@@ -645,7 +645,7 @@ void ifStock_802F98E8(unsigned char player, int b)
                     break;
                 }
                 HSD_JObjAnimAll(jobj);
-                ae44 = gm_8016AE44();
+                ae44 = gm_16AE_GetUnkData_1();
                 if (ae44->FighterMatchInfo[player].x4_b1) {
                     GXColor c = { 0x08, 0x08, 0x08, 0x80 };
                     ifStock_802FB4EC(player, &c);

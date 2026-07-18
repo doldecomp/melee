@@ -17,6 +17,7 @@
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
@@ -167,9 +168,7 @@ void ftPk_SpecialN_SpawnEffect0(HSD_GObj* gobj)
         efSync_Spawn(1214, tempObj2 = tempObj, fp->parts[part].joint);
         fp->x2219_b0 = true;
     }
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
-    fp->accessory4_cb = NULL;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 void ftPk_SpecialN_SpawnEffect1(HSD_GObj* gobj)
@@ -185,9 +184,7 @@ void ftPk_SpecialN_SpawnEffect1(HSD_GObj* gobj)
         efSync_Spawn(1215, tempObj2 = tempObj, fp->parts[part].joint);
         fp->x2219_b0 = true;
     }
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
-    fp->accessory4_cb = NULL;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 void ftPk_SpecialN_80124DC8(HSD_GObj* gobj)

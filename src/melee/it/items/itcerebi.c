@@ -67,8 +67,7 @@ void it_802D3FA0(Item_GObj* gobj)
     jobj = GET_JOBJ(gobj);
     f = 1.0f;
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    item->entered_hitlag = efLib_PauseAll;
-    item->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(item);
     efSync_Spawn(0x472, gobj, jobj, &f);
 }
 
@@ -93,8 +92,7 @@ void it_802D4070(Item_GObj* gobj)
     float* attrs = item->xC4_article_data->x4_specialAttributes;
 
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
-    item->entered_hitlag = efLib_PauseAll;
-    item->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(item);
     if (HSD_Randi(2) != 0) {
         item->x40_vel.x = attrs[1];
     } else {
@@ -147,8 +145,7 @@ void itCerebi_UnkMotion0_Phys(Item_GObj* gobj)
         jobj = GET_JOBJ(gobj);
         f = 1.0f;
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-        item->entered_hitlag = efLib_PauseAll;
-        item->exited_hitlag = efLib_ResumeAll;
+        Item_SetEffectHitlagCallbacks(item);
         efSync_Spawn(0x472, gobj, jobj, &f);
     }
 }

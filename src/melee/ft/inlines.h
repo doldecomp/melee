@@ -3,6 +3,8 @@
 
 #include <platform.h>
 
+#include "ef/eflib.h"
+
 #include "ft/forward.h"
 
 #include "ft/ftanim.h"
@@ -41,6 +43,13 @@
 #else
 #define GET_FIGHTER(gobj) ((Fighter*) HSD_GObjGetUserData(gobj))
 #endif
+
+static inline void Fighter_SetEffectHitlagCallbacks(Fighter* fp)
+{
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
+}
 
 /// @deprecated Use #GET_FIGHTER instead.
 static inline Fighter* getFighter(Fighter_GObj* gobj)

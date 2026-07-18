@@ -232,100 +232,90 @@ static u8 lbl_80408630[0x268] = {
 static float lbl_804D6070 = 12.0F;
 static float lbl_804D6074 = 12.0F;
 
-// @TODO: Register allocation differences remain
 f32 DrawASCII(int chr, float x, float y, GXColor* color)
 {
     s32 index;
     u8* glyph;
     s32 i;
-    u8* ptr;
     u8 p0, p1;
     PAD_STACK(16);
 
     if (chr >= '0' && chr <= '9') {
         index = chr - '0';
-        goto draw_glyph;
-    }
-    if (chr >= 'A' && chr <= 'Z') {
+    } else if (chr >= 'A' && chr <= 'Z') {
         index = chr - 'A' + 10;
-        goto draw_glyph;
-    }
-    if (chr >= 'a' && chr <= 'z') {
+    } else if (chr >= 'a' && chr <= 'z') {
         index = chr - 'a' + 10;
-        goto draw_glyph;
+    } else {
+        switch (chr) {
+        case '.': {
+            f32 px;
+            f32 py;
+            GXBegin(0xB8, 0, 1);
+            px = (f32) ((f64) lbl_804D6070 * 0.3 + (f64) x);
+            py = (f32) ((f64) lbl_804D6074 * 0.9 + (f64) y);
+            GXPosition2f32(px, py);
+            GXColor4u8(color->r, color->g, color->b, color->a);
+            return lbl_804D6070;
+        }
+        case ':': {
+            GXBegin(0xB8, 0, 2);
+            GXPosition2f32((f32) ((f64) lbl_804D6070 * 0.3 + (f64) x),
+                           (f32) ((f64) lbl_804D6074 * 0.3 + (f64) y));
+            GXColor4u8(color->r, color->g, color->b, color->a);
+            GXPosition2f32((f32) ((f64) lbl_804D6070 * 0.3 + (f64) x),
+                           (f32) ((f64) lbl_804D6074 * 0.7 + (f64) y));
+            GXColor4u8(color->r, color->g, color->b, color->a);
+            return lbl_804D6070;
+        }
+        case '-':
+            index = 0x24;
+            break;
+        case '_':
+            index = 0x25;
+            break;
+        case '~':
+            index = 0x26;
+            break;
+        case '>':
+            index = 0x27;
+            break;
+        case '/':
+            index = 0x28;
+            break;
+        case '(':
+            index = 0x29;
+            break;
+        case ')':
+            index = 0x2A;
+            break;
+        case ',':
+            index = 0x2B;
+            break;
+        case '<':
+            index = 0x2C;
+            break;
+        case '+':
+            index = 0x2D;
+            break;
+        case '$':
+            index = 0x2E;
+            break;
+        default:
+            return lbl_804D6070;
+        }
     }
 
-    switch (chr) {
-    case '.': {
-        f32 px;
-        f32 py;
-        GXBegin(0xB8, 0, 1);
-        px = (f32) ((f64) lbl_804D6070 * 0.3 + (f64) x);
-        py = (f32) ((f64) lbl_804D6074 * 0.9 + (f64) y);
-        GXPosition2f32(px, py);
-        GXColor4u8(color->r, color->g, color->b, color->a);
-        return lbl_804D6070;
-    }
-    case ':': {
-        GXBegin(0xB8, 0, 2);
-        GXPosition2f32((f32) ((f64) lbl_804D6070 * 0.3 + (f64) x),
-                       (f32) ((f64) lbl_804D6074 * 0.3 + (f64) y));
-        GXColor4u8(color->r, color->g, color->b, color->a);
-        GXPosition2f32((f32) ((f64) lbl_804D6070 * 0.3 + (f64) x),
-                       (f32) ((f64) lbl_804D6074 * 0.7 + (f64) y));
-        GXColor4u8(color->r, color->g, color->b, color->a);
-        return lbl_804D6070;
-    }
-    case '-':
-        index = 0x24;
-        goto draw_glyph;
-    case '_':
-        index = 0x25;
-        goto draw_glyph;
-    case '~':
-        index = 0x26;
-        goto draw_glyph;
-    case '>':
-        index = 0x27;
-        goto draw_glyph;
-    case '/':
-        index = 0x28;
-        goto draw_glyph;
-    case '(':
-        index = 0x29;
-        goto draw_glyph;
-    case ')':
-        index = 0x2A;
-        goto draw_glyph;
-    case ',':
-        index = 0x2B;
-        goto draw_glyph;
-    case '<':
-        index = 0x2C;
-        goto draw_glyph;
-    case '+':
-        index = 0x2D;
-        goto draw_glyph;
-    case '$':
-        index = 0x2E;
-        goto draw_glyph;
-    default:
-        return lbl_804D6070;
-    }
-
-draw_glyph:
     glyph = &lbl_80408630[index * 13];
-    ptr = glyph;
     i = 0;
-    while (i < 0x29 && (u8) ptr[0] != 0xFF) {
+    while (i < 0x29 && (u8) glyph[i] != 0xFF) {
         p0 = glyph[i++];
         p1 = glyph[i++];
-        ptr += 2;
         GXBegin(0xA8, 0, 2);
-        GXPosition2f32(lbl_804D6070 * (0.11F * (s32) (p0 >> 4)) + x,
+        GXPosition2f32(lbl_804D6070 * (0.11F * (p0 >> 4)) + x,
                        lbl_804D6074 * (0.11F * (p0 & 0xF)) + y);
         GXColor4u8(color->r, color->g, color->b, color->a);
-        GXPosition2f32(lbl_804D6070 * (0.11F * (s32) (p1 >> 4)) + x,
+        GXPosition2f32(lbl_804D6070 * (0.11F * (p1 >> 4)) + x,
                        lbl_804D6074 * (0.11F * (p1 & 0xF)) + y);
         GXColor4u8(color->r, color->g, color->b, color->a);
     }

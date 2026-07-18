@@ -241,33 +241,22 @@ void fn_8018A970(int arg0)
 
 void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
 {
-    TmData* tm;
-    s32 entry_offset;
-    s32 slot_offset;
-    BracketEntry* entries;
+    BracketEntry* entries = lbl_80473AB8;
     BracketEntry* entry;
     u8* sub;
-    u8* px3;
     s32* p34;
     s32* p3C;
     s32* p44;
     s32* p38;
     s32* p40;
     s32* p48;
-    s32* pX10;
-    s32* pX18;
-    s32 value;
+    u8* px3;
     u8 x3;
 
-    tm = gm_8018F634();
-    entries = lbl_80473AB8;
-    entry_offset = entry_idx * 0xDC;
-    slot_offset = slot_idx * 0x2C;
-    sub = slot_offset + &entries->x0 + entry_offset;
-    {
-        u8* bytes = &entries->x0;
-        entry = (BracketEntry*) (bytes + entry_offset);
-    }
+    TmData* tm = gm_GetTournamentData();
+
+    entry = &entries[entry_idx];
+    sub = (u8*) entry + slot_idx * (s32) 0x2C;
 
     p34 = (s32*) (sub + 0x34);
     p3C = (s32*) (sub + 0x3C);
@@ -278,38 +267,82 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
 
     if (entry->x1 != 0) {
         px3 = &entry->x3;
+        (void) px3;
         x3 = *px3;
         if (x3 == 0 && entry->x4 != 0) {
             switch (entry->x4) {
-            case 1:
-                pX18 = &entry->x18;
-                pX10 = &entry->x10;
-                *p34 = *p44 = *p3C = entry->xC;
-                value = *pX10 + *pX18 - slot_idx * *pX18;
-                *p38 = *p48 = *p40 = value;
+            case 1: {
+                s32 xC = entry->xC;
+                s32* pX18 = &entry->x18;
+                s32* pX10 = &entry->x10;
+                *p3C = xC;
+                *p44 = xC;
+                *p34 = xC;
+                {
+                    s32 x18 = entry->x18;
+                    s32 x10 = *pX10;
+                    s32 val = x10 + x18 - slot_idx * x18;
+                    *p40 = val;
+                    *p48 = val;
+                    *p38 = val;
+                }
                 *p40 = *pX10 + *pX18 / 2;
                 break;
+            }
             case 2:
                 switch (slot_idx) {
-                case 0:
-                    pX10 = &entry->x10;
-                    *p34 = *p44 = *p3C = entry->xC + 0x2B;
-                    value = *pX10 + entry->x18;
-                    *p38 = *p48 = *p40 = value;
+                case 0: {
+                    s32 xC = entry->xC;
+                    s32* pX10 = &entry->x10;
+                    s32 val1 = xC + 0x2B;
+                    *p3C = val1;
+                    *p44 = val1;
+                    *p34 = val1;
+                    {
+                        s32 x10 = entry->x10;
+                        s32 x18 = entry->x18;
+                        s32 val2 = x10 + x18;
+                        *p40 = val2;
+                        *p48 = val2;
+                        *p38 = val2;
+                    }
                     *p40 = *pX10 + entry->x18 / 2;
                     break;
-                case 1:
-                    pX10 = &entry->x10;
-                    pX18 = &entry->x18;
-                    *p34 = *p44 = *p3C = entry->xC + entry->x14;
-                    value = *pX10 + *pX18;
-                    *p38 = *p48 = *p40 = value;
+                }
+                case 1: {
+                    s32 xC = entry->xC;
+                    s32 x14 = entry->x14;
+                    s32* pX10 = &entry->x10;
+                    s32* pX18 = &entry->x18;
+                    s32 val1 = xC + x14;
+                    *p3C = val1;
+                    *p44 = val1;
+                    *p34 = val1;
+                    {
+                        s32 x10 = entry->x10;
+                        s32 x18 = *pX18;
+                        s32 val2 = x10 + x18;
+                        *p40 = val2;
+                        *p48 = val2;
+                        *p38 = val2;
+                    }
                     *p40 = *pX10 + *pX18 / 2;
                     break;
+                }
                 default: {
                     BracketEntry* ep = &entries[entry_idx];
-                    *p34 = *p44 = *p3C = ep->xC + ep->x14 / 2;
-                    *p38 = *p48 = *p40 = ep->x10;
+                    s32 x14 = ep->x14;
+                    s32 xC = ep->xC;
+                    s32 val1 = xC + x14 / 2;
+                    *p3C = val1;
+                    *p44 = val1;
+                    *p34 = val1;
+                    {
+                        s32 x10 = ep->x10;
+                        *p40 = x10;
+                        *p48 = x10;
+                        *p38 = x10;
+                    }
                     *p40 = ep->x10 + ep->x18 / 2;
                     break;
                 }
@@ -317,31 +350,72 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                 break;
             case 3:
                 switch (slot_idx) {
-                case 0:
-                    pX10 = &entry->x10;
-                    pX18 = &entry->x18;
-                    *p34 = *p44 = *p3C = entry->xC;
-                    value = *pX10 + *pX18;
-                    *p38 = *p48 = *p40 = value;
+                case 0: {
+                    s32 xC = entry->xC;
+                    s32* pX10 = &entry->x10;
+                    s32* pX18 = &entry->x18;
+                    *p3C = xC;
+                    *p44 = xC;
+                    *p34 = xC;
+                    {
+                        s32 x10 = entry->x10;
+                        s32 x18 = *pX18;
+                        s32 val = x10 + x18;
+                        *p40 = val;
+                        *p48 = val;
+                        *p38 = val;
+                    }
                     *p40 = *pX10 + *pX18 - *pX18 / 3;
                     break;
-                case 1:
-                    pX10 = &entry->x10;
-                    pX18 = &entry->x18;
-                    *p34 = *p44 = *p3C = entry->xC + entry->x14;
-                    value = *pX10 + *pX18;
-                    *p38 = *p48 = *p40 = value;
+                }
+                case 1: {
+                    s32 xC = entry->xC;
+                    s32 x14 = entry->x14;
+                    s32* pX10 = &entry->x10;
+                    s32* pX18 = &entry->x18;
+                    s32 val1 = xC + x14;
+                    *p3C = val1;
+                    *p44 = val1;
+                    *p34 = val1;
+                    {
+                        s32 x10 = entry->x10;
+                        s32 x18 = *pX18;
+                        s32 val = x10 + x18;
+                        *p40 = val;
+                        *p48 = val;
+                        *p38 = val;
+                    }
                     *p40 = *pX10 + *pX18 - *pX18 / 3;
                     break;
-                case 2:
-                    *p34 = *p44 = *p3C = entry->xC;
-                    *p38 = *p48 = *p40 = entry->x10;
+                }
+                case 2: {
+                    s32 xC = entry->xC;
+                    *p3C = xC;
+                    *p44 = xC;
+                    *p34 = xC;
+                    {
+                        s32 x10 = entry->x10;
+                        *p40 = x10;
+                        *p48 = x10;
+                        *p38 = x10;
+                    }
                     *p40 = entry->x10 + entry->x18 / 3;
                     break;
+                }
                 default: {
                     BracketEntry* ep = &entries[entry_idx];
-                    *p34 = *p44 = *p3C = ep->xC + ep->x14;
-                    *p38 = *p48 = *p40 = ep->x10;
+                    s32 xC = ep->xC;
+                    s32 x14 = ep->x14;
+                    s32 val1 = xC + x14;
+                    *p3C = val1;
+                    *p44 = val1;
+                    *p34 = val1;
+                    {
+                        s32 x10 = ep->x10;
+                        *p40 = x10;
+                        *p48 = x10;
+                        *p38 = x10;
+                    }
                     *p40 = ep->x10 + ep->x18 / 3;
                     break;
                 }
@@ -350,37 +424,55 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
             }
         } else {
             BracketEntry* ep = &entries[entry_idx];
-            pX18 = &ep->x18;
-            *p34 = *p44 = *p3C = ep->xC + slot_idx * (ep->x14 / (s32) x3);
-            value = ep->x10 + *pX18 - *pX18 * ep->x2;
-            *p38 = *p48 = *p40 = value;
+            s32 x14 = ep->x14;
+            s32* pX18 = &ep->x18;
+            s32 xC = ep->xC;
+            s32 val1 = xC + slot_idx * (x14 / (s32) x3);
+            *p3C = val1;
+            *p44 = val1;
+            *p34 = val1;
+            {
+                s32 x18 = ep->x18;
+                u8 x2 = ep->x2;
+                s32 x10 = ep->x10;
+                s32 val2 = x10 + x18 - x18 * x2;
+                *p40 = val2;
+                *p48 = val2;
+                *p38 = val2;
+            }
             *p40 = ep->x10 + *pX18 * ep->x2;
 
-            if (entry->x3 == 1) {
-                if (tm->x2E == 6) {
+            if (*px3 == 1) {
+                u8 tm_x2E = tm->x2E;
+                if (tm_x2E == 6) {
                     if (entry_idx == 5 && slot_idx == 1) {
-                        value = *p48 + 0x46;
-                        *p38 = *p48 = value;
+                        s32 tmp = *p48 + 0x46;
+                        *p48 = tmp;
+                        *p38 = tmp;
                     }
-                } else if (tm->x2E == 0xC) {
+                } else if (tm_x2E == 0xC) {
                     if ((entry_idx == 0xA && slot_idx == 0) ||
                         (entry_idx == 0xB && slot_idx == 1))
                     {
-                        value = *p48 + 0x3C;
-                        *p38 = *p48 = value;
+                        s32 tmp = *p48 + 0x3C;
+                        *p48 = tmp;
+                        *p38 = tmp;
                     }
-                } else if (tm->x2E == 0x18) {
+                } else if (tm_x2E == 0x18) {
                     if (entry_idx == 0x17 && slot_idx == 1) {
-                        value = *p48 + 0x28;
-                        *p38 = *p48 = value;
+                        s32 tmp = *p48 + 0x28;
+                        *p48 = tmp;
+                        *p38 = tmp;
                     }
-                } else if (tm->x2E == 0x30) {
+                } else if (tm_x2E == 0x30) {
                     if (entry_idx == 0x2E && slot_idx == 1) {
-                        value = *p48 + 0x1E;
-                        *p38 = *p48 = value;
+                        s32 tmp = *p48 + 0x1E;
+                        *p48 = tmp;
+                        *p38 = tmp;
                     } else if (entry_idx == 0x2F && slot_idx == 1) {
-                        value = *p48 - 0x1E;
-                        *p38 = *p48 = value;
+                        s32 tmp = *p48 - 0x1E;
+                        *p48 = tmp;
+                        *p38 = tmp;
                     }
                 }
             }
@@ -397,7 +489,7 @@ static inline f32 GetBracketSlideY(u8* p)
 
 void fn_8018B090(HSD_GObj* arg0)
 {
-    TmData* tm = gm_8018F634();
+    TmData* tm = gm_GetTournamentData();
     s32 var_r24 = 0;
     s32 idx = fn_8018F74C();
     BracketEntry* base;
@@ -1177,7 +1269,7 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8, c9;
     GXColor c10, c11, c12, c13, c14, c15, c16, c17, c18;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     c0 = lbl_804DA684;
     thickness = data->x1C;
     c1 = lbl_804DA684;
@@ -1637,7 +1729,7 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
     f32 pos;
     f32 pos_multiplier;
 
-    td = gm_8018F634();
+    td = gm_GetTournamentData();
     bracket_idx = 0;
 
     for (outer_idx = 0; outer_idx < 0x40; outer_idx++) {
@@ -1736,7 +1828,7 @@ void fn_8018ECA8(s32 char_id, s32 name_type, s32 jobj_idx1, f32 pos_x,
     TmData* tm;
     s32 num;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
 
     hmn_texts[0] = lbl_804DA6B4;
     cpu_texts[0] = lbl_804DA6BC;
@@ -1852,7 +1944,7 @@ s32 gm_8018F1B0(MatchEnd* me)
 {
     TmData* tm;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
 
     switch (gm_804771C4.match_type) {
     case 0:
@@ -2046,7 +2138,7 @@ u32 fn_8018F62C(HSD_GObj* gobj)
 
 #pragma push
 #pragma dont_inline on
-TmData* gm_8018F634(void)
+TmData* gm_GetTournamentData(void)
 {
     return &gm_804771C4;
 }
@@ -2449,7 +2541,7 @@ void gm_801905F0(StartMeleeData* arg0)
     u8 _padA[8];
     int i;
     TmData* tm = &gm_804771C4;
-    GameRules* rules = gmMainLib_8015CC34();
+    GameRules* rules = gmMainLib_GetGameRules();
     TmVsData sp18;
 
     gm_80168FC4();
@@ -2541,7 +2633,7 @@ void gm_801905F0(StartMeleeData* arg0)
             arg0->players[i].xE = 4;
             arg0->players[i].cpu_level = tm->x4B8[i].x4;
             arg0->players[i].x12 = 0;
-            if (gmMainLib_8015CC34()->handicap != 0) {
+            if (gmMainLib_GetGameRules()->handicap != 0) {
                 arg0->players[i].x18 = fn_8016419C(tm->x4B8[i].x5);
                 arg0->players[i].x1C = fn_801641B4(tm->x4B8[i].x5);
             } else {

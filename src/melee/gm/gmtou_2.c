@@ -118,7 +118,7 @@ struct lbl_803DA2E0_t lbl_803DA2E0 = {
 
 void fn_8019BA08(u8 idx, HSD_JObj* jobj)
 {
-    TmData* tmd = gm_8018F634();
+    TmData* tmd = gm_GetTournamentData();
     s32 i;
 
     if (tmd->x4B8[idx].x2 != 0) {
@@ -175,7 +175,7 @@ void fn_8019BF8C(HSD_GObj* gobj)
     s32 selection;
     HSD_JObj* jobj;
 
-    selection = gm_8018F634()->cur_option;
+    selection = gm_GetTournamentData()->cur_option;
     jobj = GET_JOBJ(gobj);
     if ((selection <= 0x1A) || (selection >= 0x1F)) {
         if (lbl_80479A58.xE > 0x77U) {
@@ -200,7 +200,7 @@ void fn_8019C048(HSD_GObj* gobj)
     u8 state;
     u8 start_frame, cur_frame, end_frame, loop_flag;
 
-    tmd = gm_8018F634();
+    tmd = gm_GetTournamentData();
     idx = fn_8018F62C(gobj);
     {
         HSD_JObj* jobj_tmp = gobj->hsd_obj;
@@ -281,7 +281,7 @@ void fn_8019C3EC(HSD_GObj* gobj)
     TmData* tmd;
     HSD_JObj* jobj;
 
-    tmd = gm_8018F634();
+    tmd = gm_GetTournamentData();
     idx = fn_8018F62C(gobj);
     jobj = GET_JOBJ(gobj);
     if (HSD_PadMasterStatus[(u8) idx].err != 0) {
@@ -306,7 +306,7 @@ void fn_8019C3EC(HSD_GObj* gobj)
 
 static inline TmData* GetTmData(void)
 {
-    return gm_8018F634();
+    return gm_GetTournamentData();
 }
 
 void fn_8019C570(HSD_GObj* gobj)
@@ -358,7 +358,7 @@ void fn_8019C744(HSD_GObj* gobj)
     HSD_JObj* jobj;
     f32 var_f1;
 
-    tmd = gm_8018F634();
+    tmd = gm_GetTournamentData();
     idx = fn_8018F62C(gobj);
     jobj = GET_JOBJ(gobj);
 
@@ -402,7 +402,7 @@ void fn_8019CA38(HSD_GObj* gobj)
     HSD_JObj* jobj;
     TmData* tmd;
 
-    tmd = gm_8018F634();
+    tmd = gm_GetTournamentData();
     idx = fn_8018F62C(gobj);
     jobj = GET_JOBJ(gobj);
     if (HSD_PadMasterStatus[(u8) idx].err != 0) {
@@ -449,7 +449,7 @@ void fn_8019CC74(HSD_GObj* gobj)
     TmData* tmd;
     HSD_JObj* jobj;
 
-    tmd = gm_8018F634();
+    tmd = gm_GetTournamentData();
     idx = fn_8018F62C(gobj);
     jobj = GET_JOBJ(gobj);
     if (HSD_PadMasterStatus[(u8) idx].err == 0) {
@@ -473,7 +473,7 @@ void fn_8019CDBC(HSD_GObj* gobj)
     f32 sp28;
     f32 sp24;
     u8 temp_r27;
-    TmData* tmd = gm_8018F634();
+    TmData* tmd = gm_GetTournamentData();
     HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj);
     u32 idx = fn_8018F62C(gobj);
     PAD_STACK(12);
@@ -540,7 +540,7 @@ void fn_8019D074(HSD_GObj* gobj)
     TmData* tmd;
     HSD_JObj* jobj;
 
-    tmd = gm_8018F634();
+    tmd = gm_GetTournamentData();
     idx = fn_8018F62C(gobj);
     jobj = GET_JOBJ(gobj);
     if (HSD_PadMasterStatus[(u8) idx].err != 0) {
@@ -571,7 +571,7 @@ void fn_8019D1BC(void)
     char name_buf[8][0x14];
     PAD_STACK(0xA0);
 
-    tmd = gm_8018F634();
+    tmd = gm_GetTournamentData();
 
     for (i = 0; i < (s32) tmd->x30; i++) {
         {
@@ -739,7 +739,7 @@ void fn_8019DD60(void)
     s32 i;
     PAD_STACK(16);
 
-    tmd = gm_8018F634();
+    tmd = gm_GetTournamentData();
     if (tmd->x2C == 0) {
         if ((s32) gm_804771C4.match_type == 1) {
             lbAudioAx_800237A8(0x7545, 0x7F, 0x40);
@@ -788,7 +788,7 @@ void fn_8019DD60(void)
 
 static inline s32 get_match_player_index(s32 player)
 {
-    TmData* tmd = gm_8018F634();
+    TmData* tmd = gm_GetTournamentData();
     s32 i;
 
     for (i = 0; i < (s32) tmd->x2E; i++) {
@@ -801,7 +801,7 @@ static inline s32 get_match_player_index(s32 player)
 
 static inline s32 get_match_player_index_xF(s32 player)
 {
-    TmData* tmd = gm_8018F634();
+    TmData* tmd = gm_GetTournamentData();
     s32 i;
 
     for (i = 0; i < (s32) tmd->x2E; i++) {
@@ -823,7 +823,7 @@ void gm_8019DF8C_OnFrame(void)
     PAD_STACK(4);
 
     confirmed = 0;
-    tmd = gm_8018F634();
+    tmd = gm_GetTournamentData();
     fn_8018F674(4);
     fn_8018F640(4);
 
@@ -1014,7 +1014,7 @@ void gm_8019E634(void)
     MatchEnd* match_end;
     s32* results_base;
 
-    tmd = gm_8018F634();
+    tmd = gm_GetTournamentData();
     hmn_cpu = tmd->hmn_cpu_count;
 
     indices[0] = lbl_803B7D3C[0];
@@ -1049,7 +1049,7 @@ void gm_8019E634(void)
     }
 
     /* Handicap adjustment */
-    if ((u8) gmMainLib_8015CC34()->handicap == 1) {
+    if ((u8) gmMainLib_GetGameRules()->handicap == 1) {
         union {
             u32 word;
             u8 bytes[4];
@@ -1161,12 +1161,12 @@ void gm_8019ECAC_OnEnter(void* arg0)
     s32 j;
     PAD_STACK(4);
 
-    tmd = gm_8018F634();
+    tmd = gm_GetTournamentData();
     lbAudioAx_80026F2C(0x12);
     lbAudioAx_8002702C(2, 8);
     lbAudioAx_80027168();
     lbAudioAx_80027648();
-    gm_8018F634();
+    gm_GetTournamentData();
     lbl_804D6688 = lbArchive_80016DBC("GmTou1p", &lbl_804D6690,
                                       "ScGamTour_scene_data", 0);
     lbl_804D668C = lbArchive_80016DBC("GmTou4p", &lbl_804D6694,
@@ -1217,12 +1217,12 @@ void fn_8019EE80(TmVsData* arg0)
     s32 i;
 
     game_cache = &lbDvd_8001822C()->game_cache;
-    for (i = 0; i < gm_8018F634()->x30; i++) {
+    for (i = 0; i < gm_GetTournamentData()->x30; i++) {
         game_cache->entries[i].char_id = arg0->char_id[i];
         game_cache->entries[i].color = arg0->color[i];
     }
 
-    if (!fn_80196594(gm_8018F634())) {
+    if (!fn_80196594(gm_GetTournamentData())) {
         game_cache->stage_id = arg0->stage_id;
     }
 

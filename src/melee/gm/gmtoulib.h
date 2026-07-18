@@ -35,7 +35,7 @@
 /* 18F508 */ s32 fn_8018F508(s32* arg0);
 /* 18F5F0 */ char* fn_8018F5F0(void);
 /* 18F62C */ u32 fn_8018F62C(HSD_GObj*);
-/* 18F634 */ TmData* gm_8018F634(void);
+/* 18F634 */ TmData* gm_GetTournamentData(void);
 /* 18F640 */ u32 fn_8018F640(int);
 /* 18F674 */ u32 fn_8018F674(int);
 /* 18F6A8 */ u32 fn_8018F6A8(int);
