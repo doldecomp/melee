@@ -2464,20 +2464,6 @@ void Camera_8002D318(void* unused)
     }
 }
 
-static inline void Camera_8002D85C_blk83687(f32* yaw_ptr, Camera* cam,
-                                            f32* pitch_ptr, f32 distance)
-{
-    {
-        f32 horiz_dist;
-        horiz_dist = distance * cosf(*pitch_ptr);
-        cam->transform.target_position.x =
-            cam->transform.target_interest.x + horiz_dist * sinf(*yaw_ptr);
-        cam->transform.target_position.y =
-            cam->transform.target_interest.y + distance * sinf(*pitch_ptr);
-        cam->transform.target_position.z =
-            cam->transform.target_interest.z + horiz_dist * cosf(*yaw_ptr);
-    }
-}
 void Camera_8002D85C(void* unused)
 {
     Camera* cam;
@@ -2486,139 +2472,75 @@ void Camera_8002D85C(void* unused)
     f32* yaw_ptr;
     f32* pitch_ptr;
     f32 distance;
+    Vec3* subj_pos;
     f32* tgt_fov_ptr;
     HSD_GObj* gobj;
     s32 slot;
-    f32 z_val;
+    f32 horiz_dist;
+    f32 delta;
+    CameraBounds bounds2;
+    CameraBounds bounds;
     PAD_STACK(16);
 
     cam = &cm_80452C68;
     slot_ptr = &cam->x2C4;
     gobj = Player_GetEntity(*slot_ptr);
-    if (gobj == NULL) {
-        /// @todo remove gotos
-        goto fallback;
-    }
-    subject = ftLib_80086B74(gobj);
-    if (subject == NULL) {
-        goto fallback;
-    }
-    if ((u32) Camera_80029124(&subject->x1C, 0) != 0) {
-        goto fallback;
-    }
-    z_val = subject->x1C.z;
-    if (z_val < 0.0f) {
-        z_val = -z_val;
-    }
-    if (!(z_val < 30.0f)) {
-        goto fallback;
-    }
-
-    Camera_80030DF8();
-    gobj = Player_GetEntity(*slot_ptr);
-    if (gobj != NULL) {
-        subject = ftLib_80086B74(gobj);
-        if (subject != NULL) {
-            Vec3* subj_pos;
-            f32 dx;
-            f32 dy;
-            f32 dz;
-
+    if (gobj != NULL && (subject = ftLib_80086B74(gobj)) != NULL &&
+        (u32) Camera_80029124(&subject->x1C, 0) == 0 &&
+        ABS(subject->x1C.z) < 30.0f)
+    {
+        Camera_80030DF8();
+        gobj = Player_GetEntity(*slot_ptr);
+        if (gobj != NULL && (subject = ftLib_80086B74(gobj)) != NULL) {
             cam->transform.target_interest.x = subject->x1C.x;
             cam->transform.target_interest.y = (subj_pos = &subject->x1C)->y;
             cam->transform.target_interest.z = subj_pos->z;
-
-            dx = cam->transform.target_interest.x - cam->transform.interest.x;
-            dy = cam->transform.target_interest.y - cam->transform.interest.y;
-            dz = cam->transform.target_interest.z;
-            dz -= cam->transform.interest.z;
-            cam->transform.interest.x += dx * cm_803BCCA0.x64;
-            cam->transform.interest.y += dy * cm_803BCCA0.x64;
-            cam->transform.interest.z += dz * cm_803BCCA0.x64;
+            approach_vec3(&cam->transform.target_interest,
+                          &cam->transform.interest, cm_803BCCA0.x64);
         }
-    }
 
-    {
-        CameraUnkGlobals* globals;
-        f32 smooth;
-        f32 delta;
-
-        globals = &cm_803BCCA0;
         tgt_fov_ptr = &cam->transform.target_fov;
-        *tgt_fov_ptr = globals->x6C;
+        *tgt_fov_ptr = cm_803BCCA0.x6C;
         delta = *tgt_fov_ptr - cam->transform.fov;
-        (void) delta;
-        smooth = globals->x70;
-        cam->transform.fov = delta * smooth + cam->transform.fov;
-    }
+        cam->transform.fov += delta * cm_803BCCA0.x70;
 
-    slot = *slot_ptr;
-    if (slot == 0xA) {
-        goto skip_fov_calc;
-    }
-    if (slot == 0xB) {
-        goto skip_fov_calc;
-    }
-    if (slot < 0) {
-        goto skip_fov_calc;
-    }
-    if (slot >= 6) {
-        goto skip_fov_calc;
-    }
-    gobj = Player_GetEntity(slot);
-    if (gobj == NULL) {
-        goto skip_fov_calc;
-    }
-    subject = ftLib_80086B74(gobj);
-    if (subject == NULL) {
-        goto skip_fov_calc;
-    }
-    distance = (2.0f * subject->x34.z) / tanf(MTXDegToRad(*tgt_fov_ptr));
-    goto fov_done;
-skip_fov_calc:
-    distance = 1000.0f;
-fov_done:
-
-    pitch_ptr = &cam->pitch_offset;
-    if (*pitch_ptr > Stage_GetCamAngleRadiansUp()) {
-        *pitch_ptr = Stage_GetCamAngleRadiansUp();
-    } else if (*pitch_ptr < -Stage_GetCamAngleRadiansDown()) {
-        *pitch_ptr = -Stage_GetCamAngleRadiansDown();
-    }
-
-    yaw_ptr = &cam->yaw_offset;
-    if (*yaw_ptr > Stage_GetCamAngleRadiansLeft()) {
-        *yaw_ptr = Stage_GetCamAngleRadiansLeft();
-    } else if (*yaw_ptr < -Stage_GetCamAngleRadiansRight()) {
-        *yaw_ptr = -Stage_GetCamAngleRadiansRight();
-    }
-
-    Camera_8002D85C_blk83687(yaw_ptr, cam, pitch_ptr, distance);
-
-    {
-        CameraUnkGlobals* globals;
-        f32 smooth;
-        f32 x, y, z;
-
-        x = cam->transform.target_position.x;
-        (void) x;
-        globals = &cm_803BCCA0;
-        y = cam->transform.target_position.y;
-        z = cam->transform.target_position.z;
-        smooth = globals->x68;
+        slot = *slot_ptr;
+        if (slot != 0xA && slot != 0xB && slot >= 0 && slot < 6 &&
+            (gobj = Player_GetEntity(slot)) != NULL &&
+            (subject = ftLib_80086B74(gobj)) != NULL)
         {
-            f32 tmp_p84448 = x - cam->transform.position.x;
-            cam->transform.position.x =
-                (tmp_p84448) *smooth + cam->transform.position.x;
+            distance =
+                (2.0f * subject->x34.z) / tanf(MTXDegToRad(*tgt_fov_ptr));
+        } else {
+            distance = 1000.0f;
         }
-        cam->transform.position.y = (y - cam->transform.position.y) * smooth +
-                                    cam->transform.position.y;
-        cam->transform.position.z = (z - cam->transform.position.z) * smooth +
-                                    cam->transform.position.z;
+
+        pitch_ptr = &cam->pitch_offset;
+        if (*pitch_ptr > Stage_GetCamAngleRadiansUp()) {
+            *pitch_ptr = Stage_GetCamAngleRadiansUp();
+        } else if (*pitch_ptr < -Stage_GetCamAngleRadiansDown()) {
+            *pitch_ptr = -Stage_GetCamAngleRadiansDown();
+        }
+
+        yaw_ptr = &cam->yaw_offset;
+        if (*yaw_ptr > Stage_GetCamAngleRadiansLeft()) {
+            *yaw_ptr = Stage_GetCamAngleRadiansLeft();
+        } else if (*yaw_ptr < -Stage_GetCamAngleRadiansRight()) {
+            *yaw_ptr = -Stage_GetCamAngleRadiansRight();
+        }
+
+        horiz_dist = distance * cosf(*pitch_ptr);
+        cam->transform.target_position.x =
+            cam->transform.target_interest.x + horiz_dist * sinf(*yaw_ptr);
+        cam->transform.target_position.y =
+            cam->transform.target_interest.y + distance * sinf(*pitch_ptr);
+        cam->transform.target_position.z =
+            cam->transform.target_interest.z + horiz_dist * cosf(*yaw_ptr);
+
+        approach_vec3(&cam->transform.target_position,
+                      &cam->transform.position, cm_803BCCA0.x68);
+        return;
     }
-fallback: {
-    CameraBounds bounds2;
-    CameraBounds bounds;
 
     Camera_80030DF8();
     Camera_800293E0();
@@ -2628,7 +2550,6 @@ fallback: {
     update_zoom_distance();
     update_bounds(&bounds, &bounds2);
     update_avg_bounds_width();
-}
 }
 
 void Camera_8002DDC4(void* arg0)
@@ -2684,8 +2605,7 @@ void Camera_8002DDC4(void* arg0)
         f32 delta;
 
         delta = cam->transform.target_fov - cam->transform.fov;
-        (void) delta;
-        cam->transform.fov = delta * globals->x7C + cam->transform.fov;
+        cam->transform.fov += delta * globals->x7C;
     }
     cam->transform_copy.target_fov = Stage_GetCamFixedFov();
     tgt_position = &transform->target_position;
