@@ -6,33 +6,50 @@ This document is to act as a guideline for how you should submit Pull Requests.
 
 - [Introduction](#introduction)
 - [Coding Style and Formatting](#coding-style-and-formatting)
+- [Compiler Notes](#compiler-notes)
 - [Pull Requests](#prs)
 - [AI Assistance](#ai)
 
 
 # <a name="introduction"></a>Introduction
 
-This document aims to clarify the coding standard required for a Pull Request to be accepted.
+This document aims to clarify the coding standard required for a Pull Request to
+be accepted.
 
-While not all code submitted at this time conforms to this standard, it is the intention of the project to correct it in time.
-
+While not all code submitted at this time conforms to this standard, it is the
+intention of the project to correct it in time.
 
 # <a name="coding-style-and-formatting"></a>Coding Style and Formatting
 
-This style-guide has recently been updated. Existing code may not perfectly follow it, but any new code you contribute should.
-
+- [Caveats](#caveats)
 - [Auto formatting](#auto-formatting)
 - [Functions](#functions)
 - [Structs](#structs)
-- [Functions](#functions)
 - [Conditionals](#conditionals)
 - [Variables](#variables)
 - [Primitives](#primitives)
 - [Enums](#enums)
 - [Literals](#literals)
+- [Headers](#headers)
+
+## <a name="caveats"></a>Caveats
+
+The original source is the gold standard for this decompilation project.
+
+While the style-guide below should be closely followed, there are times where
+convention may be reasonably broken in order to more closely reflect what the
+original developers wrote.  Some strings embedded in the binary provide some
+indication about what some things were named.
+
+In cases where there is a clear connection between a string embedded in the
+binary and an identifier in the decompiled code, we break convention and
+prioritize the identifier name from the original source.
 
 ## <a name="auto-formatting"></a>Auto Formatting
-`clang-format` should be run on all C code in `src`. The easiest way to do this is to install and run [`pre-commit`](https://pre-commit.com/), which will run the formatter with every commit. `pre-commit` is included in our dev packages:
+
+`clang-format` should be run on all C code in `src`. The easiest way to do this
+is to install and run [`pre-commit`](https://pre-commit.com/), which will run
+the formatter with every commit. `pre-commit` is included in our dev packages:
 
 ```
 pip install -r reqs/dev.txt # Install the pre-commit package
@@ -42,12 +59,18 @@ pre-commit run --all-files # Run the hook once on existing code
 
 ## <a name="functions"></a>Functions
 
-- Avoid naming a function that you are not matching. If you have not matched to understand the functionality, don't expect that someone else did just because they named it.
+- Avoid naming a function that you are not matching. If you have not matched to
+  understand the functionality, don't expect that someone else did just because
+  they named it.
 - Naming exported methods (the majority of cases)
-    - Applies to any method that is defined in a .h file, with a .c implementation.
-    - Prefix functions within Melee related code with the file's name. While asserts may indicate this was not the case for your function, this is to make the code easier to read.
+    - Applies to any method that is defined in a .h file, with a .c
+      implementation.
+    - Prefix functions within Melee related code with the file's name. While
+      asserts may indicate this was not the case for your function, this is to
+      make the code easier to read.
     - Use lowerCamelCasing for the function's filename.
-    - Use UpperCamelCasing for the function's name itself, unless it is a standard library reimplementation.
+    - Use UpperCamelCasing for the function's name itself, unless it is a
+      standard library reimplementation.
     - Examples:
 
     ```c
@@ -58,8 +81,8 @@ pre-commit run --all-files # Run the hook once on existing code
         ftFox_LaserOnDeath
     ```
 - Naming non-exported/local static inlines
-    - Applies only to methods that have no accomanying .h definition. These are local and only used in the .c file where
-      they are created.
+    - Applies only to methods that have no accomanying .h definition. These are
+      local and only used in the .c file where they are created.
     - Use lowerCamelCasing for the function name
     - Examples:
 
@@ -71,35 +94,48 @@ pre-commit run --all-files # Run the hook once on existing code
     ```
 - Empty stub functions should use `{}` rather than `{ return; }`
 - Arguments should be snake_case
+- Oftentimes a method will return a u8, but the associated values are enum
+  values. In these situations, document the actual enum type clearly in doxygen.
+  See the [Enum Types](#enum-types) section of this doc for more details.
 
 ### <a name="structs"></a>Structs
 
 - Structs should include explicit information about offsets
     - Top-level Struct offsets begin at 0.
-    - Nested structs continue from their parents offset.
-    - Struct members should include the offsets of their members as an inline comment before the type declaration.
-    - Even when the struct member is well understood and named, the offset comment should be retained.
-    - Struct offset comments must all be the same width, using 0s for left-padding.
-- Struct definitions may contain child structs only if their associated members are not pointer references.
-- When a struct members name/purpose is unknown, it should be written as `x<Hex-Offset>`.
-- When a section of a struct is only functioning as padding, it should be written as `x<Hex-Offset>_pad` and use a u8 array.
+    - Struct members should include the offsets of their members as an inline
+      comment before the type declaration.
+    - Even when the struct member is well understood and named, the offset
+      comment should be retained.
+    - Struct offset comments must all be the same width, using 0s for
+      left-padding.
+- Struct definitions should never contain child structs.
+- When a struct members name/purpose is unknown, it should be written as
+  `x<Hex-Offset>`.
+- Struct offsets should contain bit offsets when applicable
+- Bitmasks should be defined via union
+- When a section of a struct is only functioning as padding, it should be
+  written as `x<Hex-Offset>_pad` and use a u8 array.
 - Struct member names should be snake_case.
+- Struct definitions should be defined in `types.h` for a given module.
+- Typedefs associated with a given struct should be in the sibling `forward.h`
+  file in the same module.
 - Examples:
     - Yes:
 
       ```c
-      typedef struct Player {
-          /* 0x00 */ u32 x0;
-          /* 0x04 */ u8 x4_pad[12];
-          /* 0x10 */ u8 well_known_something;
-          /* 0x11 */ u8 some_bitmask
+      struct Player {
+          /* +C00 */ u32 x0;
+          /* +C04 */ u8 x4_pad[12];
+          /* +C10 */ u8 well_known_something;
+          /* +C11 */ u8 foo_bar;
+          /* +C12 */ u8 x13
       };
       ```
 
     - No:
 
       ```c
-      typedef struct Player {
+      struct Player {
           u8 thing;
           u32 something;
           u32 something2;
@@ -165,34 +201,51 @@ pre-commit run --all-files # Run the hook once on existing code
       ```
 
 ## <a name="primitives"></a>Primitives
-- Prefer primitive types with explicit bit widths
-- When a type is an unknown 32 bit integer and likely a pointer, declare it as UNK_T
 
-| Target Type                             | Good  | Bad            |
-|-----------------------------------------|-------|----------------|
-| 8-bit unsigned integer                  | u8    | unsigned char  |
-| 16-bit unsigned integer                 | u16   | unsigned short |
-| 32-bit unsigned integer                 | u32   | unsigned int   |
-| 64-bit unsigned integer                 | u64   | unsigned long  |
-| 8-bit signed integer                    | s8    | char           |
-| 16-bit signed integer                   | s16   | short          |
-| 32-bit signed integer                   | s32   | int            |
-| 64-bit signed integer                   | s64   | long           |
-| 8-bit float                             | f8    |                |
-| 16-bit float                            | f16   |                |
-| 32-bit float                            | f32   | float          |
-| 64-bit float                            | f64   | double         |
-| Unknown Pointer                         | UNK_T | void*          |
+### Numeric types
+
+Generally speaking, `int` or `unsigned int` should be the preferred type for
+whole numbers, unless there is some specific context about a piece of code or
+struct that dictates a specific bit width. In practice, `int` is more likely to
+be used throughout a codebase, and the goal of this decmopilation project is to
+try to match the original source.
+
+When explicit fixed-width numbers are necessary, use the following types:
+- Booleans: `bool`
+- Bitmasks: Use the smallest unsigned explicit width int type that fits the
+  mask. (`u8`, `u16`, `u32`, `u64`)
+- 8-bit  whole: `u8` or `s8`
+- 16-bit whole: `unsigned short` or `short`
+- 32-bit whole: `u32` or `s32`
+- 64-bit whole: `u64` or `s64`
+- 32-bit floating point: `float`
+- 64-bit floating point: `double`
+
+See the [Integer Types](#integer-types) section for more information about
+techinical quirks surrounding various integer types.
+
+### Specialized types
+- Single character: `char`
+- Strings: `char*`
+- Unknown 32 bit pointer: `UNK_T`.
+- Enums: `enum_t` as a placeholder until the actual enum is defined.
+- OS Timestamps: `OSTime`
 
 ## <a name="enums"></a>Enums
-- Enum declarations should include a clear means of determining the value for each entry
-  - May be a comment prefix with the hexadecimal value. There must be enough left-padded 0s so that each comment is the
-    same width.
+- Enum declarations should include a clear means of determining the value for each
+  entry
+  - May be a comment prefix with the hexadecimal value. There must be enough
+    left-padded 0s so that each comment is the same width.
   - May be an explicit value decl such as `FOO_BAR = 4`
-- Each enum value for a given type should have a unique prefix that makes them easy to identify as a group.
+- Each enum value for a given type should have a unique prefix that makes them
+  easy to identify as a group.
 - Enum value names should be descriptive when well understood.
 - Enum value names should contain their offset when not well understood.
 - Enum value names should be in SCREAMING_SNAKE_CASE
+  clearly in doxygen. See the [#enum-types](enum types) docs for more info
+- Enum definitions should be defined in `types.h` for a given module.
+- Typedefs associated with a given enum should be in the sibling `forward.h`
+  file in the same module.
 - Examples:
     - Good:
     ```c
@@ -232,8 +285,6 @@ pre-commit run --all-files # Run the hook once on existing code
     } CharacterKind;
     ```
 
-
-
 ## <a name="literals"></a>Literals
 - Integer literals
   - Yes: `123U` for `u32`
@@ -254,6 +305,56 @@ pre-commit run --all-files # Run the hook once on existing code
     - `1.f`
     - `1.L`
   - No: `1` for `f32` or `f64`
+
+## <a name="headers"></a>Headers
+
+- Every TU header (meaning things that actually appear in splits.txt) must
+  contain its own symbols according to the split, and only those members. Extra
+  inlines, types, etc. are not allowed. Symbols must appear in address order.
+  static symbols should appear at the top of the C file, not the header.
+- A TU may define a *.static.h file. This is a temporary file to aid in m2c
+  decompilation runs, so it should be considered as part of the C file, and
+  entirely private. It should be deleted when the TU is linked (marked as
+  Matching).
+- types.h for each module contains relevant types primary to that module. It's
+  difficult to discern where a type truly belongs, so we're not very strict
+  about that. Types should be only struct X and/or union X definitions, not
+  typedefs.
+- One forward.h corresponds to each types.h and is responsible for providing a
+  typedef for each struct and union, and typedefs of function pointers. It is
+  also the place to define enums, global const simple types like integers that
+  don't get emitted as symbols, and #define constants. The purpose of this
+  separation is to avoid circular inclusions.
+- If an inline function is shared by multiple TUs but its function body isn't a
+  real symbol, it goes in inlines.h for the most relevant module. An exception
+  is made if that inline function contains an assert which proves its source file.
+- Documentation belongs in *.dox and should be kept out of the C and H files
+  with minimal exceptions. @todo comments are allowed anywhere.
+
+# <a name="compiler-notes"></a>Compiler Notes
+
+This section documents quirks/gotchas related to the C language and mwcc.
+
+## <a name="integer-types"></a>Integer Types
+
+`char`, `short`, `long`, and `long long` all tell the compiler specific bit
+widths to use for a given type. For the gamecube, these are `8`, `16`, `32`,
+and `64` bits respectively.
+
+The `int` type provides no such indication to the compiler, specifying only that
+the platform-native int type should be used. This lets the compiler try to be
+smart about what it does for a given value, contextually making optimizations
+in the binary.  This can lead to situations where the compiler may emit opcodes
+that make an int type appear as any width from 8 to 32 bits in decomp.  In
+practice, A signed 8-bit integer (`s8`) declaration in particular is extremely
+rare, and is usually really an `int` in disguise.
+
+## <a name="enum-types"></a>Enum Types
+
+Enum typedefs in this project always resolve to `int` currently.  This is a
+quirk of the current compiler setup. Often a method will return a `u8`, but
+it's for an enum return value. Check related docs and use-sites to determine
+the actual type.
 
 # <a name="prs"></a>Pull Requests
 
