@@ -915,9 +915,9 @@ void ftParts_800753D4(Fighter* arg0, struct Fighter_804D6540_x0_t* arg1,
     arg0->parts[arg1->x0].flags_b2 = true;
 }
 
-void ftParts_800755E8(Fighter* fp, u8* arg1)
+void ftParts_800755E8(Fighter* fp, struct Fighter_804D6540_x0_t* arg1)
 {
-    FighterBone* bone = &fp->parts[*arg1];
+    FighterBone* bone = &fp->parts[arg1->x0];
     HSD_JObjRemove(bone->joint);
     HSD_JObjRemove(bone->x4_jobj2);
     bone->joint = NULL;

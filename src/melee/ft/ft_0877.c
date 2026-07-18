@@ -56,7 +56,7 @@ bool ft_800878BC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->item_gobj != NULL) && (it_8026B2B4(fp->item_gobj) == 1)) {
+    if ((fp->item_gobj != NULL) && (itIsHeavy(fp->item_gobj) == 1)) {
         return true;
     }
 

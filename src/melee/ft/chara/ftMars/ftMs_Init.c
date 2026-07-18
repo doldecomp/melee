@@ -493,7 +493,7 @@ void ftMs_SpecialN_801365A8(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     s32 result;
     if (!fp->x2219_b0) {
-        result = ftLib_800872A4(gobj);
+        result = ftLib_GetKind(gobj);
         switch (result) {
         case 18:
             efSync_Spawn(1266, gobj, fp->parts->joint);
@@ -518,7 +518,7 @@ void ftMs_SpecialN_8013666C(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     s32 result;
     if (!fp->x2219_b0) {
-        result = ftLib_800872A4(gobj);
+        result = ftLib_GetKind(gobj);
         switch (result) {
         case 18:
             efSync_Spawn(1267, gobj, fp->parts->joint);

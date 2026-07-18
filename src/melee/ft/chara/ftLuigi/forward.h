@@ -32,6 +32,9 @@ static MotionFlags const ftLg_MF_SpecialAirHi =
 static MotionFlags const ftLg_MF_SpecialAirLw =
     ftLg_MF_SpecialLw | Ft_MF_SkipParasol;
 
+static MotionFlags const ftLg_MF_SpecialN_Coll =
+    Ft_MF_SkipColAnim | Ft_MF_UpdateCmd;
+
 typedef enum ftLuigi_MotionState {
     ftLg_MS_SpecialN = ftCo_MS_Count,
     ftLg_MS_SpecialAirN,

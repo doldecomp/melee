@@ -15,6 +15,7 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_Wait.h"
+#include "ftCommon/inlines.h"
 
 #include "it/forward.h"
 
@@ -22,9 +23,6 @@
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx.h>
-
-/// SpecialN/SpecialAirN (Fireball)
-#define FTLUIGI_SPECIALN_COLL_FLAG Ft_MF_UpdateCmd | Ft_MF_SkipColAnim
 
 /// 0x8014267C
 /// https://decomp.me/scratch/dB9mj // Luigi's grounded Fireball Motion State
@@ -110,10 +108,8 @@ void ftLg_SpecialN_Coll(HSD_GObj* gobj)
 
     if (ft_80082708(gobj) == false) {
         fp = GET_FIGHTER(gobj);
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirN,
-                                  FTLUIGI_SPECIALN_COLL_FLAG,
-                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftLg_MS_SpecialAirN,
+                                        ftLg_MF_SpecialN_Coll);
         fp->accessory4_cb = &ftLg_SpecialN_FireSpawn;
     }
 }
@@ -125,10 +121,8 @@ void ftLg_SpecialAirN_Coll(HSD_GObj* gobj)
 
     if (ft_80081D0C(gobj) != false) {
         fp = GET_FIGHTER(gobj);
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialN,
-                                  FTLUIGI_SPECIALN_COLL_FLAG,
-                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftLg_MS_SpecialN,
+                                        ftLg_MF_SpecialN_Coll);
         fp->accessory4_cb = &ftLg_SpecialN_FireSpawn;
     }
 }

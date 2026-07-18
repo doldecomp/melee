@@ -64,7 +64,7 @@ void ftCa_SpecialHi_800E3EAC(HSD_GObj* gobj)
                 sp1C = 0.017453292f * da->speciallw_flame_particle_angle;
                 var_r29 = ftParts_GetBoneIndex(fp, FtPart_LFootJA);
             }
-            switch (ftLib_800872A4(gobj)) {
+            switch (ftLib_GetKind(gobj)) {
             case FTKIND_CAPTAIN:
                 efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3U, 0x490U,
                               fp->parts[var_r29].joint, &sp1C);

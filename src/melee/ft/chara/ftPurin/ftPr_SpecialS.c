@@ -15,6 +15,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/inlines.h"
 #include "ftPurin/types.h"
 
 #include <common_structs.h>
@@ -23,6 +24,9 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <baselib/objalloc.h>
+
+static MotionFlags const ftPr_MF_SpecialS_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_SkipHit;
 
 /// @todo Float order hack.
 static float forceFloatOrder0(void)
@@ -155,16 +159,14 @@ void ftPr_SpecialAirS_Coll(Fighter_GObj* gobj)
 void ftPr_SpecialS_8013D590(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialAirS, 0x0C4C508AU,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftPr_MS_SpecialAirS,
+                                    ftPr_MF_SpecialS_Coll);
 }
 
 void ftPr_SpecialS_8013D5F0(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialS, 0x0C4C508AU,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftPr_MS_SpecialS,
+                                    ftPr_MF_SpecialS_Coll);
     ftCommon_ClampAirDrift(fp);
 }

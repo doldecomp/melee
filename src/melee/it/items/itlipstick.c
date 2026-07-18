@@ -154,7 +154,7 @@ bool itLipstick_UnkMotion3_Coll(Item_GObj* gobj)
                 if (it_8026DBC8(gobj)) {
                     ip = GET_ITEM(gobj);
                     it_8026B390(gobj);
-                    ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0F;
+                    itResetVelocity(ip);
                     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
                 }
             }

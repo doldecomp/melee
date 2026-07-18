@@ -1,5 +1,7 @@
 #include "ithitodeman.h"
 
+#include "inlines.h"
+
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ftlib.h"
@@ -154,8 +156,7 @@ static inline void it_802D4564_anim_done(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool it_802D4564(Item_GObj* gobj)
@@ -172,7 +173,7 @@ bool it_802D4564(Item_GObj* gobj)
         if (ip->xDD4_itemVar.hitodeman.x90 != NULL) {
             HSD_JObj* jobj = gobj->hsd_obj;
             Vec3 target_pos;
-            PAD_STACK(12);
+            PAD_STACK(8);
             ftLib_80086644(ip->xDD4_itemVar.hitodeman.x90, &target_pos);
             if (target_pos.x < ip->pos.x) {
                 ip->facing_dir = -1.0f;
@@ -272,8 +273,7 @@ void it_802D4990(Item_GObj* gobj)
 
     ip = GET_ITEM(gobj);
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     ip->on_accessory = it_802D4B50;
 }
 
@@ -311,8 +311,7 @@ bool itHitodeman_UnkMotion1_Anim(Item_GObj* gobj)
     if (!it_80272C6C(gobj)) {
         ip = GET_ITEM(gobj);
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-        ip->entered_hitlag = efLib_PauseAll;
-        ip->exited_hitlag = efLib_ResumeAll;
+        Item_SetEffectHitlagCallbacks(ip);
         ip->on_accessory = it_802D4B50;
     }
 
@@ -339,11 +338,7 @@ void it_802D4B50(Item_GObj* gobj) {}
 
 void it_802D4B54(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_EnterAirStateWithHitlag(gobj, 2);
 }
 
 bool itHitodeman_UnkMotion2_Anim(Item_GObj* gobj)
@@ -359,8 +354,7 @@ void itHitodeman_UnkMotion2_Phys(Item_GObj* gobj)
         it_80273454(gobj);
         ip = GET_ITEM(gobj);
         Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-        ip->entered_hitlag = efLib_PauseAll;
-        ip->exited_hitlag = efLib_ResumeAll;
+        Item_SetEffectHitlagCallbacks(ip);
     }
 }
 
@@ -458,8 +452,7 @@ void it_802D4F78(Item_GObj* gobj)
     jobj = GET_JOBJ(gobj);
     f = 1.0f;
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     efSync_Spawn(0x46C, gobj, jobj, &f);
 }
 

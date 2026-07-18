@@ -1,5 +1,7 @@
 #include "it/items/itheiho.h"
 
+#include "inlines.h"
+
 #include "gr/stage.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
@@ -418,18 +420,7 @@ void it_802D98AC(Item_GObj* arg0)
 
 void it_802D98C4(HSD_JObj* jobj, Item* arg1)
 {
-    Vec3 vec;
-    Vec3 vec2;
-    if (jobj != NULL) {
-        vec.x = vec.y = vec.z = 0.0F;
-        HSD_JObjGetTranslation(jobj, &vec2);
-        arg1->x40_vel.x =
-            arg1->facing_dir * (vec2.z - arg1->xDD4_itemVar.heiho.x3C.z);
-        arg1->x40_vel.y = vec2.y - arg1->xDD4_itemVar.heiho.x3C.y;
-        arg1->x40_vel.z = vec2.x - arg1->xDD4_itemVar.heiho.x3C.x;
-        arg1->xDD4_itemVar.heiho.x3C = vec2;
-        HSD_JObjSetTranslate(jobj, &vec);
-    }
+    itUpdateVelocityFromBone(jobj, arg1, &arg1->xDD4_itemVar.heiho.x3C);
 }
 
 void it_802D9A0C(Item_GObj* jobj, HSD_GObj* arg1)
