@@ -17,7 +17,7 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/memory.h>
-#include <baselib/particle.h>
+#include <baselib/hsd_3915.h>
 #include <baselib/sislib.h>
 #include <baselib/video.h>
 #include <baselib/wobj.h>

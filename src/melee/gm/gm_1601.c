@@ -10,7 +10,6 @@
 
 #include "baselib/gobjplink.h"
 #include "baselib/jobj.h"
-#include "baselib/particle.h"
 #include "cm/camera.h"
 
 #include "ft/forward.h"
@@ -37,6 +36,7 @@
 #include <m2c_macros.h>
 #include <baselib/video.h>
 #include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/debugconsole_main.h>
 #include <sysdolphin/baselib/random.h>
 #include <melee/gm/gm_1A45.h>
 #include <melee/pl/player.h>
