@@ -535,6 +535,38 @@ static void setupShapeAnimVtxDesc(HSD_PObj* pobj)
     prev_vtxdesc = NULL;
 }
 
+static inline void decode_u8_xyz(void* src_base, f32 dst[3], int scale)
+{
+    u8* src = src_base;
+    dst[0] = (f32) src[0] / scale;
+    dst[1] = (f32) src[1] / scale;
+    dst[2] = (f32) src[2] / scale;
+}
+
+static inline void decode_s8_xyz(void* src_base, f32 dst[3], int scale)
+{
+    s8* src = src_base;
+    dst[0] = (f32) src[0] / scale;
+    dst[1] = (f32) src[1] / scale;
+    dst[2] = (f32) src[2] / scale;
+}
+
+static inline void decode_u16_xyz(void* src_base, f32 dst[3], int scale)
+{
+    u16* src = src_base;
+    dst[0] = (f32) src[0] / scale;
+    dst[1] = (f32) src[1] / scale;
+    dst[2] = (f32) src[2] / scale;
+}
+
+static inline void decode_s16_xyz(void* src_base, f32 dst[3], int scale)
+{
+    s16* src = src_base;
+    dst[0] = (f32) src[0] / scale;
+    dst[1] = (f32) src[1] / scale;
+    dst[2] = (f32) src[2] / scale;
+}
+
 static void get_shape_vertex_xyz(HSD_ShapeSet* shape_set, int shape_id,
                                  int arrayidx, f32 dst[3])
 {
@@ -558,33 +590,21 @@ static void get_shape_vertex_xyz(HSD_ShapeSet* shape_set, int shape_id,
     } else {
         int decimal_point = 1 << shape_set->vertex_desc->frac;
         switch (shape_set->vertex_desc->comp_type) {
-        case GX_U8: {
-            u8* src = src_base;
-            dst[0] = (f32) src[0] / decimal_point;
-            dst[1] = (f32) src[1] / decimal_point;
-            dst[2] = (f32) src[2] / decimal_point;
-        } break;
+        case GX_U8:
+            decode_u8_xyz(src_base, dst, decimal_point);
+            break;
 
-        case GX_S8: {
-            s8* src = src_base;
-            dst[0] = (f32) src[0] / decimal_point;
-            dst[1] = (f32) src[1] / decimal_point;
-            dst[2] = (f32) src[2] / decimal_point;
-        } break;
+        case GX_S8:
+            decode_s8_xyz(src_base, dst, decimal_point);
+            break;
 
-        case GX_U16: {
-            u16* src = src_base;
-            dst[0] = (f32) src[0] / decimal_point;
-            dst[1] = (f32) src[1] / decimal_point;
-            dst[2] = (f32) src[2] / decimal_point;
-        } break;
+        case GX_U16:
+            decode_u16_xyz(src_base, dst, decimal_point);
+            break;
 
-        case GX_S16: {
-            s16* src = src_base;
-            dst[0] = (f32) src[0] / decimal_point;
-            dst[1] = (f32) src[1] / decimal_point;
-            dst[2] = (f32) src[2] / decimal_point;
-        } break;
+        case GX_S16:
+            decode_s16_xyz(src_base, dst, decimal_point);
+            break;
 
         default:
             HSD_Panic(__FILE__, 1145, "unexpected vertex type.\n");
@@ -615,30 +635,18 @@ static void get_shape_normal_xyz(HSD_ShapeSet* shape_set, int shape_id,
     } else {
         int decimal_point = 1 << shape_set->normal_desc->frac;
         switch (shape_set->normal_desc->comp_type) {
-        case GX_U8: {
-            u8* src = src_base;
-            dst[0] = (float) src[0] / decimal_point;
-            dst[1] = (float) src[1] / decimal_point;
-            dst[2] = (float) src[2] / decimal_point;
-        } break;
-        case GX_S8: {
-            s8* src = src_base;
-            dst[0] = (float) src[0] / decimal_point;
-            dst[1] = (float) src[1] / decimal_point;
-            dst[2] = (float) src[2] / decimal_point;
-        } break;
-        case GX_U16: {
-            u16* src = src_base;
-            dst[0] = (float) src[0] / decimal_point;
-            dst[1] = (float) src[1] / decimal_point;
-            dst[2] = (float) src[2] / decimal_point;
-        } break;
-        case GX_S16: {
-            s16* src = src_base;
-            dst[0] = (float) src[0] / decimal_point;
-            dst[1] = (float) src[1] / decimal_point;
-            dst[2] = (float) src[2] / decimal_point;
-        } break;
+        case GX_U8:
+            decode_u8_xyz(src_base, dst, decimal_point);
+            break;
+        case GX_S8:
+            decode_s8_xyz(src_base, dst, decimal_point);
+            break;
+        case GX_U16:
+            decode_u16_xyz(src_base, dst, decimal_point);
+            break;
+        case GX_S16:
+            decode_s16_xyz(src_base, dst, decimal_point);
+            break;
         default:
             HSD_Panic(__FILE__, 1208, "unexpected normal type.");
         }
