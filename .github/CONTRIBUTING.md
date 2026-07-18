@@ -128,32 +128,32 @@ pre-commit run --all-files # Run the hook once on existing code
         /*  +4   */ char pad_4[0xC];
         /* +10   */ short x10;
         /* +12   */ u8 well_known_something;
-        /* +13:0 */ bool enable_rumble: 1
-        /* +13:1 */ bool x13_1: 1
-        /* +13:2 */ bool x13_2: 1
-        /* +13:3 */ bool is_invisible: 1
-        /* +13:4 */ bool x13_4: 1
-        /* +13:5 */ bool is_metal: 1
-        /* +13:6 */ bool x13_6: 1
-        /* +13:7 */ bool x13_7: 1
+        /* +13:0 */ bool enable_rumble : 1;
+        /* +13:1 */ bool x13_1 : 1;
+        /* +13:2 */ bool x13_2 : 1;
+        /* +13:3 */ bool is_invisible : 1;
+        /* +13:4 */ bool x13_4 : 1;
+        /* +13:5 */ bool is_metal : 1;
+        /* +13:6 */ bool x13_6 : 1;
+        /* +13:7 */ bool x13_7 : 1;
     };
     ```
   - No:
     ```c
     struct Player {
-      u8 thing;
-      u32 something;
-      u32 something2;
-      u32 something3;
-      u8 well_known_something;
-      u8 unkb: 1;
-      u8 unkb2: 1;
-      u8 unkb3: 1;
-      u8 unkb4: 1;
-      u8 unkb5: 1;
-      u8 unkb6: 1;
-      u8 unkb7: 1;
-      u8 unkb8: 1;
+        u8 thing;
+        u32 something;
+        u32 something2;
+        u32 something3;
+        u8 well_known_something;
+        u8 unkb : 1;
+        u8 unkb2 : 1;
+        u8 unkb3 : 1;
+        u8 unkb4 : 1;
+        u8 unkb5 : 1;
+        u8 unkb6 : 1;
+        u8 unkb7 : 1;
+        u8 unkb8 : 1;
     };
     ```
 
