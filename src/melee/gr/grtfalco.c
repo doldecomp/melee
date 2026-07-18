@@ -8,7 +8,7 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/types.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include "mp/forward.h"
 

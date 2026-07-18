@@ -954,6 +954,7 @@ static u8 __THPReadScaneHeader(THPFileInfo* info)
         scan->x76 = scan->x52;
         rowHeight = scan->x8D4;
         ySize = scan->x76;
+        (void) ySize;
         width = compBase->components[0].x08;
         quotient = ySize / rowHeight;
         rows = rowHeight + ySize;
@@ -1033,9 +1034,9 @@ static u8 __THPHuffGenerateSizeTable(THPFileInfo* info, u8 tab_index, int huffma
 static u8 __THPHuffGenerateCodeTable(THPFileInfo* info, u8 tab_index)
 {
     THPFileInfoHuffmanSizeView* huff;
-    s32 si;
     s32 p;
     u32 code;
+    s32 si;
 
     huff = (THPFileInfoHuffmanSizeView*) info;
 

@@ -10,10 +10,6 @@
 
 #include <baselib/forward.h>
 
-extern HSD_GObjEvent ftData_SpecialN[FTKIND_MAX];
-extern HSD_GObjEvent ftData_SpecialLw[FTKIND_MAX];
-extern HSD_GObjEvent ftData_SpecialHi[FTKIND_MAX];
-
 /* 085560 */ void ftData_80085560(int idx, int increment);
 /* 0855C8 */ void ftData_800855C8(FighterKind kind, u8 color);
 /* 08572C */ void ftData_8008572C(FighterKind);
@@ -30,7 +26,12 @@ extern HSD_GObjEvent ftData_SpecialHi[FTKIND_MAX];
 /* 085FD4 */ struct ftData_80085FD4_ret* ftData_80085FD4(Fighter* fp,
                                                          FtMotionId msid);
 /* 086060 */ Fighter* ftData_80086060(Fighter* arg0);
+/* 3C0EC0 */ extern struct UnkCostumeList
+    CostumeListsForeachCharacter[FTKIND_MAX];
+/* 3C0FC8 */ extern struct ftData_UnkCountStruct ftData_Table_Unk0[FTKIND_MAX];
 /* 3C10D0 */ extern Event ftData_Table_Unk1[FTKIND_MAX];
+/* 3C10D0 */ extern struct ftData_UnkCountStruct
+    ftData_UnkIntPairs[FTKIND_MAX];
 /* 3C1154 */ extern HSD_GObjEvent ftData_OnLoad[FTKIND_MAX];
 /* 3C11D8 */ extern HSD_GObjEvent ftData_OnDeath[FTKIND_MAX];
 /* 3C125C */ extern HSD_GObjEvent ftData_OnUserDataRemove[FTKIND_MAX];
@@ -39,6 +40,9 @@ extern HSD_GObjEvent ftData_SpecialHi[FTKIND_MAX];
 /* 3C14F0 */ extern HSD_GObjEvent ftData_SpecialAirLw[FTKIND_MAX];
 /* 3C1574 */ extern HSD_GObjEvent ftData_SpecialAirS[FTKIND_MAX];
 /* 3C15F8 */ extern HSD_GObjEvent ftData_SpecialAirN[FTKIND_MAX];
+/* 3C167C */ extern HSD_GObjEvent ftData_SpecialN[FTKIND_MAX];
+/* 3C1700 */ extern HSD_GObjEvent ftData_SpecialLw[FTKIND_MAX];
+/* 3C1784 */ extern HSD_GObjEvent ftData_SpecialHi[FTKIND_MAX];
 /* 3C1808 */ extern HSD_GObjEvent ftData_OnAbsorb[FTKIND_MAX];
 /* 3C188C */ extern Fighter_ItemEvent ftData_OnItemPickupExt[FTKIND_MAX];
 /* 3C1DB4 */ extern HSD_GObjEvent ftData_UnkMotionStates3[FTKIND_MAX];

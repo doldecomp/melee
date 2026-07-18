@@ -6,12 +6,12 @@
 #include <melee/gm/gmscdata.h>
 #include <melee/gm/types.h>
 
-u64 gm_801A3680(u8 idx)
+u64 gm_GetButtonsPressed(u8 idx)
 {
     return controller_map.x0[idx].button;
 }
 
-u64 gm_801A36A0(u8 idx)
+u64 gm_GetButtonsTriggered(u8 idx)
 {
     return controller_map.x0[idx].trigger;
 }
@@ -102,7 +102,7 @@ static void fn_801A396C(int idx)
 
 #pragma push
 #pragma dont_inline on
-void gm_801A3A74(void)
+void gm_EvaluateAllControllerInputs(void)
 {
     struct gm_controller_map* controller = controller_map.x0;
     int i;
@@ -158,7 +158,7 @@ void gm_801A3E88(void)
 void gm_801A3EF4(void)
 {
     GameMode* scene;
-    for (scene = gm_801A50AC(); scene->idx != GM_COUNT; scene++) {
+    for (scene = gm_GetAllGameModes(); scene->idx != GM_COUNT; scene++) {
         if (scene->Init != NULL) {
             scene->Init();
         }

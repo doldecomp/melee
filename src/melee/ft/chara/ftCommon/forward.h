@@ -8,6 +8,11 @@
 typedef struct ftHurtboxInit ftHurtboxInit;
 typedef struct ftCollisionBox ftCollisionBox;
 
+static MotionFlags const ftCommon_GroundAirColl_MF =
+    Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd |
+    Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |
+    Ft_MF_SkipModelFlags | Ft_MF_Unk27;
+
 typedef enum ftCo_JumpInput {
     JumpInput_None,
     JumpInput_LStick,

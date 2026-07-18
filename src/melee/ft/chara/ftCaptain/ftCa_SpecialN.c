@@ -15,7 +15,8 @@
 #include "ft/ftlib.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
-#include "lb/lb_00F9.h"
+#include "ftCommon/inlines.h"
+#include "lb/lbspdisplay.h"
 
 #include <dolphin/mtx.h>
 
@@ -24,7 +25,7 @@ static void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     int cur_frame = fp->cur_anim_frame;
-    FighterKind kind = ftLib_800872A4(gobj);
+    FighterKind kind = ftLib_GetKind(gobj);
 
     switch (kind) {
     case FTKIND_CAPTAIN:
@@ -141,7 +142,7 @@ static inline void doPhys(HSD_GObj* gobj)
     }
     if (throw_b1) {
         if (!fp->x2219_b0) {
-            FighterKind kind = ftLib_800872A4(gobj);
+            FighterKind kind = ftLib_GetKind(gobj);
             switch (kind) {
             case FTKIND_CAPTAIN:
                 efSync_Spawn(1167, gobj, fp->parts[FtPart_TopN].joint,
@@ -201,9 +202,8 @@ void ftCa_SpecialN_Coll(HSD_GObj* gobj)
 {
     if (!ft_800827A0(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirN, transition_flags,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftCa_MS_SpecialAirN,
+                                        transition_flags);
         fp->pre_hitlag_cb = efLib_PauseAll;
         fp->post_hitlag_cb = efLib_ResumeAll;
         ftCommon_ClampAirDrift(fp);
@@ -214,9 +214,8 @@ void ftCa_SpecialAirN_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialN, transition_flags,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftCa_MS_SpecialN,
+                                        transition_flags);
         fp->pre_hitlag_cb = efLib_PauseAll;
         fp->post_hitlag_cb = efLib_ResumeAll;
     }

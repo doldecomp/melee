@@ -11,7 +11,7 @@
 
 #include "lb/forward.h"
 
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include "mp/forward.h"
 
@@ -165,10 +165,7 @@ void grTMewtwo_802223A4(Ground_GObj* gobj) {}
 
 void grTMewtwo_802223A8(Ground_GObj* gobj)
 {
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    Ground* gp = GET_GROUND(gobj);
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTMewtwo_802223F8(Ground_GObj* gobj)
@@ -186,10 +183,7 @@ void grTMewtwo_80222434(Ground_GObj* gobj) {}
 
 void grTMewtwo_80222438(Ground_GObj* gobj)
 {
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    Ground* gp = GET_GROUND(gobj);
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTMewtwo_80222488(Ground_GObj* gobj)

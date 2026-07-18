@@ -10,8 +10,8 @@
 #include "if/ifstock.h"
 #include "if/iftime.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
+#include "lb/lbspdisplay.h"
 #include "sc/types.h"
 
 #include <baselib/cobj.h>
@@ -56,17 +56,17 @@ void ifAll_802F33CC(void)
     un_802FF620();
 }
 
-HSD_GObj* ifAll_802F3404(void)
+HSD_GObj* ifAll_GetHUDGObj(void)
 {
     return ifAll_804A0FD8.gobj;
 }
 
-Vec3* ifAll_802F3414(void)
+Vec3* ifAll_GetTimerPosition(void)
 {
     return &ifAll_804A0FD8.xC;
 }
 
-Vec3* ifAll_802F3424(int idx)
+Vec3* ifAll_GetPlayerHUDPosition(int idx)
 {
     return &ifAll_804A0FD8.x18[idx];
 }
@@ -125,7 +125,7 @@ void ifAll_802F343C(int arg0)
     }
 }
 
-HSD_Archive** ifAll_802F3690(void)
+HSD_Archive** ifAll_GetArchive(void)
 {
     static HSD_Archive* archive;
     return &archive;
@@ -167,20 +167,20 @@ static void ifAll_802F370C(SceneDesc* arg0)
     jobj = HSD_JObjLoadJoint(arg0->models[0]->joint);
     ifAll_804A0FD8.x8 = jobj;
     lb_80011E24(jobj, &spC, 0xD, -1);
-    lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.xC);
+    lb_8000B1CC(spC, NULL, ifAll_GetTimerPosition());
 
     lb_80011E24(jobj, &spC, 2, -1);
-    lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[0]);
+    lb_8000B1CC(spC, NULL, ifAll_GetPlayerHUDPosition(0));
     lb_80011E24(jobj, &spC, 3, -1);
-    lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[1]);
+    lb_8000B1CC(spC, NULL, ifAll_GetPlayerHUDPosition(1));
     lb_80011E24(jobj, &spC, 4, -1);
-    lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[2]);
+    lb_8000B1CC(spC, NULL, ifAll_GetPlayerHUDPosition(2));
     lb_80011E24(jobj, &spC, 5, -1);
-    lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[3]);
+    lb_8000B1CC(spC, NULL, ifAll_GetPlayerHUDPosition(3));
     lb_80011E24(jobj, &spC, 6, -1);
-    lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[4]);
+    lb_8000B1CC(spC, NULL, ifAll_GetPlayerHUDPosition(4));
     lb_80011E24(jobj, &spC, 7, -1);
-    lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[5]);
+    lb_8000B1CC(spC, NULL, ifAll_GetPlayerHUDPosition(5));
 
     for (i = 0; i < 3; i++) {
         lb_80011E24(jobj, &spC, i + 8, -1);
@@ -198,7 +198,7 @@ void ifAll_802F390C(void)
     SceneDesc* sp14;
 
     HSD_LightDesc* lightdesc;
-    HSD_Archive** parchive = ifAll_802F3690();
+    HSD_Archive** parchive = ifAll_GetArchive();
 
     PAD_STACK(0xC);
 

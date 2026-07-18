@@ -294,7 +294,8 @@ Fighter_CostumeStrings ftLk_Init_CostumeStrings[] = {
     { ftLk_Init_803C81E0, ftLk_Init_803C81EC, ftLk_Init_803C8204 },
 };
 
-int ftLk_Init_803C82EC[31] = { 0 };
+/* 3C82EC */ UnkCostumeStruct ftLk_Init_803C82EC = { 0 };
+/* 3C8304 */ static int pad[25] = { 0 };
 
 bool ftLk_Init_BoomerangExists(HSD_GObj* gobj)
 {
@@ -362,7 +363,7 @@ void ftLk_800EAF58(HSD_GObj* gobj)
 void ftLk_Init_OnItemPickupExt(HSD_GObj* gobj, int arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (it_8026B2B4(fp->item_gobj) == 1) {
+    if (itIsHeavy(fp->item_gobj) == 1) {
         ftParts_80074A4C(gobj, 1, 1);
     }
     ftParts_80074A4C(gobj, 2, 1);
@@ -382,7 +383,7 @@ void ftLk_Init_OnItemVisible(HSD_GObj* gobj)
 void ftLk_Init_OnItemDropExt(HSD_GObj* gobj, bool arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (it_8026B2B4(fp->item_gobj) == 1) {
+    if (itIsHeavy(fp->item_gobj) == 1) {
         ftParts_80074A4C(gobj, 1, 0);
     }
     ftParts_80074A4C(gobj, 2, 0);

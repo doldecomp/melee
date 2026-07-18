@@ -1,5 +1,7 @@
 #include "it/items/itlinkbow.h"
 
+#include "inlines.h"
+
 #include "ft/chara/ftKirby/ftkirby.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"
@@ -45,18 +47,7 @@ HSD_GObj* it_802AF1A4(f32 facing_dir, Fighter_GObj* owner_gobj, Vec3* vec,
     f32 pad[1];
 
     spawn.kind = arg4;
-    spawn.prev_pos = *vec;
-    spawn.prev_pos.z = 0.0F;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.z = 0.0F;
-    spawn.vel.y = 0.0F;
-    spawn.vel.x = 0.0F;
-    spawn.x0_parent_gobj = (HSD_GObj*) owner_gobj;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0.0F;
+    Item_InitSpawnOnPlane(&spawn, (HSD_GObj*) owner_gobj, vec, facing_dir);
 
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {

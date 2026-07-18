@@ -9,7 +9,7 @@
 
 #include "lb/forward.h"
 
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include <baselib/forward.h>
 
@@ -86,15 +86,7 @@ static void grTPichu_80222B98(bool arg0) {}
 
 static void grTPichu_80222B9C(void)
 {
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-    grTPichu_80222C3C(0);
-    grTPichu_80222C3C(1);
-    grTPichu_80222C3C(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTPichu_80222C3C);
 }
 
 static void grTpichu_UnkStage0_OnLoad(void) {}
@@ -142,11 +134,7 @@ static void grTPichu_80222D5C(Ground_GObj* arg0) {}
 
 static void grTPichu_80222D60(Ground_GObj* gobj)
 {
-    u8 _[4];
-
-    Ground* gp = GET_GROUND(gobj);
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTPichu_80222DB0(Ground_GObj* arg0)
@@ -164,11 +152,7 @@ static void grTPichu_80222DEC(Ground_GObj* arg0) {}
 
 static void grTPichu_80222DF0(Ground_GObj* gobj)
 {
-    u8 _[4];
-
-    Ground* gp = GET_GROUND(gobj);
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTPichu_80222E40(Ground_GObj* arg0)

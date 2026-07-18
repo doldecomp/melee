@@ -12,7 +12,7 @@
 
 #include "lb/forward.h"
 
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include <baselib/forward.h>
 
@@ -72,15 +72,7 @@ static void grTCaptain_OnDemoInit(int unused) {}
 
 static void grTCaptain_OnInit(void)
 {
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-    grTCaptain_8021FD04(0);
-    grTCaptain_8021FD04(1);
-    grTCaptain_8021FD04(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTCaptain_8021FD04);
 }
 static void grTCaptain_OnLoad(void) {}
 
@@ -127,11 +119,7 @@ static void grTCaptain_8021FE24(Ground_GObj* arg0) {}
 
 static void grTCaptain_8021FE28(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTCaptain_8021FE78(Ground_GObj* arg0)
@@ -149,11 +137,7 @@ static void grTCaptain_8021FEB4(Ground_GObj* arg0) {}
 
 static void grTCaptain_8021FEB8(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTCaptain_8021FF08(Ground_GObj* arg0)

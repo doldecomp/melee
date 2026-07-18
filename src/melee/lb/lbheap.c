@@ -88,24 +88,28 @@ void lbHeap_80015900(void)
 {
     s32 temp_r0;
     struct lbHeap_HeapOffsetView* destroy_view;
+    s32 bounds_i;
     struct Heap* bounds_heap;
     struct lbHeap_HeapOffsetView* create_view;
-    s32 destroy_i;
     s32 heap_offset;
-    s32 bounds_i;
     s32 create_i;
     u32 arena_lo;
     u32 aram_lo;
     u32 aram_hi;
     u32 arena_hi;
     struct Heap* main_heap;
+    s32 destroy_i;
     struct Heap* aram_heap;
+    u32 destroy_cursor;
 
     /// @remarks 0 and 1 are reserved for HSD and ARAM
-    for (destroy_i = 2, heap_offset = 0x38; destroy_i < 6;
-         destroy_i++, heap_offset += sizeof(struct Heap))
+    destroy_i = 2;
+    destroy_cursor = (u32) &lbHeap_80431FA0.heap_array[destroy_i] - 0x10;
+    heap_offset = 0x38;
+    for (; destroy_i < 6; destroy_i++, destroy_cursor += sizeof(struct Heap),
+                          heap_offset += sizeof(struct Heap))
     {
-        if (lbHeap_80431FA0.heap_array[destroy_i].transient == 1) {
+        if (((struct Heap*) (destroy_cursor + 0x10))->transient == 1) {
             destroy_view = lbHeap_GetHeapOffsetView(heap_offset);
             lbHeap_DestroyOffsetViewIfCreated(destroy_view);
         }
@@ -116,34 +120,9 @@ void lbHeap_80015900(void)
     aram_lo = lbHeap_80431FA0.aram_lo;
     aram_hi = lbHeap_80431FA0.aram_hi;
 
-    for (bounds_i = 2; bounds_i < 4; bounds_i++) {
-        bounds_heap = &lbHeap_80431FA0.heap_array[bounds_i * 2 - 2];
-        if (bounds_heap->transient == 0) {
-            switch (bounds_heap->type) {
-            case 1:
-                temp_r0 = bounds_heap->start + bounds_heap->size;
-                if (arena_lo < temp_r0) {
-                    arena_lo = temp_r0;
-                }
-                break;
-
-            case 2:
-                if (arena_hi > bounds_heap->start) {
-                    arena_hi = bounds_heap->start;
-                }
-                break;
-
-            case 4:
-                temp_r0 = bounds_heap->start + bounds_heap->size;
-                if (aram_lo < temp_r0) {
-                    aram_lo = temp_r0;
-                }
-                break;
-            }
-        }
-
-        bounds_heap++;
-        if (bounds_heap->transient == 0) {
+    for (bounds_i = 2; bounds_i < 6; bounds_i++) {
+        bounds_heap = &lbHeap_80431FA0.heap_array[bounds_i];
+        if (lbHeap_80431FA0.heap_array[bounds_i].transient == 0) {
             switch (bounds_heap->type) {
             case 1:
                 temp_r0 = bounds_heap->start + bounds_heap->size;

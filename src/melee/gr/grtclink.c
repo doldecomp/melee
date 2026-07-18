@@ -5,7 +5,7 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/types.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 #include "lb/types.h"
 
 #include <dolphin/os/OSError.h>
@@ -65,16 +65,7 @@ void grTCLink_8021FF44(bool unused)
 
 void grTCLink_8021FF48(void)
 {
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-
-    grTCLink_8021FFE8(0);
-    grTCLink_8021FFE8(1);
-    grTCLink_8021FFE8(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTCLink_8021FFE8);
 }
 
 void grTclink_UnkStage0_OnLoad(void)
@@ -131,12 +122,7 @@ void grTCLink_80220108(Ground_GObj* gobj)
 
 void grTCLink_8022010C(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
-    PAD_STACK(8);
-
-    Ground_801C2ED0(joint, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTCLink_8022015C(Ground_GObj* gobj)
@@ -157,12 +143,7 @@ void grTCLink_80220198(Ground_GObj* gobj)
 
 void grTCLink_8022019C(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
-    PAD_STACK(8);
-
-    Ground_801C2ED0(joint, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTCLink_802201EC(Ground_GObj* gobj)

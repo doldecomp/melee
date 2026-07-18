@@ -1,5 +1,7 @@
 #include "textdraw.h"
 
+#include "platform.h"
+
 #include "if/types.h"
 
 #include <printf.h>
@@ -52,21 +54,25 @@
 };
 
 /// .bss
-/* 4A1FD8 */ static DevText devtext_pool[32];
+
+/// @note Not necessarily a struct but definitely 0x6B0 unallocated.
+///       #DevText is definitely size 0x34 based on #DevText_InitPool.
+/* 4A1FD8 */ struct DevText_Pool {
+    struct DevText entries[32];
+    char pad[0x6B0 - 0x680];
+} devtext_pool;
+STATIC_ASSERT(sizeof(struct DevText_Pool) == 0x6B0);
 
 /// .sbss
-/* 4D6E18 */ static DevText* un_804D6E18;
-#define devtext_drawlist un_804D6E18
-/* 4D6E1C */ static HSD_GObj* un_804D6E1C;
-#define devtext_gobj un_804D6E1C
+/* 4D6E18 */ static DevText* devtext_drawlist;
+/* 4D6E1C */ static HSD_GObj* devtext_gobj;
 /* 4D6E20 */ static HSD_CObj* devtext_cobj;
 /* 4D6E24 */ static int devtext_setup_classifier;
 /* 4D6E28 */ static int devtext_setup_p_link;
 /* 4D6E2C */ static int devtext_setup_priority;
 /* 4D6E30 */ static int devtext_setup_gx_link;
 /* 4D6E34 */ static int devtext_setup_render_priority;
-/* 4D6E38 */ static DevText* un_804D6E38;
-#define devtext_poolhead un_804D6E38
+/* 4D6E38 */ static DevText* devtext_poolhead;
 
 int DevText_StrLen(char* str)
 {
@@ -121,15 +127,15 @@ HSD_GObj* DevText_GetGObj(void)
 #pragma dont_inline on
 void DevText_InitPool(void)
 {
-    DevText* text = devtext_pool;
+    DevText* text = devtext_pool.entries;
     int i;
-    devtext_pool[0].prev = NULL;
+    devtext_pool.entries[0].prev = NULL;
     for (i = 0; i < 31; i++) {
-        devtext_pool[i + 1].prev = &devtext_pool[i];
-        devtext_pool[i].next = &devtext_pool[i + 1];
+        devtext_pool.entries[i + 1].prev = &devtext_pool.entries[i];
+        devtext_pool.entries[i].next = &devtext_pool.entries[i + 1];
     }
-    devtext_pool[31].next = NULL;
-    devtext_poolhead = devtext_pool;
+    devtext_pool.entries[31].next = NULL;
+    devtext_poolhead = devtext_pool.entries;
     devtext_drawlist = NULL;
 }
 #pragma pop

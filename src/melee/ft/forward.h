@@ -43,6 +43,7 @@ typedef struct IKState IKState;
 typedef struct KirbyHatStruct KirbyHatStruct;
 typedef struct MotionState MotionState;
 typedef struct TempS TempS;
+typedef struct UnkCostumeStruct UnkCostumeStruct;
 typedef struct UnkFloat6_Camera UnkFloat6_Camera;
 typedef struct UnkPlBonusBits UnkPlBonusBits;
 typedef u32 MotionFlags;
@@ -149,7 +150,7 @@ typedef enum CharacterKind {
     /* 18 */ CKIND_PICHU,     // Pichu
     /* 19 */ CKIND_GANON,     // Ganondorf (Ganon)
 
-    CKIND_PLAYABLE_COUNT,
+    /* 1A */ CKIND_PLAYABLE_COUNT,
 
     /* 1A */ CKIND_MASTERH = CKIND_PLAYABLE_COUNT, // Master Hand (MasterH)
     /* 1B */ CKIND_BOY,                            // Male Wireframe (Boy)
@@ -159,7 +160,7 @@ typedef enum CharacterKind {
     /* 1F */ CHKIND_SANDBAG,                       // Sandbag
     /* 20 */ CHKIND_POPO,                          // Popo
     /* 21 */ CHKIND_NONE,                          // None
-    /* 22 */ CHKIND_MAX = CHKIND_NONE
+    /* 21 */ CHKIND_MAX = CHKIND_NONE
 } CharacterKind;
 
 static MotionFlags const Ft_MF_None = 0;

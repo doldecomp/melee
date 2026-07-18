@@ -17,10 +17,8 @@
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
-#include <baselib/debug.h>
 #include <baselib/jobj.h>
 #include <baselib/mtx.h>
-#include <baselib/particle.h>
 #include <baselib/state.h>
 #include <baselib/tev.h>
 #include <MetroTRK/intrinsics.h>
@@ -331,17 +329,17 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                      Vec3* arg4, Vec3* arg5, float arg6, float arg7)
 {
     {
-        Vec3 vec4;
         Vec3 arg4_offset;
         Vec3 arg5_offset;
         float temp_f1;
         float unk_sum = arg6 + arg7;
-        vec4 = *arg0;
+        Vec3 vec4 = *arg0;
         (void) vec4;
         arg4_offset = vec4;
         {
             Vec3 arg2_copy;
             arg2_copy = *arg2;
+            (void) arg2_copy;
             arg5_offset = arg2_copy;
         }
 
@@ -462,19 +460,20 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
             float d2_x = arg3_x - arg5_offset.x;
             float arg3_z = arg3->z;
             float d2_z = arg3_z - arg5_offset.z;
-            float d1_dot_d2 = d1_z * d2_z + d1_x * d2_x + d1_y * d2_y;
+            float d1_dot_d2 = d1_x * d2_x + d1_z * d2_z + d1_y * d2_y;
             float d2_z_sq = d2_z * d2_z;
             float d2_len_sq = d2_z_sq + d2_x * d2_x + d2_y * d2_y;
             float offset_delta_x = arg4_offset.x - arg5_offset.x;
             float d1_len_sq = (d1_z * d1_z) + ((d1_x * d1_x) + (d1_y * d1_y));
             float offset_delta_z = arg4_offset.z - arg5_offset.z;
-            float d2_dot_offset_delta = d2_z * offset_delta_z +
-                                        d2_x * offset_delta_x +
-                                        d2_y * offset_delta_y;
+            float d2_y_offset = d2_y * offset_delta_y;
+            float d2_dot_offset_delta =
+                d2_z * offset_delta_z + d2_x * offset_delta_x + d2_y_offset;
             float d1_dot_offset_delta = (d1_z * offset_delta_z) +
                                         d1_x * offset_delta_x +
                                         d1_y * offset_delta_y;
-            float denom = d1_len_sq * d2_len_sq - d1_dot_d2 * d1_dot_d2;
+            float len_product = d1_len_sq * d2_len_sq;
+            float denom = len_product - d1_dot_d2 * d1_dot_d2;
 
             {
                 float arg5_scl;
@@ -647,23 +646,48 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                 arg5->z = d2_z * arg5_scl + arg5_offset.z;
             }
         }
-            PAD_STACK(72);
+            PAD_STACK(84);
             return end(arg4, arg5, unk_sum);
         }
         }
     }
 }
 
+static inline float lbColl_Dot2(float ax, float ay, float bx, float by)
+{
+    return ax * bx + ay * by;
+}
+
+static inline float lbColl_GetY(Vec3* v)
+{
+    return v->y;
+}
+
 bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                      float p, float q, float r)
 {
+    float diff_dc_x;
+    float diff_ac_x;
+    float diff_dc_y;
+    float d_y;
+    float diff_ba_y;
+    float diff_ba_x;
+    float d_x;
     Vec3 a1;
+    float sqdist2_dc;
+    float sqdist2_ba;
+    Vec3 c1;
+    float dot2_diff_dc_ac;
+    float dot2_diff_ba_ac;
+    float determinant;
     float sum_pq = p + q;
-
     Vec3 a0;
-    PAD_STACK(72);
+    u8 operand_pad[8];
+
+    PAD_STACK(80);
 
     a0 = *a;
+    (void) a0;
     a1 = a0;
     {
         Vec3 c0;
@@ -672,8 +696,6 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
         (void) c0;
 
         {
-            Vec3 c1;
-
             c1 = c0;
             {
                 float b_x = b->x;
@@ -709,11 +731,13 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                 }
 
                 {
-                    float b_y = b->y;
+                    float loaded_b_y = b->y;
+                    float b_y = loaded_b_y;
                     if (a1.y > b_y) {
                         {
                             float y;
-                            y = a1.y + sum_pq;
+                            y = a1.y;
+                            y += sum_pq;
                             if (y < c1.y && y < d->y) {
                                 return false;
                             }
@@ -741,36 +765,37 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                     }
 
                     {
-                        float diff_ba_y = b_y - a1.y;
-                        float d_y = d->y;
-                        float diff_ac_y = a1.y - c1.y;
-                        float diff_dc_y = d_y - c1.y;
-                        float diff_ba_x = b_x - a1.x;
-                        float d_x = d->x;
-                        float diff_dc_x = d_x - c1.x;
+                        float dot2_diff_ba_dc;
+                        float diff_ac_y;
+                        diff_ba_y = b_y - a1.y;
+                        d_y = lbColl_GetY(d);
+                        diff_ac_y = a1.y - c1.y;
+                        diff_dc_y = d_y - c1.y;
+                        diff_ba_x = b_x - a1.x;
+                        d_x = d->x;
+                        diff_dc_x = d_x - c1.x;
 
-                        float dot2_diff_ba_dc =
-                            diff_ba_x * diff_dc_x + diff_ba_y * diff_dc_y;
+                        dot2_diff_ba_dc = lbColl_Dot2(diff_ba_x, diff_ba_y,
+                                                      diff_dc_x, diff_dc_y);
 
-                        float sqdist2_dc =
+                        sqdist2_dc =
                             diff_dc_x * diff_dc_x + diff_dc_y * diff_dc_y;
-                        float sqdist2_ba =
+                        sqdist2_ba =
                             diff_ba_x * diff_ba_x + diff_ba_y * diff_ba_y;
-                        float diff_ac_x = a1.x - c1.x;
+                        diff_ac_x = a1.x - c1.x;
 
-                        float dot2_diff_dc_ac =
+                        dot2_diff_dc_ac =
                             diff_dc_x * diff_ac_x + diff_dc_y * diff_ac_y;
 
-                        float dot2_diff_ba_ac =
+                        dot2_diff_ba_ac =
                             diff_ba_x * diff_ac_x + diff_ba_y * diff_ac_y;
 
-                        float determinant = sqdist2_ba * sqdist2_dc -
-                                            dot2_diff_ba_dc * dot2_diff_ba_dc;
+                        determinant = sqdist2_ba * sqdist2_dc -
+                                      dot2_diff_ba_dc * dot2_diff_ba_dc;
 
                         {
                             float scl_e;
                             float scl_f;
-                            float out0;
                             float out1;
                             if (approximatelyZero(sqdist2_dc)) {
                                 if (approximatelyZero(sqdist2_ba)) {
@@ -814,7 +839,8 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                                 float diff_dc_z;
                                                 float dot;
                                                 a2 = a0;
-                                                diff_dc_z = d->z - c->z;
+                                                diff_dc_z = d->z;
+                                                diff_dc_z -= c->z;
                                                 scl_e = 0.0f;
                                                 dot =
                                                     diff_dc_z * (c3.z - a2.z) +
@@ -850,7 +876,8 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                                 float diff_dc_y1;
                                                 float diff_dc_z1;
                                                 diff_dc_y1 = d_y - c->y;
-                                                diff_dc_z1 = d->z - c->z;
+                                                diff_dc_z1 = d->z;
+                                                diff_dc_z1 -= c->z;
                                                 {
                                                     Vec3 b0;
 
@@ -906,6 +933,7 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                     (scl_f > lbColl_804D7A00) ||
                                     (scl_f < lbColl_804D7A10))
                                 {
+                                    float out0;
                                     float result0;
                                     float temp_scl_e;
                                     {
@@ -958,7 +986,8 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
         float diff_ef_y;
         float diff_ef_x;
         diff_ef_y = e->y - f->y;
-        diff_ef_x = e->x - f->x;
+        diff_ef_x = e->x;
+        diff_ef_x -= f->x;
         if (sum_pq * sum_pq < diff_ef_x * diff_ef_x + (diff_ef_y * diff_ef_y))
         {
             return false;
@@ -990,16 +1019,17 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
                      float* out_overlap, float hit_radius, float hurt_radius,
                      float broadphase_scale)
 {
-    float hurt_len_sq;
+    float hit_end_min_z;
     float closest_delta_x;
     float hit_start_mid_x;
     float local_delta_x;
     float hurt_mid_z;
+    u8 operand_pad[4];
     Vec3 hit_start_copy;
     Vec3 hurt_start_copy;
     Vec3 hit_delta;
-    Mtx inv_hurt_mtx;
-    float candidate_hit_param;
+    float start_delta_z;
+    float hit_start_dot;
     float scaled_hurt_radius;
     float hurt_mid_x;
     float hurt_mid_y;
@@ -1011,7 +1041,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float allowed_distance;
     float hurt_closest_x;
     float hurt_closest_y;
-    float hurt_closest_z;
+    float hurt_end_x;
     float hit_start_mid_y;
     float hit_param_candidate;
     float closest_delta_y;
@@ -1019,7 +1049,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float local_delta_y;
     float start_delta_x;
     float start_delta_y;
-    float start_delta_z;
+    Mtx inv_hurt_mtx;
     float hurt_delta_x;
     float hit_start_max_x;
     float hit_end_min_x;
@@ -1035,26 +1065,26 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float hit_end_min_y;
     float hit_start_min_y;
     float hit_end_max_y;
-    float hit_end_min_z;
+    float hurt_len_sq;
     float hit_end_max_z;
-    float hit_start_dot;
+    float candidate_hurt_param;
     float hit_end_x;
     float hit_len_sq;
     float hit_end_mid_x;
     float hit_end_y;
     float hit_start_max_z;
     float hit_start_min_z;
-    float hurt_end_x;
+    float hurt_closest_z;
     float hit_end_z;
+    float segment_dot;
     float hurt_end_y;
-    float hurt_end_z;
     float hit_param;
     float local_dist;
     float hurt_param;
     float hurt_param_from_hit_start;
     float hurt_param_from_hit_end;
     float closest_dist;
-    float segment_dot;
+    float hurt_end_z;
     f64 local_rsqrt_estimate;
     f64 local_rsqrt_step1;
     f64 local_rsqrt_step2;
@@ -1148,7 +1178,8 @@ block_26:
     {
         return 0;
     }
-    hit_end_max_z = hit_end_z + broadphase_radius;
+    hit_end_max_z = hit_end_z;
+    hit_end_max_z += broadphase_radius;
     if ((hit_end_max_z < hurt_start_copy.z) && (hit_end_max_z < hurt_end->z)) {
         return 0;
     }
@@ -1158,6 +1189,7 @@ block_39:
     hit_delta.y = hit_end->y - hit_start_copy.y;
     hit_delta.z = hit_end->z - hit_start_copy.z;
     hurt_end_y = hurt_end->y;
+    (void) hurt_end_y;
     start_delta_y = hit_start_copy.y - hurt_start_copy.y;
     hurt_delta_y = hurt_end_y - hurt_start_copy.y;
     hurt_end_x = hurt_end->x;
@@ -1168,9 +1200,10 @@ block_39:
     hit_start_mid_x = hit_delta.x * hit_delta.x;
     hit_start_mid_y = hit_delta.y * hit_delta.y;
     hurt_end_z = hurt_end->z;
+    (void) hurt_end_z;
     start_delta_x = hit_start_copy.x - hurt_start_copy.x;
-    hurt_delta_z = hurt_end_z - hurt_start_copy.z;
     segment_dot = (hit_delta.x * hurt_delta_x) + segment_dot;
+    hurt_delta_z = hurt_end_z - hurt_start_copy.z;
     /* Cache 1.0 constant in a callee-save to avoid reloading it across the
      * several `hit_param = 1.0` / `hurt_param = 1.0` branches below. The
      * variable name is a borrow from the unused-after-broadphase-rejection
@@ -1308,7 +1341,7 @@ block_39:
                 (hurt_param > lbColl_804D7A00) ||
                 (hurt_param < lbColl_804D7A10))
             {
-                float candidate_hurt_param;
+                float candidate_hit_param;
                 float hit_endpoint_dist_sq;
                 float hit_endpoint_param;
                 float hurt_endpoint_param;
@@ -1355,8 +1388,8 @@ block_39:
     closest_delta_x = hit_closest->x - hurt_closest->x;
     closest_delta_z = hit_closest->z - hurt_closest->z;
     closest_dist_sq = (closest_delta_z * closest_delta_z) +
-                      ((closest_delta_x * closest_delta_x) +
-                       (closest_delta_y * closest_delta_y));
+                      ((closest_delta_y * closest_delta_y) +
+                       (closest_delta_x * closest_delta_x));
     if (closest_dist_sq > lbColl_804D79F8) {
         volatile float sp38;
 
@@ -1394,8 +1427,8 @@ block_39:
     HSD_MtxInverse(hurt_mtx, inv_hurt_mtx);
     PSMTXMultVec(inv_hurt_mtx, hit_closest, &hit_start_copy);
     PSMTXMultVec(inv_hurt_mtx, hurt_closest, &hit_delta);
-    local_delta_y = hit_start_copy.y - hit_delta.y;
     local_delta_x = hit_start_copy.x - hit_delta.x;
+    local_delta_y = hit_start_copy.y - hit_delta.y;
     local_delta_z = hit_start_copy.z - hit_delta.z;
     local_dist_sq =
         (local_delta_z * local_delta_z) +
@@ -1424,8 +1457,8 @@ block_39:
     scaled_hurt_radius = (hurt_radius * closest_dist) / local_dist;
     contact_lerp = scaled_hurt_radius / closest_dist;
     allowed_distance = hit_radius + scaled_hurt_radius;
-    hurt_closest_x = hurt_closest->x;
     *out_overlap = allowed_distance - closest_dist;
+    hurt_closest_x = hurt_closest->x;
     out_contact_pos->x =
         (contact_lerp * (hit_closest->x - hurt_closest_x)) + hurt_closest_x;
     hurt_closest_y = hurt_closest->y;

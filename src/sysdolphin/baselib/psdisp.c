@@ -1677,7 +1677,7 @@ void psDispParticles(s32 arg0, u32 arg1)
                             }
                         }
                         if (fabsf(vf2) < (f32) sp898) {
-                            angle = (-vf1 >= 0.0f) ? 1.5707964f : -1.5707964f;
+                            angle = (-vf1 >= 0.0) ? 1.5707964f : -1.5707964f;
                         } else {
                             angle = atan2f(-vf1, vf2);
                         }

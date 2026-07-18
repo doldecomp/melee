@@ -13,10 +13,10 @@
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "it/item.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbshadow.h"
+#include "lb/lbspdisplay.h"
 #include "mp/mpcoll.h"
 #include "pl/player.h"
 #include "sc/types.h"
@@ -97,7 +97,7 @@ void un_8031F294(s32 arg0, s32 arg1)
     HSD_JObjAnimAll(jobj);
     pmtx[1] = un_80400200.spawns[1];
     HSD_JObjReqAnimAll(jobj, un_804DE0DC);
-    if (gm_80164840(7) != 0) {
+    if (gm_IsCKindUnlocked(CKIND_LUIGI) != 0) {
         Player_80036E20(CKIND_LUIGI, un_804D6FCC, 5);
         Player_SetPlayerCharacter(2, CKIND_LUIGI);
         Player_SetCostumeId(2, 0);
@@ -127,21 +127,10 @@ void fn_8031F548(HSD_GObj* gobj)
 
 static void fn_8031F56C(HSD_GObj* gobj, int unused)
 {
-    HSD_CObj* cobj;
     char pad[8];
 
     lbShadow_8000F38C(0);
-    cobj = gobj->hsd_obj;
-    if (HSD_CObjSetCurrent(cobj) != 0) {
-        u8* colors = (u8*) &un_804D5B08;
-        HSD_SetEraseColor(colors[0], colors[1], colors[2], colors[3]);
-        cobj = gobj->hsd_obj;
-        HSD_CObjEraseScreen(cobj, 1, 0, 1);
-        vi_8031CA04(gobj);
-        gobj->gxlink_prios = 0x281;
-        HSD_GObj_80390ED0(gobj, 7);
-        HSD_CObjEndCurrent();
-    }
+    vi_RunCamera(gobj, (u8*) &un_804D5B08, 0x281);
 }
 
 void fn_8031F600(HSD_GObj* gobj)
@@ -151,7 +140,7 @@ void fn_8031F600(HSD_GObj* gobj)
     HSD_CObjAnim(cobj);
 
     if (170.0f == cobj->aobj->curr_frame) {
-        if (gm_80164840(7) != 0) {
+        if (gm_IsCKindUnlocked(CKIND_LUIGI) != 0) {
             vi_8031C9B4(0xD, 0);
             lbAudioAx_800237A8(0x209, 0x7F, 0x40);
         }
@@ -163,7 +152,7 @@ void fn_8031F600(HSD_GObj* gobj)
     }
 
     if (241.0f == cobj->aobj->curr_frame) {
-        if (gm_80164840(7) != 0) {
+        if (gm_IsCKindUnlocked(CKIND_LUIGI) != 0) {
             lbAudioAx_800237A8(0x20A, 0x7F, 0x40);
         }
     }
@@ -210,7 +199,7 @@ void un_8031F714_OnEnter(void* arg)
                             lb_80011AC4(un_804D6FC0->lights));
     GObj_SetupGXLink(temp_r28, HSD_GObj_LObjCallback, 0, 0);
 
-    if (gm_80164840(7) != 0) {
+    if (gm_IsCKindUnlocked(CKIND_LUIGI) != 0) {
         var_r28 = un_804D6FC0;
     } else {
         var_r28 = un_804D6FC4;

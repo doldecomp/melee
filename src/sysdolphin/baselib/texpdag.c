@@ -162,11 +162,6 @@ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
     HSD_TExp* sp94[HSD_TEXP_MAX_NUM];
     int sp14[32];
     HSD_TExp** base;
-    HSD_TExpDag* dep_entry;
-    HSD_TExpDag* dep_entry2;
-    HSD_TExpDag* dag;
-    int count;
-    int count2;
     int num;
     int j;
     int i;
@@ -174,12 +169,10 @@ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
     int l;
     int last;
     int idx;
-    int dist;
-    PAD_STACK(4);
 
     HSD_ASSERT(0xEE, HSD_TExpGetType(root) == HSD_TE_TEV);
 
-    base = &sp94[0];
+    base = sp94;
     num = 0;
     base[num++] = root;
     for (j = 0; j < num; j++) {
@@ -189,7 +182,7 @@ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
         for (i = 0; i < 4; i++) {
             if (tmp->tev.c_in[i].type == HSD_TE_TEV) {
                 for (k = 0; k < num; k++) {
-                    if (sp94[k] == tmp->tev.c_in[i].exp) {
+                    if (base[k] == tmp->tev.c_in[i].exp) {
                         break;
                     }
                 }
@@ -245,20 +238,13 @@ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
         list[last].tev = &tmp->tev;
         for (idx = 0; idx < 4; idx++) {
             if (tmp->tev.c_in[idx].type == HSD_TE_TEV) {
-                HSD_TExp** q = &sp94[last];
                 for (l = last; l < num; l++) {
-                    if (tmp->tev.c_in[idx].exp == *q) {
-                        HSD_TExpDag** deps;
-                        u8 dep_count;
-
-                        dep_count = list[last].nb_dep;
-                        deps = list[last].depend;
-                        dep_entry = &list[l];
+                    if (tmp->tev.c_in[idx].exp == sp94[l]) {
+                        HSD_TExpDag* dep_entry = &list[l];
                         for (l = 0; l < list[last].nb_dep; l++) {
-                            if (*deps == dep_entry) {
+                            if (list[last].depend[l] == dep_entry) {
                                 break;
                             }
-                            deps++;
                         }
                         if (l >= (int) list[last].nb_dep) {
                             list[last].depend[list[last].nb_dep++] = dep_entry;
@@ -266,7 +252,6 @@ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
                         }
                         break;
                     }
-                    q++;
                 }
                 HSD_ASSERT(0x145, l < num);
             }
@@ -274,26 +259,22 @@ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
 
         for (idx = 0; idx < 4; idx++) {
             if (tmp->tev.a_in[idx].type == HSD_TE_TEV) {
-                HSD_TExp** r2 = &sp94[last];
                 for (l = last; l < num; l++) {
-                    if (tmp->tev.a_in[i].exp == *r2) {
-                        HSD_TExpDag** deps2;
+                    if (tmp->tev.a_in[idx].exp == sp94[l]) {
                         u8 dep_count2 = list[last].nb_dep;
-                        deps2 = list[last].depend;
-                        dep_entry2 = &list[l];
+                        HSD_TExpDag* dep_entry2 = &list[l];
                         for (l = 0; l < (int) dep_count2; l++) {
-                            if (*deps2 == dep_entry2) {
+                            if (list[last].depend[l] == dep_entry2) {
                                 break;
                             }
-                            deps2++;
                         }
                         if (l >= list[last].nb_dep) {
-                            list[last].depend[list[last].nb_dep++] = &list[l];
-                            list[l].nb_ref++;
+                            list[last].depend[list[last].nb_dep++] =
+                                dep_entry2;
+                            dep_entry2->nb_ref++;
                         }
                         break;
                     }
-                    r2++;
                 }
                 HSD_ASSERT(0x15B, l < num);
             }

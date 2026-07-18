@@ -2,12 +2,13 @@
 
 #include "placeholder.h"
 
+#include "dolphin/pad.h"
 #include "gm/gm_unsplit.h"
 #include "gm/gmmain_lib.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lblanguage.h"
+#include "lb/lbspdisplay.h"
 #include "sc/types.h"
 #include "ty/toy.h"
 #include "ty/tylist.h"
@@ -141,7 +142,9 @@ void fn_802FE470(HSD_GObj* gobj)
             break;
         case 1:
             un_803F9D48.x2 = 0xA;
-            if (gm_801A36A0(4) & 0x1100) {
+            if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
+                (PAD_BUTTON_A | PAD_BUTTON_START))
+            {
                 if (un_803F9D48.x2C == NULL) {
                     un_802FE8CC();
                 } else {
@@ -245,29 +248,39 @@ static void setArchive(void)
     }
 }
 
+static inline void un_802FE918_update_x3(unsigned char* x3_ptr, int* r)
+{
+    int old_x3;
+    int k;
+    int new_x3;
+
+    old_x3 = *x3_ptr;
+    for (k = 0; k < 3; k++) {
+        if (k == old_x3) {
+            (*r)++;
+        } else if (*r == k) {
+            new_x3 = *r;
+            break;
+        }
+    }
+    *x3_ptr = new_x3;
+}
+
 void un_802FE918(int a, int b, int c)
 {
     struct un_803F9B30* x;
-    int new_x3;
+    unsigned char* x3_ptr;
     int r;
-    int k;
     int i;
     char sp1C[0x104];
     HSD_Text** text;
     datetime sp14;
 
     lbAudioAx_800236DC();
-    lbAudioAx_80023F28(un_803F9D48.x30[un_803F9D48.x3]);
+    x3_ptr = &un_803F9D48.x3;
+    lbAudioAx_80023F28(un_803F9D48.x30[*x3_ptr]);
     r = HSD_Randi(2);
-    for (k = 0; k < 3; k++) {
-        if (un_803F9D48.x3 == k) {
-            r++;
-        } else if (r == k) {
-            new_x3 = r;
-            break;
-        }
-    }
-    un_803F9D48.x3 = new_x3;
+    un_802FE918_update_x3(x3_ptr, &r);
     gmMainLib_8015D8B0(a);
     for (x = &un_803F9B30[0]; x->x0 != 66; x++) {
         if (x->x0 == a) {
@@ -279,12 +292,13 @@ void un_802FE918(int a, int b, int c)
 found:
     un_803F9D48.x4 = i;
     if (a == 0x3E) {
-        unsigned short v_x8;
+        unsigned short v_x6;
         un_802FE3F8(a, 2, (short*) &un_803F9D48.x6, (short*) &un_803F9D48.x8);
-        v_x8 = un_803F9D48.x8;
-        HSD_SisLib_803A6530(2, 0x4A, un_803F9D48.x6);
-        HSD_SisLib_803A660C(2, 0x4A, un_803063D4(b, 0x4E, 0x174));
-        HSD_SisLib_803A660C(2, 0x4A, v_x8);
+        v_x6 = un_803F9D48.x6;
+        r = un_803F9D48.x8;
+        HSD_SisLib_803A6530(2, 0x4A, v_x6);
+        HSD_SisLib_803A660C(2, 0x4A, Toy_803063D4(b, 0x4E, 0x174));
+        HSD_SisLib_803A660C(2, 0x4A, r);
         HSD_SisLib_803A6368(un_803F9D48.x20, 0x4A);
     } else {
         un_802FE3F8(a, 2, (short*) &un_803F9D48.x6, NULL);
@@ -311,7 +325,7 @@ void un_802FEBE0_OnEnter(void* arg0_)
     int arg0x4;
     int arg0x0;
 
-    un_803124BC();
+    Toy_803124BC();
     un_803F9D48.x28 = arg0;
     un_803F9D48.x2C = arg0->x8;
     un_803F9D48.x3 = HSD_Randi(3);

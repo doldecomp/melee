@@ -2,14 +2,13 @@
 
 #include "gr/grdisplay.h"
 #include "gr/grdynamicattr.h"
-#include "gr/grlib.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
 #include "gr/inlines.h"
 #include "gr/stage.h"
 #include "gr/types.h"
-#include "it/inlines.h"
-#include "lb/lb_00F9.h"
+#include "it/types.h"
+#include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
 
 #include <baselib/gobjgxlink.h>
@@ -80,7 +79,8 @@ static struct {
 }* grFz_804D6AB0;
 /// static s8 grFz_804D4920[8] = { 0x6A, 0x6F, 0x62, 0x6A, 0x2E, 0x68, 0, 0 };
 /// static s8 grFz_804D4928[8] = { 0x6A, 0x6F, 0x62, 0x6A, 0, 0, 0, 0 };
-static Vec3 grFz_803B8430;
+/* The stage's zero translation vector is owned by this TU's .rodata. */
+static const Vec3 grFz_803B8430 = { 0 };
 
 void grFlatzone_80216E74(bool arg0)
 {
@@ -350,7 +350,7 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
         gp->gv.flatzone.xD4 = grFz_804D6AB0->unk20;
         if (gp->gv.flatzone2.xC8 == 1.0f) {
             pos.x = grFz_804D6AB0->unk24;
-            gp->gv.flatzone.xD4 = (s32) ((f32) gp->gv.flatzone.xD4 * 0.5f);
+            gp->gv.flatzone.xD4 = (s32) ((f32) gp->gv.flatzone.xD4 / 2.0f);
         } else {
             pos.x = grFz_804D6AB0->unk28;
             {
@@ -414,25 +414,29 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
             int ret;
             f32 other_x;
             f32 other_z;
-            s32 var_r0;
+            s32 line_id;
             gp->gv.unk.xD0 = 3;
             gp->gv.unk.xD4 = grFz_804D6AB0->unk3C;
             HSD_JObjGetTranslation(jobj, &pos);
-            other_x = (36.0f * gp->gv.flatzone2.xC8) + pos.x;
-            pos.x = other_x;
+            pos.x = (36.0f * gp->gv.flatzone2.xC8) + pos.x;
             pos.y -= 27.0f;
+            other_x = pos.x;
             other_z = 5.0f + pos.y;
             pos.y -= 5.0f;
             if (mpCheckMultiple(other_x, other_z, pos.x, pos.y, &pos_2, &ret,
                                 0, 0, 1, -1, 0x32) != 0)
             {
-                var_r0 = ret;
+                line_id = ret;
             } else {
-                var_r0 = -1;
+                line_id = -1;
             }
-            if (var_r0 != -1) {
-                gp->gv.flatzone2.xCC = grDynamicAttr_801CA0F8(
-                    0x11, &pos_2, var_r0, 22.0f, grFz_804D6AB0->unk3C);
+            {
+                s32 checked_line_id = line_id;
+                if (line_id != -1) {
+                    gp->gv.flatzone2.xCC =
+                        grDynamicAttr_801CA0F8(0x11, &pos_2, checked_line_id,
+                                               22.0f, grFz_804D6AB0->unk3C);
+                }
             }
             trigger_machine = 1;
         }
@@ -562,25 +566,21 @@ static s16 grFz_803E7A68[] = { 0x0000, 0x0001, 0x0002, 0xFFFF, 0xFFFF, 0x0003,
 void grFlatzone_802174EC(Ground_GObj* gobj)
 {
     s16 row_entry;
-    s16 anim_timer;
 
     Ground* gp = GET_GROUND(gobj);
     if (((u8) gp->gv.pad_0[0] == 0) && ((u8) gp->gv.pad_0[3] != 8) &&
         ((u8) gp->gv.pad_0[5] != 0))
     {
-        anim_timer = gp->gv.flatzone.xCC;
-        gp->gv.flatzone.xCC = anim_timer - 1;
-        if (anim_timer < 0) {
-            s16* tbl = grFz_803E7A68;
+        if (gp->gv.flatzone.xCC-- < 0) {
             gp->gv.pad_0[6] = gp->gv.pad_0[5];
             while (1) {
                 s32 next_anim = HSD_Randi(4) + 1;
-                gp->gv.pad_0[5] = next_anim;
-                if ((u8) gp->gv.pad_0[6] == (u8) next_anim) {
+                if ((u8) gp->gv.pad_0[6] == (u8) (gp->gv.pad_0[5] = next_anim))
+                {
                     continue;
                 }
-                row_entry =
-                    tbl[(u8) gp->gv.pad_0[3] * 10 + (u8) gp->gv.pad_0[5]];
+                row_entry = ((s16(*)[5]) grFz_803E7A68)[(u8) gp->gv.pad_0[3]]
+                                                       [(u8) gp->gv.pad_0[5]];
                 if (row_entry != -1) {
                     break;
                 }
@@ -648,18 +648,26 @@ void grFlatzone_80217EF0(Ground_GObj* gobj)
     s32 spawn_left;
     s32 item_kind;
 
-    Ground* gp = GET_GROUND(gobj);
+    /* Matching evidence: direct user_data access instead of GET_GROUND. The
+     * inline getter's return temp lands in this frame's bottom temp-pool
+     * slot and pushes `pos` four bytes up; retail keeps `pos` at the bottom
+     * of the locals area with the pool slot above it. Direct access is the
+     * established idiom elsewhere in gr (e.g. grcorneria.c). */
+    Ground* gp = gobj->user_data;
     if ((u8) gp->gv.pad_0[0] != 0) {
         gp->gv.unk.xC8 = grFz_804D6AB0->unk10;
         gp->gv.pad_0[0] = 0;
     }
     if ((s32) gp->gv.unk.xC8 > 0) {
         if ((gp->gv.unk.xC8 % grFz_804D6AB0->unk14) == 0) {
-            f32 spawn_x;
             Vec3 pos;
-            spawn_left = grFz_804D6AB0->unk1C;
-            spawn_x = HSD_Randf() * (f32) (grFz_804D6AB0->unk18 - spawn_left);
-            pos.x = spawn_x - (f32) -spawn_left;
+            {
+                f32 spawn_x = HSD_Randf();
+                spawn_left = grFz_804D6AB0->unk1C;
+                spawn_x *= (f32) (grFz_804D6AB0->unk18 - spawn_left);
+                spawn_x -= (f32) -spawn_left;
+                pos.x = spawn_x;
+            }
             pos.y = Stage_GetBlastZoneTopOffset() - 5.0f;
             pos.z = 0.0f;
             item_kind = HSD_Randi(5);
@@ -691,7 +699,6 @@ void grFlatzone_8021805C(Ground_GObj* gobj)
 
 void grFlatzone_80218060(s32 arg0)
 {
-    s16* tbl = grFz_803E7A68;
     HSD_GObj* gobj;
     Ground* gp;
     PAD_STACK(8);
@@ -713,20 +720,21 @@ void grFlatzone_80218060(s32 arg0)
                     if (v == (u8) gp->gv.pad_0[4]) {
                         goto loop_4;
                     }
-                } while (tbl[v * 5 + 1] == -1);
+                } while (((s16(*)[5]) grFz_803E7A68)[v][1] == -1);
                 do {
                     {
                         s32 randi = HSD_Randi(4);
                         v = randi + 1;
                     }
-                } while (tbl[gp->gv.flatzone.xC7 * 5 +
-                             (u8) (gp->gv.pad_0[5] = v)] == -1);
+                } while (((s16(*)[5]) grFz_803E7A68)[gp->gv.flatzone.xC7][(
+                             u8) (gp->gv.pad_0[5] = v)] == -1);
             }
             gp->gv.pad_0[6] = 0;
             gp->gv.flatzone.xCC =
                 (s16) rand_int(grFz_804D6AB0->unkC, grFz_804D6AB0->unk8);
             gp->gv.flatzone.xC5 =
-                (u8) tbl[gp->gv.flatzone.xC7 * 5 + (u8) gp->gv.pad_0[5]];
+                (u8) ((s16(*)[5]) grFz_803E7A68)[gp->gv.flatzone.xC7]
+                                                [(u8) gp->gv.pad_0[5]];
             grAnime_801C8138(gobj, gp->map_id, (s32) gp->gv.flatzone.xC5);
         }
     }

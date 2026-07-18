@@ -37,7 +37,7 @@ GameScene gm_803DFDD8_Scenes[] = {
 
 void gm_801BF948(GameScene* scene)
 {
-    unk_struct_0_t* temp_r3 = gm_801A427C(scene);
+    unk_struct_0_t* temp_r3 = gm_GetGameSceneLoadDataCallback(scene);
     temp_r3->x4 = 0;
     temp_r3->x0 = 0;
     if (gmMainLib_8046B0F0.x0 == 1) {
@@ -58,16 +58,16 @@ enum {
 
 void gm_801BF9A8(GameScene* data)
 {
-    struct sceneData* scene_data = gm_801A4284(data);
+    struct sceneData* scene_data = gm_GetGameSceneLeaveDataCallback(data);
 
-    if (!un_803048C0(TROPHY_PIKMIN)) {
+    if (!Toy_803048C0(TROPHY_PIKMIN)) {
         if (!lb_8001C2D8(0, "01",
                          lbLang_GetLanguageSetting() == LANG_JP ? "GPIJ"
                                                                 : "GPIE",
                          "Pikmin dataFile"))
         {
-            un_803124BC();
-            Trophy_SetUnlockState(TROPHY_PIKMIN, true);
+            Toy_803124BC();
+            Toy_SetUnlockState(TROPHY_PIKMIN, true);
         }
     }
 
@@ -76,7 +76,7 @@ void gm_801BF9A8(GameScene* data)
 
     // Enter mode
     // Gekko "boot to CSS" code changes scene_id to a hardcoded 2
-    gm_801A42F8(scene_data->scene_id);
+    gm_ChangeGameModeAfterCurrentScene(scene_data->scene_id);
 }
 
 GameScene gm_803DFE18_Scenes[] = {
@@ -97,7 +97,7 @@ GameScene gm_803DFE18_Scenes[] = {
 
 void gm_801BFA3C(GameScene* scene)
 {
-    unk_struct_0_t* temp_r3 = gm_801A427C(scene);
+    unk_struct_0_t* temp_r3 = gm_GetGameSceneLoadDataCallback(scene);
     temp_r3->x4 = 0;
     temp_r3->x0 = 1;
 }

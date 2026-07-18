@@ -1,6 +1,7 @@
 #include "ftdata.h"
 
 #include "ft_0877.h"
+#include "ft_459A.h"
 
 #include <platform.h>
 
@@ -134,173 +135,40 @@
 
 extern int ft_8045996C[FTKIND_MAX];
 
-/* 4599F0 */ extern UnkCostumeStruct lbl_804599F0;
-/* 459A98 */ extern UnkCostumeStruct ft_80459A98;
-/* 459B28 */ extern UnkCostumeStruct ft_80459B28;
-/* 459C10 */ extern UnkCostumeStruct ft_80459C10;
-/* 459CA0 */ extern UnkCostumeStruct ft_80459CA0;
-/* 45A090 */ extern UnkCostumeStruct ft_8045A090;
-/* 3C82EC */ extern UnkCostumeStruct ftLk_Init_803C82EC;
-/* 459D18 */ extern UnkCostumeStruct ft_80459D18;
-/* 459D90 */ extern UnkCostumeStruct ft_80459D90;
-/* 459DF0 */ extern UnkCostumeStruct ft_80459DF0;
-/* 459E68 */ extern UnkCostumeStruct ft_80459E68;
-/* 459EC8 */ extern UnkCostumeStruct ft_80459EC8;
-/* 459F28 */ extern UnkCostumeStruct ft_80459F28;
-/* 459F88 */ extern UnkCostumeStruct ft_80459F88;
-/* 45A000 */ extern UnkCostumeStruct ft_8045A000;
-/* 45A0F0 */ extern UnkCostumeStruct ft_8045A0F0;
-/* 45A168 */ extern UnkCostumeStruct ft_8045A168;
-/* 45A1F8 */ extern UnkCostumeStruct ft_8045A1F8;
-/* 45A270 */ extern UnkCostumeStruct ft_8045A270;
-/* 45A2D0 */ extern UnkCostumeStruct ft_8045A2D0;
-/* 45A330 */ extern UnkCostumeStruct ft_8045A330;
-/* 45A3A8 */ extern UnkCostumeStruct ft_8045A3A8;
-/* 45A420 */ extern UnkCostumeStruct ft_8045A420;
-/* 45A480 */ extern UnkCostumeStruct ft_8045A480;
-/* 45A4E0 */ extern UnkCostumeStruct ft_8045A4E0;
-/* 45A540 */ extern UnkCostumeStruct ft_8045A540;
-/* 45A5B8 */ extern UnkCostumeStruct ft_8045A5B8;
-/* 45A630 */ extern UnkCostumeStruct ft_8045A630;
-/* 45A648 */ extern UnkCostumeStruct ft_8045A648;
-/* 45A660 */ extern UnkCostumeStruct ft_8045A660;
-/* 45A678 */ extern UnkCostumeStruct ft_8045A678;
-/* 45A690 */ extern UnkCostumeStruct ft_8045A690;
-/* 45A6A8 */ extern UnkCostumeStruct ft_8045A6A8;
-
 /* 3C0EC0 */ struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX] = {
-    {
-        &lbl_804599F0,
-        5,
-    },
-    {
-        &ft_80459B28,
-        4,
-    },
-    {
-        &ft_80459A98,
-        6,
-    },
-    {
-        &ft_80459CA0,
-        5,
-    },
-    {
-        &ft_80459C10,
-        6,
-    },
-    {
-        &ft_8045A090,
-        4,
-    },
-    {
-        &ftLk_Init_803C82EC,
-        5,
-    },
-    {
-        &ft_80459D18,
-        5,
-    },
-    {
-        &ft_80459D90,
-        4,
-    },
-    {
-        &ft_80459DF0,
-        5,
-    },
-    {
-        &ft_80459E68,
-        4,
-    },
-    {
-        &ft_80459EC8,
-        4,
-    },
-    {
-        &ft_80459F28,
-        4,
-    },
-    {
-        &ft_80459F88,
-        5,
-    },
-    {
-        &ft_8045A000,
-        6,
-    },
-    {
-        &ft_8045A1F8,
-        5,
-    },
-    {
-        &ft_8045A2D0,
-        4,
-    },
-    {
-        &ft_8045A270,
-        4,
-    },
-    {
-        &ft_8045A0F0,
-        5,
-    },
-    {
-        &ft_8045A168,
-        5,
-    },
-    {
-        &ft_8045A330,
-        5,
-    },
-    {
-        &ft_8045A3A8,
-        5,
-    },
-    {
-        &ft_8045A420,
-        4,
-    },
-    {
-        &ft_8045A480,
-        4,
-    },
-    {
-        &ft_8045A4E0,
-        4,
-    },
-    {
-        &ft_8045A540,
-        5,
-    },
-    {
-        &ft_8045A5B8,
-        5,
-    },
-    {
-        &ft_8045A690,
-        1,
-    },
-    {
-        &ft_8045A6A8,
-        1,
-    },
-    {
-        &ft_8045A630,
-        1,
-    },
-    {
-        &ft_8045A648,
-        1,
-    },
-    {
-        &ft_8045A660,
-        1,
-    },
-    {
-        &ft_8045A678,
-        1,
-    },
+    { &lbl_804599F0, 5 },       // Mario
+    { &ft_80459B28, 4 },        // Fox
+    { &ft_80459A98, 6 },        // Captain
+    { &ft_80459CA0, 5 },        // Donkey
+    { &ft_80459C10, 6 },        // Kirby
+    { &ft_8045A090, 4 },        // Koopa
+    { &ftLk_Init_803C82EC, 5 }, // Link
+    { &ft_80459D18, 5 },        // Seak
+    { &ft_80459D90, 4 },        // Ness
+    { &ft_80459DF0, 5 },        // Peach
+    { &ft_80459E68, 4 },        // Popo
+    { &ft_80459EC8, 4 },        // Nana
+    { &ft_80459F28, 4 },        // Pikachu
+    { &ft_80459F88, 5 },        // Samus
+    { &ft_8045A000, 6 },        // Yoshi
+    { &ft_8045A1F8, 5 },        // Purin
+    { &ft_8045A2D0, 4 },        // Mewtwo
+    { &ft_8045A270, 4 },        // Luigi
+    { &ft_8045A0F0, 5 },        // Mars
+    { &ft_8045A168, 5 },        // Zelda
+    { &ft_8045A330, 5 },        // CLink
+    { &ft_8045A3A8, 5 },        // DrMario
+    { &ft_8045A420, 4 },        // Falco
+    { &ft_8045A480, 4 },        // Pichu
+    { &ft_8045A4E0, 4 },        // GameWatch
+    { &ft_8045A540, 5 },        // Ganon
+    { &ft_8045A5B8, 5 },        // Emblem
+    { &ft_8045A690, 1 },        // MasterH
+    { &ft_8045A6A8, 1 },        // CrezyH
+    { &ft_8045A630, 1 },        // Boy
+    { &ft_8045A648, 1 },        // Girl
+    { &ft_8045A660, 1 },        // GKoops
+    { &ft_8045A678, 1 }         // Sandbag
 };
 
 ftData_UnkCountStruct ftData_Table_Unk0[FTKIND_MAX] = {

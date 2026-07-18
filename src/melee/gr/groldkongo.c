@@ -21,8 +21,9 @@
 #include "lb/forward.h"
 
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
+#include <math.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
@@ -63,7 +64,10 @@ static struct {
     s32 x6C;
 }* grOk_804D6A90;
 
-u8 grOk_803E6580[0xC] = { 0 };
+S16Vec3 grOk_803E6580[] = {
+    { 0, 3, 1 },
+    { 1, 3, 2 },
+};
 
 StageCallbacks grOk_803E658C[4] = {
     { grOldKongo_8020F618, grOldKongo_8020F644, grOldKongo_8020F64C,
@@ -101,13 +105,6 @@ grOk_StageData grOk_803E65E8 = {
     },
     "%s:%d: couldn t get gobj(id=%d)\n",
 };
-
-static lbColl_80008D30_arg1 grOk_803B8408;
-
-static inline int* grOldKongo_GetHitTimer(Ground* gp)
-{
-    return &gp->gv.oldkongo.hit_timer;
-}
 
 void grOldKongo_8020F468(bool arg) {}
 
@@ -274,87 +271,66 @@ static inline f32 grOldKongo_8020F888_tau_range(f32 a)
     return 0.0f;
 }
 
-void grOldKongo_8020F888(Ground_GObj* arg0)
+void grOldKongo_8020F888(Ground_GObj* gobj)
 {
     Vec3 sp3C;
-    lbColl_80008D30_arg1 hit;
     Ground* gp;
-    Ground_GObj* gobj;
     HSD_JObj* jobj;
-    f32 angle_step;
-    f32 angle;
-    f32 y_speed;
     f32 angle_limit;
     f32 x_speed;
-    f32 abs_y_speed;
     f32 hit_angle;
     f32 angle_delta;
     f32 xec_max;
-    int hit_timer;
-    s16 state_timer;
-    s16 release_timer;
-    s16 timer;
-    int* hit_timer_ptr;
-    gobj = arg0;
+    PAD_STACK(8);
+
     gp = GET_GROUND(gobj);
     jobj = Ground_801C3FA4(gobj, 1);
     switch (gp->gv.oldkongo.xC4) {
     case 2:
     case 3:
-        y_speed = gp->gv.oldkongo.xE4;
         angle_limit =
-            0.5f * (y_speed * (y_speed / DegToRad(grOk_804D6A90->x1C)));
-        if (y_speed > 0.0f) {
+            0.5f * (gp->gv.oldkongo.xE4 *
+                    (gp->gv.oldkongo.xE4 / DegToRad(grOk_804D6A90->x1C)));
+        if (gp->gv.oldkongo.xE4 > 0.0f) {
             angle_delta = gp->gv.oldkongo.xD8 - gp->gv.oldkongo.xDC;
-        } else if (y_speed < 0.0f) {
+        } else if (gp->gv.oldkongo.xE4 < 0.0f) {
             angle_delta = gp->gv.oldkongo.xDC - gp->gv.oldkongo.xD8;
         } else {
-            HSD_ASSERT(0x18CU, NULL);
+            HSD_ASSERT(0x18CU, 0);
         }
         if (angle_delta < 0.0f) {
             angle_delta += M_TAU;
         }
-        if (angle_delta < angle_limit) {
-            if ((s16) gp->gv.oldkongo.xC4 == 3) {
+        if (angle_delta < angle_limit ||
+            angle_delta < ABS(gp->gv.oldkongo.xE4))
+        {
+            if (gp->gv.oldkongo.xC4 == 3) {
                 gp->gv.oldkongo.xC4 = 0;
             }
             break;
         }
-        abs_y_speed = gp->gv.oldkongo.xE4;
-        if (abs_y_speed < 0.0f) {
-            abs_y_speed = -abs_y_speed;
-        }
-        if (angle_delta < abs_y_speed) {
-            if ((s16) gp->gv.oldkongo.xC4 == 3) {
-                gp->gv.oldkongo.xC4 = 0;
-            }
-            break;
-        }
-        if ((s16) gp->gv.oldkongo.xC4 == 2) {
+        if (gp->gv.oldkongo.xC4 == 2) {
             gp->gv.oldkongo.xC4 = 3;
         }
         break;
     case 0:
-        y_speed = gp->gv.oldkongo.xE4;
-        if (y_speed > 0.0f) {
-            angle_step = DegToRad(grOk_804D6A90->x1C);
-            if (y_speed < angle_step) {
+        if (gp->gv.oldkongo.xE4 > 0.0f) {
+            if (gp->gv.oldkongo.xE4 < DegToRad(grOk_804D6A90->x1C)) {
                 gp->gv.oldkongo.xE4 = 0.0f;
                 gp->gv.oldkongo.xDC = gp->gv.oldkongo.xD8;
             } else {
-                gp->gv.oldkongo.xE4 = y_speed - angle_step;
+                gp->gv.oldkongo.xE4 -= DegToRad(grOk_804D6A90->x1C);
             }
-        } else if (y_speed < 0.0f) {
-            angle_step = DegToRad(grOk_804D6A90->x1C);
-            if (y_speed > -angle_step) {
+        } else if (gp->gv.oldkongo.xE4 < 0.0f) {
+            if (gp->gv.oldkongo.xE4 > -DegToRad(grOk_804D6A90->x1C)) {
                 gp->gv.oldkongo.xE4 = 0.0f;
                 gp->gv.oldkongo.xDC = gp->gv.oldkongo.xD8;
             } else {
-                gp->gv.oldkongo.xE4 = y_speed + angle_step;
+                gp->gv.oldkongo.xE4 += DegToRad(grOk_804D6A90->x1C);
             }
         }
         gp->gv.oldkongo.xCC -= 1;
-        if ((s16) gp->gv.oldkongo.xCC < 0) {
+        if (gp->gv.oldkongo.xCC < 0) {
             gp->gv.oldkongo.xC4 = 1;
             if (HSD_Randi(2) != 0) {
                 x_speed = DegToRad(grOk_804D6A90->x1C);
@@ -368,19 +344,14 @@ void grOldKongo_8020F888(Ground_GObj* arg0)
         break;
     case 1:
         gp->gv.oldkongo.xE4 += gp->gv.oldkongo.xE0;
-        angle = gp->gv.oldkongo.xE4;
-        angle_step = DegToRad(grOk_804D6A90->x20);
-        if (angle > angle_step) {
-            gp->gv.oldkongo.xE4 = angle_step;
+        if (gp->gv.oldkongo.xE4 > DegToRad(grOk_804D6A90->x20)) {
+            gp->gv.oldkongo.xE4 = DegToRad(grOk_804D6A90->x20);
         } else {
-            angle_step = -angle_step;
-            if (angle < angle_step) {
-                gp->gv.oldkongo.xE4 = angle_step;
+            if (gp->gv.oldkongo.xE4 < -DegToRad(grOk_804D6A90->x20)) {
+                gp->gv.oldkongo.xE4 = -DegToRad(grOk_804D6A90->x20);
             }
         }
-        state_timer = gp->gv.oldkongo.xCC;
-        gp->gv.oldkongo.xCC = state_timer - 1;
-        if (state_timer < 0) {
+        if (gp->gv.oldkongo.xCC-- < 0) {
             gp->gv.oldkongo.xC4 = 2;
             gp->gv.oldkongo.xCC =
                 rand_range(grOk_804D6A90->x18, grOk_804D6A90->x14);
@@ -390,23 +361,18 @@ void grOldKongo_8020F888(Ground_GObj* arg0)
     }
 
     gp->gv.oldkongo.xDC += gp->gv.oldkongo.xE4;
-    angle = gp->gv.oldkongo.xDC;
-    if (angle > M_TAU) {
-        gp->gv.oldkongo.xDC = (f32) ((f64) angle - M_TAU);
-    } else if (angle < -M_TAU) {
-        angle += M_TAU;
-        gp->gv.oldkongo.xDC = angle;
+    if (gp->gv.oldkongo.xDC > M_TAU) {
+        gp->gv.oldkongo.xDC -= M_TAU;
+    } else if (gp->gv.oldkongo.xDC < -M_TAU) {
+        gp->gv.oldkongo.xDC += M_TAU;
     }
-    angle_limit = gp->gv.oldkongo.xDC;
-    HSD_JObjSetRotationZ(jobj, angle_limit);
+    HSD_JObjSetRotationZ(jobj, gp->gv.oldkongo.xDC);
     lb_8000B1CC(jobj, NULL, &sp3C);
     Ground_801C4D70(gobj, &sp3C, gp->gv.oldkongo.xDC);
 
     switch (gp->gv.oldkongo.xC8) {
     case 0:
-        timer = gp->gv.oldkongo.xCE;
-        gp->gv.oldkongo.xCE = timer - 1;
-        if (timer < 0) {
+        if (gp->gv.oldkongo.xCE-- < 0) {
             gp->gv.oldkongo.xC8 = 1;
         }
         break;
@@ -421,9 +387,7 @@ void grOldKongo_8020F888(Ground_GObj* arg0)
         }
         break;
     case 2:
-        timer = gp->gv.oldkongo.xCE;
-        gp->gv.oldkongo.xCE = timer - 1;
-        if (timer < 0) {
+        if (gp->gv.oldkongo.xCE-- < 0) {
             gp->gv.oldkongo.xC8 = 3;
         }
         break;
@@ -443,27 +407,22 @@ void grOldKongo_8020F888(Ground_GObj* arg0)
     case 1:
         if (gp->gv.oldkongo.keep == NULL) {
             gp->gv.oldkongo.xC6 = 0;
-            goto block_123;
+        } else {
+            if (gp->gv.oldkongo.xCA-- >= 0) {
+                return;
+            }
+            gp->gv.oldkongo.xC6 = 2;
         }
-        release_timer = gp->gv.oldkongo.xCA;
-        gp->gv.oldkongo.xCA = release_timer - 1;
-        if (release_timer >= 0) {
-            return;
-        }
-        gp->gv.oldkongo.xC6 = 2;
     case 2:
-    block_123:
         grAnime_801C7FF8(gobj, 2, 7, 2, 0.0f, 1.0f);
         grMaterial_801C95C4(gobj);
-        hit_timer_ptr = grOldKongo_GetHitTimer(gp);
-        *hit_timer_ptr = 0;
+        gp->gv.oldkongo.hit_timer = 0;
         gp->gv.oldkongo.xC6 = 3;
     case 3:
-        hit_timer_ptr = grOldKongo_GetHitTimer(gp);
-        hit_timer = *hit_timer_ptr;
-        *hit_timer_ptr = hit_timer + 1;
-        if (hit_timer > 0xA) {
-            hit = grOk_803B8408;
+        if (gp->gv.oldkongo.hit_timer++ > 0xA) {
+            lbColl_80008D30_arg1 hit = {
+                1, 1, 361, 0, 0, 180,
+            };
             hit.state = 1;
             hit.damage = grOk_804D6A90->x54;
             hit.kb_angle = grOk_804D6A90->x58;
@@ -471,11 +430,11 @@ void grOldKongo_8020F888(Ground_GObj* arg0)
             hit.unk10 = grOk_804D6A90->x60;
             hit.unk14 = grOk_804D6A90->x64;
             hit.element = grOk_804D6A90->x68;
-            hit_angle = (f32) (1.5707963267948966 + (f64) gp->gv.oldkongo.xDC);
+            hit_angle = 1.5707963267948966 + gp->gv.oldkongo.xDC;
             if (hit_angle < 0.0f) {
                 hit_angle += M_TAU;
             } else if (hit_angle > M_TAU) {
-                hit_angle = (f32) ((f64) hit_angle - M_TAU);
+                hit_angle -= M_TAU;
             }
             hit_angle = 57.29578f * hit_angle;
             {
@@ -487,15 +446,14 @@ void grOldKongo_8020F888(Ground_GObj* arg0)
             }
             gp->gv.oldkongo.xC6 = 4;
             Ground_801C5440(gp, 0, 0x12AU);
-            return;
         }
-        return;
+        break;
     case 4:
         gp->gv.oldkongo.xC6 = 0;
         break;
     case 0:
     default:
-        return;
+        break;
     }
 }
 
@@ -642,15 +600,6 @@ void grOldKongo_802105C8(HSD_GObj* gobj)
     }
 }
 
-extern f32 grOk_804DB9CC;
-extern f32 grOk_804DBA04;
-extern f32 grOk_804DBA08;
-extern f32 grOk_804DBA0C;
-extern f32 grOk_804DBA10;
-extern f32 grOk_804DBA14;
-extern f32 grOk_804DBA18;
-extern f32 grOk_804DBA1C;
-
 f32 grOldKongo_80210650(void)
 {
     f32 result;
@@ -668,21 +617,21 @@ f32 grOldKongo_80210650(void)
     }
 
     if ((r -= grOk_804D6A90->x2C) < 0) {
-        result = grOk_804DBA04;
+        result = 2.3561945;
     } else if ((r -= grOk_804D6A90->x2E) < 0) {
-        result = grOk_804DBA08;
+        result = 1.5707964;
     } else if ((r -= grOk_804D6A90->x30) < 0) {
-        result = grOk_804DBA0C;
+        result = 0.7853982;
     } else if ((r -= grOk_804D6A90->x32) < 0) {
-        result = grOk_804DB9CC;
+        result = 0;
     } else if ((r -= grOk_804D6A90->x34) < 0) {
-        result = grOk_804DBA10;
+        result = -0.7853982;
     } else if ((r -= grOk_804D6A90->x36) < 0) {
-        result = grOk_804DBA14;
+        result = -1.5707964;
     } else if ((r -= grOk_804D6A90->x38) < 0) {
-        result = grOk_804DBA18;
+        result = -2.3561945;
     } else if ((r -= grOk_804D6A90->x3A) < 0) {
-        result = grOk_804DBA1C;
+        result = -3.1415927;
     } else {
         HSD_ASSERT(786, 0);
     }

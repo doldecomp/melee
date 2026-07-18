@@ -791,6 +791,7 @@ f32 it_80270CD8(Item* ip, HitCapsule* hit)
 
 void it_80270E30(Item_GObj* arg_item_gobj)
 {
+    u32 index;
     f32 sp18;
     Vec3 hurt_pos;
     DamageLogEntry* damage_log;
@@ -807,7 +808,6 @@ void it_80270E30(Item_GObj* arg_item_gobj)
     UNUSED s32 unused_int0;
     UNUSED s32 unused_int1;
     s32 element;
-    u32 index;
     Item* item;
     Item* arg_item;
     DamageLogEntry* temp_r29;
@@ -827,6 +827,7 @@ void it_80270E30(Item_GObj* arg_item_gobj)
         while (index < it_804D6D18) {
             hit = damage_log->x8;
             attr = arg_item->xCC_item_attr;
+            (void) attr;
             if (hit->x28 != 0) {
                 knockback = (0.01f * hit->x24 *
                              ((it_804D6D28->x80_float[11] *
@@ -1342,7 +1343,7 @@ void it_80271F78(Item_GObj* gobj)
         item = GET_ITEM(item_gobj);
         if ((gobj != item_gobj) && !item->xDC8_word.flags.x13 &&
             (item->ground_or_air == GA_Ground) && !item->xDD1_flag.b0 &&
-            (it_8026B2B4(item_gobj) == 1))
+            (itIsHeavy(item_gobj) == 1))
         {
             HSD_JObjGetTranslation(item_jobj, &sp28);
             if (itColl_chkECBOverlap(sp28.x, sp28.y, &arg_item->xBEC,
@@ -1396,7 +1397,7 @@ void it_802721B8(Item_GObj* item_gobj)
         }
     }
     if (!item->xDC8_word.flags.x13 && (item->ground_or_air == GA_Ground) &&
-        (it_8026B2B4(item_gobj) == 1))
+        (itIsHeavy(item_gobj) == 1))
     {
         it_80271F78(item_gobj);
     }

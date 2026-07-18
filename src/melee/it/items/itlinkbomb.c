@@ -19,7 +19,7 @@
 #include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 #include "mp/mpcoll.h"
 #include "MSL/math.h"
 
@@ -340,11 +340,7 @@ bool itLinkbomb_UnkMotion2_Anim(HSD_GObj* gobj)
 
 void itLinkbomb_UnkMotion2_Phys(Item_GObj* gobj)
 {
-    ItemAttr* temp_r4;
-
-    temp_r4 = GET_ITEM(gobj)->xCC_item_attr;
-    it_80272860(gobj, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 static inline int it_LinkBomb_Inline_VelocityCompare(HSD_GObj* gobj, Vec3* vel)
@@ -392,6 +388,21 @@ void it_8029EC34(HSD_GObj* gobj)
     }
 }
 
+static inline void itLinkbomb_UnkMotion3_Anim_inline1(HSD_GObj* gobj)
+{
+    Item* item = GET_ITEM(gobj);
+    s32 slop;
+    it_80275414(gobj);
+    it_802754A4(gobj);
+    if (item->msid != 3) {
+        it_8029D9A4(gobj, 3, ITEM_DROP_UPDATE);
+    } else {
+        it_8029D9A4(gobj, 3, ITEM_HIT_PRESERVE | ITEM_DROP_UPDATE);
+    }
+    if (slop != 0) {
+    }
+}
+
 static inline void itLinkbomb_UnkMotion3_Anim_inline2(HSD_GObj* gobj)
 {
     if (!it_80272C6C(gobj)) {
@@ -402,16 +413,14 @@ static inline void itLinkbomb_UnkMotion3_Anim_inline2(HSD_GObj* gobj)
 
 bool itLinkbomb_UnkMotion3_Anim(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    itLinkBombAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itLinkBombAttributes* attrs =
+        GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes;
     PAD_STACK(12);
     if (!it_80272C6C(gobj)) {
-        it_8029EC34(gobj);
+        itLinkbomb_UnkMotion3_Anim_inline1(gobj);
     }
     // permuterslop
     if (attrs != NULL) {
-    }
-    if (ip != NULL) {
     }
     itLinkbomb_UnkMotion3_Anim_inline2(gobj);
     return false;
@@ -419,10 +428,7 @@ bool itLinkbomb_UnkMotion3_Anim(Item_GObj* gobj)
 
 void itLinkbomb_UnkMotion3_Phys(Item_GObj* gobj)
 {
-    ItemAttr* temp_r4;
-    temp_r4 = GET_ITEM(gobj)->xCC_item_attr;
-    it_80272860(gobj, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 bool itLinkbomb_UnkMotion3_Coll(HSD_GObj* gobj)
@@ -466,9 +472,7 @@ void it_8029F18C(HSD_GObj* gobj)
         item->xDD4_itemVar.linkbomb.x0.b1 = true;
     } else {
         item->xDD4_itemVar.linkbomb.x0.b1 = false;
-        item->x40_vel.z = 0.0f;
-        item->x40_vel.y = 0.0f;
-        item->x40_vel.x = 0.0f;
+        itResetVelocity(item);
     }
 
     it_8029D9A4(gobj, 4, 0);

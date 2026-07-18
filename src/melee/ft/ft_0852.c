@@ -2,6 +2,7 @@
 
 #include "ft/forward.h"
 
+#include "ft/ftdata.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 

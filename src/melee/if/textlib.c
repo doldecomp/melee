@@ -1,15 +1,13 @@
 #include "textlib.h"
 
+#include "platform.h"
+
 #include "baselib/controller.h"
 #include "baselib/debug.h"
-#include "dolphin/os.h"
-#include "gm/gm_unsplit.h"
-#include "gm/gmmain_lib.h"
 #include "if/textdraw.h"
 #include "if/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
-#include "lb/lblanguage.h"
 #include "ty/toy.h"
 
 #include <printf.h>
@@ -31,9 +29,13 @@
 #include <MSL/stdio.h>
 #include <MSL/string.h>
 
+struct unk_series {
+    s16 values[26];
+};
+
 /// ?
-/* 4D6E18 */ extern DevText* un_804D6E18;
-/* 4D6E38 */ extern DevText* un_804D6E38;
+/* 4D6E18 */ extern DevText* devtext_drawlist;
+/* 4D6E38 */ extern DevText* devtext_poolhead;
 /* 4DDC88 */ extern GXColor un_804DDC88;
 /* 4DDC8C */ extern GXColor un_804DDC8C;
 /* 4DDC90 */ extern GXColor un_804DDC90;
@@ -41,16 +43,10 @@
 /* 4DDC98 */ extern GXColor un_804DDC98;
 /* 4DDC9C */ extern f32 un_804DDC9C;
 /* 4DDCA0 */ extern f32 un_804DDCA0;
-unsigned short un_804A26B8[1000];
-unsigned short un_804A284C[1000];
-short* un_804D6EB4;
+
 struct un_80304138_objalloc_t* un_804D6E40;
 struct un_80304138_objalloc_t_x8* un_804D6E48;
-struct idk {
-    short idk[26];
-} un_803B8810;
-struct idk un_803B87DC;
-struct idk un_803B87A8;
+
 unsigned char un_804D6E4C;
 
 /// .bss
@@ -72,7 +68,7 @@ GXColor un_804D5A14 = { 0xA0, 0xA0, 0xFF, 0xFF };
 static inline DevText* find_by_id(char id)
 {
     DevText* text;
-    for (text = un_804D6E18; text != NULL; text = text->next) {
+    for (text = devtext_drawlist; text != NULL; text = text->next) {
         if (text->id == id) {
             return text;
         }
@@ -90,14 +86,13 @@ DevText* DevText_Create(char id, int x, int y, int w, int h, char* buf)
     if ((text = find_by_id(id))) {
         return NULL;
     }
-    text = un_804D6E38;
+    text = devtext_poolhead;
     if (text != NULL) {
-        un_804D6E38 = text->next;
+        devtext_poolhead = text->next;
     } else {
         text = NULL;
     }
     if (text == NULL) {
-        // HSD_ASSERT
         HSD_ASSERTREPORT(309, 0, "TW : Screen alloc Fail\n");
     }
     if (text != NULL) {
@@ -974,11 +969,11 @@ bool un_80304470(void)
     int sum = 0;
     int count;
     for (i = 0; i < 8; i++) {
-        sum += un_80304B94(i);
+        sum += Toy_80304B94(i);
     }
     count = 0;
     for (i = 0; i < 0x125; i++) {
-        if (i != 0xE6 && i != 0xC9 && un_803048C0(i)) {
+        if (i != 0xE6 && i != 0xC9 && Toy_803048C0(i)) {
             count++;
         }
     }
@@ -995,11 +990,11 @@ bool un_80304510(void)
     int sum = 0;
     int count;
     for (i = 0; i < 9; i++) {
-        sum += un_80304B94(i);
+        sum += Toy_80304B94(i);
     }
     count = 0;
     for (i = 0; i < 0x125; i++) {
-        if (un_803048C0(i)) {
+        if (Toy_803048C0(i)) {
             count++;
         }
     }
@@ -1012,297 +1007,64 @@ bool un_80304510(void)
 
 bool un_803045A0(void)
 {
-    struct idk sp = un_803B87A8;
+    s16 sp[] = {
+        0,  3,  6,  9,  12, 15, 18, 21, 24, 27, 30, 33, 36,
+        39, 42, 45, 48, 51, 54, 57, 60, 63, 66, 69, 72, 75,
+    };
     unsigned int i;
     unsigned int count = 0;
-    for (i = 0; i < 26; i++) {
-        if (un_803048C0(sp.idk[i])) {
+    for (i = 0; i < ARRAY_SIZE(sp); i++) {
+        if (Toy_803048C0(sp[i])) {
             count++;
         }
     }
-    if (count == 26) {
+    if (count == ARRAY_SIZE(sp)) {
         return 1;
     } else {
         return 0;
     }
 }
 
+/// @todo Duplicate code of #un_803045A0 with different data
 bool un_80304690(void)
 {
-    struct idk sp = un_803B87DC;
+    s16 sp[] = {
+        1,  4,  7,  10, 13, 16, 19, 22, 25, 28, 31, 34, 37,
+        40, 43, 46, 49, 52, 55, 58, 61, 64, 67, 70, 73, 76,
+    };
+
     unsigned int i;
     unsigned int count = 0;
-    for (i = 0; i < 26; i++) {
-        if (un_803048C0(sp.idk[i])) {
+    for (i = 0; i < ARRAY_SIZE(sp); i++) {
+        if (Toy_803048C0(sp[i])) {
             count++;
         }
     }
-    if (count == 26) {
+    if (count == ARRAY_SIZE(sp)) {
         return 1;
     } else {
         return 0;
     }
 }
 
+/// @todo Duplicate code of #un_803045A0 with different data
 bool un_80304780(void)
 {
-    struct idk sp = un_803B8810;
+    s16 sp[] = {
+        2,  5,  8,  11, 14, 17, 20, 23, 26, 29, 32, 35, 38,
+        41, 44, 47, 50, 53, 56, 59, 62, 65, 68, 71, 74, 77,
+    };
+
     unsigned int i;
     unsigned int count = 0;
-    for (i = 0; i < 26; i++) {
-        if (un_803048C0(sp.idk[i])) {
+    for (i = 0; i < ARRAY_SIZE(sp); i++) {
+        if (Toy_803048C0(sp[i])) {
             count++;
         }
     }
-    if (count == 26) {
+    if (count == ARRAY_SIZE(sp)) {
         return 1;
     } else {
         return 0;
     }
-}
-
-int un_GetTrophyTotal(void)
-{
-    if (gm_8016B498() || gm_801A4310() == GM_TOY_LOTTERY) {
-        return (short) un_804A284C[0x258 / 2];
-    } else {
-        return *gmMainLib_8015CC90();
-    }
-}
-
-inline static unsigned short* idk(void)
-{
-    if (gm_8016B498() || gm_801A4310() == GM_TOY_LOTTERY) {
-        return &un_804A284C[5];
-    } else {
-        return gmMainLib_8015CC78();
-    }
-}
-
-int un_803048C0(int arg0)
-{
-    return idk()[arg0] & 0xFF;
-}
-
-bool un_80304924(int arg0)
-{
-    return idk()[arg0] & 0x8000;
-}
-
-void un_80304988(int arg0)
-{
-    unsigned short* v = idk();
-    v[arg0] = v[arg0] ^ 0x8000;
-}
-
-bool un_803049F4(int arg0)
-{
-    return idk()[arg0] & 0x4000;
-}
-
-void un_80304A58(int arg0)
-{
-    unsigned short* v = idk();
-    if (un_803049F4(arg0)) {
-        v[arg0] = v[arg0] ^ 0x4000;
-    }
-}
-
-bool un_80304B0C(int arg0)
-{
-    unsigned short* v;
-    unsigned short s;
-    if (gm_8016B498() || gm_801A4310() == GM_TOY_LOTTERY) {
-        s = un_804A284C[3] | un_804A284C[4];
-        v = &s;
-    } else {
-        v = gmMainLib_8015CC84();
-    }
-    if (*v & (1 << arg0)) {
-        return 1;
-    } else {
-        return 0;
-    }
-}
-
-int un_80304B94(int option)
-{
-    int res;
-    switch (option) {
-    case 0:
-        if (lbLang_IsSettingJP()) {
-            res = 0x4;
-        } else {
-            res = 0x4;
-        }
-        break;
-    case 1:
-        if (lbLang_IsSettingJP()) {
-            res = 0xA;
-        } else {
-            res = 0xA;
-        }
-        break;
-    case 2:
-        if (lbLang_IsSettingJP()) {
-            res = 0x11;
-        } else {
-            res = 0x10;
-        }
-        break;
-    case 3:
-        if (lbLang_IsSettingJP()) {
-            res = 0x17;
-        } else {
-            res = 0x17;
-        }
-        break;
-    case 4:
-        if (lbLang_IsSettingJP()) {
-            res = 0xC;
-        } else {
-            res = 0xC;
-        }
-        break;
-    case 5:
-        if (lbLang_IsSettingJP()) {
-            res = 0x48;
-        } else {
-            res = 0x48;
-        }
-        break;
-    case 6:
-        if (lbLang_IsSettingJP()) {
-            res = 0x1B;
-        } else {
-            res = 0x1B;
-        }
-        break;
-    case 7:
-        if (lbLang_IsSettingJP()) {
-            res = 0x7E;
-        } else {
-            res = 0x7E;
-        }
-        break;
-    case 8:
-        if (lbLang_IsSettingJP()) {
-            res = 0x2;
-        } else {
-            res = 0x2;
-        }
-        break;
-    }
-    return res;
-}
-
-bool un_80304CC8(int arg0)
-{
-    short* v = un_804D6EB4;
-    if (lbLang_IsSettingUS()) {
-        for (; *v != -1; v++) {
-            if (*v == arg0) {
-                return 0;
-            }
-        }
-    }
-    return 1;
-}
-
-inline static unsigned short* un_80304D30_idk(void)
-{
-    if (gm_8016B498() || gm_801A4310() == GM_TOY_LOTTERY) {
-        return &un_804A26B8[0xCF];
-    } else {
-        return gmMainLib_8015CC78();
-    }
-}
-
-inline static int un_80304D30_48C0(int arg0)
-{
-    return un_80304D30_idk()[arg0] & 0xFF;
-}
-
-inline static bool un_80304D30_4B0C(int arg0)
-{
-    unsigned short* v;
-    unsigned short s;
-    if (gm_8016B498() || gm_801A4310() == GM_TOY_LOTTERY) {
-        s = un_804A26B8[0xCD] | un_804A26B8[0xCE];
-        v = &s;
-    } else {
-        v = gmMainLib_8015CC84();
-    }
-    if (*v & (1 << arg0)) {
-        return 1;
-    } else {
-        return 0;
-    }
-}
-
-int un_80304D30(void)
-{
-    int i;
-    int x;
-    int count;
-    int count2;
-    int idk;
-    int* qwe;
-    int sp14[36 / 4];
-    PAD_STACK(4);
-    if (un_80304470()) {
-        return 0;
-    }
-    memzero(sp14, 36);
-    count = 0;
-    for (i = 0; i < 0x125; i++) {
-        if (un_80304CC8(i)) {
-            if (un_80304D30_48C0(i)) {
-                x = un_803060BC(i, 6);
-                sp14[x]++;
-                if (x != 8 && x != 1) {
-                    count++;
-                }
-            }
-        }
-    }
-
-    idk = 6;
-    qwe = &sp14[6];
-    while (idk != 0) {
-        if (idk > (unsigned int) 2 && *qwe != 0 && *qwe == un_80304B94(idk)) {
-            for (i = 0; i < idk; i++) {
-                if (1 < (unsigned int) i && i != 3) {
-                    if (!un_80304D30_4B0C(i)) {
-                        ((unsigned char*) un_804A26B8)[0x194] = 2;
-                        un_80305918(i, 0, 0);
-                    }
-                }
-            }
-            i = idk + 1;
-            while (un_80304B94(i) == 0) {
-                i++;
-            }
-            if (4 <= i && i <= 6) {
-                if (!un_80304D30_4B0C(i)) {
-                    ((unsigned char*) un_804A26B8)[0x194] = 2;
-                    un_80305918(i, 0, 0);
-                    break;
-                }
-            }
-            break;
-        }
-        idk--;
-        qwe--;
-    }
-
-    count2 = 0;
-    for (i = 0; i < 8; i++) {
-        if (x != 8 && x != 1) {
-            if (un_80304D30_4B0C(i)) {
-                count2 += un_80304B94(i);
-            }
-        }
-    }
-    return count2 - count;
 }

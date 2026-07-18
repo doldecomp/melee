@@ -17,7 +17,7 @@
 #include "gr/types.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>

@@ -15,7 +15,7 @@
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
 
 #include <baselib/gobj.h>
@@ -142,19 +142,7 @@ HSD_GObj* grZebesRoute_8020B260(int gobj_id)
     gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
-        Ground* gp = gobj->user_data;
-        gp->x8_callback = NULL;
-        gp->xC_callback = NULL;
-        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
-        if (callbacks->callback3 != NULL) {
-            gp->x1C_callback = callbacks->callback3;
-        }
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
-        }
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
-        }
+        Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
         OSReport(grZe_Route_803E5E0C.fmt, __FILE__, 0xC5, gobj_id);
     }

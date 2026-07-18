@@ -1,12 +1,15 @@
 #include "mnevent.h"
 
 #include "db/db.h"
+
+#include "ft/forward.h"
+
 #include "gm/gm_1601.h"
 #include "gm/gm_1BA8.h"
 #include "gm/gmmain_lib.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
+#include "lb/lbspdisplay.h"
 #include "mn/inlines.h"
 #include "mn/mnmain.h"
 #include "mn/types.h"
@@ -35,7 +38,8 @@ static inline s32 mnEvent_CountUnlocked(void)
     return count;
 }
 
-s32 mnEvent_8024CE74(void)
+s32 mnEvent_8024CE74(
+    void) ///< Clac Event match starting selection when list is opened?
 {
     s32 count;
 
@@ -64,12 +68,16 @@ s32 mnEvent_8024CE74(void)
         }
         return 0x29;
     }
-    if (gm_80164840(0x14) && gm_80164840(7) && gm_80164840(0xF) &&
-        gm_80164840(0x15))
+    if (gm_IsCKindUnlocked(CKIND_FALCO) && gm_IsCKindUnlocked(CKIND_LUIGI) &&
+        gm_IsCKindUnlocked(CKIND_PURIN) && gm_IsCKindUnlocked(CKIND_CLINK))
     {
-        if (gm_80164840(0xA) && gm_80164840(9) && gm_80164840(3) &&
-            gm_80164840(0x18) && gm_80164840(0x19) && gm_80164840(0x16) &&
-            gm_80164840(0x17))
+        if (gm_IsCKindUnlocked(CKIND_MEWTWO) &&
+            gm_IsCKindUnlocked(CKIND_MARS) &&
+            gm_IsCKindUnlocked(CKIND_GAMEWATCH) &&
+            gm_IsCKindUnlocked(CKIND_PICHU) &&
+            gm_IsCKindUnlocked(CKIND_GANON) &&
+            gm_IsCKindUnlocked(CKIND_DRMARIO) &&
+            gm_IsCKindUnlocked(CKIND_EMBLEM))
         {
             return 0x29;
         }
@@ -171,6 +179,7 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
     }
 
     text_slot = &data->texts[idx];
+    (void) text_slot;
     if (*text_slot != NULL) {
         HSD_SisLib_803A5CC4(data->texts[idx]);
     }
@@ -625,17 +634,17 @@ void mnEvent_8024D014(HSD_GObj* gobj)
     }
 }
 
-void mnEvent_8024D0CC(HSD_GObj* gobj, s32 event)
+void mnEvent_8024D0CC(HSD_GObj* gobj, s32 ckind)
 {
     HSD_JObj* tree = gobj->hsd_obj;
     HSD_JObj* jobj;
     f32 frame;
     FORCE_PAD_STACK_4;
 
-    if (event == 0x21) {
+    if (ckind == CHKIND_NONE) {
         frame = 25.0f;
     } else {
-        frame = gm_80164024(event);
+        frame = gm_CKindToSelKind(ckind);
     }
 
     lb_80011E24(tree, &jobj, 4, -1);

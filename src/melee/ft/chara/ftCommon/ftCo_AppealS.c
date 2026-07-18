@@ -29,7 +29,7 @@
 #include "ftPeach/ftPe_Init.h"
 #include "ftZelda/ftZd_Init.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include <baselib/gobj.h>
 #include <melee/cm/camera.h>

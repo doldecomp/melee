@@ -19,6 +19,7 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/inlines.h"
 
 #include "ftMars/forward.h"
 
@@ -28,7 +29,7 @@
 #include "lb/forward.h"
 
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include <baselib/forward.h>
 
@@ -130,9 +131,7 @@ void ftMs_SpecialN_80136A1C(HSD_GObj* gobj)
                           (1 << 18) | (1 << 19) | (1 << 22) | (1 << 26) |
                           (1 << 27);
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftMs_MS_SpecialAirNStart, mf,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftMs_MS_SpecialAirNStart, mf);
 }
 
 void ftMs_SpecialN_80136A7C(HSD_GObj* gobj)
@@ -142,9 +141,7 @@ void ftMs_SpecialN_80136A7C(HSD_GObj* gobj)
                           (1 << 18) | (1 << 19) | (1 << 22) | (1 << 26) |
                           (1 << 27);
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftMs_MS_SpecialNStart, mf,
-                              fp->cur_anim_frame, 1, 0, 0);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftMs_MS_SpecialNStart, mf);
 }
 
 static inline void doLoopAnim(HSD_GObj* gobj, HSD_GObjEvent cb)
@@ -232,9 +229,7 @@ void ftMs_SpecialN_80136DB4(HSD_GObj* gobj)
                           (1 << 11) | (1 << 12) | (1 << 14) | (1 << 18) |
                           (1 << 19) | (1 << 22) | (1 << 26) | (1 << 27);
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftMs_MS_SpecialAirNLoop, mf,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftMs_MS_SpecialAirNLoop, mf);
 }
 
 void ftMs_SpecialN_80136E14(HSD_GObj* gobj)
@@ -244,9 +239,7 @@ void ftMs_SpecialN_80136E14(HSD_GObj* gobj)
                           (1 << 11) | (1 << 12) | (1 << 14) | (1 << 18) |
                           (1 << 19) | (1 << 22) | (1 << 26) | (1 << 27);
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftMs_MS_SpecialNLoop, mf,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftMs_MS_SpecialNLoop, mf);
 }
 
 void ftMs_SpecialN_80136E74(HSD_GObj* gobj)
@@ -344,8 +337,7 @@ void ftMs_SpecialN_801371FC(HSD_GObj* gobj)
     } else {
         msid = ftMs_MS_SpecialAirNEnd1;
     }
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, msid, mf, fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, msid, mf);
     if (fp->x2219_b0 == true) {
         fp->pre_hitlag_cb = efLib_PauseAll;
         fp->post_hitlag_cb = efLib_ResumeAll;
@@ -365,8 +357,7 @@ void ftMs_SpecialN_801372A8(HSD_GObj* gobj)
     } else {
         msid = ftMs_MS_SpecialNEnd1;
     }
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, msid, mf, fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, msid, mf);
     if (fp->x2219_b0 == true) {
         fp->pre_hitlag_cb = efLib_PauseAll;
         fp->post_hitlag_cb = efLib_ResumeAll;

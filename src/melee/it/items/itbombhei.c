@@ -10,7 +10,7 @@
 #include "it/it_3F14.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #define GET_ATTRS(ip)                                                         \
     ((itBombHeiAttributes*) ip->xC4_article_data->x4_specialAttributes)
@@ -493,9 +493,7 @@ bool itBombhei_UnkMotion6_Anim(Item_GObj* gobj)
 
 void itBombhei_UnkMotion6_Phys(Item_GObj* gobj)
 {
-    ItemAttr* attr = ((Item*) gobj->user_data)->xCC_item_attr;
-    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 static inline void fn_8028007C_inline(Item_GObj* gobj)
@@ -593,9 +591,7 @@ bool itBombhei_UnkMotion10_Anim(Item_GObj* gobj)
 
 void itBombhei_UnkMotion10_Phys(Item_GObj* gobj)
 {
-    ItemAttr* attr = ((Item*) gobj->user_data)->xCC_item_attr;
-    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 void fn_80280974(Item_GObj* gobj)

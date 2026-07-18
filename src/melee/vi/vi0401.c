@@ -3,6 +3,7 @@
 #include <placeholder.h>
 
 #include "cm/camera.h"
+#include "dolphin/pad.h"
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ft/ftdemo.h"
@@ -13,9 +14,9 @@
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "it/item.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
+#include "lb/lbspdisplay.h"
 #include "mp/mpcoll.h"
 #include "pl/player.h"
 #include "sc/types.h"
@@ -89,19 +90,8 @@ static void vi0401_8031D18C(HSD_GObj* gobj)
 
 static void vi0401_8031D1B0(HSD_GObj* gobj, int unused)
 {
-    HSD_CObj* cobj;
-
-    cobj = GET_COBJ(gobj);
-    if (HSD_CObjSetCurrent(cobj)) {
-        HSD_SetEraseColor(erase_colors_vi0401.r, erase_colors_vi0401.g,
-                          erase_colors_vi0401.b, erase_colors_vi0401.a);
-        cobj = GET_COBJ(gobj);
-        HSD_CObjEraseScreen(cobj, 1, 0, 1);
-        vi_8031CA04(gobj);
-        gobj->gxlink_prios = 0x281;
-        HSD_GObj_80390ED0(gobj, 7);
-        HSD_CObjEndCurrent();
-    }
+    PAD_STACK(8);
+    vi_RunCamera(gobj, (u8*) &erase_colors_vi0401, 0x281);
 }
 
 static void vi0401_8031D23C(HSD_GObj* gobj)
@@ -217,8 +207,8 @@ void un_8031D288_OnEnter(void* data)
 
 void un_8031D698_OnFrame(void)
 {
-    u64 result = gm_801A36A0(gm_8017E430());
-    if ((result & 0x1000) != 0) {
+    u64 result = gm_GetButtonsTriggered(gm_8017E430());
+    if ((result & PAD_BUTTON_START) != 0) {
         lb_800145F4();
         gm_801A4B60();
     }

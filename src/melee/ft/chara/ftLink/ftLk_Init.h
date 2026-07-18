@@ -32,5 +32,6 @@
 /* 3C8224 */ extern char ftLk_Init_AnimDatFilename[];
 /* 3C82A0 */ extern Fighter_DemoStrings ftLk_Init_DemoMotionFilenames;
 /* 3C82B0 */ extern Fighter_CostumeStrings ftLk_Init_CostumeStrings[];
+/* 3C82EC */ extern UnkCostumeStruct ftLk_Init_803C82EC;
 
 #endif

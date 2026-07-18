@@ -16,7 +16,7 @@
 #include "it/item.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 #include "mp/mpcoll.h"
 
 typedef struct {
@@ -116,9 +116,7 @@ void itMSBomb_Logic19_Thrown(Item_GObj* gobj)
 
 void itMsbomb_UnkMotion3_Phys(Item_GObj* gobj)
 {
-    ItemAttr* attr = GET_ITEM(gobj)->xCC_item_attr;
-    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 bool itMsbomb_UnkMotion3_Coll(Item_GObj* gobj)
@@ -202,9 +200,7 @@ void it_8029047C(Item_GObj* gobj)
 
 void itMsbomb_UnkMotion5_Phys(Item_GObj* gobj)
 {
-    ItemAttr* attr = GET_ITEM(gobj)->xCC_item_attr;
-    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 bool itMsbomb_UnkMotion5_Coll(Item_GObj* gobj)
@@ -245,6 +241,7 @@ bool itMsbomb_UnkMotion6_Anim(Item_GObj* gobj)
 
 bool itMSBomb_Logic19_DmgDealt(Item_GObj* gobj)
 {
+    /// @todo Use #itGetMotionId if it can be made to inline here.
     Item* ip = GET_ITEM(gobj);
     if (ip->msid == 3) {
         itColl_BounceOffVictim(gobj);
@@ -262,6 +259,8 @@ static inline void itMSBomb_Logic19_DmgReceived_inline(Item_GObj* gobj)
 
 bool itMSBomb_Logic19_DmgReceived(Item_GObj* gobj)
 {
+    /// @todo Use #itGetMotionId if its extra inline depth can be made to
+    /// match.
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(0x10);
     if (ip->msid == 4 || ip->msid == 5) {
@@ -296,6 +295,7 @@ bool itMSBomb_Logic19_Reflected(Item_GObj* gobj)
 
 bool itMSBomb_Logic19_HitShield(Item_GObj* gobj)
 {
+    /// @todo Use #itGetMotionId if it can be made to inline here.
     Item* ip = GET_ITEM(gobj);
     if (ip->msid == 3) {
         itColl_BounceOffVictim(gobj);
@@ -307,6 +307,7 @@ bool itMSBomb_Logic19_HitShield(Item_GObj* gobj)
 
 bool itMSBomb_Logic19_ShieldBounced(Item_GObj* gobj)
 {
+    /// @todo Use #itGetMotionId if it can be made to inline here.
     Item* ip = GET_ITEM(gobj);
     if (ip->msid == 3) {
         itColl_BounceOffShield(gobj);

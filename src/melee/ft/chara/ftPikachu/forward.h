@@ -35,6 +35,24 @@ static MotionFlags const ftPk_MF_SpecialAirHi =
 static MotionFlags const ftPk_MF_SpecialAirS =
     ftPk_MF_SpecialS | Ft_MF_SkipParasol;
 
+static MotionFlags const ftPk_MF_SpecialN_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx;
+
+static MotionFlags const ftPk_MF_SpecialHiStart_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepColAnimHitStatus;
+
+static MotionFlags const ftPk_MF_SpecialHiMove_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_SkipHit;
+
+static MotionFlags const ftPk_MF_SpecialLw_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus;
+
+static MotionFlags const ftPk_MF_SpecialLwHit_Coll =
+    ftPk_MF_SpecialLw_Coll | Ft_MF_SkipHit;
+
+static MotionFlags const ftPk_MF_SpecialLwHitRumble_Coll =
+    ftPk_MF_SpecialLwHit_Coll | Ft_MF_SkipRumble;
+
 typedef enum ftPikachu_MotionState {
     ftPk_MS_SpecialN = ftCo_MS_Count,
     ftPk_MS_SpecialAirN,

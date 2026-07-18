@@ -37,7 +37,7 @@
 #include "it/items/itfflowerflame.h"
 #include "it/items/itrabbitc.h"
 #include "it/items/itsword.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include "mp/forward.h"
 
@@ -1104,7 +1104,7 @@ s32 ftGetParasolStatus(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->item_gobj != NULL && itGetKind(fp->item_gobj) == It_Kind_Parasol) {
-        switch (it_8026B7A4(fp->item_gobj)) {
+        switch (itGetMotionId(fp->item_gobj)) {
         case 7:
             return 0;
         case 8:
@@ -1124,7 +1124,7 @@ s32 ftGetParasolStatus(HSD_GObj* gobj)
     if (fp->item_gobj != NULL &&
         itGetKind(fp->item_gobj) == It_Kind_Peach_Parasol)
     {
-        switch (it_8026B7A4(fp->item_gobj)) {
+        switch (itGetMotionId(fp->item_gobj)) {
         case 1:
             return 4;
         case 0:

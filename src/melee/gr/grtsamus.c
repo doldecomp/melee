@@ -9,7 +9,7 @@
 
 #include "lb/forward.h"
 
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include <baselib/forward.h>
 
@@ -23,7 +23,7 @@
 /* 2235F4 */ static void grTSamus_OnLoad(void);
 /* 2235F8 */ static void grTSamus_OnStart(void);
 /* 22361C */ static bool grTSamus_8022361C(void);
-/* 223624 */ static HSD_GObj* grTSamus_80223624(s32);
+/* 223624 */ static HSD_GObj* grTSamus_80223624(int);
 /* 22370C */ static void grTSamus_8022370C(Ground_GObj*);
 /* 223738 */ static bool grTSamus_80223738(Ground_GObj*);
 /* 223740 */ static void grTSamus_80223740(Ground_GObj*);
@@ -82,16 +82,7 @@ void grTSamus_OnDemoInit(int unused) {}
 
 void grTSamus_OnInit(void)
 {
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-
-    grTSamus_80223624(0);
-    grTSamus_80223624(1);
-    grTSamus_80223624(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTSamus_80223624);
 }
 
 void grTSamus_OnLoad(void) {}
@@ -106,7 +97,7 @@ bool grTSamus_8022361C(void)
     return false;
 }
 
-HSD_GObj* grTSamus_80223624(s32 arg0)
+HSD_GObj* grTSamus_80223624(int arg0)
 {
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grTSs_803E93F8[arg0];

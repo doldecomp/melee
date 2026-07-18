@@ -4,10 +4,12 @@
 
 #include "gm_unsplit.h"
 
-#include "if/textlib.h"
+#include "gm/gm_1601.h"
+#include "mn/types.h"
 
 #include <melee/gm/gm_16AE.h>
 #include <melee/gm/gmmain_lib.h>
+#include <melee/if/textlib.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbtime.h>
@@ -150,15 +152,34 @@ void fn_8016F344(struct lbl_8046B6A0_24C_t* arg0)
     }
 }
 
+/// Same table lookup as #gm_8016F208, but with a u16 result.
+/// fn_8016F39C passes the looked-up id straight to HSD_SisLib_803A6368 and
+/// the original code keeps it in a u16: the u16 -> int promotion is emitted
+/// during argument setup (clrlwi after the arg0[count] load). Reusing the
+/// int-returning gm_8016F208 (or changing its return type) instead moves or
+/// drops that zero-extension and regresses gm_8016F208/fn_8016F280.
+static inline u16 fn_8016F39C_GetSisTextId(int kind)
+{
+    struct lbl_803D5A4C_t* curr = lbl_803D5A4C;
+    while (curr->kind != kind) {
+        if (curr->kind == 0x29A) {
+            return 0;
+        }
+        curr++;
+    }
+    if (curr->x2 == 0xDE && lbLang_IsSettingUS()) {
+        return 0x102;
+    }
+    return curr->x2;
+}
+
 int fn_8016F39C(HSD_Text** arg0, void* arg1, u8 arg2, u16 arg3, u8 arg4,
                 u8 arg5)
 {
-    struct lbl_803D5A4C_t* curr;
     int idx;
     int count = 0;
     int matched;
     u8 flags;
-    u16 item_id;
 
     if (arg3 >= 0x101U) {
         return -1;
@@ -184,22 +205,7 @@ int fn_8016F39C(HSD_Text** arg0, void* arg1, u8 arg2, u16 arg3, u8 arg4,
         }
 
         if (matched != 0) {
-            curr = lbl_803D5A4C;
-            item_id = 0;
-            while (curr->kind != idx) {
-                if (curr->kind == 0x29A) {
-                    break;
-                }
-                curr++;
-            }
-            if (curr->kind == idx) {
-                if ((u16) curr->x2 == 0xDE && lbLang_IsSettingUS() != 0) {
-                    item_id = 0x102;
-                } else {
-                    item_id = curr->x2;
-                }
-            }
-            HSD_SisLib_803A6368(arg0[count], item_id);
+            HSD_SisLib_803A6368(arg0[count], fn_8016F39C_GetSisTextId(idx));
             count++;
             if (count == (int) arg2) {
                 break;
@@ -437,13 +443,13 @@ int fn_8016FFD4(struct lbl_8046B6A0_24C_t* arg0, int arg1, u8 arg2)
 
     for (i = 0; (u32) i < 0x101U; i++) {
         if ((s16) lbl_803D5A4C[i].kind < 0xD7) {
-            if ((u8) arg1 & (u8) fn_8016F180(i) &&
+            if ((arg1 & 0xFF) & (u8) fn_8016F180(i) &&
                 pl_80039418((u8) arg2, i) != 0)
             {
                 count += fn_8016FAD4(arg0, i, arg1, arg2);
             }
         } else {
-            if ((u8) arg1 & (u8) fn_8016F180(i)) {
+            if ((arg1 & 0xFF) & (u8) fn_8016F180(i)) {
                 if ((unsigned) fn_801701C0(arg0, (u8) arg2, i) != 0) {
                     count += fn_8016FAD4(arg0, i, arg1, arg2);
                 }
@@ -491,17 +497,12 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     struct lbl_803B7A60_t* zeroes = &lbl_803B7A60;
     u8* flags = rules->pad3F0;
     struct lbl_8046B6A0_24C_58_t* x58 = rules->x58;
+    s32 player_net;
     s32 scores[6];
-    u8 rankings[7];
+    u8 rankings[7] = { 0 };
 
-    {
-        u8 is_teams = (u8) lbl_804D65A0;
-        *(s32*) &rankings[0] = lbl_804DA2F0;
-        *(u16*) &rankings[4] = lbl_804DA2F4;
-        rankings[6] = lbl_804DA2F6;
-        if (is_teams != 0) {
-            return 0;
-        }
+    if (lbl_804D65A0 != 0) {
+        return 0;
     }
     if (rules == NULL || x58 == NULL) {
         return 0;
@@ -638,9 +639,9 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 s32* p = base;
                 for (i = j; i > 0; i--) {
                     if (p[0] < p[1]) {
-                        s32 tmp = p[0];
-                        p[0] = p[1];
-                        p[1] = tmp;
+                        s32 tmp = p[1];
+                        p[1] = p[0];
+                        p[0] = tmp;
                     }
                     p++;
                 }
@@ -700,9 +701,9 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 s32* p = base;
                 for (i = j; i > 0; i--) {
                     if (p[0] < p[1]) {
-                        s32 tmp = p[0];
-                        p[0] = p[1];
-                        p[1] = tmp;
+                        s32 tmp = p[1];
+                        p[1] = p[0];
+                        p[0] = tmp;
                     }
                     p++;
                 }
@@ -739,7 +740,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         s32 vals[4];
         s32* base;
         int i, j;
-        s32 player_net = x58[arg1].x24 - x58[arg1].xA;
+        player_net = x58[arg1].x24 - x58[arg1].xA;
         if ((u32) player_net >= 3) {
             base = vals;
             {
@@ -763,9 +764,9 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 s32* p = base;
                 for (i = j; i > 0; i--) {
                     if (p[0] < p[1]) {
-                        s32 tmp = p[0];
-                        p[0] = p[1];
-                        p[1] = tmp;
+                        s32 tmp = p[1];
+                        p[1] = p[0];
+                        p[0] = tmp;
                     }
                     p++;
                 }
@@ -828,9 +829,9 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 s32* p = base;
                 for (i = j; i > 0; i--) {
                     if (p[0] < p[1]) {
-                        s32 tmp = p[0];
-                        p[0] = p[1];
-                        p[1] = tmp;
+                        s32 tmp = p[1];
+                        p[1] = p[0];
+                        p[0] = tmp;
                     }
                     p++;
                 }
@@ -1017,9 +1018,9 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
             f32* p = base;
             for (i = j; i > 0; i--) {
                 if (p[0] < p[1]) {
-                    f32 tmp = p[0];
-                    p[0] = p[1];
-                    p[1] = tmp;
+                    f32 tmp = p[1];
+                    p[1] = p[0];
+                    p[0] = tmp;
                 }
                 p++;
             }
@@ -1150,9 +1151,9 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                     u32* p = vals;
                     for (i = j; (u32) i > 0; i--) {
                         if (p[0] > p[1]) {
-                            u32 tmp = p[0];
-                            p[0] = p[1];
-                            p[1] = tmp;
+                            u32 tmp = p[1];
+                            p[1] = p[0];
+                            p[0] = tmp;
                         }
                         p++;
                     }
@@ -1195,9 +1196,9 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                     u32* p = vals;
                     for (i = j; (u32) i > 0; i--) {
                         if (p[0] < p[1]) {
-                            u32 tmp = p[0];
-                            p[0] = p[1];
-                            p[1] = tmp;
+                            u32 tmp = p[1];
+                            p[1] = p[0];
+                            p[0] = tmp;
                         }
                         p++;
                     }
@@ -1316,26 +1317,21 @@ int fn_80171BA4(void* arg0)
         player++;
     } while (player < 6);
 
-    player = 0;
-    do {
+    for (player = 0; player < 6; player++) {
         result = Player_GetPlayerSlotType(player);
         if (result != Gm_PKind_NA) {
-            j = 0;
-            do {
+            for (j = 0; j < 6; j++) {
                 if (Player_GetPlayerSlotType(j) != Gm_PKind_NA &&
                     player != j && scores[player] < scores[j])
                 {
                     lbl_804D65A8[player] += 1;
                 }
-                j++;
-            } while (j < 6);
-            result = lbl_804D65A8[player];
-            if (lbl_804D65B0 < result) {
+            }
+            if (lbl_804D65B0 < (result = lbl_804D65A8[player])) {
                 lbl_804D65B0 = result;
             }
         }
-        player++;
-    } while (player < 6);
+    }
     return result;
 }
 
@@ -1380,7 +1376,7 @@ bool gm_801720B4(void)
     if (gm_8016B3D8()) {
         return fn_8017E160();
     }
-    return gm_8016AE50()->is_teams == true;
+    return gm_GetRules()->is_teams == true;
 }
 
 bool gm_801720F8(void)
@@ -1388,7 +1384,7 @@ bool gm_801720F8(void)
     if (gm_8016B3D8()) {
         return true;
     }
-    return gm_8016AE50()->x0_0 == 1;
+    return gm_GetRules()->x0_0 == 1;
 }
 
 int gm_80172140(void)
@@ -1611,7 +1607,7 @@ bool fn_80172664(void)
 
 bool fn_80172698(void)
 {
-    if (un_GetTrophyTotal() >= 0x32) {
+    if (Toy_GetTrophyTotal() >= 0x32) {
         return true;
     }
     return false;
@@ -1619,7 +1615,7 @@ bool fn_80172698(void)
 
 bool fn_801726CC(void)
 {
-    if (un_GetTrophyTotal() >= 0x64) {
+    if (Toy_GetTrophyTotal() >= 0x64) {
         return true;
     }
     return false;
@@ -1627,7 +1623,7 @@ bool fn_801726CC(void)
 
 bool fn_80172700(void)
 {
-    if (un_GetTrophyTotal() >= 0x96) {
+    if (Toy_GetTrophyTotal() >= 0x96) {
         return true;
     }
     return false;
@@ -1635,7 +1631,7 @@ bool fn_80172700(void)
 
 bool fn_80172734(void)
 {
-    if (un_GetTrophyTotal() >= 0xC8) {
+    if (Toy_GetTrophyTotal() >= 0xC8) {
         return true;
     }
     return false;
@@ -1643,7 +1639,7 @@ bool fn_80172734(void)
 
 bool fn_80172768(void)
 {
-    if (un_GetTrophyTotal() >= 0xFA) {
+    if (Toy_GetTrophyTotal() >= 0xFA) {
         return true;
     }
     return false;
@@ -1705,10 +1701,10 @@ int gm_80172898(u16 arg0)
             count++;
         }
     }
-    if (un_803048C0(0xE6) > 0 && gmMainLib_8015D94C(0x3F) == 0) {
+    if (Toy_803048C0(0xE6) > 0 && gmMainLib_8015D94C(0x3F) == 0) {
         gmMainLib_8015D818(0x3F);
     }
-    if (un_803048C0(0xC9) > 0 && gmMainLib_8015D94C(0x40) == 0) {
+    if (Toy_803048C0(0xC9) > 0 && gmMainLib_8015D94C(0x40) == 0) {
         gmMainLib_8015D818(0x40);
     }
     fn_8017280C();
@@ -1761,7 +1757,7 @@ void gm_801729EC(void)
     }
 
     for (i = 0; i < 11; i++) {
-        if (gm_80164840(fn_801606A8(i)) == 0) {
+        if (gm_IsCKindUnlocked(gm_GetCKindByUnlockIndex(i)) == 0) {
             gmMainLib_8015D924(fn_80160710(i));
         }
     }
@@ -1775,19 +1771,19 @@ void gm_801729EC(void)
         }
     }
 
-    if (un_803048C0(0xE6) == 0) {
+    if (Toy_803048C0(0xE6) == 0) {
         u32* tmp = gmMainLib_8015D804(0x3F);
         *tmp = 0;
         gmMainLib_8015D8B0(0x3FU);
         gmMainLib_8015D924(0x3FU);
     }
-    if (un_803048C0(0xC9) == 0) {
+    if (Toy_803048C0(0xC9) == 0) {
         u32* tmp = gmMainLib_8015D804(0x40);
         *tmp = 0;
         gmMainLib_8015D8B0(0x40U);
         gmMainLib_8015D924(0x40U);
     }
-    if (un_803048C0(0x96) == 0) {
+    if (Toy_803048C0(0x96) == 0) {
         u32* tmp = gmMainLib_8015D804(0x1A);
         *tmp = 0;
         gmMainLib_8015D8B0(0x1AU);
@@ -1847,7 +1843,7 @@ static const struct lbl_803B7AD0_t {
 static inline const struct lbl_803B7AD0_t* inline2(u8 arg0)
 {
     int i;
-    u8 temp_r3 = gm_80160638(arg0);
+    u8 temp_r3 = gm_CKindToUnlockIndex(arg0);
     const struct lbl_803B7AD0_t* tmp = lbl_803B7AD0;
     for (i = 0; i < 0xB; i++) {
         if (temp_r3 == tmp[i].x0) {
@@ -1862,7 +1858,8 @@ u8 gm_80172CC0(u8 arg0, u8 arg1)
     int var_r0;
     const struct lbl_803B7AD0_t* var_r31 = inline2(arg0);
 
-    var_r0 = var_r31->x1 - var_r31->x2 * gmMainLib_8015DB6C(gm_80160638(arg0));
+    var_r0 = var_r31->x1 -
+             var_r31->x2 * gmMainLib_8015DB6C(gm_CKindToUnlockIndex(arg0));
     if (var_r0 < 0) {
         var_r0 = 0;
     } else if (var_r0 > 9) {
@@ -1874,7 +1871,7 @@ u8 gm_80172CC0(u8 arg0, u8 arg1)
 u8 gm_80172D78(void)
 {
     u32* temp_r31 = &gmMainLib_8015ED98()->x4;
-    if (!gm_80164840(CKIND_MEWTWO) && *temp_r31 >= 0x11940) {
+    if (!gm_IsCKindUnlocked(CKIND_MEWTWO) && *temp_r31 >= 0x11940) {
         return CKIND_MEWTWO;
     }
     return CHKIND_NONE;
@@ -1885,9 +1882,9 @@ static inline const struct lbl_803B7AD0_t* inline1(u32 arg0)
     const struct lbl_803B7AD0_t* var_r29 = NULL;
     u16 var_r30 = -1;
     int i;
-    for (i = 0; i < 0xB; i++) {
+    for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
         if (lbl_803B7AD0[i].x4 <= arg0 &&
-            !gm_80164840(fn_801606A8(lbl_803B7AD0[i].x0)))
+            !gm_IsCKindUnlocked(gm_GetCKindByUnlockIndex(lbl_803B7AD0[i].x0)))
         {
             if (lbl_803B7AD0[i].x4 < var_r30) {
                 var_r30 = lbl_803B7AD0[i].x4;
@@ -1903,7 +1900,7 @@ u8 gm_80172DD4(u32 arg0)
     const struct lbl_803B7AD0_t* var_r29 = inline1(arg0);
     PAD_STACK(8);
     if (var_r29 != NULL) {
-        return fn_801606A8(var_r29->x0);
+        return gm_GetCKindByUnlockIndex(var_r29->x0);
     }
     return CHKIND_NONE;
 }
@@ -1913,12 +1910,14 @@ u8 gm_80172E74(void)
     int i;
     int count = 0;
 
-    for (i = 0; i < 0x19; i++) {
-        if (fn_801605EC(i) == 0xB && gmMainLib_8015CFCC(i)) {
+    for (i = 0; i < SELKIND_COUNT; i++) {
+        if (gm_SelKindToUnlockIndex(i) == NUM_UNLOCKABLE_CHARACTERS &&
+            gmMainLib_8015CFCC(i))
+        {
             count += 1;
         }
     }
-    if (count >= 0xE && !gm_80164840(CKIND_MARS)) {
+    if (count >= 0xE && !gm_IsCKindUnlocked(CKIND_MARS)) {
         return CKIND_MARS;
     }
     return CHKIND_NONE;
@@ -2000,34 +1999,37 @@ u8 fn_80173098(int arg0)
 {
     Unk1PData* temp_r3;
     UnkAdventureData* temp_r31;
-    int var_r31;
+    int unlocked_chars_count;
 
     temp_r3 = fn_8017DEC8(arg0);
     if (temp_r3->xC.xD == 0) {
-        if (temp_r3->ckind == CKIND_MARS && !gm_80164840(CKIND_EMBLEM)) {
+        if (temp_r3->ckind == CKIND_MARS && !gm_IsCKindUnlocked(CKIND_EMBLEM))
+        {
             return CKIND_EMBLEM;
         }
-        if (temp_r3->ckind == CKIND_MARIO && !gm_80164840(CKIND_DRMARIO)) {
+        if (temp_r3->ckind == CKIND_MARIO &&
+            !gm_IsCKindUnlocked(CKIND_DRMARIO))
+        {
             return CKIND_DRMARIO;
         }
     }
-    var_r31 = fn_80173098_CountUnlocked();
-    (void) var_r31;
-    if (var_r31 >= 10 && !gm_80164840(CKIND_CLINK)) {
+    unlocked_chars_count = fn_80173098_CountUnlocked();
+    (void) unlocked_chars_count;
+    if (unlocked_chars_count >= 10 && !gm_IsCKindUnlocked(CKIND_CLINK)) {
         return CKIND_CLINK;
     }
-    if (fn_80172FAC() && !gm_80164840(CKIND_GAMEWATCH)) {
+    if (fn_80172FAC() && !gm_IsCKindUnlocked(CKIND_GAMEWATCH)) {
         return CKIND_GAMEWATCH;
     }
     if (arg0 == 0) {
-        temp_r31 = gm_8017E424();
-        if (!gm_80164840(CKIND_LUIGI) && temp_r31->x74 != 0 &&
+        temp_r31 = gm_GetAdventureData();
+        if (!gm_IsCKindUnlocked(CKIND_LUIGI) && temp_r31->x74 != 0 &&
             temp_r31->x75 != 0)
         {
             return CKIND_LUIGI;
         }
     }
-    if (!gm_80164840(CKIND_PURIN)) {
+    if (!gm_IsCKindUnlocked(CKIND_PURIN)) {
         return CKIND_PURIN;
     }
     return CHKIND_NONE;
@@ -2035,29 +2037,29 @@ u8 fn_80173098(int arg0)
 
 u8 gm_80173224(int arg0, int arg1)
 {
-    u8 var_r4 = CHKIND_NONE;
+    u8 ckind = CHKIND_NONE;
     if (arg1 != 0) {
-        var_r4 = fn_80173098(arg0);
+        ckind = fn_80173098(arg0);
     }
-    if (var_r4 == CHKIND_NONE) {
-        var_r4 = gm_80172E74();
+    if (ckind == CHKIND_NONE) {
+        ckind = gm_80172E74();
     }
-    return var_r4;
+    return ckind;
 }
 
 /// check for event character unlocks?
-CharacterKind gm_801732D8(u8 arg0)
+u8 gm_801732D8(u8 arg0)
 {
-    if (!gm_80164840(CKIND_GANON) && gm_801BEBC0(arg0) == 0x1C) {
+    if (!gm_IsCKindUnlocked(CKIND_GANON) && gm_801BEBC0(arg0) == 0x1C) {
         return CKIND_GANON;
     }
-    if (!gm_80164840(CKIND_PICHU) && gm_801BEBC0(arg0) == 0xE) {
+    if (!gm_IsCKindUnlocked(CKIND_PICHU) && gm_801BEBC0(arg0) == 0xE) {
         return CKIND_PICHU;
     }
     return CHKIND_NONE;
 }
 
-int gm_8017335C(void)
+u16 gm_8017335C(void)
 {
     int var_r31 = 1;
     int i;
@@ -2075,7 +2077,7 @@ int gm_8017335C(void)
 
 u8 gm_801733D8(void)
 {
-    if (!gm_80164840(CKIND_GAMEWATCH) && fn_80172FAC()) {
+    if (!gm_IsCKindUnlocked(CKIND_GAMEWATCH) && fn_80172FAC()) {
         return CKIND_GAMEWATCH;
     }
     return CHKIND_NONE;
@@ -2091,7 +2093,7 @@ u16 gm_8017341C(void)
 
 u8 gm_80173460(s8 arg0)
 {
-    if (!gm_80164840(CKIND_FALCO)) {
+    if (!gm_IsCKindUnlocked(CKIND_FALCO)) {
         return CKIND_FALCO;
     }
     return CHKIND_NONE;
@@ -2157,418 +2159,4 @@ bool fn_8017367C(void)
         gmMainLib_8015EDC8()->x6 = true;
     }
     return gmMainLib_8015EDC8()->x6;
-}
-
-lbl_8046DBD8_t* gm_801736DC(void)
-{
-    return &lbl_8046DBD8;
-}
-
-void gm_801736E8(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5)
-{
-    lbl_8046DBD8_t* tmp = &lbl_8046DBD8;
-    memzero(tmp, sizeof(lbl_8046DBD8));
-    tmp->x0 = arg0;
-    tmp->x1 = arg1;
-    tmp->x2 = arg2;
-    tmp->x3 = arg3;
-    tmp->x4 = arg4;
-    tmp->x5 = arg5;
-}
-
-#pragma push
-#pragma dont_inline on
-bool gm_80173754(s8 arg0, u8 arg1)
-{
-    if (gm_801721EC()) {
-        memzero(&lbl_8046DBD8, sizeof(lbl_8046DBD8));
-        lbl_8046DBD8.x0 = CHKIND_NONE;
-        lbl_8046DBD8.x2 = arg1;
-        lbl_8046DBD8.x5 = arg0;
-        gm_801A42E8(GM_CHALLENGER_APPROACH);
-        gm_801A42D4();
-        return true;
-    }
-    return false;
-}
-#pragma pop
-
-u8 gm_801737D8(void)
-{
-    return lbl_8046DBD8.x6;
-}
-
-void gm_801737E8_OnLoad(void)
-{
-    lbl_8046DBD8.x6 = gm_801A4320();
-    if (lbl_8046DBD8.x0 == CHKIND_NONE) {
-        gm_SetScene(2);
-    } else {
-        gm_SetScene(0);
-    }
-}
-
-void fn_80173834(u8 ckind, u8 major, int arg2)
-{
-    bool temp_r31;
-    bool temp_r30 = gm_80160474(ckind, major);
-
-    if (arg2) {
-        gmMainLib_8015DA68(temp_r30);
-    }
-    fn_80172C78(temp_r30);
-    if (ckind == CKIND_ZELDA) {
-        temp_r31 = gm_80160474(CKIND_SEAK, major);
-        if (arg2) {
-            gmMainLib_8015DA68(temp_r31);
-        }
-        fn_80172C78(temp_r31);
-    }
-    if (ckind == CKIND_SEAK) {
-        temp_r31 = gm_80160474(CKIND_ZELDA, major);
-        if (arg2) {
-            gmMainLib_8015DA68(temp_r31);
-        }
-        fn_80172C78(temp_r31);
-    }
-}
-
-#pragma push
-#pragma dont_inline on
-void gm_8017390C(int arg0, int arg1)
-{
-    Unk1PData* temp_r3_2;
-    Unk1PData* temp_r3_3;
-    UnkAdventureData* temp_r3;
-
-    switch (arg0) { /* irregular */
-    case 0:
-        temp_r3 = gm_8017E424();
-        if (temp_r3->x76 != 0) {
-            fn_80172C78(0xE7);
-        }
-        if (arg1 != 0) {
-            fn_80173834(temp_r3->x0.ckind, 4, 1);
-            if (temp_r3->x0.xC.xD == 0 && temp_r3->x77 != 0) {
-                fn_80172C78(0x51);
-            }
-            if (temp_r3->x0.xC.xD == 0 && temp_r3->x0.cpu_level >= 3) {
-                fn_80172C78(0x53);
-            }
-            if (temp_r3->x0.xC.x20 < 0x101D0) {
-                fn_80172C78(0xE3);
-            }
-        }
-        break;
-    case 1:
-        if (arg1 != 0) {
-            temp_r3_2 = fn_8017DEC8(1);
-            fn_80173834(temp_r3_2->ckind, 3, 1);
-            if (temp_r3_2->xC.xD == 0 && temp_r3_2->cpu_level >= 3) {
-                fn_80172C78(0x52);
-            }
-            if (temp_r3_2->xC.x20 < 0x4650) {
-                fn_80172C78(0x11A);
-            }
-        }
-        break;
-    case 2:
-        if (arg1 != 0) {
-            temp_r3_3 = fn_8017DEC8(2);
-            fn_80173834(temp_r3_3->ckind, 5, 1);
-            fn_80172C78(0xBE);
-            if (temp_r3_3->xC.xD == 0) {
-                fn_80172C78(0xCC);
-            }
-            if (temp_r3_3->cpu_level >= 3) {
-                fn_80172C78(0x86);
-            }
-        }
-        break;
-    }
-}
-#pragma pop
-
-void gm_80173AA4(void)
-{
-    int i;
-    u32 var_r30 = 0;
-
-    if (gmMainLib_8015D640()) {
-        fn_80172C78(0xBC);
-        for (i = 0; i < 0x19; i++) {
-            var_r30 += *gmMainLib_8015D450(i);
-        }
-        if (var_r30 < 0x15F90) {
-            fn_80172C78(0x9B);
-        }
-        if (var_r30 < 0xAFC8) {
-            fn_80172C78(0x122);
-        }
-    }
-}
-
-void gm_80173B30(u32 arg0)
-{
-    u32 var_r31 = 0;
-    int i;
-
-    if (arg0 >= 0x7530) {
-        fn_80172C78(0xBD);
-    }
-    if (arg0 >= 0xAFC8) {
-        fn_80172C78(0xCB);
-    }
-    for (i = 0; i < 0x19; i++) {
-        var_r31 = lbTime_8000AEE4(var_r31, *gmMainLib_8015D084(i));
-    }
-    if (var_r31 >= 0x7A120) {
-        fn_80172C78(0x8D);
-    }
-}
-
-void gm_80173BC4(s8 arg0)
-{
-    u8 temp_r31;
-    int i;
-    int var_r29;
-    int temp_r28;
-
-    var_r29 = 0;
-    temp_r28 = gmMainLib_8015EDBC()->x114[gm_80164024(arg0)];
-    for (i = 0; i < 0x19; i++) {
-        var_r29 += gmMainLib_8015EDBC()->x114[i];
-    }
-    if (temp_r28 >= 0xA) {
-        fn_80172C78(0x6D);
-    }
-    if (temp_r28 >= 0x14) {
-        fn_80172C78(0x5B);
-    }
-    if (var_r29 >= 0x7D) {
-        fn_80172C78(0x6E);
-    }
-}
-
-void gm_80173C70(s8 c_kind, u32 arg1, u32 arg2, int arg3)
-{
-    if (arg3 != 0) {
-        if (gm_801A4310() == GM_15MIN_VS) {
-            fn_80172C78(0x50);
-        }
-        if (gm_801A4310() == GM_100MAN_VS && arg2 <= 0x3840) {
-            fn_80172C78(0x4E);
-        }
-        if (gm_801A4310() == GM_15MIN_VS) {
-            fn_80172C78(0x50);
-        }
-    }
-    if (gm_801A4310() == GM_ENDLESS_VS && arg1 >= 100) {
-        fn_80172C78(0x4F);
-    }
-    if (gm_801A4310() == GM_CRUEL_VS && arg1 >= 5) {
-        fn_80172C78(0x10E);
-    }
-}
-
-static struct lbl_803D6450_t {
-    u8 x0;
-    u8 x1;
-    u16 x2;
-} lbl_803D6450[] = {
-    { 0x02, 0x00, 0x0067 }, { 0x02, 0x01, 0x0067 }, { 0x0D, 0x02, 0x00C0 },
-    { 0x19, 0x02, 0x0092 }, { 0x2C, 0x02, 0x00BB }, { 0x2E, 0x02, 0x00DD },
-    { 0x32, 0x02, 0x00BF },
-};
-
-static inline int inline0(int arg0)
-{
-    struct lbl_803D6450_t* r30 = lbl_803D6450;
-    int i;
-    for (i = 0; i < ARRAY_SIZE(lbl_803D6450); i++) {
-        if (r30[i].x1 == 2 || r30[i].x1 == lbLang_GetLanguageSetting()) {
-            if (gm_801BEBC0(r30[i].x0) == gm_801BEBC0(arg0)) {
-                return r30[i].x2;
-            }
-        }
-    }
-    return -1;
-}
-
-void gm_80173D3C(int arg0)
-{
-    int var_r0 = inline0(arg0);
-    if (var_r0 != -1) {
-        fn_80172C78(var_r0);
-    }
-}
-
-static struct lbl_803D646C_t {
-    u16 x0;
-    u16 x2;
-} lbl_803D646C[] = {
-    { 0x032, 0xB5 }, { 0x064, 0xB9 }, { 0x096, 0xAE }, { 0x0C8, 0x8C },
-    { 0x00A, 0x55 }, { 0x064, 0x56 }, { 0x3E8, 0x54 },
-};
-
-void gm_80173DE4(MatchEnd* arg0)
-{
-    u32 temp_r30;
-    u32 var_r29_2;
-    int i;
-
-    temp_r30 = gmMainLib_8015EDBC()->x0;
-
-    for (i = 0; i < ARRAY_SIZE(lbl_803D646C); i++) {
-        if (temp_r30 >= lbl_803D646C[i].x0) {
-            fn_80172C78(lbl_803D646C[i].x2);
-        }
-    }
-    if (gmMainLib_8015EDBC()->x4 >= 100) {
-        fn_80172C78(0x76);
-    }
-    if (gmMainLib_8015EDBC()->xC >= 1000) {
-        fn_80172C78(0xE2);
-    }
-    var_r29_2 = 0;
-
-    for (i = 0; i < 6; i++) {
-        if (arg0->player_standings[i].slot_type == 0) {
-            var_r29_2 =
-                lbTime_8000AEC8(var_r29_2, arg0->player_standings[i].x50);
-        }
-    }
-    if (lbTime_8000AEC8(var_r29_2, gmMainLib_8015EDBC()->x10) >= 0xF4240) {
-        fn_80172C78(0xB0);
-    }
-}
-
-static inline bool gm_80173EEC_inline(u8 arg0, int arg1)
-{
-    return gm_80160474(arg0, arg1);
-}
-
-void gm_80173EEC(void)
-{
-    int i;
-    u8 ckind;
-    u16* temp_r29;
-
-    for (i = 0; i < 0x19; i++) {
-        temp_r29 = &gmMainLib_8015EDBC()->x18[(u32) i];
-        if (*temp_r29 >= 100) {
-            ckind = gm_8016400C(i);
-            fn_80172C78(gm_80173EEC_inline(ckind, GM_CLASSIC));
-            if (ckind == CKIND_ZELDA) {
-                fn_80172C78(gm_80173EEC_inline(CKIND_SEAK, GM_CLASSIC));
-            }
-            if (ckind == CKIND_SEAK) {
-                fn_80172C78(gm_80173EEC_inline(CKIND_ZELDA, GM_CLASSIC));
-            }
-        }
-        if (*temp_r29 >= 200) {
-            ckind = gm_8016400C(i);
-            fn_80172C78(gm_80173EEC_inline(ckind, GM_ADVENTURE));
-            if (ckind == CKIND_ZELDA) {
-                fn_80172C78(gm_80173EEC_inline(CKIND_SEAK, GM_ADVENTURE));
-            }
-            if (ckind == CKIND_SEAK) {
-                fn_80172C78(gm_80173EEC_inline(CKIND_ZELDA, GM_ADVENTURE));
-            }
-        }
-        if (*temp_r29 >= 300) {
-            ckind = gm_8016400C(i);
-            fn_80172C78(gm_80173EEC_inline(ckind, GM_ALLSTAR));
-            if (ckind == CKIND_ZELDA) {
-                fn_80172C78(gm_80173EEC_inline(CKIND_SEAK, GM_ALLSTAR));
-            }
-            if (ckind == CKIND_SEAK) {
-                fn_80172C78(gm_80173EEC_inline(CKIND_ZELDA, GM_ALLSTAR));
-            }
-        }
-    }
-
-    if (fn_80164B48() != 0) {
-        fn_80172C78(0xA0);
-    }
-    if (gm_80164ABC()) {
-        fn_80172C78(0x9F);
-    }
-    if (gmMainLib_8015EE90() != 0) {
-        fn_80172C78(0xDC);
-    }
-    if (gmMainLib_8015EDBC()->x14 >= 0x2710) {
-        fn_80172C78(0x10C);
-    }
-    if (gmMainLib_8015D94C(0x1A) != 0) {
-        fn_80172C78(0x96);
-    }
-    if (un_803045A0() != 0) {
-        fn_80172C78(0x116);
-    }
-    if (un_80304690() != 0) {
-        fn_80172C78(0xAF);
-    }
-    if (un_80304780() != 0) {
-        fn_80172C78(0x100);
-    }
-
-    {
-        int j;
-        bool result = true;
-
-        for (j = 0; j < 0x100; j++) {
-            if (j == 0x29) {
-                continue;
-            }
-            if (j == 0x42 || j == 0x43) {
-                continue;
-            }
-            if (j == 0xB9) {
-                continue;
-            }
-            if (j == 0xC9 || j == 0xCA) {
-                continue;
-            }
-            if (j == 9) {
-                continue;
-            }
-            if (!gmMainLib_8015DADC(j)) {
-                result = false;
-                break;
-            }
-        }
-        if (result) {
-            fn_80172C78(0x123);
-        }
-    }
-}
-
-void gm_80174180(void)
-{
-    if (fn_80162CCC() != 0 && gm_80162EC8() != 0) {
-        un_80305918(4, 0, 0);
-    }
-    if (gm_GetVsPlayMatchTotal() >= 0xC8) {
-        un_80305918(5, 0, 0);
-    }
-    if (gm_80164ABC() != 0) {
-        un_80305918(6, 0, 0);
-    }
-}
-
-void gm_801741FC(void)
-{
-    int i;
-    for (i = 0; i < 0x12C; i++) {
-        gmMainLib_8015DA40(i);
-    }
-}
-
-void gm_80174238(void)
-{
-    int i;
-    for (i = 0; i < 0x12C; i++) {
-        gmMainLib_8015DA68(i);
-    }
 }

@@ -12,9 +12,9 @@
 #include "if/if_2FC93.h"
 #include "if/ifall.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbrefract.h"
+#include "lb/lbspdisplay.h"
 #include "pl/player.h"
 #include "sc/types.h"
 
@@ -156,8 +156,8 @@ ifMagnifyPlayer* ifMagnify_802FB73C(ifMagnifyPlayer* arg0, Vec2* arg1,
 
 void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
 {
-    S32Vec2 screen_pos;
     Vec2 pos;
+    S32Vec2 screen_pos;
     Vec2 out;
     Vec3 translate;
     GXColor color;
@@ -170,6 +170,7 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
     u8 arrow_kind;
     u8 slot_type;
     u8 teams_enabled;
+    u8 operand_pad[20];
 
     if (arg1 != 0) {
         return;
@@ -178,7 +179,7 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
     player = arg0->user_data;
     slot = player - ifMagnify_804A1DE0.player;
     is_colored = false;
-    if ((gm_8016AE38()->hud_enabled == 0) || ifAll_IsHUDHidden() ||
+    if ((gm_16AE_GetUnkData_0()->hud_enabled == 0) || ifAll_IsHUDHidden() ||
         Camera_80030130())
     {
         should_display = false;
@@ -226,6 +227,9 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
 
 void ifMagnify_802FBBDC(HSD_GObj* arg0)
 {
+    int i;
+    f32 mix2;
+    f32 right;
     ifMagnify* magnify;
     HSD_CObj* cobj;
     HSD_GObj* fighter_gobj;
@@ -233,7 +237,6 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
     f32 top;
     f32 bottom;
     f32 left;
-    f32 right;
     Vec3 interest_pos;
     GXColor colors[4];
     Vec3 world_pos;
@@ -246,10 +249,8 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
     f32 y_class;
     f32 mix0;
     f32 mix1;
-    f32 mix2;
     f32 mix3;
     GXColor result;
-    int i;
     int j;
     u8* color_ids;
     bool should_display;
@@ -260,7 +261,7 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
         magnify->player[i].state.is_offscreen = 0;
     }
 
-    if ((gm_8016AE38()->hud_enabled == 0) || ifAll_IsHUDHidden() ||
+    if ((gm_16AE_GetUnkData_0()->hud_enabled == 0) || ifAll_IsHUDHidden() ||
         Camera_80030130())
     {
         should_display = false;
@@ -372,6 +373,7 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
                 }
             }
             y_inv = 1.0f - y_blend;
+            (void) y_inv;
             for (j = 0; j < 4; j++) {
                 if (world_pos.y > Stage_GetCamBoundsTopOffset()) {
                     y_class = 0.0f;
@@ -590,7 +592,7 @@ void ifMagnify_802FC870(void)
 
     memzero(&ifMagnify_804A1DE0, 0x74);
     ifMagnify_802FC7C0(&ifMagnify_804A1DE0);
-    archive = ifAll_802F3690();
+    archive = ifAll_GetArchive();
     lbArchive_LoadSections(*archive, (void**) &ifMagnify_804A1DE0, "lupe", 0);
     i = 0;
     do {

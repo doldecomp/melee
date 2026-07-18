@@ -9,8 +9,8 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/types.h>
-#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbarchive.h>
+#include <melee/lb/lbspdisplay.h>
 #include <melee/sc/types.h>
 
 struct PauseData {
@@ -69,7 +69,7 @@ void gm_801A0FEC(s32 slot, u8 flag)
     HSD_JObjAnimAll(lbl_80479B10.background);
 }
 
-void gm_801A10FC(int unused)
+void gm_801A10FC(int slot)
 {
     lbl_80479B10.slot = 99;
     HSD_JObjSetFlagsAll(lbl_80479B10.background, JOBJ_HIDDEN);

@@ -14,9 +14,11 @@
 #include "types.h"
 
 #include "baselib/displayfunc.h"
+#include "baselib/gobjgxlink.h"
 #include "baselib/gobjobject.h"
 #include "baselib/gobjplink.h"
 #include "baselib/gobjproc.h"
+#include "baselib/gobjuserdata.h"
 #include "baselib/particle.h"
 #include "baselib/psappsrt.h"
 #include "baselib/psdisp.h"
@@ -26,11 +28,11 @@
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_Bury.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 #include "MSL/math.h"
 
 #include <runtime.h>
-#include <trigf.h>
+#include <trigf.h> // IWYU pragma: keep
 
 // externs
 extern u32* ptclref_804D0E5C[65];

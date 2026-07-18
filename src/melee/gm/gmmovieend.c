@@ -8,6 +8,7 @@
 #include "gm_unsplit.h"
 #include "gmopening.h"
 
+#include "dolphin/pad.h"
 #include "gm/gmmain_lib.h"
 #include "gm/types.h"
 #include "if/ifcoget.h"
@@ -27,29 +28,29 @@ void gm_801A6254(GameScene* arg0)
     MatchExitInfo* temp_r30;
     lbl_8046DBD8_t* temp_r31;
 
-    temp_r30 = gm_801A4284(arg0);
-    temp_r31 = gm_801736DC();
+    temp_r30 = gm_GetGameSceneLeaveDataCallback(arg0);
+    temp_r31 = gm_GetChallengerData();
     gm_80162968(temp_r30->match_end.frame_count / 60);
     gm_8016247C(temp_r30->match_end.player_standings[0].xE);
     temp_r0 = temp_r30->match_end.result;
     if (temp_r0 != 7 && temp_r0 != 8 &&
         temp_r30->match_end.player_standings[0].stocks != 0)
     {
-        gm_80164910(temp_r31->x4);
+        gm_UnlockCKind(temp_r31->x4);
     } else {
-        temp_ret = gm_80160638(temp_r31->x4);
+        temp_ret = gm_CKindToUnlockIndex(temp_r31->x4);
         gmMainLib_8015DB2C(temp_ret);
     }
     gm_80173EEC();
     gm_80172898(0x100);
     if (gm_801721EC() == 0) {
-        gm_SetPendingScene(0);
+        gm_SetPendingSceneIndex(0);
     }
 }
 
 void gm_801A6308(GameScene* arg0)
 {
-    gm_SetPendingScene(0);
+    gm_SetPendingSceneIndex(0);
 }
 
 void gm_801A632C_OnEnter(void* arg0_)
@@ -153,8 +154,8 @@ void gm_801A64A8_OnFrame(void)
     if (gmMainLib_8046B0F0.xC && lbMthp_8001F604() == 0) {
         var_r30 = true;
     }
-    if (gm_804D6738 >= 0x1A4 || (gm_801A36A0(gm_801BF010()) & 0x1000) ||
-        var_r30)
+    if (gm_804D6738 >= 0x1A4 ||
+        (gm_GetButtonsTriggered(gm_801BF010()) & PAD_BUTTON_START) || var_r30)
     {
         lbAudioAx_800236DC();
         lbAudioAx_80023694();

@@ -1,7 +1,7 @@
 #ifndef __GALE01_00F9F8
 #define __GALE01_00F9F8
 
-#include "lb_00F9.h" // IWYU pragma: export
+#include "lbspdisplay.h" // IWYU pragma: export
 #include "platform.h"
 
 #include <placeholder.h>
@@ -39,9 +39,6 @@ struct CameraBlurData {
 /* 013BE4 */ static bool lb_80013BE4(ColorOverlay* arg);
 /* 013FF0 */ static bool lb_80013FF0(ColorOverlay* arg);
 /* 014234 */ static bool lb_80014234(ColorOverlay* arg);
-/* 4D3768 */ static GXColor lb_804D3768;
-/* 4D376C */ static GXColor lb_804D376C;
-/* 4D3770 */ static GXColor yellow;
 /* 4D63A0 */ static struct lb_804D63A0_t* lb_804D63A0;
 /* 4D63A4 */ static struct DynamicsData* cur_data;
 /* 4D63A8 */ static struct lb_804D63A8_t* lb_804D63A8;

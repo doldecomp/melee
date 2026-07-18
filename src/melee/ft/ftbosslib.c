@@ -230,7 +230,7 @@ HSD_GObj* ftBossLib_8015C3E8(FighterKind kind)
     u8 _[8];
 
     for (cur = HSD_GObj_Entities->fighters; cur; cur = cur->next) {
-        if (kind == ftLib_800872A4(cur)) {
+        if (kind == ftLib_GetKind(cur)) {
             return cur;
         }
     }
@@ -246,7 +246,7 @@ enum_t ftBossLib_8015C44C(FighterKind kind)
 
     if (gobj != NULL) {
         // DataOffset_MotionStateLoad
-        return ftLib_80086C0C(gobj);
+        return ftLib_GetMotionId(gobj);
     } else {
         return ftCo_MS_DeadDown;
     }
@@ -451,5 +451,5 @@ void ftBossLib_8015CB9C(s32 arg0)
 
 void ftBossLib_8015CC14(void)
 {
-    Camera_8002F474();
+    Camera_SetModeToStandard();
 }

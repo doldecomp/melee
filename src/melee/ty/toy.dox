@@ -1,0 +1,2 @@
+/// @todo :: fill out the struct that this uses/returns
+char* Toy_8030813C(s32 arg0, enum_t unused);

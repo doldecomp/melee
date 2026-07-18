@@ -6,7 +6,7 @@
 #include "ft/ftdevice.h"
 #include "gr/ground.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include <math.h>
 #include <baselib/cobj.h>

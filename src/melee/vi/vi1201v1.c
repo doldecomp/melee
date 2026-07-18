@@ -8,7 +8,6 @@
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
-#include "ft/ft_0C31.h"
 #include "ft/ftdemo.h"
 #include "gm/gm_1601.h"
 #include "gm/gm_unsplit.h"
@@ -16,10 +15,10 @@
 #include "gr/stage.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbshadow.h"
+#include "lb/lbspdisplay.h"
 #include "mn/mnmain.h"
 #include "mp/mpcoll.h"
 #include "pl/player.h"
@@ -70,6 +69,13 @@ void un_8031F9B4(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
+/// @todo .sdata2 order hack
+static void order_sdata2(void)
+{
+    (void) 0.55f;
+    (void) 1.0f;
+}
+
 void un_8031F9D8(CharacterKind char_index, int costume_id)
 {
     PAD_STACK(16);
@@ -117,20 +123,11 @@ void fn_8031FAA8(HSD_GObj* gobj)
 }
 void fn_8031FB90(HSD_GObj* gobj)
 {
-    GXColor* colors;
     char pad[8];
     if (un_804D7000 != NULL) {
         lbShadow_8000F38C(0);
     }
-    if (HSD_CObjSetCurrent(GET_COBJ(gobj)) != 0) {
-        colors = (GXColor*) &un_804D6FF4;
-        HSD_SetEraseColor(colors->r, colors->g, colors->b, colors->a);
-        HSD_CObjEraseScreen(GET_COBJ(gobj), 1, 0, 1);
-        vi_8031CA04(gobj);
-        gobj->gxlink_prios = 0x881;
-        HSD_GObj_80390ED0(gobj, 7);
-        HSD_CObjEndCurrent();
-    }
+    vi_RunCamera(gobj, (u8*) &un_804D6FF4, 0x881);
 }
 
 void fn_8031FC30(HSD_GObj* gobj)
@@ -182,6 +179,12 @@ static inline void un_8031FD18_SetupScene(void)
     Ground_801C0378(0x40);
 }
 
+/// @todo .data order hack
+static void order_data(void)
+{
+    (void) "!(jobj->flags & JOBJ_USE_QUATERNION)";
+}
+
 void un_8031FD18_OnEnter(void* arg)
 {
     u8* input = arg;
@@ -212,7 +215,7 @@ void un_8031FD18_OnEnter(void* arg)
     lbArchive_LoadSymbols("TyKoopa.dat", &un_804D6FEC,
                           "ToyKoopaModel_TopN_joint", NULL);
     lbArchive_LoadSymbols("GmRgStnd.dat", &un_804D6FE4, "standScene", NULL);
-    un_803124BC();
+    Toy_803124BC();
     un_804D6FE8 = lbArchive_LoadSymbols(gm_80160438(char_index), NULL);
 
     gobj = GObj_Create(0x13, 0x14, 0);
@@ -258,14 +261,14 @@ void un_8031FD18_OnEnter(void* arg)
         child = jobj->child;
     }
 
-    HSD_JObjSetTranslateXWithMtxDirty(child, -un_803060BC(0x1E, 0));
-    HSD_JObjSetTranslateYWithMtxDirty(child, -un_803060BC(0x1E, 1));
-    HSD_JObjSetTranslateZWithMtxDirty(child, -un_803060BC(0x1E, 2));
+    HSD_JObjSetTranslateXWithMtxDirty(child, -Toy_803060BC(0x1E, 0));
+    HSD_JObjSetTranslateYWithMtxDirty(child, -Toy_803060BC(0x1E, 1));
+    HSD_JObjSetTranslateZWithMtxDirty(child, -Toy_803060BC(0x1E, 2));
 
-    scale = -un_803060BC(0x1E, 5);
+    scale = -Toy_803060BC(0x1E, 5);
     HSD_JObjSetRotationYWithMtxDirty(child, scale);
 
-    scale = 0.55f * (un_803060BC(0x1E, 4) * (1.0f / un_803060BC(0x1E, 3)));
+    scale = 0.55f * (Toy_803060BC(0x1E, 4) * (1.0f / Toy_803060BC(0x1E, 3)));
 
     HSD_JObjSetScaleXWithMtxDirty(child, scale);
     HSD_JObjSetScaleYWithMtxDirty(child, scale);

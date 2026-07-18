@@ -12,10 +12,10 @@
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "it/item.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbshadow.h"
+#include "lb/lbspdisplay.h"
 #include "mp/mpcoll.h"
 #include "pl/player.h"
 #include "sc/types.h"
@@ -125,19 +125,9 @@ void vi0502_8031E304(HSD_GObj* gobj)
 
 static void vi0502_8031E328(HSD_GObj* gobj, int unused)
 {
-    HSD_CObj* cobj;
+    PAD_STACK(8);
     lbShadow_8000F38C(0);
-    cobj = GET_COBJ(gobj);
-    if (HSD_CObjSetCurrent(cobj)) {
-        HSD_SetEraseColor(erase_colors_vi0502.r, erase_colors_vi0502.g,
-                          erase_colors_vi0502.b, erase_colors_vi0502.a);
-        cobj = GET_COBJ(gobj);
-        HSD_CObjEraseScreen(cobj, 1, 0, 1);
-        vi_8031CA04(gobj);
-        gobj->gxlink_prios = 0x281;
-        HSD_GObj_80390ED0(gobj, 7);
-        HSD_CObjEndCurrent();
-    }
+    vi_RunCamera(gobj, (u8*) &erase_colors_vi0502, 0x281);
 }
 
 void vi0502_RunFrame(HSD_GObj* gobj)

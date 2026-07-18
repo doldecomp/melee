@@ -19,9 +19,9 @@
 #include "gr/stage.h"
 #include "if/ifhazard.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbshadow.h"
+#include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 #include "MSL/math.h"
@@ -37,32 +37,15 @@
 #include <baselib/psstructs.h>
 #include <MSL/math_ppc.h>
 
-extern s16 grMc_803E34A4[];
-extern Vec3 grMc_803B81B8;
+const Vec3 grMc_803B81B8 = { 0.0f, 0.0f, 0.0f };
 
 typedef void (*grMc_SpeedFn)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32);
-
-typedef struct grMc_CmdEntry {
-    s32 frame;
-    s16 cmd;
-    s16 param;
-    f32 fval;
-} grMc_CmdEntry;
-
-extern grMc_CmdEntry grMc_803E34E0[];
-
-typedef struct grMc_TrackInitData {
-    f32 pos;
-    f32 speed;
-} grMc_TrackInitData;
-
-extern grMc_TrackInitData grMc_803E3B7C[];
 
 static s32 grMc_8049F440[30];
 
 #include "grmutecity.static.h"
 
-u8 grMc_803E30B0[0x14] = { 0 };
+u16 grMc_803E30B0[10] = { 6, 29, 6, 7, 29, 8, 8, 29, 9 };
 
 StageCallbacks grMc_803E30C4[39] = {
     {
@@ -391,11 +374,6 @@ static grMc_UnkStruct* grMc_804D69D0;
 
 static s32 grMc_804D69D4;
 
-static f32 light_ref_br = 40000.0f;
-static f32 light_ref_dist = 0.99f;
-static s32 grMc_804D46CC = 0x1;
-#define light_dist_func grMc_804D46CC
-
 void grMuteCity_801EFC68(bool arg) {}
 
 void grMuteCity_801EFC6C(void)
@@ -533,6 +511,11 @@ void grMuteCity_801EFDF8(Ground_GObj* gobj)
     }
 }
 
+static f32 light_ref_br = 40000.0f;
+static f32 light_ref_dist = 0.99f;
+static s32 grMc_804D46CC = 0x1;
+#define light_dist_func grMc_804D46CC
+
 bool grMuteCity_801F0118(Ground_GObj* arg)
 {
     return false;
@@ -636,6 +619,13 @@ bool grMuteCity_801F043C(Ground_GObj* arg)
 void grMuteCity_801F0444(Ground_GObj* arg) {}
 
 void grMuteCity_801F0448(Ground_GObj* arg) {}
+// clang-format off
+s16 grMc_803E34A4[30] = {
+    2,  3,  4,  6,  7,  8,  9,  10, 11, 12,
+    1,  13, 14, 15, 16, 17, 18, 19, 20, 21,
+    22, 23, 24, 25, 26, 27, 32, 33, 34, 35
+};
+// clang-format on
 
 void grMuteCity_801F044C(Ground_GObj* gobj)
 {
@@ -653,6 +643,150 @@ bool grMuteCity_801F04A8(Ground_GObj* arg)
 void grMuteCity_801F04B0(Ground_GObj* arg) {}
 
 void grMuteCity_801F04B4(Ground_GObj* arg) {}
+
+typedef struct grMc_CmdEntry {
+    s32 frame;
+    s16 cmd;
+    s16 param;
+    f32 fval;
+} grMc_CmdEntry;
+
+// clang-format off
+grMc_CmdEntry grMc_803E34E0[] = {
+    { -1,11,  2,   0.0f},
+    { -1,11,  3,   0.0f},
+    { -1,11,  6,   0.0f},
+    { -1,11,  4,   0.0f},
+    { -1,11,  7,   0.0f},
+    { -1, 4,  0,   0.0f},
+    { -1, 4,  1,   0.0f},
+    { -1, 4,  6,   0.0f},
+    { -1, 4,  2,   0.0f},
+    { -1, 4,  5,   0.0f},
+    { -1, 4,  7,   0.0f},
+    { -1, 4,  8,   0.0f},
+    { -1,10,  0,   0.0f},
+    { -1, 9,  0,   0.932775f},
+    { -1,18,  0,   0.0f},
+    { -1, 7,  0,   0.0f},
+    { -1,17,  0,   0.0f},
+    { -1,13,  0,  90.0f},
+    { 180,17,  0,   0.0f},
+    { 384,19,  0,   0.0f},
+    {  -1, 6,  0,   0.0f},
+    {  -1,10,  0,   0.0f},
+    { 475, 2,  0,   0.0f},
+    { 475, 1,340,   0.0f},
+    {  -1,20,120,   0.0f},
+    {  -1, 1, 60,   0.0f},
+    {  -1, 3,  0,   0.0f},
+    { 530,21,  0,   0.0f},
+    { 567,18,  0,   0.0f},
+    {  -1, 7,  0,   0.0f},
+    { 708,26,  1,   0.0f},
+    { 800,19,  0,   0.0f},
+    {  -1, 6,  0,   0.0f},
+    {  -1,10,  1,   0.0f},
+    {  -1,12,  2,   0.0f},
+    {  -1, 5,  0,   0.0f},
+    {  -1, 5,  7,   0.0f},
+    {  -1, 5,  8,   0.0f},
+    {  -1,15,  0,-270.0f},
+    {  -1,16,  0, 270.0f},
+    { 890, 2,  0,   0.0f},
+    { 890, 1,340,   0.0f},
+    {  -1,20,120,   0.0f},
+    {  -1, 1, 60,   0.0f},
+    {  -1, 3,  0,   0.0f},
+    { 950,21,  0,   0.0f},
+    { 980,18,  0,   0.0f},
+    {  -1, 4,  0,   0.0f},
+    {  -1, 4,  7,   0.0f},
+    {  -1, 4,  8,   0.0f},
+    {  -1,11,  2,   0.0f},
+    {  -1, 7,  0,   0.0f},
+    {  -1,17,  0,   0.0f},
+    {1000,13,  0,  40.0f},
+    {  -1,14,  0,   0.0f},
+    {  -1,15,  0, -50.0f},
+    {  -1,16,  0,  50.0f},
+    {1080,23,  1,   0.0f},
+    {  -1,24,  1,   0.0f},
+    { 708,26,  0,   0.0f},
+    {1130,19,  0,   0.0f},
+    {  -1,23,  0,   0.0f},
+    {  -1,24,  0,   0.0f},
+    {  -1, 6,  0,   0.0f},
+    {  -1,17,  0,   0.0f},
+    {  -1,14,  0, -30.0f},
+    {  -1,10,  0,   0.0f},
+    {  -1,12,  7,   0.0f},
+    {  -1, 5,  5,   0.0f},
+    {1223, 2,  0,   0.0f},
+    {1223, 1,340,   0.0f},
+    {  -1,20,120,   0.0f},
+    {  -1, 1, 60,   0.0f},
+    {  -1, 3,  0,   0.0f},
+    {1280,21,  0,   0.0f},
+    {1312,18,  0,   0.0f},
+    {  -1,26,  2,   0.0f},
+    {  -1,11,  7,   0.0f},
+    {  -1, 4,  5,   0.0f},
+    {  -1,17,  0,   0.0f},
+    {  -1, 7,  0,   0.0f},
+    {1404,19,  0,   0.0f},
+    {  -1, 6,  0,   0.0f},
+    {  -1,10,  2,   0.0f},
+    {  -1,12,  3,   0.0f},
+    {  -1, 5,  1,   0.0f},
+    {1495, 2,  0,   0.0f},
+    {  -1,25,  1,   0.0f},
+    {1495, 1,340,   0.0f},
+    {  -1,20,120,   0.0f},
+    {  -1, 1, 60,   0.0f},
+    {  -1, 3,  0,   0.0f},
+    {1550,21,  0,   0.0f},
+    {1585,18,  0,   0.0f},
+    {  -1, 7,  0,   0.0f},
+    {  -1,25,  0,   0.0f},
+    {  -1,11,  3,   0.0f},
+    {  -1, 4,  1,   0.0f},
+    {2045,19,  0,   0.0f},
+    {  -1, 6,  0,   0.0f},
+    {  -1,10,  0,   0.0f},
+    {  -1,12,  6,   0.0f},
+    {  -1, 5,  6,   0.0f},
+    {  -1,22,  0,   1.0f},
+    {2135, 2,  0,   0.0f},
+    {2135, 1,340,   0.0f},
+    {  -1,20,120,   0.0f},
+    {  -1, 1, 60,   0.0f},
+    {  -1, 3,  0,   0.0f},
+    {  -1,22,  0,   0.0f},
+    {2190,21,  0,   0.0f},
+    {2225,18,  0,   0.0f},
+    {  -1, 7,  0,   0.0f},
+    {  -1,11,  6,   0.0f},
+    {  -1, 4,  6,   0.0f},
+    {2273, 8,  0,   0.0f},
+    {3290, 9,  0,   0.86445f},
+    {3300,13,  0,  90.0f},
+    {3390,19,  0,   0.0f},
+    {  -1, 6,  0,   0.0f},
+    {  -1,10,  0,   0.0f},
+    {  -1,12,  4,   0.0f},
+    {  -1, 5,  2,   0.0f},
+    {3510, 2,  0,   0.0f},
+    {3510, 1,340,   0.0f},
+    {  -1,20,120,   0.0f},
+    {  -1, 1, 60,   0.0f},
+    {  -1, 3,  0,   0.0f},
+    {3570,21,  0,   0.0f},
+    {3599,18,  0,   0.0f},
+    {  -1, 7,  0,   0.0f},
+    {9999, 0,  0,   0.0f},
+};
+// clang-format on
 
 void grMuteCity_801F04B8(Ground_GObj* gobj)
 {
@@ -960,12 +1094,33 @@ void grMuteCity_801F0D20(Ground_GObj* gobj)
     mpLib_8005667C(4);
 }
 
+typedef struct grMc_TrackInitData {
+    f32 pos;
+    f32 speed;
+} grMc_TrackInitData;
+// clang-format off
+grMc_TrackInitData grMc_803E3B7C[30] = {
+    {0.9999f,0.37f},{0.9999f,0.87f},
+    {0.9988f,0.37f},{0.9988f,0.87f},
+    {0.9977f,0.37f},{0.9977f,0.87f},
+    {0.9966f,0.37f},{0.9966f,0.87f},
+    {0.9955f,0.37f},{0.9955f,0.87f},
+    {0.9944f,0.37f},{0.9944f,0.87f},
+    {0.9933f,0.37f},{0.9933f,0.87f},
+    {0.9922f,0.37f},{0.9922f,0.87f},
+    {0.9911f,0.37f},{0.9911f,0.87f},
+    {0.9900f,0.37f},{0.9900f,0.87f},
+    {0.9889f,0.37f},{0.9889f,0.87f},
+    {0.9878f,0.37f},{0.9878f,0.87f},
+    {0.9867f,0.37f},{0.9867f,0.87f},
+    {0.9856f,0.37f},{0.9856f,0.87f},
+    {0.9845f,0.37f},{0.9845f,0.87f},
+};
+// clang-format on
 void grMuteCity_801F0F4C(Ground_GObj* gobj)
 {
     f32 pos;
     grMc_TrackInitData* src = grMc_803E3B7C;
-    grMc_CarEntry* dst = grMc_8049F4B8;
-    s32* idx = grMc_8049F440;
     int i;
 
     for (i = 0; i < 30; i++) {
@@ -975,19 +1130,18 @@ void grMuteCity_801F0F4C(Ground_GObj* gobj)
         } else if (pos < 0.0) {
             pos++;
         }
-        dst->x0 = pos;
-        dst->x4 = pos;
-        dst->xC = src->speed;
-        dst->x8 = 0.0f;
-        dst->x10 = 0.0f;
-        dst->x20 = 0;
-        dst->x22_flags.b0 = 0;
-        dst->x22_flags.b1 = 0;
-        dst->x24 = 0;
-        dst->x28 = 0;
-        dst++;
+        grMc_8049F4B8[i].x0 = pos;
+        grMc_8049F4B8[i].x4 = pos;
+        grMc_8049F4B8[i].xC = src->speed;
+        grMc_8049F4B8[i].x8 = 0.0f;
+        grMc_8049F4B8[i].x10 = 0.0f;
+        grMc_8049F4B8[i].x20 = 0;
+        grMc_8049F4B8[i].x22_flags.b0 = 0;
+        grMc_8049F4B8[i].x22_flags.b1 = 0;
+        grMc_8049F4B8[i].x24 = 0;
+        grMc_8049F4B8[i].x28 = 0;
         src++;
-        *idx++ = i;
+        grMc_8049F440[i] = i;
     }
 }
 
@@ -1080,22 +1234,24 @@ void grMuteCity_801F106C(s32 i)
     }
 }
 
+static inline f32 grMc_DistanceSquared(f32* a, f32* b)
+{
+    return SQ(a[0] - b[0]) + SQ(a[1] - b[1]) + SQ(a[2] - b[2]);
+}
+
 void grMuteCity_801F1328(void)
 {
     s32* arr = grMc_8049F440;
-    s32* p;
     int i;
-    s32 offset;
     int j;
+    PAD_STACK(8);
 
-    for (offset = 4, i = 1; i < 30; i++, offset += 4) {
-        p = (s32*) ((u32) arr + offset);
+    for (i = 1; i < 30; i++) {
         for (j = i; j >= 0; j--) {
-            s32 temp = p[0];
-            s32 prev = p[-1];
-            if (grMc_8049F4B8[temp].x0 > grMc_8049F4B8[prev].x0) {
-                p[0] = prev;
-                *--p = temp;
+            s32 temp = arr[j];
+            if (grMc_8049F4B8[arr[j]].x0 > grMc_8049F4B8[arr[j - 1]].x0) {
+                arr[j] = arr[j - 1];
+                arr[j - 1] = temp;
             } else {
                 break;
             }
@@ -1138,20 +1294,11 @@ void grMuteCity_801F1328(void)
             }
             grMc_8049F4B8[arr[idx]].x20 |= 1;
 
+            if (grMc_DistanceSquared(&grMc_8049F4B8[arr[i]].x14,
+                                     &grMc_8049F4B8[arr[idx]].x14) < 900.0f)
             {
-                f32 dx =
-                    grMc_8049F4B8[arr[i]].x14 - grMc_8049F4B8[arr[idx]].x14;
-                f32 dy =
-                    grMc_8049F4B8[arr[i]].x18 - grMc_8049F4B8[arr[idx]].x18;
-                f32 dz =
-                    grMc_8049F4B8[arr[i]].x1C - grMc_8049F4B8[arr[idx]].x1C;
-                f32 dx2 = dx * dx;
-                f32 dy2 = dy * dy;
-                f32 dz2 = dz * dz;
-                if ((dz2 + (dx2 + dy2)) < 900.0f) {
-                    grMc_8049F4B8[arr[i]].x20 |= 8;
-                    grMc_8049F4B8[arr[idx]].x20 |= 8;
-                }
+                grMc_8049F4B8[arr[i]].x20 |= 8;
+                grMc_8049F4B8[arr[idx]].x20 |= 8;
             }
 
             if (grMc_8049F4B8[arr[i]].xC > grMc_8049F4B8[arr[idx]].xC) {
@@ -1302,6 +1449,19 @@ void grMuteCity_801F1A0C(HSD_GObj* gobj, Ground* gp)
     Ground_801C53EC(0x5CC60);
 }
 
+UNK_T grMc_803E3C6C[] = {
+    grMuteCity_801F173C, grMuteCity_801F1754, grMuteCity_801F176C,
+    grMuteCity_801F1784, grMuteCity_801F179C, grMuteCity_801F17B4,
+    grMuteCity_801F17CC, grMuteCity_801F17E4, grMuteCity_801F17FC,
+    grMuteCity_801F1814, grMuteCity_801F182C, grMuteCity_801F1844,
+    grMuteCity_801F185C, grMuteCity_801F1874, grMuteCity_801F188C,
+    grMuteCity_801F18A4, grMuteCity_801F18BC, grMuteCity_801F18D4,
+    grMuteCity_801F18EC, grMuteCity_801F1904, grMuteCity_801F191C,
+    grMuteCity_801F1934, grMuteCity_801F194C, grMuteCity_801F1964,
+    grMuteCity_801F197C, grMuteCity_801F1994, grMuteCity_801F19AC,
+    grMuteCity_801F19C4, grMuteCity_801F19DC, grMuteCity_801F19F4,
+};
+
 void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
 {
     Vec3 car_pos;
@@ -1337,15 +1497,11 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
     HSD_Spline* spline;
 
     Ground_801C0498();
-    PAD_STACK(16);
+    PAD_STACK(12);
     track_mid = 0.5f * (gp->gv.mutecity.xD4 + gp->gv.mutecity.xD8);
     Camera_GetTransformPosition(&spE8);
 
-    if (car_jobj == NULL) {
-        jobj = NULL;
-    } else {
-        jobj = car_jobj->child;
-    }
+    jobj = car_jobj == NULL ? NULL : car_jobj->child;
 
     {
         s32 timer = car_gp->gv.mutecity.xC4;
@@ -1619,8 +1775,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
                 if (!car->x22_flags.b0 && (u32) car->x24 == 0) {
                     Item_GObj* item_gobj = grMaterial_801C8CFC(
                         0, 2, car_gp, jobj, grMuteCity_801F1A0C,
-                        ((grMc_SpeedFn*) (grMc_803E30B0 + 0xBBC))[car_idx],
-                        NULL);
+                        ((grMc_SpeedFn*) (grMc_803E3C6C))[car_idx], NULL);
                     if (item_gobj != NULL) {
                         grMaterial_801C8DE0(item_gobj, 0.0f, 0.0f, -12.0f,
                                             0.0f, 0.0f, 2.0f, 15.0f);
@@ -1650,11 +1805,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
 
         car++;
         car_idx += 1;
-        if (jobj == NULL) {
-            jobj = NULL;
-        } else {
-            jobj = jobj->next;
-        }
+        jobj = jobj == NULL ? NULL : jobj->next;
     } while (car_idx < 0x1E);
 }
 
@@ -1672,14 +1823,19 @@ DynamicModelDesc* grMuteCity_801F28A8(void)
     return NULL;
 }
 
+typedef struct grMc_StackPadArg {
+    u32 x[4];
+} grMc_StackPadArg;
+
+/// @todo Fake function: exists only to reproduce the retail stack layout.
+static inline void grMc_StackPad(grMc_StackPadArg arg) {}
+
 void grMuteCity_801F290C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_GObj* lgobj;
     s32 i;
     HSD_LObj* lobj;
-    PAD_STACK(16);
-
     if (grLib_801C96E8(gobj) != 0) {
         if (gp->gv.mutecity2.xC4_flags.b0) {
             lgobj = HSD_GObj_Entities->xC;
@@ -1741,6 +1897,7 @@ void grMuteCity_801F290C(Ground_GObj* gobj)
         }
         gp->gv.mutecity2.xC4_flags.b0 = 1;
     }
+    grMc_StackPad(*(grMc_StackPadArg*) gp->gv.mutecity2.saved_colors);
 }
 
 void grMuteCity_801F2AB0(s32 arg0, HSD_JObj* arg1)

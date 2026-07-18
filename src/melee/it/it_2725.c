@@ -552,7 +552,7 @@ void it_80273454(Item_GObj* item_gobj)
 {
     Item* item = item_gobj->user_data;
 
-    item->x40_vel.x = item->x40_vel.y = item->x40_vel.z = 0.0f;
+    itResetVelocity(item);
 }
 
 void it_8027346C(Item_GObj* item_gobj)
@@ -721,7 +721,7 @@ void it_80273748(Item_GObj* item_gobj, Vec3* pos, Vec3* vel)
         dir_radians = M_PI_2 * item->facing_dir;
         HSD_JObjSetRotationY(jobj, dir_radians);
     }
-    if (((it_8026B2B4(item_gobj) == 1) &&
+    if (((itIsHeavy(item_gobj) == 1) &&
          (hold_kind = item->hold_kind, (hold_kind != 4)) &&
          (hold_kind != 6)) ||
         (item->hold_kind == 8))
@@ -816,7 +816,7 @@ void it_80273B50(Item_GObj* item_gobj, Vec3* vel)
         dir_radians = M_PI_2 * item->facing_dir;
         HSD_JObjSetRotationY(item_jobj1, dir_radians);
     }
-    if (((it_8026B2B4(item_gobj) == 1) &&
+    if (((itIsHeavy(item_gobj) == 1) &&
          (hold_kind = item->hold_kind, (hold_kind != 4)) &&
          (hold_kind != 6)) ||
         (item->hold_kind == 8))

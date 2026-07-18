@@ -1,5 +1,6 @@
 #include "ftSk_SpecialN.h"
 
+#include "baselib/random.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 
@@ -9,12 +10,11 @@
 #include "ft/ft_0877.h"
 #include "ft/ft_0892.h"
 #include "ft/ftcolanim.h"
-#include "ft/ftcommon.h"
 #include "ft/inlines.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Landing.h"
+#include "ftCommon/inlines.h"
 
 #include "ftSeak/forward.h"
 
@@ -332,9 +332,8 @@ void ftSk_SpecialNStart_Coll(Fighter_GObj* gobj)
                           (1 << 19) | (1 << 22) | (1 << 26) | (1 << 27);
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == GA_Ground) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftSk_MS_SpecialAirNStart, mf,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftSk_MS_SpecialAirNStart,
+                                        mf);
 
         {
             setDmgCallbacks(gobj);
@@ -349,9 +348,7 @@ void ftSk_SpecialNLoop_Coll(Fighter_GObj* gobj)
                           (1 << 19) | (1 << 22) | (1 << 26) | (1 << 27);
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == GA_Ground) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftSk_MS_SpecialAirNLoop, mf,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftSk_MS_SpecialAirNLoop, mf);
 
         setDmgCallbacks(gobj);
     }
@@ -402,9 +399,7 @@ static inline void doColl(Fighter_GObj* gobj, ftSeak_MotionState msid)
                           (1 << 19) | (1 << 22) | (1 << 26) | (1 << 27);
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != GA_Ground) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, msid, mf, fp->cur_anim_frame, 1, 0,
-                                  NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, msid, mf);
         setDmgCallbacks(gobj);
     }
 }

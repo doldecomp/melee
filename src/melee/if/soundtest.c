@@ -140,7 +140,8 @@ struct un_803FA128_x130_t {
     u8 _pad13C[0x8];
     u8 x144[0x44];
     s32 x188;
-} un_803FA258 = { 0 };
+};
+extern struct un_803FA258_t un_803FA258;
 /* 3FA348 */ static u16 un_803FA348;
 /* 3FA34C */ static u8 un_803FA34C;
 /* 3FA32C */ static u8 un_803FA32C;
@@ -370,7 +371,7 @@ bool un_802FFC6C(bool update_scene)
         lbAudioAx_800245D4(0x7F);
         lbAudioAx_800245F4(0x7F);
         lbAudioAx_80024614(0x7F);
-        gm_801A42F8(GM_TITLE);
+        gm_ChangeGameModeAfterCurrentScene(GM_TITLE);
         gm_801A4B60();
     }
     return true;
@@ -412,7 +413,7 @@ int fn_802FFE0C(int arg0)
         break;
     case 6:
         lbAudioAx_80024030(1);
-        gm_SetPendingScene(4);
+        gm_SetPendingSceneIndex(4);
         gm_801A4B60();
         break;
     }
@@ -435,7 +436,7 @@ bool un_802FFEA4(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetPendingScene(0x4);
+        gm_SetPendingSceneIndex(0x4);
         gm_801A4B60();
     }
 
@@ -542,7 +543,7 @@ bool un_803001DC(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetPendingScene(0x1);
+        gm_SetPendingSceneIndex(0x1);
         gm_801A4B60();
     }
 
@@ -579,7 +580,7 @@ bool un_803002FC(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetPendingScene(0x2);
+        gm_SetPendingSceneIndex(0x2);
         gm_801A4B60();
     }
 
@@ -807,7 +808,7 @@ bool un_80300968(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(GM_HANYU_CSS);
+        gm_ChangeGameModeAfterCurrentScene(GM_HANYU_CSS);
         gm_801A4B60();
     }
 
@@ -818,7 +819,7 @@ bool un_803009A4(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(GM_HANYU_SSS);
+        gm_ChangeGameModeAfterCurrentScene(GM_HANYU_SSS);
         gm_801A4B60();
     }
 
@@ -865,7 +866,7 @@ bool un_80300AB8(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetPendingScene(0x4);
+        gm_SetPendingSceneIndex(0x4);
         gm_801A4B60();
     }
 
@@ -883,18 +884,16 @@ bool un_80300AF4(int arg0)
         data->x24[1] = 3;
         data->x24[2] = 3;
         data->x24[3] = 3;
-        gm_SetPendingScene(4);
+        gm_SetPendingSceneIndex(4);
         gm_801A4B60();
     }
     return false;
 }
 
-/// @todo Find a solution without the pragma
-#pragma push
-#pragma global_optimizer off
 bool un_80300B58(int arg0)
 {
     if (arg0 == 1) {
+        struct un_803FA258_t* data;
         lbAudioAx_80024030(1);
         {
             struct un_803FA258_t* data = &un_803FA258;
@@ -904,19 +903,18 @@ bool un_80300B58(int arg0)
             data->x24[2] = 3;
             data->x24[3] = 3;
         }
-        gm_SetPendingScene(4);
+        gm_SetPendingSceneIndex(4);
         gm_801A4B60();
     }
     return false;
 }
-#pragma pop
 
 bool un_80300BBC(bool update_scene)
 {
     if (update_scene == true) {
-        un_803124BC();
-        un_80311680();
-        gm_801A42F8(GM_TOY_GALLERY);
+        Toy_803124BC();
+        Toy_80311680();
+        gm_ChangeGameModeAfterCurrentScene(GM_TOY_GALLERY);
         gm_801A4B60();
     }
 
@@ -926,9 +924,9 @@ bool un_80300BBC(bool update_scene)
 bool un_80300BF8(bool update_scene)
 {
     if (update_scene == true) {
-        un_803124BC();
-        Trophy_SetUnlockState(0xE6, true);
-        gm_801A42F8(GM_MENU);
+        Toy_803124BC();
+        Toy_SetUnlockState(0xE6, true);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         gm_801A4B60();
     }
 
@@ -938,9 +936,9 @@ bool un_80300BF8(bool update_scene)
 bool un_80300C3C(bool update_scene)
 {
     if (update_scene == true) {
-        un_803124BC();
-        Trophy_SetUnlockState(0xC9, true);
-        gm_801A42F8(GM_MENU);
+        Toy_803124BC();
+        Toy_SetUnlockState(0xC9, true);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         gm_801A4B60();
     }
 
@@ -952,8 +950,8 @@ bool un_80300C80(int arg0)
     if (arg0 == 1) {
         u32* ptr = gmMainLib_8015CCF0();
         *ptr = un_804D6DDC * 10;
-        un_803124BC();
-        gm_801A42F8(1);
+        Toy_803124BC();
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         gm_801A4B60();
     }
     return false;
@@ -982,7 +980,7 @@ void fn_80300CC8(int arg0)
             *r31 = un_804D6DE8;
             *ptr = un_804D6DEC;
         }
-        gm_801A42F8(1);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         gm_801A4B60();
         break;
     }
@@ -1016,7 +1014,7 @@ void fn_80300DE0(int arg0)
     case 6:
         lbAudioAx_80024030(1);
         *ptr = (u32) (un_804DDC48 * un_804D6DD0);
-        gm_801A42F8(1);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         gm_801A4B60();
         break;
     }
@@ -1044,7 +1042,7 @@ void fn_80300ED0(int arg0)
     case 6:
         lbAudioAx_80024030(1);
         gmMainLib_8015D4E8(un_804D6DC8, un_804D6DCC);
-        gm_801A42F8(1);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         gm_801A4B60();
         break;
     }
@@ -1070,7 +1068,7 @@ s32 un_80300F98(s32 arg0)
         temp_r31 = gmMainLib_GetKOTotal();
         lbAudioAx_80024030(1);
         *temp_r31 = un_804D6DF4;
-        gm_801A42F8(1);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         gm_801A4B60();
     }
     return 0;
@@ -1080,7 +1078,7 @@ bool un_80300FEC(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetPendingScene(0x4);
+        gm_SetPendingSceneIndex(0x4);
         gm_801A4B60();
     }
 
@@ -1093,7 +1091,7 @@ int un_80301028(int arg0)
         struct gmm_x0_528_t* ptr = gmMainLib_8015CDD4();
         ptr->x5 = un_804D5908 - 1;
         lbAudioAx_80024030(1);
-        gm_801A42F8(4);
+        gm_ChangeGameModeAfterCurrentScene(GM_ADVENTURE);
         gm_801A4B60();
     }
     return 0;
@@ -1105,7 +1103,7 @@ int un_80301074(int arg0)
         struct gmm_x0_528_t* ptr = gmMainLib_8015CDC8();
         ptr->x5 = un_804D590C - 1;
         lbAudioAx_80024030(1);
-        gm_801A42F8(3);
+        gm_ChangeGameModeAfterCurrentScene(GM_CLASSIC);
         gm_801A4B60();
     }
     return 0;
@@ -1117,7 +1115,7 @@ int un_803010C0(int arg0)
         struct gmm_x0_528_t* ptr = gmMainLib_8015CDE0();
         ptr->x5 = un_804D5910 - 1;
         lbAudioAx_80024030(1);
-        gm_801A42F8(5);
+        gm_ChangeGameModeAfterCurrentScene(GM_ALLSTAR);
         gm_801A4B60();
     }
     return 0;
@@ -1141,15 +1139,15 @@ int fn_8030110C(int arg0)
         }
         switch (un_804D6E00) {
         case 0:
-            gm_801A42F8(0x1A);
+            gm_ChangeGameModeAfterCurrentScene(GM_DEBUG_GOVER);
             gm_801BF040(0x15);
             break;
         case 1:
-            gm_801A42F8(0x1A);
+            gm_ChangeGameModeAfterCurrentScene(GM_DEBUG_GOVER);
             gm_801BF040(0x16);
             break;
         case 2:
-            gm_801A42F8(0x1A);
+            gm_ChangeGameModeAfterCurrentScene(GM_DEBUG_GOVER);
             gm_801BF040(0x17);
             break;
         }
@@ -1172,13 +1170,13 @@ void fn_803011EC(int arg0)
         gm_801BEFC0(un_804D6DFC);
         {
             s8 c_kind = (s8) un_804D6DF8;
-            gm_8017EB30()->x0.ckind = c_kind;
+            gm_GetAllStarData()->x0.ckind = c_kind;
         }
         {
             u8 color = (u8) un_804D6DFC;
-            gm_8017EB30()->x0.color = color;
+            gm_GetAllStarData()->x0.color = color;
         }
-        gm_801A42F8(0x15);
+        gm_ChangeGameModeAfterCurrentScene(GM_CLASSIC_GOVER);
         gm_801A4B60();
         break;
     }
@@ -1209,7 +1207,7 @@ bool un_80301328(bool update_scene)
     if (update_scene == true) {
         lbAudioAx_80024030(1);
         gm_801BF708(0x0);
-        gm_801A42F8(GM_OPENING_MV);
+        gm_ChangeGameModeAfterCurrentScene(GM_OPENING_MV);
         gm_801A4B60();
     }
 
@@ -1221,7 +1219,7 @@ bool un_8030136C(bool update_scene)
     if (update_scene == true) {
         lbAudioAx_80024030(1);
         gm_801BF708(0x5);
-        gm_801A42F8(GM_OPENING_MV);
+        gm_ChangeGameModeAfterCurrentScene(GM_OPENING_MV);
         gm_801A4B60();
     }
 
@@ -1232,7 +1230,7 @@ bool un_803013B0(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(GM_DEBUG_CUTSCENE);
+        gm_ChangeGameModeAfterCurrentScene(GM_DEBUG_CUTSCENE);
         gm_801A4B60();
     }
 
@@ -1257,7 +1255,7 @@ bool un_80301454(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(GM_BOOT);
+        gm_ChangeGameModeAfterCurrentScene(GM_BOOT);
         gm_801A4B60();
     }
 
@@ -1268,7 +1266,7 @@ bool un_80301490(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetPendingScene(0xD);
+        gm_SetPendingSceneIndex(0xD);
         gm_801A4B60();
     }
 
@@ -1279,7 +1277,7 @@ bool un_803014CC(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetPendingScene(0x7);
+        gm_SetPendingSceneIndex(0x7);
         gm_801A4B60();
     }
 
@@ -1290,7 +1288,7 @@ bool un_80301508(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetPendingScene(0x3);
+        gm_SetPendingSceneIndex(0x3);
         gm_801A4B60();
     }
 
@@ -1301,7 +1299,7 @@ bool un_80301544(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetPendingScene(0x9);
+        gm_SetPendingSceneIndex(0x9);
         gm_801A4B60();
     }
 
@@ -1312,7 +1310,7 @@ bool un_80301580(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetPendingScene(0xC);
+        gm_SetPendingSceneIndex(0xC);
         gm_801A4B60();
     }
 
@@ -1323,7 +1321,7 @@ bool un_803015BC(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(GM_PROGRESSIVE_SCAN);
+        gm_ChangeGameModeAfterCurrentScene(GM_PROGRESSIVE_SCAN);
         gm_801A4B60();
     }
 
@@ -1334,7 +1332,7 @@ bool un_803015F8(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetPendingScene(0xA);
+        gm_SetPendingSceneIndex(0xA);
         gm_801A4B60();
     }
 
@@ -1544,7 +1542,7 @@ int un_80301B48(int arg0)
         break;
     case 6:
         lbAudioAx_80024030(1);
-        gm_SetPendingScene(6);
+        gm_SetPendingSceneIndex(6);
         gm_801A4B60();
         break;
     }
@@ -1596,7 +1594,7 @@ int un_80301C80(int arg0)
         break;
     case 6:
         lbAudioAx_80024030(1);
-        gm_SetPendingScene(0xB);
+        gm_SetPendingSceneIndex(0xB);
         gm_801A4B60();
         break;
     }
@@ -1608,7 +1606,7 @@ void un_80301CE0(int arg0)
     switch (arg0) {
     case 6:
         lbAudioAx_80024030(1);
-        gm_SetPendingScene(0xB);
+        gm_SetPendingSceneIndex(0xB);
         gm_801A4B60();
         break;
     case 1:
@@ -1621,7 +1619,7 @@ bool un_80301D40(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(GM_FIXED_CAMERA_VS);
+        gm_ChangeGameModeAfterCurrentScene(GM_FIXED_CAMERA_VS);
         gm_801A4B60();
     }
 
@@ -1633,7 +1631,7 @@ int un_80301D7C(int arg0)
     if (arg0 == 1) {
         lbAudioAx_80024030(1);
         gm_801BEB74(un_803FA258.x188 - 1);
-        gm_801A42F8(0x2B);
+        gm_ChangeGameModeAfterCurrentScene(GM_EVENT);
         gm_801A4B60();
     }
     return 0;
@@ -1643,7 +1641,7 @@ bool un_80301DCC(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetPendingScene(0x4);
+        gm_SetPendingSceneIndex(0x4);
         gm_801A4B60();
     }
 
@@ -1654,9 +1652,13 @@ bool un_80301E08(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetPendingScene(0xE);
+        gm_SetPendingSceneIndex(0xE);
         gm_801A4B60();
     }
 
     return false;
 }
+
+/// Defined after the functions: MWCC only keeps the address
+/// materialization un-hoisted for globals it has not yet seen defined.
+struct un_803FA258_t un_803FA258 = { 0 };

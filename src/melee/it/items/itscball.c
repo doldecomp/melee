@@ -48,7 +48,7 @@ void it_80294AD0(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
 
-    item->x40_vel.x = item->x40_vel.y = item->x40_vel.z = 0.0F;
+    itResetVelocity(item);
     it_8026B390(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
@@ -116,10 +116,7 @@ bool itScball_UnkMotion3_Anim(HSD_GObj* gobj)
 }
 void itScball_UnkMotion3_Phys(Item_GObj* gobj)
 {
-    ItemAttr* attr = GET_ITEM(gobj)->xCC_item_attr;
-
-    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
-    it_80274658((HSD_GObj*) gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 bool itScball_UnkMotion3_Coll(Item_GObj* gobj)

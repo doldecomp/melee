@@ -12,7 +12,7 @@
 
 #include "lb/forward.h"
 
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include <dolphin/mtx.h>
 #include <dolphin/os/OSError.h>
@@ -144,11 +144,7 @@ static void grFigure2_8020E490(Ground_GObj* arg0) {}
 
 static void grFigure2_8020E494(Ground_GObj* gobj)
 {
-    u8 _[8];
-
-    Ground* gp = gobj->user_data;
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grFigure2_8020E4E4(Ground_GObj* arg0)

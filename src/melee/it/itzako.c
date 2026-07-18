@@ -1,6 +1,5 @@
 #include "itzako.h"
 
-#include "it_266F.h"
 #include "it_2725.h"
 #include "it_3F14.h"
 #include "ithitbox.h"
@@ -8,6 +7,7 @@
 #include "itmaterial.h"
 
 #include "baselib/jobj.h"
+#include "baselib/random.h"
 #include "cm/camera.h"
 #include "ft/fighter.h"
 #include "ft/ftlib.h"
@@ -17,40 +17,38 @@
 #include "gr/grzakogenerator.h"
 #include "it/inlines.h"
 #include "it/items/itheiho.h"
+#include "it/itgroundcoll.h"
 #include "items/itcoin.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 #include "pl/plbonuslib.h"
 #include "ty/tydisplay.h"
 
+static void sdata2_order(void)
+{
+    (void) 0.0f;
+    (void) 1.0f;
+    (void) 0.0174532924f;
+    (void) 4503601774854144.0;
+    (void) 1.57079637f;
+    (void) 0.100000001f;
+    (void) 10.0;
+    (void) 0.5;
+    (void) 30.0f;
+    (void) 10.0f;
+    (void) 1.5707963267948966;
+    (void) 0.000174532921f;
+    (void) 3.0;
+    (void) -1.0f;
+    (void) 6.80741774e-09f;
+    (void) 2.0f;
+    (void) 0.5f;
+}
+
 const Vec3 it_803B85A8[6] = {
     { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f },
     { 0.0f, 1.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, { 0.0f, 1.0f, 0.0f },
 };
-
-static f32 sdata2_ordering(void)
-{
-    f32 data_0 = 0.0f;
-    f32 data_1 = 1.0f;
-    f32 data_2 = 0.017453292f;
-    f64 data_3 = 4503601774854144.0;
-    f32 data_4 = 1.5707964f;
-    f32 data_5 = 0.1f;
-    f64 data_6 = 10.0;
-    f64 data_7 = 0.5;
-    f32 data_8 = 30.0f;
-    f32 data_9 = 10.0f;
-    f64 data_10 = M_PI_2;
-    f32 data_11 = 0.00017453292f;
-    f64 data_12 = 3.0;
-    f32 data_13 = -1.0f;
-    f32 data_14 = 6.8074177e-9f;
-    f32 data_15 = 2.0f;
-    f32 data_16 = 0.5f;
-    return data_16 + data_15 + data_14 + data_13 + data_12 + data_11 +
-           data_10 + data_9 + data_8 + data_7 + data_6 + data_5 + data_4 +
-           data_3 + data_2 + data_1 + data_0;
-}
 
 Item_GObj* it_8027B5B0(ItemKind kind, Vec3* pos, HSD_JObj* jobj, Vec3* vel,
                        bool use_init)
@@ -569,10 +567,10 @@ bool it_8027CA7C(HSD_GObj* gobj)
     bool chk;
 
     chk = false;
-    if (ftLib_80086C0C(gobj) == 0x14E) {
+    if (ftLib_GetMotionId(gobj) == 0x14E) {
         chk = true;
     }
-    if (ftLib_80086C0C(gobj) == 0x14D) {
+    if (ftLib_GetMotionId(gobj) == 0x14D) {
         chk = true;
     }
     return chk;
@@ -662,13 +660,13 @@ Item_GObj* it_8027CC88(Item_GObj* item_gobj_arg)
     u32 pad2[4];
 
     item_gobj_var = NULL;
-    if ((gm_8016B498() != 0) && (HSD_Randi(it_804D6D40->x14) == 0)) {
+    if ((gm_IsCurrently1PMode() != 0) && (HSD_Randi(it_804D6D40->x14) == 0)) {
         if (grLib_801C9E40() == 0) {
             var_r30 = Ground_801C5840();
             if (var_r30 != -1) {
-                temp_r3 = un_8031C354(var_r30, sp1C, 0xA, 0x63);
-                temp_r3_2 =
-                    temp_r3 + un_8031C354(var_r30, &sp1C[temp_r3], 0xA, 2);
+                temp_r3 = tyDisplay_8031C354(var_r30, sp1C, 0xA, 0x63);
+                temp_r3_2 = temp_r3 + tyDisplay_8031C354(
+                                          var_r30, &sp1C[temp_r3], 0xA, 2);
                 if (temp_r3_2 != 0) {
                     var_r30 = (&sp1C[0])[HSD_Randi(temp_r3_2)];
                 }
@@ -719,7 +717,7 @@ void it_8027CE64(Item_GObj* item_gobj, HSD_GObj* fighter_gobj,
     ftLib_8008770C(fighter_gobj, (void*) &sp18);
     it_80278574(item_gobj, &sp18);
     ftLib_80087744(fighter_gobj, &item->xBC8);
-    item->x5C8 = ftLib_800870BC(item->owner, (void**) &item->xBC4);
+    item->x5C8 = ftLib_800870BC(item->owner, (int*) &item->xBC4);
     it_80274594(item_gobj);
     item->xDD4_itemVar.gamewatch.attr = arg_attr_address;
 }

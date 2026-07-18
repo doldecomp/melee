@@ -1,5 +1,7 @@
 #include "itentei.h"
 
+#include "inlines.h"
+
 #include "cm/camera.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
@@ -63,8 +65,7 @@ void it_802CF4D4(Item_GObj* gobj)
     itPokemonAttributes* sa = ap->x4_specialAttributes;
 
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    it->entered_hitlag = efLib_PauseAll;
-    it->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(it);
     it->on_accessory = it_802CF6C8;
     it->xDD4_itemVar.pokemon.timer = sa->timer;
 }
@@ -144,11 +145,7 @@ void it_802CF6C8(Item_GObj* gobj)
 
 void it_802CF744(Item_GObj* gobj)
 {
-    Item* it = gobj->user_data;
-    it_802762BC(it);
-    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    it->entered_hitlag = efLib_PauseAll;
-    it->exited_hitlag = efLib_ResumeAll;
+    Item_EnterAirStateWithHitlag(gobj, 1);
 }
 
 bool itEntei_UnkMotion1_Anim(Item_GObj* gobj)

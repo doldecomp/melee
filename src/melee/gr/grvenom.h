@@ -36,7 +36,7 @@
 /* 204DB0 */ void grVenom_80204DB0(Ground_GObj*);
 /* 204DD4 */ void grVenom_80204DD4(Ground_GObj*);
 /* 204EF4 */ bool grVenom_80204EF4(Ground_GObj*);
-/* 204EFC */ bool grVenom_80204EFC(Ground_GObj*);
+/* 204EFC */ void grVenom_80204EFC(Ground_GObj*);
 /* 204F1C */ void grVenom_80204F1C(Ground_GObj*);
 /* 204F20 */ void grVenom_80204F20(Ground_GObj*);
 /* 2052D8 */ bool grVenom_802052D8(Ground_GObj*);
@@ -65,6 +65,6 @@
 /* 206CB0 */ void grVenom_80206CB0(s32);
 /* 206D10 */ s32 grVenom_80206D10(s32);
 /* 206D74 */ DynamicsDesc* grVenom_80206D74(enum_t);
-/* 206D7C */ bool grVenom_80206D7C(Vec3*, s32, HSD_JObj*);
+/* 206D7C */ bool grVenom_80206D7C(Vec3*, int, HSD_JObj*);
 
 #endif

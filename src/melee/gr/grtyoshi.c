@@ -9,7 +9,7 @@
 
 #include "lb/forward.h"
 
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include <dolphin/mtx.h>
 #include <dolphin/os/OSError.h>
@@ -84,15 +84,7 @@ static void grTYoshi_OnDemoInit(bool arg0) {}
 
 static void grTYoshi_OnInit(void)
 {
-    stage_info.unk8C.b4 = 0;
-    stage_info.unk8C.b5 = 1;
-    grTYoshi_80223BEC(0);
-    grTYoshi_80223BEC(1);
-    grTYoshi_80223BEC(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTYoshi_80223BEC);
 }
 
 static void grTYoshi_OnLoad(void) {}
@@ -140,11 +132,7 @@ static void grTYoshi_80223D0C(Ground_GObj* arg0) {}
 
 static void grTYoshi_80223D10(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTYoshi_80223D60(Ground_GObj* arg0)
@@ -162,11 +150,7 @@ static void grTYoshi_80223D9C(Ground_GObj* arg0) {}
 
 static void grTYoshi_80223DA0(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTYoshi_80223DF0(Ground_GObj* arg0)

@@ -16,7 +16,7 @@
 
 #include "lb/forward.h"
 
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include <dolphin/mtx.h>
 #include <dolphin/os/OSError.h>
@@ -244,11 +244,7 @@ static void grBattle_8021A118(Ground_GObj* arg0) {}
 
 static void grBattle_8021A11C(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grBattle_8021A16C(Ground_GObj* arg0)

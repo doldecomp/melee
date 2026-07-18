@@ -249,7 +249,16 @@ void ftCo_DamageIce_Init(Fighter_GObj* gobj)
 
 void ftCo_DamageIce_HitWhileFrozen(Fighter_GObj* gobj)
 {
+    u8 _[8];
+    float param;
+    ftHurtboxInit hurt;
+    Vec3 offset;
+    HSD_JObj* effect_joint;
+    float* ice_size;
+    float rot_min, rot_max;
+    float rand, rand_range;
     Fighter* fp;
+
     fp = GET_FIGHTER(gobj);
 
     ftCommon_8007DB58(gobj);
@@ -260,7 +269,51 @@ void ftCo_DamageIce_HitWhileFrozen(Fighter_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftCo_MS_DamageIce,
                               Ft_MF_KeepGfx | Ft_MF_Unk06, 0, 1, 0, NULL);
 
-    ftCo_DamageIce_StartJump(fp);
+    ftCo_8009E140(fp, 0);
+    ftCommon_8007F824(fp->gobj);
+    fp->x2222_b3 = true;
+
+    if (fp->ground_or_air == GA_Air) {
+        fp->self_vel = fp->x8c_kb_vel;
+        fp->x8c_kb_vel.x = fp->x8c_kb_vel.y = fp->x8c_kb_vel.z = 0;
+    } else {
+        fp->gr_vel = fp->xF0_ground_kb_vel;
+        fp->xF0_ground_kb_vel = 0;
+    }
+
+    ftCommon_8007E2F4(fp, 0x1FF);
+    fp->mv.co.damageice.wall_hit_dir = 0;
+    rand = HSD_Randf();
+    rot_min = p_ftCommonData->damageice_rot_speed_min;
+    rot_max = p_ftCommonData->damageice_rot_speed_max;
+    rand_range = rot_max - rot_min;
+    fp->mv.co.damageice.rot_speed = rand_range * rand + rot_min;
+    ftCo_800909D0(fp);
+
+    effect_joint = fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint;
+    ice_size = &fp->co_attrs.damageice_ice_size;
+    param = fp->x34_scale.y * *ice_size / p_ftCommonData->damageice_ice_size;
+
+    {
+        float* effect_param = &param;
+        efAsync_Spawn(fp->gobj, &GET_FIGHTER(fp->gobj)->x60C, 3, 0x415,
+                      effect_joint, effect_param);
+    }
+    fp->x2219_b0 = true;
+    ftColl_8007B0C0(fp->gobj, Intangible);
+
+    offset = ftCo_DamageIce_HurtboxOffset;
+    hurt.bone_idx = ftParts_GetBoneIndex(fp, FtPart_XRotN);
+    hurt.height = HurtHeight_Mid;
+    hurt.is_grabbable = false;
+    hurt.a_offset = hurt.b_offset = offset;
+    hurt.scale = *ice_size;
+
+    ftColl_HurtboxInit(fp, fp->hurt_capsules, &hurt);
+    ftCommon_8007EBAC(fp, 1, 0);
+
+    fp->take_dmg_2_cb = ftCo_DamageIce_OnHit2;
+    fp->take_dmg_cb = ftCo_DamageIce_OnHit;
 }
 
 void ftCo_DamageIce_OnHit2(Fighter_GObj* gobj)

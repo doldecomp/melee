@@ -13,7 +13,7 @@
 
 #include "lb/forward.h"
 
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include <dolphin/mtx.h>
 #include <dolphin/os/OSError.h>
@@ -26,7 +26,7 @@
 /* 21F8B4 */ static void grTmario_UnkStage0_OnLoad(void);
 /* 21F8B8 */ static void grTmario_UnkStage0_OnStart(void);
 /* 21F8DC */ static bool grTMario_8021F8DC(void);
-/* 21F8E4 */ static HSD_GObj* grTMario_8021F8E4(s32);
+/* 21F8E4 */ static HSD_GObj* grTMario_8021F8E4(int);
 /* 21F9CC */ static void grTMario_8021F9CC(Ground_GObj*);
 /* 21F9F8 */ static bool grTMario_8021F9F8(Ground_GObj*);
 /* 21FA00 */ static void grTMario_8021FA00(Ground_GObj*);
@@ -90,16 +90,7 @@ void grTMario_8021F840(bool unk) {}
 
 void grTMario_8021F844(void)
 {
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-
-    grTMario_8021F8E4(0);
-    grTMario_8021F8E4(1);
-    grTMario_8021F8E4(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTMario_8021F8E4);
 }
 
 void grTmario_UnkStage0_OnLoad(void) {}
@@ -114,7 +105,7 @@ bool grTMario_8021F8DC(void)
     return false;
 }
 
-HSD_GObj* grTMario_8021F8E4(s32 arg0)
+HSD_GObj* grTMario_8021F8E4(int arg0)
 {
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grTMr_803E8548[arg0];

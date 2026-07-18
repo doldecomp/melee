@@ -106,7 +106,7 @@ void it_802F317C(HSD_GObj* item_gobj)
     Item* item;
 
     item = GET_ITEM(item_gobj);
-    item->x40_vel.x = item->x40_vel.y = item->x40_vel.z = 0.0f;
+    itResetVelocity(item);
     Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
 }
 
@@ -151,7 +151,7 @@ void it_802F3290(Item_GObj* item_gobj)
 
     item_jobj = GET_JOBJ(item_gobj);
     item = GET_ITEM(item_gobj);
-    item->x40_vel.x = item->x40_vel.y = item->x40_vel.z = 0.0f;
+    itResetVelocity(item);
     item->xD44_lifeTimer = 40.0f;
     HSD_JObjSetFlagsAll(item_jobj, JOBJ_HIDDEN);
     it_802756D0(item_gobj);

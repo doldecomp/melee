@@ -27,8 +27,8 @@
 #include "lb/forward.h"
 
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
+#include "lb/lbspdisplay.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
@@ -162,9 +162,9 @@ void Item_80266FCC(void)
     it_804A0E60.x8 = 0;
     it_804A0E50.x8 = 0;
     it_804A0E30.x4.x8 = 0;
-    it_804A0E60.x0 = 0;
-    it_804A0E50.x0 = 0;
-    it_804A0E30.x4.x0 = 0;
+    it_804A0E60.size = 0;
+    it_804A0E50.size = 0;
+    it_804A0E30.x4.size = 0;
 }
 
 static void ItUnkHoldKind(HSD_GObj* gobj)
@@ -726,7 +726,7 @@ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
     } else if (ftLib_80086960(spawnItem->x0_parent_gobj)) {
         item_data->x20_team_id = ftLib_80086EB4(spawnItem->x0_parent_gobj);
     } else if (it_80272D1C(spawnItem->x0_parent_gobj)) {
-        item_data->x20_team_id = it_8026B7B0(spawnItem->x0_parent_gobj);
+        item_data->x20_team_id = itGetTeamId(spawnItem->x0_parent_gobj);
     } else {
         item_data->x20_team_id = -1;
     }
@@ -930,7 +930,7 @@ static void foobar2(HSD_GObj* gobj)
         ftLib_80086960(it->owner))
     {
         it->xDC8_word.flags.xE = 1;
-        it->ecb_lock = ftLib_800872A4(it->owner);
+        it->ecb_lock = ftLib_GetKind(it->owner);
         ftLib_8008702C(it->ecb_lock);
     }
 }

@@ -19,8 +19,8 @@
 #include "if/ifstatus.h"
 #include "if/types.h"
 #include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
+#include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
 #include "pl/player.h"
 
@@ -119,9 +119,9 @@ void ifStock_802F8298(HSD_GObj* gobj)
     struct IfStockUserData* user_data;
     HSD_JObj* jobj;
     struct ifStock_804A1378* stock;
-    HSD_JObj* jobj2;
     HSD_JObj* jobj_anim;
     int i;
+    HSD_JObj* jobj2;
     Vec3 vecA, vecB;
     PAD_STACK(24);
     user_data = GET_IFSTOCK(gobj);
@@ -450,7 +450,7 @@ void fn_802F9410(HSD_GObj* gobj)
 void fn_802F94E0(HSD_GObj* gobj, int renderpass)
 {
     struct IfStockUserData* p = GET_IFSTOCK(gobj);
-    struct HudIndex* x = ifStatus_802F4910();
+    struct HudIndex* x = ifStatus_GetHUDInfo();
     if (!x->players[p->player].flags.hide_all_digits) {
         HSD_GObj_JObjCallback(gobj, renderpass);
     }
@@ -458,7 +458,7 @@ void fn_802F94E0(HSD_GObj* gobj, int renderpass)
 
 void fn_802F9548(HSD_GObj* gobj, int renderpass)
 {
-    struct HudIndex* x = ifStatus_802F4910();
+    struct HudIndex* x = ifStatus_GetHUDInfo();
     if (!x->players[0].flags.hide_all_digits) {
         HSD_GObj_JObjCallback(gobj, renderpass);
     }
@@ -466,7 +466,7 @@ void fn_802F9548(HSD_GObj* gobj, int renderpass)
 
 void fn_802F9598(HSD_GObj* gobj, int renderpass)
 {
-    struct HudIndex* x = ifStatus_802F4910();
+    struct HudIndex* x = ifStatus_GetHUDInfo();
     if (!x->players[0].flags.hide_all_digits) {
         HSD_GObj_JObjCallback(gobj, renderpass);
     }
@@ -474,7 +474,7 @@ void fn_802F9598(HSD_GObj* gobj, int renderpass)
 
 void fn_802F95E8(HSD_GObj* gobj, int renderpass)
 {
-    struct HudIndex* x = ifStatus_802F4910();
+    struct HudIndex* x = ifStatus_GetHUDInfo();
     if (gm_8016B184() && gm_8016A1F8() &&
         !(x->players[0].flags.hide_all_digits |
           x->players[1].flags.hide_all_digits |
@@ -487,7 +487,7 @@ void fn_802F95E8(HSD_GObj* gobj, int renderpass)
 
 void fn_802F9680(HSD_GObj* gobj, int renderpass)
 {
-    struct HudIndex* x = ifStatus_802F4910();
+    struct HudIndex* x = ifStatus_GetHUDInfo();
     if (!x->players[0].flags.hide_all_digits) {
         HSD_GObj_JObjCallback(gobj, renderpass);
     }
@@ -544,7 +544,7 @@ void ifStock_802F98E8(unsigned char player, int b)
                 gm_8016895C(jobj, *stock->x0, 0);
                 HSD_JObjReqAnimAll(jobj, 0.0f);
                 HSD_GObj_SetupProc(gobj, fn_802F9410, 17);
-                HSD_JObjSetTranslate(jobj, ifAll_802F3424(player));
+                HSD_JObjSetTranslate(jobj, ifAll_GetPlayerHUDPosition(player));
                 lb_80011E24(jobj, ifStock_804A1378.player[player].x4, 0, 1, 2,
                             3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
                             -1);
@@ -645,7 +645,7 @@ void ifStock_802F98E8(unsigned char player, int b)
                     break;
                 }
                 HSD_JObjAnimAll(jobj);
-                ae44 = gm_8016AE44();
+                ae44 = gm_16AE_GetUnkData_1();
                 if (ae44->FighterMatchInfo[player].x4_b1) {
                     GXColor c = { 0x08, 0x08, 0x08, 0x80 };
                     ifStock_802FB4EC(player, &c);
@@ -901,7 +901,7 @@ void ifStock_802FAEC4(void)
     memzero(&ifStock_804A1ACC, sizeof(ifStock_804A1ACC));
     memzero(&ifStock_804A1A8C, sizeof(ifStock_804A1A8C));
     memzero(&ifStock_804A1774, sizeof(ifStock_804A1774));
-    lbArchive_LoadSections(*ifAll_802F3690(), (void**) &sp18, "Stc_scemdls",
+    lbArchive_LoadSections(*ifAll_GetArchive(), (void**) &sp18, "Stc_scemdls",
                            0);
     stock->x0 = sp18;
     stock->x4 = sp18[1];
@@ -932,7 +932,7 @@ void ifStock_802FAEC4(void)
             ifStock_804A1A8C[i] = ifStock_802FA118(i);
         }
     }
-    if (gm_80182510()) {
+    if (gm_IsMultimanSmashMode()) {
         // ifStock_802FA5BC(0); // inlined
         HSD_GObj* gobj2 = GObj_Create(14, 15, 0);
         HSD_JObj* jobj = HSD_JObjLoadJoint(stock->x4->joint);

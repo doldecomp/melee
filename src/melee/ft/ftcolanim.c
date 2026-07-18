@@ -6,7 +6,7 @@
 #include "ft/ftaction.h"
 #include "ft/ftdata.h"
 #include "gm/gm_1601.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 #include "pl/player.h"
 
 #pragma force_active on

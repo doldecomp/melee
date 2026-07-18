@@ -64,6 +64,7 @@ void fn_800195FC(void)
 
 void lb_80019628(void)
 {
+    int i;
     OSTime period;
     OSTime new_val = lb_804329F0.x38;
 
@@ -80,12 +81,10 @@ void lb_80019628(void)
 
     period = (OSTime) (f32) (u32) OS_TIMER_CLOCK;
 
-    if (lb_804329F0.x0[0].x0 < period) {
-        period = lb_804329F0.x0[0].x0;
-    }
-
-    if (lb_804329F0.x0[1].x0 < period) {
-        period = lb_804329F0.x0[1].x0;
+    for (i = 0; i < 2; i++) {
+        if (lb_804329F0.x0[i].x0 < period) {
+            period = lb_804329F0.x0[i].x0;
+        }
     }
 
     if (period >= (OSTime) (f64) (0.016666668f * (f32) (u32) OS_TIMER_CLOCK)) {

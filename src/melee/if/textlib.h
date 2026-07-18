@@ -52,17 +52,5 @@
 /* 3045A0 */ int un_803045A0(void);
 /* 304690 */ int un_80304690(void);
 /* 304780 */ bool un_80304780(void);
-/* 304870 */ int un_GetTrophyTotal(void);
-/* 3048C0 */ int un_803048C0(int);
-/* 304924 */ bool un_80304924(int);
-/* 304988 */ void un_80304988(int);
-/* 3049F4 */ bool un_803049F4(int);
-/* 304A58 */ void un_80304A58(int);
-/* 304B0C */ bool un_80304B0C(int);
-/* 304B94 */ int un_80304B94(int);
-/* 304CC8 */ bool un_80304CC8(int);
-/* 304D30 */ int un_80304D30(void);
-/* 4A26B8 */ extern unsigned short un_804A26B8[1000];
-/* 4A284C */ extern unsigned short un_804A284C[1000];
 
 #endif

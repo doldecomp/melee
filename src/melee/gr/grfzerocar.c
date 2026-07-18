@@ -3,7 +3,7 @@
 #include "gr/granime.h"
 #include "gr/grdatfiles.h"
 #include "gr/ground.h"
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 #include "sc/types.h"
 
 #include <dolphin/mtx.h>

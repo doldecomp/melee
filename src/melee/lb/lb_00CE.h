@@ -3,8 +3,6 @@
 
 #include <platform.h>
 
-#include <common_structs.h>
-
 /* 00CE50 */ float expf(float);
 /* 00CEE0 */ float powf(float, float);
 /* 00CF74 */ s32 powi(s32, s32);

@@ -10,7 +10,7 @@
 
 #include "lb/forward.h"
 
-#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
 
 #include <baselib/forward.h>
 
@@ -24,7 +24,7 @@ void grTKirby_80221368(void);                  /* static */
 void grTkirby_UnkStage0_OnLoad(void);          /* static */
 void grTkirby_UnkStage0_OnStart(void);         /* static */
 bool grTKirby_80221400(void);                  /* static */
-HSD_GObj* grTKirby_80221408(s32);              /* static */
+HSD_GObj* grTKirby_80221408(int);              /* static */
 void grTKirby_802214F0(Ground_GObj*);          /* static */
 bool grTKirby_8022151C(Ground_GObj*);          /* static */
 void grTKirby_80221524(Ground_GObj*);          /* static */
@@ -68,16 +68,7 @@ void grTKirby_80221364(bool unk) {}
 
 void grTKirby_80221368(void)
 {
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-
-    grTKirby_80221408(0);
-    grTKirby_80221408(1);
-    grTKirby_80221408(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTKirby_80221408);
 }
 
 void grTkirby_UnkStage0_OnLoad(void) {}
@@ -92,7 +83,7 @@ bool grTKirby_80221400(void)
     return false;
 }
 
-HSD_GObj* grTKirby_80221408(s32 arg0)
+HSD_GObj* grTKirby_80221408(int arg0)
 {
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grTKb_803E8BB0[arg0];
