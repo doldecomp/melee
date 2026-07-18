@@ -79,6 +79,7 @@ static struct {
     u8 x0, x1, x2, x3;
 } gm_804D4278 = { 0xAA, 0xAA, 0xFF, 0xFF };
 
+/// @todo .sdata2 order hack
 static void order_sdata2(void)
 {
     (void) 60.0f;
@@ -246,6 +247,7 @@ void fn_801A6A48(HSD_GObj* gobj, int arg1)
     }
 }
 
+/// @todo .data order hack
 static void order_data(void)
 {
     (void) "!(jobj->flags & JOBJ_USE_QUATERNION)";

@@ -1130,10 +1130,6 @@ struct gm_stats {
     /* 0x40 */ u32 unk40;
 };
 
-/* Matching evidence (matching-tactics-need-evidence): with the count loop
- * open-coded in fn_80161C90 the function needs PAD_STACK(8) and still
- * mismatches (99.04%); routing the count through an inline helper's return
- * temp reproduces retail's register/stack allocation exactly. */
 static inline u32 fn_80161C90_count_players(MatchEnd* match_end)
 {
     u32 count = 0;
@@ -4280,7 +4276,7 @@ s32 fn_80169000(void* arg0, void* arg1)
 /// #fn_80169000 done
 u8 gm_80169238(u8 ckind)
 {
-    /// @remarks Matching tactic: pad the pre-inline statement count so MWCC
+    /// @todo Matching tactic: pad the pre-inline statement count so MWCC
     /// keeps direct calls to this accessor instead of auto-inlining them.
     if (0) {
         HSD_Randi(0);

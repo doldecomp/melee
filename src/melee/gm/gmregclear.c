@@ -135,7 +135,7 @@ struct lbl_80472D28_t {
 };
 
 struct lbl_80472E48_t {
-    /* 0x00 */ u8 x0;
+    /* 0x00 */ u8 b76 : 2, b54 : 2, b32 : 2, b10 : 2;
     /* 0x01 */ char pad_1[3];
     /* 0x04 */ s32 unk_4; /* inferred */
     /* 0x08 */ s32 unk_8; /* inferred */
@@ -2819,7 +2819,7 @@ void fn_80180C14(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
 
-    if ((lbl_80472E48.x0 & 3) != 0) {
+    if (lbl_80472E48.b10 != 0) {
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         HSD_JObjAnimAll(jobj);
     }
@@ -2829,9 +2829,6 @@ static s32 lbl_804D65D4;
 
 void fn_80180C60(HSD_GObj* gobj)
 {
-    typedef struct {
-        u8 b76 : 2, b54 : 2, b32 : 2, b10 : 2;
-    } x0_2bits;
     typedef struct fn_80180C60_state {
         struct lbl_80472E48_t e48;
         s32 ec8[4];
@@ -2851,9 +2848,9 @@ void fn_80180C60(HSD_GObj* gobj)
     }
 
     state->ec8[0] = dist;
-    b76 = ((x0_2bits*) &state->e48.x0)->b76;
+    b76 = state->e48.b76;
 
-    if (b76 != 0 && ((x0_2bits*) &state->e48.x0)->b54) {
+    if (b76 != 0 && state->e48.b54) {
         ifTime_HideTimers();
         if (state->ec8[0] == state->ec8[1]) {
             state->ec8[3] = state->ec8[3] + 1;
@@ -2861,9 +2858,9 @@ void fn_80180C60(HSD_GObj* gobj)
             state->ec8[3] = 0;
         }
         if (state->ec8[3] > 0x3C) {
-            ((x0_2bits*) &state->e48.x0)->b32 = 1;
-            if (dist == 0 && !(state->e48.x0 & 3)) {
-                ((x0_2bits*) &state->e48.x0)->b10 = 1;
+            state->e48.b32 = 1;
+            if (dist == 0 && !state->e48.b10) {
+                state->e48.b10 = 1;
             }
         }
     } else {
@@ -2875,33 +2872,33 @@ void fn_80180C60(HSD_GObj* gobj)
                 state->ec8[3] = 0;
             }
             if (state->ec8[3] > 0x78) {
-                ((x0_2bits*) &state->e48.x0)->b32 = 1;
-                if (!(state->e48.x0 & 3)) {
-                    ((x0_2bits*) &state->e48.x0)->b10 = 1;
+                state->e48.b32 = 1;
+                if (!state->e48.b10) {
+                    state->e48.b10 = 1;
                 }
             }
         } else if (gm_8016AEEC() == 0 && gm_8016AEFC() == 0x3B) {
-            ((x0_2bits*) &state->e48.x0)->b76 = 1;
+            state->e48.b76 = 1;
             ifTime_HideTimers();
             Player_80031790(0);
         }
         if (Ground_801C1DC0() != 0) {
-            if (!(((u8) state->e48.x0 >> 6) & 3)) {
-                ((x0_2bits*) &state->e48.x0)->b76 = 1;
+            if (!(state->e48.b76)) {
+                state->e48.b76 = 1;
                 ifTime_HideTimers();
                 Player_80031790(0);
             }
-            if (!(((u8) state->e48.x0 >> 4) & 3)) {
-                ((x0_2bits*) &state->e48.x0)->b54 = 1;
+            if (!(state->e48.b54)) {
+                state->e48.b54 = 1;
                 Player_80031790(0);
             }
             state->ec8[3] = 0;
         }
     }
 
-    if (!(((u8) state->e48.x0 >> 2) & 3)) {
+    if (!(state->e48.b32)) {
         HSD_JObjReqAnimAll(jobj, 0.0f);
-    } else if (state->e48.x0 & 3) {
+    } else if (state->e48.b10) {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     } else if (dist > state->e48.x14[gm_CKindToSelKind((u8) state->e48.unk_4)])
     {
@@ -2992,9 +2989,6 @@ extern s32 lbl_804D65D8;
 void fn_80181598(void)
 {
     typedef struct {
-        u8 b76 : 2, b54 : 2, b32 : 2, b10 : 2;
-    } x0_2bits;
-    typedef struct {
         struct lbl_80472E48_t x0;
         int x80[4];
     } lbl_80472E48_with_ec8;
@@ -3010,13 +3004,13 @@ void fn_80181598(void)
         return;
     }
 
-    mode = state->x0.x0 & 3;
+    mode = state->x0.b10;
 
     if (mode != 0) {
         if (mode == 1) {
             lbAudioAx_800237A8(0xC0, 0x7F, 0x40);
             lbAudioAx_800237A8(0x148, 0x7F, 0x40);
-            ((x0_2bits*) &state->x0.x0)->b10 = 2;
+            state->x0.b10 = 2;
         }
         lbl_804D65D8 += 1;
         if (lbl_804D65D8 >= 0xF0 ||
@@ -3028,8 +3022,7 @@ void fn_80181598(void)
         }
     }
 
-    if (((state->x0.x0 >> 2) & 3) != 0 &&
-        ((mode = state->x0.x0 & 3, mode == 0) || mode == 3))
+    if (state->x0.b32 != 0 && ((mode = state->x0.b10, mode == 0) || mode == 3))
     {
         state->x0.xC += 1;
         if (state->x0.xC > 0x3C &&
@@ -3058,9 +3051,6 @@ void fn_80181708(void)
 {
     HSD_GObj* new_var;
     typedef struct {
-        u8 b76 : 2, b54 : 2, b32 : 2, b10 : 2;
-    } x0_2bits;
-    typedef struct {
         struct lbl_80472E48_t x0;
         int x80[4];
     } lbl_80472E48_with_ec8;
@@ -3072,10 +3062,10 @@ void fn_80181708(void)
     state->x80[1] = 0;
     state->x80[2] = 0;
     state->x80[3] = 0;
-    ((x0_2bits*) &state->x0.x0)->b76 = 0;
-    ((x0_2bits*) &state->x0.x0)->b54 = 0;
-    ((x0_2bits*) &state->x0.x0)->b32 = 0;
-    ((x0_2bits*) &state->x0.x0)->b10 = 0;
+    state->x0.b76 = 0;
+    state->x0.b54 = 0;
+    state->x0.b32 = 0;
+    state->x0.b10 = 0;
     state->x0.xC = 0;
     state->x0.x10 = (s8) Player_GetPlayerId(0);
     lbl_804D65D4 = 0;
@@ -3631,7 +3621,7 @@ bool gm_IsMultimanSmashMode(void)
     return false;
 }
 
-/// Original addresses these fields relative to #lbl_80472ED8 (reference
+/// @todo Original addresses these fields relative to #lbl_80472ED8 (reference
 /// relocations are lbl_80472ED8+0x6BC..+0x6C8): lbl_80473594 overlays
 /// lbl_80472ED8+0x6BC (0x80472ED8 + 0x6BC == 0x80473594), and gm_80182578
 /// below already reads the same storage via lbl_80472ED8.record[0].

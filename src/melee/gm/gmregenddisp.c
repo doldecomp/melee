@@ -59,6 +59,7 @@ void fn_801A7FB4(HSD_GObj* gobj)
     }
 }
 
+/// @todo .sdata2 order hack
 static void order_sdata2(void)
 {
     (void) 0.0f;
@@ -99,6 +100,7 @@ void gm_801A8114(HSD_JObj* arg0, int arg1)
     HSD_JObjSetScaleZ(transJobj, scale);
 }
 
+/// @todo .data order hack
 static void order_data_0(void)
 {
     (void) "Captain  ";

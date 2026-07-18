@@ -28,6 +28,7 @@
 #include "pl/player.h"
 #include "sc/types.h"
 
+#include <m2c_macros.h>
 #include <printf.h>
 #include <dolphin/os.h>
 #include <baselib/controller.h>
@@ -967,7 +968,7 @@ static GXColor const lbl_804DA67C = { 0xFF, 0xFF, 0, 0xFF };
 void fn_8018C8D4(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                  s32 arg5, s32 arg6, f32 farg0)
 {
-    BracketEntry* data = arg0;
+    BracketEntry* data = (BracketEntry*) arg0;
     f32 thickness;
     f32 neg_thickness;
     GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8, c9;
@@ -1261,7 +1262,7 @@ void fn_8018D50C(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                  s32 arg5, s32 arg6, f32 farg0)
 {
     TmData* tm;
-    BracketEntry* data = arg0;
+    BracketEntry* data = (BracketEntry*) arg0;
     f32 thickness;
     f32 neg_thickness;
     s32 right;
@@ -1433,7 +1434,6 @@ static inline int fn_8018DC18_inline0(BracketEntry* data)
 void fn_8018DC18(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                  s32 arg5, s32 arg6, f32 farg0)
 {
-    BracketEntry* data = arg0;
     f32 thickness;
     f32 neg_thickness;
     s32 right;
@@ -1442,7 +1442,7 @@ void fn_8018DC18(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     GXColor c0, c1, c2, c3, c4, c5, c6, c7;
 
     c0 = col;
-    thickness = data->x1C;
+    thickness = M2C_FIELD(arg0, f32*, 0x1C);
     c1 = c0;
     {
         GXColor* color = &c1;
@@ -1472,17 +1472,17 @@ void fn_8018DC18(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                       neg_thickness, color);
     }
 
-    if (data->x20.g == 0) {
-        if (data->x4C == 0) {
-            c5 = data->x20;
+    if (M2C_FIELD(arg0, u8*, 0x21) == 0) {
+        if (M2C_FIELD(arg0, u8*, 0x4C) == 0) {
+            c5 = M2C_FIELD(arg0, GXColor*, 0x20);
             DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, &c5);
-            c6 = data->x20;
+            c6 = M2C_FIELD(arg0, GXColor*, 0x20);
             DrawRectangle((f32) arg1, (f32) arg5, (f32) half + thickness,
                           neg_thickness, &c6);
             return;
         }
-        if (data->x78 == 0) {
-            c7 = data->x20;
+        if (M2C_FIELD(arg0, u8*, 0x78) == 0) {
+            c7 = M2C_FIELD(arg0, GXColor*, 0x20);
             {
                 GXColor* color = &c7;
                 DrawRectangle((f32) center, (f32) arg2, thickness, (f32) arg4,
@@ -1490,9 +1490,9 @@ void fn_8018DC18(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
             }
             return;
         }
-        c7 = data->x20;
+        c7 = M2C_FIELD(arg0, GXColor*, 0x20);
         DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4, &c7);
-        c7 = data->x20;
+        c7 = M2C_FIELD(arg0, GXColor*, 0x20);
         DrawRectangle((f32) center, (f32) arg5, (f32) half + thickness,
                       neg_thickness, &c7);
     }
@@ -1503,7 +1503,6 @@ static const GXColor lbl_804DA69C = { 255, 255, 0, 255 };
 void fn_8018DF68(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                  s32 arg5, s32 arg6, f32 farg0)
 {
-    BracketEntry* data = arg0;
     GXColor right_color;
     GXColor left_third_color;
     GXColor line_color;
@@ -1523,7 +1522,7 @@ void fn_8018DF68(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     s32 half;
 
     line_color = lbl_804DA69C;
-    thickness = data->x1C;
+    thickness = M2C_FIELD(arg0, f32*, 0x1C);
     first_color = line_color;
     {
         GXColor* color = &first_color;
@@ -1558,23 +1557,23 @@ void fn_8018DF68(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     DrawRectangle((f32) arg1, (f32) arg5, (f32) arg3 + thickness,
                   neg_thickness, &horizontal_color);
 
-    if (data->x20.g == 0) {
-        if (data->x4C == 0) {
-            slot0_vertical_color = data->x20;
+    if (M2C_FIELD(arg0, u8*, 0x21) == 0) {
+        if (M2C_FIELD(arg0, u8*, 0x4C) == 0) {
+            slot0_vertical_color = M2C_FIELD(arg0, GXColor*, 0x20);
             DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
                           &slot0_vertical_color);
-            slot0_horizontal_color = data->x20;
+            slot0_horizontal_color = M2C_FIELD(arg0, GXColor*, 0x20);
             DrawRectangle((f32) arg1, (f32) arg5, (f32) (arg3 / 2) + thickness,
                           neg_thickness, &slot0_horizontal_color);
             return;
         }
-        if (data->x78 == 0) {
+        if (M2C_FIELD(arg0, u8*, 0x78) == 0) {
             GXColor slot1_vertical_color;
             GXColor slot1_horizontal_color;
-            slot1_vertical_color = data->x20;
+            slot1_vertical_color = M2C_FIELD(arg0, GXColor*, 0x20);
             DrawRectangle((f32) left_third, (f32) arg2, thickness, (f32) arg4,
                           &slot1_vertical_color);
-            slot1_horizontal_color = data->x20;
+            slot1_horizontal_color = M2C_FIELD(arg0, GXColor*, 0x20);
             {
                 GXColor* color = &slot1_horizontal_color;
                 DrawRectangle((f32) left_third, (f32) arg5,
@@ -1583,14 +1582,14 @@ void fn_8018DF68(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
             }
             return;
         }
-        if (data->xA4 == 0) {
+        if (M2C_FIELD(arg0, u8*, 0xA4) == 0) {
             GXColor slot2_horizontal_color;
             GXColor slot2_vertical_color;
-            slot2_vertical_color = data->x20;
+            slot2_vertical_color = M2C_FIELD(arg0, GXColor*, 0x20);
             DrawRectangle((f32) right_third, (f32) arg2, thickness, (f32) arg4,
                           &slot2_vertical_color);
             half = arg3 / 2;
-            slot2_horizontal_color = data->x20;
+            slot2_horizontal_color = M2C_FIELD(arg0, GXColor*, 0x20);
             {
                 f32 y = (f32) arg5;
                 DrawRectangle((f32) (arg1 + half), y,
@@ -1599,11 +1598,11 @@ void fn_8018DF68(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
             }
             return;
         }
-        slot3_vertical_color = data->x20;
+        slot3_vertical_color = M2C_FIELD(arg0, GXColor*, 0x20);
         DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4,
                       &slot3_vertical_color);
         half = arg3 / 2;
-        slot3_horizontal_color = data->x20;
+        slot3_horizontal_color = M2C_FIELD(arg0, GXColor*, 0x20);
         {
             f32 y = (f32) arg5;
             GXColor* color = &slot3_horizontal_color;
@@ -2343,16 +2342,21 @@ void fn_8018FBE0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
 {
     s32 i;
 
-    gm_804771C4.cur_option = arg0;
-    gm_804771C4.x1C = arg1;
-    gm_804771C4.x20 = arg2;
+    ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->cur_option = arg0;
+    ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x1C = arg1;
+    ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x20 = arg2;
 
     for (i = 0; 64 > i; i++) {
-        gm_804771C4.x37[i].x2 = (u8) arg3;
-        gm_804771C4.x37[i].x1 = (u8) arg4;
-        gm_804771C4.x37[i].xD = (u8) i;
-        gm_804771C4.x37[i].x9 = (u16) arg5;
-        gm_804771C4.x37[i].x0 = (u8) arg6;
+        ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x37[i].x2 =
+            (u8) arg3;
+        ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x37[i].x1 =
+            (u8) arg4;
+        ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x37[i].xD =
+            (u8) i;
+        ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x37[i].x9 =
+            (u16) arg5;
+        ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x37[i].x0 =
+            (u8) arg6;
     }
 }
 

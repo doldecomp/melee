@@ -1239,7 +1239,7 @@ void fn_8019EF08(TmVsData* arg0)
 }
 
 /// @todo .data order hack
-void order_data_1(void)
+static void order_data_1(void)
 {
     (void) "ScGamTour_scene_data";
     (void) "ckind:%d\n";
