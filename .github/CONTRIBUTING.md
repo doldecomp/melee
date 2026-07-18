@@ -129,7 +129,7 @@ pre-commit run --all-files # Run the hook once on existing code
       ```c
       struct Player {
           /*  +0   */ u32 x0;
-          /*  +4   */ u8 pad_4[0xC];
+          /*  +4   */ char pad_4[0xC];
           /* +10   */ short x10;
           /* +12   */ u8 well_known_something;
           /* +13:0 */ bool enable_rumble: 1
@@ -258,6 +258,7 @@ decompilation dictates.
 - Unknown 32 bit pointer: `UNK_T`.
 - Enums: `enum_t` as a placeholder until the actual enum is defined.
 - OS Timestamps: `OSTime`
+- Struct padding: `char`
 
 ## <a name="enums"></a>Enums
 - Enum declarations should include a clear means of determining the value for each
