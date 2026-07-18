@@ -92,16 +92,7 @@ void grTPeach_802228B4(bool arg0) {}
 
 void grTPeach_802228B8(void)
 {
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-
-    grTPeach_80222958(0);
-    grTPeach_80222958(1);
-    grTPeach_80222958(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTPeach_80222958);
 }
 
 void grTpeach_UnkStage0_OnLoad(void) {}
@@ -148,10 +139,7 @@ void grTPeach_80222A78(Ground_GObj* gobj) {}
 
 void grTPeach_80222A7C(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTPeach_80222ACC(Ground_GObj* gobj)
@@ -169,10 +157,7 @@ void grTPeach_80222B08(Ground_GObj* gobj) {}
 
 void grTPeach_80222B0C(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTPeach_80222B5C(Ground_GObj* gobj)

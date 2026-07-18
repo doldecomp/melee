@@ -105,7 +105,7 @@ void ftCo_Barrel_Accessory1_Cb(Fighter_GObj* gobj)
 void fn_800C9290(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_GObj* owner = it_8026BC78(fp->mv.co.barrel.x8);
+    Fighter_GObj* owner = itGetOwner(fp->mv.co.barrel.x8);
     if (ftLib_80086960(owner)) {
         ftColl_8007B8CC(fp, owner);
     }

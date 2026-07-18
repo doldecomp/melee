@@ -110,7 +110,7 @@ struct gmm_x1CB0 {
 };
 
 struct FighterData {
-    /* 0x00 */ u16 fighter_kos[25];
+    /* 0x00 */ u16 fighter_kos[SELKIND_COUNT];
     /* 0x32 */ u8 padding_0x32[2];
     /* 0x34 */ u16 sd_count;
     /* 0x36 */ u8 padding_0x36[2];
@@ -188,7 +188,7 @@ struct NameTagData {
     /* 0x128 */ s32 coins_collected;
     /* 0x12C */ s32 coins_swiped;
     /* 0x130 */ s32 coins_lost;
-    /* 0x134 */ u32 play_time_by_fighter[25];
+    /* 0x134 */ u32 play_time_by_fighter[SELKIND_COUNT];
     /* 0x198 */ char namedata[8];
     /* 0x1A0 */ s8 x1A0;
     /* 0x1A1 */ u8 rumble_toggle;
@@ -248,19 +248,19 @@ struct gmm_retval_EDBC {
     u32 xC;
     int x10;
     u32 x14;
-    u16 x18[2];
-    u8 pad_x1C[0x4C - 0x1C];
+    u16 x18[SELKIND_COUNT];
     s32 x4C[4];
     u8 padding_x4C[0xB0 - 0x4C - 4 * 4];
-    s32 xB0[0x19];
-    int x114[0x19];
+    s32 xB0[SELKIND_COUNT];
+    int x114[SELKIND_COUNT];
 };
 
 struct gmm_x1868 {
-    /* 0x0000 */ u16 x1868; ///< unlocked characters bitmask
-    /* 0x0002 */ u16 x186A; ///< unlocked stages bitmask
-    /* 0x0004 */ u8 x186C;  ///< unlocked features bitmask - score
-                            ///< display/random stage etc...
+    /* 0x0000 */ u16
+        unlocked_characers_bitmask; ///< unlocked characters bitmask
+    /* 0x0002 */ u16 x186A;         ///< unlocked stages bitmask
+    /* 0x0004 */ u8 x186C;          ///< unlocked features bitmask - score
+                                    ///< display/random stage etc...
     /// @remarks this would make sense to be apart of x186C, but seems unused.
     // perhaps features got removed from the unlock system? item switch comes
     // to mind as plausible
@@ -308,11 +308,11 @@ struct gmm_x1868 {
     /* 0x0420 */ u32 x1C88[3];
     /* 0x042C */ u8 padding_x1C88[0x1C];
     /* 0x0448 */ struct gmm_x1CB0 x1CB0;
-    /* 0x0468 */ s16 x1CD0;
-    /* 0x046A */ s16 x1CD2;
-    /* 0x046C */ s32 x1CD4;
-    /* 0x0470 */ u8 padding_x1CD4[0x254];
-    /* 0x06C4 */ struct FighterData x1F2C[0x19];
+    /* 0x0468 */ s16 trophy_count;
+    /* 0x046A */ u16 trophy_category_flags;
+    /* 0x046C */ u16 trophy_flags[0x125];
+    /* 0x06B6 */ u8 padding_trophy_flags[0xE];
+    /* 0x06C4 */ struct FighterData x1F2C[SELKIND_COUNT];
     /* 0x1760 */ struct NameTagDataBank x2FF8[2];
 }; /* size = 0x55E8 */
 

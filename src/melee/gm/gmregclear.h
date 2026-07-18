@@ -48,7 +48,7 @@
 /* 17E280 */ s8 gm_8017E280(u16, u32);
 /* 17E318 */ int fn_8017E318(void);
 /* 17E3C8 */ void fn_8017E3C8(void);
-/* 17E424 */ UnkAdventureData* gm_8017E424(void);
+/* 17E424 */ UnkAdventureData* gm_GetAdventureData(void);
 /* 17E430 */ u8 gm_8017E430(void); ///< returns a player slot
 /* 17E440 */ u8 gm_8017E440(void);
 /* 17E48C */ u8 gm_8017E48C(GameScene*);
@@ -68,7 +68,7 @@
 /* 17E7E0 */ bool gm_8017E7E0(void);
 /* 17E7FC */ void gm_8017E7FC(u8);
 /* 17E8A4 */ void fn_8017E8A4(int);
-/* 17EB30 */ UnkAllstarData* gm_8017EB30(void);
+/* 17EB30 */ UnkAllstarData* gm_GetAllStarData(void);
 /* 17EB3C */ u8 gm_8017EB3C(u8, u8);
 /* 17EB64 */ u8 gm_8017EB64(u8 difficulty, u8 stage_slot, u8 arg2);
 /* 17EB98 */ u8 gm_8017EB98(u8 difficulty, u8 stage_slot, u8 arg2);

@@ -750,6 +750,7 @@ void gm_801B60A4_OnLoad(void)
     gm_803DEBE8_t* var_r30;
     int temp;
     gm_803DEBE8_t tmp;
+    u8* q;
     PAD_STACK(16);
 
     data = &gm_80473A18;
@@ -821,7 +822,7 @@ void gm_801B60A4_OnLoad(void)
         p->x76[0x17] = temp;
 
         if (i < 0x1A) {
-            u8* q = ((u8*) p) + i;
+            q = ((u8*) p) + i;
             i = 0x1A - i;
             do {
                 *(q++ + 0x76) = temp;

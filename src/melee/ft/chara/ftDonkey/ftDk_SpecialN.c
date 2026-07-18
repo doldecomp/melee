@@ -20,6 +20,7 @@
 #include "ftCommon/ftCo_Escape.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftCommon/inlines.h"
 #include "ftDonkey/types.h"
 
 #include "lb/forward.h"
@@ -459,9 +460,8 @@ void ftDk_SpecialNStart_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ft_80082708(gobj)) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialAirNStart, 0x0C4C5080,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftDk_MS_SpecialAirNStart,
+                                        ftDk_MF_SpecialN_CollCancel);
         setCallbacks(gobj);
     }
 }
@@ -470,9 +470,8 @@ void ftDk_SpecialNLoop_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ft_80082708(gobj)) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialAirNLoop, 0x0C4C5080,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftDk_MS_SpecialAirNLoop,
+                                        ftDk_MF_SpecialN_CollCancel);
         setCallbacks(gobj);
     }
 }
@@ -481,9 +480,8 @@ void ftDk_SpecialNCancel_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ft_80082708(gobj)) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialAirNCancel, 0x0C4C5080,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftDk_MS_SpecialAirNCancel,
+                                        ftDk_MF_SpecialN_CollCancel);
         setCallbacks(gobj);
     }
 }
@@ -492,9 +490,8 @@ void ftDk_SpecialN_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_800827A0(gobj) == 0) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialAirN, 0x0C4D508E,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftDk_MS_SpecialAirN,
+                                        ftDk_MF_SpecialN_Coll);
         setCallbacks(gobj);
     }
 }
@@ -503,9 +500,8 @@ void ftDk_SpecialNFull_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_800827A0(gobj) == 0) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialAirNFull, 0x0C4D508E,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftDk_MS_SpecialAirNFull,
+                                        ftDk_MF_SpecialN_Coll);
         setCallbacks(gobj);
     }
 }
@@ -514,9 +510,8 @@ void ftDk_SpecialAirNStart_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) == 1) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialNStart, 0x0C4C5080,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftDk_MS_SpecialNStart,
+                                        ftDk_MF_SpecialN_CollCancel);
         setCallbacks(gobj);
     }
 }
@@ -525,9 +520,8 @@ void ftDk_SpecialAirNLoop_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) == 1) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialNLoop, 0x0C4C5080,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftDk_MS_SpecialNLoop,
+                                        ftDk_MF_SpecialN_CollCancel);
         setCallbacks(gobj);
     }
 }
@@ -536,9 +530,8 @@ void ftDk_SpecialAirNCancel_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) == 1) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialNCancel, 0x0C4C5080,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftDk_MS_SpecialNCancel,
+                                        ftDk_MF_SpecialN_CollCancel);
         setCallbacks(gobj);
     }
 }
@@ -547,9 +540,8 @@ void ftDk_SpecialAirN_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj)) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialN, 0x0C4D508E,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftDk_MS_SpecialN,
+                                        ftDk_MF_SpecialN_Coll);
         setCallbacks(gobj);
     }
 }
@@ -558,9 +550,8 @@ void ftDk_SpecialAirNFull_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj)) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialNFull, 0x0C4D508E,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftDk_MS_SpecialNFull,
+                                        ftDk_MF_SpecialN_Coll);
         setCallbacks(gobj);
     }
 }

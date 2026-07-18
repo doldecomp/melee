@@ -14,11 +14,15 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftCommon/inlines.h"
 #include "ftZelda/types.h"
 #include "it/items/itzeldadinfire.h"
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx.h>
+
+static MotionFlags const ftZd_MF_SpecialSStart_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx;
 
 /// 8013B638 - 8013B6D8 (160 bytes)
 /// https://decomp.me/scratch/QnXK1
@@ -175,7 +179,7 @@ void ftZd_SpecialSLoop_Anim(HSD_GObj* gobj)
                                       NULL);
         }
     } else {
-        temp_r3 = it_802C3AF0(fp->fv.zd.x222C);
+        temp_r3 = itZeldaDinFire_GetOwner(fp->fv.zd.x222C);
 
         if (temp_r3 != gobj) {
             fp->fv.zd.x222C = NULL;
@@ -301,7 +305,7 @@ void ftZd_SpecialAirSLoop_Anim(HSD_GObj* gobj)
                                       NULL);
         }
     } else {
-        temp_r3 = it_802C3AF0(fp->fv.zd.x222C);
+        temp_r3 = itZeldaDinFire_GetOwner(fp->fv.zd.x222C);
 
         if (temp_r3 != gobj) {
             fp->fv.zd.x222C = NULL;
@@ -519,9 +523,8 @@ void ftZd_SpecialSStart_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == 0) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 346, 0x0C4C5082, fp->cur_anim_frame,
-                                  1.0, 0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, 346,
+                                        ftZd_MF_SpecialSStart_Coll);
     }
 }
 
@@ -533,9 +536,8 @@ void ftZd_SpecialSLoop_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == 0) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 347, 0x0C4C5080, fp->cur_anim_frame,
-                                  1.0, 0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, 347,
+                                        ftCommon_GroundAirColl_MF);
     }
 }
 
@@ -546,9 +548,8 @@ void ftZd_SpecialSEnd_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == 0) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 348, 0x0C4C5080, fp->cur_anim_frame,
-                                  1.0, 0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, 348,
+                                        ftCommon_GroundAirColl_MF);
     }
 }
 
@@ -559,9 +560,8 @@ void ftZd_SpecialAirSStart_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != 0) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, 343, 0x0C4C5082, fp->cur_anim_frame,
-                                  1.0, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, 343,
+                                        ftZd_MF_SpecialSStart_Coll);
     }
 }
 
@@ -572,9 +572,8 @@ void ftZd_SpecialAirSLoop_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != 0) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, 344, 0x0C4C5080, fp->cur_anim_frame,
-                                  1.0, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, 344,
+                                        ftCommon_GroundAirColl_MF);
     }
 }
 
@@ -585,8 +584,7 @@ void ftZd_SpecialAirSEnd_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != 0) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, 345, 0x0C4C5080, fp->cur_anim_frame,
-                                  1.0, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, 345,
+                                        ftCommon_GroundAirColl_MF);
     }
 }

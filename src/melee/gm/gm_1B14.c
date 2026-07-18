@@ -429,7 +429,7 @@ void gm_801B1788(GameScene* arg0)
     if (sss->start_game != 0) {
         gm_SetPendingSceneIndex(4);
         stage = sss->data.data.rules.xE;
-        gm_8018F634()->x28 = stage;
+        gm_GetTournamentData()->x28 = stage;
         return;
     }
     if (gm_804771C4.match_type == 0) {
@@ -437,7 +437,7 @@ void gm_801B1788(GameScene* arg0)
         gm_SetPendingSceneIndex(1);
         return;
     }
-    gm_8018F634()->x32 = 0;
+    gm_GetTournamentData()->x32 = 0;
     gm_SetPendingSceneIndex(2);
 }
 
@@ -511,7 +511,7 @@ void gm_801B1AD4(GameScene* arg0)
     gm_8016247C(gm_801688AC(&rmi->match_end));
     if (gm_804771C4.match_type == 0) {
         gm_SetPendingSceneIndex(1);
-        gm_8018F634()->cur_option = 0x1F;
+        gm_GetTournamentData()->cur_option = 0x1F;
         return;
     }
     gm_8019E634();

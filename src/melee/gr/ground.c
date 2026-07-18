@@ -80,7 +80,7 @@
 /* 1C1E94 */ static void Ground_801C1E94(void);
 /* 1C20E0 */ LightList** Ground_801C20E0(UnkArchiveStruct*, LightList**);
 /* 1C24F8 */ static bool Ground_801C24F8(s32, u32, s32*);
-/* 1C28CC */ void Ground_801C28CC(void*, s32);
+/* 1C28CC */ void Ground_801C28CC(s32*, s32);
 /* 1C2BBC */ static void Ground_801C2BBC(HSD_GObj*, s32);
 /* 1C2BD4 */ static void Ground_801C2BD4(void*);
 /* 1C34AC */ void Ground_801C34AC(s32, HSD_JObj*, struct HSD_Joint*);
@@ -1163,18 +1163,62 @@ typedef struct LightOverrideEntry {
     /* 0x5 */ u8 _pad[3];
 } LightOverrideEntry;
 
+static inline HSD_LightDesc* get_light_desc_inline(LightList** list)
+{
+    return *(HSD_LightDesc**) *list;
+}
+
+static inline bool find_light_override(UnkArchiveStruct* archive,
+                                       HSD_LightDesc* desc, bool* b6, bool* b7,
+                                       bool* b5)
+{
+    UnkStageDat* dat = archive->unk4;
+    s32 count = dat->unk1C;
+    s32 i;
+
+    if (count != 0) {
+        for (i = 0; i < count; i++) {
+            LightOverrideEntry* arr = dat->unk18;
+            if (arr[i].desc == desc) {
+                *b6 = arr[i].b;
+                *b7 = arr[i].a;
+                *b5 = arr[i].c;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+static inline bool find_light_override_in_dat(UnkStageDat* dat,
+                                              HSD_LightDesc* desc, bool* b6,
+                                              bool* b7, bool* b5)
+{
+    s32 count = dat->unk1C;
+    s32 i;
+
+    (void) dat;
+    if (count != 0) {
+        for (i = 0; i < count; i++) {
+            LightOverrideEntry* arr = dat->unk18;
+            if (arr[i].desc == desc) {
+                *b6 = arr[i].b;
+                *b7 = arr[i].a;
+                *b5 = arr[i].c;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lightset)
 {
     LightList** out;
     LightList** clean;
-    LightOverrideEntry* arr;
-    UnkStageDat* dat;
-    HSD_LightDesc* desc;
-    s32 count;
-    s32 i;
     bool found;
     LightList** walker;
-    s32 b6, b7, b5;
+    bool b6, b7, b5;
     bool matched;
 
     HSD_ASSERT(1907, lightset);
@@ -1183,23 +1227,7 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lightset)
     walker = lightset;
     matched = 0;
     while (*walker != NULL) {
-        dat = archive->unk4;
-        desc = (*walker)->desc;
-        count = dat->unk1C;
-        if (count != 0) {
-            for (i = 0; i < count; i++) {
-                arr = dat->unk18;
-                if (arr[i].desc == desc) {
-                    found = true;
-                    b6 = arr[i].b;
-                    b7 = arr[i].a;
-                    b5 = arr[i].c;
-                    goto search1_done;
-                }
-            }
-        }
-        found = false;
-    search1_done:
+        found = find_light_override(archive, (*walker)->desc, &b6, &b7, &b5);
         if (found != 0 && (b6 != 0 || b7 != 0 || b5 != 0)) {
             matched = 1;
             break;
@@ -1213,36 +1241,25 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lightset)
 
     out = lightset;
     while (*out != NULL) {
-        desc = *(HSD_LightDesc**) *out;
-        if (desc->flags & 3) {
-            dat = archive->unk4;
-            (void) dat;
-            count = dat->unk1C;
-            if (count != 0) {
-                for (i = 0; i < count; i++) {
-                    arr = dat->unk18;
-                    if (arr[i].desc == desc) {
-                        found = true;
-                        b6 = arr[i].b;
-                        b7 = arr[i].a;
-                        b5 = arr[i].c;
-                        goto search2_done;
-                    }
-                }
-            }
-            found = false;
-        search2_done:
+        HSD_LightDesc* desc = get_light_desc_inline(out);
+        u16* flags = &desc->flags;
+        if (*flags & 3) {
+            found =
+                find_light_override_in_dat(archive->unk4, desc, &b6, &b7, &b5);
             if (found == 0 || (b6 == 0 && b7 == 0 && b5 == 0)) {
                 clean = out;
-                while ((clean[0] = clean[1]) != NULL) {
+                do {
+                    if ((clean[0] = clean[1]) == NULL) {
+                        break;
+                    }
                     clean++;
-                }
+                } while (true);
                 out--;
             } else {
                 if (b6) {
-                    desc->flags |= 4;
+                    *flags |= 4;
                 } else {
-                    desc->flags &= ~4;
+                    *flags &= ~4;
                 }
                 if (b7) {
                     (*(HSD_LightDesc**) *out)->flags |= 8;
@@ -1342,7 +1359,7 @@ static bool Ground_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                     }
                     break;
                 case 3:
-                    if (gm_80164840(CKIND_MARS) &&
+                    if (gm_IsCKindUnlocked(CKIND_MARS) &&
                         (phi_r30->x16 > HSD_Randi(RANDI_MAX) || temp_r25))
                     {
                         arg1 |= 2;
@@ -1351,7 +1368,7 @@ static bool Ground_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                     }
                     break;
                 case 4:
-                    if (gm_80164840(CKIND_CLINK) &&
+                    if (gm_IsCKindUnlocked(CKIND_CLINK) &&
                         (phi_r30->x16 > HSD_Randi(RANDI_MAX) || temp_r25))
                     {
                         arg1 |= 2;
@@ -1454,48 +1471,31 @@ static char msg1[] =
     "             check StageParam.csv or StageItem.csv, stdata.c\n";
 static char msg2[] = " stageid=%d\n";
 
-void Ground_801C28CC(void* arg0, s32 arg1)
+static inline void reportStageParams(s32 count)
+{
+    s32 i;
+
+    OSReport(msg1);
+    {
+        UnkBgmStruct* p = stage_info.param->xB0;
+        for (i = 0; i < count; i++, p++) {
+            OSReport(msg2, p->x0);
+        }
+    }
+}
+
+void Ground_801C28CC(s32* arg0, s32 arg1)
 {
     UnkBgmStruct* bgm = stage_info.param->xB0;
     s32 count = stage_info.param->xB4;
     s32 i;
 
-    PAD_STACK(16);
-
     for (i = 0; i < count; i++) {
         if (bgm->x0 == arg1) {
-            UnkBgmStruct* b = bgm;
-            s32* out = (s32*) arg0;
-            s32 k;
-            s32 n = 0;
-            for (k = 0; k < 4; k++) {
-                out[0] = *(s16*) ((u8*) stage_info.param + n + 0x6A) *
-                         *(s16*) ((u8*) b + 0x1A);
-                out[1] = *(s16*) ((u8*) stage_info.param + n + 0x6C) *
-                         *(s16*) ((u8*) b + 0x1C);
-                out[2] = *(s16*) ((u8*) stage_info.param + n + 0x6E) *
-                         *(s16*) ((u8*) b + 0x1E);
-                out[3] = *(s16*) ((u8*) stage_info.param + n + 0x70) *
-                         *(s16*) ((u8*) b + 0x20);
-                out[4] = *(s16*) ((u8*) stage_info.param + n + 0x72) *
-                         *(s16*) ((u8*) b + 0x22);
-                out[5] = *(s16*) ((u8*) stage_info.param + n + 0x74) *
-                         *(s16*) ((u8*) b + 0x24);
-                out[6] = *(s16*) ((u8*) stage_info.param + n + 0x76) *
-                         *(s16*) ((u8*) b + 0x26);
-                out[7] = *(s16*) ((u8*) stage_info.param + n + 0x78) *
-                         *(s16*) ((u8*) b + 0x28);
-                b = (UnkBgmStruct*) ((u8*) b + 0x10);
-                out += 8;
-                n += 0x10;
-            }
-            if ((n >> 1) < 0x23) {
-                s16* bp = (s16*) ((u8*) b + 0x1A);
-                do {
-                    *out++ =
-                        *(s16*) ((u8*) stage_info.param + n + 0x6A) * *bp++;
-                    n += 2;
-                } while ((n >> 1) < 0x23);
+            s32 j;
+            for (j = 0; 0x23 > j; j++) {
+                arg0[j] = ((s16*) stage_info.param)[0x35 + j] *
+                          ((s16*) bgm)[0xD + j];
             }
             return;
         }
@@ -1503,14 +1503,7 @@ void Ground_801C28CC(void* arg0, s32 arg1)
     }
 
     OSReport(msg0, __FILE__, 0x906, stage_info.internal_stage_id, arg1, count);
-    OSReport(msg1);
-    {
-        UnkBgmStruct* p = stage_info.param->xB0;
-        for (i = 0; i < count; i++) {
-            OSReport(msg2, p->x0);
-            p++;
-        }
-    }
+    reportStageParams(count);
     while (1) {
     }
 }
@@ -1893,10 +1886,10 @@ u32 unknown[] = {
 void Ground_801C34AC(s32 map_id, HSD_JObj* root, struct HSD_Joint* joint)
 {
     HSD_JObj* jobj;
-    StageInfo* stageinfo;
     UnkStageDat* stage_dat;
     UnkArchiveStruct* archive;
     int entry_count;
+    int i;
     struct {
         void* joint;
         s16* pairs;
@@ -1905,9 +1898,7 @@ void Ground_801C34AC(s32 map_id, HSD_JObj* root, struct HSD_Joint* joint)
     int count;
     s16* pair;
     int prev_index;
-    int jobj_index;
     int target;
-    int i;
     int j;
 
     jobj = root;
@@ -1926,31 +1917,31 @@ void Ground_801C34AC(s32 map_id, HSD_JObj* root, struct HSD_Joint* joint)
     if (entry_count == 0) {
         return;
     }
+    i = 0;
     entry = stage_dat->unk0;
-    for (i = 0; i < entry_count; i++, entry++) {
-        if (entry->joint == joint) {
-            break;
+    while (1) {
+        if (i < entry_count) {
+            if (entry->joint == joint) {
+                break;
+            }
+        } else {
+            return;
         }
-    }
-    if (i >= entry_count) {
-        return;
+        entry++;
+        i++;
     }
     count = entry->pair_count;
-    stageinfo = &stage_info;
     pair = entry->pairs;
-    if (count <= 0) {
-        return;
-    }
     for (j = count; j > 0; j--) {
         target = pair[0];
         if (prev_index > target || prev_index == -1) {
             jobj = root;
-            jobj_index = 0;
+            i = 0;
         } else {
-            jobj_index = prev_index;
+            i = prev_index;
         }
         while (jobj != NULL) {
-            if (jobj_index == target) {
+            if (i == target) {
                 break;
             }
             if (!(jobj->flags & JOBJ_INSTANCE) &&
@@ -1972,17 +1963,16 @@ void Ground_801C34AC(s32 map_id, HSD_JObj* root, struct HSD_Joint* joint)
                     jobj = HSD_JObjGetParent(jobj);
                 }
             }
-            jobj_index++;
+            i++;
         }
-        prev_index = jobj_index;
-        stageinfo->x280[pair[1]] = jobj;
+        prev_index = i;
+        stage_info.x280[pair[1]] = jobj;
         pair += 2;
     }
 }
 
 void Ground_801C36F4(int map_id, HSD_JObj* root, UNK_T joint)
 {
-    HSD_JObj* parent;
     HSD_JObj* jobj;
     UnkStageDat* stage_dat;
     UnkArchiveStruct* archive;
@@ -2026,8 +2016,8 @@ entry_found:
         jobj = stage_info.x280[i];
         (void) jobj;
         if (jobj != NULL) {
-            while ((parent = jobj->parent) != NULL) {
-                jobj = parent;
+            while (jobj->parent != NULL) {
+                jobj = jobj->parent;
             }
             if (jobj == root) {
                 stage_info.x280[i] = NULL;
@@ -2588,20 +2578,22 @@ static void Ground_801C4640(HSD_GObj* gobj, int unused)
 
 static LightList** Ground_801C466C_inline(void)
 {
-    StageCallbacks* var_r26;
+    StageCallbacks* callbacks;
+    UnkArchiveStruct* archive;
     int i;
-    int temp_r28;
+    int count;
 
-    temp_r28 = grDatFiles_GetArchive()->unk4->unkC;
-    var_r26 = Ground_803DFEDC[stage_info.internal_stage_id]->callbacks;
-    grDatFiles_GetArchive();
+    archive = grDatFiles_GetArchive();
+    callbacks = Ground_803DFEDC[stage_info.internal_stage_id]->callbacks;
+    count = archive->unk4->unkC;
+    archive = grDatFiles_GetArchive();
 
-    for (i = 0; i < temp_r28; i++) {
-        if (var_r26->flags_b0 == 1) {
-            UnkArchiveStruct* archive = grDatFiles_801C6330(i);
+    for (i = 0; i < count; i++) {
+        if (callbacks->flags_b0 == 1) {
+            archive = grDatFiles_801C6330(i);
             return Ground_801C20E0(archive, archive->unk4->unk8[i].x18);
         }
-        var_r26++;
+        callbacks++;
     }
     return NULL;
 }

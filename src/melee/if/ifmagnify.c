@@ -179,7 +179,7 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
     player = arg0->user_data;
     slot = player - ifMagnify_804A1DE0.player;
     is_colored = false;
-    if ((gm_8016AE38()->hud_enabled == 0) || ifAll_IsHUDHidden() ||
+    if ((gm_16AE_GetUnkData_0()->hud_enabled == 0) || ifAll_IsHUDHidden() ||
         Camera_80030130())
     {
         should_display = false;
@@ -227,6 +227,8 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
 
 void ifMagnify_802FBBDC(HSD_GObj* arg0)
 {
+    int i;
+    f32 mix2;
     f32 right;
     ifMagnify* magnify;
     HSD_CObj* cobj;
@@ -247,10 +249,8 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
     f32 y_class;
     f32 mix0;
     f32 mix1;
-    f32 mix2;
     f32 mix3;
     GXColor result;
-    int i;
     int j;
     u8* color_ids;
     bool should_display;
@@ -261,7 +261,7 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
         magnify->player[i].state.is_offscreen = 0;
     }
 
-    if ((gm_8016AE38()->hud_enabled == 0) || ifAll_IsHUDHidden() ||
+    if ((gm_16AE_GetUnkData_0()->hud_enabled == 0) || ifAll_IsHUDHidden() ||
         Camera_80030130())
     {
         should_display = false;
@@ -592,7 +592,7 @@ void ifMagnify_802FC870(void)
 
     memzero(&ifMagnify_804A1DE0, 0x74);
     ifMagnify_802FC7C0(&ifMagnify_804A1DE0);
-    archive = ifAll_802F3690();
+    archive = ifAll_GetArchive();
     lbArchive_LoadSections(*archive, (void**) &ifMagnify_804A1DE0, "lupe", 0);
     i = 0;
     do {

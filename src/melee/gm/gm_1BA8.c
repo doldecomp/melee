@@ -4,6 +4,8 @@
 
 #include "gm_unsplit.h"
 
+#include "ft/forward.h"
+
 #include "vi/vi1201v1.h"
 
 #include <sysdolphin/baselib/controller.h>
@@ -225,9 +227,9 @@ s32 gm_801BAC9C(GameScene* arg0, s32 arg1)
         (struct gm_event_char_list*) (*gm_804D6900)[ev->unk_535]->x4;
     PAD_STACK(8);
 
-    for (i = 0; i < 0x21; i++) {
+    for (i = 0; i < CHKIND_MAX; i++) {
         u8 c = src->c_kind[i];
-        if ((s32) c == 0x21) {
+        if ((s32) c == CHKIND_MAX) {
             break;
         }
         {
@@ -925,14 +927,13 @@ s32 gm_801BBB64(void)
             ev->x50[2] = ((u8*) event_entry)[3];
             return (s32) event_entry;
         }
-        return result;
     case 43:
         x4 = (*pp)->x4;
         event_entry = (void*) x4->x4;
         ev->x4C[2] = *(s8*) event_entry;
         event_entry = (void*) x4->x4;
         ev->x50[2] = ((u8*) event_entry)[3];
-        result = (s32) event_entry;
+        return result = (s32) event_entry;
         /* fallthrough */
     default:
         return result;
@@ -1068,7 +1069,7 @@ s32 gm_801BC00C(void)
     case 39:
     case 48:
         if (ev->x20 > 0) {
-            mi = gm_8016AE44();
+            mi = gm_16AE_GetUnkData_1();
             mi->timer_seconds = ev->x2C;
             mi->unk_2C = ev->x30;
         }
@@ -1789,7 +1790,7 @@ void gm_801BC754(HSD_GObj* gobj)
     PAD_STACK(0x48);
 
     temp_r29 = &gmMainLib_804D3EE0->unk_530;
-    switch (gm_8016AE38()->x24C8.x0_0) {
+    switch (gm_16AE_GetUnkData_0()->x24C8.x0_0) {
     case 1:
         count = 0;
         temp_r28 = &gmMainLib_804D3EE0->unk_530;
@@ -1819,7 +1820,7 @@ void gm_801BC754(HSD_GObj* gobj)
             return;
         }
         temp_r28_2 = &gmMainLib_804D3EE0->unk_530;
-        temp_r3 = gm_8016AE38();
+        temp_r3 = gm_16AE_GetUnkData_0();
         if (temp_r28_2->xB_0) {
             var_r0 = false;
         } else if (temp_r3->x24C8.x0_6 && gm_8016AEEC() == 0 &&
@@ -1843,7 +1844,7 @@ void gm_801BC754(HSD_GObj* gobj)
     case 0:
     case 2:
         temp_r28_3 = &gmMainLib_804D3EE0->unk_530;
-        temp_r3_2 = gm_8016AE38();
+        temp_r3_2 = gm_16AE_GetUnkData_0();
         if (temp_r28_3->xB_0) {
             var_r0_2 = false;
         } else if (temp_r3_2->x24C8.x0_6 && gm_8016AEEC() == 0 &&
@@ -1886,7 +1887,7 @@ void gm_801BC9E8(HSD_GObj* gobj)
         return;
     }
     temp_r30_2 = &gmMainLib_804D3EE0->unk_530;
-    temp_r3 = gm_8016AE38();
+    temp_r3 = gm_16AE_GetUnkData_0();
     if (temp_r30_2->xB_0) {
         var_r0 = false;
     } else if (temp_r3->x24C8.x0_6 && gm_8016AEEC() == 0 &&
@@ -1925,7 +1926,7 @@ void gm_801BCAF0(HSD_GObj* gobj)
         if ((Player_GetStocks(var_r30) <= 0) &&
             (temp_r3 = Player_GetEntity(var_r30), ((temp_r3 == NULL) == 0)))
         {
-            if (ftLib_800872A4(temp_r3) == FTKIND_SEAK) {
+            if (ftLib_GetKind(temp_r3) == FTKIND_SEAK) {
                 var_r0 = 1;
             } else {
                 Player_SetStocks(var_r30, 1);
@@ -1957,7 +1958,7 @@ void gm_801BCAF0(HSD_GObj* gobj)
         return;
     }
     temp_r30 = &gmMainLib_804D3EE0->unk_530;
-    temp_r3_2 = gm_8016AE38();
+    temp_r3_2 = gm_16AE_GetUnkData_0();
     if (temp_r30->xB_0) {
         var_r0_2 = 0;
     } else if (temp_r3_2->x24C8.x0_6 && gm_8016AEEC() == 0 &&
@@ -2047,7 +2048,7 @@ void gm_801BCC9C(HSD_GObj* arg0)
     }
     {
         struct EventData* temp_r31 = &gmMainLib_804D3EE0->unk_530;
-        mi = gm_8016AE38();
+        mi = gm_16AE_GetUnkData_0();
         if (temp_r31->xB_0) {
             var_r0 = 0;
         } else if (((*(u8*) &mi->x24C8 >> 1U) & 1) && gm_8016AEEC() == 0 &&
@@ -2094,7 +2095,7 @@ void gm_801BCF40(HSD_GObj* gobj)
         return;
     }
     temp_r31 = &gmMainLib_804D3EE0->unk_530;
-    temp_r3 = gm_8016AE38();
+    temp_r3 = gm_16AE_GetUnkData_0();
     if (temp_r31->xB_0) {
         var_r0 = false;
     } else if (temp_r3->x24C8.x0_6 && gm_8016AEEC() == 0 &&
@@ -2139,7 +2140,7 @@ void gm_801BD028(HSD_GObj* arg0)
         return;
     }
     ev = &gmMainLib_804D3EE0->unk_530;
-    rules = gm_8016AE38();
+    rules = gm_16AE_GetUnkData_0();
     if (ev->xB_0) {
         cond = 0;
     } else if (rules->x24C8.x0_6 && gm_8016AEEC() == 0 &&
@@ -2189,7 +2190,7 @@ void gm_801BD164(HSD_GObj* gobj)
         return;
     }
     temp_r30_2 = &gmMainLib_804D3EE0->unk_530;
-    temp_r3 = gm_8016AE38();
+    temp_r3 = gm_16AE_GetUnkData_0();
     if (temp_r30_2->xB_0) {
         var_r0 = 0;
     } else if (temp_r3->x24C8.x0_6 && gm_8016AEEC() == 0 &&
@@ -2241,7 +2242,7 @@ void gm_801BD30C(HSD_GObj* gobj)
         return;
     }
     temp_r31 = &gmMainLib_804D3EE0->unk_530;
-    temp_r3 = gm_8016AE38();
+    temp_r3 = gm_16AE_GetUnkData_0();
     if (temp_r31->xB_0) {
         var_r0 = 0;
     } else if (temp_r3->x24C8.x0_6 && gm_8016AEEC() == 0 &&
@@ -2311,7 +2312,7 @@ void gm_801BD46C(HSD_GObj* gobj)
         return;
     }
     temp_r31 = &gmMainLib_804D3EE0->unk_530;
-    temp_r3 = gm_8016AE38();
+    temp_r3 = gm_16AE_GetUnkData_0();
     if (temp_r31->xB_0) {
         var_r0 = 0;
     } else if (temp_r3->x24C8.x0_6 && gm_8016AEEC() == 0 &&
@@ -2372,7 +2373,7 @@ void gm_801BD658(HSD_GObj* gobj)
         return;
     }
     temp_r28_2 = &gmMainLib_804D3EE0->unk_530;
-    temp_r3 = gm_8016AE38();
+    temp_r3 = gm_16AE_GetUnkData_0();
     if (temp_r28_2->xB_0) {
         var_r0 = false;
     } else if (temp_r3->x24C8.x0_6 && gm_8016AEEC() == 0 &&
@@ -2417,7 +2418,7 @@ void gm_801BD7FC(HSD_GObj* gobj)
         return;
     }
     temp_r31 = &gmMainLib_804D3EE0->unk_530;
-    temp_r3 = gm_8016AE38();
+    temp_r3 = gm_16AE_GetUnkData_0();
     if (temp_r31->xB_0) {
         var_r0 = false;
     } else if (temp_r3->x24C8.x0_6 && gm_8016AEEC() == 0 &&
@@ -2473,7 +2474,7 @@ void gm_801BD93C(HSD_GObj* gobj)
         return;
     }
     temp_r31 = &gmMainLib_804D3EE0->unk_530;
-    temp_r3 = gm_8016AE38();
+    temp_r3 = gm_16AE_GetUnkData_0();
     if (temp_r31->xB_0) {
         var_r0 = false;
     } else if (temp_r3->x24C8.x0_6 && gm_8016AEEC() == 0 &&
@@ -2510,7 +2511,7 @@ void gm_801BDAF4(HSD_GObj* arg0)
     PAD_STACK(0x10);
 
     temp_r30 = &gmMainLib_804D3EE0->unk_530;
-    temp_r3 = gm_8016AE38();
+    temp_r3 = gm_16AE_GetUnkData_0();
     if (temp_r30->xB_0) {
         var_r0 = false;
     } else if (temp_r3->x24C8.x0_6 && gm_8016AEEC() == 0 &&
@@ -2561,7 +2562,7 @@ void gm_801BDC08(HSD_GObj* arg0)
         return;
     }
     temp_r31 = &gmMainLib_804D3EE0->unk_530;
-    temp_r3 = gm_8016AE38();
+    temp_r3 = gm_16AE_GetUnkData_0();
     if (temp_r31->xB_0) {
         var_r0 = false;
     } else if (temp_r3->x24C8.x0_6 && gm_8016AEEC() == 0 &&
@@ -2606,7 +2607,7 @@ void gm_801BDD44(HSD_GObj* arg0)
         return;
     }
     temp_r31 = &gmMainLib_804D3EE0->unk_530;
-    temp_r3 = gm_8016AE38();
+    temp_r3 = gm_16AE_GetUnkData_0();
     if (temp_r31->xB_0) {
         var_r0 = false;
     } else if (temp_r3->x24C8.x0_6 && gm_8016AEEC() == 0 &&
@@ -2767,7 +2768,7 @@ void gm_801BDE94(HSD_GObj* arg0)
     }
     {
         struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
-        lbl_8046B6A0_t* info = gm_8016AE38();
+        lbl_8046B6A0_t* info = gm_16AE_GetUnkData_0();
         int do_end;
         if (ev2->xB_0) {
             do_end = 0;
@@ -2857,7 +2858,7 @@ void gm_801BE39C(HSD_GObj* gobj)
         gm_8016EDDC(2, &sp40);
     }
     temp_r27_5 = &gmMainLib_804D3EE0->unk_530;
-    temp_r3_2 = gm_8016AE38();
+    temp_r3_2 = gm_16AE_GetUnkData_0();
     if (temp_r27_5->xB_0) {
         var_r0 = false;
     } else if (temp_r3_2->x24C8.x0_6 && gm_8016AEEC() == 0 &&
@@ -2925,7 +2926,7 @@ void gm_801BE638(HSD_GObj* gobj)
     if (Player_GetRemainingHP(1) <= 0 && Player_GetRemainingHP(2) <= 0) {
         temp_r28_2 = temp_r31 + temp_r29;
         if (temp_r30->x10 == 0) {
-            lbl_8046B6A0_t* tmp = gm_8016AE38();
+            lbl_8046B6A0_t* tmp = gm_16AE_GetUnkData_0();
             tmp->hud_enabled = 0;
             if (temp_r30->x18 == 1) {
                 temp_r30->x18 = 2;
@@ -2937,7 +2938,7 @@ void gm_801BE638(HSD_GObj* gobj)
             Player_80031790(0);
             Player_80036844(0, 1);
             temp_r30->x34 = gm_8016AEDC();
-            temp_r3 = gm_8016AE38();
+            temp_r3 = gm_16AE_GetUnkData_0();
             temp_r3->x24C8.x0_6 = false;
         }
         if (temp_r30->x10 == temp_r31) {
@@ -3002,7 +3003,7 @@ void gm_801BE638(HSD_GObj* gobj)
         return;
     }
     temp_r28_4 = &gmMainLib_804D3EE0->unk_530;
-    temp_r3_4 = gm_8016AE38();
+    temp_r3_4 = gm_16AE_GetUnkData_0();
     if (temp_r28_4->xB_0) {
         var_r0 = 0;
     } else if (temp_r3_4->x24C8.x0_6 && gm_8016AEEC() == 0 &&
@@ -3109,7 +3110,7 @@ u8 gm_801BEBF8(u8 arg0)
 
     entry = array[i];
     if (entry == NULL) {
-        return 0x21;
+        return CHKIND_NONE;
     }
 
     ptr = *(u8**) ((u8*) entry + 0x14);
@@ -3191,23 +3192,23 @@ void gm_801BEE58(GameScene* arg0)
 void gm_801BEE9C(GameScene* arg0)
 {
     s8* game_mode;
-    u8 temp_r27; ///< maybe CharacterKind?
+    u8 ckind;
 
     game_mode = arg0->info.leave_data;
-    temp_r27 = gm_80173224(gm_801BF030(), 1);
+    ckind = gm_80173224(gm_801BF030(), 1);
     if (gm_801BEFB0() == CKIND_GAMEWATCH && !gm_80164430(0x1B)) {
         gm_80164504(0x1B);
     }
     gm_8017390C(gm_801BF030(), 1);
     gm_80173EEC();
     gm_80172898(0x40);
-    if (temp_r27 == 0x21) {
+    if (ckind == CHKIND_NONE) {
         if (!gm_80173754(1, gm_801BEFD0())) {
             gm_SetPendingGameMode(*game_mode);
         }
     } else {
         gm_801736E8(gm_801BEFB0(), gm_801BEFD0(), gm_801BF010(), gm_801BEFF0(),
-                    temp_r27, *game_mode);
+                    ckind, *game_mode);
         gm_SetPendingGameMode(GM_CHALLENGER_APPROACH);
     }
     gm_SetNewGameModePending();
@@ -3364,7 +3365,7 @@ void gm_801BF128(void)
     count = 0;
     c = 0;
     do {
-        if (gm_80164840(c) != 0) {
+        if (gm_IsCKindUnlocked(c) != 0) {
             character_pool[count] = c;
             count += 1;
         }

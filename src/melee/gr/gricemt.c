@@ -1152,51 +1152,19 @@ void grIceMt_801F8CDC(Ground_GObj* gobj, s16* joint_indices, int block_num,
     }
 }
 
-s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
+static inline s32 grIceMt_GetRandomIndex(s32 max, s32* list)
 {
-    s32 list[12];
-    s32 max;
-    s32 i;
-    s32 pick;
-    s32 chosen;
-    Ground* gp;
-    s16 a;
-    s16 b;
+    return list[max != 0 ? HSD_Randi(max) : 0];
+}
+
+static inline void grIceMt_GetRandomTimer(s32* out)
+{
+    s32 a;
+    s32 b;
     s32 d;
 
-    max = 0;
-    gp = arg0->user_data;
-
-    {
-        Ground* g = gp;
-        s32* p = &list[max];
-        for (i = 0; i < 12; i++) {
-            if (g->gv.icemt.xDC == 0 && (Stage_80225194() != 0xD4 || i >= 4)) {
-                *p = i;
-                p++;
-                max++;
-            }
-            g = (Ground*) ((u8*) g + 2);
-        }
-    }
-
-    HSD_ASSERT(0x81D, max);
-    pick = max != 0 ? HSD_Randi(max) : 0;
-    chosen = list[pick];
-
-    {
-        Ground* g = gp;
-        for (i = 0; i < 12; i++) {
-            if (g->gv.icemt.xDC > 0) {
-                g->gv.icemt.xDC--;
-            }
-            g = (Ground*) ((u8*) g + 2);
-        }
-    }
-
-    (&gp->gv.icemt.xDC)[chosen] = *(s16*) ((u8*) grIm_804D69F4 + 2);
-    a = *(s16*) ((u8*) grIm_804D69F4 + 0x36);
-    b = *(s16*) ((u8*) grIm_804D69F4 + 0x38);
+    a = ((s16*) grIm_804D69F4)[0x36 / 2];
+    b = ((s16*) grIm_804D69F4)[0x38 / 2];
     if (a > b) {
         d = a - b;
         a = b + (d != 0 ? HSD_Randi(d) : 0);
@@ -1205,6 +1173,46 @@ s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
         a = a + (d != 0 ? HSD_Randi(d) : 0);
     }
     *out = a;
+}
+
+s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
+{
+    typedef struct IceMtTimerCursor {
+        s16 pad[0x6E];
+        s16 xDC;
+    } IceMtTimerCursor;
+    IceMtTimerCursor* timer;
+    IceMtTimerCursor* timer_base;
+    s32* p;
+    s32 i;
+    s32 max;
+    s32 list[12];
+    s32 chosen;
+
+    timer_base = timer = arg0->user_data;
+    p = &list[max = 0];
+    for (i = 0; i < 12; i++) {
+        if (timer->xDC == 0 && (Stage_80225194() != 0xD4 || i >= 4)) {
+            *p = i;
+            p++;
+            max++;
+        }
+        timer = (IceMtTimerCursor*) ((s16*) timer + 1);
+    }
+
+    HSD_ASSERT(0x81D, max);
+    chosen = grIceMt_GetRandomIndex(max, list);
+
+    timer = timer_base;
+    for (i = 0; i < 12; i++) {
+        if (timer->xDC > 0) {
+            timer->xDC--;
+        }
+        timer = (IceMtTimerCursor*) ((s16*) timer + 1);
+    }
+
+    (&timer_base->xDC)[chosen] = ((s16*) grIm_804D69F4)[1];
+    grIceMt_GetRandomTimer(out);
     return chosen;
 }
 
@@ -1772,12 +1780,17 @@ int grIceMt_801FA500(HSD_GObj* arg0, HSD_JObj* arg1)
         } else if (HSD_JObjGetNext(jobj) != NULL) {
             jobj = HSD_JObjGetNext(jobj);
         } else {
-            while (HSD_JObjGetParent(jobj) != NULL &&
-                   HSD_JObjGetNext(HSD_JObjGetParent(jobj)) == NULL)
-            {
+            while (true) {
+                if (HSD_JObjGetParent(jobj) == NULL) {
+                    jobj = NULL;
+                    break;
+                }
+                if (HSD_JObjGetNext(HSD_JObjGetParent(jobj)) != NULL) {
+                    jobj = HSD_JObjGetNext(HSD_JObjGetParent(jobj));
+                    break;
+                }
                 jobj = HSD_JObjGetParent(jobj);
             }
-            jobj = HSD_JObjGetNext(HSD_JObjGetParent(jobj));
         }
         count++;
     }

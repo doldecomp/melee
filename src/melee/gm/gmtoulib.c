@@ -235,7 +235,7 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
     u8* px3;
     u8 x3;
 
-    TmData* tm = gm_8018F634();
+    TmData* tm = gm_GetTournamentData();
 
     entry = &entries[entry_idx];
     sub = (u8*) entry + slot_idx * (s32) 0x2C;
@@ -467,7 +467,7 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
 
 void fn_8018B090(HSD_GObj* arg0)
 {
-    TmData* tm = gm_8018F634();
+    TmData* tm = gm_GetTournamentData();
     s32 var_r24 = 0;
     s32 idx = fn_8018F74C();
     BracketEntry* base;
@@ -1127,7 +1127,7 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8, c9;
     GXColor c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     c20 = lbl_804DA684;
     c0 = lbl_804DA684;
     thickness = data->x1C;
@@ -1548,7 +1548,7 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
     f32 pos;
     f32 pos_multiplier;
 
-    td = gm_8018F634();
+    td = gm_GetTournamentData();
     bracket_idx = 0;
     entry = lbl_80473AB8;
 
@@ -1648,7 +1648,7 @@ void fn_8018ECA8(s32 char_id, s32 name_type, s32 jobj_idx1, f32 pos_x,
     TmData* tm;
     s32 num;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
 
     hmn_texts[0] = lbl_804DA6B4;
     cpu_texts[0] = lbl_804DA6BC;
@@ -1764,7 +1764,7 @@ s32 gm_8018F1B0(MatchEnd* me)
 {
     TmData* tm;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
 
     switch (gm_804771C4.match_type) {
     case 0:
@@ -1960,7 +1960,7 @@ u32 fn_8018F62C(HSD_GObj* gobj)
 
 #pragma push
 #pragma dont_inline on
-TmData* gm_8018F634(void)
+TmData* gm_GetTournamentData(void)
 {
     return &gm_804771C4;
 }
@@ -2359,7 +2359,7 @@ void gm_801905F0(StartMeleeData* arg0)
     int i;
     u8 _padA[8];
     TmData* tm = &gm_804771C4;
-    GameRules* temp_r31 = gmMainLib_8015CC34();
+    GameRules* temp_r31 = gmMainLib_GetGameRules();
     TmVsData sp18;
 
     gm_80168FC4();
@@ -2451,7 +2451,7 @@ void gm_801905F0(StartMeleeData* arg0)
             arg0->players[i].xE = 4;
             arg0->players[i].cpu_level = tm->x4B8[i].x4;
             arg0->players[i].x12 = 0;
-            if (gmMainLib_8015CC34()->handicap != 0) {
+            if (gmMainLib_GetGameRules()->handicap != 0) {
                 arg0->players[i].x18 = fn_8016419C(tm->x4B8[i].x5);
                 arg0->players[i].x1C = fn_801641B4(tm->x4B8[i].x5);
             } else {

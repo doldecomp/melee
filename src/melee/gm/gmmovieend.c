@@ -29,16 +29,16 @@ void gm_801A6254(GameScene* arg0)
     lbl_8046DBD8_t* temp_r31;
 
     temp_r30 = gm_GetGameSceneLeaveDataCallback(arg0);
-    temp_r31 = gm_801736DC();
+    temp_r31 = gm_GetChallengerData();
     gm_80162968(temp_r30->match_end.frame_count / 60);
     gm_8016247C(temp_r30->match_end.player_standings[0].xE);
     temp_r0 = temp_r30->match_end.result;
     if (temp_r0 != 7 && temp_r0 != 8 &&
         temp_r30->match_end.player_standings[0].stocks != 0)
     {
-        gm_80164910(temp_r31->x4);
+        gm_UnlockCKind(temp_r31->x4);
     } else {
-        temp_ret = gm_80160638(temp_r31->x4);
+        temp_ret = gm_CKindToUnlockIndex(temp_r31->x4);
         gmMainLib_8015DB2C(temp_ret);
     }
     gm_80173EEC();

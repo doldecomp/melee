@@ -204,7 +204,7 @@ void un_802FE260(void)
     HSD_JObj* jobj;
 
     un_804D6D90 = 0;
-    lbArchive_LoadSections(*ifAll_802F3690(), (void*) &un_804A1F10.x0,
+    lbArchive_LoadSections(*ifAll_GetArchive(), (void*) &un_804A1F10.x0,
                            "Stc_rarwmdls", 0);
     for (i = 0; i < 4; i++) {
         gobj = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);

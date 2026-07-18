@@ -427,13 +427,13 @@ loop:
     for (j = 0; j < 3; j++) {
         cur_char = entry->x02[j];
 
-        if (cur_char == 0x21) {
+        if (cur_char == CHKIND_NONE) {
             continue;
         }
         if (gm_80164430(entry->x00) == 0) {
             goto next;
         }
-        if (gm_80164840(cur_char) == 0) {
+        if (gm_IsCKindUnlocked(cur_char) == 0) {
             goto next;
         }
         if (cur_char == target_char) {
@@ -596,7 +596,7 @@ void gmClassic_OnLoad(void)
     gmClassic_InitMatchupOrder(scene_data->matchups.x0CC,
                                gmClassic_80490880.x2C);
 
-    data = gm_8017EB30();
+    data = gm_GetAllStarData();
     gmMainLib_8015CDC8();
     gm_8017C984(data);
 
@@ -653,7 +653,7 @@ void gmClassic_801B3500(GameScene* arg0)
 
     sd = gm_GetGameSceneLoadDataCallback(arg0);
     entry = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->idx)];
-    ad = gm_8017EB30();
+    ad = gm_GetAllStarData();
     enemy_count = 0;
     ad->x0.x7 = arg0->idx;
     sd->x0A = entry->x0 + 1;
@@ -877,7 +877,7 @@ void gmClassic_801B3A34(GameScene* arg0)
 
     temp_r30 = gm_GetGameSceneLoadDataCallback(arg0);
     temp_r31 = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->idx)];
-    temp_r29 = gm_8017EB30();
+    temp_r29 = gm_GetAllStarData();
     new_var = temp_r30;
     var_r27 = temp_r31->xC->x00;
     if (temp_r31->x1 == 0x80 && temp_r31->x2 == 1) {
@@ -917,7 +917,7 @@ void gmClassic_801B3B40(GameScene* arg0)
     PAD_STACK(4);
 
     mei = (MatchExitInfo*) gm_GetGameSceneLeaveDataCallback(arg0);
-    asd = gm_8017EB30();
+    asd = gm_GetAllStarData();
     entry = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->idx)];
     exit_result = mei->x8;
     id = arg0->idx;
@@ -933,7 +933,7 @@ void gmClassic_801B3B40(GameScene* arg0)
     }
 
     if (entry->x1 == 0x80 && entry->x2 == 1) {
-        char_id = gm_80164024((u8) asd->x0.ckind);
+        char_id = gm_CKindToSelKind((u8) asd->x0.ckind);
         time_ptr = gmMainLib_8015D438(char_id);
         best_ptr = gmMainLib_8015D450(char_id);
         Ground_801C1DE4(&sp18, &sp14);
@@ -978,13 +978,13 @@ void gmClassic_801B3D44(GameScene* scene)
 {
     struct DebugGameOverData* temp_r31 =
         gm_GetGameSceneLoadDataCallback(scene);
-    gm_8017C9A8(temp_r31, &gm_8017EB30()->x0, 1);
+    gm_8017C9A8(temp_r31, &gm_GetAllStarData()->x0, 1);
 }
 
 void gmClassic_801B3D84(GameScene* scene)
 {
     DebugGameOverData* temp_r30 = gm_GetGameSceneLeaveDataCallback(scene);
-    gm_8017CA38(temp_r30, &gm_8017EB30()->x0, gmMainLib_8015CDC8(), 1);
+    gm_8017CA38(temp_r30, &gm_GetAllStarData()->x0, gmMainLib_8015CDC8(), 1);
 }
 
 void gmClassic_801B3DD8(GameScene* scene)
@@ -992,7 +992,8 @@ void gmClassic_801B3DD8(GameScene* scene)
     CSSData* css = gm_GetGameSceneLoadDataCallback(scene);
     struct gmm_x0_528_t* temp_r31 = gmMainLib_8015CDC8();
     gm_801B06B0(css, 0xB, temp_r31->c_kind, temp_r31->stocks, temp_r31->color,
-                temp_r31->x4, temp_r31->cpu_level, gm_8017EB30()->x0.slot);
+                temp_r31->x4, temp_r31->cpu_level,
+                gm_GetAllStarData()->x0.slot);
     lbDvd_800174BC();
 }
 
@@ -1000,7 +1001,7 @@ void gmClassic_801B3E44(GameScene* scene)
 {
     CSSData* temp_r30 = gm_GetGameSceneLeaveDataCallback(scene);
     gmm_x0_528_t* temp_r29 = gmMainLib_8015CDC8();
-    UnkAllstarData* temp_r31 = gm_8017EB30();
+    UnkAllstarData* temp_r31 = gm_GetAllStarData();
     gm_803DDEC8Struct* r4 = gmClassic_803DDEC8.x00;
     if (temp_r30->pending_scene_change == 2) {
         // This only happens when, instead of pressing start to begin the game,

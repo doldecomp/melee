@@ -304,6 +304,7 @@ void fn_8018325C(HSD_GObj* arg0, int arg1)
 
 void fn_80184138(HSD_GObj* arg0, int arg1)
 {
+    HSD_JObj* jobj2;
     u8 _padA[8];
     Vec3 pos;
     Vec3 scale;
@@ -370,7 +371,7 @@ void fn_80184138(HSD_GObj* arg0, int arg1)
         if (Player_GetEntity(i) == arg0) {
             HSD_GObj* entity2 = Player_GetEntityAtIndex(i, 1);
             if (entity2 != NULL) {
-                HSD_JObj* jobj2 = entity2->hsd_obj;
+                jobj2 = entity2->hsd_obj;
                 HSD_JObjGetTranslation(jobj, &pos);
                 HSD_JObjSetTranslate(jobj2, &pos);
                 HSD_JObjGetScale(jobj, &scale);
@@ -1096,12 +1097,12 @@ static char lbl_804D40B0[] = "IrRdMap";
 void fn_80186634(void* arg0)
 {
     HSD_GObj* gobj;
-    HSD_CObj* cobj1;
     HSD_CObj* cobj2;
     HSD_GObj* gobj2;
     HSD_GObj* gobj3;
-    HSD_JObj* jobj;
     HSD_GObj* gobj4;
+    HSD_CObj* cobj1;
+    HSD_JObj* jobj;
     u8 operand_pad[8];
     const char* names[4];
     PAD_STACK(8);
@@ -2730,7 +2731,7 @@ HSD_Text* fn_8018A000(void)
     lbl_804D6628 =
         lbArchive_80016DBC("GmTrain", &lbl_804D662C, &data[0xA0], 0);
     fn_80189B88();
-    ifAll_802F3404();
+    ifAll_GetHUDGObj();
     HSD_SisLib_803A611C(0, NULL, 9, 0x14, 0, 0xE, 0, 0x12);
     sub = &lbl_80473700.css;
     if (lbLang_IsSavedLanguageUS()) {
@@ -2805,7 +2806,7 @@ void fn_8018A364(int arg0_int)
     UnkAllstarData* data;
     u32 total_time;
 
-    rules = gm_8016AE50();
+    rules = gm_GetRules();
     data = &gm_80473A18;
 
     if (fn_8017E318() > 0) {

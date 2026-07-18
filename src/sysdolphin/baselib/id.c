@@ -15,7 +15,7 @@ HSD_ObjAllocData* HSD_IDGetAllocData(void)
 
 void HSD_IDInitAllocData(void)
 {
-    HSD_ObjAllocInit(&hsd_iddata, sizeof(IDEntry), 4);
+    HSD_ObjAllocInit(HSD_IDGetAllocData(), sizeof(IDEntry), 4);
 }
 
 void HSD_IDSetup(void)
@@ -32,7 +32,7 @@ inline IDEntry* IDEntryAlloc(void)
 {
     IDEntry* entry;
 
-    entry = HSD_ObjAlloc(&hsd_iddata);
+    entry = HSD_ObjAlloc(HSD_IDGetAllocData());
     /// @todo Convert to @c HSD_ASSERT once a byte-matching form is found.
     if (entry == NULL) {
         __assert("id.c", 67, "entry");
@@ -72,7 +72,7 @@ void HSD_IDInsertToTable(HSD_IDTable* table, u32 id, void* data)
 
 inline void IDEntryFree(IDEntry* entry)
 {
-    HSD_ObjFree(&hsd_iddata, entry);
+    HSD_ObjFree(HSD_IDGetAllocData(), entry);
 }
 
 void HSD_IDRemoveByIDFromTable(HSD_IDTable* table, u32 id)

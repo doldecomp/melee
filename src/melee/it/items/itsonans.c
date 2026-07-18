@@ -1,5 +1,6 @@
 #include "itsonans.h"
 
+#include "inlines.h"
 #include "math.h"
 
 #include "ef/eflib.h"
@@ -158,8 +159,7 @@ void it_802CD9C0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool itSonans_UnkMotion1_Anim(Item_GObj* gobj)
@@ -190,11 +190,7 @@ bool itSonans_UnkMotion1_Coll(Item_GObj* gobj)
 
 void it_802CDAA8(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_EnterAirStateWithHitlag(gobj, 2);
 }
 
 bool itSonans_UnkMotion2_Anim(Item_GObj* gobj)
@@ -214,8 +210,7 @@ void itSonans_UnkMotion2_Phys(Item_GObj* gobj)
         it_802754BC(gobj);
         ip = GET_ITEM(gobj);
         Item_80268E5C(gobj, 0, 2);
-        ip->entered_hitlag = efLib_PauseAll;
-        ip->exited_hitlag = efLib_ResumeAll;
+        Item_SetEffectHitlagCallbacks(ip);
     }
 }
 

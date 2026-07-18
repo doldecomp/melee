@@ -165,7 +165,7 @@ void gm_801B9DD8(GameScene* arg0)
 {
     u32 temp_r31;
     s32* temp_r3_2;
-    u8 temp_r30;
+    u8 selkind;
     MatchExitInfo* temp_r3;
     u16 tmp;
 
@@ -177,13 +177,13 @@ void gm_801B9DD8(GameScene* arg0)
         gm_SetPendingSceneIndex(1);
         return;
     }
-    temp_r30 =
-        gm_80164024(temp_r3->match_end.player_standings[0].character_kind);
+    selkind = gm_CKindToSelKind(
+        temp_r3->match_end.player_standings[0].character_kind);
     temp_r31 = gm_80180AE4();
     if ((tmp = gm_801734D0(temp_r31)) != 0x148) {
         gm_80164504(tmp);
     }
-    temp_r3_2 = gmMainLib_8015D084(temp_r30);
+    temp_r3_2 = gmMainLib_8015D084(selkind);
     if (temp_r31 > *temp_r3_2) {
         *temp_r3_2 = temp_r31;
     }

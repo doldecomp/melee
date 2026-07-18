@@ -13,6 +13,7 @@
 #include "baselib/particle.h"
 #include "cm/camera.h"
 
+#include "ft/forward.h"
 #include "gm/forward.h"
 
 #include "gm/types.h"
@@ -26,6 +27,7 @@
 #include "lb/lbspdisplay.h"
 #include "lb/lbtime.h"
 #include "mn/mnstagesel.h"
+#include "mn/types.h"
 #include "pl/player.h"
 #include "pl/plbonus.h"
 #include "pl/plbonuslib.h"
@@ -272,113 +274,113 @@ static struct ResultAnimEntry lbl_803D53A8[0x1B] = {
     },
 };
 
-static struct VictoryTheme lbl_803D5480[0x1B] = {
+static struct VictoryTheme ckind_victory_themes[0x1B] = {
     {
-        0x0,
+        CKIND_CAPTAIN,
         0x11,
     },
     {
-        0x1,
+        CKIND_DONKEY,
         0xD,
     },
     {
-        0x2,
+        CKIND_FOX,
         0x10,
     },
     {
-        0x3,
+        CKIND_GAMEWATCH,
         0xF,
     },
     {
-        0x4,
+        CKIND_KIRBY,
         0x14,
     },
     {
-        0x5,
+        CKIND_KOOPA,
         0x16,
     },
     {
-        0x6,
+        CKIND_LINK,
         0x15,
     },
     {
-        0x7,
+        CKIND_LUIGI,
         0x16,
     },
     {
-        0x8,
+        CKIND_MARIO,
         0x16,
     },
     {
-        0x9,
+        CKIND_MARS,
         0xE,
     },
     {
-        0xA,
+        CKIND_MEWTWO,
         0x18,
     },
     {
-        0xB,
+        CKIND_NESS,
         0x17,
     },
     {
-        0xC,
+        CKIND_PEACH,
         0x16,
     },
     {
-        0xD,
+        CKIND_PIKACHU,
         0x18,
     },
     {
-        0xE,
+        CKIND_POPONANA,
         0x13,
     },
     {
-        0xF,
+        CKIND_PURIN,
         0x18,
     },
     {
-        0x10,
+        CKIND_SAMUS,
         0x19,
     },
     {
-        0x11,
+        CKIND_YOSHI,
         0x1D,
     },
     {
-        0x12,
+        CKIND_ZELDA,
         0x15,
     },
     {
-        0x13,
+        CKIND_SEAK,
         0x15,
     },
     {
-        0x14,
+        CKIND_FALCO,
         0x10,
     },
     {
-        0x15,
+        CKIND_CLINK,
         0x15,
     },
     {
-        0x16,
+        CKIND_DRMARIO,
         0x16,
     },
     {
-        0x17,
+        CKIND_EMBLEM,
         0xE,
     },
     {
-        0x18,
+        CKIND_PICHU,
         0x18,
     },
     {
-        0x19,
+        CKIND_GANON,
         0x15,
     },
     {
-        0x21,
+        CHKIND_NONE,
         -1,
     },
 };
@@ -458,7 +460,7 @@ void gm_801603B0(void)
 
 u32 fn_80160400(CharacterKind ckind)
 {
-    struct VictoryTheme* theme = lbl_803D5480;
+    struct VictoryTheme* theme = ckind_victory_themes;
 
     while (true) {
         if (theme->ckind == ckind) {
@@ -549,36 +551,37 @@ char* gm_80160564(CharacterKind ckind, GameModeKind mode)
     return Toy_8030813C(var_r3) + 0x24;
 }
 
-u8 fn_801605EC(s32 arg0)
+u8 gm_SelKindToUnlockIndex(SelectableCharacterKind selkind)
 {
     int i;
     for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
-        if (arg0 == lbl_803B78C8[i].ckind) {
+        if (selkind == lbl_803B78C8[i].selkind) {
             return lbl_803B78C8[i].idx;
         }
     }
     return NUM_UNLOCKABLE_CHARACTERS;
 }
 
-s8 gm_80160638(s32 arg0)
+s8 gm_CKindToUnlockIndex(CharacterKind ckind)
 {
-    return fn_801605EC(gm_80164024(arg0));
+    return gm_SelKindToUnlockIndex(gm_CKindToSelKind(ckind));
 }
 
-static inline u8 fn_801606A8_inline(int arg0)
+static inline u8 get_unlockable_selkind_by_bit_index(int unlock_bit_index)
 {
     int i;
     for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
-        if (arg0 == lbl_803B78C8[i].idx) {
-            return lbl_803B78C8[i].ckind;
+        if (unlock_bit_index == lbl_803B78C8[i].idx) {
+            return lbl_803B78C8[i].selkind;
         }
     }
-    return CKIND_GANON;
+    return SELKIND_COUNT;
 }
 
-u8 fn_801606A8(int arg0)
+u8 gm_GetCKindByUnlockIndex(int unlockable_character_bit_index)
 {
-    return gm_8016400C(fn_801606A8_inline(arg0));
+    return gm_SelKindToCKind(
+        get_unlockable_selkind_by_bit_index(unlockable_character_bit_index));
 }
 
 u8 fn_80160710(int arg0)
@@ -586,17 +589,17 @@ u8 fn_80160710(int arg0)
     int i;
     for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
         if (arg0 == lbl_803B78C8[i].idx) {
-            return lbl_803B78C8[i].x2;
+            return lbl_803B78C8[i].notification_id;
         }
     }
     return 0x42;
 }
 
-int gm_8016075C(CharacterKind ckind)
+int gm_8016075C(SelectableCharacterKind selkind)
 {
     int i;
     for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
-        if (ckind == lbl_803B78C8[i].ckind) {
+        if (selkind == lbl_803B78C8[i].selkind) {
             return lbl_803B78C8[i].x4;
         }
     }
@@ -806,7 +809,7 @@ void gm_80160B40(HSD_Text* text, u8 ckind, u8 arg2)
     tmp_text->font_size.x *= var_f31;
 }
 
-void gm_80160C90(HSD_Text* text, u8 fighter_id, bool arg2)
+void gm_80160C90(HSD_Text* text, u8 ckind, bool arg2)
 {
     f32 name_scale;
     bool use_alt_name;
@@ -815,26 +818,26 @@ void gm_80160C90(HSD_Text* text, u8 fighter_id, bool arg2)
     if (lbLang_IsSavedLanguageUS() != 0) {
         text->default_kerning = 1;
     }
-    str = ((u8) arg2 != 0) ? fn_801609E0(fighter_id) : gm_80160980(fighter_id);
+    str = ((u8) arg2 != 0) ? fn_801609E0(ckind) : gm_80160980(ckind);
     if (lbLang_IsSavedLanguageUS() != 0) {
         use_alt_name = false;
-        if ((u8) arg2 != 0 && lbl_803D50E4[fighter_id] != NULL) {
+        if ((u8) arg2 != 0 && lbl_803D50E4[ckind] != NULL) {
             use_alt_name = true;
         }
         if (use_alt_name) {
-            name_scale = lbl_803B7784[fighter_id];
+            name_scale = lbl_803B7784[ckind];
         } else {
-            name_scale = lbl_803B767C[fighter_id];
+            name_scale = lbl_803B767C[ckind];
         }
     } else {
         use_alt_name = false;
-        if ((u8) arg2 != 0 && lbl_803D5060[fighter_id] != NULL) {
+        if ((u8) arg2 != 0 && lbl_803D5060[ckind] != NULL) {
             use_alt_name = true;
         }
         if (use_alt_name) {
-            name_scale = lbl_803B7700[fighter_id];
+            name_scale = lbl_803B7700[ckind];
         } else {
-            name_scale = lbl_803B75F8[fighter_id];
+            name_scale = lbl_803B75F8[ckind];
         }
     }
     HSD_SisLib_803A7548(
@@ -1210,22 +1213,24 @@ void fn_80162068(MatchEnd* match_end)
         if (pdata_i->slot_type == 3) {
             continue;
         }
-        fd = GetPersistentFighterData(gm_80164024(pdata_i->character_kind));
+        fd = GetPersistentFighterData(
+            gm_CKindToSelKind(pdata_i->character_kind));
         for (j = 0; j < 4; j++) {
             pdata_j = &match_end->player_standings[j];
             if (i == j || pdata_j->slot_type == 3) {
                 continue;
             }
-            if (pdata_i->kills[j] +
-                    fd->fighter_kos[gm_80164024(pdata_j->character_kind)] >
+            if (pdata_i->kills[j] + fd->fighter_kos[gm_CKindToSelKind(
+                                        pdata_j->character_kind)] >
                 0xFFFF)
             {
                 sum = 0xFFFF;
             } else {
-                sum = pdata_i->kills[j] +
-                      fd->fighter_kos[gm_80164024(pdata_j->character_kind)];
+                sum = pdata_i->kills[j] + fd->fighter_kos[gm_CKindToSelKind(
+                                              pdata_j->character_kind)];
             }
-            fd->fighter_kos[gm_80164024(pdata_j->character_kind)] = (u16) sum;
+            fd->fighter_kos[gm_CKindToSelKind(pdata_j->character_kind)] =
+                (u16) sum;
         }
         fn_80161C90(match_end, i, &fd->sd_count);
     }
@@ -1259,18 +1264,19 @@ static inline void fn_80162170_inner(MatchEnd* arg0)
                 }
                 {
                     {
-                        u32 sum = nt->play_time_by_fighter[gm_80164024(
+                        u32 sum = nt->play_time_by_fighter[gm_CKindToSelKind(
                                       p->character_kind)] +
                                   arg0->frame_count / 60;
                         play_time = -1;
                         if ((u32) sum <= (u32) play_time) {
-                            play_time = nt->play_time_by_fighter[gm_80164024(
-                                            p->character_kind)] +
-                                        arg0->frame_count / 60;
+                            play_time =
+                                nt->play_time_by_fighter[gm_CKindToSelKind(
+                                    p->character_kind)] +
+                                arg0->frame_count / 60;
                         }
                     }
-                    nt->play_time_by_fighter[gm_80164024(p->character_kind)] =
-                        play_time;
+                    nt->play_time_by_fighter[gm_CKindToSelKind(
+                        p->character_kind)] = play_time;
                 }
                 fn_80161C90(arg0, i, &nt->sd_count);
             }
@@ -1373,7 +1379,7 @@ void gm_80162574(u8 arg0, u8 arg1)
     }
 
     // First counter
-    ptr = (u16*) gmMainLib_8015CFB4(gm_80164024(arg0));
+    ptr = (u16*) gmMainLib_8015CFB4(gm_CKindToSelKind(arg0));
     val = *ptr + 1;
     if (val > 0xFFFF) {
         val = 0xFFFF;
@@ -1381,7 +1387,7 @@ void gm_80162574(u8 arg0, u8 arg1)
     *ptr = val;
 
     // Second counter
-    ptr = &gmMainLib_8015EDBC()->x18[gm_80164024(arg0)];
+    ptr = &gmMainLib_8015EDBC()->x18[gm_CKindToSelKind(arg0)];
     val = *ptr + 1;
     if (val > 0xFFFF) {
         val = 0xFFFF;
@@ -1399,7 +1405,7 @@ void gm_8016260C(u8 arg0, u8 arg1)
         return;
     }
     if (gm_GetCurrentGameMode() == GM_STAMINA_VS) {
-        counter = gmMainLib_8015CD5C();
+        counter = gmMainLib_GetStaminaMatchTotal();
     } else {
         switch ((s32) arg0) {
         case 0:
@@ -1441,7 +1447,7 @@ u32 gm_GetVsPlayMatchTotal(void)
               *(u32*) gmMainLib_GetStockMatchTotal() +
               *(u32*) gmMainLib_GetCoinMatchTotal() +
               *(u32*) gmMainLib_GetBonusMatchTotal() +
-              *(u32*) gmMainLib_8015CD5C();
+              *(u32*) gmMainLib_GetStaminaMatchTotal();
     return tmp;
 }
 
@@ -1569,7 +1575,7 @@ bool fn_80162BFC(s8 ckind, int arg1)
 {
     int* temp_r3;
 
-    temp_r3 = (int*) gmMainLib_8015D0C0(gm_80164024((u8) ckind));
+    temp_r3 = (int*) gmMainLib_8015D0C0(gm_CKindToSelKind((u8) ckind));
     if ((u32) *temp_r3 < (u32) arg1) {
         *temp_r3 = arg1;
         return true;
@@ -1643,7 +1649,7 @@ s32 fn_80162DF8(u8 ckind, u32 arg1)
 {
     s32* temp_r3;
 
-    temp_r3 = gmMainLib_8015D1E8(gm_80164024(ckind));
+    temp_r3 = gmMainLib_8015D1E8(gm_CKindToSelKind(ckind));
     if (*temp_r3 < arg1) {
         *temp_r3 = arg1;
         return 1;
@@ -1720,7 +1726,7 @@ bool fn_80162FF4(u8 ckind, u32 arg1)
 {
     s32* temp_r3;
 
-    temp_r3 = gmMainLib_8015D310(gm_80164024(ckind));
+    temp_r3 = gmMainLib_8015D310(gm_CKindToSelKind(ckind));
     if (*temp_r3 < arg1) {
         *temp_r3 = arg1;
         return true;
@@ -1821,7 +1827,7 @@ bool gm_80163298(s8 c_kind, u16 arg1)
     u16* record;
     u16 score;
 
-    index = gm_80164024(c_kind);
+    index = gm_CKindToSelKind(c_kind);
     record = gmMainLib_8015D7EC(index);
     score = arg1;
 
@@ -2136,14 +2142,14 @@ int fn_80163FA4(u8 arg0)
     return count;
 }
 
-u8 gm_8016400C(u8 ckind)
+u8 gm_SelKindToCKind(u8 selkind)
 {
-    return lbl_803B7888[ckind];
+    return selkind_to_ckind_map[selkind];
 }
 
-u8 gm_80164024(u8 arg0)
+u8 gm_CKindToSelKind(u8 ckind)
 {
-    return lbl_803B78A4[arg0];
+    return ckind_to_selkind_map[ckind];
 }
 
 bool gm_8016403C(u8 item)
@@ -2372,45 +2378,47 @@ int gm_801647F8(u8 arg0)
 }
 
 /// Is a specific character unlocked?
-bool gm_80164840(u8 ckind)
+bool gm_IsCKindUnlocked(u8 ckind)
 {
-    u16* temp_r31 = gmMainLib_8015ED8C();
-    u8 var = lbl_803B78A4[ckind];
-    u8 var_r0 = fn_801605EC(var);
+    u16* unlocked_chars_bitmask = gmMainLib_GetUnlockedCharactersBitmaskPtr();
+    u8 selkind = ckind_to_selkind_map[ckind];
+    u8 unlock_bit = gm_SelKindToUnlockIndex(selkind);
 
-    if (var_r0 == NUM_UNLOCKABLE_CHARACTERS || (*temp_r31 & (1LL << var_r0))) {
+    if (unlock_bit == NUM_UNLOCKABLE_CHARACTERS ||
+        (*unlocked_chars_bitmask & (1LL << unlock_bit)))
+    {
         return true;
     }
     return false;
 }
 
-static inline bool gm_80164840_inner(u8 ckind)
+static inline bool isCKindUnlocked_inner(u8 ckind)
 {
-    return gm_80164840(ckind);
+    return gm_IsCKindUnlocked(ckind);
 }
 
-static inline bool gm_80164840_noinline(u8 ckind)
+static inline bool isCKindUnlocked(u8 ckind)
 {
-    return gm_80164840_inner(ckind);
+    return isCKindUnlocked_inner(ckind);
 }
 
-void gm_80164910(int arg0)
+void gm_UnlockCKind(CharacterKind ckind)
 {
     u16* char_unlock_mask;
-    u8 internal_id;
+    u8 selkind;
     int i;
     u8 unlock_idx;
     u8 notify_val;
 
-    char_unlock_mask = gmMainLib_8015ED8C();
-    internal_id = lbl_803B78A4[(u8) arg0];
+    char_unlock_mask = gmMainLib_GetUnlockedCharactersBitmaskPtr();
+    selkind = ckind_to_selkind_map[(u8) ckind];
 
-    unlock_idx = fn_801605EC(internal_id);
+    unlock_idx = gm_SelKindToUnlockIndex(selkind);
 
     if (unlock_idx != NUM_UNLOCKABLE_CHARACTERS) {
         for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
             if ((s32) unlock_idx == (s32) lbl_803B78C8[i].idx) {
-                notify_val = lbl_803B78C8[i].x2;
+                notify_val = lbl_803B78C8[i].notification_id;
                 goto found_notify;
             }
         }
@@ -2422,11 +2430,13 @@ void gm_80164910(int arg0)
     }
 }
 
-void gm_80164A0C(u8 arg0)
+/// Lock character?
+void gm_80164A0C(u8 ckind)
 {
-    u16* unlockable_character_bitfield = gmMainLib_8015ED8C();
-    s32 tmp_p52845 = lbl_803B78A4[arg0];
-    u8 idx = fn_801605EC(tmp_p52845);
+    u16* unlockable_character_bitfield =
+        gmMainLib_GetUnlockedCharactersBitmaskPtr();
+    s32 selkind = ckind_to_selkind_map[ckind];
+    u8 idx = gm_SelKindToUnlockIndex(selkind);
     if (idx != NUM_UNLOCKABLE_CHARACTERS) {
         *unlockable_character_bitfield &= (u16) ~(1ULL << idx);
     }
@@ -2435,7 +2445,8 @@ void gm_80164A0C(u8 arg0)
 /// Are all unlockable characters unlocked?
 bool gm_80164ABC(void)
 {
-    u16* unlockable_character_bitfield = gmMainLib_8015ED8C();
+    u16* unlockable_character_bitfield =
+        gmMainLib_GetUnlockedCharactersBitmaskPtr();
     int i;
     for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
         if (!(*unlockable_character_bitfield & (1LL << i))) {
@@ -2447,7 +2458,7 @@ bool gm_80164ABC(void)
     return true;
 }
 
-static inline bool fn_80164B48_check(u8 idx, u16* ptr)
+static inline bool is_character_unlocked(u8 idx, u16* ptr)
 {
     if (idx == 0xB || (*ptr & (1LL << idx))) {
         return true;
@@ -2466,16 +2477,16 @@ bool fn_80164B48(void)
 
     PAD_STACK(16);
 
-    ptr = gmMainLib_8015ED8C();
+    ptr = gmMainLib_GetUnlockedCharactersBitmaskPtr();
     t = base[0x2C2];
     es_base = base + 0x2D0;
-    idx = 0xB;
+    idx = NUM_UNLOCKABLE_CHARACTERS;
     {
         s32 i;
         const u8* es;
 
         es = es_base;
-        for (i = 0; i < 0xB; i++) {
+        for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
             if (t == (s32) es[1]) {
                 idx = (base + i * 6)[0x2D0];
                 break;
@@ -2483,20 +2494,20 @@ bool fn_80164B48(void)
             es += 6;
         }
     }
-    ok = fn_80164B48_check(idx, ptr);
+    ok = is_character_unlocked(idx, ptr);
     if (ok == 0) {
         return 0;
     }
 
-    ptr = gmMainLib_8015ED8C();
+    ptr = gmMainLib_GetUnlockedCharactersBitmaskPtr();
     t = base[0x2C5];
-    idx = 0xB;
+    idx = NUM_UNLOCKABLE_CHARACTERS;
     {
         s32 i;
         const u8* es;
 
         es = es_base;
-        for (i = 0; i < 0xB; i++) {
+        for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
             if (t == (s32) es[1]) {
                 idx = (base + i * 6)[0x2D0];
                 break;
@@ -2504,20 +2515,20 @@ bool fn_80164B48(void)
             es += 6;
         }
     }
-    ok = fn_80164B48_check(idx, ptr);
+    ok = is_character_unlocked(idx, ptr);
     if (ok == 0) {
         return 0;
     }
 
-    ptr = gmMainLib_8015ED8C();
+    ptr = gmMainLib_GetUnlockedCharactersBitmaskPtr();
     t = base[0x2C1];
-    idx = 0xB;
+    idx = NUM_UNLOCKABLE_CHARACTERS;
     {
         s32 i;
         const u8* es;
 
         es = es_base;
-        for (i = 0; i < 0xB; i++) {
+        for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
             if (t == (s32) es[1]) {
                 idx = (base + i * 6)[0x2D0];
                 break;
@@ -2525,20 +2536,20 @@ bool fn_80164B48(void)
             es += 6;
         }
     }
-    ok = fn_80164B48_check(idx, ptr);
+    ok = is_character_unlocked(idx, ptr);
     if (ok == 0) {
         return 0;
     }
 
-    ptr = gmMainLib_8015ED8C();
+    ptr = gmMainLib_GetUnlockedCharactersBitmaskPtr();
     t = base[0x2C0];
-    idx = 0xB;
+    idx = NUM_UNLOCKABLE_CHARACTERS;
     {
         s32 i;
         const u8* es;
 
         es = es_base;
-        for (i = 0; i < 0xB; i++) {
+        for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
             if (t == (s32) es[1]) {
                 idx = (base + i * 6)[0x2D0];
                 break;
@@ -2546,20 +2557,20 @@ bool fn_80164B48(void)
             es += 6;
         }
     }
-    ok = fn_80164B48_check(idx, ptr);
+    ok = is_character_unlocked(idx, ptr);
     if (ok == 0) {
         return 0;
     }
 
-    ptr = gmMainLib_8015ED8C();
+    ptr = gmMainLib_GetUnlockedCharactersBitmaskPtr();
     t = base[0x2C4];
-    idx = 0xB;
+    idx = NUM_UNLOCKABLE_CHARACTERS;
     {
         s32 i;
         const u8* es;
 
         es = es_base;
-        for (i = 0; i < 0xB; i++) {
+        for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
             if (t == (s32) es[1]) {
                 idx = (base + i * 6)[0x2D0];
                 break;
@@ -2567,18 +2578,18 @@ bool fn_80164B48(void)
             es += 6;
         }
     }
-    ok = fn_80164B48_check(idx, ptr);
+    ok = is_character_unlocked(idx, ptr);
     if (ok == 0) {
         return 0;
     }
 
-    ptr = gmMainLib_8015ED8C();
+    ptr = gmMainLib_GetUnlockedCharactersBitmaskPtr();
     t = base[0x2C3];
-    idx = 0xB;
+    idx = NUM_UNLOCKABLE_CHARACTERS;
     {
         s32 i;
 
-        for (i = 0; i < 0xB; i++) {
+        for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
             if (t == (s32) es_base[1]) {
                 idx = (base + i * 6)[0x2D0];
                 break;
@@ -2586,7 +2597,7 @@ bool fn_80164B48(void)
             es_base += 6;
         }
     }
-    ok = fn_80164B48_check(idx, ptr);
+    ok = is_character_unlocked(idx, ptr);
     if (ok == 0) {
         return 0;
     }
@@ -2594,21 +2605,21 @@ bool fn_80164B48(void)
     return 1;
 }
 
-void gm_80164F18(void)
+void gm_80164F18(void) //< Unlock all characters?
 {
     u16* ptr;
     int i;
 
-    ptr = gmMainLib_8015ED8C();
+    ptr = gmMainLib_GetUnlockedCharactersBitmaskPtr();
 
-    for (i = 0; i < 11; i++) {
+    for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
         *ptr |= (u16) (1LL << i);
     }
 }
 
 void gm_8016505C(void)
 {
-    u16* temp_r3 = gmMainLib_8015ED8C();
+    u16* temp_r3 = gmMainLib_GetUnlockedCharactersBitmaskPtr();
     *temp_r3 = 0;
 }
 
@@ -2635,7 +2646,7 @@ void fn_801650E8(void)
 void gm_EnablePlayerPauseCamera(int playerSlot, int playerId)
 {
     if (playerSlot == -1) {
-        Camera_SetUpPauseCameraWithDefaultZoom(0xB, 5);
+        Camera_SetUpPauseCameraWithDefaultZoom(NUM_UNLOCKABLE_CHARACTERS, 5);
         return;
     }
     if (((Player_GetPlayerSlotType(playerSlot) == Gm_PKind_Human) ||
@@ -2784,12 +2795,11 @@ u8 fn_80165548(MatchEnd* me, s8 arg1, s32 team)
                 }
                 if (result >= 0) {
                     ret += result;
-                    return ret;
                 }
             }
         }
     } else {
-        ret = arg1;
+        return ret = arg1;
     }
 
     return ret;
@@ -3237,11 +3247,11 @@ float fn_80166A8C(register Vec3* src, register Vec3* dst)
 s32 gm_80166A98(MatchEnd* arg0, s32 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
                 s8 arg6, u8 arg7, u8 arg_sp8, u8 arg_spC)
 {
-    s32 score0;
     s32 score1;
     s32 score2;
     s32 score3;
     u32 i;
+    s32 score0;
 
     memzero(arg0, 0x227C);
 
@@ -3427,7 +3437,7 @@ void fn_8016719C(s32 slot, s32 subchar)
     s32 stage_id;
     struct fn_8016719C_xC_bits* temp_r4;
 
-    match_info = gm_8016AE44();
+    match_info = gm_16AE_GetUnkData_1();
     stage_id = gm_8016B004();
     if (Stage_80224DC8(stage_id) != 0) {
         var_r30 = Ground_801C5774();
@@ -3512,7 +3522,7 @@ void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, GmRouteCallback arg4)
     struct lbl_8046B488_t* new_var2;
     long long new_var3;
     struct lbl_8046B488_t* temp_ptr;
-    temp_ptr = fn_80169364();
+    temp_ptr = gm_1601_GetUnkData();
     temp_ptr->x0 = arg0;
     temp_ptr->x1 = 0x21;
     new_var3 = arg1;
@@ -3536,7 +3546,7 @@ void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, GmRouteCallback arg4)
 
 void fn_8016758C(void)
 {
-    lbl_8046B6A0_t* mi = gm_8016AE44();
+    lbl_8046B6A0_t* mi = gm_16AE_GetUnkData_1();
     int i;
 
     for (i = 0; i < ARRAY_SIZE(mi->FighterMatchInfo); i++) {
@@ -3567,7 +3577,7 @@ s32 fn_80167638(s32 arg0, Vec3* arg1, Vec3* arg2)
 
     PAD_STACK(8);
 
-    info = gm_8016AE44();
+    info = gm_16AE_GetUnkData_1();
     idx = 0;
     for (i = 0; i < ARRAY_SIZE(info->FighterMatchInfo); i++) {
         if (info->FighterMatchInfo[i].x8 == 0) {
@@ -3588,7 +3598,7 @@ s32 fn_80167638(s32 arg0, Vec3* arg1, Vec3* arg2)
         arg2->x = 16.0f * (&sp.x0)[idx];
         arg2->z = 0.0f;
         arg2->y = 0.0f;
-        info = gm_8016AE44();
+        info = gm_16AE_GetUnkData_1();
         info->FighterMatchInfo[idx].x8 = 0x90;
         info->FighterMatchInfo[idx].x9 = chr;
     }
@@ -3721,7 +3731,7 @@ void gm_80167BC8(VsModeData* vs_data)
     s8* handicap;
     PAD_STACK(56);
 
-    rules = gmMainLib_8015CC34();
+    rules = gmMainLib_GetGameRules();
     prefs = gmMainLib_8015CC58();
     vs_data->data.rules.x0_6 = 0;
 
@@ -3901,7 +3911,7 @@ void gm_80167FC4(SSSData* arg0)
 
     PAD_STACK(8);
 
-    temp_r3 = gmMainLib_8015CC34();
+    temp_r3 = gmMainLib_GetGameRules();
     if (temp_r3->unk_x7 == 1) {
         arg0->force_stage_id = mnStageSel_8025BBD4();
         return;
@@ -3948,7 +3958,7 @@ s8 gm_801685D4(u8 arg0, u8 arg1)
 {
     s8* temp_r3;
 
-    if (gmMainLib_8015CC34()->handicap == 1) {
+    if (gmMainLib_GetGameRules()->handicap == 1) {
         temp_r3 = gmMainLib_8015CE44(arg0, arg1);
         if (temp_r3 != NULL) {
             return *temp_r3;
@@ -3962,7 +3972,7 @@ void gm_80168638(MatchEnd* arg0)
     u8 spC[4];
     s32 i;
     s8* temp_r3;
-    if ((u8) gmMainLib_8015CC34()->handicap == 1) {
+    if ((u8) gmMainLib_GetGameRules()->handicap == 1) {
         for (i = 0; i < 4; i++) {
             temp_r3 = gmMainLib_8015CE44(i, arg0->player_standings[i].x4);
             if (temp_r3 != NULL) {
@@ -4386,29 +4396,29 @@ void gm_801692E8(u32 secs, datetime* datetime)
     }
 }
 
-struct lbl_8046B488_t* fn_80169364(void)
+struct lbl_8046B488_t* gm_1601_GetUnkData(void)
 {
     return &lbl_8046B488;
 }
 
 u8 gm_80169370(s32 arg0)
 {
-    return ((u8*) &lbl_8046B488)[arg0];
+    return ((u8*) gm_1601_GetUnkData())[arg0];
 }
 
 int gm_80169384(void)
 {
-    return lbl_8046B488.x7;
+    return gm_1601_GetUnkData()->x7;
 }
 
 s32 gm_80169394(void)
 {
-    return lbl_8046B488.unk_10_b3;
+    return gm_1601_GetUnkData()->unk_10_b3;
 }
 
 s32 fn_801693A8(void)
 {
-    return lbl_8046B488.unk_10_b2;
+    return gm_1601_GetUnkData()->unk_10_b2;
 }
 
 static inline bool gm_801693BC_inline(u8 ckind)
@@ -4424,7 +4434,7 @@ bool gm_801693BC(int arg0)
 {
     u8 ckind;
     PAD_STACK(8);
-    if (Player_GetFlagsBit1(arg0) && (int) lbl_8046B488.x8 > 1) {
+    if (Player_GetFlagsBit1(arg0) && (int) gm_1601_GetUnkData()->x8 > 1) {
         return true;
     }
     ckind = Player_GetPlayerCharacter(arg0);
@@ -4437,12 +4447,12 @@ bool gm_801693BC(int arg0)
 
 void fn_80169434(GmRouteCallback fn)
 {
-    lbl_8046B488.x1B8 = fn;
+    gm_1601_GetUnkData()->x1B8 = fn;
 }
 
 bool fn_80169444(bool arg0)
 {
-    struct lbl_8046B488_t* gp = &lbl_8046B488;
+    struct lbl_8046B488_t* gp = gm_1601_GetUnkData();
 
     if (gp->x1B8 != NULL) {
         if (gp->x1B8(arg0) == 1) {
@@ -4455,7 +4465,7 @@ bool fn_80169444(bool arg0)
 int gm_801694A0(HSD_GObj* arg0)
 {
     int i;
-    int count = lbl_8046B488.x7;
+    int count = gm_1601_GetUnkData()->x7;
     PAD_STACK(8);
     for (i = 0; i < 6; i++) {
         if (Player_GetPlayerSlotType(i) != Gm_PKind_NA &&
@@ -4469,23 +4479,24 @@ int gm_801694A0(HSD_GObj* arg0)
 
 UNK_T gm_80169520(void)
 {
-    return lbl_8046B488.x20;
+    return gm_1601_GetUnkData()->x20;
 }
 
 UNK_T gm_80169530(void)
 {
-    return lbl_8046B488.xA2;
+    return gm_1601_GetUnkData()->xA2;
 }
 
 UNK_T gm_80169540(void)
 {
-    return lbl_8046B488.x124;
+    return gm_1601_GetUnkData()->x124;
 }
 
 void fn_80169550(int slot)
 {
-    s8 idx = lbl_8046B488.x1A6[slot];
-    lbl_8046B488.x20[idx] = -1;
+    struct lbl_8046B488_t* gp = gm_1601_GetUnkData();
+    s8 idx = gp->x1A6[slot];
+    gp->x20[idx] = -1;
 }
 
 void fn_80169574(ssize_t size, s8* buf)
@@ -4608,13 +4619,17 @@ void fn_80169900(u8 arg0, struct lbl_8046B488_t* arg1, s8* arg2, s8* arg3)
             } else {
                 var_r27 = 5;
                 if (HSD_Randi(2) != 0) {
-                    if ((s32) arg1->x1 != 0x21 && gm_80164840(arg1->x1)) {
+                    if ((s32) arg1->x1 != CHKIND_NONE &&
+                        gm_IsCKindUnlocked(arg1->x1))
+                    {
                         arg2[var_r28] = arg1->x1;
                     } else {
                         arg2[var_r28] = arg1->x0;
                     }
                 } else {
-                    if ((s32) arg1->x2 != 0x21 && gm_80164840(arg1->x2)) {
+                    if ((s32) arg1->x2 != CHKIND_NONE &&
+                        gm_IsCKindUnlocked(arg1->x2))
+                    {
                         arg2[var_r28] = arg1->x2;
                     } else {
                         arg2[var_r28] = arg1->x0;
@@ -4646,14 +4661,14 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
         list = lbl_8046B488.x1C0;
         p = list;
         do {
-            if (i != 4 && gm_80164840_noinline((u8) i) != 0) {
+            if (i != 4 && isCKindUnlocked((u8) i) != 0) {
                 *p = i;
             } else {
                 *p = -1;
             }
             i += 1;
             p += 1;
-        } while (i < 0x1A);
+        } while (i < CKIND_PLAYABLE_COUNT);
 
         i = 0;
         p = list;
@@ -4665,7 +4680,7 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
             *q = (u8) *p;
             *p = tmp;
             p += 1;
-        } while (i < 0x1A);
+        } while (i < CKIND_PLAYABLE_COUNT);
 
         count = 0;
         for (i = 0; i < 0xD; i++) {
@@ -4857,7 +4872,7 @@ void fn_8016A09C(void)
     PAD_STACK(4);
     var_r29 = 0;
 
-    gm_8016AE44();
+    gm_16AE_GetUnkData_1();
     lbl_8046B488.unk_10_b1 = 1;
     lbl_8046B488.unk_10_b0 = 0;
 
@@ -4883,8 +4898,8 @@ void fn_8016A09C(void)
 void gm_8016A164(void)
 {
     int i;
-    struct lbl_8046B488_t* gp = &lbl_8046B488;
-    lbl_8046B6A0_t* match_info = gm_8016AE44();
+    struct lbl_8046B488_t* gp = gm_1601_GetUnkData();
+    lbl_8046B6A0_t* match_info = gm_16AE_GetUnkData_1();
     PAD_STACK(4);
     if (gp == 0) {
         if (match_info == 0) {
@@ -4906,12 +4921,12 @@ void gm_8016A164(void)
 
 s32 fn_8016A1E4(void)
 {
-    return lbl_8046B488.unk_10_b0;
+    return gm_1601_GetUnkData()->unk_10_b0;
 }
 
 bool gm_8016A1F8(void)
 {
-    if (lbl_8046B488.unk_10_b1) {
+    if (gm_1601_GetUnkData()->unk_10_b1) {
         return true;
     }
     return false;
@@ -4919,7 +4934,7 @@ bool gm_8016A1F8(void)
 
 void gm_8016A21C(StartMeleeRules* arg0)
 {
-    arg0->x54 = (void*) &lbl_8046B488;
+    arg0->x54 = (void*) gm_1601_GetUnkData();
 }
 
 static inline s32 fn_801695BC_noinline(u8 arg0, u8 arg1, u8 arg2, u8* arg3,
@@ -5076,7 +5091,7 @@ void fn_8016A46C(void)
 
 void fn_8016A488(s32 arg0)
 {
-    if (gm_8016AE44()->hud_enabled == true) {
+    if (gm_16AE_GetUnkData_1()->hud_enabled == true) {
         Player_80031848(arg0);
     }
 }
@@ -5086,7 +5101,6 @@ void fn_8016A4C8(void)
     Vec3 spawn_pos;
     f32 facing_dir;
     s32 spawn_enabled;
-    s32 active_slot;
     s32 cpu_type;
     s32 cpu_type_roll;
     s32 matching_slot;
@@ -5222,7 +5236,7 @@ void fn_8016A4C8(void)
         }
     }
     if ((s32) gp->x7 == 0) {
-        active_slot = 0;
+        s32 active_slot = 0;
     scan_active_spawn:
         if (Player_GetPlayerSlotType(active_slot) != Gm_PKind_NA &&
             Player_GetFlagsBit1(active_slot) != 0 &&
@@ -5253,7 +5267,7 @@ void gm_8016A92C(StartMeleeRules* arg0)
 
 bool gm_8016A944(void)
 {
-    if (gm_8016AE50()->x58 != NULL) {
+    if (gm_GetRules()->x58 != NULL) {
         return true;
     }
     return false;
@@ -5272,7 +5286,7 @@ struct lbl_8046B668_t* gm_8016A98C(void)
 int gm_8016A998(s8 arg0, s8 arg1)
 {
     int i;
-    struct lbl_8046B668_t* ptr = &lbl_8046B668;
+    struct lbl_8046B668_t* ptr = gm_8016A98C();
     for (i = 0; i < 27; i++) {
         if (ptr->arr2[i] == -2) {
             ptr->arr2[i + 1] = -2;
@@ -5288,7 +5302,7 @@ int gm_8016A9E8(u8 arg0, s8 arg1)
 {
     int i;
     int found;
-    struct lbl_8046B668_t* ptr = &lbl_8046B668;
+    struct lbl_8046B668_t* ptr = gm_8016A98C();
 
     found = -1;
     for (i = 0; i < 27; i++) {
@@ -5315,7 +5329,7 @@ bool gm_8016AC44(s8 ckind, s8 costume_id)
     s32 idx;
     s32 i;
 
-    if ((gm_8016AE50()->x58 != NULL ? 1 : 0) == 1) {
+    if ((gm_GetRules()->x58 != NULL ? 1 : 0) == 1) {
         idx = -1;
         for (i = 0; i < 27; i++) {
             if (ptr->arr2[i] == -2) {
