@@ -98,7 +98,7 @@ pre-commit run --all-files # Run the hook once on existing code
   values. In these situations, document the actual enum type clearly in doxygen.
   See the [Enum Types](#enum-types) section of this doc for more details.
 
-### <a name="structs"></a>Structs
+## <a name="structs"></a>Structs
 
 - Structs should include explicit information about offsets
     - Top-level Struct offsets begin at 0.
@@ -106,29 +106,40 @@ pre-commit run --all-files # Run the hook once on existing code
       comment before the type declaration.
     - Even when the struct member is well understood and named, the offset
       comment should be retained.
-    - Struct offset comments must all be the same width, using 0s for
-      left-padding.
-- Struct definitions should never contain child structs.
+    - Struct offset comments must all be the same width and right-aligned.
+    - Bitfields should include their bit offset.
+- Struct definitions should never contain child structs, except as placeholders
+  for poorly understood structs
 - When a struct members name/purpose is unknown, it should be written as
   `x<Hex-Offset>`.
+    - If it's an unknown bit field, the format would be
+      `x<Hex-Offset>_<Bit_Index>`
 - Struct offsets should contain bit offsets when applicable
 - Bitmasks should be defined via union
-- When a section of a struct is only functioning as padding, it should be
+- When a section of a struct is understood to be padding, it should be
   written as `x<Hex-Offset>_pad` and use a u8 array.
 - Struct member names should be snake_case.
 - Struct definitions should be defined in `types.h` for a given module.
 - Typedefs associated with a given struct should be in the sibling `forward.h`
   file in the same module.
-- Examples:
+
+**Examples**
     - Yes:
 
       ```c
       struct Player {
-          /* +C00 */ u32 x0;
-          /* +C04 */ u8 x4_pad[12];
-          /* +C10 */ u8 well_known_something;
-          /* +C11 */ u8 foo_bar;
-          /* +C12 */ u8 x13
+          /*    +0 */ u32 x0;
+          /*    +4 */ u8 x4_pad[10];
+          /*   +1E */ short x1E;
+          /*   +10 */ u8 well_known_something;
+          /* +11:0 */ bool enable_rumble: 1
+          /* +11:1 */ bool x13_1: 1
+          /* +11:2 */ bool x13_2: 1
+          /* +11:3 */ bool is_invisible: 1
+          /* +11:4 */ bool x13_4: 1
+          /* +11:5 */ bool is_metal: 1
+          /* +11:6 */ bool x13_6: 1
+          /* +11:7 */ bool x13_7: 1
       };
       ```
 
@@ -141,13 +152,20 @@ pre-commit run --all-files # Run the hook once on existing code
           u32 something2;
           u32 something3;
           u8 well_known_something;
-          u8 bits
+          u8 unkb: 1;
+          u8 unkb2: 1;
+          u8 unkb3: 1;
+          u8 unkb4: 1;
+          u8 unkb5: 1;
+          u8 unkb6: 1;
+          u8 unkb7: 1;
+          u8 unkb8: 1;
       };
       ```
 
 - **Do not copy structs from another project**
 
-### <a name="conditionals"></a>Conditionals
+## <a name="conditionals"></a>Conditionals
 - Make NULL checks explicit
     - Yes: `if (ptr != NULL)`
     - No: `if (!ptr)`
@@ -212,8 +230,6 @@ try to match the original source.
 
 When explicit fixed-width numbers are necessary, use the following types:
 - Booleans: `bool`
-- Bitmasks: Use the smallest unsigned explicit width int type that fits the
-  mask. (`u8`, `u16`, `u32`, `u64`)
 - 8-bit  whole: `u8` or `s8`
 - 16-bit whole: `unsigned short` or `short`
 - 32-bit whole: `u32` or `s32`
@@ -223,6 +239,18 @@ When explicit fixed-width numbers are necessary, use the following types:
 
 See the [Integer Types](#integer-types) section for more information about
 techinical quirks surrounding various integer types.
+
+### Bitfields and Bitflags
+
+Melee sometimes packs bits in to an unsigned integer type as bitflags and
+sometimes uses bitfields as structs with individual fields for each flag. The
+appropriate type or structure to use is highly dependent on what the
+decompilation dictates.
+
+- When decompilation dictates that a field use packed bitflags, use the
+  appropriate fixed-width unsigned type (`u8`, `u16`, `u32`, or `u64`)
+- When decompilation dictates that a field use bitfields, follow the
+  [struct rules](#structs) for defining those fields.
 
 ### Specialized types
 - Single character: `char`
@@ -241,32 +269,34 @@ techinical quirks surrounding various integer types.
   easy to identify as a group.
 - Enum value names should be descriptive when well understood.
 - Enum value names should contain their offset when not well understood.
-- Enum value names should be in SCREAMING_SNAKE_CASE
-  clearly in doxygen. See the [#enum-types](enum types) docs for more info
+- Enum value names should try to follow whatever is embedded in the melee
+  binary's strings.
+    - When not found in the binary or uncertain, use SCREAMING_SNAKE_CASE
 - Enum definitions should be defined in `forward.h` for a given module.
 - Examples:
     - Good:
     ```c
     typedef enum CharacterKind {
-        /* 0x00 */ CKIND_CAPTAIN,
-        /* 0x01 */ CKIND_DONKEY,
-        /* 0x02 */ CKIND_FOX,
+        /*  +0 */ CKIND_CAPTAIN,
+        /*  +1 */ CKIND_DONKEY,
+        /*  +2 */ CKIND_FOX,
         ...
-        /* 0x20 */ CHKIND_POPO,
-        /* 0x21 */ CHKIND_NONE,
-        /* 0x22 */ CHKIND_MAX = CHKIND_NONE
+        /* +20 */ CHKIND_POPO,
+        /* +21 */ CHKIND_NONE,
+        /* +22 */ CHKIND_MAX = CHKIND_NONE
     } CharacterKind;
     ```
     - Acceptable:
     ```c
     typedef enum FooKind {
-        /* 0x0 */ FOO_BAR,
-        /* 0x1 */ FOO_BAZ,
-        /* 0x2 */ FOO_0x2,
-        /* 0x3 */ FOO_WOOZLE,
-        /* 0x4 */ FOO_0x4,
-        /* 0x5 */ FOO_WOZZLE,
-        /* 0x6 */ FOO_MAX,
+        /* +0 */ FOO_BAR,
+        /* +1 */ FOO_BAZ,
+        /* +2 */ FOO_0x2,
+        /* +3 */ FOO_WOOZLE,
+        /* +4 */ FOO_0x4,
+        ...
+        /* +A */ FOO_WOZZLE,
+        /* +B */ FOO_MAX,
     } CharacterKind;
     ```
     - Bad:
