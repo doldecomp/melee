@@ -72,26 +72,24 @@ pre-commit run --all-files # Run the hook once on existing code
     - Use UpperCamelCasing for the function's name itself, unless it is a
       standard library reimplementation.
     - Examples:
-
-    ```c
-        lbVector_sin
-        lbArchive_Parse
-        Player_DoThing
-        Stage_GetLeftBlastZone
-        ftFox_LaserOnDeath
-    ```
+      ```
+      lbVector_sin
+      lbArchive_Parse
+      Player_DoThing
+      Stage_GetLeftBlastZone
+      ftFox_LaserOnDeath
+      ```
 - Naming non-exported/local static inlines
     - Applies only to methods that have no accomanying .h definition. These are
       local and only used in the .c file where they are created.
     - Use lowerCamelCasing for the function name
     - Examples:
-
-    ```c
-        someInlineMethod
-        someNonExportedThing
-        getFooID
-        getFighterCKind
-    ```
+      ```
+      someInlineMethod
+      someNonExportedThing
+      getFooID
+      getFighterCKind
+      ```
 - Empty stub functions should use `{}` rather than `{ return; }`
 - Arguments should be snake_case
 - Oftentimes a method will return a u8, but the associated values are enum
@@ -122,46 +120,42 @@ pre-commit run --all-files # Run the hook once on existing code
 - Struct definitions should be defined in `types.h` for a given module.
 - Typedefs associated with a given struct should be in the sibling `forward.h`
   file in the same module.
-
-**Examples**
-    - Yes:
-
-      ```c
-      struct Player {
-          /*  +0   */ u32 x0;
-          /*  +4   */ char pad_4[0xC];
-          /* +10   */ short x10;
-          /* +12   */ u8 well_known_something;
-          /* +13:0 */ bool enable_rumble: 1
-          /* +13:1 */ bool x13_1: 1
-          /* +13:2 */ bool x13_2: 1
-          /* +13:3 */ bool is_invisible: 1
-          /* +13:4 */ bool x13_4: 1
-          /* +13:5 */ bool is_metal: 1
-          /* +13:6 */ bool x13_6: 1
-          /* +13:7 */ bool x13_7: 1
-      };
-      ```
-
-    - No:
-
-      ```c
-      struct Player {
-          u8 thing;
-          u32 something;
-          u32 something2;
-          u32 something3;
-          u8 well_known_something;
-          u8 unkb: 1;
-          u8 unkb2: 1;
-          u8 unkb3: 1;
-          u8 unkb4: 1;
-          u8 unkb5: 1;
-          u8 unkb6: 1;
-          u8 unkb7: 1;
-          u8 unkb8: 1;
-      };
-      ```
+- Examples
+  - Yes:
+    ```c
+    struct Player {
+        /*  +0   */ u32 x0;
+        /*  +4   */ char pad_4[0xC];
+        /* +10   */ short x10;
+        /* +12   */ u8 well_known_something;
+        /* +13:0 */ bool enable_rumble: 1
+        /* +13:1 */ bool x13_1: 1
+        /* +13:2 */ bool x13_2: 1
+        /* +13:3 */ bool is_invisible: 1
+        /* +13:4 */ bool x13_4: 1
+        /* +13:5 */ bool is_metal: 1
+        /* +13:6 */ bool x13_6: 1
+        /* +13:7 */ bool x13_7: 1
+    };
+    ```
+  - No:
+    ```c
+    struct Player {
+      u8 thing;
+      u32 something;
+      u32 something2;
+      u32 something3;
+      u8 well_known_something;
+      u8 unkb: 1;
+      u8 unkb2: 1;
+      u8 unkb3: 1;
+      u8 unkb4: 1;
+      u8 unkb5: 1;
+      u8 unkb6: 1;
+      u8 unkb7: 1;
+      u8 unkb8: 1;
+    };
+    ```
 
 - **Do not copy structs from another project**
 
@@ -171,7 +165,6 @@ pre-commit run --all-files # Run the hook once on existing code
     - No: `if (!ptr)`
 - Do not leave `else` or `else if` conditions dangling unless the `if` condition lacks braces.
   - Yes:
-
     ```c
     if (condition)
     {
@@ -183,7 +176,6 @@ pre-commit run --all-files # Run the hook once on existing code
     }
     ```
   - Yes:
-
     ```c
     if (condition)
       // code line
@@ -191,7 +183,6 @@ pre-commit run --all-files # Run the hook once on existing code
       // code line
     ```
   - No:
-
     ```c
     if (condition)
     {
@@ -207,15 +198,15 @@ pre-commit run --all-files # Run the hook once on existing code
 - Examples:
     - Good:
       ```c
-        bool luigi_unlocked = gm_IsCKindUnlocked(CKIND_LUIGI)
+      bool luigi_unlocked = gm_IsCKindUnlocked(CKIND_LUIGI)
       ```
     - Acceptable:
       ```c
-        bool intr = gm_8015CDC8(CKIND_LUIGI)
+      bool intr = gm_8015CDC8(CKIND_LUIGI)
       ```
     - Bad:
       ```c
-        bool b = gm_IsCKindUnlocked(CKIND_LUIGI)
+      bool b = gm_IsCKindUnlocked(CKIND_LUIGI)
       ```
 
 ## <a name="primitives"></a>Primitives
@@ -275,41 +266,47 @@ decompilation dictates.
     - When not found in the binary or uncertain, use SCREAMING_SNAKE_CASE
 - Enum definitions should be defined in `forward.h` for a given module.
 - Examples:
-        /*  0x0 */ CKIND_CAPTAIN,
-        /*  0x1 */ CKIND_DONKEY,
-        /*  0x2 */ CKIND_FOX,
-        ...
-        /* 0x20 */ CHKIND_POPO,
-        /* 0x21 */ CHKIND_NONE,
-        /* 0x22 */ CHKIND_MAX = CHKIND_NONE
-    } CharacterKind;
-    ```
+
+    - Good:
+      ```c
+      typedef enum CharacterKind {
+          /*  0x0 */ CKIND_CAPTAIN,
+          /*  0x1 */ CKIND_DONKEY,
+          /*  0x2 */ CKIND_FOX,
+          ...
+          /* 0x20 */ CHKIND_POPO,
+          /* 0x21 */ CHKIND_NONE,
+          /* 0x22 */ CHKIND_MAX = CHKIND_NONE
+      } CharacterKind;
+      ```
+
     - Acceptable:
-    ```c
-    typedef enum FooKind {
-        /* 0x0 */ FOO_BAR,
-        /* 0x1 */ FOO_BAZ,
-        /* 0x2 */ FOO_0x2,
-        /* 0x3 */ FOO_WOOZLE,
-        /* 0x4 */ FOO_0x4,
-        ...
-        /* 0xA */ FOO_WOZZLE,
-        /* 0xB */ FOO_MAX,
-    } CharacterKind;
-    ```
+      ```c
+      typedef enum FooKind {
+          /* 0x0 */ FOO_BAR,
+          /* 0x1 */ FOO_BAZ,
+          /* 0x2 */ FOO_0x2,
+          /* 0x3 */ FOO_WOOZLE,
+          /* 0x4 */ FOO_0x4,
+          ...
+          /* 0xA */ FOO_WOZZLE,
+          /* 0xB */ FOO_MAX,
+      } FooKind;
+      ```
+
     - Bad:
-    ```c
-    typedef enum FooKind {
-        FOO_BAR,
-        FOO_BAZ,
-        FOO_0x2,
-        FOO_WOOZLE,
-        /* 0x4 */  FOO_0x3,
-        ...
-        /* 0x1A */ FOO_WOZZLE,
-        /* 0x1B */ FOO_MAX,
-    } CharacterKind;
-    ```
+      ```c
+      typedef enum FooKind {
+          FOO_BAR,
+          FOO_BAZ,
+          FOO_0x2,
+          FOO_WOOZLE,
+          /* 0x4 */  FOO_0x3,
+          ...
+          /* 0x1A */ FOO_WOZZLE,
+          /* 0x1B */ FOO_MAX,
+      } FooKind;
+      ```
 
 ## <a name="literals"></a>Literals
 - Integer literals
