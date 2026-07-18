@@ -117,7 +117,7 @@ pre-commit run --all-files # Run the hook once on existing code
 - Struct offsets should contain bit offsets when applicable
 - Bitmasks should be defined via union
 - When a section of a struct is understood to be padding, it should be
-  written as `pad_<Hex-Offset>` and use a u8 array.
+  written as `pad_<Hex-Offset>` and use a char array.
 - Struct member names should be snake_case.
 - Struct definitions should be defined in `types.h` for a given module.
 - Typedefs associated with a given struct should be in the sibling `forward.h`
