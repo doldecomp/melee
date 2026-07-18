@@ -605,6 +605,41 @@ void gm_801B6BE8(GameScene* scene)
     }
 }
 
+static inline void gmMultiman_RecordMatchResult(MatchExitInfo* data)
+{
+    gm_80162968(data->match_end.frame_count / 60);
+    gm_8016247C(data->match_end.player_standings[0].xE);
+    gm_80182578();
+}
+
+static inline void gmMultiman_SaveCompletionRecord(VsModeData* multiman,
+                                                   UnkMultimanData* data,
+                                                   s32* record, int mode)
+{
+    if (data->x0_0) {
+        if (mode == GM_10MAN_VS) {
+            gmMainLib_8015D6D8(
+                gm_CKindToSelKind(multiman->data.players[0].c_kind), 1);
+        } else {
+            gmMainLib_8015D72C(
+                gm_CKindToSelKind(multiman->data.players[0].c_kind), 1);
+        }
+        *record = data->x4;
+    } else {
+        if (mode == GM_10MAN_VS) {
+            gmMainLib_8015D6D8(
+                gm_CKindToSelKind(multiman->data.players[0].c_kind), 0);
+        } else {
+            gmMainLib_8015D72C(
+                gm_CKindToSelKind(multiman->data.players[0].c_kind), 0);
+        }
+        *record = data->x2;
+    }
+    if (!gm_801B688C(data->x0_0)) {
+        gm_SetPendingSceneIndex(0);
+    }
+}
+
 void gm_801B6F44(GameScene* scene)
 {
     UnkMultimanData* temp_r3_2;
@@ -620,24 +655,12 @@ void gm_801B6F44(GameScene* scene)
         gm_SetPendingSceneIndex(1);
         return;
     }
-    gm_80162968(temp_r3->match_end.frame_count / 60);
-    gm_8016247C(temp_r3->match_end.player_standings[0].xE);
-    gm_80182578();
+    gmMultiman_RecordMatchResult(temp_r3);
     temp_r30 = gmMainLib_8015D6A4(
         gm_CKindToSelKind(temp_r29->data.players[0].c_kind));
     temp_r3_2 = gm_80182DF0(temp_r29->data.players[0].c_kind, 0x21);
-    if (temp_r3_2->x0_0) {
-        gmMainLib_8015D6D8(gm_CKindToSelKind(temp_r29->data.players[0].c_kind),
-                           1);
-        *temp_r30 = temp_r3_2->x4;
-    } else {
-        gmMainLib_8015D6D8(gm_CKindToSelKind(temp_r29->data.players[0].c_kind),
-                           0);
-        *temp_r30 = temp_r3_2->x2;
-    }
-    if (!gm_801B688C(temp_r3_2->x0_0)) {
-        gm_SetPendingSceneIndex(0);
-    }
+    gmMultiman_SaveCompletionRecord(temp_r29, temp_r3_2, temp_r30,
+                                    GM_10MAN_VS);
 }
 
 void gm_801B7044(GameScene* scene)
@@ -707,24 +730,12 @@ void gm_801B74F0(GameScene* scene)
         gm_SetPendingSceneIndex(1);
         return;
     }
-    gm_80162968(temp_r3->match_end.frame_count / 60);
-    gm_8016247C(temp_r3->match_end.player_standings[0].xE);
-    gm_80182578();
+    gmMultiman_RecordMatchResult(temp_r3);
     temp_r30 = gmMainLib_8015D6F8(
         gm_CKindToSelKind(temp_r29->data.players[0].c_kind));
     temp_r3_2 = gm_80182DF0(temp_r29->data.players[0].c_kind, 0x22);
-    if (temp_r3_2->x0_0) {
-        gmMainLib_8015D72C(gm_CKindToSelKind(temp_r29->data.players[0].c_kind),
-                           1);
-        *temp_r30 = temp_r3_2->x4;
-    } else {
-        gmMainLib_8015D72C(gm_CKindToSelKind(temp_r29->data.players[0].c_kind),
-                           0);
-        *temp_r30 = temp_r3_2->x2;
-    }
-    if (gm_801B688C(temp_r3_2->x0_0) == 0) {
-        gm_SetPendingSceneIndex(0);
-    }
+    gmMultiman_SaveCompletionRecord(temp_r29, temp_r3_2, temp_r30,
+                                    GM_100MAN_VS);
 }
 
 void gm_801B75F0(GameScene* scene)
@@ -780,6 +791,34 @@ static inline void gmMultiman_InitScoreRecord(VsModeData* multiman,
     gm_80181AC8(multiman->data.players[0].c_kind, mode, data->x2);
 }
 
+static inline void gmMultiman_SaveTimedRecord(VsModeData* multiman,
+                                              UnkMultimanData* data,
+                                              u16* record,
+                                              bool update_15_minute_record)
+{
+    if (data->x0_0) {
+        *record = data->x2;
+        if (update_15_minute_record) {
+            gmMainLib_8015D780(
+                gm_CKindToSelKind(multiman->data.players[0].c_kind));
+        }
+    } else {
+        *record = 0;
+    }
+    if (!gm_801B688C(data->x0_0)) {
+        gm_SetPendingSceneIndex(0);
+    }
+}
+
+static inline void gmMultiman_SaveScoreRecord(UnkMultimanData* data,
+                                              s32* record)
+{
+    *record = data->x2;
+    if (!gm_801B688C(data->x0_0)) {
+        gm_SetPendingSceneIndex(0);
+    }
+}
+
 void gm_801B7700(GameScene* scene)
 {
     StartMeleeData* temp_r3;
@@ -816,20 +855,11 @@ void gm_801B7AA0(GameScene* scene)
         gm_SetPendingSceneIndex(1);
         return;
     }
-    gm_80162968(temp_r3->match_end.frame_count / 60);
-    gm_8016247C(temp_r3->match_end.player_standings[0].xE);
-    gm_80182578();
+    gmMultiman_RecordMatchResult(temp_r3);
     temp_r31 = gmMainLib_8015D74C(
         gm_CKindToSelKind(temp_r30->data.players[0].c_kind));
     temp_r3_2 = gm_80182DF0(temp_r30->data.players[0].c_kind, 0x23);
-    if (temp_r3_2->x0_0) {
-        *temp_r31 = temp_r3_2->x2;
-    } else {
-        *temp_r31 = 0;
-    }
-    if (gm_801B688C(temp_r3_2->x0_0) == 0) {
-        gm_SetPendingSceneIndex(0);
-    }
+    gmMultiman_SaveTimedRecord(temp_r30, temp_r3_2, temp_r31, false);
 }
 
 void gm_801B7B74(GameScene* scene)
@@ -890,22 +920,11 @@ void gm_801B8024(GameScene* scene)
         gm_SetPendingSceneIndex(1);
         return;
     }
-    gm_80162968(temp_r3->match_end.frame_count / 60);
-    gm_8016247C(temp_r3->match_end.player_standings[0].xE);
-    gm_80182578();
+    gmMultiman_RecordMatchResult(temp_r3);
     temp_r30 = gmMainLib_8015D7A4(
         gm_CKindToSelKind(temp_r29->data.players[0].c_kind));
     temp_r3_2 = gm_80182DF0(temp_r29->data.players[0].c_kind, 0x24);
-    if (temp_r3_2->x0_0) {
-        *temp_r30 = temp_r3_2->x2;
-        gmMainLib_8015D780(
-            gm_CKindToSelKind(temp_r29->data.players[0].c_kind));
-    } else {
-        *temp_r30 = 0;
-    }
-    if (gm_801B688C(temp_r3_2->x0_0) == 0) {
-        gm_SetPendingSceneIndex(0);
-    }
+    gmMultiman_SaveTimedRecord(temp_r29, temp_r3_2, temp_r30, true);
 }
 
 void gm_801B8110(GameScene* scene)
@@ -965,16 +984,11 @@ void gm_801B8580(GameScene* scene)
         gm_SetPendingSceneIndex(1U);
         return;
     }
-    gm_80162968(temp_r3->match_end.frame_count / 60);
-    gm_8016247C(temp_r3->match_end.player_standings[0].xE);
-    gm_80182578();
+    gmMultiman_RecordMatchResult(temp_r3);
     temp_r31 = gmMainLib_8015D7BC(
         gm_CKindToSelKind(temp_r30->data.players[0].c_kind));
     temp_r3_2 = gm_80182DF0(temp_r30->data.players[0].c_kind, 0x25);
-    *temp_r31 = temp_r3_2->x2;
-    if (!gm_801B688C(temp_r3_2->x0_0)) {
-        gm_SetPendingSceneIndex(0U);
-    }
+    gmMultiman_SaveScoreRecord(temp_r3_2, temp_r31);
 }
 
 void gm_801B863C(GameScene* scene)
@@ -1051,15 +1065,10 @@ void gm_801B8AF8(GameScene* arg0)
         gm_SetPendingSceneIndex(1);
         return;
     }
-    gm_80162968(temp_r3->match_end.frame_count / 60);
-    gm_8016247C(temp_r3->match_end.player_standings[0].xE);
-    gm_80182578();
+    gmMultiman_RecordMatchResult(temp_r3);
     temp_r31 = gmMainLib_8015D7D4(
         gm_CKindToSelKind((u8) temp_r30->data.players[0].c_kind));
     temp_r3_2 =
         gm_80182DF0((s32) (s8) (u8) temp_r30->data.players[0].c_kind, 0x26);
-    *temp_r31 = (s32) temp_r3_2->x2;
-    if (!gm_801B688C(temp_r3_2->x0_0)) {
-        gm_SetPendingSceneIndex(0);
-    }
+    gmMultiman_SaveScoreRecord(temp_r3_2, temp_r31);
 }
