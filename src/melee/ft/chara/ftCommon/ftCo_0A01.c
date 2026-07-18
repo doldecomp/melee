@@ -7400,9 +7400,8 @@ void ftCo_800AFC40(Fighter* fp)
     ftCo_800ADE48(fp);
 }
 
-static inline void ftCo_CpuActOnPlayer(Fighter* fp,
-                                      struct Fighter_x1A88_t* data,
-                                      int player_id)
+static inline void
+ftCo_CpuActOnPlayer(Fighter* fp, struct Fighter_x1A88_t* data, int player_id)
 {
     Fighter* target = ftCo_800A5294(fp, player_id);
 
