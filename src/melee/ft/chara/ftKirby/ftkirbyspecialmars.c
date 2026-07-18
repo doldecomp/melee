@@ -28,8 +28,6 @@
 #include <common_structs.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
-#include <baselib/random.h>
-#include <MSL/math.h>
 
 /* 10B2E8 */ static void fn_8010B2E8(Fighter_GObj* gobj);
 

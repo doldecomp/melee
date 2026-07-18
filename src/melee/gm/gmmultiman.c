@@ -306,7 +306,7 @@ void gm_801B6428(GameScene* arg0)
     temp_r3->players[0].xC_b1 = false;
     temp_r3->rules.xE = gm_801647F8(temp_r3->players[0].c_kind);
     {
-        PreloadCacheScene* scene = lbDvd_8001822C();
+        PreloadCacheScene* scene = lbDvd_GetPreloadCacheScene();
         scene->game_cache.stage_id = temp_r3->rules.xE;
     }
     lbDvd_80018254();
@@ -484,7 +484,7 @@ static void gm_801B6AD8_inline(GameScene* scene, int x)
     gm_801B06B0(temp_r3, x, temp_r31->data.players[0].c_kind, 1,
                 temp_r31->data.players[0].color, temp_r31->data.players[0].xA,
                 0, gm_804D68F0);
-    temp_r31_2 = &lbDvd_8001822C()->game_cache;
+    temp_r31_2 = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_800174BC();
     temp_r31_2->entries[1].char_id = CKIND_BOY;
     temp_r31_2->entries[1].color = 0;

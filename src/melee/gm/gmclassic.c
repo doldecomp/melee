@@ -736,7 +736,7 @@ void gmClassic_801B3500(GameScene* arg0)
     sd->x0B = ally_count;
     sd->x09 = ad->x0.x4;
 
-    gc = &lbDvd_8001822C()->game_cache;
+    gc = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_80018C6C();
     count = 0;
     gc->entries[count].char_id = sd->x0D[0];

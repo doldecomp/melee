@@ -222,7 +222,7 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, false);
     mpJointSetCb1(0, gp, (mpLib_Callback) fn_8021E994);
 
-    archive = grDatFiles_801C6324();
+    archive = grDatFiles_GetArchive();
     gp->gv.unk.xD4 = (intptr_t) GObj_Create(0x11, 0x13, 0);
     cobj = lb_80013B14(&cobj_desc);
     HSD_CObjSetPerspective(cobj, 30.0F, 1.4F);
@@ -722,13 +722,13 @@ void grHomeRun_8021E4FC(Ground_GObj* arg) {}
 
 HSD_GObj* grHomeRun_8021E500(s16 arg0)
 {
-    HSD_JObj* jobj;
     s32 gobj_id;
     HSD_GObj* gobj;
     HSD_JObj* child;
     Ground* gp;
     s32 idx;
     f32 offset;
+    HSD_JObj* jobj;
 
     idx = (arg0 / grHr_804D6ADC) % 4;
     if (idx == 0) {

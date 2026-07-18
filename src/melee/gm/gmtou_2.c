@@ -26,7 +26,6 @@
 
 #include "sc/types.h"
 
-#include <printf.h>
 #include <dolphin/os.h>
 #include <baselib/controller.h>
 #include <baselib/dobj.h>
@@ -34,12 +33,9 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/mobj.h>
-#include <baselib/particle.h>
-#include <baselib/random.h>
 #include <baselib/sislib.h>
 
 /// @todo .sdata2 order hack
@@ -1213,7 +1209,7 @@ void fn_8019EE80(TmVsData* arg0)
     struct GameCache* game_cache;
     s32 i;
 
-    game_cache = &lbDvd_8001822C()->game_cache;
+    game_cache = &lbDvd_GetPreloadCacheScene()->game_cache;
     for (i = 0; i < gm_GetTournamentData()->x30; i++) {
         game_cache->entries[i].char_id = arg0->char_id[i];
         game_cache->entries[i].color = arg0->color[i];
@@ -1231,7 +1227,7 @@ void fn_8019EF08(TmVsData* arg0)
     struct GameCache* game_cache;
     s32 i;
 
-    game_cache = &lbDvd_8001822C()->game_cache;
+    game_cache = &lbDvd_GetPreloadCacheScene()->game_cache;
     for (i = 0; i < 4; i++) {
         if (arg0->slot_type[i] != Gm_PKind_NA) {
             game_cache->entries[i].char_id = arg0->char_id[i];

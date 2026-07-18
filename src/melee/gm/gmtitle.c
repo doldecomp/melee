@@ -71,7 +71,7 @@ static inline bool isActiveTitle(void)
 {
     if (gm_GetCurrentGameMode() == GM_TITLE ||
         (gm_GetCurrentGameMode() == GM_OPENING_MV &&
-         gm_GetCurrentSceneIndex() == 0x02))
+         gm_GetCurrentSceneIndex() == GS_VS))
     {
         return false;
     }
@@ -140,7 +140,7 @@ HSD_GObj* gmTitle_801A165C(void)
 
     if (gm_GetCurrentGameMode() == GM_TITLE ||
         (gm_GetCurrentGameMode() == GM_OPENING_MV &&
-         gm_GetCurrentSceneIndex() == 0x02))
+         gm_GetCurrentSceneIndex() == GS_VS))
     {
         var_r0 = false;
     } else {

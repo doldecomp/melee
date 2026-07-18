@@ -430,7 +430,7 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
         colors[2] = 0;
     }
 
-    gc = &lbDvd_8001822C()->game_cache;
+    gc = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_80018C6C();
     slot_idx = 1;
     gc->entries[0].char_id = (s32) (s8) arg0->x0.ckind;
@@ -741,6 +741,7 @@ void gm_801B60A4_OnLoad(void)
     u32 index;
     int temp;
     gm_803DEBE8_t tmp;
+    u8* q;
     PAD_STACK(16);
 
     data = &gm_80473A18;

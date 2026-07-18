@@ -895,12 +895,14 @@ bool un_80300B58(int arg0)
     if (arg0 == 1) {
         struct un_803FA258_t* data;
         lbAudioAx_80024030(1);
-        data = &un_803FA258;
-        data->x4[1] = 0x3B;
-        data->x4[3] = 0x2;
-        data->x24[1] = 3;
-        data->x24[2] = 3;
-        data->x24[3] = 3;
+        {
+            struct un_803FA258_t* data = &un_803FA258;
+            data->x4[1] = 0x3B;
+            data->x4[3] = 0x2;
+            data->x24[1] = 3;
+            data->x24[2] = 3;
+            data->x24[3] = 3;
+        }
         gm_SetPendingSceneIndex(4);
         gm_801A4B60();
     }

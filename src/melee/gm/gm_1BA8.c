@@ -93,7 +93,7 @@ void gm_801BA8FC(void)
 
 void gm_801BA938(struct EventData* arg0, int lo, int hi, bool arg3)
 {
-    struct GameCache* temp_r7 = &lbDvd_8001822C()->game_cache;
+    struct GameCache* temp_r7 = &lbDvd_GetPreloadCacheScene()->game_cache;
     u64 mask;
     s8 char_id;
     int i;
@@ -636,7 +636,7 @@ void gm_801BAD70(GameScene* arg0)
         }
     }
     {
-        struct GameCache* cache = &lbDvd_8001822C()->game_cache;
+        struct GameCache* cache = &lbDvd_GetPreloadCacheScene()->game_cache;
         switch ((s8) (u8) ev->x44) {
         case 0:
             gm_801BA938(ev, 0, 4, 1);
@@ -699,7 +699,7 @@ void gm_801BB758(GameScene* arg0)
         ev->x40 = 0;
         gm_801BBB64();
         if (do_save != 0) {
-            struct GameCache* gc = &lbDvd_8001822C()->game_cache;
+            struct GameCache* gc = &lbDvd_GetPreloadCacheScene()->game_cache;
             lbDvd_80018C6C();
             gc->entries[0].char_id = (s8) ev->x0;
             gc->entries[0].color = ev->x1;
@@ -3408,7 +3408,7 @@ void gm_801BF3F8(void)
     int j;
     int c_kind;
 
-    var_r31 = &lbDvd_8001822C()->game_cache;
+    var_r31 = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_80018C6C();
 
     for (i = 0; i < 4; i++) {
@@ -3578,7 +3578,7 @@ void gm_801BF834(GameScene* arg)
 
 void gm_801BF85C(GameScene* arg)
 {
-    PreloadCacheScene* temp_r31 = lbDvd_8001822C();
+    PreloadCacheScene* temp_r31 = lbDvd_GetPreloadCacheScene();
     PAD_STACK(4);
     lbDvd_800174BC();
     temp_r31->is_heap_persistent[1] = false;
