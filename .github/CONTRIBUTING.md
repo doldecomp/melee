@@ -286,14 +286,14 @@ decompilation dictates.
     - Acceptable:
     ```c
     typedef enum FooKind {
-        /* +0 */ FOO_BAR,
-        /* +1 */ FOO_BAZ,
-        /* +2 */ FOO_0x2,
-        /* +3 */ FOO_WOOZLE,
-        /* +4 */ FOO_0x4,
+        /* 0x0 */ FOO_BAR,
+        /* 0x1 */ FOO_BAZ,
+        /* 0x2 */ FOO_0x2,
+        /* 0x3 */ FOO_WOOZLE,
+        /* 0x4 */ FOO_0x4,
         ...
-        /* +A */ FOO_WOZZLE,
-        /* +B */ FOO_MAX,
+        /* 0xA */ FOO_WOZZLE,
+        /* 0xB */ FOO_MAX,
     } CharacterKind;
     ```
     - Bad:
