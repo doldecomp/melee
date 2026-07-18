@@ -713,7 +713,8 @@ void lbDvd_80018C6C(void)
     case 3:
         lbDvd_GetPreloadCacheScene()->is_heap_persistent[0] = true;
         lbDvd_GetPreloadCacheScene()->is_heap_persistent[1] = true;
-        lbDvd_GetPreloadCacheScene()->game_cache = lbDvd_803BA638.game_cache;
+        lbDvd_GetPreloadCacheScene()->game_cache =
+            preload_cache_scene.game_cache;
     case 0:
         break;
     }
@@ -753,21 +754,24 @@ void lbDvd_80018CF4(int arg0)
     switch (preloadCache.persistent_heaps) {
     case 0:
         lbDvd_GetPreloadCacheScene()->is_heap_persistent[0] =
-            lbDvd_803BA638.is_heap_persistent[0];
+            preload_cache_scene.is_heap_persistent[0];
         lbDvd_GetPreloadCacheScene()->is_heap_persistent[1] =
-            lbDvd_803BA638.is_heap_persistent[1];
-        lbDvd_GetPreloadCacheScene()->game_cache = lbDvd_803BA638.game_cache;
+            preload_cache_scene.is_heap_persistent[1];
+        lbDvd_GetPreloadCacheScene()->game_cache =
+            preload_cache_scene.game_cache;
         break;
     case 1:
         lbHeap_800158D0(2, 0);
         lbDvd_GetPreloadCacheScene()->is_heap_persistent[1] =
-            lbDvd_803BA638.is_heap_persistent[1];
-        lbDvd_GetPreloadCacheScene()->game_cache = lbDvd_803BA638.game_cache;
+            preload_cache_scene.is_heap_persistent[1];
+        lbDvd_GetPreloadCacheScene()->game_cache =
+            preload_cache_scene.game_cache;
         break;
     case 2:
         lbHeap_800158D0(2, 0);
         lbHeap_800158D0(3, 0);
-        lbDvd_GetPreloadCacheScene()->game_cache = lbDvd_803BA638.game_cache;
+        lbDvd_GetPreloadCacheScene()->game_cache =
+            preload_cache_scene.game_cache;
         break;
     case 3:
         lbHeap_800158D0(2, 0);
@@ -800,8 +804,8 @@ void lbDvd_80018F68(void)
 {
     int i;
     preloadCache.persistent_heaps = 0;
-    *lbDvd_GetPreloadCacheScene() = lbDvd_803BA638;
-    preloadCache.new_scene = lbDvd_803BA638;
+    *lbDvd_GetPreloadCacheScene() = preload_cache_scene;
+    preloadCache.new_scene = preload_cache_scene;
     for (i = 0; i < (signed) ARRAY_SIZE(preloadCache.entries); i++) {
         preloadCache.entries[i] = lbDvd_803BA68C;
     }
