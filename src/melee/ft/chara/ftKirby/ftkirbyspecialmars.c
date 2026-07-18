@@ -52,9 +52,7 @@ void fn_8010B1F4(Fighter_GObj* gobj)
         }
         fp->x2219_b0 = true;
     }
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
-    fp->accessory4_cb = NULL;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 void fn_8010B2E8(Fighter_GObj* gobj)

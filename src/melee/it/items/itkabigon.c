@@ -68,8 +68,7 @@ void it_802C9E8C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     ip->on_accessory = (HSD_GObjEvent) it_802CA014;
     Camera_80030E44(3, NULL);
 }
@@ -143,8 +142,7 @@ void it_802CA074(Item_GObj* gobj)
 
     HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     ip->x40_vel.y = 0.0F;
     scale.z = ip->xDD4_itemVar.kabigon.x68;
     scale.y = ip->xDD4_itemVar.kabigon.x68;
@@ -159,8 +157,7 @@ static inline void itKabigon_UnkMotion1_Anim_inline(Item_GObj* gobj, Item* ip)
     if (!it_80272C6C(gobj)) {
         HSD_JObj* jobj = GET_JOBJ(gobj);
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-        ip->entered_hitlag = efLib_PauseAll;
-        ip->exited_hitlag = efLib_ResumeAll;
+        Item_SetEffectHitlagCallbacks(ip);
         scale.x = scale.y = scale.z = ip->xDD4_itemVar.kabigon.x68;
         HSD_JObjSetScale(jobj, &scale);
     }
