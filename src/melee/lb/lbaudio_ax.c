@@ -2116,7 +2116,7 @@ void fn_800269AC(void)
     }
 }
 
-int fn_80026C04(int arg0, int)
+int fn_80026C04(int arg0, int unused)
 {
     int i;
     int priority;
