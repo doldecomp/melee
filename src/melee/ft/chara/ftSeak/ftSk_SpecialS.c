@@ -12,6 +12,7 @@
 #include "ft/ftdata.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/inlines.h"
 #include "ftNess/ftNs_AttackHi4.h"
 #include "ftSeak/ftSk_Init.h"
 #include "ftSeak/types.h"
@@ -672,9 +673,7 @@ void ftSk_SpecialS_801114E4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 349, transition_flags, fp->cur_anim_frame,
-                              1.0, 0.0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 349, transition_flags);
 
     {
         Fighter* fp2 = GET_FIGHTER(gobj);
@@ -986,10 +985,7 @@ void ftSk_SpecialS_80111CB0(HSD_GObj* gobj)
     u8 _[8];
 
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-
-    Fighter_ChangeMotionState(gobj, 354, transition_flags, fp->cur_anim_frame,
-                              1, 0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, 354, transition_flags);
 
     {
         Fighter* fp2 = gobj->user_data;
@@ -1009,10 +1005,7 @@ void ftSk_SpecialS_80111CB0(HSD_GObj* gobj)
 void ftSk_SpecialS_80111D54(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-
-    Fighter_ChangeMotionState(gobj, 351, transition_flags, fp->cur_anim_frame,
-                              1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 351, transition_flags);
 
     {
         Fighter* fp2 = GET_FIGHTER(gobj);

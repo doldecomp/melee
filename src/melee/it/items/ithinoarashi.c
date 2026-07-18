@@ -1,5 +1,7 @@
 #include "ithinoarashi.h"
 
+#include "inlines.h"
+
 #include "baselib/random.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
@@ -81,11 +83,7 @@ void it_802D5D7C(HSD_GObj* gobj)
 
 void it_802D5E4C(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_EnterStateWithEffectHitlag(gobj, 0);
     it_80273670(gobj, 0, 0.0f);
     it_8026BDB4(gobj);
 }
@@ -110,8 +108,7 @@ void it_802D5F34(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     it_802756E0(gobj);
     it_802754D4(gobj);
     it_802754BC(gobj);
@@ -232,12 +229,7 @@ void it_802D6310(Item_GObj* gobj, s32 coll)
                     target_angle;
         f32 angle_factor;
 
-        while (delta > M_PI) {
-            delta -= 2 * M_PI;
-        }
-        while (delta < -M_PI) {
-            delta += 2 * M_PI;
-        }
+        Item_ClampAngleReverse(&delta);
 
         if (delta == 0.0f) {
             angle_factor = 0.0f;
@@ -265,12 +257,7 @@ void it_802D6310(Item_GObj* gobj, s32 coll)
 
         ip->xDD4_itemVar.hinoarashi.x78 -= angle_factor;
 
-        while (ip->xDD4_itemVar.hinoarashi.x78 < -M_PI) {
-            ip->xDD4_itemVar.hinoarashi.x78 += 2 * M_PI;
-        }
-        while (ip->xDD4_itemVar.hinoarashi.x78 > M_PI) {
-            ip->xDD4_itemVar.hinoarashi.x78 -= 2 * M_PI;
-        }
+        Item_ClampAngle(&ip->xDD4_itemVar.hinoarashi.x78);
     }
 }
 

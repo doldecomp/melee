@@ -101,7 +101,7 @@ void fn_80196510(void)
 {
     int stage;
 
-    gm_8018F634();
+    gm_GetTournamentData();
 
     while (1) {
         stage = fn_8018F4A0();
@@ -147,7 +147,7 @@ void fn_801965C4(void)
     TmData* temp_r3;
     int temp_r4;
 
-    temp_r3 = gm_8018F634();
+    temp_r3 = gm_GetTournamentData();
     temp_r3->x2D = 1;
     temp_r4 = temp_r3->stage_selection_type;
 
@@ -392,7 +392,7 @@ s32 fn_80196CF8(void)
     s32 entrants;
     s32 i;
 
-    tmdata = gm_8018F634();
+    tmdata = gm_GetTournamentData();
     entrants = tmdata->entrants;
     x24 = tmdata->x24;
 
@@ -435,7 +435,7 @@ void fn_80196E30(HSD_GObj* gobj)
     u8 val;
 
     base_ptr = (u8*) &lbl_804799D8;
-    cur_option = gm_8018F634()->cur_option;
+    cur_option = gm_GetTournamentData()->cur_option;
     jobj = gobj->hsd_obj;
 
     if (cur_option <= 0x1A || cur_option >= 0x1F) {
@@ -461,10 +461,11 @@ void fn_80196EEC(HSD_GObj* gobj)
     u8* counter;
     int in_range;
 
-    tmdata = gm_8018F634();
+    tmdata = gm_GetTournamentData();
     jobj = gobj->hsd_obj;
 
-    if (gm_8018F634()->cur_option >= 0x13 && gm_8018F634()->cur_option <= 0x1A)
+    if (gm_GetTournamentData()->cur_option >= 0x13 &&
+        gm_GetTournamentData()->cur_option <= 0x1A)
     {
         in_range = 1;
     } else {
@@ -523,7 +524,7 @@ void fn_80196FFC(HSD_GObj* gobj)
     u8 state;
     u8 start_frame, cur_frame, end_frame, loop_flag;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     pnum = fn_8018F62C(gobj);
     {
         HSD_JObj* jobj_tmp = gobj->hsd_obj;
@@ -532,8 +533,8 @@ void fn_80196FFC(HSD_GObj* gobj)
 
     table = lbl_803B7CE0;
 
-    if ((s32) gm_8018F634()->cur_option >= 0x1B &&
-        (s32) gm_8018F634()->cur_option <= 0x1E)
+    if ((s32) gm_GetTournamentData()->cur_option >= 0x1B &&
+        (s32) gm_GetTournamentData()->cur_option <= 0x1E)
     {
         in_range = 1;
     } else {
@@ -638,11 +639,12 @@ void fn_801973F8(HSD_GObj* gobj)
     s32 cond;
     u8 player_count;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     pnum = fn_8018F62C(gobj);
     jobj = gobj->hsd_obj;
 
-    if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         cond = 1;
     } else {
@@ -688,11 +690,12 @@ void fn_801975C8(HSD_GObj* gobj)
     HSD_JObj* jobj;
     s32 in_range;
 
-    tmdata = gm_8018F634();
+    tmdata = gm_GetTournamentData();
     idx = fn_8018F62C(gobj);
     jobj = gobj->hsd_obj;
 
-    if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         in_range = 1;
     } else {
@@ -724,9 +727,10 @@ void fn_801976D4(HSD_GObj* gobj)
     s32 is_in_range;
     PAD_STACK(8);
 
-    gm_8018F634();
+    gm_GetTournamentData();
     jobj = gobj->hsd_obj;
-    if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         is_in_range = 1;
     } else {
@@ -754,10 +758,11 @@ void fn_801977AC(HSD_GObj* gobj)
     f32 x;
     u8 players;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     jobj = (pnum = fn_8018F62C(gobj), GET_JOBJ(gobj));
 
-    if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         in_range = 1;
     } else {
@@ -822,12 +827,12 @@ void fn_80197AF0(HSD_GObj* gobj)
     u8 players;
     u8 state;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     pnum = fn_8018F62C(gobj);
     jobj = gobj->hsd_obj;
 
-    if (((s32) gm_8018F634()->cur_option >= 0x1B) &&
-        ((s32) gm_8018F634()->cur_option <= 0x1E))
+    if (((s32) gm_GetTournamentData()->cur_option >= 0x1B) &&
+        ((s32) gm_GetTournamentData()->cur_option <= 0x1E))
     {
         in_range = 1;
     } else {
@@ -886,9 +891,10 @@ void fn_80197D4C(HSD_GObj* gobj)
     int cond;
     PAD_STACK(8);
 
-    gm_8018F634();
+    gm_GetTournamentData();
     jobj = gobj->hsd_obj;
-    if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         cond = 1;
     } else {
@@ -916,11 +922,12 @@ void fn_80197E18(HSD_GObj* gobj)
     s32 in_range;
     f32 x_pos;
 
-    data = gm_8018F634();
+    data = gm_GetTournamentData();
     pnum = fn_8018F62C(gobj);
     jobj = gobj->hsd_obj;
 
-    if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         in_range = 1;
     } else {
@@ -964,11 +971,12 @@ void fn_80197FD8(HSD_GObj* gobj)
     s32 option_in_range;
     u8 port_u8;
 
-    tm_data = gm_8018F634();
+    tm_data = gm_GetTournamentData();
     port = fn_8018F62C(gobj);
     jobj = (HSD_JObj*) gobj->hsd_obj;
 
-    if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         option_in_range = 1;
     } else {
@@ -1028,11 +1036,12 @@ void fn_801981A0(HSD_GObj* gobj)
     u8 counter;
 
     state = &lbl_804799D8;
-    data = gm_8018F634();
+    data = gm_GetTournamentData();
     pnum = fn_8018F62C(gobj);
     jobj = gobj->hsd_obj;
 
-    if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         in_range = 1;
     } else {
@@ -1090,11 +1099,12 @@ void fn_801983E4(HSD_GObj* gobj)
     s32 cond;
     u8 player_count;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     pnum = fn_8018F62C(gobj);
     jobj = gobj->hsd_obj;
 
-    if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         cond = 1;
     } else {
@@ -1133,7 +1143,7 @@ void fn_80198584(ResultsData* results)
     HSD_JObj* jobj;
     int cur_option;
 
-    cur_option = gm_8018F634()->cur_option;
+    cur_option = gm_GetTournamentData()->cur_option;
     jobj = results->x28;
     if (cur_option == 0x1D) {
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
@@ -1151,11 +1161,11 @@ void fn_801985D4(HSD_GObj* gobj)
     HSD_JObj* child;
     s32 in_range;
 
-    gm_8018F634();
+    gm_GetTournamentData();
     jobj = gobj->hsd_obj;
 
-    if ((s32) gm_8018F634()->cur_option >= 0x1F &&
-        (s32) gm_8018F634()->cur_option <= 0x27)
+    if ((s32) gm_GetTournamentData()->cur_option >= 0x1F &&
+        (s32) gm_GetTournamentData()->cur_option <= 0x27)
     {
         in_range = 1;
     } else {
@@ -1195,11 +1205,11 @@ void fn_80198824(HSD_GObj* gobj)
     HSD_JObj* jobj;
     s32 in_range;
 
-    gm_8018F634();
+    gm_GetTournamentData();
     jobj = gobj->hsd_obj;
 
-    if ((s32) gm_8018F634()->cur_option >= 0x1F &&
-        (s32) gm_8018F634()->cur_option <= 0x27)
+    if ((s32) gm_GetTournamentData()->cur_option >= 0x1F &&
+        (s32) gm_GetTournamentData()->cur_option <= 0x27)
     {
         in_range = 1;
     } else {
@@ -1252,7 +1262,7 @@ void fn_80198BA0(void)
     s32 i;
 
     ptr = (u8*) &lbl_804799D8;
-    td = gm_8018F634();
+    td = gm_GetTournamentData();
 
     /* Clear first 4 bytes as word (stw instruction) */
     *(u32*) &ptr[0x00] = 0;
@@ -1303,7 +1313,7 @@ void fn_80198C60(void)
 
     PAD_STACK(24);
 
-    td = gm_8018F634();
+    td = gm_GetTournamentData();
     td->x524[2] = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
     text = td->x524[2];
     text->font_size.x = 0.054945F;
@@ -1336,7 +1346,7 @@ void fn_80198D18(void)
     HSD_GObj* gobj;
     PAD_STACK(24);
 
-    gm_8018F634();
+    gm_GetTournamentData();
     gobj = fn_80190174(lbl_804D666C->cameras->desc);
     fn_801901F8(lbl_804D666C->cameras->desc);
     fn_801902F0((int) gobj);
@@ -1344,7 +1354,7 @@ void fn_80198D18(void)
     fn_8019035C(0, lbl_804D666C->models[5], 0, 0x1A, 2, 1, fn_80196DBC, 0.0f);
     fn_8019035C(0, lbl_804D666C->models[4], 0, 0x1A, 2, 1, fn_80196E30, 80.0f);
 
-    td = gm_8018F634();
+    td = gm_GetTournamentData();
     td->x524[2] = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
     text = td->x524[2];
     text->font_size.x = lbl_804DA82C;
@@ -1393,8 +1403,8 @@ void fn_80198EBC(void)
     HSD_JObj* jobj2;
     HSD_JObj* j16;
 
-    td = gm_8018F634();
-    gm_8018F634();
+    td = gm_GetTournamentData();
+    gm_GetTournamentData();
 
     gobj = fn_80190174(lbl_804D666C->cameras->desc);
     fn_801901F8(lbl_804D666C->cameras->desc);
@@ -1585,8 +1595,8 @@ void fn_80199AF0(void)
     s32 local2;
     PAD_STACK(4);
 
-    td1 = gm_8018F634();
-    td2 = gm_8018F634();
+    td1 = gm_GetTournamentData();
+    td2 = gm_GetTournamentData();
 
     result = fn_8018F508(&local1);
     if (result == 1) {
@@ -1615,7 +1625,7 @@ void fn_80199AF0(void)
     }
 
     bracket_idx = fn_8018F74C();
-    gm_8018F634();
+    gm_GetTournamentData();
 
     gobj = fn_80190174(lbl_804D666C->cameras->desc);
     fn_801901F8(lbl_804D666C->cameras->desc);
@@ -1716,11 +1726,11 @@ void fn_8019A158(void)
     u8* cursor;
     PAD_STACK(4);
 
-    td1 = gm_8018F634();
+    td1 = gm_GetTournamentData();
     lbl_804799D8.x48 = &gm_80477738;
     lbl_804799D8.x0 = mode = 0;
 
-    td2 = gm_8018F634();
+    td2 = gm_GetTournamentData();
 
     result = fn_8018F508(&local1);
     if (result == 1) {
@@ -1919,9 +1929,9 @@ extern s32 lbl_804D6678;
 
 void gm_8019A828(void)
 {
-    gm_8018F634()->x32 = 0;
+    gm_GetTournamentData()->x32 = 0;
     lbl_804D6678 = 1;
-    gm_8018F634()->cur_option = 0x1B;
+    gm_GetTournamentData()->cur_option = 0x1B;
 }
 
 /// @todo 99.86%: all instruction shapes and callee-saved registers match;
@@ -1956,7 +1966,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
             s32 cond;
 
             lbAudioAx_80024030(1);
-            t = gm_8018F634();
+            t = gm_GetTournamentData();
             t->x2D = 1;
             stype = t->stage_selection_type;
             if ((stype == 2 && (u8) t->x32 == 0) || stype == 3) {
@@ -2037,7 +2047,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                 }
 
                 {
-                    TmData* t2 = gm_8018F634();
+                    TmData* t2 = gm_GetTournamentData();
                     BracketEntry* ent = &lbl_80473AB8[fn_8018F74C()];
                     s32 hmn_count = 0;
                     s32 active_count = 0;
@@ -2069,7 +2079,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                     }
 
                     {
-                        TmData* t3 = gm_8018F634();
+                        TmData* t3 = gm_GetTournamentData();
                         s32 stype2;
                         s32 cond2;
 
@@ -2116,7 +2126,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                         if (lbl_804799D8.x44[i] == 7) {
                             lbl_804799D8.x44[i] = 6;
                         } else if (lbl_804799D8.x44[i] == 8) {
-                            u8 np = gm_8018F634()->x30;
+                            u8 np = gm_GetTournamentData()->x30;
                             s32 count4 = 0;
                             s32 j;
 
@@ -2152,7 +2162,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                         } else {
                             u8 pstate2 = lbl_804799D8.x2A[i].state;
                             if (pstate2 == 0 || pstate2 == 3 || pstate2 == 5) {
-                                u8 np2 = gm_8018F634()->x30;
+                                u8 np2 = gm_GetTournamentData()->x30;
                                 s32 count5 = 0;
                                 s32 k;
 
@@ -2318,11 +2328,12 @@ void gm_8019B2DC_OnFrame(void)
     s32 stage;
     PAD_STACK(4);
 
-    data = gm_8018F634();
+    data = gm_GetTournamentData();
     arg1 = fn_8018F674(4);
     arg2 = fn_8018F640(4);
 
-    if (gm_8018F634()->cur_option >= 0x13 && gm_8018F634()->cur_option <= 0x1A)
+    if (gm_GetTournamentData()->cur_option >= 0x13 &&
+        gm_GetTournamentData()->cur_option <= 0x1A)
     {
         cond = 1;
     } else {
@@ -2331,8 +2342,8 @@ void gm_8019B2DC_OnFrame(void)
     if (cond != 0) {
         fn_8019A71C((s32*) data, arg1, arg2);
     } else {
-        if (gm_8018F634()->cur_option >= 0x1B &&
-            gm_8018F634()->cur_option <= 0x1E)
+        if (gm_GetTournamentData()->cur_option >= 0x1B &&
+            gm_GetTournamentData()->cur_option <= 0x1E)
         {
             cond = 1;
         } else {
@@ -2386,7 +2397,7 @@ static inline void fn_8019B458_UpdateRank(TmData* tm, struct Lbl804799D8_t* d8)
     d8->x0 = rank = 0;
     tm->pad_x34[0] = tm->x33;
 
-    td = gm_8018F634();
+    td = gm_GetTournamentData();
     entrants = td->entrants;
     x24 = td->x24;
 
@@ -2424,7 +2435,7 @@ void fn_8019B458(s32* arg0)
 
     {
         match = fn_80196CF8();
-        td2 = gm_8018F634();
+        td2 = gm_GetTournamentData();
         fn_80198D18();
 
         {
@@ -2473,7 +2484,7 @@ void fn_8019B458(s32* arg0)
             }
 
             if (use_random_stage != 0) {
-                gm_8018F634();
+                gm_GetTournamentData();
                 do {
                     lbl_804D4190 = fn_8018F4A0();
                     if (lbl_804D4194 == lbl_804D4190) {
@@ -2564,7 +2575,7 @@ void gm_8019B8C4_OnEnter(void* arg0)
     lbl_804D6664 = NULL;
     lbl_804D6680[0] = 0;
     lbl_804D6680[2] = 0;
-    gm_8018F634();
+    gm_GetTournamentData();
     lbl_804D6660 = lbArchive_80016DBC("GmTou1p", &lbl_804D666C,
                                       "ScGamTour_scene_data", 0);
     lbl_804D6638 = lbArchive_80016DBC(

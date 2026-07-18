@@ -265,9 +265,7 @@ bool itTaru_UnkMotion1_Coll(Item_GObj* gobj)
         }
         if (var_f1 < attr->x34) {
             ip = GET_ITEM(gobj);
-            ip->x40_vel.z = 0.0f;
-            ip->x40_vel.y = 0.0f;
-            ip->x40_vel.x = 0.0f;
+            itResetVelocity(ip);
             it_8026B390(gobj);
             Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
         } else {

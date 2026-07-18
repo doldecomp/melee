@@ -26,7 +26,7 @@ HSD_GObj* itGamewatchFire_Spawn(HSD_GObj* parent, Vec3* pos, Fighter_Part part,
     Item_GObj* result;
 
     spawn.kind = It_Kind_GameWatch_Fire;
-    itGamewatch_InitSpawnItem(&spawn, parent, pos, dir);
+    Item_InitSpawn(&spawn, parent, pos, dir);
 
     result = Item_80268B18(&spawn);
     if (result != NULL) {

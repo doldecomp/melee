@@ -617,7 +617,10 @@ void ifStatus_802F5B48(HSD_GObj* gobj)
             p->flags.unk10 = 0;
         }
         if (p->old_damage == 0) {
-            if (gm_8016AE44()->FighterMatchInfo[(s8) p->player_slot].x4_b5) {
+            if (gm_16AE_GetUnkData_1()
+                    ->FighterMatchInfo[(s8) p->player_slot]
+                    .x4_b5)
+            {
                 ifStatus_802F6948((s8) p->player_slot);
             }
         }
@@ -850,7 +853,7 @@ void ifStatus_802F6508(s32 arg0)
     u32 mode;
 
     if (Player_GetPlayerSlotType(arg0) != Gm_PKind_NA &&
-        (s32) ifStatus_804D6D60 > arg0 && (rules = gm_8016AE50(), rules->x2_6))
+        (s32) ifStatus_804D6D60 > arg0 && (rules = gm_GetRules(), rules->x2_6))
     {
         hud_player = &ifStatus_GetHUDInfo()->players[(u8) arg0];
         hud_player->damage_percent = -1;
@@ -980,7 +983,7 @@ void ifStatus_802F6948(s32 player_idx)
     struct StartMeleeRules* small_thing;
     IfDamageFlags* hud_player_flags;
 
-    small_thing = gm_8016AE50();
+    small_thing = gm_GetRules();
     hud_player = &ifStatus_GetHUDInfo()->players[player_idx];
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
@@ -1000,9 +1003,9 @@ static inline void ifStatus_TriggerStockLoss(s32 player_idx,
     struct StartMeleeRules* small_thing;
     IfDamageFlags* hud_player_flags;
 
-    big_thing = gm_8016AE38();
+    big_thing = gm_16AE_GetUnkData_0();
     big_thing->unk_D = player_idx;
-    small_thing = gm_8016AE50();
+    small_thing = gm_GetRules();
     hud_player = &ifStatus_GetHUDInfo()->players[player_idx];
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
@@ -1031,7 +1034,7 @@ void ifStatus_802F69C0(s32 player_idx, s32 arg1)
 {
     lbl_8046B6A0_t* big_thing;
 
-    big_thing = gm_8016AE38();
+    big_thing = gm_16AE_GetUnkData_0();
     if (big_thing->x24C8.x0_0 != 1 && big_thing->x24C8.x2_5 != 0) {
         if_802F7C30(arg1);
     }
@@ -1130,7 +1133,7 @@ void ifStatus_802F7034(UNK_T arg0)
     u8 unkB;
     u8 mr;
 
-    big_thing = gm_8016AE38();
+    big_thing = gm_16AE_GetUnkData_0();
     if (big_thing->unk_10 != 0) {
         a = big_thing->unk_10 - 1;
     } else {

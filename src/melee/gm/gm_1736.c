@@ -14,17 +14,17 @@
 #include <melee/lb/lbtime.h>
 #include <melee/ty/toy.h>
 
-static lbl_8046DBD8_t lbl_8046DBD8;
+static lbl_8046DBD8_t challenger_data;
 
-lbl_8046DBD8_t* gm_801736DC(void)
+lbl_8046DBD8_t* gm_GetChallengerData(void)
 {
-    return &lbl_8046DBD8;
+    return &challenger_data;
 }
 
 void gm_801736E8(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 game_mode)
 {
-    lbl_8046DBD8_t* tmp = &lbl_8046DBD8;
-    memzero(tmp, sizeof(lbl_8046DBD8));
+    lbl_8046DBD8_t* tmp = &challenger_data;
+    memzero(tmp, sizeof(challenger_data));
     tmp->x0 = arg0;
     tmp->x1 = arg1;
     tmp->x2 = arg2;
@@ -38,10 +38,10 @@ void gm_801736E8(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 game_mode)
 bool gm_80173754(u8 gameMode, u8 arg1)
 {
     if (gm_801721EC()) {
-        memzero(&lbl_8046DBD8, sizeof(lbl_8046DBD8));
-        lbl_8046DBD8.x0 = CHKIND_NONE;
-        lbl_8046DBD8.x2 = arg1;
-        lbl_8046DBD8.x5 = gameMode;
+        memzero(&challenger_data, sizeof(challenger_data));
+        challenger_data.x0 = CHKIND_NONE;
+        challenger_data.x2 = arg1;
+        challenger_data.x5 = gameMode;
         gm_SetPendingGameMode(GM_CHALLENGER_APPROACH);
         gm_SetNewGameModePending();
         return true;
@@ -52,13 +52,13 @@ bool gm_80173754(u8 gameMode, u8 arg1)
 
 u8 gm_801737D8(void)
 {
-    return lbl_8046DBD8.x6;
+    return challenger_data.x6;
 }
 
 void gm_801737E8_OnLoad(void)
 {
-    lbl_8046DBD8.x6 = gm_GetPreviousGameMode();
-    if (lbl_8046DBD8.x0 == CHKIND_NONE) {
+    challenger_data.x6 = gm_GetPreviousGameMode();
+    if (challenger_data.x0 == CHKIND_NONE) {
         gm_SetSceneIndex(2);
     } else {
         gm_SetSceneIndex(0);
@@ -100,7 +100,7 @@ void gm_8017390C(int arg0, int arg1)
 
     switch (arg0) { /* irregular */
     case 0:
-        temp_r3 = gm_8017E424();
+        temp_r3 = gm_GetAdventureData();
         if (temp_r3->x76 != 0) {
             fn_80172C78(0xE7);
         }

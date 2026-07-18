@@ -1121,8 +1121,6 @@ void grMuteCity_801F0F4C(Ground_GObj* gobj)
 {
     f32 pos;
     grMc_TrackInitData* src = grMc_803E3B7C;
-    grMc_CarEntry* dst = grMc_8049F4B8;
-    s32* idx = grMc_8049F440;
     int i;
 
     for (i = 0; i < 30; i++) {
@@ -1132,19 +1130,18 @@ void grMuteCity_801F0F4C(Ground_GObj* gobj)
         } else if (pos < 0.0) {
             pos++;
         }
-        dst->x0 = pos;
-        dst->x4 = pos;
-        dst->xC = src->speed;
-        dst->x8 = 0.0f;
-        dst->x10 = 0.0f;
-        dst->x20 = 0;
-        dst->x22_flags.b0 = 0;
-        dst->x22_flags.b1 = 0;
-        dst->x24 = 0;
-        dst->x28 = 0;
-        dst++;
+        grMc_8049F4B8[i].x0 = pos;
+        grMc_8049F4B8[i].x4 = pos;
+        grMc_8049F4B8[i].xC = src->speed;
+        grMc_8049F4B8[i].x8 = 0.0f;
+        grMc_8049F4B8[i].x10 = 0.0f;
+        grMc_8049F4B8[i].x20 = 0;
+        grMc_8049F4B8[i].x22_flags.b0 = 0;
+        grMc_8049F4B8[i].x22_flags.b1 = 0;
+        grMc_8049F4B8[i].x24 = 0;
+        grMc_8049F4B8[i].x28 = 0;
         src++;
-        *idx++ = i;
+        grMc_8049F440[i] = i;
     }
 }
 
@@ -1237,22 +1234,24 @@ void grMuteCity_801F106C(s32 i)
     }
 }
 
+static inline f32 grMc_DistanceSquared(f32* a, f32* b)
+{
+    return SQ(a[0] - b[0]) + SQ(a[1] - b[1]) + SQ(a[2] - b[2]);
+}
+
 void grMuteCity_801F1328(void)
 {
-    s32 offset;
     s32* arr = grMc_8049F440;
-    s32* p;
     int i;
     int j;
+    PAD_STACK(8);
 
-    for (offset = 4, i = 1; i < 30; i++, offset += 4) {
-        p = (s32*) ((u32) arr + offset);
+    for (i = 1; i < 30; i++) {
         for (j = i; j >= 0; j--) {
-            s32 temp = p[0];
-            s32 prev = p[-1];
-            if (grMc_8049F4B8[temp].x0 > grMc_8049F4B8[prev].x0) {
-                p[0] = prev;
-                *--p = temp;
+            s32 temp = arr[j];
+            if (grMc_8049F4B8[arr[j]].x0 > grMc_8049F4B8[arr[j - 1]].x0) {
+                arr[j] = arr[j - 1];
+                arr[j - 1] = temp;
             } else {
                 break;
             }
@@ -1295,20 +1294,11 @@ void grMuteCity_801F1328(void)
             }
             grMc_8049F4B8[arr[idx]].x20 |= 1;
 
+            if (grMc_DistanceSquared(&grMc_8049F4B8[arr[i]].x14,
+                                     &grMc_8049F4B8[arr[idx]].x14) < 900.0f)
             {
-                f32 dx =
-                    grMc_8049F4B8[arr[i]].x14 - grMc_8049F4B8[arr[idx]].x14;
-                f32 dy =
-                    grMc_8049F4B8[arr[i]].x18 - grMc_8049F4B8[arr[idx]].x18;
-                f32 dz =
-                    grMc_8049F4B8[arr[i]].x1C - grMc_8049F4B8[arr[idx]].x1C;
-                f32 dx2 = dx * dx;
-                f32 dy2 = dy * dy;
-                f32 dz2 = dz * dz;
-                if ((dz2 + (dx2 + dy2)) < 900.0f) {
-                    grMc_8049F4B8[arr[i]].x20 |= 8;
-                    grMc_8049F4B8[arr[idx]].x20 |= 8;
-                }
+                grMc_8049F4B8[arr[i]].x20 |= 8;
+                grMc_8049F4B8[arr[idx]].x20 |= 8;
             }
 
             if (grMc_8049F4B8[arr[i]].xC > grMc_8049F4B8[arr[idx]].xC) {
@@ -1507,15 +1497,11 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
     HSD_Spline* spline;
 
     Ground_801C0498();
-    PAD_STACK(16);
+    PAD_STACK(12);
     track_mid = 0.5f * (gp->gv.mutecity.xD4 + gp->gv.mutecity.xD8);
     Camera_GetTransformPosition(&spE8);
 
-    if (car_jobj == NULL) {
-        jobj = NULL;
-    } else {
-        jobj = car_jobj->child;
-    }
+    jobj = car_jobj == NULL ? NULL : car_jobj->child;
 
     {
         s32 timer = car_gp->gv.mutecity.xC4;
@@ -1819,11 +1805,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
 
         car++;
         car_idx += 1;
-        if (jobj == NULL) {
-            jobj = NULL;
-        } else {
-            jobj = jobj->next;
-        }
+        jobj = jobj == NULL ? NULL : jobj->next;
     } while (car_idx < 0x1E);
 }
 
@@ -1841,14 +1823,19 @@ DynamicModelDesc* grMuteCity_801F28A8(void)
     return NULL;
 }
 
+typedef struct grMc_StackPadArg {
+    u32 x[4];
+} grMc_StackPadArg;
+
+/// @todo Fake function: exists only to reproduce the retail stack layout.
+static inline void grMc_StackPad(grMc_StackPadArg arg) {}
+
 void grMuteCity_801F290C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_GObj* lgobj;
     s32 i;
     HSD_LObj* lobj;
-    PAD_STACK(16);
-
     if (grLib_801C96E8(gobj) != 0) {
         if (gp->gv.mutecity2.xC4_flags.b0) {
             lgobj = HSD_GObj_Entities->xC;
@@ -1910,6 +1897,7 @@ void grMuteCity_801F290C(Ground_GObj* gobj)
         }
         gp->gv.mutecity2.xC4_flags.b0 = 1;
     }
+    grMc_StackPad(*(grMc_StackPadArg*) gp->gv.mutecity2.saved_colors);
 }
 
 void grMuteCity_801F2AB0(s32 arg0, HSD_JObj* arg1)

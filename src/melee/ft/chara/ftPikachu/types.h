@@ -51,7 +51,7 @@ typedef struct _ftPikachuAttributes {
     float x98; // second zip velocity decay
     float x9C;
 
-    s32 xA0;
+    int xA0;
     float xA4;
     s32 xA8; // minimum stick angle difference between two up b zips
     float xAC;

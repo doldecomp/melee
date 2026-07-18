@@ -181,48 +181,52 @@ void grYorster_80202254(Ground_GObj* gobj)
 
 void grYorster_802022A0(HSD_GObj* gobj) {}
 
+static inline Ground* grYorster_GetGround(HSD_GObj* gobj)
+{
+    return gobj->user_data;
+}
+
 void grYorster_802022A4(HSD_GObj* gobj)
 {
+    Ground* gp = grYorster_GetGround(gobj);
     s32 joints[9] = { 0xA, 0xB, 0xC, 0xD, 0xE, 0xF, 0x10, 0x11, 0x12 };
-    Ground* temp_r28;
     int i;
 
-    temp_r28 = gobj->user_data;
     for (i = 0; i < 9; i++) {
-        temp_r28->gv.yorster.elements[i].x00 = (s8) i;
-        temp_r28->gv.yorster.elements[i].x01 = 0;
-        temp_r28->gv.yorster.elements[i].x04 = 0.0f;
-        temp_r28->gv.yorster.elements[i].x08 = 0.0f;
-        temp_r28->gv.yorster.elements[i].x14 = joints[i];
-        temp_r28->gv.yorster.elements[i].x18 =
-            Ground_801C3FA4(gobj, joints[i]);
-        temp_r28->gv.yorster.elements[i].x1C = grMaterial_801C8CFC(
-            0, 0, temp_r28, temp_r28->gv.yorster.elements[i].x18, NULL,
-            grYorster_80202428, NULL);
-        grMaterial_801C8E68(temp_r28->gv.yorster.elements[i].x1C, GA_Ground);
-        mpJointSetCb2(Ground_801C32D4(temp_r28->map_id,
-                                      temp_r28->gv.yorster.elements[i].x14),
-                      temp_r28, grYorster_802024F0);
-        grMaterial_801C8DE0(temp_r28->gv.yorster.elements[i].x1C, 0.0f, 0.0f,
-                            0.0f, 0.0f, 0.0f, 0.0f, 5.0f);
-        grMaterial_801C8E08(temp_r28->gv.yorster.elements[i].x1C);
-        grAnime_801C7FF8(gobj, temp_r28->gv.yorster.elements[i].x14, 7, 1,
-                         0.0f, 0.0f);
+        gp->gv.yorster.elements[i].x00 = (s8) i;
+        gp->gv.yorster.elements[i].x01 = 0;
+        gp->gv.yorster.elements[i].x04 = 0.0f;
+        gp->gv.yorster.elements[i].x08 = 0.0f;
+        gp->gv.yorster.elements[i].x14 = joints[i];
+        gp->gv.yorster.elements[i].x18 = Ground_801C3FA4(gobj, joints[i]);
+        gp->gv.yorster.elements[i].x1C =
+            grMaterial_801C8CFC(0, 0, gp, gp->gv.yorster.elements[i].x18, NULL,
+                                grYorster_80202428, NULL);
+        grMaterial_801C8E68(gp->gv.yorster.elements[i].x1C, GA_Ground);
+        mpJointSetCb2(
+            Ground_801C32D4(gp->map_id, gp->gv.yorster.elements[i].x14), gp,
+            grYorster_802024F0);
+        grMaterial_801C8DE0(gp->gv.yorster.elements[i].x1C, 0.0f, 0.0f, 0.0f,
+                            0.0f, 0.0f, 0.0f, 5.0f);
+        grMaterial_801C8E08(gp->gv.yorster.elements[i].x1C);
+        grAnime_801C7FF8(gobj, gp->gv.yorster.elements[i].x14, 7, 1, 0.0f,
+                         0.0f);
     }
 }
 
 void grYorster_80202428(HSD_GObj* item_gobj, Ground* gp, Vec3* pos,
                         HSD_GObj* fighter_gobj, f32 value)
 {
+    Ground* gp2 = (Ground*) ((s32) gp + 0);
     int i;
 
     if (ftLib_80086960(fighter_gobj)) {
-        ftLib_80086A4C(fighter_gobj, grYt_804D6A20.x0->x14);
+        ftLib_80086A4C(fighter_gobj, (f32) grYt_804D6A20.x0->x14);
     }
 
     for (i = 0; i < 9; i++) {
-        if (item_gobj == gp->gv.yorster.elements[i].x1C) {
-            gp->gv.yorster.elements[i].x04 += value;
+        if (item_gobj == gp2->gv.yorster.elements[i].x1C) {
+            gp2->gv.yorster.elements[i].x04 += value;
             break;
         }
     }
@@ -275,9 +279,11 @@ void grYorster_802024F0(Ground* gp, s32 joint_id, CollData* coll_data,
 
 void grYorster_8020266C(HSD_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    Ground* gp2 = gp;
+    Ground* gp;
+    Ground* gp2;
     s32 i;
+
+    gp2 = gp = gobj->user_data;
     PAD_STACK(8);
 
     for (i = 0; i < 9; i++) {
@@ -361,10 +367,12 @@ void grYorster_8020266C(HSD_GObj* gobj)
                 gp->gv.yorster.elements[i].x0C--;
             }
             break;
-        case 3:
+        case 3: {
+            Vec3 pos;
+            PAD_STACK(12);
+
             if (gp->gv.yorster.elements[i].x0C >= 0x143) {
-                Vec3 pos;
-                HSD_JObjGetTranslation(gp2->gv.yorster.elements[i].x18, &pos);
+                HSD_JObjGetTranslation(gp->gv.yorster.elements[i].x18, &pos);
 
                 if (grLib_801C9EE8(&pos, 10.0f * Ground_801C0498() - 2.0f)) {
                     grAnime_801C7FF8(gobj, gp2->gv.yorster.elements[i].x14, 7,
@@ -391,11 +399,10 @@ void grYorster_8020266C(HSD_GObj* gobj)
                     0 ||
                 gp->gv.yorster.elements[i].x0C >= 0x19)
             {
-                Vec3 pos;
-
                 gp->gv.yorster.elements[i].x0C = 0;
-                HSD_JObjGetTranslation(gp2->gv.yorster.elements[i].x18, &pos);
-                if (!grLib_801C9EE8(&pos, 10.0f * Ground_801C0498() * 0.5f)) {
+                HSD_JObjGetTranslation(gp->gv.yorster.elements[i].x18, &pos);
+                if (!grLib_801C9EE8(&pos, (10.0f * Ground_801C0498()) / 2.0f))
+                {
                     grAnime_801C7FF8(gobj, gp2->gv.yorster.elements[i].x14, 7,
                                      1, 0.0f, 1.0f);
                     mpJointListAdd(joint);
@@ -408,6 +415,7 @@ void grYorster_8020266C(HSD_GObj* gobj)
                 gp->gv.yorster.elements[i].x0C++;
             }
             break;
+        }
         default:
             break;
         }

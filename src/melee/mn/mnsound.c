@@ -281,7 +281,7 @@ void mnSound_80249C08(int unused)
         user_data = alloc;
     }
     HSD_ASSERTREPORT(0x22CU, user_data, "Can't get user_data.\n");
-    gmMainLib_8015CC34();
+    gmMainLib_GetGameRules();
     user_data->cursor = 0x14;
     user_data->unk1 = lbAudioAx_80024BD0();
     user_data->unk2 = 0U;

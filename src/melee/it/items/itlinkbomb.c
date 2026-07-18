@@ -472,9 +472,7 @@ void it_8029F18C(HSD_GObj* gobj)
         item->xDD4_itemVar.linkbomb.x0.b1 = true;
     } else {
         item->xDD4_itemVar.linkbomb.x0.b1 = false;
-        item->x40_vel.z = 0.0f;
-        item->x40_vel.y = 0.0f;
-        item->x40_vel.x = 0.0f;
+        itResetVelocity(item);
     }
 
     it_8029D9A4(gobj, 4, 0);

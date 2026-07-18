@@ -70,7 +70,7 @@ void fn_80190ABC(int mode)
     s32 opt;
     s32 i;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     cur_opt = tm->cur_option;
     opt = MIN(cur_opt, 6);
 
@@ -186,7 +186,7 @@ void fn_80190ABC(int mode)
 void gm_80190EA4(void)
 {
     int i;
-    TmData* tmdata = gm_8018F634();
+    TmData* tmdata = gm_GetTournamentData();
 
     fn_80190174(lbl_804D664C->cameras->desc);
     fn_801902F0(0);
@@ -203,7 +203,7 @@ void gm_80190EA4(void)
         tmdata->cur_option += 1;
     }
     if (gm_804771C4.match_type == 0) {
-        TmData* tmdata = gm_8018F634();
+        TmData* tmdata = gm_GetTournamentData();
         fn_8018EC7C();
         fn_8018E618(tmdata->entrants, 4.5f, 1);
         fn_80190480(130.0f);
@@ -212,7 +212,7 @@ void gm_80190EA4(void)
     tmdata->x20 = 0;
 
     for (i = 0; i < 64; i++) {
-        if (gmMainLib_8015CC34()->handicap == 1) {
+        if (gmMainLib_GetGameRules()->handicap == 1) {
             tmdata->x37[i].x2 = 5;
         } else {
             tmdata->x37[i].x2 = 9;
@@ -224,7 +224,7 @@ void gm_80190EA4(void)
 /// Initializes the time menu state when entering the time selection screen.
 void gm_80190FE4(int arg0)
 {
-    TmData* tm = gm_8018F634();
+    TmData* tm = gm_GetTournamentData();
 
     if (mn_8022F218() == 0) {
         fn_80190174(lbl_804D664C->cameras->desc);
@@ -270,7 +270,7 @@ void fn_80191154(HSD_GObj* gobj)
     HSD_JObj* jobj;
     u8* xE_ptr;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     jobj = gobj->hsd_obj;
 
     if (tm->cur_option < 9) {
@@ -308,7 +308,7 @@ static inline void fn_80191240_save_root_jobj(HSD_JObj* jobj,
 static inline void fn_80191240_get_menu_state(HSD_GObj* gobj, TmData** tm,
                                               s32* val)
 {
-    *tm = gm_8018F634();
+    *tm = gm_GetTournamentData();
     *val = fn_8018F62C(gobj);
 }
 
@@ -382,7 +382,7 @@ void fn_801913BC(HSD_GObj* gobj)
     u8* counter_ptr;
     PAD_STACK(0x60);
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     idx = fn_8018F62C(gobj);
     jobj = gobj->hsd_obj;
 
@@ -469,7 +469,7 @@ void fn_80191678(HSD_GObj* gobj)
     HSD_JObj* jobj;
     u8* ptr;
 
-    tmdata = gm_8018F634();
+    tmdata = gm_GetTournamentData();
     idx = fn_8018F62C(gobj);
     jobj = gobj->hsd_obj;
 
@@ -508,7 +508,7 @@ void fn_8019175C(HSD_GObj* gobj)
     HSD_JObj* root_jobj;
     HSD_JObj* child;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     fn_8018F62C(gobj);
     root_jobj = GET_JOBJ(gobj);
     jobj = root_jobj;
@@ -581,7 +581,7 @@ void fn_801918F0(HSD_GObj* gobj)
     HSD_JObj* jobj;
     u8* counter;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     jobj = gobj->hsd_obj;
 
     if (tm->cur_option <= 9) {
@@ -631,7 +631,7 @@ void fn_80191A54(HSD_GObj* gobj)
     HSD_JObj* child;
     int cur_option;
 
-    td = gm_8018F634();
+    td = gm_GetTournamentData();
     jobj = gobj->hsd_obj;
     jobj_copy = jobj;
 
@@ -666,7 +666,7 @@ void fn_80191B5C(void* gobj)
     HSD_JObj* jobj;
 
     timers = (u8*) &lbl_804799B8;
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     jobj = (HSD_JObj*) ((HSD_GObj*) gobj)->hsd_obj;
 
     if (tm->cur_option <= 9) {
@@ -703,7 +703,7 @@ void fn_80191CA4(HSD_GObj* gobj)
     TmData* tm;
     HSD_JObj* jobj;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     jobj = gobj->hsd_obj;
     if (tm->cur_option <= 9) {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
@@ -723,7 +723,7 @@ void fn_80191D38(HSD_GObj* gobj)
     s32 idx;
     HSD_JObj* jobj;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     idx = fn_8018F62C(gobj);
     jobj = gobj->hsd_obj;
 
@@ -767,7 +767,7 @@ void fn_80191E9C(HSD_GObj* gobj)
     s32 idx;
     HSD_JObj* jobj;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     idx = fn_8018F62C(gobj);
     jobj = gobj->hsd_obj;
 
@@ -807,7 +807,7 @@ void fn_80191FD4(HSD_GObj* gobj)
     HSD_JObj* sibling;
     enum CSSIconHud hud;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     jobj = gobj->hsd_obj;
     idx = fn_8018F62C(gobj);
 
@@ -929,7 +929,7 @@ void fn_8019237C(HSD_GObj* gobj)
     TmData* tm;
     HSD_JObj* jobj;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     jobj = gobj->hsd_obj;
 
     if (tm->cur_option <= 9) {
@@ -960,7 +960,7 @@ void fn_8019249C(HSD_GObj* gobj)
     HSD_JObj* child2;
     int cur_option;
 
-    tmdata = gm_8018F634();
+    tmdata = gm_GetTournamentData();
     cur_option = tmdata->cur_option;
     jobj = gobj->hsd_obj;
 
@@ -1007,7 +1007,7 @@ extern f32 lbl_804DA760; // 0.3f
 #pragma dont_inline on
 void fn_80192690(HSD_GObj* gobj)
 {
-    TmData* tmdata = gm_8018F634();
+    TmData* tmdata = gm_GetTournamentData();
     HSD_JObj* jobj = gobj->hsd_obj;
 
     if (tmdata->cur_option <= 9) {
@@ -1036,7 +1036,7 @@ void fn_80192758(HSD_GObj* gobj)
     HSD_JObj* jobj;
 
     data = (u8*) &lbl_804799B8;
-    tmdata = gm_8018F634();
+    tmdata = gm_GetTournamentData();
     {
         HSD_JObj* tmp_p26447 = gobj->hsd_obj;
         jobj = tmp_p26447;
@@ -1107,7 +1107,7 @@ s32 fn_80192938(void)
     u8 handicap;
     PAD_STACK(8);
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     lbl_804D6658 = 0;
     tm->cur_option = 9;
 
@@ -1125,9 +1125,9 @@ s32 fn_80192938(void)
         tm->x37[i].x4 = 0;
         tm->x37[i].xB = (u8) i;
 
-        if ((u8) gmMainLib_8015CC34()->handicap == 1) {
+        if ((u8) gmMainLib_GetGameRules()->handicap == 1) {
             if ((s32) gm_804771C4.match_type == 0) {
-                gmMainLib_8015CC34()->handicap = 0;
+                gmMainLib_GetGameRules()->handicap = 0;
                 tm->x37[i].x1 = 9;
             } else {
                 tm->x37[i].x1 = 5;
@@ -1187,7 +1187,7 @@ s32 fn_80192938(void)
     lbl_804799B8.x4 = 0xB;
     lbl_804799B8.x5 = 0;
     lbl_804799B8.x6 = 0;
-    handicap = gmMainLib_8015CC34()->handicap;
+    handicap = gmMainLib_GetGameRules()->handicap;
     lbl_804799B8.x0 = handicap;
     tm->x24 = 0;
     tm->pad_x34[0] = 0xFF;
@@ -1322,7 +1322,7 @@ void fn_80193308(void)
     HSD_Text* created_text;
 
     color = lbl_804DA78C;
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
 
     tm->x4E0 = HSD_SisLib_803A5ACC(0, (s32) lbl_804D663C, 124.5f, 45.0f, 0.0f,
                                    391.0f, 30.0f);
@@ -1410,7 +1410,7 @@ void fn_801935B8(void)
     HSD_Fog* fog;
     s32 i;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     fn_8018FBE0(0, 0, 0, 5, 5, 0x3e7, 3);
     fn_801902F0((s32) fn_80190174(lbl_804D664C->cameras->desc));
     fn_80193308();
@@ -1437,7 +1437,7 @@ void fn_801935B8(void)
     }
 
     lbl_804799B8.x1 = 0;
-    lbl_804799B8.x0 = gmMainLib_8015CC34()->handicap;
+    lbl_804799B8.x0 = gmMainLib_GetGameRules()->handicap;
 
     tm->x32 = 0;
     for (i = 0; i < 25; i++) {
@@ -1693,7 +1693,7 @@ post:
             } else {
                 arg0[3] = 0xE;
             }
-            tm = gm_8018F634();
+            tm = gm_GetTournamentData();
             fn_8018EC7C();
             fn_8018E618(tm->entrants, lbl_804DA6D8, 1);
             fn_80190480(lbl_804DA6DC);
@@ -1805,7 +1805,7 @@ void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
                 }
                 break;
             }
-            tm = gm_8018F634();
+            tm = gm_GetTournamentData();
             fn_8018EC7C();
             fn_8018E618(tm->entrants, lbl_804DA6D8, 1);
             fn_80190480(lbl_804DA6DC);
@@ -1885,7 +1885,7 @@ void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
                 }
                 break;
             }
-            tm = gm_8018F634();
+            tm = gm_GetTournamentData();
             fn_8018EC7C();
             fn_8018E618(tm->entrants, lbl_804DA6D8, 1);
             fn_80190480(lbl_804DA6DC);
@@ -2245,7 +2245,7 @@ void fn_80194D84(s32* state, u32 buttons, u32 trigger)
         if (cur_state == 6) {
             fn_80192938();
         } else if (cur_state == 7) {
-            tm = gm_8018F634();
+            tm = gm_GetTournamentData();
             tm->x20 = 1;
             HSD_SisLib_803A5E70();
             mn_8022F138(0x19, 0x1C);
@@ -2418,7 +2418,7 @@ void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
             tm->cur_option = 6;
             lbl_804799B8.xE = 0;
             if (gm_804771C4.match_type == 0) {
-                TmData* tmdata = gm_8018F634();
+                TmData* tmdata = gm_GetTournamentData();
                 fn_8018EC7C();
                 fn_8018E618(tmdata->entrants, 4.5f, 1);
                 fn_80190480(130.0f);
@@ -2657,7 +2657,7 @@ void fn_80195AF0(s32* state_ptr, u32 buttons, u32 trigger)
         switch (*state_ptr) {
         case 0xD:
             if (IsNameListFull() == 0) {
-                TmData* tm = gm_8018F634();
+                TmData* tm = gm_GetTournamentData();
                 tm->x20 = 1;
                 HSD_SisLib_803A5E70();
                 mn_8022F138(0x19, 0x1C);
@@ -2762,7 +2762,7 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
         if (GetNameText(lbl_804799B8.x5 + (lbl_804799B8.x6 * 4)) != NULL) {
             s32 selected = lbl_804799B8.x5 + (lbl_804799B8.x6 * 4);
             slot = lbl_804799B8.x2 + lbl_804799B8.x3;
-            tm = gm_8018F634();
+            tm = gm_GetTournamentData();
             count = tm->x2E;
             unique = 1;
             if ((s32) count > 0) {
@@ -2825,7 +2825,7 @@ void fn_8019610C(s32* state, u32 buttons, u32 trigger)
             if (gm_804771C4.match_type == 0) {
                 gm_SetPendingSceneIndex(1);
             } else {
-                td = gm_8018F634();
+                td = gm_GetTournamentData();
                 i = 0;
                 src_ptr = (u8*) td;
                 dst_ptr = (u8*) td;
@@ -2866,7 +2866,7 @@ void gm_8019628C_OnFrame(void)
     u32 r29;
     s32 cur_option;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     r30 = fn_8018F674(4);
     r29 = fn_8018F640(4);
 
@@ -2929,7 +2929,7 @@ void gm_801964A4_OnLeave(UNK_T arg)
     lbArchive_80016EFC(lbl_804D6644);
     lbArchive_80016EFC(lbl_804D6648);
     lbArchive_80016EFC(lbl_804D6638);
-    gm_8018F634()->cur_option = 0x13;
-    gm_8018F634()->x2C = 1;
-    gm_8018F634()->x31 = lbl_804799B8.x0;
+    gm_GetTournamentData()->cur_option = 0x13;
+    gm_GetTournamentData()->x2C = 1;
+    gm_GetTournamentData()->x31 = lbl_804799B8.x0;
 }

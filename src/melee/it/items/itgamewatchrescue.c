@@ -1,5 +1,7 @@
 #include "itgamewatchrescue.h"
 
+#include "inlines.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
@@ -36,16 +38,7 @@ Item_GObj* it_802C8038(Item_GObj* parent, Vec3* arg1, s32 arg2, s32 arg3,
 
     if (parent != NULL) {
         spawn.kind = It_Kind_GameWatch_Rescue;
-        spawn.prev_pos = *arg1;
-        spawn.prev_pos.z = 0.0F;
-        spawn.pos = spawn.prev_pos;
-        spawn.facing_dir = farg0;
-        spawn.x3C_damage = 0;
-        spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
-        spawn.x0_parent_gobj = parent;
-        spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-        spawn.x44_flag.b0 = false;
-        spawn.x40 = 0;
+        Item_InitSpawnOnPlaneNoInitialCollision(&spawn, parent, arg1, farg0);
         result = Item_80268B18(&spawn);
         if (result != NULL) {
             temp_r6 = result->user_data;

@@ -123,7 +123,7 @@ void it_8028FCE8(HSD_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     PAD_STACK(12);
-    item->x40_vel.x = item->x40_vel.y = item->x40_vel.z = 0.0F;
+    itResetVelocity(item);
     Item_8026AE84(item, 0x107, 0x7F, 0x40);
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
 }

@@ -22,8 +22,8 @@
 /* 1A4B60 */ void gm_801A4B60(void);
 /* 1A4B74 */ UNK_RET gm_801A4B74(UNK_PARAMS);
 /* 1A4B88 */ void gm_801A4B88(struct GameSceneInfo*);
-/* 1A4B90 */ void* gm_801A4B90(void);
-/* 1A4B9C */ void* gm_801A4B9C(void);
+/* 1A4B90 */ void* gm_GetCurrentSceneEnterData(void);
+/* 1A4B9C */ void* gm_GetCurrentSceneExitData(void);
 /* 1A4BA8 */ u32 gm_801A4BA8(void);
 /* 1A4BB8 */ u32 gm_801A4BB8(void);
 /* 1A4BC8 */ HSD_GObj* gm_801A4BC8(void);

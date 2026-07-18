@@ -1405,7 +1405,7 @@ void gm_8016260C(u8 arg0, u8 arg1)
         return;
     }
     if (gm_GetCurrentGameMode() == GM_STAMINA_VS) {
-        counter = gmMainLib_8015CD5C();
+        counter = gmMainLib_GetStaminaMatchTotal();
     } else {
         switch ((s32) arg0) {
         case 0:
@@ -1447,7 +1447,7 @@ u32 gm_GetVsPlayMatchTotal(void)
               *(u32*) gmMainLib_GetStockMatchTotal() +
               *(u32*) gmMainLib_GetCoinMatchTotal() +
               *(u32*) gmMainLib_GetBonusMatchTotal() +
-              *(u32*) gmMainLib_8015CD5C();
+              *(u32*) gmMainLib_GetStaminaMatchTotal();
     return tmp;
 }
 
@@ -3437,7 +3437,7 @@ void fn_8016719C(s32 slot, s32 subchar)
     s32 stage_id;
     struct fn_8016719C_xC_bits* temp_r4;
 
-    match_info = gm_8016AE44();
+    match_info = gm_16AE_GetUnkData_1();
     stage_id = gm_8016B004();
     if (Stage_80224DC8(stage_id) != 0) {
         var_r30 = Ground_801C5774();
@@ -3522,7 +3522,7 @@ void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, GmRouteCallback arg4)
     struct lbl_8046B488_t* new_var2;
     long long new_var3;
     struct lbl_8046B488_t* temp_ptr;
-    temp_ptr = fn_80169364();
+    temp_ptr = gm_1601_GetUnkData();
     temp_ptr->x0 = arg0;
     temp_ptr->x1 = 0x21;
     new_var3 = arg1;
@@ -3546,7 +3546,7 @@ void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, GmRouteCallback arg4)
 
 void fn_8016758C(void)
 {
-    lbl_8046B6A0_t* mi = gm_8016AE44();
+    lbl_8046B6A0_t* mi = gm_16AE_GetUnkData_1();
     int i;
 
     for (i = 0; i < ARRAY_SIZE(mi->FighterMatchInfo); i++) {
@@ -3577,7 +3577,7 @@ s32 fn_80167638(s32 arg0, Vec3* arg1, Vec3* arg2)
 
     PAD_STACK(8);
 
-    info = gm_8016AE44();
+    info = gm_16AE_GetUnkData_1();
     idx = 0;
     for (i = 0; i < ARRAY_SIZE(info->FighterMatchInfo); i++) {
         if (info->FighterMatchInfo[i].x8 == 0) {
@@ -3598,7 +3598,7 @@ s32 fn_80167638(s32 arg0, Vec3* arg1, Vec3* arg2)
         arg2->x = 16.0f * (&sp.x0)[idx];
         arg2->z = 0.0f;
         arg2->y = 0.0f;
-        info = gm_8016AE44();
+        info = gm_16AE_GetUnkData_1();
         info->FighterMatchInfo[idx].x8 = 0x90;
         info->FighterMatchInfo[idx].x9 = chr;
     }
@@ -3731,7 +3731,7 @@ void gm_80167BC8(VsModeData* vs_data)
     s8* handicap;
     PAD_STACK(56);
 
-    rules = gmMainLib_8015CC34();
+    rules = gmMainLib_GetGameRules();
     prefs = gmMainLib_8015CC58();
     vs_data->data.rules.x0_6 = 0;
 
@@ -3911,7 +3911,7 @@ void gm_80167FC4(SSSData* arg0)
 
     PAD_STACK(8);
 
-    temp_r3 = gmMainLib_8015CC34();
+    temp_r3 = gmMainLib_GetGameRules();
     if (temp_r3->unk_x7 == 1) {
         arg0->force_stage_id = mnStageSel_8025BBD4();
         return;
@@ -3958,7 +3958,7 @@ s8 gm_801685D4(u8 arg0, u8 arg1)
 {
     s8* temp_r3;
 
-    if (gmMainLib_8015CC34()->handicap == 1) {
+    if (gmMainLib_GetGameRules()->handicap == 1) {
         temp_r3 = gmMainLib_8015CE44(arg0, arg1);
         if (temp_r3 != NULL) {
             return *temp_r3;
@@ -3972,7 +3972,7 @@ void gm_80168638(MatchEnd* arg0)
     u8 spC[4];
     s32 i;
     s8* temp_r3;
-    if ((u8) gmMainLib_8015CC34()->handicap == 1) {
+    if ((u8) gmMainLib_GetGameRules()->handicap == 1) {
         for (i = 0; i < 4; i++) {
             temp_r3 = gmMainLib_8015CE44(i, arg0->player_standings[i].x4);
             if (temp_r3 != NULL) {
@@ -4396,29 +4396,29 @@ void gm_801692E8(u32 secs, datetime* datetime)
     }
 }
 
-struct lbl_8046B488_t* fn_80169364(void)
+struct lbl_8046B488_t* gm_1601_GetUnkData(void)
 {
     return &lbl_8046B488;
 }
 
 u8 gm_80169370(s32 arg0)
 {
-    return ((u8*) &lbl_8046B488)[arg0];
+    return ((u8*) gm_1601_GetUnkData())[arg0];
 }
 
 int gm_80169384(void)
 {
-    return lbl_8046B488.x7;
+    return gm_1601_GetUnkData()->x7;
 }
 
 s32 gm_80169394(void)
 {
-    return lbl_8046B488.unk_10_b3;
+    return gm_1601_GetUnkData()->unk_10_b3;
 }
 
 s32 fn_801693A8(void)
 {
-    return lbl_8046B488.unk_10_b2;
+    return gm_1601_GetUnkData()->unk_10_b2;
 }
 
 static inline bool gm_801693BC_inline(u8 ckind)
@@ -4434,7 +4434,7 @@ bool gm_801693BC(int arg0)
 {
     u8 ckind;
     PAD_STACK(8);
-    if (Player_GetFlagsBit1(arg0) && (int) lbl_8046B488.x8 > 1) {
+    if (Player_GetFlagsBit1(arg0) && (int) gm_1601_GetUnkData()->x8 > 1) {
         return true;
     }
     ckind = Player_GetPlayerCharacter(arg0);
@@ -4447,12 +4447,12 @@ bool gm_801693BC(int arg0)
 
 void fn_80169434(GmRouteCallback fn)
 {
-    lbl_8046B488.x1B8 = fn;
+    gm_1601_GetUnkData()->x1B8 = fn;
 }
 
 bool fn_80169444(bool arg0)
 {
-    struct lbl_8046B488_t* gp = &lbl_8046B488;
+    struct lbl_8046B488_t* gp = gm_1601_GetUnkData();
 
     if (gp->x1B8 != NULL) {
         if (gp->x1B8(arg0) == 1) {
@@ -4465,7 +4465,7 @@ bool fn_80169444(bool arg0)
 int gm_801694A0(HSD_GObj* arg0)
 {
     int i;
-    int count = lbl_8046B488.x7;
+    int count = gm_1601_GetUnkData()->x7;
     PAD_STACK(8);
     for (i = 0; i < 6; i++) {
         if (Player_GetPlayerSlotType(i) != Gm_PKind_NA &&
@@ -4479,23 +4479,24 @@ int gm_801694A0(HSD_GObj* arg0)
 
 UNK_T gm_80169520(void)
 {
-    return lbl_8046B488.x20;
+    return gm_1601_GetUnkData()->x20;
 }
 
 UNK_T gm_80169530(void)
 {
-    return lbl_8046B488.xA2;
+    return gm_1601_GetUnkData()->xA2;
 }
 
 UNK_T gm_80169540(void)
 {
-    return lbl_8046B488.x124;
+    return gm_1601_GetUnkData()->x124;
 }
 
 void fn_80169550(int slot)
 {
-    s8 idx = lbl_8046B488.x1A6[slot];
-    lbl_8046B488.x20[idx] = -1;
+    struct lbl_8046B488_t* gp = gm_1601_GetUnkData();
+    s8 idx = gp->x1A6[slot];
+    gp->x20[idx] = -1;
 }
 
 void fn_80169574(ssize_t size, s8* buf)
@@ -4871,7 +4872,7 @@ void fn_8016A09C(void)
     PAD_STACK(4);
     var_r29 = 0;
 
-    gm_8016AE44();
+    gm_16AE_GetUnkData_1();
     lbl_8046B488.unk_10_b1 = 1;
     lbl_8046B488.unk_10_b0 = 0;
 
@@ -4897,8 +4898,8 @@ void fn_8016A09C(void)
 void gm_8016A164(void)
 {
     int i;
-    struct lbl_8046B488_t* gp = &lbl_8046B488;
-    lbl_8046B6A0_t* match_info = gm_8016AE44();
+    struct lbl_8046B488_t* gp = gm_1601_GetUnkData();
+    lbl_8046B6A0_t* match_info = gm_16AE_GetUnkData_1();
     PAD_STACK(4);
     if (gp == 0) {
         if (match_info == 0) {
@@ -4920,12 +4921,12 @@ void gm_8016A164(void)
 
 s32 fn_8016A1E4(void)
 {
-    return lbl_8046B488.unk_10_b0;
+    return gm_1601_GetUnkData()->unk_10_b0;
 }
 
 bool gm_8016A1F8(void)
 {
-    if (lbl_8046B488.unk_10_b1) {
+    if (gm_1601_GetUnkData()->unk_10_b1) {
         return true;
     }
     return false;
@@ -4933,7 +4934,7 @@ bool gm_8016A1F8(void)
 
 void gm_8016A21C(StartMeleeRules* arg0)
 {
-    arg0->x54 = (void*) &lbl_8046B488;
+    arg0->x54 = (void*) gm_1601_GetUnkData();
 }
 
 static inline s32 fn_801695BC_noinline(u8 arg0, u8 arg1, u8 arg2, u8* arg3,
@@ -5090,7 +5091,7 @@ void fn_8016A46C(void)
 
 void fn_8016A488(s32 arg0)
 {
-    if (gm_8016AE44()->hud_enabled == true) {
+    if (gm_16AE_GetUnkData_1()->hud_enabled == true) {
         Player_80031848(arg0);
     }
 }
@@ -5266,7 +5267,7 @@ void gm_8016A92C(StartMeleeRules* arg0)
 
 bool gm_8016A944(void)
 {
-    if (gm_8016AE50()->x58 != NULL) {
+    if (gm_GetRules()->x58 != NULL) {
         return true;
     }
     return false;
@@ -5285,7 +5286,7 @@ struct lbl_8046B668_t* gm_8016A98C(void)
 int gm_8016A998(s8 arg0, s8 arg1)
 {
     int i;
-    struct lbl_8046B668_t* ptr = &lbl_8046B668;
+    struct lbl_8046B668_t* ptr = gm_8016A98C();
     for (i = 0; i < 27; i++) {
         if (ptr->arr2[i] == -2) {
             ptr->arr2[i + 1] = -2;
@@ -5301,7 +5302,7 @@ int gm_8016A9E8(u8 arg0, s8 arg1)
 {
     int i;
     int found;
-    struct lbl_8046B668_t* ptr = &lbl_8046B668;
+    struct lbl_8046B668_t* ptr = gm_8016A98C();
 
     found = -1;
     for (i = 0; i < 27; i++) {
@@ -5328,7 +5329,7 @@ bool gm_8016AC44(s8 ckind, s8 costume_id)
     s32 idx;
     s32 i;
 
-    if ((gm_8016AE50()->x58 != NULL ? 1 : 0) == 1) {
+    if ((gm_GetRules()->x58 != NULL ? 1 : 0) == 1) {
         idx = -1;
         for (i = 0; i < 27; i++) {
             if (ptr->arr2[i] == -2) {

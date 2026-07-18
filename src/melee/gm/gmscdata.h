@@ -4,6 +4,6 @@
 #include <melee/gm/forward.h>
 
 GameSceneHandler* gm_GetAllGameSceneHandlers(void);
-GameMode* gm_801A50AC(void);
+GameMode* gm_GetAllGameModes(void);
 
 #endif

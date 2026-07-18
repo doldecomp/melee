@@ -1,5 +1,7 @@
 #include "itbat.h"
 
+#include "inlines.h"
+
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -30,15 +32,7 @@ Item_GObj* it_80284854(Vec3* pos)
 
     pos->z = 0.0F;
     spawn.kind = It_Kind_Bat;
-    spawn.prev_pos = *pos;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = -1.0F;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
-    spawn.x0_parent_gobj = NULL;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawn(&spawn, NULL, pos, -1.0F);
     item_gobj = Item_80268B5C(&spawn);
 
     if (item_gobj != NULL) {
@@ -63,9 +57,7 @@ void itBat_Logic11_Spawned(Item_GObj* gobj)
 void it_80284974(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
-    item->x40_vel.z = 0.0f;
-    item->x40_vel.y = 0.0f;
-    item->x40_vel.x = 0.0f;
+    itResetVelocity(item);
     item->xD50_landNum = 0;
 
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);

@@ -92,9 +92,7 @@ void itWStar_Logic29_Spawned(Item_GObj* gobj)
 void it_8029455C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->x40_vel.z = 0.0f;
-    ip->x40_vel.y = 0.0f;
-    ip->x40_vel.x = 0.0f;
+    itResetVelocity(ip);
     it_8026B390(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
