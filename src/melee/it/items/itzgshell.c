@@ -83,6 +83,7 @@ void it_802DDB38(Item_GObj* gobj)
     Vec v;
     HSD_JObj* jobj;
     PAD_STACK(4);
+    /// @todo Shared code with #it_8028B8D8.
     if (ip->xDD4_itemVar.zgshell.xDF8 <= 0.0f) {
         jobj = GET_JOBJ(gobj);
         v = attrs->x3C;
@@ -456,6 +457,7 @@ static inline void it_802DDB38_inline(Item_GObj* gobj, Vec* v)
     Item* ip = GET_ITEM(gobj);
     itZGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     HSD_JObj* jobj;
+    /// @todo Inlined version of #it_802DDB38.
     if (ip->xDD4_itemVar.zgshell.xDF8 <= 0.0f) {
         jobj = GET_JOBJ(gobj);
         *v = attrs->x3C;
