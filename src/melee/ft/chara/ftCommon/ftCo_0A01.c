@@ -909,11 +909,6 @@ void ftCo_800A20A0(Fighter* fp)
     }
 }
 
-static inline void ftCo_800A20A0_dontinline(Fighter* fp)
-{
-    ftCo_800A20A0(fp);
-}
-
 bool ftCo_800A2170(Fighter* fp0, Fighter* fp1)
 {
     mp_UnkStruct0* temp_r3;
@@ -3972,11 +3967,6 @@ void ftCo_800A80E4(Fighter* fp)
     }
 }
 
-static inline void ftCo_800A80E4_dontinline(Fighter* fp)
-{
-    ftCo_800A80E4(fp);
-}
-
 static inline void ftCo_800A8210_inline0(Fighter* fp, Vec3* out)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
@@ -6913,6 +6903,30 @@ void ftCo_800AEA8C(Fighter* fp)
     ftCo_800ADE48(fp);
 }
 
+static inline bool ftCo_CpuShouldAct(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data;
+
+    data = &fp->x1A88;
+    if (data->x18 != data->x20 && data->x18 != data->x1C) {
+        data->x60 = 0;
+    }
+    if (data->x18 == 4) {
+        return false;
+    } else {
+        data->xFA_b2 = false;
+        return true;
+    }
+}
+
+static inline void ftCo_CpuTargetAct(Fighter* fp)
+{
+    ftCo_800A20A0(fp);
+    if (ftCo_CpuShouldAct(fp)) {
+        ftCo_800A80E4(fp);
+    }
+}
+
 void ftCo_800AECF0(Fighter* fp)
 {
     struct Fighter_x1A88_t* data2;
@@ -6942,19 +6956,7 @@ void ftCo_800AECF0(Fighter* fp)
         data->xF9_b6 = false;
         data->xF9_b7 = false;
         data->xF9_b1 = true;
-        ftCo_800A20A0_dontinline(fp);
-        if (data->x18 != data->x20 && data->x18 != data->x1C) {
-            data->x60 = 0;
-        }
-        if (data->x18 == 4) {
-            do_act = 0;
-        } else {
-            data->xFA_b2 = false;
-            do_act = 1;
-        }
-        if (do_act != 0) {
-            ftCo_800A80E4_dontinline(fp);
-        }
+        ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
     }
@@ -7090,7 +7092,6 @@ void ftCo_800AEFB8(Fighter* fp)
     Vec3 sp28;
     s32 cmd;
     Fighter* target;
-    s32 do_act;
     PAD_STACK(0x10);
 
     cmd = ftCo_800A229C(fp, &sp28);
@@ -7109,19 +7110,7 @@ void ftCo_800AEFB8(Fighter* fp)
         data->xF9_b6 = false;
         data->xF9_b7 = false;
         data->xF9_b1 = true;
-        ftCo_800A20A0_dontinline(fp);
-        if (data->x18 != data->x20 && data->x18 != data->x1C) {
-            data->x60 = 0;
-        }
-        if (data->x18 == 4) {
-            do_act = 0;
-        } else {
-            data->xFA_b2 = false;
-            do_act = 1;
-        }
-        if (do_act != 0) {
-            ftCo_800A80E4_dontinline(fp);
-        }
+        ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
     }
@@ -7146,22 +7135,6 @@ static inline void ftCo_800AF290_update_target(Fighter* fp)
         } else {
             data->xF8_b6 = false;
         }
-    }
-}
-
-static inline bool ftCo_800AF290_should_act(Fighter* fp)
-{
-    struct Fighter_x1A88_t* data;
-
-    data = &fp->x1A88;
-    if (data->x18 != data->x20 && data->x18 != data->x1C) {
-        data->x60 = 0;
-    }
-    if (data->x18 == 4) {
-        return false;
-    } else {
-        data->xFA_b2 = false;
-        return true;
     }
 }
 
@@ -7231,10 +7204,7 @@ void ftCo_800AF290(Fighter* fp)
         data->xF9_b6 = false;
         data->xF9_b7 = false;
         data->xF9_b1 = true;
-        ftCo_800A20A0_dontinline(fp);
-        if (ftCo_800AF290_should_act(fp)) {
-            ftCo_800A80E4_dontinline(fp);
-        }
+        ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
     }
@@ -7271,7 +7241,7 @@ void ftCo_800AF290(Fighter* fp)
             return;
         }
     }
-    if (ftCo_800AF290_should_act(fp)) {
+    if (ftCo_CpuShouldAct(fp)) {
         if (data->x4C != NULL) {
             ftCo_800A866C(fp);
         } else {
@@ -7380,7 +7350,6 @@ void ftCo_800AF78C(Fighter* fp)
     f32 dy;
     f32 dist;
     s32 cmd;
-    s32 do_act;
     s32 should_escape;
     Fighter** target_slot;
     struct Fighter_x1A88_t* data;
@@ -7405,19 +7374,7 @@ void ftCo_800AF78C(Fighter* fp)
         data->xF9_b6 = false;
         data->xF9_b7 = false;
         data->xF9_b1 = true;
-        ftCo_800A20A0_dontinline(fp);
-        if (data->x18 != data->x20 && data->x18 != data->x1C) {
-            data->x60 = 0;
-        }
-        if (data->x18 == 4) {
-            do_act = false;
-        } else {
-            data->xFA_b2 = false;
-            do_act = true;
-        }
-        if (do_act) {
-            ftCo_800A80E4_dontinline(fp);
-        }
+        ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
     }
@@ -7556,10 +7513,7 @@ void ftCo_800AFE3C(Fighter* fp, int arg1)
         temp_r31->xF9_b6 = false;
         temp_r31->xF9_b7 = false;
         temp_r31->xF9_b1 = true;
-        ftCo_800A20A0_dontinline(fp);
-        if (inlineI1_alt(fp)) {
-            ftCo_800A80E4_dontinline(fp);
-        }
+        ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
     }
@@ -7596,9 +7550,7 @@ void ftCo_800B00F8(Fighter* fp)
 {
     Vec3 sp28;
     Fighter* temp_r3;
-    s32 temp_r3_2;
     s32 temp_r3_4;
-    s32 var_r0;
     s32 var_r0_2;
     s32 var_r0_3;
     int var_r0_10;
@@ -7631,20 +7583,7 @@ void ftCo_800B00F8(Fighter* fp)
         temp_r31->xF9_b6 = false;
         temp_r31->xF9_b7 = false;
         temp_r31->xF9_b1 = true;
-        ftCo_800A20A0_dontinline(fp);
-        temp_r3_2 = temp_r31->x18;
-        if ((temp_r3_2 != temp_r31->x20) && (temp_r3_2 != temp_r31->x1C)) {
-            temp_r31->x60 = 0;
-        }
-        if (temp_r31->x18 == 4) {
-            var_r0 = 0;
-        } else {
-            temp_r31->xFA_b2 = false;
-            var_r0 = 1;
-        }
-        if (var_r0 != 0) {
-            ftCo_800A80E4_dontinline(fp);
-        }
+        ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
     }
@@ -8231,10 +8170,7 @@ void ftCo_800B1478(Fighter* fp)
         data->xF9_b6 = false;
         data->xF9_b7 = false;
         data->xF9_b1 = true;
-        ftCo_800A20A0_dontinline(fp);
-        if (inlineI1_alt(fp)) {
-            ftCo_800A80E4_dontinline(fp);
-        }
+        ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
     }
@@ -8322,19 +8258,7 @@ void ftCo_800B17D0(Fighter* fp)
         data->xF9_b6 = false;
         data->xF9_b7 = false;
         data->xF9_b1 = true;
-        ftCo_800A20A0_dontinline(fp);
-        if (data->x18 != data->x20 && data->x18 != data->x1C) {
-            data->x60 = 0;
-        }
-        if (data->x18 == 4) {
-            do_act = 0;
-        } else {
-            data->xFA_b2 = false;
-            do_act = 1;
-        }
-        if (do_act != 0) {
-            ftCo_800A80E4_dontinline(fp);
-        }
+        ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
     }
@@ -8428,19 +8352,7 @@ void ftCo_800B1AB8(Fighter* fp)
         data->xF9_b6 = false;
         data->xF9_b7 = false;
         data->xF9_b1 = true;
-        ftCo_800A20A0_dontinline(fp);
-        if (data->x18 != data->x20 && data->x18 != data->x1C) {
-            data->x60 = 0;
-        }
-        if (data->x18 == 4) {
-            do_act = 0;
-        } else {
-            data->xFA_b2 = false;
-            do_act = 1;
-        }
-        if (do_act != 0) {
-            ftCo_800A80E4_dontinline(fp);
-        }
+        ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
     }
@@ -8533,7 +8445,6 @@ void ftCo_800B1EF0(Fighter* fp)
     Vec3 sp28;
     s32 cmd;
     Fighter* target;
-    s32 do_act;
     PAD_STACK(0x10);
 
     cmd = ftCo_800A229C(fp, &sp28);
@@ -8552,19 +8463,7 @@ void ftCo_800B1EF0(Fighter* fp)
         data->xF9_b6 = false;
         data->xF9_b7 = false;
         data->xF9_b1 = true;
-        ftCo_800A20A0_dontinline(fp);
-        if (data->x18 != data->x20 && data->x18 != data->x1C) {
-            data->x60 = 0;
-        }
-        if (data->x18 == 4) {
-            do_act = 0;
-        } else {
-            data->xFA_b2 = false;
-            do_act = 1;
-        }
-        if (do_act != 0) {
-            ftCo_800A80E4_dontinline(fp);
-        }
+        ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
     }
@@ -8600,19 +8499,7 @@ void ftCo_800B21C8(Fighter* fp)
         data->xF9_b6 = false;
         data->xF9_b7 = false;
         data->xF9_b1 = true;
-        ftCo_800A20A0_dontinline(fp);
-        if (data->x18 != data->x20 && data->x18 != data->x1C) {
-            data->x60 = 0;
-        }
-        if (data->x18 == 4) {
-            do_act = 0;
-        } else {
-            data->xFA_b2 = false;
-            do_act = 1;
-        }
-        if (do_act != 0) {
-            ftCo_800A80E4_dontinline(fp);
-        }
+        ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
     }
@@ -8671,7 +8558,6 @@ void ftCo_800B24B8(Fighter* fp)
     Vec3 sp28;
     s32 cmd;
     Fighter* target;
-    s32 do_act;
     PAD_STACK(0x10);
 
     cmd = ftCo_800A229C(fp, &sp28);
@@ -8690,19 +8576,7 @@ void ftCo_800B24B8(Fighter* fp)
         data->xF9_b6 = false;
         data->xF9_b7 = false;
         data->xF9_b1 = true;
-        ftCo_800A20A0_dontinline(fp);
-        if (data->x18 != data->x20 && data->x18 != data->x1C) {
-            data->x60 = 0;
-        }
-        if (data->x18 == 4) {
-            do_act = 0;
-        } else {
-            data->xFA_b2 = false;
-            do_act = 1;
-        }
-        if (do_act != 0) {
-            ftCo_800A80E4_dontinline(fp);
-        }
+        ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
     }
