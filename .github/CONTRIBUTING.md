@@ -274,16 +274,13 @@ decompilation dictates.
     - When not found in the binary or uncertain, use SCREAMING_SNAKE_CASE
 - Enum definitions should be defined in `forward.h` for a given module.
 - Examples:
-    - Good:
-    ```c
-    typedef enum CharacterKind {
-        /*  +0 */ CKIND_CAPTAIN,
-        /*  +1 */ CKIND_DONKEY,
-        /*  +2 */ CKIND_FOX,
+        /*  0x0 */ CKIND_CAPTAIN,
+        /*  0x1 */ CKIND_DONKEY,
+        /*  0x2 */ CKIND_FOX,
         ...
-        /* +20 */ CHKIND_POPO,
-        /* +21 */ CHKIND_NONE,
-        /* +22 */ CHKIND_MAX = CHKIND_NONE
+        /* 0x20 */ CHKIND_POPO,
+        /* 0x21 */ CHKIND_NONE,
+        /* 0x22 */ CHKIND_MAX = CHKIND_NONE
     } CharacterKind;
     ```
     - Acceptable:
