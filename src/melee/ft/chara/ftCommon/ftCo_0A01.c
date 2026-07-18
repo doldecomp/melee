@@ -753,11 +753,6 @@ bool ftCo_800A1C44(Fighter* fp)
     return false;
 }
 
-static inline bool ftCo_800A1C44_dontinline(Fighter* fp)
-{
-    return ftCo_800A1C44(fp);
-}
-
 bool ftCo_800A1CA8(Fighter* fp)
 {
     return fp->x2168 ? true : false;
@@ -8418,9 +8413,7 @@ void ftCo_800B21C8(Fighter* fp)
     Fighter* target;
     Fighter* attack_target;
     s32 do_act;
-    f32 dx;
-    f32 dy;
-    PAD_STACK(0x14);
+    PAD_STACK(0xC);
 
     cmd = ftCo_800A229C(fp, &sp20);
     if (cmd != 0) {
@@ -8445,24 +8438,7 @@ void ftCo_800B21C8(Fighter* fp)
     data->xF9_b1 = false;
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
     fp->x1A88.x50 = ftCo_800A648C(fp);
-    if (ftCo_800A1C44_dontinline(fp)) {
-        data->xF8_b6 = false;
-    } else {
-        target = data->x44;
-        if (target != NULL && fp->ground_or_air == GA_Ground) {
-            dy = fp->cur_pos.y - target->cur_pos.y;
-            dx = fp->cur_pos.x;
-            dx = dx - target->cur_pos.x;
-            if (sqrtf__Ff(dx * dx + dy * dy) < Fighter_804D64FC->x20[fp->kind])
-            {
-                data->xF8_b6 = true;
-            } else {
-                data->xF8_b6 = false;
-            }
-        } else {
-            data->xF8_b6 = false;
-        }
-    }
+    ftCo_CpuUpdateTargetDistance(fp);
 
     data2 = &fp->x1A88;
     if (data2->x18 != data2->x20 && data2->x18 != data2->x1C) {
