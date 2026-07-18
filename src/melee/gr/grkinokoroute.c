@@ -226,12 +226,16 @@ bool grKinokoRoute_802078E8(Ground_GObj* arg)
 
 void grKinokoRoute_802078F0(Ground_GObj* gobj)
 {
-    u8 pad_stack[8];
     s32 i;
+    union {
+        Ground* gp;
+        struct grKinokoRoute_GroundVars_Entry* entry;
+    } cursor;
     Vec3 pos;
-    Ground* gp = gobj->user_data;
     HSD_GObj* fighter;
     f32 scale;
+
+    cursor.gp = gobj->user_data;
 
     fighter = Ground_801C57A4();
     if (fighter != NULL) {
@@ -247,14 +251,14 @@ void grKinokoRoute_802078F0(Ground_GObj* gobj)
         scale = 1.0f;
     }
 
-    for (i = 0; i < 4; i++) {
-        if (gp->gv.kinokoroute.entries[i].jobj != NULL) {
+    for (i = 0; i < 4; i++, cursor.entry++) {
+        if (cursor.gp->gv.kinokoroute.entries[0].jobj != NULL) {
             HSD_JObjSetTranslateX(
-                gp->gv.kinokoroute.entries[i].jobj,
-                scale * (gp->gv.kinokoroute.entries[i].pos.x + pos.x));
+                cursor.gp->gv.kinokoroute.entries[0].jobj,
+                scale * (cursor.gp->gv.kinokoroute.entries[0].pos.x + pos.x));
             HSD_JObjSetTranslateY(
-                gp->gv.kinokoroute.entries[i].jobj,
-                scale * (gp->gv.kinokoroute.entries[i].pos.y + pos.y));
+                cursor.gp->gv.kinokoroute.entries[0].jobj,
+                scale * (cursor.gp->gv.kinokoroute.entries[0].pos.y + pos.y));
         }
     }
 }

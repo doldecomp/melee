@@ -79,13 +79,13 @@ void gmCamera_801A34FC_OnFrame(void)
         *gmCamera_VsCameraTextLayout.x0 = 2;
         gm_801A4B60();
     } else if (button = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS),
-               (button & (HSD_PAD_START | HSD_PAD_A)) | (button & 0))
+               button & (HSD_PAD_START | HSD_PAD_A))
     {
         lbAudioAx_80024030(1);
         *gmCamera_VsCameraTextLayout.x0 = 0;
         gm_801A4B60();
     } else if (button = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS),
-               (button & PAD_BUTTON_B) | (button & 0))
+               button & PAD_BUTTON_B)
     {
         lbAudioAx_80024030(0);
         *gmCamera_VsCameraTextLayout.x0 = 1;
@@ -93,11 +93,15 @@ void gmCamera_801A34FC_OnFrame(void)
     }
 }
 
-void gmCamera_801A3634_OnEnter(UNK_T arg0)
+void gmCamera_801A3634_OnEnter(void* arg0)
 {
+    u32* state = arg0;
+
+    /// @todo Required for the retail 0x20-byte stack frame; without this pad,
+    /// focused checkdiff differs only in five stack-frame offsets (99.72222%).
     PAD_STACK(8);
 
-    gmCamera_VsCameraTextLayout.x0 = (u32*) arg0;
+    gmCamera_VsCameraTextLayout.x0 = state;
     gmCamera_801A2650();
     gmCamera_VsCameraTextLayout.slot_a = NULL;
     gmCamera_VsCameraTextLayout.slot_b = NULL;

@@ -71,7 +71,7 @@ static inline bool isActiveTitle(void)
 {
     if (gm_GetCurrentGameMode() == GM_TITLE ||
         (gm_GetCurrentGameMode() == GM_OPENING_MV &&
-         gm_GetCurrentSceneIndex() == 0x02))
+         gm_GetCurrentSceneIndex() == GS_VS))
     {
         return false;
     }
@@ -140,7 +140,7 @@ HSD_GObj* gmTitle_801A165C(void)
 
     if (gm_GetCurrentGameMode() == GM_TITLE ||
         (gm_GetCurrentGameMode() == GM_OPENING_MV &&
-         gm_GetCurrentSceneIndex() == 0x02))
+         gm_GetCurrentSceneIndex() == GS_VS))
     {
         var_r0 = false;
     } else {
@@ -270,7 +270,7 @@ void gmTitle_801A1C18_OnFrame(void)
     }
     gmTitle_804D6718++;
     if (gmTitle_804D6718 > 600) {
-        tmp = gm_801A4B9C();
+        tmp = gm_GetCurrentSceneExitData();
         *tmp = 0;
         gm_801A4B60();
     } else if (input & HSD_PAD_START) {
@@ -280,23 +280,23 @@ void gmTitle_801A1C18_OnFrame(void)
         lbAudioAx_80027648();
         lbAudioAx_80024030(1);
         gmMainLib_8015ECBC();
-        tmp = gm_801A4B9C();
+        tmp = gm_GetCurrentSceneExitData();
         *tmp = input;
         gm_801A4B60();
     } else if (DbLevel >= 3) {
         if (input & HSD_PAD_Y) {
             lbAudioAx_80024030(1);
-            tmp = gm_801A4B9C();
+            tmp = gm_GetCurrentSceneExitData();
             *tmp = input;
             gm_801A4B60();
         } else if (input & HSD_PAD_A) {
             lbAudioAx_80024030(1);
-            tmp = gm_801A4B9C();
+            tmp = gm_GetCurrentSceneExitData();
             *tmp = input;
             gm_801A4B60();
         } else if (input & HSD_PAD_X) {
             lbAudioAx_80024030(1);
-            tmp = gm_801A4B9C();
+            tmp = gm_GetCurrentSceneExitData();
             *tmp = input;
             gm_801A4B60();
         }

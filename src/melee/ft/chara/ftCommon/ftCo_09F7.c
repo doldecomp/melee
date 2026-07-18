@@ -2,16 +2,15 @@
 
 #include <placeholder.h>
 
+#include "baselib/random.h"
 #include "ef/efasync.h"
 #include "ft/fighter.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
-#include "ftCommon/forward.h"
-
 #include <math.h>
-#include <trigf.h>
+#include <trigf.h> // IWYU pragma: keep
 #include <baselib/gobj.h>
 #include <melee/ft/ftcmdscript.h>
 

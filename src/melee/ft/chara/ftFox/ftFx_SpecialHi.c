@@ -13,6 +13,7 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Pass.h"
@@ -46,9 +47,7 @@ void ftFx_SpecialHi_CreateLaunchGFX(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
-    fp->accessory4_cb = NULL;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 void ftFx_SpecialHi_CreateChargeGFX(HSD_GObj* gobj)
@@ -62,9 +61,7 @@ void ftFx_SpecialHi_CreateChargeGFX(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
-    fp->accessory4_cb = NULL;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 void ftFx_SpecialHi_Enter(HSD_GObj* gobj)
@@ -178,16 +175,8 @@ void ftFx_SpecialHiHold_Coll(HSD_GObj* gobj)
 void ftFx_SpecialHiHoldAir_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 facingDir;
 
-    /// @todo Ternary operator should be possible here somehow.
-    if (fp->facing_dir < 0.0f) {
-        facingDir = -1;
-    } else {
-        facingDir = 1;
-    }
-
-    if (ft_CheckGroundAndLedge(gobj, facingDir)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftFx_SpecialHiHoldAir_AirToGround(gobj);
         return;
     }
@@ -730,16 +719,9 @@ void ftFx_SpecialHiBound_Phys(HSD_GObj* gobj)
 void ftFx_SpecialHiBound_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 cliffCatchDir;
 
     if (fp->ground_or_air == GA_Air) {
-        if (fp->facing_dir < 0.0f) {
-            cliffCatchDir = -1;
-        } else {
-            cliffCatchDir = 1;
-        }
-
-        if (ft_CheckGroundAndLedge(gobj, cliffCatchDir)) {
+        if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
             ftCommon_8007D7FC(fp);
             return;
         }

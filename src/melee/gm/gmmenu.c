@@ -9,7 +9,7 @@ void gm_801A50B8_OnLoad(void)
     u8 var_r0;
     UnkAllstarData* temp_r3;
 
-    temp_r3 = gm_8017EB30();
+    temp_r3 = gm_GetAllStarData();
     var_r0 = temp_r3->x0.ckind;
     if (temp_r3->x0.ckind == CKIND_ZELDA && temp_r3->x0.xC.x12 != 0) {
         var_r0 = CKIND_SEAK;
@@ -28,7 +28,7 @@ void gm_801A5130_OnLoad(void)
     u8 var_r0;
     UnkAdventureData* temp_r3;
 
-    temp_r3 = gm_8017E424();
+    temp_r3 = gm_GetAdventureData();
     var_r0 = temp_r3->x0.ckind;
     if (temp_r3->x0.ckind == CKIND_ZELDA && temp_r3->x0.xC.x12 != 0) {
         var_r0 = CKIND_SEAK;

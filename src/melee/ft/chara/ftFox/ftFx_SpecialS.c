@@ -9,6 +9,7 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_Fall.h"
@@ -37,9 +38,7 @@ void ftFx_SpecialS_CreateGFX(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
-    fp->accessory4_cb = NULL;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 /// 0x800E9E78
@@ -210,15 +209,8 @@ void ftFx_SpecialSStart_Coll(HSD_GObj* gobj)
 void ftFx_SpecialAirSStart_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 cliffCatchDir;
 
-    if (fp->facing_dir < 0.0f) {
-        cliffCatchDir = -1;
-    } else {
-        cliffCatchDir = 1;
-    }
-
-    if (ft_CheckGroundAndLedge(gobj, cliffCatchDir)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftFx_SpecialAirSStart_AirToGround(gobj);
         return;
     }
@@ -390,14 +382,7 @@ void ftFx_SpecialS_Coll(HSD_GObj* gobj)
 void ftFx_SpecialAirS_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 cliffCatchDir;
-
-    if (fp->facing_dir < 0.0f) {
-        cliffCatchDir = -1;
-    } else {
-        cliffCatchDir = 1;
-    }
-    if (ft_CheckGroundAndLedge(gobj, cliffCatchDir)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftFx_SpecialAirS_AirToGround(gobj);
         return;
     }
@@ -573,14 +558,7 @@ void ftFx_SpecialAirSEnd_Coll(HSD_GObj* gobj)
 
     u8 _[4];
 
-    int cliffCatchDir;
-
-    if (fp->facing_dir < 0.0f) {
-        cliffCatchDir = -1;
-    } else {
-        cliffCatchDir = 1;
-    }
-    if (ft_CheckGroundAndLedge(gobj, cliffCatchDir)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftCo_LandingFallSpecial_Enter(gobj, false,
                                       da->x50_FOX_ILLUSION_LANDING_LAG);
         return;

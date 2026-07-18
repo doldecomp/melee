@@ -308,10 +308,10 @@ struct gmm_x1868 {
     /* 0x0420 */ u32 x1C88[3];
     /* 0x042C */ u8 padding_x1C88[0x1C];
     /* 0x0448 */ struct gmm_x1CB0 x1CB0;
-    /* 0x0468 */ s16 x1CD0;
-    /* 0x046A */ s16 x1CD2;
-    /* 0x046C */ s32 x1CD4;
-    /* 0x0470 */ u8 padding_x1CD4[0x254];
+    /* 0x0468 */ s16 trophy_count;
+    /* 0x046A */ u16 trophy_category_flags;
+    /* 0x046C */ u16 trophy_flags[0x125];
+    /* 0x06B6 */ u8 padding_trophy_flags[0xE];
     /* 0x06C4 */ struct FighterData x1F2C[SELKIND_COUNT];
     /* 0x1760 */ struct NameTagDataBank x2FF8[2];
 }; /* size = 0x55E8 */
@@ -1236,6 +1236,21 @@ typedef struct TmSettingTable {
 STATIC_ASSERT(offsetof(struct TmSettingTable, min) == 0x40);
 STATIC_ASSERT(offsetof(struct TmSettingTable, max) == 0x4C);
 STATIC_ASSERT(sizeof(struct TmSettingTable) == 0x58);
+
+/// Start/end/loop anim frame triplet for one tournament model anim state.
+typedef struct TmAnimFrames {
+    /* 0x0 */ u16 start;
+    /* 0x2 */ u16 end;
+    /* 0x4 */ u16 loop;
+} TmAnimFrames;
+STATIC_ASSERT(sizeof(struct TmAnimFrames) == 0x6);
+
+/// Table of anim frame triplets (raw s32 words in ROM), see fn_8019C048.
+typedef union TmAnimFrameTable {
+    s32 words[9];
+    TmAnimFrames states[6];
+} TmAnimFrameTable;
+STATIC_ASSERT(sizeof(union TmAnimFrameTable) == 0x24);
 
 typedef struct BracketEntry {
     /* 0x00 */ u8 x0;

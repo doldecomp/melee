@@ -10,7 +10,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 2C3AF0 */ Fighter_GObj* it_802C3AF0(Item_GObj* gobj);
+/* 2C3AF0 */ Fighter_GObj* itZeldaDinFire_GetOwner(Item_GObj* gobj);
 /* 2C3AFC */ bool it_802C3AFC(Item_GObj* gobj, CollData* cd);
 /* 2C3BAC */ Item_GObj* it_802C3BAC(Item_GObj* gobj, Vec3* vec,
                                     float facing_dir, float);

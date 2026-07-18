@@ -88,7 +88,7 @@ void it_8026B294(HSD_GObj* gobj,
 }
 
 /// Check if item is heavy
-bool it_8026B2B4(HSD_GObj* gobj)
+bool itIsHeavy(HSD_GObj* gobj)
 {
     Item* temp_item = gobj->user_data;
 
@@ -124,13 +124,13 @@ enum_t it_8026B30C(Item_GObj* gobj)
 }
 
 /// Return item hold kind
-enum_t it_8026B320(HSD_GObj* gobj)
+enum_t itGetHoldKind(HSD_GObj* gobj)
 {
     Item* temp_item = gobj->user_data;
     return temp_item->xCC_item_attr->x0_hold_kind;
 }
 
-f32 it_8026B334(HSD_GObj* gobj) // Return item damage multiplier
+f32 itGetDamageMultiplier(HSD_GObj* gobj) // Return item damage multiplier
 {
     Item* temp_item = gobj->user_data;
     return temp_item->xCC_item_attr->x1C_damage_mul;
@@ -147,13 +147,13 @@ void it_8026B344(HSD_GObj* gobj,
     pos->z = (f32) ip->pos.z;
 }
 
-f32 it_8026B378(HSD_GObj* gobj) // Return item's X-Axis grab range?
+f32 itGetGrabRangeX(HSD_GObj* gobj) // Return item's X-Axis grab range?
 {
     Item* temp_item = gobj->user_data;
     return temp_item->xBD4_grabRange.x;
 }
 
-f32 it_8026B384(HSD_GObj* gobj) // Return item's Y-Axis grab range?
+f32 itGetGrabRangeY(HSD_GObj* gobj) // Return item's Y-Axis grab range?
 {
     Item* temp_item = gobj->user_data;
     return temp_item->xBD4_grabRange.y;
@@ -412,13 +412,13 @@ bool it_8026B774(HSD_GObj* gobj,
     return false;
 }
 
-s32 it_8026B7A4(HSD_GObj* gobj) // Get Item State ID
+s32 itGetMotionId(HSD_GObj* gobj) // Get Item State ID
 {
     Item* ip = gobj->user_data;
     return ip->msid;
 }
 
-u8 it_8026B7B0(HSD_GObj* gobj) // Get Item Team ID
+u8 itGetTeamId(HSD_GObj* gobj) // Get Item Team ID
 {
     Item* ip = gobj->user_data;
     return ip->x20_team_id;
@@ -747,14 +747,14 @@ bool it_8026BC68(HSD_GObj* gobj)
 }
 
 /// @returns #Item::owner of @p gobj.
-HSD_GObj* it_8026BC78(HSD_GObj* gobj) // Get item owner
+HSD_GObj* itGetOwner(HSD_GObj* gobj) // Get item owner
 {
     Item* ip = GET_ITEM(gobj);
     return ip->owner;
 }
 
 /// @returns #Item::xD88_attackID of @p gobj.
-bool it_8026BC84(HSD_GObj* gobj)
+s32 itGetAttackId(HSD_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     return ip->xD88_attackID;

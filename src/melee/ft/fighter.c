@@ -2658,7 +2658,7 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1)
     Vec3 vec;
     PAD_STACK(8);
 
-    if (fp->item_gobj && !it_8026B2B4(fp->item_gobj)) {
+    if (fp->item_gobj && !itIsHeavy(fp->item_gobj)) {
         hold_item_bool = true;
     }
 
