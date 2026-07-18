@@ -308,10 +308,10 @@ struct gmm_x1868 {
     /* 0x0420 */ u32 x1C88[3];
     /* 0x042C */ u8 padding_x1C88[0x1C];
     /* 0x0448 */ struct gmm_x1CB0 x1CB0;
-    /* 0x0468 */ s16 x1CD0;
-    /* 0x046A */ s16 x1CD2;
-    /* 0x046C */ s32 x1CD4;
-    /* 0x0470 */ u8 padding_x1CD4[0x254];
+    /* 0x0468 */ s16 trophy_count;
+    /* 0x046A */ u16 trophy_category_flags;
+    /* 0x046C */ u16 trophy_flags[0x125];
+    /* 0x06B6 */ u8 padding_trophy_flags[0xE];
     /* 0x06C4 */ struct FighterData x1F2C[SELKIND_COUNT];
     /* 0x1760 */ struct NameTagDataBank x2FF8[2];
 }; /* size = 0x55E8 */

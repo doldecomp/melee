@@ -105,7 +105,7 @@ bool gm_801A659C(int arg0)
 
 void gm_801A6630(int arg0)
 {
-    u8* tmp = gm_801A4B9C();
+    u8* tmp = gm_GetCurrentSceneExitData();
     *tmp = arg0;
     gm_801A4B60();
 }
@@ -199,7 +199,7 @@ void gm_801A68D8(void)
     float mult;
     PAD_STACK(0x18);
 
-    gm_801A4B90();
+    gm_GetCurrentSceneEnterData();
     Camera_80028B9C(6);
     lb_8000FCDC();
     mpColl_80041C78();
@@ -360,7 +360,7 @@ void gm_801A6EE4(void)
 
     PAD_STACK(4);
 
-    gm_801A4B90();
+    gm_GetCurrentSceneEnterData();
     Toy_803124BC();
     Toy_803102D0();
     switch (gm_GetCurrentGameMode()) {
@@ -488,7 +488,7 @@ void gm_801A7070_OnEnter(void* unused)
     HSD_GObjObject_80390A70(temp_r3_3, HSD_SObjLib_804D7960, NULL);
     GObj_SetupGXLink(temp_r3_3, HSD_SObjLib_803A49E0, 0x12, 0);
     gm_801A68D8();
-    gm_801A4B90();
+    gm_GetCurrentSceneEnterData();
 
     // create jobj
     temp_r3_4 = GObj_Create(0xE, 0xF, 0);
@@ -509,7 +509,7 @@ void gm_801A7070_OnEnter(void* unused)
     lb_8000C290(HSD_JObjGetChild(HSD_JObjGetChild(
                     HSD_JObjGetChild(HSD_JObjGetChild(temp_r3_5)))),
                 temp_r27_4);
-    gm_801A4B90();
+    gm_GetCurrentSceneEnterData();
     temp_r3_6 = GObj_Create(0xE, 0xF, 0);
     gm_804D6778 = temp_r3_6;
     temp_r3_7 = HSD_JObjLoadJoint(gm_804D67AC->models[0]->joint);

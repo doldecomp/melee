@@ -496,7 +496,7 @@ static void gm_801B6AD8_inline(GameScene* scene, int x)
 
 void gm_801B69C0(StartMeleeData* arg0)
 {
-    gmMainLib_8015CC34();
+    gmMainLib_GetGameRules();
     arg0->rules.x0_0 = 0;
     arg0->rules.x0_6 = true;
     arg0->rules.x0_7 = true;

@@ -46,69 +46,69 @@
 #include <melee/pl/plbonuslib.h>
 #include <melee/sfx/crowdsfx.h>
 
-lbl_8046B6A0_t* gm_8016AE38(void)
+lbl_8046B6A0_t* gm_16AE_GetUnkData_0(void)
 {
     return &lbl_8046B6A0;
 }
 
-lbl_8046B6A0_t* gm_8016AE44(void)
+lbl_8046B6A0_t* gm_16AE_GetUnkData_1(void)
 {
     return &lbl_8046B6A0;
 }
 
-struct StartMeleeRules* gm_8016AE50(void)
+struct StartMeleeRules* gm_GetRules(void)
 {
     return &lbl_8046B6A0.x24C8;
 }
 
 UNK_T fn_8016AE60(void)
 {
-    return fn_80169364();
+    return gm_1601_GetUnkData();
 }
 
 bool gm_8016AE80(void)
 {
-    return gm_8016AE50()->xB;
+    return gm_GetRules()->xB;
 }
 
 f32 gm_8016AE94(void)
 {
-    return gm_8016AE38()->unk_34;
+    return gm_16AE_GetUnkData_0()->unk_34;
 }
 
 u64 gm_8016AEA4(void)
 {
-    return gm_8016AE50()->x20;
+    return gm_GetRules()->x20;
 }
 
 s32 gm_8016AEB8(void)
 {
-    return gm_8016AE50()->x28;
+    return gm_GetRules()->x28;
 }
 
 bool gm_8016AEC8(void)
 {
-    return gm_8016AE50()->xC;
+    return gm_GetRules()->xC;
 }
 
 u32 gm_8016AEDC(void)
 {
-    return gm_8016AE38()->frame_count;
+    return gm_16AE_GetUnkData_0()->frame_count;
 }
 
 u32 gm_8016AEEC(void)
 {
-    return gm_8016AE38()->timer_seconds;
+    return gm_16AE_GetUnkData_0()->timer_seconds;
 }
 
 u16 gm_8016AEFC(void)
 {
-    return gm_8016AE38()->unk_2C;
+    return gm_16AE_GetUnkData_0()->unk_2C;
 }
 
 u16 gm_8016AF0C(void)
 {
-    int tmp = 99.0F * gm_8016AE38()->unk_2C / 59.0F;
+    int tmp = 99.0F * gm_16AE_GetUnkData_0()->unk_2C / 59.0F;
     u16 var_r31 = tmp;
     if (!gm_8016B110()) {
         var_r31 = 0x63 - var_r31;
@@ -118,7 +118,7 @@ u16 gm_8016AF0C(void)
 
 bool GetMatchTimer(int* arg0)
 {
-    lbl_8046B6A0_t* data = gm_8016AE38();
+    lbl_8046B6A0_t* data = gm_16AE_GetUnkData_0();
     if (arg0 != NULL && data->x24C8.x0_6) {
         if (gm_8016B110()) {
             *arg0 = data->x24C8.x10 - data->timer_seconds;
@@ -132,7 +132,7 @@ bool GetMatchTimer(int* arg0)
 
 u16 gm_8016B004(void)
 {
-    return gm_8016AE50()->xE;
+    return gm_GetRules()->xE;
 }
 
 bool gm_8016B014(void)
@@ -140,7 +140,7 @@ bool gm_8016B014(void)
     int i;
     PAD_STACK(4);
 
-    if (gm_8016AE50()->x4_2 && !gm_8016A1F8()) {
+    if (gm_GetRules()->x4_2 && !gm_8016A1F8()) {
         for (i = 1; i < 6; i++) {
             if (Player_GetPlayerState(i) != 0) {
                 i = -1;
@@ -156,57 +156,57 @@ bool gm_8016B014(void)
 
 bool gm_8016B094(void)
 {
-    return gm_8016AE50()->x0_0 == 1;
+    return gm_GetRules()->x0_0 == 1;
 }
 
 bool gm_8016B0B4(void)
 {
-    return gm_8016AE50()->x0_0 == 2;
+    return gm_GetRules()->x0_0 == 2;
 }
 
 bool gm_8016B0D4(void)
 {
-    return gm_8016AE50()->x1_7;
+    return gm_GetRules()->x1_7;
 }
 
 bool gm_8016B0E8(void)
 {
-    return gm_8016AE50()->x4_2;
+    return gm_GetRules()->x4_2;
 }
 
 bool gm_8016B0FC(void)
 {
-    return gm_8016AE50()->x2_3;
+    return gm_GetRules()->x2_3;
 }
 
 bool gm_8016B110(void)
 {
-    return gm_8016AE50()->x0_7;
+    return gm_GetRules()->x0_7;
 }
 
 bool gm_8016B124(void)
 {
-    return gm_8016AE50()->x2_1;
+    return gm_GetRules()->x2_1;
 }
 
 void fn_8016B138(void)
 {
-    gm_8016AE50()->is_teams = false;
+    gm_GetRules()->is_teams = false;
 }
 
 bool gm_8016B14C(void)
 {
-    return gm_8016AE50()->is_teams == false;
+    return gm_GetRules()->is_teams == false;
 }
 
 bool gm_8016B168(void)
 {
-    return gm_8016AE50()->is_teams == true;
+    return gm_GetRules()->is_teams == true;
 }
 
 bool gm_8016B184(void)
 {
-    if (gm_8016AE38()->is_singleplayer == true) {
+    if (gm_16AE_GetUnkData_0()->is_singleplayer == true) {
         return true;
     }
     return false;
@@ -214,27 +214,27 @@ bool gm_8016B184(void)
 
 bool gm_8016B1A8(void)
 {
-    return gm_8016AE50()->x9 == 1;
+    return gm_GetRules()->x9 == 1;
 }
 
 bool gm_8016B1C4(void)
 {
-    return gm_8016AE50()->x5_2;
+    return gm_GetRules()->x5_2;
 }
 
 bool gm_8016B1D8(void)
 {
-    return gm_8016AE50()->x5_3;
+    return gm_GetRules()->x5_3;
 }
 
 bool gm_8016B1EC(void)
 {
-    return gm_8016AE38()->unk_0 == 0;
+    return gm_16AE_GetUnkData_0()->unk_0 == 0;
 }
 
 bool gm_8016B204(void)
 {
-    StartMeleeRules* rules = gm_8016AE50();
+    StartMeleeRules* rules = gm_GetRules();
     if (rules->x10 == 0 || !rules->x0_6) {
         return true;
     }
@@ -243,17 +243,17 @@ bool gm_8016B204(void)
 
 bool gm_8016B238(void)
 {
-    return gm_8016AE50()->x6;
+    return gm_GetRules()->x6;
 }
 
 f32 gm_8016B248(void)
 {
-    return gm_8016AE50()->x30;
+    return gm_GetRules()->x30;
 }
 
 bool gm_8016B258(int arg0)
 {
-    return gm_8016AE38()->FighterMatchInfo[arg0].x4_b3;
+    return gm_16AE_GetUnkData_0()->FighterMatchInfo[arg0].x4_b3;
 }
 
 void gm_SetGameSpeed(float speed)
@@ -268,32 +268,32 @@ void gm_ResetGameSpeed(void)
 
 void gm_8016B328(void)
 {
-    gm_8016AE38()->terminate_match = 1;
+    gm_16AE_GetUnkData_0()->terminate_match = 1;
 }
 
 void gm_8016B33C(int arg0)
 {
-    gm_8016AE38()->unk_B = arg0 + 1;
+    gm_16AE_GetUnkData_0()->unk_B = arg0 + 1;
 }
 
 void gm_8016B350(int arg0)
 {
-    gm_8016AE38()->unk_10 = arg0 + 1;
+    gm_16AE_GetUnkData_0()->unk_10 = arg0 + 1;
 }
 
 void gm_8016B364(int arg0)
 {
-    gm_8016AE38()->unk_14 = arg0 + 1;
+    gm_16AE_GetUnkData_0()->unk_14 = arg0 + 1;
 }
 
 void gm_8016B378(s8 arg0)
 {
-    gm_8016AE38()->unk_18 = arg0;
+    gm_16AE_GetUnkData_0()->unk_18 = arg0;
 }
 
 void fn_8016B388(int arg0, s16 arg1)
 {
-    gm_8016AE38()->FighterMatchInfo[arg0].x6 = arg1;
+    gm_16AE_GetUnkData_0()->FighterMatchInfo[arg0].x6 = arg1;
 }
 
 bool gm_8016B3A0(void)
@@ -378,7 +378,7 @@ bool fn_8016B4BC(void)
 
 bool fn_8016B510(void)
 {
-    if (gm_8016AE50()->x9 == 2 && Ground_801C1D98()) {
+    if (gm_GetRules()->x9 == 2 && Ground_801C1D98()) {
         return true;
     }
     return false;
@@ -440,7 +440,7 @@ float fn_8016B5B0(void)
 
 void gm_8016B6E8(int arg0, int arg1)
 {
-    lbl_8046B6A0_t* tmp = gm_8016AE38();
+    lbl_8046B6A0_t* tmp = gm_16AE_GetUnkData_0();
     if (arg0 == 0) {
         tmp->unk_2E = lbTime_8000AF24(tmp->unk_2E, arg1);
     }
@@ -448,12 +448,12 @@ void gm_8016B6E8(int arg0, int arg1)
 
 u8 fn_8016B728(void)
 {
-    return gm_8016AE38()->unk_C;
+    return gm_16AE_GetUnkData_0()->unk_C;
 }
 
 void fn_8016B738(int arg0)
 {
-    lbl_8046B6A0_t* tmp = gm_8016AE38();
+    lbl_8046B6A0_t* tmp = gm_16AE_GetUnkData_0();
     tmp->unk_C = lbTime_8000AF74(tmp->unk_C, arg0);
 }
 
@@ -464,7 +464,7 @@ struct lbl_8046B6A0_24C_t* gm_8016B774(void)
 
 void fn_8016B784(void)
 {
-    gm_8016AE38()->hud_enabled = 1;
+    gm_16AE_GetUnkData_0()->hud_enabled = 1;
     grStadium_801D4150();
 }
 
@@ -481,7 +481,7 @@ void fn_8016B7B4(int arg0)
 
 void fn_8016B7F8(void)
 {
-    lbl_8046B6A0_t* tmp = gm_8016AE38();
+    lbl_8046B6A0_t* tmp = gm_16AE_GetUnkData_0();
     PAD_STACK(4);
 
     ftLib_800868A4();
@@ -501,13 +501,13 @@ void fn_8016B88C(int arg0)
     if (arg0 == 0) {
         grStadium_801D40C8();
     }
-    gm_8016AE38()->hud_enabled = 0;
+    gm_16AE_GetUnkData_0()->hud_enabled = 0;
 }
 
 void gm_8016B8D4(s32 arg0, u8 slot_type)
 {
-    gm_8016AE38()->FighterMatchInfo[arg0].x1 = 0x82;
-    gm_8016AE38()->FighterMatchInfo[arg0].slot_type = slot_type;
+    gm_16AE_GetUnkData_0()->FighterMatchInfo[arg0].x1 = 0x82;
+    gm_16AE_GetUnkData_0()->FighterMatchInfo[arg0].slot_type = slot_type;
     grStadium_801D3B4C(arg0, slot_type);
 }
 
@@ -538,7 +538,7 @@ void fn_8016B918(void)
     StartMeleeRules* temp_r3;
     PAD_STACK(0x10);
 
-    temp_r3 = gm_8016AE50();
+    temp_r3 = gm_GetRules();
     if (!temp_r3->x4_1) {
         return;
     }
@@ -907,7 +907,7 @@ MatchOutcome gm_GetMatchOutcome(void)
 
 void fn_8016C46C(int arg0)
 {
-    if (gm_8016AE38()->unk_9 != 0) {
+    if (gm_16AE_GetUnkData_0()->unk_9 != 0) {
         switch (gm_GetCurrentGameMode()) {
         case GM_CLASSIC:
             fn_8017EE40(arg0);
@@ -957,7 +957,7 @@ int gm_8016C5C0(int pl_slot)
         tmp->x0 = (UNK_T) gm_801A4BA8();
         gm_80166378(tmp);
     }
-    if (!gm_8016AE50()->is_teams) {
+    if (!gm_GetRules()->is_teams) {
         return tmp->x58[pl_slot].x5;
     }
     return tmp->x24[tmp->x58[pl_slot].x7].x0;
@@ -1037,7 +1037,7 @@ void fn_8016C7F0(void)
          lbl_8046B6A0.x24C8.xE >= 0x21 && lbl_8046B6A0.x24C8.xE <= 0x3A))
     {
         temp_r29_2 = (u8*) gm_801B6320();
-        temp_r30 = gm_8017EB30();
+        temp_r30 = gm_GetAllStarData();
         var_r28 = 0;
         if (gm_GetCurrentGameMode() == GM_TARGET_TEST) {
             var_r29_2 = gm_CKindToSelKind(*temp_r29_2);
@@ -1536,7 +1536,7 @@ void gm_8016D800(void)
 
 void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
 {
-    lbl_8046B6A0_t* tmp = gm_8016AE38();
+    lbl_8046B6A0_t* tmp = gm_16AE_GetUnkData_0();
     PAD_STACK(4);
 
     Player_SetSlottype(arg0, arg1->slot_type);
