@@ -244,7 +244,7 @@ techinical quirks surrounding various integer types.
 
 Melee sometimes packs bits in to an unsigned integer type as bitflags and
 sometimes uses bitfields as structs with individual fields for each flag. The
-appropriate type or structure to use is highly dependent on what the
+appropriate type/structure to use is highly dependent on what the
 decompilation dictates.
 
 - When decompilation dictates that a field use packed bitflags, use the
