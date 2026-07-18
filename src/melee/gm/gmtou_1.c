@@ -149,11 +149,11 @@ void fn_80196684(s32 bracket_idx)
                              lbl_80473AB8[bracket_idx].slots[1].x51 +
                              lbl_80473AB8[bracket_idx].slots[2].x51);
 
-    if (rand_val < (s32) lbl_80473AB8[bracket_idx].slots[0].x51) {
+    if (rand_val < lbl_80473AB8[bracket_idx].slots[0].x51) {
         lbl_80473AB8[bracket_idx].slots[0].x4C = 0;
         if (HSD_Randi(lbl_80473AB8[bracket_idx].slots[1].x51 +
                       lbl_80473AB8[bracket_idx].slots[2].x51) <
-            (s32) lbl_80473AB8[bracket_idx].slots[1].x51)
+            lbl_80473AB8[bracket_idx].slots[1].x51)
         {
             lbl_80473AB8[bracket_idx].slots[1].x4C = 1;
             lbl_80473AB8[bracket_idx].slots[2].x4C = 2;
@@ -163,13 +163,13 @@ void fn_80196684(s32 bracket_idx)
         lbl_80473AB8[bracket_idx].slots[2].x4C = 1;
         return;
     }
-    if (rand_val < (s32) (lbl_80473AB8[bracket_idx].slots[0].x51 +
-                          lbl_80473AB8[bracket_idx].slots[1].x51))
+    if (rand_val < (lbl_80473AB8[bracket_idx].slots[0].x51 +
+                    lbl_80473AB8[bracket_idx].slots[1].x51))
     {
         lbl_80473AB8[bracket_idx].slots[1].x4C = 0;
         if (HSD_Randi(lbl_80473AB8[bracket_idx].slots[0].x51 +
                       lbl_80473AB8[bracket_idx].slots[2].x51) <
-            (s32) lbl_80473AB8[bracket_idx].slots[0].x51)
+            lbl_80473AB8[bracket_idx].slots[0].x51)
         {
             lbl_80473AB8[bracket_idx].slots[0].x4C = 1;
             lbl_80473AB8[bracket_idx].slots[2].x4C = 2;
@@ -182,7 +182,7 @@ void fn_80196684(s32 bracket_idx)
     lbl_80473AB8[bracket_idx].slots[2].x4C = 0;
     if (HSD_Randi(lbl_80473AB8[bracket_idx].slots[0].x51 +
                   lbl_80473AB8[bracket_idx].slots[1].x51) <
-        (s32) lbl_80473AB8[bracket_idx].slots[0].x51)
+        lbl_80473AB8[bracket_idx].slots[0].x51)
     {
         lbl_80473AB8[bracket_idx].slots[0].x4C = 1;
         lbl_80473AB8[bracket_idx].slots[1].x4C = 2;
@@ -199,16 +199,16 @@ void fn_801967E0(s32 arg0)
         lbl_80473AB8[arg0].slots[0].x51 + lbl_80473AB8[arg0].slots[1].x51 +
         lbl_80473AB8[arg0].slots[2].x51 + lbl_80473AB8[arg0].slots[3].x51);
 
-    if (rand < (s32) lbl_80473AB8[arg0].slots[0].x51) {
+    if (rand < lbl_80473AB8[arg0].slots[0].x51) {
         lbl_80473AB8[arg0].slots[0].x4C = 0;
         rand = HSD_Randi(lbl_80473AB8[arg0].slots[1].x51 +
                          lbl_80473AB8[arg0].slots[2].x51 +
                          lbl_80473AB8[arg0].slots[3].x51);
-        if (rand < (s32) lbl_80473AB8[arg0].slots[1].x51) {
+        if (rand < lbl_80473AB8[arg0].slots[1].x51) {
             lbl_80473AB8[arg0].slots[1].x4C = 1;
             rand = HSD_Randi(lbl_80473AB8[arg0].slots[2].x51 +
                              lbl_80473AB8[arg0].slots[3].x51);
-            if (rand < (s32) lbl_80473AB8[arg0].slots[2].x51) {
+            if (rand < lbl_80473AB8[arg0].slots[2].x51) {
                 lbl_80473AB8[arg0].slots[2].x4C = 2;
                 lbl_80473AB8[arg0].slots[3].x4C = 3;
                 return;
@@ -217,13 +217,13 @@ void fn_801967E0(s32 arg0)
             lbl_80473AB8[arg0].slots[3].x4C = 2;
             return;
         }
-        if (rand < (s32) (lbl_80473AB8[arg0].slots[1].x51 +
-                          lbl_80473AB8[arg0].slots[2].x51))
+        if (rand < (lbl_80473AB8[arg0].slots[1].x51 +
+                    lbl_80473AB8[arg0].slots[2].x51))
         {
             lbl_80473AB8[arg0].slots[2].x4C = 1;
             rand = HSD_Randi(lbl_80473AB8[arg0].slots[1].x51 +
                              lbl_80473AB8[arg0].slots[3].x51);
-            if (rand < (s32) lbl_80473AB8[arg0].slots[1].x51) {
+            if (rand < lbl_80473AB8[arg0].slots[1].x51) {
                 lbl_80473AB8[arg0].slots[1].x4C = 2;
                 lbl_80473AB8[arg0].slots[3].x4C = 3;
                 return;
@@ -235,7 +235,7 @@ void fn_801967E0(s32 arg0)
         lbl_80473AB8[arg0].slots[3].x4C = 1;
         rand = HSD_Randi(lbl_80473AB8[arg0].slots[1].x51 +
                          lbl_80473AB8[arg0].slots[2].x51);
-        if (rand < (s32) lbl_80473AB8[arg0].slots[2].x51) {
+        if (rand < lbl_80473AB8[arg0].slots[2].x51) {
             lbl_80473AB8[arg0].slots[1].x4C = 2;
             lbl_80473AB8[arg0].slots[2].x4C = 3;
             return;
@@ -245,18 +245,18 @@ void fn_801967E0(s32 arg0)
         return;
     }
 
-    if (rand < (s32) (lbl_80473AB8[arg0].slots[0].x51 +
-                      lbl_80473AB8[arg0].slots[1].x51))
+    if (rand <
+        (lbl_80473AB8[arg0].slots[0].x51 + lbl_80473AB8[arg0].slots[1].x51))
     {
         lbl_80473AB8[arg0].slots[1].x4C = 0;
         rand = HSD_Randi(lbl_80473AB8[arg0].slots[0].x51 +
                          lbl_80473AB8[arg0].slots[2].x51 +
                          lbl_80473AB8[arg0].slots[3].x51);
-        if (rand < (s32) lbl_80473AB8[arg0].slots[0].x51) {
+        if (rand < lbl_80473AB8[arg0].slots[0].x51) {
             lbl_80473AB8[arg0].slots[0].x4C = 1;
             rand = HSD_Randi(lbl_80473AB8[arg0].slots[2].x51 +
                              lbl_80473AB8[arg0].slots[3].x51);
-            if (rand < (s32) lbl_80473AB8[arg0].slots[2].x51) {
+            if (rand < lbl_80473AB8[arg0].slots[2].x51) {
                 lbl_80473AB8[arg0].slots[2].x4C = 2;
                 lbl_80473AB8[arg0].slots[3].x4C = 3;
                 return;
@@ -265,13 +265,13 @@ void fn_801967E0(s32 arg0)
             lbl_80473AB8[arg0].slots[3].x4C = 2;
             return;
         }
-        if (rand < (s32) (lbl_80473AB8[arg0].slots[0].x51 +
-                          lbl_80473AB8[arg0].slots[2].x51))
+        if (rand < (lbl_80473AB8[arg0].slots[0].x51 +
+                    lbl_80473AB8[arg0].slots[2].x51))
         {
             lbl_80473AB8[arg0].slots[2].x4C = 1;
             rand = HSD_Randi(lbl_80473AB8[arg0].slots[0].x51 +
                              lbl_80473AB8[arg0].slots[3].x51);
-            if (rand < (s32) lbl_80473AB8[arg0].slots[0].x51) {
+            if (rand < lbl_80473AB8[arg0].slots[0].x51) {
                 lbl_80473AB8[arg0].slots[0].x4C = 2;
                 lbl_80473AB8[arg0].slots[3].x4C = 3;
                 return;
@@ -283,7 +283,7 @@ void fn_801967E0(s32 arg0)
         lbl_80473AB8[arg0].slots[3].x4C = 1;
         rand = HSD_Randi(lbl_80473AB8[arg0].slots[0].x51 +
                          lbl_80473AB8[arg0].slots[2].x51);
-        if (rand < (s32) lbl_80473AB8[arg0].slots[0].x51) {
+        if (rand < lbl_80473AB8[arg0].slots[0].x51) {
             lbl_80473AB8[arg0].slots[0].x4C = 2;
             lbl_80473AB8[arg0].slots[2].x4C = 3;
             return;
@@ -293,19 +293,19 @@ void fn_801967E0(s32 arg0)
         return;
     }
 
-    if (rand < (s32) (lbl_80473AB8[arg0].slots[2].x51 +
-                      (lbl_80473AB8[arg0].slots[0].x51 +
-                       lbl_80473AB8[arg0].slots[1].x51)))
+    if (rand <
+        (lbl_80473AB8[arg0].slots[2].x51 +
+         (lbl_80473AB8[arg0].slots[0].x51 + lbl_80473AB8[arg0].slots[1].x51)))
     {
         lbl_80473AB8[arg0].slots[2].x4C = 0;
         rand = HSD_Randi(lbl_80473AB8[arg0].slots[0].x51 +
                          lbl_80473AB8[arg0].slots[1].x51 +
                          lbl_80473AB8[arg0].slots[3].x51);
-        if (rand < (s32) lbl_80473AB8[arg0].slots[0].x51) {
+        if (rand < lbl_80473AB8[arg0].slots[0].x51) {
             lbl_80473AB8[arg0].slots[0].x4C = 1;
             rand = HSD_Randi(lbl_80473AB8[arg0].slots[1].x51 +
                              lbl_80473AB8[arg0].slots[3].x51);
-            if (rand < (s32) lbl_80473AB8[arg0].slots[1].x51) {
+            if (rand < lbl_80473AB8[arg0].slots[1].x51) {
                 lbl_80473AB8[arg0].slots[1].x4C = 2;
                 lbl_80473AB8[arg0].slots[3].x4C = 3;
                 return;
@@ -314,13 +314,13 @@ void fn_801967E0(s32 arg0)
             lbl_80473AB8[arg0].slots[3].x4C = 2;
             return;
         }
-        if (rand < (s32) (lbl_80473AB8[arg0].slots[0].x51 +
-                          lbl_80473AB8[arg0].slots[1].x51))
+        if (rand < (lbl_80473AB8[arg0].slots[0].x51 +
+                    lbl_80473AB8[arg0].slots[1].x51))
         {
             lbl_80473AB8[arg0].slots[1].x4C = 1;
             rand = HSD_Randi(lbl_80473AB8[arg0].slots[0].x51 +
                              lbl_80473AB8[arg0].slots[3].x51);
-            if (rand < (s32) lbl_80473AB8[arg0].slots[0].x51) {
+            if (rand < lbl_80473AB8[arg0].slots[0].x51) {
                 lbl_80473AB8[arg0].slots[0].x4C = 2;
                 lbl_80473AB8[arg0].slots[3].x4C = 3;
                 return;
@@ -332,7 +332,7 @@ void fn_801967E0(s32 arg0)
         lbl_80473AB8[arg0].slots[3].x4C = 1;
         rand = HSD_Randi(lbl_80473AB8[arg0].slots[0].x51 +
                          lbl_80473AB8[arg0].slots[1].x51);
-        if (rand < (s32) lbl_80473AB8[arg0].slots[0].x51) {
+        if (rand < lbl_80473AB8[arg0].slots[0].x51) {
             lbl_80473AB8[arg0].slots[0].x4C = 2;
             lbl_80473AB8[arg0].slots[1].x4C = 3;
             return;
@@ -346,11 +346,11 @@ void fn_801967E0(s32 arg0)
     rand = HSD_Randi(lbl_80473AB8[arg0].slots[0].x51 +
                      lbl_80473AB8[arg0].slots[1].x51 +
                      lbl_80473AB8[arg0].slots[2].x51);
-    if (rand < (s32) lbl_80473AB8[arg0].slots[0].x51) {
+    if (rand < lbl_80473AB8[arg0].slots[0].x51) {
         lbl_80473AB8[arg0].slots[0].x4C = 1;
         rand = HSD_Randi(lbl_80473AB8[arg0].slots[1].x51 +
                          lbl_80473AB8[arg0].slots[2].x51);
-        if (rand < (s32) lbl_80473AB8[arg0].slots[1].x51) {
+        if (rand < lbl_80473AB8[arg0].slots[1].x51) {
             lbl_80473AB8[arg0].slots[1].x4C = 2;
             lbl_80473AB8[arg0].slots[2].x4C = 3;
             return;
@@ -359,13 +359,13 @@ void fn_801967E0(s32 arg0)
         lbl_80473AB8[arg0].slots[2].x4C = 2;
         return;
     }
-    if (rand < (s32) (lbl_80473AB8[arg0].slots[0].x51 +
-                      lbl_80473AB8[arg0].slots[1].x51))
+    if (rand <
+        (lbl_80473AB8[arg0].slots[0].x51 + lbl_80473AB8[arg0].slots[1].x51))
     {
         lbl_80473AB8[arg0].slots[1].x4C = 1;
         rand = HSD_Randi(lbl_80473AB8[arg0].slots[0].x51 +
                          lbl_80473AB8[arg0].slots[2].x51);
-        if (rand < (s32) lbl_80473AB8[arg0].slots[0].x51) {
+        if (rand < lbl_80473AB8[arg0].slots[0].x51) {
             lbl_80473AB8[arg0].slots[0].x4C = 2;
             lbl_80473AB8[arg0].slots[2].x4C = 3;
             return;
@@ -377,7 +377,7 @@ void fn_801967E0(s32 arg0)
     lbl_80473AB8[arg0].slots[2].x4C = 1;
     rand = HSD_Randi(lbl_80473AB8[arg0].slots[0].x51 +
                      lbl_80473AB8[arg0].slots[1].x51);
-    if (rand < (s32) lbl_80473AB8[arg0].slots[0].x51) {
+    if (rand < lbl_80473AB8[arg0].slots[0].x51) {
         lbl_80473AB8[arg0].slots[0].x4C = 2;
         lbl_80473AB8[arg0].slots[1].x4C = 3;
         return;
