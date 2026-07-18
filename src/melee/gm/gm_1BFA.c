@@ -1,4 +1,5 @@
-/// @file Seems to deal with the challenger approaching functions.
+/// @file
+/// @brief Seems to deal with the challenger approaching functions.
 #include "gm_1BFA.h"
 
 #include "gm_unsplit.h"
@@ -65,8 +66,8 @@ void gm_801BFA6C(GameScene* arg0)
     lbl_8046DBD8_t* temp_r3;
     VsApproachData* temp_r31;
 
-    temp_r31 = gm_801A427C(arg0);
-    temp_r3 = gm_801736DC();
+    temp_r31 = gm_GetGameSceneLoadDataCallback(arg0);
+    temp_r3 = gm_GetChallengerData();
     temp_r31->x0 = (u8) temp_r3->x4;
     temp_r31->x1 = (u8) temp_r3->x2;
     lb_8001C550();
@@ -80,14 +81,14 @@ void gm_801BFABC(GameScene* arg0)
     StartMeleeData* temp_r30;
     u8 tmp;
 
-    temp_r30 = gm_801A427C(arg0);
-    temp_r31 = gm_801736DC();
+    temp_r30 = gm_GetGameSceneLoadDataCallback(arg0);
+    temp_r31 = gm_GetChallengerData();
     gm_80167A64(&temp_r30->rules);
     gm_80167A14(temp_r30->players);
     temp_r30->rules.x0_6 = false;
     temp_r30->rules.x0_0 = 1;
     temp_r30->rules.x0_3 = 2;
-    temp_r30->rules.xE = gm_8016075C(gm_80164024(temp_r31->x4));
+    temp_r30->rules.xE = gm_8016075C(gm_CKindToSelKind(temp_r31->x4));
     gm_801B0620(&temp_r30->players[0], temp_r31->x0, temp_r31->x1, 1,
                 temp_r31->x2);
     gm_801B0664(&temp_r30->players[1], temp_r31->x4, 0, 1, 1);
@@ -105,23 +106,23 @@ void gm_801BFBA8(GameScene* arg0)
     u8 temp_r0;
     MatchExitInfo* mei;
 
-    mei = gm_801A4284(arg0);
-    temp_r31 = gm_801736DC();
+    mei = gm_GetGameSceneLeaveDataCallback(arg0);
+    temp_r31 = gm_GetChallengerData();
     gm_80162968(mei->match_end.frame_count / 60);
     gm_8016247C((s32) mei->match_end.player_standings[0].xE);
     temp_r0 = mei->match_end.result;
     if ((temp_r0 != 7) && (temp_r0 != 8) &&
         ((s8) mei->match_end.player_standings[0].stocks != 0))
     {
-        gm_80164910((s32) temp_r31->x4);
+        gm_UnlockCKind((s32) temp_r31->x4);
     } else {
-        gmMainLib_8015DB2C(gm_80160638((s32) temp_r31->x4));
+        gmMainLib_8015DB2C(gm_CKindToUnlockIndex((s32) temp_r31->x4));
     }
     gm_80173EEC();
     gm_80172898(0x100U);
     if (gm_801721EC() == 0) {
-        gm_801A42E8((s8) temp_r31->x5);
-        gm_801A42D4();
+        gm_SetPendingGameMode((s8) temp_r31->x5);
+        gm_SetNewGameModePending();
     }
 }
 
@@ -169,9 +170,9 @@ void gm_801BFCFC(GameScene* arg0)
 
     PAD_STACK(8);
 
-    gm_801A427C(arg0);
+    gm_GetGameSceneLoadDataCallback(arg0);
     var_r31 = NULL;
-    gm_801736DC();
+    gm_GetChallengerData();
     var_r30 = 0;
     memzero(gm_8049E558, 0x42);
     memzero(&gm_8049E558[0x44], 0x125);
@@ -256,6 +257,6 @@ void gm_801BFCFC(GameScene* arg0)
 
 void gm_801BFF7C(GameScene* arg0)
 {
-    gm_801A42E8((s8) gm_801736DC()->x5);
-    gm_801A42D4();
+    gm_SetPendingGameMode((s8) gm_GetChallengerData()->x5);
+    gm_SetNewGameModePending();
 }

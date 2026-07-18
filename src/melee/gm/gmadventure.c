@@ -1209,9 +1209,9 @@ void gm_801B3F40(GameScene* arg0)
     int i;
 
     temp_ret = 0;
-    temp_r30 = gm_801A427C(arg0);
+    temp_r30 = gm_GetGameSceneLoadDataCallback(arg0);
     temp_r31 = gm_8017E4C4(arg0->idx);
-    temp_r3 = gm_8017E424();
+    temp_r3 = gm_GetAdventureData();
     temp_r3->x0.x7 = arg0->idx;
     temp_r30->x1 = gm_8017BE84(arg0->idx);
     temp_r30->x2 = temp_r31->x6;
@@ -1248,9 +1248,9 @@ void gm_801B4064(GameScene* arg0)
 
     PAD_STACK(8);
 
-    temp_r28 = gm_801A427C(arg0);
+    temp_r28 = gm_GetGameSceneLoadDataCallback(arg0);
     temp_r31 = gm_8017E4C4(arg0->idx);
-    temp_r27 = gm_8017E424();
+    temp_r27 = gm_GetAdventureData();
     if (temp_r31->x4 != 0) {
         var_r30 = 1;
         var_r29 = 0;
@@ -1274,8 +1274,8 @@ void gm_801B4064(GameScene* arg0)
 
 void gm_801B4170(GameScene* arg0)
 {
-    MatchExitInfo* temp_r28 = gm_801A4284(arg0);
-    UnkAdventureData* temp_r31 = gm_8017E424();
+    MatchExitInfo* temp_r28 = gm_GetGameSceneLeaveDataCallback(arg0);
+    UnkAdventureData* temp_r31 = gm_GetAdventureData();
     setValUnk(arg0->idx, temp_r28->x8);
     if (gm_8017D7AC(temp_r28, &temp_r31->x0, 0x69) &&
         gm_8017E4C4(arg0->idx)[1].x0 == 0xFF)
@@ -1286,32 +1286,33 @@ void gm_801B4170(GameScene* arg0)
 
 void gm_801B4254(GameScene* scene)
 {
-    DebugGameOverData* data = gm_801A427C(scene);
-    gm_8017C9A8(data, &gm_8017E424()->x0, 0);
+    DebugGameOverData* data = gm_GetGameSceneLoadDataCallback(scene);
+    gm_8017C9A8(data, &gm_GetAdventureData()->x0, 0);
 }
 
 void gm_801B4294(GameScene* scene)
 {
-    DebugGameOverData* data = gm_801A4284(scene);
-    gm_8017CA38(data, &gm_8017E424()->x0, gmMainLib_8015CDD4(), 0);
+    DebugGameOverData* data = gm_GetGameSceneLeaveDataCallback(scene);
+    gm_8017CA38(data, &gm_GetAdventureData()->x0, gmMainLib_8015CDD4(), 0);
 }
 
 void gm_801B42E8(GameScene* scene)
 {
-    CSSData* css = gm_801A427C(scene);
+    CSSData* css = gm_GetGameSceneLoadDataCallback(scene);
     struct gmm_x0_528_t* temp_r31 = gmMainLib_8015CDD4();
     gm_801B06B0(css, 0xC, temp_r31->c_kind, temp_r31->stocks, temp_r31->color,
-                temp_r31->x4, temp_r31->cpu_level, gm_8017E424()->x0.slot);
+                temp_r31->x4, temp_r31->cpu_level,
+                gm_GetAdventureData()->x0.slot);
 }
 
 void gm_801B4350(GameScene* scene)
 {
-    CSSData* css = gm_801A4284(scene);
+    CSSData* css = gm_GetGameSceneLeaveDataCallback(scene);
     struct gmm_x0_528_t* temp_r29 = gmMainLib_8015CDD4();
-    UnkAdventureData* temp_r31 = gm_8017E424();
+    UnkAdventureData* temp_r31 = gm_GetAdventureData();
 
     if (css->pending_scene_change == 2) {
-        gm_801A42F8(GM_MENU);
+        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
     gm_801B0730(css, &temp_r29->c_kind, &temp_r29->stocks, &temp_r29->color,
@@ -1321,21 +1322,21 @@ void gm_801B4350(GameScene* scene)
     temp_r31->x0.cpu_level = temp_r29->cpu_level;
     temp_r31->x0.stocks = temp_r29->stocks;
     temp_r31->x0.x4 = temp_r29->x4;
-    gm_SetPendingScene(temp_r29->x5 << 3);
+    gm_SetPendingSceneIndex(temp_r29->x5 << 3);
     gm_80168F88();
 }
 
 void gm_801B4408(GameScene* scene)
 {
-    gm_801A42E8(GM_MENU);
-    gm_801A42D4();
+    gm_SetPendingGameMode(GM_MENU);
+    gm_SetNewGameModePending();
 }
 
 void gm_801B4430(GameScene* scene)
 {
-    CutsceneData* temp_r30 = gm_801A427C(scene);
+    CutsceneData* temp_r30 = gm_GetGameSceneLoadDataCallback(scene);
     struct gmm_x0_528_t* temp_r31 = gmMainLib_8015CDD4();
-    UnkAdventureData* temp_r3 = gm_8017E424();
+    UnkAdventureData* temp_r3 = gm_GetAdventureData();
     u8 var_r0;
 
     if (temp_r3->x0.ckind == CKIND_ZELDA && temp_r3->x0.xC.x12 != 0) {
@@ -1349,8 +1350,8 @@ void gm_801B4430(GameScene* scene)
 
 void gm_801B44A0(GameScene* scene)
 {
-    MatchExitInfo* temp_r30 = gm_801A4284(scene);
-    UnkAdventureData* temp_r29 = gm_8017E424();
+    MatchExitInfo* temp_r30 = gm_GetGameSceneLeaveDataCallback(scene);
+    UnkAdventureData* temp_r29 = gm_GetAdventureData();
 
     setValUnk(scene->idx, temp_r30->x8);
 
@@ -1361,17 +1362,17 @@ void gm_801B44A0(GameScene* scene)
          */
         u32 seconds = temp_r30->x4 % 60;
         if (seconds % 10 == 2) {
-            gm_SetPendingScene(ADVENTURE_LUIGI_CUTSCENE);
+            gm_SetPendingSceneIndex(ADVENTURE_LUIGI_CUTSCENE);
         } else {
-            gm_SetPendingScene(ADVENTURE_MARIO_PEACH_FIGHT);
+            gm_SetPendingSceneIndex(ADVENTURE_MARIO_PEACH_FIGHT);
         }
     }
 }
 
 void gm_801B45A4(GameScene* scene)
 {
-    CutsceneData* temp_r31 = gm_801A427C(scene);
-    UnkAdventureData* temp_r7 = gm_8017E424();
+    CutsceneData* temp_r31 = gm_GetGameSceneLoadDataCallback(scene);
+    UnkAdventureData* temp_r7 = gm_GetAdventureData();
     u8 colors[3] = { 0 };
     s8 ckinds[3] = { CKIND_MARIO, CKIND_LUIGI, CHKIND_NONE };
 
@@ -1386,9 +1387,9 @@ void gm_801B461C(GameScene* scene)
     gm_801B4064(scene);
 
     /// If we got here from the Luigi cutscene, change Mario to Luigi.
-    if (gm_801A42B4() == ADVENTURE_LUIGI_CUTSCENE) {
-        StartMeleeData* data = gm_801A427C(scene);
-        UnkAdventureData* adventure = gm_8017E424();
+    if (gm_GetPreviousSceneIndex() == ADVENTURE_LUIGI_CUTSCENE) {
+        StartMeleeData* data = gm_GetGameSceneLoadDataCallback(scene);
+        UnkAdventureData* adventure = gm_GetAdventureData();
         data->players[1].c_kind = CKIND_LUIGI;
         data->players[1].color = gm_804D68D8.x3;
         adventure->x74 = 1;
@@ -1397,8 +1398,8 @@ void gm_801B461C(GameScene* scene)
 
 void gm_801B4684(GameScene* scene)
 {
-    MatchExitInfo* temp_r29 = gm_801A4284(scene);
-    UnkAdventureData* temp_r31 = gm_8017E424();
+    MatchExitInfo* temp_r29 = gm_GetGameSceneLeaveDataCallback(scene);
+    UnkAdventureData* temp_r31 = gm_GetAdventureData();
 
     setValUnk(scene->idx, temp_r29->x8);
 
@@ -1414,7 +1415,7 @@ void gm_801B4684(GameScene* scene)
 
 void gm_801B4768(GameScene* scene)
 {
-    StartMeleeData* data = gm_801A427C(scene);
+    StartMeleeData* data = gm_GetGameSceneLoadDataCallback(scene);
     int i;
     gm_801B4064(scene);
     for (i = 0; i < 3; i++) {
@@ -1429,8 +1430,8 @@ void gm_801B47FC(GameScene* scene)
     UnkAdventureData* temp_r31;
     StartMeleeData* temp_r30;
 
-    temp_r30 = gm_801A427C(scene);
-    temp_r31 = gm_8017E424();
+    temp_r30 = gm_GetGameSceneLoadDataCallback(scene);
+    temp_r31 = gm_GetAdventureData();
     gm_801B4064(scene);
     temp_r30->rules.x50 = gm_8017E7A0;
     temp_r31->x0.x7 = 0x20;
@@ -1438,9 +1439,9 @@ void gm_801B47FC(GameScene* scene)
 
 static inline void gm_801B4860_inline0(GameScene* scene)
 {
-    MatchExitInfo* exit_info = gm_801A4284(scene);
+    MatchExitInfo* exit_info = gm_GetGameSceneLeaveDataCallback(scene);
     if (exit_info->match_end.result != 1) {
-        UnkAdventureData* tmp = gm_8017E424();
+        UnkAdventureData* tmp = gm_GetAdventureData();
         tmp->x76 = 1;
     } else {
         exit_info->match_end.player_standings[0].stocks++;
@@ -1449,8 +1450,8 @@ static inline void gm_801B4860_inline0(GameScene* scene)
 
 static inline void gm_801B4860_inline1(GameScene* scene)
 {
-    MatchExitInfo* exit_info = gm_801A4284(scene);
-    UnkAdventureData* adv_data = gm_8017E424();
+    MatchExitInfo* exit_info = gm_GetGameSceneLeaveDataCallback(scene);
+    UnkAdventureData* adv_data = gm_GetAdventureData();
 
     setValUnk(scene->idx, exit_info->x8);
 
@@ -1495,11 +1496,11 @@ void gm_801B4974(GameScene* arg0)
     CutsceneData* temp_r28;
     u8* temp_r31;
 
-    temp_r28 = gm_801A427C(arg0);
-    temp_r29 = gm_8017E424();
-    temp_r25 = gm_801A427C(arg0);
+    temp_r28 = gm_GetGameSceneLoadDataCallback(arg0);
+    temp_r29 = gm_GetAdventureData();
+    temp_r25 = gm_GetGameSceneLoadDataCallback(arg0);
     temp_r24 = gmMainLib_8015CDD4();
-    temp_r3 = gm_8017E424();
+    temp_r3 = gm_GetAdventureData();
     var_r4 = temp_r3->x0.ckind;
     if (var_r4 == CKIND_ZELDA && temp_r3->x0.xC.x12 != 0) {
         var_r4 = CKIND_SEAK;
@@ -1520,7 +1521,7 @@ void gm_801B4974(GameScene* arg0)
 
 static inline void inline0(GameScene* scene)
 {
-    UnkAdventureData* adv_data = gm_8017E424();
+    UnkAdventureData* adv_data = gm_GetAdventureData();
     if (adv_data->x0.xC.x11 != 1) {
         UNK_T unused1 = gm_80169520();
         UNK_T unused2 = gm_80169540();
@@ -1536,8 +1537,8 @@ void gm_801B4B28(GameScene* scene)
 
 void gm_801B4C5C(GameScene* scene)
 {
-    MatchExitInfo* temp_r30 = gm_801A4284(scene);
-    UnkAdventureData* temp_r29 = gm_8017E424();
+    MatchExitInfo* temp_r30 = gm_GetGameSceneLeaveDataCallback(scene);
+    UnkAdventureData* temp_r29 = gm_GetAdventureData();
 
     setValUnk(scene->idx, temp_r30->x8);
 
@@ -1545,20 +1546,21 @@ void gm_801B4C5C(GameScene* scene)
     if (gm_8017D7AC(temp_r30, &temp_r29->x0, 0x69) &&
         temp_r30->match_end.frame_count / 60 > 30)
     {
-        gm_SetPendingScene(NEXT_SCENEBLOCK_AFTER(ADVENTURE_GIANTKIRBY_FIGHT));
+        gm_SetPendingSceneIndex(
+            NEXT_SCENEBLOCK_AFTER(ADVENTURE_GIANTKIRBY_FIGHT));
     }
 }
 
 void gm_801B4D34(GameScene* scene)
 {
-    UnkAdventureData* temp_r30 = gm_8017E424();
+    UnkAdventureData* temp_r30 = gm_GetAdventureData();
     struct gm_803DE650_t* temp_r31 = gm_8017E4C4(scene->idx);
 
     /**
      * If Falco is unlocked,
      * the player will fight him instead about 1/3 of the time.
      */
-    if (gm_80164840(CKIND_FALCO) && HSD_Randi(100) <= 33) {
+    if (gm_IsCKindUnlocked(CKIND_FALCO) && HSD_Randi(100) <= 33) {
         temp_r30->x7C = CKIND_FALCO;
     } else {
         temp_r30->x7C = temp_r31->xA[0];
@@ -1567,8 +1569,8 @@ void gm_801B4D34(GameScene* scene)
 
 void gm_801B4DAC(GameScene* scene)
 {
-    UnkAdventureData* temp_r30 = gm_8017E424();
-    StartMeleeData* data = gm_801A427C(scene);
+    UnkAdventureData* temp_r30 = gm_GetAdventureData();
+    StartMeleeData* data = gm_GetGameSceneLoadDataCallback(scene);
     gm_801B4064(scene);
     if (temp_r30->x7C == CKIND_FALCO) {
         s8 ckinds[3] = { CKIND_FALCO, CHKIND_NONE, CHKIND_NONE };
@@ -1584,8 +1586,8 @@ void gm_801B4DAC(GameScene* scene)
 void gm_801B4E58(GameScene* scene)
 {
     StartMeleeData* data;
-    gm_8017E424();
-    data = gm_801A427C(scene);
+    gm_GetAdventureData();
+    data = gm_GetGameSceneLoadDataCallback(scene);
     gm_801B4064(scene);
     data->rules.x20 = 1 << 7; ///< enabling an item, which one?
     data->rules.xB = 4;
@@ -1593,12 +1595,12 @@ void gm_801B4E58(GameScene* scene)
 
 void gm_801B4EB8(GameScene* scene)
 {
-    StartMeleeData* data = gm_801A427C(scene);
+    StartMeleeData* data = gm_GetGameSceneLoadDataCallback(scene);
     int i;
     gm_801B4064(scene);
 
     /// If Luigi isn't unlocked, don't spawn him for this match.
-    if (!gm_80164840(CKIND_LUIGI)) {
+    if (!gm_IsCKindUnlocked(CKIND_LUIGI)) {
         for (i = 0; i < 3; i++) {
             if (data->players[i + 1].c_kind == CKIND_LUIGI) {
                 data->players[i + 1].slot_type = Gm_PKind_NA;
@@ -1609,7 +1611,7 @@ void gm_801B4EB8(GameScene* scene)
 
 void gm_801B4F44(GameScene* scene)
 {
-    StartMeleeData* data = gm_801A427C(scene);
+    StartMeleeData* data = gm_GetGameSceneLoadDataCallback(scene);
     int i;
     gm_801B4064(scene);
     for (i = 0; i < 3; i++) {
@@ -1622,15 +1624,15 @@ void gm_801B4F44(GameScene* scene)
 
 void gm_801B4FCC(GameScene* scene)
 {
-    MatchExitInfo* temp_r30 = gm_801A4284(scene);
-    UnkAdventureData* temp_r29 = gm_8017E424();
+    MatchExitInfo* temp_r30 = gm_GetGameSceneLeaveDataCallback(scene);
+    UnkAdventureData* temp_r29 = gm_GetAdventureData();
     setValUnk(scene->idx, temp_r30->x8);
     gm_8017D7AC(temp_r30, &temp_r29->x0, 0x69);
 }
 
 void gm_801B5078(GameScene* scene)
 {
-    UnkAdventureData* temp_r3 = gm_8017E424();
+    UnkAdventureData* temp_r3 = gm_GetAdventureData();
     if (temp_r3->x77 == 0) {
         gm_8017CBAC(temp_r3, gmMainLib_8015CDD4(), 0x16);
     }
@@ -1638,10 +1640,10 @@ void gm_801B5078(GameScene* scene)
 
 void gm_801B50C4(GameScene* scene)
 {
-    MatchExitInfo* temp_r31 = gm_801A4284(scene);
-    UnkAdventureData* temp_r30 = gm_8017E424();
+    MatchExitInfo* temp_r31 = gm_GetGameSceneLeaveDataCallback(scene);
+    UnkAdventureData* temp_r30 = gm_GetAdventureData();
 
-    UnkAdventureData* temp_r3 = gm_8017E424();
+    UnkAdventureData* temp_r3 = gm_GetAdventureData();
     if (temp_r3->x0.stocks == temp_r31->match_end.player_standings[0].stocks) {
         temp_r3->x78 = 1;
     }
@@ -1653,7 +1655,7 @@ void gm_801B50C4(GameScene* scene)
 
 void gm_801B518C(GameScene* scene)
 {
-    UnkAdventureData* data = gm_8017E424();
+    UnkAdventureData* data = gm_GetAdventureData();
     gm_8017CBAC(data, gmMainLib_8015CDD4(), 0x16);
 }
 
@@ -1676,7 +1678,7 @@ void gm_801B5214_OnLoad(void)
     int j;
     UnkAdventureData* data;
 
-    data = gm_8017E424();
+    data = gm_GetAdventureData();
     gmMainLib_8015CDD4();
     gm_8017C984(data);
     memzero(data, sizeof(*data));
@@ -1699,7 +1701,7 @@ void gm_801B5214_OnLoad(void)
     data->x60 = gm_8017E738;
     data->x6C = gm_8017E664;
     data->x70 = gm_8017E6B4;
-    gm_SetScene(ADVENTURE_BACK_TO_CSS);
+    gm_SetSceneIndex(ADVENTURE_BACK_TO_CSS);
     gm_80172174();
     Ground_801C5A28();
 }

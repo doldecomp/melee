@@ -40,11 +40,11 @@ GameScene gm_803DD8B8_Scenes[] = {
     { -1 },
 };
 
-void gm_801B0FF8(GameScene* scene)
+void gm_801B0FF8(GameScene* scene) ///< Return to menu?
 {
     GameRules* rules;
     MenuEnterData* data;
-    GameModeKind var_r0;
+    GameModeKind previous_mode;
 
     data = scene->info.load_data;
     lb_8001C550();
@@ -62,7 +62,7 @@ void gm_801B0FF8(GameScene* scene)
     lbDvd_8001823C();
     lbDvd_80018254();
     mnGallery_80258940();
-    rules = gmMainLib_8015CC34();
+    rules = gmMainLib_GetGameRules();
     if (rules->force_main_menu != 0) {
         rules->force_main_menu = 0;
         data->menu_kind = MENU_KIND_MAIN;
@@ -71,11 +71,11 @@ void gm_801B0FF8(GameScene* scene)
         return;
     }
     data->load_assets = 1;
-    var_r0 = gm_801A4320();
-    if (var_r0 == GM_CHALLENGER_APPROACH) {
-        var_r0 = gm_801737D8();
+    previous_mode = gm_GetPreviousGameMode();
+    if (previous_mode == GM_CHALLENGER_APPROACH) {
+        previous_mode = gm_801737D8();
     }
-    switch (var_r0) {
+    switch (previous_mode) {
     case GM_CLASSIC:
         data->menu_kind = MENU_KIND_REG;
         data->hovered_selection = SEL_REG_CLASSIC;
@@ -215,13 +215,13 @@ void gm_801B138C(GameScene* arg0)
 {
     MenuExitData* data = arg0->info.leave_data;
 
-    gm_801A42E8(data->pending_mode);
-    gm_801A42D4();
+    gm_SetPendingGameMode(data->pending_mode);
+    gm_SetNewGameModePending();
 }
 
 void gm_801B13B8(GameScene* arg0)
 {
-    StartMeleeData* temp_r28 = gm_801A427C(arg0);
+    StartMeleeData* temp_r28 = gm_GetGameSceneLoadDataCallback(arg0);
     int i;
 
     gm_80167A64(&temp_r28->rules);

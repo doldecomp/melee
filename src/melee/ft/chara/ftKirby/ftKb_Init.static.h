@@ -9,8 +9,5 @@
 /* 0F6210 */ static void fn_800F6210(Fighter_GObj*);
 /* 0F6280 */ static void fn_800F6280(Fighter_GObj*);
 /* 0F6318 */ static void fn_800F6318(Fighter_GObj*);
-/* 4D9570 */ extern f32 ftKb_Init_804D9570;
-
-/* 4D9570 */ extern f32 ftKb_Init_804D9570;
 
 #endif

@@ -20,6 +20,7 @@
 #include "ft/ftdata.h"
 #include "ft/ftdynamics.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
@@ -557,8 +558,8 @@ void ftPr_Init_OnLoad(HSD_GObj* gobj)
 void ftPr_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!it_8026B2B4(fp->item_gobj)) {
-        switch (it_8026B320(fp->item_gobj)) {
+    if (!itIsHeavy(fp->item_gobj)) {
+        switch (itGetHoldKind(fp->item_gobj)) {
         case 1:
             break;
         case 2:
@@ -580,7 +581,7 @@ void ftPr_Init_OnItemInvisible(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->item_gobj) {
-        if (!it_8026B2B4(fp->item_gobj)) {
+        if (!itIsHeavy(fp->item_gobj)) {
             ftAnim_80070CC4(gobj, 0);
         }
     }
@@ -590,7 +591,7 @@ void ftPr_Init_OnItemVisible(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->item_gobj) {
-        if (!it_8026B2B4(fp->item_gobj)) {
+        if (!itIsHeavy(fp->item_gobj)) {
             ftAnim_80070C48(gobj, 0);
         }
     }
@@ -625,7 +626,5 @@ void ftPr_Init_8013C94C(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
-    fp->accessory4_cb = NULL;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }

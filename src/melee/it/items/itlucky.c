@@ -190,8 +190,7 @@ static inline void it_802D533C_inline(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDAC_itcmd_var0 = 0;
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 void it_802D533C(Item_GObj* gobj)
@@ -274,11 +273,7 @@ void itLucky_UnkMotion6_Phys(Item_GObj* gobj)
 
 void it_802D5560(HSD_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_EnterStateWithEffectHitlag(gobj, 0);
     it_80273670(gobj, 0, 0.0f);
     it_8026BDB4(gobj);
 }
@@ -368,7 +363,7 @@ void it_802D582C(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(12);
     it_8026B390(gobj);
-    ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0f;
+    itResetVelocity(ip);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 

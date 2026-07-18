@@ -1,5 +1,6 @@
 #include "ft/ft_0D31.h"
 
+#include "baselib/random.h"
 #include "ft/fighter.h"
 #include "ft/ft_0C88.h"
 #include "ft/ftcolanim.h"
@@ -17,7 +18,6 @@
 #include <melee/ft/ft_0D4D.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftlib.h>
-#include <melee/ft/ftmaterial.h>
 #include <melee/ft/ftmetal.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gr/stage.h>

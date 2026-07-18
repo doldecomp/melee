@@ -203,6 +203,7 @@ static void sdata2_order(void)
     (void) S32_TO_F32;
 }
 
+/// @todo Only differs by register allocation.
 void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
 {
     ItemKind prev_kind;
@@ -269,7 +270,7 @@ void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
         }
         {
             ItemKind* spawn_ptr = &spawned[i];
-            for (; i < count; i++, spawn_ptr++) {
+            for (; i < count; spawn_ptr++, i++) {
                 ItemKind rand_kind = it_8026F3AC();
                 Vec3 vel;
                 Vec3 pos;
@@ -528,9 +529,7 @@ bool itKusudama_UnkMotion6_Anim(Item_GObj* gobj)
 
 void itKusudama_UnkMotion6_Phys(Item_GObj* gobj)
 {
-    ItemAttr* attr = GET_ITEM(gobj)->xCC_item_attr;
-    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 static inline void itKusudama_UnkMotion5_Coll_inline(Item_GObj* gobj)

@@ -3,7 +3,7 @@
 
 #include <melee/gm/forward.h>
 
-GameSceneHandler* gm_801A50A0(void);
-GameMode* gm_801A50AC(void);
+GameSceneHandler* gm_GetAllGameSceneHandlers(void);
+GameMode* gm_GetAllGameModes(void);
 
 #endif

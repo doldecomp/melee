@@ -84,52 +84,6 @@ void ftCo_800CE620(HSD_GObj* fighter_gobj)
     }
 }
 
-inline void ftCo_800CE650_inline(HSD_GObj* gobj, int frame, int interval)
-{
-    if (interval - 1 == frame % interval) {
-        ft_800892A0(gobj);
-        ft_80089824(gobj);
-    }
-}
-
-inline void ftCo_800CE650_inline2(HSD_GObj* gobj)
-{
-    Vec3 sp30;
-    Vec3 sp24;
-    Fighter* fp = GET_FIGHTER(gobj);
-    it_80292EF8(fp->item_gobj, &sp30);
-    ftCo_800CDE94(fp, &sp30, &sp24);
-    if (!it_8026B594(fp->item_gobj)) {
-        it_80292F14(fp->item_gobj, &sp24, fp->facing_dir);
-    } else {
-        ftCommon_8007ECD4(fp, 1);
-    }
-    fp->mv.co.itemthrow.x8++;
-
-    ftCo_800CE650_inline(gobj, fp->mv.co.itemthrow.x8, p_ftCommonData->x5B4);
-}
-
-inline void ftCo_800CE650_inline3(HSD_GObj* gobj)
-{
-    Vec3 spA0;
-    Vec3 sp94;
-    float sp90;
-    Vec3 sp84;
-    Fighter* fp = GET_FIGHTER(gobj);
-
-    if (it_8026B594(fp->item_gobj) == 0) {
-        sp90 = 0.0F;
-        lb_8000B1CC(fp->parts->joint, NULL, &sp84);
-        efSync_Spawn(0x3FF, gobj, &sp84, &fp->facing_dir, &sp90);
-        ft_PlaySFX(fp, 0xEE, 0x7F, 0x40);
-    } else {
-        it_80292EF8(fp->item_gobj, &spA0);
-        ftCo_800CDE94(fp, &spA0, &sp94);
-        efSync_Spawn(0x405, gobj, &sp94);
-        ft_PlaySFX(fp, 0xEF, 0x7F, 0x40);
-    }
-}
-
 static inline bool zero_throw_flag_b0(Fighter* fp)
 {
     if (fp->throw_flags_b0) {
@@ -145,10 +99,24 @@ void ftCo_800CE650(HSD_GObj* gobj)
     Vec3 spC4;
     Vec3 spB8;
     f32 spB4;
+    UNUSED u8 padA[8];
+    Vec3 spA0;
+    Vec3 sp94;
+    f32 sp90;
+    Vec3 sp84;
+    Vec3 sp78;
+    Vec3 sp6C;
+    UNUSED u8 padB[8];
+    Vec3 sp58;
+    Vec3 sp4C;
+    f32 sp48;
+    Vec3 sp3C;
+    Vec3 sp30;
+    Vec3 sp24;
 
     Fighter* temp_r3;
-
-    PAD_STACK(0x0c);
+    int frame;
+    int interval;
 
     temp_r3 = GET_FIGHTER(gobj);
     if (temp_r3->item_gobj != NULL) {
@@ -166,9 +134,41 @@ void ftCo_800CE650(HSD_GObj* gobj)
         if (zero_throw_flag_b0(temp_r3)) {
             temp_r3->mv.co.itemthrow.x14 = 1;
 
-            ftCo_800CE650_inline3(gobj);
+            {
+                Fighter* fp = GET_FIGHTER(gobj);
 
-            ftCo_800CE650_inline2(gobj);
+                if (it_8026B594(fp->item_gobj) == 0) {
+                    sp90 = 0.0F;
+                    lb_8000B1CC(fp->parts->joint, NULL, &sp84);
+                    efSync_Spawn(0x3FF, gobj, &sp84, &fp->facing_dir, &sp90);
+                    ft_PlaySFX(fp, 0xEE, 0x7F, 0x40);
+                } else {
+                    it_80292EF8(fp->item_gobj, &spA0);
+                    ftCo_800CDE94(fp, &spA0, &sp94);
+                    efSync_Spawn(0x405, gobj, &sp94);
+                    ft_PlaySFX(fp, 0xEF, 0x7F, 0x40);
+                }
+            }
+
+            {
+                Fighter* fp = GET_FIGHTER(gobj);
+
+                it_80292EF8(fp->item_gobj, &sp78);
+                ftCo_800CDE94(fp, &sp78, &sp6C);
+                if (!it_8026B594(fp->item_gobj)) {
+                    it_80292F14(fp->item_gobj, &sp6C, fp->facing_dir);
+                } else {
+                    ftCommon_8007ECD4(fp, 1);
+                }
+                fp->mv.co.itemthrow.x8++;
+
+                frame = fp->mv.co.itemthrow.x8;
+                interval = p_ftCommonData->x5B4;
+                if (interval - 1 == frame % interval) {
+                    ft_800892A0(gobj);
+                    ft_80089824(gobj);
+                }
+            }
 
             if (it_8026B594(temp_r3->item_gobj) == 0) {
                 spB4 = 0.0f;
@@ -186,13 +186,46 @@ void ftCo_800CE650(HSD_GObj* gobj)
             if (temp_r3->mv.ca.specialhi.vel.x <= 0.0f) {
                 temp_r3->mv.ca.specialhi.vel.x = p_ftCommonData->x5AC;
 
-                ftCo_800CE650_inline3(gobj);
+                {
+                    Fighter* fp = GET_FIGHTER(gobj);
+
+                    if (it_8026B594(fp->item_gobj) == 0) {
+                        sp48 = 0.0F;
+                        lb_8000B1CC(fp->parts->joint, NULL, &sp3C);
+                        efSync_Spawn(0x3FF, gobj, &sp3C, &fp->facing_dir,
+                                     &sp48);
+                        ft_PlaySFX(fp, 0xEE, 0x7F, 0x40);
+                    } else {
+                        it_80292EF8(fp->item_gobj, &sp58);
+                        ftCo_800CDE94(fp, &sp58, &sp4C);
+                        efSync_Spawn(0x405, gobj, &sp4C);
+                        ft_PlaySFX(fp, 0xEF, 0x7F, 0x40);
+                    }
+                }
             }
             temp_r3->mv.co.itemthrow.facing_dir -= 1.0f;
             if (temp_r3->mv.co.itemthrow.facing_dir <= 0.0f) {
                 temp_r3->mv.co.itemthrow.facing_dir = p_ftCommonData->x5A8;
 
-                ftCo_800CE650_inline2(gobj);
+                {
+                    Fighter* fp = GET_FIGHTER(gobj);
+
+                    it_80292EF8(fp->item_gobj, &sp30);
+                    ftCo_800CDE94(fp, &sp30, &sp24);
+                    if (!it_8026B594(fp->item_gobj)) {
+                        it_80292F14(fp->item_gobj, &sp24, fp->facing_dir);
+                    } else {
+                        ftCommon_8007ECD4(fp, 1);
+                    }
+                    fp->mv.co.itemthrow.x8++;
+
+                    frame = fp->mv.co.itemthrow.x8;
+                    interval = p_ftCommonData->x5B4;
+                    if (interval - 1 == frame % interval) {
+                        ft_800892A0(gobj);
+                        ft_80089824(gobj);
+                    }
+                }
             }
             if (temp_r3->mv.co.itemthrow.x8 >= p_ftCommonData->x5A4 &&
                 temp_r3->mv.co.itemthrow.xC != 0)

@@ -1268,7 +1268,8 @@ melee/ft/chara/ftLink/ftLk_SpecialN.c:
 melee/ft/chara/ftKirby/ftkirby.c:
 	.text       start:0x800EE528 end:0x800F1F68
 	.rodata     start:0x803B7548 end:0x803B7570
-	.data       start:0x803C8368 end:0x803CB6D8
+	.data       start:0x803C8368 end:0x803CA5FC
+	.sdata      start:0x804D3D98 end:0x804D3DB0
 	.sdata2     start:0x804D9350 end:0x804D9364
 
 melee/ft/chara/ftKirby/ftkirbyattackdash.c:
@@ -1281,6 +1282,8 @@ melee/ft/chara/ftKirby/ftkirbyspecialhi.c:
 
 melee/ft/chara/ftKirby/ftkirbyspecialn.c:
 	.text       start:0x800F331C end:0x800F9FD4
+	.data       start:0x803CA5FC end:0x803CB540 align:4
+	.sdata      start:0x804D3DB0 end:0x804D3DB8
 	.sdata2     start:0x804D9388 end:0x804D93E4
 
 melee/ft/chara/ftKirby/ftkirbyspecialpikachu.c:
@@ -1289,6 +1292,7 @@ melee/ft/chara/ftKirby/ftkirbyspecialpikachu.c:
 
 melee/ft/chara/ftKirby/ftkirbyspecialkoopa.c:
 	.text       start:0x800FA588 end:0x800FB394
+	.data       start:0x803CB540 end:0x803CB6C0
 	.sdata2     start:0x804D93F0 end:0x804D9408
 
 melee/ft/chara/ftKirby/ftkirbyspeciallink.c:
@@ -1297,6 +1301,7 @@ melee/ft/chara/ftKirby/ftkirbyspeciallink.c:
 
 melee/ft/chara/ftKirby/ftkirbyspecialsamus.c:
 	.text       start:0x800FCC14 end:0x800FDC00
+	.data       start:0x803CB6C0 end:0x803CB6D8
 	.sdata2     start:0x804D9418 end:0x804D944C
 
 melee/ft/chara/ftKirby/ftkirbyspecialfox.c:
@@ -1331,6 +1336,7 @@ melee/ft/chara/ftKirby/ftkirbyspecialseak.c:
 melee/ft/chara/ftKirby/ftkirbyspecialmewtwo.c:
 	.text       start:0x80106F44 end:0x80108CE8
 	.rodata     start:0x803B7570 end:0x803B7588
+	.data       start:0x803CB828 end:0x803CB838
 	.sdata2     start:0x804D9508 end:0x804D9548
 
 melee/ft/chara/ftKirby/ftkirbyspecialiceclimber.c:
@@ -1352,6 +1358,7 @@ melee/ft/chara/ftKirby/ftkirbyyoshiegg.c:
 
 melee/ft/chara/ftKirby/ftkirbyspecialmars.c:
 	.text       start:0x8010B1F4 end:0x8010C288
+	.sdata      start:0x804D3E00 end:0x804D3E10
 	.sdata2     start:0x804D9570 end:0x804D9580
 
 melee/ft/chara/ftKirby/ftkirbyspecialpeach.c:
@@ -2213,14 +2220,14 @@ melee/gm/gmtou_0.c:
 	.text       start:0x80190ABC end:0x80196510
 	.data       start:0x803D9FD8 end:0x803DA0D0
 	.sdata      start:0x804D4170 end:0x804D4190
-	.sdata2     start:0x804DA6D8 end:0x804DA7E8
+	.sdata2     start:0x804DA6D8 end:0x804DA7E0
 
 melee/gm/gmtou_1.c:
 	.text       start:0x80196510 end:0x8019BA08
 	.data       start:0x803DA0D0 end:0x803DA2E0
 	.bss        start:0x804799B8 end:0x80479A58
 	.sdata      start:0x804D4190 end:0x804D41D0
-	.sdata2     start:0x804DA7E8 end:0x804DA878
+	.sdata2     start:0x804DA7E0 end:0x804DA878
 
 melee/gm/gmtou_2.c:
 	.text       start:0x8019BA08 end:0x8019EFC4
@@ -2255,11 +2262,17 @@ melee/gm/gmtitle.c:
 	.sdata2     start:0x804DA998 end:0x804DA9B8
 
 melee/gm/gmcamera.c:
-	.text       start:0x801A2224 end:0x801A3680
-	.data       start:0x803DA630 end:0x803DA788
-	.bss        start:0x80479BC8 end:0x80479C30
+	.text       start:0x801A2224 end:0x801A33BC
+	.data       start:0x803DA630 end:0x803DA758
+	.bss        start:0x80479BC8 end:0x80479C20
 	.sdata      start:0x804D4248 end:0x804D4268
-	.sdata2     start:0x804DA9B8 end:0x804DA9E8
+	.sdata2     start:0x804DA9B8 end:0x804DA9D8
+
+melee/gm/gm_1A33.c:
+	.text       start:0x801A33BC end:0x801A3680
+	.data       start:0x803DA758 end:0x803DA788
+	.bss        start:0x80479C20 end:0x80479C30
+	.sdata2     start:0x804DA9D8 end:0x804DA9E8
 
 melee/gm/gm_1A36.c:
 	.text       start:0x801A3680 end:0x801A3F48
@@ -2317,11 +2330,17 @@ melee/gm/gm_1A7A.c:
 	.sdata2     start:0x804DAA18 end:0x804DAA28
 
 melee/gm/gmregenddisp.c:
-	.text       start:0x801A7FB4 end:0x801A9DD0
-	.data       start:0x803DB458 end:0x803DBF78
+	.text       start:0x801A7FB4 end:0x801A9B30
+	.data       start:0x803DB458 end:0x803DB640
 	.bss        start:0x80480A00 end:0x80480B38
 	.sdata      start:0x804D42A0 end:0x804D42B8
-	.sdata2     start:0x804DAA28 end:0x804DAAA8
+	.sdata2     start:0x804DAA28 end:0x804DAAA0
+
+melee/gm/gm_1A9B.c:
+	.text       start:0x801A9B30 end:0x801A9DD0
+	.data       start:0x803DB640 end:0x803DBF78
+	.sbss       start:0x804D67C8 end:0x804D67CA
+	.sdata2     start:0x804DAAA0 end:0x804DAAA8
 
 melee/gm/gmopening.c:
 	.text       start:0x801A9DD0 end:0x801AA644
@@ -2480,7 +2499,7 @@ melee/gm/gm_1BA8.c:
 	.bss        start:0x80497758 end:0x8049E558
 	.sdata      start:0x804D4330 end:0x804D44C8
 	.sbss       start:0x804D6900 end:0x804D6940
-	.sdata2     start:0x804DAC78 end:0x804DAC88
+	.sdata2     start:0x804DAC78 end:0x804DAC90
 
 melee/gm/gm_1BF9.c:
 	.text       start:0x801BF948 end:0x801BFA6C
@@ -3264,6 +3283,7 @@ melee/it/it_26B1.c:
 
 melee/it/itspawn.c:
 	.text       start:0x8026C47C end:0x8026D564
+	.bss        start:0x804A0E30 end:0x804A0E70
 	.sdata2     start:0x804DC698 end:0x804DC6A8
 
 melee/it/itgroundcoll.c:
@@ -3288,7 +3308,7 @@ melee/it/itcoll.c:
 
 melee/it/it_3F14.c:
 	.data       start:0x803F1418 end:0x803F1F00
-	.bss        start:0x804A0E30 end:0x804A0FD8
+	.bss        start:0x804A0E70 end:0x804A0FD8
 	.sbss       start:0x804D6D00 end:0x804D6D48
 
 melee/it/it_2725.c:
@@ -4371,7 +4391,9 @@ melee/if/textdraw.c:
 melee/if/textlib.c:
 	.text       start:0x803029B4 end:0x80304870
 	.rodata     start:0x803B87A8 end:0x803B8844
+	.data       start:0x803FDC80 end:0x803FDD18
 	.bss        start:0x804A2688 end:0x804A26B8
+	.sdata2     start:0x804DDC88 end:0x804DDCC8
 
 melee/ty/toy.c:
 	.text       start:0x80304870 end:0x80312834

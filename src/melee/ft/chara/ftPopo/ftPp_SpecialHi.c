@@ -11,6 +11,7 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ftCommon/inlines.h"
 #include "ftNana/ftNn_Init.h"
 #include "ftPopo/ftPp_Init.h"
 #include "it/items/itclimbersstring.h"
@@ -353,13 +354,7 @@ void ftPp_SpecialHiStart_0_Coll(Fighter_GObj* gobj)
 void ftPp_SpecialAirHiStart_0_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 facingDir;
-    if (fp->facing_dir < 0.0f) {
-        facingDir = -1;
-    } else {
-        facingDir = 1;
-    }
-    if (ft_CheckGroundAndLedge(gobj, facingDir)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftPp_SpecialHi_8012184C(gobj);
         return;
     }
@@ -380,9 +375,7 @@ void ftPp_SpecialHi_8012184C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x15B, 0x0C4C508AU, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 0x15B, ftPp_MF_SpecialHi_Coll);
 }
 
 void ftPp_SpecialHi_801218AC(Fighter_GObj* gobj)
@@ -546,15 +539,8 @@ void ftPp_SpecialHiThrow_0_Coll(Fighter_GObj* gobj)
 void ftPp_SpecialAirHiThrow_0_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 facingDir;
 
-    if (fp->facing_dir < 0.0f) {
-        facingDir = -1;
-    } else {
-        facingDir = 1;
-    }
-
-    if (ft_CheckGroundAndLedge(gobj, facingDir)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftPp_SpecialHi_80121D40(gobj);
         return;
     }
@@ -575,9 +561,7 @@ void ftPp_SpecialHi_80121CE0(Fighter_GObj* gobj)
 void ftPp_SpecialHi_80121D40(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x15C, 0x0C4C508A, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 0x15C, ftPp_MF_SpecialHi_Coll);
 }
 
 void ftPp_SpecialHi_80121DA0(Fighter_GObj* gobj)
@@ -641,15 +625,8 @@ void ftPp_SpecialHiStart_1_Coll(Fighter_GObj* gobj)
 void ftPp_SpecialAirHiStart_1_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 facingDir;
 
-    if (fp->facing_dir < 0.0f) {
-        facingDir = -1;
-    } else {
-        facingDir = 1;
-    }
-
-    if (ft_CheckGroundAndLedge(gobj, facingDir)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftPp_SpecialHi_80122038(gobj);
         return;
     }
@@ -670,9 +647,7 @@ void ftPp_SpecialHi_80121FD8(Fighter_GObj* gobj)
 void ftPp_SpecialHi_80122038(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x15E, 0x0C4C508A, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 0x15E, ftPp_MF_SpecialHi_Coll);
 }
 
 void ftPp_SpecialHi_80122098(Fighter_GObj* gobj)
@@ -735,14 +710,8 @@ void ftPp_SpecialAirHiThrow_1_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* da = fp->dat_attrs;
-    s32 cliffCatchDir;
     PAD_STACK(4);
-    if (fp->facing_dir < 0.0f) {
-        cliffCatchDir = -1;
-    } else {
-        cliffCatchDir = 1;
-    }
-    if (ft_CheckGroundAndLedge(gobj, cliffCatchDir)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftCo_LandingFallSpecial_Enter(gobj, false, da->x78);
         return;
     }
@@ -892,7 +861,7 @@ void ftPp_SpecialAirHiThrow2_Coll(Fighter_GObj* gobj)
     ftIceClimberAttributes* da = fp->dat_attrs;
     CollData* cd = &fp->coll_data;
     PAD_STACK(8);
-    if (ft_CheckGroundAndLedge(gobj, (fp->facing_dir < 0) ? -1 : 1)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftCo_LandingFallSpecial_Enter(gobj, false, da->x78);
     } else if (!ftCliffCommon_80081298(gobj)) {
         if ((cd->env_flags & 0x3F) && fp->self_vel.x > 0.0f) {

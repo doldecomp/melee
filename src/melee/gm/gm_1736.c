@@ -6,29 +6,31 @@
 #include "gmregclear.h"
 #include "types.h"
 
+#include "ft/forward.h"
+
 #include <melee/if/textlib.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbtime.h>
 #include <melee/ty/toy.h>
 
-static lbl_8046DBD8_t lbl_8046DBD8;
+static lbl_8046DBD8_t challenger_data;
 
-lbl_8046DBD8_t* gm_801736DC(void)
+lbl_8046DBD8_t* gm_GetChallengerData(void)
 {
-    return &lbl_8046DBD8;
+    return &challenger_data;
 }
 
-void gm_801736E8(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5)
+void gm_801736E8(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 game_mode)
 {
-    lbl_8046DBD8_t* tmp = &lbl_8046DBD8;
-    memzero(tmp, sizeof(lbl_8046DBD8));
+    lbl_8046DBD8_t* tmp = &challenger_data;
+    memzero(tmp, sizeof(challenger_data));
     tmp->x0 = arg0;
     tmp->x1 = arg1;
     tmp->x2 = arg2;
     tmp->x3 = arg3;
     tmp->x4 = arg4;
-    tmp->x5 = arg5;
+    tmp->x5 = game_mode;
 }
 
 #pragma push
@@ -36,12 +38,12 @@ void gm_801736E8(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5)
 bool gm_80173754(u8 gameMode, u8 arg1)
 {
     if (gm_801721EC()) {
-        memzero(&lbl_8046DBD8, sizeof(lbl_8046DBD8));
-        lbl_8046DBD8.x0 = CHKIND_NONE;
-        lbl_8046DBD8.x2 = arg1;
-        lbl_8046DBD8.x5 = gameMode;
-        gm_801A42E8(GM_CHALLENGER_APPROACH);
-        gm_801A42D4();
+        memzero(&challenger_data, sizeof(challenger_data));
+        challenger_data.x0 = CHKIND_NONE;
+        challenger_data.x2 = arg1;
+        challenger_data.x5 = gameMode;
+        gm_SetPendingGameMode(GM_CHALLENGER_APPROACH);
+        gm_SetNewGameModePending();
         return true;
     }
     return false;
@@ -50,16 +52,16 @@ bool gm_80173754(u8 gameMode, u8 arg1)
 
 u8 gm_801737D8(void)
 {
-    return lbl_8046DBD8.x6;
+    return challenger_data.x6;
 }
 
 void gm_801737E8_OnLoad(void)
 {
-    lbl_8046DBD8.x6 = gm_801A4320();
-    if (lbl_8046DBD8.x0 == CHKIND_NONE) {
-        gm_SetScene(2);
+    challenger_data.x6 = gm_GetPreviousGameMode();
+    if (challenger_data.x0 == CHKIND_NONE) {
+        gm_SetSceneIndex(2);
     } else {
-        gm_SetScene(0);
+        gm_SetSceneIndex(0);
     }
 }
 
@@ -98,7 +100,7 @@ void gm_8017390C(int arg0, int arg1)
 
     switch (arg0) { /* irregular */
     case 0:
-        temp_r3 = gm_8017E424();
+        temp_r3 = gm_GetAdventureData();
         if (temp_r3->x76 != 0) {
             fn_80172C78(0xE7);
         }
@@ -182,17 +184,17 @@ void gm_80173B30(u32 arg0)
     }
 }
 
-void gm_80173BC4(s8 arg0)
+void gm_80173BC4(s8 ckind)
 {
     u8 temp_r31;
-    int i;
+    int selkind;
     int var_r29;
     int temp_r28;
 
     var_r29 = 0;
-    temp_r28 = gmMainLib_8015EDBC()->x114[gm_80164024(arg0)];
-    for (i = 0; i < 0x19; i++) {
-        var_r29 += gmMainLib_8015EDBC()->x114[i];
+    temp_r28 = gmMainLib_8015EDBC()->x114[gm_CKindToSelKind(ckind)];
+    for (selkind = 0; selkind < SELKIND_COUNT; selkind++) {
+        var_r29 += gmMainLib_8015EDBC()->x114[selkind];
     }
     if (temp_r28 >= 0xA) {
         fn_80172C78(0x6D);
@@ -208,20 +210,20 @@ void gm_80173BC4(s8 arg0)
 void gm_80173C70(s8 c_kind, u32 arg1, u32 arg2, int arg3)
 {
     if (arg3 != 0) {
-        if (gm_801A4310() == GM_15MIN_VS) {
+        if (gm_GetCurrentGameMode() == GM_15MIN_VS) {
             fn_80172C78(0x50);
         }
-        if (gm_801A4310() == GM_100MAN_VS && arg2 <= 0x3840) {
+        if (gm_GetCurrentGameMode() == GM_100MAN_VS && arg2 <= 0x3840) {
             fn_80172C78(0x4E);
         }
-        if (gm_801A4310() == GM_15MIN_VS) {
+        if (gm_GetCurrentGameMode() == GM_15MIN_VS) {
             fn_80172C78(0x50);
         }
     }
-    if (gm_801A4310() == GM_ENDLESS_VS && arg1 >= 100) {
+    if (gm_GetCurrentGameMode() == GM_ENDLESS_VS && arg1 >= 100) {
         fn_80172C78(0x4F);
     }
-    if (gm_801A4310() == GM_CRUEL_VS && arg1 >= 5) {
+    if (gm_GetCurrentGameMode() == GM_CRUEL_VS && arg1 >= 5) {
         fn_80172C78(0x10E);
     }
 }
@@ -305,14 +307,14 @@ static inline bool gm_80173EEC_inline(u8 arg0, int arg1)
 
 void gm_80173EEC(void)
 {
-    int i;
+    int selkind;
     u8 ckind;
     u16* temp_r29;
 
-    for (i = 0; i < 0x19; i++) {
-        temp_r29 = &gmMainLib_8015EDBC()->x18[(u32) i];
+    for (selkind = 0; selkind < SELKIND_COUNT; selkind++) {
+        temp_r29 = &gmMainLib_8015EDBC()->x18[(u32) selkind];
         if (*temp_r29 >= 100) {
-            ckind = gm_8016400C(i);
+            ckind = gm_SelKindToCKind(selkind);
             fn_80172C78(gm_80173EEC_inline(ckind, GM_CLASSIC));
             if (ckind == CKIND_ZELDA) {
                 fn_80172C78(gm_80173EEC_inline(CKIND_SEAK, GM_CLASSIC));
@@ -322,7 +324,7 @@ void gm_80173EEC(void)
             }
         }
         if (*temp_r29 >= 200) {
-            ckind = gm_8016400C(i);
+            ckind = gm_SelKindToCKind(selkind);
             fn_80172C78(gm_80173EEC_inline(ckind, GM_ADVENTURE));
             if (ckind == CKIND_ZELDA) {
                 fn_80172C78(gm_80173EEC_inline(CKIND_SEAK, GM_ADVENTURE));
@@ -332,7 +334,7 @@ void gm_80173EEC(void)
             }
         }
         if (*temp_r29 >= 300) {
-            ckind = gm_8016400C(i);
+            ckind = gm_SelKindToCKind(selkind);
             fn_80172C78(gm_80173EEC_inline(ckind, GM_ALLSTAR));
             if (ckind == CKIND_ZELDA) {
                 fn_80172C78(gm_80173EEC_inline(CKIND_SEAK, GM_ALLSTAR));

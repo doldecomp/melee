@@ -176,19 +176,29 @@ int lbSnap_8001D7B0(int chan, int index, int jndex)
 #define RGB565_MASK_G (0x07E0)
 #define RGB565_MASK_B (0x001F)
 
-#define RGB565_TO_RGB5A3(x)                                                   \
-    (((x) & RGB5A3_MASK_B) | (((x) >> 1) & (RGB5A3_MASK_R | RGB5A3_MASK_G)) | \
-     RGB5A3_MASK_A)
+static inline u16 RGB565_TO_RGB5A3(u16 pixel)
+{
+    u16 result = pixel & RGB5A3_MASK_B;
+    result |= (pixel >> 1) & (RGB5A3_MASK_R | RGB5A3_MASK_G);
+    return result | RGB5A3_MASK_A;
+}
+
+static inline int lbSnap_GetTiledRemainder(int value)
+{
+    return value % 4;
+}
 
 static inline int lbSnap_GetTiledRGBOffset(int x, int y, int tile_stride)
 {
-    return ((((x / 4) * tile_stride) + (y / 4)) << 5) + ((x % 4) * 8) +
-           ((y % 4) * 2);
+    int tile_x = x / 4;
+    int tile_base = tile_x * tile_stride;
+    return ((tile_base + (y / 4)) << 5) + (lbSnap_GetTiledRemainder(x) * 8) +
+           (lbSnap_GetTiledRemainder(y) * 2);
 }
 
 static inline int lbSnap_GetTiledYOff(int tile_column, int y)
 {
-    return (((y / 4) + tile_column) << 5) + ((y % 4) * 2);
+    return (((y / 4) + tile_column) << 5) + (lbSnap_GetTiledRemainder(y) * 2);
 }
 
 static inline u8* lbSnap_GetMemSnapIconData(void)
@@ -201,12 +211,11 @@ static inline int lbSnap_GetTiledColumn(int x)
     return (x / 4) * 24;
 }
 
-void lbSnap_8001DA5C(int arg0)
+void lbSnap_8001DA5C(u8* arg0)
 {
     u8* dst = lbSnap_GetMemSnapIconData();
     int dst_x;
     int ctr;
-    PAD_STACK(8);
 
     for (dst_x = 0; dst_x < 32; dst_x++) {
         int src_x = (dst_x * 204 / 32) + 138;
@@ -216,13 +225,13 @@ void lbSnap_8001DA5C(int arg0)
         int src_y_accum = 0;
         u16 pixel;
         for (ctr = 0; ctr < 32; ctr++) {
-            pixel = *(u16*) &((u8*) arg0)[lbSnap_GetTiledRGBOffset(
+            pixel = *(u16*) &arg0[lbSnap_GetTiledRGBOffset(
                 src_x, src_y_accum / 64 + 96, 160)];
             *(u16*) &dst_col[lbSnap_GetTiledYOff(tile_column, dst_y + 16)] =
                 RGB565_TO_RGB5A3(pixel);
             src_y_accum += 448;
 
-            pixel = *(u16*) &((u8*) arg0)[lbSnap_GetTiledRGBOffset(
+            pixel = *(u16*) &arg0[lbSnap_GetTiledRGBOffset(
                 src_x, src_y_accum / 64 + 96, 160)];
             *(u16*) &dst_col[lbSnap_GetTiledYOff(tile_column, dst_y + 17)] =
                 RGB565_TO_RGB5A3(pixel);
@@ -233,7 +242,7 @@ void lbSnap_8001DA5C(int arg0)
     }
 }
 
-int lbSnap_8001DC0C(int arg0)
+int lbSnap_8001DC0C(u8* arg0)
 {
     OSTime ticks;
     u32 seconds;
@@ -251,8 +260,8 @@ int lbSnap_8001DC0C(int arg0)
     lbSnap_80433380.x0->x8 = 3;
     hsd_803B5C2C(lbSnap_80433380.x0->x8);
     lbSnap_80433380.x0->xC =
-        hsd_803B51C8(arg0, lbSnap_80433380.x0->x4, lbSnap_80433380.x0->x6,
-                     lbSnap_80433380.x0->x38, 256000);
+        hsd_803B51C8((int) arg0, lbSnap_80433380.x0->x4,
+                     lbSnap_80433380.x0->x6, lbSnap_80433380.x0->x38, 256000);
     if (lbSnap_80433380.x0->xC != 0) {
         ret = 1;
     }

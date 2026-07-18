@@ -20,9 +20,9 @@ typedef struct {
 /// size 0x8
 
 struct CountEntry {
-    u8 id;
+    u8 selkind;
     u8 pad[3];
-    u32 val;
+    u32 stat_value;
 };
 
 #ifdef M2C
@@ -304,6 +304,35 @@ typedef enum CSSIconJointId {
     ICONJOINT_MARS = 0x22
 } CSSIconJointId;
 
+typedef enum SelectableCharacterKind {
+    /* 00 */ SELKIND_CAPTAIN,    // Captain Falcon (Captain)
+    /* 01 */ SELKIND_DONKEY,     // Donkey Kong (Donkey)
+    /* 02 */ SELKIND_FOX,        // Fox
+    /* 03 */ SELKIND_GAMEWATCH,  // Mr. Game & Watch (GameWatch)
+    /* 04 */ SELKIND_KIRBY,      // Kirby
+    /* 05 */ SELKIND_KOOPA,      // Bowser (Koopa)
+    /* 06 */ SELKIND_LINK,       // Link
+    /* 07 */ SELKIND_LUIGI,      // Luigi
+    /* 08 */ SELKIND_MARIO,      // Mario
+    /* 09 */ SELKIND_MARS,       // Marth (Mars)
+    /* 0A */ SELKIND_MEWTWO,     // Mewtwo
+    /* 0B */ SELKIND_NESS,       // Ness
+    /* 0C */ SELKIND_PEACH,      // Peach
+    /* 0D */ SELKIND_PIKACHU,    // Pikachu
+    /* 0E */ SELKIND_POPONANA,   // Ice Climbers (Popo & Nana)
+    /* 0F */ SELKIND_PURIN,      // Jigglypuff (Purin)
+    /* 10 */ SELKIND_SAMUS,      // Samus
+    /* 11 */ SELKIND_YOSHI,      // Yoshi
+    /* 12 */ SELKIND_ZELDA_SEAK, // Zelda + Sheik
+    /* 13 */ SELKIND_FALCO,      // Falco
+    /* 14 */ SELKIND_CLINK,      // Young Link (CLink)
+    /* 15 */ SELKIND_DRMARIO,    // Dr. Mario
+    /* 16 */ SELKIND_EMBLEM,     // Roy (Emblem)
+    /* 17 */ SELKIND_PICHU,      // Pichu
+    /* 18 */ SELKIND_GANON,      // Ganondorf (Ganon)
+    /* 19 */ SELKIND_COUNT
+} SelectableCharacterKind;
+
 struct CSSIcon {
     u8 ft_hudindex; // 0x00 - used for getting combo count @ 8025C0C4
     u8 char_kind;   // 0x01 - icons external ID
@@ -518,7 +547,7 @@ struct Diagram2 {
 /// Total size: 0x78 bytes
 struct Diagram3 {
     /* 0x00 */ u8 saved_menu;
-    /* 0x01 */ u8 saved_selection;
+    /* 0x01 */ u8 cursor_row;
     /* 0x02 */ u8 pad_2[2];
     /* 0x04 */ u8 scroll_offset;
     /* 0x05 */ u8 anim_state;

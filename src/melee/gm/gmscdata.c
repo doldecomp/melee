@@ -1,5 +1,6 @@
 #include "gmscdata.h"
 
+#include "gm_1A33.h"
 #include "gm_1B14.h"
 #include "gm_unsplit.h"
 #include "gmadventure.h"
@@ -757,12 +758,12 @@ GameMode gm_803DACA4[] = {
     },
 };
 
-GameSceneHandler* gm_801A50A0(void)
+GameSceneHandler* gm_GetAllGameSceneHandlers(void)
 {
     return gm_803DA920;
 }
 
-GameMode* gm_801A50AC(void)
+GameMode* gm_GetAllGameModes(void)
 {
     return gm_803DACA4;
 }
