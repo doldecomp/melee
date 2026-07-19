@@ -3759,14 +3759,62 @@ Vec3* Camera_8003019C(void)
     return &ftLib_80086B74(Player_GetEntity(cm_80453004.ply_slot))->x1C;
 }
 
+/// @todo these are probably somewhat fake, but maybe a combination of this + render_gxlink_pass is real.
+static inline s64 gxlink_prio8(void)
+{
+    s64 prio;
+
+    if (cm_80452C68.x398_b2) {
+        prio = 0;
+    } else {
+        prio = 8;
+    }
+    return prio;
+}
+
+static inline s64 gxlink_prio1(void)
+{
+    s64 prio;
+
+    if (cm_80452C68.x398_b4) {
+        prio = 0;
+    } else {
+        prio = 1;
+    }
+    return prio;
+}
+
+static inline s64 gxlink_prio80(void)
+{
+    s64 prio;
+
+    if (cm_80452C68.x398_b3) {
+        prio = 0;
+    } else {
+        prio = 0x80;
+    }
+    return prio;
+}
+
+static inline void render_gxlink_pass(HSD_GObj* gobj, int pass, int gxlink)
+{
+    s64 prio8;
+
+    Camera_800310A0(pass);
+    if (cm_80452C68.x398_b2) {
+        prio8 = 0;
+    } else {
+        prio8 = 8;
+    }
+    gobj->gxlink_prios = prio8;
+    HSD_GObj_80390ED0(gobj, gxlink);
+}
+
 static void fn_800301D0(HSD_GObj* gobj, int arg1)
 {
     s64 prio8_a;
     s64 prio1_a;
-    s64 prio8_b;
-    s64 prio1_b;
     HSD_CObj* cobj;
-    PAD_STACK(56);
 
     cobj = gobj->hsd_obj;
     lbRefract_8002247C(cobj);
@@ -3785,83 +3833,30 @@ static void fn_800301D0(HSD_GObj* gobj, int arg1)
         HSD_LObjDeleteCurrentAll(NULL);
 
         Camera_800310A0(2);
-        if (cm_80452C68.x398_b2) {
-            prio8_a = 0;
-        } else {
-            prio8_a = 8;
-        }
-        if (cm_80452C68.x398_b4) {
-            prio1_a = 0;
-        } else {
-            prio1_a = 1;
-        }
+        prio8_a = gxlink_prio8();
+        prio1_a = gxlink_prio1();
         gobj->gxlink_prios = prio1_a | prio8_a;
         HSD_GObj_80390ED0(gobj, 7);
 
-        Camera_800310A0(1);
-        if (cm_80452C68.x398_b2) {
-            prio8_b = 0;
-        } else {
-            prio8_b = 8;
-        }
-        gobj->gxlink_prios = prio8_b;
-        HSD_GObj_80390ED0(gobj, 7);
-
-        Camera_800310A0(0);
-        if (cm_80452C68.x398_b2) {
-            prio8_b = 0;
-        } else {
-            prio8_b = 8;
-        }
-        gobj->gxlink_prios = prio8_b;
-        HSD_GObj_80390ED0(gobj, 3);
+        render_gxlink_pass(gobj, 1, 7);
+        render_gxlink_pass(gobj, 0, 3);
 
         lbRefract_80022560();
-        if (cm_80452C68.x398_b4) {
-            prio1_b = 0;
-        } else {
-            prio1_b = 1;
-        }
-        Camera_800311EC(gobj, prio1_b);
+        Camera_800311EC(gobj, gxlink_prio1());
 
         Camera_80031074(0);
-        if (cm_80452C68.x398_b2) {
-            prio8_a = 0;
-        } else {
-            prio8_a = 8;
-        }
-        if (cm_80452C68.x398_b4) {
-            prio1_a = 0;
-        } else {
-            prio1_a = 1;
-        }
+        prio8_a = gxlink_prio8();
+        prio1_a = gxlink_prio1();
         gobj->gxlink_prios = prio1_a | prio8_a;
         HSD_GObj_80390ED0(gobj, 4);
 
-        if (cm_80452C68.x398_b4) {
-            prio1_b = 0;
-        } else {
-            prio1_b = 1;
-        }
-        Camera_80031328(gobj, prio1_b);
+        Camera_80031328(gobj, gxlink_prio1());
 
         HSD_FogSet(NULL);
-        if (cm_80452C68.x398_b3) {
-            prio8_b = 0;
-        } else {
-            prio8_b = 0x80;
-        }
-        gobj->gxlink_prios = prio8_b;
+        gobj->gxlink_prios = gxlink_prio80();
         HSD_GObj_80390ED0(gobj, 7);
 
-        Camera_800310A0(3);
-        if (cm_80452C68.x398_b2) {
-            prio8_b = 0;
-        } else {
-            prio8_b = 8;
-        }
-        gobj->gxlink_prios = prio8_b;
-        HSD_GObj_80390ED0(gobj, 7);
+        render_gxlink_pass(gobj, 3, 7);
 
         if (Camera_80030AC4() != 0) {
             if (Camera_80030A78() != 0) {
@@ -3880,12 +3875,9 @@ static void fn_800301D0(HSD_GObj* gobj, int arg1)
 
 void Camera_800304E0(HSD_GObj* gobj)
 {
-    s64 var_r4;
-    s64 var_r0;
-    s64 var_r3;
-    s64 var_r3_2;
+    s64 prio8;
+    s64 prio1;
     HSD_CObj* cobj;
-    PAD_STACK(32);
 
     cobj = gobj->hsd_obj;
     if (HSD_CObjSetCurrent(cobj) != 0) {
@@ -3896,36 +3888,12 @@ void Camera_800304E0(HSD_GObj* gobj)
         HSD_LObjDeleteCurrentAll(NULL);
         Camera_800310A0(2);
 
-        if (cm_80452C68.x398_b2) {
-            var_r4 = 0;
-        } else {
-            var_r4 = 8;
-        }
-        if (cm_80452C68.x398_b4) {
-            var_r0 = 0;
-        } else {
-            var_r0 = 1;
-        }
-        gobj->gxlink_prios = var_r0 | var_r4;
+        prio8 = gxlink_prio8();
+        prio1 = gxlink_prio1();
+        gobj->gxlink_prios = prio1 | prio8;
         HSD_GObj_80390ED0(gobj, 7);
-
-        Camera_800310A0(1);
-        if (cm_80452C68.x398_b2) {
-            var_r3 = 0;
-        } else {
-            var_r3 = 8;
-        }
-        gobj->gxlink_prios = var_r3;
-        HSD_GObj_80390ED0(gobj, 7);
-
-        Camera_800310A0(0);
-        if (cm_80452C68.x398_b2) {
-            var_r3_2 = 0;
-        } else {
-            var_r3_2 = 8;
-        }
-        gobj->gxlink_prios = var_r3_2;
-        HSD_GObj_80390ED0(gobj, 7);
+        render_gxlink_pass(gobj, 1, 7);
+        render_gxlink_pass(gobj, 0, 7);
 
         gobj->gxlink_prios = 0x70;
         HSD_GObj_80390ED0(gobj, 7);
