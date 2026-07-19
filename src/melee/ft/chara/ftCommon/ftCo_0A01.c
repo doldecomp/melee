@@ -125,6 +125,14 @@ static inline void ftCo_CpuTapA(Fighter* fp)
     ftCo_800B463C(fp, CpuCmd_ReleaseA);
 }
 
+static inline void ftCo_CpuRetapA(Fighter* fp)
+{
+    ftCo_800B463C(fp, CpuCmd_ReleaseA);
+    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+    ftCo_CpuTapA(fp);
+    ftCo_800B463C(fp, CpuCmd_Done);
+}
+
 static inline void ftCo_CpuTapB(Fighter* fp)
 {
     ftCo_800B463C(fp, CpuCmd_PressB);
@@ -144,6 +152,14 @@ static inline void ftCo_CpuTapR(Fighter* fp)
     ftCo_800B463C(fp, CpuCmd_PressR);
     ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
     ftCo_800B463C(fp, CpuCmd_ReleaseR);
+}
+
+static inline void ftCo_CpuRetapR(Fighter* fp)
+{
+    ftCo_800B463C(fp, CpuCmd_ReleaseR);
+    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+    ftCo_CpuTapR(fp);
+    ftCo_800B463C(fp, CpuCmd_Done);
 }
 
 void ftCo_800A0148(Fighter* fp)
@@ -336,15 +352,9 @@ void ftCo_800A0AF4(Fighter* fp)
         ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
         ftCo_CpuFinishWithNeutralY(fp);
     } else if (rand < 0.8f) {
-        ftCo_800B463C(fp, CpuCmd_ReleaseR);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-        ftCo_CpuTapR(fp);
-        ftCo_800B463C(fp, CpuCmd_Done);
+        ftCo_CpuRetapR(fp);
     } else if (rand < 0.9f) {
-        ftCo_800B463C(fp, CpuCmd_ReleaseA);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-        ftCo_CpuTapA(fp);
-        ftCo_800B463C(fp, CpuCmd_Done);
+        ftCo_CpuRetapA(fp);
     } else {
         ftCo_800B463C(fp, CpuCmd_ReleaseY);
         ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
@@ -5670,10 +5680,7 @@ void ftCo_800AC7D4(Fighter* fp)
         if (HSD_Randf() < 0.1F * data->level) {
             ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
             ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-            ftCo_800B463C(fp, CpuCmd_ReleaseA);
-            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-            ftCo_CpuTapA(fp);
-            ftCo_800B463C(fp, CpuCmd_Done);
+            ftCo_CpuRetapA(fp);
         } else {
             if (temp_r3->cur_pos.x - fp->cur_pos.x < 0.0F) {
                 ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0x50);
@@ -5724,15 +5731,9 @@ void ftCo_800ACB44(Fighter* fp)
     temp_f1_2 = ftCo_800A1AB4(fp, temp_r3);
     if (data->xF9_b2 && temp_f1_2 < 30.0) {
         if (0.1F * data->level > HSD_Randf()) {
-            ftCo_800B463C(fp, CpuCmd_ReleaseR);
-            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-            ftCo_CpuTapR(fp);
-            ftCo_800B463C(fp, CpuCmd_Done);
+            ftCo_CpuRetapR(fp);
         } else {
-            ftCo_800B463C(fp, CpuCmd_ReleaseA);
-            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-            ftCo_CpuTapA(fp);
-            ftCo_800B463C(fp, CpuCmd_Done);
+            ftCo_CpuRetapA(fp);
         }
     } else {
         ftCo_800A0AF4(fp);
@@ -8050,10 +8051,7 @@ void ftCo_800B2790(Fighter* fp)
                     ftCo_CpuReturnToPreviousBehavior(fp, data);
                 } else {
                     ftCo_CpuSetNeutralStick(fp);
-                    ftCo_800B463C(fp, CpuCmd_ReleaseA);
-                    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-                    ftCo_CpuTapA(fp);
-                    ftCo_800B463C(fp, CpuCmd_Done);
+                    ftCo_CpuRetapA(fp);
                     data->x18 = data->x1C;
                 }
                 break;
