@@ -156,6 +156,15 @@ static inline int ftCo_CpuSelectAttack(Fighter* fp,
     return entry->cmd;
 }
 
+static inline void ftCo_CpuClearTargetAndFinish(Fighter* fp)
+{
+    struct Fighter_x1A88_t* cpu = &fp->x1A88;
+
+    cpu->x44 = NULL;
+    cpu->x18 = cpu->x1C;
+    ftCo_800A0C8C(fp);
+}
+
 int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
 {
     ftCo_AttackEntry sp3C[32];
@@ -884,9 +893,7 @@ void ftCo_800B658C(Fighter* fp)
     Fighter* temp_r0 = fp->x1A88.x44;
 
     if (temp_r0 == NULL) {
-        temp_r31->x44 = NULL;
-        temp_r31->x18 = temp_r31->x1C;
-        ftCo_800A0C8C(fp);
+        ftCo_CpuClearTargetAndFinish(fp);
         return;
     }
 
@@ -947,9 +954,7 @@ void ftCo_800B658C(Fighter* fp)
             return;
         }
         if (!ftCo_800B8A9C(fp)) {
-            fp->x1A88.x44 = NULL;
-            fp->x1A88.x18 = fp->x1A88.x1C;
-            ftCo_800A0C8C(fp);
+            ftCo_CpuClearTargetAndFinish(fp);
             return;
         }
     }
@@ -1019,9 +1024,7 @@ void ftCo_800B683C(Fighter* fp)
     Vec3 sp24;
 
     if (fp->victim_gobj == NULL) {
-        temp_r31->x44 = 0;
-        temp_r31->x18 = temp_r31->x1C;
-        ftCo_800A0C8C(fp);
+        ftCo_CpuClearTargetAndFinish(fp);
         return;
     }
     var_r30 = false;
@@ -2167,9 +2170,7 @@ void ftCo_800B9020(Fighter* fp)
     PAD_STACK(8);
 
     if (fp->x1A88.x44 == NULL) {
-        temp_r31->x44 = 0;
-        temp_r31->x18 = temp_r31->x1C;
-        ftCo_800A0C8C(fp);
+        ftCo_CpuClearTargetAndFinish(fp);
         return;
     }
 
@@ -2218,14 +2219,10 @@ void ftCo_800B9020(Fighter* fp)
             temp_r31->xA4 = 0;
             temp_r31->x90++;
         } else {
-            fp->x1A88.x44 = NULL;
-            fp->x1A88.x18 = fp->x1A88.x1C;
-            ftCo_800A0C8C(fp);
+            ftCo_CpuClearTargetAndFinish(fp);
         }
     } else {
-        fp->x1A88.x44 = NULL;
-        fp->x1A88.x18 = fp->x1A88.x1C;
-        ftCo_800A0C8C(fp);
+        ftCo_CpuClearTargetAndFinish(fp);
     }
 }
 
@@ -2235,15 +2232,11 @@ void ftCo_800B920C(Fighter* fp)
     PAD_STACK(0x10);
 
     if (temp_r3 == NULL) {
-        fp->x1A88.x44 = NULL;
-        fp->x1A88.x18 = fp->x1A88.x1C;
-        ftCo_800A0C8C(fp);
+        ftCo_CpuClearTargetAndFinish(fp);
     } else if (ABS(temp_r3->cur_pos.y - fp->cur_pos.y) < 25.0) {
         ftCo_800B463C(fp, CpuCmd_ReleaseB);
         ftCo_800B463C(fp, CpuCmd_Done);
-        fp->x1A88.x44 = NULL;
-        fp->x1A88.x18 = fp->x1A88.x1C;
-        ftCo_800A0C8C(fp);
+        ftCo_CpuClearTargetAndFinish(fp);
     } else {
         ftCo_800B46B8(fp, CpuCmd_LstickTowardFighter, 0x7F);
         ftCo_800B463C(fp, CpuCmd_Done);
@@ -2254,9 +2247,7 @@ void ftCo_800B92D4(Fighter* fp)
 {
     PAD_STACK(4 * 4);
     if (fp->x1A88.x44 == NULL) {
-        fp->x1A88.x44 = NULL;
-        fp->x1A88.x18 = fp->x1A88.x1C;
-        ftCo_800A0C8C(fp);
+        ftCo_CpuClearTargetAndFinish(fp);
     } else {
         ftCo_800B46B8(fp, 0x94, 0x7F);
         ftCo_800B463C(fp, 0x7F);
@@ -2315,9 +2306,7 @@ void ftCo_800B9504(Fighter* fp)
 
     temp_r3_2 = ftCo_800A4E8C(fp, &sp14);
     if (temp_r3_2 == NULL) {
-        fp->x1A88.x44 = NULL;
-        fp->x1A88.x18 = fp->x1A88.x1C;
-        ftCo_800A0C8C(fp);
+        ftCo_CpuClearTargetAndFinish(fp);
     } else {
         var_f1 = ABS(temp_r3_2->cur_pos.x - fp->cur_pos.x);
         var_f2 = ABS(sp14.x - fp->cur_pos.x);
