@@ -73,13 +73,20 @@ static inline void Item_InitSpawn(SpawnItem* spawn, HSD_GObj* parent,
     spawn->x40 = 0;
 }
 
+static inline Item_GObj*
+Item_AttachToParent(Item_GObj* item_gobj, HSD_GObj* parent, Fighter_Part part)
+{
+    Item_8026AB54(item_gobj, parent, part);
+    db_80225DD8(item_gobj, parent);
+    return item_gobj;
+}
+
 static inline void Item_AttachGameWatchArticle(HSD_GObj* parent,
                                                Fighter_Part part,
                                                Item_GObj* item_gobj,
                                                void** attributes)
 {
-    Item_8026AB54(item_gobj, parent, part);
-    db_80225DD8(item_gobj, parent);
+    Item_AttachToParent(item_gobj, parent, part);
     it_8027CE64(item_gobj, parent, attributes[0]);
 }
 
