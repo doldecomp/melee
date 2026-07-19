@@ -4685,18 +4685,14 @@ void ftCo_800A9CB4(Fighter* fp)
                 ftCo_CpuSetNeutralStick(fp);
                 ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
                 ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0x7F);
-                ftCo_800B463C(fp, CpuCmd_PressR);
-                ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-                ftCo_800B463C(fp, CpuCmd_ReleaseR);
+                ftCo_CpuTapR(fp);
                 ftCo_CpuFinishWithNeutralY(fp);
             } else {
                 ftCo_CpuSetNeutralStick(fp);
                 ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
                 ftCo_800B46B8(fp, CpuCmd_LstickXForward, 0x50);
                 ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0x7F);
-                ftCo_800B463C(fp, CpuCmd_PressR);
-                ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-                ftCo_800B463C(fp, CpuCmd_ReleaseR);
+                ftCo_CpuTapR(fp);
                 ftCo_CpuFinishWithNeutralY(fp);
             }
             return;
@@ -4827,6 +4823,18 @@ static inline bool isInTeeter(Fighter* fp)
     return false;
 }
 
+static inline void ftCo_CpuTurnAround(Fighter* fp)
+{
+    ftCo_CpuSetNeutralStick(fp);
+    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+    ftCo_800B46B8(fp, CpuCmd_LstickXForward, 0xB0);
+    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+    ftCo_800B46B8(fp, CpuCmd_WaitFor, 10);
+    ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+    ftCo_800B463C(fp, CpuCmd_Done);
+}
+
 static inline int ftCo_800AA42C_inline0(float clamp, float dist, float near,
                                         float far)
 {
@@ -4887,14 +4895,7 @@ void ftCo_800AA42C(Fighter* fp)
         facing_dest = false;
     }
     if (!facing_dest) {
-        ftCo_CpuSetNeutralStick(fp);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-        ftCo_800B46B8(fp, CpuCmd_LstickXForward, 0xB0);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 0xA);
-        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-        ftCo_800B463C(fp, CpuCmd_Done);
+        ftCo_CpuTurnAround(fp);
         return;
     }
     {
@@ -5051,14 +5052,7 @@ void ftCo_800AACD0(Fighter* fp)
         if ((data->x54.x < sp24.x || data->x54.x > sp18.x) &&
             !ftCo_800A2BD4(fp))
         {
-            ftCo_CpuSetNeutralStick(fp);
-            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-            ftCo_800B46B8(fp, CpuCmd_LstickXForward, 0xB0);
-            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-            ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
-            ftCo_800B46B8(fp, CpuCmd_WaitFor, 0xA);
-            ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-            ftCo_800B463C(fp, CpuCmd_Done);
+            ftCo_CpuTurnAround(fp);
             return;
         }
     }
@@ -5162,18 +5156,6 @@ bool ftCo_800AAF48(Fighter* fp)
     return false;
 }
 
-static inline void ftCo_800AD54C_inline0(Fighter* fp)
-{
-    ftCo_CpuSetNeutralStick(fp);
-    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-    ftCo_800B46B8(fp, CpuCmd_LstickXForward, 0xB0);
-    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
-    ftCo_800B46B8(fp, CpuCmd_WaitFor, 10);
-    ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-    ftCo_800B463C(fp, CpuCmd_Done);
-}
-
 void ftCo_800AB224(Fighter* fp)
 {
     struct Fighter_x1A88_t* temp_r31;
@@ -5202,7 +5184,7 @@ void ftCo_800AB224(Fighter* fp)
     temp_r31 = &fp->x1A88;
     if (temp_r31->xFA_b6) {
         if (fp->facing_dir > 0.0) {
-            ftCo_800AD54C_inline0(fp);
+            ftCo_CpuTurnAround(fp);
             return;
         }
         if (!ftCo_800A28D0(fp, 1.0F)) {
@@ -5286,14 +5268,7 @@ void ftCo_800AB224(Fighter* fp)
             }
             if (var_r0_6 != 0) {
                 if (ftCo_800A28D0(fp, 1.0F)) {
-                    ftCo_CpuSetNeutralStick(fp);
-                    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-                    ftCo_800B46B8(fp, CpuCmd_LstickXForward, 0xB0);
-                    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-                    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
-                    ftCo_800B46B8(fp, CpuCmd_WaitFor, 0xA);
-                    ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-                    ftCo_800B463C(fp, CpuCmd_Done);
+                    ftCo_CpuTurnAround(fp);
                 } else if (ftCo_800AAF48(fp) != 0) {
                     ftCo_800A0148(fp);
                 } else {
@@ -5303,7 +5278,7 @@ void ftCo_800AB224(Fighter* fp)
                 ftCo_800A0148(fp);
             } else if (!ftCo_800A2BD4(fp)) {
                 if (var_f31 < 1.3089969288557768) {
-                    ftCo_800AD54C_inline0(fp);
+                    ftCo_CpuTurnAround(fp);
                 } else {
                     ftCo_800AABC8_dontinline(fp);
                 }
@@ -5312,7 +5287,7 @@ void ftCo_800AB224(Fighter* fp)
             }
         } else if (var_f31 > -0.7853981573134661) {
             if (!ftCo_800A2BD4(fp)) {
-                ftCo_800AD54C_inline0(fp);
+                ftCo_CpuTurnAround(fp);
             } else {
                 ftCo_800AA844(fp);
             }
@@ -5847,14 +5822,7 @@ void ftCo_800ACD5C(Fighter* fp)
         return;
     }
     if (!ftCo_800A2C08(fp)) {
-        ftCo_CpuSetNeutralStick(fp);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-        ftCo_800B46B8(fp, CpuCmd_LstickXForward, 0xB0);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 0xA);
-        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-        ftCo_800B463C(fp, CpuCmd_Done);
+        ftCo_CpuTurnAround(fp);
         return;
     }
     if (data->level < 5) {
@@ -5966,12 +5934,12 @@ void ftCo_800AD54C(Fighter* fp)
         ftCo_800B4778(fp, CpuCmd_LstickForwardClamped, stick, clamp);
         ftCo_CpuFinishWithNeutralY(fp);
     } else if (ftCo_800A28D0(fp, 1.0F)) {
-        ftCo_800AD54C_inline0(fp);
+        ftCo_CpuTurnAround(fp);
     } else if (inlineC0(fp)) {
         if (HSD_Randf() < 0.5f) {
             ftCo_800A0384(fp);
         } else {
-            ftCo_800AD54C_inline0(fp);
+            ftCo_CpuTurnAround(fp);
         }
     } else if (mpIsland_8005AB54(fp->coll_data.floor.index) != NULL) {
         ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
@@ -6013,7 +5981,7 @@ void ftCo_800AD7FC(Fighter* fp)
     item = GET_ITEM(fp->item_gobj);
     if (enemy != NULL && data->xC == 0x1D) {
         if (!ftCo_800A2C08(fp)) {
-            ftCo_800AD54C_inline0(fp);
+            ftCo_CpuTurnAround(fp);
         } else {
             angle = lb_8000D008(enemy->cur_pos.y - fp->cur_pos.y,
                                 ABS(enemy->cur_pos.x - fp->cur_pos.x));
