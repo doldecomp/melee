@@ -4795,6 +4795,17 @@ static inline bool isInTeeter(Fighter* fp)
     return false;
 }
 
+static inline void ftCo_CpuTurnAwayFromLedge(Fighter* fp)
+{
+    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+    ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+    ftCo_800B46B8(fp, CpuCmd_LstickXForward, 0x7F);
+    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+    ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+    ftCo_800B463C(fp, CpuCmd_Done);
+}
+
 static inline void ftCo_CpuTurnAround(Fighter* fp)
 {
     ftCo_CpuSetNeutralStick(fp);
@@ -4852,13 +4863,7 @@ void ftCo_800AA42C(Fighter* fp)
     data = &fp->x1A88;
     ftCo_800AA320(fp, &stick, &clamp);
     if (isInTeeter(fp)) {
-        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
-        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-        ftCo_800B46B8(fp, CpuCmd_LstickXForward, 0x7F);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-        ftCo_800B463C(fp, CpuCmd_Done);
+        ftCo_CpuTurnAwayFromLedge(fp);
         return;
     }
     if (fp->facing_dir * (fp->x1A88.x54.x - fp->cur_pos.x) >= 0.0) {
@@ -4922,13 +4927,7 @@ void ftCo_800AA844(Fighter* fp)
 
     data = &fp->x1A88;
     if (isInTeeter(fp)) {
-        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
-        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-        ftCo_800B46B8(fp, CpuCmd_LstickXForward, 0x7F);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-        ftCo_800B463C(fp, CpuCmd_Done);
+        ftCo_CpuTurnAwayFromLedge(fp);
         return;
     }
     ftCo_800AA320(fp, &sp38, &sp34);
@@ -4964,6 +4963,8 @@ void ftCo_800AA844(Fighter* fp)
 void ftCo_800AABC8(Fighter* fp)
 {
     PAD_STACK(2 * 4);
+    /// @todo Using ftCo_CpuTurnAwayFromLedge here changes inlining in
+    /// ftCo_800AB224.
     if (isInTeeter(fp)) {
         ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
         ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
@@ -5002,13 +5003,7 @@ void ftCo_800AACD0(Fighter* fp)
     PAD_STACK(0xC);
 
     if (isInTeeter(fp)) {
-        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
-        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-        ftCo_800B46B8(fp, CpuCmd_LstickXForward, 0x7F);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-        ftCo_800B463C(fp, CpuCmd_Done);
+        ftCo_CpuTurnAwayFromLedge(fp);
         return;
     }
     ftCo_800AA320(fp, &stick, &clamp);
