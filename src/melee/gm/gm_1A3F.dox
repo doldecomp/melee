@@ -1,5 +1,6 @@
 /**
- * @brief Runs one game-mode scene transition and invokes the run loop for a given scene
+ * @brief Runs one game-mode scene transition and invokes the run loop for a
+ * given scene
  *
  * Finds the current #GameScene in @p mode, runs its @c Prep handler, loads
  * the scene via #gm_FindGameSceneHandler / #gm_801A4D34, then advances
@@ -13,11 +14,13 @@
 /**
  * @brief Sets the scene index for both the current and previous scene.
  *
- * Sets #GameRouting::curr_scene_idx and #GameRouting::prev_scene_idx on #gm_80479D30.
+ * Sets #GameRouting::curr_scene_idx and #GameRouting::prev_scene_idx on
+ * #gm_80479D30.
  *
  * See docs related to #GameScene.
  *
- * @param arg0 The index of the scene to use. Not to be confused with the scene class_id, which is defined as a GameSceneKind.
+ * @param arg0 The index of the scene to use. Not to be confused with the scene
+ * class_id, which is defined as a GameSceneKind.
  */
 /* 1A428C */ void gm_SetSceneIndex(u8 arg0);
 
@@ -28,53 +31,66 @@
  *
  * See docs related to #GameScene.
  *
- * @param arg0 The scene index of the scene preceding the desired pending scene. The method adds +1 to the input. Not to be confused with the scene class_id, which is defined as a #GameSceneKind.
+ * @param arg0 The scene index of the scene preceding the desired pending
+ * scene. The method adds +1 to the input. Not to be confused with the scene
+ * class_id, which is defined as a #GameSceneKind.
  */
 /* 1A42A0 */ void gm_SetPendingSceneIndex(u8 pending_scene);
-
 
 /* 1A42B4 */ u8 gm_GetPreviousSceneIndex(void);
 /* 1A42C4 */ u8 gm_GetCurrentSceneIndex(void);
 
 /**
- * @brief Sets #gm_80479D30's #GameState::pending value to @c true (1). Signaling that the game mode should change after the current scene exits.
+ * @brief Sets #gm_80479D30's #GameState::pending value to @c true (1).
+ * Signaling that the game mode should change after the current scene exits.
  *
- * See also: ::gm_ChangeGameModeAfterCurrentScene, ::gm_SetPendingGameMode, ::gm_RunGameMode
+ * See also: ::gm_ChangeGameModeAfterCurrentScene, ::gm_SetPendingGameMode,
+ * ::gm_RunGameMode
  */
 /* 1A42D4 */ void gm_SetNewGameModePending(void);
 
 /**
- * @brief Sets #GameRouting::pending_mode on #gm_80479D30 to @c pending_mode for use after the current mode exits.
+ * @brief Sets #GameRouting::pending_mode on #gm_80479D30 to @c pending_mode
+ * for use after the current mode exits.
  *
  * Sets the #gm_80479D30 #GameRouting::pending_mode to the provided value.
- * The @c pending_mode is read when ::gm_RunGameMode exits, ultimately passing the
+ * The @c pending_mode is read when ::gm_RunGameMode exits, ultimately passing
+ * the
  * @c pending_mode on to the next invocation of ::gm_RunGameMode.
  *
- * Note that subsequent calls to ::gm_SetPendingGameMode or ::gm_ChangeGameModeAfterCurrentScene will override the last one.
- * When a game mode exits, the last call to ::gm_SetPendingGameMode or ::gm_ChangeGameModeAfterCurrentScene
- * wins.
+ * Note that subsequent calls to ::gm_SetPendingGameMode or
+ * ::gm_ChangeGameModeAfterCurrentScene will override the last one. When a game
+ * mode exits, the last call to ::gm_SetPendingGameMode or
+ * ::gm_ChangeGameModeAfterCurrentScene wins.
  *
- * See also: ::gm_ChangeGameModeAfterCurrentScene, ::gm_SetNewGameModePending, ::gm_RunGameMode
+ * See also: ::gm_ChangeGameModeAfterCurrentScene, ::gm_SetNewGameModePending,
+ * ::gm_RunGameMode
  *
  * @param pending_mode The next game mode to use
  */
 /* 1A42E8 */ void gm_SetPendingGameMode(s8 pending_mode);
 
 /**
- * @brief Sets #GameRouting::pending_mode and #GameState::pending on #gm_80479D30 to @c pending_mode and @c true (1) for use after the current scene exits,
+ * @brief Sets #GameRouting::pending_mode and #GameState::pending on
+ * #gm_80479D30 to @c pending_mode and @c true (1) for use after the current
+ * scene exits,
  *
  * Sets the #gm_80479D30 #GameRouting::pending_mode to the provided
  * value, setting #GameState::pending to true (1) in the process.
- * The @c pending_mode is read when ::gm_RunGameMode exits, ultimately passing the
+ * The @c pending_mode is read when ::gm_RunGameMode exits, ultimately passing
+ * the
  * @c pending_mode on to the next invocation of ::gm_RunGameMode.
  *
- * Effectively equivelant to running ::gm_SetPendingGameMode and ::gm_SetNewGameModePending
+ * Effectively equivelant to running ::gm_SetPendingGameMode and
+ * ::gm_SetNewGameModePending
  *
- * Note that subsequent calls to ::gm_SetPendingGameMode or ::gm_ChangeGameModeAfterCurrentScene will override the last one.
- * When a game mode exits, the last call to ::gm_SetPendingGameMode or ::gm_ChangeGameModeAfterCurrentScene
- * wins.
+ * Note that subsequent calls to ::gm_SetPendingGameMode or
+ * ::gm_ChangeGameModeAfterCurrentScene will override the last one. When a game
+ * mode exits, the last call to ::gm_SetPendingGameMode or
+ * ::gm_ChangeGameModeAfterCurrentScene wins.
  *
- * See also: ::gm_SetPendingGameMode, ::gm_SetNewGameModePending, ::gm_RunGameMode
+ * See also: ::gm_SetPendingGameMode, ::gm_SetNewGameModePending,
+ * ::gm_RunGameMode
  *
  * @param pending_mode The next game mode to use
  */
@@ -96,7 +112,8 @@
  * exits, skipping typical game mode load/preload routines for the resulting
  * gamemode.  #GameState::pending takes precedence over the override behavior.
  *
- * See also: ::gm_ChangeGameModeAfterCurrentScene, ::gm_SetPendingGameMode, ::gm_SetNewGameModePending
+ * See also: ::gm_ChangeGameModeAfterCurrentScene, ::gm_SetPendingGameMode,
+ * ::gm_SetNewGameModePending
  *
  * @returns The next pending #GameModeKind (#GameRouting::pending_mode).
  */
