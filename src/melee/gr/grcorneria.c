@@ -871,8 +871,14 @@ extern Vec3 grCn_803B80A8;
 
 /// Bounds shared by #grCorneria_801DE024 and #grCorneria_801DED50. Volatile
 /// reads keep MWCC from duplicating them later in the literal pool.
-__declspec(section ".sdata2") static const f32 grCn_ArwingMinX = -10.0f;
-__declspec(section ".sdata2") static const f32 grCn_ArwingMaxX = 2000.0f;
+#ifdef __MWERKS__
+#define GRCN_SDATA2 __declspec(section ".sdata2")
+#else
+#define GRCN_SDATA2 __attribute__((section(".sdata2")))
+#endif
+GRCN_SDATA2 static const f32 grCn_ArwingMinX = -10.0f;
+GRCN_SDATA2 static const f32 grCn_ArwingMaxX = 2000.0f;
+#undef GRCN_SDATA2
 
 static inline void grCorneria_801DE024_inline(Ground_GObj* gobj)
 {
