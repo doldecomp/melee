@@ -6460,15 +6460,29 @@ static bool ftCo_800ADE48(Fighter* fp)
     }
     return true;
 }
+
+static inline void ftCo_CpuUpdateItemTargets(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data;
+
+    data = &fp->x1A88;
+    if (fp->item_gobj != NULL && !ftCo_800A5908(GET_ITEM(fp->item_gobj))) {
+        data->x4C = NULL;
+    } else {
+        if (fp->x2168 != 0) {
+            data->x4C = NULL;
+        } else {
+            data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
+        }
+    }
+    fp->x1A88.x50 = ftCo_800A648C(fp);
+}
+
 void ftCo_800AE7AC(Fighter* fp, Vec3* arg1, int arg2)
 {
     struct Fighter_x1A88_t* data0 = &fp->x1A88;
-    struct Fighter_x1A88_t* data;
     struct Fighter_x1A88_t* data2;
     struct Fighter_x1A88_t* data3;
-    Item_GObj* item_gobj;
-    ItemKind kind;
-    s32 is_food;
     s32 do_act;
     u8 _[8];
     Vec3 dir;
@@ -6480,7 +6494,7 @@ void ftCo_800AE7AC(Fighter* fp, Vec3* arg1, int arg2)
     f32 sum_y;
     f32 cy;
     f32 dy;
-    PAD_STACK(8);
+    PAD_STACK(4);
 
     data0->xF8_b0 = true;
     data0->xF9_b3 = false;
@@ -6497,33 +6511,7 @@ void ftCo_800AE7AC(Fighter* fp, Vec3* arg1, int arg2)
         data0->xF9_b6 = true;
     }
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
-    data = &fp->x1A88;
-    item_gobj = fp->item_gobj;
-    if (item_gobj != NULL) {
-        kind = GET_ITEM(item_gobj)->kind;
-        if (kind == It_Kind_Heart) {
-            is_food = 1;
-        } else if (kind == It_Kind_Tomato) {
-            is_food = 1;
-        } else if (kind == It_Kind_Foods) {
-            is_food = 1;
-        } else {
-            is_food = 0;
-        }
-        if (is_food == 0) {
-            data->x4C = NULL;
-        } else {
-            goto block_13;
-        }
-    } else {
-    block_13:
-        if (fp->x2168 != 0) {
-            data->x4C = NULL;
-        } else {
-            data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
-        }
-    }
-    fp->x1A88.x50 = ftCo_800A648C(fp);
+    ftCo_CpuUpdateItemTargets(fp);
     data2 = &fp->x1A88;
     if (data2->x18 != data2->x20 && data2->x18 != data2->x1C) {
         data2->x60 = 0;
@@ -6578,13 +6566,11 @@ void ftCo_800AEA8C(Fighter* fp)
     int line_id;
     Vec3 floor_normal;
     Vec3 floor_pos;
-    Item_GObj* item_gobj;
-    ItemKind kind;
     s32 is_food;
     s32 do_floor;
     s32 found;
 
-    PAD_STACK(0xC);
+    PAD_STACK(8);
 
     data->xF8_b0 = false;
     data->xF9_b2 = (is_food = 1);
@@ -6595,32 +6581,7 @@ void ftCo_800AEA8C(Fighter* fp)
     data->xF9_b7 = true;
     data->xF9_b1 = false;
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
-    item_gobj = fp->item_gobj;
-    if (item_gobj != NULL) {
-        kind = GET_ITEM(item_gobj)->kind;
-        if (kind == It_Kind_Heart) {
-            is_food = 1;
-        } else if (kind == It_Kind_Tomato) {
-            is_food = 1;
-        } else if (kind == It_Kind_Foods) {
-            is_food = 1;
-        } else {
-            is_food = 0;
-        }
-        if (is_food == 0) {
-            data->x4C = NULL;
-        } else {
-            goto block_10;
-        }
-    } else {
-    block_10:
-        if (fp->x2168 != 0) {
-            data->x4C = NULL;
-        } else {
-            data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
-        }
-    }
-    fp->x1A88.x50 = ftCo_800A648C(fp);
+    ftCo_CpuUpdateItemTargets(fp);
     data2 = &fp->x1A88;
     if (data2->x18 != data2->x20 && data2->x18 != data2->x1C) {
         data2->x60 = 0;
@@ -6725,9 +6686,7 @@ void ftCo_800AECF0(Fighter* fp)
     Fighter* target;
     s32 do_act;
     s32 is_food;
-    Item_GObj* item_gobj;
-    ItemKind kind;
-    PAD_STACK(0x18);
+    PAD_STACK(0x14);
 
     cmd = ftCo_800A229C(fp, &sp28);
     if (cmd != 0) {
@@ -6751,32 +6710,7 @@ void ftCo_800AECF0(Fighter* fp)
     data->xF9_b7 = true;
     data->xF9_b1 = false;
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
-    item_gobj = fp->item_gobj;
-    if (item_gobj != NULL) {
-        kind = GET_ITEM(item_gobj)->kind;
-        if (kind == It_Kind_Heart) {
-            is_food = 1;
-        } else if (kind == It_Kind_Tomato) {
-            is_food = 1;
-        } else if (kind == It_Kind_Foods) {
-            is_food = 1;
-        } else {
-            is_food = 0;
-        }
-        if (is_food == 0) {
-            data->x4C = NULL;
-        } else {
-            goto block_22;
-        }
-    } else {
-    block_22:
-        if (fp->x2168 != 0) {
-            data->x4C = NULL;
-        } else {
-            data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
-        }
-    }
-    (fp->x1A88).x50 = ftCo_800A648C(fp);
+    ftCo_CpuUpdateItemTargets(fp);
     data2 = &fp->x1A88;
     if ((data2->x18 != data2->x20) && (data2->x18 != (data2->x1C))) {
         data2->x60 = 0;
@@ -7154,22 +7088,6 @@ void ftCo_800AF78C(Fighter* fp)
     ftCo_800ADE48(fp);
 }
 
-static inline void ftCo_800AFC40_inline0(Fighter* fp)
-{
-    struct Fighter_x1A88_t* data;
-
-    data = &fp->x1A88;
-    if (fp->item_gobj != NULL && !ftCo_800A5908(GET_ITEM(fp->item_gobj))) {
-        data->x4C = NULL;
-    } else {
-        if (fp->x2168 != 0) {
-            data->x4C = NULL;
-        } else {
-            data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
-        }
-    }
-    fp->x1A88.x50 = ftCo_800A648C(fp);
-}
 void ftCo_800AFC40(Fighter* fp)
 {
     struct Fighter_x1A88_t* temp_r31;
@@ -7201,7 +7119,7 @@ void ftCo_800AFC40(Fighter* fp)
     temp_r31->xF9_b7 = false;
     temp_r31->xF9_b1 = false;
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
-    ftCo_800AFC40_inline0(fp);
+    ftCo_CpuUpdateItemTargets(fp);
     temp_r4 = &fp->x1A88;
     if (ftCo_CpuDataShouldAct(temp_r4)) {
         temp_r3_3 = ftCo_800A50D4(fp);
@@ -7260,16 +7178,7 @@ void ftCo_800AFE3C(Fighter* fp, int arg1)
     temp_r31->xF9_b7 = true;
     temp_r31->xF9_b1 = false;
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
-    if (fp->item_gobj != NULL && !ftCo_800A5908(GET_ITEM(fp->item_gobj))) {
-        temp_r31->x4C = NULL;
-    } else {
-        if (fp->x2168 != 0) {
-            temp_r31->x4C = NULL;
-        } else {
-            temp_r31->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
-        }
-    }
-    fp->x1A88.x50 = ftCo_800A648C(fp);
+    ftCo_CpuUpdateItemTargets(fp);
     if (ftCo_CpuShouldAct(fp)) {
         ftCo_CpuActOnPlayer(fp, temp_r31, arg1);
     }
@@ -7495,14 +7404,7 @@ void ftCo_800B0760(Fighter* fp)
 
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
 
-    if (fp->item_gobj != NULL && !ftCo_800A5908(GET_ITEM(fp->item_gobj))) {
-        data->x4C = NULL;
-    } else if (fp->x2168 != 0) {
-        data->x4C = NULL;
-    } else {
-        data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
-    }
-    fp->x1A88.x50 = ftCo_800A648C(fp);
+    ftCo_CpuUpdateItemTargets(fp);
     inlineI3(fp, data);
     ftCo_800ADE48(fp);
 }
@@ -7842,16 +7744,7 @@ void ftCo_800B126C(Fighter* fp)
     PAD_STACK(0x10);
 
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
-    if (fp->item_gobj != NULL && !ftCo_800A5908(GET_ITEM(fp->item_gobj))) {
-        data->x4C = NULL;
-    } else {
-        if (fp->x2168 != 0) {
-            data->x4C = NULL;
-        } else {
-            data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
-        }
-    }
-    fp->x1A88.x50 = ftCo_800A648C(fp);
+    ftCo_CpuUpdateItemTargets(fp);
 
     if (ftCo_CpuShouldAct(fp)) {
         if (data->x4C != NULL && fp->item_gobj == NULL) {
@@ -7870,10 +7763,8 @@ void ftCo_800B1478(Fighter* fp)
     Fighter* target;
     Fighter* attack_target;
     s32 is_food;
-    Item_GObj* item_gobj;
-    ItemKind kind;
 
-    PAD_STACK(0x20);
+    PAD_STACK(0x18);
 
     data = &fp->x1A88;
     target = ftCo_800A5CE0(fp);
@@ -7897,32 +7788,7 @@ void ftCo_800B1478(Fighter* fp)
     data->xF9_b1 = false;
 
     *target_slot = ftCo_800A4BEC(fp);
-    item_gobj = fp->item_gobj;
-    if (item_gobj != NULL) {
-        kind = GET_ITEM(item_gobj)->kind;
-        if (kind == It_Kind_Heart) {
-            is_food = true;
-        } else if (kind == It_Kind_Tomato) {
-            is_food = true;
-        } else if (kind == It_Kind_Foods) {
-            is_food = true;
-        } else {
-            is_food = false;
-        }
-        if (is_food == false) {
-            data->x4C = NULL;
-        } else {
-            goto maybe_find_item;
-        }
-    } else {
-    maybe_find_item:
-        if (fp->x2168 != 0) {
-            data->x4C = NULL;
-        } else {
-            data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
-        }
-    }
-    fp->x1A88.x50 = ftCo_800A648C(fp);
+    ftCo_CpuUpdateItemTargets(fp);
 
     ftCo_CpuUpdateTargetDistance(fp);
 
@@ -7950,9 +7816,7 @@ void ftCo_800B17D0(Fighter* fp)
     Fighter* attack_target;
     s32 do_act;
     s32 is_food;
-    Item_GObj* item_gobj;
-    ItemKind kind;
-    PAD_STACK(0x18);
+    PAD_STACK(0x14);
 
     cmd = ftCo_800A229C(fp, &sp28);
     if (cmd != 0) {
@@ -7977,32 +7841,7 @@ void ftCo_800B17D0(Fighter* fp)
     data->x2C = is_food;
     data->xF9_b1 = false;
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
-    item_gobj = fp->item_gobj;
-    if (item_gobj != NULL) {
-        kind = GET_ITEM(item_gobj)->kind;
-        if (kind == It_Kind_Heart) {
-            is_food = 1;
-        } else if (kind == It_Kind_Tomato) {
-            is_food = 1;
-        } else if (kind == It_Kind_Foods) {
-            is_food = 1;
-        } else {
-            is_food = 0;
-        }
-        if (is_food == 0) {
-            data->x4C = NULL;
-        } else {
-            goto block_22;
-        }
-    } else {
-    block_22:
-        if (fp->x2168 != 0) {
-            data->x4C = NULL;
-        } else {
-            data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
-        }
-    }
-    fp->x1A88.x50 = ftCo_800A648C(fp);
+    ftCo_CpuUpdateItemTargets(fp);
     data2 = &fp->x1A88;
     if (data2->x18 != data2->x20 && data2->x18 != data2->x1C) {
         data2->x60 = 0;
@@ -8037,9 +7876,7 @@ void ftCo_800B1AB8(Fighter* fp)
     Fighter* attack_target;
     s32 do_act;
     s32 is_food;
-    Item_GObj* item_gobj;
-    ItemKind kind;
-    PAD_STACK(0x18);
+    PAD_STACK(0x14);
 
     cmd = ftCo_800A229C(fp, &sp28);
     if (cmd != 0) {
@@ -8064,32 +7901,7 @@ void ftCo_800B1AB8(Fighter* fp)
     data->x2C = is_food;
     data->xF9_b1 = false;
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
-    item_gobj = fp->item_gobj;
-    if (item_gobj != NULL) {
-        kind = GET_ITEM(item_gobj)->kind;
-        if (kind == It_Kind_Heart) {
-            is_food = 1;
-        } else if (kind == It_Kind_Tomato) {
-            is_food = 1;
-        } else if (kind == It_Kind_Foods) {
-            is_food = 1;
-        } else {
-            is_food = 0;
-        }
-        if (is_food == 0) {
-            data->x4C = NULL;
-        } else {
-            goto block_22;
-        }
-    } else {
-    block_22:
-        if (fp->x2168 != 0) {
-            data->x4C = NULL;
-        } else {
-            data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
-        }
-    }
-    fp->x1A88.x50 = ftCo_800A648C(fp);
+    ftCo_CpuUpdateItemTargets(fp);
     data2 = &fp->x1A88;
     if (data2->x18 != data2->x20 && data2->x18 != data2->x1C) {
         data2->x60 = 0;
