@@ -1692,7 +1692,34 @@ struct Ground {
     f32 xC0;
 
     union {
-        /// @todo This union is named 'u', from assert statements
+        /**
+         * Union of Ground object subtypes
+         *
+         * A Ground object can be one of multiple subtypes. The toplevel Ground
+         * object for the stage itself is a generic type, but uses different
+         * subtypes for various stage hazards, graphics effects, backgrounds,
+         * etc. used by the stage.
+         *
+         * Each index in a stage's StageCallbacks array may use a different
+         * subtype of Ground object - but each callback in a single
+         * StageCallbacks struct should operate on the same subtype.
+         *
+         * This is known from assert statements to contain at least the
+         * following members:
+         * - map
+         *   - A generic member used for multiple stages - used in in Onett,
+         *     RCruise, Home Run Contest, and more. Grep for `gp->u.map`
+         *     to see lots of assert statements using it.
+         * - scroll
+         *   - Used for Rainbow Cruise
+         * - taru
+         *   - "Barrel", used in Kongo Jungle
+         * - car, carnull
+         *   - Used in Big Blue
+         *
+         * @todo This union is named 'u', from assert statements.
+         *       Usages need to be updated before `gv` can be removed.
+         */
         union GroundVars {
             char pad_0[0x204 - 0xC4];
             struct grArwing_GroundVars arwing;
@@ -1775,36 +1802,6 @@ struct Ground {
             struct grZebes_GroundVars3 zebes3;
             struct grZebes_GroundVars4 zebes4;
             struct grZebes_GroundVars5 zebes5;
-        } gv;
-
-        /**
-         * Union of Ground object subtypes
-         *
-         * A Ground object can be one of multiple subtypes. The toplevel Ground
-         * object for the stage itself is a generic type, but uses different
-         * subtypes for various stage hazards, graphics effects, backgrounds,
-         * etc. used by the stage.
-         *
-         * Each index in a stage's StageCallbacks array may use a different
-         * subtype of Ground object - but each callback in a single
-         * StageCallbacks struct should operate on the same subtype.
-         *
-         * This is known from assert statements to contain at least the
-         * following members:
-         * - map
-         *   - A generic member used for multiple stages - used in in Onett,
-         *     RCruise, Home Run Contest, and more. Grep for `gp->u.map`
-         *     to see lots of assert statements using it.
-         * - scroll
-         *   - Used for Rainbow Cruise
-         * - taru
-         *   - "Barrel", used in Kongo Jungle
-         * - car, carnull
-         *   - Used in Big Blue
-         *
-         * @todo The previous #Ground.gv union members should be moved here.
-         */
-        union GroundVars2 {
             struct grStadium_GroundVars stadium;
             struct grStadium_type9_GroundVars stadium9;
             struct grStadium_Display display; ///< Pokemon Stadium jumbotron
@@ -1821,7 +1818,7 @@ struct Ground {
                 /*  +4 gp+C8 */ HSD_JObj** coll_jobj;
                 /*  +8 gp+CC */ UNK_T rank;
             } carnull;
-        } u;
+        } u, gv;
     };
 };
 STATIC_ASSERT(sizeof(struct Ground) == 0x204);

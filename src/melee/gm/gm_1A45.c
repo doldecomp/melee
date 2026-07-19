@@ -18,6 +18,8 @@
 #include <dolphin/os/OSThread.h>
 #include <baselib/controller.h>
 #include <baselib/gobjproc.h>
+#include <baselib/hsd_3915.h>
+#include <baselib/hsd_392C.h>
 #include <baselib/initialize.h>
 #include <baselib/leak.h>
 #include <baselib/particle.h>
