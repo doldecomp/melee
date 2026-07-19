@@ -30,20 +30,17 @@ ItemStateTable it_803F78F8[] = {
 HSD_GObj* it_802C6C38(Item_GObj* parent, Vec3* pos, enum_t part,
                       float facing_dir)
 {
-    Item_GObj* gobj;
     SpawnItem spawn;
-    PAD_STACK(4);
+    Item_GObj* result;
 
-    spawn.kind = 0x75;
+    spawn.kind = It_Kind_GameWatch_Parachute;
     Item_InitSpawn(&spawn, parent, pos, facing_dir);
-    gobj = Item_80268B18(&spawn);
-    if (gobj != NULL) {
-        itGamewatchparachuteAttributes* attrs =
-            GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes;
-        Item_8026AB54(gobj, parent, part);
-        db_80225DD8(gobj, parent);
-        it_8027CE64(gobj, parent, attrs->x0);
-        return gobj;
+    result = Item_80268B18(&spawn);
+    if (result != NULL) {
+        Item* item = GET_ITEM(result);
+        void** attr = item->xC4_article_data->x4_specialAttributes;
+        Item_AttachGameWatchArticle(parent, part, result, attr);
+        return result;
     }
     return NULL;
 }
