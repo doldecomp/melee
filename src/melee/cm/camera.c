@@ -22,6 +22,7 @@
 
 #include "ft/ftlib.h"
 #include "gm/gm_unsplit.h"
+#include "gr/grkinokoroute.h"
 #include "gr/grlib.h"
 #include "gr/ground.h"
 #include "gr/stage.h"
@@ -44,7 +45,6 @@
 #include <melee/gr/grcorneria.h>
 #include <melee/gr/grgarden.h>
 #include <melee/gr/grhomerun.h>
-#include <melee/gr/grshrineroute.h>
 #include <melee/gr/grzebes.h>
 
 /* 029AAC */ static void Camera_80029AAC(CameraBounds* bounds,
@@ -950,7 +950,7 @@ inline float get_stage_floor_height(InternalStageId stage_id)
         height = grGarden_80203624();
         break;
     case KINOKOROUTE:
-        height = grShrineRoute_802087B0();
+        height = grKinokoRoute_802087B0();
         break;
     case HOMERUN:
         height = grHomeRun_8021EF10();
@@ -1304,7 +1304,7 @@ void Camera_8002AF68(HSD_CObj* cobj, CameraTransformState* transform)
         eye_y_bound = grGarden_80203624();
         break;
     case KINOKOROUTE:
-        eye_y_bound = grShrineRoute_802087B0();
+        eye_y_bound = grKinokoRoute_802087B0();
         break;
     case HOMERUN:
         eye_y_bound = grHomeRun_8021EF10();
