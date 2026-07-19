@@ -4,7 +4,7 @@
 
 #include <baselib/controller.h>
 #include <baselib/gobj.h>
-#include <baselib/particle.h>
+#include <baselib/hsd_3933.h>
 #include <baselib/video.h>
 
 /* 4D6B94 */ int db_ScreenshotNumber;
