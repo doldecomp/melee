@@ -233,25 +233,23 @@ bool grOldKongo_8020F880(Ground_GObj* gobj)
     return false;
 }
 
-#define DegToRad(a) ((a) * 0.017453292F)
-
 static inline void grOldKongo_8020F888_inline(Ground* gp)
 {
     f32 vel = gp->gv.oldkongo.xE4;
 
     if (vel > 0.0f) {
-        if (vel < DegToRad(grOk_804D6A90->x1C)) {
+        if (vel < grOk_804D6A90->x1C * deg_to_rad) {
             gp->gv.oldkongo.xE4 = 0.0f;
             gp->gv.oldkongo.xDC = gp->gv.oldkongo.xD8;
         } else {
-            gp->gv.oldkongo.xE4 = vel - DegToRad(grOk_804D6A90->x1C);
+            gp->gv.oldkongo.xE4 = vel - grOk_804D6A90->x1C * deg_to_rad;
         }
     } else if (vel < 0.0f) {
-        if (vel > -DegToRad(grOk_804D6A90->x1C)) {
+        if (vel > -(grOk_804D6A90->x1C * deg_to_rad)) {
             gp->gv.oldkongo.xE4 = 0.0f;
             gp->gv.oldkongo.xDC = gp->gv.oldkongo.xD8;
         } else {
-            gp->gv.oldkongo.xE4 = vel + DegToRad(grOk_804D6A90->x1C);
+            gp->gv.oldkongo.xE4 = vel + grOk_804D6A90->x1C * deg_to_rad;
         }
     }
 }
@@ -275,7 +273,7 @@ void grOldKongo_8020F888(Ground_GObj* gobj)
     case 3:
         angle_limit =
             0.5f * (gp->gv.oldkongo.xE4 *
-                    (gp->gv.oldkongo.xE4 / DegToRad(grOk_804D6A90->x1C)));
+                    (gp->gv.oldkongo.xE4 / (grOk_804D6A90->x1C * deg_to_rad)));
         if (gp->gv.oldkongo.xE4 > 0.0f) {
             angle_delta = gp->gv.oldkongo.xD8 - gp->gv.oldkongo.xDC;
         } else if (gp->gv.oldkongo.xE4 < 0.0f) {
@@ -304,9 +302,9 @@ void grOldKongo_8020F888(Ground_GObj* gobj)
         if (gp->gv.oldkongo.xCC < 0) {
             gp->gv.oldkongo.xC4 = 1;
             if (HSD_Randi(2) != 0) {
-                x_speed = DegToRad(grOk_804D6A90->x1C);
+                x_speed = grOk_804D6A90->x1C * deg_to_rad;
             } else {
-                x_speed = -DegToRad(grOk_804D6A90->x1C);
+                x_speed = -(grOk_804D6A90->x1C * deg_to_rad);
             }
             gp->gv.oldkongo.xE0 = x_speed;
             gp->gv.oldkongo.xCC =
@@ -316,7 +314,7 @@ void grOldKongo_8020F888(Ground_GObj* gobj)
     case 1:
         gp->gv.oldkongo.xE4 += gp->gv.oldkongo.xE0;
         Ground_ClampSymmetric(gp->gv.oldkongo.xE4,
-                              DegToRad(grOk_804D6A90->x20),
+                              grOk_804D6A90->x20 * deg_to_rad,
                               &gp->gv.oldkongo.xE4);
         if (gp->gv.oldkongo.xCC-- < 0) {
             gp->gv.oldkongo.xC4 = 2;
