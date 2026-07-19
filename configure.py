@@ -585,7 +585,7 @@ config.libs = [
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_Damage.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DamageFall.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_DamageIce.c"),
-            Object(Testing, "melee/ft/chara/ftCommon/ftCo_Guard.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_Guard.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftpickupitem.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_ItemThrow.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_SpecialS.c"),
