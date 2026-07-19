@@ -867,6 +867,14 @@ void ftCo_800B63D8(Fighter* fp)
     }
 }
 
+static inline void ftCo_CpuTapRAndWaitFiveFrames(Fighter* fp)
+{
+    ftCo_800B463C(fp, CpuCmd_PressR);
+    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+    ftCo_800B463C(fp, CpuCmd_ReleaseR);
+    ftCo_800B46B8(fp, CpuCmd_WaitFor, 5);
+}
+
 void ftCo_800B658C(Fighter* fp)
 {
     struct Fighter_x1A88_t* temp_r31 = &fp->x1A88;
@@ -910,17 +918,11 @@ void ftCo_800B658C(Fighter* fp)
         }
     } else if (fp->kind == FTKIND_SAMUS) {
         if (fp->motion_id == ftSs_MS_SpecialNHold) {
-            ftCo_800B463C(fp, CpuCmd_PressR);
-            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-            ftCo_800B463C(fp, CpuCmd_ReleaseR);
-            ftCo_800B46B8(fp, CpuCmd_WaitFor, 5);
+            ftCo_CpuTapRAndWaitFiveFrames(fp);
         }
     } else if (fp->kind == FTKIND_DONKEY) {
         if (fp->motion_id == ftDk_MS_SpecialNLoop) {
-            ftCo_800B463C(fp, CpuCmd_PressR);
-            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-            ftCo_800B463C(fp, CpuCmd_ReleaseR);
-            ftCo_800B46B8(fp, CpuCmd_WaitFor, 5);
+            ftCo_CpuTapRAndWaitFiveFrames(fp);
         }
     } else if (fp->kind == FTKIND_ZELDA) {
         if (fp->motion_id >= ftZd_MS_SpecialSLoop &&
@@ -2754,7 +2756,7 @@ static inline void inline2(Fighter* fp, Fighter* temp_r4_2)
     }
 }
 
-static inline bool escape(ftCommon_MotionState id)
+static inline bool ftCo_CpuIsRollOrAirDodge(ftCommon_MotionState id)
 {
     if (id == ftCo_MS_EscapeF || id == ftCo_MS_EscapeB ||
         id == ftCo_MS_EscapeAir)
@@ -2764,12 +2766,38 @@ static inline bool escape(ftCommon_MotionState id)
     return false;
 }
 
-static inline bool escapen(ftCommon_MotionState id)
+static inline bool ftCo_CpuIsSpotDodge(ftCommon_MotionState id)
 {
     if (id == ftCo_MS_EscapeN) {
         return true;
     }
     return false;
+}
+
+static inline void ftCo_CpuFireBlaster(Fighter* fp)
+{
+    int delay = 9 - fp->x1A88.level;
+
+    ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+    ftCo_800B46B8(fp, CpuCmd_SetLstickY, -0x50);
+    ftCo_800B463C(fp, CpuCmd_PressB);
+    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+    if (delay != 0) {
+        ftCo_800B46B8(fp, CpuCmd_WaitFor,
+                      delay * ((int) (4.0f * HSD_Randf()) + 4));
+    }
+    ftCo_800B463C(fp, CpuCmd_Done);
+}
+
+static inline void ftCo_CpuRetapR(Fighter* fp)
+{
+    ftCo_800B463C(fp, CpuCmd_ReleaseR);
+    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+    ftCo_800B463C(fp, CpuCmd_PressR);
+    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+    ftCo_800B463C(fp, CpuCmd_ReleaseR);
+    ftCo_800B463C(fp, CpuCmd_Done);
 }
 
 void ftCo_800BA9A0(Fighter* fp)
@@ -2778,8 +2806,6 @@ void ftCo_800BA9A0(Fighter* fp)
     f32 temp_f2;
     f32 var_f1;
     s32 temp_r30;
-    s32 temp_r30_2;
-    s32 temp_r30_4;
     s32 temp_r30_5;
     s32 temp_r3;
     struct Fighter_x1A88_t* temp_r5;
@@ -2787,7 +2813,7 @@ void ftCo_800BA9A0(Fighter* fp)
 
     temp_r5 = &fp->x1A88;
     temp_r3 = fp->motion_id;
-    if (escape(temp_r3) || escapen(temp_r3)) {
+    if (ftCo_CpuIsRollOrAirDodge(temp_r3) || ftCo_CpuIsSpotDodge(temp_r3)) {
         ftCo_800A0C8C(fp);
         return;
     }
@@ -2807,35 +2833,14 @@ void ftCo_800BA9A0(Fighter* fp)
     if (fp->ground_or_air == GA_Air) {
         if (fp->kind == FTKIND_FOX || fp->kind == FTKIND_FALCO) {
             if (temp_r4 == 2) {
-                temp_r30_2 = 9 - fp->x1A88.level;
-                ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-                ftCo_800B46B8(fp, CpuCmd_SetLstickY, -0x50);
-                ftCo_800B463C(fp, CpuCmd_PressB);
-                ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-                ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
-                if (temp_r30_2 != 0) {
-                    ftCo_800B46B8(fp, CpuCmd_WaitFor,
-                                  temp_r30_2 *
-                                      ((int) (4.0f * HSD_Randf()) + 4));
-                }
-                ftCo_800B463C(fp, CpuCmd_Done);
+                ftCo_CpuFireBlaster(fp);
             } else {
-                ftCo_800B463C(fp, CpuCmd_ReleaseR);
-                ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-                ftCo_800B463C(fp, CpuCmd_PressR);
-                ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-                ftCo_800B463C(fp, CpuCmd_ReleaseR);
-                ftCo_800B463C(fp, CpuCmd_Done);
+                ftCo_CpuRetapR(fp);
             }
         } else if (temp_r4 == 3) {
             ftCo_800BA080_dontinline(fp);
         } else {
-            ftCo_800B463C(fp, CpuCmd_ReleaseR);
-            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-            ftCo_800B463C(fp, CpuCmd_PressR);
-            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-            ftCo_800B463C(fp, CpuCmd_ReleaseR);
-            ftCo_800B463C(fp, CpuCmd_Done);
+            ftCo_CpuRetapR(fp);
         }
     } else if (temp_r4 == 2) {
         temp_r30_3 = temp_r5->xF4;
@@ -2848,18 +2853,7 @@ void ftCo_800BA9A0(Fighter* fp)
         } else {
             if (fp->kind == FTKIND_FOX || fp->kind == FTKIND_FALCO) {
                 if (HSD_Randf() > 0.5) {
-                    temp_r30_4 = 9 - fp->x1A88.level;
-                    ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-                    ftCo_800B46B8(fp, CpuCmd_SetLstickY, -0x50);
-                    ftCo_800B463C(fp, CpuCmd_PressB);
-                    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-                    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
-                    if (temp_r30_4 != 0) {
-                        ftCo_800B46B8(fp, CpuCmd_WaitFor,
-                                      temp_r30_4 *
-                                          ((int) (4.0f * HSD_Randf()) + 4));
-                    }
-                    ftCo_800B463C(fp, CpuCmd_Done);
+                    ftCo_CpuFireBlaster(fp);
                 } else {
                     ftCo_800B9F90(fp);
                 }
