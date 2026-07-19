@@ -54,6 +54,27 @@ static inline void Ground_InitTargetStage(HSD_GObj* (*create_gobj)(int) )
     Ground_801C42AC();
 }
 
+static inline void Ground_ClampSymmetric(f32 value, f32 limit, f32* out)
+{
+    if (value > limit) {
+        *out = limit;
+    } else {
+        limit = -limit;
+        if (value < limit) {
+            *out = limit;
+        }
+    }
+}
+
+static inline void Ground_WrapAngle(f32* angle)
+{
+    if (*angle > 6.283185307179586) {
+        *angle -= 6.283185307179586;
+    } else if (*angle < -6.283185307179586) {
+        *angle += 6.283185307179586;
+    }
+}
+
 #define ZRANDI(n) ((n) != 0 ? HSD_Randi(n) : 0)
 
 static inline int rand_range(int a, int b)

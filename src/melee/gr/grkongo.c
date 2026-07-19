@@ -340,13 +340,9 @@ void grKongo_801D577C(Ground_GObj* arg0)
         break;
     case 1:
         gp->gv.kongo3.xE0 += gp->gv.kongo3.xDC;
-        if (gp->gv.kongo3.xE0 > DegToRad(grKg_804D6980->unk38)) {
-            gp->gv.kongo3.xE0 = DegToRad(grKg_804D6980->unk38);
-        } else {
-            if (gp->gv.kongo3.xE0 < -DegToRad(grKg_804D6980->unk38)) {
-                gp->gv.kongo3.xE0 = -DegToRad(grKg_804D6980->unk38);
-            }
-        }
+        Ground_ClampSymmetric(gp->gv.kongo3.xE0,
+                              DegToRad(grKg_804D6980->unk38),
+                              &gp->gv.kongo3.xE0);
         {
             s16 val2 = gp->gv.kongo2.xCC;
             gp->gv.kongo2.xCC = val2 - 1;
@@ -360,11 +356,7 @@ void grKongo_801D577C(Ground_GObj* arg0)
         break;
     }
     gp->gv.kongo3.xD8 += gp->gv.kongo3.xE0;
-    if (gp->gv.kongo3.xD8 > M_TAU) {
-        gp->gv.kongo3.xD8 -= M_TAU;
-    } else if (gp->gv.kongo3.xD8 < -M_TAU) {
-        gp->gv.kongo3.xD8 += M_TAU;
-    }
+    Ground_WrapAngle(&gp->gv.kongo3.xD8);
     HSD_JObjSetRotationZ(jobj, gp->gv.kongo.xD8);
     lb_8000B1CC(jobj, NULL, &vec);
     Ground_801C4D70(arg0, &vec, gp->gv.kongo3.xD8);
