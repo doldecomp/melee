@@ -6,9 +6,9 @@
 
 #include "baselib/forward.h"
 
-#include <sysdolphin/baselib/generator.h>
-
 #include "baselib/jobj.h"
+
+#include <sysdolphin/baselib/generator.h>
 
 /* 3983A4 */ void hsd_803983A4(HSD_Generator*);
 /* 3984F4 */ void psInitDataBankLoad(int bank, int* cmdBank, int* texBank,

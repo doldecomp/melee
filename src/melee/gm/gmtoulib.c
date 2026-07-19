@@ -39,9 +39,9 @@
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
+#include <baselib/hsd_3915.h>
 #include <baselib/jobj.h>
 #include <baselib/mobj.h>
-#include <baselib/hsd_3915.h>
 #include <baselib/random.h>
 #include <baselib/sislib.h>
 

@@ -50,10 +50,10 @@ extern BgFlashData lbl_80433658;
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/gobjuserdata.h>
+#include <baselib/hsd_3915.h>
 #include <baselib/jobj.h>
 #include <baselib/mtx.h>
 #include <baselib/objalloc.h>
-#include <baselib/hsd_3915.h>
 #include <baselib/quatlib.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbspdisplay.h>
