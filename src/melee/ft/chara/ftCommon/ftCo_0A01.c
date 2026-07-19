@@ -1082,48 +1082,6 @@ block_43:
     return 0;
 }
 
-static inline bool inlineL0(mp_UnkStruct0* arg0)
-{
-    Item_GObj* cur;
-    Item* cur_ip;
-
-    for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
-        cur_ip = GET_ITEM(cur);
-        if (it_8026C1B4(cur) == 0) {
-            continue;
-        }
-        if (!ftCo_800A5944(cur_ip)) {
-            continue;
-        }
-        if (arg0 == mpIsland_8005AB54(cur_ip->x378_itemColl.floor.index)) {
-            return true;
-        }
-    }
-
-    switch (stage_info.internal_stage_id) {
-    case STORY:
-        return mpIsland_8005AC8C(arg0);
-    case ZEBES:
-        if (ftCo_800A1F98(0x5A, arg0->x14.y) != 0) {
-            return true;
-        }
-        if (ftCo_800A1F98(0x5A, arg0->x8.y) != 0) {
-            return true;
-        }
-        return false;
-    case ONETT:
-        return arg0->x14.y <= 5.0 && Ground_801C5794() != 0;
-    default:
-        return false;
-    }
-}
-
-static inline bool inlineL1(mp_UnkStruct0* arg0)
-{
-    return stage_info.internal_stage_id == ONETT && arg0->x8.y <= 5.0 &&
-           Ground_801C5794() != 0;
-}
-
 #pragma dont_inline on
 bool ftCo_800A2718(mp_UnkStruct0* arg0)
 {
@@ -4895,15 +4853,6 @@ static inline int ftCo_800AA42C_inline0(float clamp, float dist, float near,
             new_clamp = clamp;
         }
         return new_clamp;
-    }
-}
-
-static inline bool isFacingDestination(Fighter* fp)
-{
-    if (fp->facing_dir * (fp->x1A88.x54.x - fp->cur_pos.x) >= 0.0) {
-        return true;
-    } else {
-        return false;
     }
 }
 
