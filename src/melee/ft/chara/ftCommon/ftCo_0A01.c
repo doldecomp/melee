@@ -4195,6 +4195,13 @@ static inline int angle_y_units(float angle)
     return 127.0F * sinf(angle);
 }
 
+static inline void ftCo_CpuAimPkThunder(Fighter* fp, float angle, int frames)
+{
+    ftCo_800B46B8(fp, CpuCmd_SetLstickX, angle_x_units(angle));
+    ftCo_800B46B8(fp, CpuCmd_SetLstickY, angle_y_units(angle));
+    ftCo_800B46B8(fp, CpuCmd_WaitFor, frames);
+}
+
 /**
  * Ness recovery PK thunder logic
  */
@@ -4213,44 +4220,28 @@ void ftCo_800A8EB0(Fighter* fp)
     ftCo_800B463C(fp, CpuCmd_ReleaseB);
     if (data->x54.x - fp->cur_pos.x > 0.0) {
         angle = M_PI;
-        ftCo_800B46B8(fp, CpuCmd_SetLstickX, angle_x_units(angle));
-        ftCo_800B46B8(fp, CpuCmd_SetLstickY, angle_y_units(angle));
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 20);
+        ftCo_CpuAimPkThunder(fp, angle, 20);
 
         angle = -M_PI_2;
-        ftCo_800B46B8(fp, CpuCmd_SetLstickX, angle_x_units(angle));
-        ftCo_800B46B8(fp, CpuCmd_SetLstickY, angle_y_units(angle));
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 35);
+        ftCo_CpuAimPkThunder(fp, angle, 35);
 
         angle = 0.0F;
-        ftCo_800B46B8(fp, CpuCmd_SetLstickX, angle_x_units(angle));
-        ftCo_800B46B8(fp, CpuCmd_SetLstickY, angle_y_units(angle));
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 20);
+        ftCo_CpuAimPkThunder(fp, angle, 20);
 
         angle = M_PI_2;
-        ftCo_800B46B8(fp, CpuCmd_SetLstickX, angle_x_units(angle));
-        ftCo_800B46B8(fp, CpuCmd_SetLstickY, angle_y_units(angle));
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 20);
+        ftCo_CpuAimPkThunder(fp, angle, 20);
     } else {
         angle = 0.0F;
-        ftCo_800B46B8(fp, CpuCmd_SetLstickX, angle_x_units(angle));
-        ftCo_800B46B8(fp, CpuCmd_SetLstickY, angle_y_units(angle));
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 20);
+        ftCo_CpuAimPkThunder(fp, angle, 20);
 
         angle = -M_PI_2;
-        ftCo_800B46B8(fp, CpuCmd_SetLstickX, angle_x_units(angle));
-        ftCo_800B46B8(fp, CpuCmd_SetLstickY, angle_y_units(angle));
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 35);
+        ftCo_CpuAimPkThunder(fp, angle, 35);
 
         angle = M_PI;
-        ftCo_800B46B8(fp, CpuCmd_SetLstickX, angle_x_units(angle));
-        ftCo_800B46B8(fp, CpuCmd_SetLstickY, angle_y_units(angle));
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 20);
+        ftCo_CpuAimPkThunder(fp, angle, 20);
 
         angle = M_PI_2;
-        ftCo_800B46B8(fp, CpuCmd_SetLstickX, angle_x_units(angle));
-        ftCo_800B46B8(fp, CpuCmd_SetLstickY, angle_y_units(angle));
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 20);
+        ftCo_CpuAimPkThunder(fp, angle, 20);
     }
     ftCo_800B463C(fp, CpuCmd_Done);
 }
