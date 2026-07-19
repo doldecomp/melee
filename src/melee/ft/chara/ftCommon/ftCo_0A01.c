@@ -103,6 +103,13 @@ static inline void ftCo_CpuFinishWithNeutralStick(Fighter* fp)
     ftCo_800B463C(fp, CpuCmd_Done);
 }
 
+static inline void
+ftCo_CpuReturnToPreviousBehavior(Fighter* fp, struct Fighter_x1A88_t* data)
+{
+    data->x18 = data->x1C;
+    ftCo_800B463C(fp, CpuCmd_Done);
+}
+
 static inline void ftCo_CpuHoldUpForOneFrame(Fighter* fp)
 {
     ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
@@ -5424,8 +5431,7 @@ void ftCo_800ABBA8(Fighter* fp)
     }
     below = ftCo_800A4BEC(fp);
     if (below == NULL) {
-        data->x18 = data->x1C;
-        ftCo_800B463C(fp, CpuCmd_Done);
+        ftCo_CpuReturnToPreviousBehavior(fp, data);
         return;
     }
     if (below->cur_pos.y < fp->cur_pos.y) {
@@ -5525,8 +5531,7 @@ void ftCo_800AC30C(Fighter* fp)
     struct Fighter_x1A88_t* data = &fp->x1A88;
     PAD_STACK(4 * 4);
     if (!inlineG0(fp)) {
-        data->x18 = data->x1C;
-        ftCo_800B463C(fp, CpuCmd_Done);
+        ftCo_CpuReturnToPreviousBehavior(fp, data);
         return;
     }
     if (data->x7C % 3 == 0 && !(data->level * 0.1F < HSD_Randf())) {
@@ -5569,8 +5574,7 @@ void ftCo_800AC434(Fighter* fp)
     PAD_STACK(5 * 4);
 
     if (barrel_state == 0) {
-        data->x18 = data->x1C;
-        ftCo_800B463C(fp, CpuCmd_Done);
+        ftCo_CpuReturnToPreviousBehavior(fp, data);
         return;
     }
     if (barrel_state == 1) {
@@ -5647,8 +5651,7 @@ void ftCo_800AC7D4(Fighter* fp)
 
     var_r0 = ftCo_800A3134(fp);
     if (var_r0 == 0) {
-        data->x18 = data->x1C;
-        ftCo_800B463C(fp, CpuCmd_Done);
+        ftCo_CpuReturnToPreviousBehavior(fp, data);
         return;
     }
     if (var_r0 == 1) {
@@ -5706,8 +5709,7 @@ void ftCo_800ACB44(Fighter* fp)
         return;
     }
     if (var_r0 == 0) {
-        data->x18 = data->x1C;
-        ftCo_800B463C(fp, CpuCmd_Done);
+        ftCo_CpuReturnToPreviousBehavior(fp, data);
         return;
     }
     if (data->xC == 0xF || data->xC == 0) {
@@ -5767,8 +5769,7 @@ void ftCo_800ACD5C(Fighter* fp)
         return;
     }
     if (ftCo_800A3554(fp, 1.0f) == 0) {
-        data->x18 = data->x1C;
-        ftCo_800B463C(fp, CpuCmd_Done);
+        ftCo_CpuReturnToPreviousBehavior(fp, data);
         return;
     }
     if ((fp->kind == FTKIND_ZELDA || fp->kind == FTKIND_SEAK) && data->xF8_b5)
@@ -5850,8 +5851,7 @@ void ftCo_800AD42C(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
     if (!ftCo_800A3554(fp, 1.0F)) {
-        data->x18 = data->x1C;
-        ftCo_800B463C(fp, CpuCmd_Done);
+        ftCo_CpuReturnToPreviousBehavior(fp, data);
     } else if (fp->ground_or_air == GA_Air) {
         ftCo_CpuFinishWithNeutralStick(fp);
     } else {
@@ -5916,8 +5916,7 @@ void ftCo_800AD7FC(Fighter* fp)
 
     data = &fp->x1A88;
     if (fp->item_gobj == NULL) {
-        data->x18 = data->x1C;
-        ftCo_800B463C(fp, CpuCmd_Done);
+        ftCo_CpuReturnToPreviousBehavior(fp, data);
         return;
     }
 
@@ -8015,8 +8014,7 @@ void ftCo_800B2790(Fighter* fp)
                         on_ground = 0;
                     }
                     if (on_ground != 0) {
-                        data->x18 = data->x1C;
-                        ftCo_800B463C(fp, CpuCmd_Done);
+                        ftCo_CpuReturnToPreviousBehavior(fp, data);
                         data->xFA_b2 = false;
                     } else {
                         ftCo_800A9904(fp);
@@ -8049,8 +8047,7 @@ void ftCo_800B2790(Fighter* fp)
                 break;
             case 13:
                 if (fp->item_gobj != NULL) {
-                    data->x18 = data->x1C;
-                    ftCo_800B463C(fp, CpuCmd_Done);
+                    ftCo_CpuReturnToPreviousBehavior(fp, data);
                 } else {
                     ftCo_CpuSetNeutralStick(fp);
                     ftCo_800B463C(fp, CpuCmd_ReleaseA);
@@ -8079,8 +8076,7 @@ void ftCo_800B2790(Fighter* fp)
                     special_floor = 2;
                 }
                 if (special_floor == 0) {
-                    data->x18 = data->x1C;
-                    ftCo_800B463C(fp, CpuCmd_Done);
+                    ftCo_CpuReturnToPreviousBehavior(fp, data);
                 } else {
                     ftCo_CpuFinishWithNeutralStick(fp);
                 }
