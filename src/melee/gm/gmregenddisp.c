@@ -1,8 +1,6 @@
 #include "gm_1A7A.h"
 #include "gm_unsplit.h"
 
-#include "dolphin/pad.h"
-
 #include "ft/forward.h"
 
 #include "gm/gm_1BA8.h"
@@ -10,8 +8,6 @@
 #include "gm/inlines.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
-#include "lb/lbbgflash.h"
-#include "lb/lbmthp.h"
 #include "lb/lbspdisplay.h"
 #include "sc/types.h"
 #include "ty/toy.h"
@@ -29,7 +25,6 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/random.h>
-#include <baselib/sobjlib.h>
 #include <MSL/math.h>
 
 void fn_801A7FB4(HSD_GObj* gobj)
@@ -331,6 +326,9 @@ void fn_801A9498(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
+static HSD_GObj* gm_804D67B8;
+static HSD_GObj* gm_804D67BC;
+static HSD_GObj* gm_804D67C0;
 static s32 gm_804D67C4;
 
 void fn_801A94BC(HSD_GObj* gobj)
@@ -367,12 +365,7 @@ void fn_801A94BC(HSD_GObj* gobj)
     }
 }
 
-static HSD_GObj* gm_804D67B8;
-static HSD_GObj* gm_804D67BC;
-static HSD_GObj* gm_804D67C0;
-
-void gm_801A8114_inline(HSD_JObj* arg0, int arg1);
-void gm_801A8114_inline(HSD_JObj* arg0, int arg1)
+static void gm_801A8114_inline(HSD_JObj* arg0, int arg1)
 {
     gm_801A8114(arg0, arg1);
 }
