@@ -4202,6 +4202,14 @@ static inline void ftCo_CpuAimPkThunder(Fighter* fp, float angle, int frames)
     ftCo_800B46B8(fp, CpuCmd_WaitFor, frames);
 }
 
+static inline void ftCo_CpuStartUpSpecial(Fighter* fp)
+{
+    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0x7F);
+    ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+    ftCo_800B46B8(fp, CpuCmd_PressBFor, 1);
+    ftCo_800B463C(fp, CpuCmd_ReleaseB);
+}
+
 /**
  * Ness recovery PK thunder logic
  */
@@ -4214,10 +4222,7 @@ void ftCo_800A8EB0(Fighter* fp)
         ftCo_800B463C(fp, CpuCmd_Done);
         return;
     }
-    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0x7F);
-    ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-    ftCo_800B46B8(fp, CpuCmd_PressBFor, 1);
-    ftCo_800B463C(fp, CpuCmd_ReleaseB);
+    ftCo_CpuStartUpSpecial(fp);
     if (data->x54.x - fp->cur_pos.x > 0.0) {
         angle = M_PI;
         ftCo_CpuAimPkThunder(fp, angle, 20);
@@ -4257,10 +4262,7 @@ void ftCo_800A92CC(Fighter* fp)
         // the side.
 
         // Start the up-B
-        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0x7F);
-        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-        ftCo_800B46B8(fp, CpuCmd_PressBFor, 1);
-        ftCo_800B463C(fp, CpuCmd_ReleaseB);
+        ftCo_CpuStartUpSpecial(fp);
 
         // Go diagonally upward
         ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0x58);
@@ -4276,10 +4278,7 @@ void ftCo_800A92CC(Fighter* fp)
         // Otherwise, go straight up, then randomly horizontal or diagonal.
 
         // Start the up-B
-        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0x7F);
-        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-        ftCo_800B46B8(fp, CpuCmd_PressBFor, 1);
-        ftCo_800B463C(fp, CpuCmd_ReleaseB);
+        ftCo_CpuStartUpSpecial(fp);
         ftCo_800B46B8(fp, CpuCmd_WaitFor, 15);
 
         if (HSD_Randf() > 0.5) {
@@ -4338,9 +4337,21 @@ static void ftCo_800A949C(Fighter* fp, bool unused)
     ftCo_800B463C(fp, CpuCmd_Done);
 }
 
+static inline void ftCo_CpuRecoverDiagonally(Fighter* fp)
+{
+    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0x58);
+    ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, 0x58);
+    ftCo_800B46B8(fp, CpuCmd_PressBFor, 1);
+    ftCo_800B463C(fp, CpuCmd_ReleaseB);
+    ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, 0x7F);
+    ftCo_800B463C(fp, CpuCmd_Done);
+}
+
 /**
  * Samus recovery logic
  */
+#pragma push
+#pragma dont_inline on
 static void ftCo_800A963C(Fighter* fp, bool unused)
 {
     PAD_STACK(4 * 14);
@@ -4355,9 +4366,8 @@ static void ftCo_800A963C(Fighter* fp, bool unused)
     ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, 0x7F);
     ftCo_800B463C(fp, CpuCmd_Done);
 }
+#pragma pop
 
-#pragma push
-#pragma dont_inline on
 /**
  * Handles CPU recovery / up-B logic for each character
  */
@@ -4371,12 +4381,7 @@ void ftCo_800A96B8(Fighter* fp)
 
     switch (fp->kind) {
     case FTKIND_MARIO:
-        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0x58);
-        ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, 0x58);
-        ftCo_800B46B8(fp, CpuCmd_PressBFor, 1);
-        ftCo_800B463C(fp, CpuCmd_ReleaseB);
-        ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, 0x7F);
-        ftCo_800B463C(fp, CpuCmd_Done);
+        ftCo_CpuRecoverDiagonally(fp);
         break;
     case FTKIND_PIKACHU:
     case FTKIND_PICHU:
@@ -4422,17 +4427,10 @@ void ftCo_800A96B8(Fighter* fp)
     default:
         // For all other characters, diagonally up-B toward the stage,
         // with full inward drift
-        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0x58);
-        ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, 0x58);
-        ftCo_800B46B8(fp, CpuCmd_PressBFor, 1);
-        ftCo_800B463C(fp, CpuCmd_ReleaseB);
-        ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, 0x7F);
-        ftCo_800B463C(fp, CpuCmd_Done);
+        ftCo_CpuRecoverDiagonally(fp);
         break;
     }
 }
-#pragma pop
-
 static inline bool ftCo_IsNearlyZero(float x)
 {
     if (x < 0.00001F && x > -0.00001F) {
