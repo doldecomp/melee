@@ -32,9 +32,6 @@ static HSD_PSFormGroup** psFormGroupArray[65];
 /* 4D0D58 */ static int psNumCmdList[65];
 /* 4D0E5C */ static u32* ptclref_804D0E5C[65];
 
-/* 4D0F60 */ struct hsd_804D0F60_t hsd_804D0F60;
-/* 4D0F90 */ struct hsd_804D0F60_t hsd_804D0F90;
-
 /* 4D7850 */ static HSD_SList* hsd_804D7850;
 /* 4D7858 */ static f32 hsd_804D7858;
 /* 4D785C */ static f32 hsd_804D785C;

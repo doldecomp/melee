@@ -25,7 +25,7 @@
 /* 4D78FC */ static HSD_Generator* hsd_804D78FC;
 /* 4D7900 */ static void (*hsd_804D7900)(HSD_Generator*);
 
-/* 4D0F90 */ static struct hsd_804D0F60_t hsd_804D0F90;
+/* 4D0F90 */ struct hsd_804D0F60_t hsd_804D0F90;
 
 static u16 lbl_804D6368 = 0x100;
 
