@@ -1,15 +1,12 @@
 #ifndef GALE01_2087B0
 #define GALE01_2087B0
 
-#include <placeholder.h>
-
 #include "forward.h"
 
-#include "it/inlines.h"
+#include "lb/types.h"
 
 #include <baselib/forward.h>
 
-/* 2087B0 */ float grShrineRoute_802087B0(void);
 /* 2087B8 */ void grShrineRoute_OnDemoInit(bool);
 /* 2087BC */ void grShrineRoute_OnInit(void);
 /* 20882C */ void grShrineRoute_OnLoad(void);

@@ -305,7 +305,7 @@ HSD_JObj* ftLib_80086630(HSD_GObj* gobj, Fighter_Part part)
     return fp->parts[part].joint;
 }
 
-void ftLib_80086644(HSD_GObj* gobj, Vec3* pos)
+void ftLib_80086644(Fighter_GObj* gobj, Vec3* pos)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     *pos = fp->cur_pos;

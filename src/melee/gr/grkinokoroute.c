@@ -132,9 +132,9 @@ bool grKinokoRoute_80207544(void)
     return false;
 }
 
-HSD_GObj* grKinokoRoute_8020754C(int gobj_id)
+Ground_GObj* grKinokoRoute_8020754C(int gobj_id)
 {
-    HSD_GObj* gobj;
+    Ground_GObj* gobj;
     StageCallbacks* callbacks = &grNKr_803E57F0[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
@@ -595,7 +595,7 @@ void grKinokoRoute_80208564(HSD_GObj* gobj)
     }
 }
 
-bool grKinokoRoute_80208660(s32 arg0, HSD_GObj* gobj)
+bool grKinokoRoute_80208660(int unused, Fighter_GObj* gobj)
 {
     Vec3 pos;
     Vec3 vel;
@@ -639,4 +639,9 @@ bool grKinokoRoute_8020875C(Vec3* a, int b, HSD_JObj* jobj)
     } else {
         return false;
     }
+}
+
+float grKinokoRoute_802087B0(void)
+{
+    return 10.0f;
 }

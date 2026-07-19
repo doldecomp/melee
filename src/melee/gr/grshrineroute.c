@@ -142,11 +142,6 @@ extern struct grSh_Route_LightConfig {
     /* 0x30 */ s32 x30;
 } grSh_Route_803E5A58[];
 
-float grShrineRoute_802087B0(void)
-{
-    return grNKr_804DB868;
-}
-
 void grShrineRoute_OnDemoInit(bool arg) {}
 
 void grShrineRoute_OnInit(void)
