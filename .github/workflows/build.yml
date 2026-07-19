@@ -63,6 +63,7 @@ jobs:
         case "$mode" in
           'link')
             config_args=$(printf '%s ' \
+              '--map' \
               '--require-protos' \
               '--reloc-diffs none' \
               "$config_args")
@@ -109,12 +110,17 @@ jobs:
               *) exit 1 ;;
             esac
 
+            config_args=$(printf '%s ' \
+              '--testing' \
+              "$config_args")
+
             run_configure
             run_ninja
             cp "$report" "$expected"
 
             git checkout "$head"
             run_ninja
+            ninja # Check that Testing units can be linked
 
             build/tools/objdiff-cli report changes -o "$changes" "$expected" "$report"
             set +e
