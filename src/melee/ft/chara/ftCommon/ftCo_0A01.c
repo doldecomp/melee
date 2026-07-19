@@ -6461,7 +6461,7 @@ static bool ftCo_800ADE48(Fighter* fp)
     return true;
 }
 
-static inline void ftCo_CpuUpdateItemTargets(Fighter* fp)
+static inline void ftCo_CpuUpdateCommonItemTarget(Fighter* fp)
 {
     struct Fighter_x1A88_t* data;
 
@@ -6475,6 +6475,10 @@ static inline void ftCo_CpuUpdateItemTargets(Fighter* fp)
             data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
         }
     }
+}
+
+static inline void ftCo_CpuUpdateSpecialItemTarget(Fighter* fp)
+{
     fp->x1A88.x50 = ftCo_800A648C(fp);
 }
 
@@ -6511,7 +6515,8 @@ void ftCo_800AE7AC(Fighter* fp, Vec3* arg1, int arg2)
         data0->xF9_b6 = true;
     }
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
-    ftCo_CpuUpdateItemTargets(fp);
+    ftCo_CpuUpdateCommonItemTarget(fp);
+    ftCo_CpuUpdateSpecialItemTarget(fp);
     data2 = &fp->x1A88;
     if (data2->x18 != data2->x20 && data2->x18 != data2->x1C) {
         data2->x60 = 0;
@@ -6581,7 +6586,8 @@ void ftCo_800AEA8C(Fighter* fp)
     data->xF9_b7 = true;
     data->xF9_b1 = false;
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
-    ftCo_CpuUpdateItemTargets(fp);
+    ftCo_CpuUpdateCommonItemTarget(fp);
+    ftCo_CpuUpdateSpecialItemTarget(fp);
     data2 = &fp->x1A88;
     if (data2->x18 != data2->x20 && data2->x18 != data2->x1C) {
         data2->x60 = 0;
@@ -6710,7 +6716,8 @@ void ftCo_800AECF0(Fighter* fp)
     data->xF9_b7 = true;
     data->xF9_b1 = false;
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
-    ftCo_CpuUpdateItemTargets(fp);
+    ftCo_CpuUpdateCommonItemTarget(fp);
+    ftCo_CpuUpdateSpecialItemTarget(fp);
     data2 = &fp->x1A88;
     if ((data2->x18 != data2->x20) && (data2->x18 != (data2->x1C))) {
         data2->x60 = 0;
@@ -6731,19 +6738,12 @@ void ftCo_800AECF0(Fighter* fp)
     ftCo_800ADE48(fp);
 }
 
-/// Shared no-fight-target half of ftCo_800AEFB8/ftCo_800B1EF0/ftCo_800B24B8:
-/// look for items to grab and threats to dodge, then act on them. The common
-/// head and with-target half of those functions stay open-coded: making them
-/// smaller lets MWCC inline them into their callers, breaking the match.
-static inline void ftCo_CpuUpdateNoTarget(Fighter* fp, bool fear_flag)
+/// @note These phases must be called directly from their three users. Wrapping
+/// them in another inline prevents MWCC from inlining the outer helper.
+static inline void ftCo_CpuInitNoTarget(Fighter* fp, bool fear_flag)
 {
-    struct Fighter_x1A88_t* data2 = &fp->x1A88;
     struct Fighter_x1A88_t* data = &fp->x1A88;
-    Fighter* attack_target;
-    s32 do_act;
     s32 is_food;
-    Item_GObj* item_gobj;
-    ItemKind kind;
 
     data->xF8_b0 = false;
     data->xF9_b2 = (is_food = 1);
@@ -6754,30 +6754,15 @@ static inline void ftCo_CpuUpdateNoTarget(Fighter* fp, bool fear_flag)
     data->xF9_b7 = true;
     data->xF9_b1 = false;
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
-    item_gobj = fp->item_gobj;
-    if (item_gobj != NULL) {
-        kind = GET_ITEM(item_gobj)->kind;
-        if (kind == It_Kind_Heart) {
-            is_food = 1;
-        } else if (kind == It_Kind_Tomato) {
-            is_food = 1;
-        } else if (kind == It_Kind_Foods) {
-            is_food = 1;
-        } else {
-            is_food = 0;
-        }
-        if (is_food == 0) {
-            data->x4C = NULL;
-            goto skip_search;
-        }
-    }
-    if (fp->x2168 != 0) {
-        data->x4C = NULL;
-    } else {
-        data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
-    }
-skip_search:
-    fp->x1A88.x50 = ftCo_800A648C(fp);
+}
+
+static inline void ftCo_CpuActOnNoTarget(Fighter* fp,
+                                         struct Fighter_x1A88_t* data)
+{
+    struct Fighter_x1A88_t* data2 = &fp->x1A88;
+    Fighter* attack_target;
+    s32 do_act;
+
     data2 = &fp->x1A88;
     if (data2->x18 != data2->x20 && data2->x18 != data2->x1C) {
         data2->x60 = 0;
@@ -6808,7 +6793,7 @@ void ftCo_800AEFB8(Fighter* fp)
     Vec3 sp28;
     s32 cmd;
     Fighter* target;
-    PAD_STACK(0x10);
+    PAD_STACK(0x14);
 
     cmd = ftCo_800A229C(fp, &sp28);
     if (cmd != 0) {
@@ -6825,7 +6810,10 @@ void ftCo_800AEFB8(Fighter* fp)
         ftCo_800ADE48(fp);
         return;
     }
-    ftCo_CpuUpdateNoTarget(fp, true);
+    ftCo_CpuInitNoTarget(fp, true);
+    ftCo_CpuUpdateCommonItemTarget(fp);
+    ftCo_CpuUpdateSpecialItemTarget(fp);
+    ftCo_CpuActOnNoTarget(fp, data);
 }
 
 static inline void ftCo_CpuUpdateTargetDistance(Fighter* fp)
@@ -7119,7 +7107,8 @@ void ftCo_800AFC40(Fighter* fp)
     temp_r31->xF9_b7 = false;
     temp_r31->xF9_b1 = false;
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
-    ftCo_CpuUpdateItemTargets(fp);
+    ftCo_CpuUpdateCommonItemTarget(fp);
+    ftCo_CpuUpdateSpecialItemTarget(fp);
     temp_r4 = &fp->x1A88;
     if (ftCo_CpuDataShouldAct(temp_r4)) {
         temp_r3_3 = ftCo_800A50D4(fp);
@@ -7178,7 +7167,8 @@ void ftCo_800AFE3C(Fighter* fp, int arg1)
     temp_r31->xF9_b7 = true;
     temp_r31->xF9_b1 = false;
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
-    ftCo_CpuUpdateItemTargets(fp);
+    ftCo_CpuUpdateCommonItemTarget(fp);
+    ftCo_CpuUpdateSpecialItemTarget(fp);
     if (ftCo_CpuShouldAct(fp)) {
         ftCo_CpuActOnPlayer(fp, temp_r31, arg1);
     }
@@ -7404,7 +7394,8 @@ void ftCo_800B0760(Fighter* fp)
 
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
 
-    ftCo_CpuUpdateItemTargets(fp);
+    ftCo_CpuUpdateCommonItemTarget(fp);
+    ftCo_CpuUpdateSpecialItemTarget(fp);
     inlineI3(fp, data);
     ftCo_800ADE48(fp);
 }
@@ -7744,7 +7735,8 @@ void ftCo_800B126C(Fighter* fp)
     PAD_STACK(0x10);
 
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
-    ftCo_CpuUpdateItemTargets(fp);
+    ftCo_CpuUpdateCommonItemTarget(fp);
+    ftCo_CpuUpdateSpecialItemTarget(fp);
 
     if (ftCo_CpuShouldAct(fp)) {
         if (data->x4C != NULL && fp->item_gobj == NULL) {
@@ -7788,7 +7780,8 @@ void ftCo_800B1478(Fighter* fp)
     data->xF9_b1 = false;
 
     *target_slot = ftCo_800A4BEC(fp);
-    ftCo_CpuUpdateItemTargets(fp);
+    ftCo_CpuUpdateCommonItemTarget(fp);
+    ftCo_CpuUpdateSpecialItemTarget(fp);
 
     ftCo_CpuUpdateTargetDistance(fp);
 
@@ -7841,7 +7834,8 @@ void ftCo_800B17D0(Fighter* fp)
     data->x2C = is_food;
     data->xF9_b1 = false;
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
-    ftCo_CpuUpdateItemTargets(fp);
+    ftCo_CpuUpdateCommonItemTarget(fp);
+    ftCo_CpuUpdateSpecialItemTarget(fp);
     data2 = &fp->x1A88;
     if (data2->x18 != data2->x20 && data2->x18 != data2->x1C) {
         data2->x60 = 0;
@@ -7901,7 +7895,8 @@ void ftCo_800B1AB8(Fighter* fp)
     data->x2C = is_food;
     data->xF9_b1 = false;
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
-    ftCo_CpuUpdateItemTargets(fp);
+    ftCo_CpuUpdateCommonItemTarget(fp);
+    ftCo_CpuUpdateSpecialItemTarget(fp);
     data2 = &fp->x1A88;
     if (data2->x18 != data2->x20 && data2->x18 != data2->x1C) {
         data2->x60 = 0;
@@ -7957,7 +7952,7 @@ void ftCo_800B1EF0(Fighter* fp)
     Vec3 sp28;
     s32 cmd;
     Fighter* target;
-    PAD_STACK(0x10);
+    PAD_STACK(0x14);
 
     cmd = ftCo_800A229C(fp, &sp28);
     if (cmd != 0) {
@@ -7974,7 +7969,10 @@ void ftCo_800B1EF0(Fighter* fp)
         ftCo_800ADE48(fp);
         return;
     }
-    ftCo_CpuUpdateNoTarget(fp, false);
+    ftCo_CpuInitNoTarget(fp, false);
+    ftCo_CpuUpdateCommonItemTarget(fp);
+    ftCo_CpuUpdateSpecialItemTarget(fp);
+    ftCo_CpuActOnNoTarget(fp, data);
 }
 
 void ftCo_800B21C8(Fighter* fp)
@@ -8039,7 +8037,7 @@ void ftCo_800B24B8(Fighter* fp)
     Vec3 sp28;
     s32 cmd;
     Fighter* target;
-    PAD_STACK(0x10);
+    PAD_STACK(0x14);
 
     cmd = ftCo_800A229C(fp, &sp28);
     if (cmd != 0) {
@@ -8056,7 +8054,10 @@ void ftCo_800B24B8(Fighter* fp)
         ftCo_800ADE48(fp);
         return;
     }
-    ftCo_CpuUpdateNoTarget(fp, true);
+    ftCo_CpuInitNoTarget(fp, true);
+    ftCo_CpuUpdateCommonItemTarget(fp);
+    ftCo_CpuUpdateSpecialItemTarget(fp);
+    ftCo_CpuActOnNoTarget(fp, data);
 }
 
 void ftCo_800B2790(Fighter* fp)
