@@ -22,7 +22,7 @@ jobs:
       fail-fast: false
       matrix:
         version: [GALE01]
-        mode: ["link", "diff"]
+        mode: ['link', 'diff', 'test']
     steps:
     - name: Checkout
       uses: actions/checkout@v6
@@ -110,10 +110,6 @@ jobs:
               *) exit 1 ;;
             esac
 
-            config_args=$(printf '%s ' \
-              '--testing' \
-              "$config_args")
-
             run_configure
             run_ninja
             cp "$report" "$expected"
@@ -126,6 +122,14 @@ jobs:
             set +e
             python .github/scripts/diff_changes.py "$changes"
             set -e
+          ;;
+          'test')
+            config_args=$(printf '%s ' \
+              '--testing' \
+              "$config_args")
+
+            run_configure
+            ninja
           ;;
           *) exit 1 ;;
         esac
