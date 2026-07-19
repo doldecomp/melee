@@ -2364,15 +2364,15 @@ HSD_GObj* grCorneria_801E1BF0(void)
     return gobj;
 }
 
-extern GXColor grCn_804DB218;
-extern GXColor grCn_804DB21C;
-extern GXColor grCn_804DB220;
-extern GXColor grCn_804DB224;
-extern GXColor grCn_804DB228;
-extern GXColor grCn_804DB22C;
-extern GXColor grCn_804DB230;
-extern GXColor grCn_804DB234;
-extern GXColor grCn_804DB238;
+GXColor const grCn_804DB218 = { 0xAE, 0xBA, 0xD6, 0xFF };
+GXColor const grCn_804DB21C = { 0xD7, 0xE4, 0xF6, 0xFF };
+GXColor const grCn_804DB220 = { 0xE0, 0xEC, 0xFA, 0xFF };
+GXColor const grCn_804DB224 = { 0x6A, 0x9E, 0xAD, 0xFF };
+GXColor const grCn_804DB228 = { 0x4F, 0x94, 0xB5, 0xFF };
+GXColor const grCn_804DB22C = { 0x49, 0x6E, 0x3F, 0xFF };
+GXColor const grCn_804DB230 = { 0x6A, 0x9E, 0xAD, 0xFF };
+GXColor const grCn_804DB234 = { 0x4F, 0x94, 0xB5, 0xFF };
+GXColor const grCn_804DB238 = { 0x00, 0x50, 0x91, 0xFF };
 
 void grCorneria_801E2110(void)
 {
@@ -2528,9 +2528,10 @@ void grCorneria_801E25C4(HSD_GObj* gobj, void* gv, int line, int arg3,
                          int arg4)
 {
     struct grSmashTaunt_GroundVars* v = gv;
-    int i;
-    s16 joint0;
     s16 joint1;
+    s16 joint0;
+    int i;
+    s16* joints;
     PAD_STACK(8);
 
     v->line = line;
@@ -2538,20 +2539,23 @@ void grCorneria_801E25C4(HSD_GObj* gobj, void* gv, int line, int arg3,
     v->sound_id = arg4;
     joint0 = grCn_803E21F0[v->line][0];
     joint1 = grCn_803E21F0[v->line][1];
-    for (i = 0; i < 5; i++) {
+    joints = &grCn_803E21F0[i = 0][0];
+    do {
         if (i != 0 && v->line != i) {
-            HSD_JObj* j0 = Ground_801C3FA4(gobj, grCn_803E21F0[i][0]);
+            HSD_JObj* j0 = Ground_801C3FA4(gobj, joints[0]);
             if (j0 != NULL) {
                 HSD_JObjSetFlagsAll(j0, JOBJ_HIDDEN);
             }
             {
-                HSD_JObj* j1 = Ground_801C3FA4(gobj, grCn_803E21F0[i][1]);
+                HSD_JObj* j1 = Ground_801C3FA4(gobj, joints[1]);
                 if (j1 != NULL) {
                     HSD_JObjSetFlagsAll(j1, JOBJ_HIDDEN);
                 }
             }
         }
-    }
+        i++;
+        joints += 2;
+    } while (i < 5);
     v->jobj0 = Ground_801C3FA4(gobj, joint0);
     v->jobj1 = Ground_801C3FA4(gobj, joint1);
     v->jobj2 = Ground_801C3FA4(gobj, 5);
@@ -2563,7 +2567,7 @@ void grCorneria_801E25C4(HSD_GObj* gobj, void* gv, int line, int arg3,
     grAnime_801C8098(gobj, joint0, 7, 0, 0.0f, 1.0f);
     grAnime_801C8098(gobj, joint1, 7, 0, 0.0f, 1.0f);
     grAnime_801C8098(gobj, 5, 7, 0, 0.0f, 1.0f);
-    HSD_JObjAnimAll(GET_JOBJ(gobj));
+    HSD_JObjAnimAll(gobj->hsd_obj);
 }
 
 void grCorneria_801E2738(HSD_GObj* gobj, void* ptr, u32 idx1, u32 idx2)
@@ -2573,7 +2577,7 @@ void grCorneria_801E2738(HSD_GObj* gobj, void* ptr, u32 idx1, u32 idx2)
                         grCn_803E2204[idx1][idx2].data[2]);
 }
 
-extern GXColor grCn_804DB24C;
+GXColor const grCn_804DB24C = { 0xFF, 0xFF, 0xFF, 0xFF };
 
 void grCorneria_801E277C(Ground_GObj* gobj, struct grSmashTaunt_GroundVars* gv)
 {
@@ -2808,6 +2812,18 @@ DynamicsDesc* grCorneria_801E2EE4(enum_t arg)
     return NULL;
 }
 
+#ifdef __MWERKS__
+#define GRCN_SDATA2 __declspec(section ".sdata2")
+#else
+#define GRCN_SDATA2 __attribute__((section(".sdata2")))
+#endif
+/// These are distinct symbols in the DOL. Volatile reads below prevent MWCC
+/// from folding them back into anonymous literals in a different order.
+GRCN_SDATA2 const f32 grCn_804DB260 = 107.0f;
+GRCN_SDATA2 const f32 grCn_804DB264 = 106.0f;
+GRCN_SDATA2 const f32 grCn_804DB268 = -3.4028235e38f;
+#undef GRCN_SDATA2
+
 bool grCorneria_801E2EEC(Vec3* v, int arg1, HSD_JObj* jobj)
 {
     Vec3 sp14;
@@ -2821,11 +2837,17 @@ bool grCorneria_801E2EEC(Vec3* v, int arg1, HSD_JObj* jobj)
     if (temp_r3 != NULL) {
         temp_r3_2 = temp_r3->user_data;
         if (temp_r3_2 != NULL && temp_r3_2->gv.corneria.x12C == jobj) {
-            temp_f31 = 106.0f * Ground_801C0498();
+            temp_f31 =
+                *(volatile const f32*) &grCn_804DB264 * Ground_801C0498();
             temp_f31_2 =
-                ((v->y - sp14.y) * ((107.0f * Ground_801C0498()) / temp_f31)) +
+                ((v->y - sp14.y) *
+                 ((*(volatile const f32*) &grCn_804DB260 * Ground_801C0498()) /
+                  temp_f31)) +
                 sp14.x;
-            if (v->x > -((107.0f * Ground_801C0498()) - temp_f31_2)) {
+            if (v->x >
+                -((*(volatile const f32*) &grCn_804DB260 * Ground_801C0498()) -
+                  temp_f31_2))
+            {
                 return false;
             }
         }
@@ -2848,5 +2870,5 @@ f32 grCorneria_801E2FCC(void)
             return (Ground_801C0498() * -35.0f - gp->gv.corneria.xD0) + 5.0f;
         }
     }
-    return -3.4028235e38f;
+    return *(volatile const f32*) &grCn_804DB268;
 }
