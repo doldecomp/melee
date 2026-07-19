@@ -168,6 +168,18 @@ static inline void ftCo_CpuTapRAndWait(Fighter* fp)
     ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
 }
 
+static inline void ftCo_CpuDoubleJumpAfterDelay(Fighter* fp)
+{
+    ftCo_800B46B8(fp, CpuCmd_WaitFor, 10);
+    ftCo_800B463C(fp, CpuCmd_ReleaseY);
+    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+    ftCo_800B463C(fp, CpuCmd_PressY);
+    ftCo_800B46B8(fp, CpuCmd_WaitFor, 10);
+    ftCo_800B463C(fp, CpuCmd_ReleaseY);
+    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+    ftCo_800B463C(fp, CpuCmd_Done);
+}
+
 void ftCo_800A0148(Fighter* fp)
 {
     struct Fighter_x1A88_t* x1A88 = &fp->x1A88;
@@ -176,14 +188,7 @@ void ftCo_800A0148(Fighter* fp)
         ftCo_CpuFinishWithNeutralStick(fp);
     } else if (ftCo_800A1CA8(fp)) {
         ftCo_CpuSetNeutralStick(fp);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 10);
-        ftCo_800B463C(fp, CpuCmd_ReleaseY);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-        ftCo_800B463C(fp, CpuCmd_PressY);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 10);
-        ftCo_800B463C(fp, CpuCmd_ReleaseY);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-        ftCo_800B463C(fp, CpuCmd_Done);
+        ftCo_CpuDoubleJumpAfterDelay(fp);
     } else if (ABS(x1A88->x54.x - fp->cur_pos.x) > 30.0) {
         ftCo_800B463C(fp, CpuCmd_ReleaseY);
         ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
@@ -211,14 +216,7 @@ void ftCo_800A0384(Fighter* fp)
         ftCo_CpuFinishWithNeutralStick(fp);
     } else if (ftCo_800A1CA8(fp)) {
         ftCo_CpuSetNeutralStick(fp);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 10);
-        ftCo_800B463C(fp, CpuCmd_ReleaseY);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-        ftCo_800B463C(fp, CpuCmd_PressY);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 10);
-        ftCo_800B463C(fp, CpuCmd_ReleaseY);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-        ftCo_800B463C(fp, CpuCmd_Done);
+        ftCo_CpuDoubleJumpAfterDelay(fp);
     } else {
         ftCo_800B463C(fp, CpuCmd_ReleaseY);
         ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
@@ -253,14 +251,7 @@ void ftCo_800A05F4(Fighter* fp)
         ftCo_CpuFinishWithNeutralStick(fp);
     } else if (ftCo_800A1CA8(fp)) {
         ftCo_CpuSetNeutralStick(fp);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 10);
-        ftCo_800B463C(fp, CpuCmd_ReleaseY);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-        ftCo_800B463C(fp, CpuCmd_PressY);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 10);
-        ftCo_800B463C(fp, CpuCmd_ReleaseY);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-        ftCo_800B463C(fp, CpuCmd_Done);
+        ftCo_CpuDoubleJumpAfterDelay(fp);
     } else {
         ftCo_CpuSetNeutralStick(fp);
         ftCo_800B463C(fp, CpuCmd_ReleaseY);
