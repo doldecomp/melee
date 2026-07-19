@@ -37,7 +37,7 @@ def main():
         unit_names.append(unit["name"].removeprefix("main/"))
 
     if unit_names:
-        print("::error::One or more units are complete but not linked!")
+        print("::warning::One or more units are complete but not linked!")
         print(*unit_names, sep=os.linesep)
         sys.exit(1)
 
