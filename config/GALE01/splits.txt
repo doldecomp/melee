@@ -5454,13 +5454,14 @@ sysdolphin/baselib/hsd_3915.c:
 	.text       start:0x80391580 end:0x80392CCC
 	.data       start:0x80408630 end:0x8040A540
 	.bss        start:0x804CE3F8 end:0x804CEB40
-	.sdata      start:0x804D6070 end:0x804D6358
+	.sdata      start:0x804D6070 end:0x804D60A8
 	.sbss       start:0x804D7850 end:0x804D78D0
 	.sdata2     start:0x804DE890 end:0x804DE930
 
 sysdolphin/baselib/hsd_392C.c:
 	.text       start:0x80392CCC end:0x803932D0
 	.data       start:0x8040A540 end:0x8040A920
+	.sdata      start:0x804D60A8 end:0x804D60B0
 
 sysdolphin/baselib/hsd_3933.c:
 	.text       start:0x803932D0 end:0x80394314
@@ -5472,6 +5473,7 @@ sysdolphin/baselib/debugconsole_main.c:
 	.text       start:0x80394314 end:0x803983A4
 	.data       start:0x8040AB00 end:0x8040BFB0
 	.bss        start:0x804CF810 end:0x804D08E8
+	.sdata      start:0x804D60B0 end:0x804D6358
 
 sysdolphin/baselib/particle.c:
 	extab       start:0x80005520 end:0x80005588
