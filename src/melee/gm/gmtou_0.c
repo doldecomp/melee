@@ -138,6 +138,7 @@ typedef void (*lbl_803D9FD8_fn)(s32*, u32, u32);
     fn_80195CCC, fn_80194F30, fn_8019610C, fn_8019610C,
 };
 
+/// @todo Only differs by a register allocation tie-break in the last case.
 void fn_80190ABC(int mode)
 {
     struct Lbl804799B8_t* state = &lbl_804799B8;
@@ -145,7 +146,6 @@ void fn_80190ABC(int mode)
     TmData* tm;
     s32 cur_opt;
     s32 opt;
-    s32 i;
 
     tm = gm_GetTournamentData();
     cur_opt = tm->cur_option;
@@ -211,6 +211,7 @@ void fn_80190ABC(int mode)
     }
     case 6: {
         u8* start;
+        s32 i;
         HSD_SisLib_803A7664(tm->x518[1]);
         HSD_SisLib_803A7664(tm->x518[2]);
         start = &state->x3;
@@ -864,11 +865,13 @@ void fn_80191E9C(HSD_GObj* gobj)
     fn_8019044C(jobj, (f32) tm->x37[idx].x2);
 }
 
-static inline bool fn_80191FD4_is_selected(u32 hud, s32 slot, TmData* tm)
+static inline bool fn_80191FD4_is_selected(enum CSSIconHud hud, s32 slot,
+                                           TmData* tm)
 {
     return tm->x37[slot].x3 == hud;
 }
 
+/// @todo Only differs by callee-saved register selection in the second block.
 void fn_80191FD4(HSD_GObj* gobj)
 {
     TmData* tm;
@@ -940,16 +943,12 @@ void fn_80191FD4(HSD_GObj* gobj)
     }
 
     fn_8018FF9C(jobj, 0.9f, 0.9f, 666.0f);
-    if (jobj == NULL) {
-        child = NULL;
-    } else {
-        child = jobj->child;
-    }
+    child = HSD_JObjGetChild(jobj);
 
     hud = fn_8018F6DC(fn_8018F3BC((s32) idx));
-    x3_ptr = &state->x3;
     x2_ptr = &state->x2;
-    slot = *x3_ptr + *x2_ptr;
+    x3_ptr = &state->x3;
+    slot = *x2_ptr + *x3_ptr;
     if (fn_80191FD4_is_selected(hud, slot, tm)) {
         fn_8019044C(child, (f32) (state->xA + 0xA));
     } else {
@@ -971,11 +970,7 @@ void fn_80191FD4(HSD_GObj* gobj)
         }
     }
 
-    if (child == NULL) {
-        sibling = NULL;
-    } else {
-        sibling = child->next;
-    }
+    sibling = HSD_JObjGetNext(child);
     HSD_JObjClearFlagsAll(sibling, JOBJ_HIDDEN);
 
     hud = fn_8018F6DC(fn_8018F3BC((s32) idx));
