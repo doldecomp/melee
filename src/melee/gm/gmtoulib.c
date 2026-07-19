@@ -2095,15 +2095,6 @@ char* fn_8018F5F0(void)
 }
 #pragma pop
 
-/// @todo Maybe static to #gmtou_1
-struct TmSettingTable lbl_803D9F80 = {
-    0, 74,  0, 74,  0, 77,  0, 75, 0,  75,  0,  77, 0, 80,  0, 78, 0, 79,
-    0, 79,  0, 81,  0, 0,   0, 82, 0,  82,  0,  92, 0, 92,  0, 96, 0, 93,
-    0, 93,  0, 96,  0, 95,  0, 97, 0,  98,  0,  98, 0, 100, 0, 0,  0, 83,
-    0, 111, 0, 111, 0, 111, 0, 88, 0,  101, 0,  0,  2, 3,   0, 2,  0, 1,
-    0, 0,   0, 0,   2, 2,   4, 16, 31, 3,   63, 3,  3, 3,   9, 0,
-};
-
 /// ???
 /// tournament uses the user data as just an int
 /// it controls various menu jobj states ie animation state, visibility, etc
