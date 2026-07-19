@@ -31,7 +31,6 @@
 #include "ftCommon/ftCo_Jump.h"
 #include "ftCommon/types.h"
 #include "ftYoshi/ftYs_Guard.h"
-#include "ftYoshi/ftYs_Init.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00CE.h"
 #include "pl/player.h"
@@ -39,7 +38,7 @@
 
 #include <common_structs.h>
 #include <math.h>
-#include <math_ppc.h>
+#include <math_ppc.h> // IWYU pragma: keep
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
@@ -73,9 +72,9 @@ int ftCo_80091A4C(Fighter_GObj* gobj)
 /// @todo @c inline of #ftCo_80091A4C and something else.
 bool ftCo_80091AD8(Fighter_GObj* gobj, int mv_x20)
 {
-    u8 _[16] = { 0 };
     bool ret0;
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(8);
     if (fp->input.x668 & (HSD_PAD_R | HSD_PAD_L) &&
         fp->x672_input_timer_counter < p_ftCommonData->x2A0)
     {
@@ -110,8 +109,7 @@ void ftCo_80091B90(Fighter_GObj* gobj, int mv_x20)
 
 void ftCo_80091B9C(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.co.guard.x24 = p_ftCommonData->x68;
 }
 
@@ -260,7 +258,7 @@ static inline void ftCo_80092450_inline(Fighter_GObj* gobj)
 #pragma push
 #pragma force_active on
 
-void ftCo_80092158(Fighter_GObj* gobj, int arg1, HSD_JObj* arg2)
+static void ftCo_80092158(Fighter_GObj* gobj, int arg1, HSD_JObj* arg2)
 {
     /// @remarks Matching tactic: the body lives in #ftCo_80092158_inline and
     /// the unreachable block below pads this function's pre-inline statement
@@ -289,6 +287,7 @@ void ftCo_80092158(Fighter_GObj* gobj, int arg1, HSD_JObj* arg2)
     }
     ftCo_80092158_inline(gobj, arg1, arg2);
 }
+
 void ftCo_800921DC(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -383,8 +382,8 @@ void ftCo_800924C0(Fighter_GObj* gobj)
 
 bool ftCo_800925A4(HSD_GObj* gobj)
 {
-    u8 _[8] = { 0 };
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(8);
     if (fp->x221B_b0) {
         fp->mv.co.guard.x2C = fp->lightshield_amount;
         {
@@ -497,8 +496,8 @@ void ftCo_80092908(Fighter_GObj* gobj)
         fp->x2219_b0 = true;
         {
             AbsorbDesc absorb;
-            u8 _[8];
             Fighter* fp2 = GET_FIGHTER(gobj);
+            PAD_STACK(8);
             absorb.x0_bone_id = fp2->ft_data->x8->x11;
             absorb.x10_size = 1;
             absorb.x4_offset.x = absorb.x4_offset.y = absorb.x4_offset.z = 0;
@@ -584,8 +583,7 @@ void ftCo_GuardOff_Anim(Fighter_GObj* gobj)
 
 void ftCo_GuardOff_IASA(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     /// @todo #RETURN_IF chain
     if (!fp->mv.co.guard.x1C ||
         (!ftCo_SpecialS_CheckInput(gobj) && !ftCo_Attack100_CheckInput(gobj) &&
@@ -741,14 +739,11 @@ static inline void ftCo_80091D58_inline(Fighter* fp)
     HSD_JObjSetScale(fp->parts[fp->ft_data->x8->x11].joint, &scl);
 }
 
-#pragma push
-#pragma force_active off
 static inline void ftCo_80091D58_inline_arg(Fighter* fp, Vec3* scl)
 {
     scl->x = scl->y = scl->z = inlineB0(fp);
     HSD_JObjSetScale(fp->parts[fp->ft_data->x8->x11].joint, scl);
 }
-#pragma pop
 
 static inline void ftCo_80092C54_inline(Fighter_GObj* gobj)
 {
@@ -803,8 +798,6 @@ static inline void ftCo_800928CC_inline(Fighter_GObj* gobj)
     }
 }
 
-#pragma push
-#pragma force_active off
 static inline void ftCo_800928CC_inline_arg(Fighter_GObj* gobj,
                                             AbsorbDesc* absorb)
 {
@@ -834,7 +827,6 @@ static inline void ftCo_800928CC_inline_arg(Fighter_GObj* gobj,
         return;
     }
 }
-#pragma pop
 
 void ftCo_GuardSetOff_Anim(Fighter_GObj* gobj)
 {
@@ -854,7 +846,6 @@ void ftCo_GuardSetOff_Anim(Fighter_GObj* gobj)
         ftCo_80091D58_inline_arg(fp, &scl);
     }
 }
-#pragma pop
 
 void ftCo_GuardSetOff_IASA(Fighter_GObj* gobj) {}
 
@@ -903,8 +894,8 @@ void ftCo_8009370C(Fighter_GObj* gobj, HSD_GObjEvent on_reflect)
 
 void ftCo_80093790(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(8);
     ftCommon_8007DB24(gobj);
     ftCo_80092158_inline(gobj, 1050, fp->parts[fp->ft_data->x8->x11].joint);
     fp->x2219_b0 = true;
@@ -1049,14 +1040,6 @@ static inline void ftCo_80092908_inline2(Fighter_GObj* gobj)
     }
 }
 
-/* ftCo_GuardOn_Anim with ftCo_800928CC's switch flattened into the branch:
- * the switch sits at inline depth 1 (the compiler refuses switch-bearing
- * inlines at depth 2 without an inline_depth pragma, which is banned), the
- * non-switch ftCo_80092908 body expands at depth 2, and its interior
- * ftCo_80092158/ftCo_80092450/ftCo_80091E78 calls fall at depth 3 where the
- * default inline cap keeps them as `bl`, exactly as in the original
- * (evidence: with the whole chain flattened to depth 1 those calls get
- * auto-inlined and the match regresses 80.52 -> 68.76). */
 static inline void ftCo_GuardOn_Anim_inline(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -1088,8 +1071,7 @@ void ftCo_GuardReflect_Anim(HSD_GObj* gobj)
 
 void ftCo_GuardReflect_IASA(HSD_GObj* gobj)
 {
-    u8 _[16] = { 0 };
-    /// @todo Inline depth.
+    PAD_STACK(16);
     RETURN_IF(inlineC0(gobj, ftCo_80092BE8));
     RETURN_IF(ftCo_8009515C(gobj));
     RETURN_IF(ftCo_8009980C(gobj));

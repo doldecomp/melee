@@ -31,8 +31,10 @@
  *
  * @param kind The #GameSceneKind (passed as a @c u8) to look up.
  * @returns The #GameSceneHandler whose #GameSceneHandler::class_id equals
- */         @p kind, or @c NULL if no entry matches.
-/* 1A4CE0 */ GameSceneHandler* gm_FindGameSceneHandler(u8 kind);
+ */
+@p kind, or @c NULL if no entry matches.
+             /* 1A4CE0 */ GameSceneHandler *
+             gm_FindGameSceneHandler(u8 kind);
 
 /**
  * @brief Main per-scene loop invoked from #gm_801A4014.

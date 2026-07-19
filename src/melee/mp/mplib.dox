@@ -1,15 +1,16 @@
 #ifndef GALE01_04D164
 #define GALE01_04D164
 
+#include <placeholder.h>
 #include <platform.h>
-#include <dolphin/mtx.h>
-#include <baselib/forward.h>
 
 #include "ft/fighter.h"
 #include "ft/types.h"
 
+#include <baselib/forward.h>
+
 #include <common_structs.h>
-#include <placeholder.h>
+#include <dolphin/mtx.h>
 
 typedef void (*mpLib_Callback)(s32, s32, CollData*, s32, s32, f32);
 
@@ -20,14 +21,15 @@ UNK_T mpLib_80056A54(void);
 UNK_T mpLib_80056AFC(void);
 
 bool mpCheckLeftWall(f32 surface_normal_y, f32 surface_normal_x, f32 right_x,
-                    f32 right_y, Vec3* coll_vec, UNK_T, UNK_T, UNK_T, u32,
-                    u32);
+                     f32 right_y, Vec3* coll_vec, UNK_T, UNK_T, UNK_T, u32,
+                     u32);
 
 UNK_T mpLib_80056A8C(void);
 UNK_T mpLib_80056A1C(void);
 
 bool mpCheckRightWall(f32 surface_normal_y, f32 surface_normal_x, f32 left_x,
-                    f32 left_y, Vec3* coll_vec, UNK_T, UNK_T, UNK_T, u32, u32);
+                      f32 left_y, Vec3* coll_vec, UNK_T, UNK_T, UNK_T, u32,
+                      u32);
 
 u32 mpLineGetFlags(enum_t);
 
@@ -62,7 +64,7 @@ void mpLib_80057BC0(s32);
 bool mpLinesConnected(s32, s32);
 s32 mpLinePrevNonFloor(int idx);
 bool mpCheckFloor(Vec3*, int, int, int, int, int, int, int, float, float,
-                    float, float, float);
+                  float, float, float);
 s32 mpLeftWallGetTop(int, float*);
 bool mpLib_8004DD90_Floor(int idx, float*, float*, UNK_T, Vec3* normal);
 bool mpLib_8004E398_LeftWall(void);
@@ -78,6 +80,6 @@ void mpLib_800569EC(void);
 /* 052508 */ UNK_RET mpCheckAll(UNK_PARAMS);
 /* 054DFC */ void mpLineGetNormal(enum_t, Vec3*);
 /* 0524DC */ bool mpCheckAllRemap(int, int, int, int, int, int, float x,
-                                 float y, float z, float);
+                                  float y, float z, float);
 
 #endif
