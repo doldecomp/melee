@@ -1307,7 +1307,7 @@ melee/ft/chara/ftKirby/ftkirbyspecialsamus.c:
 melee/ft/chara/ftKirby/ftkirbyspecialfox.c:
 	.text       start:0x800FDC00 end:0x800FED38
 	.data       start:0x803CB6D8 end:0x803CB70C
-	.sdata      start:0x804D3DC8 end:0x804D3DD0
+	.sdata      start:0x804D3DB8 end:0x804D3DD0
 	.sdata2     start:0x804D9450 end:0x804D9478
 
 melee/ft/chara/ftKirby/ftkirbyspecialness.c:
@@ -2355,6 +2355,7 @@ melee/gm/gmstaffroll.c:
 	.text       start:0x801AA644 end:0x801ACC94
 	.data       start:0x803DBFD8 end:0x803DD2C0
 	.bss        start:0x80480D58 end:0x80480D70
+	.sdata      start:0x804D42B8 end:0x804D42E8
 	.sbss       start:0x804D67F8 end:0x804D6850
 	.sdata2     start:0x804DAAD0 end:0x804DAB90
 
@@ -2422,7 +2423,7 @@ melee/gm/gm_1B14.c:
 melee/gm/gmclassic.c:
 	.text       start:0x801B2BA4 end:0x801B3F40
 	.data       start:0x803DDC58 end:0x803DE1B8
-	.bss        start:0x80490880 end:0x804908A0
+	.bss        start:0x80490880 end:0x80490910
 	.sdata      start:0x804D4318 end:0x804D4330
 	.sbss       start:0x804D68D0 end:0x804D68D8
 
@@ -2852,7 +2853,7 @@ melee/gr/grfigureget.c:
 	.rodata     start:0x803B8470 end:0x803B8480
 	.data       start:0x803E7D00 end:0x803E7DA0
 	.sbss       start:0x804D6AC0 end:0x804D6AC8
-	.sdata2     start:0x804DBB40 end:0x804DBB60
+	.sdata2     start:0x804DBB40 end:0x804DBB68
 
 melee/gr/grbattle.c:
 	.text       start:0x80219C98 end:0x8021A620
@@ -3470,7 +3471,7 @@ melee/it/items/itmsbomb.c:
 
 melee/it/items/itflipper.c:
 	.text       start:0x80290938 end:0x80291BE0
-	.data       start:0x803F5F18 end:0x803F5F40
+	.data       start:0x803F5EA8 end:0x803F5F40
 	.sdata      start:0x804D52C0 end:0x804D52D0
 	.sdata2     start:0x804DCAA8 end:0x804DCAE8
 
@@ -4375,11 +4376,14 @@ melee/if/ifcoget.c:
 	.bss        start:0x804A1F48 end:0x804A1FD8
 	.sdata      start:0x804D5838 end:0x804D5850
 	.sbss       start:0x804D6DA0 end:0x804D6DA8
+	.sdata2     start:0x804DDC00 end:0x804DDC20
 
 melee/if/soundtest.c:
 	.text       start:0x802FF7DC end:0x80301E44
 	.data       start:0x803F9F28 end:0x803FDC20
 	.sdata      start:0x804D5850 end:0x804D5A40
+	.sbss       start:0x804D6DA8 end:0x804D6E18
+	.sdata2     start:0x804DDC20 end:0x804DDC58
 
 melee/if/textdraw.c:
 	.text       start:0x80301E44 end:0x803029B4

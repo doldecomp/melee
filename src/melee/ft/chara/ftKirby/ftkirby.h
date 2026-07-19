@@ -525,7 +525,5 @@ typedef struct ftKirby_CopyName {
 /* 3CA4E0 */ extern char ftKb_Init_AnimDatFilename[];
 /* 3CA55C */ extern Fighter_DemoStrings ftKb_Init_DemoMotionFilenames;
 /* 3CA5B4 */ extern Fighter_CostumeStrings ftKb_Init_CostumeStrings[];
-/* 4D3DB8 */ extern u32 ftKb_Init_804D3DB8[2];
-/* 4D3DC0 */ extern u32 ftKb_Init_804D3DC0[2];
 
 #endif
