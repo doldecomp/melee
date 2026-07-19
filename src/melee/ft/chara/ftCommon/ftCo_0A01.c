@@ -7404,12 +7404,7 @@ void ftCo_800B04DC(Fighter* fp)
 
     data = &fp->x1A88;
     data->xF8_b0 = (is_food = true);
-    data->xF9_b2 = false;
-    data->xF9_b4 = false;
-    data->xF9_b3 = false;
-    data->xF9_b5 = false;
-    data->xF9_b6 = false;
-    data->xF9_b7 = false;
+    ftCo_CpuClearTargetModes(data);
     data->xF9_b1 = true;
 
     target = ftCo_800A4BEC(fp);
@@ -7458,7 +7453,8 @@ void ftCo_800B04DC(Fighter* fp)
     ftCo_800ADE48(fp);
 }
 
-static inline void inlineI0(Fighter* fp, struct Fighter_x1A88_t* data)
+static inline void ftCo_CpuInitEnemyTarget(Fighter* fp,
+                                           struct Fighter_x1A88_t* data)
 {
     data->xF8_b0 = false;
     data->xF9_b2 = true;
@@ -8134,7 +8130,7 @@ void ftCo_800B1DA0(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
     PAD_STACK(6 * 4);
-    inlineI0(fp, data);
+    ftCo_CpuInitEnemyTarget(fp, data);
     if (ftCo_CpuDataShouldAct(data) && data->x7C % 60 * 5 == 0 &&
         HSD_Randf() < 0.5)
     {
@@ -8433,12 +8429,7 @@ void ftCo_800B2AFC(Fighter* fp)
         s32 x18;
 
         data->xF8_b0 = false;
-        data->xF9_b2 = false;
-        data->xF9_b4 = false;
-        data->xF9_b3 = false;
-        data->xF9_b5 = false;
-        data->xF9_b6 = false;
-        data->xF9_b7 = false;
+        ftCo_CpuClearTargetModes(data);
         data->xF9_b1 = false;
         x18 = fp->x1A88.x18;
         if (x18 != data->x20 && x18 != data->x1C) {
@@ -8481,12 +8472,7 @@ void ftCo_800B2AFC(Fighter* fp)
         s32 x18;
 
         data->xF8_b0 = false;
-        data->xF9_b2 = false;
-        data->xF9_b4 = false;
-        data->xF9_b3 = false;
-        data->xF9_b5 = false;
-        data->xF9_b6 = false;
-        data->xF9_b7 = false;
+        ftCo_CpuClearTargetModes(data);
         data->xF9_b1 = false;
         x18 = fp->x1A88.x18;
         if (x18 != data->x20 && x18 != data->x1C) {
@@ -8537,12 +8523,7 @@ void ftCo_800B2AFC(Fighter* fp)
         s32 x18;
 
         data->xF8_b0 = false;
-        data->xF9_b2 = false;
-        data->xF9_b4 = false;
-        data->xF9_b3 = false;
-        data->xF9_b5 = false;
-        data->xF9_b6 = false;
-        data->xF9_b7 = false;
+        ftCo_CpuClearTargetModes(data);
         data->xF9_b1 = false;
         x18 = fp->x1A88.x18;
         if (x18 != data->x20 && x18 != data->x1C) {
@@ -8633,15 +8614,7 @@ void ftCo_800B2AFC(Fighter* fp)
         s32 do_act;
         s32 x18;
 
-        data->xF8_b0 = false;
-        data->xF9_b2 = true;
-        data->xF9_b4 = true;
-        data->xF9_b3 = false;
-        data->xF9_b5 = false;
-        data->xF9_b6 = false;
-        data->xF9_b7 = false;
-        data->xF9_b1 = false;
-        fp->x1A88.x44 = ftCo_800A4BEC(fp);
+        ftCo_CpuInitEnemyTarget(fp, data);
         x18 = data->x18;
         if (x18 != data->x20 && x18 != data->x1C) {
             data->x60 = 0;
@@ -8666,15 +8639,7 @@ void ftCo_800B2AFC(Fighter* fp)
         s32 do_act;
         s32 x18;
 
-        data->xF8_b0 = false;
-        data->xF9_b2 = true;
-        data->xF9_b4 = true;
-        data->xF9_b3 = false;
-        data->xF9_b5 = false;
-        data->xF9_b6 = false;
-        data->xF9_b7 = false;
-        data->xF9_b1 = false;
-        fp->x1A88.x44 = ftCo_800A4BEC(fp);
+        ftCo_CpuInitEnemyTarget(fp, data);
         x18 = data->x18;
         if (x18 != data->x20 && x18 != data->x1C) {
             data->x60 = 0;
@@ -8698,15 +8663,7 @@ void ftCo_800B2AFC(Fighter* fp)
         s32 do_act;
         s32 x18;
 
-        data->xF8_b0 = false;
-        data->xF9_b2 = true;
-        data->xF9_b4 = true;
-        data->xF9_b3 = false;
-        data->xF9_b5 = false;
-        data->xF9_b6 = false;
-        data->xF9_b7 = false;
-        data->xF9_b1 = false;
-        fp->x1A88.x44 = ftCo_800A4BEC(fp);
+        ftCo_CpuInitEnemyTarget(fp, data);
         x18 = data->x18;
         if (x18 != data->x20 && x18 != data->x1C) {
             data->x60 = 0;
