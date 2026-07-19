@@ -5453,20 +5453,23 @@ sysdolphin/baselib/gobjinit.c:
 sysdolphin/baselib/hsd_3915.c:
 	.text       start:0x80391580 end:0x80392CCC
 	.data       start:0x80408630 end:0x8040A540
-	.bss        start:0x804CE3F8 end:0x804CEB40
+	.bss        start:0x804CE3F8 end:0x804CE728
 	.sdata      start:0x804D6070 end:0x804D60A8
-	.sbss       start:0x804D7850 end:0x804D78D0
+	.sbss       start:0x804D7850 end:0x804D7890
 	.sdata2     start:0x804DE890 end:0x804DE930
 
 sysdolphin/baselib/hsd_392C.c:
 	.text       start:0x80392CCC end:0x803932D0
 	.data       start:0x8040A540 end:0x8040A920
+	.bss        start:0x804CE728 end:0x804CEB40
 	.sdata      start:0x804D60A8 end:0x804D60B0
+	.sbss       start:0x804D7890 end:0x804D78B0
 
 sysdolphin/baselib/hsd_3933.c:
 	.text       start:0x803932D0 end:0x80394314
 	.data       start:0x8040A920 end:0x8040AB00
 	.bss        start:0x804CEB40 end:0x804CF810
+	.sbss       start:0x804D78B0 end:0x804D78D0
 	.sdata2     start:0x804DE930 end:0x804DE948
 
 sysdolphin/baselib/debugconsole_main.c:

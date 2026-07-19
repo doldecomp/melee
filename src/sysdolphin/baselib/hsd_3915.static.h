@@ -4,18 +4,6 @@
 
 // .bss
 
-extern int psNumTexGroup[65];
-static HSD_PSFormGroup** psFormGroupArray[65];
-
-/* 4D0908 */ static void* hsd_804D0908[146];
-/* 4D0B50 */ static HSD_PSTexGroup** psTexGroupArray[65];
-/* 4D0C54 */ static HSD_PSCmdList** psCmdListArray[65];
-/* 4D0D58 */ static int psNumCmdList[65];
-/* 4D0E5C */ static u32* ptclref_804D0E5C[65];
-
-/* 4D0F60 */ struct hsd_804D0F60_t hsd_804D0F60;
-/* 4D0F90 */ struct hsd_804D0F60_t hsd_804D0F90;
-
 typedef struct {
     /* 0x00 */ void* next;
     /* 0x04 */ s32 type;
@@ -34,6 +22,18 @@ typedef struct {
 } PerfDispItem;
 
 static PerfDispItem hsd_804CE3F8[6];
+
+extern int psNumTexGroup[65];
+static HSD_PSFormGroup** psFormGroupArray[65];
+
+/* 4D0908 */ static void* hsd_804D0908[146];
+/* 4D0B50 */ static HSD_PSTexGroup** psTexGroupArray[65];
+/* 4D0C54 */ static HSD_PSCmdList** psCmdListArray[65];
+/* 4D0D58 */ static int psNumCmdList[65];
+/* 4D0E5C */ static u32* ptclref_804D0E5C[65];
+
+/* 4D0F60 */ struct hsd_804D0F60_t hsd_804D0F60;
+/* 4D0F90 */ struct hsd_804D0F60_t hsd_804D0F90;
 
 /* 4D7850 */ static HSD_SList* hsd_804D7850;
 /* 4D7858 */ static f32 hsd_804D7858;

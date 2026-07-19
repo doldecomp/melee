@@ -320,5 +320,3 @@ bool hsd_803931A4(s32 exi_channel)
     OSReport("EXI initialized (EXI_%d)\n", channel);
     return 1;
 }
-
-s32 hsd_804CF740[42];
