@@ -103,6 +103,14 @@ static inline void ftCo_CpuFinishWithNeutralStick(Fighter* fp)
     ftCo_800B463C(fp, CpuCmd_Done);
 }
 
+static inline void ftCo_CpuHoldUpForOneFrame(Fighter* fp)
+{
+    ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0x7F);
+    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+    ftCo_CpuFinishWithNeutralY(fp);
+}
+
 static inline void ftCo_CpuTapA(Fighter* fp)
 {
     ftCo_800B463C(fp, CpuCmd_PressA);
@@ -115,6 +123,13 @@ static inline void ftCo_CpuTapB(Fighter* fp)
     ftCo_800B463C(fp, CpuCmd_PressB);
     ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
     ftCo_800B463C(fp, CpuCmd_ReleaseB);
+}
+
+static inline void ftCo_CpuStartCharging(Fighter* fp)
+{
+    ftCo_CpuSetNeutralStick(fp);
+    ftCo_CpuTapB(fp);
+    ftCo_800B463C(fp, CpuCmd_Done);
 }
 
 static inline void ftCo_CpuTapR(Fighter* fp)
@@ -5642,18 +5657,12 @@ void ftCo_800AC7D4(Fighter* fp)
     }
     temp_r0_2 = data->xC;
     if ((temp_r0_2 == 0xF) || (temp_r0_2 == 0)) {
-        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0x7F);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-        ftCo_CpuFinishWithNeutralY(fp);
+        ftCo_CpuHoldUpForOneFrame(fp);
         return;
     }
     temp_r3 = ftCo_800A4BEC(fp);
     if (temp_r3 == NULL) {
-        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0x7F);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-        ftCo_CpuFinishWithNeutralY(fp);
+        ftCo_CpuHoldUpForOneFrame(fp);
     } else if (ftCo_800A1AB4(fp, temp_r3) < 15.0) {
         if (HSD_Randf() < 0.1F * data->level) {
             ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
@@ -5677,10 +5686,7 @@ void ftCo_800AC7D4(Fighter* fp)
             ftCo_800B463C(fp, CpuCmd_Done);
         }
     } else {
-        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
-        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0x7F);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
-        ftCo_CpuFinishWithNeutralY(fp);
+        ftCo_CpuHoldUpForOneFrame(fp);
     }
 }
 
@@ -5781,16 +5787,12 @@ void ftCo_800ACD5C(Fighter* fp)
     }
     if (fp->kind == FTKIND_DONKEY) {
         if (fp->motion_id != ftDk_MS_SpecialNLoop && fp->fv.dk.x222C == 0) {
-            ftCo_CpuSetNeutralStick(fp);
-            ftCo_CpuTapB(fp);
-            ftCo_800B463C(fp, CpuCmd_Done);
+            ftCo_CpuStartCharging(fp);
             return;
         }
     } else if (fp->kind == FTKIND_SAMUS) {
         if (fp->motion_id != ftSs_MS_SpecialNHold && fp->fv.ss.x2230 == 0) {
-            ftCo_CpuSetNeutralStick(fp);
-            ftCo_CpuTapB(fp);
-            ftCo_800B463C(fp, CpuCmd_Done);
+            ftCo_CpuStartCharging(fp);
             return;
         }
     } else if (fp->kind == FTKIND_MEWTWO) {
@@ -5808,26 +5810,20 @@ void ftCo_800ACD5C(Fighter* fp)
         } else if (fp->motion_id != ftMt_MS_SpecialNLoop &&
                    fp->fv.mt.x2234_shadowBallCharge == 0)
         {
-            ftCo_CpuSetNeutralStick(fp);
-            ftCo_CpuTapB(fp);
-            ftCo_800B463C(fp, CpuCmd_Done);
+            ftCo_CpuStartCharging(fp);
             return;
         }
     } else if (fp->kind == FTKIND_KIRBY) {
         if (fp->fv.kb.hat.kind == FTKIND_DONKEY) {
             if (fp->motion_id != ftKb_MS_DkSpecialNLoop && fp->fv.kb.xBC == 0)
             {
-                ftCo_CpuSetNeutralStick(fp);
-                ftCo_CpuTapB(fp);
-                ftCo_800B463C(fp, CpuCmd_Done);
+                ftCo_CpuStartCharging(fp);
                 return;
             }
         } else if (fp->fv.kb.hat.kind == FTKIND_SAMUS) {
             if (fp->motion_id != ftKb_MS_SsSpecialNHold && fp->fv.kb.xA8 == 0)
             {
-                ftCo_CpuSetNeutralStick(fp);
-                ftCo_CpuTapB(fp);
-                ftCo_800B463C(fp, CpuCmd_Done);
+                ftCo_CpuStartCharging(fp);
                 return;
             }
         } else if (fp->fv.kb.hat.kind == FTKIND_MEWTWO) {
@@ -5842,9 +5838,7 @@ void ftCo_800ACD5C(Fighter* fp)
             } else if (fp->motion_id != ftKb_MS_MtSpecialNLoop &&
                        fp->fv.kb.x9C == 0)
             {
-                ftCo_CpuSetNeutralStick(fp);
-                ftCo_CpuTapB(fp);
-                ftCo_800B463C(fp, CpuCmd_Done);
+                ftCo_CpuStartCharging(fp);
                 return;
             }
         }
