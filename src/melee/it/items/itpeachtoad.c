@@ -64,9 +64,7 @@ Item_GObj* it_802BDE18(Item_GObj* item_gobj, Vec3* pos, Fighter_Part part,
 
     spawn_gobj = Item_80268B18(&spawn);
     if (spawn_gobj != NULL) {
-        Item_8026AB54(spawn_gobj, item_gobj, part);
-        db_80225DD8(spawn_gobj, item_gobj);
-        return spawn_gobj;
+        return Item_AttachToParent(spawn_gobj, item_gobj, part);
     }
     return NULL;
 }

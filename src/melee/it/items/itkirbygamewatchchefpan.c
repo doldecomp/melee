@@ -28,9 +28,7 @@ Item_GObj* it_802C74D8(HSD_GObj* parent, Vec3* pos, Fighter_Part part,
     if (result != NULL) {
         Item* item = GET_ITEM(result);
         void** attr = item->xC4_article_data->x4_specialAttributes;
-        Item_8026AB54(result, parent, part);
-        db_80225DD8(result, parent);
-        it_8027CE64(result, parent, attr[0]);
+        Item_AttachGameWatchArticle(parent, part, result, attr);
         return result;
     }
     return NULL;
