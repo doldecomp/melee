@@ -96,6 +96,22 @@ static inline BracketSrcEntry* BracketData_GetSrc(BracketEntry* entries,
     return ((BracketData*) ((BracketSrcPtr*) entries + region))->srcs[0];
 }
 
+static inline void gmTournament_SetBracketByes(BracketEntry* entries,
+                                               s32 entrant_count)
+{
+    if (entrant_count == 1) {
+        entries[5].slots[1].x32 = 1;
+    } else if (entrant_count == 3) {
+        entries[10].slots[0].x32 = 1;
+        entries[11].slots[1].x32 = 1;
+    } else if (entrant_count == 5) {
+        entries[23].slots[1].x32 = 1;
+    } else if (entrant_count == 7) {
+        entries[46].slots[1].x32 = 1;
+        entries[47].slots[1].x32 = 1;
+    }
+}
+
 void fn_8018A514(int count, float val)
 {
     s32 region;
@@ -171,17 +187,7 @@ void fn_8018A514(int count, float val)
     }
 
     if (region == 0) {
-        if (count == 1) {
-            entries[5].slots[1].x32 = 1;
-        } else if (count == 3) {
-            entries[10].slots[0].x32 = 1;
-            entries[11].slots[1].x32 = 1;
-        } else if (count == 5) {
-            entries[23].slots[1].x32 = 1;
-        } else if (count == 7) {
-            entries[46].slots[1].x32 = 1;
-            entries[47].slots[1].x32 = 1;
-        }
+        gmTournament_SetBracketByes(entries, count);
     }
     PAD_STACK(24);
 }
@@ -201,17 +207,7 @@ void fn_8018A970(int arg0)
     }
 
     if (arg0 < 9) {
-        if (arg0 == 1) {
-            lbl_80473AB8[5].slots[1].x32 = 1;
-        } else if (arg0 == 3) {
-            lbl_80473AB8[10].slots[0].x32 = 1;
-            lbl_80473AB8[11].slots[1].x32 = 1;
-        } else if (arg0 == 5) {
-            lbl_80473AB8[23].slots[1].x32 = 1;
-        } else if (arg0 == 7) {
-            lbl_80473AB8[46].slots[1].x32 = 1;
-            lbl_80473AB8[47].slots[1].x32 = 1;
-        }
+        gmTournament_SetBracketByes(lbl_80473AB8, arg0);
     }
 }
 
@@ -458,9 +454,14 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
     HSD_JObjSetTranslateX(jobj, (f32) *p44);
     HSD_JObjSetTranslateY(jobj, -(f32) *p48);
 }
-static inline f32 GetBracketSlideY(u8* p)
+static inline f32 gmTournament_GetBracketSlideYForward(u8* p)
 {
     return 0.3f * (f32) lbl_804D6630 + (f32) * (s32*) (p + 0x48);
+}
+
+static inline f32 gmTournament_GetBracketSlideYReverse(u8* p)
+{
+    return (f32) * (s32*) (p + 0x48) - 0.3f * (f32) lbl_804D6630;
 }
 
 void fn_8018B090(HSD_GObj* arg0)
@@ -486,33 +487,36 @@ void fn_8018B090(HSD_GObj* arg0)
                 if (p[0x30] != 0) {
                     HSD_JObj* jobj = (*(HSD_GObj**) (p + 0x2C))->hsd_obj;
                     if (bb[2] != 0) {
-                        HSD_JObjSetTranslateY(jobj,
-                                              -((f32) * (s32*) (p + 0x48) -
-                                                (0.3f * (f32) lbl_804D6630)));
+                        HSD_JObjSetTranslateY(
+                            jobj, -gmTournament_GetBracketSlideYReverse(p));
                     } else {
                         s8 t0 = bb[4];
                         if (t0 != 1) {
                             if (t0 >= 1 && t0 < 4) {
                                 if (i <= 1) {
                                     HSD_JObjSetTranslateY(
-                                        jobj, -((0.3f * (f32) lbl_804D6630) +
-                                                (f32) * (s32*) (p + 0x48)));
+                                        jobj,
+                                        -gmTournament_GetBracketSlideYForward(
+                                            p));
                                 } else {
                                     HSD_JObjSetTranslateY(
-                                        jobj, -((f32) * (s32*) (p + 0x48) -
-                                                (0.3f * (f32) lbl_804D6630)));
+                                        jobj,
+                                        -gmTournament_GetBracketSlideYReverse(
+                                            p));
                                 }
                             } else {
                                 HSD_JObjSetTranslateY(
-                                    jobj, -((0.3f * (f32) lbl_804D6630) +
-                                            (f32) * (s32*) (p + 0x48)));
+                                    jobj,
+                                    -gmTournament_GetBracketSlideYForward(p));
                             }
                         } else if (i == 0) {
-                            HSD_JObjSetTranslateY(jobj, -GetBracketSlideY(p));
+                            HSD_JObjSetTranslateY(
+                                jobj,
+                                -gmTournament_GetBracketSlideYForward(p));
                         } else {
                             HSD_JObjSetTranslateY(
-                                jobj, -((f32) * (s32*) (p + 0x48) -
-                                        (0.3f * (f32) lbl_804D6630)));
+                                jobj,
+                                -gmTournament_GetBracketSlideYReverse(p));
                         }
                     }
                 }
@@ -1248,7 +1252,7 @@ void fn_8018D50C(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     tm = gm_GetTournamentData();
     c0 = lbl_804DA684;
     thickness = data->x1C;
-    c1 = lbl_804DA684;
+    c1 = c0;
     {
         GXColor* color = &c1;
         DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, color);
@@ -1635,6 +1639,15 @@ void fn_8018E46C(HSD_GObj* gobj, int unused)
     }
 }
 
+static inline void gmTournament_InitBracket(s32 entrant_count, f32 anim_frame,
+                                            bool reset)
+{
+    if (reset) {
+        fn_8018A514(entrant_count, anim_frame);
+    }
+    fn_8018A970(entrant_count);
+}
+
 /// Initializes the tournament bracket camera and optionally resets bracket
 /// data. Removes all existing GObjs from two entity lists, inits lbl_80473AB8
 /// entries, creates camera GObj with CObjDesc loaded from lbl_803B7CA8 rodata.
@@ -1685,10 +1698,7 @@ void fn_8018E618(int arg0, f32 farg0, int arg1)
     ((u32*) &gobj->gxlink_prios)[1] = 0x10;
     ((u32*) &gobj->gxlink_prios)[0] = 0;
 
-    if (arg1 != 0) {
-        fn_8018A514(arg0, farg0);
-    }
-    fn_8018A970(arg0);
+    gmTournament_InitBracket(arg0, farg0, arg1);
 }
 #pragma pop
 
