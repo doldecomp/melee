@@ -2210,7 +2210,7 @@ melee/gm/gm_1832.c:
 melee/gm/gmtoulib.c:
 	.text       start:0x8018A514 end:0x80190ABC
 	.rodata     start:0x803B7D18 end:0x803B7D50
-	.data       start:0x803D9D20 end:0x803D9FD8
+	.data       start:0x803D9D20 end:0x803D9F80
 	.bss        start:0x80473AB8 end:0x804799B8
 	.sdata      start:0x804D4158 end:0x804D4170
 	.sbss       start:0x804D6630 end:0x804D6698
@@ -2218,7 +2218,7 @@ melee/gm/gmtoulib.c:
 
 melee/gm/gmtou_0.c:
 	.text       start:0x80190ABC end:0x80196510
-	.data       start:0x803D9FD8 end:0x803DA0D0
+	.data       start:0x803D9F80 end:0x803DA0D0
 	.sdata      start:0x804D4170 end:0x804D4190
 	.sdata2     start:0x804DA6D8 end:0x804DA7E0
 
