@@ -145,6 +145,17 @@ static inline f32 get_scale(Fighter* fp)
     return fp->x34_scale.y;
 }
 
+static inline int ftCo_CpuSelectAttack(Fighter* fp,
+                                       struct Fighter_x1A88_t* cpu,
+                                       const ftCo_AttackEntry* entry)
+{
+    cpu->x6C.x = fp->x34_scale.y * entry->x08;
+    cpu->x6C.y = fp->x34_scale.y * entry->x10;
+    cpu->x74.x = fp->x34_scale.y * entry->x0C;
+    cpu->x74.y = fp->x34_scale.y * entry->x14;
+    return entry->cmd;
+}
+
 int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
 {
     ftCo_AttackEntry sp3C[32];
@@ -341,11 +352,7 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
     for (i = 0, sel = sp3C; i < count; i++, sel++) {
         acc += sel->weight;
         if (acc * inv >= r) {
-            cpu->x6C.x = fp->x34_scale.y * sp3C[i].x08;
-            cpu->x6C.y = fp->x34_scale.y * sp3C[i].x10;
-            cpu->x74.x = fp->x34_scale.y * sp3C[i].x0C;
-            cpu->x74.y = fp->x34_scale.y * sp3C[i].x14;
-            return sp3C[i].cmd;
+            return ftCo_CpuSelectAttack(fp, cpu, &sp3C[i]);
         }
     }
     HSD_ASSERT(0xFA, NULL);
@@ -547,11 +554,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     for (i = 0, sel = sp40; i < count; i++, sel++) {
         acc += sel->weight;
         if (acc * inv >= r) {
-            cpu->x6C.x = fp->x34_scale.y * sp40[i].x08;
-            cpu->x6C.y = fp->x34_scale.y * sp40[i].x10;
-            cpu->x74.x = fp->x34_scale.y * sp40[i].x0C;
-            cpu->x74.y = fp->x34_scale.y * sp40[i].x14;
-            return sp40[i].cmd;
+            return ftCo_CpuSelectAttack(fp, cpu, &sp40[i]);
         }
     }
     HSD_ASSERT(0x1C5, NULL);
