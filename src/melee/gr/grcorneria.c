@@ -1083,7 +1083,21 @@ bool grCorneria_801DEC00(Ground_GObj* arg)
 
 bool grCorneria_801DEC08(Vec3* pos)
 {
-    return Stage_IsOutsideBlastZone(pos);
+    /// @todo Use #Stage_IsOutsideBlastZone when doing so no longer changes
+    /// MWCC's auto-inlining decisions for #grCorneria_801DED50.
+    if (pos->x > Stage_GetBlastZoneRightOffset()) {
+        return true;
+    }
+    if (pos->x < Stage_GetBlastZoneLeftOffset()) {
+        return true;
+    }
+    if (pos->y > Stage_GetBlastZoneTopOffset()) {
+        return true;
+    }
+    if (pos->y < Stage_GetBlastZoneBottomOffset()) {
+        return true;
+    }
+    return false;
 }
 s32 grCorneria_801DEC94(Vec3* pos)
 {
