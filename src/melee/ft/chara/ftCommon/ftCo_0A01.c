@@ -162,6 +162,12 @@ static inline void ftCo_CpuRetapR(Fighter* fp)
     ftCo_800B463C(fp, CpuCmd_Done);
 }
 
+static inline void ftCo_CpuTapRAndWait(Fighter* fp)
+{
+    ftCo_CpuTapR(fp);
+    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+}
+
 void ftCo_800A0148(Fighter* fp)
 {
     struct Fighter_x1A88_t* x1A88 = &fp->x1A88;
@@ -5990,32 +5996,27 @@ void ftCo_800ADC28(Fighter* fp)
         }
     } else if (fp->kind == FTKIND_SAMUS) {
         if (fp->motion_id == ftSs_MS_SpecialNHold) {
-            ftCo_CpuTapR(fp);
-            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_CpuTapRAndWait(fp);
         }
     } else if (fp->kind == FTKIND_MEWTWO) {
         if (fp->motion_id == ftMt_MS_SpecialNLoop ||
             fp->motion_id == ftMt_MS_SpecialNLoopFull)
         {
-            ftCo_CpuTapR(fp);
-            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_CpuTapRAndWait(fp);
         }
     } else if (fp->kind == FTKIND_KIRBY) {
         FighterKind kind = fp->fv.kb.hat.kind;
         if (kind == FTKIND_DONKEY && fp->motion_id == ftKb_MS_DkSpecialNLoop) {
-            ftCo_CpuTapR(fp);
-            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_CpuTapRAndWait(fp);
         } else if (kind == FTKIND_SAMUS &&
                    fp->motion_id == ftKb_MS_SsSpecialNHold)
         {
-            ftCo_CpuTapR(fp);
-            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_CpuTapRAndWait(fp);
         } else if (kind == FTKIND_MEWTWO &&
                    (fp->motion_id == ftKb_MS_MtSpecialNLoop ||
                     fp->motion_id == ftKb_MS_MtSpecialNLoopFull))
         {
-            ftCo_CpuTapR(fp);
-            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_CpuTapRAndWait(fp);
         }
     }
 }
@@ -6732,9 +6733,7 @@ void ftCo_800AEFB8(Fighter* fp)
     target = ftCo_800A5CE0(fp);
     data->x44 = target;
     if (target != NULL) {
-        ftCo_CpuSetTargetActive(data);
-        ftCo_CpuClearTargetModes(data);
-        ftCo_CpuSetTargetReady(data);
+        ftCo_CpuSetTargetFlags(data);
         ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
@@ -7832,9 +7831,7 @@ void ftCo_800B1EF0(Fighter* fp)
     target = ftCo_800A5CE0(fp);
     data->x44 = target;
     if (target != NULL) {
-        ftCo_CpuSetTargetActive(data);
-        ftCo_CpuClearTargetModes(data);
-        ftCo_CpuSetTargetReady(data);
+        ftCo_CpuSetTargetFlags(data);
         ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
@@ -7909,9 +7906,7 @@ void ftCo_800B24B8(Fighter* fp)
     target = ftCo_800A5CE0(fp);
     data->x44 = target;
     if (target != NULL) {
-        ftCo_CpuSetTargetActive(data);
-        ftCo_CpuClearTargetModes(data);
-        ftCo_CpuSetTargetReady(data);
+        ftCo_CpuSetTargetFlags(data);
         ftCo_CpuTargetAct(fp);
         ftCo_800ADE48(fp);
         return;
