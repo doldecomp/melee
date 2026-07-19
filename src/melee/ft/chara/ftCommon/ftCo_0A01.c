@@ -6426,6 +6426,19 @@ static inline void ftCo_CpuUpdateSpecialItemTarget(Fighter* fp)
     fp->x1A88.x50 = ftCo_800A648C(fp);
 }
 
+static inline bool ftCo_CpuDataShouldAct(struct Fighter_x1A88_t* data)
+{
+    if (data->x18 != data->x20 && data->x18 != data->x1C) {
+        data->x60 = 0;
+    }
+    if (data->x18 == 4) {
+        return false;
+    } else {
+        data->xFA_b2 = false;
+        return true;
+    }
+}
+
 void ftCo_800AE7AC(Fighter* fp, Vec3* arg1, int arg2)
 {
     struct Fighter_x1A88_t* data0 = &fp->x1A88;
@@ -6462,15 +6475,7 @@ void ftCo_800AE7AC(Fighter* fp, Vec3* arg1, int arg2)
     ftCo_CpuUpdateCommonItemTarget(fp);
     ftCo_CpuUpdateSpecialItemTarget(fp);
     data2 = &fp->x1A88;
-    if (data2->x18 != data2->x20 && data2->x18 != data2->x1C) {
-        data2->x60 = 0;
-    }
-    if (data2->x18 == 4) {
-        do_act = 0;
-    } else {
-        data2->xFA_b2 = false;
-        do_act = 1;
-    }
+    do_act = ftCo_CpuDataShouldAct(data2);
     if (do_act != 0) {
         if (arg2 >= 0) {
             ftCo_800A8210(fp, arg1);
@@ -6527,15 +6532,7 @@ void ftCo_800AEA8C(Fighter* fp)
     ftCo_CpuUpdateCommonItemTarget(fp);
     ftCo_CpuUpdateSpecialItemTarget(fp);
     data2 = &fp->x1A88;
-    if (data2->x18 != data2->x20 && data2->x18 != data2->x1C) {
-        data2->x60 = 0;
-    }
-    if (data2->x18 == 4) {
-        do_floor = 0;
-    } else {
-        data2->xFA_b2 = false;
-        do_floor = 1;
-    }
+    do_floor = ftCo_CpuDataShouldAct(data2);
     if (do_floor != 0) {
         s32 result;
         f32 x = fp->cur_pos.x;
@@ -6883,19 +6880,6 @@ void ftCo_800AF290(Fighter* fp)
         }
     }
     ftCo_800ADE48(fp);
-}
-
-static inline bool ftCo_CpuDataShouldAct(struct Fighter_x1A88_t* data)
-{
-    if (data->x18 != data->x20 && data->x18 != data->x1C) {
-        data->x60 = 0;
-    }
-    if (data->x18 == 4) {
-        return false;
-    } else {
-        data->xFA_b2 = false;
-        return true;
-    }
 }
 
 void ftCo_800AF78C(Fighter* fp)
@@ -7739,15 +7723,7 @@ void ftCo_800B17D0(Fighter* fp)
     ftCo_CpuUpdateCommonItemTarget(fp);
     ftCo_CpuUpdateSpecialItemTarget(fp);
     data2 = &fp->x1A88;
-    if (data2->x18 != data2->x20 && data2->x18 != data2->x1C) {
-        data2->x60 = 0;
-    }
-    if (data2->x18 == 4) {
-        do_act = 0;
-    } else {
-        data2->xFA_b2 = false;
-        do_act = 1;
-    }
+    do_act = ftCo_CpuDataShouldAct(data2);
     if (do_act != 0) {
         if (data->x4C != NULL && fp->item_gobj == NULL) {
             ftCo_800A866C(fp);
@@ -7800,15 +7776,7 @@ void ftCo_800B1AB8(Fighter* fp)
     ftCo_CpuUpdateCommonItemTarget(fp);
     ftCo_CpuUpdateSpecialItemTarget(fp);
     data2 = &fp->x1A88;
-    if (data2->x18 != data2->x20 && data2->x18 != data2->x1C) {
-        data2->x60 = 0;
-    }
-    if (data2->x18 == 4) {
-        do_act = 0;
-    } else {
-        data2->xFA_b2 = false;
-        do_act = 1;
-    }
+    do_act = ftCo_CpuDataShouldAct(data2);
     if (do_act != 0) {
         if (data->x4C != NULL && fp->item_gobj == NULL) {
             ftCo_800A866C(fp);
@@ -7914,15 +7882,7 @@ void ftCo_800B21C8(Fighter* fp)
     ftCo_CpuUpdateTargetDistance(fp);
 
     data2 = &fp->x1A88;
-    if (data2->x18 != data2->x20 && data2->x18 != data2->x1C) {
-        data2->x60 = 0;
-    }
-    if (data2->x18 == 4) {
-        do_act = 0;
-    } else {
-        data2->xFA_b2 = false;
-        do_act = 1;
-    }
+    do_act = ftCo_CpuDataShouldAct(data2);
     if (do_act != 0) {
         attack_target = ftCo_800A53DC(fp);
         if (attack_target == NULL) {
