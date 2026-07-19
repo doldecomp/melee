@@ -29,10 +29,11 @@ jobs:
       with:
         fetch-depth: 2
         sparse-checkout: |
-          src
-          extern
-          tools
-          config
+          src/
+          extern/
+          tools/
+          config/
+          .github/scripts/
     - name: Git config
       run: |
         git config --global --add safe.directory "$GITHUB_WORKSPACE"
@@ -45,7 +46,15 @@ jobs:
         export RUST_LOG=error
 
         mode='${{matrix.mode}}'
-        config_args='--compilers /compilers --max-errors 0 --verbose --version ${{matrix.version}}'
+        root='build/${{matrix.version}}'
+        report="$root/report.json"
+
+        config_args=$(printf '%s ' \
+          '--compilers /compilers' \
+          '--max-errors 0' \
+          '--verbose' \
+          '--version ${{matrix.version}}' \
+          '--sym off')
 
         function run_configure {
           echo "$config_args" | xargs python configure.py
@@ -53,7 +62,11 @@ jobs:
 
         case "$mode" in
           'link')
-            config_args="--map --require-protos $config_args"
+            config_args=$(printf '%s ' \
+              '--require-protos' \
+              '--reloc-diffs none' \
+              "$config_args")
+
             run_configure
 
             set +e
@@ -69,17 +82,20 @@ jobs:
                 fi
             done < <(ninja diff)
 
+            if [ "$result" -eq 0 ]; then
+                python .github/scripts/check_complete.py "$report"
+                result="$?"
+            fi
+
             exit "$result"
           ;;
           'diff')
-            root='build/${{matrix.version}}'
-            expected="$root/expected-report.json"
-            current="$root/report.json"
-            changes="$root/changes-report.json"
+            expected="$root/baseline.json"
+            changes="$root/changes.json"
             head="$(git rev-parse HEAD)"
 
             function run_ninja {
-              ninja all_source "$current"
+              ninja all_source "$report"
             }
 
             case '${{github.event_name}}' in
@@ -95,14 +111,14 @@ jobs:
 
             run_configure
             run_ninja
-            cp "$current" "$expected"
+            cp "$report" "$expected"
 
             git checkout "$head"
             run_ninja
 
-            build/tools/objdiff-cli report changes -o "$changes" "$expected" "$current"
+            build/tools/objdiff-cli report changes -o "$changes" "$expected" "$report"
             set +e
-            python tools/diff_changes.py "$changes"
+            python .github/scripts/diff_changes.py "$changes"
             set -e
           ;;
           *) exit 1 ;;
@@ -226,11 +242,11 @@ jobs:
       with:
         fetch-depth: 1
         sparse-checkout: |
-          src
-          extern
-          tools
-          config
-          .nix
+          src/
+          extern/
+          tools/
+          config/
+          .nix/
     - name: Log into container registry
       uses: docker/login-action@v4
       with:
@@ -272,8 +288,8 @@ jobs:
       uses: actions/checkout@v4
       with:
         sparse-checkout: |
-          tools
-          reqs
+          tools/
+          reqs/
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
