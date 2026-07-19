@@ -74,8 +74,7 @@ bool itMatadogas_UnkMotion1_Anim(Item_GObj* gobj)
         jobj = gobj->hsd_obj;
         ip = gobj->user_data;
         Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-        ip->entered_hitlag = efLib_PauseAll;
-        ip->exited_hitlag = efLib_ResumeAll;
+        Item_SetEffectHitlagCallbacks(ip);
         HSD_JObjSetRotationY(jobj, 0.0f);
     }
     return false;
@@ -131,8 +130,7 @@ void itMatadogas_UnkMotion2_Phys(Item_GObj* gobj)
         item2 = gobj->user_data;
         jobj = gobj->hsd_obj;
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-        item2->entered_hitlag = efLib_PauseAll;
-        item2->exited_hitlag = efLib_ResumeAll;
+        Item_SetEffectHitlagCallbacks(item2);
         ((jobj) ? ((void) 0) : __assert("jobj.h", 660, "jobj"));
         ((!(jobj->flags & JOBJ_USE_QUATERNION))
              ? ((void) 0)
@@ -225,8 +223,7 @@ void it_802CB798(Item_GObj* gobj)
     ip->xD44_lifeTimer = attrs->x0;
     it_80274740(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     it_8026B3A8(gobj);
 }
 

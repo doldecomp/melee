@@ -413,12 +413,8 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
         chars[count_processed] = opp_data[count_processed].x3;
     }
 
-    {
-        u8* cp = colors;
-        for (i = 0; i < 3; i++) {
-            *cp = arg0->x54(arg1, arg0->x0.cpu_level, (u8) i);
-            cp++;
-        }
+    for (i = 0; i < 3; i++) {
+        colors[i] = arg0->x54(arg1, arg0->x0.cpu_level, (u8) i);
     }
 
     gmRegSetupEnemyColorTable(arg0->x0.ckind, arg0->x0.color, chars_ptr,
@@ -434,27 +430,24 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
         colors[2] = 0;
     }
 
-    gc = &lbDvd_8001822C()->game_cache;
-    slot_idx = 1;
+    gc = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_80018C6C();
+    slot_idx = 1;
     gc->entries[0].char_id = (s32) (s8) arg0->x0.ckind;
     gc->entries[0].color = arg0->x0.color;
     lbDvd_80018254();
     lbDvd_80018C2C(0xC7);
     lbDvd_80017700(4);
 
-    {
-        s32 idx = slot_idx;
-        for (i = 0; i < 3; i++) {
-            if ((s8) chars_ptr[i] != 0x21) {
-                gc->entries[idx].char_id = chars_ptr[i];
-                if (is_last_round != 0) {
-                    gc->entries[idx].color = 0xFF;
-                } else {
-                    gc->entries[idx].color = colors[i];
-                }
-                idx++;
+    for (i = 0; i < 3; i++) {
+        if (chars[i] != 0x21) {
+            gc->entries[slot_idx].char_id = chars[i];
+            if (is_last_round != 0) {
+                gc->entries[slot_idx].color = 0xFF;
+            } else {
+                gc->entries[slot_idx].color = colors[i];
             }
+            slot_idx++;
         }
     }
 
@@ -745,11 +738,10 @@ void gm_801B607C(GameScene* unused)
 void gm_801B60A4_OnLoad(void)
 {
     UnkAllstarData* data;
-    u32 var_r28;
-    gm_803DEBE8_t* var_r29;
-    gm_803DEBE8_t* var_r30;
+    u32 index;
     int temp;
     gm_803DEBE8_t tmp;
+    u8* q;
     PAD_STACK(16);
 
     data = &gm_80473A18;
@@ -773,59 +765,27 @@ void gm_801B60A4_OnLoad(void)
     data->x58 = NULL;
     data->x64 = gm_8018A2C4;
     data->x68 = gm_8018A314;
-    var_r29 = gm_803DEBE8;
-    var_r30 = var_r29;
-    for (var_r28 = 0; var_r28 < 25; var_r28++) {
-        var_r30->x2 = *((&var_r30->x0) + HSD_Randi(2));
-        var_r30++;
+
+    for (index = 0; index < 25; index++) {
+        gm_803DEBE8_t* opponent = &gm_803DEBE8[index];
+        opponent->x2 = HSD_Randi(2) == 0 ? opponent->x0 : opponent->x1;
     }
 
-    var_r30 = var_r29;
-    for (var_r28 = 0; var_r28 < 0x17; var_r28++) {
-        gm_803DEBE8_t* swap = &var_r30[var_r28 + HSD_Randi(0x18 - var_r28)];
-        tmp = *var_r29;
-        *var_r29 = *swap;
-        var_r29++;
+    for (index = 0; index < 0x17; index++) {
+        u32 swap_idx = index + HSD_Randi(0x18 - index);
+        gm_803DEBE8_t* swap = &gm_803DEBE8[swap_idx];
+        tmp = gm_803DEBE8[index];
+        gm_803DEBE8[index] = *swap;
         *swap = tmp;
     }
 
     data->x74 = 0;
+    data->x9C = 0;
     {
-        UnkAllstarData* p = &gm_80473A18;
-        int i = 0x18;
-        data->x9C = 0;
+        int i;
         temp = 0x21;
-        p->x76[0] = temp;
-        p->x76[1] = temp;
-        p->x76[2] = temp;
-        p->x76[3] = temp;
-        p->x76[4] = temp;
-        p->x76[5] = temp;
-        p->x76[6] = temp;
-        p->x76[7] = temp;
-        p->x76[8] = temp;
-        p->x76[9] = temp;
-        p->x76[0xA] = temp;
-        p->x76[0xB] = temp;
-        p->x76[0xC] = temp;
-        p->x76[0xD] = temp;
-        p->x76[0xE] = temp;
-        p->x76[0xF] = temp;
-        p->x76[0x10] = temp;
-        p->x76[0x11] = temp;
-        p->x76[0x12] = temp;
-        p->x76[0x13] = temp;
-        p->x76[0x14] = temp;
-        p->x76[0x15] = temp;
-        p->x76[0x16] = temp;
-        p->x76[0x17] = temp;
-
-        if (i < 0x1A) {
-            u8* q = ((u8*) p) + i;
-            i = 0x1A - i;
-            do {
-                *(q++ + 0x76) = temp;
-            } while (--i != 0);
+        for (i = 0; i < 0x1A; i++) {
+            gm_80473A18.x76[i] = temp;
         }
     }
 

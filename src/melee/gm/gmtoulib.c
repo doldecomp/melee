@@ -28,6 +28,7 @@
 #include "pl/player.h"
 #include "sc/types.h"
 
+#include <m2c_macros.h>
 #include <printf.h>
 #include <dolphin/os.h>
 #include <baselib/controller.h>
@@ -74,42 +75,33 @@ typedef struct CamDesc {
 } CamDesc;
 extern CamDesc lbl_803B7CA8;
 
-typedef struct BracketEntrySlot {
-    /* 0x00 */ HSD_GObj* x2C;
-    /* 0x04 */ u8 x30;
-    /* 0x05 */ u8 pad31;
-    /* 0x06 */ u8 x32;
-    /* 0x07 */ u8 pad33;
-    /* 0x08 */ s32 x34;
-    /* 0x0C */ s32 x38;
-    /* 0x10 */ s32 x3C;
-    /* 0x14 */ s32 x40;
-    /* 0x18 */ s32 x44;
-    /* 0x1C */ s32 x48;
-    /* 0x20 */ u8 x4C;
-    /* 0x21 */ u8 x4D;
-    /* 0x22 */ u8 x4E;
-    /* 0x23 */ u8 x4F;
-    /* 0x24 */ u8 x50;
-    /* 0x25 */ u8 x51;
-    /* 0x26 */ u8 x52;
-    /* 0x27 */ u8 pad53;
-    /* 0x28 */ u16 x54;
-    /* 0x2A */ u8 pad56[0x2C - 0x2A];
-} BracketEntrySlot;
-STATIC_ASSERT(sizeof(BracketEntrySlot) == 0x2C);
-
 static inline BracketEntrySlot* BracketEntry_GetSlot(BracketEntry* entry,
                                                      s32 slot_idx)
 {
-    return &((BracketEntrySlot*) &entry->x2C)[slot_idx];
+    return &entry->slots[slot_idx];
+}
+
+typedef struct BracketData {
+    /* 0x0000 */ BracketEntry entries[64];
+    /* 0x3700 */ BracketSrcEntry* srcs[3];
+} BracketData;
+
+typedef struct BracketSrcPtr {
+    BracketSrcEntry* ptr;
+} BracketSrcPtr;
+
+static inline BracketSrcEntry* BracketData_GetSrc(BracketEntry* entries,
+                                                  s32 region)
+{
+    return ((BracketData*) ((BracketSrcPtr*) entries + region))->srcs[0];
 }
 
 void fn_8018A514(int count, float val)
 {
-    BracketEntry* entries = lbl_80473AB8;
     s32 region;
+    BracketEntry* entries;
     BracketSrcEntry* src;
+    BracketSrcPtr* srcs;
     int i;
     s32 n;
 
@@ -121,7 +113,8 @@ void fn_8018A514(int count, float val)
         region = 1;
     }
 
-    src = ((BracketSrcEntry**) ((u8*) entries + 0x3700))[region];
+    srcs = (BracketSrcPtr*) ((BracketData*) lbl_80473AB8)->srcs;
+    src = srcs[region].ptr;
 
     if (count < 9) {
         for (i = 0; i < count; i++) {
@@ -139,6 +132,7 @@ void fn_8018A514(int count, float val)
 
     n = lbl_803D9D20.x0[count + 0x20];
 
+    entries = lbl_80473AB8;
     for (i = 0; i < n; i++) {
         entries[i].x0 = src->x0;
         entries[i].x1 = src->x1;
@@ -161,32 +155,32 @@ void fn_8018A514(int count, float val)
         entries[i].x26 = src->x1D;
         entries[i].x27 = src->x1F;
         entries[i].x28 = src->x20;
-        entries[i].x52 = 9;
-        entries[i].x32 = 0;
-        entries[i].x7E = 9;
-        entries[i].x5E = 0;
-        entries[i].xAA = 9;
-        entries[i].x8A = 0;
-        entries[i].xD6 = 9;
-        entries[i].xB6 = 0;
-        entries[i].x30 = src->x21;
-        entries[i].x5C = src->x22;
-        entries[i].x88 = src->x23;
-        entries[i].xB4 = src->x24;
+        entries[i].slots[0].x52 = 9;
+        entries[i].slots[0].x32 = 0;
+        entries[i].slots[1].x52 = 9;
+        entries[i].slots[1].x32 = 0;
+        entries[i].slots[2].x52 = 9;
+        entries[i].slots[2].x32 = 0;
+        entries[i].slots[3].x52 = 9;
+        entries[i].slots[3].x32 = 0;
+        entries[i].slots[0].x30 = src->x21;
+        entries[i].slots[1].x30 = src->x22;
+        entries[i].slots[2].x30 = src->x23;
+        entries[i].slots[3].x30 = src->x24;
         src++;
     }
 
     if (region == 0) {
         if (count == 1) {
-            entries[5].x5E = 1;
+            entries[5].slots[1].x32 = 1;
         } else if (count == 3) {
-            entries[10].x32 = 1;
-            entries[11].x5E = 1;
+            entries[10].slots[0].x32 = 1;
+            entries[11].slots[1].x32 = 1;
         } else if (count == 5) {
-            entries[23].x5E = 1;
+            entries[23].slots[1].x32 = 1;
         } else if (count == 7) {
-            entries[46].x5E = 1;
-            entries[47].x5E = 1;
+            entries[46].slots[1].x32 = 1;
+            entries[47].slots[1].x32 = 1;
         }
     }
     PAD_STACK(24);
@@ -208,15 +202,15 @@ void fn_8018A970(int arg0)
 
     if (arg0 < 9) {
         if (arg0 == 1) {
-            lbl_80473AB8[5].x5E = 1;
+            lbl_80473AB8[5].slots[1].x32 = 1;
         } else if (arg0 == 3) {
-            lbl_80473AB8[10].x32 = 1;
-            lbl_80473AB8[11].x5E = 1;
+            lbl_80473AB8[10].slots[0].x32 = 1;
+            lbl_80473AB8[11].slots[1].x32 = 1;
         } else if (arg0 == 5) {
-            lbl_80473AB8[23].x5E = 1;
+            lbl_80473AB8[23].slots[1].x32 = 1;
         } else if (arg0 == 7) {
-            lbl_80473AB8[46].x5E = 1;
-            lbl_80473AB8[47].x5E = 1;
+            lbl_80473AB8[46].slots[1].x32 = 1;
+            lbl_80473AB8[47].slots[1].x32 = 1;
         }
     }
 }
@@ -235,7 +229,7 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
     u8* px3;
     u8 x3;
 
-    TmData* tm = gm_8018F634();
+    TmData* tm = gm_GetTournamentData();
 
     entry = &entries[entry_idx];
     sub = (u8*) entry + slot_idx * (s32) 0x2C;
@@ -464,15 +458,18 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
     HSD_JObjSetTranslateX(jobj, (f32) *p44);
     HSD_JObjSetTranslateY(jobj, -(f32) *p48);
 }
+static inline f32 GetBracketSlideY(u8* p)
+{
+    return 0.3f * (f32) lbl_804D6630 + (f32) * (s32*) (p + 0x48);
+}
 
 void fn_8018B090(HSD_GObj* arg0)
 {
-    TmData* tm = gm_8018F634();
+    TmData* tm = gm_GetTournamentData();
     s32 var_r24 = 0;
     s32 idx = fn_8018F74C();
     BracketEntry* base;
     u8* bb;
-    f32* cam;
     u8* p;
     s32 i;
 
@@ -511,9 +508,7 @@ void fn_8018B090(HSD_GObj* arg0)
                                             (f32) * (s32*) (p + 0x48)));
                             }
                         } else if (i == 0) {
-                            HSD_JObjSetTranslateY(
-                                jobj, -((0.3f * (f32) lbl_804D6630) +
-                                        (f32) * (s32*) (p + 0x48)));
+                            HSD_JObjSetTranslateY(jobj, -GetBracketSlideY(p));
                         } else {
                             HSD_JObjSetTranslateY(
                                 jobj, -((f32) * (s32*) (p + 0x48) -
@@ -527,57 +522,68 @@ void fn_8018B090(HSD_GObj* arg0)
         return;
     case 22:
         base = &lbl_80473AB8[idx];
-        cam = (f32*) ((u8*) &lbl_803D9D20 + 0x8C);
         if (base->x18 != 0) {
             f32 d;
-            cam[0] = 320.0f;
-            cam[1] = -240.0f;
-            cam[2] = 0.0f;
-            cam[3] = (f32) (base->xC + (base->x14 / 2));
-            cam[4] = -(f32) (base->x10 + (base->x18 / 2));
-            cam[5] = -150.0f;
-            d = 0.033333f * (cam[3] - cam[0]);
+            lbl_803D9DAC.current.x = 320.0f;
+            lbl_803D9DAC.current.y = -240.0f;
+            lbl_803D9DAC.current.z = 0.0f;
+            lbl_803D9DAC.target.x = (f32) (base->xC + (base->x14 / 2));
+            lbl_803D9DAC.target.y = -(f32) (base->x10 + (base->x18 / 2));
+            lbl_803D9DAC.target.z = -150.0f;
+            d = 0.033333f * (lbl_803D9DAC.target.x - lbl_803D9DAC.current.x);
             if (d < 0.0f) {
                 d = -d;
             }
-            cam[6] = 1.0f + d;
-            d = 0.033333f * (cam[4] - cam[1]);
+            lbl_803D9DAC.step.x = 1.0f + d;
+            d = 0.033333f * (lbl_803D9DAC.target.y - lbl_803D9DAC.current.y);
             if (d < 0.0f) {
                 d = -d;
             }
-            cam[7] = 1.0f + d;
-            d = 0.033333f * (cam[5] - cam[2]);
+            lbl_803D9DAC.step.y = 1.0f + d;
+            d = 0.033333f * (lbl_803D9DAC.target.z - lbl_803D9DAC.current.z);
             if (d < 0.0f) {
                 d = -d;
             }
-            cam[8] = 1.0f + d;
+            lbl_803D9DAC.step.z = 1.0f + d;
         }
         lbl_804D6630 = 0;
         /* fallthrough */
     case 23:
         base = &lbl_80473AB8[idx];
         bb = (u8*) base;
-        cam = (f32*) ((u8*) &lbl_803D9D20 + 0x8C);
         if (base->x18 != 0) {
             s32 t5 = lbl_804D6630 / 6;
             s32 t3 = t5 >> 0x1F;
             lbl_804D6630 += 1;
-            if (mn_8022F410(&cam[0], &cam[3], cam[6]) < 0) {
-                mn_8022F410(&cam[0], &cam[3], cam[6]);
+            if (mn_8022F410(&lbl_803D9DAC.current.x, &lbl_803D9DAC.target.x,
+                            lbl_803D9DAC.step.x) < 0)
+            {
+                mn_8022F410(&lbl_803D9DAC.current.x, &lbl_803D9DAC.target.x,
+                            lbl_803D9DAC.step.x);
             } else {
-                mn_8022F410(&cam[0], &cam[3], cam[6]);
+                mn_8022F410(&lbl_803D9DAC.current.x, &lbl_803D9DAC.target.x,
+                            lbl_803D9DAC.step.x);
             }
-            if (mn_8022F410(&cam[1], &cam[4], cam[7]) < 0) {
-                mn_8022F410(&cam[1], &cam[4], cam[7]);
+            if (mn_8022F410(&lbl_803D9DAC.current.y, &lbl_803D9DAC.target.y,
+                            lbl_803D9DAC.step.y) < 0)
+            {
+                mn_8022F410(&lbl_803D9DAC.current.y, &lbl_803D9DAC.target.y,
+                            lbl_803D9DAC.step.y);
             } else {
-                mn_8022F410(&cam[1], &cam[4], cam[7]);
+                mn_8022F410(&lbl_803D9DAC.current.y, &lbl_803D9DAC.target.y,
+                            lbl_803D9DAC.step.y);
             }
-            if (mn_8022F410(&cam[2], &cam[5], cam[8]) < 0) {
-                mn_8022F410(&cam[2], &cam[5], cam[8]);
+            if (mn_8022F410(&lbl_803D9DAC.current.z, &lbl_803D9DAC.target.z,
+                            lbl_803D9DAC.step.z) < 0)
+            {
+                mn_8022F410(&lbl_803D9DAC.current.z, &lbl_803D9DAC.target.z,
+                            lbl_803D9DAC.step.z);
             } else {
-                mn_8022F410(&cam[2], &cam[5], cam[8]);
+                mn_8022F410(&lbl_803D9DAC.current.z, &lbl_803D9DAC.target.z,
+                            lbl_803D9DAC.step.z);
             }
-            fn_80190520(cam[0], cam[1], cam[2]);
+            fn_80190520(lbl_803D9DAC.current.x, lbl_803D9DAC.current.y,
+                        lbl_803D9DAC.current.z);
             if (base->x4 != 1) {
                 p = bb;
                 for (i = 0; i < 4; i++, p += 0x2C) {
@@ -764,9 +770,10 @@ void fn_8018B090(HSD_GObj* arg0)
             }
             if (var_r24 == 4) {
                 u8* w = bb + lbl_804D6634 * 0x2C;
-                u8* e = (u8*) &lbl_803D9D20 + tm->entrants * 4;
-                *(s32*) (w + 0x3C) = *(s32*) (e + 0xFC);
-                *(s32*) (w + 0x40) = *(s32*) (e + 0xFE);
+                *(s32*) (w + 0x3C) =
+                    *(s16*) &lbl_803D9D20.x0[tm->entrants * 4 + 0xFC];
+                *(s32*) (w + 0x40) =
+                    *(s16*) &lbl_803D9D20.x0[tm->entrants * 4 + 0xFE];
                 tm->cur_option = 0x22;
                 return;
             }
@@ -825,46 +832,48 @@ void fn_8018B090(HSD_GObj* arg0)
         return;
     case 36:
         base = &lbl_80473AB8[idx];
-        cam = (f32*) ((u8*) &lbl_803D9D20 + 0x8C);
         if (base->x18 != 0) {
             f32 d;
-            cam[0] = (f32) (base->xC + (base->x14 / 2));
-            cam[1] = -(f32) ((base->x18 / 2) + base->x10);
-            cam[2] = -150.0f;
-            cam[3] = 320.0f;
-            cam[4] = -240.0f;
-            cam[5] = 0.0f;
-            d = 0.04f * (cam[3] - cam[0]);
+            lbl_803D9DAC.current.x = (f32) (base->xC + (base->x14 / 2));
+            lbl_803D9DAC.current.y = -(f32) ((base->x18 / 2) + base->x10);
+            lbl_803D9DAC.current.z = -150.0f;
+            lbl_803D9DAC.target.x = 320.0f;
+            lbl_803D9DAC.target.y = -240.0f;
+            lbl_803D9DAC.target.z = 0.0f;
+            d = 0.04f * (lbl_803D9DAC.target.x - lbl_803D9DAC.current.x);
             if (d < 0.0f) {
                 d = -d;
             }
-            cam[6] = d;
-            d = 0.04f * (cam[4] - cam[1]);
+            lbl_803D9DAC.step.x = d;
+            d = 0.04f * (lbl_803D9DAC.target.y - lbl_803D9DAC.current.y);
             if (d < 0.0f) {
                 d = -d;
             }
-            cam[7] = d;
-            d = 0.04f * (cam[5] - cam[2]);
+            lbl_803D9DAC.step.y = d;
+            d = 0.04f * (lbl_803D9DAC.target.z - lbl_803D9DAC.current.z);
             if (d < 0.0f) {
                 d = -d;
             }
-            cam[8] = d;
+            lbl_803D9DAC.step.z = d;
         }
         tm->cur_option = 0x25;
         return;
     case 37:
         base = &lbl_80473AB8[idx];
         (void) base;
-        cam = (f32*) ((u8*) &lbl_803D9D20 + 0x8C);
         if (base->x18 == 0) {
             lbl_804D6630 = 0x78;
         }
         if (lbl_804D6630 < 0x78) {
             lbl_804D6630 += 1;
-            mn_8022F410(&cam[0], &cam[3], cam[6]);
-            mn_8022F410(&cam[1], &cam[4], cam[7]);
-            mn_8022F410(&cam[2], &cam[5], cam[8]);
-            fn_80190520(cam[0], cam[1], cam[2]);
+            mn_8022F410(&lbl_803D9DAC.current.x, &lbl_803D9DAC.target.x,
+                        lbl_803D9DAC.step.x);
+            mn_8022F410(&lbl_803D9DAC.current.y, &lbl_803D9DAC.target.y,
+                        lbl_803D9DAC.step.y);
+            mn_8022F410(&lbl_803D9DAC.current.z, &lbl_803D9DAC.target.z,
+                        lbl_803D9DAC.step.z);
+            fn_80190520(lbl_803D9DAC.current.x, lbl_803D9DAC.current.y,
+                        lbl_803D9DAC.current.z);
             return;
         }
         lbl_804D6630 = 0;
@@ -921,7 +930,6 @@ void fn_8018B090(HSD_GObj* arg0)
 /* 3D9EE8 */ static char lbl_803D9EE8[] = {
     131, 81, 131, 88, 131, 103, 32, 48, 48,
 };
-char* const lbl_804DA6C4 = lbl_803D9EE8;
 /* 3D9EF4 */ static char lbl_803D9EF4[] = {
     130, 103, 130, 108, 130, 109, 32, 48, 48,
 };
@@ -932,20 +940,19 @@ char* const lbl_804DA6C4 = lbl_803D9EE8;
 static GXColor const lbl_804DA67C = { 0xFF, 0xFF, 0, 0xFF };
 
 /// Draws tournament bracket lines for different bracket types (0-3).
-void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
-                 s32 arg6, f32 farg0)
+void fn_8018C8D4(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
+                 s32 arg5, s32 arg6, f32 farg0)
 {
     BracketEntry* data = (BracketEntry*) arg0;
     f32 thickness;
     f32 neg_thickness;
-    f32 total_width;
-    s32 half, center, right;
+    GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8, c9;
     s32 half_h, third_h;
     s32 mid_y, bot_y, two_third_y;
-    GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8, c9;
+    s32 half, center, right, left;
     GXColor c10, c11, c12, c13, c14, c15, c16, c17, c18, c19;
     GXColor c20, c21, c22, c23, c24, c25, c26, c27, c28, c29;
-    GXColor c30, c31, c32, c33;
+    GXColor c30, c31;
 
     c0 = lbl_804DA67C;
     thickness = data->x1C;
@@ -953,74 +960,123 @@ void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     switch ((s32) data->x4) {
     case 0:
         c1 = c0;
-        DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, &c1);
+        {
+            GXColor* color = &c1;
+            DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
+                          color);
+        }
         if (data->x20.g == 0) {
             c2 = data->x20;
-            DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, &c2);
+            {
+                GXColor* color = &c2;
+                DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
+                              color);
+            }
         }
         return;
 
     case 1:
         c3 = c0;
-        DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, &c3);
+        {
+            GXColor* color = &c3;
+            DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
+                          color);
+        }
         if (data->x20.g == 0) {
-            if (data->x4C == 0) {
+            if (data->slots[0].x4C == 0) {
                 half_h = arg4 / 2;
                 c4 = data->x20;
-                DrawRectangle((f32) arg1, (f32) (arg2 + half_h), thickness,
-                              (f32) half_h, &c4);
+                {
+                    GXColor* color = &c4;
+                    DrawRectangle((f32) arg1, (f32) (arg2 + half_h), thickness,
+                                  (f32) half_h, color);
+                }
                 return;
             }
             c5 = data->x20;
-            DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) (arg4 / 2),
-                          &c5);
+            {
+                GXColor* color = &c5;
+                DrawRectangle((f32) arg1, (f32) arg2, thickness,
+                              (f32) (arg4 / 2), color);
+            }
         }
         break;
 
     case 2:
         half = arg3 / 2;
-        (void) half;
         center = arg1 + half;
         half_h = arg4 / 2;
         c6 = c0;
-        DrawRectangle((f32) center, (f32) arg2, thickness, (f32) half_h, &c6);
+        {
+            GXColor* color = &c6;
+            DrawRectangle((f32) center, (f32) arg2, thickness, (f32) half_h,
+                          color);
+        }
 
         neg_thickness = -thickness;
+        left = arg1 + 0x2B;
         mid_y = arg2 + half_h;
         c7 = c0;
-        DrawRectangle((f32) (arg1 + 0x2B), (f32) mid_y,
-                      ((f32) arg3 + thickness) - 43.0, neg_thickness, &c7);
+        {
+            GXColor* color = &c7;
+            DrawRectangle((f32) left, (f32) mid_y,
+                          ((f32) arg3 + thickness) - 43.0f, neg_thickness,
+                          color);
+        }
 
         c8 = c0;
-        DrawRectangle((f32) (arg1 + 0x2B), (f32) mid_y, thickness,
-                      (f32) half_h, &c8);
+        {
+            GXColor* color = &c8;
+            DrawRectangle((f32) (arg1 + 0x2B), (f32) mid_y, thickness,
+                          (f32) half_h, color);
+        }
 
         right = arg1 + arg3;
         c9 = c0;
-        DrawRectangle((f32) right, (f32) mid_y, thickness, (f32) half_h, &c9);
+        {
+            GXColor* color = &c9;
+            DrawRectangle((f32) right, (f32) mid_y, thickness, (f32) half_h,
+                          color);
+        }
 
         if (data->x20.g == 0) {
-            if (data->x4C == 0) {
+            if (data->slots[0].x4C == 0) {
                 c10 = data->x20;
-                DrawRectangle((f32) (arg1 + 0x2B), (f32) mid_y, thickness,
-                              (f32) half_h, &c10);
+                {
+                    GXColor* color = &c10;
+                    DrawRectangle((f32) (arg1 + 0x2B), (f32) mid_y, thickness,
+                                  (f32) half_h, color);
+                }
                 c11 = data->x20;
-                DrawRectangle((f32) (arg1 + 0x2B), (f32) mid_y,
-                              (f32) (half - 0x2B), neg_thickness, &c11);
+                {
+                    GXColor* color = &c11;
+                    DrawRectangle((f32) (arg1 + 0x2B), (f32) mid_y,
+                                  (f32) (half - 0x2B), neg_thickness, color);
+                }
                 return;
             }
-            if (data->x78 == 0) {
+            if (data->slots[1].x4C == 0) {
                 c12 = data->x20;
-                DrawRectangle((f32) right, (f32) mid_y, thickness,
-                              (f32) half_h, &c12);
+                {
+                    GXColor* color = &c12;
+                    DrawRectangle((f32) right, (f32) mid_y, thickness,
+                                  (f32) half_h, color);
+                }
                 c13 = data->x20;
-                DrawRectangle((f32) center, (f32) mid_y,
-                              (f32) half + thickness, neg_thickness, &c13);
+                {
+                    GXColor* color = &c13;
+                    DrawRectangle((f32) center, (f32) mid_y,
+                                  (f32) half + thickness, neg_thickness,
+                                  color);
+                }
                 return;
             }
             c14 = data->x20;
-            DrawRectangle((f32) center, (f32) arg2, thickness, (f32) half_h,
-                          &c14);
+            {
+                GXColor* color = &c14;
+                DrawRectangle((f32) center, (f32) arg2, thickness,
+                              (f32) half_h, color);
+            }
         }
         break;
 
@@ -1031,82 +1087,144 @@ void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
         mid_y = arg2 + third_h;
 
         c15 = c0;
-        DrawRectangle((f32) center, (f32) mid_y, thickness,
-                      (f32) (third_h - 2), &c15);
+        {
+            GXColor* color = &c15;
+            {
+                f32 tmp_p34770 = (f32) center;
+                DrawRectangle(tmp_p34770, (f32) mid_y, thickness,
+                              (f32) (third_h - 2), color);
+            }
+        }
 
         c16 = c0;
-        DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) third_h, &c16);
+        {
+            GXColor* color = &c16;
+            DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) third_h,
+                          color);
+        }
 
         right = arg1 + arg3;
         c17 = c0;
-        DrawRectangle((f32) right, (f32) arg2, thickness, (f32) third_h, &c17);
+        {
+            GXColor* color = &c17;
+            DrawRectangle((f32) right, (f32) arg2, thickness, (f32) third_h,
+                          color);
+        }
 
         bot_y = (arg2 + arg4) - third_h;
         c18 = c0;
-        DrawRectangle((f32) arg1, (f32) bot_y, thickness, (f32) third_h, &c18);
+        {
+            GXColor* color = &c18;
+            DrawRectangle((f32) arg1, (f32) bot_y, thickness, (f32) third_h,
+                          color);
+        }
 
         c19 = c0;
-        DrawRectangle((f32) right, (f32) bot_y, thickness, (f32) third_h,
-                      &c19);
+        {
+            GXColor* color = &c19;
+            DrawRectangle((f32) right, (f32) bot_y, thickness, (f32) third_h,
+                          color);
+        }
 
         neg_thickness = -thickness;
-        total_width = (f32) arg3 + thickness;
         c20 = c0;
-        DrawRectangle((f32) arg1, (f32) mid_y, total_width, neg_thickness,
-                      &c20);
+        {
+            GXColor* color = &c20;
+            DrawRectangle((f32) arg1, (f32) mid_y, (f32) arg3 + thickness,
+                          neg_thickness, color);
+        }
 
         c21 = c0;
-        DrawRectangle((f32) arg1, (f32) bot_y, total_width, neg_thickness,
-                      &c21);
+        {
+            GXColor* color = &c21;
+            DrawRectangle((f32) arg1, (f32) bot_y, (f32) arg3 + thickness,
+                          neg_thickness, color);
+        }
 
         if (data->x20.g == 0) {
-            if (data->x4C == 0) {
-                two_third_y = arg2 + ((arg4 * 2) / 3);
+            if (data->slots[0].x4C == 0) {
                 c22 = data->x20;
-                DrawRectangle((f32) arg1, (f32) two_third_y, thickness,
-                              (f32) third_h, &c22);
-                c23 = data->x20;
-                DrawRectangle((f32) arg1, (f32) two_third_y, (f32) half,
-                              neg_thickness, &c23);
-                c24 = data->x20;
-                DrawRectangle((f32) center, (f32) (arg2 + (arg4 / 2)),
-                              thickness, (f32) ((arg4 / 6) - 1), &c24);
-                return;
-            }
-            if (data->x78 == 0) {
                 two_third_y = arg2 + ((arg4 * 2) / 3);
-                c25 = data->x20;
-                DrawRectangle((f32) right, (f32) two_third_y, thickness,
-                              (f32) third_h, &c25);
-                c26 = data->x20;
-                DrawRectangle((f32) center, (f32) two_third_y, (f32) half,
-                              neg_thickness, &c26);
-                c27 = data->x20;
-                DrawRectangle((f32) center, (f32) (arg2 + (arg4 / 2)),
-                              thickness, (f32) ((arg4 / 6) - 1), &c27);
+                {
+                    GXColor* color = &c22;
+                    DrawRectangle((f32) arg1, (f32) two_third_y, thickness,
+                                  (f32) third_h, color);
+                }
+                c23 = data->x20;
+                {
+                    GXColor* color = &c23;
+                    DrawRectangle((f32) arg1, (f32) two_third_y, (f32) half,
+                                  neg_thickness, color);
+                }
+                c24 = data->x20;
+                {
+                    GXColor* color = &c24;
+                    DrawRectangle((f32) center, (f32) (arg2 + (arg4 / 2)),
+                                  thickness, (f32) ((arg4 / 6) - 1), color);
+                }
                 return;
             }
-            if (data->xA4 == 0) {
+            if (data->slots[1].x4C == 0) {
+                c25 = data->x20;
+                two_third_y = arg2 + ((arg4 * 2) / 3);
+                {
+                    GXColor* color = &c25;
+                    DrawRectangle((f32) right, (f32) two_third_y, thickness,
+                                  (f32) third_h, color);
+                }
+                c26 = data->x20;
+                {
+                    GXColor* color = &c26;
+                    DrawRectangle((f32) center, (f32) two_third_y, (f32) half,
+                                  neg_thickness, color);
+                }
+                c27 = data->x20;
+                {
+                    GXColor* color = &c27;
+                    DrawRectangle((f32) center, (f32) (arg2 + (arg4 / 2)),
+                                  thickness, (f32) ((arg4 / 6) - 1), color);
+                }
+                return;
+            }
+            if (data->slots[2].x4C == 0) {
                 c28 = data->x20;
-                DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) third_h,
-                              &c28);
+                {
+                    GXColor* color = &c28;
+                    DrawRectangle((f32) arg1, (f32) arg2, thickness,
+                                  (f32) third_h, color);
+                }
                 c29 = data->x20;
-                DrawRectangle((f32) arg1, (f32) mid_y, (f32) half,
-                              neg_thickness, &c29);
+                {
+                    GXColor* color = &c29;
+                    DrawRectangle((f32) arg1, (f32) mid_y, (f32) half,
+                                  neg_thickness, color);
+                }
                 c30 = data->x20;
-                DrawRectangle((f32) center, (f32) mid_y, thickness,
-                              (f32) ((arg4 / 6) - 1), &c30);
+                {
+                    GXColor* color = &c30;
+                    DrawRectangle((f32) center, (f32) mid_y, thickness,
+                                  (f32) ((arg4 / 6) - 1), color);
+                }
                 return;
             }
             c31 = data->x20;
-            DrawRectangle((f32) right, (f32) arg2, thickness, (f32) third_h,
-                          &c31);
-            c32 = data->x20;
-            DrawRectangle((f32) center, (f32) mid_y, (f32) half, neg_thickness,
-                          &c32);
-            c33 = data->x20;
-            DrawRectangle((f32) center, (f32) mid_y, thickness,
-                          (f32) ((arg4 / 6) - 1), &c33);
+            {
+                GXColor* color = &c31;
+                DrawRectangle((f32) right, (f32) arg2, thickness,
+                              (f32) third_h, color);
+            }
+            c2 = data->x20;
+            {
+                GXColor* color = &c2;
+                DrawRectangle((f32) center, (f32) mid_y, (f32) half,
+                              neg_thickness, color);
+            }
+            c3 = data->x20;
+            {
+                GXColor* color = &c3;
+                DrawRectangle((f32) center, (f32) mid_y, thickness,
+                              (f32) ((arg4 / 6) - 1), color);
+            }
         }
         break;
     }
@@ -1115,8 +1233,8 @@ void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
 static GXColor const lbl_804DA684 = { 255, 255, 0, 255 };
 
 /// Draws tournament bracket connector lines with optional tail segments.
-void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
-                 s32 arg6, f32 farg0)
+void fn_8018D50C(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
+                 s32 arg5, s32 arg6, f32 farg0)
 {
     TmData* tm;
     BracketEntry* data = (BracketEntry*) arg0;
@@ -1125,10 +1243,9 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     s32 right;
     s32 bottom;
     GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8, c9;
-    GXColor c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20;
+    GXColor c10, c11, c12, c13, c14, c15, c16, c17, c18;
 
-    tm = gm_8018F634();
-    c20 = lbl_804DA684;
+    tm = gm_GetTournamentData();
     c0 = lbl_804DA684;
     thickness = data->x1C;
     c1 = lbl_804DA684;
@@ -1137,7 +1254,7 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
         DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, color);
     }
 
-    right = arg3 + arg1;
+    right = arg1 + arg3;
     c2 = c0;
     {
         GXColor* color = &c2;
@@ -1153,7 +1270,7 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     }
 
     if (data->x20.g == 0) {
-        if (data->x4C == 0) {
+        if (data->slots[0].x4C == 0) {
             c4 = data->x20;
             {
                 GXColor* color = &c4;
@@ -1179,8 +1296,7 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                 c7 = data->x20;
                 {
                     GXColor* color = &c7;
-                    f32 y = (f32) arg5;
-                    DrawRectangle((f32) (arg1 + half2), y,
+                    DrawRectangle((f32) (arg1 + half2), (f32) arg5,
                                   (f32) half2 + thickness, neg_thickness,
                                   color);
                 }
@@ -1189,7 +1305,7 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     }
 
     if (tm->entrants == 1) {
-        if (data->x5E != 0) {
+        if (data->slots[1].x32 != 0) {
             bottom = arg2 + arg4;
             c8 = c0;
             {
@@ -1197,7 +1313,7 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                 DrawRectangle((f32) right, (f32) bottom, thickness, -70.0f,
                               color);
             }
-            if (data->x20.g == 0 && data->x4C != 0) {
+            if (data->x20.g == 0 && data->slots[0].x4C != 0) {
                 c9 = data->x20;
                 DrawRectangle((f32) right, (f32) bottom, thickness, -70.0f,
                               &c9);
@@ -1205,7 +1321,7 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
         }
         return;
     } else if (tm->entrants == 3) {
-        if (data->x32 != 0) {
+        if (data->slots[0].x32 != 0) {
             bottom = arg2 + arg4;
             c10 = c0;
             {
@@ -1213,12 +1329,12 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                 DrawRectangle((f32) arg1, (f32) bottom, thickness, -60.0f,
                               color);
             }
-            if (data->x20.g == 0 && data->x4C == 0) {
+            if (data->x20.g == 0 && data->slots[0].x4C == 0) {
                 c11 = data->x20;
                 DrawRectangle((f32) arg1, (f32) bottom, thickness, -60.0f,
                               &c11);
             }
-        } else if (data->x5E != 0) {
+        } else if (data->slots[1].x32 != 0) {
             bottom = arg2 + arg4;
             c12 = c0;
             {
@@ -1226,14 +1342,14 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                 DrawRectangle((f32) right, (f32) bottom, thickness, -60.0f,
                               color);
             }
-            if (data->x20.g == 0 && data->x4C != 0) {
+            if (data->x20.g == 0 && data->slots[0].x4C != 0) {
                 c13 = data->x20;
                 DrawRectangle((f32) right, (f32) bottom, thickness, -60.0f,
                               &c13);
             }
         }
     } else if (tm->entrants == 5) {
-        if (data->x5E != 0) {
+        if (data->slots[1].x32 != 0) {
             bottom = arg2 + arg4;
             c14 = c0;
             {
@@ -1241,14 +1357,14 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                 DrawRectangle((f32) right, (f32) bottom, thickness, -40.0f,
                               color);
             }
-            if (data->x20.g == 0 && data->x4C != 0) {
+            if (data->x20.g == 0 && data->slots[0].x4C != 0) {
                 c15 = data->x20;
                 DrawRectangle((f32) right, (f32) bottom, thickness, -40.0f,
                               &c15);
             }
         }
     } else if (tm->entrants == 7) {
-        if (data->x5E != 0) {
+        if (data->slots[1].x32 != 0) {
             if (data->x2 == 0) {
                 bottom = arg2 + arg4;
                 c16 = c0;
@@ -1257,7 +1373,7 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                     DrawRectangle((f32) right, (f32) bottom, thickness, -30.0f,
                                   color);
                 }
-                if (data->x20.g == 0 && data->x4C != 0) {
+                if (data->x20.g == 0 && data->slots[0].x4C != 0) {
                     c17 = data->x20;
                     {
                         GXColor* color = &c17;
@@ -1273,10 +1389,10 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                     DrawRectangle((f32) right, (f32) bottom, thickness, -30.0f,
                                   color);
                 }
-                if (data->x20.g == 0 && data->x4C != 0) {
-                    c19 = data->x20;
+                if (data->x20.g == 0 && data->slots[0].x4C != 0) {
+                    c17 = data->x20;
                     DrawRectangle((f32) right, (f32) bottom, thickness, -30.0f,
-                                  &c19);
+                                  &c17);
                 }
             }
         }
@@ -1285,150 +1401,193 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
 
 static GXColor const col = { 0xFF, 0xFF, 0x00, 0xFF };
 
-void fn_8018DC18(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
-                 s32 arg6, f32 farg0)
+static inline int fn_8018DC18_inline0(BracketEntry* data)
 {
-    // TODO: Make arg0 BracketEntry (forward.h? idk how that works)
-    BracketEntry* data = (BracketEntry*) arg0;
+    return data->x20.g;
+}
+
+void fn_8018DC18(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
+                 s32 arg5, s32 arg6, f32 farg0)
+{
     f32 thickness;
     f32 neg_thickness;
     s32 right;
     s32 half;
     s32 center;
-    GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8;
+    GXColor c0, c1, c2, c3, c4, c5, c6, c7;
 
-    c8 = col;
-    thickness = data->x1C;
-    c1 = col;
-    DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, &c1);
+    c0 = col;
+    thickness = arg0->x1C;
+    c1 = c0;
+    {
+        GXColor* color = &c1;
+        DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, color);
+    }
 
     right = arg1 + arg3;
-    c2 = c8;
-    DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4, &c2);
+    c2 = c0;
+    {
+        GXColor* color = &c2;
+        DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4, color);
+    }
 
     half = arg3 / 2;
     center = arg1 + half;
-    c3 = c8;
-    DrawRectangle((f32) center, (f32) arg2, thickness, (f32) arg4, &c3);
+    c3 = c0;
+    {
+        GXColor* color = &c3;
+        DrawRectangle((f32) center, (f32) arg2, thickness, (f32) arg4, color);
+    }
 
     neg_thickness = -thickness;
-    c4 = c8;
-    DrawRectangle((f32) arg1, (f32) arg5, (f32) arg3 + thickness,
-                  neg_thickness, &c4);
+    c4 = c0;
+    {
+        GXColor* color = &c4;
+        DrawRectangle((f32) arg1, (f32) arg5, (f32) arg3 + thickness,
+                      neg_thickness, color);
+    }
 
-    if (data->x20.g == 0) {
-        if (data->x4C == 0) {
-            c5 = data->x20;
-            DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, &c5);
-            c6 = data->x20;
-            DrawRectangle((f32) arg1, (f32) arg5, (f32) half + thickness,
-                          neg_thickness, &c6);
+    if (arg0->x20.g == 0) {
+        if (arg0->slots[0].x4C == 0) {
+            GXColor* entry_color = &arg0->x20;
+            c5 = *entry_color;
+            DrawRectangle(arg1, arg2, thickness, arg4, &c5);
+            c6 = *entry_color;
+            DrawRectangle(arg1, arg5, half + thickness, neg_thickness, &c6);
             return;
         }
-        if (data->x78 == 0) {
-            c7 = data->x20;
-            DrawRectangle((f32) center, (f32) arg2, thickness, (f32) arg4,
-                          &c7);
+        if (arg0->slots[1].x4C == 0) {
+            c7 = arg0->x20;
+            {
+                GXColor* color = &c7;
+                DrawRectangle(center, arg2, thickness, arg4, color);
+            }
             return;
         }
-        c0 = data->x20;
-        DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4, &c0);
-        c8 = data->x20;
-        DrawRectangle((f32) center, (f32) arg5, (f32) half + thickness,
-                      neg_thickness, &c8);
+        {
+            GXColor* entry_color = &arg0->x20;
+            c7 = *entry_color;
+            DrawRectangle(right, arg2, thickness, arg4, &c7);
+            c7 = *entry_color;
+            DrawRectangle(center, arg5, half + thickness, neg_thickness, &c7);
+        }
     }
 }
 
 static const GXColor lbl_804DA69C = { 255, 255, 0, 255 };
 
-void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
-                 s32 arg6, f32 farg0)
+void fn_8018DF68(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
+                 s32 arg5, s32 arg6, f32 farg0)
 {
-    BracketEntry* data = (BracketEntry*) arg0;
-    GXColor sp58;
-    GXColor sp54;
-    GXColor sp50;
-    GXColor sp4C;
-    GXColor sp48;
-    GXColor sp44;
-    GXColor sp40;
-    GXColor sp3C;
-    GXColor sp38;
-    GXColor sp34;
-    GXColor sp30;
-    GXColor sp2C;
-    GXColor sp28;
-    GXColor sp24;
-    GXColor sp20;
-    f32 thickness;
+    GXColor right_color;
+    GXColor left_third_color;
+    GXColor line_color;
+    GXColor first_color;
+    GXColor slot3_vertical_color;
+    GXColor slot0_horizontal_color;
+    GXColor right_third_color;
+    GXColor horizontal_color;
+    GXColor slot0_vertical_color;
+    GXColor slot3_horizontal_color;
     f32 neg_thickness;
+    f32 thickness;
     s32 right;
     s32 third;
     s32 left_third;
     s32 right_third;
     s32 half;
 
-    sp20 = lbl_804DA69C;
-    sp58 = sp20;
-    thickness = data->x1C;
-    sp54 = sp20;
-    DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, &sp54);
+    line_color = lbl_804DA69C;
+    thickness = arg0->x1C;
+    first_color = line_color;
+    {
+        GXColor* color = &first_color;
+        DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, color);
+    }
 
     right = arg1 + arg3;
-    sp50 = sp58;
-    DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4, &sp50);
+    right_color = line_color;
+    {
+        GXColor* color = &right_color;
+        DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4, color);
+    }
 
     third = arg3 / 3;
     left_third = arg1 + third;
-    sp4C = sp58;
-    DrawRectangle((f32) left_third, (f32) arg2, thickness, (f32) arg4, &sp4C);
+    left_third_color = line_color;
+    {
+        f32 x = (f32) left_third;
+        DrawRectangle(x, (f32) arg2, thickness, (f32) arg4, &left_third_color);
+    }
 
     right_third = right - third;
-    sp48 = sp58;
-    DrawRectangle((f32) right_third, (f32) arg2, thickness, (f32) arg4, &sp48);
+    right_third_color = line_color;
+    {
+        GXColor* color = &right_third_color;
+        DrawRectangle((f32) right_third, (f32) arg2, thickness, (f32) arg4,
+                      color);
+    }
 
     neg_thickness = -thickness;
-    sp44 = sp58;
+    horizontal_color = line_color;
     DrawRectangle((f32) arg1, (f32) arg5, (f32) arg3 + thickness,
-                  neg_thickness, &sp44);
+                  neg_thickness, &horizontal_color);
 
-    if (data->x20.g == 0) {
-        if (data->x4C == 0) {
-            sp40 = data->x20;
-            DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
-                          &sp40);
-            sp3C = data->x20;
-            DrawRectangle((f32) arg1, (f32) arg5, (f32) (arg3 / 2) + thickness,
-                          neg_thickness, &sp3C);
+    if (arg0->x20.g == 0) {
+        if (arg0->slots[0].x4C == 0) {
+            GXColor* entry_color = &arg0->x20;
+            slot0_vertical_color = *entry_color;
+            DrawRectangle(arg1, arg2, thickness, arg4, &slot0_vertical_color);
+            slot0_horizontal_color = *entry_color;
+            DrawRectangle(arg1, arg5, (arg3 / 2) + thickness, neg_thickness,
+                          &slot0_horizontal_color);
             return;
         }
-        if (data->x78 == 0) {
-            sp38 = data->x20;
-            DrawRectangle((f32) left_third, (f32) arg2, thickness, (f32) arg4,
-                          &sp38);
-            sp34 = data->x20;
-            DrawRectangle((f32) left_third, (f32) arg5,
-                          ((f32) (arg3 / 2) + thickness) - (f32) third,
-                          neg_thickness, &sp34);
+        if (arg0->slots[1].x4C == 0) {
+            GXColor slot1_vertical_color;
+            GXColor slot1_horizontal_color;
+            GXColor* entry_color = &arg0->x20;
+            slot1_vertical_color = *entry_color;
+            DrawRectangle(left_third, arg2, thickness, arg4,
+                          &slot1_vertical_color);
+            slot1_horizontal_color = *entry_color;
+            {
+                GXColor* color = &slot1_horizontal_color;
+                DrawRectangle(left_third, arg5,
+                              ((arg3 / 2) + thickness) - third, neg_thickness,
+                              color);
+            }
             return;
         }
-        if (data->xA4 == 0) {
-            sp30 = data->x20;
-            DrawRectangle((f32) right_third, (f32) arg2, thickness, (f32) arg4,
-                          &sp30);
+        if (arg0->slots[2].x4C == 0) {
+            GXColor slot2_horizontal_color;
+            GXColor slot2_vertical_color;
+            GXColor* entry_color = &arg0->x20;
+            slot2_vertical_color = *entry_color;
+            DrawRectangle(right_third, arg2, thickness, arg4,
+                          &slot2_vertical_color);
             half = arg3 / 2;
-            sp2C = data->x20;
-            DrawRectangle((f32) (arg1 + half), (f32) arg5,
-                          ((f32) half + thickness) - (f32) third,
-                          neg_thickness, &sp2C);
+            slot2_horizontal_color = *entry_color;
+            {
+                f32 y = arg5;
+                DrawRectangle((arg1 + half), y, (half + thickness) - third,
+                              neg_thickness, &slot2_horizontal_color);
+            }
             return;
         }
-        sp28 = data->x20;
-        DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4, &sp28);
-        half = arg3 / 2;
-        sp24 = data->x20;
-        DrawRectangle((f32) (arg1 + half), (f32) arg5, (f32) half + thickness,
-                      neg_thickness, &sp24);
+        {
+            GXColor* entry_color = &arg0->x20;
+            slot3_vertical_color = *entry_color;
+            DrawRectangle(right, arg2, thickness, arg4, &slot3_vertical_color);
+            half = arg3 / 2;
+            slot3_horizontal_color = *entry_color;
+        }
+        {
+            f32 y = arg5;
+            GXColor* color = &slot3_horizontal_color;
+            DrawRectangle((arg1 + half), y, half + thickness, neg_thickness,
+                          color);
+        }
     }
 }
 
@@ -1501,10 +1660,10 @@ void fn_8018E618(int arg0, f32 farg0, int arg1)
     for (i = 0; i < 0x40; i++) {
         if (arg1 != 0) {
             lbl_80473AB8[i].x0 = 0;
-            lbl_80473AB8[i].x4E = 3;
-            lbl_80473AB8[i].x7A = 3;
-            lbl_80473AB8[i].xA6 = 3;
-            lbl_80473AB8[i].xD2 = 3;
+            lbl_80473AB8[i].slots[0].x4E = 3;
+            lbl_80473AB8[i].slots[1].x4E = 3;
+            lbl_80473AB8[i].slots[2].x4E = 3;
+            lbl_80473AB8[i].slots[3].x4E = 3;
         }
     }
 
@@ -1515,10 +1674,12 @@ void fn_8018E618(int arg0, f32 farg0, int arg1)
             struct lbl_803D9DD0_t cobj_data;
         } CObjData;
         HSD_CObj* cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) &cam);
-        CObjData* cobj_data = (CObjData*) lbl_803D9DAC;
+        CObjData* cobj_data = (CObjData*) &lbl_803D9DAC;
         cobj_data->cobj_data.cobj = cobj;
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B,
-                                cobj_data->cobj_data.cobj);
+        {
+            HSD_CObj** cobj_ptr = &cobj_data->cobj_data.cobj;
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, *cobj_ptr);
+        }
     }
     GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 1);
     ((u32*) &gobj->gxlink_prios)[1] = 0x10;
@@ -1534,7 +1695,6 @@ void fn_8018E618(int arg0, f32 farg0, int arg1)
 void fn_8018E85C(DynamicModelDesc* model, s32 flag)
 {
     u8* sub;
-    BracketEntry* entry;
     TmData* td;
     HSD_JObj* jobj;
     s32 outer_idx;
@@ -1548,17 +1708,16 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
     f32 pos;
     f32 pos_multiplier;
 
-    td = gm_8018F634();
+    td = gm_GetTournamentData();
     bracket_idx = 0;
-    entry = lbl_80473AB8;
 
     for (outer_idx = 0; outer_idx < 0x40; outer_idx++) {
-        if (entry->x0 == 0) {
+        if (lbl_80473AB8[outer_idx].x0 == 0) {
             goto next_entry;
         }
         inner_idx = 0;
-        sub = (u8*) entry;
         for (; inner_idx < 4; inner_idx++) {
+            sub = &lbl_80473AB8[outer_idx].x0 + inner_idx * 0x2C;
             if (sub[0x30] == 0) {
                 goto next_sub;
             }
@@ -1614,13 +1773,13 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
                             -(f32) * (s32*) (sub + 0x48), 666.0f);
             }
 
-        next_sub:
-            sub += 0x2C;
+        next_sub:;
         }
-    next_entry:
-        entry++;
+    next_entry:;
     }
 }
+
+char* const lbl_804DA6C4 = lbl_803D9EE8;
 
 #pragma push
 #pragma auto_inline off
@@ -1648,7 +1807,7 @@ void fn_8018ECA8(s32 char_id, s32 name_type, s32 jobj_idx1, f32 pos_x,
     TmData* tm;
     s32 num;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
 
     hmn_texts[0] = lbl_804DA6B4;
     cpu_texts[0] = lbl_804DA6BC;
@@ -1764,7 +1923,7 @@ s32 gm_8018F1B0(MatchEnd* me)
 {
     TmData* tm;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
 
     switch (gm_804771C4.match_type) {
     case 0:
@@ -1862,20 +2021,16 @@ int fn_8018F3D0(int arg0)
 
 int fn_8018F410(void)
 {
-    int temp_r3;
-    int* temp_r30;
-    int* temp_r29;
+    int char_id;
 
-    temp_r30 = &lbl_803D9F0C.x8;
-    temp_r29 = &lbl_803D9F0C.x4;
     do {
-        temp_r3 = HSD_Randi(0x19);
-    } while (lbl_803D9D20.x72[temp_r3] == 0 || lbl_803D9F0C.x0 == temp_r3 ||
-             *temp_r29 == temp_r3 || *temp_r30 == temp_r3);
-    *temp_r30 = *temp_r29;
-    *temp_r29 = lbl_803D9F0C.x0;
-    lbl_803D9F0C.x0 = temp_r3;
-    return temp_r3;
+        char_id = HSD_Randi(0x19);
+    } while (lbl_803D9D20.x72[char_id] == 0 || lbl_803D9F0C.x0 == char_id ||
+             lbl_803D9F0C.x4 == char_id || lbl_803D9F0C.x8 == char_id);
+    lbl_803D9F0C.x8 = lbl_803D9F0C.x4;
+    lbl_803D9F0C.x4 = lbl_803D9F0C.x0;
+    lbl_803D9F0C.x0 = char_id;
+    return char_id;
 }
 
 /// #fn_8018F410
@@ -1889,6 +2044,7 @@ int fn_8018F4A0(void)
         printf("This is impossible stage num from mnSelStageRandom() -> stage "
                "%d \n",
                temp_r3);
+        /// @todo No byte-matching HSD assert macro form.
         __assert("gmtoulib.c", 0x53D, "0");
     }
     return temp_r3;
@@ -1960,7 +2116,7 @@ u32 fn_8018F62C(HSD_GObj* gobj)
 
 #pragma push
 #pragma dont_inline on
-TmData* gm_8018F634(void)
+TmData* gm_GetTournamentData(void)
 {
     return &gm_804771C4;
 }
@@ -2083,7 +2239,7 @@ void fn_8018F888(void)
 
     lbl_80473AB8[i].x20.g = 0;
 
-    if (gm_804771C4.x33 != 5) {
+    if (gm_804771C4.x37[0].x8 != 5) {
         return;
     }
 
@@ -2092,6 +2248,17 @@ void fn_8018F888(void)
     lbl_80473AB8[i + 1].x20.g = 0;
 }
 #pragma pop
+
+static inline int fn_8018FA24_inline0(int char_kind)
+{
+    if (char_kind < 0x13) {
+        return char_kind;
+    }
+    if (char_kind == 0x1D) {
+        return 5;
+    }
+    return char_kind + 1;
+}
 
 void fn_8018FA24(void)
 {
@@ -2102,7 +2269,6 @@ void fn_8018FA24(void)
     s32 player_count;
     s32 i;
     BracketEntry* entry;
-    s32 char_kind;
 
     PAD_STACK(8);
 
@@ -2126,21 +2292,12 @@ void fn_8018FA24(void)
         dst[0x4BC] = ptr[0x51];
         dst[0x4BD] = ptr[0x52];
         dst[0x4B9] = ptr[0x4D];
-        char_kind = dst[0x4B9];
-        if (char_kind >= 0x13) {
-            if (char_kind == 0x1D) {
-                char_kind = 5;
-            } else {
-                char_kind += 1;
-            }
-        }
-        Player_SetPlayerCharacter(player_idx, char_kind);
+        Player_SetPlayerCharacter(player_idx, fn_8018FA24_inline0(dst[0x4B9]));
         dst[0x4B8] = ptr[0x4E];
-        char_kind = dst[0x4B8];
-        if ((u32) char_kind != 3) {
+        if (dst[0x4B8] != 3) {
             player_count += 1;
         }
-        Player_SetSlottype(player_idx, char_kind);
+        Player_SetSlottype(player_idx, dst[0x4B8]);
         dst[0x4BB] = ptr[0x4F];
         Player_SetCostumeId(player_idx, dst[0x4BB]);
         dst[0x4BC] = ptr[0x51];
@@ -2159,23 +2316,26 @@ void fn_8018FBD8(void* arg0, s32 arg1)
 }
 #pragma pop
 
-void fn_8018FBE0(s32 arg0, s32 arg1, s32 arg2, s8 arg3, s8 arg4, s16 arg5,
-                 s8 arg6)
+void fn_8018FBE0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
+                 s32 arg6)
 {
     s32 i;
 
-    PAD_STACK(8);
-
-    gm_804771C4.cur_option = arg0;
-    gm_804771C4.x1C = arg1;
-    gm_804771C4.x20 = arg2;
+    ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->cur_option = arg0;
+    ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x1C = arg1;
+    ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x20 = arg2;
 
     for (i = 0; 64 > i; i++) {
-        gm_804771C4.x37[i].x2 = (u8) arg3;
-        gm_804771C4.x37[i].x1 = (u8) arg4;
-        gm_804771C4.x37[i].xD = (u8) i;
-        gm_804771C4.x37[i].x9 = (u16) arg5;
-        gm_804771C4.x37[i].x0 = (u8) arg6;
+        ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x37[i].x2 =
+            (u8) arg3;
+        ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x37[i].x1 =
+            (u8) arg4;
+        ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x37[i].xD =
+            (u8) i;
+        ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x37[i].x9 =
+            (u16) arg5;
+        ((TmData*) &((BracketData*) lbl_80473AB8)->srcs[3])->x37[i].x0 =
+            (u8) arg6;
     }
 }
 
@@ -2356,10 +2516,10 @@ static inline int gm_801905F0_inline0(int c_kind)
 
 void gm_801905F0(StartMeleeData* arg0)
 {
-    int i;
     u8 _padA[8];
+    int i;
     TmData* tm = &gm_804771C4;
-    GameRules* temp_r31 = gmMainLib_8015CC34();
+    GameRules* rules = gmMainLib_GetGameRules();
     TmVsData sp18;
 
     gm_80168FC4();
@@ -2367,26 +2527,26 @@ void gm_801905F0(StartMeleeData* arg0)
     arg0->rules.is_teams = false;
     arg0->rules.xE = tm->x28;
     fn_801640B0(&arg0->rules.x20);
-    arg0->rules.x0_0 = temp_r31->mode;
-    if (temp_r31->mode != 1) {
+    arg0->rules.x0_0 = rules->mode;
+    if (rules->mode != 1) {
         arg0->rules.x0_6 = true;
-    } else if (temp_r31->stock_time_limit != 0) {
+    } else if (rules->stock_time_limit != 0) {
         arg0->rules.x0_6 = true;
     } else {
         arg0->rules.x0_6 = false;
     }
     if (arg0->rules.x0_6) {
-        if (temp_r31->mode != 1) {
-            if (temp_r31->time_limit == 0) {
+        if (rules->mode != 1) {
+            if (rules->time_limit == 0) {
                 arg0->rules.x10 = 99 * 60;
             } else {
-                arg0->rules.x10 = temp_r31->time_limit * 60;
+                arg0->rules.x10 = rules->time_limit * 60;
             }
         } else {
-            if (temp_r31->stock_time_limit == 0) {
+            if (rules->stock_time_limit == 0) {
                 arg0->rules.x10 = 99 * 60;
             } else {
-                arg0->rules.x10 = temp_r31->stock_time_limit * 60;
+                arg0->rules.x10 = rules->stock_time_limit * 60;
             }
         }
     }
@@ -2400,7 +2560,7 @@ void gm_801905F0(StartMeleeData* arg0)
     arg0->rules.x2_2 = false;
     arg0->rules.x18 = 0;
     arg0->rules.x34 = 1.0f;
-    arg0->rules.x30 = fn_801653E8(temp_r31->damage_ratio);
+    arg0->rules.x30 = fn_801653E8(rules->damage_ratio);
     arg0->rules.x3_4 = false;
     arg0->rules.x3_5 = false;
     arg0->rules.x3_2 = false;
@@ -2416,12 +2576,12 @@ void gm_801905F0(StartMeleeData* arg0)
         arg0->rules.xC = -2;
         break;
     }
-    if (temp_r31->pause != 0) {
+    if (rules->pause != 0) {
         arg0->rules.disable_pausing = false;
     } else {
         arg0->rules.disable_pausing = true;
     }
-    if (temp_r31->score_display != 0 && !arg0->rules.x0_0) {
+    if (rules->score_display != 0 && !arg0->rules.x0_0) {
         arg0->rules.x3_0 = true;
     } else {
         arg0->rules.x3_0 = false;
@@ -2441,7 +2601,7 @@ void gm_801905F0(StartMeleeData* arg0)
                 arg0->players[i].color = tm->x4B8[i].x3;
             }
             arg0->players[i].slot_type = tm->x4B8[i].x0;
-            arg0->players[i].stocks = temp_r31->stock_count;
+            arg0->players[i].stocks = rules->stock_count;
             arg0->players[i].sub_color = 0;
             arg0->players[i].team = 0xFF;
             arg0->players[i].xC_b0 = gm_801677F8(i, arg0->players[i].xA);
@@ -2451,7 +2611,7 @@ void gm_801905F0(StartMeleeData* arg0)
             arg0->players[i].xE = 4;
             arg0->players[i].cpu_level = tm->x4B8[i].x4;
             arg0->players[i].x12 = 0;
-            if (gmMainLib_8015CC34()->handicap != 0) {
+            if (gmMainLib_GetGameRules()->handicap != 0) {
                 arg0->players[i].x18 = fn_8016419C(tm->x4B8[i].x5);
                 arg0->players[i].x1C = fn_801641B4(tm->x4B8[i].x5);
             } else {

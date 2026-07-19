@@ -91,8 +91,7 @@ void itHassam_802CDCB4(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
 
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     it_8027A13C(gobj);
     it_8027A160(ip->xBBC_dynamicBoneTable->bones[2], ip);
 }
@@ -211,8 +210,7 @@ void itHassam_802CE008(Item_GObj* gobj)
     itHassam_ItemVars* attr = ip->xC4_article_data->x4_specialAttributes;
 
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     it_8027A160(ip->xBBC_dynamicBoneTable->bones[2], ip);
     ip->xD44_lifeTimer = attr->x18;
     ip->x40_vel.x = attr->x4 * ip->facing_dir;
@@ -231,8 +229,7 @@ bool itHassam_UnkMotion1_Anim(Item_GObj* gobj)
     attr = ip->xC4_article_data->x4_specialAttributes;
     if (it_80272C6C(gobj) == false) {
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-        ip->entered_hitlag = efLib_PauseAll;
-        ip->exited_hitlag = efLib_ResumeAll;
+        Item_SetEffectHitlagCallbacks(ip);
     }
     it_8027A160(ip->xBBC_dynamicBoneTable->bones[2], ip);
     if (ip->xDB0_itcmd_var1 != 0) {

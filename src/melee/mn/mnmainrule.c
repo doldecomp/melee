@@ -216,7 +216,7 @@ void fn_8022F538(HSD_GObj* arg0)
                 break;
             }
             data = HSD_GObjGetUserData(mn_804D6BD0);
-            rules = gmMainLib_8015CC34();
+            rules = gmMainLib_GetGameRules();
             rules->mode = data->fields.x2;
             rules->time_limit = data->fields.x3;
             rules->handicap = data->fields.x4;
@@ -230,7 +230,7 @@ void fn_8022F538(HSD_GObj* arg0)
         switch ((s32) gm_GetCurrentGameMode()) {
         case GM_MENU:
             data = mn_804D6BD0->user_data;
-            rules = gmMainLib_8015CC34();
+            rules = gmMainLib_GetGameRules();
             rules->mode = data->fields.x2;
             rules->time_limit = data->fields.x3;
             rules->handicap = data->fields.x4;
@@ -241,7 +241,7 @@ void fn_8022F538(HSD_GObj* arg0)
             return;
         default:
             data = mn_804D6BD0->user_data;
-            rules = gmMainLib_8015CC34();
+            rules = gmMainLib_GetGameRules();
             rules->mode = data->fields.x2;
             rules->time_limit = data->fields.x3;
             rules->handicap = data->fields.x4;
@@ -268,7 +268,7 @@ void fn_8022F538(HSD_GObj* arg0)
         lbAudioAx_80024030(0);
         mn_804A04F0.entering_menu = 0;
         data = mn_804D6BD0->user_data;
-        rules = gmMainLib_8015CC34();
+        rules = gmMainLib_GetGameRules();
         rules->mode = data->fields.x2;
         rules->time_limit = data->fields.x3;
         rules->handicap = data->fields.x4;
@@ -1027,7 +1027,7 @@ void fn_802309F0(HSD_GObj* arg0)
             ptr[2] = state;
         }
         data = arg0->user_data;
-        rules = gmMainLib_8015CC34();
+        rules = gmMainLib_GetGameRules();
         rules->mode = data->x2;
         rules->time_limit = data->x3;
         rules->handicap = data->x4;
@@ -1048,17 +1048,17 @@ s32 mn_80230D18(struct mn_802307F8_t* arg0, HSD_JObj* arg1, s8 arg2)
     arg0->x0 = mn_804A04F0.cur_menu;
     arg0->x1 = mn_804A04F0.hovered_selection;
 
-    rules = gmMainLib_8015CC34();
+    rules = gmMainLib_GetGameRules();
     arg0->x4 = rules->handicap;
     if (mn_804D6BD4 == 0 && arg0->x4 == 1) {
         arg0->x4 = 0;
     }
 
-    arg0->x5 = gmMainLib_8015CC34()->damage_ratio;
-    arg0->x6 = gmMainLib_8015CC34()->unk_x7;
-    arg0->x2 = gmMainLib_8015CC34()->mode;
-    arg0->x9 = gmMainLib_8015CC34()->stock_count;
-    arg0->x3 = gmMainLib_8015CC34()->time_limit;
+    arg0->x5 = gmMainLib_GetGameRules()->damage_ratio;
+    arg0->x6 = gmMainLib_GetGameRules()->unk_x7;
+    arg0->x2 = gmMainLib_GetGameRules()->mode;
+    arg0->x9 = gmMainLib_GetGameRules()->stock_count;
+    arg0->x3 = gmMainLib_GetGameRules()->time_limit;
 
     if (gm_GetCurrentGameMode() == GM_TOURNAMENT && arg0->x3 == 0) {
         arg0->x3 = 0x63;

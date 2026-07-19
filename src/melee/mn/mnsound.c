@@ -221,6 +221,7 @@ void fn_80249A1C(HSD_GObj* arg0)
     HSD_JObj* jobj = arg0->hsd_obj;
     HSD_JObj* sp40;
     HSD_JObj* sp3C;
+    AnimLoopSettings* temp;
     UNUSED u8 pad38[4];
     HSD_JObj* sp34;
     AnimLoopSettings sp28;
@@ -249,7 +250,7 @@ void fn_80249A1C(HSD_GObj* arg0)
     mn_8022ED6C(sp20, &sp28);
     lb_80011E24(jobj, &sp40, 0xE, -1);
     {
-        AnimLoopSettings* temp = &anim[menu->unk2];
+        temp = &anim[menu->unk2];
         mn_8022ED6C(sp40, temp + 1);
     }
     lb_80011E24(jobj, &sp3C, 0xB, -1);
@@ -280,7 +281,7 @@ void mnSound_80249C08(int unused)
         user_data = alloc;
     }
     HSD_ASSERTREPORT(0x22CU, user_data, "Can't get user_data.\n");
-    gmMainLib_8015CC34();
+    gmMainLib_GetGameRules();
     user_data->cursor = 0x14;
     user_data->unk1 = lbAudioAx_80024BD0();
     user_data->unk2 = 0U;

@@ -43,7 +43,7 @@ void gm_801A3F48(GameScene* scene)
         HSD_SisLib_803A6048(0x4800);
         break;
     }
-    temp_r31 = lbDvd_8001822C();
+    temp_r31 = lbDvd_GetPreloadCacheScene();
     if (lbHeap_80015BB8(2) == 0) {
         temp_r31->is_heap_persistent[0] = true;
     }
@@ -61,7 +61,7 @@ void gm_801A3F48(GameScene* scene)
 inline u8 nextScene(GameScene* scenes)
 {
     int i;
-    u8 var_r3_3;
+    u8 next_scene;
     GameScene* cur = scenes;
 
     for (i = 0; scenes[i].idx != 0xFF; i++) {
@@ -71,11 +71,11 @@ inline u8 nextScene(GameScene* scenes)
         cur++;
     }
 
-    var_r3_3 = scenes[0].idx;
-    if (var_r3_3 == 0xFF) {
-        var_r3_3 = 0;
+    next_scene = scenes[0].idx;
+    if (next_scene == 0xFF) {
+        next_scene = 0;
     }
-    return var_r3_3;
+    return next_scene;
 }
 
 inline GameScene* findScene(GameScene* scene)
@@ -149,7 +149,7 @@ void gm_801A4014(GameMode* mode)
         while (HSD_DevComIsBusy(1))
             ;
         gmMainLib_8015FBA4();
-        gm_801A50AC();
+        gm_GetAllGameModes();
         memzero(&gm_80479D30, 0x14);
         gm_801A3EF4();
         gmMainLib_8046B0F0.x0 = true;
@@ -246,7 +246,7 @@ bool gm_Is1PMode(u8 mode)
 inline GameMode* findMode(u8 idx)
 {
     GameMode* cur;
-    for (cur = gm_801A50AC(); cur->idx != GM_COUNT; cur++) {
+    for (cur = gm_GetAllGameModes(); cur->idx != GM_COUNT; cur++) {
         if (cur->idx == idx) {
             return cur;
         }
@@ -306,9 +306,9 @@ void gm_801A4510(void)
     GameState* gamestate = &gm_80479D30;
     int i;
 
-    gm_801A50AC();
+    gm_GetAllGameModes();
     memzero(&gm_80479D30, sizeof(GameState));
-    modes = gm_801A50AC();
+    modes = gm_GetAllGameModes();
     for (i = 0; modes[i].idx != GM_COUNT; i++) {
         if (modes[i].Init != NULL) {
             modes[i].Init();

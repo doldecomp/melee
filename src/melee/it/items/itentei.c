@@ -65,8 +65,7 @@ void it_802CF4D4(Item_GObj* gobj)
     itPokemonAttributes* sa = ap->x4_specialAttributes;
 
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    it->entered_hitlag = efLib_PauseAll;
-    it->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(it);
     it->on_accessory = it_802CF6C8;
     it->xDD4_itemVar.pokemon.timer = sa->timer;
 }

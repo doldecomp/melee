@@ -1191,7 +1191,7 @@ HSD_GObj* grStadium_801D2BEC(void)
     GObj_InitUserData(gobj, 3, HSD_Free, text);
     memzero(text, 0x18);
     lb_800121FC(&text->desc, 0xFA, 0xA0, 4, 0x7D2);
-    archive = grDatFiles_801C6324();
+    archive = grDatFiles_GetArchive();
     HSD_SisLib_803A611C(1, gobj, 9, 0xD, 0, 1, 0, 1);
     HSD_SisLib_804D1124[1] =
         HSD_ArchiveGetPublicAddress(archive->unk0, "SIS_GrPStadiumData");
@@ -1558,7 +1558,7 @@ void grStadium_801D3460(Ground_GObj* gobj)
     }
 
     gp2->win_dynamic_p->default_fitting = 0;
-    rules = gm_8016AE50();
+    rules = gm_GetRules();
     temp_r4 = gp2->win_dynamic_p;
     temp_r4->x34.x = 0.625f;
     temp_r4->x34.y = 0.625f;

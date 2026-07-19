@@ -131,7 +131,7 @@ static UnkArchiveStruct* grDatFiles_801C62B4(void)
 #endif
 }
 
-UnkArchiveStruct* grDatFiles_801C6324(void)
+UnkArchiveStruct* grDatFiles_GetArchive(void)
 {
     return grDatFiles_8049EE10;
 }

@@ -1,8 +1,11 @@
 #ifndef MELEE_IT_INLINES_H
 #define MELEE_IT_INLINES_H
 
+#include "ef/eflib.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
+#include "it/item.h"
+#include "it/itmaplib.h"
 #include "it/types.h"
 #include "mp/mplib.h"
 
@@ -19,6 +22,21 @@ static inline Item* GetItemData(HSD_GObj* gobj)
 static inline void itResetVelocity(Item* ip)
 {
     ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0F;
+}
+
+static inline void Item_SetEffectHitlagCallbacks(Item* ip)
+{
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+}
+
+static inline void Item_EnterStateWithEffectHitlag(Item_GObj* gobj, s32 msid)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802762BC(ip);
+    Item_80268E5C(gobj, msid, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
 }
 
 static inline void Item_ApplyFallingPhysics(Item_GObj* gobj)

@@ -3,12 +3,15 @@
 
 #include "ef/eflib.h"
 #include "it/inlines.h"
+#include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itCharItems.h"
 #include "it/item.h"
 #include "it/items/itlinkhookshot.h"
 #include "it/itmaplib.h"
 #include "it/types.h"
+#include "lb/lbrefract.h"
+#include "lb/lbvector.h"
 
 #include <math.h>
 #include <baselib/gobj.h>
@@ -114,6 +117,92 @@ static inline void Item_ClampAngleReverse(f32* angle)
     while (*angle < -M_PI) {
         *angle += M_TAU;
     }
+}
+
+static inline bool Item_UpdateRayAnimation(Item_GObj* gobj, Item* ip,
+                                           HSD_JObj* jobj,
+                                           const f32* max_scale,
+                                           f32 scale_divisor)
+{
+    f32 dir;
+    f32 vel_x;
+
+    ip->x40_vel.x =
+        ip->xDD4_itemVar.ray.speed * cosf(ip->xDD4_itemVar.ray.angle);
+    ip->x40_vel.y =
+        ip->xDD4_itemVar.ray.speed * sinf(ip->xDD4_itemVar.ray.angle);
+    ip->x40_vel.z = 0.0F;
+    if (ip->x40_vel.x > 0.0F) {
+        dir = +1.0F;
+    } else {
+        dir = -1.0F;
+    }
+    ip->facing_dir = dir;
+    HSD_JObjSetRotationY(jobj, M_PI_2 * ip->facing_dir);
+    if (ip->facing_dir == 1.0F) {
+        vel_x = -ip->x40_vel.x;
+    } else {
+        vel_x = +ip->x40_vel.x;
+    }
+    HSD_JObjSetRotationX(jobj, M_PI + atan2f(ip->x40_vel.y, vel_x));
+    ip->xDD4_itemVar.ray.scale +=
+        ABS(ip->xDD4_itemVar.ray.speed) / scale_divisor;
+    if (ip->xDD4_itemVar.ray.scale > *max_scale) {
+        ip->xDD4_itemVar.ray.scale = *max_scale;
+    }
+    if (ip->xDD4_itemVar.ray.scale < 1e-5F) {
+        ip->xDD4_itemVar.ray.scale = 1e-3F;
+    }
+    HSD_JObjSetScaleZ(jobj, ip->xDD4_itemVar.ray.scale);
+    return it_80273130(gobj);
+}
+
+static inline bool Item_BounceRayOffShield(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    lbVector_Mirror(&ip->x40_vel, &ip->xC58);
+    ip->xDD4_itemVar.ray.scale = 1e-3F;
+    ip->xDD4_itemVar.ray.angle = atan2f(ip->x40_vel.y, ip->x40_vel.x);
+    while (ip->xDD4_itemVar.ray.angle < 0.0F) {
+        ip->xDD4_itemVar.ray.angle += M_TAU;
+    }
+    while (ip->xDD4_itemVar.ray.angle > M_TAU) {
+        ip->xDD4_itemVar.ray.angle -= M_TAU;
+    }
+    return false;
+}
+
+static inline void Item_ResetRayAfterReflection(Item* ip, HSD_JObj* jobj)
+{
+    HSD_JObjSetScaleZ(jobj, ip->xDD4_itemVar.ray.scale = 1e-3F);
+    ip->xDD4_itemVar.ray.angle += M_PI;
+    while (ip->xDD4_itemVar.ray.angle < 0.0F) {
+        ip->xDD4_itemVar.ray.angle += M_TAU;
+    }
+    while (ip->xDD4_itemVar.ray.angle > M_TAU) {
+        ip->xDD4_itemVar.ray.angle -= M_TAU;
+    }
+}
+
+static inline void Item_InitRaySpawnFields(SpawnItem* spawn, HSD_GObj* parent,
+                                           f32 facing_dir)
+{
+    spawn->facing_dir = facing_dir;
+    spawn->x3C_damage = 0;
+    spawn->vel.x = spawn->vel.y = spawn->vel.z = 0.0F;
+    spawn->x0_parent_gobj = parent;
+    spawn->x4_parent_gobj2 = spawn->x0_parent_gobj;
+    spawn->x44_flag.b0 = true;
+    spawn->x40 = 0;
+}
+
+static inline void Item_InitRaySpawnPosition(SpawnItem* spawn,
+                                             HSD_GObj* parent, Vec3* pos)
+{
+    spawn->prev_pos = *pos;
+    spawn->prev_pos.z = 0.0F;
+    it_8026BB68(parent, &spawn->pos);
 }
 
 static inline void itUpdateVelocityFromBone(HSD_JObj* jobj, Item* ip,

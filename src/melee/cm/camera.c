@@ -34,8 +34,7 @@
 #include "pl/player.h"
 
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
+#include <math_ppc.h> // IWYU pragma: keep
 #include <baselib/controller.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
@@ -956,6 +955,8 @@ inline float get_stage_floor_height(InternalStageId stage_id)
     case HOMERUN:
         height = grHomeRun_8021EF10();
         break;
+    default:
+        break;
     }
     return height;
 }
@@ -1307,6 +1308,8 @@ void Camera_8002AF68(HSD_CObj* cobj, CameraTransformState* transform)
         break;
     case HOMERUN:
         eye_y_bound = grHomeRun_8021EF10();
+        break;
+    default:
         break;
     }
     if (vec.y < eye_y_bound) {

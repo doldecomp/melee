@@ -119,9 +119,9 @@ void ifStock_802F8298(HSD_GObj* gobj)
     struct IfStockUserData* user_data;
     HSD_JObj* jobj;
     struct ifStock_804A1378* stock;
-    HSD_JObj* jobj2;
     HSD_JObj* jobj_anim;
     int i;
+    HSD_JObj* jobj2;
     Vec3 vecA, vecB;
     PAD_STACK(24);
     user_data = GET_IFSTOCK(gobj);
@@ -645,7 +645,7 @@ void ifStock_802F98E8(unsigned char player, int b)
                     break;
                 }
                 HSD_JObjAnimAll(jobj);
-                ae44 = gm_8016AE44();
+                ae44 = gm_16AE_GetUnkData_1();
                 if (ae44->FighterMatchInfo[player].x4_b1) {
                     GXColor c = { 0x08, 0x08, 0x08, 0x80 };
                     ifStock_802FB4EC(player, &c);

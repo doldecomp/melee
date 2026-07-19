@@ -40,6 +40,16 @@
 #include <baselib/random.h>
 #include <baselib/sislib.h>
 
+/** @todo .sdata2 literal-order anchor (same idiom as gmtou_0.c/gmtou_2.c):
+ * retail keeps -19.5f/13.0f at the head of this TU's pool (0x804DA7E0/E4),
+ * ahead of literals first used earlier in the section's emission order.
+ * Remove once the literals' first uses naturally occur in this order. */
+static void sdata2_order(void)
+{
+    (void) -19.5f;
+    (void) 13.0f;
+}
+
 /* 4799D8 */ struct Lbl804799D8_t lbl_804799D8;
 /* 4799B8 */ struct Lbl804799B8_t lbl_804799B8;
 /* 4D6670 */ extern SceneDesc* lbl_804D6670;
@@ -64,44 +74,11 @@
 
 /* 4D663C */ HSD_GObj* lbl_804D663C;
 
-/// Repeating per-slot unit of BracketEntry starting at x2C (mirrors the
-/// definition in gmtoulib.c).
-typedef struct BracketEntrySlot {
-    /* 0x00 */ HSD_GObj* x2C;
-    /* 0x04 */ u8 x30;
-    /* 0x05 */ u8 pad31;
-    /* 0x06 */ u8 x32;
-    /* 0x07 */ u8 pad33;
-    /* 0x08 */ s32 x34;
-    /* 0x0C */ s32 x38;
-    /* 0x10 */ s32 x3C;
-    /* 0x14 */ s32 x40;
-    /* 0x18 */ s32 x44;
-    /* 0x1C */ s32 x48;
-    /* 0x20 */ u8 x4C;
-    /* 0x21 */ u8 x4D;
-    /* 0x22 */ u8 x4E;
-    /* 0x23 */ u8 x4F;
-    /* 0x24 */ u8 x50;
-    /* 0x25 */ u8 x51;
-    /* 0x26 */ u8 x52;
-    /* 0x27 */ u8 pad53;
-    /* 0x28 */ u16 x54;
-    /* 0x2A */ u8 pad56[0x2C - 0x2A];
-} BracketEntrySlot;
-STATIC_ASSERT(sizeof(BracketEntrySlot) == 0x2C);
-
-/// A macro rather than an inline function (like gmtoulib.c's
-/// BracketEntry_GetSlot): MWCC reserves 8 bytes of stack per inlined call,
-/// which would break the frame size of fn_8019A158.
-#define GET_BRACKET_SLOT(entry, slot_idx)                                     \
-    (&((BracketEntrySlot*) &(entry)->x2C)[slot_idx])
-
 void fn_80196510(void)
 {
     int stage;
 
-    gm_8018F634();
+    gm_GetTournamentData();
 
     while (1) {
         stage = fn_8018F4A0();
@@ -147,7 +124,7 @@ void fn_801965C4(void)
     TmData* temp_r3;
     int temp_r4;
 
-    temp_r3 = gm_8018F634();
+    temp_r3 = gm_GetTournamentData();
     temp_r3->x2D = 1;
     temp_r4 = temp_r3->stage_selection_type;
 
@@ -168,217 +145,245 @@ void fn_801965C4(void)
 /// Randomly assigns bracket positions for tournament seeding.
 void fn_80196684(s32 bracket_idx)
 {
-    s32 rand_val = HSD_Randi(lbl_80473AB8[bracket_idx].x51 +
-                             lbl_80473AB8[bracket_idx].x7D +
-                             lbl_80473AB8[bracket_idx].xA9);
+    s32 rand_val = HSD_Randi(lbl_80473AB8[bracket_idx].slots[0].x51 +
+                             lbl_80473AB8[bracket_idx].slots[1].x51 +
+                             lbl_80473AB8[bracket_idx].slots[2].x51);
 
-    if (rand_val < (s32) lbl_80473AB8[bracket_idx].x51) {
-        lbl_80473AB8[bracket_idx].x4C = 0;
-        if (HSD_Randi(lbl_80473AB8[bracket_idx].x7D +
-                      lbl_80473AB8[bracket_idx].xA9) <
-            (s32) lbl_80473AB8[bracket_idx].x7D)
+    if (rand_val < lbl_80473AB8[bracket_idx].slots[0].x51) {
+        lbl_80473AB8[bracket_idx].slots[0].x4C = 0;
+        if (HSD_Randi(lbl_80473AB8[bracket_idx].slots[1].x51 +
+                      lbl_80473AB8[bracket_idx].slots[2].x51) <
+            lbl_80473AB8[bracket_idx].slots[1].x51)
         {
-            lbl_80473AB8[bracket_idx].x78 = 1;
-            lbl_80473AB8[bracket_idx].xA4 = 2;
+            lbl_80473AB8[bracket_idx].slots[1].x4C = 1;
+            lbl_80473AB8[bracket_idx].slots[2].x4C = 2;
             return;
         }
-        lbl_80473AB8[bracket_idx].x78 = 2;
-        lbl_80473AB8[bracket_idx].xA4 = 1;
+        lbl_80473AB8[bracket_idx].slots[1].x4C = 2;
+        lbl_80473AB8[bracket_idx].slots[2].x4C = 1;
         return;
     }
-    if (rand_val <
-        (s32) (lbl_80473AB8[bracket_idx].x51 + lbl_80473AB8[bracket_idx].x7D))
+    if (rand_val < (lbl_80473AB8[bracket_idx].slots[0].x51 +
+                    lbl_80473AB8[bracket_idx].slots[1].x51))
     {
-        lbl_80473AB8[bracket_idx].x78 = 0;
-        if (HSD_Randi(lbl_80473AB8[bracket_idx].x51 +
-                      lbl_80473AB8[bracket_idx].xA9) <
-            (s32) lbl_80473AB8[bracket_idx].x51)
+        lbl_80473AB8[bracket_idx].slots[1].x4C = 0;
+        if (HSD_Randi(lbl_80473AB8[bracket_idx].slots[0].x51 +
+                      lbl_80473AB8[bracket_idx].slots[2].x51) <
+            lbl_80473AB8[bracket_idx].slots[0].x51)
         {
-            lbl_80473AB8[bracket_idx].x4C = 1;
-            lbl_80473AB8[bracket_idx].xA4 = 2;
+            lbl_80473AB8[bracket_idx].slots[0].x4C = 1;
+            lbl_80473AB8[bracket_idx].slots[2].x4C = 2;
             return;
         }
-        lbl_80473AB8[bracket_idx].x4C = 2;
-        lbl_80473AB8[bracket_idx].xA4 = 1;
+        lbl_80473AB8[bracket_idx].slots[0].x4C = 2;
+        lbl_80473AB8[bracket_idx].slots[2].x4C = 1;
         return;
     }
-    lbl_80473AB8[bracket_idx].xA4 = 0;
-    if (HSD_Randi(lbl_80473AB8[bracket_idx].x51 +
-                  lbl_80473AB8[bracket_idx].x7D) <
-        (s32) lbl_80473AB8[bracket_idx].x51)
+    lbl_80473AB8[bracket_idx].slots[2].x4C = 0;
+    if (HSD_Randi(lbl_80473AB8[bracket_idx].slots[0].x51 +
+                  lbl_80473AB8[bracket_idx].slots[1].x51) <
+        lbl_80473AB8[bracket_idx].slots[0].x51)
     {
-        lbl_80473AB8[bracket_idx].x4C = 1;
-        lbl_80473AB8[bracket_idx].x78 = 2;
+        lbl_80473AB8[bracket_idx].slots[0].x4C = 1;
+        lbl_80473AB8[bracket_idx].slots[1].x4C = 2;
         return;
     }
-    lbl_80473AB8[bracket_idx].x4C = 2;
-    lbl_80473AB8[bracket_idx].x78 = 1;
+    lbl_80473AB8[bracket_idx].slots[0].x4C = 2;
+    lbl_80473AB8[bracket_idx].slots[1].x4C = 1;
 }
 
 void fn_801967E0(s32 arg0)
 {
     s32 rand;
-    rand = HSD_Randi(lbl_80473AB8[arg0].x51 + lbl_80473AB8[arg0].x7D +
-                     lbl_80473AB8[arg0].xA9 + lbl_80473AB8[arg0].xD5);
+    rand = HSD_Randi(
+        lbl_80473AB8[arg0].slots[0].x51 + lbl_80473AB8[arg0].slots[1].x51 +
+        lbl_80473AB8[arg0].slots[2].x51 + lbl_80473AB8[arg0].slots[3].x51);
 
-    if (rand < (s32) lbl_80473AB8[arg0].x51) {
-        lbl_80473AB8[arg0].x4C = 0;
-        rand = HSD_Randi(lbl_80473AB8[arg0].x7D + lbl_80473AB8[arg0].xA9 +
-                         lbl_80473AB8[arg0].xD5);
-        if (rand < (s32) lbl_80473AB8[arg0].x7D) {
-            lbl_80473AB8[arg0].x78 = 1;
-            rand = HSD_Randi(lbl_80473AB8[arg0].xA9 + lbl_80473AB8[arg0].xD5);
-            if (rand < (s32) lbl_80473AB8[arg0].xA9) {
-                lbl_80473AB8[arg0].xA4 = 2;
-                lbl_80473AB8[arg0].xD0 = 3;
+    if (rand < lbl_80473AB8[arg0].slots[0].x51) {
+        lbl_80473AB8[arg0].slots[0].x4C = 0;
+        rand = HSD_Randi(lbl_80473AB8[arg0].slots[1].x51 +
+                         lbl_80473AB8[arg0].slots[2].x51 +
+                         lbl_80473AB8[arg0].slots[3].x51);
+        if (rand < lbl_80473AB8[arg0].slots[1].x51) {
+            lbl_80473AB8[arg0].slots[1].x4C = 1;
+            rand = HSD_Randi(lbl_80473AB8[arg0].slots[2].x51 +
+                             lbl_80473AB8[arg0].slots[3].x51);
+            if (rand < lbl_80473AB8[arg0].slots[2].x51) {
+                lbl_80473AB8[arg0].slots[2].x4C = 2;
+                lbl_80473AB8[arg0].slots[3].x4C = 3;
                 return;
             }
-            lbl_80473AB8[arg0].xA4 = 3;
-            lbl_80473AB8[arg0].xD0 = 2;
+            lbl_80473AB8[arg0].slots[2].x4C = 3;
+            lbl_80473AB8[arg0].slots[3].x4C = 2;
             return;
         }
-        if (rand < (s32) (lbl_80473AB8[arg0].x7D + lbl_80473AB8[arg0].xA9)) {
-            lbl_80473AB8[arg0].xA4 = 1;
-            rand = HSD_Randi(lbl_80473AB8[arg0].x7D + lbl_80473AB8[arg0].xD5);
-            if (rand < (s32) lbl_80473AB8[arg0].x7D) {
-                lbl_80473AB8[arg0].x78 = 2;
-                lbl_80473AB8[arg0].xD0 = 3;
+        if (rand < (lbl_80473AB8[arg0].slots[1].x51 +
+                    lbl_80473AB8[arg0].slots[2].x51))
+        {
+            lbl_80473AB8[arg0].slots[2].x4C = 1;
+            rand = HSD_Randi(lbl_80473AB8[arg0].slots[1].x51 +
+                             lbl_80473AB8[arg0].slots[3].x51);
+            if (rand < lbl_80473AB8[arg0].slots[1].x51) {
+                lbl_80473AB8[arg0].slots[1].x4C = 2;
+                lbl_80473AB8[arg0].slots[3].x4C = 3;
                 return;
             }
-            lbl_80473AB8[arg0].x78 = 3;
-            lbl_80473AB8[arg0].xD0 = 2;
+            lbl_80473AB8[arg0].slots[1].x4C = 3;
+            lbl_80473AB8[arg0].slots[3].x4C = 2;
             return;
         }
-        lbl_80473AB8[arg0].xD0 = 1;
-        rand = HSD_Randi(lbl_80473AB8[arg0].x7D + lbl_80473AB8[arg0].xA9);
-        if (rand < (s32) lbl_80473AB8[arg0].xA9) {
-            lbl_80473AB8[arg0].x78 = 2;
-            lbl_80473AB8[arg0].xA4 = 3;
+        lbl_80473AB8[arg0].slots[3].x4C = 1;
+        rand = HSD_Randi(lbl_80473AB8[arg0].slots[1].x51 +
+                         lbl_80473AB8[arg0].slots[2].x51);
+        if (rand < lbl_80473AB8[arg0].slots[2].x51) {
+            lbl_80473AB8[arg0].slots[1].x4C = 2;
+            lbl_80473AB8[arg0].slots[2].x4C = 3;
             return;
         }
-        lbl_80473AB8[arg0].x78 = 3;
-        lbl_80473AB8[arg0].xA4 = 2;
+        lbl_80473AB8[arg0].slots[1].x4C = 3;
+        lbl_80473AB8[arg0].slots[2].x4C = 2;
         return;
     }
 
-    if (rand < (s32) (lbl_80473AB8[arg0].x51 + lbl_80473AB8[arg0].x7D)) {
-        lbl_80473AB8[arg0].x78 = 0;
-        rand = HSD_Randi(lbl_80473AB8[arg0].x51 + lbl_80473AB8[arg0].xA9 +
-                         lbl_80473AB8[arg0].xD5);
-        if (rand < (s32) lbl_80473AB8[arg0].x51) {
-            lbl_80473AB8[arg0].x4C = 1;
-            rand = HSD_Randi(lbl_80473AB8[arg0].xA9 + lbl_80473AB8[arg0].xD5);
-            if (rand < (s32) lbl_80473AB8[arg0].xA9) {
-                lbl_80473AB8[arg0].xA4 = 2;
-                lbl_80473AB8[arg0].xD0 = 3;
-                return;
-            }
-            lbl_80473AB8[arg0].xA4 = 3;
-            lbl_80473AB8[arg0].xD0 = 2;
-            return;
-        }
-        if (rand < (s32) (lbl_80473AB8[arg0].x51 + lbl_80473AB8[arg0].xA9)) {
-            lbl_80473AB8[arg0].xA4 = 1;
-            rand = HSD_Randi(lbl_80473AB8[arg0].x51 + lbl_80473AB8[arg0].xD5);
-            if (rand < (s32) lbl_80473AB8[arg0].x51) {
-                lbl_80473AB8[arg0].x4C = 2;
-                lbl_80473AB8[arg0].xD0 = 3;
-                return;
-            }
-            lbl_80473AB8[arg0].x4C = 3;
-            lbl_80473AB8[arg0].xD0 = 2;
-            return;
-        }
-        lbl_80473AB8[arg0].xD0 = 1;
-        rand = HSD_Randi(lbl_80473AB8[arg0].x51 + lbl_80473AB8[arg0].xA9);
-        if (rand < (s32) lbl_80473AB8[arg0].x51) {
-            lbl_80473AB8[arg0].x4C = 2;
-            lbl_80473AB8[arg0].xA4 = 3;
-            return;
-        }
-        lbl_80473AB8[arg0].x4C = 3;
-        lbl_80473AB8[arg0].xA4 = 2;
-        return;
-    }
-
-    if (rand < (s32) (lbl_80473AB8[arg0].xA9 +
-                      (lbl_80473AB8[arg0].x51 + lbl_80473AB8[arg0].x7D)))
+    if (rand <
+        (lbl_80473AB8[arg0].slots[0].x51 + lbl_80473AB8[arg0].slots[1].x51))
     {
-        lbl_80473AB8[arg0].xA4 = 0;
-        rand = HSD_Randi(lbl_80473AB8[arg0].x51 + lbl_80473AB8[arg0].x7D +
-                         lbl_80473AB8[arg0].xD5);
-        if (rand < (s32) lbl_80473AB8[arg0].x51) {
-            lbl_80473AB8[arg0].x4C = 1;
-            rand = HSD_Randi(lbl_80473AB8[arg0].x7D + lbl_80473AB8[arg0].xD5);
-            if (rand < (s32) lbl_80473AB8[arg0].x7D) {
-                lbl_80473AB8[arg0].x78 = 2;
-                lbl_80473AB8[arg0].xD0 = 3;
+        lbl_80473AB8[arg0].slots[1].x4C = 0;
+        rand = HSD_Randi(lbl_80473AB8[arg0].slots[0].x51 +
+                         lbl_80473AB8[arg0].slots[2].x51 +
+                         lbl_80473AB8[arg0].slots[3].x51);
+        if (rand < lbl_80473AB8[arg0].slots[0].x51) {
+            lbl_80473AB8[arg0].slots[0].x4C = 1;
+            rand = HSD_Randi(lbl_80473AB8[arg0].slots[2].x51 +
+                             lbl_80473AB8[arg0].slots[3].x51);
+            if (rand < lbl_80473AB8[arg0].slots[2].x51) {
+                lbl_80473AB8[arg0].slots[2].x4C = 2;
+                lbl_80473AB8[arg0].slots[3].x4C = 3;
                 return;
             }
-            lbl_80473AB8[arg0].x78 = 3;
-            lbl_80473AB8[arg0].xD0 = 2;
+            lbl_80473AB8[arg0].slots[2].x4C = 3;
+            lbl_80473AB8[arg0].slots[3].x4C = 2;
             return;
         }
-        if (rand < (s32) (lbl_80473AB8[arg0].x51 + lbl_80473AB8[arg0].x7D)) {
-            lbl_80473AB8[arg0].x78 = 1;
-            rand = HSD_Randi(lbl_80473AB8[arg0].x51 + lbl_80473AB8[arg0].xD5);
-            if (rand < (s32) lbl_80473AB8[arg0].x51) {
-                lbl_80473AB8[arg0].x4C = 2;
-                lbl_80473AB8[arg0].xD0 = 3;
+        if (rand < (lbl_80473AB8[arg0].slots[0].x51 +
+                    lbl_80473AB8[arg0].slots[2].x51))
+        {
+            lbl_80473AB8[arg0].slots[2].x4C = 1;
+            rand = HSD_Randi(lbl_80473AB8[arg0].slots[0].x51 +
+                             lbl_80473AB8[arg0].slots[3].x51);
+            if (rand < lbl_80473AB8[arg0].slots[0].x51) {
+                lbl_80473AB8[arg0].slots[0].x4C = 2;
+                lbl_80473AB8[arg0].slots[3].x4C = 3;
                 return;
             }
-            lbl_80473AB8[arg0].x4C = 3;
-            lbl_80473AB8[arg0].xD0 = 2;
+            lbl_80473AB8[arg0].slots[0].x4C = 3;
+            lbl_80473AB8[arg0].slots[3].x4C = 2;
             return;
         }
-        lbl_80473AB8[arg0].xD0 = 1;
-        rand = HSD_Randi(lbl_80473AB8[arg0].x51 + lbl_80473AB8[arg0].x7D);
-        if (rand < (s32) lbl_80473AB8[arg0].x51) {
-            lbl_80473AB8[arg0].x4C = 2;
-            lbl_80473AB8[arg0].x78 = 3;
+        lbl_80473AB8[arg0].slots[3].x4C = 1;
+        rand = HSD_Randi(lbl_80473AB8[arg0].slots[0].x51 +
+                         lbl_80473AB8[arg0].slots[2].x51);
+        if (rand < lbl_80473AB8[arg0].slots[0].x51) {
+            lbl_80473AB8[arg0].slots[0].x4C = 2;
+            lbl_80473AB8[arg0].slots[2].x4C = 3;
             return;
         }
-        lbl_80473AB8[arg0].x4C = 3;
-        lbl_80473AB8[arg0].x78 = 2;
+        lbl_80473AB8[arg0].slots[0].x4C = 3;
+        lbl_80473AB8[arg0].slots[2].x4C = 2;
         return;
     }
 
-    lbl_80473AB8[arg0].xD0 = 0;
-    rand = HSD_Randi(lbl_80473AB8[arg0].x51 + lbl_80473AB8[arg0].x7D +
-                     lbl_80473AB8[arg0].xA9);
-    if (rand < (s32) lbl_80473AB8[arg0].x51) {
-        lbl_80473AB8[arg0].x4C = 1;
-        rand = HSD_Randi(lbl_80473AB8[arg0].x7D + lbl_80473AB8[arg0].xA9);
-        if (rand < (s32) lbl_80473AB8[arg0].x7D) {
-            lbl_80473AB8[arg0].x78 = 2;
-            lbl_80473AB8[arg0].xA4 = 3;
+    if (rand <
+        (lbl_80473AB8[arg0].slots[2].x51 +
+         (lbl_80473AB8[arg0].slots[0].x51 + lbl_80473AB8[arg0].slots[1].x51)))
+    {
+        lbl_80473AB8[arg0].slots[2].x4C = 0;
+        rand = HSD_Randi(lbl_80473AB8[arg0].slots[0].x51 +
+                         lbl_80473AB8[arg0].slots[1].x51 +
+                         lbl_80473AB8[arg0].slots[3].x51);
+        if (rand < lbl_80473AB8[arg0].slots[0].x51) {
+            lbl_80473AB8[arg0].slots[0].x4C = 1;
+            rand = HSD_Randi(lbl_80473AB8[arg0].slots[1].x51 +
+                             lbl_80473AB8[arg0].slots[3].x51);
+            if (rand < lbl_80473AB8[arg0].slots[1].x51) {
+                lbl_80473AB8[arg0].slots[1].x4C = 2;
+                lbl_80473AB8[arg0].slots[3].x4C = 3;
+                return;
+            }
+            lbl_80473AB8[arg0].slots[1].x4C = 3;
+            lbl_80473AB8[arg0].slots[3].x4C = 2;
             return;
         }
-        lbl_80473AB8[arg0].x78 = 3;
-        lbl_80473AB8[arg0].xA4 = 2;
-        return;
-    }
-    if (rand < (s32) (lbl_80473AB8[arg0].x51 + lbl_80473AB8[arg0].x7D)) {
-        lbl_80473AB8[arg0].x78 = 1;
-        rand = HSD_Randi(lbl_80473AB8[arg0].x51 + lbl_80473AB8[arg0].xA9);
-        if (rand < (s32) lbl_80473AB8[arg0].x51) {
-            lbl_80473AB8[arg0].x4C = 2;
-            lbl_80473AB8[arg0].xA4 = 3;
+        if (rand < (lbl_80473AB8[arg0].slots[0].x51 +
+                    lbl_80473AB8[arg0].slots[1].x51))
+        {
+            lbl_80473AB8[arg0].slots[1].x4C = 1;
+            rand = HSD_Randi(lbl_80473AB8[arg0].slots[0].x51 +
+                             lbl_80473AB8[arg0].slots[3].x51);
+            if (rand < lbl_80473AB8[arg0].slots[0].x51) {
+                lbl_80473AB8[arg0].slots[0].x4C = 2;
+                lbl_80473AB8[arg0].slots[3].x4C = 3;
+                return;
+            }
+            lbl_80473AB8[arg0].slots[0].x4C = 3;
+            lbl_80473AB8[arg0].slots[3].x4C = 2;
             return;
         }
-        lbl_80473AB8[arg0].x4C = 3;
-        lbl_80473AB8[arg0].xA4 = 2;
+        lbl_80473AB8[arg0].slots[3].x4C = 1;
+        rand = HSD_Randi(lbl_80473AB8[arg0].slots[0].x51 +
+                         lbl_80473AB8[arg0].slots[1].x51);
+        if (rand < lbl_80473AB8[arg0].slots[0].x51) {
+            lbl_80473AB8[arg0].slots[0].x4C = 2;
+            lbl_80473AB8[arg0].slots[1].x4C = 3;
+            return;
+        }
+        lbl_80473AB8[arg0].slots[0].x4C = 3;
+        lbl_80473AB8[arg0].slots[1].x4C = 2;
         return;
     }
-    lbl_80473AB8[arg0].xA4 = 1;
-    rand = HSD_Randi(lbl_80473AB8[arg0].x51 + lbl_80473AB8[arg0].x7D);
-    if (rand < (s32) lbl_80473AB8[arg0].x51) {
-        lbl_80473AB8[arg0].x4C = 2;
-        lbl_80473AB8[arg0].x78 = 3;
+
+    lbl_80473AB8[arg0].slots[3].x4C = 0;
+    rand = HSD_Randi(lbl_80473AB8[arg0].slots[0].x51 +
+                     lbl_80473AB8[arg0].slots[1].x51 +
+                     lbl_80473AB8[arg0].slots[2].x51);
+    if (rand < lbl_80473AB8[arg0].slots[0].x51) {
+        lbl_80473AB8[arg0].slots[0].x4C = 1;
+        rand = HSD_Randi(lbl_80473AB8[arg0].slots[1].x51 +
+                         lbl_80473AB8[arg0].slots[2].x51);
+        if (rand < lbl_80473AB8[arg0].slots[1].x51) {
+            lbl_80473AB8[arg0].slots[1].x4C = 2;
+            lbl_80473AB8[arg0].slots[2].x4C = 3;
+            return;
+        }
+        lbl_80473AB8[arg0].slots[1].x4C = 3;
+        lbl_80473AB8[arg0].slots[2].x4C = 2;
         return;
     }
-    lbl_80473AB8[arg0].x4C = 3;
-    lbl_80473AB8[arg0].x78 = 2;
+    if (rand <
+        (lbl_80473AB8[arg0].slots[0].x51 + lbl_80473AB8[arg0].slots[1].x51))
+    {
+        lbl_80473AB8[arg0].slots[1].x4C = 1;
+        rand = HSD_Randi(lbl_80473AB8[arg0].slots[0].x51 +
+                         lbl_80473AB8[arg0].slots[2].x51);
+        if (rand < lbl_80473AB8[arg0].slots[0].x51) {
+            lbl_80473AB8[arg0].slots[0].x4C = 2;
+            lbl_80473AB8[arg0].slots[2].x4C = 3;
+            return;
+        }
+        lbl_80473AB8[arg0].slots[0].x4C = 3;
+        lbl_80473AB8[arg0].slots[2].x4C = 2;
+        return;
+    }
+    lbl_80473AB8[arg0].slots[2].x4C = 1;
+    rand = HSD_Randi(lbl_80473AB8[arg0].slots[0].x51 +
+                     lbl_80473AB8[arg0].slots[1].x51);
+    if (rand < lbl_80473AB8[arg0].slots[0].x51) {
+        lbl_80473AB8[arg0].slots[0].x4C = 2;
+        lbl_80473AB8[arg0].slots[1].x4C = 3;
+        return;
+    }
+    lbl_80473AB8[arg0].slots[0].x4C = 3;
+    lbl_80473AB8[arg0].slots[1].x4C = 2;
     return;
 }
 
@@ -392,7 +397,7 @@ s32 fn_80196CF8(void)
     s32 entrants;
     s32 i;
 
-    tmdata = gm_8018F634();
+    tmdata = gm_GetTournamentData();
     entrants = tmdata->entrants;
     x24 = tmdata->x24;
 
@@ -435,7 +440,7 @@ void fn_80196E30(HSD_GObj* gobj)
     u8 val;
 
     base_ptr = (u8*) &lbl_804799D8;
-    cur_option = gm_8018F634()->cur_option;
+    cur_option = gm_GetTournamentData()->cur_option;
     jobj = gobj->hsd_obj;
 
     if (cur_option <= 0x1A || cur_option >= 0x1F) {
@@ -461,10 +466,11 @@ void fn_80196EEC(HSD_GObj* gobj)
     u8* counter;
     int in_range;
 
-    tmdata = gm_8018F634();
+    tmdata = gm_GetTournamentData();
     jobj = gobj->hsd_obj;
 
-    if (gm_8018F634()->cur_option >= 0x13 && gm_8018F634()->cur_option <= 0x1A)
+    if (gm_GetTournamentData()->cur_option >= 0x13 &&
+        gm_GetTournamentData()->cur_option <= 0x1A)
     {
         in_range = 1;
     } else {
@@ -523,7 +529,7 @@ void fn_80196FFC(HSD_GObj* gobj)
     u8 state;
     u8 start_frame, cur_frame, end_frame, loop_flag;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     pnum = fn_8018F62C(gobj);
     {
         HSD_JObj* jobj_tmp = gobj->hsd_obj;
@@ -532,8 +538,8 @@ void fn_80196FFC(HSD_GObj* gobj)
 
     table = lbl_803B7CE0;
 
-    if ((s32) gm_8018F634()->cur_option >= 0x1B &&
-        (s32) gm_8018F634()->cur_option <= 0x1E)
+    if ((s32) gm_GetTournamentData()->cur_option >= 0x1B &&
+        (s32) gm_GetTournamentData()->cur_option <= 0x1E)
     {
         in_range = 1;
     } else {
@@ -616,8 +622,6 @@ void fn_80196FFC(HSD_GObj* gobj)
     fn_8019044C(jobj, (f32) lbl_804799D8.x2A[pnum].cur);
 }
 
-extern f32 lbl_804DA7E0; // -19.5f
-extern f32 lbl_804DA7E4; // 13.0f
 extern f32 lbl_804DA7E8; // 6.5f
 extern f32 lbl_804DA7EC; // 19.5f
 extern f32 lbl_804DA7F0; // 2.0f
@@ -638,11 +642,12 @@ void fn_801973F8(HSD_GObj* gobj)
     s32 cond;
     u8 player_count;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     pnum = fn_8018F62C(gobj);
     jobj = gobj->hsd_obj;
 
-    if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         cond = 1;
     } else {
@@ -665,12 +670,12 @@ void fn_801973F8(HSD_GObj* gobj)
 
     player_count = tm->x30;
     if ((s32) player_count == 4) {
-        x = (lbl_804DA7E4 * (f32) pnum) + lbl_804DA7E0;
+        x = (13.0f * (f32) pnum) + -19.5f;
     } else if ((s32) player_count == 3) {
-        x = lbl_804DA7E8 + ((lbl_804DA7E4 * (f32) pnum) - lbl_804DA7EC);
+        x = lbl_804DA7E8 + ((13.0f * (f32) pnum) - lbl_804DA7EC);
     } else {
         x = lbl_804DA7E8 +
-            ((lbl_804DA7E4 * (lbl_804DA7F0 * (f32) pnum)) - lbl_804DA7EC);
+            ((13.0f * (lbl_804DA7F0 * (f32) pnum)) - lbl_804DA7EC);
     }
 
     fn_8018FDC4(jobj, lbl_804DA810 + x, lbl_804DA814, lbl_804DA818);
@@ -688,11 +693,12 @@ void fn_801975C8(HSD_GObj* gobj)
     HSD_JObj* jobj;
     s32 in_range;
 
-    tmdata = gm_8018F634();
+    tmdata = gm_GetTournamentData();
     idx = fn_8018F62C(gobj);
     jobj = gobj->hsd_obj;
 
-    if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         in_range = 1;
     } else {
@@ -724,9 +730,10 @@ void fn_801976D4(HSD_GObj* gobj)
     s32 is_in_range;
     PAD_STACK(8);
 
-    gm_8018F634();
+    gm_GetTournamentData();
     jobj = gobj->hsd_obj;
-    if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         is_in_range = 1;
     } else {
@@ -754,10 +761,11 @@ void fn_801977AC(HSD_GObj* gobj)
     f32 x;
     u8 players;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     jobj = (pnum = fn_8018F62C(gobj), GET_JOBJ(gobj));
 
-    if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         in_range = 1;
     } else {
@@ -773,12 +781,12 @@ void fn_801977AC(HSD_GObj* gobj)
 
     players = tm->x30;
     if ((s32) players == 4) {
-        x = (lbl_804DA7E4 * (f32) pnum) + lbl_804DA7E0;
+        x = (13.0f * (f32) pnum) + -19.5f;
     } else if ((s32) players == 3) {
-        x = lbl_804DA7E8 + ((lbl_804DA7E4 * (f32) pnum) - lbl_804DA7EC);
+        x = lbl_804DA7E8 + ((13.0f * (f32) pnum) - lbl_804DA7EC);
     } else {
         x = lbl_804DA7E8 +
-            ((lbl_804DA7E4 * (lbl_804DA7F0 * (f32) pnum)) - lbl_804DA7EC);
+            ((13.0f * (lbl_804DA7F0 * (f32) pnum)) - lbl_804DA7EC);
     }
 
     fn_8018FDC4(jobj, lbl_804DA81C + x, lbl_804DA820, lbl_804DA818);
@@ -800,12 +808,12 @@ void fn_801977AC(HSD_GObj* gobj)
 
         players = tm->x30;
         if ((s32) players == 4) {
-            x = (lbl_804DA7E4 * (f32) pnum) + lbl_804DA7E0;
+            x = (13.0f * (f32) pnum) + -19.5f;
         } else if ((s32) players == 3) {
-            x = lbl_804DA7E8 + ((lbl_804DA7E4 * (f32) pnum) - lbl_804DA7EC);
+            x = lbl_804DA7E8 + ((13.0f * (f32) pnum) - lbl_804DA7EC);
         } else {
             x = lbl_804DA7E8 +
-                ((lbl_804DA7E4 * (lbl_804DA7F0 * (f32) pnum)) - lbl_804DA7EC);
+                ((13.0f * (lbl_804DA7F0 * (f32) pnum)) - lbl_804DA7EC);
         }
 
         fn_8018FDC4(jobj, lbl_804DA81C + x, lbl_804DA820, lbl_804DA818);
@@ -822,12 +830,12 @@ void fn_80197AF0(HSD_GObj* gobj)
     u8 players;
     u8 state;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     pnum = fn_8018F62C(gobj);
     jobj = gobj->hsd_obj;
 
-    if (((s32) gm_8018F634()->cur_option >= 0x1B) &&
-        ((s32) gm_8018F634()->cur_option <= 0x1E))
+    if (((s32) gm_GetTournamentData()->cur_option >= 0x1B) &&
+        ((s32) gm_GetTournamentData()->cur_option <= 0x1E))
     {
         in_range = 1;
     } else {
@@ -854,12 +862,12 @@ void fn_80197AF0(HSD_GObj* gobj)
 
     players = tm->x30;
     if ((s32) players == 4) {
-        x = (lbl_804DA7E4 * (f32) pnum) + lbl_804DA7E0;
+        x = (13.0f * (f32) pnum) + -19.5f;
     } else if ((s32) players == 3) {
-        x = lbl_804DA7E8 + ((lbl_804DA7E4 * (f32) pnum) - lbl_804DA7EC);
+        x = lbl_804DA7E8 + ((13.0f * (f32) pnum) - lbl_804DA7EC);
     } else {
         x = lbl_804DA7E8 +
-            ((lbl_804DA7E4 * (lbl_804DA7F0 * (f32) pnum)) - lbl_804DA7EC);
+            ((13.0f * (lbl_804DA7F0 * (f32) pnum)) - lbl_804DA7EC);
     }
 
     fn_8018FDC4(jobj, x, lbl_804DA818, lbl_804DA818);
@@ -886,9 +894,10 @@ void fn_80197D4C(HSD_GObj* gobj)
     int cond;
     PAD_STACK(8);
 
-    gm_8018F634();
+    gm_GetTournamentData();
     jobj = gobj->hsd_obj;
-    if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         cond = 1;
     } else {
@@ -916,11 +925,12 @@ void fn_80197E18(HSD_GObj* gobj)
     s32 in_range;
     f32 x_pos;
 
-    data = gm_8018F634();
+    data = gm_GetTournamentData();
     pnum = fn_8018F62C(gobj);
     jobj = gobj->hsd_obj;
 
-    if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         in_range = 1;
     } else {
@@ -944,12 +954,12 @@ void fn_80197E18(HSD_GObj* gobj)
     }
 
     if ((s32) data->x30 == 4) {
-        x_pos = (lbl_804DA7E4 * pnum) + (lbl_804DA7E0);
+        x_pos = (13.0f * pnum) + (-19.5f);
     } else if ((s32) data->x30 == 3) {
-        x_pos = lbl_804DA7E8 + ((lbl_804DA7E4 * pnum) - lbl_804DA7EC);
+        x_pos = lbl_804DA7E8 + ((13.0f * pnum) - lbl_804DA7EC);
     } else {
-        x_pos = lbl_804DA7E8 +
-                ((lbl_804DA7E4 * (lbl_804DA7F0 * pnum)) - lbl_804DA7EC);
+        x_pos =
+            lbl_804DA7E8 + ((13.0f * (lbl_804DA7F0 * pnum)) - lbl_804DA7EC);
     }
     fn_8018FDC4(jobj, x_pos, lbl_804DA818, lbl_804DA818);
 }
@@ -964,11 +974,12 @@ void fn_80197FD8(HSD_GObj* gobj)
     s32 option_in_range;
     u8 port_u8;
 
-    tm_data = gm_8018F634();
+    tm_data = gm_GetTournamentData();
     port = fn_8018F62C(gobj);
     jobj = (HSD_JObj*) gobj->hsd_obj;
 
-    if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         option_in_range = 1;
     } else {
@@ -999,14 +1010,13 @@ void fn_80197FD8(HSD_GObj* gobj)
         u8 num_players = tm_data->x30;
 
         if ((s32) num_players == 4) {
-            x_position = (lbl_804DA7E4 * (f32) port) + lbl_804DA7E0;
+            x_position = (13.0f * (f32) port) + -19.5f;
         } else if ((s32) num_players == 3) {
-            x_position =
-                lbl_804DA7E8 + ((lbl_804DA7E4 * (f32) port) - lbl_804DA7EC);
+            x_position = lbl_804DA7E8 + ((13.0f * (f32) port) - lbl_804DA7EC);
         } else {
             x_position =
                 lbl_804DA7E8 +
-                ((lbl_804DA7E4 * (lbl_804DA7F0 * (f32) port)) - lbl_804DA7EC);
+                ((13.0f * (lbl_804DA7F0 * (f32) port)) - lbl_804DA7EC);
         }
 
         fn_8018FDC4(jobj, x_position, lbl_804DA818, lbl_804DA818);
@@ -1028,11 +1038,12 @@ void fn_801981A0(HSD_GObj* gobj)
     u8 counter;
 
     state = &lbl_804799D8;
-    data = gm_8018F634();
+    data = gm_GetTournamentData();
     pnum = fn_8018F62C(gobj);
     jobj = gobj->hsd_obj;
 
-    if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         in_range = 1;
     } else {
@@ -1057,13 +1068,13 @@ void fn_801981A0(HSD_GObj* gobj)
     }
 
     if ((s32) data->x30 == 4) {
-        x_pos = (lbl_804DA7E4 * (f32) pnum) + (lbl_804DA7E0);
+        x_pos = (13.0f * (f32) pnum) + (-19.5f);
     } else if ((s32) data->x30 == 3) {
-        x_pos = lbl_804DA7E4;
+        x_pos = 13.0f;
         x_pos = lbl_804DA7E8 + ((x_pos * (f32) pnum) - lbl_804DA7EC);
     } else {
         x_pos = lbl_804DA7E8 +
-                ((lbl_804DA7E4 * (lbl_804DA7F0 * (f32) pnum)) - lbl_804DA7EC);
+                ((13.0f * (lbl_804DA7F0 * (f32) pnum)) - lbl_804DA7EC);
     }
 
     fn_8018FDC4(jobj, x_pos, lbl_804DA818, lbl_804DA824);
@@ -1090,11 +1101,12 @@ void fn_801983E4(HSD_GObj* gobj)
     s32 cond;
     u8 player_count;
 
-    tm = gm_8018F634();
+    tm = gm_GetTournamentData();
     pnum = fn_8018F62C(gobj);
     jobj = gobj->hsd_obj;
 
-    if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
+    if (gm_GetTournamentData()->cur_option >= 0x1B &&
+        gm_GetTournamentData()->cur_option <= 0x1E)
     {
         cond = 1;
     } else {
@@ -1117,12 +1129,12 @@ void fn_801983E4(HSD_GObj* gobj)
 
     player_count = tm->x30;
     if ((s32) player_count == 4) {
-        x = (lbl_804DA7E4 * (f32) pnum) + lbl_804DA7E0;
+        x = (13.0f * (f32) pnum) + -19.5f;
     } else if ((s32) player_count == 3) {
-        x = lbl_804DA7E8 + ((lbl_804DA7E4 * (f32) pnum) - lbl_804DA7EC);
+        x = lbl_804DA7E8 + ((13.0f * (f32) pnum) - lbl_804DA7EC);
     } else {
         x = lbl_804DA7E8 +
-            ((lbl_804DA7E4 * (lbl_804DA7F0 * (f32) pnum)) - lbl_804DA7EC);
+            ((13.0f * (lbl_804DA7F0 * (f32) pnum)) - lbl_804DA7EC);
     }
 
     fn_8018FDC4(jobj, x, lbl_804DA818, lbl_804DA824);
@@ -1133,7 +1145,7 @@ void fn_80198584(ResultsData* results)
     HSD_JObj* jobj;
     int cur_option;
 
-    cur_option = gm_8018F634()->cur_option;
+    cur_option = gm_GetTournamentData()->cur_option;
     jobj = results->x28;
     if (cur_option == 0x1D) {
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
@@ -1151,11 +1163,11 @@ void fn_801985D4(HSD_GObj* gobj)
     HSD_JObj* child;
     s32 in_range;
 
-    gm_8018F634();
+    gm_GetTournamentData();
     jobj = gobj->hsd_obj;
 
-    if ((s32) gm_8018F634()->cur_option >= 0x1F &&
-        (s32) gm_8018F634()->cur_option <= 0x27)
+    if ((s32) gm_GetTournamentData()->cur_option >= 0x1F &&
+        (s32) gm_GetTournamentData()->cur_option <= 0x27)
     {
         in_range = 1;
     } else {
@@ -1195,11 +1207,11 @@ void fn_80198824(HSD_GObj* gobj)
     HSD_JObj* jobj;
     s32 in_range;
 
-    gm_8018F634();
+    gm_GetTournamentData();
     jobj = gobj->hsd_obj;
 
-    if ((s32) gm_8018F634()->cur_option >= 0x1F &&
-        (s32) gm_8018F634()->cur_option <= 0x27)
+    if ((s32) gm_GetTournamentData()->cur_option >= 0x1F &&
+        (s32) gm_GetTournamentData()->cur_option <= 0x27)
     {
         in_range = 1;
     } else {
@@ -1252,7 +1264,7 @@ void fn_80198BA0(void)
     s32 i;
 
     ptr = (u8*) &lbl_804799D8;
-    td = gm_8018F634();
+    td = gm_GetTournamentData();
 
     /* Clear first 4 bytes as word (stw instruction) */
     *(u32*) &ptr[0x00] = 0;
@@ -1303,7 +1315,7 @@ void fn_80198C60(void)
 
     PAD_STACK(24);
 
-    td = gm_8018F634();
+    td = gm_GetTournamentData();
     td->x524[2] = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
     text = td->x524[2];
     text->font_size.x = 0.054945F;
@@ -1336,7 +1348,7 @@ void fn_80198D18(void)
     HSD_GObj* gobj;
     PAD_STACK(24);
 
-    gm_8018F634();
+    gm_GetTournamentData();
     gobj = fn_80190174(lbl_804D666C->cameras->desc);
     fn_801901F8(lbl_804D666C->cameras->desc);
     fn_801902F0((int) gobj);
@@ -1344,7 +1356,7 @@ void fn_80198D18(void)
     fn_8019035C(0, lbl_804D666C->models[5], 0, 0x1A, 2, 1, fn_80196DBC, 0.0f);
     fn_8019035C(0, lbl_804D666C->models[4], 0, 0x1A, 2, 1, fn_80196E30, 80.0f);
 
-    td = gm_8018F634();
+    td = gm_GetTournamentData();
     td->x524[2] = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
     text = td->x524[2];
     text->font_size.x = lbl_804DA82C;
@@ -1393,8 +1405,8 @@ void fn_80198EBC(void)
     HSD_JObj* jobj2;
     HSD_JObj* j16;
 
-    td = gm_8018F634();
-    gm_8018F634();
+    td = gm_GetTournamentData();
+    gm_GetTournamentData();
 
     gobj = fn_80190174(lbl_804D666C->cameras->desc);
     fn_801901F8(lbl_804D666C->cameras->desc);
@@ -1585,8 +1597,8 @@ void fn_80199AF0(void)
     s32 local2;
     PAD_STACK(4);
 
-    td1 = gm_8018F634();
-    td2 = gm_8018F634();
+    td1 = gm_GetTournamentData();
+    td2 = gm_GetTournamentData();
 
     result = fn_8018F508(&local1);
     if (result == 1) {
@@ -1615,7 +1627,7 @@ void fn_80199AF0(void)
     }
 
     bracket_idx = fn_8018F74C();
-    gm_8018F634();
+    gm_GetTournamentData();
 
     gobj = fn_80190174(lbl_804D666C->cameras->desc);
     fn_801901F8(lbl_804D666C->cameras->desc);
@@ -1694,10 +1706,8 @@ void fn_80199AF0(void)
     }
 }
 
-/// @todo 97.72%: all instructions match; the callee-saved register
-/// assignment is rotated by one against the target. The per-slot bracket
-/// loops use byte-offset walkers because GET_BRACKET_SLOT only folds +0x2C
-/// into the displacement in straight-line code, not in loops.
+/// @todo All instructions match; only the callee-saved register assignment
+/// is permuted against the target.
 void fn_8019A158(void)
 {
     TmData* td1;
@@ -1716,11 +1726,11 @@ void fn_8019A158(void)
     u8* cursor;
     PAD_STACK(4);
 
-    td1 = gm_8018F634();
+    td1 = gm_GetTournamentData();
     lbl_804799D8.x48 = &gm_80477738;
     lbl_804799D8.x0 = mode = 0;
 
-    td2 = gm_8018F634();
+    td2 = gm_GetTournamentData();
 
     result = fn_8018F508(&local1);
     if (result == 1) {
@@ -1758,7 +1768,7 @@ void fn_8019A158(void)
         cursor = (u8*) bracket;
         for (i = 0; i < 4; i++) {
             if (i == slot) {
-                ((u8*) bracket)[slot * 0x2C + 0x4C] = 0;
+                bracket->slots[slot].x4C = 0;
             } else {
                 cursor[0x4C] = 3;
             }
@@ -1801,14 +1811,14 @@ void fn_8019A158(void)
 
         switch (counter) {
         case 2: {
-            s32 rand_val = HSD_Randi(lbl_80473AB8[bracket_idx].x51 +
-                                     lbl_80473AB8[bracket_idx].x7D);
-            if (rand_val < lbl_80473AB8[bracket_idx].x51) {
-                lbl_80473AB8[bracket_idx].x4C = 0;
-                lbl_80473AB8[bracket_idx].x78 = 1;
+            s32 rand_val = HSD_Randi(lbl_80473AB8[bracket_idx].slots[0].x51 +
+                                     lbl_80473AB8[bracket_idx].slots[1].x51);
+            if (rand_val < lbl_80473AB8[bracket_idx].slots[0].x51) {
+                lbl_80473AB8[bracket_idx].slots[0].x4C = 0;
+                lbl_80473AB8[bracket_idx].slots[1].x4C = 1;
             } else {
-                lbl_80473AB8[bracket_idx].x4C = 1;
-                lbl_80473AB8[bracket_idx].x78 = 0;
+                lbl_80473AB8[bracket_idx].slots[0].x4C = 1;
+                lbl_80473AB8[bracket_idx].slots[1].x4C = 0;
             }
             break;
         }
@@ -1821,16 +1831,16 @@ void fn_8019A158(void)
         }
 
         {
-            u8 v = lbl_80473AB8[bracket_idx].x4C;
+            u8 v = lbl_80473AB8[bracket_idx].slots[0].x4C;
             lbl_804799D8.x48->player_standings[0].is_big_loser = v;
             lbl_804799D8.x48->player_standings[0].is_small_loser = v;
-            v = lbl_80473AB8[bracket_idx].x78;
+            v = lbl_80473AB8[bracket_idx].slots[1].x4C;
             lbl_804799D8.x48->player_standings[1].is_big_loser = v;
             lbl_804799D8.x48->player_standings[1].is_small_loser = v;
-            v = lbl_80473AB8[bracket_idx].xA4;
+            v = lbl_80473AB8[bracket_idx].slots[2].x4C;
             lbl_804799D8.x48->player_standings[2].is_big_loser = v;
             lbl_804799D8.x48->player_standings[2].is_small_loser = v;
-            v = lbl_80473AB8[bracket_idx].xD0;
+            v = lbl_80473AB8[bracket_idx].slots[3].x4C;
             lbl_804799D8.x48->player_standings[3].is_big_loser = v;
             lbl_804799D8.x48->player_standings[3].is_small_loser = v;
         }
@@ -1846,8 +1856,7 @@ void fn_8019A158(void)
 
     {
         lbl_804799D8.x4C = sel;
-        lbl_804799D8.x4D =
-            GET_BRACKET_SLOT(&lbl_80473AB8[bracket_idx], sel)->x4E;
+        lbl_804799D8.x4D = lbl_80473AB8[bracket_idx].slots[sel].x4E;
 
         if (lbl_804799D8.x4D == 0 && lbl_80473AB8[bracket_idx].x18 != 0) {
             u8 s = lbl_804799D8.x4C;
@@ -1862,8 +1871,7 @@ void fn_8019A158(void)
         cursor = (u8*) &lbl_80473AB8[bracket_idx] + sel * 0x2C;
         {
             u8 model_idx = cursor[0x50];
-            struct TmUnkMenuData* entries = td1->x37;
-            fn_8018F00C((char*) lbl_804799D8.x4E, entries[model_idx].x9);
+            fn_8018F00C((char*) lbl_804799D8.x4E, td1->x37[model_idx].x9);
         }
     }
 }
@@ -1919,16 +1927,17 @@ extern s32 lbl_804D6678;
 
 void gm_8019A828(void)
 {
-    gm_8018F634()->x32 = 0;
+    gm_GetTournamentData()->x32 = 0;
     lbl_804D6678 = 1;
-    gm_8018F634()->cur_option = 0x1B;
+    gm_GetTournamentData()->cur_option = 0x1B;
 }
 
-/// @todo 99.86%: all instruction shapes and callee-saved registers match;
-/// two scratch-register tie-breaks remain (the ready loop's err/state temps
-/// trade r7/r3, and the bracket-entry fill's address/value temps trade
-/// r0/r4). Decl orders, block-scope promotion, split counters, and comma
-/// expressions all compile to identical instructions with the same colors.
+static inline u8 get_pad_error(s32 i)
+{
+    return (u8) HSD_PadMasterStatus[(u8) i].err;
+}
+
+/// @todo The bracket-entry fill's address/value temps trade r0/r4.
 void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
 {
     s32 ready_count = 0;
@@ -1956,7 +1965,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
             s32 cond;
 
             lbAudioAx_80024030(1);
-            t = gm_8018F634();
+            t = gm_GetTournamentData();
             t->x2D = 1;
             stype = t->stage_selection_type;
             if ((stype == 2 && (u8) t->x32 == 0) || stype == 3) {
@@ -1987,7 +1996,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
             if (tm->x4B8[i].x0 == 1) {
                 ready_count += 1;
             } else {
-                u8 err = (u8) HSD_PadMasterStatus[(u8) i].err;
+                u8 err = get_pad_error(i);
                 if ((s8) err != 0) {
                     pad_err = 1;
                 }
@@ -2037,15 +2046,15 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                 }
 
                 {
-                    TmData* t2 = gm_8018F634();
+                    TmData* t2 = gm_GetTournamentData();
                     BracketEntry* ent = &lbl_80473AB8[fn_8018F74C()];
                     s32 hmn_count = 0;
                     s32 active_count = 0;
 
-                    ent->x4E = t2->x4B8[0].x0;
-                    ent->x7A = t2->x4B8[1].x0;
-                    ent->xA6 = t2->x4B8[2].x0;
-                    ent->xD2 = t2->x4B8[3].x0;
+                    ent->slots[0].x4E = t2->x4B8[0].x0;
+                    ent->slots[1].x4E = t2->x4B8[1].x0;
+                    ent->slots[2].x4E = t2->x4B8[2].x0;
+                    ent->slots[3].x4E = t2->x4B8[3].x0;
 
                     for (i = 0; i < 4; i++) {
                         u8 st = tm->x4B8[i].x0;
@@ -2069,7 +2078,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                     }
 
                     {
-                        TmData* t3 = gm_8018F634();
+                        TmData* t3 = gm_GetTournamentData();
                         s32 stype2;
                         s32 cond2;
 
@@ -2116,7 +2125,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                         if (lbl_804799D8.x44[i] == 7) {
                             lbl_804799D8.x44[i] = 6;
                         } else if (lbl_804799D8.x44[i] == 8) {
-                            u8 np = gm_8018F634()->x30;
+                            u8 np = gm_GetTournamentData()->x30;
                             s32 count4 = 0;
                             s32 j;
 
@@ -2152,7 +2161,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                         } else {
                             u8 pstate2 = lbl_804799D8.x2A[i].state;
                             if (pstate2 == 0 || pstate2 == 3 || pstate2 == 5) {
-                                u8 np2 = gm_8018F634()->x30;
+                                u8 np2 = gm_GetTournamentData()->x30;
                                 s32 count5 = 0;
                                 s32 k;
 
@@ -2192,6 +2201,13 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
 }
 
 extern u8 lbl_804D6680[8];
+
+typedef struct TimerFmt {
+    s32 d[5];
+} TimerFmt;
+typedef char* TextPtr;
+typedef u8* BytePtr;
+
 extern u8 lbl_803B7D04[20];
 
 /// Tournament match timer display/audio state machine.
@@ -2230,7 +2246,7 @@ void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
             for (n = 4; n != 0; n--) {
                 if (bp[0x30] != 0 && bp[0x4C] == 0) {
                     lbl_804D6680[1] =
-                        (&lbl_80473AB8[bracketIdx].x4D)[j * 0x2C];
+                        (&lbl_80473AB8[bracketIdx].slots[0].x4D)[j * 0x2C];
                     break;
                 }
                 bp += 0x2C;
@@ -2318,11 +2334,12 @@ void gm_8019B2DC_OnFrame(void)
     s32 stage;
     PAD_STACK(4);
 
-    data = gm_8018F634();
+    data = gm_GetTournamentData();
     arg1 = fn_8018F674(4);
     arg2 = fn_8018F640(4);
 
-    if (gm_8018F634()->cur_option >= 0x13 && gm_8018F634()->cur_option <= 0x1A)
+    if (gm_GetTournamentData()->cur_option >= 0x13 &&
+        gm_GetTournamentData()->cur_option <= 0x1A)
     {
         cond = 1;
     } else {
@@ -2331,8 +2348,8 @@ void gm_8019B2DC_OnFrame(void)
     if (cond != 0) {
         fn_8019A71C((s32*) data, arg1, arg2);
     } else {
-        if (gm_8018F634()->cur_option >= 0x1B &&
-            gm_8018F634()->cur_option <= 0x1E)
+        if (gm_GetTournamentData()->cur_option >= 0x1B &&
+            gm_GetTournamentData()->cur_option <= 0x1E)
         {
             cond = 1;
         } else {
@@ -2386,7 +2403,7 @@ static inline void fn_8019B458_UpdateRank(TmData* tm, struct Lbl804799D8_t* d8)
     d8->x0 = rank = 0;
     tm->pad_x34[0] = tm->x33;
 
-    td = gm_8018F634();
+    td = gm_GetTournamentData();
     entrants = td->entrants;
     x24 = td->x24;
 
@@ -2403,8 +2420,11 @@ static inline void fn_8019B458_UpdateRank(TmData* tm, struct Lbl804799D8_t* d8)
     tm->x33 = rank;
 }
 
-/// @todo 99.77%: all instructions match; the entry-fill loop's two pointer
-/// walkers have r28 and r29 swapped.
+static inline s32 fn_8019B458_GetRank(void)
+{
+    return fn_80196CF8();
+}
+
 void fn_8019B458(s32* arg0)
 {
     struct Preload {
@@ -2423,8 +2443,8 @@ void fn_8019B458(s32* arg0)
     fn_8019B458_UpdateRank(tm, d8);
 
     {
-        match = fn_80196CF8();
-        td2 = gm_8018F634();
+        match = fn_8019B458_GetRank();
+        td2 = gm_GetTournamentData();
         fn_80198D18();
 
         {
@@ -2473,7 +2493,7 @@ void fn_8019B458(s32* arg0)
             }
 
             if (use_random_stage != 0) {
-                gm_8018F634();
+                gm_GetTournamentData();
                 do {
                     lbl_804D4190 = fn_8018F4A0();
                     if (lbl_804D4194 == lbl_804D4190) {
@@ -2491,7 +2511,7 @@ void fn_8019B458(s32* arg0)
             }
 
             {
-                PreloadCacheScene* scene = lbDvd_8001822C();
+                PreloadCacheScene* scene = lbDvd_GetPreloadCacheScene();
                 struct GameCache* gc = &scene->game_cache;
                 lbDvd_800174BC();
 
@@ -2564,7 +2584,7 @@ void gm_8019B8C4_OnEnter(void* arg0)
     lbl_804D6664 = NULL;
     lbl_804D6680[0] = 0;
     lbl_804D6680[2] = 0;
-    gm_8018F634();
+    gm_GetTournamentData();
     lbl_804D6660 = lbArchive_80016DBC("GmTou1p", &lbl_804D666C,
                                       "ScGamTour_scene_data", 0);
     lbl_804D6638 = lbArchive_80016DBC(

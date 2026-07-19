@@ -848,7 +848,7 @@ Ground_GObj* Ground_GetStageGObj(int map_id)
     }
 
     grMaterial_801C95C4(gobj);
-    archive = grDatFiles_801C6324();
+    archive = grDatFiles_GetArchive();
     HSD_ASSERT(1358, archive);
 
     if (map_id < archive->unk4->unkC) {
@@ -1012,7 +1012,7 @@ u32 Ground_801C1DC0(void)
     return stage_info.flags & 0x80;
 }
 
-s16 Ground_801C1DD4(void)
+int Ground_801C1DD4(void)
 {
     return stage_info.x6D0;
 }
@@ -1070,12 +1070,12 @@ inline HSD_FogDesc* foo(void)
     int stage_id;
     int i;
 
-    grDatFiles_801C6324();
-    archive = grDatFiles_801C6324();
+    grDatFiles_GetArchive();
+    archive = grDatFiles_GetArchive();
     stage_id = stage_info.internal_stage_id;
     temp_r29 = Ground_803DFEDC[stage_id]->callbacks;
     temp_r30 = archive->unk4->unkC;
-    grDatFiles_801C6324();
+    grDatFiles_GetArchive();
     for (i = 0; i < temp_r30; i++) {
         phi_r29 = &temp_r29[i];
         if (phi_r29->flags_b1 == 1) {
@@ -2498,7 +2498,7 @@ bool Ground_801C43C4(void* arg0)
         u8 flag : 1;
     }* phi_r4;
     int i;
-    tmp = grDatFiles_801C6324()->unk4;
+    tmp = grDatFiles_GetArchive()->unk4;
     phi_r4 = tmp->unk20;
     max = tmp->unk24;
     if (arg0 != NULL && max != 0) {
@@ -2583,10 +2583,10 @@ static LightList** Ground_801C466C_inline(void)
     int i;
     int count;
 
-    archive = grDatFiles_801C6324();
+    archive = grDatFiles_GetArchive();
     callbacks = Ground_803DFEDC[stage_info.internal_stage_id]->callbacks;
     count = archive->unk4->unkC;
-    archive = grDatFiles_801C6324();
+    archive = grDatFiles_GetArchive();
 
     for (i = 0; i < count; i++) {
         if (callbacks->flags_b0 == 1) {
@@ -2750,7 +2750,7 @@ HSD_GObj* Ground_801C498C(void)
 
 LightList** Ground_801C49B4(void)
 {
-    UnkArchiveStruct* archive = grDatFiles_801C6324();
+    UnkArchiveStruct* archive = grDatFiles_GetArchive();
     if (stage_info.map_plit != NULL) {
         return Ground_801C20E0(archive, stage_info.map_plit);
     }
@@ -3180,7 +3180,10 @@ HSD_GObj* Ground_801C57C8(void)
     return Player_GetEntityAtIndex(0, 1);
 }
 
-f32 Ground_801C57F0(void)
+/// @param arg0 Unused by the implementation; the game's only caller
+///              (fn_80180C60 at 0x80180C88) materializes an explicit 0
+///              argument, so the original signature takes a parameter.
+f32 Ground_801C57F0(int arg0)
 {
     return stage_info.x6E0;
 }
@@ -3252,7 +3255,7 @@ int Ground_801C5940(void)
     const size_t vals_count = 32;
     u8 _[4];
     int vals[vals_count];
-    archive = grDatFiles_801C6324();
+    archive = grDatFiles_GetArchive();
     out_idx = 0;
     if (archive->unk4->unk4 == 0) {
         return -1;

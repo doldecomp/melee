@@ -35,14 +35,14 @@
 /* 1609E0 */ const char* fn_801609E0(u8 ckind);
 /* 160A60 */ const char* gm_80160A60(int);
 /* 160B40 */ UNK_RET gm_80160B40(HSD_Text*, u8, u8);
-/* 160C90 */ void gm_80160C90(HSD_Text* text, u8 ckind, bool arg2);
+/* 160C90 */ void gm_80160C90(HSD_Text* text, u8 fighter_id, u8 arg2);
 /* 160DE8 */ void fn_80160DE8(HSD_JObj*, u8, s32, u8, f32, f32);
 /* 160F58 */ float fn_80160F58(u8 ckind);
 /* 161004 */ s32 fn_80161004(MatchEnd*);
 /* 161154 */ s32 fn_80161154(MatchEnd*);
 /* 161C90 */ void fn_80161C90(MatchEnd*, int, u16*);
 /* 162068 */ void fn_80162068(MatchEnd*);
-/* 162170 */ s32 fn_80162170(MatchEnd*);
+/* 162170 */ void fn_80162170(MatchEnd*);
 /* 1623A4 */ s32 gm_801623A4(MatchEnd*);
 /* 1623D8 */ int gm_801623D8(void);
 /* 1623FC */ UNK_RET gm_801623FC(int);
@@ -139,9 +139,9 @@
 /* 165388 */ HSD_GObj* gm_80165388(u16, u8, u8, s32);
 /* 1653C8 */ void gm_801653C8(HSD_GObj*);
 /* 1653E8 */ float fn_801653E8(u8);
-/* 165418 */ u8 fn_80165418(MatchEnd*);
-/* 1654A0 */ u8 fn_801654A0(MatchEnd*);
-/* 165548 */ u8 fn_80165548(MatchEnd*, s8, s32);
+/* 165418 */ s32 fn_80165418(MatchEnd*);
+/* 1654A0 */ s32 fn_801654A0(MatchEnd*);
+/* 165548 */ s32 fn_80165548(MatchEnd*, s32, s32);
 /* 1656A8 */ u32 fn_801656A8(MatchEnd*, u32);
 /* 16588C */ s32 fn_8016588C(lbl_8046B6A0_24C_t*, s32);
 /* 165AC0 */ s32 fn_80165AC0(MatchEnd*);
@@ -196,7 +196,7 @@
 /* 169290 */ u8 gm_80169290(u8);
 /* 1692BC */ u8 gm_801692BC(u8);
 /* 1692E8 */ void gm_801692E8(u32 secs, datetime* datetime);
-/* 169364 */ struct lbl_8046B488_t* fn_80169364(void);
+/* 169364 */ struct lbl_8046B488_t* gm_1601_GetUnkData(void);
 /* 169370 */ u8 gm_80169370(s32);
 /* 169384 */ int gm_80169384(void);
 /* 169394 */ s32 gm_80169394(void);

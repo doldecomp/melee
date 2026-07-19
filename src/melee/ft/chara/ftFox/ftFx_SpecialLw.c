@@ -12,6 +12,7 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Jump.h"
 #include "ftCommon/ftCo_JumpAerial.h"
@@ -40,9 +41,7 @@ void ftFx_SpecialLw_CreateLoopGFX(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
-    fp->accessory4_cb = NULL;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 /// Create Reflector Start GFX
@@ -55,9 +54,7 @@ void ftFx_SpecialLw_CreateStartGFX(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
-    fp->accessory4_cb = NULL;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 void ftFx_SpecialLw_CreateReflectGFX(HSD_GObj* gobj)
@@ -70,9 +67,7 @@ void ftFx_SpecialLw_CreateReflectGFX(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
-    fp->accessory4_cb = NULL;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 static inline void ftFox_SpecialLw_SetVars(HSD_GObj* gobj)

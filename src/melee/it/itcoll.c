@@ -791,6 +791,7 @@ f32 it_80270CD8(Item* ip, HitCapsule* hit)
 
 void it_80270E30(Item_GObj* arg_item_gobj)
 {
+    u32 index;
     f32 sp18;
     Vec3 hurt_pos;
     DamageLogEntry* damage_log;
@@ -807,7 +808,6 @@ void it_80270E30(Item_GObj* arg_item_gobj)
     UNUSED s32 unused_int0;
     UNUSED s32 unused_int1;
     s32 element;
-    u32 index;
     Item* item;
     Item* arg_item;
     DamageLogEntry* temp_r29;
