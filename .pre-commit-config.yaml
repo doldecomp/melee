@@ -3,8 +3,8 @@ repos:
   rev: v22.1.5
   hooks:
   - id: clang-format
-    types_or: [c, file]
-    files: \.dox$
+    types_or: [file]
+    files: \.(c|h|dox)$
 - repo: local
   hooks:
     - id: style-check
