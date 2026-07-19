@@ -121,6 +121,14 @@ static void sdata2_order(void)
 /* 4DA734 */ extern f32 lbl_804DA734; // 666.0f
 /* 4DA70C */ extern f32 lbl_804DA70C; // 87.0f
 
+/* 3D9F80 */ static struct TmSettingTable lbl_803D9F80 = {
+    0, 74,  0, 74,  0, 77,  0, 75, 0,  75,  0,  77, 0, 80,  0, 78, 0, 79,
+    0, 79,  0, 81,  0, 0,   0, 82, 0,  82,  0,  92, 0, 92,  0, 96, 0, 93,
+    0, 93,  0, 96,  0, 95,  0, 97, 0,  98,  0,  98, 0, 100, 0, 0,  0, 83,
+    0, 111, 0, 111, 0, 111, 0, 88, 0,  101, 0,  0,  2, 3,   0, 2,  0, 1,
+    0, 0,   0, 0,   2, 2,   4, 16, 31, 3,   63, 3,  3, 3,   9, 0,
+};
+
 typedef void (*lbl_803D9FD8_fn)(s32*, u32, u32);
 
 /* 3D9FD8 */ lbl_803D9FD8_fn lbl_803D9FD8[] = {
@@ -2020,22 +2028,15 @@ static inline s32 fn_80194658_get_value(s32* ptr)
     return *++ptr;
 }
 
-static inline u8* fn_80194658_get_entry(u8* table, s32 idx)
-{
-    return table + (idx <<= 1);
-}
-
 void fn_80194658(s32* arg0, u32 arg1, u32 arg2)
 {
-    u8* table;
+    TmSettingTable* table = &lbl_803D9F80;
     s32 idx;
     s32 changed = 0;
     s32 val;
     s32 dir;
-    u8* entry;
     s32* ptr;
 
-    table = (u8*) &lbl_803D9F80;
     idx = arg0[0];
     dir = gm_804771C4.match_type;
 
@@ -2059,18 +2060,16 @@ void fn_80194658(s32* arg0, u32 arg1, u32 arg2)
     }
 
     if (arg1 & 0x40001) {
-        entry = fn_80194658_get_entry(table, idx) + (dir != 0);
-        if (val > (s32) entry[0x40]) {
+        if (val > (s32) table->min[idx][!!dir]) {
             *ptr = *ptr - 1;
         } else if (dir == 0) {
             *ptr = (s32) lbl_803D9D20.x0[arg0[3]];
         } else {
-            *ptr = (s32) entry[0x4C];
+            *ptr = (s32) table->max[idx][!!dir];
         }
     } else if (arg1 & 0x80002) {
-        entry = fn_80194658_get_entry(table, idx) + (dir != 0);
         changed = 1;
-        if (val < (s32) entry[0x4C]) {
+        if (val < (s32) table->max[idx][!!dir]) {
             *ptr = *ptr + 1;
             if (gm_804771C4.match_type != 0) {
                 if (arg0[4] > arg0[3] - 1 || arg0[4] > arg0[2] - arg0[3]) {
@@ -2078,12 +2077,11 @@ void fn_80194658(s32* arg0, u32 arg1, u32 arg2)
                 }
             }
         } else if (dir == 0) {
-            *ptr = (s32) entry[0x40];
+            *ptr = (s32) table->min[idx][!!dir];
         } else {
             *ptr = 1;
         }
     }
-
 end:
     if (gm_804771C4.match_type == 0) {
         if (arg0[4] > (s32) lbl_803D9D20.x0[arg0[3]]) {
