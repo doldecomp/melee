@@ -1002,24 +1002,7 @@ void grCorneria_801DE568(Ground_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
     if (grCn_803E1D68.arwing_gobj[gp->gv.arwing.xC8] != NULL) {
-        f32 angle = ABS(gp->gv.arwing.xE0.z);
-        if (angle < 10.0f) {
-            gp->gv.arwing.xE0.z = 0.0f;
-            while (gp->gv.arwing.xDC < -M_PI) {
-                gp->gv.arwing.xDC += M_TAU;
-            }
-            while (gp->gv.arwing.xDC > M_PI) {
-                gp->gv.arwing.xDC -= M_TAU;
-            }
-            if (ABS(gp->gv.arwing.xDC) < 1.0471976f) {
-                HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-            } else {
-                HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-            }
-        } else {
-            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-        }
-        HSD_JObjSetTranslate(jobj, &gp->gv.arwing.xE0);
+        Ground_UpdateStarFoxArwingVisibility(gp, jobj, 10.0F);
         {
             f32 scale = Ground_801C0498();
             {
@@ -1100,23 +1083,13 @@ bool grCorneria_801DEC00(Ground_GObj* arg)
 
 bool grCorneria_801DEC08(Vec3* pos)
 {
-    if (pos->x > Stage_GetBlastZoneRightOffset()) {
-        return true;
-    }
-    if (pos->x < Stage_GetBlastZoneLeftOffset()) {
-        return true;
-    }
-    if (pos->y > Stage_GetBlastZoneTopOffset()) {
-        return true;
-    }
-    if (pos->y < Stage_GetBlastZoneBottomOffset()) {
-        return true;
-    }
-    return false;
+    return Stage_IsOutsideBlastZone(pos);
 }
 s32 grCorneria_801DEC94(Vec3* pos)
 {
     if (pos->z > -30.0f) {
+        /// @todo Use #Stage_IsOutsideBlastZoneWithMargin when it preserves
+        /// the original fallthrough control flow here.
         if (pos->x > Stage_GetBlastZoneRightOffset() - 30.0f) {
             return 1;
         }
@@ -1976,26 +1949,7 @@ bool grCorneria_801E0F64(Ground_GObj* arg)
 void grCorneria_801E0F6C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-
-    ifStatus_802F6898();
-    un_802FF570();
-
-    if (Ground_801C2BA4(5) == NULL) {
-        if (grCorneria_801E2598(gp->gv.arwing.xC4, gp->gv.arwing.xC8)) {
-            if ((s32) gp->gv.arwing.xCC-- < 0) {
-                HSD_GObj* gobj5 = grCorneria_801DD534(5);
-                Ground* gp5 = GET_GROUND(gobj5);
-                grCorneria_801E2738(gobj5, &gp5->gv, gp->gv.arwing.xC4,
-                                    gp->gv.arwing.xC8);
-                gp->gv.arwing.xC8++;
-                gp->gv.arwing.xCC = 0;
-            }
-        } else {
-            if ((s32) gp->gv.arwing.xCC-- < 0) {
-                Ground_801C4A08(gobj);
-            }
-        }
-    }
+    Ground_UpdateStarFoxSequence(gobj, gp, 5, grCorneria_801DD534);
 }
 
 void grCorneria_801E1030(Ground_GObj* gobj)

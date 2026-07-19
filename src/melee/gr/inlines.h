@@ -2,16 +2,21 @@
 #define MELEE_GR_INLINES_H
 
 #include "gr/granime.h"
+#include "gr/grcorneria.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/types.h"
+#include "if/ifcoget.h"
+#include "if/ifstatus.h"
 #include "lb/lb_00B0.h"
+#include "MSL/math.h"
 
 #include <baselib/forward.h>
 
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
 #include <baselib/random.h>
 
 #define GET_GROUND(gobj) ((Ground*) HSD_GObjGetUserData(gobj))
@@ -109,6 +114,56 @@ static inline void Ground_AttachStarFoxArwingModel(Ground_GObj* gobj,
     lb_8000C2F8(Ground_801C3FA4(gobj, 0),
                 Ground_801C3FA4(arwing_gobj, joint_id));
     gp->gv.starfox.linked_gobj = NULL;
+}
+
+static inline void Ground_UpdateStarFoxArwingVisibility(Ground* gp,
+                                                        HSD_JObj* jobj,
+                                                        f32 depth_limit)
+{
+    f32 angle = ABS(gp->gv.arwing.xE0.z);
+    if (angle < depth_limit) {
+        gp->gv.arwing.xE0.z = 0.0F;
+        while (gp->gv.arwing.xDC < -M_PI) {
+            gp->gv.arwing.xDC += M_TAU;
+        }
+        while (gp->gv.arwing.xDC > M_PI) {
+            gp->gv.arwing.xDC -= M_TAU;
+        }
+        if (ABS(gp->gv.arwing.xDC) < 1.0471976F) {
+            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+        } else {
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+        }
+    } else {
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+    }
+    HSD_JObjSetTranslate(jobj, &gp->gv.arwing.xE0);
+}
+
+static inline void
+Ground_UpdateStarFoxSequence(Ground_GObj* gobj, Ground* gp,
+                             int sequence_gobj_id,
+                             Ground_GObj* (*create_gobj)(int) )
+{
+    ifStatus_802F6898();
+    un_802FF570();
+
+    if (Ground_801C2BA4(sequence_gobj_id) == NULL) {
+        if (grCorneria_801E2598(gp->gv.starfox.xC4.word,
+                                gp->gv.starfox.arwing_slot))
+        {
+            if ((s32) gp->gv.starfox.xCC-- < 0) {
+                Ground_GObj* sequence_gobj = create_gobj(sequence_gobj_id);
+                grCorneria_801E2738(
+                    sequence_gobj, &GET_GROUND(sequence_gobj)->gv,
+                    gp->gv.starfox.xC4.word, gp->gv.starfox.arwing_slot);
+                gp->gv.starfox.arwing_slot++;
+                gp->gv.starfox.xCC = 0;
+            }
+        } else if ((s32) gp->gv.starfox.xCC-- < 0) {
+            Ground_801C4A08(gobj);
+        }
+    }
 }
 
 #define ZRANDI(n) ((n) != 0 ? HSD_Randi(n) : 0)

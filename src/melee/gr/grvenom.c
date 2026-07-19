@@ -1007,31 +1007,7 @@ bool grVenom_80204CE4(Ground_GObj* arg)
 void grVenom_80204CEC(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    s32 temp;
-
-    ifStatus_802F6898();
-    un_802FF570();
-
-    if (Ground_801C2BA4(1) == NULL) {
-        if (grCorneria_801E2598(gp->gv.venom.xC4, gp->gv.venom.xC8) != 0) {
-            temp = gp->gv.venom.xCC;
-            gp->gv.venom.xCC = temp - 1;
-            if (temp < 0) {
-                HSD_GObj* gobj = grVenom_80203EAC(1);
-                Ground* gp2 = GET_GROUND(gobj);
-                grCorneria_801E2738(gobj, &gp2->gv.venom.xC4, gp->gv.venom.xC4,
-                                    gp->gv.venom.xC8);
-                gp->gv.venom.xC8 = gp->gv.venom.xC8 + 1;
-                gp->gv.venom.xCC = 0;
-            }
-        } else {
-            temp = gp->gv.venom.xCC;
-            gp->gv.venom.xCC = temp - 1;
-            if (temp < 0) {
-                Ground_801C4A08(gobj);
-            }
-        }
-    }
+    Ground_UpdateStarFoxSequence(gobj, gp, 1, grVenom_80203EAC);
 }
 
 void grVenom_80204DB0(Ground_GObj* gobj)
@@ -1321,24 +1297,7 @@ void grVenom_80205758(Ground_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
     if (grVe_ArwingData.arwing_gobj[gp->gv.venom.xC8] != NULL) {
-        f32 angle = ABS(gp->gv.venom.xE8);
-        if (angle < 50.0F) {
-            gp->gv.venom.xE8 = 0.0F;
-            while (gp->gv.venom.xDC < -M_PI) {
-                gp->gv.venom.xDC += M_TAU;
-            }
-            while (gp->gv.venom.xDC > M_PI) {
-                gp->gv.venom.xDC -= M_TAU;
-            }
-            if (ABS(gp->gv.venom.xDC) < 1.0471976F) {
-                HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-            } else {
-                HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-            }
-        } else {
-            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-        }
-        HSD_JObjSetTranslate(jobj, (Vec3*) &gp->gv.venom.xE0);
+        Ground_UpdateStarFoxArwingVisibility(gp, jobj, 50.0F);
         {
             f32 scale = Ground_801C0498();
             {
@@ -1418,19 +1377,7 @@ bool grVenom_80205DF0(Ground_GObj* arg)
 
 s32 grVenom_80205DF8(Vec3* pos)
 {
-    if (pos->x > Stage_GetBlastZoneRightOffset()) {
-        return 1;
-    }
-    if (pos->x < Stage_GetBlastZoneLeftOffset()) {
-        return 1;
-    }
-    if (pos->y > Stage_GetBlastZoneTopOffset()) {
-        return 1;
-    }
-    if (pos->y < Stage_GetBlastZoneBottomOffset()) {
-        return 1;
-    }
-    return 0;
+    return Stage_IsOutsideBlastZone(pos);
 }
 
 /// grVenom_80205E84
@@ -1442,19 +1389,7 @@ float Stage_GetBlastZoneTopOffset(void);
 
 s32 grVenom_80205E84(Vec3* pos)
 {
-    if (pos->x > Stage_GetBlastZoneRightOffset() - 20.0F) {
-        return 1;
-    }
-    if (pos->x < 20.0F + Stage_GetBlastZoneLeftOffset()) {
-        return 1;
-    }
-    if (pos->y > Stage_GetBlastZoneTopOffset() - 20.0F) {
-        return 1;
-    }
-    if (pos->y < 20.0F + Stage_GetBlastZoneBottomOffset()) {
-        return 1;
-    }
-    return 0;
+    return Stage_IsOutsideBlastZoneWithMargin(pos, 20.0F);
 }
 
 static const Vec3 grVe_803B82D0 = { 0.0F, 0.0F, 0.0F };

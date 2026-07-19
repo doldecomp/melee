@@ -406,8 +406,8 @@ struct grStarFox_GroundVars {
             u8 b0 : 1;
         } flags;
         u8 value;
+        u32 word;
     } xC4;
-    /* +0x01 gp+C5 */ u8 pad_C5[3];
     /* +0x04 gp+C8 */ s32 arwing_slot;
     /* +0x08 gp+CC */ s32 xCC;
     /* +0x0C gp+D0 */ s32 xD0;
