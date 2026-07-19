@@ -399,6 +399,29 @@ struct grCorneria_GroundVars {
     HSD_JObj* x12C;
 };
 
+/// Ground vars shared by Corneria and Venom's Arwing stage articles.
+struct grStarFox_GroundVars {
+    /* +0x00 gp+C4 */ union {
+        struct {
+            u8 b0 : 1;
+        } flags;
+        u8 value;
+    } xC4;
+    /* +0x01 gp+C5 */ u8 pad_C5[3];
+    /* +0x04 gp+C8 */ s32 arwing_slot;
+    /* +0x08 gp+CC */ s32 xCC;
+    /* +0x0C gp+D0 */ s32 xD0;
+    /* +0x10 gp+D4 */ s32 xD4;
+    /* +0x14 gp+D8 */ s32 xD8;
+    /* +0x18 gp+DC */ HSD_GObj* linked_gobj;
+    /* +0x1C gp+E0 */ HSD_GObj* article_gobjs[4];
+    /* +0x2C gp+F0 */ s32 xF0;
+    /* +0x30 gp+F4 */ s32 xF4;
+    /* +0x34 gp+F8 */ s32 xF8;
+    /* +0x38 gp+FC */ s32 xFC;
+    /* +0x3C gp+100 */ s32 x100;
+};
+
 /// Arwing slot ground vars (callbacks 2 and 10).
 /// Overlaps grCorneria_GroundVars in the gv union but interprets
 /// fields differently: pointers/integers instead of floats.
@@ -1791,6 +1814,7 @@ struct Ground {
             struct grShrineroute_GroundVars2 shrineroute2;
             struct grShrineroute_GroundVars3 shrineroute3;
             struct grSmashTaunt_GroundVars smashtaunt;
+            struct grStarFox_GroundVars starfox;
             struct GroundVars_unk unk;
             struct grHomeRun_GroundVars homerun;
             struct grHomeRun_GroundVars2 homerun2;

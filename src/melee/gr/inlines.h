@@ -5,6 +5,7 @@
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/types.h"
+#include "lb/lb_00B0.h"
 
 #include <baselib/forward.h>
 
@@ -52,6 +53,62 @@ static inline void Ground_InitTargetStage(HSD_GObj* (*create_gobj)(int) )
     Ground_801C3BB4();
     Ground_801C4210();
     Ground_801C42AC();
+}
+
+static inline void Ground_ClearStarFoxArwingGObjs(Ground* gp)
+{
+    gp->gv.starfox.article_gobjs[3] = NULL;
+    gp->gv.starfox.article_gobjs[2] = NULL;
+    gp->gv.starfox.article_gobjs[1] = NULL;
+    gp->gv.starfox.article_gobjs[0] = NULL;
+}
+
+static inline void Ground_AnimateStarFoxArwing(Ground_GObj* gobj)
+{
+    grAnime_801C7FF8(gobj, 0, 7, 1, 0.0F, 1.0F);
+    grAnime_801C8098(gobj, 2, 7, 3, 0.0F, 1.0F);
+}
+
+static inline void Ground_AnimateStarFoxArwingWithBackground(Ground_GObj* gobj)
+{
+    grAnime_801C7FF8(gobj, 7, 7, 0, 0.0F, 1.0F);
+    grAnime_801C7FF8(gobj, 8, 7, 0, 0.0F, 1.0F);
+    grAnime_801C8098(gobj, 2, 7, 3, 0.0F, 1.0F);
+}
+
+static inline void Ground_LinkStarFoxArwing(Ground* gp, HSD_GObj* linked_gobj)
+{
+    gp->gv.starfox.linked_gobj = linked_gobj;
+    if (linked_gobj != NULL) {
+        Ground* linked_gp = GET_GROUND(gp->gv.starfox.linked_gobj);
+        if (linked_gp != NULL) {
+            linked_gp->gv.starfox.arwing_slot = gp->gv.starfox.arwing_slot;
+        }
+    }
+}
+
+static inline void Ground_DisableStarFoxArwingGObjs(Ground* gp)
+{
+    gp->gv.starfox.article_gobjs[0] = (HSD_GObj*) -1;
+    gp->gv.starfox.article_gobjs[1] = (HSD_GObj*) -1;
+}
+
+static inline void Ground_ResetStarFoxArwingState(Ground* gp)
+{
+    gp->gv.starfox.xC4.flags.b0 = false;
+    gp->gv.starfox.xD4 = 0;
+    gp->gv.starfox.xF0 = 0;
+    gp->gv.starfox.xF4 = 0;
+}
+
+static inline void Ground_AttachStarFoxArwingModel(Ground_GObj* gobj,
+                                                   Ground* gp,
+                                                   Ground_GObj* arwing_gobj,
+                                                   int joint_id)
+{
+    lb_8000C2F8(Ground_801C3FA4(gobj, 0),
+                Ground_801C3FA4(arwing_gobj, joint_id));
+    gp->gv.starfox.linked_gobj = NULL;
 }
 
 #define ZRANDI(n) ((n) != 0 ? HSD_Randi(n) : 0)

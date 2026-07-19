@@ -1054,13 +1054,8 @@ void grCorneria_801DE8E4(Ground_GObj* gobj)
 
     scale = Ground_801C0498();
     gp->gv.corneria2.xC8 = grCn_804D69A4;
-    gp->gv.corneria2.xEC = NULL;
-    gp->gv.corneria2.xE8 = NULL;
-    gp->gv.corneria2.xE4 = NULL;
-    gp->gv.corneria2.xE0 = NULL;
-    grAnime_801C7FF8(gobj, 7, 7, 0, 0.0f, 1.0f);
-    grAnime_801C7FF8(gobj, 8, 7, 0, 0.0f, 1.0f);
-    grAnime_801C8098(gobj, 2, 7, 3, 0.0f, 1.0f);
+    Ground_ClearStarFoxArwingGObjs(gp);
+    Ground_AnimateStarFoxArwingWithBackground(gobj);
 
     switch (grCn_803E1D68.arwing_type[gp->gv.corneria2.xC8]) {
     case 1:
@@ -1074,37 +1069,25 @@ void grCorneria_801DE8E4(Ground_GObj* gobj)
     case 9: {
         HSD_GObj* arwing = grCorneria_801DD534(
             grCn_803E217C[grCn_803E1D68.arwing_group[gp->gv.corneria2.xC8]]);
-        gp->gv.corneria2.xDC = arwing;
-        if (arwing != NULL) {
-            Ground* agp = GET_GROUND(gp->gv.corneria2.xDC);
-            if (agp != NULL) {
-                agp->gv.corneria2.xC8 = gp->gv.corneria2.xC8;
-            }
-        }
+        Ground_LinkStarFoxArwing(gp, arwing);
         break;
     }
     case 10:
     case 11:
     case 12:
     case 13: {
-        lb_8000C2F8(Ground_801C3FA4(gobj, 0),
-                    Ground_801C3FA4(
-                        grCn_803E1D68.arwing_gobj[gp->gv.corneria2.xC8], 4));
-        gp->gv.corneria2.xDC = NULL;
+        Ground_AttachStarFoxArwingModel(
+            gobj, gp, grCn_803E1D68.arwing_gobj[gp->gv.corneria2.xC8], 4);
         break;
     }
     default:
-        gp->gv.corneria2.xE0 = (HSD_GObj*) -1;
-        gp->gv.corneria2.xE4 = (HSD_GObj*) -1;
+        Ground_DisableStarFoxArwingGObjs(gp);
         break;
     }
     HSD_JObjSetScaleX(jobj, scale * grCn_804D69A0->x70);
     HSD_JObjSetScaleY(jobj, scale * grCn_804D69A0->x70);
     HSD_JObjSetScaleZ(jobj, scale * grCn_804D69A0->x70);
-    gp->gv.corneria2.xC4.flags.b0 = 0;
-    gp->gv.corneria2.xD4 = 0;
-    gp->gv.corneria2.xF0 = 0;
-    gp->gv.corneria2.xF4 = 0;
+    Ground_ResetStarFoxArwingState(gp);
     gp->gv.corneria2.xF8 = (s32) grCn_804D69A0->x68;
     gp->gv.corneria2.xFC = 0;
     gp->gv.corneria2.x100 = HSD_Randi(2);
@@ -1464,13 +1447,9 @@ void grCorneria_801DF8D0(Ground_GObj* gobj)
     f32 scale;
 
     scale = Ground_801C0498();
-    gp->gv.corneria2.xC8 = grCn_804D69A4;
-    gp->gv.corneria2.xEC = NULL;
-    gp->gv.corneria2.xE8 = NULL;
-    gp->gv.corneria2.xE4 = NULL;
-    gp->gv.corneria2.xE0 = NULL;
-    grAnime_801C7FF8(gobj, 0, 7, 1, 0.0f, 1.0f);
-    grAnime_801C8098(gobj, 2, 7, 3, 0.0f, 1.0f);
+    gp->gv.starfox.arwing_slot = grCn_804D69A4;
+    Ground_ClearStarFoxArwingGObjs(gp);
+    Ground_AnimateStarFoxArwing(gobj);
 
     switch (grCn_803E1D68.arwing_type[gp->gv.corneria2.xC8]) {
     case 1:
@@ -1484,37 +1463,25 @@ void grCorneria_801DF8D0(Ground_GObj* gobj)
     case 9: {
         HSD_GObj* arwing = grCorneria_801DD534(
             grCn_803E217C[grCn_803E1D68.arwing_group[gp->gv.corneria2.xC8]]);
-        gp->gv.corneria2.xDC = arwing;
-        if (arwing != NULL) {
-            Ground* agp = GET_GROUND(gp->gv.corneria2.xDC);
-            if (agp != NULL) {
-                agp->gv.corneria2.xC8 = gp->gv.corneria2.xC8;
-            }
-        }
+        Ground_LinkStarFoxArwing(gp, arwing);
         break;
     }
     case 10:
     case 11:
     case 12:
     case 13: {
-        lb_8000C2F8(Ground_801C3FA4(gobj, 0),
-                    Ground_801C3FA4(
-                        grCn_803E1D68.arwing_gobj[gp->gv.corneria2.xC8], 4));
-        gp->gv.corneria2.xDC = NULL;
+        Ground_AttachStarFoxArwingModel(
+            gobj, gp, grCn_803E1D68.arwing_gobj[gp->gv.corneria2.xC8], 4);
         break;
     }
     default:
-        gp->gv.corneria2.xE0 = (HSD_GObj*) -1;
-        gp->gv.corneria2.xE4 = (HSD_GObj*) -1;
+        Ground_DisableStarFoxArwingGObjs(gp);
         break;
     }
     HSD_JObjSetScaleX(jobj, scale * grCn_804D69A0->x70);
     HSD_JObjSetScaleY(jobj, scale * grCn_804D69A0->x70);
     HSD_JObjSetScaleZ(jobj, scale * grCn_804D69A0->x70);
-    gp->gv.corneria2.xC4.flags.b0 = 0;
-    gp->gv.corneria2.xD4 = 0;
-    gp->gv.corneria2.xF0 = 0;
-    gp->gv.corneria2.xF4 = 0;
+    Ground_ResetStarFoxArwingState(gp);
     gp->gv.corneria2.xF8 = (s32) grCn_804D69A0->x68;
     gp->gv.corneria2.xFC = 0;
 }
