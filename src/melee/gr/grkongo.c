@@ -269,7 +269,6 @@ bool grKongo_801D5774(Ground_GObj* arg)
 }
 
 #define DegToRad(a) ((a) * 0.017453292F)
-#define M_TAU 6.283185307179586
 
 void grKongo_801D577C(Ground_GObj* arg0)
 {

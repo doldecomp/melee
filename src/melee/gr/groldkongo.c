@@ -234,7 +234,6 @@ bool grOldKongo_8020F880(Ground_GObj* gobj)
 }
 
 #define DegToRad(a) ((a) * 0.017453292F)
-#define M_TAU 6.283185307179586
 
 static inline void grOldKongo_8020F888_inline(Ground* gp)
 {
