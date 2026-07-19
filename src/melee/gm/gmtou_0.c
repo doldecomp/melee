@@ -1536,45 +1536,72 @@ void fn_801935B8(void)
 }
 #pragma pop
 
-void fn_801937C4(s32* arg0, u32 arg1, u32 arg2)
+/// Step the selected setting down, wrapping to its maximum.
+static inline void tmSettings_StepDown(s32* menu, TmSettingTable* table,
+                                       struct Lbl804799B8_t* state, int* mt)
 {
-    u8* table;
     s32 idx;
     s32* ptr;
     s32 val;
+
+    lbAudioAx_80024030(2);
+    state->x7 = 5;
+    idx = menu[0];
+    ptr = menu + idx;
+    val = *++ptr;
+    if (val > (s32) table->min[idx][!!*mt]) {
+        *ptr = val - 1;
+    } else {
+        *ptr = (s32) table->max[idx][!!*mt];
+    }
+}
+
+/// Step the selected setting up, wrapping to its minimum.
+static inline void tmSettings_StepUp(s32* menu, TmSettingTable* table,
+                                     struct Lbl804799B8_t* state, int* mt)
+{
+    s32 idx;
+    s32* ptr;
+    s32 val;
+
+    lbAudioAx_80024030(2);
+    state->x8 = 5;
+    idx = menu[0];
+    ptr = menu + idx;
+    val = *++ptr;
+    if (val < (s32) table->max[idx][!!*mt]) {
+        *ptr = val + 1;
+    } else {
+        *ptr = (s32) table->min[idx][!!*mt];
+    }
+}
+
+/// Redraw the settings HUD after input.
+static inline void tmSettings_Refresh(u32 mask)
+{
+    if (mask & 0x300) {
+        fn_80190ABC(0);
+        fn_80190ABC(2);
+    }
+    fn_80190ABC(3);
+}
+
+void fn_801937C4(s32* arg0, u32 arg1, u32 arg2)
+{
+    TmSettingTable* table;
+    s32 idx;
     TmData* global;
 
-    table = lbl_803D9F80.pad_0;
+    table = &lbl_803D9F80;
     if (arg1 & 0x40001) {
-        lbAudioAx_80024030(2);
-        lbl_804799B8.x7 = 5;
-        idx = arg0[0];
-        ptr = arg0 + idx;
-        val = *++ptr;
-        if (val > (s32) table[(idx << 1) + !!gm_804771C4.match_type + 0x40]) {
-            *ptr = val - 1;
-        } else {
-            *ptr = (s32) table[(idx << 1) + !!gm_804771C4.match_type + 0x4C];
-        }
+        tmSettings_StepDown(arg0, table, &lbl_804799B8,
+                            &gm_804771C4.match_type);
     } else if (arg1 & 0x80002) {
-        lbAudioAx_80024030(2);
-        lbl_804799B8.x8 = 5;
-        idx = arg0[0];
-        ptr = arg0 + idx;
-        val = *++ptr;
-        if (val < (s32) table[(idx << 1) + !!gm_804771C4.match_type + 0x4C]) {
-            *ptr = val + 1;
-        } else {
-            *ptr = (s32) table[(idx << 1) + !!gm_804771C4.match_type + 0x40];
-        }
+        tmSettings_StepUp(arg0, table, &lbl_804799B8, &gm_804771C4.match_type);
     }
 
     if (arg1 != 0) {
-        if ((arg1 | arg2) & 0x300) {
-            fn_80190ABC(0);
-            fn_80190ABC(2);
-        }
-        fn_80190ABC(3);
+        tmSettings_Refresh(arg1 | arg2);
     }
 
     if (arg2 & 0x100) {
@@ -1586,10 +1613,11 @@ void fn_801937C4(s32* arg0, u32 arg1, u32 arg2)
         global = &gm_804771C4;
         arg0[0] = idx + 1;
         idx = arg0[0];
-        tp = table + (idx << 1);
+        tp = table->pad_0 + (idx << 1);
         dp = arg0 + idx;
         for (; idx < 6; idx++) {
-            *++dp = tp[(global->match_type != 0) + 0x40];
+            *++dp =
+                tp[(global->match_type != 0) + offsetof(TmSettingTable, min)];
             tp += 2;
         }
         if (gm_804771C4.match_type == 0) {
@@ -1609,11 +1637,7 @@ void fn_801937C4(s32* arg0, u32 arg1, u32 arg2)
     }
 
     if (arg2 != 0) {
-        if ((arg1 | arg2) & 0x300) {
-            fn_80190ABC(0);
-            fn_80190ABC(2);
-        }
-        fn_80190ABC(3);
+        tmSettings_Refresh(arg1 | arg2);
     }
 }
 
@@ -1672,16 +1696,7 @@ void fn_80193B58(s32* arg0, u32 arg1, u32 arg2)
                 }
             }
         } else {
-            lbAudioAx_80024030(2);
-            state->x7 = 5;
-            idx = arg0[0];
-            ptr = arg0 + idx;
-            val = *++ptr;
-            if (val > (s32) table->min[idx][!!*mt]) {
-                *ptr = val - 1;
-            } else {
-                *ptr = (s32) table->max[idx][!!*mt];
-            }
+            tmSettings_StepDown(arg0, table, state, mt);
         }
     } else if (arg1 & 0x80002) {
         if (*mt == 0) {
@@ -1711,16 +1726,7 @@ void fn_80193B58(s32* arg0, u32 arg1, u32 arg2)
                 }
             }
         } else {
-            lbAudioAx_80024030(2);
-            state->x8 = 5;
-            idx = arg0[0];
-            ptr = arg0 + idx;
-            val = *++ptr;
-            if (val < (s32) table->max[idx][!!*mt]) {
-                *ptr = val + 1;
-            } else {
-                *ptr = (s32) table->min[idx][!!*mt];
-            }
+            tmSettings_StepUp(arg0, table, state, mt);
         }
     }
 
@@ -1733,11 +1739,7 @@ void fn_80193B58(s32* arg0, u32 arg1, u32 arg2)
     }
 
     if (arg1 != 0) {
-        if ((arg1 | arg2) & 0x300) {
-            fn_80190ABC(0);
-            fn_80190ABC(2);
-        }
-        fn_80190ABC(3);
+        tmSettings_Refresh(arg1 | arg2);
     }
 
     if (arg2 & 0x100) {
@@ -1764,11 +1766,7 @@ void fn_80193B58(s32* arg0, u32 arg1, u32 arg2)
     }
 
     if (arg2 != 0) {
-        if ((arg1 | arg2) & 0x300) {
-            fn_80190ABC(0);
-            fn_80190ABC(2);
-        }
-        fn_80190ABC(3);
+        tmSettings_Refresh(arg1 | arg2);
     }
 }
 
@@ -1825,16 +1823,7 @@ void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
                 }
             }
         } else {
-            lbAudioAx_80024030(2);
-            state->x7 = 5;
-            idx = arg0[0];
-            ptr = arg0 + idx;
-            val = *++ptr;
-            if (val > (s32) table->min[idx][!!*mt]) {
-                *ptr = val - 1;
-            } else {
-                *ptr = (s32) table->max[idx][!!*mt];
-            }
+            tmSettings_StepDown(arg0, table, state, mt);
         }
         if (*mt != 0) {
             goto post_clamp;
@@ -2090,11 +2079,7 @@ end:
     }
 
     if (arg1 != 0) {
-        if ((arg1 | arg2) & 0x300) {
-            fn_80190ABC(0);
-            fn_80190ABC(2);
-        }
-        fn_80190ABC(3);
+        tmSettings_Refresh(arg1 | arg2);
         fn_80190ABC(1);
     }
 
@@ -2107,11 +2092,7 @@ end:
     }
 
     if (arg2 != 0) {
-        if ((arg1 | arg2) & 0x300) {
-            fn_80190ABC(0);
-            fn_80190ABC(2);
-        }
-        fn_80190ABC(3);
+        tmSettings_Refresh(arg1 | arg2);
         fn_80190ABC(1);
     }
 }
@@ -2120,36 +2101,12 @@ end:
 void fn_801949B4(s32* arg0, u32 arg1, u32 arg2)
 {
     TmSettingTable* table = &lbl_803D9F80;
-    s32 idx;
-    s32* ptr;
-    s32 val;
 
     if (arg1 & 0x40001) {
-        lbAudioAx_80024030(2);
-        lbl_804799B8.x7 = 5;
-
-        idx = arg0[0];
-        ptr = arg0 + idx;
-        val = *++ptr;
-
-        if (val > (s32) table->min[idx][!!gm_804771C4.match_type]) {
-            *ptr = val - 1;
-        } else {
-            *ptr = (s32) table->max[idx][!!gm_804771C4.match_type];
-        }
+        tmSettings_StepDown(arg0, table, &lbl_804799B8,
+                            &gm_804771C4.match_type);
     } else if (arg1 & 0x80002) {
-        lbAudioAx_80024030(2);
-        lbl_804799B8.x8 = 5;
-
-        idx = arg0[0];
-        ptr = arg0 + idx;
-        val = *++ptr;
-
-        if (val < (s32) table->max[idx][!!gm_804771C4.match_type]) {
-            *ptr = val + 1;
-        } else {
-            *ptr = (s32) table->min[idx][!!gm_804771C4.match_type];
-        }
+        tmSettings_StepUp(arg0, table, &lbl_804799B8, &gm_804771C4.match_type);
     }
 
     if (arg1 != 0) {
@@ -2187,38 +2144,16 @@ void fn_80194BC4(s32* arg0, u32 arg1, u32 arg2)
 {
     int* match_type_ptr = &gm_804771C4.match_type;
     TmSettingTable* table = &lbl_803D9F80;
-    s32 value;
-    s32* arr_ptr;
-    s32 option;
 
     if (*match_type_ptr != 0) {
         return;
     }
 
     if (arg1 & 0x40001) {
-        lbAudioAx_80024030(2);
-        lbl_804799B8.x7 = 5;
-        option = arg0[0];
-        arr_ptr = arg0 + option;
-        value = *++arr_ptr;
-
-        if (value > (s32) table->min[option][!!*match_type_ptr]) {
-            *arr_ptr = value - 1;
-        } else {
-            *arr_ptr = (s32) table->max[option][!!*match_type_ptr];
-        }
+        tmSettings_StepDown(arg0, table, &lbl_804799B8,
+                            &gm_804771C4.match_type);
     } else if (arg1 & 0x80002) {
-        lbAudioAx_80024030(2);
-        lbl_804799B8.x8 = 5;
-        option = arg0[0];
-        arr_ptr = arg0 + option;
-        value = *++arr_ptr;
-
-        if (value < (s32) table->max[option][!!*match_type_ptr]) {
-            *arr_ptr = value + 1;
-        } else {
-            *arr_ptr = (s32) table->min[option][!!*match_type_ptr];
-        }
+        tmSettings_StepUp(arg0, table, &lbl_804799B8, &gm_804771C4.match_type);
     }
 
     if (arg1 != 0) {
