@@ -2908,6 +2908,18 @@ bool ftCo_800BB104(Fighter* fp, Fighter* arg1, Vec3* arg2, f32 arg3)
     return false;
 }
 
+static inline void ftCo_CpuPredictHitboxPosition(HitCapsule* hit, int frames,
+                                                 Vec3* predicted)
+{
+    f32 dx = hit->x4C.x - hit->x58.x;
+    f32 dy = hit->x4C.y - hit->x58.y;
+    f32 dz = hit->x4C.z - hit->x58.z;
+
+    predicted->x = dx * frames + hit->x4C.x;
+    predicted->y = dy * frames + hit->x4C.y;
+    predicted->z = dz * frames + hit->x4C.z;
+}
+
 int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
 {
     UNUSED u8 padD8[8];
@@ -2963,19 +2975,13 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
             Vec3 spAC;
             UNUSED u8 padA0[0xC];
             Vec3 sp94;
-            f32 dx, dy, dz;
             for (i = 0; i < 4; i++) {
                 state = ip->x5D4_hitboxes[i].hit.state;
                 hit = &ip->x5D4_hitboxes[i].hit;
                 if (state != HitCapsule_Disabled &&
                     state != HitCapsule_Enabled && !hit->x43_b2 &&
                     hit->element != 0xB && !lbColl_8000ACFC(fp, hit) &&
-                    (dx = hit->x4C.x - hit->x58.x,
-                     dy = hit->x4C.y - hit->x58.y,
-                     dz = hit->x4C.z - hit->x58.z,
-                     sp94.x = dx * count + hit->x4C.x,
-                     sp94.y = dy * count + hit->x4C.y,
-                     sp94.z = dz * count + hit->x4C.z,
+                    (ftCo_CpuPredictHitboxPosition(hit, count, &sp94),
                      lbColl_80006094(&hit->x4C, &sp94, arg2, &dst, &spAC,
                                      &spB8, hit->scale, arg3)))
                 {
@@ -2988,23 +2994,18 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
                 }
             }
         } else {
+            UNUSED u8 pad88[4];
             Vec3 sp84;
             Vec3 sp78;
             UNUSED u8 pad6C[0xC];
             Vec3 sp60;
-            f32 dx, dy, dz;
             for (i = 0; i < 4; i++) {
                 state = ip->x5D4_hitboxes[i].hit.state;
                 hit = &ip->x5D4_hitboxes[i].hit;
                 if (state != HitCapsule_Disabled &&
                     state != HitCapsule_Enabled && !hit->x43_b2 &&
                     hit->element != 0xB && !lbColl_8000ACFC(fp, hit) &&
-                    (dx = hit->x4C.x - hit->x58.x,
-                     dy = hit->x4C.y - hit->x58.y,
-                     dz = hit->x4C.z - hit->x58.z,
-                     sp60.x = dx * count + hit->x4C.x,
-                     sp60.y = dy * count + hit->x4C.y,
-                     sp60.z = dz * count + hit->x4C.z,
+                    (ftCo_CpuPredictHitboxPosition(hit, count, &sp60),
                      lbColl_80006094(&hit->x4C, &sp60, arg2, &dst, &sp78,
                                      &sp84, hit->scale, arg3)))
                 {
@@ -3021,23 +3022,18 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
             }
         }
     } else {
+        UNUSED u8 pad58[4];
         Vec3 sp50;
         Vec3 sp44;
         UNUSED u8 pad38[0xC];
         Vec3 sp2C;
-        UNUSED u8 pad24[8];
-        f32 dx, dy, dz;
         for (i = 0; i < 4; i++) {
             state = ip->x5D4_hitboxes[i].hit.state;
             hit = &ip->x5D4_hitboxes[i].hit;
             if (state != HitCapsule_Disabled && state != HitCapsule_Enabled &&
                 !hit->x43_b2 && hit->element != 0xB &&
                 !lbColl_8000ACFC(fp, hit) &&
-                (dx = hit->x4C.x - hit->x58.x, dy = hit->x4C.y - hit->x58.y,
-                 dz = hit->x4C.z - hit->x58.z,
-                 sp2C.x = dx * count + hit->x4C.x,
-                 sp2C.y = dy * count + hit->x4C.y,
-                 sp2C.z = dz * count + hit->x4C.z,
+                (ftCo_CpuPredictHitboxPosition(hit, count, &sp2C),
                  lbColl_80006094(&hit->x4C, &sp2C, arg2, &dst, &sp44, &sp50,
                                  hit->scale, arg3)))
             {
