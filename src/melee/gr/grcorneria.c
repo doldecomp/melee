@@ -871,14 +871,8 @@ extern Vec3 grCn_803B80A8;
 
 /// Bounds shared by #grCorneria_801DE024 and #grCorneria_801DED50. Volatile
 /// reads keep MWCC from duplicating them later in the literal pool.
-#ifdef __MWERKS__
-#define GRCN_SDATA2 __declspec(section ".sdata2")
-#else
-#define GRCN_SDATA2 __attribute__((section(".sdata2")))
-#endif
-GRCN_SDATA2 static const f32 grCn_ArwingMinX = -10.0f;
-GRCN_SDATA2 static const f32 grCn_ArwingMaxX = 2000.0f;
-#undef GRCN_SDATA2
+static const f32 grCn_ArwingMinX = -10.0f;
+static const f32 grCn_ArwingMaxX = 2000.0f;
 
 static inline void grCorneria_801DE024_inline(Ground_GObj* gobj)
 {
@@ -2812,17 +2806,11 @@ DynamicsDesc* grCorneria_801E2EE4(enum_t arg)
     return NULL;
 }
 
-#ifdef __MWERKS__
-#define GRCN_SDATA2 __declspec(section ".sdata2")
-#else
-#define GRCN_SDATA2 __attribute__((section(".sdata2")))
-#endif
 /// These are distinct symbols in the DOL. Volatile reads below prevent MWCC
 /// from folding them back into anonymous literals in a different order.
-GRCN_SDATA2 const f32 grCn_804DB260 = 107.0f;
-GRCN_SDATA2 const f32 grCn_804DB264 = 106.0f;
-GRCN_SDATA2 const f32 grCn_804DB268 = -3.4028235e38f;
-#undef GRCN_SDATA2
+const f32 grCn_804DB260 = 107.0f;
+const f32 grCn_804DB264 = 106.0f;
+const f32 grCn_804DB268 = -3.4028235e38f;
 
 bool grCorneria_801E2EEC(Vec3* v, int arg1, HSD_JObj* jobj)
 {
