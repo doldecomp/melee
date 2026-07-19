@@ -37,6 +37,7 @@
 #include <baselib/video.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/debugconsole_main.h>
+#include <sysdolphin/baselib/hsd_3915.h>
 #include <sysdolphin/baselib/random.h>
 #include <melee/gm/gm_1A45.h>
 #include <melee/pl/player.h>
