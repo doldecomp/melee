@@ -291,6 +291,184 @@ bool grPushOn_80218880(Ground_GObj* arg)
     return false;
 }
 
+/// @todo Fake padding function
+static inline void pad_stack(GXColor color) {}
+
+void grPushOn_80218888(Ground_GObj* gobj)
+{
+    HSD_GObj* player;
+    Vec3 player_pos;
+    Vec3 light_pos;
+    s32 sorted[20];
+    f32 distances[20];
+    Vec3 pos1;
+    Vec3 pos2;
+    Vec3 dir;
+    GXColor color;
+    Vec3 temp_pos;
+    Ground* gp;
+    s32 count;
+    s32 i;
+    s32 j;
+    s32 best;
+    f32 min_dist;
+    f32 ref_dist;
+    f32 weight;
+    f32 dx;
+    f32 dy;
+    f32 dist_sq;
+    GET_GROUND(0);
+    GET_GROUND(0);
+
+    gp = GET_GROUND(gobj);
+    player = Ground_801C57A4();
+    if (player != NULL) {
+        ftLib_80086644(player, &player_pos);
+    } else {
+        player_pos.z = 0.0f;
+        player_pos.y = 0.0f;
+        player_pos.x = 0.0f;
+    }
+
+    if (gp->u.pushon.gobj != 0) {
+        i = 0;
+        while (i < (s32) gp->u.pushon.count) {
+            HSD_LObj* lobj = gp->u.pushon.lobjs[i];
+            s32 type = lobj->flags & 3;
+
+            if (type == 0) {
+                distances[i] = -100.0f;
+            } else if (type == 1 || type == 2) {
+                HSD_LObjGetPosition(lobj, &pos1);
+                dx = player_pos.x - pos1.x;
+                dy = player_pos.y - pos1.y;
+                {
+                    f32 dx2 = dx * dx;
+                    f32 dy2 = dy * dy;
+                    distances[i] = sqrtf(dx2 + dy2);
+                }
+            } else if (type == 3) {
+                HSD_LObjGetPosition(lobj, &pos2);
+                distances[i] = ABS(player_pos.x - pos2.x);
+            } else {
+                HSD_ASSERT(0x1C5, 0);
+            }
+
+            if (distances[i] < 10.0f) {
+                distances[i] = 10.0f;
+            }
+            sorted[i] = i;
+            i += 1;
+        }
+
+        /* Selection sort by distance */
+        for (i = 0; i < (int) gp->u.pushon.count; i++) {
+            count = gp->u.pushon.count;
+            min_dist = 3.4028235e38f;
+            best = 0;
+            for (j = i; j < count; j++) {
+                if (min_dist > distances[sorted[j]]) {
+                    best = j;
+                    min_dist = distances[sorted[j]];
+                }
+            }
+            {
+                s32 tmp = sorted[i];
+                sorted[i] = sorted[best];
+                sorted[best] = tmp;
+            }
+        }
+
+        /* Enable first 5 lights, disable rest */
+        for (i = 0; i < (int) gp->u.pushon.count; i++) {
+            if (i < 5) {
+                HSD_LObjClearFlags(gp->u.pushon.lobjs[sorted[i]], 0x20);
+            } else {
+                HSD_LObjSetFlags(gp->u.pushon.lobjs[sorted[i]], 0x20);
+            }
+        }
+
+        /* Compute weighted direction */
+        dir = grPushOn_803B844C;
+        ref_dist = distances[sorted[1]];
+
+        for (i = 1; i < (int) gp->u.pushon.count; i++) {
+            if (HSD_LObjGetPosition(gp->u.pushon.lobjs[sorted[i]],
+                                    &light_pos) != 0)
+            {
+                weight = ref_dist / distances[sorted[i]];
+                lbVector_Sub(&light_pos, &player_pos);
+                if (light_pos.y < 100.0f) {
+                    if (light_pos.y < 0.0f) {
+                        weight = 0.0f;
+                    } else {
+                        weight *= light_pos.y / 100.0f;
+                    }
+                }
+                lbVector_Normalize(&light_pos);
+                light_pos.x *= weight;
+                light_pos.y *= weight;
+                light_pos.z *= weight;
+                lbVector_Add(&dir, &light_pos);
+            }
+        }
+
+        /* Compute magnitude and normalize direction */
+        dist_sq = sqrtf(dir.z * dir.z + (dir.x * dir.x + dir.y * dir.y));
+        if (dist_sq < 0.01f) {
+            dir.y = 100.0f;
+        }
+        lbVector_Normalize(&dir);
+        dir.x *= 20.0f;
+        dir.y *= 20.0f;
+        dir.z *= 20.0f;
+        lbVector_Add(&dir, &player_pos);
+
+        /* Set spotlight */
+        HSD_LObjSetPosition(gp->u.pushon.point_light, &dir);
+        HSD_LObjSetInterest(gp->u.pushon.point_light, &player_pos);
+        HSD_LObjSetFlags(gp->u.pushon.point_light, 0x400);
+
+        /* Color from 2nd nearest */
+        {
+            f32 dist_diff;
+            dist_diff = distances[sorted[2]] - distances[sorted[1]];
+            HSD_LObjGetColor(gp->u.pushon.lobjs[sorted[1]], &color);
+            if (distances[sorted[2]] - distances[sorted[1]] < 50.0f) {
+                f32 ratio = dist_diff / 50.0f;
+                color.r = color.r * ratio;
+                color.g = color.g * ratio;
+                color.b = color.b * ratio;
+            }
+        }
+        HSD_LObjSetColor(gp->u.pushon.spot_light, color);
+        pad_stack(color);
+
+        /* Copy position from 2nd nearest */
+        if (HSD_LObjGetPosition(gp->u.pushon.lobjs[sorted[1]], &temp_pos) == 0)
+        {
+            temp_pos.z = 0.0f;
+            temp_pos.y = 0.0f;
+            temp_pos.x = 0.0f;
+        }
+        HSD_LObjSetPosition(gp->u.pushon.spot_light, &temp_pos);
+
+        /* Copy interest from 2nd nearest */
+        if (HSD_LObjGetInterest(gp->u.pushon.lobjs[sorted[1]], &temp_pos) == 0)
+        {
+            temp_pos.z = 0.0f;
+            temp_pos.y = 0.0f;
+            temp_pos.x = 0.0f;
+        }
+        HSD_LObjSetInterest(gp->u.pushon.spot_light, &temp_pos);
+
+        /* Copy and modify flags */
+        gp->u.pushon.spot_light->flags = gp->u.pushon.lobjs[sorted[1]]->flags;
+        gp->u.pushon.spot_light->flags &= ~4;
+        gp->u.pushon.spot_light->flags |= 8;
+    }
+}
+
 void grPushOn_80218ED0(Ground_GObj* arg) {}
 
 HSD_LObj* grPushOn_80218ED4(HSD_GObj* gobj)
@@ -482,183 +660,6 @@ int grPushOn_80219230(int arg0)
         i++;
     }
     HSD_ASSERT(861, 0);
-}
-
-static inline void grPushOn_StackPad(GXColor color) {}
-
-void grPushOn_80218888(Ground_GObj* gobj)
-{
-    HSD_GObj* player;
-    Vec3 player_pos;
-    Vec3 light_pos;
-    s32 sorted[20];
-    f32 distances[20];
-    Vec3 pos1;
-    Vec3 pos2;
-    Vec3 dir;
-    GXColor color;
-    Vec3 temp_pos;
-    Ground* gp;
-    s32 count;
-    s32 i;
-    s32 j;
-    s32 best;
-    f32 min_dist;
-    f32 ref_dist;
-    f32 weight;
-    f32 dx;
-    f32 dy;
-    f32 dist_sq;
-    GET_GROUND(0);
-    GET_GROUND(0);
-
-    gp = GET_GROUND(gobj);
-    player = Ground_801C57A4();
-    if (player != NULL) {
-        ftLib_80086644(player, &player_pos);
-    } else {
-        player_pos.z = 0.0f;
-        player_pos.y = 0.0f;
-        player_pos.x = 0.0f;
-    }
-
-    if (gp->u.pushon.gobj != 0) {
-        i = 0;
-        while (i < (s32) gp->u.pushon.count) {
-            HSD_LObj* lobj = gp->u.pushon.lobjs[i];
-            s32 type = lobj->flags & 3;
-
-            if (type == 0) {
-                distances[i] = -100.0f;
-            } else if (type == 1 || type == 2) {
-                HSD_LObjGetPosition(lobj, &pos1);
-                dx = player_pos.x - pos1.x;
-                dy = player_pos.y - pos1.y;
-                {
-                    f32 dx2 = dx * dx;
-                    f32 dy2 = dy * dy;
-                    distances[i] = sqrtf(dx2 + dy2);
-                }
-            } else if (type == 3) {
-                HSD_LObjGetPosition(lobj, &pos2);
-                distances[i] = ABS(player_pos.x - pos2.x);
-            } else {
-                HSD_ASSERT(0x1C5, 0);
-            }
-
-            if (distances[i] < 10.0f) {
-                distances[i] = 10.0f;
-            }
-            sorted[i] = i;
-            i += 1;
-        }
-
-        /* Selection sort by distance */
-        for (i = 0; i < (int) gp->u.pushon.count; i++) {
-            count = gp->u.pushon.count;
-            min_dist = 3.4028235e38f;
-            best = 0;
-            for (j = i; j < count; j++) {
-                if (min_dist > distances[sorted[j]]) {
-                    best = j;
-                    min_dist = distances[sorted[j]];
-                }
-            }
-            {
-                s32 tmp = sorted[i];
-                sorted[i] = sorted[best];
-                sorted[best] = tmp;
-            }
-        }
-
-        /* Enable first 5 lights, disable rest */
-        for (i = 0; i < (int) gp->u.pushon.count; i++) {
-            if (i < 5) {
-                HSD_LObjClearFlags(gp->u.pushon.lobjs[sorted[i]], 0x20);
-            } else {
-                HSD_LObjSetFlags(gp->u.pushon.lobjs[sorted[i]], 0x20);
-            }
-        }
-
-        /* Compute weighted direction */
-        dir = grPushOn_803B844C;
-        ref_dist = distances[sorted[1]];
-
-        for (i = 1; i < (int) gp->u.pushon.count; i++) {
-            if (HSD_LObjGetPosition(gp->u.pushon.lobjs[sorted[i]],
-                                    &light_pos) != 0)
-            {
-                weight = ref_dist / distances[sorted[i]];
-                lbVector_Sub(&light_pos, &player_pos);
-                if (light_pos.y < 100.0f) {
-                    if (light_pos.y < 0.0f) {
-                        weight = 0.0f;
-                    } else {
-                        weight *= light_pos.y / 100.0f;
-                    }
-                }
-                lbVector_Normalize(&light_pos);
-                light_pos.x *= weight;
-                light_pos.y *= weight;
-                light_pos.z *= weight;
-                lbVector_Add(&dir, &light_pos);
-            }
-        }
-
-        /* Compute magnitude and normalize direction */
-        dist_sq = sqrtf(dir.z * dir.z + (dir.x * dir.x + dir.y * dir.y));
-        if (dist_sq < 0.01f) {
-            dir.y = 100.0f;
-        }
-        lbVector_Normalize(&dir);
-        dir.x *= 20.0f;
-        dir.y *= 20.0f;
-        dir.z *= 20.0f;
-        lbVector_Add(&dir, &player_pos);
-
-        /* Set spotlight */
-        HSD_LObjSetPosition(gp->u.pushon.point_light, &dir);
-        HSD_LObjSetInterest(gp->u.pushon.point_light, &player_pos);
-        HSD_LObjSetFlags(gp->u.pushon.point_light, 0x400);
-
-        /* Color from 2nd nearest */
-        {
-            f32 dist_diff;
-            dist_diff = distances[sorted[2]] - distances[sorted[1]];
-            HSD_LObjGetColor(gp->u.pushon.lobjs[sorted[1]], &color);
-            if (distances[sorted[2]] - distances[sorted[1]] < 50.0f) {
-                f32 ratio = dist_diff / 50.0f;
-                color.r = color.r * ratio;
-                color.g = color.g * ratio;
-                color.b = color.b * ratio;
-            }
-        }
-        HSD_LObjSetColor(gp->u.pushon.spot_light, color);
-        grPushOn_StackPad(color);
-
-        /* Copy position from 2nd nearest */
-        if (HSD_LObjGetPosition(gp->u.pushon.lobjs[sorted[1]], &temp_pos) == 0)
-        {
-            temp_pos.z = 0.0f;
-            temp_pos.y = 0.0f;
-            temp_pos.x = 0.0f;
-        }
-        HSD_LObjSetPosition(gp->u.pushon.spot_light, &temp_pos);
-
-        /* Copy interest from 2nd nearest */
-        if (HSD_LObjGetInterest(gp->u.pushon.lobjs[sorted[1]], &temp_pos) == 0)
-        {
-            temp_pos.z = 0.0f;
-            temp_pos.y = 0.0f;
-            temp_pos.x = 0.0f;
-        }
-        HSD_LObjSetInterest(gp->u.pushon.spot_light, &temp_pos);
-
-        /* Copy and modify flags */
-        gp->u.pushon.spot_light->flags = gp->u.pushon.lobjs[sorted[1]]->flags;
-        gp->u.pushon.spot_light->flags &= ~4;
-        gp->u.pushon.spot_light->flags |= 8;
-    }
 }
 
 s32 fn_802192A4(void* arg0, HSD_GObj* gobj, s32* result)
