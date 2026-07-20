@@ -1,11 +1,9 @@
-/** @file
- * @todo Fix formatting
- */
+/// @file melee/ft/ft_0877.h
 
 /// @remarks Only used by Purin.
 extern HSD_Joint* ft_8045A1E0[6];
 
-// SFX_PlayCharacterSFX
+/// SFX_PlayCharacterSFX
 void ft_PlaySFX(Fighter*, enum_t, int, int);
 
 /// Interrupt_Wait

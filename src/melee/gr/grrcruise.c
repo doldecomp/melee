@@ -134,12 +134,12 @@ void grRCruise_801FF168(void)
     stage_info.unk8C.b5 = 0;
     jgobj = grRCruise_801FF2C8(3);
     gp = GET_GROUND(jgobj);
-    gp->gv.rcruise.xC4.b0 = 1;
+    gp->u.rcruise.xC4.b0 = 1;
     jobj = GET_JOBJ(jgobj);
     HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     grgobj = grRCruise_801FF2C8(3);
     gp2 = GET_GROUND(grgobj);
-    gp2->gv.rcruise2.xEC = jgobj;
+    gp2->u.rcruise2.xEC = jgobj;
     grRCruise_801FF2C8(0);
     grRCruise_801FF2C8(2);
     grRCruise_801FF2C8(5);
@@ -239,7 +239,7 @@ void grRCruise_801FF444(Ground_GObj* gobj)
     mpJointSetCb1(33, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
     mpJointSetCb1(34, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
     mpJointSetCb1(35, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
-    gp->gv.rcruise.x10 = 0;
+    gp->u.rcruise.x10 = 0;
 }
 
 void grRCruise_801FF5B4(Ground_GObj* gobj)
@@ -249,7 +249,7 @@ void grRCruise_801FF5B4(Ground_GObj* gobj)
 
     Ground_801C2ED0(jobj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
-    gp->gv.rcruise.x10 = 1;
+    gp->u.rcruise.x10 = 1;
     gp->u.map.chikuwa = HSD_MemAlloc(0x198);
     HSD_ASSERT(0x19A, gp->u.map.chikuwa);
     grRCruise_80201410(gobj);
@@ -260,11 +260,11 @@ void grRCruise_801FF5B4(Ground_GObj* gobj)
     mpLib_80058560();
     {
         Vec3 pos = { 1, 0, 0 };
-        gp->gv.rcruise.x04 =
+        gp->u.rcruise.x04 =
             lb_80011A50(&pos, -1, 0.4f, 0.0f, 1.0471976f, -10000.0f, 10000.0f,
                         10000.0f, -10000.0f);
-        gp->gv.rcruise.x08 = 0.017453292f;
-        gp->gv.rcruise.x0C = 1;
+        gp->u.rcruise.x08 = 0.017453292f;
+        gp->u.rcruise.x0C = 1;
     }
 }
 
@@ -276,7 +276,7 @@ bool grRCruise_801FF6CC(Ground_GObj* arg)
 void grRCruise_801FF6D4(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    if (gp->gv.unk.xD4 == 0) {
+    if (gp->u.unk.xD4 == 0) {
         grRCruise_80201588(gobj);
         grRCruise_8020071C(gobj);
         grRCruise_80200C04(gobj);
@@ -322,9 +322,9 @@ void grRCruise_801FF7A4(Ground_GObj* gobj)
                             data != NULL))
     {
         grLib_801C9B20(Ground_801C3FA4(stage_gobj, 23), data,
-                       &gp->gv.rcruise2.xC4);
+                       &gp->u.rcruise2.xC4);
     } else {
-        gp->gv.rcruise2.xC4.data = NULL;
+        gp->u.rcruise2.xC4.data = NULL;
     }
 
     jobj = Ground_801C3FA4(stage_gobj, 10);
@@ -353,7 +353,7 @@ bool grRCruise_801FF8DC(Ground_GObj* arg)
 void grRCruise_801FF8E4(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    grLib_801C9B8C(&gp->gv);
+    grLib_801C9B8C(&gp->u);
     Ground_801C2FE0(gobj);
 }
 
@@ -497,13 +497,13 @@ void grRCruise_80200074(Ground_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
     for (i = 0; i < 3; i++) {
         grAnime_801C8098(gobj, grRc_804D4790[i], 7, 1, 0.0F, 0.0F);
-        gp->gv.rcruise.x3C[i].x02 =
+        gp->u.rcruise.x3C[i].x02 =
             Ground_801C32D4(gp->map_id, grRc_804D4790[i]);
-        mpJointSetCb1(gp->gv.rcruise.x3C[i].x02, gobj, fn_80200460);
-        gp->gv.rcruise.x3C[i].x0C = Ground_801C3FA4(gobj, grRc_804D4790[i]);
-        gp->gv.rcruise.x3C[i].x08 = 0;
-        gp->gv.rcruise.x3C[i].x04 = 0;
-        gp->gv.rcruise.x3C[i].x00 = 0;
+        mpJointSetCb1(gp->u.rcruise.x3C[i].x02, gobj, fn_80200460);
+        gp->u.rcruise.x3C[i].x0C = Ground_801C3FA4(gobj, grRc_804D4790[i]);
+        gp->u.rcruise.x3C[i].x08 = 0;
+        gp->u.rcruise.x3C[i].x04 = 0;
+        gp->u.rcruise.x3C[i].x00 = 0;
     }
 }
 
@@ -519,70 +519,70 @@ void grRCruise_80200154(Ground_GObj* gobj)
     int i;
 
     for (i = 0; i < 3; i++) {
-        switch (gp->gv.rcruise.x3C[i].x00) {
+        switch (gp->u.rcruise.x3C[i].x00) {
         case 0:
-            mpJointListAdd(gp2->gv.rcruise.x3C[i].x02);
-            grRCruise_80201B60(gp2->gv.rcruise.x3C[i].x0C->child, 1);
-            gp->gv.rcruise.x3C[i].x04 = 0;
-            gp->gv.rcruise.x3C[i].x00 = 1;
+            mpJointListAdd(gp2->u.rcruise.x3C[i].x02);
+            grRCruise_80201B60(gp2->u.rcruise.x3C[i].x0C->child, 1);
+            gp->u.rcruise.x3C[i].x04 = 0;
+            gp->u.rcruise.x3C[i].x00 = 1;
             break;
         case 2:
-            if (gp->gv.rcruise.x3C[i].x08 == 0) {
-                gp->gv.rcruise.x3C[i].x04 = 0;
+            if (gp->u.rcruise.x3C[i].x08 == 0) {
+                gp->u.rcruise.x3C[i].x04 = 0;
                 grAnime_801C7A94(gobj, grRc_804D4790[i], 1, 0.0F);
-                gp->gv.rcruise.x3C[i].x00 = 3;
+                gp->u.rcruise.x3C[i].x00 = 3;
             } else if (grAnime_801C83D0(gobj, grRc_804D4790[i], 7) != 0) {
-                gp->gv.rcruise.x3C[i].x04 = 0;
-                gp->gv.rcruise.x3C[i].x00 = 5;
+                gp->u.rcruise.x3C[i].x04 = 0;
+                gp->u.rcruise.x3C[i].x00 = 5;
             }
             break;
         case 3:
-            if (gp->gv.rcruise.x3C[i].x04 >= grRc_804D6A10->x0C) {
-                gp->gv.rcruise.x3C[i].x04 = 0;
-                gp->gv.rcruise.x3C[i].x01 = 0;
-                gp->gv.rcruise.x3C[i].x00 = 4;
+            if (gp->u.rcruise.x3C[i].x04 >= grRc_804D6A10->x0C) {
+                gp->u.rcruise.x3C[i].x04 = 0;
+                gp->u.rcruise.x3C[i].x01 = 0;
+                gp->u.rcruise.x3C[i].x00 = 4;
             }
-            gp->gv.rcruise.x3C[i].x04++;
+            gp->u.rcruise.x3C[i].x04++;
             break;
         case 4:
-            if (gp->gv.rcruise.x3C[i].x04 % grRc_804D6A10->x14 == 0) {
-                gp->gv.rcruise.x3C[i].x01 ^= 1;
-                if (gp->gv.rcruise.x3C[i].x01) {
-                    grRCruise_80201B60(gp2->gv.rcruise.x3C[i].x0C->child, 0);
+            if (gp->u.rcruise.x3C[i].x04 % grRc_804D6A10->x14 == 0) {
+                gp->u.rcruise.x3C[i].x01 ^= 1;
+                if (gp->u.rcruise.x3C[i].x01) {
+                    grRCruise_80201B60(gp2->u.rcruise.x3C[i].x0C->child, 0);
                 } else {
-                    grRCruise_80201B60(gp2->gv.rcruise.x3C[i].x0C->child, 1);
+                    grRCruise_80201B60(gp2->u.rcruise.x3C[i].x0C->child, 1);
                 }
             }
-            if (gp->gv.rcruise.x3C[i].x04 >= grRc_804D6A10->x10) {
-                mpLib_80057BC0(gp2->gv.rcruise.x3C[i].x02);
-                grRCruise_80201B60(gp2->gv.rcruise.x3C[i].x0C->child, 0);
+            if (gp->u.rcruise.x3C[i].x04 >= grRc_804D6A10->x10) {
+                mpLib_80057BC0(gp2->u.rcruise.x3C[i].x02);
+                grRCruise_80201B60(gp2->u.rcruise.x3C[i].x0C->child, 0);
                 grAnime_801C7BA0(gobj, grRc_804D4790[i], 1, 0.0F);
                 grAnime_801C7A94(gobj, grRc_804D4790[i], 1, 0.0F);
-                mpLib_80055E9C(gp2->gv.rcruise.x3C[i].x02);
-                mpLib_80057424(gp2->gv.rcruise.x3C[i].x02);
-                gp->gv.rcruise.x3C[i].x00 = 0;
+                mpLib_80055E9C(gp2->u.rcruise.x3C[i].x02);
+                mpLib_80057424(gp2->u.rcruise.x3C[i].x02);
+                gp->u.rcruise.x3C[i].x00 = 0;
             }
-            gp->gv.rcruise.x3C[i].x04++;
+            gp->u.rcruise.x3C[i].x04++;
             break;
         case 5:
-            if (gp->gv.rcruise.x3C[i].x04 % grRc_804D6A10->x1C == 0) {
-                grRCruise_80201B60(gp2->gv.rcruise.x3C[i].x0C->child, 0);
+            if (gp->u.rcruise.x3C[i].x04 % grRc_804D6A10->x1C == 0) {
+                grRCruise_80201B60(gp2->u.rcruise.x3C[i].x0C->child, 0);
             } else {
-                grRCruise_80201B60(gp2->gv.rcruise.x3C[i].x0C->child, 1);
+                grRCruise_80201B60(gp2->u.rcruise.x3C[i].x0C->child, 1);
             }
-            if (gp->gv.rcruise.x3C[i].x04 >= grRc_804D6A10->x18) {
-                mpLib_80057BC0(gp2->gv.rcruise.x3C[i].x02);
-                grRCruise_80201B60(gp2->gv.rcruise.x3C[i].x0C->child, 0);
+            if (gp->u.rcruise.x3C[i].x04 >= grRc_804D6A10->x18) {
+                mpLib_80057BC0(gp2->u.rcruise.x3C[i].x02);
+                grRCruise_80201B60(gp2->u.rcruise.x3C[i].x0C->child, 0);
                 grAnime_801C7BA0(gobj, grRc_804D4790[i], 1, 0.0F);
                 grAnime_801C7A94(gobj, grRc_804D4790[i], 1, 0.0F);
-                mpLib_80055E9C(gp2->gv.rcruise.x3C[i].x02);
-                mpLib_80057424(gp2->gv.rcruise.x3C[i].x02);
-                gp->gv.rcruise.x3C[i].x00 = 0;
+                mpLib_80055E9C(gp2->u.rcruise.x3C[i].x02);
+                mpLib_80057424(gp2->u.rcruise.x3C[i].x02);
+                gp->u.rcruise.x3C[i].x00 = 0;
             }
-            gp->gv.rcruise.x3C[i].x04++;
+            gp->u.rcruise.x3C[i].x04++;
             break;
         }
-        gp->gv.rcruise.x3C[i].x08 = 0;
+        gp->u.rcruise.x3C[i].x08 = 0;
     }
     Ground_801C2FE0(gobj);
 }
@@ -599,15 +599,15 @@ void fn_80200460(Ground* gp_arg, s32 joint_id, CollData* cd, s32 arg3,
 
     if ((s32) cd->x34_flags.b1234 == 1) {
         for (i = 0; i < 3; i++) {
-            if (gp->gv.rcruise.x3C[i].x02 == joint_id) {
-                u8 state = gp->gv.rcruise.x3C[i].x00;
+            if (gp->u.rcruise.x3C[i].x02 == joint_id) {
+                u8 state = gp->u.rcruise.x3C[i].x00;
                 if (state == 1 || state == 3 || state == 4) {
-                    gp->gv.rcruise.x3C[i].x04 = 0;
-                    grRCruise_80201B60(gp->gv.rcruise.x3C[i].x0C->child, 1);
+                    gp->u.rcruise.x3C[i].x04 = 0;
+                    grRCruise_80201B60(gp->u.rcruise.x3C[i].x0C->child, 1);
                     grAnime_801C7A94(gobj, grRc_804D4790[i], 1, 1.0f);
-                    gp->gv.rcruise.x3C[i].x00 = 2;
+                    gp->u.rcruise.x3C[i].x00 = 2;
                 }
-                gp->gv.rcruise.x3C[i].x08++;
+                gp->u.rcruise.x3C[i].x08++;
                 break;
             }
         }
@@ -617,16 +617,16 @@ void fn_80200460(Ground* gp_arg, s32 joint_id, CollData* cd, s32 arg3,
 void grRCruise_80200540(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
-    gp->gv.rcruise.x18 = 0.0F;
-    gp->gv.rcruise.x14 = 0.0F;
-    gp->gv.rcruise.x1C = 0.0F;
-    gp->gv.rcruise.x20 = 0.0F;
-    gp->gv.rcruise.x34 = 0;
-    gp->gv.rcruise.x30 = 0;
-    gp->gv.rcruise.x28 = 0.0F;
-    gp->gv.rcruise.x24 = 0.0F;
-    gp->gv.rcruise.x38 = 0;
-    gp->gv.rcruise.x2C = 0;
+    gp->u.rcruise.x18 = 0.0F;
+    gp->u.rcruise.x14 = 0.0F;
+    gp->u.rcruise.x1C = 0.0F;
+    gp->u.rcruise.x20 = 0.0F;
+    gp->u.rcruise.x34 = 0;
+    gp->u.rcruise.x30 = 0;
+    gp->u.rcruise.x28 = 0.0F;
+    gp->u.rcruise.x24 = 0.0F;
+    gp->u.rcruise.x38 = 0;
+    gp->u.rcruise.x2C = 0;
 }
 
 void grRCruise_80200578(Ground* gp_arg, s32 joint_id, CollData* cd, s32 arg3,
@@ -657,12 +657,12 @@ void grRCruise_80200578(Ground* gp_arg, s32 joint_id, CollData* cd, s32 arg3,
     dist = sqrtf(dy * dy + dx * dx);
     if (dist > 4.0f) {
         if (pos.x < cd->cur_pos.x) {
-            gp->gv.rcruise.x24 += dist * (arg3 / 1000.0f);
+            gp->u.rcruise.x24 += dist * (arg3 / 1000.0f);
         } else {
-            gp->gv.rcruise.x28 += dist * (arg3 / 1000.0f);
+            gp->u.rcruise.x28 += dist * (arg3 / 1000.0f);
         }
     }
-    gp->gv.rcruise.x34++;
+    gp->u.rcruise.x34++;
 }
 
 void grRCruise_8020071C(Ground_GObj* gobj)
@@ -670,64 +670,64 @@ void grRCruise_8020071C(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = Ground_801C3FA4(gobj, 8);
     HSD_JObj* jobj5 = Ground_801C3FA4(Ground_801C2BA4(5), 8);
-    f32 abs_rot = ABS(gp->gv.rcruise.x18);
+    f32 abs_rot = ABS(gp->u.rcruise.x18);
     f32 wrapped = abs_rot - (360.0f * (s32) (abs_rot / 360.0f));
 
-    switch (gp->gv.rcruise.x2C) {
+    switch (gp->u.rcruise.x2C) {
     case 0:
-        if (gp->gv.rcruise.x34 == 0) {
-            gp->gv.rcruise.x1C = gp->gv.rcruise.x18 < 0.0f ? 1 : -1;
-            gp->gv.rcruise.x20 = grRc_804D6A10->x8 * gp->gv.rcruise.x1C;
+        if (gp->u.rcruise.x34 == 0) {
+            gp->u.rcruise.x1C = gp->u.rcruise.x18 < 0.0f ? 1 : -1;
+            gp->u.rcruise.x20 = grRc_804D6A10->x8 * gp->u.rcruise.x1C;
             if (wrapped <= 0.2f) {
-                gp->gv.rcruise.x20 = 0.0f;
-                gp->gv.rcruise.x2C = 0;
+                gp->u.rcruise.x20 = 0.0f;
+                gp->u.rcruise.x2C = 0;
             }
-        } else if (gp->gv.rcruise.x24 < gp->gv.rcruise.x28) {
-            gp->gv.rcruise.x1C = 1.0f;
-            gp->gv.rcruise.x20 =
-                grRc_804D6A10->x0 * (gp->gv.rcruise.x28 - gp->gv.rcruise.x24);
-            if (gp->gv.rcruise.x20 >= grRc_804D6A10->x4) {
-                gp->gv.rcruise.x20 = grRc_804D6A10->x4;
+        } else if (gp->u.rcruise.x24 < gp->u.rcruise.x28) {
+            gp->u.rcruise.x1C = 1.0f;
+            gp->u.rcruise.x20 =
+                grRc_804D6A10->x0 * (gp->u.rcruise.x28 - gp->u.rcruise.x24);
+            if (gp->u.rcruise.x20 >= grRc_804D6A10->x4) {
+                gp->u.rcruise.x20 = grRc_804D6A10->x4;
             }
         } else {
-            gp->gv.rcruise.x1C = -1.0f;
-            gp->gv.rcruise.x20 =
-                -grRc_804D6A10->x0 * (gp->gv.rcruise.x24 - gp->gv.rcruise.x28);
-            if (gp->gv.rcruise.x20 <= -grRc_804D6A10->x4) {
-                gp->gv.rcruise.x20 = -grRc_804D6A10->x4;
+            gp->u.rcruise.x1C = -1.0f;
+            gp->u.rcruise.x20 =
+                -grRc_804D6A10->x0 * (gp->u.rcruise.x24 - gp->u.rcruise.x28);
+            if (gp->u.rcruise.x20 <= -grRc_804D6A10->x4) {
+                gp->u.rcruise.x20 = -grRc_804D6A10->x4;
             }
         }
         break;
     case 1:
-        if (gp->gv.rcruise.x38 == 0) {
-            if (gp->gv.rcruise.x34 == 0) {
-                gp->gv.rcruise.x1C = gp->gv.rcruise.x18 < 0.0f ? 1 : -1;
-                gp->gv.rcruise.x20 = grRc_804D6A10->x8 * gp->gv.rcruise.x1C;
+        if (gp->u.rcruise.x38 == 0) {
+            if (gp->u.rcruise.x34 == 0) {
+                gp->u.rcruise.x1C = gp->u.rcruise.x18 < 0.0f ? 1 : -1;
+                gp->u.rcruise.x20 = grRc_804D6A10->x8 * gp->u.rcruise.x1C;
                 if (wrapped <= 0.2f) {
-                    gp->gv.rcruise.x20 = 0.0f;
-                    gp->gv.rcruise.x2C = 0;
+                    gp->u.rcruise.x20 = 0.0f;
+                    gp->u.rcruise.x2C = 0;
                 }
             } else {
-                gp->gv.rcruise.x2C = 0;
+                gp->u.rcruise.x2C = 0;
             }
         } else {
-            gp->gv.rcruise.x38--;
-            gp->gv.rcruise.x20 += 0.008f * -gp->gv.rcruise.x1C;
-            if ((gp->gv.rcruise.x20 < 0.0f ? -gp->gv.rcruise.x20
-                                           : gp->gv.rcruise.x20) <= 0.008f)
+            gp->u.rcruise.x38--;
+            gp->u.rcruise.x20 += 0.008f * -gp->u.rcruise.x1C;
+            if ((gp->u.rcruise.x20 < 0.0f ? -gp->u.rcruise.x20
+                                          : gp->u.rcruise.x20) <= 0.008f)
             {
-                gp->gv.rcruise.x20 = 0.0f;
+                gp->u.rcruise.x20 = 0.0f;
             }
         }
         break;
     }
-    gp->gv.rcruise.x18 += gp->gv.rcruise.x20;
-    HSD_JObjSetRotationZ(jobj, 0.017453292f * gp->gv.rcruise.x18);
-    HSD_JObjSetRotationZ(jobj5, 0.017453292f * gp->gv.rcruise.x18);
-    gp->gv.rcruise.x30 = gp->gv.rcruise.x34;
-    gp->gv.rcruise.x34 = 0;
-    gp->gv.rcruise.x28 = 0.0f;
-    gp->gv.rcruise.x24 = 0.0f;
+    gp->u.rcruise.x18 += gp->u.rcruise.x20;
+    HSD_JObjSetRotationZ(jobj, 0.017453292f * gp->u.rcruise.x18);
+    HSD_JObjSetRotationZ(jobj5, 0.017453292f * gp->u.rcruise.x18);
+    gp->u.rcruise.x30 = gp->u.rcruise.x34;
+    gp->u.rcruise.x34 = 0;
+    gp->u.rcruise.x28 = 0.0f;
+    gp->u.rcruise.x24 = 0.0f;
 }
 
 s16 grRc_803E4FF0[] = {
@@ -751,7 +751,7 @@ void grRCruise_80200B48(Ground_GObj* gobj)
 
     gp = gobj->user_data;
     for (i = 0; i < (signed) ARRAY_SIZE(grRc_803E4FF0); i++) {
-        entry = &gp->gv.rcruise.entries[i];
+        entry = &gp->u.rcruise.entries[i];
         entry->x02 = Ground_801C32D4(gp->map_id, grRc_803E4FF0[i]);
         entry->x14 = Ground_801C3FA4(gobj, grRc_803E4FF0[i]);
         entry->x08 = 0;
@@ -783,7 +783,7 @@ void grRCruise_80200C04(Ground_GObj* gobj)
 
     gp = grRCruise_80200C04_inline(gobj);
     for (i = 0; i < (signed) ARRAY_SIZE(grRc_803E4FF0); i++) {
-        struct grRCruise_Entry* entry = &gp->gv.rcruise.entries[i];
+        struct grRCruise_Entry* entry = &gp->u.rcruise.entries[i];
 
         switch (entry->x00) {
         case 1:
@@ -879,7 +879,7 @@ void grRCruise_802010A4(Ground_GObj* gobj, s32 id, CollData* coll)
     }
 
     for (i = 0; i < 17; i++) {
-        struct grRCruise_Entry* entry = &gp->gv.rcruise.entries[i];
+        struct grRCruise_Entry* entry = &gp->u.rcruise.entries[i];
         if (entry->x02 == id) {
             if (entry->x00 == 0) {
                 entry->x04 = 0;
@@ -894,8 +894,8 @@ void grRCruise_802010A4(Ground_GObj* gobj, s32 id, CollData* coll)
 void grRCruise_80201110(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
-    f32 angle = atan2f(gp->gv.rcruise.x04->x4.z, gp->gv.rcruise.x04->x4.x);
-    angle += gp->gv.rcruise.x08;
+    f32 angle = atan2f(gp->u.rcruise.x04->x4.z, gp->u.rcruise.x04->x4.x);
+    angle += gp->u.rcruise.x08;
 
     if (angle > 1.0471975430846214) {
         angle = 1.0471976f;
@@ -903,22 +903,22 @@ void grRCruise_80201110(Ground_GObj* gobj)
     if (angle < -1.0471975430846214) {
         angle = -1.0471976f;
     }
-    gp->gv.rcruise.x04->x4.x = cosf(angle);
-    gp->gv.rcruise.x04->x4.z = sinf(angle);
-    if (gp->gv.rcruise.x04->unk_angle_int % 30 == 0 && HSD_Randf() > 0.5) {
-        gp->gv.rcruise.x08 = -gp->gv.rcruise.x08;
+    gp->u.rcruise.x04->x4.x = cosf(angle);
+    gp->u.rcruise.x04->x4.z = sinf(angle);
+    if (gp->u.rcruise.x04->unk_angle_int % 30 == 0 && HSD_Randf() > 0.5) {
+        gp->u.rcruise.x08 = -gp->u.rcruise.x08;
     }
-    if (gp->gv.rcruise.x04->unk_angle_int % 300 == 0) {
-        if (gp->gv.rcruise.x0C != 0) {
-            gp->gv.rcruise.x0C = 0;
+    if (gp->u.rcruise.x04->unk_angle_int % 300 == 0) {
+        if (gp->u.rcruise.x0C != 0) {
+            gp->u.rcruise.x0C = 0;
         } else if (HSD_Randf() > 0.5) {
-            gp->gv.rcruise.x0C = 1;
+            gp->u.rcruise.x0C = 1;
         }
     }
-    if (gp->gv.rcruise.x0C != 0) {
-        gp->gv.rcruise.x04->unk_scale = 0.3 * HSD_Randf() + 0.2;
+    if (gp->u.rcruise.x0C != 0) {
+        gp->u.rcruise.x04->unk_scale = 0.3 * HSD_Randf() + 0.2;
     } else {
-        gp->gv.rcruise.x04->unk_scale = 0.2 * HSD_Randf() + 0.1;
+        gp->u.rcruise.x04->unk_scale = 0.2 * HSD_Randf() + 0.1;
     }
 }
 
@@ -1077,11 +1077,11 @@ void grRCruise_80201588(Ground_GObj* gobj)
         if (lbl_803E5014[i].x04 != 0) {
             continue;
         }
-        switch (gp->gv.rcruise.vanish[i].x00) {
+        switch (gp->u.rcruise.vanish[i].x00) {
         case 0:
-            lb_8000B1CC(gp->gv.rcruise.vanish[i].jobj, NULL, &pos);
+            lb_8000B1CC(gp->u.rcruise.vanish[i].jobj, NULL, &pos);
             if (Camera_8003118C(&pos, -20.0f) != 0) {
-                gp->gv.rcruise.vanish[i].x00 = 1;
+                gp->u.rcruise.vanish[i].x00 = 1;
                 grAnime_801C7FF8(gobj, lbl_803E5014[i].x00, 2, 2, 0.0f, 1.0f);
                 mpJointListAdd(lbl_803E5014[i].x02);
                 mpLib_80055E9C(lbl_803E5014[i].x02);
@@ -1090,14 +1090,14 @@ void grRCruise_80201588(Ground_GObj* gobj)
             break;
         case 1:
             if (grAnime_801C83D0(gobj, lbl_803E5014[i].x00, 2) != 0) {
-                gp->gv.rcruise.vanish[i].x00 = 2;
+                gp->u.rcruise.vanish[i].x00 = 2;
                 set_hidden_a(i);
             }
             break;
         case 2:
-            lb_8000B1CC(gp->gv.rcruise.vanish[i].jobj, NULL, &pos);
+            lb_8000B1CC(gp->u.rcruise.vanish[i].jobj, NULL, &pos);
             if (Camera_8003118C(&pos, -20.0f) == 0) {
-                gp->gv.rcruise.vanish[i].x00 = 3;
+                gp->u.rcruise.vanish[i].x00 = 3;
                 grAnime_801C7FF8(gobj, lbl_803E5014[i].x00, 2, 3, 0.0f, 1.0f);
                 set_hidden_b(i);
             }
@@ -1105,11 +1105,11 @@ void grRCruise_80201588(Ground_GObj* gobj)
         case 3:
             if (grAnime_801C83D0(gobj, lbl_803E5014[i].x00, 2) != 0) {
                 int j;
-                gp->gv.rcruise.vanish[i].x00 = 0;
+                gp->u.rcruise.vanish[i].x00 = 0;
                 grAnime_801C7FF8(gobj, lbl_803E5014[i].x00, 2, 1, 0.0f, 1.0f);
                 for (j = 0; j < ARRAY_SIZE(lbl_803E5014); j++) {
                     if (lbl_803E5014[j].x02 == lbl_803E5014[i].x02 &&
-                        gp->gv.rcruise.vanish[j].x00 != 0)
+                        gp->u.rcruise.vanish[j].x00 != 0)
                     {
                         break;
                     }

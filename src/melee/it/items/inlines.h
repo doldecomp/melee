@@ -1,6 +1,7 @@
 #ifndef MELEE_IT_ITEMS_INLINES_H
 #define MELEE_IT_ITEMS_INLINES_H
 
+#include "db/db.h"
 #include "ef/eflib.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
@@ -9,6 +10,7 @@
 #include "it/item.h"
 #include "it/items/itlinkhookshot.h"
 #include "it/itmaplib.h"
+#include "it/itzako.h"
 #include "it/types.h"
 #include "lb/lbrefract.h"
 #include "lb/lbvector.h"
@@ -69,6 +71,23 @@ static inline void Item_InitSpawn(SpawnItem* spawn, HSD_GObj* parent,
     spawn->x4_parent_gobj2 = spawn->x0_parent_gobj;
     spawn->x44_flag.b0 = true;
     spawn->x40 = 0;
+}
+
+static inline Item_GObj*
+Item_AttachToParent(Item_GObj* item_gobj, HSD_GObj* parent, Fighter_Part part)
+{
+    Item_8026AB54(item_gobj, parent, part);
+    db_80225DD8(item_gobj, parent);
+    return item_gobj;
+}
+
+static inline void Item_AttachGameWatchArticle(HSD_GObj* parent,
+                                               Fighter_Part part,
+                                               Item_GObj* item_gobj,
+                                               void** attributes)
+{
+    Item_AttachToParent(item_gobj, parent, part);
+    it_8027CE64(item_gobj, parent, attributes[0]);
 }
 
 static inline void Item_EnterAirStateWithHitlag(Item_GObj* gobj, enum_t msid)

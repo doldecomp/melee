@@ -83,42 +83,42 @@ static void ftCh_Init_80156018(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->motion_id == ftMh_MS_Wait1_0 || fp->motion_id == ftMh_MS_Wait2_0) {
-        fp->cur_pos = fp->fv.mh.x2240_pos;
+        fp->cur_pos = fp->u.mh.x2240_pos;
     } else {
-        fp->fv.mh.x2240_pos = fp->cur_pos;
+        fp->u.mh.x2240_pos = fp->cur_pos;
     }
-    if (fp->fv.mh.x2258 == 0x184) {
+    if (fp->u.mh.x2258 == 0x184) {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, 0, fp->cur_anim_frame,
                                   1.0f, 0.0f, NULL);
     } else {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, 0, 0, 1.0f, 0.0f,
                                   NULL);
     }
-    fp->fv.mh.x2258 = ftMh_MS_Wait1_0;
+    fp->u.mh.x2258 = ftMh_MS_Wait1_0;
 }
 
 static void ftCh_Init_801560D8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->motion_id == 0x155 || fp->motion_id == 0x156) {
-        fp->cur_pos = fp->fv.mh.x2240_pos;
+        fp->cur_pos = fp->u.mh.x2240_pos;
     } else {
-        fp->fv.mh.x2240_pos = fp->cur_pos;
+        fp->u.mh.x2240_pos = fp->cur_pos;
     }
-    if (fp->fv.mh.x2258 == 0x185) {
+    if (fp->u.mh.x2258 == 0x185) {
         Fighter_ChangeMotionState(gobj, 0x156, 0, fp->cur_anim_frame, 1.0f,
                                   0.0f, NULL);
     } else {
         Fighter_ChangeMotionState(gobj, 0x156, 0, 0, 1.0f, 0.0f, NULL);
     }
-    fp->fv.mh.x2258 = 0x156;
+    fp->u.mh.x2258 = 0x156;
 }
 
 void ftCh_Init_80156198(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[1] = 0;
-    if (fp->fv.mh.x2258 == 0x185) {
+    if (fp->u.mh.x2258 == 0x185) {
         ftCh_Init_801560D8(gobj);
     } else {
         ftCh_Init_80156018(gobj);
@@ -130,7 +130,7 @@ static void ftCh_Init_80156310(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
     fp->cmd_vars[1] = 0;
-    fp->fv.mh.x2258 = ftMh_MS_Wait1_0;
+    fp->u.mh.x2258 = ftMh_MS_Wait1_0;
     fp->motion_id = 0x183;
     fp->cur_pos.x = da->x18;
     fp->cur_pos.y = da->x1C;
@@ -142,17 +142,17 @@ inline void doAnim0(HSD_GObj* gobj)
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
     if (fp->motion_id == 0x155 || fp->motion_id == 0x156) {
-        fp->cur_pos = fp->fv.mh.x2240_pos;
+        fp->cur_pos = fp->u.mh.x2240_pos;
     } else {
-        fp->fv.mh.x2240_pos = fp->cur_pos;
+        fp->u.mh.x2240_pos = fp->cur_pos;
     }
-    if (fp->fv.mh.x2258 == 0x185) {
+    if (fp->u.mh.x2258 == 0x185) {
         Fighter_ChangeMotionState(gobj, 0x156, 0, fp->cur_anim_frame, 1.0f,
                                   0.0f, NULL);
     } else {
         Fighter_ChangeMotionState(gobj, 0x156, 0, 0.0f, 1.0f, 0.0f, NULL);
     }
-    fp->fv.mh.x2258 = 0x156;
+    fp->u.mh.x2258 = 0x156;
 }
 
 inline void doAnim1(HSD_GObj* gobj)
@@ -160,7 +160,7 @@ inline void doAnim1(HSD_GObj* gobj)
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
     fp->cmd_vars[1] = 0;
-    if (fp->fv.mh.x2258 == 0x185) {
+    if (fp->u.mh.x2258 == 0x185) {
         ftCh_Init_801560D8(gobj);
     } else {
         ftCh_Init_80156018(gobj);
@@ -187,39 +187,39 @@ void ftCh_Wait1_0_Anim(HSD_GObj* gobj)
             }
         }
     } else {
-        if (--fp->fv.mh.x223C < 0) {
+        if (--fp->u.mh.x223C < 0) {
             ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
             Vec3 vec;
 
             u8 __[20];
 
-            ftBossLib_8015BD24(fp->x1A88.level, &fp->fv.mh.x223C,
-                               fp->fv.ch.x2238, da->x0, da->x8, da->x4);
+            ftBossLib_8015BD24(fp->x1A88.level, &fp->u.mh.x223C,
+                               fp->u.ch.x2238, da->x0, da->x8, da->x4);
             {
                 s32 tmp;
                 s32 tmp2;
                 u8_pair* qwe;
                 float rand;
-                if (fp->fv.ch.x2254 == da->xC) {
-                    fp->fv.ch.x2254 = 0;
+                if (fp->u.ch.x2254 == da->xC) {
+                    fp->u.ch.x2254 = 0;
                     tmp = 2;
                 } else {
                     if (ftBossLib_8015C2E0()) {
-                        tmp = data->x68[fp->fv.ch.x224C * 5 + HSD_Randi(4)];
+                        tmp = data->x68[fp->u.ch.x224C * 5 + HSD_Randi(4)];
                     } else {
-                        tmp = data->x68[fp->fv.ch.x224C * 5 + HSD_Randi(5)];
+                        tmp = data->x68[fp->u.ch.x224C * 5 + HSD_Randi(5)];
                     }
                     if (tmp == 2) {
-                        fp->fv.ch.x2254 = 0;
+                        fp->u.ch.x2254 = 0;
                     } else {
-                        fp->fv.ch.x2254++;
+                        fp->u.ch.x2254++;
                     }
                 }
                 qwe = &((u8_pair*) data->x5C)[tmp];
                 tmp2 = data->states[data->x48[qwe->a + HSD_Randi(qwe->b)]];
 
-                fp->fv.ch.x224C = tmp;
-                fp->fv.ch.x2250 = tmp2;
+                fp->u.ch.x224C = tmp;
+                fp->u.ch.x2250 = tmp2;
                 if (fp->x221D_b4) {
                     tmp2 = ftMh_MS_Wait1_0;
                 }
@@ -403,10 +403,10 @@ static void ftCh_Init_80156AD8(HSD_GObj* gobj)
         pos.z = 0;
         ftCh_GrabUnk1_8015BA34(gobj, fn_801587B0, &pos);
     } else if (button_tmp & (HSD_PAD_Z) && button_tmp & (HSD_PAD_DPADUP)) {
-        fp->fv.ch.x2250 = ftMh_MS_BackAirplane2;
+        fp->u.ch.x2250 = ftMh_MS_BackAirplane2;
         ftCh_Init_80158B3C(gobj);
     } else if (button_tmp & (HSD_PAD_Z) && button_tmp & (HSD_PAD_DPADRIGHT)) {
-        fp->fv.ch.x2250 = ftMh_MS_BackAirplane3;
+        fp->u.ch.x2250 = ftMh_MS_BackAirplane3;
         ftCh_Init_80158B3C(gobj);
     } else if (button_tmp & (HSD_PAD_A) && button_tmp & (HSD_PAD_DPADUP)) {
         ftCh_Init_801597F0(gobj, fn_80159908);
@@ -418,25 +418,25 @@ static void ftCh_Init_80156AD8(HSD_GObj* gobj)
         pos.x = da->x104;
         pos.y = da->x108;
         pos.z = 0;
-        fp->fv.ch.x2250 = ftMh_MS_Squeezing1;
+        fp->u.ch.x2250 = ftMh_MS_Squeezing1;
         ftCh_GrabUnk1_8015BA34(gobj, fn_8015AAC8, &pos);
     } else if (button_tmp & (HSD_PAD_Y) && button_tmp & (HSD_PAD_DPADRIGHT)) {
         pos.x = da->x10C;
         pos.y = da->x110_pos.x;
         pos.z = 0;
-        fp->fv.ch.x2250 = ftMh_MS_Squeeze;
+        fp->u.ch.x2250 = ftMh_MS_Squeeze;
         ftCh_GrabUnk1_8015BA34(gobj, fn_8015AAC8, &pos);
     } else if (button_tmp & (HSD_PAD_Y) && button_tmp & (HSD_PAD_DPADDOWN)) {
         pos.x = da->x110_pos.y;
         pos.y = da->x118_pos.x;
         pos.z = 0;
-        fp->fv.ch.x2250 = ftMh_MS_Throw;
+        fp->u.ch.x2250 = ftMh_MS_Throw;
         ftCh_GrabUnk1_8015BA34(gobj, fn_8015AAC8, &pos);
     } else if (button_tmp & (HSD_PAD_Y) && button_tmp & (HSD_PAD_DPADLEFT)) {
         pos.x = da->x118_pos.y;
         pos.y = da->x120;
         pos.z = 0;
-        fp->fv.ch.x2250 = ftMh_MS_Slam;
+        fp->u.ch.x2250 = ftMh_MS_Slam;
         ftCh_GrabUnk1_8015BA34(gobj, fn_8015AAC8, &pos);
     }
 }

@@ -176,10 +176,10 @@ void ftDr_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) gobj->user_data;
     ftParts_80074A4C(gobj, 0, 0);
-    fp->fv.mr.x2234_tornadoCharge = 0;
-    fp->fv.mr.x2238_isCapeBoost = false;
-    fp->fv.mr.x223C_capeGObj = NULL;
-    fp->fv.mr.x2240 = 0;
+    fp->u.mr.x2234_tornadoCharge = 0;
+    fp->u.mr.x2238_isCapeBoost = false;
+    fp->u.mr.x223C_capeGObj = NULL;
+    fp->u.mr.x2240 = 0;
 }
 
 void ftDr_Init_OnLoad(HSD_GObj* gobj)
@@ -246,9 +246,9 @@ void ftDr_Init_801497CC(HSD_GObj* gobj)
 
     if (gobj != NULL) {
         fp = gobj->user_data;
-        if (fp != NULL && fp->fv.mr.x2240 != 0) {
-            itDrMarioPill_802C0DBC(fp->fv.mr.x2240);
-            fp->fv.mr.x2240 = 0;
+        if (fp != NULL && fp->u.mr.x2240 != 0) {
+            itDrMarioPill_802C0DBC(fp->u.mr.x2240);
+            fp->u.mr.x2240 = 0;
         }
     }
 
@@ -277,7 +277,7 @@ bool ftDr_Init_80149844(HSD_GObj* gobj)
     if (tmp != 0x155 && tmp != 0x156) {
         return true;
     }
-    if (fp->fv.mr.x2240 == 0) {
+    if (fp->u.mr.x2240 == 0) {
         return true;
     }
     return false;
@@ -289,8 +289,8 @@ void ftDr_Init_801498A0(HSD_GObj* gobj)
 
     if (gobj != NULL) {
         fp = gobj->user_data;
-        if (fp != NULL && fp->fv.mr.x2240 != 0) {
-            fp->fv.mr.x2240 = 0;
+        if (fp != NULL && fp->u.mr.x2240 != 0) {
+            fp->u.mr.x2240 = 0;
         }
     }
     if (gobj != NULL) {

@@ -1448,8 +1448,8 @@ bool fn_800D9558(Fighter_GObj* gobj)
         grav = fp->mv.ca.specials.grav;
         if (grav == (f32) attrs->x9C) {
             lb_8000B1CC(fp->parts[51].joint, NULL, &bonePos);
-            fp->fv.ss.x223C = it_802B7C18(gobj, &bonePos, fp->facing_dir);
-            if (fp->fv.ss.x223C == NULL) {
+            fp->u.ss.x223C = it_802B7C18(gobj, &bonePos, fp->facing_dir);
+            if (fp->u.ss.x223C == NULL) {
                 ft_8008A2BC(gobj);
                 return 1;
             }
@@ -1458,7 +1458,7 @@ bool fn_800D9558(Fighter_GObj* gobj)
             fp->accessory3_cb = (void (*)(HSD_GObj*)) it_802BACC4;
         } else if (grav > (f32) attrs->x9C) {
             if (grav <= (f32) attrs->xA8) {
-                item = fp->fv.ss.x223C;
+                item = fp->u.ss.x223C;
                 it = GET_ITEM(item);
                 grappleAttrs = it->xC4_article_data->x4_specialAttributes;
                 if (item != NULL) {
@@ -1490,7 +1490,7 @@ bool fn_800D9558(Fighter_GObj* gobj)
                                             jobj->mtx[0][3],
                                         my))
                     {
-                        it_802B7B84(fp->fv.ss.x223C);
+                        it_802B7B84(fp->u.ss.x223C);
                         ft_8008A2BC(gobj);
                         return 1;
                     }
@@ -1502,7 +1502,7 @@ bool fn_800D9558(Fighter_GObj* gobj)
                 } else if (grav == (f32) attrs->xA4) {
                     it_802BAA58(item);
                 } else if (grav == (f32) attrs->xA8) {
-                    it_802B7B84(fp->fv.ss.x223C);
+                    it_802B7B84(fp->u.ss.x223C);
                 }
             }
         }
@@ -1536,9 +1536,9 @@ bool fn_800D8EC8(Fighter_GObj* gobj)
             lb_8000B1CC(
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
                 NULL, &bonePos);
-            fp->fv.lk.xC =
+            fp->u.lk.xC =
                 it_802A2BA4(gobj, &bonePos, fp->facing_dir, attrs->xBC);
-            if (fp->fv.lk.xC == NULL) {
+            if (fp->u.lk.xC == NULL) {
                 ft_8008A2BC(gobj);
                 return 1;
             }
@@ -1547,7 +1547,7 @@ bool fn_800D8EC8(Fighter_GObj* gobj)
             fp->accessory3_cb = it_802A7B34;
         } else if (grav > (f32) attrs->x84) {
             if (grav <= (f32) attrs->x90) {
-                item = fp->fv.lk.xC;
+                item = fp->u.lk.xC;
                 hookAttrs =
                     GET_ITEM(item)->xC4_article_data->x4_specialAttributes;
                 if (grav == (f32) attrs->x88) {
@@ -1566,7 +1566,7 @@ bool fn_800D8EC8(Fighter_GObj* gobj)
                                         fp->coll_data.cur_pos.x, mtxY, var_f3,
                                         mtxY))
                     {
-                        it_802A2B10(fp->fv.lk.xC);
+                        it_802A2B10(fp->u.lk.xC);
                         ft_8008A2BC(gobj);
                         return 1;
                     }
@@ -1587,7 +1587,7 @@ bool fn_800D8EC8(Fighter_GObj* gobj)
                         ft_PlaySFX(fp, 0x2714C, 0x7F, 0x40);
                     }
                 } else if (grav == (f32) attrs->x90) {
-                    it_802A2B10(fp->fv.lk.xC);
+                    it_802A2B10(fp->u.lk.xC);
                 }
             }
         }
@@ -1662,7 +1662,7 @@ bool fn_800D8E94(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     FighterKind kind = fp->kind;
     if (((kind == FTKIND_LINK) || (kind == FTKIND_CLINK)) &&
-        (fp->fv.lk.xC != NULL))
+        (fp->u.lk.xC != NULL))
     {
         return false;
     }
@@ -1683,8 +1683,8 @@ bool fn_800D9228(Fighter_GObj* gobj)
             lb_8000B1CC(
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
                 NULL, &pos);
-            fp->fv.lk.xC = it_802A2BA4(gobj, &pos, fp->facing_dir, da->xBC);
-            if (fp->fv.lk.xC == NULL) {
+            fp->u.lk.xC = it_802A2BA4(gobj, &pos, fp->facing_dir, da->xBC);
+            if (fp->u.lk.xC == NULL) {
                 ft_8008A2BC(gobj);
                 return true;
             }
@@ -1694,7 +1694,7 @@ bool fn_800D9228(Fighter_GObj* gobj)
         } else if (fp->mv.co.catch.x0 > (f32) da->x94 &&
                    fp->mv.co.catch.x0 <= (f32) da->xA0)
         {
-            Item_GObj* tether_gobj = fp->fv.lk.xC;
+            Item_GObj* tether_gobj = fp->u.lk.xC;
             Item* tether_ip = tether_gobj->user_data;
             struct TetherAttributes* tether_data =
                 tether_ip->xC4_article_data->x4_specialAttributes;
@@ -1733,7 +1733,7 @@ static void fn_800D949C(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->kind == FTKIND_LINK || fp->kind == FTKIND_CLINK) {
-        it_802A2B10(fp->fv.lk.xC);
+        it_802A2B10(fp->u.lk.xC);
     }
 }
 
@@ -1741,9 +1741,9 @@ void ftCo_800D94D8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.lk.xC != NULL) {
-        it_802A2B10(fp->fv.lk.xC);
-        fp->fv.lk.xC = NULL;
+    if (fp->u.lk.xC != NULL) {
+        it_802A2B10(fp->u.lk.xC);
+        fp->u.lk.xC = NULL;
     }
     ftLk_Init_BoomerangExists(gobj);
 }
@@ -1751,7 +1751,7 @@ void ftCo_800D94D8(Fighter_GObj* gobj)
 bool fn_800D952C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((fp->kind == FTKIND_SAMUS) && (fp->fv.ss.x223C != NULL)) {
+    if ((fp->kind == FTKIND_SAMUS) && (fp->u.ss.x223C != NULL)) {
         return false;
     }
     return true;
@@ -1782,8 +1782,8 @@ bool fn_800D9930(Fighter_GObj* gobj)
         grav = fp->mv.ca.specials.grav;
         if (grav == (f32) attrs->xAC) {
             lb_8000B1CC(fp->parts[51].joint, NULL, &bonePos);
-            fp->fv.ss.x223C = it_802B7C18(gobj, &bonePos, fp->facing_dir);
-            if (fp->fv.ss.x223C == NULL) {
+            fp->u.ss.x223C = it_802B7C18(gobj, &bonePos, fp->facing_dir);
+            if (fp->u.ss.x223C == NULL) {
                 ft_8008A2BC(gobj);
                 return 1;
             }
@@ -1793,8 +1793,8 @@ bool fn_800D9930(Fighter_GObj* gobj)
         } else if (grav > (f32) attrs->xAC) {
             if (grav <= (f32) attrs->xB8) {
                 Item* it;
-                it = GET_ITEM(fp->fv.ss.x223C);
-                item = fp->fv.ss.x223C;
+                it = GET_ITEM(fp->u.ss.x223C);
+                item = fp->u.ss.x223C;
                 grappleAttrs = it->xC4_article_data->x4_specialAttributes;
                 if (item != NULL) {
                     for (i = 0, frame = 0x14; i < 4; i++, frame += 3) {
@@ -1822,7 +1822,7 @@ bool fn_800D9930(Fighter_GObj* gobj)
                 } else if (grav == (f32) attrs->xB4) {
                     it_802BAA58(item);
                 } else if (grav == (f32) attrs->xB8) {
-                    it_802B7B84(fp->fv.ss.x223C);
+                    it_802B7B84(fp->u.ss.x223C);
                 }
             }
         }
@@ -1835,7 +1835,7 @@ void fn_800D9C64(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->kind == FTKIND_SAMUS) {
-        it_802B7B84(fp->fv.ss.x223C);
+        it_802B7B84(fp->u.ss.x223C);
     }
 }
 
@@ -1843,9 +1843,9 @@ void ftCo_800D9C98(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.ss.x223C != NULL) {
-        it_802B7B84(fp->fv.ss.x223C);
-        fp->fv.ss.x223C = NULL;
+    if (fp->u.ss.x223C != NULL) {
+        it_802B7B84(fp->u.ss.x223C);
+        fp->u.ss.x223C = NULL;
     }
 
     fp->death2_cb = NULL;
@@ -1886,13 +1886,13 @@ static void fn_800D9CE8(Fighter_GObj* gobj)
     switch (fp->kind) {
     case FTKIND_CLINK:
     case FTKIND_LINK:
-        item = fp->fv.lk.xC;
+        item = fp->u.lk.xC;
         it = GET_ITEM(item);
         it_802A7840((HSD_GObj*) item);
         fp->mv.co.capturedamage.x18 = it->xDD4_itemVar.linkhookshot.xC;
         break;
     case FTKIND_SAMUS:
-        item = fp->fv.ss.x223C;
+        item = fp->u.ss.x223C;
         it = GET_ITEM(item);
         it_802BAA94(item);
         fp->mv.co.capturedamage.x18 = it->xDD4_itemVar.samusgrapple.xC;
@@ -1918,7 +1918,7 @@ void ftCo_CatchPull_Anim(Fighter_GObj* gobj)
     switch (fp->kind) {
     case FTKIND_LINK:
     case FTKIND_CLINK: {
-        Item_GObj* item_gobj = fp->fv.lk.xC;
+        Item_GObj* item_gobj = fp->u.lk.xC;
         if (item_gobj == NULL) {
             should_transition = true;
         } else {
@@ -1930,7 +1930,7 @@ void ftCo_CatchPull_Anim(Fighter_GObj* gobj)
         break;
     }
     case FTKIND_SAMUS: {
-        Item_GObj* item_gobj = fp->fv.ss.x223C;
+        Item_GObj* item_gobj = fp->u.ss.x223C;
         if (item_gobj == NULL) {
             should_transition = true;
         } else {
@@ -2664,13 +2664,13 @@ void fn_800DB6C8(Fighter_GObj* gobj)
         break;
     case FTKIND_LINK:
     case FTKIND_CLINK:
-        if (victim_fp->fv.lk.xC != NULL) {
-            it_802A7840((HSD_GObj*) victim_fp->fv.lk.xC);
+        if (victim_fp->u.lk.xC != NULL) {
+            it_802A7840((HSD_GObj*) victim_fp->u.lk.xC);
         }
         break;
     case FTKIND_SAMUS:
-        if (victim_fp->fv.ss.x223C != NULL) {
-            it_802BAA94(victim_fp->fv.ss.x223C);
+        if (victim_fp->u.ss.x223C != NULL) {
+            it_802BAA94(victim_fp->u.ss.x223C);
         }
         break;
     }

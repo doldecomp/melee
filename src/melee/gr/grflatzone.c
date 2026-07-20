@@ -180,7 +180,7 @@ void grFlatzone_80217068(Ground_GObj* gobj)
 void fn_8021706C(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
-    gp->gv.flatzone.xC4 = 0;
+    gp->u.flatzone.xC4 = 0;
 }
 
 static inline int rand_int_inner(s32 a)
@@ -207,10 +207,10 @@ void grFlatzone_8021707C(Ground_GObj* gobj)
     Ground_801C2ED0(jobj, gp->map_id);
     HSD_JObjSetTranslateZ(jobj, 1.0f);
     grAnime_801C8138(gobj, gp->map_id, 0);
-    gp->gv.flatzone.xC4 = 1;
-    gp->gv.flatzone.xC7 = 1;
-    gp->gv.flatzone.xC6 = 0;
-    gp->gv.flatzone.xC8 = rand_int(grFz_804D6AB0->unk4, grFz_804D6AB0->unk0);
+    gp->u.flatzone.xC4 = 1;
+    gp->u.flatzone.xC7 = 1;
+    gp->u.flatzone.xC6 = 0;
+    gp->u.flatzone.xC8 = rand_int(grFz_804D6AB0->unk4, grFz_804D6AB0->unk0);
     Ground_801C10B8(gobj, fn_8021706C);
 }
 
@@ -224,7 +224,7 @@ static inline void grFlatzone_802171D4_inline(Ground_GObj* gobj)
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
         if (gp != NULL) {
-            gp->gv.flatzone.xC4 = 1;
+            gp->u.flatzone.xC4 = 1;
         }
     }
 }
@@ -235,17 +235,17 @@ void grFlatzone_802171D4(Ground_GObj* gobj)
     s16 temp_r3;
 
     Ground* gp = GET_GROUND(gobj);
-    if (!gp->gv.flatzone.xC4 && gp->gv.flatzone.xC7) {
-        if (gp->gv.flatzone.xC8 != 0) {
-            gp->gv.flatzone.xC8 -= 1;
-            if (gp->gv.flatzone.xC8 == 0) {
-                gp->gv.flatzone.xC7 = 0;
-                gp->gv.flatzone.xC6 = gp->gv.flatzone.xC5;
+    if (!gp->u.flatzone.xC4 && gp->u.flatzone.xC7) {
+        if (gp->u.flatzone.xC8 != 0) {
+            gp->u.flatzone.xC8 -= 1;
+            if (gp->u.flatzone.xC8 == 0) {
+                gp->u.flatzone.xC7 = 0;
+                gp->u.flatzone.xC6 = gp->u.flatzone.xC5;
                 do {
                     s16 vals[2] = { 3, 4 };
-                    gp->gv.flatzone.xC5 = vals[HSD_Randi(2)];
-                } while (gp->gv.flatzone.xC6 == gp->gv.flatzone.xC5);
-                switch (gp->gv.flatzone.xC5) {
+                    gp->u.flatzone.xC5 = vals[HSD_Randi(2)];
+                } while (gp->u.flatzone.xC6 == gp->u.flatzone.xC5);
+                switch (gp->u.flatzone.xC5) {
                 case 1:
                     grFlatzone_802171D4_inline(Ground_801C2BA4(4));
                     grFlatzone_80218260();
@@ -266,7 +266,7 @@ void grFlatzone_802171D4(Ground_GObj* gobj)
             }
         } else {
             grFlatzone_80218060(0);
-            gp->gv.flatzone.xC8 =
+            gp->u.flatzone.xC8 =
                 rand_int(grFz_804D6AB0->unk4, grFz_804D6AB0->unk0);
         }
     }
@@ -303,7 +303,7 @@ void grFlatzone_8021743C(Ground_GObj* gobj)
 void fn_80217440(HSD_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    gp->gv.flatzone.xC4 = 0;
+    gp->u.flatzone.xC4 = 0;
 }
 
 void grFlatzone_80217450(Ground_GObj* gobj)
@@ -312,13 +312,13 @@ void grFlatzone_80217450(Ground_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Ground_801C2ED0(jobj, gp->map_id);
     HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-    gp->gv.flatzone.xC7 = 8;
-    gp->gv.pad_0[4] = 8;
-    gp->gv.pad_0[5] = 0;
-    gp->gv.pad_0[6] = 0;
-    gp->gv.flatzone.xCC = 0;
-    gp->gv.flatzone.xC6 = 0xFF;
-    gp->gv.flatzone.xC4 = 1;
+    gp->u.flatzone.xC7 = 8;
+    gp->u.pad_0[4] = 8;
+    gp->u.pad_0[5] = 0;
+    gp->u.pad_0[6] = 0;
+    gp->u.flatzone.xCC = 0;
+    gp->u.flatzone.xC6 = 0xFF;
+    gp->u.flatzone.xC4 = 1;
     Ground_801C10B8((HSD_GObj*) gobj, fn_80217440);
 }
 
@@ -336,21 +336,21 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
     s32 trigger_machine = 0;
     Vec3 pos = grFz_803B8430;
     PAD_STACK(4);
-    if (gp->gv.flatzone.xC4 != 0) {
-        if (gp->gv.flatzone.xD0 == 3) {
+    if (gp->u.flatzone.xC4 != 0) {
+        if (gp->u.flatzone.xD0 == 3) {
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-            if (gp->gv.flatzone2.xCC == NULL) {
-                grDynamicAttr_801CA1C0(gp->gv.flatzone2.xCC);
-                gp->gv.flatzone2.xCC = NULL;
+            if (gp->u.flatzone2.xCC == NULL) {
+                grDynamicAttr_801CA1C0(gp->u.flatzone2.xCC);
+                gp->u.flatzone2.xCC = NULL;
             }
         }
-        gp->gv.flatzone.xC4 = 0;
-        gp->gv.flatzone2.xC8 = SIGN_RANDOM();
-        gp->gv.flatzone.xD0 = 0;
-        gp->gv.flatzone.xD4 = grFz_804D6AB0->unk20;
-        if (gp->gv.flatzone2.xC8 == 1.0f) {
+        gp->u.flatzone.xC4 = 0;
+        gp->u.flatzone2.xC8 = SIGN_RANDOM();
+        gp->u.flatzone.xD0 = 0;
+        gp->u.flatzone.xD4 = grFz_804D6AB0->unk20;
+        if (gp->u.flatzone2.xC8 == 1.0f) {
             pos.x = grFz_804D6AB0->unk24;
-            gp->gv.flatzone.xD4 = (s32) ((f32) gp->gv.flatzone.xD4 / 2.0f);
+            gp->u.flatzone.xD4 = (s32) ((f32) gp->u.flatzone.xD4 / 2.0f);
         } else {
             pos.x = grFz_804D6AB0->unk28;
             {
@@ -365,26 +365,26 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
         }
         HSD_JObjSetTranslate(jobj, &pos);
     }
-    switch (gp->gv.flatzone2.xD0) {
+    switch (gp->u.flatzone2.xD0) {
     case 0:
-        if ((s32) gp->gv.flatzone2.xD4 ==
+        if ((s32) gp->u.flatzone2.xD4 ==
             (s32) ((s32) grFz_804D6AB0->unk20 / 2))
         {
-            if (gp->gv.flatzone2.xC8 == 1.0f) {
+            if (gp->u.flatzone2.xC8 == 1.0f) {
                 grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
             } else {
                 grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 2);
             }
             HSD_JObjRemoveAnimAll(jobj);
         }
-        gp->gv.unk.xD4 -= 1;
-        if (gp->gv.unk.xD4 <= 0) {
-            gp->gv.unk.xD0 = 1;
-            gp->gv.unk.xD4 =
+        gp->u.unk.xD4 -= 1;
+        if (gp->u.unk.xD4 <= 0) {
+            gp->u.unk.xD0 = 1;
+            gp->u.unk.xD4 =
                 grFz_804D6AB0->unk2C *
                 (grFz_804D6AB0->unk30 +
                  rand_int_inner(grFz_804D6AB0->unk34 - grFz_804D6AB0->unk30));
-            if (gp->gv.flatzone2.xC8 == 1.0f) {
+            if (gp->u.flatzone2.xC8 == 1.0f) {
                 grAnime_801C8138(gobj, gp->map_id, 0);
             } else {
                 grAnime_801C8138(gobj, gp->map_id, 2);
@@ -392,16 +392,16 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
         }
         break;
     case 1:
-        if ((gp->gv.unk.xD4 % grFz_804D6AB0->unk2C) == 1) {
+        if ((gp->u.unk.xD4 % grFz_804D6AB0->unk2C) == 1) {
             HSD_JObjGetTranslation(jobj, &pos);
-            pos.x += grFz_804D6AB0->unk38 * gp->gv.flatzone2.xC8;
+            pos.x += grFz_804D6AB0->unk38 * gp->u.flatzone2.xC8;
             HSD_JObjSetTranslate(jobj, &pos);
         }
-        gp->gv.flatzone2.xD4 -= 1;
-        if (gp->gv.flatzone2.xD4 <= 0) {
-            gp->gv.flatzone2.xD0 = 2;
-            gp->gv.flatzone2.xD4 = 0;
-            if (gp->gv.flatzone2.xC8 == 1.0f) {
+        gp->u.flatzone2.xD4 -= 1;
+        if (gp->u.flatzone2.xD4 <= 0) {
+            gp->u.flatzone2.xD0 = 2;
+            gp->u.flatzone2.xD4 = 0;
+            if (gp->u.flatzone2.xC8 == 1.0f) {
                 grAnime_801C8138(gobj, gp->map_id, 1);
             } else {
                 grAnime_801C8138(gobj, gp->map_id, 3);
@@ -415,10 +415,10 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
             f32 other_x;
             f32 other_z;
             s32 line_id;
-            gp->gv.unk.xD0 = 3;
-            gp->gv.unk.xD4 = grFz_804D6AB0->unk3C;
+            gp->u.unk.xD0 = 3;
+            gp->u.unk.xD4 = grFz_804D6AB0->unk3C;
             HSD_JObjGetTranslation(jobj, &pos);
-            pos.x = (36.0f * gp->gv.flatzone2.xC8) + pos.x;
+            pos.x = (36.0f * gp->u.flatzone2.xC8) + pos.x;
             pos.y -= 27.0f;
             other_x = pos.x;
             other_z = 5.0f + pos.y;
@@ -433,7 +433,7 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
             {
                 s32 checked_line_id = line_id;
                 if (line_id != -1) {
-                    gp->gv.flatzone2.xCC =
+                    gp->u.flatzone2.xCC =
                         grDynamicAttr_801CA0F8(0x11, &pos_2, checked_line_id,
                                                22.0f, grFz_804D6AB0->unk3C);
                 }
@@ -442,17 +442,17 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
         }
         break;
     case 3:
-        gp->gv.flatzone2.xD4 -= 1;
-        if ((s32) gp->gv.flatzone2.xD4 <= 1) {
-            gp->gv.flatzone2.xD0 = 4;
-            gp->gv.flatzone2.xD4 = 0;
+        gp->u.flatzone2.xD4 -= 1;
+        if ((s32) gp->u.flatzone2.xD4 <= 1) {
+            gp->u.flatzone2.xD0 = 4;
+            gp->u.flatzone2.xD4 = 0;
         }
         break;
     case 4:
         HSD_JObjRemoveAnimAll(jobj);
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-        gp->gv.flatzone2.xCC = 0;
-        gp->gv.flatzone2.xD0 = -1;
+        gp->u.flatzone2.xCC = 0;
+        gp->u.flatzone2.xD0 = -1;
         break;
     }
     if (trigger_machine != 0) {
@@ -461,11 +461,11 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
             if (gobj != NULL) {
                 Ground* gp = GET_GROUND(gobj);
                 if (gp != NULL) {
-                    gp->gv.flatzone.xC7 = 1;
+                    gp->u.flatzone.xC7 = 1;
                 }
             }
         }
-        if (gp->gv.flatzone2.xC8 != 1.0f) {
+        if (gp->u.flatzone2.xC8 != 1.0f) {
             HSD_GObj* gobj = Ground_801C2BA4(2);
             if (gobj != NULL) {
                 Ground* gp = GET_GROUND(gobj);
@@ -489,11 +489,11 @@ void grFlatzone_80217648(Ground_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Ground_801C2ED0(jobj, gp->map_id);
     HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-    gp->gv.flatzone.xC4 = 0;
-    gp->gv.flatzone2.xC8 = 1.0f;
-    gp->gv.flatzone2.xCC = NULL;
-    gp->gv.flatzone2.xD0 = -1;
-    gp->gv.flatzone2.xD4 = 0;
+    gp->u.flatzone.xC4 = 0;
+    gp->u.flatzone2.xC8 = 1.0f;
+    gp->u.flatzone2.xCC = NULL;
+    gp->u.flatzone2.xD0 = -1;
+    gp->u.flatzone2.xD4 = 0;
 }
 
 bool grFlatzone_802176B4(Ground_GObj* gobj)
@@ -509,7 +509,7 @@ void grFlatzone_80217CD4(Ground_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Ground_801C2ED0(jobj, gp->map_id);
     HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-    gp->gv.flatzone.xC4 = 0;
+    gp->u.flatzone.xC4 = 0;
 }
 
 bool grFlatzone_80217D28(Ground_GObj* gobj)
@@ -520,17 +520,17 @@ bool grFlatzone_80217D28(Ground_GObj* gobj)
 void grFlatzone_80217D30(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    if (gp->gv.flatzone.xC4 != 0) {
+    if (gp->u.flatzone.xC4 != 0) {
         {
             HSD_GObj* gobj = Ground_801C2BA4(2);
             if (gobj != NULL) {
                 Ground* gp = gobj->user_data;
                 if (gp != NULL) {
-                    gp->gv.flatzone.xC7 = 1;
+                    gp->u.flatzone.xC7 = 1;
                 }
             }
         }
-        gp->gv.flatzone.xC4 = 0;
+        gp->u.flatzone.xC4 = 0;
     }
     Ground_801C2FE0((HSD_GObj*) gobj);
 }
@@ -546,7 +546,7 @@ void grFlatzone_80217DA8(Ground_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Ground_801C2ED0(jobj, gp->map_id);
     HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-    gp->gv.flatzone.xC4 = 0;
+    gp->u.flatzone.xC4 = 0;
 }
 
 bool grFlatzone_80217DFC(Ground_GObj* gobj)
@@ -568,32 +568,31 @@ void grFlatzone_802174EC(Ground_GObj* gobj)
     s16 row_entry;
 
     Ground* gp = GET_GROUND(gobj);
-    if (((u8) gp->gv.pad_0[0] == 0) && ((u8) gp->gv.pad_0[3] != 8) &&
-        ((u8) gp->gv.pad_0[5] != 0))
+    if (((u8) gp->u.pad_0[0] == 0) && ((u8) gp->u.pad_0[3] != 8) &&
+        ((u8) gp->u.pad_0[5] != 0))
     {
-        if (gp->gv.flatzone.xCC-- < 0) {
-            gp->gv.pad_0[6] = gp->gv.pad_0[5];
+        if (gp->u.flatzone.xCC-- < 0) {
+            gp->u.pad_0[6] = gp->u.pad_0[5];
             while (1) {
                 s32 next_anim = HSD_Randi(4) + 1;
-                if ((u8) gp->gv.pad_0[6] == (u8) (gp->gv.pad_0[5] = next_anim))
-                {
+                if ((u8) gp->u.pad_0[6] == (u8) (gp->u.pad_0[5] = next_anim)) {
                     continue;
                 }
-                row_entry = ((s16(*)[5]) grFz_803E7A68)[(u8) gp->gv.pad_0[3]]
-                                                       [(u8) gp->gv.pad_0[5]];
+                row_entry = ((s16(*)[5]) grFz_803E7A68)[(u8) gp->u.pad_0[3]]
+                                                       [(u8) gp->u.pad_0[5]];
                 if (row_entry != -1) {
                     break;
                 }
             }
-            gp->gv.pad_0[1] = (u8) row_entry;
-            grAnime_801C8138(gobj, gp->map_id, (u8) gp->gv.pad_0[1]);
-            gp->gv.flatzone.xCC =
+            gp->u.pad_0[1] = (u8) row_entry;
+            grAnime_801C8138(gobj, gp->map_id, (u8) gp->u.pad_0[1]);
+            gp->u.flatzone.xCC =
                 rand_int(grFz_804D6AB0->unkC, grFz_804D6AB0->unk8);
         }
     }
     Ground_801C2FE0(gobj);
-    if ((u8) gp->gv.pad_0[2] != (u8) gp->gv.pad_0[1]) {
-        gp->gv.pad_0[2] = gp->gv.pad_0[1];
+    if ((u8) gp->u.pad_0[2] != (u8) gp->u.pad_0[1]) {
+        gp->u.pad_0[2] = gp->u.pad_0[1];
         mpLib_80058560();
     }
 }
@@ -634,8 +633,8 @@ void grFlatzone_80217E90(Ground_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Ground_801C2ED0(jobj, gp->map_id);
     HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-    gp->gv.flatzone.xC4 = 0;
-    *(s32*) &gp->gv.flatzone.xC8 = 0;
+    gp->u.flatzone.xC4 = 0;
+    *(s32*) &gp->u.flatzone.xC8 = 0;
 }
 
 bool grFlatzone_80217EE8(Ground_GObj* gobj)
@@ -654,12 +653,12 @@ void grFlatzone_80217EF0(Ground_GObj* gobj)
      * of the locals area with the pool slot above it. Direct access is the
      * established idiom elsewhere in gr (e.g. grcorneria.c). */
     Ground* gp = gobj->user_data;
-    if ((u8) gp->gv.pad_0[0] != 0) {
-        gp->gv.unk.xC8 = grFz_804D6AB0->unk10;
-        gp->gv.pad_0[0] = 0;
+    if ((u8) gp->u.pad_0[0] != 0) {
+        gp->u.unk.xC8 = grFz_804D6AB0->unk10;
+        gp->u.pad_0[0] = 0;
     }
-    if ((s32) gp->gv.unk.xC8 > 0) {
-        if ((gp->gv.unk.xC8 % grFz_804D6AB0->unk14) == 0) {
+    if ((s32) gp->u.unk.xC8 > 0) {
+        if ((gp->u.unk.xC8 % grFz_804D6AB0->unk14) == 0) {
             Vec3 pos;
             {
                 f32 spawn_x = HSD_Randf();
@@ -679,13 +678,13 @@ void grFlatzone_80217EF0(Ground_GObj* gobj)
                 }
             }
         }
-        gp->gv.unk.xC8 -= 1;
-        if ((s32) gp->gv.unk.xC8 <= 0) {
+        gp->u.unk.xC8 -= 1;
+        if ((s32) gp->u.unk.xC8 <= 0) {
             HSD_GObj* gobj = Ground_801C2BA4(2);
             if (gobj != NULL) {
                 Ground* gp = GET_GROUND(gobj);
                 if (gp != NULL) {
-                    gp->gv.flatzone.xC7 = 1;
+                    gp->u.flatzone.xC7 = 1;
                 }
             }
         }
@@ -709,15 +708,15 @@ void grFlatzone_80218060(s32 arg0)
         }
         if (gp != NULL) {
             if (arg0 != 0) {
-                gp->gv.flatzone.xC7 = 2;
-                gp->gv.pad_0[5] = 1;
+                gp->u.flatzone.xC7 = 2;
+                gp->u.pad_0[5] = 1;
             } else {
                 u8 v;
                 do {
                 loop_4:
-                    gp->gv.flatzone.xC7 = HSD_Randi(8);
-                    v = gp->gv.flatzone.xC7;
-                    if (v == (u8) gp->gv.pad_0[4]) {
+                    gp->u.flatzone.xC7 = HSD_Randi(8);
+                    v = gp->u.flatzone.xC7;
+                    if (v == (u8) gp->u.pad_0[4]) {
                         goto loop_4;
                     }
                 } while (((s16(*)[5]) grFz_803E7A68)[v][1] == -1);
@@ -726,16 +725,16 @@ void grFlatzone_80218060(s32 arg0)
                         s32 randi = HSD_Randi(4);
                         v = randi + 1;
                     }
-                } while (((s16(*)[5]) grFz_803E7A68)[gp->gv.flatzone.xC7][(
-                             u8) (gp->gv.pad_0[5] = v)] == -1);
+                } while (((s16(*)[5]) grFz_803E7A68)[gp->u.flatzone.xC7][(
+                             u8) (gp->u.pad_0[5] = v)] == -1);
             }
-            gp->gv.pad_0[6] = 0;
-            gp->gv.flatzone.xCC =
+            gp->u.pad_0[6] = 0;
+            gp->u.flatzone.xCC =
                 (s16) rand_int(grFz_804D6AB0->unkC, grFz_804D6AB0->unk8);
-            gp->gv.flatzone.xC5 =
-                (u8) ((s16(*)[5]) grFz_803E7A68)[gp->gv.flatzone.xC7]
-                                                [(u8) gp->gv.pad_0[5]];
-            grAnime_801C8138(gobj, gp->map_id, (s32) gp->gv.flatzone.xC5);
+            gp->u.flatzone.xC5 =
+                (u8) ((s16(*)[5]) grFz_803E7A68)[gp->u.flatzone.xC7]
+                                                [(u8) gp->u.pad_0[5]];
+            grAnime_801C8138(gobj, gp->map_id, (s32) gp->u.flatzone.xC5);
         }
     }
 }
@@ -748,15 +747,15 @@ static inline void grFlatzone_802181B4_inline(void)
         gp = GET_GROUND(gobj);
         if (gp != NULL) {
             do {
-                gp->gv.flatzone.xC7 = HSD_Randi(8);
-            } while (gp->gv.flatzone.xC7 == (u8) gp->gv.pad_0[4]);
-            gp->gv.pad_0[5] = 0;
-            gp->gv.pad_0[6] = 0;
-            gp->gv.flatzone.xCC = 0;
-            gp->gv.flatzone.xC5 =
+                gp->u.flatzone.xC7 = HSD_Randi(8);
+            } while (gp->u.flatzone.xC7 == (u8) gp->u.pad_0[4]);
+            gp->u.pad_0[5] = 0;
+            gp->u.pad_0[6] = 0;
+            gp->u.flatzone.xCC = 0;
+            gp->u.flatzone.xC5 =
                 ((s16(*)[5])
-                     grFz_803E7A68)[gp->gv.flatzone.xC7][(u8) gp->gv.pad_0[5]];
-            grAnime_801C8138(gobj, gp->map_id, gp->gv.flatzone.xC5);
+                     grFz_803E7A68)[gp->u.flatzone.xC7][(u8) gp->u.pad_0[5]];
+            grAnime_801C8138(gobj, gp->map_id, gp->u.flatzone.xC5);
         }
     }
 }
@@ -774,7 +773,7 @@ void grFlatzone_80218260(void)
         Ground* gp = GET_GROUND(gobj);
         if (gp != NULL) {
             HSD_JObj* jobj;
-            gp->gv.flatzone.xC7 = 8;
+            gp->u.flatzone.xC7 = 8;
             if ((jobj = GET_JOBJ(gobj)) != NULL) {
                 HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             }

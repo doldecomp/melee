@@ -54,70 +54,70 @@ static void ftMh_MS_341_8014FE5C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->motion_id == ftMh_MS_Wait1_0 || fp->motion_id == ftMh_MS_Wait2_0) {
-        fp->cur_pos = fp->fv.mh.x2240_pos;
+        fp->cur_pos = fp->u.mh.x2240_pos;
     } else {
-        fp->fv.mh.x2240_pos = fp->cur_pos;
+        fp->u.mh.x2240_pos = fp->cur_pos;
     }
-    if (fp->fv.mh.x2258 == ftMh_MS_Wait1_2) {
+    if (fp->u.mh.x2258 == ftMh_MS_Wait1_2) {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, 0, fp->cur_anim_frame,
                                   1, 0, 0);
     } else {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, 0, 0, 1, 0, 0);
     }
-    fp->fv.mh.x2258 = ftMh_MS_Wait1_0;
+    fp->u.mh.x2258 = ftMh_MS_Wait1_0;
 }
 
 void ftMh_MS_341_8014FF1C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->motion_id == ftMh_MS_Wait1_0 || fp->motion_id == ftMh_MS_Wait2_0) {
-        fp->cur_pos = fp->fv.mh.x2240_pos;
+        fp->cur_pos = fp->u.mh.x2240_pos;
     } else {
-        fp->fv.mh.x2240_pos = fp->cur_pos;
+        fp->u.mh.x2240_pos = fp->cur_pos;
     }
-    if (fp->fv.mh.x2258 == ftMh_MS_Wait2_1) {
+    if (fp->u.mh.x2258 == ftMh_MS_Wait2_1) {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, 0, fp->cur_anim_frame,
                                   1, 0, 0);
     } else {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, 0, 0, 1, 0, 0);
     }
-    fp->fv.mh.x2258 = ftMh_MS_Wait2_0;
+    fp->u.mh.x2258 = ftMh_MS_Wait2_0;
 }
 
 void ftMh_MS_341_8014FFDC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     u8 _[16];
-    if (fp->fv.mh.x2258 == ftMh_MS_Wait2_1) {
+    if (fp->u.mh.x2258 == ftMh_MS_Wait2_1) {
         if (fp->motion_id == ftMh_MS_Wait1_0 ||
             fp->motion_id == ftMh_MS_Wait2_0)
         {
-            fp->cur_pos = fp->fv.mh.x2240_pos;
+            fp->cur_pos = fp->u.mh.x2240_pos;
         } else {
-            fp->fv.mh.x2240_pos = fp->cur_pos;
+            fp->u.mh.x2240_pos = fp->cur_pos;
         }
-        if (fp->fv.mh.x2258 == ftMh_MS_Wait2_1) {
+        if (fp->u.mh.x2258 == ftMh_MS_Wait2_1) {
             Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, 0,
                                       fp->cur_anim_frame, 1, 0, 0);
         } else {
             Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, 0, 0, 1, 0, 0);
         }
-        fp->fv.mh.x2258 = ftMh_MS_Wait2_0;
+        fp->u.mh.x2258 = ftMh_MS_Wait2_0;
     } else {
         if (fp->motion_id == ftMh_MS_Wait1_0 ||
             fp->motion_id == ftMh_MS_Wait2_0)
         {
-            fp->cur_pos = fp->fv.mh.x2240_pos;
+            fp->cur_pos = fp->u.mh.x2240_pos;
         } else {
-            fp->fv.mh.x2240_pos = fp->cur_pos;
+            fp->u.mh.x2240_pos = fp->cur_pos;
         }
-        if (fp->fv.mh.x2258 == ftMh_MS_Wait1_2) {
+        if (fp->u.mh.x2258 == ftMh_MS_Wait1_2) {
             Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, 0,
                                       fp->cur_anim_frame, 1, 0, 0);
         } else {
             Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, 0, 0, 1, 0, 0);
         }
-        fp->fv.mh.x2258 = ftMh_MS_Wait1_0;
+        fp->u.mh.x2258 = ftMh_MS_Wait1_0;
     }
 }
 
@@ -125,7 +125,7 @@ static void ifStage251(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
-    fp->fv.mh.x2258 = ftMh_MS_Wait1_0;
+    fp->u.mh.x2258 = ftMh_MS_Wait1_0;
     fp->motion_id = ftMh_MS_Entry;
     fp->cur_pos.x = da->x30_pos2.x;
     fp->cur_pos.y = da->x30_pos2.y;
@@ -134,17 +134,17 @@ static void ifStage251(HSD_GObj* gobj)
         if (fp->motion_id == ftMh_MS_Wait1_0 ||
             fp->motion_id == ftMh_MS_Wait2_0)
         {
-            fp->cur_pos = fp->fv.mh.x2240_pos;
+            fp->cur_pos = fp->u.mh.x2240_pos;
         } else {
-            fp->fv.mh.x2240_pos = fp->cur_pos;
+            fp->u.mh.x2240_pos = fp->cur_pos;
         }
-        if (fp->fv.mh.x2258 == ftMh_MS_Wait1_2) {
+        if (fp->u.mh.x2258 == ftMh_MS_Wait1_2) {
             Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, 0,
                                       fp->cur_anim_frame, 1, 0, 0);
         } else {
             Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_0, 0, 0, 1, 0, 0);
         }
-        fp->fv.mh.x2258 = ftMh_MS_Wait1_0;
+        fp->u.mh.x2258 = ftMh_MS_Wait1_0;
     }
 }
 
@@ -176,24 +176,24 @@ inline void doAnim0(HSD_GObj* gobj)
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
     if (fp->motion_id == ftMh_MS_Wait1_0 || fp->motion_id == ftMh_MS_Wait2_0) {
-        fp->cur_pos = fp->fv.mh.x2240_pos;
+        fp->cur_pos = fp->u.mh.x2240_pos;
     } else {
-        fp->fv.mh.x2240_pos = fp->cur_pos;
+        fp->u.mh.x2240_pos = fp->cur_pos;
     }
-    if (fp->fv.mh.x2258 == ftMh_MS_Wait2_1) {
+    if (fp->u.mh.x2258 == ftMh_MS_Wait2_1) {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, 0, fp->cur_anim_frame,
                                   1, 0, 0);
     } else {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_0, 0, 0, 1, 0, 0);
     }
-    fp->fv.mh.x2258 = ftMh_MS_Wait2_0;
+    fp->u.mh.x2258 = ftMh_MS_Wait2_0;
 }
 
 inline void doAnim1(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
-    if (fp->fv.mh.x2258 == ftMh_MS_Wait2_1) {
+    if (fp->u.mh.x2258 == ftMh_MS_Wait2_1) {
         ftMh_MS_341_8014FF1C(gobj);
     } else {
         ftMh_MS_341_8014FE5C(gobj);
@@ -214,14 +214,14 @@ void ftMh_Wait1_0_Anim(HSD_GObj* gobj)
             }
         }
     } else {
-        if (--fp->fv.mh.x223C < 0) {
+        if (--fp->u.mh.x223C < 0) {
             ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
             Vec3 vec;
 
             u8 _[20];
 
-            ftBossLib_8015BD24(fp->x1A88.level, &fp->fv.mh.x223C,
-                               fp->fv.mh.x2238, da->x18, da->x20, da->x1C);
+            ftBossLib_8015BD24(fp->x1A88.level, &fp->u.mh.x223C,
+                               fp->u.mh.x2238, da->x18, da->x20, da->x1C);
             if (ftBossLib_8015C44C(28) == ftMh_MS_TagRockPaper) {
                 // Crazy Hand Combo Attack
                 switch (ftBossLib_8015C4C4()) {
@@ -254,17 +254,17 @@ void ftMh_Wait1_0_Anim(HSD_GObj* gobj)
                 s32 tmp2;
                 u8_pair* qwe;
                 float rand;
-                if (fp->fv.mh.x2254 == da->x24) {
-                    fp->fv.mh.x2254 = 0;
+                if (fp->u.mh.x2254 == da->x24) {
+                    fp->u.mh.x2254 = 0;
                     tmp = 2;
                 } else {
                     s32 qwe4 = ftMh_Init_803D40D0
-                                   .x54[fp->fv.mh.x224C * 5 + HSD_Randi(5)];
+                                   .x54[fp->u.mh.x224C * 5 + HSD_Randi(5)];
                     tmp = qwe4;
                     if (qwe4 == 2) {
-                        fp->fv.mh.x2254 = 0;
+                        fp->u.mh.x2254 = 0;
                     } else {
-                        fp->fv.mh.x2254++;
+                        fp->u.mh.x2254++;
                     }
                 }
                 // cast required, don't know why
@@ -273,8 +273,8 @@ void ftMh_Wait1_0_Anim(HSD_GObj* gobj)
                            .states[ftMh_Init_803D40D0
                                        .x38[qwe->a + HSD_Randi(qwe->b)]];
 
-                fp->fv.mh.x224C = tmp;
-                fp->fv.mh.x2250 = tmp2;
+                fp->u.mh.x224C = tmp;
+                fp->u.mh.x2250 = tmp2;
                 if (fp->x221D_b4) {
                     tmp2 = ftMh_MS_Wait1_0;
                 }
@@ -439,11 +439,11 @@ void ftMh_MS_341_80150894(HSD_GObj* gobj)
         ftMh_MS_363_801530A4(gobj);
     } else if ((buttons & HSD_PAD_Z) && (buttons & HSD_PAD_DPADUP)) {
         // Grab
-        fp->fv.mh.x2250 = ftMh_MS_Throw;
+        fp->u.mh.x2250 = ftMh_MS_Throw;
         ftMh_MS_372_801542E0(gobj);
     } else if ((buttons & HSD_PAD_Z) && (buttons & HSD_PAD_DPADRIGHT)) {
         // Grab
-        fp->fv.mh.x2250 = ftMh_MS_Slam;
+        fp->u.mh.x2250 = ftMh_MS_Slam;
         ftMh_MS_372_801542E0(gobj);
     } else if ((buttons & HSD_PAD_Y) && (buttons & HSD_PAD_DPADUP)) {
         // Crazy Hand Combo Attack

@@ -27,8 +27,8 @@ static MotionFlags const ftMr_MF_SpecialN_Coll =
 static int pickMegavitamin(Fighter* fp, int* arr, int outpos)
 {
     int result = arr[HSD_Randi(outpos)];
-    fp->fv.mr.x2230_vitaminPrev = fp->fv.mr.x222C_vitaminCurr;
-    fp->fv.mr.x222C_vitaminCurr = result;
+    fp->u.mr.x2230_vitaminPrev = fp->u.mr.x222C_vitaminCurr;
+    fp->u.mr.x222C_vitaminCurr = result;
     return result;
 }
 
@@ -42,8 +42,7 @@ int ftMr_SpecialN_VitaminRandom(HSD_GObj* gobj)
     fp = gobj->user_data;
 
     for (i = r3 = 0; i < 9; i++) {
-        if (i != fp->fv.mr.x222C_vitaminCurr &&
-            i != fp->fv.mr.x2230_vitaminPrev)
+        if (i != fp->u.mr.x222C_vitaminCurr && i != fp->u.mr.x2230_vitaminPrev)
         {
             arr[r3] = i;
             r3++;

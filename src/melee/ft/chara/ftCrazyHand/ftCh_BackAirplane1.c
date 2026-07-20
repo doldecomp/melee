@@ -50,7 +50,7 @@ void ftCh_BackAirplane1_Anim(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        if (fp->fv.mh.x2250 == 0x170) {
+        if (fp->u.mh.x2250 == 0x170) {
             ftCh_Init_801594D4(gobj);
         } else {
             ftCh_Init_80159670(gobj);

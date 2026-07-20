@@ -34,14 +34,14 @@
 static void ftKb_NsSpecialNStart_Anim_inline(HSD_GObj* gobj, Vec3* flash_pos)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.kb.ns_flash_gobj == NULL) {
+    if (fp->u.kb.ns_flash_gobj == NULL) {
         lb_8000B1CC(fp->parts[FtPart_WaistN].joint, NULL, flash_pos);
         flash_pos->z = 0;
         flash_pos->y += fp->x34_scale.y * 3.0f;
         {
             HSD_GObj* flash_gobj =
                 it_802AA8C0(gobj, flash_pos, 145, fp->facing_dir);
-            fp->fv.kb.ns_flash_gobj = flash_gobj;
+            fp->u.kb.ns_flash_gobj = flash_gobj;
             if (flash_gobj != NULL) {
                 fp->death2_cb = ftKb_Init_800EE74C;
                 fp->take_dmg_cb = ftKb_Init_800EE7B8;
@@ -68,7 +68,7 @@ void ftKb_SpecialNNs_800FED38(HSD_GObj* gobj)
             da->specialn_ns_frames_to_loop_charge_air;
         fp->mv.kb.specialn_ns.falling_acceleration_delay =
             da->specialn_ns_falling_acceleration_delay;
-        fp->fv.kb.ns_flash_gobj = NULL;
+        fp->u.kb.ns_flash_gobj = NULL;
         fp->mv.kb.specialn_ns.charge_release_delay =
             da->specialn_ns_charge_release_delay;
         ftAnim_8006EBA4(gobj);
@@ -85,7 +85,7 @@ static inline void ftKb_SetNsFlashAttr(Fighter_GObj* gobj)
         da->specialn_ns_frames_to_loop_charge_air;
     fp->mv.kb.specialn_ns.falling_acceleration_delay =
         da->specialn_ns_falling_acceleration_delay;
-    fp->fv.kb.ns_flash_gobj = NULL;
+    fp->u.kb.ns_flash_gobj = NULL;
     fp->mv.kb.specialn_ns.charge_release_delay =
         da->specialn_ns_charge_release_delay;
 }
@@ -109,7 +109,7 @@ void ftKb_SpecialNNs_800FEDD0(HSD_GObj* gobj)
             da->specialn_ns_frames_to_loop_charge_air;
         fp->mv.kb.specialn_ns.falling_acceleration_delay =
             da->specialn_ns_falling_acceleration_delay;
-        fp->fv.kb.ns_flash_gobj = NULL;
+        fp->u.kb.ns_flash_gobj = NULL;
         fp->mv.kb.specialn_ns.charge_release_delay =
             da->specialn_ns_charge_release_delay;
         ftAnim_8006EBA4(gobj);
@@ -136,7 +136,7 @@ void ftKb_NsSpecialNHold_Anim(HSD_GObj* gobj)
         fp->mv.kb.specialn_ns.frames_to_loop_charge_ground =
             flash_timer_min - 1;
     }
-    if (fp->fv.kb.ns_flash_gobj == NULL) {
+    if (fp->u.kb.ns_flash_gobj == NULL) {
         int flash_timer_delay =
             fp->mv.kb.specialn_ns.frames_to_loop_charge_air;
         if (flash_timer_delay != 0) {
@@ -144,7 +144,7 @@ void ftKb_NsSpecialNHold_Anim(HSD_GObj* gobj)
                 flash_timer_delay - 1;
         }
     }
-    if (fp->fv.kb.ns_flash_gobj == NULL) {
+    if (fp->u.kb.ns_flash_gobj == NULL) {
         if (fp->mv.kb.specialn_ns.frames_to_loop_charge_ground <= 0 &&
             fp->mv.kb.specialn_ns.frames_to_loop_charge_air <= 0)
         {
@@ -157,11 +157,11 @@ void ftKb_NsSpecialNHold_Anim(HSD_GObj* gobj)
                                       fp->cur_anim_frame, 1, 0, NULL);
         }
     } else {
-        if (it_802AA7E4(fp->fv.kb.ns_flash_gobj) != gobj) {
-            fp->fv.kb.ns_flash_gobj = NULL;
+        if (it_802AA7E4(fp->u.kb.ns_flash_gobj) != gobj) {
+            fp->u.kb.ns_flash_gobj = NULL;
             return;
         }
-        if (it_802AA7F0(fp->fv.kb.ns_flash_gobj) == 1 &&
+        if (it_802AA7F0(fp->u.kb.ns_flash_gobj) == 1 &&
             fp->motion_id != ftKb_MS_NsSpecialNHold1)
         {
             Fighter_ChangeMotionState(gobj, ftKb_MS_NsSpecialNHold1, 0,
@@ -202,7 +202,7 @@ void ftKb_NsSpecialAirNHold_Anim(Fighter_GObj* gobj)
         fp->mv.kb.specialn_ns.frames_to_loop_charge_ground =
             flash_timer_min - 1;
     }
-    if (fp->fv.kb.ns_flash_gobj == NULL) {
+    if (fp->u.kb.ns_flash_gobj == NULL) {
         int flash_timer_delay =
             fp->mv.kb.specialn_ns.frames_to_loop_charge_air;
         if (flash_timer_delay != 0) {
@@ -210,7 +210,7 @@ void ftKb_NsSpecialAirNHold_Anim(Fighter_GObj* gobj)
                 flash_timer_delay - 1;
         }
     }
-    if (fp->fv.kb.ns_flash_gobj == NULL) {
+    if (fp->u.kb.ns_flash_gobj == NULL) {
         if (fp->mv.kb.specialn_ns.frames_to_loop_charge_ground <= 0 &&
             fp->mv.kb.specialn_ns.frames_to_loop_charge_air <= 0)
         {
@@ -223,11 +223,11 @@ void ftKb_NsSpecialAirNHold_Anim(Fighter_GObj* gobj)
                                       fp->cur_anim_frame, 1, 0, NULL);
         }
     } else {
-        if (it_802AA7E4(fp->fv.kb.ns_flash_gobj) != gobj) {
-            fp->fv.kb.ns_flash_gobj = NULL;
+        if (it_802AA7E4(fp->u.kb.ns_flash_gobj) != gobj) {
+            fp->u.kb.ns_flash_gobj = NULL;
             return;
         }
-        if (it_802AA7F0(fp->fv.kb.ns_flash_gobj) == 1 &&
+        if (it_802AA7F0(fp->u.kb.ns_flash_gobj) == 1 &&
             fp->motion_id != ftKb_MS_NsSpecialAirNHold1)
         {
             Fighter_ChangeMotionState(gobj, ftKb_MS_NsSpecialAirNHold1, 0,
@@ -284,8 +284,8 @@ void ftKb_NsSpecialNHold_IASA(Fighter_GObj* gobj)
         if (fp == NULL) {
             return;
         }
-        if (fp->fv.kb.ns_flash_gobj != NULL) {
-            fp->fv.kb.ns_flash_gobj = NULL;
+        if (fp->u.kb.ns_flash_gobj != NULL) {
+            fp->u.kb.ns_flash_gobj = NULL;
         }
     }
 }
@@ -323,8 +323,8 @@ void ftKb_NsSpecialAirNHold_IASA(Fighter_GObj* gobj)
         if (fp == NULL) {
             return;
         }
-        if (fp->fv.kb.ns_flash_gobj != NULL) {
-            fp->fv.kb.ns_flash_gobj = NULL;
+        if (fp->u.kb.ns_flash_gobj != NULL) {
+            fp->u.kb.ns_flash_gobj = NULL;
         }
     }
 }

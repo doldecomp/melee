@@ -33,7 +33,7 @@ void ftKb_SpecialNPk_800F9FD4(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     s32 msid = ftKb_MS_PkSpecialN;
     PAD_STACK(8);
-    switch (fp->fv.kb.hat.kind) {
+    switch (fp->u.kb.hat.kind) {
     case FTKIND_PIKACHU:
         break;
     case FTKIND_PICHU:
@@ -62,7 +62,7 @@ void ftKb_SpecialNPk_800FA064(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     s32 msid = ftKb_MS_PkSpecialAirN;
     PAD_STACK(8);
-    switch (fp->fv.kb.hat.kind) {
+    switch (fp->u.kb.hat.kind) {
     case FTKIND_PIKACHU:
         break;
     case FTKIND_PICHU:
@@ -91,7 +91,7 @@ void ftKb_PkSpecialN_Anim(Fighter_GObj* gobj)
 
         if (!fp->cmd_vars[1]) {
             fp->cmd_vars[1] = 1;
-            switch (fp->fv.kb.hat.kind) {
+            switch (fp->u.kb.hat.kind) {
             case FTKIND_PIKACHU:
                 sp14.x =
                     (fp->x34_scale.y * (da->specialn_pk_ground_spawn_offset_x *
@@ -142,7 +142,7 @@ void ftKb_PkSpecialAirN_Anim(Fighter_GObj* gobj)
 
         if (!fp->cmd_vars[1]) {
             fp->cmd_vars[1] = 1;
-            switch (fp->fv.kb.hat.kind) {
+            switch (fp->u.kb.hat.kind) {
             case FTKIND_PIKACHU:
                 sp14.x =
                     (fp->x34_scale.y *
@@ -175,7 +175,7 @@ void ftKb_PkSpecialAirN_Anim(Fighter_GObj* gobj)
         }
     }
 
-    switch (fp->fv.kb.hat.kind) {
+    switch (fp->u.kb.hat.kind) {
     case FTKIND_PIKACHU:
         freefall_toggle = da->specialn_pk_freefall_toggle;
         break;
@@ -217,7 +217,7 @@ void ftKb_PkSpecialN_Coll(Fighter_GObj* gobj)
         {
             s32 msid = ftKb_MS_PkSpecialAirN;
             f32 anim_frame = fp->cur_anim_frame;
-            switch (GET_FIGHTER(gobj)->fv.kb.hat.kind) {
+            switch (GET_FIGHTER(gobj)->u.kb.hat.kind) {
             case FTKIND_PIKACHU:
                 break;
             case FTKIND_PICHU:
@@ -241,7 +241,7 @@ void ftKb_PkSpecialAirN_Coll(Fighter_GObj* gobj)
         {
             s32 msid = ftKb_MS_PkSpecialN;
             f32 anim_frame = fp->cur_anim_frame;
-            switch (GET_FIGHTER(gobj)->fv.kb.hat.kind) {
+            switch (GET_FIGHTER(gobj)->u.kb.hat.kind) {
             case FTKIND_PIKACHU:
                 break;
             case FTKIND_PICHU:

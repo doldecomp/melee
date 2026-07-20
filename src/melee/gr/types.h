@@ -242,6 +242,7 @@ struct GroundVars_flatzone2 {
     s32 xD4;
 };
 
+/// @todo Should be merged with #grOldKongo_GroundVars
 struct grKongo_GroundVars {
     /* gp+C4 */ f32 xC4;
     /* gp+C8 */ f32 xC8;
@@ -399,8 +400,31 @@ struct grCorneria_GroundVars {
     HSD_JObj* x12C;
 };
 
+/// Ground vars shared by Corneria and Venom's Arwing stage articles.
+struct grStarFox_GroundVars {
+    /* +0x00 gp+C4 */ union {
+        struct {
+            u8 b0 : 1;
+        } flags;
+        u8 value;
+        u32 word;
+    } xC4;
+    /* +0x04 gp+C8 */ s32 arwing_slot;
+    /* +0x08 gp+CC */ s32 xCC;
+    /* +0x0C gp+D0 */ s32 xD0;
+    /* +0x10 gp+D4 */ s32 xD4;
+    /* +0x14 gp+D8 */ s32 xD8;
+    /* +0x18 gp+DC */ HSD_GObj* linked_gobj;
+    /* +0x1C gp+E0 */ HSD_GObj* article_gobjs[4];
+    /* +0x2C gp+F0 */ s32 xF0;
+    /* +0x30 gp+F4 */ s32 xF4;
+    /* +0x34 gp+F8 */ s32 xF8;
+    /* +0x38 gp+FC */ s32 xFC;
+    /* +0x3C gp+100 */ s32 x100;
+};
+
 /// Arwing slot ground vars (callbacks 2 and 10).
-/// Overlaps grCorneria_GroundVars in the gv union but interprets
+/// Overlaps grCorneria_GroundVars in the u union but interprets
 /// fields differently: pointers/integers instead of floats.
 struct grCorneria_GroundVars2 {
     /* 0x00 gp+C4 */ union {
@@ -468,7 +492,8 @@ struct grSmashTaunt_GroundVars {
 
 struct grVenom_GroundVars {
     /* +00 gp+C4 */ union {
-        u32 xC4;
+        u32 xC4; ///< @todo Not a #u32, either
+                 /// #grSmashTaunt_GroundVars or #HSD_GObj
         struct {
             u8 b0 : 1;
         } xC4_flags;
@@ -1691,135 +1716,129 @@ struct Ground {
     char pad_74[0xC0 - 0x74];
     f32 xC0;
 
-    union {
-        /**
-         * Union of Ground object subtypes
-         *
-         * A Ground object can be one of multiple subtypes. The toplevel Ground
-         * object for the stage itself is a generic type, but uses different
-         * subtypes for various stage hazards, graphics effects, backgrounds,
-         * etc. used by the stage.
-         *
-         * Each index in a stage's StageCallbacks array may use a different
-         * subtype of Ground object - but each callback in a single
-         * StageCallbacks struct should operate on the same subtype.
-         *
-         * This is known from assert statements to contain at least the
-         * following members:
-         * - map
-         *   - A generic member used for multiple stages - used in in Onett,
-         *     RCruise, Home Run Contest, and more. Grep for `gp->u.map`
-         *     to see lots of assert statements using it.
-         * - scroll
-         *   - Used for Rainbow Cruise
-         * - taru
-         *   - "Barrel", used in Kongo Jungle
-         * - car, carnull
-         *   - Used in Big Blue
-         *
-         * @todo This union is named 'u', from assert statements.
-         *       Usages need to be updated before `gv` can be removed.
-         */
-        union GroundVars {
-            char pad_0[0x204 - 0xC4];
-            struct grArwing_GroundVars arwing;
-            struct grBigBlue_GroundVars bigblue;
-            struct grBigBlueRoute_GroundVars2 bigblueroute2;
-            struct grCastle_GroundVars castle;
-            struct grCastle_GroundVars2 castle2;
-            struct grCastle_GroundVars3 castle3;
-            struct grCastle_GroundVars4 castle4;
-            struct grCastle_GroundVars5 castle5;
-            struct grCastle_GroundVars6 castle6;
-            struct grCastle_GroundVars7 castle7;
-            struct grCastle_GroundVars8 castle8;
-            struct grCastle_GroundVars9 castle9;
-            struct grCastle_GroundVars10 castle10;
-            struct grCastle_GroundVars11 castle11;
-            struct grCastle_GroundVars12 castle12;
-            struct grCorneria_GroundVars corneria;
-            struct grCorneria_GroundVars2 corneria2;
-            struct grGreatBay_GroundVars greatbay;
-            struct grGreatBay_GroundVars2 greatbay2;
-            struct grGreatBay_GroundVars3 greatbay3;
-            struct grGreatBay_GroundVars4 greatbay4;
-            struct grFigureGet_GroundVars figureget;
-            struct GroundVars_flatzone flatzone;
-            struct GroundVars_flatzone2 flatzone2;
-            struct grFourside_GroundVars fourside;
-            struct grFourside_CraneVars foursideCrane;
-            struct grFourside_UfoVars foursideUfo;
-            struct grFourside_GroundVars2 fourside2;
-            struct grGreens_GroundVars greens;
-            struct grGreens_GroundVars2 greens2;
-            struct grGarden_GroundVars garden;
-            struct grGarden_GroundVars2 garden2;
-            struct grIceMt_GroundVars icemt;
-            struct grIceMt_GroundVars2 icemt2;
-            struct grInishie1_GroundVars inishie1;
-            struct grInishie1_GroundVars2 inishie12;
-            struct grInishie1_GroundVars3 inishie13;
-            struct grInishie2_GroundVars inishie2;
-            struct grInishie2_GroundVars2 inishie22;
-            struct grInishie2_GroundVars3 inishie23;
-            struct grOldKongo_GroundVars oldkongo;
-            struct grOldPupupu_GroundVars oldpupupu;
-            struct grOldPupupu_GroundVars2 oldpupupu2;
-            struct grOldYoshi_Cloud_GroundVars oldyoshicloud;
-            struct grOldYoshi_Guest_GroundVars oldyoshiguest;
-            struct GroundVars_izumi izumi;
-            struct GroundVars_izumi2 izumi2;
-            struct GroundVars_izumi3 izumi3;
-            struct grKinokoRoute_GroundVars kinokoroute;
-            struct grKinokoRoute_GroundVars2 kinokoroute2;
-            struct grKongo_GroundVars kongo;
-            struct grKongo_GroundVars2 kongo2;
-            struct grKongo_GroundVars3 kongo3;
-            struct grKraid_GroundVars kraid;
-            struct grKraid_GroundVars2 kraid2;
-            struct grMuteCity_GroundVars mutecity;
-            struct grMuteCity_GroundVars2 mutecity2;
-            struct grOnett_GroundVars onett;
-            struct grOnett_Building_GroundVars onett_building;
-            struct grOnett_Car_GroundVars onettcar;
-            struct grPura_GroundVars pura;
-            struct grPura_GroundVars2 pura2;
-            struct grPura_GroundVars3 pura3;
-            struct grRCruise_GroundVars rcruise;
-            struct grRCruise_GroundVars2 rcruise2;
-            struct grShrineroute_GroundVars shrineroute;
-            struct grShrineroute_GroundVars2 shrineroute2;
-            struct grShrineroute_GroundVars3 shrineroute3;
-            struct grSmashTaunt_GroundVars smashtaunt;
-            struct GroundVars_unk unk;
-            struct grHomeRun_GroundVars homerun;
-            struct grHomeRun_GroundVars2 homerun2;
-            struct grVenom_GroundVars venom;
-            struct grVenom_GroundVars2 venom2;
-            struct grYorster_GroundVars yorster;
-            struct grZebes_GroundVars zebes;
-            struct grZebes_GroundVars2 zebes2;
-            struct grZebes_GroundVars3 zebes3;
-            struct grZebes_GroundVars4 zebes4;
-            struct grZebes_GroundVars5 zebes5;
-            struct grStadium_GroundVars stadium;
-            struct grStadium_type9_GroundVars stadium9;
-            struct grStadium_Display display; ///< Pokemon Stadium jumbotron
-            struct Randall randall;
-            struct ShyGuys shyguys;
-            struct Battlefield battle;
-            struct Last_GroundVars last;
-            struct Map_GroundVars map;
-            struct grPushOn_GroundVars pushon;
-            struct ScrollVars scroll;
-            struct grBigBlueRoute_GroundVars car;
-            struct {
-                /*  +0 gp+C4 */ UNK_T xC4;
-                /*  +4 gp+C8 */ HSD_JObj** coll_jobj;
-                /*  +8 gp+CC */ UNK_T rank;
-            } carnull;
-        } u, gv;
-    };
+    /**
+     * Union of Ground object subtypes
+     *
+     * A Ground object can be one of multiple subtypes. The toplevel Ground
+     * object for the stage itself is a generic type, but uses different
+     * subtypes for various stage hazards, graphics effects, backgrounds,
+     * etc. used by the stage.
+     *
+     * Each index in a stage's StageCallbacks array may use a different
+     * subtype of Ground object - but each callback in a single
+     * StageCallbacks struct should operate on the same subtype.
+     *
+     * This is known from assert statements to contain at least the
+     * following members:
+     * - map
+     *   - A generic member used for multiple stages - used in in Onett,
+     *     RCruise, Home Run Contest, and more. Grep for `gp->u.map`
+     *     to see lots of assert statements using it.
+     * - scroll
+     *   - Used for Rainbow Cruise
+     * - car, carnull
+     *   - Used in Big Blue
+     */
+    union GroundVars {
+        char pad_0[0x204 - 0xC4];
+        struct grArwing_GroundVars arwing;
+        struct grBigBlue_GroundVars bigblue;
+        struct grBigBlueRoute_GroundVars2 bigblueroute2;
+        struct grCastle_GroundVars castle;
+        struct grCastle_GroundVars2 castle2;
+        struct grCastle_GroundVars3 castle3;
+        struct grCastle_GroundVars4 castle4;
+        struct grCastle_GroundVars5 castle5;
+        struct grCastle_GroundVars6 castle6;
+        struct grCastle_GroundVars7 castle7;
+        struct grCastle_GroundVars8 castle8;
+        struct grCastle_GroundVars9 castle9;
+        struct grCastle_GroundVars10 castle10;
+        struct grCastle_GroundVars11 castle11;
+        struct grCastle_GroundVars12 castle12;
+        struct grCorneria_GroundVars corneria;
+        struct grCorneria_GroundVars2 corneria2;
+        struct grGreatBay_GroundVars greatbay;
+        struct grGreatBay_GroundVars2 greatbay2;
+        struct grGreatBay_GroundVars3 greatbay3;
+        struct grGreatBay_GroundVars4 greatbay4;
+        struct grFigureGet_GroundVars figureget;
+        struct GroundVars_flatzone flatzone;
+        struct GroundVars_flatzone2 flatzone2;
+        struct grFourside_GroundVars fourside;
+        struct grFourside_CraneVars foursideCrane;
+        struct grFourside_UfoVars foursideUfo;
+        struct grFourside_GroundVars2 fourside2;
+        struct grGreens_GroundVars greens;
+        struct grGreens_GroundVars2 greens2;
+        struct grGarden_GroundVars garden;
+        struct grGarden_GroundVars2 garden2;
+        struct grIceMt_GroundVars icemt;
+        struct grIceMt_GroundVars2 icemt2;
+        struct grInishie1_GroundVars inishie1;
+        struct grInishie1_GroundVars2 inishie12;
+        struct grInishie1_GroundVars3 inishie13;
+        struct grInishie2_GroundVars inishie2;
+        struct grInishie2_GroundVars2 inishie22;
+        struct grInishie2_GroundVars3 inishie23;
+        struct grOldKongo_GroundVars taru;
+        struct grOldPupupu_GroundVars oldpupupu;
+        struct grOldPupupu_GroundVars2 oldpupupu2;
+        struct grOldYoshi_Cloud_GroundVars oldyoshicloud;
+        struct grOldYoshi_Guest_GroundVars oldyoshiguest;
+        struct GroundVars_izumi izumi;
+        struct GroundVars_izumi2 izumi2;
+        struct GroundVars_izumi3 izumi3;
+        struct grKinokoRoute_GroundVars kinokoroute;
+        struct grKinokoRoute_GroundVars2 kinokoroute2;
+        struct grKongo_GroundVars kongo;
+        struct grKongo_GroundVars2 kongo2;
+        struct grKongo_GroundVars3 kongo3;
+        struct grKraid_GroundVars kraid;
+        struct grKraid_GroundVars2 kraid2;
+        struct grMuteCity_GroundVars mutecity;
+        struct grMuteCity_GroundVars2 mutecity2;
+        struct grOnett_GroundVars onett;
+        struct grOnett_Building_GroundVars onett_building;
+        struct grOnett_Car_GroundVars onettcar;
+        struct grPura_GroundVars pura;
+        struct grPura_GroundVars2 pura2;
+        struct grPura_GroundVars3 pura3;
+        struct grRCruise_GroundVars rcruise;
+        struct grRCruise_GroundVars2 rcruise2;
+        struct grShrineroute_GroundVars shrineroute;
+        struct grShrineroute_GroundVars2 shrineroute2;
+        struct grShrineroute_GroundVars3 shrineroute3;
+        struct grSmashTaunt_GroundVars smashtaunt;
+        struct grStarFox_GroundVars starfox;
+        struct GroundVars_unk unk;
+        struct grHomeRun_GroundVars homerun;
+        struct grHomeRun_GroundVars2 homerun2;
+        struct grVenom_GroundVars venom;
+        struct grVenom_GroundVars2 venom2;
+        struct grYorster_GroundVars yorster;
+        struct grZebes_GroundVars zebes;
+        struct grZebes_GroundVars2 zebes2;
+        struct grZebes_GroundVars3 zebes3;
+        struct grZebes_GroundVars4 zebes4;
+        struct grZebes_GroundVars5 zebes5;
+        struct grStadium_GroundVars stadium;
+        struct grStadium_type9_GroundVars stadium9;
+        struct grStadium_Display display; ///< Pokemon Stadium jumbotron
+        struct Randall randall;
+        struct ShyGuys shyguys;
+        struct Battlefield battle;
+        struct Last_GroundVars last;
+        struct Map_GroundVars map;
+        struct grPushOn_GroundVars pushon;
+        struct ScrollVars scroll;
+        struct grBigBlueRoute_GroundVars car;
+        struct {
+            /*  +0 gp+C4 */ UNK_T xC4;
+            /*  +4 gp+C8 */ HSD_JObj** coll_jobj;
+            /*  +8 gp+CC */ UNK_T rank;
+        } carnull;
+    } u;
 };
 STATIC_ASSERT(sizeof(struct Ground) == 0x204);
 

@@ -408,13 +408,13 @@ Fighter_CostumeStrings ftPe_Init_CostumeStrings[] = {
 void ftPe_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->fv.pe.has_float = true;
-    fp->fv.pe.attacks4_motion_id = ftCo_MS_None;
-    fp->fv.pe.specialairn_used = false;
-    fp->fv.pe.parasol_gobj_1 = NULL;
-    fp->fv.pe.parasol_gobj_0 = NULL;
-    fp->fv.pe.toad_gobj = NULL;
-    fp->fv.pe.veg_gobj = NULL;
+    fp->u.pe.has_float = true;
+    fp->u.pe.attacks4_motion_id = ftCo_MS_None;
+    fp->u.pe.specialairn_used = false;
+    fp->u.pe.parasol_gobj_1 = NULL;
+    fp->u.pe.parasol_gobj_0 = NULL;
+    fp->u.pe.toad_gobj = NULL;
+    fp->u.pe.veg_gobj = NULL;
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 2, 0);
     ftParts_80074A4C(gobj, 3, -1);

@@ -82,7 +82,7 @@ void fn_80123218(Fighter_GObj* nana_gobj)
         nana_vec.x = nana_vec.y = nana_vec.z = 0;
         lb_8000B1CC(GET_FIGHTER(nana_gobj)->parts[FtPart_L4thNb].joint, NULL,
                     &nana_vec);
-        popo_fp->fv.pp.x2240 = nana_vec;
+        popo_fp->u.pp.x2240 = nana_vec;
     }
 }
 

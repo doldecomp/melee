@@ -504,22 +504,22 @@ void ftGw_Init_OnDeath(HSD_GObj* gobj)
     ftParts_80074A4C(gobj, 8U, -1);
     ftParts_80074A4C(gobj, 9U, -1);
     ftParts_80074A4C(gobj, 10, -1);
-    fp->fv.gw.x222C_judgeVar1 = 1;
-    fp->fv.gw.x2230_judgeVar2 = 0;
-    fp->fv.gw.x2234 = 0;
-    fp->fv.gw.x223C_panicDamage = 0;
-    fp->fv.gw.x2240_chefVar1 = 1;
-    fp->fv.gw.x2244_chefVar2 = 3;
-    fp->fv.gw.x2248_manholeGObj = NULL;
-    fp->fv.gw.x224C_greenhouseGObj = NULL;
-    fp->fv.gw.x2250_manholeGObj2 = NULL;
-    fp->fv.gw.x2254_fireGObj = NULL;
-    fp->fv.gw.x2258_parachuteGObj = NULL;
-    fp->fv.gw.x225C_turtleGObj = NULL;
-    fp->fv.gw.x2260_sparkyGObj = NULL;
-    fp->fv.gw.x2264_judgementGObj = NULL;
-    fp->fv.gw.x2268_panicGObj = NULL;
-    fp->fv.gw.x226C_rescueGObj = NULL;
+    fp->u.gw.x222C_judgeVar1 = 1;
+    fp->u.gw.x2230_judgeVar2 = 0;
+    fp->u.gw.x2234 = 0;
+    fp->u.gw.x223C_panicDamage = 0;
+    fp->u.gw.x2240_chefVar1 = 1;
+    fp->u.gw.x2244_chefVar2 = 3;
+    fp->u.gw.x2248_manholeGObj = NULL;
+    fp->u.gw.x224C_greenhouseGObj = NULL;
+    fp->u.gw.x2250_manholeGObj2 = NULL;
+    fp->u.gw.x2254_fireGObj = NULL;
+    fp->u.gw.x2258_parachuteGObj = NULL;
+    fp->u.gw.x225C_turtleGObj = NULL;
+    fp->u.gw.x2260_sparkyGObj = NULL;
+    fp->u.gw.x2264_judgementGObj = NULL;
+    fp->u.gw.x2268_panicGObj = NULL;
+    fp->u.gw.x226C_rescueGObj = NULL;
 }
 
 void ftGw_Init_OnLoad(HSD_GObj* gobj)
@@ -532,7 +532,7 @@ void ftGw_Init_OnLoad(HSD_GObj* gobj)
     fp->x2224_b0 = true;
 
     PUSH_ATTRS(fp, ftGameWatchAttributes);
-    fp->fv.gw.x2238_panicCharge = ftGw_Panic_Empty;
+    fp->u.gw.x2238_panicCharge = ftGw_Panic_Empty;
 
     {
         ftGameWatchAttributes* da = fp->dat_attrs;
@@ -615,7 +615,7 @@ void ftGw_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.gw.x2238_panicCharge >= ftGw_Panic_Full) {
+    if (fp->u.gw.x2238_panicCharge >= ftGw_Panic_Full) {
         ftCo_800BFFD0(fp, 5, 0);
     }
 }

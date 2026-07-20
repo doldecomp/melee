@@ -300,7 +300,7 @@ Fighter_CostumeStrings ftLk_Init_CostumeStrings[] = {
 bool ftLk_Init_BoomerangExists(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.lk.boomerang_gobj != NULL) {
+    if (fp->u.lk.boomerang_gobj != NULL) {
         return true;
     } else {
         return false;
@@ -315,13 +315,13 @@ void ftLk_Init_OnDeath(HSD_GObj* gobj)
     ftParts_80074A4C(gobj, 1, 0);
     ftParts_80074A4C(gobj, 2, 0);
 
-    fp->fv.lk.used_boomerang = false;
-    fp->fv.lk.boomerang_gobj = NULL;
-    fp->fv.lk.xC = 0;
-    fp->fv.lk.arrow_gobj = NULL;
-    fp->fv.lk.x14 = 0;
-    fp->fv.lk.xC = 0;
-    fp->fv.lk.x18 = 0;
+    fp->u.lk.used_boomerang = false;
+    fp->u.lk.boomerang_gobj = NULL;
+    fp->u.lk.xC = 0;
+    fp->u.lk.arrow_gobj = NULL;
+    fp->u.lk.x14 = 0;
+    fp->u.lk.xC = 0;
+    fp->u.lk.x18 = 0;
 }
 
 void ftLk_Init_OnLoadForCLink(Fighter* fp)

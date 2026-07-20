@@ -30,7 +30,7 @@ bool ftPe_8011BE80(HSD_GObj* gobj)
     u8 _[8];
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.x668 & HSD_PAD_A || ftCo_800DF478(fp)) {
-        if (fp->fv.pe.x4 > 0) {
+        if (fp->u.pe.x4 > 0) {
             if (ftCo_AttackAir_GetMsidFromCStick(fp) - 65U <= 1) {
                 if (fp->item_gobj != NULL && it_8026B30C(fp->item_gobj) == 3) {
                     ftCo_800CDDA0(gobj);
@@ -55,8 +55,8 @@ static void ftPe_8011BF34(HSD_GObj* gobj)
 void ftPe_FloatAttackAir_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.pe.x4 > 0) {
-        fp->fv.pe.x4 -= 1;
+    if (fp->u.pe.x4 > 0) {
+        fp->u.pe.x4 -= 1;
     }
     if (ftCheckThrowB3(fp)) {
         fp->facing_dir = -fp->facing_dir;

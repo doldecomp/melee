@@ -23,10 +23,10 @@ void ftPp_SpecialHi_80122898(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     PAD_STACK(16);
-    if (fp->fv.pp.x2230_b0) {
+    if (fp->u.pp.x2230_b0) {
         efLib_DestroyAll(gobj);
         fp = gobj->user_data;
-        fp->fv.pp.x2230_b0 = false;
+        fp->u.pp.x2230_b0 = false;
         fp->death2_cb = NULL;
         fp->take_dmg_cb = NULL;
         ftPartSetRotX(gobj->user_data, 0, 0.0f);
@@ -68,10 +68,10 @@ void ftPp_SpecialLw_Anim(Fighter_GObj* gobj)
     PAD_STACK(16);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = gobj->user_data;
-        if (fp->fv.pp.x2230_b0) {
+        if (fp->u.pp.x2230_b0) {
             efLib_DestroyAll(gobj);
             fp = gobj->user_data;
-            fp->fv.pp.x2230_b0 = false;
+            fp->u.pp.x2230_b0 = false;
             fp->death2_cb = NULL;
             fp->take_dmg_cb = NULL;
             ftPartSetRotX(gobj->user_data, 0, 0.0f);
@@ -85,10 +85,10 @@ void ftPp_SpecialAirLw_Anim(Fighter_GObj* gobj)
     PAD_STACK(16);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = gobj->user_data;
-        if (fp->fv.pp.x2230_b0) {
+        if (fp->u.pp.x2230_b0) {
             efLib_DestroyAll(gobj);
             fp = gobj->user_data;
-            fp->fv.pp.x2230_b0 = false;
+            fp->u.pp.x2230_b0 = false;
             fp->death2_cb = NULL;
             fp->take_dmg_cb = NULL;
             ftPartSetRotX(gobj->user_data, 0, 0.0f);
@@ -193,7 +193,7 @@ void fn_80122D2C(Fighter_GObj* gobj)
     case 1:
         efSync_Spawn(0x4EC, gobj, fp->parts[FtPart_L4thNb].joint);
         fp->mv.pp.speciallw.x4_b0 = true;
-        fp->fv.pp.x2230_b0 = true;
+        fp->u.pp.x2230_b0 = true;
         ftPp_set_cbs(gobj);
         fp->cmd_vars[0] = 0;
         if (fp->kind == FTKIND_POPO) {
