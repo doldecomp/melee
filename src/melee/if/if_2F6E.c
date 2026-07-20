@@ -1,3 +1,5 @@
+#include "if_2F6E.h"
+
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
