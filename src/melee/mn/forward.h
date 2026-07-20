@@ -2,11 +2,11 @@
 #define MELEE_MN_FORWARD_H
 
 #ifdef M2C
-typedef struct MenuInfo_GObj MenuInfo_GObj;
-typedef struct Soundtest_GObj Soundtest_GObj;
+typedef struct mnInfo_GObj mnInfo_GObj;
+typedef struct mnSoundTest_GObj mnSoundTest_GObj;
 #else
-typedef struct HSD_GObj MenuInfo_GObj;
-typedef struct HSD_GObj Soundtest_GObj;
+typedef struct HSD_GObj mnInfo_GObj;
+typedef struct HSD_GObj mnSoundTest_GObj;
 #endif
 
 typedef struct MnInfoData MnInfoData;
