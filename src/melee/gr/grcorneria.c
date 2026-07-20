@@ -2533,6 +2533,20 @@ s32 grCorneria_801E2598(u32 arg0, u32 arg1)
     return val != 0;
 }
 
+static inline void grCn_HideJointPair(HSD_GObj* gobj, s16* joints)
+{
+    HSD_JObj* j0 = Ground_801C3FA4(gobj, joints[0]);
+    if (j0 != NULL) {
+        HSD_JObjSetFlagsAll(j0, JOBJ_HIDDEN);
+    }
+    {
+        HSD_JObj* j1 = Ground_801C3FA4(gobj, joints[1]);
+        if (j1 != NULL) {
+            HSD_JObjSetFlagsAll(j1, JOBJ_HIDDEN);
+        }
+    }
+}
+
 /// @todo Only differs by a callee-saved register permutation.
 void grCorneria_801E25C4(HSD_GObj* gobj, void* gv, int line, int arg3,
                          int arg4)
@@ -2552,16 +2566,7 @@ void grCorneria_801E25C4(HSD_GObj* gobj, void* gv, int line, int arg3,
     joints = &grCn_803E21F0[i = 0][0];
     do {
         if (i != 0 && v->line != i) {
-            HSD_JObj* j0 = Ground_801C3FA4(gobj, joints[0]);
-            if (j0 != NULL) {
-                HSD_JObjSetFlagsAll(j0, JOBJ_HIDDEN);
-            }
-            {
-                HSD_JObj* j1 = Ground_801C3FA4(gobj, joints[1]);
-                if (j1 != NULL) {
-                    HSD_JObjSetFlagsAll(j1, JOBJ_HIDDEN);
-                }
-            }
+            grCn_HideJointPair(gobj, joints);
         }
         i++;
         joints += 2;
