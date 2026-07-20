@@ -25,11 +25,11 @@
 #include <melee/gr/ground.h>
 #include <melee/gr/grpstadium.h>
 #include <melee/gr/stage.h>
+#include <melee/if/if_2F6E.h>
 #include <melee/if/ifall.h>
 #include <melee/if/ifhazard.h>
 #include <melee/if/ifnametag.h>
 #include <melee/if/ifstatus.h>
-#include <melee/if/if_2F6E.h>
 #include <melee/if/ifstock.h>
 #include <melee/if/iftime.h>
 #include <melee/it/item.h>
