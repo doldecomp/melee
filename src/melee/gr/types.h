@@ -423,7 +423,7 @@ struct grStarFox_GroundVars {
 };
 
 /// Arwing slot ground vars (callbacks 2 and 10).
-/// Overlaps grCorneria_GroundVars in the gv union but interprets
+/// Overlaps grCorneria_GroundVars in the u union but interprets
 /// fields differently: pointers/integers instead of floats.
 struct grCorneria_GroundVars2 {
     /* 0x00 gp+C4 */ union {
@@ -491,7 +491,8 @@ struct grSmashTaunt_GroundVars {
 
 struct grVenom_GroundVars {
     /* +00 gp+C4 */ union {
-        u32 xC4;
+        u32 xC4; ///< @todo Not a #u32, either
+                 /// #grSmashTaunt_GroundVars or #HSD_GObj
         struct {
             u8 b0 : 1;
         } xC4_flags;
@@ -1741,7 +1742,7 @@ struct Ground {
          *   - Used in Big Blue
          *
          * @todo This union is named 'u', from assert statements.
-         *       Usages need to be updated before `gv` can be removed.
+         *       Usages need to be updated before `u` can be removed.
          */
         union GroundVars {
             char pad_0[0x204 - 0xC4];
@@ -1842,7 +1843,7 @@ struct Ground {
                 /*  +4 gp+C8 */ HSD_JObj** coll_jobj;
                 /*  +8 gp+CC */ UNK_T rank;
             } carnull;
-        } u, gv;
+        } u;
     };
 };
 STATIC_ASSERT(sizeof(struct Ground) == 0x204);

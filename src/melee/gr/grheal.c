@@ -263,7 +263,7 @@ void grHeal_8021F180(Ground_GObj* gobj)
     }
 
     mpJointSetCb1(0, gp, (mpLib_Callback) (Event) fn_8021F4C0);
-    gp->gv.flatzone2.xC4 = 0;
+    gp->u.flatzone2.xC4 = 0;
 }
 
 bool grHeal_8021F41C(Ground_GObj* gobj)
@@ -279,7 +279,7 @@ s32 fn_8021F424(void)
     ground = Ground_801C2BA4(1);
     if (ground != NULL) {
         gp = ground->user_data;
-        if ((gp != NULL) && (gp->gv.unk.xC4 != 0)) {
+        if ((gp != NULL) && (gp->u.unk.xC4 != 0)) {
             return 1;
         }
     }
@@ -293,7 +293,7 @@ void grHeal_8021F474(Ground_GObj* ground)
     gp = ground->user_data;
     Ground_801C3D44(fn_8021F424, 10.0F, 20.0F);
     lb_800115F4();
-    gp->gv.flatzone2.xC4 = 0;
+    gp->u.flatzone2.xC4 = 0;
 }
 
 void grHeal_8021F4BC(Ground_GObj* gobj) {}
@@ -303,7 +303,7 @@ void fn_8021F4C0(Ground* gp, void* arg2, s32 arg4, s32 arg5, s32 arg6)
     if ((((*(u8*) ((u8*) arg4 + 0x34) >> 3U) & 0xF) == 1) &&
         ((arg6 - 1) <= 1U))
     {
-        gp->gv.unk.xC4 = 1;
+        gp->u.unk.xC4 = 1;
     }
 }
 

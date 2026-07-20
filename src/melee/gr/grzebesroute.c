@@ -187,7 +187,7 @@ void grZebesRoute_8020B3C0(Ground_GObj* gobj)
     gp->x8_callback = NULL;
     gp->xC_callback = NULL;
     mpJointSetCb1(1, gp, (mpLib_Callback) fn_8020B4D8);
-    gp->gv.zebes2.xC4 = (s16) grZe_Route_804D6A60.params->camera_timer;
+    gp->u.zebes2.xC4 = (s16) grZe_Route_804D6A60.params->camera_timer;
 }
 
 bool grZebesRoute_8020B424(Ground_GObj* arg)
@@ -212,9 +212,9 @@ void grZebesRoute_8020B42C(Ground_GObj* gobj)
         Ground_801C38BC(pos.x, pos.y);
     }
 
-    timer = *(s16*) &gp->gv.zebes2.xC4;
+    timer = *(s16*) &gp->u.zebes2.xC4;
     if (timer > 0) {
-        gp->gv.zebes2.xC4 = timer - 1;
+        gp->u.zebes2.xC4 = timer - 1;
     } else {
         Camera_80030E44(1, NULL);
     }
