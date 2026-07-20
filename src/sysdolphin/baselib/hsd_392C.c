@@ -137,9 +137,20 @@ void fn_80392E2C(s32 event_type)
 
 extern s32 hsd_804CF740[42];
 
-extern int hsd_804D78A0;
+int hsd_804D78A0;
 extern s32 hsd_804D78A8;
 extern s32 hsd_804D78AC;
+
+static void usb_exit_init(void)
+{
+    OSReport("usb exit and initialize.\n");
+    FIOExit();
+    hsd_804D78A0 = 0;
+    MCCExit();
+    if (MCCInit(hsd_804D7890, 0, (MCC_CBSysEvent) fn_80392E2C) == 0) {
+        OSReport("MCCInit NG.\n");
+    }
+}
 
 // @TODO: Currently 92.84% match - needs minor register allocation fix
 int hsd_80392E80(void)
@@ -168,30 +179,22 @@ int hsd_80392E80(void)
 
         switch (event) {
         case 2:
-            OSReport("Connecting...\n");
+            OSReport("mcc ready.\n");
             hsd_804D78AC = 0;
             hsd_804D78A8 = 0;
-            OSReport("FIO Init...");
+            OSReport("Initialize FIO-Connection ... ");
             if (FIOInit(hsd_804D7890, 1, 10) == 0) {
                 OSReport("NG\n");
             } else {
                 OSReport("OK\n");
                 hsd_804D78A0 = 1;
             }
-            OSReport("MCC Open...");
+            OSReport("Initialize MCC-Connection ... ");
             if (MCCOpen(0xF, 1, (MCC_CBEvent) fn_803932D0) == 0) {
                 OSReport("NG\n");
-                OSReport("Reseting...\n");
-                FIOExit();
-                hsd_804D78A0 = 0;
-                MCCExit();
-                if (MCCInit(hsd_804D7890, 0, (MCC_CBSysEvent) fn_80392E2C) ==
-                    0)
-                {
-                    OSReport("MCCInit Failed.\n");
-                }
+                usb_exit_init();
             } else {
-                OSReport("Waiting for connection...");
+                OSReport("Open ... ");
                 waiting = 1;
                 startTick = OSGetTick();
                 for (;;) {
@@ -208,15 +211,7 @@ int hsd_80392E80(void)
                 }
                 if (waiting != 0) {
                     OSReport("NG\n");
-                    OSReport("Reseting...\n");
-                    FIOExit();
-                    hsd_804D78A0 = 0;
-                    MCCExit();
-                    if (MCCInit(hsd_804D7890, 0,
-                                (MCC_CBSysEvent) fn_80392E2C) == 0)
-                    {
-                        OSReport("MCCInit Failed.\n");
-                    }
+                    usb_exit_init();
                 } else {
                     OSReport("OK\n");
                     channel_flags = (s32*) hsd_804CF740;
@@ -243,20 +238,12 @@ int hsd_80392E80(void)
             }
             break;
         case 1:
-            OSReport("Disconnecting...\n");
+            OSReport("receive event \'REBOOT\'. Query server ...");
             if (hsd_80393328() == 0) {
-                OSReport("Disconnection failed.\n");
-                OSReport("Reseting...\n");
-                FIOExit();
-                hsd_804D78A0 = 0;
-                MCCExit();
-                if (MCCInit(hsd_804D7890, 0, (MCC_CBSysEvent) fn_80392E2C) ==
-                    0)
-                {
-                    OSReport("MCCInit Failed.\n");
-                }
+                OSReport("Query NG.\n");
+                usb_exit_init();
             } else {
-                OSReport("Disconnection OK.\n");
+                OSReport("Query OK. This event is dumped.\n");
             }
             break;
         }

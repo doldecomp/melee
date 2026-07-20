@@ -27,9 +27,7 @@ Item_GObj* it_802B2560(Fighter_GObj* parent_gobj, float facing_dir, Vec3* pos,
 
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
-        Item_8026AB54(gobj, parent_gobj, part);
-        db_80225DD8(gobj, parent_gobj);
-        return gobj;
+        return Item_AttachToParent(gobj, parent_gobj, part);
     }
     return NULL;
 }
