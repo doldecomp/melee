@@ -1,12 +1,9 @@
 #ifndef GALE01_390730
 #define GALE01_390730
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "baselib/forward.h" // IWYU pragma: export
-
-#include "baselib/objalloc.h"
 
 #define HSD_GOBJ_GXLINK_NONE ((u8) 0xFF)
 #define HSD_GOBJ_OBJ_NONE 0xFF
@@ -20,6 +17,7 @@
 
 #define HSD_GOBJ_CLASS_EFFECT 0x8
 #define HSD_GOBJ_CLASS_LIGHT 0xB
+#define HSD_GOBJ_CLASS_GROUND 0xD
 #define HSD_GOBJ_CLASS_UI 0xE
 #define HSD_GOBJ_CLASS_CAMERA 0x13
 

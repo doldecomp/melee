@@ -1,7 +1,6 @@
 #ifndef GALE01_1C87D0
 #define GALE01_1C87D0
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "gr/forward.h"
@@ -9,6 +8,7 @@
 #include <baselib/forward.h>
 #include <melee/it/forward.h>
 
+#include <common_structs.h>
 #include <baselib/gobj.h>
 
 /* 1C8D44 */ Item_GObj*
