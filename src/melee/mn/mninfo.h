@@ -1,12 +1,9 @@
 #ifndef MELEE_MN_INFO_H
 #define MELEE_MN_INFO_H
 
-#include "baselib/forward.h"
 #include "mn/forward.h"
 #include "sc/forward.h"
-
-/* 4A0958 */ extern StaticModelDesc mnInfo_804A0958;
-/* 4A0968 */ extern u8 mnInfo_804A0968[0x48];
+#include <baselib/forward.h>
 
 /* 251A08 */ s32 mnInfo_80251A08(s32);
 /* 251AA4 */ s32 mnInfo_80251AA4(void);
@@ -20,5 +17,7 @@
 /* 252548 */ void fn_80252548(HSD_GObj*);
 /* 252720 */ void mnInfo_80252720(MnInfoData*);
 /* 252758 */ s32 mnInfo_80252758(void);
+/* 4A0958 */ extern StaticModelDesc mnInfo_804A0958;
+/* 4A0968 */ extern u8 mnInfo_804A0968[0x48];
 
 #endif
