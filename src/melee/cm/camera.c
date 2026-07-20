@@ -6,6 +6,9 @@
 
 #include "baselib/cobj.h"
 #include "baselib/displayfunc.h"
+
+#include "baselib/forward.h"
+
 #include "baselib/gobj.h"
 #include "baselib/lobj.h"
 #include "baselib/memory.h"
@@ -265,11 +268,11 @@ void Camera_800290D4(CmSubject* subject)
     cm_804D6458 = subject;
 }
 
-s32 Camera_80029124(Vec3* subject_pos, s32 distance)
+u32 Camera_80029124(Vec3* subject_pos, s32 distance)
 {
     /// @todo lots of ways to match this without the padding
     u8 _PAD[4];
-    s32 result;
+    CameraEdge edge;
     f32 slope;
     f32 intercept;
     f32 bounds_left;
@@ -277,7 +280,7 @@ s32 Camera_80029124(Vec3* subject_pos, s32 distance)
     f32 bounds_top;
     f32 bounds_bottom;
 
-    result = 0;
+    edge = CAMERA_EDGE_NONE;
     Ground_801C4368(&slope, &intercept);
     slope += 1.0;
 
@@ -292,20 +295,20 @@ s32 Camera_80029124(Vec3* subject_pos, s32 distance)
     }
 
     if (subject_pos->x < (bounds_left - distance)) {
-        result |= LEFT_BOUND;
+        edge |= CAMERA_EDGE_LEFT;
     }
     if (subject_pos->x > (bounds_right + distance)) {
-        result |= RIGHT_BOUND;
+        edge |= CAMERA_EDGE_RIGHT;
     }
 
     if (subject_pos->y > (bounds_top + distance)) {
-        result |= TOP_BOUND;
+        edge |= CAMERA_EDGE_TOP;
     }
     if (subject_pos->y < (bounds_bottom - distance)) {
-        result |= BOTTOM_BOUND;
+        edge |= CAMERA_EDGE_BOTTOM;
     }
 
-    return result;
+    return edge;
 }
 
 static inline bool cam_bound(float x)
@@ -482,16 +485,16 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
                 if (boundary_flags != 0) {
                     Ground_801C4368(&base_ground, &base_ground_intercept);
                     base_ground += 1.0;
-                    if (boundary_flags & LEFT_BOUND) {
+                    if (boundary_flags & CAMERA_EDGE_LEFT) {
                         base_pos.x = Stage_GetCamBoundsLeftOffset();
                     }
-                    if (boundary_flags & RIGHT_BOUND) {
+                    if (boundary_flags & CAMERA_EDGE_RIGHT) {
                         base_pos.x = Stage_GetCamBoundsRightOffset();
                     }
-                    if (boundary_flags & TOP_BOUND) {
+                    if (boundary_flags & CAMERA_EDGE_TOP) {
                         base_pos.y = Stage_GetCamBoundsTopOffset();
                     }
-                    if (boundary_flags & BOTTOM_BOUND) {
+                    if (boundary_flags & CAMERA_EDGE_BOTTOM) {
                         base_pos.y =
                             (Stage_GetCamBoundsBottomOffset() > base_ground)
                                 ? (Stage_GetCamBoundsBottomOffset())
@@ -504,16 +507,16 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
                 if (boundary_flags != 0) {
                     Ground_801C4368(&x_extent_ground, &x_extent_intercept);
                     x_extent_ground += 1.0;
-                    if (boundary_flags & LEFT_BOUND) {
+                    if (boundary_flags & CAMERA_EDGE_LEFT) {
                         test_pos.x = Stage_GetCamBoundsLeftOffset();
                     }
-                    if (boundary_flags & RIGHT_BOUND) {
+                    if (boundary_flags & CAMERA_EDGE_RIGHT) {
                         test_pos.x = Stage_GetCamBoundsRightOffset();
                     }
-                    if (boundary_flags & TOP_BOUND) {
+                    if (boundary_flags & CAMERA_EDGE_TOP) {
                         test_pos.y = Stage_GetCamBoundsTopOffset();
                     }
-                    if (boundary_flags & BOTTOM_BOUND) {
+                    if (boundary_flags & CAMERA_EDGE_BOTTOM) {
                         test_pos.y = (Stage_GetCamBoundsBottomOffset() >
                                       x_extent_ground)
                                          ? (Stage_GetCamBoundsBottomOffset())
@@ -532,16 +535,16 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
                 if (boundary_flags != 0) {
                     Ground_801C4368(&alt_x_ground, &alt_x_intercept);
                     alt_x_ground += 1.0;
-                    if (boundary_flags & LEFT_BOUND) {
+                    if (boundary_flags & CAMERA_EDGE_LEFT) {
                         test_pos.x = Stage_GetCamBoundsLeftOffset();
                     }
-                    if (boundary_flags & RIGHT_BOUND) {
+                    if (boundary_flags & CAMERA_EDGE_RIGHT) {
                         test_pos.x = Stage_GetCamBoundsRightOffset();
                     }
-                    if (boundary_flags & TOP_BOUND) {
+                    if (boundary_flags & CAMERA_EDGE_TOP) {
                         test_pos.y = Stage_GetCamBoundsTopOffset();
                     }
-                    if (boundary_flags & BOTTOM_BOUND) {
+                    if (boundary_flags & CAMERA_EDGE_BOTTOM) {
                         test_pos.y =
                             (Stage_GetCamBoundsBottomOffset() > alt_x_ground)
                                 ? (Stage_GetCamBoundsBottomOffset())
@@ -560,16 +563,16 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
                 if (boundary_flags != 0) {
                     Ground_801C4368(&y_extent_ground, &y_extent_intercept);
                     y_extent_ground += 1.0;
-                    if (boundary_flags & LEFT_BOUND) {
+                    if (boundary_flags & CAMERA_EDGE_LEFT) {
                         test_pos.x = Stage_GetCamBoundsLeftOffset();
                     }
-                    if (boundary_flags & RIGHT_BOUND) {
+                    if (boundary_flags & CAMERA_EDGE_RIGHT) {
                         test_pos.x = Stage_GetCamBoundsRightOffset();
                     }
-                    if (boundary_flags & TOP_BOUND) {
+                    if (boundary_flags & CAMERA_EDGE_TOP) {
                         test_pos.y = Stage_GetCamBoundsTopOffset();
                     }
-                    if (boundary_flags & BOTTOM_BOUND) {
+                    if (boundary_flags & CAMERA_EDGE_BOTTOM) {
                         test_pos.y = (Stage_GetCamBoundsBottomOffset() >
                                       y_extent_ground)
                                          ? (Stage_GetCamBoundsBottomOffset())
@@ -588,16 +591,16 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
                 if (boundary_flags != 0) {
                     Ground_801C4368(&alt_y_ground, &alt_y_intercept);
                     alt_y_ground += 1.0;
-                    if (boundary_flags & LEFT_BOUND) {
+                    if (boundary_flags & CAMERA_EDGE_LEFT) {
                         test_pos.x = Stage_GetCamBoundsLeftOffset();
                     }
-                    if (boundary_flags & RIGHT_BOUND) {
+                    if (boundary_flags & CAMERA_EDGE_RIGHT) {
                         test_pos.x = Stage_GetCamBoundsRightOffset();
                     }
-                    if (boundary_flags & TOP_BOUND) {
+                    if (boundary_flags & CAMERA_EDGE_TOP) {
                         test_pos.y = Stage_GetCamBoundsTopOffset();
                     }
-                    if (boundary_flags & BOTTOM_BOUND) {
+                    if (boundary_flags & CAMERA_EDGE_BOTTOM) {
                         test_pos.y =
                             (Stage_GetCamBoundsBottomOffset() > alt_y_ground)
                                 ? (Stage_GetCamBoundsBottomOffset())
@@ -1396,13 +1399,13 @@ void Camera_8002B1F8(CameraTransformState* transform)
     if ((((temp_r3 = Player_GetEntity(0), temp_r3 != NULL) &&
           (subject = ftLib_80086B74(temp_r3), subject != NULL) &&
           (Camera_8002928C(subject) != 0) &&
-          (Camera_80029124(&subject->x1C, 0) == 0U) &&
+          (Camera_80029124(&subject->x1C, 0) == CAMERA_EDGE_NONE) &&
           !ftLib_8008732C(temp_r3)) ||
          ((Player_GetPlayerCharacter(1) == CHKIND_SANDBAG) &&
           (temp_r3_2 = Player_GetEntity(1), ((temp_r3_2 == NULL) == 0)) &&
           (subject = ftLib_80086B74(temp_r3_2), ((subject == NULL) == 0)) &&
           (Camera_8002928C(subject) != 0) &&
-          ((u32) Camera_80029124(&subject->x1C, 0) == false))))
+          (Camera_80029124(&subject->x1C, 0) == CAMERA_EDGE_NONE))))
     {
         lbVector_Diff(&transform->target_interest, &subject->x1C, &vec);
         temp_f1 = *temp_r31;
@@ -1567,11 +1570,12 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
         return;
     }
 
-    /// @remark Slot 4 reads all ports at once: the stick and substick each
-    /// come from the first controller deflected past 0.85 on either axis (zero
-    /// if none), and the buttons are merged across all controllers.
-    /// @note, there is probably an inline for the stick comparisons that would
-    /// fix PAD_STACK
+    /// @todo some notes on this weird thing: Slot 4 reads all ports at once:
+    /// the stick and substick each
+    // come from the first controller deflected past 0.85 on either axis (zero
+    // if none), and the buttons are merged across all controllers.
+    // there is probably an inline for the stick comparisons that would fix the
+    // PAD_STACK
     if (slot == 4) {
         for (current_slot = 0; current_slot < PAD_MAX_CONTROLLERS;
              current_slot++)
@@ -2363,53 +2367,78 @@ void Camera_8002CDDC(void* unused)
 
 static inline void approach_vec3(Vec3* target, Vec3* cur, f32 smooth)
 {
-    f32 y, z;
-    f32 iy, iz;
     f32 dy;
     f32 ix;
+    f32 z;
+    f32 iy, iz;
     f32 x;
 
     x = target->x;
     ix = cur->x;
     x -= ix;
-    y = target->y;
+    dy = target->y;
     iy = cur->y;
-    dy = y - iy;
-    {
-        f32 tmp = target->z;
-        z = tmp;
-    }
-    {
-        f32 tmp = cur->z;
-        iz = tmp;
-    }
+    dy -= iy;
+    z = target->z;
+    iz = cur->z;
     cur->x = x * smooth + ix;
     ix = z - iz;
     cur->y = dy * smooth + cur->y;
     cur->z = ix * smooth + cur->z;
 }
 
+static inline f32 compute_orbit_distance(s32 slot)
+{
+    f32 distance;
+    HSD_GObj* gobj;
+    CmSubject* subject;
+
+    if (slot != 10 && slot != 11 && slot >= 0 && slot < 6 &&
+        (gobj = Player_GetEntity(slot)) != NULL &&
+        (subject = ftLib_80086B74(gobj)) != NULL)
+    {
+        distance = (2.0f * subject->x34.z) /
+                   tanf(MTXDegToRad(cm_80452C68.transform.target_fov));
+    } else {
+        distance = 1000.0f;
+    }
+    return distance;
+}
+
+/// @todo i dont think this is real but it fixes some reg swaps in
+/// Camera_8002D318
+// needs another hard look
+static inline Vec3* get_subject_x1C(CmSubject* subject)
+{
+    return &subject->x1C;
+}
+
 void Camera_8002D318(void* unused)
 {
+    /// @todo this and Camera_8002D85C are very similar but i cant quite figure
+    /// out the helpers for them
     Vec3* pos;
-    f32 delta;
-    CmSubject* subject;
     HSD_GObj* gobj;
     f32 half_z;
-    f32 horiz_dist;
     f32 distance;
+    f32 delta;
+    CameraBounds bounds2;
+    CmSubject* subject;
+    f32 horiz_dist;
+    CameraBounds bounds_copy;
+    CameraBounds bounds;
 
     gobj = Player_GetEntity(cm_80452C68.x2C4);
-    if (gobj != NULL && ftLib_8008701C(gobj) == 0 &&
+    if (gobj != NULL && ftLib_8008701C(gobj) == false &&
         (subject = ftLib_80086B74(gobj)) != NULL && Camera_8002928C(subject) &&
-        (u32) Camera_80029124(&subject->x1C, 0) == 0 &&
+        Camera_80029124(&subject->x1C, 0) == CAMERA_EDGE_NONE &&
         ABS(subject->x1C.z) < 10.0f)
     {
         Camera_80030DF8();
         if ((gobj = Player_GetEntity(cm_80452C68.x2C4)) != NULL &&
             (subject = ftLib_80086B74(gobj)) != NULL)
         {
-            pos = &subject->x1C;
+            pos = get_subject_x1C(subject);
             half_z = 0.5f * subject->x34.z;
             cm_80452C68.transform.target_interest.x =
                 -((half_z * cosf(cm_80452C68.yaw_offset)) - pos->x);
@@ -2424,121 +2453,104 @@ void Camera_8002D318(void* unused)
         delta = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
         cm_80452C68.transform.fov += delta * cm_803BCCA0.x70;
 
-        if (cm_80452C68.x2C4 != 0xA && cm_80452C68.x2C4 != 0xB && cm_80452C68.x2C4 >= 0 && cm_80452C68.x2C4 < 6 &&
-            (gobj = Player_GetEntity(cm_80452C68.x2C4)) != NULL &&
-            (subject = ftLib_80086B74(gobj)) != NULL)
         {
-            distance = (2.0f * subject->x34.z) /
-                       tanf(0.017453292f * cm_80452C68.transform.target_fov);
-        } else {
-            distance = 1000.0f;
+            f32 tmp = compute_orbit_distance(cm_80452C68.x2C4);
+            distance = tmp;
         }
 
         horiz_dist = distance * cosf(cm_80452C68.pitch_offset);
         cm_80452C68.transform.target_position.x =
-            (horiz_dist * sinf(cm_80452C68.yaw_offset)) +
+            horiz_dist * sinf(cm_80452C68.yaw_offset) +
             cm_80452C68.transform.target_interest.x;
         cm_80452C68.transform.target_position.y =
-            (distance * sinf(cm_80452C68.pitch_offset)) +
+            distance * sinf(cm_80452C68.pitch_offset) +
             cm_80452C68.transform.target_interest.y;
         cm_80452C68.transform.target_position.z =
-            (horiz_dist * cosf(cm_80452C68.yaw_offset)) +
+            horiz_dist * cosf(cm_80452C68.yaw_offset) +
             cm_80452C68.transform.target_interest.z;
         approach_vec3(&cm_80452C68.transform.target_position,
                       &cm_80452C68.transform.position, cm_803BCCA0.x68);
         return;
     }
 
-    {
-        CameraBounds bounds_copy;
-        CameraBounds bounds;
-
-        Camera_80030DF8();
-        Camera_800293E0();
-        Camera_8002B0E0();
-        update_transform(&bounds, &cm_80452C68.transform);
-        update_transform(&bounds_copy, &cm_80452C68.transform_copy);
-        update_zoom_distance();
-        update_bounds(&bounds, &bounds_copy);
-        update_avg_bounds_width();
-    }
+    Camera_80030DF8();
+    Camera_800293E0();
+    Camera_8002B0E0();
+    update_transform(&bounds, &cm_80452C68.transform);
+    update_transform(&bounds_copy, &cm_80452C68.transform_copy);
+    update_zoom_distance();
+    update_bounds(&bounds, &bounds_copy);
+    update_avg_bounds_width();
 }
 
 void Camera_8002D85C(void* unused)
 {
-    Camera* cam;
-    s8* slot_ptr;
     CmSubject* subject;
-    f32* yaw_ptr;
-    f32* pitch_ptr;
-    f32 distance;
-    Vec3* subj_pos;
-    f32* tgt_fov_ptr;
     HSD_GObj* gobj;
-    s32 slot;
-    f32 horiz_dist;
+    Vec3* subj_pos;
+    f32 distance;
     f32 delta;
+    f32 horiz_dist;
+    CameraBounds bounds3;
     CameraBounds bounds2;
     CameraBounds bounds;
-    PAD_STACK(16);
 
-    cam = &cm_80452C68;
-    slot_ptr = &cam->x2C4;
-    gobj = Player_GetEntity(*slot_ptr);
+    gobj = Player_GetEntity(cm_80452C68.x2C4);
     if (gobj != NULL && (subject = ftLib_80086B74(gobj)) != NULL &&
-        (u32) Camera_80029124(&subject->x1C, 0) == 0 &&
+        Camera_80029124(&subject->x1C, 0) == CAMERA_EDGE_NONE &&
         ABS(subject->x1C.z) < 30.0f)
     {
         Camera_80030DF8();
-        gobj = Player_GetEntity(*slot_ptr);
+        gobj = Player_GetEntity(cm_80452C68.x2C4);
         if (gobj != NULL && (subject = ftLib_80086B74(gobj)) != NULL) {
-            cam->transform.target_interest.x = subject->x1C.x;
-            cam->transform.target_interest.y = (subj_pos = &subject->x1C)->y;
-            cam->transform.target_interest.z = subj_pos->z;
-            approach_vec3(&cam->transform.target_interest,
-                          &cam->transform.interest, cm_803BCCA0.x64);
+            subj_pos = &subject->x1C;
+            cm_80452C68.transform.target_interest.x = subj_pos->x;
+            cm_80452C68.transform.target_interest.y = subj_pos->y;
+            cm_80452C68.transform.target_interest.z = subj_pos->z;
+            approach_vec3(&cm_80452C68.transform.target_interest,
+                          &cm_80452C68.transform.interest, cm_803BCCA0.x64);
         }
 
-        tgt_fov_ptr = &cam->transform.target_fov;
-        *tgt_fov_ptr = cm_803BCCA0.x6C;
-        delta = *tgt_fov_ptr - cam->transform.fov;
-        cam->transform.fov += delta * cm_803BCCA0.x70;
+        cm_80452C68.transform.target_fov = cm_803BCCA0.x6C;
+        delta = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
+        cm_80452C68.transform.fov += delta * cm_803BCCA0.x70;
 
-        slot = *slot_ptr;
-        if (slot != 0xA && slot != 0xB && slot >= 0 && slot < 6 &&
-            (gobj = Player_GetEntity(slot)) != NULL &&
+        if (cm_80452C68.x2C4 != 10 && cm_80452C68.x2C4 != 11 &&
+            cm_80452C68.x2C4 >= 0 && cm_80452C68.x2C4 < 6 &&
+            (gobj = Player_GetEntity(cm_80452C68.x2C4)) != NULL &&
             (subject = ftLib_80086B74(gobj)) != NULL)
         {
-            distance =
-                (2.0f * subject->x34.z) / tanf(MTXDegToRad(*tgt_fov_ptr));
+            distance = (2.0f * subject->x34.z) /
+                       tanf(MTXDegToRad(cm_80452C68.transform.target_fov));
         } else {
             distance = 1000.0f;
         }
 
-        pitch_ptr = &cam->pitch_offset;
-        if (*pitch_ptr > Stage_GetCamAngleRadiansUp()) {
-            *pitch_ptr = Stage_GetCamAngleRadiansUp();
-        } else if (*pitch_ptr < -Stage_GetCamAngleRadiansDown()) {
-            *pitch_ptr = -Stage_GetCamAngleRadiansDown();
+        if (cm_80452C68.pitch_offset > Stage_GetCamAngleRadiansUp()) {
+            cm_80452C68.pitch_offset = Stage_GetCamAngleRadiansUp();
+        } else if (cm_80452C68.pitch_offset < -Stage_GetCamAngleRadiansDown())
+        {
+            cm_80452C68.pitch_offset = -Stage_GetCamAngleRadiansDown();
         }
 
-        yaw_ptr = &cam->yaw_offset;
-        if (*yaw_ptr > Stage_GetCamAngleRadiansLeft()) {
-            *yaw_ptr = Stage_GetCamAngleRadiansLeft();
-        } else if (*yaw_ptr < -Stage_GetCamAngleRadiansRight()) {
-            *yaw_ptr = -Stage_GetCamAngleRadiansRight();
+        if (cm_80452C68.yaw_offset > Stage_GetCamAngleRadiansLeft()) {
+            cm_80452C68.yaw_offset = Stage_GetCamAngleRadiansLeft();
+        } else if (cm_80452C68.yaw_offset < -Stage_GetCamAngleRadiansRight()) {
+            cm_80452C68.yaw_offset = -Stage_GetCamAngleRadiansRight();
         }
 
-        horiz_dist = distance * cosf(*pitch_ptr);
-        cam->transform.target_position.x =
-            cam->transform.target_interest.x + horiz_dist * sinf(*yaw_ptr);
-        cam->transform.target_position.y =
-            cam->transform.target_interest.y + distance * sinf(*pitch_ptr);
-        cam->transform.target_position.z =
-            cam->transform.target_interest.z + horiz_dist * cosf(*yaw_ptr);
-
-        approach_vec3(&cam->transform.target_position,
-                      &cam->transform.position, cm_803BCCA0.x68);
+        horiz_dist = distance * cosf(cm_80452C68.pitch_offset);
+        cm_80452C68.transform.target_position.x =
+            horiz_dist * sinf(cm_80452C68.yaw_offset) +
+            cm_80452C68.transform.target_interest.x;
+        cm_80452C68.transform.target_position.y =
+            distance * sinf(cm_80452C68.pitch_offset) +
+            cm_80452C68.transform.target_interest.y;
+        cm_80452C68.transform.target_position.z =
+            horiz_dist * cosf(cm_80452C68.yaw_offset) +
+            cm_80452C68.transform.target_interest.z;
+        approach_vec3(&cm_80452C68.transform.target_position,
+                      &cm_80452C68.transform.position, cm_803BCCA0.x68);
         return;
     }
 
@@ -3308,7 +3320,7 @@ void Camera_SetUpPauseCamera(s8 pauserSlot, s8 pauserId, s32 arg2)
     Vec3* pause_eye_offset;
     CameraTransformState* transform;
     f32 var_f31;
-    PAD_STACK(32);
+    PAD_STACK(24);
 
     if ((pauserSlot < 0 || pauserSlot >= 6) && (u8) (pauserSlot - 10) > 1) {
         pauserSlot = 0;
@@ -3347,15 +3359,7 @@ void Camera_SetUpPauseCamera(s8 pauserSlot, s8 pauserId, s32 arg2)
         break;
     }
 
-    {
-        s32 slot = cm_80452C68.x2C4;
-        if (slot != 0xA && slot != 0xB && slot >= 0 && slot < 6) {
-            HSD_GObj* gobj = Player_GetEntity(slot);
-            if (gobj != NULL && ftLib_80086B74(gobj) != NULL) {
-                tanf(0.017453292f * cm_80452C68.transform.target_fov);
-            }
-        }
-    }
+    compute_orbit_distance(cm_80452C68.x2C4);
 
     {
         s8 slot = cm_80452C68.x2C4;
@@ -3759,7 +3763,8 @@ Vec3* Camera_8003019C(void)
     return &ftLib_80086B74(Player_GetEntity(cm_80453004.ply_slot))->x1C;
 }
 
-/// @todo these are probably somewhat fake, but maybe a combination of this + render_gxlink_pass is real.
+/// @todo these are probably somewhat fake, but maybe a combination of this +
+/// render_gxlink_pass is the real deal.
 static inline s64 gxlink_prio8(void)
 {
     s64 prio;
