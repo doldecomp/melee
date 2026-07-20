@@ -8,6 +8,7 @@
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/hsd_3915.h>
 #include <sysdolphin/baselib/hsd_3933.h>
+#include <sysdolphin/baselib/hsd_393C.h>
 #include <sysdolphin/baselib/video.h>
 #include <MetroTRK/ppc_reg.h>
 

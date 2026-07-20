@@ -268,9 +268,6 @@ bool grKongo_801D5774(Ground_GObj* arg)
     return 0;
 }
 
-#define DegToRad(a) ((a) * 0.017453292F)
-#define M_TAU 6.283185307179586
-
 void grKongo_801D577C(Ground_GObj* arg0)
 {
     Ground* gp = arg0->user_data;
@@ -284,8 +281,9 @@ void grKongo_801D577C(Ground_GObj* arg0)
     case 3: {
         f32 angular_vel;
         angular_vel = gp->gv.kongo3.xE0;
-        limit_angle = 0.5f * (angular_vel *
-                              (angular_vel / DegToRad(grKg_804D6980->unk34)));
+        limit_angle =
+            0.5f * (angular_vel *
+                    (angular_vel / (grKg_804D6980->unk34 * deg_to_rad)));
         if (angular_vel > 0.0f) {
             angle_delta = gp->gv.kongo3.xD4 - gp->gv.kongo3.xD8;
         } else if (angular_vel < 0.0f) {
@@ -310,18 +308,18 @@ void grKongo_801D577C(Ground_GObj* arg0)
     }
     case 0:
         if (gp->gv.kongo3.xE0 > 0.0f) {
-            if (gp->gv.kongo3.xE0 < DegToRad(grKg_804D6980->unk34)) {
+            if (gp->gv.kongo3.xE0 < grKg_804D6980->unk34 * deg_to_rad) {
                 gp->gv.kongo3.xE0 = 0.0f;
                 gp->gv.kongo3.xD8 = gp->gv.kongo3.xD4;
             } else {
-                gp->gv.kongo3.xE0 -= DegToRad(grKg_804D6980->unk34);
+                gp->gv.kongo3.xE0 -= grKg_804D6980->unk34 * deg_to_rad;
             }
         } else if (gp->gv.kongo3.xE0 < 0.0f) {
-            if (gp->gv.kongo3.xE0 > -DegToRad(grKg_804D6980->unk34)) {
+            if (gp->gv.kongo3.xE0 > -(grKg_804D6980->unk34 * deg_to_rad)) {
                 gp->gv.kongo3.xE0 = 0.0f;
                 gp->gv.kongo3.xD8 = gp->gv.kongo3.xD4;
             } else {
-                gp->gv.kongo3.xE0 += DegToRad(grKg_804D6980->unk34);
+                gp->gv.kongo3.xE0 += grKg_804D6980->unk34 * deg_to_rad;
             }
         }
         gp->gv.kongo2.xCC -= 1;
@@ -329,9 +327,9 @@ void grKongo_801D577C(Ground_GObj* arg0)
             f32 spin_step;
             gp->gv.kongo3.xC4 = 1;
             if (HSD_Randi(2) != 0) {
-                spin_step = DegToRad(grKg_804D6980->unk34);
+                spin_step = grKg_804D6980->unk34 * deg_to_rad;
             } else {
-                spin_step = -DegToRad(grKg_804D6980->unk34);
+                spin_step = -(grKg_804D6980->unk34 * deg_to_rad);
             }
             gp->gv.kongo3.xDC = spin_step;
             gp->gv.kongo2.xCC = rand_range((s32) grKg_804D6980->unk40,
@@ -340,13 +338,9 @@ void grKongo_801D577C(Ground_GObj* arg0)
         break;
     case 1:
         gp->gv.kongo3.xE0 += gp->gv.kongo3.xDC;
-        if (gp->gv.kongo3.xE0 > DegToRad(grKg_804D6980->unk38)) {
-            gp->gv.kongo3.xE0 = DegToRad(grKg_804D6980->unk38);
-        } else {
-            if (gp->gv.kongo3.xE0 < -DegToRad(grKg_804D6980->unk38)) {
-                gp->gv.kongo3.xE0 = -DegToRad(grKg_804D6980->unk38);
-            }
-        }
+        Ground_ClampSymmetric(gp->gv.kongo3.xE0,
+                              grKg_804D6980->unk38 * deg_to_rad,
+                              &gp->gv.kongo3.xE0);
         {
             s16 val2 = gp->gv.kongo2.xCC;
             gp->gv.kongo2.xCC = val2 - 1;
@@ -360,11 +354,7 @@ void grKongo_801D577C(Ground_GObj* arg0)
         break;
     }
     gp->gv.kongo3.xD8 += gp->gv.kongo3.xE0;
-    if (gp->gv.kongo3.xD8 > M_TAU) {
-        gp->gv.kongo3.xD8 -= M_TAU;
-    } else if (gp->gv.kongo3.xD8 < -M_TAU) {
-        gp->gv.kongo3.xD8 += M_TAU;
-    }
+    Ground_WrapAngle(&gp->gv.kongo3.xD8);
     HSD_JObjSetRotationZ(jobj, gp->gv.kongo.xD8);
     lb_8000B1CC(jobj, NULL, &vec);
     Ground_801C4D70(arg0, &vec, gp->gv.kongo3.xD8);
