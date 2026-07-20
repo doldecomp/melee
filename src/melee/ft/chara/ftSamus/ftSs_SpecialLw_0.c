@@ -224,10 +224,7 @@ void ftSs_SpecialLw_Coll(HSD_GObj* gobj)
     u8 _[8];
 
     if (fp->cmd_vars[0]) {
-        /// @todo Remove cast.
-        if (!ft_80082888(gobj,
-                         (ftCollisionBox*) &samus_attr->height_attributes))
-        {
+        if (!ft_80082888(gobj, &samus_attr->height_attributes)) {
             ftSs_SpecialLw_80129048(gobj);
         }
     } else if (!ft_800827A0(gobj)) {
@@ -243,9 +240,7 @@ void ftSs_SpecialAirLw_Coll(HSD_GObj* gobj)
     u8 _[8];
 
     if (fp->cmd_vars[0]) {
-        if (ft_800824A0(gobj,
-                        (ftCollisionBox*) &samus_attr->height_attributes))
-        {
+        if (ft_800824A0(gobj, &samus_attr->height_attributes)) {
             ftSs_SpecialLw_801290A4(gobj);
         }
     } else if (ft_80081D0C(gobj)) {
