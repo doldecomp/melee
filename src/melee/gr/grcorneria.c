@@ -6,6 +6,7 @@
 
 #include "baselib/forward.h"
 
+#include "baselib/generator.h"
 #include "baselib/sislib.h"
 #include "cm/camera.h"
 #include "ft/ftlib.h"
@@ -39,7 +40,6 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/jobj.h>
-#include <baselib/particle.h>
 #include <baselib/random.h>
 
 typedef struct grCn_StageData {
@@ -88,11 +88,9 @@ static S16Vec3 grCn_803E1D38[] = {
     { 0x0006, 0x0011, 0x0000 }, { 0x0007, 0x0012, 0x0000 },
 };
 
-static struct grCn_Data2 {
-    /* 0x030 */ HSD_GObj* arwing_gobj[3];
-    /* 0x03C */ int arwing_type[3];
-    /* 0x048 */ int arwing_group[3];
-} grCn_803E1D68 = { 0 };
+static HSD_GObj* arwing_gobjs[3] = { 0 };
+static int arwing_types[3] = { 0 };
+static int arwing_groups[3] = { 0 };
 
 StageCallbacks grCn_803E1D8C[] = {
     {
@@ -256,15 +254,15 @@ void grCorneria_801DCCFC(void)
     s32 imin, imax;
     PAD_STACK(16);
 
-    grCn_803E1D68.arwing_gobj[0] = NULL;
-    grCn_803E1D68.arwing_type[0] = 0;
-    grCn_803E1D68.arwing_group[0] = 0;
-    grCn_803E1D68.arwing_gobj[1] = NULL;
-    grCn_803E1D68.arwing_type[1] = 0;
-    grCn_803E1D68.arwing_group[1] = 0;
-    grCn_803E1D68.arwing_gobj[2] = NULL;
-    grCn_803E1D68.arwing_type[2] = 0;
-    grCn_803E1D68.arwing_group[2] = 0;
+    arwing_gobjs[0] = NULL;
+    arwing_types[0] = 0;
+    arwing_groups[0] = 0;
+    arwing_gobjs[1] = NULL;
+    arwing_types[1] = 0;
+    arwing_groups[1] = 0;
+    arwing_gobjs[2] = NULL;
+    arwing_types[2] = 0;
+    arwing_groups[2] = 0;
 
     stage = Stage_80225194();
     switch (stage) {
@@ -294,10 +292,8 @@ void grCorneria_801DCCFC(void)
     grCn_804D69A8 = imax;
 }
 
-static inline s32 grCn_RandRange(f32 fmin, f32 fmax)
+static inline s32 grCn_RandRange(s32 imax, s32 imin)
 {
-    s32 imin = fmin;
-    s32 imax = fmax;
     if (imax > imin) {
         s32 range = imax - imin;
         imax = imin + (range != 0 ? HSD_Randi(range) : 0);
@@ -328,17 +324,16 @@ static inline int grCn_CheckFar(Vec3* pos)
 static inline void grCn_SpawnArwing(s32 slot, u32 type_id, int group)
 {
     grCn_804D69A4 = slot;
-    grCn_803E1D68.arwing_type[slot] = type_id;
-    grCn_803E1D68.arwing_group[slot] = group;
-    grCn_803E1D68.arwing_gobj[grCn_804D69A4] = grCorneria_801DD534(1);
+    arwing_types[slot] = type_id;
+    arwing_groups[slot] = group;
+    arwing_gobjs[grCn_804D69A4] = grCorneria_801DD534(1);
 }
 
 static inline u32 grCn_PickUniqueType(s32 slot, int range, int base)
 {
-    int rand_id = grCn_803E1D68.arwing_type[slot];
-    while (rand_id == grCn_803E1D68.arwing_type[0] ||
-           rand_id == grCn_803E1D68.arwing_type[1] ||
-           rand_id == grCn_803E1D68.arwing_type[2])
+    int rand_id = arwing_types[slot];
+    while (rand_id == arwing_types[0] || rand_id == arwing_types[1] ||
+           rand_id == arwing_types[2])
     {
         rand_id = HSD_Randi(range) + base;
     }
@@ -348,22 +343,26 @@ static inline u32 grCn_PickUniqueType(s32 slot, int range, int base)
 void grCorneria_801DCE1C(void)
 {
     Vec3 pos;
+    UNUSED u8 pad[4];
+    Vec3 pos2;
 
     if (Stage_80225194() != 0x46) {
         if (grCn_804D69B0 == 0) {
-            if (grCn_803E1D68.arwing_gobj[0] == NULL) {
+            if (arwing_gobjs[0] == NULL) {
                 grCn_804D69A8--;
                 if (grCn_804D69A8 <= 0) {
                     int far;
                     int type_id;
                     int group;
+                    int* types;
+                    int* groups;
 
                     grCorneria_801DDD4C(&pos);
                     far = grCn_CheckFar(&pos);
 
                     {
-                        type_id = grCn_803E1D68.arwing_type[0];
-                        while (type_id == grCn_803E1D68.arwing_type[0]) {
+                        type_id = *(types = &arwing_types[0]);
+                        while (type_id == *types) {
                             int var_r0 = far == 1 ? 9 : 13;
                             int var_r3_2;
                             if (var_r0 != 0) {
@@ -374,28 +373,28 @@ void grCorneria_801DCE1C(void)
                             type_id = var_r3_2 + 1;
                         }
 
-                        if (grCn_803E1D68.arwing_group[0] == 4) {
+                        if (*(groups = &arwing_groups[0]) == 4) {
                             group = 1;
                         } else {
                             group = HSD_Randf() > grCn_804D69A0->x4C ? 1 : 4;
                         }
 
                         grCn_804D69A4 = 0;
-                        grCn_803E1D68.arwing_type[0] = type_id;
-                        grCn_803E1D68.arwing_group[0] = group;
-                        grCn_803E1D68.arwing_gobj[grCn_804D69A4] =
-                            grCorneria_801DD534(1);
+                        *types = type_id;
+                        *groups = group;
+                        arwing_gobjs[grCn_804D69A4] = grCorneria_801DD534(1);
                     }
                 }
             } else {
-                grCn_804D69A8 =
-                    grCn_RandRange(grCn_804D69A0->x44, grCn_804D69A0->x48);
+                grCn_804D69A8 = grCn_RandRange((s32) grCn_804D69A0->x48,
+                                               (s32) grCn_804D69A0->x44);
             }
         } else {
             {
+                HSD_GObj** gobjs = &arwing_gobjs[0];
                 int count = 0;
                 for (count = 0; count < 3; count++) {
-                    if (grCn_803E1D68.arwing_gobj[count] == NULL) {
+                    if (gobjs[count] == NULL) {
                         break;
                     }
                 }
@@ -407,35 +406,52 @@ void grCorneria_801DCE1C(void)
                         int i;
 
                         for (i = 0; i < 3; i++) {
-                            if (i == count) {
-                                continue;
-                            }
-                            switch (grCn_803E1D68.arwing_type[i]) {
-                            case 1:
-                            case 2:
-                            case 3:
-                            case 4:
-                            case 5:
-                            case 6:
-                            case 7:
-                            case 8:
-                            case 9:
-                                if (grCn_803E1D68.arwing_gobj[i] != NULL) {
-                                    has_near = true;
+                            if (i != count) {
+                                switch (arwing_types[i]) {
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                    if (gobjs[i] != NULL) {
+                                        has_near = true;
+                                    }
                                 }
                             }
                         }
 
                         if (has_near == 0) {
-                            int type_id = grCn_PickUniqueType(count, 13, 1);
-                            grCn_SpawnArwing(count, type_id, count + 1);
+                            int type_id = arwing_types[count];
+                            while (type_id == arwing_types[0] ||
+                                   type_id == arwing_types[1] ||
+                                   type_id == arwing_types[2])
+                            {
+                                type_id = HSD_Randi(13) + 1;
+                            }
+                            grCn_804D69A4 = count;
+                            arwing_types[count] = type_id;
+                            arwing_groups[count] = count + 1;
+                            arwing_gobjs[grCn_804D69A4] =
+                                grCorneria_801DD534(1);
                         } else {
-                            Vec3 pos2;
                             grCorneria_801DDD4C(&pos2);
                             if (grCn_CheckFar(&pos2) == 0) {
-                                int type_id =
-                                    grCn_PickUniqueType(count, 4, 10);
-                                grCn_SpawnArwing(count, type_id, count + 1);
+                                int type_id = arwing_types[count];
+                                while (type_id == arwing_types[0] ||
+                                       type_id == arwing_types[1] ||
+                                       type_id == arwing_types[2])
+                                {
+                                    type_id = HSD_Randi(4) + 10;
+                                }
+                                grCn_804D69A4 = count;
+                                arwing_types[count] = type_id;
+                                arwing_groups[count] = count + 1;
+                                arwing_gobjs[grCn_804D69A4] =
+                                    grCorneria_801DD534(1);
                             }
                         }
                     }
@@ -445,9 +461,9 @@ void grCorneria_801DCE1C(void)
             }
         }
     } else {
-        grCn_803E1D68.arwing_gobj[0] = NULL;
-        grCn_803E1D68.arwing_gobj[1] = NULL;
-        grCn_803E1D68.arwing_gobj[2] = NULL;
+        arwing_gobjs[0] = NULL;
+        arwing_gobjs[1] = NULL;
+        arwing_gobjs[2] = NULL;
     }
 }
 
@@ -580,7 +596,7 @@ HSD_GObj* grCorneria_801DD534(int arg0)
 
 void grCorneria_801DD620(Ground_GObj* gobj)
 {
-    grAnime_801C8138((HSD_GObj*) gobj, GET_GROUND(gobj)->map_id, 0);
+    grAnime_801C8138(gobj, GET_GROUND(gobj)->map_id, 0);
 }
 
 bool grCorneria_801DD64C(Ground_GObj* arg)
@@ -731,14 +747,14 @@ void grCorneria_801DDAC0(Ground_GObj* arg) {}
 
 void grCorneria_801DDAC4(Ground_GObj* gobj)
 {
-    struct grCn_Data2* data = &grCn_803E1D68;
+    HSD_GObj** data = arwing_gobjs;
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     f32 scale;
 
-    grCn_803E1D68.arwing_gobj[gp->gv.arwing.xC8 = grCn_804D69A4] = gobj;
+    arwing_gobjs[gp->gv.arwing.xC8 = grCn_804D69A4] = gobj;
     {
-        s32 idx = grCn_803E1D68.arwing_group[gp->gv.arwing.xC8];
+        s32 idx = arwing_groups[gp->gv.arwing.xC8];
         HSD_GObj* arwing = grCorneria_801DD534(grCn_803E2110[idx]);
         if (arwing != NULL) {
             GET_GROUND(arwing)->x10_flags.b2 = 0;
@@ -804,7 +820,7 @@ void grCorneria_801DDDA8(HSD_GObj* gobj, Vec3* vec)
         gp2 = Ground_801C2BA4(3)->user_data;
         jobj = Ground_801C3FA4(gobj, 4);
         lb_8000B1CC(jobj, NULL, &pos);
-        idx = grCn_803E1D68.arwing_type[gp->gv.arwing.xC8];
+        idx = arwing_types[gp->gv.arwing.xC8];
         vec->x = gp2->gv.arwing.xDC + (-pos.z + lbl_803E2068[idx].x);
         vec->y = pos.y + lbl_803E2068[idx].y;
         vec->z = pos.x + lbl_803E2068[idx].z;
@@ -833,7 +849,7 @@ void grCorneria_801DDE88(HSD_GObj* gobj)
         Ground* ship = GET_GROUND(Ground_801C2BA4(3));
         s32 idx;
         lb_8000B1CC(Ground_801C3FA4(gobj, 4), NULL, &sp20);
-        idx = grCn_803E1D68.arwing_type[gp2->gv.arwing.xC8];
+        idx = arwing_types[gp2->gv.arwing.xC8];
         sp2C.x = ship->gv.corneria.offset_x + (-sp20.z + lbl_803E2068[idx].x);
         sp2C.y = sp20.y + lbl_803E2068[idx].y;
         sp2C.z = sp20.x + lbl_803E2068[idx].z;
@@ -869,6 +885,11 @@ void grCorneria_801DDE88(HSD_GObj* gobj)
 
 extern Vec3 grCn_803B80A8;
 
+/// Bounds shared by #grCorneria_801DE024 and #grCorneria_801DED50. Volatile
+/// reads keep MWCC from duplicating them later in the literal pool.
+static const f32 grCn_ArwingMinX = -10.0f;
+static const f32 grCn_ArwingMaxX = 2000.0f;
+
 static inline void grCorneria_801DE024_inline(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -876,13 +897,17 @@ static inline void grCorneria_801DE024_inline(Ground_GObj* gobj)
     grCorneria_801DDDA8(gobj, &pos);
     switch (gp->gv.arwing.xD8) {
     case 0:
-        if (-10.0f < pos.x && pos.x < 2000.0f) {
+        if (*(volatile const f32*) &grCn_ArwingMinX < pos.x &&
+            pos.x < *(volatile const f32*) &grCn_ArwingMaxX)
+        {
             lbAudioAx_800237A8(0x55731, 0x7F, 0x40);
             gp->gv.arwing.xD8 = 1;
         }
         break;
     case 1:
-        if (pos.x < -10.0f || 2000.0f < pos.x) {
+        if (pos.x < *(volatile const f32*) &grCn_ArwingMinX ||
+            *(volatile const f32*) &grCn_ArwingMaxX < pos.x)
+        {
             lbAudioAx_800237A8(0x55732, 0x7F, 0x40);
             gp->gv.arwing.xD8 = 2;
         }
@@ -907,17 +932,17 @@ void grCorneria_801DE024(Ground_GObj* gobj)
         }
     }
     {
-        if (grCn_803E1D68.arwing_gobj[gp->gv.arwing.xC8] == gobj) {
+        if (arwing_gobjs[gp->gv.arwing.xC8] == gobj) {
             if (gp->gv.arwing.xD4 == 1) {
                 gp->gv.arwing.xD4 = 0;
                 {
-                    s32 idx = grCn_803E1D68.arwing_type[gp->gv.arwing.xC8];
+                    s32 idx = arwing_types[gp->gv.arwing.xC8];
                     grAnime_801C8138(gobj, gp->map_id, grCn_803E2030[idx]);
                 }
                 return;
             }
             {
-                s32 idx = grCn_803E1D68.arwing_type[gp->gv.arwing.xC8];
+                s32 idx = arwing_types[gp->gv.arwing.xC8];
                 if (idx < 10) {
                     if (idx >= 1) {
                         goto arwing_near_type;
@@ -953,7 +978,7 @@ void grCorneria_801DE024(Ground_GObj* gobj)
             arwing_type_done:;
             }
             if (grAnime_801C83D0(gobj, 0, 7) != 0) {
-                grCn_803E1D68.arwing_gobj[gp->gv.arwing.xC8] = 0;
+                arwing_gobjs[gp->gv.arwing.xC8] = 0;
                 Ground_801C4A08(gobj);
             }
         } else {
@@ -964,7 +989,9 @@ void grCorneria_801DE024(Ground_GObj* gobj)
 
 void grCorneria_801DE4BC(Ground_GObj* arg) {}
 
-static int grCn_803E214C[] = { -1, -1, 1, 0, 2, 2, 4, 4, 5, 5, -1, -1 };
+static int grCn_803E214C[6][2] = {
+    { -1, -1 }, { 1, 0 }, { 2, 2 }, { 4, 4 }, { 5, 5 }, { -1, -1 },
+};
 
 static int grCn_803E217C[] = { 0x0D, 0x0D, 0x0E, 0x0F, 0x10 };
 
@@ -974,7 +1001,7 @@ void grCorneria_Arwing_801DE4C0(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    int joint_offset;
+    int group;
     int joint_id;
 
     Ground_801C2ED0(jobj, gp->map_id);
@@ -984,8 +1011,8 @@ void grCorneria_Arwing_801DE4C0(Ground_GObj* gobj)
     gp->gv.arwing.xE0.z = 0.0f;
     gp->gv.arwing.xE0.y = 0.0f;
     gp->gv.arwing.xE0.x = 0.0f;
-    joint_offset = grCn_803E1D68.arwing_type[gp->gv.arwing.xC8 - 3];
-    joint_id = grCn_803E2190[joint_offset];
+    group = arwing_groups[gp->gv.arwing.xC8];
+    joint_id = grCn_803E2190[group];
     mpJointListAdd(joint_id);
 
     Ground_801C2ED0(jobj, gp->map_id);
@@ -1001,25 +1028,8 @@ void grCorneria_801DE568(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    if (grCn_803E1D68.arwing_gobj[gp->gv.arwing.xC8] != NULL) {
-        f32 angle = ABS(gp->gv.arwing.xE0.z);
-        if (angle < 10.0f) {
-            gp->gv.arwing.xE0.z = 0.0f;
-            while (gp->gv.arwing.xDC < -M_PI) {
-                gp->gv.arwing.xDC += M_TAU;
-            }
-            while (gp->gv.arwing.xDC > M_PI) {
-                gp->gv.arwing.xDC -= M_TAU;
-            }
-            if (ABS(gp->gv.arwing.xDC) < 1.0471976f) {
-                HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-            } else {
-                HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-            }
-        } else {
-            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-        }
-        HSD_JObjSetTranslate(jobj, &gp->gv.arwing.xE0);
+    if (arwing_gobjs[gp->gv.arwing.xC8] != NULL) {
+        Ground_UpdateStarFoxArwingVisibility(gp, jobj, 10.0F);
         {
             f32 scale = Ground_801C0498();
             {
@@ -1037,8 +1047,7 @@ void grCorneria_801DE568(Ground_GObj* gobj)
         }
         Ground_801C2FE0(gobj);
     } else {
-        mpLib_80057BC0(
-            grCn_803E2190[grCn_803E1D68.arwing_group[gp->gv.arwing.xC8]]);
+        mpLib_80057BC0(grCn_803E2190[arwing_groups[gp->gv.arwing.xC8]]);
         Ground_801C4A08(gobj);
     }
 }
@@ -1054,15 +1063,10 @@ void grCorneria_801DE8E4(Ground_GObj* gobj)
 
     scale = Ground_801C0498();
     gp->gv.corneria2.xC8 = grCn_804D69A4;
-    gp->gv.corneria2.xEC = NULL;
-    gp->gv.corneria2.xE8 = NULL;
-    gp->gv.corneria2.xE4 = NULL;
-    gp->gv.corneria2.xE0 = NULL;
-    grAnime_801C7FF8(gobj, 7, 7, 0, 0.0f, 1.0f);
-    grAnime_801C7FF8(gobj, 8, 7, 0, 0.0f, 1.0f);
-    grAnime_801C8098(gobj, 2, 7, 3, 0.0f, 1.0f);
+    Ground_ClearStarFoxArwingGObjs(gp);
+    Ground_AnimateStarFoxArwingWithBackground(gobj);
 
-    switch (grCn_803E1D68.arwing_type[gp->gv.corneria2.xC8]) {
+    switch (arwing_types[gp->gv.corneria2.xC8]) {
     case 1:
     case 2:
     case 3:
@@ -1073,38 +1077,26 @@ void grCorneria_801DE8E4(Ground_GObj* gobj)
     case 8:
     case 9: {
         HSD_GObj* arwing = grCorneria_801DD534(
-            grCn_803E217C[grCn_803E1D68.arwing_group[gp->gv.corneria2.xC8]]);
-        gp->gv.corneria2.xDC = arwing;
-        if (arwing != NULL) {
-            Ground* agp = GET_GROUND(gp->gv.corneria2.xDC);
-            if (agp != NULL) {
-                agp->gv.corneria2.xC8 = gp->gv.corneria2.xC8;
-            }
-        }
+            grCn_803E217C[arwing_groups[gp->gv.corneria2.xC8]]);
+        Ground_LinkStarFoxArwing(gp, arwing);
         break;
     }
     case 10:
     case 11:
     case 12:
     case 13: {
-        lb_8000C2F8(Ground_801C3FA4(gobj, 0),
-                    Ground_801C3FA4(
-                        grCn_803E1D68.arwing_gobj[gp->gv.corneria2.xC8], 4));
-        gp->gv.corneria2.xDC = NULL;
+        Ground_AttachStarFoxArwingModel(gobj, gp,
+                                        arwing_gobjs[gp->gv.corneria2.xC8], 4);
         break;
     }
     default:
-        gp->gv.corneria2.xE0 = (HSD_GObj*) -1;
-        gp->gv.corneria2.xE4 = (HSD_GObj*) -1;
+        Ground_DisableStarFoxArwingGObjs(gp);
         break;
     }
     HSD_JObjSetScaleX(jobj, scale * grCn_804D69A0->x70);
     HSD_JObjSetScaleY(jobj, scale * grCn_804D69A0->x70);
     HSD_JObjSetScaleZ(jobj, scale * grCn_804D69A0->x70);
-    gp->gv.corneria2.xC4.flags.b0 = 0;
-    gp->gv.corneria2.xD4 = 0;
-    gp->gv.corneria2.xF0 = 0;
-    gp->gv.corneria2.xF4 = 0;
+    Ground_ResetStarFoxArwingState(gp);
     gp->gv.corneria2.xF8 = (s32) grCn_804D69A0->x68;
     gp->gv.corneria2.xFC = 0;
     gp->gv.corneria2.x100 = HSD_Randi(2);
@@ -1117,6 +1109,7 @@ bool grCorneria_801DEC00(Ground_GObj* arg)
 
 bool grCorneria_801DEC08(Vec3* pos)
 {
+    /// @todo #Stage_IsOutsideBlastZone here perturbs #grCorneria_801DED50.
     if (pos->x > Stage_GetBlastZoneRightOffset()) {
         return true;
     }
@@ -1134,6 +1127,7 @@ bool grCorneria_801DEC08(Vec3* pos)
 s32 grCorneria_801DEC94(Vec3* pos)
 {
     if (pos->z > -30.0f) {
+        /// @todo #Stage_IsOutsideBlastZoneWithMargin breaks the fallthrough.
         if (pos->x > Stage_GetBlastZoneRightOffset() - 30.0f) {
             return 1;
         }
@@ -1166,7 +1160,7 @@ static inline int get_grp_off(Ground_GObj* gobj)
 {
     s32 grp_off = -1;
     {
-        int* groups = grCn_803E1D68.arwing_group;
+        int* groups = arwing_groups;
         int g = groups[GET_GROUND(gobj)->gv.corneria2.xC8];
         switch (g) {
         case 0:
@@ -1184,22 +1178,32 @@ static inline int get_grp_off(Ground_GObj* gobj)
     return grp_off;
 }
 
+static inline Ground* get_arwing_ground(HSD_GObj* gobj)
+{
+    return GET_GROUND(gobj);
+}
+
 void grCorneria_801DED50(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
+    HSD_JObj* jobj = gobj->hsd_obj;
+    HSD_JObj* arwing;
+    HSD_GObj* far_arwing;
+    Ground* ship_gp;
+    Ground* arwing_gp;
     Vec3 pos = grCn_803B80B4;
-    PAD_STACK(8);
+    PAD_STACK(6);
 
     if (grCn_804D69AC) {
         return;
     }
 
-    if (grCn_803E1D68.arwing_gobj[gp->gv.corneria2.xC8] != NULL) {
-        if (grCn_803E1D68.arwing_group[gp->gv.corneria2.xC8] == 4) {
-            HSD_JObjSetRotationZ(Ground_801C3FA4(gobj, 1), 0.0f);
+    if (arwing_gobjs[gp->gv.corneria2.xC8] != NULL) {
+        if (arwing_groups[gp->gv.corneria2.xC8] == 4) {
+            arwing = Ground_801C3FA4(gobj, 1);
+            HSD_JObjSetRotationZ(arwing, 0.0f);
         }
-        switch (grCn_803E1D68.arwing_type[gp->gv.corneria2.xC8]) {
+        switch (arwing_types[gp->gv.corneria2.xC8]) {
         case 1:
         case 2:
         case 3:
@@ -1214,20 +1218,37 @@ void grCorneria_801DED50(Ground_GObj* gobj)
             case 0:
                 if (gp->gv.corneria2.xF8 <= 0) {
                     s32 new_state = HSD_Randi(5) + 1;
+                    int group_offset = -1;
                     gp->gv.corneria2.xF4 = new_state;
-                    grAnime_801C8098(
-                        gobj,
-                        grCn_803E214C[grCn_803E1D68
-                                          .arwing_group[gp->gv.corneria2.xC8]],
-                        7,
-                        (&grCn_803E21B0[gp->gv.corneria2.xF4])[get_grp_off(
-                            gobj)],
-                        0.0f, 1.0f);
+                    {
+                        int group =
+                            arwing_groups[GET_GROUND(gobj)->gv.corneria2.xC8];
+                        switch (group) {
+                        case 0:
+                            break;
+                        case 1:
+                        case 2:
+                        case 3:
+                            group_offset = 0;
+                            break;
+                        case 4:
+                            group_offset = 1;
+                            break;
+                        }
+                    }
+                    {
+                        int anim_arg =
+                            grCn_803E214C[gp->gv.corneria2.xF4][group_offset];
+                        grAnime_801C8098(
+                            gobj,
+                            grCn_803E21B0[arwing_groups[gp->gv.corneria2.xC8]],
+                            7, anim_arg, 0.0f, 1.0f);
+                    }
                 } else {
                     HSD_JObjSetRotationZ(
                         Ground_801C3FA4(
-                            gobj, grCn_803E21B0[grCn_803E1D68.arwing_group
-                                                    [gp->gv.corneria2.xC8]]),
+                            gobj, grCn_803E21B0
+                                      [arwing_groups[gp->gv.corneria2.xC8]]),
                         0.0f);
                 }
                 gp->gv.corneria2.xF8 -= 1;
@@ -1243,15 +1264,15 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                 break;
             }
             {
-                HSD_GObj* arwing =
-                    grCn_803E1D68.arwing_gobj[gp->gv.corneria2.xC8];
-                if (arwing != NULL) {
-                    Ground* arwing_gp = GET_GROUND(arwing);
-                    Ground* ship_gp = GET_GROUND(Ground_801C2BA4(3));
+                if ((arwing = (HSD_JObj*) arwing_gobjs[gp->gv.corneria2.xC8]))
+                {
                     Vec3 arwing_pos;
-                    lb_8000B1CC(Ground_801C3FA4(arwing, 4), NULL, &arwing_pos);
+                    arwing_gp = get_arwing_ground((Ground_GObj*) arwing);
+                    ship_gp = GET_GROUND(Ground_801C2BA4(3));
+                    lb_8000B1CC(Ground_801C3FA4((Ground_GObj*) arwing, 4),
+                                NULL, &arwing_pos);
                     {
-                        int* types = grCn_803E1D68.arwing_type;
+                        int* types = arwing_types;
                         int atype = types[arwing_gp->gv.corneria2.xC8];
                         pos.x = ship_gp->gv.corneria.offset_x +
                                 (-arwing_pos.z + lbl_803E2068[atype].x);
@@ -1270,9 +1291,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
             HSD_JObjSetTranslate(jobj, &pos);
             lb_8000B1CC(
                 Ground_801C3FA4(
-                    gobj,
-                    grCn_803E21B0[grCn_803E1D68
-                                      .arwing_group[gp->gv.corneria2.xC8]]),
+                    gobj, grCn_803E21B0[arwing_groups[gp->gv.corneria2.xC8]]),
                 NULL, &pos);
             {
                 f32 rot_z;
@@ -1287,9 +1306,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                     }
                 }
                 rot_z = HSD_JObjGetRotationZ(Ground_801C3FA4(
-                    gobj,
-                    grCn_803E21B0[grCn_803E1D68
-                                      .arwing_group[gp->gv.corneria2.xC8]]));
+                    gobj, grCn_803E21B0[arwing_groups[gp->gv.corneria2.xC8]]));
                 angle = rot_z;
                 {
                     HSD_GObj* item = gp->gv.corneria2.xDC;
@@ -1368,17 +1385,14 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                 }
             }
             {
-                HSD_GObj* arwing;
-                if ((arwing = grCn_803E1D68.arwing_gobj[gp->gv.corneria2.xC8]))
-                {
-                    Ground* arwing_gp = GET_GROUND(arwing);
-                    Ground* ship_gp = GET_GROUND(Ground_801C2BA4(3));
+                if ((far_arwing = arwing_gobjs[gp->gv.corneria2.xC8])) {
                     Vec3 arwing_pos;
-                    lb_8000B1CC(Ground_801C3FA4(arwing, 4), NULL, &arwing_pos);
+                    arwing_gp = far_arwing->user_data;
+                    ship_gp = GET_GROUND(Ground_801C2BA4(3));
+                    lb_8000B1CC(Ground_801C3FA4(far_arwing, 4), NULL,
+                                &arwing_pos);
                     {
-                        s32 atype =
-                            grCn_803E1D68
-                                .arwing_type[arwing_gp->gv.corneria2.xC8];
+                        s32 atype = arwing_types[arwing_gp->gv.corneria2.xC8];
                         pos.x = ship_gp->gv.corneria.offset_x +
                                 (-arwing_pos.z + lbl_803E2068[atype].x);
                         pos.y = arwing_pos.y + lbl_803E2068[atype].y;
@@ -1393,7 +1407,9 @@ void grCorneria_801DED50(Ground_GObj* gobj)
             if (pos.y <= 100.0f) {
                 pos.y = 100.0f;
             }
-            if (500.0F < pos.x && pos.x < 2000.0f && gp->gv.corneria2.xFC != 0)
+            if (500.0F < pos.x &&
+                pos.x < *(volatile const f32*) &grCn_ArwingMaxX &&
+                gp->gv.corneria2.xFC != 0)
             {
                 gp->gv.corneria2.xFC = 0;
                 {
@@ -1465,14 +1481,10 @@ void grCorneria_801DF8D0(Ground_GObj* gobj)
 
     scale = Ground_801C0498();
     gp->gv.corneria2.xC8 = grCn_804D69A4;
-    gp->gv.corneria2.xEC = NULL;
-    gp->gv.corneria2.xE8 = NULL;
-    gp->gv.corneria2.xE4 = NULL;
-    gp->gv.corneria2.xE0 = NULL;
-    grAnime_801C7FF8(gobj, 0, 7, 1, 0.0f, 1.0f);
-    grAnime_801C8098(gobj, 2, 7, 3, 0.0f, 1.0f);
+    Ground_ClearStarFoxArwingGObjs(gp);
+    Ground_AnimateStarFoxArwing(gobj);
 
-    switch (grCn_803E1D68.arwing_type[gp->gv.corneria2.xC8]) {
+    switch (arwing_types[gp->gv.corneria2.xC8]) {
     case 1:
     case 2:
     case 3:
@@ -1483,38 +1495,26 @@ void grCorneria_801DF8D0(Ground_GObj* gobj)
     case 8:
     case 9: {
         HSD_GObj* arwing = grCorneria_801DD534(
-            grCn_803E217C[grCn_803E1D68.arwing_group[gp->gv.corneria2.xC8]]);
-        gp->gv.corneria2.xDC = arwing;
-        if (arwing != NULL) {
-            Ground* agp = GET_GROUND(gp->gv.corneria2.xDC);
-            if (agp != NULL) {
-                agp->gv.corneria2.xC8 = gp->gv.corneria2.xC8;
-            }
-        }
+            grCn_803E217C[arwing_groups[gp->gv.corneria2.xC8]]);
+        Ground_LinkStarFoxArwing(gp, arwing);
         break;
     }
     case 10:
     case 11:
     case 12:
     case 13: {
-        lb_8000C2F8(Ground_801C3FA4(gobj, 0),
-                    Ground_801C3FA4(
-                        grCn_803E1D68.arwing_gobj[gp->gv.corneria2.xC8], 4));
-        gp->gv.corneria2.xDC = NULL;
+        Ground_AttachStarFoxArwingModel(gobj, gp,
+                                        arwing_gobjs[gp->gv.corneria2.xC8], 4);
         break;
     }
     default:
-        gp->gv.corneria2.xE0 = (HSD_GObj*) -1;
-        gp->gv.corneria2.xE4 = (HSD_GObj*) -1;
+        Ground_DisableStarFoxArwingGObjs(gp);
         break;
     }
     HSD_JObjSetScaleX(jobj, scale * grCn_804D69A0->x70);
     HSD_JObjSetScaleY(jobj, scale * grCn_804D69A0->x70);
     HSD_JObjSetScaleZ(jobj, scale * grCn_804D69A0->x70);
-    gp->gv.corneria2.xC4.flags.b0 = 0;
-    gp->gv.corneria2.xD4 = 0;
-    gp->gv.corneria2.xF0 = 0;
-    gp->gv.corneria2.xF4 = 0;
+    Ground_ResetStarFoxArwingState(gp);
     gp->gv.corneria2.xF8 = (s32) grCn_804D69A0->x68;
     gp->gv.corneria2.xFC = 0;
 }
@@ -1534,7 +1534,7 @@ void grCorneria_801DFBEC(Ground_GObj* arg) {}
 void grCorneria_801DFBF0(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
+    grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
 bool grCorneria_801DFC1C(Ground_GObj* arg)
@@ -1601,7 +1601,7 @@ void grCorneria_801DFEB8(Ground_GObj* gobj)
     Ground* gp = gobj->user_data;
 
     gp->gv.corneria.xC6.flags.b0 = 0;
-    grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
+    grAnime_801C8138(gobj, gp->map_id, 0);
     gp->gv.corneria.xC4.value = 0;
     gp->x11_flags.b012 = 1;
 }
@@ -1648,7 +1648,7 @@ void grCorneria_801E0140(Ground_GObj* gobj)
     Ground* gp = gobj->user_data;
 
     gp->gv.corneria.xC6.flags.b0 = 0;
-    grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
+    grAnime_801C8138(gobj, gp->map_id, 0);
     gp->gv.corneria.xC4.value = 0;
     gp->x11_flags.b012 = 1;
 }
@@ -1690,15 +1690,15 @@ void grCorneria_801E01A8(Ground_GObj* gobj)
 
 void grCorneria_801E03C4(Ground_GObj* arg) {}
 
-void grCorneria_801E03C8(Ground_GObj* gobj, int id)
+/** @todo Fake return type, function returns nothing and its return value is
+ *        not used either
+ */
+UNK_T grCorneria_801E03C8(Ground_GObj* gobj, int id)
 {
     Ground* gp;
-    HSD_GObj* new_gobj;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     f32 x = HSD_JObjGetTranslationX(jobj);
-    PAD_STACK(8);
-
-    new_gobj = grCorneria_801DD534(id);
+    HSD_GObj* new_gobj = grCorneria_801DD534(id);
     gp = GET_GROUND(new_gobj);
 
     if (id == 8) {
@@ -1708,12 +1708,12 @@ void grCorneria_801E03C8(Ground_GObj* gobj, int id)
         gp->gv.corneria.xC5 = 0;
     } else if (id == 9) {
         f32 half = 3200.0f * Ground_801C0498() / 2;
-        HSD_JObjSetTranslateX(new_gobj->hsd_obj,
+        HSD_JObjSetTranslateX(GET_JOBJ(new_gobj),
                               x - (3200.0f * Ground_801C0498() / 2 + half));
         gp->gv.corneria.xC5 = 0;
     } else if (id == 4) {
         f32 half = 4800.0f * Ground_801C0498() / 2;
-        HSD_JObjSetTranslateX(new_gobj->hsd_obj,
+        HSD_JObjSetTranslateX(GET_JOBJ(new_gobj),
                               x - (3200.0f * Ground_801C0498() / 2 + half));
         gp->gv.corneria.xC5 = 0;
     }
@@ -2009,26 +2009,7 @@ bool grCorneria_801E0F64(Ground_GObj* arg)
 void grCorneria_801E0F6C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-
-    ifStatus_802F6898();
-    un_802FF570();
-
-    if (Ground_801C2BA4(5) == NULL) {
-        if (grCorneria_801E2598(gp->gv.arwing.xC4, gp->gv.arwing.xC8)) {
-            if ((s32) gp->gv.arwing.xCC-- < 0) {
-                HSD_GObj* gobj5 = grCorneria_801DD534(5);
-                Ground* gp5 = GET_GROUND(gobj5);
-                grCorneria_801E2738(gobj5, &gp5->gv, gp->gv.arwing.xC4,
-                                    gp->gv.arwing.xC8);
-                gp->gv.arwing.xC8++;
-                gp->gv.arwing.xCC = 0;
-            }
-        } else {
-            if ((s32) gp->gv.arwing.xCC-- < 0) {
-                Ground_801C4A08(gobj);
-            }
-        }
-    }
+    Ground_UpdateStarFoxSequence(gobj, gp, 5, grCorneria_801DD534);
 }
 
 void grCorneria_801E1030(Ground_GObj* gobj)
@@ -2102,8 +2083,8 @@ void fn_801E12D4(Item_GObj* gobj, Ground* gr, Vec3* pos, HSD_GObj* arg3,
     OSReport("*** Beam Damage! %f\n", damage);
     if (gr->gv.corneria.x114 >= grCn_804D69A0->x38) {
         gr->gv.corneria.x108 = 4;
-        grMaterial_801C8E28((HSD_GObj*) gr->gv.corneria.left_cannon);
-        grMaterial_801C8E28((HSD_GObj*) gr->gv.corneria.right_cannon);
+        grMaterial_801C8E28(gr->gv.corneria.left_cannon);
+        grMaterial_801C8E28(gr->gv.corneria.right_cannon);
     }
 }
 
@@ -2156,12 +2137,10 @@ void grCorneria_801E1348(Ground_GObj* gobj)
             sp40.z = grCn_803E1FAC[1].z;
             grLib_801C9808(0xBC, 0, Ground_801C3FA4(gobj, 2));
             grLib_801C9808(0xBC, 0, Ground_801C3FA4(gobj, 3));
-            Item_80268E5C((HSD_GObj*) gp->gv.corneria.left_cannon, 2,
-                          ITEM_ANIM_UPDATE);
-            Item_80268E5C((HSD_GObj*) gp->gv.corneria.right_cannon, 2,
-                          ITEM_ANIM_UPDATE);
-            grMaterial_801C8E28((HSD_GObj*) gp->gv.corneria.left_cannon);
-            grMaterial_801C8E28((HSD_GObj*) gp->gv.corneria.right_cannon);
+            Item_80268E5C(gp->gv.corneria.left_cannon, 2, ITEM_ANIM_UPDATE);
+            Item_80268E5C(gp->gv.corneria.right_cannon, 2, ITEM_ANIM_UPDATE);
+            grMaterial_801C8E28(gp->gv.corneria.left_cannon);
+            grMaterial_801C8E28(gp->gv.corneria.right_cannon);
             gp->gv.corneria.x108 = 1;
             return;
         }
@@ -2171,10 +2150,8 @@ void grCorneria_801E1348(Ground_GObj* gobj)
         if (gp->gv.corneria.x10C == 0) {
             hsd_8039D580(grCn_GetCannonJObj2(gobj));
             hsd_8039D580(Ground_801C3FA4(gobj, 3));
-            Item_80268E5C((HSD_GObj*) gp->gv.corneria.left_cannon, 0,
-                          ITEM_ANIM_UPDATE);
-            Item_80268E5C((HSD_GObj*) gp->gv.corneria.right_cannon, 0,
-                          ITEM_ANIM_UPDATE);
+            Item_80268E5C(gp->gv.corneria.left_cannon, 0, ITEM_ANIM_UPDATE);
+            Item_80268E5C(gp->gv.corneria.right_cannon, 0, ITEM_ANIM_UPDATE);
             gp->gv.corneria.x10C = grCn_804D69A0->x20;
             gp->gv.corneria.x108 = 2;
             return;
@@ -2200,8 +2177,8 @@ void grCorneria_801E1348(Ground_GObj* gobj)
         }
         if (gp->gv.corneria.x10C == 0) {
             gp->gv.corneria.x108 = 3;
-            grMaterial_801C8E08((Item_GObj*) gp->gv.corneria.left_cannon);
-            grMaterial_801C8E08((Item_GObj*) gp->gv.corneria.right_cannon);
+            grMaterial_801C8E08(gp->gv.corneria.left_cannon);
+            grMaterial_801C8E08(gp->gv.corneria.right_cannon);
             return;
         }
         gp->gv.corneria.x10C -= 1;
@@ -2372,15 +2349,15 @@ HSD_GObj* grCorneria_801E1BF0(void)
     return gobj;
 }
 
-extern GXColor grCn_804DB218;
-extern GXColor grCn_804DB21C;
-extern GXColor grCn_804DB220;
-extern GXColor grCn_804DB224;
-extern GXColor grCn_804DB228;
-extern GXColor grCn_804DB22C;
-extern GXColor grCn_804DB230;
-extern GXColor grCn_804DB234;
-extern GXColor grCn_804DB238;
+const GXColor grCn_804DB218 = { 0xAE, 0xBA, 0xD6, 0xFF };
+const GXColor grCn_804DB21C = { 0xD7, 0xE4, 0xF6, 0xFF };
+const GXColor grCn_804DB220 = { 0xE0, 0xEC, 0xFA, 0xFF };
+const GXColor grCn_804DB224 = { 0x6A, 0x9E, 0xAD, 0xFF };
+const GXColor grCn_804DB228 = { 0x4F, 0x94, 0xB5, 0xFF };
+const GXColor grCn_804DB22C = { 0x49, 0x6E, 0x3F, 0xFF };
+const GXColor grCn_804DB230 = { 0x6A, 0x9E, 0xAD, 0xFF };
+const GXColor grCn_804DB234 = { 0x4F, 0x94, 0xB5, 0xFF };
+const GXColor grCn_804DB238 = { 0x00, 0x50, 0x91, 0xFF };
 
 void grCorneria_801E2110(void)
 {
@@ -2532,13 +2509,29 @@ s32 grCorneria_801E2598(u32 arg0, u32 arg1)
     return val != 0;
 }
 
+static inline void grCn_HideJointPair(HSD_GObj* gobj, s16* joints)
+{
+    HSD_JObj* j0 = Ground_801C3FA4(gobj, joints[0]);
+    if (j0 != NULL) {
+        HSD_JObjSetFlagsAll(j0, JOBJ_HIDDEN);
+    }
+    {
+        HSD_JObj* j1 = Ground_801C3FA4(gobj, joints[1]);
+        if (j1 != NULL) {
+            HSD_JObjSetFlagsAll(j1, JOBJ_HIDDEN);
+        }
+    }
+}
+
+/// @todo Only differs by a callee-saved register permutation.
 void grCorneria_801E25C4(HSD_GObj* gobj, void* gv, int line, int arg3,
                          int arg4)
 {
     struct grSmashTaunt_GroundVars* v = gv;
-    int i;
-    s16 joint0;
     s16 joint1;
+    s16 joint0;
+    int i;
+    s16* joints;
     PAD_STACK(8);
 
     v->line = line;
@@ -2546,20 +2539,14 @@ void grCorneria_801E25C4(HSD_GObj* gobj, void* gv, int line, int arg3,
     v->sound_id = arg4;
     joint0 = grCn_803E21F0[v->line][0];
     joint1 = grCn_803E21F0[v->line][1];
-    for (i = 0; i < 5; i++) {
+    joints = &grCn_803E21F0[i = 0][0];
+    do {
         if (i != 0 && v->line != i) {
-            HSD_JObj* j0 = Ground_801C3FA4(gobj, grCn_803E21F0[i][0]);
-            if (j0 != NULL) {
-                HSD_JObjSetFlagsAll(j0, JOBJ_HIDDEN);
-            }
-            {
-                HSD_JObj* j1 = Ground_801C3FA4(gobj, grCn_803E21F0[i][1]);
-                if (j1 != NULL) {
-                    HSD_JObjSetFlagsAll(j1, JOBJ_HIDDEN);
-                }
-            }
+            grCn_HideJointPair(gobj, joints);
         }
-    }
+        i++;
+        joints += 2;
+    } while (i < 5);
     v->jobj0 = Ground_801C3FA4(gobj, joint0);
     v->jobj1 = Ground_801C3FA4(gobj, joint1);
     v->jobj2 = Ground_801C3FA4(gobj, 5);
@@ -2571,7 +2558,7 @@ void grCorneria_801E25C4(HSD_GObj* gobj, void* gv, int line, int arg3,
     grAnime_801C8098(gobj, joint0, 7, 0, 0.0f, 1.0f);
     grAnime_801C8098(gobj, joint1, 7, 0, 0.0f, 1.0f);
     grAnime_801C8098(gobj, 5, 7, 0, 0.0f, 1.0f);
-    HSD_JObjAnimAll(GET_JOBJ(gobj));
+    HSD_JObjAnimAll(gobj->hsd_obj);
 }
 
 void grCorneria_801E2738(HSD_GObj* gobj, void* ptr, u32 idx1, u32 idx2)
@@ -2581,7 +2568,7 @@ void grCorneria_801E2738(HSD_GObj* gobj, void* ptr, u32 idx1, u32 idx2)
                         grCn_803E2204[idx1][idx2].data[2]);
 }
 
-extern GXColor grCn_804DB24C;
+const GXColor grCn_804DB24C = { 0xFF, 0xFF, 0xFF, 0xFF };
 
 void grCorneria_801E277C(Ground_GObj* gobj, struct grSmashTaunt_GroundVars* gv)
 {
@@ -2816,6 +2803,10 @@ DynamicsDesc* grCorneria_801E2EE4(enum_t arg)
     return NULL;
 }
 
+extern const f32 grCn_804DB260;
+extern const f32 grCn_804DB264;
+extern const f32 grCn_804DB268;
+
 bool grCorneria_801E2EEC(Vec3* v, int arg1, HSD_JObj* jobj)
 {
     Vec3 sp14;
@@ -2829,11 +2820,11 @@ bool grCorneria_801E2EEC(Vec3* v, int arg1, HSD_JObj* jobj)
     if (temp_r3 != NULL) {
         temp_r3_2 = temp_r3->user_data;
         if (temp_r3_2 != NULL && temp_r3_2->gv.corneria.x12C == jobj) {
-            temp_f31 = 106.0f * Ground_801C0498();
-            temp_f31_2 =
-                ((v->y - sp14.y) * ((107.0f * Ground_801C0498()) / temp_f31)) +
-                sp14.x;
-            if (v->x > -((107.0f * Ground_801C0498()) - temp_f31_2)) {
+            temp_f31 = grCn_804DB264 * Ground_801C0498();
+            temp_f31_2 = ((v->y - sp14.y) *
+                          ((grCn_804DB260 * Ground_801C0498()) / temp_f31)) +
+                         sp14.x;
+            if (v->x > -((grCn_804DB260 * Ground_801C0498()) - temp_f31_2)) {
                 return false;
             }
         }
@@ -2856,5 +2847,11 @@ f32 grCorneria_801E2FCC(void)
             return (Ground_801C0498() * -35.0f - gp->gv.corneria.xD0) + 5.0f;
         }
     }
-    return -3.4028235e38f;
+    return grCn_804DB268;
 }
+
+/// Defined after all readers so MWCC loads the named symbols instead of
+/// folding the values back into the literal pool.
+const f32 grCn_804DB260 = 107.0f;
+const f32 grCn_804DB264 = 106.0f;
+const f32 grCn_804DB268 = -3.4028235e38f;

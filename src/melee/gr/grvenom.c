@@ -1007,31 +1007,7 @@ bool grVenom_80204CE4(Ground_GObj* arg)
 void grVenom_80204CEC(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    s32 temp;
-
-    ifStatus_802F6898();
-    un_802FF570();
-
-    if (Ground_801C2BA4(1) == NULL) {
-        if (grCorneria_801E2598(gp->gv.venom.xC4, gp->gv.venom.xC8) != 0) {
-            temp = gp->gv.venom.xCC;
-            gp->gv.venom.xCC = temp - 1;
-            if (temp < 0) {
-                HSD_GObj* gobj = grVenom_80203EAC(1);
-                Ground* gp2 = GET_GROUND(gobj);
-                grCorneria_801E2738(gobj, &gp2->gv.venom.xC4, gp->gv.venom.xC4,
-                                    gp->gv.venom.xC8);
-                gp->gv.venom.xC8 = gp->gv.venom.xC8 + 1;
-                gp->gv.venom.xCC = 0;
-            }
-        } else {
-            temp = gp->gv.venom.xCC;
-            gp->gv.venom.xCC = temp - 1;
-            if (temp < 0) {
-                Ground_801C4A08(gobj);
-            }
-        }
-    }
+    Ground_UpdateStarFoxSequence(gobj, gp, 1, grVenom_80203EAC);
 }
 
 void grVenom_80204DB0(Ground_GObj* gobj)
@@ -1321,24 +1297,7 @@ void grVenom_80205758(Ground_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
     if (grVe_ArwingData.arwing_gobj[gp->gv.venom.xC8] != NULL) {
-        f32 angle = ABS(gp->gv.venom.xE8);
-        if (angle < 50.0F) {
-            gp->gv.venom.xE8 = 0.0F;
-            while (gp->gv.venom.xDC < -M_PI) {
-                gp->gv.venom.xDC += M_TAU;
-            }
-            while (gp->gv.venom.xDC > M_PI) {
-                gp->gv.venom.xDC -= M_TAU;
-            }
-            if (ABS(gp->gv.venom.xDC) < 1.0471976F) {
-                HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-            } else {
-                HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-            }
-        } else {
-            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-        }
-        HSD_JObjSetTranslate(jobj, (Vec3*) &gp->gv.venom.xE0);
+        Ground_UpdateStarFoxArwingVisibility(gp, jobj, 50.0F);
         {
             f32 scale = Ground_801C0498();
             {
@@ -1369,22 +1328,16 @@ void grVenom_80205AD0(Ground_GObj* arg) {}
 
 void grVenom_80205AD4(Ground_GObj* gobj)
 {
-    s32* data = (s32*) &grVe_803E5348;
     Ground* gp = gobj->user_data;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     f32 scale;
 
     scale = Ground_801C0498();
     gp->gv.venom.xC8 = grVe_804D6A34;
-    gp->gv.venom.xEC_int = 0;
-    gp->gv.venom.xE8_int = 0;
-    gp->gv.venom.xE4_int = 0;
-    gp->gv.venom.xE0_int = 0;
-    grAnime_801C7FF8(gobj, 7, 7, 0, 0.0F, 1.0F);
-    grAnime_801C7FF8(gobj, 8, 7, 0, 0.0F, 1.0F);
-    grAnime_801C8098(gobj, 2, 7, 3, 0.0F, 1.0F);
+    Ground_ClearStarFoxArwingGObjs(gp);
+    Ground_AnimateStarFoxArwingWithBackground(gobj);
 
-    switch (data[gp->gv.venom.xC8 + 11]) {
+    switch (grVe_ArwingData.arwing_type[gp->gv.venom.xC8]) {
     case 1:
     case 2:
     case 3:
@@ -1393,37 +1346,25 @@ void grVenom_80205AD4(Ground_GObj* gobj)
     case 6:
     case 7: {
         HSD_GObj* other =
-            grVenom_80203EAC(data[data[gp->gv.venom.xC8 + 14] + 0xC9]);
-        gp->gv.venom.linked_gobj = other;
-        if (other != NULL) {
-            Ground* other_gp = GET_GROUND(gp->gv.venom.linked_gobj);
-            if (other_gp != NULL) {
-                other_gp->gv.venom.xC8 = gp->gv.venom.xC8;
-            }
-        }
+            grVenom_80203EAC(grVe_803E566C[grVe_803E5380[gp->gv.venom.xC8]]);
+        Ground_LinkStarFoxArwing(gp, other);
         break;
     }
     case 8:
     case 9:
     case 10:
     case 11:
-        lb_8000C2F8(
-            Ground_801C3FA4(gobj, 0),
-            Ground_801C3FA4((HSD_GObj*) data[gp->gv.venom.xC8 + 8], 5));
-        gp->gv.venom.linked_gobj = NULL;
+        Ground_AttachStarFoxArwingModel(
+            gobj, gp, grVe_ArwingData.arwing_gobj[gp->gv.venom.xC8], 5);
         break;
     default:
-        gp->gv.venom.xE0_int = -1;
-        gp->gv.venom.xE4_int = -1;
+        Ground_DisableStarFoxArwingGObjs(gp);
         break;
     }
     HSD_JObjSetScaleX(jobj, scale * grVe_804D6A30->x34);
     HSD_JObjSetScaleY(jobj, scale * grVe_804D6A30->x34);
     HSD_JObjSetScaleZ(jobj, scale * grVe_804D6A30->x34);
-    gp->gv.venom.xC4_flags.b0 = false;
-    gp->gv.venom.xD4 = 0;
-    gp->gv.venom.xF0 = 0;
-    gp->gv.venom.xF4 = 0;
+    Ground_ResetStarFoxArwingState(gp);
     gp->gv.venom.xF8 = (s32) grVe_804D6A30->x2C;
     gp->gv.venom.xFC = 0;
     gp->gv.venom.x100 = HSD_Randi(2);
@@ -1436,19 +1377,7 @@ bool grVenom_80205DF0(Ground_GObj* arg)
 
 s32 grVenom_80205DF8(Vec3* pos)
 {
-    if (pos->x > Stage_GetBlastZoneRightOffset()) {
-        return 1;
-    }
-    if (pos->x < Stage_GetBlastZoneLeftOffset()) {
-        return 1;
-    }
-    if (pos->y > Stage_GetBlastZoneTopOffset()) {
-        return 1;
-    }
-    if (pos->y < Stage_GetBlastZoneBottomOffset()) {
-        return 1;
-    }
-    return 0;
+    return Stage_IsOutsideBlastZone(pos);
 }
 
 /// grVenom_80205E84
@@ -1460,19 +1389,7 @@ float Stage_GetBlastZoneTopOffset(void);
 
 s32 grVenom_80205E84(Vec3* pos)
 {
-    if (pos->x > Stage_GetBlastZoneRightOffset() - 20.0F) {
-        return 1;
-    }
-    if (pos->x < 20.0F + Stage_GetBlastZoneLeftOffset()) {
-        return 1;
-    }
-    if (pos->y > Stage_GetBlastZoneTopOffset() - 20.0F) {
-        return 1;
-    }
-    if (pos->y < 20.0F + Stage_GetBlastZoneBottomOffset()) {
-        return 1;
-    }
-    return 0;
+    return Stage_IsOutsideBlastZoneWithMargin(pos, 20.0F);
 }
 
 static const Vec3 grVe_803B82D0 = { 0.0F, 0.0F, 0.0F };
@@ -1789,22 +1706,16 @@ void grVenom_80206870(Ground_GObj* arg) {}
 
 void grVenom_80206874(Ground_GObj* gobj)
 {
-    s32* data = (s32*) &grVe_803E5348;
     Ground* gp = gobj->user_data;
     HSD_JObj* jobj = gobj->hsd_obj;
     f32 scale;
 
     scale = Ground_801C0498();
     gp->gv.venom.xC8 = grVe_804D6A34;
-    gp->gv.venom.xEC_int = 0;
-    gp->gv.venom.xE8_int = 0;
-    gp->gv.venom.xE4_int = 0;
-    gp->gv.venom.xE0_int = 0;
+    Ground_ClearStarFoxArwingGObjs(gp);
+    Ground_AnimateStarFoxArwing(gobj);
 
-    grAnime_801C7FF8(gobj, 0, 7, 1, 0.0F, 1.0F);
-    grAnime_801C8098(gobj, 2, 7, 3, 0.0F, 1.0F);
-
-    switch (data[gp->gv.venom.xC8 + 11]) {
+    switch (grVe_ArwingData.arwing_type[gp->gv.venom.xC8]) {
     case 1:
     case 2:
     case 3:
@@ -1813,28 +1724,19 @@ void grVenom_80206874(Ground_GObj* gobj)
     case 6:
     case 7: {
         HSD_GObj* other =
-            grVenom_80203EAC(data[data[gp->gv.venom.xC8 + 14] + 0xC9]);
-        gp->gv.venom.linked_gobj = other;
-        if (other != NULL) {
-            Ground* other_gp = GET_GROUND(gp->gv.venom.linked_gobj);
-            if (other_gp != NULL) {
-                other_gp->gv.venom.xC8 = gp->gv.venom.xC8;
-            }
-        }
+            grVenom_80203EAC(grVe_803E566C[grVe_803E5380[gp->gv.venom.xC8]]);
+        Ground_LinkStarFoxArwing(gp, other);
         break;
     }
     case 8:
     case 9:
     case 10:
     case 11:
-        lb_8000C2F8(
-            Ground_801C3FA4(gobj, 0),
-            Ground_801C3FA4((HSD_GObj*) data[gp->gv.venom.xC8 + 8], 5));
-        gp->gv.venom.linked_gobj = NULL;
+        Ground_AttachStarFoxArwingModel(
+            gobj, gp, grVe_ArwingData.arwing_gobj[gp->gv.venom.xC8], 5);
         break;
     default:
-        gp->gv.venom.xE0_int = -1;
-        gp->gv.venom.xE4_int = -1;
+        Ground_DisableStarFoxArwingGObjs(gp);
         break;
     }
 
@@ -1842,10 +1744,7 @@ void grVenom_80206874(Ground_GObj* gobj)
     HSD_JObjSetScaleY(jobj, scale * grVe_804D6A30->x34);
     HSD_JObjSetScaleZ(jobj, scale * grVe_804D6A30->x34);
 
-    gp->gv.venom.xC4_flags.b0 = false;
-    gp->gv.venom.xD4 = 0;
-    gp->gv.venom.xF0 = 0;
-    gp->gv.venom.xF4 = 0;
+    Ground_ResetStarFoxArwingState(gp);
 
     gp->gv.venom.xF8 = (s32) grVe_804D6A30->x2C;
     gp->gv.venom.xFC = 0;
