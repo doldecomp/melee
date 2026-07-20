@@ -3,9 +3,6 @@
 
 #include "platform.h"
 
-#include <placeholder.h>
-
-#include "gm/forward.h"
 #include "mn/forward.h" // IWYU pragma: export
 
 #include <baselib/sislib.h>
@@ -687,6 +684,20 @@ struct MnInfoData {
         left_column[4]; ///< date and time of achievement unlock
     /* +18 */ HSD_Text* right_column[4]; ///< achievement
     /* +28 */ HSD_Text* description;
+};
+
+struct soundtest_user_data {
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u16 unk4;
+    f32 unk8;
+    f32 unkC;
+    HSD_Text* unk10;
+    HSD_Text* unk14;
+    HSD_Text* unk18;
+    HSD_Text* unk1C;
 };
 
 #endif

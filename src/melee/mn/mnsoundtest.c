@@ -1,17 +1,16 @@
 #include "mnsoundtest.h"
 
+#include "inlines.h"
+#include "types.h"
+
 #include <platform.h>
+
+#include "forward.h"
 
 #include "gm/gm_unsplit.h"
 #include "gm/gmmain_lib.h"
 #include "lb/lbarchive.h"
 #include "lb/lbspdisplay.h"
-
-#include "mn/forward.h"
-
-#include "mn/inlines.h"
-#include "mn/types.h"
-#include "sc/types.h"
 
 #include <baselib/forward.h>
 
@@ -30,7 +29,7 @@
 
 extern HSD_PadStatus HSD_PadCopyStatus[4];
 
-static HSD_GObj* mnSoundTest_804D6C40;
+static mnSoundTest_GObj* mnSoundTest_804D6C40;
 static u8 mnSoundTest_804D6C44;
 static s32 mnSoundTest_804D6C48;
 static s32 mnSoundTest_804D6C4C;
@@ -42,7 +41,7 @@ typedef struct {
     void* shapeanim_joint;
 } SoundTestModelDesc;
 
-void fn_8024B2B0(HSD_GObj*);
+void fn_8024B2B0(mnSoundTest_GObj*);
 static SoundTestModelDesc mnSoundTest_804A08C8;
 
 AnimLoopSettings vec_0 = {
@@ -132,7 +131,7 @@ static char mnSoundTest_803EF540[] = "MenMainConTs_Top_animjoint";
 static char mnSoundTest_803EF55C[] = "MenMainConTs_Top_matanim_joint";
 static char mnSoundTest_803EF57C[] = "MenMainConTs_Top_shapeanim_joint";
 
-void mnSoundTest_8024A790(HSD_GObj* arg0)
+void mnSoundTest_8024A790(mnSoundTest_GObj* arg0)
 {
     f32 temp_f31;
     f32 temp_f30;
@@ -182,7 +181,7 @@ void mnSoundTest_8024A790(HSD_GObj* arg0)
     }
 }
 
-void mnSoundTest_8024A958(HSD_GObj* arg0)
+void mnSoundTest_8024A958(mnSoundTest_GObj* arg0)
 {
     f32 unused1;
     f32 unused2;
@@ -225,7 +224,7 @@ void mnSoundTest_8024A958(HSD_GObj* arg0)
     HSD_SisLib_803A6B98(temp_r3_4, 0.0f, 0.0f, string);
 }
 
-void mnSoundTest_8024AA70(HSD_GObj* arg0, u8 arg1)
+void mnSoundTest_8024AA70(mnSoundTest_GObj* arg0, u8 arg1)
 {
     HSD_JObj* sp38;
     HSD_JObj* sp34;
@@ -278,7 +277,7 @@ void mnSoundTest_8024AA70(HSD_GObj* arg0, u8 arg1)
     HSD_JObjAnimAll(sp34);
 }
 
-void mnSoundTest_8024ABF8(HSD_GObj* arg0, u8 arg1)
+void mnSoundTest_8024ABF8(mnSoundTest_GObj* arg0, u8 arg1)
 {
     HSD_JObj* sp1C;
     HSD_JObj* sp18;
@@ -310,7 +309,7 @@ void mnSoundTest_8024ABF8(HSD_GObj* arg0, u8 arg1)
     HSD_JObjAnimAll(sp1C);
 }
 
-void mnSoundTest_8024AD58(HSD_GObj* arg0, u8 arg1)
+void mnSoundTest_8024AD58(mnSoundTest_GObj* arg0, u8 arg1)
 {
     HSD_JObj* sp1C;
     HSD_JObj* sp18;
@@ -343,7 +342,7 @@ void mnSoundTest_8024AD58(HSD_GObj* arg0, u8 arg1)
     mnSoundTest_8024AA70(arg0, arg1);
 }
 
-static inline void fn_8024AED0_inline(HSD_GObj* arg0, char* string)
+static inline void fn_8024AED0_inline(mnSoundTest_GObj* arg0, char* string)
 {
     HSD_Text* text;
     f32 pos_y;
@@ -370,7 +369,7 @@ static inline soundtest_user_data* fn_8024AED0_GetUserData(void)
     return mnSoundTest_804D6C40->user_data;
 }
 
-void fn_8024AED0(HSD_GObj* arg0)
+void fn_8024AED0(mnSoundTest_GObj* arg0)
 {
     u8 operand_pad[24];
     HSD_JObj* sp7C;
@@ -486,7 +485,7 @@ static inline s32 mnSoundTest_GetAudioVolume(void)
     return gm_801601C4(gmMainLib_8015ED74());
 }
 
-void fn_8024B2B0(HSD_GObj* arg0)
+void fn_8024B2B0(mnSoundTest_GObj* arg0)
 {
     u8 high_pad[0x28];
     HSD_JObj* sp54;
@@ -495,7 +494,7 @@ void fn_8024B2B0(HSD_GObj* arg0)
     u8 stack_pad2[8];
     HSD_JObj* sp3C;
     HSD_GObjProc* proc;
-    HSD_GObj* gobj;
+    mnSoundTest_GObj* gobj;
     HSD_JObj* jobj;
     soundtest_user_data* menu_data;
     soundtest_user_data* reset_data;
@@ -639,7 +638,7 @@ void fn_8024B2B0(HSD_GObj* arg0)
     mnSoundTest_8024A790(mnSoundTest_804D6C40);
 }
 
-void fn_8024B7E4(HSD_GObj* arg0)
+void fn_8024B7E4(mnSoundTest_GObj* arg0)
 {
     u32 pad2;
     HSD_JObj* sp20;
@@ -661,7 +660,7 @@ void fn_8024B7E4(HSD_GObj* arg0)
     }
 }
 
-void fn_8024B8B4(HSD_GObj* arg0, f32 farg0)
+void fn_8024B8B4(mnSoundTest_GObj* arg0, f32 farg0)
 {
     f32 var_f1;
     HSD_JObj* sp20;
@@ -729,7 +728,7 @@ void fn_8024B8B4(HSD_GObj* arg0, f32 farg0)
     mn_8022EC18(sp10, (AnimLoopSettings*) &vec_5, MOBJ_MASK);
 }
 
-void fn_8024BAF0(HSD_GObj* arg0)
+void fn_8024BAF0(mnSoundTest_GObj* arg0)
 {
     u32 pad2;
     HSD_JObj* sp1C;
@@ -773,7 +772,7 @@ void fn_8024BAF0(HSD_GObj* arg0)
         if (temp_f31 == vec_0.end_frame) {
             HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
             proc2 = HSD_GObj_SetupProc(
-                arg0, (void (*)(HSD_GObj*))(Event) fn_8024B8B4, 0U);
+                arg0, (void (*)(mnSoundTest_GObj*))(Event) fn_8024B8B4, 0U);
             proc2->flags_3 = HSD_GObj_804D783C;
             mnSoundTest_8024A958(arg0);
             mnSoundTest_804D6C44 = 0;
@@ -785,7 +784,7 @@ void mnSoundTest_8024BCA0(int arg0)
 {
     HSD_JObj* jobj;
     UNUSED u8 pad[0xC];
-    HSD_GObj* gobj;
+    mnSoundTest_GObj* gobj;
     HSD_GObjProc* proc;
     HSD_JObj* category_jobj;
     SoundTestModelDesc* model_desc;
@@ -806,7 +805,8 @@ void mnSoundTest_8024BCA0(int arg0)
                        model_desc->shapeanim_joint);
     HSD_JObjReqAnimAll(jobj, 0.0f);
     HSD_JObjAnimAll(jobj);
-    proc = HSD_GObj_SetupProc(gobj, (void (*)(HSD_GObj*)) fn_8024BAF0, 0U);
+    proc = HSD_GObj_SetupProc(gobj, (void (*)(mnSoundTest_GObj*)) fn_8024BAF0,
+                              0U);
     proc->flags_3 = HSD_GObj_804D783C;
     user_data = HSD_MemAlloc(0x20);
     if (user_data == NULL) {

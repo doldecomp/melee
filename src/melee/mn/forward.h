@@ -9,13 +9,8 @@ typedef struct HSD_GObj mnInfo_GObj;
 typedef struct HSD_GObj mnSoundTest_GObj;
 #endif
 
-typedef struct MnInfoData MnInfoData;
-typedef struct Menu Menu;
 typedef struct AnimLoopSettings AnimLoopSettings;
 typedef struct CountEntry CountEntry;
-typedef struct Diagram Diagram;
-typedef struct Diagram2 Diagram2;
-typedef struct Diagram3 Diagram3;
 typedef struct CSSData CSSData;
 typedef struct CSSDoor CSSDoor;
 typedef struct CSSDoorsData CSSDoorsData;
@@ -25,13 +20,18 @@ typedef struct CSSKOStar CSSKOStar;
 typedef struct CSSModeInfo CSSModeInfo;
 typedef struct CSSTag CSSTag;
 typedef struct CSSTagData CSSTagData;
+typedef struct Diagram Diagram;
+typedef struct Diagram2 Diagram2;
+typedef struct Diagram3 Diagram3;
+typedef struct Menu Menu;
 typedef struct MenuKindData MenuKindData;
+typedef struct MnInfoData MnInfoData;
 typedef struct PlayerInitData PlayerInitData;
+typedef struct soundtest_user_data soundtest_user_data;
 typedef struct SSSData SSSData;
 typedef struct StartMeleeData StartMeleeData;
 typedef struct StartMeleeRules StartMeleeRules;
 typedef struct VsModeData VsModeData;
-
 typedef unsigned char MenuKind8;
 typedef unsigned char MenuState8;
 
