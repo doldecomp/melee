@@ -37,10 +37,10 @@ void ftNs_AttackHi4_YoyoUpdateHitPos(HSD_GObj* gobj)
     HitCapsule* hitbox_data = &fp->x914[0];
 
     if (hitbox_data->state != HitCapsule_Disabled) {
-        if (fp->fv.ns.yoyo_hitbox_pos.x != 0.0f ||
-            fp->fv.ns.yoyo_hitbox_pos.y != 0.0f)
+        if (fp->u.ns.yoyo_hitbox_pos.x != 0.0f ||
+            fp->u.ns.yoyo_hitbox_pos.y != 0.0f)
         {
-            ftColl_8007B8A8(&fp->x914[0], &fp->fv.ns.yoyo_hitbox_pos);
+            ftColl_8007B8A8(&fp->x914[0], &fp->u.ns.yoyo_hitbox_pos);
         }
     }
 };
@@ -215,7 +215,7 @@ void ftNs_AttackHi4_YoyoSetHitPos(HSD_GObj* gobj)
         lbVector_Add(&sp2C, &sp20);
     }
 
-    fp->fv.ns.yoyo_hitbox_pos = sp2C;
+    fp->u.ns.yoyo_hitbox_pos = sp2C;
 }
 
 void ftNs_AttackHi4_YoyoSetHitPosUnk(HSD_GObj* gobj, float pos_unk)
@@ -248,13 +248,13 @@ void ftNs_AttackHi4_YoyoSetHitPosUnk(HSD_GObj* gobj, float pos_unk)
         lbVector_Add(&sp3C, &sp24);
     }
 
-    sp30 = fp->fv.ns.yoyo_hitbox_pos;
+    sp30 = fp->u.ns.yoyo_hitbox_pos;
     pos_update = 1.0f - pos_unk;
-    fp->fv.ns.yoyo_hitbox_pos.x =
+    fp->u.ns.yoyo_hitbox_pos.x =
         (float) ((sp3C.x * pos_unk) + (sp30.x * pos_update));
-    fp->fv.ns.yoyo_hitbox_pos.y =
+    fp->u.ns.yoyo_hitbox_pos.y =
         (float) ((sp3C.y * pos_unk) + (sp30.y * pos_update));
-    fp->fv.ns.yoyo_hitbox_pos.z =
+    fp->u.ns.yoyo_hitbox_pos.z =
         (float) ((sp3C.z * pos_unk) + (sp30.z * pos_update));
 }
 
@@ -276,10 +276,10 @@ bool ftNs_AttackHi4_YoyoCheckNoObstruct(HSD_GObj* gobj)
     sp20.x += fp->cur_pos.x;
     sp20.y += fp->cur_pos.y;
     sp20.z += fp->cur_pos.z;
-    sp14 = fp->fv.ns.yoyo_hitbox_pos;
+    sp14 = fp->u.ns.yoyo_hitbox_pos;
 
     if (!ftNs_AttackHi4_YoyoCheckEnvColl(gobj, &sp20, &sp14, ECB_MUL_Y)) {
-        sp14 = fp->fv.ns.yoyo_hitbox_pos;
+        sp14 = fp->u.ns.yoyo_hitbox_pos;
         sp20 = sp14;
         sp20.y += fp->x34_scale.y;
         sp14.y += -1.0f * fp->x34_scale.y;
@@ -301,10 +301,10 @@ void ftNs_AttackHi4_YoyoSetVarAll(HSD_GObj* gobj)
     fp->mv.ns.attackhi4.yoyoCurrentFrame = 1;
     fp->mv.ns.attackhi4.yoyoRehitTimer = 0;
     fp->mv.ns.attackhi4.isPosUpdateMod = true;
-    fp->fv.ns.yoyo_hitbox_pos.z = 0.0f;
-    fp->fv.ns.yoyo_hitbox_pos.y = 0.0f;
-    fp->fv.ns.yoyo_hitbox_pos.x = 0.0f;
-    fp->fv.ns.x223C = 0.0f;
+    fp->u.ns.yoyo_hitbox_pos.z = 0.0f;
+    fp->u.ns.yoyo_hitbox_pos.y = 0.0f;
+    fp->u.ns.yoyo_hitbox_pos.x = 0.0f;
+    fp->u.ns.x223C = 0.0f;
 }
 
 struct Unknown {
@@ -335,7 +335,7 @@ void ftNs_AttackHi4_YoyoApplySmash(HSD_GObj* gobj)
     s32 smashColAnimID;
 
     fp->mv.ns.attackhi4.yoyoCurrentFrame = 0;
-    temp_yoyo = fp->fv.ns.yoyo_gobj;
+    temp_yoyo = fp->u.ns.yoyo_gobj;
     yoyo_GObj = temp_yoyo;
 
     if (temp_yoyo) {
@@ -391,7 +391,7 @@ void ftNs_AttackHi4_YoyoSetChargeDamage(HSD_GObj* gobj)
     // Current animation frame, integer
     fp->mv.ns.attackhi4.yoyoCurrentFrame = 14;
 
-    yoyo_GObj = fp->fv.ns.yoyo_gobj;
+    yoyo_GObj = fp->u.ns.yoyo_gobj;
 
     if (yoyo_GObj) {
         item_data = yoyo_GObj->user_data;
@@ -399,7 +399,7 @@ void ftNs_AttackHi4_YoyoSetChargeDamage(HSD_GObj* gobj)
         yoyo_attr = article->x4_specialAttributes;
         sp30 = YoyoChargePos;
         it_802C0010(yoyo_GObj, &sp30);
-        fp->fv.ns.x223C = yoyo_attr->x18_SPIN_TEXANIM_SPEED;
+        fp->u.ns.x223C = yoyo_attr->x18_SPIN_TEXANIM_SPEED;
     }
 
     ft_80088510(fp, 210090, 127, 64);
@@ -460,19 +460,19 @@ bool ftNs_AttackHi4_YoyoThink_IsRemove(HSD_GObj* gobj)
     if ((yoyoSmashFrameCurr > yoyoSpawnFrame) &&
         (yoyoSmashFrameCurr <= yoyoDespawnFrame))
     {
-        yoyo_GObj = fp->fv.ns.yoyo_gobj;
+        yoyo_GObj = fp->u.ns.yoyo_gobj;
         yoyo_itemdata = yoyo_GObj->user_data;
         yoyo_article = yoyo_itemdata->xC4_article_data;
         yoyo_attr = yoyo_article->x4_specialAttributes;
         if ((u32) fp->cmd_vars[1] == 1U) {
             fp->cmd_vars[1] = 0U;
             it_802BE5D8(yoyo_GObj, 1.0f);
-            fp->fv.ns.x223C = yoyo_attr->x18_SPIN_TEXANIM_SPEED;
+            fp->u.ns.x223C = yoyo_attr->x18_SPIN_TEXANIM_SPEED;
         }
         if ((u32) fp->cmd_vars[1] == 2U) {
             fp->cmd_vars[1] = 0U;
             it_802BE5D8(yoyo_GObj, 0.0f);
-            fp->fv.ns.x223C = 0.0f;
+            fp->u.ns.x223C = 0.0f;
             ft_80088510(fp, 210096, SFX_VOLUME_MAX, SFX_PAN_MID);
         }
         msid = fp->motion_id;
@@ -500,11 +500,11 @@ bool ftNs_AttackHi4_YoyoThink_IsRemove(HSD_GObj* gobj)
             it_802BFEC4(yoyo_GObj);
         }
         if ((s32) fp->mv.ns.attackhi4.yoyoCurrentFrame == yoyoDespawnFrame) {
-            it_802BE958(fp->fv.ns.yoyo_gobj);
+            it_802BE958(fp->u.ns.yoyo_gobj);
         }
     } else if (yoyoSmashFrameCurr == yoyoSpawnFrame) {
         ftNs_AttackHi4_YoyoCreateItem(gobj);
-        if (fp->fv.ns.yoyo_gobj == NULL) {
+        if (fp->u.ns.yoyo_gobj == NULL) {
             ft_8008A2BC(gobj);
             return true;
         }
@@ -527,7 +527,7 @@ void ftNs_AttackHi4_YoyoSetUnkRate(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     ness_attr = fp->dat_attrs;
-    yoyo_GObj = fp->fv.ns.yoyo_gobj;
+    yoyo_GObj = fp->u.ns.yoyo_gobj;
     if (yoyo_GObj != NULL) {
         item_data = yoyo_GObj->user_data;
         item_article = item_data->xC4_article_data;
@@ -539,7 +539,7 @@ void ftNs_AttackHi4_YoyoSetUnkRate(HSD_GObj* gobj)
             yoyo_float * ((float) fp->mv.ns.attackhi4.yoyoCurrentFrame /
                           ness_attr->xAC_YOYO_CHARGE_DURATION);
 
-        fp->fv.ns.x223C = texanim_unk - yoyo_float;
+        fp->u.ns.x223C = texanim_unk - yoyo_float;
     }
 }
 
@@ -549,10 +549,10 @@ void ftNs_AttackHi4_YoyoCreateItem(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     lb_8000B1CC(fp->parts[FtPart_R2ndNa].joint, NULL, &sp10);
-    fp->fv.ns.yoyo_gobj =
+    fp->u.ns.yoyo_gobj =
         it_802BE9D8(gobj, fp->facing_dir, &sp10, fp->motion_id);
-    fp->x1984_heldItemSpec = fp->fv.ns.yoyo_gobj;
-    if (fp->fv.ns.yoyo_gobj != NULL) {
+    fp->x1984_heldItemSpec = fp->u.ns.yoyo_gobj;
+    if (fp->u.ns.yoyo_gobj != NULL) {
         if (fp->death2_cb == NULL) {
             fp->death2_cb = ftNs_Init_OnDamage;
         }
@@ -569,7 +569,7 @@ void ftNs_AttackHi4_YoyoItemSetFlag(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftNs_AttackHi4_YoyoItemSetUnk2(gobj);
-    fp->fv.ns.yoyo_gobj = NULL;
+    fp->u.ns.yoyo_gobj = NULL;
 }
 
 void ftNs_AttackHi4_YoyoItemDespawn(HSD_GObj* gobj)
@@ -578,19 +578,19 @@ void ftNs_AttackHi4_YoyoItemDespawn(HSD_GObj* gobj)
 
     u8 _[8];
 
-    if (fp->fv.ns.yoyo_gobj != NULL) {
-        it_802BE958(fp->fv.ns.yoyo_gobj);
+    if (fp->u.ns.yoyo_gobj != NULL) {
+        it_802BE958(fp->u.ns.yoyo_gobj);
         fp = gobj->user_data;
         ftNs_AttackHi4_YoyoItemSetUnk2(gobj);
-        fp->fv.ns.yoyo_gobj = NULL;
+        fp->u.ns.yoyo_gobj = NULL;
     }
 }
 
 void ftNs_AttackHi4_YoyoItemSetUnk(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.ns.yoyo_gobj != NULL) {
-        it_802BE598(fp->fv.ns.yoyo_gobj);
+    if (fp->u.ns.yoyo_gobj != NULL) {
+        it_802BE598(fp->u.ns.yoyo_gobj);
     }
 }
 
@@ -598,8 +598,8 @@ void ftNs_AttackHi4_YoyoItemSetUnk2(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.ns.yoyo_gobj) {
-        it_802BE5B8(fp->fv.ns.yoyo_gobj);
+    if (fp->u.ns.yoyo_gobj) {
+        it_802BE5B8(fp->u.ns.yoyo_gobj);
     }
 }
 
@@ -619,10 +619,10 @@ void ftNs_AttackHi4_Enter(HSD_GObj* gobj)
         fp->mv.ns.attackhi4.yoyoRehitTimer = 0;
 
         fp->mv.ns.attackhi4.isPosUpdateMod = 1;
-        fp->fv.ns.yoyo_hitbox_pos.z = 0.0f;
-        fp->fv.ns.yoyo_hitbox_pos.y = 0.0f;
-        fp->fv.ns.yoyo_hitbox_pos.x = 0.0f;
-        fp->fv.ns.x223C = 0.0f;
+        fp->u.ns.yoyo_hitbox_pos.z = 0.0f;
+        fp->u.ns.yoyo_hitbox_pos.y = 0.0f;
+        fp->u.ns.yoyo_hitbox_pos.x = 0.0f;
+        fp->u.ns.x223C = 0.0f;
     }
 
     Fighter_ChangeMotionState(gobj, ftNs_MS_AttackHi4, 0, 0.0f, 1.0f, 0.0f,
@@ -694,10 +694,10 @@ void ftNs_AttackHi4_Anim(HSD_GObj* gobj)
             sp18.x += fighter_data2->cur_pos.x;
             sp18.y += fighter_data2->cur_pos.y;
             sp18.z += fighter_data2->cur_pos.z;
-            sp24 = fighter_data2->fv.ns.yoyo_hitbox_pos;
+            sp24 = fighter_data2->u.ns.yoyo_hitbox_pos;
             if ((ftNs_AttackHi4_YoyoCheckEnvColl(gobj, &sp18, &sp24, 0.5f) ==
                  0) &&
-                (sp24 = fighter_data2->fv.ns.yoyo_hitbox_pos, sp18 = sp24,
+                (sp24 = fighter_data2->u.ns.yoyo_hitbox_pos, sp18 = sp24,
                  sp18.y += fighter_data2->x34_scale.y,
                  sp24.y += -1.0f * fighter_data2->x34_scale.y,
                  (((ftNs_AttackHi4_YoyoCheckEnvColl(gobj, &sp18, &sp24, 1.5f) &
@@ -744,14 +744,14 @@ void ftNs_AttackHi4_Phys(HSD_GObj* gobj) // Ness's Up Smash Physics callback
     ft_80084F3C(gobj);
     fp = GET_FIGHTER(gobj);
     ftNs_AttackHi4_YoyoSetUnkPos(gobj, &sp10);
-    fp->fv.ns.yoyo_hitbox_pos = sp10;
+    fp->u.ns.yoyo_hitbox_pos = sp10;
 }
 
 static inline HSD_GObj*
 GetFighterData_x222C(HSD_GObj* gobj) // Yet another inline needed to match
 {
     Fighter* fp = gobj->user_data;
-    HSD_GObj* yoyo_GObj = fp->fv.ns.yoyo_gobj;
+    HSD_GObj* yoyo_GObj = fp->u.ns.yoyo_gobj;
     return yoyo_GObj;
 }
 
@@ -773,16 +773,16 @@ void ftNs_AttackHi4_Coll(HSD_GObj* gobj) // Ness's Up Smash Collision callback
 
         fp = gobj->user_data;
 
-        if (fp->fv.ns.yoyo_gobj != NULL) {
-            it_802BE5B8(fp->fv.ns.yoyo_gobj);
+        if (fp->u.ns.yoyo_gobj != NULL) {
+            it_802BE5B8(fp->u.ns.yoyo_gobj);
         }
-        fp->fv.ns.yoyo_gobj = NULL;
+        fp->u.ns.yoyo_gobj = NULL;
     }
 }
 
 static inline HSD_GObj* GetYoyoGObj(Fighter* fp)
 {
-    return fp->fv.ns.yoyo_gobj;
+    return fp->u.ns.yoyo_gobj;
 };
 
 /// 0x80115F88
@@ -812,7 +812,7 @@ void ftNs_AttackHi4Charge_Anim(
         unk_float =
             unk_float * ((float) temp_fp->mv.ns.attackhi4.yoyoCurrentFrame /
                          temp_ness_attr->xAC_YOYO_CHARGE_DURATION);
-        temp_fp->fv.ns.x223C = yoyo_attr->x20_UNK_TEXANIM_MOD - unk_float;
+        temp_fp->u.ns.x223C = yoyo_attr->x20_UNK_TEXANIM_MOD - unk_float;
     }
 
     fighter_data2 = gobj->user_data;
@@ -867,10 +867,10 @@ void ftNs_AttackHi4Charge_Coll(
     {
         it_802BE958(yoyo_GObj);
         fp = GET_FIGHTER(gobj);
-        if (fp->fv.ns.yoyo_gobj != NULL) {
-            it_802BE5B8(fp->fv.ns.yoyo_gobj);
+        if (fp->u.ns.yoyo_gobj != NULL) {
+            it_802BE5B8(fp->u.ns.yoyo_gobj);
         }
-        fp->fv.ns.yoyo_gobj = NULL;
+        fp->u.ns.yoyo_gobj = NULL;
     }
 }
 
@@ -962,19 +962,19 @@ void ftNs_AttackHi4Release_Phys(
         }
         fighter_data2 = GET_FIGHTER(gobj);
         ftNs_AttackHi4_YoyoSetUnkPos(gobj, &sp24);
-        sp30 = fighter_data2->fv.ns.yoyo_hitbox_pos;
+        sp30 = fighter_data2->u.ns.yoyo_hitbox_pos;
         temp_f2 = 1.0f - phi_f31;
-        fighter_data2->fv.ns.yoyo_hitbox_pos.x =
+        fighter_data2->u.ns.yoyo_hitbox_pos.x =
             (float) ((sp24.x * phi_f31) + (sp30.x * temp_f2));
-        fighter_data2->fv.ns.yoyo_hitbox_pos.y =
+        fighter_data2->u.ns.yoyo_hitbox_pos.y =
             (float) ((sp24.y * phi_f31) + (sp30.y * temp_f2));
-        fighter_data2->fv.ns.yoyo_hitbox_pos.z =
+        fighter_data2->u.ns.yoyo_hitbox_pos.z =
             (float) ((sp24.z * phi_f31) + (sp30.z * temp_f2));
         return;
     }
     fighter_data3 = GET_FIGHTER(gobj);
     ftNs_AttackHi4_YoyoSetUnkPos(gobj, &sp18);
-    fighter_data3->fv.ns.yoyo_hitbox_pos = sp18;
+    fighter_data3->u.ns.yoyo_hitbox_pos = sp18;
 }
 
 /// 0x80116420
@@ -993,10 +993,10 @@ void ftNs_AttackHi4Release_Coll(
     {
         it_802BE958(yoyo_GObj);
         fp = GET_FIGHTER(gobj);
-        if (fp->fv.ns.yoyo_gobj != NULL) {
-            it_802BE5B8(fp->fv.ns.yoyo_gobj);
+        if (fp->u.ns.yoyo_gobj != NULL) {
+            it_802BE5B8(fp->u.ns.yoyo_gobj);
         }
-        fp->fv.ns.yoyo_gobj = NULL;
+        fp->u.ns.yoyo_gobj = NULL;
     }
 }
 
@@ -1027,11 +1027,11 @@ void ftNs_AttackHi4Release_Enter(HSD_GObj* gobj)
     fighter_data2 = getFighter(gobj);
     fighter_data2->mv.ns.attackhi4.yoyoCurrentFrame = 14;
 
-    if ((yoyo_GObj = fighter_data2->fv.ns.yoyo_gobj) != NULL) {
+    if ((yoyo_GObj = fighter_data2->u.ns.yoyo_gobj) != NULL) {
         yoyo_attr = GetYoyoAttr(yoyo_GObj);
         sp34 = YoyoChargePos;
         it_802C0010(yoyo_GObj, &sp34);
-        fighter_data2->fv.ns.x223C = yoyo_attr->x18_SPIN_TEXANIM_SPEED;
+        fighter_data2->u.ns.x223C = yoyo_attr->x18_SPIN_TEXANIM_SPEED;
     }
 
     ft_80088510(fighter_data2, 210090, SFX_VOLUME_MAX, SFX_PAN_MID);

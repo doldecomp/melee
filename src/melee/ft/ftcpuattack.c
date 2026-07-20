@@ -1633,7 +1633,7 @@ void ftCo_800B77E8(Fighter* fp)
                 tmp->xEC++;
             }
         }
-        charge = fp->fv.gw.x2238_panicCharge;
+        charge = fp->u.gw.x2238_panicCharge;
         if (charge == 3 || charge == 0xD || charge == 0x10) {
             {
                 struct Fighter_x1A88_t* tmp = &fp->x1A88;
@@ -2045,7 +2045,7 @@ void ftCo_800B9504(Fighter* fp)
     f32 var_f1;
     f32 var_f2;
     Fighter* temp_r3_2;
-    HSD_GObj* gobj = fp->fv.zd.x222C;
+    HSD_GObj* gobj = fp->u.zd.x222C;
     u8 _[8];
     Vec3 sp14;
     PAD_STACK(4);

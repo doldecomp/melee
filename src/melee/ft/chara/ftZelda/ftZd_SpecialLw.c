@@ -332,7 +332,7 @@ s32 ftZd_SpecialLw_8013B540(HSD_GObj* gobj)
     actionStateIndex = fp->motion_id;
 
     if (((actionStateIndex == 344) || (actionStateIndex == 347)) &&
-        (fp->fv.zd.x222C != 0U))
+        (fp->u.zd.x222C != 0U))
     {
         return 1;
     }
@@ -346,7 +346,7 @@ bool ftZd_SpecialLw_8013B574(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.zd.x222C != 0) {
+    if (fp->u.zd.x222C != 0) {
         switch (fp->motion_id) {
         case 348:
         case 345:
@@ -368,8 +368,8 @@ void ftZd_SpecialLw_8013B5C4(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    if (fp->fv.zd.x222C != 0) {
-        fp->fv.zd.x222C = 0;
+    if (fp->u.zd.x222C != 0) {
+        fp->u.zd.x222C = 0;
     }
 
     fp->death2_cb = 0;
@@ -382,9 +382,9 @@ void ftZd_SpecialLw_8013B5EC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.zd.x222C != NULL) {
-        it_802C3D44(fp->fv.zd.x222C);
-        fp->fv.zd.x222C = NULL;
+    if (fp->u.zd.x222C != NULL) {
+        it_802C3D44(fp->u.zd.x222C);
+        fp->u.zd.x222C = NULL;
     }
 
     fp->death2_cb = 0;

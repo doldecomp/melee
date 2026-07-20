@@ -120,7 +120,7 @@ void ftPr_SpecialAirS_Phys(HSD_GObj* gobj)
 
     if (fp->cmd_vars[0]) {
         fp->cmd_vars[0] = 0;
-        ++fp->fv.pr.x222C;
+        ++fp->u.pr.x222C;
         {
             float angle = calcAngleRadians(gobj, fp->input.lstick.y);
             fp->self_vel.y = da->xF0 * sinf(angle);

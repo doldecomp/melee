@@ -161,5 +161,5 @@ void ftLk_SpecialHi_GetPosWithAdjustedY(HSD_GObj* gobj, Vec3* pos)
 
 int ftLk_SpecialHi_GetFv4(HSD_GObj* gobj)
 {
-    return GET_FIGHTER(gobj)->fv.lk.x4;
+    return GET_FIGHTER(gobj)->u.lk.x4;
 }

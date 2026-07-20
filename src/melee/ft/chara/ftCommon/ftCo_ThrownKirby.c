@@ -66,12 +66,12 @@ FighterKind ftCo_800BD9E0(Fighter_GObj* gobj, Fighter_GObj* victim_gobj)
     FighterKind victim_kind = victim_fp->kind;
     if (victim_kind == FTKIND_KIRBY) {
         ftCo_800BDA50(victim_gobj);
-        return victim_fp->fv.kb.hat.kind;
+        return victim_fp->u.kb.hat.kind;
     }
     if ((unsigned) (victim_kind - FTKIND_BOY) <= 1 ||
         victim_kind == FTKIND_SANDBAG)
     {
-        return fp->fv.kb.hat.kind;
+        return fp->u.kb.hat.kind;
     }
     if (victim_kind == FTKIND_NANA) {
         victim_kind = FTKIND_POPO;
@@ -82,7 +82,7 @@ FighterKind ftCo_800BD9E0(Fighter_GObj* gobj, Fighter_GObj* victim_gobj)
 void ftCo_800BDA50(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.kb.hat.kind != FTKIND_KIRBY) {
+    if (fp->u.kb.hat.kind != FTKIND_KIRBY) {
         /// @todo Which @c mv is this?
         fp->mv.co.thrownkirby.x18_b1 = true;
     }
@@ -296,11 +296,11 @@ void ftCo_800BE494(Fighter_GObj* gobj)
             fp->self_vel.x = self_vel.x * (fp->self_vel.x < 0 ? -1 : +1);
         }
     } else if (fp->kind == FTKIND_KIRBY && fp->mv.co.thrownkirby.x18_b1 &&
-               !fp->fv.kb.hat.x8_b0)
+               !fp->u.kb.hat.x8_b0)
     {
-        ftKb_SpecialN_800F190C(gobj, fp->fv.kb.hat.kind);
-        ftKb_SpecialN_800EEEC4(gobj, fp->fv.kb.hat.kind);
-        fp->fv.kb.hat.kind = FTKIND_KIRBY;
+        ftKb_SpecialN_800F190C(gobj, fp->u.kb.hat.kind);
+        ftKb_SpecialN_800EEEC4(gobj, fp->u.kb.hat.kind);
+        fp->u.kb.hat.kind = FTKIND_KIRBY;
     }
     fp->mv.co.thrownkirby.x10 = ftKb_SpecialN_800F5A98();
     ftCommon_InitGrab(fp, 0, fp->mv.co.thrownkirby.x10);

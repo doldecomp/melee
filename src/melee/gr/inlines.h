@@ -62,10 +62,10 @@ static inline void Ground_InitTargetStage(HSD_GObj* (*create_gobj)(int) )
 
 static inline void Ground_ClearStarFoxArwingGObjs(Ground* gp)
 {
-    gp->gv.starfox.article_gobjs[3] = NULL;
-    gp->gv.starfox.article_gobjs[2] = NULL;
-    gp->gv.starfox.article_gobjs[1] = NULL;
-    gp->gv.starfox.article_gobjs[0] = NULL;
+    gp->u.starfox.article_gobjs[3] = NULL;
+    gp->u.starfox.article_gobjs[2] = NULL;
+    gp->u.starfox.article_gobjs[1] = NULL;
+    gp->u.starfox.article_gobjs[0] = NULL;
 }
 
 static inline void Ground_AnimateStarFoxArwing(Ground_GObj* gobj)
@@ -83,27 +83,27 @@ static inline void Ground_AnimateStarFoxArwingWithBackground(Ground_GObj* gobj)
 
 static inline void Ground_LinkStarFoxArwing(Ground* gp, HSD_GObj* linked_gobj)
 {
-    gp->gv.starfox.linked_gobj = linked_gobj;
+    gp->u.starfox.linked_gobj = linked_gobj;
     if (linked_gobj != NULL) {
-        Ground* linked_gp = GET_GROUND(gp->gv.starfox.linked_gobj);
+        Ground* linked_gp = GET_GROUND(gp->u.starfox.linked_gobj);
         if (linked_gp != NULL) {
-            linked_gp->gv.starfox.arwing_slot = gp->gv.starfox.arwing_slot;
+            linked_gp->u.starfox.arwing_slot = gp->u.starfox.arwing_slot;
         }
     }
 }
 
 static inline void Ground_DisableStarFoxArwingGObjs(Ground* gp)
 {
-    gp->gv.starfox.article_gobjs[0] = (HSD_GObj*) -1;
-    gp->gv.starfox.article_gobjs[1] = (HSD_GObj*) -1;
+    gp->u.starfox.article_gobjs[0] = (HSD_GObj*) -1;
+    gp->u.starfox.article_gobjs[1] = (HSD_GObj*) -1;
 }
 
 static inline void Ground_ResetStarFoxArwingState(Ground* gp)
 {
-    gp->gv.starfox.xC4.flags.b0 = false;
-    gp->gv.starfox.xD4 = 0;
-    gp->gv.starfox.xF0 = 0;
-    gp->gv.starfox.xF4 = 0;
+    gp->u.starfox.xC4.flags.b0 = false;
+    gp->u.starfox.xD4 = 0;
+    gp->u.starfox.xF0 = 0;
+    gp->u.starfox.xF4 = 0;
 }
 
 static inline void Ground_AttachStarFoxArwingModel(Ground_GObj* gobj,
@@ -113,23 +113,23 @@ static inline void Ground_AttachStarFoxArwingModel(Ground_GObj* gobj,
 {
     lb_8000C2F8(Ground_801C3FA4(gobj, 0),
                 Ground_801C3FA4(arwing_gobj, joint_id));
-    gp->gv.starfox.linked_gobj = NULL;
+    gp->u.starfox.linked_gobj = NULL;
 }
 
 static inline void Ground_UpdateStarFoxArwingVisibility(Ground* gp,
                                                         HSD_JObj* jobj,
                                                         f32 depth_limit)
 {
-    f32 angle = ABS(gp->gv.arwing.xE0.z);
+    f32 angle = ABS(gp->u.arwing.xE0.z);
     if (angle < depth_limit) {
-        gp->gv.arwing.xE0.z = 0.0F;
-        while (gp->gv.arwing.xDC < -M_PI) {
-            gp->gv.arwing.xDC += M_TAU;
+        gp->u.arwing.xE0.z = 0.0F;
+        while (gp->u.arwing.xDC < -M_PI) {
+            gp->u.arwing.xDC += M_TAU;
         }
-        while (gp->gv.arwing.xDC > M_PI) {
-            gp->gv.arwing.xDC -= M_TAU;
+        while (gp->u.arwing.xDC > M_PI) {
+            gp->u.arwing.xDC -= M_TAU;
         }
-        if (ABS(gp->gv.arwing.xDC) < 1.0471976F) {
+        if (ABS(gp->u.arwing.xDC) < 1.0471976F) {
             HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         } else {
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
@@ -137,7 +137,7 @@ static inline void Ground_UpdateStarFoxArwingVisibility(Ground* gp,
     } else {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     }
-    HSD_JObjSetTranslate(jobj, &gp->gv.arwing.xE0);
+    HSD_JObjSetTranslate(jobj, &gp->u.arwing.xE0);
 }
 
 static inline void
@@ -149,18 +149,18 @@ Ground_UpdateStarFoxSequence(Ground_GObj* gobj, Ground* gp,
     un_802FF570();
 
     if (Ground_801C2BA4(sequence_gobj_id) == NULL) {
-        if (grCorneria_801E2598(gp->gv.starfox.xC4.word,
-                                gp->gv.starfox.arwing_slot))
+        if (grCorneria_801E2598(gp->u.starfox.xC4.word,
+                                gp->u.starfox.arwing_slot))
         {
-            if ((s32) gp->gv.starfox.xCC-- < 0) {
+            if ((s32) gp->u.starfox.xCC-- < 0) {
                 Ground_GObj* sequence_gobj = create_gobj(sequence_gobj_id);
                 grCorneria_801E2738(
-                    sequence_gobj, &GET_GROUND(sequence_gobj)->gv,
-                    gp->gv.starfox.xC4.word, gp->gv.starfox.arwing_slot);
-                gp->gv.starfox.arwing_slot++;
-                gp->gv.starfox.xCC = 0;
+                    sequence_gobj, &GET_GROUND(sequence_gobj)->u,
+                    gp->u.starfox.xC4.word, gp->u.starfox.arwing_slot);
+                gp->u.starfox.arwing_slot++;
+                gp->u.starfox.xCC = 0;
             }
-        } else if ((s32) gp->gv.starfox.xCC-- < 0) {
+        } else if ((s32) gp->u.starfox.xCC-- < 0) {
             Ground_801C4A08(gobj);
         }
     }

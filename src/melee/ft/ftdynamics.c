@@ -106,7 +106,7 @@ static inline void ftCo_SetupKirbyHatBone(Fighter* fp, KirbyHatStruct* hat,
 {
     BoneDynamicsDesc* article =
         &hat->hat_dynamics[dyn_idx]->ftDynamicBones->array[i];
-    HSD_JObj* cur = fp->fv.kb.hat.jobj;
+    HSD_JObj* cur = fp->u.kb.hat.jobj;
     ssize_t j;
     for (j = 0; j < (signed) article->bone_id; j++) {
         if (cur->child != NULL) {
@@ -310,7 +310,7 @@ void ftCo_8009DC54(Fighter* fp)
         ssize_t dyn_idx = 0;
         i = 0;
         do {
-            HSD_JObj* cur = fp->fv.kb.hat.jobj;
+            HSD_JObj* cur = fp->u.kb.hat.jobj;
             ftDynamics* dynamics = data->x2C;
             ArticleDynamicBones* bones = dynamics->ftDynamicBones;
             ssize_t j;
