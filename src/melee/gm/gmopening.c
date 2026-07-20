@@ -6,10 +6,11 @@
 #include "dolphin/pad.h"
 
 #include <stdio.h>
+#include <sysdolphin/baselib/debugconsole_main.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/particle.h>
+#include <sysdolphin/baselib/hsd_3915.h>
 #include <sysdolphin/baselib/sobjlib.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lbaudio_ax.h>

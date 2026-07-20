@@ -13,7 +13,8 @@
 /// its #GameScene::idx during scene graph traversal. The scene graph is walked
 /// comparing each entry's @c idx against #GameRouting::curr_scene_idx, and
 /// #nextScene advances to the next scene whose @c idx is greater than the
-/// current one. An @c idx value of @c 0xFF terminates a collection of GameScene.
+/// current one. An @c idx value of @c 0xFF terminates a collection of
+/// GameScene.
 
 /// @var GameScene::idx
 /// Scene graph index searched against #GameRouting::curr_scene_idx during
@@ -23,7 +24,7 @@
 
 /// @var GameScene::GameSceneInfo::class_id
 /// The #GameSceneKind associated with this scene. This is the value matched by
-/// #gm_FindGameSceneHandler to look up the corresponding #GameSceneHandler supplying the
-/// #GameSceneHandler::OnLoad, #GameSceneHandler::OnLeave, and
+/// #gm_FindGameSceneHandler to look up the corresponding #GameSceneHandler
+/// supplying the #GameSceneHandler::OnLoad, #GameSceneHandler::OnLeave, and
 /// #GameSceneHandler::OnFrame callbacks invoked for this scene. Not to be
 /// confused with #GameScene::idx, which is the scene graph traversal index.

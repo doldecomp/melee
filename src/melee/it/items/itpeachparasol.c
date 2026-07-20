@@ -46,9 +46,7 @@ Item_GObj* it_802BDA64(HSD_GObj* parent, Vec3* pos, Fighter_Part arg2, f32 dir)
     Item_InitSpawn(&spawn, parent, pos, dir);
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
-        Item_8026AB54(item_gobj, parent, arg2);
-        db_80225DD8(item_gobj, parent);
-        return item_gobj;
+        return Item_AttachToParent(item_gobj, parent, arg2);
     }
     return NULL;
 }

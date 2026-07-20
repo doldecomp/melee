@@ -5,6 +5,7 @@
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/types.h"
+#include "MSL/math.h"
 
 #include <baselib/forward.h>
 
@@ -52,6 +53,27 @@ static inline void Ground_InitTargetStage(HSD_GObj* (*create_gobj)(int) )
     Ground_801C3BB4();
     Ground_801C4210();
     Ground_801C42AC();
+}
+
+static inline void Ground_ClampSymmetric(f32 value, f32 limit, f32* out)
+{
+    if (value > limit) {
+        *out = limit;
+    } else {
+        limit = -limit;
+        if (value < limit) {
+            *out = limit;
+        }
+    }
+}
+
+static inline void Ground_WrapAngle(f32* angle)
+{
+    if (*angle > M_TAU) {
+        *angle -= M_TAU;
+    } else if (*angle < -M_TAU) {
+        *angle += M_TAU;
+    }
 }
 
 #define ZRANDI(n) ((n) != 0 ? HSD_Randi(n) : 0)

@@ -235,42 +235,27 @@ bool grOldKongo_8020F880(Ground_GObj* gobj)
     return false;
 }
 
-#define DegToRad(a) ((a) * 0.017453292F)
-#define M_TAU 6.283185307179586
-
-static inline void grOldKongo_8020F888_inline(Ground* gp, f32 vel, bool sign)
+static inline void grOldKongo_8020F888_inline(Ground* gp)
 {
-    f32 step = DegToRad(grOk_804D6A90->rspeed_barrel_rot_accel);
-    bool compare = sign ? (vel < step) : (vel > -step);
+    f32 vel = gp->gv.oldkongo.xE4;
 
-    if (compare) {
-        gp->gv.oldkongo.xE4 = 0.0f;
-        gp->gv.oldkongo.xDC = gp->gv.oldkongo.xD8;
-    } else {
-        gp->gv.oldkongo.xE4 = vel - (sign ? step : -step);
-    }
-}
-
-static inline void grOldKongo_8020F888_clamp(f32 a, f32 b, f32* out)
-{
-    if (a > b) {
-        *out = b;
-    } else {
-        b = -b;
-        if (a < b) {
-            *out = b;
+    if (vel > 0.0f) {
+        if (vel < grOk_804D6A90->rspeed_barrel_rot_accel * deg_to_rad) {
+            gp->gv.oldkongo.xE4 = 0.0f;
+            gp->gv.oldkongo.xDC = gp->gv.oldkongo.xD8;
+        } else {
+            gp->gv.oldkongo.xE4 =
+                vel - grOk_804D6A90->rspeed_barrel_rot_accel * deg_to_rad;
+        }
+    } else if (vel < 0.0f) {
+        if (vel > -(grOk_804D6A90->rspeed_barrel_rot_accel * deg_to_rad)) {
+            gp->gv.oldkongo.xE4 = 0.0f;
+            gp->gv.oldkongo.xDC = gp->gv.oldkongo.xD8;
+        } else {
+            gp->gv.oldkongo.xE4 =
+                vel + grOk_804D6A90->rspeed_barrel_rot_accel * deg_to_rad;
         }
     }
-}
-
-static inline f32 grOldKongo_8020F888_tau_range(f32 a)
-{
-    if (a > (f32) M_TAU) {
-        return (f64) a - M_TAU;
-    } else if (a < (f32) -M_TAU) {
-        return (f64) a + M_TAU;
-    }
-    return 0.0f;
 }
 
 void grOldKongo_8020F888(Ground_GObj* gobj)
@@ -293,7 +278,7 @@ void grOldKongo_8020F888(Ground_GObj* gobj)
         angle_limit =
             0.5f * (gp->gv.oldkongo.xE4 *
                     (gp->gv.oldkongo.xE4 /
-                     DegToRad(grOk_804D6A90->rspeed_barrel_rot_accel)));
+                     (grOk_804D6A90->rspeed_barrel_rot_accel * deg_to_rad)));
         if (gp->gv.oldkongo.xE4 > 0.0f) {
             angle_delta = gp->gv.oldkongo.xD8 - gp->gv.oldkongo.xDC;
         } else if (gp->gv.oldkongo.xE4 < 0.0f) {
@@ -317,34 +302,15 @@ void grOldKongo_8020F888(Ground_GObj* gobj)
         }
         break;
     case 0:
-        if (gp->gv.oldkongo.xE4 > 0.0f) {
-            if (gp->gv.oldkongo.xE4 <
-                DegToRad(grOk_804D6A90->rspeed_barrel_rot_accel))
-            {
-                gp->gv.oldkongo.xE4 = 0.0f;
-                gp->gv.oldkongo.xDC = gp->gv.oldkongo.xD8;
-            } else {
-                gp->gv.oldkongo.xE4 -=
-                    DegToRad(grOk_804D6A90->rspeed_barrel_rot_accel);
-            }
-        } else if (gp->gv.oldkongo.xE4 < 0.0f) {
-            if (gp->gv.oldkongo.xE4 >
-                -DegToRad(grOk_804D6A90->rspeed_barrel_rot_accel))
-            {
-                gp->gv.oldkongo.xE4 = 0.0f;
-                gp->gv.oldkongo.xDC = gp->gv.oldkongo.xD8;
-            } else {
-                gp->gv.oldkongo.xE4 +=
-                    DegToRad(grOk_804D6A90->rspeed_barrel_rot_accel);
-            }
-        }
+        grOldKongo_8020F888_inline(gp);
         gp->gv.oldkongo.xCC -= 1;
         if (gp->gv.oldkongo.xCC < 0) {
             gp->gv.oldkongo.xC4 = 1;
             if (HSD_Randi(2) != 0) {
-                x_speed = DegToRad(grOk_804D6A90->rspeed_barrel_rot_accel);
+                x_speed = grOk_804D6A90->rspeed_barrel_rot_accel * deg_to_rad;
             } else {
-                x_speed = -DegToRad(grOk_804D6A90->rspeed_barrel_rot_accel);
+                x_speed =
+                    -(grOk_804D6A90->rspeed_barrel_rot_accel * deg_to_rad);
             }
             gp->gv.oldkongo.xE0 = x_speed;
             gp->gv.oldkongo.xCC =
@@ -354,19 +320,10 @@ void grOldKongo_8020F888(Ground_GObj* gobj)
         break;
     case 1:
         gp->gv.oldkongo.xE4 += gp->gv.oldkongo.xE0;
-        if (gp->gv.oldkongo.xE4 >
-            DegToRad(grOk_804D6A90->rspeed_barrel_rot_max))
-        {
-            gp->gv.oldkongo.xE4 =
-                DegToRad(grOk_804D6A90->rspeed_barrel_rot_max);
-        } else {
-            if (gp->gv.oldkongo.xE4 <
-                -DegToRad(grOk_804D6A90->rspeed_barrel_rot_max))
-            {
-                gp->gv.oldkongo.xE4 =
-                    -DegToRad(grOk_804D6A90->rspeed_barrel_rot_max);
-            }
-        }
+        Ground_ClampSymmetric(gp->gv.oldkongo.xE4,
+                              grOk_804D6A90->rspeed_barrel_rot_max *
+                                  deg_to_rad,
+                              &gp->gv.oldkongo.xE4);
         if (gp->gv.oldkongo.xCC-- < 0) {
             gp->gv.oldkongo.xC4 = 2;
             gp->gv.oldkongo.xCC =
@@ -378,11 +335,7 @@ void grOldKongo_8020F888(Ground_GObj* gobj)
     }
 
     gp->gv.oldkongo.xDC += gp->gv.oldkongo.xE4;
-    if (gp->gv.oldkongo.xDC > M_TAU) {
-        gp->gv.oldkongo.xDC -= M_TAU;
-    } else if (gp->gv.oldkongo.xDC < -M_TAU) {
-        gp->gv.oldkongo.xDC += M_TAU;
-    }
+    Ground_WrapAngle(&gp->gv.oldkongo.xDC);
     HSD_JObjSetRotationZ(jobj, gp->gv.oldkongo.xDC);
     lb_8000B1CC(jobj, NULL, &sp3C);
     Ground_801C4D70(gobj, &sp3C, gp->gv.oldkongo.xDC);

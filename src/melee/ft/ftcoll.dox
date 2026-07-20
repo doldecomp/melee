@@ -1,16 +1,17 @@
 #ifndef _ftcoll_h_
 #define _ftcoll_h_
 
+#include <placeholder.h>
 #include <platform.h>
+
+#include "ft/fighter.h"
+
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
-#include "ft/fighter.h"
-
 #include <common_structs.h>
-#include <placeholder.h>
 #include <dolphin/mtx.h>
 #include <baselib/gobjproc.h>
 
@@ -71,8 +72,7 @@ void ftColl_CreateReflectHit(Fighter_GObj*, ReflectDesc*,
                              HSD_GObjEvent on_reflect);
 void ftColl_CreateAbsorbHit(Fighter_GObj*, AbsorbDesc*);
 void ftColl_8007AF10(Fighter_GObj*);
-void ftColl_HurtboxInit(Fighter* fp, HurtCapsule* arg1,
-                     ftHurtboxInit* arg2);
+void ftColl_HurtboxInit(Fighter* fp, HurtCapsule* arg1, ftHurtboxInit* arg2);
 void ftColl_8007B7FC(Fighter*, int);
 bool ftColl_80076640(Fighter*, float*);
 void ftColl_80076764(int arg0, enum_t arg1, enum_t arg2, UNK_T arg3,
