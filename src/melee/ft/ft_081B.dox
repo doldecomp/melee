@@ -18,7 +18,7 @@
 Fighter_GObj* ft_80082E3C(Fighter_GObj* gobj);
 float ft_GetGroundFrictionMultiplier(Fighter* fp);
 bool ft_8008239C(Fighter_GObj* gobj, s32 facing_direction,
-                 float* height_attributes);
+                 ftCollisionBox* height_attributes);
 void ft_80084FA8(Fighter_GObj* gobj);
 void ft_80084EEC(Fighter_GObj* gobj);
 bool ft_800827A0(Fighter_GObj* gobj);
