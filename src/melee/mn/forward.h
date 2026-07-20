@@ -1,6 +1,16 @@
 #ifndef MELEE_MN_FORWARD_H
 #define MELEE_MN_FORWARD_H
 
+#ifdef M2C
+typedef struct MenuInfo_GObj MenuInfo_GObj;
+typedef struct Soundtest_GObj Soundtest_GObj;
+#else
+typedef struct HSD_GObj MenuInfo_GObj;
+typedef struct HSD_GObj Soundtest_GObj;
+#endif
+
+typedef struct MnInfoData MnInfoData;
+typedef struct Menu Menu;
 typedef struct AnimLoopSettings AnimLoopSettings;
 typedef struct CountEntry CountEntry;
 typedef struct Diagram Diagram;

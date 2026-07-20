@@ -2,6 +2,7 @@
 
 #include "placeholder.h"
 
+#include "baselib/gobjuserdata.h"
 #include "gm/gm_1601.h"
 #include "gm/gmmain_lib.h"
 #include "gm/types.h"
