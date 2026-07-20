@@ -345,6 +345,8 @@ static inline u32 grCn_PickUniqueType(s32 slot, int range, int base)
     return rand_id;
 }
 
+/// @todo The frame is 0x18 too large and the type walker rebases onto the
+///       arwing_gobj pointer.
 void grCorneria_801DCE1C(void)
 {
     Vec3 pos;
@@ -393,9 +395,10 @@ void grCorneria_801DCE1C(void)
             }
         } else {
             {
+                HSD_GObj** gobjs = &grCn_803E1D68.arwing_gobj[0];
                 int count = 0;
                 for (count = 0; count < 3; count++) {
-                    if (grCn_803E1D68.arwing_gobj[count] == NULL) {
+                    if (gobjs[count] == NULL) {
                         break;
                     }
                 }
@@ -407,21 +410,20 @@ void grCorneria_801DCE1C(void)
                         int i;
 
                         for (i = 0; i < 3; i++) {
-                            if (i == count) {
-                                continue;
-                            }
-                            switch (grCn_803E1D68.arwing_type[i]) {
-                            case 1:
-                            case 2:
-                            case 3:
-                            case 4:
-                            case 5:
-                            case 6:
-                            case 7:
-                            case 8:
-                            case 9:
-                                if (grCn_803E1D68.arwing_gobj[i] != NULL) {
-                                    has_near = true;
+                            if (i != count) {
+                                switch (grCn_803E1D68.arwing_type[i]) {
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                    if (gobjs[i] != NULL) {
+                                        has_near = true;
+                                    }
                                 }
                             }
                         }
@@ -1695,6 +1697,8 @@ void grCorneria_801E01A8(Ground_GObj* gobj)
 
 void grCorneria_801E03C4(Ground_GObj* arg) {}
 
+/// @todo Only the repeated matrix-dirty check temporaries differ by one
+///       register.
 void grCorneria_801E03C8(Ground_GObj* gobj, int id)
 {
     Ground* gp;
@@ -2518,6 +2522,7 @@ s32 grCorneria_801E2598(u32 arg0, u32 arg1)
     return val != 0;
 }
 
+/// @todo Only differs by a callee-saved register permutation.
 void grCorneria_801E25C4(HSD_GObj* gobj, void* gv, int line, int arg3,
                          int arg4)
 {
@@ -2806,11 +2811,9 @@ DynamicsDesc* grCorneria_801E2EE4(enum_t arg)
     return NULL;
 }
 
-/// These are distinct symbols in the DOL. Volatile reads below prevent MWCC
-/// from folding them back into anonymous literals in a different order.
-const f32 grCn_804DB260 = 107.0f;
-const f32 grCn_804DB264 = 106.0f;
-const f32 grCn_804DB268 = -3.4028235e38f;
+extern const f32 grCn_804DB260;
+extern const f32 grCn_804DB264;
+extern const f32 grCn_804DB268;
 
 bool grCorneria_801E2EEC(Vec3* v, int arg1, HSD_JObj* jobj)
 {
@@ -2825,17 +2828,11 @@ bool grCorneria_801E2EEC(Vec3* v, int arg1, HSD_JObj* jobj)
     if (temp_r3 != NULL) {
         temp_r3_2 = temp_r3->user_data;
         if (temp_r3_2 != NULL && temp_r3_2->gv.corneria.x12C == jobj) {
-            temp_f31 =
-                *(volatile const f32*) &grCn_804DB264 * Ground_801C0498();
-            temp_f31_2 =
-                ((v->y - sp14.y) *
-                 ((*(volatile const f32*) &grCn_804DB260 * Ground_801C0498()) /
-                  temp_f31)) +
-                sp14.x;
-            if (v->x >
-                -((*(volatile const f32*) &grCn_804DB260 * Ground_801C0498()) -
-                  temp_f31_2))
-            {
+            temp_f31 = grCn_804DB264 * Ground_801C0498();
+            temp_f31_2 = ((v->y - sp14.y) *
+                          ((grCn_804DB260 * Ground_801C0498()) / temp_f31)) +
+                         sp14.x;
+            if (v->x > -((grCn_804DB260 * Ground_801C0498()) - temp_f31_2)) {
                 return false;
             }
         }
@@ -2858,5 +2855,11 @@ f32 grCorneria_801E2FCC(void)
             return (Ground_801C0498() * -35.0f - gp->gv.corneria.xD0) + 5.0f;
         }
     }
-    return *(volatile const f32*) &grCn_804DB268;
+    return grCn_804DB268;
 }
+
+/// Defined after all readers so MWCC loads the named symbols instead of
+/// folding the values back into the literal pool.
+const f32 grCn_804DB260 = 107.0f;
+const f32 grCn_804DB264 = 106.0f;
+const f32 grCn_804DB268 = -3.4028235e38f;
