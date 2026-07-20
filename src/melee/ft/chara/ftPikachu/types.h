@@ -4,6 +4,9 @@
 #include <platform.h>
 
 #include "ft/forward.h"
+
+#include "ftCommon/types.h"
+
 #include "it/forward.h"
 
 #include <dolphin/mtx.h>
@@ -71,7 +74,7 @@ typedef struct _ftPikachuAttributes {
     s32 xD8;
     u32 xDC;
 
-    float height_attributes[6];
+    ftCollisionBox height_attributes;
 } ftPikachuAttributes;
 
 union ftPikachu_MotionVars {
