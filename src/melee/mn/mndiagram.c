@@ -3,6 +3,19 @@
 #include "gm/gm_1A36.h"
 #include "mn/types.h"
 #define MNDIAGRAM_SOURCE
+
+#include "baselib/debug.h"
+extern char mnDiagram_804D4FA8[];
+extern char mnDiagram_804D4FB0[];
+#undef HSD_ASSERT
+#define HSD_ASSERT(line, cond)                                                \
+    ((cond) ? ((void) 0)                                                      \
+            : __assert(mnDiagram_804D4FA8, line, mnDiagram_804D4FB0))
+#include "baselib/jobj.h"
+#undef HSD_ASSERT
+#define HSD_ASSERT(line, cond)                                                \
+    ((cond) ? ((void) 0) : __assert(__FILE__, line, #cond))
+
 #include "mndiagram.static.h"
 #include "mndiagram2.static.h"
 
@@ -126,6 +139,9 @@ typedef struct mnDiagram_AnimTable {
 #define GET_DIAGRAM_ANIM_TABLE() ((mnDiagram_AnimTable*) &mnDiagram_803EE728)
 
 static s32 mnDiagram_PopupTextColor = 0xFF;
+
+SDATA char mnDiagram_804D4FA8[] = "jobj.h";
+SDATA char mnDiagram_804D4FB0[] = "jobj";
 
 /// @brief Gets the fighter ID at the given sorted index.
 /// @param idx Index into the sorted fighter list
