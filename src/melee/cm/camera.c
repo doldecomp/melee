@@ -2564,28 +2564,58 @@ void Camera_8002D85C(void* unused)
     update_avg_bounds_width();
 }
 
-void Camera_8002DDC4(void* arg0)
+static inline void set_bounds_z(CameraBounds* bounds, Vec3* interest,
+                                Vec3* position)
+{
+    Vec3 diff;
+
+    lbVector_Diff(interest, position, &diff);
+    bounds->z_pos =
+        sqrtf__Ff((diff.z * diff.z) + ((diff.x * diff.x) + (diff.y * diff.y)));
+}
+
+static inline void
+smooth_fixed_camera_interest(CameraTransformState* transform_copy, Camera* cam,
+                             CameraUnkGlobals* globals)
+{
+    f32 dx, dy, dz;
+
+    Stage_80224CAC(&transform_copy->target_interest);
+    dx =
+        cam->transform_copy.target_interest.x - cam->transform_copy.interest.x;
+    dy =
+        cam->transform_copy.target_interest.y - cam->transform_copy.interest.y;
+    dz =
+        cam->transform_copy.target_interest.z - cam->transform_copy.interest.z;
+    cam->transform_copy.interest.x += dx * globals->x74;
+    cam->transform_copy.interest.y += dy * globals->x74;
+    cam->transform_copy.interest.z += dz * globals->x74;
+}
+
+void Camera_8002DDC4(void* unused)
 {
     CameraBounds bounds;
-    Vec3 spC;
-    Vec3* tgt_interest;
+    Vec3* target_interest;
     CameraTransformState* transform;
     Camera* cam;
-    Vec3* tgt_position;
+    Vec3* target_position;
     CameraTransformState* transform_copy;
     CameraUnkGlobals* globals;
+    UNUSED u8 _pad[4];
     f32 smooth;
+    UNUSED u8 _pad1[4];
+    f32 dx, dy, dz;
 
+    /// @todo there is a clear pattern inside here
+    // smooth_fixed_camera_interest is most likely fake but its definitely similar
     cam = &cm_80452C68;
     Camera_80030DF8();
     transform = &cam->transform;
-    tgt_interest = &transform->target_interest;
-    Stage_80224CAC(tgt_interest);
+    target_interest = &transform->target_interest;
+    Stage_80224CAC(target_interest);
     globals = &cm_803BCCA0;
     transform_copy = &cam->transform_copy;
     {
-        f32 dx, dy, dz;
-
         dx = cam->transform.target_interest.x - cam->transform.interest.x;
         smooth = globals->x74;
         dy = cam->transform.target_interest.y - cam->transform.interest.y;
@@ -2594,24 +2624,7 @@ void Camera_8002DDC4(void* arg0)
         cam->transform.interest.y = dy * smooth + cam->transform.interest.y;
         cam->transform.interest.z = dz * smooth + cam->transform.interest.z;
     }
-    Stage_80224CAC(&transform_copy->target_interest);
-    {
-        f32 dx, dy, dz;
-
-        smooth = globals->x74;
-        dx = cam->transform_copy.target_interest.x -
-             cam->transform_copy.interest.x;
-        dy = cam->transform_copy.target_interest.y -
-             cam->transform_copy.interest.y;
-        dz = cam->transform_copy.target_interest.z -
-             cam->transform_copy.interest.z;
-        cam->transform_copy.interest.x =
-            dx * smooth + cam->transform_copy.interest.x;
-        cam->transform_copy.interest.y =
-            dy * smooth + cam->transform_copy.interest.y;
-        cam->transform_copy.interest.z =
-            dz * smooth + cam->transform_copy.interest.z;
-    }
+    smooth_fixed_camera_interest(transform_copy, cam, globals);
     cam->transform.target_fov = Stage_GetCamFixedFov();
     {
         f32 delta;
@@ -2620,18 +2633,15 @@ void Camera_8002DDC4(void* arg0)
         cam->transform.fov += delta * globals->x7C;
     }
     cam->transform_copy.target_fov = Stage_GetCamFixedFov();
-    tgt_position = &transform->target_position;
+    target_position = &transform->target_position;
     {
         f32 delta;
 
         delta = cam->transform_copy.target_fov - cam->transform_copy.fov;
-        cam->transform_copy.fov =
-            delta * globals->x7C + cam->transform_copy.fov;
+        cam->transform_copy.fov += delta * globals->x7C;
     }
-    Stage_SetVecToFixedCamPos(tgt_position);
+    Stage_SetVecToFixedCamPos(target_position);
     {
-        f32 dx, dy, dz;
-
         dx = cam->transform.target_position.x - cam->transform.position.x;
         smooth = globals->x78;
         dy = cam->transform.target_position.y - cam->transform.position.y;
@@ -2642,8 +2652,6 @@ void Camera_8002DDC4(void* arg0)
     }
     Stage_SetVecToFixedCamPos(&transform_copy->target_position);
     {
-        f32 dx, dy, dz;
-
         smooth = globals->x78;
         dx = cam->transform_copy.target_position.x -
              cam->transform_copy.position.x;
@@ -2658,11 +2666,9 @@ void Camera_8002DDC4(void* arg0)
         cam->transform_copy.position.z =
             dz * smooth + cam->transform_copy.position.z;
     }
-    lbVector_Diff(tgt_interest, tgt_position, &spC);
-    bounds.z_pos =
-        sqrtf__Ff((spC.z * spC.z) + ((spC.x * spC.x) + (spC.y * spC.y)));
+    set_bounds_z(&bounds, target_interest, target_position);
     Camera_8002A28C(&bounds);
-    Camera_8002A0C0(&bounds, transform);
+    Camera_8002A0C0(&bounds, &cam->transform);
 }
 
 s32 Camera_8002DFE4(Vec3* arg0, Vec3* interest,
