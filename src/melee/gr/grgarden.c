@@ -219,11 +219,11 @@ void grGarden_80203004(Ground_GObj* gobj)
 {
     int iVar1;
     Ground* gp = GET_GROUND(gobj);
-    gp->gv.garden.xc4 = 0;
+    gp->u.garden.xc4 = 0;
     iVar1 = grGd_804D6A28->x8;
     iVar1 = (iVar1 != 0) ? HSD_Randi(iVar1) : 0;
-    gp->gv.garden.xc8 = iVar1 + 1;
-    grAnime_801C8138(gobj, gp->map_id, gp->gv.garden.xc4);
+    gp->u.garden.xc8 = iVar1 + 1;
+    grAnime_801C8138(gobj, gp->map_id, gp->u.garden.xc4);
     gp->x8_callback = NULL;
     gp->xC_callback = NULL;
     gp->x11_flags.b012 = 1;
@@ -241,29 +241,29 @@ void grGarden_80203098(Ground_GObj* gobj)
     if ((grAnime_801C83D0(gobj, 0, 7) != NULL) ||
         (grAnime_801C84A4(gobj, 0, 7) != NULL))
     {
-        if (gp->gv.garden.xc8 == 0) {
-            gp->gv.garden.xc4 = gp->gv.garden.xc4 + 1;
-            if (3 < gp->gv.garden.xc4) {
-                gp->gv.garden.xc4 = 0;
+        if (gp->u.garden.xc8 == 0) {
+            gp->u.garden.xc4 = gp->u.garden.xc4 + 1;
+            if (3 < gp->u.garden.xc4) {
+                gp->u.garden.xc4 = 0;
             }
-            if (gp->gv.garden.xc4 == 0) {
+            if (gp->u.garden.xc4 == 0) {
                 if (grGd_804D6A28->x8 != 0) {
                     iVar1 = HSD_Randi(grGd_804D6A28->x8);
                 } else {
                     iVar1 = 0;
                 }
-                gp->gv.garden.xc8 = iVar1 + 1;
-            } else if (gp->gv.garden.xc4 == 2) {
+                gp->u.garden.xc8 = iVar1 + 1;
+            } else if (gp->u.garden.xc4 == 2) {
                 if (grGd_804D6A28->xC != 0) {
                     iVar1 = HSD_Randi(grGd_804D6A28->xC);
                 } else {
                     iVar1 = 0;
                 }
-                gp->gv.garden.xc8 = iVar1 + 1;
+                gp->u.garden.xc8 = iVar1 + 1;
             }
-            grAnime_801C8138(gobj, gp->map_id, gp->gv.garden.xc4);
+            grAnime_801C8138(gobj, gp->map_id, gp->u.garden.xc4);
         } else {
-            gp->gv.garden.xc8 = gp->gv.garden.xc8 - 1;
+            gp->u.garden.xc8 = gp->u.garden.xc8 - 1;
         }
     }
 }
@@ -274,15 +274,15 @@ void grGarden_802031A4(Ground_GObj* gobj)
 {
     int iVar1;
     Ground* gp = GET_GROUND(gobj);
-    gp->gv.garden2.xc4 = grMaterial_801C8CFC(
-        0, 0, gp, Ground_801C3FA4(gobj, 8), grGarden_80203498, 0, 0);
+    gp->u.garden2.xc4 = grMaterial_801C8CFC(0, 0, gp, Ground_801C3FA4(gobj, 8),
+                                            grGarden_80203498, 0, 0);
     if (grGd_804D6A28->x14 != 0) {
         iVar1 = HSD_Randi(grGd_804D6A28->x14);
     } else {
         iVar1 = 0;
     }
-    gp->gv.garden2.xcc = grGd_804D6A28->x10 + iVar1;
-    gp->gv.garden2.xc8 = 0;
+    gp->u.garden2.xcc = grGd_804D6A28->x10 + iVar1;
+    gp->u.garden2.xc8 = 0;
     gp->x8_callback = NULL;
     gp->xC_callback = NULL;
     gp->x11_flags.b012 = 1;
@@ -310,10 +310,10 @@ void grGarden_80203250(Ground_GObj* gobj)
     Ground* gp = gobj->user_data;
     HSD_JObj* jobj = Ground_801C3FA4(gobj, 0);
 
-    switch (gp->gv.garden2.xc8) {
+    switch (gp->u.garden2.xc8) {
     case 0:
-        if (gp->gv.garden2.xcc == 0) {
-            Item_80268E5C(gp->gv.garden2.xc4, 2, 2);
+        if (gp->u.garden2.xcc == 0) {
+            Item_80268E5C(gp->u.garden2.xc4, 2, 2);
             grAnime_801C8138(gobj, gp->map_id, 0);
             dVar1 = grGd_804D6A28->x18;
             iVar1 = (grGd_804D6A28->x1C - grGd_804D6A28->x18) < 0.0f
@@ -327,31 +327,31 @@ void grGarden_80203250(Ground_GObj* gobj)
             }
             dVar1 += iVar1;
             HSD_JObjSetTranslateX(jobj, dVar1);
-            gp->gv.garden2.xcc = 0;
-            gp->gv.garden2.xc8 = 1;
+            gp->u.garden2.xcc = 0;
+            gp->u.garden2.xc8 = 1;
         } else {
-            gp->gv.garden2.xcc = gp->gv.garden2.xcc - 1;
+            gp->u.garden2.xcc = gp->u.garden2.xcc - 1;
         }
         break;
     case 1:
-        iVar4 = gp->gv.garden2.xcc;
+        iVar4 = gp->u.garden2.xcc;
         if (iVar4 == 38 || iVar4 == 148) {
             Ground_801C53EC(410001);
         } else if (iVar4 == 110 || iVar4 == 210) {
             Ground_801C53EC(410002);
         }
         if (grAnime_801C83D0(gobj, 0, 7)) {
-            Item_80268E5C(gp->gv.garden2.xc4, 0, 2);
+            Item_80268E5C(gp->u.garden2.xc4, 0, 2);
             HSD_JObjRemoveAnimAll(jobj);
             if (grGd_804D6A28->x14 != 0) {
                 iVar1 = HSD_Randi(grGd_804D6A28->x14);
             } else {
                 iVar1 = 0;
             }
-            gp->gv.garden2.xcc = grGd_804D6A28->x10 + iVar1;
-            gp->gv.garden2.xc8 = 0;
+            gp->u.garden2.xcc = grGd_804D6A28->x10 + iVar1;
+            gp->u.garden2.xc8 = 0;
         }
-        gp->gv.garden2.xcc = gp->gv.garden2.xcc + 1;
+        gp->u.garden2.xcc = gp->u.garden2.xcc + 1;
         break;
     }
 }

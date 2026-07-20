@@ -592,27 +592,27 @@ void it_802BC080(ItemLink* link, Vec3* target, Item* ip)
             ip->xDD4_itemVar.seakchain.history[last_idx - 1 - i].y;
     }
 
-    if (ABS(fp->fv.sk.lstick_delta.x) > attrs->x48) {
-        s32 sign = (fp->fv.sk.lstick_delta.x < 0.0f) ? -1 : 1;
+    if (ABS(fp->u.sk.lstick_delta.x) > attrs->x48) {
+        s32 sign = (fp->u.sk.lstick_delta.x < 0.0f) ? -1 : 1;
         if (ip->facing_dir == sign) {
             ip->xDD4_itemVar.seakchain.history[0].x =
-                fp->fv.sk.lstick_delta.x * attrs->x38;
+                fp->u.sk.lstick_delta.x * attrs->x38;
         } else {
             ip->xDD4_itemVar.seakchain.history[0].x =
-                fp->fv.sk.lstick_delta.x * attrs->x3C;
+                fp->u.sk.lstick_delta.x * attrs->x3C;
         }
     } else {
         ip->xDD4_itemVar.seakchain.history[0].x = 0.0f;
     }
 
-    if (ABS(fp->fv.sk.lstick_delta.y) > attrs->x48) {
-        s32 sign = (fp->fv.sk.lstick_delta.y < 0.0f) ? -1 : 1;
+    if (ABS(fp->u.sk.lstick_delta.y) > attrs->x48) {
+        s32 sign = (fp->u.sk.lstick_delta.y < 0.0f) ? -1 : 1;
         if (sign > 0.0f) {
             ip->xDD4_itemVar.seakchain.history[0].y =
-                fp->fv.sk.lstick_delta.y * attrs->x40;
+                fp->u.sk.lstick_delta.y * attrs->x40;
         } else {
             ip->xDD4_itemVar.seakchain.history[0].y =
-                fp->fv.sk.lstick_delta.y * attrs->x44;
+                fp->u.sk.lstick_delta.y * attrs->x44;
         }
     } else {
         ip->xDD4_itemVar.seakchain.history[0].y = 0.0f;

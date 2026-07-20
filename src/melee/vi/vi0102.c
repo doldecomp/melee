@@ -28,7 +28,6 @@
 #include <dolphin/gx.h>
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
-#include <baselib/displayfunc.h>
 #include <baselib/fog.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
@@ -38,6 +37,7 @@
 static SceneDesc* un_804D6F30;
 static GXColor erase_colors_vi0102;
 static HSD_Archive* un_804D6F38;
+u8 un_804D6F3C[8];
 
 static Vec3 initial_pos = { 0, 0, 0 };
 

@@ -19,8 +19,7 @@ void ftMh_MS_389_80150C8C(HSD_GObj* gobj)
 {
     /// @todo the @c #pragma above is preventing use of #GET_FIGHTER.
     Fighter* fp = gobj->user_data;
-    if (fp->fv.mh.x2258 == ftMh_MS_Wait1_0 ||
-        fp->fv.mh.x2258 == ftMh_MS_Wait1_2)
+    if (fp->u.mh.x2258 == ftMh_MS_Wait1_0 || fp->u.mh.x2258 == ftMh_MS_Wait1_2)
     {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_2, 0, fp->cur_anim_frame,
                                   1, 0, 0);
@@ -28,14 +27,13 @@ void ftMh_MS_389_80150C8C(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_2, 0, 0, 1, 0, 0);
         ftAnim_8006EBA4(gobj);
     }
-    fp->fv.mh.x2258 = ftMh_MS_Wait1_2;
+    fp->u.mh.x2258 = ftMh_MS_Wait1_2;
 }
 
 void ftMh_MS_389_80150D28(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->fv.mh.x2258 == ftMh_MS_Wait2_0 ||
-        fp->fv.mh.x2258 == ftMh_MS_Wait2_1)
+    if (fp->u.mh.x2258 == ftMh_MS_Wait2_0 || fp->u.mh.x2258 == ftMh_MS_Wait2_1)
     {
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_1, 0, fp->cur_anim_frame,
                                   1, 0, 0);
@@ -43,7 +41,7 @@ void ftMh_MS_389_80150D28(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_1, 0, 0, 1, 0, 0);
         ftAnim_8006EBA4(gobj);
     }
-    fp->fv.mh.x2258 = ftMh_MS_Wait2_1;
+    fp->u.mh.x2258 = ftMh_MS_Wait2_1;
 }
 #pragma pop
 
@@ -51,9 +49,9 @@ void ftMh_MS_389_80150DC4(HSD_GObj* gobj, HSD_GObjEvent cb, Vec3* pos)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     u8 _[16];
-    if (fp->fv.mh.x2258 == ftMh_MS_Wait2_0) {
-        if ((fp->fv.mh.x2258 == ftMh_MS_Wait2_0) ||
-            (fp->fv.mh.x2258 == ftMh_MS_Wait2_1))
+    if (fp->u.mh.x2258 == ftMh_MS_Wait2_0) {
+        if ((fp->u.mh.x2258 == ftMh_MS_Wait2_0) ||
+            (fp->u.mh.x2258 == ftMh_MS_Wait2_1))
         {
             Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_1, 0,
                                       fp->cur_anim_frame, 1, 0, 0);
@@ -61,10 +59,10 @@ void ftMh_MS_389_80150DC4(HSD_GObj* gobj, HSD_GObjEvent cb, Vec3* pos)
             Fighter_ChangeMotionState(gobj, ftMh_MS_Wait2_1, 0, 0, 1, 0, 0);
             ftAnim_8006EBA4(gobj);
         }
-        fp->fv.mh.x2258 = ftMh_MS_Wait2_1;
+        fp->u.mh.x2258 = ftMh_MS_Wait2_1;
     } else {
-        if (fp->fv.mh.x2258 == ftMh_MS_Wait1_0 ||
-            fp->fv.mh.x2258 == ftMh_MS_Wait1_2)
+        if (fp->u.mh.x2258 == ftMh_MS_Wait1_0 ||
+            fp->u.mh.x2258 == ftMh_MS_Wait1_2)
         {
             Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_2, 0,
                                       fp->cur_anim_frame, 1, 0, 0);
@@ -72,7 +70,7 @@ void ftMh_MS_389_80150DC4(HSD_GObj* gobj, HSD_GObjEvent cb, Vec3* pos)
             Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_2, 0, 0, 1, 0, 0);
             ftAnim_8006EBA4(gobj);
         }
-        fp->fv.mh.x2258 = ftMh_MS_Wait1_2;
+        fp->u.mh.x2258 = ftMh_MS_Wait1_2;
     }
     fp->mv.mh.unk0.x4 = cb;
     fp->mv.mh.unk0.xC = *pos;
@@ -83,7 +81,7 @@ void ftMh_Wait1_2_Anim(HSD_GObj* gobj)
     u8 _[4];
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        fp->fv.mh.x2258 = ftMh_MS_Wait1_2;
+        fp->u.mh.x2258 = ftMh_MS_Wait1_2;
         Fighter_ChangeMotionState(gobj, ftMh_MS_Wait1_2, 0, 0, 1, 0, 0);
         ftAnim_8006EBA4(gobj);
     }
@@ -122,10 +120,10 @@ void ftMh_MS_389_80151018(HSD_GObj* gobj)
         pos.x = da->x30_pos2.x;
         pos.y = da->x30_pos2.y;
         pos.z = 0;
-        fp->fv.mh.x2258 = ftMh_MS_Wait2_1;
+        fp->u.mh.x2258 = ftMh_MS_Wait2_1;
         {
             Fighter* fp = GET_FIGHTER(gobj);
-            if (fp->fv.mh.x2258 == ftMh_MS_Wait2_0) {
+            if (fp->u.mh.x2258 == ftMh_MS_Wait2_0) {
                 ftMh_MS_389_80150D28(gobj);
             } else {
                 ftMh_MS_389_80150C8C(gobj);

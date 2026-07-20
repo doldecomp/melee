@@ -80,7 +80,7 @@ typedef struct gmClassicSceneData {
 } gmClassicSceneData;
 STATIC_ASSERT(sizeof(gmClassicSceneData) == 0x560);
 
-extern gmClassic_80490880Data gmClassic_80490880;
+static gmClassic_80490880Data gmClassic_80490880;
 extern gmClassic_803DDEC8Data gmClassic_803DDEC8;
 
 GameScene gm_803DDC58_Scenes[] = {

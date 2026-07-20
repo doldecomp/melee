@@ -314,8 +314,8 @@ void ftGk_Init_OnDeath(HSD_GObj* gobj)
 
     ftParts_80074A4C(gobj, 0, 0);
     fp->dmg.armor0 = koopaAttr->x0;
-    fp->fv.gk.x222C = koopaAttr->x10;
-    fp->fv.gk.x2230 = koopaAttr->x18;
+    fp->u.gk.x222C = koopaAttr->x10;
+    fp->u.gk.x2230 = koopaAttr->x18;
 }
 
 void ftGk_Init_UnkMotionStates3(HSD_GObj* gobj)

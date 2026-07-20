@@ -14,6 +14,51 @@
 
 #include <math.h>
 
+ItemStateTable ItemStateTable_Flipper[] = {
+    {
+        -1,
+        itFlipper_Resting_Anim,
+        itFlipper_Resting_Phys,
+        itFlipper_Resting_Coll,
+    },
+    {
+        -1,
+        itFlipper_Falling_Anim,
+        itFlipper_Falling_Phys,
+        itFlipper_Falling_Coll,
+    },
+    {
+        -1,
+        itFlipper_Held_Anim,
+        itFlipper_Held_Phys,
+        NULL,
+    },
+    {
+        0,
+        itFlipper_Inflight_Anim,
+        itFlipper_Inflight_Phys,
+        itFlipper_Inflight_Coll,
+    },
+    {
+        -1,
+        itFlipper_Airborne_Anim,
+        itFlipper_Airborne_Phys,
+        itFlipper_Airborne_Coll,
+    },
+    {
+        1,
+        itFlipper_Active_Anim,
+        itFlipper_Spinning_Phys,
+        itFlipper_Spinning_Coll,
+    },
+    {
+        2,
+        itFlipper_Spinning_Anim,
+        itFlipper_Spinning_Phys,
+        itFlipper_Spinning_Coll,
+    },
+};
+
 HSD_GObj* itFlipper_Spawn(HSD_JObj* jobj)
 {
     u8 _pad[8];

@@ -2,6 +2,7 @@
 
 #include "gm/gm_1601.h"
 #include "gm/gm_16AE.h"
+#include "if/if_2F6E.h"
 #include "if/ifall.h"
 #include "if/ifstatus.h"
 #include "if/types.h"

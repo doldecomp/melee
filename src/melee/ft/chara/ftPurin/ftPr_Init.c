@@ -479,32 +479,32 @@ void ftPr_Init_8013C360(HSD_GObj* gobj)
                 ftPr_Init_803D05B4[fp->x619_costume_id]);
         }
 
-        fp->fv.pr.x2240.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+        fp->u.pr.x2240.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
         ftPartsPObjSetDefaultClass();
-        fp->fv.pr.x223C = HSD_JObjLoadJoint(joints[fp->x619_costume_id]);
+        fp->u.pr.x223C = HSD_JObjLoadJoint(joints[fp->x619_costume_id]);
         fp->x2225_b2 = true;
         ftPartsPObjClearDefaultClass();
-        ftParts_80075650(gobj, fp->fv.pr.x223C, &fp->fv.pr.x2240);
+        ftParts_80075650(gobj, fp->u.pr.x223C, &fp->u.pr.x2240);
 
-        ftParts_8007487C((FtPartsDesc*) &items_shifted[1], &fp->fv.pr.x2248,
-                         fp->x619_costume_id, &fp->fv.pr.x2240,
-                         &fp->fv.pr.x2240);
+        ftParts_8007487C((FtPartsDesc*) &items_shifted[1], &fp->u.pr.x2248,
+                         fp->x619_costume_id, &fp->u.pr.x2240,
+                         &fp->u.pr.x2240);
         ftCo_8009DC54(fp);
         return;
     }
 
-    fp->fv.pr.x223C = 0;
+    fp->u.pr.x223C = 0;
 }
 
 void ftPr_Init_8013C494(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.pr.x223C != NULL) {
-        HSD_JObjRemoveAll(fp->fv.pr.x223C);
-        fp->fv.pr.x223C = NULL;
-        HSD_ObjFree(&fighter_x2040_alloc_data, fp->fv.pr.x2240.data);
-        fp->fv.pr.x2240.data = NULL;
+    if (fp->u.pr.x223C != NULL) {
+        HSD_JObjRemoveAll(fp->u.pr.x223C);
+        fp->u.pr.x223C = NULL;
+        HSD_ObjFree(&fighter_x2040_alloc_data, fp->u.pr.x2240.data);
+        fp->u.pr.x2240.data = NULL;
     }
 }
 
@@ -512,24 +512,24 @@ void ftPr_Init_UnkMtxFunc0(HSD_GObj* gobj, int arg1, Mtx vmtx)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.pr.x223C && fp->x2225_b2) {
+    if (fp->u.pr.x223C && fp->x2225_b2) {
         MtxPtr mtx = HSD_JObjGetMtxPtr(fp->parts[FtPart_LLegJA].joint);
-        HSD_JObj* jobj = fp->fv.pr.x223C;
-        HSD_JObjCopyMtx(fp->fv.pr.x223C, mtx);
+        HSD_JObj* jobj = fp->u.pr.x223C;
+        HSD_JObjCopyMtx(fp->u.pr.x223C, mtx);
         jobj->flags |= (1 << 23) | (1 << 24) | (1 << 25);
         HSD_JObjSetMtxDirty(jobj);
 
-        HSD_JObjDispAll(fp->fv.pr.x223C, vmtx, HSD_GObj_80390EB8(arg1), 0);
+        HSD_JObjDispAll(fp->u.pr.x223C, vmtx, HSD_GObj_80390EB8(arg1), 0);
     }
 }
 
 void ftPr_Init_UnkIntBoolFunc0(Fighter* fp, int arg1, bool arg2)
 {
-    if (fp->fv.pr.x223C) {
+    if (fp->u.pr.x223C) {
         if (arg2) {
-            ftParts_80074CA0(&fp->fv.pr.x2248, arg1, &fp->fv.pr.x2240);
+            ftParts_80074CA0(&fp->u.pr.x2248, arg1, &fp->u.pr.x2240);
         } else {
-            ftParts_80074D7C(&fp->fv.pr.x2248, arg1, &fp->fv.pr.x2240);
+            ftParts_80074D7C(&fp->u.pr.x2248, arg1, &fp->u.pr.x2240);
         }
     }
 }
@@ -538,8 +538,8 @@ HSD_JObj* ftPr_Init_UnkMotionStates6(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.pr.x223C) {
-        return fp->fv.pr.x223C;
+    if (fp->u.pr.x223C) {
+        return fp->u.pr.x223C;
     }
 
     /// @todo What???

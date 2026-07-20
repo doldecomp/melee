@@ -1786,7 +1786,7 @@ struct Fighter {
         /* fp+222C */ struct ftYoshi_FighterVars ys;
         /* fp+222C */ struct ftZakoBoy_FighterVars bo, gl;
         /* fp+222C */ struct ftZelda_FighterVars zd;
-    } fv;
+    } u;
     /* fp+2324 */ InternalStageId bury_stage_kind;
     /* fp+2328 */ u32 bury_timer_1;
     /* fp+232C */ u32 bury_timer_2;

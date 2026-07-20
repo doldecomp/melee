@@ -44,19 +44,19 @@ void ftGw_AttackLw3_ItemManholeSetup(HSD_GObj* gobj)
 
     Fighter* fp = getFighter(gobj);
 
-    if (fp->fv.gw.x2250_manholeGObj2 == NULL) {
+    if (fp->u.gw.x2250_manholeGObj2 == NULL) {
         lb_8000B1CC(fp->parts[FtPart_LHandNb].joint, NULL, &sp10);
         manholeGObj = fp->item_gobj;
         if (manholeGObj != NULL) {
-            fp->fv.gw.x2248_manholeGObj = manholeGObj;
+            fp->u.gw.x2248_manholeGObj = manholeGObj;
             it_8026BB44(fp->item_gobj);
             it_8026B724(fp->item_gobj);
             ftCommon_8007E6DC(gobj, fp->item_gobj, 1);
         }
-        fp->fv.gw.x2250_manholeGObj2 =
+        fp->u.gw.x2250_manholeGObj2 =
             it_802C65E4(gobj, &sp10, FtPart_LHandNb, fp->facing_dir);
     }
-    if (fp->fv.gw.x2250_manholeGObj2 != NULL) {
+    if (fp->u.gw.x2250_manholeGObj2 != NULL) {
         if (fp->death2_cb == NULL) {
             fp->death2_cb = ftGw_Init_OnDamage;
         }
@@ -77,11 +77,11 @@ void ftGw_AttackLw3_ItemManholeRemove(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftGw_AttackLw3_ItemManholeExitHitlag(gobj);
-    fp->fv.gw.x2250_manholeGObj2 = NULL;
-    manholeGObj = fp->fv.gw.x2248_manholeGObj;
+    fp->u.gw.x2250_manholeGObj2 = NULL;
+    manholeGObj = fp->u.gw.x2248_manholeGObj;
     if (manholeGObj != NULL) {
         fp->item_gobj = manholeGObj;
-        fp->fv.gw.x2248_manholeGObj = NULL;
+        fp->u.gw.x2248_manholeGObj = NULL;
         it_8026BB20(fp->item_gobj);
         it_8026B73C(fp->item_gobj);
         ftpickupitem_80094818(gobj, 1);
@@ -96,8 +96,8 @@ void ftGw_AttackLw3_ItemManholeOnDamage(HSD_GObj* gobj)
 
     Fighter* fp = getFighter(gobj);
 
-    if (fp->fv.gw.x2250_manholeGObj2 != NULL) {
-        it_802C6718(fp->fv.gw.x2250_manholeGObj2);
+    if (fp->u.gw.x2250_manholeGObj2 != NULL) {
+        it_802C6718(fp->u.gw.x2250_manholeGObj2);
         ftGw_AttackLw3_ItemManholeRemove(gobj);
     }
 }
@@ -107,8 +107,8 @@ void ftGw_AttackLw3_ItemManholeOnDamage(HSD_GObj* gobj)
 static void ftGw_AttackLw3_ItemManholeEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.gw.x2250_manholeGObj2 != NULL) {
-        it_802C6764(fp->fv.gw.x2250_manholeGObj2);
+    if (fp->u.gw.x2250_manholeGObj2 != NULL) {
+        it_802C6764(fp->u.gw.x2250_manholeGObj2);
     }
 }
 
@@ -116,8 +116,8 @@ static void ftGw_AttackLw3_ItemManholeEnterHitlag(HSD_GObj* gobj)
 static void ftGw_AttackLw3_ItemManholeExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.gw.x2250_manholeGObj2 != NULL) {
-        it_802C6784(fp->fv.gw.x2250_manholeGObj2);
+    if (fp->u.gw.x2250_manholeGObj2 != NULL) {
+        it_802C6784(fp->u.gw.x2250_manholeGObj2);
     }
 }
 

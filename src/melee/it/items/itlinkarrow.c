@@ -212,6 +212,8 @@ HSD_GObj* it_802A83E0(f32 facing_dir, Fighter_GObj* arg1, Vec3* arg2,
         item->xDD4_itemVar.linkarrow.xE4 = -1;
         item->xDD4_itemVar.linkarrow.xEC = 0.0f;
         item->xDD4_itemVar.linkarrow.xE8 = 0.0f;
+        /// @todo Use Item_AttachToParent when it inlines here without growing
+        /// the stack frame.
         Item_8026AB54(gobj, arg1, arg3);
         db_80225DD8(gobj, (Fighter_GObj*) arg1);
     }

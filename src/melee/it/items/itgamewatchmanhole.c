@@ -22,18 +22,17 @@ ItemStateTable it_803F78D8[] = { { 0, itGamewatchmanhole_UnkMotion0_Anim, 0,
 HSD_GObj* it_802C65E4(Item_GObj* gobj, Vec* vec, enum Fighter_Part arg2,
                       float arg3)
 {
-    HSD_GObj* n;
-    SpawnItem si;
-    PAD_STACK(4);
-    si.kind = It_Kind_GameWatch_Manhole;
-    Item_InitSpawn(&si, gobj, vec, arg3);
-    n = Item_80268B18(&si);
-    if (n != NULL) {
-        void** x = GET_ITEM(n)->xC4_article_data->x4_specialAttributes;
-        Item_8026AB54(n, gobj, arg2);
-        db_80225DD8(n, gobj);
-        it_8027CE64(n, gobj, *x);
-        return n;
+    SpawnItem spawn;
+    Item_GObj* result;
+
+    spawn.kind = It_Kind_GameWatch_Manhole;
+    Item_InitSpawn(&spawn, gobj, vec, arg3);
+    result = Item_80268B18(&spawn);
+    if (result != NULL) {
+        Item* item = GET_ITEM(result);
+        void** attr = item->xC4_article_data->x4_specialAttributes;
+        Item_AttachGameWatchArticle(gobj, arg2, result, attr);
+        return result;
     }
     return NULL;
 }

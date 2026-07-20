@@ -1,5 +1,6 @@
 #include "ifall.h"
 
+#include "if/if_2F6E.h"
 #include "if/if_2F72.h"
 #include "if/if_2FC93.h"
 #include "if/ifcoget.h"
