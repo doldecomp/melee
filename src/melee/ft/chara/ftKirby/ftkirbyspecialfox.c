@@ -18,6 +18,16 @@
 
 #include <MSL/math.h>
 
+static u32 ftKb_Init_804D3DB8[] = {
+    0x0001AE17,
+    0x0001AE1A,
+};
+
+static u32 ftKb_Init_804D3DC0[] = {
+    0x00018703,
+    0x00018706,
+};
+
 void ftKb_SpecialNFx_800FDC00(Fighter_GObj* gobj, Vec3* vec)
 {
     if (gobj != NULL) {

@@ -30,20 +30,17 @@ ItemStateTable it_803F7918[] = {
 
 Item_GObj* it_802C6F40(HSD_GObj* parent, Vec3* pos, Fighter_Part arg2, f32 dir)
 {
-    SpawnItem spawn_item;
-    HSD_GObj* item_gobj;
-    void** temp_r30;
+    SpawnItem spawn;
+    Item_GObj* result;
 
-    spawn_item.kind = It_Kind_GameWatch_Turtle;
-    Item_InitSpawn(&spawn_item, parent, pos, dir);
-    item_gobj = Item_80268B18(&spawn_item);
-    if (item_gobj != NULL) {
-        Item* it = GET_ITEM(item_gobj);
-        temp_r30 = it->xC4_article_data->x4_specialAttributes;
-        Item_8026AB54(item_gobj, parent, arg2);
-        db_80225DD8(item_gobj, parent);
-        it_8027CE64(item_gobj, parent, *temp_r30);
-        return item_gobj;
+    spawn.kind = It_Kind_GameWatch_Turtle;
+    Item_InitSpawn(&spawn, parent, pos, dir);
+    result = Item_80268B18(&spawn);
+    if (result != NULL) {
+        Item* item = GET_ITEM(result);
+        void** attr = item->xC4_article_data->x4_specialAttributes;
+        Item_AttachGameWatchArticle(parent, arg2, result, attr);
+        return result;
     }
     return NULL;
 }

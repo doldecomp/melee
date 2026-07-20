@@ -166,6 +166,27 @@ Ground_UpdateStarFoxSequence(Ground_GObj* gobj, Ground* gp,
     }
 }
 
+static inline void Ground_ClampSymmetric(f32 value, f32 limit, f32* out)
+{
+    if (value > limit) {
+        *out = limit;
+    } else {
+        limit = -limit;
+        if (value < limit) {
+            *out = limit;
+        }
+    }
+}
+
+static inline void Ground_WrapAngle(f32* angle)
+{
+    if (*angle > M_TAU) {
+        *angle -= M_TAU;
+    } else if (*angle < -M_TAU) {
+        *angle += M_TAU;
+    }
+}
+
 #define ZRANDI(n) ((n) != 0 ? HSD_Randi(n) : 0)
 
 static inline int rand_range(int a, int b)

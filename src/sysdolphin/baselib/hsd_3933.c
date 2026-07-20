@@ -5,7 +5,6 @@
 #include <sysdolphin/baselib/hsd_3915.h>
 #include <sysdolphin/baselib/hsd_392C.h>
 #include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/video.h>
 
 typedef struct {
     s32 x0;
@@ -33,37 +32,16 @@ struct ParticleUsbMessages {
 };
 STATIC_ASSERT(sizeof(struct ParticleUsbMessages) == 0x130);
 
-struct ParticleConsoleState {
-    /* 00 */ u8 x0_b0 : 1;
-    /* 00 */ u8 x0_b1 : 1;
-    /* 04 */ u8* out_buf;
-    /* 08 */ u32 buf_size;
-    /* 0C */ int xC;
-    /* 10 */ u8 x10;
-    /* 11 */ u8 x11;
-    /* 12 */ u8 x12;
-    /* 13 */ u8 x13;
-    /* 14 */ int x14;
-    /* 18 */ int x18;
-    /* 1C */ int x1C;
-    /* 20 */ int x20;
-    /* 20 */ UNK_T x24;
-};
-STATIC_ASSERT(sizeof(struct ParticleConsoleState) == 0x28);
+/* 4D78C0 */ int hsd_804D78C0;
+/* 4D78BC */ s32 hsd_804D78BC;
+/* 4D78B8 */ s32 hsd_804D78B8;
+/* 4D78B4 */ s32 hsd_804D78B4;
+/* 4D78B0 */ s32 hsd_804D78B0;
+s32 hsd_804D78AC;
+s32 hsd_804D78A8;
 
-/* 4D78B0 */ static s32 hsd_804D78B0;
-/* 4D78B4 */ static s32 hsd_804D78B4;
-/* 4D78B8 */ static s32 hsd_804D78B8;
-/* 4D78BC */ static s32 hsd_804D78BC;
-/* 4D78C0 */ static int hsd_804D78C0;
-/* 4D78C8 */ static int hsd_804D78C8;
-/* 4D78CC */ static u32 hsd_804D78CC;
-
-/* 4CF7E8 */ static struct ParticleConsoleState hsd_804CF7E8;
-
-/* 4CF810 */ extern struct ParticleScreenState hsd_804CF810;
-
-ParticleLogEntry hsd_804CEB40[0x100];
+static ParticleLogEntry hsd_804CEB40[0x100];
+s32 hsd_804CF740[42];
 
 void fn_803932D0(s32 type, u32 flags, s32 value)
 {
@@ -120,26 +98,6 @@ s32 hsd_80393328(void)
 static void (*lbl_8040A93C[32])(void*, void*) = {
     (void (*)(void*, void*)) hsd_80393440,
     (void (*)(void*, void*)) hsd_80393840,
-};
-
-// Evidence: retail hsd_80393A5C loads this table's base into a register
-// (lis/addi 0x8040A9D0) and reads the messages at field displacements
-// +0x20 ("cannot open"), +0x90 ("Done"), +0xB8 ("cannot save"); the
-// remaining messages fill out the retail 0x130 object (see
-// struct ParticleUsbMessages in particle.static.h).
-/* 40A9D0 */ static struct ParticleUsbMessages psUsbMessages = {
-    "loading file (%s) from USB ...",
-    "cannot open file\n",
-    "cannot get files stat\n",
-    "too large file size\n",
-    "cannot allocate memory\n",
-    "cannot load file\n",
-    "Done %s size:%d time:%f spped:%fkbps\n",
-    "cannot save file\n",
-    "Seaching files (%s) via USB ...",
-    "cannot get dir stat\n",
-    "too large dir size\n",
-    "cannot use USB now.\n",
 };
 
 extern int hsd_804D78A0;
@@ -246,6 +204,22 @@ void hsd_80393440(void* request, void* response)
         return;
     }
 }
+
+/* 40A9D0 */ static struct ParticleUsbMessages
+    psUsbMessages ATTRIBUTE_ALIGN(8) = {
+        "loading file (%s) from USB ...",
+        "cannot open file\n",
+        "cannot get files stat\n",
+        "too large file size\n",
+        "cannot allocate memory\n",
+        "cannot load file\n",
+        "Done %s size:%d time:%f spped:%fkbps\n",
+        "cannot save file\n",
+        "Seaching files (%s) via USB ...",
+        "cannot get dir stat\n",
+        "too large dir size\n",
+        "cannot use USB now.\n",
+    };
 
 void hsd_80393840(void) {}
 
@@ -395,369 +369,3 @@ int hsd_80393A5C(char* filename, int data, int size)
     }
     return size;
 }
-
-void fn_80393C14(const u8* buf, size_t size)
-{
-    int i;
-
-    const u32 out_size = hsd_804CF7E8.buf_size;
-
-    int write_pos = hsd_804CF7E8.xC;
-    u8* out_buf = hsd_804CF7E8.out_buf;
-    u8 line_len = hsd_804CF7E8.x11;
-
-    for (i = 0; i < size; i++) {
-        const u32 tmp = out_size - 1;
-        switch (buf[i]) {
-        case '\r':
-            break;
-        case '\n':
-            if (line_len != 0 || out_buf[(write_pos + tmp) % out_size] != '\0')
-            {
-                out_buf[write_pos] = line_len;
-                write_pos = (write_pos + 1) % out_size;
-                hsd_804CF7E8.x1C++;
-                hsd_804CF7E8.x18++;
-                line_len = 0;
-            }
-            break;
-        default:
-            out_buf[write_pos] = buf[i];
-            if (++line_len == 0x36) {
-                write_pos = (write_pos + 1) % out_size;
-                out_buf[write_pos] = line_len;
-                hsd_804CF7E8.x1C++;
-                hsd_804CF7E8.x18++;
-                line_len = 0;
-            }
-            write_pos = (write_pos + 1) % out_size;
-            hsd_804CF7E8.x1C++;
-            break;
-        }
-    }
-    hsd_804CF7E8.xC = write_pos;
-    hsd_804CF7E8.x11 = line_len;
-}
-
-#pragma push
-#pragma dont_inline on
-s32 hsd_80393D2C(s32 enable)
-{
-    struct ParticleConsoleState* sp = &hsd_804CF7E8;
-    s32 old = sp->x0_b1;
-
-    if (enable != 0) {
-        sp->x0_b1 = 1;
-        HSD_SetReportCallback(fn_80393C14);
-    } else {
-        sp->x0_b1 = 0;
-        HSD_SetReportCallback(NULL);
-    }
-    return old;
-}
-#pragma pop
-
-#pragma push
-#pragma pool_data off
-void hsd_80393DA0(u8* buf, size_t size)
-{
-    PAD_STACK(4);
-    memset(&hsd_804CF7E8, 0, sizeof(hsd_804CF7E8) - sizeof(hsd_804CF7E8.x24));
-    hsd_804CF7E8.out_buf = buf;
-    hsd_804CF7E8.buf_size = size;
-    memset(buf, 0, size);
-    hsd_804CF7E8.x0_b0 = true;
-    hsd_804CF7E8.x0_b1 = true;
-    HSD_SetReportCallback(fn_80393C14);
-}
-#pragma pop
-
-#pragma push
-#pragma dont_inline on
-void hsd_80393E34(s32* col_out, s32* row_out)
-{
-    if (col_out != NULL) {
-        *col_out = hsd_804CF7E8.x14;
-    }
-    if (row_out != NULL) {
-        *row_out = hsd_804CF7E8.x18;
-    }
-}
-#pragma pop
-
-#pragma push
-#pragma dont_inline on
-void hsd_80393E68(u32 col, u32 row)
-{
-    struct ParticleConsoleState* sp = &hsd_804CF7E8;
-    u32 byte_val;
-    u32 buf_size;
-    u8* out_buf;
-    u32 sum;
-    u32 pos;
-    u32 counter;
-
-    if (!sp->x0_b0) {
-        return;
-    }
-
-    byte_val = sp->x11;
-    counter = 0;
-    buf_size = sp->buf_size;
-    out_buf = sp->out_buf;
-    sum = sp->xC + buf_size;
-    pos = byte_val;
-
-    while (counter < row && pos < buf_size) {
-        pos++;
-        byte_val = out_buf[(sum - pos) % buf_size];
-        counter++;
-        pos += byte_val;
-    }
-
-    sp->x18 = counter;
-    sp->x1C = pos;
-    sp->x20 = byte_val;
-
-    if (col < byte_val) {
-        sp->x14 = col;
-    } else {
-        sp->x14 = byte_val;
-    }
-}
-#pragma pop
-
-#pragma push
-#pragma dont_inline on
-void hsd_80393EF4(int col_delta, int row_delta)
-{
-    u32 byte_val;
-    u32 buf_size;
-    int* pos_ptr;
-    u32 counter;
-    u32 pos;
-    u32 sum;
-    u8* out_buf;
-    struct ParticleConsoleState* sp = &hsd_804CF7E8;
-
-    if (!sp->x0_b0) {
-        return;
-    }
-
-    buf_size = sp->buf_size;
-
-    if ((u32) * (pos_ptr = &sp->x1C) >= buf_size) {
-        hsd_80393E68(sp->x14 + col_delta, sp->x18 + row_delta);
-        return;
-    }
-
-    out_buf = sp->out_buf;
-    pos = *pos_ptr;
-    byte_val = sp->x20;
-    sum = sp->xC + buf_size;
-
-    if (row_delta > 0) {
-        counter = 0;
-
-        while (counter < (u32) row_delta && pos < buf_size) {
-            pos++;
-            byte_val = out_buf[(sum - pos) % buf_size];
-            counter++;
-            pos += byte_val;
-        }
-
-        sp->x18 += counter;
-        *pos_ptr = pos;
-
-        if (col_delta >= 0) {
-            int* col_ptr = &sp->x14;
-            *col_ptr += col_delta;
-            if ((u32) *col_ptr > byte_val) {
-                *col_ptr = byte_val;
-            }
-        } else {
-            int* col_ptr;
-            u32 col = *(col_ptr = &sp->x14);
-            col_delta = -col_delta;
-            if (col > (u32) col_delta) {
-                *col_ptr = col - (u32) col_delta;
-            } else {
-                *col_ptr = 0;
-            }
-        }
-    } else if (row_delta < 0) {
-        if (col_delta < 0 && (u32) sp->x14 < (u32) -col_delta) {
-            col_delta = 0;
-        } else {
-            col_delta = sp->x14 + col_delta;
-        }
-
-        if (row_delta < 0 && (u32) sp->x18 < (u32) -row_delta) {
-            row_delta = 0;
-        } else {
-            row_delta = sp->x18 + row_delta;
-        }
-
-        hsd_80393E68(col_delta, row_delta);
-    }
-}
-#pragma pop
-
-#pragma push
-#pragma pool_data off
-#pragma dont_inline on
-u8 hsd_80394068(void)
-{
-    u8 result;
-
-    if (!hsd_804CF7E8.x0_b0) {
-        return 0;
-    }
-    if ((u32) hsd_804CF7E8.x1C > hsd_804CF7E8.buf_size) {
-        return 0;
-    }
-    if ((u32) hsd_804CF7E8.x14 < (u32) hsd_804CF7E8.x20) {
-        result =
-            hsd_804CF7E8.out_buf[(hsd_804CF7E8.x14 +
-                                  (hsd_804CF7E8.xC + hsd_804CF7E8.buf_size -
-                                   hsd_804CF7E8.x1C)) %
-                                 hsd_804CF7E8.buf_size];
-        hsd_804CF7E8.x14++;
-    } else {
-        result = 0;
-        hsd_80393EF4(0, -1);
-        hsd_804CF7E8.x14 = 0;
-    }
-    return result;
-}
-#pragma pop
-
-#pragma push
-#pragma dont_inline on
-u8 hsd_80394128(s32 col, s32 row)
-{
-    struct {
-        u8 value;
-    } result;
-
-    hsd_80393E68(col, row);
-    if (!hsd_804CF7E8.x0_b0) {
-        result.value = 0;
-    } else if ((u32) hsd_804CF7E8.x1C > hsd_804CF7E8.buf_size) {
-        result.value = 0;
-    } else if ((u32) hsd_804CF7E8.x14 < (u32) hsd_804CF7E8.x20) {
-        result.value =
-            hsd_804CF7E8.out_buf[(hsd_804CF7E8.x14 +
-                                  (hsd_804CF7E8.xC + hsd_804CF7E8.buf_size -
-                                   hsd_804CF7E8.x1C)) %
-                                 hsd_804CF7E8.buf_size];
-        hsd_804CF7E8.x14++;
-    } else {
-        result.value = 0;
-        hsd_80393EF4(0, -1);
-        hsd_804CF7E8.x14 = result.value;
-    }
-    return result.value;
-}
-#pragma pop
-
-s32 hsd_803941E8(void* xfb_out_ptr, void* xfb_cur_ptr)
-{
-    s32* xfb_out = xfb_out_ptr;
-    u32* xfb_cur = xfb_cur_ptr;
-    s32 last_draw;
-    u8* vi_base;
-    s32 nb_xfb;
-    s32 i;
-    u32 buf;
-    PAD_STACK(8);
-
-    HSD_VIWaitXFBFlushNoYield();
-    last_draw = HSD_VIGetXFBLastDrawDone();
-
-    if (last_draw != -1) {
-        *xfb_cur = (u32) HSD_VIData.xfb[last_draw].buffer;
-    }
-
-    vi_base = (u8*) &HSD_VIData;
-    nb_xfb = HSD_VIData.nb_xfb;
-    for (i = 0; i < nb_xfb; i++) {
-        if (i == last_draw) {
-            goto next1;
-        }
-        buf = *(u32*) (vi_base + 0x58);
-        xfb_out[0] = buf;
-        if (buf != 0) {
-            break;
-        }
-    next1:
-        vi_base += 0x60;
-    }
-
-    i++;
-    vi_base = (u8*) &HSD_VIData + i * 0x60;
-    for (; i < nb_xfb; i++) {
-        if (i == last_draw) {
-            goto next2;
-        }
-        buf = *(u32*) (vi_base + 0x58);
-        xfb_out[1] = buf;
-        if (buf != 0) {
-            break;
-        }
-    next2:
-        vi_base += 0x60;
-    }
-
-    if ((u32) xfb_out[0] == 0) {
-        if (xfb_cur != NULL) {
-            xfb_out[0] = (s32) *xfb_cur;
-            *xfb_cur = 0;
-        } else {
-            return 0;
-        }
-    }
-
-    if ((u32) xfb_out[1] != 0) {
-        return 2;
-    }
-    return 1;
-}
-
-/// @todo misnomer - moved from particle file, not particle-related
-struct ParticleScreenState {
-    /* 0x00 */ u8 x0_b7 : 1;
-    /* 0x00 */ u8 x0_b6 : 1;
-    /* 0x00 */ u8 x0_b5 : 1;
-    /* 0x00 */ u8 x0_rest : 5;
-    /* 0x01 */ u8 _pad0[0x3];
-    /* 0x04 */ s32 x4;
-    /* 0x08 */ s32 x8;
-    /* 0x0C */ s32 x0C;
-    /* 0x10 */ s32 x10;
-    /* 0x14 */ s32 x14;
-    /* 0x18 */ s32 x18;
-    /* 0x1C */ s32 x1C;
-    /* 0x20 */ s32 x20;
-    /* 0x24 */ s32 x24;
-    /* 0x28 */ u32 x28;
-    /* 0x2C */ s32 x2C;
-    /* 0x30 */ void* x30;
-    /* 0x34 */ s32 x34;
-    /* 0x38 */ s32 x38;
-    /* 0x3C */ s32 x3C;
-    /* 0x40 */ s32 x40;
-    /* 0x44 */ s32 x44;
-    /* 0x48 */ s32 x48;
-    /* 0x4C */ void* x4C;
-    /* 0x50 */ void* x50;
-    /* 0x54 */ u8 _pad4[0x68];
-    /* 0xBC */ u32 xBC;
-    /* 0xC0 */ u32 xC0;
-    /* 0xC4 */ s32 xC4;
-    /* 0xC8 */ s32 xC8;
-    /* 0xCC */ s32 xCC;
-    /* 0xD0 */ void* xD0;
-    /* 0xD4 */ OSContext* xD4;
-};
-extern u8 lbl_804088B8[];
