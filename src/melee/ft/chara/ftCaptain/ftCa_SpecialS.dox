@@ -1,15 +1,7 @@
-/// @todo Fix formatting
-/** @file
- * Side Special - Raptor Boost / Gerudo Dragon (SpecialS)
+/** @file melee/ft/chara/ftCaptain/ftCa_SpecialS.h
+ * Captain Falcon & Ganondorf's Side Special -
+ * Raptor Boost / Gerudo Dragon (SpecialS)
  */
-#ifndef MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_SPECIALS_H
-#define MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_SPECIALS_H
-
-#include <platform.h>
-
-#include "ft/forward.h"
-
-#include <baselib/gobj.h>
 
 /**
  * Remove all GFX and set GFX flags to @c false.
@@ -116,5 +108,3 @@ void ftCa_SpecialS_Coll(HSD_GObj* gobj);
 void ftCa_SpecialAirSStart_Coll(HSD_GObj* gobj);
 
 void ftCa_SpecialAirS_Coll(HSD_GObj* gobj);
-
-#endif

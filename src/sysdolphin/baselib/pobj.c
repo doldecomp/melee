@@ -15,7 +15,6 @@
 
 #include "forward.h"
 
-#include <__mem.h>
 #include <math.h> // IWYU pragma: keep
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>

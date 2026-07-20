@@ -81,7 +81,7 @@ void ftCo_800C8A64(Fighter_GObj* gobj)
         ftCo_800C88A0(fp);
         ft_800C0098(fp);
         ft_800C8170(fp);
-        lbRefract_80022BD0();
+        lbRefSetUnuse();
         fp->x221F_b2 = false;
     }
 }
