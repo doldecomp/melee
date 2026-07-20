@@ -901,8 +901,9 @@ HSD_GObj* un_80304168(void* arg0, int arg1, int arg2, int arg3)
     return gobj2;
 }
 
-void un_80304210(struct un_80304138_objalloc_t* arg0, void* arg1, int arg2,
-                 int arg3, int arg4)
+struct un_80304138_objalloc_t* un_80304210(struct un_80304138_objalloc_t* arg0,
+                                           void* arg1, int arg2, int arg3,
+                                           int arg4)
 {
     struct un_80304138_objalloc_t* obj = HSD_ObjAlloc(&un_804A2688);
     if (obj != NULL) {
@@ -919,6 +920,7 @@ void un_80304210(struct un_80304138_objalloc_t* arg0, void* arg1, int arg2,
         obj->next = arg0;
         obj->x1 = obj->x1 | 2;
     }
+    return obj;
 }
 
 void un_80304334(struct un_80304138_objalloc_t* arg0)
