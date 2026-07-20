@@ -1,4 +1,1 @@
-/** @var Fighter::u
- * A different struct for each fighter to store non-transient variables.
- * @see @ref glossary_ev
- */
+/// @file melee/ft/types.h
