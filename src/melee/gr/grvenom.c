@@ -1711,7 +1711,7 @@ void grVenom_80206874(Ground_GObj* gobj)
     f32 scale;
 
     scale = Ground_801C0498();
-    gp->gv.starfox.arwing_slot = grVe_804D6A34;
+    gp->gv.venom.xC8 = grVe_804D6A34;
     Ground_ClearStarFoxArwingGObjs(gp);
     Ground_AnimateStarFoxArwing(gobj);
 
