@@ -243,27 +243,34 @@ u8 hsd_80394068(void)
 
 u8 hsd_80394128(s32 col, s32 row)
 {
+    struct ParticleConsoleState* sp = &hsd_804CF7E8;
     u8 result;
 
     hsd_80393E68(col, row);
-    if (!(result = hsd_804CF7E8.x0_b0)) {
+    if (!(result = sp->x0_b0)) {
         result = 0;
-    } else if (hsd_804CF7E8.x1C > hsd_804CF7E8.buf_size) {
+        goto exit;
+    }
+    if ((u32) sp->x1C > sp->buf_size) {
         result = 0;
-    } else {
-        if (hsd_804CF7E8.x14 < (u32) hsd_804CF7E8.x20) {
+        goto exit;
+    }
+    {
+        int* x14_ptr = &hsd_804CF7E8.x14;
+        if ((u32) hsd_804CF7E8.x14 < (u32) hsd_804CF7E8.x20) {
             result = hsd_804CF7E8
                          .out_buf[(hsd_804CF7E8.x14 +
                                    (hsd_804CF7E8.xC + hsd_804CF7E8.buf_size -
                                     hsd_804CF7E8.x1C)) %
                                   hsd_804CF7E8.buf_size];
-            hsd_804CF7E8.x14++;
+            *x14_ptr = hsd_804CF7E8.x14 + 1;
         } else {
             result = 0;
             hsd_80393EF4(0, -1);
-            hsd_804CF7E8.x14 = result;
+            *x14_ptr = (s32) result;
         }
     }
+exit:
     return result;
 }
 
