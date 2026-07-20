@@ -4312,12 +4312,17 @@ melee/if/iftime.c:
 	.sdata2     start:0x804DDA38 end:0x804DDA48
 
 melee/if/ifstatus.c:
-	.text       start:0x802F4910 end:0x802F7288
-	.data       start:0x803F9598 end:0x803F9780
+	.text       start:0x802F4910 end:0x802F6EA4
+	.data       start:0x803F9598 end:0x803F9628
 	.bss        start:0x804A10C8 end:0x804A1340
 	.sdata      start:0x804D57A8 end:0x804D57C8
 	.sbss       start:0x804D6D60 end:0x804D6D68
-	.sdata2     start:0x804DDA48 end:0x804DDAB0
+	.sdata2     start:0x804DDA48 end:0x804DDAA8
+
+melee/if/if_2F6E.c:
+	.text       start:0x802F6EA4 end:0x802F7288
+	.data       start:0x803F9628 end:0x803F9780
+	.sdata2     start:0x804DDAA8 end:0x804DDAB0
 
 melee/if/if_2F72.c:
 	.text       start:0x802F7288 end:0x802F7EFC
