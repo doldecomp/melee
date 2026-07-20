@@ -5,6 +5,7 @@
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/types.h"
+#include "MSL/math.h"
 
 #include <baselib/forward.h>
 
@@ -38,6 +39,40 @@ static inline void Ground_SetupStageCallbacks(HSD_GObj* gobj,
     }
     if (callbacks->callback2 != NULL) {
         HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+    }
+}
+
+static inline void Ground_InitTargetStage(HSD_GObj* (*create_gobj)(int) )
+{
+    stage_info.unk8C.b4 = false;
+    stage_info.unk8C.b5 = true;
+    create_gobj(0);
+    create_gobj(1);
+    create_gobj(2);
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    Ground_801C4210();
+    Ground_801C42AC();
+}
+
+static inline void Ground_ClampSymmetric(f32 value, f32 limit, f32* out)
+{
+    if (value > limit) {
+        *out = limit;
+    } else {
+        limit = -limit;
+        if (value < limit) {
+            *out = limit;
+        }
+    }
+}
+
+static inline void Ground_WrapAngle(f32* angle)
+{
+    if (*angle > M_TAU) {
+        *angle -= M_TAU;
+    } else if (*angle < -M_TAU) {
+        *angle += M_TAU;
     }
 }
 

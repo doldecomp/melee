@@ -1,3 +1,15 @@
+/// @file gm_1A9B.c
+/// Game-over "Regend" ending THP playback scene (OnEnter/OnFrame pair).
+///
+/// This TU is split from gmregenddisp.c: the retail object anchors the THP
+/// table loads in gm_801A9B30_OnEnter at the first table literal
+/// (gm_803DB640, displacements 0x278/0x5B4/0x8D0), i.e. at this TU's own
+/// .data+0. MWCC 1.2.5n always places its merged-data anchor (..data.N) at
+/// the object's .data start, so these tables cannot share a TU with the
+/// string literals at 0x803DB458-0x803DB640 (which belong to gmregenddisp.c,
+/// whose functions anchor at 0x803DB458). Splitting here reproduces the
+/// retail anchor exactly; keeping the tables in gmregenddisp.c compiles the
+/// same instructions with displacements 0x460/0x79C/0xAB8 instead.
 #include "gm_1A7A.h"
 
 #include "dolphin/pad.h"

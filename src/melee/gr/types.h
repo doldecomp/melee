@@ -476,16 +476,28 @@ struct grVenom_GroundVars {
     /* +04 gp+C8 */ u32 xC8;
     /* +08 gp+CC */ u32 xCC;
     /* +0C gp+D0 */ u32 xD0;
-    /* +10 gp+D4 */ f32 xD4;
-    /* +14 gp+D8 */ f32 xD8;
+    /* +10 gp+D4 */ s32 xD4;
+    /* +14 gp+D8 */ s32 xD8;
     /* +18 gp+DC */ union {
         f32 xDC;
         Ground_GObj* linked_gobj;
     };
-    /* +1C gp+E0 */ f32 xE0;
-    /* +20 gp+E4 */ f32 xE4;
-    /* +24 gp+E8 */ f32 xE8;
-    /* +28 gp+EC */ f32 xEC;
+    /* +1C gp+E0 */ union {
+        f32 xE0;
+        s32 xE0_int;
+    };
+    /* +20 gp+E4 */ union {
+        f32 xE4;
+        s32 xE4_int;
+    };
+    /* +24 gp+E8 */ union {
+        f32 xE8;
+        s32 xE8_int;
+    };
+    /* +28 gp+EC */ union {
+        f32 xEC;
+        s32 xEC_int;
+    };
     /* +2C gp+F0 */ s32 xF0;
     /* +30 gp+F4 */ s32 xF4;
     /* +34 gp+F8 */ s32 xF8;
@@ -1080,7 +1092,7 @@ struct grGreens_GroundVars {
         int whole_thing;
     } x0_flags;
     /*  +4 gp+C8 */ Vec* x4;
-    /*  +8 gp+CC */ struct grGreens_BlockVars* x8_blocks;
+    /*  +8 gp+CC */ struct grGreens_BlockVars (*x8_blocks)[6];
     /*  +C gp+D0 */ int xC;
     /* +10 gp+D4 */ int x10;
     /* +14 gp+D8 */ int x14;
@@ -1258,7 +1270,8 @@ struct grBigBlue_PlatformVars {
 /// Per-lane data for the Big Blue car gobj (ID 33), 0x40-byte stride from
 /// gp+D4. Only the fields read by the game logic are named here.
 struct grBigBlue_CarLane {
-    /* +00 gp+D4 */ u8 state;
+    /* +00 gp+D4 */ u8 state : 6;
+    /* +00 gp+D4 */ u8 state_lo : 2;
     /* +01 gp+D5 */ u8 x1;
     /* +02 gp+D6 */ s8 x2;
     /* +03 gp+D7 */ u8 x3;
@@ -1283,6 +1296,16 @@ struct grBigBlue_GroundVars {
                 struct {
                     u8 x0_b1 : 1;
                     u8 pad[3];
+                };
+                struct {
+                    /* +0 gp+C4:0 */ u32 b0 : 1;
+                    /* +0 gp+C4:1 */ u32 b1 : 1;
+                    /* +0 gp+C4:2 */ u32 b2 : 1;
+                    /* +0 gp+C4:3 */ u32 prev_lane : 7;
+                    /* +1 gp+C5:2 */ u32 cur_lane : 7;
+                    /* +2 gp+C6:1 */ u32 next_lane : 7;
+                    /* +3 gp+C7:0 */ u32 nibble_hi : 4;
+                    /* +3 gp+C7:4 */ u32 nibble_lo : 4;
                 };
             };
             /*  +4 gp+C8 */ void* xC8;
@@ -1553,25 +1576,34 @@ struct ScrollVars {
 };
 
 struct grHomeRun_GroundVars {
+    /* +00 gp+C4 */ HSD_GObj** gobjs;
+    /* +04 gp+C8 */ HSD_GObj** jobj_gobjs;
+    /* +08 gp+CC */ HSD_Text* xCC;
+    /* +0C gp+D0 */ HSD_JObj* xD0;
+    /* +10 gp+D4 */ HSD_GObj* xD4;
+    /* +14 gp+D8 */ HSD_GObj* rear_gobj;
+    /* +18 gp+DC */ HSD_GObj* rear2_gobj;
+    /* +1C gp+E0 */ HSD_GObj* rear3_gobj;
+    /* +20 gp+E4 */ HSD_GObj* rear4_gobj;
+    /* +24 gp+E8 */ struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } xE8_flags;
+};
+
+/// View used by the per-target Ground gobjs created by #grHomeRun_8021E500.
+struct grHomeRun_GroundVars2 {
     /* +00 gp+C4 */ u16 xC4;
     /* +02 gp+C6 */ u16 xC6;
     /* +04 gp+C8 */ int xC8;
     /* +08 gp+CC */ int xCC;
     /* +0C gp+D0 */ float xD0;
-    /* +0C gp+D4 */ u8 pad_D4[0x14];
-    /* +24 gp+E8 */ union {
-        u8 xE8;
-        struct {
-            u8 xE8_b0 : 1;
-            u8 xE8_b1 : 1;
-            u8 xE8_b2 : 1;
-            u8 xE8_b3 : 1;
-            u8 xE8_b4 : 1;
-            u8 xE8_b5 : 1;
-            u8 xE8_b6 : 1;
-            u8 xE8_b7 : 1;
-        };
-    };
 };
 
 struct Map_GroundVars {
@@ -1660,7 +1692,34 @@ struct Ground {
     f32 xC0;
 
     union {
-        /// @todo This union is named 'u', from assert statements
+        /**
+         * Union of Ground object subtypes
+         *
+         * A Ground object can be one of multiple subtypes. The toplevel Ground
+         * object for the stage itself is a generic type, but uses different
+         * subtypes for various stage hazards, graphics effects, backgrounds,
+         * etc. used by the stage.
+         *
+         * Each index in a stage's StageCallbacks array may use a different
+         * subtype of Ground object - but each callback in a single
+         * StageCallbacks struct should operate on the same subtype.
+         *
+         * This is known from assert statements to contain at least the
+         * following members:
+         * - map
+         *   - A generic member used for multiple stages - used in in Onett,
+         *     RCruise, Home Run Contest, and more. Grep for `gp->u.map`
+         *     to see lots of assert statements using it.
+         * - scroll
+         *   - Used for Rainbow Cruise
+         * - taru
+         *   - "Barrel", used in Kongo Jungle
+         * - car, carnull
+         *   - Used in Big Blue
+         *
+         * @todo This union is named 'u', from assert statements.
+         *       Usages need to be updated before `gv` can be removed.
+         */
         union GroundVars {
             char pad_0[0x204 - 0xC4];
             struct grArwing_GroundVars arwing;
@@ -1734,6 +1793,7 @@ struct Ground {
             struct grSmashTaunt_GroundVars smashtaunt;
             struct GroundVars_unk unk;
             struct grHomeRun_GroundVars homerun;
+            struct grHomeRun_GroundVars2 homerun2;
             struct grVenom_GroundVars venom;
             struct grVenom_GroundVars2 venom2;
             struct grYorster_GroundVars yorster;
@@ -1742,36 +1802,6 @@ struct Ground {
             struct grZebes_GroundVars3 zebes3;
             struct grZebes_GroundVars4 zebes4;
             struct grZebes_GroundVars5 zebes5;
-        } gv;
-
-        /**
-         * Union of Ground object subtypes
-         *
-         * A Ground object can be one of multiple subtypes. The toplevel Ground
-         * object for the stage itself is a generic type, but uses different
-         * subtypes for various stage hazards, graphics effects, backgrounds,
-         * etc. used by the stage.
-         *
-         * Each index in a stage's StageCallbacks array may use a different
-         * subtype of Ground object - but each callback in a single
-         * StageCallbacks struct should operate on the same subtype.
-         *
-         * This is known from assert statements to contain at least the
-         * following members:
-         * - map
-         *   - A generic member used for multiple stages - used in in Onett,
-         *     RCruise, Home Run Contest, and more. Grep for `gp->u.map`
-         *     to see lots of assert statements using it.
-         * - scroll
-         *   - Used for Rainbow Cruise
-         * - taru
-         *   - "Barrel", used in Kongo Jungle
-         * - car, carnull
-         *   - Used in Big Blue
-         *
-         * @todo The previous #Ground.gv union members should be moved here.
-         */
-        union GroundVars2 {
             struct grStadium_GroundVars stadium;
             struct grStadium_type9_GroundVars stadium9;
             struct grStadium_Display display; ///< Pokemon Stadium jumbotron
@@ -1788,7 +1818,7 @@ struct Ground {
                 /*  +4 gp+C8 */ HSD_JObj** coll_jobj;
                 /*  +8 gp+CC */ UNK_T rank;
             } carnull;
-        } u;
+        } u, gv;
     };
 };
 STATIC_ASSERT(sizeof(struct Ground) == 0x204);

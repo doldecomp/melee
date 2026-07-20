@@ -142,11 +142,6 @@ extern struct grSh_Route_LightConfig {
     /* 0x30 */ s32 x30;
 } grSh_Route_803E5A58[];
 
-float grShrineRoute_802087B0(void)
-{
-    return grNKr_804DB868;
-}
-
 void grShrineRoute_OnDemoInit(bool arg) {}
 
 void grShrineRoute_OnInit(void)
@@ -779,6 +774,11 @@ bool grShrineRoute_80209BE4(Ground_GObj* arg)
     return false;
 }
 
+inline f32 grShrineRoute_8020A8A4_rand(void)
+{
+    return HSD_Randf();
+}
+
 void grShrineRoute_80209BEC(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -901,6 +901,8 @@ bool grShrineRoute_8020A214(Ground_GObj* arg)
     return false;
 }
 
+static inline void grShrineRoute_StackPad(GXColor color) {}
+
 void grShrineRoute_8020A21C(Ground_GObj* gobj)
 {
     HSD_GObj* player;
@@ -924,7 +926,6 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
     f32 dx;
     f32 dy;
     f32 dist_sq;
-    PAD_STACK(4);
     GET_GROUND(0);
     GET_GROUND(0);
 
@@ -1050,6 +1051,7 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
             }
         }
         HSD_LObjSetColor(gp->gv.shrineroute2.x170, color);
+        grShrineRoute_StackPad(color);
 
         /* Copy position from 2nd nearest */
         if (HSD_LObjGetPosition(gp->gv.shrineroute2.xC8[sorted[1]],
@@ -1095,11 +1097,6 @@ bool grShrineRoute_8020A894(Ground_GObj* arg)
 void grShrineRoute_8020A89C(Ground_GObj* arg) {}
 
 void grShrineRoute_8020A8A0(Ground_GObj* arg) {}
-
-inline f32 grShrineRoute_8020A8A4_rand(void)
-{
-    return HSD_Randf();
-}
 
 void grShrineRoute_8020A8A4(Ground_GObj* gobj)
 {
@@ -1266,20 +1263,22 @@ s32 grShrineRoute_8020AE08(HSD_GObj* gobj, HSD_GObj* player_gobj, s32* out)
 void grShrineRoute_8020AF38(HSD_GObj* gobj, s32 arg1)
 {
     Ground* gp = GET_GROUND(gobj);
-    HSD_GObj* pgobj;
     HSD_GObj** symbolp;
-    HSD_JObj* jobj;
-    f32 scale;
     s32 ix = arg1 - 0xBD;
-    PAD_STACK(4);
+    HSD_JObj* jobj;
+    HSD_GObj* pgobj;
 
     pgobj = Ground_801C57A4();
 
     if (gp->gv.shrineroute.symbols[ix] != NULL) {
-        symbolp = gp->gv.shrineroute.symbols + ix;
+        HSD_GObj** symbols = gp->gv.shrineroute.symbols;
+        f32 scale;
+        s32 map_id;
+        PAD_STACK(4);
+        symbolp = &symbols[ix];
+        map_id = ((Ground*) (*symbolp)->user_data)->map_id;
         scale = 0.7f;
-        if (((Ground*) gp->gv.shrineroute.symbols[ix]->user_data)->map_id == 1)
-        {
+        if (map_id == 1) {
             scale *= grSh_Route_804D6A58->x14;
         } else {
             scale *= grSh_Route_804D6A58->x18;

@@ -85,7 +85,7 @@ void gm_801B98E8(GameScene* scene)
     gm_801B06B0(css, 0x10, vs->data.players[0].c_kind, 1,
                 vs->data.players[0].color, vs->data.players[0].xA, 0,
                 gm_804D68F8);
-    game_cache = &lbDvd_8001822C()->game_cache;
+    game_cache = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_800174BC();
     game_cache->entries[1].char_id = CHKIND_SANDBAG;
     game_cache->entries[1].color = 0;
@@ -165,7 +165,7 @@ void gm_801B9DD8(GameScene* arg0)
 {
     u32 temp_r31;
     s32* temp_r3_2;
-    u8 temp_r30;
+    u8 selkind;
     MatchExitInfo* temp_r3;
     u16 tmp;
 
@@ -177,13 +177,13 @@ void gm_801B9DD8(GameScene* arg0)
         gm_SetPendingSceneIndex(1);
         return;
     }
-    temp_r30 =
-        gm_80164024(temp_r3->match_end.player_standings[0].character_kind);
+    selkind = gm_CKindToSelKind(
+        temp_r3->match_end.player_standings[0].character_kind);
     temp_r31 = gm_80180AE4();
     if ((tmp = gm_801734D0(temp_r31)) != 0x148) {
         gm_80164504(tmp);
     }
-    temp_r3_2 = gmMainLib_8015D084(temp_r30);
+    temp_r3_2 = gmMainLib_8015D084(selkind);
     if (temp_r31 > *temp_r3_2) {
         *temp_r3_2 = temp_r31;
     }

@@ -1,5 +1,6 @@
 #include "itrshell.h"
 
+#include "inlines.h"
 #include "m2c_macros.h"
 
 #include <placeholder.h>
@@ -65,6 +66,7 @@ void it_8028CFE0(Item_GObj* gobj)
     Vec v;
     HSD_JObj* jobj;
     PAD_STACK(4);
+    /// @todo Shared code with #it_8028B8D8.
     if (ip->xDD4_itemVar.rshell.xDDC <= 0.0f) {
         jobj = GET_JOBJ(gobj);
         v = attrs->x48;
@@ -363,9 +365,7 @@ bool itRshell_UnkMotion0_Coll(Item_GObj* gobj)
     jobj = GET_JOBJ(gobj);
     attrs = ip->xC4_article_data->x4_specialAttributes;
     if (ip->ground_or_air == GA_Ground) {
-        it_80276CB8(gobj);
-        jobj = HSD_JObjGetChild(jobj);
-        HSD_JObjAddRotationY(jobj, attrs->x38 * ABS(ip->x40_vel.x));
+        Item_UpdateRollingShellRotation(gobj, ip, jobj, &attrs->x38);
     }
     return false;
 }
@@ -702,9 +702,7 @@ bool itRshell_UnkMotion7_Coll(Item_GObj* gobj)
     jobj = GET_JOBJ(gobj);
     attrs = ip->xC4_article_data->x4_specialAttributes;
     if (ip->ground_or_air == GA_Ground) {
-        it_80276CB8(gobj);
-        jobj = HSD_JObjGetChild(jobj);
-        HSD_JObjAddRotationY(jobj, attrs->x38 * ABS(ip->x40_vel.x));
+        Item_UpdateRollingShellRotation(gobj, ip, jobj, &attrs->x38);
     }
     return false;
 }

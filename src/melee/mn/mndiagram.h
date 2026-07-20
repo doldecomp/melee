@@ -3,6 +3,8 @@
 
 #include <placeholder.h>
 
+#include "mn/types.h"
+
 #include <baselib/forward.h>
 
 /* 23EA2C */ u8 mnDiagram_GetFighterByIndex(int idx);
@@ -29,8 +31,9 @@
 /* 23F400 */ u8 mnDiagram_GetNextNameIndex(s32 idx);
 /* 23F45C */ u8 mnDiagram_GetPrevFighterIndex(s32 idx);
 /* 23F4CC */ u8 mnDiagram_GetNextFighterIndex(s32 idx);
-/* 23F540 */ u32 mnDiagram_GetNamePlayTimeByFighter(int name_idx,
-                                                    int fighter_idx);
+/* 23F540 */ u32
+mnDiagram_GetNamePlayTimeByFighter(int name_idx,
+                                   SelectableCharacterKind fighter_idx);
 /* 23F578 */ int mnDiagram_GetRankedFighterForName(int rank, int name_idx,
                                                    u32 (*func)(int, int));
 /* 23F8CC */ u8 mnDiagram_GetLeastPlayedFighter(u8 name_idx);

@@ -306,7 +306,7 @@ void gm_801B6428(GameScene* arg0)
     temp_r3->players[0].xC_b1 = false;
     temp_r3->rules.xE = gm_801647F8(temp_r3->players[0].c_kind);
     {
-        PreloadCacheScene* scene = lbDvd_8001822C();
+        PreloadCacheScene* scene = lbDvd_GetPreloadCacheScene();
         scene->game_cache.stage_id = temp_r3->rules.xE;
     }
     lbDvd_80018254();
@@ -342,7 +342,7 @@ void gm_801B65D4(GameScene* arg0)
         gm_SetPendingSceneIndex(1U);
         return;
     }
-    temp_r3_2 = gm_80164024(temp_r28->unk_584);
+    temp_r3_2 = gm_CKindToSelKind(temp_r28->unk_584);
     temp_r31 = gmMainLib_8015D438(temp_r3_2);
     temp_r26 = gmMainLib_8015D450(temp_r3_2);
     Ground_801C1DE4(&sp14, &sp10);
@@ -484,7 +484,7 @@ static void gm_801B6AD8_inline(GameScene* scene, int x)
     gm_801B06B0(temp_r3, x, temp_r31->data.players[0].c_kind, 1,
                 temp_r31->data.players[0].color, temp_r31->data.players[0].xA,
                 0, gm_804D68F0);
-    temp_r31_2 = &lbDvd_8001822C()->game_cache;
+    temp_r31_2 = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_800174BC();
     temp_r31_2->entries[1].char_id = CKIND_BOY;
     temp_r31_2->entries[1].color = 0;
@@ -496,7 +496,7 @@ static void gm_801B6AD8_inline(GameScene* scene, int x)
 
 void gm_801B69C0(StartMeleeData* arg0)
 {
-    gmMainLib_8015CC34();
+    gmMainLib_GetGameRules();
     arg0->rules.x0_0 = 0;
     arg0->rules.x0_6 = true;
     arg0->rules.x0_7 = true;
@@ -525,23 +525,69 @@ void gm_801B6AD8(GameScene* scene)
     gm_801B6AD8_inline(scene, 0x11);
 }
 
+static void gmMultiman_LeaveFinish(VsModeData* data, CSSData* css_data)
+{
+    gm_80167A14(data->data.players);
+    gm_801B0730(css_data, &data->data.players[0].c_kind, NULL,
+                &data->data.players[0].color, &data->data.players[0].xA, NULL);
+}
+
+static inline void gmMultiman_InitPlayers(StartMeleeData* match,
+                                          VsModeData* multiman,
+                                          bool clear_xC_b1)
+{
+    int i;
+
+    gm_80167A14(match->players);
+
+    for (i = 0; i < 6; i++) {
+        match->players[i] = multiman->data.players[i];
+    }
+
+    gm_801B0620(match->players, multiman->data.players[0].c_kind,
+                multiman->data.players[0].color, 1, gm_804D68F0);
+
+    for (i = 1; i < 6; i++) {
+        match->players[i].team = !match->players[0].team;
+        if (clear_xC_b1) {
+            match->players[i].xC_b1 = false;
+        }
+    }
+
+    gm_8016F088(match);
+}
+
+static inline void gmMultiman_InitTimedRules(StartMeleeData* match,
+                                             u32 time_limit)
+{
+    match->rules.x0_6 = true;
+    match->rules.x0_7 = false;
+    match->rules.x10 = time_limit;
+}
+
+static inline void gmMultiman_InitScoreRules(StartMeleeData* match)
+{
+    match->rules.x0_6 = false;
+    match->rules.x0_7 = false;
+    match->rules.x10 = 0;
+    match->rules.x5_0 = true;
+    match->rules.x5_1 = false;
+}
+
 void gm_801B6B70(GameScene* scene)
 {
-    VsModeData* temp_r31;
-    CSSData* temp_r3;
+    VsModeData* data;
+    CSSData* css_data;
 
     PAD_STACK(8);
 
-    temp_r31 = &gmMainLib_804D3EE0->unk_1490;
-    temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
-    if (temp_r3->pending_scene_change == 2) {
+    data = &gmMainLib_804D3EE0->unk_1490;
+    css_data = gm_GetGameSceneLeaveDataCallback(scene);
+    if (css_data->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
-    gm_80167A14(temp_r31->data.players);
-    gm_801B0730(temp_r3, &temp_r31->data.players[0].c_kind, NULL,
-                &temp_r31->data.players[0].color,
-                &temp_r31->data.players[0].xA, NULL);
+    gmMultiman_LeaveFinish(data, css_data);
 }
 
 void gm_801B6BE8(GameScene* scene)
@@ -550,7 +596,6 @@ void gm_801B6BE8(GameScene* scene)
     UnkMultimanData* temp_r30;
     StartMeleeData* temp_r3;
     s32* temp_r29;
-    int i;
 
     PAD_STACK(8);
 
@@ -559,25 +604,13 @@ void gm_801B6BE8(GameScene* scene)
 
     temp_r3->rules = temp_r31->data.rules;
     gm_801B69C0(temp_r3);
-    gm_80167A14(temp_r3->players);
-
-    for (i = 0; i < 6; i++) {
-        temp_r3->players[i] = temp_r31->data.players[i];
-    }
-    gm_801B0620(temp_r3->players, temp_r31->data.players[0].c_kind,
-                temp_r31->data.players[0].color, 1, gm_804D68F0);
-
-    for (i = 1; i < 6; i++) {
-        temp_r3->players[i].team = !temp_r3->players[0].team;
-    }
-
-    gm_8016F088(temp_r3);
+    gmMultiman_InitPlayers(temp_r3, temp_r31, false);
     gm_80182554(temp_r3->players[0].c_kind, 0x21);
-    temp_r29 =
-        gmMainLib_8015D6A4(gm_80164024(temp_r31->data.players[0].c_kind));
+    temp_r29 = gmMainLib_8015D6A4(
+        gm_CKindToSelKind(temp_r31->data.players[0].c_kind));
     temp_r30 = gm_80182DF0(temp_r31->data.players[0].c_kind, 0x21);
-    temp_r30->x0_0 =
-        gmMainLib_8015D6BC(gm_80164024(temp_r31->data.players[0].c_kind));
+    temp_r30->x0_0 = gmMainLib_8015D6BC(
+        gm_CKindToSelKind(temp_r31->data.players[0].c_kind));
     gm_80181A44(temp_r31->data.players[0].c_kind, 0x21, temp_r30->x0_0);
     if (temp_r30->x0_0) {
         temp_r30->x4 = *temp_r29;
@@ -586,6 +619,41 @@ void gm_801B6BE8(GameScene* scene)
         temp_r30->x2 = *temp_r29;
         gm_80181AC8(temp_r31->data.players[0].c_kind, 0x21, temp_r30->x2);
         gm_80181B64(temp_r31->data.players[0].c_kind, 0x21, 0x0FFFFFFF);
+    }
+}
+
+static inline void gmMultiman_RecordMatchResult(MatchExitInfo* data)
+{
+    gm_80162968(data->match_end.frame_count / 60);
+    gm_8016247C(data->match_end.player_standings[0].xE);
+    gm_80182578();
+}
+
+static inline void gmMultiman_SaveCompletionRecord(VsModeData* multiman,
+                                                   UnkMultimanData* data,
+                                                   s32* record, int mode)
+{
+    if (data->x0_0) {
+        if (mode == GM_10MAN_VS) {
+            gmMainLib_8015D6D8(
+                gm_CKindToSelKind(multiman->data.players[0].c_kind), 1);
+        } else {
+            gmMainLib_8015D72C(
+                gm_CKindToSelKind(multiman->data.players[0].c_kind), 1);
+        }
+        *record = data->x4;
+    } else {
+        if (mode == GM_10MAN_VS) {
+            gmMainLib_8015D6D8(
+                gm_CKindToSelKind(multiman->data.players[0].c_kind), 0);
+        } else {
+            gmMainLib_8015D72C(
+                gm_CKindToSelKind(multiman->data.players[0].c_kind), 0);
+        }
+        *record = data->x2;
+    }
+    if (!gm_801B688C(data->x0_0)) {
+        gm_SetPendingSceneIndex(0);
     }
 }
 
@@ -604,22 +672,12 @@ void gm_801B6F44(GameScene* scene)
         gm_SetPendingSceneIndex(1);
         return;
     }
-    gm_80162968(temp_r3->match_end.frame_count / 60);
-    gm_8016247C(temp_r3->match_end.player_standings[0].xE);
-    gm_80182578();
-    temp_r30 =
-        gmMainLib_8015D6A4(gm_80164024(temp_r29->data.players[0].c_kind));
+    gmMultiman_RecordMatchResult(temp_r3);
+    temp_r30 = gmMainLib_8015D6A4(
+        gm_CKindToSelKind(temp_r29->data.players[0].c_kind));
     temp_r3_2 = gm_80182DF0(temp_r29->data.players[0].c_kind, 0x21);
-    if (temp_r3_2->x0_0) {
-        gmMainLib_8015D6D8(gm_80164024(temp_r29->data.players[0].c_kind), 1);
-        *temp_r30 = temp_r3_2->x4;
-    } else {
-        gmMainLib_8015D6D8(gm_80164024(temp_r29->data.players[0].c_kind), 0);
-        *temp_r30 = temp_r3_2->x2;
-    }
-    if (!gm_801B688C(temp_r3_2->x0_0)) {
-        gm_SetPendingSceneIndex(0);
-    }
+    gmMultiman_SaveCompletionRecord(temp_r29, temp_r3_2, temp_r30,
+                                    GM_10MAN_VS);
 }
 
 void gm_801B7044(GameScene* scene)
@@ -629,21 +687,18 @@ void gm_801B7044(GameScene* scene)
 
 void gm_801B70DC(GameScene* scene)
 {
-    VsModeData* temp_r31;
-    CSSData* temp_r3;
+    VsModeData* data;
+    CSSData* css_data;
 
     PAD_STACK(8);
 
-    temp_r31 = &gmMainLib_804D3EE0->unk_1490;
-    temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
-    if (temp_r3->pending_scene_change == 2) {
+    data = &gmMainLib_804D3EE0->unk_1490;
+    css_data = gm_GetGameSceneLeaveDataCallback(scene);
+    if (css_data->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
-    gm_80167A14(temp_r31->data.players);
-    gm_801B0730(temp_r3, &temp_r31->data.players[0].c_kind, NULL,
-                &temp_r31->data.players[0].color,
-                &temp_r31->data.players[0].xA, NULL);
+    gmMultiman_LeaveFinish(data, css_data);
 }
 
 void gm_801B7154(GameScene* scene)
@@ -652,7 +707,6 @@ void gm_801B7154(GameScene* scene)
     UnkMultimanData* temp_r30;
     s32* temp_r29;
     StartMeleeData* temp_r3;
-    int i;
 
     PAD_STACK(8);
 
@@ -661,26 +715,13 @@ void gm_801B7154(GameScene* scene)
 
     temp_r3->rules = temp_r31->data.rules;
     gm_801B69C0(temp_r3);
-    gm_80167A14(temp_r3->players);
-
-    for (i = 0; i < 6; i++) {
-        temp_r3->players[i] = temp_r31->data.players[i];
-    }
-
-    gm_801B0620(temp_r3->players, temp_r31->data.players[0].c_kind,
-                temp_r31->data.players[0].color, 1, gm_804D68F0);
-
-    for (i = 1; i < 6; i++) {
-        temp_r3->players[i].team = !temp_r3->players[0].team;
-        temp_r3->players[i].xC_b1 = false;
-    }
-    gm_8016F088(temp_r3);
+    gmMultiman_InitPlayers(temp_r3, temp_r31, true);
     gm_80182554(temp_r3->players[0].c_kind, 0x22);
-    temp_r29 =
-        gmMainLib_8015D6F8(gm_80164024(temp_r31->data.players[0].c_kind));
+    temp_r29 = gmMainLib_8015D6F8(
+        gm_CKindToSelKind(temp_r31->data.players[0].c_kind));
     temp_r30 = gm_80182DF0(temp_r31->data.players[0].c_kind, 0x22);
-    temp_r30->x0_0 =
-        gmMainLib_8015D710(gm_80164024(temp_r31->data.players[0].c_kind));
+    temp_r30->x0_0 = gmMainLib_8015D710(
+        gm_CKindToSelKind(temp_r31->data.players[0].c_kind));
     gm_80181A44(temp_r31->data.players[0].c_kind, 0x22, temp_r30->x0_0);
     if (temp_r30->x0_0) {
         temp_r30->x4 = *temp_r29;
@@ -706,22 +747,12 @@ void gm_801B74F0(GameScene* scene)
         gm_SetPendingSceneIndex(1);
         return;
     }
-    gm_80162968(temp_r3->match_end.frame_count / 60);
-    gm_8016247C(temp_r3->match_end.player_standings[0].xE);
-    gm_80182578();
-    temp_r30 =
-        gmMainLib_8015D6F8(gm_80164024(temp_r29->data.players[0].c_kind));
+    gmMultiman_RecordMatchResult(temp_r3);
+    temp_r30 = gmMainLib_8015D6F8(
+        gm_CKindToSelKind(temp_r29->data.players[0].c_kind));
     temp_r3_2 = gm_80182DF0(temp_r29->data.players[0].c_kind, 0x22);
-    if (temp_r3_2->x0_0) {
-        gmMainLib_8015D72C(gm_80164024(temp_r29->data.players[0].c_kind), 1);
-        *temp_r30 = temp_r3_2->x4;
-    } else {
-        gmMainLib_8015D72C(gm_80164024(temp_r29->data.players[0].c_kind), 0);
-        *temp_r30 = temp_r3_2->x2;
-    }
-    if (gm_801B688C(temp_r3_2->x0_0) == 0) {
-        gm_SetPendingSceneIndex(0);
-    }
+    gmMultiman_SaveCompletionRecord(temp_r29, temp_r3_2, temp_r30,
+                                    GM_100MAN_VS);
 }
 
 void gm_801B75F0(GameScene* scene)
@@ -731,20 +762,18 @@ void gm_801B75F0(GameScene* scene)
 
 void gm_801B7688(GameScene* scene)
 {
-    VsModeData* temp_r31;
-    CSSData* temp_r3;
+    VsModeData* data;
+    CSSData* css_data;
+
     PAD_STACK(8);
 
-    temp_r31 = &gmMainLib_804D3EE0->unk_1490;
-    temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
-    if (temp_r3->pending_scene_change == 2) {
+    data = &gmMainLib_804D3EE0->unk_1490;
+    css_data = gm_GetGameSceneLeaveDataCallback(scene);
+    if (css_data->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
-    gm_80167A14(temp_r31->data.players);
-    gm_801B0730(temp_r3, &temp_r31->data.players[0].c_kind, NULL,
-                &temp_r31->data.players[0].color,
-                &temp_r31->data.players[0].xA, NULL);
+    gmMultiman_LeaveFinish(data, css_data);
 }
 
 static inline VsModeData* getMultimanData(void)
@@ -752,51 +781,79 @@ static inline VsModeData* getMultimanData(void)
     return &gmMainLib_804D3EE0->unk_1490;
 }
 
+static inline void gmMultiman_InitRecord(VsModeData* multiman, u16* record,
+                                         int mode)
+{
+    UnkMultimanData* data =
+        gm_80182DF0(multiman->data.players[0].c_kind, mode);
+
+    data->x0_0 = *record ? true : false;
+    gm_80181A44(multiman->data.players[0].c_kind, mode, data->x0_0);
+    if (data->x0_0) {
+        data->x2 = *record;
+        gm_80181AC8(multiman->data.players[0].c_kind, mode, data->x2);
+    } else {
+        data->x2 = 0;
+        gm_80181AC8(multiman->data.players[0].c_kind, mode, 0);
+    }
+}
+
+static inline void gmMultiman_InitScoreRecord(VsModeData* multiman,
+                                              s32* record, int mode)
+{
+    UnkMultimanData* data =
+        gm_80182DF0(multiman->data.players[0].c_kind, mode);
+
+    data->x2 = *record;
+    gm_80181AC8(multiman->data.players[0].c_kind, mode, data->x2);
+}
+
+static inline void gmMultiman_SaveTimedRecord(VsModeData* multiman,
+                                              UnkMultimanData* data,
+                                              u16* record,
+                                              bool update_15_minute_record)
+{
+    if (data->x0_0) {
+        *record = data->x2;
+        if (update_15_minute_record) {
+            gmMainLib_8015D780(
+                gm_CKindToSelKind(multiman->data.players[0].c_kind));
+        }
+    } else {
+        *record = 0;
+    }
+    if (!gm_801B688C(data->x0_0)) {
+        gm_SetPendingSceneIndex(0);
+    }
+}
+
+static inline void gmMultiman_SaveScoreRecord(UnkMultimanData* data,
+                                              s32* record)
+{
+    *record = data->x2;
+    if (!gm_801B688C(data->x0_0)) {
+        gm_SetPendingSceneIndex(0);
+    }
+}
+
 void gm_801B7700(GameScene* scene)
 {
     StartMeleeData* temp_r3;
     VsModeData* temp_r30;
-    UnkMultimanData* temp_r28;
     s32 var_r29;
     u16* temp_r27;
-    int i;
 
     temp_r30 = getMultimanData();
     temp_r3 = gm_GetGameSceneLoadDataCallback(scene);
 
     temp_r3->rules = temp_r30->data.rules;
     gm_801B69C0(temp_r3);
-    temp_r3->rules.x0_6 = true;
-    temp_r3->rules.x0_7 = false;
-    temp_r3->rules.x10 = 0xB4;
-    gm_80167A14(temp_r3->players);
-
-    for (i = 0; i < 6; i++) {
-        temp_r3->players[i] = temp_r30->data.players[i];
-    }
-
-    gm_801B0620(temp_r3->players, temp_r30->data.players[0].c_kind,
-                temp_r30->data.players[0].color, 1, gm_804D68F0);
-
-    for (i = 1; i < 6; i++) {
-        temp_r3->players[i].team = !temp_r3->players[0].team;
-        temp_r3->players[i].xC_b1 = false;
-    }
-
-    gm_8016F088(temp_r3);
+    gmMultiman_InitTimedRules(temp_r3, 0xB4);
+    gmMultiman_InitPlayers(temp_r3, temp_r30, true);
     gm_80182554(temp_r3->players[0].c_kind, 0x23);
-    temp_r27 =
-        gmMainLib_8015D74C(gm_80164024(temp_r30->data.players[0].c_kind));
-    temp_r28 = gm_80182DF0(temp_r30->data.players[0].c_kind, 0x23);
-    temp_r28->x0_0 = *temp_r27 ? true : false;
-    gm_80181A44(temp_r30->data.players[0].c_kind, 0x23, temp_r28->x0_0);
-    if (temp_r28->x0_0) {
-        temp_r28->x2 = (u16) *temp_r27;
-        gm_80181AC8(temp_r30->data.players[0].c_kind, 0x23, temp_r28->x2);
-    } else {
-        temp_r28->x2 = 0;
-        gm_80181AC8(temp_r30->data.players[0].c_kind, 0x23, 0);
-    }
+    temp_r27 = gmMainLib_8015D74C(
+        gm_CKindToSelKind(temp_r30->data.players[0].c_kind));
+    gmMultiman_InitRecord(temp_r30, temp_r27, 0x23);
 }
 
 void gm_801B7AA0(GameScene* scene)
@@ -813,20 +870,11 @@ void gm_801B7AA0(GameScene* scene)
         gm_SetPendingSceneIndex(1);
         return;
     }
-    gm_80162968(temp_r3->match_end.frame_count / 60);
-    gm_8016247C(temp_r3->match_end.player_standings[0].xE);
-    gm_80182578();
-    temp_r31 =
-        gmMainLib_8015D74C(gm_80164024(temp_r30->data.players[0].c_kind));
+    gmMultiman_RecordMatchResult(temp_r3);
+    temp_r31 = gmMainLib_8015D74C(
+        gm_CKindToSelKind(temp_r30->data.players[0].c_kind));
     temp_r3_2 = gm_80182DF0(temp_r30->data.players[0].c_kind, 0x23);
-    if (temp_r3_2->x0_0) {
-        *temp_r31 = temp_r3_2->x2;
-    } else {
-        *temp_r31 = 0;
-    }
-    if (gm_801B688C(temp_r3_2->x0_0) == 0) {
-        gm_SetPendingSceneIndex(0);
-    }
+    gmMultiman_SaveTimedRecord(temp_r30, temp_r3_2, temp_r31, false);
 }
 
 void gm_801B7B74(GameScene* scene)
@@ -836,29 +884,25 @@ void gm_801B7B74(GameScene* scene)
 
 void gm_801B7C0C(GameScene* scene)
 {
-    VsModeData* temp_r31;
-    CSSData* temp_r3;
+    VsModeData* data;
+    CSSData* css_data;
+
     PAD_STACK(8);
 
-    temp_r31 = &gmMainLib_804D3EE0->unk_1490;
-    temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
-    if (temp_r3->pending_scene_change == 2) {
+    data = &gmMainLib_804D3EE0->unk_1490;
+    css_data = gm_GetGameSceneLeaveDataCallback(scene);
+    if (css_data->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
-    gm_80167A14(temp_r31->data.players);
-    gm_801B0730(temp_r3, &temp_r31->data.players[0].c_kind, NULL,
-                &temp_r31->data.players[0].color,
-                &temp_r31->data.players[0].xA, NULL);
+    gmMultiman_LeaveFinish(data, css_data);
 }
 
 void gm_801B7C84(GameScene* scene)
 {
     VsModeData* temp_r30;
     StartMeleeData* temp_r3;
-    UnkMultimanData* temp_r28;
     u16* temp_r27;
-    int i;
 
     temp_r30 = getMultimanData();
     temp_r3 = gm_GetGameSceneLoadDataCallback(scene);
@@ -867,37 +911,12 @@ void gm_801B7C84(GameScene* scene)
 
     temp_r3->rules = temp_r30->data.rules;
     gm_801B69C0(temp_r3);
-    temp_r3->rules.x0_6 = true;
-    temp_r3->rules.x0_7 = false;
-    temp_r3->rules.x10 = 0x384;
-    gm_80167A14(temp_r3->players);
-
-    for (i = 0; i < 6; i++) {
-        temp_r3->players[i] = temp_r30->data.players[i];
-    }
-
-    gm_801B0620(temp_r3->players, temp_r30->data.players[0].c_kind,
-                temp_r30->data.players[0].color, 1, gm_804D68F0);
-
-    for (i = 1; i < 6; i++) {
-        temp_r3->players[i].team = !temp_r3->players[0].team;
-        temp_r3->players[i].xC_b1 = false;
-    }
-
-    gm_8016F088(temp_r3);
+    gmMultiman_InitTimedRules(temp_r3, 0x384);
+    gmMultiman_InitPlayers(temp_r3, temp_r30, true);
     gm_80182554(temp_r3->players[0].c_kind, 0x24);
-    temp_r27 =
-        gmMainLib_8015D7A4(gm_80164024(temp_r30->data.players[0].c_kind));
-    temp_r28 = gm_80182DF0(temp_r30->data.players[0].c_kind, 0x24);
-    temp_r28->x0_0 = *temp_r27 ? true : false;
-    gm_80181A44(temp_r30->data.players[0].c_kind, 0x24, temp_r28->x0_0);
-    if (temp_r28->x0_0) {
-        temp_r28->x2 = *temp_r27;
-        gm_80181AC8(temp_r30->data.players[0].c_kind, 0x24, temp_r28->x2);
-    } else {
-        temp_r28->x2 = 0;
-        gm_80181AC8(temp_r30->data.players[0].c_kind, 0x24, 0);
-    }
+    temp_r27 = gmMainLib_8015D7A4(
+        gm_CKindToSelKind(temp_r30->data.players[0].c_kind));
+    gmMultiman_InitRecord(temp_r30, temp_r27, 0x24);
 }
 
 void gm_801B8024(GameScene* scene)
@@ -914,21 +933,11 @@ void gm_801B8024(GameScene* scene)
         gm_SetPendingSceneIndex(1);
         return;
     }
-    gm_80162968(temp_r3->match_end.frame_count / 60);
-    gm_8016247C(temp_r3->match_end.player_standings[0].xE);
-    gm_80182578();
-    temp_r30 =
-        gmMainLib_8015D7A4(gm_80164024(temp_r29->data.players[0].c_kind));
+    gmMultiman_RecordMatchResult(temp_r3);
+    temp_r30 = gmMainLib_8015D7A4(
+        gm_CKindToSelKind(temp_r29->data.players[0].c_kind));
     temp_r3_2 = gm_80182DF0(temp_r29->data.players[0].c_kind, 0x24);
-    if (temp_r3_2->x0_0) {
-        *temp_r30 = temp_r3_2->x2;
-        gmMainLib_8015D780(gm_80164024(temp_r29->data.players[0].c_kind));
-    } else {
-        *temp_r30 = 0;
-    }
-    if (gm_801B688C(temp_r3_2->x0_0) == 0) {
-        gm_SetPendingSceneIndex(0);
-    }
+    gmMultiman_SaveTimedRecord(temp_r29, temp_r3_2, temp_r30, true);
 }
 
 void gm_801B8110(GameScene* scene)
@@ -938,20 +947,18 @@ void gm_801B8110(GameScene* scene)
 
 void gm_801B81A8(GameScene* scene)
 {
-    VsModeData* temp_r31;
-    CSSData* temp_r3;
+    VsModeData* data;
+    CSSData* css_data;
+
     PAD_STACK(8);
 
-    temp_r31 = &gmMainLib_804D3EE0->unk_1490;
-    temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
-    if (temp_r3->pending_scene_change == 2) {
+    data = &gmMainLib_804D3EE0->unk_1490;
+    css_data = gm_GetGameSceneLeaveDataCallback(scene);
+    if (css_data->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
-    gm_80167A14(temp_r31->data.players);
-    gm_801B0730(temp_r3, &temp_r31->data.players[0].c_kind, NULL,
-                &temp_r31->data.players[0].color,
-                &temp_r31->data.players[0].xA, NULL);
+    gmMultiman_LeaveFinish(data, css_data);
 }
 
 void gm_801B8220(GameScene* scene)
@@ -959,39 +966,17 @@ void gm_801B8220(GameScene* scene)
     VsModeData* temp_r30 = &gmMainLib_804D3EE0->unk_1490;
     StartMeleeData* temp_r3 = gm_GetGameSceneLoadDataCallback(scene);
     s32* temp_r29;
-    UnkMultimanData* temp_r3_3;
-    int i;
 
     PAD_STACK(8);
 
     temp_r3->rules = temp_r30->data.rules;
     gm_801B69C0(temp_r3);
-    temp_r3->rules.x0_6 = false;
-    temp_r3->rules.x0_7 = false;
-    temp_r3->rules.x10 = 0;
-    temp_r3->rules.x5_0 = true;
-    temp_r3->rules.x5_1 = false;
-    gm_80167A14(temp_r3->players);
-
-    for (i = 0; i < 6; i++) {
-        temp_r3->players[i] = temp_r30->data.players[i];
-    }
-
-    gm_801B0620(temp_r3->players, temp_r30->data.players[0].c_kind,
-                temp_r30->data.players[0].color, 1, gm_804D68F0);
-
-    for (i = 1; i < 6; i++) {
-        temp_r3->players[i].team = !temp_r3->players[0].team;
-        temp_r3->players[i].xC_b1 = false;
-    }
-
-    gm_8016F088(temp_r3);
+    gmMultiman_InitScoreRules(temp_r3);
+    gmMultiman_InitPlayers(temp_r3, temp_r30, true);
     gm_80182554(temp_r3->players[0].c_kind, 0x25);
-    temp_r29 =
-        gmMainLib_8015D7BC(gm_80164024(temp_r30->data.players[0].c_kind));
-    temp_r3_3 = gm_80182DF0(temp_r30->data.players[0].c_kind, 0x25);
-    temp_r3_3->x2 = *temp_r29;
-    gm_80181AC8(temp_r30->data.players[0].c_kind, 0x25, temp_r3_3->x2);
+    temp_r29 = gmMainLib_8015D7BC(
+        gm_CKindToSelKind(temp_r30->data.players[0].c_kind));
+    gmMultiman_InitScoreRecord(temp_r30, temp_r29, 0x25);
 }
 
 void gm_801B8580(GameScene* scene)
@@ -1008,16 +993,11 @@ void gm_801B8580(GameScene* scene)
         gm_SetPendingSceneIndex(1U);
         return;
     }
-    gm_80162968(temp_r3->match_end.frame_count / 60);
-    gm_8016247C(temp_r3->match_end.player_standings[0].xE);
-    gm_80182578();
-    temp_r31 =
-        gmMainLib_8015D7BC(gm_80164024(temp_r30->data.players[0].c_kind));
+    gmMultiman_RecordMatchResult(temp_r3);
+    temp_r31 = gmMainLib_8015D7BC(
+        gm_CKindToSelKind(temp_r30->data.players[0].c_kind));
     temp_r3_2 = gm_80182DF0(temp_r30->data.players[0].c_kind, 0x25);
-    *temp_r31 = temp_r3_2->x2;
-    if (!gm_801B688C(temp_r3_2->x0_0)) {
-        gm_SetPendingSceneIndex(0U);
-    }
+    gmMultiman_SaveScoreRecord(temp_r3_2, temp_r31);
 }
 
 void gm_801B863C(GameScene* scene)
@@ -1027,20 +1007,18 @@ void gm_801B863C(GameScene* scene)
 
 void gm_801B86D4(GameScene* scene)
 {
-    VsModeData* temp_r31;
-    CSSData* temp_r3;
+    VsModeData* data;
+    CSSData* css_data;
+
     PAD_STACK(8);
 
-    temp_r31 = &gmMainLib_804D3EE0->unk_1490;
-    temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
-    if (temp_r3->pending_scene_change == 2) {
+    data = &gmMainLib_804D3EE0->unk_1490;
+    css_data = gm_GetGameSceneLeaveDataCallback(scene);
+    if (css_data->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
-    gm_80167A14(temp_r31->data.players);
-    gm_801B0730(temp_r3, &temp_r31->data.players[0].c_kind, NULL,
-                &temp_r31->data.players[0].color,
-                &temp_r31->data.players[0].xA, NULL);
+    gmMultiman_LeaveFinish(data, css_data);
 }
 
 void gm_801B874C(GameScene* scene)
@@ -1048,7 +1026,6 @@ void gm_801B874C(GameScene* scene)
     VsModeData* temp_r29 = &gmMainLib_804D3EE0->unk_1490;
     StartMeleeData* temp_r3 = gm_GetGameSceneLoadDataCallback(scene);
     s32* temp_r28;
-    UnkMultimanData* temp_r3_3;
     int i;
 
     PAD_STACK(8);
@@ -1056,11 +1033,7 @@ void gm_801B874C(GameScene* scene)
     temp_r3->rules = temp_r29->data.rules;
     gm_801B69C0(temp_r3);
     temp_r3->rules.xB = -1;
-    temp_r3->rules.x0_6 = false;
-    temp_r3->rules.x0_7 = false;
-    temp_r3->rules.x10 = 0;
-    temp_r3->rules.x5_0 = true;
-    temp_r3->rules.x5_1 = false;
+    gmMultiman_InitScoreRules(temp_r3);
     gm_80167A14(temp_r3->players);
 
     for (i = 0; i < 6; i++) {
@@ -1078,11 +1051,9 @@ void gm_801B874C(GameScene* scene)
 
     gm_8016F088(temp_r3);
     gm_80182554(temp_r3->players[0].c_kind, 0x26);
-    temp_r28 =
-        gmMainLib_8015D7D4(gm_80164024(temp_r29->data.players[0].c_kind));
-    temp_r3_3 = gm_80182DF0(temp_r29->data.players[0].c_kind, 0x26);
-    temp_r3_3->x2 = *temp_r28;
-    gm_80181AC8(temp_r29->data.players[0].c_kind, 0x26, temp_r3_3->x2);
+    temp_r28 = gmMainLib_8015D7D4(
+        gm_CKindToSelKind(temp_r29->data.players[0].c_kind));
+    gmMultiman_InitScoreRecord(temp_r29, temp_r28, 0x26);
 }
 
 void gm_801B8AF8(GameScene* arg0)
@@ -1099,15 +1070,10 @@ void gm_801B8AF8(GameScene* arg0)
         gm_SetPendingSceneIndex(1);
         return;
     }
-    gm_80162968(temp_r3->match_end.frame_count / 60);
-    gm_8016247C(temp_r3->match_end.player_standings[0].xE);
-    gm_80182578();
-    temp_r31 =
-        gmMainLib_8015D7D4(gm_80164024((u8) temp_r30->data.players[0].c_kind));
+    gmMultiman_RecordMatchResult(temp_r3);
+    temp_r31 = gmMainLib_8015D7D4(
+        gm_CKindToSelKind((u8) temp_r30->data.players[0].c_kind));
     temp_r3_2 =
         gm_80182DF0((s32) (s8) (u8) temp_r30->data.players[0].c_kind, 0x26);
-    *temp_r31 = (s32) temp_r3_2->x2;
-    if (!gm_801B688C(temp_r3_2->x0_0)) {
-        gm_SetPendingSceneIndex(0);
-    }
+    gmMultiman_SaveScoreRecord(temp_r3_2, temp_r31);
 }

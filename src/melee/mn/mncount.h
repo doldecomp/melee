@@ -4,6 +4,8 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "mn/types.h"
+
 #include <baselib/forward.h>
 #include <melee/mn/forward.h>
 
@@ -57,19 +59,22 @@ typedef enum {
     DISASTER_MASTER,       // Disaster Master
 } mnCount_row;
 
-/* 2502CC */ u32 mnCount_GetMatchTime(s32);
-/* 2502F0 */ u32 mnCount_GetKOKingpin(s32);
-/* 250314 */ u32 mnCount_GetNoDefenseNelly(s32);
-/* 250338 */ u32 mnCount_GetDisasterMaster(s32);
-/* 25035C */ int mnCount_8025035C(s32 skip_count, u32 (*get_val_func)(s32));
-/* 25069C */ u32 mnCount_GetSmashChamp(s32);
-/* 2506C0 */ u32 mnCount_GetSmashSap(s32);
-/* 2506E4 */ u32 mnCount_GetSlugMeister(s32);
-/* 250708 */ u32 mnCount_GetPunchingBag(s32);
+/* 2502CC */ u32 mnCount_GetMatchTime(SelectableCharacterKind);
+/* 2502F0 */ u32 mnCount_GetKOKingpin(SelectableCharacterKind);
+/* 250314 */ u32 mnCount_GetNoDefenseNelly(SelectableCharacterKind);
+/* 250338 */ u32 mnCount_GetDisasterMaster(SelectableCharacterKind);
+/* 25035C */ int
+mnCount_8025035C(s32 skip_count, u32 (*get_val_func)(SelectableCharacterKind));
+/* 25069C */ u32 mnCount_GetSmashChamp(SelectableCharacterKind);
+/* 2506C0 */ u32 mnCount_GetSmashSap(SelectableCharacterKind);
+/* 2506E4 */ u32 mnCount_GetSlugMeister(SelectableCharacterKind);
+/* 250708 */ u32 mnCount_GetPunchingBag(SelectableCharacterKind);
 /* 25072C */ s32 mnCount_8025072C(CountEntry* entries, s32 start_idx,
                                   bool mode);
-/* 25092C */ s32 mnCount_8025092C(s32 rank, u32 (*getVal)(s32), bool mode);
-/* 250C7C */ int mnCount_GetRowValue_Character(mnCount_row row);
+/* 25092C */ s32
+mnCount_8025092C(s32 rank, u32 (*getVal)(SelectableCharacterKind), bool mode);
+/* 250C7C */ SelectableCharacterKind
+mnCount_GetRowValue_Character(mnCount_row row);
 /* 250DE4 */ unsigned int mnCount_GetRowValue_Number(int);
 /* 250FF8 */ void mnCount_CreateRow(HSD_GObj*, int, mnCount_row);
 /* 251278 */ void mnCount_HandleUserInput(HSD_GObj* gobj);

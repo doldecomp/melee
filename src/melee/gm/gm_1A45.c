@@ -18,6 +18,8 @@
 #include <dolphin/os/OSThread.h>
 #include <baselib/controller.h>
 #include <baselib/gobjproc.h>
+#include <baselib/hsd_3915.h>
+#include <baselib/hsd_392C.h>
 #include <baselib/initialize.h>
 #include <baselib/leak.h>
 #include <baselib/particle.h>
@@ -180,13 +182,13 @@ void gm_801A4B88(struct GameSceneInfo* info)
 }
 
 /// @brief returns a pointer to the current scenes enter data
-void* gm_801A4B90(void)
+void* gm_GetCurrentSceneEnterData(void)
 {
     return gm_804D6720->load_data;
 }
 
 /// @brief returns a pointer to the current scenes exit data
-void* gm_801A4B9C(void)
+void* gm_GetCurrentSceneExitData(void)
 {
     return gm_804D6720->leave_data;
 }

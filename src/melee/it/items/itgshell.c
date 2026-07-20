@@ -1,6 +1,7 @@
 #include "itgshell.h"
 
 #include "common_structs.h"
+#include "inlines.h"
 
 #include <placeholder.h>
 #include <platform.h>
@@ -73,6 +74,7 @@ void it_8028B8D8(Item_GObj* gobj)
     HSD_JObj* jobj;
     PAD_STACK(4);
 
+    /// @todo Shared code used by #it_8028CFE0 and #it_802DDB38.
     if (ip->xDD4_itemVar.gshell.xDDC <= 0.0f) {
         jobj = GET_JOBJ(gobj);
         v = attrs->x34;
@@ -254,9 +256,7 @@ bool itGshell_UnkMotion0_Coll(Item_GObj* gobj)
     jobj = GET_JOBJ(gobj);
     attrs = ip->xC4_article_data->x4_specialAttributes;
     if (ip->ground_or_air == GA_Ground) {
-        it_80276CB8(gobj);
-        jobj = HSD_JObjGetChild(jobj);
-        HSD_JObjAddRotationY(jobj, attrs->x20 * ABS(ip->x40_vel.x));
+        Item_UpdateRollingShellRotation(gobj, ip, jobj, &attrs->x20);
     }
     return false;
 }
@@ -461,9 +461,7 @@ bool itGshell_UnkMotion6_Coll(Item_GObj* gobj)
     jobj = GET_JOBJ(gobj);
     attrs = ip->xC4_article_data->x4_specialAttributes;
     if (ip->ground_or_air == GA_Ground) {
-        it_80276CB8(gobj);
-        jobj = HSD_JObjGetChild(jobj);
-        HSD_JObjAddRotationY(jobj, attrs->x20 * ABS(ip->x40_vel.x));
+        Item_UpdateRollingShellRotation(gobj, ip, jobj, &attrs->x20);
     }
     if (it_8027770C(gobj)) {
         it_80272980(gobj);

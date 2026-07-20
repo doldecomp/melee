@@ -14,10 +14,10 @@
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/gobjuserdata.h>
+#include <baselib/hsd_3915.h>
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/memory.h>
-#include <baselib/particle.h>
 #include <baselib/sislib.h>
 #include <baselib/video.h>
 #include <baselib/wobj.h>
@@ -205,11 +205,12 @@ void DevText_SetupCObj(void)
 
 void DevText_Draw(DevText* text)
 {
-    PAD_STACK(8);
+    GXColor color;
+    PAD_STACK(4);
     hsd_80391A04(text->scale_x, text->scale_y, text->line_width);
     if ((text->flags & DEVTEXT_FLAG_HIDEBACKGROUND) == 0) {
-        GXColor color = text->bg_color;
         {
+            GXColor color = text->bg_color;
             GXColor* color_ptr = &color;
             DrawRectangle(text->x - 8, text->y - 8,
                           text->scale_x * text->w + 8,
@@ -224,27 +225,23 @@ void DevText_Draw(DevText* text)
         }
     }
     if ((text->flags & DEVTEXT_FLAG_HIDETEXT) == 0) {
-        GXColor color;
         GXColor* color_ptr = &color;
         int y = text->y;
-        int row = 0;
-        while (row < text->h) {
+        int row;
+        for (row = 0; row < text->h; row++) {
             int x = text->x;
-            int col = 0;
-            while (col < text->w) {
+            int col;
+            for (col = 0; col < text->w; col++) {
                 int index = (col + text->w * row) * 2;
-                u8* buf = (u8*) &text->buf[index];
-                s8 chr = buf[0];
-                u8 color_idx = (buf[1] & 0xC0) >> 6;
+                s8 chr = text->buf[index];
+                u8 color_idx = ((u8) text->buf[index + 1] & 0xC0) >> 6;
                 if (chr) {
                     color = text->text_colors[color_idx];
                     DrawASCII(chr, x, y, color_ptr);
                 }
                 x += text->scale_x;
-                col++;
             }
             y += text->scale_y;
-            row++;
         }
         if (text->flags & DEVTEXT_FLAG_SHOWCURSOR) {
             text->unk++;

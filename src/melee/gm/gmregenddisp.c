@@ -1,8 +1,6 @@
 #include "gm_1A7A.h"
 #include "gm_unsplit.h"
 
-#include "dolphin/pad.h"
-
 #include "ft/forward.h"
 
 #include "gm/gm_1BA8.h"
@@ -10,8 +8,6 @@
 #include "gm/inlines.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
-#include "lb/lbbgflash.h"
-#include "lb/lbmthp.h"
 #include "lb/lbspdisplay.h"
 #include "sc/types.h"
 #include "ty/toy.h"
@@ -29,7 +25,6 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/random.h>
-#include <baselib/sobjlib.h>
 #include <MSL/math.h>
 
 void fn_801A7FB4(HSD_GObj* gobj)
@@ -59,6 +54,7 @@ void fn_801A7FB4(HSD_GObj* gobj)
     }
 }
 
+/// @todo .sdata2 order hack
 static void order_sdata2(void)
 {
     (void) 0.0f;
@@ -99,6 +95,7 @@ void gm_801A8114(HSD_JObj* arg0, int arg1)
     HSD_JObjSetScaleZ(transJobj, scale);
 }
 
+/// @todo .data order hack
 static void order_data_0(void)
 {
     (void) "Captain  ";
@@ -329,6 +326,9 @@ void fn_801A9498(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
+static HSD_GObj* gm_804D67B8;
+static HSD_GObj* gm_804D67BC;
+static HSD_GObj* gm_804D67C0;
 static s32 gm_804D67C4;
 
 void fn_801A94BC(HSD_GObj* gobj)
@@ -365,17 +365,12 @@ void fn_801A94BC(HSD_GObj* gobj)
     }
 }
 
-static HSD_GObj* gm_804D67B8;
-static HSD_GObj* gm_804D67BC;
-static HSD_GObj* gm_804D67C0;
-
-void gm_801A8114_inline(HSD_JObj* arg0, int arg1);
-void gm_801A8114_inline(HSD_JObj* arg0, int arg1)
+static void gm_801A8114_inline(HSD_JObj* arg0, int arg1)
 {
     gm_801A8114(arg0, arg1);
 }
 
-static inline void gm_801A9630_init(void)
+static inline void gm_801A9630_init(s32** randoms)
 {
     int i;
     PAD_STACK(8);
@@ -385,13 +380,14 @@ static inline void gm_801A9630_init(void)
     }
 
     gm_804D67C4 = 0xB4;
+    *randoms = gm_80480AD0;
 
-    for (i = 0; i < 0x1A; i++) {
+    for (i = 0; i < 0x1A; i++, (*randoms)++) {
         gm_GetCurrentGameMode();
         if (Toy_803048C0(gm_801A659C(i)) ? true : false) {
-            gm_80480AD0[i] = HSD_Randi(0x2710);
+            **randoms = HSD_Randi(0x2710);
         } else {
-            gm_80480AD0[i] = 0;
+            **randoms = 0;
         }
     }
 }
@@ -426,17 +422,33 @@ static inline void gm_801A9630_light(void)
     HSD_GObj_SetupProc(gobj, fn_801A80CC, 0x17);
 }
 
+static inline void gm_801A9630_camera(void)
+{
+    HSD_GObj* gobj;
+    HSD_CObj* cobj;
+
+    gobj = GObj_Create(0x13, 0x14, 0);
+    cobj =
+        lb_80013B14((HSD_CameraDescPerspective*) gm_804D67A4->cameras[0].desc);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 8);
+    gobj->gxlink_prios = 0x801;
+    HSD_CObjAddAnim(cobj, gm_804D67A4->cameras[0].anims[0]);
+    HSD_CObjReqAnim(cobj, 0.0f);
+    HSD_CObjAnim(cobj);
+    HSD_GObj_SetupProc(gobj, fn_801A94BC, 0);
+}
+
 void gm_801A9630(void)
 {
     int i;
-    HSD_CObj* cobj;
-    HSD_GObj* cam_gobj;
+    s32* randoms;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
     HSD_JObj* child;
     HSD_JObj* target;
 
-    gm_801A9630_init();
+    gm_801A9630_init(&randoms);
 
     // Fog GObj
     gm_801A9630_fog();
@@ -445,17 +457,8 @@ void gm_801A9630(void)
     gm_801A9630_light();
 
     // Camera GObj
-    cam_gobj = GObj_Create(0x13, 0x14, 0);
-    cobj =
-        lb_80013B14((HSD_CameraDescPerspective*) gm_804D67A4->cameras[0].desc);
-    HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B, cobj);
-    GObj_SetupGXLinkMax(cam_gobj, HSD_GObj_803910D8, 8);
-    cam_gobj->gxlink_prios = 0x801;
     child = NULL;
-    HSD_CObjAddAnim(cobj, gm_804D67A4->cameras[0].anims[0]);
-    HSD_CObjReqAnim(cobj, 0.0f);
-    HSD_CObjAnim(cobj);
-    HSD_GObj_SetupProc(cam_gobj, fn_801A94BC, 0);
+    gm_801A9630_camera();
 
     // Background JObj GObj 1
     gobj = GObj_Create(0xE, 0xF, 0);
@@ -484,7 +487,7 @@ void gm_801A9630(void)
 
     // Character display setup
     gm_801A9094();
-    gm_801A4B90();
+    gm_GetCurrentSceneEnterData();
 
     // Character JObj GObj 3
     gobj = GObj_Create(0xE, 0xF, 0);

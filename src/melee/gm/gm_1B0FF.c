@@ -62,7 +62,7 @@ void gm_801B0FF8(GameScene* scene) ///< Return to menu?
     lbDvd_8001823C();
     lbDvd_80018254();
     mnGallery_80258940();
-    rules = gmMainLib_8015CC34();
+    rules = gmMainLib_GetGameRules();
     if (rules->force_main_menu != 0) {
         rules->force_main_menu = 0;
         data->menu_kind = MENU_KIND_MAIN;

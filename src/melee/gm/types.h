@@ -110,7 +110,7 @@ struct gmm_x1CB0 {
 };
 
 struct FighterData {
-    /* 0x00 */ u16 fighter_kos[25];
+    /* 0x00 */ u16 fighter_kos[SELKIND_COUNT];
     /* 0x32 */ u8 padding_0x32[2];
     /* 0x34 */ u16 sd_count;
     /* 0x36 */ u8 padding_0x36[2];
@@ -188,7 +188,7 @@ struct NameTagData {
     /* 0x128 */ s32 coins_collected;
     /* 0x12C */ s32 coins_swiped;
     /* 0x130 */ s32 coins_lost;
-    /* 0x134 */ u32 play_time_by_fighter[25];
+    /* 0x134 */ u32 play_time_by_fighter[SELKIND_COUNT];
     /* 0x198 */ char namedata[8];
     /* 0x1A0 */ s8 x1A0;
     /* 0x1A1 */ u8 rumble_toggle;
@@ -248,19 +248,19 @@ struct gmm_retval_EDBC {
     u32 xC;
     int x10;
     u32 x14;
-    u16 x18[2];
-    u8 pad_x1C[0x4C - 0x1C];
+    u16 x18[SELKIND_COUNT];
     s32 x4C[4];
     u8 padding_x4C[0xB0 - 0x4C - 4 * 4];
-    s32 xB0[0x19];
-    int x114[0x19];
+    s32 xB0[SELKIND_COUNT];
+    int x114[SELKIND_COUNT];
 };
 
 struct gmm_x1868 {
-    /* 0x0000 */ u16 x1868; ///< unlocked characters bitmask
-    /* 0x0002 */ u16 x186A; ///< unlocked stages bitmask
-    /* 0x0004 */ u8 x186C;  ///< unlocked features bitmask - score
-                            ///< display/random stage etc...
+    /* 0x0000 */ u16
+        unlocked_characers_bitmask; ///< unlocked characters bitmask
+    /* 0x0002 */ u16 x186A;         ///< unlocked stages bitmask
+    /* 0x0004 */ u8 x186C;          ///< unlocked features bitmask - score
+                                    ///< display/random stage etc...
     /// @remarks this would make sense to be apart of x186C, but seems unused.
     // perhaps features got removed from the unlock system? item switch comes
     // to mind as plausible
@@ -308,11 +308,11 @@ struct gmm_x1868 {
     /* 0x0420 */ u32 x1C88[3];
     /* 0x042C */ u8 padding_x1C88[0x1C];
     /* 0x0448 */ struct gmm_x1CB0 x1CB0;
-    /* 0x0468 */ s16 x1CD0;
-    /* 0x046A */ s16 x1CD2;
-    /* 0x046C */ s32 x1CD4;
-    /* 0x0470 */ u8 padding_x1CD4[0x254];
-    /* 0x06C4 */ struct FighterData x1F2C[0x19];
+    /* 0x0468 */ s16 trophy_count;
+    /* 0x046A */ u16 trophy_category_flags;
+    /* 0x046C */ u16 trophy_flags[0x125];
+    /* 0x06B6 */ u8 padding_trophy_flags[0xE];
+    /* 0x06C4 */ struct FighterData x1F2C[SELKIND_COUNT];
     /* 0x1760 */ struct NameTagDataBank x2FF8[2];
 }; /* size = 0x55E8 */
 
@@ -1237,6 +1237,50 @@ STATIC_ASSERT(offsetof(struct TmSettingTable, min) == 0x40);
 STATIC_ASSERT(offsetof(struct TmSettingTable, max) == 0x4C);
 STATIC_ASSERT(sizeof(struct TmSettingTable) == 0x58);
 
+/// Start/end/loop anim frame triplet for one tournament model anim state.
+typedef struct TmAnimFrames {
+    /* 0x0 */ u16 start;
+    /* 0x2 */ u16 end;
+    /* 0x4 */ u16 loop;
+} TmAnimFrames;
+STATIC_ASSERT(sizeof(struct TmAnimFrames) == 0x6);
+
+/// Table of anim frame triplets (raw s32 words in ROM), see fn_8019C048.
+typedef union TmAnimFrameTable {
+    s32 words[9];
+    TmAnimFrames states[6];
+} TmAnimFrameTable;
+STATIC_ASSERT(sizeof(union TmAnimFrameTable) == 0x24);
+
+/// Repeating per-slot unit of BracketEntry, one per tournament bracket
+/// slot starting at 0x2C. Field names keep their slot-0 offsets from the
+/// original flat BracketEntry layout (slots[1].x4C is 0x78 in the parent,
+/// and so on).
+typedef struct BracketEntrySlot {
+    /* +0x00 */ HSD_GObj* x2C;
+    /* +0x04 */ u8 x30;
+    /* +0x05 */ u8 pad31;
+    /* +0x06 */ u8 x32;
+    /* +0x07 */ u8 pad33;
+    /* +0x08 */ s32 x34;
+    /* +0x0C */ s32 x38;
+    /* +0x10 */ s32 x3C;
+    /* +0x14 */ s32 x40;
+    /* +0x18 */ s32 x44;
+    /* +0x1C */ s32 x48;
+    /* +0x20 */ u8 x4C;
+    /* +0x21 */ u8 x4D;
+    /* +0x22 */ u8 x4E;
+    /* +0x23 */ u8 x4F;
+    /* +0x24 */ u8 x50;
+    /* +0x25 */ u8 x51;
+    /* +0x26 */ u8 x52;
+    /* +0x27 */ u8 pad53;
+    /* +0x28 */ u16 x54;
+    /* +0x2A */ u8 pad56[0x2C - 0x2A];
+} BracketEntrySlot;
+STATIC_ASSERT(sizeof(struct BracketEntrySlot) == 0x2C);
+
 typedef struct BracketEntry {
     /* 0x00 */ u8 x0;
     /* 0x01 */ u8 x1;
@@ -1258,87 +1302,7 @@ typedef struct BracketEntry {
     /* 0x27 */ u8 x27;
     /* 0x28 */ u8 x28;
     /* 0x29 */ u8 pad29[0x2C - 0x29];
-    /* 0x2C */ HSD_GObj* x2C;
-    /* 0x30 */ u8 x30;
-    /* 0x31 */ u8 pad31;
-    /* 0x32 */ u8 x32;
-    /* 0x33 */ u8 pad33;
-    /* 0x34 */ s32 x34;
-    /* 0x38 */ s32 x38;
-    /* 0x3C */ s32 x3C;
-    /* 0x40 */ s32 x40;
-    /* 0x44 */ s32 x44;
-    /* 0x48 */ s32 x48;
-    /* 0x4C */ u8 x4C;
-    /* 0x4D */ u8 x4D;
-    /* 0x4E */ u8 x4E;
-    /* 0x4F */ u8 x4F;
-    /* 0x50 */ u8 x50;
-    /* 0x51 */ u8 x51;
-    /* 0x52 */ u8 x52;
-    /* 0x53 */ u8 pad53;
-    /* 0x54 */ u16 x54;
-    /* 0x56 */ u8 pad56[0x58 - 0x56];
-    /* 0x58 */ HSD_GObj* x58;
-    /* 0x5C */ u8 x5C;
-    /* 0x5D */ u8 pad5D;
-    /* 0x5E */ u8 x5E;
-    /* 0x5F */ u8 pad5F;
-    /* 0x60 */ s32 x60;
-    /* 0x64 */ s32 x64;
-    /* 0x68 */ s32 x68;
-    /* 0x6C */ s32 x6C;
-    /* 0x70 */ s32 x70;
-    /* 0x74 */ s32 x74;
-    /* 0x78 */ u8 x78;
-    /* 0x79 */ u8 pad79;
-    /* 0x7A */ u8 x7A;
-    /* 0x7B */ u8 pad7B[0x7D - 0x7B];
-    /* 0x7D */ u8 x7D;
-    /* 0x7E */ u8 x7E;
-    /* 0x7F */ u8 pad7F;
-    /* 0x80 */ u16 x80;
-    /* 0x82 */ u8 pad82[0x84 - 0x82];
-    /* 0x84 */ HSD_GObj* x84;
-    /* 0x88 */ u8 x88;
-    /* 0x89 */ u8 pad89;
-    /* 0x8A */ u8 x8A;
-    /* 0x8B */ u8 pad8B;
-    /* 0x8C */ s32 x8C;
-    /* 0x90 */ s32 x90;
-    /* 0x94 */ s32 x94;
-    /* 0x98 */ s32 x98;
-    /* 0x9C */ s32 x9C;
-    /* 0xA0 */ s32 xA0;
-    /* 0xA4 */ u8 xA4;
-    /* 0xA5 */ u8 padA5;
-    /* 0xA6 */ u8 xA6;
-    /* 0xA7 */ u8 padA7[0xA9 - 0xA7];
-    /* 0xA9 */ u8 xA9;
-    /* 0xAA */ u8 xAA;
-    /* 0xAB */ u8 padAB;
-    /* 0xAC */ u16 xAC;
-    /* 0xAE */ u8 padAE[0xB0 - 0xAE];
-    /* 0xB0 */ HSD_GObj* xB0;
-    /* 0xB4 */ u8 xB4;
-    /* 0xB5 */ u8 padB5;
-    /* 0xB6 */ u8 xB6;
-    /* 0xB7 */ u8 padB7;
-    /* 0xB8 */ s32 xB8;
-    /* 0xBC */ s32 xBC;
-    /* 0xC0 */ s32 xC0;
-    /* 0xC4 */ s32 xC4;
-    /* 0xC8 */ s32 xC8;
-    /* 0xCC */ s32 xCC;
-    /* 0xD0 */ u8 xD0;
-    /* 0xD1 */ u8 padD1;
-    /* 0xD2 */ u8 xD2;
-    /* 0xD3 */ u8 padD3[0xD5 - 0xD3];
-    /* 0xD5 */ u8 xD5;
-    /* 0xD6 */ u8 xD6;
-    /* 0xD7 */ u8 padD7;
-    /* 0xD8 */ u16 xD8;
-    /* 0xDA */ u8 padDA[0xDC - 0xDA];
+    /* 0x2C */ BracketEntrySlot slots[4];
 } BracketEntry;
 STATIC_ASSERT(sizeof(struct BracketEntry) == 0xDC);
 

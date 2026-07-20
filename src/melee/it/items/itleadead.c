@@ -1062,7 +1062,7 @@ void it_802EAAEC(Item_GObj* gobj, Fighter_GObj* fobj, int part, f32 ignored)
     ip->xDD4_itemVar.leadead.x3C = -12.0f;
     it_8026BD54(gobj);
     ip2 = GET_ITEM(gobj);
-    ip2->x40_vel.x = ip2->x40_vel.y = ip2->x40_vel.z = 0.0f;
+    itResetVelocity(ip2);
     it_80275258(gobj);
     Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
     jobj = it_80272CC0(gobj, 1);

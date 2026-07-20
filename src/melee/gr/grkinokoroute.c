@@ -132,9 +132,9 @@ bool grKinokoRoute_80207544(void)
     return false;
 }
 
-HSD_GObj* grKinokoRoute_8020754C(int gobj_id)
+Ground_GObj* grKinokoRoute_8020754C(int gobj_id)
 {
-    HSD_GObj* gobj;
+    Ground_GObj* gobj;
     StageCallbacks* callbacks = &grNKr_803E57F0[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
@@ -226,12 +226,16 @@ bool grKinokoRoute_802078E8(Ground_GObj* arg)
 
 void grKinokoRoute_802078F0(Ground_GObj* gobj)
 {
-    u8 pad_stack[8];
     s32 i;
+    union {
+        Ground* gp;
+        struct grKinokoRoute_GroundVars_Entry* entry;
+    } cursor;
     Vec3 pos;
-    Ground* gp = gobj->user_data;
     HSD_GObj* fighter;
     f32 scale;
+
+    cursor.gp = gobj->user_data;
 
     fighter = Ground_801C57A4();
     if (fighter != NULL) {
@@ -247,14 +251,14 @@ void grKinokoRoute_802078F0(Ground_GObj* gobj)
         scale = 1.0f;
     }
 
-    for (i = 0; i < 4; i++) {
-        if (gp->gv.kinokoroute.entries[i].jobj != NULL) {
+    for (i = 0; i < 4; i++, cursor.entry++) {
+        if (cursor.gp->gv.kinokoroute.entries[0].jobj != NULL) {
             HSD_JObjSetTranslateX(
-                gp->gv.kinokoroute.entries[i].jobj,
-                scale * (gp->gv.kinokoroute.entries[i].pos.x + pos.x));
+                cursor.gp->gv.kinokoroute.entries[0].jobj,
+                scale * (cursor.gp->gv.kinokoroute.entries[0].pos.x + pos.x));
             HSD_JObjSetTranslateY(
-                gp->gv.kinokoroute.entries[i].jobj,
-                scale * (gp->gv.kinokoroute.entries[i].pos.y + pos.y));
+                cursor.gp->gv.kinokoroute.entries[0].jobj,
+                scale * (cursor.gp->gv.kinokoroute.entries[0].pos.y + pos.y));
         }
     }
 }
@@ -591,7 +595,7 @@ void grKinokoRoute_80208564(HSD_GObj* gobj)
     }
 }
 
-bool grKinokoRoute_80208660(s32 arg0, HSD_GObj* gobj)
+bool grKinokoRoute_80208660(int unused, Fighter_GObj* gobj)
 {
     Vec3 pos;
     Vec3 vel;
@@ -635,4 +639,9 @@ bool grKinokoRoute_8020875C(Vec3* a, int b, HSD_JObj* jobj)
     } else {
         return false;
     }
+}
+
+float grKinokoRoute_802087B0(void)
+{
+    return 10.0f;
 }

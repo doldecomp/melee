@@ -178,19 +178,7 @@ HSD_GObj* grRCruise_801FF2C8(int gobj_id)
     gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
-        Ground* gp = gobj->user_data;
-        gp->x8_callback = NULL;
-        gp->xC_callback = NULL;
-        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
-        if (callbacks->callback3 != NULL) {
-            gp->x1C_callback = callbacks->callback3;
-        }
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
-        }
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
-        }
+        Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0x122,
                  gobj_id);
@@ -328,7 +316,7 @@ void grRCruise_801FF7A4(Ground_GObj* gobj)
     Ground_801C2ED0(jobj, gp->map_id);
     grAnime_801C8138(stage_gobj, gp->map_id, 0);
     grAnime_801C752C(jobj, 1, 30628, HSD_AObjSetFlags, 3, AOBJ_LOOP);
-    archive = grDatFiles_801C6324();
+    archive = grDatFiles_GetArchive();
     if (archive != NULL && (data = HSD_ArchiveGetPublicAddress(
                                 archive->unk0, "dynamicsdata_shipflag"),
                             data != NULL))

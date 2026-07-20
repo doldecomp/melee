@@ -57,9 +57,7 @@ void itMball_80297944(Item_GObj* arg0)
     Item* item = GET_ITEM(arg0);
     HSD_JObj* jobj = GET_JOBJ(arg0);
     it_8026B390(arg0);
-    item->x40_vel.z = 0.0f;
-    item->x40_vel.y = 0.0f;
-    item->x40_vel.x = 0.0f;
+    itResetVelocity(item);
     Item_80268E5C(arg0, 0, ITEM_ANIM_UPDATE);
 }
 
@@ -136,10 +134,7 @@ void itMball_Thrown(Item_GObj* arg0)
 
 void itMball_Motion3_Phys(Item_GObj* arg0)
 {
-    Item* item = GET_ITEM(arg0);
-    it_80272860(arg0, item->xCC_item_attr->x10_fall_speed,
-                item->xCC_item_attr->x14_fall_speed_max);
-    it_80274658(arg0, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(arg0);
 }
 
 bool itMball_Motion3_Coll(Item_GObj* arg0)
@@ -220,11 +215,7 @@ void itMball_OnAccessory(Item_GObj* arg0)
 bool itMball_Motion5_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    if (ip->xD44_lifeTimer <= 0.0f) {
-        return true;
-    }
-    ip->xD44_lifeTimer -= 1.0f;
-    return false;
+    return Item_TickLifetime(ip);
 }
 
 void itMball_Motion5_Phys(Item_GObj* gobj) {}
@@ -245,7 +236,7 @@ void itMball_80297E8C(Item_GObj* gobj)
     it_8026B3A8(gobj);
     item->xDC8_word.flags.x1A = 0;
     item->xD5C = 0;
-    item->x40_vel.x = item->x40_vel.y = item->x40_vel.z = 0.0f;
+    itResetVelocity(item);
     it_80274740(gobj);
     if (item->xDD4_itemVar.mball.b0 == 0) {
         item->xD44_lifeTimer = spec_attrs->x0;
@@ -262,11 +253,7 @@ void itMball_80297E8C(Item_GObj* gobj)
 bool itMball_Motion6_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    if (ip->xD44_lifeTimer <= 0.0f) {
-        return true;
-    }
-    ip->xD44_lifeTimer -= 1.0f;
-    return false;
+    return Item_TickLifetime(ip);
 }
 
 void itMball_Motion6_Phys(Item_GObj* arg0)

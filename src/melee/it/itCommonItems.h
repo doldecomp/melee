@@ -317,12 +317,15 @@ typedef struct ItLGunAttr {
     Vec3 pos;     // [0, 2.128, 6.668]
 } ItLGunAttr;
 
-typedef struct itLGunRay_ItemVars {
+/// State shared by Fox/Falco's laser and the Ray Gun projectile.
+typedef struct itRay_ItemVars {
     /* +0 ip+DD4 */ float scale;
     /* +4 ip+DD8 */ float angle;
     /* +8 ip+DDC */ float speed;
     /* +C ip+DE0 */ Vec3 pos;
-} itLGunRay_ItemVars;
+} itRay_ItemVars;
+
+typedef itRay_ItemVars itLGunRay_ItemVars;
 
 typedef struct ItLGunRayAttr {
     /* +0 */ float speed;     // [5]

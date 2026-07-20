@@ -612,7 +612,7 @@ void grIzumi_801CCB14(Ground_GObj* gobj)
 
 void grIzumi_801CCB18(HSD_GObj* gobj)
 {
-    HSD_Joint* j = HSD_ArchiveGetPublicAddress(grDatFiles_801C6324()->unk0,
+    HSD_Joint* j = HSD_ArchiveGetPublicAddress(grDatFiles_GetArchive()->unk0,
                                                "GrdIzumiStar_TopN_joint");
     if (j != NULL) {
         HSD_GObj* sub = Ground_801C1A20(j, -1);

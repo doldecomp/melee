@@ -509,6 +509,14 @@
 /* 0FF7A8 */ void ftKb_NsSpecialAirNStart_Coll(Fighter_GObj* gobj);
 /* 0FF814 */ void ftKb_NsSpecialAirNHold_Coll(Fighter_GObj* gobj);
 /* 0FF880 */ void ftKb_NsSpecialAirNEnd_Coll(Fighter_GObj* gobj);
+typedef struct ftKirby_CopyName {
+    char* filename;
+    char* name;
+} ftKirby_CopyName;
+
+/* 3CA9D0 */ extern ftKirby_CopyName ftKb_Init_803CA9D0[];
+/* 3CB3E8 */ extern Fighter_CostumeStrings* ftKb_Init_803CB3E8[];
+/* 3CB46C */ extern u8 ftKb_Init_803CB46C[];
 /* 3CB540 */ extern enum_t ftKb_Init_803CB540[];
 /* 3C8368 */ extern MotionState ftKb_Init_MotionStateTable[ftKb_MS_SelfCount];
 /* 3CA04C */ extern MotionState ftKb_Init_UnkMotionStates0[];
@@ -517,7 +525,5 @@
 /* 3CA4E0 */ extern char ftKb_Init_AnimDatFilename[];
 /* 3CA55C */ extern Fighter_DemoStrings ftKb_Init_DemoMotionFilenames;
 /* 3CA5B4 */ extern Fighter_CostumeStrings ftKb_Init_CostumeStrings[];
-/* 4D3DB8 */ extern u32 ftKb_Init_804D3DB8[2];
-/* 4D3DC0 */ extern u32 ftKb_Init_804D3DC0[2];
 
 #endif

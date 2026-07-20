@@ -2,6 +2,7 @@
 
 #include "gm/gm_1601.h"
 #include "gm/gm_16AE.h"
+#include "if/if_2F6E.h"
 #include "if/ifall.h"
 #include "if/ifstatus.h"
 #include "if/types.h"
@@ -175,7 +176,7 @@ void fn_802F7670(HSD_GObj* gobj)
 
 void fn_802F770C(HSD_GObj* gobj, int callback)
 {
-    HudIndex* status = ifStatus_802F4910();
+    HudIndex* status = ifStatus_GetHUDInfo();
     void** ptr = lbl_804A1340;
     void** ptr2;
     void** ptr3;
@@ -246,7 +247,7 @@ HSD_GObj* fn_802F77F8(HSD_GObj* gobj, u8 slot, s32 arg2)
             HSD_JObjReqAnimAll(jobj, 0.0f);
             HSD_JObjAnimAll(jobj);
 
-            pos = ifAll_802F3424(slot);
+            pos = ifAll_GetPlayerHUDPosition(slot);
             HSD_JObjSetTranslate(jobj, pos);
         } else {
             HSD_GObjPLink_80390228(gobj);
@@ -440,7 +441,7 @@ void if_802F7D08(s32 slot)
 void if_802F7E24(void)
 {
     memzero(lbl_804A1340, 0x34);
-    lbArchive_LoadSections(*ifAll_802F3690(), lbl_804A1340, lbl_803F9780, 0);
+    lbArchive_LoadSections(*ifAll_GetArchive(), lbl_804A1340, lbl_803F9780, 0);
 }
 
 void if_802F7E7C(void)

@@ -1,5 +1,7 @@
 #include "itgamewatchpanic.h"
 
+#include "inlines.h"
+
 #include "db/db.h"
 #include "ft/chara/ftGameWatch/ftGw_SpecialLw.h"
 #include "ft/ftlib.h"
@@ -17,29 +19,17 @@ ItemStateTable it_803F79A0[] = {
 
 HSD_GObj* it_802C7D60(Item_GObj* parent, Vec3* pos, Fighter_Part arg2, f32 dir)
 {
-    SpawnItem spawn_item;
-    HSD_GObj* gobj;
-    void** attr;
+    SpawnItem spawn;
+    Item_GObj* result;
 
-    spawn_item.kind = It_Kind_GameWatch_Panic;
-    spawn_item.prev_pos = *pos;
-    spawn_item.pos = spawn_item.prev_pos;
-    spawn_item.facing_dir = dir;
-    spawn_item.x3C_damage = 0;
-    spawn_item.vel.x = spawn_item.vel.y = spawn_item.vel.z = 0.0F;
-    spawn_item.x0_parent_gobj = parent;
-
-    spawn_item.x4_parent_gobj2 = spawn_item.x0_parent_gobj;
-    spawn_item.x44_flag.b0 = true;
-    spawn_item.x40 = 0;
-    gobj = Item_80268B18(&spawn_item);
-    if (gobj != NULL) {
-        Item* ip = GET_ITEM(gobj);
-        attr = ip->xC4_article_data->x4_specialAttributes;
-        Item_8026AB54(gobj, parent, arg2);
-        db_80225DD8(gobj, parent);
-        it_8027CE64(gobj, parent, *attr);
-        return gobj;
+    spawn.kind = It_Kind_GameWatch_Panic;
+    Item_InitSpawn(&spawn, parent, pos, dir);
+    result = Item_80268B18(&spawn);
+    if (result != NULL) {
+        Item* item = GET_ITEM(result);
+        void** attr = item->xC4_article_data->x4_specialAttributes;
+        Item_AttachGameWatchArticle(parent, arg2, result, attr);
+        return result;
     }
     return NULL;
 }

@@ -48,9 +48,14 @@ struct lbl_803D9D20_t lbl_803D9D20 = {
     },
 };
 
-static float lbl_803D9DAC[9] = {
-    // maybe vec3?
-    320, -240, 415.6922, 320, -240, 415.6922,
+static struct lbl_803D9DAC_t {
+    Vec3 current;
+    Vec3 target;
+    Vec3 step;
+} lbl_803D9DAC = {
+    { 320, -240, 415.6922 },
+    { 320, -240, 415.6922 },
+    { 0, 0, 0 },
 };
 
 static struct lbl_803D9DD0_t {

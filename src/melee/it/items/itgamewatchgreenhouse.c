@@ -1,5 +1,7 @@
 #include "itgamewatchgreenhouse.h"
 
+#include "inlines.h"
+
 #include "it/forward.h"
 
 #include "it/it_2725.h"
@@ -32,23 +34,12 @@ HSD_GObj* itGamewatchGreenhouse_Spawn(HSD_GObj* parent, Vec3* pos,
     Item_GObj* result;
 
     spawn.kind = It_Kind_GameWatch_Greenhouse;
-    spawn.prev_pos = *pos;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
-    spawn.x0_parent_gobj = parent;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
-
+    Item_InitSpawn(&spawn, parent, pos, dir);
     result = Item_80268B18(&spawn);
     if (result != NULL) {
         Item* item = GET_ITEM(result);
         void** attr = item->xC4_article_data->x4_specialAttributes;
-        Item_8026AB54(result, parent, part);
-        db_80225DD8(result, parent);
-        it_8027CE64(result, parent, attr[0]);
+        Item_AttachGameWatchArticle(parent, part, result, attr);
         return result;
     }
     return NULL;

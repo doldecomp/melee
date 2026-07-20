@@ -1,7 +1,6 @@
 /// @file
 /// @todo
 
-
 extern HSD_ObjAllocData item_link_alloc_data;
 extern HSD_ObjAllocUnk Item_804A0C64;
 extern Item_FtTrack Item_804A0CCC;
