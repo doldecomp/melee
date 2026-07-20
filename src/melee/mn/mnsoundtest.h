@@ -21,29 +21,8 @@ typedef struct {
     HSD_Text* unk1C;
 } soundtest_user_data;
 
-typedef struct {
-    /*  +0 */ u16 classifier;
-    /*  +2 */ u8 p_link;
-    /*  +3 */ u8 gx_link;
-    /*  +4 */ u8 p_priority;
-    /*  +5 */ u8 render_priority;
-    /*  +6 */ u8 obj_kind;
-    /*  +7 */ u8 user_data_kind;
-    /*  +8 */ HSD_GObj* next;
-    /*  +C */ HSD_GObj* prev;
-    /* +10 */ HSD_GObj* next_gx;
-    /* +14 */ HSD_GObj* prev_gx;
-    /* +18 */ HSD_GObjProc* proc;
-    /* +1C */ GObj_RenderFunc render_cb;
-    /* +20 */ u64 gxlink_prios;
-    /* +28 */ void* hsd_obj;
-    /* +2C */ soundtest_user_data* user_data;
-    /* +30 */ void (*user_data_remove_func)(void* data);
-    /* +34 */ void* x34_unk;
-} Soundtest_GObj;
-
 /* 24A790 */ void mnSoundTest_8024A790(HSD_GObj*);
-/* 24A958 */ void mnSoundTest_8024A958(Soundtest_GObj*);
+/* 24A958 */ void mnSoundTest_8024A958(HSD_GObj*);
 /* 24AA70 */ void mnSoundTest_8024AA70(HSD_GObj*, u8);
 /* 24ABF8 */ void mnSoundTest_8024ABF8(HSD_GObj*, u8);
 /* 24AD58 */ void mnSoundTest_8024AD58(HSD_GObj*, u8);

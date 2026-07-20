@@ -20,32 +20,7 @@ typedef struct MnInfoData {
 
 #define GET_MNINFO(gobj) ((MnInfoData*) HSD_GObjGetUserData(gobj))
 
-/// was using this to try and fix some matches, unsuccessfully
-#ifdef M2C
-typedef struct MenuInfo_GObj MenuInfo_GObj;
-struct MenuInfo_GObj {
-    /*  +0 */ u16 classifier;
-    /*  +2 */ u8 p_link;
-    /*  +3 */ u8 gx_link;
-    /*  +4 */ u8 p_priority;
-    /*  +5 */ u8 render_priority;
-    /*  +6 */ u8 obj_kind;
-    /*  +7 */ u8 user_data_kind;
-    /*  +8 */ MenuInfo_GObj* next;
-    /*  +C */ MenuInfo_GObj* prev;
-    /* +10 */ MenuInfo_GObj* next_gx;
-    /* +14 */ MenuInfo_GObj* prev_gx;
-    /* +18 */ HSD_GObjProc* proc;
-    /* +1C */ void (*rendered)(MenuInfo_GObj* gobj, s32 code);
-    /* +20 */ u64 gxlink_prios;
-    /* +28 */ HSD_JObj* hsd_obj;
-    /* +2C */ MnInfoData* user_data;
-    /* +30 */ void (*user_data_remove_func)(MenuInfo_GObj* data);
-    /* +34 */ void* x34_unk;
-};
-#else
 typedef struct HSD_GObj MenuInfo_GObj;
-#endif
 
 extern StaticModelDesc mnInfo_804A0958;
 extern u8 mnInfo_804A0968[0x48];
