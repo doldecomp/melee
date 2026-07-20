@@ -3969,26 +3969,15 @@ void Camera_GetTransformInterest(Vec* arg0)
     *arg0 = cm_80452C68.transform.interest;
 }
 
-static inline void compute_edge(Vec3* forward, Vec3* eye_pos, f32 fov,
-                                f32* value)
+static inline void project_ground_x(f32* value, Vec3* eye_pos, f32 dir_x,
+                                    f32 dir_z)
 {
-    f32 s;
-    f32 c;
-    f32 edge_x;
-    f32 edge_z;
+    *value = -((dir_x * (eye_pos->z / dir_z)) - eye_pos->x);
+}
 
-    s = sinf(fov);
-    c = cosf(fov);
-    edge_x = (forward->x * c) + (forward->z * s);
-    edge_z = (forward->z * c) - (forward->x * s);
-
-    if ((ABS(edge_z) > 0.0001) && ((forward->z * edge_z) > 0.0)) {
-        *value = -((edge_x * (eye_pos->z / edge_z)) - eye_pos->x);
-    } else if (edge_x > 0.0f) {
-        *value = 8.5070587e37f;
-    } else {
-        *value = -8.5070587e37f;
-    }
+static inline bool same_side(f32 fwd_z, f32 dir_z)
+{
+    return (fwd_z * dir_z) > 0.0L;
 }
 
 bool Camera_800307D0(f32* left, f32* center, f32* right)
@@ -3998,34 +3987,63 @@ bool Camera_800307D0(f32* left, f32* center, f32* right)
     Vec3 forward;
     Vec3 interest_pos;
     Vec3 eye_pos;
-    bool b_r30;
-    PAD_STACK(0x10);
+    bool result;
+    f32 s;
+    f32 c;
+    f32 edge_x;
+    f32 edge_z;
+    f32 s2;
+    f32 c2;
+    f32 edge_x2;
+    f32 edge_z2;
 
     cobj = GET_COBJ(cm_80452C68.gobj);
     half_fov =
-        0.5 * (deg_to_rad * HSD_CObjGetFov(cobj) * HSD_CObjGetAspect(cobj));
+        0.5L * (deg_to_rad * HSD_CObjGetFov(cobj) * HSD_CObjGetAspect(cobj));
 
-    b_r30 = true;
+    result = true;
     HSD_CObjGetEyePosition(cobj, &eye_pos);
     HSD_CObjGetEyeVector(cobj, &forward);
     HSD_CObjGetInterest(cobj, &interest_pos);
 
-    if (ABS(forward.x) > 1e-4 && ABS(forward.z) > 1e-4) {
+    if (ABS(forward.x) > 1E-4L && ABS(forward.z) > 1E-4L) {
         // ray casts?
         forward.x *= -1.0f;
         forward.y *= -1.0f;
         forward.z *= -1.0f;
-        *center = -((forward.x * (eye_pos.z / forward.z)) - eye_pos.x);
+        project_ground_x(center, &eye_pos, forward.x, forward.z);
 
-        compute_edge(&forward, &eye_pos, half_fov, left);
-        compute_edge(&forward, &eye_pos, -half_fov, right);
+        /// @todo would make more sense if these two blocks were the inlines, but i cant solve it
+        s = sinf(half_fov);
+        c = cosf(half_fov);
+        edge_x = (forward.x * c) + (forward.z * s);
+        edge_z = (forward.z * c) - (forward.x * s);
+        if ((ABS(edge_z) > 0.0001L) && same_side(forward.z, edge_z)) {
+            project_ground_x(left, &eye_pos, edge_x, edge_z);
+        } else if (edge_x > 0.0f) {
+            *left = 8.5070587e37f;
+        } else {
+            *left = -8.5070587e37f;
+        }
+
+        s2 = sinf(-half_fov);
+        c2 = cosf(-half_fov);
+        edge_x2 = (forward.x * c2) + (forward.z * s2);
+        edge_z2 = (forward.z * c2) - (forward.x * s2);
+        if ((ABS(edge_z2) > 0.0001L) && same_side(forward.z, edge_z2)) {
+            project_ground_x(right, &eye_pos, edge_x2, edge_z2);
+        } else if (edge_x2 > 0.0f) {
+            *right = 8.5070587e37f;
+        } else {
+            *right = -8.5070587e37f;
+        }
     } else {
         *left = -8.5070587e37f;
         *right = 8.5070587e37f;
         *center = 0.0f;
-        b_r30 = false;
+        result = false;
     }
-    return b_r30;
+    return result;
 }
 
 HSD_GObj* Camera_80030A50(void)
