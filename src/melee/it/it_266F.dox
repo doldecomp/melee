@@ -1,10 +1,5 @@
-/// @file
+/// @file melee/it/it_266F.h
 /// @todo
-
-#include <placeholder.h>
-
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
 
 /* 4A0E30 */ extern RandomItemSpawner it_804A0E30;
 /* 4A0E50 */ extern HSD_ObjAllocUnk5 it_804A0E50;

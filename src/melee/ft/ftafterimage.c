@@ -1,4 +1,5 @@
-/// @file Creates trailing "afterimages" for swords in motion
+/// @file
+/// @brief Creates trailing "afterimages" for swords in motion
 
 #include "ftafterimage.h"
 
