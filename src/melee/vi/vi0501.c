@@ -61,7 +61,7 @@ void un_8031D9E4(int arg0, int arg1, int arg2)
     un_804D6F84[3] = arg2;
 }
 
-/// @todo 99.32%: regswap in the spawn loop — the counts[i-1] address temp
+/// @todo 99.32%: regswap in the spawn loop -- the counts[i-1] address temp
 ///       lands in r27; target uses r25 (shifting the two loop walkers).
 void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
                  int spawn_count)

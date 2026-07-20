@@ -4,9 +4,7 @@
 #include "mn/types.h"
 
 #include <baselib/gobj.h>
-#include <baselib/gobjuserdata.h>
 #include <baselib/jobj.h>
-#include <baselib/memory.h>
 #include <baselib/sislib.h>
 
 typedef enum _MenuInput {
@@ -26,6 +24,7 @@ typedef enum _MenuInput {
 
 #define GET_MENU(gobj) ((Menu*) HSD_GObjGetUserData(gobj))
 #define GET_DIAGRAM(gobj) ((Diagram*) HSD_GObjGetUserData(gobj))
+#define GET_MNINFO(gobj) ((MnInfoData*) HSD_GObjGetUserData(gobj))
 
 static inline void Menu_DecrementAnimTimer(void)
 {

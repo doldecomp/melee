@@ -2,6 +2,7 @@
 
 #include "placeholder.h"
 
+#include "baselib/gobjuserdata.h"
 #include "gm/gm_1601.h"
 #include "gm/gmmain_lib.h"
 #include "gm/types.h"
@@ -144,7 +145,7 @@ static AnimLoopSettings mnInfo_803EFC08[0x12] = {
 
 #pragma push
 #pragma dont_inline on
-s32 mnInfo_80251D58(MenuInfo_GObj* arg0, s32 arg1, u32 arg2, u32 arg3)
+s32 mnInfo_80251D58(mnInfo_GObj* arg0, s32 arg1, u32 arg2, u32 arg3)
 {
     char sp34[5];
     char sp30[3];
@@ -194,7 +195,7 @@ s32 mnInfo_80251D58(MenuInfo_GObj* arg0, s32 arg1, u32 arg2, u32 arg3)
 
 #pragma push
 #pragma dont_inline on
-void mnInfo_80251F04(MenuInfo_GObj* arg0, s32 arg1, u32 arg2)
+void mnInfo_80251F04(mnInfo_GObj* arg0, s32 arg1, u32 arg2)
 {
     s16 sp16;
     s16 unused;
@@ -233,7 +234,7 @@ static inline s32 mnInfo_CountUnlocked(void)
 
 void fn_80251FE4(void)
 {
-    MenuInfo_GObj* gobj;
+    mnInfo_GObj* gobj;
     MnInfoData* data;
     u64 buttons;
     u8* trophy;
@@ -461,9 +462,9 @@ static inline void fn_80252548_inline(MnInfoData* data, HSD_GObj* gobj)
             if (mnInfo_80251A08(*trophy) != 0) {
                 u32 id = *trophy;
 
-                mnInfo_80251D58((MenuInfo_GObj*) gobj, i, id,
+                mnInfo_80251D58((mnInfo_GObj*) gobj, i, id,
                                 *gmMainLib_8015D804(id));
-                mnInfo_80251F04((MenuInfo_GObj*) gobj, i, id);
+                mnInfo_80251F04((mnInfo_GObj*) gobj, i, id);
             }
             trophy++;
         }

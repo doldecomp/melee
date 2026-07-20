@@ -24,6 +24,41 @@
 /* 224B50 */ float Stage_GetBlastZoneLeftOffset(void);
 /* 224B68 */ float Stage_GetBlastZoneTopOffset(void);
 /* 224B80 */ float Stage_GetBlastZoneBottomOffset(void);
+
+static inline bool Stage_IsOutsideBlastZone(Vec3* pos)
+{
+    if (pos->x > Stage_GetBlastZoneRightOffset()) {
+        return true;
+    }
+    if (pos->x < Stage_GetBlastZoneLeftOffset()) {
+        return true;
+    }
+    if (pos->y > Stage_GetBlastZoneTopOffset()) {
+        return true;
+    }
+    if (pos->y < Stage_GetBlastZoneBottomOffset()) {
+        return true;
+    }
+    return false;
+}
+
+static inline bool Stage_IsOutsideBlastZoneWithMargin(Vec3* pos, f32 margin)
+{
+    if (pos->x > Stage_GetBlastZoneRightOffset() - margin) {
+        return true;
+    }
+    if (pos->x < Stage_GetBlastZoneLeftOffset() + margin) {
+        return true;
+    }
+    if (pos->y > Stage_GetBlastZoneTopOffset() - margin) {
+        return true;
+    }
+    if (pos->y < Stage_GetBlastZoneBottomOffset() + margin) {
+        return true;
+    }
+    return false;
+}
+
 /* 224B98 */ float Stage_CalcUnkCamY(void);
 /* 224BC4 */ float Stage_CalcUnkCamYBounds(void);
 /* 224BF8 */ void Stage_UnkSetVec3TCam_Offset(Vec3*);

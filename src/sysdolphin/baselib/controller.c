@@ -425,6 +425,49 @@ void HSD_PadRenewMasterStatus(void)
     OSRestoreInterrupts(intr);
 }
 
+static inline void HSD_PadCopyStatusFields(HSD_PadStatus* dst,
+                                           HSD_PadStatus* src)
+{
+    dst->button = src->button;
+    dst->stickX = src->stickX;
+    dst->stickY = src->stickY;
+    dst->subStickX = src->subStickX;
+    dst->subStickY = src->subStickY;
+    dst->analogL = src->analogL;
+    dst->analogR = src->analogR;
+    dst->analogA = src->analogA;
+    dst->analogB = src->analogB;
+    dst->nml_stickX = src->nml_stickX;
+    dst->nml_stickY = src->nml_stickY;
+    dst->nml_subStickX = src->nml_subStickX;
+    dst->nml_subStickY = src->nml_subStickY;
+    dst->nml_analogL = src->nml_analogL;
+    dst->nml_analogR = src->nml_analogR;
+    dst->nml_analogA = src->nml_analogA;
+    dst->nml_analogB = src->nml_analogB;
+}
+
+static inline void HSD_PadClearStatusFields(HSD_PadStatus* dst)
+{
+    dst->button = 0;
+    dst->subStickY = 0;
+    dst->subStickX = 0;
+    dst->stickY = 0;
+    dst->stickX = 0;
+    dst->analogB = 0;
+    dst->analogA = 0;
+    dst->analogR = 0;
+    dst->analogL = 0;
+    dst->nml_subStickY = 0.0;
+    dst->nml_subStickX = 0.0;
+    dst->nml_stickY = 0.0;
+    dst->nml_stickX = 0.0;
+    dst->nml_analogB = 0.0;
+    dst->nml_analogA = 0.0;
+    dst->nml_analogR = 0.0;
+    dst->nml_analogL = 0.0;
+}
+
 void HSD_PadRenewCopyStatus(void)
 {
     int iVar1;
@@ -442,41 +485,9 @@ void HSD_PadRenewCopyStatus(void)
         cp->last_button = cp->button;
         cp->err = mp->err;
         if (cp->err == 0) {
-            cp->button = mp->button;
-            cp->stickX = mp->stickX;
-            cp->stickY = mp->stickY;
-            cp->subStickX = mp->subStickX;
-            cp->subStickY = mp->subStickY;
-            cp->analogL = mp->analogL;
-            cp->analogR = mp->analogR;
-            cp->analogA = mp->analogA;
-            cp->analogB = mp->analogB;
-            cp->nml_stickX = mp->nml_stickX;
-            cp->nml_stickY = mp->nml_stickY;
-            cp->nml_subStickX = mp->nml_subStickX;
-            cp->nml_subStickY = mp->nml_subStickY;
-            cp->nml_analogL = mp->nml_analogL;
-            cp->nml_analogR = mp->nml_analogR;
-            cp->nml_analogA = mp->nml_analogA;
-            cp->nml_analogB = mp->nml_analogB;
+            HSD_PadCopyStatusFields(cp, mp);
         } else {
-            cp->button = 0;
-            cp->subStickY = 0;
-            cp->subStickX = 0;
-            cp->stickY = 0;
-            cp->stickX = 0;
-            cp->analogB = 0;
-            cp->analogA = 0;
-            cp->analogR = 0;
-            cp->analogL = 0;
-            cp->nml_subStickY = 0.0;
-            cp->nml_subStickX = 0.0;
-            cp->nml_stickY = 0.0;
-            cp->nml_stickX = 0.0;
-            cp->nml_analogB = 0.0;
-            cp->nml_analogA = 0.0;
-            cp->nml_analogR = 0.0;
-            cp->nml_analogL = 0.0;
+            HSD_PadClearStatusFields(cp);
         }
         cp->trigger = cp->button & (cp->last_button ^ cp->button);
         cp->release = cp->last_button & (cp->last_button ^ cp->button);
@@ -513,41 +524,9 @@ void HSD_PadRenewGameStatus(void)
         gs->last_button = gs->button;
         gs->err = mp->err;
         if (gs->err == 0) {
-            gs->button = mp->button;
-            gs->stickX = mp->stickX;
-            gs->stickY = mp->stickY;
-            gs->subStickX = mp->subStickX;
-            gs->subStickY = mp->subStickY;
-            gs->analogL = mp->analogL;
-            gs->analogR = mp->analogR;
-            gs->analogA = mp->analogA;
-            gs->analogB = mp->analogB;
-            gs->nml_stickX = mp->nml_stickX;
-            gs->nml_stickY = mp->nml_stickY;
-            gs->nml_subStickX = mp->nml_subStickX;
-            gs->nml_subStickY = mp->nml_subStickY;
-            gs->nml_analogL = mp->nml_analogL;
-            gs->nml_analogR = mp->nml_analogR;
-            gs->nml_analogA = mp->nml_analogA;
-            gs->nml_analogB = mp->nml_analogB;
+            HSD_PadCopyStatusFields(gs, mp);
         } else {
-            gs->button = 0;
-            gs->subStickY = 0;
-            gs->subStickX = 0;
-            gs->stickY = 0;
-            gs->stickX = 0;
-            gs->analogB = 0;
-            gs->analogA = 0;
-            gs->analogR = 0;
-            gs->analogL = 0;
-            gs->nml_subStickY = 0.0;
-            gs->nml_subStickX = 0.0;
-            gs->nml_stickY = 0.0;
-            gs->nml_stickX = 0.0;
-            gs->nml_analogB = 0.0;
-            gs->nml_analogA = 0.0;
-            gs->nml_analogR = 0.0;
-            gs->nml_analogL = 0.0;
+            HSD_PadClearStatusFields(gs);
         }
         gs->trigger = gs->button & (gs->last_button ^ gs->button);
         gs->release = gs->last_button & (gs->last_button ^ gs->button);

@@ -52,10 +52,6 @@ Short for "dynamic."
 @section glossary_ecb ECB
 Stands for "environmental collision box."
 
-@section glossary_ev EV
-Stands for "Entity Variables." Used by #HSD_GObj::user_data structs (such as
-#Fighter::ev) to store polymorphic variables.
-
 @section glossary_ft ft
 Short for "fighter."
 

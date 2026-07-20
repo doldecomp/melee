@@ -1,11 +1,5 @@
-/// @file
+/// @file melee/it/item.h
 /// @todo
-
-
-extern HSD_ObjAllocData item_link_alloc_data;
-extern HSD_ObjAllocUnk Item_804A0C64;
-extern Item_FtTrack Item_804A0CCC;
-extern S32Vec3 Item_804A0E24;
 
 /// Checks if items are enabled
 bool Item_80266F3C(void);

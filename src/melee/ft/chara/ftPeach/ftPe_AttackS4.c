@@ -23,8 +23,8 @@ void ftPe_AttackS4_Enter(HSD_GObj* gobj)
             int const min = ftPe_MS_AttackS4Club;
             int const max = ftPe_MS_AttackS4Racket;
             msid = HSD_Randi(max - min + 1) + min;
-        } while (msid == fp->fv.pe.attacks4_motion_id);
-        fp->fv.pe.attacks4_motion_id = msid;
+        } while (msid == fp->u.pe.attacks4_motion_id);
+        fp->u.pe.attacks4_motion_id = msid;
         Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
     }
     ftAnim_8006EBA4(gobj);

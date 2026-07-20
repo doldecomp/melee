@@ -38,7 +38,7 @@ bool ftPe_8011BA54(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     bool float_input = checkStartFloatInput(gobj);
-    if (fp->kind == FTKIND_PEACH && fp->fv.pe.has_float && float_input) {
+    if (fp->kind == FTKIND_PEACH && fp->u.pe.has_float && float_input) {
         ftPe_8011BB6C(gobj, true);
         return true;
     }
@@ -49,7 +49,7 @@ bool ftPe_8011BAD8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->kind == FTKIND_PEACH) {
-        if (fp->self_vel.y <= 0 && fp->fv.pe.has_float) {
+        if (fp->self_vel.y <= 0 && fp->u.pe.has_float) {
             if (ftPe_Float_CheckContinueInput(fp)) {
                 ftPe_8011BB6C(gobj, true);
                 return true;
@@ -73,9 +73,9 @@ void ftPe_8011BB6C(HSD_GObj* gobj, bool arg1)
     HSD_JObj* joint;
 
     Fighter_ChangeMotionState(gobj, ftPe_MS_Float, 0, 0, 1, 0, NULL);
-    fp->fv.pe.has_float = false;
+    fp->u.pe.has_float = false;
     if (arg1) {
-        fp->fv.pe.x4 = da->xC;
+        fp->u.pe.x4 = da->xC;
     }
     fp->self_vel.y = 0;
     fp->x2219_b0 = true;
@@ -86,10 +86,10 @@ void ftPe_8011BB6C(HSD_GObj* gobj, bool arg1)
 void ftPe_Float_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.pe.x4 > 0) {
-        fp->fv.pe.x4 -= 1;
+    if (fp->u.pe.x4 > 0) {
+        fp->u.pe.x4 -= 1;
     }
-    if (fp->fv.pe.x4 <= 0) {
+    if (fp->u.pe.x4 <= 0) {
         ftPe_UpdateFloatDir(gobj);
     }
 }

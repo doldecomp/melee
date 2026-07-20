@@ -442,7 +442,7 @@ ftCollisionBox* ft_80082838(ftCollisionBox* arg0, ftCollisionBox* arg1,
         arg0->left.x = -arg1->right.x;
         return arg0;
     }
-    return (ftCollisionBox*) arg1;
+    return arg1;
 }
 
 bool ft_80082888(Fighter_GObj* arg0, ftCollisionBox* arg1)

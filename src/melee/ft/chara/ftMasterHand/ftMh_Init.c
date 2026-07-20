@@ -637,13 +637,13 @@ void ftMh_Init_OnLoad(HSD_GObj* gobj)
         fp->mv.mh.unk0.x30 = -1;
         fp->mv.mh.unk0.x1C = 0;
         fp->mv.mh.unk0.x20 = 0;
-        fp->fv.mh.x222C = ftBossLib_8015C244(gobj, &fp->cur_pos);
-        fp->fv.mh.x2238 = 1;
-        fp->fv.mh.x224C = 0;
-        fp->fv.mh.x2250 = ftMh_MS_SweepLoop;
-        fp->fv.mh.x2254 = 0;
+        fp->u.mh.x222C = ftBossLib_8015C244(gobj, &fp->cur_pos);
+        fp->u.mh.x2238 = 1;
+        fp->u.mh.x224C = 0;
+        fp->u.mh.x2250 = ftMh_MS_SweepLoop;
+        fp->u.mh.x2254 = 0;
         fp->x1A88.level = 1;
-        ftBossLib_8015BD24(fp->x1A88.level, &fp->fv.mh.x223C, fp->fv.mh.x2238,
+        ftBossLib_8015BD24(fp->x1A88.level, &fp->u.mh.x223C, fp->u.mh.x2238,
                            ftData_attr->x18, ftData_attr->x20,
                            ftData_attr->x1C);
     }

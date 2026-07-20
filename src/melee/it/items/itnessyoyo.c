@@ -289,7 +289,7 @@ void itNessyoyo_UnkMotion3_Phys(Item_GObj* gobj)
             HSD_GObj* owner = ip->xDD4_itemVar.nessyoyo.x10;
             ItemLink* link1 = ip->xDD4_itemVar.nessyoyo.x8;
             Fighter* fp = owner->user_data;
-            link1->pos = fp->fv.ns.yoyo_hitbox_pos;
+            link1->pos = fp->u.ns.yoyo_hitbox_pos;
         }
     }
     it_802BFAFC(ip, &pos);
@@ -322,7 +322,7 @@ static inline void itNessyoyo_UnkMotion3_Anim_UpdateRotation(Item* ip)
 
     if (child) {
         f32 rot = HSD_JObjGetRotationX(child);
-        rot += fp->fv.ns.x223C;
+        rot += fp->u.ns.x223C;
         HSD_JObjSetRotationX(child, rot);
     }
 }
@@ -409,7 +409,7 @@ s32 it_802BF28C(ItemLink* link, Vec3* target, itYoyoAttributes* attrs,
         ItemLink* next = cur->next;
         PAD_STACK(4);
 
-        cur->pos = fp->fv.ns.yoyo_hitbox_pos;
+        cur->pos = fp->u.ns.yoyo_hitbox_pos;
         cur->vel.z = 0.0f;
         cur->vel.y = 0.0f;
         cur->vel.x = 0.0f;
@@ -686,7 +686,7 @@ void it_802BFAFC(Item* ip, Vec3* target)
 
         if (jobj == ip->xDD4_itemVar.nessyoyo.x18) {
             Fighter* fp = ip->xDD4_itemVar.nessyoyo.x10->user_data;
-            fp->fv.ns.yoyo_hitbox_pos = link->pos;
+            fp->u.ns.yoyo_hitbox_pos = link->pos;
         }
 
         it_802A6DC8(jobj, &link_pos, &dir);

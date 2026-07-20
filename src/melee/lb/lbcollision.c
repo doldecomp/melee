@@ -2675,16 +2675,16 @@ bool lbColl_8000A584(HurtCapsule* hurt, u32 arg1, u32 arg2, Mtx arg3, f32 arg8)
     }
 }
 
-bool lbColl_8000A78C(HitResult* hit, u32 arg1, Mtx arg2, f32 pos_z)
+static inline bool lbColl_DrawHit(HitResult* hit, u32 arg1, MtxPtr arg2,
+                                  f32 pos_z, GXColor* color,
+                                  GXColor* secondary_color, MtxPtr hit_mtx,
+                                  Vec3* pos_a, Vec3* pos_b)
 {
     f32 temp_f31;
-    Mtx sp9C;
-    Vec3 sp90;
-    Vec3 sp84;
     MtxPtr var_r31;
     u32 var_r0;
 
-    if (lbColl_804D36C4.a == 0xFF) {
+    if (color->a == 0xFF) {
         var_r0 = 0;
     } else {
         var_r0 = 2;
@@ -2698,21 +2698,31 @@ bool lbColl_8000A78C(HitResult* hit, u32 arg1, Mtx arg2, f32 pos_z)
             hit->skip_update_pos = true;
         }
         if (arg2 != NULL) {
-            PSMTXConcat(arg2, HSD_JObjGetMtxPtr(hit->bone), sp9C);
+            PSMTXConcat(arg2, HSD_JObjGetMtxPtr(hit->bone), hit_mtx);
         }
         temp_f31 = hit->size;
-        sp84 = hit->pos;
-        sp90 = hit->pos;
+        *pos_b = hit->pos;
+        *pos_a = hit->pos;
         if (arg2 != NULL) {
-            var_r31 = sp9C;
+            var_r31 = hit_mtx;
         } else {
             var_r31 = HSD_JObjGetMtxPtr(hit->bone);
         }
-        lbColl_DrawHitResult(var_r31, &sp90, &sp84, &lbColl_804D36C4,
-                             &lbColl_804D36C8, temp_f31);
+        lbColl_DrawHitResult(var_r31, pos_a, pos_b, color, secondary_color,
+                             temp_f31);
         return true;
     }
     return false;
+}
+
+bool lbColl_8000A78C(HitResult* hit, u32 arg1, Mtx arg2, f32 pos_z)
+{
+    Mtx sp9C;
+    Vec3 sp90;
+    Vec3 sp84;
+
+    return lbColl_DrawHit(hit, arg1, arg2, pos_z, &lbColl_804D36C4,
+                          &lbColl_804D36C8, sp9C, &sp90, &sp84);
 }
 
 bool lbColl_8000A95C(HitResult* hit, u32 arg1, Mtx arg2, f32 pos_z)
@@ -2721,39 +2731,8 @@ bool lbColl_8000A95C(HitResult* hit, u32 arg1, Mtx arg2, f32 pos_z)
     Vec3 sp90;
     Vec3 sp84;
 
-    f32 temp_f31;
-    MtxPtr var_r31;
-    u32 var_r0;
-
-    if (lbColl_804D36CC.a == 0xFF) {
-        var_r0 = 0;
-    } else {
-        var_r0 = 2;
-    }
-    if (var_r0 == arg1) {
-        if (!hit->skip_update_pos) {
-            lb_8000B1CC(hit->bone, &hit->offset, &hit->pos);
-            if (arg2 != NULL) {
-                hit->pos.z = pos_z;
-            }
-            hit->skip_update_pos = 1;
-        }
-        if (arg2 != NULL) {
-            PSMTXConcat(arg2, HSD_JObjGetMtxPtr(hit->bone), sp9C);
-        }
-        temp_f31 = hit->size;
-        sp84 = hit->pos;
-        sp90 = hit->pos;
-        if (arg2 != NULL) {
-            var_r31 = sp9C;
-        } else {
-            var_r31 = HSD_JObjGetMtxPtr(hit->bone);
-        }
-        lbColl_DrawHitResult(var_r31, &sp90, &sp84, &lbColl_804D36CC,
-                             &lbColl_804D36D0, temp_f31);
-        return true;
-    }
-    return false;
+    return lbColl_DrawHit(hit, arg1, arg2, pos_z, &lbColl_804D36CC,
+                          &lbColl_804D36D0, sp9C, &sp90, &sp84);
 }
 
 bool lbColl_8000AB2C(HitResult* hit, u32 arg1, MtxPtr arg2, f32 pos_z)
@@ -2762,39 +2741,8 @@ bool lbColl_8000AB2C(HitResult* hit, u32 arg1, MtxPtr arg2, f32 pos_z)
     Vec3 sp90;
     Vec3 sp84;
 
-    f32 temp_f31;
-    MtxPtr var_r31;
-    u32 var_r0;
-
-    if (lbColl_804D36D4.a == 0xFF) {
-        var_r0 = 0;
-    } else {
-        var_r0 = 2;
-    }
-    if (var_r0 == arg1) {
-        if (!hit->skip_update_pos) {
-            lb_8000B1CC(hit->bone, &hit->offset, &hit->pos);
-            if (arg2 != NULL) {
-                hit->pos.z = pos_z;
-            }
-            hit->skip_update_pos = true;
-        }
-        if (arg2 != NULL) {
-            PSMTXConcat(arg2, HSD_JObjGetMtxPtr(hit->bone), sp9C);
-        }
-        temp_f31 = hit->size;
-        sp84 = hit->pos;
-        sp90 = hit->pos;
-        if (arg2 != NULL) {
-            var_r31 = sp9C;
-        } else {
-            var_r31 = HSD_JObjGetMtxPtr(hit->bone);
-        }
-        lbColl_DrawHitResult(var_r31, &sp90, &sp84, &lbColl_804D36D4,
-                             &lbColl_804D36D8, temp_f31);
-        return true;
-    }
-    return false;
+    return lbColl_DrawHit(hit, arg1, arg2, pos_z, &lbColl_804D36D4,
+                          &lbColl_804D36D8, sp9C, &sp90, &sp84);
 }
 
 bool lbColl_8000ACFC(UNK_T victim, HitCapsule* hitbox)

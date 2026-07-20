@@ -1,0 +1,37 @@
+/**
+ * @file melee/lb/lbrefract.h
+ * @brief Refraction visual effects using GX indirect textures.
+ *
+ * Uses reference counting to track active effect users.
+ * Supports IA4, IA8, and RGBA8 texture formats.
+ */
+
+/// @brief Write IA4 texture coordinate to refraction buffer.
+static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, s32 row,
+                                       u32 col, u32 arg3, u8 arg4,
+                                       u8 intensity, u8 alpha);
+
+/// @brief Copy framebuffer to refraction source texture.
+void lbRefract_80022560(void);
+
+/// @brief Reset TEV and indirect texture stages.
+void lbRefract_800225D4(void);
+
+/// @brief Increment refraction effect user count.
+void lbRefract_80022BB8(void);
+
+/// @brief Decrement refraction effect user count.
+void lbRefSetUnuse(void);
+
+/// @brief Display DObj then reset TEV/indirect stages for refraction cleanup.
+static void lbRefract_DObjDispReset(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx,
+                                    u32 rendermode);
+
+/// @brief Read RGBA8 texture coordinate addresses from refraction buffer.
+static void lbRefract_ReadTexCoordRGBA8(lbRefract_CallbackData* data, s32 row,
+                                        u32 col, u32* out_r, u32* out_g,
+                                        u8* out_b, u8* out_a);
+
+/// @brief Initialize refraction callback data for a texture buffer.
+s32 lbRefract_8002219C(lbRefract_CallbackData* data, s32 buffer, s32 format,
+                       s32 width, s32 height);

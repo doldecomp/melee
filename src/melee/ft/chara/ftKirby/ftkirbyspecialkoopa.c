@@ -61,7 +61,7 @@ void ftKb_SpecialNKp_800FA588(Fighter_GObj* gobj)
     }
 
     itKoopaFlame_Spawn(gobj, &pos, fp->facing_dir, fp->mv.kb.specialn_kp.x0[1],
-                       new_facing, fp->fv.kb.x84, fp->fv.kb.x88, 0x9A);
+                       new_facing, fp->u.kb.x84, fp->u.kb.x88, 0x9A);
 
     if (fp->mv.kb.specialn_kp.x14 == 0) {
         fp->mv.kb.specialn_kp.x0[1] = Item_8026AE60();
@@ -70,7 +70,7 @@ void ftKb_SpecialNKp_800FA588(Fighter_GObj* gobj)
     }
 
     if ((fp->mv.kb.specialn_kp.x14 % 3) == 0) {
-        f32 f = (fp->fv.kb.x88 - da->specialn_kp_lowest_charge_graphic_size) /
+        f32 f = (fp->u.kb.x88 - da->specialn_kp_lowest_charge_graphic_size) /
                 (da->specialn_kp_flame_scale -
                  da->specialn_kp_lowest_charge_graphic_size);
         if (f < 0.3333f) {
@@ -91,14 +91,13 @@ void ftKb_SpecialNKp_800FA7D4(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
     if (fp->motion_id >= 449 || fp->motion_id < 443) {
-        fp->fv.kb.x84 = fp->fv.kb.x84 + da->specialn_kp_fuel_recharge_rate;
-        if (fp->fv.kb.x84 > da->specialn_kp_max_fuel) {
-            fp->fv.kb.x84 = da->specialn_kp_max_fuel;
+        fp->u.kb.x84 = fp->u.kb.x84 + da->specialn_kp_fuel_recharge_rate;
+        if (fp->u.kb.x84 > da->specialn_kp_max_fuel) {
+            fp->u.kb.x84 = da->specialn_kp_max_fuel;
         }
-        fp->fv.kb.x88 =
-            fp->fv.kb.x88 + da->specialn_kp_flame_size_recharge_rate;
-        if (fp->fv.kb.x88 > da->specialn_kp_flame_scale) {
-            fp->fv.kb.x88 = da->specialn_kp_flame_scale;
+        fp->u.kb.x88 = fp->u.kb.x88 + da->specialn_kp_flame_size_recharge_rate;
+        if (fp->u.kb.x88 > da->specialn_kp_flame_scale) {
+            fp->u.kb.x88 = da->specialn_kp_flame_scale;
         }
     }
 }
@@ -132,7 +131,7 @@ void ftKb_SpecialNKp_800FA8B4(Fighter_GObj* gobj)
     Fighter* fp;
     s32 msid = ftKb_MS_KpSpecialNStart;
     PAD_STACK(8);
-    switch ((s32) GET_FIGHTER(gobj)->fv.kb.hat.kind) {
+    switch ((s32) GET_FIGHTER(gobj)->u.kb.hat.kind) {
     case FTKIND_KOOPA:
         break;
     case FTKIND_GKOOPS:
@@ -156,7 +155,7 @@ void ftKb_SpecialNKp_800FA958(Fighter_GObj* gobj)
     Fighter* fp;
     int new_var;
     s32 msid = ftKb_MS_KpSpecialAirNStart;
-    switch ((s32) GET_FIGHTER(gobj)->fv.kb.hat.kind) {
+    switch ((s32) GET_FIGHTER(gobj)->u.kb.hat.kind) {
     case FTKIND_KOOPA:
         break;
     case FTKIND_GKOOPS:
@@ -182,7 +181,7 @@ void ftKb_KpSpecialNStart_Anim(Fighter_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
         ftKirby_MotionState msid = ftKb_MS_KpSpecialN;
-        switch (fp->fv.kb.hat.kind) {
+        switch (fp->u.kb.hat.kind) {
         case FTKIND_GKOOPS:
             msid = ftKb_MS_GkSpecialN;
             break;
@@ -238,7 +237,7 @@ void ftKb_KpSpecialAirNStart_Anim(Fighter_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
         ftKirby_MotionState msid = ftKb_MS_KpSpecialAirN;
-        switch (fp->fv.kb.hat.kind) {
+        switch (fp->u.kb.hat.kind) {
         case FTKIND_GKOOPS:
             msid = ftKb_MS_GkSpecialAirN;
             break;
@@ -303,7 +302,7 @@ void ftKb_KpSpecialN_IASA(Fighter_GObj* gobj)
             }
         } else {
             s32 msid = ftKb_MS_KpSpecialNEnd;
-            switch ((s32) fp->fv.kb.hat.kind) {
+            switch ((s32) fp->u.kb.hat.kind) {
             case FTKIND_KOOPA:
                 break;
             case FTKIND_GKOOPS:
@@ -319,13 +318,13 @@ void ftKb_KpSpecialN_IASA(Fighter_GObj* gobj)
     if ((s32) fp->mv.kb.specialn_kp.x0[0] >= 3) {
         fp->mv.kb.specialn_kp.x0[0] = 0;
     }
-    fp->fv.kb.x84 -= 1.0F;
-    if (fp->fv.kb.x84 < da->specialn_kp_spew_flame_velocity) {
-        fp->fv.kb.x84 = da->specialn_kp_spew_flame_velocity;
+    fp->u.kb.x84 -= 1.0F;
+    if (fp->u.kb.x84 < da->specialn_kp_spew_flame_velocity) {
+        fp->u.kb.x84 = da->specialn_kp_spew_flame_velocity;
     }
-    fp->fv.kb.x88 -= 1.0F;
-    if (fp->fv.kb.x88 < da->specialn_kp_lowest_charge_graphic_size) {
-        fp->fv.kb.x88 = da->specialn_kp_lowest_charge_graphic_size;
+    fp->u.kb.x88 -= 1.0F;
+    if (fp->u.kb.x88 < da->specialn_kp_lowest_charge_graphic_size) {
+        fp->u.kb.x88 = da->specialn_kp_lowest_charge_graphic_size;
     }
     fp->mv.kb.specialn_kp.x0[3] += 1;
     if ((s32) fp->mv.kb.specialn_kp.x0[3] >
@@ -357,7 +356,7 @@ void ftKb_KpSpecialAirN_IASA(Fighter_GObj* gobj)
             }
         } else {
             s32 msid = ftKb_MS_KpSpecialAirNEnd;
-            switch ((s32) fp->fv.kb.hat.kind) {
+            switch ((s32) fp->u.kb.hat.kind) {
             case FTKIND_KOOPA:
                 break;
             case FTKIND_GKOOPS:
@@ -373,13 +372,13 @@ void ftKb_KpSpecialAirN_IASA(Fighter_GObj* gobj)
     if ((s32) fp->mv.kb.specialn_kp.x0[0] >= 3) {
         fp->mv.kb.specialn_kp.x0[0] = 0;
     }
-    fp->fv.kb.x84 -= 1.0F;
-    if (fp->fv.kb.x84 < da->specialn_kp_spew_flame_velocity) {
-        fp->fv.kb.x84 = da->specialn_kp_spew_flame_velocity;
+    fp->u.kb.x84 -= 1.0F;
+    if (fp->u.kb.x84 < da->specialn_kp_spew_flame_velocity) {
+        fp->u.kb.x84 = da->specialn_kp_spew_flame_velocity;
     }
-    fp->fv.kb.x88 -= 1.0F;
-    if (fp->fv.kb.x88 < da->specialn_kp_lowest_charge_graphic_size) {
-        fp->fv.kb.x88 = da->specialn_kp_lowest_charge_graphic_size;
+    fp->u.kb.x88 -= 1.0F;
+    if (fp->u.kb.x88 < da->specialn_kp_lowest_charge_graphic_size) {
+        fp->u.kb.x88 = da->specialn_kp_lowest_charge_graphic_size;
     }
     fp->mv.kb.specialn_kp.x0[3] += 1;
     if ((s32) fp->mv.kb.specialn_kp.x0[3] >
@@ -429,7 +428,7 @@ void ftKb_KpSpecialNStart_Coll(Fighter_GObj* gobj)
         {
             s32 msid = ftKb_MS_KpSpecialAirNStart;
             f32 anim_frame = fp->cur_anim_frame;
-            switch (GET_FIGHTER(gobj)->fv.kb.hat.kind) {
+            switch (GET_FIGHTER(gobj)->u.kb.hat.kind) {
             case FTKIND_KOOPA:
                 break;
             case FTKIND_GKOOPS:
@@ -452,7 +451,7 @@ void ftKb_KpSpecialN_Coll(Fighter_GObj* gobj)
         {
             s32 msid = ftKb_MS_KpSpecialAirN;
             f32 anim_frame = fp->cur_anim_frame;
-            switch (GET_FIGHTER(gobj)->fv.kb.hat.kind) {
+            switch (GET_FIGHTER(gobj)->u.kb.hat.kind) {
             case FTKIND_KOOPA:
                 break;
             case FTKIND_GKOOPS:
@@ -475,7 +474,7 @@ void ftKb_KpSpecialNEnd_Coll(Fighter_GObj* gobj)
         {
             s32 msid = ftKb_MS_KpSpecialAirNEnd;
             f32 anim_frame = fp->cur_anim_frame;
-            switch (GET_FIGHTER(gobj)->fv.kb.hat.kind) {
+            switch (GET_FIGHTER(gobj)->u.kb.hat.kind) {
             case FTKIND_KOOPA:
                 break;
             case FTKIND_GKOOPS:
@@ -498,7 +497,7 @@ void ftKb_KpSpecialAirNStart_Coll(Fighter_GObj* gobj)
         {
             s32 msid = ftKb_MS_KpSpecialN;
             f32 anim_frame = fp->cur_anim_frame;
-            switch (GET_FIGHTER(gobj)->fv.kb.hat.kind) {
+            switch (GET_FIGHTER(gobj)->u.kb.hat.kind) {
             case FTKIND_KOOPA:
                 break;
             case FTKIND_GKOOPS:
@@ -521,7 +520,7 @@ void ftKb_KpSpecialAirN_Coll(Fighter_GObj* gobj)
         {
             s32 msid = ftKb_MS_KpSpecialN;
             f32 anim_frame = fp->cur_anim_frame;
-            switch (GET_FIGHTER(gobj)->fv.kb.hat.kind) {
+            switch (GET_FIGHTER(gobj)->u.kb.hat.kind) {
             case FTKIND_KOOPA:
                 break;
             case FTKIND_GKOOPS:
@@ -544,7 +543,7 @@ void ftKb_KpSpecialAirNEnd_Coll(Fighter_GObj* gobj)
         {
             s32 msid = ftKb_MS_KpSpecialNEnd;
             f32 anim_frame = fp->cur_anim_frame;
-            switch (GET_FIGHTER(gobj)->fv.kb.hat.kind) {
+            switch (GET_FIGHTER(gobj)->u.kb.hat.kind) {
             case FTKIND_KOOPA:
                 break;
             case FTKIND_GKOOPS:
