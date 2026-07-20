@@ -34,6 +34,7 @@
 #include "mp/mplib.h"
 #include "pl/player.h"
 
+#include <stddef.h>
 #include <baselib/controller.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
@@ -294,10 +295,8 @@ void grCorneria_801DCCFC(void)
     grCn_804D69A8 = imax;
 }
 
-static inline s32 grCn_RandRange(f32 fmin, f32 fmax)
+static inline s32 grCn_RandRange(s32 imax, s32 imin)
 {
-    s32 imin = fmin;
-    s32 imax = fmax;
     if (imax > imin) {
         s32 range = imax - imin;
         imax = imin + (range != 0 ? HSD_Randi(range) : 0);
@@ -345,11 +344,16 @@ static inline u32 grCn_PickUniqueType(s32 slot, int range, int base)
     return rand_id;
 }
 
-/// @todo The frame is 0x18 too large and the type walker rebases onto the
-///       arwing_gobj pointer.
+static inline int* grCn_GetArwingTypes(struct grCn_Data2* data)
+{
+    return (int*) ((u8*) data + offsetof(struct grCn_Data2, arwing_type));
+}
+
 void grCorneria_801DCE1C(void)
 {
     Vec3 pos;
+    UNUSED u8 pad[4];
+    Vec3 pos2;
 
     if (Stage_80225194() != 0x46) {
         if (grCn_804D69B0 == 0) {
@@ -390,8 +394,8 @@ void grCorneria_801DCE1C(void)
                     }
                 }
             } else {
-                grCn_804D69A8 =
-                    grCn_RandRange(grCn_804D69A0->x44, grCn_804D69A0->x48);
+                grCn_804D69A8 = grCn_RandRange((s32) grCn_804D69A0->x48,
+                                               (s32) grCn_804D69A0->x44);
             }
         } else {
             {
@@ -411,7 +415,8 @@ void grCorneria_801DCE1C(void)
 
                         for (i = 0; i < 3; i++) {
                             if (i != count) {
-                                switch (grCn_803E1D68.arwing_type[i]) {
+                                switch (grCn_GetArwingTypes(&grCn_803E1D68)[i])
+                                {
                                 case 1:
                                 case 2:
                                 case 3:
@@ -429,15 +434,34 @@ void grCorneria_801DCE1C(void)
                         }
 
                         if (has_near == 0) {
-                            int type_id = grCn_PickUniqueType(count, 13, 1);
-                            grCn_SpawnArwing(count, type_id, count + 1);
+                            int type_id = grCn_803E1D68.arwing_type[count];
+                            while (type_id == grCn_803E1D68.arwing_type[0] ||
+                                   type_id == grCn_803E1D68.arwing_type[1] ||
+                                   type_id == grCn_803E1D68.arwing_type[2])
+                            {
+                                type_id = HSD_Randi(13) + 1;
+                            }
+                            grCn_804D69A4 = count;
+                            grCn_803E1D68.arwing_type[count] = type_id;
+                            grCn_803E1D68.arwing_group[count] = count + 1;
+                            grCn_803E1D68.arwing_gobj[grCn_804D69A4] =
+                                grCorneria_801DD534(1);
                         } else {
-                            Vec3 pos2;
                             grCorneria_801DDD4C(&pos2);
                             if (grCn_CheckFar(&pos2) == 0) {
-                                int type_id =
-                                    grCn_PickUniqueType(count, 4, 10);
-                                grCn_SpawnArwing(count, type_id, count + 1);
+                                int type_id = grCn_803E1D68.arwing_type[count];
+                                while (
+                                    type_id == grCn_803E1D68.arwing_type[0] ||
+                                    type_id == grCn_803E1D68.arwing_type[1] ||
+                                    type_id == grCn_803E1D68.arwing_type[2])
+                                {
+                                    type_id = HSD_Randi(4) + 10;
+                                }
+                                grCn_804D69A4 = count;
+                                grCn_803E1D68.arwing_type[count] = type_id;
+                                grCn_803E1D68.arwing_group[count] = count + 1;
+                                grCn_803E1D68.arwing_gobj[grCn_804D69A4] =
+                                    grCorneria_801DD534(1);
                             }
                         }
                     }
