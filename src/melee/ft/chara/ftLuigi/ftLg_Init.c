@@ -283,7 +283,7 @@ void ftLg_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0, false);
-    fp->fv.lg.x2234 = 0;
+    fp->u.lg.x2234 = 0;
 }
 
 void ftLg_Init_OnLoad(HSD_GObj* gobj)

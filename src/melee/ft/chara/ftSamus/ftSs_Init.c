@@ -263,12 +263,12 @@ void ftSs_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0, 0);
-    fp->fv.ss.x222C = 0;
-    fp->fv.ss.x2230 = 0;
-    fp->fv.ss.x2238 = 0;
-    fp->fv.ss.x2244 = 0;
-    fp->fv.ss.x223C = 0;
-    fp->fv.ss.x2240 = 0;
+    fp->u.ss.x222C = 0;
+    fp->u.ss.x2230 = 0;
+    fp->u.ss.x2238 = 0;
+    fp->u.ss.x2244 = 0;
+    fp->u.ss.x223C = 0;
+    fp->u.ss.x2240 = 0;
 }
 
 void ftSs_Init_OnLoad(HSD_GObj* gobj)
@@ -317,7 +317,7 @@ void ftSs_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* da = fp->dat_attrs;
-    s32 samus_x2230 = fp->fv.ss.x2230;
+    s32 samus_x2230 = fp->u.ss.x2230;
     if (samus_x2230 == da->x18) {
         ftCo_800BFFD0(fp, 53, 0);
     }

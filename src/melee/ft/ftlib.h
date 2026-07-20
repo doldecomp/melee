@@ -19,7 +19,7 @@
 /* 0865D8 */ void ftLib_800865D8(HSD_GObj*, float*, float*);
 /* 0865F0 */ HSD_JObj* ftLib_800865F0(HSD_GObj*);
 /* 086630 */ HSD_JObj* ftLib_80086630(Fighter_GObj*, Fighter_Part part);
-/* 086644 */ void ftLib_80086644(HSD_GObj*, Vec3*);
+/* 086644 */ void ftLib_80086644(Fighter_GObj*, Vec3*);
 /* 086664 */ void ftLib_80086664(HSD_GObj*, Vec3*);
 /* 086684 */ void ftLib_80086684(HSD_GObj*, Vec3*);
 /* 0866A4 */ void ftLib_SetScale(HSD_GObj*, float);

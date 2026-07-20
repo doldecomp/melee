@@ -415,7 +415,7 @@ void ftMs_Init_OnDeath(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, 0);
-    fp->fv.ms.x222C = 0;
+    fp->u.ms.x222C = 0;
 }
 
 /// 801362B0 00132E90

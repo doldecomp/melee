@@ -59,8 +59,8 @@ static void ftGw_SpecialN_CreateSausage(HSD_GObj* gobj)
                             fp1 = gobj->user_data;
                             pSausage = chefStruct.sausageCount;
                             for (i = 5, i -= 5; i < 5; i++) {
-                                if (i != fp1->fv.gw.x2240_chefVar1 &&
-                                    i != fp1->fv.gw.x2244_chefVar2)
+                                if (i != fp1->u.gw.x2240_chefVar1 &&
+                                    i != fp1->u.gw.x2244_chefVar2)
                                 {
                                     *pSausage++ = i;
                                     var_r28++;
@@ -71,10 +71,10 @@ static void ftGw_SpecialN_CreateSausage(HSD_GObj* gobj)
                                     chefStruct
                                         .sausageCount[HSD_Randi(var_r28)];
                                 int var_r6;
-                                fp1->fv.gw.x2244_chefVar2 =
-                                    fp1->fv.gw.x2240_chefVar1;
+                                fp1->u.gw.x2244_chefVar2 =
+                                    fp1->u.gw.x2240_chefVar1;
                                 var_r6 = temp_r5;
-                                fp1->fv.gw.x2240_chefVar1 = temp_r5;
+                                fp1->u.gw.x2240_chefVar1 = temp_r5;
                                 it_802C837C(gobj, &vec0, 122, var_r6,
                                             fp->facing_dir);
                             }

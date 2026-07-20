@@ -1,7 +1,8 @@
 /**
  * @enum SelectableCharacterKind
  *
- * @brief Identifier for a single selectable character as seen in high-scores or on the CSS.
+ * @brief Identifier for a single selectable character as seen in high-scores
+ * or on the CSS.
  *
  * #SelectableCharacterKind mirrors the first @c 0x19 entries of
  * #CharacterKind (i.e. up to and including #CharacterKind::CKIND_GANON),

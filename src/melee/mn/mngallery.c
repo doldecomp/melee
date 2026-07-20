@@ -1,6 +1,7 @@
 #include "mngallery.h"
 
 #include "baselib/debug.h"
+#include "baselib/memory.h"
 #include "mn/inlines.h"
 
 #include <baselib/controller.h>

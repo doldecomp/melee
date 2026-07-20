@@ -109,6 +109,28 @@ struct lbl_803DA2E0_t lbl_803DA2E0 = {
     },
 };
 
+static inline f32 gmTournament_GetPlayerX(u8 player_count, s32 player)
+{
+    if ((s32) player_count == 4) {
+        return (13.0f * (f32) player) + -19.5f;
+    }
+    if ((s32) player_count == 3) {
+        return 6.5f + ((13.0f * (f32) player) - 19.5f);
+    }
+    return 6.5f + ((13.0f * (2.0f * (f32) player)) - 19.5f);
+}
+
+static inline void gmTournament_SetPlayerX(f32* x, u8 player_count, s32 player)
+{
+    if ((s32) player_count == 4) {
+        *x = (13.0f * (f32) player) + -19.5f;
+    } else if ((s32) player_count == 3) {
+        *x = 6.5f + ((13.0f * (f32) player) - 19.5f);
+    } else {
+        *x = 6.5f + ((13.0f * (2.0f * (f32) player)) - 19.5f);
+    }
+}
+
 void fn_8019BA08(u8 idx, HSD_JObj* jobj)
 {
     TmData* tmd = gm_GetTournamentData();
@@ -283,13 +305,7 @@ void fn_8019C3EC(HSD_GObj* gobj)
     }
     HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
 
-    if ((s32) tmd->x30 == 4) {
-        var_f1 = (13.0f * idx) + -19.5f;
-    } else if ((s32) tmd->x30 == 3) {
-        var_f1 = 6.5f + ((13.0f * idx) - 19.5f);
-    } else {
-        var_f1 = 6.5f + ((13.0f * (2.0f * idx)) - 19.5f);
-    }
+    var_f1 = gmTournament_GetPlayerX(tmd->x30, idx);
     fn_8018FDC4(jobj, 4.5f + var_f1, 3.0f, 666.0f);
     if (lbl_80479A58.x1D[idx].x0 == 4) {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
@@ -355,13 +371,7 @@ void fn_8019C744(HSD_GObj* gobj)
     idx = fn_8018F62C(gobj);
     jobj = GET_JOBJ(gobj);
 
-    if ((s32) tmd->x30 == 4) {
-        var_f1 = (13.0f * (f32) idx) + -19.5f;
-    } else if ((s32) tmd->x30 == 3) {
-        var_f1 = 6.5f + ((13.0f * (f32) idx) - 19.5f);
-    } else {
-        var_f1 = 6.5f + ((13.0f * (2.0f * (f32) idx)) - 19.5f);
-    }
+    var_f1 = gmTournament_GetPlayerX(tmd->x30, idx);
     fn_8018FDC4(jobj, 0.3f + var_f1, 10.1f, 666.0f);
 
     if (lbl_80479A58.x1D[idx].x0 == 4) {
@@ -377,13 +387,7 @@ void fn_8019C744(HSD_GObj* gobj)
         (tmd->x4B8[idx].x0 != 1))
     {
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-        if ((s32) tmd->x30 == 4) {
-            var_f1 = (13.0f * (f32) idx) + -19.5f;
-        } else if ((s32) tmd->x30 == 3) {
-            var_f1 = 6.5f + ((13.0f * (f32) idx) - 19.5f);
-        } else {
-            var_f1 = 6.5f + ((13.0f * (2.0f * (f32) idx)) - 19.5f);
-        }
+        var_f1 = gmTournament_GetPlayerX(tmd->x30, idx);
         fn_8018FDC4(jobj, 0.3f + var_f1, 10.1f, 666.0f);
     }
 }
@@ -404,13 +408,7 @@ void fn_8019CA38(HSD_GObj* gobj)
     }
 
     HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-    if ((s32) tmd->x30 == 4) {
-        var_f1 = (13.0f * (s32) idx) + -19.5f;
-    } else if ((s32) tmd->x30 == 3) {
-        var_f1 = 6.5f + ((13.0f * (s32) idx) - 19.5f);
-    } else {
-        var_f1 = 6.5f + ((13.0f * (2.0f * (s32) idx)) - 19.5f);
-    }
+    gmTournament_SetPlayerX(&var_f1, tmd->x30, idx);
     fn_8018FDC4(jobj, var_f1, 666.0f, 666.0f);
     if (lbl_80479A58.x1D[idx].x0 == 2) {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
@@ -451,13 +449,7 @@ void fn_8019CC74(HSD_GObj* gobj)
     }
     HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
 
-    if ((s32) tmd->x30 == 4) {
-        var_f1 = (13.0f * (f32) idx) + -19.5f;
-    } else if ((s32) tmd->x30 == 3) {
-        var_f1 = 6.5f + ((13.0f * (f32) idx) - 19.5f);
-    } else {
-        var_f1 = 6.5f + ((13.0f * (2.0f * (f32) idx)) - 19.5f);
-    }
+    gmTournament_SetPlayerX(&var_f1, tmd->x30, idx);
     fn_8018FDC4(jobj, var_f1, 666.0f, 0.01f);
 }
 
@@ -541,13 +533,7 @@ void fn_8019D074(HSD_GObj* gobj)
         return;
     }
     HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-    if ((s32) tmd->x30 == 4) {
-        var_f1 = (13.0f * idx) + -19.5f;
-    } else if ((s32) tmd->x30 == 3) {
-        var_f1 = 6.5f + ((13.0f * idx) - 19.5f);
-    } else {
-        var_f1 = 6.5f + ((13.0f * (2.0f * idx)) - 19.5f);
-    }
+    gmTournament_SetPlayerX(&var_f1, tmd->x30, idx);
     fn_8018FDC4(jobj, var_f1, 666.0f, 666.0f);
 }
 
@@ -611,13 +597,7 @@ void fn_8019D1BC(void)
         jobj = GET_JOBJ(gobj);
         fn_8018FBD8(gobj, i);
 
-        if ((s32) tmd->x30 == 4) {
-            var_f1 = (13.0f * (f32) i) + -19.5f;
-        } else if ((s32) tmd->x30 == 3) {
-            var_f1 = 6.5f + ((13.0f * (f32) i) - 19.5f);
-        } else {
-            var_f1 = 6.5f + ((13.0f * (2.0f * (f32) i)) - 19.5f);
-        }
+        var_f1 = gmTournament_GetPlayerX(tmd->x30, i);
         fn_8018FDC4(jobj, var_f1 - 2.799999f, 4.3f, 0.001f);
 
         if (tmd->x4B8[i].x2 != 0) {

@@ -3,7 +3,6 @@
 
 #include "types.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "gr/forward.h"
@@ -54,7 +53,7 @@
 /* 1E0140 */ void grCorneria_801E0140(Ground_GObj*);
 /* 1E01A0 */ bool grCorneria_801E01A0(Ground_GObj*);
 /* 1E01A8 */ void grCorneria_801E01A8(Ground_GObj*);
-/* 1E03C8 */ void grCorneria_801E03C8(Ground_GObj*, int);
+/* 1E03C8 */ UNK_T grCorneria_801E03C8(Ground_GObj*, int);
 /* 1E0678 */ void grCorneria_801E0678(void);
 /* 1E08CC */ int grCorneria_801E08CC(void);
 /* 1E0A74 */ int grCorneria_801E0A74(f32*);
@@ -85,7 +84,8 @@
 /* 1E2550 */ void smashTaunt_801E2550(Ground_GObj*,
                                       struct grSmashTaunt_GroundVars*);
 /* 1E2598 */ s32 grCorneria_801E2598(u32, u32);
-/* 1E25C4 */ void grCorneria_801E25C4(HSD_GObj*, void*, int, int, int);
+/* 1E25C4 */ void
+grCorneria_801E25C4(HSD_GObj*, struct grSmashTaunt_GroundVars*, int, int, int);
 /* 1E2738 */ void grCorneria_801E2738(HSD_GObj*, void*, u32, u32);
 /* 1E277C */ void grCorneria_801E277C(Ground_GObj*,
                                       struct grSmashTaunt_GroundVars*);

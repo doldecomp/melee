@@ -12,11 +12,13 @@ struct lbl_8046B488_t;
                                GameModeKind); ///< gets characters trophy model
 /* 160564 */ char* gm_80160564(CharacterKind, GameModeKind);
 /**
- * @brief Returns the index used in the bitmask to represent whether or not the provided character is unlocked.
+ * @brief Returns the index used in the bitmask to represent whether or not the
+ * provided character is unlocked.
  */
 /* 1605EC */ u8 gm_SelKindToUnlockIndex(SelectableCharacterKind);
 /**
- * @brief Returns the index used in the bitmask to represent whether or not the provided character is unlocked.
+ * @brief Returns the index used in the bitmask to represent whether or not the
+ * provided character is unlocked.
  */
 /* 160638 */ s8 gm_CKindToUnlockIndex(CharacterKind);
 /* 1606A8 */ u8 gm_GetCKindByUnlockIndex(int);
@@ -117,10 +119,10 @@ struct lbl_8046B488_t;
 /**
  * @brief Convert a #CharacterKind into its #SelectableCharacterKind.
  *
- * Indexes #ckind_to_selkind_map with @p ckind. Both #CharacterKind::CKIND_ZELDA
- * and #CharacterKind::CKIND_SEAK collapse onto #SELKIND_ZELDA_SEAK, so this
- * direction is lossy with respect to the Zelda/Sheik split, not to mention all
- * the non-playable characters.
+ * Indexes #ckind_to_selkind_map with @p ckind. Both
+ * #CharacterKind::CKIND_ZELDA and #CharacterKind::CKIND_SEAK collapse onto
+ * #SELKIND_ZELDA_SEAK, so this direction is lossy with respect to the
+ * Zelda/Sheik split, not to mention all the non-playable characters.
  *
  * @param[in] ckind A #CharacterKind.
  * @return The #SelectableCharacterKind representing the CSS slot for @p ckind.

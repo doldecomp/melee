@@ -41,7 +41,7 @@ void ftSs_SpecialHi_Enter(HSD_GObj* gobj)
     fp->mv.ss.unk5.x0 = 0;
     ftAnim_8006EBA4(gobj);
     efSync_Spawn(1154, gobj, fp->parts[FtPart_YRotN].joint);
-    fp->fv.ss.x2244 = 1;
+    fp->u.ss.x2244 = 1;
 }
 
 void ftSs_SpecialAirHi_Enter(HSD_GObj* gobj)
@@ -63,14 +63,14 @@ void ftSs_SpecialAirHi_Enter(HSD_GObj* gobj)
     ftCommon_ClampSelfVelX(fp, samus_attr->x40);
     ftAnim_8006EBA4(gobj);
     efSync_Spawn(1154, gobj, fp->parts[FtPart_YRotN].joint);
-    fp->fv.ss.x2244 = 1;
+    fp->u.ss.x2244 = 1;
 }
 
 static void ftSamus_DestroyAllUnsetx2444(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     efLib_DestroyAll(gobj);
-    fp->fv.ss.x2244 = 0;
+    fp->u.ss.x2244 = 0;
 }
 
 void ftSs_SpecialHi_Anim(HSD_GObj* gobj)

@@ -142,11 +142,6 @@ extern struct grSh_Route_LightConfig {
     /* 0x30 */ s32 x30;
 } grSh_Route_803E5A58[];
 
-float grShrineRoute_802087B0(void)
-{
-    return grNKr_804DB868;
-}
-
 void grShrineRoute_OnDemoInit(bool arg) {}
 
 void grShrineRoute_OnInit(void)
@@ -275,12 +270,12 @@ void fn_80208A38(HSD_GObj* gobj)
         jobj = Ground_801C2CF4(i + 0xBD);
         if (jobj != NULL) {
             if (*flag != 0) {
-                gp->gv.shrineroute.symbols[i] = grShrineRoute_802088C0(3);
+                gp->u.shrineroute.symbols[i] = grShrineRoute_802088C0(3);
             } else {
-                gp->gv.shrineroute.symbols[i] = grShrineRoute_802088C0(1);
+                gp->u.shrineroute.symbols[i] = grShrineRoute_802088C0(1);
             }
             lb_8000B1CC(jobj, NULL, &pos);
-            effect = gp->gv.shrineroute.symbols[i];
+            effect = gp->u.shrineroute.symbols[i];
             if (effect != NULL) {
                 if ((ejobj = GET_JOBJ(effect)) != NULL) {
                     HSD_JObjSetTranslate(ejobj, &pos);
@@ -307,19 +302,19 @@ void grShrineRoute_80208D14(Ground_GObj* gobj)
     grMaterial_801C94D8(Ground_801C3FA4(gobj, 1));
     grMaterial_801C94D8(Ground_801C3FA4(gobj, 1));
 
-    gp->gv.shrineroute.xC4 = 0;
-    gp->gv.shrineroute.xC6 = 0;
-    gp->gv.shrineroute.xC8 = 0;
-    gp->gv.shrineroute.xCE = 0;
-    gp->gv.shrineroute.xD4 = 0;
-    gp->gv.shrineroute.xCA = 0;
-    gp->gv.shrineroute.xCC = 0;
+    gp->u.shrineroute.xC4 = 0;
+    gp->u.shrineroute.xC6 = 0;
+    gp->u.shrineroute.xC8 = 0;
+    gp->u.shrineroute.xCE = 0;
+    gp->u.shrineroute.xD4 = 0;
+    gp->u.shrineroute.xCA = 0;
+    gp->u.shrineroute.xCC = 0;
 
     gp->x11_flags.b012 = 2;
     stage_info.x6DC = 0;
 
     for (i = 0; i < 6; i++) {
-        gp->gv.shrineroute.symbols[i] = NULL;
+        gp->u.shrineroute.symbols[i] = NULL;
     }
 
     ftCo_800C07F8(gobj, 3, grShrineRoute_8020AE08);
@@ -334,18 +329,17 @@ void grShrineRoute_80208D14(Ground_GObj* gobj)
         HSD_JObj* jobj;
         for (i = 0; i < 3; i++) {
             jobj = Ground_801C2CF4(i + 0x7F);
-            gp->gv.shrineroute.platforms[i].jobj = jobj;
+            gp->u.shrineroute.platforms[i].jobj = jobj;
             if (jobj != NULL) {
-                HSD_JObjGetTranslation(
-                    gp->gv.shrineroute.platforms[i].jobj,
-                    &gp->gv.shrineroute.platforms[i].offset);
-                lbVector_Sub(&gp->gv.shrineroute.platforms[i].offset, &center);
+                HSD_JObjGetTranslation(gp->u.shrineroute.platforms[i].jobj,
+                                       &gp->u.shrineroute.platforms[i].offset);
+                lbVector_Sub(&gp->u.shrineroute.platforms[i].offset, &center);
             }
         }
     } else {
-        gp->gv.shrineroute.platforms[0].jobj = NULL;
-        gp->gv.shrineroute.platforms[1].jobj = NULL;
-        gp->gv.shrineroute.platforms[2].jobj = NULL;
+        gp->u.shrineroute.platforms[0].jobj = NULL;
+        gp->u.shrineroute.platforms[1].jobj = NULL;
+        gp->u.shrineroute.platforms[2].jobj = NULL;
     }
 
     Ground_801C10B8(gobj, fn_80208A38);
@@ -365,8 +359,8 @@ bool grShrineRoute_80208F14(void)
     if (gobj != NULL) {
         gp = GET_GROUND(gobj);
         if (gp != NULL) {
-            if (gp->gv.shrineroute.xCA != 0) {
-                if (gp->gv.shrineroute.xCC != 0) {
+            if (gp->u.shrineroute.xCA != 0) {
+                if (gp->u.shrineroute.xCC != 0) {
                     return true;
                 }
             }
@@ -400,7 +394,7 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
         sp7C.x = 0.0f;
     }
 
-    switch (gp->gv.shrineroute.xC4) {
+    switch (gp->u.shrineroute.xC4) {
     case 0: {
         f32 radius;
         s32 result;
@@ -412,26 +406,26 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
                                  radius);
         if (result != -1) {
             ix = result - 0xBD;
-            if (!(gp->gv.shrineroute.xC6 & (1 << ix))) {
-                gp->gv.shrineroute.xC8 = (u16) result;
-                HSD_ASSERTMSG(0x213, gp->gv.shrineroute.symbols[(u32) ix],
+            if (!(gp->u.shrineroute.xC6 & (1 << ix))) {
+                gp->u.shrineroute.xC8 = (u16) result;
+                HSD_ASSERTMSG(0x213, gp->u.shrineroute.symbols[(u32) ix],
                               "gp->u.map.symbol[ix]");
                 {
                     s32 mid =
-                        ((Ground*) gp->gv.shrineroute.symbols[ix]->user_data)
+                        ((Ground*) gp->u.shrineroute.symbols[ix]->user_data)
                             ->map_id;
                     if (player != NULL) {
                         Player_80031790((s32) ftLib_80086BE0(player));
                     }
                     if (mid == 3) {
-                        gp->gv.shrineroute.xC4 = 6;
-                        gp->gv.shrineroute.xD0 = 0x3C;
+                        gp->u.shrineroute.xC4 = 6;
+                        gp->u.shrineroute.xD0 = 0x3C;
                     } else {
                         HSD_GObj* temp;
                         HSD_JObj* ejobj;
 
-                        gp->gv.shrineroute.xC4 = 1;
-                        gp->gv.shrineroute.xCE = 0x3C;
+                        gp->u.shrineroute.xC4 = 1;
+                        gp->u.shrineroute.xCE = 0x3C;
                         mpLib_80057BC0(0);
                         mpLib_80057BC0(1);
                         mpLib_80057BC0(2);
@@ -441,10 +435,10 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
                         mpLib_80057BC0(6);
                         mpLib_80057BC0(7);
                         temp = grShrineRoute_802088C0(5);
-                        gp->gv.shrineroute.xD4 = (u32) temp;
+                        gp->u.shrineroute.xD4 = (u32) temp;
                         if (temp != NULL) {
                             ejobj =
-                                ((HSD_GObj*) gp->gv.shrineroute.xD4)->hsd_obj;
+                                ((HSD_GObj*) gp->u.shrineroute.xD4)->hsd_obj;
                             HSD_JObjSetFlagsAll(ejobj, JOBJ_HIDDEN);
                             Ground_801C2D24(result, &sp88);
                             HSD_JObjSetTranslate(ejobj, &sp88);
@@ -514,8 +508,8 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
                             }
                         }
                         grZakoGenerator_801CAF08();
-                        grShrineRoute_8020B020(
-                            (HSD_GObj*) gobj, (s32) gp->gv.shrineroute.xC8, 1);
+                        grShrineRoute_8020B020((HSD_GObj*) gobj,
+                                               (s32) gp->u.shrineroute.xC8, 1);
                     }
                 }
             }
@@ -525,7 +519,7 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
     case 1: {
         track_plat = 1;
         if (grLib_801C96E8((HSD_GObj*) gobj) != 0) {
-            gp->gv.shrineroute.xC4 = 2;
+            gp->u.shrineroute.xC4 = 2;
             HSD_JObjSetFlagsAll(Ground_801C3FA4((HSD_GObj*) gobj, 1),
                                 JOBJ_HIDDEN);
             HSD_JObjSetFlagsAll(Ground_801C3FA4((HSD_GObj*) gobj, 1),
@@ -538,8 +532,8 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
             }
             grAnime_801C7A04((HSD_GObj*) gobj, 0, 7U, 0.0f);
             grLib_801C9908(gobj->hsd_obj);
-            if (gp->gv.shrineroute.xD4 != 0) {
-                grMaterial_801C9604((HSD_GObj*) gp->gv.shrineroute.xD4,
+            if (gp->u.shrineroute.xD4 != 0) {
+                grMaterial_801C9604((HSD_GObj*) gp->u.shrineroute.xD4,
                                     grSh_Route_804D6A58->x4, 0);
             }
         }
@@ -547,42 +541,42 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
     }
     case 2: {
         track_plat = 1;
-        if (gp->gv.shrineroute.xD4 != 0) {
-            HSD_JObj* ejobj = ((HSD_GObj*) gp->gv.shrineroute.xD4)->hsd_obj;
+        if (gp->u.shrineroute.xD4 != 0) {
+            HSD_JObj* ejobj = ((HSD_GObj*) gp->u.shrineroute.xD4)->hsd_obj;
             if (HSD_JObjGetFlags(ejobj) & 0x10) {
-                void* anim = ((HSD_GObj*) gp->gv.shrineroute.xD4)->user_data;
+                void* anim = ((HSD_GObj*) gp->u.shrineroute.xD4)->user_data;
                 HSD_JObjClearFlagsAll(ejobj, JOBJ_HIDDEN);
-                grAnime_801C8138((HSD_GObj*) gp->gv.shrineroute.xD4,
+                grAnime_801C8138((HSD_GObj*) gp->u.shrineroute.xD4,
                                  ((Ground*) anim)->map_id, 0);
             }
         }
         {
-            if (((gp->gv.shrineroute.xD4 != 0) &&
-                 (grLib_801C96E8((HSD_GObj*) gp->gv.shrineroute.xD4) != 0)) ||
-                (gp->gv.shrineroute.xD4 == 0))
+            if (((gp->u.shrineroute.xD4 != 0) &&
+                 (grLib_801C96E8((HSD_GObj*) gp->u.shrineroute.xD4) != 0)) ||
+                (gp->u.shrineroute.xD4 == 0))
             {
-                gp->gv.shrineroute.xC4 = 3;
+                gp->u.shrineroute.xC4 = 3;
                 Ground_801C5750();
-                gm_801674C4(6, 1, 1, (s8) (gp->gv.shrineroute.xC8 - 0xA),
+                gm_801674C4(6, 1, 1, (s8) (gp->u.shrineroute.xC8 - 0xA),
                             grShrineRoute_8020AD24);
                 Player_80031900();
                 grShrineRoute_8020AF38((HSD_GObj*) gobj,
-                                       (s32) gp->gv.shrineroute.xC8);
+                                       (s32) gp->u.shrineroute.xC8);
             }
         }
         break;
     }
     case 3: {
         track_plat = 1;
-        if ((Ground_801C5764() == 1) && (gp->gv.shrineroute.xCA != 0) &&
-            (gp->gv.shrineroute.xCC != 0))
+        if ((Ground_801C5764() == 1) && (gp->u.shrineroute.xCA != 0) &&
+            (gp->u.shrineroute.xCC != 0))
         {
-            gp->gv.shrineroute.xC6 =
-                (u16) (gp->gv.shrineroute.xC6 |
-                       (1 << (gp->gv.shrineroute.xC8 - 0xBD)));
+            gp->u.shrineroute.xC6 =
+                (u16) (gp->u.shrineroute.xC6 |
+                       (1 << (gp->u.shrineroute.xC8 - 0xBD)));
             grZakoGenerator_801CAEF0(1);
             grShrineRoute_8020B020((HSD_GObj*) gobj, -1, 0);
-            gp->gv.shrineroute.xCE = 0x3C;
+            gp->u.shrineroute.xCE = 0x3C;
             mpJointListAdd(0);
             mpJointListAdd(1);
             mpJointListAdd(2);
@@ -592,26 +586,26 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
             mpJointListAdd(6);
             mpJointListAdd(7);
             grShrineRoute_8020B0AC();
-            if (gp->gv.shrineroute.xD4 != 0) {
-                grMaterial_801C9604((HSD_GObj*) gp->gv.shrineroute.xD4,
+            if (gp->u.shrineroute.xD4 != 0) {
+                grMaterial_801C9604((HSD_GObj*) gp->u.shrineroute.xD4,
                                     grSh_Route_804D6A58->x8, 0);
             }
             stage_info.x6DC = 0;
-            gp->gv.shrineroute.xC4 = 4;
+            gp->u.shrineroute.xC4 = 4;
         }
         break;
     }
     case 4: {
         track_plat = 0;
-        if (((gp->gv.shrineroute.xD4 != 0) &&
-             (grLib_801C96E8((HSD_GObj*) gp->gv.shrineroute.xD4) != 0)) ||
-            (gp->gv.shrineroute.xD4 == 0))
+        if (((gp->u.shrineroute.xD4 != 0) &&
+             (grLib_801C96E8((HSD_GObj*) gp->u.shrineroute.xD4) != 0)) ||
+            (gp->u.shrineroute.xD4 == 0))
         {
-            gp->gv.shrineroute.xC4 = 5;
-            grLib_801C9908(((HSD_GObj*) gp->gv.shrineroute.xD4)->hsd_obj);
-            if (gp->gv.shrineroute.xD4 != 0) {
-                Ground_801C4A08((HSD_GObj*) gp->gv.shrineroute.xD4);
-                gp->gv.shrineroute.xD4 = 0;
+            gp->u.shrineroute.xC4 = 5;
+            grLib_801C9908(((HSD_GObj*) gp->u.shrineroute.xD4)->hsd_obj);
+            if (gp->u.shrineroute.xD4 != 0) {
+                Ground_801C4A08((HSD_GObj*) gp->u.shrineroute.xD4);
+                gp->u.shrineroute.xD4 = 0;
             }
             grMaterial_801C9604((HSD_GObj*) gobj, grSh_Route_804D6A58->xC, 0);
             {
@@ -638,7 +632,7 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
                 HSD_JObjClearFlagsAll(Ground_801C3FA4(gr2, 0), JOBJ_HIDDEN);
             }
             grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
-            pid = gp->gv.shrineroute.xC8;
+            pid = gp->u.shrineroute.xC8;
             if ((s32) pid != 0xBD) {
                 HSD_JObj* j = Ground_801C3FA4((HSD_GObj*) gobj, 0x13);
                 if (j != NULL) {
@@ -684,7 +678,7 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
             mpLib_80058560();
         }
         if (grLib_801C96E8((HSD_GObj*) gobj) != 0) {
-            gp->gv.shrineroute.xC4 = 0;
+            gp->u.shrineroute.xC4 = 0;
         }
         break;
     }
@@ -697,10 +691,10 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
         if (player != NULL) {
             if (ftLib_80086EC0(player) != 0) {
                 Stage_UnkSetVec3TCam_Offset(&sp5C);
-                gp->gv.shrineroute.xCE = 0x3C;
+                gp->u.shrineroute.xCE = 0x3C;
             } else if (ftLib_8008732C(player) != 0) {
                 Stage_UnkSetVec3TCam_Offset(&sp5C);
-                gp->gv.shrineroute.xCE = 0;
+                gp->u.shrineroute.xCE = 0;
             } else {
                 sp5C = sp7C;
             }
@@ -709,13 +703,13 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
         }
         Camera_80030AE0(1);
     } else {
-        Ground_801C2D24((s32) gp->gv.shrineroute.xC8, &sp5C);
+        Ground_801C2D24((s32) gp->u.shrineroute.xC8, &sp5C);
         sp5C.y += 30.0f;
         Camera_80030AE0(0);
     }
 
     {
-        u16 timer = gp->gv.shrineroute.xCE;
+        u16 timer = gp->u.shrineroute.xCE;
         if (timer == 0) {
             Ground_801C38BC(sp5C.x, sp5C.y);
         } else {
@@ -727,7 +721,7 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
             sp5C.z *= t;
             lbVector_Add(&sp50, &sp5C);
             Ground_801C38BC(sp50.x, sp50.y);
-            gp->gv.shrineroute.xCE = (u16) (gp->gv.shrineroute.xCE - 1);
+            gp->u.shrineroute.xCE = (u16) (gp->u.shrineroute.xCE - 1);
         }
     }
 
@@ -736,20 +730,20 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
         HSD_JObj* jobj;
         s32 k;
         for (k = 0; k < 3; k++) {
-            if ((jobj = gp->gv.shrineroute.platforms[k].jobj) != NULL) {
-                f32 tx = gp->gv.shrineroute.platforms[k].offset.x + sp44.x;
+            if ((jobj = gp->u.shrineroute.platforms[k].jobj) != NULL) {
+                f32 tx = gp->u.shrineroute.platforms[k].offset.x + sp44.x;
                 HSD_JObjSetTranslateX(jobj, tx);
-                jobj = gp->gv.shrineroute.platforms[k].jobj;
+                jobj = gp->u.shrineroute.platforms[k].jobj;
                 {
-                    f32 ty = gp->gv.shrineroute.platforms[k].offset.y + sp44.y;
+                    f32 ty = gp->u.shrineroute.platforms[k].offset.y + sp44.y;
                     HSD_JObjSetTranslateY(jobj, ty);
                 }
             }
         }
     }
 
-    gp->gv.shrineroute.xCA = 0;
-    gp->gv.shrineroute.xCC = 0;
+    gp->u.shrineroute.xCA = 0;
+    gp->u.shrineroute.xCC = 0;
     lb_800115F4();
 }
 
@@ -764,14 +758,14 @@ void grShrineRoute_80209AF0(Ground_GObj* gobj)
     gp->xC_callback = NULL;
     gp->x11_flags.b012 = 2;
     grMaterial_801C94D8(jobj);
-    gp->gv.shrineroute3.xC4 = Ground_801C3FA4(gobj, 10);
+    gp->u.shrineroute3.xC4 = Ground_801C3FA4(gobj, 10);
     grShrineRoute_8020A8A4(gobj);
-    gp->gv.shrineroute3.xCC = 0.0f;
-    gp->gv.shrineroute3.xC8 = 0.0f;
-    gp->gv.shrineroute3.xD0 = 0.00006981317F * HSD_Randf() + 0.000017453292F;
-    gp->gv.shrineroute3.xD0 *= (HSD_Randi(2) != 0) ? 1.0f : -1.0F;
-    gp->gv.shrineroute3.xD4 = 0.00006981317F * HSD_Randf() + 0.000017453292F;
-    gp->gv.shrineroute3.xD4 *= (HSD_Randi(2) != 0) ? 1.0f : -1.0F;
+    gp->u.shrineroute3.xCC = 0.0f;
+    gp->u.shrineroute3.xC8 = 0.0f;
+    gp->u.shrineroute3.xD0 = 0.00006981317F * HSD_Randf() + 0.000017453292F;
+    gp->u.shrineroute3.xD0 *= (HSD_Randi(2) != 0) ? 1.0f : -1.0F;
+    gp->u.shrineroute3.xD4 = 0.00006981317F * HSD_Randf() + 0.000017453292F;
+    gp->u.shrineroute3.xD4 *= (HSD_Randi(2) != 0) ? 1.0f : -1.0F;
 }
 
 bool grShrineRoute_80209BE4(Ground_GObj* arg)
@@ -790,75 +784,75 @@ void grShrineRoute_80209BEC(Ground_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     f32 rot;
 
-    gp->gv.shrineroute3.xC8 += gp->gv.shrineroute3.xD0;
-    gp->gv.shrineroute3.xC8 *= 0.99f;
-    if (gp->gv.shrineroute3.xC8 > 0.0008726646f) {
-        gp->gv.shrineroute3.xC8 = 0.0008726646f;
-    } else if (gp->gv.shrineroute3.xC8 < -0.0008726646f) {
-        gp->gv.shrineroute3.xC8 = -0.0008726646f;
+    gp->u.shrineroute3.xC8 += gp->u.shrineroute3.xD0;
+    gp->u.shrineroute3.xC8 *= 0.99f;
+    if (gp->u.shrineroute3.xC8 > 0.0008726646f) {
+        gp->u.shrineroute3.xC8 = 0.0008726646f;
+    } else if (gp->u.shrineroute3.xC8 < -0.0008726646f) {
+        gp->u.shrineroute3.xC8 = -0.0008726646f;
     }
 
-    gp->gv.shrineroute3.xCC += gp->gv.shrineroute3.xD4;
-    gp->gv.shrineroute3.xCC *= 0.99f;
-    if (gp->gv.shrineroute3.xCC > 0.0008726646f) {
-        gp->gv.shrineroute3.xCC = 0.0008726646f;
-    } else if (gp->gv.shrineroute3.xCC < -0.0008726646f) {
-        gp->gv.shrineroute3.xCC = -0.0008726646f;
+    gp->u.shrineroute3.xCC += gp->u.shrineroute3.xD4;
+    gp->u.shrineroute3.xCC *= 0.99f;
+    if (gp->u.shrineroute3.xCC > 0.0008726646f) {
+        gp->u.shrineroute3.xCC = 0.0008726646f;
+    } else if (gp->u.shrineroute3.xCC < -0.0008726646f) {
+        gp->u.shrineroute3.xCC = -0.0008726646f;
     }
 
-    rot = HSD_JObjGetRotationX(jobj) + gp->gv.shrineroute3.xC8;
+    rot = HSD_JObjGetRotationX(jobj) + gp->u.shrineroute3.xC8;
     if (rot > 0.2617994f) {
         rot = 0.2617994f;
-        gp->gv.shrineroute3.xC8 = -ABS(gp->gv.shrineroute3.xC8);
+        gp->u.shrineroute3.xC8 = -ABS(gp->u.shrineroute3.xC8);
         {
             f32 tmp = HSD_Randf();
-            gp->gv.shrineroute3.xD0 = 0.00006981317f * -tmp - 0.000017453292f;
+            gp->u.shrineroute3.xD0 = 0.00006981317f * -tmp - 0.000017453292f;
         }
     } else if (rot < -0.2617994f) {
         rot = -0.2617994f;
-        gp->gv.shrineroute3.xC8 = ABS(gp->gv.shrineroute3.xC8);
-        gp->gv.shrineroute3.xD0 =
+        gp->u.shrineroute3.xC8 = ABS(gp->u.shrineroute3.xC8);
+        gp->u.shrineroute3.xD0 =
             0.00006981317f * HSD_Randf() + 0.000017453292f;
     }
     HSD_JObjSetRotationX(jobj, rot);
 
     {
-        f32 rot = HSD_JObjGetRotationY(jobj) + gp->gv.shrineroute3.xCC;
+        f32 rot = HSD_JObjGetRotationY(jobj) + gp->u.shrineroute3.xCC;
         if (rot > 0.17453292f) {
             rot = 0.17453292f;
-            gp->gv.shrineroute3.xCC = -ABS(gp->gv.shrineroute3.xCC);
+            gp->u.shrineroute3.xCC = -ABS(gp->u.shrineroute3.xCC);
             {
                 f32 tmp = HSD_Randf();
-                gp->gv.shrineroute3.xD4 =
+                gp->u.shrineroute3.xD4 =
                     0.00006981317f * -tmp - 0.000017453292f;
             }
         } else if (rot < -0.17453292f) {
             rot = -0.17453292f;
-            gp->gv.shrineroute3.xCC = ABS(gp->gv.shrineroute3.xCC);
-            gp->gv.shrineroute3.xD4 =
+            gp->u.shrineroute3.xCC = ABS(gp->u.shrineroute3.xCC);
+            gp->u.shrineroute3.xD4 =
                 0.00006981317f * HSD_Randf() + 0.000017453292f;
         }
         HSD_JObjSetRotationY(jobj, rot);
     }
 
-    if (gp->gv.shrineroute3.xC4 != NULL) {
-        rot = gp->gv.shrineroute3.xD8 +
-              HSD_JObjGetRotationX(gp->gv.shrineroute3.xC4);
+    if (gp->u.shrineroute3.xC4 != NULL) {
+        rot = gp->u.shrineroute3.xD8 +
+              HSD_JObjGetRotationX(gp->u.shrineroute3.xC4);
         if (rot > 6.283185307179586) {
             rot = (f32) ((f64) rot - 6.283185307179586);
         } else if (rot < -6.283185307179586) {
             rot += 6.283185307179586;
         }
-        HSD_JObjSetRotationX(gp->gv.shrineroute3.xC4, rot);
+        HSD_JObjSetRotationX(gp->u.shrineroute3.xC4, rot);
 
-        rot = gp->gv.shrineroute3.xDC +
-              HSD_JObjGetRotationY(gp->gv.shrineroute3.xC4);
+        rot = gp->u.shrineroute3.xDC +
+              HSD_JObjGetRotationY(gp->u.shrineroute3.xC4);
         if (rot > 6.283185307179586) {
             rot = (f32) ((f64) rot - 6.283185307179586);
         } else if (rot < -6.283185307179586) {
             rot += 6.283185307179586;
         }
-        HSD_JObjSetRotationY(gp->gv.shrineroute3.xC4, rot);
+        HSD_JObjSetRotationY(gp->u.shrineroute3.xC4, rot);
     }
 
     if (lb_8000B134(jobj)) {
@@ -882,22 +876,22 @@ void grShrineRoute_8020A104(Ground_GObj* gobj)
         }
     }
     HSD_ASSERT(1106, lgobj);
-    gp->gv.shrineroute2.xC4 = lgobj;
-    grShrineRoute_8020AA40(gp->gv.shrineroute2.xC4);
+    gp->u.shrineroute2.xC4 = lgobj;
+    grShrineRoute_8020AA40(gp->u.shrineroute2.xC4);
 
-    lobj = GET_LOBJ(gp->gv.shrineroute2.xC4);
-    gp->gv.shrineroute2.x168 = 0;
+    lobj = GET_LOBJ(gp->u.shrineroute2.xC4);
+    gp->u.shrineroute2.x168 = 0;
     while (lobj != NULL) {
-        gp->gv.shrineroute2.xC8[gp->gv.shrineroute2.x168] = lobj;
-        gp->gv.shrineroute2.x118[gp->gv.shrineroute2.x168] =
+        gp->u.shrineroute2.xC8[gp->u.shrineroute2.x168] = lobj;
+        gp->u.shrineroute2.x118[gp->u.shrineroute2.x168] =
             HSD_LObjGetFlags(lobj);
 
         lobj = HSD_LObjGetNext(lobj);
-        gp->gv.shrineroute2.x168 += 1;
+        gp->u.shrineroute2.x168 += 1;
     }
 
-    gp->gv.shrineroute2.x16C = grShrineRoute_8020AB58(gp->gv.shrineroute2.xC4);
-    gp->gv.shrineroute2.x170 = grShrineRoute_8020AC44(gp->gv.shrineroute2.xC4);
+    gp->u.shrineroute2.x16C = grShrineRoute_8020AB58(gp->u.shrineroute2.xC4);
+    gp->u.shrineroute2.x170 = grShrineRoute_8020AC44(gp->u.shrineroute2.xC4);
     grShrineRoute_8020A21C(gobj);
 }
 
@@ -944,10 +938,10 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
         player_pos.x = 0.0f;
     }
 
-    if (gp->gv.shrineroute2.xC4 != 0) {
+    if (gp->u.shrineroute2.xC4 != 0) {
         i = 0;
-        while (i < (s32) gp->gv.shrineroute2.x168) {
-            HSD_LObj* lobj = gp->gv.shrineroute2.xC8[i];
+        while (i < (s32) gp->u.shrineroute2.x168) {
+            HSD_LObj* lobj = gp->u.shrineroute2.xC8[i];
             s32 type = lobj->flags & 3;
 
             if (type == 0) {
@@ -976,8 +970,8 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
         }
 
         /* Selection sort by distance */
-        for (i = 0; i < (int) gp->gv.shrineroute2.x168; i++) {
-            count = gp->gv.shrineroute2.x168;
+        for (i = 0; i < (int) gp->u.shrineroute2.x168; i++) {
+            count = gp->u.shrineroute2.x168;
             min_dist = 3.4028235e38f;
             best = 0;
             for (j = i; j < count; j++) {
@@ -994,11 +988,11 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
         }
 
         /* Enable first 6 lights, disable rest */
-        for (i = 0; i < (int) gp->gv.shrineroute2.x168; i++) {
+        for (i = 0; i < (int) gp->u.shrineroute2.x168; i++) {
             if (i < 6) {
-                HSD_LObjClearFlags(gp->gv.shrineroute2.xC8[sorted[i]], 0x20);
+                HSD_LObjClearFlags(gp->u.shrineroute2.xC8[sorted[i]], 0x20);
             } else {
-                HSD_LObjSetFlags(gp->gv.shrineroute2.xC8[sorted[i]], 0x20);
+                HSD_LObjSetFlags(gp->u.shrineroute2.xC8[sorted[i]], 0x20);
             }
         }
 
@@ -1006,8 +1000,8 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
         dir = grSh_Route_803B8360;
         ref_dist = distances[sorted[1]];
 
-        for (i = 1; i < (int) gp->gv.shrineroute2.x168; i++) {
-            if (HSD_LObjGetPosition(gp->gv.shrineroute2.xC8[sorted[i]],
+        for (i = 1; i < (int) gp->u.shrineroute2.x168; i++) {
+            if (HSD_LObjGetPosition(gp->u.shrineroute2.xC8[sorted[i]],
                                     &light_pos) != 0)
             {
                 weight = ref_dist / distances[sorted[i]];
@@ -1039,15 +1033,15 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
         lbVector_Add(&dir, &player_pos);
 
         /* Set spotlight */
-        HSD_LObjSetPosition(gp->gv.shrineroute2.x16C, &dir);
-        HSD_LObjSetInterest(gp->gv.shrineroute2.x16C, &player_pos);
-        HSD_LObjSetFlags(gp->gv.shrineroute2.x16C, 0x400);
+        HSD_LObjSetPosition(gp->u.shrineroute2.x16C, &dir);
+        HSD_LObjSetInterest(gp->u.shrineroute2.x16C, &player_pos);
+        HSD_LObjSetFlags(gp->u.shrineroute2.x16C, 0x400);
 
         /* Color from 2nd nearest */
         {
             f32 dist_diff;
             dist_diff = distances[sorted[2]] - distances[sorted[1]];
-            HSD_LObjGetColor(gp->gv.shrineroute2.xC8[sorted[1]], &color);
+            HSD_LObjGetColor(gp->u.shrineroute2.xC8[sorted[1]], &color);
             if (distances[sorted[2]] - distances[sorted[1]] < 50.0f) {
                 f32 ratio = dist_diff / 50.0f;
                 color.r = color.r * ratio;
@@ -1055,34 +1049,34 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
                 color.b = color.b * ratio;
             }
         }
-        HSD_LObjSetColor(gp->gv.shrineroute2.x170, color);
+        HSD_LObjSetColor(gp->u.shrineroute2.x170, color);
         grShrineRoute_StackPad(color);
 
         /* Copy position from 2nd nearest */
-        if (HSD_LObjGetPosition(gp->gv.shrineroute2.xC8[sorted[1]],
+        if (HSD_LObjGetPosition(gp->u.shrineroute2.xC8[sorted[1]],
                                 &temp_pos) == 0)
         {
             temp_pos.z = 0.0f;
             temp_pos.y = 0.0f;
             temp_pos.x = 0.0f;
         }
-        HSD_LObjSetPosition(gp->gv.shrineroute2.x170, &temp_pos);
+        HSD_LObjSetPosition(gp->u.shrineroute2.x170, &temp_pos);
 
         /* Copy interest from 2nd nearest */
-        if (HSD_LObjGetInterest(gp->gv.shrineroute2.xC8[sorted[1]],
+        if (HSD_LObjGetInterest(gp->u.shrineroute2.xC8[sorted[1]],
                                 &temp_pos) == 0)
         {
             temp_pos.z = 0.0f;
             temp_pos.y = 0.0f;
             temp_pos.x = 0.0f;
         }
-        HSD_LObjSetInterest(gp->gv.shrineroute2.x170, &temp_pos);
+        HSD_LObjSetInterest(gp->u.shrineroute2.x170, &temp_pos);
 
         /* Copy and modify flags */
-        gp->gv.shrineroute2.x170->flags =
-            gp->gv.shrineroute2.xC8[sorted[1]]->flags;
-        gp->gv.shrineroute2.x170->flags &= ~4;
-        gp->gv.shrineroute2.x170->flags |= 8;
+        gp->u.shrineroute2.x170->flags =
+            gp->u.shrineroute2.xC8[sorted[1]]->flags;
+        gp->u.shrineroute2.x170->flags &= ~4;
+        gp->u.shrineroute2.x170->flags |= 8;
     }
 }
 
@@ -1108,13 +1102,13 @@ void grShrineRoute_8020A8A4(Ground_GObj* gobj)
     Ground* gp = gobj->user_data;
     f32 angle;
 
-    if (gp->gv.shrineroute3.xC4 != NULL) {
+    if (gp->u.shrineroute3.xC4 != NULL) {
         angle = (f32) (6.283185307179586 * HSD_Randf());
-        HSD_JObjSetTranslateX(gp->gv.shrineroute3.xC4, 300.0f * cosf(angle));
-        HSD_JObjSetTranslateY(gp->gv.shrineroute3.xC4, 300.0f * sinf(angle));
-        gp->gv.shrineroute3.xD8 =
+        HSD_JObjSetTranslateX(gp->u.shrineroute3.xC4, 300.0f * cosf(angle));
+        HSD_JObjSetTranslateY(gp->u.shrineroute3.xC4, 300.0f * sinf(angle));
+        gp->u.shrineroute3.xD8 =
             0.04363323f * ((2.0f * grShrineRoute_8020A8A4_rand()) - 1.0f);
-        gp->gv.shrineroute3.xDC =
+        gp->u.shrineroute3.xDC =
             0.04363323f * ((2.0f * grShrineRoute_8020A8A4_rand()) - 1.0f);
     }
 }
@@ -1213,17 +1207,17 @@ void grShrineRoute_8020AD58(Ground* gp, int r4, CollData* r5, int r6, int r7)
     if ((int) r5->x34_flags.b1234 == 1 && r7 == 2) {
         slot = ftLib_80086BE0(r5->x0_gobj);
         if (r5->x0_gobj == Player_GetEntity(slot)) {
-            gp->gv.shrineroute.xCA = 1;
+            gp->u.shrineroute.xCA = 1;
             pgobj = Player_GetEntityAtIndex(slot, 1);
             if (pgobj) {
                 if (!ftLib_8008731C(pgobj)) {
                     return;
                 }
             }
-            gp->gv.shrineroute.xCC = 1;
+            gp->u.shrineroute.xCC = 1;
             return;
         }
-        gp->gv.shrineroute.xCC = 1;
+        gp->u.shrineroute.xCC = 1;
     }
 }
 
@@ -1239,7 +1233,7 @@ s32 grShrineRoute_8020AE08(HSD_GObj* gobj, HSD_GObj* player_gobj, s32* out)
     Vec3 pos;
     float unused4;
 
-    if (gp->gv.shrineroute.xC4 == 1 || gp->gv.shrineroute.xC4 == 3) {
+    if (gp->u.shrineroute.xC4 == 1 || gp->u.shrineroute.xC4 == 3) {
         return 0;
     }
 
@@ -1275,8 +1269,8 @@ void grShrineRoute_8020AF38(HSD_GObj* gobj, s32 arg1)
 
     pgobj = Ground_801C57A4();
 
-    if (gp->gv.shrineroute.symbols[ix] != NULL) {
-        HSD_GObj** symbols = gp->gv.shrineroute.symbols;
+    if (gp->u.shrineroute.symbols[ix] != NULL) {
+        HSD_GObj** symbols = gp->u.shrineroute.symbols;
         f32 scale;
         s32 map_id;
         PAD_STACK(4);
@@ -1290,7 +1284,7 @@ void grShrineRoute_8020AF38(HSD_GObj* gobj, s32 arg1)
         }
         jobj = Ground_801C2CF4(arg1);
         efSync_Spawn(0x428, gobj, jobj, &scale);
-        Ground_801C4A08(gp->gv.shrineroute.symbols[ix]);
+        Ground_801C4A08(gp->u.shrineroute.symbols[ix]);
         *symbolp = NULL;
         if (pgobj != NULL) {
             ftLib_80086C18(pgobj, 0xB, 0x1E);
@@ -1307,15 +1301,15 @@ void grShrineRoute_8020B020(HSD_GObj* gobj, int r4, int r5)
     comp = r4 - 189;
     for (i = 0; i < 6; i++) {
         if (r4 == -1 || i != comp) {
-            if (gp->gv.shrineroute.symbols[i]) {
-                if (GET_JOBJ(gp->gv.shrineroute.symbols[i])) {
+            if (gp->u.shrineroute.symbols[i]) {
+                if (GET_JOBJ(gp->u.shrineroute.symbols[i])) {
                     if (r5) {
                         HSD_JObjSetFlagsAll(
-                            gp->gv.shrineroute.symbols[i]->hsd_obj,
+                            gp->u.shrineroute.symbols[i]->hsd_obj,
                             JOBJ_HIDDEN);
                     } else {
                         HSD_JObjClearFlagsAll(
-                            gp->gv.shrineroute.symbols[i]->hsd_obj,
+                            gp->u.shrineroute.symbols[i]->hsd_obj,
                             JOBJ_HIDDEN);
                     }
                 }

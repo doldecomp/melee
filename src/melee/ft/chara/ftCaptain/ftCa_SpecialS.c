@@ -31,8 +31,8 @@ void ftCa_SpecialS_RemoveGFX(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     efLib_DestroyAll(gobj);
-    fp->fv.ca.during_specials = false;
-    fp->fv.ca.during_specials_start = false;
+    fp->u.ca.during_specials = false;
+    fp->u.ca.during_specials_start = false;
 }
 
 static void setCallbacks(HSD_GObj* gobj)
@@ -66,15 +66,15 @@ void ftCa_SpecialS_Enter(HSD_GObj* gobj)
     switch (ftLib_GetKind(gobj)) {
     case FTKIND_CAPTAIN: {
         efSync_Spawn(1169, gobj, fp->parts[FtPart_HeadN].joint);
-        fp->fv.ca.during_specials_start = true;
+        fp->u.ca.during_specials_start = true;
         break;
     }
     case FTKIND_GANON:
         efSync_Spawn(1293, gobj, fp->parts[FtPart_L2ndNb].joint);
-        fp->fv.ca.during_specials_start = true;
+        fp->u.ca.during_specials_start = true;
         break;
     }
-    fp->fv.ca.during_specials = false;
+    fp->u.ca.during_specials = false;
     fp->pre_hitlag_cb = efLib_PauseAll;
     fp->post_hitlag_cb = efLib_ResumeAll;
     fp->hurtbox_detect_cb = ftCa_SpecialS_OnDetect;
@@ -98,16 +98,16 @@ static inline void setupAirStart(HSD_GObj* gobj)
     switch (ftLib_GetKind(gobj)) {
     case FTKIND_CAPTAIN: {
         efSync_Spawn(1169, gobj, fp->parts[FtPart_HeadN].joint);
-        fp->fv.ca.during_specials_start = true;
+        fp->u.ca.during_specials_start = true;
         break;
     }
     case FTKIND_GANON: {
         efSync_Spawn(1293, gobj, fp->parts[FtPart_L2ndNb].joint);
-        fp->fv.ca.during_specials_start = true;
+        fp->u.ca.during_specials_start = true;
         break;
     }
     }
-    fp->fv.ca.during_specials = false;
+    fp->u.ca.during_specials = false;
     fp->pre_hitlag_cb = efLib_PauseAll;
     fp->post_hitlag_cb = efLib_ResumeAll;
     fp->hurtbox_detect_cb = ftCa_SpecialS_OnDetect;
@@ -215,18 +215,18 @@ void ftCa_SpecialSStart_Anim(HSD_GObj* gobj)
 void ftCa_SpecialS_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!fp->fv.ca.during_specials) {
+    if (!fp->u.ca.during_specials) {
         switch (ftLib_GetKind(gobj)) {
         case FTKIND_CAPTAIN: {
             efSync_Spawn(1170, gobj, fp->parts[FtPart_TransN].joint,
                          &fp->facing_dir);
-            fp->fv.ca.during_specials = true;
+            fp->u.ca.during_specials = true;
             break;
         }
         case FTKIND_GANON:
             efSync_Spawn(1294, gobj, fp->parts[FtPart_TransN].joint,
                          &fp->facing_dir);
-            fp->fv.ca.during_specials = true;
+            fp->u.ca.during_specials = true;
             break;
         }
         fp->pre_hitlag_cb = efLib_PauseAll;
@@ -257,18 +257,18 @@ void ftCa_SpecialAirS_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* captainAttrs = fp->dat_attrs;
     u8 _[8];
-    if (!fp->fv.ca.during_specials) {
+    if (!fp->u.ca.during_specials) {
         switch (ftLib_GetKind(gobj)) {
         case FTKIND_CAPTAIN: {
             efSync_Spawn(1171, gobj, fp->parts[FtPart_TransN].joint,
                          &fp->facing_dir);
-            fp->fv.ca.during_specials = true;
+            fp->u.ca.during_specials = true;
             break;
         }
         case FTKIND_GANON: {
             efSync_Spawn(1295, gobj, fp->parts[FtPart_TransN].joint,
                          &fp->facing_dir);
-            fp->fv.ca.during_specials = true;
+            fp->u.ca.during_specials = true;
             break;
         }
         }
