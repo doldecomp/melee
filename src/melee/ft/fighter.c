@@ -1128,7 +1128,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
 
     if (fp->ground_or_air == GA_Ground) {
         if (fp->kind == FTKIND_PEACH) {
-            fp->fv.pe.has_float = true;
+            fp->u.pe.has_float = true;
         }
         fp->x2221_b5 = false;
         fp->x2221_b7 = true;

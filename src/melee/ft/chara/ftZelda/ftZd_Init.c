@@ -254,7 +254,7 @@ void ftZd_Init_OnDeath(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, 0);
-    fp->fv.zd.x222C = 0;
+    fp->u.zd.x222C = 0;
 }
 
 void ftZd_Init_OnLoad(HSD_GObj* gobj)

@@ -460,7 +460,7 @@ void ftYs_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0, 0);
-    fp->fv.ys.x2238 = 0;
+    fp->u.ys.x2238 = 0;
 }
 
 /// https://decomp.me/scratch/5TPxg

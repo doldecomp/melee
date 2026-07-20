@@ -5785,18 +5785,18 @@ void ftCo_800ACD5C(Fighter* fp)
         return;
     }
     if (fp->kind == FTKIND_DONKEY) {
-        if (fp->motion_id != ftDk_MS_SpecialNLoop && fp->fv.dk.x222C == 0) {
+        if (fp->motion_id != ftDk_MS_SpecialNLoop && fp->u.dk.x222C == 0) {
             ftCo_CpuStartCharging(fp);
             return;
         }
     } else if (fp->kind == FTKIND_SAMUS) {
-        if (fp->motion_id != ftSs_MS_SpecialNHold && fp->fv.ss.x2230 == 0) {
+        if (fp->motion_id != ftSs_MS_SpecialNHold && fp->u.ss.x2230 == 0) {
             ftCo_CpuStartCharging(fp);
             return;
         }
     } else if (fp->kind == FTKIND_MEWTWO) {
         ftMewtwoAttributes* da = fp->dat_attrs;
-        if (fp->fv.mt.x2234_shadowBallCharge ==
+        if (fp->u.mt.x2234_shadowBallCharge ==
             da->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES)
         {
             if (fp->motion_id == ftMt_MS_SpecialNLoop ||
@@ -5807,27 +5807,25 @@ void ftCo_800ACD5C(Fighter* fp)
                 return;
             }
         } else if (fp->motion_id != ftMt_MS_SpecialNLoop &&
-                   fp->fv.mt.x2234_shadowBallCharge == 0)
+                   fp->u.mt.x2234_shadowBallCharge == 0)
         {
             ftCo_CpuStartCharging(fp);
             return;
         }
     } else if (fp->kind == FTKIND_KIRBY) {
-        if (fp->fv.kb.hat.kind == FTKIND_DONKEY) {
-            if (fp->motion_id != ftKb_MS_DkSpecialNLoop && fp->fv.kb.xBC == 0)
-            {
+        if (fp->u.kb.hat.kind == FTKIND_DONKEY) {
+            if (fp->motion_id != ftKb_MS_DkSpecialNLoop && fp->u.kb.xBC == 0) {
                 ftCo_CpuStartCharging(fp);
                 return;
             }
-        } else if (fp->fv.kb.hat.kind == FTKIND_SAMUS) {
-            if (fp->motion_id != ftKb_MS_SsSpecialNHold && fp->fv.kb.xA8 == 0)
-            {
+        } else if (fp->u.kb.hat.kind == FTKIND_SAMUS) {
+            if (fp->motion_id != ftKb_MS_SsSpecialNHold && fp->u.kb.xA8 == 0) {
                 ftCo_CpuStartCharging(fp);
                 return;
             }
-        } else if (fp->fv.kb.hat.kind == FTKIND_MEWTWO) {
+        } else if (fp->u.kb.hat.kind == FTKIND_MEWTWO) {
             struct ftKb_DatAttrs* da = fp->dat_attrs;
-            if (fp->fv.kb.x9C == da->specialn_mt_charge_time) {
+            if (fp->u.kb.x9C == da->specialn_mt_charge_time) {
                 if (fp->motion_id == ftKb_MS_MtSpecialNLoop ||
                     fp->motion_id == ftKb_MS_MtSpecialNLoopFull)
                 {
@@ -5835,7 +5833,7 @@ void ftCo_800ACD5C(Fighter* fp)
                     return;
                 }
             } else if (fp->motion_id != ftKb_MS_MtSpecialNLoop &&
-                       fp->fv.kb.x9C == 0)
+                       fp->u.kb.x9C == 0)
             {
                 ftCo_CpuStartCharging(fp);
                 return;
@@ -5996,7 +5994,7 @@ void ftCo_800ADC28(Fighter* fp)
             ftCo_CpuTapRAndWait(fp);
         }
     } else if (fp->kind == FTKIND_KIRBY) {
-        FighterKind kind = fp->fv.kb.hat.kind;
+        FighterKind kind = fp->u.kb.hat.kind;
         if (kind == FTKIND_DONKEY && fp->motion_id == ftKb_MS_DkSpecialNLoop) {
             ftCo_CpuTapRAndWait(fp);
         } else if (kind == FTKIND_SAMUS &&

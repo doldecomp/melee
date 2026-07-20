@@ -35,7 +35,7 @@ void fn_8010B1F4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2219_b0) {
-        if ((s32) fp->fv.kb.hat.kind == FTKIND_MARS) {
+        if ((s32) fp->u.kb.hat.kind == FTKIND_MARS) {
             if ((s32) fp->ground_or_air == GA_Ground) {
                 efSync_Spawn(0x4B4, gobj, fp->parts[FtPart_TopN].joint);
             } else {
@@ -70,7 +70,7 @@ inline void setupStartAccessory(HSD_GObj* gobj, Vec3* scale)
     mars_hat = ft_80459B88.hats[FTKIND_MARS - 1];
     fe_hat = ft_80459B88.hats[FTKIND_EMBLEM - 1];
 
-    if (fp->fv.kb.hat.kind == FTKIND_MARS) {
+    if (fp->u.kb.hat.kind == FTKIND_MARS) {
         ftCommon_SetAccessory(fp, (HSD_Joint*) mars_hat->hat_dynamics[0]);
     } else {
         ftCommon_SetAccessory(fp, (HSD_Joint*) fe_hat->hat_dynamics[0]);
@@ -95,7 +95,7 @@ void ftKb_SpecialNMs_8010B2FC(HSD_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         da = fp->dat_attrs;
 
-        if (fp->fv.kb.hat.kind == FTKIND_MARS) {
+        if (fp->u.kb.hat.kind == FTKIND_MARS) {
             ms_da = &da->ms;
         } else {
             ms_da = &da->fe;
@@ -111,7 +111,7 @@ void ftKb_SpecialNMs_8010B2FC(HSD_GObj* gobj)
         ftKirby_MotionState msid;
         {
             Fighter* fp = GET_FIGHTER(gobj);
-            if (fp->fv.kb.hat.kind == FTKIND_MARS) {
+            if (fp->u.kb.hat.kind == FTKIND_MARS) {
                 msid = ftKb_MS_MsSpecialNStart;
             } else {
                 msid = ftKb_MS_FeSpecialNStart;
@@ -133,7 +133,7 @@ void ftKb_SpecialNMs_8010B4A0(HSD_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         da = fp->dat_attrs;
 
-        if (fp->fv.kb.hat.kind == FTKIND_MARS) {
+        if (fp->u.kb.hat.kind == FTKIND_MARS) {
             ms_da = &da->ms;
         } else {
             ms_da = &da->fe;
@@ -153,7 +153,7 @@ void ftKb_SpecialNMs_8010B4A0(HSD_GObj* gobj)
         ftKirby_MotionState msid;
         {
             Fighter* fp = GET_FIGHTER(gobj);
-            if (fp->fv.kb.hat.kind == FTKIND_MARS) {
+            if (fp->u.kb.hat.kind == FTKIND_MARS) {
                 msid = ftKb_MS_MsSpecialAirNStart;
             } else {
                 msid = ftKb_MS_FeSpecialAirNStart;
@@ -177,7 +177,7 @@ void ftKb_MsSpecialNStart_Anim(HSD_GObj* gobj)
         ftKb_SpecialNMs_8010BC40(gobj);
         {
             Fighter* fp = GET_FIGHTER(gobj);
-            if (fp->fv.kb.hat.kind == FTKIND_MARS) {
+            if (fp->u.kb.hat.kind == FTKIND_MARS) {
                 ftCo_800BFFD0(fp, 99, 0);
             } else {
                 ftCo_800BFFD0(fp, 100, 0);
@@ -192,7 +192,7 @@ void ftKb_MsSpecialAirNStart_Anim(HSD_GObj* gobj)
         ftKb_SpecialNMs_8010BC90(gobj);
         {
             Fighter* fp = GET_FIGHTER(gobj);
-            if (fp->fv.kb.hat.kind == FTKIND_MARS) {
+            if (fp->u.kb.hat.kind == FTKIND_MARS) {
                 ftCo_800BFFD0(fp, 99, 0);
             } else {
                 ftCo_800BFFD0(fp, 100, 0);
@@ -211,7 +211,7 @@ void ftKb_MsSpecialNStart_Phys(Fighter_GObj* gobj)
     ftKb_DatAttrs* da = fp->dat_attrs;
     struct ftKb_SpecialNMs_DatAttrs* ms_da;
     PAD_STACK(16);
-    if (fp->fv.kb.hat.kind == FTKIND_MARS) {
+    if (fp->u.kb.hat.kind == FTKIND_MARS) {
         ms_da = &da->ms;
     } else {
         ms_da = &da->fe;
@@ -226,7 +226,7 @@ void ftKb_MsSpecialAirNStart_Phys(Fighter_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
     PAD_STACK(16);
-    if (fp->fv.kb.hat.kind == FTKIND_MARS) {
+    if (fp->u.kb.hat.kind == FTKIND_MARS) {
         ms_da = &da->ms;
     } else {
         ms_da = &da->fe;
@@ -252,7 +252,7 @@ void ftKb_MsSpecialAirNStart_Coll(Fighter_GObj* gobj)
 inline FtMotionId getAirSpecialMotionId(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.kb.hat.kind == FTKIND_MARS) {
+    if (fp->u.kb.hat.kind == FTKIND_MARS) {
         return ftKb_MS_MsSpecialAirNStart;
     } else {
         return ftKb_MS_FeSpecialAirNStart;
@@ -271,7 +271,7 @@ void ftKb_SpecialNMs_8010B868(Fighter_GObj* gobj)
 inline FtMotionId getGroundSpecialMotionId(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.kb.hat.kind == FTKIND_MARS) {
+    if (fp->u.kb.hat.kind == FTKIND_MARS) {
         return ftKb_MS_MsSpecialNStart;
     } else {
         return ftKb_MS_FeSpecialNStart;
@@ -292,7 +292,7 @@ void ftKb_MsSpecialNLoop_Anim(Fighter_GObj* gobj)
     s32* charge;
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
-    if (fp->fv.kb.hat.kind == FTKIND_MARS) {
+    if (fp->u.kb.hat.kind == FTKIND_MARS) {
         charge = (s32*) &da->ms.charge_iterations;
     } else {
         charge = (s32*) &da->fe.charge_iterations;
@@ -309,7 +309,7 @@ void ftKb_MsSpecialAirNLoop_Anim(Fighter_GObj* gobj)
     u32* charge;
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
-    if (fp->fv.kb.hat.kind == FTKIND_MARS) {
+    if (fp->u.kb.hat.kind == FTKIND_MARS) {
         charge = &da->ms.charge_iterations;
     } else {
         charge = &da->fe.charge_iterations;
@@ -368,7 +368,7 @@ void ftKb_SpecialNMs_8010BB50(Fighter_GObj* gobj)
     FtMotionId msid;
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
-    if ((s32) GET_FIGHTER(gobj)->fv.kb.hat.kind == FTKIND_MARS) {
+    if ((s32) GET_FIGHTER(gobj)->u.kb.hat.kind == FTKIND_MARS) {
         msid = ftKb_MS_MsSpecialAirNLoop;
     } else {
         msid = ftKb_MS_FeSpecialAirNLoop;
@@ -382,7 +382,7 @@ void ftKb_SpecialNMs_8010BBC8(Fighter_GObj* gobj)
     FtMotionId msid;
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
-    if ((s32) GET_FIGHTER(gobj)->fv.kb.hat.kind == FTKIND_MARS) {
+    if ((s32) GET_FIGHTER(gobj)->u.kb.hat.kind == FTKIND_MARS) {
         msid = ftKb_MS_MsSpecialNLoop;
     } else {
         msid = ftKb_MS_FeSpecialNLoop;
@@ -396,7 +396,7 @@ void ftKb_SpecialNMs_8010BC40(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     s32 i;
 
-    if ((s32) fp->fv.gw.x2238_panicCharge == 0x12) {
+    if ((s32) fp->u.gw.x2238_panicCharge == 0x12) {
         i = ftKb_MS_MsSpecialNLoop;
     } else {
         i = ftKb_MS_FeSpecialNLoop;
@@ -410,7 +410,7 @@ void ftKb_SpecialNMs_8010BC90(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     s32 i;
 
-    if ((s32) fp->fv.gw.x2238_panicCharge == 0x12) {
+    if ((s32) fp->u.gw.x2238_panicCharge == 0x12) {
         i = ftKb_MS_MsSpecialAirNLoop;
     } else {
         i = ftKb_MS_FeSpecialAirNLoop;
@@ -428,7 +428,7 @@ void ftKb_MsSpecialNEnd_Anim(Fighter_GObj* gobj)
     u32 dmg;
     ftKb_DatAttrs* da = fp->dat_attrs;
     PAD_STACK(24);
-    if ((s32) fp->fv.kb.hat.kind == FTKIND_MARS) {
+    if ((s32) fp->u.kb.hat.kind == FTKIND_MARS) {
         ms_da = &da->ms;
     } else {
         ms_da = &da->fe;
@@ -463,7 +463,7 @@ void ftKb_MsSpecialAirNEnd_Anim(Fighter_GObj* gobj)
     u32 dmg;
     ftKb_DatAttrs* da = fp->dat_attrs;
     PAD_STACK(24);
-    if ((s32) fp->fv.kb.hat.kind == FTKIND_MARS) {
+    if ((s32) fp->u.kb.hat.kind == FTKIND_MARS) {
         ms_da = &da->ms;
     } else {
         ms_da = &da->fe;
@@ -523,11 +523,11 @@ void ftKb_SpecialNPe_8010BF90(Fighter_GObj* gobj)
     s32 msid;
     PAD_STACK(16);
     if (((Fighter*) gobj->user_data)->cmd_vars[0] == 0) {
-        msid = (((Fighter*) gobj->user_data)->fv.kb.hat.kind == FTKIND_MARS)
+        msid = (((Fighter*) gobj->user_data)->u.kb.hat.kind == FTKIND_MARS)
                    ? ftKb_MS_MsSpecialAirNEnd0
                    : ftKb_MS_FeSpecialAirNEnd0;
     } else {
-        msid = (((Fighter*) gobj->user_data)->fv.kb.hat.kind == FTKIND_MARS)
+        msid = (((Fighter*) gobj->user_data)->u.kb.hat.kind == FTKIND_MARS)
                    ? ftKb_MS_MsSpecialAirNEnd0 + 1
                    : ftKb_MS_FeSpecialAirNEnd0 + 1;
     }
@@ -546,11 +546,11 @@ void ftKb_SpecialNPe_8010C06C(Fighter_GObj* gobj)
     s32 msid;
     PAD_STACK(16);
     if (((Fighter*) gobj->user_data)->cmd_vars[0] == 0) {
-        msid = (((Fighter*) gobj->user_data)->fv.kb.hat.kind == FTKIND_MARS)
+        msid = (((Fighter*) gobj->user_data)->u.kb.hat.kind == FTKIND_MARS)
                    ? ftKb_MS_MsSpecialNEnd0
                    : ftKb_MS_FeSpecialNEnd0;
     } else {
-        msid = (((Fighter*) gobj->user_data)->fv.kb.hat.kind == FTKIND_MARS)
+        msid = (((Fighter*) gobj->user_data)->u.kb.hat.kind == FTKIND_MARS)
                    ? ftKb_MS_MsSpecialNEnd0 + 1
                    : ftKb_MS_FeSpecialNEnd0 + 1;
     }
@@ -569,11 +569,11 @@ void ftKb_SpecialNPe_8010C148(Fighter_GObj* gobj)
     s32 msid;
     PAD_STACK(4 * 6);
     if (fp->cmd_vars[0] == 0U) {
-        msid = ((s32) fp->fv.kb.hat.kind == FTKIND_MARS)
+        msid = ((s32) fp->u.kb.hat.kind == FTKIND_MARS)
                    ? ftKb_MS_MsSpecialNEnd0
                    : ftKb_MS_FeSpecialNEnd0;
     } else {
-        msid = ((s32) fp->fv.kb.hat.kind == FTKIND_MARS)
+        msid = ((s32) fp->u.kb.hat.kind == FTKIND_MARS)
                    ? ftKb_MS_MsSpecialNEnd0 + 1
                    : ftKb_MS_FeSpecialNEnd0 + 1;
     }
@@ -587,11 +587,11 @@ void ftKb_SpecialNPe_8010C1E8(Fighter_GObj* gobj)
     s32 msid;
     PAD_STACK(4 * 6);
     if (fp->cmd_vars[0] == 0U) {
-        msid = ((s32) fp->fv.kb.hat.kind == FTKIND_MARS)
+        msid = ((s32) fp->u.kb.hat.kind == FTKIND_MARS)
                    ? ftKb_MS_MsSpecialAirNEnd0
                    : ftKb_MS_FeSpecialAirNEnd0;
     } else {
-        msid = ((s32) fp->fv.kb.hat.kind == FTKIND_MARS)
+        msid = ((s32) fp->u.kb.hat.kind == FTKIND_MARS)
                    ? ftKb_MS_MsSpecialAirNEnd0 + 1
                    : ftKb_MS_FeSpecialAirNEnd0 + 1;
     }

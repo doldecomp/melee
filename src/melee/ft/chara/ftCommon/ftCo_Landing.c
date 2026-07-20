@@ -83,11 +83,11 @@ void ftCo_Landing_Enter(Fighter_GObj* gobj, FtMotionId msid,
     switch (fp->kind) {
     case FTKIND_MARIO:
     case FTKIND_DRMARIO:
-        fp->fv.mr.x2234_tornadoCharge = false;
-        fp->fv.mr.x2238_isCapeBoost = false;
+        fp->u.mr.x2234_tornadoCharge = false;
+        fp->u.mr.x2238_isCapeBoost = false;
         break;
     case FTKIND_PEACH:
-        fp->fv.pe.specialairn_used = false;
+        fp->u.pe.specialairn_used = false;
         if (allow_interrupt == true) {
             ftPe_8011D598(gobj);
         }
@@ -95,22 +95,22 @@ void ftCo_Landing_Enter(Fighter_GObj* gobj, FtMotionId msid,
         break;
     case FTKIND_MARS:
     case FTKIND_EMBLEM:
-        fp->fv.ms.x222C = 0;
+        fp->u.ms.x222C = 0;
         break;
     case FTKIND_GAMEWATCH:
-        fp->fv.gw.x2234 = 0;
+        fp->u.gw.x2234 = 0;
         break;
     case FTKIND_POPO:
     case FTKIND_NANA:
-        fp->fv.pp.x224C = 0;
+        fp->u.pp.x224C = 0;
         break;
     case FTKIND_KIRBY:
-        fp->fv.kb.xCC = false;
-        fp->fv.kb.xC4 = false;
-        fp->fv.kb.x64 = false;
+        fp->u.kb.xCC = false;
+        fp->u.kb.xC4 = false;
+        fp->u.kb.x64 = false;
         break;
     case FTKIND_MEWTWO:
-        fp->fv.mt.x223C_isConfusionBoost = false;
+        fp->u.mt.x223C_isConfusionBoost = false;
         break;
     }
 }
