@@ -508,60 +508,15 @@ struct grSmashTaunt_GroundVars {
     /* +0x28 */ f32 xEC;
 };
 
-struct grVenom_GroundVars {
-    /* +00 gp+C4 */ union {
-        u32 xC4;
-        Ground_GObj* target_gobj;
-        struct {
-            u8 b0 : 1;
-        } xC4_flags;
-    };
-    /* +04 gp+C8 */ s32 xC8;
-    /* +08 gp+CC */ union {
-        u32 xCC;
-        HSD_JObj* upper_jobj;
-    };
-    /* +0C gp+D0 */ union {
-        u32 xD0;
-        HSD_JObj* lower_jobj;
-    };
-    /* +10 gp+D4 */ s32 xD4;
-    /* +14 gp+D8 */ s32 xD8;
-    /* +18 gp+DC */ union {
-        f32 xDC;
-        Ground_GObj* linked_gobj;
-    };
-    /* +1C gp+E0 */ union {
-        f32 xE0;
-        s32 xE0_int;
-    };
-    /* +20 gp+E4 */ union {
-        f32 xE4;
-        s32 xE4_int;
-    };
-    /* +24 gp+E8 */ union {
-        f32 xE8;
-        s32 xE8_int;
-    };
-    /* +28 gp+EC */ union {
-        f32 xEC;
-        s32 xEC_int;
-    };
-    /* +2C gp+F0 */ s32 xF0;
-    /* +30 gp+F4 */ s32 xF4;
-    /* +34 gp+F8 */ s32 xF8;
-    /* +38 gp+FC */ s32 xFC;
-    /* +3C gp+100 */ s32 x100;
+struct grVenom_Platform_GroundVars {
+    /* +00 gp+C4 */ Ground_GObj* target_gobj;
+    /* +04 gp+C8 */ s32 smash_taunt_timer;
+    /* +08 gp+CC */ HSD_JObj* upper_jobj;
+    /* +0C gp+D0 */ HSD_JObj* lower_jobj;
 };
 
-struct grVenom_GroundVars2 {
-    /* +00 gp+C4 */ HSD_JObj* xC4;
-    /* +04 gp+C8 */ HSD_JObj* xC8;
-    /* +08 gp+CC */ HSD_JObj* xCC;
-    /* +0C gp+D0 */ HSD_JObj* xD0;
-    /* +10 gp+D4 */ HSD_JObj* xD4;
-    /* +14 gp+D8 */ HSD_JObj* xD8;
-    /* +18 gp+DC */ HSD_JObj* xDC;
+struct grVenom_Environment_GroundVars {
+    /* +00 gp+C4 */ HSD_JObj* visibility_joints[7];
     /* +1C gp+E0 */ union {
         u8 environment_flags;
         struct {
@@ -580,6 +535,7 @@ struct grVenom_GroundVars2 {
             u8 b7 : 1;
         };
     } xE0_state;
+    /* +20 gp+E4 */ f32 previous_frame;
 };
 
 struct grArwing_GroundVars {
@@ -1840,8 +1796,8 @@ struct Ground {
         struct GroundVars_unk unk;
         struct grHomeRun_GroundVars homerun;
         struct grHomeRun_GroundVars2 homerun2;
-        struct grVenom_GroundVars venom;
-        struct grVenom_GroundVars2 venom2;
+        struct grVenom_Platform_GroundVars venom_platform;
+        struct grVenom_Environment_GroundVars venom_environment;
         struct grYorster_GroundVars yorster;
         struct grZebes_GroundVars zebes;
         struct grZebes_GroundVars2 zebes2;
