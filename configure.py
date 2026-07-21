@@ -1110,7 +1110,7 @@ config.libs = [
             Object(Matching, "melee/gr/grshrine.c"),
             Object(Matching, "melee/gr/gryorster.c"),
             Object(Matching, "melee/gr/grgarden.c"),
-            Object(NonMatching, "melee/gr/grvenom.c"),
+            Object(Matching, "melee/gr/grvenom.c"),
             Object(Matching, "melee/gr/grtest.c"),
             Object(Matching, "melee/gr/grkinokoroute.c"),
             Object(NonMatching, "melee/gr/grshrineroute.c"),
