@@ -2190,31 +2190,71 @@ static inline void track_subject(CameraTransformState* transform,
     cm_80452C68.transform.fov += delta * *fov_rate;
 }
 
+/// @todo this and Camera_8002C908 share the body of track_subject, there
+/// always seems to be a regswap though
 void Camera_8002C908(void* arg0)
 {
     CameraBounds bounds;
-    u8 _pad[24];
+    UNUSED u8 pad[24];
+    Vec3 eye_diff;
+    Vec3 interest_diff;
     CameraTransformState* transform;
-    Vec3* pos_ptr;
     s8* slot_ptr;
+    Vec3* subject_pos;
+    Vec3* copy_src;
+    Vec3* target_pos;
+    Vec3* position_ptr;
+    f32* coeff_ptr;
+    Vec3* target_interest;
+    f32 coeff;
+    f32 delta;
 
     Camera_80030DF8();
     Camera_800293E0();
     transform = &cm_80452C68.transform;
     Camera_8002958C(&bounds, transform);
     Camera_8002C1A8();
-    pos_ptr = &cm_80452C68.x308;
-    slot_ptr = &cm_80452C68.x304;
 
-    while (!get_subject_pos(pos_ptr, slot_ptr)) {
-        s32 slot = *slot_ptr;
-        *slot_ptr = Camera_8002BA00(slot, 1);
+    subject_pos = &cm_80452C68.x308;
+    slot_ptr = &cm_80452C68.x304;
+    while (!get_subject_pos(subject_pos, slot_ptr)) {
+        *slot_ptr = Camera_8002BA00(*slot_ptr, 1);
     }
 
-    track_subject(transform, pos_ptr, &cm_80452C68.x32C, &cm_803BCCA0.x88);
+    Camera_8002C5B4(&cm_80452C68.x2D0);
+
+    target_interest = &transform->target_interest;
+    copy_src = &cm_80452C68.transform.target_interest;
+    *copy_src = *subject_pos;
+    lbVector_Add(target_interest, &cm_80452C68.x314);
+
+    cm_80452C68.transform.target_position = *copy_src;
+    target_pos = &transform->target_position;
+    lbVector_Add(target_pos, &cm_80452C68.pause_eye_offset);
+
+    position_ptr = &transform->position;
+    lbVector_Diff(target_pos, position_ptr, &eye_diff);
+
+    coeff_ptr = &cm_803BCCA0.x84;
+    coeff = *coeff_ptr;
+    eye_diff.x *= coeff;
+    eye_diff.y *= coeff;
+    eye_diff.z *= coeff;
+    lbVector_Add(position_ptr, &eye_diff);
+
+    lbVector_Diff(target_interest, &transform->interest, &interest_diff);
+    coeff = *coeff_ptr;
+    interest_diff.x *= coeff;
+    interest_diff.y *= coeff;
+    interest_diff.z *= coeff;
+    lbVector_Add(&transform->interest, &interest_diff);
+
+    cm_80452C68.transform.target_fov = cm_80452C68.x32C;
+    delta = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
+    cm_80452C68.transform.fov += delta * cm_803BCCA0.x88;
 
     Camera_8002A28C(&bounds);
-    Camera_8002A0C0(&bounds, transform);
+    Camera_8002A0C0(&bounds, &cm_80452C68.transform);
 }
 
 /// Camera_PauseThink
@@ -2607,7 +2647,8 @@ void Camera_8002DDC4(void* unused)
     f32 dx, dy, dz;
 
     /// @todo there is a clear pattern inside here
-    // smooth_fixed_camera_interest is most likely fake but its definitely similar
+    // smooth_fixed_camera_interest is most likely fake but its definitely
+    // something similar
     cam = &cm_80452C68;
     Camera_80030DF8();
     transform = &cam->transform;
@@ -4013,7 +4054,7 @@ bool Camera_800307D0(f32* left, f32* center, f32* right)
         forward.z *= -1.0f;
         project_ground_x(center, &eye_pos, forward.x, forward.z);
 
-        /// @todo would make more sense if these two blocks were the inlines, but i cant solve it
+        /// @todo would make more sense if these two blocks were the inlines
         s = sinf(half_fov);
         c = cosf(half_fov);
         edge_x = (forward.x * c) + (forward.z * s);
