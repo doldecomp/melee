@@ -808,7 +808,7 @@ void grCorneria_801DDD4C(Vec3* vec)
     vec->z = 0.0f;
 }
 
-void grCorneria_801DDDA8(HSD_GObj* gobj, Vec3* vec)
+void grCorneria_GetArwingPosition(HSD_GObj* gobj, Vec3* vec)
 {
     Ground* gp2;
     Ground* gp;
@@ -897,7 +897,7 @@ static inline void grCorneria_801DE024_inline(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     Vec3 pos = grCn_803B80A8;
-    grCorneria_801DDDA8(gobj, &pos);
+    grCorneria_GetArwingPosition(gobj, &pos);
     switch (gp->u.starfox_arwing.sound_state) {
     case 0:
         if (*(volatile const f32*) &grCn_ArwingMinX < pos.x &&

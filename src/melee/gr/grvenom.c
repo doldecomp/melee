@@ -1100,7 +1100,7 @@ typedef struct {
     f32 z;
 } VenomSpawnData;
 
-void grVenom_802052E0(Ground_GObj* gobj, Vec3* pos)
+void grVenom_GetArwingPosition(Ground_GObj* gobj, Vec3* pos)
 {
     u8* new_var2;
     Vec3 jobj_pos;
@@ -1178,7 +1178,7 @@ void grVenom_802053B0(Ground_GObj* gobj)
         goto far_type;
 
     near_type:
-        grVenom_802052E0(gobj, &sp28);
+        grVenom_GetArwingPosition(gobj, &sp28);
         state = gp->u.starfox_arwing.sound_state;
         switch (state) {
         case 0:
@@ -1205,7 +1205,7 @@ void grVenom_802053B0(Ground_GObj* gobj)
         HSD_JObjSetRotationY(jobj, 0.0F);
 
         gp2 = gobj->user_data;
-        grVenom_802052E0(gobj, &sp1C);
+        grVenom_GetArwingPosition(gobj, &sp1C);
         state = gp2->u.starfox_arwing.sound_state;
         switch (state) {
         case 0:

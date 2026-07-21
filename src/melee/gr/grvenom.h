@@ -40,7 +40,7 @@
 /* 204F1C */ void grVenom_80204F1C(Ground_GObj*);
 /* 204F20 */ void grVenom_80204F20(Ground_GObj*);
 /* 2052D8 */ bool grVenom_802052D8(Ground_GObj*);
-/* 2052E0 */ void grVenom_802052E0(Ground_GObj*, Vec3*);
+/* 2052E0 */ void grVenom_GetArwingPosition(Ground_GObj*, Vec3*);
 /* 2053B0 */ void grVenom_802053B0(Ground_GObj*);
 /* 2056AC */ void grVenom_802056AC(Ground_GObj*);
 /* 2056B0 */ void grVenom_802056B0(Ground_GObj*);
