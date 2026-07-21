@@ -510,15 +510,21 @@ struct grSmashTaunt_GroundVars {
 
 struct grVenom_GroundVars {
     /* +00 gp+C4 */ union {
-        u32 xC4; ///< @todo Not a #u32, either
-                 /// #grSmashTaunt_GroundVars or #HSD_GObj
+        u32 xC4;
+        Ground_GObj* target_gobj;
         struct {
             u8 b0 : 1;
         } xC4_flags;
     };
     /* +04 gp+C8 */ s32 xC8;
-    /* +08 gp+CC */ u32 xCC;
-    /* +0C gp+D0 */ u32 xD0;
+    /* +08 gp+CC */ union {
+        u32 xCC;
+        HSD_JObj* upper_jobj;
+    };
+    /* +0C gp+D0 */ union {
+        u32 xD0;
+        HSD_JObj* lower_jobj;
+    };
     /* +10 gp+D4 */ s32 xD4;
     /* +14 gp+D8 */ s32 xD8;
     /* +18 gp+DC */ union {

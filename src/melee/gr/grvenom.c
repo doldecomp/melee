@@ -473,7 +473,7 @@ void grVenom_80203B18(void)
         {
             Ground_GObj* gobj1 = grVenom_80203EAC(5);
             gp1 = GET_GROUND(gobj1);
-            gp1->u.venom.xC4 = (u32) gobj;
+            gp1->u.venom.target_gobj = gobj;
             grVenom_80203EAC(9);
             gobj1 = grVenom_80203EAC(7);
             grAnime_801C8138(gobj1, 7, 0);
@@ -677,14 +677,14 @@ void grVenom_802040F0(Ground_GObj* gobj)
     grAnime_801C7FF8(gobj, 7, 7, 3, 0.0F, 1.0F);
     Ground_801C10B8(gobj, (HSD_GObjEvent) fn_802040B4);
     gp->u.venom.xC8 = -1;
-    gp->u.venom.xCC = (u32) Ground_801C3FA4(gobj, 2);
-    gp->u.venom.xD0 = (u32) Ground_801C3FA4(gobj, 3);
-    lb_8000B1CC((HSD_JObj*) gp->u.venom.xCC, NULL, &pos1);
-    lb_8000B1CC((HSD_JObj*) gp->u.venom.xD0, NULL, &pos2);
+    gp->u.venom.upper_jobj = Ground_801C3FA4(gobj, 2);
+    gp->u.venom.lower_jobj = Ground_801C3FA4(gobj, 3);
+    lb_8000B1CC(gp->u.venom.upper_jobj, NULL, &pos1);
+    lb_8000B1CC(gp->u.venom.lower_jobj, NULL, &pos2);
     if (pos2.y > pos1.y) {
-        temp = (HSD_JObj*) gp->u.venom.xCC;
-        gp->u.venom.xCC = new_var->u.venom.xD0;
-        gp->u.venom.xD0 = (u32) temp;
+        temp = gp->u.venom.upper_jobj;
+        gp->u.venom.upper_jobj = new_var->u.venom.lower_jobj;
+        gp->u.venom.lower_jobj = temp;
     }
     gp->x10_flags.b5 = 1;
 }
@@ -709,7 +709,7 @@ void grVenom_80204284(Ground_GObj* gobj)
     tmp_gp = GET_GROUND(gobj);
     gp = tmp_gp;
     src_jobj = GET_JOBJ(gobj);
-    dst_jobj = (HSD_JObj*) ((HSD_GObj*) gp->u.venom.xC4)->hsd_obj;
+    dst_jobj = gp->u.venom.target_gobj->hsd_obj;
 
     HSD_JObjGetTranslation(src_jobj, &pos);
     HSD_JObjSetTranslate(dst_jobj, &pos);
@@ -1857,8 +1857,8 @@ bool grVenom_80206D7C(Vec3* pos, int arg1, HSD_JObj* arg2)
     gobj = Ground_801C2BA4(5);
     if (gobj != NULL) {
         gp = gobj->user_data;
-        if (gp != NULL && (HSD_JObj*) gp->u.venom.xD0 == arg2) {
-            lb_8000B1CC((HSD_JObj*) gp->u.venom.xCC, NULL, &sp14);
+        if (gp != NULL && gp->u.venom.lower_jobj == arg2) {
+            lb_8000B1CC(gp->u.venom.upper_jobj, NULL, &sp14);
             if (pos->y > sp14.y) {
                 return 0;
             }
