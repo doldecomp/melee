@@ -944,7 +944,7 @@ void grVenom_80204B88(Ground_GObj* gobj)
     GXColor color_neutral1;
     GXColor color_neutral2;
 
-    env_flags = *(u8*) &gp->u.venom2.xE0_state.xE0_state_pad;
+    env_flags = gp->u.venom2.xE0_state.environment_flags;
 
     if ((env_flags >> 5) & 1) {
         if (gp->u.venom2.xE0_state.xE0_state_pad.state != 1) {
@@ -1786,14 +1786,14 @@ bool grVenom_80206BF0(int arg0)
     PAD_STACK(32);
 
     if (Ground_801C2BA4(8) != NULL) {
-        return 0;
+        return false;
     }
     if (arg0 == 2) {
         var_r30 = HSD_Randi(5) + 8;
     } else if (arg0 == 20) {
         var_r30 = HSD_Randi(5) + 13;
     } else {
-        return 0;
+        return false;
     }
     wgobj = grVenom_80203EAC(8);
     HSD_ASSERT(2244, wgobj);
@@ -1801,7 +1801,7 @@ bool grVenom_80206BF0(int arg0)
     gp->u.venom.xCC = 10;
     gp->u.venom.xC8 = 0;
     gp->u.venom.xC4 = var_r30;
-    return 1;
+    return true;
 }
 
 void grVenom_80206CB0(s32 arg0)
@@ -1810,7 +1810,7 @@ void grVenom_80206CB0(s32 arg0)
 
     gobj = Ground_801C2BA4(8);
     if (gobj != NULL) {
-        if (arg0 != 0) {
+        if (arg0) {
             Ground_801C4A08(gobj);
         }
         gobj = Ground_801C2BA4(1);
@@ -1834,7 +1834,7 @@ s32 grVenom_80206D10(s32 arg0)
         if (diff > 1U) {
             in_range = 0;
         }
-        if (in_range != 0) {
+        if (in_range) {
             return 1;
         }
     }
@@ -1843,7 +1843,7 @@ s32 grVenom_80206D10(s32 arg0)
 
 DynamicsDesc* grVenom_80206D74(enum_t arg)
 {
-    return false;
+    return NULL;
 }
 
 bool grVenom_80206D7C(Vec3* pos, int arg1, HSD_JObj* arg2)
@@ -1860,12 +1860,12 @@ bool grVenom_80206D7C(Vec3* pos, int arg1, HSD_JObj* arg2)
         if (gp != NULL && gp->u.venom.lower_jobj == arg2) {
             lb_8000B1CC(gp->u.venom.upper_jobj, NULL, &sp14);
             if (pos->y > sp14.y) {
-                return 0;
+                return false;
             }
         }
     }
     if (pos->y > sp20.y) {
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }

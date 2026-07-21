@@ -563,6 +563,7 @@ struct grVenom_GroundVars2 {
     /* +14 gp+D8 */ HSD_JObj* xD8;
     /* +18 gp+DC */ HSD_JObj* xDC;
     /* +1C gp+E0 */ union {
+        u8 environment_flags;
         struct {
             u16 padding : 7;
             u16 state : 2;
