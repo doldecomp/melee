@@ -179,7 +179,7 @@ StageData grVe_803E54CC = {
     5,
 };
 
-typedef struct grVe_TimingData {
+typedef struct grVe_StageData {
     f32 initial_spawn_delay_min;
     f32 initial_spawn_delay_max;
     f32 respawn_delay_min;
@@ -190,13 +190,13 @@ typedef struct grVe_TimingData {
     char x30[0x34 - 0x30];
     f32 arwing_scale;
     s32 laser_effect_id;
-} grVe_TimingData;
+} grVe_StageData;
 
-static grVe_TimingData* grVe_804D6A30;
-static u32 grVe_804D6A34;
-static s32 grVe_804D6A38;
-static s32 grVe_804D6A3C;
-static s32 grVe_804D6A40;
+static grVe_StageData* grVe_StageParams;
+static u32 grVe_CurrentArwingSlot;
+static s32 grVe_ArwingSpawnTimer;
+static s32 grVe_ArwingUpdateDisabled;
+static s32 grVe_MultiArwingMode;
 
 typedef struct grVe_Lighting {
     char pad[0xE0];
@@ -215,7 +215,7 @@ static inline int* grVe_GetArwingTypes(grVe_Data* data)
     return data->arwing.arwing_type;
 }
 
-static inline s32 grVe_RandRange(f32 fmin, f32 fmax)
+static inline s32 grVe_GetRandomArwingDelay(f32 fmin, f32 fmax)
 {
     s32 imin = fmin;
     s32 imax = fmax;
@@ -245,10 +245,10 @@ void grVenom_8020362C(void)
     HSD_GObj** x20_next;
     PAD_STACK(0x20);
 
-    if (grVe_804D6A40 == 0) {
+    if (grVe_MultiArwingMode == 0) {
         if (data->arwing.arwing_gobj[0] == NULL) {
-            grVe_804D6A38 = grVe_804D6A38 - 1;
-            if (grVe_804D6A38 <= 0) {
+            grVe_ArwingSpawnTimer = grVe_ArwingSpawnTimer - 1;
+            if (grVe_ArwingSpawnTimer <= 0) {
                 s32 combined;
                 Ground* gp = Ground_801C2BA4(7)->user_data;
                 group_a =
@@ -289,14 +289,14 @@ void grVenom_8020362C(void)
                     if (*(x38_ptr = &grVe_ArwingGroups[0]) == 4) {
                         mode = 1;
                     } else {
-                        mode = (HSD_Randf() > grVe_804D6A30->group4_chance)
+                        mode = (HSD_Randf() > grVe_StageParams->group4_chance)
                                    ? 1
                                    : 4;
                     }
-                    grVe_804D6A34 = 0;
+                    grVe_CurrentArwingSlot = 0;
                     *x2c_ptr = idx;
                     *x38_ptr = mode;
-                    data->arwing.arwing_gobj[grVe_804D6A34] =
+                    data->arwing.arwing_gobj[grVe_CurrentArwingSlot] =
                         grVenom_80203EAC(2);
                     return;
                 }
@@ -309,22 +309,23 @@ void grVenom_8020362C(void)
                     }
                     if (*(far_x38_ptr = &grVe_ArwingGroups[0]) == 4) {
                         mode = 1;
-                    } else if (HSD_Randf() > grVe_804D6A30->group4_chance) {
+                    } else if (HSD_Randf() > grVe_StageParams->group4_chance) {
                         mode = 1;
                     } else {
                         mode = 4;
                     }
-                    grVe_804D6A34 = 0;
+                    grVe_CurrentArwingSlot = 0;
                     *far_x2c_ptr = idx;
                     *far_x38_ptr = mode;
-                    data->arwing.arwing_gobj[grVe_804D6A34] =
+                    data->arwing.arwing_gobj[grVe_CurrentArwingSlot] =
                         grVenom_80203EAC(2);
                     return;
                 }
             }
         } else {
-            grVe_804D6A38 = grVe_RandRange(grVe_804D6A30->respawn_delay_min,
-                                           grVe_804D6A30->respawn_delay_max);
+            grVe_ArwingSpawnTimer =
+                grVe_GetRandomArwingDelay(grVe_StageParams->respawn_delay_min,
+                                          grVe_StageParams->respawn_delay_max);
         }
     } else {
         x20_ptr = &data->arwing.arwing_gobj[0];
@@ -340,8 +341,8 @@ void grVenom_8020362C(void)
             }
         }
         if (i < 3) {
-            grVe_804D6A38 = grVe_804D6A38 - 1;
-            if (grVe_804D6A38 <= 0) {
+            grVe_ArwingSpawnTimer = grVe_ArwingSpawnTimer - 1;
+            if (grVe_ArwingSpawnTimer <= 0) {
                 has_active = 0;
                 x2c_ptr = &data->arwing.arwing_type[0];
                 for (j = 0; j < 3; j++) {
@@ -368,10 +369,10 @@ void grVenom_8020362C(void)
                     {
                         idx = HSD_Randi(0xB) + 1;
                     }
-                    grVe_804D6A34 = i;
+                    grVe_CurrentArwingSlot = i;
                     data->arwing.arwing_type[i] = idx;
                     grVe_ArwingGroups[i] = i + 1;
-                    data->arwing.arwing_gobj[grVe_804D6A34] =
+                    data->arwing.arwing_gobj[grVe_CurrentArwingSlot] =
                         grVenom_80203EAC(2);
                 } else {
                     Ground* gp = Ground_801C2BA4(7)->user_data;
@@ -399,25 +400,25 @@ void grVenom_8020362C(void)
                         {
                             idx = HSD_Randi(4) + 8;
                         }
-                        grVe_804D6A34 = i;
+                        grVe_CurrentArwingSlot = i;
                         data->arwing.arwing_type[i] = idx;
                         grVe_ArwingGroups[i] = i + 1;
-                        data->arwing.arwing_gobj[grVe_804D6A34] =
+                        data->arwing.arwing_gobj[grVe_CurrentArwingSlot] =
                             grVenom_80203EAC(2);
                     }
                 }
             }
         } else {
-            grVe_804D6A38 = 0xA;
+            grVe_ArwingSpawnTimer = 0xA;
         }
     }
 }
 void grVenom_80203B14(bool arg) {}
 
-static inline void inlineA0(void)
+static inline void grVe_InitArwingSpawnTimer(void)
 {
-    int i = grVe_804D6A30->initial_spawn_delay_min;
-    int j = grVe_804D6A30->initial_spawn_delay_max;
+    int i = grVe_StageParams->initial_spawn_delay_min;
+    int j = grVe_StageParams->initial_spawn_delay_max;
     if (j > i) {
         s32 diff = j - i;
         if (diff != 0) {
@@ -435,7 +436,7 @@ static inline void inlineA0(void)
         }
         j = j + diff;
     }
-    grVe_804D6A38 = j;
+    grVe_ArwingSpawnTimer = j;
 }
 
 /// Stage initialization function for Venom
@@ -448,7 +449,7 @@ void grVenom_80203B18(void)
         Ground* gp1;
         s32 flag;
 
-        grVe_804D6A30 = Ground_801C49F8();
+        grVe_StageParams = Ground_801C49F8();
         grVenom_80203EAC(4);
         stage_info.unk8C.b4 = false;
         flag = true;
@@ -463,11 +464,11 @@ void grVenom_80203B18(void)
             }
         }
         flag = (Stage_80225194() == 0xE9) ? flag : 0;
-        grVe_804D6A40 = flag;
+        grVe_MultiArwingMode = flag;
         if (flag == 1) {
-            grVe_804D6A38 = 0x78;
+            grVe_ArwingSpawnTimer = 0x78;
         } else {
-            inlineA0();
+            grVe_InitArwingSpawnTimer();
         }
         {
             Ground_GObj* gobj1 = grVenom_80203EAC(5);
@@ -1039,7 +1040,7 @@ void grVenom_80204F20(Ground_GObj* arg0)
     PAD_STACK(0x10);
 
     grVe_803E5348.arwing
-        .arwing_gobj[gp->u.starfox_arwing.slot = grVe_804D6A34] =
+        .arwing_gobj[gp->u.starfox_arwing.slot = grVe_CurrentArwingSlot] =
         (HSD_GObj*) arg0;
 
     other = grVenom_80203EAC(base[base[gp->u.starfox_arwing.slot + 14] + 170]);
@@ -1073,7 +1074,7 @@ check_scale_uniform:
 scale_nonuniform:
     HSD_JObjSetScaleX(jobj, scale);
     HSD_JObjSetScaleY(jobj, scale);
-    HSD_JObjSetScaleZ(jobj, scale * grVe_804D6A30->arwing_scale);
+    HSD_JObjSetScaleZ(jobj, scale * grVe_StageParams->arwing_scale);
     goto done_scale;
 
 scale_uniform:
@@ -1134,7 +1135,28 @@ void grVenom_GetArwingPosition(Ground_GObj* gobj, Vec3* pos)
     }
 }
 
-/// grVenom_802053B0
+static inline void grVe_UpdateArwingSounds(Ground* gp, Vec3* pos)
+{
+    switch (gp->u.starfox_arwing.sound_state) {
+    case 0:
+        if (grVenom_80205DF8(pos) == 0) {
+            lbAudioAx_800237A8(0x6B6C0, 0x7F, 0x40);
+            gp->u.starfox_arwing.sound_state = 1;
+        }
+        break;
+    case 1:
+        if (grVenom_80205E84(pos) == 0) {
+            gp->u.starfox_arwing.sound_state = 2;
+        }
+        break;
+    case 2:
+        if (grVenom_80205E84(pos) == 1) {
+            lbAudioAx_800237A8(0x6B6C2, 0x7F, 0x40);
+            gp->u.starfox_arwing.sound_state = 3;
+        }
+        break;
+    }
+}
 
 void grVenom_802053B0(Ground_GObj* gobj)
 {
@@ -1179,26 +1201,7 @@ void grVenom_802053B0(Ground_GObj* gobj)
 
     near_type:
         grVenom_GetArwingPosition(gobj, &sp28);
-        state = gp->u.starfox_arwing.sound_state;
-        switch (state) {
-        case 0:
-            if (grVenom_80205DF8(&sp28) == 0) {
-                lbAudioAx_800237A8(0x6B6C0, 0x7F, 0x40);
-                gp->u.starfox_arwing.sound_state = 1;
-            }
-            break;
-        case 1:
-            if (grVenom_80205E84(&sp28) == 0) {
-                gp->u.starfox_arwing.sound_state = 2;
-            }
-            break;
-        case 2:
-            if (grVenom_80205E84(&sp28) == 1) {
-                lbAudioAx_800237A8(0x6B6C2, 0x7F, 0x40);
-                gp->u.starfox_arwing.sound_state = 3;
-            }
-            break;
-        }
+        grVe_UpdateArwingSounds(gp, &sp28);
         goto type_done;
 
     far_type:
@@ -1206,26 +1209,7 @@ void grVenom_802053B0(Ground_GObj* gobj)
 
         gp2 = gobj->user_data;
         grVenom_GetArwingPosition(gobj, &sp1C);
-        state = gp2->u.starfox_arwing.sound_state;
-        switch (state) {
-        case 0:
-            if (grVenom_80205DF8(&sp1C) == 0) {
-                lbAudioAx_800237A8(0x6B6C0, 0x7F, 0x40);
-                gp2->u.starfox_arwing.sound_state = 1;
-            }
-            break;
-        case 1:
-            if (grVenom_80205E84(&sp1C) == 0) {
-                gp2->u.starfox_arwing.sound_state = 2;
-            }
-            break;
-        case 2:
-            if (grVenom_80205E84(&sp1C) == 1) {
-                lbAudioAx_800237A8(0x6B6C2, 0x7F, 0x40);
-                gp2->u.starfox_arwing.sound_state = 3;
-            }
-            break;
-        }
+        grVe_UpdateArwingSounds(gp2, &sp1C);
 
     type_done:
         if (grAnime_801C83D0(gobj, 0, 7) != 0) {
@@ -1258,7 +1242,7 @@ void grVenom_802056B0(Ground_GObj* gobj)
     int joint_id;
 
     Ground_801C2ED0(jobj, gp->map_id);
-    gp->u.starfox_arwing.slot = grVe_804D6A34;
+    gp->u.starfox_arwing.slot = grVe_CurrentArwingSlot;
     joint_idx = grVe_ArwingGroups;
     joints = grVe_ArwingCollisionJointIds;
     gp->u.starfox_arwing.xD0 = 0;
@@ -1288,15 +1272,15 @@ void grVenom_80205758(Ground_GObj* gobj)
         {
             f32 scale = Ground_801C0498();
             {
-                f32 s = scale * grVe_804D6A30->arwing_scale;
+                f32 s = scale * grVe_StageParams->arwing_scale;
                 HSD_JObjSetScaleX(jobj, s);
             }
             {
-                f32 s = scale * grVe_804D6A30->arwing_scale;
+                f32 s = scale * grVe_StageParams->arwing_scale;
                 HSD_JObjSetScaleY(jobj, s);
             }
             {
-                f32 s = scale * grVe_804D6A30->arwing_scale;
+                f32 s = scale * grVe_StageParams->arwing_scale;
                 HSD_JObjSetScaleZ(jobj, s);
             }
         }
@@ -1320,7 +1304,7 @@ void grVenom_80205AD4(Ground_GObj* gobj)
     f32 scale;
 
     scale = Ground_801C0498();
-    gp->u.starfox.arwing_slot = grVe_804D6A34;
+    gp->u.starfox.arwing_slot = grVe_CurrentArwingSlot;
     Ground_ClearStarFoxArwingGObjs(gp);
     Ground_AnimateStarFoxArwingWithBackground(gobj);
 
@@ -1350,11 +1334,12 @@ void grVenom_80205AD4(Ground_GObj* gobj)
         Ground_DisableStarFoxArwingGObjs(gp);
         break;
     }
-    HSD_JObjSetScaleX(jobj, scale * grVe_804D6A30->arwing_scale);
-    HSD_JObjSetScaleY(jobj, scale * grVe_804D6A30->arwing_scale);
-    HSD_JObjSetScaleZ(jobj, scale * grVe_804D6A30->arwing_scale);
+    HSD_JObjSetScaleX(jobj, scale * grVe_StageParams->arwing_scale);
+    HSD_JObjSetScaleY(jobj, scale * grVe_StageParams->arwing_scale);
+    HSD_JObjSetScaleZ(jobj, scale * grVe_StageParams->arwing_scale);
     Ground_ResetStarFoxArwingState(gp);
-    gp->u.starfox.maneuver_cooldown = (s32) grVe_804D6A30->maneuver_cooldown;
+    gp->u.starfox.maneuver_cooldown =
+        (s32) grVe_StageParams->maneuver_cooldown;
     gp->u.starfox.fire_laser = false;
     gp->u.starfox.laser_joint = HSD_Randi(2);
 }
@@ -1440,7 +1425,7 @@ void grVenom_80205F30(Ground_GObj* gobj)
     sp88 = grVe_803B82DC;
     PAD_STACK(0x18);
 
-    if (grVe_804D6A3C != 0) {
+    if (grVe_ArwingUpdateDisabled != 0) {
         return;
     }
 
@@ -1516,7 +1501,7 @@ void grVenom_80205F30(Ground_GObj* gobj)
                 if (grAnime_801C83D0((HSD_GObj*) gobj, 0, 7) != 0) {
                     gp->u.starfox.maneuver = ARWING_MANEUVER_NONE;
                     gp->u.starfox.maneuver_cooldown =
-                        (s32) grVe_804D6A30->maneuver_cooldown;
+                        (s32) grVe_StageParams->maneuver_cooldown;
                 }
             venom_80205F30_anim_done:;
             }
@@ -1675,22 +1660,23 @@ void grVenom_80205F30(Ground_GObj* gobj)
                     }
                     if (formation_variant == 1) {
                         it_802E7654(gobj, Ground_801C3FA4((HSD_GObj*) gobj, 7),
-                                    &sp88, 3, 0, grVe_804D6A30->arwing_scale);
+                                    &sp88, 3, 0,
+                                    grVe_StageParams->arwing_scale);
                     } else {
                         if (gp->u.starfox.laser_joint != 0) {
                             it_802E7654(
                                 gobj, Ground_801C3FA4((HSD_GObj*) gobj, 5),
-                                &sp88, 1, 0, grVe_804D6A30->arwing_scale);
+                                &sp88, 1, 0, grVe_StageParams->arwing_scale);
                         } else {
                             it_802E7654(
                                 gobj, Ground_801C3FA4((HSD_GObj*) gobj, 6),
-                                &sp88, 1, 0, grVe_804D6A30->arwing_scale);
+                                &sp88, 1, 0, grVe_StageParams->arwing_scale);
                         }
                         gp->u.starfox.laser_joint =
                             (gp->u.starfox.laser_joint + 1) & 1;
                     }
                     grMaterial_801C9604((HSD_GObj*) gobj,
-                                        grVe_804D6A30->laser_effect_id, 0);
+                                        grVe_StageParams->laser_effect_id, 0);
                 }
             }
             break;
@@ -1723,7 +1709,7 @@ void grVenom_80206874(Ground_GObj* gobj)
     f32 scale;
 
     scale = Ground_801C0498();
-    gp->u.starfox.arwing_slot = grVe_804D6A34;
+    gp->u.starfox.arwing_slot = grVe_CurrentArwingSlot;
     Ground_ClearStarFoxArwingGObjs(gp);
     Ground_AnimateStarFoxArwing(gobj);
 
@@ -1754,13 +1740,14 @@ void grVenom_80206874(Ground_GObj* gobj)
         break;
     }
 
-    HSD_JObjSetScaleX(jobj, scale * grVe_804D6A30->arwing_scale);
-    HSD_JObjSetScaleY(jobj, scale * grVe_804D6A30->arwing_scale);
-    HSD_JObjSetScaleZ(jobj, scale * grVe_804D6A30->arwing_scale);
+    HSD_JObjSetScaleX(jobj, scale * grVe_StageParams->arwing_scale);
+    HSD_JObjSetScaleY(jobj, scale * grVe_StageParams->arwing_scale);
+    HSD_JObjSetScaleZ(jobj, scale * grVe_StageParams->arwing_scale);
 
     Ground_ResetStarFoxArwingState(gp);
 
-    gp->u.starfox.maneuver_cooldown = (s32) grVe_804D6A30->maneuver_cooldown;
+    gp->u.starfox.maneuver_cooldown =
+        (s32) grVe_StageParams->maneuver_cooldown;
     gp->u.starfox.fire_laser = false;
 }
 

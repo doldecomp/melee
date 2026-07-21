@@ -10,7 +10,7 @@
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
-/* 1DCCFC */ void grCorneria_801DCCFC(void);
+/* 1DCCFC */ void grCorneria_InitArwingScheduler(void);
 /* 1DCE1C */ void grCorneria_801DCE1C(void);
 /* 1DD2C0 */ void grCorneria_801DD2C0(int);
 /* 1DD350 */ void grCorneria_801DD350(void);

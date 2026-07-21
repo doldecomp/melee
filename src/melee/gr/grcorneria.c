@@ -75,11 +75,11 @@ typedef struct grCn_StageData {
     /* 0x88 */ f32 x88;
 } grCn_StageData;
 
-static grCn_StageData* grCn_804D69A0;
-static u32 grCn_804D69A4;
-static int grCn_804D69A8;
-static bool grCn_804D69AC;
-static int grCn_804D69B0;
+static grCn_StageData* grCn_StageParams;
+static u32 grCn_CurrentArwingSlot;
+static int grCn_ArwingSpawnTimer;
+static bool grCn_ArwingUpdateDisabled;
+static int grCn_MultiArwingMode;
 
 static S16Vec3 grCn_803E1D38[] = {
     { 0x0003, 0x0003, 0x0000 }, { 0x0004, 0x0003, 0x0000 },
@@ -248,7 +248,7 @@ typedef struct {
     int data[3];
 } grCn_Entry;
 
-void grCorneria_801DCCFC(void)
+void grCorneria_InitArwingScheduler(void)
 {
     s32 stage;
     s32 imin, imax;
@@ -268,20 +268,20 @@ void grCorneria_801DCCFC(void)
     switch (stage) {
     case 0xE9:
     case 0x47:
-        grCn_804D69B0 = 1;
+        grCn_MultiArwingMode = 1;
         break;
     default:
-        grCn_804D69B0 = (imax = 0);
+        grCn_MultiArwingMode = (imax = 0);
         break;
     }
 
-    if (grCn_804D69B0 == 1) {
-        grCn_804D69A8 = 0x78;
+    if (grCn_MultiArwingMode == 1) {
+        grCn_ArwingSpawnTimer = 0x78;
         return;
     }
 
-    imin = grCn_804D69A0->initial_spawn_delay_min;
-    imax = grCn_804D69A0->initial_spawn_delay_max;
+    imin = grCn_StageParams->initial_spawn_delay_min;
+    imax = grCn_StageParams->initial_spawn_delay_max;
     if (imax > imin) {
         s32 range = imax - imin;
         imax = imin + (range != 0 ? HSD_Randi(range) : 0);
@@ -289,10 +289,10 @@ void grCorneria_801DCCFC(void)
         s32 range = imin - imax;
         imax += (range != 0 ? HSD_Randi(range) : 0);
     }
-    grCn_804D69A8 = imax;
+    grCn_ArwingSpawnTimer = imax;
 }
 
-static inline s32 grCn_RandRange(s32 imax, s32 imin)
+static inline s32 grCn_GetRandomArwingDelay(s32 imax, s32 imin)
 {
     if (imax > imin) {
         s32 range = imax - imin;
@@ -321,25 +321,6 @@ static inline int grCn_CheckFar(Vec3* pos)
     return 1;
 }
 
-static inline void grCn_SpawnArwing(s32 slot, u32 type_id, int group)
-{
-    grCn_804D69A4 = slot;
-    arwing_types[slot] = type_id;
-    arwing_groups[slot] = group;
-    arwing_gobjs[grCn_804D69A4] = grCorneria_801DD534(1);
-}
-
-static inline u32 grCn_PickUniqueType(s32 slot, int range, int base)
-{
-    int rand_id = arwing_types[slot];
-    while (rand_id == arwing_types[0] || rand_id == arwing_types[1] ||
-           rand_id == arwing_types[2])
-    {
-        rand_id = HSD_Randi(range) + base;
-    }
-    return rand_id;
-}
-
 void grCorneria_801DCE1C(void)
 {
     Vec3 pos;
@@ -347,10 +328,10 @@ void grCorneria_801DCE1C(void)
     Vec3 pos2;
 
     if (Stage_80225194() != 0x46) {
-        if (grCn_804D69B0 == 0) {
+        if (grCn_MultiArwingMode == 0) {
             if (arwing_gobjs[0] == NULL) {
-                grCn_804D69A8--;
-                if (grCn_804D69A8 <= 0) {
+                grCn_ArwingSpawnTimer--;
+                if (grCn_ArwingSpawnTimer <= 0) {
                     int far;
                     int type_id;
                     int group;
@@ -376,21 +357,23 @@ void grCorneria_801DCE1C(void)
                         if (*(groups = &arwing_groups[0]) == 4) {
                             group = 1;
                         } else {
-                            group = HSD_Randf() > grCn_804D69A0->group4_chance
-                                        ? 1
-                                        : 4;
+                            group =
+                                HSD_Randf() > grCn_StageParams->group4_chance
+                                    ? 1
+                                    : 4;
                         }
 
-                        grCn_804D69A4 = 0;
+                        grCn_CurrentArwingSlot = 0;
                         *types = type_id;
                         *groups = group;
-                        arwing_gobjs[grCn_804D69A4] = grCorneria_801DD534(1);
+                        arwing_gobjs[grCn_CurrentArwingSlot] =
+                            grCorneria_801DD534(1);
                     }
                 }
             } else {
-                grCn_804D69A8 =
-                    grCn_RandRange((s32) grCn_804D69A0->respawn_delay_max,
-                                   (s32) grCn_804D69A0->respawn_delay_min);
+                grCn_ArwingSpawnTimer = grCn_GetRandomArwingDelay(
+                    (s32) grCn_StageParams->respawn_delay_max,
+                    (s32) grCn_StageParams->respawn_delay_min);
             }
         } else {
             {
@@ -403,8 +386,8 @@ void grCorneria_801DCE1C(void)
                 }
 
                 if (count < 3) {
-                    grCn_804D69A8--;
-                    if (grCn_804D69A8 <= 0) {
+                    grCn_ArwingSpawnTimer--;
+                    if (grCn_ArwingSpawnTimer <= 0) {
                         bool has_near = false;
                         int i;
 
@@ -435,10 +418,10 @@ void grCorneria_801DCE1C(void)
                             {
                                 type_id = HSD_Randi(13) + 1;
                             }
-                            grCn_804D69A4 = count;
+                            grCn_CurrentArwingSlot = count;
                             arwing_types[count] = type_id;
                             arwing_groups[count] = count + 1;
-                            arwing_gobjs[grCn_804D69A4] =
+                            arwing_gobjs[grCn_CurrentArwingSlot] =
                                 grCorneria_801DD534(1);
                         } else {
                             grCorneria_801DDD4C(&pos2);
@@ -450,16 +433,16 @@ void grCorneria_801DCE1C(void)
                                 {
                                     type_id = HSD_Randi(4) + 10;
                                 }
-                                grCn_804D69A4 = count;
+                                grCn_CurrentArwingSlot = count;
                                 arwing_types[count] = type_id;
                                 arwing_groups[count] = count + 1;
-                                arwing_gobjs[grCn_804D69A4] =
+                                arwing_gobjs[grCn_CurrentArwingSlot] =
                                     grCorneria_801DD534(1);
                             }
                         }
                     }
                 } else {
-                    grCn_804D69A8 = 10;
+                    grCn_ArwingSpawnTimer = 10;
                 }
             }
         }
@@ -491,7 +474,7 @@ void grCorneria_801DD2C0(int unused)
         rand = HSD_Randi(4);
     }
     grCorneria_801E0F34(obj, rand);
-    grCn_804D69AC = true;
+    grCn_ArwingUpdateDisabled = true;
 }
 
 extern Vec3 grCn_803B8090;
@@ -503,12 +486,12 @@ void grCorneria_801DD350(void)
     Vec3 light_pos;
     u8 _pad2[12];
 
-    grCn_804D69A0 = (grCn_StageData*) Ground_801C49F8();
+    grCn_StageParams = (grCn_StageData*) Ground_801C49F8();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grCorneria_801DD534(7);
     grCorneria_801DD534(3);
-    grCorneria_801DCCFC();
+    grCorneria_InitArwingScheduler();
     (gp = (grCorneria_801DD534(8)->user_data))->u.corneria.xC4.value = 1;
     (gp = (grCorneria_801DD534(9)->user_data))->u.corneria.xC4.value = 1;
     (gp = (grCorneria_801DD534(4)->user_data))->u.corneria.xC4.value = 1;
@@ -518,7 +501,7 @@ void grCorneria_801DD350(void)
     light_pos = grCn_803B8090;
     lb_80011A50(&light_pos, -1, 1.0f, 0.0f, 1.0471976f, -100000.0f, 100000.0f,
                 100000.0f, -100000.0f);
-    grCn_804D69AC = true;
+    grCn_ArwingUpdateDisabled = true;
     mpLib_80057BC0(0);
     mpLib_80057BC0(1);
     mpLib_80057BC0(2);
@@ -551,7 +534,7 @@ void grCorneria_801DD478(void)
     gobj = grCorneria_801DD534(8);
     gp = GET_GROUND(gobj);
     gp->u.corneria.xC5 = 0;
-    grCn_804D69AC = false;
+    grCn_ArwingUpdateDisabled = false;
     Ground_801C53EC(0x55737);
 }
 
@@ -755,7 +738,7 @@ void grCorneria_801DDAC4(Ground_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     f32 scale;
 
-    arwing_gobjs[gp->u.starfox_arwing.slot = grCn_804D69A4] = gobj;
+    arwing_gobjs[gp->u.starfox_arwing.slot = grCn_CurrentArwingSlot] = gobj;
     {
         s32 idx = arwing_groups[gp->u.starfox_arwing.slot];
         HSD_GObj* arwing = grCorneria_801DD534(grCn_803E2110[idx]);
@@ -770,7 +753,7 @@ void grCorneria_801DDAC4(Ground_GObj* gobj)
         }
     }
     scale = Ground_801C0498();
-    HSD_JObjSetScaleX(jobj, scale * grCn_804D69A0->arwing_scale);
+    HSD_JObjSetScaleX(jobj, scale * grCn_StageParams->arwing_scale);
     HSD_JObjSetScaleY(jobj, scale);
     HSD_JObjSetScaleZ(jobj, scale);
     gp->u.starfox_arwing.animation_pending = true;
@@ -893,7 +876,7 @@ extern Vec3 grCn_803B80A8;
 static const f32 grCn_ArwingMinX = -10.0f;
 static const f32 grCn_ArwingMaxX = 2000.0f;
 
-static inline void grCorneria_801DE024_inline(Ground_GObj* gobj)
+static inline void grCn_UpdateFarArwingSounds(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     Vec3 pos = grCn_803B80A8;
@@ -962,7 +945,7 @@ void grCorneria_801DE024(Ground_GObj* gobj)
                 goto arwing_type_done;
             arwing_far_type: {
                 HSD_JObjSetRotationY(jobj, -1.5707964f);
-                grCorneria_801DE024_inline(gobj);
+                grCn_UpdateFarArwingSounds(gobj);
                 {
                     f32 vf = grCorneria_801E2EA0();
                     HSD_JObj* j0;
@@ -1009,7 +992,7 @@ void grCorneria_Arwing_801DE4C0(Ground_GObj* gobj)
     int joint_id;
 
     Ground_801C2ED0(jobj, gp->map_id);
-    gp->u.starfox_arwing.slot = grCn_804D69A4;
+    gp->u.starfox_arwing.slot = grCn_CurrentArwingSlot;
     gp->u.starfox_arwing.xD0 = 0;
     gp->u.starfox_arwing.roll_angle = 0.0f;
     gp->u.starfox_arwing.position.z = 0.0f;
@@ -1037,15 +1020,15 @@ void grCorneria_801DE568(Ground_GObj* gobj)
         {
             f32 scale = Ground_801C0498();
             {
-                f32 s = scale * grCn_804D69A0->arwing_scale;
+                f32 s = scale * grCn_StageParams->arwing_scale;
                 HSD_JObjSetScaleX(jobj, s);
             }
             {
-                f32 s = scale * grCn_804D69A0->arwing_scale;
+                f32 s = scale * grCn_StageParams->arwing_scale;
                 HSD_JObjSetScaleY(jobj, s);
             }
             {
-                f32 s = scale * grCn_804D69A0->arwing_scale;
+                f32 s = scale * grCn_StageParams->arwing_scale;
                 HSD_JObjSetScaleZ(jobj, s);
             }
         }
@@ -1067,7 +1050,7 @@ void grCorneria_801DE8E4(Ground_GObj* gobj)
     f32 scale;
 
     scale = Ground_801C0498();
-    gp->u.starfox.arwing_slot = grCn_804D69A4;
+    gp->u.starfox.arwing_slot = grCn_CurrentArwingSlot;
     Ground_ClearStarFoxArwingGObjs(gp);
     Ground_AnimateStarFoxArwingWithBackground(gobj);
 
@@ -1099,11 +1082,12 @@ void grCorneria_801DE8E4(Ground_GObj* gobj)
         Ground_DisableStarFoxArwingGObjs(gp);
         break;
     }
-    HSD_JObjSetScaleX(jobj, scale * grCn_804D69A0->arwing_scale);
-    HSD_JObjSetScaleY(jobj, scale * grCn_804D69A0->arwing_scale);
-    HSD_JObjSetScaleZ(jobj, scale * grCn_804D69A0->arwing_scale);
+    HSD_JObjSetScaleX(jobj, scale * grCn_StageParams->arwing_scale);
+    HSD_JObjSetScaleY(jobj, scale * grCn_StageParams->arwing_scale);
+    HSD_JObjSetScaleZ(jobj, scale * grCn_StageParams->arwing_scale);
     Ground_ResetStarFoxArwingState(gp);
-    gp->u.starfox.maneuver_cooldown = (s32) grCn_804D69A0->maneuver_cooldown;
+    gp->u.starfox.maneuver_cooldown =
+        (s32) grCn_StageParams->maneuver_cooldown;
     gp->u.starfox.fire_laser = false;
     gp->u.starfox.laser_joint = HSD_Randi(2);
 }
@@ -1164,19 +1148,21 @@ static inline int grCn_Randi(int max)
 
 static inline void grCn_UpdateArwingLaserRequest(Ground* gp)
 {
-    if (grCn_804D69B0 == 0) {
-        if (gp->u.starfox.frame_count % grCn_804D69A0->single_laser_interval ==
+    if (grCn_MultiArwingMode == 0) {
+        if (gp->u.starfox.frame_count %
+                    grCn_StageParams->single_laser_interval ==
                 0 &&
-            grCn_Randi(grCn_804D69A0->single_laser_chance) == 0)
+            grCn_Randi(grCn_StageParams->single_laser_chance) == 0)
         {
             gp->u.starfox.fire_laser = true;
         } else {
             gp->u.starfox.fire_laser = false;
         }
     } else {
-        if (gp->u.starfox.frame_count % grCn_804D69A0->multi_laser_interval ==
+        if (gp->u.starfox.frame_count %
+                    grCn_StageParams->multi_laser_interval ==
                 0 &&
-            grCn_Randi(grCn_804D69A0->multi_laser_chance) == 0)
+            grCn_Randi(grCn_StageParams->multi_laser_chance) == 0)
         {
             gp->u.starfox.fire_laser = true;
         } else {
@@ -1207,7 +1193,7 @@ static inline int grCn_GetArwingFormationVariant(Ground_GObj* gobj)
     return grp_off;
 }
 
-static inline Ground* get_arwing_ground(HSD_GObj* gobj)
+static inline Ground* grCn_GetArwingGround(HSD_GObj* gobj)
 {
     return GET_GROUND(gobj);
 }
@@ -1223,7 +1209,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
     Vec3 pos = grCn_803B80B4;
     PAD_STACK(6);
 
-    if (grCn_804D69AC) {
+    if (grCn_ArwingUpdateDisabled) {
         return;
     }
 
@@ -1294,7 +1280,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                 if (grAnime_801C83D0(gobj, 0, 7) != 0) {
                     gp->u.starfox.maneuver = ARWING_MANEUVER_NONE;
                     gp->u.starfox.maneuver_cooldown =
-                        (s32) grCn_804D69A0->maneuver_cooldown;
+                        (s32) grCn_StageParams->maneuver_cooldown;
                 }
                 break;
             }
@@ -1303,7 +1289,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                          (HSD_JObj*) arwing_gobjs[gp->u.starfox.arwing_slot]))
                 {
                     Vec3 arwing_pos;
-                    arwing_gp = get_arwing_ground((Ground_GObj*) arwing);
+                    arwing_gp = grCn_GetArwingGround((Ground_GObj*) arwing);
                     ship_gp = GET_GROUND(Ground_801C2BA4(3));
                     lb_8000B1CC(Ground_801C3FA4((Ground_GObj*) arwing, 4),
                                 NULL, &arwing_pos);
@@ -1372,16 +1358,17 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                                 lbAudioAx_800237A8(0x55733, 0x7F, 0x40);
                                 if (grCn_GetArwingFormationVariant(gobj) == 1)
                                 {
-                                    it_802E72E0(gobj, Ground_801C3FA4(gobj, 7),
-                                                2, -1.0f,
-                                                grCn_804D69A0->arwing_scale);
+                                    it_802E72E0(
+                                        gobj, Ground_801C3FA4(gobj, 7), 2,
+                                        -1.0f, grCn_StageParams->arwing_scale);
                                 } else {
-                                    it_802E72E0(gobj, Ground_801C3FA4(gobj, 5),
-                                                0, -1.0f,
-                                                grCn_804D69A0->arwing_scale);
+                                    it_802E72E0(
+                                        gobj, Ground_801C3FA4(gobj, 5), 0,
+                                        -1.0f, grCn_StageParams->arwing_scale);
                                 }
                                 grMaterial_801C9604(
-                                    gobj, grCn_804D69A0->laser_effect_id, 0);
+                                    gobj, grCn_StageParams->laser_effect_id,
+                                    0);
                             }
                         }
                     }
@@ -1438,20 +1425,21 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                 {
                     if (grCn_GetArwingFormationVariant(gobj) == 1) {
                         it_802E7654(gobj, Ground_801C3FA4(gobj, 7), &pos, 3, 3,
-                                    grCn_804D69A0->arwing_scale);
+                                    grCn_StageParams->arwing_scale);
                     } else {
                         if (gp->u.starfox.laser_joint != 0) {
                             it_802E7654(gobj, Ground_801C3FA4(gobj, 5), &pos,
-                                        1, 3, grCn_804D69A0->arwing_scale);
+                                        1, 3, grCn_StageParams->arwing_scale);
                         } else {
                             it_802E7654(gobj, Ground_801C3FA4(gobj, 6), &pos,
-                                        1, 3, grCn_804D69A0->arwing_scale);
+                                        1, 3, grCn_StageParams->arwing_scale);
                         }
                         gp->u.starfox.laser_joint =
                             (gp->u.starfox.laser_joint + 1) & 1;
                     }
                 }
-                grMaterial_801C9604(gobj, grCn_804D69A0->laser_effect_id, 0);
+                grMaterial_801C9604(gobj, grCn_StageParams->laser_effect_id,
+                                    0);
             }
         }
         }
@@ -1490,7 +1478,7 @@ void grCorneria_801DF8D0(Ground_GObj* gobj)
     f32 scale;
 
     scale = Ground_801C0498();
-    gp->u.starfox.arwing_slot = grCn_804D69A4;
+    gp->u.starfox.arwing_slot = grCn_CurrentArwingSlot;
     Ground_ClearStarFoxArwingGObjs(gp);
     Ground_AnimateStarFoxArwing(gobj);
 
@@ -1522,11 +1510,12 @@ void grCorneria_801DF8D0(Ground_GObj* gobj)
         Ground_DisableStarFoxArwingGObjs(gp);
         break;
     }
-    HSD_JObjSetScaleX(jobj, scale * grCn_804D69A0->arwing_scale);
-    HSD_JObjSetScaleY(jobj, scale * grCn_804D69A0->arwing_scale);
-    HSD_JObjSetScaleZ(jobj, scale * grCn_804D69A0->arwing_scale);
+    HSD_JObjSetScaleX(jobj, scale * grCn_StageParams->arwing_scale);
+    HSD_JObjSetScaleY(jobj, scale * grCn_StageParams->arwing_scale);
+    HSD_JObjSetScaleZ(jobj, scale * grCn_StageParams->arwing_scale);
     Ground_ResetStarFoxArwingState(gp);
-    gp->u.starfox.maneuver_cooldown = (s32) grCn_804D69A0->maneuver_cooldown;
+    gp->u.starfox.maneuver_cooldown =
+        (s32) grCn_StageParams->maneuver_cooldown;
     gp->u.starfox.fire_laser = false;
 }
 
@@ -1580,7 +1569,7 @@ void grCorneria_801DFC98(Ground_GObj* gobj)
 
     if (gp->u.corneria.xC4.value == 0 && gp->u.corneria.offset_y.flags.b0 != 1)
     {
-        HSD_JObjAddTranslationX(jobj, grCn_804D69A0->x88);
+        HSD_JObjAddTranslationX(jobj, grCn_StageParams->x88);
         HSD_JObjSetTranslateY(jobj, -grCorneria_801E2EA0());
 
         switch ((s8) gp->u.corneria.xC5) {
@@ -1627,7 +1616,7 @@ void grCorneria_801DFF20(Ground_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
     if (gp->u.corneria.xC4.value == 0 && gp->u.corneria.xC6.flags.b0 != 1) {
-        HSD_JObjAddTranslationX(jobj, grCn_804D69A0->x88);
+        HSD_JObjAddTranslationX(jobj, grCn_StageParams->x88);
         HSD_JObjSetTranslateY(jobj, -grCorneria_801E2EA0());
 
         switch ((s8) gp->u.corneria.xC5) {
@@ -1674,7 +1663,7 @@ void grCorneria_801E01A8(Ground_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
     if (gp->u.corneria.xC4.value == 0 && gp->u.corneria.xC6.flags.b0 != 1) {
-        HSD_JObjAddTranslationX(jobj, grCn_804D69A0->x88);
+        HSD_JObjAddTranslationX(jobj, grCn_StageParams->x88);
         HSD_JObjSetTranslateY(jobj, -grCorneria_801E2EA0());
 
         switch ((s8) gp->u.corneria.xC5) {
@@ -2091,7 +2080,7 @@ void fn_801E12D4(Item_GObj* gobj, Ground* gr, Vec3* pos, HSD_GObj* arg3,
 {
     gr->u.corneria.x114 += damage;
     OSReport("*** Beam Damage! %f\n", damage);
-    if (gr->u.corneria.x114 >= grCn_804D69A0->x38) {
+    if (gr->u.corneria.x114 >= grCn_StageParams->x38) {
         gr->u.corneria.x108 = 4;
         grMaterial_801C8E28(gr->u.corneria.left_cannon);
         grMaterial_801C8E28(gr->u.corneria.right_cannon);
@@ -2100,7 +2089,7 @@ void fn_801E12D4(Item_GObj* gobj, Ground* gr, Vec3* pos, HSD_GObj* arg3,
 
 static inline f32 grCn_GetX1C(void)
 {
-    return grCn_804D69A0->x1C;
+    return grCn_StageParams->x1C;
 }
 
 static inline HSD_JObj* grCn_GetCannonJObj2(Ground_GObj* gobj)
@@ -2121,15 +2110,15 @@ void grCorneria_801E1348(Ground_GObj* gobj)
     switch (gp->u.corneria.x108) {
     case 0:
         if (gp->u.corneria.x110 == 0) {
-            if (HSD_Randf() <= grCn_804D69A0->x24) {
+            if (HSD_Randf() <= grCn_StageParams->x24) {
                 gp->u.corneria.x119 = 0;
                 gp->u.corneria.x118 = 1;
-                gp->u.corneria.x10C = grCn_804D69A0->x28;
+                gp->u.corneria.x10C = grCn_StageParams->x28;
                 Ground_801C53EC(0x55739);
             } else {
                 s32 imax;
-                s32 imin = grCn_804D69A0->x30;
-                imax = grCn_804D69A0->x34;
+                s32 imin = grCn_StageParams->x30;
+                imax = grCn_StageParams->x34;
                 if (imax > imin) {
                     s32 range = imax - imin;
                     imax = imin + (range != 0 ? HSD_Randi(range) : 0);
@@ -2139,7 +2128,7 @@ void grCorneria_801E1348(Ground_GObj* gobj)
                 }
                 gp->u.corneria.x119 = 1;
                 gp->u.corneria.x118 = imax;
-                gp->u.corneria.x10C = grCn_804D69A0->x2C;
+                gp->u.corneria.x10C = grCn_StageParams->x2C;
                 Ground_801C53EC(0x5573A);
             }
             sp40.x = grCn_803E1FAC[1].x;
@@ -2162,7 +2151,7 @@ void grCorneria_801E1348(Ground_GObj* gobj)
             hsd_8039D580(Ground_801C3FA4(gobj, 3));
             Item_80268E5C(gp->u.corneria.left_cannon, 0, ITEM_ANIM_UPDATE);
             Item_80268E5C(gp->u.corneria.right_cannon, 0, ITEM_ANIM_UPDATE);
-            gp->u.corneria.x10C = grCn_804D69A0->x20;
+            gp->u.corneria.x10C = grCn_StageParams->x20;
             gp->u.corneria.x108 = 2;
             return;
         }
@@ -2220,8 +2209,8 @@ void grCorneria_801E1348(Ground_GObj* gobj)
             return;
         }
         {
-            s32 rand_range = grCn_804D69A0->x18;
-            s32 range = grCn_804D69A0->x18;
+            s32 rand_range = grCn_StageParams->x18;
+            s32 range = grCn_StageParams->x18;
             gp->u.corneria.x110 =
                 (s32) (grCn_GetX1C() +
                        (range != 0 ? HSD_Randi(rand_range) : 0));
@@ -2278,19 +2267,19 @@ void grCorneria_801E1970(Ground_GObj* gobj)
 
     if (gp->u.corneria.x104 <= 0) {
         f32 randf = HSD_Randf();
-        f32 a = grCn_804D69A0->x4 - grCn_804D69A0->x0;
-        gp->u.corneria.x104 = a * randf + grCn_804D69A0->x0;
+        f32 a = grCn_StageParams->x4 - grCn_StageParams->x0;
+        gp->u.corneria.x104 = a * randf + grCn_StageParams->x0;
         randf = HSD_Randf();
-        gp->u.corneria.xF4 = grCn_804D69A0->x8 * (2.0f * (randf - 0.5f));
+        gp->u.corneria.xF4 = grCn_StageParams->x8 * (2.0f * (randf - 0.5f));
         randf = HSD_Randf();
-        gp->u.corneria.xF8 = grCn_804D69A0->x8 * (2.0f * (randf - 0.5f));
+        gp->u.corneria.xF8 = grCn_StageParams->x8 * (2.0f * (randf - 0.5f));
     }
     gp->u.corneria.x104 -= 1;
     gp->u.corneria.xE4.z += gp->u.corneria.xF4;
     gp->u.corneria.xF0 += gp->u.corneria.xF8;
     {
         f32 vel = gp->u.corneria.xE4.z;
-        f32 max = grCn_804D69A0->xC;
+        f32 max = grCn_StageParams->xC;
         if (vel > max) {
             gp->u.corneria.xE4.z = max;
         } else if (vel < -max) {
@@ -2299,7 +2288,7 @@ void grCorneria_801E1970(Ground_GObj* gobj)
     }
     {
         f32 vel = gp->u.corneria.xF0;
-        f32 max = grCn_804D69A0->xC;
+        f32 max = grCn_StageParams->xC;
         if (vel > max) {
             gp->u.corneria.xF0 = max;
         } else if (vel < -max) {
@@ -2312,20 +2301,20 @@ void grCorneria_801E1970(Ground_GObj* gobj)
     gp->u.corneria.offset_y.val += gp->u.corneria.xF0;
     {
         f32 offset = gp->u.corneria.offset_x;
-        f32 limit = grCn_804D69A0->x10;
+        f32 limit = grCn_StageParams->x10;
         if (offset > limit) {
-            gp->u.corneria.xF4 = -grCn_804D69A0->x8;
+            gp->u.corneria.xF4 = -grCn_StageParams->x8;
         } else if (offset < -limit) {
-            gp->u.corneria.xF4 = grCn_804D69A0->x8;
+            gp->u.corneria.xF4 = grCn_StageParams->x8;
         }
     }
     {
         f32 offset = gp->u.corneria.offset_y.val;
-        f32 limit = grCn_804D69A0->x14;
+        f32 limit = grCn_StageParams->x14;
         if (offset > limit) {
-            gp->u.corneria.xF8 = -grCn_804D69A0->x8;
+            gp->u.corneria.xF8 = -grCn_StageParams->x8;
         } else if (offset < -limit) {
-            gp->u.corneria.xF8 = grCn_804D69A0->x8;
+            gp->u.corneria.xF8 = grCn_StageParams->x8;
         }
     }
     pos.x = gp->u.corneria.base_x + gp->u.corneria.offset_x;
