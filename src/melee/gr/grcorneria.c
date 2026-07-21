@@ -1154,12 +1154,35 @@ extern Vec3 grCn_803B80B4;
 
 static int grCn_ArwingModelJointIds[] = { 1, 1, 1, 1, 1 };
 
-static inline int randi(int max)
+static inline int grCn_Randi(int max)
 {
     if (max != 0) {
         return HSD_Randi(max);
     }
     return 0;
+}
+
+static inline void grCn_UpdateArwingLaserRequest(Ground* gp)
+{
+    if (grCn_804D69B0 == 0) {
+        if (gp->u.starfox.frame_count % grCn_804D69A0->single_laser_interval ==
+                0 &&
+            grCn_Randi(grCn_804D69A0->single_laser_chance) == 0)
+        {
+            gp->u.starfox.fire_laser = true;
+        } else {
+            gp->u.starfox.fire_laser = false;
+        }
+    } else {
+        if (gp->u.starfox.frame_count % grCn_804D69A0->multi_laser_interval ==
+                0 &&
+            grCn_Randi(grCn_804D69A0->multi_laser_chance) == 0)
+        {
+            gp->u.starfox.fire_laser = true;
+        } else {
+            gp->u.starfox.fire_laser = false;
+        }
+    }
 }
 
 static inline int grCn_GetArwingFormationVariant(Ground_GObj* gobj)
@@ -1332,27 +1355,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                         }
                     }
                 }
-                if (grCn_804D69B0 == 0) {
-                    if (gp->u.starfox.frame_count %
-                                grCn_804D69A0->single_laser_interval ==
-                            0 &&
-                        randi(grCn_804D69A0->single_laser_chance) == 0)
-                    {
-                        gp->u.starfox.fire_laser = true;
-                    } else {
-                        gp->u.starfox.fire_laser = false;
-                    }
-                } else {
-                    if (gp->u.starfox.frame_count %
-                                grCn_804D69A0->multi_laser_interval ==
-                            0 &&
-                        randi(grCn_804D69A0->multi_laser_chance) == 0)
-                    {
-                        gp->u.starfox.fire_laser = true;
-                    } else {
-                        gp->u.starfox.fire_laser = false;
-                    }
-                }
+                grCn_UpdateArwingLaserRequest(gp);
                 if (gp->u.starfox.fire_laser) {
                     gp->u.starfox.fire_laser = false;
                     if (!grCorneria_801DEC08(&pos)) {
@@ -1389,27 +1392,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
         case 11:
         case 12:
         case 13: {
-            if (grCn_804D69B0 == 0) {
-                if (gp->u.starfox.frame_count %
-                            grCn_804D69A0->single_laser_interval ==
-                        0 &&
-                    randi(grCn_804D69A0->single_laser_chance) == 0)
-                {
-                    gp->u.starfox.fire_laser = true;
-                } else {
-                    gp->u.starfox.fire_laser = false;
-                }
-            } else {
-                if (gp->u.starfox.frame_count %
-                            grCn_804D69A0->multi_laser_interval ==
-                        0 &&
-                    randi(grCn_804D69A0->multi_laser_chance) == 0)
-                {
-                    gp->u.starfox.fire_laser = true;
-                } else {
-                    gp->u.starfox.fire_laser = false;
-                }
-            }
+            grCn_UpdateArwingLaserRequest(gp);
             {
                 if ((far_arwing = arwing_gobjs[gp->u.starfox.arwing_slot])) {
                     Vec3 arwing_pos;
