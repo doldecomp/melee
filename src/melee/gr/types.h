@@ -521,9 +521,9 @@ struct grVenom_Environment_GroundVars {
         u8 environment_flags;
         struct {
             u16 padding : 7;
-            u16 lighting_mode : 2;
+            u16 color_mode : 2;
             u16 padding2 : 7;
-        } lighting;
+        } magnify;
         struct {
             u8 b0 : 1;
             u8 b1 : 1;

@@ -953,15 +953,15 @@ void grVenom_8020454C(Ground_GObj* gobj)
 void grVenom_80204B84(Ground_GObj* arg) {}
 
 /// grVenom_80204B88
-/// Updates Venom stage lighting colors based on environment state.
+/// Updates Venom's offscreen magnifier palette based on environment state.
 
-static const GXColor grVe_804DB7D8 = { 0, 0, 0, 0 };
-static const GXColor grVe_804DB7DC = { 190, 10, 0, 0 };
-static const GXColor grVe_804DB7E0 = { 110, 60, 25, 0 };
-static const GXColor grVe_804DB7E4 = { 110, 90, 0, 0 };
+static const GXColor grVe_MagnifyColorBlack = { 0, 0, 0, 0 };
+static const GXColor grVe_MagnifyColorRed = { 190, 10, 0, 0 };
+static const GXColor grVe_MagnifyColorDefaultPrimary = { 110, 60, 25, 0 };
+static const GXColor grVe_MagnifyColorDefaultAccent = { 110, 90, 0, 0 };
 
-static inline void grVe_SetEnvironmentColors(GXColor* primary,
-                                              GXColor* accent)
+/// Sets the first six and last three colors in the stage's magnifier palette.
+static inline void grVe_SetMagnifyColors(GXColor* primary, GXColor* accent)
 {
     Ground_801C052C(primary);
     Ground_801C05D4(primary);
@@ -986,23 +986,23 @@ void grVenom_80204B88(Ground_GObj* gobj)
     env_flags = gp->u.venom_environment.xE0_state.environment_flags;
 
     if ((env_flags >> 5) & 1) {
-        if (gp->u.venom_environment.xE0_state.lighting.lighting_mode != 1) {
-            black = grVe_804DB7D8;
-            grVe_SetEnvironmentColors(&black, &black);
-            gp->u.venom_environment.xE0_state.lighting.lighting_mode = 1;
+        if (gp->u.venom_environment.xE0_state.magnify.color_mode != 1) {
+            black = grVe_MagnifyColorBlack;
+            grVe_SetMagnifyColors(&black, &black);
+            gp->u.venom_environment.xE0_state.magnify.color_mode = 1;
         }
     } else if ((env_flags >> 1) & 1) {
-        if (gp->u.venom_environment.xE0_state.lighting.lighting_mode != 2) {
-            red = grVe_804DB7DC;
+        if (gp->u.venom_environment.xE0_state.magnify.color_mode != 2) {
+            red = grVe_MagnifyColorRed;
             Ground_801C05BC(&red);
-            gp->u.venom_environment.xE0_state.lighting.lighting_mode = 2;
+            gp->u.venom_environment.xE0_state.magnify.color_mode = 2;
         }
     } else {
-        if (gp->u.venom_environment.xE0_state.lighting.lighting_mode != 0) {
-            default_primary = grVe_804DB7E0;
-            default_accent = grVe_804DB7E4;
-            grVe_SetEnvironmentColors(&default_primary, &default_accent);
-            gp->u.venom_environment.xE0_state.lighting.lighting_mode = 0;
+        if (gp->u.venom_environment.xE0_state.magnify.color_mode != 0) {
+            default_primary = grVe_MagnifyColorDefaultPrimary;
+            default_accent = grVe_MagnifyColorDefaultAccent;
+            grVe_SetMagnifyColors(&default_primary, &default_accent);
+            gp->u.venom_environment.xE0_state.magnify.color_mode = 0;
         }
     }
 }
@@ -1204,9 +1204,9 @@ void grVenom_802053B0(Ground_GObj* gobj)
             gp->u.starfox_arwing.animation_pending = false;
             grAnime_801C8138(
                 gobj, gp->map_id,
-                grVe_ArwingTables.animation_ids
-                    [grVe_803E5348.arwing
-                         .arwing_type[gp->u.starfox_arwing.slot]]);
+                grVe_ArwingTables
+                    .animation_ids[grVe_803E5348.arwing.arwing_type
+                                       [gp->u.starfox_arwing.slot]]);
             return;
         }
 
@@ -1538,9 +1538,12 @@ void grVenom_80205F30(Ground_GObj* gobj)
                 lb_8000B1CC(Ground_801C3FA4(other, 5), NULL, &sp64);
                 {
                     grVe_ArwingSpawnOffsetView* spawn_data =
-                        (grVe_ArwingSpawnOffsetView*) (
-                            base +
-                            base[other_gp->u.starfox_arwing.slot + 11] * 3);
+                        (grVe_ArwingSpawnOffsetView*) (base +
+                                                       base[other_gp->u
+                                                                .starfox_arwing
+                                                                .slot +
+                                                            11] *
+                                                           3);
                     sp94.x = sp64.x + spawn_data->offset.x;
                     sp94.y = sp64.y + spawn_data->offset.y;
                     sp94.z = sp64.z + spawn_data->offset.z;
@@ -1631,11 +1634,12 @@ void grVenom_80205F30(Ground_GObj* gobj)
                     lb_8000B1CC(Ground_801C3FA4(far_other, 5), NULL, &sp50);
                     {
                         grVe_ArwingSpawnOffsetView* spawn_data =
-                            (grVe_ArwingSpawnOffsetView*) (
-                                base +
-                                base[far_other_gp->u.starfox_arwing.slot +
-                                     11] *
-                                    3);
+                            (grVe_ArwingSpawnOffsetView*) (base +
+                                                           base[far_other_gp->u
+                                                                    .starfox_arwing
+                                                                    .slot +
+                                                                11] *
+                                                               3);
                         sp94.x = sp50.x + spawn_data->offset.x;
                         sp94.y = sp50.y + spawn_data->offset.y;
                         sp94.z = sp50.z + spawn_data->offset.z;
