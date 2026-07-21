@@ -401,6 +401,11 @@ struct grCorneria_GroundVars {
 };
 
 /// Ground vars shared by Corneria and Venom's Arwing stage articles.
+enum grArwingManeuver {
+    ARWING_MANEUVER_NONE,
+    ARWING_MANEUVER_FIRST,
+};
+
 struct grStarFox_GroundVars {
     /* +0x00 gp+C4 */ union {
         struct {
@@ -412,15 +417,28 @@ struct grStarFox_GroundVars {
     /* +0x04 gp+C8 */ s32 arwing_slot;
     /* +0x08 gp+CC */ s32 xCC;
     /* +0x0C gp+D0 */ s32 xD0;
-    /* +0x10 gp+D4 */ s32 xD4;
+    /* +0x10 gp+D4 */ s32 animation_pending;
     /* +0x14 gp+D8 */ s32 xD8;
     /* +0x18 gp+DC */ HSD_GObj* linked_gobj;
     /* +0x1C gp+E0 */ HSD_GObj* article_gobjs[4];
-    /* +0x2C gp+F0 */ s32 xF0;
-    /* +0x30 gp+F4 */ s32 xF4;
-    /* +0x34 gp+F8 */ s32 xF8;
-    /* +0x38 gp+FC */ s32 xFC;
-    /* +0x3C gp+100 */ s32 x100;
+    /* +0x2C gp+F0 */ s32 frame_count;
+    /* +0x30 gp+F4 */ enum grArwingManeuver maneuver;
+    /* +0x34 gp+F8 */ s32 maneuver_cooldown;
+    /* +0x38 gp+FC */ bool fire_laser;
+    /* +0x3C gp+100 */ s32 laser_joint;
+};
+
+/// Ground vars for the independently moving Arwing model.
+struct grStarFoxArwing_GroundVars {
+    /* +0x00 gp+C4 */ u32 xC4;
+    /* +0x04 gp+C8 */ s32 slot;
+    /* +0x08 gp+CC */ u32 xCC;
+    /* +0x0C gp+D0 */ u32 xD0;
+    /* +0x10 gp+D4 */ s32 animation_pending;
+    /* +0x14 gp+D8 */ s32 sound_state;
+    /* +0x18 gp+DC */ f32 roll_angle;
+    /* +0x1C gp+E0 */ Vec3 position;
+    /* +0x28 gp+EC */ f32 xEC;
 };
 
 /// Arwing slot ground vars (callbacks 2 and 10).
@@ -1811,6 +1829,7 @@ struct Ground {
         struct grShrineroute_GroundVars3 shrineroute3;
         struct grSmashTaunt_GroundVars smashtaunt;
         struct grStarFox_GroundVars starfox;
+        struct grStarFoxArwing_GroundVars starfox_arwing;
         struct GroundVars_unk unk;
         struct grHomeRun_GroundVars homerun;
         struct grHomeRun_GroundVars2 homerun2;

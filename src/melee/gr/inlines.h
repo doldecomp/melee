@@ -101,9 +101,9 @@ static inline void Ground_DisableStarFoxArwingGObjs(Ground* gp)
 static inline void Ground_ResetStarFoxArwingState(Ground* gp)
 {
     gp->u.starfox.xC4.flags.b0 = false;
-    gp->u.starfox.xD4 = 0;
-    gp->u.starfox.xF0 = 0;
-    gp->u.starfox.xF4 = 0;
+    gp->u.starfox.animation_pending = 0;
+    gp->u.starfox.frame_count = 0;
+    gp->u.starfox.maneuver = 0;
 }
 
 static inline void Ground_AttachStarFoxArwingModel(Ground_GObj* gobj,
@@ -120,16 +120,16 @@ static inline void Ground_UpdateStarFoxArwingVisibility(Ground* gp,
                                                         HSD_JObj* jobj,
                                                         f32 depth_limit)
 {
-    f32 angle = ABS(gp->u.arwing.xE0.z);
+    f32 angle = ABS(gp->u.starfox_arwing.position.z);
     if (angle < depth_limit) {
-        gp->u.arwing.xE0.z = 0.0F;
-        while (gp->u.arwing.xDC < -M_PI) {
-            gp->u.arwing.xDC += M_TAU;
+        gp->u.starfox_arwing.position.z = 0.0F;
+        while (gp->u.starfox_arwing.roll_angle < -M_PI) {
+            gp->u.starfox_arwing.roll_angle += M_TAU;
         }
-        while (gp->u.arwing.xDC > M_PI) {
-            gp->u.arwing.xDC -= M_TAU;
+        while (gp->u.starfox_arwing.roll_angle > M_PI) {
+            gp->u.starfox_arwing.roll_angle -= M_TAU;
         }
-        if (ABS(gp->u.arwing.xDC) < 1.0471976F) {
+        if (ABS(gp->u.starfox_arwing.roll_angle) < 1.0471976F) {
             HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         } else {
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
@@ -137,7 +137,7 @@ static inline void Ground_UpdateStarFoxArwingVisibility(Ground* gp,
     } else {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     }
-    HSD_JObjSetTranslate(jobj, &gp->u.arwing.xE0);
+    HSD_JObjSetTranslate(jobj, &gp->u.starfox_arwing.position);
 }
 
 static inline void
