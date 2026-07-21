@@ -240,7 +240,7 @@ StageData grCn_803E1F08 = {
     grCorneria_801E2EE4,
     grCorneria_801E2EEC,
     0x00000001,
-    (void*) &grCn_803E1D38,
+    grCn_803E1D38,
     8,
 };
 
@@ -328,7 +328,7 @@ void grCorneria_801DCE1C(void)
     Vec3 pos2;
 
     if (Stage_80225194() != 0x46) {
-        if (grCn_MultiArwingMode == 0) {
+        if (!grCn_MultiArwingMode) {
             if (grCn_ArwingGObjs[0] == NULL) {
                 grCn_ArwingSpawnTimer--;
                 if (grCn_ArwingSpawnTimer <= 0) {
@@ -346,7 +346,7 @@ void grCorneria_801DCE1C(void)
                         while (type_id == *types) {
                             int var_r0 = far == 1 ? 9 : 13;
                             int var_r3_2;
-                            if (var_r0 != 0) {
+                            if (var_r0) {
                                 var_r3_2 = HSD_Randi(far == 1 ? 9 : 13);
                             } else {
                                 var_r3_2 = 0;
@@ -410,7 +410,7 @@ void grCorneria_801DCE1C(void)
                             }
                         }
 
-                        if (has_near == 0) {
+                        if (!has_near) {
                             int type_id = grCn_ArwingTypes[count];
                             while (type_id == grCn_ArwingTypes[0] ||
                                    type_id == grCn_ArwingTypes[1] ||
@@ -425,7 +425,7 @@ void grCorneria_801DCE1C(void)
                                 grCorneria_801DD534(1);
                         } else {
                             grCorneria_801DDD4C(&pos2);
-                            if (grCn_CheckFar(&pos2) == 0) {
+                            if (!grCn_CheckFar(&pos2)) {
                                 int type_id = grCn_ArwingTypes[count];
                                 while (type_id == grCn_ArwingTypes[0] ||
                                        type_id == grCn_ArwingTypes[1] ||
@@ -486,7 +486,7 @@ void grCorneria_801DD350(void)
     Vec3 light_pos;
     u8 _pad2[12];
 
-    grCn_StageParams = (grCn_StageData*) Ground_801C49F8();
+    grCn_StageParams = Ground_801C49F8();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grCorneria_801DD534(7);
@@ -850,13 +850,13 @@ void grCorneria_UpdateNearArwingSounds(HSD_GObj* gobj)
     }
     switch (gp->u.starfox_arwing.sound_state) {
     case 0:
-        if (grCorneria_IsOutsideBlastZone(&sp2C) == 0) {
+        if (!grCorneria_IsOutsideBlastZone(&sp2C)) {
             lbAudioAx_800237A8(0x55730, 0x7F, 0x40);
             gp->u.starfox_arwing.sound_state = 1;
         }
         break;
     case 1:
-        if (grCorneria_801DEC94(&sp2C) == 0) {
+        if (!grCorneria_801DEC94(&sp2C)) {
             gp->u.starfox_arwing.sound_state = 2;
             return;
         }
@@ -964,7 +964,7 @@ void grCorneria_801DE024(Ground_GObj* gobj)
             }
             arwing_type_done:;
             }
-            if (grAnime_801C83D0(gobj, 0, 7) != 0) {
+            if (grAnime_801C83D0(gobj, 0, 7)) {
                 grCn_ArwingGObjs[gp->u.starfox_arwing.slot] = 0;
                 Ground_801C4A08(gobj);
             }
@@ -1149,7 +1149,7 @@ static inline int grCn_Randi(int max)
 
 static inline void grCn_UpdateArwingLaserRequest(Ground* gp)
 {
-    if (grCn_MultiArwingMode == 0) {
+    if (!grCn_MultiArwingMode) {
         if (gp->u.starfox.frame_count %
                     grCn_StageParams->single_laser_interval ==
                 0 &&
@@ -1279,7 +1279,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
             case 2:
             case 3:
             case 4:
-                if (grAnime_801C83D0(gobj, 0, 7) != 0) {
+                if (grAnime_801C83D0(gobj, 0, 7)) {
                     gp->u.starfox.maneuver = ARWING_MANEUVER_NONE;
                     gp->u.starfox.maneuver_cooldown =
                         (s32) grCn_StageParams->maneuver_cooldown;

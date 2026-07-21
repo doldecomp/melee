@@ -175,7 +175,7 @@ StageData grVe_803E54CC = {
     grVenom_80206D74,
     grVenom_80206D7C,
     0x00000001,
-    (void*) &grVe_803E5348,
+    grVe_803E5348.joints,
     5,
 };
 
@@ -245,7 +245,7 @@ void grVenom_8020362C(void)
     HSD_GObj** x20_next;
     PAD_STACK(0x20);
 
-    if (grVe_MultiArwingMode == 0) {
+    if (!grVe_MultiArwingMode) {
         if (data->arwing.arwing_gobj[0] == NULL) {
             grVe_ArwingSpawnTimer = grVe_ArwingSpawnTimer - 1;
             if (grVe_ArwingSpawnTimer <= 0) {
@@ -257,12 +257,12 @@ void grVenom_8020362C(void)
                     gp->u.venom2.xE0_state.b0 | gp->u.venom2.xE0_state.b1;
                 group_b = group_b | gp->u.venom2.xE0_state.b2;
                 group_a |= gp->u.venom2.xE0_state.b5;
-                if (group_a != 0) {
+                if (group_a) {
                     group_a = 2;
                 } else {
                     group_a = 0;
                 }
-                if (group_b != 0) {
+                if (group_b) {
                     group_b = 1;
                 } else {
                     group_b = 0;
@@ -271,7 +271,7 @@ void grVenom_8020362C(void)
                 if (combined != 2) {
                     do {
                         if (combined < 2) {
-                            if (combined == 0) {
+                            if (!combined) {
                                 break;
                             }
                             return;
@@ -361,7 +361,7 @@ void grVenom_8020362C(void)
                         }
                     }
                 }
-                if (has_active == 0) {
+                if (!has_active) {
                     idx = data->arwing.arwing_type[i];
                     while (idx == data->arwing.arwing_type[0] ||
                            idx == data->arwing.arwing_type[1] ||
@@ -382,17 +382,17 @@ void grVenom_8020362C(void)
                         gp->u.venom2.xE0_state.b0 | gp->u.venom2.xE0_state.b1;
                     group_b = group_b | gp->u.venom2.xE0_state.b2;
                     group_a |= gp->u.venom2.xE0_state.b5;
-                    if (group_a != 0) {
+                    if (group_a) {
                         group_a = 2;
                     } else {
                         group_a = 0;
                     }
-                    if (group_b != 0) {
+                    if (group_b) {
                         group_b = 1;
                     } else {
                         group_b = 0;
                     }
-                    if ((group_b | group_a) == 0) {
+                    if (!(group_b | group_a)) {
                         idx = data->arwing.arwing_type[i];
                         while (idx == data->arwing.arwing_type[0] ||
                                idx == data->arwing.arwing_type[1] ||
@@ -561,7 +561,7 @@ Ground_GObj* grVenom_80203EAC(int gobj_id)
 {
     Ground_GObj* gobj;
     Ground* gp;
-    grVe_Data* base = (grVe_Data*) &grVe_803E5348;
+    grVe_Data* base = &grVe_803E5348;
     StageCallbacks* callbacks =
         &((StageCallbacks*) ((char*) base + 0x44))[gobj_id];
 
@@ -720,11 +720,11 @@ void grVenom_80204284(Ground_GObj* gobj)
     timer = gp->u.venom.xC8;
     if (timer > 0) {
         gp->u.venom.xC8 = timer + 1;
-        if ((s32) gp->u.venom.xC8 >= 0x3C) {
-            if ((s32) gp->u.venom.xC8 == 0x3C) {
+        if (gp->u.venom.xC8 >= 0x3C) {
+            if (gp->u.venom.xC8 == 0x3C) {
                 ifStatus_802F6898();
                 un_802FF570();
-                other_gobj = (Ground_GObj*) grVenom_80203EAC(1);
+                other_gobj = grVenom_80203EAC(1);
                 if (other_gobj != NULL) {
                     Ground* other_gp = GET_GROUND(other_gobj);
                     grCorneria_801E25C4(
@@ -1041,7 +1041,7 @@ void grVenom_80204F20(Ground_GObj* arg0)
 
     grVe_803E5348.arwing
         .arwing_gobj[gp->u.starfox_arwing.slot = grVe_CurrentArwingSlot] =
-        (HSD_GObj*) arg0;
+        arg0;
 
     other = grVenom_80203EAC(base[base[gp->u.starfox_arwing.slot + 14] + 170]);
     if (other != NULL) {
@@ -1139,13 +1139,13 @@ static inline void grVe_UpdateArwingSounds(Ground* gp, Vec3* pos)
 {
     switch (gp->u.starfox_arwing.sound_state) {
     case 0:
-        if (grVenom_IsOutsideBlastZone(pos) == 0) {
+        if (!grVenom_IsOutsideBlastZone(pos)) {
             lbAudioAx_800237A8(0x6B6C0, 0x7F, 0x40);
             gp->u.starfox_arwing.sound_state = 1;
         }
         break;
     case 1:
-        if (grVenom_IsOutsideBlastZoneWithMargin(pos) == 0) {
+        if (!grVenom_IsOutsideBlastZoneWithMargin(pos)) {
             gp->u.starfox_arwing.sound_state = 2;
         }
         break;
@@ -1175,7 +1175,7 @@ void grVenom_802053B0(Ground_GObj* gobj)
     jobj = gobj->hsd_obj;
     ptr = base + gp->u.starfox_arwing.slot;
 
-    if ((u32) ptr[8] == (u32) gobj) {
+    if (grVe_803E5348.arwing.arwing_gobj[gp->u.starfox_arwing.slot] == gobj) {
         if (gp->u.starfox_arwing.animation_pending == true) {
             gp->u.starfox_arwing.animation_pending = false;
             grAnime_801C8138(
@@ -1212,7 +1212,7 @@ void grVenom_802053B0(Ground_GObj* gobj)
         grVe_UpdateArwingSounds(gp2, &sp1C);
 
     type_done:
-        if (grAnime_801C83D0(gobj, 0, 7) != 0) {
+        if (grAnime_801C83D0(gobj, 0, 7)) {
             base[gp->u.starfox_arwing.slot + 8] = 0;
             Ground_801C4A08(gobj);
         }
@@ -1423,14 +1423,14 @@ void grVenom_80205F30(Ground_GObj* gobj)
     sp88 = grVe_803B82DC;
     PAD_STACK(0x18);
 
-    if (grVe_ArwingUpdateDisabled != 0) {
+    if (grVe_ArwingUpdateDisabled) {
         return;
     }
 
     entry = base + gp->u.starfox.arwing_slot;
-    if ((u32) entry[8] != 0U) {
+    if (grVe_803E5348.arwing.arwing_gobj[gp->u.starfox.arwing_slot] != NULL) {
         if (entry[14] == 4) {
-            tmp_jobj = Ground_801C3FA4((HSD_GObj*) gobj, 1);
+            tmp_jobj = Ground_801C3FA4(gobj, 1);
             HSD_JObjSetRotationZ(tmp_jobj, 0.0F);
         }
 
@@ -1482,13 +1482,13 @@ void grVenom_80205F30(Ground_GObj* gobj)
                         s32 maneuver_anim = grVe_GetArwingManeuverAnim(
                             formation_variant, gp, anim_data);
                         s32 model_joint = anim_data->model_joints[idx0];
-                        grAnime_801C8098((HSD_GObj*) gobj, model_joint, 7,
-                                         maneuver_anim, 0.0F, 1.0F);
+                        grAnime_801C8098(gobj, model_joint, 7, maneuver_anim,
+                                         0.0F, 1.0F);
                     }
                 } else {
                     s32 idx0 = base[gp->u.starfox.arwing_slot + 14];
                     s32 model_joint = grVe_ArwingModelJointIds[idx0];
-                    tmp_jobj = Ground_801C3FA4((HSD_GObj*) gobj, model_joint);
+                    tmp_jobj = Ground_801C3FA4(gobj, model_joint);
                     HSD_JObjSetRotationZ(tmp_jobj, 0.0F);
                 }
                 gp->u.starfox.maneuver_cooldown =
@@ -1496,7 +1496,7 @@ void grVenom_80205F30(Ground_GObj* gobj)
             }
                 goto venom_80205F30_anim_done;
             venom_80205F30_check_anim:
-                if (grAnime_801C83D0((HSD_GObj*) gobj, 0, 7) != 0) {
+                if (grAnime_801C83D0(gobj, 0, 7)) {
                     gp->u.starfox.maneuver = ARWING_MANEUVER_NONE;
                     gp->u.starfox.maneuver_cooldown =
                         (s32) grVe_StageParams->maneuver_cooldown;
@@ -1530,8 +1530,7 @@ void grVenom_80205F30(Ground_GObj* gobj)
             {
                 s32 idx0 = base[gp->u.starfox.arwing_slot + 14];
                 s32 model_joint = grVe_ArwingModelJointIds[idx0];
-                lb_8000B1CC(Ground_801C3FA4((HSD_GObj*) gobj, model_joint),
-                            NULL, &sp94);
+                lb_8000B1CC(Ground_801C3FA4(gobj, model_joint), NULL, &sp94);
             }
             if (gp->u.starfox.linked_gobj != NULL) {
                 Ground* sub = gp->u.starfox.linked_gobj->user_data;
@@ -1544,7 +1543,7 @@ void grVenom_80205F30(Ground_GObj* gobj)
                 f32 rot_z;
                 s32 idx0 = base[gp->u.starfox.arwing_slot + 14];
                 s32 model_joint = grVe_ArwingModelJointIds[idx0];
-                helper = Ground_801C3FA4((HSD_GObj*) gobj, model_joint);
+                helper = Ground_801C3FA4(gobj, model_joint);
                 rot_z = HSD_JObjGetRotationZ(helper);
                 if (gp->u.starfox.linked_gobj != NULL) {
                     Ground* sub = gp->u.starfox.linked_gobj->user_data;
@@ -1657,23 +1656,20 @@ void grVenom_80205F30(Ground_GObj* gobj)
                         break;
                     }
                     if (formation_variant == 1) {
-                        it_802E7654(gobj, Ground_801C3FA4((HSD_GObj*) gobj, 7),
-                                    &sp88, 3, 0,
-                                    grVe_StageParams->arwing_scale);
+                        it_802E7654(gobj, Ground_801C3FA4(gobj, 7), &sp88, 3,
+                                    0, grVe_StageParams->arwing_scale);
                     } else {
                         if (gp->u.starfox.laser_joint != 0) {
-                            it_802E7654(
-                                gobj, Ground_801C3FA4((HSD_GObj*) gobj, 5),
-                                &sp88, 1, 0, grVe_StageParams->arwing_scale);
+                            it_802E7654(gobj, Ground_801C3FA4(gobj, 5), &sp88,
+                                        1, 0, grVe_StageParams->arwing_scale);
                         } else {
-                            it_802E7654(
-                                gobj, Ground_801C3FA4((HSD_GObj*) gobj, 6),
-                                &sp88, 1, 0, grVe_StageParams->arwing_scale);
+                            it_802E7654(gobj, Ground_801C3FA4(gobj, 6), &sp88,
+                                        1, 0, grVe_StageParams->arwing_scale);
                         }
                         gp->u.starfox.laser_joint =
                             (gp->u.starfox.laser_joint + 1) & 1;
                     }
-                    grMaterial_801C9604((HSD_GObj*) gobj,
+                    grMaterial_801C9604(gobj,
                                         grVe_StageParams->laser_effect_id, 0);
                 }
             }
@@ -1694,7 +1690,7 @@ void grVenom_80205F30(Ground_GObj* gobj)
         if (gp->u.starfox.article_gobjs[3] != NULL) {
             Ground_801C4A08(gp->u.starfox.article_gobjs[3]);
         }
-        Ground_801C4A08((HSD_GObj*) gobj);
+        Ground_801C4A08(gobj);
     }
 }
 
@@ -1799,7 +1795,7 @@ bool grVenom_80206BF0(int arg0)
     } else {
         return 0;
     }
-    wgobj = (Ground_GObj*) grVenom_80203EAC(8);
+    wgobj = grVenom_80203EAC(8);
     HSD_ASSERT(2244, wgobj);
     gp = wgobj->user_data;
     gp->u.venom.xCC = 10;

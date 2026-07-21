@@ -516,7 +516,7 @@ struct grVenom_GroundVars {
             u8 b0 : 1;
         } xC4_flags;
     };
-    /* +04 gp+C8 */ u32 xC8;
+    /* +04 gp+C8 */ s32 xC8;
     /* +08 gp+CC */ u32 xCC;
     /* +0C gp+D0 */ u32 xD0;
     /* +10 gp+D4 */ s32 xD4;
