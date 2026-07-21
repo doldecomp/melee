@@ -198,16 +198,6 @@ static s32 grVe_ArwingSpawnTimer;
 static s32 grVe_ArwingUpdateDisabled;
 static s32 grVe_MultiArwingMode;
 
-typedef struct grVe_Lighting {
-    char pad[0xE0];
-    u8 xE0;
-} grVe_Lighting;
-
-typedef struct grVe_GroundData {
-    char pad[0x2C];
-    grVe_Lighting* x2C;
-} grVe_GroundData;
-
 /// grVenom_8020362C
 
 static inline int* grVe_GetArwingTypes(grVe_Data* data)
@@ -229,11 +219,30 @@ static inline s32 grVe_GetRandomArwingDelay(f32 fmin, f32 fmax)
     return imax;
 }
 
+static inline s32 grVe_GetEnvironmentStateMask(Ground* gp)
+{
+    s32 group_a = gp->u.venom_environment.xE0_state.b3 |
+                  gp->u.venom_environment.xE0_state.b4;
+    s32 group_b = gp->u.venom_environment.xE0_state.b0 |
+                  gp->u.venom_environment.xE0_state.b1;
+    group_b |= gp->u.venom_environment.xE0_state.b2;
+    group_a |= gp->u.venom_environment.xE0_state.b5;
+    if (group_a) {
+        group_a = 2;
+    } else {
+        group_a = 0;
+    }
+    if (group_b) {
+        group_b = 1;
+    } else {
+        group_b = 0;
+    }
+    return group_b | group_a;
+}
+
 void grVenom_8020362C(void)
 {
     grVe_Data* data = &grVe_803E5348;
-    s32 group_b;
-    s32 group_a;
     s32 j;
     s32 idx;
     s32 i;
@@ -249,25 +258,8 @@ void grVenom_8020362C(void)
         if (data->arwing.arwing_gobj[0] == NULL) {
             grVe_ArwingSpawnTimer = grVe_ArwingSpawnTimer - 1;
             if (grVe_ArwingSpawnTimer <= 0) {
-                s32 combined;
                 Ground* gp = Ground_801C2BA4(7)->user_data;
-                group_a = gp->u.venom_environment.xE0_state.b3 |
-                          gp->u.venom_environment.xE0_state.b4;
-                group_b = gp->u.venom_environment.xE0_state.b0 |
-                          gp->u.venom_environment.xE0_state.b1;
-                group_b = group_b | gp->u.venom_environment.xE0_state.b2;
-                group_a |= gp->u.venom_environment.xE0_state.b5;
-                if (group_a) {
-                    group_a = 2;
-                } else {
-                    group_a = 0;
-                }
-                if (group_b) {
-                    group_b = 1;
-                } else {
-                    group_b = 0;
-                }
-                combined = group_b | group_a;
+                s32 combined = grVe_GetEnvironmentStateMask(gp);
                 if (combined != 2) {
                     do {
                         if (combined < 2) {
@@ -376,23 +368,7 @@ void grVenom_8020362C(void)
                         grVenom_80203EAC(2);
                 } else {
                     Ground* gp = Ground_801C2BA4(7)->user_data;
-                    group_a = gp->u.venom_environment.xE0_state.b3 |
-                              gp->u.venom_environment.xE0_state.b4;
-                    group_b = gp->u.venom_environment.xE0_state.b0 |
-                              gp->u.venom_environment.xE0_state.b1;
-                    group_b = group_b | gp->u.venom_environment.xE0_state.b2;
-                    group_a |= gp->u.venom_environment.xE0_state.b5;
-                    if (group_a) {
-                        group_a = 2;
-                    } else {
-                        group_a = 0;
-                    }
-                    if (group_b) {
-                        group_b = 1;
-                    } else {
-                        group_b = 0;
-                    }
-                    if (!(group_b | group_a)) {
+                    if (!grVe_GetEnvironmentStateMask(gp)) {
                         idx = data->arwing.arwing_type[i];
                         while (idx == data->arwing.arwing_type[0] ||
                                idx == data->arwing.arwing_type[1] ||
@@ -589,13 +565,16 @@ Ground_GObj* grVenom_80203EAC(int gobj_id)
     return gobj;
 }
 
-/// Per-state map animation ids, read via the stage data base pointer
-/// (`base[state + 0x7A]`, see #grVenom_802053B0); trailing entries are
-/// the zero/3/6 words observed in the reference object.
-static int grVe_803E5530[53] = {
-    -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 0, 0, 0, 0, 0,
-    0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0,
-    0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  3, 3, 3, 3, 6,
+typedef struct grVe_ArwingTableData {
+    s32 animation_ids[12];
+    Vec3 spawn_offsets[12];
+    s32 linked_gobj_ids[5];
+} grVe_ArwingTableData;
+
+static grVe_ArwingTableData grVe_ArwingTables = {
+    { -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+    { { 0.0F, 0.0F, 0.0F } },
+    { 3, 3, 3, 3, 6 },
 };
 
 void grVenom_80203F98(Ground_GObj* gobj)
@@ -981,51 +960,49 @@ static const GXColor grVe_804DB7DC = { 190, 10, 0, 0 };
 static const GXColor grVe_804DB7E0 = { 110, 60, 25, 0 };
 static const GXColor grVe_804DB7E4 = { 110, 90, 0, 0 };
 
+static inline void grVe_SetEnvironmentColors(GXColor* primary,
+                                              GXColor* accent)
+{
+    Ground_801C052C(primary);
+    Ground_801C05D4(primary);
+    Ground_801C0544(primary);
+    Ground_801C058C(primary);
+    Ground_801C05EC(primary);
+    Ground_801C05A4(primary);
+    Ground_801C055C(accent);
+    Ground_801C05BC(accent);
+    Ground_801C0574(accent);
+}
+
 void grVenom_80204B88(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     u8 env_flags;
-    GXColor color_set1;
-    GXColor color_set2;
-    GXColor color_neutral1;
-    GXColor color_neutral2;
+    GXColor black;
+    GXColor red;
+    GXColor default_primary;
+    GXColor default_accent;
 
     env_flags = gp->u.venom_environment.xE0_state.environment_flags;
 
     if ((env_flags >> 5) & 1) {
-        if (gp->u.venom_environment.xE0_state.xE0_state_pad.state != 1) {
-            color_set1 = grVe_804DB7D8;
-            Ground_801C052C(&color_set1);
-            Ground_801C05D4(&color_set1);
-            Ground_801C0544(&color_set1);
-            Ground_801C058C(&color_set1);
-            Ground_801C05EC(&color_set1);
-            Ground_801C05A4(&color_set1);
-            Ground_801C055C(&color_set1);
-            Ground_801C05BC(&color_set1);
-            Ground_801C0574(&color_set1);
-            gp->u.venom_environment.xE0_state.xE0_state_pad.state = 1;
+        if (gp->u.venom_environment.xE0_state.lighting.lighting_mode != 1) {
+            black = grVe_804DB7D8;
+            grVe_SetEnvironmentColors(&black, &black);
+            gp->u.venom_environment.xE0_state.lighting.lighting_mode = 1;
         }
     } else if ((env_flags >> 1) & 1) {
-        if (gp->u.venom_environment.xE0_state.xE0_state_pad.state != 2) {
-            color_set2 = grVe_804DB7DC;
-            Ground_801C05BC(&color_set2);
-            gp->u.venom_environment.xE0_state.xE0_state_pad.state = 2;
+        if (gp->u.venom_environment.xE0_state.lighting.lighting_mode != 2) {
+            red = grVe_804DB7DC;
+            Ground_801C05BC(&red);
+            gp->u.venom_environment.xE0_state.lighting.lighting_mode = 2;
         }
     } else {
-        if (gp->u.venom_environment.xE0_state.xE0_state_pad.state != 0) {
-            color_neutral1 = grVe_804DB7E0;
-            color_neutral2 = grVe_804DB7E4;
-            Ground_801C052C(&color_neutral1);
-            Ground_801C05D4(&color_neutral1);
-            Ground_801C0544(&color_neutral1);
-            Ground_801C058C(&color_neutral1);
-            Ground_801C05EC(&color_neutral1);
-            Ground_801C05A4(&color_neutral1);
-            Ground_801C055C(&color_neutral2);
-            Ground_801C05BC(&color_neutral2);
-            Ground_801C0574(&color_neutral2);
-            gp->u.venom_environment.xE0_state.xE0_state_pad.state = 0;
+        if (gp->u.venom_environment.xE0_state.lighting.lighting_mode != 0) {
+            default_primary = grVe_804DB7E0;
+            default_accent = grVe_804DB7E4;
+            grVe_SetEnvironmentColors(&default_primary, &default_accent);
+            gp->u.venom_environment.xE0_state.lighting.lighting_mode = 0;
         }
     }
 }
@@ -1077,7 +1054,6 @@ void grVenom_80204F1C(Ground_GObj* arg) {}
 
 void grVenom_80204F20(Ground_GObj* arg0)
 {
-    s32* base = (s32*) &grVe_803E5348;
     Ground* gp = arg0->user_data;
     HSD_JObj* jobj = arg0->hsd_obj;
     HSD_GObj* other;
@@ -1089,7 +1065,9 @@ void grVenom_80204F20(Ground_GObj* arg0)
         .arwing_gobj[gp->u.starfox_arwing.slot = grVe_CurrentArwingSlot] =
         arg0;
 
-    other = grVenom_80203EAC(base[base[gp->u.starfox_arwing.slot + 14] + 170]);
+    other = grVenom_80203EAC(
+        grVe_ArwingTables
+            .linked_gobj_ids[grVe_ArwingGroups[gp->u.starfox_arwing.slot]]);
     if (other != NULL) {
         Ground* other_gp = other->user_data;
         other_gp->x10_flags.b2 = 0;
@@ -1102,7 +1080,7 @@ void grVenom_80204F20(Ground_GObj* arg0)
     }
 
     scale = Ground_801C0498();
-    state = base[gp->u.starfox_arwing.slot + 11];
+    state = grVe_803E5348.arwing.arwing_type[gp->u.starfox_arwing.slot];
     if (state >= 8) {
         goto check_scale_uniform;
     }
@@ -1139,43 +1117,43 @@ bool grVenom_802052D8(Ground_GObj* arg)
     return false;
 }
 
-/// @todo VenomSpawnData struct should be defined in gr/types.h or grvenom.h
-typedef struct {
-    u8 pad[0x218];
-    f32 x;
-    f32 y;
-    f32 z;
-} VenomSpawnData;
+/// View anchored at #grVe_803E5348 after advancing to the selected Arwing
+/// type. The offset fields are #grVe_ArwingTables.spawn_offsets.
+typedef struct grVe_ArwingSpawnOffsetView {
+    u8 pad_to_spawn_offsets[0x218];
+    Vec3 offset;
+} grVe_ArwingSpawnOffsetView;
 
 void grVenom_GetArwingPosition(Ground_GObj* gobj, Vec3* pos)
 {
-    u8* new_var2;
+    u8* data_bytes;
     Vec3 jobj_pos;
-    s32* spawn_table = (s32*) &grVe_803E5348;
+    s32* data = (s32*) &grVe_803E5348;
     Ground* gp;
     HSD_JObj* jobj;
-    s32* new_var;
-    s32* new_var4;
+    s32* data_words;
+    s32* data_base;
     u32 spawn_idx;
-    struct grStarFoxArwing_GroundVars* new_var3;
+    struct grStarFoxArwing_GroundVars* arwing;
     s32 data_idx;
-    VenomSpawnData* spawn_data;
+    grVe_ArwingSpawnOffsetView* spawn_offset;
 
     if (gobj != NULL) {
         gp = gobj->user_data;
         Ground_801C2BA4(5);
         jobj = Ground_801C3FA4(gobj, 5);
         lb_8000B1CC(jobj, NULL, &jobj_pos);
-        new_var = spawn_table;
-        new_var4 = spawn_table;
-        new_var2 = (u8*) new_var4;
-        new_var3 = &gp->u.starfox_arwing;
-        spawn_idx = new_var3->slot;
-        data_idx = new_var[spawn_idx + 11];
-        spawn_data = (VenomSpawnData*) (new_var2 + data_idx * 12);
-        pos->x = jobj_pos.x + spawn_data->x;
-        pos->y = jobj_pos.y + spawn_data->y;
-        pos->z = jobj_pos.z + spawn_data->z;
+        data_words = data;
+        data_base = data;
+        data_bytes = (u8*) data_base;
+        arwing = &gp->u.starfox_arwing;
+        spawn_idx = arwing->slot;
+        data_idx = data_words[spawn_idx + 11];
+        spawn_offset =
+            (grVe_ArwingSpawnOffsetView*) (data_bytes + data_idx * 12);
+        pos->x = jobj_pos.x + spawn_offset->offset.x;
+        pos->y = jobj_pos.y + spawn_offset->offset.y;
+        pos->z = jobj_pos.z + spawn_offset->offset.z;
     } else {
         pos->x = pos->y = pos->z = 0.0F;
     }
@@ -1226,7 +1204,9 @@ void grVenom_802053B0(Ground_GObj* gobj)
             gp->u.starfox_arwing.animation_pending = false;
             grAnime_801C8138(
                 gobj, gp->map_id,
-                base[base[gp->u.starfox_arwing.slot + 11] + 0x7A]);
+                grVe_ArwingTables.animation_ids
+                    [grVe_803E5348.arwing
+                         .arwing_type[gp->u.starfox_arwing.slot]]);
             return;
         }
 
@@ -1557,15 +1537,13 @@ void grVenom_80205F30(Ground_GObj* gobj)
                 Ground_801C2BA4(5);
                 lb_8000B1CC(Ground_801C3FA4(other, 5), NULL, &sp64);
                 {
-                    VenomSpawnData* spawn_data =
-                        (VenomSpawnData*) (base +
-                                           base[other_gp->u.starfox_arwing
-                                                    .slot +
-                                                11] *
-                                               3);
-                    sp94.x = sp64.x + spawn_data->x;
-                    sp94.y = sp64.y + spawn_data->y;
-                    sp94.z = sp64.z + spawn_data->z;
+                    grVe_ArwingSpawnOffsetView* spawn_data =
+                        (grVe_ArwingSpawnOffsetView*) (
+                            base +
+                            base[other_gp->u.starfox_arwing.slot + 11] * 3);
+                    sp94.x = sp64.x + spawn_data->offset.x;
+                    sp94.y = sp64.y + spawn_data->offset.y;
+                    sp94.z = sp64.z + spawn_data->offset.z;
                 }
             } else {
                 sp94.x = sp94.y = sp94.z = 0.0F;
@@ -1652,15 +1630,15 @@ void grVenom_80205F30(Ground_GObj* gobj)
                     Ground_801C2BA4(5);
                     lb_8000B1CC(Ground_801C3FA4(far_other, 5), NULL, &sp50);
                     {
-                        VenomSpawnData* spawn_data =
-                            (VenomSpawnData*) (base +
-                                               base[far_other_gp->u
-                                                        .starfox_arwing.slot +
-                                                    11] *
-                                                   3);
-                        sp94.x = sp50.x + spawn_data->x;
-                        sp94.y = sp50.y + spawn_data->y;
-                        sp94.z = sp50.z + spawn_data->z;
+                        grVe_ArwingSpawnOffsetView* spawn_data =
+                            (grVe_ArwingSpawnOffsetView*) (
+                                base +
+                                base[far_other_gp->u.starfox_arwing.slot +
+                                     11] *
+                                    3);
+                        sp94.x = sp50.x + spawn_data->offset.x;
+                        sp94.y = sp50.y + spawn_data->offset.y;
+                        sp94.z = sp50.z + spawn_data->offset.z;
                     }
                 } else {
                     sp94.x = sp94.y = sp94.z = 0.0F;
