@@ -1139,18 +1139,18 @@ static inline void grVe_UpdateArwingSounds(Ground* gp, Vec3* pos)
 {
     switch (gp->u.starfox_arwing.sound_state) {
     case 0:
-        if (grVenom_80205DF8(pos) == 0) {
+        if (grVenom_IsOutsideBlastZone(pos) == 0) {
             lbAudioAx_800237A8(0x6B6C0, 0x7F, 0x40);
             gp->u.starfox_arwing.sound_state = 1;
         }
         break;
     case 1:
-        if (grVenom_80205E84(pos) == 0) {
+        if (grVenom_IsOutsideBlastZoneWithMargin(pos) == 0) {
             gp->u.starfox_arwing.sound_state = 2;
         }
         break;
     case 2:
-        if (grVenom_80205E84(pos) == 1) {
+        if (grVenom_IsOutsideBlastZoneWithMargin(pos) == 1) {
             lbAudioAx_800237A8(0x6B6C2, 0x7F, 0x40);
             gp->u.starfox_arwing.sound_state = 3;
         }
@@ -1349,19 +1349,17 @@ bool grVenom_80205DF0(Ground_GObj* arg)
     return false;
 }
 
-s32 grVenom_80205DF8(Vec3* pos)
+s32 grVenom_IsOutsideBlastZone(Vec3* pos)
 {
     return Stage_IsOutsideBlastZone(pos);
 }
-
-/// grVenom_80205E84
 
 float Stage_GetBlastZoneBottomOffset(void);
 float Stage_GetBlastZoneLeftOffset(void);
 float Stage_GetBlastZoneRightOffset(void);
 float Stage_GetBlastZoneTopOffset(void);
 
-s32 grVenom_80205E84(Vec3* pos)
+s32 grVenom_IsOutsideBlastZoneWithMargin(Vec3* pos)
 {
     return Stage_IsOutsideBlastZoneWithMargin(pos, 20.0F);
 }

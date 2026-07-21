@@ -823,7 +823,7 @@ void grCorneria_GetArwingPosition(HSD_GObj* gobj, Vec3* vec)
 
 extern Vec3 grCn_803B809C;
 
-void grCorneria_801DDE88(HSD_GObj* gobj)
+void grCorneria_UpdateNearArwingSounds(HSD_GObj* gobj)
 {
     Vec3 sp2C;
     Vec3 sp20;
@@ -849,7 +849,7 @@ void grCorneria_801DDE88(HSD_GObj* gobj)
     }
     switch (gp->u.starfox_arwing.sound_state) {
     case 0:
-        if (grCorneria_801DEC08(&sp2C) == 0) {
+        if (grCorneria_IsOutsideBlastZone(&sp2C) == 0) {
             lbAudioAx_800237A8(0x55730, 0x7F, 0x40);
             gp->u.starfox_arwing.sound_state = 1;
         }
@@ -941,7 +941,7 @@ void grCorneria_801DE024(Ground_GObj* gobj)
                     goto arwing_far_type;
                 }
             arwing_near_type:
-                grCorneria_801DDE88(gobj);
+                grCorneria_UpdateNearArwingSounds(gobj);
                 goto arwing_type_done;
             arwing_far_type: {
                 HSD_JObjSetRotationY(jobj, -1.5707964f);
@@ -1097,7 +1097,7 @@ bool grCorneria_801DEC00(Ground_GObj* arg)
     return false;
 }
 
-bool grCorneria_801DEC08(Vec3* pos)
+bool grCorneria_IsOutsideBlastZone(Vec3* pos)
 {
     /// @todo #Stage_IsOutsideBlastZone here perturbs #grCorneria_801DED50.
     if (pos->x > Stage_GetBlastZoneRightOffset()) {
@@ -1344,7 +1344,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                 grCn_UpdateArwingLaserRequest(gp);
                 if (gp->u.starfox.fire_laser) {
                     gp->u.starfox.fire_laser = false;
-                    if (!grCorneria_801DEC08(&pos)) {
+                    if (!grCorneria_IsOutsideBlastZone(&pos)) {
                         while (angle < -M_PI) {
                             angle += M_TAU;
                         }

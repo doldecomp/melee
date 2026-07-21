@@ -29,14 +29,14 @@
 /* 1DDCF0 */ void grCorneria_801DDCF0(Vec3*);
 /* 1DDD4C */ void grCorneria_801DDD4C(Vec3*);
 /* 1DDDA8 */ void grCorneria_GetArwingPosition(HSD_GObj*, Vec3*);
-/* 1DDE88 */ void grCorneria_801DDE88(HSD_GObj*);
+/* 1DDE88 */ void grCorneria_UpdateNearArwingSounds(HSD_GObj*);
 /* 1DE024 */ void grCorneria_801DE024(Ground_GObj*);
 /* 1DE4C0 */ void grCorneria_Arwing_801DE4C0(Ground_GObj*);
 /* 1DE560 */ bool grCorneria_801DE560(Ground_GObj*);
 /* 1DE568 */ void grCorneria_801DE568(Ground_GObj*);
 /* 1DE8E4 */ void grCorneria_801DE8E4(Ground_GObj*);
 /* 1DEC00 */ bool grCorneria_801DEC00(Ground_GObj*);
-/* 1DEC08 */ bool grCorneria_801DEC08(Vec3*);
+/* 1DEC08 */ bool grCorneria_IsOutsideBlastZone(Vec3*);
 /* 1DEC94 */ s32 grCorneria_801DEC94(Vec3*);
 /* 1DED50 */ void grCorneria_801DED50(Ground_GObj*);
 /* 1DF8D0 */ void grCorneria_801DF8D0(Ground_GObj*);
