@@ -88,9 +88,9 @@ static S16Vec3 grCn_803E1D38[] = {
     { 0x0006, 0x0011, 0x0000 }, { 0x0007, 0x0012, 0x0000 },
 };
 
-static HSD_GObj* arwing_gobjs[3] = { 0 };
-static int arwing_types[3] = { 0 };
-static int arwing_groups[3] = { 0 };
+static HSD_GObj* grCn_ArwingGObjs[3] = { 0 };
+static int grCn_ArwingTypes[3] = { 0 };
+static int grCn_ArwingGroups[3] = { 0 };
 
 StageCallbacks grCn_803E1D8C[] = {
     {
@@ -254,15 +254,15 @@ void grCorneria_InitArwingScheduler(void)
     s32 imin, imax;
     PAD_STACK(16);
 
-    arwing_gobjs[0] = NULL;
-    arwing_types[0] = 0;
-    arwing_groups[0] = 0;
-    arwing_gobjs[1] = NULL;
-    arwing_types[1] = 0;
-    arwing_groups[1] = 0;
-    arwing_gobjs[2] = NULL;
-    arwing_types[2] = 0;
-    arwing_groups[2] = 0;
+    grCn_ArwingGObjs[0] = NULL;
+    grCn_ArwingTypes[0] = 0;
+    grCn_ArwingGroups[0] = 0;
+    grCn_ArwingGObjs[1] = NULL;
+    grCn_ArwingTypes[1] = 0;
+    grCn_ArwingGroups[1] = 0;
+    grCn_ArwingGObjs[2] = NULL;
+    grCn_ArwingTypes[2] = 0;
+    grCn_ArwingGroups[2] = 0;
 
     stage = Stage_80225194();
     switch (stage) {
@@ -329,7 +329,7 @@ void grCorneria_801DCE1C(void)
 
     if (Stage_80225194() != 0x46) {
         if (grCn_MultiArwingMode == 0) {
-            if (arwing_gobjs[0] == NULL) {
+            if (grCn_ArwingGObjs[0] == NULL) {
                 grCn_ArwingSpawnTimer--;
                 if (grCn_ArwingSpawnTimer <= 0) {
                     int far;
@@ -342,7 +342,7 @@ void grCorneria_801DCE1C(void)
                     far = grCn_CheckFar(&pos);
 
                     {
-                        type_id = *(types = &arwing_types[0]);
+                        type_id = *(types = &grCn_ArwingTypes[0]);
                         while (type_id == *types) {
                             int var_r0 = far == 1 ? 9 : 13;
                             int var_r3_2;
@@ -354,7 +354,7 @@ void grCorneria_801DCE1C(void)
                             type_id = var_r3_2 + 1;
                         }
 
-                        if (*(groups = &arwing_groups[0]) == 4) {
+                        if (*(groups = &grCn_ArwingGroups[0]) == 4) {
                             group = 1;
                         } else {
                             group =
@@ -366,7 +366,7 @@ void grCorneria_801DCE1C(void)
                         grCn_CurrentArwingSlot = 0;
                         *types = type_id;
                         *groups = group;
-                        arwing_gobjs[grCn_CurrentArwingSlot] =
+                        grCn_ArwingGObjs[grCn_CurrentArwingSlot] =
                             grCorneria_801DD534(1);
                     }
                 }
@@ -377,7 +377,7 @@ void grCorneria_801DCE1C(void)
             }
         } else {
             {
-                HSD_GObj** gobjs = &arwing_gobjs[0];
+                HSD_GObj** gobjs = &grCn_ArwingGObjs[0];
                 int count = 0;
                 for (count = 0; count < 3; count++) {
                     if (gobjs[count] == NULL) {
@@ -393,7 +393,7 @@ void grCorneria_801DCE1C(void)
 
                         for (i = 0; i < 3; i++) {
                             if (i != count) {
-                                switch (arwing_types[i]) {
+                                switch (grCn_ArwingTypes[i]) {
                                 case 1:
                                 case 2:
                                 case 3:
@@ -411,32 +411,32 @@ void grCorneria_801DCE1C(void)
                         }
 
                         if (has_near == 0) {
-                            int type_id = arwing_types[count];
-                            while (type_id == arwing_types[0] ||
-                                   type_id == arwing_types[1] ||
-                                   type_id == arwing_types[2])
+                            int type_id = grCn_ArwingTypes[count];
+                            while (type_id == grCn_ArwingTypes[0] ||
+                                   type_id == grCn_ArwingTypes[1] ||
+                                   type_id == grCn_ArwingTypes[2])
                             {
                                 type_id = HSD_Randi(13) + 1;
                             }
                             grCn_CurrentArwingSlot = count;
-                            arwing_types[count] = type_id;
-                            arwing_groups[count] = count + 1;
-                            arwing_gobjs[grCn_CurrentArwingSlot] =
+                            grCn_ArwingTypes[count] = type_id;
+                            grCn_ArwingGroups[count] = count + 1;
+                            grCn_ArwingGObjs[grCn_CurrentArwingSlot] =
                                 grCorneria_801DD534(1);
                         } else {
                             grCorneria_801DDD4C(&pos2);
                             if (grCn_CheckFar(&pos2) == 0) {
-                                int type_id = arwing_types[count];
-                                while (type_id == arwing_types[0] ||
-                                       type_id == arwing_types[1] ||
-                                       type_id == arwing_types[2])
+                                int type_id = grCn_ArwingTypes[count];
+                                while (type_id == grCn_ArwingTypes[0] ||
+                                       type_id == grCn_ArwingTypes[1] ||
+                                       type_id == grCn_ArwingTypes[2])
                                 {
                                     type_id = HSD_Randi(4) + 10;
                                 }
                                 grCn_CurrentArwingSlot = count;
-                                arwing_types[count] = type_id;
-                                arwing_groups[count] = count + 1;
-                                arwing_gobjs[grCn_CurrentArwingSlot] =
+                                grCn_ArwingTypes[count] = type_id;
+                                grCn_ArwingGroups[count] = count + 1;
+                                grCn_ArwingGObjs[grCn_CurrentArwingSlot] =
                                     grCorneria_801DD534(1);
                             }
                         }
@@ -447,9 +447,9 @@ void grCorneria_801DCE1C(void)
             }
         }
     } else {
-        arwing_gobjs[0] = NULL;
-        arwing_gobjs[1] = NULL;
-        arwing_gobjs[2] = NULL;
+        grCn_ArwingGObjs[0] = NULL;
+        grCn_ArwingGObjs[1] = NULL;
+        grCn_ArwingGObjs[2] = NULL;
     }
 }
 
@@ -733,14 +733,15 @@ void grCorneria_801DDAC0(Ground_GObj* arg) {}
 
 void grCorneria_801DDAC4(Ground_GObj* gobj)
 {
-    HSD_GObj** data = arwing_gobjs;
+    HSD_GObj** data = grCn_ArwingGObjs;
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     f32 scale;
 
-    arwing_gobjs[gp->u.starfox_arwing.slot = grCn_CurrentArwingSlot] = gobj;
+    grCn_ArwingGObjs[gp->u.starfox_arwing.slot = grCn_CurrentArwingSlot] =
+        gobj;
     {
-        s32 idx = arwing_groups[gp->u.starfox_arwing.slot];
+        s32 idx = grCn_ArwingGroups[gp->u.starfox_arwing.slot];
         HSD_GObj* arwing = grCorneria_801DD534(grCn_803E2110[idx]);
         if (arwing != NULL) {
             GET_GROUND(arwing)->x10_flags.b2 = 0;
@@ -806,7 +807,7 @@ void grCorneria_GetArwingPosition(HSD_GObj* gobj, Vec3* vec)
         gp2 = Ground_801C2BA4(3)->user_data;
         jobj = Ground_801C3FA4(gobj, 4);
         lb_8000B1CC(jobj, NULL, &pos);
-        idx = arwing_types[gp->u.starfox_arwing.slot];
+        idx = grCn_ArwingTypes[gp->u.starfox_arwing.slot];
         vec->x = gp2->u.corneria.offset_x + (-pos.z + lbl_803E2068[idx].x);
         vec->y = pos.y + lbl_803E2068[idx].y;
         vec->z = pos.x + lbl_803E2068[idx].z;
@@ -835,7 +836,7 @@ void grCorneria_UpdateNearArwingSounds(HSD_GObj* gobj)
         Ground* ship = GET_GROUND(Ground_801C2BA4(3));
         s32 idx;
         lb_8000B1CC(Ground_801C3FA4(gobj, 4), NULL, &sp20);
-        idx = arwing_types[gp2->u.starfox_arwing.slot];
+        idx = grCn_ArwingTypes[gp2->u.starfox_arwing.slot];
         sp2C.x = ship->u.corneria.offset_x + (-sp20.z + lbl_803E2068[idx].x);
         sp2C.y = sp20.y + lbl_803E2068[idx].y;
         sp2C.z = sp20.x + lbl_803E2068[idx].z;
@@ -918,17 +919,17 @@ void grCorneria_801DE024(Ground_GObj* gobj)
         }
     }
     {
-        if (arwing_gobjs[gp->u.starfox_arwing.slot] == gobj) {
+        if (grCn_ArwingGObjs[gp->u.starfox_arwing.slot] == gobj) {
             if (gp->u.starfox_arwing.animation_pending == true) {
                 gp->u.starfox_arwing.animation_pending = false;
                 {
-                    s32 idx = arwing_types[gp->u.starfox_arwing.slot];
+                    s32 idx = grCn_ArwingTypes[gp->u.starfox_arwing.slot];
                     grAnime_801C8138(gobj, gp->map_id, grCn_803E2030[idx]);
                 }
                 return;
             }
             {
-                s32 idx = arwing_types[gp->u.starfox_arwing.slot];
+                s32 idx = grCn_ArwingTypes[gp->u.starfox_arwing.slot];
                 if (idx < 10) {
                     if (idx >= 1) {
                         goto arwing_near_type;
@@ -964,7 +965,7 @@ void grCorneria_801DE024(Ground_GObj* gobj)
             arwing_type_done:;
             }
             if (grAnime_801C83D0(gobj, 0, 7) != 0) {
-                arwing_gobjs[gp->u.starfox_arwing.slot] = 0;
+                grCn_ArwingGObjs[gp->u.starfox_arwing.slot] = 0;
                 Ground_801C4A08(gobj);
             }
         } else {
@@ -998,7 +999,7 @@ void grCorneria_Arwing_801DE4C0(Ground_GObj* gobj)
     gp->u.starfox_arwing.position.z = 0.0f;
     gp->u.starfox_arwing.position.y = 0.0f;
     gp->u.starfox_arwing.position.x = 0.0f;
-    group = arwing_groups[gp->u.starfox_arwing.slot];
+    group = grCn_ArwingGroups[gp->u.starfox_arwing.slot];
     joint_id = grCn_ArwingCollisionJointIds[group];
     mpJointListAdd(joint_id);
 
@@ -1015,7 +1016,7 @@ void grCorneria_801DE568(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    if (arwing_gobjs[gp->u.starfox_arwing.slot] != NULL) {
+    if (grCn_ArwingGObjs[gp->u.starfox_arwing.slot] != NULL) {
         Ground_UpdateStarFoxArwingVisibility(gp, jobj, 10.0F);
         {
             f32 scale = Ground_801C0498();
@@ -1035,7 +1036,7 @@ void grCorneria_801DE568(Ground_GObj* gobj)
         Ground_801C2FE0(gobj);
     } else {
         mpLib_80057BC0(grCn_ArwingCollisionJointIds
-                           [arwing_groups[gp->u.starfox_arwing.slot]]);
+                           [grCn_ArwingGroups[gp->u.starfox_arwing.slot]]);
         Ground_801C4A08(gobj);
     }
 }
@@ -1054,7 +1055,7 @@ void grCorneria_801DE8E4(Ground_GObj* gobj)
     Ground_ClearStarFoxArwingGObjs(gp);
     Ground_AnimateStarFoxArwingWithBackground(gobj);
 
-    switch (arwing_types[gp->u.starfox.arwing_slot]) {
+    switch (grCn_ArwingTypes[gp->u.starfox.arwing_slot]) {
     case 1:
     case 2:
     case 3:
@@ -1066,7 +1067,7 @@ void grCorneria_801DE8E4(Ground_GObj* gobj)
     case 9: {
         HSD_GObj* arwing = grCorneria_801DD534(
             grCn_ArwingLinkedArticleIds
-                [arwing_groups[gp->u.starfox.arwing_slot]]);
+                [grCn_ArwingGroups[gp->u.starfox.arwing_slot]]);
         Ground_LinkStarFoxArwing(gp, arwing);
         break;
     }
@@ -1075,7 +1076,7 @@ void grCorneria_801DE8E4(Ground_GObj* gobj)
     case 12:
     case 13: {
         Ground_AttachStarFoxArwingModel(
-            gobj, gp, arwing_gobjs[gp->u.starfox.arwing_slot], 4);
+            gobj, gp, grCn_ArwingGObjs[gp->u.starfox.arwing_slot], 4);
         break;
     }
     default:
@@ -1175,7 +1176,7 @@ static inline int grCn_GetArwingFormationVariant(Ground_GObj* gobj)
 {
     s32 grp_off = -1;
     {
-        int* groups = arwing_groups;
+        int* groups = grCn_ArwingGroups;
         int g = groups[GET_GROUND(gobj)->u.starfox.arwing_slot];
         switch (g) {
         case 0:
@@ -1213,12 +1214,12 @@ void grCorneria_801DED50(Ground_GObj* gobj)
         return;
     }
 
-    if (arwing_gobjs[gp->u.starfox.arwing_slot] != NULL) {
-        if (arwing_groups[gp->u.starfox.arwing_slot] == 4) {
+    if (grCn_ArwingGObjs[gp->u.starfox.arwing_slot] != NULL) {
+        if (grCn_ArwingGroups[gp->u.starfox.arwing_slot] == 4) {
             arwing = Ground_801C3FA4(gobj, 1);
             HSD_JObjSetRotationZ(arwing, 0.0f);
         }
-        switch (arwing_types[gp->u.starfox.arwing_slot]) {
+        switch (grCn_ArwingTypes[gp->u.starfox.arwing_slot]) {
         case 1:
         case 2:
         case 3:
@@ -1238,8 +1239,9 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                     int formation_variant = -1;
                     gp->u.starfox.maneuver = maneuver;
                     {
-                        int group = arwing_groups[GET_GROUND(gobj)
-                                                      ->u.starfox.arwing_slot];
+                        int group =
+                            grCn_ArwingGroups[GET_GROUND(gobj)
+                                                  ->u.starfox.arwing_slot];
                         switch (group) {
                         case 0:
                             break;
@@ -1260,15 +1262,15 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                         grAnime_801C8098(
                             gobj,
                             grCn_ArwingModelJointIds
-                                [arwing_groups[gp->u.starfox.arwing_slot]],
+                                [grCn_ArwingGroups[gp->u.starfox.arwing_slot]],
                             7, anim_index, 0.0f, 1.0f);
                     }
                 } else {
                     HSD_JObjSetRotationZ(
                         Ground_801C3FA4(
-                            gobj,
-                            grCn_ArwingModelJointIds
-                                [arwing_groups[gp->u.starfox.arwing_slot]]),
+                            gobj, grCn_ArwingModelJointIds
+                                      [grCn_ArwingGroups[gp->u.starfox
+                                                             .arwing_slot]]),
                         0.0f);
                 }
                 gp->u.starfox.maneuver_cooldown -= 1;
@@ -1285,8 +1287,8 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                 break;
             }
             {
-                if ((arwing =
-                         (HSD_JObj*) arwing_gobjs[gp->u.starfox.arwing_slot]))
+                if ((arwing = (HSD_JObj*)
+                         grCn_ArwingGObjs[gp->u.starfox.arwing_slot]))
                 {
                     Vec3 arwing_pos;
                     arwing_gp = grCn_GetArwingGround((Ground_GObj*) arwing);
@@ -1294,7 +1296,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                     lb_8000B1CC(Ground_801C3FA4((Ground_GObj*) arwing, 4),
                                 NULL, &arwing_pos);
                     {
-                        int* types = arwing_types;
+                        int* types = grCn_ArwingTypes;
                         int atype = types[arwing_gp->u.starfox.arwing_slot];
                         pos.x = ship_gp->u.corneria.offset_x +
                                 (-arwing_pos.z + lbl_803E2068[atype].x);
@@ -1311,11 +1313,11 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                 pos.y = 100.0f;
             }
             HSD_JObjSetTranslate(jobj, &pos);
-            lb_8000B1CC(Ground_801C3FA4(
-                            gobj,
-                            grCn_ArwingModelJointIds
-                                [arwing_groups[gp->u.starfox.arwing_slot]]),
-                        NULL, &pos);
+            lb_8000B1CC(
+                Ground_801C3FA4(
+                    gobj, grCn_ArwingModelJointIds
+                              [grCn_ArwingGroups[gp->u.starfox.arwing_slot]]),
+                NULL, &pos);
             {
                 f32 rot_z;
                 f32 angle;
@@ -1330,7 +1332,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                 }
                 rot_z = HSD_JObjGetRotationZ(Ground_801C3FA4(
                     gobj, grCn_ArwingModelJointIds
-                              [arwing_groups[gp->u.starfox.arwing_slot]]));
+                              [grCn_ArwingGroups[gp->u.starfox.arwing_slot]]));
                 angle = rot_z;
                 {
                     HSD_GObj* item = gp->u.starfox.linked_gobj;
@@ -1381,7 +1383,8 @@ void grCorneria_801DED50(Ground_GObj* gobj)
         case 13: {
             grCn_UpdateArwingLaserRequest(gp);
             {
-                if ((far_arwing = arwing_gobjs[gp->u.starfox.arwing_slot])) {
+                if ((far_arwing = grCn_ArwingGObjs[gp->u.starfox.arwing_slot]))
+                {
                     Vec3 arwing_pos;
                     arwing_gp = far_arwing->user_data;
                     ship_gp = GET_GROUND(Ground_801C2BA4(3));
@@ -1389,7 +1392,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                                 &arwing_pos);
                     {
                         s32 atype =
-                            arwing_types[arwing_gp->u.starfox.arwing_slot];
+                            grCn_ArwingTypes[arwing_gp->u.starfox.arwing_slot];
                         pos.x = ship_gp->u.corneria.offset_x +
                                 (-arwing_pos.z + lbl_803E2068[atype].x);
                         pos.y = arwing_pos.y + lbl_803E2068[atype].y;
@@ -1482,7 +1485,7 @@ void grCorneria_801DF8D0(Ground_GObj* gobj)
     Ground_ClearStarFoxArwingGObjs(gp);
     Ground_AnimateStarFoxArwing(gobj);
 
-    switch (arwing_types[gp->u.starfox.arwing_slot]) {
+    switch (grCn_ArwingTypes[gp->u.starfox.arwing_slot]) {
     case 1:
     case 2:
     case 3:
@@ -1494,7 +1497,7 @@ void grCorneria_801DF8D0(Ground_GObj* gobj)
     case 9: {
         HSD_GObj* arwing = grCorneria_801DD534(
             grCn_ArwingLinkedArticleIds
-                [arwing_groups[gp->u.starfox.arwing_slot]]);
+                [grCn_ArwingGroups[gp->u.starfox.arwing_slot]]);
         Ground_LinkStarFoxArwing(gp, arwing);
         break;
     }
@@ -1503,7 +1506,7 @@ void grCorneria_801DF8D0(Ground_GObj* gobj)
     case 12:
     case 13: {
         Ground_AttachStarFoxArwingModel(
-            gobj, gp, arwing_gobjs[gp->u.starfox.arwing_slot], 4);
+            gobj, gp, grCn_ArwingGObjs[gp->u.starfox.arwing_slot], 4);
         break;
     }
     default:
