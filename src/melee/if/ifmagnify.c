@@ -51,13 +51,13 @@ static char ifMagnify_804D57F8[] = "jobj";
 
 ifMagnify ifMagnify_804A1DE0;
 
-static GXColor* (*ifMagnify_803F9828[])(void) = {
-    Ground_801C0604, Ground_801C0690, Ground_801C0618,
-    Ground_801C0654, Ground_801C06A4, Ground_801C0668,
-    Ground_801C062C, Ground_801C067C, Ground_801C0640,
+static GXColor* (*ifMagnify_ColorGetters[])(void) = {
+    Ground_GetMagnifyColor0, Ground_GetMagnifyColor1, Ground_GetMagnifyColor2,
+    Ground_GetMagnifyColor3, Ground_GetMagnifyColor4, Ground_GetMagnifyColor5,
+    Ground_GetMagnifyColor6, Ground_GetMagnifyColor7, Ground_GetMagnifyColor8,
 };
 
-static s32 ifMagnify_803F984C[0x10] = {
+static s32 ifMagnify_ColorIndexGrid[0x10] = {
     0,          0x10001,    0x01020102, 0x02020202, 0x303,      0x10304,
     0x01020405, 0x02020505, 0x03030606, 0x03040607, 0x04050708, 0x05050808,
     0x06060606, 0x06070607, 0x07080708, 0x08080808,
@@ -399,9 +399,10 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
                 } else {
                     x_class = 2.0f;
                 }
-                color_ids = (u8*) &ifMagnify_803F984C[(s32) x_class +
-                                                      ((s32) y_class * 4)];
-                colors[j] = *ifMagnify_803F9828[color_ids[j]]();
+                color_ids =
+                    (u8*) &ifMagnify_ColorIndexGrid[(s32) x_class +
+                                                    ((s32) y_class * 4)];
+                colors[j] = *ifMagnify_ColorGetters[color_ids[j]]();
             }
 
             y_blend = 1.0f - y_inv;
@@ -556,28 +557,28 @@ void ifMagnify_802FC7C0(ifMagnify* magnify)
     volatile int default_val = ifMagnify_804DDB60;
     GXColor* result;
 
-    result = Ground_801C0604();
+    result = Ground_GetMagnifyColor0();
     if (result != NULL) {
         magnify->x4 = *(int*) result;
     } else {
         magnify->x4 = default_val;
     }
 
-    result = Ground_801C0618();
+    result = Ground_GetMagnifyColor2();
     if (result != NULL) {
         magnify->x8 = *(int*) result;
     } else {
         magnify->x8 = default_val;
     }
 
-    result = Ground_801C062C();
+    result = Ground_GetMagnifyColor6();
     if (result != NULL) {
         magnify->xC = *(int*) result;
     } else {
         magnify->xC = default_val;
     }
 
-    result = Ground_801C0640();
+    result = Ground_GetMagnifyColor8();
     if (result != NULL) {
         magnify->x10 = *(int*) result;
     } else {

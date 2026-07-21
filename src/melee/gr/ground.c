@@ -305,112 +305,112 @@ s32 Ground_801C0508(void)
     return temp_r3 != NULL ? temp_r3->x4 : 128;
 }
 
-void Ground_801C052C(GXColor* arg0)
+void Ground_SetMagnifyColor0(GXColor* color)
 {
-    UnkStage6B0* x = stage_info.param;
-    x->xB8 = *arg0;
+    UnkStage6B0* params = stage_info.param;
+    params->magnify_colors[0] = *color;
 }
 
-void Ground_801C0544(GXColor* arg0)
+void Ground_SetMagnifyColor2(GXColor* color)
 {
-    UnkStage6B0* x = stage_info.param;
-    x->xC0 = *arg0;
+    UnkStage6B0* params = stage_info.param;
+    params->magnify_colors[2] = *color;
 }
 
-void Ground_801C055C(GXColor* arg0)
+void Ground_SetMagnifyColor6(GXColor* color)
 {
-    UnkStage6B0* x = stage_info.param;
-    x->xD0 = *arg0;
+    UnkStage6B0* params = stage_info.param;
+    params->magnify_colors[6] = *color;
 }
 
-void Ground_801C0574(GXColor* arg0)
+void Ground_SetMagnifyColor8(GXColor* color)
 {
-    UnkStage6B0* x = stage_info.param;
-    x->xD8 = *arg0;
+    UnkStage6B0* params = stage_info.param;
+    params->magnify_colors[8] = *color;
 }
 
-void Ground_801C058C(GXColor* arg0)
+void Ground_SetMagnifyColor3(GXColor* color)
 {
-    UnkStage6B0* x = stage_info.param;
-    x->xC4 = *arg0;
+    UnkStage6B0* params = stage_info.param;
+    params->magnify_colors[3] = *color;
 }
 
-void Ground_801C05A4(GXColor* arg0)
+void Ground_SetMagnifyColor5(GXColor* color)
 {
-    UnkStage6B0* x = stage_info.param;
-    x->xCC = *arg0;
+    UnkStage6B0* params = stage_info.param;
+    params->magnify_colors[5] = *color;
 }
 
-void Ground_801C05BC(GXColor* arg0)
+void Ground_SetMagnifyColor7(GXColor* color)
 {
-    UnkStage6B0* x = stage_info.param;
-    x->xD4 = *arg0;
+    UnkStage6B0* params = stage_info.param;
+    params->magnify_colors[7] = *color;
 }
 
-void Ground_801C05D4(GXColor* arg0)
+void Ground_SetMagnifyColor1(GXColor* color)
 {
-    UnkStage6B0* x = stage_info.param;
-    x->xBC = *arg0;
+    UnkStage6B0* params = stage_info.param;
+    params->magnify_colors[1] = *color;
 }
 
-void Ground_801C05EC(GXColor* arg0)
+void Ground_SetMagnifyColor4(GXColor* color)
 {
-    UnkStage6B0* x = stage_info.param;
-    x->xC8 = *arg0;
+    UnkStage6B0* params = stage_info.param;
+    params->magnify_colors[4] = *color;
 }
 
-GXColor* Ground_801C0604(void)
+GXColor* Ground_GetMagnifyColor0(void)
 {
-    UnkStage6B0* x = stage_info.param;
-    return &x->xB8;
+    UnkStage6B0* params = stage_info.param;
+    return &params->magnify_colors[0];
 }
 
-GXColor* Ground_801C0618(void)
+GXColor* Ground_GetMagnifyColor2(void)
 {
-    UnkStage6B0* x = stage_info.param;
-    return &x->xC0;
+    UnkStage6B0* params = stage_info.param;
+    return &params->magnify_colors[2];
 }
 
-GXColor* Ground_801C062C(void)
+GXColor* Ground_GetMagnifyColor6(void)
 {
-    UnkStage6B0* x = stage_info.param;
-    return &x->xD0;
+    UnkStage6B0* params = stage_info.param;
+    return &params->magnify_colors[6];
 }
 
-GXColor* Ground_801C0640(void)
+GXColor* Ground_GetMagnifyColor8(void)
 {
-    UnkStage6B0* x = stage_info.param;
-    return &x->xD8;
+    UnkStage6B0* params = stage_info.param;
+    return &params->magnify_colors[8];
 }
 
-GXColor* Ground_801C0654(void)
+GXColor* Ground_GetMagnifyColor3(void)
 {
-    UnkStage6B0* x = stage_info.param;
-    return &x->xC4;
+    UnkStage6B0* params = stage_info.param;
+    return &params->magnify_colors[3];
 }
 
-GXColor* Ground_801C0668(void)
+GXColor* Ground_GetMagnifyColor5(void)
 {
-    UnkStage6B0* x = stage_info.param;
-    return &x->xCC;
+    UnkStage6B0* params = stage_info.param;
+    return &params->magnify_colors[5];
 }
 
-GXColor* Ground_801C067C(void)
+GXColor* Ground_GetMagnifyColor7(void)
 {
-    UnkStage6B0* x = stage_info.param;
-    return &x->xD4;
+    UnkStage6B0* params = stage_info.param;
+    return &params->magnify_colors[7];
 }
 
-GXColor* Ground_801C0690(void)
+GXColor* Ground_GetMagnifyColor1(void)
 {
-    UnkStage6B0* x = stage_info.param;
-    return &x->xBC;
+    UnkStage6B0* params = stage_info.param;
+    return &params->magnify_colors[1];
 }
 
-GXColor* Ground_801C06A4(void)
+GXColor* Ground_GetMagnifyColor4(void)
 {
-    UnkStage6B0* x = stage_info.param;
-    return &x->xC8;
+    UnkStage6B0* params = stage_info.param;
+    return &params->magnify_colors[4];
 }
 
 void Ground_801C06B8(InternalStageId arg0)

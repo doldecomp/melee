@@ -2370,32 +2370,32 @@ void grCorneria_801E2110(void)
         c1 = grCn_804DB218;
         c2 = grCn_804DB21C;
         c3 = grCn_804DB220;
-        Ground_801C058C(&c2);
-        Ground_801C05EC(&c1);
-        Ground_801C05A4(&c2);
-        Ground_801C055C(&c3);
-        Ground_801C05BC(&c3);
-        Ground_801C0574(&c3);
+        Ground_SetMagnifyColor3(&c2);
+        Ground_SetMagnifyColor4(&c1);
+        Ground_SetMagnifyColor5(&c2);
+        Ground_SetMagnifyColor6(&c3);
+        Ground_SetMagnifyColor7(&c3);
+        Ground_SetMagnifyColor8(&c3);
     } else if (id == 9) {
         c4 = grCn_804DB224;
         c5 = grCn_804DB228;
         c6 = grCn_804DB22C;
-        Ground_801C058C(&c5);
-        Ground_801C05EC(&c4);
-        Ground_801C05A4(&c5);
-        Ground_801C055C(&c6);
-        Ground_801C05BC(&c6);
-        Ground_801C0574(&c6);
+        Ground_SetMagnifyColor3(&c5);
+        Ground_SetMagnifyColor4(&c4);
+        Ground_SetMagnifyColor5(&c5);
+        Ground_SetMagnifyColor6(&c6);
+        Ground_SetMagnifyColor7(&c6);
+        Ground_SetMagnifyColor8(&c6);
     } else if (id == 4) {
         c7 = grCn_804DB230;
         c8 = grCn_804DB234;
         c9 = grCn_804DB238;
-        Ground_801C058C(&c8);
-        Ground_801C05EC(&c7);
-        Ground_801C05A4(&c8);
-        Ground_801C055C(&c9);
-        Ground_801C05BC(&c9);
-        Ground_801C0574(&c9);
+        Ground_SetMagnifyColor3(&c8);
+        Ground_SetMagnifyColor4(&c7);
+        Ground_SetMagnifyColor5(&c8);
+        Ground_SetMagnifyColor6(&c9);
+        Ground_SetMagnifyColor7(&c9);
+        Ground_SetMagnifyColor8(&c9);
     }
 }
 

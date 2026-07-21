@@ -1861,15 +1861,7 @@ struct UnkStage6B0 {
     u8 x6C_pad[0xB0 - 0x6A];
     UnkBgmStruct* xB0;
     s32 xB4; // number of entries in xB0
-    GXColor xB8;
-    GXColor xBC;
-    GXColor xC0;
-    GXColor xC4;
-    GXColor xC8;
-    GXColor xCC;
-    GXColor xD0;
-    GXColor xD4;
-    GXColor xD8;
+    GXColor magnify_colors[9];
 };
 
 struct UnkStageDatInternal {

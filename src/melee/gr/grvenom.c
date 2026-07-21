@@ -963,15 +963,15 @@ static const GXColor grVe_MagnifyColorDefaultAccent = { 110, 90, 0, 0 };
 /// Sets the first six and last three colors in the stage's magnifier palette.
 static inline void grVe_SetMagnifyColors(GXColor* primary, GXColor* accent)
 {
-    Ground_801C052C(primary);
-    Ground_801C05D4(primary);
-    Ground_801C0544(primary);
-    Ground_801C058C(primary);
-    Ground_801C05EC(primary);
-    Ground_801C05A4(primary);
-    Ground_801C055C(accent);
-    Ground_801C05BC(accent);
-    Ground_801C0574(accent);
+    Ground_SetMagnifyColor0(primary);
+    Ground_SetMagnifyColor1(primary);
+    Ground_SetMagnifyColor2(primary);
+    Ground_SetMagnifyColor3(primary);
+    Ground_SetMagnifyColor4(primary);
+    Ground_SetMagnifyColor5(primary);
+    Ground_SetMagnifyColor6(accent);
+    Ground_SetMagnifyColor7(accent);
+    Ground_SetMagnifyColor8(accent);
 }
 
 void grVenom_80204B88(Ground_GObj* gobj)
@@ -994,7 +994,7 @@ void grVenom_80204B88(Ground_GObj* gobj)
     } else if ((env_flags >> 1) & 1) {
         if (gp->u.venom_environment.xE0_state.magnify.color_mode != 2) {
             red = grVe_MagnifyColorRed;
-            Ground_801C05BC(&red);
+            Ground_SetMagnifyColor7(&red);
             gp->u.venom_environment.xE0_state.magnify.color_mode = 2;
         }
     } else {

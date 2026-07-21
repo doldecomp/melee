@@ -931,15 +931,15 @@ static void grLast_8021C500(Ground_GObj* gobj)
 static void grLast_8021C640(void)
 {
     GXColor sp8 = { 0x0C, 0x06, 0x28, 0xFF };
-    Ground_801C052C(&sp8);
-    Ground_801C05D4(&sp8);
-    Ground_801C0544(&sp8);
-    Ground_801C058C(&sp8);
-    Ground_801C05EC(&sp8);
-    Ground_801C05A4(&sp8);
-    Ground_801C055C(&sp8);
-    Ground_801C05BC(&sp8);
-    Ground_801C0574(&sp8);
+    Ground_SetMagnifyColor0(&sp8);
+    Ground_SetMagnifyColor1(&sp8);
+    Ground_SetMagnifyColor2(&sp8);
+    Ground_SetMagnifyColor3(&sp8);
+    Ground_SetMagnifyColor4(&sp8);
+    Ground_SetMagnifyColor5(&sp8);
+    Ground_SetMagnifyColor6(&sp8);
+    Ground_SetMagnifyColor7(&sp8);
+    Ground_SetMagnifyColor8(&sp8);
 }
 
 static void grLast_8021C6AC(void)
@@ -950,15 +950,15 @@ static void grLast_8021C6AC(void)
     GXColor sp10 = { 0x00, 0x00, 0x00, 0xFF };
     GXColor spC = { 0x73, 0xA0, 0x91, 0xFF };
     GXColor sp8 = { 0x87, 0xA5, 0xA0, 0xFF };
-    Ground_801C052C(&sp1C);
-    Ground_801C05D4(&sp18);
-    Ground_801C0544(&sp1C);
-    Ground_801C058C(&sp14);
-    Ground_801C05EC(&sp10);
-    Ground_801C05A4(&sp14);
-    Ground_801C055C(&spC);
-    Ground_801C05BC(&sp8);
-    Ground_801C0574(&spC);
+    Ground_SetMagnifyColor0(&sp1C);
+    Ground_SetMagnifyColor1(&sp18);
+    Ground_SetMagnifyColor2(&sp1C);
+    Ground_SetMagnifyColor3(&sp14);
+    Ground_SetMagnifyColor4(&sp10);
+    Ground_SetMagnifyColor5(&sp14);
+    Ground_SetMagnifyColor6(&spC);
+    Ground_SetMagnifyColor7(&sp8);
+    Ground_SetMagnifyColor8(&spC);
 }
 
 static DynamicsDesc* grLast_OnTouchLine(enum_t arg0)
