@@ -2000,7 +2000,7 @@ void fn_8016E730(StartMeleeData* arg0)
     ftCo_800C06C0();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8((enum InternalStageId) arg0->rules.xE, NULL);
+    Stage_802251E8(arg0->rules.xE, NULL);
 
     r30 = &lbl_8046B6A0;
 
