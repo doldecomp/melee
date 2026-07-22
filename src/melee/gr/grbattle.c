@@ -146,7 +146,7 @@ static void grBattle_OnDemoInit(bool arg0)
 
 static void grBattle_OnInit(void)
 {
-    grNBa_804D6ACC = Ground_801C49F8();
+    grNBa_804D6ACC = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 1;
     stage_info.unk8C.b5 = 1;
 

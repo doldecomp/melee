@@ -101,7 +101,7 @@ void grPushOn_802182C4(bool arg) {}
 
 void grPushOn_802182C8(void)
 {
-    grPushOn_804D6AB8 = Ground_801C49F8();
+    grPushOn_804D6AB8 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grPushOn_802183E4(0);

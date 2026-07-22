@@ -112,7 +112,7 @@ void grOldKongo_8020F468(bool arg) {}
 
 void grOldKongo_8020F46C(void)
 {
-    yaku = Ground_801C49F8();
+    yaku = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grOldKongo_8020F52C(0);

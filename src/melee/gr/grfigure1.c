@@ -74,7 +74,7 @@ static void grFigure1_OnDemoInit(int unused) {}
 
 static void grFigure1_OnInit(void)
 {
-    grEF1_804D6A70 = Ground_801C49F8();
+    grEF1_804D6A70 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grFigure1_8020E080(0);

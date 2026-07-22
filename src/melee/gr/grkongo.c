@@ -1206,7 +1206,7 @@ void grKongo_801D523C(void)
 {
     u8* temp_r5;
 
-    grKg_804D6980 = Ground_801C49F8();
+    grKg_804D6980 = Ground_GetYakumonoParam();
     temp_r5 = (u8*) &stage_info.unk8C;
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;

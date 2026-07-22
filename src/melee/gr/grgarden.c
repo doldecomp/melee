@@ -67,7 +67,7 @@ void grGarden_80202B6C(bool arg) {}
 
 void grGarden_80202B70(void)
 {
-    grGd_804D6A28 = Ground_801C49F8();
+    grGd_804D6A28 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grGarden_80202C78(0);

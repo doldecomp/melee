@@ -291,7 +291,7 @@ void grCastle_801CD338(bool arg0)
 void grCastle_801CD37C(void)
 {
     PAD_STACK(4);
-    grCs_804D6970 = Ground_801C49F8();
+    grCs_804D6970 = Ground_GetYakumonoParam();
 
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;

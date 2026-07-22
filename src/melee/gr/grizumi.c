@@ -181,7 +181,7 @@ void grIzumi_801CBB88(void)
 {
     HSD_GObj* r3;
 
-    grIz_804D6968 = Ground_801C49F8();
+    grIz_804D6968 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grIzumi_801CBCE8(0);

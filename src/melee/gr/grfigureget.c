@@ -97,7 +97,7 @@ void grFigureGet_OnDemoInit(int unused) {}
 
 void grFigureGet_OnInit(void)
 {
-    yakumono_param = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grFigureGet_802195CC(0);

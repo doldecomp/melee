@@ -70,7 +70,7 @@ void grOldYoshi_8020E798(bool arg) {}
 
 void grOldYoshi_8020E79C(void)
 {
-    grOy_804D6A88 = Ground_801C49F8();
+    grOy_804D6A88 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grOldYoshi_8020E854(0);
