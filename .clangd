@@ -1,3 +1,10 @@
 Diagnostics:
   Includes:
     AnalyzeAngledIncludes: true
+---
+If:
+  PathMatch: .*\.dox
+CompileFlags:
+  Add: [-xc-header, -ferror-limit=0]
+Diagnostics:
+  Suppress: "*"

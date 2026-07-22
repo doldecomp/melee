@@ -1,18 +1,12 @@
 #include "gronett.h"
 
-#include "placeholder.h"
 #include "types.h"
 
+#include <placeholder.h>
 #include <platform.h>
 
 #include "cm/camera.h"
-
-#include "cm/forward.h"
-
 #include "cm/types.h"
-
-#include "forward.h"
-
 #include "ft/ftlib.h"
 #include "gm/gm_16AE.h"
 #include "gr/grdatfiles.h"
@@ -29,11 +23,18 @@
 #include "lb/types.h"
 #include "mp/mplib.h"
 
-#include "sc/forward.h"
-
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
+
+/* 1E40E4 */ static void grOnett_801E40E4(void* user_data, int joint_id,
+                                          CollData* coll, int coll_x50,
+                                          mpLib_GroundEnum ground_kind,
+                                          float delta_y);
+/* 1E54B4 */ static void grOnett_801E54B4(void* user_data, int joint_id,
+                                          CollData* coll, int coll_x50,
+                                          mpLib_GroundEnum ground_kind,
+                                          float delta_y);
 
 /* 3E27E0 */ static StageCallbacks grOt_803E27E0[6] = {
     { NULL, NULL, NULL, NULL, 0 },
@@ -391,12 +392,14 @@ void grOnett_801E3DA0(Ground_GObj* gobj)
 
 void grOnett_801E40E0(Ground_GObj* gobj) {}
 
-void grOnett_801E40E4(Ground* gp, s32 arg1, CollData* cd, s32 arg3,
-                      mpLib_GroundEnum arg4, f32 arg5)
+/// @copydoc mpLib_JointCollisionCallback
+void grOnett_801E40E4(void* user_data, int joint_id, CollData* coll,
+                      int coll_x50, mpLib_GroundEnum ground_kind,
+                      float delta_y)
 {
-    PAD_STACK(8);
+    Ground* gp = user_data;
 
-    if (arg4 == 1) {
+    if (ground_kind == 1) {
         gp->u.onett_building.hit_count += 1;
         switch (gp->u.onett_building.state) {
         case 4:
@@ -872,19 +875,22 @@ void grOnett_801E5214(Ground_GObj* gobj)
     }
 }
 
-/// Updates awning collision tracking data
-void grOnett_801E54B4(Ground* gp, s32 arg1, CollData* cd, s32 arg3,
-                      mpLib_GroundEnum arg4, f32 arg5)
+/// @brief Updates awning collision tracking data
+/// @copydetails mpLib_JointCollisionCallback
+void grOnett_801E54B4(void* user_data, int joint_id, CollData* coll,
+                      int coll_x50, mpLib_GroundEnum ground_kind,
+                      float delta_y)
 {
-    int temp = cd->x34_flags.b1234;
+    Ground* gp = user_data;
+    int temp = coll->x34_flags.b1234;
     int idx;
 
     if (temp != 1 && temp != 2 && temp != 3) {
         return;
     }
 
-    idx = (arg1 == 0) ? 0 : 1;
-    if (arg4 == 1) {
+    idx = (joint_id == 0) ? 0 : 1;
+    if (ground_kind == 1) {
         gp->u.onett.awnings[idx].flag = 1;
         gp->u.onett.awnings[idx].initial = grOt_804D69C0->awning_initial;
     }

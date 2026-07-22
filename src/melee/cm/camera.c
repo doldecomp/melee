@@ -6,6 +6,7 @@
 
 #include "baselib/cobj.h"
 #include "baselib/displayfunc.h"
+#include "baselib/fog.h"
 #include "baselib/gobj.h"
 #include "baselib/lobj.h"
 #include "baselib/memory.h"

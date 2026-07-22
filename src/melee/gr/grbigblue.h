@@ -4,6 +4,7 @@
 #include "baselib/forward.h"
 #include "gr/forward.h"
 #include "lb/forward.h"
+#include "mp/forward.h"
 
 #include <dolphin/mtx.h>
 
@@ -42,7 +43,6 @@
 /* 1E6C58 */ bool grBigBlue_801E6C58(Ground_GObj*);
 /* 1E6C60 */ void grBigBlue_801E6C60(Ground_GObj*);
 /* 1E855C */ void grBigBlue_801E855C(Ground_GObj*);
-/* 1E8560 */ void fn_801E8560(Ground*, s32, CollData*, s32, s32, f32);
 /* 1E8794 */ bool grBigBlue_801E8794(void*, Vec3*, bool, f32, f32);
 /* 1E8978 */ void grBigBlue_801E8978(int, void*, void*);
 /* 1E89DC */ void* grBigBlue_801E89DC(int);
@@ -70,7 +70,6 @@
 /* 1EE398 */ s32 grBigBlue_801EE398(Ground_GObj*, s32, s32);
 /* 1EEF00 */ bool grBigBlue_801EEF00(Ground_GObj*, s32);
 /* 1EF424 */ void grBigBlue_801EF424(Ground_GObj*);
-/* 1EF60C */ void fn_801EF60C(Ground*, s32, CollData*, s32, s32, f32);
 /* 1EF7D8 */ void grBigBlue_801EF7D8(Vec3*);
 /* 1EF844 */ bool grBigBlue_801EF844(enum_t);
 /* 1EFB9C */ void fn_801EFB9C(HSD_GObj*, int);

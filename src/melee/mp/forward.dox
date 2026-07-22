@@ -1,0 +1,12 @@
+/** @file melee/mp/forward.h
+ */
+
+/** @typedef mpLib_JointCollisionCallback
+ * @brief Joint collision callback for ground surfaces.
+ *
+ * @param user_data Saved untyped data attached to the callback.
+ * @param coll_x50 %Unknown, sourced from #CollData::x50.
+ *                 `dist` according to #fn_801FC9AC?
+ * @param delta_y Relative y-offset since the collision started, equal to
+ *                `coll->cur_pos.y - coll->last_pos.y`
+ */

@@ -1,33 +1,28 @@
 #include "grpushon.h"
 
-#include "placeholder.h"
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
 #include "types.h"
 
+#include <placeholder.h>
 #include <platform.h>
 
 #include "cm/camera.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
-
-#include "gr/forward.h"
-
-#include "gr/granime.h"
-#include "gr/grdisplay.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/stage.h"
 #include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
 #include "lb/types.h"
 #include "mp/mplib.h"
-#include "MSL/math.h"
-#include "sysdolphin/baselib/lobj.h"
 
 #include <math_ppc.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/random.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <MSL/math.h>
 
 struct grPushOn_Entry {
     s32 x0;
@@ -59,6 +54,11 @@ static struct {
     struct grPushOn_Entry x1c[0x1E];
     struct grPushOn_Lookup x10c[0x21];
 }* grPushOn_804D6AB8;
+
+/* 2190A0 */ static void fn_802190A0(void* user_data, int joint_id,
+                                     CollData* coll, int coll_x50,
+                                     mpLib_GroundEnum ground_kind,
+                                     float delta_y);
 
 /// @todo .sdata order hack
 static void order_sdata(void)
@@ -579,11 +579,13 @@ HSD_LObj* grPushOn_80218FC0(HSD_GObj* gobj)
 
 /// Ground collision callback for pushon stage elements.
 /// Activates push behavior when collision flags indicate contact (b1234 == 1).
-void fn_802190A0(Ground* gp, s32 joint_id, CollData* coll, s32 unk,
-                 mpLib_GroundEnum ground_enum, f32 arg5)
+/// @copydetails mpLib_JointCollisionCallback
+void fn_802190A0(void* user_data, int joint_id, CollData* coll, int coll_x50,
+                 mpLib_GroundEnum ground_kind, float delta_y)
 {
+    Ground* gp = user_data;
     if (((*(u8*) &coll->x34_flags >> 3U) & 0xF) == 1 &&
-        (ground_enum - 1) <= 1U)
+        (ground_kind - 1) <= 1U)
     {
         gp->u.map.xC4_b0 = true;
     }

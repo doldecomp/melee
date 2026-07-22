@@ -10,7 +10,6 @@
 static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, s32 row,
                                        u32 col, u32 arg3, u8 arg4,
                                        u8 intensity, u8 alpha);
-
 /// @brief Copy framebuffer to refraction source texture.
 void lbRefract_80022560(void);
 

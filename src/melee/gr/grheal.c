@@ -50,6 +50,11 @@ typedef struct grHeal_StageData {
 } grHeal_StageData;
 STATIC_ASSERT(sizeof(grHeal_StageData) == 0x58);
 
+/* 21F4C0 */ static void fn_8021F4C0(void* user_data, int joint_id,
+                                     CollData* coll, int coll_x50,
+                                     mpLib_GroundEnum ground_kind,
+                                     float delta_y);
+
 const grHeal_UnkVec4 grHeal_803B84A8 = { { 0.0F, 40.0F, 0.0F }, 0 };
 
 s32 grHeal_803E83B8[0x27] = {
@@ -262,7 +267,7 @@ void grHeal_8021F180(Ground_GObj* gobj)
         }
     }
 
-    mpJointSetCb1(0, gp, (mpLib_Callback) (Event) fn_8021F4C0);
+    mpJointSetCb1(0, gp, fn_8021F4C0);
     gp->u.flatzone2.xC4 = 0;
 }
 
@@ -298,10 +303,13 @@ void grHeal_8021F474(Ground_GObj* ground)
 
 void grHeal_8021F4BC(Ground_GObj* gobj) {}
 
-void fn_8021F4C0(Ground* gp, void* arg2, s32 arg4, s32 arg5, s32 arg6)
+/// @copydoc mpLib_JointCollisionCallback
+void fn_8021F4C0(void* user_data, int joint_id, CollData* coll, int coll_x50,
+                 mpLib_GroundEnum ground_kind, float delta_y)
 {
-    if ((((*(u8*) ((u8*) arg4 + 0x34) >> 3U) & 0xF) == 1) &&
-        ((arg6 - 1) <= 1U))
+    Ground* gp = user_data;
+    if ((((*(u8*) ((u8*) coll + 0x34) >> 3U) & 0xF) == 1) &&
+        ((ground_kind - 1) <= 1U))
     {
         gp->u.unk.xC4 = 1;
     }
