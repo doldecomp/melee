@@ -380,7 +380,7 @@ void grMuteCity_801EFC68(bool arg) {}
 
 void grMuteCity_801EFC6C(void)
 {
-    grMc_804D69D0 = Ground_801C49F8();
+    grMc_804D69D0 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 0;
     grMuteCity_801EFD0C(0);

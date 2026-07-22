@@ -229,7 +229,7 @@ void grBigBlue_801E57C0(void)
     Vec3 direction;
     PAD_STACK(12);
 
-    grBb_804D69C8 = Ground_801C49F8();
+    grBb_804D69C8 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grBigBlue_801E59F8(0x1F);

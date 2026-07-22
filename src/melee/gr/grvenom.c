@@ -446,7 +446,7 @@ void grVenom_80203B18(void)
         Ground* gp1;
         s32 flag;
 
-        grVe_804D6A30 = Ground_801C49F8();
+        grVe_804D6A30 = Ground_GetYakumonoParam();
         grVenom_80203EAC(4);
         stage_info.unk8C.b4 = false;
         flag = true;

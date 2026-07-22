@@ -38,7 +38,7 @@
 #include <melee/mp/mplib.h>
 #include <melee/pl/player.h>
 
-static struct {
+static struct grPStadium_YakumonoParam {
     int x0;
     int x4;
     int x8;
@@ -62,7 +62,7 @@ static struct {
     s16 x4C;
     s16 x4E;
     s16 x50;
-}* yaku;
+}* yakumono_param;
 
 S16Vec3 grPs_803E1248[] = {
     { 1, 3, 0 }, { 2, 3, 0 }, { 3, 4, 0 },
@@ -162,7 +162,7 @@ void grStadium_OnDemoInit(int unused) {}
 
 void grStadium_OnInit(void)
 {
-    yaku = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
 
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
@@ -222,7 +222,7 @@ Ground_GObj* grStadium_801D10F8(StadiumGrType id)
             HSD_GObj_SetupProc(gobj, cb->callback2, 4);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0x120, id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 288, id);
     }
     return gobj;
 }
@@ -324,9 +324,9 @@ void grStadium_801D13E0(Ground_GObj* gobj)
     gr->u.stadium.xE2 = -1;
     gr->u.stadium.xE4 = grStadium_801D10F8(gr->u.stadium.xDE);
     gr->u.stadium.xE8 = NULL;
-    var_r27 = yaku->x4;
-    temp_r28 = yaku->x0;
-    if (var_r27 > yaku->x0) {
+    var_r27 = yakumono_param->x4;
+    temp_r28 = yakumono_param->x0;
+    if (var_r27 > yakumono_param->x0) {
         var_r27 = temp_r28 + randi(var_r27 - temp_r28);
     } else if (var_r27 < temp_r28) {
         var_r27 += randi(temp_r28 - var_r27);
@@ -804,7 +804,8 @@ void grStadium_801D21E4(Ground_GObj* gobj, bool arg1)
     if (arg1) {
         HSD_MObjClearFlags(mobj, 2);
         HSD_MObjSetFlags(mobj, 1);
-        HSD_MObjSetDiffuseColor(mobj, yaku->r, yaku->g, yaku->b);
+        HSD_MObjSetDiffuseColor(mobj, yakumono_param->r, yakumono_param->g,
+                                yakumono_param->b);
     } else {
         HSD_MObjSetFlags(mobj, 2);
         HSD_MObjClearFlags(mobj, 1);
@@ -988,7 +989,7 @@ void grStadium_801D2528(Ground_GObj* gobj, int arg1, int arg2)
     case 1:
         grStadium_801D39A0(gobj);
         gp->u.display.xE6 = 0x40;
-        gp->u.display.xE0 = yaku->x20;
+        gp->u.display.xE0 = yakumono_param->x20;
         gp->u.display.xF8_0 = false;
         gp->u.display.xF8_1 = false;
         if (gp->u.display.xF4 != NULL) {
@@ -998,7 +999,7 @@ void grStadium_801D2528(Ground_GObj* gobj, int arg1, int arg2)
     case 9:
         grStadium_801D3A0C(gobj);
         gp->u.display.xE6 = 0x40;
-        gp->u.display.xE0 = yaku->x24;
+        gp->u.display.xE0 = yakumono_param->x24;
         gp->u.display.xF8_0 = false;
         gp->u.display.xF8_1 = false;
         if (gp->u.display.xF4 != NULL) {
@@ -1008,7 +1009,7 @@ void grStadium_801D2528(Ground_GObj* gobj, int arg1, int arg2)
     case 14:
         grStadium_801D3BBC(gobj);
         gp->u.display.xE6 = 0x40;
-        gp->u.display.xE0 = yaku->x2C;
+        gp->u.display.xE0 = yakumono_param->x2C;
         gp->u.display.xF8_0 = false;
         gp->u.display.xF8_1 = false;
         if (gp->u.display.xF4 != NULL) {
@@ -1029,21 +1030,22 @@ void grStadium_801D2528(Ground_GObj* gobj, int arg1, int arg2)
         break;
     case 15:
         gp->u.display.xE6 = 0x20;
-        gp->u.display.xE0 = yaku->x20;
+        gp->u.display.xE0 = yakumono_param->x20;
         if (gp->u.display.xF4 != NULL) {
             gp->u.display.xF4->x8 = 1;
         }
         break;
     case 16:
         gp->u.display.xE6 = 0x80;
-        gp->u.display.xE0 = yaku->x20;
+        gp->u.display.xE0 = yakumono_param->x20;
         if (gp->u.display.xF4 != NULL) {
             gp->u.display.xF4->x8 = 1;
         }
         break;
     case 7:
         gp->u.display.xE6 = 0x40;
-        gp->u.display.xE0 = randi_between_2(yaku->x38, yaku->x3C);
+        gp->u.display.xE0 =
+            randi_between_2(yakumono_param->x38, yakumono_param->x3C);
         gp->u.display.xF8_0 = false;
         gp->u.display.xF8_1 = false;
         if (gp->u.display.xF4 != NULL) {
@@ -1052,7 +1054,8 @@ void grStadium_801D2528(Ground_GObj* gobj, int arg1, int arg2)
         break;
     case 8:
         gp->u.display.xE6 = 0x40;
-        gp->u.display.xE0 = randi_between(yaku->x30, yaku->x34);
+        gp->u.display.xE0 =
+            randi_between(yakumono_param->x30, yakumono_param->x34);
         n = gp->u.display.xEE++;
         for (i = 0; gp->u.display.xEE != n; gp->u.display.xEE++) {
             if (gp->u.display.xEE >= 6) {
@@ -1083,35 +1086,35 @@ void grStadium_801D2528(Ground_GObj* gobj, int arg1, int arg2)
         break;
     case 2:
         gp->u.display.xE6 = 1;
-        gp->u.display.xE0 = yaku->x28;
+        gp->u.display.xE0 = yakumono_param->x28;
         if (gp->u.display.xF4 != NULL) {
             gp->u.display.xF4->x8 = 0;
         }
         break;
     case 3:
         gp->u.display.xE6 = 2;
-        gp->u.display.xE0 = yaku->x28;
+        gp->u.display.xE0 = yakumono_param->x28;
         if (gp->u.display.xF4 != NULL) {
             gp->u.display.xF4->x8 = 0;
         }
         break;
     case 4:
         gp->u.display.xE6 = 4;
-        gp->u.display.xE0 = yaku->x28;
+        gp->u.display.xE0 = yakumono_param->x28;
         if (gp->u.display.xF4 != NULL) {
             gp->u.display.xF4->x8 = 0;
         }
         break;
     case 5:
         gp->u.display.xE6 = 0x10;
-        gp->u.display.xE0 = yaku->x28;
+        gp->u.display.xE0 = yakumono_param->x28;
         if (gp->u.display.xF4 != NULL) {
             gp->u.display.xF4->x8 = 0;
         }
         break;
     case 6:
         gp->u.display.xE6 = 8;
-        gp->u.display.xE0 = yaku->x28;
+        gp->u.display.xE0 = yakumono_param->x28;
         if (gp->u.display.xF4 != NULL) {
             gp->u.display.xF4->x8 = 0;
         }
@@ -1128,21 +1131,21 @@ void grStadium_801D2A60(Ground_GObj* gobj)
     float val;
     int var_r4;
 
-    if (gp->u.display.xF2 >= yaku->x50) {
+    if (gp->u.display.xF2 >= yakumono_param->x50) {
         gp->u.display.xF2 = 0;
         var_r4 = 0xE;
     } else {
         do {
-            val =
-                HSD_Randf() * (yaku->x48 + yaku->x4A + yaku->x4C + yaku->x4E);
-            val -= yaku->x48;
+            val = HSD_Randf() * (yakumono_param->x48 + yakumono_param->x4A +
+                                 yakumono_param->x4C + yakumono_param->x4E);
+            val -= yakumono_param->x48;
             if (val < 0) {
                 var_r4 = 8;
-            } else if ((val -= yaku->x4C) < 0) {
+            } else if ((val -= yakumono_param->x4C) < 0) {
                 var_r4 = 7;
-            } else if ((val -= yaku->x4A) < 0) {
+            } else if ((val -= yakumono_param->x4A) < 0) {
                 var_r4 = 1;
-            } else if ((val -= yaku->x4E) < 0) {
+            } else if ((val -= yakumono_param->x4E) < 0) {
                 var_r4 = 15;
             } else {
                 var_r4 = 1;
@@ -2186,7 +2189,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
         temp_r31->u.stadium.xDC = 3;
         return;
     case 3:
-        if (++temp_r31->u.stadium.xD8 > yaku->x10) {
+        if (++temp_r31->u.stadium.xD8 > yakumono_param->x10) {
             temp_r6 = GET_GROUND(temp_r31->u.stadium.xE4);
             temp_r6->u.stadium.xC4_b1 = true;
             temp_r31->u.stadium.xDC = 4;
@@ -2198,7 +2201,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
         break;
     case 4:
         temp_r27_2 = GET_JOBJ(temp_r31->u.stadium.xE4);
-        temp_f29 = -((temp_f31 * (0.95f / yaku->x14)) -
+        temp_f29 = -((temp_f31 * (0.95f / yakumono_param->x14)) -
                      HSD_JObjGetScaleY(temp_r27_2));
         temp_f30 = 0.05f * temp_f31;
         if (temp_f29 > temp_f30) {
@@ -2207,7 +2210,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
             HSD_JObjSetScaleY(temp_r27_2, 0.05F);
             temp_r4_4 = temp_r31->u.stadium.xD8;
             temp_r31->u.stadium.xD8 = temp_r4_4 + 1;
-            if (temp_r4_4 > yaku->x18) {
+            if (temp_r4_4 > yakumono_param->x18) {
                 grAnime_801C7A04(temp_r31->u.stadium.xE4, 0, 7, 0.0f);
                 temp_r3_7 = grStadium_801D10F8(temp_r31->u.stadium.xDE);
                 temp_r27_3 = GET_JOBJ(temp_r3_7);
@@ -2225,14 +2228,14 @@ void grStadium_801D4548(Ground_GObj* gobj)
         return;
     case 5:
         temp_r0_3 = ++temp_r31->u.stadium.xD8;
-        if (temp_r0_3 <= yaku->x14) {
+        if (temp_r0_3 <= yakumono_param->x14) {
             float tmp;
             temp_r30 = temp_r31->u.stadium.xE8->hsd_obj;
             (void) temp_r30;
-            tmp = 0.95f * temp_r0_3 / yaku->x14 + 0.05F;
+            tmp = 0.95f * temp_r0_3 / yakumono_param->x14 + 0.05F;
             HSD_JObjSetScaleY(temp_r30, tmp * temp_f31);
             temp_r4_8 = temp_r31->u.stadium.xD8;
-            temp_r0_4 = yaku->x14 / 2;
+            temp_r0_4 = yakumono_param->x14 / 2;
             if (temp_r4_8 < temp_r0_4) {
                 var_f29 =
                     -10.0f * temp_f31 * (1.0f - ((f32) temp_r4_8 / temp_r0_4));
@@ -2240,7 +2243,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
                 var_f29 = 0.0f;
             }
             HSD_JObjSetTranslateY(temp_r30, var_f29);
-            temp_r5_2 = yaku->x14;
+            temp_r5_2 = yakumono_param->x14;
             temp_r3_8 = temp_r31->u.stadium.xD8;
             temp_r27_4 = temp_r31->u.stadium.xE4->hsd_obj;
             temp_r0_5 = temp_r5_2 / 2;
@@ -2269,12 +2272,14 @@ void grStadium_801D4548(Ground_GObj* gobj)
         temp_r3_9->u.stadium.xC4_b0 = true;
         mpLib_80058560();
         if (temp_r31->u.stadium.xDE == 5) {
-            temp_r31->u.stadium.xD8 = randi_between_2(yaku->x0, yaku->x4);
+            temp_r31->u.stadium.xD8 =
+                randi_between_2(yakumono_param->x0, yakumono_param->x4);
             grAnime_801C65B0((void*) temp_r31->u.stadium.xCC);
             mpLib_800575B0(0x55);
             mpLib_800575B0(0x6F);
         } else {
-            temp_r31->u.stadium.xD8 = randi_between_2(yaku->x8, yaku->xC);
+            temp_r31->u.stadium.xD8 =
+                randi_between_2(yakumono_param->x8, yakumono_param->xC);
         }
         temp_r31->u.stadium.xDC = 0;
         break;

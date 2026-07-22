@@ -4189,7 +4189,7 @@ melee/it/items/it_2E5A.c:
 	.data       start:0x803F8BD8 end:0x803F8C08
 	.sdata2     start:0x804DD790 end:0x804DD800
 
-melee/it/items/it_2E6A.c:
+melee/it/items/ityaku.c:
 	.text       start:0x802E6AEC end:0x802E70BC
 	.rodata     start:0x803B8730 end:0x803B8740
 	.data       start:0x803F8C08 end:0x803F8DE8

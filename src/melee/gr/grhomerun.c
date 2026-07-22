@@ -109,7 +109,7 @@ void grHomeRun_8021C754(void)
 {
     Vec3 cam_offset;
 
-    grHr_804D6AE8 = Ground_801C49F8();
+    grHr_804D6AE8 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grHomeRun_8021EDD4();

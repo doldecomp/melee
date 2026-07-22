@@ -125,7 +125,7 @@ void grOldPupupu_802107E0(void)
 {
     PAD_STACK(8);
 
-    grOp_804D6A98 = Ground_801C49F8();
+    grOp_804D6A98 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grOldPupupu_802108B4(0);

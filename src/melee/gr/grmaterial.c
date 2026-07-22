@@ -3,7 +3,7 @@
 #include "gr/types.h"
 #include "it/it_2725.h"
 #include "it/item.h"
-#include "it/items/it_2E6A.h"
+#include "it/items/ityaku.h"
 #include "it/ithitbox.h"
 #include "it/types.h"
 

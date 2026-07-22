@@ -41,13 +41,13 @@ StageData grTGn_803E98DC = {
     (1 << 0),
 };
 
-typedef struct grTGnSpecialParams {
+typedef struct grTGn_YakumonoParam {
     DynamicsDesc* x0;
     DynamicsDesc* x4;
     DynamicsDesc* x8;
-} grTGnSpecialParams;
+} grTGn_YakumonoParam;
 
-grTGnSpecialParams* grTGn_804D6B18;
+grTGn_YakumonoParam* yakumono_param;
 
 void grTGanon_802246D8(bool unused)
 {
@@ -56,7 +56,7 @@ void grTGanon_802246D8(bool unused)
 
 void grTGanon_802246DC(void)
 {
-    grTGn_804D6B18 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
 
@@ -171,15 +171,15 @@ DynamicsDesc* grTGanon_802249B4(enum_t arg0)
             i = mpLineGetKind(arg0);
 
             if (i == CollLine_Ceiling) {
-                return grTGn_804D6B18->x0;
+                return yakumono_param->x0;
             }
 
             if (i == CollLine_RightWall) {
-                return grTGn_804D6B18->x4;
+                return yakumono_param->x4;
             }
 
             if (i == CollLine_LeftWall) {
-                return grTGn_804D6B18->x8;
+                return yakumono_param->x8;
             }
 
             return NULL;

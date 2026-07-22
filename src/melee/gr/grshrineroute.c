@@ -151,7 +151,7 @@ void grShrineRoute_OnDemoInit(bool arg) {}
 
 void grShrineRoute_OnInit(void)
 {
-    grSh_Route_804D6A58 = Ground_801C49F8();
+    grSh_Route_804D6A58 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 0;
     grShrineRoute_802088C0(0);
@@ -374,7 +374,6 @@ bool grShrineRoute_80208F14(void)
     return false;
 }
 
-/// #grShrineRoute_80208F70
 void grShrineRoute_80208F70(Ground_GObj* gobj)
 {
     Vec3 sp88;
@@ -394,9 +393,7 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
     if (player != NULL) {
         ftLib_80086644(player, &sp7C);
     } else {
-        sp7C.z = 0.0f;
-        sp7C.y = 0.0f;
-        sp7C.x = 0.0f;
+        sp7C.x = sp7C.y = sp7C.z = 0.0f;
     }
 
     switch (gp->u.shrineroute.xC4) {

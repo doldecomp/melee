@@ -101,7 +101,7 @@ void grOnett_801E3734(bool arg) {}
 
 void grOnett_801E3738(void)
 {
-    grOt_804D69C0 = Ground_801C49F8();
+    grOt_804D69C0 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grOnett_801E37F4(0);

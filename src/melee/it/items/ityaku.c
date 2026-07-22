@@ -1,11 +1,9 @@
-#include "it_2E6A.h"
+#include "ityaku.h"
 
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
-#include "it/it_2725.h"
 #include "it/it_3F14.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
@@ -170,7 +168,7 @@ void it_2E6A_UnkMotion19_Phys(HSD_GObj* item_gobj)
         HSD_JObjGetRotation(jobj2, &sp14);
         HSD_JObjSetRotation(item_jobj, &sp14);
     } else if (item->xDD4_itemVar.yaku.x2 != 2) {
-        OSReport("%s:%d: oioi...\n", "ityaku.c", 0xD7);
+        OSReport("%s:%d: oioi...\n", __FILE__, 215);
         while (true)
             ;
     }

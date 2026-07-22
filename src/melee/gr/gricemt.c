@@ -177,7 +177,7 @@ void grIceMt_801F686C(void)
     HSD_JObj* jobj;
     PAD_STACK(0x10);
 
-    grIm_804D69F4 = Ground_801C49F8();
+    grIm_804D69F4 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = true;
     stage_info.unk8C.b5 = false;
     grIceMt_801F71E8(0);

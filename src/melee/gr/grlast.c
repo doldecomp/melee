@@ -166,7 +166,7 @@ StageData grNLa_803E7F90 = {
 
 static void grLast_OnInit(void)
 {
-    grNLa_804D6AD0 = Ground_801C49F8();
+    grNLa_804D6AD0 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 1;
     stage_info.unk8C.b5 = 1;
     grLast_8021A7F4(0);
@@ -727,10 +727,10 @@ static void grLast_8021B920(Ground_GObj* gobj_, int arg1)
 {
     Ground_GObj* gobj = gobj_;
     Vec3 sp40;
-    u8 _[0x0C];
     Ground* gp;
     int i;
     Ground* temp_r28_10;
+    PAD_STACK(3 * 4);
 
     gp = gobj->user_data;
 
@@ -741,7 +741,7 @@ static void grLast_8021B920(Ground_GObj* gobj_, int arg1)
         for (i = 0; i < 5; i++) {
             if (gp->u.map.lv_gobj[i] == NULL) {
                 gp->u.map.lv_gobj[i] = grLast_8021A7F4(grNLa_803E8010[i][0]);
-                HSD_ASSERT(0x44B, gp->u.map.lv_gobj[i]);
+                HSD_ASSERT(1099, gp->u.map.lv_gobj[i]);
                 HSD_GObjGXLink_803909D8(gp->u.map.lv_gobj[i], gobj_);
                 if (grNLa_803E8010[i][2] != -1) {
                     grAnime_801C7FF8(gp->u.map.lv_gobj[i],

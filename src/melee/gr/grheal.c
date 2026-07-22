@@ -135,7 +135,7 @@ void grHeal_8021EF38(bool arg0) {}
 
 void grHeal_8021EF3C(void)
 {
-    grHeal_804D6AF0[0] = Ground_801C49F8();
+    grHeal_804D6AF0[0] = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
 

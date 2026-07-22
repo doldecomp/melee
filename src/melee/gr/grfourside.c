@@ -96,7 +96,7 @@ void grFourside_801F2D0C(bool arg) {}
 
 void grFourside_801F2D10(void)
 {
-    grFs_804D69D8 = Ground_801C49F8();
+    grFs_804D69D8 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grFourside_801F2DD0(0);

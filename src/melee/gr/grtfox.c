@@ -81,7 +81,7 @@ void grTFox_80220B80(bool unk) {}
 
 void grTFox_80220B84(void)
 {
-    grTFx_804D6B00 = Ground_801C49F8();
+    grTFx_804D6B00 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
 

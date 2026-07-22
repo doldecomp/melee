@@ -226,7 +226,7 @@ void grGreens_80213458(bool arg)
 void grGreens_Init(void)
 {
     PAD_STACK(8);
-    grGr_params = Ground_801C49F8();
+    grGr_params = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grGreens_80213524(0);

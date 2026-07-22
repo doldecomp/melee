@@ -203,7 +203,7 @@ void grGreatBay_801F423C(bool unused)
 
 void grGreatBay_801F4240(void)
 {
-    grGb_804D69E0.x0 = Ground_801C49F8();
+    grGb_804D69E0.x0 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grGreatBay_801F4300(0);

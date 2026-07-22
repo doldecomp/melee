@@ -102,7 +102,7 @@ void grZebesRoute_8020B160(bool arg) {}
 
 void grZebesRoute_8020B164(void)
 {
-    grZe_Route_804D6A60.params = Ground_801C49F8();
+    grZe_Route_804D6A60.params = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grZebesRoute_8020B260(0);
