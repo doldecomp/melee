@@ -1,20 +1,16 @@
 #ifndef GALE01_04D164
 #define GALE01_04D164
 
-#include <placeholder.h>
 #include <platform.h>
 
-#include "dolphin/gx/GXStruct.h"
-
 #include "ft/forward.h"
-#include "gr/forward.h"
 #include "lb/forward.h"
 
 #include "mp/types.h"
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
+#include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
 
 /* 04D164 */ MapCollData* mpLib_8004D164(void);
@@ -175,12 +171,16 @@
 /* 057FDC */ void mpLib_80057FDC(int joint_id);
 /* 058044 */ void mpLib_80058044(int joint_id);
 /* 0580AC */ void mpJointSetB10(int joint_id);
-/* 0580C8 */ void mpJointSetCb1(int joint_id, void*, mpLib_Callback);
+/* 0580C8 */ void mpJointSetCb1(int joint_id, void* user_data,
+                                mpLib_JointCollisionCallback cb);
 /* 0580E0 */ void mpJointClearCb1(int joint_id);
-/* 0580FC */ void mpJointGetCb1(int joint_id, mpLib_Callback*, Ground**);
+/* 0580FC */ void mpJointGetCb1(int joint_id, mpLib_JointCollisionCallback* cb,
+                                void** user_data);
 /* 05811C */ void mpLib_8005811C(CollData*, int ledge_id);
-/* 0581A4 */ void mpJointSetCb2(int joint_id, Ground*, mpLib_Callback);
-/* 0581BC */ void mpJointGetCb2(int joint_id, mpLib_Callback*, Ground**);
+/* 0581A4 */ void mpJointSetCb2(int joint_id, void* user_data,
+                                mpLib_JointCollisionCallback cb);
+/* 0581BC */ void mpJointGetCb2(int joint_id, mpLib_JointCollisionCallback* cb,
+                                void** user_data);
 /* 0581DC */ void mpLib_800581DC(int joint_id0, int joint_id1);
 /* 058560 */ void mpLib_80058560(void);
 /* 058614 */ void mpLib_80058614_Floor(void);

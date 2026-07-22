@@ -13,7 +13,7 @@
 #include <melee/ft/chara/ftZelda/forward.h>
 
 #include <math.h>
-#include <math_ppc.h> // IWYU pragma: keep
+#include <math_ppc.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/chara/ftCommon/ftCo_09F7.h>
 #include <melee/ft/chara/ftCommon/ftCo_0A01.h>

@@ -8,11 +8,11 @@
 #include "baselib/random.h"
 #include "baselib/util.h"
 
+#include <math_ppc.h>
+#include <trigf.h>
 #include <dolphin/os.h>
 #include <melee/lb/lb_00CE.h>
 #include <MSL/math.h>
-#include <MSL/math_ppc.h>
-#include <MSL/trigf.h>
 
 typedef union {
     void* p;

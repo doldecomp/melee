@@ -3,6 +3,8 @@
 #include "hsd_3915.static.h"
 
 #include <math.h>
+#include <math_ppc.h>
+#include <trigf.h>
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/mcc.h>
@@ -23,8 +25,6 @@
 #include <baselib/state.h>
 #include <baselib/video.h>
 #include <MetroTRK/ppc_reg.h>
-#include <MSL/math_ppc.h>
-#include <MSL/trigf.h>
 
 /* 4CF810 */ extern struct ParticleScreenState hsd_804CF810;
 

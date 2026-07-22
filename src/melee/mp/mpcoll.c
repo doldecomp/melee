@@ -21,11 +21,9 @@
 
 #include "mp/mplib.h"
 
-#include <string.h>
-#include <dolphin/os/OSError.h>
+#include <trigf.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
-#include <MSL/trigf.h>
 
 struct mpColl_80458810_t {
     /*  +0 */ int right[9];
@@ -722,16 +720,15 @@ static void mpColl_LeftWall_inline3(int line_id, int* arr)
     mpColl_804D648C++;
 }
 
-/// 80043268 https://decomp.me/scratch/GNwej
 void mpColl_80043268(CollData* coll, int line_id, bool arg2, float dy)
 {
     int joint_id; // r31
 
     joint_id = mpJointFromLine(line_id);
     if (joint_id != -1) {
-        mpLib_Callback callback;
-        Ground* ground = NULL;
-        mpJointGetCb1(joint_id, &callback, &ground);
+        mpLib_JointCollisionCallback callback;
+        void* user_data = NULL;
+        mpJointGetCb1(joint_id, &callback, &user_data);
         if (callback != 0) {
             s32 thing;
             if (!arg2) {
@@ -739,7 +736,7 @@ void mpColl_80043268(CollData* coll, int line_id, bool arg2, float dy)
             } else {
                 thing = 1;
             }
-            callback(ground, joint_id, coll, coll->x50, thing, dy);
+            callback(user_data, joint_id, coll, coll->x50, thing, dy);
         }
     }
 }
@@ -753,12 +750,12 @@ static inline void mpCollEnd_inline2(CollData* coll, int line_id, bool arg2,
 
     joint_id = mpJointFromLine(line_id);
     if (joint_id != -1) {
-        mpLib_Callback callback;
-        Ground* ground = NULL;
-        mpJointGetCb2(joint_id, &callback, &ground);
+        mpLib_JointCollisionCallback callback;
+        void* user_data = NULL;
+        mpJointGetCb2(joint_id, &callback, &user_data);
 
         if (callback != NULL) {
-            callback(ground, joint_id, coll, coll->x50, 0, dy);
+            callback(user_data, joint_id, coll, coll->x50, 0, dy);
         }
     }
 }
@@ -829,21 +826,21 @@ void mpColl_80043558(CollData* coll, int line_id)
     if (kind == CollLine_Floor) {
         joint_id = mpJointFromLine(line_id);
         if (joint_id != -1) {
-            Ground* ground = NULL;
-            mpLib_Callback callback;
-            mpJointGetCb1(joint_id, &callback, &ground);
+            void* user_data = NULL;
+            mpLib_JointCollisionCallback callback;
+            mpJointGetCb1(joint_id, &callback, &user_data);
             if (callback != NULL) {
-                callback(ground, joint_id, coll, coll->x50, 2, 0.0F);
+                callback(user_data, joint_id, coll, coll->x50, 2, 0.0F);
             }
         }
     } else if (kind == CollLine_Ceiling) {
         joint_id = mpJointFromLine(line_id);
         if (joint_id != -1) {
-            Ground* ground = NULL;
-            mpLib_Callback callback;
-            mpJointGetCb2(joint_id, &callback, &ground);
+            void* user_data = NULL;
+            mpLib_JointCollisionCallback callback;
+            mpJointGetCb2(joint_id, &callback, &user_data);
             if (callback != NULL) {
-                callback(ground, joint_id, coll, coll->x50, 0, 0.0F);
+                callback(user_data, joint_id, coll, coll->x50, 0, 0.0F);
             }
         }
     }

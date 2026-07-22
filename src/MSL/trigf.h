@@ -1,7 +1,5 @@
 #ifndef MSL_TRIGF_H
-#define MSL_TRIGF_H
-
-#include <platform.h>
+#define MSL_TRIGF_H // IWYU pragma: always_keep
 
 float acosf(float);
 float asinf(float);

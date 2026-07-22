@@ -21,15 +21,13 @@
 #include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
 
+#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
-#include <MSL/trigf.h>
 
 static struct {
     /* 00 */ int heli_wait;
@@ -53,6 +51,11 @@ static struct {
     /* 46 */ u16 x46;
     /* 48 */ u16 x48;
 }* grFs_804D69D8;
+
+/* 1F9338 */ static void grFourside_801F30A0(void* user_data, int joint_id,
+                                             CollData* coll, int coll_x50,
+                                             mpLib_GroundEnum ground_kind,
+                                             float delta_y);
 
 S16Vec3 grFs_803E3CE8[] = { { 3, 1, 7 }, { 4, 5, 1 }, { 0, 6, 10 } };
 
@@ -205,21 +208,22 @@ void grFourside_801F3078(Ground_GObj* gobj)
 
 void grFourside_801F309C(Ground_GObj* arg) {}
 
-void grFourside_801F30A0(Ground* unusedr3, s32 unusedr4, CollData* r5,
-                         s32 unusedr6, mpLib_GroundEnum unusedr7,
-                         float unusedf1)
+/// @copydoc mpLib_JointCollisionCallback
+void grFourside_801F30A0(void* user_data, int joint_id, CollData* coll,
+                         int coll_x50, mpLib_GroundEnum ground_kind,
+                         float delta_y)
 {
     HSD_GObj* gobj;
-    Ground* gp;
+    Ground* gp1;
     s32 val;
     PAD_STACK(3 * 4);
 
     gobj = Ground_801C2BA4(5);
-    val = M2C_FIELD(r5, u8*, 0x34);
-    gp = GET_GROUND(gobj);
+    val = M2C_FIELD(coll, u8*, 0x34);
+    gp1 = GET_GROUND(gobj);
     val = ((val >> 3) & 0xF);
     if (val == 1) {
-        gp->u.fourside2.x8 += 1;
+        gp1->u.fourside2.x8 += 1;
     }
 }
 

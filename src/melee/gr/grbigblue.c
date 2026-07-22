@@ -27,13 +27,22 @@
 #include "mp/mplib.h"
 
 #include <math.h>
-#include <math_ppc.h> // IWYU pragma: keep
-#include <trigf.h>    // IWYU pragma: keep
+#include <math_ppc.h>
+#include <trigf.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/memory.h>
 #include <baselib/random.h>
+
+/* 1E8560 */ static void fn_801E8560(void* user_data, int joint_id,
+                                     CollData* coll, int coll_x50,
+                                     mpLib_GroundEnum ground_kind,
+                                     float delta_y);
+/* 1EF60C */ static void fn_801EF60C(void* user_data, int joint_id,
+                                     CollData* coll, int coll_x50,
+                                     mpLib_GroundEnum ground_kind,
+                                     float delta_y);
 
 /// @todo Emitted only to lay out the .sdata2 literal pool in retail order.
 static void sdata2_order(void)
@@ -649,9 +658,9 @@ void grBigBlue_801E6904(Ground_GObj* gobj)
     jobj = gp->u.bigblue.xD4[2];
     HSD_JObjSetScale(jobj, &scale);
 
-    mpJointSetCb1(0, gp, (mpLib_Callback) fn_801E8560);
-    mpJointSetCb1(1, gp, (mpLib_Callback) fn_801E8560);
-    mpJointSetCb1(2, gp, (mpLib_Callback) fn_801E8560);
+    mpJointSetCb1(0, gp, fn_801E8560);
+    mpJointSetCb1(1, gp, fn_801E8560);
+    mpJointSetCb1(2, gp, fn_801E8560);
 }
 
 bool grBigBlue_801E6C58(Ground_GObj* arg)
@@ -1247,9 +1256,11 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
 
 void grBigBlue_801E855C(Ground_GObj* arg) {}
 
-void fn_801E8560(Ground* gp, s32 param, CollData* coll, s32 time_param,
-                 s32 env, f32 force)
+/// @copydoc mpLib_JointCollisionCallback
+void fn_801E8560(void* user_data, int joint_id, CollData* coll, int coll_x50,
+                 mpLib_GroundEnum ground_kind, float delta_y)
 {
+    Ground* gp = user_data;
     HSD_JObj* jobj;
     s32 joint_index;
     Vec3 pos;
@@ -1261,20 +1272,20 @@ void fn_801E8560(Ground* gp, s32 param, CollData* coll, s32 time_param,
         return;
     }
 
-    if (param == 0) {
+    if (joint_id == 0) {
         joint_index = 0;
     }
-    if (param == 1) {
+    if (joint_id == 1) {
         joint_index = 1;
     }
-    if (param == 2) {
+    if (joint_id == 2) {
         joint_index = 2;
     }
 
     jobj = gp->u.bigblue.xD4[joint_index];
 
-    if ((f32) time_param > 1000.0F) {
-        time_param = 1000;
+    if ((f32) coll_x50 > 1000.0F) {
+        coll_x50 = 1000;
     }
 
     HSD_JObjGetTranslation2(jobj, &pos);
@@ -1297,10 +1308,10 @@ void fn_801E8560(Ground* gp, s32 param, CollData* coll, s32 time_param,
 
         if (pos.x < coll->cur_pos.x) {
             gp->u.bigblue.data[active_joint].x24 +=
-                dist * ((f32) time_param / 1000.0F);
+                dist * ((f32) coll_x50 / 1000.0F);
         } else {
             gp->u.bigblue.data[active_joint].x28 +=
-                dist * ((f32) time_param / 1000.0F);
+                dist * ((f32) coll_x50 / 1000.0F);
         }
 
         gp->u.bigblue.data[active_joint].x2C++;
@@ -3072,7 +3083,7 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
 
     for (i = 0; i < 30; i++) {
         u8 val;
-        mpJointSetCb1(lbl_803E2DFC[i], gp, (mpLib_Callback) fn_801EF60C);
+        mpJointSetCb1(lbl_803E2DFC[i], gp, fn_801EF60C);
         HSD_JObjSetFlagsAll(((HSD_JObj**) gp->u.bigblue.xC8)[i], JOBJ_HIDDEN);
         val = HSD_Randi(2) ? 0 : 2;
         ((u8*) gp->u.bigblue.xCC)[i] = val;
@@ -4752,9 +4763,11 @@ void grBigBlue_801EF424(Ground_GObj* gobj)
     }
 }
 
-void fn_801EF60C(Ground* gp, s32 joint_id, CollData* coll, s32 time_param,
-                 s32 env, f32 force)
+/// @copydoc mpLib_JointCollisionCallback
+void fn_801EF60C(void* user_data, int joint_id, CollData* coll, int coll_x50,
+                 mpLib_GroundEnum ground_kind, float delta_y)
 {
+    Ground* gp = user_data;
     s32 car_num;
     s16* table;
     grBb_YakumonoParams* params;
@@ -4766,7 +4779,7 @@ void fn_801EF60C(Ground* gp, s32 joint_id, CollData* coll, s32 time_param,
     if ((s32) coll->x34_flags.b1234 != 1) {
         return;
     }
-    if (env != 1) {
+    if (ground_kind != 1) {
         return;
     }
     table = lbl_803E2DFC;

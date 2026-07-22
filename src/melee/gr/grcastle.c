@@ -24,7 +24,7 @@
 #include "lb/types.h"
 #include "mp/mplib.h"
 
-#include <trigf.h> // IWYU pragma: keep
+#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <baselib/archive.h>
 #include <baselib/gobj.h>
@@ -34,6 +34,11 @@
 #include <baselib/psstructs.h>
 #include <baselib/random.h>
 #include <MetroTRK/intrinsics.h>
+
+/* 1CF750 */ static void grCastle_801CF750(void* user_data, int joint_id,
+                                           CollData* coll, int coll_x50,
+                                           mpLib_GroundEnum ground_kind,
+                                           float delta_y);
 
 S16Vec3 grCs_803E0FE8[] = {
     { 4, 6, 1 },
@@ -1393,20 +1398,23 @@ static void grCastle_ForceSdata2Order(void)
 
 void grCastle_801CF74C(Ground_GObj* gobj) {}
 
-void grCastle_801CF750(Ground* gp, s32 arg1, CollData* cd, s32 arg3,
-                       mpLib_GroundEnum arg4, f32 arg5)
+/// @copydoc mpLib_JointCollisionCallback
+void grCastle_801CF750(void* user_data, int joint_id, CollData* coll,
+                       int coll_x50, mpLib_GroundEnum ground_kind,
+                       float delta_y)
 {
+    Ground* gp = user_data;
     s32 idx;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
-    if (arg1 == 4) {
+    if (joint_id == 4) {
         idx = 0;
     } else {
         idx = 1;
     }
 
-    if ((s32) cd->x34_flags.b1234 == 1) {
-        gp->u.castle8.plat[idx].wind += (f32) arg3;
+    if ((s32) coll->x34_flags.b1234 == 1) {
+        gp->u.castle8.plat[idx].wind += (f32) coll_x50;
     }
 }
 
@@ -1529,7 +1537,7 @@ static inline void grCastle_UpdateSatellite(Ground* gp)
     }
 }
 
-HSD_JObj* grCastle_801CF868(Ground_GObj* gobj)
+void grCastle_801CF868(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grCastle_UpdateSatellite(gp);

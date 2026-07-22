@@ -19,7 +19,6 @@
 #include <math_ppc.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
-#include <MSL/math_ppc.h>
 
 HSD_ObjAllocData robj_alloc_data;   // robj_alloc_data
 HSD_ObjAllocData rvalue_alloc_data; // rvalue_alloc_data

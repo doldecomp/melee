@@ -21,9 +21,9 @@
 #include "it/types.h"
 #include "lb/lbvector.h"
 
+#include <trigf.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
-#include <MSL/trigf.h>
 
 /* 2CDC5C */ static void itHassam_802CDC5C(Item_GObj* gobj);
 /* 2CDC80 */ static void itHassam_802CDC80(Item_GObj* gobj);

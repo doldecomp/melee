@@ -1,43 +1,48 @@
 #include "grrcruise.h"
 
+#include "grdatfiles.h"
+#include "grdisplay.h"
+#include "grlib.h"
+#include "ground.h"
 #include "grzakogenerator.h"
+#include "inlines.h"
 #include "placeholder.h"
+#include "stage.h"
+#include "types.h"
 
 #include <platform.h>
 
 #include "baselib/debug.h"
 #include "cm/camera.h"
-
-#include "forward.h"
-
 #include "gm/gm_1A45.h"
-#include "gr/grdatfiles.h"
-#include "gr/grdisplay.h"
-#include "gr/grlib.h"
-#include "gr/ground.h"
-#include "gr/inlines.h"
-#include "gr/stage.h"
-#include "gr/types.h"
-
-#include "lb/forward.h"
-
 #include "lb/lb_00B0.h"
 #include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
-#include "sysdolphin/baselib/debug.h"
-#include "sysdolphin/baselib/memory.h"
 
-#include <math.h>
+#include <math_ppc.h>
+#include <trigf.h>
 #include <baselib/archive.h>
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
-#include <MSL/math_ppc.h>
-#include <MSL/trigf.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/memory.h>
+
+/* 200460 */ static void fn_80200460(void* user_data, int joint_id,
+                                     CollData* coll, int coll_x50,
+                                     mpLib_GroundEnum ground_kind,
+                                     float delta_y);
+/* 200578 */ static void grRCruise_80200578(void* user_data, int joint_id,
+                                            CollData* coll, int coll_x50,
+                                            mpLib_GroundEnum ground_kind,
+                                            float delta_y);
+/* 2010A4 */ static void grRCruise_802010A4(void* user_data, int joint_id,
+                                            CollData* coll, int coll_x50,
+                                            mpLib_GroundEnum ground_kind,
+                                            float delta_y);
 
 static void sdata2_order(void)
 {
@@ -222,23 +227,23 @@ void grRCruise_801FF444(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     mpJointSetCb1(5, gobj, grRCruise_80200578);
-    mpJointSetCb1(27, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
-    mpJointSetCb1(36, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
-    mpJointSetCb1(37, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
-    mpJointSetCb1(38, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
-    mpJointSetCb1(39, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
-    mpJointSetCb1(40, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
-    mpJointSetCb1(41, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
-    mpJointSetCb1(42, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
-    mpJointSetCb1(43, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
-    mpJointSetCb1(28, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
-    mpJointSetCb1(29, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
-    mpJointSetCb1(30, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
-    mpJointSetCb1(31, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
-    mpJointSetCb1(32, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
-    mpJointSetCb1(33, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
-    mpJointSetCb1(34, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
-    mpJointSetCb1(35, gobj, (mpLib_Callback) (Event) grRCruise_802010A4);
+    mpJointSetCb1(27, gobj, grRCruise_802010A4);
+    mpJointSetCb1(36, gobj, grRCruise_802010A4);
+    mpJointSetCb1(37, gobj, grRCruise_802010A4);
+    mpJointSetCb1(38, gobj, grRCruise_802010A4);
+    mpJointSetCb1(39, gobj, grRCruise_802010A4);
+    mpJointSetCb1(40, gobj, grRCruise_802010A4);
+    mpJointSetCb1(41, gobj, grRCruise_802010A4);
+    mpJointSetCb1(42, gobj, grRCruise_802010A4);
+    mpJointSetCb1(43, gobj, grRCruise_802010A4);
+    mpJointSetCb1(28, gobj, grRCruise_802010A4);
+    mpJointSetCb1(29, gobj, grRCruise_802010A4);
+    mpJointSetCb1(30, gobj, grRCruise_802010A4);
+    mpJointSetCb1(31, gobj, grRCruise_802010A4);
+    mpJointSetCb1(32, gobj, grRCruise_802010A4);
+    mpJointSetCb1(33, gobj, grRCruise_802010A4);
+    mpJointSetCb1(34, gobj, grRCruise_802010A4);
+    mpJointSetCb1(35, gobj, grRCruise_802010A4);
     gp->u.rcruise.x10 = 0;
 }
 
@@ -589,25 +594,26 @@ void grRCruise_80200154(Ground_GObj* gobj)
 
 void grRCruise_8020045C(Ground_GObj* arg) {}
 
-void fn_80200460(Ground* gp_arg, s32 joint_id, CollData* cd, s32 arg3,
-                 mpLib_GroundEnum arg4, f32 arg5)
+/// @copydoc mpLib_JointCollisionCallback
+void fn_80200460(void* user_data, int joint_id, CollData* coll, int coll_x50,
+                 mpLib_GroundEnum ground_kind, float delta_y)
 {
-    HSD_GObj* gobj = (HSD_GObj*) gp_arg;
-    Ground* gp = HSD_GObjGetUserData(gobj);
+    HSD_GObj* gobj = user_data;
+    Ground* gp1 = HSD_GObjGetUserData(gobj); ///< @todo weird regswap
     int i;
     PAD_STACK(16);
 
-    if ((s32) cd->x34_flags.b1234 == 1) {
+    if ((s32) coll->x34_flags.b1234 == 1) {
         for (i = 0; i < 3; i++) {
-            if (gp->u.rcruise.x3C[i].x02 == joint_id) {
-                u8 state = gp->u.rcruise.x3C[i].x00;
+            if (gp1->u.rcruise.x3C[i].x02 == joint_id) {
+                u8 state = gp1->u.rcruise.x3C[i].x00;
                 if (state == 1 || state == 3 || state == 4) {
-                    gp->u.rcruise.x3C[i].x04 = 0;
-                    grRCruise_80201B60(gp->u.rcruise.x3C[i].x0C->child, 1);
+                    gp1->u.rcruise.x3C[i].x04 = 0;
+                    grRCruise_80201B60(gp1->u.rcruise.x3C[i].x0C->child, 1);
                     grAnime_801C7A94(gobj, grRc_804D4790[i], 1, 1.0f);
-                    gp->u.rcruise.x3C[i].x00 = 2;
+                    gp1->u.rcruise.x3C[i].x00 = 2;
                 }
-                gp->u.rcruise.x3C[i].x08++;
+                gp1->u.rcruise.x3C[i].x08++;
                 break;
             }
         }
@@ -629,40 +635,45 @@ void grRCruise_80200540(Ground_GObj* gobj)
     gp->u.rcruise.x2C = 0;
 }
 
-void grRCruise_80200578(Ground* gp_arg, s32 joint_id, CollData* cd, s32 arg3,
-                        mpLib_GroundEnum arg4, f32 arg5)
+/// @copydoc mpLib_JointCollisionCallback
+void grRCruise_80200578(void* user_data, int joint_id, CollData* coll,
+                        int coll_x50, mpLib_GroundEnum ground_kind,
+                        float delta_y)
 {
-    UNUSED u8 pad[8];
-    Point3d pos;
-    HSD_GObj* gobj = (HSD_GObj*) gp_arg;
-    Ground* gp = HSD_GObjGetUserData(gobj);
-    HSD_JObj* jobj = Ground_801C3FA4(gobj, 8);
-    f32 dx;
-    f32 dy;
-    f32 dist;
     PAD_STACK(8);
-
-    if ((s32) cd->x34_flags.b1234 != 1 && (s32) cd->x34_flags.b1234 != 2 &&
-        (s32) cd->x34_flags.b1234 != 3)
     {
-        return;
-    }
+        Vec3 pos;
+        HSD_GObj* gobj = (HSD_GObj*) user_data;
+        Ground* gp = HSD_GObjGetUserData(gobj);
+        HSD_JObj* jobj = Ground_801C3FA4(gobj, 8);
+        f32 dx;
+        f32 dy;
+        f32 dist;
+        PAD_STACK(8);
 
-    if (arg3 > 1000.0f) {
-        arg3 = 1000;
-    }
-    lb_8000B1CC(jobj, NULL, &pos);
-    dx = pos.x - cd->cur_pos.x;
-    dy = pos.y - cd->cur_pos.y;
-    dist = sqrtf(dy * dy + dx * dx);
-    if (dist > 4.0f) {
-        if (pos.x < cd->cur_pos.x) {
-            gp->u.rcruise.x24 += dist * (arg3 / 1000.0f);
-        } else {
-            gp->u.rcruise.x28 += dist * (arg3 / 1000.0f);
+        if ((s32) coll->x34_flags.b1234 != 1 &&
+            (s32) coll->x34_flags.b1234 != 2 &&
+            (s32) coll->x34_flags.b1234 != 3)
+        {
+            return;
         }
+
+        if (coll_x50 > 1000.0f) {
+            coll_x50 = 1000;
+        }
+        lb_8000B1CC(jobj, NULL, &pos);
+        dx = pos.x - coll->cur_pos.x;
+        dy = pos.y - coll->cur_pos.y;
+        dist = sqrtf(dy * dy + dx * dx);
+        if (dist > 4.0f) {
+            if (pos.x < coll->cur_pos.x) {
+                gp->u.rcruise.x24 += dist * (coll_x50 / 1000.0f);
+            } else {
+                gp->u.rcruise.x28 += dist * (coll_x50 / 1000.0f);
+            }
+        }
+        gp->u.rcruise.x34++;
     }
-    gp->u.rcruise.x34++;
 }
 
 void grRCruise_8020071C(Ground_GObj* gobj)
@@ -863,15 +874,12 @@ void grRCruise_80200C04(Ground_GObj* gobj)
     }
 }
 
-// TODO: is this GET_GROUND? calling it directly didn't work.
-static inline Ground* grRCruise_802010A4_inline(Ground_GObj* arg0)
+/// @copydoc mpLib_JointCollisionCallback
+void grRCruise_802010A4(void* user_data, int joint_id, CollData* coll,
+                        int coll_x50, mpLib_GroundEnum ground_kind,
+                        float delta_y)
 {
-    return arg0->user_data;
-}
-
-void grRCruise_802010A4(Ground_GObj* gobj, s32 id, CollData* coll)
-{
-    Ground* gp = grRCruise_802010A4_inline(gobj);
+    Ground* gp = HSD_GObjGetUserData(user_data); ///< @todo weird regswap
     s32 i;
 
     if ((s32) coll->x34_flags.b1234 != 1) {
@@ -880,7 +888,7 @@ void grRCruise_802010A4(Ground_GObj* gobj, s32 id, CollData* coll)
 
     for (i = 0; i < 17; i++) {
         struct grRCruise_Entry* entry = &gp->u.rcruise.entries[i];
-        if (entry->x02 == id) {
+        if (entry->x02 == joint_id) {
             if (entry->x00 == 0) {
                 entry->x04 = 0;
                 entry->x00 = 1;

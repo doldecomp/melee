@@ -1,5 +1,5 @@
 #include <math.h>
-#include <trigf.h> // IWYU pragma: keep
+#include <trigf.h>
 #include <MetroTRK/intrinsics.h>
 
 /* 022DF8 */ static float lb_sqrtf(float x);

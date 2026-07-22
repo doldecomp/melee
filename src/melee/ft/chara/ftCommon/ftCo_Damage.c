@@ -57,11 +57,11 @@
 #include <common_structs.h>
 #include <math.h>
 #include <math_ppc.h>
+#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <baselib/mtx.h>
 #include <baselib/random.h>
 #include <MetroTRK/intrinsics.h>
-#include <MSL/trigf.h>
 
 int ftCo_803C5520[2][12] = {
     { 81, 78, 75, 82, 79, 76, 83, 80, 77, 89, 88, 87 },

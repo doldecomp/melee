@@ -24,10 +24,10 @@
 #include "ft/types.h"
 #include "ftPurin/ftPr_Init.h"
 #include "ftPurin/types.h"
-#include "MSL/trigf.h"
 
 #include <common_structs.h>
 #include <math.h>
+#include <trigf.h>
 #include <baselib/archive.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>

@@ -1,17 +1,20 @@
 #ifndef __GALE01_1D5238
 #define __GALE01_1D5238
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "gr/types.h"
 
 #include "mp/forward.h"
 
-/* 1D7700 */ static void fn_801D7700(Ground* gp, s32, CollData*, s32,
-                                     mpLib_GroundEnum arg4, float);
-/* 1D7E60 */ static void fn_801D7E60(Ground* gp, s32, CollData*, s32,
-                                     mpLib_GroundEnum arg4, float);
+/* 1D7700 */ static void fn_801D7700(void* user_data, int joint_id,
+                                     CollData* coll, int coll_x50,
+                                     mpLib_GroundEnum ground_kind,
+                                     float delta_y);
+/* 1D7E60 */ static void fn_801D7E60(void* user_data, int joint_id,
+                                     CollData* coll, int coll_x50,
+                                     mpLib_GroundEnum ground_kind,
+                                     float delta_y);
 /* 1D8134 */ static int fn_801D8134(HSD_GObj* arg0, HSD_GObj* arg1);
 /* 1D8444 */ static DynamicsDesc* grKongo_801D8444(enum_t);
 
