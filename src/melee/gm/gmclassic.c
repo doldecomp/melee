@@ -799,7 +799,7 @@ void gmClassic_801B3500(GameScene* arg0)
     }
 
     {
-        InternalStageId stage_id;
+        ExternalStageId stage_id;
         if (entry->x1 == 0x80 && entry->x2 == 1) {
             stage_id = (u16) gm_801647F8(ad->x0.ckind);
         } else {
