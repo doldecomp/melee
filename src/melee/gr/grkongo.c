@@ -1283,84 +1283,16 @@ void fn_801D542C(HSD_GObj* arg0)
     gp->u.kongo.xE4 = (s16) ((range * rand) + min);
 }
 
-/// #grKongo_801D5490
-
-/// #grKongo_801D5574
-
-/// #grKongo_801D557C
-
-/// #grKongo_801D55D4
-
-/// #grKongo_801D55D8
-
-/// #grKongo_801D5774
-
-/// #grKongo_801D577C
-
-/// #grKongo_801D5FA4
-
-/// #grKongo_801D5FA8
-
-/// #grKongo_801D5FD4
-
-/// #grKongo_801D5FDC
-
-/// #grKongo_801D5FE0
-
-/// #grKongo_801D5FE4
-
-/// #grKongo_801D6028
-
-/// #grKongo_801D6030
-
-/// #grKongo_801D6034
-
-/// #grKongo_801D6038
-
-/// #grKongo_801D6064
-
-/// #grKongo_801D606C
-
-/// #grKongo_801D6070
-
-/// #grKongo_801D6074
-
-/// #grKongo_801D6190
-
-/// #grKongo_801D6198
-
-/// #grKongo_801D6378
-
-/// #grKongo_801D637C
-
-/// #grKongo_801D64B4
-
-/// #grKongo_801D64BC
-
-/// #grKongo_801D6518
-
-/// #grKongo_801D651C
-
-/// #grKongo_801D6660
-
-/// #grKongo_801D6668
-
-/// #grKongo_801D69AC
-
-/// #grKongo_801D69B0
-
-/// #grKongo_801D6AFC
-
-/// #grKongo_801D7134
-
-static void fn_801D7700(Ground* gp, s32 arg1, CollData* cd, s32 arg3,
-                        mpLib_GroundEnum arg4, float arg8)
+/// @copydoc mpLib_JointCollisionCallback
+void fn_801D7700(void* user_data, int joint_id, CollData* coll, int coll_x50,
+                 mpLib_GroundEnum ground_kind, float delta_y)
 {
+    Ground* gp = user_data;
     s32 idx;
     s32 idx2;
     f32 ratio;
-    Vec3* cur = &cd->cur_pos;
-    s32 type = cd->x34_flags.b1234;
+    Vec3* cur = &coll->cur_pos;
+    s32 type = coll->x34_flags.b1234;
     f32 segment_size;
     f32 x1;
     f32 y1;
@@ -1368,7 +1300,7 @@ static void fn_801D7700(Ground* gp, s32 arg1, CollData* cd, s32 arg3,
     f32 y2;
 
     if (type == 1 || type == 3) {
-        if (arg4 == mpLib_GroundEnum_Unk1) {
+        if (ground_kind == mpLib_GroundEnum_Unk1) {
             mpVtxGetPos(0x1D, &x1, &y1);
             mpVtxGetPos(0x1A, &x2, &y2);
 
@@ -1562,10 +1494,12 @@ void grKongo_801D7BBC(HSD_GObj* gobj)
     }
 }
 
-void fn_801D7E60(Ground* gp, s32 arg1, CollData* arg2, s32 arg3,
-                 mpLib_GroundEnum arg4, float arg8)
+/// @copydoc mpLib_JointCollisionCallback
+void fn_801D7E60(void* user_data, int joint_id, CollData* coll, int coll_x50,
+                 mpLib_GroundEnum ground_kind, float delta_y)
 {
-    if (arg4 == mpLib_GroundEnum_Unk2) {
+    Ground* gp = user_data;
+    if (ground_kind == mpLib_GroundEnum_Unk2) {
         gp->u.kongo3.xC6 = gp->u.kongo3.xC8 + 1;
     }
 }
@@ -1722,10 +1656,6 @@ void grKongo_801D8270(Ground_GObj* gobj)
         gp->u.inishie2.xC6 = 2;
     }
 }
-
-/// #grKongo_801D828C
-
-/// #grKongo_801D8314
 
 DynamicsDesc* grKongo_801D8444(enum_t arg)
 {

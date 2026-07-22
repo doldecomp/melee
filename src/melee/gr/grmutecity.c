@@ -1,22 +1,22 @@
 #include "grmutecity.h"
 
+#include "grdatfiles.h"
+#include "grdisplay.h"
+#include "grfzerocar.h"
+#include "grlib.h"
+#include "grmaterial.h"
+
+#include "grmutecity.static.h"
+
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
 #include "types.h"
 
 #include <platform.h>
 
 #include "cm/camera.h"
-
-#include "forward.h"
-
-#include "gr/grdatfiles.h"
-#include "gr/grdisplay.h"
-#include "gr/grfzerocar.h"
-#include "gr/grlib.h"
-#include "gr/grmaterial.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/stage.h"
 #include "if/ifhazard.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
@@ -24,8 +24,6 @@
 #include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
-#include "MSL/math.h"
-#include "sysdolphin/baselib/spline.h"
 
 #include <math_ppc.h>
 #include <trigf.h>
@@ -36,14 +34,18 @@
 #include <baselib/lobj.h>
 #include <baselib/psappsrt.h>
 #include <baselib/psstructs.h>
-
-const Vec3 grMc_803B81B8 = { 0.0f, 0.0f, 0.0f };
+#include <sysdolphin/baselib/spline.h>
 
 typedef void (*grMc_SpeedFn)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32);
 
-static s32 grMc_8049F440[30];
+/* 1F2B58 */ static void fn_801F2B58(void* user_data, int joint_id,
+                                     CollData* coll, int coll_x50,
+                                     mpLib_GroundEnum ground_kind,
+                                     float delta_y);
 
-#include "grmutecity.static.h"
+const Vec3 grMc_803B81B8 = { 0.0f, 0.0f, 0.0f };
+
+static s32 grMc_8049F440[30];
 
 u16 grMc_803E30B0[10] = { 6, 29, 6, 7, 29, 8, 8, 29, 9 };
 
@@ -1918,10 +1920,11 @@ void grMuteCity_801F2AB0(s32 arg0, HSD_JObj* arg1)
     }
 }
 
-void fn_801F2B58(Ground* gp, s32 arg1, CollData* cd, s32 arg3,
-                 mpLib_GroundEnum arg4, f32 arg5)
+/// @copydoc mpLib_JointCollisionCallback
+void fn_801F2B58(void* user_data, int joint_id, CollData* coll, int coll_x50,
+                 mpLib_GroundEnum ground_kind, float delta_y)
 {
-    s32 b1234 = cd->x34_flags.b1234;
+    s32 b1234 = coll->x34_flags.b1234;
 
     if (grMc_804D69D4 != 1) {
         return;
@@ -1931,23 +1934,23 @@ void fn_801F2B58(Ground* gp, s32 arg1, CollData* cd, s32 arg3,
         return;
     }
 
-    if (arg4 != mpLib_GroundEnum_Unk2) {
+    if (ground_kind != mpLib_GroundEnum_Unk2) {
         return;
     }
 
-    if (cd->x0_gobj == NULL) {
+    if (coll->x0_gobj == NULL) {
         return;
     }
 
-    if (cd->x0_gobj->p_link != 9) {
+    if (coll->x0_gobj->p_link != 9) {
         return;
     }
 
-    if (cd->x0_gobj == NULL) {
+    if (coll->x0_gobj == NULL) {
         return;
     }
 
-    cd->x34_flags.b7 = 1;
+    coll->x34_flags.b7 = 1;
 }
 
 DynamicsDesc* grMuteCity_801F2BBC(enum_t arg0)

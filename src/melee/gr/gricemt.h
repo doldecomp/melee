@@ -130,12 +130,6 @@ extern f32 grIm_804DB570;
 /* 1F9150 */ s32 fn_801F9150(HSD_GObj*, s32*);
 /* 1F91A8 */ int fn_801F91A8(Ground_GObj*);
 /* 1F929C */ void grIceMt_801F929C(HSD_GObj* arg0, void* arg1);
-/* 1F9338 */ void fn_801F9338(Ground*, int, CollData*, s32, mpLib_GroundEnum,
-                              float);
-/* 1F9448 */ void fn_801F9448(Ground*, int, CollData*, s32, mpLib_GroundEnum,
-                              float);
-/* 1F9558 */ void fn_801F9558(Ground*, int, CollData*, s32, mpLib_GroundEnum,
-                              float);
 /* 1F9668 */ void grIceMt_801F9668(float);
 /* 1F96E0 */ float grIceMt_801F96E0(struct grIceMt_GroundVars*, float);
 /* 1F98A8 */ void grIceMt_801F98A8(HSD_GObj* param1);
@@ -149,8 +143,6 @@ extern f32 grIm_804DB570;
 /* 1FA500 */ int grIceMt_801FA500(HSD_GObj*, HSD_JObj*);
 /* 1FA6D8 */ void grIceMt_801FA6D8(HSD_GObj*);
 /* 1FA728 */ void grIceMt_801FA728(Vec3*);
-/* 1FA7F0 */ void grIceMt_801FA7F0(Ground*, s32, CollData*, s32,
-                                   mpLib_GroundEnum, float);
 /* 1FA854 */ void grIceMt_801FA854(void);
 /* 1FA8F8 */ DynamicsDesc* grIceMt_801FA8F8(enum_t id);
 /* 1FA900 */ bool grIceMt_801FA900(Vec3* a, int id, HSD_JObj* jobj);

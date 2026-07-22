@@ -66,10 +66,8 @@ struct unkCastle {
 /* 1CF300 */ bool grCastle_801CF300(Ground_GObj*);
 /* 1CF308 */ void grCastle_801CF308(Ground_GObj*);
 /* 1CF74C */ void grCastle_801CF74C(Ground_GObj*);
-/* 1CF750 */ void grCastle_801CF750(Ground*, s32, CollData*, s32,
-                                    mpLib_GroundEnum, f32);
 /* 1CF7B0 */ void grCastle_801CF7B0(Ground_GObj*);
-/* 1CF868 */ HSD_JObj* grCastle_801CF868(Ground_GObj*);
+/* 1CF868 */ void grCastle_801CF868(Ground_GObj*);
 /* 1CFAFC */ void fn_801CFAFC(Item_GObj*, Ground*, Vec3*, HSD_GObj*);
 /* 1CFB68 */ void fn_801CFB68(Item_GObj*, Ground*, HSD_GObj*);
 /* 1CFBD4 */ s32 grCastle_801CFBD4(Ground_GObj* gobj, s32 arg1);

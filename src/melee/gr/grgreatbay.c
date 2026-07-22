@@ -33,32 +33,106 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
+/* 1F5914 */ static void grGreatBay_801F5914(void* user_data, int joint_id,
+                                             CollData* coll, int coll_x50,
+                                             mpLib_GroundEnum ground_kind,
+                                             float delta_y);
+/* 1F60C4 */ static void grGreatBay_801F60C4(void* user_data, int joint_id,
+                                             CollData* coll, int coll_x50,
+                                             mpLib_GroundEnum ground_kind,
+                                             float delta_y);
+
 S16Vec3 grGb_803E3E60[] = { { 0, 2, 49 }, { 1, 1, 2 },  { 2, 1, 3 },
                             { 4, 1, 34 }, { 3, 1, 38 }, { 5, 10, 0 } };
 
 StageCallbacks grGb_803E3E84[11] = {
-    { grGreatBay_801F4404, grGreatBay_801F4430, grGreatBay_801F4438,
-      grGreatBay_801F443C, 0 },
-    { grGreatBay_801F4694, grGreatBay_801F4994, grGreatBay_801F499C,
-      grGreatBay_801F545C, 0 }, // turtle
-    { grGreatBay_801F454C, grGreatBay_801F4650, grGreatBay_801F4658,
-      grGreatBay_801F4690, 0xC0000000 }, // main stage
-    { grGreatBay_801F4440, grGreatBay_801F44A0, grGreatBay_801F44A8,
-      grGreatBay_801F44AC, 0 }, // background
-    { grGreatBay_801F44B0, grGreatBay_801F4510, grGreatBay_801F4518,
-      grGreatBay_801F451C, 0 }, // foreground water
-    { grGreatBay_801F598C, grGreatBay_801F59F0, grGreatBay_801F59F8,
-      grGreatBay_801F59FC, 0 }, // giant 1
-    { grGreatBay_801F598C, grGreatBay_801F59F0, grGreatBay_801F59F8,
-      grGreatBay_801F59FC, 0 }, // giant 2
-    { grGreatBay_801F598C, grGreatBay_801F59F0, grGreatBay_801F59F8,
-      grGreatBay_801F59FC, 0 }, // giant 3
-    { grGreatBay_801F598C, grGreatBay_801F59F0, grGreatBay_801F59F8,
-      grGreatBay_801F59FC, 0 }, // giant 4
-    { grGreatBay_801F5A00, grGreatBay_801F5AF0, grGreatBay_801F5AF8,
-      grGreatBay_801F5D48, 0 }, // moon
-    { grGreatBay_801F5460, grGreatBay_801F55F8, grGreatBay_801F5600,
-      grGreatBay_801F5988, 0 } // tingle
+    {
+        grGreatBay_801F4404,
+        grGreatBay_801F4430,
+        grGreatBay_801F4438,
+        grGreatBay_801F443C,
+        0,
+    },
+    {
+        // turtle
+        grGreatBay_801F4694,
+        grGreatBay_801F4994,
+        grGreatBay_801F499C,
+        grGreatBay_801F545C,
+        0,
+    },
+    {
+        // main stage
+        grGreatBay_801F454C,
+        grGreatBay_801F4650,
+        grGreatBay_801F4658,
+        grGreatBay_801F4690,
+        0xC0000000,
+    },
+    {
+        // background
+        grGreatBay_801F4440,
+        grGreatBay_801F44A0,
+        grGreatBay_801F44A8,
+        grGreatBay_801F44AC,
+        0,
+    },
+    {
+        // foreground water
+        grGreatBay_801F44B0,
+        grGreatBay_801F4510,
+        grGreatBay_801F4518,
+        grGreatBay_801F451C,
+        0,
+    },
+    {
+        // giant 1
+        grGreatBay_801F598C,
+        grGreatBay_801F59F0,
+        grGreatBay_801F59F8,
+        grGreatBay_801F59FC,
+        0,
+    },
+    {
+        // giant 2
+        grGreatBay_801F598C,
+        grGreatBay_801F59F0,
+        grGreatBay_801F59F8,
+        grGreatBay_801F59FC,
+        0,
+    },
+    {
+        // giant 3
+        grGreatBay_801F598C,
+        grGreatBay_801F59F0,
+        grGreatBay_801F59F8,
+        grGreatBay_801F59FC,
+        0,
+    },
+    {
+        // giant 4
+        grGreatBay_801F598C,
+        grGreatBay_801F59F0,
+        grGreatBay_801F59F8,
+        grGreatBay_801F59FC,
+        0,
+    },
+    {
+        // moon
+        grGreatBay_801F5A00,
+        grGreatBay_801F5AF0,
+        grGreatBay_801F5AF8,
+        grGreatBay_801F5D48,
+        0,
+    },
+    {
+        // tingle
+        grGreatBay_801F5460,
+        grGreatBay_801F55F8,
+        grGreatBay_801F5600,
+        grGreatBay_801F5988,
+        0,
+    },
 };
 
 StageData grGb_803E3F6C = {
@@ -642,17 +716,20 @@ void grGreatBay_801F5600(Ground_GObj* gobj)
     Ground_801C2FE0(gobj);
 }
 
-void grGreatBay_801F5914(Ground* arg0, s32 arg1, CollData* arg2, s32 arg3,
-                         enum mpLib_GroundEnum arg4, f32 farg0)
+/// @copydoc mpLib_JointCollisionCallback
+void grGreatBay_801F5914(void* user_data, int joint_id, CollData* coll,
+                         int coll_x50, mpLib_GroundEnum ground_kind,
+                         float delta_y)
 {
+    Ground* gp = user_data;
     s32 temp_r0;
     PAD_STACK(12);
 
-    temp_r0 = arg2->x34_flags.b1234;
+    temp_r0 = coll->x34_flags.b1234;
     if (temp_r0 == 1 || (s32) temp_r0 == 2 || temp_r0 == 3) {
-        arg0->u.greatbay.xD4 = ((u32) arg2->env_flags & Collide_LedgeGrabMask);
-        arg0->u.greatbay.xD8 += 1;
-        arg0->u.greatbay.xE0 += arg3 / 100.0f;
+        gp->u.greatbay.xD4 = ((u32) coll->env_flags & Collide_LedgeGrabMask);
+        gp->u.greatbay.xD8 += 1;
+        gp->u.greatbay.xE0 += coll_x50 / 100.0f;
     }
 }
 
@@ -840,35 +917,40 @@ void grGreatBay_801F5E28(HSD_GObj* gobj)
     }
 }
 
-void grGreatBay_801F60C4(Ground* gp, s32 arg1, CollData* arg2, s32 arg3,
-                         enum mpLib_GroundEnum arg4, f32 farg0)
+/// @copydoc mpLib_JointCollisionCallback
+void grGreatBay_801F60C4(void* user_data, int joint_id, CollData* coll,
+                         int coll_x50, mpLib_GroundEnum ground_kind,
+                         float delta_y)
 {
+    Ground* gp = user_data;
     s32 temp_r0;
     PAD_STACK(4);
 
-    temp_r0 = arg2->x34_flags.b1234;
+    temp_r0 = coll->x34_flags.b1234;
     if (temp_r0 == 1 || temp_r0 == 3) {
         HSD_JObj* jobj;
-        if (arg4 == 1) {
-            arg3 =
-                (s32) ((f32) arg3 * grGb_804D69E0.x0->floatfloor_landing_rate);
+        if (ground_kind == 1) {
+            coll_x50 = (s32) ((f32) coll_x50 *
+                              grGb_804D69E0.x0->floatfloor_landing_rate);
         }
         if ((jobj = gp->u.greatbay3.jobj) != NULL) {
             f32 dx, abs_dx;
             Vec3 pos;
             f32 t, rot_amount, disp_amount, y_amount;
             lb_8000B1CC(jobj, NULL, &pos);
-            dx = arg2->cur_pos.x - pos.x;
+            dx = coll->cur_pos.x - pos.x;
             t = ABS(dx) / 15.0f;
             if (t > 1.0f) {
                 t = 1.0f;
             }
-            rot_amount = t * (0.017453292f *
-                              (arg3 * grGb_804D69E0.x0->floatfloor_slant_mul +
-                               grGb_804D69E0.x0->floatfloor_slant_add));
-            disp_amount = t * (arg3 * grGb_804D69E0.x0->floatfloor_slide_mul +
-                               grGb_804D69E0.x0->floatfloor_slide_add);
-            y_amount = arg3 * grGb_804D69E0.x0->floatfloor_down_mul +
+            rot_amount =
+                t * (0.017453292f *
+                     (coll_x50 * grGb_804D69E0.x0->floatfloor_slant_mul +
+                      grGb_804D69E0.x0->floatfloor_slant_add));
+            disp_amount =
+                t * (coll_x50 * grGb_804D69E0.x0->floatfloor_slide_mul +
+                     grGb_804D69E0.x0->floatfloor_slide_add);
+            y_amount = coll_x50 * grGb_804D69E0.x0->floatfloor_down_mul +
                        grGb_804D69E0.x0->floatfloor_down_add;
             if (dx < 0.0f) {
                 gp->u.greatbay3.translation.z += rot_amount;

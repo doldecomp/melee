@@ -21,6 +21,11 @@
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 
+/* 2024F0 */ static void grYorster_802024F0(void* user_data, int joint_id,
+                                            CollData* coll, int coll_x50,
+                                            mpLib_GroundEnum ground_kind,
+                                            float delta_y);
+
 StageCallbacks grYt_803E5198[2] = {
     { grYorster_80202124, grYorster_80202150, grYorster_80202158,
       grYorster_8020215C, NULL },
@@ -232,11 +237,14 @@ void grYorster_80202428(HSD_GObj* item_gobj, Ground* gp, Vec3* pos,
     }
 }
 
-void grYorster_802024F0(Ground* gp, s32 joint_id, CollData* coll_data,
-                        s32 unused, mpLib_GroundEnum ground_kind, f32 value)
+/// @copydoc mpLib_JointCollisionCallback
+void grYorster_802024F0(void* user_data, int joint_id, CollData* coll,
+                        int coll_x50, mpLib_GroundEnum ground_kind,
+                        float delta_y)
 {
-    HSD_GObj* gobj = coll_data->x0_gobj;
-    s32 env = coll_data->x34_flags.b1234;
+    Ground* gp = user_data;
+    HSD_GObj* gobj = coll->x0_gobj;
+    s32 env = coll->x34_flags.b1234;
     s32 i;
     PAD_STACK(8);
 
@@ -244,7 +252,7 @@ void grYorster_802024F0(Ground* gp, s32 joint_id, CollData* coll_data,
         return;
     }
 
-    if (env == 1 && ftLib_800873F4((0, coll_data->x0_gobj))) {
+    if (env == 1 && ftLib_800873F4((0, coll->x0_gobj))) {
         return;
     }
 
@@ -253,15 +261,15 @@ void grYorster_802024F0(Ground* gp, s32 joint_id, CollData* coll_data,
         Vec3 pos;
 
         ftLib_80086BEC(gobj, &pos);
-        value = pos.y;
-        if (value >= grYt_804D6A20.x0->x00) {
+        delta_y = pos.y;
+        if (delta_y >= grYt_804D6A20.x0->x00) {
             ftLib_80086A4C(gobj, (f32) grYt_804D6A20.x0->x10);
         }
         break;
     }
     case 2:
     case 3:
-        if (value >= grYt_804D6A20.x0->x00) {
+        if (delta_y >= grYt_804D6A20.x0->x00) {
             it_8026B718(gobj, (f32) grYt_804D6A20.x0->x10);
         }
         break;
@@ -271,7 +279,7 @@ void grYorster_802024F0(Ground* gp, s32 joint_id, CollData* coll_data,
         if (joint_id ==
             Ground_801C32D4(gp->map_id, gp->u.yorster.elements[i].x14))
         {
-            gp->u.yorster.elements[i].x08 += value;
+            gp->u.yorster.elements[i].x08 += delta_y;
             break;
         }
     }
