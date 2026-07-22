@@ -25,9 +25,10 @@
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 #include "MSL/math.h"
-#include "MSL/trigf.h"
 #include "sysdolphin/baselib/spline.h"
 
+#include <math_ppc.h>
+#include <trigf.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -35,7 +36,6 @@
 #include <baselib/lobj.h>
 #include <baselib/psappsrt.h>
 #include <baselib/psstructs.h>
-#include <MSL/math_ppc.h>
 
 const Vec3 grMc_803B81B8 = { 0.0f, 0.0f, 0.0f };
 

@@ -22,10 +22,10 @@
 #include "mp/mplib.h"
 
 #include <string.h>
+#include <trigf.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
-#include <MSL/trigf.h>
 
 struct mpColl_80458810_t {
     /*  +0 */ int right[9];

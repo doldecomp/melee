@@ -21,7 +21,7 @@
 #include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
 
-#include <trigf.h> // IWYU pragma: keep
+#include <trigf.h>
 #include <dolphin/os.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>

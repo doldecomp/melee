@@ -20,9 +20,9 @@
 #include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
-#include "MSL/math_ppc.h"
 
 #include <math.h>
+#include <math_ppc.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>

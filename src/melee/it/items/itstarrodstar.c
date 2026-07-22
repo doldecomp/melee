@@ -18,7 +18,7 @@
 
 #include "lb/forward.h"
 
-#include <MSL/trigf.h>
+#include <trigf.h>
 
 ItemStateTable it_803F6530[] = { { 0, itStarrodstar_UnkMotion0_Anim,
                                    itStarrodstar_UnkMotion0_Phys,

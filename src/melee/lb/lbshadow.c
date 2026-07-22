@@ -1,5 +1,6 @@
 #include "lbshadow.h"
 
+#include <math_ppc.h>
 #include <dolphin/gx/GXVert.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -20,7 +21,6 @@
 #include <melee/gr/ground.h>
 #include <melee/lb/lbvector.h>
 #include <melee/lb/types.h>
-#include <MSL/math_ppc.h>
 
 void lbShadow_8000E9F0(Vec3* p, HSD_Spline* spline, f32 u)
 {

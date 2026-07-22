@@ -14,8 +14,8 @@
 #include "ty/toy.h"
 #include "ty/types.h"
 
-#include <math_ppc.h> // IWYU pragma: keep
-#include <trigf.h>    // IWYU pragma: keep
+#include <math_ppc.h>
+#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 #include <baselib/archive.h>

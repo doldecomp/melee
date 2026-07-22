@@ -9,8 +9,8 @@
 #include "lb/lbvector.h"
 #include "MSL/math.h"
 
+#include <trigf.h>
 #include <baselib/random.h>
-#include <MSL/trigf.h>
 
 ItemStateTable it_803F6568[] = {
     { 0, itSscopebeam_UnkMotion9_Anim, itSscopebeam_UnkMotion9_Phys,

@@ -18,9 +18,9 @@
 
 #include <__mem.h>
 #include <math.h>
+#include <trigf.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <MSL/trigf.h>
 
 HSD_ObjAllocData shadow_alloc_data;
 

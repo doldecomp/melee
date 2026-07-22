@@ -13,9 +13,9 @@
 #include "it/itmaplib.h"
 #include "lb/lbvector.h"
 
+#include <trigf.h>
 #include <baselib/random.h>
 #include <MSL/math.h>
-#include <MSL/trigf.h>
 
 ItemStateTable it_803F7D60[] = {
     { 0, itUnknown_UnkMotion0_Anim, itUnknown_UnkMotion0_Phys,

@@ -7,6 +7,7 @@
 #include "baselib/forward.h"
 #include "ft/forward.h"
 
+#include <trigf.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
@@ -41,7 +42,6 @@
 #include <melee/mn/mnmainrule.h>
 #include <melee/mn/mnname.h>
 #include <melee/mn/mnnamenew.h>
-#include <MSL/trigf.h>
 
 typedef struct CSSAllData {
     u8 gnw_name[0x1C];

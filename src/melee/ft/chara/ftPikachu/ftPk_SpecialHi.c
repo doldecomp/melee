@@ -28,8 +28,8 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <math_ppc.h> // IWYU pragma: keep
-#include <trigf.h>    // IWYU pragma: keep
+#include <math_ppc.h>
+#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
