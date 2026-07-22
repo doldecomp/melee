@@ -1086,7 +1086,7 @@ void fn_80186634(void* arg0)
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(0, NULL);
+    Stage_802251E8(ExternalStageID_Unk00, NULL);
     Item_80266FA8();
     Item_80266FCC();
     Stage_8022524C();
@@ -1446,7 +1446,7 @@ void fn_80187714(void)
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(64);
-    Stage_802251E8(0, NULL);
+    Stage_802251E8(ExternalStageID_Unk00, NULL);
     Stage_8022524C();
     Item_80266FA8();
     Item_80266FCC();
@@ -1771,7 +1771,8 @@ typedef struct gm_80187F48_EnterData {
     u16 stage_id;
 } gm_80187F48_EnterData;
 
-static inline enum_t gm_80187F48_GetStageId(gm_80187F48_EnterData* data)
+static inline ExternalStageId
+gm_80187F48_GetStageId(gm_80187F48_EnterData* data)
 {
     return data->stage_id;
 }

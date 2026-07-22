@@ -66,11 +66,11 @@ void un_8031F294(s32 arg0, s32 arg1)
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(0x1F, 0);
+    Stage_802251E8(ExternalStageID_BATTLE, 0);
     Item_80266FA8();
     Item_80266FCC();
     Stage_8022524C();
-    Stage_8022532C(0x1F, 0);
+    Stage_8022532C(ExternalStageID_BATTLE, 0);
     ftDemo_ObjAllocInit();
     Player_InitAllPlayers();
     Player_80036E20(arg0, un_804D6FC8, 3);

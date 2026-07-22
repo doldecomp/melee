@@ -77,15 +77,13 @@ static inline bool Stage_IsOutsideBlastZoneWithMargin(Vec3* pos, f32 margin)
 /* 224E64 */ void Stage_80224E64(enum_t, Vec3*);
 /* 224FDC */ bool Stage_80224FDC(Vec3*);
 /* 225074 */ s32 Stage_80225074(s32);
-/* 225194 */ enum_t Stage_80225194(void);
-/// An external stage ID indexes #unk_arr_803E9960, which maps it to an
-/// #InternalStageId.
-/* 22519C */ InternalStageId Stage_8022519C(enum_t external_id);
-/* 2251B4 */ void Stage_802251B4(enum_t external_id);
-/* 2251E8 */ void Stage_802251E8(enum_t external_id, s32*);
+/* 225194 */ ExternalStageId Stage_80225194(void);
+/* 22519C */ InternalStageId Stage_8022519C(ExternalStageId external_id);
+/* 2251B4 */ void Stage_802251B4(ExternalStageId external_id);
+/* 2251E8 */ void Stage_802251E8(ExternalStageId external_id, s32*);
 /* 22524C */ void Stage_8022524C(void);
 /* 225298 */ void Stage_80225298(void);
-/* 2252E4 */ void Stage_802252E4(enum_t external_id, HSD_GObj*);
-/* 22532C */ void Stage_8022532C(enum_t external_id, s32);
+/* 2252E4 */ void Stage_802252E4(ExternalStageId external_id, HSD_GObj*);
+/* 22532C */ void Stage_8022532C(ExternalStageId external_id, s32);
 
 #endif

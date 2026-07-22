@@ -148,11 +148,11 @@ void vi0801_OnEnter(void* unused)
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(0x49, 0);
+    Stage_802251E8(ExternalStageID_BIGBLUEROUTE, 0);
     Item_80266FA8();
     Item_80266FCC();
     Stage_8022524C();
-    Stage_8022532C(0x49, 0);
+    Stage_8022532C(ExternalStageID_BIGBLUEROUTE, 0);
 
     gobj = GObj_Create(0xB, 3, 0);
     fog = HSD_FogLoadDesc(un_804D6FB8->fogs->desc);
