@@ -24,7 +24,7 @@
 #include "lb/types.h"
 #include "mp/mplib.h"
 
-#include <trigf.h> // IWYU pragma: keep
+#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <baselib/archive.h>
 #include <baselib/gobj.h>

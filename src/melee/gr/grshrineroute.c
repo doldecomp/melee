@@ -26,14 +26,14 @@
 #include "mp/mplib.h"
 #include "pl/player.h"
 
+#include <math_ppc.h>
+#include <trigf.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/lobj.h>
 #include <baselib/random.h>
-#include <MSL/math_ppc.h>
-#include <MSL/trigf.h>
 
 s16 grSh_Route_803E58E0[8] = {
     0x33, 0x4F, 0x65, 0x66, 0x73, 0x74, 0x83, 0x00

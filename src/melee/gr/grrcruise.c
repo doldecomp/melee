@@ -29,6 +29,8 @@
 #include "sysdolphin/baselib/memory.h"
 
 #include <math.h>
+#include <math_ppc.h>
+#include <trigf.h>
 #include <baselib/archive.h>
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>
@@ -36,8 +38,6 @@
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
-#include <MSL/math_ppc.h>
-#include <MSL/trigf.h>
 
 static void sdata2_order(void)
 {

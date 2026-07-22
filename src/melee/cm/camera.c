@@ -35,7 +35,7 @@
 #include "pl/player.h"
 
 #include <math.h>
-#include <math_ppc.h> // IWYU pragma: keep
+#include <math_ppc.h>
 #include <baselib/controller.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>

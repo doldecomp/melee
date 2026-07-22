@@ -19,7 +19,7 @@
 #include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
 
-#include <math_ppc.h> // IWYU pragma: keep
+#include <math_ppc.h>
 #include <dolphin/os.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>

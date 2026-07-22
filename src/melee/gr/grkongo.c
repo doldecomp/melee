@@ -27,8 +27,8 @@
 
 #include "mp/mplib.h"
 #include "MSL/math.h"
-#include "MSL/math_ppc.h" // IWYU pragma: keep
 
+#include <math_ppc.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>

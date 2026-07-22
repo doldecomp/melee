@@ -7,7 +7,7 @@
 
 #include "baselib/debug.h"
 
-#include <math_ppc.h> // IWYU pragma: keep
+#include <math_ppc.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>

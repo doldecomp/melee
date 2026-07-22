@@ -86,6 +86,8 @@
 #include "sfx/crowdsfx.h"
 
 #include <common_structs.h>
+#include <math_ppc.h>
+#include <trigf.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os/OSError.h>
@@ -101,8 +103,6 @@
 #include <baselib/mtx.h>
 #include <baselib/random.h>
 #include <MSL/math.h>
-#include <MSL/math_ppc.h>
-#include <MSL/trigf.h>
 
 extern struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX];
 

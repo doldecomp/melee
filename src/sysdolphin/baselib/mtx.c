@@ -3,8 +3,8 @@
 #include "debug.h"
 #include "math.h"
 
-#include <MSL/math_ppc.h>
-#include <MSL/trigf.h>
+#include <math_ppc.h>
+#include <trigf.h>
 
 #define EPSILON 0.0000000001f
 #define FLOAT_MIN 1.1754943E-38f

@@ -18,7 +18,7 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <MSL/trigf.h>
+#include <trigf.h>
 
 /* 2D60C8 */ static bool itHinoarashi_UnkMotion2_Anim(Item_GObj* gobj);
 

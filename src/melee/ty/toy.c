@@ -2,7 +2,6 @@
 
 #include "m2c_macros.h"
 #include "math.h"
-#include "math_ppc.h" // IWYU pragma: keep
 #include "placeholder.h"
 #include "platform.h"
 #include "stddef.h"
@@ -10,7 +9,6 @@
 
 #include "toy.static.h"
 
-#include "trigf.h" // IWYU pragma: keep
 #include "tylist.h"
 #include "types.h"
 
@@ -36,11 +34,12 @@
 #include "mn/mnmain.h"
 #include "mn/mnsoundtest.h"
 #include "MSL/math.h"
-#include "MSL/math_ppc.h"
 #include "sc/types.h"
 #include "ty/toy.h"
 #include "ty/types.h"
 
+#include <math_ppc.h>
+#include <trigf.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>

@@ -21,6 +21,7 @@
 #include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
 
+#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -29,7 +30,6 @@
 #include <baselib/gobjuserdata.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
-#include <MSL/trigf.h>
 
 static struct {
     /* 00 */ int heli_wait;

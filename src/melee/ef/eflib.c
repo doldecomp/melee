@@ -32,8 +32,7 @@
 #include "MSL/math.h"
 
 #include <runtime.h>
-#include <trigf.h> // IWYU pragma: keep
-
+#include <trigf.h>
 // externs
 extern u32* ptclref_804D0E5C[65];
 extern EF_DAT_Entry efAsync_DatEntries[51];

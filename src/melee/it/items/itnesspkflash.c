@@ -16,9 +16,9 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "it/items/itnesspkflashexplode.h"
-#include "MSL/trigf.h"
 
 #include <math.h>
+#include <trigf.h>
 #include <baselib/jobj.h>
 
 /* 2AB29C */ static bool itNesspkflash_UnkMotion1_Coll(Item_GObj* gobj);
