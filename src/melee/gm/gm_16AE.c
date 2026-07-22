@@ -486,7 +486,7 @@ void fn_8016B7F8(void)
     PAD_STACK(4);
 
     ftLib_800868A4();
-    Stage_802252E4((InternalStageId) tmp->x24C8.xE, NULL);
+    Stage_802252E4(tmp->x24C8.xE, NULL);
     grStadium_801D4040();
     if (!tmp->x24C8.x1_3) {
         ifStatus_802F6EA4(4, -1, -1, 0, NULL, fn_8016B784);
@@ -2140,7 +2140,7 @@ void gm_8016EC28_OnEnter(void* arg0)
     un_802FD404();
     tmp2 = &lbl_8046B6A0;
     ftLib_800868A4();
-    Stage_802252E4((InternalStageId) tmp2->x24C8.xE, NULL);
+    Stage_802252E4(tmp2->x24C8.xE, NULL);
     grStadium_801D4040();
     if (!lbl_8046B6A0.x24C8.x1_3) {
         ifStatus_802F6EA4(4, -1, -1, 0, 0, fn_8016B784);

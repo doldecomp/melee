@@ -1086,7 +1086,7 @@ void fn_80186634(void* arg0)
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(InternalStageID_Unk00, NULL);
+    Stage_802251E8(0, NULL);
     Item_80266FA8();
     Item_80266FCC();
     Stage_8022524C();
@@ -1771,8 +1771,7 @@ typedef struct gm_80187F48_EnterData {
     u16 stage_id;
 } gm_80187F48_EnterData;
 
-static inline InternalStageId
-gm_80187F48_GetStageId(gm_80187F48_EnterData* data)
+static inline enum_t gm_80187F48_GetStageId(gm_80187F48_EnterData* data)
 {
     return data->stage_id;
 }

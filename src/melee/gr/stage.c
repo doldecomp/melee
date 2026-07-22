@@ -399,22 +399,22 @@ struct StructStageIDWithUnks unk_arr_803E9960[] = {
     { 36, 0, 0 },
 };
 
-s32 Stage_8022519C(InternalStageId idx)
+InternalStageId Stage_8022519C(enum_t external_id)
 {
-    return unk_arr_803E9960[idx].stage_id;
+    return unk_arr_803E9960[external_id].stage_id;
 }
 
-void Stage_802251B4(InternalStageId idx)
+void Stage_802251B4(enum_t external_id)
 {
-    Ground_801C06B8(unk_arr_803E9960[idx].stage_id);
+    Ground_801C06B8(unk_arr_803E9960[external_id].stage_id);
 }
 
-void Stage_802251E8(InternalStageId idx, s32* _)
+void Stage_802251E8(enum_t external_id, s32* _)
 {
     StructPairWithStageID local_data;
 
-    unk_struct_804D49E8.list_idx = idx;
-    unk_struct_804D49E8.unk_struct = &unk_arr_803E9960[idx];
+    unk_struct_804D49E8.list_idx = external_id;
+    unk_struct_804D49E8.unk_struct = &unk_arr_803E9960[external_id];
 
     local_data = unk_struct_804D49F0;
 
@@ -448,26 +448,26 @@ void Stage_80225298(void)
     Ground_801C0F78(&local_data);
 }
 
-void Stage_802252E4(InternalStageId idx, HSD_GObj* _)
+void Stage_802252E4(enum_t external_id, HSD_GObj* _)
 {
     StructPairWithStageID local_data;
 
     local_data = unk_struct_804D49F0;
 
     local_data.stage_id = unk_struct_804D49E8.unk_struct->stage_id;
-    local_data.list_idx = idx;
+    local_data.list_idx = external_id;
 
     Ground_801C0FB8(&local_data);
 }
 
-void Stage_8022532C(InternalStageId idx, s32 arg1)
+void Stage_8022532C(enum_t external_id, s32 arg1)
 {
     StructPairWithStageID local_data;
 
     local_data = unk_struct_804D49F0;
 
     local_data.stage_id = unk_struct_804D49E8.unk_struct->stage_id;
-    local_data.list_idx = idx;
+    local_data.list_idx = external_id;
 
     Ground_DemoInit(&local_data, arg1);
 }

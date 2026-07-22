@@ -83,13 +83,13 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(PURA, NULL);
+    Stage_802251E8(17, NULL);
     Item_80266FA8();
     Item_80266FCC();
     un_804D6F80 = Ground_801C0498();
     Ground_801C04BC(0.7f);
     Stage_8022524C();
-    Stage_8022532C(PURA, 0);
+    Stage_8022532C(17, 0);
     ftDemo_ObjAllocInit();
     Player_InitAllPlayers();
     Player_80036E20(char_kind, un_804D6F78, 3);
