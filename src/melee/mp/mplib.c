@@ -31,7 +31,6 @@
 #include <math.h>
 #include <math_ppc.h>
 #include <stddef.h>
-#include <string.h>
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 #include <sysdolphin/baselib/cobj.h>
@@ -922,10 +921,10 @@ void mpLibLoad(MapCollData* coll_data)
         joint->bounding_max.x = f31 * coll_data->joints[i].right_bound;
         joint->bounding_max.y = f31 * coll_data->joints[i].top_bound;
         joint->x20 = NULL;
-        joint->x28 = NULL;
-        joint->x24 = NULL;
-        joint->x30 = NULL;
-        joint->x2C = NULL;
+        joint->cb_data_0 = NULL;
+        joint->cb_0 = NULL;
+        joint->cb_data_1 = NULL;
+        joint->cb_1 = NULL;
         joint->xE = true;
         if (joint_prev == NULL) {
             jointListStart = joint;
@@ -5502,25 +5501,27 @@ void mpJointSetB10(int joint_id)
     joint->flags |= CollJoint_B10;
 }
 
-void mpJointSetCb1(int joint_id, void* obj, mpLib_Callback cb)
+void mpJointSetCb1(int joint_id, void* user_data,
+                   mpLib_JointCollisionCallback cb)
 {
     CollJoint* joint = &groundCollJoint[joint_id];
-    joint->x24 = cb;
-    joint->x28 = obj;
+    joint->cb_0 = cb;
+    joint->cb_data_0 = user_data;
 }
 
 void mpJointClearCb1(int joint_id)
 {
     CollJoint* joint = &groundCollJoint[joint_id];
-    joint->x24 = NULL;
-    joint->x28 = NULL;
+    joint->cb_0 = NULL;
+    joint->cb_data_0 = NULL;
 }
 
-void mpJointGetCb1(int joint_id, mpLib_Callback* arg1, Ground** arg2)
+void mpJointGetCb1(int joint_id, mpLib_JointCollisionCallback* cb,
+                   void** user_data)
 {
     CollJoint* joint = &groundCollJoint[joint_id];
-    *arg1 = joint->x24;
-    *arg2 = joint->x28;
+    *cb = joint->cb_0;
+    *user_data = joint->cb_data_0;
 }
 
 void mpLib_8005811C(CollData* coll, int ledge_id)
@@ -5528,8 +5529,8 @@ void mpLib_8005811C(CollData* coll, int ledge_id)
     if (ledge_id != -1) {
         int joint_id = mpJointFromLine(ledge_id);
         if (joint_id != -1) {
-            mpLib_Callback cb = groundCollJoint[joint_id].x24;
-            Ground* gp = groundCollJoint[joint_id].x28;
+            mpLib_JointCollisionCallback cb = groundCollJoint[joint_id].cb_0;
+            Ground* gp = groundCollJoint[joint_id].cb_data_0;
             if (cb != NULL) {
                 cb(gp, joint_id, coll, coll->x50, 3, 0.0F);
             }
@@ -5537,18 +5538,19 @@ void mpLib_8005811C(CollData* coll, int ledge_id)
     }
 }
 
-void mpJointSetCb2(int joint_id, Ground* arg1, mpLib_Callback arg2)
+void mpJointSetCb2(int joint_id, void* gp, mpLib_JointCollisionCallback cb)
 {
     CollJoint* joint = &groundCollJoint[joint_id];
-    joint->x2C = arg2;
-    joint->x30 = arg1;
+    joint->cb_1 = cb;
+    joint->cb_data_1 = gp;
 }
 
-void mpJointGetCb2(int joint_id, mpLib_Callback* cb, Ground** gr)
+void mpJointGetCb2(int joint_id, mpLib_JointCollisionCallback* cb,
+                   void** user_data)
 {
     CollJoint* joint = &groundCollJoint[joint_id];
-    *cb = joint->x2C;
-    *gr = joint->x30;
+    *cb = joint->cb_1;
+    *user_data = joint->cb_data_1;
 }
 
 static inline void mpLib_GetJointVtxRange(CollJoint* joint, int* start,

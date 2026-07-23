@@ -1,85 +1,21 @@
-#ifndef GALE01_04D164
-#define GALE01_04D164
+/** @file melee/mp/mplib.h
+ * @brief Map library.
+ */
 
-#include <placeholder.h>
-#include <platform.h>
+/** @file melee/mp/mplib.c
+ * @copydoc melee/mp/mplib.h
+ */
 
-#include "ft/fighter.h"
-#include "ft/types.h"
+/** @fn bool mpGetSpeed(int, Vec3*, Vec3*)
+ * @param line_id
+ * @param pos
+ * @param[out] speed
+ */
 
-#include <baselib/forward.h>
+/** @fn int mpLineGetNext(int)
+ * @returns A ground index.
+ */
 
-#include <common_structs.h>
-#include <dolphin/mtx.h>
-
-typedef void (*mpLib_Callback)(s32, s32, CollData*, s32, s32, f32);
-
-bool mpLib_80054ED8(s32);
-UNK_T mpLib_80056B34(void);
-UNK_T mpLib_80056AC4(void);
-UNK_T mpLib_80056A54(void);
-UNK_T mpLib_80056AFC(void);
-
-bool mpCheckLeftWall(f32 surface_normal_y, f32 surface_normal_x, f32 right_x,
-                     f32 right_y, Vec3* coll_vec, UNK_T, UNK_T, UNK_T, u32,
-                     u32);
-
-UNK_T mpLib_80056A8C(void);
-UNK_T mpLib_80056A1C(void);
-
-bool mpCheckRightWall(f32 surface_normal_y, f32 surface_normal_x, f32 left_x,
-                      f32 left_y, Vec3* coll_vec, UNK_T, UNK_T, UNK_T, u32,
-                      u32);
-
-u32 mpLineGetFlags(enum_t);
-
-s32 mpCheckMultiple(Vec3*, s32, s32, s32, s32, s32, s32, f32, f32, f32, f32);
-void mpLib_80053DA4_Floor(int ledge_id, Vec3*);
-void mpLib_80053ECC_Floor(int ledge_id, Vec3*);
-void mpFloorGetRight(s32, Vec3*);
-void mpFloorGetLeft(s32, Vec3*);
-
-/// @todo Params not confirmed.
-bool mpGetSpeed(s32 wall_id, Vec3* ecb_side_vtx, Vec3* result);
-
-bool mpLib_80056C54(s32 idx, Vec3* pos, bool, Vec3*, bool, bool, f32, f32, f32,
-                    f32);
-
-void mpLib_8005811C(CollData*, s32 ledge_id);
-
-/// @returns A ground index.
-s32 mpLineGetNext(s32 gr_idx);
-
-/// @returns A ground index.
-s32 mpLineGetPrev(s32 gr_idx);
-
-void mpLibLoad(UNK_T);
-void mpLib_80058820(void);
-void mpLib_800552B0(s16 x, HSD_JObj*, s16 z);
-void mpLib_80055E9C(s16 x);
-void mpGetGroundCollJoint(void);
-void mpLib_80057424(s32);
-void mpJointListAdd(s32);
-void mpLib_80057BC0(s32);
-bool mpLinesConnected(s32, s32);
-s32 mpLinePrevNonFloor(int idx);
-bool mpCheckFloor(Vec3*, int, int, int, int, int, int, int, float, float,
-                  float, float, float);
-s32 mpLeftWallGetTop(int, float*);
-bool mpLib_8004DD90_Floor(int idx, float*, float*, UNK_T, Vec3* normal);
-bool mpLib_8004E398_LeftWall(void);
-void mpBoundingCheck(f32 left, f32 bottom, f32 right, f32 top);
-enum_t mpJointFromLine(enum_t);
-void mpJointGetCb1(int, mpLib_Callback*, UNK_T);
-void mpJointGetCb2(int, mpLib_Callback*, UNK_T);
-enum_t mpLineGetKind(int);
-void mpUncheckBounding(void);
-enum_t mpLib_8004E090_Ceiling(int idx, Vec3*, f32*, u32*, Vec3* normal);
-void mpLib_800569EC(void);
-/* 04F8A4 */ UNK_RET mpCheckCeiling(UNK_PARAMS);
-/* 052508 */ UNK_RET mpCheckAll(UNK_PARAMS);
-/* 054DFC */ void mpLineGetNormal(enum_t, Vec3*);
-/* 0524DC */ bool mpCheckAllRemap(int, int, int, int, int, int, float x,
-                                  float y, float z, float);
-
-#endif
+/** @fn int mpLineGetPrev(int)
+ * @returns A ground index.
+ */

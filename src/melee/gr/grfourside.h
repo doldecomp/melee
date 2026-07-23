@@ -29,8 +29,6 @@
 /* 1F3070 */ bool grFourside_801F3070(Ground_GObj*);
 /* 1F3078 */ void grFourside_801F3078(Ground_GObj*);
 /* 1F309C */ void grFourside_801F309C(Ground_GObj*);
-/* 1F9338 */ void grFourside_801F30A0(Ground*, s32, CollData*, s32,
-                                      mpLib_GroundEnum, float);
 /* 1F30F0 */ void grFourside_801F30F0(Ground_GObj*);
 /* 1F3144 */ bool grFourside_801F3144(Ground_GObj*);
 /* 1F314C */ void grFourside_801F314C(Ground_GObj*);

@@ -1,10 +1,8 @@
 #ifndef MELEE_MP_FORWARD_H
 #define MELEE_MP_FORWARD_H
 
-#include <placeholder.h>
 #include <platform.h>
 
-#include "gr/forward.h"
 #include "lb/forward.h"
 
 typedef struct CollJoint CollJoint;
@@ -49,9 +47,10 @@ typedef enum mpLib_GroundEnum {
     mpLib_GroundEnum_Unk2,
 } mpLib_GroundEnum;
 
-typedef void (*mpLib_Callback)(
-    Ground*, s32, CollData*, s32, mpLib_GroundEnum,
-    f32); /// @TODO Fix Ground* to be a void* as it can be a GObj or a Ground*
+typedef void (*mpLib_JointCollisionCallback)(void* user_data, int joint_id,
+                                             CollData* coll, int coll_x50,
+                                             mpLib_GroundEnum ground_kind,
+                                             float delta_y);
 typedef bool (*mpColl_Callback)(CollData*, u32);
 
 typedef enum CollLineKind {

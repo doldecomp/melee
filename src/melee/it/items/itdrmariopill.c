@@ -1,6 +1,5 @@
 #include "itdrmariopill.h"
 
-#include "math_ppc.h"
 #include "placeholder.h"
 #include "platform.h"
 
@@ -32,6 +31,7 @@
 #include "it/itmaplib.h"
 
 #include <math.h>
+#include <math_ppc.h>
 
 #define GET_ATTRS(ip)                                                         \
     ((itDrMarioPillAttributes*) ip->xC4_article_data->x4_specialAttributes)

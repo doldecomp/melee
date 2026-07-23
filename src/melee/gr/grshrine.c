@@ -76,7 +76,7 @@ static void grShrine_80201C64(void)
 {
     u8 unused0[8];
 
-    grSh_804D6A18 = Ground_801C49F8();
+    grSh_804D6A18 = Ground_GetYakumonoParam();
     grShrine_80201D20(0);
     grShrine_80201D20(1);
     grShrine_80201D20(2);

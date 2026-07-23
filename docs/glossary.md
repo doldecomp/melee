@@ -25,8 +25,7 @@ Short for "channel."
 Short for "collision(s)."
 
 @section glossary_cstick cstick
-Short for "camera stick," the yellow analog stick on the right side of the
-GameCube controller.
+Short for "camera stick," the yellow analog stick on the right side of the GameCube controller.
 
 @section glossary_cur cur
 Short for "current" or "cursor."
@@ -61,6 +60,9 @@ Short for "ground."
 @section glossary_grav grav
 Short for "gravity."
 
+@section glossary_hatena hatena
+Japanese for "question [mark]."
+
 @section glossary_id id
 Short for "identifier." Not an acronym.
 
@@ -92,8 +94,7 @@ Short for "minimum."
 Short for "multiplier" or "multiply."
 
 @section glossary_mv mv
-Stands for "motion variables." Used by #HSD_GObj::user_data structs (such as
-#Fighter::mv) to store polymorphic variables specific to an #MotionState.
+Stands for "motion variables." Used by #HSD_GObj::user_data structs (such as #Fighter::mv) to store polymorphic variables specific to an #MotionState.
 
 @section glossary_phys phys
 Short for "physics."
@@ -152,7 +153,8 @@ Short for "vertex."
 @section glossary_vic vic
 Short for "victim."
 
+@section glossary_yakumono yakumono
+Japanese for "punctuation marks" or special characters. Might just refer to "symbols" as in named members within an archive file. Used by #StageInfo::yakumono_param.
+
 @section glossary_zako zako
-Zako (雑魚) is Japanese for "trash mob" in video games, literally "small fish."
-In Melee, this is used to refer to Fighting Wire Frames and possibly other
-enemies.
+Zako (雑魚) is Japanese for "trash mob" in video games, literally "small fish." In Melee, this is used to refer to Fighting Wire Frames and possibly other enemies.

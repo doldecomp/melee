@@ -24,7 +24,6 @@
 #include "gr/forward.h"
 
 #include "gr/inlines.h"
-#include "if/textlib.h"
 #include "it/it_26B1.h"
 #include "it/it_3F14.h"
 #include "it/items/itcoin.h"
@@ -43,7 +42,6 @@
 #include "sc/types.h"
 #include "ty/toy.h"
 #include "ty/tydisplay.h"
-#include "ty/tylist.h"
 
 #include <common_structs.h>
 #include <math.h>
@@ -51,7 +49,6 @@
 #include <trigf.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/cobj.h>
 #include <baselib/debug.h>
 #include <baselib/fog.h>
@@ -72,6 +69,7 @@
 
 /* 1BFFA8 */ static void Ground_OnStart(void);
 /* 1BFFAC */ static void Ground_801BFFAC(bool);
+/* 1C0478 */ static void mem_free(void* ptr);
 /* 1C0A70 */ static bool Ground_801C0A70(Vec3* pos);
 /* 1C0C2C */ static void Ground_801C0C2C(HSD_GObj*);
 /* 1C1CD0 */ static void Ground_801C1CD0(HSD_GObj*);
@@ -81,7 +79,7 @@
 /* 1C20E0 */ LightList** Ground_801C20E0(UnkArchiveStruct*, LightList**);
 /* 1C24F8 */ static bool Ground_801C24F8(s32, u32, s32*);
 /* 1C28CC */ void Ground_801C28CC(s32*, s32);
-/* 1C2BBC */ static void Ground_801C2BBC(HSD_GObj*, s32);
+/* 1C2BBC */ static void Ground_801C2BBC(Ground_GObj* map_gobj, int index);
 /* 1C2BD4 */ static void Ground_801C2BD4(void*);
 /* 1C34AC */ void Ground_801C34AC(s32, HSD_JObj*, struct HSD_Joint*);
 /* 1C466C */ void Ground_801C466C(void);
@@ -164,9 +162,10 @@ static StageData* Ground_803DFEDC[] = {
     &grTe_803E5764,       &grTe_803E5764,       &grTe_803E5764,
 };
 
-#define _BUFFER_SZ (64)
-
 static u8* Ground_804D6950;
+
+static ssize_t const buffer_size = 64;
+static ssize_t const Gr_CObj_Max = ARRAY_SIZE(stage_info.x694);
 
 /// @todo Move elsewhere.
 static inline f32 fabsf(f32 x)
@@ -182,20 +181,8 @@ static void Ground_OnStart(void) {}
 
 static void Ground_801BFFAC(bool arg0) {}
 
-static void zeroStageInfoArrays(void)
-{
-    int i;
-    for (i = 0; i < 64; i++) {
-        stage_info.x180[i] = NULL;
-    }
-    for (i = 0; i < 261; i++) {
-        stage_info.x280[i] = NULL;
-    }
-}
-
 void Ground_801BFFB0(void)
 {
-    u32 _[2];
     grDatFiles_801C6288();
     stage_info.flags = 0;
     stage_info.x6D0 = -1;
@@ -217,11 +204,18 @@ void Ground_801BFFB0(void)
     stage_info.unk8C.b7 = false;
     stage_info.x720 = -1;
     stage_info.x94 = NULL;
-    zeroStageInfoArrays();
-    stage_info.x694[0] = NULL;
-    stage_info.x694[1] = NULL;
-    stage_info.x694[2] = NULL;
-    stage_info.x694[3] = NULL;
+    {
+        ssize_t i;
+        for (i = 0; i < (ssize_t) ARRAY_SIZE(stage_info.map_gobjs); i++) {
+            stage_info.map_gobjs[i] = NULL;
+        }
+        for (i = 0; i < (ssize_t) ARRAY_SIZE(stage_info.x280); i++) {
+            stage_info.x280[i] = NULL;
+        }
+        for (i = 0; i < (ssize_t) ARRAY_SIZE(stage_info.x694); i++) {
+            stage_info.x694[i] = NULL;
+        }
+    }
     stage_info.x6A4 = NULL;
     stage_info.cam_info.cam_bounds.left = -170;
     stage_info.cam_info.cam_bounds.right = 170;
@@ -253,7 +247,7 @@ void Ground_801BFFB0(void)
 static void zeroBuffer(void)
 {
     int i;
-    for (i = 0; i < _BUFFER_SZ; i++) {
+    for (i = 0; i < buffer_size; i++) {
         Ground_804D6950[i] = 0;
     }
 }
@@ -261,11 +255,11 @@ static void zeroBuffer(void)
 void Ground_801C0378(int arg0)
 {
     ftCo_800C06C0();
-    Ground_804D6950 = HSD_MemAlloc(_BUFFER_SZ);
+    Ground_804D6950 = HSD_MemAlloc(buffer_size);
     zeroBuffer();
 }
 
-void Ground_801C0478(void* ptr)
+void mem_free(void* ptr)
 {
     HSD_Free(ptr);
 }
@@ -280,13 +274,13 @@ f32 Ground_801C0498(void)
     }
 }
 
-static void* alloc_user_data_ground(void)
+static Ground* alloc_user_data_ground(void)
 {
-    Ground* temp_r3 = HSD_MemAlloc(sizeof(Ground));
-    if (temp_r3 == NULL) {
-        OSReport("%s:%d: couldn t get user data(Ground)\n", __FILE__, 0x1DA);
+    Ground* gp = HSD_MemAlloc(sizeof(Ground));
+    if (gp == NULL) {
+        OSReport("%s:%d: couldn t get user data(Ground)\n", __FILE__, 474);
     }
-    return temp_r3;
+    return gp;
 }
 
 void Ground_801C04BC(f32 arg8)
@@ -810,7 +804,7 @@ Ground_GObj* Ground_GetStageGObj(int map_id)
     HSD_GObj* gobj;
     UnkArchiveStruct* archive;
     HSD_JObj* temp_r3_8;
-    Ground* temp_r3;
+    Ground* gp;
     s16* phi_r23;
     int phi_r24;
     int i;
@@ -820,30 +814,30 @@ Ground_GObj* Ground_GetStageGObj(int map_id)
         OSReport("%s:%d: couldn t get gobj!\n", __FILE__, 0x522);
         return NULL;
     }
-    temp_r3 = alloc_user_data_ground();
-    if (temp_r3 == NULL) {
+    gp = alloc_user_data_ground();
+    if (gp == NULL) {
         HSD_GObjPLink_80390228(gobj);
         return NULL;
     }
-    GObj_InitUserData(gobj, 3, Ground_801C0478, temp_r3);
-    temp_r3->map_id = map_id;
-    temp_r3->gobj = gobj;
-    temp_r3->x10_flags.b0 = 0;
-    temp_r3->x10_flags.b1 = 0;
-    temp_r3->x10_flags.b2 = 1;
-    temp_r3->x8_callback = 0;
-    temp_r3->xC_callback = 0;
-    temp_r3->x1C_callback = 0;
-    temp_r3->x10_flags.b5 = 0;
-    temp_r3->x10_flags.b6 = 0;
-    temp_r3->x11_flags.b012 = 0;
-    temp_r3->x10_flags.b7 = 0;
-    temp_r3->x18 = 0;
-    temp_r3->x10_flags.b3 = 0;
+    GObj_InitUserData(gobj, 3, mem_free, gp);
+    gp->map_id = map_id;
+    gp->gobj = gobj;
+    gp->x10_flags.b0 = 0;
+    gp->x10_flags.b1 = 0;
+    gp->x10_flags.b2 = 1;
+    gp->x8_callback = 0;
+    gp->xC_callback = 0;
+    gp->x1C_callback = 0;
+    gp->x10_flags.b5 = 0;
+    gp->x10_flags.b6 = 0;
+    gp->x11_flags.b012 = 0;
+    gp->x10_flags.b7 = 0;
+    gp->x18 = 0;
+    gp->x10_flags.b3 = 0;
     {
         size_t i;
-        for (i = 0; i < ARRAY_SIZE(temp_r3->x20); i++) {
-            temp_r3->x20[i] = -1;
+        for (i = 0; i < ARRAY_SIZE(gp->x20); i++) {
+            gp->x20[i] = -1;
         }
     }
 
@@ -879,7 +873,7 @@ Ground_GObj* Ground_GetStageGObj(int map_id)
             HSD_GObjObject_80390A70(temp_r23_2, HSD_GObj_804D784B, temp_r27);
             GObj_SetupGXLinkMax(new_var2, &grDisplay_801C5F60, 5);
             temp_r23_2->gxlink_prios = 8;
-            temp_r3->x18 = temp_r23_2;
+            gp->x18 = temp_r23_2;
             Ground_801C2BD4(temp_r27);
         }
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, new_var);
@@ -935,7 +929,7 @@ HSD_GObj* Ground_801C1A20(HSD_Joint* arg0, s32 arg1)
         HSD_GObjPLink_80390228(temp_r30);
         return NULL;
     }
-    GObj_InitUserData(temp_r30, 3, Ground_801C0478, gp);
+    GObj_InitUserData(temp_r30, 3, mem_free, gp);
     gp->map_id = arg1;
     gp->gobj = temp_r30;
     gp->x10_flags.b0 = 0;
@@ -1513,7 +1507,7 @@ s32* Ground_801C2AD8(void)
     return &stage_info.xA0;
 }
 
-f32 Ground_801C2AE8(s32 arg0)
+float Ground_801C2AE8(int arg0)
 {
     UnkBgmStruct* phi_r5 = stage_info.param->xB0;
     int i;
@@ -1528,34 +1522,32 @@ f32 Ground_801C2AE8(s32 arg0)
     }
 }
 
-HSD_GObj* Ground_801C2BA4(s32 i)
+Ground_GObj* Ground_801C2BA4(int index)
 {
-    return stage_info.x180[i];
+    return stage_info.map_gobjs[index];
 }
 
-static void Ground_801C2BBC(HSD_GObj* arg0, s32 i)
+static void Ground_801C2BBC(Ground_GObj* map_gobj, int index)
 {
-    stage_info.x180[i] = arg0;
+    stage_info.map_gobjs[index] = map_gobj;
 }
-
-static const int Gr_CObj_Max = 4;
 
 static void Ground_801C2BD4(void* arg0)
 {
     int i;
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < Gr_CObj_Max; i++) {
         if (stage_info.x694[i] == arg0) {
             return;
         }
     }
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < Gr_CObj_Max; i++) {
         if (stage_info.x694[i] == NULL) {
             stage_info.x694[i] = arg0;
             break;
         }
     }
-    HSD_ASSERT(0x94D, i!=Gr_CObj_Max);
+    HSD_ASSERT(2381, i!=Gr_CObj_Max);
 }
 
 bool Ground_801C2C8C(void* arg0)
@@ -2741,7 +2733,7 @@ HSD_GObj* Ground_801C498C(void)
 {
     HSD_GObj* gobj;
     for (gobj = HSD_GObj_Entities->xC; gobj != NULL; gobj = gobj->next) {
-        if (gobj->classifier == 13) {
+        if (gobj->classifier == HSD_GOBJ_CLASS_GROUND) {
             break;
         }
     }
@@ -2757,7 +2749,7 @@ LightList** Ground_801C49B4(void)
     return Ground_803E06C8;
 }
 
-void* Ground_801C49F8(void)
+void* Ground_GetYakumonoParam(void)
 {
     return stage_info.yakumono_param;
 }
@@ -2792,8 +2784,8 @@ void Ground_801C4A08(HSD_GObj* gobj)
         if (gp->x1C_callback != NULL) {
             gp->x1C_callback(gobj);
         }
-        if (stage_info.x180[map_id] == gobj) {
-            stage_info.x180[map_id] = NULL;
+        if (stage_info.map_gobjs[map_id] == gobj) {
+            stage_info.map_gobjs[map_id] = NULL;
         }
         Ground_801C55AC(gp);
         if (gp->x18 != NULL) {

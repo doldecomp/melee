@@ -26,11 +26,10 @@
 #include "lb/lbvector.h"
 
 #include <common_structs.h>
-#include <trigf.h> // IWYU pragma: keep
+#include <math_ppc.h>
+#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <MSL/math.h>
-#include <MSL/math_ppc.h> // IWYU pragma: keep
-
 /// Create Teleport Start GFX
 void ftMt_SpecialHi_CreateGFX(HSD_GObj* gobj)
 {

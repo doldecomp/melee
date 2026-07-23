@@ -5,6 +5,8 @@
 
 #include <platform.h>
 
+#include "baselib/objalloc.h"
+
 #include <melee/ft/forward.h>
 
 /// Sound object userdata (0x48 bytes, allocated by HSD_ObjAlloc)

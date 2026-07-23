@@ -19,7 +19,7 @@
 #include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
 
-#include <math_ppc.h> // IWYU pragma: keep
+#include <math_ppc.h>
 #include <dolphin/os.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
@@ -61,7 +61,7 @@
 /* 1DAA08 */ static s32 grZebes_801DAA08(void);
 /* 1DAE70 */ static void grZebes_801DAE70(s32, u8, f32, f32, f32);
 /* 1DB3CC */ static s32 grZebes_801DB3CC(HSD_GObj* gobj);
-/* 1DBB60 */ static s32 grZebes_801DBB60(HSD_GObj* yaku);
+/* 1DBB60 */ static bool grZebes_801DBB60(Item_GObj* yaku);
 /* 1DC260 */ static void grZebes_801DC260(void);
 /* 1DC408 */ static void grZebes_801DC408(Ground_GObj*);
 /* 1DC744 */ static void grZebes_801DC744(s32, u8);
@@ -246,7 +246,7 @@ void grZebes_801D84A0(bool arg) {}
 
 void grZebes_801D84A4(void)
 {
-    grZe_804D6990 = Ground_801C49F8();
+    grZe_804D6990 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grZebes_801D8558(0);
@@ -1966,7 +1966,7 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
     return popped;
 }
 
-s32 grZebes_801DBB60(HSD_GObj* yaku)
+bool grZebes_801DBB60(Item_GObj* yaku)
 {
     s32 last_idx;
     grZe_BubbleState* state = (grZe_BubbleState*) grZe_8049F140;
@@ -2000,16 +2000,16 @@ s32 grZebes_801DBB60(HSD_GObj* yaku)
     if (count == 1) {
         grZe_BubbleEntry* entry;
         f32 zero;
-        grMaterial_801C8E08((Item_GObj*) yaku);
+        grMaterial_801C8E08(yaku);
         entry = &bubbles[last_idx];
         zero = 0.0f;
-        grMaterial_801C8DE0((Item_GObj*) yaku, entry->x08_x, entry->x0C_y,
-                            zero, entry->x08_x, entry->x0C_y, zero,
+        grMaterial_801C8DE0(yaku, entry->x08_x, entry->x0C_y, zero,
+                            entry->x08_x, entry->x0C_y, zero,
                             (f32) (2.0 * (f64) entry->x18_size));
         return 1;
     }
 
-    grMaterial_801C8E08((Item_GObj*) yaku);
+    grMaterial_801C8E08(yaku);
 
     {
         s32 i = 0;
@@ -2176,12 +2176,11 @@ s32 grZebes_801DBB60(HSD_GObj* yaku)
                 }
             }
 
-            grMaterial_801C8DE0((Item_GObj*) yaku, x1, y1, 0.0f, x2, y2, 0.0f,
-                                width);
+            grMaterial_801C8DE0(yaku, x1, y1, 0.0f, x2, y2, 0.0f, width);
             return 1;
         }
     }
-    HSD_ASSERT(0x943, 0);
+    HSD_ASSERT(2371, 0);
 }
 
 void grZebes_801DC260(void)

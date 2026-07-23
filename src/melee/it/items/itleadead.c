@@ -21,9 +21,9 @@
 #include "mp/mplib.h"
 #include "sysdolphin/baselib/random.h"
 
+#include <trigf.h>
 #include <baselib/jobj.h>
 #include <MSL/math.h>
-#include <MSL/trigf.h>
 
 ItemStateTable it_803F8EB0[] = {
     {

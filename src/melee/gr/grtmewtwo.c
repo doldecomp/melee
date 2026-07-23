@@ -108,7 +108,7 @@ void grTMewtwo_802221D8(bool arg0) {}
 
 void grTMewtwo_802221DC(void)
 {
-    grTMewtwo_804D6B08 = Ground_801C49F8();
+    grTMewtwo_804D6B08 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grTMewtwo_80222284(0);

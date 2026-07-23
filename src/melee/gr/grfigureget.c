@@ -1,20 +1,18 @@
 #include "grfigureget.h"
 
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
+
 #include <platform.h>
 
 #include "baselib/forward.h"
 
 #include "ft/ftlib.h"
 #include "gm/gmregclear.h"
-
-#include "gr/forward.h"
-
-#include "gr/granime.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/stage.h"
-#include "gr/types.h"
 
 #include "it/forward.h"
 
@@ -27,17 +25,12 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbspdisplay.h"
 #include "lb/types.h"
-
-#include "mp/forward.h"
-
 #include "mp/mplib.h"
 #include "ty/toy.h"
 #include "ty/tydisplay.h"
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 typedef struct grFigureGet_Data {
@@ -65,6 +58,10 @@ static Vec3 const grFigureGet_803B8470 = { 0.0f, 0.0f, 0.0f };
 /* 219890 */ static bool grFigureGet_80219890(Ground_GObj*);
 /* 219898 */ static void grFigureGet_80219898(Ground_GObj*);
 /* 219B0C */ static void grFigureGet_80219B0C(Ground_GObj*);
+/* 219B10 */ static void grFigureGet_80219B10(void* user_data, int joint_id,
+                                              CollData* coll, int coll_x50,
+                                              mpLib_GroundEnum ground_kind,
+                                              float delta_y);
 /* 219C88 */ static DynamicsDesc* grFigureGet_OnTouchLine(enum_t);
 /* 219C90 */ static bool grFigureGet_OnCheckShadowRender(Vec3*, int,
                                                          HSD_JObj*);
@@ -100,7 +97,7 @@ void grFigureGet_OnDemoInit(int unused) {}
 
 void grFigureGet_OnInit(void)
 {
-    yakumono_param = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grFigureGet_802195CC(0);
@@ -291,29 +288,33 @@ void grFigureGet_80219898(Ground_GObj* gobj)
 
 void grFigureGet_80219B0C(Ground_GObj* gobj) {}
 
-void grFigureGet_80219B10(Ground* gp, s32 arg1, CollData* cd, s32 arg3,
-                          mpLib_GroundEnum arg4, f32 arg5)
+/// @copydoc mpLib_JointCollisionCallback
+void grFigureGet_80219B10(void* user_data, int joint_id, CollData* coll,
+                          int coll_x50, mpLib_GroundEnum ground_kind,
+                          float delta_y)
 {
+    Ground* gp = user_data;
     ECBFlagStruct* tmp;
-    HSD_GObj* item_gobj = cd->x0_gobj;
-    if (((((s32) (*(tmp = &cd->x34_flags)).b1234) == 5) && item_gobj) &&
-        (item_gobj->classifier == 0x6))
+    HSD_GObj* item_gobj = coll->x0_gobj;
+    if (((((s32) (*(tmp = &coll->x34_flags)).b1234) == 5) && item_gobj) &&
+        item_gobj->classifier == HSD_GOBJ_CLASS_ITEM)
     {
-        Item* ip = GET_ITEM(cd->x0_gobj);
-        if (ip->kind == It_Kind_Coin && gp->u.figureget.x8 < 3) {
-            HSD_GObj* item_gobj = cd->x0_gobj;
+        if (GET_ITEM(coll->x0_gobj)->kind == It_Kind_Coin &&
+            gp->u.figureget.x8 < 3)
+        {
+            HSD_GObj* item_gobj = coll->x0_gobj;
             int value = it_802F2020(item_gobj);
             int count = 0;
             int i;
             for (i = 0; i < gp->u.figureget.x8; i++) {
-                if (gp->u.figureget.x28[i] == cd->x0_gobj) {
+                if (gp->u.figureget.x28[i] == coll->x0_gobj) {
                     count++;
                 }
             }
             if (count == 0) {
-                if (cd->cur_pos.x <= 4.5F && cd->cur_pos.x >= -4.5F) {
-                    it_802F202C(cd->x0_gobj);
-                    gp->u.figureget.x28[gp->u.figureget.x8] = cd->x0_gobj;
+                if (coll->cur_pos.x <= 4.5F && coll->cur_pos.x >= -4.5F) {
+                    it_802F202C(coll->x0_gobj);
+                    gp->u.figureget.x28[gp->u.figureget.x8] = coll->x0_gobj;
                     gp->u.figureget.x1C[gp->u.figureget.x8] = value;
                     gp->u.figureget.x8++;
                 }

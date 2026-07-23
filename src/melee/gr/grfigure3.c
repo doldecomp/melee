@@ -73,7 +73,7 @@ static void grFigure3_8020E504(bool number) {}
 
 static void grFigure3_8020E508(void)
 {
-    grEF2_804D6A80 = Ground_801C49F8();
+    grEF2_804D6A80 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grFigure3_8020E5A8(0);

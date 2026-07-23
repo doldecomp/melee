@@ -1,8 +1,7 @@
 #ifndef GALE01_1FF164
 #define GALE01_1FF164
 
-#include <placeholder.h>
-
+#include "gr/forward.h"
 #include "mp/forward.h"
 
 #include <dolphin/mtx.h>
@@ -12,7 +11,7 @@
 /* 1FF298 */ void grRCruise_801FF298(void);
 /* 1FF29C */ void grRCruise_801FF29C(void);
 /* 1FF2C0 */ bool grRCruise_801FF2C0(void);
-/* 1FF2C8 */ HSD_GObj* grRCruise_801FF2C8(int);
+/* 1FF2C8 */ Ground_GObj* grRCruise_801FF2C8(int);
 /* 1FF3B4 */ void grRCruise_801FF3B4(Ground_GObj*);
 /* 1FF3E0 */ bool grRCruise_801FF3E0(Ground_GObj*);
 /* 1FF3E8 */ void grRCruise_801FF3E8(Ground_GObj*);
@@ -42,15 +41,10 @@
 /* 20014C */ bool grRCruise_8020014C(Ground_GObj*);
 /* 200154 */ void grRCruise_80200154(Ground_GObj*);
 /* 20045C */ void grRCruise_8020045C(Ground_GObj*);
-/* 200460 */ void fn_80200460(Ground*, s32, CollData*, s32, mpLib_GroundEnum,
-                              f32);
 /* 200540 */ void grRCruise_80200540(Ground_GObj*);
-/* 200578 */ void grRCruise_80200578(Ground*, s32, CollData*, s32,
-                                     mpLib_GroundEnum, f32);
 /* 20071C */ void grRCruise_8020071C(Ground_GObj*);
 /* 200B48 */ void grRCruise_80200B48(Ground_GObj*);
 /* 200C04 */ void grRCruise_80200C04(Ground_GObj*);
-/* 2010A4 */ void grRCruise_802010A4(Ground_GObj*, s32, CollData*);
 /* 201110 */ void grRCruise_80201110(Ground_GObj*);
 /* 201288 */ void grRCruise_80201288(HSD_JObj*, void (*)(HSD_DObj*, u32), u32);
 /* 201410 */ void grRCruise_80201410(Ground_GObj*);

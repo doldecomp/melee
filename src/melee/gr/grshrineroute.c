@@ -26,14 +26,19 @@
 #include "mp/mplib.h"
 #include "pl/player.h"
 
+#include <math_ppc.h>
+#include <trigf.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/lobj.h>
 #include <baselib/random.h>
-#include <MSL/math_ppc.h>
-#include <MSL/trigf.h>
+
+/* 20AD58 */ static void grShrineRoute_8020AD58(void* user_data, int joint_id,
+                                                CollData* coll, int coll_x50,
+                                                mpLib_GroundEnum ground_kind,
+                                                float delta_y);
 
 s16 grSh_Route_803E58E0[8] = {
     0x33, 0x4F, 0x65, 0x66, 0x73, 0x74, 0x83, 0x00
@@ -146,7 +151,7 @@ void grShrineRoute_OnDemoInit(bool arg) {}
 
 void grShrineRoute_OnInit(void)
 {
-    grSh_Route_804D6A58 = Ground_801C49F8();
+    grSh_Route_804D6A58 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 0;
     grShrineRoute_802088C0(0);
@@ -318,12 +323,12 @@ void grShrineRoute_80208D14(Ground_GObj* gobj)
     }
 
     ftCo_800C07F8(gobj, 3, grShrineRoute_8020AE08);
-    mpJointSetCb1(8, gp, (mpLib_Callback) (Event) grShrineRoute_8020AD58);
-    mpJointSetCb1(9, gp, (mpLib_Callback) (Event) grShrineRoute_8020AD58);
-    mpJointSetCb1(0xA, gp, (mpLib_Callback) (Event) grShrineRoute_8020AD58);
-    mpJointSetCb1(0xB, gp, (mpLib_Callback) (Event) grShrineRoute_8020AD58);
-    mpJointSetCb1(0xC, gp, (mpLib_Callback) (Event) grShrineRoute_8020AD58);
-    mpJointSetCb1(0xD, gp, (mpLib_Callback) (Event) grShrineRoute_8020AD58);
+    mpJointSetCb1(8, gp, grShrineRoute_8020AD58);
+    mpJointSetCb1(9, gp, grShrineRoute_8020AD58);
+    mpJointSetCb1(10, gp, grShrineRoute_8020AD58);
+    mpJointSetCb1(11, gp, grShrineRoute_8020AD58);
+    mpJointSetCb1(12, gp, grShrineRoute_8020AD58);
+    mpJointSetCb1(13, gp, grShrineRoute_8020AD58);
 
     if (Ground_801C2D24(0x94, &center)) {
         HSD_JObj* jobj;
@@ -369,7 +374,6 @@ bool grShrineRoute_80208F14(void)
     return false;
 }
 
-/// #grShrineRoute_80208F70
 void grShrineRoute_80208F70(Ground_GObj* gobj)
 {
     Vec3 sp88;
@@ -389,9 +393,7 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
     if (player != NULL) {
         ftLib_80086644(player, &sp7C);
     } else {
-        sp7C.z = 0.0f;
-        sp7C.y = 0.0f;
-        sp7C.x = 0.0f;
+        sp7C.x = sp7C.y = sp7C.z = 0.0f;
     }
 
     switch (gp->u.shrineroute.xC4) {
@@ -1198,15 +1200,19 @@ bool grShrineRoute_8020AD24(int arg)
     return false;
 }
 
-void grShrineRoute_8020AD58(Ground* gp, int r4, CollData* r5, int r6, int r7)
+/// @copydoc mpLib_JointCollisionCallback
+void grShrineRoute_8020AD58(void* user_data, int joint_id, CollData* coll,
+                            int coll_x50, mpLib_GroundEnum ground_kind,
+                            float delta_y)
 {
+    Ground* gp = user_data;
     HSD_GObj* pgobj;
     u32 slot;
-    PAD_STACK(0x10);
+    PAD_STACK(8);
 
-    if ((int) r5->x34_flags.b1234 == 1 && r7 == 2) {
-        slot = ftLib_80086BE0(r5->x0_gobj);
-        if (r5->x0_gobj == Player_GetEntity(slot)) {
+    if ((int) coll->x34_flags.b1234 == 1 && ground_kind == 2) {
+        slot = ftLib_80086BE0(coll->x0_gobj);
+        if (coll->x0_gobj == Player_GetEntity(slot)) {
             gp->u.shrineroute.xCA = 1;
             pgobj = Player_GetEntityAtIndex(slot, 1);
             if (pgobj) {

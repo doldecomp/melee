@@ -38,7 +38,7 @@
 
 #include <common_structs.h>
 #include <math.h>
-#include <math_ppc.h> // IWYU pragma: keep
+#include <math_ppc.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 

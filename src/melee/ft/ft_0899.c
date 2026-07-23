@@ -11,10 +11,10 @@
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 
+#include <math_ppc.h>
+#include <trigf.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
-#include <MSL/math_ppc.h>
-#include <MSL/trigf.h>
 
 /* 08998C */ static bool fn_8008998C(Fighter* fp, IKState* ik, Vec3* normal);
 

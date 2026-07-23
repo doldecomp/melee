@@ -22,6 +22,8 @@ typedef struct {
 #include "particle.static.h"
 
 #include <math.h>
+#include <math_ppc.h>
+#include <trigf.h>
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/mcc.h>
@@ -42,8 +44,6 @@ typedef struct {
 #include <baselib/state.h>
 #include <baselib/video.h>
 #include <MetroTRK/ppc_reg.h>
-#include <MSL/math_ppc.h>
-#include <MSL/trigf.h>
 
 static HSD_JObj* hsd_804D08E8[8];
 static void* hsd_804D0908[0x144 / 4];

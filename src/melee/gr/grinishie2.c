@@ -184,7 +184,7 @@ void grInishie2_801FCBC0(bool arg) {}
 
 void grInishie2_801FCBC4(void)
 {
-    grI2_804D6A00 = Ground_801C49F8();
+    grI2_804D6A00 = Ground_GetYakumonoParam();
 
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;

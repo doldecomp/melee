@@ -21,7 +21,7 @@
 #include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
 
-#include <trigf.h> // IWYU pragma: keep
+#include <trigf.h>
 #include <dolphin/os.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -163,7 +163,7 @@ void grBigBlueRoute_8020B864(bool arg)
 
 void grBigBlueRoute_8020B89C(void)
 {
-    grBb_Route_804D6A68 = Ground_801C49F8();
+    grBb_Route_804D6A68 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grBigBlueRoute_8020B9D4(0);

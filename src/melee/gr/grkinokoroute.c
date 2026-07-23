@@ -20,9 +20,9 @@
 #include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
-#include "MSL/math_ppc.h"
 
 #include <math.h>
+#include <math_ppc.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -91,7 +91,7 @@ void grKinokoRoute_8020741C(bool arg) {}
 
 void grKinokoRoute_80207420(void)
 {
-    grNKr_804D6A50 = Ground_801C49F8();
+    grNKr_804D6A50 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grKinokoRoute_8020754C(2);

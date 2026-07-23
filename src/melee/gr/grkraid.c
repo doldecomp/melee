@@ -59,7 +59,7 @@ void grKraid_OnInit(void)
 {
     HSD_GObj* gobj;
 
-    grKr_804D6A08 = Ground_801C49F8();
+    grKr_804D6A08 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grKraid_801FE0C4(0);

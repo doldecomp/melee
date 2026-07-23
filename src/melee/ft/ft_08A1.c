@@ -15,10 +15,10 @@
 #include "it/it_26B1.h"
 #include "it/items/itpeachparasol.h"
 
+#include <math_ppc.h>
+#include <trigf.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
-#include <MSL/math_ppc.h>
-#include <MSL/trigf.h>
 
 bool ft_8008A1FC(Fighter_GObj* gobj)
 {

@@ -6,6 +6,7 @@
 
 #include "baselib/archive.h"
 #include "baselib/debug.h"
+#include "baselib/fog.h"
 
 #include "baselib/forward.h"
 
@@ -31,6 +32,11 @@
 #include "lb/lbspdisplay.h"
 #include "lb/types.h"
 #include "mp/mplib.h"
+
+/* 21E994 */ static void fn_8021E994(void* user_data, int joint_id,
+                                     CollData* coll, int coll_x50,
+                                     mpLib_GroundEnum ground_kind,
+                                     float delta_y);
 
 f32 grHr_804D6AD8;
 int grHr_804D6ADC;
@@ -103,7 +109,7 @@ void grHomeRun_8021C754(void)
 {
     Vec3 cam_offset;
 
-    grHr_804D6AE8 = Ground_801C49F8();
+    grHr_804D6AE8 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grHomeRun_8021EDD4();
@@ -220,7 +226,7 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
 
     *(u8*) &gp->x10_flags |= 4;
     grAnime_801C8138(gobj, gp->map_id, false);
-    mpJointSetCb1(0, gp, (mpLib_Callback) fn_8021E994);
+    mpJointSetCb1(0, gp, fn_8021E994);
 
     archive = grDatFiles_GetArchive();
     gp->u.unk.xD4 = (intptr_t) GObj_Create(0x11, 0x13, 0);
@@ -784,23 +790,24 @@ HSD_GObj* grHomeRun_8021E500(s16 arg0)
     return gobj;
 }
 
-void fn_8021E994(Ground* arg0, s32 arg1, CollData* arg2, s32 arg3,
-                 mpLib_GroundEnum arg4, f32 arg5)
+/// @copydoc mpLib_JointCollisionCallback
+void fn_8021E994(void* user_data, int joint_id, CollData* coll, int coll_x50,
+                 mpLib_GroundEnum ground_kind, float delta_y)
 {
     HSD_GObj* gobj;
     Ground* gp;
-    s32 collKind = arg2->x34_flags.b1234;
+    s32 collKind = coll->x34_flags.b1234;
     Ground* new_var;
     gobj = Ground_801C2BA4(0xA);
     if (gobj != NULL) {
         gp = (new_var = GET_GROUND(gobj));
         if (gp == NULL) {
-            arg2->x34_flags = arg2->x34_flags;
+            coll->x34_flags = coll->x34_flags;
             return;
         }
         if (collKind == 1) {
             gobj = gm_80180AF4();
-            if (arg2->x0_gobj == gobj && arg4 == 1) {
+            if (coll->x0_gobj == gobj && ground_kind == 1) {
                 gp->u.homerun.xE8_flags.b0 = 1;
             }
         }

@@ -44,11 +44,11 @@
 
 #include <common_structs.h>
 #include <math.h>
+#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
-#include <MSL/trigf.h>
 #include <Runtime/runtime.h>
 
 /// @todo .sdata2 order hack

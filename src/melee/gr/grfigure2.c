@@ -72,7 +72,7 @@ extern StageInfo stage_info;
 
 static void grFigure2_8020E274(void)
 {
-    grEF2_804D6A78 = Ground_801C49F8();
+    grEF2_804D6A78 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grFigure2_8020E314(0);

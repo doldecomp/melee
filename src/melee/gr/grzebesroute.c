@@ -11,7 +11,6 @@
 #include "cm/camera.h"
 #include "dolphin/mtx.h"
 #include "ft/ftlib.h"
-#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -19,7 +18,6 @@
 #include "mp/mplib.h"
 
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/lobj.h>
 #include <baselib/random.h>
@@ -42,6 +40,11 @@ typedef struct grZebesRoute_ParamStore {
     grZebesRoute_Params* params;
     u32 pad;
 } grZebesRoute_ParamStore;
+
+/* 20B4D8 */ static void fn_8020B4D8(void* user_data, int joint_id,
+                                     CollData* coll, int coll_x50,
+                                     mpLib_GroundEnum ground_kind,
+                                     float delta_y);
 
 const grZebesRoute_LightData grZe_Route_803B83A0 = {
     { 0.0F, 0.0F, 0.0F },     { 0.0F, -30.0F, 50.0F },
@@ -99,7 +102,7 @@ void grZebesRoute_8020B160(bool arg) {}
 
 void grZebesRoute_8020B164(void)
 {
-    grZe_Route_804D6A60.params = Ground_801C49F8();
+    grZe_Route_804D6A60.params = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grZebesRoute_8020B260(0);
@@ -186,7 +189,7 @@ void grZebesRoute_8020B3C0(Ground_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
     gp->x8_callback = NULL;
     gp->xC_callback = NULL;
-    mpJointSetCb1(1, gp, (mpLib_Callback) fn_8020B4D8);
+    mpJointSetCb1(1, gp, fn_8020B4D8);
     gp->u.zebes2.xC4 = (s16) grZe_Route_804D6A60.params->camera_timer;
 }
 
@@ -224,13 +227,15 @@ void grZebesRoute_8020B42C(Ground_GObj* gobj)
 
 void grZebesRoute_8020B4D4(Ground_GObj* arg) {}
 
-void fn_8020B4D8(Ground* gp, s32 arg1, CollData* coll, s32 arg3,
-                 mpLib_GroundEnum kind, f32 arg5)
+/// @copydoc mpLib_JointCollisionCallback
+void fn_8020B4D8(void* user_data, int joint_id, CollData* coll, int coll_x50,
+                 mpLib_GroundEnum ground_kind, float delta_y)
 {
-    PAD_STACK(16);
+    Ground* gp = user_data;
+    PAD_STACK(8);
     if ((s32) coll->x34_flags.b1234 == 1) {
         if (Ground_801C57A4() == coll->x0_gobj) {
-            if (kind == 1) {
+            if (ground_kind == 1) {
                 stage_info.flags |= 0x10;
             }
         }

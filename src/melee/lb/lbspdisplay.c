@@ -1,7 +1,6 @@
 #include "lbspdisplay.static.h"
 
 #include "math.h"
-#include "math_ppc.h"
 #include "stdarg.h"
 #include "stddef.h"
 
@@ -29,6 +28,8 @@
 #include "lb/lbvector.h"
 #include "lb/types.h"
 
+#include <math_ppc.h>
+#include <trigf.h>
 #include <baselib/cobj.h>
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>
@@ -43,8 +44,6 @@
 #include <baselib/tev.h>
 #include <melee/mp/mplib.h>
 #include <melee/sc/types.h>
-#include <MSL/trigf.h> // IWYU pragma: keep
-
 typedef bool (*lb_803BA248_fn)(ColorOverlay*);
 
 struct lb_Collider {

@@ -63,7 +63,7 @@ static void grStory_801E302C(bool _) {}
 
 void grStory_801E3030(void)
 {
-    shyguy_vars = Ground_801C49F8();
+    shyguy_vars = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grStory_801E30D8(0);

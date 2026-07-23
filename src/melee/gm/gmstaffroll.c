@@ -19,7 +19,7 @@
 #include "sc/types.h"
 #include "ty/toy.h"
 
-#include <math_ppc.h> // IWYU pragma: keep
+#include <math_ppc.h>
 #include <baselib/particle.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>

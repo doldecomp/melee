@@ -2,7 +2,6 @@
 
 #include <platform.h>
 
-#include "it/it_2725.h"
 #include "it/ithitbox.h"
 
 #include <melee/gr/forward.h>
@@ -26,12 +25,16 @@
 #include <melee/gr/inlines.h>
 #include <melee/gr/stage.h>
 #include <melee/gr/types.h>
-#include <melee/it/it_2725.h>
 #include <melee/it/items/itwhispyapple.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/mp/mplib.h>
+
+/* 216DE4 */ static void fn_80216DE4(void* user_data, int joint_id,
+                                     CollData* coll, int coll_x50,
+                                     mpLib_GroundEnum ground_kind,
+                                     float delta_y);
 
 /// @todo Emitted only to lay out the .sdata2 literal pool in retail order.
 static void sdata2_order(void)
@@ -223,7 +226,7 @@ void grGreens_80213458(bool arg)
 void grGreens_Init(void)
 {
     PAD_STACK(8);
-    grGr_params = Ground_801C49F8();
+    grGr_params = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grGreens_80213524(0);
@@ -1592,15 +1595,17 @@ void grGreens_80216C20(Ground_GObj* gobj)
     }
 }
 
-void fn_80216DE4(Ground* gp, s32 arg1, CollData* arg2, s32 arg3,
-                 enum mpLib_GroundEnum arg4, f32 farg0)
+/// @copydoc mpLib_JointCollisionCallback
+void fn_80216DE4(void* user_data, int joint_id, CollData* coll, int coll_x50,
+                 mpLib_GroundEnum ground_kind, float delta_y)
 {
+    Ground* gp = user_data;
     int i;
     int j;
     for (i = 0; i < 5; i++) {
         for (j = 0; j < 6; j++) {
             if (getBlock(gp, i, j)->status != Gr_Greens_Block_Status_None &&
-                arg1 == getBlock(gp, i, j)->x18)
+                joint_id == getBlock(gp, i, j)->x18)
             {
                 getBlock(gp, i, j)->x1_4 = 1;
                 i = 5;

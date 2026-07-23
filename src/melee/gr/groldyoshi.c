@@ -5,10 +5,6 @@
 #include <platform.h>
 
 #include "baselib/random.h"
-
-#include "forward.h"
-
-#include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
@@ -19,8 +15,12 @@
 #include "mp/mplib.h"
 
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
+
+/* 20F2A8 */ static void fn_8020F2A8(void* user_data, int joint_id,
+                                     CollData* coll, int coll_x50,
+                                     mpLib_GroundEnum ground_kind,
+                                     float delta_y);
 
 StageCallbacks grOy_803E6488[] = {
     { grOldYoshi_8020E93C, grOldYoshi_8020E968, grOldYoshi_8020E970,
@@ -70,7 +70,7 @@ void grOldYoshi_8020E798(bool arg) {}
 
 void grOldYoshi_8020E79C(void)
 {
-    grOy_804D6A88 = Ground_801C49F8();
+    grOy_804D6A88 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grOldYoshi_8020E854(0);
@@ -331,8 +331,7 @@ static inline s32 randi_between(s32 min, s32 max)
     //}
 }
 
-// For some reason, the normal GET_GROUND didn't work here
-inline Ground* grOldYoshi_8020EFCC_inline(Ground_GObj* arg0);
+/// @todo For some reason, the normal GET_GROUND didn't work here
 inline Ground* grOldYoshi_8020EFCC_inline(Ground_GObj* arg0)
 {
     return arg0->user_data;
@@ -402,15 +401,17 @@ void grOldYoshi_8020F088(Ground_GObj* arg)
 
 void grOldYoshi_8020F2A4(Ground_GObj* arg) {}
 
-void fn_8020F2A8(Ground* gp, s32 param2, CollData* coll, s32 param4,
-                 mpLib_GroundEnum param5, float param6)
+/// @copydoc mpLib_JointCollisionCallback
+void fn_8020F2A8(void* user_data, int joint_id, CollData* coll, int coll_x50,
+                 mpLib_GroundEnum ground_kind, float delta_y)
 {
+    Ground* gp = user_data;
     int i;
     if ((s32) coll->x34_flags.b1234 != 1) {
         return;
     }
     for (i = 0; i < 3; i++) {
-        if (param2 == grOy_803E6574[i * 2]) {
+        if (joint_id == grOy_803E6574[i * 2]) {
             break;
         }
     }

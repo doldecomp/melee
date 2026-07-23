@@ -53,7 +53,7 @@ void grTPurin_80223160(bool unused)
 
 void grTPurin_80223164(void)
 {
-    grTPr_804D6B10 = Ground_801C49F8();
+    grTPr_804D6B10 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
 

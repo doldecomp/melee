@@ -1,12 +1,10 @@
 #ifndef GALE01_1F423C
 #define GALE01_1F423C
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "gr/forward.h"
 #include "lb/forward.h"
-#include "mp/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
@@ -41,8 +39,6 @@
 /* 1F5460 */ void grGreatBay_801F5460(Ground_GObj*);
 /* 1F55F8 */ bool grGreatBay_801F55F8(Ground_GObj*);
 /* 1F5600 */ void grGreatBay_801F5600(Ground_GObj*);
-/* 1F5914 */ void grGreatBay_801F5914(Ground*, s32, CollData*, s32,
-                                      mpLib_GroundEnum, f32);
 /* 1F5988 */ void grGreatBay_801F5988(Ground_GObj*);
 /* 1F598C */ void grGreatBay_801F598C(Ground_GObj*);
 /* 1F59F0 */ bool grGreatBay_801F59F0(Ground_GObj*);
@@ -54,8 +50,6 @@
 /* 1F5D48 */ void grGreatBay_801F5D48(Ground_GObj*);
 /* 1F5D4C */ void grGreatBay_801F5D4C(HSD_GObj*);
 /* 1F5E28 */ void grGreatBay_801F5E28(HSD_GObj*);
-/* 1F60C4 */ void grGreatBay_801F60C4(Ground*, s32, CollData*, s32,
-                                      mpLib_GroundEnum, f32);
 /* 1F62F8 */ s32 grGreatBay_801F62F8(s32);
 /* 1F63F4 */ bool grGreatBay_801F63F4(Ground_GObj*);
 /* 1F660C */ void grGreatBay_801F660C(Ground_GObj*);

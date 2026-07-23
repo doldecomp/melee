@@ -70,7 +70,7 @@ void grTFalco_802207F0(bool arg0) {}
 
 void grTFalco_802207F4(void)
 {
-    grTFc_804D6AF8 = Ground_801C49F8();
+    grTFc_804D6AF8 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grTFalco_8022089C(0);
