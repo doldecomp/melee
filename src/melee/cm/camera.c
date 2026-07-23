@@ -2493,8 +2493,8 @@ void Camera_8002D318(void* unused)
         delta = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
         cm_80452C68.transform.fov += delta * cm_803BCCA0.x70;
 
-        if ((s32)cm_80452C68.x2C4 != 10 && (s32)cm_80452C68.x2C4 != 11 &&
-            (s32)cm_80452C68.x2C4 >= 0 && (s32)cm_80452C68.x2C4 < 6 &&
+        if ((s32) cm_80452C68.x2C4 != 10 && (s32) cm_80452C68.x2C4 != 11 &&
+            (s32) cm_80452C68.x2C4 >= 0 && (s32) cm_80452C68.x2C4 < 6 &&
             (gobj = Player_GetEntity(cm_80452C68.x2C4)) != NULL &&
             (subject = ftLib_80086B74(gobj)) != NULL)
         {
@@ -2561,8 +2561,8 @@ void Camera_8002D85C(void* unused)
         delta = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
         cm_80452C68.transform.fov += delta * cm_803BCCA0.x70;
 
-        if ((s32)cm_80452C68.x2C4 != 10 && (s32)cm_80452C68.x2C4 != 11 &&
-            (s32)cm_80452C68.x2C4 >= 0 && (s32)cm_80452C68.x2C4 < 6 &&
+        if ((s32) cm_80452C68.x2C4 != 10 && (s32) cm_80452C68.x2C4 != 11 &&
+            (s32) cm_80452C68.x2C4 >= 0 && (s32) cm_80452C68.x2C4 < 6 &&
             (gobj = Player_GetEntity(cm_80452C68.x2C4)) != NULL &&
             (subject = ftLib_80086B74(gobj)) != NULL)
         {
@@ -4046,7 +4046,7 @@ bool Camera_800307D0(f32* left, f32* center, f32* right)
 
     cobj = GET_COBJ(cm_80452C68.gobj);
     half_fov =
-        0.5L * (deg_to_rad * HSD_CObjGetFov(cobj) * HSD_CObjGetAspect(cobj));
+        0.5 * (deg_to_rad * HSD_CObjGetFov(cobj) * HSD_CObjGetAspect(cobj));
 
     result = true;
     HSD_CObjGetEyePosition(cobj, &eye_pos);
