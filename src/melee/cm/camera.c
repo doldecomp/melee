@@ -2457,13 +2457,13 @@ static inline Vec3* get_subject_x1C(CmSubject* subject)
 void Camera_8002D318(void* unused)
 {
     /// @todo this and Camera_8002D85C are very similar but i cant quite figure
-    /// out the helpers for them
+    /// out the helpers for them. there is also a pattern stack gaps of 24 bytes
     Vec3* pos;
     HSD_GObj* gobj;
     f32 half_z;
     f32 distance;
     f32 delta;
-    CameraBounds bounds2;
+    u8 _pad[24];
     CmSubject* subject;
     f32 horiz_dist;
     CameraBounds bounds_copy;
@@ -2538,7 +2538,7 @@ void Camera_8002D85C(void* unused)
     f32 distance;
     f32 delta;
     f32 horiz_dist;
-    CameraBounds bounds3;
+    u8 _pad[24];
     CameraBounds bounds2;
     CameraBounds bounds;
 
