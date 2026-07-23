@@ -500,6 +500,13 @@ struct grSmashTaunt_GroundVars {
     /* +28 */ f32 xEC;
 };
 
+struct grVenom_Platform_GroundVars {
+    /* +00 gp+C4 */ Ground_GObj* target_gobj;
+    /* +04 gp+C8 */ s32 smash_taunt_timer;
+    /* +08 gp+CC */ HSD_JObj* upper_jobj;
+    /* +0C gp+D0 */ HSD_JObj* lower_jobj;
+};
+
 struct grVenom_GroundVars {
     /* +00 gp+C4 */ union {
         u32 xC4; ///< @todo Not a #u32, either
@@ -1823,6 +1830,7 @@ struct Ground {
         struct GroundVars_unk unk;
         struct grHomeRun_GroundVars homerun;
         struct grHomeRun_GroundVars2 homerun2;
+        struct grVenom_Platform_GroundVars venom_platform;
         struct grVenom_GroundVars venom;
         struct grVenom_GroundVars2 venom2;
         struct grYorster_GroundVars yorster;

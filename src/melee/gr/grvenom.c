@@ -470,7 +470,7 @@ void grVenom_80203B18(void)
         {
             Ground_GObj* gobj1 = grVenom_80203EAC(5);
             gp1 = GET_GROUND(gobj1);
-            gp1->u.venom.xC4 = (u32) gobj;
+            gp1->u.venom_platform.target_gobj = gobj;
             grVenom_80203EAC(9);
             gobj1 = grVenom_80203EAC(7);
             grAnime_801C8138(gobj1, 7, 0);
@@ -649,7 +649,7 @@ void fn_802040B4(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     if (Stage_80225194() == 0xE4) {
-        gp->u.venom.xC8 = 1;
+        gp->u.venom_platform.smash_taunt_timer = 1;
     }
 }
 
@@ -673,15 +673,15 @@ void grVenom_802040F0(Ground_GObj* gobj)
     grAnime_801C7FF8(gobj, 4, 7, 3, 0.0F, 1.0F);
     grAnime_801C7FF8(gobj, 7, 7, 3, 0.0F, 1.0F);
     Ground_801C10B8(gobj, (HSD_GObjEvent) fn_802040B4);
-    gp->u.venom.xC8 = -1;
-    gp->u.venom.xCC = (u32) Ground_801C3FA4(gobj, 2);
-    gp->u.venom.xD0 = (u32) Ground_801C3FA4(gobj, 3);
-    lb_8000B1CC((HSD_JObj*) gp->u.venom.xCC, NULL, &pos1);
-    lb_8000B1CC((HSD_JObj*) gp->u.venom.xD0, NULL, &pos2);
+    gp->u.venom_platform.smash_taunt_timer = -1;
+    gp->u.venom_platform.upper_jobj = Ground_801C3FA4(gobj, 2);
+    gp->u.venom_platform.lower_jobj = Ground_801C3FA4(gobj, 3);
+    lb_8000B1CC(gp->u.venom_platform.upper_jobj, NULL, &pos1);
+    lb_8000B1CC(gp->u.venom_platform.lower_jobj, NULL, &pos2);
     if (pos2.y > pos1.y) {
-        temp = (HSD_JObj*) gp->u.venom.xCC;
-        gp->u.venom.xCC = new_var->u.venom.xD0;
-        gp->u.venom.xD0 = (u32) temp;
+        temp = gp->u.venom_platform.upper_jobj;
+        gp->u.venom_platform.upper_jobj = new_var->u.venom_platform.lower_jobj;
+        gp->u.venom_platform.lower_jobj = temp;
     }
     gp->x10_flags.b5 = 1;
 }
@@ -706,7 +706,7 @@ void grVenom_80204284(Ground_GObj* gobj)
     tmp_gp = GET_GROUND(gobj);
     gp = tmp_gp;
     src_jobj = GET_JOBJ(gobj);
-    dst_jobj = (HSD_JObj*) ((HSD_GObj*) gp->u.venom.xC4)->hsd_obj;
+    dst_jobj = gp->u.venom_platform.target_gobj->hsd_obj;
 
     HSD_JObjGetTranslation(src_jobj, &pos);
     HSD_JObjSetTranslate(dst_jobj, &pos);
@@ -714,11 +714,11 @@ void grVenom_80204284(Ground_GObj* gobj)
     Ground_801C39C0();
     Ground_801C3BB4();
 
-    timer = gp->u.venom.xC8;
+    timer = gp->u.venom_platform.smash_taunt_timer;
     if (timer > 0) {
-        gp->u.venom.xC8 = timer + 1;
-        if ((s32) gp->u.venom.xC8 >= 0x3C) {
-            if ((s32) gp->u.venom.xC8 == 0x3C) {
+        gp->u.venom_platform.smash_taunt_timer = timer + 1;
+        if (gp->u.venom_platform.smash_taunt_timer >= 0x3C) {
+            if (gp->u.venom_platform.smash_taunt_timer == 0x3C) {
                 ifStatus_802F6898();
                 un_802FF570();
                 other_gobj = grVenom_80203EAC(1);
@@ -736,7 +736,7 @@ void grVenom_80204284(Ground_GObj* gobj)
                 if (Ground_801C2BA4(1) == NULL) {
                     ifStatus_802F68F0();
                     un_802FF620();
-                    gp->u.venom.xC8 = -1;
+                    gp->u.venom_platform.smash_taunt_timer = -1;
                 }
             }
         }
@@ -1840,8 +1840,8 @@ bool grVenom_80206D7C(Vec3* pos, int arg1, HSD_JObj* arg2)
     gobj = Ground_801C2BA4(5);
     if (gobj != NULL) {
         gp = gobj->user_data;
-        if (gp != NULL && (HSD_JObj*) gp->u.venom.xD0 == arg2) {
-            lb_8000B1CC((HSD_JObj*) gp->u.venom.xCC, NULL, &sp14);
+        if (gp != NULL && gp->u.venom_platform.lower_jobj == arg2) {
+            lb_8000B1CC(gp->u.venom_platform.upper_jobj, NULL, &sp14);
             if (pos->y > sp14.y) {
                 return 0;
             }
