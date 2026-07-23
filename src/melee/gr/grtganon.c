@@ -17,7 +17,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-StageCallbacks grTGn_803E9880[] = {
+StageCallbacks grTGn_StageCallbacks[] = {
     { grTGanon_8022486C, grTGanon_80224898, grTGanon_802248A0,
       grTGanon_802248A4, 0 },
     { grTGanon_80224938, grTGanon_80224988, grTGanon_80224990,
@@ -29,7 +29,7 @@ StageCallbacks grTGn_803E9880[] = {
 
 StageData grTGn_803E98DC = {
     TGANON,
-    grTGn_803E9880,
+    grTGn_StageCallbacks,
     "/GrTGn.dat",
     grTGanon_802246DC,
     grTGanon_802246D8,
@@ -87,7 +87,7 @@ bool grTGanon_8022477C(void)
 HSD_GObj* grTGanon_80224784(int id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTGn_803E9880[id];
+    StageCallbacks* callbacks = &grTGn_StageCallbacks[id];
 
     gobj = Ground_GetStageGObj(id);
 

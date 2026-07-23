@@ -61,7 +61,7 @@ static grVe_Data grVe_803E5348 = {
 
 static int grVe_803E5380[3] = { 0 };
 
-StageCallbacks grVe_803E538C[16] = {
+StageCallbacks grVe_StageCallbacks[16] = {
     {
         grVenom_80203F98,
         grVenom_80203FC4,
@@ -178,7 +178,7 @@ StageCallbacks grVe_803E538C[16] = {
 
 StageData grVe_803E54CC = {
     VENOM,
-    grVe_803E538C,
+    grVe_StageCallbacks,
     "/GrVe",
     grVenom_80203B18,
     grVenom_80203B14,

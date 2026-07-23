@@ -39,7 +39,7 @@ void grtDrMario_802207DC(Ground_GObj*);          /* static */
 DynamicsDesc* grtDrMario_802207E0(enum_t);       /* static */
 bool grtDrMario_802207E8(Vec3*, int, HSD_JObj*); /* static */
 
-static StageCallbacks grTDr_803E8850[4] = {
+static StageCallbacks grTDr_StageCallbacks[4] = {
     { grtDrMario_80220698, grtDrMario_802206C4, grtDrMario_802206CC,
       grtDrMario_802206D0, 0 },
     { grtDrMario_80220764, grtDrMario_802207B4, grtDrMario_802207BC,
@@ -51,7 +51,7 @@ static StageCallbacks grTDr_803E8850[4] = {
 
 StageData grTDr_803E88AC = {
     TDRMARIO,
-    grTDr_803E8850,
+    grTDr_StageCallbacks,
     "/GrTDr.dat",
     grtDrMario_80220510,
     grtDrMario_8022050C,
@@ -85,7 +85,7 @@ bool grtDrMario_802205A8(void)
 HSD_GObj* grtDrMario_802205B0(int arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTDr_803E8850[arg0];
+    StageCallbacks* callbacks = &grTDr_StageCallbacks[arg0];
 
     gobj = Ground_GetStageGObj(arg0);
 

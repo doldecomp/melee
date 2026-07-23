@@ -39,7 +39,7 @@
 /* 223B38 */ static DynamicsDesc* grTSeak_OnTouchLine(enum_t);
 /* 223B40 */ static bool grTSeak_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 
-static StageCallbacks grTSk_803E94B8[] = {
+static StageCallbacks grTSk_StageCallbacks[] = {
     {
         grTSeak_802239F0,
         grTSeak_80223A1C,
@@ -66,7 +66,7 @@ static StageCallbacks grTSk_803E94B8[] = {
 
 StageData grTSk_803E9514 = {
     TSEAK,
-    grTSk_803E94B8,
+    grTSk_StageCallbacks,
     "/GrTSk.dat",
     grTSeak_OnInit,
     grTSeak_OnDemoInit,
@@ -100,7 +100,7 @@ bool grTSeak_80223900(void)
 HSD_GObj* grTSeak_80223908(int arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTSk_803E94B8[arg0];
+    StageCallbacks* callbacks = &grTSk_StageCallbacks[arg0];
 
     gobj = Ground_GetStageGObj(arg0);
 

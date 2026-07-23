@@ -61,7 +61,7 @@ static struct grFourside_YakumonoParam* yakumono_param;
 
 S16Vec3 grFs_803E3CE8[] = { { 3, 1, 7 }, { 4, 5, 1 }, { 0, 6, 10 } };
 
-StageCallbacks grFs_803E3CFC[] = {
+StageCallbacks grFs_StageCallbacks[] = {
     { grFourside_801F2EBC, grFourside_801F2EE8, grFourside_801F2EF0,
       grFourside_801F2EF4, 0 },
     { grFourside_801F3154, grFourside_801F326C, grFourside_801F3274,
@@ -80,7 +80,7 @@ StageCallbacks grFs_803E3CFC[] = {
 
 StageData grFs_803E3D94 = {
     FOURSIDE,
-    grFs_803E3CFC,
+    grFs_StageCallbacks,
     "/GrFs.dat",
     grFourside_801F2D10,
     grFourside_801F2D0C,
@@ -128,7 +128,7 @@ bool grFourside_801F2DC8(void)
 HSD_GObj* grFourside_801F2DD0(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grFs_803E3CFC[gobj_id];
+    StageCallbacks* callbacks = &grFs_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 

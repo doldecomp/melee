@@ -42,7 +42,7 @@ static bool grTFox_80220F08(Vec3*, int, HSD_JObj*);
 
 static struct grTFox_YakumonoParam* yakumono_param;
 
-static StageCallbacks grTFx_803E89D8[4] = {
+static StageCallbacks grTFx_StageCallbacks[4] = {
     { grTFox_80220D14, grTFox_80220D40, grTFox_80220D48, grTFox_80220D4C, 0 },
     { grTFox_80220DE0, grTFox_80220E30, grTFox_80220E38, grTFox_80220E58, 0 },
     { grTFox_80220D50, grTFox_80220DA0, grTFox_80220DA8, grTFox_80220DDC,
@@ -52,7 +52,7 @@ static StageCallbacks grTFx_803E89D8[4] = {
 
 StageData grTFx_803E8A34 = {
     TFOX,
-    grTFx_803E89D8,
+    grTFx_StageCallbacks,
     "/GrTFx.dat",
     grTFox_80220B84,
     grTFox_80220B80,
@@ -96,7 +96,7 @@ bool grTFox_80220C24(void)
 HSD_GObj* grTFox_80220C2C(s32 arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTFx_803E89D8[arg0];
+    StageCallbacks* callbacks = &grTFx_StageCallbacks[arg0];
 
     gobj = Ground_GetStageGObj(arg0);
 

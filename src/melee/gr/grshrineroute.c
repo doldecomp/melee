@@ -54,7 +54,7 @@ s16 grSh_Route_803E58E0[8] = {
     0x33, 0x4F, 0x65, 0x66, 0x73, 0x74, 0x83, 0x00
 };
 
-StageCallbacks grSh_Route_803E58F0[7] = {
+StageCallbacks grSh_Route_StageCallbacks[7] = {
     {
         grShrineRoute_802089AC,
         grShrineRoute_802089D8,
@@ -108,7 +108,7 @@ StageCallbacks grSh_Route_803E58F0[7] = {
 
 StageData grSh_Route_803E5988 = {
     SHRINEROUTE,
-    grSh_Route_803E58F0,
+    grSh_Route_StageCallbacks,
     "/GrNSr.dat",
     grShrineRoute_OnInit,
     grShrineRoute_OnDemoInit,
@@ -188,7 +188,7 @@ bool grShrineRoute_802088B8(void)
 HSD_GObj* grShrineRoute_802088C0(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grSh_Route_803E58F0[gobj_id];
+    StageCallbacks* callbacks = &grSh_Route_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 

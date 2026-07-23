@@ -45,7 +45,7 @@ static bool grShrine_80201F4C(Vec3*, int, HSD_JObj*);
 
 static void* yakumono_param;
 
-static StageCallbacks grSh_803E50E8[3] = {
+static StageCallbacks grSh_StageCallbacks[3] = {
     { grShrine_80201E08, grShrine_80201E34, grShrine_80201E3C,
       grShrine_80201E40, 0 },
     { grShrine_80201E44, grShrine_80201E88, grShrine_80201E90,
@@ -56,7 +56,7 @@ static StageCallbacks grSh_803E50E8[3] = {
 
 StageData grSh_803E5130 = {
     SHRINE,
-    grSh_803E50E8,
+    grSh_StageCallbacks,
     "/GrSh.dat",
     grShrine_80201C64,
     grShrine_80201C60,
@@ -108,7 +108,7 @@ static bool grShrine_80201D18(void)
 static HSD_GObj* grShrine_80201D20(s32 arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grSh_803E50E8[arg0];
+    StageCallbacks* callbacks = &grSh_StageCallbacks[arg0];
 
     gobj = Ground_GetStageGObj(arg0);
 

@@ -62,7 +62,7 @@ typedef struct grOldPupupuSpawnDesc {
     s16 x2;
 } grOldPupupuSpawnDesc;
 
-StageCallbacks grOp_803E6688[9] = {
+StageCallbacks grOp_StageCallbacks[9] = {
     { grOldPupupu_8021099C, grOldPupupu_802109C8, grOldPupupu_802109D0,
       grOldPupupu_802109D4, 0 },
     { grOldPupupu_802109D8, grOldPupupu_80210A1C, grOldPupupu_80210A24,
@@ -94,7 +94,7 @@ typedef struct grOp_StageData {
 grOp_StageData grOp_803E6748 = {
     {
         OLDPUPUPU,
-        grOp_803E6688,
+        grOp_StageCallbacks,
         grOp_803E673C,
         grOldPupupu_802107E0,
         grOldPupupu_802107DC,
@@ -165,15 +165,15 @@ HSD_GObj* grOldPupupu_802108B4_noinline(int arg0)
 HSD_GObj* grOldPupupu_802108B4(int arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grOp_803E6688[arg0];
+    StageCallbacks* callbacks = &grOp_StageCallbacks[arg0];
 
     gobj = Ground_GetStageGObj(arg0);
 
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport((char*) grOp_803E6688 + 0xF4, (char*) grOp_803E6688 + 0x118,
-                 0xD9, arg0);
+        OSReport((char*) grOp_StageCallbacks + 0xF4,
+                 (char*) grOp_StageCallbacks + 0x118, 0xD9, arg0);
     }
 
     return gobj;

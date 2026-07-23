@@ -26,7 +26,7 @@ S16Vec3 grTe_803E56B8[] = {
     { 10, 2, 11 }, { 12, 2, 16 }, { 13, 2, 17 },
 };
 
-StageCallbacks grTe_803E5708[] = {
+StageCallbacks grTe_StageCallbacks[] = {
     { grTest_80207130, grTest_8020715C, grTest_80207164, grTest_80207168, 0 },
     { grTest_802073D0, grTest_802073FC, grTest_80207404, grTest_80207408, 0 },
     { grTest_8020716C, grTest_802071BC, grTest_802071C4, grTest_802073AC,
@@ -36,7 +36,7 @@ StageCallbacks grTe_803E5708[] = {
 
 StageData grTe_803E5764 = {
     TEST,
-    grTe_803E5708,
+    grTe_StageCallbacks,
     "/GrTe.dat",
     grTest_80206E30,
     grTest_80206E2C,
@@ -89,7 +89,7 @@ bool grTest_8020703C(void)
 HSD_GObj* grTest_80207044(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTe_803E5708[gobj_id];
+    StageCallbacks* callbacks = &grTe_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 

@@ -14,7 +14,7 @@
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 
-StageCallbacks grTPr_803E9338[] = {
+StageCallbacks grTPr_StageCallbacks[] = {
     { grTPurin_802232F4, grTPurin_80223320, grTPurin_80223328,
       grTPurin_8022332C, 0 },
     { grTPurin_8022347C, grTPurin_802234CC, grTPurin_802234D4,
@@ -26,7 +26,7 @@ StageCallbacks grTPr_803E9338[] = {
 
 StageData grTPr_803E9394 = {
     TPURIN,
-    grTPr_803E9338,
+    grTPr_StageCallbacks,
     "/GrTPr.dat",
     grTPurin_80223164,
     grTPurin_80223160,
@@ -82,7 +82,7 @@ bool grTPurin_80223204(void)
 HSD_GObj* grTPurin_8022320C(int id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTPr_803E9338[id];
+    StageCallbacks* callbacks = &grTPr_StageCallbacks[id];
 
     gobj = Ground_GetStageGObj(id);
 

@@ -41,7 +41,7 @@ S16Vec3 grKg_803E16E0[6] = {
     { 6, 10, 44 }, { 0, 1, 0 },   { 1, 2, 2 },
 };
 
-StageCallbacks grKg_803E1704[12] = {
+StageCallbacks grKg_StageCallbacks[12] = {
     { NULL, NULL, NULL, NULL, 0 },
     { grKongo_801D6074, grKongo_801D6190, grKongo_801D6198, grKongo_801D6378,
       0 },
@@ -77,7 +77,7 @@ typedef struct grKg_StageData {
 grKg_StageData grKg_803E1800 = {
     {
         KONGO,
-        grKg_803E1704,
+        grKg_StageCallbacks,
         grKg_803E17F4,
         grKongo_801D523C,
         grKongo_801D5238,
@@ -1242,7 +1242,7 @@ bool grKongo_801D5338(void)
 HSD_GObj* grKongo_801D5340(s32 gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grKg_803E1704[gobj_id];
+    StageCallbacks* callbacks = &grKg_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 

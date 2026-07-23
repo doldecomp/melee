@@ -19,7 +19,7 @@
 /* 1D8444 */ static DynamicsDesc* grKongo_801D8444(enum_t);
 
 extern S16Vec3 grKg_803E16E0[6];
-extern StageCallbacks grKg_803E1704[12];
+extern StageCallbacks grKg_StageCallbacks[12];
 
 /// A dat file index and the index of a spline within that file's
 /// spline table, as taken by #Ground_801C247C.

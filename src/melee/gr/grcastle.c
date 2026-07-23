@@ -45,7 +45,7 @@ S16Vec3 grCs_803E0FE8[] = {
     { 5, 6, 4 },
 };
 
-StageCallbacks grCs_803E0FF4[21] = {
+StageCallbacks grCs_StageCallbacks[21] = {
     { NULL, NULL, NULL, NULL, 0 },
     { grCastle_801CE8E8, grCastle_801CE9E0, grCastle_801CE9E8,
       grCastle_801CEAC8, 0 },
@@ -93,7 +93,7 @@ char grCs_803E1198[] = "/GrCs.dat";
 
 StageData grCs_803E11A4 = {
     CASTLE,
-    grCs_803E0FF4,
+    grCs_StageCallbacks,
     grCs_803E1198,
     grCastle_801CD37C,
     grCastle_801CD338,
@@ -339,7 +339,7 @@ bool grCastle_801CD4C8(void)
 HSD_GObj* grCastle_801CD4D0(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grCs_803E0FF4[gobj_id];
+    StageCallbacks* callbacks = &grCs_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 

@@ -89,7 +89,7 @@ S16Vec3 grRc_803E4DA8[] = {
     { 21, 1, 18 }, { 22, 1, 18 }, { 23, 1, 18 },
 };
 
-StageCallbacks grRc_803E4E34[7] = {
+StageCallbacks grRc_StageCallbacks[7] = {
     { grRCruise_801FF3B4, grRCruise_801FF3E0, grRCruise_801FF3E8,
       grRCruise_801FF3EC, 0 },
     { grRCruise_801FF5B4, grRCruise_801FF6CC, grRCruise_801FF6D4,
@@ -108,7 +108,7 @@ StageCallbacks grRc_803E4E34[7] = {
 
 struct StageData grRc_803E4ECC = {
     RCRUISE,
-    grRc_803E4E34,
+    grRc_StageCallbacks,
     "/GrRc.dat",
     grRCruise_801FF168,
     grRCruise_801FF164,
@@ -181,7 +181,7 @@ bool grRCruise_801FF2C0(void)
 Ground_GObj* grRCruise_801FF2C8(int gobj_id)
 {
     Ground_GObj* gobj;
-    StageCallbacks* callbacks = &grRc_803E4E34[gobj_id];
+    StageCallbacks* callbacks = &grRc_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
