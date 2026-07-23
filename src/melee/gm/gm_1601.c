@@ -3207,7 +3207,7 @@ float fn_80166A8C(register Vec3* src, register Vec3* dst)
 #endif
 
 // Probably some code to setup or end a 4 player match?
-s32 gm_80166A98(MatchEnd* arg0, s32 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
+s32 gm_80166A98(MatchEnd* arg0, u8 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
                 s8 arg6, u8 arg7, u8 arg_sp8, u8 arg_spC)
 {
     s32 score0;
@@ -3216,7 +3216,6 @@ s32 gm_80166A98(MatchEnd* arg0, s32 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
     s32 score3;
     u32 i;
 
-    arg1 &= 0x3F;
     memzero(arg0, 0x227C);
 
     arg0->result = 1;
