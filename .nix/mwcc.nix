@@ -12,7 +12,8 @@ stdenv.mkDerivation {
 
   installPhase = ''
     runHook preInstall
-    cp -r . $out/
+    mkdir -p $out/GC
+    cp -r GC/{1.1p1,1.2.5,1.2.5n,1.3.2} $out/GC/
     runHook postInstall
   '';
 }
