@@ -1,28 +1,28 @@
-#include "gr/grpura.h"
+#include "grpura.h"
+
+#include "grdisplay.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
 
 #include <platform.h>
 
-#include "baselib/debug.h"
-#include "baselib/gobjgxlink.h"
-#include "baselib/gobjproc.h"
-#include "baselib/random.h"
 #include "cm/camera.h"
 #include "cm/types.h"
-#include "gr/grdisplay.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/stage.h"
-#include "gr/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
 
 #include <dolphin/mtx.h>
+#include <baselib/debug.h>
+#include <baselib/dobj.h>
 #include <baselib/gobj.h>
+#include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
+#include <baselib/random.h>
 #include <baselib/tobj.h>
-#include <sysdolphin/baselib/dobj.h>
 
 /* 213030 */ static void grPura_80213030(Ground_GObj* arg0);
 
@@ -102,7 +102,7 @@ struct HSD_ImageDesc grPu_803E7620 = { &grPu_803E6E20, 32, 32, 4, 0, 0, 0 };
 
 void grPura_80211CFC(bool num) {}
 
-/* 4D6AA0 */ static HSD_GObj* grPu_804D6AA0;
+/* 4D6AA0 */ static void* yakumono_param;
 
 void grPura_80211D00(void)
 {
@@ -111,7 +111,7 @@ void grPura_80211D00(void)
     UNUSED u32 unused3;
     Vec3 cam_offset;
 
-    grPu_804D6AA0 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grPura_80211E08(0);

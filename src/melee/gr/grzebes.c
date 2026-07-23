@@ -20,6 +20,7 @@
 #include "mp/mplib.h"
 
 #include <math_ppc.h>
+#include <dolphin/mtx.h>
 #include <dolphin/os.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
@@ -61,7 +62,7 @@
 /* 1DAA08 */ static s32 grZebes_801DAA08(void);
 /* 1DAE70 */ static void grZebes_801DAE70(s32, u8, f32, f32, f32);
 /* 1DB3CC */ static s32 grZebes_801DB3CC(HSD_GObj* gobj);
-/* 1DBB60 */ static s32 grZebes_801DBB60(HSD_GObj* yaku);
+/* 1DBB60 */ static bool grZebes_801DBB60(Item_GObj* yaku);
 /* 1DC260 */ static void grZebes_801DC260(void);
 /* 1DC408 */ static void grZebes_801DC408(Ground_GObj*);
 /* 1DC744 */ static void grZebes_801DC744(s32, u8);
@@ -121,11 +122,9 @@ typedef struct grZe_YakumonoParam {
     /* 0xA0 */ grZe_AcidLevelEntry xA0_entries[30];
 } grZe_YakumonoParam;
 
-/* 4D6990 */ static grZe_YakumonoParam* grZe_804D6990;
+/* 4D6990 */ static grZe_YakumonoParam* yakumono_param;
 /* 4D6994 */ static s32 grZe_804D6994;
 /* 4D6998 */ static s16 grZe_804D6998;
-
-extern f32 grZe_804DB0B0;
 
 typedef struct grZe_BubbleEntry {
     /* 0x00 */ u8 x00_active;
@@ -180,11 +179,8 @@ typedef struct grZe_AcidState {
     /* +20 */ s16 x20_anim_idx;
 } grZe_AcidState;
 
-extern const grZe_BubbleConfig grZe_803B8044;
-
-u32 grZe_803E1A10[8] = {
-    0x00010006, 0x00150004, 0x0006000E, 0x00030006,
-    0x00010002, 0x00070006, 0x00050007, 0x00010000,
+S16Vec3 grZe_803E1A10[] = {
+    { 1, 6, 21 }, { 4, 6, 14 }, { 3, 6, 1 }, { 2, 7, 6 }, { 5, 7, 1 },
 };
 
 StageCallbacks grZe_callbacks[] = {
@@ -208,28 +204,10 @@ StageCallbacks grZe_callbacks[] = {
     { NULL, NULL, NULL, NULL, 0 },
 };
 
-char grZe_803E1B20[] = "/GrZe.dat";
-
-typedef struct grZe_803E1B2C_t {
-    u32 count;
-    StageCallbacks* cbs;
-    char* datfile;
-    void (*init)(void);
-    void (*reset)(bool);
-    void (*unk528)(void);
-    void (*unk52c)(void);
-    bool (*unk550)(void);
-    DynamicsDesc* (*unkCCB8)(enum_t);
-    bool (*unkCCC0)(Vec3*, int, HSD_JObj*);
-    u32 unkA;
-    u32* unkB;
-    u32 unkC;
-} grZe_803E1B2C_t;
-
-grZe_803E1B2C_t grZe_803E1B2C = {
-    8,
+StageData grZe_803E1B2C = {
+    ZEBES,
     grZe_callbacks,
-    grZe_803E1B20,
+    "/GrZe.dat",
     grZebes_801D84A4,
     grZebes_801D84A0,
     grZebes_801D8528,
@@ -237,18 +215,18 @@ grZe_803E1B2C_t grZe_803E1B2C = {
     grZebes_801D8550,
     grZebes_801DCCB8,
     grZebes_801DCCC0,
-    1,
+    (1 << 0),
     grZe_803E1A10,
-    5,
+    ARRAY_SIZE(grZe_803E1A10),
 };
 
 void grZebes_801D84A0(bool arg) {}
 
 void grZebes_801D84A4(void)
 {
-    grZe_804D6990 = Ground_801C49F8();
-    stage_info.unk8C.b4 = 0;
-    stage_info.unk8C.b5 = 1;
+    yakumono_param = Ground_GetYakumonoParam();
+    stage_info.unk8C.b4 = false;
+    stage_info.unk8C.b5 = true;
     grZebes_801D8558(0);
     grZebes_801D8558(1);
     grZebes_801D8558(6);
@@ -295,22 +273,14 @@ Ground_GObj* grZebes_801D8558(int id)
     return gobj;
 }
 
-typedef struct {
-    Vec3 x00;
-    Vec3 x04;
-    Vec3 x08;
-    Vec3 x0C;
-    Vec3 x10;
-} grZe_803B7FF0_t;
-
-static const grZe_803B7FF0_t grZe_803B7FF0 = {
+static struct grZebesRoute_LightData const grZe_803B7FF0 = {
     // clang-format off
     {    0.0f,   0.0f, 0.0f }, {   8.2f, -4.55f, 0.0f },
     {   7.59f,   2.5f, 0.0f }, { 8.589f, 1.215f, 0.0f },
     { 23.151f, 1.207f, 0.0f },
 }; // clang-format on
 
-Vec3 grZe_803E1B90[20] = {
+Vec3 grZe_803E1B90[] = {
     // clang-format off
     { -40.5f, -10.0f, 13.0f }, { -40.5f, -24.0f, 13.0f },
     {  -5.5f, -13.0f, 23.5f }, {  -5.5f, -27.0f, 23.5f },
@@ -359,7 +329,7 @@ void grZebes_801D8644(HSD_GObj* gobj)
     ((grZe_AcidState*) &gp->u.zebes5.xC8)->x20_anim_idx = 0x1C;
     gp->u.zebes5.xEC = 0;
     gp->u.zebes5.xF4 = 0;
-    pos = grZe_803B7FF0.x00;
+    pos = grZe_803B7FF0.player_pos;
     mat_gobj2 =
         grMaterial_801C8D44(0, 0, gp, &pos, 0, NULL, fn_801DAC90, NULL);
     grMaterial_801C8E08(mat_gobj2);
@@ -420,8 +390,8 @@ void grZebes_801D881C(HSD_GObj* gobj)
             grZebes_801DAA08();
             {
                 f32 rand = HSD_Randf();
-                f32 base = grZe_804D6990->x08;
-                f32 diff = grZe_804D6990->x0C - base;
+                f32 base = yakumono_param->x08;
+                f32 diff = yakumono_param->x0C - base;
                 *(s16*) &gp->u.zebes5.xF8 = diff * rand + base;
             }
         }
@@ -450,8 +420,8 @@ void grZebes_801D881C(HSD_GObj* gobj)
                 f32 diff;
                 gp->u.zebes5.xC4 = 2;
                 rand = HSD_Randf();
-                base = grZe_804D6990->x00;
-                diff = grZe_804D6990->x04 - base;
+                base = yakumono_param->x00;
+                diff = yakumono_param->x04 - base;
                 gp->u.zebes5.xC6 = (s16) (diff * rand + base);
             }
             break;
@@ -472,7 +442,7 @@ void grZebes_801D881C(HSD_GObj* gobj)
             s32 divisor;
             s32 spawn_phase;
             gp->u.zebes5.xF6 = (s16) (gp->u.zebes5.xF6 + 1);
-            divisor = grZe_804D6990->x10;
+            divisor = yakumono_param->x10;
             eq_counter = gp->u.zebes5.xF6;
             if (eq_counter % divisor == 0) {
                 s32 mirror;
@@ -480,12 +450,12 @@ void grZebes_801D881C(HSD_GObj* gobj)
                 mirror = 6 - spawn_phase;
                 if (spawn_phase < mirror) {
                     f32 rand = HSD_Randf();
-                    f32 scale_min = grZe_804D6990->x58;
+                    f32 scale_min = yakumono_param->x58;
                     grZe_BubbleSpawnPos* pos =
                         (grZe_BubbleSpawnPos*) grZe_8049F140;
                     grZebes_801DAE70(spawn_phase, 4, pos[spawn_phase].x14_x,
                                      pos[spawn_phase].x18_y,
-                                     (grZe_804D6990->x5C - scale_min) * rand +
+                                     (yakumono_param->x5C - scale_min) * rand +
                                          scale_min);
                 }
                 if (spawn_phase <= mirror) {
@@ -511,8 +481,8 @@ void grZebes_801D881C(HSD_GObj* gobj)
         }
     }
 
-    sp80 = grZe_803B7FF0.x04;
-    sp74 = grZe_803B7FF0.x08;
+    sp80 = grZe_803B7FF0.spot_pos;
+    sp74 = grZe_803B7FF0.spot_interest;
     {
         HSD_JObj* jobj = Ground_801C3FA4(gobj, 0xE);
         if (jobj != NULL) {
@@ -577,8 +547,8 @@ void grZebes_801D881C(HSD_GObj* gobj)
             }
         }
 
-        sp28 = grZe_803B7FF0.x0C;
-        sp1C = grZe_803B7FF0.x10;
+        sp28 = grZe_803B7FF0.upper_point_pos;
+        sp1C = grZe_803B7FF0.lower_point_pos;
 
         {
             HSD_JObj* sima_jobj;
@@ -818,9 +788,9 @@ void grZebes_801D9798(HSD_GObj* gobj)
     gp->u.zebes5.xC4 = 0;
 
     if ((delay_max =
-             grZe_804D6990->xA0_entries[gp->u.zebes5.xC4].x4_delay_max) >
+             yakumono_param->xA0_entries[gp->u.zebes5.xC4].x4_delay_max) >
         (delay_min =
-             grZe_804D6990->xA0_entries[gp->u.zebes5.xC4].x2_delay_min))
+             yakumono_param->xA0_entries[gp->u.zebes5.xC4].x2_delay_min))
     {
         s32 diff = delay_max - delay_min;
         delay_max = delay_min + ((diff != 0) ? HSD_Randi(diff) : 0);
@@ -830,7 +800,7 @@ void grZebes_801D9798(HSD_GObj* gobj)
     }
 
     gp->u.zebes5.xC6 =
-        (s16) (grZe_804D6990->xA0_entries[gp->u.zebes5.xC4].x0_base +
+        (s16) (yakumono_param->xA0_entries[gp->u.zebes5.xC4].x0_base +
                delay_max);
     gp->u.zebes5.xC8 = 0;
     gp->u.zebes5.xCC = 0.0f;
@@ -839,18 +809,18 @@ void grZebes_801D9798(HSD_GObj* gobj)
     gp->x11_flags.b012 = 1;
 
     for (j = 0;
-         j < 0x1D && (grZe_804D6990->xA0_entries[j + 1].x0_base != 0 ||
-                      grZe_804D6990->xA0_entries[j + 1].x2_delay_min != 0 ||
-                      grZe_804D6990->xA0_entries[j + 1].x4_delay_max != 0 ||
-                      grZe_804D6990->xA0_entries[j + 1].x6_level != 0);
+         j < 0x1D && (yakumono_param->xA0_entries[j + 1].x0_base != 0 ||
+                      yakumono_param->xA0_entries[j + 1].x2_delay_min != 0 ||
+                      yakumono_param->xA0_entries[j + 1].x4_delay_max != 0 ||
+                      yakumono_param->xA0_entries[j + 1].x6_level != 0);
          j++)
     {
         ;
     }
 
     rand = HSD_Randf();
-    gp->u.zebes5.xD8 = grZe_804D6990->x94 * rand +
-                       (f32) grZe_804D6990->xA0_entries[j].x6_level;
+    gp->u.zebes5.xD8 = yakumono_param->x94 * rand +
+                       (f32) yakumono_param->xA0_entries[j].x6_level;
     gp->u.zebes5.xD4 = gp->u.zebes5.xD8;
 
     jobj = Ground_801C3FA4(gobj, 0);
@@ -888,13 +858,13 @@ void grZebes_801D99E0(HSD_GObj* gobj)
             f32 rand = HSD_Randf();
 
             gp->u.zebes5.xD4 =
-                grZe_804D6990->x94 * rand +
-                (f32) grZe_804D6990->xA0_entries[gp->u.zebes5.xC4].x6_level;
+                yakumono_param->x94 * rand +
+                (f32) yakumono_param->xA0_entries[gp->u.zebes5.xC4].x6_level;
 
-            if (gp->u.zebes5.xD4 > grZe_804D6990->x8C) {
-                gp->u.zebes5.xD4 = grZe_804D6990->x8C;
-            } else if (gp->u.zebes5.xD4 < grZe_804D6990->x90) {
-                gp->u.zebes5.xD4 = grZe_804D6990->x90;
+            if (gp->u.zebes5.xD4 > yakumono_param->x8C) {
+                gp->u.zebes5.xD4 = yakumono_param->x8C;
+            } else if (gp->u.zebes5.xD4 < yakumono_param->x90) {
+                gp->u.zebes5.xD4 = yakumono_param->x90;
             }
 
             gp->u.zebes5.xD0 = 0.0f;
@@ -903,15 +873,15 @@ void grZebes_801D99E0(HSD_GObj* gobj)
 
             diff = ABS(gp->u.zebes5.xD4 - gp->u.zebes5.xD8);
 
-            discriminant = (grZe_804D6990->x98 * grZe_804D6990->x98) -
-                           (4.0f * diff) / grZe_804D6990->x9C;
+            discriminant = (yakumono_param->x98 * yakumono_param->x98) -
+                           (4.0f * diff) / yakumono_param->x9C;
             if (discriminant < 0.0f) {
                 gp->u.zebes5.xCC = 999.0f;
             } else {
                 f32 root = sqrtf(discriminant);
                 gp->u.zebes5.xCC =
-                    (f32) (0.5 * (f64) (grZe_804D6990->x9C *
-                                        (grZe_804D6990->x98 - root)));
+                    (f32) (0.5 * (f64) (yakumono_param->x9C *
+                                        (yakumono_param->x98 - root)));
                 if (gp->u.zebes5.xCC < 0.0f) {
                     gp->u.zebes5.xCC = 999.0f;
                 }
@@ -942,7 +912,7 @@ void grZebes_801D99E0(HSD_GObj* gobj)
         }
 
         vel = gp->u.zebes5.xD0;
-        accel = grZe_804D6990->x9C;
+        accel = yakumono_param->x9C;
         {
             f32 temp = vel / accel;
             t = temp;
@@ -972,7 +942,7 @@ void grZebes_801D99E0(HSD_GObj* gobj)
     }
     case 4: {
         f32 delta = gp->u.zebes5.xD4 - gp->u.zebes5.xD8;
-        gp->u.zebes5.xD0 = gp->u.zebes5.xD0 - grZe_804D6990->x9C;
+        gp->u.zebes5.xD0 = gp->u.zebes5.xD0 - yakumono_param->x9C;
 
         if (gp->u.zebes5.xD0 < 0.0f) {
             goto state4_done;
@@ -998,10 +968,10 @@ void grZebes_801D99E0(HSD_GObj* gobj)
         {
             s16 idx = gp->u.zebes5.xC4;
             if (idx == 0x1E ||
-                (grZe_804D6990->xA0_entries[idx].x0_base == 0 &&
-                 grZe_804D6990->xA0_entries[idx].x2_delay_min == 0 &&
-                 grZe_804D6990->xA0_entries[idx].x4_delay_max == 0 &&
-                 grZe_804D6990->xA0_entries[idx].x6_level == 0))
+                (yakumono_param->xA0_entries[idx].x0_base == 0 &&
+                 yakumono_param->xA0_entries[idx].x2_delay_min == 0 &&
+                 yakumono_param->xA0_entries[idx].x4_delay_max == 0 &&
+                 yakumono_param->xA0_entries[idx].x6_level == 0))
             {
                 gp->u.zebes5.xC4 = 0;
             }
@@ -1011,10 +981,10 @@ void grZebes_801D99E0(HSD_GObj* gobj)
             s32 delay_min, delay_max;
 
             delay_max =
-                grZe_804D6990->xA0_entries[gp->u.zebes5.xC4].x4_delay_max;
+                yakumono_param->xA0_entries[gp->u.zebes5.xC4].x4_delay_max;
             (void) delay_max;
             delay_min =
-                grZe_804D6990->xA0_entries[gp->u.zebes5.xC4].x2_delay_min;
+                yakumono_param->xA0_entries[gp->u.zebes5.xC4].x2_delay_min;
             if (delay_max > delay_min) {
                 s32 diff = delay_max - delay_min;
                 delay_max = delay_min + ((diff != 0) ? HSD_Randi(diff) : 0);
@@ -1024,7 +994,7 @@ void grZebes_801D99E0(HSD_GObj* gobj)
             }
 
             gp->u.zebes5.xC6 =
-                (s16) (grZe_804D6990->xA0_entries[gp->u.zebes5.xC4].x0_base +
+                (s16) (yakumono_param->xA0_entries[gp->u.zebes5.xC4].x0_base +
                        delay_max);
         }
 
@@ -1102,7 +1072,7 @@ void grZebes_801D9F84(Ground_GObj* gobj)
 
 void grZebes_801DA0C0(Ground_GObj* arg) {}
 
-const grZe_BubbleConfig grZe_803B8044 = {
+grZe_BubbleConfig const grZe_803B8044 = {
     { { 1.0f, 1.1f, 1.0f, 1.2f, 1.1f, 1.0f, 1.0f } },
     {
         { 7.59f, 2.5f, 0.0f },
@@ -1197,8 +1167,8 @@ void grZebes_801DA254(Ground_GObj* gobj, f32 level)
         GXColor result;
         f32 t;
 
-        t = (level - grZe_804D6990->x90) /
-            (grZe_804D6990->x8C - grZe_804D6990->x90);
+        t = (level - yakumono_param->x90) /
+            (yakumono_param->x8C - yakumono_param->x90);
         result.r = (u8) (t * (f32) (c1.r - c2.r) + (f32) c2.r);
         result.g = (u8) (t * (f32) (c1.g - c2.g) + (f32) c2.g);
         result.b = (u8) (t * (f32) (c1.b - c2.b) + (f32) c2.b);
@@ -1257,8 +1227,8 @@ s32 grZebes_801DA528(HSD_GObj* arg0, void* arg1, s32 arg2, s32 arg3)
             break;
         case 2: {
             f1 = HSD_Randf();
-            f0 = (grZe_804D6990->x54 - grZe_804D6990->x50);
-            st->x02_timer = (s16) (f0 * f1 + grZe_804D6990->x50);
+            f0 = (yakumono_param->x54 - yakumono_param->x50);
+            st->x02_timer = (s16) (f0 * f1 + yakumono_param->x50);
             break;
         }
         case 3:
@@ -1273,7 +1243,7 @@ s32 grZebes_801DA528(HSD_GObj* arg0, void* arg1, s32 arg2, s32 arg3)
     case 0: {
         s16 t = st->x02_timer;
         st->x02_timer += 1;
-        if ((f32) t > grZe_804D6990->x48) {
+        if ((f32) t > yakumono_param->x48) {
             st->x02_timer = 0;
             st->x10_damage -= 1.0f;
             if (st->x10_damage < 0.0f) {
@@ -1281,26 +1251,26 @@ s32 grZebes_801DA528(HSD_GObj* arg0, void* arg1, s32 arg2, s32 arg3)
             }
         }
         {
-            if (st->x08_offset > grZe_804D6990->x44) {
-                st->x0C_velocity -= grZe_804D6990->x38;
-            } else if (st->x08_offset < -grZe_804D6990->x44) {
-                st->x0C_velocity += grZe_804D6990->x38;
+            if (st->x08_offset > yakumono_param->x44) {
+                st->x0C_velocity -= yakumono_param->x38;
+            } else if (st->x08_offset < -yakumono_param->x44) {
+                st->x0C_velocity += yakumono_param->x38;
             }
         }
-        st->x0C_velocity *= (1.0f - grZe_804D6990->x3C);
+        st->x0C_velocity *= (1.0f - yakumono_param->x3C);
         {
-            if (st->x0C_velocity > grZe_804D6990->x34) {
-                st->x0C_velocity = grZe_804D6990->x34;
-            } else if (st->x0C_velocity < -grZe_804D6990->x34) {
-                st->x0C_velocity = -grZe_804D6990->x34;
+            if (st->x0C_velocity > yakumono_param->x34) {
+                st->x0C_velocity = yakumono_param->x34;
+            } else if (st->x0C_velocity < -yakumono_param->x34) {
+                st->x0C_velocity = -yakumono_param->x34;
             }
         }
         st->x08_offset += st->x0C_velocity;
         {
-            if (st->x08_offset > grZe_804D6990->x30) {
-                st->x08_offset = grZe_804D6990->x30;
-            } else if (st->x08_offset < -grZe_804D6990->x30) {
-                st->x08_offset = -grZe_804D6990->x30;
+            if (st->x08_offset > yakumono_param->x30) {
+                st->x08_offset = yakumono_param->x30;
+            } else if (st->x08_offset < -yakumono_param->x30) {
+                st->x08_offset = -yakumono_param->x30;
             }
         }
         {
@@ -1308,12 +1278,12 @@ s32 grZebes_801DA528(HSD_GObj* arg0, void* arg1, s32 arg2, s32 arg3)
             if (f0 < 0.0f) {
                 f0 = -f0;
             }
-            if (f0 < grZe_804D6990->x44) {
+            if (f0 < yakumono_param->x44) {
                 f32 abs_vel = st->x0C_velocity;
                 if (abs_vel < 0.0f) {
                     abs_vel = -abs_vel;
                 }
-                if (abs_vel < grZe_804D6990->x40) {
+                if (abs_vel < yakumono_param->x40) {
                     st->x08_offset = 0.0f;
                     st->x0C_velocity = 0.0f;
                 }
@@ -1324,7 +1294,7 @@ s32 grZebes_801DA528(HSD_GObj* arg0, void* arg1, s32 arg2, s32 arg3)
         HSD_JObjSetTranslateX(st->x18_jobj2, st->x04_base_x + st->x08_offset);
         {
             f32 dmg = st->x10_damage;
-            f32 thr = grZe_804D6990->x4C;
+            f32 thr = yakumono_param->x4C;
             f32 frame;
             if (dmg > thr) {
                 frame = 30.0f;
@@ -1566,7 +1536,7 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
                     f32* targetp = &((grZe_BubbleState*) grZe_8049F140)
                                         ->bubbles[arg1]
                                         .x1C;
-                    f32 speed = grZe_804D6990->x68;
+                    f32 speed = yakumono_param->x68;
                     f32* sizep = &((grZe_BubbleState*) grZe_8049F140)
                                       ->bubbles[arg1]
                                       .x18_size;
@@ -1725,7 +1695,7 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
     }
 
     {
-        grZe_YakumonoParam* yaku = grZe_804D6990;
+        grZe_YakumonoParam* yaku = yakumono_param;
         int j;
         for (j = 0; j < 20; j++) {
             if (base[j].x00_active != 0) {
@@ -1758,9 +1728,9 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                             dist = sqrtf(dist);
                         }
                         {
-                            f32 col_r = grZe_804D6990->x74;
+                            f32 col_r = yakumono_param->x74;
                             if (dist > col_r) {
-                                f32 max_force = grZe_804D6990->x80;
+                                f32 max_force = yakumono_param->x80;
                                 f32 norm_x =
                                     grZebes_801DB3CC_normalize(dist, dx);
                                 f32 norm_y =
@@ -1786,9 +1756,9 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                                 dist2 = sqrtf(dist2);
                             }
                             {
-                                f32 col_r2 = grZe_804D6990->x74;
+                                f32 col_r2 = yakumono_param->x74;
                                 if (dist2 > col_r2) {
-                                    f32 max_force2 = grZe_804D6990->x80;
+                                    f32 max_force2 = yakumono_param->x80;
                                     f32 norm_x2 = dx2 / dist2;
                                     f32 norm_y2 = dy2 / dist2;
                                     f32 push2 = dist2 - col_r2;
@@ -1835,11 +1805,11 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                                 f32 effective_dist = dist;
                                 f32 avg_size = ea->x18_size + eb->x18_size;
                                 f32 col_rad =
-                                    grZe_804D6990->x74 * 0.5f * avg_size;
+                                    yakumono_param->x74 * 0.5f * avg_size;
                                 f32 near_rad =
-                                    grZe_804D6990->x70 * 0.5f * avg_size;
+                                    yakumono_param->x70 * 0.5f * avg_size;
                                 f32 far_rad =
-                                    grZe_804D6990->x6C * 0.5f * avg_size;
+                                    yakumono_param->x6C * 0.5f * avg_size;
                                 if (dist < 0.001f) {
                                     dy = 0.001f;
                                     dx = 0.0f;
@@ -1875,7 +1845,7 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                                            effective_dist < far_rad)
                                 {
                                     f32 attract =
-                                        grZe_804D6990->x78 / effective_dist;
+                                        yakumono_param->x78 / effective_dist;
                                     if (a >= 7) {
                                         f32 vx = dx * attract;
                                         f32 vy = dy * attract;
@@ -1942,7 +1912,7 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                     base->x0C_y = new_y;
                     {
                         f32 vx = base->x10;
-                        f32 max_v = grZe_804D6990->x88;
+                        f32 max_v = yakumono_param->x88;
                         if (vx > max_v) {
                             base->x10 = max_v;
                         } else if (vx < -max_v) {
@@ -1951,7 +1921,7 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                     }
                     {
                         f32 vy = base->x14;
-                        f32 max_v = grZe_804D6990->x88;
+                        f32 max_v = yakumono_param->x88;
                         if (vy > max_v) {
                             base->x14 = max_v;
                         } else if (vy < -max_v) {
@@ -1966,7 +1936,7 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
     return popped;
 }
 
-s32 grZebes_801DBB60(HSD_GObj* yaku)
+bool grZebes_801DBB60(Item_GObj* yaku)
 {
     s32 last_idx;
     grZe_BubbleState* state = (grZe_BubbleState*) grZe_8049F140;
@@ -2000,16 +1970,16 @@ s32 grZebes_801DBB60(HSD_GObj* yaku)
     if (count == 1) {
         grZe_BubbleEntry* entry;
         f32 zero;
-        grMaterial_801C8E08((Item_GObj*) yaku);
+        grMaterial_801C8E08(yaku);
         entry = &bubbles[last_idx];
         zero = 0.0f;
-        grMaterial_801C8DE0((Item_GObj*) yaku, entry->x08_x, entry->x0C_y,
-                            zero, entry->x08_x, entry->x0C_y, zero,
+        grMaterial_801C8DE0(yaku, entry->x08_x, entry->x0C_y, zero,
+                            entry->x08_x, entry->x0C_y, zero,
                             (f32) (2.0 * (f64) entry->x18_size));
         return 1;
     }
 
-    grMaterial_801C8E08((Item_GObj*) yaku);
+    grMaterial_801C8E08(yaku);
 
     {
         s32 i = 0;
@@ -2176,12 +2146,11 @@ s32 grZebes_801DBB60(HSD_GObj* yaku)
                 }
             }
 
-            grMaterial_801C8DE0((Item_GObj*) yaku, x1, y1, 0.0f, x2, y2, 0.0f,
-                                width);
+            grMaterial_801C8DE0(yaku, x1, y1, 0.0f, x2, y2, 0.0f, width);
             return 1;
         }
     }
-    HSD_ASSERT(0x943, 0);
+    HSD_ASSERT(2371, 0);
 }
 
 void grZebes_801DC260(void)
@@ -2238,7 +2207,7 @@ void grZebes_801DC408(Ground_GObj* gobj)
 
             if (count < 15) {
                 f32 y_min = grZe_8049F158[0].y;
-                f32 bubble_r = grZe_804D6990->x74;
+                f32 bubble_r = yakumono_param->x74;
                 f32 x_base = grZe_8049F158[0].x + bubble_r;
                 f32 x_range = -((2.0f * bubble_r) -
                                 (grZe_8049F140[1].x - grZe_8049F158[0].x));
@@ -2254,8 +2223,8 @@ void grZebes_801DC408(Ground_GObj* gobj)
             }
 
             {
-                s32 t_min = (s32) grZe_804D6990->x60;
-                s32 timer = (s32) grZe_804D6990->x64;
+                s32 t_min = (s32) yakumono_param->x60;
+                s32 timer = (s32) yakumono_param->x64;
 
                 if (timer > t_min) {
                     s32 range = timer - t_min;
@@ -2322,7 +2291,7 @@ void grZebes_801DC744(s32 arg0, u8 arg1)
 
         p_x = base[2].x;
         y_start = grZebes_GetBubbleStartY(base);
-        bubble_r = grZe_804D6990->x74;
+        bubble_r = yakumono_param->x74;
         x_base = p_x + bubble_r;
         x_range = (base[1].x - p_x) - 2.0f * bubble_r;
         y_range = base[1].y - y_start;
@@ -2416,7 +2385,7 @@ bool grZebes_801DCBFC(Ground_GObj* gobj, HSD_GObj* fobj, void* arg)
     ftLib_80086684(fobj, &prev);
     prev.y += intercept;
     if (pos.y < slope) {
-        *(void**) arg = ((HSD_GObj*) grZe_804D6990)->user_data;
+        *(void**) arg = ((HSD_GObj*) yakumono_param)->user_data;
         if (prev.y > slope) {
             Ground_801C43A4(&pos);
             Ground_801C53EC(0x61A82);
@@ -2441,5 +2410,5 @@ f32 grZebes_801DCCC8(void)
 {
     f32 slope, intercept;
     Ground_801C4368(&slope, &intercept);
-    return grZe_804DB0B0 + slope;
+    return 5.0f + slope;
 }

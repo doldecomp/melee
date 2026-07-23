@@ -355,15 +355,15 @@ void ftKb_SpecialHi_800F331C(Fighter_GObj* gobj)
             ftParts_80074B0C(gobj, 0, 0);
             ftParts_80074B0C(gobj, 1, 0);
             ftCommon_8007F5CC(gobj, 1);
-            fp->x221E_b4 = TRUE;
-            fp->x2225_b2 = TRUE;
+            fp->x221E_b4 = true;
+            fp->x2225_b2 = true;
         } else {
             ftParts_80074B0C(
                 gobj, 0, ftKb_Init_803CB4EC.ints[fp->mv.kb.specialhi.x10.i]);
             ftParts_80074B0C(gobj, 1, -1);
             ftCommon_8007F5CC(gobj, 0);
-            fp->x221E_b4 = FALSE;
-            fp->x2225_b2 = FALSE;
+            fp->x221E_b4 = false;
+            fp->x2225_b2 = false;
         }
     } else {
         fp->mv.kb.specialhi.x8.i = 0;

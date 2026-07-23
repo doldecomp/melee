@@ -28,7 +28,8 @@ const Vec3 grLast_803B8498 = { 0, 0, 1 };
 
 S16Vec grLast_804D4968[1] = { { 0, 3, 0 } };
 
-static int* grNLa_804D6AD0;
+/// @todo yakumono struct
+static int* yakumono_param;
 
 static void grLast_OnDemoInit(int arg0)
 {
@@ -166,7 +167,7 @@ StageData grNLa_803E7F90 = {
 
 static void grLast_OnInit(void)
 {
-    grNLa_804D6AD0 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 1;
     stage_info.unk8C.b5 = 1;
     grLast_8021A7F4(0);
@@ -188,7 +189,7 @@ static void grLast_OnStart(void)
 
 static bool grLast_8021A7EC(void)
 {
-    return FALSE;
+    return false;
 }
 
 static Ground_GObj* grLast_8021A7F4(int id)
@@ -727,10 +728,10 @@ static void grLast_8021B920(Ground_GObj* gobj_, int arg1)
 {
     Ground_GObj* gobj = gobj_;
     Vec3 sp40;
-    u8 _[0x0C];
     Ground* gp;
     int i;
     Ground* temp_r28_10;
+    PAD_STACK(3 * 4);
 
     gp = gobj->user_data;
 
@@ -741,7 +742,7 @@ static void grLast_8021B920(Ground_GObj* gobj_, int arg1)
         for (i = 0; i < 5; i++) {
             if (gp->u.map.lv_gobj[i] == NULL) {
                 gp->u.map.lv_gobj[i] = grLast_8021A7F4(grNLa_803E8010[i][0]);
-                HSD_ASSERT(0x44B, gp->u.map.lv_gobj[i]);
+                HSD_ASSERT(1099, gp->u.map.lv_gobj[i]);
                 HSD_GObjGXLink_803909D8(gp->u.map.lv_gobj[i], gobj_);
                 if (grNLa_803E8010[i][2] != -1) {
                     grAnime_801C7FF8(gp->u.map.lv_gobj[i],
@@ -835,7 +836,7 @@ static void grLast_8021B920(Ground_GObj* gobj_, int arg1)
     case 13:
         grLast_8021C40C(gobj, grNLa_804DBBD8, 120.0F);
         for (i = 0; i < 5; i++) {
-            grMaterial_801C9604(gp->u.map.lv_gobj[i], grNLa_804D6AD0[0], 0);
+            grMaterial_801C9604(gp->u.map.lv_gobj[i], yakumono_param[0], 0);
             grMaterial_801C9698(gp->u.map.lv_gobj[i]);
         }
         gp->u.map.xC4_b26 = true;
@@ -850,7 +851,7 @@ static void grLast_8021B920(Ground_GObj* gobj_, int arg1)
         HSD_ASSERT(0x4D2, gp->u.map.lv_gobj[5]);
         HSD_GObjGXLink_803909D8(gp->u.map.lv_gobj[5], gobj);
         do_anime(gp->u.map.lv_gobj[5], 5, 0);
-        grMaterial_801C9604(gp->u.map.lv_gobj[5], grNLa_804D6AD0[1], 0);
+        grMaterial_801C9604(gp->u.map.lv_gobj[5], yakumono_param[1], 0);
         grMaterial_801C9698(gp->u.map.lv_gobj[5]);
         Ground_801C1E00(0);
         gp->u.map.xC4_b26 = true;
@@ -861,7 +862,7 @@ static void grLast_8021B920(Ground_GObj* gobj_, int arg1)
         break;
     case 16:
         grLast_8021C40C(gobj, grNLa_804DBBE0, 60.0F);
-        grMaterial_801C9604(gp->u.map.lv_gobj[5], grNLa_804D6AD0[2], 0);
+        grMaterial_801C9604(gp->u.map.lv_gobj[5], yakumono_param[2], 0);
         grMaterial_801C9698(gp->u.map.lv_gobj[5]);
         gp->u.map.xC4_b26 = true;
         break;
@@ -875,7 +876,7 @@ static void grLast_8021B920(Ground_GObj* gobj_, int arg1)
                                  grNLa_803E8010[i][3], 0.0F, 1.0F);
             }
             do_anime(gp->u.map.lv_gobj[i], i, 0);
-            grMaterial_801C9604(gp->u.map.lv_gobj[i], grNLa_804D6AD0[3], 0);
+            grMaterial_801C9604(gp->u.map.lv_gobj[i], yakumono_param[3], 0);
             grMaterial_801C9698(gp->u.map.lv_gobj[i]);
         }
 

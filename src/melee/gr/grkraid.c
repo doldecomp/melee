@@ -10,10 +10,19 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbspdisplay.h"
 
-#include "mn/forward.h"
-
 #include <baselib/controller.h>
 #include <baselib/random.h>
+
+struct grKraid_YakumonoParam {
+    u32 map_time_min;
+    u32 map_time_max;
+    s32 map_time_acl;
+    float map_rot_spd_min;
+    float map_rot_spd_max;
+    u32 kraid_wait_time;
+    u32 kraid_wait_time_add;
+    float kraid_pos_x[6];
+};
 
 S16Vec3 grKr_803E4C78[] = { { 0, 3, 12 }, { 1, 3, 12 }, { 2, 3, 12 },
                             { 3, 3, 12 }, { 4, 3, 12 }, { 5, 3, 12 } };
@@ -47,7 +56,7 @@ StageData grKr_803E4D0C = {
     6,
 };
 
-static grKr_804D6A08_t* grKr_804D6A08;
+static struct grKraid_YakumonoParam* yakumono_param;
 static int grKr_804D6A0C;
 
 void grKraid_OnDemoInit(int unused)
@@ -59,7 +68,7 @@ void grKraid_OnInit(void)
 {
     HSD_GObj* gobj;
 
-    grKr_804D6A08 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grKraid_801FE0C4(0);
@@ -210,8 +219,8 @@ void grKraid_801FE440(Ground_GObj* gobj)
     case 0:
         if (gp->u.kraid.x4) { /// @remark Explicit != 0.0f comparison leads to
                               /// incorrect ordering
-            gp->u.kraid.x10 = rand_range(grKr_804D6A08->map_time_max,
-                                         grKr_804D6A08->map_time_min);
+            gp->u.kraid.x10 = rand_range(yakumono_param->map_time_max,
+                                         yakumono_param->map_time_min);
             gp->u.kraid.x0 = 1;
             grAnime_801C7FF8(gobj, 18, 7, 1, 0.0f, 1.0f);
             Ground_801C53EC(420007);
@@ -268,20 +277,20 @@ void grKraid_801FE6D8(HSD_JObj* hand, float param2)
         map->u.kraid.x4 = param2;
         lb_8000B1CC(hand, NULL, &handpos);
         OSReport("Kraid Hand Pos = %f\n", handpos.x);
-        max = grKr_804D6A08->map_rot_spd_max;
-        min = grKr_804D6A08->map_rot_spd_min;
+        max = yakumono_param->map_rot_spd_max;
+        min = yakumono_param->map_rot_spd_min;
         rot = (max / min) / 132.0f;
         rot = rot * min;
-        grKr_804D6A08->map_rot_spd_min = grKr_804D6A08->map_rot_spd_min;
+        yakumono_param->map_rot_spd_min = yakumono_param->map_rot_spd_min;
         map->u.kraid.x8 = rot * ((handpos.x < 0.0f) ? -handpos.x : handpos.x);
-        if (map->u.kraid.x8 < grKr_804D6A08->map_rot_spd_min) {
-            map->u.kraid.x8 = grKr_804D6A08->map_rot_spd_min;
+        if (map->u.kraid.x8 < yakumono_param->map_rot_spd_min) {
+            map->u.kraid.x8 = yakumono_param->map_rot_spd_min;
         }
-        if (map->u.kraid.x8 > grKr_804D6A08->map_rot_spd_max) {
-            map->u.kraid.x8 = grKr_804D6A08->map_rot_spd_max;
+        if (map->u.kraid.x8 > yakumono_param->map_rot_spd_max) {
+            map->u.kraid.x8 = yakumono_param->map_rot_spd_max;
         }
         map->u.kraid.x8 = map->u.kraid.x8 * map->u.kraid.x4;
-        map->u.kraid.xC = map->u.kraid.x8 / grKr_804D6A08->map_time_acl;
+        map->u.kraid.xC = map->u.kraid.x8 / yakumono_param->map_time_acl;
         Ground_801C53EC(420005);
         Camera_80030E44(3, &handpos);
     }
@@ -301,7 +310,7 @@ void grKraid_801FE818(Ground_GObj* gobj)
     gp->u.kraid2.x4 = 0;
     gp->u.kraid2.x3 = 0;
 
-    fVar2 = grKr_804D6A08->kraid_pos_x[0];
+    fVar2 = yakumono_param->kraid_pos_x[0];
     if (fVar2 < 0.0f) {
         gp->u.kraid2.x3 = 0;
         fVar3 = fVar2;
@@ -311,7 +320,7 @@ void grKraid_801FE818(Ground_GObj* gobj)
             gp->u.kraid2.x4 = 0;
         }
     }
-    fVar2 = grKr_804D6A08->kraid_pos_x[1];
+    fVar2 = yakumono_param->kraid_pos_x[1];
     if (fVar2 < fVar3) {
         gp->u.kraid2.x3 = 1;
         fVar3 = fVar2;
@@ -321,7 +330,7 @@ void grKraid_801FE818(Ground_GObj* gobj)
             gp->u.kraid2.x4 = 1;
         }
     }
-    fVar2 = grKr_804D6A08->kraid_pos_x[2];
+    fVar2 = yakumono_param->kraid_pos_x[2];
     if (fVar2 < fVar3) {
         gp->u.kraid2.x3 = 2;
         fVar3 = fVar2;
@@ -331,7 +340,7 @@ void grKraid_801FE818(Ground_GObj* gobj)
             gp->u.kraid2.x4 = 2;
         }
     }
-    fVar2 = grKr_804D6A08->kraid_pos_x[3];
+    fVar2 = yakumono_param->kraid_pos_x[3];
     if (fVar2 < fVar3) {
         gp->u.kraid2.x3 = 3;
         fVar3 = fVar2;
@@ -341,7 +350,7 @@ void grKraid_801FE818(Ground_GObj* gobj)
             gp->u.kraid2.x4 = 3;
         }
     }
-    fVar2 = grKr_804D6A08->kraid_pos_x[4];
+    fVar2 = yakumono_param->kraid_pos_x[4];
     if (fVar2 < fVar3) {
         gp->u.kraid2.x3 = 4;
         fVar3 = fVar2;
@@ -351,7 +360,7 @@ void grKraid_801FE818(Ground_GObj* gobj)
             gp->u.kraid2.x4 = 4;
         }
     }
-    fVar2 = grKr_804D6A08->kraid_pos_x[5];
+    fVar2 = yakumono_param->kraid_pos_x[5];
     if (fVar2 < fVar3) {
         gp->u.kraid2.x3 = 5;
         fVar3 = fVar2;
@@ -362,9 +371,9 @@ void grKraid_801FE818(Ground_GObj* gobj)
         }
     }
     gp->u.kraid2.x0 = 0;
-    gp->u.kraid2.xC = grKr_804D6A08->kraid_wait_time +
-                      ((s32) grKr_804D6A08->kraid_wait_time_add != 0
-                           ? HSD_Randi(grKr_804D6A08->kraid_wait_time_add)
+    gp->u.kraid2.xC = yakumono_param->kraid_wait_time +
+                      ((s32) yakumono_param->kraid_wait_time_add != 0
+                           ? HSD_Randi(yakumono_param->kraid_wait_time_add)
                            : 0);
     gp->u.kraid2.x8 = 0.0f;
     fVar2 = 0;
@@ -474,14 +483,14 @@ void grKraid_801FEA00(Ground_GObj* gobj)
         break;
     case 4:
         if (grAnime_801C83D0(gobj, 0, 7) != 0) {
-            gp->u.kraid2.xC = grKr_804D6A08->kraid_wait_time +
-                              grKr_804D6A08->kraid_wait_time_add;
+            gp->u.kraid2.xC = yakumono_param->kraid_wait_time +
+                              yakumono_param->kraid_wait_time_add;
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             HSD_JObjSetFlagsAll(Ground_801C2BA4(1)->hsd_obj, JOBJ_HIDDEN);
             gp->u.kraid2.xC =
-                grKr_804D6A08->kraid_wait_time +
-                ((s32) grKr_804D6A08->kraid_wait_time_add != 0
-                     ? HSD_Randi(grKr_804D6A08->kraid_wait_time_add)
+                yakumono_param->kraid_wait_time +
+                ((s32) yakumono_param->kraid_wait_time_add != 0
+                     ? HSD_Randi(yakumono_param->kraid_wait_time_add)
                      : 0);
             gp->u.kraid2.x0 = 0;
         }
@@ -504,17 +513,17 @@ void grKraid_801FEE54(HSD_GObj* gobj)
     }
     gp->u.kraid2.x5 = 0;
     gp->u.kraid2.x2 = iVar3;
-    HSD_JObjSetTranslateX(jobj, grKr_804D6A08->kraid_pos_x[iVar3]);
+    HSD_JObjSetTranslateX(jobj, yakumono_param->kraid_pos_x[iVar3]);
     HSD_JObjSetTranslateX(Ground_801C2BA4(1)->hsd_obj,
-                          grKr_804D6A08->kraid_pos_x[iVar3]);
-    if (grKr_804D6A08->kraid_pos_x[iVar3] == 0.0f) {
+                          yakumono_param->kraid_pos_x[iVar3]);
+    if (yakumono_param->kraid_pos_x[iVar3] == 0.0f) {
         if (HSD_Randi(2) != 0) {
             iVar3 = 1;
         } else {
             iVar3 = 0;
         }
         gp->u.kraid2.x8 = iVar3;
-    } else if (grKr_804D6A08->kraid_pos_x[iVar3] < 0.0f) {
+    } else if (yakumono_param->kraid_pos_x[iVar3] < 0.0f) {
         gp->u.kraid2.x8 = 0.0f;
     } else {
         gp->u.kraid2.x8 = 1.0f;

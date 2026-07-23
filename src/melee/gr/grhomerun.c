@@ -42,7 +42,7 @@ f32 grHr_804D6AD8;
 int grHr_804D6ADC;
 f32 grHr_804D6AE0;
 f32 grHr_804D6AE4;
-static void* grHr_804D6AE8;
+static void* yakumono_param;
 static int grHr_804D4998[2] = { 0xA, 0 };
 static char grHr_804D49A0[] = "/GrHr";
 static char grHr_804D49D0[] = "%d";
@@ -109,7 +109,7 @@ void grHomeRun_8021C754(void)
 {
     Vec3 cam_offset;
 
-    grHr_804D6AE8 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grHomeRun_8021EDD4();

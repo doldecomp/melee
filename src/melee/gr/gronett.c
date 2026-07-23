@@ -66,7 +66,7 @@
 };
 
 /// Onett stage yakumono parameters
-static struct grOnett_StageParam {
+struct grOnett_StageParam {
     /* 0x00 */ f32 awning_initial;
     /* 0x04 */ f32 max_velocity;
     /* 0x08 */ f32 vel_threshold;
@@ -93,7 +93,9 @@ static struct grOnett_StageParam {
     /* 0x5C */ f32 x5C;
     /* 0x60 */ f32 x60;
     /* 0x64 */ f32 x64;
-}* grOt_804D69C0;
+};
+
+static struct grOnett_StageParam* yakumono_param;
 
 static s32 grOt_804D69C4;
 
@@ -101,7 +103,7 @@ void grOnett_801E3734(bool arg) {}
 
 void grOnett_801E3738(void)
 {
-    grOt_804D69C0 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grOnett_801E37F4(0);
@@ -227,7 +229,7 @@ void grOnett_801E3A34(Ground_GObj* gobj)
     gp->u.onett.awnings[1].flag = 0;
     gp->u.onett.awnings[1].cooldown = 0;
 
-    gp->u.onett.timer = rand_range(grOt_804D69C0->x28, grOt_804D69C0->x24);
+    gp->u.onett.timer = rand_range(yakumono_param->x28, yakumono_param->x24);
     gp->u.onett.gen = NULL;
 
     Ground_801C4E70(Ground_801C3FA4(gobj, 16), Ground_801C3FA4(gobj, 17),
@@ -339,8 +341,8 @@ void grOnett_801E3DA0(Ground_GObj* gobj)
         }
         if (grAnime_801C83D0(gobj, 0, 7)) {
             f32 rand = HSD_Randf();
-            f32 lo = grOt_804D69C0->x3C;
-            f32 range = grOt_804D69C0->x40 - lo;
+            f32 lo = yakumono_param->x3C;
+            f32 range = yakumono_param->x40 - lo;
             gp->u.onett_building.timer = (s32) (range * rand + lo);
             gp->u.onett_building.next_state = 6;
         }
@@ -406,14 +408,14 @@ void grOnett_801E40E4(void* user_data, int joint_id, CollData* coll,
         case 5:
             break;
         case 0:
-            if (gp->u.onett_building.hit_count < grOt_804D69C0->x34) {
+            if (gp->u.onett_building.hit_count < yakumono_param->x34) {
                 gp->u.onett_building.next_state = 1;
                 return;
             }
             gp->u.onett_building.next_state = 2;
             return;
         case 3:
-            if (gp->u.onett_building.hit_count < grOt_804D69C0->x38) {
+            if (gp->u.onett_building.hit_count < yakumono_param->x38) {
                 gp->u.onett_building.next_state = 4;
                 return;
             }
@@ -497,7 +499,7 @@ static inline void grOnett_StartCar(Ground* gp)
     HSD_JObjSetTranslateZ(car_jobj, 30.0f);
     HSD_JObjSetRotationY(car_jobj->child, 0.0f);
     gp->u.onettcar.state_a = 1;
-    gp->u.onettcar.x108 = grOt_804D69C0->x44;
+    gp->u.onettcar.x108 = yakumono_param->x44;
     Ground_801C5784(0);
 }
 
@@ -517,7 +519,7 @@ static inline void grOnett_StartNextCar(Ground* gp)
     HSD_JObjSetTranslateZ(jobj, 56.0f);
     HSD_JObjSetRotationY(jobj->child, M_PI);
     gp->u.onettcar.state_b = 1;
-    gp->u.onettcar.timer_b = grOt_804D69C0->x44;
+    gp->u.onettcar.timer_b = yakumono_param->x44;
 }
 
 static inline void grOnett_WaitCar(Ground* gp, s8 saved_car)
@@ -528,11 +530,11 @@ static inline void grOnett_WaitCar(Ground* gp, s8 saved_car)
         gp->u.onettcar.x108 = t - 1;
     } else {
         s32 car = gp->u.onettcar.curr_car;
-        gp->u.onettcar.x108 = grOt_804D69C0->x48;
+        gp->u.onettcar.x108 = yakumono_param->x48;
         {
             f32 rand = HSD_Randf();
             gp->u.onettcar.car_speed =
-                grOt_804D69C0->x58 * rand + grOt_804D69C0->x54;
+                yakumono_param->x58 * rand + yakumono_param->x54;
         }
         if (gp->u.onettcar.car_speed > 0.0f) {
             gp->u.onettcar.car_speed *= -1.0f;
@@ -587,10 +589,10 @@ void grOnett_801E43E0(Ground_GObj* gobj)
                             HSD_JObjClearFlagsAll(car_jobj, JOBJ_HIDDEN);
                             gp->u.onettcar.state_a = 5;
                         } else if (fighter_count == rank + 1) {
-                            gp->u.onettcar.x108 = grOt_804D69C0->x50;
+                            gp->u.onettcar.x108 = yakumono_param->x50;
                             gp->u.onettcar.state_a = 3;
                         } else {
-                            gp->u.onettcar.x108 = grOt_804D69C0->x4C;
+                            gp->u.onettcar.x108 = yakumono_param->x4C;
                             gp->u.onettcar.state_a = 3;
                         }
                         gp->u.onettcar.x110 = 0;
@@ -620,7 +622,7 @@ void grOnett_801E43E0(Ground_GObj* gobj)
         }
         case 4:
             HSD_JObjAddRotationY(car_jobj->child,
-                                 0.017453292f * grOt_804D69C0->x5C);
+                                 0.017453292f * yakumono_param->x5C);
             grLib_801C9808(0x2C, 0, car_jobj2);
             HSD_JObjAddTranslationX(car_jobj, gp->u.onettcar.car_speed);
             if (HSD_JObjGetTranslationX(car_jobj) <= -642.0f) {
@@ -638,13 +640,13 @@ void grOnett_801E43E0(Ground_GObj* gobj)
             case 0:
                 if (HSD_JObjGetTranslationX(car_jobj) <= 580.0f) {
                     grOnett_801E5194(gp, gp->u.onettcar.curr_car, 5);
-                    un_802FD604(grOt_804D69C0->x60);
+                    un_802FD604(yakumono_param->x60);
                     gp->u.onettcar.x110 = 1;
                 }
                 break;
             case 1:
                 if (HSD_JObjGetTranslationX(car_jobj) <=
-                    cam_z + grOt_804D69C0->x64)
+                    cam_z + yakumono_param->x64)
                 {
                     HSD_GObj* fiter = HSD_GObj_Entities->fighters;
                     while (fiter != NULL) {
@@ -694,10 +696,10 @@ void grOnett_801E43E0(Ground_GObj* gobj)
                     gp->u.onettcar.timer_b = t - 1;
                     return;
                 }
-                gp->u.onettcar.timer_b = grOt_804D69C0->x48;
+                gp->u.onettcar.timer_b = yakumono_param->x48;
                 gp->u.onettcar.speed_b =
-                    grOt_804D69C0->x58 * HSD_RandF_noinline() +
-                    grOt_804D69C0->x54;
+                    yakumono_param->x58 * HSD_RandF_noinline() +
+                    yakumono_param->x54;
                 gp->u.onettcar.state_b = 2;
                 return;
             }
@@ -799,39 +801,39 @@ void grOnett_801E5214(Ground_GObj* gobj)
         HSD_JObj* jobj;
 
         if (gp->u.onett.awnings[i].accumulator <
-            -grOt_804D69C0->max_displacement)
+            -yakumono_param->max_displacement)
         {
             gp->u.onett.awnings[i].accumulator =
-                -grOt_804D69C0->max_displacement;
+                -yakumono_param->max_displacement;
         }
 
         disp = gp->u.onett.awnings[i].accumulator;
         error = disp - gp->u.onett.awnings[i].velocity;
         force = gp->u.onett.awnings[i].initial;
-        spring = grOt_804D69C0->spring_constant;
+        spring = yakumono_param->spring_constant;
         force += spring;
 
         abs_ratio = ABS(error);
-        abs_ratio /= grOt_804D69C0->max_displacement;
+        abs_ratio /= yakumono_param->max_displacement;
 
         if (error < 0.0) {
-            force = -(grOt_804D69C0->spring_force * abs_ratio - force);
+            force = -(yakumono_param->spring_force * abs_ratio - force);
         } else {
-            force = grOt_804D69C0->spring_force * abs_ratio + force;
+            force = yakumono_param->spring_force * abs_ratio + force;
         }
 
         force -= spring;
-        force *= 1.0f - grOt_804D69C0->damping;
+        force *= 1.0f - yakumono_param->damping;
 
-        if (force > grOt_804D69C0->max_velocity) {
-            force = grOt_804D69C0->max_velocity;
-        } else if (force < -grOt_804D69C0->max_velocity) {
-            force = -grOt_804D69C0->max_velocity;
+        if (force > yakumono_param->max_velocity) {
+            force = yakumono_param->max_velocity;
+        } else if (force < -yakumono_param->max_velocity) {
+            force = -yakumono_param->max_velocity;
         }
 
         vel = gp->u.onett.awnings[i].velocity;
-        if ((ABS(vel - disp) < grOt_804D69C0->pos_threshold) &&
-            (ABS(force) < grOt_804D69C0->vel_threshold))
+        if ((ABS(vel - disp) < yakumono_param->pos_threshold) &&
+            (ABS(force) < yakumono_param->vel_threshold))
         {
             gp->u.onett.awnings[i].velocity = disp;
             gp->u.onett.awnings[i].initial = 0.0f;
@@ -839,7 +841,7 @@ void grOnett_801E5214(Ground_GObj* gobj)
             gp->u.onett.awnings[i].initial = force;
             gp->u.onett.awnings[i].velocity += force;
             {
-                f32 lim = grOt_804D69C0->max_displacement;
+                f32 lim = yakumono_param->max_displacement;
                 if (gp->u.onett.awnings[i].velocity > lim) {
                     gp->u.onett.awnings[i].velocity = lim;
                 } else if (gp->u.onett.awnings[i].velocity < -lim) {
@@ -892,10 +894,10 @@ void grOnett_801E54B4(void* user_data, int joint_id, CollData* coll,
     idx = (joint_id == 0) ? 0 : 1;
     if (ground_kind == 1) {
         gp->u.onett.awnings[idx].flag = 1;
-        gp->u.onett.awnings[idx].initial = grOt_804D69C0->awning_initial;
+        gp->u.onett.awnings[idx].initial = yakumono_param->awning_initial;
     }
 
-    gp->u.onett.awnings[idx].accumulator += grOt_804D69C0->awning_delta;
+    gp->u.onett.awnings[idx].accumulator += yakumono_param->awning_delta;
     gp->u.onett.awnings[idx].counter++;
 }
 
@@ -909,12 +911,13 @@ void grOnett_801E5538(Ground_GObj* gobj)
     if (new_var < 0) {
         if (gp->u.onett.gen != NULL) {
             gp->u.onett.timer =
-                rand_range(grOt_804D69C0->x28, grOt_804D69C0->x24);
+                rand_range(yakumono_param->x28, yakumono_param->x24);
             grLib_801C9834(gp->u.onett.gen);
             gp->u.onett.gen = NULL;
             return;
         }
-        gp->u.onett.timer = rand_range(grOt_804D69C0->x30, grOt_804D69C0->x2C);
+        gp->u.onett.timer =
+            rand_range(yakumono_param->x30, yakumono_param->x2C);
         {
             HSD_JObj* jobj = Ground_801C3FA4(gobj, 6);
             if (jobj != NULL) {

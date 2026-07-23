@@ -14,7 +14,6 @@
 
 /* 1BFFB0 */ void Ground_801BFFB0(void);
 /* 1C0378 */ void Ground_801C0378(int);
-/* 1C0478 */ void Ground_801C0478(void* ptr);
 /* 1C0498 */ f32 Ground_801C0498(void);
 /* 1C04BC */ void Ground_801C04BC(f32);
 /* 1C0508 */ s32 Ground_801C0508(void);
@@ -67,8 +66,8 @@
 /* 1C247C */ HSD_Spline* Ground_801C247C(s32, s32);
 /* 1C28AC */ bool Ground_801C28AC(s32, u32, s32*);
 /* 1C2AD8 */ s32* Ground_801C2AD8(void);
-/* 1C2AE8 */ f32 Ground_801C2AE8(s32);
-/* 1C2BA4 */ HSD_GObj* Ground_801C2BA4(s32);
+/* 1C2AE8 */ float Ground_801C2AE8(int);
+/* 1C2BA4 */ Ground_GObj* Ground_801C2BA4(int index);
 /* 1C2C8C */ bool Ground_801C2C8C(void*);
 /* 1C2CF4 */ HSD_JObj* Ground_801C2CF4(s32);
 /* 1C2D0C */ void Ground_801C2D0C(s32 i, HSD_JObj* jobj);
@@ -118,7 +117,7 @@
 /* 1C445C */ void Ground_801C445C(HSD_LObj* lobj);
 /* 1C498C */ HSD_GObj* Ground_801C498C(void);
 /* 1C49B4 */ LightList** Ground_801C49B4(void);
-/* 1C49F8 */ void* Ground_801C49F8(void);
+/* 1C49F8 */ void* Ground_GetYakumonoParam(void);
 /* 1C4A08 */ void Ground_801C4A08(HSD_GObj* gobj);
 /* 1C4B50 */ void Ground_801C4B50(HSD_Spline*, Vec3*, Vec3*, f32);
 /* 1C4D70 */ bool Ground_801C4D70(HSD_GObj*, Vec3*, f32);

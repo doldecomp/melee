@@ -19,12 +19,16 @@
 #include "lb/lbspdisplay.h"
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
+
+struct grBattle_YakumonoParam {
+    int unk0;
+    int unk4;
+};
 
 static void grBattle_OnDemoInit(bool);
 static void grBattle_OnInit(void);
@@ -62,14 +66,8 @@ static void grBattle_8021A60C(Ground_GObj*);
 static DynamicsDesc* grBattle_OnTouchLine(enum_t);
 static bool grBattle_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 
-extern StageInfo stage_info;
-
-struct {
-    int unk0;
-    int unk4;
-}* grNBa_804D6ACC;
-
-static u8 isDemoFight;
+/* 4D6AC8 */ static u8 isDemoFight;
+/* 4D6ACC */ static struct grBattle_YakumonoParam* yakumono_param;
 
 static StageCallbacks grNBa_803E7DA0[7] = {
     {
@@ -146,7 +144,7 @@ static void grBattle_OnDemoInit(bool arg0)
 
 static void grBattle_OnInit(void)
 {
-    grNBa_804D6ACC = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 1;
     stage_info.unk8C.b5 = 1;
 
@@ -407,11 +405,11 @@ static void grBattle_8021A3BC(Ground_GObj* gobj)
 
             bg_gobj = Ground_801C2BA4(gp->u.battle.prev_bg);
             HSD_ASSERT(535, bg_gobj);
-            grMaterial_801C9604(bg_gobj, grNBa_804D6ACC->unk4, 0);
+            grMaterial_801C9604(bg_gobj, yakumono_param->unk4, 0);
 
             bg_gobj = grBattle_80219D84(gp->u.battle.curr_bg);
             HSD_ASSERT(539, bg_gobj);
-            grMaterial_801C9604(bg_gobj, grNBa_804D6ACC->unk0, 0);
+            grMaterial_801C9604(bg_gobj, yakumono_param->unk0, 0);
 
             gp->u.battle.bg_state = BG_Done;
         }

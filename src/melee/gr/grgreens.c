@@ -31,28 +31,7 @@
 #include <melee/lb/lbspdisplay.h>
 #include <melee/mp/mplib.h>
 
-/* 216DE4 */ static void fn_80216DE4(void* user_data, int joint_id,
-                                     CollData* coll, int coll_x50,
-                                     mpLib_GroundEnum ground_kind,
-                                     float delta_y);
-
-/// @todo Emitted only to lay out the .sdata2 literal pool in retail order.
-static void sdata2_order(void)
-{
-    (void) 1.0f;
-    (void) 0.0f;
-}
-
-#define Gr_Greens_Block_Status_None 0
-/// "Colum" (sic): the retail assert strings at 0x803E7908/0x803E7924 spell
-/// "ix<Gr_Greens_Block_Colum*2" / "ix<Gr_Greens_Block_Colum", so the original
-/// macro name carried this typo.
-#define Gr_Greens_Block_Colum 3
-#define Gr_Greens_Block_Max 30
-
-static u8 grGr_804D6AAC;
-static u8 grGr_804D6AAD;
-static struct {
+struct grGreens_YakumonoParam {
     int x0_blockTimerMin;
     int x4_blockTimerMax;
     int x8_blockBombChance;
@@ -84,7 +63,30 @@ static struct {
     float x70;
     float x74;
     float x78;
-}* grGr_params;
+};
+
+/* 216DE4 */ static void fn_80216DE4(void* user_data, int joint_id,
+                                     CollData* coll, int coll_x50,
+                                     mpLib_GroundEnum ground_kind,
+                                     float delta_y);
+
+/// @todo Emitted only to lay out the .sdata2 literal pool in retail order.
+static void sdata2_order(void)
+{
+    (void) 1.0f;
+    (void) 0.0f;
+}
+
+#define Gr_Greens_Block_Status_None 0
+/// "Colum" (sic): the retail assert strings at 0x803E7908/0x803E7924 spell
+/// "ix<Gr_Greens_Block_Colum*2" / "ix<Gr_Greens_Block_Colum", so the original
+/// macro name carried this typo.
+#define Gr_Greens_Block_Colum 3
+#define Gr_Greens_Block_Max 30
+
+static u8 grGr_804D6AAC;
+static u8 grGr_804D6AAD;
+static struct grGreens_YakumonoParam* yakumono_param;
 
 static StageCallbacks grGr_callbacks[] = {
     {
@@ -226,7 +228,7 @@ void grGreens_80213458(bool arg)
 void grGreens_Init(void)
 {
     PAD_STACK(8);
-    grGr_params = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grGreens_80213524(0);
@@ -371,8 +373,8 @@ void grGreens_802139C4(Ground_GObj* gobj)
     gp->u.greens.x0_flags.whole_thing = 0;
     gp->u.greens.x4 = NULL;
     gp->u.greens.x8_blocks = NULL;
-    gp->u.greens.xC = randrange(grGr_params->x38_windTimerMax,
-                                grGr_params->x34_windTimerMin);
+    gp->u.greens.xC = randrange(yakumono_param->x38_windTimerMax,
+                                yakumono_param->x34_windTimerMin);
     gp->u.greens.x10 = 1;
     gp->u.greens.x1C = 0;
     gp->u.greens.x14 = HSD_Randi(2);
@@ -419,20 +421,20 @@ bool fn_80213B1C(Ground_GObj* ground_gobj, Fighter_GObj* fighter_gobj,
     vec->z = 0.0f;
     switch (GET_GROUND(ground_gobj)->u.greens2.x18) {
     case 1:
-        if (grGreens_80213AB4(&vec2, -grGr_params->x40_left,
-                              -grGr_params->x44_right, grGr_params->x48_top,
-                              grGr_params->x4C_bottom) == true)
+        if (grGreens_80213AB4(
+                &vec2, -yakumono_param->x40_left, -yakumono_param->x44_right,
+                yakumono_param->x48_top, yakumono_param->x4C_bottom) == true)
         {
-            vec->x = -grGr_params->x3C_windSpeed;
+            vec->x = -yakumono_param->x3C_windSpeed;
             return true;
         }
         break;
     case 2:
-        if (grGreens_80213AB4(&vec2, grGr_params->x44_right,
-                              grGr_params->x40_left, grGr_params->x48_top,
-                              grGr_params->x4C_bottom) == true)
+        if (grGreens_80213AB4(
+                &vec2, yakumono_param->x44_right, yakumono_param->x40_left,
+                yakumono_param->x48_top, yakumono_param->x4C_bottom) == true)
         {
-            vec->x = grGr_params->x3C_windSpeed;
+            vec->x = yakumono_param->x3C_windSpeed;
             return true;
         }
         break;
@@ -475,8 +477,8 @@ void grGreens_80213C10(Ground_GObj* gobj)
         if (gp->u.greens2.x10 != 0) {
             gp->u.greens2.x10 = 0;
             gp->u.greens2.x8 = HSD_Randi(8);
-            gp->u.greens2.xC = randrange(grGr_params->x38_windTimerMax,
-                                         grGr_params->x34_windTimerMin);
+            gp->u.greens2.xC = randrange(yakumono_param->x38_windTimerMax,
+                                         yakumono_param->x34_windTimerMin);
             grAnime_801C8138(gobj, gp->map_id,
                              grGr_803E775C[gp->u.greens2.x8]);
             grAnime_801C8138(bg_gobj, bg_gp->map_id,
@@ -561,7 +563,7 @@ void grGreens_80213C10(Ground_GObj* gobj)
         case 2:
             if (grAnime_801C84A4(gobj, 0, 7) != 0) {
                 gp->u.greens2.xC++;
-                if ((float) gp->u.greens2.xC > grGr_params->x50) {
+                if ((float) gp->u.greens2.xC > yakumono_param->x50) {
                     gp->u.greens2.x8++;
                     gp->u.greens2.xC = 0;
                     grAnime_801C8138(
@@ -588,15 +590,15 @@ void grGreens_80213C10(Ground_GObj* gobj)
                     grGr_803E777C[gp->u.greens2.x8][gp->u.greens2.x14]);
                 wind_dir = GET_GROUND(gobj)->u.greens2.x14;
                 if (wind_dir == 0) {
-                    lb_80011A50(&grGr_803E780C[wind_dir], 0xF, 0.5f, 0.0f,
-                                0.0f, -grGr_params->x44_right,
-                                grGr_params->x48_top, -grGr_params->x40_left,
-                                grGr_params->x4C_bottom);
+                    lb_80011A50(
+                        &grGr_803E780C[wind_dir], 0xF, 0.5f, 0.0f, 0.0f,
+                        -yakumono_param->x44_right, yakumono_param->x48_top,
+                        -yakumono_param->x40_left, yakumono_param->x4C_bottom);
                 } else {
-                    lb_80011A50(&grGr_803E780C[wind_dir], 0xF, 0.5f, 0.0f,
-                                0.0f, grGr_params->x40_left,
-                                grGr_params->x48_top, grGr_params->x44_right,
-                                grGr_params->x4C_bottom);
+                    lb_80011A50(
+                        &grGr_803E780C[wind_dir], 0xF, 0.5f, 0.0f, 0.0f,
+                        yakumono_param->x40_left, yakumono_param->x48_top,
+                        yakumono_param->x44_right, yakumono_param->x4C_bottom);
                 }
                 grAnime_801C8138(
                     bg_gobj, bg_gp->map_id,
@@ -612,8 +614,8 @@ void grGreens_80213C10(Ground_GObj* gobj)
                 int wind_dir;
 
                 gp->u.greens2.xC++;
-                if ((float) gp->u.greens2.xC > grGr_params->x54 ||
-                    ((float) gp->u.greens2.xC > grGr_params->x58 &&
+                if ((float) gp->u.greens2.xC > yakumono_param->x54 ||
+                    ((float) gp->u.greens2.xC > yakumono_param->x58 &&
                      gp->u.greens2.x14 != get_whispy_dir(gobj, &pos2)))
                 {
                     gp->u.greens2.x8++;
@@ -629,15 +631,15 @@ void grGreens_80213C10(Ground_GObj* gobj)
 
                 wind_dir = GET_GROUND(gobj)->u.greens2.x14;
                 if (wind_dir == 0) {
-                    lb_80011A50(&grGr_803E780C[wind_dir], 0xF, 0.5f, 0.0f,
-                                0.0f, -grGr_params->x44_right,
-                                grGr_params->x48_top, -grGr_params->x40_left,
-                                grGr_params->x4C_bottom);
+                    lb_80011A50(
+                        &grGr_803E780C[wind_dir], 0xF, 0.5f, 0.0f, 0.0f,
+                        -yakumono_param->x44_right, yakumono_param->x48_top,
+                        -yakumono_param->x40_left, yakumono_param->x4C_bottom);
                 } else {
-                    lb_80011A50(&grGr_803E780C[wind_dir], 0xF, 0.5f, 0.0f,
-                                0.0f, grGr_params->x40_left,
-                                grGr_params->x48_top, grGr_params->x44_right,
-                                grGr_params->x4C_bottom);
+                    lb_80011A50(
+                        &grGr_803E780C[wind_dir], 0xF, 0.5f, 0.0f, 0.0f,
+                        yakumono_param->x40_left, yakumono_param->x48_top,
+                        yakumono_param->x44_right, yakumono_param->x4C_bottom);
                 }
                 return;
             }
@@ -666,7 +668,7 @@ void grGreens_80213C10(Ground_GObj* gobj)
             grAnime_801C8138(bg_gobj, bg_gp->map_id, 7);
             lbAudioAx_800237A8(0x68FB2, 0x7F, 0x40);
             gp->u.greens2.x20 =
-                randrange(grGr_params->x60, grGr_params->x5C - 1);
+                randrange(yakumono_param->x60, yakumono_param->x5C - 1);
             gp->u.greens2.x24 = HSD_Randi(2);
         } else if (grAnime_801C83D0(gobj, 0, 7) != 0) {
             if (gp->u.greens2.x20 < 0) {
@@ -681,9 +683,9 @@ void grGreens_80213C10(Ground_GObj* gobj)
                 grAnime_801C8138(bg_gobj, bg_gp->map_id, 7);
             }
         } else if (gp->u.greens2.x20 >= 0) {
-            if (gp->u.greens2.xC >= grGr_params->x64 &&
-                ((gp->u.greens2.xC - grGr_params->x64) % grGr_params->x68) ==
-                    0)
+            if (gp->u.greens2.xC >= yakumono_param->x64 &&
+                ((gp->u.greens2.xC - yakumono_param->x64) %
+                 yakumono_param->x68) == 0)
             {
                 float rand;
                 float sign;
@@ -693,12 +695,12 @@ void grGreens_80213C10(Ground_GObj* gobj)
                 sign = gp->u.greens2.x24 == 0 ? -1.0f : 1.0f;
                 apple_pos.x = sign * (40.0f * rand);
                 rand = HSD_Randf();
-                diff = grGr_params->x70 - grGr_params->x6C;
-                apple_pos.y = (diff * rand) + grGr_params->x6C;
+                diff = yakumono_param->x70 - yakumono_param->x6C;
+                apple_pos.y = (diff * rand) + yakumono_param->x6C;
                 apple_pos.z = -40.0f;
                 lbAudioAx_800237A8(0x68FB3, 0x7F, 0x40);
-                it_802EE200(gobj, &apple_pos, grGr_params->x74,
-                            grGr_params->x78);
+                it_802EE200(gobj, &apple_pos, yakumono_param->x74,
+                            yakumono_param->x78);
                 gp->u.greens2.x20--;
                 gp->u.greens2.x24 = (gp->u.greens2.x24 + 1) & 1;
             }
@@ -752,8 +754,8 @@ void grGreens_80214674(Ground_GObj* gobj)
     grGr_804D6AAC = 0;
     grGreens_80214FA8(new_var);
     Ground_801C10B8(new_var, fn_80214658);
-    gp->u.greens.xC = randrange(grGr_params->x0_blockTimerMin,
-                                grGr_params->x4_blockTimerMax);
+    gp->u.greens.xC = randrange(yakumono_param->x0_blockTimerMin,
+                                yakumono_param->x4_blockTimerMax);
     gp->u.greens.x0_flags.b0 = 1;
     grGr_804D6AAD = 1;
 }
@@ -861,8 +863,10 @@ void grGreens_8021483C(Ground_GObj* gobj)
 static inline void BOMB(int idx)
 {
     grGr_8049F9E0[idx] =
-        (((grGr_params->x20 != 0) ? HSD_Randi(grGr_params->x20) : 0) != 0) ? 1
-                                                                           : 2;
+        (((yakumono_param->x20 != 0) ? HSD_Randi(yakumono_param->x20) : 0) !=
+         0)
+            ? 1
+            : 2;
 }
 
 void grGreens_80214B58(Ground_GObj* gobj)
@@ -987,9 +991,9 @@ static inline void get_block_material_params(int block_type, float* duration,
     int value;
 
     if (block_type == 2) {
-        value = grGr_params->x28;
+        value = yakumono_param->x28;
     } else {
-        value = grGr_params->x24;
+        value = yakumono_param->x24;
     }
     *duration = value * Ground_801C0498();
     *scale = 5.0f * Ground_801C0498();
@@ -1225,9 +1229,9 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
             gp->u.greens.x8_blocks[row][col].x1_4 = 0;
             grGreens_802159B8(gp, col, row, 0);
         } else {
-            gp->u.greens.x8_blocks[row][col].x4 += grGr_params->x30;
-            if (gp->u.greens.x8_blocks[row][col].x4 > grGr_params->x2C) {
-                gp->u.greens.x8_blocks[row][col].x4 = grGr_params->x2C;
+            gp->u.greens.x8_blocks[row][col].x4 += yakumono_param->x30;
+            if (gp->u.greens.x8_blocks[row][col].x4 > yakumono_param->x2C) {
+                gp->u.greens.x8_blocks[row][col].x4 = yakumono_param->x2C;
             }
             gp->u.greens.x8_blocks[row][col].x8 -=
                 gp->u.greens.x8_blocks[row][col].x4;
@@ -1332,26 +1336,26 @@ void grGreens_802166C4(Ground_GObj* gobj)
         int right_has_zero = 0;
 
         for (col = 0; col < 6; col++) {
-            weights[col] = grGr_params->x1C;
+            weights[col] = yakumono_param->x1C;
             for (row = 4; row >= 0; row--) {
                 if (getBlock(gp, row, col)->status !=
                     Gr_Greens_Block_Status_None)
                 {
                     switch (row) {
                     case 0:
-                        weights[col] = grGr_params->x18;
+                        weights[col] = yakumono_param->x18;
                         break;
                     case 1:
-                        weights[col] = grGr_params->x14;
+                        weights[col] = yakumono_param->x14;
                         break;
                     case 2:
-                        weights[col] = grGr_params->x10;
+                        weights[col] = yakumono_param->x10;
                         break;
                     case 3:
-                        weights[col] = grGr_params->xC;
+                        weights[col] = yakumono_param->xC;
                         break;
                     case 4:
-                        weights[col] = grGr_params->x8_blockBombChance;
+                        weights[col] = yakumono_param->x8_blockBombChance;
                         break;
                     }
                     break;
@@ -1464,7 +1468,7 @@ void grGreens_802166C4(Ground_GObj* gobj)
                 spawn_row -= 1;
             }
             type_roll =
-                grGr_params->x20 != 0 ? HSD_Randi(grGr_params->x20) : 0;
+                yakumono_param->x20 != 0 ? HSD_Randi(yakumono_param->x20) : 0;
             if (type_roll != 0) {
                 type = 1;
             } else {
@@ -1473,8 +1477,8 @@ void grGreens_802166C4(Ground_GObj* gobj)
             grGreens_80215358(gobj, ix, spawn_row, type, 1);
         }
 
-        gp->u.greens.xC = randrange(grGr_params->x0_blockTimerMin,
-                                    grGr_params->x4_blockTimerMax);
+        gp->u.greens.xC = randrange(yakumono_param->x0_blockTimerMin,
+                                    yakumono_param->x4_blockTimerMax);
     }
 
     for (col = 0; col < 5; col++) {

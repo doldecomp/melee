@@ -38,8 +38,6 @@
 /* 2221C8 */ static DynamicsDesc* grTMars_802221C8(enum_t);
 /* 2221D0 */ static bool grTMars_802221D0(Vec3*, int, HSD_JObj*);
 
-extern StageInfo stage_info;
-
 static StageCallbacks grTMs_803E8EB0[4] = {
     {
         grTMars_80222080,

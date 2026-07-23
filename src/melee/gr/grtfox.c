@@ -1,59 +1,46 @@
-#include "gr/grtfox.h"
+#include "grtfox.h"
 
-#include <placeholder.h>
-#include <platform.h>
-
-#include "gr/granime.h"
-#include "gr/grdisplay.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/types.h"
-
-#include "lb/forward.h"
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
 #include "lb/lbspdisplay.h"
-
-#include "mp/forward.h"
-
 #include "mp/mplib.h"
 
-#include <baselib/forward.h>
-
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-void grTFox_80220B80(bool);                  /* static */
-void grTFox_80220B84(void);                  /* static */
-void grTfox_UnkStage0_OnLoad(void);          /* static */
-void grTfox_UnkStage0_OnStart(void);         /* static */
-bool grTFox_80220C24(void);                  /* static */
-HSD_GObj* grTFox_80220C2C(s32);              /* static */
-void grTFox_80220D14(Ground_GObj*);          /* static */
-bool grTFox_80220D40(Ground_GObj*);          /* static */
-void grTFox_80220D48(Ground_GObj*);          /* static */
-void grTFox_80220D4C(Ground_GObj*);          /* static */
-void grTFox_80220D50(Ground_GObj*);          /* static */
-bool grTFox_80220DA0(Ground_GObj*);          /* static */
-void grTFox_80220DA8(Ground_GObj*);          /* static */
-void grTFox_80220DDC(Ground_GObj*);          /* static */
-void grTFox_80220DE0(Ground_GObj*);          /* static */
-bool grTFox_80220E30(Ground_GObj*);          /* static */
-void grTFox_80220E38(Ground_GObj*);          /* static */
-void grTFox_80220E58(Ground_GObj*);          /* static */
-DynamicsDesc* grTFox_80220E5C(enum_t);       /* static */
-bool grTFox_80220F08(Vec3*, int, HSD_JObj*); /* static */
-
-typedef struct grTFox_UnkStruct {
+struct grTFox_YakumonoParam {
     UNK_T unk0;
     UNK_T unk4;
     UNK_T unk8;
     UNK_T unkC;
-} grTFox_UnkStruct;
+};
 
-grTFox_UnkStruct* grTFx_804D6B00;
+static void grTFox_80220B80(bool);
+static void grTFox_80220B84(void);
+static void grTFox_UnkStage0_OnLoad(void);
+static void grTFox_UnkStage0_OnStart(void);
+static bool grTFox_80220C24(void);
+static HSD_GObj* grTFox_80220C2C(s32);
+static void grTFox_80220D14(Ground_GObj*);
+static bool grTFox_80220D40(Ground_GObj*);
+static void grTFox_80220D48(Ground_GObj*);
+static void grTFox_80220D4C(Ground_GObj*);
+static void grTFox_80220D50(Ground_GObj*);
+static bool grTFox_80220DA0(Ground_GObj*);
+static void grTFox_80220DA8(Ground_GObj*);
+static void grTFox_80220DDC(Ground_GObj*);
+static void grTFox_80220DE0(Ground_GObj*);
+static bool grTFox_80220E30(Ground_GObj*);
+static void grTFox_80220E38(Ground_GObj*);
+static void grTFox_80220E58(Ground_GObj*);
+static DynamicsDesc* grTFox_80220E5C(enum_t);
+static bool grTFox_80220F08(Vec3*, int, HSD_JObj*);
+
+static struct grTFox_YakumonoParam* yakumono_param;
 
 static StageCallbacks grTFx_803E89D8[4] = {
     { grTFox_80220D14, grTFox_80220D40, grTFox_80220D48, grTFox_80220D4C, 0 },
@@ -69,8 +56,8 @@ StageData grTFx_803E8A34 = {
     "/GrTFx.dat",
     grTFox_80220B84,
     grTFox_80220B80,
-    grTfox_UnkStage0_OnLoad,
-    grTfox_UnkStage0_OnStart,
+    grTFox_UnkStage0_OnLoad,
+    grTFox_UnkStage0_OnStart,
     grTFox_80220C24,
     grTFox_80220E5C,
     grTFox_80220F08,
@@ -81,7 +68,7 @@ void grTFox_80220B80(bool unk) {}
 
 void grTFox_80220B84(void)
 {
-    grTFx_804D6B00 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
 
@@ -94,9 +81,9 @@ void grTFox_80220B84(void)
     Ground_801C42AC();
 }
 
-void grTfox_UnkStage0_OnLoad(void) {}
+void grTFox_UnkStage0_OnLoad(void) {}
 
-void grTfox_UnkStage0_OnStart(void)
+void grTFox_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(NULL);
 }
@@ -179,16 +166,16 @@ DynamicsDesc* grTFox_80220E5C(enum_t arg0)
         if (i != -1 && i == 1) {
             i = mpLineGetKind(arg0);
             if (i == CollLine_Floor) {
-                return grTFx_804D6B00->unk0;
+                return yakumono_param->unk0;
             }
             if (i == CollLine_Ceiling) {
-                return grTFx_804D6B00->unk4;
+                return yakumono_param->unk4;
             }
             if (i == CollLine_RightWall) {
-                return grTFx_804D6B00->unk8;
+                return yakumono_param->unk8;
             }
             if (i == CollLine_LeftWall) {
-                return grTFx_804D6B00->unkC;
+                return yakumono_param->unkC;
             }
             return NULL;
         }

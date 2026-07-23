@@ -33,9 +33,7 @@ typedef struct grKg_SplineChoiceList {
     s32 terminator;
 } grKg_SplineChoiceList;
 
-extern const grKg_SplineChoiceList grKg_803B7FD4;
-
-static struct {
+struct grKongo_YakumonoParam {
     f32 unk0;
     f32 unk4;
     f32 unk8;
@@ -87,8 +85,10 @@ static struct {
     f32 unkB0;
     f32 unkB4;
     f32 unkB8;
-}* grKg_804D6980;
+};
 
-extern StageInfo stage_info;
+extern const grKg_SplineChoiceList grKg_803B7FD4;
+
+static struct grKongo_YakumonoParam* yakumono_param;
 
 #endif

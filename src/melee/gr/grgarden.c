@@ -7,7 +7,6 @@
 #include "ft/ftlib.h"
 #include "gm/gm_16AE.h"
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
@@ -19,14 +18,22 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbspdisplay.h"
 
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
+
+struct grGarden_YakumonoParam {
+    float x0;
+    float x4;
+    int x8;
+    int xC;
+    int x10;
+    int x14;
+    float x18;
+    float x1C;
+};
 
 StageCallbacks grGd_803E5248[] = {
     { grGarden_80202D60, grGarden_80202D8C, grGarden_80202D94,
@@ -61,13 +68,13 @@ StageData grGd_803E52E0 = {
     0,
 };
 
-GardenParams* grGd_804D6A28;
+static struct grGarden_YakumonoParam* yakumono_param;
 
 void grGarden_80202B6C(bool arg) {}
 
 void grGarden_80202B70(void)
 {
-    grGd_804D6A28 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grGarden_80202C78(0);
@@ -220,7 +227,7 @@ void grGarden_80203004(Ground_GObj* gobj)
     int iVar1;
     Ground* gp = GET_GROUND(gobj);
     gp->u.garden.xc4 = 0;
-    iVar1 = grGd_804D6A28->x8;
+    iVar1 = yakumono_param->x8;
     iVar1 = (iVar1 != 0) ? HSD_Randi(iVar1) : 0;
     gp->u.garden.xc8 = iVar1 + 1;
     grAnime_801C8138(gobj, gp->map_id, gp->u.garden.xc4);
@@ -247,15 +254,15 @@ void grGarden_80203098(Ground_GObj* gobj)
                 gp->u.garden.xc4 = 0;
             }
             if (gp->u.garden.xc4 == 0) {
-                if (grGd_804D6A28->x8 != 0) {
-                    iVar1 = HSD_Randi(grGd_804D6A28->x8);
+                if (yakumono_param->x8 != 0) {
+                    iVar1 = HSD_Randi(yakumono_param->x8);
                 } else {
                     iVar1 = 0;
                 }
                 gp->u.garden.xc8 = iVar1 + 1;
             } else if (gp->u.garden.xc4 == 2) {
-                if (grGd_804D6A28->xC != 0) {
-                    iVar1 = HSD_Randi(grGd_804D6A28->xC);
+                if (yakumono_param->xC != 0) {
+                    iVar1 = HSD_Randi(yakumono_param->xC);
                 } else {
                     iVar1 = 0;
                 }
@@ -276,12 +283,12 @@ void grGarden_802031A4(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     gp->u.garden2.xc4 = grMaterial_801C8CFC(0, 0, gp, Ground_801C3FA4(gobj, 8),
                                             grGarden_80203498, 0, 0);
-    if (grGd_804D6A28->x14 != 0) {
-        iVar1 = HSD_Randi(grGd_804D6A28->x14);
+    if (yakumono_param->x14 != 0) {
+        iVar1 = HSD_Randi(yakumono_param->x14);
     } else {
         iVar1 = 0;
     }
-    gp->u.garden2.xcc = grGd_804D6A28->x10 + iVar1;
+    gp->u.garden2.xcc = yakumono_param->x10 + iVar1;
     gp->u.garden2.xc8 = 0;
     gp->x8_callback = NULL;
     gp->xC_callback = NULL;
@@ -315,10 +322,10 @@ void grGarden_80203250(Ground_GObj* gobj)
         if (gp->u.garden2.xcc == 0) {
             Item_80268E5C(gp->u.garden2.xc4, 2, 2);
             grAnime_801C8138(gobj, gp->map_id, 0);
-            dVar1 = grGd_804D6A28->x18;
-            iVar1 = (grGd_804D6A28->x1C - grGd_804D6A28->x18) < 0.0f
-                        ? -(grGd_804D6A28->x1C - grGd_804D6A28->x18)
-                        : (grGd_804D6A28->x1C - grGd_804D6A28->x18);
+            dVar1 = yakumono_param->x18;
+            iVar1 = (yakumono_param->x1C - yakumono_param->x18) < 0.0f
+                        ? -(yakumono_param->x1C - yakumono_param->x18)
+                        : (yakumono_param->x1C - yakumono_param->x18);
 
             if (iVar1 != 0) {
                 iVar1 = HSD_Randi(iVar1);
@@ -343,12 +350,12 @@ void grGarden_80203250(Ground_GObj* gobj)
         if (grAnime_801C83D0(gobj, 0, 7)) {
             Item_80268E5C(gp->u.garden2.xc4, 0, 2);
             HSD_JObjRemoveAnimAll(jobj);
-            if (grGd_804D6A28->x14 != 0) {
-                iVar1 = HSD_Randi(grGd_804D6A28->x14);
+            if (yakumono_param->x14 != 0) {
+                iVar1 = HSD_Randi(yakumono_param->x14);
             } else {
                 iVar1 = 0;
             }
-            gp->u.garden2.xcc = grGd_804D6A28->x10 + iVar1;
+            gp->u.garden2.xcc = yakumono_param->x10 + iVar1;
             gp->u.garden2.xc8 = 0;
         }
         gp->u.garden2.xcc = gp->u.garden2.xcc + 1;
@@ -366,7 +373,7 @@ bool grGarden_8020349C(u32 unk, HSD_GObj* player, Vec3* water)
     float dVar3;
     Vec3 current;
     Vec3 previous;
-    dVar3 = grGd_804D6A28->x0;
+    dVar3 = yakumono_param->x0;
     ftLib_80086644(player, &current);
     ftLib_80086684(player, &previous);
     if (current.y < dVar3) {
@@ -377,7 +384,7 @@ bool grGarden_8020349C(u32 unk, HSD_GObj* player, Vec3* water)
             Ground_801C53EC(410000);
         }
         uVar1 = true;
-        water->x = grGd_804D6A28->x4;
+        water->x = yakumono_param->x4;
         water->y = 0.0f;
         water->z = 0.0f;
     } else {

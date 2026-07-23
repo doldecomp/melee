@@ -73,7 +73,7 @@ void grYorster_80201FA0(bool unused)
 
 void grYorster_80201FA4(void)
 {
-    grYt_804D6A20.x0 = Ground_801C49F8();
+    grYt_804D6A20.x0 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grYorster_8020203C(0);

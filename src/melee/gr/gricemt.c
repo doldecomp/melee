@@ -1,6 +1,63 @@
 #include "gricemt.static.h"
 
-IceMountainParams* grIm_804D69F4;
+struct grIceMt_YakumonoParam {
+    float x0;
+    int x4;
+    float x8;
+    float xC;
+    float x10;
+    float x14;
+    float x18;
+    float x1C;
+    float x20;
+    float x24;
+    float x28;
+    float x2C;
+    float x30;
+    float x34;
+    u16 x38;
+    u16 x3A;
+    float x3C;
+    float x40;
+    float x44;
+    float x48;
+    float x4C;
+    float x50;
+    float x54;
+    float x58;
+    float x5C;
+    float x60;
+    float x64;
+    float x68;
+    float x6C;
+    float x70;
+    float x74;
+    float x78;
+    float x7C;
+    float x80;
+    float x84;
+    float x88;
+    float x8C;
+    float x90;
+    float x94;
+    float x98;
+    float x9C;
+    float xA0;
+    float xA4;
+    float xA8;
+    s16* xAC;
+    s16* xB0;
+    s16* xB4;
+    s16 xB8;
+    s16 pad;
+    grZakoGenerator_SpawnDesc xBC;
+    float xC0;
+    float xC4;
+    float xC8;
+    float xCC;
+};
+
+static struct grIceMt_YakumonoParam* yakumono_param;
 HSD_GObj* grIm_804D69F0;
 HSD_GObj* grIm_804D69EC;
 HSD_GObj* grIm_804D69E8;
@@ -177,7 +234,7 @@ void grIceMt_801F686C(void)
     HSD_JObj* jobj;
     PAD_STACK(0x10);
 
-    grIm_804D69F4 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = true;
     stage_info.unk8C.b5 = false;
     grIceMt_801F71E8(0);
@@ -191,7 +248,7 @@ void grIceMt_801F686C(void)
 
     if (Stage_80225194() == 76) {
         for (i = 0; i < ICEMT_FIELD_MAX; i++) {
-            xAC = grIm_804D69F4->xAC;
+            xAC = yakumono_param->xAC;
             id = grIm_803E4068[i].id;
             if (xAC[0] == id) {
                 continue;
@@ -205,7 +262,7 @@ void grIceMt_801F686C(void)
         HSD_ASSERT(600, i<ICEMT_FIELD_MAX);
 
         for (i = 0; i < ICEMT_FIELD_MAX; i++) {
-            xAC = grIm_804D69F4->xAC;
+            xAC = yakumono_param->xAC;
             id = grIm_803E4068[i].id;
             if (xAC[0] == id) {
                 continue;
@@ -222,7 +279,7 @@ void grIceMt_801F686C(void)
         HSD_ASSERT(609, i<ICEMT_FIELD_MAX);
 
         for (i = 0; i < ICEMT_FIELD_MAX; i++) {
-            xAC = grIm_804D69F4->xAC;
+            xAC = yakumono_param->xAC;
             id = grIm_803E4068[i].id;
             if (xAC[0] == id) {
                 continue;
@@ -244,31 +301,31 @@ void grIceMt_801F686C(void)
         y_pos = Ground_801C0498();
         y_pos = grIm_804DB570 * y_pos;
         y_pos =
-            y_pos + grIceMt_801F993C(grIm_803E4068[grIm_804D69F4->xAC[0]].id,
-                                     grIm_803E4068[grIm_804D69F4->xAC[1]].id);
+            y_pos + grIceMt_801F993C(grIm_803E4068[yakumono_param->xAC[0]].id,
+                                     grIm_803E4068[yakumono_param->xAC[1]].id);
         y_pos2 =
-            y_pos + grIceMt_801F993C(grIm_803E4068[grIm_804D69F4->xAC[1]].id,
+            y_pos + grIceMt_801F993C(grIm_803E4068[yakumono_param->xAC[1]].id,
                                      grIm_803E4068[field30].id);
         y_pos3 = y_pos2 + grIceMt_801F993C(grIm_803E4068[field30].id,
                                            grIm_803E4068[field29].id);
         y_pos4 = y_pos3 + grIceMt_801F993C(grIm_803E4068[field29].id,
                                            grIm_803E4068[field28].id);
 
-        gobj = grIceMt_801F71E8(grIm_803E4068[grIm_804D69F4->xAC[2]].id);
+        gobj = grIceMt_801F71E8(grIm_803E4068[yakumono_param->xAC[2]].id);
         HSD_ASSERT(636, gobj);
         jobj = gobj->hsd_obj;
         HSD_ASSERT(637, jobj);
         HSD_JObjSetTranslateY(jobj, y_pos2);
         grIm_804D69E8 = gobj;
 
-        gobj = grIceMt_801F71E8(grIm_803E4068[grIm_804D69F4->xAC[3]].id);
+        gobj = grIceMt_801F71E8(grIm_803E4068[yakumono_param->xAC[3]].id);
         HSD_ASSERT(641, gobj);
         jobj = gobj->hsd_obj;
         HSD_ASSERT(642, jobj);
         HSD_JObjSetTranslateY(jobj, y_pos3);
         grIm_804D69EC = gobj;
 
-        gobj = grIceMt_801F71E8(grIm_803E4068[grIm_804D69F4->xAC[4]].id);
+        gobj = grIceMt_801F71E8(grIm_803E4068[yakumono_param->xAC[4]].id);
         HSD_ASSERT(646, gobj);
         jobj = gobj->hsd_obj;
         HSD_ASSERT(647, jobj);
@@ -323,8 +380,8 @@ void grIceMt_801F7080(void)
         Ground_801C2FE0(gobj);
     }
     if (Stage_80225194() == 76) {
-        grZakoGenerator_801CAE04(&grIm_804D69F4->xBC);
-        if (rand_zero(grIm_804D69F4->xB8)) {
+        grZakoGenerator_801CAE04(&yakumono_param->xBC);
+        if (rand_zero(yakumono_param->xB8)) {
             grZakoGenerator_801CAEB0(Ground_801C5840(), Ground_801C5940());
         }
 
@@ -433,13 +490,13 @@ void grIceMt_801F75FC(Ground_GObj* arg0)
         iVar1 = HSD_Randi(6);
         val = gp->u.icemt.xF4[iVar1];
     } while (val != 0);
-    gp->u.icemt.xF4[iVar1] = *(s16*) grIm_804D69F4;
+    gp->u.icemt.xF4[iVar1] = *(s16*) yakumono_param;
     gp->u.icemt.xC4 = (s16) grIm_803E4068[iVar1].id;
     do {
         iVar1 = HSD_Randi(6);
         val = gp->u.icemt.xF4[iVar1];
     } while (val != 0);
-    gp->u.icemt.xF4[iVar1] = *(s16*) grIm_804D69F4;
+    gp->u.icemt.xF4[iVar1] = *(s16*) yakumono_param;
     gp->u.icemt.xC6 = (s16) grIm_803E4068[iVar1].id;
     grIceMt_801FA0BC(&gp->u.icemt.xC4);
     gp->u.icemt.xDA = 0;
@@ -498,9 +555,9 @@ void grIceMt_801F785C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
 
-    // Index into grIm_803E4068 using row indices from grIm_804D69F4->xAC
-    gp->u.icemt.xC4 = (s16) grIm_803E4068[grIm_804D69F4->xAC[1]].id;
-    gp->u.icemt.xC6 = (s16) grIm_803E4068[grIm_804D69F4->xAC[0]].id;
+    // Index into grIm_803E4068 using row indices from yakumono_param->xAC
+    gp->u.icemt.xC4 = (s16) grIm_803E4068[yakumono_param->xAC[1]].id;
+    gp->u.icemt.xC6 = (s16) grIm_803E4068[yakumono_param->xAC[0]].id;
 
     grIceMt_801FA0BC(&gp->u.icemt.xC4);
 
@@ -576,24 +633,24 @@ void grIceMt_801F7A2C(Ground_GObj* arg0)
                 ftLib_80086644(fighter, &sp24);
                 if (!((UnkFlagStruct*) &gp->u.icemt.xD8)->b1 &&
                     !ftLib_80086EC0(fighter) &&
-                    sp24.y > (f32) ((s16*) grIm_804D69F4)[0x98 / 2])
+                    sp24.y > (f32) ((s16*) yakumono_param)[0x98 / 2])
                 {
                     ((UnkFlagStruct*) &gp->u.icemt.xD8)->b1 = 1;
-                    gp->u.icemt.xDA = ((s16*) grIm_804D69F4)[0xA4 / 2];
+                    gp->u.icemt.xDA = ((s16*) yakumono_param)[0xA4 / 2];
                 }
             }
         }
         if (((UnkFlagStruct*) &gp->u.icemt.xD8)->b1) {
-            gp->u.icemt.xE4 += grIm_804D69F4->xA0;
-            if (gp->u.icemt.xE4 > grIm_804D69F4->x9C) {
-                gp->u.icemt.xE4 = grIm_804D69F4->x9C;
+            gp->u.icemt.xE4 += yakumono_param->xA0;
+            if (gp->u.icemt.xE4 > yakumono_param->x9C) {
+                gp->u.icemt.xE4 = yakumono_param->x9C;
             }
             gp->u.icemt.xDA -= 1;
             if (gp->u.icemt.xDA == 0) {
                 ((UnkFlagStruct*) &gp->u.icemt.xD8)->b1 = 0;
             }
         } else {
-            gp->u.icemt.xE4 -= grIm_804D69F4->xA0;
+            gp->u.icemt.xE4 -= yakumono_param->xA0;
             if (gp->u.icemt.xE4 < 0.0f) {
                 gp->u.icemt.xE4 = 0.0f;
             }
@@ -605,18 +662,18 @@ void grIceMt_801F7A2C(Ground_GObj* arg0)
         jobj = mgobj->hsd_obj;
         HSD_ASSERT(0x4C5, jobj);
         dist = HSD_JObjGetTranslationY(jobj) -
-               (f32) ((s16*) grIm_804D69F4)[0xA8 / 2];
+               (f32) ((s16*) yakumono_param)[0xA8 / 2];
         if (dist < 0.0f) {
             gp->u.icemt.xD4 = 0.0f;
         } else {
-            ratio = gp->u.icemt.xD4 / grIm_804D69F4->xA0;
+            ratio = gp->u.icemt.xD4 / yakumono_param->xA0;
             if ((gp->u.icemt.xD4 * ratio) -
-                    (ratio * (0.5f * grIm_804D69F4->xA0 * ratio)) >
+                    (ratio * (0.5f * yakumono_param->xA0 * ratio)) >
                 dist)
             {
-                gp->u.icemt.xD4 -= grIm_804D69F4->xA0;
-                if (gp->u.icemt.xD4 < grIm_804D69F4->xA0) {
-                    gp->u.icemt.xD4 = grIm_804D69F4->xA0;
+                gp->u.icemt.xD4 -= yakumono_param->xA0;
+                if (gp->u.icemt.xD4 < yakumono_param->xA0) {
+                    gp->u.icemt.xD4 = yakumono_param->xA0;
                 }
             }
         }
@@ -630,7 +687,7 @@ void grIceMt_801F7A2C(Ground_GObj* arg0)
     }
     if (!((UnkFlagStruct*) &gp->u.icemt.xD8)->b3) {
         if (var_r30 != 0 &&
-            gp->u.icemt.xDE == ((s16*) grIm_804D69F4)[0xA6 / 2])
+            gp->u.icemt.xDE == ((s16*) yakumono_param)[0xA6 / 2])
         {
             ((UnkFlagStruct*) &gp->u.icemt.xD8)->b3 = 1;
             Ground_801C5750();
@@ -1104,8 +1161,8 @@ static inline void grIceMt_GetRandomTimer(s32* out)
     s32 b;
     s32 d;
 
-    a = ((s16*) grIm_804D69F4)[0x36 / 2];
-    b = ((s16*) grIm_804D69F4)[0x38 / 2];
+    a = ((s16*) yakumono_param)[0x36 / 2];
+    b = ((s16*) yakumono_param)[0x38 / 2];
     if (a > b) {
         d = a - b;
         a = b + (d != 0 ? HSD_Randi(d) : 0);
@@ -1152,7 +1209,7 @@ s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
         timer = (IceMtTimerCursor*) ((s16*) timer + 1);
     }
 
-    (&timer_base->xDC)[chosen] = ((s16*) grIm_804D69F4)[1];
+    (&timer_base->xDC)[chosen] = ((s16*) yakumono_param)[1];
     grIceMt_GetRandomTimer(out);
     return chosen;
 }
@@ -1176,7 +1233,7 @@ int fn_801F9038(Ground_GObj* gobj)
         }
     }
 
-    gp->u.icemt.xF4[idx] = *(s16*) grIm_804D69F4;
+    gp->u.icemt.xF4[idx] = *(s16*) yakumono_param;
 
     return grIm_803E4068[idx].id;
 }
@@ -1188,8 +1245,8 @@ s32 fn_801F9150(HSD_GObj* arg0, s32* out)
     s32 a;
 
     while (true) {
-        a = grIm_804D69F4->xB0[gp->u.icemt.xDE];
-        *out = grIm_804D69F4->xB4[gp->u.icemt.xDE];
+        a = yakumono_param->xB0[gp->u.icemt.xDE];
+        *out = yakumono_param->xB4[gp->u.icemt.xDE];
         if (a != -1 && *out != -1) {
             gp->u.icemt.xDE++;
             return a;
@@ -1206,7 +1263,7 @@ int fn_801F91A8(Ground_GObj* gobj)
     s16* xAC;
 
     gp = gobj->user_data;
-    xAC = grIm_804D69F4->xAC;
+    xAC = yakumono_param->xAC;
     index = xAC[gp->u.icemt.xE0];
     result = index;
     if (result == -1) {
@@ -1406,7 +1463,7 @@ f32 grIceMt_801F993C(s32 arg0, s32 arg1)
     HSD_ASSERT(0xAA2, under_ix<ICEMT_FIELD_MAX);
 
     return -((t * grIm_803E4068[upper_ix].x8) -
-             (t * grIm_803E4068[under_ix].x4 + grIm_804D69F4->x40));
+             (t * grIm_803E4068[under_ix].x4 + yakumono_param->x40));
 }
 
 static inline HSD_GObj* grIceMt_801F71E8_inner2(int id)
@@ -1669,27 +1726,27 @@ bool grIceMt_801FA364(void* state_, f32* out, HSD_GObjEvent cb_,
             state->idx = cb((HSD_GObj*) gobj, &next_delay);
             state->delay = (s16) next_delay;
             state->phase = 1;
-            state->lerp_count = ((s16*) grIm_804D69F4)[0x34 / 2];
+            state->lerp_count = ((s16*) yakumono_param)[0x34 / 2];
         }
         break;
     case 1:
         state->lerp_count = state->lerp_count - 1;
         tmp = state->lerp_count;
         if (tmp != 0) {
-            state->cur +=
-                (((f32*) ((u8*) grIm_804D69F4 + 4))[state->idx] - state->cur) /
-                (f32) tmp;
+            state->cur += (((f32*) ((u8*) yakumono_param + 4))[state->idx] -
+                           state->cur) /
+                          (f32) tmp;
             ret = false;
         } else {
             state->phase = 0;
-            state->cur = ((f32*) ((u8*) grIm_804D69F4 + 4))[state->idx];
+            state->cur = ((f32*) ((u8*) yakumono_param + 4))[state->idx];
         }
         break;
     }
 
     result = state->cur;
     if (state->burst_count != 0) {
-        result = grIm_804D69F4->x3C * Ground_801C0498();
+        result = yakumono_param->x3C * Ground_801C0498();
         state->burst_count--;
     }
     *out = result;
@@ -1756,7 +1813,7 @@ void grIceMt_801FA6D8(HSD_GObj* param1)
         if (gobj != NULL) {
             gp = gobj->user_data;
             if (gp != NULL) {
-                gp->u.icemt.xCE = grIm_804D69F4->x3A;
+                gp->u.icemt.xCE = yakumono_param->x3A;
             }
         }
     }

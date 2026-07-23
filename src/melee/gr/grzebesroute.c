@@ -1,56 +1,39 @@
 #include "grzebesroute.h"
 
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
 #include "placeholder.h"
 
-#include <platform.h>
-
-#include "baselib/debug.h"
-
-#include "baselib/forward.h"
-
 #include "cm/camera.h"
-#include "dolphin/mtx.h"
 #include "ft/ftlib.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
 #include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
 
+#include <dolphin/mtx.h>
+#include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjproc.h>
 #include <baselib/lobj.h>
 #include <baselib/random.h>
 
-typedef struct grZebesRoute_LightData {
-    Vec3 player_pos;
-    Vec3 spot_pos;
-    Vec3 spot_interest;
-    Vec3 upper_point_pos;
-    Vec3 lower_point_pos;
-    f32 pad;
-} grZebesRoute_LightData;
-
-typedef struct grZebesRoute_Params {
+struct grZebesRoute_YakumonoParam {
     int camera_timer;
     int zako_spawn_chance;
-} grZebesRoute_Params;
+};
 
-typedef struct grZebesRoute_ParamStore {
-    grZebesRoute_Params* params;
-    u32 pad;
-} grZebesRoute_ParamStore;
-
+/* 20B260 */ static Ground_GObj* grZebesRoute_8020B260(int);
 /* 20B4D8 */ static void fn_8020B4D8(void* user_data, int joint_id,
                                      CollData* coll, int coll_x50,
                                      mpLib_GroundEnum ground_kind,
                                      float delta_y);
 
-const grZebesRoute_LightData grZe_Route_803B83A0 = {
-    { 0.0F, 0.0F, 0.0F },     { 0.0F, -30.0F, 50.0F },
-    { 0.0F, 680.0F, -20.0F }, { -5.0F, 980.0F, 5.0F },
-    { 0.0F, 215.0F, -50.0F }, 0.0F,
-};
+static struct grZebesRoute_LightData const grZe_Route_803B83A0 = {
+    // clang-format off
+    { 0.0f,   0.0f,   0.0f }, {  0.0f, -30.0f, 50.0f },
+    { 0.0f, 680.0f, -20.0f }, { -5.0f, 980.0f,  5.0f },
+    { 0.0f, 215.0f, -50.0f },
+}; // clang-format on
 
 StageCallbacks grZe_Route_803E5DB0[] = {
     { grZebesRoute_8020B348, grZebesRoute_8020B374, grZebesRoute_8020B37C,
@@ -62,29 +45,12 @@ StageCallbacks grZe_Route_803E5DB0[] = {
     { NULL, NULL, NULL, NULL, 0 },
 };
 
-char grZe_Route_803E5E00[] = "/GrNZr.dat";
-
-struct {
-    u32 internal_stage_id;
-    StageCallbacks* callbacks;
-    char* data1;
-    void (*OnInit)(void);
-    void (*OnDemoInit)(int);
-    void (*OnLoad)(void);
-    void (*OnStart)(void);
-    bool (*callback4)(void);
-    DynamicsDesc* (*callback5)(enum_t);
-    bool (*callback6)(Vec3*, int, HSD_JObj*);
-    u32 flags2;
-    S16Vec3* x2C;
-    size_t x30;
-    char fmt[0x24];
-} grZe_Route_803E5E0C = {
+StageData grZe_Route_803E5E0C = {
     ZEBESROUTE,
     grZe_Route_803E5DB0,
-    grZe_Route_803E5E00,
+    "/GrNZr.dat",
     grZebesRoute_8020B164,
-    (void (*)(int)) grZebesRoute_8020B160,
+    grZebesRoute_8020B160,
     grZebesRoute_8020B1D4,
     grZebesRoute_8020B1F4,
     grZebesRoute_8020B258,
@@ -93,18 +59,17 @@ struct {
     1,
     NULL,
     0,
-    "%s:%d: couldn t get gobj(id=%d)\n",
 };
 
-grZebesRoute_ParamStore grZe_Route_804D6A60;
+static struct grZebesRoute_YakumonoParam* yakumono_param;
 
 void grZebesRoute_8020B160(bool arg) {}
 
 void grZebesRoute_8020B164(void)
 {
-    grZe_Route_804D6A60.params = Ground_801C49F8();
-    stage_info.unk8C.b4 = 0;
-    stage_info.unk8C.b5 = 1;
+    yakumono_param = Ground_GetYakumonoParam();
+    stage_info.unk8C.b4 = false;
+    stage_info.unk8C.b5 = true;
     grZebesRoute_8020B260(0);
     grZebesRoute_8020B260(1);
     grZebesRoute_8020B260(2);
@@ -121,9 +86,9 @@ void grZebesRoute_8020B1F4(void)
 {
     int val;
     grZakoGenerator_801CAE04(NULL);
-    val = grZe_Route_804D6A60.params->zako_spawn_chance;
+    val = yakumono_param->zako_spawn_chance;
     if (val != 0) {
-        val = HSD_Randi(grZe_Route_804D6A60.params->zako_spawn_chance);
+        val = HSD_Randi(yakumono_param->zako_spawn_chance);
     } else {
         val = 0;
     }
@@ -137,17 +102,16 @@ bool grZebesRoute_8020B258(void)
     return false;
 }
 
-HSD_GObj* grZebesRoute_8020B260(int gobj_id)
+Ground_GObj* grZebesRoute_8020B260(int gobj_id)
 {
-    HSD_GObj* gobj;
+    Ground_GObj* gobj;
     StageCallbacks* callbacks = &grZe_Route_803E5DB0[gobj_id];
-
     gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport(grZe_Route_803E5E0C.fmt, __FILE__, 0xC5, gobj_id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 197, gobj_id);
     }
 
     return gobj;
@@ -190,7 +154,7 @@ void grZebesRoute_8020B3C0(Ground_GObj* gobj)
     gp->x8_callback = NULL;
     gp->xC_callback = NULL;
     mpJointSetCb1(1, gp, fn_8020B4D8);
-    gp->u.zebes2.xC4 = (s16) grZe_Route_804D6A60.params->camera_timer;
+    gp->u.zebes2.xC4 = yakumono_param->camera_timer;
 }
 
 bool grZebesRoute_8020B424(Ground_GObj* arg)
@@ -242,17 +206,14 @@ void fn_8020B4D8(void* user_data, int joint_id, CollData* coll, int coll_x50,
     }
 }
 
-inline HSD_LObj* grZebesRoute_8020B548_inline1(HSD_GObj* light_gobj)
-{
-    return (HSD_LObj*) light_gobj->hsd_obj;
-}
-
-inline HSD_LObj* grZebesRoute_8020B548_inline2(HSD_LObj* arg0)
+/// @todo Useless wrapper
+inline HSD_LObj* HSD_LObjGetNext_padstack(HSD_LObj* arg0)
 {
     return HSD_LObjGetNext(arg0);
 }
 
-inline int grZebesRoute_8020B548_inline3(HSD_LObj* lobj)
+/// @todo ::HSD_LObjGetType
+inline int HSD_LObjGetType_padstack(HSD_LObj* lobj)
 {
     return lobj->flags & LOBJ_TYPE_MASK;
 }
@@ -260,72 +221,65 @@ inline int grZebesRoute_8020B548_inline3(HSD_LObj* lobj)
 void grZebesRoute_8020B548(void)
 {
     HSD_GObj* gobj = HSD_GObjGXLinkHead[4];
-    HSD_LObj* first_lobj;
-    HSD_LObj* lobj;
-    f32 scale;
-    f32 spot_ref_dist;
-    f32 upper_ref_dist;
-    f32 lower_ref_dist;
-    f32 split_y;
-    s32 i;
-
-    HSD_ASSERT(0x169, gobj);
-
-    first_lobj = grZebesRoute_8020B548_inline1(gobj);
-    scale = Ground_801C0498();
-    lobj = grZebesRoute_8020B548_inline2(first_lobj);
-    spot_ref_dist = 600.0f * scale;
-    upper_ref_dist = 1000.0f * scale;
-    lower_ref_dist = 400.0f * scale;
-    split_y = 500.0f;
-
-    for (i = 0; i < 3 && lobj != NULL;
-         i++, lobj = grZebesRoute_8020B548_inline2(lobj))
+    HSD_ASSERT(361, gobj);
     {
-        Vec3 current_pos;
-        u32 light_type;
+        HSD_LObj* first_lobj = GET_LOBJ(gobj);
+        float scale = Ground_801C0498();
+        HSD_LObj* lobj = HSD_LObjGetNext(first_lobj);
+        float spot_ref_dist = 600.0f * scale;
+        float upper_ref_dist = 1000.0f * scale;
+        float lower_ref_dist = 400.0f * scale;
+        float split_y = 500.0f;
+        int i;
 
-        if (!HSD_LObjGetPosition(lobj, &current_pos)) {
-            HSD_ASSERT(0x174, 0);
-        }
+        for (i = 0; i < 3 && lobj != NULL;
+             i++, lobj = HSD_LObjGetNext_padstack(lobj))
+        {
+            Vec3 current_pos;
+            u32 light_type;
 
-        light_type = grZebesRoute_8020B548_inline3(lobj);
-        if (light_type == LOBJ_SPOT) {
-            GXColor color = { 0xFF, 0xFF, 0xCC, 0xFF };
-            Vec3 pos = grZe_Route_803B83A0.spot_pos;
-            Vec3 interest = grZe_Route_803B83A0.spot_interest;
+            if (!HSD_LObjGetPosition(lobj, &current_pos)) {
+                HSD_ASSERT(372, 0);
+            }
 
-            HSD_LObjSetColor(lobj, color);
-            pos.x *= scale;
-            pos.y *= scale;
-            pos.z *= scale;
-            HSD_LObjSetPosition(lobj, &pos);
-            interest.x *= scale;
-            interest.y *= scale;
-            interest.z *= scale;
-            HSD_LObjSetInterest(lobj, &interest);
-            HSD_LObjSetSpot(lobj, 45.0f, 3);
-            HSD_LObjSetDistAttn(lobj, spot_ref_dist, 0.99f, 3);
-        } else if (light_type == LOBJ_POINT && current_pos.y > split_y) {
-            GXColor color = { 0xFD, 0xFD, 0xBF, 0xFF };
-            Vec3 pos = grZe_Route_803B83A0.upper_point_pos;
+            light_type = HSD_LObjGetType_padstack(lobj);
+            if (light_type == LOBJ_SPOT) {
+                GXColor color = { 0xFF, 0xFF, 0xCC, 0xFF };
+                Vec3 pos = grZe_Route_803B83A0.spot_pos;
+                Vec3 interest = grZe_Route_803B83A0.spot_interest;
 
-            HSD_LObjSetColor(lobj, color);
-            pos.x *= scale;
-            pos.y *= scale;
-            pos.z *= scale;
-            HSD_LObjSetPosition(lobj, &pos);
-            HSD_LObjSetDistAttn(lobj, upper_ref_dist, 0.03f, 3);
-        } else if (light_type == LOBJ_POINT && current_pos.y < split_y) {
-            GXColor color = { 0x00, 0x00, 0xF7, 0xFF };
-            Vec3 pos = grZe_Route_803B83A0.lower_point_pos;
+                HSD_LObjSetColor(lobj, color);
+                pos.x *= scale;
+                pos.y *= scale;
+                pos.z *= scale;
+                HSD_LObjSetPosition(lobj, &pos);
+                interest.x *= scale;
+                interest.y *= scale;
+                interest.z *= scale;
+                HSD_LObjSetInterest(lobj, &interest);
+                HSD_LObjSetSpot(lobj, 45.0f, 3);
+                HSD_LObjSetDistAttn(lobj, spot_ref_dist, 0.99f, 3);
+            } else if (light_type == LOBJ_POINT && current_pos.y > split_y) {
+                GXColor color = { 0xFD, 0xFD, 0xBF, 0xFF };
+                Vec3 pos = grZe_Route_803B83A0.upper_point_pos;
 
-            HSD_LObjSetColor(lobj, color);
-            pos.x *= scale;
-            pos.y *= scale;
-            pos.z *= scale;
-            HSD_LObjSetPosition(lobj, &pos);
-            HSD_LObjSetDistAttn(lobj, lower_ref_dist, 0.03f, 3);
+                HSD_LObjSetColor(lobj, color);
+                pos.x *= scale;
+                pos.y *= scale;
+                pos.z *= scale;
+                HSD_LObjSetPosition(lobj, &pos);
+                HSD_LObjSetDistAttn(lobj, upper_ref_dist, 0.03f, 3);
+            } else if (light_type == LOBJ_POINT && current_pos.y < split_y) {
+                GXColor color = { 0x00, 0x00, 0xF7, 0xFF };
+                Vec3 pos = grZe_Route_803B83A0.lower_point_pos;
+
+                HSD_LObjSetColor(lobj, color);
+                pos.x *= scale;
+                pos.y *= scale;
+                pos.z *= scale;
+                HSD_LObjSetPosition(lobj, &pos);
+                HSD_LObjSetDistAttn(lobj, lower_ref_dist, 0.03f, 3);
+            }
         }
     }
 }

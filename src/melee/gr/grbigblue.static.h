@@ -17,7 +17,7 @@ typedef struct grBb_TrackEntry {
     Vec3 delta;
 } grBb_TrackEntry;
 
-typedef struct grBb_YakumonoParams {
+typedef struct grBb_YakumonoParam {
     f32 x0;
     f32 x4;
     f32 x8;
@@ -96,6 +96,6 @@ typedef struct grBb_YakumonoParams {
     f32 x130;
     Vec3 x134_translate;
     f32 x140_scale;
-} grBb_YakumonoParams;
+} grBb_YakumonoParam;
 
 #endif
