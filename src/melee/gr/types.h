@@ -1949,4 +1949,12 @@ struct UnkArchiveStruct {
     u32 unk8;
 };
 
+struct grZebesRoute_LightData {
+    Vec3 player_pos;
+    Vec3 spot_pos;
+    Vec3 spot_interest;
+    Vec3 upper_point_pos;
+    Vec3 lower_point_pos;
+};
+
 #endif

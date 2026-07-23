@@ -65,8 +65,6 @@ StageData grEF1_803E62C0 = {
 
 static void* yakumono_param;
 
-extern StageInfo stage_info;
-
 static void grFigure1_OnDemoInit(int unused) {}
 
 static void grFigure1_OnInit(void)

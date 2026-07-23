@@ -67,8 +67,6 @@ StageData grTDk_803E87EC = {
     0,
 };
 
-extern StageInfo stage_info;
-
 static void grTDonkey_80220228(bool arg0) {}
 
 static void grTDonkey_8022022C(void)
