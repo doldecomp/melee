@@ -240,7 +240,7 @@ StageData grCn_803E1F08 = {
     grCorneria_801E2EE4,
     grCorneria_801E2EEC,
     0x00000001,
-    (void*) &grCn_803E1D38,
+    grCn_803E1D38,
     8,
 };
 
@@ -500,7 +500,7 @@ void grCorneria_801DD350(void)
     Vec3 light_pos;
     u8 _pad2[12];
 
-    grCn_804D69A0 = (grCn_StageData*) Ground_GetYakumonoParam();
+    grCn_804D69A0 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grCorneria_801DD534(7);
