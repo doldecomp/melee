@@ -40,8 +40,6 @@ static void grTKoopa_80221918(Ground_GObj*);
 static DynamicsDesc* grTKoopa_8022191C(enum_t);
 static bool grTKoopa_80221924(Vec3*, int, HSD_JObj*);
 
-extern StageInfo stage_info;
-
 static StageCallbacks grTKp_803E8C70[4] = {
     { grTKoopa_802217D4, grTKoopa_80221800, grTKoopa_80221808,
       grTKoopa_8022180C, 0 },

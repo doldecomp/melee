@@ -21,7 +21,7 @@
 
 #define GET_GROUND(gobj) ((Ground*) HSD_GObjGetUserData(gobj))
 
-static inline void Ground_JObjInline1(HSD_GObj* gobj)
+static inline void Ground_JObjInline1(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -29,7 +29,8 @@ static inline void Ground_JObjInline1(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static inline void Ground_SetupStageCallbacks(HSD_GObj* gobj,
+/// @todo Call sites have a lot of duplicate code
+static inline void Ground_SetupStageCallbacks(Ground_GObj* gobj,
                                               StageCallbacks* callbacks)
 {
     Ground* gp = GET_GROUND(gobj);

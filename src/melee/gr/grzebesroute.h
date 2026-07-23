@@ -11,7 +11,6 @@
 /* 20B1D4 */ void grZebesRoute_8020B1D4(void);
 /* 20B1F4 */ void grZebesRoute_8020B1F4(void);
 /* 20B258 */ bool grZebesRoute_8020B258(void);
-/* 20B260 */ Ground_GObj* grZebesRoute_8020B260(int);
 /* 20B348 */ void grZebesRoute_8020B348(Ground_GObj*);
 /* 20B374 */ bool grZebesRoute_8020B374(Ground_GObj*);
 /* 20B37C */ void grZebesRoute_8020B37C(Ground_GObj*);

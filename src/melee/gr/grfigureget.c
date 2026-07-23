@@ -91,8 +91,6 @@ StageData grFigureGet_803E7D34 = {
 
 static grFigureGet_Params* yakumono_param;
 
-extern StageInfo stage_info;
-
 void grFigureGet_OnDemoInit(int unused) {}
 
 void grFigureGet_OnInit(void)

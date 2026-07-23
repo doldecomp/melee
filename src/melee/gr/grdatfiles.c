@@ -1,6 +1,8 @@
-#include "gr/grdatfiles.h"
+#include "grdatfiles.h"
 
-#include "gr/types.h"
+#include "ground.h"
+#include "types.h"
+
 #include "lb/lb_00B0.h"
 #include "lb/lbarchive.h"
 #include "lb/lbheap.h"
@@ -10,14 +12,10 @@
 #include <baselib/particle.h>
 #include <baselib/psstructs.h>
 
-extern StageInfo stage_info;
-
-/// @todo Bad split?
+/// @todo Merge declaration and definition
 /* static */ extern UnkStage6B0 grDatFiles_803E0848;
 
-static UnkArchiveStruct grDatFiles_8049EE10[4];
-
-/// @todo Bad split?
+/// @todo Merge declaration and definition
 /* static */ extern UnkStageDat grDatFiles_803E0924;
 
 void grDatFiles_801C5FC0(HSD_Archive* archive, void* data, u32 length)
@@ -31,6 +29,23 @@ void grDatFiles_801C5FC0(HSD_Archive* archive, void* data, u32 length)
     if (map_ptcl != NULL && map_texg != NULL) {
         psInitDataBankLocate(map_ptcl, map_texg, NULL);
     }
+}
+
+/// @todo .data order hack
+static void order_data(void)
+{
+    (void) "map_head";
+    (void) "map_head";
+    (void) "coll_data";
+    (void) "grGroundParam";
+    (void) "itemdata";
+    (void) "ALDYakuAll";
+    (void) "map_ptcl";
+    (void) "map_texg";
+    (void) "yakumono_param";
+    (void) "map_plit";
+    (void) "quake_model_set";
+    (void) __FILE__;
 }
 
 void grDatFiles_801C6038(void* arg0, s32 arg1, s32 arg2)
@@ -109,6 +124,8 @@ static void grDatFiles_801C6228(UnkStageDat* arg0)
         }
     }
 }
+
+static UnkArchiveStruct grDatFiles_8049EE10[4];
 
 void grDatFiles_801C6288(void)
 {

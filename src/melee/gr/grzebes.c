@@ -20,6 +20,7 @@
 #include "mp/mplib.h"
 
 #include <math_ppc.h>
+#include <dolphin/mtx.h>
 #include <dolphin/os.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
@@ -125,8 +126,6 @@ typedef struct grZe_YakumonoParam {
 /* 4D6994 */ static s32 grZe_804D6994;
 /* 4D6998 */ static s16 grZe_804D6998;
 
-extern f32 grZe_804DB0B0;
-
 typedef struct grZe_BubbleEntry {
     /* 0x00 */ u8 x00_active;
     /* 0x01 */ u8 pad_01;
@@ -180,11 +179,8 @@ typedef struct grZe_AcidState {
     /* +20 */ s16 x20_anim_idx;
 } grZe_AcidState;
 
-extern const grZe_BubbleConfig grZe_803B8044;
-
-u32 grZe_803E1A10[8] = {
-    0x00010006, 0x00150004, 0x0006000E, 0x00030006,
-    0x00010002, 0x00070006, 0x00050007, 0x00010000,
+S16Vec3 grZe_803E1A10[] = {
+    { 1, 6, 21 }, { 4, 6, 14 }, { 3, 6, 1 }, { 2, 7, 6 }, { 5, 7, 1 },
 };
 
 StageCallbacks grZe_callbacks[] = {
@@ -208,28 +204,10 @@ StageCallbacks grZe_callbacks[] = {
     { NULL, NULL, NULL, NULL, 0 },
 };
 
-char grZe_803E1B20[] = "/GrZe.dat";
-
-typedef struct grZe_803E1B2C_t {
-    u32 count;
-    StageCallbacks* cbs;
-    char* datfile;
-    void (*init)(void);
-    void (*reset)(bool);
-    void (*unk528)(void);
-    void (*unk52c)(void);
-    bool (*unk550)(void);
-    DynamicsDesc* (*unkCCB8)(enum_t);
-    bool (*unkCCC0)(Vec3*, int, HSD_JObj*);
-    u32 unkA;
-    u32* unkB;
-    u32 unkC;
-} grZe_803E1B2C_t;
-
-grZe_803E1B2C_t grZe_803E1B2C = {
-    8,
+StageData grZe_803E1B2C = {
+    ZEBES,
     grZe_callbacks,
-    grZe_803E1B20,
+    "/GrZe.dat",
     grZebes_801D84A4,
     grZebes_801D84A0,
     grZebes_801D8528,
@@ -237,9 +215,9 @@ grZe_803E1B2C_t grZe_803E1B2C = {
     grZebes_801D8550,
     grZebes_801DCCB8,
     grZebes_801DCCC0,
-    1,
+    (1 << 0),
     grZe_803E1A10,
-    5,
+    ARRAY_SIZE(grZe_803E1A10),
 };
 
 void grZebes_801D84A0(bool arg) {}
@@ -247,8 +225,8 @@ void grZebes_801D84A0(bool arg) {}
 void grZebes_801D84A4(void)
 {
     yakumono_param = Ground_GetYakumonoParam();
-    stage_info.unk8C.b4 = 0;
-    stage_info.unk8C.b5 = 1;
+    stage_info.unk8C.b4 = false;
+    stage_info.unk8C.b5 = true;
     grZebes_801D8558(0);
     grZebes_801D8558(1);
     grZebes_801D8558(6);
@@ -295,22 +273,14 @@ Ground_GObj* grZebes_801D8558(int id)
     return gobj;
 }
 
-typedef struct {
-    Vec3 x00;
-    Vec3 x04;
-    Vec3 x08;
-    Vec3 x0C;
-    Vec3 x10;
-} grZe_803B7FF0_t;
-
-static const grZe_803B7FF0_t grZe_803B7FF0 = {
+static struct grZebesRoute_LightData const grZe_803B7FF0 = {
     // clang-format off
     {    0.0f,   0.0f, 0.0f }, {   8.2f, -4.55f, 0.0f },
     {   7.59f,   2.5f, 0.0f }, { 8.589f, 1.215f, 0.0f },
     { 23.151f, 1.207f, 0.0f },
 }; // clang-format on
 
-Vec3 grZe_803E1B90[20] = {
+Vec3 grZe_803E1B90[] = {
     // clang-format off
     { -40.5f, -10.0f, 13.0f }, { -40.5f, -24.0f, 13.0f },
     {  -5.5f, -13.0f, 23.5f }, {  -5.5f, -27.0f, 23.5f },
@@ -359,7 +329,7 @@ void grZebes_801D8644(HSD_GObj* gobj)
     ((grZe_AcidState*) &gp->u.zebes5.xC8)->x20_anim_idx = 0x1C;
     gp->u.zebes5.xEC = 0;
     gp->u.zebes5.xF4 = 0;
-    pos = grZe_803B7FF0.x00;
+    pos = grZe_803B7FF0.player_pos;
     mat_gobj2 =
         grMaterial_801C8D44(0, 0, gp, &pos, 0, NULL, fn_801DAC90, NULL);
     grMaterial_801C8E08(mat_gobj2);
@@ -511,8 +481,8 @@ void grZebes_801D881C(HSD_GObj* gobj)
         }
     }
 
-    sp80 = grZe_803B7FF0.x04;
-    sp74 = grZe_803B7FF0.x08;
+    sp80 = grZe_803B7FF0.spot_pos;
+    sp74 = grZe_803B7FF0.spot_interest;
     {
         HSD_JObj* jobj = Ground_801C3FA4(gobj, 0xE);
         if (jobj != NULL) {
@@ -577,8 +547,8 @@ void grZebes_801D881C(HSD_GObj* gobj)
             }
         }
 
-        sp28 = grZe_803B7FF0.x0C;
-        sp1C = grZe_803B7FF0.x10;
+        sp28 = grZe_803B7FF0.upper_point_pos;
+        sp1C = grZe_803B7FF0.lower_point_pos;
 
         {
             HSD_JObj* sima_jobj;
@@ -1102,7 +1072,7 @@ void grZebes_801D9F84(Ground_GObj* gobj)
 
 void grZebes_801DA0C0(Ground_GObj* arg) {}
 
-const grZe_BubbleConfig grZe_803B8044 = {
+grZe_BubbleConfig const grZe_803B8044 = {
     { { 1.0f, 1.1f, 1.0f, 1.2f, 1.1f, 1.0f, 1.0f } },
     {
         { 7.59f, 2.5f, 0.0f },
@@ -2440,5 +2410,5 @@ f32 grZebes_801DCCC8(void)
 {
     f32 slope, intercept;
     Ground_801C4368(&slope, &intercept);
-    return grZe_804DB0B0 + slope;
+    return 5.0f + slope;
 }

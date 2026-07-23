@@ -62,8 +62,6 @@ StageData grEF2_803E6420 = {
 
 static void* yakumono_param;
 
-extern StageInfo stage_info;
-
 static void grFigure3_8020E504(bool number) {}
 
 static void grFigure3_8020E508(void)
