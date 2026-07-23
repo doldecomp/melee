@@ -331,11 +331,11 @@ bool grFlatzone_802174E4(Ground_GObj* gobj)
 
 void grFlatzone_802176BC(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
+    Ground* gp = gobj->user_data;
+    HSD_JObj* jobj = gobj->hsd_obj;
     s32 trigger_machine = 0;
     Vec3 pos = grFz_803B8430;
-    PAD_STACK(4);
+    PAD_STACK(12);
     if (gp->u.flatzone.xC4 != 0) {
         if (gp->u.flatzone.xD0 == 3) {
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
@@ -567,14 +567,15 @@ void grFlatzone_802174EC(Ground_GObj* gobj)
 {
     s16 row_entry;
 
-    Ground* gp = GET_GROUND(gobj);
+    Ground* gp = gobj->user_data;
     if (gp->u.flatzone3.xC4 == 0 && gp->u.flatzone3.xC7 != 8 &&
         gp->u.flatzone3.xC9 != 0)
     {
         if (gp->u.flatzone.xCC-- < 0) {
             gp->u.flatzone3.xCA = gp->u.flatzone3.xC9;
             while (true) {
-                s32 next_anim = HSD_Randi(4) + 1;
+                s32 next_anim = HSD_Randi(4);
+                next_anim++;
                 if ((u8) gp->u.flatzone3.xCA ==
                     (u8) (gp->u.flatzone3.xC9 = next_anim))
                 {
