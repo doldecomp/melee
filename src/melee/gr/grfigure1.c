@@ -38,7 +38,7 @@
 /* 20E260 */ static DynamicsDesc* grFigure1_OnTouchLine(enum_t);
 /* 20E268 */ static bool grFigure1_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 
-static StageCallbacks grEF1_803E6278[3] = {
+static StageCallbacks grEF1_StageCallbacks[3] = {
     { grFigure1_8020E168, grFigure1_8020E194, grFigure1_8020E19C,
       grFigure1_8020E1A0, 0 },
     { grFigure1_8020E1A4, grFigure1_8020E1D0, grFigure1_8020E1D8,
@@ -49,7 +49,7 @@ static StageCallbacks grEF1_803E6278[3] = {
 
 StageData grEF1_803E62C0 = {
     FIGURE1,
-    grEF1_803E6278,
+    grEF1_StageCallbacks,
     "/GrEF1.dat",
     grFigure1_OnInit,
     grFigure1_OnDemoInit,
@@ -94,7 +94,7 @@ static bool grFigure1_8020E078(void)
 static HSD_GObj* grFigure1_8020E080(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grEF1_803E6278[gobj_id];
+    StageCallbacks* callbacks = &grEF1_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 

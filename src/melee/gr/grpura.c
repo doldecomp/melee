@@ -26,7 +26,7 @@
 
 /* 213030 */ static void grPura_80213030(Ground_GObj* arg0);
 
-StageCallbacks grPu_803E6800[] = {
+StageCallbacks grPu_StageCallbacks[] = {
     { grPura_80211EF0, grPura_80211F1C, grPura_80211F24, grPura_80211F28, 0 },
     { grPura_80212024, grPura_802120D8, grPura_802120E0, grPura_8021228C, 0 },
     { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
@@ -70,7 +70,7 @@ typedef struct grPu_StageData {
 grPu_StageData grPu_803E6A3C = {
     {
         0x11,
-        grPu_803E6800,
+        grPu_StageCallbacks,
         grPu_803E6A30,
         grPura_80211D00,
         grPura_80211CFC,
@@ -154,15 +154,15 @@ HSD_GObj* grPura_80211E08_noinline2(int gobj_id)
 HSD_GObj* grPura_80211E08(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grPu_803E6800[gobj_id];
+    StageCallbacks* callbacks = &grPu_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport((char*) grPu_803E6800 + 0x270, (char*) grPu_803E6800 + 0x294,
-                 0x108, gobj_id);
+        OSReport((char*) grPu_StageCallbacks + 0x270,
+                 (char*) grPu_StageCallbacks + 0x294, 0x108, gobj_id);
     }
 
     return gobj;
@@ -335,7 +335,7 @@ void grPura_802125F0(HSD_GObj* arg0)
         s32 x0;
         f32 x4;
         s32 x8;
-    }* desc = (void*) ((char*) grPu_803E6800 + 0x2B0);
+    }* desc = (void*) ((char*) grPu_StageCallbacks + 0x2B0);
     f32 scale;
     HSD_JObj* jobj;
     u32 i;

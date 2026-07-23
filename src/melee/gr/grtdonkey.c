@@ -41,7 +41,7 @@ static void grTDonkey_802204F8(Ground_GObj*);
 static DynamicsDesc* grTDonkey_802204FC(enum_t);
 static bool grTDonkey_80220504(Vec3*, int, HSD_JObj*);
 
-static StageCallbacks grTDk_803E8790[] = {
+static StageCallbacks grTDk_StageCallbacks[] = {
     { grTDonkey_802203B4, grTDonkey_802203E0, grTDonkey_802203E8,
       grTDonkey_802203EC, 0 },
     { grTDonkey_80220480, grTDonkey_802204D0, grTDonkey_802204D8,
@@ -53,7 +53,7 @@ static StageCallbacks grTDk_803E8790[] = {
 
 StageData grTDk_803E87EC = {
     TDONKEY,
-    grTDk_803E8790,
+    grTDk_StageCallbacks,
     "/GrTDk.dat",
     grTDonkey_8022022C,
     grTDonkey_80220228,
@@ -89,7 +89,7 @@ static bool grTDonkey_802202C4(void)
 static HSD_GObj* grTDonkey_802202CC(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTDk_803E8790[gobj_id];
+    StageCallbacks* callbacks = &grTDk_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 

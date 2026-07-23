@@ -69,7 +69,7 @@ S16Vec3 grPs_803E1248[] = {
     { 4, 5, 0 }, { 5, 6, 0 }, { 7, 9, 0 },
 };
 
-static StageCallbacks grPs_803E126C[] = {
+static StageCallbacks grPs_StageCallbacks[] = {
     {
         NULL,
         NULL,
@@ -144,7 +144,7 @@ static StageCallbacks grPs_803E126C[] = {
 
 StageData grPs_803E1334 = {
     PSTADIUM,
-    grPs_803E126C,
+    grPs_StageCallbacks,
     "/GrPs",
     grStadium_OnInit,
     grStadium_OnDemoInit,
@@ -204,7 +204,7 @@ Ground_GObj* grStadium_801D10F8(StadiumGrType id)
     Ground_GObj* gobj;
     StageCallbacks* cb;
 
-    cb = &grPs_803E126C[id];
+    cb = &grPs_StageCallbacks[id];
     gobj = Ground_GetStageGObj(id);
 
     if (gobj != NULL) {

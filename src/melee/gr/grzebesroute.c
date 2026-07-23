@@ -35,7 +35,7 @@ static struct grZebesRoute_LightData const grZe_Route_803B83A0 = {
     { 0.0f, 215.0f, -50.0f },
 }; // clang-format on
 
-StageCallbacks grZe_Route_803E5DB0[] = {
+StageCallbacks grZe_Route_StageCallbacks[] = {
     { grZebesRoute_8020B348, grZebesRoute_8020B374, grZebesRoute_8020B37C,
       grZebesRoute_8020B380, 0 },
     { grZebesRoute_8020B3C0, grZebesRoute_8020B424, grZebesRoute_8020B42C,
@@ -47,7 +47,7 @@ StageCallbacks grZe_Route_803E5DB0[] = {
 
 StageData grZe_Route_803E5E0C = {
     ZEBESROUTE,
-    grZe_Route_803E5DB0,
+    grZe_Route_StageCallbacks,
     "/GrNZr.dat",
     grZebesRoute_8020B164,
     grZebesRoute_8020B160,
@@ -105,7 +105,7 @@ bool grZebesRoute_8020B258(void)
 Ground_GObj* grZebesRoute_8020B260(int gobj_id)
 {
     Ground_GObj* gobj;
-    StageCallbacks* callbacks = &grZe_Route_803E5DB0[gobj_id];
+    StageCallbacks* callbacks = &grZe_Route_StageCallbacks[gobj_id];
     gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {

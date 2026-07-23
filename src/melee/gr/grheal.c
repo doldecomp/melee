@@ -66,7 +66,7 @@ s32 grHeal_803E83B8[0x27] = {
     0x11,     0x12,     0x17,     -1,
 };
 
-StageCallbacks grHeal_803E8454[] = {
+StageCallbacks grHeal_StageCallbacks[] = {
     {
         grHeal_8021F0D8,
         grHeal_8021F170,
@@ -107,7 +107,7 @@ StageCallbacks grHeal_803E8454[] = {
 grHeal_StageData grHeal_803E84C4 = {
     {
         HEAL,
-        grHeal_803E8454,
+        grHeal_StageCallbacks,
         "/GrHe.dat",
         grHeal_8021EF3C,
         grHeal_8021EF38,

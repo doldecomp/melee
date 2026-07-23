@@ -26,7 +26,7 @@ struct grStory_YakumonoParam {
 /* 1E302C */ static void grStory_801E302C(bool);
 /* 1E36D0 */ static DynamicsDesc* grStory_801E36D0(enum_t);
 
-static StageCallbacks grSt_803E26F0[] = {
+static StageCallbacks grSt_StageCallbacks[] = {
     { NULL, NULL, NULL, NULL, 0 },
     { grStory_801E31C0, grStory_801E3224, grStory_801E322C, grStory_801E3230,
       0 },
@@ -42,7 +42,7 @@ static struct grStory_YakumonoParam* yakumono_param;
 
 StageData grSt_803E274C = {
     STORY,
-    grSt_803E26F0,
+    grSt_StageCallbacks,
     "/GrSt.dat",
     grStory_801E3030,
     grStory_801E302C,
@@ -86,7 +86,7 @@ bool grStory_801E30D0(void)
 Ground_GObj* grStory_801E30D8(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grSt_803E26F0[gobj_id];
+    StageCallbacks* callbacks = &grSt_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 

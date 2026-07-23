@@ -38,7 +38,7 @@
 /* 2228A4 */ static DynamicsDesc* grTNess_802228A4(enum_t);
 /* 2228AC */ static bool grTNess_802228AC(Vec3*, int, HSD_JObj*);
 
-static StageCallbacks grTNs_803E9030[] = {
+static StageCallbacks grTNs_StageCallbacks[] = {
     {
         grTNess_8022275C,
         grTNess_80222788,
@@ -63,7 +63,7 @@ static StageCallbacks grTNs_803E9030[] = {
 
 StageData grTNs_803E908C = {
     TNESS,
-    grTNs_803E9030,
+    grTNs_StageCallbacks,
     "/GrTNs.dat",
     grTNess_802225D4,
     grTNess_802225D0,
@@ -103,7 +103,7 @@ static bool grTNess_8022266C(void)
 static HSD_GObj* grTNess_80222674(int id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTNs_803E9030[id];
+    StageCallbacks* callbacks = &grTNs_StageCallbacks[id];
 
     gobj = Ground_GetStageGObj(id);
 
@@ -122,17 +122,17 @@ static void grTNess_8022275C(Ground_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTNess_80222788(Ground_GObj* arg0)
+static bool grTNess_80222788(Ground_GObj* gobj)
 {
     return false;
 }
 
-static void grTNess_80222790(Ground_GObj* arg0)
+static void grTNess_80222790(Ground_GObj* gobj)
 {
     return;
 }
 
-static void grTNess_80222794(Ground_GObj* arg0)
+static void grTNess_80222794(Ground_GObj* gobj)
 {
     return;
 }
@@ -142,7 +142,7 @@ static void grTNess_80222798(Ground_GObj* gobj)
     Ground_JObjInline1(gobj);
 }
 
-static bool grTNess_802227E8(Ground_GObj* arg0)
+static bool grTNess_802227E8(Ground_GObj* gobj)
 {
     return false;
 }
@@ -153,7 +153,7 @@ static void grTNess_802227F0(Ground_GObj* gobj)
     Ground_801C2FE0(gobj);
 }
 
-static void grTNess_80222824(Ground_GObj* arg0)
+static void grTNess_80222824(Ground_GObj* gobj)
 {
     return;
 }
@@ -163,7 +163,7 @@ static void grTNess_80222828(Ground_GObj* gobj)
     Ground_JObjInline1(gobj);
 }
 
-static bool grTNess_80222878(Ground_GObj* arg0)
+static bool grTNess_80222878(Ground_GObj* gobj)
 {
     return false;
 }
@@ -173,7 +173,7 @@ static void grTNess_80222880(Ground_GObj* gobj)
     Ground_801C2FE0(gobj);
 }
 
-static void grTNess_802228A0(Ground_GObj* arg0)
+static void grTNess_802228A0(Ground_GObj* gobj)
 {
     return;
 }

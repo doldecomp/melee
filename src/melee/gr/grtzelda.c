@@ -41,7 +41,7 @@ void grTZelda_802240FC(Ground_GObj*);                     /* static */
 DynamicsDesc* grTZelda_OnTouchLine(enum_t);               /* static */
 bool grTZelda_OnCheckShadowRender(Vec3*, int, HSD_JObj*); /* static */
 
-static StageCallbacks grTZd_803E9638[4] = {
+static StageCallbacks grTZd_StageCallbacks[4] = {
     { grTZelda_80223FB8, grTZelda_80223FE4, grTZelda_80223FEC,
       grTZelda_80223FF0, 0 },
     { grTZelda_80224084, grTZelda_802240D4, grTZelda_802240DC,
@@ -53,7 +53,7 @@ static StageCallbacks grTZd_803E9638[4] = {
 
 StageData grTZd_803E9694 = {
     TZELDA,
-    grTZd_803E9638,
+    grTZd_StageCallbacks,
     "/GrTZd.dat",
     grTZelda_OnInit,
     grTZelda_OnDemoInit,
@@ -87,7 +87,7 @@ bool grTZelda_80223EC8(void)
 HSD_GObj* grTZelda_80223ED0(int arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTZd_803E9638[arg0];
+    StageCallbacks* callbacks = &grTZd_StageCallbacks[arg0];
 
     gobj = Ground_GetStageGObj(arg0);
 

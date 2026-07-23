@@ -41,7 +41,7 @@
 /* 222B90 */ static bool grTPeach_80222B90(Vec3* arg0, int arg1,
                                            HSD_JObj* arg2);
 
-StageCallbacks grTPe_803E90F0[4] = {
+StageCallbacks grTPe_StageCallbacks[4] = {
     {
         grTPeach_80222A40,
         grTPeach_80222A6C,
@@ -74,7 +74,7 @@ StageCallbacks grTPe_803E90F0[4] = {
 
 StageData grTPe_803E914C = {
     TPEACH,
-    grTPe_803E90F0,
+    grTPe_StageCallbacks,
     "/GrTPe.dat",
     grTPeach_802228B8,
     grTPeach_802228B4,
@@ -110,7 +110,7 @@ bool grTPeach_80222950(void)
 Ground_GObj* grTPeach_80222958(int index)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTPe_803E90F0[index];
+    StageCallbacks* callbacks = &grTPe_StageCallbacks[index];
 
     gobj = Ground_GetStageGObj(index);
 

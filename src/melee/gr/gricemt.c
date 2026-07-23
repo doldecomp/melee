@@ -159,7 +159,7 @@ static void order_data0(void)
     (void) "i<ICEMT_FIELD_MAX";
 }
 
-StageCallbacks grIm_803E4718[] = {
+StageCallbacks grIm_StageCallbacks[] = {
     { grIceMt_801F72D4, grIceMt_801F75DC, grIceMt_801F75E4, grIceMt_801F75E8,
       0 },
     { grIceMt_801F7D94, grIceMt_801F7EE0, grIceMt_801F7EE8, grIceMt_801F7F1C,
@@ -174,7 +174,7 @@ StageCallbacks grIm_803E4718[] = {
       0 },
     { grIceMt_801F8850, grIceMt_801F89A4, grIceMt_801F89AC, grIceMt_801F89E0,
       0 },
-    { 0, 0, 0, 0, 0 },
+    { NULL, NULL, NULL, NULL, NULL },
     { grIceMt_801F8A34, grIceMt_801F8B08, grIceMt_801F8B10, grIceMt_801F8C60,
       0xC0000000 },
     { grIceMt_801F75FC, grIceMt_801F7720, grIceMt_801F7728, grIceMt_801F77AC,
@@ -185,7 +185,7 @@ StageCallbacks grIm_803E4718[] = {
 
 StageData grIm_803E4800 = {
     ICEMTN,
-    grIm_803E4718,
+    grIm_StageCallbacks,
     "/GrIm.dat",
     grIceMt_801F686C,
     grIceMt_801F6868,
@@ -404,7 +404,7 @@ bool grIceMt_801F71E0(void)
 HSD_GObj* grIceMt_801F71E8(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grIm_803E4718[gobj_id];
+    StageCallbacks* callbacks = &grIm_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
@@ -424,34 +424,50 @@ static void order_data1(void)
     (void) "block_jobj";
 }
 
-void grIceMt_801F72D4(Ground_GObj* arg0)
+void grIceMt_801F72D4(Ground_GObj* gobj)
 {
-    Vec3 v1;
-    Vec3 v2;
-    Vec3 v3;
-    Vec3 v4;
-    HSD_JObj* jobj;
-    Ground* gp = GET_GROUND(arg0);
-    grAnime_801C8138(arg0, gp->map_id, 0);
-    jobj = Ground_801C3FA4(arg0, 18);
-    if (jobj != 0) {
-        v1 = grIm_803B8220[1];
-        HSD_JObjSetTranslate(jobj, &v1);
-    }
-    jobj = Ground_801C3FA4(arg0, 19);
-    if (jobj != 0) {
-        v2 = grIm_803B8220[2];
-        HSD_JObjSetTranslate(jobj, &v2);
-    }
-    jobj = Ground_801C3FA4(arg0, 20);
-    if (jobj != 0) {
-        v3 = grIm_803B8220[3];
-        HSD_JObjSetTranslate(jobj, &v3);
-    }
-    jobj = Ground_801C3FA4(arg0, 21);
-    if (jobj != 0) {
-        v4 = grIm_803B8220[4];
-        HSD_JObjSetTranslate(jobj, &v4);
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+
+    { /// @todo Unrolled loop?
+        HSD_JObj* jobj;
+        Vec3 v[4];
+        {
+            int const i = 0;
+            int const ix = (ARRAY_SIZE(v) - 1) - i;
+            jobj = Ground_801C3FA4(gobj, i + 18);
+            if (jobj != NULL) {
+                v[ix] = grIm_803B8220[i + 1];
+                HSD_JObjSetTranslate(jobj, &v[ix]);
+            }
+        }
+        {
+            int const i = 1;
+            int const ix = (ARRAY_SIZE(v) - 1) - i;
+            jobj = Ground_801C3FA4(gobj, i + 18);
+            if (jobj != NULL) {
+                v[ix] = grIm_803B8220[i + 1];
+                HSD_JObjSetTranslate(jobj, &v[ix]);
+            }
+        }
+        {
+            int const i = 2;
+            int const ix = (ARRAY_SIZE(v) - 1) - i;
+            jobj = Ground_801C3FA4(gobj, i + 18);
+            if (jobj != NULL) {
+                v[ix] = grIm_803B8220[i + 1];
+                HSD_JObjSetTranslate(jobj, &v[ix]);
+            }
+        }
+        {
+            int const i = 3;
+            int const ix = (ARRAY_SIZE(v) - 1) - i;
+            jobj = Ground_801C3FA4(gobj, i + 18);
+            if (jobj != NULL) {
+                v[ix] = grIm_803B8220[i + 1];
+                HSD_JObjSetTranslate(jobj, &v[ix]);
+            }
+        }
     }
     Ground_801C39C0();
     Ground_801C3BB4();
@@ -978,7 +994,7 @@ void grIceMt_801F87C8(Ground_GObj* param1)
     return;
 }
 
-/// @todo Rename: This is callback3 (destroy) for row 5 in grIm_803E4718.
+/// @todo Rename: This is callback3 (destroy) for row 5 in grIm_StageCallbacks.
 /// Destroys HSD_GObj* stored in icemt2.xF8[0-4].
 void grIceMt_801F87FC(Ground_GObj* gobj)
 {

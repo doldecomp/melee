@@ -52,7 +52,7 @@ extern f32 grHr_804DBC7C;
 extern f32 grHr_804DBC80;
 extern f32 grHr_804DBC84;
 
-StageCallbacks grHr_803E8140[11] = {
+StageCallbacks grHr_StageCallbacks[11] = {
     { grHomeRun_8021C914, grHomeRun_8021CB10, grHomeRun_8021CB18,
       grHomeRun_8021CB1C, 0 },
     { grHomeRun_8021E038, grHomeRun_8021E064, grHomeRun_8021E06C,
@@ -86,7 +86,7 @@ typedef struct grHr_StageData {
 grHr_StageData grHr_803E821C = {
     {
         HOMERUN,
-        grHr_803E8140,
+        grHr_StageCallbacks,
         grHr_804D49A0,
         grHomeRun_8021C754,
         grHomeRun_8021C750,
@@ -148,15 +148,15 @@ HSD_GObj* grHomeRun_8021C82C_noinline(int gobj_id)
 HSD_GObj* grHomeRun_8021C82C(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grHr_803E8140[gobj_id];
+    StageCallbacks* callbacks = &grHr_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport((char*) grHr_803E8140 + 0x110, (char*) grHr_803E8140 + 0x134,
-                 0x131, gobj_id);
+        OSReport((char*) grHr_StageCallbacks + 0x110,
+                 (char*) grHr_StageCallbacks + 0x134, 0x131, gobj_id);
     }
 
     return gobj;

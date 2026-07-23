@@ -104,6 +104,7 @@
     0,
 };
 
+/// @todo Use headers
 extern StageData Ground_803DFEA8, grTe_803E5764, grCs_803E11A4, grRc_803E4ECC,
     grKg_803E1800, grGd_803E52E0, grGb_803E3F6C, grSh_803E5130, grZe_803E1B2C,
     grKr_803E4D0C, grSt_803E274C, grYt_803E51CC, grIz_803E0E5C, grGr_803E76D0,

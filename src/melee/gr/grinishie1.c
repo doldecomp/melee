@@ -139,7 +139,7 @@ s16 grI1_803E48C8[22] = {
     16, 17, 3, 17, 18, 3,  18, 19, 3,  19, 0,
 };
 
-StageCallbacks grI1_803E48F4[] = {
+StageCallbacks grI1_StageCallbacks[] = {
     {
         grInishie1_801FAAA0,
         grInishie1_801FAACC,
@@ -180,7 +180,7 @@ typedef struct grInishie1_StageData {
 grInishie1_StageData grI1_803E4950 = {
     {
         INISHIE1,
-        grI1_803E48F4,
+        grI1_StageCallbacks,
         grI1_803E4944,
         grInishie1_801FA90C,
         grInishie1_801FA908,

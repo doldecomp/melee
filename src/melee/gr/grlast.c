@@ -74,7 +74,7 @@ static void grLast_OnDemoInit(int arg0)
     gp->u.map.xC4_b1 = true;
 }
 
-static StageCallbacks grLast_803E7EBC[] = {
+static StageCallbacks grLast_StageCallbacks[] = {
     {
         // 0 generic anime gobj
         grLast_8021A8E0,
@@ -151,7 +151,7 @@ static StageCallbacks grLast_803E7EBC[] = {
 
 StageData grNLa_803E7F90 = {
     LAST,
-    grLast_803E7EBC,
+    grLast_StageCallbacks,
     "/GrNLa.dat",
     grLast_OnInit,
     grLast_OnDemoInit,
@@ -198,7 +198,7 @@ static Ground_GObj* grLast_8021A7F4(int id)
     Ground* gp;
     StageCallbacks* cb;
 
-    cb = &grLast_803E7EBC[id];
+    cb = &grLast_StageCallbacks[id];
     gobj = Ground_GetStageGObj(id);
     if (gobj != NULL) {
         gp = GET_GROUND(gobj);

@@ -58,7 +58,7 @@ static const grNKr_Depths grNKr_803B82F4 = {
     },
 };
 
-StageCallbacks grNKr_803E57F0[4] = {
+StageCallbacks grNKr_StageCallbacks[4] = {
     { grKinokoRoute_80207634, grKinokoRoute_802078E8, grKinokoRoute_802078F0,
       grKinokoRoute_80207A94, 0 },
     { grKinokoRoute_80207ADC, grKinokoRoute_80207B20, grKinokoRoute_80207B28,
@@ -73,7 +73,7 @@ static char grNKr_803E5840[] = "/GrNKr.dat";
 
 StageData grNKr_803E584C = {
     KINOKOROUTE,
-    grNKr_803E57F0,
+    grNKr_StageCallbacks,
     grNKr_803E5840,
     grKinokoRoute_80207420,
     (void (*)(int)) grKinokoRoute_8020741C,
@@ -135,7 +135,7 @@ bool grKinokoRoute_80207544(void)
 Ground_GObj* grKinokoRoute_8020754C(int gobj_id)
 {
     Ground_GObj* gobj;
-    StageCallbacks* callbacks = &grNKr_803E57F0[gobj_id];
+    StageCallbacks* callbacks = &grNKr_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 

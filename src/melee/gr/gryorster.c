@@ -26,7 +26,7 @@
                                             mpLib_GroundEnum ground_kind,
                                             float delta_y);
 
-StageCallbacks grYt_803E5198[2] = {
+StageCallbacks grYt_StageCallbacks[2] = {
     { grYorster_80202124, grYorster_80202150, grYorster_80202158,
       grYorster_8020215C, NULL },
     { grYorster_802021AC, grYorster_8020224C, grYorster_80202254,
@@ -35,7 +35,7 @@ StageCallbacks grYt_803E5198[2] = {
 
 StageData grYt_803E51CC = {
     YORSTER,
-    grYt_803E5198,
+    grYt_StageCallbacks,
     "/GrYt.dat",
     grYorster_80201FA4,
     grYorster_80201FA0,
@@ -101,7 +101,7 @@ bool grYorster_80202034(void)
 HSD_GObj* grYorster_8020203C(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grYt_803E5198[gobj_id];
+    StageCallbacks* callbacks = &grYt_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 

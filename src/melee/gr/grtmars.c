@@ -38,7 +38,7 @@
 /* 2221C8 */ static DynamicsDesc* grTMars_802221C8(enum_t);
 /* 2221D0 */ static bool grTMars_802221D0(Vec3*, int, HSD_JObj*);
 
-static StageCallbacks grTMs_803E8EB0[4] = {
+static StageCallbacks grTMs_StageCallbacks[4] = {
     {
         grTMars_80222080,
         grTMars_802220AC,
@@ -62,7 +62,7 @@ static StageCallbacks grTMs_803E8EB0[4] = {
 
 StageData grTMs_803E8F0C = {
     TMARS,
-    grTMs_803E8EB0,
+    grTMs_StageCallbacks,
     "/GrTMs.dat",
     grTMars_80221EF8,
     grTMars_80221EF4,
@@ -99,7 +99,7 @@ static bool grTMars_80221F90(void)
 static HSD_GObj* grTMars_80221F98(int id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTMs_803E8EB0[id];
+    StageCallbacks* callbacks = &grTMs_StageCallbacks[id];
 
     gobj = Ground_GetStageGObj(id);
 

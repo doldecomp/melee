@@ -43,7 +43,6 @@
 #include <common_structs.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <melee/ft/dobjlist.h>
 
 #define FTPART_INVALID 0xFF
 
