@@ -1,28 +1,30 @@
 #include "grstory.h"
 
-#include <platform.h>
+#include "granime.h"
+#include "grlib.h"
+#include "grmaterial.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
-#include <dolphin/os/OSError.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/random.h>
-#include <melee/gr/granime.h>
-#include <melee/gr/grdisplay.h>
-#include <melee/gr/grlib.h>
-#include <melee/gr/grmaterial.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/grzakogenerator.h>
-#include <melee/gr/inlines.h>
-#include <melee/gr/types.h>
-#include <melee/it/it_26B1.h>
-#include <melee/it/items/itheiho.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbspdisplay.h>
+#include "it/it_26B1.h"
+#include "it/items/itheiho.h"
+#include "lb/lb_00B0.h"
+#include "lb/lbspdisplay.h"
+
+#include <baselib/gobjproc.h>
+#include <baselib/random.h>
+
+struct grStory_YakumonoParam {
+    float timer_min;
+    float timer_rand;
+    float spawnmany_rarity;
+    float vpos[6];
+};
 
 /* 1E302C */ static void grStory_801E302C(bool);
 /* 1E36D0 */ static DynamicsDesc* grStory_801E36D0(enum_t);
-
-extern StageInfo stage_info;
 
 static StageCallbacks grSt_803E26F0[] = {
     { NULL, NULL, NULL, NULL, 0 },
@@ -36,12 +38,7 @@ static StageCallbacks grSt_803E26F0[] = {
       (1 << 30) | (1 << 31) },
 };
 
-static struct {
-    float timer_min;
-    float timer_rand;
-    float spawnmany_rarity;
-    float vpos[6];
-}* shyguy_vars;
+static struct grStory_YakumonoParam* yakumono_param;
 
 StageData grSt_803E274C = {
     STORY,
@@ -63,7 +60,7 @@ static void grStory_801E302C(bool _) {}
 
 void grStory_801E3030(void)
 {
-    shyguy_vars = Ground_GetYakumonoParam();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grStory_801E30D8(0);
@@ -130,7 +127,7 @@ static inline void reset_shyguy_timer(Ground* gp)
 {
     // Reset the timer
     gp->u.shyguys.timer =
-        shyguy_vars->timer_min + randi(shyguy_vars->timer_rand);
+        yakumono_param->timer_min + randi(yakumono_param->timer_rand);
 
     // This value really is overwritten in the game code.
     // Maybe a leftover hardcoded value from debugging?
@@ -244,7 +241,7 @@ void grStory_801E3418(Ground_GObj* gobj)
     // Pick a random spawn pattern,
     // which must be different from the previous one
     do {
-        spawn_pattern = randi(ARRAY_SIZE(shyguy_vars->vpos));
+        spawn_pattern = randi(ARRAY_SIZE(yakumono_param->vpos));
     } while (gp->u.shyguys.pattern == spawn_pattern);
     gp->u.shyguys.pattern = spawn_pattern;
 
@@ -254,14 +251,14 @@ void grStory_801E3418(Ground_GObj* gobj)
     } else {
         pos.x = 304.0F;
     }
-    pos.y = shyguy_vars->vpos[spawn_pattern];
+    pos.y = yakumono_param->vpos[spawn_pattern];
     pos.z = 2.0F;
 
     {
         int temp_r29 = randi(3);
 
         // Spawn either 1, or 3-6 shy guys
-        set_shyguy_spawn_count(gp, shyguy_vars->spawnmany_rarity);
+        set_shyguy_spawn_count(gp, yakumono_param->spawnmany_rarity);
 
         // Value is overwritten, possible debugging?
         set_shyguy_spawn_count(gp, 2);
@@ -270,7 +267,7 @@ void grStory_801E3418(Ground_GObj* gobj)
             it_802D8618(i, &pos, temp_r29, 25.0F * i);
 
             // Jitter the vertical position of the each subsequent shy guy
-            pos.y = 3.0F * frand_amp1() + shyguy_vars->vpos[spawn_pattern];
+            pos.y = 3.0F * frand_amp1() + yakumono_param->vpos[spawn_pattern];
         }
     }
 }

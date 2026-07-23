@@ -47,7 +47,7 @@ typedef struct grTGn_YakumonoParam {
     DynamicsDesc* x8;
 } grTGn_YakumonoParam;
 
-grTGn_YakumonoParam* yakumono_param;
+static grTGn_YakumonoParam* yakumono_param;
 
 void grTGanon_802246D8(bool unused)
 {

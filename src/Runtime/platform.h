@@ -5,6 +5,24 @@
 #include <stddef.h>        // IWYU pragma: export
 #include <dolphin/types.h> // IWYU pragma: export
 
+/// @typedef bool
+/// @note Dolphin's #BOOL macro is not supported.
+/// @typedef BOOL
+/// @deprecated Use #bool instead.
+#undef BOOL
+
+/// @def false
+/// @note Dolphin's #FALSE macro is not supported.
+/// @def FALSE
+/// @deprecated Use #false instead.
+#undef FALSE
+
+/// @def true
+/// @note Dolphin's #TRUE macro is not supported.
+/// @def TRUE
+/// @deprecated Use #true instead.
+#undef TRUE
+
 /// The underlying type of an @c enum, used as a placeholder
 typedef int enum_t;
 

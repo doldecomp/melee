@@ -2,21 +2,17 @@
 #ifndef GALE01_1FA908
 #define GALE01_1FA908
 
-#include <placeholder.h>
 #include <platform.h>
 
+#include "gr/forward.h"
 #include "it/forward.h"
-#include "lb/forward.h"
-#include "mp/forward.h"
-
-#include <baselib/gobj.h>
 
 /* 1FA908 */ void grInishie1_801FA908(bool);
 /* 1FA90C */ void grInishie1_801FA90C(void);
 /* 1FA984 */ void grInishie1_801FA984(void);
 /* 1FA988 */ void grInishie1_801FA988(void);
 /* 1FA9AC */ bool grInishie1_801FA9AC(void);
-/* 1FA9B4 */ HSD_GObj* grInishie1_801FA9B4(s32);
+/* 1FA9B4 */ Ground_GObj* grInishie1_801FA9B4(s32);
 /* 1FAAA0 */ void grInishie1_801FAAA0(Ground_GObj*);
 /* 1FAACC */ bool grInishie1_801FAACC(Ground_GObj*);
 /* 1FAAD4 */ void grInishie1_801FAAD4(Ground_GObj*);

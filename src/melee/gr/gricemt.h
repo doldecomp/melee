@@ -15,63 +15,6 @@
 
 #include <dolphin/mtx.h>
 
-struct IceMountainParams {
-    float x0;
-    int x4;
-    float x8;
-    float xC;
-    float x10;
-    float x14;
-    float x18;
-    float x1C;
-    float x20;
-    float x24;
-    float x28;
-    float x2C;
-    float x30;
-    float x34;
-    u16 x38;
-    u16 x3A;
-    float x3C;
-    float x40;
-    float x44;
-    float x48;
-    float x4C;
-    float x50;
-    float x54;
-    float x58;
-    float x5C;
-    float x60;
-    float x64;
-    float x68;
-    float x6C;
-    float x70;
-    float x74;
-    float x78;
-    float x7C;
-    float x80;
-    float x84;
-    float x88;
-    float x8C;
-    float x90;
-    float x94;
-    float x98;
-    float x9C;
-    float xA0;
-    float xA4;
-    float xA8;
-    s16* xAC;
-    s16* xB0;
-    s16* xB4;
-    s16 xB8;
-    s16 pad;
-    grZakoGenerator_SpawnDesc xBC;
-    float xC0;
-    float xC4;
-    float xC8;
-    float xCC;
-};
-
 extern f32 grIm_804DB570;
 
 /* 1F6868 */ void grIceMt_801F6868(bool id);

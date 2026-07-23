@@ -57,20 +57,20 @@ StageData grTFc_803E8974 = {
     1,
 };
 
-typedef struct grTFalco_UnkStruct {
+struct grTFalco_YakumonoParam {
     UNK_T unk_0;
     UNK_T unk_4;
     UNK_T unk_8;
     UNK_T unk_C;
-} grTFalco_UnkStruct;
+};
 
-grTFalco_UnkStruct* grTFc_804D6AF8;
+static struct grTFalco_YakumonoParam* yakumono_param;
 
 void grTFalco_802207F0(bool arg0) {}
 
 void grTFalco_802207F4(void)
 {
-    grTFc_804D6AF8 = Ground_GetYakumonoParam();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grTFalco_8022089C(0);
@@ -169,19 +169,19 @@ DynamicsDesc* grTFalco_80220ACC(enum_t arg0)
             i = mpLineGetKind(arg0);
 
             if (i == CollLine_Floor) {
-                return grTFc_804D6AF8->unk_0;
+                return yakumono_param->unk_0;
             }
 
             if (i == CollLine_Ceiling) {
-                return grTFc_804D6AF8->unk_4;
+                return yakumono_param->unk_4;
             }
 
             if (i == CollLine_RightWall) {
-                return grTFc_804D6AF8->unk_8;
+                return yakumono_param->unk_8;
             }
 
             if (i == CollLine_LeftWall) {
-                return grTFc_804D6AF8->unk_C;
+                return yakumono_param->unk_C;
             }
 
             return NULL;

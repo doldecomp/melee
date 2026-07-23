@@ -32,6 +32,27 @@
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/memory.h>
 
+struct grRCruise_YakumonoParam {
+    f32 x0;
+    f32 x4;
+    f32 x8;
+    s32 xC;
+    s32 x10;
+    s32 x14;
+    s32 x18;
+    s32 x1C;
+    s32 x20;
+    s32 x24;
+    s32 x28;
+    f32 x2C;
+    f32 x30;
+    f32 x34;
+    f32 x38;
+    s32 x3C;
+    s32 x40;
+    s32 x44;
+};
+
 /* 200460 */ static void fn_80200460(void* user_data, int joint_id,
                                      CollData* coll, int coll_x50,
                                      mpLib_GroundEnum ground_kind,
@@ -101,26 +122,7 @@ struct StageData grRc_803E4ECC = {
     ARRAY_SIZE(grRc_803E4DA8),
 };
 
-static struct grRCruise_Yakumono {
-    f32 x0;
-    f32 x4;
-    f32 x8;
-    s32 xC;
-    s32 x10;
-    s32 x14;
-    s32 x18;
-    s32 x1C;
-    s32 x20;
-    s32 x24;
-    s32 x28;
-    f32 x2C;
-    f32 x30;
-    f32 x34;
-    f32 x38;
-    s32 x3C;
-    s32 x40;
-    s32 x44;
-}* grRc_804D6A10;
+static struct grRCruise_YakumonoParam* yakumono_param;
 
 void grRCruise_801FF164(bool arg) {}
 
@@ -135,7 +137,7 @@ void grRCruise_801FF168(void)
     HSD_GObj* gobj1;
     HSD_GObj* gobj4;
 
-    grRc_804D6A10 = Ground_GetYakumonoParam();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 1;
     stage_info.unk8C.b5 = 0;
     jgobj = grRCruise_801FF2C8(3);
@@ -542,7 +544,7 @@ void grRCruise_80200154(Ground_GObj* gobj)
             }
             break;
         case 3:
-            if (gp->u.rcruise.x3C[i].x4 >= grRc_804D6A10->xC) {
+            if (gp->u.rcruise.x3C[i].x4 >= yakumono_param->xC) {
                 gp->u.rcruise.x3C[i].x4 = 0;
                 gp->u.rcruise.x3C[i].x1_b0 = 0;
                 gp->u.rcruise.x3C[i].x0 = 4;
@@ -550,7 +552,7 @@ void grRCruise_80200154(Ground_GObj* gobj)
             gp->u.rcruise.x3C[i].x4++;
             break;
         case 4:
-            if (gp->u.rcruise.x3C[i].x4 % grRc_804D6A10->x14 == 0) {
+            if (gp->u.rcruise.x3C[i].x4 % yakumono_param->x14 == 0) {
                 gp->u.rcruise.x3C[i].x1_b0 ^= 1;
                 if (gp->u.rcruise.x3C[i].x1_b0) {
                     grRCruise_80201B60(gp2->u.rcruise.x3C[i].xC->child, 0);
@@ -558,7 +560,7 @@ void grRCruise_80200154(Ground_GObj* gobj)
                     grRCruise_80201B60(gp2->u.rcruise.x3C[i].xC->child, 1);
                 }
             }
-            if (gp->u.rcruise.x3C[i].x4 >= grRc_804D6A10->x10) {
+            if (gp->u.rcruise.x3C[i].x4 >= yakumono_param->x10) {
                 mpLib_80057BC0(gp2->u.rcruise.x3C[i].x2);
                 grRCruise_80201B60(gp2->u.rcruise.x3C[i].xC->child, 0);
                 grAnime_801C7BA0(gobj, grRc_804D4790[i], 1, 0.0F);
@@ -570,12 +572,12 @@ void grRCruise_80200154(Ground_GObj* gobj)
             gp->u.rcruise.x3C[i].x4++;
             break;
         case 5:
-            if (gp->u.rcruise.x3C[i].x4 % grRc_804D6A10->x1C == 0) {
+            if (gp->u.rcruise.x3C[i].x4 % yakumono_param->x1C == 0) {
                 grRCruise_80201B60(gp2->u.rcruise.x3C[i].xC->child, 0);
             } else {
                 grRCruise_80201B60(gp2->u.rcruise.x3C[i].xC->child, 1);
             }
-            if (gp->u.rcruise.x3C[i].x4 >= grRc_804D6A10->x18) {
+            if (gp->u.rcruise.x3C[i].x4 >= yakumono_param->x18) {
                 mpLib_80057BC0(gp2->u.rcruise.x3C[i].x2);
                 grRCruise_80201B60(gp2->u.rcruise.x3C[i].xC->child, 0);
                 grAnime_801C7BA0(gobj, grRc_804D4790[i], 1, 0.0F);
@@ -688,7 +690,7 @@ void grRCruise_8020071C(Ground_GObj* gobj)
     case 0:
         if (gp->u.rcruise.x34 == 0) {
             gp->u.rcruise.x1C = gp->u.rcruise.x18 < 0.0f ? 1 : -1;
-            gp->u.rcruise.x20 = grRc_804D6A10->x8 * gp->u.rcruise.x1C;
+            gp->u.rcruise.x20 = yakumono_param->x8 * gp->u.rcruise.x1C;
             if (wrapped <= 0.2f) {
                 gp->u.rcruise.x20 = 0.0f;
                 gp->u.rcruise.x2C = 0;
@@ -696,16 +698,16 @@ void grRCruise_8020071C(Ground_GObj* gobj)
         } else if (gp->u.rcruise.x24 < gp->u.rcruise.x28) {
             gp->u.rcruise.x1C = 1.0f;
             gp->u.rcruise.x20 =
-                grRc_804D6A10->x0 * (gp->u.rcruise.x28 - gp->u.rcruise.x24);
-            if (gp->u.rcruise.x20 >= grRc_804D6A10->x4) {
-                gp->u.rcruise.x20 = grRc_804D6A10->x4;
+                yakumono_param->x0 * (gp->u.rcruise.x28 - gp->u.rcruise.x24);
+            if (gp->u.rcruise.x20 >= yakumono_param->x4) {
+                gp->u.rcruise.x20 = yakumono_param->x4;
             }
         } else {
             gp->u.rcruise.x1C = -1.0f;
             gp->u.rcruise.x20 =
-                -grRc_804D6A10->x0 * (gp->u.rcruise.x24 - gp->u.rcruise.x28);
-            if (gp->u.rcruise.x20 <= -grRc_804D6A10->x4) {
-                gp->u.rcruise.x20 = -grRc_804D6A10->x4;
+                -yakumono_param->x0 * (gp->u.rcruise.x24 - gp->u.rcruise.x28);
+            if (gp->u.rcruise.x20 <= -yakumono_param->x4) {
+                gp->u.rcruise.x20 = -yakumono_param->x4;
             }
         }
         break;
@@ -713,7 +715,7 @@ void grRCruise_8020071C(Ground_GObj* gobj)
         if (gp->u.rcruise.x38 == 0) {
             if (gp->u.rcruise.x34 == 0) {
                 gp->u.rcruise.x1C = gp->u.rcruise.x18 < 0.0f ? 1 : -1;
-                gp->u.rcruise.x20 = grRc_804D6A10->x8 * gp->u.rcruise.x1C;
+                gp->u.rcruise.x20 = yakumono_param->x8 * gp->u.rcruise.x1C;
                 if (wrapped <= 0.2f) {
                     gp->u.rcruise.x20 = 0.0f;
                     gp->u.rcruise.x2C = 0;
@@ -797,32 +799,33 @@ void grRCruise_80200C04(Ground_GObj* gobj)
             if (entry->x8 == 0) {
                 entry->x4 = 0;
                 entry->x0 = 0;
-            } else if (entry->x4 >= grRc_804D6A10->x20) {
+            } else if (entry->x4 >= yakumono_param->x20) {
                 entry->x0 = 2;
             } else {
                 entry->x4++;
             }
             break;
         case 2:
-            if ((entry->x4 % grRc_804D6A10->x28) == 0) {
-                f32 range = 100.0f * (grRc_804D6A10->x30 - grRc_804D6A10->x2C);
+            if ((entry->x4 % yakumono_param->x28) == 0) {
+                f32 range =
+                    100.0f * (yakumono_param->x30 - yakumono_param->x2C);
                 s32 randi = (s32) range != 0 ? HSD_Randi(range) : 0;
                 HSD_JObjSetTranslateY(
                     entry->x14,
-                    entry->xC + (grRc_804D6A10->x2C + (randi / 100.0f)));
+                    entry->xC + (yakumono_param->x2C + (randi / 100.0f)));
             }
-            if (entry->x4 >= grRc_804D6A10->x24) {
+            if (entry->x4 >= yakumono_param->x24) {
                 entry->x10 = 0.0f;
                 entry->x0 = 3;
             }
             entry->x4++;
             break;
         case 3:
-            entry->x10 -= grRc_804D6A10->x34;
+            entry->x10 -= yakumono_param->x34;
             if ((entry->x10 < 0.0f ? -entry->x10 : entry->x10) >
-                grRc_804D6A10->x38)
+                yakumono_param->x38)
             {
-                entry->x10 = -grRc_804D6A10->x38;
+                entry->x10 = -yakumono_param->x38;
             }
             HSD_JObjAddTranslationY(entry->x14, entry->x10);
             if (HSD_JObjGetTranslationY(entry->x14) <=
@@ -836,7 +839,7 @@ void grRCruise_80200C04(Ground_GObj* gobj)
             }
             break;
         case 4:
-            if (entry->x4 >= grRc_804D6A10->x3C) {
+            if (entry->x4 >= yakumono_param->x3C) {
                 HSD_JObjSetTranslateY(entry->x14, entry->xC);
                 mpLib_80055E9C(entry->x2);
                 mpLib_80057424(entry->x2);
@@ -849,7 +852,7 @@ void grRCruise_80200C04(Ground_GObj* gobj)
             entry->x4++;
             break;
         case 5:
-            if ((entry->x4 % grRc_804D6A10->x44) == 0) {
+            if ((entry->x4 % yakumono_param->x44) == 0) {
                 ((struct grRCruise_EntryFlags*) &entry->pad_01)->b0 =
                     ((struct grRCruise_EntryFlags*) &entry->pad_01)->b0 ^ 1;
                 if (((struct grRCruise_EntryFlags*) &entry->pad_01)->b0) {
@@ -858,7 +861,7 @@ void grRCruise_80200C04(Ground_GObj* gobj)
                     grRCruise_80201B60(entry->x14, 1);
                 }
             }
-            if (entry->x4 >= grRc_804D6A10->x40) {
+            if (entry->x4 >= yakumono_param->x40) {
                 grRCruise_80201B60(entry->x14, 1);
                 entry->x4 = 0;
                 entry->x0 = 0;

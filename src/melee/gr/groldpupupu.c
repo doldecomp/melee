@@ -11,7 +11,6 @@
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
@@ -22,12 +21,11 @@
 
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
-static struct {
+struct grOldpupupu_YakumonoParam {
     s16 x0;
     s16 x2;
     s16 x4;
@@ -43,7 +41,9 @@ static struct {
     f32 x28;
     f32 x2C;
     f32 x30;
-}* grOp_804D6A98;
+};
+
+static struct grOldpupupu_YakumonoParam* yakumono_param;
 
 static void* grOp_804D6A9C;
 
@@ -125,7 +125,7 @@ void grOldPupupu_802107E0(void)
 {
     PAD_STACK(8);
 
-    grOp_804D6A98 = Ground_GetYakumonoParam();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grOldPupupu_802108B4(0);
@@ -302,8 +302,8 @@ void grOldPupupu_80210C7C(Ground_GObj* gobj)
     Ground* gp = gobj->user_data;
     s16 x2, x0;
 
-    x2 = grOp_804D6A98->x2;
-    x0 = grOp_804D6A98->x0;
+    x2 = yakumono_param->x2;
+    x0 = yakumono_param->x0;
     gp->u.oldpupupu2.xC4 =
         x2 > x0   ? x0 + (x2 - x0 != 0 ? HSD_Randi(x2 - x0) : 0)
         : x2 < x0 ? x2 + (x0 - x2 != 0 ? HSD_Randi(x0 - x2) : 0)
@@ -366,7 +366,7 @@ void grOldPupupu_80210D10(Ground_GObj* gobj)
         {
             f32 rand = HSD_Randf();
             y = direction *
-                (((f32) grOp_804D6A98->x4 * ((2.0F * rand) - 1.0F)) + 20.0F);
+                (((f32) yakumono_param->x4 * ((2.0F * rand) - 1.0F)) + 20.0F);
         }
         z = -150.0F * direction;
         for (i = 0; i < count; i++) {
@@ -387,8 +387,8 @@ void grOldPupupu_80210D10(Ground_GObj* gobj)
             x += step;
         }
 
-        respawn = grOp_804D6A98->x2;
-        min_respawn = grOp_804D6A98->x0;
+        respawn = yakumono_param->x2;
+        min_respawn = yakumono_param->x0;
         respawn = respawn > min_respawn
                       ? min_respawn + (respawn - min_respawn != 0
                                            ? HSD_Randi(respawn - min_respawn)
@@ -451,7 +451,7 @@ void grOldPupupu_8021119C(Ground_GObj* gobj)
     gp->u.oldpupupu.xC4 = 0;
     gp->u.oldpupupu.xC8 = 0;
     gp->u.oldpupupu.xCC = 0;
-    gp->u.oldpupupu.xD0 = randrange(grOp_804D6A98->xC, grOp_804D6A98->x8);
+    gp->u.oldpupupu.xD0 = randrange(yakumono_param->xC, yakumono_param->x8);
     gp->u.oldpupupu.xD4 = 1;
     gp->u.oldpupupu.xE0 = 0;
     gp->u.oldpupupu.xD8 = 1;
@@ -500,20 +500,20 @@ bool fn_802112F4(Ground_GObj* gobj, HSD_GObj* fighter_gobj, Vec3* vel)
     gp = GET_GROUND(gobj);
     switch (gp->u.oldpupupu.xDC) {
     case 1:
-        if (grOldPupupu_8021128C(&pos, grOp_804D6A98->x1C, grOp_804D6A98->x20,
-                                 grOp_804D6A98->x24,
-                                 grOp_804D6A98->x28) == true)
+        if (grOldPupupu_8021128C(&pos, yakumono_param->x1C,
+                                 yakumono_param->x20, yakumono_param->x24,
+                                 yakumono_param->x28) == true)
         {
-            vel->x = -grOp_804D6A98->x10;
+            vel->x = -yakumono_param->x10;
             return true;
         }
         break;
     case 2:
-        if (grOldPupupu_8021128C(&pos, grOp_804D6A98->x18, grOp_804D6A98->x14,
-                                 grOp_804D6A98->x24,
-                                 grOp_804D6A98->x28) == true)
+        if (grOldPupupu_8021128C(&pos, yakumono_param->x18,
+                                 yakumono_param->x14, yakumono_param->x24,
+                                 yakumono_param->x28) == true)
         {
-            vel->x = grOp_804D6A98->x10;
+            vel->x = yakumono_param->x10;
             return true;
         }
         break;
@@ -539,7 +539,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                 gp->u.oldpupupu.xD4 = 0;
                 gp->u.oldpupupu.xCC = 0;
                 gp->u.oldpupupu.xD0 =
-                    randrange(grOp_804D6A98->xC, grOp_804D6A98->x8);
+                    randrange(yakumono_param->xC, yakumono_param->x8);
                 grAnime_801C8138(
                     gobj, gp->map_id,
                     grOp_804D48C8[gp->u.oldpupupu.xCC][gp->u.oldpupupu.xD8]);
@@ -550,8 +550,8 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                 other_gp->u.oldpupupu.xCC = 0;
                 other_gp->u.oldpupupu.xD4 = gp->u.oldpupupu.xD8;
                 other_gp->u.oldpupupu.xD0 = 1;
-                gp->u.oldpupupu.xCC = randrange((s32) grOp_804D6A98->x30,
-                                                (s32) grOp_804D6A98->x2C);
+                gp->u.oldpupupu.xCC = randrange((s32) yakumono_param->x30,
+                                                (s32) yakumono_param->x2C);
             }
 
             gp->u.oldpupupu.xD0 -= 1;
@@ -566,8 +566,8 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                                          grOp_804D48C8[gp->u.oldpupupu.xCC]
                                                       [gp->u.oldpupupu.xD8]);
                         gp->u.oldpupupu.xCC =
-                            randrange((s32) grOp_804D6A98->x30,
-                                      (s32) grOp_804D6A98->x2C);
+                            randrange((s32) yakumono_param->x30,
+                                      (s32) yakumono_param->x2C);
                     }
                     gp = gobj->user_data;
                     other_gp = Ground_801C2BA4(1)->user_data;
@@ -722,17 +722,17 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                     if ((gp->u.oldpupupu.xD0 % 10) == 0) {
                         gp = gobj->user_data;
                         if (gp->u.oldpupupu.xD8 == 0) {
-                            lb_80011A50(&grOp_803E67E4[gp->u.oldpupupu.xD8],
-                                        0xF, 0.5F, 0.0F, 0.0F,
-                                        grOp_804D6A98->x20, grOp_804D6A98->x24,
-                                        grOp_804D6A98->x1C,
-                                        grOp_804D6A98->x28);
+                            lb_80011A50(
+                                &grOp_803E67E4[gp->u.oldpupupu.xD8], 0xF, 0.5F,
+                                0.0F, 0.0F, yakumono_param->x20,
+                                yakumono_param->x24, yakumono_param->x1C,
+                                yakumono_param->x28);
                         } else {
-                            lb_80011A50(&grOp_803E67E4[gp->u.oldpupupu.xD8],
-                                        0xF, 0.5F, 0.0F, 0.0F,
-                                        grOp_804D6A98->x14, grOp_804D6A98->x24,
-                                        grOp_804D6A98->x18,
-                                        grOp_804D6A98->x28);
+                            lb_80011A50(
+                                &grOp_803E67E4[gp->u.oldpupupu.xD8], 0xF, 0.5F,
+                                0.0F, 0.0F, yakumono_param->x14,
+                                yakumono_param->x24, yakumono_param->x18,
+                                yakumono_param->x28);
                         }
                         return;
                     }

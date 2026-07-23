@@ -30,6 +30,19 @@
 #include <baselib/random.h>
 #include <baselib/spline.h>
 
+struct grBigBlueRoute_YakumonoParam {
+    int x0;
+    f32 x4;
+    u8 pad_8[0x20 - 0x8];
+    f32 x20;
+    u8 pad_24[0x3C - 0x24];
+    f32 x3C;
+    f32 x40;
+    f32 x44;
+    f32 x48;
+    f32 x4C;
+};
+
 /// @todo Emitted only to lay out the .sdata2 literal pool in retail order.
 static void sdata2_order(void)
 {
@@ -138,18 +151,7 @@ static struct {
     "%s:%d: couldn t get gobj(id=%d)\n",
 };
 
-static struct {
-    int x0;
-    f32 x4;
-    u8 pad_8[0x20 - 0x8];
-    f32 x20;
-    u8 pad_24[0x3C - 0x24];
-    f32 x3C;
-    f32 x40;
-    f32 x44;
-    f32 x48;
-    f32 x4C;
-}* grBb_Route_804D6A68;
+static struct grBigBlueRoute_YakumonoParam* yakumono_param;
 
 void grBigBlueRoute_8020B864(bool arg)
 {
@@ -163,7 +165,7 @@ void grBigBlueRoute_8020B864(bool arg)
 
 void grBigBlueRoute_8020B89C(void)
 {
-    grBb_Route_804D6A68 = Ground_GetYakumonoParam();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grBigBlueRoute_8020B9D4(0);
@@ -197,9 +199,9 @@ void grBigBlueRoute_8020B95C(void)
         return;
     }
 
-    val = grBb_Route_804D6A68->x0;
+    val = yakumono_param->x0;
     if (val != 0) {
-        val = HSD_Randi(grBb_Route_804D6A68->x0);
+        val = HSD_Randi(yakumono_param->x0);
     } else {
         val = 0;
     }
@@ -483,13 +485,13 @@ void grBigBlueRoute_8020C238(Ground_GObj* gobj)
         while (jobj != NULL) {
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
 
-            val = grBb_Route_804D6A68->x4;
+            val = yakumono_param->x4;
             HSD_JObjSetScaleX(jobj, val);
 
-            val = grBb_Route_804D6A68->x4;
+            val = yakumono_param->x4;
             HSD_JObjSetScaleY(jobj, val);
 
-            val = grBb_Route_804D6A68->x4;
+            val = yakumono_param->x4;
             HSD_JObjSetScaleZ(jobj, val);
 
             if (jobj == NULL) {
@@ -570,7 +572,7 @@ static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
     if (route_idx == 0) {
         route_idx = 30;
         ((RouteEntry*) gp->u.car.car_info)[30].flags.b1 = 1;
-        gp->u.car.x10A = grBb_Route_804D6A68->x4C;
+        gp->u.car.x10A = yakumono_param->x4C;
     } else {
         s32 max_val;
         s32 min_val;
@@ -580,8 +582,8 @@ static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
 
         ((RouteEntry*) gp->u.car.car_info)[route_idx].flags.b1 = 0;
 
-        min_val = (s32) grBb_Route_804D6A68->x44;
-        max_val = (s32) grBb_Route_804D6A68->x48;
+        min_val = (s32) yakumono_param->x44;
+        max_val = (s32) yakumono_param->x48;
 
         if (max_val > min_val) {
             s32 range = max_val - min_val;
@@ -607,7 +609,7 @@ static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
         re->x4 = 1.0F;
 
         re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
-        re->x8 = grBb_Route_804D6A68->x20;
+        re->x8 = yakumono_param->x20;
 
         re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
         re->xC = 0.5F;
@@ -622,7 +624,7 @@ static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
         re->x14 = 0.0F;
 
         re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
-        re->x18 = grBb_Route_804D6A68->x3C;
+        re->x18 = yakumono_param->x3C;
 
         re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
         (void) re;
@@ -687,7 +689,7 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     PAD_STACK(8);
 
-    if (!((f32) gp->u.car.x108 < 1.0f + grBb_Route_804D6A68->x40)) {
+    if (!((f32) gp->u.car.x108 < 1.0f + yakumono_param->x40)) {
         return;
     }
 
@@ -996,7 +998,7 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
             {
                 if (RE_ENTRY->flags.b1) {
                     if (!((UnkFlagStruct*) &gp->u.bigblue.x0)->b0) {
-                        un_802FD604((s32) grBb_Route_804D6A68->x4C);
+                        un_802FD604((s32) yakumono_param->x4C);
                         Ground_801C53EC(0x77A11);
                         ((UnkFlagStruct*) &gp->u.bigblue.x0)->b0 = 1;
                     }
