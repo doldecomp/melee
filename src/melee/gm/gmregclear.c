@@ -3298,7 +3298,7 @@ static inline s32 fn_80181C80_CountPlayers(volatile s32* out)
     return count;
 }
 
-s32 fn_80181C80(s32 arg0)
+void fn_80181C80(s32 arg0)
 {
     lbl_80472ED8_t* data = &lbl_80472ED8;
     s32 count;
@@ -3310,7 +3310,7 @@ s32 fn_80181C80(s32 arg0)
     sp10 = data->xC;
     count = fn_80181C80_CountPlayers(&sp38);
 
-    if ((data->x54 + arg0)->x4 > count && data->x8 > 0x5A) {
+    if (data->x54[arg0].x4 > count && data->x8 > 0x5A) {
         if (Player_GetPlayerSlotType(sp38) != Gm_PKind_NA) {
             Player_SetFalls(sp38, 0);
             Player_SetSuicideCount(sp38, 0);
@@ -3326,7 +3326,7 @@ s32 fn_80181C80(s32 arg0)
         gm_8016EDDC(sp38, &sp10);
         Player_SetNametagSlotID(sp38, 0x78);
         un_802FD28C(sp38);
-        return data->x0++;
+        data->x0++;
     }
 }
 

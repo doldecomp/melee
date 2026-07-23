@@ -1,33 +1,28 @@
 #include "grpushon.h"
 
-#include "placeholder.h"
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
 #include "types.h"
 
+#include <placeholder.h>
 #include <platform.h>
 
 #include "cm/camera.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
-
-#include "gr/forward.h"
-
-#include "gr/granime.h"
-#include "gr/grdisplay.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/stage.h"
 #include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
 #include "lb/types.h"
 #include "mp/mplib.h"
-#include "MSL/math.h"
-#include "sysdolphin/baselib/lobj.h"
 
 #include <math_ppc.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/random.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <MSL/math.h>
 
 struct grPushOn_Entry {
     s32 x0;
@@ -48,7 +43,7 @@ struct grPushOn_LightConfig {
     s32 dist_func;
 };
 
-static struct {
+struct grPushon_YakumonoParam {
     s32 x0;
     DynamicsDesc* x4;
     DynamicsDesc* x8;
@@ -58,7 +53,14 @@ static struct {
     bool x18;
     struct grPushOn_Entry x1c[0x1E];
     struct grPushOn_Lookup x10c[0x21];
-}* grPushOn_804D6AB8;
+};
+
+static struct grPushon_YakumonoParam* yakumono_param;
+
+/* 2190A0 */ static void fn_802190A0(void* user_data, int joint_id,
+                                     CollData* coll, int coll_x50,
+                                     mpLib_GroundEnum ground_kind,
+                                     float delta_y);
 
 /// @todo .sdata order hack
 static void order_sdata(void)
@@ -101,7 +103,7 @@ void grPushOn_802182C4(bool arg) {}
 
 void grPushOn_802182C8(void)
 {
-    grPushOn_804D6AB8 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grPushOn_802183E4(0);
@@ -127,9 +129,9 @@ void grPushOn_80218378(void)
 {
     bool val;
     grZakoGenerator_801CAE04(NULL);
-    val = grPushOn_804D6AB8->x18;
+    val = yakumono_param->x18;
     if (val) {
-        val = HSD_Randi(grPushOn_804D6AB8->x18);
+        val = HSD_Randi(yakumono_param->x18);
     } else {
         val = false;
     }
@@ -579,11 +581,13 @@ HSD_LObj* grPushOn_80218FC0(HSD_GObj* gobj)
 
 /// Ground collision callback for pushon stage elements.
 /// Activates push behavior when collision flags indicate contact (b1234 == 1).
-void fn_802190A0(Ground* gp, s32 joint_id, CollData* coll, s32 unk,
-                 mpLib_GroundEnum ground_enum, f32 arg5)
+/// @copydetails mpLib_JointCollisionCallback
+void fn_802190A0(void* user_data, int joint_id, CollData* coll, int coll_x50,
+                 mpLib_GroundEnum ground_kind, float delta_y)
 {
+    Ground* gp = user_data;
     if (((*(u8*) &coll->x34_flags >> 3U) & 0xF) == 1 &&
-        (ground_enum - 1) <= 1U)
+        (ground_kind - 1) <= 1U)
     {
         gp->u.map.xC4_b0 = true;
     }
@@ -644,8 +648,8 @@ f32 grPushOn_803E7CCC[13] = {
 void grPushOn_80219204(int arg0, int* out1, int* out2)
 {
     int idx = arg0 - 0x99;
-    *out1 = grPushOn_804D6AB8->x1c[idx].x0;
-    *out2 = grPushOn_804D6AB8->x1c[idx].x4;
+    *out1 = yakumono_param->x1c[idx].x0;
+    *out2 = yakumono_param->x1c[idx].x4;
 }
 
 int grPushOn_80219230(int arg0)
@@ -653,9 +657,9 @@ int grPushOn_80219230(int arg0)
     s32 i = 0;
     s32 key;
 
-    while (i < 0x21 && (key = grPushOn_804D6AB8->x10c[i].key) != -1) {
+    while (i < 0x21 && (key = yakumono_param->x10c[i].key) != -1) {
         if (key == arg0) {
-            return grPushOn_804D6AB8->x10c[i].value;
+            return yakumono_param->x10c[i].value;
         }
         i++;
     }
@@ -675,7 +679,7 @@ s32 fn_802192A4(void* arg0, HSD_GObj* gobj, s32* result)
             (scale * (-50.0f + grPushOn_803E7CCC[i * 3 + 2]) < sp14.y) &&
             (scale * grPushOn_803E7CCC[i * 3 + 2] > sp14.y))
         {
-            *result = grPushOn_804D6AB8->x0;
+            *result = yakumono_param->x0;
             return 1;
         }
     }
@@ -692,21 +696,21 @@ DynamicsDesc* grPushOn_80219458(enum_t arg0)
         if (joint != -1) {
             if (joint == 1) {
                 mpLineGetKind(arg0);
-                return grPushOn_804D6AB8->x4;
+                return yakumono_param->x4;
             }
             if (joint == 2) {
                 kind = mpLineGetKind(arg0);
                 if (kind == 1) {
-                    return grPushOn_804D6AB8->x8;
+                    return yakumono_param->x8;
                 }
                 if (kind == 2) {
-                    return grPushOn_804D6AB8->xC;
+                    return yakumono_param->xC;
                 }
                 if (kind == 4) {
-                    return grPushOn_804D6AB8->x10;
+                    return yakumono_param->x10;
                 }
                 if (kind == 8) {
-                    return grPushOn_804D6AB8->x14;
+                    return yakumono_param->x14;
                 }
                 return NULL;
             }

@@ -353,8 +353,8 @@ s32 it_802C2EC4(ItemLink* link, Vec3* target,
     Fighter* fp = GET_FIGHTER(ip->xDD4_itemVar.climbersstring.xC);
     PAD_STACK(4);
 
-    if (fp->fv.pp.x2240.x != 0.0f || fp->fv.pp.x2240.y != 0.0f) {
-        link->pos = fp->fv.pp.x2240;
+    if (fp->u.pp.x2240.x != 0.0f || fp->u.pp.x2240.y != 0.0f) {
+        link->pos = fp->u.pp.x2240;
     }
     link->vel.x = link->vel.y = link->vel.z = 0.0f;
 
@@ -412,8 +412,8 @@ s32 it_802C30E8(ItemLink* link, Vec3* target,
 
     link->vel.y -= 0.9f * attrs->x14;
 
-    if (fp->fv.pp.x2240.x != 0.0f || fp->fv.pp.x2240.y != 0.0f) {
-        link->pos = fp->fv.pp.x2240;
+    if (fp->u.pp.x2240.x != 0.0f || fp->u.pp.x2240.y != 0.0f) {
+        link->pos = fp->u.pp.x2240;
     } else {
         it_802A4420(cur);
     }

@@ -44,7 +44,7 @@ void ftMh_Entry_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        fp->fv.mh.x2258 = ftMh_MS_Wait1_0;
+        fp->u.mh.x2258 = ftMh_MS_Wait1_0;
         ftMh_MS_389_80151018(gobj);
     }
 }

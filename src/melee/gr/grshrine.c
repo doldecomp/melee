@@ -43,7 +43,7 @@ static void grShrine_80201F40(Ground_GObj*);
 static DynamicsDesc* grShrine_80201F44(enum_t);
 static bool grShrine_80201F4C(Vec3*, int, HSD_JObj*);
 
-static void* grSh_804D6A18;
+static void* yakumono_param;
 
 static StageCallbacks grSh_803E50E8[3] = {
     { grShrine_80201E08, grShrine_80201E34, grShrine_80201E3C,
@@ -76,7 +76,7 @@ static void grShrine_80201C64(void)
 {
     u8 unused0[8];
 
-    grSh_804D6A18 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     grShrine_80201D20(0);
     grShrine_80201D20(1);
     grShrine_80201D20(2);

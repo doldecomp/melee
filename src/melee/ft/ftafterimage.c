@@ -1,4 +1,5 @@
-/// @file Creates trailing "afterimages" for swords in motion
+/// @file
+/// @brief Creates trailing "afterimages" for swords in motion
 
 #include "ftafterimage.h"
 
@@ -6,7 +7,7 @@
 
 #include "baselib/debug.h"
 
-#include <math_ppc.h> // IWYU pragma: keep
+#include <math_ppc.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>

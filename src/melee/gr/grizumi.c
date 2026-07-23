@@ -1,15 +1,16 @@
-#include "gr/grizumi.h"
+#include "grizumi.h"
+
+#include "granime.h"
+#include "grdatfiles.h"
+#include "grdisplay.h"
+#include "grlib.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
 #include "cm/camera.h"
 #include "ft/ftdrawcommon.h"
-#include "gr/granime.h"
-#include "gr/grdatfiles.h"
-#include "gr/grdisplay.h"
-#include "gr/grlib.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbdvd.h"
 #include "lb/lbspdisplay.h"
@@ -17,7 +18,6 @@
 
 #include <dolphin/gx/GXTexture.h>
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/aobj.h>
 #include <baselib/archive.h>
 #include <baselib/cobj.h>
@@ -37,10 +37,9 @@
 #include <baselib/random.h>
 #include <baselib/state.h>
 #include <baselib/tobj.h>
-#include <baselib/wobj.h> // IWYU pragma: keep
+#include <baselib/wobj.h>
 
-/// context stuff
-typedef struct FountainParams {
+struct grIzumi_YakumonoParam {
     float x0;
     int x4;
     float x8;
@@ -62,18 +61,22 @@ typedef struct FountainParams {
     float x48;
     float x4C;
     float x50;
-} FountainParams;
+};
+
 typedef struct IzumiReflection {
     Mtx texture_matrix;
     HSD_ImageDesc* image;
 } IzumiReflection;
+
 typedef struct IzumiUnkCC {
     u8 pad[0x18];
     HSD_GObj* x18;
 } IzumiUnkCC;
+
 #define GET_REFLECTION(gobj) ((IzumiReflection*) HSD_GObjGetUserData(gobj))
 
-FountainParams* grIz_804D6968;
+static struct grIzumi_YakumonoParam* yakumono_param;
+
 S16Vec3 grIz_803E0D60[] = { { 0, 3, 1 }, { 1, 3, 2 }, { 2, 3, 3 } };
 StageCallbacks grIz_803E0D74[] = {
     {
@@ -181,7 +184,7 @@ void grIzumi_801CBB88(void)
 {
     HSD_GObj* r3;
 
-    grIz_804D6968 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grIzumi_801CBCE8(0);
@@ -305,10 +308,10 @@ void grIzumi_801CBE64(Ground_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
     gp->x11_flags.b012 = 1;
     gp->x10_flags.b5 = 1;
-    gp->gv.izumi.xD0 = Ground_801C3FA4(gobj, 1);
-    gp->gv.izumi.xD4 = Ground_801C3FA4(gobj, 2);
-    gp->gv.izumi.xC8 = grIzumi_801CCD98();
-    tobj = grIzumi_801CD090(gobj, GET_REFLECTION(gp->gv.izumi.xC8)->image);
+    gp->u.izumi.xD0 = Ground_801C3FA4(gobj, 1);
+    gp->u.izumi.xD4 = Ground_801C3FA4(gobj, 2);
+    gp->u.izumi.xC8 = grIzumi_801CCD98();
+    tobj = grIzumi_801CD090(gobj, GET_REFLECTION(gp->u.izumi.xC8)->image);
     if (tobj != NULL) {
         tobj->src = 0;
         tobj->wrap_s = 0;
@@ -317,7 +320,7 @@ void grIzumi_801CBE64(Ground_GObj* gobj)
     } else {
         OSReport("%s:%d:Warning: not found tobj !\n", __FILE__, 387);
     }
-    gp->gv.izumi.xC4 = tobj;
+    gp->u.izumi.xC4 = tobj;
     gobj->render_cb = grIzumi_801CD220;
     grIzumi_801CCB18(gobj);
     {
@@ -331,9 +334,9 @@ void grIzumi_801CBE64(Ground_GObj* gobj)
         y.z *= Ground_801C0498();
         grLib_801C96F8(0x7536, 0x1E, &y);
     }
-    gp->gv.izumi.xCC = grIzumi_801CBCE8(2);
-    ((IzumiUnkCC*) HSD_GObjGetUserData(gp->gv.izumi.xCC))->x18 =
-        gp->gv.izumi.xC8;
+    gp->u.izumi.xCC = grIzumi_801CBCE8(2);
+    ((IzumiUnkCC*) HSD_GObjGetUserData(gp->u.izumi.xCC))->x18 =
+        gp->u.izumi.xC8;
     jobj = Ground_801C3FA4(gobj, 4);
     { // this looks like inlines, but there's a lot of small differences
         u8 _[4] = { 0 };
@@ -344,21 +347,21 @@ void grIzumi_801CBE64(Ground_GObj* gobj)
         lb_8000B1CC(jobj, NULL, &x38);
         {
             HSD_GObj* plat =
-                grIzumi_801CCBDC(grIz_804D6968->x0, &x38, 0, gp->gv.izumi.xD0);
+                grIzumi_801CCBDC(yakumono_param->x0, &x38, 0, gp->u.izumi.xD0);
             Ground* platground = GET_GROUND(plat);
-            platground->gv.izumi2.xDC = grIz_804D6968->xC;
+            platground->u.izumi2.xDC = yakumono_param->xC;
             platground->x10_flags.b3 = 1;
-            platground->x18 = gp->gv.izumi.xC8;
+            platground->x18 = gp->u.izumi.xC8;
         }
         jobj = Ground_801C3FA4(gobj, 6);
         lb_8000B1CC(jobj, NULL, &x38);
         {
             HSD_GObj* plat =
-                grIzumi_801CCBDC(grIz_804D6968->x8, &x38, 1, gp->gv.izumi.xD4);
+                grIzumi_801CCBDC(yakumono_param->x8, &x38, 1, gp->u.izumi.xD4);
             Ground* platground = GET_GROUND(plat);
-            platground->gv.izumi2.xDC = grIz_804D6968->xC;
+            platground->u.izumi2.xDC = yakumono_param->xC;
             platground->x10_flags.b3 = 1;
-            platground->x18 = gp->gv.izumi.xC8;
+            platground->x18 = gp->u.izumi.xC8;
         }
     }
 }
@@ -371,36 +374,36 @@ bool grIzumi_801CC0CC(Ground_GObj* gobj)
 void grIzumi_801CC0D4(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    if (gp->gv.izumi.xCC != NULL) {
-        Ground* gp2 = GET_GROUND(gp->gv.izumi.xCC);
+    if (gp->u.izumi.xCC != NULL) {
+        Ground* gp2 = GET_GROUND(gp->u.izumi.xCC);
         Vec3 vec;
-        if (gp->gv.izumi.xD0 != NULL) {
-            HSD_JObjGetTranslation(gp->gv.izumi.xD0, &vec);
-            HSD_JObjSetTranslate(gp2->gv.izumi2.xC4, &vec);
+        if (gp->u.izumi.xD0 != NULL) {
+            HSD_JObjGetTranslation(gp->u.izumi.xD0, &vec);
+            HSD_JObjSetTranslate(gp2->u.izumi2.xC4, &vec);
             if (vec.y < 0.0f) {
-                u32 flags = HSD_JObjGetFlags(gp2->gv.izumi2.xC4);
+                u32 flags = HSD_JObjGetFlags(gp2->u.izumi2.xC4);
                 if ((flags & 0x10) == 0) {
-                    HSD_JObjSetFlagsAll(gp2->gv.izumi2.xC4, JOBJ_HIDDEN);
+                    HSD_JObjSetFlagsAll(gp2->u.izumi2.xC4, JOBJ_HIDDEN);
                 }
             } else {
-                u32 flags = HSD_JObjGetFlags(gp2->gv.izumi2.xC4);
+                u32 flags = HSD_JObjGetFlags(gp2->u.izumi2.xC4);
                 if ((flags & 0x10) != 0) {
-                    HSD_JObjClearFlagsAll(gp2->gv.izumi2.xC4, JOBJ_HIDDEN);
+                    HSD_JObjClearFlagsAll(gp2->u.izumi2.xC4, JOBJ_HIDDEN);
                 }
             }
         }
-        if (gp->gv.izumi.xD4 != NULL) {
-            HSD_JObjGetTranslation(gp->gv.izumi.xD4, &vec);
-            HSD_JObjSetTranslate(gp2->gv.izumi2.xC8, &vec);
+        if (gp->u.izumi.xD4 != NULL) {
+            HSD_JObjGetTranslation(gp->u.izumi.xD4, &vec);
+            HSD_JObjSetTranslate(gp2->u.izumi2.xC8, &vec);
             if (vec.y < 0.0f) {
-                u32 flags = HSD_JObjGetFlags(gp2->gv.izumi2.xC8);
+                u32 flags = HSD_JObjGetFlags(gp2->u.izumi2.xC8);
                 if ((flags & 0x10) == 0) {
-                    HSD_JObjSetFlagsAll(gp2->gv.izumi2.xC8, JOBJ_HIDDEN);
+                    HSD_JObjSetFlagsAll(gp2->u.izumi2.xC8, JOBJ_HIDDEN);
                 }
             } else {
-                u32 flags = HSD_JObjGetFlags(gp2->gv.izumi2.xC8);
+                u32 flags = HSD_JObjGetFlags(gp2->u.izumi2.xC8);
                 if ((flags & 0x10) != 0) {
-                    HSD_JObjClearFlagsAll(gp2->gv.izumi2.xC8, JOBJ_HIDDEN);
+                    HSD_JObjClearFlagsAll(gp2->u.izumi2.xC8, JOBJ_HIDDEN);
                 }
             }
         }
@@ -430,85 +433,87 @@ void grIzumi_801CC358(Ground_GObj* gobj)
     bool r29 = false;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Ground* gp = GET_GROUND(gobj);
-    switch (gp->gv.izumi3.xC4) {
+    switch (gp->u.izumi3.xC4) {
     case 0: {
         // 54
-        gp->gv.izumi3.xC4 = 1;
-        gp->gv.izumi3.xC6 = rand_range(grIz_804D6968->x3C, grIz_804D6968->x38);
+        gp->u.izumi3.xC4 = 1;
+        gp->u.izumi3.xC6 =
+            rand_range(yakumono_param->x3C, yakumono_param->x38);
         r29 = true;
         break;
     }
     case 1: {
         // e4
-        if (gp->gv.izumi3.xC6-- < 0) {
-            float f = HSD_Randf() * (grIz_804D6968->x40 + grIz_804D6968->x44 +
-                                     grIz_804D6968->x48);
-            f -= grIz_804D6968->x40;
+        if (gp->u.izumi3.xC6-- < 0) {
+            float f =
+                HSD_Randf() * (yakumono_param->x40 + yakumono_param->x44 +
+                               yakumono_param->x48);
+            f -= yakumono_param->x40;
             if (f < 0.0) {
-                gp->gv.izumi3.xC4 = 2;
-                gp->gv.izumi3.xD4 = -1;
+                gp->u.izumi3.xC4 = 2;
+                gp->u.izumi3.xD4 = -1;
                 break;
             }
-            f -= grIz_804D6968->x48;
+            f -= yakumono_param->x48;
             if (f < 0.0) {
                 float fff = HSD_Randf();
-                float ff = (grIz_804D6968->x1C - grIz_804D6968->x18);
-                ff = ff * fff + grIz_804D6968->x18;
-                gp->gv.izumi3.xC4 = 2;
-                if (gp->gv.izumi3.xD0 < gp->gv.izumi3.xDC) {
-                    if (HSD_Randf() < grIz_804D6968->x30) {
-                        gp->gv.izumi3.xD4 -= ff;
+                float ff = (yakumono_param->x1C - yakumono_param->x18);
+                ff = ff * fff + yakumono_param->x18;
+                gp->u.izumi3.xC4 = 2;
+                if (gp->u.izumi3.xD0 < gp->u.izumi3.xDC) {
+                    if (HSD_Randf() < yakumono_param->x30) {
+                        gp->u.izumi3.xD4 -= ff;
                     } else {
-                        gp->gv.izumi3.xD4 += ff;
+                        gp->u.izumi3.xD4 += ff;
                     }
-                } else if (gp->gv.izumi3.xD0 > gp->gv.izumi3.xDC) {
-                    if (HSD_Randf() < grIz_804D6968->x34) {
-                        gp->gv.izumi3.xD4 += ff;
+                } else if (gp->u.izumi3.xD0 > gp->u.izumi3.xDC) {
+                    if (HSD_Randf() < yakumono_param->x34) {
+                        gp->u.izumi3.xD4 += ff;
                     } else {
-                        gp->gv.izumi3.xD4 -= ff;
+                        gp->u.izumi3.xD4 -= ff;
                     }
                 } else {
                     if (HSD_Randf() < 0.5) {
-                        gp->gv.izumi3.xD4 += ff;
+                        gp->u.izumi3.xD4 += ff;
                     } else {
-                        gp->gv.izumi3.xD4 -= ff;
+                        gp->u.izumi3.xD4 -= ff;
                     }
                 }
-                if (gp->gv.izumi3.xD4 > grIz_804D6968->x20) {
-                    gp->gv.izumi3.xD4 = grIz_804D6968->x20;
-                } else if (gp->gv.izumi3.xD4 < grIz_804D6968->x24) {
-                    gp->gv.izumi3.xD4 = grIz_804D6968->x24;
+                if (gp->u.izumi3.xD4 > yakumono_param->x20) {
+                    gp->u.izumi3.xD4 = yakumono_param->x20;
+                } else if (gp->u.izumi3.xD4 < yakumono_param->x24) {
+                    gp->u.izumi3.xD4 = yakumono_param->x24;
                 }
             } else {
-                gp->gv.izumi3.xC6 =
-                    rand_range(grIz_804D6968->x3C, grIz_804D6968->x38);
+                gp->u.izumi3.xC6 =
+                    rand_range(yakumono_param->x3C, yakumono_param->x38);
             }
         }
         break;
     }
     case 2: {
         // 2c0
-        float f = gp->gv.izumi3.xD4 - gp->gv.izumi3.xD0;
+        float f = gp->u.izumi3.xD4 - gp->u.izumi3.xD0;
         if (f > 0) {
-            if (f < grIz_804D6968->x28) {
-                gp->gv.izumi3.xD0 = gp->gv.izumi3.xD4;
-                gp->gv.izumi3.xC4 = 0;
+            if (f < yakumono_param->x28) {
+                gp->u.izumi3.xD0 = gp->u.izumi3.xD4;
+                gp->u.izumi3.xC4 = 0;
             } else {
-                gp->gv.izumi3.xD0 += grIz_804D6968->x28;
+                gp->u.izumi3.xD0 += yakumono_param->x28;
             }
         } else if (f < 0) {
-            if (-f < grIz_804D6968->x2C) {
-                gp->gv.izumi3.xD0 = gp->gv.izumi3.xD4;
-                if (gp->gv.izumi3.xD0 < grIz_804D6968->x24) {
-                    gp->gv.izumi3.xC4 = 3;
+            if (-f < yakumono_param->x2C) {
+                gp->u.izumi3.xD0 = gp->u.izumi3.xD4;
+                if (gp->u.izumi3.xD0 < yakumono_param->x24) {
+                    gp->u.izumi3.xC4 = 3;
                 } else {
-                    gp->gv.izumi3.xC4 = 0;
+                    gp->u.izumi3.xC4 = 0;
                 }
             } else {
-                gp->gv.izumi3.xD0 -= grIz_804D6968->x2C;
+                gp->u.izumi3.xD0 -= yakumono_param->x2C;
             }
         } else {
-            gp->gv.izumi3.xC4 = 0;
+            gp->u.izumi3.xC4 = 0;
         }
         r29 = true;
         break;
@@ -517,20 +522,21 @@ void grIzumi_801CC358(Ground_GObj* gobj)
     case 3: {
         // 368
         float f;
-        gp->gv.izumi3.xC4 = 4;
-        gp->gv.izumi3.xC6 = rand_range(grIz_804D6968->x50, grIz_804D6968->x4C);
+        gp->u.izumi3.xC4 = 4;
+        gp->u.izumi3.xC6 =
+            rand_range(yakumono_param->x50, yakumono_param->x4C);
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         HSD_JObjRemoveAnimAll(jobj); ///< @todo float load order (41c)
         f = HSD_JObjGetTranslationY(jobj);
         f += -1.0;
-        HSD_JObjSetTranslateY(gp->gv.izumi3.xCC, f);
+        HSD_JObjSetTranslateY(gp->u.izumi3.xCC, f);
         break;
     }
     case 4: {
         // 4a4
-        if (gp->gv.izumi3.xC6-- < 0) {
-            gp->gv.izumi3.xC4 = 2;
-            gp->gv.izumi3.xD4 = gp->gv.izumi3.xDC;
+        if (gp->u.izumi3.xC6-- < 0) {
+            gp->u.izumi3.xC4 = 2;
+            gp->u.izumi3.xD4 = gp->u.izumi3.xDC;
             HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
             grAnime_801C7FF8(gobj, 0, 7, 0, 0.0f, 1.0f);
             r29 = true;
@@ -541,16 +547,16 @@ void grIzumi_801CC358(Ground_GObj* gobj)
     if (r29) {
         HSD_JObj* jobj2 = HSD_JObjGetChild(jobj);
         if (jobj2 != NULL) {
-            float f = gp->gv.izumi3.xD0 / (double) gp->gv.izumi3.xD8;
+            float f = gp->u.izumi3.xD0 / (double) gp->u.izumi3.xD8;
             if (f < 0.01f) {
                 f = 0.01f;
             }
             HSD_JObjSetScaleX(jobj2, 0.5f * f + 0.5f);
             HSD_JObjSetScaleY(jobj2, f);
-            HSD_JObjSetTranslateY(gp->gv.izumi3.xCC, gp->gv.izumi3.xD0);
+            HSD_JObjSetTranslateY(gp->u.izumi3.xCC, gp->u.izumi3.xD0);
         }
     }
-    mpLib_80055E9C(gp->gv.izumi3.xC8);
+    mpLib_80055E9C(gp->u.izumi3.xC8);
 }
 
 void grIzumi_801CCA10(Ground_GObj* gobj)
@@ -589,10 +595,10 @@ void grIzumi_801CCA64(Ground_GObj* gobj)
     gp->xC_callback = NULL;
     HSD_GObjGXLink_8039084C(gobj);
     GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 2, 0);
-    gp->gv.izumi2.xC4 = Ground_801C3FA4(gobj, 2);
-    HSD_JObjSetFlagsAll(gp->gv.izumi2.xC4, JOBJ_HIDDEN);
-    gp->gv.izumi2.xC8 = Ground_801C3FA4(gobj, 3);
-    HSD_JObjSetFlagsAll(gp->gv.izumi2.xC8, JOBJ_HIDDEN);
+    gp->u.izumi2.xC4 = Ground_801C3FA4(gobj, 2);
+    HSD_JObjSetFlagsAll(gp->u.izumi2.xC4, JOBJ_HIDDEN);
+    gp->u.izumi2.xC8 = Ground_801C3FA4(gobj, 3);
+    HSD_JObjSetFlagsAll(gp->u.izumi2.xC8, JOBJ_HIDDEN);
 }
 
 bool grIzumi_801CCB08(Ground_GObj* gobj)
@@ -646,14 +652,14 @@ HSD_GObj* grIzumi_801CCBDC(float height, Vec3* a, int b, HSD_JObj* jobj)
             if (jobj2 != NULL) { // permuter
                 Vec3 aa = *a;
                 HSD_JObjSetTranslate(jobj2, &aa);
-                gp->gv.izumi3.xD4 = height;
-                gp->gv.izumi3.xD0 = height;
-                gp->gv.izumi3.xC8 = b;
-                gp->gv.izumi3.xCC = jobj;
+                gp->u.izumi3.xD4 = height;
+                gp->u.izumi3.xD0 = height;
+                gp->u.izumi3.xC8 = b;
+                gp->u.izumi3.xCC = jobj;
                 if (height < 0.0f) {
-                    gp->gv.izumi3.xC4 = 3;
+                    gp->u.izumi3.xC4 = 3;
                 } else {
-                    gp->gv.izumi3.xC4 = 0;
+                    gp->u.izumi3.xC4 = 0;
                     grAnime_801C7FF8(gobj, 0, 7, 0, 0.0f, 1.0f);
                 }
                 jobj2 = Ground_801C3FA4(gobj, 2);
@@ -661,9 +667,9 @@ HSD_GObj* grIzumi_801CCBDC(float height, Vec3* a, int b, HSD_JObj* jobj)
                     Vec3 vec;
                     u8 _[4];
                     lb_8000B1CC(jobj2, NULL, &vec);
-                    gp->gv.izumi3.xD8 = (vec.y - aa.y) / Ground_801C0498();
+                    gp->u.izumi3.xD8 = (vec.y - aa.y) / Ground_801C0498();
                 } else {
-                    gp->gv.izumi3.xD8 = 45.0f;
+                    gp->u.izumi3.xD8 = 45.0f;
                 }
                 grIzumi_801CC358(gobj);
                 goto ret; // return has to be after the loop, but idk how to
@@ -846,8 +852,8 @@ HSD_TObj* grIzumi_801CD090(HSD_GObj* gobj, HSD_ImageDesc* image)
 void grIzumi_801CD220(HSD_GObj* gobj, int renderpass)
 {
     Ground* gp = GET_GROUND(gobj);
-    IzumiReflection* refl = HSD_GObjGetUserData(gp->gv.izumi.xC8);
-    HSD_TObj* tobj = gp->gv.izumi.xC4;
+    IzumiReflection* refl = HSD_GObjGetUserData(gp->u.izumi.xC8);
+    HSD_TObj* tobj = gp->u.izumi.xC4;
     PSMTXCopy(refl->texture_matrix, tobj->mtx);
     grDisplay_801C5DB0(gobj, renderpass);
 }

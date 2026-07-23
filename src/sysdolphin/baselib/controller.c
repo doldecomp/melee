@@ -5,10 +5,10 @@
 #include "baselib/rumble.h"
 #include "baselib/util.h"
 
+#include <math_ppc.h>
+#include <trigf.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/pad.h>
-#include <MSL/math_ppc.h>
-#include <MSL/trigf.h>
 
 HSD_PadStatus default_status_data = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                                       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 };

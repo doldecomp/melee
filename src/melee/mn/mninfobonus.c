@@ -30,7 +30,7 @@
 inline int mnInfoBonus_802528F8_inline(int j)
 {
     if (*mnInfoBonus_804D6C80) {
-        return TRUE;
+        return true;
     }
     return gm_8016F120(j);
 }

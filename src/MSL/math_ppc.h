@@ -1,5 +1,5 @@
 #ifndef _MATH_PPC_H_
-#define _MATH_PPC_H_
+#define _MATH_PPC_H_ // IWYU pragma: always_keep
 
 #ifdef __MWERKS__
 #pragma push

@@ -12,9 +12,9 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "it/items/itnesspkthunderball.h"
-#include "MSL/trigf.h"
 
 #include <math.h>
+#include <trigf.h>
 #include <baselib/jobj.h>
 
 ItemStateTable it_803F6C08[] = {

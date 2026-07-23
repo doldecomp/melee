@@ -1,4 +1,4 @@
-/// @file
+/// @file melee/ft/chara/ftNess/ftNs_AttackHi4.h
 /// @todo Fix formatting
 
 void ftNs_AttackHi4_YoyoItemDespawn(HSD_GObj*);

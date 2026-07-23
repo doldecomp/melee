@@ -17,9 +17,9 @@
 #include "it/items/itpikachutjoltground.h"
 #include "lb/lb_00B0.h"
 
+#include <trigf.h>
 #include <baselib/jobj.h>
 #include <MSL/math.h>
-#include <MSL/trigf.h>
 
 /* 2B45E8 */ static bool itPikachutjoltair_UnkMotion0_Coll(Item_GObj* gobj);
 

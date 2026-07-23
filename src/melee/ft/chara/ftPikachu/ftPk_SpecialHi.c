@@ -28,8 +28,8 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <math_ppc.h> // IWYU pragma: keep
-#include <trigf.h>    // IWYU pragma: keep
+#include <math_ppc.h>
+#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
@@ -317,8 +317,7 @@ void ftPk_SpecialHiStart1_Coll(HSD_GObj* gobj)
 
     u8 _[20];
 
-    /// @todo Eliminate cast (by changing type of field)
-    if (!ft_80082888(gobj, (ftCollisionBox*) &pika_attr->height_attributes)) {
+    if (!ft_80082888(gobj, &pika_attr->height_attributes)) {
         if (collData->env_flags & Collide_LeftWallMask ||
             collData->env_flags & Collide_RightWallMask)
         {
@@ -740,9 +739,7 @@ void ftPk_SpecialHiEnd_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
-    /// @todo Eliminate cast (by changing type of
-    ///       #ftPikachuAttributes::height_attributes)
-    ftCollisionBox* box = (ftCollisionBox*) &pika_attr->height_attributes;
+    ftCollisionBox* box = &pika_attr->height_attributes;
 
     if (!ft_80082888(gobj, box)) {
         ftPk_SpecialHi_ChangeMotion_Unk04(gobj);
@@ -754,9 +751,7 @@ void ftPk_SpecialAirHiEnd_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
-    /// @todo Eliminate cast (by changing type of
-    ///       #ftPikachuAttributes::height_attributes)
-    ftCollisionBox* box = (ftCollisionBox*) &pika_attr->height_attributes;
+    ftCollisionBox* box = &pika_attr->height_attributes;
 
     u8 _[8];
 

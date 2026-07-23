@@ -80,8 +80,6 @@ StageData grTPc_803E920C = {
     0,
 };
 
-extern StageInfo stage_info;
-
 static void grTPichu_80222B98(bool arg0) {}
 
 static void grTPichu_80222B9C(void)

@@ -28,7 +28,6 @@ typedef struct grHeal_UnkData {
 /* 21F424 */ s32 fn_8021F424(void);
 /* 21F474 */ void grHeal_8021F474(Ground_GObj*);
 /* 21F4BC */ void grHeal_8021F4BC(Ground_GObj*);
-/* 21F4C0 */ void fn_8021F4C0(Ground*, void*, s32, s32, s32);
 /* 21F4E8 */ void grHeal_8021F4E8(s32, HSD_JObj*);
 /* 21F5C8 */ void grHeal_8021F5C8(Ground_GObj*);
 /* 21F5CC */ bool grHeal_8021F5CC(Ground_GObj*);

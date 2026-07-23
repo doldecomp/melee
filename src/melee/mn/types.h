@@ -3,21 +3,62 @@
 
 #include "platform.h"
 
-#include <placeholder.h>
-
-#include "gm/forward.h"
 #include "mn/forward.h" // IWYU pragma: export
 
 #include <baselib/sislib.h>
 
-typedef struct {
+#ifdef M2C
+struct mnInfo_GObj {
+    /*  +0 */ u16 classifier;
+    /*  +2 */ u8 p_link;
+    /*  +3 */ u8 gx_link;
+    /*  +4 */ u8 p_priority;
+    /*  +5 */ u8 render_priority;
+    /*  +6 */ u8 obj_kind;
+    /*  +7 */ u8 user_data_kind;
+    /*  +8 */ mnInfo_GObj* next;
+    /*  +C */ mnInfo_GObj* prev;
+    /* +10 */ mnInfo_GObj* next_gx;
+    /* +14 */ mnInfo_GObj* prev_gx;
+    /* +18 */ HSD_GObjProc* proc;
+    /* +1C */ void (*rendered)(mnInfo_GObj* gobj, s32 code);
+    /* +20 */ u64 gxlink_prios;
+    /* +28 */ HSD_JObj* hsd_obj;
+    /* +2C */ MnInfoData* user_data;
+    /* +30 */ void (*user_data_remove_func)(mnInfo_GObj* data);
+    /* +34 */ void* x34_unk;
+};
+
+struct mnSoundTest_GObj {
+    /*  +0 */ u16 classifier;
+    /*  +2 */ u8 p_link;
+    /*  +3 */ u8 gx_link;
+    /*  +4 */ u8 p_priority;
+    /*  +5 */ u8 render_priority;
+    /*  +6 */ u8 obj_kind;
+    /*  +7 */ u8 user_data_kind;
+    /*  +8 */ HSD_GObj* next;
+    /*  +C */ HSD_GObj* prev;
+    /* +10 */ HSD_GObj* next_gx;
+    /* +14 */ HSD_GObj* prev_gx;
+    /* +18 */ HSD_GObjProc* proc;
+    /* +1C */ GObj_RenderFunc render_cb;
+    /* +20 */ u64 gxlink_prios;
+    /* +28 */ void* hsd_obj;
+    /* +2C */ soundtest_user_data* user_data;
+    /* +30 */ void (*user_data_remove_func)(void* data);
+    /* +34 */ void* x34_unk;
+};
+#endif
+
+struct Menu {
     u8 cursor;
     u8 unk1;
     u8 unk2;
     u8 unk3;
     HSD_Text* text;
-} Menu;
-/// size 0x8
+};
+STATIC_ASSERT(sizeof(struct Menu) == 0x8);
 
 struct CountEntry {
     u8 selkind;
@@ -128,11 +169,11 @@ struct StartMeleeRules {
     u32 x2_0 : 1;
     u32 x2_1 : 1;
     u32 x2_2 : 1;
-    u32 x2_3 : 1; ///< single-button mode enabled
-    u32 disable_pausing
-        : 1; ///< When set, pausing is disabled for both active gameplay and
-             ///< pause menus. Sourced from the rules pause option and from
-             ///< several game-mode setups.
+    u32 x2_3 : 1;            ///< single-button mode enabled
+    u32 disable_pausing : 1; ///< When set, pausing is disabled for both active
+                             ///< gameplay and pause menus. Sourced from the
+                             ///< rules pause option and from several game-mode
+                             ///< setups.
     u32 x2_5 : 1;
     u32 x2_6 : 1;
     u32 x2_7 : 1;
@@ -633,5 +674,30 @@ typedef struct NameNewEntry {
     /* 0x64 */ HSD_Text* name_disp_text;
     /* 0x68 */ HSD_Text* desc_text;
 } NameNewEntry; /* size = 0x6C */
+
+/// seems like each menu probably has its own struct, and isnt just #Menu
+struct MnInfoData {
+    /* +00 */ u8 scroll_idx;
+    /* +04 */ u32 anim_timer; ///< decrements from 10 when transitioning from
+                              ///< main menu to special menu
+    /* +08 */ HSD_Text*
+        left_column[4]; ///< date and time of achievement unlock
+    /* +18 */ HSD_Text* right_column[4]; ///< achievement
+    /* +28 */ HSD_Text* description;
+};
+
+struct soundtest_user_data {
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u16 unk4;
+    f32 unk8;
+    f32 unkC;
+    HSD_Text* unk10;
+    HSD_Text* unk14;
+    HSD_Text* unk18;
+    HSD_Text* unk1C;
+};
 
 #endif

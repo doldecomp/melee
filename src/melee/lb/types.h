@@ -153,7 +153,7 @@ struct lbRefract_CallbackData {
 
 typedef struct _ECBFlagStruct {
     u8 b0 : 1;
-    u8 b1234 : 4;
+    u8 b1234 : 4; ///< @todo Used as #s32, fix type to eliminate casts
     u8 b5 : 1;
     u8 b6 : 1;
     u8 b7 : 1;

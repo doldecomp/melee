@@ -410,7 +410,7 @@ void ftPk_Init_LoadSpecialAttrs(HSD_GObj* gobj)
              i < (signed) (sizeof(sA2->height_attributes) / sizeof(float));
              i++)
         {
-            *(float*) &sA2->height_attributes[i] *= fp->x34_scale.y;
+            ((float*) &sA2->height_attributes)[i] *= fp->x34_scale.y;
         }
     }
 }

@@ -33,32 +33,106 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
+/* 1F5914 */ static void grGreatBay_801F5914(void* user_data, int joint_id,
+                                             CollData* coll, int coll_x50,
+                                             mpLib_GroundEnum ground_kind,
+                                             float delta_y);
+/* 1F60C4 */ static void grGreatBay_801F60C4(void* user_data, int joint_id,
+                                             CollData* coll, int coll_x50,
+                                             mpLib_GroundEnum ground_kind,
+                                             float delta_y);
+
 S16Vec3 grGb_803E3E60[] = { { 0, 2, 49 }, { 1, 1, 2 },  { 2, 1, 3 },
                             { 4, 1, 34 }, { 3, 1, 38 }, { 5, 10, 0 } };
 
 StageCallbacks grGb_803E3E84[11] = {
-    { grGreatBay_801F4404, grGreatBay_801F4430, grGreatBay_801F4438,
-      grGreatBay_801F443C, 0 },
-    { grGreatBay_801F4694, grGreatBay_801F4994, grGreatBay_801F499C,
-      grGreatBay_801F545C, 0 }, // turtle
-    { grGreatBay_801F454C, grGreatBay_801F4650, grGreatBay_801F4658,
-      grGreatBay_801F4690, 0xC0000000 }, // main stage
-    { grGreatBay_801F4440, grGreatBay_801F44A0, grGreatBay_801F44A8,
-      grGreatBay_801F44AC, 0 }, // background
-    { grGreatBay_801F44B0, grGreatBay_801F4510, grGreatBay_801F4518,
-      grGreatBay_801F451C, 0 }, // foreground water
-    { grGreatBay_801F598C, grGreatBay_801F59F0, grGreatBay_801F59F8,
-      grGreatBay_801F59FC, 0 }, // giant 1
-    { grGreatBay_801F598C, grGreatBay_801F59F0, grGreatBay_801F59F8,
-      grGreatBay_801F59FC, 0 }, // giant 2
-    { grGreatBay_801F598C, grGreatBay_801F59F0, grGreatBay_801F59F8,
-      grGreatBay_801F59FC, 0 }, // giant 3
-    { grGreatBay_801F598C, grGreatBay_801F59F0, grGreatBay_801F59F8,
-      grGreatBay_801F59FC, 0 }, // giant 4
-    { grGreatBay_801F5A00, grGreatBay_801F5AF0, grGreatBay_801F5AF8,
-      grGreatBay_801F5D48, 0 }, // moon
-    { grGreatBay_801F5460, grGreatBay_801F55F8, grGreatBay_801F5600,
-      grGreatBay_801F5988, 0 } // tingle
+    {
+        grGreatBay_801F4404,
+        grGreatBay_801F4430,
+        grGreatBay_801F4438,
+        grGreatBay_801F443C,
+        0,
+    },
+    {
+        // turtle
+        grGreatBay_801F4694,
+        grGreatBay_801F4994,
+        grGreatBay_801F499C,
+        grGreatBay_801F545C,
+        0,
+    },
+    {
+        // main stage
+        grGreatBay_801F454C,
+        grGreatBay_801F4650,
+        grGreatBay_801F4658,
+        grGreatBay_801F4690,
+        0xC0000000,
+    },
+    {
+        // background
+        grGreatBay_801F4440,
+        grGreatBay_801F44A0,
+        grGreatBay_801F44A8,
+        grGreatBay_801F44AC,
+        0,
+    },
+    {
+        // foreground water
+        grGreatBay_801F44B0,
+        grGreatBay_801F4510,
+        grGreatBay_801F4518,
+        grGreatBay_801F451C,
+        0,
+    },
+    {
+        // giant 1
+        grGreatBay_801F598C,
+        grGreatBay_801F59F0,
+        grGreatBay_801F59F8,
+        grGreatBay_801F59FC,
+        0,
+    },
+    {
+        // giant 2
+        grGreatBay_801F598C,
+        grGreatBay_801F59F0,
+        grGreatBay_801F59F8,
+        grGreatBay_801F59FC,
+        0,
+    },
+    {
+        // giant 3
+        grGreatBay_801F598C,
+        grGreatBay_801F59F0,
+        grGreatBay_801F59F8,
+        grGreatBay_801F59FC,
+        0,
+    },
+    {
+        // giant 4
+        grGreatBay_801F598C,
+        grGreatBay_801F59F0,
+        grGreatBay_801F59F8,
+        grGreatBay_801F59FC,
+        0,
+    },
+    {
+        // moon
+        grGreatBay_801F5A00,
+        grGreatBay_801F5AF0,
+        grGreatBay_801F5AF8,
+        grGreatBay_801F5D48,
+        0,
+    },
+    {
+        // tingle
+        grGreatBay_801F5460,
+        grGreatBay_801F55F8,
+        grGreatBay_801F5600,
+        grGreatBay_801F5988,
+        0,
+    },
 };
 
 StageData grGb_803E3F6C = {
@@ -129,7 +203,7 @@ void grGreatBay_801F423C(bool unused)
 
 void grGreatBay_801F4240(void)
 {
-    grGb_804D69E0.x0 = Ground_801C49F8();
+    grGb_804D69E0.x0 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grGreatBay_801F4300(0);
@@ -318,17 +392,17 @@ void grGreatBay_801F4694(Ground_GObj* gobj)
                                     grGb_804D69E0.x0->kame_x_offset_init);
     HSD_JObjSetTranslateY(jobj, grGb_804D69E0.x0->kame_y);
 
-    gp->gv.greatbay.xCC = HSD_JObjGetTranslationY(Ground_801C3FA4(gobj, 2));
+    gp->u.greatbay.xCC = HSD_JObjGetTranslationY(Ground_801C3FA4(gobj, 2));
 
-    gp->gv.greatbay.xC4 = 0;
-    gp->gv.greatbay.xC5.b0123456 = 0;
+    gp->u.greatbay.xC4 = 0;
+    gp->u.greatbay.xC5.b0123456 = 0;
 
     max_val = grGb_804D69E0.x0->kame_wait_frame_b;
     min_val = grGb_804D69E0.x0->kame_wait_frame_a;
-    gp->gv.greatbay.xC6 = rand_range(max_val, min_val);
+    gp->u.greatbay.xC6 = rand_range(max_val, min_val);
 
-    gp->gv.greatbay.xC5.b7 = 1;
-    gp->gv.greatbay.xC8 = NULL;
+    gp->u.greatbay.xC5.b7 = 1;
+    gp->u.greatbay.xC8 = NULL;
     gp->x10_flags.b5 = 1;
     gp->x11_flags.b012 = 1;
 }
@@ -349,41 +423,41 @@ void grGreatBay_801F499C(Ground_GObj* gobj)
     HSD_ASSERT(529, jobj);
     HSD_ASSERT(530, trans_jobj);
 
-    switch (gp->gv.greatbay.xC4) {
+    switch (gp->u.greatbay.xC4) {
     case 0: {
-        if (gp->gv.greatbay.xC6 < 0) {
+        if (gp->u.greatbay.xC6 < 0) {
             if (grAnime_801C84A4(gobj, 0, 7)) {
-                gp->gv.greatbay.xC4 = 1;
+                gp->u.greatbay.xC4 = 1;
                 grAnime_801C8138(gobj, gp->map_id, 1);
-                gp->gv.greatbay.xC6 = 0;
+                gp->u.greatbay.xC6 = 0;
                 mpLib_80058044(2);
                 mpLib_80058044(3);
                 mpLib_80058044(4);
                 mpLib_80058044(1);
             }
         } else {
-            gp->gv.greatbay.xC6--;
+            gp->u.greatbay.xC6--;
         }
         break;
     }
     case 1: {
-        s16 timer = gp->gv.greatbay.xC6;
-        gp->gv.greatbay.xC6 = timer + 1;
+        s16 timer = gp->u.greatbay.xC6;
+        gp->u.greatbay.xC6 = timer + 1;
         if (timer == 90) {
             Ground_801C53EC(0x57E42);
             lb_8000B1CC(jobj, NULL, &pos);
-            gp->gv.greatbay.xC8 = grLib_801C96F8(0x7531, 0x1E, &pos);
+            gp->u.greatbay.xC8 = grLib_801C96F8(0x7531, 0x1E, &pos);
         }
         if (grAnime_801C83D0(gobj, 0, 7)) {
-            gp->gv.greatbay.xC4 = 3;
-            gp->gv.greatbay.xC6 =
+            gp->u.greatbay.xC4 = 3;
+            gp->u.greatbay.xC6 =
                 rand_range(grGb_804D69E0.x0->kame_rebirth_frame_b,
                            grGb_804D69E0.x0->kame_rebirth_frame_a);
             grAnime_801C7A04(gobj, 0, 7, 0.0f);
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-            if (gp->gv.greatbay.xC8 != NULL) {
-                grLib_801C9874(gp->gv.greatbay.xC8);
-                gp->gv.greatbay.xC8 = NULL;
+            if (gp->u.greatbay.xC8 != NULL) {
+                grLib_801C9874(gp->u.greatbay.xC8);
+                gp->u.greatbay.xC8 = NULL;
             }
         }
         break;
@@ -391,14 +465,14 @@ void grGreatBay_801F499C(Ground_GObj* gobj)
     case 2: {
         Vec3 pos2;
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-        gp->gv.greatbay.xC6++;
-        if (gp->gv.greatbay.xC6 == 60) {
+        gp->u.greatbay.xC6++;
+        if (gp->u.greatbay.xC6 == 60) {
             Ground_801C53EC(0x57E41);
             lb_8000B1CC(jobj, NULL, &pos2);
-            gp->gv.greatbay.xC8 = grLib_801C96F8(0x7531, 0x1E, &pos2);
+            gp->u.greatbay.xC8 = grLib_801C96F8(0x7531, 0x1E, &pos2);
         }
         {
-            if (gp->gv.greatbay.xC6 == 60 || gp->gv.greatbay.xC6 == 120) {
+            if (gp->u.greatbay.xC6 == 60 || gp->u.greatbay.xC6 == 120) {
                 HSD_JObj* j = Ground_801C3FA4(gobj, 34);
                 if (j != NULL) {
                     grLib_801C97DC(0x7533, 0x1E, j);
@@ -406,7 +480,7 @@ void grGreatBay_801F499C(Ground_GObj* gobj)
             }
         }
         {
-            if (gp->gv.greatbay.xC6 == 90 || gp->gv.greatbay.xC6 == 150) {
+            if (gp->u.greatbay.xC6 == 90 || gp->u.greatbay.xC6 == 150) {
                 HSD_JObj* j = Ground_801C3FA4(gobj, 38);
                 if (j != NULL) {
                     grLib_801C97DC(0x7533, 0x1E, j);
@@ -414,8 +488,8 @@ void grGreatBay_801F499C(Ground_GObj* gobj)
             }
         }
         if (grAnime_801C83D0(gobj, 0, 7)) {
-            gp->gv.greatbay.xC4 = 0;
-            gp->gv.greatbay.xC6 =
+            gp->u.greatbay.xC4 = 0;
+            gp->u.greatbay.xC6 =
                 rand_range(grGb_804D69E0.x0->kame_wait_frame_b,
                            grGb_804D69E0.x0->kame_wait_frame_a);
             grAnime_801C8138(gobj, gp->map_id, 0);
@@ -423,24 +497,24 @@ void grGreatBay_801F499C(Ground_GObj* gobj)
             mpLib_80057FDC(3);
             mpLib_80057FDC(4);
             mpLib_80057FDC(1);
-            if (gp->gv.greatbay.xC8 != NULL) {
-                grLib_801C9874(gp->gv.greatbay.xC8);
-                gp->gv.greatbay.xC8 = NULL;
+            if (gp->u.greatbay.xC8 != NULL) {
+                grLib_801C9874(gp->u.greatbay.xC8);
+                gp->u.greatbay.xC8 = NULL;
             }
         }
         break;
     }
     case 3: {
-        s16 timer = gp->gv.greatbay.xC6;
-        gp->gv.greatbay.xC6 = timer - 1;
+        s16 timer = gp->u.greatbay.xC6;
+        gp->u.greatbay.xC6 = timer - 1;
         if (timer < 0) {
-            gp->gv.greatbay.xC4 = 2;
+            gp->u.greatbay.xC4 = 2;
             grAnime_801C8138(gobj, gp->map_id, 2);
-            gp->gv.greatbay.xC6 = 0;
-            gp->gv.greatbay.xC5.b7 = 0;
-            gp->gv.greatbay.xC5.b0123456 =
-                grGreatBay_801F62F8(gp->gv.greatbay.xC5.b0123456);
-            switch (gp->gv.greatbay.xC5.b0123456) {
+            gp->u.greatbay.xC6 = 0;
+            gp->u.greatbay.xC5.b7 = 0;
+            gp->u.greatbay.xC5.b0123456 =
+                grGreatBay_801F62F8(gp->u.greatbay.xC5.b0123456);
+            switch (gp->u.greatbay.xC5.b0123456) {
             case 1: {
                 HSD_JObjSetTranslateX(
                     jobj,
@@ -488,14 +562,14 @@ void grGreatBay_801F499C(Ground_GObj* gobj)
 
     {
         f32 y = HSD_JObjGetTranslationY(trans_jobj);
-        if (gp->gv.greatbay.xCC != y) {
+        if (gp->u.greatbay.xCC != y) {
             y *= grGb_804D69E0.x0->kame_ud_scale;
             HSD_JObjSetTranslateY(trans_jobj, y);
-            gp->gv.greatbay.xCC = y;
+            gp->u.greatbay.xCC = y;
         }
     }
 
-    switch (gp->gv.greatbay.xC5.b0123456) {
+    switch (gp->u.greatbay.xC5.b0123456) {
     case 1:
         HSD_JObjSetRotationY(jobj3, 1.5707964f);
         break;
@@ -514,8 +588,8 @@ void grGreatBay_801F499C(Ground_GObj* gobj)
     grGreatBay_801F660C(gobj);
     mpLib_80055E24(2);
 
-    if (gp->gv.greatbay.xC4 == 2 && !gp->gv.greatbay.xC5.b7) {
-        gp->gv.greatbay.xC5.b7 = grGreatBay_801F63F4(gobj);
+    if (gp->u.greatbay.xC4 == 2 && !gp->u.greatbay.xC5.b7) {
+        gp->u.greatbay.xC5.b7 = grGreatBay_801F63F4(gobj);
     }
 }
 
@@ -544,14 +618,14 @@ void grGreatBay_801F5460(Ground_GObj* gobj)
     HSD_JObjSetTranslateY(jobj, 1000.0f);
     Ground_801C2FE0(gobj);
     mpLib_80057424(5);
-    gp->gv.greatbay4.xF0 = it_802ECA70(gobj);
-    gp->gv.greatbay4.xC4 = 0;
-    gp->gv.greatbay4.xC8 = 0;
-    gp->gv.greatbay4.xD0 = 0;
-    gp->gv.greatbay4.xCC = 0;
-    gp->gv.greatbay4.xD8 = 0;
-    gp->gv.greatbay4.xDC = 0;
-    gp->gv.greatbay4.xE0 = 0.0f;
+    gp->u.greatbay4.xF0 = it_802ECA70(gobj);
+    gp->u.greatbay4.xC4 = 0;
+    gp->u.greatbay4.xC8 = 0;
+    gp->u.greatbay4.xD0 = 0;
+    gp->u.greatbay4.xCC = 0;
+    gp->u.greatbay4.xD8 = 0;
+    gp->u.greatbay4.xDC = 0;
+    gp->u.greatbay4.xE0 = 0.0f;
 }
 
 bool grGreatBay_801F55F8(Ground_GObj* gobj)
@@ -565,96 +639,97 @@ void grGreatBay_801F5600(Ground_GObj* gobj)
     HSD_JObj* jobj = gobj->hsd_obj;
     Vec3 pos;
 
-    it_802ECCA4(gp->gv.greatbay4.xF0, &gp->gv.greatbay4.xC4,
-                &gp->gv.greatbay4.xE4);
-    if (gp->gv.greatbay4.xE4.y < -50.0f) {
-        it_802EC830(gp->gv.greatbay4.xF0);
+    it_802ECCA4(gp->u.greatbay4.xF0, &gp->u.greatbay4.xC4,
+                &gp->u.greatbay4.xE4);
+    if (gp->u.greatbay4.xE4.y < -50.0f) {
+        it_802EC830(gp->u.greatbay4.xF0);
         mpLib_80057424(5);
-        gp->gv.greatbay4.xF0 = it_802ECA70(gobj);
-        gp->gv.greatbay4.xC4 = 0;
-        gp->gv.greatbay4.xC8 = 0;
-        gp->gv.greatbay4.xD0 = 0;
-        gp->gv.greatbay4.xCC = 0;
-        gp->gv.greatbay4.xD8 = 0;
-        gp->gv.greatbay4.xDC = 0;
-        gp->gv.greatbay4.xE0 = 0.0f;
+        gp->u.greatbay4.xF0 = it_802ECA70(gobj);
+        gp->u.greatbay4.xC4 = 0;
+        gp->u.greatbay4.xC8 = 0;
+        gp->u.greatbay4.xD0 = 0;
+        gp->u.greatbay4.xCC = 0;
+        gp->u.greatbay4.xD8 = 0;
+        gp->u.greatbay4.xDC = 0;
+        gp->u.greatbay4.xE0 = 0.0f;
         return;
     }
-    it_802ECC98(gp->gv.greatbay4.xF0, gp->gv.greatbay4.xE0);
-    switch (gp->gv.greatbay4.xC4) {
+    it_802ECC98(gp->u.greatbay4.xF0, gp->u.greatbay4.xE0);
+    switch (gp->u.greatbay4.xC4) {
     case 1:
         mpJointListAdd(5);
         Ground_801C2FE0(gobj);
         break;
     case 2:
     case 5:
-        if (gp->gv.greatbay4.xD8 != 0 && gp->gv.greatbay4.xD4 == 0) {
-            it_802EBD14(gp->gv.greatbay4.xF0);
+        if (gp->u.greatbay4.xD8 != 0 && gp->u.greatbay4.xD4 == 0) {
+            it_802EBD14(gp->u.greatbay4.xF0);
         }
         break;
     case 4:
-        if (gp->gv.greatbay4.xD8 == 0) {
-            it_802EBFAC(gp->gv.greatbay4.xF0);
-        } else if (gp->gv.greatbay4.xDC != gp->gv.greatbay4.xD8) {
-            it_802EBD14(gp->gv.greatbay4.xF0);
+        if (gp->u.greatbay4.xD8 == 0) {
+            it_802EBFAC(gp->u.greatbay4.xF0);
+        } else if (gp->u.greatbay4.xDC != gp->u.greatbay4.xD8) {
+            it_802EBD14(gp->u.greatbay4.xF0);
         }
         break;
     case 6:
     case 7:
-        if (gp->gv.greatbay4.xCC == 0 &&
-            it_802ECC8C(gp->gv.greatbay4.xF0) == 0)
+        if (gp->u.greatbay4.xCC == 0 && it_802ECC8C(gp->u.greatbay4.xF0) == 0)
         {
-            pos = gp->gv.greatbay4.xE4;
+            pos = gp->u.greatbay4.xE4;
             pos.y += 10.0f;
             grLib_801C96F8(0x7534, 0x1E, &pos);
             Ground_801C53EC(0x57E4A);
-            gp->gv.greatbay4.xCC = 1;
+            gp->u.greatbay4.xCC = 1;
         }
         mpLib_80057BC0(5);
         break;
     case 8:
-        if (gp->gv.greatbay4.xD0 == 0 && gp->gv.greatbay4.xE4.y <= 0.0f) {
-            gp->gv.greatbay4.xD0 = 1;
-            grLib_801C96F8(0x7537, 0x1E, &gp->gv.greatbay4.xE4);
+        if (gp->u.greatbay4.xD0 == 0 && gp->u.greatbay4.xE4.y <= 0.0f) {
+            gp->u.greatbay4.xD0 = 1;
+            grLib_801C96F8(0x7537, 0x1E, &gp->u.greatbay4.xE4);
             Ground_801C53EC(0x57E48);
         }
         break;
     case 9:
-        if (gp->gv.greatbay4.xC8 != gp->gv.greatbay4.xC4) {
+        if (gp->u.greatbay4.xC8 != gp->u.greatbay4.xC4) {
             Ground_801C53EC(0x57E47);
         }
         break;
     case 12:
-        if (gp->gv.greatbay4.xC8 != gp->gv.greatbay4.xC4) {
-            gp->gv.greatbay4.xCC = 0;
+        if (gp->u.greatbay4.xC8 != gp->u.greatbay4.xC4) {
+            gp->u.greatbay4.xCC = 0;
             mpJointListAdd(5);
         }
-        if (gp->gv.greatbay4.xD8 != 0) {
-            it_802EBD14(gp->gv.greatbay4.xF0);
+        if (gp->u.greatbay4.xD8 != 0) {
+            it_802EBD14(gp->u.greatbay4.xF0);
         }
         break;
     }
-    gp->gv.greatbay4.xC8 = gp->gv.greatbay4.xC4;
-    HSD_JObjSetTranslate(jobj, &gp->gv.greatbay4.xE4);
+    gp->u.greatbay4.xC8 = gp->u.greatbay4.xC4;
+    HSD_JObjSetTranslate(jobj, &gp->u.greatbay4.xE4);
     Ground_801C2FE0(gobj);
-    gp->gv.greatbay4.xDC = gp->gv.greatbay4.xD8;
-    gp->gv.greatbay4.xD8 = 0;
-    gp->gv.greatbay4.xE0 = 0.0f;
+    gp->u.greatbay4.xDC = gp->u.greatbay4.xD8;
+    gp->u.greatbay4.xD8 = 0;
+    gp->u.greatbay4.xE0 = 0.0f;
     Ground_801C2FE0(gobj);
 }
 
-void grGreatBay_801F5914(Ground* arg0, s32 arg1, CollData* arg2, s32 arg3,
-                         enum mpLib_GroundEnum arg4, f32 farg0)
+/// @copydoc mpLib_JointCollisionCallback
+void grGreatBay_801F5914(void* user_data, int joint_id, CollData* coll,
+                         int coll_x50, mpLib_GroundEnum ground_kind,
+                         float delta_y)
 {
+    Ground* gp = user_data;
     s32 temp_r0;
     PAD_STACK(12);
 
-    temp_r0 = arg2->x34_flags.b1234;
+    temp_r0 = coll->x34_flags.b1234;
     if (temp_r0 == 1 || (s32) temp_r0 == 2 || temp_r0 == 3) {
-        arg0->gv.greatbay.xD4 =
-            ((u32) arg2->env_flags & Collide_LedgeGrabMask);
-        arg0->gv.greatbay.xD8 += 1;
-        arg0->gv.greatbay.xE0 += arg3 / 100.0f;
+        gp->u.greatbay.xD4 = ((u32) coll->env_flags & Collide_LedgeGrabMask);
+        gp->u.greatbay.xD8 += 1;
+        gp->u.greatbay.xE0 += coll_x50 / 100.0f;
     }
 }
 
@@ -694,14 +769,14 @@ void grGreatBay_801F5A00(Ground_GObj* gobj)
 
     grAnime_801C8138(gobj, gp->map_id, 0);
     grAnime_801C7A04(gobj, 0, 7, 0.0f);
-    gp->gv.greatbay2.gobjs[0] = grGreatBay_801F4300(5);
-    gp->gv.greatbay2.gobjs[1] = grGreatBay_801F4300(6);
-    gp->gv.greatbay2.gobjs[2] = grGreatBay_801F4300(7);
-    gp->gv.greatbay2.gobjs[3] = grGreatBay_801F4300(8);
+    gp->u.greatbay2.gobjs[0] = grGreatBay_801F4300(5);
+    gp->u.greatbay2.gobjs[1] = grGreatBay_801F4300(6);
+    gp->u.greatbay2.gobjs[2] = grGreatBay_801F4300(7);
+    gp->u.greatbay2.gobjs[3] = grGreatBay_801F4300(8);
 
     max_val = grGb_804D69E0.x0->moon_fall_wait_b;
     min_val = grGb_804D69E0.x0->moon_fall_wait_a;
-    gp->gv.greatbay2.x10 = rand_range(max_val, min_val);
+    gp->u.greatbay2.x10 = rand_range(max_val, min_val);
 
     gp->x11_flags.b012 = 2;
 }
@@ -718,50 +793,49 @@ void grGreatBay_801F5AF8(Ground_GObj* gobj)
     s32 i;
     PAD_STACK(8);
 
-    if (gp->gv.greatbay2.x10 > 0) {
-        gp->gv.greatbay2.x10 = gp->gv.greatbay2.x10 - 1;
-        if (gp->gv.greatbay2.x10 == 0) {
+    if (gp->u.greatbay2.x10 > 0) {
+        gp->u.greatbay2.x10 = gp->u.greatbay2.x10 - 1;
+        if (gp->u.greatbay2.x10 == 0) {
             grAnime_801C8138(gobj, gp->map_id, 0);
             grAnime_801C7A04(gobj, 0, 7, 1.0f);
             for (i = 0; i < 4; i++) {
-                HSD_GObj* g = gp->gv.greatbay2.gobjs[i];
+                HSD_GObj* g = gp->u.greatbay2.gobjs[i];
                 if (g != NULL) {
                     Ground* child_gp = GET_GROUND(g);
                     if (child_gp != NULL) {
-                        grAnime_801C8138(gp->gv.greatbay2.gobjs[i],
+                        grAnime_801C8138(gp->u.greatbay2.gobjs[i],
                                          child_gp->map_id, 0);
-                        grAnime_801C7A04(gp->gv.greatbay2.gobjs[i], 0, 7,
-                                         1.0f);
+                        grAnime_801C7A04(gp->u.greatbay2.gobjs[i], 0, 7, 1.0f);
                     }
                 }
             }
-            gp->gv.greatbay2.x12.b0 = 0;
-            gp->gv.greatbay2.x12.b1 = 0;
-            gp->gv.greatbay2.x12.b2 = 0;
-            gp->gv.greatbay2.x12.b3 = 0;
+            gp->u.greatbay2.x12.b0 = 0;
+            gp->u.greatbay2.x12.b1 = 0;
+            gp->u.greatbay2.x12.b2 = 0;
+            gp->u.greatbay2.x12.b3 = 0;
         }
     } else {
         f32 frame = Ground_801C3F20(jobj);
-        if (!gp->gv.greatbay2.x12.b0 && frame > 0.0f) {
-            gp->gv.greatbay2.x12.b0 = 1;
+        if (!gp->u.greatbay2.x12.b0 && frame > 0.0f) {
+            gp->u.greatbay2.x12.b0 = 1;
         }
-        if (!gp->gv.greatbay2.x12.b1 && frame > 0.0f) {
-            gp->gv.greatbay2.x12.b1 = 1;
+        if (!gp->u.greatbay2.x12.b1 && frame > 0.0f) {
+            gp->u.greatbay2.x12.b1 = 1;
         }
-        if (!gp->gv.greatbay2.x12.b2 && frame > 0.0f) {
-            gp->gv.greatbay2.x12.b2 = 1;
+        if (!gp->u.greatbay2.x12.b2 && frame > 0.0f) {
+            gp->u.greatbay2.x12.b2 = 1;
         }
-        if (!gp->gv.greatbay2.x12.b3 && frame > 0.0f) {
-            gp->gv.greatbay2.x12.b3 = 1;
+        if (!gp->u.greatbay2.x12.b3 && frame > 0.0f) {
+            gp->u.greatbay2.x12.b3 = 1;
         }
         if (lb_8000B134(GET_JOBJ(gobj))) {
             grAnime_801C7A04(gobj, 0, 7, 0.0f);
             for (i = 0; i < 4; i++) {
-                if (gp->gv.greatbay2.gobjs[i] != NULL) {
-                    grAnime_801C7A04(gp->gv.greatbay2.gobjs[i], 0, 7, 0.0f);
+                if (gp->u.greatbay2.gobjs[i] != NULL) {
+                    grAnime_801C7A04(gp->u.greatbay2.gobjs[i], 0, 7, 0.0f);
                 }
             };
-            gp->gv.greatbay2.x10 =
+            gp->u.greatbay2.x10 =
                 rand_range(grGb_804D69E0.x0->moon_fall_wait_b,
                            grGb_804D69E0.x0->moon_fall_wait_a);
         }
@@ -781,135 +855,138 @@ void grGreatBay_801F5D4C(Ground_GObj* gobj)
 
     mpJointSetCb1(0, gp, grGreatBay_801F60C4);
     jobj = Ground_801C3FA4(gobj, 49);
-    gp->gv.greatbay3.jobj = jobj;
+    gp->u.greatbay3.jobj = jobj;
     if (jobj != NULL) {
-        gp->gv.greatbay3.translation.x =
-            HSD_JObjGetTranslationX(gp->gv.greatbay3.jobj);
-        gp->gv.greatbay3.translation.y =
-            HSD_JObjGetTranslationY(gp->gv.greatbay3.jobj);
+        gp->u.greatbay3.translation.x =
+            HSD_JObjGetTranslationX(gp->u.greatbay3.jobj);
+        gp->u.greatbay3.translation.y =
+            HSD_JObjGetTranslationY(gp->u.greatbay3.jobj);
     } else {
         HSD_ASSERT(1132, 0);
     }
-    gp->gv.greatbay3.translation.z = 0.0f;
-    gp->gv.greatbay3.xD0 = 0.0f;
-    gp->gv.greatbay3.xD4 = 0.0f;
-    gp->gv.greatbay3.xD8 = 0.0f;
-    gp->gv.greatbay3.xDC = 0.0f;
-    gp->gv.greatbay3.xE0 = 0.0f;
+    gp->u.greatbay3.translation.z = 0.0f;
+    gp->u.greatbay3.xD0 = 0.0f;
+    gp->u.greatbay3.xD4 = 0.0f;
+    gp->u.greatbay3.xD8 = 0.0f;
+    gp->u.greatbay3.xDC = 0.0f;
+    gp->u.greatbay3.xE0 = 0.0f;
 }
 
 void grGreatBay_801F5E28(HSD_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = gp->gv.greatbay3.jobj;
+    HSD_JObj* jobj = gp->u.greatbay3.jobj;
     PAD_STACK(8);
 
     if (jobj != NULL) {
         f32 delta, factor;
 
-        delta = gp->gv.greatbay3.translation.z - gp->gv.greatbay3.xD8;
-        if (-gp->gv.greatbay3.xD8 * delta < 0.0f) {
+        delta = gp->u.greatbay3.translation.z - gp->u.greatbay3.xD8;
+        if (-gp->u.greatbay3.xD8 * delta < 0.0f) {
             factor = grGb_804D69E0.x0->floatfloor_slant_rate;
         } else {
             factor = grGb_804D69E0.x0->floatfloor_slant_reb_rate;
         }
-        gp->gv.greatbay3.xD8 += delta * factor;
+        gp->u.greatbay3.xD8 += delta * factor;
 
-        delta = gp->gv.greatbay3.xD0 - gp->gv.greatbay3.xDC;
-        if (-gp->gv.greatbay3.xDC * delta < 0.0f) {
+        delta = gp->u.greatbay3.xD0 - gp->u.greatbay3.xDC;
+        if (-gp->u.greatbay3.xDC * delta < 0.0f) {
             factor = grGb_804D69E0.x0->floatfloor_slide_rate;
         } else {
             factor = grGb_804D69E0.x0->floatfloor_slide_reb_rate;
         }
-        gp->gv.greatbay3.xDC += delta * factor;
+        gp->u.greatbay3.xDC += delta * factor;
 
-        delta = gp->gv.greatbay3.xD4 - gp->gv.greatbay3.xE0;
+        delta = gp->u.greatbay3.xD4 - gp->u.greatbay3.xE0;
         if (delta < 0.0f) {
             factor = grGb_804D69E0.x0->floatfloor_down_down_rate;
         } else {
             factor = grGb_804D69E0.x0->floatfloor_down_up_rate;
         }
-        gp->gv.greatbay3.xE0 += delta * factor;
+        gp->u.greatbay3.xE0 += delta * factor;
 
-        HSD_JObjSetRotationZ(jobj, gp->gv.greatbay3.xD8);
-        HSD_JObjSetTranslateX(jobj, gp->gv.greatbay3.translation.x +
-                                        gp->gv.greatbay3.xDC);
-        HSD_JObjSetTranslateY(jobj, gp->gv.greatbay3.translation.y +
-                                        gp->gv.greatbay3.xE0);
+        HSD_JObjSetRotationZ(jobj, gp->u.greatbay3.xD8);
+        HSD_JObjSetTranslateX(jobj, gp->u.greatbay3.translation.x +
+                                        gp->u.greatbay3.xDC);
+        HSD_JObjSetTranslateY(jobj, gp->u.greatbay3.translation.y +
+                                        gp->u.greatbay3.xE0);
 
-        gp->gv.greatbay3.translation.z = 0.0f;
-        gp->gv.greatbay3.xD0 = 0.0f;
-        gp->gv.greatbay3.xD4 = 0.0f;
+        gp->u.greatbay3.translation.z = 0.0f;
+        gp->u.greatbay3.xD0 = 0.0f;
+        gp->u.greatbay3.xD4 = 0.0f;
     }
 }
 
-void grGreatBay_801F60C4(Ground* gp, s32 arg1, CollData* arg2, s32 arg3,
-                         enum mpLib_GroundEnum arg4, f32 farg0)
+/// @copydoc mpLib_JointCollisionCallback
+void grGreatBay_801F60C4(void* user_data, int joint_id, CollData* coll,
+                         int coll_x50, mpLib_GroundEnum ground_kind,
+                         float delta_y)
 {
+    Ground* gp = user_data;
     s32 temp_r0;
     PAD_STACK(4);
 
-    temp_r0 = arg2->x34_flags.b1234;
+    temp_r0 = coll->x34_flags.b1234;
     if (temp_r0 == 1 || temp_r0 == 3) {
         HSD_JObj* jobj;
-        if (arg4 == 1) {
-            arg3 =
-                (s32) ((f32) arg3 * grGb_804D69E0.x0->floatfloor_landing_rate);
+        if (ground_kind == 1) {
+            coll_x50 = (s32) ((f32) coll_x50 *
+                              grGb_804D69E0.x0->floatfloor_landing_rate);
         }
-        if ((jobj = gp->gv.greatbay3.jobj) != NULL) {
+        if ((jobj = gp->u.greatbay3.jobj) != NULL) {
             f32 dx, abs_dx;
             Vec3 pos;
             f32 t, rot_amount, disp_amount, y_amount;
             lb_8000B1CC(jobj, NULL, &pos);
-            dx = arg2->cur_pos.x - pos.x;
+            dx = coll->cur_pos.x - pos.x;
             t = ABS(dx) / 15.0f;
             if (t > 1.0f) {
                 t = 1.0f;
             }
-            rot_amount = t * (0.017453292f *
-                              (arg3 * grGb_804D69E0.x0->floatfloor_slant_mul +
-                               grGb_804D69E0.x0->floatfloor_slant_add));
-            disp_amount = t * (arg3 * grGb_804D69E0.x0->floatfloor_slide_mul +
-                               grGb_804D69E0.x0->floatfloor_slide_add);
-            y_amount = arg3 * grGb_804D69E0.x0->floatfloor_down_mul +
+            rot_amount =
+                t * (0.017453292f *
+                     (coll_x50 * grGb_804D69E0.x0->floatfloor_slant_mul +
+                      grGb_804D69E0.x0->floatfloor_slant_add));
+            disp_amount =
+                t * (coll_x50 * grGb_804D69E0.x0->floatfloor_slide_mul +
+                     grGb_804D69E0.x0->floatfloor_slide_add);
+            y_amount = coll_x50 * grGb_804D69E0.x0->floatfloor_down_mul +
                        grGb_804D69E0.x0->floatfloor_down_add;
             if (dx < 0.0f) {
-                gp->gv.greatbay3.translation.z += rot_amount;
+                gp->u.greatbay3.translation.z += rot_amount;
                 {
                     f32 max = grGb_804D69E0.x0->floatfloor_slant_limit;
-                    if (gp->gv.greatbay3.translation.z > max) {
-                        gp->gv.greatbay3.translation.z = max;
+                    if (gp->u.greatbay3.translation.z > max) {
+                        gp->u.greatbay3.translation.z = max;
                     }
                 }
-                gp->gv.greatbay3.xD0 += disp_amount;
+                gp->u.greatbay3.xD0 += disp_amount;
                 {
                     f32 max = grGb_804D69E0.x0->floatfloor_slide_limit;
-                    if (gp->gv.greatbay3.xD0 > max) {
-                        gp->gv.greatbay3.xD0 = max;
+                    if (gp->u.greatbay3.xD0 > max) {
+                        gp->u.greatbay3.xD0 = max;
                     }
                 }
             } else {
-                gp->gv.greatbay3.translation.z -= rot_amount;
-                if (gp->gv.greatbay3.translation.z <
+                gp->u.greatbay3.translation.z -= rot_amount;
+                if (gp->u.greatbay3.translation.z <
                     -grGb_804D69E0.x0->floatfloor_slant_limit)
                 {
-                    gp->gv.greatbay3.translation.z =
+                    gp->u.greatbay3.translation.z =
                         -grGb_804D69E0.x0->floatfloor_slant_limit;
                 }
-                gp->gv.greatbay3.xD0 -= disp_amount;
-                if (gp->gv.greatbay3.xD0 <
+                gp->u.greatbay3.xD0 -= disp_amount;
+                if (gp->u.greatbay3.xD0 <
                     -grGb_804D69E0.x0->floatfloor_slide_limit)
                 {
-                    gp->gv.greatbay3.xD0 =
+                    gp->u.greatbay3.xD0 =
                         -grGb_804D69E0.x0->floatfloor_slide_limit;
                 }
             }
-            gp->gv.greatbay3.xD4 -= y_amount;
-            if (gp->gv.greatbay3.xD4 <
-                -grGb_804D69E0.x0->floatfloor_down_limit)
+            gp->u.greatbay3.xD4 -= y_amount;
+            if (gp->u.greatbay3.xD4 < -grGb_804D69E0.x0->floatfloor_down_limit)
             {
-                gp->gv.greatbay3.xD4 =
-                    -grGb_804D69E0.x0->floatfloor_down_limit;
+                gp->u.greatbay3.xD4 = -grGb_804D69E0.x0->floatfloor_down_limit;
             }
         }
     }
@@ -1063,7 +1140,7 @@ bool grGreatBay_801F66A4(void)
         if (gobj != NULL) {
             gp = GET_GROUND(gobj);
             if (gp != NULL) {
-                if (gp->gv.greatbay.xC4 != 0) {
+                if (gp->u.greatbay.xC4 != 0) {
                     return true;
                 }
             }

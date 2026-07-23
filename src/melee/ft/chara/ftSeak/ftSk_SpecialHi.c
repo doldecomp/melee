@@ -28,7 +28,7 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <trigf.h> // IWYU pragma: keep
+#include <trigf.h>
 #include <baselib/gobj.h>
 
 static MotionFlags const ftSk_MF_SpecialHi_Coll =

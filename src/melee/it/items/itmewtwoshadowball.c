@@ -14,9 +14,9 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
+#include <trigf.h>
 #include <baselib/mtx.h>
 #include <baselib/random.h>
-#include <MSL/trigf.h>
 
 /* 2C5B18 */ static void it_802C5B18(Item_GObj*, Item_GObj*);
 

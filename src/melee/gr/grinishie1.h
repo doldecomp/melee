@@ -2,21 +2,17 @@
 #ifndef GALE01_1FA908
 #define GALE01_1FA908
 
-#include <placeholder.h>
 #include <platform.h>
 
+#include "gr/forward.h"
 #include "it/forward.h"
-#include "lb/forward.h"
-#include "mp/forward.h"
-
-#include <baselib/gobj.h>
 
 /* 1FA908 */ void grInishie1_801FA908(bool);
 /* 1FA90C */ void grInishie1_801FA90C(void);
 /* 1FA984 */ void grInishie1_801FA984(void);
 /* 1FA988 */ void grInishie1_801FA988(void);
 /* 1FA9AC */ bool grInishie1_801FA9AC(void);
-/* 1FA9B4 */ HSD_GObj* grInishie1_801FA9B4(s32);
+/* 1FA9B4 */ Ground_GObj* grInishie1_801FA9B4(s32);
 /* 1FAAA0 */ void grInishie1_801FAAA0(Ground_GObj*);
 /* 1FAACC */ bool grInishie1_801FAACC(Ground_GObj*);
 /* 1FAAD4 */ void grInishie1_801FAAD4(Ground_GObj*);
@@ -40,14 +36,11 @@
 /* 1FBAA0 */ void grInishie1_801FBAA0(HSD_GObj*, s32);
 /* 1FBC4C */ void grInishie1_801FBC4C(HSD_GObj*, u32);
 /* 1FBCEC */ void grInishie1_801FBCEC(HSD_GObj*, u32);
-/* 1FBEB8 */ void fn_801FBEB8(Ground*, s32, CollData*, s32,
-                              enum mpLib_GroundEnum, f32);
 /* 1FBF6C */ void fn_801FBF6C(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32);
 /* 1FC018 */ void grInishie1_801FC018(HSD_GObj*);
 /* 1FC110 */ void grInishie1_801FC110(HSD_GObj*);
 /* 1FC4A0 */ void grInishie1_801FC4A0(HSD_GObj*);
 /* 1FC664 */ void grInishie1_801FC664(HSD_GObj*);
-/* 1FC9AC */ void fn_801FC9AC(Ground*, s32, s32, s32, enum mpLib_GroundEnum);
 /* 1FCAAC */ bool grInishie1_801FCAAC(int);
 /* 1FCB10 */ void grInishie1_801FCB10(HSD_GObj*);
 /* 1FCBB0 */ DynamicsDesc* grInishie1_801FCBB0(enum_t);

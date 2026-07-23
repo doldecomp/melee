@@ -27,7 +27,7 @@
 
 static void setCallbacks(Fighter* fp)
 {
-    if (fp->fv.mr.x223C_capeGObj != NULL) {
+    if (fp->u.mr.x223C_capeGObj != NULL) {
         fp->death2_cb = ftMr_Init_OnTakeDamage;
         fp->take_dmg_cb = ftMr_Init_OnTakeDamage;
     }
@@ -57,10 +57,10 @@ void ftMr_SpecialS_CreateCape(HSD_GObj* gobj)
                             ftParts_GetBoneIndex(fp, FtPart_RThumbNb),
                             sa->specials.cape_kind);
 
-            fp->fv.mr.x223C_capeGObj = cape;
+            fp->u.mr.x223C_capeGObj = cape;
         }
 
-        fp->x1984_heldItemSpec = fp->fv.mr.x223C_capeGObj;
+        fp->x1984_heldItemSpec = fp->u.mr.x223C_capeGObj;
         setCallbacks(fp);
         fp->accessory4_cb = NULL;
     }
@@ -70,7 +70,7 @@ void ftMr_SpecialS_Reset(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMr_SpecialS_ExitHitlag(gobj);
-    fp->fv.mr.x223C_capeGObj = NULL;
+    fp->u.mr.x223C_capeGObj = NULL;
     fp->death2_cb = NULL;
     fp->take_dmg_cb = NULL;
 }
@@ -79,8 +79,8 @@ void ftMr_SpecialS_RemoveCape(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.mr.x223C_capeGObj != NULL) {
-        it_802B2674(fp->fv.mr.x223C_capeGObj);
+    if (fp->u.mr.x223C_capeGObj != NULL) {
+        it_802B2674(fp->u.mr.x223C_capeGObj);
         ftMr_SpecialS_Reset(gobj);
     }
 }
@@ -88,16 +88,16 @@ void ftMr_SpecialS_RemoveCape(HSD_GObj* gobj)
 void ftMr_SpecialS_EnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.mr.x223C_capeGObj != NULL) {
-        it_802B26C0(fp->fv.mr.x223C_capeGObj);
+    if (fp->u.mr.x223C_capeGObj != NULL) {
+        it_802B26C0(fp->u.mr.x223C_capeGObj);
     }
 }
 
 void ftMr_SpecialS_ExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.mr.x223C_capeGObj != NULL) {
-        it_802B26E0(fp->fv.mr.x223C_capeGObj);
+    if (fp->u.mr.x223C_capeGObj != NULL) {
+        it_802B26E0(fp->u.mr.x223C_capeGObj);
     }
 }
 
@@ -229,8 +229,8 @@ void ftMr_SpecialAirS_Phys(HSD_GObj* gobj)
     if (ftcmd_var0_tmp >= 1U) {
         if (ftcmd_var0_tmp == 1U) {
             fp->cmd_vars[0] = 2U;
-            if (!fp->fv.mr.x2238_isCapeBoost) {
-                fp->fv.mr.x2238_isCapeBoost = true;
+            if (!fp->u.mr.x2238_isCapeBoost) {
+                fp->u.mr.x2238_isCapeBoost = true;
                 fp->self_vel.y = sa->specials.vel.y;
             } else {
                 fp->self_vel.y = 0;
@@ -297,7 +297,7 @@ void ftMr_SpecialAirS_AirToGround(HSD_GObj* gobj)
     u8 _[4];
 
     fp = gobj->user_data;
-    fp->fv.mr.x2238_isCapeBoost = false;
+    fp->u.mr.x2238_isCapeBoost = false;
     ftCommon_AirToGroundStateChange(gobj, fp, ftMr_MS_SpecialS,
                                     transition_flags);
 

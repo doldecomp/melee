@@ -5,10 +5,6 @@
 #include <platform.h>
 
 #include "baselib/random.h"
-
-#include "forward.h"
-
-#include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
@@ -19,8 +15,12 @@
 #include "mp/mplib.h"
 
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
+
+/* 20F2A8 */ static void fn_8020F2A8(void* user_data, int joint_id,
+                                     CollData* coll, int coll_x50,
+                                     mpLib_GroundEnum ground_kind,
+                                     float delta_y);
 
 StageCallbacks grOy_803E6488[] = {
     { grOldYoshi_8020E93C, grOldYoshi_8020E968, grOldYoshi_8020E970,
@@ -64,13 +64,13 @@ static struct {
     s16 x14;
     s16 x16;
     s16 x18;
-}* grOy_804D6A88;
+}* yakumono_param;
 
 void grOldYoshi_8020E798(bool arg) {}
 
 void grOldYoshi_8020E79C(void)
 {
-    grOy_804D6A88 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grOldYoshi_8020E854(0);
@@ -200,15 +200,15 @@ void grOldYoshi_8020EAFC(Ground_GObj* gobj)
     Ground_801C2ED0(jobj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
     for (i = 0; i < 3; i++) {
-        gp->gv.oldyoshicloud.cloud[i].xC4_0123 = 0;
-        gp->gv.oldyoshicloud.cloud[i].xC4_4 = 0;
-        gp->gv.oldyoshicloud.cloud[i].xC4_567 = 0;
-        gp->gv.oldyoshicloud.cloud[i].xD4 = 0.0f;
-        gp->gv.oldyoshicloud.cloud[i].xD0 = 0.0f;
-        gp->gv.oldyoshicloud.cloud[i].xC8 =
+        gp->u.oldyoshicloud.cloud[i].xC4_0123 = 0;
+        gp->u.oldyoshicloud.cloud[i].xC4_4 = 0;
+        gp->u.oldyoshicloud.cloud[i].xC4_567 = 0;
+        gp->u.oldyoshicloud.cloud[i].xD4 = 0.0f;
+        gp->u.oldyoshicloud.cloud[i].xD0 = 0.0f;
+        gp->u.oldyoshicloud.cloud[i].xC8 =
             Ground_801C3FA4(gobj, grOy_803E6574[i * 2 + 1]);
-        gp->gv.oldyoshicloud.cloud[i].xCC =
-            HSD_JObjGetTranslationY(gp->gv.oldyoshicloud.cloud[i].xC8);
+        gp->u.oldyoshicloud.cloud[i].xCC =
+            HSD_JObjGetTranslationY(gp->u.oldyoshicloud.cloud[i].xC8);
         mpJointSetCb1(grOy_803E6574[i * 2], gp, fn_8020F2A8);
     }
     gp->x11_flags.b012 = 1;
@@ -227,84 +227,84 @@ void grOldYoshi_8020EC10(Ground_GObj* arg)
     HSD_JObj* jobj = arg->user_data;
     for (i = 0; i < 3; i++) {
         // int test = HSD_Randi(3);
-        switch (gp->gv.oldyoshicloud.cloud[i].xC4_0123) {
+        switch (gp->u.oldyoshicloud.cloud[i].xC4_0123) {
         case 0:
-            if (gp->gv.oldyoshicloud.cloud[i].xC4_4 != 0) {
+            if (gp->u.oldyoshicloud.cloud[i].xC4_4 != 0) {
                 // grOldYoshi_8020F31C(0,0,0,0,0,0);
-                gp->gv.oldyoshicloud.cloud[i].xD4 = grOldYoshi_8020F31C(
-                    gp->gv.oldyoshicloud.cloud[i].xD4, grOy_804D6A88->x8,
-                    gp->gv.oldyoshicloud.cloud[i].xD0, grOy_804D6A88->xC,
-                    grOy_804D6A88->x4, -grOy_804D6A88->x4);
-                gp->gv.oldyoshicloud.cloud[i].xD0 +=
-                    gp->gv.oldyoshicloud.cloud[i].xD4;
-                if (gp->gv.oldyoshicloud.cloud[i].xD0 > grOy_804D6A88->xC) {
-                    gp->gv.oldyoshicloud.cloud[i].xD0 = grOy_804D6A88->xC;
+                gp->u.oldyoshicloud.cloud[i].xD4 = grOldYoshi_8020F31C(
+                    gp->u.oldyoshicloud.cloud[i].xD4, yakumono_param->x8,
+                    gp->u.oldyoshicloud.cloud[i].xD0, yakumono_param->xC,
+                    yakumono_param->x4, -yakumono_param->x4);
+                gp->u.oldyoshicloud.cloud[i].xD0 +=
+                    gp->u.oldyoshicloud.cloud[i].xD4;
+                if (gp->u.oldyoshicloud.cloud[i].xD0 > yakumono_param->xC) {
+                    gp->u.oldyoshicloud.cloud[i].xD0 = yakumono_param->xC;
                 }
-                uVar3 = gp->gv.oldyoshicloud.cloud[i].xC4_567++;
-                if (uVar3 > grOy_804D6A88->x0) {
-                    gp->gv.oldyoshicloud.cloud[i].xC4_0123 = 1;
+                uVar3 = gp->u.oldyoshicloud.cloud[i].xC4_567++;
+                if (uVar3 > yakumono_param->x0) {
+                    gp->u.oldyoshicloud.cloud[i].xC4_0123 = 1;
                     grAnime_801C7FF8(arg, grOy_803E6574[i * 2 + 1], 2, 1, 0.0f,
                                      1.0);
                     grLib_801C97DC(
                         30000, 30,
-                        gp->gv.oldyoshicloud.cloud[i].xC8); // spawn effect
-                    gp->gv.oldyoshicloud.cloud[i].xC4_567 = 0;
+                        gp->u.oldyoshicloud.cloud[i].xC8); // spawn effect
+                    gp->u.oldyoshicloud.cloud[i].xC4_567 = 0;
                 }
             } else {
-                gp->gv.oldyoshicloud.cloud[i].xD4 = grOldYoshi_8020F31C(
-                    gp->gv.oldyoshicloud.cloud[i].xD4, grOy_804D6A88->x8,
-                    gp->gv.oldyoshicloud.cloud[i].xD0, 0.0f, grOy_804D6A88->x4,
-                    -grOy_804D6A88->x4);
-                gp->gv.oldyoshicloud.cloud[i].xD0 +=
-                    gp->gv.oldyoshicloud.cloud[i].xD4;
-                if (gp->gv.oldyoshicloud.cloud[i].xD0 < 0.0f) {
-                    gp->gv.oldyoshicloud.cloud[i].xD0 = 0.0f;
+                gp->u.oldyoshicloud.cloud[i].xD4 = grOldYoshi_8020F31C(
+                    gp->u.oldyoshicloud.cloud[i].xD4, yakumono_param->x8,
+                    gp->u.oldyoshicloud.cloud[i].xD0, 0.0f, yakumono_param->x4,
+                    -yakumono_param->x4);
+                gp->u.oldyoshicloud.cloud[i].xD0 +=
+                    gp->u.oldyoshicloud.cloud[i].xD4;
+                if (gp->u.oldyoshicloud.cloud[i].xD0 < 0.0f) {
+                    gp->u.oldyoshicloud.cloud[i].xD0 = 0.0f;
                 }
-                gp->gv.oldyoshicloud.cloud[i].xC4_567 = 0;
+                gp->u.oldyoshicloud.cloud[i].xC4_567 = 0;
             }
             break;
         case 1:
-            if (gp->gv.oldyoshicloud.cloud[i].xC4_567 == grOy_804D6A88->x10) {
+            if (gp->u.oldyoshicloud.cloud[i].xC4_567 == yakumono_param->x10) {
                 mpLib_80057BC0(grOy_803E6574[i * 2]);
             }
-            gp->gv.oldyoshicloud.cloud[i].xC4_567++;
+            gp->u.oldyoshicloud.cloud[i].xC4_567++;
             if (grAnime_801C83D0(arg, grOy_803E6574[i * 2 + 1], 2)) {
-                gp->gv.oldyoshicloud.cloud[i].xC4_0123 = 2;
+                gp->u.oldyoshicloud.cloud[i].xC4_0123 = 2;
                 mpLib_80057BC0(grOy_803E6574[i * 2]);
-                HSD_JObjSetFlagsAll(gp->gv.oldyoshicloud.cloud[i].xC8,
+                HSD_JObjSetFlagsAll(gp->u.oldyoshicloud.cloud[i].xC8,
                                     JOBJ_HIDDEN);
-                gp->gv.oldyoshicloud.cloud[i].xC4_567 = 0;
+                gp->u.oldyoshicloud.cloud[i].xC4_567 = 0;
             }
             break;
         case 2:
-            //                gp->gv.oldyoshicloud.cloud[i].xC4_5++;
-            uVar3 = gp->gv.oldyoshicloud.cloud[i].xC4_567++;
-            if (uVar3 > grOy_804D6A88->x2) {
-                gp->gv.oldyoshicloud.cloud[i].xC4_0123 = 3;
+            //                gp->u.oldyoshicloud.cloud[i].xC4_5++;
+            uVar3 = gp->u.oldyoshicloud.cloud[i].xC4_567++;
+            if (uVar3 > yakumono_param->x2) {
+                gp->u.oldyoshicloud.cloud[i].xC4_0123 = 3;
                 grAnime_801C7FF8(arg, grOy_803E6574[i * 2 + 1], 2, 2, 0.0f,
                                  1.0);
-                gp->gv.oldyoshicloud.cloud[i].xC4_567 = 0;
+                gp->u.oldyoshicloud.cloud[i].xC4_567 = 0;
             }
             break;
         case 3:
-            if (gp->gv.oldyoshicloud.cloud[i].xC4_567 == 0) {
-                HSD_JObjClearFlagsAll(gp->gv.oldyoshicloud.cloud[i].xC8,
+            if (gp->u.oldyoshicloud.cloud[i].xC4_567 == 0) {
+                HSD_JObjClearFlagsAll(gp->u.oldyoshicloud.cloud[i].xC8,
                                       JOBJ_HIDDEN);
             }
-            if (gp->gv.oldyoshicloud.cloud[i].xC4_567 == grOy_804D6A88->x12) {
+            if (gp->u.oldyoshicloud.cloud[i].xC4_567 == yakumono_param->x12) {
                 mpJointListAdd(grOy_803E6574[i * 2]);
             }
-            gp->gv.oldyoshicloud.cloud[i].xC4_567++;
+            gp->u.oldyoshicloud.cloud[i].xC4_567++;
             if (grAnime_801C83D0(arg, grOy_803E6574[i * 2 + 1], 2)) {
-                gp->gv.oldyoshicloud.cloud[i].xC4_0123 = 0;
-                gp->gv.oldyoshicloud.cloud[i].xC4_567 = 0;
+                gp->u.oldyoshicloud.cloud[i].xC4_0123 = 0;
+                gp->u.oldyoshicloud.cloud[i].xC4_567 = 0;
             }
             break;
         }
-        HSD_JObjSetTranslateY(gp->gv.oldyoshicloud.cloud[i].xC8,
-                              gp->gv.oldyoshicloud.cloud[i].xCC -
-                                  gp->gv.oldyoshicloud.cloud[i].xD0);
-        gp->gv.oldyoshicloud.cloud[i].xC4_4 = 0;
+        HSD_JObjSetTranslateY(gp->u.oldyoshicloud.cloud[i].xC8,
+                              gp->u.oldyoshicloud.cloud[i].xCC -
+                                  gp->u.oldyoshicloud.cloud[i].xD0);
+        gp->u.oldyoshicloud.cloud[i].xC4_4 = 0;
     }
     Ground_801C2FE0(arg);
     return;
@@ -331,8 +331,7 @@ static inline s32 randi_between(s32 min, s32 max)
     //}
 }
 
-// For some reason, the normal GET_GROUND didn't work here
-inline Ground* grOldYoshi_8020EFCC_inline(Ground_GObj* arg0);
+/// @todo For some reason, the normal GET_GROUND didn't work here
 inline Ground* grOldYoshi_8020EFCC_inline(Ground_GObj* arg0)
 {
     return arg0->user_data;
@@ -343,9 +342,9 @@ void grOldYoshi_8020EFCC(Ground_GObj* arg)
     HSD_JObj* jobj = arg->hsd_obj;
     Ground* gp = grOldYoshi_8020EFCC_inline(arg);
     HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-    gp->gv.oldyoshiguest.xC4 =
-        rand_range(grOy_804D6A88->x16, grOy_804D6A88->x14);
-    gp->gv.oldyoshiguest.xC6 = -1;
+    gp->u.oldyoshiguest.xC4 =
+        rand_range(yakumono_param->x16, yakumono_param->x14);
+    gp->u.oldyoshiguest.xC6 = -1;
     gp->x11_flags.b012 = 2;
     // oldyoshiguest;
 }
@@ -370,21 +369,21 @@ void grOldYoshi_8020F088(Ground_GObj* arg)
     Ground* gp = arg->user_data;
     float dVar9;
     float dVar10;
-    if (gp->gv.oldyoshiguest.xC6 == -1) {
+    if (gp->u.oldyoshiguest.xC6 == -1) {
         s16 sVar5;
-        sVar5 = gp->gv.oldyoshiguest.xC4;
-        gp->gv.oldyoshiguest.xC4 = sVar5 - 1;
+        sVar5 = gp->u.oldyoshiguest.xC4;
+        gp->u.oldyoshiguest.xC4 = sVar5 - 1;
         if (sVar5 < 0) {
             grOy_803B83F0_t local34 = grOy_803B83F0.ids;
             PAD_STACK(8);
-            gp->gv.oldyoshiguest.xC6 = local34.x[HSD_Randi(5)];
+            gp->u.oldyoshiguest.xC6 = local34.x[HSD_Randi(5)];
         }
         grAnime_801C8138(arg, gp->map_id, 0);
         dVar10 = HSD_Randf();
-        dVar9 = grOy_804D6A88->x18 * (dVar10 * 2.0f - 1.0f);
+        dVar9 = yakumono_param->x18 * (dVar10 * 2.0f - 1.0f);
         HSD_JObjSetTranslateY(arg->hsd_obj, dVar9);
     } else {
-        HSD_JObj* jobj = Ground_801C3FA4(arg, gp->gv.oldyoshiguest.xC6);
+        HSD_JObj* jobj = Ground_801C3FA4(arg, gp->u.oldyoshiguest.xC6);
         if (jobj == NULL) {
             return;
         }
@@ -393,31 +392,33 @@ void grOldYoshi_8020F088(Ground_GObj* arg)
         }
         if (grAnime_801C83D0(arg, 0, 7) != 0) {
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-            gp->gv.oldyoshiguest.xC4 =
-                rand_range(grOy_804D6A88->x16, grOy_804D6A88->x14);
-            gp->gv.oldyoshiguest.xC6 = -1;
+            gp->u.oldyoshiguest.xC4 =
+                rand_range(yakumono_param->x16, yakumono_param->x14);
+            gp->u.oldyoshiguest.xC6 = -1;
         }
     }
 }
 
 void grOldYoshi_8020F2A4(Ground_GObj* arg) {}
 
-void fn_8020F2A8(Ground* gp, s32 param2, CollData* coll, s32 param4,
-                 mpLib_GroundEnum param5, float param6)
+/// @copydoc mpLib_JointCollisionCallback
+void fn_8020F2A8(void* user_data, int joint_id, CollData* coll, int coll_x50,
+                 mpLib_GroundEnum ground_kind, float delta_y)
 {
+    Ground* gp = user_data;
     int i;
     if ((s32) coll->x34_flags.b1234 != 1) {
         return;
     }
     for (i = 0; i < 3; i++) {
-        if (param2 == grOy_803E6574[i * 2]) {
+        if (joint_id == grOy_803E6574[i * 2]) {
             break;
         }
     }
     if (i == 3) {
         return;
     }
-    gp->gv.oldyoshicloud.cloud[i].xC4_4 = 1;
+    gp->u.oldyoshicloud.cloud[i].xC4_4 = 1;
     return;
 }
 

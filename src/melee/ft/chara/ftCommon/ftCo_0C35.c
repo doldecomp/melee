@@ -12,9 +12,9 @@
 
 #include <common_structs.h>
 #include <math.h>
+#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
-#include <MSL/trigf.h>
 
 static void inlineA0(Fighter_GObj* gobj)
 {

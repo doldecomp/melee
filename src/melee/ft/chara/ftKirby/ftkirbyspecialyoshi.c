@@ -141,12 +141,12 @@ void ftKb_SpecialNYs_801093B4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObjAddAnimAll(
-        fp->fv.kb.hat.jobj,
+        fp->u.kb.hat.jobj,
         (HSD_AnimJoint*) ft_80459B88.hats[FTKIND_SAMUS]->hat_dynamics[1], 0,
         0);
-    HSD_JObjReqAnimAll(fp->fv.kb.hat.jobj, 0.0F);
-    HSD_JObjAnimAll(fp->fv.kb.hat.jobj);
-    lb_8000BA0C(fp->fv.kb.hat.jobj, 0.0F);
+    HSD_JObjReqAnimAll(fp->u.kb.hat.jobj, 0.0F);
+    HSD_JObjAnimAll(fp->u.kb.hat.jobj);
+    lb_8000BA0C(fp->u.kb.hat.jobj, 0.0F);
 }
 
 void ftKb_SpecialNYs_8010941C(Fighter_GObj* gobj)
@@ -157,10 +157,10 @@ void ftKb_SpecialNYs_8010941C(Fighter_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialN1, 0, 0.0F, 1.0F, 0.0F,
                               NULL);
     ftAnim_8006EBA4(gobj);
-    HSD_JObjAddAnimAll(fp->fv.kb.hat.jobj,
+    HSD_JObjAddAnimAll(fp->u.kb.hat.jobj,
                        (HSD_AnimJoint*) ys_hat->hat_dynamics[1], 0, 0);
-    HSD_JObjReqAnimAll(fp->fv.kb.hat.jobj, 0.0F);
-    HSD_JObjAnimAll(fp->fv.kb.hat.jobj);
+    HSD_JObjReqAnimAll(fp->u.kb.hat.jobj, 0.0F);
+    HSD_JObjAnimAll(fp->u.kb.hat.jobj);
     ftCommon_8007E2D0(GET_FIGHTER(gobj), 4, fn_80109680, fn_801095DC,
                       fn_8010A930);
     {
@@ -178,10 +178,10 @@ void ftKb_SpecialNYs_801094FC(Fighter_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialAirNCapture2, 0, 0.0F,
                               1.0F, 0.0F, NULL);
     ftAnim_8006EBA4(gobj);
-    HSD_JObjAddAnimAll(fp->fv.kb.hat.jobj,
+    HSD_JObjAddAnimAll(fp->u.kb.hat.jobj,
                        (HSD_AnimJoint*) ys_hat->hat_dynamics[3], 0, 0);
-    HSD_JObjReqAnimAll(fp->fv.kb.hat.jobj, 0.0F);
-    HSD_JObjAnimAll(fp->fv.kb.hat.jobj);
+    HSD_JObjReqAnimAll(fp->u.kb.hat.jobj, 0.0F);
+    HSD_JObjAnimAll(fp->u.kb.hat.jobj);
     ftCommon_8007E2D0(GET_FIGHTER(gobj), 4, fn_801097B8, fn_80109714,
                       fn_8010A930);
     {
@@ -391,7 +391,7 @@ void ftKb_YsSpecialN1_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    HSD_JObjAnimAll(fp->fv.kb.hat.jobj);
+    HSD_JObjAnimAll(fp->u.kb.hat.jobj);
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
         ft_8008A2BC(gobj);
     }
@@ -401,7 +401,7 @@ void ftKb_YsSpecialAirNCapture2_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    HSD_JObjAnimAll(fp->fv.kb.hat.jobj);
+    HSD_JObjAnimAll(fp->u.kb.hat.jobj);
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
         ftCo_Fall_Enter(gobj);
     }
@@ -424,9 +424,9 @@ void ftKb_YsSpecialAirNCapture1_Anim(Fighter_GObj* gobj)
         hat = ft_80459B88.hats[0xD];
         Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialNCapture2_1, 0x80012,
                                   0.0f, 1.0f, 0.0f, NULL);
-        HSD_JObjAddAnimAll(fp2->fv.kb.hat.jobj,
+        HSD_JObjAddAnimAll(fp2->u.kb.hat.jobj,
                            (HSD_AnimJoint*) hat->hat_dynamics[2], NULL, NULL);
-        HSD_JObjReqAnimAll(fp2->fv.kb.hat.jobj, 0.0f);
+        HSD_JObjReqAnimAll(fp2->u.kb.hat.jobj, 0.0f);
         fp2 = GET_FIGHTER(gobj);
         fp2->death2_cb = ftKb_Init_800EE74C;
         fp2->take_dmg_cb = ftKb_Init_800EE7B8;
@@ -444,7 +444,7 @@ void ftKb_YsSpecialNCapture1_Anim(Fighter_GObj* gobj)
     do {
         UNUSED unsigned char _[8];
     } while (new_var);
-    HSD_JObjAnimAll(fp->fv.kb.hat.jobj);
+    HSD_JObjAnimAll(fp->u.kb.hat.jobj);
     if (fp->cmd_vars[0] != new_var && fp->victim_gobj != NULL) {
         fp->cmd_vars[0] = new_var;
         fp->cmd_vars[1] = new_var;
@@ -452,9 +452,9 @@ void ftKb_YsSpecialNCapture1_Anim(Fighter_GObj* gobj)
         hat = ft_80459B88.hats[0xD];
         Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialNCapture2_0, 0x80012,
                                   0.0f, 1.0f, 0.0f, NULL);
-        HSD_JObjAddAnimAll(fp2->fv.kb.hat.jobj,
+        HSD_JObjAddAnimAll(fp2->u.kb.hat.jobj,
                            (HSD_AnimJoint*) hat->hat_dynamics[2], NULL, NULL);
-        HSD_JObjReqAnimAll(fp2->fv.kb.hat.jobj, 0.0f);
+        HSD_JObjReqAnimAll(fp2->u.kb.hat.jobj, 0.0f);
         fp2 = GET_FIGHTER(gobj);
         fp2->death2_cb = ftKb_Init_800EE74C;
         fp2->take_dmg_cb = ftKb_Init_800EE7B8;
@@ -479,9 +479,9 @@ void ftKb_YsSpecialAirCapture2_Anim(Fighter_GObj* gobj)
         hat = ft_80459B88.hats[0xD];
         Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialAirN2_1, 0x80012,
                                   0.0f, 1.0f, 0.0f, NULL);
-        HSD_JObjAddAnimAll(fp2->fv.kb.hat.jobj,
+        HSD_JObjAddAnimAll(fp2->u.kb.hat.jobj,
                            (HSD_AnimJoint*) hat->hat_dynamics[4], NULL, NULL);
-        HSD_JObjReqAnimAll(fp2->fv.kb.hat.jobj, 0.0f);
+        HSD_JObjReqAnimAll(fp2->u.kb.hat.jobj, 0.0f);
         fp2 = GET_FIGHTER(gobj);
         fp2->death2_cb = ftKb_Init_800EE74C;
         fp2->take_dmg_cb = ftKb_Init_800EE7B8;
@@ -499,7 +499,7 @@ void ftKb_YsSpecialAirCapture1_Anim(Fighter_GObj* gobj)
     do {
         UNUSED unsigned char _[8];
     } while (new_var);
-    HSD_JObjAnimAll(fp->fv.kb.hat.jobj);
+    HSD_JObjAnimAll(fp->u.kb.hat.jobj);
     if (fp->cmd_vars[0] != new_var && fp->victim_gobj != NULL) {
         fp->cmd_vars[0] = new_var;
         fp->cmd_vars[1] = new_var;
@@ -507,9 +507,9 @@ void ftKb_YsSpecialAirCapture1_Anim(Fighter_GObj* gobj)
         hat = ft_80459B88.hats[0xD];
         Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialAirN2_0, 0x80012,
                                   0.0f, 1.0f, 0.0f, NULL);
-        HSD_JObjAddAnimAll(fp2->fv.kb.hat.jobj,
+        HSD_JObjAddAnimAll(fp2->u.kb.hat.jobj,
                            (HSD_AnimJoint*) hat->hat_dynamics[4], NULL, NULL);
-        HSD_JObjReqAnimAll(fp2->fv.kb.hat.jobj, 0.0f);
+        HSD_JObjReqAnimAll(fp2->u.kb.hat.jobj, 0.0f);
         fp2 = GET_FIGHTER(gobj);
         fp2->death2_cb = ftKb_Init_800EE74C;
         fp2->take_dmg_cb = ftKb_Init_800EE7B8;
@@ -523,7 +523,7 @@ void ftKb_YsSpecialNCapture2_0_Anim(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     itYoshiEggLay_DatAttrs item_attrs;
     PAD_STACK(82);
-    HSD_JObjAnimAll(fp->fv.kb.hat.jobj);
+    HSD_JObjAnimAll(fp->u.kb.hat.jobj);
     if (fp->cmd_vars[1] != 0) {
         if (fp->target_item_gobj != NULL) {
             it_802F2E7C(fp->target_item_gobj, false);
@@ -576,7 +576,7 @@ void ftKb_YsSpecialNCapture2_1_Anim(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_GObj* victim;
     PAD_STACK(8);
-    HSD_JObjAnimAll(fp->fv.kb.hat.jobj);
+    HSD_JObjAnimAll(fp->u.kb.hat.jobj);
     if (fp->cmd_vars[1] != 0) {
         if (fp->victim_gobj != NULL) {
             ftKb_SpecialNYs_8010AA2C(fp->victim_gobj);
@@ -600,7 +600,7 @@ void ftKb_YsSpecialAirN2_1_Anim(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     itYoshiEggLay_DatAttrs item_attrs;
     PAD_STACK(0x54);
-    HSD_JObjAnimAll(fp->fv.kb.hat.jobj);
+    HSD_JObjAnimAll(fp->u.kb.hat.jobj);
     if (fp->cmd_vars[1] != 0) {
         if (fp->target_item_gobj != NULL) {
             it_802F2E7C(fp->target_item_gobj, false);
@@ -653,7 +653,7 @@ void ftKb_YsSpecialAirN2_0_Anim(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_GObj* victim;
     PAD_STACK(8);
-    HSD_JObjAnimAll(fp->fv.kb.hat.jobj);
+    HSD_JObjAnimAll(fp->u.kb.hat.jobj);
     if (fp->cmd_vars[1] != 0) {
         if (fp->victim_gobj != NULL) {
             ftKb_SpecialNYs_8010AA2C(fp->victim_gobj);

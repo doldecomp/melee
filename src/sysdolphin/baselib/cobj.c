@@ -13,13 +13,13 @@
 #include <placeholder.h>
 
 #include <math.h>
+#include <math_ppc.h>
+#include <trigf.h>
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
 #include <dolphin/vi.h>
 #include <MetroTRK/intrinsics.h>
-#include <MSL/math_ppc.h>
-#include <MSL/trigf.h>
 
 static HSD_ClassInfo* default_class;
 static HSD_CObj* current;

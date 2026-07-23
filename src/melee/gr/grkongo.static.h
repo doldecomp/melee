@@ -1,17 +1,20 @@
 #ifndef __GALE01_1D5238
 #define __GALE01_1D5238
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "gr/types.h"
 
 #include "mp/forward.h"
 
-/* 1D7700 */ static void fn_801D7700(Ground* gp, s32, CollData*, s32,
-                                     mpLib_GroundEnum arg4, float);
-/* 1D7E60 */ static void fn_801D7E60(Ground* gp, s32, CollData*, s32,
-                                     mpLib_GroundEnum arg4, float);
+/* 1D7700 */ static void fn_801D7700(void* user_data, int joint_id,
+                                     CollData* coll, int coll_x50,
+                                     mpLib_GroundEnum ground_kind,
+                                     float delta_y);
+/* 1D7E60 */ static void fn_801D7E60(void* user_data, int joint_id,
+                                     CollData* coll, int coll_x50,
+                                     mpLib_GroundEnum ground_kind,
+                                     float delta_y);
 /* 1D8134 */ static int fn_801D8134(HSD_GObj* arg0, HSD_GObj* arg1);
 /* 1D8444 */ static DynamicsDesc* grKongo_801D8444(enum_t);
 
@@ -30,9 +33,7 @@ typedef struct grKg_SplineChoiceList {
     s32 terminator;
 } grKg_SplineChoiceList;
 
-extern const grKg_SplineChoiceList grKg_803B7FD4;
-
-static struct {
+struct grKongo_YakumonoParam {
     f32 unk0;
     f32 unk4;
     f32 unk8;
@@ -84,8 +85,10 @@ static struct {
     f32 unkB0;
     f32 unkB4;
     f32 unkB8;
-}* grKg_804D6980;
+};
 
-extern StageInfo stage_info;
+extern const grKg_SplineChoiceList grKg_803B7FD4;
+
+static struct grKongo_YakumonoParam* yakumono_param;
 
 #endif

@@ -20,9 +20,9 @@
 #include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
-#include "MSL/math_ppc.h"
 
 #include <math.h>
+#include <math_ppc.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -34,7 +34,7 @@
 static struct {
     int x0;
     grZakoGenerator_SpawnDesc x4;
-}* grNKr_804D6A50;
+}* yakumono_param;
 
 typedef struct grNKr_Depths {
     s16 x[51];
@@ -91,7 +91,7 @@ void grKinokoRoute_8020741C(bool arg) {}
 
 void grKinokoRoute_80207420(void)
 {
-    grNKr_804D6A50 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grKinokoRoute_8020754C(2);
@@ -114,10 +114,10 @@ void grKinokoRoute_80207490(void)
 void grKinokoRoute_802074D8(void)
 {
     int val;
-    grZakoGenerator_801CAE04(&grNKr_804D6A50->x4);
-    val = grNKr_804D6A50->x0;
+    grZakoGenerator_801CAE04(&yakumono_param->x4);
+    val = yakumono_param->x0;
     if (val != 0) {
-        val = HSD_Randi(grNKr_804D6A50->x0);
+        val = HSD_Randi(yakumono_param->x0);
     } else {
         val = 0;
     }
@@ -172,42 +172,42 @@ void grKinokoRoute_80207634(Ground_GObj* gobj)
     if (jobj != NULL) {
         HSD_JObjGetTranslation(jobj, &origin);
 
-        if ((gp->gv.kinokoroute.entries[0].jobj = Ground_801C2CF4(0x7F)) !=
+        if ((gp->u.kinokoroute.entries[0].jobj = Ground_801C2CF4(0x7F)) !=
             NULL)
         {
-            HSD_JObjGetTranslation(gp->gv.kinokoroute.entries[0].jobj,
-                                   &gp->gv.kinokoroute.entries[0].pos);
-            lbVector_Sub(&gp->gv.kinokoroute.entries[0].pos, &origin);
+            HSD_JObjGetTranslation(gp->u.kinokoroute.entries[0].jobj,
+                                   &gp->u.kinokoroute.entries[0].pos);
+            lbVector_Sub(&gp->u.kinokoroute.entries[0].pos, &origin);
         }
 
-        if ((gp->gv.kinokoroute.entries[1].jobj = Ground_801C2CF4(0x80)) !=
+        if ((gp->u.kinokoroute.entries[1].jobj = Ground_801C2CF4(0x80)) !=
             NULL)
         {
-            HSD_JObjGetTranslation(gp->gv.kinokoroute.entries[1].jobj,
-                                   &gp->gv.kinokoroute.entries[1].pos);
-            lbVector_Sub(&gp->gv.kinokoroute.entries[1].pos, &origin);
+            HSD_JObjGetTranslation(gp->u.kinokoroute.entries[1].jobj,
+                                   &gp->u.kinokoroute.entries[1].pos);
+            lbVector_Sub(&gp->u.kinokoroute.entries[1].pos, &origin);
         }
 
-        if ((gp->gv.kinokoroute.entries[2].jobj = Ground_801C2CF4(0x81)) !=
+        if ((gp->u.kinokoroute.entries[2].jobj = Ground_801C2CF4(0x81)) !=
             NULL)
         {
-            HSD_JObjGetTranslation(gp->gv.kinokoroute.entries[2].jobj,
-                                   &gp->gv.kinokoroute.entries[2].pos);
-            lbVector_Sub(&gp->gv.kinokoroute.entries[2].pos, &origin);
+            HSD_JObjGetTranslation(gp->u.kinokoroute.entries[2].jobj,
+                                   &gp->u.kinokoroute.entries[2].pos);
+            lbVector_Sub(&gp->u.kinokoroute.entries[2].pos, &origin);
         }
 
-        if ((gp->gv.kinokoroute.entries[3].jobj = Ground_801C2CF4(0x82)) !=
+        if ((gp->u.kinokoroute.entries[3].jobj = Ground_801C2CF4(0x82)) !=
             NULL)
         {
-            HSD_JObjGetTranslation(gp->gv.kinokoroute.entries[3].jobj,
-                                   &gp->gv.kinokoroute.entries[3].pos);
-            lbVector_Sub(&gp->gv.kinokoroute.entries[3].pos, &origin);
+            HSD_JObjGetTranslation(gp->u.kinokoroute.entries[3].jobj,
+                                   &gp->u.kinokoroute.entries[3].pos);
+            lbVector_Sub(&gp->u.kinokoroute.entries[3].pos, &origin);
         }
     } else {
-        gp->gv.kinokoroute.entries[0].jobj = NULL;
-        gp->gv.kinokoroute.entries[1].jobj = NULL;
-        gp->gv.kinokoroute.entries[2].jobj = NULL;
-        gp->gv.kinokoroute.entries[3].jobj = NULL;
+        gp->u.kinokoroute.entries[0].jobj = NULL;
+        gp->u.kinokoroute.entries[1].jobj = NULL;
+        gp->u.kinokoroute.entries[2].jobj = NULL;
+        gp->u.kinokoroute.entries[3].jobj = NULL;
     }
 
     Ground_801C39C0();
@@ -252,13 +252,13 @@ void grKinokoRoute_802078F0(Ground_GObj* gobj)
     }
 
     for (i = 0; i < 4; i++, cursor.entry++) {
-        if (cursor.gp->gv.kinokoroute.entries[0].jobj != NULL) {
+        if (cursor.gp->u.kinokoroute.entries[0].jobj != NULL) {
             HSD_JObjSetTranslateX(
-                cursor.gp->gv.kinokoroute.entries[0].jobj,
-                scale * (cursor.gp->gv.kinokoroute.entries[0].pos.x + pos.x));
+                cursor.gp->u.kinokoroute.entries[0].jobj,
+                scale * (cursor.gp->u.kinokoroute.entries[0].pos.x + pos.x));
             HSD_JObjSetTranslateY(
-                cursor.gp->gv.kinokoroute.entries[0].jobj,
-                scale * (cursor.gp->gv.kinokoroute.entries[0].pos.y + pos.y));
+                cursor.gp->u.kinokoroute.entries[0].jobj,
+                scale * (cursor.gp->u.kinokoroute.entries[0].pos.y + pos.y));
         }
     }
 }
@@ -313,16 +313,16 @@ void grKinokoRoute_80207B5C(Ground_GObj* gobj)
     gp->x8_callback = NULL;
     gp->xC_callback = NULL;
     gp->x10_flags.b5 = 1;
-    gp->gv.kinokoroute2.phase = 0;
-    gp->gv.kinokoroute2.zone_idx = 0;
-    gp->gv.kinokoroute2.cam_timer = 0;
-    gp->gv.kinokoroute2.spawn_idx = -1;
+    gp->u.kinokoroute2.phase = 0;
+    gp->u.kinokoroute2.zone_idx = 0;
+    gp->u.kinokoroute2.cam_timer = 0;
+    gp->u.kinokoroute2.spawn_idx = -1;
     Ground_801C10B8(gobj, grKinokoRoute_80207B30);
     grKinokoRoute_80208564(gobj);
-    gp->gv.kinokoroute2.flags_0 = true;
+    gp->u.kinokoroute2.flags_0 = true;
     reb0_jobj = Ground_801C2CF4(4);
     HSD_ASSERT(467, reb0_jobj);
-    HSD_JObjGetTranslation(reb0_jobj, &gp->gv.kinokoroute2.reb0_pos);
+    HSD_JObjGetTranslation(reb0_jobj, &gp->u.kinokoroute2.reb0_pos);
 }
 
 bool grKinokoRoute_80207C80(Ground_GObj* arg)
@@ -352,22 +352,22 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
     } else {
         return;
     }
-    if (gp->gv.kinokoroute2.phase != 2) {
+    if (gp->u.kinokoroute2.phase != 2) {
         if (ftLib_80086EC0(fighter)) {
             Stage_UnkSetVec3TCam_Offset(&cam_target);
-            gp->gv.kinokoroute2.cam_timer = 0x3C;
+            gp->u.kinokoroute2.cam_timer = 0x3C;
         } else if (ftLib_8008732C(fighter)) {
             Stage_UnkSetVec3TCam_Offset(&cam_target);
-            gp->gv.kinokoroute2.cam_timer = 0;
+            gp->u.kinokoroute2.cam_timer = 0;
         } else {
             if (fighter_pos.y < 20.0f * scale) {
                 fighter_pos.y = 20.0f * scale;
             } else if (fighter_pos.y > 250.0f * scale) {
                 fighter_pos.y = 250.0f * scale;
             }
-            if (gp->gv.kinokoroute2.spawn_idx != -1) {
+            if (gp->u.kinokoroute2.spawn_idx != -1) {
                 Vec3 spawn_point;
-                Ground_801C2D24(gp->gv.kinokoroute2.spawn_idx, &spawn_point);
+                Ground_801C2D24(gp->u.kinokoroute2.spawn_idx, &spawn_point);
                 if (fighter_pos.x < spawn_point.x) {
                     fighter_pos.x = spawn_point.x;
                 }
@@ -386,19 +386,19 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
             Camera_80030AE0(true);
         }
         Ground_801C3D44(NULL, 30.0f, 10000.0f);
-        if (gp->gv.kinokoroute2.phase < 2) {
+        if (gp->u.kinokoroute2.phase < 2) {
             s16 spawn_idx = Ground_801C3DB4(NULL, 60.0f, 10000.0f);
-            gp->gv.kinokoroute2.spawn_idx = spawn_idx;
+            gp->u.kinokoroute2.spawn_idx = spawn_idx;
             if (spawn_idx != -1) {
-                gp->gv.kinokoroute2.phase = 2;
-                gp->gv.kinokoroute2.cam_timer = 0x3C;
+                gp->u.kinokoroute2.phase = 2;
+                gp->u.kinokoroute2.cam_timer = 0x3C;
                 Ground_801C5750();
                 {
                     u8 route_id = 0xB3;
                     gm_801674C4(0x11, 0xA, 3, route_id,
                                 grKinokoRoute_80208480);
                 }
-                gp->gv.kinokoroute2.zone_idx = 2;
+                gp->u.kinokoroute2.zone_idx = 2;
                 ground_gobj = Ground_801C2BA4(0);
                 if (ground_gobj != NULL) {
                     Ground_801C4A08(ground_gobj);
@@ -411,21 +411,21 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
                 grKinokoRoute_8020754C(2);
                 Ground_801C38BC(cam_target.x, cam_target.y);
                 grZakoGenerator_801CAF08();
-                gp->gv.kinokoroute2.cam_timer = 0x3C;
+                gp->u.kinokoroute2.cam_timer = 0x3C;
             }
         }
         {
-            s32 zone_idx = gp->gv.kinokoroute2.zone_idx + 5;
+            s32 zone_idx = gp->u.kinokoroute2.zone_idx + 5;
             if (7 > zone_idx && Ground_801C2D24(zone_idx, &zone_point) &&
                 fighter_pos.x > zone_point.x)
             {
-                gp->gv.kinokoroute2.zone_idx += 1;
+                gp->u.kinokoroute2.zone_idx += 1;
             }
         }
-        stage_info.x6DC = gp->gv.kinokoroute2.zone_idx;
+        stage_info.x6DC = gp->u.kinokoroute2.zone_idx;
     } else {
         Vec3 translate;
-        Ground_801C2D24(gp->gv.kinokoroute2.spawn_idx, &fighter_pos);
+        Ground_801C2D24(gp->u.kinokoroute2.spawn_idx, &fighter_pos);
         fighter_pos.y += 30.0f;
         cam_target = fighter_pos;
         Camera_80030AE0(false);
@@ -436,18 +436,18 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
         HSD_JObjGetTranslation(eve_jobj, &translate);
         translate.y += 50.0f;
         HSD_JObjSetTranslate(reb0_jobj, &translate);
-        if (gp->gv.kinokoroute2.cam_timer == 0) {
+        if (gp->u.kinokoroute2.cam_timer == 0) {
             grKinokoRoute_8020836C(gobj, 0);
         }
         switch (Ground_801C5764()) {
         case 1:
-            gp->gv.kinokoroute2.phase = 3;
-            gp->gv.kinokoroute2.cam_timer = 0x3C;
+            gp->u.kinokoroute2.phase = 3;
+            gp->u.kinokoroute2.cam_timer = 0x3C;
             grKinokoRoute_8020836C(gobj, 1);
             grZakoGenerator_801CAEF0(true);
             reb0_jobj = Ground_801C2CF4(4);
             HSD_ASSERT(654, reb0_jobj);
-            HSD_JObjSetTranslate(reb0_jobj, &gp->gv.kinokoroute2.reb0_pos);
+            HSD_JObjSetTranslate(reb0_jobj, &gp->u.kinokoroute2.reb0_pos);
             ground_gobj = Ground_801C2BA4(0);
             if (ground_gobj != NULL) {
                 Ground_801C4A08(ground_gobj);
@@ -463,7 +463,7 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
     }
 
     Stage_UnkSetVec3TCam_Offset(&cam_offset);
-    if (gp->gv.kinokoroute2.cam_timer == 0) {
+    if (gp->u.kinokoroute2.cam_timer == 0) {
         Vec3 diff;
         lbVector_Diff(&cam_offset, &cam_target, &diff);
         if (sqrtf(SQ(diff.x) + SQ(diff.y) + SQ(diff.z)) > 10.0f) {
@@ -474,21 +474,21 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
             Ground_801C38BC(cam_target.x + diff.x, cam_target.y + diff.y);
         }
     } else {
-        f32 step = 1.0f / gp->gv.kinokoroute2.cam_timer;
+        f32 step = 1.0f / gp->u.kinokoroute2.cam_timer;
         lbVector_Sub(&cam_target, &cam_offset);
         cam_target.x *= step;
         cam_target.y *= step;
         cam_target.z *= step;
         lbVector_Add(&cam_offset, &cam_target);
         Ground_801C38BC(cam_offset.x, cam_offset.y);
-        gp->gv.kinokoroute2.cam_timer -= 1;
+        gp->u.kinokoroute2.cam_timer -= 1;
     }
 
     lb_800115F4();
     Ground_801C2FE0(gobj);
-    if (gp->gv.kinokoroute2.flags_0) {
+    if (gp->u.kinokoroute2.flags_0) {
         mpLib_80058560();
-        gp->gv.kinokoroute2.flags_0 = false;
+        gp->u.kinokoroute2.flags_0 = false;
     }
 }
 

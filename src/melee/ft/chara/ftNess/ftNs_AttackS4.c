@@ -44,7 +44,7 @@ void ftNs_AttackS4_Enter(HSD_GObj* gobj) // Ness's F-Smash Motion State handler
     baseballBatGObj = it_802AD478(gobj, &fp->cur_pos,
                                   0x2A /* Item Hold Bone */, fp->facing_dir);
 
-    fp->fv.ns.bat_gobj = baseballBatGObj;
+    fp->u.ns.bat_gobj = baseballBatGObj;
 
     if (baseballBatGObj != NULL) {
         fp->death2_cb = ftNs_Init_OnDamage;
@@ -63,7 +63,7 @@ bool ftNs_AttackS4_CheckNessBatRemove(
         return true;
     }
 
-    if (fp->fv.ns.bat_gobj == NULL) {
+    if (fp->u.ns.bat_gobj == NULL) {
         return true;
     }
 
@@ -76,9 +76,9 @@ void ftNs_AttackS4_ItemNessBatRemove(HSD_GObj* gobj) // Remove Baseball Bat
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.ns.bat_gobj != NULL) {
-        it_802AD6B8(fp->fv.ns.bat_gobj);
-        fp->fv.ns.bat_gobj = NULL;
+    if (fp->u.ns.bat_gobj != NULL) {
+        it_802AD6B8(fp->u.ns.bat_gobj);
+        fp->u.ns.bat_gobj = NULL;
     }
 };
 
@@ -89,8 +89,8 @@ void ftNs_AttackS4_ItemNessBatSetNULL(
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.ns.bat_gobj != NULL) {
-        fp->fv.ns.bat_gobj = NULL;
+    if (fp->u.ns.bat_gobj != NULL) {
+        fp->u.ns.bat_gobj = NULL;
     }
 };
 
@@ -118,11 +118,11 @@ void ftNs_AttackS4_Anim(HSD_GObj* gobj) // Ness's F-Smash Animation callback
     {
         Fighter* fighter_data2;
         fighter_data2 = GET_FIGHTER(gobj);
-        if (fighter_data2->fv.ns.bat_gobj != NULL) {
+        if (fighter_data2->u.ns.bat_gobj != NULL) {
             it_802AD6B8(
-                fighter_data2->fv.ns.bat_gobj); // Despawn the Baseball Bat if
-                                                // animation is over
-            fighter_data2->fv.ns.bat_gobj = NULL;
+                fighter_data2->u.ns.bat_gobj); // Despawn the Baseball Bat if
+                                               // animation is over
+            fighter_data2->u.ns.bat_gobj = NULL;
         }
         ft_8008A2BC(gobj);
     }
@@ -137,9 +137,9 @@ void ftNs_AttackS4_IASA(HSD_GObj* gobj) // Ness's F-Smash IASA Callback
     u8 _[8];
 
     if (fp->allow_interrupt != 0) {
-        if (fp->fv.ns.bat_gobj != NULL) {
-            it_802AD6B8(fp->fv.ns.bat_gobj);
-            fp->fv.ns.bat_gobj = NULL;
+        if (fp->u.ns.bat_gobj != NULL) {
+            it_802AD6B8(fp->u.ns.bat_gobj);
+            fp->u.ns.bat_gobj = NULL;
         }
         ftCo_Wait_IASA(gobj);
     }

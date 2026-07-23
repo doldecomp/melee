@@ -3,8 +3,6 @@
 
 #include "platform.h"
 
-#include <placeholder.h>
-
 #include "dolphin/gx/GXStruct.h"
 
 #include "gr/forward.h"
@@ -111,10 +109,11 @@ struct CollJoint {
     /* 0x10 */ Vec2 bounding_min;
     /* 0x18 */ Vec2 bounding_max;
     /* 0x20 */ HSD_JObj* x20;
-    /* 0x24 */ mpLib_Callback x24;
-    /* 0x28 */ void* x28;
-    /* 0x2C */ mpLib_Callback x2C;
-    /* 0x30 */ Ground* x30;
+    /* 0x24 */ mpLib_JointCollisionCallback
+        cb_0; ///< @todo Possible array here
+    /* 0x28 */ Ground* cb_data_0;
+    /* 0x2C */ mpLib_JointCollisionCallback cb_1;
+    /* 0x30 */ Ground* cb_data_1;
 }; /* size = 0x34 */
 STATIC_ASSERT(sizeof(struct CollJoint) == 0x34);
 

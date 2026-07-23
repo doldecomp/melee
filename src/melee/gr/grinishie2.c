@@ -161,7 +161,7 @@ StageData grI2_803E4C00 = {
     14,
 };
 
-typedef struct grInishie2_params {
+struct grInishie2_YakumonoParam {
     s16 unk0;
     s16 unk2;
     s16 unk4;
@@ -176,15 +176,15 @@ typedef struct grInishie2_params {
     Vec3 unk30[2];
     s16 unk48;
     s16 unk4A;
-} grInishie2_params;
+};
 
-grInishie2_params* grI2_804D6A00;
+static struct grInishie2_YakumonoParam* yakumono_param;
 
 void grInishie2_801FCBC0(bool arg) {}
 
 void grInishie2_801FCBC4(void)
 {
-    grI2_804D6A00 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
 
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
@@ -289,7 +289,7 @@ void grInishie2_801FCE04(Ground_GObj* gobj)
     Ground_801C4E70(Ground_801C3FA4(gobj, 9), Ground_801C3FA4(gobj, 0xC),
                     Ground_801C3FA4(gobj, 8), Ground_801C3FA4(gobj, 0xB),
                     Ground_801C3FA4(gobj, 0xA), Ground_801C3FA4(gobj, 0xD));
-    gp->gv.inishie2.xC4_flags.b0 = 0;
+    gp->u.inishie2.xC4_flags.b0 = 0;
 }
 
 bool grInishie2_801FCF24(Ground_GObj* gobj)
@@ -308,7 +308,7 @@ void grInishie2_801FCF2C(HSD_GObj* gobj)
     s32 var_r3;
 
     gp = GET_GROUND(gobj);
-    if (gp->gv.inishie2.xC4_flags.b0 == 0) {
+    if (gp->u.inishie2.xC4_flags.b0 == 0) {
         if (GetMatchTimer((int*) &time_remaining) != 0) {
             if (time_remaining < 20) {
                 s32 temp_r3 = Ground_801C5A94();
@@ -320,10 +320,10 @@ void grInishie2_801FCF2C(HSD_GObj* gobj)
                     var_r3 = -1;
                 }
                 lbAudioAx_80023F28(var_r3);
-                gp->gv.inishie2.xC4_flags.b0 = 1;
+                gp->u.inishie2.xC4_flags.b0 = 1;
             }
         } else {
-            gp->gv.inishie2.xC4_flags.b0 = 1;
+            gp->u.inishie2.xC4_flags.b0 = 1;
         }
     }
 }
@@ -347,40 +347,40 @@ void grInishie2_801FD018(HSD_GObj* gobj)
     Ground* gp;
     gp = gobj->user_data;
 
-    gp->gv.inishie2.xC4_flags.b1 = 1;
-    gp->gv.inishie2.xC4_flags.b2 = 1;
-    gp->gv.inishie2.xC6 =
-        grI2_804D6A00->unk0 + test_random((int) grI2_804D6A00->unk2);
-    gp->gv.inishie2.xC8 =
-        grI2_804D6A00->unk4 + test_random((int) grI2_804D6A00->unk6);
+    gp->u.inishie2.xC4_flags.b1 = 1;
+    gp->u.inishie2.xC4_flags.b2 = 1;
+    gp->u.inishie2.xC6 =
+        yakumono_param->unk0 + test_random((int) yakumono_param->unk2);
+    gp->u.inishie2.xC8 =
+        yakumono_param->unk4 + test_random((int) yakumono_param->unk6);
 }
 
 void grInishie2_801FD0B4(HSD_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
 
-    if (gp->gv.inishie2.xC4_flags.b1) {
-        s16 timer = gp->gv.inishie2.xC6--;
+    if (gp->u.inishie2.xC4_flags.b1) {
+        s16 timer = gp->u.inishie2.xC6--;
         if (timer < 0) {
             HSD_GObj* new_gobj = grInishie2_801FCCDC(3);
             mpLib_80057BC0(12);
-            gp->gv.inishie2.xC4_flags.b1 = 0;
+            gp->u.inishie2.xC4_flags.b1 = 0;
             if (new_gobj != NULL) {
                 Ground* new_gp = GET_GROUND(new_gobj);
-                new_gp->gv.inishie22.xCC = gobj;
+                new_gp->u.inishie22.xCC = gobj;
             }
         }
     }
 
-    if (gp->gv.inishie2.xC4_flags.b2) {
-        s16 timer = gp->gv.inishie2.xC8--;
+    if (gp->u.inishie2.xC4_flags.b2) {
+        s16 timer = gp->u.inishie2.xC8--;
         if (timer < 0) {
             HSD_GObj* new_gobj = grInishie2_801FCCDC(4);
             mpLib_80057BC0(13);
-            gp->gv.inishie2.xC4_flags.b2 = 0;
+            gp->u.inishie2.xC4_flags.b2 = 0;
             if (new_gobj != NULL) {
                 Ground* new_gp = GET_GROUND(new_gobj);
-                new_gp->gv.inishie22.xCC = gobj;
+                new_gp->u.inishie22.xCC = gobj;
             }
         }
     }
@@ -394,10 +394,10 @@ void grInishie2_801FD198(Ground_GObj* gobj)
     Ground_801C2ED0(jobj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
 
-    gp->gv.inishie2.xC4_flags.b0 = 0;
+    gp->u.inishie2.xC4_flags.b0 = 0;
 
-    gp->gv.inishie2.xC8 = gp->map_id - 3;
-    gp->gv.inishie2.xC6 = grI2_804D6A00->unk10[gp->gv.inishie2.xC8];
+    gp->u.inishie2.xC8 = gp->map_id - 3;
+    gp->u.inishie2.xC6 = yakumono_param->unk10[gp->u.inishie2.xC8];
 }
 
 bool grInishie2_801FD21C(Ground_GObj* gobj)
@@ -409,18 +409,18 @@ void grInishie2_801FD224(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
 
-    if (!gp->gv.inishie2.xC4_flags.b0) {
-        s16 counter = gp->gv.inishie2.xC6;
-        gp->gv.inishie2.xC6 = counter - 1;
+    if (!gp->u.inishie2.xC4_flags.b0) {
+        s16 counter = gp->u.inishie2.xC6;
+        gp->u.inishie2.xC6 = counter - 1;
 
         if (counter < 0) {
-            if (gp->gv.inishie2.xC8 == 0) {
+            if (gp->u.inishie2.xC8 == 0) {
                 mpJointListAdd(0xC);
             } else {
                 mpJointListAdd(0xD);
             }
 
-            gp->gv.inishie2.xC4_flags.b0 = 1;
+            gp->u.inishie2.xC4_flags.b0 = 1;
         }
     }
 
@@ -428,15 +428,15 @@ void grInishie2_801FD224(Ground_GObj* gobj)
 
     gp = GET_GROUND(gobj);
     if (grAnime_801C83D0(gobj, 0, 1)) { ///< @todo union irregularity
-        Ground* gp_2 = GET_GROUND(gp->gv.inishie22.xCC);
-        if (gp->gv.inishie2.xC8 == 0) {
-            gp_2->gv.inishie2.xC4_flags.b1 = 1;
-            gp_2->gv.inishie2.xC6 =
-                grI2_804D6A00->unk0 + test_random((int) grI2_804D6A00->unk2);
+        Ground* gp_2 = GET_GROUND(gp->u.inishie22.xCC);
+        if (gp->u.inishie2.xC8 == 0) {
+            gp_2->u.inishie2.xC4_flags.b1 = 1;
+            gp_2->u.inishie2.xC6 =
+                yakumono_param->unk0 + test_random((int) yakumono_param->unk2);
         } else {
-            gp_2->gv.inishie2.xC4_flags.b2 = 1;
-            gp_2->gv.inishie2.xC8 =
-                grI2_804D6A00->unk4 + test_random((int) grI2_804D6A00->unk6);
+            gp_2->u.inishie2.xC4_flags.b2 = 1;
+            gp_2->u.inishie2.xC8 =
+                yakumono_param->unk4 + test_random((int) yakumono_param->unk6);
         }
 
         Ground_801C4A08(gobj);
@@ -451,12 +451,12 @@ void grInishie2_801FD368(HSD_GObj* gobj)
     s32 rand_max;
     s32 rand_val;
 
-    gp->gv.inishie2.xC4_flags.b3 = 1;
+    gp->u.inishie2.xC4_flags.b3 = 1;
 
-    rand_max = grI2_804D6A00->unkA;
+    rand_max = yakumono_param->unkA;
     rand_val = test_random(rand_max);
 
-    gp->gv.inishie2.xCA = grI2_804D6A00->unk8 + rand_val;
+    gp->u.inishie2.xCA = yakumono_param->unk8 + rand_val;
 }
 
 void grInishie2_801FD3CC(HSD_GObj* gobj)
@@ -465,15 +465,15 @@ void grInishie2_801FD3CC(HSD_GObj* gobj)
     s16 counter;
     Ground* gp = GET_GROUND(gobj);
 
-    if (gp->gv.inishie2.xC4_flags.b3) {
-        counter = gp->gv.inishie2.xCA;
-        gp->gv.inishie2.xCA = counter - 1;
+    if (gp->u.inishie2.xC4_flags.b3) {
+        counter = gp->u.inishie2.xCA;
+        gp->u.inishie2.xCA = counter - 1;
         if (counter < 0) {
             gobj_2 = grInishie2_801FCCDC(0xF);
-            gp->gv.inishie2.xC4_flags.b3 = 0;
+            gp->u.inishie2.xC4_flags.b3 = 0;
             if (gobj_2 != NULL) {
                 Ground* gp_2 = gobj_2->user_data;
-                gp_2->gv.inishie22.xC8 = gobj;
+                gp_2->u.inishie22.xC8 = gobj;
             }
         }
     }
@@ -487,14 +487,14 @@ void grInishie2_801FD448(HSD_GObj* gobj)
     Ground* gp_2;
 
     gp = GET_GROUND(gobj);
-    gp_2 = GET_GROUND(gp->gv.inishie22.xC8);
+    gp_2 = GET_GROUND(gp->u.inishie22.xC8);
 
-    gp_2->gv.inishie2.xC4_flags.b3 = 1; // Set bit 4 (0x10)
+    gp_2->u.inishie2.xC4_flags.b3 = 1; // Set bit 4 (0x10)
 
-    rand_max = grI2_804D6A00->unkA;
+    rand_max = yakumono_param->unkA;
     rand_val = test_random(rand_max);
 
-    gp_2->gv.inishie2.xCA = (s16) (grI2_804D6A00->unk8 + rand_val);
+    gp_2->u.inishie2.xCA = (s16) (yakumono_param->unk8 + rand_val);
 
     Ground_801C4A08(gobj);
 }
@@ -522,16 +522,16 @@ void grInishie2_801FD4F0(Ground_GObj* gobj)
     spawn_side = HSD_Randi(2);
     mpJointListAdd(0xE);
     if (spawn_side == 0) {
-        vec.x = grI2_804D6A00->unk14[spawn_side].x +
+        vec.x = yakumono_param->unk14[spawn_side].x +
                 Stage_GetBlastZoneRightOffset();
     } else {
-        vec.x = grI2_804D6A00->unk14[spawn_side].x +
+        vec.x = yakumono_param->unk14[spawn_side].x +
                 Stage_GetBlastZoneLeftOffset();
     }
-    vec.y = grI2_804D6A00->unk14[spawn_side].y;
-    vec.z = grI2_804D6A00->unk14[spawn_side].z;
+    vec.y = yakumono_param->unk14[spawn_side].y;
+    vec.z = yakumono_param->unk14[spawn_side].z;
     HSD_JObjSetTranslate(temp_r29, &vec);
-    gp->gv.inishie22.xC4 = it_802ECD3C(gobj, &vec, sign_inline(spawn_side));
+    gp->u.inishie22.xC4 = it_802ECD3C(gobj, &vec, sign_inline(spawn_side));
     Ground_801C2ED0(temp_r30, gp->map_id);
 }
 
@@ -549,9 +549,9 @@ void grInishie2_801FD654(Ground_GObj* gobj)
 
     jobj = GET_JOBJ(gobj);
     gp = GET_GROUND(gobj);
-    if (gp->gv.inishie22.xC4 != 0) {
-        it_802ECD1C(gp->gv.inishie22.xC4, &vec);
-        vec.y += grI2_804D6A00->unk2C;
+    if (gp->u.inishie22.xC4 != 0) {
+        it_802ECD1C(gp->u.inishie22.xC4, &vec);
+        vec.y += yakumono_param->unk2C;
         HSD_JObjSetTranslate(jobj, &vec);
     }
     Ground_801C2FE0(gobj);
@@ -563,10 +563,10 @@ void grInishie2_801FD744(HSD_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
 
-    gp->gv.inishie2.xC4_flags.b4 = 1;
+    gp->u.inishie2.xC4_flags.b4 = 1;
 
-    gp->gv.inishie2.xCC =
-        grI2_804D6A00->unkC + test_random((int) grI2_804D6A00->unkE);
+    gp->u.inishie2.xCC =
+        yakumono_param->unkC + test_random((int) yakumono_param->unkE);
 }
 
 void grInishie2_801FD7A8(HSD_GObj* gobj)
@@ -577,16 +577,16 @@ void grInishie2_801FD7A8(HSD_GObj* gobj)
 
     gp = GET_GROUND(gobj);
 
-    if (gp->gv.inishie2.xC4_flags.b4) {
-        counter = gp->gv.inishie2.xCC;
-        gp->gv.inishie2.xCC = counter - 1;
+    if (gp->u.inishie2.xC4_flags.b4) {
+        counter = gp->u.inishie2.xCC;
+        gp->u.inishie2.xCC = counter - 1;
 
         if (counter < 0) {
             gobj_2 = grInishie2_801FCCDC(1);
-            gp->gv.inishie2.xC4_flags.b4 = 0;
+            gp->u.inishie2.xC4_flags.b4 = 0;
 
             if (gobj_2 != NULL) {
-                GET_GROUND(gobj_2)->gv.inishie22.xC4 = gobj;
+                GET_GROUND(gobj_2)->u.inishie22.xC4 = gobj;
             }
         }
     }
@@ -605,30 +605,30 @@ void grInishie2_801FD824(HSD_GObj* gobj)
     mpJointListAdd(0);
 
     if (spawn_side == 0) {
-        spawn_pos.x = grI2_804D6A00->unk30[spawn_side].x +
+        spawn_pos.x = yakumono_param->unk30[spawn_side].x +
                       Stage_GetBlastZoneRightOffset();
     } else {
-        spawn_pos.x = grI2_804D6A00->unk30[spawn_side].x +
+        spawn_pos.x = yakumono_param->unk30[spawn_side].x +
                       Stage_GetBlastZoneLeftOffset();
     }
 
-    spawn_pos.y = grI2_804D6A00->unk30[spawn_side].y;
-    spawn_pos.z = grI2_804D6A00->unk30[spawn_side].z;
+    spawn_pos.y = yakumono_param->unk30[spawn_side].y;
+    spawn_pos.z = yakumono_param->unk30[spawn_side].z;
 
     if (spawn_side == 0) {
-        gp->gv.inishie23.xC8_flags.b3 = 1;
+        gp->u.inishie23.xC8_flags.b3 = 1;
     } else {
-        gp->gv.inishie23.xC8_flags.b3 = 0;
+        gp->u.inishie23.xC8_flags.b3 = 0;
     }
 
-    grAnime_801C8138(gobj, gp->map_id, gp->gv.inishie23.xC8_flags.b3);
+    grAnime_801C8138(gobj, gp->map_id, gp->u.inishie23.xC8_flags.b3);
 
-    gp->gv.inishie23.xC8_flags.b1 = 1;
-    gp->gv.inishie23.xC8_flags.b0 = 0;
-    gp->gv.inishie23.xC8_flags.b2 = 0;
+    gp->u.inishie23.xC8_flags.b1 = 1;
+    gp->u.inishie23.xC8_flags.b0 = 0;
+    gp->u.inishie23.xC8_flags.b2 = 0;
 
-    gp->gv.inishie2.xCA = 0;
-    gp->gv.inishie2.xD8 = spawn_pos;
+    gp->u.inishie2.xCA = 0;
+    gp->u.inishie2.xD8 = spawn_pos;
 
     HSD_JObjSetTranslate(Ground_801C3FA4(gobj, 0), &spawn_pos);
 }
@@ -648,9 +648,9 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
     gp = gobj->user_data;
 
     if (grAnime_801C83D0(gobj, 1, 1) != 0) {
-        if (gp->gv.inishie23.xC8_flags.b1) {
-            f32 temp_f = GET_GROUND(gobj)->gv.inishie23.xD8.x +
-                         GET_GROUND(gobj)->gv.inishie23.xCC.x;
+        if (gp->u.inishie23.xC8_flags.b1) {
+            f32 temp_f = GET_GROUND(gobj)->u.inishie23.xD8.x +
+                         GET_GROUND(gobj)->u.inishie23.xCC.x;
 
             if (temp_f > Stage_GetCamBoundsRightOffset()) {
                 var_r0 = 2;
@@ -661,16 +661,16 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
             }
 
             if (var_r0 == 0) {
-                gp->gv.inishie23.xC8_flags.b1 = 0;
+                gp->u.inishie23.xC8_flags.b1 = 0;
             }
 
         } else {
-            if (!gp->gv.inishie23.xC8_flags.b2) {
-                if ((s16) gp->gv.inishie23.xCA < 2) {
-                    gp->gv.inishie23.xC8_flags.b3 ^= 1;
+            if (!gp->u.inishie23.xC8_flags.b2) {
+                if ((s16) gp->u.inishie23.xCA < 2) {
+                    gp->u.inishie23.xC8_flags.b3 ^= 1;
                 } else {
-                    f32 temp_f = GET_GROUND(gobj)->gv.inishie23.xD8.x +
-                                 GET_GROUND(gobj)->gv.inishie23.xCC.x;
+                    f32 temp_f = GET_GROUND(gobj)->u.inishie23.xD8.x +
+                                 GET_GROUND(gobj)->u.inishie23.xCC.x;
 
                     if (temp_f > Stage_GetCamBoundsRightOffset()) {
                         var_r3 = 2;
@@ -681,33 +681,34 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
                     }
 
                     if (var_r3 != 0) {
-                        gp->gv.inishie23.xC8_flags.b2 = 1;
-                        gp->gv.inishie23.xC8_flags.b3 = var_r3;
-                        gp->gv.inishie23.xC8_flags.b0 = 1;
+                        gp->u.inishie23.xC8_flags.b2 = 1;
+                        gp->u.inishie23.xC8_flags.b3 = var_r3;
+                        gp->u.inishie23.xC8_flags.b0 = 1;
                     } else {
-                        temp_r0 = grI2_804D6A00->unk48 + grI2_804D6A00->unk4A;
+                        temp_r0 =
+                            yakumono_param->unk48 + yakumono_param->unk4A;
 
                         var_r3_2 = test_random(temp_r0);
 
-                        if (var_r3_2 >= (s16) grI2_804D6A00->unk48) {
-                            gp->gv.inishie23.xC8_flags.b3 ^= 1;
+                        if (var_r3_2 >= (s16) yakumono_param->unk48) {
+                            gp->u.inishie23.xC8_flags.b3 ^= 1;
                         }
                     }
                 }
             }
-            gp->gv.inishie23.xCA += 1;
+            gp->u.inishie23.xCA += 1;
         }
 
-        grAnime_801C8138(gobj, gp->map_id, gp->gv.inishie23.xC8_flags.b3);
+        grAnime_801C8138(gobj, gp->map_id, gp->u.inishie23.xC8_flags.b3);
 
         gp = GET_GROUND(gobj);
         jobj = Ground_801C3FA4(gobj, 0);
-        temp_vec = &gp->gv.inishie23.xD8;
+        temp_vec = &gp->u.inishie23.xD8;
         HSD_JObjSetTranslate(jobj, temp_vec);
-        HSD_JObjAddTranslationX(jobj, gp->gv.inishie23.xCC.x);
-        HSD_JObjAddTranslationY(jobj, gp->gv.inishie23.xCC.y);
-        HSD_JObjAddTranslationZ(jobj, gp->gv.inishie23.xCC.z);
-        temp_vec = &gp->gv.inishie23.xD8;
+        HSD_JObjAddTranslationX(jobj, gp->u.inishie23.xCC.x);
+        HSD_JObjAddTranslationY(jobj, gp->u.inishie23.xCC.y);
+        HSD_JObjAddTranslationZ(jobj, gp->u.inishie23.xCC.z);
+        temp_vec = &gp->u.inishie23.xD8;
         HSD_JObjGetTranslation(jobj, temp_vec);
 
         return;
@@ -715,7 +716,7 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
 
     gp = GET_GROUND(gobj);
     jobj = Ground_801C3FA4(gobj, 1);
-    temp_vec = &gp->gv.inishie23.xCC;
+    temp_vec = &gp->u.inishie23.xCC;
     HSD_JObjGetTranslation(jobj, temp_vec);
 }
 
@@ -750,13 +751,13 @@ static inline void grInishie2_801FDED8_inline(HSD_GObj* gobj)
 
     lb_8000B1CC(Ground_801C3FA4(gobj, 0), NULL, &pos);
 
-    if ((checkBlastZone(&pos) != 0) && gp->gv.inishie23.xC8_flags.b0) {
-        HSD_GObj* gobj_2 = gp->gv.inishie22.xC4;
+    if ((checkBlastZone(&pos) != 0) && gp->u.inishie23.xC8_flags.b0) {
+        HSD_GObj* gobj_2 = gp->u.inishie22.xC4;
         Ground* gp_2 = GET_GROUND(gobj_2);
-        gp_2->gv.inishie2.xC4_flags.b4 = 1;
-        gp_2->gv.inishie2.xCC =
-            (s16) (grI2_804D6A00->unkC +
-                   grInishie2_801FDFB4(grI2_804D6A00->unkE));
+        gp_2->u.inishie2.xC4_flags.b4 = 1;
+        gp_2->u.inishie2.xCC =
+            (s16) (yakumono_param->unkC +
+                   grInishie2_801FDFB4(yakumono_param->unkE));
         Ground_801C4A08(gobj);
     }
 }

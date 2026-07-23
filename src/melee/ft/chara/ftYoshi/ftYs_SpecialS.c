@@ -37,8 +37,8 @@
 
 #include "lb/lb_00B0.h"
 #include "mp/mplib.h"
-#include "MSL/trigf.h"
 
+#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 
@@ -123,7 +123,7 @@ static inline void fn_8012EC7C_inline(Fighter_GObj* gobj)
     if ((motion != 0x16B) && ((motion >= 0x16B) || (motion != 0x167))) {
         ftParts_80074B0C(gobj, 0, 0);
     }
-    HSD_JObjSetScale(jobj, &fp->fv.ys.x222C);
+    HSD_JObjSetScale(jobj, &fp->u.ys.x222C);
     ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
     ftPartSetRotZ(fp, 2, 0.0F);
     if (fp->mv.ys.specials.x24 != 0.0F) {
@@ -139,15 +139,15 @@ static inline void ftYs_SpecialS_UpdateScale(Fighter_GObj* gobj, Vec3* scale)
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     if (fp->mv.ys.specials.x8 >= 0 && fp->mv.ys.specials.x8 < 4) {
-        scale->x = fp->fv.ys.x222C.x;
+        scale->x = fp->u.ys.x222C.x;
         scale->y =
-            fp->fv.ys.x222C.y * ftYs_Unk3_803CED84[fp->mv.ys.specials.x8];
+            fp->u.ys.x222C.y * ftYs_Unk3_803CED84[fp->mv.ys.specials.x8];
         scale->z =
-            fp->fv.ys.x222C.z * ftYs_Unk3_803CED94[fp->mv.ys.specials.x8];
+            fp->u.ys.x222C.z * ftYs_Unk3_803CED94[fp->mv.ys.specials.x8];
         HSD_JObjSetScale(jobj, scale);
         fp->mv.ys.specials.x8++;
     } else {
-        HSD_JObjSetScale(jobj, &fp->fv.ys.x222C);
+        HSD_JObjSetScale(jobj, &fp->u.ys.x222C);
     }
 }
 
@@ -160,15 +160,13 @@ static inline void ftYs_SpecialS_UpdateScale2(Fighter_GObj* gobj)
     fp = gobj->user_data;
     jobj = gobj->hsd_obj;
     if (fp->mv.ys.specials.x8 >= 0 && fp->mv.ys.specials.x8 < 4) {
-        scale.x = fp->fv.ys.x222C.x;
-        scale.y =
-            fp->fv.ys.x222C.y * ftYs_Unk3_803CED84[fp->mv.ys.specials.x8];
-        scale.z =
-            fp->fv.ys.x222C.z * ftYs_Unk3_803CED94[fp->mv.ys.specials.x8];
+        scale.x = fp->u.ys.x222C.x;
+        scale.y = fp->u.ys.x222C.y * ftYs_Unk3_803CED84[fp->mv.ys.specials.x8];
+        scale.z = fp->u.ys.x222C.z * ftYs_Unk3_803CED94[fp->mv.ys.specials.x8];
         HSD_JObjSetScale(jobj, &scale);
         fp->mv.ys.specials.x8++;
     } else {
-        HSD_JObjSetScale(jobj, &fp->fv.ys.x222C);
+        HSD_JObjSetScale(jobj, &fp->u.ys.x222C);
     }
 }
 
@@ -204,7 +202,7 @@ void fn_8012EC7C(Fighter_GObj* gobj)
     if ((motion != 0x16B) && ((motion >= 0x16B) || (motion != 0x167))) {
         ftParts_80074B0C(gobj, 0, 0);
     }
-    HSD_JObjSetScale(jobj, &fp->fv.ys.x222C);
+    HSD_JObjSetScale(jobj, &fp->u.ys.x222C);
     ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
     ftPartSetRotZ(fp, 2, 0.0F);
     if (fp->mv.ys.specials.x24 != 0.0F) {
@@ -324,7 +322,7 @@ void ftYs_SpecialS_8012F35C(Fighter_GObj* gobj)
     ftYoshiAttributes* attributes = fp->dat_attrs;
     PAD_STACK(16);
 
-    HSD_JObjGetScale(jobj, &fp->fv.ys.x222C);
+    HSD_JObjGetScale(jobj, &fp->u.ys.x222C);
 
     if (fp->ground_or_air == GA_Ground) {
         var_f0 = attributes->x54;

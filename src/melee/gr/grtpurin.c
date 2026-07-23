@@ -1,18 +1,16 @@
 #include "grtpurin.h"
 
-#include "gr/grdisplay.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/types.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
+
 #include "lb/lb_00B0.h"
 #include "lb/lbspdisplay.h"
 #include "lb/types.h"
 #include "mp/mplib.h"
 
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 
@@ -44,7 +42,7 @@ typedef struct grTPrSpecialParams {
     DynamicsDesc* x0;
 } grTPrSpecialParams;
 
-grTPrSpecialParams* grTPr_804D6B10;
+static grTPrSpecialParams* yakumono_param;
 
 void grTPurin_80223160(bool unused)
 {
@@ -53,7 +51,7 @@ void grTPurin_80223160(bool unused)
 
 void grTPurin_80223164(void)
 {
-    grTPr_804D6B10 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
 
@@ -189,10 +187,10 @@ DynamicsDesc* grTPurin_802234F8(enum_t arg0)
         if (i != -1) {
             mpLineGetKind(arg0);
             if (i == (0 << 0)) {
-                return grTPr_804D6B10->x0;
+                return yakumono_param->x0;
             }
             if (i == (1 << 0)) {
-                return grTPr_804D6B10->x0;
+                return yakumono_param->x0;
             }
         }
     }

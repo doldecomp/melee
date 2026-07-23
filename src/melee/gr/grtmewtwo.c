@@ -56,7 +56,7 @@ typedef struct grTMewtwo_UnkStruct {
 /* 2225C8 */ static bool grTMewtwo_802225C8(Vec3* arg0, int arg1,
                                             HSD_JObj* arg2);
 /* 3E8FC0 */ static void grTMewtwo_803E8FC0(Ground_GObj* gobj);
-/* 4D6B08 */ static grTMewtwo_UnkStruct* grTMewtwo_804D6B08;
+/* 4D6B08 */ static grTMewtwo_UnkStruct* yakumono_param;
 
 static StageCallbacks grTMewtwo_803E8F70[4] = {
     {
@@ -108,7 +108,7 @@ void grTMewtwo_802221D8(bool arg0) {}
 
 void grTMewtwo_802221DC(void)
 {
-    grTMewtwo_804D6B08 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grTMewtwo_80222284(0);
@@ -202,13 +202,13 @@ static inline DynamicsDesc* inlineA0(int arg0)
 {
     int temp = mpLineGetKind(arg0);
     if (temp == CollLine_Floor) {
-        return grTMewtwo_804D6B08->x0;
+        return yakumono_param->x0;
     } else if (temp == CollLine_Ceiling) {
-        return grTMewtwo_804D6B08->x4;
+        return yakumono_param->x4;
     } else if (temp == CollLine_RightWall) {
-        return grTMewtwo_804D6B08->x8;
+        return yakumono_param->x8;
     } else if (temp == CollLine_LeftWall) {
-        return grTMewtwo_804D6B08->xC;
+        return yakumono_param->xC;
     } else {
         return NULL;
     }
@@ -218,13 +218,13 @@ static inline DynamicsDesc* inlineA1(int arg0)
 {
     int temp = mpLineGetKind(arg0);
     if (temp == CollLine_Floor) {
-        return grTMewtwo_804D6B08->x10;
+        return yakumono_param->x10;
     } else if (temp == CollLine_Ceiling) {
-        return grTMewtwo_804D6B08->x14;
+        return yakumono_param->x14;
     } else if (temp == CollLine_RightWall) {
-        return grTMewtwo_804D6B08->x18;
+        return yakumono_param->x18;
     } else if (temp == CollLine_LeftWall) {
-        return grTMewtwo_804D6B08->x1C;
+        return yakumono_param->x1C;
     } else {
         return NULL;
     }

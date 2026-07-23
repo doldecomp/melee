@@ -13,19 +13,23 @@
 ###
 
 import argparse
+import json
 import sys
 from collections.abc import Iterator
 from pathlib import Path
 from typing import cast
 
 from tools.project import (
+    BuildConfigUnit,
     Library,
     Object,
     ProgressCategory,
     ProjectConfig,
     calculate_progress,
+    file_is_c_cpp,
     generate_build,
     is_windows,
+    load_build_config,
 )
 
 # Game versions
@@ -179,6 +183,12 @@ parser.add_argument(
     action="store_false",
     help="disable progress calculation",
 )
+parser.add_argument(
+    "--no-compile-commands",
+    dest="compile_commands",
+    action="store_false",
+    help="do not generate compile_commands.json",
+)
 args = parser.parse_args()
 
 if any({args.debug, args.bugfix, args.asm, args.testing}) or args.sym == "on":
@@ -204,6 +214,9 @@ if not is_windows():
     config.wrapper = args.wrapper
 if not args.asm:
     config.asm_dir = None
+
+# Handled internally
+config.generate_compile_commands = False
 
 # Tool versions
 config.binutils_tag = "2.42-2"
@@ -499,7 +512,8 @@ config.libs = [
             Object(NonMatching, "melee/lb/lbmthp.c"),
             Object(Matching, "melee/lb/lb_01F8.c"),
             Object(NonMatching, "melee/lb/lbbgflash.c"),
-            Object(NonMatching, "melee/lb/lbrefract.c"),
+            Object(Testing, "melee/lb/lbrefract.c"),
+            Object(Matching, "melee/lb/lbtrigf.c"),
             Object(NonMatching, "melee/lb/lbaudio_ax.c"),
         ],
     ),
@@ -1109,7 +1123,7 @@ config.libs = [
             Object(Matching, "melee/gr/grshrine.c"),
             Object(Matching, "melee/gr/gryorster.c"),
             Object(Matching, "melee/gr/grgarden.c"),
-            Object(NonMatching, "melee/gr/grvenom.c"),
+            Object(Matching, "melee/gr/grvenom.c"),
             Object(Matching, "melee/gr/grtest.c"),
             Object(Matching, "melee/gr/grkinokoroute.c"),
             Object(NonMatching, "melee/gr/grshrineroute.c"),
@@ -1123,7 +1137,7 @@ config.libs = [
             Object(NonMatching, "melee/gr/groldpupupu.c"),
             Object(NonMatching, "melee/gr/grpura.c"),
             Object(NonMatching, "melee/gr/grgreens.c"),
-            Object(NonMatching, "melee/gr/grflatzone.c"),
+            Object(Matching, "melee/gr/grflatzone.c"),
             Object(Matching, "melee/gr/grpushon.c"),
             Object(Matching, "melee/gr/grfigureget.c"),
             Object(Matching, "melee/gr/grbattle.c"),
@@ -1379,7 +1393,7 @@ config.libs = [
             # Stage-related items
             Object(Matching, "melee/it/items/itoctarock.c"),
             Object(Matching, "melee/it/items/it_2E5A.c"),
-            Object(Matching, "melee/it/items/it_2E6A.c"),
+            Object(Matching, "melee/it/items/ityaku.c"),
             Object(NonMatching, "melee/it/items/itarwinglaser.c"),
             Object(Matching, "melee/it/items/itoctarockstone.c"),
             Object(Matching, "melee/it/items/itleadead.c"),
@@ -1771,9 +1785,18 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/hsd_3933.c"),
             Object(Matching, "sysdolphin/baselib/hsd_393C.c"),
             Object(NonMatching, "sysdolphin/baselib/debugconsole_main.c"),
-            Object(NonMatching, "sysdolphin/baselib/particle.c", extra_cflags=["-Cpp_exceptions on"]),
-            Object(NonMatching, "sysdolphin/baselib/generator.c", extra_cflags=["-Cpp_exceptions on"]),
-            Object(NonMatching,
+            Object(
+                NonMatching,
+                "sysdolphin/baselib/particle.c",
+                extra_cflags=["-Cpp_exceptions on"],
+            ),
+            Object(
+                NonMatching,
+                "sysdolphin/baselib/generator.c",
+                extra_cflags=["-Cpp_exceptions on"],
+            ),
+            Object(
+                NonMatching,
                 "sysdolphin/baselib/psdisp.c",
                 extra_cflags=["-Cpp_exceptions on"],
             ),
@@ -1800,8 +1823,16 @@ config.libs = [
                 "sysdolphin/baselib/hsd_3B33.c",
                 extra_cflags=["-Cpp_exceptions on"],
             ),
-            Object(NonMatching, "sysdolphin/baselib/hsd_3B34.c", extra_cflags=["-Cpp_exceptions on"]),
-            Object(NonMatching, "sysdolphin/baselib/hsd_3B5C.c", extra_cflags=["-Cpp_exceptions on"]),
+            Object(
+                NonMatching,
+                "sysdolphin/baselib/hsd_3B34.c",
+                extra_cflags=["-Cpp_exceptions on"],
+            ),
+            Object(
+                NonMatching,
+                "sysdolphin/baselib/hsd_3B5C.c",
+                extra_cflags=["-Cpp_exceptions on"],
+            ),
         ],
     ),
 ]
@@ -1841,9 +1872,73 @@ config.progress_report_args = [
     f"--config functionRelocDiffs={args.reloc_diffs}",
 ]
 
+
+def generate_compile_commands():
+    config.validate()
+    objects = config.objects()
+    build_config = load_build_config(config, config.out_path() / "config.json")
+
+    compile_flags = [
+        *Path("compile_flags.txt").read_text().splitlines(),
+        *config.extra_clang_flags,
+    ]
+
+    clangd_config = []
+
+    def add_unit(build_obj: BuildConfigUnit) -> None:
+        obj = objects.get(build_obj["name"])
+        if obj is None:
+            return
+
+        # Skip unresolved objects
+        if (
+            obj.src_path is None
+            or obj.src_obj_path is None
+            or not file_is_c_cpp(obj.src_path)
+        ):
+            return
+
+        unit_config = {
+            "directory": Path.cwd(),
+            "file": obj.src_path,
+            "output": obj.src_obj_path,
+            "arguments": [
+                "clang",
+                *[*compile_flags, *obj.options["extra_clang_flags"]],
+                "-c",
+                obj.src_path,
+                "-o",
+                obj.src_obj_path,
+            ],
+        }
+        clangd_config.append(unit_config)
+
+    if build_config is not None:
+        # Add DOL units
+        for unit in build_config["units"]:
+            add_unit(unit)
+
+        # Add REL units
+        for module in build_config["modules"]:
+            for unit in module["units"]:
+                add_unit(unit)
+
+    # Write compile_commands.json
+    with Path("compile_commands.json").open("w", encoding="utf-8") as w:
+
+        def default_format(o):
+            if isinstance(o, Path):
+                return o.resolve().as_posix()
+            return str(o)
+
+        json.dump(clangd_config, w, indent=2, default=default_format)
+
+
 if args.mode == "configure":
     # Write build.ninja and objdiff.json
     generate_build(config)
+    if args.compile_commands:
+        generate_compile_commands()
 elif args.mode == "progress":
     # Print progress information
     calculate_progress(config)

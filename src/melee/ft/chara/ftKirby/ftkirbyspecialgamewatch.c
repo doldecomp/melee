@@ -76,8 +76,7 @@ void fn_8010CE5C(Fighter_GObj* gobj)
                                 fp = gobj->user_data;
                                 pSausage = sausageCount;
                                 for (i = 5, i -= 5; i < 5; i++) {
-                                    if (i != fp->fv.kb.xD4 &&
-                                        i != fp->fv.kb.xD8)
+                                    if (i != fp->u.kb.xD4 && i != fp->u.kb.xD8)
                                     {
                                         *pSausage++ = i;
                                         var_r28++;
@@ -87,9 +86,9 @@ void fn_8010CE5C(Fighter_GObj* gobj)
                                     int temp_r5 =
                                         sausageCount[HSD_Randi(var_r28)];
                                     int var_r6;
-                                    fp->fv.kb.xD8 = fp->fv.kb.xD4;
+                                    fp->u.kb.xD8 = fp->u.kb.xD4;
                                     var_r6 = temp_r5;
-                                    fp->fv.kb.xD4 = temp_r5;
+                                    fp->u.kb.xD4 = temp_r5;
                                     it_802C837C(gobj, &vec0, 0x9B, var_r6,
                                                 fp2->facing_dir);
                                 }
@@ -109,9 +108,9 @@ void fn_8010CFB0(Fighter_GObj* gobj)
     Vec3 pos;
     lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_LThumbNb)].joint,
                 NULL, &pos);
-    fp->fv.kb.xDC = it_802C74D8(
+    fp->u.kb.xDC = it_802C74D8(
         gobj, &pos, ftParts_GetBoneIndex(fp, FtPart_LThumbNb), fp->facing_dir);
-    if (fp->fv.kb.xDC != NULL) {
+    if (fp->u.kb.xDC != NULL) {
         fp->death2_cb = ftKb_Init_800EE74C;
         fp->take_dmg_cb = ftKb_Init_800EE7B8;
     }
@@ -124,14 +123,14 @@ void ftKb_SpecialNGw_8010D074(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_SpecialNGw_8010D130(gobj);
-    fp->fv.kb.xDC = NULL;
+    fp->u.kb.xDC = NULL;
 }
 
 void ftKb_SpecialNGw_8010D0A8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.kb.xDC != NULL) {
-        it_802C760C(fp->fv.kb.xDC);
+    if (fp->u.kb.xDC != NULL) {
+        it_802C760C(fp->u.kb.xDC);
         ftKb_SpecialNGw_8010D074(gobj);
     }
 }
@@ -139,16 +138,16 @@ void ftKb_SpecialNGw_8010D0A8(Fighter_GObj* gobj)
 void fn_8010D100(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.kb.xDC != NULL) {
-        it_802C7658(fp->fv.kb.xDC);
+    if (fp->u.kb.xDC != NULL) {
+        it_802C7658(fp->u.kb.xDC);
     }
 }
 
 void ftKb_SpecialNGw_8010D130(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.kb.xDC != NULL) {
-        it_802C7678(fp->fv.kb.xDC);
+    if (fp->u.kb.xDC != NULL) {
+        it_802C7678(fp->u.kb.xDC);
     }
 }
 

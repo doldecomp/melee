@@ -386,12 +386,12 @@ void ftPp_Init_OnDeath(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0U, 0);
     ftParts_80074A4C(gobj, 1U, 0);
-    fp->fv.nn.x2234 = 0;
-    fp->fv.nn.x222C = 0;
-    fp->fv.nn.x2230_b0 = false;
-    fp->fv.nn.x2238 = 0;
-    fp->fv.nn.x224C = 0;
-    fp->fv.nn.x2250 = 0.0f;
+    fp->u.nn.x2234 = 0;
+    fp->u.nn.x222C = 0;
+    fp->u.nn.x2230_b0 = false;
+    fp->u.nn.x2238 = 0;
+    fp->u.nn.x224C = 0;
+    fp->u.nn.x2250 = 0.0f;
 }
 
 static void ftPp_Init_8011F190(HSD_GObj* gobj);
@@ -423,11 +423,11 @@ void ftPp_Init_8011F16C(HSD_GObj* gobj, Item_GObj* item_gobj)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
 
-    if (item_gobj != fp->fv.nn.x222C) {
+    if (item_gobj != fp->u.nn.x222C) {
         return;
     }
 
-    fp->fv.nn.x222C = 0;
+    fp->u.nn.x222C = 0;
     fp->death2_cb = NULL;
     fp->take_dmg_cb = NULL;
 }
@@ -436,10 +436,10 @@ static void ftPp_Init_8011F190(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
 
-    if (fp->fv.nn.x222C == 0) {
+    if (fp->u.nn.x222C == 0) {
         return;
     }
 
-    it_802C17DC(fp->fv.nn.x222C);
-    ftPp_Init_8011F16C(gobj, fp->fv.nn.x222C);
+    it_802C17DC(fp->u.nn.x222C);
+    ftPp_Init_8011F16C(gobj, fp->u.nn.x222C);
 }

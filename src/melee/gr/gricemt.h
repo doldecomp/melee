@@ -15,63 +15,6 @@
 
 #include <dolphin/mtx.h>
 
-struct IceMountainParams {
-    float x0;
-    int x4;
-    float x8;
-    float xC;
-    float x10;
-    float x14;
-    float x18;
-    float x1C;
-    float x20;
-    float x24;
-    float x28;
-    float x2C;
-    float x30;
-    float x34;
-    u16 x38;
-    u16 x3A;
-    float x3C;
-    float x40;
-    float x44;
-    float x48;
-    float x4C;
-    float x50;
-    float x54;
-    float x58;
-    float x5C;
-    float x60;
-    float x64;
-    float x68;
-    float x6C;
-    float x70;
-    float x74;
-    float x78;
-    float x7C;
-    float x80;
-    float x84;
-    float x88;
-    float x8C;
-    float x90;
-    float x94;
-    float x98;
-    float x9C;
-    float xA0;
-    float xA4;
-    float xA8;
-    s16* xAC;
-    s16* xB0;
-    s16* xB4;
-    s16 xB8;
-    s16 pad;
-    grZakoGenerator_SpawnDesc xBC;
-    float xC0;
-    float xC4;
-    float xC8;
-    float xCC;
-};
-
 extern f32 grIm_804DB570;
 
 /* 1F6868 */ void grIceMt_801F6868(bool id);
@@ -130,12 +73,6 @@ extern f32 grIm_804DB570;
 /* 1F9150 */ s32 fn_801F9150(HSD_GObj*, s32*);
 /* 1F91A8 */ int fn_801F91A8(Ground_GObj*);
 /* 1F929C */ void grIceMt_801F929C(HSD_GObj* arg0, void* arg1);
-/* 1F9338 */ void fn_801F9338(Ground*, int, CollData*, s32, mpLib_GroundEnum,
-                              float);
-/* 1F9448 */ void fn_801F9448(Ground*, int, CollData*, s32, mpLib_GroundEnum,
-                              float);
-/* 1F9558 */ void fn_801F9558(Ground*, int, CollData*, s32, mpLib_GroundEnum,
-                              float);
 /* 1F9668 */ void grIceMt_801F9668(float);
 /* 1F96E0 */ float grIceMt_801F96E0(struct grIceMt_GroundVars*, float);
 /* 1F98A8 */ void grIceMt_801F98A8(HSD_GObj* param1);
@@ -149,8 +86,6 @@ extern f32 grIm_804DB570;
 /* 1FA500 */ int grIceMt_801FA500(HSD_GObj*, HSD_JObj*);
 /* 1FA6D8 */ void grIceMt_801FA6D8(HSD_GObj*);
 /* 1FA728 */ void grIceMt_801FA728(Vec3*);
-/* 1FA7F0 */ void grIceMt_801FA7F0(Ground*, s32, CollData*, s32,
-                                   mpLib_GroundEnum, float);
 /* 1FA854 */ void grIceMt_801FA854(void);
 /* 1FA8F8 */ DynamicsDesc* grIceMt_801FA8F8(enum_t id);
 /* 1FA900 */ bool grIceMt_801FA900(Vec3* a, int id, HSD_JObj* jobj);

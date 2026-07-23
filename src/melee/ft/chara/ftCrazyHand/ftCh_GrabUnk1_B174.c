@@ -45,7 +45,7 @@ void ftCh_TagFail_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        fp->fv.mh.x2258 = ftMh_MS_Wait1_0;
+        fp->u.mh.x2258 = ftMh_MS_Wait1_0;
         ftCh_GrabUnk1_8015BC88(gobj);
     }
 }

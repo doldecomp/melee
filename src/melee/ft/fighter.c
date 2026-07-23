@@ -1,4 +1,4 @@
-#include "ft/fighter.h"
+#include "fighter.h"
 
 #include "ft_07C1.h"
 #include "ft_07C6.h"
@@ -6,39 +6,36 @@
 #include "ft_081B.h"
 #include "ft_0852.h"
 #include "ft_0877.h"
+#include "ft_0881.h"
+#include "ft_0892.h"
 #include "ft_0899.h"
+#include "ft_0C31.h"
+#include "ft_0C88.h"
+#include "ft_0C8C.h"
 #include "ft_0D31.h"
+#include "ft_0DF0.h"
 #include "ftaction.h"
+#include "ftafterimage.h"
 #include "ftanim.h"
 #include "ftcamera.h"
+#include "ftchangeparam.h"
+#include "ftCo_800C7CA0.h"
+#include "ftcolanim.h"
 #include "ftcoll.h"
 #include "ftcommon.h"
+#include "ftdata.h"
+#include "ftdevice.h"
 #include "ftdrawcommon.h"
 #include "ftdynamics.h"
 #include "ftlib.h"
+#include "ftmetal.h"
 #include "ftparts.h"
 #include "placeholder.h"
-
-#include <platform.h>
+#include "types.h"
 
 #include "cm/camera.h"
 #include "db/db.h"
 #include "ef/efasync.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0892.h"
-#include "ft/ft_0C31.h"
-#include "ft/ft_0C88.h"
-#include "ft/ft_0C8C.h"
-#include "ft/ft_0DF0.h"
-#include "ft/ftafterimage.h"
-#include "ft/ftchangeparam.h"
-#include "ft/ftCo_800C7CA0.h"
-#include "ft/ftcolanim.h"
-#include "ft/ftdata.h"
-#include "ft/ftdevice.h"
-#include "ft/ftmaterial.h"
-#include "ft/ftmetal.h"
-#include "ft/types.h"
 
 #include "ftCommon/forward.h"
 
@@ -60,12 +57,12 @@
 #include "ftCommon/ftCo_Rebound.h"
 #include "ftCommon/ftCo_ShieldBreakFly.h"
 #include "ftCommon/ftCo_SpecialS.h"
-#include "ftCrazyHand/ftCh_Init.h"
 #include "ftCrazyHand/ftCh_Wait1_0.h"
 #include "ftKirby/ftkirby.h"
 #include "ftMasterHand/ftMh_Wait1_0.h"
 #include "ftPeach/types.h"
 #include "gm/gm_unsplit.h"
+#include "gr/ground.h"
 #include "gr/stage.h"
 #include "if/ifmagnify.h"
 #include "it/it_26B1.h"
@@ -86,9 +83,10 @@
 #include "sfx/crowdsfx.h"
 
 #include <common_structs.h>
+#include <math_ppc.h>
+#include <trigf.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/controller.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
@@ -101,15 +99,11 @@
 #include <baselib/mtx.h>
 #include <baselib/random.h>
 #include <MSL/math.h>
-#include <MSL/math_ppc.h>
-#include <MSL/trigf.h>
 
 extern struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX];
 
 extern MotionState ftData_MotionStateList[ftCo_MS_Count];
 extern MotionState* ftData_CharacterStateTables[FTKIND_MAX];
-
-extern StageInfo stage_info; // from asm/melee/gm_1A36.s
 
 /// ==== fighter.c variables ====
 /// =============================
@@ -836,7 +830,7 @@ void Fighter_80068E64(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (stage_info.internal_stage_id == 0x1B) {
+    if (stage_info.internal_stage_id == FLATZONE) {
         fp->x34_scale.z = p_ftCommonData->x7E4_scaleZ;
     } else {
         fp->x34_scale.z = 1.0f;
@@ -1128,7 +1122,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
 
     if (fp->ground_or_air == GA_Ground) {
         if (fp->kind == FTKIND_PEACH) {
-            fp->fv.pe.has_float = true;
+            fp->u.pe.has_float = true;
         }
         fp->x2221_b5 = false;
         fp->x2221_b7 = true;

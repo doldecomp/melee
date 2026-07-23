@@ -1,7 +1,7 @@
-/// @file
+/// @file melee/gr/ground.h
 /// @todo
 /// Get stage's "yakumono" ("about"?) param
-/* 1C49F8 */ void* Ground_801C49F8(void);
+/* 1C49F8 */ void* Ground_GetYakumonoParam(void);
 
 /// @param[in] arg0
 /// @param[in] arg1

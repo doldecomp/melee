@@ -159,12 +159,12 @@ void ftMr_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0, 0);
-    fp->fv.mr.x222C_vitaminCurr = 9;
-    fp->fv.mr.x2230_vitaminPrev = 9;
-    fp->fv.mr.x2234_tornadoCharge = false;
-    fp->fv.mr.x2238_isCapeBoost = false;
-    fp->fv.mr.x223C_capeGObj = NULL;
-    fp->fv.mr.x2240 = 0;
+    fp->u.mr.x222C_vitaminCurr = 9;
+    fp->u.mr.x2230_vitaminPrev = 9;
+    fp->u.mr.x2234_tornadoCharge = false;
+    fp->u.mr.x2238_isCapeBoost = false;
+    fp->u.mr.x223C_capeGObj = NULL;
+    fp->u.mr.x2240 = 0;
 }
 
 void ftMr_Init_OnLoadForDrMario(Fighter* fp)

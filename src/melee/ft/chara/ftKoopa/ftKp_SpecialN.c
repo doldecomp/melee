@@ -66,14 +66,14 @@ void ftKp_SpecialLw_80134ACC(Fighter_GObj* gobj)
     v.y += da->x28 * fp->x34_scale.y;
     itKoopaFlame_Spawn(gobj, &v, fp->facing_dir, fp->mv.kp.specials.x4,
                        ftKp_SpecialLw_80134ACC_inline(gobj, dirs),
-                       fp->fv.kp.x222C, fp->fv.kp.x2230, 100);
+                       fp->u.kp.x222C, fp->u.kp.x2230, 100);
     if (fp->mv.kp.specials.x14 == 0) {
         fp->mv.kp.unk1.x4 = Item_8026AE60();
         ft_80089824(gobj);
         ft_800892A0(gobj);
     }
     if ((fp->mv.kp.specials.x14 % 3) == 0) {
-        f32 f = (fp->fv.kp.x2230 - da->x1C) / (da->x18 - da->x1C);
+        f32 f = (fp->u.kp.x2230 - da->x1C) / (da->x18 - da->x1C);
         if (f < 0.3333f) {
             if (fp->kind == FTKIND_KOOPA) {
                 ft_PlaySFX(fp, 0x24A2B, 0x7F, 0x40);
@@ -101,13 +101,13 @@ void ftKp_SpecialLw_80134D78(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* da = fp->dat_attrs;
     if ((fp->motion_id >= 0x15B) || (fp->motion_id < 0x155)) {
-        fp->fv.kp.x222C = fp->fv.kp.x222C + da->x8;
-        if (fp->fv.kp.x222C > da->x10) {
-            fp->fv.kp.x222C = da->x10;
+        fp->u.kp.x222C = fp->u.kp.x222C + da->x8;
+        if (fp->u.kp.x222C > da->x10) {
+            fp->u.kp.x222C = da->x10;
         }
-        fp->fv.kp.x2230 = fp->fv.kp.x2230 + da->xC;
-        if (fp->fv.kp.x2230 > da->x18) {
-            fp->fv.kp.x2230 = da->x18;
+        fp->u.kp.x2230 = fp->u.kp.x2230 + da->xC;
+        if (fp->u.kp.x2230 > da->x18) {
+            fp->u.kp.x2230 = da->x18;
         }
     }
 }
@@ -258,13 +258,13 @@ void ftKp_SpecialN_IASA(Fighter_GObj* gobj)
     if (fp->mv.co.throw.x0 >= 3) {
         fp->mv.co.throw.x0 = 0;
     }
-    fp->fv.kp.x222C -= 1.0f;
-    if (fp->fv.kp.x222C < da->x14) {
-        fp->fv.kp.x222C = da->x14;
+    fp->u.kp.x222C -= 1.0f;
+    if (fp->u.kp.x222C < da->x14) {
+        fp->u.kp.x222C = da->x14;
     }
-    fp->fv.kp.x2230 -= 1.0f;
-    if (fp->fv.kp.x2230 < da->x1C) {
-        fp->fv.kp.x2230 = da->x1C;
+    fp->u.kp.x2230 -= 1.0f;
+    if (fp->u.kp.x2230 < da->x1C) {
+        fp->u.kp.x2230 = da->x1C;
     }
     fp->mv.co.itemthrow.xC += 1;
     if (fp->mv.co.itemthrow.xC > da->x4) {
@@ -300,13 +300,13 @@ void ftKp_SpecialAirN_IASA(Fighter_GObj* gobj)
     if (fp->mv.co.throw.x0 >= 3) {
         fp->mv.co.throw.x0 = 0;
     }
-    fp->fv.kp.x222C -= 1.0f;
-    if (fp->fv.kp.x222C < da->x14) {
-        fp->fv.kp.x222C = da->x14;
+    fp->u.kp.x222C -= 1.0f;
+    if (fp->u.kp.x222C < da->x14) {
+        fp->u.kp.x222C = da->x14;
     }
-    fp->fv.kp.x2230 -= 1.0f;
-    if (fp->fv.kp.x2230 < da->x1C) {
-        fp->fv.kp.x2230 = da->x1C;
+    fp->u.kp.x2230 -= 1.0f;
+    if (fp->u.kp.x2230 < da->x1C) {
+        fp->u.kp.x2230 = da->x1C;
     }
     fp->mv.co.itemthrow.xC += 1;
     if (fp->mv.co.itemthrow.xC > da->x4) {

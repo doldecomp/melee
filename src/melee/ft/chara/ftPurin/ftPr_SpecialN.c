@@ -24,10 +24,10 @@
 #include "ft/types.h"
 #include "ftPurin/ftPr_Init.h"
 #include "ftPurin/types.h"
-#include "MSL/trigf.h"
 
 #include <common_structs.h>
 #include <math.h>
+#include <trigf.h>
 #include <baselib/archive.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
@@ -70,7 +70,7 @@ void ftPr_SpecialS_8013D658(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    HSD_JObjSetScale(jobj, &fp->fv.pr.x2230);
+    HSD_JObjSetScale(jobj, &fp->u.pr.x2230);
     ftPartSetRotY(fp, FtPart_TopN, M_PI_2 * fp->facing_dir);
     if (fp->mv.pr.specialn.facing_dir != 0) {
         fp->facing_dir = fp->mv.pr.specialn.facing_dir;
@@ -239,7 +239,7 @@ void ftPr_SpecialS_8013DC64(HSD_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Fighter* fp = GET_FIGHTER(gobj);
     ftPurinAttributes* da = fp->dat_attrs;
-    HSD_JObjGetScale(jobj, &fp->fv.pr.x2230);
+    HSD_JObjGetScale(jobj, &fp->u.pr.x2230);
     fp->gr_vel = 0;
     fp->mv.pr.specialn.x0 = da->x34;
     fp->mv.pr.specialn.x4 = -1;
@@ -274,13 +274,13 @@ static inline void scaleAnimStep(HSD_GObj* gobj, Vec3* scale)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     int frame = fp->mv.pr.specialn.x8;
     if (frame >= 0 && frame < 4) {
-        scale->x = fp->fv.pr.x2230.x;
-        scale->y = fp->fv.pr.x2230.y * ftPr_Init_803D05C8[frame];
-        scale->z = fp->fv.pr.x2230.z * ftPr_Init_803D05D8[frame];
+        scale->x = fp->u.pr.x2230.x;
+        scale->y = fp->u.pr.x2230.y * ftPr_Init_803D05C8[frame];
+        scale->z = fp->u.pr.x2230.z * ftPr_Init_803D05D8[frame];
         HSD_JObjSetScale(jobj, scale);
         fp->mv.pr.specialn.x8 += 1;
     } else {
-        HSD_JObjSetScale(jobj, &fp->fv.pr.x2230);
+        HSD_JObjSetScale(jobj, &fp->u.pr.x2230);
     }
 }
 
@@ -586,13 +586,13 @@ static inline void ftPr_SpecialAirNChargeRelease_Anim_inline(HSD_GObj* gobj,
     HSD_JObj* jobj = GET_JOBJ(gobj);
     s32 frame = fp->mv.pr.specialn.x8;
     if (frame >= 0 && frame < 4) {
-        scale->x = fp->fv.pr.x2230.x;
-        scale->y = fp->fv.pr.x2230.y * scale_base[frame];
-        scale->z = fp->fv.pr.x2230.z * scale_base[frame + 4];
+        scale->x = fp->u.pr.x2230.x;
+        scale->y = fp->u.pr.x2230.y * scale_base[frame];
+        scale->z = fp->u.pr.x2230.z * scale_base[frame + 4];
         HSD_JObjSetScale(jobj, scale);
         fp->mv.pr.specialn.x8 += 1;
     } else {
-        HSD_JObjSetScale(jobj, &fp->fv.pr.x2230);
+        HSD_JObjSetScale(jobj, &fp->u.pr.x2230);
     }
 }
 
@@ -1305,7 +1305,7 @@ static inline void ftPr_SpecialAirNChargeRelease_Coll_inline(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    HSD_JObjSetScale(jobj, &fp->fv.pr.x2230);
+    HSD_JObjSetScale(jobj, &fp->u.pr.x2230);
     ftPartSetRotY(fp, FtPart_TopN, M_PI_2 * fp->facing_dir);
     if (fp->mv.pr.specialn.facing_dir != 0) {
         fp->facing_dir = fp->mv.pr.specialn.facing_dir;

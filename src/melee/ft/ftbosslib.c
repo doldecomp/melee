@@ -259,7 +259,7 @@ enum_t ftBossLib_8015C4C4(void)
     u8 _[24];
 
     if (gobj) {
-        return GET_FIGHTER(gobj)->fv.mh.x2250;
+        return GET_FIGHTER(gobj)->u.mh.x2250;
     }
 
     return 0;

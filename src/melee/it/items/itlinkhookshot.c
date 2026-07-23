@@ -29,7 +29,7 @@
 #include "sysdolphin/baselib/gobjplink.h"
 #include "sysdolphin/baselib/jobj.h"
 
-#include <MSL/math_ppc.h>
+#include <math_ppc.h>
 
 /* 2A5770 */ static void it_802A5770_inline(ItemLink* link_1,
                                             itLinkHookshotAttributes* arg2,
@@ -288,7 +288,7 @@ void it_802A2B10(Item_GObj* arg0)
                 fp = GET_FIGHTER(item->xDD4_itemVar.linkhookshot.x8);
                 if (fp != NULL) {
                     item->xDD4_itemVar.linkhookshot.x10 = NULL;
-                    fp->fv.lk.xC = 0;
+                    fp->u.lk.xC = 0;
                     fp->accessory2_cb = 0;
                     fp->death1_cb = 0;
                     fp->accessory3_cb = 0;
@@ -2210,8 +2210,8 @@ void it_802A7AAC(HSD_GObj* arg0)
     Fighter* fp;
 
     fp = arg0->user_data;
-    if (fp->fv.lk.xC != NULL) {
-        it_802A2B10(fp->fv.lk.xC);
+    if (fp->u.lk.xC != NULL) {
+        it_802A2B10(fp->u.lk.xC);
         return;
     }
     fp->accessory2_cb = NULL;
@@ -2225,10 +2225,10 @@ void it_802A7AF0(HSD_GObj* arg0)
     Fighter* fp;
 
     fp = arg0->user_data;
-    if (fp->fv.lk.xC != NULL) {
-        item = GET_ITEM(fp->fv.lk.xC);
+    if (fp->u.lk.xC != NULL) {
+        item = GET_ITEM(fp->u.lk.xC);
         if (item->xDD4_itemVar.linkhookshot.x10) {
-            item->xDD4_itemVar.linkhookshot.x10(fp->fv.lk.xC);
+            item->xDD4_itemVar.linkhookshot.x10(fp->u.lk.xC);
         }
     }
 }
@@ -2262,8 +2262,8 @@ void it_802A7B34(HSD_GObj* arg0)
     Vec3 vec;
 
     Fighter* fp = GET_FIGHTER(arg0);
-    if (fp->fv.lk.xC != NULL) {
-        Item* item = GET_ITEM(fp->fv.lk.xC);
+    if (fp->u.lk.xC != NULL) {
+        Item* item = GET_ITEM(fp->u.lk.xC);
         itLinkHookshotAttributes* attr =
             item->xC4_article_data->x4_specialAttributes;
         ItemLink* item_link = item->xDD4_itemVar.linkhookshot.x0;

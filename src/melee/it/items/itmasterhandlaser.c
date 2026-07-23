@@ -1,7 +1,5 @@
 #include "itmasterhandlaser.h"
 
-#include "math_ppc.h"
-
 #include <placeholder.h>
 #include <platform.h>
 
@@ -27,6 +25,7 @@
 #include "mp/mplib.h"
 
 #include <math.h>
+#include <math_ppc.h>
 #include <baselib/gobj.h>
 
 ItemStateTable it_803F9378[] = {
