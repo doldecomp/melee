@@ -2478,7 +2478,7 @@ void Camera_8002D318(void* unused)
         if ((gobj = Player_GetEntity(cm_80452C68.x2C4)) != NULL &&
             (subject = ftLib_80086B74(gobj)) != NULL)
         {
-            pos = get_subject_x1C(subject);
+            pos = &subject->x1C;
             half_z = 0.5f * subject->x34.z;
             cm_80452C68.transform.target_interest.x =
                 -((half_z * cosf(cm_80452C68.yaw_offset)) - pos->x);
@@ -2493,9 +2493,15 @@ void Camera_8002D318(void* unused)
         delta = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
         cm_80452C68.transform.fov += delta * cm_803BCCA0.x70;
 
+        if ((s32)cm_80452C68.x2C4 != 10 && (s32)cm_80452C68.x2C4 != 11 &&
+            (s32)cm_80452C68.x2C4 >= 0 && (s32)cm_80452C68.x2C4 < 6 &&
+            (gobj = Player_GetEntity(cm_80452C68.x2C4)) != NULL &&
+            (subject = ftLib_80086B74(gobj)) != NULL)
         {
-            f32 tmp = compute_orbit_distance(cm_80452C68.x2C4);
-            distance = tmp;
+            distance = (2.0f * subject->x34.z) /
+                       tanf(MTXDegToRad(cm_80452C68.transform.target_fov));
+        } else {
+            distance = 1000.0f;
         }
 
         horiz_dist = distance * cosf(cm_80452C68.pitch_offset);
@@ -2555,8 +2561,8 @@ void Camera_8002D85C(void* unused)
         delta = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
         cm_80452C68.transform.fov += delta * cm_803BCCA0.x70;
 
-        if (cm_80452C68.x2C4 != 10 && cm_80452C68.x2C4 != 11 &&
-            cm_80452C68.x2C4 >= 0 && cm_80452C68.x2C4 < 6 &&
+        if ((s32)cm_80452C68.x2C4 != 10 && (s32)cm_80452C68.x2C4 != 11 &&
+            (s32)cm_80452C68.x2C4 >= 0 && (s32)cm_80452C68.x2C4 < 6 &&
             (gobj = Player_GetEntity(cm_80452C68.x2C4)) != NULL &&
             (subject = ftLib_80086B74(gobj)) != NULL)
         {
