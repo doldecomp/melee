@@ -36,6 +36,19 @@ typedef struct grVe_Data {
     } arwing;
 } grVe_Data;
 
+struct grVenom_YakumonoParam {
+    f32 x0;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    f32 x10;
+    char x14[0x2C - 0x14];
+    f32 x2C;
+    char x30[0x34 - 0x30];
+    f32 x34;
+    s32 x38;
+};
+
 static grVe_Data grVe_803E5348 = {
     {
         { 0, 5, 0 },
@@ -174,25 +187,12 @@ StageData grVe_803E54CC = {
     grVenom_80203EA4,
     grVenom_80206D74,
     grVenom_80206D7C,
-    0x00000001,
+    1,
     grVe_803E5348.joints,
-    5,
+    ARRAY_SIZE(grVe_803E5348.joints),
 };
 
-typedef struct grVe_TimingData {
-    f32 x0;
-    f32 x4;
-    f32 x8;
-    f32 xC;
-    f32 x10;
-    char x14[0x2C - 0x14];
-    f32 x2C;
-    char x30[0x34 - 0x30];
-    f32 x34;
-    s32 x38;
-} grVe_TimingData;
-
-static grVe_TimingData* grVe_804D6A30;
+static struct grVenom_YakumonoParam* yakumono_param;
 static u32 grVe_804D6A34;
 static s32 grVe_804D6A38;
 static s32 grVe_804D6A3C;
@@ -289,7 +289,7 @@ void grVenom_8020362C(void)
                     if (*(x38_ptr = &grVe_803E5380[0]) == 4) {
                         mode = 1;
                     } else {
-                        mode = (HSD_Randf() > grVe_804D6A30->x10) ? 1 : 4;
+                        mode = (HSD_Randf() > yakumono_param->x10) ? 1 : 4;
                     }
                     grVe_804D6A34 = 0;
                     *x2c_ptr = idx;
@@ -307,7 +307,7 @@ void grVenom_8020362C(void)
                     }
                     if (*(far_x38_ptr = &grVe_803E5380[0]) == 4) {
                         mode = 1;
-                    } else if (HSD_Randf() > grVe_804D6A30->x10) {
+                    } else if (HSD_Randf() > yakumono_param->x10) {
                         mode = 1;
                     } else {
                         mode = 4;
@@ -322,7 +322,7 @@ void grVenom_8020362C(void)
             }
         } else {
             grVe_804D6A38 =
-                grVe_RandRange(grVe_804D6A30->x8, grVe_804D6A30->xC);
+                grVe_RandRange(yakumono_param->x8, yakumono_param->xC);
         }
     } else {
         x20_ptr = &data->arwing.arwing_gobj[0];
@@ -414,8 +414,8 @@ void grVenom_80203B14(bool arg) {}
 
 static inline void inlineA0(void)
 {
-    int i = grVe_804D6A30->x0;
-    int j = grVe_804D6A30->x4;
+    int i = yakumono_param->x0;
+    int j = yakumono_param->x4;
     if (j > i) {
         s32 diff = j - i;
         if (diff != 0) {
@@ -446,7 +446,7 @@ void grVenom_80203B18(void)
         Ground* gp1;
         s32 flag;
 
-        grVe_804D6A30 = Ground_GetYakumonoParam();
+        yakumono_param = Ground_GetYakumonoParam();
         grVenom_80203EAC(4);
         stage_info.unk8C.b4 = false;
         flag = true;
@@ -1069,7 +1069,7 @@ check_scale_uniform:
 scale_nonuniform:
     HSD_JObjSetScaleX(jobj, scale);
     HSD_JObjSetScaleY(jobj, scale);
-    HSD_JObjSetScaleZ(jobj, scale * *(f32*) ((u8*) grVe_804D6A30 + 0x34));
+    HSD_JObjSetScaleZ(jobj, scale * *(f32*) ((u8*) yakumono_param + 0x34));
     goto done_scale;
 
 scale_uniform:
@@ -1283,15 +1283,15 @@ void grVenom_80205758(Ground_GObj* gobj)
         {
             f32 scale = Ground_801C0498();
             {
-                f32 s = scale * grVe_804D6A30->x34;
+                f32 s = scale * yakumono_param->x34;
                 HSD_JObjSetScaleX(jobj, s);
             }
             {
-                f32 s = scale * grVe_804D6A30->x34;
+                f32 s = scale * yakumono_param->x34;
                 HSD_JObjSetScaleY(jobj, s);
             }
             {
-                f32 s = scale * grVe_804D6A30->x34;
+                f32 s = scale * yakumono_param->x34;
                 HSD_JObjSetScaleZ(jobj, s);
             }
         }
@@ -1343,11 +1343,11 @@ void grVenom_80205AD4(Ground_GObj* gobj)
         Ground_DisableStarFoxArwingGObjs(gp);
         break;
     }
-    HSD_JObjSetScaleX(jobj, scale * grVe_804D6A30->x34);
-    HSD_JObjSetScaleY(jobj, scale * grVe_804D6A30->x34);
-    HSD_JObjSetScaleZ(jobj, scale * grVe_804D6A30->x34);
+    HSD_JObjSetScaleX(jobj, scale * yakumono_param->x34);
+    HSD_JObjSetScaleY(jobj, scale * yakumono_param->x34);
+    HSD_JObjSetScaleZ(jobj, scale * yakumono_param->x34);
     Ground_ResetStarFoxArwingState(gp);
-    gp->u.venom.xF8 = (s32) grVe_804D6A30->x2C;
+    gp->u.venom.xF8 = (s32) yakumono_param->x2C;
     gp->u.venom.xFC = 0;
     gp->u.venom.x100 = HSD_Randi(2);
 }
@@ -1503,7 +1503,7 @@ void grVenom_80205F30(Ground_GObj* gobj)
             venom_80205F30_check_anim:
                 if (grAnime_801C83D0(gobj, 0, 7)) {
                     gp->u.venom.xF4 = 0;
-                    gp->u.venom.xF8 = (s32) grVe_804D6A30->x2C;
+                    gp->u.venom.xF8 = (s32) yakumono_param->x2C;
                 }
             venom_80205F30_anim_done:;
             }
@@ -1645,18 +1645,18 @@ void grVenom_80205F30(Ground_GObj* gobj)
                     }
                     if (fire_kind == 1) {
                         it_802E7654(gobj, Ground_801C3FA4(gobj, 7), &sp88, 3,
-                                    0, grVe_804D6A30->x34);
+                                    0, yakumono_param->x34);
                     } else {
                         if (gp->u.venom.x100 != 0) {
                             it_802E7654(gobj, Ground_801C3FA4(gobj, 5), &sp88,
-                                        1, 0, grVe_804D6A30->x34);
+                                        1, 0, yakumono_param->x34);
                         } else {
                             it_802E7654(gobj, Ground_801C3FA4(gobj, 6), &sp88,
-                                        1, 0, grVe_804D6A30->x34);
+                                        1, 0, yakumono_param->x34);
                         }
                         gp->u.venom.x100 = (gp->u.venom.x100 + 1) & 1;
                     }
-                    grMaterial_801C9604(gobj, grVe_804D6A30->x38, 0);
+                    grMaterial_801C9604(gobj, yakumono_param->x38, 0);
                 }
             }
             break;
@@ -1718,13 +1718,13 @@ void grVenom_80206874(Ground_GObj* gobj)
         break;
     }
 
-    HSD_JObjSetScaleX(jobj, scale * grVe_804D6A30->x34);
-    HSD_JObjSetScaleY(jobj, scale * grVe_804D6A30->x34);
-    HSD_JObjSetScaleZ(jobj, scale * grVe_804D6A30->x34);
+    HSD_JObjSetScaleX(jobj, scale * yakumono_param->x34);
+    HSD_JObjSetScaleY(jobj, scale * yakumono_param->x34);
+    HSD_JObjSetScaleZ(jobj, scale * yakumono_param->x34);
 
     Ground_ResetStarFoxArwingState(gp);
 
-    gp->u.venom.xF8 = (s32) grVe_804D6A30->x2C;
+    gp->u.venom.xF8 = (s32) yakumono_param->x2C;
     gp->u.venom.xFC = 0;
 }
 

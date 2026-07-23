@@ -355,7 +355,7 @@ char grMc_803E3434[0x48] = "grmutecity.c\0\0\0\0"
                            "not found car spline (R)\n\0\0\0"
                            "not found car spline (L)\n";
 
-typedef struct grMc_UnkStruct {
+struct grMc_YakumonoParam {
     int x0;
     void* x4;
     DynamicsDesc* x8;
@@ -370,9 +370,9 @@ typedef struct grMc_UnkStruct {
     f32 x44;
     f32 x48;
     f32 x4C;
-} grMc_UnkStruct;
+};
 
-static grMc_UnkStruct* grMc_804D69D0;
+static struct grMc_YakumonoParam* yakumono_param;
 
 static s32 grMc_804D69D4;
 
@@ -380,7 +380,7 @@ void grMuteCity_801EFC68(bool arg) {}
 
 void grMuteCity_801EFC6C(void)
 {
-    grMc_804D69D0 = Ground_GetYakumonoParam();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 0;
     grMuteCity_801EFD0C(0);
@@ -911,7 +911,7 @@ void grMuteCity_801F04B8(Ground_GObj* gobj)
             Ground_801C39B0(gp->u.mutecity.x130);
             break;
         case 21:
-            grMaterial_801C9604(gobj, grMc_804D69D0->x0, 0);
+            grMaterial_801C9604(gobj, yakumono_param->x0, 0);
             break;
         case 20:
             un_802FD604(entry->param);
@@ -940,7 +940,7 @@ void grMuteCity_801F04B8(Ground_GObj* gobj)
             HSD_GObj* bg_gobj = Ground_801C2BA4(0x1D);
             if (bg_gobj != NULL) {
                 if (param != 0) {
-                    grMaterial_801C9604(bg_gobj, (s32) grMc_804D69D0->x4, 0);
+                    grMaterial_801C9604(bg_gobj, (s32) yakumono_param->x4, 0);
                     if (gp->u.mutecity.x110 != NULL) {
                         HSD_LObjClearFlags(gp->u.mutecity.x110, LOBJ_HIDDEN);
                     }
@@ -1157,24 +1157,24 @@ void grMuteCity_801F106C(s32 i)
     if (!cars[i].x22_flags.b0) {
         if (flags16 & 1) {
             if (flags16 & 8) {
-                state->cars[i].x8 -= grMc_804D69D0->x4C;
+                state->cars[i].x8 -= yakumono_param->x4C;
             } else {
                 s32 rnd = HSD_Randi(4);
                 switch (rnd) {
                 case 3:
                     break;
                 case 0:
-                    state->cars[i].x8 -= grMc_804D69D0->x4C;
+                    state->cars[i].x8 -= yakumono_param->x4C;
                     break;
                 case 1:
                 case 2:
                     if (flags16 & 4) {
-                        state->cars[i].xC += grMc_804D69D0->x44;
+                        state->cars[i].xC += yakumono_param->x44;
                         if (state->cars[i].xC > 0.9) {
                             state->cars[i].xC = 0.9f;
                         }
                     } else {
-                        state->cars[i].xC -= grMc_804D69D0->x44;
+                        state->cars[i].xC -= yakumono_param->x44;
                         if (state->cars[i].xC < 0.1) {
                             state->cars[i].xC = 0.1f;
                         }
@@ -1183,7 +1183,7 @@ void grMuteCity_801F106C(s32 i)
                 }
             }
         } else {
-            grMc_UnkStruct* params = grMc_804D69D0;
+            struct grMc_YakumonoParam* params = yakumono_param;
             state->cars[i].x8 += params->x40;
             if (state->cars[i].xC > (0.7f + params->x48)) {
                 state->cars[i].xC -= params->x48;
@@ -1193,23 +1193,23 @@ void grMuteCity_801F106C(s32 i)
         }
         if (flags16 & 8) {
             if (flags16 & 4) {
-                state->cars[i].xC += grMc_804D69D0->x44;
+                state->cars[i].xC += yakumono_param->x44;
                 if (state->cars[i].xC > 1.0) {
                     state->cars[i].xC = 1.0f;
                 }
             } else {
-                state->cars[i].xC -= grMc_804D69D0->x44;
+                state->cars[i].xC -= yakumono_param->x44;
                 if (state->cars[i].xC < 0.0) {
                     state->cars[i].xC = 0.0f;
                 }
             }
         }
         if (flags16 & 0x10) {
-            max_x8 = grMc_804D69D0->x38;
+            max_x8 = yakumono_param->x38;
         } else if (flags16 & 0x20) {
-            max_x8 = grMc_804D69D0->x3C;
+            max_x8 = yakumono_param->x3C;
         } else {
-            max_x8 = grMc_804D69D0->x34;
+            max_x8 = yakumono_param->x34;
         }
         if (state->cars[i].x8 > max_x8) {
             state->cars[i].x8 = max_x8;
@@ -1683,7 +1683,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
 
         {
             f32 age = car->x10;
-            if (age > grMc_804D69D0->x30) {
+            if (age > yakumono_param->x30) {
                 if (!car->x22_flags.b0) {
                     grLib_801C98A0(jobj);
                     var_r20 = NULL;
@@ -1710,7 +1710,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
                     }
                     car->x22_flags.b0 = 1;
                 }
-            } else if (age > grMc_804D69D0->x2C && (u32) car->x28 == 0) {
+            } else if (age > yakumono_param->x2C && (u32) car->x28 == 0) {
                 grMuteCity_801F2AB0(0x116, jobj);
                 car->x28 = (s32) jobj;
             }
@@ -1957,13 +1957,13 @@ DynamicsDesc* grMuteCity_801F2BBC(enum_t arg0)
 {
     if (grMc_804D69D4 == 1) {
         if (arg0 == 0x31) {
-            return grMc_804D69D0->x8;
+            return yakumono_param->x8;
         }
         if (arg0 == 0x35) {
-            return grMc_804D69D0->x8;
+            return yakumono_param->x8;
         }
         if ((u32) (arg0 - 0x32) <= 2) {
-            return grMc_804D69D0->xC;
+            return yakumono_param->xC;
         }
     }
     return NULL;

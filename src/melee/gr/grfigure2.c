@@ -1,23 +1,18 @@
-#include "gr/grfigure2.h"
+#include "grfigure2.h"
+
+#include "granime.h"
+#include "grfigure1.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
 #include <platform.h>
-
-#include "gr/granime.h"
-#include "gr/grdisplay.h"
-#include "gr/grfigure1.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/types.h"
-
-#include "lb/forward.h"
 
 #include "lb/lbspdisplay.h"
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 /* 20E274 */ static void grFigure2_8020E274(void);
@@ -61,18 +56,16 @@ StageData grEF2_803E6370 = {
     grFigure2_8020E30C,
     grFigure2_8020E4F4,
     grFigure2_8020E4FC,
-    0x00000001,
+    1,
     NULL,
-    0UL,
+    0,
 };
 
-void* grEF2_804D6A78;
-
-extern StageInfo stage_info;
+static void* yakumono_param;
 
 static void grFigure2_8020E274(void)
 {
-    grEF2_804D6A78 = Ground_GetYakumonoParam();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grFigure2_8020E314(0);

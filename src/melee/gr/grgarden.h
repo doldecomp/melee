@@ -1,27 +1,17 @@
 #ifndef GALE01_202B6C
 #define GALE01_202B6C
 
-#include <placeholder.h>
 #include <platform.h>
 
-#include "it/inlines.h"
-typedef struct GardenParams {
-    float x0;
-    float x4;
-    int x8;
-    int xC;
-    int x10;
-    int x14;
-    float x18;
-    float x1C;
-} GardenParams;
+#include "gr/forward.h"
+#include "it/forward.h"
 
 /* 202B6C */ void grGarden_80202B6C(bool);
 /* 202B70 */ void grGarden_80202B70(void);
 /* 202C24 */ void grGarden_80202C24(void);
 /* 202C4C */ void grGarden_80202C4C(void);
 /* 202C70 */ bool grGarden_80202C70(void);
-/* 202C78 */ HSD_GObj* grGarden_80202C78(int gobj_id);
+/* 202C78 */ Ground_GObj* grGarden_80202C78(int gobj_id);
 /* 202D60 */ void grGarden_80202D60(Ground_GObj*);
 /* 202D8C */ bool grGarden_80202D8C(Ground_GObj*);
 /* 202D94 */ void grGarden_80202D94(Ground_GObj*);
