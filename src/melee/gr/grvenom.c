@@ -389,7 +389,7 @@ void grVenom_8020362C(void)
                     } else {
                         group_b = 0;
                     }
-                    if (!(group_b | group_a)) {
+                    if ((group_b | group_a) == 0) {
                         idx = data->arwing.arwing_type[i];
                         while (idx == data->arwing.arwing_type[0] ||
                                idx == data->arwing.arwing_type[1] ||
