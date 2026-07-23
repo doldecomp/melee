@@ -240,7 +240,7 @@ StageData grCn_803E1F08 = {
     grCorneria_801E2EE4,
     grCorneria_801E2EEC,
     0x00000001,
-    (void*) &grCn_803E1D38,
+    grCn_803E1D38,
     8,
 };
 
@@ -347,7 +347,7 @@ void grCorneria_801DCE1C(void)
     Vec3 pos2;
 
     if (Stage_80225194() != 0x46) {
-        if (grCn_804D69B0 == 0) {
+        if (!grCn_804D69B0) {
             if (arwing_gobjs[0] == NULL) {
                 grCn_804D69A8--;
                 if (grCn_804D69A8 <= 0) {
@@ -365,7 +365,7 @@ void grCorneria_801DCE1C(void)
                         while (type_id == *types) {
                             int var_r0 = far == 1 ? 9 : 13;
                             int var_r3_2;
-                            if (var_r0 != 0) {
+                            if (var_r0) {
                                 var_r3_2 = HSD_Randi(far == 1 ? 9 : 13);
                             } else {
                                 var_r3_2 = 0;
@@ -424,7 +424,7 @@ void grCorneria_801DCE1C(void)
                             }
                         }
 
-                        if (has_near == 0) {
+                        if (!has_near) {
                             int type_id = arwing_types[count];
                             while (type_id == arwing_types[0] ||
                                    type_id == arwing_types[1] ||
@@ -439,7 +439,7 @@ void grCorneria_801DCE1C(void)
                                 grCorneria_801DD534(1);
                         } else {
                             grCorneria_801DDD4C(&pos2);
-                            if (grCn_CheckFar(&pos2) == 0) {
+                            if (!grCn_CheckFar(&pos2)) {
                                 int type_id = arwing_types[count];
                                 while (type_id == arwing_types[0] ||
                                        type_id == arwing_types[1] ||
@@ -500,7 +500,7 @@ void grCorneria_801DD350(void)
     Vec3 light_pos;
     u8 _pad2[12];
 
-    grCn_804D69A0 = (grCn_StageData*) Ground_GetYakumonoParam();
+    grCn_804D69A0 = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grCorneria_801DD534(7);
@@ -863,13 +863,13 @@ void grCorneria_801DDE88(HSD_GObj* gobj)
     }
     switch (gp->u.arwing.xD8) {
     case 0:
-        if (grCorneria_801DEC08(&sp2C) == 0) {
+        if (!grCorneria_801DEC08(&sp2C)) {
             lbAudioAx_800237A8(0x55730, 0x7F, 0x40);
             gp->u.arwing.xD8 = 1;
         }
         break;
     case 1:
-        if (grCorneria_801DEC94(&sp2C) == 0) {
+        if (!grCorneria_801DEC94(&sp2C)) {
             gp->u.arwing.xD8 = 2;
             return;
         }
@@ -977,7 +977,7 @@ void grCorneria_801DE024(Ground_GObj* gobj)
             }
             arwing_type_done:;
             }
-            if (grAnime_801C83D0(gobj, 0, 7) != 0) {
+            if (grAnime_801C83D0(gobj, 0, 7)) {
                 arwing_gobjs[gp->u.arwing.xC8] = 0;
                 Ground_801C4A08(gobj);
             }
@@ -1257,7 +1257,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
             case 2:
             case 3:
             case 4:
-                if (grAnime_801C83D0(gobj, 0, 7) != 0) {
+                if (grAnime_801C83D0(gobj, 0, 7)) {
                     gp->u.corneria2.xF4 = 0;
                     gp->u.corneria2.xF8 = (s32) grCn_804D69A0->x68;
                 }
@@ -1316,7 +1316,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                         }
                     }
                 }
-                if (grCn_804D69B0 == 0) {
+                if (!grCn_804D69B0) {
                     if (gp->u.corneria2.xF0 % grCn_804D69A0->x74 == 0 &&
                         randi(grCn_804D69A0->x78) == 0)
                     {
@@ -1366,7 +1366,7 @@ void grCorneria_801DED50(Ground_GObj* gobj)
         case 11:
         case 12:
         case 13: {
-            if (grCn_804D69B0 == 0) {
+            if (!grCn_804D69B0) {
                 if (gp->u.corneria2.xF0 % grCn_804D69A0->x74 == 0 &&
                     randi(grCn_804D69A0->x78) == 0)
                 {
