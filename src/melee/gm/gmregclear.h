@@ -113,7 +113,7 @@
 /* 181AC8 */ void gm_80181AC8(int, int, u16);
 /* 181B64 */ void gm_80181B64(int c_kind, int, s32);
 /* 181BFC */ int fn_80181BFC(int*);
-/* 181C80 */ s32 fn_80181C80(s32 arg0);
+/* 181C80 */ void fn_80181C80(s32 arg0);
 /* 181E18 */ UNK_RET fn_80181E18(UNK_PARAMS);
 /* 182174 */ UNK_RET gm_80182174(UNK_PARAMS);
 /* 182510 */ bool gm_IsMultimanSmashMode(void);
