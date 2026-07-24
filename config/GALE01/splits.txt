@@ -2193,14 +2193,20 @@ melee/gm/gmregcommon.c:
 	.data       start:0x803D79F0 end:0x803D7A50
 	.sdata      start:0x804D4050 end:0x804D4058
 
+melee/gm/gm_17C0.c:
+	.text       start:0x8017C0C8 end:0x8017C984
+	.data       start:0x803D7A50 end:0x803D8B88
+	.bss        start:0x804706C0 end:0x804706D8
+	.sdata2     start:0x804DA428 end:0x804DA468
+
 melee/gm/gmregclear.c:
-	.text       start:0x8017C0C8 end:0x8018325C
+	.text       start:0x8017C984 end:0x8018325C
 	.rodata     start:0x803B7C08 end:0x803B7C28
-	.data       start:0x803D7A50 end:0x803D9248
-	.bss        start:0x804706C0 end:0x804735A8
+	.data       start:0x803D8B88 end:0x803D9248
+	.bss        start:0x804706D8 end:0x804735A8
 	.sdata      start:0x804D4058 end:0x804D4090
 	.sbss       start:0x804D65B8 end:0x804D65F0
-	.sdata2     start:0x804DA428 end:0x804DA538
+	.sdata2     start:0x804DA468 end:0x804DA538
 
 melee/gm/gm_1832.c:
 	.text       start:0x8018325C end:0x8018A514
