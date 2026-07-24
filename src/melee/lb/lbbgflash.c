@@ -254,10 +254,11 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
             s32 y2;
 
             for (y2 = *(pY = &data->x38); y2 <= 0x1E0; y2 += data->x32) {
+                s32 right;
+                u8 strip_h;
+                s32 x34;
+
                 if (y2 == *pY) {
-                    s32 right;
-                    u8 strip_h;
-                    s32 x34;
                     s32 neg_y;
                     s32 xr;
                     s32 neg_yh;
@@ -280,9 +281,9 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
                     GXColor4u8(0, 0, 0, 0xFF);
                 } else {
                     s32 neg_y;
-                    u8 strip_h = data->x32;
                     s32 neg_yh;
 
+                    strip_h = data->x32;
                     GXBegin(GX_QUADS, GX_VTXFMT0, 4);
                     neg_y = -y2;
                     neg_yh = -(y2 + strip_h);
@@ -295,6 +296,8 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
                     GXPosition2f32(0.0f, (f32) neg_yh);
                     GXColor4u8(0, 0, 0, 0xFF);
                 }
+                /* Keep strip_h live across both arms (required for match). */
+                (void) strip_h;
             }
         }
         break;

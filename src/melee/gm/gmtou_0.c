@@ -138,7 +138,6 @@ typedef void (*lbl_803D9FD8_fn)(s32*, u32, u32);
     fn_80195CCC, fn_80194F30, fn_8019610C, fn_8019610C,
 };
 
-/// @todo Only differs by a register allocation tie-break in the last case.
 void fn_80190ABC(int mode)
 {
     struct Lbl804799B8_t* state = &lbl_804799B8;
@@ -146,6 +145,8 @@ void fn_80190ABC(int mode)
     TmData* tm;
     s32 cur_opt;
     s32 opt;
+    /* Shared by cases 5/6 for matching base register coloring. */
+    u8* start;
 
     tm = gm_GetTournamentData();
     cur_opt = tm->cur_option;
@@ -210,7 +211,6 @@ void fn_80190ABC(int mode)
         break;
     }
     case 6: {
-        u8* start;
         s32 i;
         HSD_SisLib_803A7664(tm->x518[1]);
         HSD_SisLib_803A7664(tm->x518[2]);
@@ -233,16 +233,20 @@ void fn_80190ABC(int mode)
     }
     case 5: {
         s32 idx;
-        u8* x2;
-        u8* x3;
         HSD_SisLib_803A7664(tm->x524[0]);
         HSD_SisLib_803A7664(tm->x524[1]);
-        x2 = &state->x2;
-        x3 = &state->x3;
-        idx = *x2 + *x3;
+        /* Reuse table local so &state->x2 colors correctly. */
+        table = (u16*) &state->x2;
+        start = &state->x3;
+        idx = *(u8*) table + *start;
         fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 3, 514.0f, 87.0f, 4);
-        idx = *x2 + *x3;
+        idx = *(u8*) table + *start;
         fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 3, 514.0f, 87.0f, 4);
+        /* Keep state live through end of case (load-bearing for match). */
+        switch (state->x4) {
+        default:
+            break;
+        }
         break;
     }
     }
