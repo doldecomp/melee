@@ -275,7 +275,7 @@ struct PreloadCacheScene {
         u8 field2_0x9;
         u8 field3_0xa;
         u8 field4_0xb;
-        InternalStageId stage_id;
+        ExternalStageId stage_id;
         PreloadCacheSceneEntry entries[8];
     } game_cache;
     s32 mode_scene_changes;
