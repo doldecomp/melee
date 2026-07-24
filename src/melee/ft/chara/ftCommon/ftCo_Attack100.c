@@ -2773,7 +2773,10 @@ void ftCo_CaptureWaitHi_Phys(Fighter_GObj* gobj)
 
 void ftCo_CaptureWaitHi_Coll(Fighter_GObj* gobj)
 {
-    ftCo_CapturePulledHi_Coll(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (!fp->x2226_b2) {
+        ft_80083C00(gobj, fn_800DBAC4);
+    }
 }
 
 void fn_800DBAC4(Fighter_GObj* gobj)
@@ -2890,7 +2893,10 @@ void ftCo_CaptureWaitLw_Phys(Fighter_GObj* gobj)
 
 void ftCo_CaptureWaitLw_Coll(Fighter_GObj* gobj)
 {
-    ftCo_CapturePulledLw_Coll(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (!fp->x2226_b2) {
+        ft_8008403C(gobj, fn_800DBED4);
+    }
 }
 
 static inline void fn_800DBED4_inline(Fighter_GObj* gobj)
@@ -3023,6 +3029,7 @@ void ftCo_CaptureDamageHi_Phys(Fighter_GObj* gobj)
 }
 #pragma pop
 
+/// @todo Fix duplicate ::ft_80083C00 usages
 void ftCo_CaptureDamageHi_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
