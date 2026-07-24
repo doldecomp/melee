@@ -10,75 +10,9 @@
 #include <melee/mn/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-/* 17C984 */ void gm_8017C984(UNK_T);
-/* 17C9A8 */ void gm_8017C9A8(DebugGameOverData*, Unk1PData*, u8);
-/* 17CA38 */ UNK_RET gm_8017CA38(DebugGameOverData*, Unk1PData*,
-                                 struct gmm_x0_528_t*, u8);
-/* 17CBAC */ UNK_RET gm_8017CBAC(UnkAdventureData*, struct gmm_x0_528_t*, u8);
-/* 17CD94 */ u8 gm_8017CD94(UnkAdventureData*, int, int, int);
-/* 17CE34 */ s32 gm_8017CE34(StartMeleeData*, UnkAdventureData*, s8*, u8, u8,
-                             u8, s32, InternalStageId, s32 count, s32);
-/* 17D7AC */ bool gm_8017D7AC(MatchExitInfo*, Unk1PData*, u8);
-/* 17D9C0 */ s32 fn_8017D9C0(u8* arg0, u8* arg1);
-/* 17DB58 */ void gm_8017DB58(struct Unk1PData_x24* arg0);
-/* 17DB6C */ u8 gm_8017DB6C(gm_8017DB6C_arg0_t* arg0, int index);
-/* 17DB78 */ u8 gm_8017DB78(gm_8017DB6C_arg0_t* arg0, int index);
-/* 17DB88 */ s32 gm_8017DB88(void* arg0, u8 arg1, s32 arg2, s32 arg3, u8* arg4,
-                             u8 arg5, u8 (*arg6)(s32, s32, u8),
-                             u8 (*arg7)(s32, s32, u8),
-                             u8 (*arg8)(s32, s32, u8), f32 (*arg9)(s32, s32),
-                             f32 (*arg10)(s32, s32));
-/* 17DD7C */ s32 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1,
-                             u8 arg2);
-/* 17DE54 */ s32 fn_8017DE54(u8, u8*);
-/* 17DEC8 */ Unk1PData* fn_8017DEC8(int);
-/* 17DF28 */ Unk1PData* fn_8017DF28(void);
-/* 17DF90 */ u8 fn_8017DF90(void);
-/* 17DFF4 */ int gm_8017DFF4(int);
-/* 17E068 */ bool gm_8017E068(void);
-/* 17E0E4 */ int fn_8017E0E4(void);
-/* 17E160 */ bool fn_8017E160(void);
-/* 17E21C */ void fn_8017E21C(void);
-/* 17E280 */ s8 gm_8017E280(u16, u32);
-/* 17E318 */ int fn_8017E318(void);
-/* 17E3C8 */ void fn_8017E3C8(void);
-/* 17E424 */ UnkAdventureData* gm_GetAdventureData(void);
-/* 17E430 */ u8 gm_8017E430(void); ///< returns a player slot
-/* 17E440 */ u8 gm_8017E440(void);
-/* 17E48C */ u8 gm_8017E48C(GameScene*);
-/* 17E4C4 */ struct gm_803DE650_t* gm_8017E4C4(u8);
-/* 17E500 */ u8 gm_8017E500(u8, u8);
-/* 17E528 */ f32 gm_8017E528(u8, u8);
-/* 17E578 */ f32 gm_8017E578(u8, u8);
-/* 17E5C8 */ u8 gm_8017E5C8(u8, u8, u8);
-/* 17E5FC */ u8 gm_8017E5FC(u8, u8, u8);
-/* 17E630 */ u8 gm_8017E630(u8 difficulty, u8 stage_slot, u8 arg2);
-/* 17E664 */ f32 gm_8017E664(u8, u8);
-/* 17E6B4 */ f32 gm_8017E6B4(u8, u8);
-/* 17E704 */ u8 gm_8017E704(u8 difficulty, u8 stage_slot, u8 arg2);
-/* 17E738 */ u8 gm_8017E738(u8 difficulty, u8 stage_slot, u8 arg2);
-/* 17E76C */ u8 gm_8017E76C(u8 difficulty, u8 stage_slot, u8 arg2);
-/* 17E7A0 */ void gm_8017E7A0(u8);
-/* 17E7E0 */ bool gm_8017E7E0(void);
-/* 17E7FC */ void gm_8017E7FC(u8);
-/* 17E8A4 */ void fn_8017E8A4(int);
-/* 17EB30 */ UnkAllstarData* gm_GetAllStarData(void);
-/* 17EB3C */ u8 gm_8017EB3C(u8, u8);
-/* 17EB64 */ u8 gm_8017EB64(u8 difficulty, u8 stage_slot, u8 arg2);
-/* 17EB98 */ u8 gm_8017EB98(u8 difficulty, u8 stage_slot, u8 arg2);
-/* 17EBCC */ u8 gm_8017EBCC(u8 difficulty, u8 stage_slot, u8 arg2);
-/* 17EC00 */ f32 gm_8017EC00(u8, u8);
-/* 17EC50 */ f32 gm_8017EC50(u8, u8);
-/* 17ECA0 */ u8 gm_8017ECA0(u8 difficulty, u8 stage_slot, u8 arg2);
-/* 17ECD4 */ u8 gm_8017ECD4(u8 difficulty, u8 stage_slot, u8 arg2);
-/* 17ED08 */ u8 gm_8017ED08(u8 difficulty, u8 stage_slot, u8 arg2);
-/* 17ED3C */ f32 gm_8017ED3C(u8, u8);
-/* 17ED8C */ f32 gm_8017ED8C(u8, u8);
-/* 17EDDC */ bool fn_8017EDDC(void);
-/* 17EE40 */ void fn_8017EE40(int);
 /* 17F008 */ int fn_8017F008(void);
 /* 17F09C */ s32 fn_8017F09C(void);
-/* 17F14C */ s32 fn_8017F14C(void* arg0);
+/* 17F14C */ s32 fn_8017F14C(void*);
 /* 17F1B8 */ s32 fn_8017F1B8(void);
 /* 17F2A4 */ s32 fn_8017F2A4(HSD_Text** arg0, f32 farg0, f32 farg1);
 /* 17F47C */ s32 fn_8017F47C(HSD_Text** arg0, int arg1);
@@ -117,4 +51,7 @@
 /* 182DF0 */ UnkMultimanData* gm_80182DF0(int c_kind, int);
 /* 182F40 */ void fn_80182F40(HSD_GObj*);
 /* 183218 */ UNK_RET gm_80183218(UNK_PARAMS);
+
+/* 3D8B88 */ extern u16 lbl_803D8B88[];
+
 #endif

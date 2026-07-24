@@ -14,4 +14,7 @@
 /* 3D7AC0 */ extern AdventureStageTable lbl_803D7AC0;
 /* 3D85F0 */ extern AllstarStageTable lbl_803D85F0;
 
+/* 4DA428 */ extern const f32 lbl_804DA428;
+/* 4DA42C */ extern const f32 lbl_804DA42C;
+
 #endif

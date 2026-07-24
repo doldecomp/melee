@@ -1,6 +1,8 @@
 #include "gm_17C0.h"
 
-#include "gmregclear.h"
+#include "gm_17C9.h"
+#include "gm_17E4.h"
+#include "gm_17EB.h"
 #include "platform.h"
 
 #include "baselib/forward.h"
@@ -107,6 +109,10 @@ void fn_8017C0C8(void)
     gm_8016EDDC(1, &sp8);
 }
 
+// Volatile reads keep MWCC from duplicating these shared constants.
+const f32 lbl_804DA428 = 0.5F;
+const f32 lbl_804DA42C = 1.0F;
+
 void fn_8017C1A4(HSD_GObj* unused)
 {
     struct lbl_804706C0_t* tmp = &lbl_804706C0;
@@ -179,7 +185,9 @@ void fn_8017C1A4(HSD_GObj* unused)
         if (Player_GetRemainingHP(2) <= 0) {
             tmp->x0 = 7;
             tmp->x8 = 0;
-        } else if (Player_GetRemainingHP(2) <= 0.5F * tmp->xC && fn_8017EDDC())
+        } else if (Player_GetRemainingHP(2) <=
+                       *(volatile const f32*) &lbl_804DA428 * tmp->xC &&
+                   fn_8017EDDC())
         {
             tmp->x0 = 1;
             tmp->x8 = 0;
@@ -216,9 +224,9 @@ void fn_8017C1A4(HSD_GObj* unused)
             lbAudioAx_8002438C(0x4E200);
             ftBossLib_8015CC14();
             gm_801A4674(6);
-            gm_SetGameSpeed(0.5f);
+            gm_SetGameSpeed(*(volatile const f32*) &lbl_804DA428);
         } else if (tmp->x8 >= temp_r27_2) {
-            gm_SetGameSpeed(1.0f);
+            gm_SetGameSpeed(*(volatile const f32*) &lbl_804DA42C);
             tmp->x0 = 5;
         }
         if (Player_GetRemainingHP(2) <= 0 && Player_GetRemainingHP(1) <= 0) {
@@ -249,13 +257,13 @@ void fn_8017C1A4(HSD_GObj* unused)
             lbAudioAx_8002438C(0x4E200);
             ftBossLib_8015CC14();
             gm_801A4674(6);
-            gm_SetGameSpeed(0.5f);
+            gm_SetGameSpeed(*(volatile const f32*) &lbl_804DA428);
             lbBgFlash_80020688(temp_r27);
         } else if (tmp->x8 == temp_r28) {
             lbBgFlash_800205F0(temp_r3);
         } else if (tmp->x8 >= temp_r29_2) {
             lbAudioAx_80028B90();
-            gm_SetGameSpeed(1.0f);
+            gm_SetGameSpeed(*(volatile const f32*) &lbl_804DA42C);
             gm_8016B33C(8);
             gm_8016B328();
             break;
