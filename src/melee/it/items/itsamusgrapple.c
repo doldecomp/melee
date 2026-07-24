@@ -588,7 +588,6 @@ void itSamusgrapple_UnkMotion0_Phys(Item_GObj* gobj)
 void fn_802B805C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    Fighter_GObj* owner;
     itSamusGrappleAttributes* attrs;
     ItemLink* link;
     Fighter* fp;
@@ -599,9 +598,8 @@ void fn_802B805C(Item_GObj* gobj)
     Mtx m;
     PAD_STACK(28);
 
-    owner = ip->owner;
     attrs = ip->xC4_article_data->x4_specialAttributes;
-    fp = owner->user_data;
+    fp = ip->owner->user_data;
     samus_grapple_state_sync(fp);
 
     link = ip->xDD4_itemVar.samusgrapple.x0;

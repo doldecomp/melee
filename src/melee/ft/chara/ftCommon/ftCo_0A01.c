@@ -1304,6 +1304,17 @@ bool ftCo_800A2C08(Fighter* fp)
     }
 }
 
+static inline s32 ftCo_800A2C80_inline0(Fighter* fp)
+{
+    int floor_id = fp->coll_data.floor.index;
+    if (grBigBlue_801EF844(floor_id) || grInishie1_801FCAAC(floor_id) ||
+        grCorneria_801E2D90(floor_id) || grVenom_80206D10(floor_id))
+    {
+        return 1;
+    }
+    return 0;
+}
+
 s32 ftCo_800A2C80(Fighter* fp)
 {
     s32 result;
@@ -1333,13 +1344,7 @@ s32 ftCo_800A2C80(Fighter* fp)
         return 0;
     }
     if (fp->ground_or_air == GA_Ground) {
-        int floor_id = fp->coll_data.floor.index;
-        if (grBigBlue_801EF844(floor_id) || grInishie1_801FCAAC(floor_id) ||
-            grCorneria_801E2D90(floor_id) || grVenom_80206D10(floor_id))
-        {
-            return 1;
-        }
-        return 0;
+        return ftCo_800A2C80_inline0(fp);
     }
     if (fp->motion_id == 0xF4) {
         return 0;
