@@ -28,6 +28,8 @@ static void sdata2_order(void)
     (void) S32_TO_F32;
     (void) 0.0F;
     (void) 0.99F;
+    (void) it_804A0E30;
+    (void) it_804A0E50;
 }
 
 void it_8026C47C(struct it_8026C47C_arg0_t* arg_struct)
@@ -283,7 +285,9 @@ void it_8026CB9C(s32* counts, u64 mask, f32 weight)
 
 void it_8026CD50(s32* counts, u64 mask, f32 weight)
 {
-    ItemPickTable* table = &it_804A0E50;
+    /// @todo #it_804A0E50 immediately follows #it_804A0E30; the original
+    ///       addressed it relative to the spawner.
+    RandomItemSpawner* spawner = &it_804A0E30;
     s32* p;
     s32 cnt;
     ItemKind it_kind;
@@ -308,9 +312,10 @@ void it_8026CD50(s32* counts, u64 mask, f32 weight)
         it_kind++;
         mask >>= 1;
     }
-    table->size = cnt;
-    *(item_kinds = &table->x4) = HSD_MemAlloc(cnt * 4);
-    *(weights = &table->xC) = HSD_MemAlloc(cnt * 4);
+    ((ItemPickTable*) (spawner + 1))->size = cnt;
+    *(item_kinds = &((ItemPickTable*) (spawner + 1))->x4) =
+        HSD_MemAlloc(cnt * 4);
+    *(weights = &((ItemPickTable*) (spawner + 1))->xC) = HSD_MemAlloc(cnt * 4);
 
     idx = (cnt2 = 0);
     mask = backup;

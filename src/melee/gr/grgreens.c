@@ -166,27 +166,6 @@ grGr_StageData grGr_803E76D0 = {
     "%s:%d: couldn t get gobj(id=%d)\n",
 };
 
-char grGr_803E7728[] = "grgreens.c";
-
-static s32 grGr_803E7734[] = {
-    0, 1, 0, 1, 0, 2, 0, 1, 0, 2,
-};
-static s32 grGr_803E775C[] = {
-    0, 0, 0, 14, 0, 0, 0, 14,
-};
-static s32 grGr_803E777C[][2] = {
-    { 1, 8 }, { 15, 16 }, { 2, 9 }, { 3, 10 }, { 4, 11 }, { 5, 12 }, { 6, 13 },
-};
-static s32 grGr_803E77B4[] = {
-    0, 0, 0, 14, 0, 0, 0, 14,
-};
-static s32 grGr_803E77D4[][2] = {
-    { 1, 8 }, { 15, 16 }, { 2, 9 }, { 3, 10 }, { 4, 11 }, { 5, 12 }, { 6, 13 },
-};
-static Vec3 grGr_803E780C[] = {
-    { -1.0f, 0.0f, 0.0f },
-    { 1.0f, 0.0f, 0.0f },
-};
 static u8 grGr_8049F9E0[0x20];
 
 static inline int randrange(int min, int max);
@@ -274,10 +253,30 @@ Ground_GObj* grGreens_80213524(int id)
             HSD_GObj_SetupProc(gobj, cbs->callback2, 4);
         }
     } else {
-        OSReport((char*) grGr_callbacks + 0xCC, grGr_803E7728, 281, id);
+        OSReport((char*) grGr_callbacks + 0xCC, "grgreens.c", 281, id);
     }
     return gobj;
 }
+
+static s32 grGr_803E7734[] = {
+    0, 1, 0, 1, 0, 2, 0, 1, 0, 2,
+};
+static s32 grGr_803E775C[] = {
+    0, 0, 0, 14, 0, 0, 0, 14,
+};
+static s32 grGr_803E777C[][2] = {
+    { 1, 8 }, { 15, 16 }, { 2, 9 }, { 3, 10 }, { 4, 11 }, { 5, 12 }, { 6, 13 },
+};
+static s32 grGr_803E77B4[] = {
+    0, 0, 0, 14, 0, 0, 0, 14,
+};
+static s32 grGr_803E77D4[][2] = {
+    { 1, 8 }, { 15, 16 }, { 2, 9 }, { 3, 10 }, { 4, 11 }, { 5, 12 }, { 6, 13 },
+};
+static Vec3 grGr_803E780C[] = {
+    { -1.0f, 0.0f, 0.0f },
+    { 1.0f, 0.0f, 0.0f },
+};
 
 void grGreens_8021360C(Ground_GObj* gobj)
 {
@@ -1002,7 +1001,8 @@ static inline void get_block_material_params(int block_type, float* duration,
 void grGreens_80215358(Ground_GObj* gobj, int col, int row, int arg3, int arg4)
 {
     Ground* gp = GET_GROUND(gobj);
-    struct grGreens_BlockVars* block = getBlock(gp, row, col);
+    struct grGreens_BlockVars* block = &gp->u.greens.x8_blocks[row][col];
+    Vec vec;
     unsigned char arr[30];
     int m;
     int n;
@@ -1013,17 +1013,17 @@ void grGreens_80215358(Ground_GObj* gobj, int col, int row, int arg3, int arg4)
     int num;
     float grMaterial_801C8DE0_paramA;
     float grMaterial_801C8DE0_paramB;
-    Vec vec;
     float f;
-    PAD_STACK(0x10);
     HSD_ASSERT(1305, block->status==Gr_Greens_Block_Status_None);
     for (n = 0; n < 30; n++) {
         arr[n] = 0;
     }
     for (n = 0; n < 5; n++) {
         for (m = 0; m < 6; m++) {
-            if (getBlock(gp, n, m)->status != Gr_Greens_Block_Status_None) {
-                arr[getBlock(gp, n, m)->index] = 1;
+            if (gp->u.greens.x8_blocks[n][m].status !=
+                Gr_Greens_Block_Status_None)
+            {
+                arr[gp->u.greens.x8_blocks[n][m].index] = 1;
             }
         }
     }
@@ -1068,7 +1068,7 @@ void grGreens_80215358(Ground_GObj* gobj, int col, int row, int arg3, int arg4)
     block->x1C = 0;
     block->x1_4 = 0;
     block->x1_7 = 0;
-    vec.x = getVec(gp, row, col)->x;
+    vec.x = ((Vec(*)[6]) gp->u.greens.x4)[row][col].x;
     vec.y = block->x8;
     vec.z = 0.0f;
     if (arg4 == 3) {
