@@ -1,5 +1,6 @@
 #include "gmadventure.h"
 
+#include "gm_17C0.h"
 #include "gm_unsplit.h"
 
 #include <sysdolphin/baselib/random.h>
