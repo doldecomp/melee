@@ -175,6 +175,49 @@ typedef enum InternalStageId {
     FIGURE3
 } InternalStageId;
 
+/// External stage IDs, the public stage numbering used by
+/// #StartMeleeRules::xE and the Stage_802251E8 argument. #stage_id_map
+/// converts them to #InternalStageId values; entries 0x21+ are
+/// single-player, event, and other mode variants.
+typedef enum ExternalStageId {
+    ExternalStageID_Unk00,
+    ExternalStageID_TEST,
+    ExternalStageID_IZUMI,
+    ExternalStageID_PSTADIUM,
+    ExternalStageID_CASTLE,
+    ExternalStageID_KONGO,
+    ExternalStageID_ZEBES,
+    ExternalStageID_CORNERIA,
+    ExternalStageID_STORY,
+    ExternalStageID_ONETT,
+    ExternalStageID_MUTECITY,
+    ExternalStageID_RCRUISE,
+    ExternalStageID_GARDEN,
+    ExternalStageID_GREATBAY,
+    ExternalStageID_SHRINE,
+    ExternalStageID_KRAID,
+    ExternalStageID_YORSTER,
+    ExternalStageID_GREENS,
+    ExternalStageID_FOURSIDE,
+    ExternalStageID_INISHIE1,
+    ExternalStageID_INISHIE2,
+    ExternalStageID_Unk21, // maps to InternalStageID_Unk26
+    ExternalStageID_VENOM,
+    ExternalStageID_PURA,
+    ExternalStageID_BIGBLUE,
+    ExternalStageID_ICEMTN,
+    ExternalStageID_Unk26, // second Icicle Mountain entry
+    ExternalStageID_FLATZONE,
+    ExternalStageID_OLDPUPUPU,
+    ExternalStageID_OLDYOSHI,
+    ExternalStageID_OLDKONGO,
+    ExternalStageID_BATTLE,
+    ExternalStageID_LAST,
+
+    ExternalStageID_BIGBLUEROUTE = 0x49,
+    ExternalStageID_HEAL = 0x55,
+} ExternalStageId;
+
 typedef struct unkCastle unkCastle;
 
 typedef void (*unkCastleCallback)(void*, struct unkCastle*);

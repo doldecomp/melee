@@ -99,11 +99,11 @@ void un_80320508(CharacterKind char_kind, int costume)
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(0x20, 0);
+    Stage_802251E8(ExternalStageID_LAST, 0);
     Item_80266FA8();
     Item_80266FCC();
     Stage_8022524C();
-    Stage_8022532C(0x20, 0x1A);
+    Stage_8022532C(ExternalStageID_LAST, 0x1A);
     ftDemo_ObjAllocInit();
     Player_InitAllPlayers();
     Player_80036E20(char_kind, un_804D7018, 3);
