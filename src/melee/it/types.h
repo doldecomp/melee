@@ -908,4 +908,9 @@ struct it_8026F3D4_arg1_t {
     Item_GObj* x8;
 };
 
+struct ItemSpawnTable {
+    RandomItemSpawner spawner;
+    ItemPickTable table;
+};
+
 #endif

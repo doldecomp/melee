@@ -1,6 +1,7 @@
 #include "it/itspawn.h"
 
 #include "placeholder.h"
+#include "types.h"
 
 #include "db/db.h"
 #include "ef/efsync.h"
@@ -19,8 +20,12 @@
 #include <baselib/random.h>
 
 ItemPickTable monster;
-ItemPickTable it_804A0E50;
+
+///@todo Merge with ::it_804A0E50 into ::ItemSpawnTable.
+/// BSS layout places ::it_802A0E50 immediately after ::it_804A0E30; target
+/// forms one @ha/@l of the spawner and uses +0x20 field offsets.
 RandomItemSpawner it_804A0E30;
+ItemPickTable it_804A0E50;
 
 /// @todo .sdata2 order hack
 static void sdata2_order(void)
@@ -285,12 +290,7 @@ void it_8026CB9C(s32* counts, u64 mask, f32 weight)
 
 void it_8026CD50(s32* counts, u64 mask, f32 weight)
 {
-    /// BSS layout places #it_804A0E50 immediately after #it_804A0E30; target
-    /// forms one @ha/@l of the spawner and uses +0x20 field offsets.
-    struct {
-        RandomItemSpawner spawner;
-        ItemPickTable table;
-    }* combined = (void*) &it_804A0E30;
+    ItemSpawnTable* combined = (void*) &it_804A0E30;
     s32* p;
     s32 cnt;
     ItemKind it_kind;

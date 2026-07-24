@@ -23,4 +23,6 @@ struct it_8026C47C_arg0_t;
 /* 26D258 */ bool it_8026D258(Vec3*, ItemKind);
 /* 26D324 */ bool it_8026D324(ItemKind);
 /* 26D3CC */ bool it_8026D3CC(void);
+/* 4A0E30 */ extern RandomItemSpawner it_804A0E30;
+
 #endif

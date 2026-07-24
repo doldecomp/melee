@@ -1,7 +1,6 @@
 /// @file melee/it/it_266F.h
 /// @todo
 
-/* 4A0E30 */ extern RandomItemSpawner it_804A0E30;
 /* 4A0E50 */ extern HSD_ObjAllocUnk5 it_804A0E50;
 /* 4A0E60 */ extern ItemPickTable it_804A0E60;
 /* 4D6D28 */ extern ItemCommonData* it_804D6D28;

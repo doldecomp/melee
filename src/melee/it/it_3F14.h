@@ -33,7 +33,6 @@ typedef struct it_804D6D20_t {
 /* 3F1ED8 */ extern char it_803F1ED8[];
 /* 3F1EE4 */ extern char it_803F1EE4[];
 /* 3F1EF0 */ extern char it_803F1EF0[];
-/* 4A0E30 */ extern RandomItemSpawner it_804A0E30;
 /* 4A0E50 */ extern ItemPickTable it_804A0E50;
 /* 4A0E60 */ extern ItemPickTable it_804A0E60;
 /* 4A0E70 */ extern DamageLogEntry it_804A0E70[15];
