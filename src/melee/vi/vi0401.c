@@ -56,11 +56,11 @@ void un_8031D030(CharacterKind char_kind, int costume)
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(6, 0);
+    Stage_802251E8(ExternalStageID_ZEBES, 0);
     Item_80266FA8();
     Item_80266FCC();
     Stage_8022524C();
-    Stage_8022532C(6, 0);
+    Stage_8022532C(ExternalStageID_ZEBES, 0);
 
     ftDemo_ObjAllocInit();
     Player_InitAllPlayers();

@@ -428,24 +428,24 @@ void Ground_801C06B8(InternalStageId arg0)
     }
 }
 
-void Ground_801C0754(StructPairWithStageID* pair)
+void Ground_801C0754(StageIdPair* pair)
 {
     StageData* stage;
     s32 arg3;
     Ground_801BFFB0();
-    stage_info.internal_stage_id = pair->stage_id;
-    stage = Ground_803DFEDC[pair->stage_id];
-    arg3 = (pair->list_idx == 0x55) ? 0 : 1;
+    stage_info.internal_stage_id = pair->internal_id;
+    stage = Ground_803DFEDC[pair->internal_id];
+    arg3 = (pair->external_id == ExternalStageID_HEAL) ? 0 : 1;
     grDatFiles_801C6038(stage->data1, 0, arg3);
-    Ground_801C28CC(&stage_info.xA0, pair->list_idx);
+    Ground_801C28CC(&stage_info.xA0, pair->external_id);
     stage_info.x178 = stage->callback5;
     stage_info.x17C = stage->callback6;
     Ground_801C5878();
 }
 
-void Ground_801C0800(StructPairWithStageID* pair)
+void Ground_801C0800(StageIdPair* pair)
 {
-    StageData* stage_data = Ground_803DFEDC[pair->stage_id];
+    StageData* stage_data = Ground_803DFEDC[pair->internal_id];
     Ground_801C38D0(stage_info.param->x8, stage_info.param->x14,
                     stage_info.param->x1C, stage_info.param->x18);
     Ground_801C38EC(stage_info.param->x10, stage_info.param->xC);
@@ -663,12 +663,12 @@ void Ground_801C0C2C(HSD_GObj* arg0)
     }
 }
 
-void Ground_801C0F78(StructPairWithStageID* pair)
+void Ground_801C0F78(StageIdPair* pair)
 {
-    Ground_803DFEDC[pair->stage_id]->OnLoad();
+    Ground_803DFEDC[pair->internal_id]->OnLoad();
 }
 
-void Ground_801C0FB8(StructPairWithStageID* pair)
+void Ground_801C0FB8(StageIdPair* pair)
 {
     struct {
         void* unk0;
@@ -676,7 +676,7 @@ void Ground_801C0FB8(StructPairWithStageID* pair)
         void (*unk8)(s32);
     }* cur;
     void* next;
-    Ground_803DFEDC[pair->stage_id]->OnStart();
+    Ground_803DFEDC[pair->internal_id]->OnStart();
     for (cur = stage_info.x6A4; cur != NULL; cur = next) {
         next = cur->unk0;
         cur->unk8(cur->unk4);
@@ -687,9 +687,9 @@ void Ground_801C0FB8(StructPairWithStageID* pair)
                        Ground_801C0C2C, 10);
 }
 
-void Ground_DemoInit(StructPairWithStageID* pair, s32 arg1)
+void Ground_DemoInit(StageIdPair* pair, s32 arg1)
 {
-    Ground_803DFEDC[pair->stage_id]->OnDemoInit(arg1);
+    Ground_803DFEDC[pair->internal_id]->OnDemoInit(arg1);
 }
 
 void Ground_801C10B8(HSD_GObj* arg0, HSD_GObjEvent arg1)

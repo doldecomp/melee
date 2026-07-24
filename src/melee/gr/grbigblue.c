@@ -3622,6 +3622,7 @@ typedef union grBigBlue_CarPhysics {
 /// @todo Currently partial match - complex car physics simulation
 #pragma push
 #pragma fp_contract on
+/// @todo The collision scratch vector sits four bytes low.
 void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
 {
     grBigBlue_CarPhysics* gp = gobj->user_data;
@@ -3824,13 +3825,11 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
         }
 
         if (-F32_MAX != ground_y) {
-            f32 scale = Ground_801C0498();
             gp->data.lanes[lane].angular_velocity -=
-                3.0F * (yakumono_param->x80 * scale);
+                3.0F * (yakumono_param->x80 * Ground_801C0498());
         } else {
-            f32 scale = Ground_801C0498();
             gp->data.lanes[lane].angular_velocity -=
-                yakumono_param->x80 * scale;
+                yakumono_param->x80 * Ground_801C0498();
         }
 
         /* Lateral position += angular velocity */
@@ -3861,8 +3860,8 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
         } else {
             ((grBb_ByteBits*) lane_flags)->b6 = 1;
             rank_factor = yakumono_param->x84 * Ground_801C0498();
-            gp->data.lanes[lane].angular_velocity =
-                sinf(f31_rot) * rank_factor;
+            heading_osc = sinf(f31_rot);
+            gp->data.lanes[lane].angular_velocity = heading_osc * rank_factor;
         }
     }
 

@@ -181,21 +181,23 @@ static inline int fn_802FF218_inline(HSD_GObj* arg0)
 void fn_802FF218(HSD_GObj* arg0)
 {
     int y;
+    struct un_804A1F58_x8_t* thing;
     PAD_STACK(32);
     y = fn_802FF218_inline(arg0);
     if (y >= 0) {
-        struct un_804A1F58_x8_t* thing = &un_804A1F58.x8[y];
-        if (thing->x10 == 1) {
+        if ((thing = &un_804A1F58.x8[y])->x10 == 1) {
             HSD_SisLib_803A70A0(thing->x4, thing->x8, "  ");
         } else {
             int s;
+            int tmp;
             gm_8016B774();
             s = gm_8016C658(y);
             if (s > 9999) {
                 s = 9999;
             }
+            tmp = s;
             if (thing->xC != s) {
-                HSD_SisLib_803A70A0(thing->x4, thing->x8, "%d", s);
+                HSD_SisLib_803A70A0(thing->x4, thing->x8, "%d", tmp);
                 thing->xC = s;
             }
         }

@@ -108,21 +108,6 @@ static inline void inline_free_text(HSD_GObj* gobj)
     HSD_SisLib_803A5CC4(userdata->title);
 }
 
-static inline void mnCount_8025186C_inline(HSD_GObj* gobj)
-{
-    MnCountData* userdata = GET_MNCOUNT(gobj);
-    HSD_Text* text;
-    if (userdata->title != NULL) {
-        HSD_SisLib_803A5CC4(userdata->title);
-    }
-    text =
-        HSD_SisLib_803A5ACC(0, 1, -9.5f, 9.1f, 17.0f, 364.68332f, 38.38772f);
-    userdata->title = text;
-    text->font_size.x = 0.0521f;
-    text->font_size.y = 0.0521f;
-    HSD_SisLib_803A6368(text, 166);
-}
-
 static inline bool mnCount_8025035C_inline(void)
 {
     s32 i;
@@ -823,19 +808,28 @@ static void mnCount_InitUserData_noinline(MnCountData* userdata)
     mnCount_InitUserData(userdata);
 }
 
+static MnCountData* mnCount_AllocUserData(void)
+{
+    MnCountData* userdata = HSD_MemAlloc(sizeof(MnCountData));
+    HSD_ASSERTREPORT(0x512, userdata, "Can't get user_data.\n");
+    return userdata;
+}
+
 void mnCount_Create(void)
 {
     MnCountData* userdata;
     HSD_GObjProc* proc;
     HSD_GObj* gobj;
+    HSD_Archive* archive;
 
     mn_804D6BC8.cooldown = 5;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
     mn_804A04F0.cur_menu = MENU_KIND_RECORDS_MISC;
     mn_804A04F0.hovered_selection = 0;
 
+    archive = mn_804D6BB8;
     lbArchive_LoadSections(
-        mn_804D6BB8, (void**) &model_desc.joint, "MenMainConCo_Top_joint",
+        archive, (void**) &model_desc.joint, "MenMainConCo_Top_joint",
         &model_desc.animjoint, "MenMainConCo_Top_animjoint",
         &model_desc.matanim_joint, "MenMainConCo_Top_matanim_joint",
         &model_desc.shapeanim_joint, "MenMainConCo_Top_shapeanim_joint", 0);
@@ -843,14 +837,26 @@ void mnCount_Create(void)
     gobj = GObj_Create(6, 7, 0x80);
     menu_gobj = gobj;
 
-    userdata = HSD_MemAlloc(sizeof(MnCountData));
-    HSD_ASSERTREPORT(0x512, userdata, "Can't get user_data.\n");
+    userdata = mnCount_AllocUserData();
     mnCount_InitUserData_noinline(userdata);
     GObj_InitUserData(gobj, 0, HSD_Free, userdata);
 
     proc = HSD_GObj_SetupProc(gobj, fn_80251640, 0);
     proc->flags_3 = HSD_GObj_804D783C;
-    mnCount_8025186C_inline(gobj);
+
+    {
+        MnCountData* menu_data;
+        HSD_Text* text;
+        if ((menu_data = (MnCountData*) gobj->user_data)->title != NULL) {
+            HSD_SisLib_803A5CC4(menu_data->title);
+        }
+        text = HSD_SisLib_803A5ACC(0, 1, -9.5f, 9.1f, 17.0f, 364.68332f,
+                                   38.38772f);
+        menu_data->title = text;
+        text->font_size.x = 0.0521f;
+        text->font_size.y = 0.0521f;
+        HSD_SisLib_803A6368(text, 166);
+    }
 
     gobj = GObj_Create(0, 1, 0x80);
     proc = HSD_GObj_SetupProc(gobj, mnCount_HandleUserInput, 0);

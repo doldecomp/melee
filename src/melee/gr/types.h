@@ -163,10 +163,10 @@ typedef struct StageData {
     size_t x30; // size of x2C array
 } StageData;
 
-typedef struct StructPairWithStageID {
-    s32 stage_id;
-    s32 list_idx;
-} StructPairWithStageID;
+typedef struct StageIdPair {
+    InternalStageId internal_id;
+    ExternalStageId external_id;
+} StageIdPair;
 
 struct GroundVars_unk {
     int xC4;

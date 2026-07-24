@@ -2160,7 +2160,7 @@ u64 lbAudioAx_80026E84(CharacterKind c_kind)
     return lbl_803BB3C0[c_kind].x8;
 }
 
-u64 lbAudioAx_80026EBC(InternalStageId arg0)
+u64 lbAudioAx_80026EBC(ExternalStageId arg0)
 {
     const int imax = ARRAY_SIZE(s32_arr_803BB6B0);
     int id = Stage_8022519C(arg0);
@@ -2322,7 +2322,7 @@ void lbAudioAx_8002785C(void)
 {
     u64 result = 0;
     int i;
-    InternalStageId stage;
+    ExternalStageId stage;
 
     if (gm_8016B184()) {
         result = lbAudioAx_80026E84(Player_GetPlayerCharacter(0));

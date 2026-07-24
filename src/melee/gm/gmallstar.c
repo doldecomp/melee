@@ -451,7 +451,7 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
         }
     }
 
-    gc->stage_id = (InternalStageId) opp_data->x2;
+    gc->stage_id = opp_data->x2;
     lbDvd_80018254();
 
     audio = lbAudioAx_80026E84((CharacterKind) (s8) arg0->x0.ckind);
@@ -462,7 +462,7 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
         }
     }
 
-    audio |= lbAudioAx_80026EBC((InternalStageId) opp_data->x2);
+    audio |= lbAudioAx_80026EBC(opp_data->x2);
     lbAudioAx_80026F2C(0x1C);
     lbAudioAx_8002702C(0xC, audio);
     lbAudioAx_80027168();
