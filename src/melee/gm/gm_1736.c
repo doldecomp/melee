@@ -1,9 +1,11 @@
 #include "gm_1601.h"
 #include "gm_16F1.h"
+#include "gm_17C9.h"
+#include "gm_17E4.h"
+#include "gm_17EB.h"
 #include "gm_1A3F.h"
 #include "gm_1BA8.h"
 #include "gmmain_lib.h"
-#include "gmregclear.h"
 #include "types.h"
 
 #include "ft/forward.h"

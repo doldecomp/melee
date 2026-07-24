@@ -131,6 +131,10 @@ typedef enum MatchOutcome {
 
 struct gm_801677C0_s;
 struct lbl_8046B488_t;
+typedef struct AdventureStageEntry AdventureStageEntry;
+typedef struct AdventureStageTable AdventureStageTable;
+typedef struct AllstarStageEntry AllstarStageEntry;
+typedef struct AllstarStageTable AllstarStageTable;
 typedef struct CameraVsData CameraVsData;
 typedef struct datetime datetime;
 typedef struct DebugGameOverData DebugGameOverData;
