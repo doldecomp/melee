@@ -1232,8 +1232,6 @@ void HSD_SisLib_803A8134(void* cursor, HSD_Text* text, f32* out_width,
     u32 pop_result;
     TextKerning* kern_data_2;
     u8 opcode;
-    u8 kern_left;
-    u8 kern_right;
     TextKerning* kern_data;
     saved_scale_x = text->x80.x;
     saved_scale_y = text->x80.y;
@@ -1255,6 +1253,11 @@ loop_3:
             cursor = (u8*) (pop_result + 4);
             goto block_33;
         }
+        break;
+    case 1:
+    case 2:
+    case 3:
+    case 7:
         break;
     case 9:
         HSD_SisLib_803A7684(text, (u8*) cursor, 0x85U);
@@ -1311,23 +1314,22 @@ loop_3:
             if (kern_enabled != 0) {
                 glyph_code = *(u16*) cursor;
                 if (glyph_code < 0x4000U) {
-                    kern_data = (TextKerning*) (default_kerning +
-                                                (((glyph_code - 0x2000) * 2) &
-                                                 0x1FFFE));
-                    kern_right = kern_data->right;
-                    kern_left = kern_data->left;
-                    kern_width = kern_right - 2;
-                    kern_width = kern_left + kern_width;
+                    kern_width =
+                        (s32) (default_kerning +
+                               (((glyph_code - 0x2000) * 2) & 0x1FFFE));
+                    kern_data = (TextKerning*) kern_width;
+                    kern_width = kern_data->right - 2;
+                    kern_data = (TextKerning*) (u32) kern_data->left;
+                    kern_width = (s32) kern_data + kern_width;
                     *out_width =
                         -((text->x80.x * (f32) kern_width) - *out_width);
                 } else {
                     kern_data_2 =
                         (TextKerning*) &glyph_tex
                             ->data[((glyph_code - 0x4000) * 2) & 0x1FFFE];
-                    kern_right = kern_data_2->right;
-                    kern_left = kern_data_2->left;
-                    kern_width = kern_right - 2;
-                    kern_width = kern_left + kern_width;
+                    kern_width = kern_data_2->right - 2;
+                    kern_data_2 = (TextKerning*) (u32) kern_data_2->left;
+                    kern_width = (s32) kern_data_2 + kern_width;
                     *out_width =
                         -((text->x80.x * (f32) kern_width) - *out_width);
                 }
