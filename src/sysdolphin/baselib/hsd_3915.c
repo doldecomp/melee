@@ -934,8 +934,6 @@ static s32 lbl_804D609C = 0x00FFFFFF;
 static s32 lbl_804D60A0 = 0x8080FF;
 static s32 lbl_804D60A4 = (s32) 0xC0C000FF;
 
-// @TODO: Currently 89.63% match - needs register allocation and expression
-// fixes
 static inline PerfDispItem* get_perf_disp_item(s32 count)
 {
     return &hsd_804CE3F8[count];
@@ -954,8 +952,9 @@ void* fn_80392A3C(void)
     numFrames = lbl_804D6088;
     if (0 != numFrames) {
         u8* counts = &hsd_804CE3F8[0].content.bytes[0];
-        u8* colors_base = &hsd_804CE3F8[0].content.bytes[4];
-        u8* colors = colors_base;
+        u8* colors = &hsd_804CE3F8[0].content.bytes[4];
+        // Self-assign forces colors into r5 and green's stack slot to 0x8.
+        colors = colors;
         hsd_804CE3F8[0].type = 1;
         *(s32*) counts = 1;
         bar_count = count;
