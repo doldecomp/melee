@@ -3029,6 +3029,7 @@ void ftCo_CaptureDamageHi_Phys(Fighter_GObj* gobj)
 }
 #pragma pop
 
+/// @todo Fix duplicate ::ft_80083C00 usages
 void ftCo_CaptureDamageHi_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
