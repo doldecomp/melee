@@ -3101,7 +3101,8 @@ void gm_80166378(lbl_8046B6A0_24C_t* arg0_raw)
             sp48_y = (a = 0.031f) * ((f32) cnt * fn_8016B5B0());
             fn_80166A8C((Vec3*) &sp48_y, (Vec3*) &sp48_x);
             arg0->player_standings[i].xE = *(u16*) &sp48_x;
-            arg0->player_standings[i].x34 = (s8) ((b = 100.0f) * pl_80040948(i));
+            arg0->player_standings[i].x34 =
+                (s8) ((b = 100.0f) * pl_80040948(i));
             arg0->player_standings[i].x38 = pl_80040900(i);
             arg0->player_standings[i].x3C = pl_80040924(i);
             arg0->player_standings[i].x40 = pl_80040B3C(i);
@@ -3126,9 +3127,9 @@ void gm_80166378(lbl_8046B6A0_24C_t* arg0_raw)
             arg0->player_standings[i].x8C = pl_80040AF0(i);
             arg0->player_standings[i].x90 = pl_8003E39C(i);
             arg0->player_standings[i].x94 =
-                (u32) ((void)(c = 60.0f), (c * ((d = 10.0f) * pl_80040D44(i))));
-            arg0->player_standings[i].x98 =
-                (u32) (c * (d * pl_80040D68(i)));
+                (u32) ((void) (c = 60.0f),
+                       (c * ((d = 10.0f) * pl_80040D44(i))));
+            arg0->player_standings[i].x98 = (u32) (c * (d * pl_80040D68(i)));
             arg0->player_standings[i].x9C = (u32) pl_80040CFC(i) / 60U;
             arg0->player_standings[i].xA0 = (u32) pl_80040D20(i) / 60U;
             arg0->player_standings[i].xA4 = pl_80040DB8(i);
