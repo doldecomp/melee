@@ -213,7 +213,7 @@ struct StartMeleeRules {
     s8 xB; // item frequency
     s8 xC; // SD penalty
     u8 xD;
-    u16 xE; // InternalStageId
+    u16 xE; // ExternalStageId
 
     u32 x10; // time limit
     u8 x14;

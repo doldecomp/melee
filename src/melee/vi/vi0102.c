@@ -47,11 +47,11 @@ void vi0102_8031CB00(int mario_costume, int luigi_costume)
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(4, 0);
+    Stage_802251E8(ExternalStageID_CASTLE, 0);
     Item_80266FA8();
     Item_80266FCC();
     Stage_8022524C();
-    Stage_8022532C(4, 0);
+    Stage_8022532C(ExternalStageID_CASTLE, 0);
 
     ftDemo_ObjAllocInit();
     Player_InitAllPlayers();

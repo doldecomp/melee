@@ -75,12 +75,12 @@ void vi0502_8031E124(CharacterKind player_kind, int player_costume,
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(17, 0);
+    Stage_802251E8(ExternalStageID_GREENS, 0);
     Item_80266FA8();
     Item_80266FCC();
     Ground_801C04BC(0.7f);
     Stage_8022524C();
-    Stage_8022532C(17, 0);
+    Stage_8022532C(ExternalStageID_GREENS, 0);
 
     ftDemo_ObjAllocInit();
     Player_InitAllPlayers();

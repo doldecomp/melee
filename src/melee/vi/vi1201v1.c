@@ -230,11 +230,11 @@ void un_8031FD18_OnEnter(void* arg)
     HSD_GObj_SetupProc(gobj, fn_8031FC30, 0);
 
     un_8031FD18_SetupScene();
-    Stage_802251E8(0x20, 0);
+    Stage_802251E8(ExternalStageID_LAST, 0);
     Item_80266FA8();
     Item_80266FCC();
     Stage_8022524C();
-    Stage_8022532C(0x20, 0x19);
+    Stage_8022532C(ExternalStageID_LAST, 0x19);
 
     gobj = GObj_Create(0xE, 0xF, 0);
     jobj = HSD_JObjLoadJoint(un_804D6FEC);

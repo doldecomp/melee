@@ -453,9 +453,8 @@ loop:
 
         for (temp = arg2; temp->x0 != 0xD; temp++) {
             if (temp->xC != NULL) {
-                stage1 = Stage_8022519C((InternalStageId) entry->x00);
-                if (Stage_8022519C((InternalStageId) temp->xC->x00) == stage1)
-                {
+                stage1 = Stage_8022519C(entry->x00);
+                if (Stage_8022519C(temp->xC->x00) == stage1) {
                     result = entry;
                     goto next;
                 }
@@ -800,7 +799,7 @@ void gmClassic_801B3500(GameScene* arg0)
     }
 
     {
-        InternalStageId stage_id;
+        ExternalStageId stage_id;
         if (entry->x1 == 0x80 && entry->x2 == 1) {
             stage_id = (u16) gm_801647F8(ad->x0.ckind);
         } else {

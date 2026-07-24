@@ -639,8 +639,7 @@ void gm_801B1EEC(GameScene* arg0)
     gm_80473814.x6 = stage_id;
     vs_data->data.rules.xE = stage_id;
     lbAudioAx_80026F2C(0x18);
-    lbAudioAx_8002702C(8, lbAudioAx_80026EBC((enum InternalStageId)(
-                                                 u16) vs_data->data.rules.xE));
+    lbAudioAx_8002702C(8, lbAudioAx_80026EBC(vs_data->data.rules.xE));
     lbAudioAx_80027168();
 }
 

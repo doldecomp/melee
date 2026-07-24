@@ -116,8 +116,7 @@ void gm_801B927C(GameScene* arg0)
         *vs = sss->data;
 
         lbAudioAx_80026F2C(0x18);
-        lbAudioAx_8002702C(
-            8, lbAudioAx_80026EBC((enum InternalStageId) sss->force_stage_id));
+        lbAudioAx_8002702C(8, lbAudioAx_80026EBC(sss->force_stage_id));
         lbAudioAx_80027168();
         return;
     }

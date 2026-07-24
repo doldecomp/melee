@@ -12,18 +12,19 @@
 
 extern struct StageInfo stage_info;
 
-struct StructStageIDWithUnks {
-    s32 stage_id;
+/// One #stage_id_map entry: the #InternalStageId for an #ExternalStageId.
+struct StageIdMapEntry {
+    InternalStageId internal_id;
     s32 unk1;
     s32 unk2;
 };
-struct StructNumberAndStage {
-    s32 list_idx;
-    struct StructStageIDWithUnks* unk_struct;
+struct StageSelection {
+    ExternalStageId external_id;
+    struct StageIdMapEntry* entry;
 };
 
-struct StructNumberAndStage unk_struct_804D49E8 = { 2, NULL };
-StructPairWithStageID unk_struct_804D49F0 = { 12, 2 };
+struct StageSelection selected_stage = { ExternalStageID_IZUMI, NULL };
+StageIdPair default_stage_pair = { IZUMI, ExternalStageID_IZUMI };
 
 f32 Stage_GetCamBoundsLeftOffset(void)
 {
@@ -326,148 +327,377 @@ s32 Stage_80225074(s32 arg0)
         HSD_ASSERT(526, 0);
     }
 
-    tmp = Ground_801C28AC(unk_struct_804D49E8.list_idx, r31, &spC);
+    tmp = Ground_801C28AC(selected_stage.external_id, r31, &spC);
     lbAudioAx_80023F28(spC);
     Ground_801C5A84(spC);
     Ground_801C5AA4(tmp);
     return arg0;
 }
 
-enum_t Stage_80225194(void)
+ExternalStageId Stage_80225194(void)
 {
-    return unk_struct_804D49E8.list_idx;
+    return selected_stage.external_id;
 }
 
-struct StructStageIDWithUnks unk_arr_803E9960[] = {
-    { 0, 0, 0 },  { 1, 0, 0 },  { 12, 0, 0 }, { 16, 0, 0 }, { 2, 0, 0 },
-    { 4, 0, 0 },  { 8, 0, 0 },  { 14, 0, 0 }, { 10, 0, 0 }, { 20, 0, 0 },
-    { 18, 0, 0 }, { 3, 0, 0 },  { 5, 0, 0 },  { 6, 0, 0 },  { 7, 0, 0 },
-    { 9, 0, 0 },  { 11, 0, 0 }, { 13, 0, 0 }, { 21, 0, 0 }, { 24, 0, 0 },
-    { 25, 0, 0 }, { 26, 0, 0 }, { 15, 0, 0 }, { 17, 0, 0 }, { 19, 0, 0 },
-    { 22, 0, 0 }, { 22, 0, 0 }, { 27, 0, 0 }, { 28, 0, 0 }, { 29, 0, 0 },
-    { 30, 0, 0 }, { 36, 0, 0 }, { 37, 0, 0 }, { 40, 0, 0 }, { 41, 0, 0 },
-    { 42, 0, 0 }, { 43, 0, 0 }, { 44, 0, 0 }, { 45, 0, 0 }, { 46, 0, 0 },
-    { 47, 0, 0 }, { 48, 0, 0 }, { 49, 0, 0 }, { 50, 0, 0 }, { 51, 0, 0 },
-    { 52, 0, 0 }, { 53, 0, 0 }, { 54, 0, 0 }, { 55, 0, 0 }, { 56, 0, 0 },
-    { 57, 0, 0 }, { 58, 0, 0 }, { 59, 0, 0 }, { 60, 0, 0 }, { 61, 0, 0 },
-    { 62, 0, 0 }, { 63, 0, 0 }, { 64, 0, 0 }, { 65, 0, 0 }, { 31, 0, 0 },
-    { 2, 0, 0 },  { 4, 0, 0 },  { 5, 0, 0 },  { 32, 0, 0 }, { 7, 0, 0 },
-    { 8, 0, 0 },  { 33, 0, 0 }, { 13, 0, 0 }, { 13, 0, 0 }, { 13, 0, 0 },
-    { 14, 0, 0 }, { 14, 0, 0 }, { 16, 0, 0 }, { 34, 0, 0 }, { 18, 0, 0 },
-    { 20, 0, 0 }, { 22, 0, 0 }, { 22, 0, 0 }, { 36, 0, 0 }, { 36, 0, 0 },
-    { 37, 0, 0 }, { 37, 0, 0 }, { 39, 0, 0 }, { 38, 0, 0 }, { 67, 0, 0 },
-    { 66, 0, 0 }, { 2, 0, 0 },  { 3, 0, 0 },  { 4, 0, 0 },  { 5, 0, 0 },
-    { 6, 0, 0 },  { 7, 0, 0 },  { 8, 0, 0 },  { 9, 0, 0 },  { 10, 0, 0 },
-    { 11, 0, 0 }, { 12, 0, 0 }, { 13, 0, 0 }, { 14, 0, 0 }, { 15, 0, 0 },
-    { 16, 0, 0 }, { 24, 0, 0 }, { 25, 0, 0 }, { 18, 0, 0 }, { 19, 0, 0 },
-    { 20, 0, 0 }, { 21, 0, 0 }, { 16, 0, 0 }, { 2, 0, 0 },  { 36, 0, 0 },
-    { 2, 0, 0 },  { 25, 0, 0 }, { 7, 0, 0 },  { 6, 0, 0 },  { 37, 0, 0 },
-    { 16, 0, 0 }, { 22, 0, 0 }, { 22, 0, 0 }, { 24, 0, 0 }, { 6, 0, 0 },
-    { 7, 0, 0 },  { 14, 0, 0 }, { 15, 0, 0 }, { 6, 0, 0 },  { 16, 0, 0 },
-    { 36, 0, 0 }, { 25, 0, 0 }, { 4, 0, 0 },  { 7, 0, 0 },  { 6, 0, 0 },
-    { 24, 0, 0 }, { 6, 0, 0 },  { 19, 0, 0 }, { 8, 0, 0 },  { 10, 0, 0 },
-    { 11, 0, 0 }, { 13, 0, 0 }, { 12, 0, 0 }, { 13, 0, 0 }, { 22, 0, 0 },
-    { 14, 0, 0 }, { 18, 0, 0 }, { 16, 0, 0 }, { 16, 0, 0 }, { 24, 0, 0 },
-    { 20, 0, 0 }, { 21, 0, 0 }, { 19, 0, 0 }, { 36, 0, 0 }, { 36, 0, 0 },
-    { 36, 0, 0 }, { 7, 0, 0 },  { 6, 0, 0 },  { 7, 0, 0 },  { 6, 0, 0 },
-    { 2, 0, 0 },  { 4, 0, 0 },  { 6, 0, 0 },  { 10, 0, 0 }, { 25, 0, 0 },
-    { 18, 0, 0 }, { 16, 0, 0 }, { 12, 0, 0 }, { 24, 0, 0 }, { 7, 0, 0 },
-    { 3, 0, 0 },  { 5, 0, 0 },  { 12, 0, 0 }, { 25, 0, 0 }, { 20, 0, 0 },
-    { 16, 0, 0 }, { 22, 0, 0 }, { 16, 0, 0 }, { 27, 0, 0 }, { 18, 0, 0 },
-    { 36, 0, 0 }, { 37, 0, 0 }, { 3, 0, 0 },  { 4, 0, 0 },  { 6, 0, 0 },
-    { 8, 0, 0 },  { 10, 0, 0 }, { 13, 0, 0 }, { 14, 0, 0 }, { 16, 0, 0 },
-    { 24, 0, 0 }, { 18, 0, 0 }, { 20, 0, 0 }, { 17, 0, 0 }, { 22, 0, 0 },
-    { 2, 0, 0 },  { 7, 0, 0 },  { 12, 0, 0 }, { 36, 0, 0 }, { 11, 0, 0 },
-    { 25, 0, 0 }, { 5, 0, 0 },  { 15, 0, 0 }, { 21, 0, 0 }, { 37, 0, 0 },
-    { 27, 0, 0 }, { 9, 0, 0 },  { 36, 0, 0 }, { 7, 0, 0 },  { 2, 0, 0 },
-    { 10, 0, 0 }, { 20, 0, 0 }, { 12, 0, 0 }, { 16, 0, 0 }, { 8, 0, 0 },
-    { 6, 0, 0 },  { 11, 0, 0 }, { 22, 0, 0 }, { 18, 0, 0 }, { 3, 0, 0 },
-    { 68, 0, 0 }, { 36, 0, 0 }, { 14, 0, 0 }, { 5, 0, 0 },  { 4, 0, 0 },
-    { 37, 0, 0 }, { 8, 0, 0 },  { 2, 0, 0 },  { 25, 0, 0 }, { 9, 0, 0 },
-    { 11, 0, 0 }, { 21, 0, 0 }, { 69, 0, 0 }, { 15, 0, 0 }, { 13, 0, 0 },
-    { 7, 0, 0 },  { 12, 0, 0 }, { 24, 0, 0 }, { 14, 0, 0 }, { 34, 0, 0 },
-    { 6, 0, 0 },  { 28, 0, 0 }, { 21, 0, 0 }, { 12, 0, 0 }, { 25, 0, 0 },
-    { 16, 0, 0 }, { 7, 0, 0 },  { 7, 0, 0 },  { 17, 0, 0 }, { 19, 0, 0 },
-    { 36, 0, 0 }, { 27, 0, 0 }, { 7, 0, 0 },  { 70, 0, 0 }, { 10, 0, 0 },
-    { 24, 0, 0 }, { 37, 0, 0 }, { 37, 0, 0 }, { 5, 0, 0 },  { 10, 0, 0 },
-    { 2, 0, 0 },  { 3, 0, 0 },  { 6, 0, 0 },  { 7, 0, 0 },  { 18, 0, 0 },
-    { 14, 0, 0 }, { 16, 0, 0 }, { 20, 0, 0 }, { 22, 0, 0 }, { 25, 0, 0 },
-    { 17, 0, 0 }, { 37, 0, 0 }, { 27, 0, 0 }, { 15, 0, 0 }, { 16, 0, 0 },
-    { 6, 0, 0 },  { 7, 0, 0 },  { 37, 0, 0 }, { 36, 0, 0 }, { 16, 0, 0 },
-    { 37, 0, 0 }, { 25, 0, 0 }, { 12, 0, 0 }, { 27, 0, 0 }, { 2, 0, 0 },
-    { 37, 0, 0 }, { 6, 0, 0 },  { 36, 0, 0 }, { 16, 0, 0 }, { 7, 0, 0 },
-    { 36, 0, 0 },
+/// Indexed by #ExternalStageId.
+struct StageIdMapEntry stage_id_map[] = {
+    { InternalStageID_Unk00, 0, 0 },
+    { TEST, 0, 0 },
+    { IZUMI, 0, 0 },
+    { PSTADIUM, 0, 0 },
+    { CASTLE, 0, 0 },
+    { KONGO, 0, 0 },
+    { ZEBES, 0, 0 },
+    { CORNERIA, 0, 0 },
+    { STORY, 0, 0 },
+    { ONETT, 0, 0 },
+    { MUTECITY, 0, 0 },
+    { RCRUISE, 0, 0 },
+    { GARDEN, 0, 0 },
+    { GREATBAY, 0, 0 },
+    { SHRINE, 0, 0 },
+    { KRAID, 0, 0 },
+    { YORSTER, 0, 0 },
+    { GREENS, 0, 0 },
+    { FOURSIDE, 0, 0 },
+    { INISHIE1, 0, 0 },
+    { INISHIE2, 0, 0 },
+    { InternalStageID_Unk26, 0, 0 },
+    { VENOM, 0, 0 },
+    { PURA, 0, 0 },
+    { BIGBLUE, 0, 0 },
+    { ICEMTN, 0, 0 },
+    { ICEMTN, 0, 0 },
+    { FLATZONE, 0, 0 },
+    { OLDPUPUPU, 0, 0 },
+    { OLDYOSHI, 0, 0 },
+    { OLDKONGO, 0, 0 },
+    { BATTLE, 0, 0 },
+    { LAST, 0, 0 },
+    { TMARIO, 0, 0 },
+    { TCAPTAIN, 0, 0 },
+    { TCLINK, 0, 0 },
+    { TDONKEY, 0, 0 },
+    { TDRMARIO, 0, 0 },
+    { TFALCO, 0, 0 },
+    { TFOX, 0, 0 },
+    { TICECLIMBER, 0, 0 },
+    { TKIRBY, 0, 0 },
+    { TKOOPA, 0, 0 },
+    { TLINK, 0, 0 },
+    { TLUIGI, 0, 0 },
+    { TMARS, 0, 0 },
+    { TMEWTWO, 0, 0 },
+    { TNESS, 0, 0 },
+    { TPEACH, 0, 0 },
+    { TPICHU, 0, 0 },
+    { TPIKACHU, 0, 0 },
+    { TPURIN, 0, 0 },
+    { TSAMUS, 0, 0 },
+    { TSEAK, 0, 0 },
+    { TYOSHI, 0, 0 },
+    { TZELDA, 0, 0 },
+    { TGAMEWATCH, 0, 0 },
+    { TEMBLEM, 0, 0 },
+    { TGANON, 0, 0 },
+    { KINOKOROUTE, 0, 0 },
+    { CASTLE, 0, 0 },
+    { KONGO, 0, 0 },
+    { GARDEN, 0, 0 },
+    { SHRINEROUTE, 0, 0 },
+    { SHRINE, 0, 0 },
+    { ZEBES, 0, 0 },
+    { ZEBESROUTE, 0, 0 },
+    { GREENS, 0, 0 },
+    { GREENS, 0, 0 },
+    { GREENS, 0, 0 },
+    { CORNERIA, 0, 0 },
+    { CORNERIA, 0, 0 },
+    { PSTADIUM, 0, 0 },
+    { BIGBLUEROUTE, 0, 0 },
+    { MUTECITY, 0, 0 },
+    { ONETT, 0, 0 },
+    { ICEMTN, 0, 0 },
+    { ICEMTN, 0, 0 },
+    { BATTLE, 0, 0 },
+    { BATTLE, 0, 0 },
+    { LAST, 0, 0 },
+    { LAST, 0, 0 },
+    { PUSHON, 0, 0 },
+    { FIGUREGET, 0, 0 },
+    { HOMERUN, 0, 0 },
+    { HEAL, 0, 0 },
+    { CASTLE, 0, 0 },
+    { RCRUISE, 0, 0 },
+    { KONGO, 0, 0 },
+    { GARDEN, 0, 0 },
+    { GREATBAY, 0, 0 },
+    { SHRINE, 0, 0 },
+    { ZEBES, 0, 0 },
+    { KRAID, 0, 0 },
+    { STORY, 0, 0 },
+    { YORSTER, 0, 0 },
+    { IZUMI, 0, 0 },
+    { GREENS, 0, 0 },
+    { CORNERIA, 0, 0 },
+    { VENOM, 0, 0 },
+    { PSTADIUM, 0, 0 },
+    { INISHIE1, 0, 0 },
+    { INISHIE2, 0, 0 },
+    { MUTECITY, 0, 0 },
+    { BIGBLUE, 0, 0 },
+    { ONETT, 0, 0 },
+    { FOURSIDE, 0, 0 },
+    { PSTADIUM, 0, 0 },
+    { CASTLE, 0, 0 },
+    { BATTLE, 0, 0 },
+    { CASTLE, 0, 0 },
+    { INISHIE2, 0, 0 },
+    { SHRINE, 0, 0 },
+    { GREATBAY, 0, 0 },
+    { LAST, 0, 0 },
+    { PSTADIUM, 0, 0 },
+    { ICEMTN, 0, 0 },
+    { ICEMTN, 0, 0 },
+    { INISHIE1, 0, 0 },
+    { GREATBAY, 0, 0 },
+    { SHRINE, 0, 0 },
+    { CORNERIA, 0, 0 },
+    { VENOM, 0, 0 },
+    { GREATBAY, 0, 0 },
+    { PSTADIUM, 0, 0 },
+    { BATTLE, 0, 0 },
+    { INISHIE2, 0, 0 },
+    { KONGO, 0, 0 },
+    { SHRINE, 0, 0 },
+    { GREATBAY, 0, 0 },
+    { INISHIE1, 0, 0 },
+    { GREATBAY, 0, 0 },
+    { BIGBLUE, 0, 0 },
+    { ZEBES, 0, 0 },
+    { STORY, 0, 0 },
+    { YORSTER, 0, 0 },
+    { GREENS, 0, 0 },
+    { IZUMI, 0, 0 },
+    { GREENS, 0, 0 },
+    { ICEMTN, 0, 0 },
+    { CORNERIA, 0, 0 },
+    { MUTECITY, 0, 0 },
+    { PSTADIUM, 0, 0 },
+    { PSTADIUM, 0, 0 },
+    { INISHIE1, 0, 0 },
+    { ONETT, 0, 0 },
+    { FOURSIDE, 0, 0 },
+    { BIGBLUE, 0, 0 },
+    { BATTLE, 0, 0 },
+    { BATTLE, 0, 0 },
+    { BATTLE, 0, 0 },
+    { SHRINE, 0, 0 },
+    { GREATBAY, 0, 0 },
+    { SHRINE, 0, 0 },
+    { GREATBAY, 0, 0 },
+    { CASTLE, 0, 0 },
+    { KONGO, 0, 0 },
+    { GREATBAY, 0, 0 },
+    { STORY, 0, 0 },
+    { INISHIE2, 0, 0 },
+    { MUTECITY, 0, 0 },
+    { PSTADIUM, 0, 0 },
+    { IZUMI, 0, 0 },
+    { INISHIE1, 0, 0 },
+    { SHRINE, 0, 0 },
+    { RCRUISE, 0, 0 },
+    { GARDEN, 0, 0 },
+    { IZUMI, 0, 0 },
+    { INISHIE2, 0, 0 },
+    { ONETT, 0, 0 },
+    { PSTADIUM, 0, 0 },
+    { ICEMTN, 0, 0 },
+    { PSTADIUM, 0, 0 },
+    { FLATZONE, 0, 0 },
+    { MUTECITY, 0, 0 },
+    { BATTLE, 0, 0 },
+    { LAST, 0, 0 },
+    { RCRUISE, 0, 0 },
+    { KONGO, 0, 0 },
+    { GREATBAY, 0, 0 },
+    { ZEBES, 0, 0 },
+    { STORY, 0, 0 },
+    { GREENS, 0, 0 },
+    { CORNERIA, 0, 0 },
+    { PSTADIUM, 0, 0 },
+    { INISHIE1, 0, 0 },
+    { MUTECITY, 0, 0 },
+    { ONETT, 0, 0 },
+    { PURA, 0, 0 },
+    { ICEMTN, 0, 0 },
+    { CASTLE, 0, 0 },
+    { SHRINE, 0, 0 },
+    { IZUMI, 0, 0 },
+    { BATTLE, 0, 0 },
+    { YORSTER, 0, 0 },
+    { INISHIE2, 0, 0 },
+    { GARDEN, 0, 0 },
+    { VENOM, 0, 0 },
+    { FOURSIDE, 0, 0 },
+    { LAST, 0, 0 },
+    { FLATZONE, 0, 0 },
+    { KRAID, 0, 0 },
+    { BATTLE, 0, 0 },
+    { SHRINE, 0, 0 },
+    { CASTLE, 0, 0 },
+    { STORY, 0, 0 },
+    { ONETT, 0, 0 },
+    { IZUMI, 0, 0 },
+    { PSTADIUM, 0, 0 },
+    { ZEBES, 0, 0 },
+    { GREATBAY, 0, 0 },
+    { YORSTER, 0, 0 },
+    { ICEMTN, 0, 0 },
+    { MUTECITY, 0, 0 },
+    { RCRUISE, 0, 0 },
+    { FIGURE1, 0, 0 },
+    { BATTLE, 0, 0 },
+    { CORNERIA, 0, 0 },
+    { GARDEN, 0, 0 },
+    { KONGO, 0, 0 },
+    { LAST, 0, 0 },
+    { ZEBES, 0, 0 },
+    { CASTLE, 0, 0 },
+    { INISHIE2, 0, 0 },
+    { KRAID, 0, 0 },
+    { YORSTER, 0, 0 },
+    { FOURSIDE, 0, 0 },
+    { FIGURE2, 0, 0 },
+    { VENOM, 0, 0 },
+    { GREENS, 0, 0 },
+    { SHRINE, 0, 0 },
+    { IZUMI, 0, 0 },
+    { INISHIE1, 0, 0 },
+    { CORNERIA, 0, 0 },
+    { BIGBLUEROUTE, 0, 0 },
+    { GREATBAY, 0, 0 },
+    { OLDPUPUPU, 0, 0 },
+    { FOURSIDE, 0, 0 },
+    { IZUMI, 0, 0 },
+    { INISHIE2, 0, 0 },
+    { PSTADIUM, 0, 0 },
+    { SHRINE, 0, 0 },
+    { SHRINE, 0, 0 },
+    { PURA, 0, 0 },
+    { BIGBLUE, 0, 0 },
+    { BATTLE, 0, 0 },
+    { FLATZONE, 0, 0 },
+    { SHRINE, 0, 0 },
+    { FIGURE3, 0, 0 },
+    { STORY, 0, 0 },
+    { INISHIE1, 0, 0 },
+    { LAST, 0, 0 },
+    { LAST, 0, 0 },
+    { GARDEN, 0, 0 },
+    { STORY, 0, 0 },
+    { CASTLE, 0, 0 },
+    { RCRUISE, 0, 0 },
+    { GREATBAY, 0, 0 },
+    { SHRINE, 0, 0 },
+    { MUTECITY, 0, 0 },
+    { CORNERIA, 0, 0 },
+    { PSTADIUM, 0, 0 },
+    { ONETT, 0, 0 },
+    { ICEMTN, 0, 0 },
+    { INISHIE2, 0, 0 },
+    { PURA, 0, 0 },
+    { LAST, 0, 0 },
+    { FLATZONE, 0, 0 },
+    { VENOM, 0, 0 },
+    { PSTADIUM, 0, 0 },
+    { GREATBAY, 0, 0 },
+    { SHRINE, 0, 0 },
+    { LAST, 0, 0 },
+    { BATTLE, 0, 0 },
+    { PSTADIUM, 0, 0 },
+    { LAST, 0, 0 },
+    { INISHIE2, 0, 0 },
+    { IZUMI, 0, 0 },
+    { FLATZONE, 0, 0 },
+    { CASTLE, 0, 0 },
+    { LAST, 0, 0 },
+    { GREATBAY, 0, 0 },
+    { BATTLE, 0, 0 },
+    { PSTADIUM, 0, 0 },
+    { SHRINE, 0, 0 },
+    { BATTLE, 0, 0 },
 };
 
-s32 Stage_8022519C(InternalStageId idx)
+InternalStageId Stage_8022519C(ExternalStageId external_id)
 {
-    return unk_arr_803E9960[idx].stage_id;
+    return stage_id_map[external_id].internal_id;
 }
 
-void Stage_802251B4(InternalStageId idx)
+void Stage_802251B4(ExternalStageId external_id)
 {
-    Ground_801C06B8(unk_arr_803E9960[idx].stage_id);
+    Ground_801C06B8(stage_id_map[external_id].internal_id);
 }
 
-void Stage_802251E8(InternalStageId idx, s32* _)
+void Stage_802251E8(ExternalStageId external_id, s32* _)
 {
-    StructPairWithStageID local_data;
+    StageIdPair local_data;
 
-    unk_struct_804D49E8.list_idx = idx;
-    unk_struct_804D49E8.unk_struct = &unk_arr_803E9960[idx];
+    selected_stage.external_id = external_id;
+    selected_stage.entry = &stage_id_map[external_id];
 
-    local_data = unk_struct_804D49F0;
+    local_data = default_stage_pair;
 
-    local_data.stage_id = unk_struct_804D49E8.unk_struct->stage_id;
-    local_data.list_idx = unk_struct_804D49E8.list_idx;
+    local_data.internal_id = selected_stage.entry->internal_id;
+    local_data.external_id = selected_stage.external_id;
 
     Ground_801C0754(&local_data);
 }
 
 void Stage_8022524C(void)
 {
-    StructPairWithStageID local_data;
+    StageIdPair local_data;
 
-    local_data = unk_struct_804D49F0;
+    local_data = default_stage_pair;
 
-    local_data.stage_id = unk_struct_804D49E8.unk_struct->stage_id;
-    local_data.list_idx = unk_struct_804D49E8.list_idx;
+    local_data.internal_id = selected_stage.entry->internal_id;
+    local_data.external_id = selected_stage.external_id;
 
     Ground_801C0800(&local_data);
 }
 
 void Stage_80225298(void)
 {
-    StructPairWithStageID local_data;
+    StageIdPair local_data;
 
-    local_data = unk_struct_804D49F0;
+    local_data = default_stage_pair;
 
-    local_data.stage_id = unk_struct_804D49E8.unk_struct->stage_id;
-    local_data.list_idx = unk_struct_804D49E8.list_idx;
+    local_data.internal_id = selected_stage.entry->internal_id;
+    local_data.external_id = selected_stage.external_id;
 
     Ground_801C0F78(&local_data);
 }
 
-void Stage_802252E4(InternalStageId idx, HSD_GObj* _)
+void Stage_802252E4(ExternalStageId external_id, HSD_GObj* _)
 {
-    StructPairWithStageID local_data;
+    StageIdPair local_data;
 
-    local_data = unk_struct_804D49F0;
+    local_data = default_stage_pair;
 
-    local_data.stage_id = unk_struct_804D49E8.unk_struct->stage_id;
-    local_data.list_idx = idx;
+    local_data.internal_id = selected_stage.entry->internal_id;
+    local_data.external_id = external_id;
 
     Ground_801C0FB8(&local_data);
 }
 
-void Stage_8022532C(InternalStageId idx, s32 arg1)
+void Stage_8022532C(ExternalStageId external_id, s32 arg1)
 {
-    StructPairWithStageID local_data;
+    StageIdPair local_data;
 
-    local_data = unk_struct_804D49F0;
+    local_data = default_stage_pair;
 
-    local_data.stage_id = unk_struct_804D49E8.unk_struct->stage_id;
-    local_data.list_idx = idx;
+    local_data.internal_id = selected_stage.entry->internal_id;
+    local_data.external_id = external_id;
 
     Ground_DemoInit(&local_data, arg1);
 }
