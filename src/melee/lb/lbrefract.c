@@ -379,6 +379,7 @@ HSD_TObjDesc tobjdesc1 = {
     NULL,
 };
 
+/// @todo Only differs by register allocation.
 void lbRefract_800222A4(void)
 {
     lbl_804336D0.refractionUserCount = 0;
@@ -394,6 +395,8 @@ void lbRefract_800222A4(void)
     {
         lbRefract_CallbackData cb;
         size_t i;
+        size_t j;
+        j = 0;
         for (i = 0; i < *refract_data; i++) {
             void* buf;
             buf = HSD_MemAlloc(GXGetTexBufferSize(0x20, 0x20, 3, 0, 0));
@@ -414,10 +417,11 @@ void lbRefract_800222A4(void)
             imagedesc0.width = 320;
             imagedesc0.height = 240;
 
-            lbl_804336D0.unk_8[i].image_ptr = buf;
-            lbl_804336D0.unk_8[i].format = 3;
-            lbl_804336D0.unk_8[i].width = 32;
-            lbl_804336D0.unk_8[i].height = 32;
+            lbl_804336D0.unk_8[j].image_ptr = buf;
+            lbl_804336D0.unk_8[j].format = 3;
+            lbl_804336D0.unk_8[j].width = 32;
+            lbl_804336D0.unk_8[j].height = 32;
+            j++;
         }
     }
 }
