@@ -10,12 +10,6 @@
 #include <melee/mn/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-/* 17C0C8 */ void fn_8017C0C8(void);
-/* 17C1A4 */ void fn_8017C1A4(HSD_GObj*);
-/* 17C71C */ void fn_8017C71C(void);
-/* 17C7A0 */ void fn_8017C7A0(void);
-/* 17C7EC */ void fn_8017C7EC(void);
-/* 17C838 */ void gm_8017C838(void);
 /* 17C984 */ void gm_8017C984(UNK_T);
 /* 17C9A8 */ void gm_8017C9A8(DebugGameOverData*, Unk1PData*, u8);
 /* 17CA38 */ UNK_RET gm_8017CA38(DebugGameOverData*, Unk1PData*,
@@ -123,7 +117,4 @@
 /* 182DF0 */ UnkMultimanData* gm_80182DF0(int c_kind, int);
 /* 182F40 */ void fn_80182F40(HSD_GObj*);
 /* 183218 */ UNK_RET gm_80183218(UNK_PARAMS);
-/* 18325C */ void fn_8018325C(HSD_GObj*, int);
-/* 184138 */ void fn_80184138(HSD_GObj*, int);
-
 #endif

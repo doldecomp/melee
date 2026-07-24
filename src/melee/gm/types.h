@@ -739,6 +739,37 @@ struct Unk1PData {
     } xC;
 };
 
+struct AdventureStageEntry {
+    /* 0x00 */ u8 stage_kind;
+    /* 0x01 */ u8 pad_1;
+    /* 0x02 */ u16 scale0_pct;
+    /* 0x04 */ u16 scale1_pct;
+    /* 0x06 */ u8 pad_6[0x14];
+};
+STATIC_ASSERT(sizeof(AdventureStageEntry) == 0x1A);
+
+struct AdventureStageTable {
+    /* 0x000 */ AdventureStageEntry entries[110];
+    /* 0xB2C */ u8 pad[4];
+};
+
+struct AllstarStageEntry {
+    /* 0x00 */ u8 stage_kind;
+    /* 0x01 */ u8 pad_1;
+    /* 0x02 */ u16 scale0_pct;
+    /* 0x04 */ u16 scale1_pct;
+    /* 0x06 */ u8 pad_6[0xA];
+    /* 0x10 */ u16 scale2_pct;
+    /* 0x12 */ u16 scale3_pct;
+    /* 0x14 */ u8 pad_14[0x6];
+};
+STATIC_ASSERT(sizeof(AllstarStageEntry) == 0x1A);
+
+struct AllstarStageTable {
+    /* 0x000 */ AllstarStageEntry entries[55];
+    /* 0x596 */ u8 pad[2];
+};
+
 struct UnkAdventureData {
     /* 00 */ Unk1PData x0;
     /* 48 */ u8 (*x48)(u8, u8);

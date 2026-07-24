@@ -7,6 +7,8 @@
 
 #include <melee/gm/types.h>
 
+/* 18325C */ void fn_8018325C(HSD_GObj*, int);
+/* 184138 */ void fn_80184138(HSD_GObj*, int);
 /* 1849E0 */ void fn_801849E0(HSD_GObj*);
 /* 184A04 */ void fn_80184A04(HSD_GObj*);
 /* 184A28 */ void fn_80184A28(HSD_GObj*);

@@ -1,6 +1,6 @@
 #include "gmregclear.h"
 
-#include "gmregclear_data.h"
+#include "gm_17C0.h"
 #include "platform.h"
 
 #include "baselib/forward.h"
