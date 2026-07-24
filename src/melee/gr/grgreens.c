@@ -1001,7 +1001,8 @@ static inline void get_block_material_params(int block_type, float* duration,
 void grGreens_80215358(Ground_GObj* gobj, int col, int row, int arg3, int arg4)
 {
     Ground* gp = GET_GROUND(gobj);
-    struct grGreens_BlockVars* block = getBlock(gp, row, col);
+    struct grGreens_BlockVars* block = &gp->u.greens.x8_blocks[row][col];
+    Vec vec;
     unsigned char arr[30];
     int m;
     int n;
@@ -1012,17 +1013,17 @@ void grGreens_80215358(Ground_GObj* gobj, int col, int row, int arg3, int arg4)
     int num;
     float grMaterial_801C8DE0_paramA;
     float grMaterial_801C8DE0_paramB;
-    Vec vec;
     float f;
-    PAD_STACK(0x10);
     HSD_ASSERT(1305, block->status==Gr_Greens_Block_Status_None);
     for (n = 0; n < 30; n++) {
         arr[n] = 0;
     }
     for (n = 0; n < 5; n++) {
         for (m = 0; m < 6; m++) {
-            if (getBlock(gp, n, m)->status != Gr_Greens_Block_Status_None) {
-                arr[getBlock(gp, n, m)->index] = 1;
+            if (gp->u.greens.x8_blocks[n][m].status !=
+                Gr_Greens_Block_Status_None)
+            {
+                arr[gp->u.greens.x8_blocks[n][m].index] = 1;
             }
         }
     }
@@ -1067,7 +1068,7 @@ void grGreens_80215358(Ground_GObj* gobj, int col, int row, int arg3, int arg4)
     block->x1C = 0;
     block->x1_4 = 0;
     block->x1_7 = 0;
-    vec.x = getVec(gp, row, col)->x;
+    vec.x = ((Vec(*)[6]) gp->u.greens.x4)[row][col].x;
     vec.y = block->x8;
     vec.z = 0.0f;
     if (arg4 == 3) {
