@@ -269,7 +269,7 @@ void Camera_800290D4(CmSubject* subject)
     cm_804D6458 = subject;
 }
 
-u32 Camera_80029124(Vec3* subject_pos, s32 distance)
+CameraEdge Camera_80029124(Vec3* subject_pos, s32 distance)
 {
     /// @todo lots of ways to match this without the padding
     u8 _PAD[4];
@@ -433,7 +433,7 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
     f32 z_pos;
     f32 z_factor;
     CameraBounds* new_bounds;
-    BOOL boundary_flags;
+    CameraEdge camera_edge;
     Vec3 base_pos;
     Vec3 test_pos;
     Vec3 default_offset;
@@ -482,20 +482,20 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
                 subject_count++;
                 base_pos = subject->x10;
                 test_pos = subject->x10;
-                boundary_flags = Camera_80029124(&base_pos, 0);
-                if (boundary_flags != 0) {
+                camera_edge = Camera_80029124(&base_pos, 0);
+                if (camera_edge != 0) {
                     Ground_801C4368(&base_ground, &base_ground_intercept);
                     base_ground += 1.0;
-                    if (boundary_flags & CAMERA_EDGE_LEFT) {
+                    if (camera_edge & CAMERA_EDGE_LEFT) {
                         base_pos.x = Stage_GetCamBoundsLeftOffset();
                     }
-                    if (boundary_flags & CAMERA_EDGE_RIGHT) {
+                    if (camera_edge & CAMERA_EDGE_RIGHT) {
                         base_pos.x = Stage_GetCamBoundsRightOffset();
                     }
-                    if (boundary_flags & CAMERA_EDGE_TOP) {
+                    if (camera_edge & CAMERA_EDGE_TOP) {
                         base_pos.y = Stage_GetCamBoundsTopOffset();
                     }
-                    if (boundary_flags & CAMERA_EDGE_BOTTOM) {
+                    if (camera_edge & CAMERA_EDGE_BOTTOM) {
                         base_pos.y =
                             (Stage_GetCamBoundsBottomOffset() > base_ground)
                                 ? (Stage_GetCamBoundsBottomOffset())
@@ -504,20 +504,20 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
                 }
                 test_pos.x =
                     (subject->x2C.x * tracking_multiplier) + base_pos.x;
-                boundary_flags = Camera_80029124(&test_pos, 0);
-                if (boundary_flags != 0) {
+                camera_edge = Camera_80029124(&test_pos, 0);
+                if (camera_edge != 0) {
                     Ground_801C4368(&x_extent_ground, &x_extent_intercept);
                     x_extent_ground += 1.0;
-                    if (boundary_flags & CAMERA_EDGE_LEFT) {
+                    if (camera_edge & CAMERA_EDGE_LEFT) {
                         test_pos.x = Stage_GetCamBoundsLeftOffset();
                     }
-                    if (boundary_flags & CAMERA_EDGE_RIGHT) {
+                    if (camera_edge & CAMERA_EDGE_RIGHT) {
                         test_pos.x = Stage_GetCamBoundsRightOffset();
                     }
-                    if (boundary_flags & CAMERA_EDGE_TOP) {
+                    if (camera_edge & CAMERA_EDGE_TOP) {
                         test_pos.y = Stage_GetCamBoundsTopOffset();
                     }
-                    if (boundary_flags & CAMERA_EDGE_BOTTOM) {
+                    if (camera_edge & CAMERA_EDGE_BOTTOM) {
                         test_pos.y = (Stage_GetCamBoundsBottomOffset() >
                                       x_extent_ground)
                                          ? (Stage_GetCamBoundsBottomOffset())
@@ -532,20 +532,20 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
                 }
                 test_pos.x =
                     (subject->x2C.y * tracking_multiplier) + base_pos.x;
-                boundary_flags = Camera_80029124(&test_pos, 0);
-                if (boundary_flags != 0) {
+                camera_edge = Camera_80029124(&test_pos, 0);
+                if (camera_edge != 0) {
                     Ground_801C4368(&alt_x_ground, &alt_x_intercept);
                     alt_x_ground += 1.0;
-                    if (boundary_flags & CAMERA_EDGE_LEFT) {
+                    if (camera_edge & CAMERA_EDGE_LEFT) {
                         test_pos.x = Stage_GetCamBoundsLeftOffset();
                     }
-                    if (boundary_flags & CAMERA_EDGE_RIGHT) {
+                    if (camera_edge & CAMERA_EDGE_RIGHT) {
                         test_pos.x = Stage_GetCamBoundsRightOffset();
                     }
-                    if (boundary_flags & CAMERA_EDGE_TOP) {
+                    if (camera_edge & CAMERA_EDGE_TOP) {
                         test_pos.y = Stage_GetCamBoundsTopOffset();
                     }
-                    if (boundary_flags & CAMERA_EDGE_BOTTOM) {
+                    if (camera_edge & CAMERA_EDGE_BOTTOM) {
                         test_pos.y =
                             (Stage_GetCamBoundsBottomOffset() > alt_x_ground)
                                 ? (Stage_GetCamBoundsBottomOffset())
@@ -560,20 +560,20 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
                 }
                 test_pos.y =
                     (subject->x34.y * tracking_multiplier) + base_pos.y;
-                boundary_flags = Camera_80029124(&test_pos, 0);
-                if (boundary_flags != 0) {
+                camera_edge = Camera_80029124(&test_pos, 0);
+                if (camera_edge != 0) {
                     Ground_801C4368(&y_extent_ground, &y_extent_intercept);
                     y_extent_ground += 1.0;
-                    if (boundary_flags & CAMERA_EDGE_LEFT) {
+                    if (camera_edge & CAMERA_EDGE_LEFT) {
                         test_pos.x = Stage_GetCamBoundsLeftOffset();
                     }
-                    if (boundary_flags & CAMERA_EDGE_RIGHT) {
+                    if (camera_edge & CAMERA_EDGE_RIGHT) {
                         test_pos.x = Stage_GetCamBoundsRightOffset();
                     }
-                    if (boundary_flags & CAMERA_EDGE_TOP) {
+                    if (camera_edge & CAMERA_EDGE_TOP) {
                         test_pos.y = Stage_GetCamBoundsTopOffset();
                     }
-                    if (boundary_flags & CAMERA_EDGE_BOTTOM) {
+                    if (camera_edge & CAMERA_EDGE_BOTTOM) {
                         test_pos.y = (Stage_GetCamBoundsBottomOffset() >
                                       y_extent_ground)
                                          ? (Stage_GetCamBoundsBottomOffset())
@@ -588,20 +588,20 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
                 }
                 test_pos.y =
                     (subject->x34.x * tracking_multiplier) + base_pos.y;
-                boundary_flags = Camera_80029124(&test_pos, 0);
-                if (boundary_flags != 0) {
+                camera_edge = Camera_80029124(&test_pos, 0);
+                if (camera_edge != 0) {
                     Ground_801C4368(&alt_y_ground, &alt_y_intercept);
                     alt_y_ground += 1.0;
-                    if (boundary_flags & CAMERA_EDGE_LEFT) {
+                    if (camera_edge & CAMERA_EDGE_LEFT) {
                         test_pos.x = Stage_GetCamBoundsLeftOffset();
                     }
-                    if (boundary_flags & CAMERA_EDGE_RIGHT) {
+                    if (camera_edge & CAMERA_EDGE_RIGHT) {
                         test_pos.x = Stage_GetCamBoundsRightOffset();
                     }
-                    if (boundary_flags & CAMERA_EDGE_TOP) {
+                    if (camera_edge & CAMERA_EDGE_TOP) {
                         test_pos.y = Stage_GetCamBoundsTopOffset();
                     }
-                    if (boundary_flags & CAMERA_EDGE_BOTTOM) {
+                    if (camera_edge & CAMERA_EDGE_BOTTOM) {
                         test_pos.y =
                             (Stage_GetCamBoundsBottomOffset() > alt_y_ground)
                                 ? (Stage_GetCamBoundsBottomOffset())
@@ -2388,7 +2388,8 @@ void Camera_8002CDDC(void* unused)
     if (cm_80452C68.x2C4 != 10 && cm_80452C68.x2C4 != 11 &&
         (gobj = Player_GetEntity(cm_80452C68.x2C4)) != NULL &&
         (subject = ftLib_80086B74(gobj)) != NULL && Camera_8002928C(subject) &&
-        !subject->x8 && (u32) Camera_80029124(&subject->x1C, 0) == 0 &&
+        !subject->x8 &&
+        Camera_80029124(&subject->x1C, 0) == CAMERA_EDGE_NONE &&
         ABS(subject->x1C.z) < 30.0f)
     {
         track_subject(&cm_80452C68.transform, pos_ptr, &cm_803BCCA0.x6C,
@@ -4367,7 +4368,7 @@ f32 Camera_80031144(void)
 
 bool Camera_80031154(Vec3* arg0)
 {
-    if ((u32) Camera_80029124(arg0, 0) == 0) {
+    if (Camera_80029124(arg0, 0) == CAMERA_EDGE_NONE) {
         return true;
     }
     return false;
@@ -4375,7 +4376,7 @@ bool Camera_80031154(Vec3* arg0)
 
 bool Camera_8003118C(Vec3* arg0, float arg1)
 {
-    if ((u32) Camera_80029124(arg0, arg1) == 0) {
+    if (Camera_80029124(arg0, arg1) == CAMERA_EDGE_NONE) {
         return true;
     }
     return false;

@@ -3,15 +3,6 @@
 
 #include <placeholder.h>
 
-/// @todo not sure if the defines or the enums are better.
-/// setting the return type of Camera_80029124 to CameraEdge means
-/// we need to cast to u32 when checking for CAMERA_EDGE_NONE (0)
-// #define CAMERA_EDGE_NONE 0
-// #define CAMERA_EDGE_TOP (1 << 0)    ///< 0x1
-// #define CAMERA_EDGE_BOTTOM (1 << 1) ///< 0x2
-// #define CAMERA_EDGE_LEFT (1 << 2)   ///< 0x4
-// #define CAMERA_EDGE_RIGHT (1 << 3)  ///< 0x8
-
 typedef enum CameraType {
     CAMERA_STANDARD = 0,      ///< mode used during normal gameplay
     CAMERA_PAUSE = 1,         ///< mode used during pause menu
@@ -29,13 +20,19 @@ typedef enum CameraType {
     CAMERA_DEBUG_FREE = 8,
 } CameraType;
 
-typedef enum CameraEdge {
-    CAMERA_EDGE_NONE = 0,
-    CAMERA_EDGE_TOP = (1 << 0),    ///< 0x1
-    CAMERA_EDGE_BOTTOM = (1 << 1), ///< 0x2
-    CAMERA_EDGE_LEFT = (1 << 2),   ///< 0x4
-    CAMERA_EDGE_RIGHT = (1 << 3),  ///< 0x8
-} CameraEdge;
+typedef u32 CameraEdge;
+
+// #define CAMERA_EDGE_NONE 0
+// #define CAMERA_EDGE_TOP (1 << 0)    ///< 0x1
+// #define CAMERA_EDGE_BOTTOM (1 << 1) ///< 0x2
+// #define CAMERA_EDGE_LEFT (1 << 2)   ///< 0x4
+// #define CAMERA_EDGE_RIGHT (1 << 3)  ///< 0x8
+
+static CameraEdge const CAMERA_EDGE_NONE = 0;
+static CameraEdge const CAMERA_EDGE_TOP = 1 << 0;    ///< 0x1
+static CameraEdge const CAMERA_EDGE_BOTTOM = 1 << 1; ///< 0x2
+static CameraEdge const CAMERA_EDGE_LEFT = 1 << 2;   ///< 0x4
+static CameraEdge const CAMERA_EDGE_RIGHT = 1 << 3;  ///< 0x8
 
 typedef struct Camera Camera;
 typedef struct CameraBounds CameraBounds;
