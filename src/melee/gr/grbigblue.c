@@ -3626,6 +3626,7 @@ typedef union grBigBlue_CarPhysics {
 void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
 {
     grBigBlue_CarPhysics* gp = gobj->user_data;
+    Point3d sp_vec;
     s32 offset;
     HSD_JObj* jobj;
     u8* lane_flags;
@@ -3636,7 +3637,6 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
     f32 f31_rot;
     f32 heading_osc;
     f32 heading_val;
-    Point3d sp_vec;
 
     /* Check and handle lane status */
     {
