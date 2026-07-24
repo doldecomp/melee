@@ -35,7 +35,7 @@ struct grGarden_YakumonoParam {
     float x1C;
 };
 
-StageCallbacks grGd_803E5248[] = {
+StageCallbacks grGd_StageCallbacks[] = {
     { grGarden_80202D60, grGarden_80202D8C, grGarden_80202D94,
       grGarden_80202D98, 0 },
     { grGarden_80203004, grGarden_80203090, grGarden_80203098,
@@ -54,7 +54,7 @@ StageCallbacks grGd_803E5248[] = {
 
 StageData grGd_803E52E0 = {
     GARDEN,
-    grGd_803E5248,
+    grGd_StageCallbacks,
     "/GrGd.dat",
     grGarden_80202B70,
     grGarden_80202B6C,
@@ -109,7 +109,7 @@ bool grGarden_80202C70(void)
 HSD_GObj* grGarden_80202C78(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grGd_803E5248[gobj_id];
+    StageCallbacks* callbacks = &grGd_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 

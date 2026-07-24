@@ -74,7 +74,7 @@ Vec3 const grPushOn_803B8458 = { 0.0f, 100.0f, 0.0f };
 Vec3 const grPushOn_803B8464 = { 0.0f, 100.0f, 0.0f };
 float grPushOn_804D4934 = 16.0f;
 
-StageCallbacks grPushOn_803E7AC8[3] = {
+StageCallbacks grPushOn_StageCallbacks[3] = {
     { grPushOn_802184CC, grPushOn_80218590, grPushOn_80218598,
       grPushOn_8021859C, 0 },
     { grPushOn_802185A0, grPushOn_80218670, grPushOn_802186C8,
@@ -85,7 +85,7 @@ StageCallbacks grPushOn_803E7AC8[3] = {
 
 StageData grPushOn_803E7B10 = {
     PUSHON,
-    grPushOn_803E7AC8,
+    grPushOn_StageCallbacks,
     "/GrNPo.dat",
     grPushOn_802182C8,
     grPushOn_802182C4,
@@ -148,7 +148,7 @@ bool grPushOn_802183DC(void)
 HSD_GObj* grPushOn_802183E4(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grPushOn_803E7AC8[gobj_id];
+    StageCallbacks* callbacks = &grPushOn_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 

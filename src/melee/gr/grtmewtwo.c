@@ -58,7 +58,7 @@ typedef struct grTMewtwo_UnkStruct {
 /* 3E8FC0 */ static void grTMewtwo_803E8FC0(Ground_GObj* gobj);
 /* 4D6B08 */ static grTMewtwo_UnkStruct* yakumono_param;
 
-static StageCallbacks grTMewtwo_803E8F70[4] = {
+static StageCallbacks grTMewtwo_StageCallbacks[4] = {
     {
         grTMewtwo_8022236C,
         grTMewtwo_80222398,
@@ -91,7 +91,7 @@ static StageCallbacks grTMewtwo_803E8F70[4] = {
 
 StageData grTMewtwo_803E8FCC = {
     TMEWTWO,
-    grTMewtwo_803E8F70,
+    grTMewtwo_StageCallbacks,
     "/GrTMt.dat",
     grTMewtwo_802221DC,
     grTMewtwo_802221D8,
@@ -135,7 +135,7 @@ bool grTMewtwo_8022227C(void)
 Ground_GObj* grTMewtwo_80222284(int index)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTMewtwo_803E8F70[index];
+    StageCallbacks* callbacks = &grTMewtwo_StageCallbacks[index];
 
     gobj = Ground_GetStageGObj(index);
 

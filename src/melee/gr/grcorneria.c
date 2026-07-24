@@ -91,7 +91,7 @@ static HSD_GObj* arwing_gobjs[3] = { 0 };
 static int arwing_types[3] = { 0 };
 static int arwing_groups[3] = { 0 };
 
-StageCallbacks grCn_803E1D8C[] = {
+StageCallbacks grCn_StageCallbacks[] = {
     {
         grCorneria_801DD620,
         grCorneria_801DD64C,
@@ -229,7 +229,7 @@ StageCallbacks grCn_803E1D8C[] = {
 
 StageData grCn_803E1F08 = {
     CORNERIA,
-    grCn_803E1D8C,
+    grCn_StageCallbacks,
     "/GrCn",
     grCorneria_801DD350,
     grCorneria_801DD2C0,
@@ -566,7 +566,7 @@ bool grCorneria_801DD52C(void)
 HSD_GObj* grCorneria_801DD534(int arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grCn_803E1D8C[arg0];
+    StageCallbacks* callbacks = &grCn_StageCallbacks[arg0];
 
     gobj = Ground_GetStageGObj(arg0);
 

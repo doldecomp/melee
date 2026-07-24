@@ -13,7 +13,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-static StageCallbacks grTCLink_803E86D0[] = {
+static StageCallbacks grTCLink_StageCallbacks[] = {
     {
         grTCLink_802200D0,
         grTCLink_802200FC,
@@ -46,7 +46,7 @@ static StageCallbacks grTCLink_803E86D0[] = {
 
 StageData grTCLink_803E872C = {
     TCLINK,
-    grTCLink_803E86D0,
+    grTCLink_StageCallbacks,
     "/GrTCl.dat",
     grTCLink_8021FF48,
     grTCLink_8021FF44,
@@ -86,7 +86,7 @@ bool grTCLink_8021FFE0(void)
 HSD_GObj* grTCLink_8021FFE8(int id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTCLink_803E86D0[id];
+    StageCallbacks* callbacks = &grTCLink_StageCallbacks[id];
 
     gobj = Ground_GetStageGObj(id);
 

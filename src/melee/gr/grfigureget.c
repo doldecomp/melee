@@ -66,7 +66,7 @@ static Vec3 const grFigureGet_803B8470 = { 0.0f, 0.0f, 0.0f };
 /* 219C90 */ static bool grFigureGet_OnCheckShadowRender(Vec3*, int,
                                                          HSD_JObj*);
 
-static StageCallbacks grFigureGet_803E7D00[2] = {
+static StageCallbacks grFigureGet_StageCallbacks[2] = {
     { grFigureGet_802196B4, grFigureGet_802196E0, grFigureGet_802196E8,
       grFigureGet_802196EC, 0 },
     { grFigureGet_802196F0, grFigureGet_80219890, grFigureGet_80219898,
@@ -75,7 +75,7 @@ static StageCallbacks grFigureGet_803E7D00[2] = {
 
 StageData grFigureGet_803E7D34 = {
     FIGUREGET,
-    grFigureGet_803E7D00,
+    grFigureGet_StageCallbacks,
     "/GrNFg.dat",
     grFigureGet_OnInit,
     grFigureGet_OnDemoInit,
@@ -119,7 +119,7 @@ bool grFigureGet_802195C4(void)
 HSD_GObj* grFigureGet_802195CC(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grFigureGet_803E7D00[gobj_id];
+    StageCallbacks* callbacks = &grFigureGet_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 

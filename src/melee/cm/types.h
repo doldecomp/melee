@@ -78,7 +78,7 @@ struct CameraDebugMode {
     Vec3 free_int_pos;
     Vec3 free_eye_pos;
     float free_fov;
-    u8 _4C[8]; // padding? not sure if this is correct
+    u8 _58[4];
 };
 
 struct Camera {

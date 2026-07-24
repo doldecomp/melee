@@ -39,7 +39,7 @@
 /* 223E1C */ static DynamicsDesc* grTYoshi_OnTouchLine(enum_t);
 /* 223E24 */ static bool grTYoshi_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 
-static StageCallbacks grTYs_803E9578[] = {
+static StageCallbacks grTYs_StageCallbacks[] = {
     {
         grTYoshi_80223CD4,
         grTYoshi_80223D00,
@@ -66,7 +66,7 @@ static StageCallbacks grTYs_803E9578[] = {
 
 StageData grTYs_803E95D4 = {
     TYOSHI,
-    grTYs_803E9578,
+    grTYs_StageCallbacks,
     "/GrTYs.dat",
     grTYoshi_OnInit,
     grTYoshi_OnDemoInit,
@@ -102,7 +102,7 @@ static bool grTYoshi_80223BE4(void)
 static HSD_GObj* grTYoshi_80223BEC(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTYs_803E9578[gobj_id];
+    StageCallbacks* callbacks = &grTYs_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 

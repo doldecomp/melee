@@ -30,7 +30,7 @@ S16Vec3 grI2_803E4A60[] = {
     { 4, 6, 0 },  { 5, 7, 0 },   { 6, 8, 0 },   { 7, 9, 0 },   { 8, 10, 0 },
     { 9, 11, 0 }, { 10, 12, 0 }, { 11, 13, 0 }, { 2, 14, 0 },
 };
-StageCallbacks grI2_803E4AB4[] = {
+StageCallbacks grI2_StageCallbacks[] = {
     {
         grInishie2_801FCDC8,
         grInishie2_801FCDF4,
@@ -147,7 +147,7 @@ StageCallbacks grI2_803E4AB4[] = {
 
 StageData grI2_803E4C00 = {
     0x19,
-    grI2_803E4AB4,
+    grI2_StageCallbacks,
     "/GrI2.dat",
     grInishie2_801FCBC4,
     grInishie2_801FCBC0,
@@ -228,7 +228,7 @@ bool grInishie2_801FCCD4(void)
 HSD_GObj* grInishie2_801FCCDC(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grI2_803E4AB4[gobj_id];
+    StageCallbacks* callbacks = &grI2_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 

@@ -71,7 +71,7 @@ S16Vec3 grOk_803E6580[] = {
     { 1, 3, 2 },
 };
 
-StageCallbacks grOk_803E658C[4] = {
+StageCallbacks grOk_StageCallbacks[4] = {
     { grOldKongo_8020F618, grOldKongo_8020F644, grOldKongo_8020F64C,
       grOldKongo_8020F650, 0 },
     { grOldKongo_8020F6E4, grOldKongo_8020F880, grOldKongo_8020F888,
@@ -92,7 +92,7 @@ typedef struct grOk_StageData {
 grOk_StageData grOk_803E65E8 = {
     {
         OLDKONGO,
-        grOk_803E658C,
+        grOk_StageCallbacks,
         grOk_803E65DC,
         grOldKongo_8020F46C,
         grOldKongo_8020F468,
@@ -141,7 +141,7 @@ bool grOldKongo_8020F524(void)
 HSD_GObj* grOldKongo_8020F52C(int arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grOk_803E658C[arg0];
+    StageCallbacks* callbacks = &grOk_StageCallbacks[arg0];
 
     gobj = Ground_GetStageGObj(arg0);
 

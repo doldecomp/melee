@@ -36,7 +36,7 @@
 /* 20E4FC */ static bool grFigure2_8020E4FC(Vec3* vector, int number,
                                             HSD_JObj* jobj);
 
-static StageCallbacks grEF2_803E6328[3] = {
+static StageCallbacks grEF2_StageCallbacks[3] = {
     { grFigure2_8020E3FC, grFigure2_8020E428, grFigure2_8020E430,
       grFigure2_8020E434, 0UL },
     { grFigure2_8020E438, grFigure2_8020E464, grFigure2_8020E46C,
@@ -47,7 +47,7 @@ static StageCallbacks grEF2_803E6328[3] = {
 
 StageData grEF2_803E6370 = {
     FIGURE2,
-    grEF2_803E6328,
+    grEF2_StageCallbacks,
     "/GrEF2.dat",
     grFigure2_8020E274,
     grFigure1_8020E270,
@@ -89,7 +89,7 @@ static bool grFigure2_8020E30C(void)
 static HSD_GObj* grFigure2_8020E314(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grEF2_803E6328[gobj_id];
+    StageCallbacks* callbacks = &grEF2_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 

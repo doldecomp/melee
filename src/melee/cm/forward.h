@@ -3,10 +3,14 @@
 
 #include <placeholder.h>
 
-#define TOP_BOUND (1 << 0)    ///< 0x1
-#define BOTTOM_BOUND (1 << 1) ///< 0x2
-#define LEFT_BOUND (1 << 2)   ///< 0x4
-#define RIGHT_BOUND (1 << 3)  ///< 0x8
+/// @todo not sure if the defines or the enums are better.
+/// setting the return type of Camera_80029124 to CameraEdge means
+/// we need to cast to u32 when checking for CAMERA_EDGE_NONE (0)
+// #define CAMERA_EDGE_NONE 0
+// #define CAMERA_EDGE_TOP (1 << 0)    ///< 0x1
+// #define CAMERA_EDGE_BOTTOM (1 << 1) ///< 0x2
+// #define CAMERA_EDGE_LEFT (1 << 2)   ///< 0x4
+// #define CAMERA_EDGE_RIGHT (1 << 3)  ///< 0x8
 
 typedef enum CameraType {
     CAMERA_STANDARD = 0,      ///< mode used during normal gameplay
@@ -24,6 +28,14 @@ typedef enum CameraType {
         7, ///< follows the player, but can change pos/rotation offset
     CAMERA_DEBUG_FREE = 8,
 } CameraType;
+
+typedef enum CameraEdge {
+    CAMERA_EDGE_NONE = 0,
+    CAMERA_EDGE_TOP = (1 << 0),    ///< 0x1
+    CAMERA_EDGE_BOTTOM = (1 << 1), ///< 0x2
+    CAMERA_EDGE_LEFT = (1 << 2),   ///< 0x4
+    CAMERA_EDGE_RIGHT = (1 << 3),  ///< 0x8
+} CameraEdge;
 
 typedef struct Camera Camera;
 typedef struct CameraBounds CameraBounds;

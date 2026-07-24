@@ -27,7 +27,7 @@ struct grKraid_YakumonoParam {
 S16Vec3 grKr_803E4C78[] = { { 0, 3, 12 }, { 1, 3, 12 }, { 2, 3, 12 },
                             { 3, 3, 12 }, { 4, 3, 12 }, { 5, 3, 12 } };
 
-StageCallbacks grKr_803E4C9C[5] = {
+StageCallbacks grKr_StageCallbacks[5] = {
     { grKraid_801FE1B0, grKraid_801FE1DC, grKraid_801FE1E4, grKraid_801FE1E8,
       0 },
     { grKraid_801FE1EC, grKraid_801FE2C8, grKraid_801FE2D0, grKraid_801FE35C,
@@ -42,7 +42,7 @@ StageCallbacks grKr_803E4C9C[5] = {
 
 StageData grKr_803E4D0C = {
     KRAID,
-    grKr_803E4C9C,
+    grKr_StageCallbacks,
     "/GrKr.dat",
     grKraid_OnInit,
     grKraid_OnDemoInit,
@@ -97,7 +97,7 @@ bool grKraid_801FE0BC(void)
 HSD_GObj* grKraid_801FE0C4(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grKr_803E4C9C[gobj_id];
+    StageCallbacks* callbacks = &grKr_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 

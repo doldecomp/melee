@@ -71,7 +71,7 @@ static void sdata2_order(void)
 
 void grBigBlue_801E8D04(Ground_GObj*);
 
-StageCallbacks grBb_Route_803E5E78[38] = {
+StageCallbacks grBb_Route_StageCallbacks[38] = {
     { grBigBlueRoute_8020BABC, grBigBlueRoute_8020BB00,
       grBigBlueRoute_8020BB08, grBigBlueRoute_8020BB0C, 0 },
     { grBigBlueRoute_8020BB68, grBigBlueRoute_8020BC24,
@@ -136,7 +136,7 @@ static struct {
     char fmt[0x24];
 } grBb_Route_803E617C = {
     BIGBLUEROUTE,
-    grBb_Route_803E5E78,
+    grBb_Route_StageCallbacks,
     grBb_Route_803E6170,
     grBigBlueRoute_8020B89C,
     grBigBlueRoute_8020B864,
@@ -218,7 +218,7 @@ bool grBigBlueRoute_8020B9CC(void)
 HSD_GObj* grBigBlueRoute_8020B9D4(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grBb_Route_803E5E78[gobj_id];
+    StageCallbacks* callbacks = &grBb_Route_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 

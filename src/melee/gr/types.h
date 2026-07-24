@@ -674,6 +674,7 @@ struct grIceMt_GroundVars {
     /* +44 gp+10E */ s16 x100[4];
     /* +44 gp+108 */ s16 x108[8];
 };
+
 struct grIceMt_GroundVars2 {
     /* +00 gp+C4 */ f32 xC4;
     /* +04 gp+C8 */ HSD_JObj* xC8;
@@ -1563,11 +1564,11 @@ struct grShrineroute_GroundVars3 {
     /* +20 gp+E4 */ HSD_JObj* xE4;
 };
 
-struct Battlefield {
-    /* +0 gp+C4 */ int bg_state;
-    /* +4 gp+C8 */ int curr_bg;
-    /* +8 gp+CC */ int prev_bg;
-    /* +C gp+D0 */ int bg_timer;
+struct grNBa_BG_Vars {
+    /* +0 gp+C4 */ int state;
+    /* +4 gp+C8 */ int curr;
+    /* +8 gp+CC */ int prev;
+    /* +C gp+D0 */ int timer;
 };
 
 struct Last_GroundVars {
@@ -1836,7 +1837,7 @@ struct Ground {
         struct grStadium_Display display; ///< Pokemon Stadium jumbotron
         struct Randall randall;
         struct ShyGuys shyguys;
-        struct Battlefield battle;
+        struct grNBa_BG_Vars battle_bg;
         struct Last_GroundVars last;
         struct Map_GroundVars map;
         struct grPushOn_GroundVars pushon;

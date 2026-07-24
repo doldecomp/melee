@@ -157,7 +157,7 @@ u16 grBb_803E2938[] = {
 extern grBb_Data803E2D78 grBb_803E2D78;
 extern grBb_Data803E2EB8 grBb_803E2EB8;
 
-StageCallbacks grBb_803E29E0[] = {
+StageCallbacks grBb_StageCallbacks[] = {
     { grBigBlue_801E5AE4, grBigBlue_801E5B10, grBigBlue_801E5B18,
       grBigBlue_801E5B1C, 0 },
     { grBigBlue_801E6298, grBigBlue_801E6354, grBigBlue_801E635C,
@@ -298,7 +298,7 @@ char grBb_803E2D14[] = "/GrBb.dat";
 grBb_StageData grBb_803E2D20 = {
     {
         BIGBLUE,
-        grBb_803E29E0,
+        grBb_StageCallbacks,
         grBb_803E2D14,
         grBigBlue_801E57C0,
         grBigBlue_801E57BC,
@@ -316,7 +316,7 @@ grBb_StageData grBb_803E2D20 = {
 HSD_GObj* grBigBlue_801E59F8(s32 id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* cbs = &grBb_803E29E0[id];
+    StageCallbacks* cbs = &grBb_StageCallbacks[id];
     gobj = Ground_GetStageGObj(id);
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);

@@ -39,7 +39,7 @@
 /* 222E6C */ static DynamicsDesc* grTPichu_80222E6C(enum_t);
 /* 222E74 */ static bool grTPichu_80222E74(Vec3*, int, HSD_JObj*);
 
-static StageCallbacks grTPc_803E91B0[] = {
+static StageCallbacks grTPc_StageCallbacks[] = {
     {
         grTPichu_80222D24,
         grTPichu_80222D50,
@@ -66,7 +66,7 @@ static StageCallbacks grTPc_803E91B0[] = {
 
 StageData grTPc_803E920C = {
     TPICHU,
-    grTPc_803E91B0,
+    grTPc_StageCallbacks,
     "/GrTPc.dat",
     grTPichu_80222B9C,
     grTPichu_80222B98,
@@ -102,7 +102,7 @@ static bool grTPichu_80222C34(void)
 static HSD_GObj* grTPichu_80222C3C(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTPc_803E91B0[gobj_id];
+    StageCallbacks* callbacks = &grTPc_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 

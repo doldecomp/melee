@@ -41,7 +41,7 @@ void grTLink_80221BFC(Ground_GObj*);          /* static */
 DynamicsDesc* grTLink_80221C00(enum_t);       /* static */
 bool grTLink_80221C08(Vec3*, int, HSD_JObj*); /* static */
 
-static StageCallbacks grTLk_803E8D30[4] = {
+static StageCallbacks grTLk_StageCallbacks[4] = {
     { grTLink_80221AB8, grTLink_80221AE4, grTLink_80221AEC, grTLink_80221AF0,
       0 },
     { grTLink_80221B84, grTLink_80221BD4, grTLink_80221BDC, grTLink_80221BFC,
@@ -53,7 +53,7 @@ static StageCallbacks grTLk_803E8D30[4] = {
 
 StageData grTLk_803E8D8C = {
     TLINK,
-    grTLk_803E8D30,
+    grTLk_StageCallbacks,
     "/GrTLk.dat",
     grTLink_80221930,
     grTLink_8022192C,
@@ -87,7 +87,7 @@ bool grTLink_802219C8(void)
 HSD_GObj* grTLink_802219D0(int arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTLk_803E8D30[arg0];
+    StageCallbacks* callbacks = &grTLk_StageCallbacks[arg0];
 
     gobj = Ground_GetStageGObj(arg0);
 

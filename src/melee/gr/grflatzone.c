@@ -37,7 +37,7 @@ struct grFlatzone_YakumonoParam {
     s32 unk3C;
 };
 
-static StageCallbacks grFz_803E7940[9] = {
+static StageCallbacks grFz_StageCallbacks[9] = {
     { grFlatzone_80217030, grFlatzone_8021705C, grFlatzone_80217064,
       grFlatzone_80217068, 0 },
     { grFlatzone_802173D4, grFlatzone_80217430, grFlatzone_80217438,
@@ -60,7 +60,7 @@ static StageCallbacks grFz_803E7940[9] = {
 
 StageData grFz_803E7A00 = {
     FLATZONE,
-    grFz_803E7940,
+    grFz_StageCallbacks,
     "/GrFz.dat",
     grFlatzone_80216E78,
     grFlatzone_80216E74,
@@ -118,7 +118,7 @@ static Ground_GObj* grFlatzone_80216F48_inline(s32 arg0)
 
 HSD_GObj* grFlatzone_80216F48(s32 gobj_id)
 {
-    StageCallbacks* callbacks = &grFz_803E7940[gobj_id];
+    StageCallbacks* callbacks = &grFz_StageCallbacks[gobj_id];
     HSD_GObj* gobj = grFlatzone_80216F48_inline(gobj_id);
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);

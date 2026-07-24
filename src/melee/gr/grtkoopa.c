@@ -40,7 +40,7 @@ static void grTKoopa_80221918(Ground_GObj*);
 static DynamicsDesc* grTKoopa_8022191C(enum_t);
 static bool grTKoopa_80221924(Vec3*, int, HSD_JObj*);
 
-static StageCallbacks grTKp_803E8C70[4] = {
+static StageCallbacks grTKp_StageCallbacks[4] = {
     { grTKoopa_802217D4, grTKoopa_80221800, grTKoopa_80221808,
       grTKoopa_8022180C, 0 },
     { grTKoopa_802218A0, grTKoopa_802218F0, grTKoopa_802218F8,
@@ -52,7 +52,7 @@ static StageCallbacks grTKp_803E8C70[4] = {
 
 StageData grTKp_803E8CCC = {
     TKOOPA,
-    grTKp_803E8C70,
+    grTKp_StageCallbacks,
     "/GrTKp.dat",
     grTKoopa_8022164C,
     grTKoopa_80221648,
@@ -87,7 +87,7 @@ static bool grTKoopa_802216E4(void)
 static HSD_GObj* grTKoopa_802216EC(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTKp_803E8C70[gobj_id];
+    StageCallbacks* callbacks = &grTKp_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 

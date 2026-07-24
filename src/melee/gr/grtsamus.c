@@ -39,7 +39,7 @@
 /* 223854 */ static DynamicsDesc* grTSamus_OnTouchLine(enum_t);
 /* 22385C */ static bool grTSamus_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 
-static StageCallbacks grTSs_803E93F8[] = {
+static StageCallbacks grTSs_StageCallbacks[] = {
     {
         grTSamus_8022370C,
         grTSamus_80223738,
@@ -66,7 +66,7 @@ static StageCallbacks grTSs_803E93F8[] = {
 
 StageData grTSs_803E9454 = {
     TSAMUS,
-    grTSs_803E93F8,
+    grTSs_StageCallbacks,
     "/GrTSs.dat",
     grTSamus_OnInit,
     grTSamus_OnDemoInit,
@@ -100,7 +100,7 @@ bool grTSamus_8022361C(void)
 HSD_GObj* grTSamus_80223624(int arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTSs_803E93F8[arg0];
+    StageCallbacks* callbacks = &grTSs_StageCallbacks[arg0];
 
     gobj = Ground_GetStageGObj(arg0);
 

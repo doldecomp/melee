@@ -49,7 +49,7 @@ static s32 grMc_8049F440[30];
 
 u16 grMc_803E30B0[10] = { 6, 29, 6, 7, 29, 8, 8, 29, 9 };
 
-StageCallbacks grMc_803E30C4[39] = {
+StageCallbacks grMc_StageCallbacks[39] = {
     {
         NULL,
         NULL,
@@ -335,7 +335,7 @@ typedef struct grMc_StageData {
 grMc_StageData grMc_803E33DC = {
     {
         MUTECITY,
-        grMc_803E30C4,
+        grMc_StageCallbacks,
         grMc_803E33D0,
         grMuteCity_801EFC6C,
         grMuteCity_801EFC68,
@@ -406,7 +406,7 @@ bool grMuteCity_801EFD04(void)
 HSD_GObj* grMuteCity_801EFD0C(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grMc_803E30C4[gobj_id];
+    StageCallbacks* callbacks = &grMc_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 

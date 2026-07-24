@@ -45,7 +45,7 @@
 S16Vec3 grGb_803E3E60[] = { { 0, 2, 49 }, { 1, 1, 2 },  { 2, 1, 3 },
                             { 4, 1, 34 }, { 3, 1, 38 }, { 5, 10, 0 } };
 
-StageCallbacks grGb_803E3E84[11] = {
+StageCallbacks grGb_StageCallbacks[11] = {
     {
         grGreatBay_801F4404,
         grGreatBay_801F4430,
@@ -137,7 +137,7 @@ StageCallbacks grGb_803E3E84[11] = {
 
 StageData grGb_803E3F6C = {
     GREATBAY,
-    grGb_803E3E84,
+    grGb_StageCallbacks,
     "/GrGb.dat",
     grGreatBay_801F4240,
     grGreatBay_801F423C,
@@ -232,7 +232,7 @@ bool grGreatBay_801F42F8(void)
 HSD_GObj* grGreatBay_801F4300(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grGb_803E3E84[gobj_id];
+    StageCallbacks* callbacks = &grGb_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
