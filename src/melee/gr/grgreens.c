@@ -166,27 +166,6 @@ grGr_StageData grGr_803E76D0 = {
     "%s:%d: couldn t get gobj(id=%d)\n",
 };
 
-char grGr_803E7728[] = "grgreens.c";
-
-static s32 grGr_803E7734[] = {
-    0, 1, 0, 1, 0, 2, 0, 1, 0, 2,
-};
-static s32 grGr_803E775C[] = {
-    0, 0, 0, 14, 0, 0, 0, 14,
-};
-static s32 grGr_803E777C[][2] = {
-    { 1, 8 }, { 15, 16 }, { 2, 9 }, { 3, 10 }, { 4, 11 }, { 5, 12 }, { 6, 13 },
-};
-static s32 grGr_803E77B4[] = {
-    0, 0, 0, 14, 0, 0, 0, 14,
-};
-static s32 grGr_803E77D4[][2] = {
-    { 1, 8 }, { 15, 16 }, { 2, 9 }, { 3, 10 }, { 4, 11 }, { 5, 12 }, { 6, 13 },
-};
-static Vec3 grGr_803E780C[] = {
-    { -1.0f, 0.0f, 0.0f },
-    { 1.0f, 0.0f, 0.0f },
-};
 static u8 grGr_8049F9E0[0x20];
 
 static inline int randrange(int min, int max);
@@ -274,10 +253,30 @@ Ground_GObj* grGreens_80213524(int id)
             HSD_GObj_SetupProc(gobj, cbs->callback2, 4);
         }
     } else {
-        OSReport((char*) grGr_callbacks + 0xCC, grGr_803E7728, 281, id);
+        OSReport((char*) grGr_callbacks + 0xCC, "grgreens.c", 281, id);
     }
     return gobj;
 }
+
+static s32 grGr_803E7734[] = {
+    0, 1, 0, 1, 0, 2, 0, 1, 0, 2,
+};
+static s32 grGr_803E775C[] = {
+    0, 0, 0, 14, 0, 0, 0, 14,
+};
+static s32 grGr_803E777C[][2] = {
+    { 1, 8 }, { 15, 16 }, { 2, 9 }, { 3, 10 }, { 4, 11 }, { 5, 12 }, { 6, 13 },
+};
+static s32 grGr_803E77B4[] = {
+    0, 0, 0, 14, 0, 0, 0, 14,
+};
+static s32 grGr_803E77D4[][2] = {
+    { 1, 8 }, { 15, 16 }, { 2, 9 }, { 3, 10 }, { 4, 11 }, { 5, 12 }, { 6, 13 },
+};
+static Vec3 grGr_803E780C[] = {
+    { -1.0f, 0.0f, 0.0f },
+    { 1.0f, 0.0f, 0.0f },
+};
 
 void grGreens_8021360C(Ground_GObj* gobj)
 {
