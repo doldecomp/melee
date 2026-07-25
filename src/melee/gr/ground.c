@@ -267,7 +267,7 @@ void mem_free(void* ptr)
 
 f32 Ground_801C0498(void)
 {
-    UnkStage6B0* temp_r3 = stage_info.param;
+    GroundParam* temp_r3 = stage_info.param;
     if (temp_r3 != NULL) {
         return temp_r3->x0;
     } else {
@@ -286,7 +286,7 @@ static Ground* alloc_user_data_ground(void)
 
 void Ground_801C04BC(f32 arg8)
 {
-    UnkStage6B0* temp_r3 = stage_info.param;
+    GroundParam* temp_r3 = stage_info.param;
     if (temp_r3 != NULL) {
         temp_r3->x0 = arg8;
     } else {
@@ -296,115 +296,115 @@ void Ground_801C04BC(f32 arg8)
 
 s32 Ground_801C0508(void)
 {
-    UnkStage6B0* temp_r3 = stage_info.param;
+    GroundParam* temp_r3 = stage_info.param;
     return temp_r3 != NULL ? temp_r3->x4 : 128;
 }
 
 void Ground_801C052C(GXColor* arg0)
 {
-    UnkStage6B0* x = stage_info.param;
+    GroundParam* x = stage_info.param;
     x->xB8 = *arg0;
 }
 
 void Ground_801C0544(GXColor* arg0)
 {
-    UnkStage6B0* x = stage_info.param;
+    GroundParam* x = stage_info.param;
     x->xC0 = *arg0;
 }
 
 void Ground_801C055C(GXColor* arg0)
 {
-    UnkStage6B0* x = stage_info.param;
+    GroundParam* x = stage_info.param;
     x->xD0 = *arg0;
 }
 
 void Ground_801C0574(GXColor* arg0)
 {
-    UnkStage6B0* x = stage_info.param;
+    GroundParam* x = stage_info.param;
     x->xD8 = *arg0;
 }
 
 void Ground_801C058C(GXColor* arg0)
 {
-    UnkStage6B0* x = stage_info.param;
+    GroundParam* x = stage_info.param;
     x->xC4 = *arg0;
 }
 
 void Ground_801C05A4(GXColor* arg0)
 {
-    UnkStage6B0* x = stage_info.param;
+    GroundParam* x = stage_info.param;
     x->xCC = *arg0;
 }
 
 void Ground_801C05BC(GXColor* arg0)
 {
-    UnkStage6B0* x = stage_info.param;
+    GroundParam* x = stage_info.param;
     x->xD4 = *arg0;
 }
 
 void Ground_801C05D4(GXColor* arg0)
 {
-    UnkStage6B0* x = stage_info.param;
+    GroundParam* x = stage_info.param;
     x->xBC = *arg0;
 }
 
 void Ground_801C05EC(GXColor* arg0)
 {
-    UnkStage6B0* x = stage_info.param;
+    GroundParam* x = stage_info.param;
     x->xC8 = *arg0;
 }
 
 GXColor* Ground_801C0604(void)
 {
-    UnkStage6B0* x = stage_info.param;
+    GroundParam* x = stage_info.param;
     return &x->xB8;
 }
 
 GXColor* Ground_801C0618(void)
 {
-    UnkStage6B0* x = stage_info.param;
+    GroundParam* x = stage_info.param;
     return &x->xC0;
 }
 
 GXColor* Ground_801C062C(void)
 {
-    UnkStage6B0* x = stage_info.param;
+    GroundParam* x = stage_info.param;
     return &x->xD0;
 }
 
 GXColor* Ground_801C0640(void)
 {
-    UnkStage6B0* x = stage_info.param;
+    GroundParam* x = stage_info.param;
     return &x->xD8;
 }
 
 GXColor* Ground_801C0654(void)
 {
-    UnkStage6B0* x = stage_info.param;
+    GroundParam* x = stage_info.param;
     return &x->xC4;
 }
 
 GXColor* Ground_801C0668(void)
 {
-    UnkStage6B0* x = stage_info.param;
+    GroundParam* x = stage_info.param;
     return &x->xCC;
 }
 
 GXColor* Ground_801C067C(void)
 {
-    UnkStage6B0* x = stage_info.param;
+    GroundParam* x = stage_info.param;
     return &x->xD4;
 }
 
 GXColor* Ground_801C0690(void)
 {
-    UnkStage6B0* x = stage_info.param;
+    GroundParam* x = stage_info.param;
     return &x->xBC;
 }
 
 GXColor* Ground_801C06A4(void)
 {
-    UnkStage6B0* x = stage_info.param;
+    GroundParam* x = stage_info.param;
     return &x->xC8;
 }
 
@@ -1085,7 +1085,7 @@ void Ground_801C1E94(void)
     HSD_Fog* temp_r29_2;
     HSD_GObj* temp_r30_2;
 
-    UnkStage6B0* temp_r3;
+    GroundParam* temp_r3;
     HSD_FogDesc* phi_r0;
     float phi_f1;
     StageInfo* stageinfo = &stage_info;
@@ -1318,14 +1318,14 @@ static bool Ground_801C24F8(s32 arg0, u32 arg1, s32* arg2)
 {
     bool temp_r25;
     /// @todo @c phi_r30 probably belongs to an @c inline.
-    UnkBgmStruct* phi_r30;
-    UnkBgmStruct* phi_r30_0 = stage_info.param->xB0;
+    StageParam* phi_r30;
+    StageParam* phi_r30_0 = stage_info.param->stage_params;
     enum_t bgm = BGM_Undefined;
     bool result = false;
     int i;
-    for (i = 0; i < stage_info.param->xB4; i++) {
+    for (i = 0; i < stage_info.param->stage_param_count; i++) {
         phi_r30 = &phi_r30_0[i];
-        if (phi_r30->x0 == arg0) {
+        if (phi_r30->stkind == arg0) {
             if (arg1 & 4) {
                 temp_r25 = arg1 & 0x40;
                 switch (phi_r30->x14) {
@@ -1405,7 +1405,7 @@ static bool Ground_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                 if (arg1 & 1) {
                     bgm = phi_r30->xC;
                 } else if (arg1 & 2) {
-                    /// @todo Weird comparison, but typing #UnkBgmStruct::x10
+                    /// @todo Weird comparison, but typing #StageParam::x10
                     /// as @c signed doesn't match and neither does typing
                     /// #BGM_Undefined as @c unsigned.
                     if (phi_r30->x10 != (unsigned) BGM_Undefined) {
@@ -1472,29 +1472,29 @@ static inline void reportStageParams(s32 count)
 
     OSReport(msg1);
     {
-        UnkBgmStruct* p = stage_info.param->xB0;
+        StageParam* p = stage_info.param->stage_params;
         for (i = 0; i < count; i++, p++) {
-            OSReport(msg2, p->x0);
+            OSReport(msg2, p->stkind);
         }
     }
 }
 
 void Ground_801C28CC(s32* arg0, s32 arg1)
 {
-    UnkBgmStruct* bgm = stage_info.param->xB0;
-    s32 count = stage_info.param->xB4;
+    StageParam* param = stage_info.param->stage_params;
+    s32 count = stage_info.param->stage_param_count;
     s32 i;
 
     for (i = 0; i < count; i++) {
-        if (bgm->x0 == arg1) {
+        if (param->stkind == arg1) {
             s32 j;
             for (j = 0; 0x23 > j; j++) {
                 arg0[j] = ((s16*) stage_info.param)[0x35 + j] *
-                          ((s16*) bgm)[0xD + j];
+                          ((s16*) param)[0xD + j];
             }
             return;
         }
-        bgm++;
+        param++;
     }
 
     OSReport(msg0, __FILE__, 0x906, stage_info.internal_stage_id, arg1, count);
@@ -1510,10 +1510,10 @@ s32* Ground_801C2AD8(void)
 
 float Ground_801C2AE8(int arg0)
 {
-    UnkBgmStruct* phi_r5 = stage_info.param->xB0;
+    StageParam* phi_r5 = stage_info.param->stage_params;
     int i;
-    for (i = 0; i < stage_info.param->xB4; i++) {
-        if (phi_r5->x0 == arg0) {
+    for (i = 0; i < stage_info.param->stage_param_count; i++) {
+        if (phi_r5->stkind == arg0) {
             return (0.01f * stage_info.param->x68) * (0.01f * phi_r5->x18);
         }
         phi_r5 += 1;

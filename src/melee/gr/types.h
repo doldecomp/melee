@@ -92,7 +92,7 @@ struct StageInfo {
         Article* unk4;
     }** itemdata;
     /* +6AC */ MapCollData* coll_data;
-    /* +6B0 */ UnkStage6B0* param;
+    /* +6B0 */ GroundParam* param;
     /* +6B4 */ UNK_T** ald_yaku_all;
     /* +6B8 */ void* map_ptcl;
     /* +6BC */ void* map_texg;
@@ -1853,9 +1853,13 @@ struct Ground {
 STATIC_ASSERT(sizeof(union GroundVars) == 0x140);
 STATIC_ASSERT(sizeof(struct Ground) == 0x204);
 
-/// Appears to be related to stage audio
-struct UnkBgmStruct {
-    s32 x0;
+/// One row of #GroundParam::stage_params, describing a single #StKind. An
+/// archive carries one row per #StKind built on its ground; ground.c calls
+/// these rows stage params and sources them from @c StageParam.csv /
+/// @c StageItem.csv (@c stdata.c).
+struct StageParam {
+    /// The #StKind this row describes; ground.c lists it as @c stageid.
+    StKind stkind;
     s32 x4;
     s32 x8;
     u32 xC;
@@ -1866,8 +1870,11 @@ struct UnkBgmStruct {
     u8 pad[0x64 - 0x1A];
 };
 
-/// @todo what is this struct?
-struct UnkStage6B0 {
+/// The stage archive's @c grGroundParam public symbol, reached through
+/// #StageInfo::param; see #grDatFiles_801C6038.
+///
+/// @todo Most fields are still unidentified.
+struct GroundParam {
     f32 x0;
     s16 x4;
     u8 x6_pad[2];
@@ -1888,8 +1895,10 @@ struct UnkStage6B0 {
     f32 x50, x54, x58, x5C, x60, x64;
     s16 x68;
     u8 x6C_pad[0xB0 - 0x6A];
-    UnkBgmStruct* xB0;
-    s32 xB4; // number of entries in xB0
+    /// One row per #StKind this ground serves, looked up by
+    /// #StageParam::stkind.
+    StageParam* stage_params;
+    s32 stage_param_count;
     GXColor xB8;
     GXColor xBC;
     GXColor xC0;
