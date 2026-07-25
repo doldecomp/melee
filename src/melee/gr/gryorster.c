@@ -34,7 +34,7 @@ StageCallbacks grYt_StageCallbacks[2] = {
 };
 
 StageData grYt_803E51CC = {
-    YORSTER,
+    Gr_Kind_Yorster,
     grYt_StageCallbacks,
     "/GrYt.dat",
     grYorster_80201FA4,

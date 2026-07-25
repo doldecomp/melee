@@ -417,10 +417,10 @@ void Ground_801C06B8(GrKind arg0)
         lbDvd_800178E8(4, Ground_803DFEDC[arg0]->data1, 4, 4, 0, 1, 7, 16, 0);
     }
     switch (arg0) {
-    case IZUMI:
+    case Gr_Kind_Izumi:
         grIzumi_801CD2D4();
         return;
-    case PSTADIUM:
+    case Gr_Kind_PStadium:
         grStadium_801D511C();
         return;
     default:
@@ -435,7 +435,7 @@ void Ground_801C0754(StageIdPair* pair)
     Ground_801BFFB0();
     stage_info.grkind = pair->grkind;
     stage = Ground_803DFEDC[pair->grkind];
-    arg3 = (pair->stkind == StKind_HEAL) ? 0 : 1;
+    arg3 = (pair->stkind == St_Kind_Heal) ? 0 : 1;
     grDatFiles_801C6038(stage->data1, 0, arg3);
     Ground_801C28CC(&stage_info.xA0, pair->stkind);
     stage_info.x178 = stage->callback5;
@@ -491,35 +491,35 @@ static bool Ground_801C0A70(Vec3* pos)
 {
     if (HSD_Randi(2) != 0) {
         GrKind enabled_stages[] = {
-            CASTLE,
-            RCRUISE,
-            KONGO,
-            GARDEN,
-            GREATBAY,
-            SHRINE,
-            ZEBES,
-            KRAID,
-            STORY,
-            YORSTER,
-            IZUMI,
-            GREENS,
-            CORNERIA,
-            VENOM,
-            PSTADIUM,
-            PURA,
-            MUTECITY,
-            BIGBLUE,
-            ONETT,
-            FOURSIDE,
-            // ICEMTN disabled
+            Gr_Kind_Castle,
+            Gr_Kind_RCruise,
+            Gr_Kind_Kongo,
+            Gr_Kind_Garden,
+            Gr_Kind_GreatBay,
+            Gr_Kind_Shrine,
+            Gr_Kind_Zebes,
+            Gr_Kind_Kraid,
+            Gr_Kind_Story,
+            Gr_Kind_Yorster,
+            Gr_Kind_Izumi,
+            Gr_Kind_Greens,
+            Gr_Kind_Corneria,
+            Gr_Kind_Venom,
+            Gr_Kind_PStadium,
+            Gr_Kind_Pura,
+            Gr_Kind_MuteCity,
+            Gr_Kind_BigBlue,
+            Gr_Kind_Onett,
+            Gr_Kind_Fourside,
+            // Gr_Kind_Icemt disabled
             // id 0x17 _/unknown?
-            INISHIE1,
-            INISHIE2,
+            Gr_Kind_Inishie1,
+            Gr_Kind_Inishie2,
             // id 0x1A _/unknown?
-            // FLATZONE disabled
-            OLDPUPUPU,
-            OLDYOSHI,
-            OLDKONGO, ///< @todo what stages are these?
+            // Gr_Kind_Flatzone disabled
+            Gr_Kind_OldPupupu,
+            Gr_Kind_OldYoshi,
+            Gr_Kind_OldKongo, ///< @todo what stages are these?
             36,
             37,
         };
@@ -716,11 +716,11 @@ void Ground_801C1154(void) {}
 void Ground_801C1158(void)
 {
     switch (stage_info.grkind) {
-    case PSTADIUM:
+    case Gr_Kind_PStadium:
         grStadium_801D39A0(Ground_801C2BA4(1));
         break;
-    case CORNERIA:
-    case VENOM:
+    case Gr_Kind_Corneria:
+    case Gr_Kind_Venom:
         grCorneria_801E2A6C();
         break;
     default:
@@ -2256,43 +2256,43 @@ void Ground_801C3BB4(void)
             top = 200;
             bot = -100;
             break;
-        case CASTLE:
+        case Gr_Kind_Castle:
             lft = -250;
             rgt = 250;
             top = 180;
             bot = -150;
             break;
-        case CORNERIA:
+        case Gr_Kind_Corneria:
             lft = -550;
             rgt = 550;
             top = 200;
             bot = -100;
             break;
-        case GrKind_Unk26:
+        case Gr_Kind_Unk26:
             lft = -600;
             rgt = 600;
             top = 200;
             bot = -100;
             break;
-        case SHRINE:
+        case Gr_Kind_Shrine:
             lft = -550;
             rgt = 550;
             top = 200;
             bot = -150;
             break;
-        case INISHIE2:
+        case Gr_Kind_Inishie2:
             lft = -300;
             rgt = 300;
             top = 300;
             bot = -160;
             break;
-        case RCRUISE:
+        case Gr_Kind_RCruise:
             lft = -300;
             rgt = 300;
             top = 270;
             bot = -240;
             break;
-        case YORSTER:
+        case Gr_Kind_Yorster:
             lft = -300;
             rgt = 300;
             top = 210;
@@ -2877,9 +2877,9 @@ bool Ground_801C4DA0(Vec3* arg0, f32* arg1)
 bool Ground_801C4DD0(void)
 {
     GrKind kind = stage_info.grkind;
-    if (kind == KONGO) {
+    if (kind == Gr_Kind_Kongo) {
         grKongo_801D8270(stage_info.x72C);
-    } else if (kind == OLDKONGO) {
+    } else if (kind == Gr_Kind_OldKongo) {
         grOldKongo_802105AC(stage_info.x72C);
     }
     return true;
@@ -2888,9 +2888,9 @@ bool Ground_801C4DD0(void)
 bool Ground_801C4E20(void)
 {
     GrKind kind = stage_info.grkind;
-    if (kind == KONGO) {
+    if (kind == Gr_Kind_Kongo) {
         grKongo_801D828C(stage_info.x72C);
-    } else if (kind == OLDKONGO) {
+    } else if (kind == Gr_Kind_OldKongo) {
         grOldKongo_802105C8(stage_info.x72C);
     }
     return true;

@@ -92,7 +92,7 @@ StageCallbacks grCs_StageCallbacks[21] = {
 char grCs_803E1198[] = "/GrCs.dat";
 
 StageData grCs_803E11A4 = {
-    CASTLE,
+    Gr_Kind_Castle,
     grCs_StageCallbacks,
     grCs_803E1198,
     grCastle_801CD37C,
@@ -1083,7 +1083,7 @@ void grCastle_801CEACC(Ground_GObj* gobj)
     }
 
     switch (gp->map_id) {
-    case PURA:
+    case Gr_Kind_Pura:
         gp->u.castle10.jobjs[0] = Ground_801C3FA4((HSD_GObj*) gobj, 1);
         gp->u.castle10.effect_a[0] = Ground_801C3FA4((HSD_GObj*) gobj, 2);
         gp->u.castle10.effect_b[0] = Ground_801C3FA4((HSD_GObj*) gobj, 3);
@@ -1109,7 +1109,7 @@ void grCastle_801CEACC(Ground_GObj* gobj)
         gp->u.castle10.x120[3] = 0xE;
         break;
 
-    case SHRINE:
+    case Gr_Kind_Shrine:
         gp->u.castle10.jobjs[0] = Ground_801C3FA4((HSD_GObj*) gobj, 1);
         gp->u.castle10.effect_a[0] = Ground_801C3FA4((HSD_GObj*) gobj, 2);
         gp->u.castle10.effect_b[0] = Ground_801C3FA4((HSD_GObj*) gobj, 3);
@@ -1141,7 +1141,7 @@ void grCastle_801CEACC(Ground_GObj* gobj)
         gp->u.castle10.x120[4] = 0xA;
         break;
 
-    case GARDEN:
+    case Gr_Kind_Garden:
         gp->u.castle10.jobjs[0] = Ground_801C3FA4((HSD_GObj*) gobj, 1);
         gp->u.castle10.effect_a[0] = Ground_801C3FA4((HSD_GObj*) gobj, 2);
         gp->u.castle10.effect_b[0] = Ground_801C3FA4((HSD_GObj*) gobj, 3);
@@ -1273,13 +1273,13 @@ void grCastle_801CF0F4(Ground_GObj* gobj)
     HSD_JObjSetScaleZ(jobj, scale);
 
     switch (gp->map_id) {
-    case ONETT:
+    case Gr_Kind_Onett:
         gp->u.castle7.xD0 = grCastle_801CD4D0(0x11);
         return;
-    case BIGBLUE:
+    case Gr_Kind_BigBlue:
         gp->u.castle7.xD0 = grCastle_801CD4D0(7);
         return;
-    case MUTECITY:
+    case Gr_Kind_MuteCity:
         gp->u.castle7.xD0 = grCastle_801CD4D0(5);
         return;
     default:

@@ -184,7 +184,7 @@ StageCallbacks grIm_StageCallbacks[] = {
 };
 
 StageData grIm_803E4800 = {
-    ICEMTN,
+    Gr_Kind_Icemt,
     grIm_StageCallbacks,
     "/GrIm.dat",
     grIceMt_801F686C,

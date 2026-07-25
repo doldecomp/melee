@@ -1853,10 +1853,12 @@ struct Ground {
 STATIC_ASSERT(sizeof(union GroundVars) == 0x140);
 STATIC_ASSERT(sizeof(struct Ground) == 0x204);
 
-/// One row of #GroundParam::stage_params, describing a single #StKind. An
-/// archive carries one row per #StKind built on its ground; ground.c calls
-/// these rows stage params and sources them from @c StageParam.csv /
-/// @c StageItem.csv (@c stdata.c).
+/**
+ * One row of #GroundParam::stage_params, describing a single #StKind. An
+ * archive carries one row per #StKind built on its ground; ground.c calls
+ * these rows stage params and sources them from @c StageParam.csv /
+ * @c StageItem.csv (@c stdata.c).
+ */
 struct StageParam {
     /// The #StKind this row describes; ground.c lists it as @c stageid.
     StKind stkind;
@@ -1870,10 +1872,12 @@ struct StageParam {
     u8 pad[0x64 - 0x1A];
 };
 
-/// The stage archive's @c grGroundParam public symbol, reached through
-/// #StageInfo::param; see #grDatFiles_801C6038.
-///
-/// @todo Most fields are still unidentified.
+/**
+ * The stage archive's @c grGroundParam public symbol, reached through
+ * #StageInfo::param; see #grDatFiles_801C6038.
+ *
+ * @todo Most fields are still unidentified.
+ */
 struct GroundParam {
     f32 x0;
     s16 x4;
@@ -1895,8 +1899,10 @@ struct GroundParam {
     f32 x50, x54, x58, x5C, x60, x64;
     s16 x68;
     u8 x6C_pad[0xB0 - 0x6A];
-    /// One row per #StKind this ground serves, looked up by
-    /// #StageParam::stkind.
+    /**
+     * One row per #StKind this ground serves, looked up by
+     * #StageParam::stkind.
+     */
     StageParam* stage_params;
     s32 stage_param_count;
     GXColor xB8;

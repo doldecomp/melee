@@ -1086,7 +1086,7 @@ void fn_80186634(void* arg0)
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(StKind_Unk00, NULL);
+    Stage_802251E8(St_Kind_Dummy, NULL);
     Item_80266FA8();
     Item_80266FCC();
     Stage_8022524C();
@@ -1446,7 +1446,7 @@ void fn_80187714(void)
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(64);
-    Stage_802251E8(StKind_Unk00, NULL);
+    Stage_802251E8(St_Kind_Dummy, NULL);
     Stage_8022524C();
     Item_80266FA8();
     Item_80266FCC();

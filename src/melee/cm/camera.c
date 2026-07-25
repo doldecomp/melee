@@ -969,22 +969,22 @@ inline float get_stage_floor_height(GrKind kind)
 {
     float height = -F32_MAX;
     switch (kind) {
-    case CASTLE:
+    case Gr_Kind_Castle:
         height = grCastle_801D0FF0();
         break;
-    case CORNERIA:
+    case Gr_Kind_Corneria:
         height = grCorneria_801E2FCC();
         break;
-    case ZEBES:
+    case Gr_Kind_Zebes:
         height = grZebes_801DCCC8();
         break;
-    case GARDEN:
+    case Gr_Kind_Garden:
         height = grGarden_80203624();
         break;
-    case KINOKOROUTE:
+    case Gr_Kind_KinokoRoute:
         height = grKinokoRoute_802087B0();
         break;
-    case HOMERUN:
+    case Gr_Kind_Homerun:
         height = grHomeRun_8021EF10();
         break;
     }
@@ -1320,22 +1320,22 @@ void Camera_8002AF68(HSD_CObj* cobj, CameraTransformState* transform)
 
     eye_y_bound = -3.4028235e38f;
     switch (stage_info.grkind) {
-    case CASTLE:
+    case Gr_Kind_Castle:
         eye_y_bound = grCastle_801D0FF0();
         break;
-    case CORNERIA:
+    case Gr_Kind_Corneria:
         eye_y_bound = grCorneria_801E2FCC();
         break;
-    case ZEBES:
+    case Gr_Kind_Zebes:
         eye_y_bound = grZebes_801DCCC8();
         break;
-    case GARDEN:
+    case Gr_Kind_Garden:
         eye_y_bound = grGarden_80203624();
         break;
-    case KINOKOROUTE:
+    case Gr_Kind_KinokoRoute:
         eye_y_bound = grKinokoRoute_802087B0();
         break;
-    case HOMERUN:
+    case Gr_Kind_Homerun:
         eye_y_bound = grHomeRun_8021EF10();
         break;
     }

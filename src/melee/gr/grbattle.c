@@ -123,7 +123,7 @@ static StageCallbacks grNBa_StageCallbacks[] = {
 };
 
 StageData grNBa_803E7E38 = {
-    BATTLE,
+    Gr_Kind_Battle,
     grNBa_StageCallbacks,
     "/GrNBa.dat",
     grBattle_OnInit,

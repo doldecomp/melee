@@ -91,7 +91,7 @@ typedef struct grOk_StageData {
 
 grOk_StageData grOk_803E65E8 = {
     {
-        OLDKONGO,
+        Gr_Kind_OldKongo,
         grOk_StageCallbacks,
         grOk_803E65DC,
         grOldKongo_8020F46C,

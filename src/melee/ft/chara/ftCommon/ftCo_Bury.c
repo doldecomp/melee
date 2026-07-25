@@ -104,13 +104,13 @@ void ftCo_800C09B4(Fighter_GObj* gobj)
     fp->bury_stage_kind = stage_info.grkind;
     fp->bury_timer_1 = 0;
     switch (fp->bury_stage_kind) {
-    case OLDKONGO:
-    case KONGO:
+    case Gr_Kind_OldKongo:
+    case Gr_Kind_Kongo:
         fp->bury_timer_2 = 0;
         return;
-    case SHRINEROUTE:
-    case PUSHON:
-    case ZEBES:
+    case Gr_Kind_ShrineRoute:
+    case Gr_Kind_Pushon:
+    case Gr_Kind_Zebes:
         fp->bury_timer_2 = 0;
         return;
     }
@@ -145,16 +145,16 @@ void ftCo_800C0A98(Fighter_GObj* gobj)
         --fp->bury_timer_1;
     }
     switch (fp->bury_stage_kind) {
-    case OLDKONGO:
-    case KONGO:
+    case Gr_Kind_OldKongo:
+    case Gr_Kind_Kongo:
         if (fp->bury_timer_2 != 0) {
             --fp->bury_timer_2;
             return;
         }
         break;
-    case SHRINEROUTE:
-    case PUSHON:
-    case ZEBES:
+    case Gr_Kind_ShrineRoute:
+    case Gr_Kind_Pushon:
+    case Gr_Kind_Zebes:
         if (fp->bury_timer_2 != 0) {
             --fp->bury_timer_2;
             return;

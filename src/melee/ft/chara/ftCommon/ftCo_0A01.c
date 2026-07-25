@@ -901,7 +901,7 @@ bool ftCo_800A1F98(int x, float y)
     float intercept;
     PAD_STACK(1 * 4);
 
-    if (stage_info.grkind != ZEBES) {
+    if (stage_info.grkind != Gr_Kind_Zebes) {
         return false;
     }
     Ground_801C4368(&slope, &intercept);
@@ -1011,7 +1011,7 @@ s32 ftCo_800A229C(Fighter* fp, Vec3* arg1)
     if (grCastle_801CDF54(arg1) != 0) {
         return 1;
     }
-    if (stage_info.grkind != ZEBES) {
+    if (stage_info.grkind != Gr_Kind_Zebes) {
         var_r0 = 0;
     } else {
         Ground_801C4368(&sp18, &sp1C);
@@ -1031,7 +1031,7 @@ s32 ftCo_800A229C(Fighter* fp, Vec3* arg1)
     }
     stage = stage_info.grkind;
     grLib_801C9E60(&sp2C);
-    if (stage == RCRUISE) {
+    if (stage == Gr_Kind_RCruise) {
         w = Stage_GetBlastZoneRightOffset() - Stage_GetBlastZoneLeftOffset();
         if (sp2C.x < 0.0) {
             if (fp->cur_pos.x < 0.4f * w + Stage_GetBlastZoneLeftOffset()) {
@@ -1068,7 +1068,7 @@ s32 ftCo_800A229C(Fighter* fp, Vec3* arg1)
         }
         goto block_43;
     }
-    if (stage == BIGBLUE) {
+    if (stage == Gr_Kind_BigBlue) {
         w = Stage_GetBlastZoneRightOffset() - Stage_GetBlastZoneLeftOffset();
         h = Stage_GetBlastZoneTopOffset() - Stage_GetBlastZoneBottomOffset();
         if (fp->cur_pos.x < 0.2f * w + Stage_GetBlastZoneLeftOffset() ||
@@ -1081,7 +1081,7 @@ s32 ftCo_800A229C(Fighter* fp, Vec3* arg1)
         }
         goto block_43;
     }
-    if (stage == ICEMTN) {
+    if (stage == Gr_Kind_Icemt) {
         h = Stage_GetBlastZoneTopOffset() - Stage_GetBlastZoneBottomOffset();
         grLib_801C9E60(&sp20);
         mag = ABS(sp20.y);
@@ -1136,9 +1136,9 @@ bool ftCo_800A2718(mp_UnkStruct0* arg0)
 
         stage = &stage_info.grkind;
         switch (*stage) {
-        case STORY:
+        case Gr_Kind_Story:
             return mpIsland_8005AC8C(island);
-        case ZEBES: {
+        case Gr_Kind_Zebes: {
             float y = island->x14.y;
             if (ftCo_800A1F98(0x5A, y) != 0) {
                 return true;
@@ -1149,11 +1149,11 @@ bool ftCo_800A2718(mp_UnkStruct0* arg0)
             }
             return false;
         }
-        case ONETT: {
+        case Gr_Kind_Onett: {
             bool ret;
             bool ret2;
             float y = island->x14.y;
-            if (*stage != ONETT) {
+            if (*stage != Gr_Kind_Onett) {
                 ret = false;
             } else if (y <= 5.0 && Ground_801C5794() != 0) {
                 ret = true;
@@ -1164,7 +1164,7 @@ bool ftCo_800A2718(mp_UnkStruct0* arg0)
                 goto ret_true;
             }
             y = island->x8.y;
-            if (*stage != ONETT) {
+            if (*stage != Gr_Kind_Onett) {
                 ret2 = false;
             } else if (y <= 5.0 && Ground_801C5794() != 0) {
                 ret2 = true;
@@ -1375,11 +1375,12 @@ s32 ftCo_800A2C80(Fighter* fp)
     if (data->xFA_b5) {
         return 0;
     }
-    if (stage_info.grkind == INISHIE1) {
+    if (stage_info.grkind == Gr_Kind_Inishie1) {
         if (fp->cur_pos.y < 5.0f) {
             return 1;
         }
-    } else if (stage_info.grkind == FOURSIDE && fp->cur_pos.y < -35.0f) {
+    } else if (stage_info.grkind == Gr_Kind_Fourside && fp->cur_pos.y < -35.0f)
+    {
         return 1;
     }
     lbVector_Normalize(&dir);
@@ -3921,7 +3922,7 @@ bool ftCo_800A8210(Fighter* fp, Vec3* arg1)
     if (fp->ground_or_air == GA_Air) {
         return true;
     }
-    if (stage_info.grkind == ICEMTN) {
+    if (stage_info.grkind == Gr_Kind_Icemt) {
         grLib_801C9E60(&dir);
         if (dir.y < 0.0) {
             if (ftCo_800A6A98(fp, &out)) {
@@ -3935,7 +3936,7 @@ bool ftCo_800A8210(Fighter* fp, Vec3* arg1)
             }
         }
         return false;
-    } else if (stage_info.grkind == RCRUISE) {
+    } else if (stage_info.grkind == Gr_Kind_RCruise) {
         left = Stage_GetBlastZoneLeftOffset();
         sum_x = Stage_GetBlastZoneRightOffset();
         cx = 0.5f * (sum_x += left);
@@ -3957,7 +3958,7 @@ bool ftCo_800A8210(Fighter* fp, Vec3* arg1)
             return true;
         }
         return false;
-    } else if (stage_info.grkind == BIGBLUE) {
+    } else if (stage_info.grkind == Gr_Kind_BigBlue) {
         left = Stage_GetBlastZoneLeftOffset();
         sum_x = Stage_GetBlastZoneRightOffset();
         cx = 0.5f * (sum_x += left);
@@ -4572,11 +4573,11 @@ void ftCo_800A9904(Fighter* fp)
 
 static inline enum_t ftCo_800A9CB4_inline0(Fighter* fp)
 {
-    if (stage_info.grkind == SHRINE) {
+    if (stage_info.grkind == Gr_Kind_Shrine) {
         if (fp->cur_pos.x > -150.0f && fp->cur_pos.x < -90.0f) {
             return 1;
         }
-    } else if (stage_info.grkind == FOURSIDE) {
+    } else if (stage_info.grkind == Gr_Kind_Fourside) {
         return 2;
     }
     return 0;
@@ -4590,12 +4591,12 @@ static inline bool ftCo_800A9CB4_inline1(Fighter* fp, Vec3* stage_pos)
     if (fp->x34_scale.y < 1.0f) {
         return true;
     }
-    if (stage_info.grkind == ICEMTN) {
+    if (stage_info.grkind == Gr_Kind_Icemt) {
         grLib_801C9E60(stage_pos);
         if (stage_pos->y < 0.0) {
             return true;
         }
-    } else if (stage_info.grkind == RCRUISE) {
+    } else if (stage_info.grkind == Gr_Kind_RCruise) {
         return true;
     }
     return false;
@@ -5030,7 +5031,7 @@ void ftCo_800AACD0(Fighter* fp)
             return;
         }
     }
-    if (stage_info.grkind != ICEMTN && inlineC0(fp)) {
+    if (stage_info.grkind != Gr_Kind_Icemt && inlineC0(fp)) {
         ftCo_800A0148(fp);
         return;
     }
@@ -5057,7 +5058,7 @@ bool ftCo_800AAF48(Fighter* fp)
     if (temp_r29->x60 != 0) {
         return false;
     }
-    if (stage_info.grkind != SHRINE) {
+    if (stage_info.grkind != Gr_Kind_Shrine) {
         return false;
     }
     if (fp->facing_dir > 0.0) {
@@ -5248,7 +5249,7 @@ void ftCo_800AB224(Fighter* fp)
                 } else {
                     ftCo_800AABC8_dontinline(fp);
                 }
-            } else if (stage_info.grkind == ICEMTN) {
+            } else if (stage_info.grkind == Gr_Kind_Icemt) {
                 ftCo_800A0148(fp);
             } else if (!ftCo_800A2BD4(fp)) {
                 if (var_f31 < 1.3089969288557768) {

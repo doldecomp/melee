@@ -106,7 +106,7 @@ StageCallbacks grHeal_StageCallbacks[] = {
 
 grHeal_StageData grHeal_803E84C4 = {
     {
-        HEAL,
+        Gr_Kind_Heal,
         grHeal_StageCallbacks,
         "/GrHe.dat",
         grHeal_8021EF3C,

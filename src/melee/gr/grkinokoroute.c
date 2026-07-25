@@ -72,7 +72,7 @@ StageCallbacks grNKr_StageCallbacks[4] = {
 static char grNKr_803E5840[] = "/GrNKr.dat";
 
 StageData grNKr_803E584C = {
-    KINOKOROUTE,
+    Gr_Kind_KinokoRoute,
     grNKr_StageCallbacks,
     grNKr_803E5840,
     grKinokoRoute_80207420,

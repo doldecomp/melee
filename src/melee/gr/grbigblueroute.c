@@ -135,7 +135,7 @@ static struct {
     size_t x30;
     char fmt[0x24];
 } grBb_Route_803E617C = {
-    BIGBLUEROUTE,
+    Gr_Kind_BigBlueRoute,
     grBb_Route_StageCallbacks,
     grBb_Route_803E6170,
     grBigBlueRoute_8020B89C,

@@ -177,7 +177,7 @@ StageCallbacks grVe_StageCallbacks[16] = {
 };
 
 StageData grVe_803E54CC = {
-    VENOM,
+    Gr_Kind_Venom,
     grVe_StageCallbacks,
     "/GrVe",
     grVenom_80203B18,
@@ -1810,7 +1810,7 @@ s32 grVenom_80206D10(s32 arg0)
     s32 result;
     u32 diff;
 
-    if (stage_info.grkind == VENOM && arg0 != -1) {
+    if (stage_info.grkind == Gr_Kind_Venom && arg0 != -1) {
         result = mpJointFromLine(arg0);
         diff = result - 3;
         in_range = 1;

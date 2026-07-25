@@ -51,7 +51,7 @@ static StageCallbacks grTFx_StageCallbacks[4] = {
 };
 
 StageData grTFx_803E8A34 = {
-    TFOX,
+    Gr_Kind_TFox,
     grTFx_StageCallbacks,
     "/GrTFx.dat",
     grTFox_80220B84,

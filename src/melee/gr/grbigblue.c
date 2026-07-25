@@ -297,7 +297,7 @@ char grBb_803E2D14[] = "/GrBb.dat";
 
 grBb_StageData grBb_803E2D20 = {
     {
-        BIGBLUE,
+        Gr_Kind_BigBlue,
         grBb_StageCallbacks,
         grBb_803E2D14,
         grBigBlue_801E57C0,

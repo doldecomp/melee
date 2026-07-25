@@ -160,7 +160,7 @@ StageCallbacks grIz_StageCallbacks[] = {
     },
 };
 StageData grIz_803E0E5C = {
-    IZUMI,
+    Gr_Kind_Izumi,
     grIz_StageCallbacks,
     "/GrIz.dat",
     grIzumi_801CBB88,

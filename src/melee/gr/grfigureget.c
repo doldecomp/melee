@@ -74,7 +74,7 @@ static StageCallbacks grFigureGet_StageCallbacks[2] = {
 };
 
 StageData grFigureGet_803E7D34 = {
-    FIGUREGET,
+    Gr_Kind_FigureGet,
     grFigureGet_StageCallbacks,
     "/GrNFg.dat",
     grFigureGet_OnInit,

@@ -48,7 +48,7 @@ static StageCallbacks grEF1_StageCallbacks[3] = {
 };
 
 StageData grEF1_803E62C0 = {
-    FIGURE1,
+    Gr_Kind_Figure1,
     grEF1_StageCallbacks,
     "/GrEF1.dat",
     grFigure1_OnInit,

@@ -84,7 +84,7 @@ StageCallbacks grPushOn_StageCallbacks[3] = {
 };
 
 StageData grPushOn_803E7B10 = {
-    PUSHON,
+    Gr_Kind_Pushon,
     grPushOn_StageCallbacks,
     "/GrNPo.dat",
     grPushOn_802182C8,

@@ -107,7 +107,7 @@ StageCallbacks grSh_Route_StageCallbacks[7] = {
 };
 
 StageData grSh_Route_803E5988 = {
-    SHRINEROUTE,
+    Gr_Kind_ShrineRoute,
     grSh_Route_StageCallbacks,
     "/GrNSr.dat",
     grShrineRoute_OnInit,

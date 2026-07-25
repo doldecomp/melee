@@ -50,7 +50,7 @@ static StageCallbacks grTDr_StageCallbacks[4] = {
 };
 
 StageData grTDr_803E88AC = {
-    TDRMARIO,
+    Gr_Kind_TDrmario,
     grTDr_StageCallbacks,
     "/GrTDr.dat",
     grtDrMario_80220510,

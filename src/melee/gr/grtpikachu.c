@@ -24,7 +24,7 @@ StageCallbacks grTPk_StageCallbacks[] = {
 };
 
 StageData grTPk_803E92CC = {
-    TPIKACHU,
+    Gr_Kind_TPikachu,
     grTPk_StageCallbacks,
     "/GrTPk.dat",
     grTPikachu_80222E80,

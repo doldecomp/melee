@@ -205,7 +205,7 @@ StageCallbacks grZe_callbacks[] = {
 };
 
 StageData grZe_803E1B2C = {
-    ZEBES,
+    Gr_Kind_Zebes,
     grZe_callbacks,
     "/GrZe.dat",
     grZebes_801D84A4,

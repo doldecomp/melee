@@ -41,7 +41,7 @@ StageCallbacks grKr_StageCallbacks[5] = {
 };
 
 StageData grKr_803E4D0C = {
-    KRAID,
+    Gr_Kind_Kraid,
     grKr_StageCallbacks,
     "/GrKr.dat",
     grKraid_OnInit,

@@ -93,7 +93,7 @@ typedef struct grOp_StageData {
 
 grOp_StageData grOp_803E6748 = {
     {
-        OLDPUPUPU,
+        Gr_Kind_OldPupupu,
         grOp_StageCallbacks,
         grOp_803E673C,
         grOldPupupu_802107E0,

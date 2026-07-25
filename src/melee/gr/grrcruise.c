@@ -107,7 +107,7 @@ StageCallbacks grRc_StageCallbacks[7] = {
 };
 
 struct StageData grRc_803E4ECC = {
-    RCRUISE,
+    Gr_Kind_RCruise,
     grRc_StageCallbacks,
     "/GrRc.dat",
     grRCruise_801FF168,
@@ -1144,7 +1144,7 @@ void grRCruise_80201918(Vec3* vec)
 
 bool grRCruise_80201988(s32 line_id)
 {
-    if (stage_info.grkind == RCRUISE && line_id != -1) {
+    if (stage_info.grkind == Gr_Kind_RCruise && line_id != -1) {
         int joint = mpJointFromLine(line_id);
         bool result;
 

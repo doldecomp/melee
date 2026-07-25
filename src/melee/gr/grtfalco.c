@@ -44,7 +44,7 @@
 };
 
 StageData grTFc_803E8974 = {
-    TFALCO,
+    Gr_Kind_TFalco,
     grTFc_803E8918,
     "/GrTFc.dat",
     grTFalco_802207F4,

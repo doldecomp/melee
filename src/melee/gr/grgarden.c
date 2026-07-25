@@ -53,7 +53,7 @@ StageCallbacks grGd_StageCallbacks[] = {
 };
 
 StageData grGd_803E52E0 = {
-    GARDEN,
+    Gr_Kind_Garden,
     grGd_StageCallbacks,
     "/GrGd.dat",
     grGarden_80202B70,
