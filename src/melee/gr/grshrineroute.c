@@ -1262,11 +1262,16 @@ s32 grShrineRoute_8020AE08(HSD_GObj* gobj, HSD_GObj* player_gobj, s32* out)
     return 0;
 }
 
+static inline Ground* getGp(HSD_GObj* gobj)
+{
+    return GET_GROUND(gobj);
+}
+
 void grShrineRoute_8020AF38(HSD_GObj* gobj, s32 arg1)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_GObj** symbolp;
     s32 ix = arg1 - 0xBD;
+    Ground* gp = getGp(gobj);
+    HSD_GObj** symbolp;
     HSD_JObj* jobj;
     HSD_GObj* pgobj;
 
