@@ -48,6 +48,7 @@ void ftFx_SpecialHi_CreateLaunchGFX(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void ftFx_SpecialHi_CreateChargeGFX(HSD_GObj* gobj)
@@ -62,6 +63,7 @@ void ftFx_SpecialHi_CreateChargeGFX(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void ftFx_SpecialHi_Enter(HSD_GObj* gobj)

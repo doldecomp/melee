@@ -105,8 +105,7 @@ void ftCa_SpecialLw_Enter(HSD_GObj* gobj)
                               0.0F, NULL);
     ftAnim_8006EBA4(gobj);
     fp->deal_dmg_cb = ftCa_SpecialHi_800E400C;
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 void ftCa_SpecialAirLw_Enter(HSD_GObj* gobj)
@@ -120,8 +119,7 @@ void ftCa_SpecialAirLw_Enter(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirLw, Ft_MF_None, 0, 1, 0,
                               NULL);
     ftAnim_8006EBA4(gobj);
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 static inline void ftCa_SpecialLw_Anim_inline(HSD_GObj* gobj, s32 condition)

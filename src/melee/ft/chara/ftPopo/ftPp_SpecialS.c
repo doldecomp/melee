@@ -83,8 +83,7 @@ void ftPp_SpecialS_8011F720(Fighter_GObj* gobj)
                 } else {
                     HSD_JObjSetRotationZ(temp_r30, 0.0F);
                 }
-                fp->pre_hitlag_cb = efLib_PauseAll;
-                fp->post_hitlag_cb = efLib_ResumeAll;
+                Fighter_SetEffectHitlagCallbacks(fp);
                 return;
             }
         }
@@ -386,8 +385,7 @@ void ftPp_SpecialS1_Phys(Fighter_GObj* gobj)
         temp_r5_2 = GET_FIGHTER(gobj);
         temp_r5_2->take_dmg_cb = ftPp_Init_8011F060;
         temp_r5_2->death2_cb = ftPp_Init_8011F060;
-        temp_r5_2->pre_hitlag_cb = efLib_PauseAll;
-        temp_r5_2->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(temp_r5_2);
         ftCommon_ClampSelfVelX(temp_r27, temp_r28->x3C);
         fp->self_vel.y += temp_r30->x60;
         fp->mv.pp.specials.x10 = 0;
@@ -448,8 +446,7 @@ void ftPp_SpecialS2_Phys(Fighter_GObj* gobj)
         temp_r5_2 = GET_FIGHTER(gobj);
         temp_r5_2->take_dmg_cb = ftPp_Init_8011F060;
         temp_r5_2->death2_cb = ftPp_Init_8011F060;
-        temp_r5_2->pre_hitlag_cb = efLib_PauseAll;
-        temp_r5_2->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(temp_r5_2);
         ftCommon_ClampSelfVelX(temp_r27, temp_r28->x3C);
         temp_r31->self_vel.y += temp_r30->x64;
         temp_r31->mv.pp.specials.x10 = 0;

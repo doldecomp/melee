@@ -39,6 +39,7 @@ void ftFx_SpecialS_CreateGFX(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 /// 0x800E9E78

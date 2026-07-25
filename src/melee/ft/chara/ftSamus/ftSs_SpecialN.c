@@ -450,6 +450,5 @@ static void ftSs_SpecialS_8012A168(HSD_GObj* gobj, Vec3* spawnlocation)
         efSync_Spawn(1155, gobj, spawnlocation);
         fp->x2219_b0 = 1;
     }
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }

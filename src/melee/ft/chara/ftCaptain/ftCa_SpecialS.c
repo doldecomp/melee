@@ -75,8 +75,7 @@ void ftCa_SpecialS_Enter(HSD_GObj* gobj)
         break;
     }
     fp->u.ca.during_specials = false;
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     fp->hurtbox_detect_cb = ftCa_SpecialS_OnDetect;
 
     resetVel(fp);
@@ -229,8 +228,7 @@ void ftCa_SpecialS_Anim(HSD_GObj* gobj)
             fp->u.ca.during_specials = true;
             break;
         }
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
@@ -272,8 +270,7 @@ void ftCa_SpecialAirS_Anim(HSD_GObj* gobj)
             break;
         }
         }
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCommon_8007D60C(fp);

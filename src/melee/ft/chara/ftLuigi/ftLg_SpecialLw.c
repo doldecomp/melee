@@ -92,8 +92,7 @@ void ftLg_SpecialLw_Enter(HSD_GObj* gobj)
     ftLuigi_SpecialLw_SetVars(gobj);
     ftLuigi_SpecialLw_SetCall(gobj);
     ftLuigi_SpecialLw_SetGFX(gobj);
-    fp2->pre_hitlag_cb = efLib_PauseAll;
-    fp2->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp2);
 }
 
 /// 0x80144708
@@ -127,8 +126,7 @@ void ftLg_SpecialAirLw_Enter(HSD_GObj* gobj)
     ftLuigi_SpecialLw_SetVars(gobj);
     ftLuigi_SpecialLw_SetCall(gobj);
     ftLuigi_SpecialLw_SetGFX(gobj);
-    fp2->pre_hitlag_cb = efLib_PauseAll;
-    fp2->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp2);
 }
 
 static inline void ftLuigi_SpecialLw_SetNULL(HSD_GObj* gobj)

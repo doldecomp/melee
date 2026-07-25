@@ -34,8 +34,7 @@ void ftLg_SpecialS_SetGFX(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 /// Luigi's Green Missile Setup (RNG + calculations)
