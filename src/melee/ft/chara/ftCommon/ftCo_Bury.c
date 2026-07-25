@@ -101,9 +101,9 @@ void ftCo_800C08A0(Fighter_GObj* gobj, Fighter_GObj* arg1, DynamicsDesc* arg2,
 void ftCo_800C09B4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->bury_stage_kind = stage_info.grkind;
+    fp->bury_grkind = stage_info.grkind;
     fp->bury_timer_1 = 0;
-    switch (fp->bury_stage_kind) {
+    switch (fp->bury_grkind) {
     case Gr_Kind_OldKongo:
     case Gr_Kind_Kongo:
         fp->bury_timer_2 = 0;
@@ -144,7 +144,7 @@ void ftCo_800C0A98(Fighter_GObj* gobj)
     if (fp->bury_timer_1 != 0) {
         --fp->bury_timer_1;
     }
-    switch (fp->bury_stage_kind) {
+    switch (fp->bury_grkind) {
     case Gr_Kind_OldKongo:
     case Gr_Kind_Kongo:
         if (fp->bury_timer_2 != 0) {
