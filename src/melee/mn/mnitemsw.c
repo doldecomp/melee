@@ -836,11 +836,8 @@ HSD_GObj* mnItemSw_802351A0(s32 arg0)
     HSD_JObjReqAnimAll(jobj, 0.0f);
     HSD_JObjAnimAll(jobj);
 
-    user_data = HSD_MemAlloc(sizeof(MnItemSwData));
-    if (user_data == NULL) {
-        OSReport("Can't get user_data.\n");
-        __assert("mnitemsw.c", 0x3D7, "user_data");
-    }
+    user_data = HSD_MemAlloc(sizeof(*user_data));
+    HSD_ASSERTREPORT(983, user_data, "Can't get user_data.\n");
 
     GObj_InitUserData(gobj, 0, HSD_Free, user_data);
 
