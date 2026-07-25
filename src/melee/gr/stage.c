@@ -532,7 +532,7 @@ void Stage_80225298(void)
     local_data.grkind = selected_stage.entry->grkind;
     local_data.stkind = selected_stage.stkind;
 
-    Ground_801C0F78(&local_data);
+    Ground_OnLoad(&local_data);
 }
 
 void Stage_802252E4(StKind stkind, HSD_GObj* _)

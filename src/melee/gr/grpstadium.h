@@ -9,10 +9,6 @@
 
 #include <dolphin/mtx.h>
 
-typedef enum {
-    PsType_Display = 1,
-} StadiumGrType;
-
 /* 1D1018 */ void grStadium_OnDemoInit(int);
 /* 1D101C */ void grStadium_OnInit(void);
 /* 1D10C8 */ void grStadium_OnLoad(void);
@@ -92,5 +88,6 @@ typedef enum {
 /* 1D50B8 */ DynamicsDesc* grStadium_OnTouchLine(enum_t);
 /* 1D50C0 */ bool grStadium_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 /* 1D511C */ void grStadium_801D511C(void);
+/* 3E1334 */ extern StageData grPs_StageData;
 
 #endif

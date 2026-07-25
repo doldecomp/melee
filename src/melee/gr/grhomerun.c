@@ -77,31 +77,27 @@ StageCallbacks grHr_StageCallbacks[11] = {
       grHomeRun_8021DEB0, 0xC0000000 },
 };
 
-typedef struct grHr_StageData {
-    StageData stage_data;
-    char report_format[0x24];
-    char filename[0xC];
-} grHr_StageData;
-
-grHr_StageData grHr_803E821C = {
-    {
-        Gr_Kind_Homerun,
-        grHr_StageCallbacks,
-        grHr_804D49A0,
-        grHomeRun_8021C754,
-        grHomeRun_8021C750,
-        grHomeRun_8021C7FC,
-        grHomeRun_8021C800,
-        grHomeRun_8021C824,
-        grHomeRun_8021EEB4,
-        grHomeRun_8021EEBC,
-        1,
-        (S16Vec3*) grHr_804D4998,
-        1,
-    },
-    "%s:%d: couldn t get gobj(id=%d)\n",
-    "grhomerun.c",
+StageData grHr_StageData = {
+    Gr_Kind_Homerun,
+    grHr_StageCallbacks,
+    grHr_804D49A0,
+    grHomeRun_8021C754,
+    grHomeRun_8021C750,
+    grHomeRun_8021C7FC,
+    grHomeRun_8021C800,
+    grHomeRun_8021C824,
+    grHomeRun_8021EEB4,
+    grHomeRun_8021EEBC,
+    1,
+    (GrJoint*) grHr_804D4998,
+    1,
 };
+
+static void order_data(void)
+{
+    (void) "%s:%d: couldn t get gobj(id=%d)\n";
+    (void) __FILE__;
+}
 
 void grHomeRun_8021C750(bool arg) {}
 

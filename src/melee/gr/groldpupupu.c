@@ -62,54 +62,93 @@ typedef struct grOldPupupuSpawnDesc {
     s16 x2;
 } grOldPupupuSpawnDesc;
 
-StageCallbacks grOp_StageCallbacks[9] = {
-    { grOldPupupu_8021099C, grOldPupupu_802109C8, grOldPupupu_802109D0,
-      grOldPupupu_802109D4, 0 },
-    { grOldPupupu_802109D8, grOldPupupu_80210A1C, grOldPupupu_80210A24,
-      grOldPupupu_80210B00, 0 },
-    { grOldPupupu_80210BE4, grOldPupupu_80210C2C, grOldPupupu_80210C34,
-      grOldPupupu_80210C78, 0 },
-    { grOldPupupu_80211110, grOldPupupu_8021118C, grOldPupupu_80211194,
-      grOldPupupu_80211198, 0 },
-    { grOldPupupu_80210B04, grOldPupupu_80210B48, grOldPupupu_80210B50,
-      grOldPupupu_80210B54, 0 },
-    { grOldPupupu_80210B58, grOldPupupu_80210BB8, grOldPupupu_80210BC0,
-      grOldPupupu_80210BE0, 0xC0000000 },
-    { grOldPupupu_80211C10, grOldPupupu_80211C14, grOldPupupu_80211C1C,
-      grOldPupupu_80211C9C, 0 },
-    { grOldPupupu_8021119C, grOldPupupu_80211284, grOldPupupu_802113E0,
-      grOldPupupu_80211C0C, 0 },
-    { grOldPupupu_80210C7C, grOldPupupu_80210D08, grOldPupupu_80210D10,
-      grOldPupupu_8021110C, 0 },
-};
-
-char grOp_803E673C[] = "/GrOp.dat";
-
-typedef struct grOp_StageData {
-    StageData stage_data;
-    char report_format[0x24];
-    char filename[0x10];
-} grOp_StageData;
-
-grOp_StageData grOp_803E6748 = {
+StageCallbacks grOp_StageCallbacks[] = {
     {
-        Gr_Kind_OldPupupu,
-        grOp_StageCallbacks,
-        grOp_803E673C,
-        grOldPupupu_802107E0,
-        grOldPupupu_802107DC,
-        grOldPupupu_80210884,
-        grOldPupupu_80210888,
-        grOldPupupu_802108AC,
-        grOldPupupu_80211CA0,
-        grOldPupupu_80211CA8,
-        1,
-        0,
+        grOldPupupu_8021099C,
+        grOldPupupu_802109C8,
+        grOldPupupu_802109D0,
+        grOldPupupu_802109D4,
         0,
     },
-    "%s:%d: couldn t get gobj(id=%d)\n",
-    "groldpupupu.c",
+    {
+        grOldPupupu_802109D8,
+        grOldPupupu_80210A1C,
+        grOldPupupu_80210A24,
+        grOldPupupu_80210B00,
+        0,
+    },
+    {
+        grOldPupupu_80210BE4,
+        grOldPupupu_80210C2C,
+        grOldPupupu_80210C34,
+        grOldPupupu_80210C78,
+        0,
+    },
+    {
+        grOldPupupu_80211110,
+        grOldPupupu_8021118C,
+        grOldPupupu_80211194,
+        grOldPupupu_80211198,
+        0,
+    },
+    {
+        grOldPupupu_80210B04,
+        grOldPupupu_80210B48,
+        grOldPupupu_80210B50,
+        grOldPupupu_80210B54,
+        0,
+    },
+    {
+        grOldPupupu_80210B58,
+        grOldPupupu_80210BB8,
+        grOldPupupu_80210BC0,
+        grOldPupupu_80210BE0,
+        (1 << 30) | (1 << 31),
+    },
+    {
+        grOldPupupu_80211C10,
+        grOldPupupu_80211C14,
+        grOldPupupu_80211C1C,
+        grOldPupupu_80211C9C,
+        0,
+    },
+    {
+        grOldPupupu_8021119C,
+        grOldPupupu_80211284,
+        grOldPupupu_802113E0,
+        grOldPupupu_80211C0C,
+        0,
+    },
+    {
+        grOldPupupu_80210C7C,
+        grOldPupupu_80210D08,
+        grOldPupupu_80210D10,
+        grOldPupupu_8021110C,
+        0,
+    },
 };
+
+StageData grOp_StageData = {
+    Gr_Kind_OldPupupu,
+    grOp_StageCallbacks,
+    "/GrOp.dat",
+    grOldPupupu_802107E0,
+    grOldPupupu_802107DC,
+    grOldPupupu_80210884,
+    grOldPupupu_80210888,
+    grOldPupupu_802108AC,
+    grOldPupupu_80211CA0,
+    grOldPupupu_80211CA8,
+    (1 << 0),
+    NULL,
+    0,
+};
+
+static void order_data(void)
+{
+    (void) "%s:%d: couldn t get gobj(id=%d)\n";
+    (void) "groldpupupu.c";
+}
 
 static grOldPupupuSpawnDesc grOp_803E67B0[10] = {
     { -1, 1, 1 }, { 1, 1, 3 },   { 1, 1, 5 },  { -1, 1, 7 },  { -1, 0, 9 },

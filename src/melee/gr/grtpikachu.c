@@ -23,7 +23,7 @@ StageCallbacks grTPk_StageCallbacks[] = {
     { NULL, NULL, NULL, NULL, 0 }
 };
 
-StageData grTPk_803E92CC = {
+StageData grTPk_StageData = {
     Gr_Kind_TPikachu,
     grTPk_StageCallbacks,
     "/GrTPk.dat",

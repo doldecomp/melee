@@ -1,18 +1,23 @@
 #ifndef MELEE_GR_FORWARD_H
 #define MELEE_GR_FORWARD_H
 
+#include "lb/forward.h"
 #include <baselib/forward.h>
 
-struct grCorneria_GroundVars;
+#include <dolphin/mtx.h>
 
+struct grCorneria_GroundVars;
 typedef struct grDynamicAttr_UnkStruct grDynamicAttr_UnkStruct;
+typedef struct GrJoint GrJoint;
 typedef struct Ground Ground;
-typedef struct StageInfo StageInfo;
 typedef struct GroundParam GroundParam;
+typedef struct StageData StageData;
+typedef struct StageInfo StageInfo;
 typedef struct StageParam StageParam;
 typedef struct UnkArchiveStruct UnkArchiveStruct;
-typedef struct UnkStageDatInternal UnkStageDatInternal;
+typedef struct unkCastle unkCastle;
 typedef struct UnkStageDat UnkStageDat;
+typedef struct UnkStageDatInternal UnkStageDatInternal;
 
 #ifdef M2C
 typedef struct Ground_GObj Ground_GObj;
@@ -41,7 +46,7 @@ typedef HSD_GObj Ground_GObj;
 #endif
 
 /** @remarks
- * Selects the @c Gr??.dat archive, indexing #Ground_803DFEDC. Several #StKind
+ * Selects the @c Gr??.dat archive, indexing #stage_datas. Several #StKind
  * values can share one #GrKind.
  *
  * Member names follow the per-stage @c gr*.c module names the asserts embed.
@@ -169,10 +174,15 @@ typedef enum StKind {
     /* 0x55 */ St_Kind_Heal = 0x55,
 } StKind;
 
-typedef struct unkCastle unkCastle;
+typedef enum StadiumGrType {
+    PsType_Display = 1,
+} StadiumGrType;
 
 typedef void (*unkCastleCallback)(void*, struct unkCastle*);
 typedef void (*unkCastleCallback2)(void*, struct unkCastle*, Ground_GObj*);
 typedef int (*GrIceMtSegmentLookup)(Ground_GObj*);
+typedef DynamicsDesc* (*GrTouchLineCallback)(int index);
+typedef bool (*GrCheckShadowRenderCallback)(Vec3* fighter_pos, int,
+                                            HSD_JObj* jobj);
 
 #endif

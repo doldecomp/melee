@@ -1,16 +1,14 @@
 #include "grtclink.h"
 
-#include "gr/grdisplay.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/types.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
+
 #include "lb/lbspdisplay.h"
 #include "lb/types.h"
 
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 static StageCallbacks grTCLink_StageCallbacks[] = {
@@ -35,16 +33,10 @@ static StageCallbacks grTCLink_StageCallbacks[] = {
         grTCLink_80220198,
         (1 << 30) | (1 << 31),
     },
-    {
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        0,
-    },
+    { 0 },
 };
 
-StageData grTCLink_803E872C = {
+StageData grTCLink_StageData = {
     Gr_Kind_TClink,
     grTCLink_StageCallbacks,
     "/GrTCl.dat",
@@ -56,22 +48,18 @@ StageData grTCLink_803E872C = {
     grTCLink_80220218,
     grTCLink_80220220,
     (1 << 0),
+    NULL,
+    0,
 };
 
-void grTCLink_8021FF44(bool unused)
-{
-    return;
-}
+void grTCLink_8021FF44(bool unused) {}
 
 void grTCLink_8021FF48(void)
 {
     Ground_InitTargetStage(grTCLink_8021FFE8);
 }
 
-void grTclink_UnkStage0_OnLoad(void)
-{
-    return;
-}
+void grTclink_UnkStage0_OnLoad(void) {}
 
 void grTclink_UnkStage0_OnStart(void)
 {
@@ -110,15 +98,9 @@ bool grTCLink_802200FC(Ground_GObj* gobj)
     return false;
 }
 
-void grTCLink_80220104(Ground_GObj* gobj)
-{
-    return;
-}
+void grTCLink_80220104(Ground_GObj* gobj) {}
 
-void grTCLink_80220108(Ground_GObj* gobj)
-{
-    return;
-}
+void grTCLink_80220108(Ground_GObj* gobj) {}
 
 void grTCLink_8022010C(Ground_GObj* gobj)
 {
@@ -136,10 +118,7 @@ void grTCLink_80220164(Ground_GObj* gobj)
     Ground_801C2FE0(gobj);
 }
 
-void grTCLink_80220198(Ground_GObj* gobj)
-{
-    return;
-}
+void grTCLink_80220198(Ground_GObj* gobj) {}
 
 void grTCLink_8022019C(Ground_GObj* gobj)
 {
@@ -156,10 +135,7 @@ void grTCLink_802201F4(Ground_GObj* gobj)
     Ground_801C2FE0(gobj);
 }
 
-void grTCLink_80220214(Ground_GObj* gobj)
-{
-    return;
-}
+void grTCLink_80220214(Ground_GObj* gobj) {}
 
 DynamicsDesc* grTCLink_80220218(enum_t unused)
 {

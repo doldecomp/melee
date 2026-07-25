@@ -25,7 +25,7 @@
 #include "sysdolphin/baselib/random.h"
 
 #include <baselib/jobj.h>
-S16Vec3 grI2_803E4A60[] = {
+GrJoint grI2_803E4A60[] = {
     { 0, 1, 1 },  { 12, 3, 1 },  { 13, 4, 1 },  { 14, 15, 0 }, { 3, 5, 0 },
     { 4, 6, 0 },  { 5, 7, 0 },   { 6, 8, 0 },   { 7, 9, 0 },   { 8, 10, 0 },
     { 9, 11, 0 }, { 10, 12, 0 }, { 11, 13, 0 }, { 2, 14, 0 },
@@ -145,8 +145,8 @@ StageCallbacks grI2_StageCallbacks[] = {
     },
 };
 
-StageData grI2_803E4C00 = {
-    0x19,
+StageData grI2_StageData = {
+    Gr_Kind_Inishie2,
     grI2_StageCallbacks,
     "/GrI2.dat",
     grInishie2_801FCBC4,
@@ -156,9 +156,9 @@ StageData grI2_803E4C00 = {
     grInishie2_801FCCD4,
     grInishie2_801FDFE8,
     grInishie2_801FDFF0,
-    1,
+    (1 << 0),
     grI2_803E4A60,
-    14,
+    ARRAY_SIZE(grI2_803E4A60),
 };
 
 struct grInishie2_YakumonoParam {
@@ -242,12 +242,12 @@ HSD_GObj* grInishie2_801FCCDC(int gobj_id)
             gp->x1C_callback = (HSD_GObjEvent) callbacks->callback3;
         }
 
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
 
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
         }
 
     } else {

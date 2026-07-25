@@ -2,7 +2,6 @@
 #define GALE01_20E798
 
 #include "gr/forward.h"
-#include "mp/forward.h"
 
 #include <dolphin/mtx.h>
 
@@ -40,5 +39,6 @@
                                        float);
 /* 20F404 */ DynamicsDesc* grOldYoshi_8020F404(enum_t);
 /* 20F40C */ bool grOldYoshi_8020F40C(Vec3*, int arg, HSD_JObj* jobj);
+/* 3E650C */ extern StageData grOy_StageData;
 
 #endif

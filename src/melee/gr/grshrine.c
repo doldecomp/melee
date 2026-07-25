@@ -1,24 +1,19 @@
-#include "gr/grshrine.h"
+#include "grshrine.h"
+
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
 #include <platform.h>
-
-#include "gr/granime.h"
-#include "gr/grdisplay.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/types.h"
-
-#include "lb/forward.h"
 
 #include "lb/lb_00B0.h"
 #include "lb/lbspdisplay.h"
 
 #include <math.h>
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 static void grShrine_80201C60(bool);
@@ -54,7 +49,7 @@ static StageCallbacks grSh_StageCallbacks[3] = {
       grShrine_80201F40, (1 << 30) | (1 << 31) },
 };
 
-StageData grSh_803E5130 = {
+StageData grSh_StageData = {
     Gr_Kind_Shrine,
     grSh_StageCallbacks,
     "/GrSh.dat",

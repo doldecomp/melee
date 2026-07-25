@@ -101,5 +101,6 @@ grCorneria_801E25C4(HSD_GObj*, struct grSmashTaunt_GroundVars*, int, int, int);
 /* 1E2EE4 */ DynamicsDesc* grCorneria_801E2EE4(enum_t);
 /* 1E2EEC */ bool grCorneria_801E2EEC(Vec3*, int, HSD_JObj*);
 /* 1E2FCC */ f32 grCorneria_801E2FCC(void);
+/* 3E1F08 */ extern StageData grCn_StageData;
 
 #endif

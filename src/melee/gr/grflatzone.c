@@ -37,28 +37,73 @@ struct grFlatzone_YakumonoParam {
     s32 unk3C;
 };
 
-static StageCallbacks grFz_StageCallbacks[9] = {
-    { grFlatzone_80217030, grFlatzone_8021705C, grFlatzone_80217064,
-      grFlatzone_80217068, 0 },
-    { grFlatzone_802173D4, grFlatzone_80217430, grFlatzone_80217438,
-      grFlatzone_8021743C, 0 },
-    { grFlatzone_8021707C, grFlatzone_802171CC, grFlatzone_802171D4,
-      grFlatzone_802173D0, 0xC0000000 },
-    { grFlatzone_80217648, grFlatzone_802176B4, grFlatzone_802176BC,
-      grFlatzone_80217CD0, 0 },
-    { grFlatzone_80217CD4, grFlatzone_80217D28, grFlatzone_80217D30,
-      grFlatzone_80217DA4, 0 },
-    { grFlatzone_80217450, grFlatzone_802174E4, grFlatzone_802174EC,
-      grFlatzone_80217644, 0 },
-    { grFlatzone_80217DA8, grFlatzone_80217DFC, grFlatzone_80217E04,
-      grFlatzone_80217E78, 0 },
-    { grFlatzone_80217E7C, grFlatzone_80217E80, grFlatzone_80217E88,
-      grFlatzone_80217E8C, 0 },
-    { grFlatzone_80217E90, grFlatzone_80217EE8, grFlatzone_80217EF0,
-      grFlatzone_8021805C, 0 }
+static StageCallbacks grFz_StageCallbacks[] = {
+    {
+        grFlatzone_80217030,
+        grFlatzone_8021705C,
+        grFlatzone_80217064,
+        grFlatzone_80217068,
+        0,
+    },
+    {
+        grFlatzone_802173D4,
+        grFlatzone_80217430,
+        grFlatzone_80217438,
+        grFlatzone_8021743C,
+        0,
+    },
+    {
+        grFlatzone_8021707C,
+        grFlatzone_802171CC,
+        grFlatzone_802171D4,
+        grFlatzone_802173D0,
+        (1 << 30) | (1 << 31),
+    },
+    {
+        grFlatzone_80217648,
+        grFlatzone_802176B4,
+        grFlatzone_802176BC,
+        grFlatzone_80217CD0,
+        0,
+    },
+    {
+        grFlatzone_80217CD4,
+        grFlatzone_80217D28,
+        grFlatzone_80217D30,
+        grFlatzone_80217DA4,
+        0,
+    },
+    {
+        grFlatzone_80217450,
+        grFlatzone_802174E4,
+        grFlatzone_802174EC,
+        grFlatzone_80217644,
+        0,
+    },
+    {
+        grFlatzone_80217DA8,
+        grFlatzone_80217DFC,
+        grFlatzone_80217E04,
+        grFlatzone_80217E78,
+        0,
+    },
+    {
+        grFlatzone_80217E7C,
+        grFlatzone_80217E80,
+        grFlatzone_80217E88,
+        grFlatzone_80217E8C,
+        0,
+    },
+    {
+        grFlatzone_80217E90,
+        grFlatzone_80217EE8,
+        grFlatzone_80217EF0,
+        grFlatzone_8021805C,
+        0,
+    },
 };
 
-StageData grFz_803E7A00 = {
+StageData grFz_StageData = {
     Gr_Kind_Flatzone,
     grFz_StageCallbacks,
     "/GrFz.dat",
@@ -128,11 +173,11 @@ HSD_GObj* grFlatzone_80216F48(s32 gobj_id)
         if (callbacks->callback3 != NULL) {
             gp->x1C_callback = callbacks->callback3;
         }
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grflatzone.c", 0xE8,

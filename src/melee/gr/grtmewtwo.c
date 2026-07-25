@@ -89,7 +89,7 @@ static StageCallbacks grTMewtwo_StageCallbacks[4] = {
     },
 };
 
-StageData grTMewtwo_803E8FCC = {
+StageData grTMewtwo_StageData = {
     Gr_Kind_TMewtwo,
     grTMewtwo_StageCallbacks,
     "/GrTMt.dat",

@@ -7,6 +7,7 @@
 
 #include "cm/camera.h"
 #include "ft/ftlib.h"
+#include "gr/types.h"
 #include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
 
@@ -36,16 +37,31 @@ static struct grZebesRoute_LightData const grZe_Route_803B83A0 = {
 }; // clang-format on
 
 StageCallbacks grZe_Route_StageCallbacks[] = {
-    { grZebesRoute_8020B348, grZebesRoute_8020B374, grZebesRoute_8020B37C,
-      grZebesRoute_8020B380, 0 },
-    { grZebesRoute_8020B3C0, grZebesRoute_8020B424, grZebesRoute_8020B42C,
-      grZebesRoute_8020B4D4, 0xC0000000 },
-    { grZebesRoute_8020B384, grZebesRoute_8020B3B0, grZebesRoute_8020B3B8,
-      grZebesRoute_8020B3BC, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
+    {
+        grZebesRoute_8020B348,
+        grZebesRoute_8020B374,
+        grZebesRoute_8020B37C,
+        grZebesRoute_8020B380,
+        0,
+    },
+    {
+        grZebesRoute_8020B3C0,
+        grZebesRoute_8020B424,
+        grZebesRoute_8020B42C,
+        grZebesRoute_8020B4D4,
+        (1 << 30) | (1 << 31),
+    },
+    {
+        grZebesRoute_8020B384,
+        grZebesRoute_8020B3B0,
+        grZebesRoute_8020B3B8,
+        grZebesRoute_8020B3BC,
+        0,
+    },
+    { 0 },
 };
 
-StageData grZe_Route_803E5E0C = {
+StageData grZe_Route_StageData = {
     Gr_Kind_ZebesRoute,
     grZe_Route_StageCallbacks,
     "/GrNZr.dat",
@@ -56,7 +72,7 @@ StageData grZe_Route_803E5E0C = {
     grZebesRoute_8020B258,
     grZebesRoute_8020B854,
     grZebesRoute_8020B85C,
-    1,
+    (1 << 0),
     NULL,
     0,
 };

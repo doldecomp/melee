@@ -29,6 +29,8 @@ typedef int enum_t;
 /// A @c void callback with no arguments.
 typedef void (*Event)(void);
 
+typedef bool (*Predicate)(void);
+
 #if defined(__MWERKS__) && defined(__PPCGEKKO__)
 #define MWERKS_GEKKO
 #endif

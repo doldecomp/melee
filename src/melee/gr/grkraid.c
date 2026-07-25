@@ -24,7 +24,7 @@ struct grKraid_YakumonoParam {
     float kraid_pos_x[6];
 };
 
-S16Vec3 grKr_803E4C78[] = { { 0, 3, 12 }, { 1, 3, 12 }, { 2, 3, 12 },
+GrJoint grKr_803E4C78[] = { { 0, 3, 12 }, { 1, 3, 12 }, { 2, 3, 12 },
                             { 3, 3, 12 }, { 4, 3, 12 }, { 5, 3, 12 } };
 
 StageCallbacks grKr_StageCallbacks[5] = {
@@ -40,7 +40,7 @@ StageCallbacks grKr_StageCallbacks[5] = {
       0 }
 };
 
-StageData grKr_803E4D0C = {
+StageData grKr_StageData = {
     Gr_Kind_Kraid,
     grKr_StageCallbacks,
     "/GrKr.dat",
