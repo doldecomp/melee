@@ -85,7 +85,7 @@ typedef struct grHr_StageData {
 
 grHr_StageData grHr_803E821C = {
     {
-        HOMERUN,
+        Gr_Kind_Homerun,
         grHr_StageCallbacks,
         grHr_804D49A0,
         grHomeRun_8021C754,

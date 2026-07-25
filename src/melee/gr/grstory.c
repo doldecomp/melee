@@ -41,7 +41,7 @@ static StageCallbacks grSt_StageCallbacks[] = {
 static struct grStory_YakumonoParam* yakumono_param;
 
 StageData grSt_803E274C = {
-    STORY,
+    Gr_Kind_Story,
     grSt_StageCallbacks,
     "/GrSt.dat",
     grStory_801E3030,

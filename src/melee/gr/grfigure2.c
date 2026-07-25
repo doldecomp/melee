@@ -46,7 +46,7 @@ static StageCallbacks grEF2_StageCallbacks[3] = {
 };
 
 StageData grEF2_803E6370 = {
-    FIGURE2,
+    Gr_Kind_Figure2,
     grEF2_StageCallbacks,
     "/GrEF2.dat",
     grFigure2_8020E274,

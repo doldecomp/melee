@@ -964,7 +964,7 @@ void gm_8019DF8C_OnFrame(void)
             } else {
                 stage = (s32) tmd->x28;
             }
-            vsdata.stage_id = (u32) stage;
+            vsdata.stkind = (u32) stage;
         }
         for (i = 0; i < 4; i++) {
             vsdata.slot_type[i] = (Gm_PKind) tmd->x4B8[i].x0;
@@ -1124,7 +1124,7 @@ void gm_8019E634(void)
 void gm_8019ECAC_OnEnter(void* arg0)
 {
     struct {
-        u32 stage_id;
+        StKind stkind;
         CharacterKind char_id[4];
         u32 color[4];
     } local;
@@ -1158,9 +1158,9 @@ void gm_8019ECAC_OnEnter(void* arg0)
 
     fn_80196510();
     if (fn_80196564(tmd)) {
-        local.stage_id = fn_8019655C();
+        local.stkind = fn_8019655C();
     } else {
-        local.stage_id = tmd->x28;
+        local.stkind = tmd->x28;
     }
     fn_80196594(tmd);
     lbDvd_800174BC();
@@ -1171,7 +1171,7 @@ void gm_8019ECAC_OnEnter(void* arg0)
             audio_mask |= lbAudioAx_80026E84(local.char_id[j]);
         }
     }
-    audio_mask |= lbAudioAx_80026EBC(local.stage_id);
+    audio_mask |= lbAudioAx_80026EBC(local.stkind);
     lbAudioAx_80026F2C(0x1C);
     lbAudioAx_8002702C(0xC, audio_mask);
     lbAudioAx_80027168();
@@ -1196,7 +1196,7 @@ void fn_8019EE80(TmVsData* arg0)
     }
 
     if (!fn_80196594(gm_GetTournamentData())) {
-        game_cache->stage_id = arg0->stage_id;
+        game_cache->stkind = arg0->stkind;
     }
 
     lbDvd_80018254();

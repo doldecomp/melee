@@ -89,7 +89,7 @@ void gm_801B98E8(GameScene* scene)
     lbDvd_800174BC();
     game_cache->entries[1].char_id = CHKIND_SANDBAG;
     game_cache->entries[1].color = 0;
-    game_cache->stage_id = 0x54;
+    game_cache->stkind = 0x54;
     lbDvd_80018254();
     gm_804D68F9 = lbTime_8000AF74(gm_804D68F9, 1);
 }

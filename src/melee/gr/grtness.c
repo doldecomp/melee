@@ -62,7 +62,7 @@ static StageCallbacks grTNs_StageCallbacks[] = {
 };
 
 StageData grTNs_803E908C = {
-    TNESS,
+    Gr_Kind_TNess,
     grTNs_StageCallbacks,
     "/GrTNs.dat",
     grTNess_802225D4,

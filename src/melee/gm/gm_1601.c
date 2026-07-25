@@ -2318,19 +2318,19 @@ found:
     return false;
 }
 
-void gm_80164504(u16 stage_id)
+void gm_80164504(u16 stkind)
 {
     u16* stage_unlock_mask;
     s32 i;
-    u8 internal_id;
+    u8 grkind;
     u8 unlock_idx;
     u8 notify_val;
 
     stage_unlock_mask = gmMainLib_8015EDA4();
-    internal_id = Stage_8022519C(stage_id);
+    grkind = Stage_8022519C(stkind);
 
     for (i = 0; i < NUM_UNLOCKABLE_STAGES; i++) {
-        if ((s32) internal_id == (s32) lbl_803B790C[i][1]) {
+        if ((s32) grkind == (s32) lbl_803B790C[i][1]) {
             unlock_idx = lbl_803B790C[i][0];
             goto found_stage;
         }
@@ -3399,18 +3399,18 @@ void fn_8016719C(s32 slot, s32 subchar)
     Vec3 offset;
     lbl_8046B6A0_t* match_info;
     s32 var_r30;
-    s32 stage_id;
+    StKind stkind;
     struct fn_8016719C_xC_bits* temp_r4;
 
     match_info = gm_16AE_GetUnkData_1();
-    stage_id = gm_8016B004();
-    if (Stage_80224DC8(stage_id) != 0) {
+    stkind = gm_8016B004();
+    if (Stage_80224DC8(stkind) != 0) {
         var_r30 = Ground_801C5774();
         Stage_80224E38(&respawn_pos, var_r30);
         offset.z = 0.0f;
         offset.y = 0.0f;
         offset.x = 0.0f;
-        if ((stage_id != 0x4C) && (subchar == 0)) {
+        if ((stkind != 0x4C) && (subchar == 0)) {
             Ground_801C38BC(respawn_pos.x, respawn_pos.y);
             Camera_8002F3AC();
         }

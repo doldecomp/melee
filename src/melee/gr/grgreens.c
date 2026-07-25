@@ -149,7 +149,7 @@ typedef struct grGr_StageData {
 
 grGr_StageData grGr_803E76D0 = {
     {
-        GREENS,
+        Gr_Kind_Greens,
         grGr_callbacks,
         grGr_803E76C4,
         grGreens_Init,

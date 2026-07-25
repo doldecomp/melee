@@ -1723,7 +1723,7 @@ bool ftCo_800B89CC(Fighter* fp)
 
     PAD_STACK(8);
 
-    if (stage_info.internal_stage_id == KONGO &&
+    if (stage_info.grkind == Gr_Kind_Kongo &&
         (fp->cur_pos.x > 25.0F || fp->cur_pos.x < -25.0F))
     {
         return false;

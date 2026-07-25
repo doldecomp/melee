@@ -965,26 +965,26 @@ void Camera_8002A28C(CameraBounds* arg0)
 
 /// @note doesnt check all stages...
 /// probably was a bandaid for problem stages
-inline float get_stage_floor_height(InternalStageId stage_id)
+inline float get_stage_floor_height(GrKind kind)
 {
     float height = -F32_MAX;
-    switch (stage_id) {
-    case CASTLE:
+    switch (kind) {
+    case Gr_Kind_Castle:
         height = grCastle_801D0FF0();
         break;
-    case CORNERIA:
+    case Gr_Kind_Corneria:
         height = grCorneria_801E2FCC();
         break;
-    case ZEBES:
+    case Gr_Kind_Zebes:
         height = grZebes_801DCCC8();
         break;
-    case GARDEN:
+    case Gr_Kind_Garden:
         height = grGarden_80203624();
         break;
-    case KINOKOROUTE:
+    case Gr_Kind_KinokoRoute:
         height = grKinokoRoute_802087B0();
         break;
-    case HOMERUN:
+    case Gr_Kind_Homerun:
         height = grHomeRun_8021EF10();
         break;
     }
@@ -1014,10 +1014,9 @@ void Camera_8002A4AC(HSD_GObj* gobj)
         break;
     case CAMERA_PAUSE:
         pos = transform->position;
-        floor_height = get_stage_floor_height(stage_info.internal_stage_id);
+        floor_height = get_stage_floor_height(stage_info.grkind);
         if (pos.y < floor_height) {
-            floor_height =
-                get_stage_floor_height(stage_info.internal_stage_id);
+            floor_height = get_stage_floor_height(stage_info.grkind);
             pos.y = floor_height;
         }
         HSD_CObjSetFov(cobj, transform->fov);
@@ -1320,23 +1319,23 @@ void Camera_8002AF68(HSD_CObj* cobj, CameraTransformState* transform)
     vec.y += cm_80452C68.translation.y;
 
     eye_y_bound = -3.4028235e38f;
-    switch (stage_info.internal_stage_id) {
-    case CASTLE:
+    switch (stage_info.grkind) {
+    case Gr_Kind_Castle:
         eye_y_bound = grCastle_801D0FF0();
         break;
-    case CORNERIA:
+    case Gr_Kind_Corneria:
         eye_y_bound = grCorneria_801E2FCC();
         break;
-    case ZEBES:
+    case Gr_Kind_Zebes:
         eye_y_bound = grZebes_801DCCC8();
         break;
-    case GARDEN:
+    case Gr_Kind_Garden:
         eye_y_bound = grGarden_80203624();
         break;
-    case KINOKOROUTE:
+    case Gr_Kind_KinokoRoute:
         eye_y_bound = grKinokoRoute_802087B0();
         break;
-    case HOMERUN:
+    case Gr_Kind_Homerun:
         eye_y_bound = grHomeRun_8021EF10();
         break;
     }

@@ -45,7 +45,7 @@ static StageCallbacks grTCLink_StageCallbacks[] = {
 };
 
 StageData grTCLink_803E872C = {
-    TCLINK,
+    Gr_Kind_TClink,
     grTCLink_StageCallbacks,
     "/GrTCl.dat",
     grTCLink_8021FF48,

@@ -307,7 +307,7 @@ void gm_801B6428(GameScene* arg0)
     temp_r3->rules.xE = gm_801647F8(temp_r3->players[0].c_kind);
     {
         PreloadCacheScene* scene = lbDvd_GetPreloadCacheScene();
-        scene->game_cache.stage_id = temp_r3->rules.xE;
+        scene->game_cache.stkind = temp_r3->rules.xE;
     }
     lbDvd_80018254();
     gm_8016F088(temp_r3);
@@ -490,7 +490,7 @@ static void gm_801B6AD8_inline(GameScene* scene, int x)
     temp_r31_2->entries[1].color = 0;
     temp_r31_2->entries[2].char_id = CKIND_GIRL;
     temp_r31_2->entries[2].color = 0;
-    temp_r31_2->stage_id = 0x11D;
+    temp_r31_2->stkind = 0x11D;
     lbDvd_80018254();
 }
 

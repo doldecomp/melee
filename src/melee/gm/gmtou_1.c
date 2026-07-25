@@ -2436,7 +2436,7 @@ void fn_8019B458(s32* arg0)
                         skip_stage_cache = 0;
                     }
                     if (skip_stage_cache == 0) {
-                        gc->stage_id = req.stage;
+                        gc->stkind = req.stage;
                     }
                 }
 

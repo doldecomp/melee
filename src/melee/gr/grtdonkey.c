@@ -52,7 +52,7 @@ static StageCallbacks grTDk_StageCallbacks[] = {
 };
 
 StageData grTDk_803E87EC = {
-    TDONKEY,
+    Gr_Kind_TDonkey,
     grTDk_StageCallbacks,
     "/GrTDk.dat",
     grTDonkey_8022022C,

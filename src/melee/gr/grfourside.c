@@ -79,7 +79,7 @@ StageCallbacks grFs_StageCallbacks[] = {
 };
 
 StageData grFs_803E3D94 = {
-    FOURSIDE,
+    Gr_Kind_Fourside,
     grFs_StageCallbacks,
     "/GrFs.dat",
     grFourside_801F2D10,

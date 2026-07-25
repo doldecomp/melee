@@ -55,7 +55,7 @@ static StageCallbacks grSh_StageCallbacks[3] = {
 };
 
 StageData grSh_803E5130 = {
-    SHRINE,
+    Gr_Kind_Shrine,
     grSh_StageCallbacks,
     "/GrSh.dat",
     grShrine_80201C64,

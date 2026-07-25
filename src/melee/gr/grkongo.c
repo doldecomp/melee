@@ -76,7 +76,7 @@ typedef struct grKg_StageData {
 
 grKg_StageData grKg_803E1800 = {
     {
-        KONGO,
+        Gr_Kind_Kongo,
         grKg_StageCallbacks,
         grKg_803E17F4,
         grKongo_801D523C,
@@ -522,7 +522,7 @@ void grKongo_801D6074(Ground_GObj* arg0)
     temp_r31->u.kongo3.xCA = 0;
     temp_r31->u.kongo2.xD0 = -99999.0f;
     temp_r31->u.kongo2.xD4 = 3.4028235e38f;
-    if ((enum InternalStageId) temp_r31->map_id == TEST) {
+    if ((enum GrKind) temp_r31->map_id == Gr_Kind_Test) {
         temp_r31->u.kongo.xCC = (f32) ((45.0 * HSD_Randf()) + -15.0);
     } else {
         temp_r31->u.kongo.xCC = (f32) (9.0 * HSD_Randf());
@@ -546,7 +546,7 @@ void grKongo_801D6198(Ground_GObj* arg0)
         if (grAnime_801C83D0(arg0, 0, 1) != 0) {
             Ground_801C2ED0((HSD_JObj*) arg0->hsd_obj, temp_r3->map_id);
             Ground_801C2FE0(arg0);
-            if ((enum InternalStageId) temp_r3->map_id == TEST) {
+            if ((enum GrKind) temp_r3->map_id == Gr_Kind_Test) {
                 mpJointListAdd(0);
                 mpJointSetCb1(0, temp_r3, fn_801D7E60);
             } else {
@@ -569,7 +569,7 @@ void grKongo_801D6198(Ground_GObj* arg0)
             (grKongo_801D7F78(arg0) != 0))
         {
             grAnime_801C8138(arg0, temp_r3->map_id, 1);
-            if ((enum InternalStageId) temp_r3->map_id == TEST) {
+            if ((enum GrKind) temp_r3->map_id == Gr_Kind_Test) {
                 mpLib_80057BC0(0);
                 mpJointClearCb1(0);
             } else {
@@ -617,9 +617,9 @@ void grKongo_801D637C(Ground_GObj* arg0)
     temp_r30 = arg0->hsd_obj;
     grAnime_801C8138(arg0, temp_r31->map_id, 0);
     grAnime_801C78FC(arg0, 0, 7);
-    if (temp_r31->map_id == SHRINE) {
+    if (temp_r31->map_id == Gr_Kind_Shrine) {
         temp_r31->u.kongo.xCC = (f32) ((45.0 * HSD_Randf()) + -15.0);
-    } else if (temp_r31->map_id == ZEBES) {
+    } else if (temp_r31->map_id == Gr_Kind_Zebes) {
         temp_r31->u.kongo.xCC = (f32) ((20.0 * HSD_Randf()) + -10.0);
     } else {
         temp_r31->u.kongo.xCC = (f32) (9.0 * HSD_Randf());
@@ -1511,8 +1511,9 @@ Vec3* grKongo_801D7E78(HSD_GObj* gobj, Vec3* pos)
     PAD_STACK(8);
 
     if (gp != NULL) {
-        if (gp->map_id == TEST || gp->map_id == CASTLE ||
-            gp->map_id == SHRINE || gp->map_id == ZEBES || gp->map_id == KRAID)
+        if (gp->map_id == Gr_Kind_Test || gp->map_id == Gr_Kind_Castle ||
+            gp->map_id == Gr_Kind_Shrine || gp->map_id == Gr_Kind_Zebes ||
+            gp->map_id == Gr_Kind_Kraid)
         {
             jobj = Ground_801C3FA4(gobj, 2);
             if (jobj != NULL) {
@@ -1521,7 +1522,7 @@ Vec3* grKongo_801D7E78(HSD_GObj* gobj, Vec3* pos)
             }
             return NULL;
         }
-        if (gp->map_id == YORSTER) {
+        if (gp->map_id == Gr_Kind_Yorster) {
             jobj = gobj->hsd_obj;
             if (jobj != NULL) {
                 HSD_JObjGetTranslation(jobj, pos);

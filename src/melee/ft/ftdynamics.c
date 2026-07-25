@@ -378,7 +378,7 @@ void ftCo_8009DD94(Fighter_GObj* gobj, bool arg1)
     f32 scale_x;
     PAD_STACK(8);
 
-    if (dynamics_num != 0 && stage_info.internal_stage_id == FLATZONE) {
+    if (dynamics_num != 0 && stage_info.grkind == Gr_Kind_Flatzone) {
         HSD_JObj* jobj = GET_JOBJ(gobj);
         scale_x = jobj->scale.x;
         jobj->scale.x = fp->x34_scale.y;
@@ -423,7 +423,7 @@ void ftCo_8009DD94(Fighter_GObj* gobj, bool arg1)
             }
         }
     }
-    if (dynamics_num != 0 && stage_info.internal_stage_id == FLATZONE) {
+    if (dynamics_num != 0 && stage_info.grkind == Gr_Kind_Flatzone) {
         HSD_JObj* jobj = GET_JOBJ(gobj);
         jobj->scale.x = scale_x;
         HSD_JObjSetMtxDirty(jobj);

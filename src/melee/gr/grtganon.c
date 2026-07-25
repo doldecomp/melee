@@ -28,7 +28,7 @@ StageCallbacks grTGn_StageCallbacks[] = {
 };
 
 StageData grTGn_803E98DC = {
-    TGANON,
+    Gr_Kind_TGanon,
     grTGn_StageCallbacks,
     "/GrTGn.dat",
     grTGanon_802246DC,

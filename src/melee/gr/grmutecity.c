@@ -334,7 +334,7 @@ typedef struct grMc_StageData {
 
 grMc_StageData grMc_803E33DC = {
     {
-        MUTECITY,
+        Gr_Kind_MuteCity,
         grMc_StageCallbacks,
         grMc_803E33D0,
         grMuteCity_801EFC6C,

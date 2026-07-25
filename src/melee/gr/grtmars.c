@@ -61,7 +61,7 @@ static StageCallbacks grTMs_StageCallbacks[4] = {
 };
 
 StageData grTMs_803E8F0C = {
-    TMARS,
+    Gr_Kind_TMars,
     grTMs_StageCallbacks,
     "/GrTMs.dat",
     grTMars_80221EF8,

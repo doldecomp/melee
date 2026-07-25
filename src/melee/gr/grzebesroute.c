@@ -46,7 +46,7 @@ StageCallbacks grZe_Route_StageCallbacks[] = {
 };
 
 StageData grZe_Route_803E5E0C = {
-    ZEBESROUTE,
+    Gr_Kind_ZebesRoute,
     grZe_Route_StageCallbacks,
     "/GrNZr.dat",
     grZebesRoute_8020B164,

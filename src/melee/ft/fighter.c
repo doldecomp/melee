@@ -830,7 +830,7 @@ void Fighter_80068E64(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (stage_info.internal_stage_id == FLATZONE) {
+    if (stage_info.grkind == Gr_Kind_Flatzone) {
         fp->x34_scale.z = p_ftCommonData->x7E4_scaleZ;
     } else {
         fp->x34_scale.z = 1.0f;

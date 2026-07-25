@@ -35,7 +35,7 @@
 /* 1C067C */ GXColor* Ground_801C067C(void);
 /* 1C0690 */ GXColor* Ground_801C0690(void);
 /* 1C06A4 */ GXColor* Ground_801C06A4(void);
-/* 1C06B8 */ void Ground_801C06B8(InternalStageId);
+/* 1C06B8 */ void Ground_801C06B8(GrKind);
 /* 1C0754 */ void Ground_801C0754(StageIdPair* pair);
 /* 1C0800 */ void Ground_801C0800(StageIdPair* pair);
 /* 1C0F78 */ void Ground_801C0F78(StageIdPair* pair);
@@ -64,9 +64,9 @@
 /* 1C20D0 */ f32 Ground_801C20D0(void);
 /* 1C2374 */ void Ground_801C2374(HSD_LObj* lobj);
 /* 1C247C */ HSD_Spline* Ground_801C247C(s32, s32);
-/* 1C28AC */ bool Ground_801C28AC(s32, u32, s32*);
+/* 1C28AC */ bool Ground_801C28AC(StKind, u32, s32*);
 /* 1C2AD8 */ s32* Ground_801C2AD8(void);
-/* 1C2AE8 */ float Ground_801C2AE8(int);
+/* 1C2AE8 */ float Ground_801C2AE8(StKind);
 /* 1C2BA4 */ Ground_GObj* Ground_801C2BA4(int index);
 /* 1C2C8C */ bool Ground_801C2C8C(void*);
 /* 1C2CF4 */ HSD_JObj* Ground_801C2CF4(s32);

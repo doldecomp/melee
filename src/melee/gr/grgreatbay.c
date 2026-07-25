@@ -136,7 +136,7 @@ StageCallbacks grGb_StageCallbacks[11] = {
 };
 
 StageData grGb_803E3F6C = {
-    GREATBAY,
+    Gr_Kind_GreatBay,
     grGb_StageCallbacks,
     "/GrGb.dat",
     grGreatBay_801F4240,
@@ -1135,7 +1135,7 @@ bool grGreatBay_801F66A4(void)
     HSD_GObj* gobj;
     Ground* gp;
 
-    if (stage_info.internal_stage_id == GREATBAY) {
+    if (stage_info.grkind == Gr_Kind_GreatBay) {
         gobj = Ground_801C2BA4(1);
         if (gobj != NULL) {
             gp = GET_GROUND(gobj);

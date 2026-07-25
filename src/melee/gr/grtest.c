@@ -35,7 +35,7 @@ StageCallbacks grTe_StageCallbacks[] = {
 };
 
 StageData grTe_803E5764 = {
-    TEST,
+    Gr_Kind_Test,
     grTe_StageCallbacks,
     "/GrTe.dat",
     grTest_80206E30,

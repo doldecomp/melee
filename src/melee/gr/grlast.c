@@ -150,7 +150,7 @@ static StageCallbacks grLast_StageCallbacks[] = {
 };
 
 StageData grNLa_803E7F90 = {
-    LAST,
+    Gr_Kind_Last,
     grLast_StageCallbacks,
     "/GrNLa.dat",
     grLast_OnInit,

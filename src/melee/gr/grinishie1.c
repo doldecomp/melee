@@ -179,7 +179,7 @@ typedef struct grInishie1_StageData {
 
 grInishie1_StageData grI1_803E4950 = {
     {
-        INISHIE1,
+        Gr_Kind_Inishie1,
         grI1_StageCallbacks,
         grI1_803E4944,
         grInishie1_801FA90C,
@@ -1129,7 +1129,7 @@ void fn_801FC9AC(void* user_data, int joint_id, CollData* coll, int coll_x50,
 
 bool grInishie1_801FCAAC(int line_id)
 {
-    if (stage_info.internal_stage_id == INISHIE1 && line_id != -1) {
+    if (stage_info.grkind == Gr_Kind_Inishie1 && line_id != -1) {
         int result;
         u32 joint;
 
