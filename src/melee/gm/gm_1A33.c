@@ -8,6 +8,7 @@
 #include <melee/gm/types.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbsnap.h>
+#include <melee/mn/inlines.h>
 #include <melee/mn/mnmain.h>
 
 static f32 gmCamera_803DA758[12] = {
@@ -74,20 +75,20 @@ void gmCamera_801A34FC_OnFrame(void)
         }
         gmCamera_801A33BC();
     } else if (mn_8022F218() != 0) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_8022F268();
         *gmCamera_VsCameraTextLayout.x0 = 2;
         gm_801A4B60();
     } else if (button = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS),
                button & (HSD_PAD_START | HSD_PAD_A))
     {
-        lbAudioAx_80024030(1);
+        sfxForward();
         *gmCamera_VsCameraTextLayout.x0 = 0;
         gm_801A4B60();
     } else if (button = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS),
                button & PAD_BUTTON_B)
     {
-        lbAudioAx_80024030(0);
+        sfxBack();
         *gmCamera_VsCameraTextLayout.x0 = 1;
         gm_801A4B60();
     }

@@ -6,6 +6,7 @@
 
 #include "dolphin/pad.h"
 #include "gm/gm_1B14.h"
+#include "mn/inlines.h"
 #include "pl/pl_040D.h"
 
 #include <math_ppc.h>
@@ -1675,7 +1676,7 @@ void fn_80187CF4(HSD_GObj* gobj)
         break;
     case 2:
         if (gm_GetButtonsTriggered(data->x38) & PAD_BUTTON_START) {
-            lbAudioAx_80024030(1);
+            sfxForward();
             data->x36.active = 1;
             data->x37.state2 = 3;
             anim_state = data->x37.state2;
@@ -2398,7 +2399,7 @@ void fn_801891F4(void)
         sub->x01 = 1;
 
         if (buttons & 0x1000000000ULL) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             if ((u8) sub->x00 != 0) {
                 sub->x00--;
                 if (sub->x00 == 5) {
@@ -2410,7 +2411,7 @@ void fn_801891F4(void)
         }
 
         if (buttons & 0x2000000000ULL) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             if ((u8) sub->x00 < 8) {
                 sub->x00++;
                 if (sub->x00 == 5) {
@@ -2424,7 +2425,7 @@ void fn_801891F4(void)
         switch (sub->x00) {
         case 0:
             if (buttons & 0x4000000000ULL) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] != 0) {
                     sub->menu_values[sub->x00]--;
                     return;
@@ -2433,7 +2434,7 @@ void fn_801891F4(void)
                 return;
             }
             if (buttons & 0x8000000000ULL) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] < 5) {
                     sub->menu_values[sub->x00]++;
                     return;
@@ -2444,14 +2445,14 @@ void fn_801891F4(void)
             break;
         case 1:
             if (buttons & 0x4000000000ULL) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] != 0) {
                     sub->menu_values[sub->x00]--;
                 } else {
                     sub->menu_values[sub->x00] = 0x1D;
                 }
             } else if (buttons & 0x8000000000ULL) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] < 0x1D) {
                     sub->menu_values[sub->x00]++;
                 } else {
@@ -2473,7 +2474,7 @@ void fn_801891F4(void)
             break;
         case 2:
             if (buttons & 0x4000000000ULL) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] != 0) {
                     sub->menu_values[sub->x00]--;
                     return;
@@ -2482,7 +2483,7 @@ void fn_801891F4(void)
                 return;
             }
             if (buttons & 0x8000000000ULL) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] < 2) {
                     sub->menu_values[sub->x00]++;
                     return;
@@ -2493,7 +2494,7 @@ void fn_801891F4(void)
             break;
         case 3:
             if (buttons & 0x4000000000ULL) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] != 0) {
                     sub->menu_values[sub->x00]--;
                     return;
@@ -2502,7 +2503,7 @@ void fn_801891F4(void)
                 return;
             }
             if (buttons & 0x8000000000ULL) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] < 5) {
                     sub->menu_values[sub->x00]++;
                     return;
@@ -2513,7 +2514,7 @@ void fn_801891F4(void)
             break;
         case 4:
             if (buttons & 0x4000000000ULL) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] != 0) {
                     sub->menu_values[sub->x00]--;
                     if ((u32) sub->menu_values[sub->x00] == 0) {
@@ -2525,7 +2526,7 @@ void fn_801891F4(void)
                     return;
                 }
             } else if (buttons & 0x8000000000ULL) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] < 0x3E7) {
                     sub->menu_values[sub->x00]++;
                     if ((u32) sub->menu_values[sub->x00] == 0x3E7) {
@@ -2540,19 +2541,19 @@ void fn_801891F4(void)
             break;
         case 5:
             if (buttons & 0x4000000000ULL) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 sub->menu_values[sub->x00] = 0;
                 return;
             }
             if (buttons & 0x8000000000ULL) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 sub->menu_values[sub->x00] = 1;
                 return;
             }
             break;
         case 6:
             if (buttons & 0x4000000000ULL) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] != 0) {
                     sub->menu_values[sub->x00]--;
                 } else {
@@ -2574,7 +2575,7 @@ void fn_801891F4(void)
                     return;
                 }
             } else if (buttons & 0x8000000000ULL) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] < 2) {
                     sub->menu_values[sub->x00]++;
                 } else {
@@ -2599,7 +2600,7 @@ void fn_801891F4(void)
             break;
         case 7:
             if (buttons & 0x100ULL) {
-                lbAudioAx_80024030(1);
+                sfxForward();
                 fn_80188644();
                 return;
             }
@@ -2620,7 +2621,7 @@ void fn_801891F4(void)
 
             speeds = *(ClassicProcArray*) lbl_803B7C68;
 
-            lbAudioAx_80024030(0);
+            sfxBack();
             sub->anim_frames[22] = 0x14;
             lb_80019880(__cvt_dbl_usll(
                 (f64) (0.016666668f / ((f32*) speeds.v)[sub->menu_values[0]] *

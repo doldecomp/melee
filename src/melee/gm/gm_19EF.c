@@ -8,6 +8,7 @@
 
 #include "dolphin/pad.h"
 #include "it/inlines.h"
+#include "mn/inlines.h"
 
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
@@ -226,7 +227,7 @@ static void fn_8019F2D4(u32 arg0)
             if ((u8) lbl_80479A98.x14 != 0) {
                 if ((u16) lbl_80479A98.x1E >= (u16) lbl_80479A98.x1C) {
                     lbl_80479A98.x0 = 8;
-                    lbAudioAx_80024030(1);
+                    sfxForward();
                     lbl_80479A98.x60 = 1;
                     lbl_80479A98.x22 =
                         lbl_80479A98.x22 - (lbl_80479A98.x1C * 0xA);
@@ -239,7 +240,7 @@ static void fn_8019F2D4(u32 arg0)
                 return;
             }
             lbl_80479A98.x0 = 8;
-            lbAudioAx_80024030(1);
+            sfxForward();
             lbAudioAx_80023F28(0x20);
             lbAudioAx_800237A8(0x9C43, 0x7F, 0x40);
             lbl_804D66C8.x4 = 0x6E;
@@ -247,11 +248,11 @@ static void fn_8019F2D4(u32 arg0)
             return;
         }
         if ((arg0 & 0x40000) && ((u8) lbl_80479A98.x14 == 0)) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             lbl_80479A98.x14 = 1;
         }
         if ((arg0 & 0x80000) && ((u8) lbl_80479A98.x14 == 1)) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             lbl_80479A98.x14 = 0;
             return;
         }

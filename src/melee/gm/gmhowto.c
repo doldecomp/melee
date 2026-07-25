@@ -11,6 +11,7 @@
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbmthp.h>
+#include <melee/mn/inlines.h>
 
 static u32 gm_803DD2C0[] = {
     1,  19, 856, 1,  1,   85, 279, 1,  1,   59,  17,  1,  1,     59, 19,
@@ -73,7 +74,7 @@ void gm_801ACD8C_OnFrame(void)
         if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
             (HSD_PAD_START | HSD_PAD_A))
         {
-            lbAudioAx_80024030(1);
+            sfxForward();
             gm_SetPendingGameMode(GM_TITLE);
             gm_SetNewGameModePending();
         } else if (gmMainLib_8015DB00() != 5) {
