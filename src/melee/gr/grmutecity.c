@@ -328,10 +328,18 @@ StageCallbacks grMc_StageCallbacks[39] = {
 };
 
 StageData grMc_StageData = {
-    Gr_Kind_MuteCity,          grMc_StageCallbacks, "/GrMc.dat",
-    grMuteCity_801EFC6C,       grMuteCity_801EFC68, grMuteCity_801EFCDC,
-    grMuteCity_801EFCE0,       grMuteCity_801EFD04, grMuteCity_801F2BBC,
-    grMuteCity_801F2C10,       0x00000001,          grMc_803E30B0,
+    Gr_Kind_MuteCity,
+    grMc_StageCallbacks,
+    "/GrMc.dat",
+    grMuteCity_801EFC6C,
+    grMuteCity_801EFC68,
+    grMuteCity_801EFCDC,
+    grMuteCity_801EFCE0,
+    grMuteCity_801EFD04,
+    grMuteCity_801F2BBC,
+    grMuteCity_801F2C10,
+    (1 << 0),
+    grMc_803E30B0,
     ARRAY_SIZE(grMc_803E30B0),
 };
 
