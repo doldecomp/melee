@@ -519,9 +519,9 @@ static bool Ground_801C0A70(Vec3* pos)
             // Gr_Kind_Flatzone disabled
             Gr_Kind_OldPupupu,
             Gr_Kind_OldYoshi,
-            Gr_Kind_OldKongo, ///< @todo what stages are these?
-            36,
-            37,
+            Gr_Kind_OldKongo,
+            Gr_Kind_Battle,
+            Gr_Kind_Last,
         };
         enum_t player_slot;
         size_t nstages = sizeof(enabled_stages) / sizeof(enabled_stages[0]);
@@ -2157,7 +2157,7 @@ void Ground_801C39C0(void)
             phi_f0 = 120;
             phi_f5 = -60;
             break;
-        case 2:
+        case Gr_Kind_Castle:
             phi_f3 = -170;
             phi_f4 = 170;
             phi_f0 = 120;
@@ -2165,7 +2165,7 @@ void Ground_801C39C0(void)
             phi_f1 = 0;
             phi_f2 = 180;
             break;
-        case 14:
+        case Gr_Kind_Corneria:
             phi_f3 = -470;
             phi_f4 = 470;
             phi_f0 = 120;
@@ -2173,7 +2173,7 @@ void Ground_801C39C0(void)
             phi_f1 = 0;
             phi_f2 = 300;
             break;
-        case 26:
+        case Gr_Kind_Unk26:
             phi_f3 = -470;
             phi_f4 = 470;
             phi_f0 = 180;
@@ -2181,7 +2181,7 @@ void Ground_801C39C0(void)
             phi_f1 = 0;
             phi_f2 = 130;
             break;
-        case 25:
+        case Gr_Kind_Inishie2:
             phi_f3 = -200;
             phi_f4 = 200;
             phi_f0 = 200;
@@ -2189,7 +2189,7 @@ void Ground_801C39C0(void)
             phi_f1 = 0;
             phi_f2 = 130;
             break;
-        case 3:
+        case Gr_Kind_RCruise:
             phi_f1 = 0;
             phi_f3 = -200;
             phi_f2 = 0;
@@ -2197,7 +2197,7 @@ void Ground_801C39C0(void)
             phi_f0 = 150;
             phi_f5 = -160;
             break;
-        case 11:
+        case Gr_Kind_Yorster:
             phi_f1 = 0;
             phi_f3 = -170;
             phi_f2 = 0;
@@ -2205,7 +2205,7 @@ void Ground_801C39C0(void)
             phi_f0 = 180;
             phi_f5 = -60;
             break;
-        case 18:
+        case Gr_Kind_MuteCity:
             phi_f1 = 0;
             phi_f3 = -170;
             phi_f2 = 0;

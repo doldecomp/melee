@@ -914,7 +914,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
             }
 
             {
-                s32 grkind = Stage_8022519C(arg7);
+                GrKind grkind = Stage_8022519C(arg7);
                 stage_flags = Ground_801C5AD0(grkind);
             }
 

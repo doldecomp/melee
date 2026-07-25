@@ -1124,7 +1124,7 @@ void gm_8019E634(void)
 void gm_8019ECAC_OnEnter(void* arg0)
 {
     struct {
-        u32 stkind;
+        StKind stkind;
         CharacterKind char_id[4];
         u32 color[4];
     } local;

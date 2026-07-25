@@ -3399,7 +3399,7 @@ void fn_8016719C(s32 slot, s32 subchar)
     Vec3 offset;
     lbl_8046B6A0_t* match_info;
     s32 var_r30;
-    s32 stkind;
+    StKind stkind;
     struct fn_8016719C_xC_bits* temp_r4;
 
     match_info = gm_16AE_GetUnkData_1();

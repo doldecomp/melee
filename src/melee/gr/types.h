@@ -148,7 +148,7 @@ typedef struct StageCallbacks {
 } StageCallbacks;
 
 typedef struct StageData {
-    u32 grkind;
+    GrKind grkind;
     StageCallbacks* callbacks;
     char* data1;
     void (*OnInit)(void);

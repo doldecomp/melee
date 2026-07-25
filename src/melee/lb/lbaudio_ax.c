@@ -2163,7 +2163,7 @@ u64 lbAudioAx_80026E84(CharacterKind c_kind)
 u64 lbAudioAx_80026EBC(StKind stkind)
 {
     const int imax = ARRAY_SIZE(s32_arr_803BB6B0);
-    int grkind = Stage_8022519C(stkind);
+    GrKind grkind = Stage_8022519C(stkind);
     int shift;
 
     if (grkind < 0 || grkind >= imax) {
