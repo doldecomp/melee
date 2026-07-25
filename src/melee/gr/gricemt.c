@@ -804,9 +804,10 @@ void grIceMt_801F7F70(Ground_GObj* arg0)
     grIceMt_801F8CDC(arg0, (s16*) &sp14, 2, &gp->u.icemt2.xF8[0]);
     grIceMt_801F91EC(arg0, (s16*) ((u8*) gp + 0x100),
                      grIceMt_801FA500(arg0, jobj), -1, 0x25, 0x109, 0x27E,
-                     fn_801F9338);
+                     (mpLib_JointCollisionCallback) fn_801F9338);
     grIceMt_801F91EC(arg0, &gp->u.icemt.x108[3], grIceMt_801FA500(arg0, jobj2),
-                     -1, 0x26, 0x109, 0x27E, fn_801F9448);
+                     -1, 0x26, 0x109, 0x27E,
+                     (mpLib_JointCollisionCallback) fn_801F9448);
 }
 
 bool grIceMt_801F8154(Ground_GObj* param1)
@@ -926,7 +927,8 @@ void grIceMt_801F83EC(Ground_GObj* arg0)
     grIceMt_801F8CDC(arg0, (s16*) &sp14, 4, &gp->u.icemt2.xF8[0]);
     r = grIceMt_801FA500(arg0, jobj3);
     grIceMt_801F91EC(arg0, gp->u.icemt.x108, grIceMt_801FA500(arg0, jobj2), r,
-                     0x75, 0x109, 0x27E, fn_801F9558);
+                     0x75, 0x109, 0x27E,
+                     (mpLib_JointCollisionCallback) fn_801F9558);
 }
 
 bool grIceMt_801F85BC(Ground_GObj* param1)
@@ -1327,10 +1329,9 @@ void grIceMt_801F929C(HSD_GObj* arg0, void* arg1)
 }
 
 /// @copydoc mpLib_JointCollisionCallback
-void fn_801F9338(void* user_data, int joint_id, CollData* coll, int coll_x50,
+void fn_801F9338(Ground* gp, int joint_id, CollData* coll, int coll_x50,
                  mpLib_GroundEnum ground_kind, float delta_y)
 {
-    Ground* gp = user_data;
     HSD_GObj* gobj;
     s16* s = gp->u.icemt.x100;
     PAD_STACK(8);
@@ -1351,10 +1352,9 @@ void fn_801F9338(void* user_data, int joint_id, CollData* coll, int coll_x50,
 }
 
 /// @copydoc mpLib_JointCollisionCallback
-void fn_801F9448(void* user_data, int joint_id, CollData* coll, int coll_x50,
+void fn_801F9448(Ground* gp, int joint_id, CollData* coll, int coll_x50,
                  mpLib_GroundEnum ground_kind, float delta_y)
 {
-    Ground* gp = user_data;
     HSD_GObj* gobj;
     s16* s = &gp->u.icemt.x108[3];
     PAD_STACK(8);
@@ -1375,10 +1375,9 @@ void fn_801F9448(void* user_data, int joint_id, CollData* coll, int coll_x50,
 }
 
 /// @copydoc mpLib_JointCollisionCallback
-void fn_801F9558(void* user_data, int joint_id, CollData* coll, int coll_x50,
+void fn_801F9558(Ground* gp, int joint_id, CollData* coll, int coll_x50,
                  mpLib_GroundEnum ground_kind, float delta_y)
 {
-    Ground* gp = user_data;
     HSD_GObj* gobj;
     s16* s = gp->u.icemt.x108;
     PAD_STACK(8);

@@ -33,16 +33,16 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-/* 1F9338 */ static void fn_801F9338(void* user_data, int joint_id,
-                                     CollData* coll, int coll_x50,
+/* 1F9338 */ static void fn_801F9338(Ground* gp, int joint_id, CollData* coll,
+                                     int coll_x50,
                                      mpLib_GroundEnum ground_kind,
                                      float delta_y);
-/* 1F9448 */ static void fn_801F9448(void* user_data, int joint_id,
-                                     CollData* coll, int coll_x50,
+/* 1F9448 */ static void fn_801F9448(Ground* gp, int joint_id, CollData* coll,
+                                     int coll_x50,
                                      mpLib_GroundEnum ground_kind,
                                      float delta_y);
-/* 1F9558 */ static void fn_801F9558(void* user_data, int joint_id,
-                                     CollData* coll, int coll_x50,
+/* 1F9558 */ static void fn_801F9558(Ground* gp, int joint_id, CollData* coll,
+                                     int coll_x50,
                                      mpLib_GroundEnum ground_kind,
                                      float delta_y);
 /* 1F8C64 */ static void fn_801F8C64(Item_GObj* gobj, Ground* u1, Vec3* u2,
