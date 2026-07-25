@@ -84,16 +84,6 @@ void ftCo_800CE620(HSD_GObj* fighter_gobj)
     }
 }
 
-static inline bool zero_throw_flag_b0(Fighter* fp)
-{
-    if (fp->throw_flags_b0) {
-        fp->throw_flags_b0 = false;
-        return true;
-    } else {
-        return false;
-    }
-}
-
 void ftCo_800CE650(HSD_GObj* gobj)
 {
     Vec3 spC4;
@@ -131,7 +121,7 @@ void ftCo_800CE650(HSD_GObj* gobj)
         {
             temp_r3->mv.co.itemthrow.x10 = 0.0F;
         }
-        if (zero_throw_flag_b0(temp_r3)) {
+        if (ftCheckThrowB0(temp_r3)) {
             temp_r3->mv.co.itemthrow.x14 = 1;
 
             {
@@ -240,34 +230,14 @@ void ftCo_800CE650(HSD_GObj* gobj)
     }
 }
 
-static inline bool zero_throw_flag_b3(Fighter* fp)
-{
-    if (fp->throw_flags_b3) {
-        fp->throw_flags_b3 = false;
-        return true;
-    } else {
-        return false;
-    }
-}
-
-static inline bool zero_throw_flag_b4(Fighter* fp)
-{
-    if (fp->throw_flags_b4) {
-        fp->throw_flags_b4 = false;
-        return true;
-    } else {
-        return false;
-    }
-}
-
 void ftCo_FireFlowerShoot_Anim(Fighter_GObj* fighter_gobj)
 {
     Fighter* fighter = GET_FIGHTER(fighter_gobj);
     if (fighter->item_gobj != NULL) {
-        if (zero_throw_flag_b3(fighter)) {
+        if (ftCheckThrowB3(fighter)) {
             it_80292E64(fighter->item_gobj);
         }
-        if (zero_throw_flag_b4(fighter)) {
+        if (ftCheckThrowB4(fighter)) {
             it_80292EAC(fighter->item_gobj);
         }
         ftCo_800CDE18(fighter_gobj);

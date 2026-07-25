@@ -3532,20 +3532,13 @@ static inline s32 fn_800F9260_GetLHandBone(Fighter* fp)
 void fn_800F9260(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 found = 0;
     Vec3 sp44;
     s32 bone;
     s32 pick;
     HSD_JObj* joint;
 
     if (fp->u.kb.hat.kind != 4) {
-        if (fp->throw_flags_b0) {
-            fp->throw_flags_b0 = 0;
-            found = 1;
-        } else {
-            found = 0;
-        }
-        if (found) {
+        if (ftCheckThrowB0(fp)) {
             lb_8000B1CC(
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_LHandN)].joint, NULL,
                 &sp44);
