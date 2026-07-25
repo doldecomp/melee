@@ -5314,6 +5314,20 @@ static inline void ftCo_800ABBA8_blk155144r(Fighter* fp, Fighter** target)
     *target = data->x44;
 }
 
+/* MSL sqrtf with caller-provided volatile slot (retail 0x34/0x38/0x40). */
+static inline float ftCo_800ABBA8_sqrtf_store(float x, volatile float* y)
+{
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        *y = (float) (x * guess);
+        return *(volatile float*) y;
+    }
+    return x;
+}
+
 void ftCo_800ABBA8(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
@@ -5328,6 +5342,8 @@ void ftCo_800ABBA8(Fighter* fp)
         Vec3 v;
         u8 _[4];
     } sp50;
+    u8 sqrt_gap[0xC];
+    float sqrt_tmp[4];
     s32 result;
     s32 blocked;
     s32 ok;
@@ -5347,7 +5363,8 @@ void ftCo_800ABBA8(Fighter* fp)
 
     ftCo_800ABBA8_blk155144r(fp, &target);
 
-    PAD_STACK(0x1C);
+    PAD_STACK(0xC);
+    (void) sqrt_gap;
 
     if (data->level < 5) {
         ok = 0;
@@ -5376,8 +5393,9 @@ void ftCo_800ABBA8(Fighter* fp)
         blocked = 0;
         line_id = -1;
         {
+            f32 cx2 = cx;
             f32 floor_y = cy - 1000.0;
-            result = mpCheckFloor(cx, cy, cx, floor_y, 0.0f, &sp74, &line_id,
+            result = mpCheckFloor(cx2, cy, cx, floor_y, 0.0f, &sp74, &line_id,
                                   &flags, &sp68, -1, -1, -1, NULL,
                                   (Fighter_GObj*) blocked);
         }
@@ -5403,7 +5421,8 @@ void ftCo_800ABBA8(Fighter* fp)
                 ok = 0;
             }
             if (ok == 0) {
-                disc = sqrtf(ABS(2.0f * g * h + v * v));
+                disc = ftCo_800ABBA8_sqrtf_store(ABS(2.0f * g * h + v * v),
+                                                 &sqrt_tmp[3]);
                 t = (-disc - v) / g;
             } else {
                 if (v < 0.00001f && v > -0.00001f) {
@@ -5485,11 +5504,11 @@ void ftCo_800ABBA8(Fighter* fp)
     if (vf5 <= 0.0f) {
         land_y = fp->pos_delta.y * vf0 + fp->cur_pos.y;
     } else if (vf0 < vf5) {
-        tmp = sqrtf(vf0);
+        tmp = ftCo_800ABBA8_sqrtf_store(vf0, &sqrt_tmp[1]);
         land_y =
             fp->cur_pos.y + (fp->pos_delta.y * vf0 - 0.5 * (*grav_ptr * tmp));
     } else {
-        tmp = sqrtf(vf5);
+        tmp = ftCo_800ABBA8_sqrtf_store(vf5, &sqrt_tmp[0]);
         land_y =
             fp->cur_pos.y + (fp->pos_delta.y * vf5 - 0.5 * (*grav_ptr * tmp) -
                              (vf0 - vf5) * ftCo_GetTerminalVelocity(fp));
