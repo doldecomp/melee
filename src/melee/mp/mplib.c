@@ -730,7 +730,6 @@ static struct mpLib_803BF248_t_x4* mpLib_803BF1F8[20] = {
     &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
 };
 
-/// clang-format off
 static struct mpLib_803BF248_t mpLib_803BF248[0x47] = {
     { Gr_Kind_Unk00, &mpLib_803BDC18 },
     { Gr_Kind_Test, &mpLib_803BDC68 },
@@ -804,7 +803,6 @@ static struct mpLib_803BF248_t mpLib_803BF248[0x47] = {
     { Gr_Kind_Figure2, &mpLib_803BF1A8 },
     { Gr_Kind_Figure3, &mpLib_803BF1F8 },
 };
-/// clang-format on
 
 extern Vec2 mpLib_803BF718[2];
 extern MapLine mpLib_803BF728;
