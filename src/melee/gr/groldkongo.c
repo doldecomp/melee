@@ -208,9 +208,8 @@ void stageGObj0_Callback3(Ground_GObj* arg) {}
 void stageGObj3_OnInit(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+
+    Ground_JObjInline1(gobj);
     gp->x10_flags.b5 = 1;
 }
 
