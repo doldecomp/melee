@@ -61,7 +61,7 @@ static inline void sfxMove(void)
     lbAudioAx_80024030(2);
 }
 
-static inline void Menu_InitCenterText(Menu* menu, u8 val)
+static inline void Menu_InitCenterText(Menu* menu, s32 val)
 {
     HSD_Text* text =
         HSD_SisLib_803A5ACC(0, 1, -9.5F, 9.1F, 17.0F, 364.68332F, 38.38772F);

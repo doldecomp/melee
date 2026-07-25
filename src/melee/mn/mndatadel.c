@@ -617,9 +617,7 @@ void fn_8024F840(HSD_GObj* gobj)
 
     user_data = mnDataDel_804D6C68->user_data;
     if (mn_804D6BC8.cooldown != 0) {
-        mn_804D6BC8.cooldown--;
-        mn_804D6BC8.x2 = 0;
-        mn_804D6BC8.x4 = 0;
+        Menu_DecrementAnimTimer();
         return;
     }
     buttons = Menu_GetAllInputs();
