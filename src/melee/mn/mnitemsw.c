@@ -756,17 +756,14 @@ HSD_JObj* mnItemSw_80235020(u8 arg0, MnItemSwData* arg1)
     return jobj;
 }
 
-static inline HSD_JObj* mnItemSw_GetLeftColumn(MnItemSwData* data)
-{
-    return data->jobjs[4];
-}
-
-static inline void mnItemSw_SetInitialCursorPosition(MnItemSwData* user_data)
+static inline void setInitialCursorPosition(MnItemSwData* user_data,
+                                            HSD_JObj* item_jobj)
 {
     u8 cursor;
     f32 y_spacing;
     HSD_JObj* cjobj;
 
+    (void) item_jobj;
     HSD_JObjSetFlagsAll(user_data->jobjs[4], JOBJ_HIDDEN);
     HSD_JObjSetFlagsAll(user_data->jobjs[6], JOBJ_HIDDEN);
 
@@ -798,6 +795,24 @@ static inline void mnItemSw_SetInitialCursorPosition(MnItemSwData* user_data)
     HSD_JObjSetFlagsAll(user_data->jobjs[2], JOBJ_HIDDEN);
 }
 
+static inline void initUserData(MnItemSwData* user_data, s32 arg0,
+                                struct MnItemSwTable* tbl)
+{
+    u8* order;
+    s32 i;
+
+    user_data->menu_kind = mn_804A04F0.cur_menu;
+    user_data->cursor = (u8) mn_804A04F0.hovered_selection;
+
+    order = tbl->item_order;
+    for (i = 0; (u8) i < 0x1F; order++, i++) {
+        user_data->items[(u8) i] = gm_8016403C(*order);
+    }
+
+    user_data->x21 = gmMainLib_8015CC58()->item_freq + 1;
+    user_data->x23 = (u8) arg0;
+}
+
 HSD_GObj* mnItemSw_802351A0(s32 arg0)
 {
     HSD_JObj* jobj;
@@ -806,7 +821,6 @@ HSD_GObj* mnItemSw_802351A0(s32 arg0)
     struct StaticModelDesc* mdl = &MenMainConIs_Top;
     struct MnItemSwTable* tbl = mnItemSw_GetTable();
     f32 y_spacing;
-    u8* order;
     s32 i;
     HSD_GObj* gobj = GObj_Create(6, 7, 0x80);
 
@@ -822,21 +836,12 @@ HSD_GObj* mnItemSw_802351A0(s32 arg0)
     HSD_JObjReqAnimAll(jobj, 0.0f);
     HSD_JObjAnimAll(jobj);
 
-    user_data = HSD_MemAlloc(sizeof(MnItemSwData));
-    HSD_ASSERTREPORT(0x3D7, user_data, "Can't get user_data.\n");
+    user_data = HSD_MemAlloc(sizeof(*user_data));
+    HSD_ASSERTREPORT(983, user_data, "Can't get user_data.\n");
 
     GObj_InitUserData(gobj, 0, HSD_Free, user_data);
 
-    user_data->menu_kind = mn_804A04F0.cur_menu;
-    user_data->cursor = (u8) mn_804A04F0.hovered_selection;
-
-    order = tbl->item_order;
-    for (i = 0; (u8) i < 0x1F; order++, i++) {
-        user_data->items[(u8) i] = gm_8016403C(*order);
-    }
-
-    user_data->x21 = gmMainLib_8015CC58()->item_freq + 1;
-    user_data->x23 = (u8) arg0;
+    initUserData(user_data, arg0, tbl);
 
     for (i = 0; i < 7; i++) {
         lb_80011E24(jobj, &user_data->jobjs[i], i, -1);
@@ -851,7 +856,7 @@ HSD_GObj* mnItemSw_802351A0(s32 arg0)
     }
 
     y_spacing = HSD_JObjGetTranslationY(user_data->jobjs[5]) -
-                HSD_JObjGetTranslationY(mnItemSw_GetLeftColumn(user_data));
+                HSD_JObjGetTranslationY(user_data->jobjs[4]);
 
     for (i = 0; i < 0x1F; i++) {
         item_jobj = mnItemSw_80235020((u8) i, user_data);
@@ -864,19 +869,19 @@ HSD_GObj* mnItemSw_802351A0(s32 arg0)
         }
     }
 
-    mnItemSw_SetInitialCursorPosition(user_data);
+    setInitialCursorPosition(user_data, item_jobj);
 
     {
         u8 hov = (u8) mn_804A04F0.hovered_selection;
         u8 x21 = user_data->x21;
-        HSD_JObj* all_jobj = user_data->jobjs[3];
+        item_jobj = user_data->jobjs[3];
 
         if (hov == 0x1F || hov == 0x20) {
-            HSD_JObjReqAnimAll(all_jobj, tbl->x30[7 + x21 * 2]);
+            HSD_JObjReqAnimAll(item_jobj, tbl->x30[7 + x21 * 2]);
         } else {
-            HSD_JObjReqAnimAll(all_jobj, tbl->x30[6 + x21 * 2]);
+            HSD_JObjReqAnimAll(item_jobj, tbl->x30[6 + x21 * 2]);
         }
-        HSD_JObjAnimAll(all_jobj);
+        HSD_JObjAnimAll(item_jobj);
     }
 
     HSD_JObjSetFlagsAll(user_data->jobjs[3], JOBJ_HIDDEN);
