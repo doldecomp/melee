@@ -408,7 +408,7 @@ GXColor* Ground_801C06A4(void)
     return &x->xC8;
 }
 
-void Ground_801C06B8(InternalStageId arg0)
+void Ground_801C06B8(GrKind arg0)
 {
     if (Ground_803DFEDC[arg0] == NULL) {
         return;
@@ -435,7 +435,7 @@ void Ground_801C0754(StageIdPair* pair)
     Ground_801BFFB0();
     stage_info.internal_stage_id = pair->internal_id;
     stage = Ground_803DFEDC[pair->internal_id];
-    arg3 = (pair->external_id == ExternalStageID_HEAL) ? 0 : 1;
+    arg3 = (pair->external_id == StKind_HEAL) ? 0 : 1;
     grDatFiles_801C6038(stage->data1, 0, arg3);
     Ground_801C28CC(&stage_info.xA0, pair->external_id);
     stage_info.x178 = stage->callback5;
@@ -490,7 +490,7 @@ void Ground_801C0800(StageIdPair* pair)
 static bool Ground_801C0A70(Vec3* pos)
 {
     if (HSD_Randi(2) != 0) {
-        InternalStageId enabled_stages[] = {
+        GrKind enabled_stages[] = {
             CASTLE,
             RCRUISE,
             KONGO,
@@ -527,7 +527,7 @@ static bool Ground_801C0A70(Vec3* pos)
         size_t nstages = sizeof(enabled_stages) / sizeof(enabled_stages[0]);
         u32 _[5];
         size_t i;
-        InternalStageId stage_id = stage_info.internal_stage_id;
+        GrKind stage_id = stage_info.internal_stage_id;
         for (i = 0; i < nstages; i++) {
             if (stage_id == enabled_stages[i]) {
                 break;
@@ -2269,7 +2269,7 @@ void Ground_801C3BB4(void)
             top = 200;
             bot = -100;
             break;
-        case InternalStageID_Unk26:
+        case GrKind_Unk26:
             lft = -600;
             rgt = 600;
             top = 200;
@@ -2877,7 +2877,7 @@ bool Ground_801C4DA0(Vec3* arg0, f32* arg1)
 
 bool Ground_801C4DD0(void)
 {
-    InternalStageId stage_id = stage_info.internal_stage_id;
+    GrKind stage_id = stage_info.internal_stage_id;
     if (stage_id == KONGO) {
         grKongo_801D8270(stage_info.x72C);
     } else if (stage_id == OLDKONGO) {
@@ -2888,7 +2888,7 @@ bool Ground_801C4DD0(void)
 
 bool Ground_801C4E20(void)
 {
-    InternalStageId stage_id = stage_info.internal_stage_id;
+    GrKind stage_id = stage_info.internal_stage_id;
     if (stage_id == KONGO) {
         grKongo_801D828C(stage_info.x72C);
     } else if (stage_id == OLDKONGO) {

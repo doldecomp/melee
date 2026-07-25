@@ -370,7 +370,7 @@ struct gmm_x0 {
         /* 0x0570 */ int x40;
         /* 0x0574 */ s8 x44;
         /* 0x0575 */ u8 x45;
-        /* 0x0578 */ ExternalStageId x48;
+        /* 0x0578 */ StKind x48;
         /* 0x057C */ s8 x4C[4]; ///< CharacterKind
         /* 0x0580 */ u8 x50[4]; ///< character color
         struct gmm_x0_584_t {
@@ -1084,7 +1084,7 @@ struct gm_8049E548_t {
     /* 0x09 */ u8 unk_9;
     /* 0x0A */ s8 unk_A;
     /* 0x0B */ char pad_B[1];
-    /* 0x0C */ u16 unk_C; ///< InternalStageId
+    /* 0x0C */ u16 unk_C; ///< GrKind
     /* 0x0E */ s8 unk_E;  /* inferred */
     /* 0x0F */ char pad_F[1];
 }; /* size = 0x10 */

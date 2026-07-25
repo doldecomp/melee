@@ -61,7 +61,7 @@ struct StageInfo {
 
     u32 flags; // 0x84
 
-    InternalStageId internal_stage_id; // 0x88
+    GrKind internal_stage_id; // 0x88
 
     struct {
         u8 b0 : 1;
@@ -164,8 +164,8 @@ typedef struct StageData {
 } StageData;
 
 typedef struct StageIdPair {
-    InternalStageId internal_id;
-    ExternalStageId external_id;
+    GrKind internal_id;
+    StKind external_id;
 } StageIdPair;
 
 struct GroundVars_unk {
@@ -1710,8 +1710,8 @@ struct Ground {
         u8 b7 : 1;
     } x11_flags;
 
-    InternalStageId map_id; // 0x14
-    HSD_GObj* x18;          // 0x18
+    GrKind map_id; // 0x14
+    HSD_GObj* x18; // 0x18
     HSD_GObjEvent x1C_callback;
     int x20[8];
     Vec3 self_vel;

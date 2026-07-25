@@ -742,8 +742,8 @@ static inline void gm_8017CE34_SetupColors(UnkAdventureData* arg1, s32 count,
 }
 
 s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
-                u8 arg3, u8 arg4, u8 arg5, s32 arg6, ExternalStageId arg7,
-                s32 count, s32 arg9)
+                u8 arg3, u8 arg4, u8 arg5, s32 arg6, StKind arg7, s32 count,
+                s32 arg9)
 {
     u8 colors[16];
     u8 enemy_level;

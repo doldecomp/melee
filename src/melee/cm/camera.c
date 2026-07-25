@@ -965,7 +965,7 @@ void Camera_8002A28C(CameraBounds* arg0)
 
 /// @note doesnt check all stages...
 /// probably was a bandaid for problem stages
-inline float get_stage_floor_height(InternalStageId stage_id)
+inline float get_stage_floor_height(GrKind stage_id)
 {
     float height = -F32_MAX;
     switch (stage_id) {

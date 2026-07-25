@@ -40,9 +40,12 @@ struct Ground_GObj {
 typedef HSD_GObj Ground_GObj;
 #endif
 
+/// Selects the @c Gr??.dat archive, indexing #Ground_803DFEDC. Several #StKind
+/// values can share one #GrKind.
+///
 /// @todo Finish values, use @c PascalCase
-typedef enum InternalStageId {
-    InternalStageID_Unk00,
+typedef enum GrKind {
+    GrKind_Unk00,
     TEST,
 
     /// Princess Peach's Castle
@@ -108,7 +111,7 @@ typedef enum InternalStageId {
     /// Icicle Mountain
     ICEMTN,
 
-    InternalStageID_Unk23,
+    GrKind_Unk23,
 
     /// Mushroom Kingdom
     INISHIE1,
@@ -116,7 +119,7 @@ typedef enum InternalStageId {
     /// Mushroom Kingdom II
     INISHIE2,
 
-    InternalStageID_Unk26,
+    GrKind_Unk26,
 
     /// Flat Zone
     FLATZONE,
@@ -135,7 +138,7 @@ typedef enum InternalStageId {
     ZEBESROUTE,
     BIGBLUEROUTE,
 
-    InternalStageID_Unk35,
+    GrKind_Unk35,
 
     BATTLE,
     LAST,
@@ -173,50 +176,56 @@ typedef enum InternalStageId {
     FIGURE1,
     FIGURE2,
     FIGURE3
-} InternalStageId;
+} GrKind;
 
-/// External stage IDs, the public stage numbering used by
-/// #StartMeleeRules::xE and the Stage_802251E8 argument. #stage_id_map
-/// converts them to #InternalStageId values; entries 0x21+ are
-/// single-player, event, and other mode variants.
-typedef enum ExternalStageId {
-    ExternalStageID_Unk00,
-    ExternalStageID_TEST,
-    ExternalStageID_IZUMI,
-    ExternalStageID_PSTADIUM,
-    ExternalStageID_CASTLE,
-    ExternalStageID_KONGO,
-    ExternalStageID_ZEBES,
-    ExternalStageID_CORNERIA,
-    ExternalStageID_STORY,
-    ExternalStageID_ONETT,
-    ExternalStageID_MUTECITY,
-    ExternalStageID_RCRUISE,
-    ExternalStageID_GARDEN,
-    ExternalStageID_GREATBAY,
-    ExternalStageID_SHRINE,
-    ExternalStageID_KRAID,
-    ExternalStageID_YORSTER,
-    ExternalStageID_GREENS,
-    ExternalStageID_FOURSIDE,
-    ExternalStageID_INISHIE1,
-    ExternalStageID_INISHIE2,
-    ExternalStageID_Unk21, // maps to InternalStageID_Unk26
-    ExternalStageID_VENOM,
-    ExternalStageID_PURA,
-    ExternalStageID_BIGBLUE,
-    ExternalStageID_ICEMTN,
-    ExternalStageID_Unk26, // second Icicle Mountain entry
-    ExternalStageID_FLATZONE,
-    ExternalStageID_OLDPUPUPU,
-    ExternalStageID_OLDYOSHI,
-    ExternalStageID_OLDKONGO,
-    ExternalStageID_BATTLE,
-    ExternalStageID_LAST,
+/// The numbering used by #StartMeleeRules::xE and Stage_802251E8.
+/// #stage_id_map converts it to #GrKind, and each archive's @c grGroundParam
+/// list is keyed by it; entries 0x21+ are single-player, event, and other mode
+/// variants.
+///
+/// Both names come from ground.c's report
+/// `not found stage param in DAT(grkind=%d stkind=%d,num=%d)`, which passes
+/// #StageInfo::internal_stage_id for grkind and this value for stkind.
+typedef enum StKind {
+    StKind_Unk00,
+    StKind_TEST,
+    StKind_IZUMI,
+    StKind_PSTADIUM,
+    StKind_CASTLE,
+    StKind_KONGO,
+    StKind_ZEBES,
+    StKind_CORNERIA,
+    StKind_STORY,
+    StKind_ONETT,
+    StKind_MUTECITY,
+    StKind_RCRUISE,
+    StKind_GARDEN,
+    StKind_GREATBAY,
+    StKind_SHRINE,
+    StKind_KRAID,
+    StKind_YORSTER,
+    StKind_GREENS,
+    StKind_FOURSIDE,
+    StKind_INISHIE1,
+    StKind_INISHIE2,
+    StKind_Unk21, // maps to GrKind_Unk26
+    StKind_VENOM,
+    StKind_PURA,
+    StKind_BIGBLUE,
+    StKind_ICEMTN,
+    /// Second Icicle Mountain entry. @c GrIm.dat has no stage-param row for
+    /// it, so loading it spins in Ground_801C28CC's not-found loop.
+    StKind_Unk26,
+    StKind_FLATZONE,
+    StKind_OLDPUPUPU,
+    StKind_OLDYOSHI,
+    StKind_OLDKONGO,
+    StKind_BATTLE,
+    StKind_LAST,
 
-    ExternalStageID_BIGBLUEROUTE = 0x49,
-    ExternalStageID_HEAL = 0x55,
-} ExternalStageId;
+    StKind_BIGBLUEROUTE = 0x49,
+    StKind_HEAL = 0x55,
+} StKind;
 
 typedef struct unkCastle unkCastle;
 

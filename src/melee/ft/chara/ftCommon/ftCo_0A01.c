@@ -994,7 +994,7 @@ s32 ftCo_800A229C(Fighter* fp, Vec3* arg1)
     Vec3 sp20;
     f32 sp1C;
     f32 sp18;
-    enum InternalStageId stage;
+    enum GrKind stage;
     f32 w;
     f32 h;
     f32 bottom;
@@ -1116,7 +1116,7 @@ bool ftCo_800A2718(mp_UnkStruct0* arg0)
     {
         Item_GObj* cur;
         Item* cur_ip;
-        enum InternalStageId* stage;
+        enum GrKind* stage;
 
         PAD_STACK(6 * 4);
 
@@ -2173,8 +2173,7 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                             data2->x54.y = ey;
                             data2->x38 = 5.0f;
                             {
-                                InternalStageId stage_id =
-                                    stage_info.internal_stage_id;
+                                GrKind stage_id = stage_info.internal_stage_id;
                                 ftCo_800A1CC4(fp, ftCo_803C6594[stage_id]);
                             }
                         }

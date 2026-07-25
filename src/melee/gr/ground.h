@@ -35,7 +35,7 @@
 /* 1C067C */ GXColor* Ground_801C067C(void);
 /* 1C0690 */ GXColor* Ground_801C0690(void);
 /* 1C06A4 */ GXColor* Ground_801C06A4(void);
-/* 1C06B8 */ void Ground_801C06B8(InternalStageId);
+/* 1C06B8 */ void Ground_801C06B8(GrKind);
 /* 1C0754 */ void Ground_801C0754(StageIdPair* pair);
 /* 1C0800 */ void Ground_801C0800(StageIdPair* pair);
 /* 1C0F78 */ void Ground_801C0F78(StageIdPair* pair);
