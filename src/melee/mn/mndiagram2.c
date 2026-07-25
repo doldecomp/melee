@@ -6,6 +6,7 @@
 
 #include "baselib/forward.h"
 
+#include "mn/inlines.h"
 #include "mn/types.h"
 
 #include <stdbool.h>
@@ -294,7 +295,7 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
     result = mn_804A04F0.buttons = mn_80229624(4);
 
     if (result & 0x20) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_804A04F0.entering_menu = 0;
         data2 = (d2 = mnDiagram2_804D6C18)->user_data;
         x46 = data2->selected_fighter_idx;
@@ -308,7 +309,7 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
     }
 
     if (result & 0xC0) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         data2 = mnDiagram2_804D6C18->user_data;
         x46 = data2->selected_fighter_idx;
         gmMainLib_GetGameRules()->x12 = x46;
@@ -331,7 +332,7 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
             lbAudioAx_80024030(3);
             return;
         }
-        lbAudioAx_80024030(1);
+        sfxForward();
         var_r28 = 0;
         if (data->is_name_mode == 0) {
             var_r28 = 1;
@@ -371,13 +372,13 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         GetNameCount();
         if (result & 1) {
             if (data->scroll_offset != 0) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 data->scroll_offset = data->scroll_offset - 1;
                 mnDiagram2_RefreshStatRows();
             }
         } else if (result & 2) {
             if ((s32) (data->scroll_offset + 10) < 0x18) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 data->scroll_offset = data->scroll_offset + 1;
                 mnDiagram2_RefreshStatRows();
             }
@@ -385,7 +386,7 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
             var_r28 =
                 (u8) mnDiagram_GetPrevNameIndex_s(data->selected_name_idx);
             if ((s32) data->selected_name_idx != var_r28) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 data->selected_name_idx = var_r28;
                 mnDiagram2_RefreshStatRows();
                 mnDiagram2_UpdateHeader(mnDiagram2_804D6C18,
@@ -396,7 +397,7 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
             var_r28 =
                 (u8) mnDiagram_GetNextNameIndex_s(data->selected_name_idx);
             if ((s32) data->selected_name_idx != var_r28) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 data->selected_name_idx = var_r28;
                 mnDiagram2_RefreshStatRows();
                 mnDiagram2_UpdateHeader(mnDiagram2_804D6C18,
@@ -408,13 +409,13 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         mnDiagram_CountUnlockedFighters();
         if (result & 1) {
             if (data->scroll_offset != 0) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 data->scroll_offset = data->scroll_offset - 1;
                 mnDiagram2_RefreshStatRows();
             }
         } else if (result & 2) {
             if ((s32) (data->scroll_offset + 10) < 0x15) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 data->scroll_offset = data->scroll_offset + 1;
                 mnDiagram2_RefreshStatRows();
             }
@@ -422,7 +423,7 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
             var_r28 = (u8) mnDiagram_GetPrevFighterIndex_s(
                 data->selected_fighter_idx);
             if ((s32) data->selected_fighter_idx != var_r28) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 data->selected_fighter_idx = var_r28;
                 mnDiagram2_RefreshStatRows();
                 mnDiagram2_UpdateHeader(mnDiagram2_804D6C18,
@@ -433,7 +434,7 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
             var_r28 = (u8) mnDiagram_GetNextFighterIndex_s(
                 data->selected_fighter_idx);
             if ((s32) data->selected_fighter_idx != var_r28) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 data->selected_fighter_idx = var_r28;
                 mnDiagram2_RefreshStatRows();
                 mnDiagram2_UpdateHeader(mnDiagram2_804D6C18,

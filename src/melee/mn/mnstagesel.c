@@ -1,5 +1,7 @@
 #include "mnstagesel.h"
 
+#include "inlines.h"
+
 #include "mnstagesel.static.h"
 
 #include "placeholder.h"
@@ -141,7 +143,7 @@ skip_randomize:
     HSD_JObjAnimAll(gobj->hsd_obj);
     mnStageSel_804D6CAF = 1;
     mnStageSel_804D6CA4 = 0x1E;
-    lbAudioAx_80024030(1);
+    sfxForward();
 }
 
 void fn_80259D84(HSD_GObj* gobj)
@@ -170,7 +172,7 @@ void fn_80259D84(HSD_GObj* gobj)
             {
                 HSD_JObjReqAnimAllByFlags(jobj, 1, 10.0F);
             }
-            lbAudioAx_80024030(2);
+            sfxMove();
             temp_r31->x4 = 0;
             temp_r31->x2 = 2;
             mnStageSel_80259ED8(mnStageSel_804D6CAE);
@@ -764,7 +766,7 @@ void mnStageSel_8025B850_OnFrame(void)
         return;
     }
     if (mnStageSel_804D6C90->no_lras == 0 && mn_8022F218()) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         lb_800145F4();
         HSD_GObjPLink_80390228(mnStageSel_804D6C9C);
         mn_8022F268();
@@ -816,7 +818,7 @@ void mnStageSel_8025B850_OnFrame(void)
     if (mnStageSel_804D6C90->x1 == 0 && (mnStageSel_804D6CA0 & 0x200) &&
         mnStageSel_804D6CAF == 0)
     {
-        lbAudioAx_80024030(0);
+        sfxBack();
         gm_801A4B60();
     }
     if (mnStageSel_804D6CAF == 2) {

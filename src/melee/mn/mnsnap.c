@@ -516,7 +516,7 @@ s32 mnSnap_80253BE0(u64 buttons, s32* cursor, s32 count)
         return 0;
     }
 
-    lbAudioAx_80024030(2);
+    sfxMove();
     if ((next / 4) == (cur / 4)) {
         return 1;
     }
@@ -814,7 +814,7 @@ s32 mnSnap_8025441C(u64 buttons)
     if (mnSnap_804A0A10.dlg_type != 0 && (buttons & 0x8) &&
         mnSnap_804A0A10.btn_idx == 0)
     {
-        lbAudioAx_80024030(2);
+        sfxMove();
         HSD_JObjReqAnimAll(mnSnap_804A0A10.left_btn, 0.0F);
         mnSnap_804A0A10.btn_idx = 1;
         HSD_JObjAnimAll(mnSnap_804A0A10.left_btn);
@@ -825,7 +825,7 @@ s32 mnSnap_8025441C(u64 buttons)
     if (mnSnap_804A0A10.dlg_type != 0 && (buttons & 0x4) &&
         mnSnap_804A0A10.btn_idx == 1)
     {
-        lbAudioAx_80024030(2);
+        sfxMove();
         HSD_JObjReqAnimAll(mnSnap_804A0A10.right_btn, 0.0F);
         mnSnap_804A0A10.btn_idx = 0;
         HSD_JObjAnimAll(snap->left_btn);
@@ -1124,7 +1124,7 @@ void fn_802545C4(void)
             if (((slot == 0) && (mnSnap_804A0A10.card_status[1] != 0)) &&
                 (buttons & 8))
             {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 mnSnap_804A0A10.active_slot = 1;
                 byte_off = 4;
                 for (i = 0; i < 2; i++, byte_off += 8) {
@@ -1155,7 +1155,7 @@ void fn_802545C4(void)
                         (mnSnap_804A0A10.card_status[0] != 0)) &&
                        (buttons & 4))
             {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 mnSnap_804A0A10.active_slot = 0;
                 byte_off2 = 4;
                 for (i = 0; i < 2; i++, byte_off2 += 8) {
@@ -1256,7 +1256,7 @@ void fn_802545C4(void)
                     mnSnap_804A0A10.dlg_text->pos_x = jobj->translate.x - 6.0F;
                     lbAudioAx_80024030(3);
                 } else {
-                    lbAudioAx_80024030(1);
+                    sfxForward();
                     mnSnap_804A0A10.state = 4;
                     mnSnap_804A0A10.cursor_idx = 0;
                     mnSnap_80253640(0);
@@ -1287,7 +1287,7 @@ void fn_802545C4(void)
             mnSnap_80253E90(slot);
         }
         if (mnSnap_804A0A10.dlg_result != 0) {
-            lbAudioAx_80024030(0);
+            sfxBack();
         }
         if ((mnSnap_804A0A10.card_status[mnSnap_804A0A10.active_slot] == 0) ||
             (mnSnap_804A0A10.dlg_result != 0))
@@ -1329,7 +1329,7 @@ void fn_802545C4(void)
                 lbAudioAx_80024030(3);
             } else {
                 mnSnap_804A0A10.state = 6;
-                lbAudioAx_80024030(1);
+                sfxForward();
                 mnSnap_804A0A10.menu_sel = 0;
                 mnSnap_80253AE4(0);
             }
@@ -1378,7 +1378,7 @@ void fn_802545C4(void)
     case 5:
         if (mnSnap_804A0A10.dlg_result == 1) {
             s32 poll_result;
-            lbAudioAx_80024030(1);
+            sfxForward();
             result = lbSnap_8001D5FC(mnSnap_804A0A10.active_slot,
                                      mnSnap_804A0A10.cursor_idx);
             if (result != 0xB) {
@@ -1455,7 +1455,7 @@ void fn_802545C4(void)
                 mnSnap_804A0A10.state = 4;
             }
         } else if (mnSnap_804A0A10.dlg_result == 2) {
-            lbAudioAx_80024030(0);
+            sfxBack();
             mnSnap_804A0A10.dlg_active = 0;
             mnSnap_804A0A10.dlg_timer = 0;
             if (mnSnap_804A0A10.dlg_text != NULL) {
@@ -1473,21 +1473,21 @@ void fn_802545C4(void)
             mnSnap_804A0A10.timer -= 1;
         }
         if (buttons & 1) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             mnSnap_804A0A10.menu_sel -= 1;
             if (mnSnap_804A0A10.menu_sel < 0) {
                 mnSnap_804A0A10.menu_sel = 4;
             }
             mnSnap_80253AE4(0);
         } else if (buttons & 2) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             mnSnap_804A0A10.menu_sel += 1;
             if (mnSnap_804A0A10.menu_sel > 4) {
                 mnSnap_804A0A10.menu_sel = 0;
             }
             mnSnap_80253AE4(0);
         } else if (buttons & 0x20) {
-            lbAudioAx_80024030(0);
+            sfxBack();
             mnSnap_804A0A10.state = 4;
         } else if (buttons & 0x200) {
             while (mnSnap_804A0A10.timer != 0) {
@@ -1498,7 +1498,7 @@ void fn_802545C4(void)
 
             if (mnSnap_804A0A10.menu_sel == 0) {
                 void* thumb_img;
-                lbAudioAx_80024030(1);
+                sfxForward();
                 mnSnap_804A0A10.state = 0xA;
                 HSD_JObjClearFlagsAll(mnSnap_804A0A10.fullview_jobj,
                                       JOBJ_HIDDEN);
@@ -1513,7 +1513,7 @@ void fn_802545C4(void)
                 jobj->u.dobj->mobj->tobj->imagedesc->width = 640;
                 jobj->u.dobj->mobj->tobj->imagedesc->height = 480;
             } else if (mnSnap_804A0A10.menu_sel == 1) {
-                lbAudioAx_80024030(1);
+                sfxForward();
                 mnSnap_804A0A10.state = 0xB;
                 HSD_JObjAnimAll(mnSnap_804A0A10.submenu_jobj);
                 mnSnap_804A0A10.timer = 4;
@@ -1538,7 +1538,7 @@ void fn_802545C4(void)
                                         JOBJ_HIDDEN);
                 }
             } else if (mnSnap_804A0A10.menu_sel == 2) {
-                lbAudioAx_80024030(1);
+                sfxForward();
                 mnSnap_804A0A10.dlg_timer = 9;
                 mnSnap_804A0A10.dlg_active = 1;
                 mnSnap_8025409C(1);
@@ -1584,7 +1584,7 @@ void fn_802545C4(void)
                 lbAudioAx_80024030(7);
                 mnSnap_804A0A10.state = 0x14;
             } else if (mnSnap_804A0A10.menu_sel == 4) {
-                lbAudioAx_80024030(1);
+                sfxForward();
                 mnSnap_804A0A10.dlg_timer = 9;
                 mnSnap_804A0A10.dlg_active = 1;
                 mnSnap_8025409C(1);
@@ -1615,11 +1615,11 @@ void fn_802545C4(void)
     case 10:
         if (buttons & 0x200) {
             mnSnap_804A0A10.state = 4;
-            lbAudioAx_80024030(0);
+            sfxBack();
             HSD_JObjSetFlagsAll(mnSnap_804A0A10.fullview_jobj, JOBJ_HIDDEN);
         } else if (buttons & 0x20) {
             mnSnap_804A0A10.state = 6;
-            lbAudioAx_80024030(0);
+            sfxBack();
             HSD_JObjSetFlagsAll(mnSnap_804A0A10.fullview_jobj, JOBJ_HIDDEN);
         }
         break;
@@ -1632,7 +1632,7 @@ void fn_802545C4(void)
         }
         if (buttons & 0x200) {
             if (mnSnap_804A0A10.move_idx != mnSnap_804A0A10.cursor_idx) {
-                lbAudioAx_80024030(1);
+                sfxForward();
                 {
                     s32 mi = mnSnap_804A0A10.move_idx;
                     result = lbSnap_8001D7B0(mnSnap_804A0A10.active_slot,
@@ -1650,7 +1650,7 @@ void fn_802545C4(void)
             }
         } else if (buttons & 0x20) {
             next_state = 6;
-            lbAudioAx_80024030(0);
+            sfxBack();
         } else if (buttons & 0xCF) {
             result = mnSnap_80253BE0(
                 buttons, &mnSnap_804A0A10.move_idx,
@@ -1768,7 +1768,7 @@ void fn_802545C4(void)
             }
 
             if (result == 0) {
-                lbAudioAx_80024030(1);
+                sfxForward();
                 mnSnap_804A0A10.state = 0xF;
                 HSD_JObjClearFlags(mnSnap_804A0A10.dlg_btn_r, JOBJ_HIDDEN);
                 HSD_JObjSetTranslateX(mnSnap_804A0A10.progress_jobj, -6.9F);
@@ -1874,7 +1874,7 @@ void fn_802545C4(void)
             }
 
         } else if (mnSnap_804A0A10.dlg_result == 2) {
-            lbAudioAx_80024030(0);
+            sfxBack();
             mnSnap_804A0A10.dlg_active = 0;
             mnSnap_804A0A10.dlg_timer = 0;
             if (mnSnap_804A0A10.dlg_text != NULL) {
@@ -1887,7 +1887,7 @@ void fn_802545C4(void)
 
     case 13:
         if (mnSnap_804A0A10.dlg_result == 2) {
-            lbAudioAx_80024030(0);
+            sfxBack();
             mnSnap_804A0A10.state = 6;
             mnSnap_804A0A10.dlg_active = 0;
             mnSnap_804A0A10.dlg_timer = 0;
@@ -1916,7 +1916,7 @@ void fn_802545C4(void)
 
     case 14:
         if (mnSnap_804A0A10.dlg_result != 0) {
-            lbAudioAx_80024030(0);
+            sfxBack();
             mnSnap_804A0A10.state = 6;
             mnSnap_804A0A10.dlg_active = 0;
             mnSnap_804A0A10.dlg_timer = 0;
@@ -2070,7 +2070,7 @@ void fn_802545C4(void)
         if (mnSnap_804A0A10.dlg_result == 1) {
             s32 do_delete = 0;
             s32 poll_result;
-            lbAudioAx_80024030(1);
+            sfxForward();
             if (lbSnap_8001D5FC(mnSnap_804A0A10.active_slot,
                                 mnSnap_804A0A10.cursor_idx) != 0xB)
             {
@@ -2149,7 +2149,7 @@ void fn_802545C4(void)
                 mnSnap_804A0A10.state = 4;
             }
         } else if (mnSnap_804A0A10.dlg_result == 2) {
-            lbAudioAx_80024030(0);
+            sfxBack();
             mnSnap_804A0A10.dlg_active = 0;
             mnSnap_804A0A10.dlg_timer = 0;
             if (mnSnap_804A0A10.dlg_text != NULL) {
@@ -2215,7 +2215,7 @@ void fn_802545C4(void)
                 lbAudioAx_80024030(3);
             } else {
                 s32 new_slot;
-                lbAudioAx_80024030(1);
+                sfxForward();
                 mnSnap_804A0A10.dlg_active = 0;
                 mnSnap_804A0A10.dlg_timer = 0;
                 if (mnSnap_804A0A10.dlg_text != NULL) {
@@ -2245,7 +2245,7 @@ void fn_802545C4(void)
                 }
             }
         } else if (mnSnap_804A0A10.dlg_result == 2) {
-            lbAudioAx_80024030(0);
+            sfxBack();
             mnSnap_804A0A10.dlg_active = 0;
             mnSnap_804A0A10.dlg_timer = 0;
             if (mnSnap_804A0A10.dlg_text != NULL) {
@@ -2258,7 +2258,7 @@ void fn_802545C4(void)
 
     case 22:
         if (mnSnap_804A0A10.dlg_result == 2) {
-            lbAudioAx_80024030(0);
+            sfxBack();
             mnSnap_804A0A10.state = 6;
             mnSnap_804A0A10.dlg_active = 0;
             mnSnap_804A0A10.dlg_timer = 0;
@@ -2350,7 +2350,7 @@ void fn_802545C4(void)
 
     case 23:
         if (mnSnap_804A0A10.dlg_result == 2) {
-            lbAudioAx_80024030(0);
+            sfxBack();
             mnSnap_804A0A10.state = 6;
             mnSnap_804A0A10.dlg_active = 0;
             mnSnap_804A0A10.dlg_timer = 0;

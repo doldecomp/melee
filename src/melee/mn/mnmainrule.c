@@ -1,5 +1,6 @@
 #include "mnmainrule.h"
 
+#include "inlines.h"
 #include "mnmain.h"
 
 #include "baselib/gobjgxlink.h"
@@ -202,7 +203,7 @@ void fn_8022F538(HSD_GObj* arg0)
         if (mn_804A04F0.hovered_selection == 5 ||
             mn_804A04F0.hovered_selection == 6)
         {
-            lbAudioAx_80024030(1);
+            sfxForward();
             mn_804A04F0.entering_menu = 1;
             mn_804D6BC8.cooldown = 5;
             switch (mn_804A04F0.hovered_selection) {
@@ -226,7 +227,7 @@ void fn_8022F538(HSD_GObj* arg0)
             return;
         }
     } else if ((buttons & 0x100) != 0) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         switch ((s32) gm_GetCurrentGameMode()) {
         case GM_MENU:
             data = mn_804D6BD0->user_data;
@@ -265,7 +266,7 @@ void fn_8022F538(HSD_GObj* arg0)
         }
     }
     if ((buttons & 0x20) != 0) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_804A04F0.entering_menu = 0;
         data = mn_804D6BD0->user_data;
         rules = gmMainLib_GetGameRules();
@@ -291,7 +292,7 @@ void fn_8022F538(HSD_GObj* arg0)
         return;
     }
     if ((buttons & 1) != 0) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         do {
             if ((s32) mn_804A04F0.hovered_selection == 0) {
                 mn_804A04F0.hovered_selection = 6;
@@ -314,7 +315,7 @@ void fn_8022F538(HSD_GObj* arg0)
         return;
     }
     if ((buttons & 2) != 0) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         do {
             if ((s32) mn_804A04F0.hovered_selection == 6) {
                 mn_804A04F0.hovered_selection = 0;
@@ -349,7 +350,7 @@ void fn_8022F538(HSD_GObj* arg0)
         limits = mn_803EC7DC[mn_804A04F0.hovered_selection];
     }
     if ((buttons & 4) != 0) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         if (mn_804A04F0.confirmed_selection > limits[0]) {
             mn_804A04F0.confirmed_selection--;
             if (mn_804A04F0.confirmed_selection == limits[0] &&
@@ -378,7 +379,7 @@ void fn_8022F538(HSD_GObj* arg0)
         return;
     }
     if ((buttons & 8) != 0) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         if (mn_804A04F0.confirmed_selection < limits[1]) {
             mn_804A04F0.confirmed_selection++;
             if (mn_804A04F0.confirmed_selection == limits[1] &&

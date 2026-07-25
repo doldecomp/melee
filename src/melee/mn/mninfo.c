@@ -254,7 +254,7 @@ void fn_80251FE4(void)
     }
     buttons = mn_804A04F0.buttons = mn_80229624(4);
     if (buttons & MenuInput_Back) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_804A04F0.entering_menu = 0;
         mn_80229894(5, 4, 3);
         return;
@@ -262,7 +262,7 @@ void fn_80251FE4(void)
     if (buttons & MenuInput_Up) {
         if (data->scroll_idx != 0) {
             data->scroll_idx -= 1;
-            lbAudioAx_80024030(2);
+            sfxMove();
             j = 0;
             data2 = mnInfo_804D6C78->user_data;
             data3 = data2;
@@ -297,7 +297,7 @@ void fn_80251FE4(void)
             }
         }
         if ((data->scroll_idx + 4) < count) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             data->scroll_idx += 1;
             j = 0;
             data2 = mnInfo_804D6C78->user_data;
