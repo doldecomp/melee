@@ -228,10 +228,18 @@ StageCallbacks grCn_StageCallbacks[] = {
 };
 
 StageData grCn_803E1F08 = {
-    Gr_Kind_Corneria,          grCn_StageCallbacks, "/GrCn",
-    grCorneria_801DD350,       grCorneria_801DD2C0, grCorneria_801DD478,
-    grCorneria_801DD508,       grCorneria_801DD52C, grCorneria_801E2EE4,
-    grCorneria_801E2EEC,       0x00000001,          grCn_803E1D38,
+    Gr_Kind_Corneria,
+    grCn_StageCallbacks,
+    "/GrCn",
+    grCorneria_801DD350,
+    grCorneria_801DD2C0,
+    grCorneria_801DD478,
+    grCorneria_801DD508,
+    grCorneria_801DD52C,
+    grCorneria_801E2EE4,
+    grCorneria_801E2EEC,
+    (1 << 0),
+    grCn_803E1D38,
     ARRAY_SIZE(grCn_803E1D38),
 };
 
