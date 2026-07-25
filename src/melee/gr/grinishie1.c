@@ -1129,7 +1129,7 @@ void fn_801FC9AC(void* user_data, int joint_id, CollData* coll, int coll_x50,
 
 bool grInishie1_801FCAAC(int line_id)
 {
-    if (stage_info.internal_stage_id == INISHIE1 && line_id != -1) {
+    if (stage_info.grkind == INISHIE1 && line_id != -1) {
         int result;
         u32 joint;
 

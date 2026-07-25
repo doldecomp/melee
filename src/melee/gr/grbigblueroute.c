@@ -120,7 +120,7 @@ StageCallbacks grBb_Route_StageCallbacks[38] = {
 char grBb_Route_803E6170[] = "/GrNBr.dat";
 
 static struct {
-    u32 internal_stage_id;
+    u32 grkind;
     StageCallbacks* callbacks;
     char* data1;
     void (*OnInit)(void);

@@ -1768,12 +1768,12 @@ static HSD_Archive* lbl_804D6620;
 typedef struct gm_80187F48_EnterData {
     u8 x0;
     u8 stage_index;
-    u16 stage_id;
+    u16 stkind;
 } gm_80187F48_EnterData;
 
-static inline StKind gm_80187F48_GetStageId(gm_80187F48_EnterData* data)
+static inline StKind gm_GetStKind(gm_80187F48_EnterData* data)
 {
-    return data->stage_id;
+    return data->stkind;
 }
 
 static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
@@ -1788,7 +1788,7 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(gm_80187F48_GetStageId(arg0), NULL);
+    Stage_802251E8(gm_GetStKind(arg0), NULL);
     Item_80266F70();
     Item_80266FCC();
     efLib_Init();

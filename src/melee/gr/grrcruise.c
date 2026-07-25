@@ -1144,7 +1144,7 @@ void grRCruise_80201918(Vec3* vec)
 
 bool grRCruise_80201988(s32 line_id)
 {
-    if (stage_info.internal_stage_id == RCRUISE && line_id != -1) {
+    if (stage_info.grkind == RCRUISE && line_id != -1) {
         int joint = mpJointFromLine(line_id);
         bool result;
 

@@ -451,7 +451,7 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
         }
     }
 
-    gc->stage_id = opp_data->x2;
+    gc->stkind = opp_data->x2;
     lbDvd_80018254();
 
     audio = lbAudioAx_80026E84((CharacterKind) (s8) arg0->x0.ckind);

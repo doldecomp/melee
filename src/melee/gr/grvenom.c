@@ -1810,7 +1810,7 @@ s32 grVenom_80206D10(s32 arg0)
     s32 result;
     u32 diff;
 
-    if (stage_info.internal_stage_id == VENOM && arg0 != -1) {
+    if (stage_info.grkind == VENOM && arg0 != -1) {
         result = mpJointFromLine(arg0);
         diff = result - 3;
         in_range = 1;

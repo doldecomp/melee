@@ -101,7 +101,7 @@ void ftCo_800C08A0(Fighter_GObj* gobj, Fighter_GObj* arg1, DynamicsDesc* arg2,
 void ftCo_800C09B4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->bury_stage_kind = stage_info.internal_stage_id;
+    fp->bury_stage_kind = stage_info.grkind;
     fp->bury_timer_1 = 0;
     switch (fp->bury_stage_kind) {
     case OLDKONGO:

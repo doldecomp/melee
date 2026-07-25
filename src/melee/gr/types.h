@@ -61,7 +61,7 @@ struct StageInfo {
 
     u32 flags; // 0x84
 
-    GrKind internal_stage_id; // 0x88
+    GrKind grkind; // 0x88
 
     struct {
         u8 b0 : 1;
@@ -148,7 +148,7 @@ typedef struct StageCallbacks {
 } StageCallbacks;
 
 typedef struct StageData {
-    u32 internal_stage_id;
+    u32 grkind;
     StageCallbacks* callbacks;
     char* data1;
     void (*OnInit)(void);
@@ -164,8 +164,8 @@ typedef struct StageData {
 } StageData;
 
 typedef struct StageIdPair {
-    GrKind internal_id;
-    StKind external_id;
+    GrKind grkind;
+    StKind stkind;
 } StageIdPair;
 
 struct GroundVars_unk {

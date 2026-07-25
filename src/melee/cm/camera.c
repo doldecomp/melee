@@ -965,10 +965,10 @@ void Camera_8002A28C(CameraBounds* arg0)
 
 /// @note doesnt check all stages...
 /// probably was a bandaid for problem stages
-inline float get_stage_floor_height(GrKind stage_id)
+inline float get_stage_floor_height(GrKind kind)
 {
     float height = -F32_MAX;
-    switch (stage_id) {
+    switch (kind) {
     case CASTLE:
         height = grCastle_801D0FF0();
         break;
@@ -1014,10 +1014,9 @@ void Camera_8002A4AC(HSD_GObj* gobj)
         break;
     case CAMERA_PAUSE:
         pos = transform->position;
-        floor_height = get_stage_floor_height(stage_info.internal_stage_id);
+        floor_height = get_stage_floor_height(stage_info.grkind);
         if (pos.y < floor_height) {
-            floor_height =
-                get_stage_floor_height(stage_info.internal_stage_id);
+            floor_height = get_stage_floor_height(stage_info.grkind);
             pos.y = floor_height;
         }
         HSD_CObjSetFov(cobj, transform->fov);
@@ -1320,7 +1319,7 @@ void Camera_8002AF68(HSD_CObj* cobj, CameraTransformState* transform)
     vec.y += cm_80452C68.translation.y;
 
     eye_y_bound = -3.4028235e38f;
-    switch (stage_info.internal_stage_id) {
+    switch (stage_info.grkind) {
     case CASTLE:
         eye_y_bound = grCastle_801D0FF0();
         break;

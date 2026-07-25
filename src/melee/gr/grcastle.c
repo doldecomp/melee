@@ -662,7 +662,7 @@ bool grCastle_801CDF54(Vec3* vec)
     int i;
 
     i = 0;
-    if (stage_info.internal_stage_id == 0x2) {
+    if (stage_info.grkind == 0x2) {
         for (i = 0; i < 9; i += 1) {
             gobj = Ground_801C2BA4(i + 8);
             if (gobj != NULL) {

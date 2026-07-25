@@ -78,12 +78,12 @@ static inline bool Stage_IsOutsideBlastZoneWithMargin(Vec3* pos, f32 margin)
 /* 224FDC */ bool Stage_80224FDC(Vec3*);
 /* 225074 */ s32 Stage_80225074(s32);
 /* 225194 */ StKind Stage_80225194(void);
-/* 22519C */ GrKind Stage_8022519C(StKind external_id);
-/* 2251B4 */ void Stage_802251B4(StKind external_id);
-/* 2251E8 */ void Stage_802251E8(StKind external_id, s32*);
+/* 22519C */ GrKind Stage_8022519C(StKind stkind);
+/* 2251B4 */ void Stage_802251B4(StKind stkind);
+/* 2251E8 */ void Stage_802251E8(StKind stkind, s32*);
 /* 22524C */ void Stage_8022524C(void);
 /* 225298 */ void Stage_80225298(void);
-/* 2252E4 */ void Stage_802252E4(StKind external_id, HSD_GObj*);
-/* 22532C */ void Stage_8022532C(StKind external_id, s32);
+/* 2252E4 */ void Stage_802252E4(StKind stkind, HSD_GObj*);
+/* 22532C */ void Stage_8022532C(StKind stkind, s32);
 
 #endif

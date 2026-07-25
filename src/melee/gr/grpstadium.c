@@ -1695,7 +1695,7 @@ void grStadium_801D3B4C(int arg0, int slot_type)
     Ground_GObj* gobj;
     Ground* gp;
 
-    if (stage_info.internal_stage_id == PSTADIUM) {
+    if (stage_info.grkind == PSTADIUM) {
         gobj = Ground_801C2BA4(PsType_Display);
         gp = GET_GROUND(gobj);
         gp->u.display.xEE = arg0;
@@ -1862,35 +1862,35 @@ void grStadium_801D3F40(Ground_GObj* arg0, int arg1)
 
 void grStadium_801D4040(void)
 {
-    if (stage_info.internal_stage_id == PSTADIUM) {
+    if (stage_info.grkind == PSTADIUM) {
         grStadium_801D2528(Ground_801C2BA4(PsType_Display), 0xB, 0);
     }
 }
 
 void grStadium_801D4084(void)
 {
-    if (stage_info.internal_stage_id == PSTADIUM) {
+    if (stage_info.grkind == PSTADIUM) {
         grStadium_801D2528(Ground_801C2BA4(PsType_Display), 0xA, 0);
     }
 }
 
 void grStadium_801D40C8(void)
 {
-    if (stage_info.internal_stage_id == PSTADIUM) {
+    if (stage_info.grkind == PSTADIUM) {
         grStadium_801D2528(Ground_801C2BA4(PsType_Display), 0xC, 0);
     }
 }
 
 void grStadium_801D410C(void)
 {
-    if (stage_info.internal_stage_id == PSTADIUM) {
+    if (stage_info.grkind == PSTADIUM) {
         grStadium_801D2528(Ground_801C2BA4(PsType_Display), 0xD, 0);
     }
 }
 
 void grStadium_801D4150(void)
 {
-    if (stage_info.internal_stage_id == PSTADIUM) {
+    if (stage_info.grkind == PSTADIUM) {
         grStadium_801D2528(Ground_801C2BA4(PsType_Display), 1, 0);
     }
 }
@@ -2291,7 +2291,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
  */
 bool grStadium_801D4FF8(int pl_slot)
 {
-    if (stage_info.internal_stage_id == PSTADIUM) {
+    if (stage_info.grkind == PSTADIUM) {
         Ground_GObj* gobj = Ground_801C2BA4(PsType_Display);
         if (gobj != NULL) {
             Ground* gp = GET_GROUND(gobj);

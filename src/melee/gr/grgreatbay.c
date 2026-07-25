@@ -1135,7 +1135,7 @@ bool grGreatBay_801F66A4(void)
     HSD_GObj* gobj;
     Ground* gp;
 
-    if (stage_info.internal_stage_id == GREATBAY) {
+    if (stage_info.grkind == GREATBAY) {
         gobj = Ground_801C2BA4(1);
         if (gobj != NULL) {
             gp = GET_GROUND(gobj);

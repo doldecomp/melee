@@ -14,12 +14,12 @@ extern struct StageInfo stage_info;
 
 /// One #stage_id_map entry: the #GrKind for a #StKind.
 struct StageIdMapEntry {
-    GrKind internal_id;
+    GrKind grkind;
     s32 unk1;
     s32 unk2;
 };
 struct StageSelection {
-    StKind external_id;
+    StKind stkind;
     struct StageIdMapEntry* entry;
 };
 
@@ -327,7 +327,7 @@ s32 Stage_80225074(s32 arg0)
         HSD_ASSERT(526, 0);
     }
 
-    tmp = Ground_801C28AC(selected_stage.external_id, r31, &spC);
+    tmp = Ground_801C28AC(selected_stage.stkind, r31, &spC);
     lbAudioAx_80023F28(spC);
     Ground_801C5A84(spC);
     Ground_801C5AA4(tmp);
@@ -336,7 +336,7 @@ s32 Stage_80225074(s32 arg0)
 
 StKind Stage_80225194(void)
 {
-    return selected_stage.external_id;
+    return selected_stage.stkind;
 }
 
 /// Indexed by #StKind.
@@ -439,27 +439,27 @@ struct StageIdMapEntry stage_id_map[] = {
     { BATTLE, 0, 0 },
 };
 
-GrKind Stage_8022519C(StKind external_id)
+GrKind Stage_8022519C(StKind stkind)
 {
-    return stage_id_map[external_id].internal_id;
+    return stage_id_map[stkind].grkind;
 }
 
-void Stage_802251B4(StKind external_id)
+void Stage_802251B4(StKind stkind)
 {
-    Ground_801C06B8(stage_id_map[external_id].internal_id);
+    Ground_801C06B8(stage_id_map[stkind].grkind);
 }
 
-void Stage_802251E8(StKind external_id, s32* _)
+void Stage_802251E8(StKind stkind, s32* _)
 {
     StageIdPair local_data;
 
-    selected_stage.external_id = external_id;
-    selected_stage.entry = &stage_id_map[external_id];
+    selected_stage.stkind = stkind;
+    selected_stage.entry = &stage_id_map[stkind];
 
     local_data = default_stage_pair;
 
-    local_data.internal_id = selected_stage.entry->internal_id;
-    local_data.external_id = selected_stage.external_id;
+    local_data.grkind = selected_stage.entry->grkind;
+    local_data.stkind = selected_stage.stkind;
 
     Ground_801C0754(&local_data);
 }
@@ -470,8 +470,8 @@ void Stage_8022524C(void)
 
     local_data = default_stage_pair;
 
-    local_data.internal_id = selected_stage.entry->internal_id;
-    local_data.external_id = selected_stage.external_id;
+    local_data.grkind = selected_stage.entry->grkind;
+    local_data.stkind = selected_stage.stkind;
 
     Ground_801C0800(&local_data);
 }
@@ -482,32 +482,32 @@ void Stage_80225298(void)
 
     local_data = default_stage_pair;
 
-    local_data.internal_id = selected_stage.entry->internal_id;
-    local_data.external_id = selected_stage.external_id;
+    local_data.grkind = selected_stage.entry->grkind;
+    local_data.stkind = selected_stage.stkind;
 
     Ground_801C0F78(&local_data);
 }
 
-void Stage_802252E4(StKind external_id, HSD_GObj* _)
+void Stage_802252E4(StKind stkind, HSD_GObj* _)
 {
     StageIdPair local_data;
 
     local_data = default_stage_pair;
 
-    local_data.internal_id = selected_stage.entry->internal_id;
-    local_data.external_id = external_id;
+    local_data.grkind = selected_stage.entry->grkind;
+    local_data.stkind = stkind;
 
     Ground_801C0FB8(&local_data);
 }
 
-void Stage_8022532C(StKind external_id, s32 arg1)
+void Stage_8022532C(StKind stkind, s32 arg1)
 {
     StageIdPair local_data;
 
     local_data = default_stage_pair;
 
-    local_data.internal_id = selected_stage.entry->internal_id;
-    local_data.external_id = external_id;
+    local_data.grkind = selected_stage.entry->grkind;
+    local_data.stkind = stkind;
 
     Ground_DemoInit(&local_data, arg1);
 }

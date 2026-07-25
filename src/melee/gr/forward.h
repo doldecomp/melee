@@ -185,7 +185,7 @@ typedef enum GrKind {
 ///
 /// Both names come from ground.c's report
 /// `not found stage param in DAT(grkind=%d stkind=%d,num=%d)`, which passes
-/// #StageInfo::internal_stage_id for grkind and this value for stkind.
+/// #StageInfo::grkind and then this value.
 typedef enum StKind {
     StKind_Unk00,
     StKind_TEST,

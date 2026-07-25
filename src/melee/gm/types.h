@@ -885,7 +885,7 @@ struct CameraVsData {
 };
 
 struct TmVsData {
-    u32 stage_id;
+    u32 stkind;
     Gm_PKind slot_type[4];
     u32 char_id[4];
     u32 color[4];

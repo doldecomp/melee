@@ -4830,7 +4830,7 @@ void grBigBlue_801EF7D8(Vec3* pos)
 
 bool grBigBlue_801EF844(enum_t line_id)
 {
-    if (stage_info.internal_stage_id == 19 && line_id != -1) {
+    if (stage_info.grkind == 19 && line_id != -1) {
         s32 joint = mpJointFromLine(line_id);
         s32 result;
 
