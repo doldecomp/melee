@@ -1,5 +1,7 @@
 #include "lbshadow.h"
 
+#include <placeholder.h>
+
 #include <math_ppc.h>
 #include <dolphin/gx/GXVert.h>
 #include <sysdolphin/baselib/debug.h>
@@ -21,6 +23,32 @@
 #include <melee/gr/ground.h>
 #include <melee/lb/lbvector.h>
 #include <melee/lb/types.h>
+
+/// @todo Emitted only to lay out the .sdata2 literal pool in retail order.
+static void sdata2_order(void)
+{
+    (void) -3.0f;
+    (void) 4.0f;
+    (void) 1.0f;
+    (void) 3.0f;
+    (void) 2.0f;
+    (void) 0.5f;
+    (void) 0.0f;
+    (void) S32_TO_F32;
+    (void) 0.001f;
+    (void) 5000.0f;
+    (void) 0.45f;
+    (void) -0.45f;
+    (void) 1.2f;
+    (void) -1.1f;
+    (void) 0.5;
+    (void) 3.0;
+    (void) 0.0000010000001f;
+    (void) 100.0f;
+    (void) -1.0f;
+    (void) 128.0f;
+    (void) -128.0f;
+}
 
 void lbShadow_8000E9F0(Vec3* p, HSD_Spline* spline, f32 u)
 {
@@ -54,7 +82,7 @@ void lbShadow_8000E9F0(Vec3* p, HSD_Spline* spline, f32 u)
         f32 t2, u_1, bez1, bez0, bez2;
         cp = &spline->cv[idx * 3];
         t2 = 3.0F * (t * t);
-        bez1 = (-4.0F * t) + 1.0F;
+        bez1 = 1.0F - (4.0F * t);
         u_1 = t - 1.0F;
         bez0 = -3.0F * u_1 * u_1;
         bez1 = 3.0F * (bez1 + t2);
