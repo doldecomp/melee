@@ -45,11 +45,15 @@ melee/lb/lbvector.c:
 	.sdata      start:0x804D3720 end:0x804D3728
 	.sdata2     start:0x804D7AA8 end:0x804D7B30
 
+melee/lb/lb_E9F0.c:
+	.text       start:0x8000E9F0 end:0x8000ED54
+	.sdata2     start:0x804D7B30 end:0x804D7B58
+
 melee/lb/lbshadow.c:
-	.text       start:0x8000E9F0 end:0x8000F9F8
+	.text       start:0x8000ED54 end:0x8000F9F8
 	.data       start:0x803BA0D8 end:0x803BA150
 	.sdata      start:0x804D3728 end:0x804D3740
-	.sdata2     start:0x804D7B30 end:0x804D7BA0
+	.sdata2     start:0x804D7B58 end:0x804D7BA0
 
 melee/lb/lbspdisplay.c:
 	.text       start:0x8000F9F8 end:0x80014ABC

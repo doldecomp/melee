@@ -20,7 +20,7 @@
 #include "if/ifhazard.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
-#include "lb/lbshadow.h"
+#include "lb/lb_E9F0.h"
 #include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
