@@ -35,12 +35,19 @@
 #include <baselib/random.h>
 #include <MetroTRK/intrinsics.h>
 
+struct unkCastle {
+    /* 0x000 */ u8 _pad[0x10C];
+    /* 0x10C */ HSD_GObj* x10C[5];
+    /* 0x120 */ u8 _pad2[0x134 - 0x120];
+    /* 0x134 */ u8 x134[5];
+};
+
 /* 1CF750 */ static void grCastle_801CF750(void* user_data, int joint_id,
                                            CollData* coll, int coll_x50,
                                            mpLib_GroundEnum ground_kind,
                                            float delta_y);
 
-S16Vec3 grCs_803E0FE8[] = {
+GrJoint grCs_803E0FE8[] = {
     { 4, 6, 1 },
     { 5, 6, 4 },
 };
@@ -91,7 +98,7 @@ StageCallbacks grCs_StageCallbacks[21] = {
 
 char grCs_803E1198[] = "/GrCs.dat";
 
-StageData grCs_803E11A4 = {
+StageData grCs_StageData = {
     Gr_Kind_Castle,
     grCs_StageCallbacks,
     grCs_803E1198,
@@ -353,12 +360,12 @@ HSD_GObj* grCastle_801CD4D0(int gobj_id)
             gp->x1C_callback = (HSD_GObjEvent) callbacks->callback3;
         }
 
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
 
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
         }
 
     } else {

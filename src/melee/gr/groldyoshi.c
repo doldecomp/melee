@@ -37,8 +37,8 @@ StageCallbacks grOy_StageCallbacks[] = {
       grOldYoshi_8020EAF8, 0 },
 };
 
-StageData grOy_803E650C = {
-    29,
+StageData grOy_StageData = {
+    Gr_Kind_OldYoshi,
     grOy_StageCallbacks,
     "/GrOy.dat",
     grOldYoshi_8020E79C,
@@ -48,8 +48,8 @@ StageData grOy_803E650C = {
     grOldYoshi_8020E84C,
     grOldYoshi_8020F404,
     grOldYoshi_8020F40C,
-    1,
-    0,
+    (1 << 0),
+    NULL,
     0,
 };
 

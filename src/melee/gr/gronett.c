@@ -36,21 +36,41 @@
                                           mpLib_GroundEnum ground_kind,
                                           float delta_y);
 
-/* 3E27E0 */ static StageCallbacks grOt_803E27E0[6] = {
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { grOnett_801E38DC, grOnett_801E3920, grOnett_801E3928, grOnett_801E392C,
-      0 },
-    { grOnett_801E41C8, grOnett_801E43D8, grOnett_801E43E0, grOnett_801E502C,
-      0 },
-    { grOnett_801E3CE4, grOnett_801E3D98, grOnett_801E3DA0, grOnett_801E40E0,
-      0 },
-    { grOnett_801E3A34, grOnett_801E3C58, grOnett_801E3C60, grOnett_801E3CE0,
-      0xC0000000 },
+/* 3E27E0 */ static StageCallbacks grOt_803E27E0[] = {
+    { 0 },
+    { 0 },
+    {
+        grOnett_801E38DC,
+        grOnett_801E3920,
+        grOnett_801E3928,
+        grOnett_801E392C,
+        0,
+    },
+    {
+        grOnett_801E41C8,
+        grOnett_801E43D8,
+        grOnett_801E43E0,
+        grOnett_801E502C,
+        0,
+    },
+    {
+        grOnett_801E3CE4,
+        grOnett_801E3D98,
+        grOnett_801E3DA0,
+        grOnett_801E40E0,
+        0,
+    },
+    {
+        grOnett_801E3A34,
+        grOnett_801E3C58,
+        grOnett_801E3C60,
+        grOnett_801E3CE0,
+        (1 << 30) | (1 << 31),
+    },
 };
 
-/* 3E2858 */ StageData grOt_803E2858 = {
-    0x14,
+/* 3E2858 */ StageData grOt_StageData = {
+    Gr_Kind_Onett,
     grOt_803E27E0,
     "/GrOt",
     grOnett_801E3738,
@@ -60,7 +80,7 @@
     grOnett_801E37EC,
     grOnett_801E5760,
     grOnett_801E5768,
-    1,
+    (1 << 0),
     NULL,
     0,
 };
@@ -144,11 +164,11 @@ HSD_GObj* grOnett_801E37F4(int gobj_id)
         if (callbacks->callback3 != NULL) {
             gp->x1C_callback = callbacks->callback3;
         }
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 235, gobj_id);

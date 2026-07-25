@@ -40,5 +40,6 @@
 /* 1FF150 */ void grKraid_801FF150(Ground_GObj*);
 /* 1FF154 */ DynamicsDesc* grKraid_OnTouchLine(enum_t);
 /* 1FF15C */ bool grKraid_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
+/* 3E4D0C */ extern StageData grKr_StageData;
 
 #endif

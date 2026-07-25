@@ -22,21 +22,26 @@
 #include <melee/lb/lbspdisplay.h>
 #include <melee/lb/lbvector.h>
 
-const Vec3 grLast_803B8480 = { 1, 1, 1 };
-const Vec3 grLast_803B848C = { 0, 1, 0 };
-const Vec3 grLast_803B8498 = { 0, 0, 1 };
+/// @todo Size is wrong but type is correct; using ::SDATA as a hack
+/// Implies that ::GrJoint is the wrong size/layout
+SDATA GrJoint grLast_804D4968[] = {
+    { 0, 3, 0 },
+};
 
-S16Vec grLast_804D4968[1] = { { 0, 3, 0 } };
+/// @todo ::Mtx?
+Vec3 const grLast_803B8480 = { 1.0f, 1.0f, 1.0f };
+Vec3 const grLast_803B848C = { 0.0f, 1.0f, 0.0f };
+Vec3 const grLast_803B8498 = { 0.0f, 0.0f, 1.0f };
 
 /// @todo yakumono struct
 static int* yakumono_param;
 
-static void grLast_OnDemoInit(int arg0)
+static void grLast_OnDemoInit(enum_t arg0)
 {
     Ground_GObj* gobj;
     Ground* gp;
 
-    if (arg0 != 0x1A) {
+    if (arg0 != 26) {
         return;
     }
     gobj = Ground_801C2BA4(4);
@@ -149,7 +154,7 @@ static StageCallbacks grLast_StageCallbacks[] = {
     },
 };
 
-StageData grNLa_803E7F90 = {
+StageData grNLa_StageData = {
     Gr_Kind_Last,
     grLast_StageCallbacks,
     "/GrNLa.dat",
@@ -160,7 +165,7 @@ StageData grNLa_803E7F90 = {
     grLast_8021A7EC,
     grLast_OnTouchLine,
     grLast_OnCheckShadowRender,
-    0x00000001,
+    (1 << 0),
     grLast_804D4968,
     ARRAY_SIZE(grLast_804D4968),
 };
@@ -208,11 +213,11 @@ static Ground_GObj* grLast_8021A7F4(int id)
         if (cb->callback3 != NULL) {
             gp->x1C_callback = cb->callback3;
         }
-        if (cb->callback0 != NULL) {
-            cb->callback0(gobj);
+        if (cb->on_init != NULL) {
+            cb->on_init(gobj);
         }
-        if (cb->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, cb->callback2, 4);
+        if (cb->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, cb->gobj_proc, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 255, id);

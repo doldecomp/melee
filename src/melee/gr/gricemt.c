@@ -85,7 +85,7 @@ IceMtRowData grIm_803E4068[6] = {
     { 4, 195.0f, -185.0f }, { 5, 190.0f, -200.0f }, { 6, 180.0f, -190.0f },
 };
 
-S16Vec3 grIm_803E40B0[] = {
+GrJoint grIm_803E40B0[] = {
     { 0, 1, 0 },   { 1, 1, 0 },   { 2, 1, 0 },   { 3, 1, 0 },   { 4, 1, 0 },
     { 5, 1, 0 },   { 6, 1, 0 },   { 7, 1, 0 },   { 10, 1, 0 },  { 11, 1, 0 },
     { 12, 1, 0 },  { 13, 1, 0 },  { 14, 1, 0 },  { 15, 1, 0 },  { 16, 1, 0 },
@@ -160,30 +160,80 @@ static void order_data0(void)
 }
 
 StageCallbacks grIm_StageCallbacks[] = {
-    { grIceMt_801F72D4, grIceMt_801F75DC, grIceMt_801F75E4, grIceMt_801F75E8,
-      0 },
-    { grIceMt_801F7D94, grIceMt_801F7EE0, grIceMt_801F7EE8, grIceMt_801F7F1C,
-      0 },
-    { grIceMt_801F7F70, grIceMt_801F8154, grIceMt_801F815C, grIceMt_801F81B4,
-      0 },
-    { grIceMt_801F8208, grIceMt_801F835C, grIceMt_801F8364, grIceMt_801F8398,
-      0 },
-    { grIceMt_801F83EC, grIceMt_801F85BC, grIceMt_801F85C4, grIceMt_801F8608,
-      0 },
-    { grIceMt_801F865C, grIceMt_801F87C0, grIceMt_801F87C8, grIceMt_801F87FC,
-      0 },
-    { grIceMt_801F8850, grIceMt_801F89A4, grIceMt_801F89AC, grIceMt_801F89E0,
-      0 },
-    { NULL, NULL, NULL, NULL, NULL },
-    { grIceMt_801F8A34, grIceMt_801F8B08, grIceMt_801F8B10, grIceMt_801F8C60,
-      0xC0000000 },
-    { grIceMt_801F75FC, grIceMt_801F7720, grIceMt_801F7728, grIceMt_801F77AC,
-      0 },
-    { grIceMt_801F785C, grIceMt_801F796C, grIceMt_801F7A2C, grIceMt_801F7D90,
-      0 },
+    {
+        grIceMt_801F72D4,
+        grIceMt_801F75DC,
+        grIceMt_801F75E4,
+        grIceMt_801F75E8,
+        0,
+    },
+    {
+        grIceMt_801F7D94,
+        grIceMt_801F7EE0,
+        grIceMt_801F7EE8,
+        grIceMt_801F7F1C,
+        0,
+    },
+    {
+        grIceMt_801F7F70,
+        grIceMt_801F8154,
+        grIceMt_801F815C,
+        grIceMt_801F81B4,
+        0,
+    },
+    {
+        grIceMt_801F8208,
+        grIceMt_801F835C,
+        grIceMt_801F8364,
+        grIceMt_801F8398,
+        0,
+    },
+    {
+        grIceMt_801F83EC,
+        grIceMt_801F85BC,
+        grIceMt_801F85C4,
+        grIceMt_801F8608,
+        0,
+    },
+    {
+        grIceMt_801F865C,
+        grIceMt_801F87C0,
+        grIceMt_801F87C8,
+        grIceMt_801F87FC,
+        0,
+    },
+    {
+        grIceMt_801F8850,
+        grIceMt_801F89A4,
+        grIceMt_801F89AC,
+        grIceMt_801F89E0,
+        0,
+    },
+    { 0 },
+    {
+        grIceMt_801F8A34,
+        grIceMt_801F8B08,
+        grIceMt_801F8B10,
+        grIceMt_801F8C60,
+        (1 << 30) | (1 << 31),
+    },
+    {
+        grIceMt_801F75FC,
+        grIceMt_801F7720,
+        grIceMt_801F7728,
+        grIceMt_801F77AC,
+        0,
+    },
+    {
+        grIceMt_801F785C,
+        grIceMt_801F796C,
+        grIceMt_801F7A2C,
+        grIceMt_801F7D90,
+        0,
+    },
 };
 
-StageData grIm_803E4800 = {
+StageData grIm_StageData = {
     Gr_Kind_Icemt,
     grIm_StageCallbacks,
     "/GrIm.dat",

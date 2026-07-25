@@ -673,10 +673,10 @@ static inline void mnStageSw_InitUserData(MnStageSwData* user_data, s8 state)
     user_data->x1 = (u8) mn_804A04F0.hovered_selection;
     user_data->x1F = state;
     for (i = 0; i < NUM_STAGES; i++) {
-        u8 stage_id = mnStageSw_803ED4C4[i];
+        u8 stkind = mnStageSw_803ED4C4[i];
 
-        if (gm_80164430(gm_801641CC(stage_id)) != 0) {
-            user_data->x2[i] = gm_80164250(stage_id);
+        if (gm_80164430(gm_801641CC(stkind)) != 0) {
+            user_data->x2[i] = gm_80164250(stkind);
         } else {
             user_data->x2[i] = 0;
         }

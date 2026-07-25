@@ -42,7 +42,7 @@
                                              mpLib_GroundEnum ground_kind,
                                              float delta_y);
 
-S16Vec3 grGb_803E3E60[] = { { 0, 2, 49 }, { 1, 1, 2 },  { 2, 1, 3 },
+GrJoint grGb_803E3E60[] = { { 0, 2, 49 }, { 1, 1, 2 },  { 2, 1, 3 },
                             { 4, 1, 34 }, { 3, 1, 38 }, { 5, 10, 0 } };
 
 StageCallbacks grGb_StageCallbacks[11] = {
@@ -135,7 +135,7 @@ StageCallbacks grGb_StageCallbacks[11] = {
     },
 };
 
-StageData grGb_803E3F6C = {
+StageData grGb_StageData = {
     Gr_Kind_GreatBay,
     grGb_StageCallbacks,
     "/GrGb.dat",
@@ -244,14 +244,14 @@ HSD_GObj* grGreatBay_801F4300(int gobj_id)
         if (callbacks->callback3 != NULL) {
             gp->x1C_callback = callbacks->callback3;
         }
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
-        if (callbacks->callback2 != NULL) {
+        if (callbacks->gobj_proc != NULL) {
             if (gobj_id == 10) {
-                HSD_GObj_SetupProc(gobj, callbacks->callback2, 5);
+                HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 5);
             } else {
-                HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+                HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
             }
         }
     } else {

@@ -1,7 +1,6 @@
 #include "grmutecity.h"
 
 #include "grdatfiles.h"
-#include "grdisplay.h"
 #include "grfzerocar.h"
 #include "grlib.h"
 #include "grmaterial.h"
@@ -29,7 +28,6 @@
 #include <trigf.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/lobj.h>
 #include <baselib/psappsrt.h>
@@ -47,7 +45,11 @@ const Vec3 grMc_803B81B8 = { 0.0f, 0.0f, 0.0f };
 
 static s32 grMc_8049F440[30];
 
-u16 grMc_803E30B0[10] = { 6, 29, 6, 7, 29, 8, 8, 29, 9 };
+GrJoint grMc_803E30B0[] = {
+    { 6, 29, 6 },
+    { 7, 29, 8 },
+    { 8, 29, 9 },
+};
 
 StageCallbacks grMc_StageCallbacks[39] = {
     {
@@ -325,35 +327,21 @@ StageCallbacks grMc_StageCallbacks[39] = {
     },
 };
 
-char grMc_803E33D0[] = "/GrMc.dat";
-
-typedef struct grMc_StageData {
-    StageData stage_data;
-    char report_format[0x24];
-} grMc_StageData;
-
-grMc_StageData grMc_803E33DC = {
-    {
-        Gr_Kind_MuteCity,
-        grMc_StageCallbacks,
-        grMc_803E33D0,
-        grMuteCity_801EFC6C,
-        grMuteCity_801EFC68,
-        grMuteCity_801EFCDC,
-        grMuteCity_801EFCE0,
-        grMuteCity_801EFD04,
-        grMuteCity_801F2BBC,
-        grMuteCity_801F2C10,
-        0x00000001,
-        (S16Vec3*) grMc_803E30B0,
-        3,
-    },
-    "%s:%d: couldn t get gobj(id=%d)\n",
+StageData grMc_StageData = {
+    Gr_Kind_MuteCity,          grMc_StageCallbacks, "/GrMc.dat",
+    grMuteCity_801EFC6C,       grMuteCity_801EFC68, grMuteCity_801EFCDC,
+    grMuteCity_801EFCE0,       grMuteCity_801EFD04, grMuteCity_801F2BBC,
+    grMuteCity_801F2C10,       0x00000001,          grMc_803E30B0,
+    ARRAY_SIZE(grMc_803E30B0),
 };
 
-char grMc_803E3434[0x48] = "grmutecity.c\0\0\0\0"
-                           "not found car spline (R)\n\0\0\0"
-                           "not found car spline (L)\n";
+static void order_data(void)
+{
+    (void) "%s:%d: couldn t get gobj(id=%d)\n";
+    (void) __FILE__;
+    (void) "not found car spline (R)\n";
+    (void) "not found car spline (L)\n";
+}
 
 struct grMc_YakumonoParam {
     int x0;
@@ -403,33 +391,30 @@ bool grMuteCity_801EFD04(void)
     return false;
 }
 
-HSD_GObj* grMuteCity_801EFD0C(int gobj_id)
+Ground_GObj* grMuteCity_801EFD0C(int gobj_id)
 {
-    HSD_GObj* gobj;
+    Ground_GObj* gobj;
     StageCallbacks* callbacks = &grMc_StageCallbacks[gobj_id];
-
     gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
-        Ground* gp = gobj->user_data;
+        /// @todo ::Ground_SetupStageCallbacks
+        Ground* gp = GET_GROUND(gobj);
         gp->x8_callback = NULL;
         gp->xC_callback = NULL;
         GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
-
         if (callbacks->callback3 != NULL) {
             gp->x1C_callback = callbacks->callback3;
         }
-
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
-
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
         }
 
     } else {
-        OSReport((char*) grMc_803E30B0 + 0x360, grMc_803E3434, 292, gobj_id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 292, gobj_id);
     }
 
     return gobj;
@@ -454,14 +439,23 @@ void grMuteCity_801EFDF8(Ground_GObj* gobj)
     gp->u.mutecity.xD0_flags.b0 = 0;
     gp->u.mutecity.xDC = Ground_801C3FA4(gobj, 5);
     gp->u.mutecity.xE0 = Ground_801C3FA4(gobj, 9);
+
+    /// @todo ::HSD_ASSERTREPORT
+    // HSD_ASSERTREPORT(351, gp->u.mutecity.xE0->u.spline != NULL,
+    //                  "not found car spline (R)\n");
     if (gp->u.mutecity.xE0->u.spline == NULL) {
-        OSReport(grMc_803E3434 + 0x10);
-        __assert(grMc_803E3434, 0x15F, "0");
+        OSReport("not found car spline (R)\n");
+        __assert(__FILE__, 351, "0");
     }
+
+    /// @todo ::HSD_ASSERTREPORT
+    // HSD_ASSERTREPORT(355, gp->u.mutecity.xDC->u.spline != NULL,
+    //                  "not found car spline (L)\n");
     if (gp->u.mutecity.xDC->u.spline == NULL) {
-        OSReport(grMc_803E3434 + 0x2C);
-        __assert(grMc_803E3434, 0x163, "0");
+        OSReport("not found car spline (L)\n");
+        __assert(__FILE__, 355, "0");
     }
+
     gp->u.mutecity.xD0_flags.b23 = 2;
     gp->u.mutecity.xE4.x = gp->u.mutecity.xE4.y = gp->u.mutecity.xE4.z = 0.0f;
     gp->u.mutecity.xF0.x = gp->u.mutecity.xF0.y = gp->u.mutecity.xF0.z = 0.0f;
@@ -1809,11 +1803,9 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
 
 DynamicModelDesc* grMuteCity_801F28A8(void)
 {
-    UnkArchiveStruct* archive = grDatFiles_801C6330(0x26);
+    UnkArchiveStruct* archive = grDatFiles_801C6330(38);
     UnkStageDat* dat;
-    if (archive == NULL) {
-        __assert(grMc_803E3434, 2135, "archive");
-    }
+    HSD_ASSERT(2135, archive);
     dat = archive->unk4;
     if (dat != NULL) {
         return (DynamicModelDesc*) ((char*) dat->unk8 + 0x7B8);

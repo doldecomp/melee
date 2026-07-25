@@ -81,8 +81,8 @@ struct StageInfo {
     u8 xA4_pad[0x12C - 0xA4];
     HSD_GObj* x12C;
     Vec3 x130, x13C, x148, x154, x160, x16C;
-    DynamicsDesc* (*x178)(int);
-    bool (*x17C)(Vec3*, int, HSD_JObj*);
+    DynamicsDesc* (*on_touch_line)(int);
+    bool (*on_check_shadow_render)(Vec3* fighter_pos, int, HSD_JObj*);
     Ground_GObj* map_gobjs[64];
     HSD_JObj* x280[261];
     void* x694[4];
@@ -128,9 +128,9 @@ struct StageInfo {
 STATIC_ASSERT(sizeof(struct StageInfo) == 0x748);
 
 typedef struct StageCallbacks {
-    /*  +0 */ void (*callback0)(Ground_GObj*); ///< initialization callback
-    /*  +4 */ bool (*callback1)(Ground_GObj*);
-    /*  +8 */ void (*callback2)(Ground_GObj*);
+    /*  +0 */ HSD_GObjEvent on_init;
+    /*  +4 */ HSD_GObjPredicate callback1;
+    /*  +8 */ HSD_GObjEvent gobj_proc;
     /*  +C */ void (*callback3)(Ground_GObj*);
     /* +10 */ union {
         /* +10 */ u32 flags;
@@ -147,21 +147,27 @@ typedef struct StageCallbacks {
     };
 } StageCallbacks;
 
-typedef struct StageData {
+struct GrJoint { ///< @todo rename fields
+    s16 x;
+    s16 y;
+    s16 z;
+};
+
+struct StageData {
     GrKind grkind;
     StageCallbacks* callbacks;
     char* data1;
-    void (*OnInit)(void);
-    void (*OnDemoInit)(int);
-    void (*OnLoad)(void);
-    void (*OnStart)(void);
-    bool (*callback4)(void);
-    DynamicsDesc* (*callback5)(enum_t);
-    bool (*callback6)(Vec3*, int, HSD_JObj*);
+    Event on_init;
+    void (*on_demo_init)(int);
+    Event on_load;
+    Event on_start;
+    Predicate callback4;
+    GrTouchLineCallback on_touch_line;
+    GrCheckShadowRenderCallback on_check_shadow_render;
     u32 flags2;
-    S16Vec3* x2C;
-    size_t x30; // size of x2C array
-} StageData;
+    GrJoint* joints;
+    size_t joint_count;
+};
 
 typedef struct StageIdPair {
     GrKind grkind;
@@ -1930,7 +1936,7 @@ struct UnkStageDat_x8_t {
     /* +14 */ UNK_T x14;
     /* +18 */ UNK_T x18;
     /* +1C */ HSD_FogDesc* x1C;
-    /* +20 */ S16Vec3* unk20;
+    /* +20 */ GrJoint* unk20;
     /* +24 */ s32 unk24; // size of unk20 array
     /* +28 */ UNK_T x28;
     /* +2C */ s16* x2C;
@@ -1972,5 +1978,28 @@ struct grZebesRoute_LightData {
     Vec3 upper_point_pos;
     Vec3 lower_point_pos;
 };
+
+typedef struct {
+    u8 b0 : 1;
+    u8 b1 : 1;
+    u8 b2_5 : 4;
+    u8 b6 : 1;
+    u8 b7 : 1;
+} RouteEntryFlags;
+
+typedef struct {
+    RouteEntryFlags flags;
+    u8 pad_1[3];
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    f32 x10;
+    f32 x14;
+    f32 x18;
+    f32 x1C;
+    f32 x20;
+    f32 x24;
+    void* x28;
+} RouteEntry;
 
 #endif

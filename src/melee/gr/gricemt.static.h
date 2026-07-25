@@ -33,6 +33,12 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
+/* 1F8C64 */ static void fn_801F8C64(Item_GObj* gobj, Ground* u1, Vec3* u2,
+                                     HSD_GObj* u3, f32 u4);
+/* 1F91EC */ static void
+grIceMt_801F91EC(HSD_GObj* param_1, s16* param_2, int param_3, int param_4,
+                 int param_5, int param_6, int param_7,
+                 mpLib_JointCollisionCallback param_8);
 /* 1F9338 */ static void fn_801F9338(void* user_data, int joint_id,
                                      CollData* coll, int coll_x50,
                                      mpLib_GroundEnum ground_kind,
@@ -45,18 +51,13 @@
                                      CollData* coll, int coll_x50,
                                      mpLib_GroundEnum ground_kind,
                                      float delta_y);
-/* 1F8C64 */ static void fn_801F8C64(Item_GObj* gobj, Ground* u1, Vec3* u2,
-                                     HSD_GObj* u3, f32 u4);
-/* 1F91EC */ static void
-grIceMt_801F91EC(HSD_GObj* param_1, s16* param_2, int param_3, int param_4,
-                 int param_5, int param_6, int param_7,
-                 mpLib_JointCollisionCallback param_8);
+/* 1F96E0 */ static float grIceMt_801F96E0(struct grIceMt_GroundVars*, float);
 /* 1FA7F0 */ static void grIceMt_801FA7F0(void* user_data, int joint_id,
                                           CollData* coll, int coll_x50,
                                           mpLib_GroundEnum ground_kind,
                                           float delta_y);
 
 static const Vec3 grIm_803B8220[] = {
-    { 0.0, 0.0, 0.0 },    { -8.0, 15.0, 0.0 }, { 8.0, 15.0, 0.0 },
-    { -24.0, 15.0, 0.0 }, { 24.0, 15.0, 0.0 },
+    { 0.0f, 0.0f, 0.0f },    { -8.0f, 15.0f, 0.0f }, { 8.0f, 15.0f, 0.0f },
+    { -24.0f, 15.0f, 0.0f }, { 24.0f, 15.0f, 0.0f },
 };

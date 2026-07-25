@@ -1,6 +1,5 @@
 #include "grinishie1.h"
 
-#include "grdisplay.h"
 #include "grlib.h"
 #include "grmaterial.h"
 #include "grzakogenerator.h"
@@ -21,23 +20,61 @@
 #include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
 
+#include <dolphin/types.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
 
+/* 1FA908 */ static void grInishie1_801FA908(bool);
+/* 1FA90C */ static void grInishie1_801FA90C(void);
+/* 1FA984 */ static void grInishie1_801FA984(void);
+/* 1FA988 */ static void grInishie1_801FA988(void);
+/* 1FA9AC */ static bool grInishie1_801FA9AC(void);
+/* 1FA9B4 */ static Ground_GObj* setupStageCallbacks(int gobj_id);
+/* 1FAAA0 */ static void grInishie1_801FAAA0(Ground_GObj*);
+/* 1FAACC */ static bool grInishie1_801FAACC(Ground_GObj*);
+/* 1FAAD4 */ static void grInishie1_801FAAD4(Ground_GObj*);
+/* 1FAAD8 */ static void grInishie1_801FAAD8(Ground_GObj*);
+/* 1FAADC */ static void grInishie1_801FAADC(Ground_GObj*);
+/* 1FAB60 */ static bool grInishie1_801FAB60(Ground_GObj*);
+/* 1FAB68 */ static void grInishie1_801FAB68(Ground_GObj*);
+/* 1FABB0 */ static void grInishie1_801FABB0(Ground_GObj*);
+/* 1FABB4 */ static void grInishie1_801FABB4(Ground_GObj*);
+/* 1FABF4 */ static bool grInishie1_801FABF4(Ground_GObj*);
+/* 1FABFC */ static void grInishie1_801FABFC(Ground_GObj*);
+/* 1FAC00 */ static void grInishie1_801FAC00(Ground_GObj*);
+/* 1FAC04 */ static void grInishie1_801FAC04(Ground_GObj*);
+/* 1FAC50 */ static bool grInishie1_801FAC50(Ground_GObj*);
+/* 1FAC58 */ static void grInishie1_801FAC58(Ground_GObj*);
+/* 1FAD80 */ static void grInishie1_801FAD80(Ground_GObj*);
+/* 1FAD84 */ static void grInishie1_801FAD84(HSD_GObj*);
+/* 1FB0AC */ static void grInishie1_801FB0AC(HSD_GObj*, u32);
+/* 1FB3F0 */ static void grInishie1_801FB3F0(HSD_GObj*);
+/* 1FBA34 */ static void grInishie1_801FBA34(HSD_GObj*, HSD_JObj*);
+/* 1FBAA0 */ static void grInishie1_801FBAA0(HSD_GObj*, s32);
+/* 1FBC4C */ static void grInishie1_801FBC4C(HSD_GObj*, u32);
+/* 1FBCEC */ static void grInishie1_801FBCEC(HSD_GObj*, u32);
 /* 1FBEB8 */ static void fn_801FBEB8(void* user_data, int joint_id,
                                      CollData* coll, int coll_x50,
                                      mpLib_GroundEnum ground_kind,
                                      float delta_y);
+/* 1FBF6C */ static void fn_801FBF6C(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                     f32);
+/* 1FC018 */ static void grInishie1_801FC018(HSD_GObj*);
+/* 1FC110 */ static void grInishie1_801FC110(HSD_GObj*);
+/* 1FC4A0 */ static void grInishie1_801FC4A0(HSD_GObj*);
+/* 1FC664 */ static void grInishie1_801FC664(HSD_GObj*);
 /* 1FC9AC */ static void fn_801FC9AC(void* user_data, int joint_id,
                                      CollData* coll, int coll_x50,
                                      mpLib_GroundEnum ground_kind,
                                      float delta_y);
+/* 1FCB10 */ static void grInishie1_801FCB10(HSD_GObj*);
+/* 1FCBB0 */ static DynamicsDesc* grInishie1_801FCBB0(enum_t);
+/* 1FCBB8 */ static bool grInishie1_801FCBB8(Vec3*, int arg, HSD_JObj* jobj);
 
 /// @todo Emitted only to lay out the .sdata2 literal pool in retail order.
 static void sdata2_order(void)
@@ -134,9 +171,9 @@ const Vec3 grI1_803B8268 = { 0.0f, 5.0f, 0.0f };
         }                                                                     \
     }
 
-s16 grI1_803E48C8[22] = {
-    13, 3,  3, 14, 3,  14, 15, 3,  15, 16, 3,
-    16, 17, 3, 17, 18, 3,  18, 19, 3,  19, 0,
+GrJoint grI1_803E48C8[] = {
+    { 13, 3, 3 },  { 14, 3, 14 }, { 15, 3, 15 }, { 16, 3, 16 },
+    { 17, 3, 17 }, { 18, 3, 18 }, { 19, 3, 19 },
 };
 
 StageCallbacks grI1_StageCallbacks[] = {
@@ -166,35 +203,30 @@ StageCallbacks grI1_StageCallbacks[] = {
         grInishie1_801FAB60,
         grInishie1_801FAB68,
         grInishie1_801FABB0,
-        0xC0000000,
+        (1 << 30) | (1 << 31),
     },
 };
 
-char grI1_803E4944[] = "/GrI1.dat";
-
-typedef struct grInishie1_StageData {
-    StageData stage_data;
-    char report_fmt_get_gobj[0x24];
-} grInishie1_StageData;
-
-grInishie1_StageData grI1_803E4950 = {
-    {
-        Gr_Kind_Inishie1,
-        grI1_StageCallbacks,
-        grI1_803E4944,
-        grInishie1_801FA90C,
-        grInishie1_801FA908,
-        grInishie1_801FA984,
-        grInishie1_801FA988,
-        grInishie1_801FA9AC,
-        grInishie1_801FCBB0,
-        grInishie1_801FCBB8,
-        1,
-        (S16Vec3*) grI1_803E48C8,
-        7,
-    },
-    "%s:%d: couldn t get gobj(id=%d)\n",
+StageData grI1_StageData = {
+    Gr_Kind_Inishie1,
+    grI1_StageCallbacks,
+    "/GrI1.dat",
+    grInishie1_801FA90C,
+    grInishie1_801FA908,
+    grInishie1_801FA984,
+    grInishie1_801FA988,
+    grInishie1_801FA9AC,
+    grInishie1_801FCBB0,
+    grInishie1_801FCBB8,
+    (1 << 0),
+    grI1_803E48C8,
+    ARRAY_SIZE(grI1_803E48C8),
 };
+
+static void order_data(void)
+{
+    (void) "%s:%d: couldn t get gobj(id=%d)\n";
+}
 
 void grInishie1_801FA908(bool arg) {}
 
@@ -213,8 +245,8 @@ void grInishie1_801FA90C(void)
     yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
-    grInishie1_801FA9B4(0);
-    grInishie1_801FA9B4(3);
+    setupStageCallbacks(0);
+    setupStageCallbacks(3);
     Ground_801C39C0();
     Ground_801C3BB4();
     Camera_800311DC(1.0f);
@@ -233,36 +265,29 @@ bool grInishie1_801FA9AC(void)
     return false;
 }
 
-HSD_GObj* grInishie1_801FA9B4(s32 arg0)
+Ground_GObj* setupStageCallbacks(int gobj_id)
 {
-    HSD_GObj* gobj;
-    StageCallbacks* cb =
-        (StageCallbacks*) ((char*) grI1_803E48C8 + 0x2c) + arg0;
-
-    gobj = Ground_GetStageGObj(arg0);
+    Ground_GObj* gobj;
+    StageCallbacks* callbacks = &grI1_StageCallbacks[gobj_id];
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
-        Ground* gp = gobj->user_data;
-
+        /// @todo ::Ground_SetupStageCallbacks
+        Ground* gp = GET_GROUND(gobj);
         gp->x8_callback = NULL;
         gp->xC_callback = NULL;
-
-        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3U, 0U);
-
-        if (cb->callback3 != NULL) {
-            gp->x1C_callback = cb->callback3;
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
+        if (callbacks->callback3 != NULL) {
+            gp->x1C_callback = callbacks->callback3;
         }
-
-        if (cb->callback0 != NULL) {
-            cb->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
-
-        if (cb->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, cb->callback2, 4U);
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
         }
     } else {
-        OSReport(grI1_803E4950.report_fmt_get_gobj, "grinishie1.c", 0xE7,
-                 arg0);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 231, gobj_id);
     }
 
     return gobj;
@@ -762,7 +787,7 @@ void grInishie1_801FBAA0(HSD_GObj* gobj, s32 ix)
     Vec3 position;
     Ground* mapgp = HSD_GObjGetUserData(gobj);
     Ground* hatena_gp;
-    HSD_GObj* hatena = grInishie1_801FA9B4(2);
+    HSD_GObj* hatena = setupStageCallbacks(2);
     PAD_STACK(4);
 
     if (hatena != NULL) {

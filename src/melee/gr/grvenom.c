@@ -28,7 +28,7 @@
 #include <baselib/sislib.h>
 
 typedef struct grVe_Data {
-    /* +0 */ S16Vec3 joints[5];
+    /* +0 */ GrJoint joints[5];
     /* +1E */ u16 pad;
     /* +20 */ struct {
         /* +20 */ HSD_GObj* arwing_gobj[3];
@@ -176,7 +176,7 @@ StageCallbacks grVe_StageCallbacks[16] = {
     },
 };
 
-StageData grVe_803E54CC = {
+StageData grVe_StageData = {
     Gr_Kind_Venom,
     grVe_StageCallbacks,
     "/GrVe",
@@ -572,11 +572,11 @@ Ground_GObj* grVenom_80203EAC(int gobj_id)
         if (callbacks->callback3 != NULL) {
             gp->x1C_callback = callbacks->callback3;
         }
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grvenom.c", 0x23B,

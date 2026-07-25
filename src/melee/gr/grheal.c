@@ -5,7 +5,6 @@
 #include <platform.h>
 
 #include "baselib/gobj.h"
-#include "baselib/gobjgxlink.h"
 #include "baselib/gobjproc.h"
 #include "baselib/jobj.h"
 #include "dolphin/types.h"
@@ -14,7 +13,6 @@
 #include "gr/forward.h"
 
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -27,109 +25,120 @@
 #include "mp/mplib.h"
 #include "ty/toy.h"
 
-typedef struct grHeal_UnkVec4 {
-    Vec3 pos;
-    s32 unused;
-} grHeal_UnkVec4;
+typedef struct grHeal_UnkData {
+    s32 x0;
+    s32 x4;
+} grHeal_UnkData;
 
-typedef struct grHeal_DataBlock {
-    s16 player_model_joint_ids[0x1A];
-    s32 next_player_character_ids[0x1A];
-    StageCallbacks callbacks[5];
-    char stage_filename[0xC];
-    StageData stage_data;
-    char report_fmt_get_gobj[0x24];
-    char assert_filename[0xC];
-    char report_fmt_not_found_next_player[0x20];
-} grHeal_DataBlock;
-STATIC_ASSERT(sizeof(grHeal_DataBlock) == 0x190);
+/* 21EF38 */ static void grHeal_8021EF38(bool);
+/* 21EF3C */ static void grHeal_8021EF3C(void);
+/* 21EFBC */ static void grHeal_8021EFBC(void);
+/* 21EFC0 */ static void grHeal_8021EFC0(void);
+/* 21EFE4 */ static bool grHeal_8021EFE4(void);
+/* 21EFEC */ static Ground_GObj* grHeal_8021EFEC(u32);
+/* 21F0D8 */ static void stageGObj0_OnInit(Ground_GObj*);
+/* 21F170 */ static bool stageGObj0_Callback1(Ground_GObj*);
+/* 21F178 */ static void stageGObj0_GObjProc(Ground_GObj*);
+/* 21F17C */ static void stageGObj0_Callback3(Ground_GObj*);
+/* 21F180 */ static void stageGObj1_OnInit(Ground_GObj*);
+/* 21F41C */ static bool stageGObj1_Callback1(Ground_GObj*);
+/* 21F424 */ static s32 fn_8021F424(void);
+/* 21F474 */ static void stageGObj1_GObjProc(Ground_GObj*);
+/* 21F4BC */ static void stageGObj1_Callback3(Ground_GObj*);
+/* 21F4C0 */ static void onJointCollision(void* user_data, int joint_id,
+                                          CollData* coll, int coll_x50,
+                                          mpLib_GroundEnum ground_kind,
+                                          float delta_y);
+/* 21F4E8 */ static void grHeal_8021F4E8(s32, HSD_JObj*);
+/* 21F5C8 */ static void stageGObj2_OnInit(Ground_GObj*);
+/* 21F5CC */ static bool stageGObj2_Callback1(Ground_GObj*);
+/* 21F5D4 */ static void stageGObj2_GObjProc(Ground_GObj*);
+/* 21F5D8 */ static void stageGObj2_Callback3(Ground_GObj*);
+/* 21F5DC */ static void stageGObj3_OnInit(Ground_GObj*);
+/* 21F618 */ static bool stageGObj3_Callback1(Ground_GObj*);
+/* 21F620 */ static void stageGObj3_GObjProc(Ground_GObj*);
+/* 21F624 */ static void stageGObj3_Callback3(Ground_GObj*);
+/* 21F628 */ static void grHeal_8021F628(s32, HSD_JObj*);
+/* 21F6F8 */ static void stageGObj4_OnInit(Ground_GObj*);
+/* 21F6FC */ static bool stageGObj4_Callback1(Ground_GObj*);
+/* 21F704 */ static void stageGObj4_GObjProc(Ground_GObj*);
+/* 21F708 */ static void stageGObj4_Callback3(Ground_GObj*);
+/* 21F70C */ static int grHeal_8021F70C(enum_t character_id);
+/* 21F79C */ static void grHeal_8021F79C(s32, s32, s32);
+/* 21F830 */ static DynamicsDesc* grHeal_8021F830(enum_t);
+/* 21F838 */ static bool grHeal_8021F838(Vec3*, int, HSD_JObj*);
 
-typedef struct grHeal_StageData {
-    StageData stage_data;
-    char report_fmt_get_gobj[0x24];
-} grHeal_StageData;
-STATIC_ASSERT(sizeof(grHeal_StageData) == 0x58);
+static Vec3 const grHeal_803B84A8 = { 0.0F, 40.0F, 0.0F };
 
-/* 21F4C0 */ static void fn_8021F4C0(void* user_data, int joint_id,
-                                     CollData* coll, int coll_x50,
-                                     mpLib_GroundEnum ground_kind,
-                                     float delta_y);
+static size_t const char_id_count = 26;
 
-const grHeal_UnkVec4 grHeal_803B84A8 = { { 0.0F, 40.0F, 0.0F }, 0 };
-
-s32 grHeal_803E83B8[0x27] = {
-    0x1D001E, 0x1F0020, 0x210022, 0x230024, 0x250026, 0x270028, 0x29002A,
-    0x2B002C, 0x2D002E, 0x2F0030, 0x310032, 0x330034, 0x350036, 0,
-    0x15,     1,        0x16,     0x14,     2,        0x19,     3,
-    0xE,      4,        5,        7,        6,        8,        9,
-    0xA,      0xB,      0x18,     0xC,      0xD,      0xF,      0x10,
-    0x11,     0x12,     0x17,     -1,
+static s16 grHeal_803E83B8[char_id_count] = {
+    29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
+    42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54,
 };
 
-StageCallbacks grHeal_StageCallbacks[] = {
+static enum_t frame_to_character_id[char_id_count] = {
+    0, 21, 1,  22, 20, 2,  25, 3,  14, 4,  5,  7,  6,
+    8, 9,  10, 11, 24, 12, 13, 15, 16, 17, 18, 23, -1,
+};
+
+static StageCallbacks stage_callbacks[] = {
     {
-        grHeal_8021F0D8,
-        grHeal_8021F170,
-        grHeal_8021F178,
-        grHeal_8021F17C,
+        stageGObj0_OnInit,
+        stageGObj0_Callback1,
+        stageGObj0_GObjProc,
+        stageGObj0_Callback3,
         0,
     },
     {
-        grHeal_8021F180,
-        grHeal_8021F41C,
-        grHeal_8021F474,
-        grHeal_8021F4BC,
-        0xC0000000,
+        stageGObj1_OnInit,
+        stageGObj1_Callback1,
+        stageGObj1_GObjProc,
+        stageGObj1_Callback3,
+        (1 << 30) | (1 << 31),
     },
     {
-        grHeal_8021F5C8,
-        grHeal_8021F5CC,
-        grHeal_8021F5D4,
-        grHeal_8021F5D8,
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
         0,
     },
     {
-        grHeal_8021F5DC,
-        grHeal_8021F618,
-        grHeal_8021F620,
-        grHeal_8021F624,
+        stageGObj3_OnInit,
+        stageGObj3_Callback1,
+        stageGObj3_GObjProc,
+        stageGObj3_Callback3,
         0,
     },
     {
-        grHeal_8021F6F8,
-        grHeal_8021F6FC,
-        grHeal_8021F704,
-        grHeal_8021F708,
+        stageGObj4_OnInit,
+        stageGObj4_Callback1,
+        stageGObj4_GObjProc,
+        stageGObj4_Callback3,
         0,
     },
 };
 
-grHeal_StageData grHeal_803E84C4 = {
-    {
-        Gr_Kind_Heal,
-        grHeal_StageCallbacks,
-        "/GrHe.dat",
-        grHeal_8021EF3C,
-        grHeal_8021EF38,
-        grHeal_8021EFBC,
-        grHeal_8021EFC0,
-        grHeal_8021EFE4,
-        grHeal_8021F830,
-        grHeal_8021F838,
-        1,
-        0,
-        0,
-    },
-    "%s:%d: couldn t get gobj(id=%d)\n",
+StageData grHeal_StageData = {
+    Gr_Kind_Heal,
+    stage_callbacks,
+    "/GrHe.dat",
+    grHeal_8021EF3C,
+    grHeal_8021EF38,
+    grHeal_8021EFBC,
+    grHeal_8021EFC0,
+    grHeal_8021EFE4,
+    grHeal_8021F830,
+    grHeal_8021F838,
+    (1 << 0),
+    NULL,
+    0,
 };
-
-char grHeal_803E851C[0x2C] =
-    "grheal.c\0\0\0\0*** Not found Next Player!(%d)\n";
 
 s16 grHeal_804D49D8[4] = { 7, 8, 9, 0 };
-SDATA char grHeal_804D49E0[] = "gobj";
 
-grHeal_UnkData* grHeal_804D6AF0[2];
+static grHeal_UnkData* grHeal_804D6AF0[2];
 
 void grHeal_8021EF38(bool arg0) {}
 
@@ -159,41 +168,35 @@ bool grHeal_8021EFE4(void)
     return false;
 }
 
-Ground_GObj* grHeal_8021EFEC(u32 idx)
+Ground_GObj* grHeal_8021EFEC(u32 gobj_id)
 {
-    HSD_GObj* gobj;
-    StageCallbacks* callbacks =
-        (StageCallbacks*) ((char*) grHeal_803E83B8 + 0x9C) + idx;
-
-    gobj = Ground_GetStageGObj(idx);
+    Ground_GObj* gobj;
+    StageCallbacks* callbacks = &stage_callbacks[gobj_id];
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
-        Ground* gp = gobj->user_data;
+        /// @todo ::Ground_SetupStageCallbacks
+        Ground* gp = GET_GROUND(gobj);
         gp->x8_callback = NULL;
         gp->xC_callback = NULL;
         GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
-
         if (callbacks->callback3 != NULL) {
             gp->x1C_callback = callbacks->callback3;
         }
-
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
-
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
         }
-
     } else {
-        OSReport(grHeal_803E84C4.report_fmt_get_gobj, grHeal_803E851C, 273,
-                 idx);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 273, gobj_id);
     }
 
     return gobj;
 }
 
-void grHeal_8021F0D8(Ground_GObj* gobj)
+void stageGObj0_OnInit(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     s32 i;
@@ -207,71 +210,75 @@ void grHeal_8021F0D8(Ground_GObj* gobj)
     }
 }
 
-bool grHeal_8021F170(Ground_GObj* gobj)
+bool stageGObj0_Callback1(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grHeal_8021F178(Ground_GObj* gobj) {}
+void stageGObj0_GObjProc(Ground_GObj* gobj) {}
 
-void grHeal_8021F17C(Ground_GObj* gobj) {}
+void stageGObj0_Callback3(Ground_GObj* gobj) {}
 
-void grHeal_8021F180(Ground_GObj* gobj)
+void stageGObj1_OnInit(Ground_GObj* gobj)
 {
-    grHeal_UnkVec4 coin_pos;
-    u8 next_players[4];
-    HSD_JObj* next_jobjs[3];
-    UNUSED HSD_JObj* reserved_next_jobj;
-    HSD_JObj* player_jobjs[0x1A];
-    UNUSED HSD_JObj* reserved_player_jobj;
-    s32 next_count;
-    s32 line_id;
-    s32 next_idx;
-    u32 i;
-    Ground* gp;
+    PAD_STACK(4);
+    {
+        Vec3 coin_pos;
+        u8 next_players[4];
+        HSD_JObj* next_jobjs[3];
+        UNUSED HSD_JObj* reserved_next_jobj;
+        HSD_JObj* player_jobjs[char_id_count];
+        UNUSED HSD_JObj* reserved_player_jobj;
+        s32 next_count;
+        s32 line_id;
+        s32 next_idx;
+        u32 i;
+        Ground* gp;
 
-    gp = GET_GROUND(gobj);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+        gp = GET_GROUND(gobj);
+        grAnime_801C8138(gobj, gp->map_id, 0);
 
-    if (gm_80473A18._94[0] % grHeal_804D6AF0[0]->x4 == 0) {
-        coin_pos.pos = grHeal_803B84A8.pos;
-        Ground_801C2D24(0xDC, &coin_pos.pos);
-        line_id = Ground_801C5840();
-        if (line_id != -1) {
-            it_802F2094(NULL, &coin_pos.pos, line_id, 0);
-            Toy_80304A58(line_id);
+        if (gm_80473A18._94[0] % grHeal_804D6AF0[0]->x4 == 0) {
+            coin_pos = grHeal_803B84A8;
+            Ground_801C2D24(0xDC, &coin_pos);
+            line_id = Ground_801C5840();
+            if (line_id != -1) {
+                it_802F2094(NULL, &coin_pos, line_id, 0);
+                Toy_80304A58(line_id);
+            }
         }
-    }
 
-    for (next_count = 0; next_count < (s32) gm_80473A18._94[1]; next_count++) {
-        next_players[next_count] = gm_80473A18._94[next_count + 2];
-    }
-
-    next_jobjs[0] = Ground_801C3FA4(gobj, 0x3A);
-    next_jobjs[1] = Ground_801C3FA4(gobj, 0x3B);
-    next_jobjs[2] = Ground_801C3FA4(gobj, 0x3C);
-
-    for (next_idx = 0; next_idx < next_count; next_idx++) {
-        grHeal_8021F4E8(grHeal_8021F70C(next_players[next_idx]),
-                        next_jobjs[next_idx]);
-    }
-
-    for (i = 0; i < 0x1A; i++) {
-        player_jobjs[i] = Ground_801C3FA4(gobj, ((s16*) grHeal_803E83B8)[i]);
-    }
-
-    for (i = 0; i < 0x1A; i++) {
-        u32 character_id = gm_80473A18.x76[i];
-        if ((s32) character_id != 0x21) {
-            grHeal_8021F628(grHeal_8021F70C(character_id), player_jobjs[i]);
+        for (next_count = 0; next_count < gm_80473A18._94[1]; next_count++) {
+            next_players[next_count] = gm_80473A18._94[next_count + 2];
         }
-    }
 
-    mpJointSetCb1(0, gp, fn_8021F4C0);
-    gp->u.flatzone2.xC4 = 0;
+        next_jobjs[0] = Ground_801C3FA4(gobj, 58);
+        next_jobjs[1] = Ground_801C3FA4(gobj, 59);
+        next_jobjs[2] = Ground_801C3FA4(gobj, 60);
+
+        for (next_idx = 0; next_idx < next_count; next_idx++) {
+            grHeal_8021F4E8(grHeal_8021F70C(next_players[next_idx]),
+                            next_jobjs[next_idx]);
+        }
+
+        for (i = 0; i < ARRAY_SIZE(grHeal_803E83B8); i++) {
+            player_jobjs[i] = Ground_801C3FA4(gobj, grHeal_803E83B8[i]);
+        }
+
+        for (i = 0; i < ARRAY_SIZE(grHeal_803E83B8); i++) {
+            enum_t character_id = gm_80473A18.x76[i];
+            if (character_id != 33) {
+                grHeal_8021F628(grHeal_8021F70C(character_id),
+                                player_jobjs[i]);
+            }
+        }
+
+        mpJointSetCb1(0, gp, onJointCollision);
+        gp->u.flatzone2.xC4 = 0;
+    }
 }
 
-bool grHeal_8021F41C(Ground_GObj* gobj)
+bool stageGObj1_Callback1(Ground_GObj* gobj)
 {
     return false;
 }
@@ -291,7 +298,7 @@ s32 fn_8021F424(void)
     return 0;
 }
 
-void grHeal_8021F474(Ground_GObj* ground)
+void stageGObj1_GObjProc(Ground_GObj* ground)
 {
     Ground* gp;
 
@@ -301,11 +308,12 @@ void grHeal_8021F474(Ground_GObj* ground)
     gp->u.flatzone2.xC4 = 0;
 }
 
-void grHeal_8021F4BC(Ground_GObj* gobj) {}
+void stageGObj1_Callback3(Ground_GObj* gobj) {}
 
 /// @copydoc mpLib_JointCollisionCallback
-void fn_8021F4C0(void* user_data, int joint_id, CollData* coll, int coll_x50,
-                 mpLib_GroundEnum ground_kind, float delta_y)
+void onJointCollision(void* user_data, int joint_id, CollData* coll,
+                      int coll_x50, mpLib_GroundEnum ground_kind,
+                      float delta_y)
 {
     Ground* gp = user_data;
     if ((((*(u8*) ((u8*) coll + 0x34) >> 3U) & 0xF) == 1) &&
@@ -317,35 +325,33 @@ void fn_8021F4C0(void* user_data, int joint_id, CollData* coll, int coll_x50,
 
 void grHeal_8021F4E8(s32 arg0, HSD_JObj* parent_jobj)
 {
-    Ground_GObj* ground;
+    Ground_GObj* gobj;
     HSD_JObj* jobj;
     HSD_JObj* child;
 
-    ground = grHeal_8021EFEC(4U);
-    if (ground == NULL) {
-        __assert(grHeal_803E851C, 0x1B8U, grHeal_804D49E0);
-    }
-    grAnime_801C8138(ground, 4, 0);
-    grAnime_801C7FF8(ground, 0, 7, 0, (f32) arg0, 0.0F);
-    jobj = GET_JOBJ(ground);
+    gobj = grHeal_8021EFEC(4U);
+    HSD_ASSERT(440, gobj);
+    grAnime_801C8138(gobj, 4, 0);
+    grAnime_801C7FF8(gobj, 0, 7, 0, (f32) arg0, 0.0F);
+    jobj = GET_JOBJ(gobj);
     child = HSD_JObjGetChild(jobj);
     HSD_JObjReparent(child, parent_jobj);
     HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
-    Ground_801C4A08(ground);
+    Ground_801C4A08(gobj);
 }
 
-void grHeal_8021F5C8(Ground_GObj* gobj) {}
+void stageGObj2_OnInit(Ground_GObj* gobj) {}
 
-bool grHeal_8021F5CC(Ground_GObj* gobj)
+bool stageGObj2_Callback1(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grHeal_8021F5D4(Ground_GObj* gobj) {}
+void stageGObj2_GObjProc(Ground_GObj* gobj) {}
 
-void grHeal_8021F5D8(Ground_GObj* gobj) {}
+void stageGObj2_Callback3(Ground_GObj* gobj) {}
 
-void grHeal_8021F5DC(Ground_GObj* ground)
+void stageGObj3_OnInit(Ground_GObj* ground)
 {
     Ground* gp;
 
@@ -354,82 +360,68 @@ void grHeal_8021F5DC(Ground_GObj* ground)
     grAnime_801C8138(ground, gp->map_id, 0);
 }
 
-bool grHeal_8021F618(Ground_GObj* gobj)
+bool stageGObj3_Callback1(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grHeal_8021F620(Ground_GObj* gobj) {}
+void stageGObj3_GObjProc(Ground_GObj* gobj) {}
 
-void grHeal_8021F624(Ground_GObj* gobj) {}
+void stageGObj3_Callback3(Ground_GObj* gobj) {}
 
 void grHeal_8021F628(s32 arg0, HSD_JObj* jobj_parent)
 {
-    Ground_GObj* ground;
+    Ground_GObj* gobj;
     HSD_JObj* jobj;
     HSD_JObj* child;
 
-    ground = grHeal_8021EFEC(2U);
-    if (ground == NULL) {
-        __assert(grHeal_803E851C, 0x201U, grHeal_804D49E0);
-    }
-    grAnime_801C8138(ground, 2, 0);
-    grAnime_801C7FF8(ground, 0, 7, 0, (f32) arg0, 0.0F);
-    jobj = GET_JOBJ(ground);
+    gobj = grHeal_8021EFEC(2U);
+    HSD_ASSERT(513, gobj);
+    grAnime_801C8138(gobj, 2, 0);
+    grAnime_801C7FF8(gobj, 0, 7, 0, arg0, 0.0F);
+    jobj = GET_JOBJ(gobj);
     child = HSD_JObjGetChild(jobj);
     HSD_JObjReparent(child, jobj_parent);
-    Ground_801C4A08(ground);
+    Ground_801C4A08(gobj);
 }
 
-void grHeal_8021F6F8(Ground_GObj* gobj) {}
+void stageGObj4_OnInit(Ground_GObj* gobj) {}
 
-bool grHeal_8021F6FC(Ground_GObj* gobj)
+bool stageGObj4_Callback1(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grHeal_8021F704(Ground_GObj* gobj) {}
+void stageGObj4_GObjProc(Ground_GObj* gobj) {}
 
-void grHeal_8021F708(Ground_GObj* gobj) {}
+void stageGObj4_Callback3(Ground_GObj* gobj) {}
 
-u32 grHeal_8021F70C(u32 character_id)
+/// @todo Eliminate gotos, use enum members
+int grHeal_8021F70C(enum_t character_id)
 {
-    s32* base;
-    s32* entry;
-    s32 value;
-    int frame;
+    int frame = 0;
 
-    base = grHeal_803E83B8;
-    frame = 0;
-
-    if ((s32) character_id != 0x13) {
-        goto loop_start;
+    if (character_id == 19) {
+        character_id = 18;
     }
-    character_id = 0x12;
     goto loop_start;
 
 loop_compare:
-    if ((s32) character_id == value) {
-        goto loop_done;
-    }
-    entry++;
-    frame++;
-loop_check:
-    value = *entry;
-    if (value != -1) {
-        goto loop_compare;
+    if (character_id != frame_to_character_id[frame]) {
+        frame++;
+    loop_check:
+        if (frame_to_character_id[frame] != -1) {
+            goto loop_compare;
+        }
     }
 
-loop_done:
-    if (base[frame + 0xD] == -1) {
-        OSReport(((grHeal_DataBlock*) base)->report_fmt_not_found_next_player,
-                 character_id);
+    if (frame_to_character_id[frame] == -1) {
+        OSReport("*** Not found Next Player!(%d)\n", character_id);
         frame = 0;
     }
     return frame;
 
 loop_start:
-    entry = base + 0xD;
     goto loop_check;
 }
 

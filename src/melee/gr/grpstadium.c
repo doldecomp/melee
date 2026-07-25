@@ -64,7 +64,7 @@ static struct grPStadium_YakumonoParam {
     s16 x50;
 }* yakumono_param;
 
-S16Vec3 grPs_803E1248[] = {
+GrJoint grPs_803E1248[] = {
     { 1, 3, 0 }, { 2, 3, 0 }, { 3, 4, 0 },
     { 4, 5, 0 }, { 5, 6, 0 }, { 7, 9, 0 },
 };
@@ -142,7 +142,7 @@ static StageCallbacks grPs_StageCallbacks[] = {
     },
 };
 
-StageData grPs_803E1334 = {
+StageData grPs_StageData = {
     Gr_Kind_PStadium,
     grPs_StageCallbacks,
     "/GrPs",
@@ -215,11 +215,11 @@ Ground_GObj* grStadium_801D10F8(StadiumGrType id)
         if (cb->callback3 != NULL) {
             gp->x1C_callback = cb->callback3;
         }
-        if (cb->callback0 != NULL) {
-            cb->callback0(gobj);
+        if (cb->on_init != NULL) {
+            cb->on_init(gobj);
         }
-        if (cb->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, cb->callback2, 4);
+        if (cb->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, cb->gobj_proc, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 288, id);

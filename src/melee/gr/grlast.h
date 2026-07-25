@@ -1,14 +1,13 @@
 #ifndef GALE01_21A620
 #define GALE01_21A620
 
-#include <placeholder.h>
+#include "gr/forward.h"
+#include "lb/forward.h"
+#include <baselib/forward.h>
 
-#include <melee/gr/forward.h>
-#include <melee/lb/forward.h>
+#include <dolphin/gx/GXStruct.h>
 
-#include <sysdolphin/baselib/jobj.h>
-
-/* 21A620 */ static void grLast_OnDemoInit(bool);
+/* 21A620 */ static void grLast_OnDemoInit(enum_t);
 /* 21A740 */ static void grLast_OnInit(void);
 /* 21A7C4 */ static void grLast_OnLoad(void);
 /* 21A7C8 */ static void grLast_OnStart(void);
@@ -64,5 +63,6 @@
 /* 21C6AC */ static void grLast_8021C6AC(void);
 /* 21C740 */ static DynamicsDesc* grLast_OnTouchLine(enum_t);
 /* 21C748 */ static bool grLast_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
+/* 3E7F90 */ extern StageData grNLa_StageData;
 
 #endif

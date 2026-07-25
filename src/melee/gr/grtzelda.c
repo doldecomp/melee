@@ -51,7 +51,7 @@ static StageCallbacks grTZd_StageCallbacks[4] = {
     { NULL, NULL, NULL, NULL, 0 }
 };
 
-StageData grTZd_803E9694 = {
+StageData grTZd_StageData = {
     Gr_Kind_TZelda,
     grTZd_StageCallbacks,
     "/GrTZd.dat",

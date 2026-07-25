@@ -1,8 +1,6 @@
 #ifndef GALE01_1D84A0
 #define GALE01_1D84A0
 
-#include <placeholder.h>
-
 #include "forward.h"
 
 #include <dolphin/mtx.h>
@@ -25,5 +23,6 @@
 /* 1DCBB0 */ bool grZebes_801DCBB0(Vec3*, int);
 /* 1DCBFC */ bool grZebes_801DCBFC(Ground_GObj*, HSD_GObj*, void*);
 /* 1DCCC8 */ float grZebes_801DCCC8(void);
+/*3E1B2C */ extern StageData grZe_StageData;
 
 #endif

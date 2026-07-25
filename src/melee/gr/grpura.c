@@ -1,91 +1,263 @@
-#include "grpura.h"
+#include "grpura.static.h"
 
-#include "grdisplay.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
-#include "types.h"
-
-#include <platform.h>
-
-#include "cm/camera.h"
-#include "cm/types.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
-#include "mp/mplib.h"
-
-#include <dolphin/mtx.h>
-#include <baselib/debug.h>
-#include <baselib/dobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
-#include <baselib/tobj.h>
-
+/* 211CFC */ static void grPura_80211CFC(bool);
+/* 211D00 */ static void grPura_80211D00(void);
+/* 211DD8 */ static void grPura_80211DD8(void);
+/* 211DDC */ static void grPura_80211DDC(void);
+/* 211E00 */ static bool grPura_80211E00(void);
+/* 211E08 */ static HSD_GObj* setupStageCallbacks(int);
+/* 211EF0 */ static void stageGObj0_OnInit(Ground_GObj*);
+/* 211F1C */ static bool stageGObj0_Callback1(Ground_GObj*);
+/* 211F24 */ static void stageGObj0_GObjProc(Ground_GObj*);
+/* 211F28 */ static void stageGObj0_Callback3(Ground_GObj*);
+/* 211F2C */ static void stageGObj27_OnInit(Ground_GObj*);
+/* 211F58 */ static bool stageGObj27_Callback1(Ground_GObj*);
+/* 211F60 */ static void stageGObj27_GObjProc(Ground_GObj*);
+/* 211F64 */ static void stageGObj27_Callback3(Ground_GObj*);
+/* 211F68 */ static void stageGObj4_OnInit(Ground_GObj*);
+/* 211FD0 */ static bool stageGObj4_Callback1(Ground_GObj*);
+/* 211FD8 */ static void stageGObj4_GObjProc(Ground_GObj*);
+/* 212020 */ static void stageGObj4_Callback3(Ground_GObj*);
+/* 212024 */ static void stageGObj1_OnInit(Ground_GObj*);
+/* 2120D8 */ static bool stageGObj1_Callback1(Ground_GObj*);
+/* 2120E0 */ static void stageGObj1_GObjProc(Ground_GObj*);
+/* 21228C */ static void stageGObj1_Callback3(Ground_GObj*);
+/* 212290 */ static void stageGObj2_OnInit(Ground_GObj*);
+/* 212314 */ static bool stageGObj2_Callback1(Ground_GObj*);
+/* 21231C */ static void stageGObj2_GObjProc(Ground_GObj*);
+/* 2125EC */ static void stageGObj2_Callback3(Ground_GObj*);
+/* 2125F0 */ static UNK_RET grPura_802125F0(HSD_GObj*);
+/* 212CD4 */ static void grPura_80212CD4(HSD_GObj*);
+/* 212EF4 */ static void grPura_80212EF4(HSD_GObj*);
+/* 212FC0 */ static void grPura_80212FC0(HSD_GObj*);
 /* 213030 */ static void grPura_80213030(Ground_GObj* arg0);
+/* 2130C0 */ static DynamicsDesc* grPura_802130C0(enum_t);
+/* 2130C8 */ static bool grPura_802130C8(Vec3* a, int, HSD_JObj*);
+/* 2130D0 */ static UNK_RET fn_802130D0(HSD_GObj*, int);
+/* 213128 */ static void grPura_80213128(HSD_DObj*);
+/* 213224 */ static UNK_RET grPura_80213224(HSD_DObj*);
+/* 213250 */ static void grPura_80213250(HSD_JObj*);
 
-StageCallbacks grPu_StageCallbacks[] = {
-    { grPura_80211EF0, grPura_80211F1C, grPura_80211F24, grPura_80211F28, 0 },
-    { grPura_80212024, grPura_802120D8, grPura_802120E0, grPura_8021228C, 0 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80211F68, grPura_80211FD0, grPura_80211FD8, grPura_80212020,
-      0x40000000 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80212290, grPura_80212314, grPura_8021231C, grPura_802125EC, 0 },
-    { grPura_80211F2C, grPura_80211F58, grPura_80211F60, grPura_80211F64,
-      0x80000000 }
-};
-
-char grPu_803E6A30[] = "/GrPu.dat";
-
-typedef struct grPu_StageData {
-    StageData stage_data;
-    char report_format[0x24];
-    char filename[0xC];
-} grPu_StageData;
-
-grPu_StageData grPu_803E6A3C = {
+static StageCallbacks stage_callbacks[] = {
     {
-        0x11,
-        grPu_StageCallbacks,
-        grPu_803E6A30,
-        grPura_80211D00,
-        grPura_80211CFC,
-        grPura_80211DD8,
-        grPura_80211DDC,
-        grPura_80211E00,
-        grPura_802130C0,
-        grPura_802130C8,
-        1,
-        0,
+        stageGObj0_OnInit,
+        stageGObj0_Callback1,
+        stageGObj0_GObjProc,
+        stageGObj0_Callback3,
         0,
     },
-    "%s:%d: couldn t get gobj(id=%d)\n",
-    "grpura.c",
+    {
+        stageGObj1_OnInit,
+        stageGObj1_Callback1,
+        stageGObj1_GObjProc,
+        stageGObj1_Callback3,
+        0,
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj4_OnInit,
+        stageGObj4_Callback1,
+        stageGObj4_GObjProc,
+        stageGObj4_Callback3,
+        (1 << 30),
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj2_OnInit,
+        stageGObj2_Callback1,
+        stageGObj2_GObjProc,
+        stageGObj2_Callback3,
+        0,
+    },
+    {
+        stageGObj27_OnInit,
+        stageGObj27_Callback1,
+        stageGObj27_GObjProc,
+        stageGObj27_Callback3,
+        (1 << 31),
+    },
 };
+
+StageData grPu_StageData = {
+    Gr_Kind_Pura,
+    stage_callbacks,
+    "/GrPu.dat",
+    grPura_80211D00,
+    grPura_80211CFC,
+    grPura_80211DD8,
+    grPura_80211DDC,
+    grPura_80211E00,
+    grPura_802130C0,
+    grPura_802130C8,
+    (1 << 0),
+    NULL,
+    0,
+};
+
+static void order_data(void)
+{
+    (void) "%s:%d: couldn t get gobj(id=%d)\n";
+    (void) "grpura.c";
+}
 
 GXColor grPu_803E6AA0[] = {
     { 0x00, 0x00, 0x00, 0xFF }, { 0x00, 0x00, 0x50, 0xFF },
@@ -94,6 +266,53 @@ GXColor grPu_803E6AA0[] = {
     { 0x00, 0x00, 0x00, 0x01 }, { 0x3F, 0x80, 0x00, 0x00 },
     { 0x00, 0x00, 0x00, 0x03 }, { 0x00, 0x00, 0x00, 0x02 },
     { 0x3F, 0x80, 0x00, 0x00 },
+};
+
+/* 3E6C0C */ static struct GrPuVtxMapEntry grPu_803E6C0C[] = {
+    { 20, 2, 21, 0, NULL },
+    { 21, 2, 22, 0, NULL },
+    { 22, 2, 23, 0, NULL },
+    { 23, 2, 24, 0, NULL },
+    { 24, 2, 25, 0, NULL },
+    { 25, 2, 26, 0, NULL },
+    { 26, 2, 27, 0, NULL },
+    { 39, 2, 28, 0, NULL },
+    { 284, 12, 21, 0, NULL },
+    { 285, 12, 23, 0, NULL },
+    { 267, 12, 24, 0, NULL },
+    { 261, 12, 25, 0, NULL },
+    { 262, 12, 26, 0, NULL },
+    { 275, 12, 27, 0, NULL },
+    { 276, 12, 28, 0, NULL },
+    { 277, 12, 29, 0, NULL },
+    { 269, 12, 30, 0, NULL },
+    { 270, 12, 31, 0, NULL },
+    { 272, 12, 32, 0, NULL },
+    { 286, 12, 33, 0, NULL },
+    { 180, 8, 23, 0, NULL },
+    { 181, 8, 51, 0, NULL },
+    { 182, 8, 27, 0, NULL },
+    { 183, 8, 30, 0, NULL },
+    { 184, 8, 31, 0, NULL },
+    { 513, 25, 10, 0, NULL },
+    { 514, 25, 13, 0, NULL },
+    { 520, 25, 16, 0, NULL },
+    { 521, 25, 19, 0, NULL },
+    { 522, 25, 22, 0, NULL },
+    { 496, 25, 25, 0, NULL },
+    { 497, 25, 28, 0, NULL },
+    { 500, 25, 31, 0, NULL },
+    { 523, 25, 32, 0, NULL },
+    { 524, 25, 29, 0, NULL },
+    { 527, 25, 26, 0, NULL },
+    { 528, 25, 23, 0, NULL },
+    { 525, 25, 20, 0, NULL },
+    { 526, 25, 17, 0, NULL },
+    { 494, 25, 14, 0, NULL },
+    { 495, 25, 11, 0, NULL },
+    { -1, 0, 0, 0, NULL },
+    { 0 },
+    { 0 },
 };
 
 void* grPu_803E6E20;
@@ -114,9 +333,9 @@ void grPura_80211D00(void)
     yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
-    grPura_80211E08(0);
-    grPura_80211E08(1);
-    grPura_80211E08(4);
+    setupStageCallbacks(0);
+    setupStageCallbacks(1);
+    setupStageCallbacks(4);
     Ground_801C39C0();
     Ground_801C3BB4();
     Stage_UnkSetVec3TCam_Offset(&cam_offset);
@@ -138,68 +357,76 @@ bool grPura_80211E00(void)
     return false;
 }
 
-HSD_GObj* grPura_80211E08_noinline(int gobj_id);
 HSD_GObj* grPura_80211E08_noinline(int gobj_id)
 {
-    return grPura_80211E08(gobj_id);
+    return setupStageCallbacks(gobj_id);
 };
 
-HSD_GObj* grPura_80211E08_noinline2(int gobj_id);
 HSD_GObj* grPura_80211E08_noinline2(int gobj_id)
 {
     return grPura_80211E08_noinline(gobj_id);
 };
 
-#pragma auto_inline off
-HSD_GObj* grPura_80211E08(int gobj_id)
+HSD_GObj* setupStageCallbacks(int gobj_id)
 {
-    HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grPu_StageCallbacks[gobj_id];
+    Ground_GObj* gobj;
+    StageCallbacks* callbacks = &stage_callbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
-        Ground_SetupStageCallbacks(gobj, callbacks);
+        /// @todo ::Ground_SetupStageCallbacks
+        Ground* gp = GET_GROUND(gobj);
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
+        if (callbacks->callback3 != NULL) {
+            gp->x1C_callback = callbacks->callback3;
+        }
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
+        }
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
+        }
     } else {
-        OSReport((char*) grPu_StageCallbacks + 0x270,
-                 (char*) grPu_StageCallbacks + 0x294, 0x108, gobj_id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 264, gobj_id);
     }
 
     return gobj;
 }
-#pragma auto_inline on
 
-void grPura_80211EF0(Ground_GObj* arg0)
+void stageGObj0_OnInit(Ground_GObj* arg0)
 {
     Ground* gp = arg0->user_data;
     grAnime_801C8138(arg0, gp->map_id, 0);
 }
 
-bool grPura_80211F1C(Ground_GObj* arg0)
+bool stageGObj0_Callback1(Ground_GObj* arg0)
 {
     return false;
 }
 
-void grPura_80211F24(Ground_GObj* arg0) {}
+void stageGObj0_GObjProc(Ground_GObj* arg0) {}
 
-void grPura_80211F28(Ground_GObj* arg0) {}
+void stageGObj0_Callback3(Ground_GObj* arg0) {}
 
-void grPura_80211F2C(Ground_GObj* arg0)
+void stageGObj27_OnInit(Ground_GObj* arg0)
 {
     Ground* gp = arg0->user_data;
     grAnime_801C8138(arg0, gp->map_id, 0);
 }
 
-bool grPura_80211F58(Ground_GObj* arg0)
+bool stageGObj27_Callback1(Ground_GObj* arg0)
 {
     return false;
 }
 
-void grPura_80211F60(Ground_GObj* arg0) {}
+void stageGObj27_GObjProc(Ground_GObj* arg0) {}
 
-void grPura_80211F64(Ground_GObj* arg0) {}
+void stageGObj27_Callback3(Ground_GObj* arg0) {}
 
-void grPura_80211F68(Ground_GObj* arg0)
+void stageGObj4_OnInit(Ground_GObj* arg0)
 {
     Ground_JObjInline1(arg0);
     grPura_80212CD4(arg0);
@@ -207,12 +434,12 @@ void grPura_80211F68(Ground_GObj* arg0)
     grPura_80212FC0(arg0);
 }
 
-bool grPura_80211FD0(Ground_GObj* arg0)
+bool stageGObj4_Callback1(Ground_GObj* arg0)
 {
     return false;
 }
 
-void grPura_80211FD8(Ground_GObj* arg0)
+void stageGObj4_GObjProc(Ground_GObj* arg0)
 {
     grPura_80212EF4(arg0);
     Ground_801C2FE0(arg0);
@@ -221,9 +448,9 @@ void grPura_80211FD8(Ground_GObj* arg0)
     lb_800115F4();
 }
 
-void grPura_80212020(Ground_GObj* arg0) {}
+void stageGObj4_Callback3(Ground_GObj* arg0) {}
 
-void grPura_80212024(Ground_GObj* arg0)
+void stageGObj1_OnInit(Ground_GObj* arg0)
 {
     unsigned int uVar1;
     Ground* gp = GET_GROUND(arg0);
@@ -241,12 +468,12 @@ void grPura_80212024(Ground_GObj* arg0)
     gp->u.pura.xC8 = 0;
 }
 
-bool grPura_802120D8(Ground_GObj* arg0)
+bool stageGObj1_Callback1(Ground_GObj* arg0)
 {
     return false;
 }
 
-void grPura_802120E0(Ground_GObj* arg0)
+void stageGObj1_GObjProc(Ground_GObj* arg0)
 {
     GXColor spilC;
     GXColor sp18;
@@ -280,9 +507,9 @@ void grPura_802120E0(Ground_GObj* arg0)
     gp->u.pura.xC8 = 0;
 }
 
-void grPura_8021228C(Ground_GObj* arg0) {}
+void stageGObj1_Callback3(Ground_GObj* arg0) {}
 
-void grPura_80212290(Ground_GObj* arg0)
+void stageGObj2_OnInit(Ground_GObj* arg0)
 {
     Ground* gp = GET_GROUND(arg0);
     HSD_JObj* jobj = arg0->hsd_obj;
@@ -295,12 +522,12 @@ void grPura_80212290(Ground_GObj* arg0)
     grAnime_801C8138(arg0, gp->map_id, 0);
 }
 
-bool grPura_80212314(Ground_GObj* arg0)
+bool stageGObj2_Callback1(Ground_GObj* arg0)
 {
     return false;
 }
 
-void grPura_8021231C(Ground_GObj* arg0)
+void stageGObj2_GObjProc(Ground_GObj* arg0)
 {
     u32 pad2;
     Vec3 vec;
@@ -327,7 +554,7 @@ void grPura_8021231C(Ground_GObj* arg0)
     }
 }
 
-void grPura_802125EC(Ground_GObj* arg0) {}
+void stageGObj2_Callback3(Ground_GObj* arg0) {}
 
 void grPura_802125F0(HSD_GObj* arg0)
 {
@@ -335,7 +562,7 @@ void grPura_802125F0(HSD_GObj* arg0)
         s32 x0;
         f32 x4;
         s32 x8;
-    }* desc = (void*) ((char*) grPu_StageCallbacks + 0x2B0);
+    }* desc = (void*) ((char*) stage_callbacks + 0x2B0);
     f32 scale;
     HSD_JObj* jobj;
     u32 i;
@@ -346,7 +573,7 @@ void grPura_802125F0(HSD_GObj* arg0)
 
     for (i = 0; i < 27; i++, desc++) {
         if (desc->x8 != -1) {
-            gobj = grPura_80211E08(desc->x8);
+            gobj = setupStageCallbacks(desc->x8);
             HSD_ASSERT(0x291, gobj);
             gp = GET_GROUND(gobj);
             HSD_ASSERT(0x292, gp);

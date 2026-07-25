@@ -27,20 +27,35 @@ struct grStory_YakumonoParam {
 /* 1E36D0 */ static DynamicsDesc* grStory_801E36D0(enum_t);
 
 static StageCallbacks grSt_StageCallbacks[] = {
-    { NULL, NULL, NULL, NULL, 0 },
-    { grStory_801E31C0, grStory_801E3224, grStory_801E322C, grStory_801E3230,
-      0 },
-    // Randall
-    { grStory_801E3370, grStory_801E33D8, grStory_801E33E0, grStory_801E3414,
-      0 },
-    // Shy Guys
-    { grStory_801E3234, grStory_801E332C, grStory_801E3334, grStory_801E336C,
-      (1 << 30) | (1 << 31) },
+    { 0 },
+    {
+        // Randall
+        grStory_801E31C0,
+        grStory_801E3224,
+        grStory_801E322C,
+        grStory_801E3230,
+        0,
+    },
+    {
+        // Shy Guys
+        grStory_801E3370,
+        grStory_801E33D8,
+        grStory_801E33E0,
+        grStory_801E3414,
+        0,
+    },
+    {
+        grStory_801E3234,
+        grStory_801E332C,
+        grStory_801E3334,
+        grStory_801E336C,
+        (1 << 30) | (1 << 31),
+    },
 };
 
 static struct grStory_YakumonoParam* yakumono_param;
 
-StageData grSt_803E274C = {
+StageData grSt_StageData = {
     Gr_Kind_Story,
     grSt_StageCallbacks,
     "/GrSt.dat",

@@ -1,12 +1,9 @@
 #ifndef GALE01_201FA0
 #define GALE01_201FA0
 
-#include <placeholder.h>
-
-#include "baselib/forward.h"
 #include "gr/forward.h"
 #include "lb/forward.h"
-#include "mp/forward.h"
+#include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
 
@@ -31,5 +28,6 @@
 /* 20266C */ void grYorster_8020266C(HSD_GObj*);
 /* 202B5C */ DynamicsDesc* grYorster_80202B5C(enum_t);
 /* 202B64 */ bool grYorster_80202B64(Vec3*, int _, HSD_JObj*);
+/* 3E51CC */ extern StageData grYt_StageData;
 
 #endif

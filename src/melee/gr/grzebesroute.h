@@ -26,5 +26,6 @@
 /* 20B548 */ void grZebesRoute_8020B548(void);
 /* 20B854 */ DynamicsDesc* grZebesRoute_8020B854(enum_t);
 /* 20B85C */ bool grZebesRoute_8020B85C(Vec3*, int arg, HSD_JObj* jobj);
+/* 3E5E0C */ extern StageData grZe_Route_StageData;
 
 #endif

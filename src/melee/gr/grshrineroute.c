@@ -106,7 +106,7 @@ StageCallbacks grSh_Route_StageCallbacks[7] = {
     },
 };
 
-StageData grSh_Route_803E5988 = {
+StageData grSh_Route_StageData = {
     Gr_Kind_ShrineRoute,
     grSh_Route_StageCallbacks,
     "/GrNSr.dat",
@@ -200,11 +200,11 @@ HSD_GObj* grShrineRoute_802088C0(int gobj_id)
         if (callbacks->callback3 != NULL) {
             gp->x1C_callback = callbacks->callback3;
         }
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 271, gobj_id);

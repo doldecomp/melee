@@ -50,7 +50,7 @@ static StageCallbacks grTFx_StageCallbacks[4] = {
     { NULL, NULL, NULL, NULL, 0 }
 };
 
-StageData grTFx_803E8A34 = {
+StageData grTFx_StageData = {
     Gr_Kind_TFox,
     grTFx_StageCallbacks,
     "/GrTFx.dat",

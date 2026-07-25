@@ -82,7 +82,7 @@ static int grCn_804D69A8;
 static bool grCn_804D69AC;
 static int grCn_804D69B0;
 
-static S16Vec3 grCn_803E1D38[] = {
+static GrJoint grCn_803E1D38[] = {
     { 3, 3, 0 },  { 4, 3, 0 },  { 0, 13, 0 }, { 1, 14, 0 },
     { 2, 15, 0 }, { 5, 16, 0 }, { 6, 17, 0 }, { 7, 18, 0 },
 };
@@ -227,7 +227,7 @@ StageCallbacks grCn_StageCallbacks[] = {
     },
 };
 
-StageData grCn_803E1F08 = {
+StageData grCn_StageData = {
     Gr_Kind_Corneria,
     grCn_StageCallbacks,
     "/GrCn",
@@ -578,11 +578,11 @@ HSD_GObj* grCorneria_801DD534(int arg0)
         if (callbacks->callback3 != NULL) {
             gp->x1C_callback = callbacks->callback3;
         }
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grcorneria.c", 0x26A,
