@@ -1945,6 +1945,7 @@ void psDispParticles(s32 arg0, u32 arg1)
     u32 sp798;
     s32 sp794;
     u16 sp790;
+    u32 sp78C;
     GXTlutFmt sp788;
     GXTexObj sp764;
     HSD_Particle* sp760;
@@ -2007,7 +2008,7 @@ void psDispParticles(s32 arg0, u32 arg1)
                 GXTexWrapMode wrap_t;
                 f32 scale_s;
                 f32 scale_t;
-                u32 fmt;
+                GXTexFmt fmt;
                 u8** tex_table;
                 u32 width;
                 u32 height;
@@ -2121,8 +2122,6 @@ void psDispParticles(s32 arg0, u32 arg1)
                     }
 
                     if (pp->kind & DispTexture) {
-                        image = NULL;
-                        tlut = NULL;
                         if (pp->kind & MirrorS) {
                             scale_s = 2.0f;
                             wrap_s = GX_MIRROR;
@@ -2157,31 +2156,40 @@ void psDispParticles(s32 arg0, u32 arg1)
                             tex_table = tex_group->texTable;
                             width = tex_group->width;
                             height = tex_group->height;
+                        } else {
+                            fmt = 0;
+                            height = 0;
+                            width = 0;
+                            tex_table = NULL;
+                        }
+                        if (tex_table != NULL) {
                             image = tex_table[pp->poseNum];
-                            if ((fmt == GX_TF_C4) || (fmt == GX_TF_C8)) {
+                        } else {
+                            image = NULL;
+                        }
+                        if ((fmt == GX_TF_C4) || (fmt == GX_TF_C8)) {
+                            if (tex_table != NULL) {
                                 void** palettes =
                                     (void**) &tex_table[tex_group->num];
-                                if (pp->palNum != 0xFF) {
-                                    tlut = palettes[pp->palNum];
-                                } else if (!(pp->kind & ComTLUT)) {
-                                    tlut = palettes[pp->poseNum];
-                                } else {
-                                    tlut = palettes[0];
-                                }
-                                if (tlut != sp79C) {
-                                    sp79C = tlut;
-                                    if (fmt == GX_TF_C4) {
-                                        sp790 = 0x10;
+                                if (palettes != NULL) {
+                                    if (pp->palNum != 0xFF) {
+                                        tlut = palettes[pp->palNum];
+                                    } else if (!(pp->kind & ComTLUT)) {
+                                        tlut = palettes[pp->poseNum];
                                     } else {
-                                        sp790 = 0x100;
+                                        tlut = palettes[0];
                                     }
-                                    sp788 = tex_group->tlutfmt;
-                                    if (tlut != NULL) {
+                                    if (tlut != sp79C) {
+                                        sp788 = (GXTlutFmt) (u8)
+                                                    tex_group->tlutfmt;
+                                        sp78C = GX_TLUT0;
+                                        sp790 =
+                                            (fmt == GX_TF_C4) ? 0x10 : 0x100;
                                         GXInitTlutObj(&sp71C, tlut, sp788,
                                                       sp790);
-                                        GXLoadTlut(&sp71C, GX_TLUT0);
+                                        GXLoadTlut(&sp71C, sp78C);
+                                        sp7B0 = NULL;
                                     }
-                                    sp7B0 = NULL;
                                 }
                             }
                         }
