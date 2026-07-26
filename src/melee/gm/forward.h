@@ -167,9 +167,18 @@ typedef struct VsApproachData VsApproachData;
 
 typedef bool (*GmRouteCallback)(int);
 
-/// Number of player slots.
+/// Player slot indices.
+/// @remarks @c Gm_Player_NumMax is named by an assert in #pl_8004049C.
+/// @c Gm_Player_Other is named by asserts in #setFlag and #setPointValue.
 typedef enum Gm_Player {
+    /* 0x00 */ Gm_Player_Unk0,
+    /* 0x01 */ Gm_Player_Unk1,
+    /* 0x02 */ Gm_Player_Unk2,
+    /* 0x03 */ Gm_Player_Unk3,
+    /* 0x04 */ Gm_Player_Unk4,
+    /* 0x05 */ Gm_Player_Unk5,
     /* 0x06 */ Gm_Player_NumMax = 6,
+    /* 0x06 */ Gm_Player_Other = Gm_Player_NumMax,
 } Gm_Player;
 
 #endif

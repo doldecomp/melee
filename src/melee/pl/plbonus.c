@@ -16,10 +16,6 @@
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_unsplit.h>
 
-enum {
-    Gm_Player_Other = 6,
-};
-
 /// Sets a bonus flag boolean to true
 static void setFlag(int player, int kind)
 {
