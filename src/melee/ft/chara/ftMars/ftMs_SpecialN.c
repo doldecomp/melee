@@ -339,8 +339,7 @@ void ftMs_SpecialN_801371FC(HSD_GObj* gobj)
     }
     ftCommon_GroundToAirStateChange(gobj, fp, msid, mf);
     if (fp->x2219_b0 == true) {
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     }
 }
 
@@ -359,8 +358,7 @@ void ftMs_SpecialN_801372A8(HSD_GObj* gobj)
     }
     ftCommon_AirToGroundStateChange(gobj, fp, msid, mf);
     if (fp->x2219_b0 == true) {
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     }
 }
 

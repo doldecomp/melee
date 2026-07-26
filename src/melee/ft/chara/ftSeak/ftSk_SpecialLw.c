@@ -28,8 +28,7 @@ static void fn_80114034(Fighter_GObj* gobj)
         efSync_Spawn(0x4FC, gobj, fp->parts[FtPart_R2ndNb].joint);
         fp->x2219_b0 = true;
     }
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     fp->accessory4_cb = 0;
 }
 
@@ -40,8 +39,7 @@ static void fn_801140B0(Fighter_GObj* gobj)
         efSync_Spawn(0x4FD, gobj, fp->parts[FtPart_HipN].joint);
         fp->x2219_b0 = true;
     }
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     fp->accessory4_cb = 0;
 }
 

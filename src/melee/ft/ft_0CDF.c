@@ -100,6 +100,7 @@ void ftCo_800CE14C(HSD_GObj* fighter_gobj)
 }
 
 /// LGun accessory4 callback function (ran after fire input already processed)
+/// @todo Cannot use #ftCheckThrowB0 under the surrounding `dont_inline`.
 #pragma push
 #pragma dont_inline on
 void ftCo_800CE1D4(HSD_GObj* fighter_gobj)

@@ -627,4 +627,5 @@ void ftPr_Init_8013C94C(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }

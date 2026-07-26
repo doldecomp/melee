@@ -30,11 +30,10 @@ static u32 const coll_mf = Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim |
 
 static void setCallbacks(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = gobj->user_data;
     fp->take_dmg_cb = ftDk_Init_8010D774;
     fp->death2_cb = ftDk_Init_8010D774;
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 void ftDk_SpecialHi_Enter(HSD_GObj* gobj)
@@ -140,7 +139,7 @@ void ftDk_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
-    u8 _[8];
+    u8 _[4];
     if (fp->self_vel.y >= 0) {
         if (ft_80081D0C(gobj)) {
             ftCommon_AirToGroundStateChange(gobj, fp, ftDk_MS_SpecialHi,

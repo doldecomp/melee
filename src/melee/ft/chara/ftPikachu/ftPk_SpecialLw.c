@@ -112,16 +112,7 @@ void ftPk_SpecialLw_SpawnEffect(HSD_GObj* gobj)
     {
         u8 _[4];
 
-        /// @todo Result of an inner function.
-        bool result;
-        if (fp->throw_flags_b0) {
-            fp->throw_flags_b0 = false;
-            result = true;
-        } else {
-            result = false;
-        }
-
-        if (result && !fp->mv.pk.speciallw.x0) {
+        if (ftCheckThrowB0(fp) && !fp->mv.pk.speciallw.x0) {
             pos = fp->cur_pos;
 
             pos.y += pika_attr->xD0;

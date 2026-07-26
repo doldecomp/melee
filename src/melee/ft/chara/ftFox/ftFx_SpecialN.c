@@ -666,8 +666,6 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                 }
                 return;
             } else {
-                bool flag;
-
                 it_802ADDD0(fp->u.fx.x222C_blasterGObj, fp->cmd_vars[1]);
                 switch (fp->cmd_vars[3]) {
                 case 1:
@@ -679,13 +677,7 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                     it_802AE608(fp->u.fx.x222C_blasterGObj);
                     break;
                 }
-                if (fp->throw_flags_b0 != 0) {
-                    fp->throw_flags_b0 = 0;
-                    flag = true;
-                } else {
-                    flag = false;
-                }
-                if (flag) {
+                if (ftCheckThrowB0(fp)) {
                     Vec3 sp50;
                     Vec3 sp44;
 

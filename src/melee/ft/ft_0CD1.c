@@ -33,17 +33,10 @@ void ftCo_800CD1BC(Fighter_GObj* gobj)
 void ftCo_800CD204(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    int y;
     if ((fp->input.held_inputs & HSD_PAD_A) == 0) {
         fp->mv.co.swing.x0 = 0;
     }
-    if (fp->throw_flags_b3) {
-        fp->throw_flags_b3 = 0;
-        y = 1;
-    } else {
-        y = 0;
-    }
-    if (y && fp->mv.co.swing.x0 != 0) {
+    if (ftCheckThrowB3(fp) && fp->mv.co.swing.x0 != 0) {
         ftCo_Attack_800CCF58(gobj, 3);
     }
 }

@@ -91,16 +91,6 @@ static inline void mnSound_InitVolumeAnim(HSD_JObj* jobj, s32 sound_music_mix,
                               pos_0->x);
 }
 
-static inline void mnSound_InitCenterText(Menu* menu, s32 val)
-{
-    HSD_Text* text =
-        HSD_SisLib_803A5ACC(0, 1, -9.5F, 9.1F, 17.0F, 364.68332F, 38.38772F);
-    menu->text = text;
-    text->font_size.x = 0.0521F;
-    text->font_size.y = 0.0521F;
-    HSD_SisLib_803A6368(text, val);
-}
-
 static inline void mnSound_UpdateCenterText(void)
 {
     Menu* menu = GET_MENU(mnSound_804D6C30);
@@ -113,7 +103,7 @@ static inline void mnSound_UpdateCenterText(void)
     } else {
         text_id = 0xBC;
     }
-    mnSound_InitCenterText(menu, text_id);
+    Menu_InitCenterText(menu, text_id);
 }
 
 void mnSound_802492CC(HSD_GObj* gobj)
@@ -302,7 +292,7 @@ void mnSound_80249C08(int unused)
         } else {
             text_id = 0xBC;
         }
-        mnSound_InitCenterText(menu, text_id);
+        Menu_InitCenterText(menu, text_id);
     }
 
     mnSound_ChannelAnim(GET_JOBJ(gobj), user_data->unk1);

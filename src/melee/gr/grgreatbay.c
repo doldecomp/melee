@@ -336,10 +336,8 @@ void fn_801F4520(HSD_GObj* gobj)
 void grGreatBay_801F454C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
     gp->x8_callback = NULL;
     gp->x11_flags.b012 = 1;
     gp->xC_callback = NULL;

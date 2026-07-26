@@ -11,6 +11,7 @@
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftFox/inlines.h"
+#include "ftKirby/inlines.h"
 #include "it/items/itfoxblaster.h"
 #include "it/items/itfoxlaser.h"
 #include "it/items/itnesspkflash.h"
@@ -212,13 +213,6 @@ void ftKb_SpecialNFx_800FDEE0(Fighter_GObj* gobj)
     }
 }
 
-inline void ftKb_SpecialNFx_SetCall(HSD_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    fp->death2_cb = ftKb_Init_800EE74C;
-    fp->take_dmg_cb = ftKb_Init_800EE7B8;
-}
-
 void ftKb_SpecialNFx_800FDF30(Fighter_GObj* gobj)
 {
     Vec3 sp2C;
@@ -337,7 +331,7 @@ void ftKb_SpecialNFx_800FE100(HSD_GObj* gobj)
     fp->u.kb.xB0 = blasterGObj;
 
     if (blasterGObj != NULL) {
-        ftKb_SpecialNFx_SetCall(gobj);
+        ftKb_SpecialN_set_cbs(gobj);
         return;
     }
 
@@ -397,7 +391,7 @@ void ftKb_SpecialNFx_800FE240(HSD_GObj* gobj)
     fp->u.kb.xB0 = blasterGObj;
 
     if (blasterGObj != NULL) {
-        ftKb_SpecialNFx_SetCall(gobj);
+        ftKb_SpecialN_set_cbs(gobj);
         return;
     }
 
@@ -435,7 +429,7 @@ void ftKb_FxSpecialNStart_Anim(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, ftKbGetLoopMotionId(gobj),
                                   (Ft_MF_SkipModel | Ft_MF_KeepGfx), 0, 1, 0,
                                   NULL);
-        ftKb_SpecialNFx_SetCall(gobj);
+        ftKb_SpecialN_set_cbs(gobj);
         fp->accessory4_cb = ftKb_SpecialNFx_CreateBlasterShot;
         it_802ADDD0(fp->u.kb.xB0, 1);
     }
@@ -487,7 +481,7 @@ void ftKb_FxSpecialNLoop_Anim(HSD_GObj* gobj)
             fp->cmd_vars[1] = 1;
             it_802ADDD0(temp, 1);
         }
-        ftKb_SpecialNFx_SetCall(gobj);
+        ftKb_SpecialN_set_cbs(gobj);
     }
     ftKb_SpecialNFx_800FDF30(gobj);
 }
@@ -543,7 +537,7 @@ void ftKb_FxSpecialAirNStart_Anim(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, ftKbGetAirLoopMotionId(gobj),
                                   (Ft_MF_SkipModel | Ft_MF_KeepGfx), 0, 1, 0,
                                   NULL);
-        ftKb_SpecialNFx_SetCall(gobj);
+        ftKb_SpecialN_set_cbs(gobj);
         fp->accessory4_cb = ftKb_SpecialNFx_CreateBlasterShot;
         it_802ADDD0(fp->u.kb.xB0, 1);
     }
@@ -584,7 +578,7 @@ void ftKb_FxSpecialAirNLoop_Anim(HSD_GObj* gobj)
                 temp = gobj, ftKbGetAirLoopMotionId(gobj),
                 (Ft_MF_SkipAttackCount | Ft_MF_SkipModel | Ft_MF_KeepGfx), 0,
                 1, 0, NULL);
-            ftKb_SpecialNFx_SetCall(gobj);
+            ftKb_SpecialN_set_cbs(gobj);
             fp->accessory4_cb = ftKb_SpecialNFx_CreateBlasterShot;
             fp->mv.fx.SpecialN.isBlasterLoop = false;
             it_802ADDD0(fp->u.kb.xB0, 1);
@@ -592,12 +586,12 @@ void ftKb_FxSpecialAirNLoop_Anim(HSD_GObj* gobj)
             Fighter_ChangeMotionState(gobj, ftKbGetAirEndMotionId(gobj),
                                       (Ft_MF_SkipModel | Ft_MF_KeepGfx), 0, 1,
                                       0, NULL);
-            ftKb_SpecialNFx_SetCall(gobj);
+            ftKb_SpecialN_set_cbs(gobj);
             temp = fp->u.kb.xB0;
             fp->cmd_vars[1] = 1;
             it_802ADDD0(temp, 1);
         }
-        ftKb_SpecialNFx_SetCall(gobj);
+        ftKb_SpecialN_set_cbs(gobj);
     }
     ftKb_SpecialNFx_800FDF30(gobj);
 }
