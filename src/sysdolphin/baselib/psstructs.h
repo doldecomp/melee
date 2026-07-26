@@ -119,7 +119,7 @@ struct HSD_psAppSRT {
     void (*freefunc)(struct HSD_psAppSRT* appSrt); /* 0x9C */
 
     u16 idnum; /* 0xA0 */
-    s8 xA2;    /* 0xA2 */
+    u8 xA2;    /* 0xA2 */
 };
 
 /* size: 0x98 */
