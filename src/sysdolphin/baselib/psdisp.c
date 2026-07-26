@@ -1322,20 +1322,23 @@ static inline void psUpdateAppSRT(HSD_Particle* pp, psdisp_Cache* cache)
     }
 }
 
-static inline void psGetAppSRTPositions(HSD_Particle* pp, Vec3* cur_pos,
-                                        Vec3* prev_pos)
+static inline void psGetAppSRTPositions(HSD_Particle* pp, Mtx draw_mtx,
+                                        Vec3* cur_pos, Vec3* prev_pos)
 {
     Vec3 last_pos;
 
-    cur_pos->x = pp->appsrt->x70 +
-                 (pp->appsrt->x6C * pp->pos.z +
-                  (pp->appsrt->ssx * pp->pos.x + pp->appsrt->ssy * pp->pos.y));
-    cur_pos->y = pp->appsrt->x80 +
-                 (pp->appsrt->x7C * pp->pos.z +
-                  (pp->appsrt->x74 * pp->pos.x + pp->appsrt->x78 * pp->pos.y));
-    cur_pos->z = pp->appsrt->x90 +
-                 (pp->appsrt->x8C * pp->pos.z +
-                  (pp->appsrt->x84 * pp->pos.x + pp->appsrt->x88 * pp->pos.y));
+    cur_pos->x =
+        draw_mtx[0][3] + (draw_mtx[0][2] * pp->pos.z +
+                          (draw_mtx[0][0] * pp->pos.x +
+                           draw_mtx[0][1] * pp->pos.y));
+    cur_pos->y =
+        draw_mtx[1][3] + (draw_mtx[1][2] * pp->pos.z +
+                          (draw_mtx[1][0] * pp->pos.x +
+                           draw_mtx[1][1] * pp->pos.y));
+    cur_pos->z =
+        draw_mtx[2][3] + (draw_mtx[2][2] * pp->pos.z +
+                          (draw_mtx[2][0] * pp->pos.x +
+                           draw_mtx[2][1] * pp->pos.y));
     if (pp->kind & Tornado) {
         calcTornadoLastPos(pp, &last_pos.x, &last_pos.y, &last_pos.z);
     } else {
@@ -1343,15 +1346,18 @@ static inline void psGetAppSRTPositions(HSD_Particle* pp, Vec3* cur_pos,
         last_pos.y = pp->pos.y - pp->vel.y;
         last_pos.z = pp->pos.z - pp->vel.z;
     }
-    prev_pos->x = pp->appsrt->x70 +
-                  (pp->appsrt->x6C * last_pos.z +
-                   (pp->appsrt->ssx * last_pos.x + pp->appsrt->ssy * last_pos.y));
-    prev_pos->y = pp->appsrt->x80 +
-                  (pp->appsrt->x7C * last_pos.z +
-                   (pp->appsrt->x74 * last_pos.x + pp->appsrt->x78 * last_pos.y));
-    prev_pos->z = pp->appsrt->x90 +
-                  (pp->appsrt->x8C * last_pos.z +
-                   (pp->appsrt->x84 * last_pos.x + pp->appsrt->x88 * last_pos.y));
+    prev_pos->x =
+        draw_mtx[0][3] + (draw_mtx[0][2] * last_pos.z +
+                          (draw_mtx[0][0] * last_pos.x +
+                           draw_mtx[0][1] * last_pos.y));
+    prev_pos->y =
+        draw_mtx[1][3] + (draw_mtx[1][2] * last_pos.z +
+                          (draw_mtx[1][0] * last_pos.x +
+                           draw_mtx[1][1] * last_pos.y));
+    prev_pos->z =
+        draw_mtx[2][3] + (draw_mtx[2][2] * last_pos.z +
+                          (draw_mtx[2][0] * last_pos.x +
+                           draw_mtx[2][1] * last_pos.y));
 }
 
 static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
@@ -1363,7 +1369,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
 
     psSetCurrentMtx(3);
     psUpdateAppSRT(pp, cache);
-    psGetAppSRTPositions(pp, &cur_pos, &prev_pos);
+    psGetAppSRTPositions(pp, (MtxPtr) &pp->appsrt->ssx, &cur_pos, &prev_pos);
 
     ax = pp->size > 42.5 ? 255.0f : 6.0f * pp->size;
     if (pp->kind & Trail) {
@@ -1459,7 +1465,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
 
     psUpdateAppSRT(pp, cache);
     PSMTXCopy((MtxPtr) &pp->appsrt->ssx, draw_mtx);
-    psGetAppSRTPositions(pp, &cur_pos, &prev_pos);
+    psGetAppSRTPositions(pp, draw_mtx, &cur_pos, &prev_pos);
     psScaleAppSRTAxes(pp, draw_mtx);
     ax = pp->appsrt->x94 * pp->size;
     if (texform == NULL) {
