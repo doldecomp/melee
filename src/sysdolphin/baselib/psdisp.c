@@ -17,18 +17,6 @@
 #include <dolphin/gx.h>
 
 typedef struct {
-    char filename[9];
-    u8 x9_pad[3];
-    char ref_count_report[39];
-    u8 x33_pad[13];
-    u8 texture_coords[0x20];
-} psdisp_StaticData;
-
-typedef struct {
-    u8 sort_frame[0x10];
-} psdisp_ReportData;
-
-typedef struct {
     HSD_Particle* head;
     HSD_Particle* tail;
 } psdisp_ParticleSortBucket;
@@ -66,19 +54,19 @@ typedef struct {
       { 0.0F, 1.0F, 0.0F, 0.0F },
       { 0.0F, 0.0F, 1.0F, 0.0F } },
 };
-/* 40C300 */ static psdisp_StaticData HSD_PSDisp_8040C300 = {
-    "object.h",
-    { 0 },
-    "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF",
-    { 0 },
-    {
-        0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1,
-        0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0,
-    },
+/** @remarks Orphaned #ref_INC assertion literals: the original unit was
+ * compiled as C++ (see its extab entries), which discards an unused static
+ * #psSetBillboardCamera-like caller but keeps its pooled `__assert` strings.
+ * GNT4 emits the live body in its generator unit. */
+/* 40C300 */ static char HSD_PSDisp_8040C300[] = "object.h";
+/* 40C30C */ static char HSD_PSDisp_8040C30C[] =
+    "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF";
+/* 40C334 */ static u8 HSD_PSDisp_8040C334[0xC] = { 0 };
+/* 40C340 */ static u8 HSD_PSDisp_8040C340[0x20] = {
+    0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1,
+    0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0,
 };
-/* 40C360 */ static psdisp_ReportData HSD_PSDisp_8040C360 = {
-    { 0 },
-};
+/* 40C360 */ static u8 HSD_PSDisp_8040C360[0x10] = { 0 };
 /* 4D6380 */ static u8 HSD_PSDisp_804D6380 = 0x7B;
 /* 4D0908 */ extern HSD_Particle* hsd_804D0908[146];
 /* 4D0B50 */ extern HSD_PSTexGroup** psTexGroupArray[65];
@@ -102,7 +90,7 @@ typedef struct {
 /* 4D7944 */ static GXColor HSD_PSDisp_804D7944;
 /* 4D7948 */ static s32 HSD_PSDisp_804D7948[2];
 
-STATIC_ASSERT(sizeof(HSD_PSDisp_8040C300) == 0x60);
+STATIC_ASSERT(sizeof(HSD_PSDisp_8040C340) == 0x20);
 STATIC_ASSERT(sizeof(HSD_PSDisp_8040C360) == 0x10);
 STATIC_ASSERT(sizeof(HSD_PSDisp_804D0FC0) == 0xF0);
 STATIC_ASSERT(sizeof(HSD_PSDisp_804D0FC0) -
@@ -463,7 +451,7 @@ HSD_Particle* particleSort(s32 arg0, u8 arg1, HSD_Particle** arg2,
 
     STATIC_ASSERT(sizeof(buckets[0]) == 8);
 
-    temp_r9 = &HSD_PSDisp_8040C360.sort_frame[arg0];
+    temp_r9 = &HSD_PSDisp_8040C360[arg0];
     temp_r29 = (new_var = &hsd_804D0908[arg0]);
     cache = &HSD_PSDisp_804D0FC0;
     var_r28 = *temp_r29;
@@ -2067,8 +2055,7 @@ void psDispParticles(s32 arg0, u32 arg1)
                         psSetCurrentMtx(0);
                         GXEnableTexOffsets(GX_TEXCOORD0, GX_TRUE, GX_TRUE);
                         GXSetCullMode(GX_CULL_BACK);
-                        GXSetArray(GX_VA_TEX0,
-                                   HSD_PSDisp_8040C300.texture_coords, 2U);
+                        GXSetArray(GX_VA_TEX0, HSD_PSDisp_8040C340, 2U);
                         psSetupVtxFormat(GX_VTXFMT0, false, true, GX_RGB565);
                         psSetupVtxFormat(GX_VTXFMT1, false, false, GX_RGB565);
                         psSetupVtxFormat(GX_VTXFMT2, true, true, GX_RGB565);
