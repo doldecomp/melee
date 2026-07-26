@@ -111,11 +111,11 @@ void it_80272674(Item_GObj* item_gobj, s32 idx)
     case HitCapsule_Enabled:
         lb_8000B1CC(hitbox->jobj, &hitbox->b_offset, &hitbox->x4C);
         hitbox->x58 = hitbox->x4C;
-        hitbox->state = 2;
+        hitbox->state = HitCapsule_Unk2;
         item->xDAA_flag.b2 = 1;
         return;
     case HitCapsule_Unk2:
-        hitbox->state = 3;
+        hitbox->state = HitCapsule_Unk3;
         /* fallthrough */
     case HitCapsule_Unk3:
         hitbox->x58 = hitbox->x4C;

@@ -403,18 +403,18 @@ void ftKp_SpecialAirNEnd_Coll(Fighter_GObj* gobj)
 static void ftKp_SpecialN_80135780_inline(Fighter_GObj* gobj)
 {
     ftParts_80074B0C(gobj, 0, 1);
-    ftColl_8007B128(gobj, 0x37, Intangible);
-    ftColl_8007B128(gobj, 0x30, Intangible);
-    ftColl_8007B128(gobj, 0x3C, Intangible);
-    ftColl_8007B128(gobj, 0x21, Intangible);
-    ftColl_8007B128(gobj, 0x3D, Intangible);
-    ftColl_8007B128(gobj, 0x22, Intangible);
-    ftColl_8007B128(gobj, 0xF, Intangible);
-    ftColl_8007B128(gobj, 6, Intangible);
-    ftColl_8007B128(gobj, 0x10, Intangible);
-    ftColl_8007B128(gobj, 7, Intangible);
-    ftColl_8007B128(gobj, 0x13, Intangible);
-    ftColl_8007B128(gobj, 0xA, Intangible);
+    ftColl_8007B128(gobj, 0x37, HurtCapsule_Intangible);
+    ftColl_8007B128(gobj, 0x30, HurtCapsule_Intangible);
+    ftColl_8007B128(gobj, 0x3C, HurtCapsule_Intangible);
+    ftColl_8007B128(gobj, 0x21, HurtCapsule_Intangible);
+    ftColl_8007B128(gobj, 0x3D, HurtCapsule_Intangible);
+    ftColl_8007B128(gobj, 0x22, HurtCapsule_Intangible);
+    ftColl_8007B128(gobj, 0xF, HurtCapsule_Intangible);
+    ftColl_8007B128(gobj, 6, HurtCapsule_Intangible);
+    ftColl_8007B128(gobj, 0x10, HurtCapsule_Intangible);
+    ftColl_8007B128(gobj, 7, HurtCapsule_Intangible);
+    ftColl_8007B128(gobj, 0x13, HurtCapsule_Intangible);
+    ftColl_8007B128(gobj, 0xA, HurtCapsule_Intangible);
     ftCommon_8007F5CC(gobj, 0);
 }
 

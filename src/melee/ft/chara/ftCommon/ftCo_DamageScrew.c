@@ -55,7 +55,7 @@ bool ftCo_800D2FA4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->dmg.x1860_element == 0xE) {
+    if (fp->dmg.x1860_element == HitElement_Scball) {
         int x = fp->x2070.x2071_b0_3;
         switch (x) {
         case 11:

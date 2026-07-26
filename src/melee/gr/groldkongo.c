@@ -412,7 +412,7 @@ void stageGObj1_GObjProc(Ground_GObj* gobj)
             lbColl_80008D30_arg1 hit = {
                 1, 1, 361, 0, 0, 180,
             };
-            hit.state = 1;
+            hit.state = HitCapsule_Enabled;
             hit.damage = yakumono_param->rpower_barrel_attack;
             hit.kb_angle = yakumono_param->rvector_barrel_attack;
             hit.unkC = yakumono_param->rreff_barrel_attack;
