@@ -226,6 +226,154 @@ static inline void getColorMatAmb_noinline(HSD_Particle* pp, GXColor* matCol,
     getColorMatAmb_inner(pp, matCol, ambCol);
 }
 
+static inline void getClrTrail(HSD_Particle* pp, GXColor* color)
+{
+    GXColor env_color;
+
+    if (pp->kind & PrimEnv) {
+        color->r = 0xFF;
+        color->g = 0xFF;
+        color->b = 0xFF;
+        color->a = 0xFF;
+    } else {
+        getColorPrimEnv(pp, color, &env_color);
+    }
+}
+
+static inline void setupChanCtrl(HSD_Particle* pp)
+{
+    u32 chan_state = pp->kind & (DispLighting | Trail);
+
+    if ((u32) HSD_PSDisp_804D7930 != chan_state) {
+        HSD_PSDisp_804D7930 = chan_state;
+        GXSetNumChans(1);
+        switch (chan_state) {
+        case DispLighting:
+            GXSetChanCtrl(GX_COLOR0, GX_TRUE, GX_SRC_REG, GX_SRC_REG,
+                          HSD_LObjGetLightMaskDiffuse(), GX_DF_NONE,
+                          HSD_LObjGetLightMaskAttnFunc() ? GX_AF_SPOT
+                                                         : GX_AF_NONE);
+            GXSetChanCtrl(GX_ALPHA0, GX_FALSE, GX_SRC_REG, GX_SRC_REG, 0,
+                          GX_DF_NONE, GX_AF_NONE);
+            break;
+        case DispLighting | Trail:
+            GXSetChanCtrl(GX_COLOR0, GX_TRUE, GX_SRC_REG, GX_SRC_REG,
+                          HSD_LObjGetLightMaskDiffuse(), GX_DF_NONE,
+                          HSD_LObjGetLightMaskAttnFunc() ? GX_AF_SPOT
+                                                         : GX_AF_NONE);
+            GXSetChanCtrl(GX_ALPHA0, GX_FALSE, GX_SRC_VTX, GX_SRC_VTX, 0,
+                          GX_DF_NONE, GX_AF_NONE);
+            break;
+        case Trail:
+            GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_VTX, GX_SRC_VTX, 0,
+                          GX_DF_NONE, GX_AF_NONE);
+            break;
+        default:
+            GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_REG, GX_SRC_REG, 0,
+                          GX_DF_NONE, GX_AF_NONE);
+            break;
+        }
+    }
+}
+
+static inline void setupChanReg(HSD_Particle* pp)
+{
+    GXColor mat_color;
+    GXColor amb_color;
+    GXColor prim_color;
+    HSD_LObj* lobj;
+
+    if (pp->kind & DispLighting) {
+        getColorMatAmb_noinline(pp, &mat_color, &amb_color);
+        getClrTrail(pp, &prim_color);
+        if (!(pp->kind & PrimEnv)) {
+            amb_color.r = (u8) ((amb_color.r * prim_color.r) >> 8);
+            amb_color.g = (u8) ((amb_color.g * prim_color.g) >> 8);
+            amb_color.b = (u8) ((amb_color.b * prim_color.b) >> 8);
+        }
+        if (prim_color.r != HSD_PSDisp_804D7934.r ||
+            prim_color.g != HSD_PSDisp_804D7934.g ||
+            prim_color.b != HSD_PSDisp_804D7934.b)
+        {
+            HSD_PSDisp_804D7934.r = prim_color.r;
+            HSD_PSDisp_804D7934.g = prim_color.g;
+            HSD_PSDisp_804D7934.b = prim_color.b;
+            GXSetChanMatColor(GX_COLOR0, HSD_PSDisp_804D7934);
+        }
+        lobj = HSD_LObjGetActiveByID(GX_MAX_LIGHT);
+        if (lobj != NULL) {
+            HSD_MulColor(&amb_color, &lobj->color, &amb_color);
+        } else {
+            amb_color.r = 0;
+            amb_color.g = 0;
+            amb_color.b = 0;
+        }
+        if (amb_color.r != HSD_PSDisp_804D7938.r ||
+            amb_color.g != HSD_PSDisp_804D7938.g ||
+            amb_color.b != HSD_PSDisp_804D7938.b)
+        {
+            HSD_PSDisp_804D7938.r = amb_color.r;
+            HSD_PSDisp_804D7938.g = amb_color.g;
+            HSD_PSDisp_804D7938.b = amb_color.b;
+            GXSetChanAmbColor(GX_COLOR0, HSD_PSDisp_804D7938);
+        }
+    }
+}
+
+static inline void setupTevReg(HSD_Particle* pp)
+{
+    GXColor prim_color;
+    GXColor env_color;
+    GXColor mat_color;
+    GXColor amb_color;
+
+    getColorPrimEnv(pp, &prim_color, &env_color);
+    if ((pp->kind & PrimEnv) ||
+        (!(pp->kind & DispLighting) && !(pp->kind & Trail)))
+    {
+        if (HSD_PSDisp_804D793C.r != prim_color.r ||
+            HSD_PSDisp_804D793C.g != prim_color.g ||
+            HSD_PSDisp_804D793C.b != prim_color.b ||
+            HSD_PSDisp_804D793C.a != prim_color.a)
+        {
+            HSD_PSDisp_804D793C = prim_color;
+            GXSetTevColor(GX_TEVREG0, HSD_PSDisp_804D793C);
+        }
+        if (pp->kind & PrimEnv) {
+            if (HSD_PSDisp_804D7940.r != env_color.r ||
+                HSD_PSDisp_804D7940.g != env_color.g ||
+                HSD_PSDisp_804D7940.b != env_color.b ||
+                HSD_PSDisp_804D7940.a != env_color.a)
+            {
+                HSD_PSDisp_804D7940 = env_color;
+                GXSetTevColor(GX_TEVREG1, HSD_PSDisp_804D7940);
+            }
+        } else if (HSD_PSDisp_804D7940.r != 0 || HSD_PSDisp_804D7940.g != 0 ||
+                   HSD_PSDisp_804D7940.b != 0 || HSD_PSDisp_804D7940.a != 0)
+        {
+            HSD_PSDisp_804D7940.r = 0;
+            HSD_PSDisp_804D7940.g = 0;
+            HSD_PSDisp_804D7940.b = 0;
+            HSD_PSDisp_804D7940.a = 0;
+            GXSetTevColor(GX_TEVREG1, HSD_PSDisp_804D7940);
+        }
+    }
+    if (pp->kind & DispLighting) {
+        getColorMatAmb_noinline(pp, &mat_color, &amb_color);
+        if (!(pp->kind & PrimEnv)) {
+            mat_color.a = (u8) ((mat_color.a * prim_color.a) >> 8);
+        }
+        if (HSD_PSDisp_804D7944.r != mat_color.r ||
+            HSD_PSDisp_804D7944.g != mat_color.g ||
+            HSD_PSDisp_804D7944.b != mat_color.b ||
+            HSD_PSDisp_804D7944.a != mat_color.a)
+        {
+            HSD_PSDisp_804D7944 = mat_color;
+            GXSetTevColor(GX_TEVREG2, HSD_PSDisp_804D7944);
+        }
+    }
+}
+
 HSD_Particle* particleSort(s32 arg0, u8 arg1, HSD_Particle** arg2,
                            HSD_Particle** arg3)
 {
@@ -469,14 +617,7 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
         vbuf[0].prev.y = pp->pos.y - pp->vel.y;
         vbuf[0].prev.z = pp->pos.z - pp->vel.z;
     }
-    if (pp->kind & PrimEnv) {
-        cbuf[0].c0.r = 0xFF;
-        cbuf[0].c0.g = 0xFF;
-        cbuf[0].c0.b = 0xFF;
-        cbuf[0].c0.a = 0xFF;
-    } else {
-        getColorPrimEnv(pp, &cbuf[0].c0, &env);
-    }
+    getClrTrail(pp, &cbuf[0].c0);
     count = 1;
     cbuf[0].c1 = cbuf[0].c0;
     cbuf[0].c1.a = (u8) ((f32) cbuf[0].c1.a * pp->trail);
@@ -494,14 +635,7 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
                 vbuf[count].prev.y = q->pos.y - q->vel.y;
                 vbuf[count].prev.z = q->pos.z - q->vel.z;
             }
-            if (q->kind & PrimEnv) {
-                cbuf[count].c0.r = 0xFF;
-                cbuf[count].c0.g = 0xFF;
-                cbuf[count].c0.b = 0xFF;
-                cbuf[count].c0.a = 0xFF;
-            } else {
-                getColorPrimEnv(q, &cbuf[count].c0, &env);
-            }
+            getClrTrail(q, &cbuf[count].c0);
             count++;
             cbuf[count - 1].c1 = cbuf[count - 1].c0;
             cbuf[count - 1].c1.a =
@@ -578,42 +712,863 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
     return last;
 }
 
+static inline void setBlendMode(int blend_mode)
+{
+    if (HSD_PSDisp_804D792C != blend_mode) {
+        HSD_PSDisp_804D792C = blend_mode;
+        switch (blend_mode) {
+        case 0:
+            GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA,
+                           GX_LO_CLEAR);
+            break;
+        case 1:
+            GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_ONE,
+                           GX_LO_CLEAR);
+            break;
+        default:
+            OSReport((char*) &HSD_PSDisp_8040C300 + 0x70);
+            break;
+        }
+    }
+}
+
+static inline void psSetCurrentMtx(GXPosNrmMtx idx)
+{
+    if (HSD_PSDisp_804D7948 != idx) {
+        HSD_PSDisp_804D7948 = idx;
+        GXSetCurrentMtx(idx);
+    }
+}
+
+typedef struct {
+    Vec3 pos;
+    Vec3 prev;
+    Vec3 right;
+    Vec3 up;
+} psdisp_PolygonGeometry;
+
+static inline void psDispSubTrailQuad(HSD_Particle* pp,
+                                      psdisp_PolygonGeometry* geom,
+                                      GXColor* color)
+{
+    u8 tex_base = (pp->kind >> 16) & 0xC;
+
+    if (pp->kind & DispTexture) {
+        setVtxDesc(2);
+        GXBegin(GX_QUADS, GX_VTXFMT2, 4);
+    } else {
+        setVtxDesc(3);
+        GXBegin(GX_QUADS, GX_VTXFMT3, 4);
+    }
+    GXWGFifo.f32 = geom->prev.x - geom->right.x;
+    GXWGFifo.f32 = geom->prev.y - geom->right.y;
+    GXWGFifo.f32 = geom->prev.z - geom->right.z;
+    GXWGFifo.u8 = color->r;
+    GXWGFifo.u8 = color->g;
+    GXWGFifo.u8 = color->b;
+    GXWGFifo.u8 = (s8) ((f32) color->a * pp->trail);
+    if (pp->kind & DispTexture) {
+        GXWGFifo.u8 = tex_base;
+    }
+    GXWGFifo.f32 = geom->pos.x - geom->up.x;
+    GXWGFifo.f32 = geom->pos.y - geom->up.y;
+    GXWGFifo.f32 = geom->pos.z - geom->up.z;
+    GXWGFifo.u8 = color->r;
+    GXWGFifo.u8 = color->g;
+    GXWGFifo.u8 = color->b;
+    GXWGFifo.u8 = color->a;
+    if (pp->kind & DispTexture) {
+        GXWGFifo.u8 = tex_base + 1;
+    }
+    GXWGFifo.f32 = geom->pos.x + geom->right.x;
+    GXWGFifo.f32 = geom->pos.y + geom->right.y;
+    GXWGFifo.f32 = geom->pos.z + geom->right.z;
+    GXWGFifo.u8 = color->r;
+    GXWGFifo.u8 = color->g;
+    GXWGFifo.u8 = color->b;
+    GXWGFifo.u8 = color->a;
+    if (pp->kind & DispTexture) {
+        GXWGFifo.u8 = tex_base + 2;
+    }
+    GXWGFifo.f32 = geom->prev.x + geom->up.x;
+    GXWGFifo.f32 = geom->prev.y + geom->up.y;
+    GXWGFifo.f32 = geom->prev.z + geom->up.z;
+    GXWGFifo.u8 = color->r;
+    GXWGFifo.u8 = color->g;
+    GXWGFifo.u8 = color->b;
+    GXWGFifo.u8 = (s8) ((f32) color->a * pp->trail);
+    if (pp->kind & DispTexture) {
+        GXWGFifo.u8 = tex_base + 3;
+    }
+}
+
+static inline void psDispSubTrailForm(HSD_Particle* pp, u8* texform,
+                                      psdisp_PolygonGeometry* geom,
+                                      GXColor* color)
+{
+    f32 trail_alpha = 255.0f * (1.0f - pp->trail);
+    f32 up_len = sqrtf(geom->up.x * geom->up.x + geom->up.y * geom->up.y +
+                       geom->up.z * geom->up.z);
+
+    if (up_len != 0.0f) {
+        f32 dx = geom->pos.x - geom->prev.x;
+        f32 dy = geom->pos.y - geom->prev.y;
+        f32 dz = geom->pos.z - geom->prev.z;
+        f32 segment_len = sqrtf(dx * dx + dy * dy + dz * dz);
+        f32 ratio = segment_len / up_len;
+        u8* it = texform;
+        u32 primitive_count = *(u32*) it;
+
+        it += sizeof(u32);
+        while (primitive_count-- != 0) {
+            GXPrimitive primitive = it[0];
+            u8 count = it[1];
+            u8 vertex_count = count;
+
+            it += 4;
+            if (pp->kind & DispTexture) {
+                setVtxDesc(5);
+                GXBegin(primitive, GX_VTXFMT5, count);
+            } else {
+                setVtxDesc(3);
+                GXBegin(primitive, GX_VTXFMT3, count);
+            }
+            while (vertex_count-- != 0) {
+                f32 s = *(f32*) &it[0];
+                f32 sx = 2.0f * (s - 0.5f);
+                f32 t;
+                f32 tx;
+                s32 alpha;
+
+                if (pp->kind & TexFlipS) {
+                    s = 1.0f - s;
+                }
+                t = *(f32*) &it[4];
+                it += 8;
+                alpha = (s8) (255.0f - t * trail_alpha);
+                if (alpha < 0) {
+                    alpha = 0;
+                }
+                if (alpha > 0xFF) {
+                    alpha = 0xFF;
+                }
+                tx = 2.0f * (t - 0.5f);
+                if (pp->kind & TexFlipT) {
+                    t = 1.0f - t;
+                }
+                GXWGFifo.f32 = geom->up.x * ratio * tx +
+                               (geom->right.x * sx + geom->pos.x);
+                GXWGFifo.f32 = geom->up.y * ratio * tx +
+                               (geom->right.y * sx + geom->pos.y);
+                GXWGFifo.f32 = geom->up.z * ratio * tx +
+                               (geom->right.z * sx + geom->pos.z);
+                GXWGFifo.u8 = color->r;
+                GXWGFifo.u8 = color->g;
+                GXWGFifo.u8 = color->b;
+                GXWGFifo.u8 = alpha;
+                if (pp->kind & DispTexture) {
+                    GXWGFifo.f32 = s;
+                    GXWGFifo.f32 = t;
+                }
+            }
+        }
+    }
+}
+
+static inline void psDispSubQuad(HSD_Particle* pp,
+                                 psdisp_PolygonGeometry* geom)
+{
+    u8 tex_base = (pp->kind >> 16) & 0xC;
+
+    if (pp->kind & DispTexture) {
+        setVtxDesc(0);
+        GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+    } else {
+        setVtxDesc(1);
+        GXBegin(GX_QUADS, GX_VTXFMT1, 4);
+    }
+    GXWGFifo.f32 = geom->pos.x - geom->right.x;
+    GXWGFifo.f32 = geom->pos.y - geom->right.y;
+    GXWGFifo.f32 = geom->pos.z - geom->right.z;
+    if (pp->kind & DispTexture) {
+        GXWGFifo.u8 = tex_base;
+    }
+    GXWGFifo.f32 = geom->pos.x - geom->up.x;
+    GXWGFifo.f32 = geom->pos.y - geom->up.y;
+    GXWGFifo.f32 = geom->pos.z - geom->up.z;
+    if (pp->kind & DispTexture) {
+        GXWGFifo.u8 = tex_base + 1;
+    }
+    GXWGFifo.f32 = geom->pos.x + geom->right.x;
+    GXWGFifo.f32 = geom->pos.y + geom->right.y;
+    GXWGFifo.f32 = geom->pos.z + geom->right.z;
+    if (pp->kind & DispTexture) {
+        GXWGFifo.u8 = tex_base + 2;
+    }
+    GXWGFifo.f32 = geom->pos.x + geom->up.x;
+    GXWGFifo.f32 = geom->pos.y + geom->up.y;
+    GXWGFifo.f32 = geom->pos.z + geom->up.z;
+    if (pp->kind & DispTexture) {
+        GXWGFifo.u8 = tex_base + 3;
+    }
+}
+
+static inline void psDispSubForm(HSD_Particle* pp, u8* texform,
+                                 psdisp_PolygonGeometry* geom)
+{
+    u8* it = texform;
+    u32 primitive_count = *(u32*) it;
+
+    it += sizeof(u32);
+    while (primitive_count-- != 0) {
+        GXPrimitive primitive = it[0];
+        u8 count = it[1];
+        u8 vertex_count = count;
+
+        it += 4;
+        if (pp->kind & DispTexture) {
+            setVtxDesc(4);
+            GXBegin(primitive, GX_VTXFMT4, count);
+        } else {
+            setVtxDesc(1);
+            GXBegin(primitive, GX_VTXFMT1, count);
+        }
+        while (vertex_count-- != 0) {
+            f32 s = *(f32*) &it[0];
+            f32 t = *(f32*) &it[4];
+            f32 sx;
+            f32 tx;
+
+            it += 8;
+            if (pp->kind & TexFlipS) {
+                s = 1.0f - s;
+            }
+            if (pp->kind & TexFlipT) {
+                t = 1.0f - t;
+            }
+            sx = 2.0f * (s - 0.5f);
+            tx = 2.0f * (t - 0.5f);
+            GXWGFifo.f32 = geom->pos.x + geom->right.x * sx + geom->up.x * tx;
+            GXWGFifo.f32 = geom->pos.y + geom->right.y * sx + geom->up.y * tx;
+            GXWGFifo.f32 = geom->pos.z + geom->right.z * sx + geom->up.z * tx;
+            if (pp->kind & DispTexture) {
+                GXWGFifo.f32 = s;
+                GXWGFifo.f32 = t;
+            }
+        }
+    }
+}
+
+static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, float x,
+                                        float y, float z, float ppvx,
+                                        float ppvy, float ppvz, float x0,
+                                        float y0, float z0, float x1, float y1,
+                                        float z1)
+{
+    psdisp_PolygonGeometry geom;
+
+    geom.pos.x = x;
+    geom.pos.y = y;
+    geom.pos.z = z;
+    geom.right.x = x0;
+    geom.right.y = y0;
+    geom.right.z = z0;
+    geom.up.x = x1;
+    geom.up.y = y1;
+    geom.up.z = z1;
+
+    psSetCurrentMtx(0);
+    if (pp->kind & Trail) {
+        GXColor color;
+
+        if (pp->kind & Tornado) {
+            calcTornadoLastPos(pp, &geom.prev.x, &geom.prev.y, &geom.prev.z);
+        } else {
+            geom.prev.x = x - ppvx;
+            geom.prev.y = y - ppvy;
+            geom.prev.z = z - ppvz;
+        }
+        getClrTrail(pp, &color);
+        if (texform == NULL) {
+            psDispSubTrailQuad(pp, &geom, &color);
+        } else {
+            psDispSubTrailForm(pp, texform, &geom, &color);
+        }
+    } else if (texform == NULL) {
+        psDispSubQuad(pp, &geom);
+    } else {
+        psDispSubForm(pp, texform, &geom);
+    }
+}
+
+static inline void psDispSub(HSD_Particle* pp, u8* texform)
+{
+    f32* cache = (f32*) &HSD_PSDisp_804D0FC0;
+    Vec3 right;
+    Vec3 up;
+    f32 angle;
+    Mtx mtx;
+
+    if (texform != NULL) {
+        right.x = cache[0xC] * pp->size;
+        right.y = cache[0x10] * pp->size;
+        right.z = cache[0x14] * pp->size;
+        up.x = -cache[0xD] * pp->size;
+        up.y = -cache[0x11] * pp->size;
+        up.z = -cache[0x15] * pp->size;
+    } else {
+        right.x = HSD_PSDisp_804D7914 * pp->size;
+        right.y = HSD_PSDisp_804D791C * pp->size;
+        right.z = HSD_PSDisp_804D7924 * pp->size;
+        up.x = HSD_PSDisp_804D7918 * pp->size;
+        up.y = HSD_PSDisp_804D7920 * pp->size;
+        up.z = HSD_PSDisp_804D7928 * pp->size;
+    }
+    if ((pp->kind & Trail) || (pp->kind & DirVec)) {
+        f32 x = 0.0f;
+        f32 y = 0.0f;
+
+        if (cache[0x18] == 0.0f) {
+            Vec3 prev;
+            f32 w0;
+
+            if (pp->kind & Tornado) {
+                calcTornadoLastPos(pp, &prev.x, &prev.y, &prev.z);
+            } else {
+                prev.x = pp->pos.x - pp->vel.x;
+                prev.y = pp->pos.y - pp->vel.y;
+                prev.z = pp->pos.z - pp->vel.z;
+            }
+            w0 = cache[0xB] + (cache[0xA] * pp->pos.z +
+                               (cache[8] * pp->pos.x + cache[9] * pp->pos.y));
+            if (cache[0x18] != w0) {
+                f32 w0inv = 1.0f / w0;
+                f32 w1 =
+                    cache[0xB] + (cache[0xA] * prev.z +
+                                  (cache[8] * prev.x + cache[9] * prev.y));
+
+                if (cache[0x18] != w1) {
+                    f32 w1inv = 1.0f / w1;
+                    f64 cur_y = (f64) (cache[0x20] * pp->pos.y);
+                    f64 prev_xy =
+                        (f64) (cache[0x1F] * prev.x + cache[0x20] * prev.y);
+
+                    x = w0inv * (cache[0x22] +
+                                 (cache[0x21] * pp->pos.z +
+                                  (cache[0x1F] * pp->pos.x + (f32) cur_y))) -
+                        w1inv * (cache[0x22] +
+                                 (cache[0x21] * prev.z + (f32) prev_xy));
+                    y = w0inv * (cache[0x26] + (cache[0x25] * pp->pos.z +
+                                                (cache[0x23] * pp->pos.x +
+                                                 cache[0x24] * pp->pos.y))) -
+                        w1inv * (cache[0x26] + (cache[0x25] * prev.z +
+                                                (cache[0x23] * prev.x +
+                                                 cache[0x24] * prev.y)));
+                }
+            }
+        } else if (pp->kind & Tornado) {
+            Vec3 prev;
+            f32 dx;
+            f32 dy;
+            f32 dz;
+
+            calcTornadoLastPos(pp, &prev.x, &prev.y, &prev.z);
+            dx = pp->pos.x - prev.x;
+            dy = pp->pos.y - prev.y;
+            dz = pp->pos.z - prev.z;
+            x = cache[0x21] * dz + (cache[0x1F] * dx + cache[0x20] * dy);
+            y = cache[0x25] * dz + (cache[0x23] * dx + cache[0x24] * dy);
+        } else {
+            x = cache[0x21] * pp->vel.z +
+                (cache[0x1F] * pp->vel.x + cache[0x20] * pp->vel.y);
+            y = cache[0x25] * pp->vel.z +
+                (cache[0x23] * pp->vel.x + cache[0x24] * pp->vel.y);
+        }
+        if (fabsf(y) < 0.00001f) {
+            angle = (x >= 0.0f) ? 1.5707964f : -1.5707964f;
+        } else {
+            angle = atan2f(x, y);
+        }
+        if (pp->kind & DirVec) {
+            angle += pp->rotate;
+        }
+    } else {
+        angle = pp->rotate;
+    }
+    if (fabsf(angle) > 0.01f) {
+        Vec3 axis;
+        f32 t1;
+        f32 t2;
+        f32 t3;
+        f32 t4;
+
+        axis.x = right.y * up.z - right.z * up.y;
+        axis.y = right.z * up.x - right.x * up.z;
+        axis.z = right.x * up.y - right.y * up.x;
+        PSMTXRotAxisRad(mtx, &axis, angle);
+        t1 = mtx[1][0] * right.x + mtx[1][1] * right.y;
+        t2 = mtx[1][0] * up.x + mtx[1][1] * up.y;
+        t3 = mtx[2][0] * right.x + mtx[2][1] * right.y;
+        t4 = mtx[2][0] * up.x + mtx[2][1] * up.y;
+        right.x =
+            mtx[0][2] * right.z + (mtx[0][0] * right.x + mtx[0][1] * right.y);
+        right.y = mtx[1][2] * right.z + t1;
+        right.z = mtx[2][2] * right.z + t3;
+        up.x = mtx[0][2] * up.z + (mtx[0][0] * up.x + mtx[0][1] * up.y);
+        up.y = mtx[1][2] * up.z + t2;
+        up.z = mtx[2][2] * up.z + t4;
+    }
+    psDispSubMakePolygon(pp, texform, pp->pos.x, pp->pos.y, pp->pos.z,
+                         pp->vel.x, pp->vel.y, pp->vel.z, right.x, right.y,
+                         right.z, up.x, up.y, up.z);
+}
+
+static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
+{
+    f32* cache = (f32*) &HSD_PSDisp_804D0FC0;
+    HSD_psAppSRT* appsrt = pp->appsrt;
+    GXColor draw_color;
+    GXColor tail_color;
+    Vec3 last_pos;
+    Vec3 cur_pos;
+    Vec3 prev_pos;
+    Vec3 scale;
+    Mtx temp_mtx;
+    Mtx draw_mtx;
+    f32 ax;
+    f32 ay;
+    u8 tex_base = (pp->kind >> 16) & 0xC;
+
+    if (pp->kind & Tornado) {
+        calcTornadoLastPos(pp, &last_pos.x, &last_pos.y, &last_pos.z);
+    } else {
+        last_pos.x = pp->pos.x - pp->vel.x;
+        last_pos.y = pp->pos.y - pp->vel.y;
+        last_pos.z = pp->pos.z - pp->vel.z;
+    }
+    getClrTrail(pp, &draw_color);
+    tail_color = draw_color;
+
+    if (appsrt->frameNum != HSD_PSDisp_804D6380[0]) {
+        if (appsrt->status != 2) {
+            HSD_MtxSRT(appsrt->mmtx, &appsrt->scale, (Point3d*) &appsrt->rot,
+                       &appsrt->translate, NULL);
+        }
+        if (appsrt->status == 1) {
+            appsrt->status = 2;
+        }
+        PSMTXConcat((MtxPtr) cache, appsrt->mmtx, (MtxPtr) &appsrt->ssx);
+        ax = appsrt->ssx * appsrt->ssx + appsrt->x74 * appsrt->x74 +
+             appsrt->x84 * appsrt->x84;
+        ax = sqrtf(ax);
+        appsrt->x94 = ax;
+        ay = appsrt->ssy * appsrt->ssy + appsrt->x78 * appsrt->x78 +
+             appsrt->x88 * appsrt->x88;
+        ay = sqrtf(ay);
+        appsrt->x98 = ay;
+        if (appsrt->xA2 != 0) {
+            PSMTXIdentity(temp_mtx);
+            temp_mtx[0][3] = appsrt->translate.x;
+            temp_mtx[1][3] = appsrt->translate.y;
+            temp_mtx[2][3] = appsrt->translate.z;
+            PSMTXConcat((MtxPtr) cache, temp_mtx, temp_mtx);
+            HSD_MtxGetScale(temp_mtx, &scale);
+            PSMTXScale((MtxPtr) &appsrt->ssx, scale.x, scale.y, scale.z);
+            appsrt->x70 = temp_mtx[0][3];
+            appsrt->x80 = temp_mtx[1][3];
+            appsrt->x90 = temp_mtx[2][3];
+        }
+        appsrt->frameNum = HSD_PSDisp_804D6380[0];
+    }
+
+    psSetCurrentMtx(3);
+    draw_mtx[0][0] = appsrt->ssx;
+    draw_mtx[0][1] = appsrt->ssy;
+    draw_mtx[0][2] = appsrt->x6C;
+    draw_mtx[0][3] = appsrt->x70;
+    draw_mtx[1][0] = appsrt->x74;
+    draw_mtx[1][1] = appsrt->x78;
+    draw_mtx[1][2] = appsrt->x7C;
+    draw_mtx[1][3] = appsrt->x80;
+    draw_mtx[2][0] = appsrt->x84;
+    draw_mtx[2][1] = appsrt->x88;
+    draw_mtx[2][2] = appsrt->x8C;
+    draw_mtx[2][3] = appsrt->x90;
+    PSMTXMultVec(draw_mtx, &pp->pos, &cur_pos);
+    PSMTXMultVec(draw_mtx, &last_pos, &prev_pos);
+
+    ax = pp->size > 42.5f ? 255.0f : 6.0f * pp->size;
+    if (pp->kind & Trail) {
+        tail_color.a = (u8) ((f32) tail_color.a * pp->trail);
+        if (HSD_PSDisp_804D7910 != (s32) (u8) (s32) ax) {
+            HSD_PSDisp_804D7910 = (u8) (s32) ax;
+            GXSetLineWidth((u8) HSD_PSDisp_804D7910, GX_TO_ONE);
+        }
+        if (pp->kind & DispTexture) {
+            setVtxDesc(2);
+            GXBegin(GX_LINES, GX_VTXFMT2, 2);
+        } else {
+            setVtxDesc(3);
+            GXBegin(GX_LINES, GX_VTXFMT3, 2);
+        }
+        GXWGFifo.f32 = prev_pos.x;
+        GXWGFifo.f32 = prev_pos.y;
+        GXWGFifo.f32 = prev_pos.z;
+        GXWGFifo.u8 = tail_color.r;
+        GXWGFifo.u8 = tail_color.g;
+        GXWGFifo.u8 = tail_color.b;
+        GXWGFifo.u8 = tail_color.a;
+        if (pp->kind & DispTexture) {
+            GXWGFifo.u8 = tex_base;
+        }
+        GXWGFifo.f32 = cur_pos.x;
+        GXWGFifo.f32 = cur_pos.y;
+        GXWGFifo.f32 = cur_pos.z;
+        GXWGFifo.u8 = draw_color.r;
+        GXWGFifo.u8 = draw_color.g;
+        GXWGFifo.u8 = draw_color.b;
+        GXWGFifo.u8 = draw_color.a;
+        if (pp->kind & DispTexture) {
+            GXWGFifo.u8 = tex_base + 1;
+        }
+    } else {
+        if (HSD_PSDisp_804D790C != (s32) (u8) (s32) ax) {
+            HSD_PSDisp_804D790C = (u8) (s32) ax;
+            GXSetPointSize((u8) HSD_PSDisp_804D790C, GX_TO_ONE);
+        }
+        if (pp->kind & DispTexture) {
+            setVtxDesc(0);
+            GXBegin(GX_POINTS, GX_VTXFMT0, 1);
+        } else {
+            setVtxDesc(1);
+            GXBegin(GX_POINTS, GX_VTXFMT1, 1);
+        }
+        GXWGFifo.f32 = cur_pos.x;
+        GXWGFifo.f32 = cur_pos.y;
+        GXWGFifo.f32 = cur_pos.z;
+        if (pp->kind & DispTexture) {
+            GXWGFifo.u8 = tex_base + 1;
+        }
+    }
+}
+
+static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
+{
+    f32* cache = (f32*) &HSD_PSDisp_804D0FC0;
+    HSD_psAppSRT* appsrt;
+    GXColor draw_color;
+    GXColor tail_color;
+    Vec3 last_pos;
+    Vec3 cur_pos;
+    Vec3 prev_pos;
+    Vec3 scale;
+    Mtx temp_mtx;
+    Mtx draw_mtx;
+    f32 ax;
+    f32 ay;
+    f32 bx;
+    f32 by;
+    f32 angle;
+    u8 tex_base = (pp->kind >> 16) & 0xC;
+
+    if (pp->kind & Tornado) {
+        calcTornadoLastPos(pp, &last_pos.x, &last_pos.y, &last_pos.z);
+    } else {
+        last_pos.x = pp->pos.x - pp->vel.x;
+        last_pos.y = pp->pos.y - pp->vel.y;
+        last_pos.z = pp->pos.z - pp->vel.z;
+    }
+    appsrt = pp->appsrt;
+    if (appsrt->frameNum != HSD_PSDisp_804D6380[0]) {
+        if (appsrt->status != 2) {
+            HSD_MtxSRT(appsrt->mmtx, &appsrt->scale, (Point3d*) &appsrt->rot,
+                       &appsrt->translate, NULL);
+        }
+        if (appsrt->status == 1) {
+            appsrt->status = 2;
+        }
+        PSMTXConcat((MtxPtr) cache, appsrt->mmtx, (MtxPtr) &appsrt->ssx);
+        ax = appsrt->ssx * appsrt->ssx + appsrt->x74 * appsrt->x74 +
+             appsrt->x84 * appsrt->x84;
+        ax = sqrtf(ax);
+        appsrt->x94 = ax;
+        ay = appsrt->ssy * appsrt->ssy + appsrt->x78 * appsrt->x78 +
+             appsrt->x88 * appsrt->x88;
+        ay = sqrtf(ay);
+        appsrt->x98 = ay;
+        if (appsrt->xA2 != 0) {
+            PSMTXIdentity(temp_mtx);
+            temp_mtx[0][3] = appsrt->translate.x;
+            temp_mtx[1][3] = appsrt->translate.y;
+            temp_mtx[2][3] = appsrt->translate.z;
+            PSMTXConcat((MtxPtr) cache, temp_mtx, temp_mtx);
+            HSD_MtxGetScale(temp_mtx, &scale);
+            PSMTXScale((MtxPtr) &appsrt->ssx, scale.x, scale.y, scale.z);
+            appsrt->x70 = temp_mtx[0][3];
+            appsrt->x80 = temp_mtx[1][3];
+            appsrt->x90 = temp_mtx[2][3];
+        }
+        appsrt->frameNum = HSD_PSDisp_804D6380[0];
+    }
+    psSetCurrentMtx(3);
+    draw_mtx[0][0] = appsrt->ssx;
+    draw_mtx[0][1] = appsrt->ssy;
+    draw_mtx[0][2] = appsrt->x6C;
+    draw_mtx[0][3] = appsrt->x70;
+    draw_mtx[1][0] = appsrt->x74;
+    draw_mtx[1][1] = appsrt->x78;
+    draw_mtx[1][2] = appsrt->x7C;
+    draw_mtx[1][3] = appsrt->x80;
+    draw_mtx[2][0] = appsrt->x84;
+    draw_mtx[2][1] = appsrt->x88;
+    draw_mtx[2][2] = appsrt->x8C;
+    draw_mtx[2][3] = appsrt->x90;
+    cur_pos.x = draw_mtx[0][0] * pp->pos.x + draw_mtx[0][1] * pp->pos.y +
+                draw_mtx[0][2] * pp->pos.z + draw_mtx[0][3];
+    cur_pos.y = draw_mtx[1][0] * pp->pos.x + draw_mtx[1][1] * pp->pos.y +
+                draw_mtx[1][2] * pp->pos.z + draw_mtx[1][3];
+    cur_pos.z = draw_mtx[2][0] * pp->pos.x + draw_mtx[2][1] * pp->pos.y +
+                draw_mtx[2][2] * pp->pos.z + draw_mtx[2][3];
+    prev_pos.x = draw_mtx[0][0] * last_pos.x + draw_mtx[0][1] * last_pos.y +
+                 draw_mtx[0][2] * last_pos.z + draw_mtx[0][3];
+    prev_pos.y = draw_mtx[1][0] * last_pos.x + draw_mtx[1][1] * last_pos.y +
+                 draw_mtx[1][2] * last_pos.z + draw_mtx[1][3];
+    prev_pos.z = draw_mtx[2][0] * last_pos.x + draw_mtx[2][1] * last_pos.y +
+                 draw_mtx[2][2] * last_pos.z + draw_mtx[2][3];
+    ax = appsrt->x94 * pp->size;
+    ay = 0.0f;
+    bx = 0.0f;
+    by = -appsrt->x98 * pp->size;
+    if (texform == NULL) {
+        bx = ax;
+        ay = -by;
+    }
+    if ((pp->kind & Trail) || (pp->kind & DirVec)) {
+        f32 vf1 = 0.0f;
+        f32 vf2 = 0.0f;
+        if (0.0f == cache[0x18]) {
+            Vec3 d;
+            f32 x84 = appsrt->x84;
+            f32 x88 = appsrt->x88;
+            f32 x8C = appsrt->x8C;
+            f32 x90 = appsrt->x90;
+            f32 x74 = appsrt->x74;
+            f32 x78 = appsrt->x78;
+            f32 x7C = appsrt->x7C;
+            f32 x80 = appsrt->x80;
+            f64 d830 = (f64) (cache[0x1A] * x90);
+            f64 d840 = (f64) (cache[0x1C] * x84);
+            f64 d850 = (f64) (cache[0x1C] * x88);
+            f64 d860 = (f64) (cache[0x1C] * x8C);
+            f64 d870 = (f64) (cache[0x1C] * x90);
+            f32 w0 =
+                x90 + (x8C * pp->pos.z + (x84 * pp->pos.x + x88 * pp->pos.y));
+            f32 f16 = cache[0x19] * appsrt->x6C + cache[0x1A] * x8C;
+            f32 s808 = cache[0x19] * appsrt->ssx + cache[0x1A] * x84;
+            f32 s804 = cache[0x19] * appsrt->ssy + cache[0x1A] * x88;
+            f32 f20 = cache[0x19] * appsrt->x70 + (f32) d830;
+            f32 f12 = cache[0x1B] * x74 + (f32) d840;
+            f32 f8 = cache[0x1B] * x78 + (f32) d850;
+            f32 f11 = cache[0x1B] * x7C + (f32) d860;
+            f32 f13 = cache[0x1B] * x80 + (f32) d870;
+            if (pp->kind & Tornado) {
+                calcTornadoLastPos(pp, &d.x, &d.y, &d.z);
+            } else {
+                d.x = pp->pos.x - pp->vel.x;
+                d.y = pp->pos.y - pp->vel.y;
+                d.z = pp->pos.z - pp->vel.z;
+            }
+            if (cache[0x18] != w0) {
+                f32 w0inv = 1.0f / w0;
+                f32 w1 = x90 + (x8C * d.z + (x84 * d.x + x88 * d.y));
+                if (cache[0x18] != w1) {
+                    f32 w1inv = 1.0f / w1;
+                    vf1 = w0inv *
+                              (f20 + (f16 * pp->pos.z +
+                                      (s808 * pp->pos.x + s804 * pp->pos.y))) -
+                          w1inv *
+                              (f20 + (f16 * d.z + (s808 * d.x + s804 * d.y)));
+                    vf2 =
+                        w0inv * (f13 + (f11 * pp->pos.z +
+                                        (f12 * pp->pos.x + f8 * pp->pos.y))) -
+                        w1inv * (f13 + (f11 * d.z + (f12 * d.x + f8 * d.y)));
+                }
+            }
+        } else {
+            f32 s800 = cache[0x19] * appsrt->ssx + cache[0x1A];
+            f32 s7FC = cache[0x19] * appsrt->ssy + cache[0x1A];
+            f32 s7F8 = cache[0x19] * appsrt->x6C + cache[0x1A];
+            f32 f17 = cache[0x1B] * appsrt->x74 + cache[0x1C];
+            f32 f18 = cache[0x1B] * appsrt->x78 + cache[0x1C];
+            f32 f20 = cache[0x1B] * appsrt->x7C + cache[0x1C];
+            if (pp->kind & Tornado) {
+                Vec3 t;
+                calcTornadoLastPos(pp, &t.x, &t.y, &t.z);
+                {
+                    f32 dy = pp->pos.y - t.y;
+                    f32 dx = pp->pos.x - t.x;
+                    f32 dz = pp->pos.z - t.z;
+                    vf1 = s7F8 * dz + (s800 * dx + s7FC * dy);
+                    vf2 = f20 * dz + (f17 * dx + f18 * dy);
+                }
+            } else {
+                f32 vy = pp->vel.y;
+                f32 vx = pp->vel.x;
+                f32 vz = pp->vel.z;
+                vf1 = s7F8 * vz + (s800 * vx + s7FC * vy);
+                vf2 = f20 * vz + (f17 * vx + f18 * vy);
+            }
+        }
+        if (fabsf(vf2) < 0.00001f) {
+            angle = (-vf1 >= 0.0) ? 1.5707964f : -1.5707964f;
+        } else {
+            angle = atan2f(-vf1, vf2);
+        }
+        if (pp->kind & DirVec) {
+            angle += pp->rotate;
+        }
+    } else {
+        angle = pp->rotate;
+    }
+    if (fabsf(angle) > 0.01f) {
+        f32 c = cosf(angle);
+        f32 s = sinf(angle);
+        f32 old_ax = ax;
+        f32 old_bx = bx;
+        ax = c * ax - s * ay;
+        ay = s * old_ax + c * ay;
+        bx = c * bx - s * by;
+        by = s * old_bx + c * by;
+    }
+    if (pp->kind & Trail) {
+        getClrTrail(pp, &draw_color);
+        tail_color = draw_color;
+        tail_color.a = (u8) ((f32) tail_color.a * pp->trail);
+        if (pp->kind & DispTexture) {
+            setVtxDesc(2);
+            GXBegin(GX_QUADS, GX_VTXFMT2, 4U);
+        } else {
+            setVtxDesc(3);
+            GXBegin(GX_QUADS, GX_VTXFMT3, 4U);
+        }
+        GXWGFifo.f32 = prev_pos.x - ax;
+        GXWGFifo.f32 = prev_pos.y - ay;
+        GXWGFifo.f32 = prev_pos.z;
+        GXWGFifo.u8 = tail_color.r;
+        GXWGFifo.u8 = tail_color.g;
+        GXWGFifo.u8 = tail_color.b;
+        GXWGFifo.u8 = tail_color.a;
+        if (pp->kind & DispTexture) {
+            GXWGFifo.u8 = tex_base + 0;
+        }
+        GXWGFifo.f32 = cur_pos.x - bx;
+        GXWGFifo.f32 = cur_pos.y - by;
+        GXWGFifo.f32 = cur_pos.z;
+        GXWGFifo.u8 = draw_color.r;
+        GXWGFifo.u8 = draw_color.g;
+        GXWGFifo.u8 = draw_color.b;
+        GXWGFifo.u8 = draw_color.a;
+        if (pp->kind & DispTexture) {
+            GXWGFifo.u8 = tex_base + 1;
+        }
+        GXWGFifo.f32 = cur_pos.x + ax;
+        GXWGFifo.f32 = cur_pos.y + ay;
+        GXWGFifo.f32 = cur_pos.z;
+        GXWGFifo.u8 = draw_color.r;
+        GXWGFifo.u8 = draw_color.g;
+        GXWGFifo.u8 = draw_color.b;
+        GXWGFifo.u8 = draw_color.a;
+        if (pp->kind & DispTexture) {
+            GXWGFifo.u8 = tex_base + 2;
+        }
+        GXWGFifo.f32 = prev_pos.x + bx;
+        GXWGFifo.f32 = prev_pos.y + by;
+        GXWGFifo.f32 = prev_pos.z;
+        GXWGFifo.u8 = tail_color.r;
+        GXWGFifo.u8 = tail_color.g;
+        GXWGFifo.u8 = tail_color.b;
+        GXWGFifo.u8 = tail_color.a;
+        if (pp->kind & DispTexture) {
+            GXWGFifo.u8 = tex_base + 3;
+        }
+    } else if (texform != NULL) {
+        u8* it = texform;
+        u32 primitive_count = *(u32*) it;
+        it += sizeof(u32);
+        while (primitive_count-- != 0) {
+            GXPrimitive prim = it[0];
+            u8 count = it[1];
+            u8 vtx_count = count;
+            it += 4;
+            if (pp->kind & DispTexture) {
+                setVtxDesc(4);
+                GXBegin(prim, GX_VTXFMT4, count);
+            } else {
+                setVtxDesc(1);
+                GXBegin(prim, GX_VTXFMT1, count);
+            }
+            while (vtx_count-- != 0) {
+                f32 s = *(f32*) &it[0];
+                f32 t = *(f32*) &it[4];
+                it += 8;
+                if (pp->kind & TexFlipS) {
+                    s = 1.0f - s;
+                }
+                if (pp->kind & TexFlipT) {
+                    t = 1.0f - t;
+                }
+                GXWGFifo.f32 = cur_pos.x + ax * (2.0f * (s - 0.5f)) +
+                               bx * (2.0f * (t - 0.5f));
+                GXWGFifo.f32 = cur_pos.y + ay * (2.0f * (s - 0.5f)) +
+                               by * (2.0f * (t - 0.5f));
+                GXWGFifo.f32 = cur_pos.z;
+                if (pp->kind & DispTexture) {
+                    GXWGFifo.f32 = s;
+                    GXWGFifo.f32 = t;
+                }
+            }
+        }
+    } else {
+        if (pp->kind & DispTexture) {
+            setVtxDesc(0);
+            GXBegin(GX_QUADS, GX_VTXFMT0, 4U);
+        } else {
+            setVtxDesc(1);
+            GXBegin(GX_QUADS, GX_VTXFMT1, 4U);
+        }
+        GXWGFifo.f32 = cur_pos.x - ax;
+        GXWGFifo.f32 = cur_pos.y - ay;
+        GXWGFifo.f32 = cur_pos.z;
+        if (pp->kind & DispTexture) {
+            GXWGFifo.u8 = tex_base + 0;
+        }
+        GXWGFifo.f32 = cur_pos.x - bx;
+        GXWGFifo.f32 = cur_pos.y - by;
+        GXWGFifo.f32 = cur_pos.z;
+        if (pp->kind & DispTexture) {
+            GXWGFifo.u8 = tex_base + 1;
+        }
+        GXWGFifo.f32 = cur_pos.x + ax;
+        GXWGFifo.f32 = cur_pos.y + ay;
+        GXWGFifo.f32 = cur_pos.z;
+        if (pp->kind & DispTexture) {
+            GXWGFifo.u8 = tex_base + 2;
+        }
+        GXWGFifo.f32 = cur_pos.x + bx;
+        GXWGFifo.f32 = cur_pos.y + by;
+        GXWGFifo.f32 = cur_pos.z;
+        if (pp->kind & DispTexture) {
+            GXWGFifo.u8 = tex_base + 3;
+        }
+    }
+}
+
 void psDispParticles(s32 arg0, u32 arg1)
 {
-    s32 sp8BC;
-    s32 sp8B8;
     f64 sp8B0;
-    f64 sp8A8;
-    f64 sp8A0;
-    f64 sp898;
-    f64 sp890;
-    f64 sp888;
-    f64 sp880;
-    f64 sp878;
-    f64 sp870;
-    f64 sp868;
-    f64 sp860;
-    f64 sp858;
-    f64 sp850;
-    f64 sp848;
-    f64 sp840;
-    f64 sp838;
-    f64 sp830;
-    f64 sp828;
-    f64 sp820;
     f64 sp818;
-    f32 sp814;
-    f32 sp810;
-    f32 sp80C;
-    f32 sp808;
-    f32 sp804;
-    f32 sp800;
-    f32 sp7FC;
-    f32 sp7F8;
     void* sp7F4;
     void* sp7F0;
-    s32 sp7EC;
-    s32 sp7E8;
     s32* sp7E4;
     s32* sp7E0;
     s32* sp7DC;
@@ -637,7 +1592,6 @@ void psDispParticles(s32 arg0, u32 arg1)
     u32 sp798;
     s32 sp794;
     u16 sp790;
-    u32 sp78C;
     GXTlutFmt sp788;
     GXTexObj sp764;
     HSD_Particle* sp760;
@@ -663,105 +1617,11 @@ void psDispParticles(s32 arg0, u32 arg1)
     s32 sp6D0;
     s32 sp6CC;
     s32 sp6C8;
-    u8 sp6C4;
-    u8 sp6C2;
-    u8 sp6C1;
-    u8 sp6C0;
-    u8 sp6BE;
-    u8 sp6BD;
-    u8 sp6BC;
     s32 sp6B8;
     s32 sp6B4;
     s32 sp6B0;
     s32 sp6AC;
     s32 sp6A8;
-    u8 sp6A4;
-    u8 sp6A3;
-    u8 sp6A0;
-    u8 sp69C;
-    u8 sp698;
-    u8 sp697;
-    u8 sp696;
-    u8 sp695;
-    u8 sp694;
-    f32 sp690;
-    f32 sp68C;
-    f32 sp688;
-    Point3d sp67C;
-    f32 sp678;
-    f32 sp668;
-    f32 sp644;
-    f32 sp640;
-    f32 sp63C;
-    f32 sp638;
-    f32 sp634;
-    f32 sp630;
-    s32 sp5B4;
-    s8 sp5B3;
-    s8 sp5B2;
-    s8 sp5B1;
-    u8 sp5B0;
-    f32 sp438;
-    f32 sp434;
-    f32 sp430;
-    f32 sp374;
-    f32 sp370;
-    f32 sp36C;
-    u8 sp36B;
-    u8 sp36A;
-    u8 sp369;
-    u8 sp368;
-    f32 sp358;
-    f32 sp354;
-    f32 sp350;
-    f32 sp34C;
-    f32 sp348;
-    f32 sp344;
-    f32 sp310;
-    f32 sp30C;
-    f32 sp308;
-    Point3d sp2FC;
-    f32 sp2EC;
-    f32 sp2E8;
-    f32 sp2E4;
-    f32 sp2E0;
-    f32 sp2DC;
-    f32 sp2D8;
-    f32 sp2D4;
-    f32 sp2D0;
-    f32 sp2BC;
-    f32 sp2B8;
-    f32 sp2B4;
-    u8 sp2B3;
-    u8 sp2B2;
-    u8 sp2B1;
-    u8 sp2B0;
-    f32 sp294;
-    f32 sp290;
-    f32 sp28C;
-    f32 sp258;
-    f32 sp254;
-    f32 sp250;
-    f32 sp24C;
-    f32 sp248;
-    f32 sp244;
-    f32 sp240;
-    f32 sp23C;
-    u8 sp238;
-    u8 sp208;
-    u8 sp204;
-    f32 sp1D8;
-    f32 sp1D4;
-    f32 sp1D0;
-    f32 sp1CC;
-    u8 sp1C8;
-    f32 sp184;
-    f32 sp180;
-    f32 sp110;
-    f32 sp10C;
-    u8 sp108;
-    f32 spD4;
-    f32 spD0;
     u32 prev_kind;
     s32 var_r16;
     s32 var_r15;
@@ -798,12 +1658,6 @@ void psDispParticles(s32 arg0, u32 arg1)
     sp7E0 = &sp6DC;
     sp7E4 = &sp6E0;
     sp8B0 = 0.0;
-    sp8A8 = 4503599627370496.0;
-    sp8A0 = 0.01;
-    sp898 = 0.00001;
-    sp878 = 1.0;
-    sp828 = 6.0;
-    sp820 = 42.5;
     sp818 = 0.000001;
     sp7B4 = 0;
     cache = (f32*) &HSD_PSDisp_804D0FC0;
@@ -819,36 +1673,12 @@ void psDispParticles(s32 arg0, u32 arg1)
                 HSD_PSTexGroup* tex_group = NULL;
                 HSD_PSFormGroup* form_group = NULL;
                 u8* form = NULL;
-                GXColor prim_color;
-                GXColor env_color;
-                GXColor mat_color;
-                GXColor amb_color;
-                GXColor draw_color;
-                GXColor tail_color;
-                HSD_LObj* lobj;
-                HSD_psAppSRT* appsrt;
                 void* image;
                 void* tlut;
                 u32 blend_mode;
                 u8 alpha0;
                 u8 alpha1;
-                Vec3 last_pos;
-                Vec3 cur_pos;
-                Vec3 prev_pos;
-                Vec3 view_cur;
-                Vec3 view_prev;
-                Vec3 right;
-                Vec3 up;
-                Vec3 scale;
                 Mtx temp_mtx;
-                Mtx draw_mtx;
-                f32 ax;
-                f32 ay;
-                f32 bx;
-                f32 by;
-                f32 angle;
-                u8 tex_base;
-                u32 chan_state;
                 u32 wrap_bits;
                 GXTexWrapMode wrap_s;
                 GXTexWrapMode wrap_t;
@@ -960,10 +1790,7 @@ void psDispParticles(s32 arg0, u32 arg1)
                     sp758 = HSD_PSDisp_803B9628[11];
                     GXLoadPosMtxImm((MtxPtr) &sp72C, 3);
                     HSD_PSDisp_804D7948 = 3;
-                    if (HSD_PSDisp_804D7948 != 0) {
-                        HSD_PSDisp_804D7948 = 0;
-                        GXSetCurrentMtx(0);
-                    }
+                    psSetCurrentMtx(0);
                     GXEnableTexOffsets(GX_TEXCOORD0, GX_TRUE, GX_TRUE);
                     GXSetCullMode(GX_CULL_BACK);
                     GXSetArray(GX_VA_TEX0,
@@ -999,22 +1826,7 @@ void psDispParticles(s32 arg0, u32 arg1)
                 }
 
                 blend_mode = (pp->kind >> 0x16U) & 3;
-                if (HSD_PSDisp_804D792C != (s32) blend_mode) {
-                    HSD_PSDisp_804D792C = blend_mode;
-                    switch (blend_mode) {
-                    case 0:
-                        GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA,
-                                       GX_BL_INVSRCALPHA, GX_LO_CLEAR);
-                        break;
-                    case 1:
-                        GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_ONE,
-                                       GX_LO_CLEAR);
-                        break;
-                    default:
-                        OSReport((char*) &HSD_PSDisp_8040C300 + 0x70);
-                        break;
-                    }
-                }
+                setBlendMode(blend_mode);
 
                 if (pp->aCmpCount != 0) {
                     s32 scale = (65536 * pp->aCmpRemain) / pp->aCmpCount;
@@ -1042,150 +1854,9 @@ void psDispParticles(s32 arg0, u32 arg1)
                 }
 
                 psSetupTev((u32*) pp);
-                chan_state = pp->kind & 0x80100000;
-                if ((u32) HSD_PSDisp_804D7930 != chan_state) {
-                    HSD_PSDisp_804D7930 = chan_state;
-                    GXSetNumChans(1U);
-                    if (chan_state != (DispLighting | Trail)) {
-                        if ((s32) chan_state < (s32) (DispLighting | Trail)) {
-                            if ((s32) chan_state < 0x80000001) {
-                                GXAttnFn attn_fn =
-                                    HSD_LObjGetLightMaskAttnFunc() != 0
-                                        ? GX_AF_SPOT
-                                        : GX_AF_NONE;
-                                GXSetChanCtrl(GX_COLOR0, GX_TRUE, GX_SRC_REG,
-                                              GX_SRC_REG,
-                                              HSD_LObjGetLightMaskDiffuse(),
-                                              GX_DF_NONE, attn_fn);
-                                GXSetChanCtrl(GX_ALPHA0, GX_FALSE, GX_SRC_REG,
-                                              GX_SRC_REG, 0U, GX_DF_NONE,
-                                              GX_AF_NONE);
-                            } else {
-                                GXSetChanCtrl(GX_COLOR0A0, GX_FALSE,
-                                              GX_SRC_REG, GX_SRC_REG, 0U,
-                                              GX_DF_NONE, GX_AF_NONE);
-                            }
-                        } else if (chan_state != Trail) {
-                            GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_REG,
-                                          GX_SRC_REG, 0U, GX_DF_NONE,
-                                          GX_AF_NONE);
-                        } else {
-                            GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_VTX,
-                                          GX_SRC_VTX, 0U, GX_DF_NONE,
-                                          GX_AF_NONE);
-                        }
-                    } else {
-                        GXAttnFn attn_fn = HSD_LObjGetLightMaskAttnFunc() != 0
-                                               ? GX_AF_SPOT
-                                               : GX_AF_NONE;
-                        GXSetChanCtrl(GX_COLOR0, GX_TRUE, GX_SRC_REG,
-                                      GX_SRC_REG,
-                                      HSD_LObjGetLightMaskDiffuse(),
-                                      GX_DF_NONE, attn_fn);
-                        GXSetChanCtrl(GX_ALPHA0, GX_FALSE, GX_SRC_VTX,
-                                      GX_SRC_VTX, 0U, GX_DF_NONE, GX_AF_NONE);
-                    }
-                }
-
-                if (pp->kind & DispLighting) {
-                    getColorMatAmb_noinline(pp, &mat_color, &amb_color);
-                    if (pp->kind & PrimEnv) {
-                        prim_color.r = 0xFF;
-                        prim_color.g = 0xFF;
-                        prim_color.b = 0xFF;
-                        prim_color.a = 0xFF;
-                    } else {
-                        getColorPrimEnv(pp, &prim_color, &env_color);
-                        amb_color.r =
-                            (u8) (((s32) (amb_color.r * prim_color.r)) >> 8);
-                        amb_color.g =
-                            (u8) (((s32) (amb_color.g * prim_color.g)) >> 8);
-                        amb_color.b =
-                            (u8) (((s32) (amb_color.b * prim_color.b)) >> 8);
-                    }
-                    if ((prim_color.r != HSD_PSDisp_804D7934.r) ||
-                        (prim_color.g != HSD_PSDisp_804D7934.g) ||
-                        (prim_color.b != HSD_PSDisp_804D7934.b))
-                    {
-                        HSD_PSDisp_804D7934.r = prim_color.r;
-                        HSD_PSDisp_804D7934.g = prim_color.g;
-                        HSD_PSDisp_804D7934.b = prim_color.b;
-                        sp6C8 = *(s32*) &HSD_PSDisp_804D7934;
-                        GXSetChanMatColor(GX_COLOR0, *(GXColor*) sp7D0);
-                    }
-                    lobj = HSD_LObjGetActiveByID(GX_MAX_LIGHT);
-                    if (lobj != NULL) {
-                        HSD_MulColor(&amb_color, &lobj->color, &amb_color);
-                    } else {
-                        amb_color.r = 0;
-                        amb_color.g = 0;
-                        amb_color.b = 0;
-                    }
-                    if ((amb_color.r != HSD_PSDisp_804D7938.r) ||
-                        (amb_color.g != HSD_PSDisp_804D7938.g) ||
-                        (amb_color.b != HSD_PSDisp_804D7938.b))
-                    {
-                        HSD_PSDisp_804D7938.r = amb_color.r;
-                        HSD_PSDisp_804D7938.g = amb_color.g;
-                        HSD_PSDisp_804D7938.b = amb_color.b;
-                        sp6CC = *(s32*) &HSD_PSDisp_804D7938;
-                        GXSetChanAmbColor(GX_COLOR0, *(GXColor*) sp7CC);
-                    }
-                }
-
-                getColorPrimEnv(pp, &prim_color, &env_color);
-                if ((pp->kind & PrimEnv) ||
-                    (!(pp->kind & DispLighting) && !(pp->kind & Trail)))
-                {
-                    if ((HSD_PSDisp_804D793C.r != prim_color.r) ||
-                        (HSD_PSDisp_804D793C.g != prim_color.g) ||
-                        (HSD_PSDisp_804D793C.b != prim_color.b) ||
-                        (HSD_PSDisp_804D793C.a != prim_color.a))
-                    {
-                        HSD_PSDisp_804D793C = prim_color;
-                        sp6A8 = *(s32*) &HSD_PSDisp_804D793C;
-                        GXSetTevColor(GX_TEVREG0, *(GXColor*) sp7C8);
-                    }
-                    if (pp->kind & PrimEnv) {
-                        if ((HSD_PSDisp_804D7940.r != env_color.r) ||
-                            (HSD_PSDisp_804D7940.g != env_color.g) ||
-                            (HSD_PSDisp_804D7940.b != env_color.b) ||
-                            (HSD_PSDisp_804D7940.a != env_color.a))
-                        {
-                            HSD_PSDisp_804D7940 = env_color;
-                            sp6AC = *(s32*) &HSD_PSDisp_804D7940;
-                            GXSetTevColor(GX_TEVREG1, *(GXColor*) sp7C4);
-                        }
-                    } else if ((HSD_PSDisp_804D7940.r != 0) ||
-                               (HSD_PSDisp_804D7940.g != 0) ||
-                               (HSD_PSDisp_804D7940.b != 0) ||
-                               (HSD_PSDisp_804D7940.a != 0))
-                    {
-                        HSD_PSDisp_804D7940.r = 0;
-                        HSD_PSDisp_804D7940.g = 0;
-                        HSD_PSDisp_804D7940.b = 0;
-                        HSD_PSDisp_804D7940.a = 0;
-                        sp6B0 = *(s32*) &HSD_PSDisp_804D7940;
-                        GXSetTevColor(GX_TEVREG1, *(GXColor*) sp7C0);
-                    }
-                }
-                if (pp->kind & DispLighting) {
-                    getColorMatAmb_noinline(pp, &mat_color, &amb_color);
-                    if (!(pp->kind & PrimEnv)) {
-                        mat_color.a =
-                            (u8) (((s32) (mat_color.a * prim_color.a)) >> 8);
-                    }
-                    if ((HSD_PSDisp_804D7944.r != mat_color.r) ||
-                        (HSD_PSDisp_804D7944.g != mat_color.g) ||
-                        (HSD_PSDisp_804D7944.b != mat_color.b) ||
-                        (HSD_PSDisp_804D7944.a != mat_color.a))
-                    {
-                        HSD_PSDisp_804D7944 = mat_color;
-                        sp6B8 = *(s32*) &HSD_PSDisp_804D7944;
-                        GXSetTevColor(GX_TEVREG2, *(GXColor*) sp7B8);
-                    }
-                }
-
+                setupChanCtrl(pp);
+                setupChanReg(pp);
+                setupTevReg(pp);
                 if (sp7AC != (pp->kind & TexEdge)) {
                     sp7AC = pp->kind & TexEdge;
                     GXSetZMode(GX_TRUE, GX_LEQUAL,
@@ -1319,180 +1990,11 @@ void psDispParticles(s32 arg0, u32 arg1)
                     }
                 }
 
-                if (pp->kind & Tornado) {
-                    calcTornadoLastPos(pp, &last_pos.x, &last_pos.y,
-                                       &last_pos.z);
-                } else {
-                    last_pos.x = pp->pos.x - pp->vel.x;
-                    last_pos.y = pp->pos.y - pp->vel.y;
-                    last_pos.z = pp->pos.z - pp->vel.z;
-                }
-
-                tex_base = (pp->kind >> 16) & 0xC;
                 if (pp->kind & DispPoint) {
-                    draw_color = prim_color;
-                    if (pp->kind & PrimEnv) {
-                        draw_color.r = 0xFF;
-                        draw_color.g = 0xFF;
-                        draw_color.b = 0xFF;
-                        draw_color.a = 0xFF;
-                    }
-                    tail_color = draw_color;
-                    cur_pos = pp->pos;
-                    prev_pos = last_pos;
-                    appsrt = pp->appsrt;
-                    if (appsrt != NULL) {
-                        if (appsrt->frameNum != HSD_PSDisp_804D6380[0]) {
-                            if (appsrt->status != 2) {
-                                HSD_MtxSRT(appsrt->mmtx, &appsrt->scale,
-                                           (Point3d*) &appsrt->rot,
-                                           &appsrt->translate, NULL);
-                            }
-                            if (appsrt->status == 1) {
-                                appsrt->status = 2;
-                            }
-                            PSMTXConcat((MtxPtr) cache, appsrt->mmtx,
-                                        (MtxPtr) &appsrt->ssx);
-                            ax = appsrt->ssx * appsrt->ssx +
-                                 appsrt->x74 * appsrt->x74 +
-                                 appsrt->x84 * appsrt->x84;
-                            if (ax > (f32) sp8B0) {
-                                double e = __frsqrte((double) ax);
-                                e = 0.5 * e * (3.0 - (double) ax * e * e);
-                                e = 0.5 * e * (3.0 - (double) ax * e * e);
-                                e = 0.5 * e * (3.0 - (double) ax * e * e);
-                                ax = (f32) ((double) ax * e);
-                            }
-                            appsrt->x94 = ax;
-                            ay = appsrt->ssy * appsrt->ssy +
-                                 appsrt->x78 * appsrt->x78 +
-                                 appsrt->x88 * appsrt->x88;
-                            if (ay > (f32) sp8B0) {
-                                double e = __frsqrte((double) ay);
-                                e = 0.5 * e * (3.0 - (double) ay * e * e);
-                                e = 0.5 * e * (3.0 - (double) ay * e * e);
-                                e = 0.5 * e * (3.0 - (double) ay * e * e);
-                                ay = (f32) ((double) ay * e);
-                            }
-                            appsrt->x98 = ay;
-                            if (appsrt->xA2 != 0) {
-                                PSMTXIdentity(temp_mtx);
-                                temp_mtx[0][3] = appsrt->translate.x;
-                                temp_mtx[1][3] = appsrt->translate.y;
-                                temp_mtx[2][3] = appsrt->translate.z;
-                                PSMTXConcat((MtxPtr) cache, temp_mtx,
-                                            temp_mtx);
-                                HSD_MtxGetScale(temp_mtx, &scale);
-                                PSMTXScale((MtxPtr) &appsrt->ssx, scale.x,
-                                           scale.y, scale.z);
-                                appsrt->x70 = temp_mtx[0][3];
-                                appsrt->x80 = temp_mtx[1][3];
-                                appsrt->x90 = temp_mtx[2][3];
-                            }
-                            appsrt->frameNum = HSD_PSDisp_804D6380[0];
-                        }
-                        if (HSD_PSDisp_804D7948 != 3) {
-                            HSD_PSDisp_804D7948 = 3;
-                            GXSetCurrentMtx(3U);
-                        }
-                        draw_mtx[0][0] = appsrt->ssx;
-                        draw_mtx[0][1] = appsrt->ssy;
-                        draw_mtx[0][2] = appsrt->x6C;
-                        draw_mtx[0][3] = appsrt->x70;
-                        draw_mtx[1][0] = appsrt->x74;
-                        draw_mtx[1][1] = appsrt->x78;
-                        draw_mtx[1][2] = appsrt->x7C;
-                        draw_mtx[1][3] = appsrt->x80;
-                        draw_mtx[2][0] = appsrt->x84;
-                        draw_mtx[2][1] = appsrt->x88;
-                        draw_mtx[2][2] = appsrt->x8C;
-                        draw_mtx[2][3] = appsrt->x90;
-                        cur_pos.x = draw_mtx[0][0] * pp->pos.x +
-                                    draw_mtx[0][1] * pp->pos.y +
-                                    draw_mtx[0][2] * pp->pos.z +
-                                    draw_mtx[0][3];
-                        cur_pos.y = draw_mtx[1][0] * pp->pos.x +
-                                    draw_mtx[1][1] * pp->pos.y +
-                                    draw_mtx[1][2] * pp->pos.z +
-                                    draw_mtx[1][3];
-                        cur_pos.z = draw_mtx[2][0] * pp->pos.x +
-                                    draw_mtx[2][1] * pp->pos.y +
-                                    draw_mtx[2][2] * pp->pos.z +
-                                    draw_mtx[2][3];
-                        prev_pos.x = draw_mtx[0][0] * last_pos.x +
-                                     draw_mtx[0][1] * last_pos.y +
-                                     draw_mtx[0][2] * last_pos.z +
-                                     draw_mtx[0][3];
-                        prev_pos.y = draw_mtx[1][0] * last_pos.x +
-                                     draw_mtx[1][1] * last_pos.y +
-                                     draw_mtx[1][2] * last_pos.z +
-                                     draw_mtx[1][3];
-                        prev_pos.z = draw_mtx[2][0] * last_pos.x +
-                                     draw_mtx[2][1] * last_pos.y +
-                                     draw_mtx[2][2] * last_pos.z +
-                                     draw_mtx[2][3];
-                        ax = (pp->size > (f32) sp820) ? 255.0f
-                                                      : (f32) sp828 * pp->size;
-                        if (pp->kind & Trail) {
-                            tail_color.a =
-                                (u8) ((f32) tail_color.a * pp->trail);
-                            if (HSD_PSDisp_804D7910 != (s32) (u8) (s32) ax) {
-                                HSD_PSDisp_804D7910 = (u8) (s32) ax;
-                                GXSetLineWidth((u8) HSD_PSDisp_804D7910,
-                                               GX_TO_ONE);
-                            }
-                            if (pp->kind & DispTexture) {
-                                setVtxDesc(2);
-                                GXBegin(GX_LINES, GX_VTXFMT2, 2U);
-                            } else {
-                                setVtxDesc(3);
-                                GXBegin(GX_LINES, GX_VTXFMT3, 2U);
-                            }
-                            GXWGFifo.f32 = prev_pos.x;
-                            GXWGFifo.f32 = prev_pos.y;
-                            GXWGFifo.f32 = prev_pos.z;
-                            GXWGFifo.u8 = tail_color.r;
-                            GXWGFifo.u8 = tail_color.g;
-                            GXWGFifo.u8 = tail_color.b;
-                            GXWGFifo.u8 = tail_color.a;
-                            if (pp->kind & DispTexture) {
-                                GXWGFifo.u8 = tex_base + 0;
-                            }
-                            GXWGFifo.f32 = cur_pos.x;
-                            GXWGFifo.f32 = cur_pos.y;
-                            GXWGFifo.f32 = cur_pos.z;
-                            GXWGFifo.u8 = draw_color.r;
-                            GXWGFifo.u8 = draw_color.g;
-                            GXWGFifo.u8 = draw_color.b;
-                            GXWGFifo.u8 = draw_color.a;
-                            if (pp->kind & DispTexture) {
-                                GXWGFifo.u8 = tex_base + 1;
-                            }
-                        } else {
-                            if (HSD_PSDisp_804D790C != (s32) (u8) (s32) ax) {
-                                HSD_PSDisp_804D790C = (u8) (s32) ax;
-                                GXSetPointSize((u8) HSD_PSDisp_804D790C,
-                                               GX_TO_ONE);
-                            }
-                            if (pp->kind & DispTexture) {
-                                setVtxDesc(0);
-                                GXBegin(GX_POINTS, GX_VTXFMT0, 1U);
-                            } else {
-                                setVtxDesc(1);
-                                GXBegin(GX_POINTS, GX_VTXFMT1, 1U);
-                            }
-                            GXWGFifo.f32 = cur_pos.x;
-                            GXWGFifo.f32 = cur_pos.y;
-                            GXWGFifo.f32 = cur_pos.z;
-                            if (pp->kind & DispTexture) {
-                                GXWGFifo.u8 = tex_base + 1;
-                            }
-                        }
+                    if (pp->appsrt != NULL) {
+                        psDispSubAPPSRTPoint(pp);
                     } else {
-                        if (HSD_PSDisp_804D7948 != 0) {
-                            HSD_PSDisp_804D7948 = 0;
-                            GXSetCurrentMtx(0U);
-                        }
+                        psSetCurrentMtx(0);
                         if (pp->kind & Trail) {
                             pp = psDispSubPointTrail(pp);
                         } else {
@@ -1500,687 +2002,9 @@ void psDispParticles(s32 arg0, u32 arg1)
                         }
                     }
                 } else if (pp->appsrt != NULL) {
-                    appsrt = pp->appsrt;
-                    if (appsrt->frameNum != HSD_PSDisp_804D6380[0]) {
-                        if (appsrt->status != 2) {
-                            HSD_MtxSRT(appsrt->mmtx, &appsrt->scale,
-                                       (Point3d*) &appsrt->rot,
-                                       &appsrt->translate, NULL);
-                        }
-                        if (appsrt->status == 1) {
-                            appsrt->status = 2;
-                        }
-                        PSMTXConcat((MtxPtr) cache, appsrt->mmtx,
-                                    (MtxPtr) &appsrt->ssx);
-                        ax = appsrt->ssx * appsrt->ssx +
-                             appsrt->x74 * appsrt->x74 +
-                             appsrt->x84 * appsrt->x84;
-                        if (ax > (f32) sp8B0) {
-                            double e = __frsqrte((double) ax);
-                            e = 0.5 * e * (3.0 - (double) ax * e * e);
-                            e = 0.5 * e * (3.0 - (double) ax * e * e);
-                            e = 0.5 * e * (3.0 - (double) ax * e * e);
-                            ax = (f32) ((double) ax * e);
-                        }
-                        appsrt->x94 = ax;
-                        ay = appsrt->ssy * appsrt->ssy +
-                             appsrt->x78 * appsrt->x78 +
-                             appsrt->x88 * appsrt->x88;
-                        if (ay > (f32) sp8B0) {
-                            double e = __frsqrte((double) ay);
-                            e = 0.5 * e * (3.0 - (double) ay * e * e);
-                            e = 0.5 * e * (3.0 - (double) ay * e * e);
-                            e = 0.5 * e * (3.0 - (double) ay * e * e);
-                            ay = (f32) ((double) ay * e);
-                        }
-                        appsrt->x98 = ay;
-                        if (appsrt->xA2 != 0) {
-                            PSMTXIdentity(temp_mtx);
-                            temp_mtx[0][3] = appsrt->translate.x;
-                            temp_mtx[1][3] = appsrt->translate.y;
-                            temp_mtx[2][3] = appsrt->translate.z;
-                            PSMTXConcat((MtxPtr) cache, temp_mtx, temp_mtx);
-                            HSD_MtxGetScale(temp_mtx, &scale);
-                            PSMTXScale((MtxPtr) &appsrt->ssx, scale.x, scale.y,
-                                       scale.z);
-                            appsrt->x70 = temp_mtx[0][3];
-                            appsrt->x80 = temp_mtx[1][3];
-                            appsrt->x90 = temp_mtx[2][3];
-                        }
-                        appsrt->frameNum = HSD_PSDisp_804D6380[0];
-                    }
-                    if (HSD_PSDisp_804D7948 != 3) {
-                        HSD_PSDisp_804D7948 = 3;
-                        GXSetCurrentMtx(3U);
-                    }
-                    draw_mtx[0][0] = appsrt->ssx;
-                    draw_mtx[0][1] = appsrt->ssy;
-                    draw_mtx[0][2] = appsrt->x6C;
-                    draw_mtx[0][3] = appsrt->x70;
-                    draw_mtx[1][0] = appsrt->x74;
-                    draw_mtx[1][1] = appsrt->x78;
-                    draw_mtx[1][2] = appsrt->x7C;
-                    draw_mtx[1][3] = appsrt->x80;
-                    draw_mtx[2][0] = appsrt->x84;
-                    draw_mtx[2][1] = appsrt->x88;
-                    draw_mtx[2][2] = appsrt->x8C;
-                    draw_mtx[2][3] = appsrt->x90;
-                    cur_pos.x = draw_mtx[0][0] * pp->pos.x +
-                                draw_mtx[0][1] * pp->pos.y +
-                                draw_mtx[0][2] * pp->pos.z + draw_mtx[0][3];
-                    cur_pos.y = draw_mtx[1][0] * pp->pos.x +
-                                draw_mtx[1][1] * pp->pos.y +
-                                draw_mtx[1][2] * pp->pos.z + draw_mtx[1][3];
-                    cur_pos.z = draw_mtx[2][0] * pp->pos.x +
-                                draw_mtx[2][1] * pp->pos.y +
-                                draw_mtx[2][2] * pp->pos.z + draw_mtx[2][3];
-                    prev_pos.x = draw_mtx[0][0] * last_pos.x +
-                                 draw_mtx[0][1] * last_pos.y +
-                                 draw_mtx[0][2] * last_pos.z + draw_mtx[0][3];
-                    prev_pos.y = draw_mtx[1][0] * last_pos.x +
-                                 draw_mtx[1][1] * last_pos.y +
-                                 draw_mtx[1][2] * last_pos.z + draw_mtx[1][3];
-                    prev_pos.z = draw_mtx[2][0] * last_pos.x +
-                                 draw_mtx[2][1] * last_pos.y +
-                                 draw_mtx[2][2] * last_pos.z + draw_mtx[2][3];
-                    ax = appsrt->x94 * pp->size;
-                    ay = 0.0f;
-                    bx = 0.0f;
-                    by = -appsrt->x98 * pp->size;
-                    if (form == NULL) {
-                        bx = ax;
-                        ay = -by;
-                    }
-                    if ((pp->kind & Trail) || (pp->kind & DirVec)) {
-                        f32 vf1 = 0.0f;
-                        f32 vf2 = 0.0f;
-                        if ((f32) sp8B0 == cache[0x18]) {
-                            Vec3 d;
-                            f32 x84 = appsrt->x84;
-                            f32 x88 = appsrt->x88;
-                            f32 x8C = appsrt->x8C;
-                            f32 x90 = appsrt->x90;
-                            f32 x74 = appsrt->x74;
-                            f32 x78 = appsrt->x78;
-                            f32 x7C = appsrt->x7C;
-                            f32 x80 = appsrt->x80;
-                            f64 d830 = (f64) (cache[0x1A] * x90);
-                            f64 d840 = (f64) (cache[0x1C] * x84);
-                            f64 d850 = (f64) (cache[0x1C] * x88);
-                            f64 d860 = (f64) (cache[0x1C] * x8C);
-                            f64 d870 = (f64) (cache[0x1C] * x90);
-                            f32 w0 =
-                                x90 + (x8C * pp->pos.z +
-                                       (x84 * pp->pos.x + x88 * pp->pos.y));
-                            f32 f16 =
-                                cache[0x19] * appsrt->x6C + cache[0x1A] * x8C;
-                            f32 s808 =
-                                cache[0x19] * appsrt->ssx + cache[0x1A] * x84;
-                            f32 s804 =
-                                cache[0x19] * appsrt->ssy + cache[0x1A] * x88;
-                            f32 f20 = cache[0x19] * appsrt->x70 + (f32) d830;
-                            f32 f12 = cache[0x1B] * x74 + (f32) d840;
-                            f32 f8 = cache[0x1B] * x78 + (f32) d850;
-                            f32 f11 = cache[0x1B] * x7C + (f32) d860;
-                            f32 f13 = cache[0x1B] * x80 + (f32) d870;
-                            if (pp->kind & Tornado) {
-                                calcTornadoLastPos(pp, &d.x, &d.y, &d.z);
-                            } else {
-                                d.x = pp->pos.x - pp->vel.x;
-                                d.y = pp->pos.y - pp->vel.y;
-                                d.z = pp->pos.z - pp->vel.z;
-                            }
-                            if (cache[0x18] != w0) {
-                                f32 w0inv = (f32) sp878 / w0;
-                                f32 w1 = x90 +
-                                         (x8C * d.z + (x84 * d.x + x88 * d.y));
-                                if (cache[0x18] != w1) {
-                                    f32 w1inv = (f32) sp878 / w1;
-                                    vf1 =
-                                        w0inv * (f20 + (f16 * pp->pos.z +
-                                                        (s808 * pp->pos.x +
-                                                         s804 * pp->pos.y))) -
-                                        w1inv * (f20 +
-                                                 (f16 * d.z +
-                                                  (s808 * d.x + s804 * d.y)));
-                                    vf2 = w0inv * (f13 + (f11 * pp->pos.z +
-                                                          (f12 * pp->pos.x +
-                                                           f8 * pp->pos.y))) -
-                                          w1inv *
-                                              (f13 + (f11 * d.z +
-                                                      (f12 * d.x + f8 * d.y)));
-                                }
-                            }
-                        } else {
-                            f32 s800 = cache[0x19] * appsrt->ssx + cache[0x1A];
-                            f32 s7FC = cache[0x19] * appsrt->ssy + cache[0x1A];
-                            f32 s7F8 = cache[0x19] * appsrt->x6C + cache[0x1A];
-                            f32 f17 = cache[0x1B] * appsrt->x74 + cache[0x1C];
-                            f32 f18 = cache[0x1B] * appsrt->x78 + cache[0x1C];
-                            f32 f20 = cache[0x1B] * appsrt->x7C + cache[0x1C];
-                            if (pp->kind & Tornado) {
-                                Vec3 t;
-                                calcTornadoLastPos(pp, &t.x, &t.y, &t.z);
-                                {
-                                    f32 dy = pp->pos.y - t.y;
-                                    f32 dx = pp->pos.x - t.x;
-                                    f32 dz = pp->pos.z - t.z;
-                                    vf1 = s7F8 * dz + (s800 * dx + s7FC * dy);
-                                    vf2 = f20 * dz + (f17 * dx + f18 * dy);
-                                }
-                            } else {
-                                f32 vy = pp->vel.y;
-                                f32 vx = pp->vel.x;
-                                f32 vz = pp->vel.z;
-                                vf1 = s7F8 * vz + (s800 * vx + s7FC * vy);
-                                vf2 = f20 * vz + (f17 * vx + f18 * vy);
-                            }
-                        }
-                        if (fabsf(vf2) < (f32) sp898) {
-                            angle = (-vf1 >= 0.0) ? 1.5707964f : -1.5707964f;
-                        } else {
-                            angle = atan2f(-vf1, vf2);
-                        }
-                        if (pp->kind & DirVec) {
-                            angle += pp->rotate;
-                        }
-                    } else {
-                        angle = pp->rotate;
-                    }
-                    if (fabsf(angle) > (f32) sp8A0) {
-                        f32 c = cosf(angle);
-                        f32 s = sinf(angle);
-                        f32 old_ax = ax;
-                        f32 old_bx = bx;
-                        ax = c * ax - s * ay;
-                        ay = s * old_ax + c * ay;
-                        bx = c * bx - s * by;
-                        by = s * old_bx + c * by;
-                    }
-                    if (pp->kind & Trail) {
-                        draw_color = prim_color;
-                        if (pp->kind & PrimEnv) {
-                            draw_color.r = 0xFF;
-                            draw_color.g = 0xFF;
-                            draw_color.b = 0xFF;
-                            draw_color.a = 0xFF;
-                        }
-                        tail_color = draw_color;
-                        tail_color.a = (u8) ((f32) tail_color.a * pp->trail);
-                        if (pp->kind & DispTexture) {
-                            setVtxDesc(2);
-                            GXBegin(GX_QUADS, GX_VTXFMT2, 4U);
-                        } else {
-                            setVtxDesc(3);
-                            GXBegin(GX_QUADS, GX_VTXFMT3, 4U);
-                        }
-                        GXWGFifo.f32 = prev_pos.x - ax;
-                        GXWGFifo.f32 = prev_pos.y - ay;
-                        GXWGFifo.f32 = prev_pos.z;
-                        GXWGFifo.u8 = tail_color.r;
-                        GXWGFifo.u8 = tail_color.g;
-                        GXWGFifo.u8 = tail_color.b;
-                        GXWGFifo.u8 = tail_color.a;
-                        if (pp->kind & DispTexture) {
-                            GXWGFifo.u8 = tex_base + 0;
-                        }
-                        GXWGFifo.f32 = cur_pos.x - bx;
-                        GXWGFifo.f32 = cur_pos.y - by;
-                        GXWGFifo.f32 = cur_pos.z;
-                        GXWGFifo.u8 = draw_color.r;
-                        GXWGFifo.u8 = draw_color.g;
-                        GXWGFifo.u8 = draw_color.b;
-                        GXWGFifo.u8 = draw_color.a;
-                        if (pp->kind & DispTexture) {
-                            GXWGFifo.u8 = tex_base + 1;
-                        }
-                        GXWGFifo.f32 = cur_pos.x + ax;
-                        GXWGFifo.f32 = cur_pos.y + ay;
-                        GXWGFifo.f32 = cur_pos.z;
-                        GXWGFifo.u8 = draw_color.r;
-                        GXWGFifo.u8 = draw_color.g;
-                        GXWGFifo.u8 = draw_color.b;
-                        GXWGFifo.u8 = draw_color.a;
-                        if (pp->kind & DispTexture) {
-                            GXWGFifo.u8 = tex_base + 2;
-                        }
-                        GXWGFifo.f32 = prev_pos.x + bx;
-                        GXWGFifo.f32 = prev_pos.y + by;
-                        GXWGFifo.f32 = prev_pos.z;
-                        GXWGFifo.u8 = tail_color.r;
-                        GXWGFifo.u8 = tail_color.g;
-                        GXWGFifo.u8 = tail_color.b;
-                        GXWGFifo.u8 = tail_color.a;
-                        if (pp->kind & DispTexture) {
-                            GXWGFifo.u8 = tex_base + 3;
-                        }
-                    } else if (form != NULL) {
-                        u8* it = form;
-                        u32 primitive_count = *(u32*) it;
-                        it += sizeof(u32);
-                        while (primitive_count-- != 0) {
-                            GXPrimitive prim = it[0];
-                            u8 count = it[1];
-                            u8 vtx_count = count;
-                            it += 4;
-                            if (pp->kind & DispTexture) {
-                                setVtxDesc(4);
-                                GXBegin(prim, GX_VTXFMT4, count);
-                            } else {
-                                setVtxDesc(1);
-                                GXBegin(prim, GX_VTXFMT1, count);
-                            }
-                            while (vtx_count-- != 0) {
-                                f32 s = *(f32*) &it[0];
-                                f32 t = *(f32*) &it[4];
-                                it += 8;
-                                if (pp->kind & TexFlipS) {
-                                    s = 1.0f - s;
-                                }
-                                if (pp->kind & TexFlipT) {
-                                    t = 1.0f - t;
-                                }
-                                GXWGFifo.f32 = cur_pos.x +
-                                               ax * (2.0f * (s - 0.5f)) +
-                                               bx * (2.0f * (t - 0.5f));
-                                GXWGFifo.f32 = cur_pos.y +
-                                               ay * (2.0f * (s - 0.5f)) +
-                                               by * (2.0f * (t - 0.5f));
-                                GXWGFifo.f32 = cur_pos.z;
-                                if (pp->kind & DispTexture) {
-                                    GXWGFifo.f32 = s;
-                                    GXWGFifo.f32 = t;
-                                }
-                            }
-                        }
-                    } else {
-                        if (pp->kind & DispTexture) {
-                            setVtxDesc(0);
-                            GXBegin(GX_QUADS, GX_VTXFMT0, 4U);
-                        } else {
-                            setVtxDesc(1);
-                            GXBegin(GX_QUADS, GX_VTXFMT1, 4U);
-                        }
-                        GXWGFifo.f32 = cur_pos.x - ax;
-                        GXWGFifo.f32 = cur_pos.y - ay;
-                        GXWGFifo.f32 = cur_pos.z;
-                        if (pp->kind & DispTexture) {
-                            GXWGFifo.u8 = tex_base + 0;
-                        }
-                        GXWGFifo.f32 = cur_pos.x - bx;
-                        GXWGFifo.f32 = cur_pos.y - by;
-                        GXWGFifo.f32 = cur_pos.z;
-                        if (pp->kind & DispTexture) {
-                            GXWGFifo.u8 = tex_base + 1;
-                        }
-                        GXWGFifo.f32 = cur_pos.x + ax;
-                        GXWGFifo.f32 = cur_pos.y + ay;
-                        GXWGFifo.f32 = cur_pos.z;
-                        if (pp->kind & DispTexture) {
-                            GXWGFifo.u8 = tex_base + 2;
-                        }
-                        GXWGFifo.f32 = cur_pos.x + bx;
-                        GXWGFifo.f32 = cur_pos.y + by;
-                        GXWGFifo.f32 = cur_pos.z;
-                        if (pp->kind & DispTexture) {
-                            GXWGFifo.u8 = tex_base + 3;
-                        }
-                    }
+                    psDispSubAppSRT(pp, form);
                 } else {
-                    cur_pos = pp->pos;
-                    prev_pos = last_pos;
-                    if (form != NULL) {
-                        right.x = cache[0xC] * pp->size;
-                        right.y = cache[0x10] * pp->size;
-                        right.z = cache[0x14] * pp->size;
-                        up.x = -cache[0xD] * pp->size;
-                        up.y = -cache[0x11] * pp->size;
-                        up.z = -cache[0x15] * pp->size;
-                    } else {
-                        right.x = HSD_PSDisp_804D7914 * pp->size;
-                        right.y = HSD_PSDisp_804D791C * pp->size;
-                        right.z = HSD_PSDisp_804D7924 * pp->size;
-                        up.x = HSD_PSDisp_804D7918 * pp->size;
-                        up.y = HSD_PSDisp_804D7920 * pp->size;
-                        up.z = HSD_PSDisp_804D7928 * pp->size;
-                    }
-                    if ((pp->kind & Trail) || (pp->kind & DirVec)) {
-                        f32 vf1 = 0.0f;
-                        f32 vf2 = 0.0f;
-                        if ((f32) sp8B0 == cache[0x18]) {
-                            Vec3 d;
-                            if (pp->kind & Tornado) {
-                                calcTornadoLastPos(pp, &d.x, &d.y, &d.z);
-                            } else {
-                                d.x = pp->pos.x - pp->vel.x;
-                                d.y = pp->pos.y - pp->vel.y;
-                                d.z = pp->pos.z - pp->vel.z;
-                            }
-                            {
-                                f32 w0 = cache[0xB] + (cache[0xA] * pp->pos.z +
-                                                       (cache[8] * pp->pos.x +
-                                                        cache[9] * pp->pos.y));
-                                if (cache[0x18] != w0) {
-                                    f32 w0inv = (f32) sp878 / w0;
-                                    f32 w1 =
-                                        cache[0xB] +
-                                        (cache[0xA] * d.z +
-                                         (cache[8] * d.x + cache[9] * d.y));
-                                    if (cache[0x18] != w1) {
-                                        f32 w1inv = (f32) sp878 / w1;
-                                        f64 t888 =
-                                            (f64) (cache[0x20] * pp->pos.y);
-                                        f64 t890 = (f64) (cache[0x1F] * d.x +
-                                                          cache[0x20] * d.y);
-                                        vf1 = w0inv *
-                                                  (cache[0x22] +
-                                                   (cache[0x21] * pp->pos.z +
-                                                    (cache[0x1F] * pp->pos.x +
-                                                     (f32) t888))) -
-                                              w1inv * (cache[0x22] +
-                                                       (cache[0x21] * d.z +
-                                                        (f32) t890));
-                                        vf2 =
-                                            w0inv *
-                                                (cache[0x26] +
-                                                 (cache[0x25] * pp->pos.z +
-                                                  (cache[0x23] * pp->pos.x +
-                                                   cache[0x24] * pp->pos.y))) -
-                                            w1inv * (cache[0x26] +
-                                                     (cache[0x25] * d.z +
-                                                      (cache[0x23] * d.x +
-                                                       cache[0x24] * d.y)));
-                                    }
-                                }
-                            }
-                        } else {
-                            if (pp->kind & Tornado) {
-                                Vec3 t;
-                                calcTornadoLastPos(pp, &t.x, &t.y, &t.z);
-                                {
-                                    f32 dy = pp->pos.y - t.y;
-                                    f32 dx = pp->pos.x - t.x;
-                                    f32 dz = pp->pos.z - t.z;
-                                    vf1 =
-                                        cache[0x21] * dz +
-                                        (cache[0x1F] * dx + cache[0x20] * dy);
-                                    vf2 =
-                                        cache[0x25] * dz +
-                                        (cache[0x23] * dx + cache[0x24] * dy);
-                                }
-                            } else {
-                                f32 vy = pp->vel.y;
-                                f32 vx = pp->vel.x;
-                                f32 vz = pp->vel.z;
-                                vf1 = cache[0x21] * vz +
-                                      (cache[0x1F] * vx + cache[0x20] * vy);
-                                vf2 = cache[0x25] * vz +
-                                      (cache[0x23] * vx + cache[0x24] * vy);
-                            }
-                        }
-                        if (fabsf(vf2) < (f32) sp898) {
-                            angle = (vf1 >= 0.0f) ? 1.5707964f : -1.5707964f;
-                        } else {
-                            angle = atan2f(vf1, vf2);
-                        }
-                        if (pp->kind & DirVec) {
-                            angle += pp->rotate;
-                        }
-                    } else {
-                        angle = pp->rotate;
-                    }
-                    if (fabsf(angle) > (f32) sp8A0) {
-                        Vec3 axis;
-                        f32 t1;
-                        f32 t2;
-                        f32 t3;
-                        f32 t4;
-                        axis.x = right.y * up.z - right.z * up.y;
-                        axis.y = right.z * up.x - right.x * up.z;
-                        axis.z = right.x * up.y - right.y * up.x;
-                        PSMTXRotAxisRad(temp_mtx, &axis, angle);
-                        t1 = temp_mtx[1][0] * right.x +
-                             temp_mtx[1][1] * right.y;
-                        t2 = temp_mtx[1][0] * up.x + temp_mtx[1][1] * up.y;
-                        t3 = temp_mtx[2][0] * right.x +
-                             temp_mtx[2][1] * right.y;
-                        t4 = temp_mtx[2][0] * up.x + temp_mtx[2][1] * up.y;
-                        right.x = temp_mtx[0][2] * right.z +
-                                  (temp_mtx[0][0] * right.x +
-                                   temp_mtx[0][1] * right.y);
-                        right.y = temp_mtx[1][2] * right.z + t1;
-                        right.z = temp_mtx[2][2] * right.z + t3;
-                        up.x = temp_mtx[0][2] * up.z +
-                               (temp_mtx[0][0] * up.x + temp_mtx[0][1] * up.y);
-                        up.y = temp_mtx[1][2] * up.z + t2;
-                        up.z = temp_mtx[2][2] * up.z + t4;
-                    }
-                    if (HSD_PSDisp_804D7948 != 0) {
-                        HSD_PSDisp_804D7948 = 0;
-                        GXSetCurrentMtx(0U);
-                    }
-                    if (pp->kind & Trail) {
-                        if (pp->kind & PrimEnv) {
-                            draw_color.r = 0xFF;
-                            draw_color.g = 0xFF;
-                            draw_color.b = 0xFF;
-                            draw_color.a = 0xFF;
-                        } else {
-                            getColorPrimEnv(pp, &draw_color, &env_color);
-                        }
-                        if (form == NULL) {
-                            if (pp->kind & DispTexture) {
-                                setVtxDesc(2);
-                                GXBegin(GX_QUADS, GX_VTXFMT2, 4U);
-                            } else {
-                                setVtxDesc(3);
-                                GXBegin(GX_QUADS, GX_VTXFMT3, 4U);
-                            }
-                            GXWGFifo.f32 = prev_pos.x - right.x;
-                            GXWGFifo.f32 = prev_pos.y - right.y;
-                            GXWGFifo.f32 = prev_pos.z - right.z;
-                            GXWGFifo.u8 = draw_color.r;
-                            GXWGFifo.u8 = draw_color.g;
-                            GXWGFifo.u8 = draw_color.b;
-                            GXWGFifo.u8 =
-                                (s8) ((f32) draw_color.a * pp->trail);
-                            if (pp->kind & DispTexture) {
-                                GXWGFifo.u8 = tex_base + 0;
-                            }
-                            GXWGFifo.f32 = cur_pos.x - up.x;
-                            GXWGFifo.f32 = cur_pos.y - up.y;
-                            GXWGFifo.f32 = cur_pos.z - up.z;
-                            GXWGFifo.u8 = draw_color.r;
-                            GXWGFifo.u8 = draw_color.g;
-                            GXWGFifo.u8 = draw_color.b;
-                            GXWGFifo.u8 = draw_color.a;
-                            if (pp->kind & DispTexture) {
-                                GXWGFifo.u8 = tex_base + 1;
-                            }
-                            GXWGFifo.f32 = cur_pos.x + right.x;
-                            GXWGFifo.f32 = cur_pos.y + right.y;
-                            GXWGFifo.f32 = cur_pos.z + right.z;
-                            GXWGFifo.u8 = draw_color.r;
-                            GXWGFifo.u8 = draw_color.g;
-                            GXWGFifo.u8 = draw_color.b;
-                            GXWGFifo.u8 = draw_color.a;
-                            if (pp->kind & DispTexture) {
-                                GXWGFifo.u8 = tex_base + 2;
-                            }
-                            GXWGFifo.f32 = prev_pos.x + up.x;
-                            GXWGFifo.f32 = prev_pos.y + up.y;
-                            GXWGFifo.f32 = prev_pos.z + up.z;
-                            GXWGFifo.u8 = draw_color.r;
-                            GXWGFifo.u8 = draw_color.g;
-                            GXWGFifo.u8 = draw_color.b;
-                            GXWGFifo.u8 =
-                                (s8) ((f32) draw_color.a * pp->trail);
-                            if (pp->kind & DispTexture) {
-                                GXWGFifo.u8 = tex_base + 3;
-                            }
-                        } else {
-                            f32 trailA = 255.0f * (1.0f - pp->trail);
-                            f32 upLen =
-                                up.x * up.x + up.y * up.y + up.z * up.z;
-                            if (upLen > (f32) sp8B0) {
-                                double e = __frsqrte((double) upLen);
-                                e = 0.5 * e * (3.0 - (double) upLen * e * e);
-                                e = 0.5 * e * (3.0 - (double) upLen * e * e);
-                                e = 0.5 * e * (3.0 - (double) upLen * e * e);
-                                upLen = (f32) ((double) upLen * e);
-                            }
-                            if ((f32) sp8B0 != upLen) {
-                                f32 sdx = cur_pos.x - prev_pos.x;
-                                f32 sdy = cur_pos.y - prev_pos.y;
-                                f32 sdz = cur_pos.z - prev_pos.z;
-                                f32 segLen = sdx * sdx + sdy * sdy + sdz * sdz;
-                                f32 ratio;
-                                u8* it;
-                                u32 primitive_count;
-                                if (segLen > (f32) sp8B0) {
-                                    double e = __frsqrte((double) segLen);
-                                    e = 0.5 * e *
-                                        (3.0 - (double) segLen * e * e);
-                                    e = 0.5 * e *
-                                        (3.0 - (double) segLen * e * e);
-                                    e = 0.5 * e *
-                                        (3.0 - (double) segLen * e * e);
-                                    segLen = (f32) ((double) segLen * e);
-                                }
-                                ratio = segLen / upLen;
-                                it = form;
-                                primitive_count = *(u32*) it;
-                                it += sizeof(u32);
-                                while (primitive_count-- != 0) {
-                                    GXPrimitive prim = it[0];
-                                    u8 count = it[1];
-                                    u8 vtx_count = count;
-                                    it += 4;
-                                    if (pp->kind & DispTexture) {
-                                        setVtxDesc(5);
-                                        GXBegin(prim, GX_VTXFMT5, count);
-                                    } else {
-                                        setVtxDesc(3);
-                                        GXBegin(prim, GX_VTXFMT3, count);
-                                    }
-                                    while (vtx_count-- != 0) {
-                                        f32 s = *(f32*) &it[0];
-                                        f32 sx = 2.0f * (s - 0.5f);
-                                        f32 t;
-                                        f32 tx;
-                                        s32 a;
-                                        if (pp->kind & TexFlipS) {
-                                            s = 1.0f - s;
-                                        }
-                                        t = *(f32*) &it[4];
-                                        it += 8;
-                                        a = (s8) (255.0f - t * trailA);
-                                        if (a < 0) {
-                                            a = 0;
-                                        }
-                                        if (a > 0xFF) {
-                                            a = 0xFF;
-                                        }
-                                        tx = 2.0f * (t - 0.5f);
-                                        if (pp->kind & TexFlipT) {
-                                            t = 1.0f - t;
-                                        }
-                                        GXWGFifo.f32 =
-                                            up.x * ratio * tx +
-                                            (right.x * sx + cur_pos.x);
-                                        GXWGFifo.f32 =
-                                            up.y * ratio * tx +
-                                            (right.y * sx + cur_pos.y);
-                                        GXWGFifo.f32 =
-                                            up.z * ratio * tx +
-                                            (right.z * sx + cur_pos.z);
-                                        GXWGFifo.u8 = draw_color.r;
-                                        GXWGFifo.u8 = draw_color.g;
-                                        GXWGFifo.u8 = draw_color.b;
-                                        GXWGFifo.u8 = a;
-                                        if (pp->kind & DispTexture) {
-                                            GXWGFifo.f32 = s;
-                                            GXWGFifo.f32 = t;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    } else if (form == NULL) {
-                        if (pp->kind & DispTexture) {
-                            setVtxDesc(0);
-                            GXBegin(GX_QUADS, GX_VTXFMT0, 4U);
-                        } else {
-                            setVtxDesc(1);
-                            GXBegin(GX_QUADS, GX_VTXFMT1, 4U);
-                        }
-                        GXWGFifo.f32 = cur_pos.x - right.x;
-                        GXWGFifo.f32 = cur_pos.y - right.y;
-                        GXWGFifo.f32 = cur_pos.z - right.z;
-                        if (pp->kind & DispTexture) {
-                            GXWGFifo.u8 = tex_base + 0;
-                        }
-                        GXWGFifo.f32 = cur_pos.x - up.x;
-                        GXWGFifo.f32 = cur_pos.y - up.y;
-                        GXWGFifo.f32 = cur_pos.z - up.z;
-                        if (pp->kind & DispTexture) {
-                            GXWGFifo.u8 = tex_base + 1;
-                        }
-                        GXWGFifo.f32 = cur_pos.x + right.x;
-                        GXWGFifo.f32 = cur_pos.y + right.y;
-                        GXWGFifo.f32 = cur_pos.z + right.z;
-                        if (pp->kind & DispTexture) {
-                            GXWGFifo.u8 = tex_base + 2;
-                        }
-                        GXWGFifo.f32 = cur_pos.x + up.x;
-                        GXWGFifo.f32 = cur_pos.y + up.y;
-                        GXWGFifo.f32 = cur_pos.z + up.z;
-                        if (pp->kind & DispTexture) {
-                            GXWGFifo.u8 = tex_base + 3;
-                        }
-                    } else {
-                        u8* it = form;
-                        u32 primitive_count = *(u32*) it;
-                        it += sizeof(u32);
-                        while (primitive_count-- != 0) {
-                            GXPrimitive prim = it[0];
-                            u8 count = it[1];
-                            u8 vtx_count = count;
-                            it += 4;
-                            if (pp->kind & DispTexture) {
-                                setVtxDesc(4);
-                                GXBegin(prim, GX_VTXFMT4, count);
-                            } else {
-                                setVtxDesc(1);
-                                GXBegin(prim, GX_VTXFMT1, count);
-                            }
-                            while (vtx_count-- != 0) {
-                                f32 s = *(f32*) &it[0];
-                                f32 t = *(f32*) &it[4];
-                                f32 sx;
-                                f32 tx;
-                                it += 8;
-                                if (pp->kind & TexFlipS) {
-                                    s = 1.0f - s;
-                                }
-                                if (pp->kind & TexFlipT) {
-                                    t = 1.0f - t;
-                                }
-                                sx = 2.0f * (s - 0.5f);
-                                tx = 2.0f * (t - 0.5f);
-                                GXWGFifo.f32 =
-                                    cur_pos.x + right.x * sx + up.x * tx;
-                                GXWGFifo.f32 =
-                                    cur_pos.y + right.y * sx + up.y * tx;
-                                GXWGFifo.f32 =
-                                    cur_pos.z + right.z * sx + up.z * tx;
-                                if (pp->kind & DispTexture) {
-                                    GXWGFifo.f32 = s;
-                                    GXWGFifo.f32 = t;
-                                }
-                            }
-                        }
-                    }
+                    psDispSub(pp, form);
                 }
 
                 prev_kind = pp->kind;
