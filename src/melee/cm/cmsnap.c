@@ -20,12 +20,12 @@ static _cmsnap_data cmsnap_data;
 void cmSnap_800315C8(void)
 {
     HSD_ASSERT(0x55, _p(status) == CmSnapStatus_Sleep);
-    _p(status) = 1;
+    _p(status) = CmSnapStatus_0x1;
 }
 
 void* cmSnap_80031618(void)
 {
-    if (_p(status) != 5) {
+    if (_p(status) != CmSnapStatus_0x5) {
         return 0;
     }
     _p(status) = CmSnapStatus_Sleep;
@@ -37,13 +37,13 @@ void cmSnap_80031640(HSD_GObj* arg0, int code)
     switch (_p(status)) {
     case CmSnapStatus_Sleep:
         break;
-    case 1:
+    case CmSnapStatus_0x1:
         lb_800122C8(&_p(unk1), 0, 0, 0);
-        _p(status) = 2;
+        _p(status) = CmSnapStatus_0x2;
         break;
-    case 2:
-    case 3:
-    case 4:
+    case CmSnapStatus_0x2:
+    case CmSnapStatus_0x3:
+    case CmSnapStatus_0x4:
         _p(status) += 1;
         break;
     }

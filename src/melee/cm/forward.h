@@ -40,6 +40,11 @@ typedef struct CameraInputs CameraInputs;
 /// Named by an assert in #cmSnap_800315C8.
 typedef enum CmSnapStatus {
     /* 0x0 */ CmSnapStatus_Sleep,
+    /* 0x1 */ CmSnapStatus_0x1,
+    /* 0x2 */ CmSnapStatus_0x2,
+    /* 0x3 */ CmSnapStatus_0x3,
+    /* 0x4 */ CmSnapStatus_0x4,
+    /* 0x5 */ CmSnapStatus_0x5,
 } CmSnapStatus;
 
 #endif
