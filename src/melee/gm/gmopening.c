@@ -16,6 +16,7 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbmthp.h>
+#include <melee/mn/inlines.h>
 #include <melee/mn/types.h>
 
 /* 3B7D68 */ static const Vec3 gm_803B7D68 = { 0.0f, 0.0f, 1.0f };
@@ -262,7 +263,7 @@ void gm_801AA28C_OnFrame(void)
         if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & HSD_PAD_START) {
             gmMainLib_8015F500();
             lbAudioAx_800236DC();
-            lbAudioAx_80024030(1);
+            sfxForward();
             gm_801A4B60();
             gm_80173EEC();
             gm_80172898(0x100);
@@ -278,7 +279,7 @@ void gm_801AA28C_OnFrame(void)
             gmMainLib_8015F500();
             lbAudioAx_800236DC();
             lbAudioAx_80023694();
-            lbAudioAx_80024030(1);
+            sfxForward();
             gm_801A4B60();
             gm_SetPendingGameMode(GM_TITLE);
             gm_SetNewGameModePending();

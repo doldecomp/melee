@@ -8,6 +8,7 @@
 #include "if/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
+#include "mn/inlines.h"
 #include "ty/toy.h"
 
 #include <printf.h>
@@ -498,7 +499,7 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
             *q += 1;
             ret = true;
             arg0->x1 = arg0->x1 | 1;
-            lbAudioAx_80024030(2);
+            sfxMove();
         }
         break;
     }
@@ -508,7 +509,7 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
             ret = true;
             *q += arg0->x8[arg0->x0].x1C;
             arg0->x1 = arg0->x1 | 1;
-            lbAudioAx_80024030(2);
+            sfxMove();
         }
         break;
     }
@@ -522,7 +523,7 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
         }
         ret = true;
         arg0->x1 = arg0->x1 | 1;
-        lbAudioAx_80024030(2);
+        sfxMove();
         break;
     }
     case 6: {
@@ -535,7 +536,7 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
         }
         ret = true;
         arg0->x1 = arg0->x1 | 1;
-        lbAudioAx_80024030(2);
+        sfxMove();
         break;
     }
     case 4:
@@ -549,7 +550,7 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
         }
         ret = true;
         arg0->x1 = arg0->x1 | 1;
-        lbAudioAx_80024030(2);
+        sfxMove();
         break;
     }
     case 8: {
@@ -558,7 +559,7 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
             *q += arg0->x8[arg0->x0].x1C;
             ret = true;
             arg0->x1 = arg0->x1 | 1;
-            lbAudioAx_80024030(2);
+            sfxMove();
         }
         break;
     }
@@ -577,7 +578,7 @@ bool un_80303720(struct un_80304138_objalloc_t* arg0)
             *q -= 1;
             ret = true;
             arg0->x1 = arg0->x1 | 1;
-            lbAudioAx_80024030(2);
+            sfxMove();
         }
         break;
     }
@@ -587,7 +588,7 @@ bool un_80303720(struct un_80304138_objalloc_t* arg0)
             ret = true;
             *q -= x8[arg0->x0].x1C;
             arg0->x1 = arg0->x1 | 1;
-            lbAudioAx_80024030(2);
+            sfxMove();
         }
         break;
     }
@@ -601,7 +602,7 @@ bool un_80303720(struct un_80304138_objalloc_t* arg0)
         }
         ret = true;
         arg0->x1 = arg0->x1 | 1;
-        lbAudioAx_80024030(2);
+        sfxMove();
         break;
     }
     case 6: {
@@ -614,7 +615,7 @@ bool un_80303720(struct un_80304138_objalloc_t* arg0)
         }
         ret = true;
         arg0->x1 = arg0->x1 | 1;
-        lbAudioAx_80024030(2);
+        sfxMove();
         break;
     }
     case 4:
@@ -624,7 +625,7 @@ bool un_80303720(struct un_80304138_objalloc_t* arg0)
         *q = *q - idk;
         ret = true;
         arg0->x1 = arg0->x1 | 1;
-        lbAudioAx_80024030(2);
+        sfxMove();
         break;
     }
     case 8: {
@@ -633,7 +634,7 @@ bool un_80303720(struct un_80304138_objalloc_t* arg0)
             *q -= x8[arg0->x0].x1C;
             ret = true;
             arg0->x1 = arg0->x1 | 1;
-            lbAudioAx_80024030(2);
+            sfxMove();
         }
         break;
     }
@@ -709,7 +710,7 @@ void un_80303AC4(struct un_80304138_objalloc_t* arg0)
         if (i != -1) {
             arg0->x0 = i;
             arg0->x1 = arg0->x1 | 1;
-            lbAudioAx_80024030(2);
+            sfxMove();
         }
     } else if (buttons & (0x20000000 | HSD_PAD_X)) { // down
         u8 j = arg0->x0;
@@ -726,7 +727,7 @@ void un_80303AC4(struct un_80304138_objalloc_t* arg0)
         if (i != -1) {
             arg0->x0 = i;
             arg0->x1 = arg0->x1 | 1;
-            lbAudioAx_80024030(2);
+            sfxMove();
         }
     } else if (buttons & (0x80000000 | HSD_PAD_R)) { // right
         if (un_80303444(arg0)) {

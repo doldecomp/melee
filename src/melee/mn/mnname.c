@@ -1,5 +1,6 @@
 #include "mnname.h"
 
+#include "inlines.h"
 #include "mnmain.h"
 #include "mnmainrule.h"
 
@@ -386,7 +387,7 @@ u8 mnName_80237D94(s32 arg0, u8 arg1)
         if (arg0 & 8) {
             if ((s32) (arg1 / 6) == 3) {
                 if (mnName_GetColumnCount() > 4) {
-                    lbAudioAx_80024030(2);
+                    sfxMove();
                     if ((s32) (mnName_GetColumnCount() - 1) >
                         (s32) gobj->gx_link)
                     {
@@ -403,7 +404,7 @@ u8 mnName_80237D94(s32 arg0, u8 arg1)
         if (arg0 & 4) {
             if ((arg1 / 6) == 0) {
                 if (mnName_GetColumnCount() > 4) {
-                    lbAudioAx_80024030(2);
+                    sfxMove();
                     if (gobj->gx_link != 0) {
                         gobj->gx_link = gobj->gx_link - 1;
                     } else {
@@ -451,7 +452,7 @@ void mnName_ConfirmNameDeleteInput(HSD_GObj* arg0)
     PAD_STACK(0x18);
     if (buttons & 0x10) {
         if ((u8) flow->confirmed_selection == 0) {
-            lbAudioAx_80024030(0);
+            sfxBack();
             mn_804D6BC8.cooldown = 5;
             flow->x10 = 0;
             return;
@@ -469,7 +470,7 @@ void mnName_ConfirmNameDeleteInput(HSD_GObj* arg0)
             }
             idx = (sel % 6) + (col * 6);
             nameIdx = mnName_NameDisplayOrder[idx];
-            lbAudioAx_80024030(1);
+            sfxForward();
             {
                 u8 term = mnName_StringTerminator;
                 nameIdxInt = (u8) nameIdx;
@@ -493,13 +494,13 @@ void mnName_ConfirmNameDeleteInput(HSD_GObj* arg0)
         return;
     }
     if (buttons & 0x20) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_804D6BC8.cooldown = 5;
         flow->x10 = 0;
         return;
     }
     if ((buttons & 8) || (buttons & 4)) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         if ((u8) mn_804A04F0.confirmed_selection == 0) {
             mn_804A04F0.confirmed_selection = 1;
             return;
@@ -553,7 +554,7 @@ void mnName_MainInput(HSD_GObj* arg0)
     mn_804A04F0.buttons = buttons;
 
     if (buttons & 0x20) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_804D6BC8.cooldown = 5;
         if ((u16) mn_804A04F0.hovered_selection < 0x18U) {
             mn_804A04F0.hovered_selection = 0x1A;
@@ -572,7 +573,7 @@ void mnName_MainInput(HSD_GObj* arg0)
             isFull = GetNameCount_noinline() < 0x78 ? 0 : 1;
             if (isFull == 0) {
                 u8 count;
-                lbAudioAx_80024030(1);
+                sfxForward();
                 mnName_80239878(1U, (HSD_GObj*) gobj2);
                 mnName_80238A04((HSD_GObj*) gobj2, 0x18U, 1U);
                 HSD_SisLib_803A5CC4(gobj2->text2);
@@ -584,7 +585,7 @@ void mnName_MainInput(HSD_GObj* arg0)
             return;
         case 25:
             if (mnName_GetPageCount() != 0) {
-                lbAudioAx_80024030(1);
+                sfxForward();
                 isFull = 0;
                 if ((u8) gobj2->gobj.p_priority == 0) {
                     isFull = 1;
@@ -599,7 +600,7 @@ void mnName_MainInput(HSD_GObj* arg0)
             return;
         case 26:
             if (mnName_GetPageCount() != 0) {
-                lbAudioAx_80024030(1);
+                sfxForward();
                 mn_804A04F0.hovered_selection = 0;
                 mnName_80238A04((HSD_GObj*) gobj2, 0x1AU, 1U);
                 return;
@@ -618,7 +619,7 @@ void mnName_MainInput(HSD_GObj* arg0)
                     isValid = 1;
                 }
                 if (isValid != 0) {
-                    lbAudioAx_80024030(1);
+                    sfxForward();
                     mn_804A04F0.x10 = 2;
                     mn_804A04F0.confirmed_selection = 0;
                     mnName_8023A290();
@@ -633,7 +634,7 @@ void mnName_MainInput(HSD_GObj* arg0)
         u32 isL = buttons & 0x40;
         if (isL != 0 || (buttons & 0x80)) {
             if (mnName_GetColumnCount() > 4) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if (isL != 0) {
                     u8 scroll = gobj2->gobj.gx_link;
                     if (scroll != 0) {
@@ -658,7 +659,7 @@ void mnName_MainInput(HSD_GObj* arg0)
             mn_804A04F0.hovered_selection =
                 (u16) mnName_80237D94((s32) buttons, prev);
             if ((s32) prev != (s32) mn_804A04F0.hovered_selection) {
-                lbAudioAx_80024030(2);
+                sfxMove();
             }
         }
     }

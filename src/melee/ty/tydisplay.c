@@ -42,6 +42,7 @@
 #include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
 #include "melee/if/textlib.h"
+#include "mn/inlines.h"
 #include "mn/mnmain.h"
 #include "MSL/math.h"
 #include "sc/types.h"
@@ -1279,14 +1280,14 @@ void _tyDisplay_8031A4EC(HSD_GObj* arg0)
     }
 
     if (mn_8022F218() != 0) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_8022F268();
         ((TyModeState*) Toy_804A284C)->x4 = 1;
         return;
     }
 
     if (Toy_80305B88() & 0x1200) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         ((TyModeState*) Toy_804A284C)->x4 = 1;
         return;
     }
@@ -1441,7 +1442,7 @@ void _tyDisplay_8031A94C(HSD_GObj* arg0)
     if (Toy_80305C44() & 0x200) {
         _tyDisplay_804D6F28 += 1;
         if (_tyDisplay_804D6F28 > 0x78) {
-            lbAudioAx_80024030(0);
+            sfxBack();
             ((TyModeState*) Toy_804A284C)->x4 = 1;
         }
     } else {

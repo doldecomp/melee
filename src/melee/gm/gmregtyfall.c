@@ -18,6 +18,7 @@
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbspdisplay.h"
+#include "mn/inlines.h"
 #include "mn/mnmain.h"
 #include "mp/mpcoll.h"
 #include "pl/player.h"
@@ -547,7 +548,7 @@ void gm_801A79D4_OnFrame(void)
         gm_804D6740--;
     } else if (gm_GetButtonsTriggered(gm_801BF010()) & PAD_BUTTON_START) {
         lbAudioAx_80023694();
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_801A4B60();
     }
 }

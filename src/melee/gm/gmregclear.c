@@ -8,6 +8,8 @@
 
 #include "gm/forward.h"
 
+#include "mn/inlines.h"
+
 #include <math_ppc.h>
 #include <dolphin/gx.h>
 #include <sysdolphin/baselib/aobj.h>
@@ -2489,7 +2491,7 @@ void fn_8017FF1C(HSD_GObj* gobj)
             {
                 state->xFC = state->x104;
                 state->x116 = 1;
-                lbAudioAx_80024030(1);
+                sfxForward();
                 break;
             }
         }
@@ -4046,7 +4048,7 @@ void fn_80182F40(HSD_GObj* unused)
     {
         lbAudioAx_80024C84();
         lbAudioAx_80023694();
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_801A4B60();
         gm_SetPendingGameMode(GM_TITLE);
         gm_SetNewGameModePending();

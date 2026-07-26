@@ -17,6 +17,7 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbspdisplay.h>
+#include <melee/mn/inlines.h>
 #include <melee/mn/mnmain.h>
 #include <melee/mn/mnruleplus.h>
 #include <melee/sc/types.h>
@@ -307,7 +308,7 @@ static void fn_80235F80(HSD_GObj* gobj)
     buttons = mn_804A04F0.buttons = mn_80229624(4U);
     PAD_STACK(0x28);
     if (buttons & 0x20) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_804A04F0.entering_menu = 0;
         mnStageSw_8023593C(mnStageSw_804D6BF0);
         lb_8001CE00();
@@ -330,11 +331,11 @@ static void fn_80235F80(HSD_GObj* gobj)
                     if (enabled != 0) {
                         lbAudioAx_80024030(3);
                     } else {
-                        lbAudioAx_80024030(2);
+                        sfxMove();
                         mn_804A04F0.confirmed_selection = 0;
                     }
                 } else {
-                    lbAudioAx_80024030(2);
+                    sfxMove();
                     mn_804A04F0.confirmed_selection = 1;
                 }
                 user_data = mnStageSw_804D6BF0->user_data;
@@ -354,7 +355,7 @@ static void fn_80235F80(HSD_GObj* gobj)
             goto check_dpad;
         }
         if (buttons & 0x100) {
-            lbAudioAx_80024030(1);
+            sfxForward();
             result = gm_GetCurrentGameMode();
             switch (result) {
             case GM_MENU:
@@ -371,7 +372,7 @@ static void fn_80235F80(HSD_GObj* gobj)
         }
     check_dpad:
         if (buttons & 0xF) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             mnStageSw_80235DC8(user_data, buttons);
         }
     }

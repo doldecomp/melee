@@ -22,6 +22,7 @@
 #include "melee/lb/lbtime.h"
 #include "melee/lb/types.h"
 #include "melee/mn/types.h"
+#include "mn/inlines.h"
 
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/memory.h>
@@ -704,7 +705,7 @@ void gm_801B2204(GameScene* arg0)
     if (!gm_80173754(0x1C, gm_804D68C0)) {
         gm_SetPendingSceneIndex(0);
     }
-    lbAudioAx_80024030(1);
+    sfxForward();
 }
 
 void gm_801B2298_OnInit(void)

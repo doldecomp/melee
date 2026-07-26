@@ -146,7 +146,7 @@ void mnSound_802492CC(HSD_GObj* gobj)
             }
         } else if ((s8) menu->unk3 > -100) {
             // move towards sounds
-            lbAudioAx_80024030(2);
+            sfxMove();
             menu->unk3 -= 5;
             mix = menu->unk3;
             mnSound_VolumeAnim(GET_JOBJ(mnSound_804D6C30), mix, 5);
@@ -164,7 +164,7 @@ void mnSound_802492CC(HSD_GObj* gobj)
             }
         } else if ((s8) menu->unk3 < 100) {
             // move towards music
-            lbAudioAx_80024030(2);
+            sfxMove();
             menu->unk3 += 5;
             mix = menu->unk3;
             mnSound_VolumeAnim(GET_JOBJ(mnSound_804D6C30), mix, 18);

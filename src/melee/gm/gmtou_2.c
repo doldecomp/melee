@@ -20,6 +20,7 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lbdvd.h"
 #include "lb/types.h"
+#include "mn/inlines.h"
 #include "mn/mnmain.h"
 
 #include "pl/forward.h"
@@ -801,7 +802,7 @@ void gm_8019DF8C_OnFrame(void)
     fn_8018F640(4);
 
     if (mn_8022F218() != 0) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_8022F268();
         gm_801A4B60();
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
@@ -836,7 +837,7 @@ void gm_8019DF8C_OnFrame(void)
                 if (fn_8018F6A8(i) & 0x200) {
                     lbl_80479A58.x18[i] = (u8) (lbl_80479A58.x18[i] + 1);
                     if ((u8) lbl_80479A58.x18[i] > 0x5AU) {
-                        lbAudioAx_80024030(1);
+                        sfxForward();
                         gm_SetPendingSceneIndex(0U);
                         gm_801A4B60();
                         return;
@@ -856,7 +857,7 @@ void gm_8019DF8C_OnFrame(void)
 
                     if (pressed & 0x40001) {
                         u8 chr;
-                        lbAudioAx_80024030(2);
+                        sfxMove();
 
                         j = get_match_player_index(i);
                         tmd->x37[j].x5 = 0;
@@ -882,7 +883,7 @@ void gm_8019DF8C_OnFrame(void)
 
                     } else if (pressed & 0x80002) {
                         u8 chr;
-                        lbAudioAx_80024030(2);
+                        sfxMove();
 
                         j = get_match_player_index(i);
                         tmd->x37[j].x5 = 0;
@@ -912,7 +913,7 @@ void gm_8019DF8C_OnFrame(void)
                 if (buttons & 0x1100) {
                     if ((u8) lbl_80479A58.x1D[i].x0 != 2) {
                         u16 char_id;
-                        lbAudioAx_80024030(1);
+                        sfxForward();
                         lbl_80479A58.x1D[i].x0 = 1;
                         char_id = tmd->x4B8[i].x6;
                         if (char_id <= 0x78U) {
@@ -923,7 +924,7 @@ void gm_8019DF8C_OnFrame(void)
                     }
                 } else if (buttons & 0x200) {
                     if ((u8) lbl_80479A58.x1D[i].x0 == 2) {
-                        lbAudioAx_80024030(0);
+                        sfxBack();
                         lbl_80479A58.x1D[i].x0 = 3;
                     }
                 } else {

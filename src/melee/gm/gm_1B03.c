@@ -6,6 +6,9 @@
 #include "if/soundtest.h"
 
 #include "mn/forward.h"
+
+#include "mn/inlines.h"
+
 #include <melee/pl/forward.h>
 
 #include <sysdolphin/baselib/controller.h>
@@ -530,7 +533,7 @@ void gm_801B09C0(GameScene* arg0)
 int fn_801B09F8(int arg0)
 {
     if (arg0 == 0) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         gm_ChangeGameModeAfterCurrentScene(GM_TITLE);
         gm_801A4B60();
     }
@@ -551,7 +554,7 @@ void gm_801B0A34(GameScene* arg0)
 int fn_801B0A8C(int arg0)
 {
     if (arg0 == 0) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         gm_SetPendingSceneIndex(0);
         gm_801A4B60();
     }

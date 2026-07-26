@@ -11,6 +11,7 @@
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbmthp.h>
+#include <melee/mn/inlines.h>
 
 static HSD_GObj* gm_804D6858;
 
@@ -64,7 +65,7 @@ void gm_801ACF8C_OnFrame(void)
             var_r31)
         {
             if (var_r31 == 0) {
-                lbAudioAx_80024030(1);
+                sfxForward();
             }
             gm_SetPendingGameMode(GM_TITLE);
             gm_SetNewGameModePending();

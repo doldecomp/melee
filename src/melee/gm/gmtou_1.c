@@ -21,6 +21,7 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lbdvd.h"
 #include "lb/types.h"
+#include "mn/inlines.h"
 #include "mn/mnmain.h"
 #include "sc/types.h"
 
@@ -1864,7 +1865,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
     if (tm->cur_option == 0x1D) {
         lbl_804799D8.x0 += 1;
         if ((arg2 & 0x600) || (lbl_804799D8.x0 >= 0x12CU)) {
-            lbAudioAx_80024030(0);
+            sfxBack();
             fn_8018EC48();
             tm->x2D = 0;
             tm->cur_option = 0x1F;
@@ -1874,7 +1875,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
             s32 stype;
             s32 cond;
 
-            lbAudioAx_80024030(1);
+            sfxForward();
             t = gm_GetTournamentData();
             t->x2D = 1;
             stype = t->stage_selection_type;
@@ -1934,7 +1935,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                 cond3 = 0;
             }
             if (cond3 != 0 && pad_err != 0) {
-                lbAudioAx_80024030(0);
+                sfxBack();
                 HSD_SisLib_803A5E70();
                 mn_8022F138(0x19, 0x1C);
                 mn_8022F138(0x12, 0x15);
@@ -2031,7 +2032,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                     u32 buttons = fn_8018F640(i);
 
                     if (buttons & (PAD_BUTTON_A | PAD_BUTTON_START)) {
-                        lbAudioAx_80024030(1);
+                        sfxForward();
                         if (lbl_804799D8.x44[i] == 7) {
                             lbl_804799D8.x44[i] = 6;
                         } else if (lbl_804799D8.x44[i] == 8) {
@@ -2066,7 +2067,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                         }
                     } else if (buttons & PAD_BUTTON_X) {
                         if (lbl_804799D8.x44[i] != 6) {
-                            lbAudioAx_80024030(0);
+                            sfxBack();
                             lbl_804799D8.x44[i] = 6;
                         } else {
                             u8 pstate2 = lbl_804799D8.x2A[i].state;
@@ -2081,11 +2082,11 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                                     }
                                 }
                                 if (count5 < (s32) (tm->x30 - 1)) {
-                                    lbAudioAx_80024030(0);
+                                    sfxBack();
                                     lbl_804799D8.x44[i] = 7;
                                 }
                             } else if (pstate2 == 2) {
-                                lbAudioAx_80024030(0);
+                                sfxBack();
                                 lbl_804799D8.x2A[i].state = 3;
                                 lbl_804799D8.x2A[i].done = 0;
                             }
@@ -2094,14 +2095,14 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                                (buttons & PAD_BUTTON_UP))
                     {
                         if (lbl_804799D8.x44[i] == 8) {
-                            lbAudioAx_80024030(2);
+                            sfxMove();
                             lbl_804799D8.x44[i] = 7;
                         }
                     } else if (((buttons & PAD_STICK_DOWN) ||
                                 (buttons & PAD_BUTTON_DOWN)) &&
                                lbl_804799D8.x44[i] == 7)
                     {
-                        lbAudioAx_80024030(2);
+                        sfxMove();
                         lbl_804799D8.x44[i] = 8;
                     }
                 }
