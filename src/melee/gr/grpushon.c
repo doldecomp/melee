@@ -715,16 +715,16 @@ DynamicsDesc* grPushOn_80219458(enum_t arg0)
             }
             if (joint == 2) {
                 kind = mpLineGetKind(arg0);
-                if (kind == 1) {
+                if (kind == CollLine_Floor) {
                     return yakumono_param->x8;
                 }
-                if (kind == 2) {
+                if (kind == CollLine_Ceiling) {
                     return yakumono_param->xC;
                 }
-                if (kind == 4) {
+                if (kind == CollLine_RightWall) {
                     return yakumono_param->x10;
                 }
-                if (kind == 8) {
+                if (kind == CollLine_LeftWall) {
                     return yakumono_param->x14;
                 }
                 return NULL;
