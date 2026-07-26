@@ -505,8 +505,7 @@ void ftMs_SpecialN_801365A8(HSD_GObj* gobj)
         fp->x2219_b0 = 1;
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     fp->accessory4_cb = 0;
     return;
 }
@@ -530,8 +529,7 @@ void ftMs_SpecialN_8013666C(HSD_GObj* gobj)
         fp->x2219_b0 = 1;
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     fp->accessory4_cb = 0;
     return;
 }

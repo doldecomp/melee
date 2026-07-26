@@ -30,6 +30,7 @@ void ftZd_SpecialN_8013A830(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void ftZd_SpecialN_8013A8AC(HSD_GObj* gobj)
@@ -42,6 +43,7 @@ void ftZd_SpecialN_8013A8AC(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 inline void startActionHelper(HSD_GObj* gobj)

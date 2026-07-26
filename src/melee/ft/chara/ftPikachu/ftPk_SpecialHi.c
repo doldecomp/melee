@@ -191,8 +191,7 @@ void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)
                 &vec);
             efSync_Spawn(1012, gobj, &vec);
             fp->x2219_b0 = true;
-            fp->pre_hitlag_cb = efLib_PauseAll;
-            fp->post_hitlag_cb = efLib_ResumeAll;
+            Fighter_SetEffectHitlagCallbacks(fp);
         }
     } else {
         fp = GET_FIGHTER(gobj);
@@ -207,8 +206,7 @@ void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)
             vec2.y += 6 * tempf - 3;
             efSync_Spawn(1012, gobj, &vec2);
             fp->x2219_b0 = true;
-            fp->pre_hitlag_cb = efLib_PauseAll;
-            fp->post_hitlag_cb = efLib_ResumeAll;
+            Fighter_SetEffectHitlagCallbacks(fp);
         }
     }
 }
@@ -232,8 +230,7 @@ void ftPk_SpecialAirHiStart1_Anim(HSD_GObj* gobj)
                 &vec);
             efSync_Spawn(1012, gobj, &vec);
             fp->x2219_b0 = true;
-            fp->pre_hitlag_cb = efLib_PauseAll;
-            fp->post_hitlag_cb = efLib_ResumeAll;
+            Fighter_SetEffectHitlagCallbacks(fp);
         }
     } else {
         fp = GET_FIGHTER(gobj);
@@ -248,8 +245,7 @@ void ftPk_SpecialAirHiStart1_Anim(HSD_GObj* gobj)
             vec2.y += (10 * tempf) - 5;
             efSync_Spawn(1012, gobj, &vec2);
             fp->x2219_b0 = true;
-            fp->pre_hitlag_cb = efLib_PauseAll;
-            fp->post_hitlag_cb = efLib_ResumeAll;
+            Fighter_SetEffectHitlagCallbacks(fp);
         }
     }
 }

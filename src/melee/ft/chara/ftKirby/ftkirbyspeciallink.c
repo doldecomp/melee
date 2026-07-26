@@ -7,18 +7,12 @@
 #include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftKirby/inlines.h"
 #include "it/items/itlinkarrow.h"
 #include "it/items/itlinkbow.h"
 #include "lb/lb_00B0.h"
 
 #include <lb/lbrefract.h>
-
-static inline void ftKb_SpecialN_set_cbs(Fighter_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    fp->death2_cb = ftKb_Init_800EE74C;
-    fp->take_dmg_cb = ftKb_Init_800EE7B8;
-}
 
 ftLk_SpecialNIndex ftKb_SpecialNLk800FB394(Fighter_GObj* gobj)
 {

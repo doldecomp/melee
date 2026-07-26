@@ -104,8 +104,7 @@ void ftNs_SpecialLwStart_Anim(
                           fp->parts[FtPart_L1stNb].joint);
             fp->x2219_b0 = true;
         }
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
         fighter_data2->mv.ns.speciallw.x10 = 0;
         if ((s32) fighter_data2->ground_or_air == GA_Ground) {
             ftNs_SpecialLwHold_Enter(gobj);
@@ -139,8 +138,7 @@ void ftNs_SpecialAirLwStart_Anim(
                           fp->parts[FtPart_L1stNb].joint);
             fp->x2219_b0 = true;
         }
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
         fighter_data2->mv.ns.speciallw.x10 = 0;
         if ((s32) fighter_data2->ground_or_air == GA_Ground) {
             ftNs_SpecialLwHold_Enter(gobj);
@@ -740,8 +738,7 @@ void ftNs_SpecialLwHit_Anim(
                               temp_r30->parts[FtPart_L1stNb].joint);
                 temp_r30->x2219_b0 = true;
             }
-            temp_r30->pre_hitlag_cb = efLib_PauseAll;
-            temp_r30->post_hitlag_cb = efLib_ResumeAll;
+            Fighter_SetEffectHitlagCallbacks(temp_r30);
         }
     }
 
@@ -776,8 +773,7 @@ void ftNs_SpecialAirLwHit_Anim(
                               fp->parts[FtPart_L1stNb].joint);
                 fp->x2219_b0 = true;
             }
-            fp->pre_hitlag_cb = efLib_PauseAll;
-            fp->post_hitlag_cb = efLib_ResumeAll;
+            Fighter_SetEffectHitlagCallbacks(fp);
         }
     }
 

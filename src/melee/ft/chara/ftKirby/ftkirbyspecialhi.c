@@ -85,8 +85,7 @@ void ftKb_SpecialHi_Enter(Fighter_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     efSync_Spawn(0x494, gobj);
     fp->x2219_b0 = 1;
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 void ftKb_SpecialAirHi_Enter(Fighter_GObj* gobj)
@@ -103,8 +102,7 @@ void ftKb_SpecialAirHi_Enter(Fighter_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     efSync_Spawn(0x494, gobj);
     fp->x2219_b0 = 1;
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 void ftKb_SpecialHi1_Anim(Fighter_GObj* gobj)
@@ -115,8 +113,7 @@ void ftKb_SpecialHi1_Anim(Fighter_GObj* gobj)
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirHi2, 0xA, 0.0f, 1.0f,
                                   0.0f, NULL);
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
         fp->mv.kb.specialhi.x0 = 0;
     }
 }
@@ -128,8 +125,7 @@ void ftKb_SpecialHi2_Anim(Fighter_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 0x187, 0xA, 0.0f, 1.0f, 0.0f, NULL);
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     }
 }
 
@@ -156,8 +152,7 @@ void ftKb_SpecialAirHi1_Anim(Fighter_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirHi2, 0xA, 0.0f, 1.0f,
                                   0.0f, NULL);
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
         fp->mv.kb.specialn_pe.facing_dir = 0;
     }
 }
@@ -169,8 +164,7 @@ void ftKb_SpecialAirHi2_Anim(Fighter_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirHi3, 0xA, 0.0F, 1.0F,
                                   0.0F, NULL);
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     }
 }
 

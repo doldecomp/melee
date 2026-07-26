@@ -115,11 +115,7 @@ void itClimbersBlizzard_802C2358(Item_GObj* gobj)
 bool itClimbersBlizzard_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    if (ip->xD44_lifeTimer <= 0.0f) {
-        return true;
-    }
-    ip->xD44_lifeTimer -= 1.0F;
-    return false;
+    return Item_TickLifetime(ip);
 }
 
 void itClimbersBlizzard_UnkMotion0_Phys(Item_GObj* gobj)

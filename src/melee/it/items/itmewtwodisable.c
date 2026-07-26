@@ -99,11 +99,7 @@ void it_802C4BB8(Item_GObj* item_gobj)
 bool itMewtwodisable_UnkMotion0_Anim(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
-    if (item->xD44_lifeTimer <= 0.0f) {
-        return true;
-    }
-    item->xD44_lifeTimer -= 1.0f;
-    return false;
+    return Item_TickLifetime(item);
 }
 
 void itMewtwodisable_UnkMotion0_Phys(Item_GObj* item_gobj) {}
