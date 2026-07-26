@@ -16,6 +16,7 @@
 
 #include "ef/efsync.h"
 
+#include "ef/forward.h"
 #include "ft/forward.h"
 
 #include "ft/inlines.h"
@@ -714,22 +715,22 @@ bool ftColl_80076ED8(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
     return false;
 }
 
-// Indexed by HitElement (-1 = no effect); same values as it_803F1384
-static int ftColl_803C0CAC[] = {
-    /* [HitElement_Normal]   */ 1000,
-    /* [HitElement_Fire]     */ 1002,
-    /* [HitElement_Electric] */ 1001,
-    /* [HitElement_Slash]    */ 1004,
-    /* [HitElement_Coin]     */ 1145,
-    /* [HitElement_Ice]      */ 1005,
+// Effect IDs spawned on hit, indexed by HitElement (-1 = no effect)
+static int hit_effect_ids[] = {
+    /* [HitElement_Normal]   */ Ef_Id_Unk1000,
+    /* [HitElement_Fire]     */ Ef_Id_Unk1002,
+    /* [HitElement_Electric] */ Ef_Id_Unk1001,
+    /* [HitElement_Slash]    */ Ef_Id_Unk1004,
+    /* [HitElement_Coin]     */ Ef_Id_Unk1145,
+    /* [HitElement_Ice]      */ Ef_Id_Unk1005,
     /* [HitElement_Nap]      */ -1,
     /* [HitElement_Sleep]    */ -1,
     /* [HitElement_Catch]    */ -1,
-    /* [HitElement_Ground]   */ 1000,
-    /* [HitElement_Cape]     */ 1000,
+    /* [HitElement_Ground]   */ Ef_Id_Unk1000,
+    /* [HitElement_Cape]     */ Ef_Id_Unk1000,
     /* [HitElement_Inert]    */ -1,
     /* [HitElement_Disable]  */ -1,
-    /* [HitElement_Dark]     */ 1046,
+    /* [HitElement_Dark]     */ Ef_Id_Unk1046,
     /* [HitElement_Scball]   */ -1,
     /* [HitElement_Lipstick] */ -1,
     /* [HitElement_Leadead]  */ 0,
@@ -1378,7 +1379,7 @@ void ftColl_80078538(Fighter_GObj* gobj, Vec3* pos, u32 dmg, float ignored,
     PAD_STACK(20);
 
     if (scale < p_ftCommonData->x3F0) {
-        efSync_Spawn(0x3E8, 0, pos, &ignored);
+        efSync_Spawn(Ef_Id_Unk1000, 0, pos, &ignored);
     } else {
         efSync_Spawn(0x3F3, 0, pos);
     }
@@ -2369,25 +2370,25 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
                 u32 u_dmg = (u32) entry->x20;
                 HitCapsule* sfx_hit = entry->hit0;
                 Fighter* sfx_fp = gobj->user_data;
-                int sfx_id = ftColl_803C0CAC[sfx_hit->element];
+                int sfx_id = hit_effect_ids[sfx_hit->element];
                 int severity = sfx_hit->sfx_severity;
 
                 switch (sfx_id) {
-                case 0x3E8:
+                case Ef_Id_Unk1000:
                     ftColl_80078538(gobj, &entry->pos, severity, u_dmg, kb);
                     break;
-                case 0x3E9:
-                case 0x3EA:
-                case 0x3EC:
-                case 0x416:
-                case 0x479:
-                case 0x4E7:
+                case Ef_Id_Unk1001:
+                case Ef_Id_Unk1002:
+                case Ef_Id_Unk1004:
+                case Ef_Id_Unk1046:
+                case Ef_Id_Unk1145:
+                case Ef_Id_Unk1255:
                     efSync_Spawn(sfx_id, 0, &entry->pos);
                     break;
-                case 0x3ED:
+                case Ef_Id_Unk1005:
                     efSync_Spawn(sfx_id, 0, &entry->pos, &sfx_fp->facing_dir);
                     break;
-                case 0x3EB:
+                case Ef_Id_Unk1003:
                     break;
                 }
             }
@@ -2473,25 +2474,25 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
             if (arg4 != 0) {
                 u32 u_dmg = (u32) entry->x20;
                 Fighter* sfx_fp = gobj->user_data;
-                int sfx_id = ftColl_803C0CAC[hit->element];
+                int sfx_id = hit_effect_ids[hit->element];
                 int severity = hit->sfx_severity;
 
                 switch (sfx_id) {
-                case 0x3E8:
+                case Ef_Id_Unk1000:
                     ftColl_80078538(gobj, &entry->pos, severity, u_dmg, kb);
                     break;
-                case 0x3E9:
-                case 0x3EA:
-                case 0x3EC:
-                case 0x416:
-                case 0x479:
-                case 0x4E7:
+                case Ef_Id_Unk1001:
+                case Ef_Id_Unk1002:
+                case Ef_Id_Unk1004:
+                case Ef_Id_Unk1046:
+                case Ef_Id_Unk1145:
+                case Ef_Id_Unk1255:
                     efSync_Spawn(sfx_id, 0, &entry->pos);
                     break;
-                case 0x3ED:
+                case Ef_Id_Unk1005:
                     efSync_Spawn(sfx_id, 0, &entry->pos, &sfx_fp->facing_dir);
                     break;
-                case 0x3EB:
+                case Ef_Id_Unk1003:
                     break;
                 }
             }
@@ -3489,21 +3490,21 @@ void ftColl_8007BE3C(Fighter_GObj* gobj)
         float x187c = fp->dmg.x187c;
         u32 dmg_unsigned = fp->dmg.x1898;
         u32 x1890 = fp->dmg.x1890;
-        int effect_idx = ftColl_803C0CAC[fp->dmg.x188c];
+        int effect_idx = hit_effect_ids[fp->dmg.x188c];
         Fighter* vfp = gobj->user_data;
         switch (effect_idx) {
-        case 1000:
+        case Ef_Id_Unk1000:
             ftColl_80078538(gobj, &fp->dmg.x1880, x1890, dmg_unsigned, x187c);
             break;
-        case 1001:
-        case 1002:
-        case 1004:
-        case 1046:
-        case 1145:
-        case 1255:
+        case Ef_Id_Unk1001:
+        case Ef_Id_Unk1002:
+        case Ef_Id_Unk1004:
+        case Ef_Id_Unk1046:
+        case Ef_Id_Unk1145:
+        case Ef_Id_Unk1255:
             efSync_Spawn(effect_idx, 0, &fp->dmg.x1880);
             break;
-        case 1005:
+        case Ef_Id_Unk1005:
             efSync_Spawn(effect_idx, 0, &fp->dmg.x1880, &vfp->facing_dir);
             break;
         default:

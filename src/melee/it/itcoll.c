@@ -9,6 +9,9 @@
 #include <platform.h>
 
 #include "ef/efsync.h"
+
+#include "ef/forward.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_0881.h"
 #include "ft/ftchangeparam.h"
@@ -101,21 +104,21 @@ void it_8026F9AC(s32 arg0, void* fighter, HitCapsule* hit, Item* arg_item,
 }
 
 // EF IDs spawned on hit, indexed by HitElement (-1 = no effect)
-static s32 it_803F1384[17] = {
-    /* [HitElement_Normal]   */ 1000,
-    /* [HitElement_Fire]     */ 1002,
-    /* [HitElement_Electric] */ 1001,
-    /* [HitElement_Slash]    */ 1004,
-    /* [HitElement_Coin]     */ 1145,
-    /* [HitElement_Ice]      */ 1005,
+static s32 hit_effect_ids[17] = {
+    /* [HitElement_Normal]   */ Ef_Id_Unk1000,
+    /* [HitElement_Fire]     */ Ef_Id_Unk1002,
+    /* [HitElement_Electric] */ Ef_Id_Unk1001,
+    /* [HitElement_Slash]    */ Ef_Id_Unk1004,
+    /* [HitElement_Coin]     */ Ef_Id_Unk1145,
+    /* [HitElement_Ice]      */ Ef_Id_Unk1005,
     /* [HitElement_Nap]      */ -1,
     /* [HitElement_Sleep]    */ -1,
     /* [HitElement_Catch]    */ -1,
-    /* [HitElement_Ground]   */ 1000,
-    /* [HitElement_Cape]     */ 1000,
+    /* [HitElement_Ground]   */ Ef_Id_Unk1000,
+    /* [HitElement_Cape]     */ Ef_Id_Unk1000,
     /* [HitElement_Inert]    */ -1,
     /* [HitElement_Disable]  */ -1,
-    /* [HitElement_Dark]     */ 1046,
+    /* [HitElement_Dark]     */ Ef_Id_Unk1046,
     /* [HitElement_Scball]   */ -1,
     /* [HitElement_Lipstick] */ -1,
     /* [HitElement_Leadead]  */ 0,
@@ -860,28 +863,29 @@ void it_80270E30(Item_GObj* arg_item_gobj)
                     hit2 = damage_log->x8;
                     arg_item2 = arg_item_gobj->user_data;
                     hurt_coll_pos = &hit2->hurt_coll_pos;
-                    element = it_803F1384[hit2->element];
+                    element = hit_effect_ids[hit2->element];
                     switch (element) {
-                    case 0x3E8:
-                        efSync_Spawn(0x3E8, arg_item_gobj, hurt_coll_pos,
-                                     &sp18);
+                    case Ef_Id_Unk1000:
+                        efSync_Spawn(Ef_Id_Unk1000, arg_item_gobj,
+                                     hurt_coll_pos, &sp18);
                         break;
-                    case 0x3E9:
-                    case 0x3EA:
-                    case 0x3EC:
-                    case 0x416:
-                    case 0x479:
-                        efSync_Spawn(it_803F1384[hit2->element], arg_item_gobj,
-                                     hurt_coll_pos, arg_item2);
+                    case Ef_Id_Unk1001:
+                    case Ef_Id_Unk1002:
+                    case Ef_Id_Unk1004:
+                    case Ef_Id_Unk1046:
+                    case Ef_Id_Unk1145:
+                        efSync_Spawn(hit_effect_ids[hit2->element],
+                                     arg_item_gobj, hurt_coll_pos, arg_item2);
                         break;
-                    case 0x3ED:
-                        efSync_Spawn(it_803F1384[hit2->element], arg_item_gobj,
-                                     hurt_coll_pos, &arg_item2->facing_dir);
+                    case Ef_Id_Unk1005:
+                        efSync_Spawn(hit_effect_ids[hit2->element],
+                                     arg_item_gobj, hurt_coll_pos,
+                                     &arg_item2->facing_dir);
                         break;
                     }
                 } else {
                     hurt_pos = hit->hurt_coll_pos;
-                    efSync_Spawn(0x3E8, arg_item_gobj, &hurt_pos,
+                    efSync_Spawn(Ef_Id_Unk1000, arg_item_gobj, &hurt_pos,
                                  &damage_log->x8->damage);
                 }
             }
