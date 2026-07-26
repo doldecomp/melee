@@ -468,7 +468,7 @@ void grKongo_801D577C(Ground_GObj* arg0)
         HSD_GObj* kept_gobj;
         lbColl_80008D30_arg1 hit = grKg_803B7FB0;
         PAD_STACK(4);
-        hit.state = 1;
+        hit.state = HitCapsule_Enabled;
         hit.damage = *(u32*) &yakumono_param->unk6C;
         hit.kb_angle = *(u32*) &yakumono_param->unk70;
         hit.unkC = *(u32*) &yakumono_param->unk74;

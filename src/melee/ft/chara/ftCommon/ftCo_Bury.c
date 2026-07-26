@@ -216,8 +216,8 @@ bool ftCo_800C0C88(ftCommon_BuryType arg0)
 bool ftCo_800C0CB8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->dmg.x1860_element == 9 && fp->ground_or_air == GA_Ground &&
-        !fp->x2227_b6)
+    if (fp->dmg.x1860_element == HitElement_Ground &&
+        fp->ground_or_air == GA_Ground && !fp->x2227_b6)
     {
         ftCo_800C0D0C(gobj);
         return true;

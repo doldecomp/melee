@@ -195,11 +195,11 @@ void it_80275788(Item_GObj* item_gobj)
 {
     Item* item;
     HitCapsule* hitcapsule;
-    u32 state;
+    HitCapsuleState state;
     u32 var_ctr;
 
     item = item_gobj->user_data;
-    state = 4;
+    state = HitCapsule_Unk4;
     for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
         hitcapsule = (0, &item->x5D4_hitboxes[var_ctr].hit);
         if (hitcapsule->state != HitCapsule_Disabled) {

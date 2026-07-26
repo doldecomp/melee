@@ -73,7 +73,7 @@ void ftYs_Init_8012BDA0(Fighter_GObj* gobj)
     {
         ftHurtboxInit hurt;
         PAD_STACK(4 * 4);
-        ftColl_8007B0C0(gobj, Intangible);
+        ftColl_8007B0C0(gobj, HurtCapsule_Intangible);
         hurt.bone_idx = fp->ft_data->x8->x11;
         hurt.height = HurtHeight_Mid;
         hurt.is_grabbable = true;
@@ -89,7 +89,7 @@ void ftYs_Init_8012BE3C(HSD_GObj* gobj)
     ftCo_DatAttrs_xBC_t* xBC;
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074B0C(gobj, 0, 0);
-    ftColl_8007B0C0(gobj, 0);
+    ftColl_8007B0C0(gobj, HurtCapsule_Enabled);
     xBC = &fp->co_attrs.xBC;
     {
         Fighter_Part part = ftParts_GetBoneIndex(fp, 4);
@@ -149,7 +149,7 @@ static inline void spawnEffect(HSD_GObj* gobj)
     Fighter* fp;
     fp = GET_FIGHTER(gobj);
     ftParts_80074B0C(gobj, 0, 0);
-    ftColl_8007B0C0(gobj, 0);
+    ftColl_8007B0C0(gobj, HurtCapsule_Enabled);
 
     co_xBC = &fp->co_attrs.xBC;
     part = ftParts_GetBoneIndex(fp, FtPart_HipN);
@@ -201,7 +201,7 @@ static inline void inlineA0(Fighter_GObj* gobj)
     {
         Fighter* fp = GET_FIGHTER(gobj);
         ftHurtboxInit hurt;
-        ftColl_8007B0C0(gobj, Intangible);
+        ftColl_8007B0C0(gobj, HurtCapsule_Intangible);
         hurt.bone_idx = fp->ft_data->x8->x11;
         hurt.height = HurtHeight_Mid;
         hurt.is_grabbable = true;
@@ -270,7 +270,7 @@ void ftYs_Shield_8012C49C(HSD_GObj* gobj)
     {
         Fighter* fp0 = GET_FIGHTER(gobj);
         ftParts_80074B0C(gobj, 0, 0);
-        ftColl_8007B0C0(gobj, 0);
+        ftColl_8007B0C0(gobj, HurtCapsule_Enabled);
 
         {
             u8 _[8];

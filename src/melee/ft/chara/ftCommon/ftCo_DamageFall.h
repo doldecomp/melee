@@ -8,7 +8,7 @@
 #include <dolphin/mtx.h>
 
 /* 090574 */ void ftCo_80090574(Fighter_GObj* gobj);
-/* 090594 */ void ftCo_80090594(Fighter* fp, enum_t element, int dmg,
+/* 090594 */ void ftCo_80090594(Fighter* fp, HitElement element, int dmg,
                                 FtMotionId msid, GroundOrAir ground_or_air,
                                 float hitlag_mul);
 /* 090690 */ Vec2* ftCo_80090690(Fighter* fp, Vec2* shift);

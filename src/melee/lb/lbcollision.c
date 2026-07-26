@@ -1727,7 +1727,7 @@ bool lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2, s32 arg3,
     MtxPtr var_r9;
     float var_f1;
 
-    if (arg1->state != Intangible) {
+    if (arg1->state != HurtCapsule_Intangible) {
         if (!arg1->skip_update_pos) {
             lb_8000B1CC(arg1->bone, &arg1->a_offset, &arg1->a_pos);
             lb_8000B1CC(arg1->bone, &arg1->b_offset, &arg1->b_pos);
@@ -2636,7 +2636,7 @@ bool lbColl_8000A584(HurtCapsule* hurt, u32 arg1, u32 arg2, Mtx arg3, f32 arg8)
         GXColor* temp_r3;
 
         var_r4 = arg1;
-        if (hurt->state == Intangible) {
+        if (hurt->state == HurtCapsule_Intangible) {
             var_r4 = 2;
         }
         temp_r3 = lbColl_803B9928[var_r4].pad;
