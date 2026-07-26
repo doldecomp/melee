@@ -37,7 +37,8 @@ typedef struct CameraDebugMode CameraDebugMode;
 typedef struct CameraModeCallbacks CameraModeCallbacks;
 typedef struct CameraInputs CameraInputs;
 
-/// Named by an assert in #cmSnap_800315C8.
+/// @remarks @c CmSnapStatus_Sleep is named by an assert in
+/// #cmSnap_800315C8.
 typedef enum CmSnapStatus {
     /* 0x0 */ CmSnapStatus_Sleep,
     /* 0x1 */ CmSnapStatus_Unk1,
