@@ -75,7 +75,8 @@ static void ftGw_SpecialN_CreateSausage(HSD_GObj* gobj)
                                     fp1->u.gw.x2240_chefVar1;
                                 var_r6 = temp_r5;
                                 fp1->u.gw.x2240_chefVar1 = temp_r5;
-                                it_802C837C(gobj, &vec0, 122, var_r6,
+                                it_802C837C(gobj, &vec0,
+                                            It_Kind_GameWatch_Chef, var_r6,
                                             fp->facing_dir);
                             }
                         }

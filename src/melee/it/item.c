@@ -407,7 +407,7 @@ static void Item_802676F4(HSD_GObj* gobj)
     case 0:
         Item_804A0C64.x0++;
 
-        if (item_data->kind == 34) {
+        if (item_data->kind == It_Kind_M_Ball) {
             Item_804A0C64.x1C++;
         }
 
@@ -1629,7 +1629,7 @@ static bool Item_80269F14(HSD_GObj* gobj)
     Item* temp_item = (Item*) HSD_GObjGetUserData(gobj);
 
     if (temp_item->xDCC_flag.b1 == 0) {
-        if (temp_item->kind == 34) {
+        if (temp_item->kind == It_Kind_M_Ball) {
             if (temp_item->xDCC_flag.b2 == 0) {
                 temp_item->owner = temp_item->xC64_reflectGObj;
                 temp_item->x20_team_id = ftLib_80086EB4(temp_item->owner);

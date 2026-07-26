@@ -39,8 +39,8 @@ static void ftKb_NsSpecialNStart_Anim_inline(HSD_GObj* gobj, Vec3* flash_pos)
         flash_pos->z = 0;
         flash_pos->y += fp->x34_scale.y * 3.0f;
         {
-            HSD_GObj* flash_gobj =
-                it_802AA8C0(gobj, flash_pos, 145, fp->facing_dir);
+            HSD_GObj* flash_gobj = it_802AA8C0(
+                gobj, flash_pos, It_Kind_Kirby_NessPKFlush, fp->facing_dir);
             fp->u.kb.ns_flash_gobj = flash_gobj;
             if (flash_gobj != NULL) {
                 fp->death2_cb = ftKb_Init_800EE74C;

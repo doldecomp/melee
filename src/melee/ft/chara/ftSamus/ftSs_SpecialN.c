@@ -83,7 +83,8 @@ static bool ftSs_SpecialN_801292E4(HSD_GObj* gobj)
         vec2.x = 0;
         lb_8000B1CC(fp->parts[FtPart_RHandNb].joint, &vec2, &vec1);
         vec1.z = 0;
-        result = it_802B55C8(gobj, &vec1, FtPart_RHandNb, 94, fp->facing_dir);
+        result = it_802B55C8(gobj, &vec1, FtPart_RHandNb, It_Kind_Samus_Charge,
+                             fp->facing_dir);
         fp->u.ss.x222C = result;
         if (result != NULL) {
             ftSamus_updateDamageDeathCBs(gobj);

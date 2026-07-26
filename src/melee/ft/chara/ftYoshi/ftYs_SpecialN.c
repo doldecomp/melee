@@ -387,7 +387,7 @@ static inline void inlineB0(Fighter_GObj* gobj, HSD_GObjEvent on_anim_end)
                     item_attrs.lifetime = ftYs_SpecialN_GetDatAttr24(gobj);
                     item_attrs.x24 = ftYs_SpecialN_GetDatAttr18(gobj);
                     item_attrs.float3 = ftYs_SpecialN_8012CDB4();
-                    item_attrs.kind = 87;
+                    item_attrs.kind = It_Kind_Yoshi_EggLay;
                     it_802F2F34(gobj, &item_attrs);
                     fp->mv.ys.specialn.x0_b0 = false;
                     fp->cmd_vars[0] = 0;

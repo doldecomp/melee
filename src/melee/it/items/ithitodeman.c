@@ -379,7 +379,7 @@ void it_802D4C74(Item_GObj* gobj)
     spawn.vel.x = spawn.facing_dir * attrs->x50;
     spawn.vel.y = 0.0f;
     spawn.vel.z = 0.0f;
-    spawn.kind = 0xCC;
+    spawn.kind = Pokemon_Hitodeman_Star;
     spawn.x0_parent_gobj = ip->owner;
     spawn.x4_parent_gobj2 = gobj;
     spawn.x44_flag.b0 = false;

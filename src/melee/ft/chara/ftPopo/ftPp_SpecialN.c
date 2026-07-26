@@ -164,7 +164,8 @@ void ftPp_SpecialN_8011F500(Fighter_GObj* gobj)
         lb_8000B1CC(fp->parts[0].joint, NULL, &pos);
         pos.x = da->xC * fp->facing_dir + pos.x;
         pos.y += da->x10 + fp->u.pp.x2250;
-        fp->u.pp.x222C = it_802C1590(gobj, &pos, 106, fp->facing_dir);
+        fp->u.pp.x222C =
+            it_802C1590(gobj, &pos, It_Kind_IceClimber_Ice, fp->facing_dir);
         ft_PlaySFX(fp, 130021, 127, 64);
         if (fp->u.pp.x222C != NULL) {
             fp->death2_cb = ftPp_Init_8011F060;

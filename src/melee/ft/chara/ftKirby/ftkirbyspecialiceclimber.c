@@ -189,7 +189,8 @@ void fn_801090D4(Fighter_GObj* gobj)
         lb_8000B1CC(fp->parts[0].joint, NULL, &pos);
         pos.x += da->specialn_pp_x_spawn * fp->facing_dir;
         pos.y += da->specialn_pp_y_spawn + fp->u.kb.xC8;
-        fp->u.kb.xC0 = it_802C1590(gobj, &pos, 0x85, fp->facing_dir);
+        fp->u.kb.xC0 = it_802C1590(gobj, &pos, It_Kind_Kirby_IceClimberIce,
+                                   fp->facing_dir);
         ft_PlaySFX(fp, 0x1FBE5, 127, 64);
         if (fp->u.kb.xC0 != NULL) {
             fp->death2_cb = (HSD_GObjEvent) ftKb_Init_800EE74C;

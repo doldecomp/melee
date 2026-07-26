@@ -151,7 +151,7 @@ Item_GObj* it_802C27D4(Fighter_GObj* owner, Vec3* pos, int msid, float dir)
     Item_GObj* item_gobj;
     PAD_STACK(20);
 
-    spawn.kind = 0x71;
+    spawn.kind = It_Kind_IceClimber_GumStrings;
     spawn.prev_pos = *pos;
     spawn.pos = spawn.prev_pos;
     spawn.facing_dir = dir;

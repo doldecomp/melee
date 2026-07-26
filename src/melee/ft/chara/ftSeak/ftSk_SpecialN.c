@@ -52,8 +52,8 @@ void ftSk_SpecialN_80111FBC(HSD_GObj* gobj)
             }
             pos.z = 0;
             {
-                Item_GObj* item_gobj =
-                    it_802AFD8C(gobj, &pos, 79, fp->facing_dir);
+                Item_GObj* item_gobj = it_802AFD8C(
+                    gobj, &pos, It_Kind_Seak_NeedleThrow, fp->facing_dir);
                 if (item_gobj != NULL) {
                     it_802AFEA8(item_gobj, gobj, 1);
                 }
@@ -113,7 +113,8 @@ void ftSk_SpecialNStart_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        fp->u.sk.x4 = it_802B19AC(gobj, &fp->cur_pos, 23, 80, fp->facing_dir);
+        fp->u.sk.x4 = it_802B19AC(gobj, &fp->cur_pos, 23,
+                                  It_Kind_Seak_NeedleHeld, fp->facing_dir);
         Fighter_ChangeMotionState(gobj, ftSk_MS_SpecialNLoop, Ft_MF_None, 0, 1,
                                   0, NULL);
         setDmgCallbacks(gobj);
@@ -175,7 +176,8 @@ void ftSk_SpecialAirNStart_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        fp->u.sk.x4 = it_802B19AC(gobj, &fp->cur_pos, 23, 80, fp->facing_dir);
+        fp->u.sk.x4 = it_802B19AC(gobj, &fp->cur_pos, 23,
+                                  It_Kind_Seak_NeedleHeld, fp->facing_dir);
         Fighter_ChangeMotionState(gobj, ftSk_MS_SpecialAirNLoop, Ft_MF_None, 0,
                                   1, 0, NULL);
         setDmgCallbacks(gobj);
@@ -462,8 +464,8 @@ void shootNeedles(Fighter_GObj* gobj)
             pos.z = 0;
 
             {
-                Item_GObj* item_gobj =
-                    it_802AFD8C(gobj, &pos, 79, fp->facing_dir);
+                Item_GObj* item_gobj = it_802AFD8C(
+                    gobj, &pos, It_Kind_Seak_NeedleThrow, fp->facing_dir);
                 if (item_gobj != NULL) {
                     it_802AFEA8(item_gobj, gobj, 0);
                 }
