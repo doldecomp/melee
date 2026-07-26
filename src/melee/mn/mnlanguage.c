@@ -63,7 +63,7 @@ void mnLanguage_8024BFE0(HSD_GObj* arg0_unused)
             lbLang_SetSavedLanguage(temp_r31->x0);
             lb_8001CE00();
             lbAudioAx_80027AB0(0xAD);
-            mn_80229860(1);
+            mn_80229860(GM_MENU);
             mn_8022F1A8(1, 9);
             mn_804A04F0.cur_menu = 4;
             mn_804A04F0.hovered_selection = 4;

@@ -3220,7 +3220,7 @@ s32 gm_80166A98(MatchEnd* arg0, u8 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
 
     memzero(arg0, 0x227C);
 
-    arg0->result = 1;
+    arg0->result = OUTCOME_TIMEOUT;
     arg0->x5 = 0;
     arg0->is_teams = 0;
 
@@ -3287,7 +3287,7 @@ void gm_80166CCC(MatchEnd* arg0, MatchEnd* arg1)
     result = arg1->result;
     player_count = 0;
     team_count = 0;
-    if (result == 7 || result == 8) {
+    if (result == OUTCOME_NO_CONTEST || result == OUTCOME_RETRY) {
         arg0->result = result;
     }
     if (arg1->n_winners > 1) {
@@ -3363,7 +3363,7 @@ bool gm_80167140(MatchEnd* me)
 {
     s32 winners;
 
-    if (me->result != 7) {
+    if (me->result != OUTCOME_NO_CONTEST) {
         if (me->is_teams == 1) {
             winners = me->n_team_winners;
         } else {

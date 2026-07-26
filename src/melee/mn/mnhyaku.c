@@ -70,22 +70,22 @@ void mnHyaku_8024C68C(HSD_GObj* arg0)
         // load the different multi-man melee modes
         switch (menu->cursor) {
         case 0:
-            mn_80229860(0x21);
+            mn_80229860(GM_10MAN_VS);
             return;
         case 1:
-            mn_80229860(0x22);
+            mn_80229860(GM_100MAN_VS);
             return;
         case 2:
-            mn_80229860(0x23);
+            mn_80229860(GM_3MIN_VS);
             return;
         case 3:
-            mn_80229860(0x24);
+            mn_80229860(GM_15MIN_VS);
             return;
         case 4:
-            mn_80229860(0x25);
+            mn_80229860(GM_ENDLESS_VS);
             return;
         case 5:
-            mn_80229860(0x26);
+            mn_80229860(GM_CRUEL_VS);
             return;
         }
     } else {

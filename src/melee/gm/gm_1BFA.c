@@ -111,7 +111,7 @@ void gm_801BFBA8(GameScene* arg0)
     gm_80162968(mei->match_end.frame_count / 60);
     gm_8016247C((s32) mei->match_end.player_standings[0].xE);
     temp_r0 = mei->match_end.result;
-    if ((temp_r0 != 7) && (temp_r0 != 8) &&
+    if ((temp_r0 != OUTCOME_NO_CONTEST) && (temp_r0 != OUTCOME_RETRY) &&
         ((s8) mei->match_end.player_standings[0].stocks != 0))
     {
         gm_UnlockCKind((s32) temp_r31->x4);

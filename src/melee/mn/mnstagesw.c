@@ -361,7 +361,7 @@ static void fn_80235F80(HSD_GObj* gobj)
             case GM_MENU:
                 mnStageSw_8023593C(mnStageSw_804D6BF0);
                 lb_8001CE00();
-                mn_80229860(2);
+                mn_80229860(GM_VS);
                 return;
             default:
                 mnStageSw_8023593C(mnStageSw_804D6BF0);
