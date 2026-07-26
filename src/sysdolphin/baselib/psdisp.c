@@ -14,7 +14,6 @@
 
 #include <math_ppc.h>
 #include <string.h>
-
 #include <dolphin/gx.h>
 
 typedef struct {
@@ -1278,8 +1277,8 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
         up.y = mtx[1][2] * up.z + t2;
         up.z = mtx[2][2] * up.z + t4;
     }
-    psDispSubMakePolygon(pp, texform, pp->pos.x, pp->pos.y, pp->pos.z,
-                         right.x, right.y, right.z, up.x, up.y, up.z);
+    psDispSubMakePolygon(pp, texform, pp->pos.x, pp->pos.y, pp->pos.z, right.x,
+                         right.y, right.z, up.x, up.y, up.z);
 }
 
 static inline void psUpdateAppSRT(HSD_Particle* pp, psdisp_Cache* cache)
@@ -1333,18 +1332,15 @@ static inline void psGetAppSRTPositions(HSD_Particle* pp, Mtx draw_mtx,
 {
     Vec3 last_pos;
 
-    cur_pos->x =
-        draw_mtx[0][3] + (draw_mtx[0][2] * pp->pos.z +
-                          (draw_mtx[0][0] * pp->pos.x +
-                           draw_mtx[0][1] * pp->pos.y));
-    cur_pos->y =
-        draw_mtx[1][3] + (draw_mtx[1][2] * pp->pos.z +
-                          (draw_mtx[1][0] * pp->pos.x +
-                           draw_mtx[1][1] * pp->pos.y));
-    cur_pos->z =
-        draw_mtx[2][3] + (draw_mtx[2][2] * pp->pos.z +
-                          (draw_mtx[2][0] * pp->pos.x +
-                           draw_mtx[2][1] * pp->pos.y));
+    cur_pos->x = draw_mtx[0][3] +
+                 (draw_mtx[0][2] * pp->pos.z +
+                  (draw_mtx[0][0] * pp->pos.x + draw_mtx[0][1] * pp->pos.y));
+    cur_pos->y = draw_mtx[1][3] +
+                 (draw_mtx[1][2] * pp->pos.z +
+                  (draw_mtx[1][0] * pp->pos.x + draw_mtx[1][1] * pp->pos.y));
+    cur_pos->z = draw_mtx[2][3] +
+                 (draw_mtx[2][2] * pp->pos.z +
+                  (draw_mtx[2][0] * pp->pos.x + draw_mtx[2][1] * pp->pos.y));
     if (pp->kind & Tornado) {
         calcTornadoLastPos(pp, &last_pos.x, &last_pos.y, &last_pos.z);
     } else {
@@ -1353,17 +1349,17 @@ static inline void psGetAppSRTPositions(HSD_Particle* pp, Mtx draw_mtx,
         last_pos.z = pp->pos.z - pp->vel.z;
     }
     prev_pos->x =
-        draw_mtx[0][3] + (draw_mtx[0][2] * last_pos.z +
-                          (draw_mtx[0][0] * last_pos.x +
-                           draw_mtx[0][1] * last_pos.y));
+        draw_mtx[0][3] +
+        (draw_mtx[0][2] * last_pos.z +
+         (draw_mtx[0][0] * last_pos.x + draw_mtx[0][1] * last_pos.y));
     prev_pos->y =
-        draw_mtx[1][3] + (draw_mtx[1][2] * last_pos.z +
-                          (draw_mtx[1][0] * last_pos.x +
-                           draw_mtx[1][1] * last_pos.y));
+        draw_mtx[1][3] +
+        (draw_mtx[1][2] * last_pos.z +
+         (draw_mtx[1][0] * last_pos.x + draw_mtx[1][1] * last_pos.y));
     prev_pos->z =
-        draw_mtx[2][3] + (draw_mtx[2][2] * last_pos.z +
-                          (draw_mtx[2][0] * last_pos.x +
-                           draw_mtx[2][1] * last_pos.y));
+        draw_mtx[2][3] +
+        (draw_mtx[2][2] * last_pos.z +
+         (draw_mtx[2][0] * last_pos.x + draw_mtx[2][1] * last_pos.y));
 }
 
 static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
@@ -1543,9 +1539,10 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
                                   (s808 * pp->pos.x + s804 * pp->pos.y))) -
                   w1inv *
                       (f20 + (f16 * prev.z + (s808 * prev.x + s804 * prev.y)));
-            vf2 = w0inv * (f13 + (f11 * pp->pos.z +
-                                  (f12 * pp->pos.x + f8 * pp->pos.y))) -
-                  w1inv * (f13 + (f11 * prev.z + (f12 * prev.x + f8 * prev.y)));
+            vf2 =
+                w0inv * (f13 + (f11 * pp->pos.z +
+                                (f12 * pp->pos.x + f8 * pp->pos.y))) -
+                w1inv * (f13 + (f11 * prev.z + (f12 * prev.x + f8 * prev.y)));
         } else {
             f32 s800 = cache->projection.x_scale * pp->appsrt->ssx +
                        cache->projection.x_offset;
@@ -2136,8 +2133,8 @@ void psDispParticles(s32 arg0, u32 arg1)
                                               GX_TG_TEX0, GX_TEXMTX0, GX_FALSE,
                                               GX_PTIDENTITY);
                         }
-                        tex_group = ((HSD_PSTexGroup***)
-                                          sp7F4)[pp->bank][pp->texGroup];
+                        tex_group = ((
+                            HSD_PSTexGroup***) sp7F4)[pp->bank][pp->texGroup];
                         if (tex_group != NULL) {
                             fmt = tex_group->fmt;
                             tex_table = tex_group->texTable;
