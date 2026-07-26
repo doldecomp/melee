@@ -290,8 +290,12 @@ static inline void setupChanReg(HSD_Particle* pp)
 
     if (pp->kind & DispLighting) {
         getColorMatAmb_noinline(pp, &mat_color, &amb_color);
-        getClrTrail(pp, &prim_color);
-        if (!(pp->kind & PrimEnv)) {
+        if (pp->kind & PrimEnv) {
+            prim_color.r = 0xFF;
+            prim_color.g = 0xFF;
+            prim_color.b = 0xFF;
+        } else {
+            getColorPrimEnv(pp, &prim_color, &mat_color);
             amb_color.r = (u8) ((amb_color.r * prim_color.r) >> 8);
             amb_color.g = (u8) ((amb_color.g * prim_color.g) >> 8);
             amb_color.b = (u8) ((amb_color.b * prim_color.b) >> 8);
@@ -300,9 +304,7 @@ static inline void setupChanReg(HSD_Particle* pp)
             prim_color.g != HSD_PSDisp_804D7934.g ||
             prim_color.b != HSD_PSDisp_804D7934.b)
         {
-            HSD_PSDisp_804D7934.r = prim_color.r;
-            HSD_PSDisp_804D7934.g = prim_color.g;
-            HSD_PSDisp_804D7934.b = prim_color.b;
+            HSD_PSDisp_804D7934 = prim_color;
             GXSetChanMatColor(GX_COLOR0, HSD_PSDisp_804D7934);
         }
         lobj = HSD_LObjGetActiveByID(GX_MAX_LIGHT);
@@ -317,9 +319,7 @@ static inline void setupChanReg(HSD_Particle* pp)
             amb_color.g != HSD_PSDisp_804D7938.g ||
             amb_color.b != HSD_PSDisp_804D7938.b)
         {
-            HSD_PSDisp_804D7938.r = amb_color.r;
-            HSD_PSDisp_804D7938.g = amb_color.g;
-            HSD_PSDisp_804D7938.b = amb_color.b;
+            HSD_PSDisp_804D7938 = amb_color;
             GXSetChanAmbColor(GX_COLOR0, HSD_PSDisp_804D7938);
         }
     }
