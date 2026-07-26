@@ -218,19 +218,6 @@ static void getColorMatAmb(HSD_Particle* pp, GXColor* matCol, GXColor* ambCol)
         ambCol->a = pp->ambA;
     }
 }
-
-static inline void getColorMatAmb_inner(HSD_Particle* pp, GXColor* matCol,
-                                        GXColor* ambCol)
-{
-    getColorMatAmb(pp, matCol, ambCol);
-}
-
-static inline void getColorMatAmb_noinline(HSD_Particle* pp, GXColor* matCol,
-                                           GXColor* ambCol)
-{
-    getColorMatAmb_inner(pp, matCol, ambCol);
-}
-
 static inline void getClrTrail(HSD_Particle* pp, GXColor* color)
 {
     GXColor env_color;
@@ -289,7 +276,7 @@ static inline void setupChanReg(HSD_Particle* pp)
     HSD_LObj* lobj;
 
     if (pp->kind & DispLighting) {
-        getColorMatAmb_noinline(pp, &mat_color, &amb_color);
+        getColorMatAmb(pp, &mat_color, &amb_color);
         if (pp->kind & PrimEnv) {
             prim_color.r = 0xFF;
             prim_color.g = 0xFF;
@@ -364,7 +351,7 @@ static inline void setupTevReg(HSD_Particle* pp)
         }
     }
     if (pp->kind & DispLighting) {
-        getColorMatAmb_noinline(pp, &mat_color, &amb_color);
+        getColorMatAmb(pp, &mat_color, &amb_color);
         if (pp->kind & PrimEnv) {
             if (HSD_PSDisp_804D7944.r != mat_color.r ||
                 HSD_PSDisp_804D7944.g != mat_color.g ||
@@ -386,6 +373,19 @@ static inline void setupTevReg(HSD_Particle* pp)
             }
         }
     }
+}
+
+static inline void psSetupParticleColors(HSD_Particle* pp)
+{
+    setupChanReg(pp);
+    setupTevReg(pp);
+}
+
+static inline void psSetupParticleRenderState(HSD_Particle* pp)
+{
+    psSetupTev((u32*) pp);
+    setupChanCtrl(pp);
+    psSetupParticleColors(pp);
 }
 
 HSD_Particle* particleSort(s32 arg0, u8 arg1, HSD_Particle** arg2,
@@ -1677,11 +1677,11 @@ void psDispParticles(s32 arg0, u32 arg1)
     f64 sp818;
     void* sp7F4;
     void* sp7F0;
-    s32* sp7E4;
-    s32* sp7E0;
-    s32* sp7DC;
-    s32* sp7D8;
-    s32* sp7D4;
+    GXColor* sp7E4;
+    GXColor* sp7E0;
+    GXColor* sp7DC;
+    GXColor* sp7D8;
+    GXColor* sp7D4;
     s32* sp7D0;
     s32* sp7CC;
     s32* sp7C8;
@@ -1707,11 +1707,11 @@ void psDispParticles(s32 arg0, u32 arg1)
     psdisp_Mtx billboard_mtx;
     GXTlutObj sp71C;
     f32 sp700;
-    s32 sp6E0;
-    s32 sp6DC;
-    s32 sp6D8;
-    s32 sp6D4;
-    s32 sp6D0;
+    GXColor sp6E0;
+    GXColor sp6DC;
+    GXColor sp6D8;
+    GXColor sp6D4;
+    GXColor sp6D0;
     s32 sp6CC;
     s32 sp6C8;
     s32 sp6B8;
@@ -1803,10 +1803,10 @@ void psDispParticles(s32 arg0, u32 arg1)
                         HSD_PSDisp_804D7938.g = 0xFF;
                         HSD_PSDisp_804D7938.b = 0xFF;
                         HSD_PSDisp_804D7938.a = 0xFF;
-                        sp6E0 = *(s32*) &HSD_PSDisp_804D7934;
-                        GXSetChanMatColor(GX_COLOR0A0, *(GXColor*) sp7E4);
-                        sp6DC = *(s32*) &HSD_PSDisp_804D7938;
-                        GXSetChanAmbColor(GX_COLOR0A0, *(GXColor*) sp7E0);
+                        sp6E0 = HSD_PSDisp_804D7934;
+                        GXSetChanMatColor(GX_COLOR0A0, *sp7E4);
+                        sp6DC = HSD_PSDisp_804D7938;
+                        GXSetChanAmbColor(GX_COLOR0A0, *sp7E0);
                         psSetupTevInvalidState();
                         psSetupTevCommon();
                         HSD_PSDisp_804D793C.r = 0xFF;
@@ -1821,12 +1821,12 @@ void psDispParticles(s32 arg0, u32 arg1)
                         HSD_PSDisp_804D7944.g = 0xFF;
                         HSD_PSDisp_804D7944.b = 0xFF;
                         HSD_PSDisp_804D7944.a = 0xFF;
-                        sp6D8 = *(s32*) &HSD_PSDisp_804D793C;
-                        GXSetTevColor(GX_TEVREG0, *(GXColor*) sp7DC);
-                        sp6D4 = *(s32*) &HSD_PSDisp_804D7940;
-                        GXSetTevColor(GX_TEVREG1, *(GXColor*) sp7D8);
-                        sp6D0 = *(s32*) &HSD_PSDisp_804D7944;
-                        GXSetTevColor(GX_TEVREG2, *(GXColor*) sp7D4);
+                        sp6D8 = HSD_PSDisp_804D793C;
+                        GXSetTevColor(GX_TEVREG0, *sp7DC);
+                        sp6D4 = HSD_PSDisp_804D7940;
+                        GXSetTevColor(GX_TEVREG1, *sp7D8);
+                        sp6D0 = HSD_PSDisp_804D7944;
+                        GXSetTevColor(GX_TEVREG2, *sp7D4);
                         HSD_PSDisp_804D792C = -1;
                         GXSetZCompLoc(GX_FALSE);
                         HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(),
@@ -1900,10 +1900,7 @@ void psDispParticles(s32 arg0, u32 arg1)
                                           pp->aCmpMode & 7, sp7A4);
                     }
 
-                    psSetupTev((u32*) pp);
-                    setupChanCtrl(pp);
-                    setupChanReg(pp);
-                    setupTevReg(pp);
+                    psSetupParticleRenderState(pp);
                     if (sp7AC != (pp->kind & TexEdge)) {
                         sp7AC = pp->kind & TexEdge;
                         if (sp7AC != 0) {
