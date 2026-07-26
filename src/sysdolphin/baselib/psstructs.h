@@ -294,11 +294,9 @@ static inline void setupTevReg(HSD_Particle* pp);
 static inline void psSetCurrentMtx(GXPosNrmMtx idx);
 static inline HSD_Particle* psDispSubPoint(HSD_Particle* pp);
 static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp);
-static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, float x,
-                                        float y, float z, float ppvx,
-                                        float ppvy, float ppvz, float x0,
-                                        float y0, float z0, float x1, float y1,
-                                        float z1);
+static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
+                                        f32 y, f32 z, f32 x0, f32 y0, f32 z0,
+                                        f32 x1, f32 y1, f32 z1);
 
 static inline void psDispSub(HSD_Particle* pp, u8* texform);
 
