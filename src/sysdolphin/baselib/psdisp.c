@@ -1150,7 +1150,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
     }
 }
 
-static inline void psDispSub(HSD_Particle* pp, u8* texform, f64 zero)
+static inline void psDispSub(HSD_Particle* pp, u8* texform)
 {
     f32 abs_angle;
     psdisp_Cache* cache = &HSD_PSDisp_804D0FC0;
@@ -1178,7 +1178,7 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform, f64 zero)
         f32 x;
         f32 y;
 
-        if (zero == cache->projection.type) {
+        if (0.0f == cache->projection.type) {
             f32 prev_x;
             f32 prev_y;
             f32 prev_z;
@@ -1199,14 +1199,14 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform, f64 zero)
             w0 = cache->view_mtx[2][3] + (cache->view_mtx[2][2] * pp->pos.z +
                                           (cache->view_mtx[2][0] * pp->pos.x +
                                            cache->view_mtx[2][1] * pp->pos.y));
-            if (zero == w0) {
+            if (0.0f == w0) {
                 return;
             }
             w0inv = -1.0f / w0;
             w1 = cache->view_mtx[2][3] + (cache->view_mtx[2][2] * prev_z +
                                           (cache->view_mtx[2][0] * prev_x +
                                            cache->view_mtx[2][1] * prev_y));
-            if (zero == w1) {
+            if (0.0f == w1) {
                 return;
             }
             w1inv = -1.0f / w1;
@@ -1463,7 +1463,7 @@ static inline void psScaleAppSRTAxes(HSD_Particle* pp, Mtx mtx)
 }
 
 static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
-                                   psdisp_Cache* cache, f64 zero)
+                                   psdisp_Cache* cache)
 {
     GXColor draw_color;
     Vec3 cur_pos;
@@ -1493,7 +1493,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
     if ((pp->kind & Trail) || (pp->kind & DirVec)) {
         f32 vf1;
         f32 vf2;
-        if (zero == cache->projection.type) {
+        if (0.0f == cache->projection.type) {
             f32 prev_x;
             f32 prev_y;
             f32 prev_z;
@@ -1536,14 +1536,14 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
                   cache->projection.y_offset * pp->appsrt->x8C;
             f13 = cache->projection.y_scale * pp->appsrt->x80 +
                   cache->projection.y_offset * pp->appsrt->x90;
-            if (zero == w0) {
+            if (0.0f == w0) {
                 return;
             }
             w0inv = -1.0f / w0;
             w1 = pp->appsrt->x90 +
                  (pp->appsrt->x8C * prev_z +
                   (pp->appsrt->x84 * prev_x + pp->appsrt->x88 * prev_y));
-            if (zero == w1) {
+            if (0.0f == w1) {
                 return;
             }
             w1inv = -1.0f / w1;
@@ -1592,7 +1592,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
             f32 abs_v = vf2;
             *(s32*) &abs_v &= 0x7FFFFFFF;
             if (abs_v < 1.17549435e-38f) {
-                angle = (-vf1 >= 0.0) ? 1.5707964f : -1.5707964f;
+                angle = (-vf1 >= 0.0f) ? 1.5707964f : -1.5707964f;
             } else {
                 angle = atan2f(-vf1, vf2);
             }
@@ -1929,7 +1929,6 @@ static inline void psUpdateProjectionCache(psdisp_Cache* cache,
 #pragma inline_depth(3)
 void psDispParticles(s32 arg0, u32 arg1)
 {
-    f64 sp8B0;
     f64 sp818;
     void* sp7F4;
     void* sp7F0;
@@ -1982,7 +1981,6 @@ void psDispParticles(s32 arg0, u32 arg1)
     }
     sp7F4 = psTexGroupArray;
     sp7F0 = psNumCmdList;
-    sp8B0 = 0.0;
     sp818 = 1.1920928955078125e-07f;
     sp7B4 = 0;
     do {
@@ -2047,7 +2045,7 @@ void psDispParticles(s32 arg0, u32 arg1)
                         HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(),
                                               cache->view_mtx);
                         PSMTXInverse(cache->view_mtx, cache->inverse_view_mtx);
-                        psUpdateProjectionCache(cache, (f32) sp8B0);
+                        psUpdateProjectionCache(cache, 0.0f);
                         GXLoadPosMtxImm(cache->view_mtx, 0);
                         billboard_mtx = HSD_PSDisp_803B9628;
                         GXLoadPosMtxImm(billboard_mtx.mtx, 3);
@@ -2233,9 +2231,9 @@ void psDispParticles(s32 arg0, u32 arg1)
                             }
                         }
                     } else if (pp->appsrt != NULL) {
-                        psDispSubAppSRT(pp, form, cache, sp8B0);
+                        psDispSubAppSRT(pp, form, cache);
                     } else {
-                        psDispSub(pp, form, sp8B0);
+                        psDispSub(pp, form);
                     }
                 }
 
