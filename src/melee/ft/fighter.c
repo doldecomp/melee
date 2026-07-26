@@ -2869,10 +2869,10 @@ void Fighter_ProcessHit_8006D1EC(Fighter_GObj* gobj)
 
             } else {
                 switch (fp->kind) {
-                case 0x1B:
+                case FTKIND_MASTERH:
                     ftMh_MS_341_8014FE58(gobj);
                     break;
-                case 0x1C:
+                case FTKIND_CREZYH:
                     ftCh_Init_80156014(gobj);
                     break;
                 default:

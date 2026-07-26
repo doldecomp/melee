@@ -30,7 +30,7 @@ void it_802EFA44(Item_GObj* catherine, Vec* pos, float dir)
     Item* eggData;
     PAD_STACK(0x50);
     if (catherine != NULL) {
-        egg = it_8027B5B0(0xEC, pos, 0, 0, 1);
+        egg = it_8027B5B0(It_Kind_Kyasarin_Egg, pos, 0, 0, 1);
         if (egg != NULL) {
             eggData = GET_ITEM((HSD_GObj*) egg);
             eggData->facing_dir = dir;

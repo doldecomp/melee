@@ -1925,7 +1925,7 @@ void Player_InitOrResetPlayer(s32 slot)
     player = &player_slots[slot];
 
     player->player_state = 0;
-    player->player_character = 8;
+    player->player_character = CKIND_MARIO;
     transformed0 = &player->transformed[0];
     transformed1 = &player->transformed[1];
 

@@ -69,8 +69,8 @@ void onAccessory4(HSD_GObj* gobj)
     {
         Vec3 pos;
         lb_8000B1CC(fp->parts[FtPart_109].joint, NULL, &pos);
-        fp->u.pe.toad_gobj =
-            it_802BDE18(gobj, &pos, FtPart_109, 104, fp->facing_dir);
+        fp->u.pe.toad_gobj = it_802BDE18(gobj, &pos, FtPart_109,
+                                         It_Kind_Peach_Toad, fp->facing_dir);
     }
     fp->x1984_heldItemSpec = fp->u.pe.toad_gobj;
     if (fp->u.pe.toad_gobj != NULL) {
@@ -89,7 +89,7 @@ static void doHitAccessory4(HSD_GObj* gobj)
     lb_8000B1CC(fp->parts[FtPart_109].joint, NULL, &pos);
     pos.y += 2.5f;
     pos.z = 0;
-    it_802BE214(gobj, &pos, 111, fp->facing_dir);
+    it_802BE214(gobj, &pos, It_Kind_Peach_ToadSpore, fp->facing_dir);
 }
 
 static void onHitAccessory4(HSD_GObj* gobj)

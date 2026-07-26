@@ -250,7 +250,7 @@ s32 ft_80087C1C(void)
 
     for (gobj = HSD_GObj_Entities->fighters; gobj != 0; gobj = gobj->next) {
         ftKind = (GET_FIGHTER(gobj))->kind;
-        if (ftKind < 27) {
+        if (ftKind < FTKIND_MASTERH) {
             result = result | 1 << ftKind;
         }
     }

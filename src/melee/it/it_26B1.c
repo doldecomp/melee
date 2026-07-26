@@ -918,7 +918,7 @@ HSD_GObj* it_8026BE84(BobOmbRain* bobOmbRain)
 
     switch (bobomb_id) {
     case 1:
-        if (it_8026D324(true)) {
+        if (it_8026D324(It_Kind_Box)) {
             gobj = it_80286088(bobOmbRain->x0);
         }
 
@@ -967,7 +967,7 @@ HSD_GObj* it_8026BE84(BobOmbRain* bobOmbRain)
         break;
 
     case 4:
-        if (it_8026D324(4)) {
+        if (it_8026D324(It_Kind_Kusudama)) {
             gobj = it_802896CC(&bobOmbRain->x8_vec);
             if (gobj != NULL) {
                 it_80274F10(gobj);

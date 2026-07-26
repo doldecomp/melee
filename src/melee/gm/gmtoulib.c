@@ -2252,10 +2252,10 @@ void fn_8018F888(void)
 
 static inline int fn_8018FA24_inline0(int char_kind)
 {
-    if (char_kind < 0x13) {
+    if (char_kind < CKIND_SEAK) {
         return char_kind;
     }
-    if (char_kind == 0x1D) {
+    if (char_kind == CKIND_GKOOPS) {
         return 5;
     }
     return char_kind + 1;

@@ -631,7 +631,7 @@ void gmClassic_OnLoad(void)
 void gmClassic_OnInit(void)
 {
     struct gmm_x0_528_t* temp_r3 = gmMainLib_8015CDC8();
-    temp_r3->c_kind = 0x21;
+    temp_r3->c_kind = CHKIND_NONE;
     temp_r3->color = 0;
     temp_r3->stocks = 3;
     temp_r3->cpu_level = 0;
@@ -710,8 +710,8 @@ void gmClassic_801B3500(GameScene* arg0)
 
     ally_count = 1;
     ckind = ad->x0.ckind;
-    if (ckind == 0x12 && ad->x0.xC.x12 != 0) {
-        sd->x0D[0] = 0x13;
+    if (ckind == CKIND_ZELDA && ad->x0.xC.x12 != 0) {
+        sd->x0D[0] = CKIND_SEAK;
     } else {
         sd->x0D[0] = ckind;
     }

@@ -1632,7 +1632,7 @@ HSD_GObj* grKongo_801D8078(HSD_GObj* gobj)
     Ground_801C4DA0(&pos, &unk);
 
     for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
-        if (itGetKind(cur) == 0xDA) {
+        if (itGetKind(cur) == It_Kind_Klap) {
             f32 dx, dy, dz, dx2, dy2, dz2, r;
 
             it_8026B294(cur, &item_pos);

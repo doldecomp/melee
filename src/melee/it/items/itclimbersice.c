@@ -45,7 +45,7 @@ static inline void itClimbersice_Spawn(Item_GObj* gobj, u32 spawn1, u32 spawn2)
 {
     HSD_JObj* child = HSD_JObjGetChild(gobj->hsd_obj);
     Item* ip = GET_ITEM(gobj);
-    if (ip->kind == 0x6A) {
+    if (ip->kind == It_Kind_IceClimber_Ice) {
         f32* facing = &ip->facing_dir;
         efAsync_Spawn(gobj, &ip->xBC0, 3, spawn1, child, facing);
     } else {
@@ -58,7 +58,7 @@ static inline void itClimbersice_Spawn2(Item_GObj* gobj)
     HSD_JObj* child = HSD_JObjGetChild(gobj->hsd_obj);
     HSD_JObj* other;
     Item* ip = GET_ITEM(gobj);
-    if (ip->kind == 0x6A) {
+    if (ip->kind == It_Kind_IceClimber_Ice) {
         other = child;
         efAsync_Spawn(gobj, &ip->xBC0, 0, 0x4E9, other);
     } else {
@@ -129,7 +129,7 @@ void it_2725_Logic90_Destroyed(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xDD4_itemVar.climbersice.x0 != NULL) {
-        if (ip->kind == 0x6A) {
+        if (ip->kind == It_Kind_IceClimber_Ice) {
             ftPp_Init_8011F16C(ip->xDD4_itemVar.climbersice.x0, gobj);
         } else {
             ftKb_SpecialNIc_80108CE8(ip->xDD4_itemVar.climbersice.x0, gobj);

@@ -562,7 +562,7 @@ void ftKb_YsSpecialNCapture2_0_Anim(Fighter_GObj* gobj)
             item_attrs.float3 =
                 ea->specialn_ys_unk3 / ea->specialn_ys_damage_multiplier;
         }
-        item_attrs.kind = 0x9D;
+        item_attrs.kind = It_Kind_Kirby_YoshiEggLay;
         it_802F2F34(gobj, &item_attrs);
         fp->cmd_vars[0] = 0;
     }
@@ -639,7 +639,7 @@ void ftKb_YsSpecialAirN2_1_Anim(Fighter_GObj* gobj)
             item_attrs.float3 =
                 ea->specialn_ys_unk3 / ea->specialn_ys_damage_multiplier;
         }
-        item_attrs.kind = 0x9D;
+        item_attrs.kind = It_Kind_Kirby_YoshiEggLay;
         it_802F2F34(gobj, &item_attrs);
         fp->cmd_vars[0] = 0;
     }

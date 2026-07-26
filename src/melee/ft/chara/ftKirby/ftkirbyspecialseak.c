@@ -84,8 +84,8 @@ void ftKb_SpecialNSk_8010603C(Fighter_GObj* gobj)
             }
             pos.z = 0.0f;
             {
-                Item_GObj* needle =
-                    it_802AFD8C(gobj, &pos, 0x98, fp->facing_dir);
+                Item_GObj* needle = it_802AFD8C(
+                    gobj, &pos, It_Kind_Kirby_SeakNeedleThrow, fp->facing_dir);
                 if (needle != NULL) {
                     it_802AFEA8(needle, gobj, 1);
                 }
@@ -148,7 +148,8 @@ void ftKb_SkSpecialNStart_Anim(Fighter_GObj* gobj)
     Fighter* fp = (0, GET_FIGHTER(gobj));
     if (!ftAnim_IsFramesRemaining(gobj)) {
         fp->u.kb.xB8 =
-            it_802B19AC(gobj, &fp->cur_pos, 39, 153, fp->facing_dir);
+            it_802B19AC(gobj, &fp->cur_pos, 39, It_Kind_Kirby_SeakNeedleHeld,
+                        fp->facing_dir);
         Fighter_ChangeMotionState(gobj, ftKb_MS_SkSpecialNLoop, 0, 0, 1, 0,
                                   NULL);
         ftKb_SpecialN_set_cbs(gobj);
@@ -215,7 +216,8 @@ void ftKb_SkSpecialAirNStart_Anim(Fighter_GObj* gobj)
         if (new_var) {
         }
         fp->u.kb.xB8 =
-            it_802B19AC(new_var, &fp->cur_pos, 39, 153, fp->facing_dir);
+            it_802B19AC(new_var, &fp->cur_pos, 39,
+                        It_Kind_Kirby_SeakNeedleHeld, fp->facing_dir);
         Fighter_ChangeMotionState(gobj, ftKb_MS_SkSpecialAirNLoop, 0, 0, 1, 0,
                                   NULL);
         new_var2 = gobj;
@@ -497,8 +499,8 @@ void fn_80106DB0(Fighter_GObj* gobj)
             }
             pos.z = 0.0f;
             {
-                Item_GObj* needle =
-                    it_802AFD8C(gobj, &pos, 0x98, fp->facing_dir);
+                Item_GObj* needle = it_802AFD8C(
+                    gobj, &pos, It_Kind_Kirby_SeakNeedleThrow, fp->facing_dir);
                 if (needle != NULL) {
                     it_802AFEA8(needle, gobj, 0);
                 }

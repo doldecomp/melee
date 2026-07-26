@@ -479,7 +479,7 @@ void ftFc_Init_OnLoad(HSD_GObj* gobj)
     sa2 = fp->dat_attrs;
     it_8026B3F8(items[0], sa2[7]);
     it_8026B3F8(items[1], sa2[8]);
-    it_8026B3F8(items[3], 0x39);
+    it_8026B3F8(items[3], It_Kind_Falco_Phantasm);
 }
 
 void ftFc_Init_LoadSpecialAttrs(HSD_GObj* gobj)

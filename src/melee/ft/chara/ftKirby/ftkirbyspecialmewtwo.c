@@ -384,7 +384,8 @@ void ftKb_MtSpecialNStart_Anim(Fighter_GObj* gobj)
         lb_8000B1CC(fp->parts[FtPart_RHandN].joint, &sp2C, &sp20);
         sp20.z = 0.0f;
         shadowHeldGObj =
-            it_802C5000(gobj, &sp20, FtPart_RHandN, 0x90, fp->facing_dir);
+            it_802C5000(gobj, &sp20, FtPart_RHandN,
+                        It_Kind_Kirby_MewtwoShadowBall, fp->facing_dir);
         fp->u.kb.x98 = shadowHeldGObj;
         if (shadowHeldGObj != NULL) {
             ftKb_SpecialN_set_cbs(gobj);
@@ -421,7 +422,8 @@ static inline void ftKb_SpecialNMt_CreateHeldShadow(Fighter_GObj* gobj,
         lb_8000B1CC(fp->parts[FtPart_RHandN].joint, pos1, pos2);
         pos2->z = 0.0f;
         shadowHeldGObj =
-            it_802C5000(gobj, pos2, FtPart_RHandN, 0x90, fp->facing_dir);
+            it_802C5000(gobj, pos2, FtPart_RHandN,
+                        It_Kind_Kirby_MewtwoShadowBall, fp->facing_dir);
         fp->u.kb.x98 = shadowHeldGObj;
         if (shadowHeldGObj != NULL) {
             ftKb_SpecialN_set_cbs(gobj);
@@ -530,7 +532,8 @@ void ftKb_MtSpecialAirNStart_Anim(Fighter_GObj* gobj)
         lb_8000B1CC(fp->parts[FtPart_RHandN].joint, &sp2C, &sp20);
         sp20.z = 0.0f;
         shadowHeldGObj =
-            it_802C5000(gobj, &sp20, FtPart_RHandN, 0x90, fp->facing_dir);
+            it_802C5000(gobj, &sp20, FtPart_RHandN,
+                        It_Kind_Kirby_MewtwoShadowBall, fp->facing_dir);
         fp->u.kb.x98 = shadowHeldGObj;
         if (shadowHeldGObj != NULL) {
             ftKb_SpecialN_set_cbs(gobj);

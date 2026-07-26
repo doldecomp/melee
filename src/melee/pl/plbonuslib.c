@@ -527,17 +527,17 @@ u32 pl_8003E420(int arg0)
 
 inline int match_item_kind(int kind)
 {
-    if (kind >= 0 && kind < 0x23) {
+    if (kind >= It_Common_Start && kind < It_Common_End) {
         return kind;
     } else {
         switch (kind) {
-        case 0xCD:
+        case Pokemon_Lucky_Egg:
             return 0x23;
-        case 0xE1:
+        case It_Kind_WhispyApple:
             return 0x24;
-        case 0xE2:
+        case It_Kind_WhispyHealApple:
             return 0x25;
-        case 0x28:
+        case It_Kind_Hammer_Head:
             return 0x26;
         default:
             return -1;

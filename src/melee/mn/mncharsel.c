@@ -1771,7 +1771,7 @@ s32 mnCharSel_8025FDEC(u8 door)
     css = mnCharSel_804D6CB0;
     c_kind = css->data.data.players[player].c_kind;
 
-    if (c_kind < 0x1A) {
+    if (c_kind < CKIND_PLAYABLE_COUNT) {
         if (c_kind !=
             all_data->icons[mnCharSel_803F0DFC.doors[door].sel_icon].char_kind)
         {
@@ -2114,7 +2114,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                             }
                                             mnCharSel_804D6CB0->data.data
                                                 .players[player_idx]
-                                                .c_kind = 0x21;
+                                                .c_kind = CHKIND_NONE;
                                         }
                                     }
                                     mnCharSel_8025DB34(grabbed);
@@ -4452,7 +4452,8 @@ s32 mnCharSel_802640A0(void)
             }
         }
         if (found >= 0x19) {
-            mnCharSel_804D6CB0->data.data.players[player].c_kind = 0x1A;
+            mnCharSel_804D6CB0->data.data.players[player].c_kind =
+                CKIND_PLAYABLE_COUNT;
             if ((u8) mnCharSel_804D6CB0->data.data.players[player].slot_type ==
                 1)
             {
