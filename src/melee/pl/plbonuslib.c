@@ -476,7 +476,7 @@ void pl_8003E17C(int player_id, int arg1,
     }
 }
 
-u32 pl_8003E2CC(int arg0, int pl_itemlog_kind)
+u32 pl_8003E2CC(int arg0, Pl_ItemLog pl_itemlog_kind)
 {
     HSD_ASSERT(555, pl_itemlog_kind < Pl_ItemLog_Terminate);
 
@@ -484,7 +484,7 @@ u32 pl_8003E2CC(int arg0, int pl_itemlog_kind)
         ->x0_staleMoveTable.x674[pl_itemlog_kind];
 }
 
-u32 pl_8003E334(int arg0, int pl_itemlog_kind)
+u32 pl_8003E334(int arg0, Pl_ItemLog pl_itemlog_kind)
 {
     HSD_ASSERT(564, pl_itemlog_kind < Pl_ItemLog_Terminate);
 
@@ -532,13 +532,13 @@ inline int match_item_kind(int kind)
     } else {
         switch (kind) {
         case It_Kind_Lucky_Egg:
-            return 0x23;
+            return Pl_ItemLog_Unk35;
         case It_Kind_WhispyApple:
-            return 0x24;
+            return Pl_ItemLog_Unk36;
         case It_Kind_WhispyHealApple:
-            return 0x25;
+            return Pl_ItemLog_Unk37;
         case It_Kind_Hammer_Head:
-            return 0x26;
+            return Pl_ItemLog_Unk38;
         default:
             return -1;
         }

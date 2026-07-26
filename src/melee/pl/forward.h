@@ -125,8 +125,49 @@ typedef enum PlATK {
     PlATK_AttackNormal_End = 16,
 } PlATK;
 
-/// Terminator of the bonus item-log index range.
+/// Bonus item-log indices.
+/// @remarks @c Pl_ItemLog_Terminate is named by asserts in #pl_8003E2CC and
+/// #pl_8003E334.
 typedef enum Pl_ItemLog {
+    /* 0x00 */ Pl_ItemLog_Unk00,
+    /* 0x01 */ Pl_ItemLog_Unk01,
+    /* 0x02 */ Pl_ItemLog_Unk02,
+    /* 0x03 */ Pl_ItemLog_Unk03,
+    /* 0x04 */ Pl_ItemLog_Unk04,
+    /* 0x05 */ Pl_ItemLog_Unk05,
+    /* 0x06 */ Pl_ItemLog_Unk06,
+    /* 0x07 */ Pl_ItemLog_Unk07,
+    /* 0x08 */ Pl_ItemLog_Unk08,
+    /* 0x09 */ Pl_ItemLog_Unk09,
+    /* 0x0A */ Pl_ItemLog_Unk10,
+    /* 0x0B */ Pl_ItemLog_Unk11,
+    /* 0x0C */ Pl_ItemLog_Unk12,
+    /* 0x0D */ Pl_ItemLog_Unk13,
+    /* 0x0E */ Pl_ItemLog_Unk14,
+    /* 0x0F */ Pl_ItemLog_Unk15,
+    /* 0x10 */ Pl_ItemLog_Unk16,
+    /* 0x11 */ Pl_ItemLog_Unk17,
+    /* 0x12 */ Pl_ItemLog_Unk18,
+    /* 0x13 */ Pl_ItemLog_Unk19,
+    /* 0x14 */ Pl_ItemLog_Unk20,
+    /* 0x15 */ Pl_ItemLog_Unk21,
+    /* 0x16 */ Pl_ItemLog_Unk22,
+    /* 0x17 */ Pl_ItemLog_Unk23,
+    /* 0x18 */ Pl_ItemLog_Unk24,
+    /* 0x19 */ Pl_ItemLog_Unk25,
+    /* 0x1A */ Pl_ItemLog_Unk26,
+    /* 0x1B */ Pl_ItemLog_Unk27,
+    /* 0x1C */ Pl_ItemLog_Unk28,
+    /* 0x1D */ Pl_ItemLog_Unk29,
+    /* 0x1E */ Pl_ItemLog_Unk30,
+    /* 0x1F */ Pl_ItemLog_Unk31,
+    /* 0x20 */ Pl_ItemLog_Unk32,
+    /* 0x21 */ Pl_ItemLog_Unk33,
+    /* 0x22 */ Pl_ItemLog_Unk34,
+    /* 0x23 */ Pl_ItemLog_Unk35,
+    /* 0x24 */ Pl_ItemLog_Unk36,
+    /* 0x25 */ Pl_ItemLog_Unk37,
+    /* 0x26 */ Pl_ItemLog_Unk38,
     /* 0x27 */ Pl_ItemLog_Terminate = 39,
 } Pl_ItemLog;
 
