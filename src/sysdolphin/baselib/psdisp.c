@@ -54,10 +54,9 @@ typedef struct {
       { 0.0F, 1.0F, 0.0F, 0.0F },
       { 0.0F, 0.0F, 1.0F, 0.0F } },
 };
-/** @remarks Orphaned #ref_INC assertion literals: the original unit was
- * compiled as C++ (see its extab entries), which discards an unused static
- * #psSetBillboardCamera-like caller but keeps its pooled `__assert` strings.
- * GNT4 emits the live body in its generator unit. */
+/** @remarks Orphaned #ref_INC assertion literals: no caller survives in this
+ * unit, but GNT4 emits the live #psSetBillboardCamera body in its generator
+ * unit with the same `__assert` strings. */
 /* 40C300 */ static char HSD_PSDisp_8040C300[] = "object.h";
 /* 40C30C */ static char HSD_PSDisp_8040C30C[] =
     "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF";
