@@ -1283,6 +1283,9 @@ static inline void psUpdateAppSRT(HSD_Particle* pp, psdisp_Cache* cache)
     f32 scale_x;
     f32 scale_y;
 
+    if (pp->appsrt == NULL) {
+        return;
+    }
     if (pp->appsrt->frameNum != HSD_PSDisp_804D6380[0]) {
         if (pp->appsrt->status != 2) {
             HSD_MtxSRT(pp->appsrt->mmtx, &pp->appsrt->scale,
@@ -1319,17 +1322,20 @@ static inline void psUpdateAppSRT(HSD_Particle* pp, psdisp_Cache* cache)
     }
 }
 
-static inline void psGetAppSRTPositions(HSD_Particle* pp, Mtx draw_mtx,
-                                        Vec3* cur_pos, Vec3* prev_pos)
+static inline void psGetAppSRTPositions(HSD_Particle* pp, Vec3* cur_pos,
+                                        Vec3* prev_pos)
 {
     Vec3 last_pos;
 
-    cur_pos->x = draw_mtx[0][0] * pp->pos.x + draw_mtx[0][1] * pp->pos.y +
-                 draw_mtx[0][2] * pp->pos.z + draw_mtx[0][3];
-    cur_pos->y = draw_mtx[1][0] * pp->pos.x + draw_mtx[1][1] * pp->pos.y +
-                 draw_mtx[1][2] * pp->pos.z + draw_mtx[1][3];
-    cur_pos->z = draw_mtx[2][0] * pp->pos.x + draw_mtx[2][1] * pp->pos.y +
-                 draw_mtx[2][2] * pp->pos.z + draw_mtx[2][3];
+    cur_pos->x = pp->appsrt->x70 +
+                 (pp->appsrt->x6C * pp->pos.z +
+                  (pp->appsrt->ssx * pp->pos.x + pp->appsrt->ssy * pp->pos.y));
+    cur_pos->y = pp->appsrt->x80 +
+                 (pp->appsrt->x7C * pp->pos.z +
+                  (pp->appsrt->x74 * pp->pos.x + pp->appsrt->x78 * pp->pos.y));
+    cur_pos->z = pp->appsrt->x90 +
+                 (pp->appsrt->x8C * pp->pos.z +
+                  (pp->appsrt->x84 * pp->pos.x + pp->appsrt->x88 * pp->pos.y));
     if (pp->kind & Tornado) {
         calcTornadoLastPos(pp, &last_pos.x, &last_pos.y, &last_pos.z);
     } else {
@@ -1337,51 +1343,35 @@ static inline void psGetAppSRTPositions(HSD_Particle* pp, Mtx draw_mtx,
         last_pos.y = pp->pos.y - pp->vel.y;
         last_pos.z = pp->pos.z - pp->vel.z;
     }
-    prev_pos->x = draw_mtx[0][0] * last_pos.x + draw_mtx[0][1] * last_pos.y +
-                  draw_mtx[0][2] * last_pos.z + draw_mtx[0][3];
-    prev_pos->y = draw_mtx[1][0] * last_pos.x + draw_mtx[1][1] * last_pos.y +
-                  draw_mtx[1][2] * last_pos.z + draw_mtx[1][3];
-    prev_pos->z = draw_mtx[2][0] * last_pos.x + draw_mtx[2][1] * last_pos.y +
-                  draw_mtx[2][2] * last_pos.z + draw_mtx[2][3];
+    prev_pos->x = pp->appsrt->x70 +
+                  (pp->appsrt->x6C * last_pos.z +
+                   (pp->appsrt->ssx * last_pos.x + pp->appsrt->ssy * last_pos.y));
+    prev_pos->y = pp->appsrt->x80 +
+                  (pp->appsrt->x7C * last_pos.z +
+                   (pp->appsrt->x74 * last_pos.x + pp->appsrt->x78 * last_pos.y));
+    prev_pos->z = pp->appsrt->x90 +
+                  (pp->appsrt->x8C * last_pos.z +
+                   (pp->appsrt->x84 * last_pos.x + pp->appsrt->x88 * last_pos.y));
 }
 
 static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
 {
     GXColor draw_color;
-    GXColor tail_color;
     Vec3 cur_pos;
     Vec3 prev_pos;
-    Mtx draw_mtx;
     f32 ax;
-    f32 ay;
-    u8 tex_base = (pp->kind >> 16) & 0xC;
 
     psSetCurrentMtx(3);
     psUpdateAppSRT(pp, cache);
+    psGetAppSRTPositions(pp, &cur_pos, &prev_pos);
 
-    draw_mtx[0][0] = pp->appsrt->ssx;
-    draw_mtx[0][1] = pp->appsrt->ssy;
-    draw_mtx[0][2] = pp->appsrt->x6C;
-    draw_mtx[0][3] = pp->appsrt->x70;
-    draw_mtx[1][0] = pp->appsrt->x74;
-    draw_mtx[1][1] = pp->appsrt->x78;
-    draw_mtx[1][2] = pp->appsrt->x7C;
-    draw_mtx[1][3] = pp->appsrt->x80;
-    draw_mtx[2][0] = pp->appsrt->x84;
-    draw_mtx[2][1] = pp->appsrt->x88;
-    draw_mtx[2][2] = pp->appsrt->x8C;
-    draw_mtx[2][3] = pp->appsrt->x90;
-    psGetAppSRTPositions(pp, draw_mtx, &cur_pos, &prev_pos);
-
-    ax = pp->size > 42.5f ? 255.0f : 6.0f * pp->size;
+    ax = pp->size > 42.5 ? 255.0f : 6.0f * pp->size;
     if (pp->kind & Trail) {
         if (HSD_PSDisp_804D7910 != (s32) (u8) (s32) ax) {
             HSD_PSDisp_804D7910 = (u8) (s32) ax;
             GXSetLineWidth((u8) HSD_PSDisp_804D7910, GX_TO_ONE);
         }
         getClrTrail(pp, &draw_color);
-        tail_color = draw_color;
-        tail_color.a = (u8) ((f32) tail_color.a * pp->trail);
         if (pp->kind & DispTexture) {
             setVtxDesc(2);
             GXBegin(GX_LINES, GX_VTXFMT2, 2);
@@ -1392,22 +1382,33 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
         GXWGFifo.f32 = prev_pos.x;
         GXWGFifo.f32 = prev_pos.y;
         GXWGFifo.f32 = prev_pos.z;
-        GXWGFifo.u8 = tail_color.r;
-        GXWGFifo.u8 = tail_color.g;
-        GXWGFifo.u8 = tail_color.b;
-        GXWGFifo.u8 = tail_color.a;
+        {
+            u8 r = draw_color.r;
+            u8 g = draw_color.g;
+            u8 b = draw_color.b;
+            GXWGFifo.u8 = r;
+            GXWGFifo.u8 = g;
+            GXWGFifo.u8 = b;
+            GXWGFifo.u8 = (u8) ((f32) draw_color.a * pp->trail);
+        }
         if (pp->kind & DispTexture) {
-            GXWGFifo.u8 = tex_base;
+            GXWGFifo.u8 = (pp->kind >> 16) & 0xC;
         }
         GXWGFifo.f32 = cur_pos.x;
         GXWGFifo.f32 = cur_pos.y;
         GXWGFifo.f32 = cur_pos.z;
-        GXWGFifo.u8 = draw_color.r;
-        GXWGFifo.u8 = draw_color.g;
-        GXWGFifo.u8 = draw_color.b;
-        GXWGFifo.u8 = draw_color.a;
+        {
+            u8 r = draw_color.r;
+            u8 g = draw_color.g;
+            u8 b = draw_color.b;
+            u8 a = draw_color.a;
+            GXWGFifo.u8 = r;
+            GXWGFifo.u8 = g;
+            GXWGFifo.u8 = b;
+            GXWGFifo.u8 = a;
+        }
         if (pp->kind & DispTexture) {
-            GXWGFifo.u8 = tex_base + 1;
+            GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 1;
         }
     } else {
         if (HSD_PSDisp_804D790C != (s32) (u8) (s32) ax) {
@@ -1425,7 +1426,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
         GXWGFifo.f32 = cur_pos.y;
         GXWGFifo.f32 = cur_pos.z;
         if (pp->kind & DispTexture) {
-            GXWGFifo.u8 = tex_base + 1;
+            GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 1;
         }
     }
 }
@@ -1458,7 +1459,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
 
     psUpdateAppSRT(pp, cache);
     PSMTXCopy((MtxPtr) &pp->appsrt->ssx, draw_mtx);
-    psGetAppSRTPositions(pp, draw_mtx, &cur_pos, &prev_pos);
+    psGetAppSRTPositions(pp, &cur_pos, &prev_pos);
     psScaleAppSRTAxes(pp, draw_mtx);
     ax = pp->appsrt->x94 * pp->size;
     if (texform == NULL) {
