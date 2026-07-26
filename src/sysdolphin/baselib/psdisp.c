@@ -1378,16 +1378,18 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
     Vec3 cur_pos;
     Vec3 prev_pos;
     f32 ax;
+    s32 w;
 
     psSetCurrentMtx(3);
     psUpdateAppSRT(pp, cache);
     psGetAppSRTPositions(pp, (MtxPtr) &pp->appsrt->ssx, &cur_pos, &prev_pos);
 
     ax = pp->size > 42.5 ? 255.0f : 6.0f * pp->size;
+    w = (s32) ax;
     if (pp->kind & Trail) {
-        if (HSD_PSDisp_804D7910 != (s32) (u8) (s32) ax) {
-            HSD_PSDisp_804D7910 = (u8) (s32) ax;
-            GXSetLineWidth((u8) HSD_PSDisp_804D7910, GX_TO_ONE);
+        if (HSD_PSDisp_804D7910 != (s32) (u8) w) {
+            HSD_PSDisp_804D7910 = (u8) w;
+            GXSetLineWidth((u8) w, GX_TO_ONE);
         }
         getClrTrail(pp, &draw_color);
         if (pp->kind & DispTexture) {
