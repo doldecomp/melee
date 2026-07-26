@@ -719,7 +719,7 @@ void gm_801B2298_OnInit(void)
         temp_r31->data.players[i].color = i;
         temp_r31->data.players[i].xE = 0;
         if (i != 0) {
-            temp_r31->data.players[1].c_kind = 0x21;
+            temp_r31->data.players[1].c_kind = CHKIND_NONE;
         }
         gm_80473814.players[i] = temp_r31->data.players[i];
     }

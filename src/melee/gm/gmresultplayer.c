@@ -1407,11 +1407,13 @@ void fn_8017A078(s32 arg0)
 
     if (mode == 0) {
         s32 kind = disp->state.char_kind[arg0];
-        if (kind == 5 && (u8) disp->state.variant[arg0] == 1) {
+        if (kind == CKIND_KOOPA && (u8) disp->state.variant[arg0] == 1) {
             eye.z += 6.0f;
-        } else if (kind == 9 && (u8) disp->state.variant[arg0] == 1) {
+        } else if (kind == CKIND_MARS && (u8) disp->state.variant[arg0] == 1) {
             eye.z += 7.5f;
-        } else if (kind == 0 && (u8) disp->state.variant[arg0] == 2) {
+        } else if (kind == CKIND_CAPTAIN &&
+                   (u8) disp->state.variant[arg0] == 2)
+        {
             eye.z += 6.0f;
         }
     }

@@ -3249,7 +3249,7 @@ s32 gm_80166A98(MatchEnd* arg0, u8 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
 
     for (i = 0; i < 4; i++) {
         arg0->player_standings[i].x30 += 6 - i;
-        if (arg0->player_standings[i].character_kind == 0x21) {
+        if (arg0->player_standings[i].character_kind == CHKIND_NONE) {
             arg0->player_standings[i].slot_type = 3;
         } else if (HSD_PadMasterStatus[(u8) i].err == 0) {
             arg0->player_standings[i].slot_type = 0;
@@ -3257,9 +3257,9 @@ s32 gm_80166A98(MatchEnd* arg0, u8 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
             arg0->player_standings[i].slot_type = 1;
         }
 
-        if (arg0->player_standings[i].character_kind == 0x13) {
-            arg0->player_standings[i].character_kind = 0x12;
-            arg0->player_standings[i].character_id = 7;
+        if (arg0->player_standings[i].character_kind == CKIND_SEAK) {
+            arg0->player_standings[i].character_kind = CKIND_ZELDA;
+            arg0->player_standings[i].character_id = FTKIND_SEAK;
         }
     }
 
@@ -4385,7 +4385,7 @@ s32 fn_801693A8(void)
 
 static inline bool gm_801693BC_inline(u8 ckind)
 {
-    if (ckind - 0x1B <= 1) {
+    if (ckind - CKIND_BOY <= 1) {
         return true;
     }
     return false;
