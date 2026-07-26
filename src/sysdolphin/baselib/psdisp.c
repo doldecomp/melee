@@ -17,15 +17,15 @@
 #include <dolphin/gx.h>
 
 typedef struct {
-    u8 x0_pad[0x40];
+    char filename[9];
+    u8 x9_pad[3];
+    char ref_count_report[39];
+    u8 x33_pad[13];
     u8 texture_coords[0x20];
 } psdisp_StaticData;
 
 typedef struct {
     u8 sort_frame[0x10];
-    char blend_mode_report[0x24];
-    char filename[9];
-    u8 x3D_pad[3];
 } psdisp_ReportData;
 
 typedef struct {
@@ -57,41 +57,57 @@ typedef struct {
     HSD_Particle* particle_list[17];
 } psdisp_Cache;
 
-STATIC_ASSERT(sizeof(psdisp_ParticleSortBucket) == 8);
-STATIC_ASSERT(sizeof(psdisp_StaticData) == 0x60);
-STATIC_ASSERT(sizeof(psdisp_ReportData) == 0x40);
-STATIC_ASSERT(sizeof(psdisp_Cache) == 0xF0);
-STATIC_ASSERT(offsetof(psdisp_Cache, particle_list) == 0xAC);
-
 /* 39F89C */ static void calcTornadoLastPos(HSD_Particle*, f32*, f32*, f32*);
 /* 39FA28 */ static void getColorPrimEnv(HSD_Particle*, GXColor*, GXColor*);
 /* 39FB74 */ static void getColorMatAmb(HSD_Particle*, GXColor*, GXColor*);
-/* 3B9628 */ extern psdisp_Mtx HSD_PSDisp_803B9628;
-/* 40C300 */ extern psdisp_StaticData HSD_PSDisp_8040C300;
-/* 40C360 */ extern psdisp_ReportData HSD_PSDisp_8040C360;
-/* 4D6380 */ extern u8 HSD_PSDisp_804D6380[2];
-/* 4D6384 */ extern u8 HSD_PSDisp_804D6384[2];
+
+/* 3B9628 */ static const psdisp_Mtx HSD_PSDisp_803B9628 = {
+    { { 1.0F, 0.0F, 0.0F, 0.0F },
+      { 0.0F, 1.0F, 0.0F, 0.0F },
+      { 0.0F, 0.0F, 1.0F, 0.0F } },
+};
+/* 40C300 */ static psdisp_StaticData HSD_PSDisp_8040C300 = {
+    "object.h",
+    { 0 },
+    "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF",
+    { 0 },
+    {
+        0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1,
+        0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0,
+    },
+};
+/* 40C360 */ static psdisp_ReportData HSD_PSDisp_8040C360 = {
+    { 0 },
+};
+/* 4D6380 */ static u8 HSD_PSDisp_804D6380 = 0x7B;
 /* 4D0908 */ extern HSD_Particle* hsd_804D0908[146];
-/* 4D0B50 */ extern void* psTexGroupArray_804D0B50;
-/* 4D0C54 */ extern void* psNumCmdList_804D0C54;
-/* 4D0FC0 */ extern psdisp_Cache HSD_PSDisp_804D0FC0;
-/* 4D7908 */ extern HSD_Fog* HSD_PSDisp_804D7908;
-/* 4D790C */ extern s32 HSD_PSDisp_804D790C;
-/* 4D7910 */ extern s32 HSD_PSDisp_804D7910;
-/* 4D7914 */ extern f32 HSD_PSDisp_804D7914;
-/* 4D7918 */ extern f32 HSD_PSDisp_804D7918;
-/* 4D791C */ extern f32 HSD_PSDisp_804D791C;
-/* 4D7920 */ extern f32 HSD_PSDisp_804D7920;
-/* 4D7924 */ extern f32 HSD_PSDisp_804D7924;
-/* 4D7928 */ extern f32 HSD_PSDisp_804D7928;
-/* 4D792C */ extern s32 HSD_PSDisp_804D792C;
-/* 4D7930 */ extern s32 HSD_PSDisp_804D7930;
-/* 4D7934 */ extern GXColor HSD_PSDisp_804D7934;
-/* 4D7938 */ extern GXColor HSD_PSDisp_804D7938;
-/* 4D793C */ extern GXColor HSD_PSDisp_804D793C;
-/* 4D7940 */ extern GXColor HSD_PSDisp_804D7940;
-/* 4D7944 */ extern GXColor HSD_PSDisp_804D7944;
-/* 4D7948 */ extern s32 HSD_PSDisp_804D7948;
+/* 4D0B50 */ extern HSD_PSTexGroup** psTexGroupArray[65];
+/* 4D0C54 */ extern HSD_PSFormGroup** psNumCmdList[65];
+/* 4D0FC0 */ static psdisp_Cache HSD_PSDisp_804D0FC0;
+/* 4D7908 */ static HSD_Fog* HSD_PSDisp_804D7908;
+/* 4D790C */ static s32 HSD_PSDisp_804D790C;
+/* 4D7910 */ static s32 HSD_PSDisp_804D7910;
+/* 4D7914 */ static f32 HSD_PSDisp_804D7914;
+/* 4D7918 */ static f32 HSD_PSDisp_804D7918;
+/* 4D791C */ static f32 HSD_PSDisp_804D791C;
+/* 4D7920 */ static f32 HSD_PSDisp_804D7920;
+/* 4D7924 */ static f32 HSD_PSDisp_804D7924;
+/* 4D7928 */ static f32 HSD_PSDisp_804D7928;
+/* 4D792C */ static s32 HSD_PSDisp_804D792C;
+/* 4D7930 */ static s32 HSD_PSDisp_804D7930;
+/* 4D7934 */ static GXColor HSD_PSDisp_804D7934;
+/* 4D7938 */ static GXColor HSD_PSDisp_804D7938;
+/* 4D793C */ static GXColor HSD_PSDisp_804D793C;
+/* 4D7940 */ static GXColor HSD_PSDisp_804D7940;
+/* 4D7944 */ static GXColor HSD_PSDisp_804D7944;
+/* 4D7948 */ static s32 HSD_PSDisp_804D7948[2];
+
+STATIC_ASSERT(sizeof(HSD_PSDisp_8040C300) == 0x60);
+STATIC_ASSERT(sizeof(HSD_PSDisp_8040C360) == 0x10);
+STATIC_ASSERT(sizeof(HSD_PSDisp_804D0FC0) == 0xF0);
+STATIC_ASSERT(sizeof(HSD_PSDisp_804D0FC0) -
+                  sizeof(HSD_PSDisp_804D0FC0.particle_list) ==
+              0xAC);
 
 void setVtxDesc(s32 fmt)
 {
@@ -444,6 +460,8 @@ HSD_Particle* particleSort(s32 arg0, u8 arg1, HSD_Particle** arg2,
     s32 var_r0_2;
     s32 var_r6;
     u8* temp_r9;
+
+    STATIC_ASSERT(sizeof(buckets[0]) == 8);
 
     temp_r9 = &HSD_PSDisp_8040C360.sort_frame[arg0];
     temp_r29 = (new_var = &hsd_804D0908[arg0]);
@@ -855,8 +873,8 @@ static inline void setBlendMode(int blend_mode)
 
 static inline void psSetCurrentMtx(GXPosNrmMtx idx)
 {
-    if (HSD_PSDisp_804D7948 != idx) {
-        HSD_PSDisp_804D7948 = idx;
+    if (HSD_PSDisp_804D7948[0] != idx) {
+        HSD_PSDisp_804D7948[0] = idx;
         GXSetCurrentMtx(idx);
     }
 }
@@ -1291,7 +1309,7 @@ static inline void psUpdateAppSRT(HSD_Particle* pp, psdisp_Cache* cache)
     if (pp->appsrt == NULL) {
         return;
     }
-    if (pp->appsrt->frameNum != HSD_PSDisp_804D6380[0]) {
+    if (pp->appsrt->frameNum != HSD_PSDisp_804D6380) {
         if (pp->appsrt->status != 2) {
             HSD_MtxSRT(pp->appsrt->mmtx, &pp->appsrt->scale,
                        (Vec3*) &pp->appsrt->rot, &pp->appsrt->translate, NULL);
@@ -1323,14 +1341,16 @@ static inline void psUpdateAppSRT(HSD_Particle* pp, psdisp_Cache* cache)
             pp->appsrt->x80 = temp_mtx[1][3];
             pp->appsrt->x90 = temp_mtx[2][3];
         }
-        pp->appsrt->frameNum = HSD_PSDisp_804D6380[0];
+        pp->appsrt->frameNum = HSD_PSDisp_804D6380;
     }
 }
 
 static inline void psGetAppSRTPositions(HSD_Particle* pp, Mtx draw_mtx,
                                         Vec3* cur_pos, Vec3* prev_pos)
 {
-    Vec3 last_pos;
+    f32 x;
+    f32 y;
+    f32 z;
 
     cur_pos->x = draw_mtx[0][3] +
                  (draw_mtx[0][2] * pp->pos.z +
@@ -1342,24 +1362,18 @@ static inline void psGetAppSRTPositions(HSD_Particle* pp, Mtx draw_mtx,
                  (draw_mtx[2][2] * pp->pos.z +
                   (draw_mtx[2][0] * pp->pos.x + draw_mtx[2][1] * pp->pos.y));
     if (pp->kind & Tornado) {
-        calcTornadoLastPos(pp, &last_pos.x, &last_pos.y, &last_pos.z);
+        calcTornadoLastPos(pp, &x, &y, &z);
     } else {
-        last_pos.x = pp->pos.x - pp->vel.x;
-        last_pos.y = pp->pos.y - pp->vel.y;
-        last_pos.z = pp->pos.z - pp->vel.z;
+        x = pp->pos.x - pp->vel.x;
+        y = pp->pos.y - pp->vel.y;
+        z = pp->pos.z - pp->vel.z;
     }
-    prev_pos->x =
-        draw_mtx[0][3] +
-        (draw_mtx[0][2] * last_pos.z +
-         (draw_mtx[0][0] * last_pos.x + draw_mtx[0][1] * last_pos.y));
-    prev_pos->y =
-        draw_mtx[1][3] +
-        (draw_mtx[1][2] * last_pos.z +
-         (draw_mtx[1][0] * last_pos.x + draw_mtx[1][1] * last_pos.y));
-    prev_pos->z =
-        draw_mtx[2][3] +
-        (draw_mtx[2][2] * last_pos.z +
-         (draw_mtx[2][0] * last_pos.x + draw_mtx[2][1] * last_pos.y));
+    prev_pos->x = draw_mtx[0][3] + (draw_mtx[0][2] * z +
+                                    (draw_mtx[0][0] * x + draw_mtx[0][1] * y));
+    prev_pos->y = draw_mtx[1][3] + (draw_mtx[1][2] * z +
+                                    (draw_mtx[1][0] * x + draw_mtx[1][1] * y));
+    prev_pos->z = draw_mtx[2][3] + (draw_mtx[2][2] * z +
+                                    (draw_mtx[2][0] * x + draw_mtx[2][1] * y));
 }
 
 static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
@@ -1484,7 +1498,9 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
         f32 vf1;
         f32 vf2;
         if (zero == cache->projection.type) {
-            Vec3 prev;
+            f32 prev_x;
+            f32 prev_y;
+            f32 prev_z;
             f32 w0;
             f32 w1;
             f32 w0inv;
@@ -1499,11 +1515,11 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
             f32 f13;
 
             if (pp->kind & Tornado) {
-                calcTornadoLastPos(pp, &prev.x, &prev.y, &prev.z);
+                calcTornadoLastPos(pp, &prev_x, &prev_y, &prev_z);
             } else {
-                prev.x = pp->pos.x - pp->vel.x;
-                prev.y = pp->pos.y - pp->vel.y;
-                prev.z = pp->pos.z - pp->vel.z;
+                prev_x = pp->pos.x - pp->vel.x;
+                prev_y = pp->pos.y - pp->vel.y;
+                prev_z = pp->pos.z - pp->vel.z;
             }
             w0 = pp->appsrt->x90 +
                  (pp->appsrt->x8C * pp->pos.z +
@@ -1529,8 +1545,8 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
             }
             w0inv = 1.0f / w0;
             w1 = pp->appsrt->x90 +
-                 (pp->appsrt->x8C * prev.z +
-                  (pp->appsrt->x84 * prev.x + pp->appsrt->x88 * prev.y));
+                 (pp->appsrt->x8C * prev_z +
+                  (pp->appsrt->x84 * prev_x + pp->appsrt->x88 * prev_y));
             if (zero == w1) {
                 return;
             }
@@ -1538,11 +1554,11 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
             vf1 = w0inv * (f20 + (f16 * pp->pos.z +
                                   (s808 * pp->pos.x + s804 * pp->pos.y))) -
                   w1inv *
-                      (f20 + (f16 * prev.z + (s808 * prev.x + s804 * prev.y)));
+                      (f20 + (f16 * prev_z + (s808 * prev_x + s804 * prev_y)));
             vf2 =
                 w0inv * (f13 + (f11 * pp->pos.z +
                                 (f12 * pp->pos.x + f8 * pp->pos.y))) -
-                w1inv * (f13 + (f11 * prev.z + (f12 * prev.x + f8 * prev.y)));
+                w1inv * (f13 + (f11 * prev_z + (f12 * prev_x + f8 * prev_y)));
         } else {
             f32 s800 = cache->projection.x_scale * pp->appsrt->ssx +
                        cache->projection.x_offset;
@@ -1948,7 +1964,7 @@ void psDispParticles(s32 arg0, u32 arg1)
     HSD_Particle* pp;
     psdisp_Cache* cache;
     /// @todo Recover this stack space from the original inline hierarchy.
-    PAD_STACK(0x40);
+    PAD_STACK(0x58);
 
     var_r16 = 0;
     var_r15 = 0;
@@ -1959,21 +1975,21 @@ void psDispParticles(s32 arg0, u32 arg1)
     sp7A4 = 0xFF;
     sp7A0 = 1;
     if (sp798 == 0) {
-        if (HSD_PSDisp_804D6380[0] < 0xFFU) {
-            HSD_PSDisp_804D6380[0] += 1;
+        if (HSD_PSDisp_804D6380 < 0xFFU) {
+            HSD_PSDisp_804D6380 += 1;
             return;
         }
-        HSD_PSDisp_804D6380[0] = 1;
+        HSD_PSDisp_804D6380 = 1;
         return;
     }
-    sp7F4 = (void*) &psTexGroupArray_804D0B50;
-    sp7F0 = (void*) &psNumCmdList_804D0C54;
+    sp7F4 = psTexGroupArray;
+    sp7F0 = psNumCmdList;
     sp8B0 = 0.0;
     sp818 = 0.000001;
     sp7B4 = 0;
     do {
         if (sp794 & (1 << sp7B4)) {
-            particleSort(sp7B4, HSD_PSDisp_804D6380[0], &sp760, &sp75C);
+            particleSort(sp7B4, HSD_PSDisp_804D6380, &sp760, &sp75C);
             if (sp798 == 1) {
                 pp = sp760;
             } else {
@@ -2037,7 +2053,7 @@ void psDispParticles(s32 arg0, u32 arg1)
                         GXLoadPosMtxImm(cache->view_mtx, 0);
                         billboard_mtx = HSD_PSDisp_803B9628;
                         GXLoadPosMtxImm(billboard_mtx.mtx, 3);
-                        HSD_PSDisp_804D7948 = 3;
+                        HSD_PSDisp_804D7948[0] = 3;
                         psSetCurrentMtx(0);
                         GXEnableTexOffsets(GX_TEXCOORD0, GX_TRUE, GX_TRUE);
                         GXSetCullMode(GX_CULL_BACK);
