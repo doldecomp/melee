@@ -505,12 +505,12 @@ void it_802703E8(Item_GObj* arg_item_gobj)
                         &arg_item->xACC_itemHurtbox[hurt_index]);
                     it_8027B378(fighter->gobj, arg_item->entity, dmg);
                     kind = arg_item->kind;
-                    if ((kind == Pokemon_Random) &&
+                    if ((kind == It_PKind_Random) &&
                         (arg_item->xDD4_itemVar.pokemon.x0 == 7) &&
                         ((hit->sfx_kind == 1U) || (hit->sfx_kind == 2U)))
                     {
                         lbAudioAx_800237A8(0x61A87, 0x7FU, 0x40U);
-                    } else if ((kind != Pokemon_Random) ||
+                    } else if ((kind != It_PKind_Random) ||
                                (arg_item->xDD4_itemVar.pokemon.x0 != 8) ||
                                ((hit->sfx_kind != 1U) &&
                                 (hit->sfx_kind != 2U)))
@@ -614,11 +614,12 @@ static inline void it_802706D0_sub3(Item* item, Item* arg_item,
     it_8026F9AC_outline(2, item, hit, arg_item, arg_hurt);
     it_8027B408(item->entity, arg_item->entity, dmg);
     kind = arg_item->kind;
-    if ((kind == Pokemon_Random) && (arg_item->xDD4_itemVar.pokemon.x0 == 7) &&
+    if ((kind == It_PKind_Random) &&
+        (arg_item->xDD4_itemVar.pokemon.x0 == 7) &&
         ((hit->sfx_kind == 1U) || (hit->sfx_kind == 2U)))
     {
         lbAudioAx_800237A8(0x61A87, 0x7FU, 0x40U);
-    } else if ((kind != Pokemon_Random) ||
+    } else if ((kind != It_PKind_Random) ||
                (arg_item->xDD4_itemVar.pokemon.x0 != 8) ||
                ((hit->sfx_kind != 1U) && (hit->sfx_kind != 2U)))
     {

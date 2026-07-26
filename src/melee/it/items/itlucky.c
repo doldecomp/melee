@@ -325,7 +325,7 @@ static inline Item_GObj* it_802D5710_inline(Item_GObj* gobj, Vec3* pos,
 {
     Item* ip = gobj->user_data;
     SpawnItem spawn;
-    spawn.kind = Pokemon_Lucky_Egg;
+    spawn.kind = It_Kind_Lucky_Egg;
     spawn.prev_pos = *pos;
     spawn.prev_pos.z = 0.0f;
     spawn.pos = spawn.prev_pos;

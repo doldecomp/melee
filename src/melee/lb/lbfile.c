@@ -12,19 +12,6 @@
 #include <baselib/debug.h>
 #include <baselib/devcom.h>
 
-static char lbFile_803BA508[] = __FILE__;
-
-/// This file passes its stored file name rather than a fresh @c __FILE__
-/// literal, so both assert macros are respelled around that array.
-#undef HSD_ASSERT
-#define HSD_ASSERT(line, cond)                                                \
-    ((cond) ? ((void) 0) : __assert(lbFile_803BA508, line, #cond))
-#undef HSD_ASSERTREPORT
-#define HSD_ASSERTREPORT(line, cond, ...)                                     \
-    ((cond)                                                                   \
-         ? (void) 0                                                           \
-         : (OSReport(__VA_ARGS__), __assert(lbFile_803BA508, line, #cond)))
-
 static bool cancel;
 
 void lbFile_8001615C(int r3, int r4, void* r5, bool cancelflag)

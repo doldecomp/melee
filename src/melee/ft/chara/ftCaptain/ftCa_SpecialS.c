@@ -186,7 +186,7 @@ void ftCa_SpecialS_OnDetect(HSD_GObj* gobj)
                         itGetKind(detected_gobj) < It_Kind_Octarock_Stone) ||
                        (itGetKind(detected_gobj) >= It_Kind_Old_Kuri &&
                         itGetKind(detected_gobj) < It_Kind_Arwing_Laser) ||
-                       itGetKind(detected_gobj) == Pokemon_Random)
+                       itGetKind(detected_gobj) == It_PKind_Random)
             {
                 switch (fp->motion_id) {
                 case ftCa_MS_SpecialSStart: {

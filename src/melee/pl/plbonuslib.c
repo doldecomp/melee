@@ -436,7 +436,7 @@ void pl_8003E17C(int player_id, int arg1,
         kind2 = kind;
     } else { // Not one of the common items
         switch (kind) {
-        case Pokemon_Lucky_Egg:
+        case It_Kind_Lucky_Egg:
             kind2 = It_Kind_L_Gun_Ray;
             break;
         case It_Kind_WhispyApple:
