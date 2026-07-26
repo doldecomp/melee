@@ -173,7 +173,7 @@ void gm_801B9DD8(GameScene* arg0)
     gm_80162968(temp_r3->match_end.frame_count / 60);
     gm_8016247C(temp_r3->match_end.player_standings[0].xE);
     gm_80180BA0();
-    if (temp_r3->match_end.result == 8) {
+    if (temp_r3->match_end.result == OUTCOME_RETRY) {
         gm_SetPendingSceneIndex(1);
         return;
     }

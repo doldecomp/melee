@@ -1753,7 +1753,7 @@ void fn_8017AA78(u8* arg0)
         for (i = 0; i < 4; i++) {
             state->player_flags[i] = 0;
             state->costume_override[i] = arg0[i];
-            if (disp->state.match_end.result == 7) {
+            if (disp->state.match_end.result == OUTCOME_NO_CONTEST) {
                 player_standings[i].is_big_loser = 1;
                 team_standings = fn_8017AA78_get_team_standings(disp);
                 team_standings[player_standings[i].team].is_big_loser = 1;

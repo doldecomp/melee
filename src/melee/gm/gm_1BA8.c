@@ -679,7 +679,7 @@ void gm_801BB758(GameScene* arg0)
     s32 t;
 
     gm_8016A164();
-    if (exit->match_end.result == 8) {
+    if (exit->match_end.result == OUTCOME_RETRY) {
         s32 do_save = 0;
         if (ev->x20 != 0) {
             do_save = 1;
@@ -709,7 +709,7 @@ void gm_801BB758(GameScene* arg0)
         gm_SetPendingSceneIndex(1);
         return;
     }
-    if (exit->match_end.result == 7) {
+    if (exit->match_end.result == OUTCOME_NO_CONTEST) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }

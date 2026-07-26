@@ -275,7 +275,7 @@ void fn_80233E10(HSD_GObj* gobj)
             gmMainLib_8015CC58()->item_freq = data2->x21 - 1;
         }
             lb_8001CE00();
-            mn_80229860(2);
+            mn_80229860(GM_VS);
             return;
         default: {
             u8* order2 = mnItemSw_GetTable()->item_order;
