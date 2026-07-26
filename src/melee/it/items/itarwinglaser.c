@@ -439,9 +439,9 @@ static void itArwinglaser_UnkMotion3_Phys(Item_GObj* gobj)
         grCorneria_801DDCF0(&corneria_offset);
         ip->pos.x += corneria_offset.x;
         ip->pos.y += corneria_offset.y;
-        /* fallthrough */
+        // fallthrough
     case Gr_Kind_Venom:
-        return;
+        break;
     }
 }
 
