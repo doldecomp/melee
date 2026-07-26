@@ -2,6 +2,7 @@
 
 #include "it_2725.h"
 #include "ithitbox.h"
+#include "itzako.h"
 
 #include "baselib/random.h"
 #include "db/db.h"
