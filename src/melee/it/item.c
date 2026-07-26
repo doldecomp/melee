@@ -247,7 +247,7 @@ static void Item_80267130(HSD_GObj* gobj, SpawnItem* spawnItem)
     HSD_JObjSetTranslate(model, &item_data->pos);
     it_80274658(gobj, it_804D6D28->x6C_float);
     it_802725D4(gobj);
-    it_80271508(gobj, 0);
+    it_80271508(gobj, HurtCapsule_Enabled);
     it_80272280(gobj);
 
     item_data->on_accessory = NULL;

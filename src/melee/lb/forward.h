@@ -34,7 +34,7 @@ typedef struct LbShadow LbShadow;
 typedef enum HurtCapsuleState {
     HurtCapsule_Enabled,
     HurtCapsule_Disabled,
-    Intangible
+    HurtCapsule_Intangible
 } HurtCapsuleState;
 
 typedef enum HitElement {

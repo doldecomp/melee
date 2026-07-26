@@ -73,7 +73,7 @@ void ftYs_Init_8012BDA0(Fighter_GObj* gobj)
     {
         ftHurtboxInit hurt;
         PAD_STACK(4 * 4);
-        ftColl_8007B0C0(gobj, Intangible);
+        ftColl_8007B0C0(gobj, HurtCapsule_Intangible);
         hurt.bone_idx = fp->ft_data->x8->x11;
         hurt.height = HurtHeight_Mid;
         hurt.is_grabbable = true;
@@ -201,7 +201,7 @@ static inline void inlineA0(Fighter_GObj* gobj)
     {
         Fighter* fp = GET_FIGHTER(gobj);
         ftHurtboxInit hurt;
-        ftColl_8007B0C0(gobj, Intangible);
+        ftColl_8007B0C0(gobj, HurtCapsule_Intangible);
         hurt.bone_idx = fp->ft_data->x8->x11;
         hurt.height = HurtHeight_Mid;
         hurt.is_grabbable = true;

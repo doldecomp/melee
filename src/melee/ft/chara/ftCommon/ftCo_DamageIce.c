@@ -150,7 +150,7 @@ static inline void ftCo_DamageIce_StartJump(Fighter* fp)
 
     ftCo_800909D0(fp);
     ftCo_80090AC0(fp);
-    ftColl_8007B0C0(fp->gobj, Intangible);
+    ftColl_8007B0C0(fp->gobj, HurtCapsule_Intangible);
 
     {
         Vec3 offset = ftCo_DamageIce_HurtboxOffset;
@@ -300,7 +300,7 @@ void ftCo_DamageIce_HitWhileFrozen(Fighter_GObj* gobj)
                       effect_joint, effect_param);
     }
     fp->x2219_b0 = true;
-    ftColl_8007B0C0(fp->gobj, Intangible);
+    ftColl_8007B0C0(fp->gobj, HurtCapsule_Intangible);
 
     offset = ftCo_DamageIce_HurtboxOffset;
     hurt.bone_idx = ftParts_GetBoneIndex(fp, FtPart_XRotN);

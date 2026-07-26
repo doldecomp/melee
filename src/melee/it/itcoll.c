@@ -946,6 +946,7 @@ void it_80270E30(Item_GObj* arg_item_gobj)
 
 void it_8027129C(Item_GObj* arg_item_gobj, s32 index)
 {
+    /// @todo Using #HitCapsuleState here changes the stack frame.
     s32 state;
     HitCapsule* hit;
     Item* item;
@@ -967,7 +968,7 @@ void it_8027129C(Item_GObj* arg_item_gobj, s32 index)
         hit->x58 = hit->x4C;
         lb_8000B1CC(hit->jobj, &hit->b_offset, &hit->x4C);
         /* fallthrough */
-    case 4: // HitCapsule_Max:
+    case HitCapsule_Unk4:
     case HitCapsule_Disabled:
         return;
     }
@@ -984,7 +985,7 @@ void it_8027137C(Item_GObj* arg_item_gobj)
         arg_item = arg_item_gobj->user_data;
         hit = &arg_item->x5D4_hitboxes[index].hit;
         switch (hit->state) {
-        case 4: // HitCapsule_Max:
+        case HitCapsule_Unk4:
         case HitCapsule_Disabled:
             break;
         case HitCapsule_Enabled:

@@ -39,7 +39,7 @@ static u16 calcShift(float hitlag_mul, FtMotionId msid, int dmg)
     return fcp->x168 * ftCommon_CalcHitlag(dmg, msid, hitlag_mul) + fcp->x16C;
 }
 
-void ftCo_80090594(Fighter* fp, enum_t element, int dmg, FtMotionId msid,
+void ftCo_80090594(Fighter* fp, HitElement element, int dmg, FtMotionId msid,
                    GroundOrAir ground_or_air, float hitlag_mul)
 {
     FtMotionId motion_id = msid;

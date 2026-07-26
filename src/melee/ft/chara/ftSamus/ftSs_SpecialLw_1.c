@@ -44,7 +44,7 @@ void ftSs_SpecialLw_8012AEBC(HSD_GObj* gobj)
 {
     ftHurtboxInit hurt;
     Fighter* fp = GET_FIGHTER(gobj);
-    ftColl_8007B0C0(gobj, Intangible);
+    ftColl_8007B0C0(gobj, HurtCapsule_Intangible);
 
     hurt.bone_idx = FtPart_XRotN;
     hurt.height = HurtHeight_Mid;
