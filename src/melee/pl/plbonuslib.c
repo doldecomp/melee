@@ -549,20 +549,20 @@ void pl_8003E4A4(int slot, bool arg1, void* arg2, int count)
 {
     pl_StaleMoveTableExt_t* table = Player_GetStaleMoveTableIndexPtr2(slot);
     int* moves = arg2;
-    u32 seen[0x27];
+    u32 seen[Pl_ItemLog_Terminate];
     int i;
 
-    for (i = 0; i < 0x27; i++) {
+    for (i = 0; i < Pl_ItemLog_Terminate; i++) {
         seen[i] = 0;
     }
 
     for (i = 0; i < count; i++) {
-        if (match_item_kind(moves[i]) < 0x27) {
+        if (match_item_kind(moves[i]) < Pl_ItemLog_Terminate) {
             seen[match_item_kind(moves[i])] = 1;
         }
     }
 
-    for (i = 0; i < 0x27; i++) {
+    for (i = 0; i < Pl_ItemLog_Terminate; i++) {
         if (seen[i] == 1) {
             table->x0_staleMoveTable.x7AC[i]++;
             if ((u32) table->x0_staleMoveTable.x7AC[i] == pl_804D6470->x138) {

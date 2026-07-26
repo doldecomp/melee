@@ -118,13 +118,13 @@
 
 /// .bss
 /* 4A1ED0 */ static StaticModelDesc un_804A1ED0;
-/* 4A1EE0 */ static HSD_GObj* un_804A1EE0[PL_SLOT_MAX];
-/* 4A1EF8 */ static int un_804A1EF8[PL_SLOT_MAX];
+/* 4A1EE0 */ static HSD_GObj* un_804A1EE0[Gm_Player_NumMax];
+/* 4A1EF8 */ static int un_804A1EF8[Gm_Player_NumMax];
 
 /// .sbss
 /* 4D6D68 */ static HSD_GObj* un_804D6D68;
 /* 4D6D6C */ static u8 un_804D6D6C;
-/* 4D6D70 */ static u8 un_804D6D70[PL_SLOT_MAX];
+/* 4D6D70 */ static u8 un_804D6D70[Gm_Player_NumMax];
 /* 4D6D78 */ static HSD_Text* un_804D6D78;
 /* 4D6D7C */ static int un_804D6D7C;
 
@@ -162,7 +162,7 @@ void fn_802FCAC4(HSD_GObj* gobj, int pass)
 {
     if (ifAll_IsHUDHidden() || un_804D6D6C) {
         int i;
-        for (i = 0; i < PL_SLOT_MAX; i++) {
+        for (i = 0; i < Gm_Player_NumMax; i++) {
             int do_it;
             if (Player_GetPlayerSlotType(i) != Gm_PKind_Human ||
                 Player_GetNametagSlotID(i) == 0x78)
@@ -344,7 +344,7 @@ void un_802FD45C(void)
 void un_802FD468(void)
 {
     int i;
-    for (i = 0; i < PL_SLOT_MAX; i++) {
+    for (i = 0; i < Gm_Player_NumMax; i++) {
         if (un_804A1EE0[i]) {
             HSD_GObjPLink_80390228(un_804A1EE0[i]);
         }
@@ -363,7 +363,7 @@ void un_802FD4C8(void)
     HSD_CObj* new_var;
     int i;
     PAD_STACK(0x10);
-    for (i = 0; i < PL_SLOT_MAX; i++) {
+    for (i = 0; i < Gm_Player_NumMax; i++) {
         un_804A1EE0[i] = NULL;
     }
     un_804D6D68 = NULL;
@@ -381,7 +381,7 @@ void un_802FD4C8(void)
     un_804D6D78->pos_z = -10.0;
     un_804D6D78->default_alignment = 1;
     un_802FCBA0();
-    for (i = 0; i < PL_SLOT_MAX; i++) {
+    for (i = 0; i < Gm_Player_NumMax; i++) {
         NameTag_Create(i);
     }
 }

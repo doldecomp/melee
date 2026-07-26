@@ -204,9 +204,9 @@ void it_80275E98(Item_GObj* item_gobj, SpawnItem* spawn)
         coll->x34_flags.b1234 = 5;
     } else if (kind < It_PKind_Random) {
         coll->x34_flags.b1234 = 5;
-    } else if (kind < It_PKind_Tosakinto) {
+    } else if (kind < It_PKind_Start) {
         coll->x34_flags.b1234 = 5;
-    } else if (kind < It_Kind_Chicorita_Leaf) {
+    } else if (kind < It_PKind_Terminate) {
         coll->x34_flags.b1234 = 5;
     } else if (kind < It_Kind_Old_Kuri) {
         coll->x34_flags.b1234 = 4;

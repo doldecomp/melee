@@ -1008,17 +1008,17 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
 
 ItemKind it_803F2ED0[22] = {
     // Common Pokemon
-    It_PKind_Tosakinto,     It_PKind_Chicorita,
-    It_PKind_Kabigon,       It_PKind_Kamex,
-    It_PKind_Matadogas,     It_PKind_Lizardon,
-    It_PKind_Sonans,        It_PKind_Hassam,
-    It_PKind_Unknown,       It_PKind_Kireihana,
-    It_PKind_Marumine,      It_PKind_Metamon,
-    It_PKind_Pippi,         It_PKind_Togepy,
-    It_PKind_Hitodeman,     It_PKind_Lucky,
-    It_PKind_Porygon2,      It_PKind_Hinoarashi,
-    It_PKind_Maril,         It_PKind_Fushigibana,
-    It_Kind_Chicorita_Leaf, 0x00,
+    It_PKind_Tosakinto, It_PKind_Chicorita,
+    It_PKind_Kabigon,   It_PKind_Kamex,
+    It_PKind_Matadogas, It_PKind_Lizardon,
+    It_PKind_Sonans,    It_PKind_Hassam,
+    It_PKind_Unknown,   It_PKind_Kireihana,
+    It_PKind_Marumine,  It_PKind_Metamon,
+    It_PKind_Pippi,     It_PKind_Togepy,
+    It_PKind_Hitodeman, It_PKind_Lucky,
+    It_PKind_Porygon2,  It_PKind_Hinoarashi,
+    It_PKind_Maril,     It_PKind_Fushigibana,
+    It_PKind_Terminate, 0x00,
 };
 
 /// Character-specific items
@@ -3968,21 +3968,18 @@ void it_8027A344(Item_GObj* item_gobj)
     item->x40_vel.y = item->xDD4_itemVar.pokemon_spawn.x4.y;
 }
 
-#define PK_START (It_PKind_Tosakinto)
-#define PK_END (It_PKind_Tosakinto + 30)
-
 s32 it_8027A364(Item* item)
 {
     itPokemonSpawn_DatAttrs* attr =
         item->xC4_article_data->x4_specialAttributes;
     int ret_val = 1;
     int i;
-    int start = It_PKind_Tosakinto;
-    int end = It_PKind_Tosakinto + 30;
+    int start = It_PKind_Start;
+    int end = It_PKind_Terminate;
 
     for (i = start; i < end; i++) {
         if (Item_804A0E24.x != i && Item_804A0E24.y != i) {
-            ret_val += attr->pokemon_spawn_weights[i - It_PKind_Tosakinto];
+            ret_val += attr->pokemon_spawn_weights[i - It_PKind_Start];
         }
     }
 
@@ -4010,15 +4007,15 @@ s32 it_8027A4D4(Item* item)
     }
     rand_int = HSD_Randi(it_8027A364(item));
     var_r3 = 0;
-    for (i = PK_START; i < PK_END; i++) {
+    for (i = It_PKind_Start; i < It_PKind_Terminate; i++) {
         int y = Item_804A0E24.y;
         int x = Item_804A0E24.x;
         if (x != i && y != i) {
-            var_r3 += attr->pokemon_spawn_weights[i - It_PKind_Tosakinto];
+            var_r3 += attr->pokemon_spawn_weights[i - It_PKind_Start];
             if (var_r3 >= rand_int) {
                 Item_804A0E24.y = x;
                 Item_804A0E24.x = i;
-                return i - It_PKind_Tosakinto;
+                return i - It_PKind_Start;
             }
         }
     }
@@ -4051,14 +4048,14 @@ s32 it_8027A780(Item* item, void* arg1)
     y = Item_804A0E24.y;
     for (i = 0; i < 30; i++) {
         ItemKind kind = ((ItemKind*) arg1)[i];
-        if (kind == It_Kind_Chicorita_Leaf) {
+        if (kind == It_PKind_Terminate) {
             break;
         }
         if (x != kind && y != kind) {
             buf->x = kind;
             cnt++;
             buf->y = attr->pokemon_spawn_weights[((ItemKind*) arg1)[i] -
-                                                 It_PKind_Tosakinto];
+                                                 It_PKind_Start];
             total += buf->y;
             buf++;
         }
@@ -4079,7 +4076,7 @@ s32 it_8027A780(Item* item, void* arg1)
     }
     Item_804A0E24.y = Item_804A0E24.x;
     Item_804A0E24.x = result;
-    return result - It_PKind_Tosakinto;
+    return result - It_PKind_Start;
 }
 
 s32 it_8027A9B8(Item* item)
@@ -4142,7 +4139,7 @@ void it_8027AAA0(Item_GObj* item1_gobj, Item* item2, s32 arg2)
 static inline s32 it_8027AB64_SpawnWeight(itPokemonSpawn_DatAttrs* attr,
                                           s32 index)
 {
-    return attr->pokemon_spawn_weights[index - It_PKind_Tosakinto];
+    return attr->pokemon_spawn_weights[index - It_PKind_Start];
 }
 
 static inline s32 it_8027AB64_SelectKind(Item* item)
@@ -4157,14 +4154,14 @@ static inline s32 it_8027AB64_SelectKind(Item* item)
     s32 var_ctr;
 
     var_r4 = 0;
-    index = It_PKind_Tosakinto;
+    index = It_PKind_Start;
     for (var_ctr = 30; var_ctr != 0; var_ctr--) {
         if (recent_x_val != index && recent_y_val != index) {
             var_r4 += it_8027AB64_SpawnWeight(attr, index);
             if (var_r4 >= rand_int) {
                 Item_804A0E24.y = recent_x_val;
                 Item_804A0E24.x = index;
-                return index - It_PKind_Tosakinto;
+                return index - It_PKind_Start;
             }
         }
         index++;
@@ -4186,14 +4183,14 @@ static inline s32 it_8027AB64_SelectKind(Item* item)
     s32 var_ctr;
 
     var_r4 = 0;
-    index = It_PKind_Tosakinto;
+    index = It_PKind_Start;
     for (var_ctr = 30; var_ctr != 0; var_ctr--) {
         if (recent_x_val != index && recent_y_val != index) {
             var_r4 += *(spawn_weights - 0x92);
             if (var_r4 >= rand_int) {
                 Item_804A0E24.y = recent_x_val;
                 Item_804A0E24.x = index;
-                return index - It_PKind_Tosakinto;
+                return index - It_PKind_Start;
             }
         }
         spawn_weights++;
@@ -4218,7 +4215,7 @@ bool it_8027AB64(Item_GObj* item_gobj)
         if (temp_r3 == 1) {
             spawn.kind = it_8027A9B8(item);
         } else {
-            spawn.kind = temp_r3 - It_PKind_Tosakinto;
+            spawn.kind = temp_r3 - It_PKind_Start;
         }
     } else if (gm_8018841C()) {
         spawn.kind = (&it_803F2ED0 == NULL) ? It_PKind_Sonans
@@ -4252,7 +4249,7 @@ bool it_8027AB64(Item_GObj* item_gobj)
         it_8026BB88(item_gobj, &spawn.pos);
         spawn.x3C_damage = 0;
         spawn.facing_dir = it_8026B6A8(prev_pos, item2->owner);
-        spawn.kind = spawn.kind + It_PKind_Tosakinto;
+        spawn.kind = spawn.kind + It_PKind_Start;
         spawn.x0_parent_gobj = item2->owner;
         spawn.x4_parent_gobj2 = item_gobj;
         spawn.x44_flag.b0 = 1;

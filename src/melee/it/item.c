@@ -331,7 +331,7 @@ static void Item_802674AC(SpawnItem* spawnItem)
         return;
     }
 
-    if (kind < It_Kind_Chicorita_Leaf) {
+    if (kind < It_PKind_Terminate) {
         spawnItem->hold_kind = 9;
         return;
     }
@@ -540,14 +540,14 @@ void Item_80267978(HSD_GObj* gobj)
         // Common items
         item_data->xC4_article_data = it_804D6D24[item_data->kind];
         item_data->xB8_itemLogicTable = &it_803F14C4[item_data->kind];
-    } else if (item_data->kind < It_PKind_Tosakinto) {
+    } else if (item_data->kind < It_PKind_Start) {
         // Character items
         int idx = item_data->kind - It_Kind_Kuriboh;
         item_data->xC4_article_data = it_804D6D38[idx];
         item_data->xB8_itemLogicTable = &it_803F3100[idx];
     } else if (item_data->kind < It_Kind_Old_Kuri) {
         // Pokemon
-        int idx = item_data->kind - It_PKind_Tosakinto;
+        int idx = item_data->kind - It_PKind_Start;
         item_data->xC4_article_data = it_804D6D30[idx];
         item_data->xB8_itemLogicTable = &it_803F23CC[idx];
     } else {
@@ -971,13 +971,13 @@ static HSD_GObj* Item_8026862C(SpawnItem* spawnItem)
         // Common items
         GObj_SetupGXLink(gobj, it_803F1418[spawnItem->kind].x0_renderFunc, 6,
                          0);
-    } else if (spawnItem->kind < It_PKind_Tosakinto) {
+    } else if (spawnItem->kind < It_PKind_Start) {
         // Character items
         int idx = spawnItem->kind - It_Kind_Kuriboh;
         GObj_SetupGXLink(gobj, it_803F2F28[idx].x0_renderFunc, 6, 0);
     } else if (spawnItem->kind < It_Kind_Old_Kuri) {
         // Pokemon
-        int idx = spawnItem->kind - It_PKind_Tosakinto;
+        int idx = spawnItem->kind - It_PKind_Start;
         GObj_SetupGXLink(gobj, it_803F2310[idx].x0_renderFunc, 6, 0);
     } else {
         // Stage items

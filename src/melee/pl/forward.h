@@ -1,8 +1,6 @@
 #ifndef MELEE_PL_FORWARD_H
 #define MELEE_PL_FORWARD_H
 
-#define PL_SLOT_MAX 6
-
 typedef struct StaleMoveTable StaleMoveTable;
 typedef struct plAllocInfo2 plAllocInfo2;
 typedef struct plActionStats plActionStats;
