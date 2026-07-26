@@ -1983,7 +1983,7 @@ void psDispParticles(s32 arg0, u32 arg1)
     HSD_Particle* pp;
     psdisp_Cache* cache;
     /// @todo Recover this stack space from the original inline hierarchy.
-    PAD_STACK(0x58);
+    PAD_STACK(0x80);
 
     var_r16 = 0;
     var_r15 = 0;
