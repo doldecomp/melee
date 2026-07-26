@@ -571,11 +571,12 @@ static inline HSD_Particle* psDispSubPoint(HSD_Particle* pp)
         GXSetPointSize((u8) w, GX_TO_ONE);
     }
     last = pp;
-    buf[0].x = pp->pos.x;
-    buf[0].y = pp->pos.y;
-    buf[0].z = pp->pos.z;
+    p = buf;
+    p->x = pp->pos.x;
+    p->y = pp->pos.y;
+    p->z = pp->pos.z;
+    p++;
     count = 1;
-    p = &buf[1];
     q = pp->next;
     while (q != NULL) {
         if (q->size == pp->size && q->appsrt == NULL &&
@@ -1782,7 +1783,7 @@ void psDispParticles(s32 arg0, u32 arg1)
     HSD_Particle* pp;
     psdisp_Cache* cache;
     /// @todo Recover this stack space from the original inline hierarchy.
-    PAD_STACK(0x38);
+    PAD_STACK(0x40);
 
     var_r16 = 0;
     var_r15 = 0;
