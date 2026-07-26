@@ -1006,7 +1006,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
     },
 };
 
-static ItemKind common_pokemon[22] = {
+static ItemKind common_pokemon[] = {
     // Common Pokemon
     It_PKind_Tosakinto, It_PKind_Chicorita,   It_PKind_Kabigon,
     It_PKind_Kamex,     It_PKind_Matadogas,   It_PKind_Lizardon,
@@ -1018,7 +1018,7 @@ static ItemKind common_pokemon[22] = {
 };
 
 /// Character-specific items
-struct sdata_ItemGXLink it_803F2F28[118] = {
+struct sdata_ItemGXLink it_803F2F28[118] ATTRIBUTE_ALIGN(8) = {
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
 
