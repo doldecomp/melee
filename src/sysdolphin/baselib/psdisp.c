@@ -37,6 +37,10 @@ typedef struct {
     HSD_Particle* tail;
 } psdisp_ParticleSortBucket;
 
+typedef struct {
+    Mtx mtx;
+} psdisp_Mtx;
+
 typedef Vec3 Point3d;
 
 typedef struct {
@@ -50,7 +54,7 @@ STATIC_ASSERT(sizeof(psdisp_ParticleSortCache) == 0xF0);
 /* 39F89C */ static void calcTornadoLastPos(HSD_Particle*, f32*, f32*, f32*);
 /* 39FA28 */ static void getColorPrimEnv(HSD_Particle*, GXColor*, GXColor*);
 /* 39FB74 */ static void getColorMatAmb(HSD_Particle*, GXColor*, GXColor*);
-/* 3B9628 */ extern f32 HSD_PSDisp_803B9628[12];
+/* 3B9628 */ extern psdisp_Mtx HSD_PSDisp_803B9628;
 /* 40C300 */ extern psdisp_UnknownType001 HSD_PSDisp_8040C300;
 /* 40C360 */ extern psdisp_UnknownType002 HSD_PSDisp_8040C360;
 /* 4D6380 */ extern u8 HSD_PSDisp_804D6380[2];
@@ -1700,18 +1704,7 @@ void psDispParticles(s32 arg0, u32 arg1)
     GXTexObj sp764;
     HSD_Particle* sp760;
     HSD_Particle* sp75C;
-    s32 sp758;
-    s32 sp754;
-    s32 sp750;
-    s32 sp74C;
-    s32 sp748;
-    s32 sp744;
-    s32 sp740;
-    s32 sp73C;
-    s32 sp738;
-    s32 sp734;
-    s32 sp730;
-    s32 sp72C;
+    psdisp_Mtx billboard_mtx;
     GXTlutObj sp71C;
     f32 sp700;
     s32 sp6E0;
@@ -1841,19 +1834,8 @@ void psDispParticles(s32 arg0, u32 arg1)
                         PSMTXInverse((MtxPtr) cache, (MtxPtr) (cache + 0xC));
                         psUpdateProjectionCache(cache, (f32) sp8B0);
                         GXLoadPosMtxImm((MtxPtr) cache, 0);
-                        sp72C = HSD_PSDisp_803B9628[0];
-                        sp730 = HSD_PSDisp_803B9628[1];
-                        sp734 = HSD_PSDisp_803B9628[2];
-                        sp738 = HSD_PSDisp_803B9628[3];
-                        sp73C = HSD_PSDisp_803B9628[4];
-                        sp740 = HSD_PSDisp_803B9628[5];
-                        sp744 = HSD_PSDisp_803B9628[6];
-                        sp748 = HSD_PSDisp_803B9628[7];
-                        sp74C = HSD_PSDisp_803B9628[8];
-                        sp750 = HSD_PSDisp_803B9628[9];
-                        sp754 = HSD_PSDisp_803B9628[10];
-                        sp758 = HSD_PSDisp_803B9628[11];
-                        GXLoadPosMtxImm((MtxPtr) &sp72C, 3);
+                        billboard_mtx = HSD_PSDisp_803B9628;
+                        GXLoadPosMtxImm(billboard_mtx.mtx, 3);
                         HSD_PSDisp_804D7948 = 3;
                         psSetCurrentMtx(0);
                         GXEnableTexOffsets(GX_TEXCOORD0, GX_TRUE, GX_TRUE);
