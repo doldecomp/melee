@@ -1994,6 +1994,10 @@ void psDispParticles(s32 arg0, u32 arg1)
                 Mtx temp_mtx;
                 GXTexWrapMode wrap_s;
                 GXTexWrapMode wrap_t;
+                u32 fmt;
+                u8** tex_table;
+                u32 width;
+                u32 height;
 
                 if ((sp798 == 1) && !(pp->kind & TexEdge)) {
                     break;
@@ -2135,13 +2139,14 @@ void psDispParticles(s32 arg0, u32 arg1)
                         tex_group = ((HSD_PSTexGroup***)
                                           sp7F4)[pp->bank][pp->texGroup];
                         if (tex_group != NULL) {
-                            image = tex_group->texTable[pp->poseNum];
-                            if ((tex_group->fmt == GX_TF_C4) ||
-                                (tex_group->fmt == GX_TF_C8))
-                            {
+                            fmt = tex_group->fmt;
+                            tex_table = tex_group->texTable;
+                            width = tex_group->width;
+                            height = tex_group->height;
+                            image = tex_table[pp->poseNum];
+                            if ((fmt == GX_TF_C4) || (fmt == GX_TF_C8)) {
                                 void** palettes =
-                                    (void**) &tex_group
-                                        ->texTable[tex_group->num];
+                                    (void**) &tex_table[tex_group->num];
                                 if (pp->palNum != 0xFF) {
                                     tlut = palettes[pp->palNum];
                                 } else if (!(pp->kind & ComTLUT)) {
@@ -2151,7 +2156,7 @@ void psDispParticles(s32 arg0, u32 arg1)
                                 }
                                 if (tlut != sp79C) {
                                     sp79C = tlut;
-                                    if (tex_group->fmt == GX_TF_C4) {
+                                    if (fmt == GX_TF_C4) {
                                         sp790 = 0x10;
                                     } else {
                                         sp790 = 0x100;
@@ -2168,13 +2173,12 @@ void psDispParticles(s32 arg0, u32 arg1)
                         }
                         if ((image != sp7B0) && (image != NULL)) {
                             sp7B0 = image;
-                            switch (tex_group->fmt) {
+                            switch (fmt) {
                             case GX_TF_C4:
                             case GX_TF_C8:
-                                GXInitTexObjCI(&sp764, image, tex_group->width,
-                                               tex_group->height,
-                                               tex_group->fmt, wrap_s, wrap_t,
-                                               GX_FALSE, GX_TLUT0);
+                                GXInitTexObjCI(&sp764, image, width, height,
+                                               fmt, wrap_s, wrap_t, GX_FALSE,
+                                               GX_TLUT0);
                                 break;
                             case GX_TF_I4:
                             case GX_TF_I8:
@@ -2184,8 +2188,7 @@ void psDispParticles(s32 arg0, u32 arg1)
                             case GX_TF_RGB5A3:
                             case GX_TF_RGBA8:
                             case GX_TF_CMPR:
-                                GXInitTexObj(&sp764, image, tex_group->width,
-                                             tex_group->height, tex_group->fmt,
+                                GXInitTexObj(&sp764, image, width, height, fmt,
                                              wrap_s, wrap_t, GX_FALSE);
                                 break;
                             default:
