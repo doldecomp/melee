@@ -662,7 +662,9 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
         if (q->size == pp->size && q->appsrt == NULL &&
             !((q->kind ^ pp->kind) & 0xC0100400) && !(q->kind & DispPoint))
         {
-            vbuf[count].cur = q->pos;
+            vbuf[count].cur.x = q->pos.x;
+            vbuf[count].cur.y = q->pos.y;
+            vbuf[count].cur.z = q->pos.z;
             if (q->kind & Tornado) {
                 calcTornadoLastPos(q, &vbuf[count].prev.x, &vbuf[count].prev.y,
                                    &vbuf[count].prev.z);
