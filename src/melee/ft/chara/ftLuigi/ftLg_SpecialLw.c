@@ -64,8 +64,7 @@ static inline void ftLuigi_SpecialLw_SetGFX(HSD_GObj* gobj)
     HSD_JObj* hsd_obj = gobj->hsd_obj;
     efSync_Spawn(0x509, gobj, hsd_obj);
     fp->x2219_b0 = 1;
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 /// 0x801445F0
@@ -77,7 +76,7 @@ void ftLg_SpecialLw_Enter(HSD_GObj* gobj)
     Fighter* temp_fp;
     Fighter* fp2;
 
-    u8 _[20];
+    u8 _[12];
 
     temp_fp = (fp = GET_FIGHTER(gobj));
     luigiAttrs = temp_fp->dat_attrs;
@@ -189,8 +188,7 @@ static inline void ftLuigi_SpecialLw_GroundToAir(HSD_GObj* gobj)
                               1.0f, 0.0f, NULL);
     ftCommon_ClampFallSpeed(fp, luigiAttrs->x90_LUIGI_CYCLONE_TAP_GRAVITY);
     ftCommon_ClampSelfVelX(fp, luigiAttrs->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR);
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 /// 0x80144958
@@ -198,8 +196,6 @@ static inline void ftLuigi_SpecialLw_GroundToAir(HSD_GObj* gobj)
 /// callback
 void ftLg_SpecialLw_Phys(HSD_GObj* gobj)
 {
-    u8 _[8];
-
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* attrs = getFtSpecialAttrs(fp);
 
@@ -291,7 +287,7 @@ void ftLg_SpecialLw_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    u8 _[20];
+    u8 _[12];
 
     if (fp->ground_or_air == GA_Ground) {
         if (!ft_80082888(gobj, &ftLg_SpecialLw_CollisionBox)) {
@@ -321,8 +317,7 @@ static inline void ftLuigi_SpecialAirLw_AirToGround(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialLw, FTLUIGI_SPECIALLW_FLAG,
                               fp->cur_anim_frame, 1.0f, 0.0f, NULL);
     ftCommon_ClampGrVel(fp, luigiAttrs->x74_LUIGI_CYCLONE_MOMENTUM_X_GROUND);
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 /// 0x80144CEC
@@ -332,7 +327,7 @@ void ftLg_SpecialAirLw_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    u8 _[24];
+    u8 _[16];
 
     if (ft_800824A0(gobj, &ftLg_SpecialLw_CollisionBox) != false) {
         ftLuigi_SpecialAirLw_AirToGround(gobj);

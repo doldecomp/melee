@@ -1209,7 +1209,7 @@ void ftKb_SpecialAirLw_800F539C(Fighter_GObj* gobj)
 
 static inline void fn_800F53AC_SpawnEffect(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = gobj->user_data;
     s32 ef_id;
     if (fp->ground_or_air == GA_Air) {
         ef_id = 0x497;
@@ -1218,8 +1218,7 @@ static inline void fn_800F53AC_SpawnEffect(HSD_GObj* gobj)
     }
     efSync_Spawn(ef_id, gobj, fp->parts[FtPart_HipN].joint, &fp->facing_dir);
     fp->x2219_b0 = true;
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 static inline void fn_800F53AC_CleanupItem(HSD_GObj* gobj)
@@ -2168,16 +2167,12 @@ void fn_800F6638(HSD_GObj* gobj)
 
 void fn_800F66E8(HSD_GObj* gobj)
 {
-    void (*new_var2)(HSD_GObj* gobj);
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
-    void (*new_var)(HSD_GObj* gobj);
+    PAD_STACK(8);
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirNLoop, 0x0C4C5A9A,
                               fp->cur_anim_frame, 1.0f, 0.0f, 0L);
-    new_var = efLib_PauseAll;
-    new_var2 = efLib_ResumeAll;
-    fp->pre_hitlag_cb = new_var;
-    fp->post_hitlag_cb = new_var2;
+    Fighter_SetEffectHitlagCallbacks(fp);
     fp = (Fighter*) HSD_GObjGetUserData(gobj);
     ftCommon_8007E2D0(fp, 0x10, fn_800F6318, fn_800F6280, ftCo_800BD1DC);
     fp->x2225_b1 = 1;
@@ -2368,8 +2363,7 @@ static inline void ftKb_SpecialN_SetHitlagCb(Fighter_GObj* gobj, s32 ms,
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ms, mf, 0.0f, 1.0f, 0.0f, NULL);
     fp->x2222_b2 = true;
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 static inline void
@@ -2386,7 +2380,7 @@ void ftKb_SpecialN_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* joint = fp->parts[FtPart_YRotN].joint;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     if (fp->cmd_vars[0] != 0) {
         efAsync_Spawn(gobj, &fp->x60C, 3, 0x49A, joint, &fp->facing_dir);
@@ -2405,7 +2399,7 @@ void ftKb_SpecialAirN_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* joint = fp->parts[FtPart_YRotN].joint;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     if (fp->cmd_vars[0] != 0) {
         efAsync_Spawn(gobj, &fp->x60C, 3, 0x49A, joint, &fp->facing_dir);

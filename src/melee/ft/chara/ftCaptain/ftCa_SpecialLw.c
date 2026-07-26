@@ -139,14 +139,13 @@ static inline void ftCa_SpecialLw_Anim_inline(HSD_GObj* gobj, s32 condition)
         Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialLwEndAir, Ft_MF_None, 0,
                                   1, 0, NULL);
     }
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 void ftCa_SpecialLw_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    PAD_STACK(24);
+    PAD_STACK(16);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->ground_or_air == GA_Ground) {
             ftCa_SpecialLw_Anim_inline(gobj, 0);
