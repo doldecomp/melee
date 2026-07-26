@@ -1365,17 +1365,29 @@ static inline void psGetAppSRTPositions(HSD_Particle* pp, Mtx draw_mtx,
                   (draw_mtx[2][0] * pp->pos.x + draw_mtx[2][1] * pp->pos.y));
     if (pp->kind & Tornado) {
         calcTornadoLastPos(pp, &x, &y, &z);
+        prev_pos->x =
+            draw_mtx[0][3] +
+            (draw_mtx[0][2] * z + (draw_mtx[0][0] * x + draw_mtx[0][1] * y));
+        prev_pos->y =
+            draw_mtx[1][3] +
+            (draw_mtx[1][2] * z + (draw_mtx[1][0] * x + draw_mtx[1][1] * y));
+        prev_pos->z =
+            draw_mtx[2][3] +
+            (draw_mtx[2][2] * z + (draw_mtx[2][0] * x + draw_mtx[2][1] * y));
     } else {
         x = pp->pos.x - pp->vel.x;
         y = pp->pos.y - pp->vel.y;
         z = pp->pos.z - pp->vel.z;
+        prev_pos->x =
+            draw_mtx[0][3] +
+            (draw_mtx[0][2] * z + (draw_mtx[0][0] * x + draw_mtx[0][1] * y));
+        prev_pos->y =
+            draw_mtx[1][3] +
+            (draw_mtx[1][2] * z + (draw_mtx[1][0] * x + draw_mtx[1][1] * y));
+        prev_pos->z =
+            draw_mtx[2][3] +
+            (draw_mtx[2][2] * z + (draw_mtx[2][0] * x + draw_mtx[2][1] * y));
     }
-    prev_pos->x = draw_mtx[0][3] + (draw_mtx[0][2] * z +
-                                    (draw_mtx[0][0] * x + draw_mtx[0][1] * y));
-    prev_pos->y = draw_mtx[1][3] + (draw_mtx[1][2] * z +
-                                    (draw_mtx[1][0] * x + draw_mtx[1][1] * y));
-    prev_pos->z = draw_mtx[2][3] + (draw_mtx[2][2] * z +
-                                    (draw_mtx[2][0] * x + draw_mtx[2][1] * y));
 }
 
 static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
