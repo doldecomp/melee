@@ -43,7 +43,9 @@ void ftCo_80090594(Fighter* fp, enum_t element, int dmg, FtMotionId msid,
                    GroundOrAir ground_or_air, float hitlag_mul)
 {
     FtMotionId motion_id = msid;
-    if (element == 10 || element == 12 || element == 6 || element == 7) {
+    if (element == HitElement_Cape || element == HitElement_Disable ||
+        element == HitElement_Nap || element == HitElement_Sleep)
+    {
         return;
     }
     if (fp->motion_id == ftCo_MS_DamageIce) {
@@ -53,7 +55,7 @@ void ftCo_80090594(Fighter* fp, enum_t element, int dmg, FtMotionId msid,
     fp->dmg.x18fa_model_shift_frames = calcShift(hitlag_mul, motion_id, dmg);
     fp->dmg.x18FC = 0;
 
-    if (element == 2) {
+    if (element == HitElement_Electric) {
         fp->dmg.x18F8 = 2;
     } else if (ground_or_air == GA_Air) {
         fp->dmg.x18F8 = 0;

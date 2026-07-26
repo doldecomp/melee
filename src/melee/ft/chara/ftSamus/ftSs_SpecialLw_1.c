@@ -44,7 +44,7 @@ void ftSs_SpecialLw_8012AEBC(HSD_GObj* gobj)
 {
     ftHurtboxInit hurt;
     Fighter* fp = GET_FIGHTER(gobj);
-    ftColl_8007B0C0(gobj, 2);
+    ftColl_8007B0C0(gobj, Intangible);
 
     hurt.bone_idx = FtPart_XRotN;
     hurt.height = HurtHeight_Mid;
@@ -57,7 +57,7 @@ void ftSs_SpecialLw_8012AEBC(HSD_GObj* gobj)
 
 void ftSs_SpecialLw_8012AF38(HSD_GObj* gobj)
 {
-    ftColl_8007B0C0(gobj, 0);
+    ftColl_8007B0C0(gobj, HurtCapsule_Enabled);
 }
 
 static void ftSamus_SpecialLw_StartAction_inner(HSD_GObj* gobj)
@@ -121,7 +121,7 @@ inline static void checkStateVar1(HSD_GObj* gobj)
         setSamusBits(fp, 1);
     }
     if ((!fp->cmd_vars[0]) && (fp->mv.ss.unk6.x0)) {
-        ftColl_8007B0C0((Fighter_GObj*) gobj, 0);
+        ftColl_8007B0C0((Fighter_GObj*) gobj, HurtCapsule_Enabled);
         setSamusBits(fp, 0);
     }
 }

@@ -319,7 +319,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         if (kb_level_base < 2) {
             goto block_17;
         }
-        if ((u32) fp->dmg.x1860_element != 5U) {
+        if ((u32) fp->dmg.x1860_element != HitElement_Ice) {
             goto block_17;
         }
         kb_angle = calcAngle(kb_angle);
@@ -422,7 +422,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         if (kb_level_base < 2) {
             goto block_42;
         }
-        if ((u32) fp->dmg.x1860_element != 5U) {
+        if ((u32) fp->dmg.x1860_element != HitElement_Ice) {
             goto block_42;
         }
         msid = 0x5A;
@@ -528,7 +528,7 @@ block_83:
     if (kb_level_base < 2) {
         return;
     }
-    if ((u32) fp->dmg.x1860_element == 5U) {
+    if ((u32) fp->dmg.x1860_element == HitElement_Ice) {
         ftCo_DamageIce_Init(gobj);
     }
 }
@@ -834,7 +834,7 @@ void ftCo_8008EC90(Fighter_GObj* gobj)
     if (fp->x2220_b3 || fp->x2220_b4 || !fp->dmg.kb_applied) {
         inlineB2(gobj);
         goto ret_A8C;
-    } else if (fp->dmg.x1860_element == 10U) {
+    } else if (fp->dmg.x1860_element == HitElement_Cape) {
         if (ftCo_800C3538(gobj)) {
             goto ret_A8C;
         }

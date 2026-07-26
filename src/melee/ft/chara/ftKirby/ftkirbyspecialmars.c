@@ -438,7 +438,7 @@ void ftKb_MsSpecialNEnd_Anim(Fighter_GObj* gobj)
         hit_fp = fp;
         i = 0;
         do {
-            if ((s32) hit_fp->x914[0].state == 1) {
+            if ((s32) hit_fp->x914[0].state == HitCapsule_Enabled) {
                 dmg =
                     (u32) (f32) (s32) (ms_da->base_damage +
                                        (fp->mv.kb.specialn_ms.cur_frame / 30) *
@@ -473,7 +473,7 @@ void ftKb_MsSpecialAirNEnd_Anim(Fighter_GObj* gobj)
         hit_fp = fp;
         i = 0;
         do {
-            if ((s32) hit_fp->x914[0].state == 1) {
+            if ((s32) hit_fp->x914[0].state == HitCapsule_Enabled) {
                 dmg =
                     (u32) (f32) (s32) (ms_da->base_damage +
                                        (fp->mv.kb.specialn_ms.cur_frame / 30) *
