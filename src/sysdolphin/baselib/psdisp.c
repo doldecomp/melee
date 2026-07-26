@@ -1896,19 +1896,21 @@ static inline void psComposeProjectionRow(Vec4* dst, const f32* row,
 
 static inline void psUpdateBillboardAxes(const Mtx inv_view)
 {
-    f32 right_x = inv_view[0][0];
-    f32 up_x = inv_view[0][1];
-    f32 right_y = inv_view[1][0];
-    f32 up_y = inv_view[1][1];
-    f32 right_z = inv_view[2][0];
-    f32 up_z = inv_view[2][1];
+    f32 right;
+    f32 up;
 
-    HSD_PSDisp_804D7914 = right_x + up_x;
-    HSD_PSDisp_804D7918 = right_x - up_x;
-    HSD_PSDisp_804D791C = right_y + up_y;
-    HSD_PSDisp_804D7920 = right_y - up_y;
-    HSD_PSDisp_804D7924 = right_z + up_z;
-    HSD_PSDisp_804D7928 = right_z - up_z;
+    right = inv_view[0][0];
+    up = inv_view[0][1];
+    HSD_PSDisp_804D7914 = right + up;
+    HSD_PSDisp_804D7918 = right - up;
+    right = inv_view[1][0];
+    up = inv_view[1][1];
+    HSD_PSDisp_804D791C = right + up;
+    HSD_PSDisp_804D7920 = right - up;
+    right = inv_view[2][0];
+    up = inv_view[2][1];
+    HSD_PSDisp_804D7924 = right + up;
+    HSD_PSDisp_804D7928 = right - up;
 }
 
 static inline void psUpdateProjectionCache(psdisp_Cache* cache,
