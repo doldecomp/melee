@@ -768,7 +768,7 @@ static inline void setBlendMode(int blend_mode)
                            GX_LO_CLEAR);
             break;
         default:
-            OSReport((char*) &HSD_PSDisp_8040C300 + 0x70);
+            OSReport("Particle:setBlendMode:Unknown mode\n");
             break;
         }
     }
