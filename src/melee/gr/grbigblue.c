@@ -2396,8 +2396,6 @@ void grBigBlue_801EB004(Ground_GObj* gobj)
     grBb_TrackEntry* entry;
     PAD_STACK(4);
 
-    /// The assert at 2328 names the per-entry jobj, so the stage model's own
-    /// jobj is the one scoped to this block.
     {
         HSD_JObj* jobj = GET_JOBJ(gobj);
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
