@@ -830,7 +830,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, float x,
             GXWGFifo.u8 = color.r;
             GXWGFifo.u8 = color.g;
             GXWGFifo.u8 = color.b;
-            GXWGFifo.u8 = (s8) ((f32) color.a * pp->trail);
+            GXWGFifo.u8 = (u8) ((f32) color.a * pp->trail);
             if (pp->kind & DispTexture) {
                 GXWGFifo.u8 = tex_base;
             }
@@ -860,7 +860,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, float x,
             GXWGFifo.u8 = color.r;
             GXWGFifo.u8 = color.g;
             GXWGFifo.u8 = color.b;
-            GXWGFifo.u8 = (s8) ((f32) color.a * pp->trail);
+            GXWGFifo.u8 = (u8) ((f32) color.a * pp->trail);
             if (pp->kind & DispTexture) {
                 GXWGFifo.u8 = tex_base + 3;
             }
