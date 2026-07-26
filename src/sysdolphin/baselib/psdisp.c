@@ -38,18 +38,41 @@ typedef struct {
 } psdisp_ParticleSortBucket;
 
 typedef struct {
+    f32 type;
+    f32 x_scale;
+    f32 x_offset;
+    f32 y_scale;
+    f32 y_offset;
+    f32 z_scale;
+    f32 z_offset;
+} psdisp_Projection;
+
+typedef struct {
+    f32 x;
+    f32 y;
+    f32 z;
+    f32 w;
+} psdisp_ProjectionRow;
+
+typedef struct {
     Mtx mtx;
 } psdisp_Mtx;
 
 typedef Vec3 Point3d;
 
 typedef struct {
-    u8 x0_pad[0xAC];
-    HSD_Particle* xAC[17];
-} psdisp_ParticleSortCache;
+    Mtx view_mtx;
+    Mtx inverse_view_mtx;
+    psdisp_Projection projection;
+    psdisp_ProjectionRow projected_x;
+    psdisp_ProjectionRow projected_y;
+    u8 x9C_pad[0x10];
+    HSD_Particle* particle_list[17];
+} psdisp_Cache;
 
 STATIC_ASSERT(sizeof(psdisp_ParticleSortBucket) == 8);
-STATIC_ASSERT(sizeof(psdisp_ParticleSortCache) == 0xF0);
+STATIC_ASSERT(sizeof(psdisp_Cache) == 0xF0);
+STATIC_ASSERT(offsetof(psdisp_Cache, particle_list) == 0xAC);
 
 /* 39F89C */ static void calcTornadoLastPos(HSD_Particle*, f32*, f32*, f32*);
 /* 39FA28 */ static void getColorPrimEnv(HSD_Particle*, GXColor*, GXColor*);
@@ -62,7 +85,7 @@ STATIC_ASSERT(sizeof(psdisp_ParticleSortCache) == 0xF0);
 /* 4D0908 */ extern HSD_Particle* hsd_804D0908[146];
 /* 4D0B50 */ extern void* psTexGroupArray_804D0B50;
 /* 4D0C54 */ extern void* psNumCmdList_804D0C54;
-/* 4D0FC0 */ extern psdisp_ParticleSortCache HSD_PSDisp_804D0FC0;
+/* 4D0FC0 */ extern psdisp_Cache HSD_PSDisp_804D0FC0;
 /* 4D7908 */ extern HSD_Fog* HSD_PSDisp_804D7908;
 /* 4D790C */ extern s32 HSD_PSDisp_804D790C;
 /* 4D7910 */ extern s32 HSD_PSDisp_804D7910;
@@ -421,7 +444,7 @@ HSD_Particle* particleSort(s32 arg0, u8 arg1, HSD_Particle** arg2,
     HSD_Particle** temp_r29;
     HSD_Particle** var_r6_2;
     HSD_Particle** var_r7_2;
-    psdisp_ParticleSortCache* cache;
+    psdisp_Cache* cache;
     s32 i;
     u32 temp_r3;
     u32 temp_r3_2;
@@ -437,13 +460,13 @@ HSD_Particle* particleSort(s32 arg0, u8 arg1, HSD_Particle** arg2,
     var_r28 = *temp_r29;
     if (*temp_r9 == arg1) {
         *arg2 = var_r28;
-        *arg3 = cache->xAC[arg0];
+        *arg3 = cache->particle_list[arg0];
         return var_r28;
     }
 
     *temp_r9 = arg1;
     if (var_r28 == NULL) {
-        cache->xAC[arg0] = NULL;
+        cache->particle_list[arg0] = NULL;
         *arg2 = NULL;
         *arg3 = NULL;
         return NULL;
@@ -522,7 +545,7 @@ HSD_Particle* particleSort(s32 arg0, u8 arg1, HSD_Particle** arg2,
     }
 
     *temp_r29 = var_r3;
-    cache->xAC[arg0] = var_r5;
+    cache->particle_list[arg0] = var_r5;
     *arg2 = var_r3;
     *arg3 = var_r5;
     return var_r3;
@@ -1011,19 +1034,19 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, float x,
 
 static inline void psDispSub(HSD_Particle* pp, u8* texform)
 {
-    f32* cache = (f32*) &HSD_PSDisp_804D0FC0;
+    psdisp_Cache* cache = &HSD_PSDisp_804D0FC0;
     Vec3 right;
     Vec3 up;
     f32 angle;
     Mtx mtx;
 
     if (texform != NULL) {
-        right.x = cache[0xC] * pp->size;
-        right.y = cache[0x10] * pp->size;
-        right.z = cache[0x14] * pp->size;
-        up.x = -cache[0xD] * pp->size;
-        up.y = -cache[0x11] * pp->size;
-        up.z = -cache[0x15] * pp->size;
+        right.x = cache->inverse_view_mtx[0][0] * pp->size;
+        right.y = cache->inverse_view_mtx[1][0] * pp->size;
+        right.z = cache->inverse_view_mtx[2][0] * pp->size;
+        up.x = -cache->inverse_view_mtx[0][1] * pp->size;
+        up.y = -cache->inverse_view_mtx[1][1] * pp->size;
+        up.z = -cache->inverse_view_mtx[2][1] * pp->size;
     } else {
         right.x = HSD_PSDisp_804D7914 * pp->size;
         right.y = HSD_PSDisp_804D791C * pp->size;
@@ -1036,7 +1059,7 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
         f32 x = 0.0f;
         f32 y = 0.0f;
 
-        if (cache[0x18] == 0.0f) {
+        if (cache->projection.type == 0.0f) {
             Vec3 prev;
             f32 w0;
 
@@ -1047,31 +1070,37 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
                 prev.y = pp->pos.y - pp->vel.y;
                 prev.z = pp->pos.z - pp->vel.z;
             }
-            w0 = cache[0xB] + (cache[0xA] * pp->pos.z +
-                               (cache[8] * pp->pos.x + cache[9] * pp->pos.y));
-            if (cache[0x18] != w0) {
+            w0 = cache->view_mtx[2][3] + (cache->view_mtx[2][2] * pp->pos.z +
+                                          (cache->view_mtx[2][0] * pp->pos.x +
+                                           cache->view_mtx[2][1] * pp->pos.y));
+            if (cache->projection.type != w0) {
                 f32 w0inv = 1.0f / w0;
                 f32 w1 =
-                    cache[0xB] + (cache[0xA] * prev.z +
-                                  (cache[8] * prev.x + cache[9] * prev.y));
+                    cache->view_mtx[2][3] + (cache->view_mtx[2][2] * prev.z +
+                                             (cache->view_mtx[2][0] * prev.x +
+                                              cache->view_mtx[2][1] * prev.y));
 
-                if (cache[0x18] != w1) {
+                if (cache->projection.type != w1) {
                     f32 w1inv = 1.0f / w1;
-                    f64 cur_y = (f64) (cache[0x20] * pp->pos.y);
-                    f64 prev_xy =
-                        (f64) (cache[0x1F] * prev.x + cache[0x20] * prev.y);
+                    f64 cur_y = (f64) (cache->projected_x.y * pp->pos.y);
+                    f64 prev_xy = (f64) (cache->projected_x.x * prev.x +
+                                         cache->projected_x.y * prev.y);
 
-                    x = w0inv * (cache[0x22] +
-                                 (cache[0x21] * pp->pos.z +
-                                  (cache[0x1F] * pp->pos.x + (f32) cur_y))) -
-                        w1inv * (cache[0x22] +
-                                 (cache[0x21] * prev.z + (f32) prev_xy));
-                    y = w0inv * (cache[0x26] + (cache[0x25] * pp->pos.z +
-                                                (cache[0x23] * pp->pos.x +
-                                                 cache[0x24] * pp->pos.y))) -
-                        w1inv * (cache[0x26] + (cache[0x25] * prev.z +
-                                                (cache[0x23] * prev.x +
-                                                 cache[0x24] * prev.y)));
+                    x = w0inv * (cache->projected_x.w +
+                                 (cache->projected_x.z * pp->pos.z +
+                                  (cache->projected_x.x * pp->pos.x +
+                                   (f32) cur_y))) -
+                        w1inv *
+                            (cache->projected_x.w +
+                             (cache->projected_x.z * prev.z + (f32) prev_xy));
+                    y = w0inv * (cache->projected_y.w +
+                                 (cache->projected_y.z * pp->pos.z +
+                                  (cache->projected_y.x * pp->pos.x +
+                                   cache->projected_y.y * pp->pos.y))) -
+                        w1inv * (cache->projected_y.w +
+                                 (cache->projected_y.z * prev.z +
+                                  (cache->projected_y.x * prev.x +
+                                   cache->projected_y.y * prev.y)));
                 }
             }
         } else if (pp->kind & Tornado) {
@@ -1084,13 +1113,17 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
             dx = pp->pos.x - prev.x;
             dy = pp->pos.y - prev.y;
             dz = pp->pos.z - prev.z;
-            x = cache[0x21] * dz + (cache[0x1F] * dx + cache[0x20] * dy);
-            y = cache[0x25] * dz + (cache[0x23] * dx + cache[0x24] * dy);
+            x = cache->projected_x.z * dz +
+                (cache->projected_x.x * dx + cache->projected_x.y * dy);
+            y = cache->projected_y.z * dz +
+                (cache->projected_y.x * dx + cache->projected_y.y * dy);
         } else {
-            x = cache[0x21] * pp->vel.z +
-                (cache[0x1F] * pp->vel.x + cache[0x20] * pp->vel.y);
-            y = cache[0x25] * pp->vel.z +
-                (cache[0x23] * pp->vel.x + cache[0x24] * pp->vel.y);
+            x = cache->projected_x.z * pp->vel.z +
+                (cache->projected_x.x * pp->vel.x +
+                 cache->projected_x.y * pp->vel.y);
+            y = cache->projected_y.z * pp->vel.z +
+                (cache->projected_y.x * pp->vel.x +
+                 cache->projected_y.y * pp->vel.y);
         }
         if (fabsf(y) < 0.00001f) {
             angle = (x >= 0.0f) ? 1.5707964f : -1.5707964f;
@@ -1131,7 +1164,7 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
                          right.z, up.x, up.y, up.z);
 }
 
-static inline void psUpdateAppSRT(HSD_Particle* pp, f32* cache)
+static inline void psUpdateAppSRT(HSD_Particle* pp, psdisp_Cache* cache)
 {
     Vec3 scale;
     Mtx temp_mtx;
@@ -1147,7 +1180,7 @@ static inline void psUpdateAppSRT(HSD_Particle* pp, f32* cache)
         if (pp->appsrt->status == 1) {
             pp->appsrt->status = 2;
         }
-        PSMTXConcat((MtxPtr) cache, pp->appsrt->mmtx,
+        PSMTXConcat(cache->view_mtx, pp->appsrt->mmtx,
                     (MtxPtr) &pp->appsrt->ssx);
         scale_x = pp->appsrt->ssx * pp->appsrt->ssx +
                   pp->appsrt->x74 * pp->appsrt->x74 +
@@ -1164,7 +1197,7 @@ static inline void psUpdateAppSRT(HSD_Particle* pp, f32* cache)
             temp_mtx[0][3] = pp->appsrt->translate.x;
             temp_mtx[1][3] = pp->appsrt->translate.y;
             temp_mtx[2][3] = pp->appsrt->translate.z;
-            PSMTXConcat((MtxPtr) cache, temp_mtx, temp_mtx);
+            PSMTXConcat(cache->view_mtx, temp_mtx, temp_mtx);
             HSD_MtxGetScale(temp_mtx, &scale);
             PSMTXScale((MtxPtr) &pp->appsrt->ssx, scale.x, scale.y, scale.z);
             pp->appsrt->x70 = temp_mtx[0][3];
@@ -1201,7 +1234,7 @@ static inline void psGetAppSRTPositions(HSD_Particle* pp, Mtx draw_mtx,
                   draw_mtx[2][2] * last_pos.z + draw_mtx[2][3];
 }
 
-static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, f32* cache)
+static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
 {
     GXColor draw_color;
     GXColor tail_color;
@@ -1287,8 +1320,9 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, f32* cache)
 }
 
 static inline void psGetPerspectiveAppSRTDirection(HSD_Particle* pp,
-                                                   f32* cache, Mtx draw_mtx,
-                                                   f32* dir_x, f32* dir_y)
+                                                   psdisp_Cache* cache,
+                                                   Mtx draw_mtx, f32* dir_x,
+                                                   f32* dir_y)
 {
     Vec3 prev;
     f32 x84;
@@ -1329,24 +1363,27 @@ static inline void psGetPerspectiveAppSRTDirection(HSD_Particle* pp,
     x78 = draw_mtx[1][1];
     x7C = draw_mtx[1][2];
     x80 = draw_mtx[1][3];
-    d830 = (f64) (cache[0x1A] * x90);
-    d840 = (f64) (cache[0x1C] * x84);
-    d850 = (f64) (cache[0x1C] * x88);
-    d860 = (f64) (cache[0x1C] * x8C);
-    d870 = (f64) (cache[0x1C] * x90);
+    d830 = (f64) (cache->projection.x_offset * x90);
+    d840 = (f64) (cache->projection.y_offset * x84);
+    d850 = (f64) (cache->projection.y_offset * x88);
+    d860 = (f64) (cache->projection.y_offset * x8C);
+    d870 = (f64) (cache->projection.y_offset * x90);
     w0 = x90 + (x8C * pp->pos.z + (x84 * pp->pos.x + x88 * pp->pos.y));
-    f16 = cache[0x19] * draw_mtx[0][2] + cache[0x1A] * x8C;
-    s808 = cache[0x19] * draw_mtx[0][0] + cache[0x1A] * x84;
-    s804 = cache[0x19] * draw_mtx[0][1] + cache[0x1A] * x88;
-    f20 = cache[0x19] * draw_mtx[0][3] + (f32) d830;
-    f12 = cache[0x1B] * x74 + (f32) d840;
-    f8 = cache[0x1B] * x78 + (f32) d850;
-    f11 = cache[0x1B] * x7C + (f32) d860;
-    f13 = cache[0x1B] * x80 + (f32) d870;
-    if (cache[0x18] != w0) {
+    f16 = cache->projection.x_scale * draw_mtx[0][2] +
+          cache->projection.x_offset * x8C;
+    s808 = cache->projection.x_scale * draw_mtx[0][0] +
+           cache->projection.x_offset * x84;
+    s804 = cache->projection.x_scale * draw_mtx[0][1] +
+           cache->projection.x_offset * x88;
+    f20 = cache->projection.x_scale * draw_mtx[0][3] + (f32) d830;
+    f12 = cache->projection.y_scale * x74 + (f32) d840;
+    f8 = cache->projection.y_scale * x78 + (f32) d850;
+    f11 = cache->projection.y_scale * x7C + (f32) d860;
+    f13 = cache->projection.y_scale * x80 + (f32) d870;
+    if (cache->projection.type != w0) {
         f32 w0inv = 1.0f / w0;
         f32 w1 = x90 + (x8C * prev.z + (x84 * prev.x + x88 * prev.y));
-        if (cache[0x18] != w1) {
+        if (cache->projection.type != w1) {
             f32 w1inv = 1.0f / w1;
             *dir_x =
                 w0inv * (f20 + (f16 * pp->pos.z +
@@ -1374,7 +1411,8 @@ static inline void psScaleAppSRTAxes(HSD_Particle* pp, Mtx mtx)
     mtx[2][2] *= pp->size;
 }
 
-static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform, f32* cache)
+static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
+                                   psdisp_Cache* cache)
 {
     GXColor draw_color;
     GXColor tail_color;
@@ -1403,15 +1441,21 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform, f32* cache)
     if ((pp->kind & Trail) || (pp->kind & DirVec)) {
         f32 vf1 = 0.0f;
         f32 vf2 = 0.0f;
-        if (0.0f == cache[0x18]) {
+        if (0.0f == cache->projection.type) {
             psGetPerspectiveAppSRTDirection(pp, cache, draw_mtx, &vf1, &vf2);
         } else {
-            f32 s800 = cache[0x19] * draw_mtx[0][0] + cache[0x1A];
-            f32 s7FC = cache[0x19] * draw_mtx[0][1] + cache[0x1A];
-            f32 s7F8 = cache[0x19] * draw_mtx[0][2] + cache[0x1A];
-            f32 f17 = cache[0x1B] * draw_mtx[1][0] + cache[0x1C];
-            f32 f18 = cache[0x1B] * draw_mtx[1][1] + cache[0x1C];
-            f32 f20 = cache[0x1B] * draw_mtx[1][2] + cache[0x1C];
+            f32 s800 = cache->projection.x_scale * draw_mtx[0][0] +
+                       cache->projection.x_offset;
+            f32 s7FC = cache->projection.x_scale * draw_mtx[0][1] +
+                       cache->projection.x_offset;
+            f32 s7F8 = cache->projection.x_scale * draw_mtx[0][2] +
+                       cache->projection.x_offset;
+            f32 f17 = cache->projection.y_scale * draw_mtx[1][0] +
+                      cache->projection.y_offset;
+            f32 f18 = cache->projection.y_scale * draw_mtx[1][1] +
+                      cache->projection.y_offset;
+            f32 f20 = cache->projection.y_scale * draw_mtx[1][2] +
+                      cache->projection.y_offset;
             if (pp->kind & Tornado) {
                 Vec3 t;
                 calcTornadoLastPos(pp, &t.x, &t.y, &t.z);
@@ -1643,31 +1687,32 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform, f32* cache)
     }
 }
 
-static inline void psComposeProjectionRow(f32* dst, const f32* row,
-                                          const f32* view_w, f32 scale,
-                                          f32 offset, bool perspective)
+static inline void psComposeProjectionRow(psdisp_ProjectionRow* dst,
+                                          const f32* row, const f32* view_w,
+                                          f32 scale, f32 offset,
+                                          bool perspective)
 {
     if (perspective) {
-        dst[0] = scale * row[0] + offset * view_w[0];
-        dst[1] = scale * row[1] + offset * view_w[1];
-        dst[2] = scale * row[2] + offset * view_w[2];
-        dst[3] = scale * row[3] + offset * view_w[3];
+        dst->x = scale * row[0] + offset * view_w[0];
+        dst->y = scale * row[1] + offset * view_w[1];
+        dst->z = scale * row[2] + offset * view_w[2];
+        dst->w = scale * row[3] + offset * view_w[3];
     } else {
-        dst[0] = scale * row[0] + offset;
-        dst[1] = scale * row[1] + offset;
-        dst[2] = scale * row[2] + offset;
-        dst[3] = scale * row[3] + offset;
+        dst->x = scale * row[0] + offset;
+        dst->y = scale * row[1] + offset;
+        dst->z = scale * row[2] + offset;
+        dst->w = scale * row[3] + offset;
     }
 }
 
-static inline void psUpdateBillboardAxes(const f32* inv_view)
+static inline void psUpdateBillboardAxes(const Mtx inv_view)
 {
-    f32 right_x = inv_view[0xC];
-    f32 up_x = inv_view[0xD];
-    f32 right_y = inv_view[0x10];
-    f32 up_y = inv_view[0x11];
-    f32 right_z = inv_view[0x14];
-    f32 up_z = inv_view[0x15];
+    f32 right_x = inv_view[0][0];
+    f32 up_x = inv_view[0][1];
+    f32 right_y = inv_view[1][0];
+    f32 up_y = inv_view[1][1];
+    f32 right_z = inv_view[2][0];
+    f32 up_z = inv_view[2][1];
 
     HSD_PSDisp_804D7914 = right_x + up_x;
     HSD_PSDisp_804D7918 = right_x - up_x;
@@ -1677,21 +1722,26 @@ static inline void psUpdateBillboardAxes(const f32* inv_view)
     HSD_PSDisp_804D7928 = right_z - up_z;
 }
 
-static inline void psUpdateProjectionCache(f32* cache, f32 perspective)
+static inline void psUpdateProjectionCache(psdisp_Cache* cache,
+                                           f32 perspective)
 {
-    GXGetProjectionv(&cache[0x18]);
-    if (cache[0x18] == perspective) {
-        psComposeProjectionRow(&cache[0x1F], &cache[0], &cache[8], cache[0x19],
-                               cache[0x1A], true);
-        psComposeProjectionRow(&cache[0x23], &cache[4], &cache[8], cache[0x1B],
-                               cache[0x1C], true);
+    GXGetProjectionv((f32*) &cache->projection);
+    if (cache->projection.type == perspective) {
+        psComposeProjectionRow(&cache->projected_x, cache->view_mtx[0],
+                               cache->view_mtx[2], cache->projection.x_scale,
+                               cache->projection.x_offset, true);
+        psComposeProjectionRow(&cache->projected_y, cache->view_mtx[1],
+                               cache->view_mtx[2], cache->projection.y_scale,
+                               cache->projection.y_offset, true);
     } else {
-        psComposeProjectionRow(&cache[0x1F], &cache[0], &cache[8], cache[0x19],
-                               cache[0x1A], false);
-        psComposeProjectionRow(&cache[0x23], &cache[4], &cache[8], cache[0x1B],
-                               cache[0x1C], false);
+        psComposeProjectionRow(&cache->projected_x, cache->view_mtx[0],
+                               cache->view_mtx[2], cache->projection.x_scale,
+                               cache->projection.x_offset, false);
+        psComposeProjectionRow(&cache->projected_y, cache->view_mtx[1],
+                               cache->view_mtx[2], cache->projection.y_scale,
+                               cache->projection.y_offset, false);
     }
-    psUpdateBillboardAxes(cache);
+    psUpdateBillboardAxes(cache->inverse_view_mtx);
 }
 
 #pragma push
@@ -1729,13 +1779,13 @@ void psDispParticles(s32 arg0, u32 arg1)
     s32 var_r16;
     s32 var_r15;
     HSD_Particle* pp;
-    f32* cache;
+    psdisp_Cache* cache;
     /// @todo Recover this stack space from the original inline hierarchy.
     PAD_STACK(0x38);
 
     var_r16 = 0;
     var_r15 = 0;
-    cache = (f32*) &HSD_PSDisp_804D0FC0;
+    cache = &HSD_PSDisp_804D0FC0;
     sp798 = arg1;
     sp794 = arg0;
     sp7A5 = 0;
@@ -1811,10 +1861,10 @@ void psDispParticles(s32 arg0, u32 arg1)
                         HSD_PSDisp_804D792C = -1;
                         GXSetZCompLoc(GX_FALSE);
                         HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(),
-                                              (MtxPtr) cache);
-                        PSMTXInverse((MtxPtr) cache, (MtxPtr) (cache + 0xC));
+                                              cache->view_mtx);
+                        PSMTXInverse(cache->view_mtx, cache->inverse_view_mtx);
                         psUpdateProjectionCache(cache, (f32) sp8B0);
-                        GXLoadPosMtxImm((MtxPtr) cache, 0);
+                        GXLoadPosMtxImm(cache->view_mtx, 0);
                         billboard_mtx = HSD_PSDisp_803B9628;
                         GXLoadPosMtxImm(billboard_mtx.mtx, 3);
                         HSD_PSDisp_804D7948 = 3;
