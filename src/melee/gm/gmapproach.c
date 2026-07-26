@@ -124,7 +124,8 @@ static void gm_801ADB04(void)
 void gm_801ADC88_OnFrame(void)
 {
     if (gm_80480D98.xC++ >= 0xB4 &&
-        (HSD_PadCopyStatus[gm_80480D98.xE].trigger & 0x1100))
+        (HSD_PadCopyStatus[gm_80480D98.xE].trigger &
+         (HSD_PAD_A | HSD_PAD_START)))
     {
         gm_801A4B60();
     }

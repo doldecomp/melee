@@ -3183,7 +3183,7 @@ void mn_8022F1A8(u16 arg0, u16 arg1)
 
 bool mn_8022F218(void)
 {
-    if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & PAD_LRAST) {
+    if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & PAD_LR_START) {
         return true;
     }
     return false;

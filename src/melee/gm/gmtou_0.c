@@ -2185,12 +2185,14 @@ void fn_80194D84(s32* state, u32 buttons, u32 trigger)
     s32 cur_state;
     TmData* tm;
 
-    if (buttons & 0x40001) {
+    if (buttons & (PAD_BUTTON_LEFT | PAD_STICK_LEFT)) {
         if (*state > 6) {
             sfxMove();
             *state -= 1;
         }
-    } else if ((buttons & 0x80002) && (*state < 8)) {
+    } else if ((buttons & (PAD_BUTTON_RIGHT | PAD_STICK_RIGHT)) &&
+               (*state < 8))
+    {
         sfxMove();
         *state += 1;
     }
@@ -2199,7 +2201,7 @@ void fn_80194D84(s32* state, u32 buttons, u32 trigger)
         fn_80190ABC(0);
     }
 
-    if (trigger & 0x1100) {
+    if (trigger & (PAD_BUTTON_A | PAD_BUTTON_START)) {
         sfxForward();
         fn_8018EC7C();
         cur_state = *state;
@@ -2220,7 +2222,7 @@ void fn_80194D84(s32* state, u32 buttons, u32 trigger)
         } else {
             *state = 0;
         }
-    } else if (trigger & 0x200) {
+    } else if (trigger & PAD_BUTTON_B) {
         sfxBack();
         if (gm_804771C4.match_type == 0) {
             *state = 5;
@@ -2269,14 +2271,14 @@ void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
     TmData_80194F30* tm_alt = (TmData_80194F30*) state_ptr;
     s32 idx;
 
-    if (trigger & 0x1000) {
+    if (trigger & PAD_BUTTON_START) {
         sfxForward();
         lbl_804D6654 = *state_ptr;
         *state_ptr = 0x11;
         return;
     }
 
-    if (buttons & 0x40001) {
+    if (buttons & (PAD_BUTTON_LEFT | PAD_STICK_LEFT)) {
         switch (*state_ptr) {
         case 12:
             sfxMove();
@@ -2288,7 +2290,7 @@ void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
             state->x1 = 0;
             break;
         }
-    } else if (buttons & 0x80002) {
+    } else if (buttons & (PAD_BUTTON_RIGHT | PAD_STICK_RIGHT)) {
         switch (*state_ptr) {
         case 11:
             break;
@@ -2303,7 +2305,7 @@ void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
             }
             break;
         }
-    } else if (buttons & 0x10008) {
+    } else if (buttons & (PAD_BUTTON_UP | PAD_STICK_UP)) {
         if (*state_ptr != 0x10 || state->x1 == 0) {
             u8* pos_ptr;
             if (*(pos_ptr = &state->x2) != 0) {
@@ -2329,7 +2331,7 @@ void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
                 tm->x37[idx].x2 -= 1;
             }
         }
-    } else if (buttons & 0x20004) {
+    } else if (buttons & (PAD_BUTTON_DOWN | PAD_STICK_DOWN)) {
         if (*state_ptr != 0x10 || state->x1 == 0) {
             u8* pos_ptr;
             u8* scroll_ptr;
@@ -2361,7 +2363,7 @@ void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
         }
     }
 
-    if (trigger & 0x100) {
+    if (trigger & PAD_BUTTON_A) {
         switch (*state_ptr) {
         case 12:
         case 10:
@@ -2387,7 +2389,7 @@ void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
             }
             break;
         }
-    } else if (trigger & 0x200) {
+    } else if (trigger & PAD_BUTTON_B) {
         u8* flag_ptr;
         sfxBack();
         if (*state_ptr != 0x10 || *(flag_ptr = &state->x1) == 0) {
@@ -2432,7 +2434,7 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
     idx = lbl_804799B8.x2 + lbl_804799B8.x3;
     cur_pos = fn_8018F310(fn_8018F6FC(tm->x37[idx].x3));
 
-    if (trigger & 0x1000) {
+    if (trigger & PAD_BUTTON_START) {
         sfxBack();
         idx = lbl_804799B8.x2 + lbl_804799B8.x3;
         tm->x37[idx].x3 = tm->x37[idx].x4;
@@ -2445,7 +2447,7 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
         return;
     }
 
-    if (buttons & 0x40001) {
+    if (buttons & (PAD_BUTTON_LEFT | PAD_STICK_LEFT)) {
         group = (cur_pos / 5) * 5;
         for (i = 1; i < 5; i++) {
             step = fn_801953C8_GetPreviousPosition(i, cur_pos);
@@ -2473,7 +2475,7 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
                 break;
             }
         }
-    } else if (buttons & 0x80002) {
+    } else if (buttons & (PAD_BUTTON_RIGHT | PAD_STICK_RIGHT)) {
         group = ((cur_pos / 5) + 1) * 5;
         for (i = 1; i < 5; i++) {
             step = cur_pos + i;
@@ -2501,7 +2503,7 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
                 break;
             }
         }
-    } else if (buttons & 0x10008) {
+    } else if (buttons & (PAD_BUTTON_UP | PAD_STICK_UP)) {
         s32 temp;
 
         for (i = 1; i < 5; i++) {
@@ -2530,7 +2532,7 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
                 break;
             }
         }
-    } else if (buttons & 0x20004) {
+    } else if (buttons & (PAD_BUTTON_DOWN | PAD_STICK_DOWN)) {
         s32 next_candidate;
 
         for (i = 1; i < 5; i++) {
@@ -2560,7 +2562,7 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
         }
     }
 
-    if (trigger & 0x100) {
+    if (trigger & PAD_BUTTON_A) {
         if ((fn_8018F6A8(4) & 0x40) && (fn_8018F6A8(4) & 0x20) &&
             gm_804771C4.match_type != 0)
         {
@@ -2586,7 +2588,7 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
         if (tm->x37[idx].x5 != 0) {
             tm->x37[idx].x5 = 0;
         }
-    } else if (trigger & 0x200) {
+    } else if (trigger & PAD_BUTTON_B) {
         sfxBack();
         idx = lbl_804799B8.x2 + lbl_804799B8.x3;
         tm->x37[idx].x3 = tm->x37[idx].x4;
@@ -2595,7 +2597,7 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
         idx = lbl_804799B8.x2 + lbl_804799B8.x3;
         tm->x37[idx].x5 = tm->x37[idx].x6;
         *state_ptr -= 1;
-    } else if (trigger & 0x400) {
+    } else if (trigger & PAD_BUTTON_X) {
         if ((s32) tm->x37[lbl_804799B8.x2 + lbl_804799B8.x3].x7 <
             (s32) (u8) gm_80169238((u8) fn_8018F6FC(
                 tm->x37[lbl_804799B8.x2 + lbl_804799B8.x3].x3)) -
@@ -2605,7 +2607,7 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
             idx = lbl_804799B8.x2 + lbl_804799B8.x3;
             tm->x37[idx].x7++;
         }
-    } else if (trigger & 0x800) {
+    } else if (trigger & PAD_BUTTON_Y) {
         idx = lbl_804799B8.x2 + lbl_804799B8.x3;
         if (tm->x37[idx].x7 != 0) {
             sfxMove();
@@ -2626,23 +2628,25 @@ void fn_80195AF0(s32* state_ptr, u32 buttons, u32 trigger)
     u8* x2;
     u8* x5;
 
-    if (trigger & 0x1000) {
+    if (trigger & PAD_BUTTON_START) {
         lbl_804D6654 = *state_ptr;
         *state_ptr = 0x11;
         return;
     }
 
-    if (buttons & 0x40001) {
+    if (buttons & (PAD_BUTTON_LEFT | PAD_STICK_LEFT)) {
         if (*state_ptr == 0xE) {
             sfxMove();
             *state_ptr = 0xD;
         }
-    } else if ((buttons & 0x80002) && (*state_ptr == 0xD)) {
+    } else if ((buttons & (PAD_BUTTON_RIGHT | PAD_STICK_RIGHT)) &&
+               (*state_ptr == 0xD))
+    {
         sfxMove();
         *state_ptr = 0xE;
     }
 
-    if (trigger & 0x100) {
+    if (trigger & PAD_BUTTON_A) {
         sfxForward();
         tm_alt = (TmData_80194F30*) state_ptr;
         idx = *(x2 = &menu->x2) + *(x3 = &menu->x3);
@@ -2669,7 +2673,7 @@ void fn_80195AF0(s32* state_ptr, u32 buttons, u32 trigger)
             fn_80190ABC(4);
             return;
         }
-    } else if (trigger & 0x200) {
+    } else if (trigger & PAD_BUTTON_B) {
         sfxBack();
         tm_alt = (TmData_80194F30*) state_ptr;
         idx = menu->x2 + menu->x3;
@@ -2712,7 +2716,7 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
     u8* ptr;
     u8* x6_tmp;
 
-    if (buttons & 0x40001) {
+    if (buttons & (PAD_BUTTON_LEFT | PAD_STICK_LEFT)) {
         sfxMove();
         if ((*(ptr = menu + 5) % 4) != 0) {
             *ptr -= 1;
@@ -2721,7 +2725,7 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
             fn_80190ABC(5);
             fn_80190ABC(4);
         }
-    } else if (buttons & 0x80002) {
+    } else if (buttons & (PAD_BUTTON_RIGHT | PAD_STICK_RIGHT)) {
         u8* right_x5;
 
         sfxMove();
@@ -2735,7 +2739,7 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
             fn_80190ABC(5);
             fn_80190ABC(4);
         }
-    } else if (buttons & 0x10008) {
+    } else if (buttons & (PAD_BUTTON_UP | PAD_STICK_UP)) {
         sfxMove();
         if (((s32) lbl_804799B8.x5 / 4) != 0) {
             lbl_804799B8.x5 -= 4;
@@ -2750,7 +2754,7 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
             fn_80190ABC(5);
             fn_80190ABC(4);
         }
-    } else if (buttons & 0x20004) {
+    } else if (buttons & (PAD_BUTTON_DOWN | PAD_STICK_DOWN)) {
         sfxMove();
         if ((s32) ((s32) * (ptr = menu + 5) / 4) < 8) {
             if ((s32) (*ptr + (i = (*(x6_tmp = menu + 6) * 4) + 4)) <
@@ -2778,7 +2782,7 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
         }
     }
 
-    if (trigger & 0x100) {
+    if (trigger & PAD_BUTTON_A) {
         x6_ptr = menu + 6;
         x5 = menu + 5;
         if (GetNameText(*x5 + (*x6_ptr * 4)) != NULL) {
@@ -2803,7 +2807,7 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
         return;
     }
 
-    if (trigger & 0x200) {
+    if (trigger & PAD_BUTTON_B) {
         sfxBack();
         slot = menu[2] + menu[3];
         tm_alt->x37[slot].x9 = tm_alt->x37[slot].xB;
@@ -2823,19 +2827,19 @@ void fn_8019610C(s32* state, u32 buttons, u32 trigger)
 
     i = 1;
 
-    if (buttons & 0x10008) {
+    if (buttons & (PAD_BUTTON_UP | PAD_STICK_UP)) {
         if (*state == 0x12) {
             sfxMove();
             *state = 0x11;
         }
-    } else if ((buttons & 0x20004) != 0) {
+    } else if ((buttons & (PAD_BUTTON_DOWN | PAD_STICK_DOWN)) != 0) {
         if (*state == 0x11) {
             sfxMove();
             *state = 0x12;
         }
     }
 
-    if ((trigger & 0x1100) != 0) {
+    if ((trigger & (PAD_BUTTON_A | PAD_BUTTON_START)) != 0) {
         if (*state == 0x11) {
             lbAudioAx_80024030(i);
             if (gm_804771C4.match_type == 0) {
@@ -2868,7 +2872,7 @@ void fn_8019610C(s32* state, u32 buttons, u32 trigger)
             sfxBack();
             *state = lbl_804D6654;
         }
-    } else if ((trigger & 0x200) != 0) {
+    } else if ((trigger & PAD_BUTTON_B) != 0) {
         sfxBack();
         *state = lbl_804D6654;
     }

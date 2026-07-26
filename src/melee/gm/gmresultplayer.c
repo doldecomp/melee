@@ -335,9 +335,9 @@ bool fn_80177B7C(int slot)
             stick_y = 0;
         }
         trigger = HSD_PadCopyStatus[(u8) slot].trigger;
-        if (trigger & 0x40200) {
+        if (trigger & (PAD_BUTTON_B | PAD_STICK_LEFT)) {
             result = pagePrev(slot);
-        } else if (trigger & 0x80100) {
+        } else if (trigger & (PAD_BUTTON_A | PAD_STICK_RIGHT)) {
             result = pageNext(slot);
         } else if (stick_y < 0) {
             result = scrollDown(slot, -stick_y);
@@ -501,7 +501,8 @@ void fn_80178050(HSD_GObj* arg0)
                                 fn_80174B4C(data, k2);
                             }
                             if (((s8) pad->err != 0) ||
-                                (HSD_PadCopyStatus[(u8) k2].trigger & 0x1000))
+                                (HSD_PadCopyStatus[(u8) k2].trigger &
+                                 PAD_BUTTON_START))
                             {
                                 data->player_data[k2].x0_0 = 1;
                                 fn_80174920(&data->player_data[k2]);
@@ -535,7 +536,8 @@ void fn_80178050(HSD_GObj* arg0)
                                 data->player_data[k2].x0_4 = 0;
                                 fn_80174338();
                             }
-                        } else if (HSD_PadCopyStatus[(u8) k2].trigger & 0x1000)
+                        } else if (HSD_PadCopyStatus[(u8) k2].trigger &
+                                   PAD_BUTTON_START)
                         {
                             fn_80174920(&data->player_data[k2]);
                             data->player_data[k2].x0_0 = 0;
@@ -567,7 +569,8 @@ void fn_80178050(HSD_GObj* arg0)
                         if ((s32) lbl_804D3FC8 != 0) {
                             data->player_data[k2].x0_0 = 0;
                             if (((s8) pad->err == 0) &&
-                                (HSD_PadCopyStatus[(u8) k2].trigger & 0x1000))
+                                (HSD_PadCopyStatus[(u8) k2].trigger &
+                                 PAD_BUTTON_START))
                             {
                                 fn_80174338();
                                 var_r24 = 1;
@@ -576,7 +579,8 @@ void fn_80178050(HSD_GObj* arg0)
                     } else if (slot == 3) {
                         if (((s32) lbl_804D3FC8 != 0) &&
                             ((s8) pad->err == 0) &&
-                            (HSD_PadCopyStatus[(u8) k2].trigger & 0x1000))
+                            (HSD_PadCopyStatus[(u8) k2].trigger &
+                             PAD_BUTTON_START))
                         {
                             fn_80174338();
                             var_r24 = 1;
@@ -933,7 +937,7 @@ bool fn_801791E4(void)
         for (i = 0; i < 4; i++) {
             if (end->player_standings[i].slot_type == Gm_PKind_Human &&
                 HSD_PadMasterStatus[(u8) i].err == 0 &&
-                (HSD_PadCopyStatus[(u8) i].trigger & 0x1000))
+                (HSD_PadCopyStatus[(u8) i].trigger & PAD_BUTTON_START))
             {
                 return true;
             }
@@ -1688,7 +1692,7 @@ void fn_8017AA78(u8* arg0)
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(0, NULL);
+    Stage_802251E8(St_Kind_Dummy, NULL);
     Stage_8022524C();
     Item_80266FA8();
     Item_80266FCC();
