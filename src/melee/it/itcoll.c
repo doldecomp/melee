@@ -946,14 +946,14 @@ void it_80270E30(Item_GObj* arg_item_gobj)
 
 void it_8027129C(Item_GObj* arg_item_gobj, s32 index)
 {
-    /// @todo Using #HitCapsuleState here changes the stack frame.
-    s32 state;
+    HitCapsuleState state;
     HitCapsule* hit;
     Item* item;
 
-    item = arg_item_gobj->user_data;
+    item = GET_ITEM(arg_item_gobj);
     hit = &item->x5D4_hitboxes[index].hit;
     state = hit->state;
+
     switch (state) {
     case HitCapsule_Enabled:
         lb_8000B1CC(hit->jobj, &hit->b_offset, &hit->x4C);
