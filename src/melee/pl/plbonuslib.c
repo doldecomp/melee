@@ -478,8 +478,7 @@ void pl_8003E17C(int player_id, int arg1,
 
 u32 pl_8003E2CC(int arg0, int pl_itemlog_kind)
 {
-    HSD_ASSERTMSG(555, pl_itemlog_kind < 39,
-                  "pl_itemlog_kind < Pl_ItemLog_Terminate");
+    HSD_ASSERT(555, pl_itemlog_kind < Pl_ItemLog_Terminate);
 
     return Player_GetStaleMoveTableIndexPtr2(arg0)
         ->x0_staleMoveTable.x674[pl_itemlog_kind];
@@ -487,8 +486,7 @@ u32 pl_8003E2CC(int arg0, int pl_itemlog_kind)
 
 u32 pl_8003E334(int arg0, int pl_itemlog_kind)
 {
-    HSD_ASSERTMSG(564, pl_itemlog_kind < 39,
-                  "pl_itemlog_kind < Pl_ItemLog_Terminate");
+    HSD_ASSERT(564, pl_itemlog_kind < Pl_ItemLog_Terminate);
 
     return Player_GetStaleMoveTableIndexPtr2(arg0)
         ->x0_staleMoveTable.x710[pl_itemlog_kind];
@@ -499,9 +497,10 @@ int pl_8003E39C(int arg0)
     int sum = 0;
     int pl_itemlog_kind;
 
-    for (pl_itemlog_kind = 0; pl_itemlog_kind < 39; pl_itemlog_kind++) {
-        HSD_ASSERTMSG(555, pl_itemlog_kind < 39,
-                      "pl_itemlog_kind < Pl_ItemLog_Terminate");
+    for (pl_itemlog_kind = 0; pl_itemlog_kind < Pl_ItemLog_Terminate;
+         pl_itemlog_kind++)
+    {
+        HSD_ASSERT(555, pl_itemlog_kind < Pl_ItemLog_Terminate);
 
         sum += Player_GetStaleMoveTableIndexPtr2(arg0)
                    ->x0_staleMoveTable.x674[pl_itemlog_kind];
@@ -515,9 +514,10 @@ u32 pl_8003E420(int arg0)
     int sum = 0;
     int pl_itemlog_kind;
 
-    for (pl_itemlog_kind = 0; pl_itemlog_kind < 39; pl_itemlog_kind++) {
-        HSD_ASSERTMSG(564, pl_itemlog_kind < 39,
-                      "pl_itemlog_kind < Pl_ItemLog_Terminate");
+    for (pl_itemlog_kind = 0; pl_itemlog_kind < Pl_ItemLog_Terminate;
+         pl_itemlog_kind++)
+    {
+        HSD_ASSERT(564, pl_itemlog_kind < Pl_ItemLog_Terminate);
 
         sum += Player_GetStaleMoveTableIndexPtr2(arg0)
                    ->x0_staleMoveTable.x710[pl_itemlog_kind];
@@ -582,9 +582,8 @@ void pl_8003E70C(Item_GObj* igobj)
 
     HSD_GObj* temp_r30 = itGetOwner(igobj);
 
-    HSD_ASSERTMSG(634, 0xA1 <= itGetKind(igobj) && itGetKind(igobj) < 0xBF,
-                  "It_PKind_Start <= itGetKind(igobj) && itGetKind(igobj) < "
-                  "It_PKind_Terminate");
+    HSD_ASSERT(634, It_PKind_Start <= itGetKind(igobj) &&
+                        itGetKind(igobj) < It_PKind_Terminate);
     RETURN_IF(!ftLib_80086960(temp_r30));
 
     temp_r31 = Player_GetStaleMoveTableIndexPtr2(ftLib_80086BE0(temp_r30));
@@ -594,8 +593,7 @@ void pl_8003E70C(Item_GObj* igobj)
 
 u32 pl_8003E7D4(int arg0, int kind)
 {
-    HSD_ASSERTMSG(649, 0xA1 <= kind && kind < 0xBF,
-                  "It_PKind_Start <= kind && kind < It_PKind_Terminate");
+    HSD_ASSERT(649, It_PKind_Start <= kind && kind < It_PKind_Terminate);
 
     return Player_GetStaleMoveTableIndexPtr2(arg0)
         ->x0_staleMoveTable.total_attack_count_struct.x598[kind];

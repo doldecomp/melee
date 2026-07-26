@@ -284,7 +284,7 @@ void gm_801A9094(void)
     HSD_MatAnimJoint* matanim;
     HSD_GObj* gobj;
     HSD_JObj* root;
-    HSD_JObj* child;
+    HSD_JObj* jobj;
     PAD_STACK(0x84);
 
     gm_801A8D54(sp8C);
@@ -306,14 +306,14 @@ void gm_801A9094(void)
             HSD_JObjSetScaleY(root, 1.8f);
             HSD_JObjSetScaleZ(root, 1.8f);
             HSD_ASSERT(0x2F5, joint);
-            child = HSD_JObjLoadJoint(joint);
-            HSD_ASSERTMSG(0x2F7, child, "jobj");
-            HSD_JObjAddChild(root, child);
-            HSD_JObjAddAnimAll(child, NULL, matanim, NULL);
-            HSD_JObjReqAnimAll(child, (f32) dsp->x05);
-            HSD_JObjAnimAll(child);
-            HSD_JObjSetTranslateX(child, dsp->x08);
-            HSD_JObjSetTranslateZ(child, dsp->x0C);
+            jobj = HSD_JObjLoadJoint(joint);
+            HSD_ASSERT(0x2F7, jobj);
+            HSD_JObjAddChild(root, jobj);
+            HSD_JObjAddAnimAll(jobj, NULL, matanim, NULL);
+            HSD_JObjReqAnimAll(jobj, (f32) dsp->x05);
+            HSD_JObjAnimAll(jobj);
+            HSD_JObjSetTranslateX(jobj, dsp->x08);
+            HSD_JObjSetTranslateZ(jobj, dsp->x0C);
             HSD_JObjAddChild(root, HSD_JObjLoadJoint(bg_joint));
             gm_801A85E4(root, i, sp8C[i]);
         }

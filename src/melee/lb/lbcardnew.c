@@ -45,20 +45,20 @@ struct CardTask* lb_80019C38(void)
     int i;
     struct CardTask* result;
 
-    for (i = 0; i < 0xB; i++) {
+    for (i = 0; i < LbCardNewTaskArray_Max; i++) {
         result = &lb_80432A68.task_array[i];
         if (result->x0 == 0xE) {
             break;
         }
     }
-    HSD_ASSERTMSG(0x154, i != 0xB, "i != LbCardNewTaskArray_Max");
+    HSD_ASSERT(0x154, i != LbCardNewTaskArray_Max);
     return result;
 }
 
 static void reset_task_array(void)
 {
     int i;
-    for (i = 0; i < 11; i++) {
+    for (i = 0; i < LbCardNewTaskArray_Max; i++) {
         lb_80432A68.task_array[i].x0 = 0xE;
     }
 }
@@ -71,13 +71,13 @@ int lb_80019CB0(int result)
 again:
 
     i = 0;
-    for (i = 0; i < 11; i++) {
+    for (i = 0; i < LbCardNewTaskArray_Max; i++) {
         task = &lb_80432A68.task_array[i];
         if (lb_80432A68.task_array[i].x0 != 0xE) {
             break;
         }
     }
-    if (i != 0xB) {
+    if (i != LbCardNewTaskArray_Max) {
         if (!(task->x4 & (1 << result))) {
             reset_task_array();
         } else {

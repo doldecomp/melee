@@ -109,4 +109,9 @@ typedef enum ECBSourceKind {
     ECBSource_Fixed,
 } ECBSourceKind;
 
+/// Size of the memory card task array.
+typedef enum LbCardNewTaskArray {
+    /* 0x0B */ LbCardNewTaskArray_Max = 11,
+} LbCardNewTaskArray;
+
 #endif

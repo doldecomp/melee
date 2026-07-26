@@ -2613,8 +2613,7 @@ void lbAudioAx_8002838C(void)
     AXDriver_8038E30C(0, 2, &rvbStd, (u8*) &lbl_80433B44[0x48], 0xD400);
 
     AXDriver_8038E37C(AXDRIVER_AUX_DELAY, &delay);
-    HSD_ASSERTMSG(0xF72, HSD_AudioGetAuxHeapSize(2, &delay) < 71 * 1024,
-                  "HSD_AudioGetAuxHeapSize(2, &delay) < 71*1024");
+    HSD_ASSERT(0xF72, HSD_AudioGetAuxHeapSize(2, &delay) < 71*1024);
 
     AXDriver_8038E30C(1, 4, &delay, (u8*) &lbl_80433B44[0x3548], 0x11C00);
 

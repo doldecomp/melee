@@ -38,6 +38,9 @@
                                      mpLib_GroundEnum ground_kind,
                                      float delta_y);
 
+#define INIT_ADD_PARTS_RANGE (1.0F + (2400.0F / (160.0F * Ground_801C0498())))
+#define Gr_Homerun_Parts_Max 64
+
 f32 grHr_804D6AD8;
 int grHr_804D6ADC;
 f32 grHr_804D6AE0;
@@ -207,7 +210,6 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
     UnkArchiveStruct* archive;
     HSD_CObj* cobj;
     s32 i;
-    f32 gobjs_num;
     Ground_801C2ED0(jobj2, gp->map_id);
 
     gp->u.homerun.gobjs = HSD_MemAlloc(0x100);
@@ -236,15 +238,12 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
     HSD_SisLib_803A611C(1, (HSD_GObj*) gp->u.unk.xD4, 9, 0xD, 0, 1, 0, 7);
     HSD_SisLib_804D1124[1] =
         HSD_ArchiveGetPublicAddress(archive->unk0, "SIS_GrHomerunData");
-    gobjs_num = 2.0F * (1.0F + (2400.0F / (160.0F * Ground_801C0498())));
-    HSD_ASSERTMSG(0x1A2, gobjs_num < 64,
-                  "INIT_ADD_PARTS_RANGE*2<Gr_Homerun_Parts_Max");
+    HSD_ASSERT(0x1A2, INIT_ADD_PARTS_RANGE*2<Gr_Homerun_Parts_Max);
 
-    for (i = 0; (f32) i < 1.0F + (2400.0F / (160.0F * Ground_801C0498())); i++)
-    {
+    for (i = 0; (f32) i < INIT_ADD_PARTS_RANGE; i++) {
         gp->u.homerun.gobjs[i] = grHomeRun_8021E500(i);
     }
-    for (; i < 64; i++) {
+    for (; i < Gr_Homerun_Parts_Max; i++) {
         gp->u.homerun.gobjs[i] = NULL;
     }
 

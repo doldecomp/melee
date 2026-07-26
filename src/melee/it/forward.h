@@ -369,4 +369,10 @@ typedef enum ItemKind {
     It_Kind_Kyasarin_Egg,    // Birdo's Egg
 } ItemKind;
 
+/// Bounds of the Poke Ball Pokemon range of #ItemKind.
+typedef enum It_PKind {
+    /* 0xA1 */ It_PKind_Start = Pokemon_Tosakinto,
+    /* 0xBF */ It_PKind_Terminate = Pokemon_Chicorita_Leaf,
+} It_PKind;
+
 #endif

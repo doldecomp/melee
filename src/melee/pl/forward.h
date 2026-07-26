@@ -127,4 +127,9 @@ typedef enum PlATK {
     PlATK_AttackNormal_End = 16,
 } PlATK;
 
+/// Terminator of the bonus item-log index range.
+typedef enum Pl_ItemLog {
+    /* 0x27 */ Pl_ItemLog_Terminate = 39,
+} Pl_ItemLog;
+
 #endif
