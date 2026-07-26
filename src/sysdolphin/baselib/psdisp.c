@@ -883,18 +883,20 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                                         f32 y, f32 z, f32 x0, f32 y0, f32 z0,
                                         f32 x1, f32 y1, f32 z1)
 {
-    Vec3 prev;
+    f32 prev_x;
+    f32 prev_y;
+    f32 prev_z;
 
     psSetCurrentMtx(0);
     if (pp->kind & Trail) {
         GXColor color;
 
         if (pp->kind & Tornado) {
-            calcTornadoLastPos(pp, &prev.x, &prev.y, &prev.z);
+            calcTornadoLastPos(pp, &prev_x, &prev_y, &prev_z);
         } else {
-            prev.x = x - pp->vel.x;
-            prev.y = y - pp->vel.y;
-            prev.z = z - pp->vel.z;
+            prev_x = x - pp->vel.x;
+            prev_y = y - pp->vel.y;
+            prev_z = z - pp->vel.z;
         }
         getClrTrail(pp, &color);
         if (texform == NULL) {
@@ -906,9 +908,9 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                 GXBegin(GX_QUADS, GX_VTXFMT3, 4);
             }
             {
-                f32 vx = prev.x - x0;
-                f32 vy = prev.y - y0;
-                f32 vz = prev.z - z0;
+                f32 vx = prev_x - x0;
+                f32 vy = prev_y - y0;
+                f32 vz = prev_z - z0;
                 GXWGFifo.f32 = vx;
                 GXWGFifo.f32 = vy;
                 GXWGFifo.f32 = vz;
@@ -968,9 +970,9 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                 GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 2;
             }
             {
-                f32 vx = prev.x + x1;
-                f32 vy = prev.y + y1;
-                f32 vz = prev.z + z1;
+                f32 vx = prev_x + x1;
+                f32 vy = prev_y + y1;
+                f32 vz = prev_z + z1;
                 GXWGFifo.f32 = vx;
                 GXWGFifo.f32 = vy;
                 GXWGFifo.f32 = vz;
@@ -992,9 +994,9 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
             f32 up_len = sqrtf(x1 * x1 + y1 * y1 + z1 * z1);
 
             if (up_len != 0.0f) {
-                f32 dx = x - prev.x;
-                f32 dy = y - prev.y;
-                f32 dz = z - prev.z;
+                f32 dx = x - prev_x;
+                f32 dy = y - prev_y;
+                f32 dz = z - prev_z;
                 f32 xl = dx * dx;
                 f32 yl = dy * dy;
                 f32 zl = dz * dz;
@@ -1189,15 +1191,17 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
         f32 y = 0.0f;
 
         if (cache->projection.type == 0.0f) {
-            Vec3 prev;
+            f32 prev_x;
+            f32 prev_y;
+            f32 prev_z;
             f32 w0;
 
             if (pp->kind & Tornado) {
-                calcTornadoLastPos(pp, &prev.x, &prev.y, &prev.z);
+                calcTornadoLastPos(pp, &prev_x, &prev_y, &prev_z);
             } else {
-                prev.x = pp->pos.x - pp->vel.x;
-                prev.y = pp->pos.y - pp->vel.y;
-                prev.z = pp->pos.z - pp->vel.z;
+                prev_x = pp->pos.x - pp->vel.x;
+                prev_y = pp->pos.y - pp->vel.y;
+                prev_z = pp->pos.z - pp->vel.z;
             }
             w0 = cache->view_mtx[2][3] + (cache->view_mtx[2][2] * pp->pos.z +
                                           (cache->view_mtx[2][0] * pp->pos.x +
@@ -1205,15 +1209,15 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
             if (cache->projection.type != w0) {
                 f32 w0inv = 1.0f / w0;
                 f32 w1 =
-                    cache->view_mtx[2][3] + (cache->view_mtx[2][2] * prev.z +
-                                             (cache->view_mtx[2][0] * prev.x +
-                                              cache->view_mtx[2][1] * prev.y));
+                    cache->view_mtx[2][3] + (cache->view_mtx[2][2] * prev_z +
+                                             (cache->view_mtx[2][0] * prev_x +
+                                              cache->view_mtx[2][1] * prev_y));
 
                 if (cache->projection.type != w1) {
                     f32 w1inv = 1.0f / w1;
                     f64 cur_y = (f64) (cache->projected_x.y * pp->pos.y);
-                    f64 prev_xy = (f64) (cache->projected_x.x * prev.x +
-                                         cache->projected_x.y * prev.y);
+                    f64 prev_xy = (f64) (cache->projected_x.x * prev_x +
+                                         cache->projected_x.y * prev_y);
 
                     x = w0inv * (cache->projected_x.w +
                                  (cache->projected_x.z * pp->pos.z +
@@ -1221,27 +1225,29 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
                                    (f32) cur_y))) -
                         w1inv *
                             (cache->projected_x.w +
-                             (cache->projected_x.z * prev.z + (f32) prev_xy));
+                             (cache->projected_x.z * prev_z + (f32) prev_xy));
                     y = w0inv * (cache->projected_y.w +
                                  (cache->projected_y.z * pp->pos.z +
                                   (cache->projected_y.x * pp->pos.x +
                                    cache->projected_y.y * pp->pos.y))) -
                         w1inv * (cache->projected_y.w +
-                                 (cache->projected_y.z * prev.z +
-                                  (cache->projected_y.x * prev.x +
-                                   cache->projected_y.y * prev.y)));
+                                 (cache->projected_y.z * prev_z +
+                                  (cache->projected_y.x * prev_x +
+                                   cache->projected_y.y * prev_y)));
                 }
             }
         } else if (pp->kind & Tornado) {
-            Vec3 prev;
+            f32 prev_x;
+            f32 prev_y;
+            f32 prev_z;
             f32 dx;
             f32 dy;
             f32 dz;
 
-            calcTornadoLastPos(pp, &prev.x, &prev.y, &prev.z);
-            dx = pp->pos.x - prev.x;
-            dy = pp->pos.y - prev.y;
-            dz = pp->pos.z - prev.z;
+            calcTornadoLastPos(pp, &prev_x, &prev_y, &prev_z);
+            dx = pp->pos.x - prev_x;
+            dy = pp->pos.y - prev_y;
+            dz = pp->pos.z - prev_z;
             x = cache->projected_x.z * dz +
                 (cache->projected_x.x * dx + cache->projected_x.y * dy);
             y = cache->projected_y.z * dz +
@@ -1573,12 +1579,14 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
             f32 f20 = cache->projection.y_scale * pp->appsrt->x7C +
                       cache->projection.y_offset;
             if (pp->kind & Tornado) {
-                Vec3 t;
-                calcTornadoLastPos(pp, &t.x, &t.y, &t.z);
+                f32 tx;
+                f32 ty;
+                f32 tz;
+                calcTornadoLastPos(pp, &tx, &ty, &tz);
                 {
-                    f32 dy = pp->pos.y - t.y;
-                    f32 dx = pp->pos.x - t.x;
-                    f32 dz = pp->pos.z - t.z;
+                    f32 dy = pp->pos.y - ty;
+                    f32 dx = pp->pos.x - tx;
+                    f32 dz = pp->pos.z - tz;
                     vf1 = s7F8 * dz + (s800 * dx + s7FC * dy);
                     vf2 = f20 * dz + (f17 * dx + f18 * dy);
                 }
