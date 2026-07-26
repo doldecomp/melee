@@ -834,7 +834,7 @@ void gm_8019DF8C_OnFrame(void)
                 pressed = fn_8018F674(i);
 
                 /* Abort combo check */
-                if (fn_8018F6A8(i) & 0x200) {
+                if (fn_8018F6A8(i) & PAD_BUTTON_B) {
                     lbl_80479A58.x18[i] = (u8) (lbl_80479A58.x18[i] + 1);
                     if ((u8) lbl_80479A58.x18[i] > 0x5AU) {
                         sfxForward();
@@ -849,13 +849,15 @@ void gm_8019DF8C_OnFrame(void)
             check_confirm: {
                 u8 status = lbl_80479A58.x1D[i].x0;
                 if (status != 2 && status != 1) {
-                    if ((fn_8018F6A8(i) & 0x40) && (fn_8018F6A8(i) & 0x20)) {
+                    if ((fn_8018F6A8(i) & PAD_TRIGGER_L) &&
+                        (fn_8018F6A8(i) & PAD_TRIGGER_R))
+                    {
                         j = get_match_player_index(i);
                         tmd->x37[j].x5 = 1;
                         tmd->x4B8[i].x2 = 1;
                     }
 
-                    if (pressed & 0x40001) {
+                    if (pressed & (PAD_BUTTON_LEFT | PAD_STICK_LEFT)) {
                         u8 chr;
                         sfxMove();
 
@@ -881,7 +883,8 @@ void gm_8019DF8C_OnFrame(void)
                         tmd->x4B8[i].x3 = 0;
                         tmd->x37[j].x7 = 0;
 
-                    } else if (pressed & 0x80002) {
+                    } else if (pressed & (PAD_BUTTON_RIGHT | PAD_STICK_RIGHT))
+                    {
                         u8 chr;
                         sfxMove();
 
@@ -910,7 +913,7 @@ void gm_8019DF8C_OnFrame(void)
                 }
             }
 
-                if (buttons & 0x1100) {
+                if (buttons & (PAD_BUTTON_A | PAD_BUTTON_START)) {
                     if ((u8) lbl_80479A58.x1D[i].x0 != 2) {
                         u16 char_id;
                         sfxForward();
@@ -922,7 +925,7 @@ void gm_8019DF8C_OnFrame(void)
                             gm_80167858(i, 0x78, 0xB, 0x14);
                         }
                     }
-                } else if (buttons & 0x200) {
+                } else if (buttons & PAD_BUTTON_B) {
                     if ((u8) lbl_80479A58.x1D[i].x0 == 2) {
                         sfxBack();
                         lbl_80479A58.x1D[i].x0 = 3;
@@ -930,7 +933,7 @@ void gm_8019DF8C_OnFrame(void)
                 } else {
                     u8 color_status = lbl_80479A58.x1D[i].x0;
                     if (color_status != 2 && color_status != 1) {
-                        if (buttons & 0x400) {
+                        if (buttons & PAD_BUTTON_X) {
                             /* Down: increment color */
                             if ((s32) tmd->x4B8[i].x3 <
                                 (s32) (gm_80169238(fn_8018F6FC(
@@ -943,7 +946,7 @@ void gm_8019DF8C_OnFrame(void)
                             j = get_match_player_index(i);
                             tmd->x37[j].x7 = tmd->x4B8[i].x3;
 
-                        } else if (buttons & 0x800) {
+                        } else if (buttons & PAD_BUTTON_Y) {
                             /* Up: decrement color */
                             u8 color = tmd->x4B8[i].x3;
                             if (color != 0) {

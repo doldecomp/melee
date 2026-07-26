@@ -2120,7 +2120,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                     mnCharSel_8025DB34(grabbed);
                                     cursor->x5 = 2;
                                 } else {
-                                    u32 a_press = trigger & 0x100;
+                                    u32 a_press = trigger & HSD_PAD_A;
                                     if (a_press != 0) {
                                         struct CSSCharModel* m =
                                             mnCharSel_804A0BD0[grabbed];
@@ -2235,7 +2235,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                         .sel_icon = (u8) i;
                                                     mnCharSel_8025DB34(
                                                         grabbed);
-                                                    if (trigger & 0x100) {
+                                                    if (trigger & HSD_PAD_A) {
                                                         s32 player_idx;
                                                         if ((u8)
                                                                 mnCharSel_804D6CF5 ==
@@ -2348,9 +2348,9 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                             }
                                             mnCharSel_803F0DFC.doors[grabbed]
                                                 .sel_icon_prev = 0x19;
-                                            if (trigger & 0x100) {
+                                            if (trigger & HSD_PAD_A) {
                                                 lbAudioAx_80024030(3);
-                                            } else if (trigger & 0x200) {
+                                            } else if (trigger & HSD_PAD_B) {
                                                 if (mnCharSel_8025FDEC(
                                                         grabbed) == 0)
                                                 {
@@ -2412,7 +2412,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                 HSD_JObjSetTranslateX(sp98, val);
                                 cursor->xC = (f32) (-2.9f + (val - base_x));
                                 cursor->x10 = (f32) (1.7f + sp88.y);
-                                if (trigger & 0x100) {
+                                if (trigger & HSD_PAD_A) {
                                     cursor->x5 = 2;
                                     mnCharSel_803F0DFC.doors[slider_door]
                                         .is_hold_cpu_slider = 0;
@@ -2454,7 +2454,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                             HSD_JObjSetTranslateX(sp98, val);
                             cursor->xC = (f32) (-2.9f + (val - base_x));
                             cursor->x10 = (f32) (1.7f + sp88.y);
-                            if (trigger & 0x100) {
+                            if (trigger & HSD_PAD_A) {
                                 cursor->x5 = 2;
                                 mnCharSel_803F0DFC.doors[hc_door]
                                     .is_hold_handicap_slider = 0;
@@ -2467,7 +2467,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
 
                 if ((cursor->xC > 17.3f) && (cursor->x10 > 22.0f)) {
                     cursor->x8 = 1;
-                    if (trigger & 0x100) {
+                    if (trigger & HSD_PAD_A) {
                         mnCharSel_804D6CF6 = 2;
                         goto block_392;
                     }
@@ -2484,7 +2484,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                             f32 cx = cursor->xC;
                             if (cx > data2.xf8 && cx < data2.xfc) {
                                 cursor->x8 = 1;
-                                if ((trigger & 0x100) &&
+                                if ((trigger & HSD_PAD_A) &&
                                     (u8) data2.stocks > 1U)
                                 {
                                     data2.stocks = (u8) (data2.stocks - 1);
@@ -2515,7 +2515,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                 }
                             } else if (cx > data2.x100 && cx < data2.x104) {
                                 cursor->x8 = 1;
-                                if ((trigger & 0x100) &&
+                                if ((trigger & HSD_PAD_A) &&
                                     (u8) data2.stocks < 5U)
                                 {
                                     data2.stocks = (u8) (data2.stocks + 1);
@@ -2562,7 +2562,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                     cx2 < mnCharSel_803F0DFC.xdb)
                                 {
                                     cursor->x8 = 1;
-                                    if ((trigger & 0x100) &&
+                                    if ((trigger & HSD_PAD_A) &&
                                         (u8) mnCharSel_803F0DFC.xcd != 0)
                                     {
                                         mnCharSel_803F0DFC.xcd =
@@ -2581,7 +2581,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                            cx2 < mnCharSel_803F0DFC.xe3)
                                 {
                                     cursor->x8 = 1;
-                                    if ((trigger & 0x100) &&
+                                    if ((trigger & HSD_PAD_A) &&
                                         (u8) mnCharSel_803F0DFC.xcd < 4U)
                                     {
                                         mnCharSel_803F0DFC.xcd =
@@ -2613,7 +2613,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                     f32 cx3 = cursor->xC;
                     if (cx3 > -17.0f && cx3 < 15.0f && cursor->x10 > 22.0f) {
                         cursor->x8 = 1;
-                        if (trigger & 0x100) {
+                        if (trigger & HSD_PAD_A) {
                             s32 loop_i;
                             mnCharSel_804D6CF6 = 3;
                             for (loop_i = 0; loop_i < (s32) mnCharSel_804D6CF5;
@@ -2638,7 +2638,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                     u8 mtype = mnCharSel_804D6CB0->match_type;
                     if ((s32) mtype < 0xB && (s32) mtype >= 0) {
                         cursor->x8 = 1;
-                        if (trigger & 0x100) {
+                        if (trigger & HSD_PAD_A) {
                             sfxMove();
                             mnCharSel_804D6CB0->data.data.rules.is_teams =
                                 (mnCharSel_804D6CB0->data.data.rules.is_teams +
@@ -2750,7 +2750,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                     }
                 }
                 block_298: {
-                    u32 a_press2 = trigger & 0x100;
+                    u32 a_press2 = trigger & HSD_PAD_A;
                     if (a_press2 != 0) {
                         if ((u8) mnCharSel_804D6CF5 != 1) {
                             s32 di;
@@ -3099,7 +3099,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                            -2.0f);
                             }
                         }
-                    } else if (trigger & 0x200) {
+                    } else if (trigger & HSD_PAD_B) {
                         u8 cport5 = cursor->x4;
                         if ((u8) mnCharSel_803F0DFC.doors[cport5].p_kind !=
                                 3 &&
@@ -3895,7 +3895,7 @@ void fn_802633B0(HSD_GObj* gobj)
             } while (j < 9);
         }
 
-        if (trigger & 0x100) {
+        if (trigger & HSD_PAD_A) {
             if ((u8) mnCharSel_804D6CF5 == 1) {
                 lb_80011E24(mnCharSel_804D6CC0, &list_origin_jobj,
                             mnCharSel_803F0DFC.name_list_joint, -1);
@@ -4037,7 +4037,7 @@ void fn_802633B0(HSD_GObj* gobj)
             goto block_116;
         }
     block_116:
-        if (trigger & 0x200) {
+        if (trigger & HSD_PAD_B) {
             tag->state = 4;
             sfxBack();
             return;

@@ -2431,7 +2431,9 @@ void fn_8017FF1C(HSD_GObj* gobj)
         {
             u64 buttons = gm_GetButtonsTriggered(Player_GetPlayerId(0));
             u64 repeat = gm_801A36C0(Player_GetPlayerId(0));
-            if (((repeat | buttons) & 0x20004) | ((repeat | buttons) & 0)) {
+            if (((repeat | buttons) & (PAD_BUTTON_DOWN | PAD_STICK_DOWN)) |
+                ((repeat | buttons) & 0))
+            {
                 mask = fn_8017F008();
                 if (fn_8016F740(gm_8016B774(), state->xC0, mask, 0) > 0) {
                     mask = fn_8017F008();
@@ -2446,7 +2448,8 @@ void fn_8017FF1C(HSD_GObj* gobj)
             } else {
                 buttons = gm_GetButtonsTriggered(Player_GetPlayerId(0));
                 repeat = gm_801A36C0(Player_GetPlayerId(0));
-                if (((repeat | buttons) & 0x10008) | ((repeat | buttons) & 0))
+                if (((repeat | buttons) & (PAD_BUTTON_UP | PAD_STICK_UP)) |
+                    ((repeat | buttons) & 0))
                 {
                     mask = fn_8017F008();
                     if (fn_8016F870(gm_8016B774(), state->xC0, mask, 0) >= 0) {
@@ -2475,7 +2478,8 @@ void fn_8017FF1C(HSD_GObj* gobj)
 
     for (i = 0; i < 6; i++) {
         if (Player_GetPlayerSlotType(i) == Gm_PKind_Human &&
-            (HSD_PadMasterStatus[(u8) Player_GetPlayerId(i)].trigger & 0x100))
+            (HSD_PadMasterStatus[(u8) Player_GetPlayerId(i)].trigger &
+             HSD_PAD_A))
         {
             state->xFC = state->x104;
             state->x115 = 1;
@@ -3017,7 +3021,7 @@ void fn_80181598(void)
         lbl_804D65D8 += 1;
         if (lbl_804D65D8 >= 0xF0 ||
             (lbl_804D65D8 > 0x3C &&
-             (HSD_PadCopyStatus[state->x0.x10].trigger & 0x100)))
+             (HSD_PadCopyStatus[state->x0.x10].trigger & HSD_PAD_A)))
         {
             gm_8016B328();
             return;
@@ -3029,7 +3033,7 @@ void fn_80181598(void)
         state->x0.xC += 1;
         if (state->x0.xC > 0x3C &&
             (state->x0.xC >= 0xF0 ||
-             (HSD_PadCopyStatus[state->x0.x10].trigger & 0x100)))
+             (HSD_PadCopyStatus[state->x0.x10].trigger & HSD_PAD_A)))
         {
             unk_4 = &state->x0.unk_4;
             idx = gm_CKindToSelKind((u8) *unk_4);

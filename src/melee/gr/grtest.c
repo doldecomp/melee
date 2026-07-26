@@ -130,7 +130,7 @@ void grTest_802071C4(Ground_GObj* gobj)
     HSD_PadStatus* pad;
     PAD_STACK(16);
 
-    if ((HSD_PadMasterStatus[1].trigger & 0x100) != 0) {
+    if ((HSD_PadMasterStatus[1].trigger & HSD_PAD_A) != 0) {
         iVar2 = Ground_801C3FA4(gobj, 0x10);
         if (iVar2) {
             if (HSD_JObjGetFlags(iVar2) & 0x10) {
@@ -142,7 +142,7 @@ void grTest_802071C4(Ground_GObj* gobj)
         }
     }
     pad = &HSD_PadMasterStatus[2];
-    if ((HSD_PadMasterStatus[2].trigger & 0x100) != 0) {
+    if ((HSD_PadMasterStatus[2].trigger & HSD_PAD_A) != 0) {
         iVar2 = Ground_801C3FA4(gobj, 0x11);
         if (iVar2) {
             if (HSD_JObjGetFlags(iVar2) & 0x10) {
