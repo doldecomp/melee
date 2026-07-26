@@ -240,6 +240,18 @@ static inline void psSetColor(GXColor* color, u8 value)
     color->a = value;
 }
 
+static inline void psSetupVtxFormat(GXVtxFmt format, bool has_color,
+                                    bool has_texture, GXCompType texture_type)
+{
+    GXSetVtxAttrFmt(format, GX_VA_POS, GX_TEX_ST, GX_RGBA6, 0U);
+    if (has_color) {
+        GXSetVtxAttrFmt(format, GX_VA_CLR0, GX_TEX_ST, GX_RGBA8, 0U);
+    }
+    if (has_texture) {
+        GXSetVtxAttrFmt(format, GX_VA_TEX0, GX_TEX_ST, texture_type, 0U);
+    }
+}
+
 static inline void setupChanCtrl(HSD_Particle* pp)
 {
     u32 chan_state = pp->kind & (DispLighting | Trail);
@@ -1624,23 +1636,21 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
     }
 }
 
-static inline void psComposePerspectiveRow(f32* dst, const f32* row,
-                                           const f32* view_w, f32 scale,
-                                           f32 offset)
+static inline void psComposeProjectionRow(f32* dst, const f32* row,
+                                          const f32* view_w, f32 scale,
+                                          f32 offset, bool perspective)
 {
-    dst[0] = scale * row[0] + offset * view_w[0];
-    dst[1] = scale * row[1] + offset * view_w[1];
-    dst[2] = scale * row[2] + offset * view_w[2];
-    dst[3] = scale * row[3] + offset * view_w[3];
-}
-
-static inline void psComposeOrthographicRow(f32* dst, const f32* row,
-                                            f32 scale, f32 offset)
-{
-    dst[0] = scale * row[0] + offset;
-    dst[1] = scale * row[1] + offset;
-    dst[2] = scale * row[2] + offset;
-    dst[3] = scale * row[3] + offset;
+    if (perspective) {
+        dst[0] = scale * row[0] + offset * view_w[0];
+        dst[1] = scale * row[1] + offset * view_w[1];
+        dst[2] = scale * row[2] + offset * view_w[2];
+        dst[3] = scale * row[3] + offset * view_w[3];
+    } else {
+        dst[0] = scale * row[0] + offset;
+        dst[1] = scale * row[1] + offset;
+        dst[2] = scale * row[2] + offset;
+        dst[3] = scale * row[3] + offset;
+    }
 }
 
 static inline void psUpdateBillboardAxes(const f32* inv_view)
@@ -1664,15 +1674,15 @@ static inline void psUpdateProjectionCache(f32* cache, f32 perspective)
 {
     GXGetProjectionv(&cache[0x18]);
     if (cache[0x18] == perspective) {
-        psComposePerspectiveRow(&cache[0x1F], &cache[0], &cache[8],
-                                cache[0x19], cache[0x1A]);
-        psComposePerspectiveRow(&cache[0x23], &cache[4], &cache[8],
-                                cache[0x1B], cache[0x1C]);
+        psComposeProjectionRow(&cache[0x1F], &cache[0], &cache[8], cache[0x19],
+                               cache[0x1A], true);
+        psComposeProjectionRow(&cache[0x23], &cache[4], &cache[8], cache[0x1B],
+                               cache[0x1C], true);
     } else {
-        psComposeOrthographicRow(&cache[0x1F], &cache[0], cache[0x19],
-                                 cache[0x1A]);
-        psComposeOrthographicRow(&cache[0x23], &cache[4], cache[0x1B],
-                                 cache[0x1C]);
+        psComposeProjectionRow(&cache[0x1F], &cache[0], &cache[8], cache[0x19],
+                               cache[0x1A], false);
+        psComposeProjectionRow(&cache[0x23], &cache[4], &cache[8], cache[0x1B],
+                               cache[0x1C], false);
     }
     psUpdateBillboardAxes(cache);
 }
@@ -1807,32 +1817,12 @@ void psDispParticles(s32 arg0, u32 arg1)
                         GXSetArray(
                             GX_VA_TEX0,
                             (void*) ((char*) &HSD_PSDisp_8040C300 + 0x40), 2U);
-                        GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_TEX_ST,
-                                        GX_RGBA6, 0U);
-                        GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX0, GX_TEX_ST,
-                                        GX_RGB565, 0U);
-                        GXSetVtxAttrFmt(GX_VTXFMT1, GX_VA_POS, GX_TEX_ST,
-                                        GX_RGBA6, 0U);
-                        GXSetVtxAttrFmt(GX_VTXFMT2, GX_VA_POS, GX_TEX_ST,
-                                        GX_RGBA6, 0U);
-                        GXSetVtxAttrFmt(GX_VTXFMT2, GX_VA_CLR0, GX_TEX_ST,
-                                        GX_RGBA8, 0U);
-                        GXSetVtxAttrFmt(GX_VTXFMT2, GX_VA_TEX0, GX_TEX_ST,
-                                        GX_RGB565, 0U);
-                        GXSetVtxAttrFmt(GX_VTXFMT3, GX_VA_POS, GX_TEX_ST,
-                                        GX_RGBA6, 0U);
-                        GXSetVtxAttrFmt(GX_VTXFMT3, GX_VA_CLR0, GX_TEX_ST,
-                                        GX_RGBA8, 0U);
-                        GXSetVtxAttrFmt(GX_VTXFMT4, GX_VA_POS, GX_TEX_ST,
-                                        GX_RGBA6, 0U);
-                        GXSetVtxAttrFmt(GX_VTXFMT4, GX_VA_TEX0, GX_TEX_ST,
-                                        GX_RGBA6, 0U);
-                        GXSetVtxAttrFmt(GX_VTXFMT5, GX_VA_POS, GX_TEX_ST,
-                                        GX_RGBA6, 0U);
-                        GXSetVtxAttrFmt(GX_VTXFMT5, GX_VA_CLR0, GX_TEX_ST,
-                                        GX_RGBA8, 0U);
-                        GXSetVtxAttrFmt(GX_VTXFMT5, GX_VA_TEX0, GX_TEX_ST,
-                                        GX_RGBA6, 0U);
+                        psSetupVtxFormat(GX_VTXFMT0, false, true, GX_RGB565);
+                        psSetupVtxFormat(GX_VTXFMT1, false, false, GX_RGB565);
+                        psSetupVtxFormat(GX_VTXFMT2, true, true, GX_RGB565);
+                        psSetupVtxFormat(GX_VTXFMT3, true, false, GX_RGB565);
+                        psSetupVtxFormat(GX_VTXFMT4, false, true, GX_RGBA6);
+                        psSetupVtxFormat(GX_VTXFMT5, true, true, GX_RGBA6);
                         sp7A0 = 0;
                     }
 
