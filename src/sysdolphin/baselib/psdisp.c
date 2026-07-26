@@ -572,7 +572,7 @@ static inline HSD_Particle* psDispSubPoint(HSD_Particle* pp)
     s32 w;
 
     psSetCurrentMtx(0);
-    fw = (pp->size > 42.5f) ? 255.0f : 6.0f * pp->size;
+    fw = (pp->size > 42.5) ? 255.0f : 6.0f * pp->size;
     w = (s32) fw;
     if (HSD_PSDisp_804D790C != (s32) (u8) w) {
         HSD_PSDisp_804D790C = (u8) w;
@@ -1162,7 +1162,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
     }
 }
 
-static inline void psDispSub(HSD_Particle* pp, u8* texform)
+static inline void psDispSub(HSD_Particle* pp, u8* texform, f64 zero)
 {
     f32 abs_angle;
     psdisp_Cache* cache = &HSD_PSDisp_804D0FC0;
@@ -1187,14 +1187,19 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
         up.z = HSD_PSDisp_804D7928 * pp->size;
     }
     if ((pp->kind & Trail) || (pp->kind & DirVec)) {
-        f32 x = 0.0f;
-        f32 y = 0.0f;
+        f32 x;
+        f32 y;
 
-        if (cache->projection.type == 0.0f) {
+        if (zero == cache->projection.type) {
             f32 prev_x;
             f32 prev_y;
             f32 prev_z;
             f32 w0;
+            f32 w0inv;
+            f32 w1;
+            f32 w1inv;
+            f64 cur_y;
+            f64 prev_xy;
 
             if (pp->kind & Tornado) {
                 calcTornadoLastPos(pp, &prev_x, &prev_y, &prev_z);
@@ -1206,36 +1211,33 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
             w0 = cache->view_mtx[2][3] + (cache->view_mtx[2][2] * pp->pos.z +
                                           (cache->view_mtx[2][0] * pp->pos.x +
                                            cache->view_mtx[2][1] * pp->pos.y));
-            if (cache->projection.type != w0) {
-                f32 w0inv = 1.0f / w0;
-                f32 w1 =
-                    cache->view_mtx[2][3] + (cache->view_mtx[2][2] * prev_z +
-                                             (cache->view_mtx[2][0] * prev_x +
-                                              cache->view_mtx[2][1] * prev_y));
-
-                if (cache->projection.type != w1) {
-                    f32 w1inv = 1.0f / w1;
-                    f64 cur_y = (f64) (cache->projected_x.y * pp->pos.y);
-                    f64 prev_xy = (f64) (cache->projected_x.x * prev_x +
-                                         cache->projected_x.y * prev_y);
-
-                    x = w0inv * (cache->projected_x.w +
-                                 (cache->projected_x.z * pp->pos.z +
-                                  (cache->projected_x.x * pp->pos.x +
-                                   (f32) cur_y))) -
-                        w1inv *
-                            (cache->projected_x.w +
-                             (cache->projected_x.z * prev_z + (f32) prev_xy));
-                    y = w0inv * (cache->projected_y.w +
-                                 (cache->projected_y.z * pp->pos.z +
-                                  (cache->projected_y.x * pp->pos.x +
-                                   cache->projected_y.y * pp->pos.y))) -
-                        w1inv * (cache->projected_y.w +
-                                 (cache->projected_y.z * prev_z +
-                                  (cache->projected_y.x * prev_x +
-                                   cache->projected_y.y * prev_y)));
-                }
+            if (zero == w0) {
+                return;
             }
+            w0inv = -1.0f / w0;
+            w1 = cache->view_mtx[2][3] + (cache->view_mtx[2][2] * prev_z +
+                                          (cache->view_mtx[2][0] * prev_x +
+                                           cache->view_mtx[2][1] * prev_y));
+            if (zero == w1) {
+                return;
+            }
+            w1inv = -1.0f / w1;
+            cur_y = (f64) (cache->projected_x.y * pp->pos.y);
+            prev_xy = (f64) (cache->projected_x.x * prev_x +
+                             cache->projected_x.y * prev_y);
+            x = w0inv * (cache->projected_x.w +
+                         (cache->projected_x.z * pp->pos.z +
+                          (cache->projected_x.x * pp->pos.x + (f32) cur_y))) -
+                w1inv * (cache->projected_x.w +
+                         (cache->projected_x.z * prev_z + (f32) prev_xy));
+            y = w0inv * (cache->projected_y.w +
+                         (cache->projected_y.z * pp->pos.z +
+                          (cache->projected_y.x * pp->pos.x +
+                           cache->projected_y.y * pp->pos.y))) -
+                w1inv *
+                    (cache->projected_y.w + (cache->projected_y.z * prev_z +
+                                             (cache->projected_y.x * prev_x +
+                                              cache->projected_y.y * prev_y)));
         } else if (pp->kind & Tornado) {
             f32 prev_x;
             f32 prev_y;
@@ -1263,7 +1265,7 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
         {
             f32 abs_y = y;
             *(s32*) &abs_y &= 0x7FFFFFFF;
-            if (abs_y < 0.00001) {
+            if (abs_y < 1.17549435e-38f) {
                 angle = (x >= 0.0f) ? 1.5707964f : -1.5707964f;
             } else {
                 angle = atan2f(x, y);
@@ -1549,14 +1551,14 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
             if (zero == w0) {
                 return;
             }
-            w0inv = 1.0f / w0;
+            w0inv = -1.0f / w0;
             w1 = pp->appsrt->x90 +
                  (pp->appsrt->x8C * prev_z +
                   (pp->appsrt->x84 * prev_x + pp->appsrt->x88 * prev_y));
             if (zero == w1) {
                 return;
             }
-            w1inv = 1.0f / w1;
+            w1inv = -1.0f / w1;
             vf1 = w0inv * (f20 + (f16 * pp->pos.z +
                                   (s808 * pp->pos.x + s804 * pp->pos.y))) -
                   w1inv *
@@ -1601,7 +1603,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
         {
             f32 abs_v = vf2;
             *(s32*) &abs_v &= 0x7FFFFFFF;
-            if (abs_v < 0.00001) {
+            if (abs_v < 1.17549435e-38f) {
                 angle = (-vf1 >= 0.0) ? 1.5707964f : -1.5707964f;
             } else {
                 angle = atan2f(-vf1, vf2);
@@ -1993,7 +1995,7 @@ void psDispParticles(s32 arg0, u32 arg1)
     sp7F4 = psTexGroupArray;
     sp7F0 = psNumCmdList;
     sp8B0 = 0.0;
-    sp818 = 0.000001;
+    sp818 = 1.1920928955078125e-07f;
     sp7B4 = 0;
     do {
         if (sp794 & (1 << sp7B4)) {
@@ -2246,7 +2248,7 @@ void psDispParticles(s32 arg0, u32 arg1)
                     } else if (pp->appsrt != NULL) {
                         psDispSubAppSRT(pp, form, cache, sp8B0);
                     } else {
-                        psDispSub(pp, form);
+                        psDispSub(pp, form, sp8B0);
                     }
                 }
 

@@ -298,7 +298,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                                         f32 y, f32 z, f32 x0, f32 y0, f32 z0,
                                         f32 x1, f32 y1, f32 z1);
 
-static inline void psDispSub(HSD_Particle* pp, u8* texform);
+static inline void psDispSub(HSD_Particle* pp, u8* texform, f64 zero);
 
 void psInitDataBank(int bank, int* cmdBank, int* texBank, u32* ref,
                     int* formBank);
