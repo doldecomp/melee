@@ -531,13 +531,13 @@ inline int match_item_kind(int kind)
         return kind;
     } else {
         switch (kind) {
-        case 0xCD:
+        case Pokemon_Lucky_Egg:
             return 0x23;
-        case 0xE1:
+        case It_Kind_WhispyApple:
             return 0x24;
-        case 0xE2:
+        case It_Kind_WhispyHealApple:
             return 0x25;
-        case 0x28:
+        case It_Kind_Hammer_Head:
             return 0x26;
         default:
             return -1;

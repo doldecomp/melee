@@ -3004,7 +3004,10 @@ static inline bool ftCo_800A648C_inline1(Item* ip)
     if (ip->kind >= 0x2B && ip->kind < 0x2F) {
         return true;
     }
-    if (ip->kind == 0xD3 || (u32) (ip->kind - 0xD4) <= 1 || ip->kind == 0xD9) {
+    if (ip->kind == It_Kind_Nokonoko ||
+        (u32) (ip->kind - It_Kind_Patapata) <= 1 ||
+        ip->kind == It_Kind_Whitebea)
+    {
         return true;
     }
     return false;
@@ -6370,8 +6373,8 @@ static bool ftCo_800ADE48(Fighter* fp)
                 kind = ip->kind;
                 if (kind == It_Kind_M_Ball) {
                     found = 1;
-                } else if (kind < 0x22) {
-                    if (kind < 7) {
+                } else if (kind < It_Kind_M_Ball) {
+                    if (kind < It_Kind_Dosei) {
                         if (kind < 0) {
                             found = ftCo_ItemCheck(ip);
                         } else {

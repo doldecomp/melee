@@ -35,7 +35,7 @@ Item_GObj* it_802EAF34(HSD_GObj* owner, Vec3* offset, int type)
     PAD_STACK(12);
 
     lb_8000B1CC(jobj, offset, &spawn.prev_pos);
-    spawn.kind = 0xEB;
+    spawn.kind = It_Kind_GreatFox_Laser;
     spawn.pos = spawn.prev_pos;
     spawn.facing_dir = -1.0f;
     spawn.x3C_damage = 0;

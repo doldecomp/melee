@@ -163,7 +163,7 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type, f32 scale,
     }
     }
     spawn.prev_pos = spawn.pos = sp24;
-    spawn.kind = 0xEA;
+    spawn.kind = It_Kind_Arwing_Laser;
     spawn.facing_dir = scale;
     spawn.x3C_damage = 0;
     spawn.vel.z = 0.0f;

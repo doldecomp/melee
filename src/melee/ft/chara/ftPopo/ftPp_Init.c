@@ -375,9 +375,9 @@ void ftPp_Init_OnLoad(HSD_GObj* gobj)
     {
         ftIceClimberAttributes* da = fp->dat_attrs;
         fp->x40 = da->x0;
-        it_8026B3F8(item_list[0], 106);
-        it_8026B3F8(item_list[1], 107);
-        it_8026B3F8(item_list[2], 113);
+        it_8026B3F8(item_list[0], It_Kind_IceClimber_Ice);
+        it_8026B3F8(item_list[1], It_Kind_IceClimber_Blizzard);
+        it_8026B3F8(item_list[2], It_Kind_IceClimber_GumStrings);
     }
 }
 

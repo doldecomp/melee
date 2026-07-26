@@ -55,7 +55,7 @@ Item_GObj* it_80286088(Item_GObj* parent_gobj)
     if (parent_gobj != NULL && GET_JOBJ(parent_gobj) != NULL) {
         lb_8000B1CC(GET_JOBJ(parent_gobj), NULL, &pos);
 
-        spawn.kind = 1;
+        spawn.kind = It_Kind_Box;
         spawn.prev_pos = pos;
         spawn.pos = spawn.prev_pos;
         spawn.facing_dir = 1.0F;

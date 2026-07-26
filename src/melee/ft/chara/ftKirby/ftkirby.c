@@ -2763,10 +2763,10 @@ void ftKb_Init_OnLoad(HSD_GObj* gobj)
     fp->can_multijump = true;
     fp->x2D0 = fp->dat_attrs;
     fp->u.kb.hat.x8_b0 = Player_GetFlagsAEBit1(fp->player_id);
-    it_8026B3F8(item_list[0], 50);
-    it_8026B3F8(item_list[1], 51);
-    it_8026B3F8(item_list[2], 52);
-    it_8026B3F8(item_list[3], 53);
+    it_8026B3F8(item_list[0], It_Kind_Kirby_CBeam);
+    it_8026B3F8(item_list[1], It_Kind_Kirby_Hammer);
+    it_8026B3F8(item_list[2], It_Kind_Unk1);
+    it_8026B3F8(item_list[3], It_Kind_Unk2);
 }
 
 void ftKb_Init_800EE74C(HSD_GObj* gobj)
@@ -3983,81 +3983,101 @@ void ftKb_SpecialN_800F16D0(Fighter_GObj* gobj, FighterKind kind)
 
     switch (kind) {
     case FTKIND_MARIO:
-        it_8026B3F8((Article*) g->x0->xC, 0x82);
+        it_8026B3F8((Article*) g->x0->xC, It_Kind_Kirby_MarioFire);
         break;
     case FTKIND_LUIGI:
-        it_8026B3F8((Article*) g->hats[16]->hat_dynamics[0], 0x84);
+        it_8026B3F8((Article*) g->hats[16]->hat_dynamics[0],
+                    It_Kind_Kirby_LuigiFire);
         break;
     case FTKIND_POPO:
-        it_8026B3F8((Article*) g->hats[9]->hat_dynamics[0], 0x85);
+        it_8026B3F8((Article*) g->hats[9]->hat_dynamics[0],
+                    It_Kind_Kirby_IceClimberIce);
         break;
     case FTKIND_PEACH:
         hat = g->hats[8];
-        it_8026B3F8((Article*) hat->hat_dynamics[0], 0x86);
-        it_8026B3F8((Article*) hat->hat_dynamics[1], 0x87);
+        it_8026B3F8((Article*) hat->hat_dynamics[0], It_Kind_Kirby_PeachToad);
+        it_8026B3F8((Article*) hat->hat_dynamics[1],
+                    It_Kind_Kirby_PeachToadSpore);
         break;
     case FTKIND_FOX:
         hat = g->hats[0];
-        it_8026B3F8((Article*) hat->hat_dynamics[0], 0x88);
-        it_8026B3F8((Article*) hat->hat_dynamics[1], 0x8a);
+        it_8026B3F8((Article*) hat->hat_dynamics[0], It_Kind_Kirby_FoxLaser);
+        it_8026B3F8((Article*) hat->hat_dynamics[1], It_Kind_Kirby_FoxBlaster);
         break;
     case FTKIND_FALCO:
         hat = g->hats[21];
-        it_8026B3F8((Article*) hat->hat_dynamics[3], 0x89);
-        it_8026B3F8((Article*) hat->hat_dynamics[4], 0x8b);
+        it_8026B3F8((Article*) hat->hat_dynamics[3], It_Kind_Kirby_FalcoLaser);
+        it_8026B3F8((Article*) hat->hat_dynamics[4],
+                    It_Kind_Kirby_FalcoBlaster);
         break;
     case FTKIND_LINK:
         hat = g->hats[5];
-        it_8026B3F8((Article*) hat->hat_dynamics[0], 0x8c);
-        it_8026B3F8((Article*) hat->hat_dynamics[1], 0x8e);
+        it_8026B3F8((Article*) hat->hat_dynamics[0], It_Kind_Kirby_LinkArrow);
+        it_8026B3F8((Article*) hat->hat_dynamics[1], It_Kind_Kirby_LinkBow);
         break;
     case FTKIND_CLINK:
         hat = g->hats[19];
-        it_8026B3F8((Article*) hat->hat_dynamics[0], 0x8d);
-        it_8026B3F8((Article*) hat->hat_dynamics[1], 0x8f);
+        it_8026B3F8((Article*) hat->hat_dynamics[0], It_Kind_Kirby_CLinkArrow);
+        it_8026B3F8((Article*) hat->hat_dynamics[1], It_Kind_Kirby_CLinkBow);
         break;
     case FTKIND_MEWTWO:
-        it_8026B3F8((Article*) g->hats[15]->hat_dynamics[3], 0x90);
+        it_8026B3F8((Article*) g->hats[15]->hat_dynamics[3],
+                    It_Kind_Kirby_MewtwoShadowBall);
         break;
     case FTKIND_NESS:
         hat = g->hats[7];
-        it_8026B3F8((Article*) hat->hat_dynamics[0], 0x91);
-        it_8026B3F8((Article*) hat->hat_dynamics[1], 0x92);
+        it_8026B3F8((Article*) hat->hat_dynamics[0],
+                    It_Kind_Kirby_NessPKFlush);
+        it_8026B3F8((Article*) hat->hat_dynamics[1],
+                    It_Kind_Kirby_NessPKFlush_Explode);
         break;
     case FTKIND_PIKACHU:
         hat = g->hats[11];
-        it_8026B3F8((Article*) hat->hat_dynamics[0], 0x93);
-        it_8026B3F8((Article*) hat->hat_dynamics[1], 0x94);
+        it_8026B3F8((Article*) hat->hat_dynamics[0],
+                    It_Kind_Kirby_PikachuTJolt_Ground);
+        it_8026B3F8((Article*) hat->hat_dynamics[1],
+                    It_Kind_Kirby_PikachuTJolt_Air);
         break;
     case FTKIND_PICHU:
         hat = g->hats[22];
-        it_8026B3F8((Article*) hat->hat_dynamics[0], 0x95);
-        it_8026B3F8((Article*) hat->hat_dynamics[1], 0x96);
+        it_8026B3F8((Article*) hat->hat_dynamics[0],
+                    It_Kind_Kirby_PichuTJolt_Ground);
+        it_8026B3F8((Article*) hat->hat_dynamics[1],
+                    It_Kind_Kirby_PichuTJolt_Air);
         break;
     case FTKIND_SAMUS:
-        it_8026B3F8((Article*) g->hats[12]->hat_dynamics[0], 0x97);
+        it_8026B3F8((Article*) g->hats[12]->hat_dynamics[0],
+                    It_Kind_Kirby_SamusCharge);
         break;
     case FTKIND_KOOPA:
-        it_8026B3F8((Article*) g->hats[4]->hat_dynamics[0], 0x9a);
+        it_8026B3F8((Article*) g->hats[4]->hat_dynamics[0],
+                    It_Kind_Kirby_KoopaFlame);
         break;
     case FTKIND_GKOOPS:
-        it_8026B3F8((Article*) g->hats[30]->hat_dynamics[0], 0x9a);
+        it_8026B3F8((Article*) g->hats[30]->hat_dynamics[0],
+                    It_Kind_Kirby_KoopaFlame);
         break;
     case FTKIND_SEAK:
         hat = g->hats[6];
-        it_8026B3F8((Article*) hat->hat_dynamics[0], 0x98);
-        it_8026B3F8((Article*) hat->hat_dynamics[1], 0x99);
+        it_8026B3F8((Article*) hat->hat_dynamics[0],
+                    It_Kind_Kirby_SeakNeedleThrow);
+        it_8026B3F8((Article*) hat->hat_dynamics[1],
+                    It_Kind_Kirby_SeakNeedleHeld);
         break;
     case FTKIND_DRMARIO:
-        it_8026B3F8((Article*) g->hats[20]->hat_dynamics[0], 0x83);
+        it_8026B3F8((Article*) g->hats[20]->hat_dynamics[0],
+                    It_Kind_Kirby_DrMarioVitamin);
         break;
     case FTKIND_GAMEWATCH:
         hat = g->hats[23];
-        it_8026B3F8((Article*) hat->hat_dynamics[5], 0x9b);
-        it_8026B3F8((Article*) hat->hat_dynamics[6], 0x9c);
+        it_8026B3F8((Article*) hat->hat_dynamics[5],
+                    It_Kind_Kirby_GameWatchChef);
+        it_8026B3F8((Article*) hat->hat_dynamics[6],
+                    It_Kind_Kirby_GameWatchChefPan);
         break;
     case FTKIND_YOSHI:
-        it_8026B3F8((Article*) g->hats[13]->hat_dynamics[5], 0x9d);
+        it_8026B3F8((Article*) g->hats[13]->hat_dynamics[5],
+                    It_Kind_Kirby_YoshiEggLay);
         break;
     }
 }

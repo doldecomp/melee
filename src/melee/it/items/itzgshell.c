@@ -969,7 +969,7 @@ Item_GObj* it_802E0100(s32 arg0, Vec3* pos, s32 facing_int)
     Vec3 vel = it_803B86E8;
     Item_GObj* spawn_gobj;
     PAD_STACK(8);
-    spawn_gobj = it_8027B5B0(0xDB, pos, NULL, &vel, 1);
+    spawn_gobj = it_8027B5B0(It_Kind_ZGShell, pos, NULL, &vel, 1);
     if (spawn_gobj != NULL) {
         Item* spawn_ip = GET_ITEM(spawn_gobj);
         spawn_ip->facing_dir = facing_int;

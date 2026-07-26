@@ -1099,12 +1099,12 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
                 ft_PlaySFX(fp, 0xF9, 0x7F, 0x40);
                 ftCommon_8007EBAC(fp, 0x11, 0);
                 break;
-            case 0x1A:
+            case It_Kind_Kinoko:
                 hit->state = HitCapsule_Disabled;
                 fp->x200C++;
                 item->xC34_damageDealt = 1;
                 break;
-            case 0x1B:
+            case It_Kind_DKinoko:
                 hit->state = HitCapsule_Disabled;
                 fp->x2010++;
                 item->xC34_damageDealt = 1;
@@ -1448,7 +1448,7 @@ void ftColl_800787B4(Item_GObj* arg0, Fighter_GObj* arg1, int arg2)
     HSD_GObj* owner = ip->owner;
     PAD_STACK(8);
 
-    if (ip->kind == 6) {
+    if (ip->kind == It_Kind_BombHei) {
         pl_80041B08(fp->player_id, (UNK_T) (uintptr_t) fp->x221F_b4,
                     (u16) ip->x1C);
     }
@@ -1778,7 +1778,7 @@ void ftColl_8007925C(Fighter_GObj* gobj)
          entity = entity->next)
     {
         item = entity->user_data;
-        if (item->kind == 0x9E) {
+        if (item->kind == It_Kind_Unk4) {
             continue;
         }
 
@@ -2682,7 +2682,7 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
         Item* ip = (Item*) entity->user_data;
         HSD_GObj* owner_gobj;
 
-        if (ip->kind == 6) {
+        if (ip->kind == It_Kind_BombHei) {
             int player_id = fp->player_id;
             pl_80041B08(player_id, (UNK_T) (uintptr_t) fp->x221F_b4,
                         (u16) ip->x1C);

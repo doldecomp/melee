@@ -400,7 +400,7 @@ void db_CheckAndSpawnItem(int player)
     if (spawnItem.kind < 0xD0 || spawnItem.kind >= 0xEA ||
         it_804A0F60[spawnItem.kind - 0xD0] != 0)
     {
-        if (spawnItem.kind != 0x22 || it_8026C704() == 0) {
+        if (spawnItem.kind != It_Kind_M_Ball || it_8026C704() == 0) {
             {
                 HSD_GObj* gobj = Item_80268B18(&spawnItem);
                 if (gobj != NULL) {
