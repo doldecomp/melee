@@ -531,7 +531,7 @@ inline int match_item_kind(int kind)
         return kind;
     } else {
         switch (kind) {
-        case Pokemon_Lucky_Egg:
+        case It_Kind_Lucky_Egg:
             return 0x23;
         case It_Kind_WhispyApple:
             return 0x24;

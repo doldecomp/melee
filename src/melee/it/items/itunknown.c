@@ -243,7 +243,7 @@ void it_802CED54(Item_GObj* gobj)
     spawn.x3C_damage = 0;
     spawn.vel = ip->xDD4_itemVar.unknown.x78.vec;
     spawn.x40 = 0;
-    spawn.kind = Pokemon_Unknown_Swarm;
+    spawn.kind = It_Kind_Unknown_Swarm;
     spawn.x0_parent_gobj = ip->owner;
     spawn.x4_parent_gobj2 = gobj;
     spawn.x44_flag.b0 = false;
