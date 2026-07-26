@@ -903,7 +903,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, float x,
                         }
                         t = *(f32*) &it[4];
                         it += 8;
-                        alpha = (s8) (255.0f - t * trail_alpha);
+                        alpha = (s32) (255.0f - t * trail_alpha);
                         if (alpha < 0) {
                             alpha = 0;
                         }
@@ -1545,7 +1545,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform, f32* cache)
                         }
                         t = *(f32*) &it[4];
                         it += 8;
-                        alpha = (s8) (255.0f - t * trail_alpha);
+                        alpha = (s32) (255.0f - t * trail_alpha);
                         if (alpha < 0) {
                             alpha = 0;
                         }
