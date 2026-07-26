@@ -59,27 +59,66 @@ static struct grFourside_YakumonoParam* yakumono_param;
                                              mpLib_GroundEnum ground_kind,
                                              float delta_y);
 
-S16Vec3 grFs_803E3CE8[] = { { 3, 1, 7 }, { 4, 5, 1 }, { 0, 6, 10 } };
-
-StageCallbacks grFs_StageCallbacks[] = {
-    { grFourside_801F2EBC, grFourside_801F2EE8, grFourside_801F2EF0,
-      grFourside_801F2EF4, 0 },
-    { grFourside_801F3154, grFourside_801F326C, grFourside_801F3274,
-      grFourside_801F37F8, 0 },
-    { grFourside_801F2EF8, grFourside_801F2F24, grFourside_801F2F2C,
-      grFourside_801F2F30, 0 },
-    { grFourside_801F3C40, grFourside_801F3CC0, grFourside_801F3CC8,
-      grFourside_801F3F0C, 0 },
-    { grFourside_801F30F0, grFourside_801F3144, grFourside_801F314C,
-      grFourside_801F3150, 0 },
-    { grFourside_801F37FC, grFourside_801F388C, grFourside_801F3894,
-      grFourside_801F3B6C, 0 },
-    { grFourside_801F2F34, grFourside_801F3070, grFourside_801F3078,
-      grFourside_801F309C, 0xc0000000 }
+GrJoint grFs_803E3CE8[] = {
+    { 3, 1, 7 },
+    { 4, 5, 1 },
+    { 0, 6, 10 },
 };
 
-StageData grFs_803E3D94 = {
-    FOURSIDE,
+StageCallbacks grFs_StageCallbacks[] = {
+    {
+        grFourside_801F2EBC,
+        grFourside_801F2EE8,
+        grFourside_801F2EF0,
+        grFourside_801F2EF4,
+        0,
+    },
+    {
+        grFourside_801F3154,
+        grFourside_801F326C,
+        grFourside_801F3274,
+        grFourside_801F37F8,
+        0,
+    },
+    {
+        grFourside_801F2EF8,
+        grFourside_801F2F24,
+        grFourside_801F2F2C,
+        grFourside_801F2F30,
+        0,
+    },
+    {
+        grFourside_801F3C40,
+        grFourside_801F3CC0,
+        grFourside_801F3CC8,
+        grFourside_801F3F0C,
+        0,
+    },
+    {
+        grFourside_801F30F0,
+        grFourside_801F3144,
+        grFourside_801F314C,
+        grFourside_801F3150,
+        0,
+    },
+    {
+        grFourside_801F37FC,
+        grFourside_801F388C,
+        grFourside_801F3894,
+        grFourside_801F3B6C,
+        0,
+    },
+    {
+        grFourside_801F2F34,
+        grFourside_801F3070,
+        grFourside_801F3078,
+        grFourside_801F309C,
+        (1 << 30) | (1 << 31),
+    },
+};
+
+StageData grFs_StageData = {
+    Gr_Kind_Fourside,
     grFs_StageCallbacks,
     "/GrFs.dat",
     grFourside_801F2D10,
@@ -89,9 +128,9 @@ StageData grFs_803E3D94 = {
     grFourside_801F2DC8,
     grFourside_801F41E0,
     grFourside_801F41E8,
-    1,
+    (1 << 0),
     grFs_803E3CE8,
-    3,
+    ARRAY_SIZE(grFs_803E3CE8),
 };
 
 void grFourside_801F2D0C(bool arg) {}

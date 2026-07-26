@@ -1209,7 +1209,7 @@ void ftKb_SpecialAirLw_800F539C(Fighter_GObj* gobj)
 
 static inline void fn_800F53AC_SpawnEffect(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = gobj->user_data;
     s32 ef_id;
     if (fp->ground_or_air == GA_Air) {
         ef_id = 0x497;
@@ -1218,8 +1218,7 @@ static inline void fn_800F53AC_SpawnEffect(HSD_GObj* gobj)
     }
     efSync_Spawn(ef_id, gobj, fp->parts[FtPart_HipN].joint, &fp->facing_dir);
     fp->x2219_b0 = true;
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 static inline void fn_800F53AC_CleanupItem(HSD_GObj* gobj)
@@ -2141,8 +2140,7 @@ void fn_800F6588(HSD_GObj* gobj)
     ftCommon_GroundToAirStateChange(gobj, fp, ftKb_MS_SpecialAirN,
                                     ftKb_MF_SpecialN_Loop_Coll);
     new_var = fp;
-    new_var->pre_hitlag_cb = efLib_PauseAll;
-    new_var->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(new_var);
     new_var2 = HSD_GObjGetUserData(gobj);
     fp = (Fighter*) new_var2;
     ftCommon_8007E2D0(fp, 0x10, fn_800F6318, fn_800F6280, ftCo_800BD1DC);
@@ -2160,8 +2158,7 @@ void fn_800F6638(HSD_GObj* gobj)
     }
     Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialN, 0x0C4C529A,
                               fp->cur_anim_frame, 1.0f, 0.0f, NULL);
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     new_var = HSD_GObjGetUserData(gobj);
     fp = (Fighter*) new_var;
     ftCommon_8007E2D0(fp, 0x10, fn_800F6210, fn_800F6178, ftCo_800BD1DC);
@@ -2170,16 +2167,12 @@ void fn_800F6638(HSD_GObj* gobj)
 
 void fn_800F66E8(HSD_GObj* gobj)
 {
-    void (*new_var2)(HSD_GObj* gobj);
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
-    void (*new_var)(HSD_GObj* gobj);
+    PAD_STACK(8);
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirNLoop, 0x0C4C5A9A,
                               fp->cur_anim_frame, 1.0f, 0.0f, 0L);
-    new_var = efLib_PauseAll;
-    new_var2 = efLib_ResumeAll;
-    fp->pre_hitlag_cb = new_var;
-    fp->post_hitlag_cb = new_var2;
+    Fighter_SetEffectHitlagCallbacks(fp);
     fp = (Fighter*) HSD_GObjGetUserData(gobj);
     ftCommon_8007E2D0(fp, 0x10, fn_800F6318, fn_800F6280, ftCo_800BD1DC);
     fp->x2225_b1 = 1;
@@ -2192,8 +2185,7 @@ void fn_800F6798(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_SpecialNLoop,
                                     ftKb_MF_SpecialN_LoopRumble_Coll);
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     fp = HSD_GObjGetUserData(gobj);
     ftCommon_8007E2D0(fp, 0x10, fn_800F6210, fn_800F6178, ftCo_800BD1DC);
     new_var = fp;
@@ -2371,8 +2363,7 @@ static inline void ftKb_SpecialN_SetHitlagCb(Fighter_GObj* gobj, s32 ms,
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ms, mf, 0.0f, 1.0f, 0.0f, NULL);
     fp->x2222_b2 = true;
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 static inline void
@@ -2389,13 +2380,12 @@ void ftKb_SpecialN_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* joint = fp->parts[FtPart_YRotN].joint;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     if (fp->cmd_vars[0] != 0) {
         efAsync_Spawn(gobj, &fp->x60C, 3, 0x49A, joint, &fp->facing_dir);
         fp->x2219_b0 = true;
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
         fp->cmd_vars[0] = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -2409,13 +2399,12 @@ void ftKb_SpecialAirN_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* joint = fp->parts[FtPart_YRotN].joint;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     if (fp->cmd_vars[0] != 0) {
         efAsync_Spawn(gobj, &fp->x60C, 3, 0x49A, joint, &fp->facing_dir);
         fp->x2219_b0 = true;
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
         fp->cmd_vars[0] = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -3532,20 +3521,13 @@ static inline s32 fn_800F9260_GetLHandBone(Fighter* fp)
 void fn_800F9260(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 found = 0;
     Vec3 sp44;
     s32 bone;
     s32 pick;
     HSD_JObj* joint;
 
     if (fp->u.kb.hat.kind != 4) {
-        if (fp->throw_flags_b0) {
-            fp->throw_flags_b0 = 0;
-            found = 1;
-        } else {
-            found = 0;
-        }
-        if (found) {
+        if (ftCheckThrowB0(fp)) {
             lb_8000B1CC(
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_LHandN)].joint, NULL,
                 &sp44);
@@ -3762,8 +3744,7 @@ void ftKb_SpecialNCa_800F99BC(Fighter_GObj* gobj)
         msid = ftKb_MS_GnSpecialN;
     }
     Fighter_ChangeMotionState(gobj, msid, 0, 0.0f, 1.0f, 0.0f, NULL);
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -3780,8 +3761,7 @@ void ftKb_SpecialNCa_800F9A54(Fighter_GObj* gobj)
         msid = ftKb_MS_GnSpecialAirN;
     }
     Fighter_ChangeMotionState(gobj, msid, 0, 0.0f, 1.0f, 0.0f, NULL);
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -3946,8 +3926,7 @@ void ftKb_CaSpecialN_Coll(Fighter_GObj* gobj)
             Fighter_ChangeMotionState(gobj, msid, ftKb_Ca_transition_flags,
                                       anim_frame, 1.0f, 0.0f, NULL);
         }
-        fp2->pre_hitlag_cb = efLib_PauseAll;
-        fp2->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp2);
         ftCommon_ClampAirDrift(fp);
     }
 }
@@ -3972,7 +3951,6 @@ void ftKb_CaSpecialAirN_Coll(Fighter_GObj* gobj)
             Fighter_ChangeMotionState(gobj, msid, ftKb_Ca_transition_flags,
                                       anim_frame, 1.0f, 0.0f, NULL);
         }
-        fp2->pre_hitlag_cb = efLib_PauseAll;
-        fp2->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp2);
     }
 }

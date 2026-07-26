@@ -77,7 +77,7 @@ typedef struct IzumiUnkCC {
 
 static struct grIzumi_YakumonoParam* yakumono_param;
 
-S16Vec3 grIz_803E0D60[] = { { 0, 3, 1 }, { 1, 3, 2 }, { 2, 3, 3 } };
+GrJoint grIz_803E0D60[] = { { 0, 3, 1 }, { 1, 3, 2 }, { 2, 3, 3 } };
 StageCallbacks grIz_StageCallbacks[] = {
     {
         grIzumi_801CBDD4,
@@ -159,8 +159,9 @@ StageCallbacks grIz_StageCallbacks[] = {
         0,
     },
 };
-StageData grIz_803E0E5C = {
-    IZUMI,
+
+StageData grIz_StageData = {
+    Gr_Kind_Izumi,
     grIz_StageCallbacks,
     "/GrIz.dat",
     grIzumi_801CBB88,
@@ -242,12 +243,12 @@ HSD_GObj* grIzumi_801CBCE8(int gobj_id)
             gp->x1C_callback = callbacks->callback3;
         }
 
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
 
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
         }
 
     } else {

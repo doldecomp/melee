@@ -29,6 +29,7 @@ static void fn_80134518(Fighter_GObj* gobj)
         fp->x2219_b0 = true;
     }
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 static void fn_80134590(Fighter_GObj* gobj)
@@ -40,6 +41,7 @@ static void fn_80134590(Fighter_GObj* gobj)
         fp->x2219_b0 = true;
     }
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 static void ftKp_SpecialLw_Enter_inline(Fighter_GObj* gobj)

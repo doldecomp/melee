@@ -106,8 +106,8 @@ StageCallbacks grSh_Route_StageCallbacks[7] = {
     },
 };
 
-StageData grSh_Route_803E5988 = {
-    SHRINEROUTE,
+StageData grSh_Route_StageData = {
+    Gr_Kind_ShrineRoute,
     grSh_Route_StageCallbacks,
     "/GrNSr.dat",
     grShrineRoute_OnInit,
@@ -200,11 +200,11 @@ HSD_GObj* grShrineRoute_802088C0(int gobj_id)
         if (callbacks->callback3 != NULL) {
             gp->x1C_callback = callbacks->callback3;
         }
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 271, gobj_id);
@@ -1262,11 +1262,16 @@ s32 grShrineRoute_8020AE08(HSD_GObj* gobj, HSD_GObj* player_gobj, s32* out)
     return 0;
 }
 
+static inline Ground* getGp(HSD_GObj* gobj)
+{
+    return GET_GROUND(gobj);
+}
+
 void grShrineRoute_8020AF38(HSD_GObj* gobj, s32 arg1)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_GObj** symbolp;
     s32 ix = arg1 - 0xBD;
+    Ground* gp = getGp(gobj);
+    HSD_GObj** symbolp;
     HSD_JObj* jobj;
     HSD_GObj* pgobj;
 

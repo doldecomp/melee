@@ -142,18 +142,16 @@ typedef struct grBb_GroundStateFlag {
     s32 xCC;
 } grBb_GroundStateFlag;
 
-u16 grBb_803E2938[] = {
-    0x0024, 0x0022, 0x000A, 0x0025, 0x0022, 0x000A, 0x0026, 0x0022, 0x0007,
-    0x0027, 0x0022, 0x0007, 0x0028, 0x0022, 0x0007, 0x0029, 0x0022, 0x000E,
-    0x002A, 0x0022, 0x000E, 0x002B, 0x0022, 0x000E, 0x002C, 0x0022, 0x000F,
-    0x002D, 0x0022, 0x000F, 0x002E, 0x0022, 0x000F, 0x002F, 0x0022, 0x0010,
-    0x0030, 0x0022, 0x0010, 0x0031, 0x0022, 0x0010, 0x0034, 0x0022, 0x0020,
-    0x0035, 0x0022, 0x0020, 0x0036, 0x0022, 0x0020, 0x0037, 0x0022, 0x0023,
-    0x0038, 0x0022, 0x0023, 0x0039, 0x0022, 0x0023, 0x003A, 0x0022, 0x0026,
-    0x003B, 0x0022, 0x0026, 0x003C, 0x0022, 0x0026, 0x003D, 0x0022, 0x0029,
-    0x003E, 0x0022, 0x0029, 0x003F, 0x0022, 0x0029, 0x0040, 0x0022, 0x002C,
-    0x0041, 0x0022, 0x002C,
+GrJoint grBb_803E2938[] = {
+    { 36, 34, 10 }, { 37, 34, 10 }, { 38, 34, 7 },  { 39, 34, 7 },
+    { 40, 34, 7 },  { 41, 34, 14 }, { 42, 34, 14 }, { 43, 34, 14 },
+    { 44, 34, 15 }, { 45, 34, 15 }, { 46, 34, 15 }, { 47, 34, 16 },
+    { 48, 34, 16 }, { 49, 34, 16 }, { 52, 34, 32 }, { 53, 34, 32 },
+    { 54, 34, 32 }, { 55, 34, 35 }, { 56, 34, 35 }, { 57, 34, 35 },
+    { 58, 34, 38 }, { 59, 34, 38 }, { 60, 34, 38 }, { 61, 34, 41 },
+    { 62, 34, 41 }, { 63, 34, 41 }, { 64, 34, 44 }, { 65, 34, 44 },
 };
+
 extern grBb_Data803E2D78 grBb_803E2D78;
 extern grBb_Data803E2EB8 grBb_803E2EB8;
 
@@ -210,16 +208,16 @@ StageCallbacks grBb_StageCallbacks[] = {
     { NULL, NULL, NULL, NULL, 0 }
 };
 
-typedef struct grBb_StageData {
-    StageData stage_data;
-} grBb_StageData;
-
 static const Vec3 grBb_803B8108 = { -1.0F, 0.0F, 0.0F };
 static const Vec3 grBb_803B8114 = { 56.0F, 40.0F, 24.0F };
-/* 3B8120 */ static const grBb_ItemKindList grBb_803B8120 = {
-    { It_Kind_Sword, It_Kind_S_Scope, It_Kind_RabbitC, It_Kind_F_Flower,
-      It_Kind_Kusudama }
-};
+
+/* 3B8120 */ static const grBb_ItemKindList grBb_803B8120 = { {
+    It_Kind_Sword,
+    It_Kind_S_Scope,
+    It_Kind_RabbitC,
+    It_Kind_F_Flower,
+    It_Kind_Kusudama,
+} };
 
 void grBigBlue_801E57BC(bool arg) {}
 
@@ -293,24 +291,20 @@ bool grBigBlue_801E59F0(void)
     return false;
 }
 
-char grBb_803E2D14[] = "/GrBb.dat";
-
-grBb_StageData grBb_803E2D20 = {
-    {
-        BIGBLUE,
-        grBb_StageCallbacks,
-        grBb_803E2D14,
-        grBigBlue_801E57C0,
-        grBigBlue_801E57BC,
-        grBigBlue_801E59C8,
-        grBigBlue_801E59CC,
-        grBigBlue_801E59F0,
-        grBigBlue_801EFC0C,
-        grBigBlue_801EFC14,
-        1,
-        (S16Vec3*) grBb_803E2938,
-        0x1C,
-    },
+StageData grBb_StageData = {
+    Gr_Kind_BigBlue,
+    grBb_StageCallbacks,
+    "/GrBb.dat",
+    grBigBlue_801E57C0,
+    grBigBlue_801E57BC,
+    grBigBlue_801E59C8,
+    grBigBlue_801E59CC,
+    grBigBlue_801E59F0,
+    grBigBlue_801EFC0C,
+    grBigBlue_801EFC14,
+    (1 << 0),
+    grBb_803E2938,
+    ARRAY_SIZE(grBb_803E2938),
 };
 
 HSD_GObj* grBigBlue_801E59F8(s32 id)
@@ -327,11 +321,11 @@ HSD_GObj* grBigBlue_801E59F8(s32 id)
         if (cbs->callback3 != NULL) {
             gp->x1C_callback = cbs->callback3;
         }
-        if (cbs->callback0 != NULL) {
-            cbs->callback0(gobj);
+        if (cbs->on_init != NULL) {
+            cbs->on_init(gobj);
         }
-        if (cbs->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, cbs->callback2, 4U);
+        if (cbs->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, cbs->gobj_proc, 4U);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grbigblue.c", 0x17E,
@@ -3622,9 +3616,11 @@ typedef union grBigBlue_CarPhysics {
 /// @todo Currently partial match - complex car physics simulation
 #pragma push
 #pragma fp_contract on
+/// @todo The collision scratch vector sits four bytes low.
 void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
 {
     grBigBlue_CarPhysics* gp = gobj->user_data;
+    Point3d sp_vec;
     s32 offset;
     HSD_JObj* jobj;
     u8* lane_flags;
@@ -3635,7 +3631,6 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
     f32 f31_rot;
     f32 heading_osc;
     f32 heading_val;
-    Point3d sp_vec;
 
     /* Check and handle lane status */
     {
@@ -3824,13 +3819,11 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
         }
 
         if (-F32_MAX != ground_y) {
-            f32 scale = Ground_801C0498();
             gp->data.lanes[lane].angular_velocity -=
-                3.0F * (yakumono_param->x80 * scale);
+                3.0F * (yakumono_param->x80 * Ground_801C0498());
         } else {
-            f32 scale = Ground_801C0498();
             gp->data.lanes[lane].angular_velocity -=
-                yakumono_param->x80 * scale;
+                yakumono_param->x80 * Ground_801C0498();
         }
 
         /* Lateral position += angular velocity */
@@ -3861,8 +3854,8 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
         } else {
             ((grBb_ByteBits*) lane_flags)->b6 = 1;
             rank_factor = yakumono_param->x84 * Ground_801C0498();
-            gp->data.lanes[lane].angular_velocity =
-                sinf(f31_rot) * rank_factor;
+            heading_osc = sinf(f31_rot);
+            gp->data.lanes[lane].angular_velocity = heading_osc * rank_factor;
         }
     }
 
@@ -4831,7 +4824,7 @@ void grBigBlue_801EF7D8(Vec3* pos)
 
 bool grBigBlue_801EF844(enum_t line_id)
 {
-    if (stage_info.internal_stage_id == 19 && line_id != -1) {
+    if (stage_info.grkind == Gr_Kind_BigBlue && line_id != -1) {
         s32 joint = mpJointFromLine(line_id);
         s32 result;
 

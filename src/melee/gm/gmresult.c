@@ -43,6 +43,7 @@ extern HSD_Archive* lbl_804D65B8;
 #include "lb/lblanguage.h"
 #include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
+#include "mn/inlines.h"
 #include "mn/mnmain.h"
 #include "pl/player.h"
 #include "sc/types.h"
@@ -88,17 +89,17 @@ s32 fn_80174284(u8 slot)
 
 void fn_80174338(void)
 {
-    lbAudioAx_80024030(1);
+    sfxForward();
 }
 
 void fn_8017435C(void)
 {
-    lbAudioAx_80024030(0);
+    sfxBack();
 }
 
 void fn_80174380(void)
 {
-    lbAudioAx_80024030(2);
+    sfxMove();
 }
 
 bool gm_801743A4(u8 outcome)

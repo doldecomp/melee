@@ -96,11 +96,7 @@ bool itTosakinto_UnkMotion2_Anim(Item_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
     it_8027A160(HSD_JObjGetChild(jobj), it);
-    if (it->xD44_lifeTimer <= 0.0F) {
-        return true;
-    }
-    it->xD44_lifeTimer -= 1.0F;
-    return false;
+    return Item_TickLifetime(it);
 }
 
 void itTosakinto_UnkMotion2_Phys(Item_GObj* gobj)

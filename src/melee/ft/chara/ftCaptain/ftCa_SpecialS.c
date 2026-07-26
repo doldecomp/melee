@@ -75,8 +75,7 @@ void ftCa_SpecialS_Enter(HSD_GObj* gobj)
         break;
     }
     fp->u.ca.during_specials = false;
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     fp->hurtbox_detect_cb = ftCa_SpecialS_OnDetect;
 
     resetVel(fp);
@@ -86,7 +85,7 @@ void ftCa_SpecialS_Enter(HSD_GObj* gobj)
 
 static inline void setupAirStart(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = gobj->user_data;
     {
         u32* vars = &fp->cmd_vars[0];
         vars[0] = vars[1] = vars[2] = vars[3] = 0;
@@ -108,8 +107,7 @@ static inline void setupAirStart(HSD_GObj* gobj)
     }
     }
     fp->u.ca.during_specials = false;
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     fp->hurtbox_detect_cb = ftCa_SpecialS_OnDetect;
     {
         /// @todo Too much stack for #resetVel.
@@ -229,8 +227,7 @@ void ftCa_SpecialS_Anim(HSD_GObj* gobj)
             fp->u.ca.during_specials = true;
             break;
         }
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
@@ -272,8 +269,7 @@ void ftCa_SpecialAirS_Anim(HSD_GObj* gobj)
             break;
         }
         }
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCommon_8007D60C(fp);

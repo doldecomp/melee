@@ -21,6 +21,7 @@
 #include <melee/lb/lbmthp.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/lb/lbtime.h>
+#include <melee/mn/inlines.h>
 #include <melee/mn/mnmain.h>
 #include <melee/sc/types.h>
 
@@ -278,24 +279,24 @@ void gmTitle_801A1C18_OnFrame(void)
         lbAudioAx_8002702C(0xC, 0);
         lbAudioAx_80027168();
         lbAudioAx_80027648();
-        lbAudioAx_80024030(1);
+        sfxForward();
         gmMainLib_8015ECBC();
         tmp = gm_GetCurrentSceneExitData();
         *tmp = input;
         gm_801A4B60();
     } else if (DbLevel >= 3) {
         if (input & HSD_PAD_Y) {
-            lbAudioAx_80024030(1);
+            sfxForward();
             tmp = gm_GetCurrentSceneExitData();
             *tmp = input;
             gm_801A4B60();
         } else if (input & HSD_PAD_A) {
-            lbAudioAx_80024030(1);
+            sfxForward();
             tmp = gm_GetCurrentSceneExitData();
             *tmp = input;
             gm_801A4B60();
         } else if (input & HSD_PAD_X) {
-            lbAudioAx_80024030(1);
+            sfxForward();
             tmp = gm_GetCurrentSceneExitData();
             *tmp = input;
             gm_801A4B60();

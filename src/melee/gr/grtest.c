@@ -6,21 +6,17 @@
 #include "gr/forward.h"
 
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
-#include "gr/stage.h"
 #include "gr/types.h"
 
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/jobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
-S16Vec3 grTe_803E56B8[] = {
+GrJoint grTe_803E56B8[] = {
     { 0, 2, 1 },   { 1, 2, 2 },   { 2, 2, 3 },   { 3, 2, 4 }, { 4, 2, 5 },
     { 5, 2, 6 },   { 6, 2, 7 },   { 7, 2, 8 },   { 8, 2, 9 }, { 9, 2, 10 },
     { 10, 2, 11 }, { 12, 2, 16 }, { 13, 2, 17 },
@@ -34,8 +30,8 @@ StageCallbacks grTe_StageCallbacks[] = {
     { 0, 0, 0, 0, 0 }
 };
 
-StageData grTe_803E5764 = {
-    TEST,
+StageData grTe_StageData = {
+    Gr_Kind_Test,
     grTe_StageCallbacks,
     "/GrTe.dat",
     grTest_80206E30,

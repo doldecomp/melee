@@ -51,5 +51,6 @@
 /* 20B104 */ DynamicsDesc* grShrineRoute_OnTouchLine(enum_t);
 /* 20B10C */ bool grShrineRoute_OnCheckShadowRender(Vec3*, int arg,
                                                     HSD_JObj* jobj);
+/* 3E5988 */ extern StageData grSh_Route_StageData;
 
 #endif

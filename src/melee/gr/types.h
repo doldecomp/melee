@@ -61,7 +61,7 @@ struct StageInfo {
 
     u32 flags; // 0x84
 
-    InternalStageId internal_stage_id; // 0x88
+    GrKind grkind; // 0x88
 
     struct {
         u8 b0 : 1;
@@ -81,8 +81,8 @@ struct StageInfo {
     u8 xA4_pad[0x12C - 0xA4];
     HSD_GObj* x12C;
     Vec3 x130, x13C, x148, x154, x160, x16C;
-    DynamicsDesc* (*x178)(int);
-    bool (*x17C)(Vec3*, int, HSD_JObj*);
+    DynamicsDesc* (*on_touch_line)(int);
+    bool (*on_check_shadow_render)(Vec3* fighter_pos, int, HSD_JObj*);
     Ground_GObj* map_gobjs[64];
     HSD_JObj* x280[261];
     void* x694[4];
@@ -92,7 +92,7 @@ struct StageInfo {
         Article* unk4;
     }** itemdata;
     /* +6AC */ MapCollData* coll_data;
-    /* +6B0 */ UnkStage6B0* param;
+    /* +6B0 */ GroundParam* param;
     /* +6B4 */ UNK_T** ald_yaku_all;
     /* +6B8 */ void* map_ptcl;
     /* +6BC */ void* map_texg;
@@ -128,9 +128,9 @@ struct StageInfo {
 STATIC_ASSERT(sizeof(struct StageInfo) == 0x748);
 
 typedef struct StageCallbacks {
-    /*  +0 */ void (*callback0)(Ground_GObj*); ///< initialization callback
-    /*  +4 */ bool (*callback1)(Ground_GObj*);
-    /*  +8 */ void (*callback2)(Ground_GObj*);
+    /*  +0 */ HSD_GObjEvent on_init;
+    /*  +4 */ HSD_GObjPredicate callback1;
+    /*  +8 */ HSD_GObjEvent gobj_proc;
     /*  +C */ void (*callback3)(Ground_GObj*);
     /* +10 */ union {
         /* +10 */ u32 flags;
@@ -147,26 +147,32 @@ typedef struct StageCallbacks {
     };
 } StageCallbacks;
 
-typedef struct StageData {
-    u32 internal_stage_id;
+struct GrJoint { ///< @todo rename fields
+    s16 x;
+    s16 y;
+    s16 z;
+};
+
+struct StageData {
+    GrKind grkind;
     StageCallbacks* callbacks;
     char* data1;
-    void (*OnInit)(void);
-    void (*OnDemoInit)(int);
-    void (*OnLoad)(void);
-    void (*OnStart)(void);
-    bool (*callback4)(void);
-    DynamicsDesc* (*callback5)(enum_t);
-    bool (*callback6)(Vec3*, int, HSD_JObj*);
+    Event on_init;
+    void (*on_demo_init)(int);
+    Event on_load;
+    Event on_start;
+    Predicate callback4;
+    GrTouchLineCallback on_touch_line;
+    GrCheckShadowRenderCallback on_check_shadow_render;
     u32 flags2;
-    S16Vec3* x2C;
-    size_t x30; // size of x2C array
-} StageData;
+    GrJoint* joints;
+    size_t joint_count;
+};
 
-typedef struct StructPairWithStageID {
-    s32 stage_id;
-    s32 list_idx;
-} StructPairWithStageID;
+typedef struct StageIdPair {
+    GrKind grkind;
+    StKind stkind;
+} StageIdPair;
 
 struct GroundVars_unk {
     int xC4;
@@ -1710,8 +1716,8 @@ struct Ground {
         u8 b7 : 1;
     } x11_flags;
 
-    InternalStageId map_id; // 0x14
-    HSD_GObj* x18;          // 0x18
+    GrKind map_id; // 0x14
+    HSD_GObj* x18; // 0x18
     HSD_GObjEvent x1C_callback;
     int x20[8];
     Vec3 self_vel;
@@ -1853,9 +1859,15 @@ struct Ground {
 STATIC_ASSERT(sizeof(union GroundVars) == 0x140);
 STATIC_ASSERT(sizeof(struct Ground) == 0x204);
 
-/// Appears to be related to stage audio
-struct UnkBgmStruct {
-    s32 x0;
+/**
+ * One row of #GroundParam::stage_params, describing a single #StKind. An
+ * archive carries one row per #StKind built on its ground; ground.c calls
+ * these rows stage params and sources them from @c StageParam.csv /
+ * @c StageItem.csv (@c stdata.c).
+ */
+struct StageParam {
+    /// The #StKind this row describes; ground.c lists it as @c stageid.
+    StKind stkind;
     s32 x4;
     s32 x8;
     u32 xC;
@@ -1866,8 +1878,13 @@ struct UnkBgmStruct {
     u8 pad[0x64 - 0x1A];
 };
 
-/// @todo what is this struct?
-struct UnkStage6B0 {
+/**
+ * The stage archive's @c grGroundParam public symbol, reached through
+ * #StageInfo::param; see #grDatFiles_801C6038.
+ *
+ * @todo Most fields are still unidentified.
+ */
+struct GroundParam {
     f32 x0;
     s16 x4;
     u8 x6_pad[2];
@@ -1888,8 +1905,12 @@ struct UnkStage6B0 {
     f32 x50, x54, x58, x5C, x60, x64;
     s16 x68;
     u8 x6C_pad[0xB0 - 0x6A];
-    UnkBgmStruct* xB0;
-    s32 xB4; // number of entries in xB0
+    /**
+     * One row per #StKind this ground serves, looked up by
+     * #StageParam::stkind.
+     */
+    StageParam* stage_params;
+    s32 stage_param_count;
     GXColor xB8;
     GXColor xBC;
     GXColor xC0;
@@ -1915,7 +1936,7 @@ struct UnkStageDat_x8_t {
     /* +14 */ UNK_T x14;
     /* +18 */ UNK_T x18;
     /* +1C */ HSD_FogDesc* x1C;
-    /* +20 */ S16Vec3* unk20;
+    /* +20 */ GrJoint* unk20;
     /* +24 */ s32 unk24; // size of unk20 array
     /* +28 */ UNK_T x28;
     /* +2C */ s16* x2C;
@@ -1957,5 +1978,28 @@ struct grZebesRoute_LightData {
     Vec3 upper_point_pos;
     Vec3 lower_point_pos;
 };
+
+typedef struct {
+    u8 b0 : 1;
+    u8 b1 : 1;
+    u8 b2_5 : 4;
+    u8 b6 : 1;
+    u8 b7 : 1;
+} RouteEntryFlags;
+
+typedef struct {
+    RouteEntryFlags flags;
+    u8 pad_1[3];
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    f32 x10;
+    f32 x14;
+    f32 x18;
+    f32 x1C;
+    f32 x20;
+    f32 x24;
+    void* x28;
+} RouteEntry;
 
 #endif

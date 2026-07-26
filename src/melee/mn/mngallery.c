@@ -210,7 +210,7 @@ static void mnGallery_80258DBC(HSD_GObj* gobj,
     pressed = buttons & 0x1300;
     if (pressed != 0 || data->unk1 > 0x32 || skip != 0) {
         if (pressed != 0) {
-            lbAudioAx_80024030(0);
+            sfxBack();
         }
         data->state = 1;
         mn_8022BD8C();

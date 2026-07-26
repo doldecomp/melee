@@ -24,8 +24,8 @@ StageCallbacks grTPr_StageCallbacks[] = {
     { NULL, NULL, NULL, NULL, 0 }
 };
 
-StageData grTPr_803E9394 = {
-    TPURIN,
+StageData grTPr_StageData = {
+    Gr_Kind_TPurin,
     grTPr_StageCallbacks,
     "/GrTPr.dat",
     grTPurin_80223164,

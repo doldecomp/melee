@@ -37,8 +37,8 @@ StageCallbacks grOy_StageCallbacks[] = {
       grOldYoshi_8020EAF8, 0 },
 };
 
-StageData grOy_803E650C = {
-    29,
+StageData grOy_StageData = {
+    Gr_Kind_OldYoshi,
     grOy_StageCallbacks,
     "/GrOy.dat",
     grOldYoshi_8020E79C,
@@ -48,8 +48,8 @@ StageData grOy_803E650C = {
     grOldYoshi_8020E84C,
     grOldYoshi_8020F404,
     grOldYoshi_8020F40C,
-    1,
-    0,
+    (1 << 0),
+    NULL,
     0,
 };
 
@@ -150,10 +150,8 @@ void grOldYoshi_8020E9EC(Ground_GObj* arg) {}
 void grOldYoshi_8020E9F0(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
     gp->x11_flags.b012 = 1;
     gp->x10_flags.b5 = 1;
 }
@@ -174,10 +172,8 @@ void grOldYoshi_8020EA88(Ground_GObj* arg) {}
 void grOldYoshi_8020EA8C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
     gp->x11_flags.b012 = 1;
 }
 

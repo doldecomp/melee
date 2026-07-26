@@ -62,6 +62,7 @@ void fn_80105A34(Fighter_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void fn_80105AB0(Fighter_GObj* gobj)
@@ -72,6 +73,7 @@ void fn_80105AB0(Fighter_GObj* gobj)
         fp->x2219_b0 = true;
     }
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void ftKb_SpecialNZd_80105B2C(Fighter_GObj* gobj)
@@ -212,8 +214,7 @@ void ftKb_SpecialNSk_80105E8C(Fighter_GObj* gobj)
     fp = (Fighter*) (new_var = HSD_GObjGetUserData(gobj));
     da = fp->dat_attrs;
     if (fp->x2219_b0 == true) {
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     }
     if (fp->cmd_vars[0] == 2U) {
         ftColl_CreateReflectHit(gobj, &da->specialn_zd_reflectdesc,
@@ -232,8 +233,7 @@ void ftKb_SpecialNSk_80105F3C(Fighter_GObj* gobj)
     fp = (Fighter*) (new_var = HSD_GObjGetUserData(gobj));
     da = fp->dat_attrs;
     if (fp->x2219_b0 == true) {
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     }
     if (fp->cmd_vars[0] == 2U) {
         ftColl_CreateReflectHit(gobj, &da->specialn_zd_reflectdesc,

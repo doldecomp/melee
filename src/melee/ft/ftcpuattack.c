@@ -140,6 +140,22 @@ typedef struct ftCo_CollData {
 } ftCo_CollData;
 
 /// @todo Fake helper forcing a fresh load of the scale field.
+
+/// MSL sqrtf expansion writing through a caller-provided stack slot so each
+/// call site owns a distinct 4-byte temp (retail 0x28..0x34 below sp3C).
+static inline float sqrtf_store(float x, volatile float* y)
+{
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        *y = (float) (x * guess);
+        return *(volatile float*) y;
+    }
+    return x;
+}
+
 static inline f32 get_scale(Fighter* fp)
 {
     return fp->x34_scale.y;
@@ -168,9 +184,9 @@ static inline void ftCo_CpuClearTargetAndFinish(Fighter* fp)
 int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
 {
     ftCo_AttackEntry sp3C[32];
-    u8 operand_pad[8];
+    float sqrt_tmp[4]; /* pins sqrtf volatile slots at 0x28..0x34 */
     ftCo_AttackEntry* list = arg2;
-    ftCo_AttackEntry* sel;
+    ftCo_AttackEntry* sel; /* layout/reg pressure; unused */
     struct Fighter_x1A88_t* cpu = &fp->x1A88;
     s32 count;
     s32 i;
@@ -186,7 +202,7 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
     f32 relPredY;
     f32 v;
     f32 sq;
-    f32 scale;
+    f32 scale; /* layout; unused */
     f32 upper;
     f32 lower;
     f32 fpX;
@@ -270,11 +286,11 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
             if (v <= 0.0f) {
                 fpPredY = fpVy * t + fpY;
             } else if (t < v) {
-                sq = sqrtf(t);
+                sq = sqrtf_store(t, &sqrt_tmp[2]);
                 fpPredY = (f32) ((f64) fpY + ((f64) (fpVy * t) -
                                               0.5 * (f64) (fpGrav * sq)));
             } else {
-                sq = sqrtf(v);
+                sq = sqrtf_store(v, &sqrt_tmp[1]);
                 fpPredY =
                     (f32) ((f64) fpY +
                            ((f64) (fpTermNeg * (t - v)) +
@@ -297,12 +313,12 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
             if (v <= 0.0f) {
                 relPredY = (tgtVy * t + tgtY) - fpPredY;
             } else if (t < v) {
-                sq = sqrtf(t);
+                sq = sqrtf_store(t, &sqrt_tmp[0]);
                 relPredY = (f32) (((f64) (tgtVy * t + tgtY) -
                                    0.5 * (f64) (tgtGrav * sq)) -
                                   (f64) fpPredY);
             } else {
-                sq = sqrtf(v);
+                sq = sqrtf_store(v, sqrt_tmp - 1);
                 relPredY = (f32) (((f64) (tgtTermNeg * (t - v)) +
                                    ((f64) (tgtVy * t + tgtY) -
                                     0.5 * (f64) (tgtGrav * sq))) -
@@ -320,9 +336,12 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
         }
         dirx *= halfRange;
         diry *= halfRange;
-        scale = get_scale(fp);
-        upper = list->x14 * scale * halfRange;
-        lower = list->x10 * scale * halfRange;
+        {
+            f32 u = list->x14 * fp->x34_scale.y;
+            upper = u * halfRange;
+        }
+        lower = list->x10 * fp->x34_scale.y;
+        lower *= halfRange;
         if (upper > relPredY && lower < relPredY + x568 &&
             dirx < relx + rangeF && diry > relx - rangeB)
         {
@@ -358,8 +377,8 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
     }
     inv = 1.0 / sum;
     acc = 0.0f;
-    for (i = 0, sel = sp3C; i < count; i++, sel++) {
-        acc += sel->weight;
+    for (i = 0; i < count; i++) {
+        acc += sp3C[i].weight;
         if (acc * inv >= r) {
             return ftCo_CpuSelectAttack(fp, cpu, &sp3C[i]);
         }
@@ -1704,7 +1723,7 @@ bool ftCo_800B89CC(Fighter* fp)
 
     PAD_STACK(8);
 
-    if (stage_info.internal_stage_id == KONGO &&
+    if (stage_info.grkind == Gr_Kind_Kongo &&
         (fp->cur_pos.x > 25.0F || fp->cur_pos.x < -25.0F))
     {
         return false;
@@ -1726,9 +1745,9 @@ bool ftCo_800B89CC(Fighter* fp)
 
 bool ftCo_800B8A9C(Fighter* fp)
 {
-    int sp34;
     u8 _[0x38];
     u32 sp38;
+    int sp34;
     Vec3 sp28;
     Vec3 sp1C;
     Fighter** target_pp;
@@ -1739,6 +1758,7 @@ bool ftCo_800B8A9C(Fighter* fp)
     float weapon_reach;
     int result;
     int var_r0;
+    PAD_STACK(4);
 
     if (!cpu->xF9_b2) {
         return false;
@@ -1826,7 +1846,9 @@ bool ftCo_800B8A9C(Fighter* fp)
         }
         goto done;
     }
-    if (fp->item_gobj != NULL && ftCo_800A59E4(GET_ITEM(fp->item_gobj))) {
+    if (fp->item_gobj != NULL &&
+        ftCo_800A59E4((Item*) fp->item_gobj->user_data))
+    {
         item = GET_ITEM(fp->item_gobj);
         if (!ftCo_800A59E4(item)) {
             weapon_reach = 0.0f;

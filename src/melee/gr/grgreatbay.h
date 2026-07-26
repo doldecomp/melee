@@ -58,5 +58,6 @@
 /* 1F67A4 */ void grGreatBay_801F67A4(Vec3*, f32);
 /* 1F680C */ DynamicsDesc* grGreatBay_801F680C(enum_t);
 /* 1F6814 */ bool grGreatBay_801F6814(Vec3*, int _, HSD_JObj*);
+/* 3E3F6C */ extern StageData grGb_StageData;
 
 #endif

@@ -1,16 +1,8 @@
 #ifndef GALE01_1F6868
 #define GALE01_1F6868
 
-#include <placeholder.h>
-#include <platform.h>
-
-#include "gm/forward.h"
 #include "gr/forward.h"
-
-#include "gr/types.h"
-
 #include "lb/forward.h"
-#include "mp/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
@@ -74,7 +66,6 @@ extern f32 grIm_804DB570;
 /* 1F91A8 */ int fn_801F91A8(Ground_GObj*);
 /* 1F929C */ void grIceMt_801F929C(HSD_GObj* arg0, void* arg1);
 /* 1F9668 */ void grIceMt_801F9668(float);
-/* 1F96E0 */ float grIceMt_801F96E0(struct grIceMt_GroundVars*, float);
 /* 1F98A8 */ void grIceMt_801F98A8(HSD_GObj* param1);
 /* 1F993C */ f32 grIceMt_801F993C(s32, s32);
 /* 1F9ACC */ int grIceMt_801F9ACC(Ground_GObj*, float, GrIceMtSegmentLookup,
@@ -89,5 +80,6 @@ extern f32 grIm_804DB570;
 /* 1FA854 */ void grIceMt_801FA854(void);
 /* 1FA8F8 */ DynamicsDesc* grIceMt_801FA8F8(enum_t id);
 /* 1FA900 */ bool grIceMt_801FA900(Vec3* a, int id, HSD_JObj* jobj);
+/* 3E4800 */ extern StageData grIm_StageData;
 
 #endif

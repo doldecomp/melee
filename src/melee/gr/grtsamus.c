@@ -64,8 +64,8 @@ static StageCallbacks grTSs_StageCallbacks[] = {
     { 0 },
 };
 
-StageData grTSs_803E9454 = {
-    TSAMUS,
+StageData grTSs_StageData = {
+    Gr_Kind_TSamus,
     grTSs_StageCallbacks,
     "/GrTSs.dat",
     grTSamus_OnInit,

@@ -28,6 +28,7 @@
 #include "lb/lbcardnew.h"
 #include "lb/lbsnap.h"
 #include "lb/lbspdisplay.h"
+#include "mn/inlines.h"
 #include "mn/mnmain.h"
 #include "sc/types.h"
 
@@ -375,7 +376,7 @@ void gmCamera_801A2AAC(void)
     if ((lbSnap_8001D338(0) != 0) || (lbSnap_8001D338(1) != 0)) {
         gmCamera_801A3048(2);
     } else if (HSD_PadCopyStatus[3].trigger & PAD_BUTTON_A) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         switch (gmCamera_VsCamUiState.x44) {
         case 0:
         case 1:
@@ -397,7 +398,7 @@ void gmCamera_801A2AAC(void)
             break;
         }
     } else if (HSD_PadCopyStatus[3].trigger & PAD_BUTTON_B) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         gmCamera_801A3048(0);
     }
 }
@@ -405,7 +406,7 @@ void gmCamera_801A2AAC(void)
 void gmCamera_801A2BB0(void)
 {
     if (HSD_PadCopyStatus[3].trigger & PAD_BUTTON_B) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         gmCamera_801A3048(0);
     }
 }
@@ -460,7 +461,7 @@ static inline void gmCamera_801A2D44_update_selection(HSD_JObj** jobj_b,
 
     if (HSD_PadCopyStatus[3].trigger & (PAD_BUTTON_LEFT | PAD_STICK_LEFT)) {
         if (*(px18 = &gcus->x18) != 0) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             *px18 = 0;
             lb_80011E24(gcus->x8, &(*jobj), 0xC, -1);
             if (*px18 != 0) {
@@ -474,7 +475,7 @@ static inline void gmCamera_801A2D44_update_selection(HSD_JObj** jobj_b,
     }
     if (HSD_PadCopyStatus[3].trigger & (PAD_BUTTON_RIGHT | PAD_STICK_RIGHT)) {
         if (*(px18 = &gcus->x18) != 1) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             *px18 = 1;
             lb_80011E24(gcus->x8, &(*jobj_b), 0xC, -1);
             if (*px18 != 0) {
@@ -500,16 +501,16 @@ void gmCamera_801A2D44(void)
     }
     if (HSD_PadCopyStatus[3].trigger & (PAD_BUTTON_A | PAD_BUTTON_START)) {
         if (gcus->x18 == 0) {
-            lbAudioAx_80024030(1);
+            sfxForward();
             gmCamera_801A3048(7);
             return;
         }
-        lbAudioAx_80024030(0);
+        sfxBack();
         gmCamera_801A3048(0);
         return;
     }
     if (HSD_PadCopyStatus[3].trigger & PAD_BUTTON_B) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         gmCamera_801A3048(0);
         return;
     }

@@ -26,5 +26,6 @@
 /* 1E3418 */ void grStory_801E3418(Ground_GObj*);
 /* 1E366C */ void grStory_801E366C(Ground_GObj*);
 /* 1E36D8 */ bool grStory_801E36D8(Vec3*, int, HSD_JObj*);
+/* 3E274C */ extern StageData grSt_StageData;
 
 #endif

@@ -2623,7 +2623,7 @@ void gm_801905F0(StartMeleeData* arg0)
         }
     }
 
-    sp18.stage_id = arg0->rules.xE;
+    sp18.stkind = arg0->rules.xE;
     for (i = 0; i < 4; i++) {
         sp18.slot_type[i] = arg0->players[i].slot_type;
         sp18.char_id[i] = arg0->players[i].c_kind;

@@ -47,5 +47,6 @@
 /* 2035C8 */ DynamicsDesc* grGarden_802035C8(enum_t);
 /* 2035D0 */ bool grGarden_802035D0(Vec3*, int arg, HSD_JObj* jobj);
 /* 203624 */ float grGarden_80203624(void);
+/* 3E52E0 */ extern StageData grGd_StageData;
 
 #endif

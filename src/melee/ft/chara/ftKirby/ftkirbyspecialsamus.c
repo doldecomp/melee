@@ -13,17 +13,11 @@
 #include "ft/ftcommon.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/inlines.h"
+#include "ftKirby/inlines.h"
 #include "it/items/itsamuschargeshot.h"
 #include "lb/lb_00B0.h"
 
 #include <MSL/math.h>
-
-static inline void ftKb_SpecialN_set_cbs(Fighter_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    fp->death2_cb = ftKb_Init_800EE74C;
-    fp->take_dmg_cb = ftKb_Init_800EE7B8;
-}
 
 long ftKb_SpecialNSs_800FCC14(Fighter_GObj* gobj, long* out1, long* out2)
 {

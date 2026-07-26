@@ -292,19 +292,19 @@ void grLib_801C9E50(s16 val)
 
 bool grLib_801C9E60(Vec3* v)
 {
-    InternalStageId id = stage_info.internal_stage_id;
+    GrKind id = stage_info.grkind;
 
-    if (id == RCRUISE) {
+    if (id == Gr_Kind_RCruise) {
         grRCruise_80201918(v);
         return true;
     }
 
-    if (id == BIGBLUE) {
+    if (id == Gr_Kind_BigBlue) {
         grBigBlue_801EF7D8(v);
         return true;
     }
 
-    if (id == ICEMTN) {
+    if (id == Gr_Kind_Icemt) {
         grIceMt_801FA728(v);
         return true;
     }

@@ -453,9 +453,8 @@ loop:
 
         for (temp = arg2; temp->x0 != 0xD; temp++) {
             if (temp->xC != NULL) {
-                stage1 = Stage_8022519C((InternalStageId) entry->x00);
-                if (Stage_8022519C((InternalStageId) temp->xC->x00) == stage1)
-                {
+                stage1 = Stage_8022519C(entry->x00);
+                if (Stage_8022519C(temp->xC->x00) == stage1) {
                     result = entry;
                     goto next;
                 }
@@ -771,11 +770,11 @@ void gmClassic_801B3500(GameScene* arg0)
     lbDvd_80018254();
 
     if (entry->x1 == 0x80 && entry->x2 == 1) {
-        gc->stage_id = (u16) gm_801647F8(ad->x0.ckind);
+        gc->stkind = (u16) gm_801647F8(ad->x0.ckind);
     } else if (entry->x1 == 4) {
-        gc->stage_id = 0xAF;
+        gc->stkind = 0xAF;
     } else {
-        gc->stage_id = entry->xC->x00;
+        gc->stkind = entry->xC->x00;
     }
 
     lbDvd_80018254();
@@ -800,13 +799,13 @@ void gmClassic_801B3500(GameScene* arg0)
     }
 
     {
-        InternalStageId stage_id;
+        StKind stkind;
         if (entry->x1 == 0x80 && entry->x2 == 1) {
-            stage_id = (u16) gm_801647F8(ad->x0.ckind);
+            stkind = (u16) gm_801647F8(ad->x0.ckind);
         } else {
-            stage_id = entry->xC->x00;
+            stkind = entry->xC->x00;
         }
-        audio |= lbAudioAx_80026EBC(stage_id);
+        audio |= lbAudioAx_80026EBC(stkind);
     }
 
     lbAudioAx_80026F2C(0x1C);

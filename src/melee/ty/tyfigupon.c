@@ -41,6 +41,7 @@
 #include "lb/lblanguage.h"
 #include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
+#include "mn/inlines.h"
 #include "mn/mnmain.h"
 #include "MSL/math.h"
 #include "sc/types.h"
@@ -934,7 +935,7 @@ void _tyFigupon_80316C24(HSD_GObj* arg0)
     }
 
     if (mn_8022F218() != 0) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_8022F268();
         ((TyModeState*) Toy_804A284C)->x4 = 1;
         return;
@@ -942,7 +943,7 @@ void _tyFigupon_80316C24(HSD_GObj* arg0)
 
     if (Toy_80305B88() & 0x200) {
         if (((u32) gm_801623D8() / 10u) == 0 || ef4->x5E <= 1) {
-            lbAudioAx_80024030(0);
+            sfxBack();
             ((TyModeState*) Toy_804A284C)->x4 = 1;
             return;
         }
@@ -983,7 +984,7 @@ void _tyFigupon_80316C24(HSD_GObj* arg0)
             }
             _tyFigupon_803153EC((u32) (s32) pct, 9, 3, 2, 0);
         }
-        lbAudioAx_80024030(2);
+        sfxMove();
         data->x28 = 1;
         return;
     }
@@ -1045,7 +1046,7 @@ void _tyFigupon_80316C24(HSD_GObj* arg0)
                 }
                 _tyFigupon_803153EC((u32) (s32) pct, 9, 3, 2, 0);
             }
-            lbAudioAx_80024030(2);
+            sfxMove();
             data->x28 = 1;
             return;
         }
@@ -1110,7 +1111,7 @@ void _tyFigupon_80316C24(HSD_GObj* arg0)
                     }
                     _tyFigupon_803153EC((u32) (s32) pct, 9, 3, 2, 0);
                 }
-                lbAudioAx_80024030(2);
+                sfxMove();
                 data->x28 = 3;
             }
         } else if (stick_scroll >= 0.1f || (Toy_80305C44() & 0x800) ||
@@ -1158,7 +1159,7 @@ void _tyFigupon_80316C24(HSD_GObj* arg0)
                     }
                     _tyFigupon_803153EC((u32) (s32) pct, 9, 3, 2, 0);
                 }
-                lbAudioAx_80024030(2);
+                sfxMove();
                 data->x28 = 3;
             }
         } else {

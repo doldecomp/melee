@@ -110,7 +110,7 @@ void gm_801BA938(struct EventData* arg0, int lo, int hi, bool arg3)
     }
 
     if (arg3 != 0) {
-        temp_r7->stage_id = arg0->x48;
+        temp_r7->stkind = arg0->x48;
     }
     lbDvd_80018254();
     mask = 0;
@@ -417,7 +417,7 @@ void gm_801BAD70(GameScene* arg0)
         stage_list = ((struct gm_evlevel*) *lvlpp)->x10;
         stage = stage_list->stage[ev->x20];
         md->rules.xE = stage;
-        ev->x48 = (InternalStageId) stage;
+        ev->x48 = stage;
         if (ev->x20 > 0) {
             md->rules.x1_2 = 1;
             md->rules.x1_3 = 1;
@@ -843,7 +843,7 @@ s32 gm_801BBB64(void)
         ev->x44 = 1;
     }
     pp = &tbl[idx];
-    ev->x48 = (InternalStageId) * (u16*) ((u8*) (*pp)->x8 + 6);
+    ev->x48 = *(u16*) ((u8*) (*pp)->x8 + 6);
     for (i = 0; i < 4; i++) {
         player_init = (&(*pp)->x14)[i];
         if (player_init != NULL) {
@@ -3415,7 +3415,7 @@ void gm_801BF3F8(void)
         var_r31->entries[i].char_id = gm_801BF648(i);
         var_r31->entries[i].color = gm_801BF670(i);
     }
-    var_r31->stage_id = gm_801BF694();
+    var_r31->stkind = gm_801BF694();
     lbDvd_80018254();
 
     temp_ret = 4;

@@ -6,6 +6,7 @@
 
 #include "dolphin/pad.h"
 #include "gm/gm_1B14.h"
+#include "mn/inlines.h"
 #include "pl/pl_040D.h"
 
 #include <math_ppc.h>
@@ -1086,7 +1087,7 @@ void fn_80186634(void* arg0)
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(InternalStageID_Unk00, NULL);
+    Stage_802251E8(St_Kind_Dummy, NULL);
     Item_80266FA8();
     Item_80266FCC();
     Stage_8022524C();
@@ -1446,7 +1447,7 @@ void fn_80187714(void)
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(64);
-    Stage_802251E8(0, NULL);
+    Stage_802251E8(St_Kind_Dummy, NULL);
     Stage_8022524C();
     Item_80266FA8();
     Item_80266FCC();
@@ -1675,7 +1676,7 @@ void fn_80187CF4(HSD_GObj* gobj)
         break;
     case 2:
         if (gm_GetButtonsTriggered(data->x38) & PAD_BUTTON_START) {
-            lbAudioAx_80024030(1);
+            sfxForward();
             data->x36.active = 1;
             data->x37.state2 = 3;
             anim_state = data->x37.state2;
@@ -1768,13 +1769,12 @@ static HSD_Archive* lbl_804D6620;
 typedef struct gm_80187F48_EnterData {
     u8 x0;
     u8 stage_index;
-    u16 stage_id;
+    u16 stkind;
 } gm_80187F48_EnterData;
 
-static inline InternalStageId
-gm_80187F48_GetStageId(gm_80187F48_EnterData* data)
+static inline StKind gm_GetStKind(gm_80187F48_EnterData* data)
 {
-    return data->stage_id;
+    return data->stkind;
 }
 
 static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
@@ -1789,7 +1789,7 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(gm_80187F48_GetStageId(arg0), NULL);
+    Stage_802251E8(gm_GetStKind(arg0), NULL);
     Item_80266F70();
     Item_80266FCC();
     efLib_Init();
@@ -2399,7 +2399,7 @@ void fn_801891F4(void)
         sub->x01 = 1;
 
         if (buttons & PAD_ANY_UP) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             if ((u8) sub->x00 != 0) {
                 sub->x00--;
                 if (sub->x00 == 5) {
@@ -2411,7 +2411,7 @@ void fn_801891F4(void)
         }
 
         if (buttons & PAD_ANY_DOWN) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             if ((u8) sub->x00 < 8) {
                 sub->x00++;
                 if (sub->x00 == 5) {
@@ -2425,7 +2425,7 @@ void fn_801891F4(void)
         switch (sub->x00) {
         case 0:
             if (buttons & PAD_ANY_LEFT) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] != 0) {
                     sub->menu_values[sub->x00]--;
                     return;
@@ -2434,7 +2434,7 @@ void fn_801891F4(void)
                 return;
             }
             if (buttons & PAD_ANY_RIGHT) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] < 5) {
                     sub->menu_values[sub->x00]++;
                     return;
@@ -2445,14 +2445,14 @@ void fn_801891F4(void)
             break;
         case 1:
             if (buttons & PAD_ANY_LEFT) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] != 0) {
                     sub->menu_values[sub->x00]--;
                 } else {
                     sub->menu_values[sub->x00] = 0x1D;
                 }
             } else if (buttons & PAD_ANY_RIGHT) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] < 0x1D) {
                     sub->menu_values[sub->x00]++;
                 } else {
@@ -2474,7 +2474,7 @@ void fn_801891F4(void)
             break;
         case 2:
             if (buttons & PAD_ANY_LEFT) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] != 0) {
                     sub->menu_values[sub->x00]--;
                     return;
@@ -2483,7 +2483,7 @@ void fn_801891F4(void)
                 return;
             }
             if (buttons & PAD_ANY_RIGHT) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] < 2) {
                     sub->menu_values[sub->x00]++;
                     return;
@@ -2494,7 +2494,7 @@ void fn_801891F4(void)
             break;
         case 3:
             if (buttons & PAD_ANY_LEFT) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] != 0) {
                     sub->menu_values[sub->x00]--;
                     return;
@@ -2503,7 +2503,7 @@ void fn_801891F4(void)
                 return;
             }
             if (buttons & PAD_ANY_RIGHT) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] < 5) {
                     sub->menu_values[sub->x00]++;
                     return;
@@ -2514,7 +2514,7 @@ void fn_801891F4(void)
             break;
         case 4:
             if (buttons & PAD_ANY_LEFT) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] != 0) {
                     sub->menu_values[sub->x00]--;
                     if ((u32) sub->menu_values[sub->x00] == 0) {
@@ -2526,7 +2526,7 @@ void fn_801891F4(void)
                     return;
                 }
             } else if (buttons & PAD_ANY_RIGHT) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] < 0x3E7) {
                     sub->menu_values[sub->x00]++;
                     if ((u32) sub->menu_values[sub->x00] == 0x3E7) {
@@ -2541,19 +2541,19 @@ void fn_801891F4(void)
             break;
         case 5:
             if (buttons & PAD_ANY_LEFT) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 sub->menu_values[sub->x00] = 0;
                 return;
             }
             if (buttons & PAD_ANY_RIGHT) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 sub->menu_values[sub->x00] = 1;
                 return;
             }
             break;
         case 6:
             if (buttons & PAD_ANY_LEFT) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] != 0) {
                     sub->menu_values[sub->x00]--;
                 } else {
@@ -2575,7 +2575,7 @@ void fn_801891F4(void)
                     return;
                 }
             } else if (buttons & PAD_ANY_RIGHT) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 if ((u32) sub->menu_values[sub->x00] < 2) {
                     sub->menu_values[sub->x00]++;
                 } else {
@@ -2600,7 +2600,7 @@ void fn_801891F4(void)
             break;
         case 7:
             if (buttons & PAD_BUTTON_A) {
-                lbAudioAx_80024030(1);
+                sfxForward();
                 fn_80188644();
                 return;
             }
@@ -2621,7 +2621,7 @@ void fn_801891F4(void)
 
             speeds = *(ClassicProcArray*) lbl_803B7C68;
 
-            lbAudioAx_80024030(0);
+            sfxBack();
             sub->anim_frames[22] = 0x14;
             lb_80019880(__cvt_dbl_usll(
                 (f64) (0.016666668f / ((f32*) speeds.v)[sub->menu_values[0]] *

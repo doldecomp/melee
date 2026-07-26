@@ -1,7 +1,6 @@
 #include <platform.h>
 
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -12,9 +11,7 @@
 #include "lb/lbspdisplay.h"
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 /* 2225D0 */ static void grTNess_802225D0(bool);
@@ -61,8 +58,8 @@ static StageCallbacks grTNs_StageCallbacks[] = {
     { 0 },
 };
 
-StageData grTNs_803E908C = {
-    TNESS,
+StageData grTNs_StageData = {
+    Gr_Kind_TNess,
     grTNs_StageCallbacks,
     "/GrTNs.dat",
     grTNess_802225D4,

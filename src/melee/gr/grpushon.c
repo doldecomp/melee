@@ -74,17 +74,32 @@ Vec3 const grPushOn_803B8458 = { 0.0f, 100.0f, 0.0f };
 Vec3 const grPushOn_803B8464 = { 0.0f, 100.0f, 0.0f };
 float grPushOn_804D4934 = 16.0f;
 
-StageCallbacks grPushOn_StageCallbacks[3] = {
-    { grPushOn_802184CC, grPushOn_80218590, grPushOn_80218598,
-      grPushOn_8021859C, 0 },
-    { grPushOn_802185A0, grPushOn_80218670, grPushOn_802186C8,
-      grPushOn_802187A4, 0xC0000000 },
-    { grPushOn_802187A8, grPushOn_80218880, grPushOn_80218888,
-      grPushOn_80218ED0, 0 },
+StageCallbacks grPushOn_StageCallbacks[] = {
+    {
+        grPushOn_802184CC,
+        grPushOn_80218590,
+        grPushOn_80218598,
+        grPushOn_8021859C,
+        0,
+    },
+    {
+        grPushOn_802185A0,
+        grPushOn_80218670,
+        grPushOn_802186C8,
+        grPushOn_802187A4,
+        (1 << 30) | (1 << 31),
+    },
+    {
+        grPushOn_802187A8,
+        grPushOn_80218880,
+        grPushOn_80218888,
+        grPushOn_80218ED0,
+        0,
+    },
 };
 
-StageData grPushOn_803E7B10 = {
-    PUSHON,
+StageData grPushOn_StageData = {
+    Gr_Kind_Pushon,
     grPushOn_StageCallbacks,
     "/GrNPo.dat",
     grPushOn_802182C8,

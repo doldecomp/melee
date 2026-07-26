@@ -66,15 +66,25 @@ static Vec3 const grFigureGet_803B8470 = { 0.0f, 0.0f, 0.0f };
 /* 219C90 */ static bool grFigureGet_OnCheckShadowRender(Vec3*, int,
                                                          HSD_JObj*);
 
-static StageCallbacks grFigureGet_StageCallbacks[2] = {
-    { grFigureGet_802196B4, grFigureGet_802196E0, grFigureGet_802196E8,
-      grFigureGet_802196EC, 0 },
-    { grFigureGet_802196F0, grFigureGet_80219890, grFigureGet_80219898,
-      grFigureGet_80219B0C, (1 << 30) | (1 << 31) },
+static StageCallbacks grFigureGet_StageCallbacks[] = {
+    {
+        grFigureGet_802196B4,
+        grFigureGet_802196E0,
+        grFigureGet_802196E8,
+        grFigureGet_802196EC,
+        0,
+    },
+    {
+        grFigureGet_802196F0,
+        grFigureGet_80219890,
+        grFigureGet_80219898,
+        grFigureGet_80219B0C,
+        (1 << 30) | (1 << 31),
+    },
 };
 
-StageData grFigureGet_803E7D34 = {
-    FIGUREGET,
+StageData grFigureGet_StageData = {
+    Gr_Kind_FigureGet,
     grFigureGet_StageCallbacks,
     "/GrNFg.dat",
     grFigureGet_OnInit,
@@ -84,7 +94,7 @@ StageData grFigureGet_803E7D34 = {
     grFigureGet_802195C4,
     grFigureGet_OnTouchLine,
     grFigureGet_OnCheckShadowRender,
-    1,
+    (1 << 0),
     NULL,
     0,
 };

@@ -81,7 +81,7 @@ static void sdata2_order(void)
     (void) 1000.0f;      // 44 7a 00 00
 }
 
-S16Vec3 grRc_803E4DA8[] = {
+GrJoint grRc_803E4DA8[] = {
     { 0, 1, 1 },   { 1, 1, 1 },   { 2, 1, 1 },   { 3, 1, 1 },   { 4, 1, 1 },
     { 11, 1, 7 },  { 10, 1, 17 }, { 6, 1, 7 },   { 7, 1, 7 },   { 8, 1, 7 },
     { 9, 1, 7 },   { 12, 1, 19 }, { 13, 1, 18 }, { 14, 1, 18 }, { 15, 1, 18 },
@@ -106,8 +106,8 @@ StageCallbacks grRc_StageCallbacks[7] = {
       grRCruise_801FF920, 0 },
 };
 
-struct StageData grRc_803E4ECC = {
-    RCRUISE,
+struct StageData grRc_StageData = {
+    Gr_Kind_RCruise,
     grRc_StageCallbacks,
     "/GrRc.dat",
     grRCruise_801FF168,
@@ -117,7 +117,7 @@ struct StageData grRc_803E4ECC = {
     grRCruise_801FF2C0,
     grRCruise_80201C50,
     grRCruise_80201C58,
-    4,
+    (1 << 2),
     grRc_803E4DA8,
     ARRAY_SIZE(grRc_803E4DA8),
 };
@@ -1144,7 +1144,7 @@ void grRCruise_80201918(Vec3* vec)
 
 bool grRCruise_80201988(s32 line_id)
 {
-    if (stage_info.internal_stage_id == RCRUISE && line_id != -1) {
+    if (stage_info.grkind == Gr_Kind_RCruise && line_id != -1) {
         int joint = mpJointFromLine(line_id);
         bool result;
 

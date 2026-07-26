@@ -169,6 +169,7 @@ void ftPk_SpecialN_SpawnEffect0(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void ftPk_SpecialN_SpawnEffect1(HSD_GObj* gobj)
@@ -185,6 +186,7 @@ void ftPk_SpecialN_SpawnEffect1(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void ftPk_SpecialN_80124DC8(HSD_GObj* gobj)

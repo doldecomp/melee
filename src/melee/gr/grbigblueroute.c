@@ -43,6 +43,14 @@ struct grBigBlueRoute_YakumonoParam {
     f32 x4C;
 };
 
+struct grBigBlueRoute_8020DA9C_t {
+    /* +0 */ char pad_0[0x8];
+    /* +8 */ int x8;
+};
+
+/* 20DA9C */ static int
+grBigBlueRoute_8020DA9C(struct grBigBlueRoute_8020DA9C_t*);
+
 /// @todo Emitted only to lay out the .sdata2 literal pool in retail order.
 static void sdata2_order(void)
 {
@@ -76,68 +84,51 @@ StageCallbacks grBb_Route_StageCallbacks[38] = {
       grBigBlueRoute_8020BB08, grBigBlueRoute_8020BB0C, 0 },
     { grBigBlueRoute_8020BB68, grBigBlueRoute_8020BC24,
       grBigBlueRoute_8020BC2C, grBigBlueRoute_8020BC30, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
+    { 0 },
+    { 0 },
     { grBigBlueRoute_8020C140, grBigBlueRoute_8020C1D4,
       grBigBlueRoute_8020C1DC, grBigBlueRoute_8020C210, 0x80000000 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
     { grBigBlueRoute_8020BC68, grBigBlueRoute_8020BF30,
       grBigBlueRoute_8020BF38, grBigBlueRoute_8020C13C, 0x40000000 },
     { grBigBlueRoute_8020BB10, grBigBlueRoute_8020BB58,
       grBigBlueRoute_8020BB60, grBigBlueRoute_8020BB64, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
 };
 
-char grBb_Route_803E6170[] = "/GrNBr.dat";
-
-static struct {
-    u32 internal_stage_id;
-    StageCallbacks* callbacks;
-    char* data1;
-    void (*OnInit)(void);
-    void (*OnDemoInit)(int);
-    void (*OnLoad)(void);
-    void (*OnStart)(void);
-    bool (*callback4)(void);
-    DynamicsDesc* (*callback5)(enum_t);
-    bool (*callback6)(Vec3*, int, HSD_JObj*);
-    u32 flags2;
-    S16Vec3* x2C;
-    size_t x30;
-    char fmt[0x24];
-} grBb_Route_803E617C = {
-    BIGBLUEROUTE,
+StageData grBb_Route_StageData = {
+    Gr_Kind_BigBlueRoute,
     grBb_Route_StageCallbacks,
-    grBb_Route_803E6170,
+    "/GrNBr.dat",
     grBigBlueRoute_8020B89C,
     grBigBlueRoute_8020B864,
     grBigBlueRoute_8020B920,
@@ -145,13 +136,17 @@ static struct {
     grBigBlueRoute_8020B9CC,
     grBigBlueRoute_8020DF78,
     grBigBlueRoute_8020DF80,
-    1,
+    (1 << 0),
     NULL,
     0,
-    "%s:%d: couldn t get gobj(id=%d)\n",
 };
 
 static struct grBigBlueRoute_YakumonoParam* yakumono_param;
+
+static void order_data(void)
+{
+    (void) "%s:%d: couldn t get gobj(id=%d)\n";
+}
 
 void grBigBlueRoute_8020B864(bool arg)
 {
@@ -232,16 +227,17 @@ HSD_GObj* grBigBlueRoute_8020B9D4(int gobj_id)
             gp->x1C_callback = callbacks->callback3;
         }
 
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
 
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
         }
 
     } else {
-        OSReport(grBb_Route_803E617C.fmt, __FILE__, 0x117, gobj_id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0x117,
+                 gobj_id);
     }
 
     return gobj;

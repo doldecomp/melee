@@ -44,6 +44,7 @@ static void onAccessory4(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void ftLk_SpecialHi_Enter(HSD_GObj* gobj)

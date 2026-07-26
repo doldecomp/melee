@@ -83,8 +83,7 @@ void ftSk_SpecialHi_80112FA8(HSD_GObj* gobj)
         efSync_Spawn(1284, gobj, &pos);
         fp->x2219_b0 = true;
     }
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 void fn_80113038(HSD_GObj* gobj)
@@ -97,6 +96,7 @@ void fn_80113038(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void ftSk_SpecialHi_Enter(HSD_GObj* gobj)

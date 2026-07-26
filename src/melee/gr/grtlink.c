@@ -1,58 +1,68 @@
-#include "gr/grtlink.h"
+#include "grtlink.h"
+
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
 #include <platform.h>
-
-#include "gr/granime.h"
-#include "gr/grdisplay.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/types.h"
-
-#include "lb/forward.h"
 
 #include "lb/lbspdisplay.h"
 
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-void grTLink_8022192C(bool);                  /* static */
-void grTLink_80221930(void);                  /* static */
-void grTlink_UnkStage0_OnLoad(void);          /* static */
-void grTlink_UnkStage0_OnStart(void);         /* static */
-bool grTLink_802219C8(void);                  /* static */
-HSD_GObj* grTLink_802219D0(int arg0);         /* static */
-void grTLink_80221AB8(Ground_GObj*);          /* static */
-bool grTLink_80221AE4(Ground_GObj*);          /* static */
-void grTLink_80221AEC(Ground_GObj*);          /* static */
-void grTLink_80221AF0(Ground_GObj*);          /* static */
-void grTLink_80221AF4(Ground_GObj*);          /* static */
-bool grTLink_80221B44(Ground_GObj*);          /* static */
-void grTLink_80221B4C(Ground_GObj*);          /* static */
-void grTLink_80221B80(Ground_GObj*);          /* static */
-void grTLink_80221B84(Ground_GObj*);          /* static */
-bool grTLink_80221BD4(Ground_GObj*);          /* static */
-void grTLink_80221BDC(Ground_GObj*);          /* static */
-void grTLink_80221BFC(Ground_GObj*);          /* static */
-DynamicsDesc* grTLink_80221C00(enum_t);       /* static */
-bool grTLink_80221C08(Vec3*, int, HSD_JObj*); /* static */
+/* 22192C */ static void grTLink_8022192C(bool);
+/* 221930 */ static void grTLink_80221930(void);
+/* 2219A0 */ static void grTlink_UnkStage0_OnLoad(void);
+/* 2219A4 */ static void grTlink_UnkStage0_OnStart(void);
+/* 2219C8 */ static bool grTLink_802219C8(void);
+/* 2219D0 */ static HSD_GObj* grTLink_802219D0(int arg0);
+/* 221AB8 */ static void grTLink_80221AB8(Ground_GObj*);
+/* 221AE4 */ static bool grTLink_80221AE4(Ground_GObj*);
+/* 221AEC */ static void grTLink_80221AEC(Ground_GObj*);
+/* 221AF0 */ static void grTLink_80221AF0(Ground_GObj*);
+/* 221AF4 */ static void grTLink_80221AF4(Ground_GObj*);
+/* 221B44 */ static bool grTLink_80221B44(Ground_GObj*);
+/* 221B4C */ static void grTLink_80221B4C(Ground_GObj*);
+/* 221B80 */ static void grTLink_80221B80(Ground_GObj*);
+/* 221B84 */ static void grTLink_80221B84(Ground_GObj*);
+/* 221BD4 */ static bool grTLink_80221BD4(Ground_GObj*);
+/* 221BDC */ static void grTLink_80221BDC(Ground_GObj*);
+/* 221BFC */ static void grTLink_80221BFC(Ground_GObj*);
+/* 221C00 */ static DynamicsDesc* grTLink_80221C00(enum_t);
+/* 221C08 */ static bool grTLink_80221C08(Vec3*, int, HSD_JObj*);
 
-static StageCallbacks grTLk_StageCallbacks[4] = {
-    { grTLink_80221AB8, grTLink_80221AE4, grTLink_80221AEC, grTLink_80221AF0,
-      0 },
-    { grTLink_80221B84, grTLink_80221BD4, grTLink_80221BDC, grTLink_80221BFC,
-      0 },
-    { grTLink_80221AF4, grTLink_80221B44, grTLink_80221B4C, grTLink_80221B80,
-      (1 << 31) | (1 << 30) },
-    { NULL, NULL, NULL, NULL, 0 }
+static StageCallbacks grTLk_StageCallbacks[] = {
+    {
+        grTLink_80221AB8,
+        grTLink_80221AE4,
+        grTLink_80221AEC,
+        grTLink_80221AF0,
+        0,
+    },
+    {
+        grTLink_80221B84,
+        grTLink_80221BD4,
+        grTLink_80221BDC,
+        grTLink_80221BFC,
+        0,
+    },
+    {
+        grTLink_80221AF4,
+        grTLink_80221B44,
+        grTLink_80221B4C,
+        grTLink_80221B80,
+        (1 << 31) | (1 << 30),
+    },
+    { 0 },
 };
 
-StageData grTLk_803E8D8C = {
-    TLINK,
+StageData grTLk_StageData = {
+    Gr_Kind_TLink,
     grTLk_StageCallbacks,
     "/GrTLk.dat",
     grTLink_80221930,
@@ -62,7 +72,9 @@ StageData grTLk_803E8D8C = {
     grTLink_802219C8,
     grTLink_80221C00,
     grTLink_80221C08,
-    1,
+    (1 << 0),
+    NULL,
+    0,
 };
 
 void grTLink_8022192C(bool unk0) {}

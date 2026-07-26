@@ -4,7 +4,6 @@
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
@@ -16,9 +15,7 @@
 #include "lb/lbspdisplay.h"
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 /* 21F840 */ static void grTMario_8021F840(bool);
@@ -67,11 +64,11 @@ StageCallbacks grTMr_StageCallbacks[] = {
         grTMario_8021FAD0,
         (1 << 30) | (1 << 31),
     },
-    { NULL, NULL, NULL, NULL, 0 },
+    { 0 },
 };
 
-StageData grTMr_803E85A4 = {
-    TMARIO,
+StageData grTMr_StageData = {
+    Gr_Kind_TMario,
     grTMr_StageCallbacks,
     "/GrTMr.dat",
     grTMario_8021F844,

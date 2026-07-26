@@ -48,6 +48,7 @@ void ftFx_SpecialHi_CreateLaunchGFX(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void ftFx_SpecialHi_CreateChargeGFX(HSD_GObj* gobj)
@@ -62,6 +63,7 @@ void ftFx_SpecialHi_CreateChargeGFX(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void ftFx_SpecialHi_Enter(HSD_GObj* gobj)
@@ -749,8 +751,7 @@ inline void ftFox_SpecialHiBound_SetVars(HSD_GObj* gobj)
     }
     efSync_Spawn(1030, gobj, &fp->cur_pos, &f);
     fp->x2219_b0 = true;
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 /// 0x800E82E4
@@ -758,7 +759,7 @@ inline void ftFox_SpecialHiBound_SetVars(HSD_GObj* gobj)
 /// Motion State handler
 void ftFx_SpecialHiBound_Enter(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = gobj->user_data;
     ftFox_DatAttrs* da = fp->dat_attrs;
 
     Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialHiBound, 0, 0.0f, 1.0f,

@@ -101,8 +101,7 @@ static void ftDonkey_8010DE88_inner(HSD_GObj* gobj)
         efAsync_Spawn(gobj, &fp->x60C, 1, 1228, fp->parts[FtPart_TopN].joint);
         fp->x2219_b0 = true;
     }
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 static void callback(HSD_GObj* gobj);
@@ -173,6 +172,7 @@ void ftDk_SpecialLw_8010E0CC(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void ftDk_SpecialLw_8010E148(HSD_GObj* gobj)
@@ -183,4 +183,5 @@ void ftDk_SpecialLw_8010E148(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }

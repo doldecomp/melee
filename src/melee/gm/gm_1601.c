@@ -2318,19 +2318,19 @@ found:
     return false;
 }
 
-void gm_80164504(u16 stage_id)
+void gm_80164504(u16 stkind)
 {
     u16* stage_unlock_mask;
     s32 i;
-    u8 internal_id;
+    u8 grkind;
     u8 unlock_idx;
     u8 notify_val;
 
     stage_unlock_mask = gmMainLib_8015EDA4();
-    internal_id = Stage_8022519C(stage_id);
+    grkind = Stage_8022519C(stkind);
 
     for (i = 0; i < NUM_UNLOCKABLE_STAGES; i++) {
-        if ((s32) internal_id == (s32) lbl_803B790C[i][1]) {
+        if ((s32) grkind == (s32) lbl_803B790C[i][1]) {
             unlock_idx = lbl_803B790C[i][0];
             goto found_stage;
         }
@@ -3066,6 +3066,7 @@ void gm_80166378(lbl_8046B6A0_24C_t* arg0_raw)
     f32 sp48_x;
     s32 j;
     u32 cnt;
+    f32 d, c, b, a;
 
     PAD_STACK(60);
 
@@ -3097,10 +3098,11 @@ void gm_80166378(lbl_8046B6A0_24C_t* arg0_raw)
             arg0->player_standings[i].x3_7 = Player_GetMoreFlagsBit2(i);
             arg0->player_standings[i].x9 = (s8) Player_GetRemainingHP(i);
             cnt = Player_GetJoystickCountByIndex(i, 0);
-            sp48_y = 0.031f * ((f32) cnt * fn_8016B5B0());
+            sp48_y = (a = 0.031f) * ((f32) cnt * fn_8016B5B0());
             fn_80166A8C((Vec3*) &sp48_y, (Vec3*) &sp48_x);
             arg0->player_standings[i].xE = *(u16*) &sp48_x;
-            arg0->player_standings[i].x34 = (s8) (100.0f * pl_80040948(i));
+            arg0->player_standings[i].x34 =
+                (s8) ((b = 100.0f) * pl_80040948(i));
             arg0->player_standings[i].x38 = pl_80040900(i);
             arg0->player_standings[i].x3C = pl_80040924(i);
             arg0->player_standings[i].x40 = pl_80040B3C(i);
@@ -3125,9 +3127,9 @@ void gm_80166378(lbl_8046B6A0_24C_t* arg0_raw)
             arg0->player_standings[i].x8C = pl_80040AF0(i);
             arg0->player_standings[i].x90 = pl_8003E39C(i);
             arg0->player_standings[i].x94 =
-                (u32) (60.0f * (10.0f * pl_80040D44(i)));
-            arg0->player_standings[i].x98 =
-                (u32) (60.0f * (10.0f * pl_80040D68(i)));
+                (u32) ((void) (c = 60.0f),
+                       (c * ((d = 10.0f) * pl_80040D44(i))));
+            arg0->player_standings[i].x98 = (u32) (c * (d * pl_80040D68(i)));
             arg0->player_standings[i].x9C = (u32) pl_80040CFC(i) / 60U;
             arg0->player_standings[i].xA0 = (u32) pl_80040D20(i) / 60U;
             arg0->player_standings[i].xA4 = pl_80040DB8(i);
@@ -3397,18 +3399,18 @@ void fn_8016719C(s32 slot, s32 subchar)
     Vec3 offset;
     lbl_8046B6A0_t* match_info;
     s32 var_r30;
-    s32 stage_id;
+    StKind stkind;
     struct fn_8016719C_xC_bits* temp_r4;
 
     match_info = gm_16AE_GetUnkData_1();
-    stage_id = gm_8016B004();
-    if (Stage_80224DC8(stage_id) != 0) {
+    stkind = gm_8016B004();
+    if (Stage_80224DC8(stkind) != 0) {
         var_r30 = Ground_801C5774();
         Stage_80224E38(&respawn_pos, var_r30);
         offset.z = 0.0f;
         offset.y = 0.0f;
         offset.x = 0.0f;
-        if ((stage_id != 0x4C) && (subchar == 0)) {
+        if ((stkind != 0x4C) && (subchar == 0)) {
             Ground_801C38BC(respawn_pos.x, respawn_pos.y);
             Camera_8002F3AC();
         }
