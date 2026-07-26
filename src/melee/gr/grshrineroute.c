@@ -408,11 +408,10 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
             ix = result - 0xBD;
             if (!(gp->u.shrineroute.xC6 & (1 << ix))) {
                 gp->u.shrineroute.xC8 = (u16) result;
-                HSD_ASSERTMSG(0x213, gp->u.map.symbol[(u32) ix],
-                              "gp->u.map.symbol[ix]");
+                HSD_ASSERT(0x213, gp->u.map.symbol[ix]);
                 {
-                    s32 mid =
-                        ((Ground*) gp->u.map.symbol[ix]->user_data)->map_id;
+                    s32 mid = ((Ground*) gp->u.map.symbol[(u32) ix]->user_data)
+                                  ->map_id;
                     if (player != NULL) {
                         Player_80031790((s32) ftLib_80086BE0(player));
                     }

@@ -215,7 +215,7 @@ void lbHeap_80015CA8(int arg0, void* arg1)
         HSD_Free(arg1);
         HSD_SetHeap(cur_heap);
     } else {
-        lbMemory_800150F0(p->handle, arg1);
+        lbMemFreeToHeap(p->handle, arg1);
     }
     OSRestoreInterrupts(enabled);
 }
