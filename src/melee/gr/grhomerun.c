@@ -39,7 +39,6 @@
                                      float delta_y);
 
 #define INIT_ADD_PARTS_RANGE (1.0F + (2400.0F / (160.0F * Ground_801C0498())))
-#define Gr_Homerun_Parts_Max 64
 
 f32 grHr_804D6AD8;
 int grHr_804D6ADC;

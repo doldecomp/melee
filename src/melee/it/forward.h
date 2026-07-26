@@ -107,8 +107,8 @@ typedef enum Item_HoldKinds {
 #define It_Common_End It_Kind_L_Gun_Ray
 
 typedef enum ItemKind {
-    // COMMON ITEMS
-
+    /** @name COMMON ITEMS */
+    /// @{
     /* 00 */ It_Kind_Capsule,  // Capsule
     /* 01 */ It_Kind_Box,      // Crate
     /* 02 */ It_Kind_Taru,     // Barrel
@@ -145,8 +145,10 @@ typedef enum ItemKind {
     /* 21 */ It_Kind_Spycloak, // Cloaking Device (Spycloak)
     /* 22 */ It_Kind_M_Ball,   // Poke Ball (M Ball)
 
-    // ITEM-RELATED
+    /// @}
 
+    /** @name ITEM-RELATED */
+    /// @{
     It_Kind_L_Gun_Ray,      // Ray Gun recoil effect (?)
     It_Kind_StarRod_Star,   // Star Rod Star
     It_Kind_LipStick_Spore, // Lips Stick Dust
@@ -156,16 +158,20 @@ typedef enum ItemKind {
     It_Kind_F_Flower_Flame, // Flower
     It_Kind_EvYoshiEgg,     // Yoshi's Egg (Event)
 
-    // MONSTERS
+    /// @}
 
+    /** @name MONSTERS */
+    /// @{
     It_Kind_Kuriboh,        // Goomba (Kuriboh)
     It_Kind_Leadead,        // Redead (Leadead)
     It_Kind_Octarock,       // Octarok (Octarock)
     It_Kind_Ottosea,        // Ottosea
     It_Kind_Octarock_Stone, // Stone (Octarok Projectile)
 
-    // CHARACTER-RELATED
+    /// @}
 
+    /** @name CHARACTER-RELATED */
+    /// @{
     It_Kind_Mario_Fire,      // Mario's fireball
     It_Kind_DrMario_Vitamin, // Dr. Mario's pill
     It_Kind_Kirby_CBeam,     // Kirby's Cutter beam
@@ -280,8 +286,10 @@ typedef enum ItemKind {
     It_Kind_Unk4,                   // (unique)
     It_Kind_Coin,                   // Coin (?)
 
-    // POKEMON
+    /// @}
 
+    /** @name POKEMON */
+    /// @{
     /* 0xA0 */ It_PKind_Random, ///< Used for Random Pokemon value
     /* 0xA1 */ It_PKind_Start,  ///< First Poke Ball Pokemon, named by an
                                 ///< assert in #pl_8003E70C.
@@ -317,8 +325,10 @@ typedef enum ItemKind {
     /* 0xBE */ It_PKind_Fushigibana,                ///< Venusaur (Fushigibana)
     /* 0xBF */ It_PKind_Terminate, ///< One past the last Poke Ball Pokemon.
 
-    // POKEMON-RELATED
+    /// @}
 
+    /** @name POKEMON-RELATED */
+    /// @{
     /* 0xBF */ It_Kind_Chicorita_Leaf =
         It_PKind_Terminate,              ///< Chikorita's Leaf
     /* 0xC0 */ It_Kind_Kamex_HydroPump,  ///< Blastoise's Water
@@ -338,8 +348,10 @@ typedef enum ItemKind {
     /* 0xCE */ It_Kind_Hinoarashi_Flame, ///< Cyndaquil's Fire
     /* 0xCF */ It_Kind_Pokemon_Unk,      ///< ???
 
-    // MONSTERS 2
+    /// @}
 
+    /** @name MONSTERS 2 */
+    /// @{
     It_Kind_Old_Kuri, // Old Goomba (old-Kuri)
     It_Kind_Mato,     // Target (Mato)
     It_Kind_Heiho,    // Yoshi's Story Shy Guy (Heiho)
@@ -354,8 +366,10 @@ typedef enum ItemKind {
     It_Kind_ZGShell,  // Green Shell (zgshell)
     It_Kind_ZRShell,  // Red Shell (green act) (zrshell)
 
-    // STAGE-SPECIFIC
+    /// @}
 
+    /** @name STAGE-SPECIFIC */
+    /// @{
     It_Kind_Tincle,          // Tingle (Tincle) (on balloon)
     It_Kind_Invalid1,        // [Invalid]
     It_Kind_Invalid2,        // [Invalid]
@@ -372,7 +386,7 @@ typedef enum ItemKind {
     It_Kind_Arwing_Laser,    // Arwing Laser
     It_Kind_GreatFox_Laser,  // Great Fox's Laser
     It_Kind_Kyasarin_Egg,    // Birdo's Egg
-
+    /// @}
 } ItemKind;
 
 #endif
