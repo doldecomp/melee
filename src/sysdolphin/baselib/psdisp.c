@@ -1281,32 +1281,32 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, f32* cache)
 }
 
 static inline void psGetPerspectiveAppSRTDirection(HSD_Particle* pp,
-                                                   f32* cache, f32* dir_x,
-                                                   f32* dir_y)
+                                                   f32* cache, Mtx draw_mtx,
+                                                   f32* dir_x, f32* dir_y)
 {
     Vec3 prev;
-    f32 x84 = pp->appsrt->x84;
-    f32 x88 = pp->appsrt->x88;
-    f32 x8C = pp->appsrt->x8C;
-    f32 x90 = pp->appsrt->x90;
-    f32 x74 = pp->appsrt->x74;
-    f32 x78 = pp->appsrt->x78;
-    f32 x7C = pp->appsrt->x7C;
-    f32 x80 = pp->appsrt->x80;
-    f64 d830 = (f64) (cache[0x1A] * x90);
-    f64 d840 = (f64) (cache[0x1C] * x84);
-    f64 d850 = (f64) (cache[0x1C] * x88);
-    f64 d860 = (f64) (cache[0x1C] * x8C);
-    f64 d870 = (f64) (cache[0x1C] * x90);
-    f32 w0 = x90 + (x8C * pp->pos.z + (x84 * pp->pos.x + x88 * pp->pos.y));
-    f32 f16 = cache[0x19] * pp->appsrt->x6C + cache[0x1A] * x8C;
-    f32 s808 = cache[0x19] * pp->appsrt->ssx + cache[0x1A] * x84;
-    f32 s804 = cache[0x19] * pp->appsrt->ssy + cache[0x1A] * x88;
-    f32 f20 = cache[0x19] * pp->appsrt->x70 + (f32) d830;
-    f32 f12 = cache[0x1B] * x74 + (f32) d840;
-    f32 f8 = cache[0x1B] * x78 + (f32) d850;
-    f32 f11 = cache[0x1B] * x7C + (f32) d860;
-    f32 f13 = cache[0x1B] * x80 + (f32) d870;
+    f32 x84;
+    f32 x88;
+    f32 x8C;
+    f32 x90;
+    f32 x74;
+    f32 x78;
+    f32 x7C;
+    f32 x80;
+    f64 d830;
+    f64 d840;
+    f64 d850;
+    f64 d860;
+    f64 d870;
+    f32 w0;
+    f32 f16;
+    f32 s808;
+    f32 s804;
+    f32 f20;
+    f32 f12;
+    f32 f8;
+    f32 f11;
+    f32 f13;
 
     if (pp->kind & Tornado) {
         calcTornadoLastPos(pp, &prev.x, &prev.y, &prev.z);
@@ -1315,6 +1315,28 @@ static inline void psGetPerspectiveAppSRTDirection(HSD_Particle* pp,
         prev.y = pp->pos.y - pp->vel.y;
         prev.z = pp->pos.z - pp->vel.z;
     }
+    x84 = draw_mtx[2][0];
+    x88 = draw_mtx[2][1];
+    x8C = draw_mtx[2][2];
+    x90 = draw_mtx[2][3];
+    x74 = draw_mtx[1][0];
+    x78 = draw_mtx[1][1];
+    x7C = draw_mtx[1][2];
+    x80 = draw_mtx[1][3];
+    d830 = (f64) (cache[0x1A] * x90);
+    d840 = (f64) (cache[0x1C] * x84);
+    d850 = (f64) (cache[0x1C] * x88);
+    d860 = (f64) (cache[0x1C] * x8C);
+    d870 = (f64) (cache[0x1C] * x90);
+    w0 = x90 + (x8C * pp->pos.z + (x84 * pp->pos.x + x88 * pp->pos.y));
+    f16 = cache[0x19] * draw_mtx[0][2] + cache[0x1A] * x8C;
+    s808 = cache[0x19] * draw_mtx[0][0] + cache[0x1A] * x84;
+    s804 = cache[0x19] * draw_mtx[0][1] + cache[0x1A] * x88;
+    f20 = cache[0x19] * draw_mtx[0][3] + (f32) d830;
+    f12 = cache[0x1B] * x74 + (f32) d840;
+    f8 = cache[0x1B] * x78 + (f32) d850;
+    f11 = cache[0x1B] * x7C + (f32) d860;
+    f13 = cache[0x1B] * x80 + (f32) d870;
     if (cache[0x18] != w0) {
         f32 w0inv = 1.0f / w0;
         f32 w1 = x90 + (x8C * prev.z + (x84 * prev.x + x88 * prev.y));
@@ -1331,6 +1353,19 @@ static inline void psGetPerspectiveAppSRTDirection(HSD_Particle* pp,
                 w1inv * (f13 + (f11 * prev.z + (f12 * prev.x + f8 * prev.y)));
         }
     }
+}
+
+static inline void psScaleAppSRTAxes(HSD_Particle* pp, Mtx mtx)
+{
+    mtx[0][0] *= pp->size;
+    mtx[1][0] *= pp->size;
+    mtx[2][0] *= pp->size;
+    mtx[0][1] *= pp->size;
+    mtx[1][1] *= pp->size;
+    mtx[2][1] *= pp->size;
+    mtx[0][2] *= pp->size;
+    mtx[1][2] *= pp->size;
+    mtx[2][2] *= pp->size;
 }
 
 static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform, f32* cache)
@@ -1350,6 +1385,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform, f32* cache)
     psUpdateAppSRT(pp, cache);
     PSMTXCopy((MtxPtr) &pp->appsrt->ssx, draw_mtx);
     psGetAppSRTPositions(pp, draw_mtx, &cur_pos, &prev_pos);
+    psScaleAppSRTAxes(pp, draw_mtx);
     ax = pp->appsrt->x94 * pp->size;
     ay = 0.0f;
     bx = 0.0f;
@@ -1362,14 +1398,14 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform, f32* cache)
         f32 vf1 = 0.0f;
         f32 vf2 = 0.0f;
         if (0.0f == cache[0x18]) {
-            psGetPerspectiveAppSRTDirection(pp, cache, &vf1, &vf2);
+            psGetPerspectiveAppSRTDirection(pp, cache, draw_mtx, &vf1, &vf2);
         } else {
-            f32 s800 = cache[0x19] * pp->appsrt->ssx + cache[0x1A];
-            f32 s7FC = cache[0x19] * pp->appsrt->ssy + cache[0x1A];
-            f32 s7F8 = cache[0x19] * pp->appsrt->x6C + cache[0x1A];
-            f32 f17 = cache[0x1B] * pp->appsrt->x74 + cache[0x1C];
-            f32 f18 = cache[0x1B] * pp->appsrt->x78 + cache[0x1C];
-            f32 f20 = cache[0x1B] * pp->appsrt->x7C + cache[0x1C];
+            f32 s800 = cache[0x19] * draw_mtx[0][0] + cache[0x1A];
+            f32 s7FC = cache[0x19] * draw_mtx[0][1] + cache[0x1A];
+            f32 s7F8 = cache[0x19] * draw_mtx[0][2] + cache[0x1A];
+            f32 f17 = cache[0x1B] * draw_mtx[1][0] + cache[0x1C];
+            f32 f18 = cache[0x1B] * draw_mtx[1][1] + cache[0x1C];
+            f32 f20 = cache[0x1B] * draw_mtx[1][2] + cache[0x1C];
             if (pp->kind & Tornado) {
                 Vec3 t;
                 calcTornadoLastPos(pp, &t.x, &t.y, &t.z);
@@ -1689,7 +1725,7 @@ void psDispParticles(s32 arg0, u32 arg1)
     HSD_Particle* pp;
     f32* cache;
     /// @todo Recover this stack space from the original inline hierarchy.
-    PAD_STACK(0x78);
+    PAD_STACK(0x38);
 
     var_r16 = 0;
     var_r15 = 0;
@@ -1779,10 +1815,9 @@ void psDispParticles(s32 arg0, u32 arg1)
                         psSetCurrentMtx(0);
                         GXEnableTexOffsets(GX_TEXCOORD0, GX_TRUE, GX_TRUE);
                         GXSetCullMode(GX_CULL_BACK);
-                        GXSetArray(GX_VA_TEX0,
-                                   (void*) ((char*) &HSD_PSDisp_8040C300 +
-                                            0x40),
-                                   2U);
+                        GXSetArray(
+                            GX_VA_TEX0,
+                            (void*) ((char*) &HSD_PSDisp_8040C300 + 0x40), 2U);
                         psSetupVtxFormat(GX_VTXFMT0, false, true, GX_RGB565);
                         psSetupVtxFormat(GX_VTXFMT1, false, false, GX_RGB565);
                         psSetupVtxFormat(GX_VTXFMT2, true, true, GX_RGB565);
