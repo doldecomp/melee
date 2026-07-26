@@ -236,10 +236,10 @@ void gm_801B13B8(GameScene* arg0)
         temp_r28->players[i].xE = 4;
     }
 
-    temp_r28->players[0].c_kind = 6;
-    temp_r28->players[1].c_kind = 8;
-    temp_r28->players[2].c_kind = 6;
-    temp_r28->players[3].c_kind = 6;
+    temp_r28->players[0].c_kind = CKIND_LINK;
+    temp_r28->players[1].c_kind = CKIND_MARIO;
+    temp_r28->players[2].c_kind = CKIND_LINK;
+    temp_r28->players[3].c_kind = CKIND_LINK;
 
     temp_r28->players[0].slot_type = Gm_PKind_Human;
     temp_r28->players[1].slot_type = Gm_PKind_Human;

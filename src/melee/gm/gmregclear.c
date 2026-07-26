@@ -846,12 +846,12 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     }
 
     player_ckind = (u8) arg1->x0.ckind;
-    if ((player_ckind == 0x12) && ((u8) arg1->x0.xC.x12 != 0)) {
-        player_ckind = 0x13;
+    if ((player_ckind == CKIND_ZELDA) && ((u8) arg1->x0.xC.x12 != 0)) {
+        player_ckind = CKIND_SEAK;
     } else if (((arg1->x0.x8 & 0x80) != 0) && ((u8) arg1->x0.x9 == 1) &&
-               ((s8) player_ckind == 0xE))
+               ((s8) player_ckind == CKIND_POPONANA))
     {
-        player_ckind = 0x20;
+        player_ckind = CHKIND_POPO;
     }
 
     gm_801B0620(arg0->players, player_ckind, arg1->x0.color, player_stocks,
@@ -992,18 +992,20 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
                 arg0->players[player_idx].xC_b2 = 1;
                 arg0->players[player_idx].xE = 0x1B;
             }
-            if ((s32) arg0->players[player_idx].c_kind == 0x1D) {
+            if ((s32) arg0->players[player_idx].c_kind == CKIND_GKOOPS) {
                 arg0->players[player_idx].xC_b1 = 0;
             }
             enemy_ckind = (u8) arg0->players[player_idx].c_kind;
-            if (((s8) enemy_ckind == 0x1A) || ((s8) enemy_ckind == 0x1E)) {
+            if (((s8) enemy_ckind == CKIND_MASTERH) ||
+                ((s8) enemy_ckind == CKIND_CREZYH))
+            {
                 arg0->players[player_idx].xC_b7 = 1;
                 arg0->players[player_idx].hp = 0x12C;
                 arg0->players[player_idx].xD_b2 = 1;
                 arg0->players[player_idx].xD_b0 = 1;
                 arg0->players[player_idx].xD_b2 = 1;
                 arg0->players[player_idx].spawn_dir = -1;
-                if ((s32) arg0->players[player_idx].c_kind == 0x1E) {
+                if ((s32) arg0->players[player_idx].c_kind == CKIND_CREZYH) {
                     arg0->players[player_idx].slot_type = 3;
                 }
                 boss_count += 1;
@@ -3485,7 +3487,7 @@ void gm_80182174(void)
 
     gm_8016795C(&lbl_80472ED8.xC);
 
-    ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.c_kind = 0x1B;
+    ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.c_kind = CKIND_BOY;
     ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.slot_type = 1;
     ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.stocks = 1;
     ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.xD_b4 = 1;

@@ -2742,7 +2742,7 @@ void ftKb_Init_OnDeath(HSD_GObj* gobj)
     fp->u.kb.hat.x0 = 0;
     fp->u.kb.hat.x4 = HSD_Randi(5) + 1;
     fp->u.kb.hat.jobj = NULL;
-    fp->u.kb.hat.kind = 4;
+    fp->u.kb.hat.kind = FTKIND_KIRBY;
     fp->u.kb.hat.x14.data = 0;
     fp->u.kb.x60 = 0;
     fp->u.kb.x64 = 0;
