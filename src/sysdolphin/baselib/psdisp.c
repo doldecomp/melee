@@ -20,17 +20,16 @@ extern float __fabsf(float);
 #include <dolphin/gx.h>
 
 typedef struct {
-    u8 filename[9];
-    u8 message[39];
-    UNK_T pointers[3];
-    u32 bitfields[8];
-} psdisp_UnknownType001;
+    u8 x0_pad[0x40];
+    u8 texture_coords[0x20];
+} psdisp_StaticData;
 
 typedef struct {
-    UNK_T pointers[4];
-    u8 message[36];
-    u8 filename[9];
-} psdisp_UnknownType002;
+    u8 sort_frame[0x10];
+    char blend_mode_report[0x24];
+    char filename[9];
+    u8 x3D_pad[3];
+} psdisp_ReportData;
 
 typedef struct {
     HSD_Particle* head;
@@ -71,6 +70,8 @@ typedef struct {
 } psdisp_Cache;
 
 STATIC_ASSERT(sizeof(psdisp_ParticleSortBucket) == 8);
+STATIC_ASSERT(sizeof(psdisp_StaticData) == 0x60);
+STATIC_ASSERT(sizeof(psdisp_ReportData) == 0x40);
 STATIC_ASSERT(sizeof(psdisp_Cache) == 0xF0);
 STATIC_ASSERT(offsetof(psdisp_Cache, particle_list) == 0xAC);
 
@@ -78,8 +79,8 @@ STATIC_ASSERT(offsetof(psdisp_Cache, particle_list) == 0xAC);
 /* 39FA28 */ static void getColorPrimEnv(HSD_Particle*, GXColor*, GXColor*);
 /* 39FB74 */ static void getColorMatAmb(HSD_Particle*, GXColor*, GXColor*);
 /* 3B9628 */ extern psdisp_Mtx HSD_PSDisp_803B9628;
-/* 40C300 */ extern psdisp_UnknownType001 HSD_PSDisp_8040C300;
-/* 40C360 */ extern psdisp_UnknownType002 HSD_PSDisp_8040C360;
+/* 40C300 */ extern psdisp_StaticData HSD_PSDisp_8040C300;
+/* 40C360 */ extern psdisp_ReportData HSD_PSDisp_8040C360;
 /* 4D6380 */ extern u8 HSD_PSDisp_804D6380[2];
 /* 4D6384 */ extern u8 HSD_PSDisp_804D6384[2];
 /* 4D0908 */ extern HSD_Particle* hsd_804D0908[146];
@@ -454,7 +455,7 @@ HSD_Particle* particleSort(s32 arg0, u8 arg1, HSD_Particle** arg2,
     s32 var_r6;
     u8* temp_r9;
 
-    temp_r9 = (u8*) &HSD_PSDisp_8040C360 + arg0;
+    temp_r9 = &HSD_PSDisp_8040C360.sort_frame[arg0];
     temp_r29 = (new_var = &hsd_804D0908[arg0]);
     cache = &HSD_PSDisp_804D0FC0;
     var_r28 = *temp_r29;
@@ -1871,9 +1872,8 @@ void psDispParticles(s32 arg0, u32 arg1)
                         psSetCurrentMtx(0);
                         GXEnableTexOffsets(GX_TEXCOORD0, GX_TRUE, GX_TRUE);
                         GXSetCullMode(GX_CULL_BACK);
-                        GXSetArray(
-                            GX_VA_TEX0,
-                            (void*) ((char*) &HSD_PSDisp_8040C300 + 0x40), 2U);
+                        GXSetArray(GX_VA_TEX0,
+                                   HSD_PSDisp_8040C300.texture_coords, 2U);
                         psSetupVtxFormat(GX_VTXFMT0, false, true, GX_RGB565);
                         psSetupVtxFormat(GX_VTXFMT1, false, false, GX_RGB565);
                         psSetupVtxFormat(GX_VTXFMT2, true, true, GX_RGB565);
