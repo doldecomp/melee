@@ -282,61 +282,61 @@ typedef enum ItemKind {
 
     // POKEMON
 
-    /* 0xA0 */ It_PKind_Random, // Used for Random Pokemon value
-    /// First Poke Ball Pokemon, named by an assert in #pl_8003E70C.
-    /* 0xA1 */ It_PKind_Start,
-    /* 0xA1 */ It_PKind_Tosakinto = It_PKind_Start, // Goldeen (Tosakinto)
-    /* 0xA2 */ It_PKind_Chicorita,                  // Chikorita (Chicorita)
-    /* 0xA3 */ It_PKind_Kabigon,                    // Snorlax (Kabigon)
-    /* 0xA4 */ It_PKind_Kamex,                      // Blastoise (Kamex)
-    /* 0xA5 */ It_PKind_Matadogas,                  // Weezing (Matadogas)
-    /* 0xA6 */ It_PKind_Lizardon,                   // Charizard (Lizardon)
-    /* 0xA7 */ It_PKind_Fire,                       // Moltres (Fire)
-    /* 0xA8 */ It_PKind_Thunder,                    // Zapdos (Thunder)
-    /* 0xA9 */ It_PKind_Freezer,                    // Articuno (Freezer)
-    /* 0xAA */ It_PKind_Sonans,                     // Wobbuffet (Sonans)
-    /* 0xAB */ It_PKind_Hassam,                     // Scizor (Hassam)
-    /* 0xAC */ It_PKind_Unknown,                    // Unown (Unknown)
-    /* 0xAD */ It_PKind_Entei,                      // Entei
-    /* 0xAE */ It_PKind_Raikou,                     // Raikou
-    /* 0xAF */ It_PKind_Suikun,                     // Suicune (Suikun)
-    /* 0xB0 */ It_PKind_Kireihana,                  // Bellossom (Kireihana)
-    /* 0xB1 */ It_PKind_Marumine,                   // Electrode (Marumine)
-    /* 0xB2 */ It_PKind_Lugia,                      // Lugia
-    /* 0xB3 */ It_PKind_Houou,                      // Ho-oh (Houou)
-    /* 0xB4 */ It_PKind_Metamon,                    // Ditto (Metamon)
-    /* 0xB5 */ It_PKind_Pippi,                      // Clefairy (Pippi)
-    /* 0xB6 */ It_PKind_Togepy,                     // Togepi (Togepy)
-    /* 0xB7 */ It_PKind_Mew,                        // Mew
-    /* 0xB8 */ It_PKind_Cerebi,                     // Celebi (Cerebi)
-    /* 0xB9 */ It_PKind_Hitodeman,                  // Staryu (Hitodeman)
-    /* 0xBA */ It_PKind_Lucky,                      // Chansey (Lucky)
-    /* 0xBB */ It_PKind_Porygon2,                   // Porygon2
-    /* 0xBC */ It_PKind_Hinoarashi,                 // Cyndaquil (Hinoarashi)
-    /* 0xBD */ It_PKind_Maril,                      // Marill (Maril)
-    /* 0xBE */ It_PKind_Fushigibana,                // Venusaur (Fushigibana)
-    /// One past the last Poke Ball Pokemon.
-    /* 0xBF */ It_PKind_Terminate,
+    /* 0xA0 */ It_PKind_Random, ///< Used for Random Pokemon value
+    /* 0xA1 */ It_PKind_Start,  ///< First Poke Ball Pokemon, named by an
+                                ///< assert in #pl_8003E70C.
+    /* 0xA1 */ It_PKind_Tosakinto = It_PKind_Start, ///< Goldeen (Tosakinto)
+    /* 0xA2 */ It_PKind_Chicorita,                  ///< Chikorita (Chicorita)
+    /* 0xA3 */ It_PKind_Kabigon,                    ///< Snorlax (Kabigon)
+    /* 0xA4 */ It_PKind_Kamex,                      ///< Blastoise (Kamex)
+    /* 0xA5 */ It_PKind_Matadogas,                  ///< Weezing (Matadogas)
+    /* 0xA6 */ It_PKind_Lizardon,                   ///< Charizard (Lizardon)
+    /* 0xA7 */ It_PKind_Fire,                       ///< Moltres (Fire)
+    /* 0xA8 */ It_PKind_Thunder,                    ///< Zapdos (Thunder)
+    /* 0xA9 */ It_PKind_Freezer,                    ///< Articuno (Freezer)
+    /* 0xAA */ It_PKind_Sonans,                     ///< Wobbuffet (Sonans)
+    /* 0xAB */ It_PKind_Hassam,                     ///< Scizor (Hassam)
+    /* 0xAC */ It_PKind_Unknown,                    ///< Unown (Unknown)
+    /* 0xAD */ It_PKind_Entei,                      ///< Entei
+    /* 0xAE */ It_PKind_Raikou,                     ///< Raikou
+    /* 0xAF */ It_PKind_Suikun,                     ///< Suicune (Suikun)
+    /* 0xB0 */ It_PKind_Kireihana,                  ///< Bellossom (Kireihana)
+    /* 0xB1 */ It_PKind_Marumine,                   ///< Electrode (Marumine)
+    /* 0xB2 */ It_PKind_Lugia,                      ///< Lugia
+    /* 0xB3 */ It_PKind_Houou,                      ///< Ho-oh (Houou)
+    /* 0xB4 */ It_PKind_Metamon,                    ///< Ditto (Metamon)
+    /* 0xB5 */ It_PKind_Pippi,                      ///< Clefairy (Pippi)
+    /* 0xB6 */ It_PKind_Togepy,                     ///< Togepi (Togepy)
+    /* 0xB7 */ It_PKind_Mew,                        ///< Mew
+    /* 0xB8 */ It_PKind_Cerebi,                     ///< Celebi (Cerebi)
+    /* 0xB9 */ It_PKind_Hitodeman,                  ///< Staryu (Hitodeman)
+    /* 0xBA */ It_PKind_Lucky,                      ///< Chansey (Lucky)
+    /* 0xBB */ It_PKind_Porygon2,                   ///< Porygon2
+    /* 0xBC */ It_PKind_Hinoarashi,                 ///< Cyndaquil (Hinoarashi)
+    /* 0xBD */ It_PKind_Maril,                      ///< Marill (Maril)
+    /* 0xBE */ It_PKind_Fushigibana,                ///< Venusaur (Fushigibana)
+    /* 0xBF */ It_PKind_Terminate, ///< One past the last Poke Ball Pokemon.
 
     // POKEMON-RELATED
 
-    /* 0xBF */ It_Kind_Chicorita_Leaf = It_PKind_Terminate, // Chikorita's Leaf
-    /* 0xC0 */ It_Kind_Kamex_HydroPump,  // Blastoise's Water
-    /* 0xC1 */ It_Kind_Matadogas_Gas1,   // Weezing's Gas
-    /* 0xC2 */ It_Kind_Matadogas_Gas2,   // Weezing's Gas
-    /* 0xC3 */ It_Kind_Lizardon_Flame1,  // Charizard's Breath
-    /* 0xC4 */ It_Kind_Lizardon_Flame2,  // Charizard's Breath
-    /* 0xC5 */ It_Kind_Lizardon_Flame3,  // Charizard's Breath
-    /* 0xC6 */ It_Kind_Lizardon_Flame4,  // Charizard's Breath
-    /* 0xC7 */ It_Kind_Unknown_Swarm,    // Mini-Unowns
-    /* 0xC8 */ It_Kind_Lugia_Aeroblast,  // Lugia's Aeroblast
-    /* 0xC9 */ It_Kind_Lugia_Aeroblast2, // Lugia's Aeroblast
-    /* 0xCA */ It_Kind_Lugia_Aeroblast3, // Lugia's Aeroblast
-    /* 0xCB */ It_Kind_Houou_SacredFire, // Ho-Oh's Flame
-    /* 0xCC */ It_Kind_Hitodeman_Star,   // Staryu's Star
-    /* 0xCD */ It_Kind_Lucky_Egg,        // Chansey's Healing Egg
-    /* 0xCE */ It_Kind_Hinoarashi_Flame, // Cyndaquil's Fire
-    /* 0xCF */ It_Kind_Pokemon_Unk,      // ???
+    /* 0xBF */ It_Kind_Chicorita_Leaf =
+        It_PKind_Terminate,              ///< Chikorita's Leaf
+    /* 0xC0 */ It_Kind_Kamex_HydroPump,  ///< Blastoise's Water
+    /* 0xC1 */ It_Kind_Matadogas_Gas1,   ///< Weezing's Gas
+    /* 0xC2 */ It_Kind_Matadogas_Gas2,   ///< Weezing's Gas
+    /* 0xC3 */ It_Kind_Lizardon_Flame1,  ///< Charizard's Breath
+    /* 0xC4 */ It_Kind_Lizardon_Flame2,  ///< Charizard's Breath
+    /* 0xC5 */ It_Kind_Lizardon_Flame3,  ///< Charizard's Breath
+    /* 0xC6 */ It_Kind_Lizardon_Flame4,  ///< Charizard's Breath
+    /* 0xC7 */ It_Kind_Unknown_Swarm,    ///< Mini-Unowns
+    /* 0xC8 */ It_Kind_Lugia_Aeroblast,  ///< Lugia's Aeroblast
+    /* 0xC9 */ It_Kind_Lugia_Aeroblast2, ///< Lugia's Aeroblast
+    /* 0xCA */ It_Kind_Lugia_Aeroblast3, ///< Lugia's Aeroblast
+    /* 0xCB */ It_Kind_Houou_SacredFire, ///< Ho-Oh's Flame
+    /* 0xCC */ It_Kind_Hitodeman_Star,   ///< Staryu's Star
+    /* 0xCD */ It_Kind_Lucky_Egg,        ///< Chansey's Healing Egg
+    /* 0xCE */ It_Kind_Hinoarashi_Flame, ///< Cyndaquil's Fire
+    /* 0xCF */ It_Kind_Pokemon_Unk,      ///< ???
 
     // MONSTERS 2
 

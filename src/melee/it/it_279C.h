@@ -43,7 +43,6 @@
 /* 27B564 */ void it_8027B564(Item_GObj*);
 /* 3F2310 */ extern struct sdata_ItemGXLink it_803F2310[47];
 /* 3F23CC */ extern struct ItemLogicTable it_803F23CC[47];
-/* 3F2ED0 */ extern ItemKind it_803F2ED0[22];
 /* 3F2F28 */ extern struct sdata_ItemGXLink it_803F2F28[118];
 /* 3F3100 */ extern struct ItemLogicTable it_803F3100[118];
 /* 3F4CA8 */ extern struct sdata_ItemGXLink it_803F4CA8[30];

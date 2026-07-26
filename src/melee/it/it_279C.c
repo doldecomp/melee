@@ -1006,19 +1006,15 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
     },
 };
 
-ItemKind it_803F2ED0[22] = {
+static ItemKind common_pokemon[22] = {
     // Common Pokemon
-    It_PKind_Tosakinto, It_PKind_Chicorita,
-    It_PKind_Kabigon,   It_PKind_Kamex,
-    It_PKind_Matadogas, It_PKind_Lizardon,
-    It_PKind_Sonans,    It_PKind_Hassam,
-    It_PKind_Unknown,   It_PKind_Kireihana,
-    It_PKind_Marumine,  It_PKind_Metamon,
-    It_PKind_Pippi,     It_PKind_Togepy,
-    It_PKind_Hitodeman, It_PKind_Lucky,
-    It_PKind_Porygon2,  It_PKind_Hinoarashi,
-    It_PKind_Maril,     It_PKind_Fushigibana,
-    It_PKind_Terminate, 0x00,
+    It_PKind_Tosakinto, It_PKind_Chicorita,   It_PKind_Kabigon,
+    It_PKind_Kamex,     It_PKind_Matadogas,   It_PKind_Lizardon,
+    It_PKind_Sonans,    It_PKind_Hassam,      It_PKind_Unknown,
+    It_PKind_Kireihana, It_PKind_Marumine,    It_PKind_Metamon,
+    It_PKind_Pippi,     It_PKind_Togepy,      It_PKind_Hitodeman,
+    It_PKind_Lucky,     It_PKind_Porygon2,    It_PKind_Hinoarashi,
+    It_PKind_Maril,     It_PKind_Fushigibana, It_PKind_Terminate,
 };
 
 /// Character-specific items
@@ -4218,8 +4214,9 @@ bool it_8027AB64(Item_GObj* item_gobj)
             spawn.kind = temp_r3 - It_PKind_Start;
         }
     } else if (gm_8018841C()) {
-        spawn.kind = (&it_803F2ED0 == NULL) ? It_PKind_Sonans
-                                            : it_8027A780(item, &it_803F2ED0);
+        spawn.kind = (&common_pokemon == NULL)
+                         ? It_PKind_Sonans
+                         : it_8027A780(item, &common_pokemon);
     } else if (gm_GetCurrentGameMode() == GM_OPENING_MV) {
         spawn.kind = it_8027AB64_SelectKind(item);
     } else {
