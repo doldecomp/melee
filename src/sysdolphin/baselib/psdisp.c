@@ -2005,6 +2005,8 @@ void psDispParticles(s32 arg0, u32 arg1)
                 Mtx temp_mtx;
                 GXTexWrapMode wrap_s;
                 GXTexWrapMode wrap_t;
+                f32 scale_s;
+                f32 scale_t;
                 u32 fmt;
                 u8** tex_table;
                 u32 width;
@@ -2122,21 +2124,23 @@ void psDispParticles(s32 arg0, u32 arg1)
                         image = NULL;
                         tlut = NULL;
                         if (pp->kind & MirrorS) {
+                            scale_s = 2.0f;
                             wrap_s = GX_MIRROR;
                         } else {
+                            scale_s = 1.0f;
                             wrap_s = GX_CLAMP;
                         }
                         if (pp->kind & MirrorT) {
+                            scale_t = 2.0f;
                             wrap_t = GX_MIRROR;
                         } else {
+                            scale_t = 1.0f;
                             wrap_t = GX_CLAMP;
                         }
                         if ((pp->kind & (MirrorS | MirrorT)) != sp7A8) {
                             sp7A8 = pp->kind & (MirrorS | MirrorT);
                             sp7B0 = NULL;
-                            PSMTXScale(
-                                temp_mtx, (pp->kind & MirrorS) ? 2.0f : 1.0f,
-                                (pp->kind & MirrorT) ? 2.0f : 1.0f, 1.0f);
+                            PSMTXScale(temp_mtx, scale_s, scale_t, 1.0f);
                             if (pp->kind & MirrorT) {
                                 sp700 = 1.0f;
                                 temp_mtx[1][3] = sp700;
