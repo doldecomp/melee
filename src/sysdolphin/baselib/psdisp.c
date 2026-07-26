@@ -15,8 +15,6 @@
 #include <math_ppc.h>
 #include <string.h>
 
-extern float __fabsf(float);
-#define fabsf __fabsf
 #include <dolphin/gx.h>
 
 typedef struct {
@@ -1147,6 +1145,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
 
 static inline void psDispSub(HSD_Particle* pp, u8* texform)
 {
+    f32 abs_angle;
     psdisp_Cache* cache = &HSD_PSDisp_804D0FC0;
     Vec3 right;
     Vec3 up;
@@ -1238,10 +1237,14 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
                 (cache->projected_y.x * pp->vel.x +
                  cache->projected_y.y * pp->vel.y);
         }
-        if (fabsf(y) < 0.00001f) {
-            angle = (x >= 0.0f) ? 1.5707964f : -1.5707964f;
-        } else {
-            angle = atan2f(x, y);
+        {
+            f32 abs_y = y;
+            *(s32*) &abs_y &= 0x7FFFFFFF;
+            if (abs_y < 0.00001) {
+                angle = (x >= 0.0f) ? 1.5707964f : -1.5707964f;
+            } else {
+                angle = atan2f(x, y);
+            }
         }
         if (pp->kind & DirVec) {
             angle += pp->rotate;
@@ -1249,8 +1252,11 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
     } else {
         angle = pp->rotate;
     }
-    if (fabsf(angle) > 0.01f) {
+    abs_angle = angle;
+    *(s32*) &abs_angle &= 0x7FFFFFFF;
+    if (abs_angle > 0.01) {
         Vec3 axis;
+
         f32 t1;
         f32 t2;
         f32 t3;
@@ -1462,6 +1468,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
     f32 bx;
     f32 by;
     f32 angle;
+    f32 abs_angle;
 
     psUpdateAppSRT(pp, cache);
     PSMTXCopy((MtxPtr) &pp->appsrt->ssx, draw_mtx);
@@ -1570,10 +1577,14 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
                 vf2 = f20 * vz + (f17 * vx + f18 * vy);
             }
         }
-        if (fabsf(vf2) < 0.00001f) {
-            angle = (-vf1 >= 0.0) ? 1.5707964f : -1.5707964f;
-        } else {
-            angle = atan2f(-vf1, vf2);
+        {
+            f32 abs_v = vf2;
+            *(s32*) &abs_v &= 0x7FFFFFFF;
+            if (abs_v < 0.00001) {
+                angle = (-vf1 >= 0.0) ? 1.5707964f : -1.5707964f;
+            } else {
+                angle = atan2f(-vf1, vf2);
+            }
         }
         if (pp->kind & DirVec) {
             angle += pp->rotate;
@@ -1581,7 +1592,9 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
     } else {
         angle = pp->rotate;
     }
-    if (fabsf(angle) > 0.01f) {
+    abs_angle = angle;
+    *(s32*) &abs_angle &= 0x7FFFFFFF;
+    if (abs_angle > 0.01) {
         f32 c = cosf(angle);
         f32 s = sinf(angle);
         f32 old_ax = ax;
