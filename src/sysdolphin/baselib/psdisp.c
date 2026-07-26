@@ -1023,9 +1023,9 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                         }
                         t = *(f32*) &it[4];
                         it += 8;
-                        alpha = ((s32) (255.0f - t * trail_alpha) < 0)
-                                    ? 0
-                                    : (s32) (255.0f - t * trail_alpha);
+                        alpha = ((s32) (255.0f - t * trail_alpha) >= 0)
+                                    ? (s32) (255.0f - t * trail_alpha)
+                                    : 0;
                         if (alpha > 0xFF) {
                             alpha = 0xFF;
                         }
@@ -1447,7 +1447,6 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
                                    psdisp_Cache* cache, f64 zero)
 {
     GXColor draw_color;
-    GXColor tail_color;
     Vec3 cur_pos;
     Vec3 prev_pos;
     Mtx draw_mtx;
@@ -1589,8 +1588,6 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
     if (pp->kind & Trail) {
         getClrTrail(pp, &draw_color);
         if (texform == NULL) {
-            tail_color = draw_color;
-            tail_color.a = (u8) ((f32) tail_color.a * pp->trail);
             if (pp->kind & DispTexture) {
                 setVtxDesc(2);
                 GXBegin(GX_QUADS, GX_VTXFMT2, 4U);
@@ -1599,28 +1596,27 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
                 GXBegin(GX_QUADS, GX_VTXFMT3, 4U);
             }
             {
-                f32 vx = prev_pos.x - ax;
-                f32 vy = prev_pos.y - ay;
+                f32 vx = -ax + prev_pos.x;
+                f32 vy = -ay + prev_pos.y;
                 GXWGFifo.f32 = vx;
                 GXWGFifo.f32 = vy;
                 GXWGFifo.f32 = prev_pos.z;
             }
             {
-                u8 r = tail_color.r;
-                u8 g = tail_color.g;
-                u8 b = tail_color.b;
-                u8 a = tail_color.a;
+                u8 r = draw_color.r;
+                u8 g = draw_color.g;
+                u8 b = draw_color.b;
                 GXWGFifo.u8 = r;
                 GXWGFifo.u8 = g;
                 GXWGFifo.u8 = b;
-                GXWGFifo.u8 = a;
+                GXWGFifo.u8 = (u8) ((f32) draw_color.a * pp->trail);
             }
             if (pp->kind & DispTexture) {
                 GXWGFifo.u8 = (pp->kind >> 16) & 0xC;
             }
             {
-                f32 vx = cur_pos.x - bx;
-                f32 vy = cur_pos.y - by;
+                f32 vx = -bx + cur_pos.x;
+                f32 vy = -by + cur_pos.y;
                 GXWGFifo.f32 = vx;
                 GXWGFifo.f32 = vy;
                 GXWGFifo.f32 = cur_pos.z;
@@ -1639,8 +1635,8 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
                 GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 1;
             }
             {
-                f32 vx = cur_pos.x + ax;
-                f32 vy = cur_pos.y + ay;
+                f32 vx = ax + cur_pos.x;
+                f32 vy = ay + cur_pos.y;
                 GXWGFifo.f32 = vx;
                 GXWGFifo.f32 = vy;
                 GXWGFifo.f32 = cur_pos.z;
@@ -1659,21 +1655,20 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
                 GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 2;
             }
             {
-                f32 vx = prev_pos.x + bx;
-                f32 vy = prev_pos.y + by;
+                f32 vx = bx + prev_pos.x;
+                f32 vy = by + prev_pos.y;
                 GXWGFifo.f32 = vx;
                 GXWGFifo.f32 = vy;
                 GXWGFifo.f32 = prev_pos.z;
             }
             {
-                u8 r = tail_color.r;
-                u8 g = tail_color.g;
-                u8 b = tail_color.b;
-                u8 a = tail_color.a;
+                u8 r = draw_color.r;
+                u8 g = draw_color.g;
+                u8 b = draw_color.b;
                 GXWGFifo.u8 = r;
                 GXWGFifo.u8 = g;
                 GXWGFifo.u8 = b;
-                GXWGFifo.u8 = a;
+                GXWGFifo.u8 = (u8) ((f32) draw_color.a * pp->trail);
             }
             if (pp->kind & DispTexture) {
                 GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 3;
@@ -1728,9 +1723,9 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
                         }
                         t = *(f32*) &it[4];
                         it += 8;
-                        alpha = ((s32) (255.0f - t * trail_alpha) < 0)
-                                    ? 0
-                                    : (s32) (255.0f - t * trail_alpha);
+                        alpha = ((s32) (255.0f - t * trail_alpha) >= 0)
+                                    ? (s32) (255.0f - t * trail_alpha)
+                                    : 0;
                         if (alpha > 0xFF) {
                             alpha = 0xFF;
                         }
@@ -1753,7 +1748,55 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
                 }
             }
         }
-    } else if (texform != NULL) {
+    } else if (texform == NULL) {
+        if (pp->kind & DispTexture) {
+            setVtxDesc(0);
+            GXBegin(GX_QUADS, GX_VTXFMT0, 4U);
+        } else {
+            setVtxDesc(1);
+            GXBegin(GX_QUADS, GX_VTXFMT1, 4U);
+        }
+        {
+            f32 vx = -ax + cur_pos.x;
+            f32 vy = -ay + cur_pos.y;
+            GXWGFifo.f32 = vx;
+            GXWGFifo.f32 = vy;
+            GXWGFifo.f32 = cur_pos.z;
+        }
+        if (pp->kind & DispTexture) {
+            GXWGFifo.u8 = (pp->kind >> 16) & 0xC;
+        }
+        {
+            f32 vx = -bx + cur_pos.x;
+            f32 vy = -by + cur_pos.y;
+            GXWGFifo.f32 = vx;
+            GXWGFifo.f32 = vy;
+            GXWGFifo.f32 = cur_pos.z;
+        }
+        if (pp->kind & DispTexture) {
+            GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 1;
+        }
+        {
+            f32 vx = ax + cur_pos.x;
+            f32 vy = ay + cur_pos.y;
+            GXWGFifo.f32 = vx;
+            GXWGFifo.f32 = vy;
+            GXWGFifo.f32 = cur_pos.z;
+        }
+        if (pp->kind & DispTexture) {
+            GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 2;
+        }
+        {
+            f32 vx = bx + cur_pos.x;
+            f32 vy = by + cur_pos.y;
+            GXWGFifo.f32 = vx;
+            GXWGFifo.f32 = vy;
+            GXWGFifo.f32 = cur_pos.z;
+        }
+        if (pp->kind & DispTexture) {
+            GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 3;
+        }
+    } else {
         u8* it = texform;
         u32 primitive_count = *(u32*) it;
         it += sizeof(u32);
@@ -1791,54 +1834,6 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
                     GXWGFifo.f32 = t;
                 }
             }
-        }
-    } else {
-        if (pp->kind & DispTexture) {
-            setVtxDesc(0);
-            GXBegin(GX_QUADS, GX_VTXFMT0, 4U);
-        } else {
-            setVtxDesc(1);
-            GXBegin(GX_QUADS, GX_VTXFMT1, 4U);
-        }
-        {
-            f32 vx = cur_pos.x - ax;
-            f32 vy = cur_pos.y - ay;
-            GXWGFifo.f32 = vx;
-            GXWGFifo.f32 = vy;
-            GXWGFifo.f32 = cur_pos.z;
-        }
-        if (pp->kind & DispTexture) {
-            GXWGFifo.u8 = (pp->kind >> 16) & 0xC;
-        }
-        {
-            f32 vx = cur_pos.x - bx;
-            f32 vy = cur_pos.y - by;
-            GXWGFifo.f32 = vx;
-            GXWGFifo.f32 = vy;
-            GXWGFifo.f32 = cur_pos.z;
-        }
-        if (pp->kind & DispTexture) {
-            GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 1;
-        }
-        {
-            f32 vx = cur_pos.x + ax;
-            f32 vy = cur_pos.y + ay;
-            GXWGFifo.f32 = vx;
-            GXWGFifo.f32 = vy;
-            GXWGFifo.f32 = cur_pos.z;
-        }
-        if (pp->kind & DispTexture) {
-            GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 2;
-        }
-        {
-            f32 vx = cur_pos.x + bx;
-            f32 vy = cur_pos.y + by;
-            GXWGFifo.f32 = vx;
-            GXWGFifo.f32 = vy;
-            GXWGFifo.f32 = cur_pos.z;
-        }
-        if (pp->kind & DispTexture) {
-            GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 3;
         }
     }
 }
