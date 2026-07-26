@@ -1157,8 +1157,14 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
     Vec3 right;
     Vec3 up;
     f32 angle;
+    f32 x;
+    f32 y;
+    f32 z;
     Mtx mtx;
 
+    x = pp->pos.x;
+    y = pp->pos.y;
+    z = pp->pos.z;
     if (texform != NULL) {
         right.x = cache->inverse_view_mtx[0][0] * pp->size;
         right.y = cache->inverse_view_mtx[1][0] * pp->size;
@@ -1168,10 +1174,10 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
         up.z = -cache->inverse_view_mtx[2][1] * pp->size;
     } else {
         right.x = HSD_PSDisp_804D7914 * pp->size;
-        right.y = HSD_PSDisp_804D791C * pp->size;
-        right.z = HSD_PSDisp_804D7924 * pp->size;
         up.x = HSD_PSDisp_804D7918 * pp->size;
+        right.y = HSD_PSDisp_804D791C * pp->size;
         up.y = HSD_PSDisp_804D7920 * pp->size;
+        right.z = HSD_PSDisp_804D7924 * pp->size;
         up.z = HSD_PSDisp_804D7928 * pp->size;
     }
     if ((pp->kind & Trail) || (pp->kind & DirVec)) {
@@ -1291,8 +1297,8 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
         up.y = mtx[1][2] * up.z + t2;
         up.z = mtx[2][2] * up.z + t4;
     }
-    psDispSubMakePolygon(pp, texform, pp->pos.x, pp->pos.y, pp->pos.z, right.x,
-                         right.y, right.z, up.x, up.y, up.z);
+    psDispSubMakePolygon(pp, texform, x, y, z, right.x, right.y, right.z, up.x,
+                         up.y, up.z);
 }
 
 static inline void psUpdateAppSRT(HSD_Particle* pp, psdisp_Cache* cache)
