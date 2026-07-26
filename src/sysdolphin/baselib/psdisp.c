@@ -1612,6 +1612,59 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
     }
 }
 
+static inline void psComposePerspectiveRow(f32* dst, const f32* row,
+                                           const f32* view_w, f32 scale,
+                                           f32 offset)
+{
+    dst[0] = scale * row[0] + offset * view_w[0];
+    dst[1] = scale * row[1] + offset * view_w[1];
+    dst[2] = scale * row[2] + offset * view_w[2];
+    dst[3] = scale * row[3] + offset * view_w[3];
+}
+
+static inline void psComposeOrthographicRow(f32* dst, const f32* row,
+                                            f32 scale, f32 offset)
+{
+    dst[0] = scale * row[0] + offset;
+    dst[1] = scale * row[1] + offset;
+    dst[2] = scale * row[2] + offset;
+    dst[3] = scale * row[3] + offset;
+}
+
+static inline void psUpdateBillboardAxes(const f32* inv_view)
+{
+    f32 right_x = inv_view[0xC];
+    f32 up_x = inv_view[0xD];
+    f32 right_y = inv_view[0x10];
+    f32 up_y = inv_view[0x11];
+    f32 right_z = inv_view[0x14];
+    f32 up_z = inv_view[0x15];
+
+    HSD_PSDisp_804D7914 = right_x + up_x;
+    HSD_PSDisp_804D7918 = right_x - up_x;
+    HSD_PSDisp_804D791C = right_y + up_y;
+    HSD_PSDisp_804D7920 = right_y - up_y;
+    HSD_PSDisp_804D7924 = right_z + up_z;
+    HSD_PSDisp_804D7928 = right_z - up_z;
+}
+
+static inline void psUpdateProjectionCache(f32* cache, f32 perspective)
+{
+    GXGetProjectionv(&cache[0x18]);
+    if (cache[0x18] == perspective) {
+        psComposePerspectiveRow(&cache[0x1F], &cache[0], &cache[8],
+                                cache[0x19], cache[0x1A]);
+        psComposePerspectiveRow(&cache[0x23], &cache[4], &cache[8],
+                                cache[0x1B], cache[0x1C]);
+    } else {
+        psComposeOrthographicRow(&cache[0x1F], &cache[0], cache[0x19],
+                                 cache[0x1A]);
+        psComposeOrthographicRow(&cache[0x23], &cache[4], cache[0x1B],
+                                 cache[0x1C]);
+    }
+    psUpdateBillboardAxes(cache);
+}
+
 #pragma push
 #pragma inline_depth(3)
 void psDispParticles(s32 arg0, u32 arg1)
@@ -1786,40 +1839,7 @@ void psDispParticles(s32 arg0, u32 arg1)
                         HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(),
                                               (MtxPtr) cache);
                         PSMTXInverse((MtxPtr) cache, (MtxPtr) (cache + 0xC));
-                        GXGetProjectionv(&cache[0x18]);
-                        if (cache[0x18] == (f32) sp8B0) {
-                            cache[0x1F] = cache[0x19] * cache[0] +
-                                          cache[0x1A] * cache[8];
-                            cache[0x20] = cache[0x19] * cache[1] +
-                                          cache[0x1A] * cache[9];
-                            cache[0x21] = cache[0x19] * cache[2] +
-                                          cache[0x1A] * cache[10];
-                            cache[0x22] = cache[0x19] * cache[3] +
-                                          cache[0x1A] * cache[11];
-                            cache[0x23] = cache[0x1B] * cache[4] +
-                                          cache[0x1C] * cache[8];
-                            cache[0x24] = cache[0x1B] * cache[5] +
-                                          cache[0x1C] * cache[9];
-                            cache[0x25] = cache[0x1B] * cache[6] +
-                                          cache[0x1C] * cache[10];
-                            cache[0x26] = cache[0x1B] * cache[7] +
-                                          cache[0x1C] * cache[11];
-                        } else {
-                            cache[0x1F] = cache[0x19] * cache[0] + cache[0x1A];
-                            cache[0x20] = cache[0x19] * cache[1] + cache[0x1A];
-                            cache[0x21] = cache[0x19] * cache[2] + cache[0x1A];
-                            cache[0x22] = cache[0x19] * cache[3] + cache[0x1A];
-                            cache[0x23] = cache[0x1B] * cache[4] + cache[0x1C];
-                            cache[0x24] = cache[0x1B] * cache[5] + cache[0x1C];
-                            cache[0x25] = cache[0x1B] * cache[6] + cache[0x1C];
-                            cache[0x26] = cache[0x1B] * cache[7] + cache[0x1C];
-                        }
-                        HSD_PSDisp_804D7914 = cache[0xC] + cache[0xD];
-                        HSD_PSDisp_804D7918 = cache[0xC] - cache[0xD];
-                        HSD_PSDisp_804D791C = cache[0x10] + cache[0x11];
-                        HSD_PSDisp_804D7920 = cache[0x10] - cache[0x11];
-                        HSD_PSDisp_804D7924 = cache[0x14] + cache[0x15];
-                        HSD_PSDisp_804D7928 = cache[0x14] - cache[0x15];
+                        psUpdateProjectionCache(cache, (f32) sp8B0);
                         GXLoadPosMtxImm((MtxPtr) cache, 0);
                         sp72C = HSD_PSDisp_803B9628[0];
                         sp730 = HSD_PSDisp_803B9628[1];
