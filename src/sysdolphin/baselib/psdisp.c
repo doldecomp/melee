@@ -47,24 +47,15 @@ typedef struct {
 } psdisp_Projection;
 
 typedef struct {
-    f32 x;
-    f32 y;
-    f32 z;
-    f32 w;
-} psdisp_ProjectionRow;
-
-typedef struct {
     Mtx mtx;
 } psdisp_Mtx;
-
-typedef Vec3 Point3d;
 
 typedef struct {
     Mtx view_mtx;
     Mtx inverse_view_mtx;
     psdisp_Projection projection;
-    psdisp_ProjectionRow projected_x;
-    psdisp_ProjectionRow projected_y;
+    Vec4 projected_x;
+    Vec4 projected_y;
     u8 x9C_pad[0x10];
     HSD_Particle* particle_list[17];
 } psdisp_Cache;
@@ -1176,8 +1167,7 @@ static inline void psUpdateAppSRT(HSD_Particle* pp, psdisp_Cache* cache)
     if (pp->appsrt->frameNum != HSD_PSDisp_804D6380[0]) {
         if (pp->appsrt->status != 2) {
             HSD_MtxSRT(pp->appsrt->mmtx, &pp->appsrt->scale,
-                       (Point3d*) &pp->appsrt->rot, &pp->appsrt->translate,
-                       NULL);
+                       (Vec3*) &pp->appsrt->rot, &pp->appsrt->translate, NULL);
         }
         if (pp->appsrt->status == 1) {
             pp->appsrt->status = 2;
@@ -1689,10 +1679,9 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
     }
 }
 
-static inline void psComposeProjectionRow(psdisp_ProjectionRow* dst,
-                                          const f32* row, const f32* view_w,
-                                          f32 scale, f32 offset,
-                                          bool perspective)
+static inline void psComposeProjectionRow(Vec4* dst, const f32* row,
+                                          const f32* view_w, f32 scale,
+                                          f32 offset, bool perspective)
 {
     if (perspective) {
         dst->x = scale * row[0] + offset * view_w[0];
