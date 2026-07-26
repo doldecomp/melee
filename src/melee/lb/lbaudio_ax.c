@@ -2282,7 +2282,7 @@ void lbAudioAx_80027168(void)
 
     if (lbl_804D6438 < lbl_804D6448 + lbl_804D6450) {
         OSReport("******** CAUTION ********\nFGM load size is over\n");
-        __assert(__FILE__, 0xDB3, "0");
+        HSD_ASSERT(0xDB3, 0);
     }
 
     slot = fn_80026650_noinline();

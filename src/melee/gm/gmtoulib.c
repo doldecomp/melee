@@ -11,6 +11,7 @@
 
 #include <placeholder.h>
 
+#include "baselib/debug.h"
 #include "baselib/fog.h"
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjobject.h"
@@ -2054,8 +2055,7 @@ int fn_8018F4A0(void)
         printf("This is impossible stage num from mnSelStageRandom() -> stage "
                "%d \n",
                temp_r3);
-        /// @todo No byte-matching HSD assert macro form.
-        __assert("gmtoulib.c", 0x53D, "0");
+        HSD_ASSERT(0x53D, 0);
     }
     return temp_r3;
 }

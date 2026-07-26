@@ -1382,21 +1382,11 @@ void pl_80040460(int slot, int arg1)
 void pl_8004049C(int player, ItemKind arg1)
 {
     int var_r30 = -1;
-    s32 var_r0;
 
-    RETURN_IF(player == 6);
+    RETURN_IF(player == Gm_Player_NumMax);
 
-    var_r0 = 0;
-    if ((player >= 0) && (player < 6)) {
-        var_r0 = 1;
-    }
-    if (var_r0 == 0) {
-        OSReport("zako ko player illegal ! :%d\n", player);
-        /// @todo Convert to @c HSD_ASSERT once a byte-matching form is
-        /// found.
-        __assert("plbonuslib.c", 1559,
-                 "0 <= player && player < Gm_Player_NumMax");
-    }
+    HSD_ASSERTREPORT(1559, 0 <= player && player < Gm_Player_NumMax,
+                     "zako ko player illegal ! :%d\n", player);
 
     switch (arg1) {
     case It_Kind_Old_Kuri:

@@ -167,4 +167,9 @@ typedef struct VsApproachData VsApproachData;
 
 typedef bool (*GmRouteCallback)(int);
 
+/// Number of player slots.
+typedef enum Gm_Player {
+    /* 0x06 */ Gm_Player_NumMax = 6,
+} Gm_Player;
+
 #endif

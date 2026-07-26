@@ -14,13 +14,22 @@
 
 static char lbFile_803BA508[] = __FILE__;
 
+/// This file passes its stored file name rather than a fresh @c __FILE__
+/// literal, so both assert macros are respelled around that array.
+#undef HSD_ASSERT
+#define HSD_ASSERT(line, cond)                                                \
+    ((cond) ? ((void) 0) : __assert(lbFile_803BA508, line, #cond))
+#undef HSD_ASSERTREPORT
+#define HSD_ASSERTREPORT(line, cond, ...)                                     \
+    ((cond)                                                                   \
+         ? (void) 0                                                           \
+         : (OSReport(__VA_ARGS__), __assert(lbFile_803BA508, line, #cond)))
+
 static bool cancel;
 
 void lbFile_8001615C(int r3, int r4, void* r5, bool cancelflag)
 {
-    if (cancelflag) {
-        __assert(lbFile_803BA508, 71, "!cancelflag");
-    }
+    HSD_ASSERT(71, !cancelflag);
     cancel = true;
 }
 
@@ -58,7 +67,7 @@ char* lbFile_80016204(const char* basename)
         // no room for file extension?
         if (pos > MAX_BASENAME_LENGTH) {
             OSReport("Error : file name too long %s.", basename);
-            __assert(lbFile_803BA508, 0x99, "NULL");
+            HSD_ASSERT(0x99, NULL);
         }
         lbFile_80432058[pos++] = cur++[0];
     }
@@ -110,7 +119,7 @@ size_t lbFile_8001634C(s32 fileno)
 
     if (!DVDFastOpen(fileno, (DVDFileInfo*) &info)) {
         OSReport("Cannot open file no=%d.", fileno);
-        __assert(lbFile_803BA508, 0xD8, "0");
+        HSD_ASSERT(0xD8, 0);
     }
 
     length = info.length;
@@ -124,10 +133,8 @@ s32 lbFile_800163D8(const char* basename)
     s32 entry_num;
     char* filename = lbFile_80016204(basename);
     entry_num = DVDConvertPathToEntrynum(filename);
-    if (entry_num == -1) {
-        OSReport("file isn't exist %s = %d\n", filename, entry_num);
-        __assert(lbFile_803BA508, 0xEE, "entry_num != -1");
-    }
+    HSD_ASSERTREPORT(0xEE, entry_num != -1, "file isn't exist %s = %d\n",
+                     filename, entry_num);
     return lbFile_8001634C(entry_num);
 }
 
@@ -150,10 +157,8 @@ void lbFile_80016580(const char* basename, u32 src, u32* dest,
     s32 entry_num = DVDConvertPathToEntrynum(filename);
     PAD_STACK(4);
 
-    if (entry_num == -1) {
-        OSReport("file isn't exist %s = %d\n", filename, entry_num);
-        __assert(lbFile_803BA508, 0x11A, "entry_num != -1");
-    }
+    HSD_ASSERTREPORT(0x11A, entry_num != -1, "file isn't exist %s = %d\n",
+                     filename, entry_num);
 
     lbFile_800164A4(entry_num, src, dest, 1, callback, args);
 }
@@ -183,15 +188,10 @@ void lbFile_80016760(const char* basename, u32* src, u32* dest)
     qwer(0, basename, src, dest);
 }
 
-inline u32 func_800163D8_inline(const char* basename)
-{
-    return lbFile_800163D8(basename);
-}
-
 bool lbFile_800168A0(s32 arg0, const char* basename, u32* src, u32* dest)
 {
     if ((*src = (u32) lbDvd_8001819C(basename))) {
-        *dest = func_800163D8_inline(basename);
+        *dest = lbFile_800163D8(basename);
         return true;
     } else {
         cancel = false;
