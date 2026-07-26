@@ -1979,7 +1979,6 @@ void psDispParticles(s32 arg0, u32 arg1)
                 u8 alpha0;
                 u8 alpha1;
                 Mtx temp_mtx;
-                u32 wrap_bits;
                 GXTexWrapMode wrap_s;
                 GXTexWrapMode wrap_t;
 
@@ -2084,18 +2083,12 @@ void psDispParticles(s32 arg0, u32 arg1)
                         }
                     }
 
-                    if (sp7F0 != NULL) {
-                        HSD_PSFormGroup*** form_array =
-                            (HSD_PSFormGroup***) sp7F0;
-                        HSD_PSFormGroup** bank_entry = form_array[pp->bank];
-                        if (bank_entry != NULL) {
-                            form_group = bank_entry[pp->texGroup];
-                            if ((form_group != NULL) &&
-                                (pp->poseNum < form_group->num))
-                            {
-                                form = form_group->formTable[pp->poseNum];
-                            }
-                        }
+                    form_group =
+                        ((HSD_PSFormGroup***) sp7F0)[pp->bank][pp->texGroup];
+                    if (form_group != NULL && form_group->formTable != NULL) {
+                        form = form_group->formTable[pp->poseNum];
+                    } else {
+                        form = NULL;
                     }
 
                     if (pp->kind & DispTexture) {
@@ -2111,9 +2104,8 @@ void psDispParticles(s32 arg0, u32 arg1)
                         } else {
                             wrap_t = GX_CLAMP;
                         }
-                        wrap_bits = pp->kind & (MirrorS | MirrorT);
-                        if (wrap_bits != sp7A8) {
-                            sp7A8 = wrap_bits;
+                        if ((pp->kind & (MirrorS | MirrorT)) != sp7A8) {
+                            sp7A8 = pp->kind & (MirrorS | MirrorT);
                             sp7B0 = NULL;
                             PSMTXScale(
                                 temp_mtx, (pp->kind & MirrorS) ? 2.0f : 1.0f,
@@ -2127,14 +2119,8 @@ void psDispParticles(s32 arg0, u32 arg1)
                                               GX_TG_TEX0, GX_TEXMTX0, GX_FALSE,
                                               GX_PTIDENTITY);
                         }
-                        if (sp7F4 != NULL) {
-                            HSD_PSTexGroup*** tex_array =
-                                (HSD_PSTexGroup***) sp7F4;
-                            HSD_PSTexGroup** bank_tex = tex_array[pp->bank];
-                            if (bank_tex != NULL) {
-                                tex_group = bank_tex[pp->texGroup];
-                            }
-                        }
+                        tex_group = ((HSD_PSTexGroup***)
+                                          sp7F4)[pp->bank][pp->texGroup];
                         if (tex_group != NULL) {
                             image = tex_group->texTable[pp->poseNum];
                             if ((tex_group->fmt == GX_TF_C4) ||
