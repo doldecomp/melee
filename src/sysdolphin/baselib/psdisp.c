@@ -1730,332 +1730,331 @@ void psDispParticles(s32 arg0, u32 arg1)
                 GXTexWrapMode wrap_t;
 
                 if ((sp798 == 1) && !(pp->kind & TexEdge)) {
-                    prev_kind = pp->kind;
-                    pp = pp->next;
-                    continue;
+                    break;
                 }
-                if (pp->size < (f32) sp818) {
-                    prev_kind = pp->kind;
-                    pp = pp->next;
-                    continue;
-                }
-                if (sp7A0 != 0) {
-                    sp79C = NULL;
-                    HSD_PSDisp_804D790C = -1;
-                    sp7B0 = NULL;
-                    HSD_PSDisp_804D7910 = -1;
-                    HSD_PSDisp_804D7930 = -1;
-                    psSetupTevInvalidState();
-                    sp7A8 = (u32) -1;
-                    prev_kind &= 0xFEFFFFFF;
-                    sp7AC = (u32) -1;
-                    HSD_FogSet(NULL);
-                    HSD_PSDisp_804D7934.r = 0xFF;
-                    HSD_PSDisp_804D7934.g = 0xFF;
-                    HSD_PSDisp_804D7934.b = 0xFF;
-                    HSD_PSDisp_804D7934.a = 0xFF;
-                    HSD_PSDisp_804D7938.r = 0xFF;
-                    HSD_PSDisp_804D7938.g = 0xFF;
-                    HSD_PSDisp_804D7938.b = 0xFF;
-                    HSD_PSDisp_804D7938.a = 0xFF;
-                    sp6E0 = *(s32*) &HSD_PSDisp_804D7934;
-                    GXSetChanMatColor(GX_COLOR0A0, *(GXColor*) sp7E4);
-                    sp6DC = *(s32*) &HSD_PSDisp_804D7938;
-                    GXSetChanAmbColor(GX_COLOR0A0, *(GXColor*) sp7E0);
-                    psSetupTevInvalidState();
-                    psSetupTevCommon();
-                    HSD_PSDisp_804D793C.r = 0xFF;
-                    HSD_PSDisp_804D793C.g = 0xFF;
-                    HSD_PSDisp_804D793C.b = 0xFF;
-                    HSD_PSDisp_804D793C.a = 0xFF;
-                    HSD_PSDisp_804D7940.r = 0;
-                    HSD_PSDisp_804D7940.g = 0;
-                    HSD_PSDisp_804D7940.b = 0;
-                    HSD_PSDisp_804D7940.a = 0;
-                    HSD_PSDisp_804D7944.r = 0xFF;
-                    HSD_PSDisp_804D7944.g = 0xFF;
-                    HSD_PSDisp_804D7944.b = 0xFF;
-                    HSD_PSDisp_804D7944.a = 0xFF;
-                    sp6D8 = *(s32*) &HSD_PSDisp_804D793C;
-                    GXSetTevColor(GX_TEVREG0, *(GXColor*) sp7DC);
-                    sp6D4 = *(s32*) &HSD_PSDisp_804D7940;
-                    GXSetTevColor(GX_TEVREG1, *(GXColor*) sp7D8);
-                    sp6D0 = *(s32*) &HSD_PSDisp_804D7944;
-                    GXSetTevColor(GX_TEVREG2, *(GXColor*) sp7D4);
-                    HSD_PSDisp_804D792C = -1;
-                    GXSetZCompLoc(GX_FALSE);
-                    HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(),
-                                          (MtxPtr) cache);
-                    PSMTXInverse((MtxPtr) cache, (MtxPtr) (cache + 0xC));
-                    GXGetProjectionv(&cache[0x18]);
-                    if (cache[0x18] == (f32) sp8B0) {
-                        cache[0x1F] =
-                            cache[0x19] * cache[0] + cache[0x1A] * cache[8];
-                        cache[0x20] =
-                            cache[0x19] * cache[1] + cache[0x1A] * cache[9];
-                        cache[0x21] =
-                            cache[0x19] * cache[2] + cache[0x1A] * cache[10];
-                        cache[0x22] =
-                            cache[0x19] * cache[3] + cache[0x1A] * cache[11];
-                        cache[0x23] =
-                            cache[0x1B] * cache[4] + cache[0x1C] * cache[8];
-                        cache[0x24] =
-                            cache[0x1B] * cache[5] + cache[0x1C] * cache[9];
-                        cache[0x25] =
-                            cache[0x1B] * cache[6] + cache[0x1C] * cache[10];
-                        cache[0x26] =
-                            cache[0x1B] * cache[7] + cache[0x1C] * cache[11];
-                    } else {
-                        cache[0x1F] = cache[0x19] * cache[0] + cache[0x1A];
-                        cache[0x20] = cache[0x19] * cache[1] + cache[0x1A];
-                        cache[0x21] = cache[0x19] * cache[2] + cache[0x1A];
-                        cache[0x22] = cache[0x19] * cache[3] + cache[0x1A];
-                        cache[0x23] = cache[0x1B] * cache[4] + cache[0x1C];
-                        cache[0x24] = cache[0x1B] * cache[5] + cache[0x1C];
-                        cache[0x25] = cache[0x1B] * cache[6] + cache[0x1C];
-                        cache[0x26] = cache[0x1B] * cache[7] + cache[0x1C];
-                    }
-                    HSD_PSDisp_804D7914 = cache[0xC] + cache[0xD];
-                    HSD_PSDisp_804D7918 = cache[0xC] - cache[0xD];
-                    HSD_PSDisp_804D791C = cache[0x10] + cache[0x11];
-                    HSD_PSDisp_804D7920 = cache[0x10] - cache[0x11];
-                    HSD_PSDisp_804D7924 = cache[0x14] + cache[0x15];
-                    HSD_PSDisp_804D7928 = cache[0x14] - cache[0x15];
-                    GXLoadPosMtxImm((MtxPtr) cache, 0);
-                    sp72C = HSD_PSDisp_803B9628[0];
-                    sp730 = HSD_PSDisp_803B9628[1];
-                    sp734 = HSD_PSDisp_803B9628[2];
-                    sp738 = HSD_PSDisp_803B9628[3];
-                    sp73C = HSD_PSDisp_803B9628[4];
-                    sp740 = HSD_PSDisp_803B9628[5];
-                    sp744 = HSD_PSDisp_803B9628[6];
-                    sp748 = HSD_PSDisp_803B9628[7];
-                    sp74C = HSD_PSDisp_803B9628[8];
-                    sp750 = HSD_PSDisp_803B9628[9];
-                    sp754 = HSD_PSDisp_803B9628[10];
-                    sp758 = HSD_PSDisp_803B9628[11];
-                    GXLoadPosMtxImm((MtxPtr) &sp72C, 3);
-                    HSD_PSDisp_804D7948 = 3;
-                    psSetCurrentMtx(0);
-                    GXEnableTexOffsets(GX_TEXCOORD0, GX_TRUE, GX_TRUE);
-                    GXSetCullMode(GX_CULL_BACK);
-                    GXSetArray(GX_VA_TEX0,
-                               (void*) ((char*) &HSD_PSDisp_8040C300 + 0x40),
-                               2U);
-                    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_TEX_ST, GX_RGBA6,
-                                    0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX0, GX_TEX_ST,
-                                    GX_RGB565, 0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT1, GX_VA_POS, GX_TEX_ST, GX_RGBA6,
-                                    0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT2, GX_VA_POS, GX_TEX_ST, GX_RGBA6,
-                                    0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT2, GX_VA_CLR0, GX_TEX_ST,
-                                    GX_RGBA8, 0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT2, GX_VA_TEX0, GX_TEX_ST,
-                                    GX_RGB565, 0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT3, GX_VA_POS, GX_TEX_ST, GX_RGBA6,
-                                    0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT3, GX_VA_CLR0, GX_TEX_ST,
-                                    GX_RGBA8, 0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT4, GX_VA_POS, GX_TEX_ST, GX_RGBA6,
-                                    0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT4, GX_VA_TEX0, GX_TEX_ST,
-                                    GX_RGBA6, 0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT5, GX_VA_POS, GX_TEX_ST, GX_RGBA6,
-                                    0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT5, GX_VA_CLR0, GX_TEX_ST,
-                                    GX_RGBA8, 0U);
-                    GXSetVtxAttrFmt(GX_VTXFMT5, GX_VA_TEX0, GX_TEX_ST,
-                                    GX_RGBA6, 0U);
-                    sp7A0 = 0;
-                }
-
-                blend_mode = (pp->kind >> 0x16U) & 3;
-                setBlendMode(blend_mode);
-
-                if (pp->aCmpCount != 0) {
-                    s32 scale = (65536 * pp->aCmpRemain) / pp->aCmpCount;
-                    alpha0 =
-                        ((pp->aCmpParam1Target << 16) +
-                         scale * (pp->aCmpParam1 - pp->aCmpParam1Target)) >>
-                        16;
-                    alpha1 =
-                        ((pp->aCmpParam2Target << 16) +
-                         scale * (pp->aCmpParam2 - pp->aCmpParam2Target)) >>
-                        16;
-                } else {
-                    alpha0 = pp->aCmpParam1;
-                    alpha1 = pp->aCmpParam2;
-                }
-                if ((var_r16 != pp->aCmpMode) || (sp7A5 != alpha0) ||
-                    (sp7A4 != alpha1))
-                {
-                    sp7A5 = alpha0;
-                    var_r16 = pp->aCmpMode;
-                    sp7A4 = alpha1;
-                    GXSetAlphaCompare((pp->aCmpMode >> 3) & 7, sp7A5,
-                                      (pp->aCmpMode >> 6) & 3,
-                                      pp->aCmpMode & 7, sp7A4);
-                }
-
-                psSetupTev((u32*) pp);
-                setupChanCtrl(pp);
-                setupChanReg(pp);
-                setupTevReg(pp);
-                if (sp7AC != (pp->kind & TexEdge)) {
-                    sp7AC = pp->kind & TexEdge;
-                    if (sp7AC != 0) {
-                        GXSetZMode(GX_TRUE, GX_LEQUAL, GX_TRUE);
-                    } else {
-                        GXSetZMode(GX_TRUE, GX_LEQUAL, GX_FALSE);
-                    }
-                }
-                if (((pp->kind ^ prev_kind) & DispFog) != 0) {
-                    if (pp->kind & DispFog) {
-                        HSD_FogSet(HSD_PSDisp_804D7908);
-                    } else {
-                        HSD_FogSet(NULL);
-                    }
-                }
-
-                if (sp7F0 != NULL) {
-                    HSD_PSFormGroup*** form_array = (HSD_PSFormGroup***) sp7F0;
-                    HSD_PSFormGroup** bank_entry = form_array[pp->bank];
-                    if (bank_entry != NULL) {
-                        form_group = bank_entry[pp->texGroup];
-                        if ((form_group != NULL) &&
-                            (pp->poseNum < form_group->num))
-                        {
-                            form = form_group->formTable[pp->poseNum];
-                        }
-                    }
-                }
-
-                if (pp->kind & DispTexture) {
-                    image = NULL;
-                    tlut = NULL;
-                    if (pp->kind & MirrorS) {
-                        wrap_s = GX_MIRROR;
-                    } else {
-                        wrap_s = GX_CLAMP;
-                    }
-                    if (pp->kind & MirrorT) {
-                        wrap_t = GX_MIRROR;
-                    } else {
-                        wrap_t = GX_CLAMP;
-                    }
-                    wrap_bits = pp->kind & (MirrorS | MirrorT);
-                    if (wrap_bits != sp7A8) {
-                        sp7A8 = wrap_bits;
+                if (pp->size >= (f32) sp818) {
+                    if (sp7A0 != 0) {
+                        sp79C = NULL;
+                        HSD_PSDisp_804D790C = -1;
                         sp7B0 = NULL;
-                        PSMTXScale(temp_mtx,
-                                   (pp->kind & MirrorS) ? 2.0f : 1.0f,
-                                   (pp->kind & MirrorT) ? 2.0f : 1.0f, 1.0f);
-                        if (pp->kind & MirrorT) {
-                            sp700 = 1.0f;
-                            temp_mtx[1][3] = sp700;
-                        }
-                        GXLoadTexMtxImm(temp_mtx, GX_TEXMTX0, GX_MTX2x4);
-                        GXSetTexCoordGen2(GX_TEXCOORD0, GX_TG_MTX2x4,
-                                          GX_TG_TEX0, GX_TEXMTX0, GX_FALSE,
-                                          GX_PTIDENTITY);
-                    }
-                    if (sp7F4 != NULL) {
-                        HSD_PSTexGroup*** tex_array =
-                            (HSD_PSTexGroup***) sp7F4;
-                        HSD_PSTexGroup** bank_tex = tex_array[pp->bank];
-                        if (bank_tex != NULL) {
-                            tex_group = bank_tex[pp->texGroup];
-                        }
-                    }
-                    if (tex_group != NULL) {
-                        image = tex_group->texTable[pp->poseNum];
-                        if ((tex_group->fmt == GX_TF_C4) ||
-                            (tex_group->fmt == GX_TF_C8))
-                        {
-                            void** palettes =
-                                (void**) &tex_group->texTable[tex_group->num];
-                            if (pp->palNum != 0xFF) {
-                                tlut = palettes[pp->palNum];
-                            } else if (!(pp->kind & ComTLUT)) {
-                                tlut = palettes[pp->poseNum];
-                            } else {
-                                tlut = palettes[0];
-                            }
-                            if (tlut != sp79C) {
-                                sp79C = tlut;
-                                if (tex_group->fmt == GX_TF_C4) {
-                                    sp790 = 0x10;
-                                } else {
-                                    sp790 = 0x100;
-                                }
-                                sp788 = tex_group->tlutfmt;
-                                if (tlut != NULL) {
-                                    GXInitTlutObj(&sp71C, tlut, sp788, sp790);
-                                    GXLoadTlut(&sp71C, GX_TLUT0);
-                                }
-                                sp7B0 = NULL;
-                            }
-                        }
-                    }
-                    if ((image != sp7B0) && (image != NULL)) {
-                        sp7B0 = image;
-                        switch (tex_group->fmt) {
-                        case GX_TF_C4:
-                        case GX_TF_C8:
-                            GXInitTexObjCI(&sp764, image, tex_group->width,
-                                           tex_group->height, tex_group->fmt,
-                                           wrap_s, wrap_t, GX_FALSE, GX_TLUT0);
-                            break;
-                        case GX_TF_I4:
-                        case GX_TF_I8:
-                        case GX_TF_IA4:
-                        case GX_TF_IA8:
-                        case GX_TF_RGB565:
-                        case GX_TF_RGB5A3:
-                        case GX_TF_RGBA8:
-                        case GX_TF_CMPR:
-                            GXInitTexObj(&sp764, image, tex_group->width,
-                                         tex_group->height, tex_group->fmt,
-                                         wrap_s, wrap_t, GX_FALSE);
-                            break;
-                        default:
-                            __assert((char*) &HSD_PSDisp_8040C300 + 0x94,
-                                     0x8AAU, "0");
-                            break;
-                        }
-                        var_r15 = pp->kind & TexInterpNear;
-                        GXInitTexObjLOD(
-                            &sp764, (var_r15 != 0) ? GX_NEAR : GX_LINEAR,
-                            (var_r15 != 0) ? GX_NEAR : GX_LINEAR, 0.0f, 0.0f,
-                            0.0f, GX_FALSE, GX_FALSE, GX_ANISO_1);
-                        GXLoadTexObj(&sp764, GX_TEXMAP0);
-                    }
-                    if ((pp->kind & TexInterpNear) != (u32) var_r15) {
-                        var_r15 = pp->kind & TexInterpNear;
-                        GXInitTexObjLOD(
-                            &sp764, (var_r15 != 0) ? GX_NEAR : GX_LINEAR,
-                            (var_r15 != 0) ? GX_NEAR : GX_LINEAR, 0.0f, 0.0f,
-                            0.0f, GX_FALSE, GX_FALSE, GX_ANISO_1);
-                        GXLoadTexObj(&sp764, GX_TEXMAP0);
-                    }
-                }
-
-                if (pp->kind & DispPoint) {
-                    if (pp->appsrt != NULL) {
-                        psDispSubAPPSRTPoint(pp);
-                    } else {
-                        if (pp->kind & Trail) {
-                            pp = psDispSubPointTrail(pp);
+                        HSD_PSDisp_804D7910 = -1;
+                        HSD_PSDisp_804D7930 = -1;
+                        psSetupTevInvalidState();
+                        sp7A8 = (u32) -1;
+                        prev_kind &= 0xFEFFFFFF;
+                        sp7AC = (u32) -1;
+                        HSD_FogSet(NULL);
+                        HSD_PSDisp_804D7934.r = 0xFF;
+                        HSD_PSDisp_804D7934.g = 0xFF;
+                        HSD_PSDisp_804D7934.b = 0xFF;
+                        HSD_PSDisp_804D7934.a = 0xFF;
+                        HSD_PSDisp_804D7938.r = 0xFF;
+                        HSD_PSDisp_804D7938.g = 0xFF;
+                        HSD_PSDisp_804D7938.b = 0xFF;
+                        HSD_PSDisp_804D7938.a = 0xFF;
+                        sp6E0 = *(s32*) &HSD_PSDisp_804D7934;
+                        GXSetChanMatColor(GX_COLOR0A0, *(GXColor*) sp7E4);
+                        sp6DC = *(s32*) &HSD_PSDisp_804D7938;
+                        GXSetChanAmbColor(GX_COLOR0A0, *(GXColor*) sp7E0);
+                        psSetupTevInvalidState();
+                        psSetupTevCommon();
+                        HSD_PSDisp_804D793C.r = 0xFF;
+                        HSD_PSDisp_804D793C.g = 0xFF;
+                        HSD_PSDisp_804D793C.b = 0xFF;
+                        HSD_PSDisp_804D793C.a = 0xFF;
+                        HSD_PSDisp_804D7940.r = 0;
+                        HSD_PSDisp_804D7940.g = 0;
+                        HSD_PSDisp_804D7940.b = 0;
+                        HSD_PSDisp_804D7940.a = 0;
+                        HSD_PSDisp_804D7944.r = 0xFF;
+                        HSD_PSDisp_804D7944.g = 0xFF;
+                        HSD_PSDisp_804D7944.b = 0xFF;
+                        HSD_PSDisp_804D7944.a = 0xFF;
+                        sp6D8 = *(s32*) &HSD_PSDisp_804D793C;
+                        GXSetTevColor(GX_TEVREG0, *(GXColor*) sp7DC);
+                        sp6D4 = *(s32*) &HSD_PSDisp_804D7940;
+                        GXSetTevColor(GX_TEVREG1, *(GXColor*) sp7D8);
+                        sp6D0 = *(s32*) &HSD_PSDisp_804D7944;
+                        GXSetTevColor(GX_TEVREG2, *(GXColor*) sp7D4);
+                        HSD_PSDisp_804D792C = -1;
+                        GXSetZCompLoc(GX_FALSE);
+                        HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(),
+                                              (MtxPtr) cache);
+                        PSMTXInverse((MtxPtr) cache, (MtxPtr) (cache + 0xC));
+                        GXGetProjectionv(&cache[0x18]);
+                        if (cache[0x18] == (f32) sp8B0) {
+                            cache[0x1F] = cache[0x19] * cache[0] +
+                                          cache[0x1A] * cache[8];
+                            cache[0x20] = cache[0x19] * cache[1] +
+                                          cache[0x1A] * cache[9];
+                            cache[0x21] = cache[0x19] * cache[2] +
+                                          cache[0x1A] * cache[10];
+                            cache[0x22] = cache[0x19] * cache[3] +
+                                          cache[0x1A] * cache[11];
+                            cache[0x23] = cache[0x1B] * cache[4] +
+                                          cache[0x1C] * cache[8];
+                            cache[0x24] = cache[0x1B] * cache[5] +
+                                          cache[0x1C] * cache[9];
+                            cache[0x25] = cache[0x1B] * cache[6] +
+                                          cache[0x1C] * cache[10];
+                            cache[0x26] = cache[0x1B] * cache[7] +
+                                          cache[0x1C] * cache[11];
                         } else {
-                            pp = psDispSubPoint(pp);
+                            cache[0x1F] = cache[0x19] * cache[0] + cache[0x1A];
+                            cache[0x20] = cache[0x19] * cache[1] + cache[0x1A];
+                            cache[0x21] = cache[0x19] * cache[2] + cache[0x1A];
+                            cache[0x22] = cache[0x19] * cache[3] + cache[0x1A];
+                            cache[0x23] = cache[0x1B] * cache[4] + cache[0x1C];
+                            cache[0x24] = cache[0x1B] * cache[5] + cache[0x1C];
+                            cache[0x25] = cache[0x1B] * cache[6] + cache[0x1C];
+                            cache[0x26] = cache[0x1B] * cache[7] + cache[0x1C];
+                        }
+                        HSD_PSDisp_804D7914 = cache[0xC] + cache[0xD];
+                        HSD_PSDisp_804D7918 = cache[0xC] - cache[0xD];
+                        HSD_PSDisp_804D791C = cache[0x10] + cache[0x11];
+                        HSD_PSDisp_804D7920 = cache[0x10] - cache[0x11];
+                        HSD_PSDisp_804D7924 = cache[0x14] + cache[0x15];
+                        HSD_PSDisp_804D7928 = cache[0x14] - cache[0x15];
+                        GXLoadPosMtxImm((MtxPtr) cache, 0);
+                        sp72C = HSD_PSDisp_803B9628[0];
+                        sp730 = HSD_PSDisp_803B9628[1];
+                        sp734 = HSD_PSDisp_803B9628[2];
+                        sp738 = HSD_PSDisp_803B9628[3];
+                        sp73C = HSD_PSDisp_803B9628[4];
+                        sp740 = HSD_PSDisp_803B9628[5];
+                        sp744 = HSD_PSDisp_803B9628[6];
+                        sp748 = HSD_PSDisp_803B9628[7];
+                        sp74C = HSD_PSDisp_803B9628[8];
+                        sp750 = HSD_PSDisp_803B9628[9];
+                        sp754 = HSD_PSDisp_803B9628[10];
+                        sp758 = HSD_PSDisp_803B9628[11];
+                        GXLoadPosMtxImm((MtxPtr) &sp72C, 3);
+                        HSD_PSDisp_804D7948 = 3;
+                        psSetCurrentMtx(0);
+                        GXEnableTexOffsets(GX_TEXCOORD0, GX_TRUE, GX_TRUE);
+                        GXSetCullMode(GX_CULL_BACK);
+                        GXSetArray(
+                            GX_VA_TEX0,
+                            (void*) ((char*) &HSD_PSDisp_8040C300 + 0x40), 2U);
+                        GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_TEX_ST,
+                                        GX_RGBA6, 0U);
+                        GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX0, GX_TEX_ST,
+                                        GX_RGB565, 0U);
+                        GXSetVtxAttrFmt(GX_VTXFMT1, GX_VA_POS, GX_TEX_ST,
+                                        GX_RGBA6, 0U);
+                        GXSetVtxAttrFmt(GX_VTXFMT2, GX_VA_POS, GX_TEX_ST,
+                                        GX_RGBA6, 0U);
+                        GXSetVtxAttrFmt(GX_VTXFMT2, GX_VA_CLR0, GX_TEX_ST,
+                                        GX_RGBA8, 0U);
+                        GXSetVtxAttrFmt(GX_VTXFMT2, GX_VA_TEX0, GX_TEX_ST,
+                                        GX_RGB565, 0U);
+                        GXSetVtxAttrFmt(GX_VTXFMT3, GX_VA_POS, GX_TEX_ST,
+                                        GX_RGBA6, 0U);
+                        GXSetVtxAttrFmt(GX_VTXFMT3, GX_VA_CLR0, GX_TEX_ST,
+                                        GX_RGBA8, 0U);
+                        GXSetVtxAttrFmt(GX_VTXFMT4, GX_VA_POS, GX_TEX_ST,
+                                        GX_RGBA6, 0U);
+                        GXSetVtxAttrFmt(GX_VTXFMT4, GX_VA_TEX0, GX_TEX_ST,
+                                        GX_RGBA6, 0U);
+                        GXSetVtxAttrFmt(GX_VTXFMT5, GX_VA_POS, GX_TEX_ST,
+                                        GX_RGBA6, 0U);
+                        GXSetVtxAttrFmt(GX_VTXFMT5, GX_VA_CLR0, GX_TEX_ST,
+                                        GX_RGBA8, 0U);
+                        GXSetVtxAttrFmt(GX_VTXFMT5, GX_VA_TEX0, GX_TEX_ST,
+                                        GX_RGBA6, 0U);
+                        sp7A0 = 0;
+                    }
+
+                    blend_mode = (pp->kind >> 0x16U) & 3;
+                    setBlendMode(blend_mode);
+
+                    if (pp->aCmpCount != 0) {
+                        s32 scale = (65536 * pp->aCmpRemain) / pp->aCmpCount;
+                        alpha0 = ((pp->aCmpParam1Target << 16) +
+                                  scale * (pp->aCmpParam1 -
+                                           pp->aCmpParam1Target)) >>
+                                 16;
+                        alpha1 = ((pp->aCmpParam2Target << 16) +
+                                  scale * (pp->aCmpParam2 -
+                                           pp->aCmpParam2Target)) >>
+                                 16;
+                    } else {
+                        alpha0 = pp->aCmpParam1;
+                        alpha1 = pp->aCmpParam2;
+                    }
+                    if ((var_r16 != pp->aCmpMode) || (sp7A5 != alpha0) ||
+                        (sp7A4 != alpha1))
+                    {
+                        sp7A5 = alpha0;
+                        var_r16 = pp->aCmpMode;
+                        sp7A4 = alpha1;
+                        GXSetAlphaCompare((pp->aCmpMode >> 3) & 7, sp7A5,
+                                          (pp->aCmpMode >> 6) & 3,
+                                          pp->aCmpMode & 7, sp7A4);
+                    }
+
+                    psSetupTev((u32*) pp);
+                    setupChanCtrl(pp);
+                    setupChanReg(pp);
+                    setupTevReg(pp);
+                    if (sp7AC != (pp->kind & TexEdge)) {
+                        sp7AC = pp->kind & TexEdge;
+                        if (sp7AC != 0) {
+                            GXSetZMode(GX_TRUE, GX_LEQUAL, GX_TRUE);
+                        } else {
+                            GXSetZMode(GX_TRUE, GX_LEQUAL, GX_FALSE);
                         }
                     }
-                } else if (pp->appsrt != NULL) {
-                    psDispSubAppSRT(pp, form);
-                } else {
-                    psDispSub(pp, form);
+                    if (((pp->kind ^ prev_kind) & DispFog) != 0) {
+                        if (pp->kind & DispFog) {
+                            HSD_FogSet(HSD_PSDisp_804D7908);
+                        } else {
+                            HSD_FogSet(NULL);
+                        }
+                    }
+
+                    if (sp7F0 != NULL) {
+                        HSD_PSFormGroup*** form_array =
+                            (HSD_PSFormGroup***) sp7F0;
+                        HSD_PSFormGroup** bank_entry = form_array[pp->bank];
+                        if (bank_entry != NULL) {
+                            form_group = bank_entry[pp->texGroup];
+                            if ((form_group != NULL) &&
+                                (pp->poseNum < form_group->num))
+                            {
+                                form = form_group->formTable[pp->poseNum];
+                            }
+                        }
+                    }
+
+                    if (pp->kind & DispTexture) {
+                        image = NULL;
+                        tlut = NULL;
+                        if (pp->kind & MirrorS) {
+                            wrap_s = GX_MIRROR;
+                        } else {
+                            wrap_s = GX_CLAMP;
+                        }
+                        if (pp->kind & MirrorT) {
+                            wrap_t = GX_MIRROR;
+                        } else {
+                            wrap_t = GX_CLAMP;
+                        }
+                        wrap_bits = pp->kind & (MirrorS | MirrorT);
+                        if (wrap_bits != sp7A8) {
+                            sp7A8 = wrap_bits;
+                            sp7B0 = NULL;
+                            PSMTXScale(
+                                temp_mtx, (pp->kind & MirrorS) ? 2.0f : 1.0f,
+                                (pp->kind & MirrorT) ? 2.0f : 1.0f, 1.0f);
+                            if (pp->kind & MirrorT) {
+                                sp700 = 1.0f;
+                                temp_mtx[1][3] = sp700;
+                            }
+                            GXLoadTexMtxImm(temp_mtx, GX_TEXMTX0, GX_MTX2x4);
+                            GXSetTexCoordGen2(GX_TEXCOORD0, GX_TG_MTX2x4,
+                                              GX_TG_TEX0, GX_TEXMTX0, GX_FALSE,
+                                              GX_PTIDENTITY);
+                        }
+                        if (sp7F4 != NULL) {
+                            HSD_PSTexGroup*** tex_array =
+                                (HSD_PSTexGroup***) sp7F4;
+                            HSD_PSTexGroup** bank_tex = tex_array[pp->bank];
+                            if (bank_tex != NULL) {
+                                tex_group = bank_tex[pp->texGroup];
+                            }
+                        }
+                        if (tex_group != NULL) {
+                            image = tex_group->texTable[pp->poseNum];
+                            if ((tex_group->fmt == GX_TF_C4) ||
+                                (tex_group->fmt == GX_TF_C8))
+                            {
+                                void** palettes =
+                                    (void**) &tex_group
+                                        ->texTable[tex_group->num];
+                                if (pp->palNum != 0xFF) {
+                                    tlut = palettes[pp->palNum];
+                                } else if (!(pp->kind & ComTLUT)) {
+                                    tlut = palettes[pp->poseNum];
+                                } else {
+                                    tlut = palettes[0];
+                                }
+                                if (tlut != sp79C) {
+                                    sp79C = tlut;
+                                    if (tex_group->fmt == GX_TF_C4) {
+                                        sp790 = 0x10;
+                                    } else {
+                                        sp790 = 0x100;
+                                    }
+                                    sp788 = tex_group->tlutfmt;
+                                    if (tlut != NULL) {
+                                        GXInitTlutObj(&sp71C, tlut, sp788,
+                                                      sp790);
+                                        GXLoadTlut(&sp71C, GX_TLUT0);
+                                    }
+                                    sp7B0 = NULL;
+                                }
+                            }
+                        }
+                        if ((image != sp7B0) && (image != NULL)) {
+                            sp7B0 = image;
+                            switch (tex_group->fmt) {
+                            case GX_TF_C4:
+                            case GX_TF_C8:
+                                GXInitTexObjCI(&sp764, image, tex_group->width,
+                                               tex_group->height,
+                                               tex_group->fmt, wrap_s, wrap_t,
+                                               GX_FALSE, GX_TLUT0);
+                                break;
+                            case GX_TF_I4:
+                            case GX_TF_I8:
+                            case GX_TF_IA4:
+                            case GX_TF_IA8:
+                            case GX_TF_RGB565:
+                            case GX_TF_RGB5A3:
+                            case GX_TF_RGBA8:
+                            case GX_TF_CMPR:
+                                GXInitTexObj(&sp764, image, tex_group->width,
+                                             tex_group->height, tex_group->fmt,
+                                             wrap_s, wrap_t, GX_FALSE);
+                                break;
+                            default:
+                                __assert((char*) &HSD_PSDisp_8040C300 + 0x94,
+                                         0x8AAU, "0");
+                                break;
+                            }
+                            var_r15 = pp->kind & TexInterpNear;
+                            GXInitTexObjLOD(
+                                &sp764, (var_r15 != 0) ? GX_NEAR : GX_LINEAR,
+                                (var_r15 != 0) ? GX_NEAR : GX_LINEAR, 0.0f,
+                                0.0f, 0.0f, GX_FALSE, GX_FALSE, GX_ANISO_1);
+                            GXLoadTexObj(&sp764, GX_TEXMAP0);
+                        }
+                        if ((pp->kind & TexInterpNear) != (u32) var_r15) {
+                            var_r15 = pp->kind & TexInterpNear;
+                            GXInitTexObjLOD(
+                                &sp764, (var_r15 != 0) ? GX_NEAR : GX_LINEAR,
+                                (var_r15 != 0) ? GX_NEAR : GX_LINEAR, 0.0f,
+                                0.0f, 0.0f, GX_FALSE, GX_FALSE, GX_ANISO_1);
+                            GXLoadTexObj(&sp764, GX_TEXMAP0);
+                        }
+                    }
+
+                    if (pp->kind & DispPoint) {
+                        if (pp->appsrt != NULL) {
+                            psDispSubAPPSRTPoint(pp);
+                        } else {
+                            if (pp->kind & Trail) {
+                                pp = psDispSubPointTrail(pp);
+                            } else {
+                                pp = psDispSubPoint(pp);
+                            }
+                        }
+                    } else if (pp->appsrt != NULL) {
+                        psDispSubAppSRT(pp, form);
+                    } else {
+                        psDispSub(pp, form);
+                    }
                 }
 
                 prev_kind = pp->kind;
