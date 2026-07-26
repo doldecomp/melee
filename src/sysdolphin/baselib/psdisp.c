@@ -232,6 +232,14 @@ static inline void getClrTrail(HSD_Particle* pp, GXColor* color)
     }
 }
 
+static inline void psSetColor(GXColor* color, u8 value)
+{
+    color->r = value;
+    color->g = value;
+    color->b = value;
+    color->a = value;
+}
+
 static inline void setupChanCtrl(HSD_Particle* pp)
 {
     u32 chan_state = pp->kind & (DispLighting | Trail);
@@ -1677,18 +1685,6 @@ void psDispParticles(s32 arg0, u32 arg1)
     f64 sp818;
     void* sp7F4;
     void* sp7F0;
-    GXColor* sp7E4;
-    GXColor* sp7E0;
-    GXColor* sp7DC;
-    GXColor* sp7D8;
-    GXColor* sp7D4;
-    s32* sp7D0;
-    s32* sp7CC;
-    s32* sp7C8;
-    s32* sp7C4;
-    s32* sp7C0;
-    s32* sp7BC;
-    s32* sp7B8;
     s32 sp7B4;
     void* sp7B0;
     u32 sp7AC;
@@ -1712,18 +1708,13 @@ void psDispParticles(s32 arg0, u32 arg1)
     GXColor sp6D8;
     GXColor sp6D4;
     GXColor sp6D0;
-    s32 sp6CC;
-    s32 sp6C8;
-    s32 sp6B8;
-    s32 sp6B4;
-    s32 sp6B0;
-    s32 sp6AC;
-    s32 sp6A8;
     u32 prev_kind;
     s32 var_r16;
     s32 var_r15;
     HSD_Particle* pp;
     f32* cache;
+    /// @todo Recover this stack space from the original inline hierarchy.
+    PAD_STACK(0x38);
 
     var_r16 = 0;
     var_r15 = 0;
@@ -1742,18 +1733,6 @@ void psDispParticles(s32 arg0, u32 arg1)
     }
     sp7F4 = (void*) &psTexGroupArray_804D0B50;
     sp7F0 = (void*) &psNumCmdList_804D0C54;
-    sp7B8 = &sp6B8;
-    sp7BC = &sp6B4;
-    sp7C0 = &sp6B0;
-    sp7C4 = &sp6AC;
-    sp7C8 = &sp6A8;
-    sp7CC = &sp6CC;
-    sp7D0 = &sp6C8;
-    sp7D4 = &sp6D0;
-    sp7D8 = &sp6D4;
-    sp7DC = &sp6D8;
-    sp7E0 = &sp6DC;
-    sp7E4 = &sp6E0;
     sp8B0 = 0.0;
     sp818 = 0.000001;
     sp7B4 = 0;
@@ -1795,38 +1774,23 @@ void psDispParticles(s32 arg0, u32 arg1)
                         prev_kind &= 0xFEFFFFFF;
                         sp7AC = (u32) -1;
                         HSD_FogSet(NULL);
-                        HSD_PSDisp_804D7934.r = 0xFF;
-                        HSD_PSDisp_804D7934.g = 0xFF;
-                        HSD_PSDisp_804D7934.b = 0xFF;
-                        HSD_PSDisp_804D7934.a = 0xFF;
-                        HSD_PSDisp_804D7938.r = 0xFF;
-                        HSD_PSDisp_804D7938.g = 0xFF;
-                        HSD_PSDisp_804D7938.b = 0xFF;
-                        HSD_PSDisp_804D7938.a = 0xFF;
+                        psSetColor(&HSD_PSDisp_804D7934, 0xFF);
+                        psSetColor(&HSD_PSDisp_804D7938, 0xFF);
                         sp6E0 = HSD_PSDisp_804D7934;
-                        GXSetChanMatColor(GX_COLOR0A0, *sp7E4);
+                        GXSetChanMatColor(GX_COLOR0A0, sp6E0);
                         sp6DC = HSD_PSDisp_804D7938;
-                        GXSetChanAmbColor(GX_COLOR0A0, *sp7E0);
+                        GXSetChanAmbColor(GX_COLOR0A0, sp6DC);
                         psSetupTevInvalidState();
                         psSetupTevCommon();
-                        HSD_PSDisp_804D793C.r = 0xFF;
-                        HSD_PSDisp_804D793C.g = 0xFF;
-                        HSD_PSDisp_804D793C.b = 0xFF;
-                        HSD_PSDisp_804D793C.a = 0xFF;
-                        HSD_PSDisp_804D7940.r = 0;
-                        HSD_PSDisp_804D7940.g = 0;
-                        HSD_PSDisp_804D7940.b = 0;
-                        HSD_PSDisp_804D7940.a = 0;
-                        HSD_PSDisp_804D7944.r = 0xFF;
-                        HSD_PSDisp_804D7944.g = 0xFF;
-                        HSD_PSDisp_804D7944.b = 0xFF;
-                        HSD_PSDisp_804D7944.a = 0xFF;
+                        psSetColor(&HSD_PSDisp_804D793C, 0xFF);
+                        psSetColor(&HSD_PSDisp_804D7940, 0);
+                        psSetColor(&HSD_PSDisp_804D7944, 0xFF);
                         sp6D8 = HSD_PSDisp_804D793C;
-                        GXSetTevColor(GX_TEVREG0, *sp7DC);
+                        GXSetTevColor(GX_TEVREG0, sp6D8);
                         sp6D4 = HSD_PSDisp_804D7940;
-                        GXSetTevColor(GX_TEVREG1, *sp7D8);
+                        GXSetTevColor(GX_TEVREG1, sp6D4);
                         sp6D0 = HSD_PSDisp_804D7944;
-                        GXSetTevColor(GX_TEVREG2, *sp7D4);
+                        GXSetTevColor(GX_TEVREG2, sp6D0);
                         HSD_PSDisp_804D792C = -1;
                         GXSetZCompLoc(GX_FALSE);
                         HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(),
