@@ -2386,6 +2386,7 @@ static grBb_TrackEntry grBb_TrackEntries[12] = {
 
 void grBigBlue_801EB004(Ground_GObj* gobj)
 {
+    HSD_JObj* stage_jobj = GET_JOBJ(gobj);
     Ground* gp = gobj->user_data;
     HSD_JObj* jobj;
     Vec3 pos;
@@ -2396,13 +2397,10 @@ void grBigBlue_801EB004(Ground_GObj* gobj)
     grBb_TrackEntry* entry;
     PAD_STACK(4);
 
-    {
-        HSD_JObj* jobj = GET_JOBJ(gobj);
-        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+    HSD_JObjSetFlagsAll(stage_jobj, JOBJ_HIDDEN);
 
-        pos.x = pos.y = pos.z = 1.0F;
-        HSD_JObjSetScale(jobj, &pos);
-    }
+    pos.x = pos.y = pos.z = 1.0F;
+    HSD_JObjSetScale(stage_jobj, &pos);
 
     pos.x = pos.y = pos.z = Ground_801C0498();
 
