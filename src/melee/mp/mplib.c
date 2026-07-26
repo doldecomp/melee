@@ -5232,7 +5232,7 @@ bool mpLib_80056C54(int line_id, Vec3* pos, int* line_id_out, Vec3* vec_out,
         }
     }
     if (line_id != -1) {
-        if (!(mpLineGetKind(line_id) & 1)) {
+        if (!(mpLineGetKind(line_id) & CollLine_Floor)) {
             line_id = -1;
         }
     }
