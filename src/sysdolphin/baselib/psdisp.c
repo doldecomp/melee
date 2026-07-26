@@ -547,7 +547,9 @@ static inline HSD_Particle* psDispSubPoint(HSD_Particle* pp)
         GXSetPointSize((u8) w, GX_TO_ONE);
     }
     last = pp;
-    buf[0] = pp->pos;
+    buf[0].x = pp->pos.x;
+    buf[0].y = pp->pos.y;
+    buf[0].z = pp->pos.z;
     count = 1;
     p = &buf[1];
     q = pp->next;
@@ -563,7 +565,9 @@ static inline HSD_Particle* psDispSubPoint(HSD_Particle* pp)
               q->ambRGB == pp->ambRGB && q->ambA == pp->ambA)))
         {
             count++;
-            *p = q->pos;
+            p->x = q->pos.x;
+            p->y = q->pos.y;
+            p->z = q->pos.z;
             p++;
             if (count == 16) {
                 if (pp->kind & DispTexture) {
