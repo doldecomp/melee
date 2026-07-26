@@ -527,7 +527,7 @@ u32 pl_8003E420(int arg0)
 
 inline int match_item_kind(int kind)
 {
-    if (kind >= 0 && kind < 0x23) {
+    if (kind >= It_Common_Start && kind < It_Common_End) {
         return kind;
     } else {
         switch (kind) {
