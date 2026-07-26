@@ -985,9 +985,7 @@ void fn_8003C340(int player)
     }
 
     temp_r3_2 = it_8026B7E0();
-    if (temp_r3_2 != 0 &&
-        temp_r3_2 == pl_8003E334(player, Pl_ItemLog_Unk18))
-    {
+    if (temp_r3_2 != 0 && temp_r3_2 == pl_8003E334(player, Pl_ItemLog_Unk18)) {
         setFlag(player, 0xA0);
     }
 
