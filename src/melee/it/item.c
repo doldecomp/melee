@@ -16,6 +16,7 @@
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/it_3F14.h"
+#include "it/it_3F2F.h"
 #include "it/itanimlist.h"
 #include "it/itcoll.h"
 #include "it/iteffect.h"
