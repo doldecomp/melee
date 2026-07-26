@@ -597,7 +597,7 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
     int v;
     PAD_STACK(72);
 
-    if ((u32) input & 0x20) {
+    if ((u32) input & MenuInput_Back) {
         lbAudioAx_80024030(0);
         i = mn_804A04F0.entering_menu = 0;
         gmMainLib_GetGameRules()->xD =
@@ -620,7 +620,7 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
         mn_80229894(0x1C, 0, 3);
         return;
     }
-    if (input & 0xC0) {
+    if (input & (MenuInput_LTrigger | MenuInput_RTrigger)) {
         lbAudioAx_80024030(1);
         gmMainLib_GetGameRules()->xD =
             ((Diagram3*) mnDiagram3_804D6C20->user_data)->is_name_mode;
@@ -639,14 +639,14 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
             } while (++i < 0xA);
         }
         HSD_GObjPLink_80390228(gobj);
-        if (input & 0x40) {
+        if (input & MenuInput_LTrigger) {
             mnDiagram2_Init();
             return;
         }
         mnDiagram_Init(0, 0);
         return;
     }
-    if (input & 0xC00) {
+    if (input & (MenuInput_XButton | MenuInput_YButton)) {
         if (GetNameCount() == 0) {
             lbAudioAx_80024030(3);
             return;

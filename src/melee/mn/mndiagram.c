@@ -877,7 +877,7 @@ void mnDiagram_PopupInputProc(HSD_GObj* gobj)
     HSD_GObjProc* proc;
     Diagram* data = mnDiagram_804D6C10->user_data;
     u64 input = Menu_GetAllInputs();
-    if ((u32) input & 0x20) {
+    if ((u32) input & MenuInput_Back) {
         lbAudioAx_80024030(0);
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObj_SetupProc(
@@ -1234,7 +1234,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     u8 sp[64];
     mn_804A04F0.buttons = input;
     count2 = 0;
-    if (input & 0x10) {
+    if (input & MenuInput_Confirm) {
         cur = 1;
         lbAudioAx_80024030(cur);
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
@@ -1313,7 +1313,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         mnDiagram_CreatePopup(col_result2, row_result2, 0);
         return;
     }
-    if (input & 0x20) {
+    if (input & MenuInput_Back) {
         lbAudioAx_80024030(0);
         mn_804A04F0.entering_menu = count2;
         {
@@ -1327,7 +1327,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         }
         return;
     }
-    if (input & 0xC0) {
+    if (input & (MenuInput_LTrigger | MenuInput_RTrigger)) {
         lbAudioAx_80024030(1);
         {
             Diagram* d = mnDiagram_804D6C10->user_data;
@@ -1337,7 +1337,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             gmMainLib_GetGameRules()->x11 = (u8) d->name_cursor_pos;
             gmMainLib_GetGameRules()->xD = d->is_name_mode;
             HSD_GObjPLink_80390228(gobj);
-            if (input & 0x40) {
+            if (input & MenuInput_LTrigger) {
                 mnDiagram3_Init(0L);
                 return;
             }
@@ -1345,7 +1345,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         }
         return;
     }
-    if (input & 0xC00) {
+    if (input & (MenuInput_XButton | MenuInput_YButton)) {
         if (GetNameCount() == 0) {
             lbAudioAx_80024030(3);
             return;

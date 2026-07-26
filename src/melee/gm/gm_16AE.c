@@ -1300,7 +1300,9 @@ static inline void fn_8016CFE0_inline(void)
     lbl_8046B6A0_t* tmp;
 
     if (DbLevel >= 3 && gm_801A46B8(0) != 0 &&
-        (HSD_PadCopyStatus->button & 0x1160) == 0x1160)
+        (HSD_PadCopyStatus->button &
+         (HSD_PAD_L | HSD_PAD_R | HSD_PAD_A | HSD_PAD_START)) ==
+            (HSD_PAD_L | HSD_PAD_R | HSD_PAD_A | HSD_PAD_START))
     {
         fn_8016C7F0();
         gm_801A4B60();
@@ -1397,13 +1399,15 @@ static inline int fn_8016CBE8_inline(void)
         pad = &HSD_PadCopyStatus[(u8) i];
         if (pad->err == 0) {
             if (DbLevel >= 3) {
-                if ((pad->trigger & 8) && (pad->button & HSD_PAD_X)) {
+                if ((pad->trigger & HSD_PAD_DPADUP) &&
+                    (pad->button & HSD_PAD_X))
+                {
                     var_r0 = true;
                 } else {
                     var_r0 = false;
                 }
             } else {
-                var_r0 = pad->trigger & 0x1000;
+                var_r0 = pad->trigger & HSD_PAD_START;
             }
             if (var_r0) {
                 return i;

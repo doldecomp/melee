@@ -197,8 +197,9 @@ void fn_80252C50(HSD_GObj* gobj)
         o->x4C = NULL;
         return;
     } ///< @todo inline button getter
-    if (DbLevel >= 3 && HSD_PadCopyStatus->button & 0x40 &&
-        HSD_PadCopyStatus->button & 0x20 && HSD_PadCopyStatus->button & 0x100)
+    if (DbLevel >= 3 && HSD_PadCopyStatus->button & HSD_PAD_L &&
+        HSD_PadCopyStatus->button & HSD_PAD_R &&
+        HSD_PadCopyStatus->button & HSD_PAD_A)
     {
         o->x0 = 0;
         *mnInfoBonus_804D6C80 = 1;

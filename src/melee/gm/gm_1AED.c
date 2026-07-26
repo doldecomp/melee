@@ -107,9 +107,9 @@ int gm_801AF0D4(void)
 
 static inline u8 set_gm_804D6870_inline(void)
 {
-    if ((HSD_PadCopyStatus->button & 0x40) &&
-        (HSD_PadCopyStatus->button & 0x20) &&
-        (HSD_PadCopyStatus->button & 0x100))
+    if ((HSD_PadCopyStatus->button & HSD_PAD_L) &&
+        (HSD_PadCopyStatus->button & HSD_PAD_R) &&
+        (HSD_PadCopyStatus->button & HSD_PAD_A))
     {
         gm_804D6870 = 1;
     }
@@ -224,20 +224,20 @@ void gm_801AF568_OnFrame(void)
     u8 _[0x14];
 
     if (DbLevel >= 3 && set_gm_804D6870_inline() != 0) {
-        if (HSD_PadCopyStatus->trigger & 0x40) {
+        if (HSD_PadCopyStatus->trigger & HSD_PAD_L) {
             if (gm_804D6872 > 6) {
                 gm_804D6872 -= 1;
                 gm_801AEE6C(0, gm_804D6872, get_lang_val(gm_804D6872));
             }
-        } else if ((HSD_PadCopyStatus->trigger & 0x20)) {
+        } else if ((HSD_PadCopyStatus->trigger & HSD_PAD_R)) {
             if (gm_804D6872 < 0x18) {
                 gm_804D6872 += 1;
                 gm_801AEE6C(0, gm_804D6872, get_lang_val(gm_804D6872));
             }
         }
-        if ((HSD_PadCopyStatus->button & 0x40) &&
-            (HSD_PadCopyStatus->button & 0x20) &&
-            (HSD_PadCopyStatus->button & 0x200))
+        if ((HSD_PadCopyStatus->button & HSD_PAD_L) &&
+            (HSD_PadCopyStatus->button & HSD_PAD_R) &&
+            (HSD_PadCopyStatus->button & HSD_PAD_B))
         {
             gm_801A4B60();
         }
