@@ -924,10 +924,10 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                 GXWGFifo.f32 = vz;
             }
             {
-                u8 r = color.r;
-                u8 g = color.g;
-                u8 b = color.b;
                 u8 a = color.a;
+                u8 b = color.b;
+                u8 g = color.g;
+                u8 r = color.r;
                 GXWGFifo.u8 = r;
                 GXWGFifo.u8 = g;
                 GXWGFifo.u8 = b;
@@ -945,10 +945,10 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                 GXWGFifo.f32 = vz;
             }
             {
-                u8 r = color.r;
-                u8 g = color.g;
-                u8 b = color.b;
                 u8 a = color.a;
+                u8 b = color.b;
+                u8 g = color.g;
+                u8 r = color.r;
                 GXWGFifo.u8 = r;
                 GXWGFifo.u8 = g;
                 GXWGFifo.u8 = b;
@@ -1447,10 +1447,10 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
         GXWGFifo.f32 = cur_pos.y;
         GXWGFifo.f32 = cur_pos.z;
         {
-            u8 r = draw_color.r;
-            u8 g = draw_color.g;
-            u8 b = draw_color.b;
             u8 a = draw_color.a;
+            u8 b = draw_color.b;
+            u8 g = draw_color.g;
+            u8 r = draw_color.r;
             GXWGFifo.u8 = r;
             GXWGFifo.u8 = g;
             GXWGFifo.u8 = b;
@@ -1685,10 +1685,10 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
                 GXWGFifo.f32 = cur_pos.z;
             }
             {
-                u8 r = draw_color.r;
-                u8 g = draw_color.g;
-                u8 b = draw_color.b;
                 u8 a = draw_color.a;
+                u8 b = draw_color.b;
+                u8 g = draw_color.g;
+                u8 r = draw_color.r;
                 GXWGFifo.u8 = r;
                 GXWGFifo.u8 = g;
                 GXWGFifo.u8 = b;
@@ -1705,10 +1705,10 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
                 GXWGFifo.f32 = cur_pos.z;
             }
             {
-                u8 r = draw_color.r;
-                u8 g = draw_color.g;
-                u8 b = draw_color.b;
                 u8 a = draw_color.a;
+                u8 b = draw_color.b;
+                u8 g = draw_color.g;
+                u8 r = draw_color.r;
                 GXWGFifo.u8 = r;
                 GXWGFifo.u8 = g;
                 GXWGFifo.u8 = b;
