@@ -1549,18 +1549,18 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
         Mtx draw_mtx;
 
         PSMTXCopy((MtxPtr) &pp->appsrt->ssx, draw_mtx);
-        cur_pos.x =
-            draw_mtx[0][3] +
-            (draw_mtx[0][2] * pp->pos.z +
-             (draw_mtx[0][0] * pp->pos.x + draw_mtx[0][1] * pp->pos.y));
-        cur_pos.y =
-            draw_mtx[1][3] +
-            (draw_mtx[1][2] * pp->pos.z +
-             (draw_mtx[1][0] * pp->pos.x + draw_mtx[1][1] * pp->pos.y));
         cur_pos.z =
             draw_mtx[2][3] +
             (draw_mtx[2][2] * pp->pos.z +
              (draw_mtx[2][0] * pp->pos.x + draw_mtx[2][1] * pp->pos.y));
+        cur_pos.y =
+            draw_mtx[1][3] +
+            (draw_mtx[1][2] * pp->pos.z +
+             (draw_mtx[1][0] * pp->pos.x + draw_mtx[1][1] * pp->pos.y));
+        cur_pos.x =
+            draw_mtx[0][3] +
+            (draw_mtx[0][2] * pp->pos.z +
+             (draw_mtx[0][0] * pp->pos.x + draw_mtx[0][1] * pp->pos.y));
         if (pp->kind & Tornado) {
             f32 x;
             f32 y;
