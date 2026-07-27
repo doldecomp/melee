@@ -2056,8 +2056,6 @@ void psDispParticles(s32 arg0, u32 arg1)
     u8 sp7A4;
     s32 sp7A0;
     void* sp79C;
-    u32 sp798;
-    s32 sp794;
     u16 sp790;
     u32 sp78C;
     GXTlutFmt sp788;
@@ -2083,12 +2081,10 @@ void psDispParticles(s32 arg0, u32 arg1)
     var_r16 = 0;
     var_r15 = 0;
     cache = &HSD_PSDisp_804D0FC0;
-    sp798 = arg1;
-    sp794 = arg0;
     sp7A5 = 0;
     sp7A4 = 0xFF;
     sp7A0 = 1;
-    if (sp798 == 0) {
+    if (arg1 == 0) {
         if (HSD_PSDisp_804D6380 < 0xFFU) {
             HSD_PSDisp_804D6380 += 1;
             return;
@@ -2100,9 +2096,9 @@ void psDispParticles(s32 arg0, u32 arg1)
     sp7F0 = psNumCmdList;
     sp7B4 = 0;
     do {
-        if (sp794 & (1 << sp7B4)) {
+        if (arg0 & (1 << sp7B4)) {
             particleSort(sp7B4, HSD_PSDisp_804D6380, &sp760, &sp75C);
-            if (sp798 == 1) {
+            if (arg1 == 1) {
                 pp = sp760;
             } else {
                 pp = sp75C;
@@ -2127,7 +2123,7 @@ void psDispParticles(s32 arg0, u32 arg1)
                 u32 width;
                 u32 height;
 
-                if ((sp798 == 1) && !(pp->kind & TexEdge)) {
+                if ((arg1 == 1) && !(pp->kind & TexEdge)) {
                     break;
                 }
                 if (!(pp->size < 1.1920928955078125e-07f)) {
