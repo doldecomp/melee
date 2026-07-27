@@ -1188,7 +1188,7 @@ typedef struct itPokemonSpawn_DatAttrs {
     f32 x1C[6];
     f32 x34;
     s32 x38;
-    s32 pokemon_spawn_weights[Pokemon_Chicorita_Leaf - Pokemon_Tosakinto];
+    s32 pokemon_spawn_weights[It_PKind_Terminate - It_PKind_Start];
     u8 _pad[520];
 } itPokemonSpawn_DatAttrs;
 STATIC_ASSERT(sizeof(itPokemonSpawn_DatAttrs) == 0x2BC);

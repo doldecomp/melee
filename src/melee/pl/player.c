@@ -82,7 +82,7 @@ ftMapping ftMapping_list[CHKIND_MAX] = { //////ftMapping_list
 };
 
 ////.bss
-StaticPlayer player_slots[PL_SLOT_MAX];
+StaticPlayer player_slots[Gm_Player_NumMax];
 HSD_ObjAllocData Player_AllocData;
 
 pl_804D6470_t* pl_804D6470;
@@ -96,7 +96,7 @@ static inline bool hasExtraFighterId(ftMapping* data)
 
 static inline void Player_CheckSlot(int slot)
 {
-    if (slot < 0 || !(slot < PL_SLOT_MAX)) {
+    if (slot < 0 || !(slot < Gm_Player_NumMax)) {
         HSD_ASSERTREPORT(102, 0, "cant get player struct! %d\n", slot);
     }
 }
@@ -2041,7 +2041,7 @@ void Player_InitAllPlayers(void)
     plStale_InitAttackInstance();
     plAttack_80037590();
 
-    for (i = 0; i < PL_SLOT_MAX; i++) {
+    for (i = 0; i < Gm_Player_NumMax; i++) {
         Player_InitOrResetPlayer(i);
         pl_8003891C(i);
     }

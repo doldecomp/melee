@@ -1240,6 +1240,7 @@ config.libs = [
             Object(Matching, "melee/it/iteffect.c"),
             Object(Matching, "melee/it/itanimlist.c"),
             Object(Matching, "melee/it/it_279C.c"),
+            Object(Matching, "melee/it/it_3F2F.c"),
             Object(Matching, "melee/it/itzako.c"),
             # Individual items
             Object(Matching, "melee/it/items/itcapsule.c"),

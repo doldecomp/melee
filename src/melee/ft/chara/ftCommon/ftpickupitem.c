@@ -173,7 +173,7 @@ bool ftpickupitem_8009447C(Fighter_GObj* gobj, Item_GObj* item_gobj)
             Fighter_8006CF5C(fp, it_8026B47C(item_gobj));
             Item_8026A8EC(item_gobj);
             goto block_35;
-        case Pokemon_Lucky_Egg:
+        case It_Kind_Lucky_Egg:
             Fighter_8006CF5C(fp, it_8026B47C(item_gobj));
             Item_8026A8EC(item_gobj);
             goto block_35;
@@ -363,7 +363,7 @@ void ftpickupitem_80094B6C(Fighter_GObj* gobj, Item_GObj* item_gobj)
             Fighter_8006CF5C(fp, it_8026B47C(item_gobj));
             Item_8026A8EC(item_gobj);
             return;
-        case Pokemon_Lucky_Egg:
+        case It_Kind_Lucky_Egg:
             Fighter_8006CF5C(fp, it_8026B47C(item_gobj));
             Item_8026A8EC(item_gobj);
             return;

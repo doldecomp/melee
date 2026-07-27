@@ -38,6 +38,8 @@
                                      mpLib_GroundEnum ground_kind,
                                      float delta_y);
 
+#define INIT_ADD_PARTS_RANGE (1.0F + (2400.0F / (160.0F * Ground_801C0498())))
+
 f32 grHr_804D6AD8;
 int grHr_804D6ADC;
 f32 grHr_804D6AE0;
@@ -207,14 +209,13 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
     UnkArchiveStruct* archive;
     HSD_CObj* cobj;
     s32 i;
-    f32 gobjs_num;
     Ground_801C2ED0(jobj2, gp->map_id);
 
-    gp->u.homerun.gobjs = HSD_MemAlloc(0x100);
-    HSD_ASSERTMSG(0x17A, gp->u.homerun.gobjs, "gp->u.map.parts");
+    gp->u.homerun.parts = HSD_MemAlloc(0x100);
+    HSD_ASSERTMSG(0x17A, gp->u.homerun.parts, "gp->u.map.parts");
 
-    gp->u.homerun.jobj_gobjs = HSD_MemAlloc(0x40);
-    HSD_ASSERTMSG(0x17B, gp->u.homerun.jobj_gobjs, "gp->u.map.back");
+    gp->u.homerun.back = HSD_MemAlloc(0x40);
+    HSD_ASSERTMSG(0x17B, gp->u.homerun.back, "gp->u.map.back");
 
     HSD_JObjSetScaleX(jobj2, grHr_804D6AE4 * HSD_JObjGetScaleX(jobj));
     HSD_JObjSetScaleY(jobj2, grHr_804D6AE4 * HSD_JObjGetScaleY(jobj));
@@ -236,24 +237,21 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
     HSD_SisLib_803A611C(1, (HSD_GObj*) gp->u.unk.xD4, 9, 0xD, 0, 1, 0, 7);
     HSD_SisLib_804D1124[1] =
         HSD_ArchiveGetPublicAddress(archive->unk0, "SIS_GrHomerunData");
-    gobjs_num = 2.0F * (1.0F + (2400.0F / (160.0F * Ground_801C0498())));
-    HSD_ASSERTMSG(0x1A2, gobjs_num < 64,
-                  "INIT_ADD_PARTS_RANGE*2<Gr_Homerun_Parts_Max");
+    HSD_ASSERT(0x1A2, INIT_ADD_PARTS_RANGE*2<Gr_Homerun_Parts_Max);
 
-    for (i = 0; (f32) i < 1.0F + (2400.0F / (160.0F * Ground_801C0498())); i++)
-    {
-        gp->u.homerun.gobjs[i] = grHomeRun_8021E500(i);
+    for (i = 0; (f32) i < INIT_ADD_PARTS_RANGE; i++) {
+        gp->u.homerun.parts[i] = grHomeRun_8021E500(i);
     }
-    for (; i < 64; i++) {
-        gp->u.homerun.gobjs[i] = NULL;
+    for (; i < Gr_Homerun_Parts_Max; i++) {
+        gp->u.homerun.parts[i] = NULL;
     }
 
     for (i = 0; i < 16; i++) {
         HSD_JObj* child;
-        gp->u.homerun.jobj_gobjs[i] = grHomeRun_8021C82C_noinline(4);
-        HSD_ASSERTMSG(0x1AB, gp->u.homerun.jobj_gobjs[i], "gp->u.map.back[i]");
+        gp->u.homerun.back[i] = grHomeRun_8021C82C_noinline(4);
+        HSD_ASSERTMSG(0x1AB, gp->u.homerun.back[i], "gp->u.map.back[i]");
 
-        jobj = GET_JOBJ(gp->u.homerun.jobj_gobjs[i]);
+        jobj = GET_JOBJ(gp->u.homerun.back[i]);
         HSD_ASSERT(0x1AC, jobj);
 
         HSD_JObjSetScaleX(jobj, grHr_804D6AE4 * HSD_JObjGetScaleX(jobj));
@@ -267,27 +265,27 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
                       ((4.0F + (f32) i) * -(160.0F * Ground_801C0498())));
     }
 
-    gp->u.homerun.rear_gobj = grHomeRun_8021C82C_noinline(3);
-    HSD_ASSERTMSG(0x1BA, gp->u.homerun.rear_gobj, "gp->u.map.bg_gobj[0]");
-    jobj = GET_JOBJ(gp->u.homerun.rear_gobj);
+    gp->u.homerun.bg_gobj[0] = grHomeRun_8021C82C_noinline(3);
+    HSD_ASSERTMSG(0x1BA, gp->u.homerun.bg_gobj[0], "gp->u.map.bg_gobj[0]");
+    jobj = GET_JOBJ(gp->u.homerun.bg_gobj[0]);
     HSD_ASSERT(0x1BB, jobj);
     HSD_JObjSetTranslateX(jobj, 1.5F * -(2150.99F * Ground_801C0498()));
 
-    gp->u.homerun.rear2_gobj = grHomeRun_8021C82C_noinline(3);
-    HSD_ASSERTMSG(0x1BD, gp->u.homerun.rear2_gobj, "gp->u.map.bg_gobj[1]");
-    jobj = GET_JOBJ(gp->u.homerun.rear2_gobj);
+    gp->u.homerun.bg_gobj[1] = grHomeRun_8021C82C_noinline(3);
+    HSD_ASSERTMSG(0x1BD, gp->u.homerun.bg_gobj[1], "gp->u.map.bg_gobj[1]");
+    jobj = GET_JOBJ(gp->u.homerun.bg_gobj[1]);
     HSD_ASSERT(0x1BE, jobj);
     HSD_JObjSetTranslateX(jobj, 0.5F * -(2150.99F * Ground_801C0498()));
 
-    gp->u.homerun.rear3_gobj = grHomeRun_8021C82C_noinline(3);
-    HSD_ASSERTMSG(0x1C0, gp->u.homerun.rear3_gobj, "gp->u.map.bg_gobj[2]");
-    jobj = GET_JOBJ(gp->u.homerun.rear3_gobj);
+    gp->u.homerun.bg_gobj[2] = grHomeRun_8021C82C_noinline(3);
+    HSD_ASSERTMSG(0x1C0, gp->u.homerun.bg_gobj[2], "gp->u.map.bg_gobj[2]");
+    jobj = GET_JOBJ(gp->u.homerun.bg_gobj[2]);
     HSD_ASSERT(0x1C1, jobj);
     HSD_JObjSetTranslateX(jobj, 0.5F * (2150.99F * Ground_801C0498()));
 
-    gp->u.homerun.rear4_gobj = grHomeRun_8021C82C_noinline(3);
-    HSD_ASSERTMSG(0x1C3, gp->u.homerun.rear4_gobj, "gp->u.map.bg_gobj[3]");
-    jobj = GET_JOBJ(gp->u.homerun.rear4_gobj);
+    gp->u.homerun.bg_gobj[3] = grHomeRun_8021C82C_noinline(3);
+    HSD_ASSERTMSG(0x1C3, gp->u.homerun.bg_gobj[3], "gp->u.map.bg_gobj[3]");
+    jobj = GET_JOBJ(gp->u.homerun.bg_gobj[3]);
     HSD_ASSERT(0x1C4, jobj);
     HSD_JObjSetTranslateX(jobj, 1.5F * (2150.99F * Ground_801C0498()));
 
@@ -378,25 +376,25 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
 
     x1 = (s32) (1.0F +
                 ((2400.0F + cam_interest.x) / (160.0F * Ground_801C0498())));
-    gobj2 = gp->u.homerun.gobjs[0];
+    gobj2 = gp->u.homerun.parts[0];
     gp2 = GET_GROUND(gobj2);
     if (gp2->u.homerun2.xC4 < x0) {
         Ground_801C4A08(gobj2);
         for (i = 0; i < 63; i++) {
-            gp->u.homerun.gobjs[i] = gp->u.homerun.gobjs[i + 1];
+            gp->u.homerun.parts[i] = gp->u.homerun.parts[i + 1];
         }
-        gp->u.homerun.gobjs[63] = NULL;
+        gp->u.homerun.parts[63] = NULL;
     } else if (gp2->u.homerun2.xC4 > x0) {
         gobj2 = grHomeRun_8021E500(gp2->u.homerun2.xC4 - 1);
         for (i = 63; i > 0; i--) {
             struct grHomeRun_GroundVars* vars = &gp->u.homerun;
-            vars->gobjs[i] = vars->gobjs[i - 1];
+            vars->parts[i] = vars->parts[i - 1];
         }
-        gp->u.homerun.gobjs[0] = gobj2;
+        gp->u.homerun.parts[0] = gobj2;
     }
 
     for (i = 63; i >= 0; i--) {
-        gobj2 = gp->u.homerun.gobjs[i];
+        gobj2 = gp->u.homerun.parts[i];
         if (gobj2 != NULL) {
             break;
         }
@@ -404,10 +402,10 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
     HSD_ASSERT(0x239, gobj2);
     gp2 = GET_GROUND(gobj2);
     if (gp2->u.homerun2.xC4 > x1) {
-        gp->u.homerun.gobjs[i] = NULL;
+        gp->u.homerun.parts[i] = NULL;
         Ground_801C4A08(gobj2);
     } else if (gp2->u.homerun2.xC4 < x1) {
-        gp->u.homerun.gobjs[i + 1] =
+        gp->u.homerun.parts[i + 1] =
             grHomeRun_8021E500(gp2->u.homerun2.xC4 + 1);
     }
 
@@ -423,21 +421,21 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
         }
     }
 
-    jobj = GET_JOBJ(gp->u.homerun.rear_gobj);
+    jobj = GET_JOBJ(gp->u.homerun.bg_gobj[0]);
     HSD_ASSERT(0x257, jobj);
     HSD_JObjSetTranslateX(jobj, x - 1.5F * (2150.99F * Ground_801C0498()));
 
-    jobj = GET_JOBJ(gp->u.homerun.rear2_gobj);
+    jobj = GET_JOBJ(gp->u.homerun.bg_gobj[1]);
     HSD_ASSERT(0x259, jobj);
 
     HSD_JObjSetTranslateX(jobj, x - 0.5F * (2150.99F * Ground_801C0498()));
 
-    jobj = GET_JOBJ(gp->u.homerun.rear3_gobj);
+    jobj = GET_JOBJ(gp->u.homerun.bg_gobj[2]);
     HSD_ASSERT(0x25B, jobj);
 
     HSD_JObjSetTranslateX(jobj, x + 0.5F * (2150.99F * Ground_801C0498()));
 
-    jobj = GET_JOBJ(gp->u.homerun.rear4_gobj);
+    jobj = GET_JOBJ(gp->u.homerun.bg_gobj[3]);
     HSD_ASSERT(0x25D, jobj);
 
     HSD_JObjSetTranslateX(jobj, x + 1.5F * (2150.99F * Ground_801C0498()));

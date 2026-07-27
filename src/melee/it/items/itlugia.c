@@ -335,7 +335,7 @@ void it_802D1BBC(Item_GObj* gobj)
         if (ip->xDD4_itemVar.lugia.xE50.y >= 1.0) {
             ip->xDD4_itemVar.lugia.xE50.y =
                 (ip->xDD4_itemVar.lugia.xE50.y - 1.0);
-            it_802D1E8C(gobj, Pokemon_Lugia_Aeroblast, attrs->x1C);
+            it_802D1E8C(gobj, It_Kind_Lugia_Aeroblast, attrs->x1C);
             switch (HSD_Randi(3)) {
             case 0:
                 Item_8026AE84(ip, 0x274D, 0x7F, 0x40);
@@ -352,12 +352,12 @@ void it_802D1BBC(Item_GObj* gobj)
         if (ip->xDD4_itemVar.lugia.xE50.z >= 1.0) {
             ip->xDD4_itemVar.lugia.xE50.z =
                 (ip->xDD4_itemVar.lugia.xE50.z - 1.0);
-            it_802D1E8C(gobj, Pokemon_Lugia_Aeroblast2, attrs->x24);
+            it_802D1E8C(gobj, It_Kind_Lugia_Aeroblast2, attrs->x24);
         }
 
         if (ip->xDD4_itemVar.lugia.x88 >= 1.0) {
             ip->xDD4_itemVar.lugia.x88 = (ip->xDD4_itemVar.lugia.x88 - 1.0);
-            it_802D1E8C(gobj, Pokemon_Lugia_Aeroblast3, attrs->x2C);
+            it_802D1E8C(gobj, It_Kind_Lugia_Aeroblast3, attrs->x2C);
         }
     }
 }
@@ -530,13 +530,13 @@ void it_802D24A0(Item_GObj* gobj)
     f32 multiplier = 0.0f;
 
     switch (ip->kind) {
-    case Pokemon_Lugia_Aeroblast:
+    case It_Kind_Lugia_Aeroblast:
         multiplier = attrs[1];
         break;
-    case Pokemon_Lugia_Aeroblast2:
+    case It_Kind_Lugia_Aeroblast2:
         multiplier = attrs[2];
         break;
-    case Pokemon_Lugia_Aeroblast3:
+    case It_Kind_Lugia_Aeroblast3:
         multiplier = attrs[3];
         break;
     default:

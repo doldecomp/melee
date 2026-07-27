@@ -448,20 +448,14 @@ void grMuteCity_801EFDF8(Ground_GObj* gobj)
     gp->u.mutecity.xDC = Ground_801C3FA4(gobj, 5);
     gp->u.mutecity.xE0 = Ground_801C3FA4(gobj, 9);
 
-    /// @todo ::HSD_ASSERTREPORT
-    // HSD_ASSERTREPORT(351, gp->u.mutecity.xE0->u.spline != NULL,
-    //                  "not found car spline (R)\n");
     if (gp->u.mutecity.xE0->u.spline == NULL) {
         OSReport("not found car spline (R)\n");
-        __assert(__FILE__, 351, "0");
+        HSD_ASSERT(351, 0);
     }
 
-    /// @todo ::HSD_ASSERTREPORT
-    // HSD_ASSERTREPORT(355, gp->u.mutecity.xDC->u.spline != NULL,
-    //                  "not found car spline (L)\n");
     if (gp->u.mutecity.xDC->u.spline == NULL) {
         OSReport("not found car spline (L)\n");
-        __assert(__FILE__, 355, "0");
+        HSD_ASSERT(355, 0);
     }
 
     gp->u.mutecity.xD0_flags.b23 = 2;

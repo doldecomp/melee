@@ -1843,7 +1843,7 @@ void Toy_80307470(s32 arg0)
 
     if (tg->x50 == NULL) {
         OSReport("*** BG data aren't being loaded!\n");
-        __assert(__FILE__, 2481, "0");
+        HSD_ASSERT(2481, 0);
     }
 
     if (tg->x0 != NULL) {
@@ -1876,7 +1876,7 @@ void Toy_80307470(s32 arg0)
     }
 
     OSReport("*** Can not Load Panel Label(%s)\n", *label);
-    __assert(__FILE__, 2534, "0");
+    HSD_ASSERT(2534, 0);
 }
 
 void _Toy_803075E8(s32 arg0)
@@ -1897,7 +1897,7 @@ void _Toy_803075E8(s32 arg0)
 
     if (td->archive == NULL) {
         OSReport("*** BG data aren't being loaded!\n");
-        __assert(__FILE__, 2625, "0");
+        HSD_ASSERT(2625, 0);
     }
 
     if (td->gobj != NULL) {
@@ -1939,7 +1939,7 @@ void _Toy_803075E8(s32 arg0)
             }
         } else {
             OSReport("*** Can not Load Back Label(%s)\n", *ptr);
-            __assert(__FILE__, 2677, "0");
+            HSD_ASSERT(2677, 0);
         }
     } else if (td->x54 != 0) {
         tdjobj = ((ToyED8Data*) Toy_sbss_804D6ED8)->x8->x28;
@@ -2225,7 +2225,7 @@ char* Toy_8030813C(int trophy_id)
 
     if (found == 0) {
         OSReport("**** Not Found Toy Model!(%d)\n", id);
-        __assert("toy.c", 2979, "0");
+        HSD_ASSERT(2979, 0);
     }
 
     return ptr;
@@ -2523,7 +2523,7 @@ HSD_GObj* Toy_803087F4(void* arg0)
 
 assert_fail:
     OSReport("*** Cann't Show Model!\n");
-    __assert("toy.c", 3358, "0");
+    HSD_ASSERT(3358, 0);
 
 done:
     return anim->gobj;

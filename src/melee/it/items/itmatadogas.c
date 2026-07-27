@@ -98,9 +98,9 @@ void it_802CB2B0(Item_GObj* gobj)
         if (--ip->xDD4_itemVar.matadogas.x60 == 0) {
             ip->xDD4_itemVar.matadogas.x60 = attrs->x4;
             if (HSD_Randi(2) == 0) {
-                it_802CB4F0(gobj, Pokemon_Matadogas_Gas1, attrs->x8);
+                it_802CB4F0(gobj, It_Kind_Matadogas_Gas1, attrs->x8);
             } else {
-                it_802CB4F0(gobj, Pokemon_Matadogas_Gas2, attrs->xC);
+                it_802CB4F0(gobj, It_Kind_Matadogas_Gas2, attrs->xC);
             }
         }
     }
@@ -248,10 +248,10 @@ void it_802CB844(Item_GObj* gobj)
     itMatadogasAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
 
     switch (kind) {
-    case Pokemon_Matadogas_Gas1:
+    case It_Kind_Matadogas_Gas1:
         scale = attrs->x4;
         break;
-    case Pokemon_Matadogas_Gas2:
+    case It_Kind_Matadogas_Gas2:
         scale = attrs->x8;
         break;
     }

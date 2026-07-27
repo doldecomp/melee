@@ -178,6 +178,12 @@ typedef enum StadiumGrType {
     PsType_Display = 1,
 } StadiumGrType;
 
+/// Size of the Home-Run Contest parts array, named by an assert in
+/// #grHomeRun_8021CB20.
+typedef enum Gr_Homerun_Parts {
+    /* 0x40 */ Gr_Homerun_Parts_Max = 64,
+} Gr_Homerun_Parts;
+
 typedef void (*unkCastleCallback)(void*, struct unkCastle*);
 typedef void (*unkCastleCallback2)(void*, struct unkCastle*, Ground_GObj*);
 typedef int (*GrIceMtSegmentLookup)(Ground_GObj*);

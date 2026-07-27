@@ -3353,9 +3353,12 @@ melee/it/itanimlist.c:
 melee/it/it_279C.c:
 	.text       start:0x80279C48 end:0x8027B5B0
 	.rodata     start:0x803B8588 end:0x803B85A8
-	.data       start:0x803F2310 end:0x803F5428
+	.data       start:0x803F2310 end:0x803F2F28
 	.sdata      start:0x804D51D0 end:0x804D51E0
 	.sdata2     start:0x804DC7B8 end:0x804DC7D0
+
+melee/it/it_3F2F.c:
+	.data       start:0x803F2F28 end:0x803F5428
 
 melee/it/itzako.c:
 	.text       start:0x8027B5B0 end:0x8027CF00

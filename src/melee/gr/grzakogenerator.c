@@ -124,27 +124,27 @@ s32 grZakoGenerator_801CA43C(grZakoGenerator_Config* config, HSD_JObj* jobj,
 
 grZakoGenerator_Data* grZakoGenerator_801CA67C(void)
 {
-    grZakoGenerator_Data* data = HSD_MemAlloc(sizeof(grZakoGenerator_Data));
+    grZakoGenerator_Data* pointp = HSD_MemAlloc(sizeof(grZakoGenerator_Data));
     int i;
     PAD_STACK(8);
 
-    HSD_ASSERTMSG(0x52, data, "pointp");
+    HSD_ASSERT(0x52, pointp);
 
     for (i = 0; i < 80; i++) {
-        data->entries[i].x0 = i + 0x20;
-        data->entries[i].x2 = 0;
-        data->entries[i].x4 = 0;
+        pointp->entries[i].x0 = i + 0x20;
+        pointp->entries[i].x2 = 0;
+        pointp->entries[i].x4 = 0;
     }
-    // NOTE: this actually intializes data->sentinel
+    // NOTE: this actually intializes pointp->sentinel
     for (; i < 81; i++) {
-        data->entries[i].x0 = -1;
-        data->entries[i].x2 = 0;
-        data->entries[i].x4 = 0;
+        pointp->entries[i].x0 = -1;
+        pointp->entries[i].x2 = 0;
+        pointp->entries[i].x4 = 0;
     }
 
     lbl_8049F030.xA_b0 = true;
     lbl_8049F030.x8 = 0;
-    return data;
+    return pointp;
 }
 
 void grZakoGenerator_801CA8B4(int arg0)
