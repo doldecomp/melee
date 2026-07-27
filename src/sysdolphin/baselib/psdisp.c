@@ -2126,7 +2126,7 @@ void psDispParticles(s32 arg0, u32 arg1)
                     psSetupParticleRenderState(pp);
                     if ((pp->kind & TexEdge) != sp7AC) {
                         sp7AC = pp->kind & TexEdge;
-                        if (sp7AC != 0) {
+                        if ((s32) sp7AC != 0) {
                             GXSetZMode(GX_TRUE, GX_LEQUAL, GX_TRUE);
                         } else {
                             GXSetZMode(GX_TRUE, GX_LEQUAL, GX_FALSE);
