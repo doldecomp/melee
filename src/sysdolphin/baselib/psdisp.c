@@ -996,7 +996,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                 x1 *= ratio;
                 y1 *= ratio;
                 z1 *= ratio;
-                while (primitive_count-- != 0) {
+                for (; primitive_count != 0; primitive_count--) {
                     GXPrimitive primitive = it[0];
                     u8 count = it[1];
                     s32 i;
@@ -1109,7 +1109,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
         u32 primitive_count = *(u32*) it;
 
         it += sizeof(u32);
-        while (primitive_count-- != 0) {
+        for (; primitive_count != 0; primitive_count--) {
             GXPrimitive primitive = it[0];
             u8 count = it[1];
             s32 i;
@@ -1751,7 +1751,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
                 bx *= ratio;
                 by *= ratio;
                 it += sizeof(u32);
-                while (primitive_count-- != 0) {
+                for (; primitive_count != 0; primitive_count--) {
                     GXPrimitive primitive = it[0];
                     u8 count = it[1];
                     s32 i;
@@ -1859,7 +1859,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
         u8* it = texform;
         u32 primitive_count = *(u32*) it;
         it += sizeof(u32);
-        while (primitive_count-- != 0) {
+        for (; primitive_count != 0; primitive_count--) {
             GXPrimitive prim = it[0];
             u8 count = it[1];
             s32 i;
