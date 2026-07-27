@@ -1409,7 +1409,9 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
     s32 w;
 
     psSetCurrentMtx(3);
-    psUpdateAppSRT(pp, cache);
+    if (pp->appsrt != NULL) {
+        psUpdateAppSRT(pp, cache);
+    }
     psGetAppSRTPositions(pp, (MtxPtr) &pp->appsrt->ssx, &cur_pos, &prev_pos);
 
     ax = pp->size > 42.5 ? 255.0f : 6.0f * pp->size;
