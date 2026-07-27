@@ -1617,13 +1617,13 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
             f32 w0inv;
             f32 w1inv;
             f32 f16;
-            f32 s808;
-            f32 s804;
             f32 f20;
             f32 f12;
             f32 f8;
             f32 f11;
             f32 f13;
+            f32 s808;
+            f32 s804;
 
             if (pp->kind & Tornado) {
                 calcTornadoLastPos(pp, &prev_x, &prev_y, &prev_z);
@@ -2100,7 +2100,7 @@ void psDispParticles(s32 arg0, u32 arg1)
     HSD_Particle* pp;
     psdisp_Cache* cache;
     /// @todo Recover this stack space from the original inline hierarchy.
-    PAD_STACK(0x68);
+    PAD_STACK(0x70);
 
     var_r16 = 0;
     var_r15 = 0;
