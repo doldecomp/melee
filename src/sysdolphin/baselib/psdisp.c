@@ -641,8 +641,8 @@ static inline HSD_Particle* psDispSubPoint(HSD_Particle* pp)
 
 static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
 {
-    GXColor cbuf[32];
     Vec3 vbuf[32];
+    GXColor cbuf[32];
     Vec3* p;
     GXColor* c;
     HSD_Particle* last;
@@ -1311,60 +1311,6 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
                          up_y, up_z);
 }
 
-static inline void psUpdateAppSRT(HSD_Particle* pp, psdisp_Cache* cache,
-                                  bool always_stamp)
-{
-    Vec3 scale;
-    Mtx temp_mtx;
-    f32 scale_x;
-    f32 scale_y;
-
-    if (pp->appsrt->frameNum != HSD_PSDisp_804D6380) {
-        if (pp->appsrt->status != 2) {
-            HSD_psAppSRT* appsrt = pp->appsrt;
-            Vec3* translate = &appsrt->translate;
-            Vec3* rotate = (Vec3*) &appsrt->rot;
-            Vec3* scale = &appsrt->scale;
-            MtxPtr mmtx = appsrt->mmtx;
-
-            HSD_MtxSRT(mmtx, scale, rotate, translate, NULL);
-        }
-        if (pp->appsrt->status == 1) {
-            pp->appsrt->status = 2;
-        }
-        PSMTXConcat(cache->view_mtx, pp->appsrt->mmtx,
-                    (MtxPtr) &pp->appsrt->ssx);
-        scale_x = pp->appsrt->ssx * pp->appsrt->ssx +
-                  pp->appsrt->x74 * pp->appsrt->x74 +
-                  pp->appsrt->x84 * pp->appsrt->x84;
-        scale_x = sqrtf(scale_x);
-        pp->appsrt->x94 = scale_x;
-        scale_y = pp->appsrt->ssy * pp->appsrt->ssy +
-                  pp->appsrt->x78 * pp->appsrt->x78 +
-                  pp->appsrt->x88 * pp->appsrt->x88;
-        scale_y = sqrtf(scale_y);
-        pp->appsrt->x98 = scale_y;
-        if (pp->appsrt->xA2 != 0) {
-            PSMTXIdentity(temp_mtx);
-            temp_mtx[0][3] = pp->appsrt->translate.x;
-            temp_mtx[1][3] = pp->appsrt->translate.y;
-            temp_mtx[2][3] = pp->appsrt->translate.z;
-            PSMTXConcat(cache->view_mtx, temp_mtx, temp_mtx);
-            HSD_MtxGetScale(temp_mtx, &scale);
-            PSMTXScale((MtxPtr) &pp->appsrt->ssx, scale.x, scale.y, scale.z);
-            pp->appsrt->x70 = temp_mtx[0][3];
-            pp->appsrt->x80 = temp_mtx[1][3];
-            pp->appsrt->x90 = temp_mtx[2][3];
-        }
-        if (!always_stamp) {
-            pp->appsrt->frameNum = HSD_PSDisp_804D6380;
-        }
-    }
-    if (always_stamp) {
-        pp->appsrt->frameNum = HSD_PSDisp_804D6380;
-    }
-}
-
 static inline void psScaleAppSRTAxes(HSD_Particle* pp, Mtx mtx)
 {
     mtx[0][0] *= pp->size;
@@ -1378,96 +1324,6 @@ static inline void psScaleAppSRTAxes(HSD_Particle* pp, Mtx mtx)
     mtx[2][2] *= pp->size;
 }
 
-static inline void psGetAppSRTPositions(HSD_Particle* pp, Vec3* cur_pos,
-                                        Vec3* prev_pos)
-{
-    Mtx draw_mtx;
-
-    PSMTXCopy((MtxPtr) &pp->appsrt->ssx, draw_mtx);
-    cur_pos->x = draw_mtx[0][3] +
-                 (draw_mtx[0][2] * pp->pos.z +
-                  (draw_mtx[0][0] * pp->pos.x + draw_mtx[0][1] * pp->pos.y));
-    cur_pos->y = draw_mtx[1][3] +
-                 (draw_mtx[1][2] * pp->pos.z +
-                  (draw_mtx[1][0] * pp->pos.x + draw_mtx[1][1] * pp->pos.y));
-    cur_pos->z = draw_mtx[2][3] +
-                 (draw_mtx[2][2] * pp->pos.z +
-                  (draw_mtx[2][0] * pp->pos.x + draw_mtx[2][1] * pp->pos.y));
-    if (pp->kind & Tornado) {
-        f32 x;
-        f32 y;
-        f32 z;
-
-        calcTornadoLastPos(pp, &x, &y, &z);
-        prev_pos->x =
-            draw_mtx[0][3] +
-            (draw_mtx[0][2] * z + (draw_mtx[0][0] * x + draw_mtx[0][1] * y));
-        prev_pos->y =
-            draw_mtx[1][3] +
-            (draw_mtx[1][2] * z + (draw_mtx[1][0] * x + draw_mtx[1][1] * y));
-        prev_pos->z =
-            draw_mtx[2][3] +
-            (draw_mtx[2][2] * z + (draw_mtx[2][0] * x + draw_mtx[2][1] * y));
-    } else {
-        f32 dx = pp->pos.x - pp->vel.x;
-        f32 dy = pp->pos.y - pp->vel.y;
-        f32 dz = pp->pos.z - pp->vel.z;
-        prev_pos->x =
-            draw_mtx[0][3] + (draw_mtx[0][2] * dz +
-                              (draw_mtx[0][0] * dx + draw_mtx[0][1] * dy));
-        prev_pos->y =
-            draw_mtx[1][3] + (draw_mtx[1][2] * dz +
-                              (draw_mtx[1][0] * dx + draw_mtx[1][1] * dy));
-        prev_pos->z =
-            draw_mtx[2][3] + (draw_mtx[2][2] * dz +
-                              (draw_mtx[2][0] * dx + draw_mtx[2][1] * dy));
-    }
-    psScaleAppSRTAxes(pp, draw_mtx);
-}
-
-static inline void psGetAPPSRTPointPositions(HSD_Particle* pp, Vec3* cur_pos,
-                                             Vec3* prev_pos)
-{
-    cur_pos->x = pp->appsrt->x70 +
-                 (pp->appsrt->x6C * pp->pos.z +
-                  (pp->appsrt->ssx * pp->pos.x + pp->appsrt->ssy * pp->pos.y));
-    cur_pos->y = pp->appsrt->x80 +
-                 (pp->appsrt->x7C * pp->pos.z +
-                  (pp->appsrt->x74 * pp->pos.x + pp->appsrt->x78 * pp->pos.y));
-    cur_pos->z = pp->appsrt->x90 +
-                 (pp->appsrt->x8C * pp->pos.z +
-                  (pp->appsrt->x84 * pp->pos.x + pp->appsrt->x88 * pp->pos.y));
-    if (pp->kind & Tornado) {
-        f32 x;
-        f32 y;
-        f32 z;
-
-        calcTornadoLastPos(pp, &x, &y, &z);
-        prev_pos->x =
-            pp->appsrt->x70 + (pp->appsrt->x6C * z +
-                               (pp->appsrt->ssx * x + pp->appsrt->ssy * y));
-        prev_pos->y =
-            pp->appsrt->x80 + (pp->appsrt->x7C * z +
-                               (pp->appsrt->x74 * x + pp->appsrt->x78 * y));
-        prev_pos->z =
-            pp->appsrt->x90 + (pp->appsrt->x8C * z +
-                               (pp->appsrt->x84 * x + pp->appsrt->x88 * y));
-    } else {
-        f32 dx = pp->pos.x - pp->vel.x;
-        f32 dy = pp->pos.y - pp->vel.y;
-        f32 dz = pp->pos.z - pp->vel.z;
-        prev_pos->x =
-            pp->appsrt->x70 + (pp->appsrt->x6C * dz +
-                               (pp->appsrt->ssx * dx + pp->appsrt->ssy * dy));
-        prev_pos->y =
-            pp->appsrt->x80 + (pp->appsrt->x7C * dz +
-                               (pp->appsrt->x74 * dx + pp->appsrt->x78 * dy));
-        prev_pos->z =
-            pp->appsrt->x90 + (pp->appsrt->x8C * dz +
-                               (pp->appsrt->x84 * dx + pp->appsrt->x88 * dy));
-    }
-}
-
 static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
 {
     GXColor draw_color;
@@ -1478,9 +1334,91 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
 
     psSetCurrentMtx(3);
     if (pp->appsrt != NULL) {
-        psUpdateAppSRT(pp, cache, true);
+        if (pp->appsrt->frameNum != HSD_PSDisp_804D6380) {
+            f32 scale_x;
+            f32 scale_y;
+
+            if (pp->appsrt->status != 2) {
+                HSD_psAppSRT* appsrt = pp->appsrt;
+                Vec3* translate = &appsrt->translate;
+                Vec3* rotate = (Vec3*) &appsrt->rot;
+                Vec3* scale = &appsrt->scale;
+                MtxPtr mmtx = appsrt->mmtx;
+
+                HSD_MtxSRT(mmtx, scale, rotate, translate, NULL);
+            }
+            if (pp->appsrt->status == 1) {
+                pp->appsrt->status = 2;
+            }
+            PSMTXConcat(cache->view_mtx, pp->appsrt->mmtx,
+                        (MtxPtr) &pp->appsrt->ssx);
+            scale_x = pp->appsrt->ssx * pp->appsrt->ssx +
+                      pp->appsrt->x74 * pp->appsrt->x74 +
+                      pp->appsrt->x84 * pp->appsrt->x84;
+            scale_x = sqrtf(scale_x);
+            pp->appsrt->x94 = scale_x;
+            scale_y = pp->appsrt->ssy * pp->appsrt->ssy +
+                      pp->appsrt->x78 * pp->appsrt->x78 +
+                      pp->appsrt->x88 * pp->appsrt->x88;
+            scale_y = sqrtf(scale_y);
+            pp->appsrt->x98 = scale_y;
+            if (pp->appsrt->xA2 != 0) {
+                Mtx temp_mtx;
+                Vec3 scale;
+
+                PSMTXIdentity(temp_mtx);
+                temp_mtx[0][3] = pp->appsrt->translate.x;
+                temp_mtx[1][3] = pp->appsrt->translate.y;
+                temp_mtx[2][3] = pp->appsrt->translate.z;
+                PSMTXConcat(cache->view_mtx, temp_mtx, temp_mtx);
+                HSD_MtxGetScale(temp_mtx, &scale);
+                PSMTXScale((MtxPtr) &pp->appsrt->ssx, scale.x, scale.y,
+                           scale.z);
+                pp->appsrt->x70 = temp_mtx[0][3];
+                pp->appsrt->x80 = temp_mtx[1][3];
+                pp->appsrt->x90 = temp_mtx[2][3];
+            }
+        }
+        pp->appsrt->frameNum = HSD_PSDisp_804D6380;
     }
-    psGetAPPSRTPointPositions(pp, &cur_pos, &prev_pos);
+    cur_pos.x = pp->appsrt->x70 +
+                (pp->appsrt->x6C * pp->pos.z +
+                 (pp->appsrt->ssx * pp->pos.x + pp->appsrt->ssy * pp->pos.y));
+    cur_pos.y = pp->appsrt->x80 +
+                (pp->appsrt->x7C * pp->pos.z +
+                 (pp->appsrt->x74 * pp->pos.x + pp->appsrt->x78 * pp->pos.y));
+    cur_pos.z = pp->appsrt->x90 +
+                (pp->appsrt->x8C * pp->pos.z +
+                 (pp->appsrt->x84 * pp->pos.x + pp->appsrt->x88 * pp->pos.y));
+    if (pp->kind & Tornado) {
+        f32 x;
+        f32 y;
+        f32 z;
+
+        calcTornadoLastPos(pp, &x, &y, &z);
+        prev_pos.x =
+            pp->appsrt->x70 + (pp->appsrt->x6C * z +
+                               (pp->appsrt->ssx * x + pp->appsrt->ssy * y));
+        prev_pos.y =
+            pp->appsrt->x80 + (pp->appsrt->x7C * z +
+                               (pp->appsrt->x74 * x + pp->appsrt->x78 * y));
+        prev_pos.z =
+            pp->appsrt->x90 + (pp->appsrt->x8C * z +
+                               (pp->appsrt->x84 * x + pp->appsrt->x88 * y));
+    } else {
+        f32 dx = pp->pos.x - pp->vel.x;
+        f32 dy = pp->pos.y - pp->vel.y;
+        f32 dz = pp->pos.z - pp->vel.z;
+        prev_pos.x =
+            pp->appsrt->x70 + (pp->appsrt->x6C * dz +
+                               (pp->appsrt->ssx * dx + pp->appsrt->ssy * dy));
+        prev_pos.y =
+            pp->appsrt->x80 + (pp->appsrt->x7C * dz +
+                               (pp->appsrt->x74 * dx + pp->appsrt->x78 * dy));
+        prev_pos.z =
+            pp->appsrt->x90 + (pp->appsrt->x8C * dz +
+                               (pp->appsrt->x84 * dx + pp->appsrt->x88 * dy));
+    }
 
     ax = pp->size > 42.5 ? 255.0f : 6.0f * pp->size;
     w = (s32) ax;
@@ -1564,8 +1502,98 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
     f32 angle;
     f32 abs_angle;
 
-    psUpdateAppSRT(pp, cache, false);
-    psGetAppSRTPositions(pp, &cur_pos, &prev_pos);
+    if (pp->appsrt->frameNum != HSD_PSDisp_804D6380) {
+        f32 scale_x;
+        f32 scale_y;
+
+        if (pp->appsrt->status != 2) {
+            HSD_psAppSRT* appsrt = pp->appsrt;
+            Vec3* translate = &appsrt->translate;
+            Vec3* rotate = (Vec3*) &appsrt->rot;
+            Vec3* scale = &appsrt->scale;
+            MtxPtr mmtx = appsrt->mmtx;
+
+            HSD_MtxSRT(mmtx, scale, rotate, translate, NULL);
+        }
+        if (pp->appsrt->status == 1) {
+            pp->appsrt->status = 2;
+        }
+        PSMTXConcat(cache->view_mtx, pp->appsrt->mmtx,
+                    (MtxPtr) &pp->appsrt->ssx);
+        scale_x = pp->appsrt->ssx * pp->appsrt->ssx +
+                  pp->appsrt->x74 * pp->appsrt->x74 +
+                  pp->appsrt->x84 * pp->appsrt->x84;
+        scale_x = sqrtf(scale_x);
+        pp->appsrt->x94 = scale_x;
+        scale_y = pp->appsrt->ssy * pp->appsrt->ssy +
+                  pp->appsrt->x78 * pp->appsrt->x78 +
+                  pp->appsrt->x88 * pp->appsrt->x88;
+        scale_y = sqrtf(scale_y);
+        pp->appsrt->x98 = scale_y;
+        if (pp->appsrt->xA2 != 0) {
+            Mtx temp_mtx;
+            Vec3 scale;
+
+            PSMTXIdentity(temp_mtx);
+            temp_mtx[0][3] = pp->appsrt->translate.x;
+            temp_mtx[1][3] = pp->appsrt->translate.y;
+            temp_mtx[2][3] = pp->appsrt->translate.z;
+            PSMTXConcat(cache->view_mtx, temp_mtx, temp_mtx);
+            HSD_MtxGetScale(temp_mtx, &scale);
+            PSMTXScale((MtxPtr) &pp->appsrt->ssx, scale.x, scale.y, scale.z);
+            pp->appsrt->x70 = temp_mtx[0][3];
+            pp->appsrt->x80 = temp_mtx[1][3];
+            pp->appsrt->x90 = temp_mtx[2][3];
+        }
+        pp->appsrt->frameNum = HSD_PSDisp_804D6380;
+    }
+    {
+        Mtx draw_mtx;
+
+        PSMTXCopy((MtxPtr) &pp->appsrt->ssx, draw_mtx);
+        cur_pos.x =
+            draw_mtx[0][3] +
+            (draw_mtx[0][2] * pp->pos.z +
+             (draw_mtx[0][0] * pp->pos.x + draw_mtx[0][1] * pp->pos.y));
+        cur_pos.y =
+            draw_mtx[1][3] +
+            (draw_mtx[1][2] * pp->pos.z +
+             (draw_mtx[1][0] * pp->pos.x + draw_mtx[1][1] * pp->pos.y));
+        cur_pos.z =
+            draw_mtx[2][3] +
+            (draw_mtx[2][2] * pp->pos.z +
+             (draw_mtx[2][0] * pp->pos.x + draw_mtx[2][1] * pp->pos.y));
+        if (pp->kind & Tornado) {
+            f32 x;
+            f32 y;
+            f32 z;
+
+            calcTornadoLastPos(pp, &x, &y, &z);
+            prev_pos.x =
+                draw_mtx[0][3] + (draw_mtx[0][2] * z +
+                                  (draw_mtx[0][0] * x + draw_mtx[0][1] * y));
+            prev_pos.y =
+                draw_mtx[1][3] + (draw_mtx[1][2] * z +
+                                  (draw_mtx[1][0] * x + draw_mtx[1][1] * y));
+            prev_pos.z =
+                draw_mtx[2][3] + (draw_mtx[2][2] * z +
+                                  (draw_mtx[2][0] * x + draw_mtx[2][1] * y));
+        } else {
+            f32 dx = pp->pos.x - pp->vel.x;
+            f32 dy = pp->pos.y - pp->vel.y;
+            f32 dz = pp->pos.z - pp->vel.z;
+            prev_pos.x =
+                draw_mtx[0][3] + (draw_mtx[0][2] * dz +
+                                  (draw_mtx[0][0] * dx + draw_mtx[0][1] * dy));
+            prev_pos.y =
+                draw_mtx[1][3] + (draw_mtx[1][2] * dz +
+                                  (draw_mtx[1][0] * dx + draw_mtx[1][1] * dy));
+            prev_pos.z =
+                draw_mtx[2][3] + (draw_mtx[2][2] * dz +
+                                  (draw_mtx[2][0] * dx + draw_mtx[2][1] * dy));
+        }
+        psScaleAppSRTAxes(pp, draw_mtx);
+    }
     ax = pp->appsrt->x94 * pp->size;
     y_extent = pp->appsrt->x98 * pp->size;
     if (texform == NULL) {
