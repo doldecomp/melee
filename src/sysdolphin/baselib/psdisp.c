@@ -1314,7 +1314,8 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
                          up_y, up_z);
 }
 
-static inline void psUpdateAppSRT(HSD_Particle* pp, psdisp_Cache* cache)
+static inline void psUpdateAppSRT(HSD_Particle* pp, psdisp_Cache* cache,
+                                  bool always_stamp)
 {
     Vec3 scale;
     Mtx temp_mtx;
@@ -1358,6 +1359,11 @@ static inline void psUpdateAppSRT(HSD_Particle* pp, psdisp_Cache* cache)
             pp->appsrt->x80 = temp_mtx[1][3];
             pp->appsrt->x90 = temp_mtx[2][3];
         }
+        if (!always_stamp) {
+            pp->appsrt->frameNum = HSD_PSDisp_804D6380;
+        }
+    }
+    if (always_stamp) {
         pp->appsrt->frameNum = HSD_PSDisp_804D6380;
     }
 }
@@ -1415,7 +1421,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
 
     psSetCurrentMtx(3);
     if (pp->appsrt != NULL) {
-        psUpdateAppSRT(pp, cache);
+        psUpdateAppSRT(pp, cache, true);
     }
     psGetAppSRTPositions(pp, (MtxPtr) &pp->appsrt->ssx, &cur_pos, &prev_pos);
 
@@ -1515,7 +1521,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
     f32 angle;
     f32 abs_angle;
 
-    psUpdateAppSRT(pp, cache);
+    psUpdateAppSRT(pp, cache, false);
     PSMTXCopy((MtxPtr) &pp->appsrt->ssx, draw_mtx);
     psGetAppSRTPositions(pp, draw_mtx, &cur_pos, &prev_pos);
     psScaleAppSRTAxes(pp, draw_mtx);
