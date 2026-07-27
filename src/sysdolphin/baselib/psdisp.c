@@ -210,6 +210,8 @@ static void getColorPrimEnv(HSD_Particle* pp, GXColor* primCol,
     }
 }
 
+#pragma push
+#pragma dont_inline on
 static void getColorMatAmb(HSD_Particle* pp, GXColor* matCol, GXColor* ambCol)
 {
     if (pp->matColCount) {
@@ -239,6 +241,8 @@ static void getColorMatAmb(HSD_Particle* pp, GXColor* matCol, GXColor* ambCol)
         ambCol->a = pp->ambA;
     }
 }
+#pragma pop
+
 static inline void getClrTrail(HSD_Particle* pp, GXColor* color)
 {
     GXColor env_color;
@@ -416,19 +420,6 @@ static inline void setupTevReg(HSD_Particle* pp)
             }
         }
     }
-}
-
-static inline void psSetupParticleColors(HSD_Particle* pp)
-{
-    setupChanReg(pp);
-    setupTevReg(pp);
-}
-
-static inline void psSetupParticleRenderState(HSD_Particle* pp)
-{
-    psSetupTev((u32*) pp);
-    setupChanCtrl(pp);
-    psSetupParticleColors(pp);
 }
 
 HSD_Particle* particleSort(s32 arg0, u8 arg1, HSD_Particle** arg2,
@@ -1374,9 +1365,25 @@ static inline void psUpdateAppSRT(HSD_Particle* pp, psdisp_Cache* cache,
     }
 }
 
-static inline void psGetAppSRTPositions(HSD_Particle* pp, Mtx draw_mtx,
-                                        Vec3* cur_pos, Vec3* prev_pos)
+static inline void psScaleAppSRTAxes(HSD_Particle* pp, Mtx mtx)
 {
+    mtx[0][0] *= pp->size;
+    mtx[1][0] *= pp->size;
+    mtx[2][0] *= pp->size;
+    mtx[0][1] *= pp->size;
+    mtx[1][1] *= pp->size;
+    mtx[2][1] *= pp->size;
+    mtx[0][2] *= pp->size;
+    mtx[1][2] *= pp->size;
+    mtx[2][2] *= pp->size;
+}
+
+static inline void psGetAppSRTPositions(HSD_Particle* pp, Vec3* cur_pos,
+                                        Vec3* prev_pos)
+{
+    Mtx draw_mtx;
+
+    PSMTXCopy((MtxPtr) &pp->appsrt->ssx, draw_mtx);
     cur_pos->x = draw_mtx[0][3] +
                  (draw_mtx[0][2] * pp->pos.z +
                   (draw_mtx[0][0] * pp->pos.x + draw_mtx[0][1] * pp->pos.y));
@@ -1415,6 +1422,7 @@ static inline void psGetAppSRTPositions(HSD_Particle* pp, Mtx draw_mtx,
             draw_mtx[2][3] + (draw_mtx[2][2] * dz +
                               (draw_mtx[2][0] * dx + draw_mtx[2][1] * dy));
     }
+    psScaleAppSRTAxes(pp, draw_mtx);
 }
 
 static inline void psGetAPPSRTPointPositions(HSD_Particle* pp, Vec3* cur_pos,
@@ -1542,26 +1550,12 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
     }
 }
 
-static inline void psScaleAppSRTAxes(HSD_Particle* pp, Mtx mtx)
-{
-    mtx[0][0] *= pp->size;
-    mtx[1][0] *= pp->size;
-    mtx[2][0] *= pp->size;
-    mtx[0][1] *= pp->size;
-    mtx[1][1] *= pp->size;
-    mtx[2][1] *= pp->size;
-    mtx[0][2] *= pp->size;
-    mtx[1][2] *= pp->size;
-    mtx[2][2] *= pp->size;
-}
-
 static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
                                    psdisp_Cache* cache)
 {
     GXColor draw_color;
     Vec3 cur_pos;
     Vec3 prev_pos;
-    Mtx draw_mtx;
     f32 ax;
     f32 ay;
     f32 bx;
@@ -1571,9 +1565,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
     f32 abs_angle;
 
     psUpdateAppSRT(pp, cache, false);
-    PSMTXCopy((MtxPtr) &pp->appsrt->ssx, draw_mtx);
-    psGetAppSRTPositions(pp, draw_mtx, &cur_pos, &prev_pos);
-    psScaleAppSRTAxes(pp, draw_mtx);
+    psGetAppSRTPositions(pp, &cur_pos, &prev_pos);
     ax = pp->appsrt->x94 * pp->size;
     y_extent = pp->appsrt->x98 * pp->size;
     if (texform == NULL) {
@@ -2210,7 +2202,10 @@ void psDispParticles(s32 arg0, u32 arg1)
                                           sp7A4);
                     }
 
-                    psSetupParticleRenderState(pp);
+                    psSetupTev((u32*) pp);
+                    setupChanCtrl(pp);
+                    setupChanReg(pp);
+                    setupTevReg(pp);
                     if ((pp->kind & TexEdge) != sp7AC) {
                         sp7AC = pp->kind & TexEdge;
                         if ((s32) sp7AC != 0) {
