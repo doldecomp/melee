@@ -390,10 +390,8 @@ static inline void setupTevReg(HSD_Particle* pp)
         } else if (HSD_PSDisp_804D7940.r != 0 || HSD_PSDisp_804D7940.g != 0 ||
                    HSD_PSDisp_804D7940.b != 0 || HSD_PSDisp_804D7940.a != 0)
         {
-            HSD_PSDisp_804D7940.r = 0;
-            HSD_PSDisp_804D7940.g = 0;
-            HSD_PSDisp_804D7940.b = 0;
-            HSD_PSDisp_804D7940.a = 0;
+            HSD_PSDisp_804D7940.r = HSD_PSDisp_804D7940.g =
+                HSD_PSDisp_804D7940.b = HSD_PSDisp_804D7940.a = 0;
             GXSetTevColor(GX_TEVREG1, HSD_PSDisp_804D7940);
         }
     }
