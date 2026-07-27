@@ -1507,6 +1507,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
     f32 ay;
     f32 bx;
     f32 by;
+    f32 y_extent;
     f32 angle;
     f32 abs_angle;
 
@@ -1515,13 +1516,14 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
     psGetAppSRTPositions(pp, draw_mtx, &cur_pos, &prev_pos);
     psScaleAppSRTAxes(pp, draw_mtx);
     ax = pp->appsrt->x94 * pp->size;
+    y_extent = pp->appsrt->x98 * pp->size;
     if (texform == NULL) {
-        ay = pp->appsrt->x98 * pp->size;
+        ay = y_extent;
         by = -ay;
         bx = ax;
     } else {
         ay = 0.0f;
-        by = -(pp->appsrt->x98 * pp->size);
+        by = -y_extent;
         bx = 0.0f;
     }
     if ((pp->kind & Trail) || (pp->kind & DirVec)) {
