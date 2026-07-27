@@ -1463,9 +1463,9 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
             GXWGFifo.u8 = 1;
         }
     } else {
-        if (HSD_PSDisp_804D790C != (s32) (u8) (s32) ax) {
-            HSD_PSDisp_804D790C = (u8) (s32) ax;
-            GXSetPointSize((u8) HSD_PSDisp_804D790C, GX_TO_ONE);
+        if (HSD_PSDisp_804D790C != (s32) (u8) w) {
+            HSD_PSDisp_804D790C = (u8) w;
+            GXSetPointSize((u8) w, GX_TO_ONE);
         }
         if (pp->kind & DispTexture) {
             setVtxDesc(0);
