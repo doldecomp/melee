@@ -1323,8 +1323,13 @@ static inline void psUpdateAppSRT(HSD_Particle* pp, psdisp_Cache* cache)
 
     if (pp->appsrt->frameNum != HSD_PSDisp_804D6380) {
         if (pp->appsrt->status != 2) {
-            HSD_MtxSRT(pp->appsrt->mmtx, &pp->appsrt->scale,
-                       (Vec3*) &pp->appsrt->rot, &pp->appsrt->translate, NULL);
+            HSD_psAppSRT* appsrt = pp->appsrt;
+            Vec3* translate = &appsrt->translate;
+            Vec3* rotate = (Vec3*) &appsrt->rot;
+            Vec3* scale = &appsrt->scale;
+            MtxPtr mmtx = appsrt->mmtx;
+
+            HSD_MtxSRT(mmtx, scale, rotate, translate, NULL);
         }
         if (pp->appsrt->status == 1) {
             pp->appsrt->status = 2;
