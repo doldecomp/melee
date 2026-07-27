@@ -1668,18 +1668,25 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
                                 (f12 * pp->pos.x + f8 * pp->pos.y))) -
                 w1inv * (f13 + (f11 * prev_z + (f12 * prev_x + f8 * prev_y)));
         } else {
-            f32 s800 = cache->projection.x_scale * pp->appsrt->ssx +
-                       cache->projection.x_offset;
-            f32 s7FC = cache->projection.x_scale * pp->appsrt->ssy +
-                       cache->projection.x_offset;
-            f32 s7F8 = cache->projection.x_scale * pp->appsrt->x6C +
-                       cache->projection.x_offset;
-            f32 f17 = cache->projection.y_scale * pp->appsrt->x74 +
-                      cache->projection.y_offset;
-            f32 f18 = cache->projection.y_scale * pp->appsrt->x78 +
-                      cache->projection.y_offset;
-            f32 f20 = cache->projection.y_scale * pp->appsrt->x7C +
-                      cache->projection.y_offset;
+            f32 f17;
+            f32 f18;
+            f32 f20;
+            f32 s800;
+            f32 s7FC;
+            f32 s7F8;
+
+            s800 = cache->projection.x_scale * pp->appsrt->ssx +
+                   cache->projection.x_offset;
+            s7FC = cache->projection.x_scale * pp->appsrt->ssy +
+                   cache->projection.x_offset;
+            s7F8 = cache->projection.x_scale * pp->appsrt->x6C +
+                   cache->projection.x_offset;
+            f17 = cache->projection.y_scale * pp->appsrt->x74 +
+                  cache->projection.y_offset;
+            f18 = cache->projection.y_scale * pp->appsrt->x78 +
+                  cache->projection.y_offset;
+            f20 = cache->projection.y_scale * pp->appsrt->x7C +
+                  cache->projection.y_offset;
             if (pp->kind & Tornado) {
                 f32 tx;
                 f32 ty;
