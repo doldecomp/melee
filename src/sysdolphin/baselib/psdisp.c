@@ -2256,8 +2256,9 @@ void psDispParticles(s32 arg0, u32 arg1)
                             var_r15 = pp->kind & TexInterpNear;
                             GXInitTexObjLOD(
                                 &sp764, (var_r15 != 0) ? GX_NEAR : GX_LINEAR,
-                                (pp->kind & TexInterpNear) ? GX_NEAR
-                                                           : GX_LINEAR,
+                                (s32) (pp->kind & TexInterpNear) != 0
+                                    ? GX_NEAR
+                                    : GX_LINEAR,
                                 0.0f, 0.0f, 0.0f, GX_FALSE, GX_FALSE,
                                 GX_ANISO_1);
                             GXLoadTexObj(&sp764, GX_TEXMAP0);
