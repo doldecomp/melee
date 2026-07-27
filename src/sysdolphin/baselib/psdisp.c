@@ -1411,6 +1411,49 @@ static inline void psGetAppSRTPositions(HSD_Particle* pp, Mtx draw_mtx,
     }
 }
 
+static inline void psGetAPPSRTPointPositions(HSD_Particle* pp, Vec3* cur_pos,
+                                             Vec3* prev_pos)
+{
+    cur_pos->x = pp->appsrt->x70 +
+                 (pp->appsrt->x6C * pp->pos.z +
+                  (pp->appsrt->ssx * pp->pos.x + pp->appsrt->ssy * pp->pos.y));
+    cur_pos->y = pp->appsrt->x80 +
+                 (pp->appsrt->x7C * pp->pos.z +
+                  (pp->appsrt->x74 * pp->pos.x + pp->appsrt->x78 * pp->pos.y));
+    cur_pos->z = pp->appsrt->x90 +
+                 (pp->appsrt->x8C * pp->pos.z +
+                  (pp->appsrt->x84 * pp->pos.x + pp->appsrt->x88 * pp->pos.y));
+    if (pp->kind & Tornado) {
+        f32 x;
+        f32 y;
+        f32 z;
+
+        calcTornadoLastPos(pp, &x, &y, &z);
+        prev_pos->x =
+            pp->appsrt->x70 + (pp->appsrt->x6C * z +
+                               (pp->appsrt->ssx * x + pp->appsrt->ssy * y));
+        prev_pos->y =
+            pp->appsrt->x80 + (pp->appsrt->x7C * z +
+                               (pp->appsrt->x74 * x + pp->appsrt->x78 * y));
+        prev_pos->z =
+            pp->appsrt->x90 + (pp->appsrt->x8C * z +
+                               (pp->appsrt->x84 * x + pp->appsrt->x88 * y));
+    } else {
+        f32 dx = pp->pos.x - pp->vel.x;
+        f32 dy = pp->pos.y - pp->vel.y;
+        f32 dz = pp->pos.z - pp->vel.z;
+        prev_pos->x =
+            pp->appsrt->x70 + (pp->appsrt->x6C * dz +
+                               (pp->appsrt->ssx * dx + pp->appsrt->ssy * dy));
+        prev_pos->y =
+            pp->appsrt->x80 + (pp->appsrt->x7C * dz +
+                               (pp->appsrt->x74 * dx + pp->appsrt->x78 * dy));
+        prev_pos->z =
+            pp->appsrt->x90 + (pp->appsrt->x8C * dz +
+                               (pp->appsrt->x84 * dx + pp->appsrt->x88 * dy));
+    }
+}
+
 static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
 {
     GXColor draw_color;
@@ -1423,7 +1466,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
     if (pp->appsrt != NULL) {
         psUpdateAppSRT(pp, cache, true);
     }
-    psGetAppSRTPositions(pp, (MtxPtr) &pp->appsrt->ssx, &cur_pos, &prev_pos);
+    psGetAPPSRTPointPositions(pp, &cur_pos, &prev_pos);
 
     ax = pp->size > 42.5 ? 255.0f : 6.0f * pp->size;
     w = (s32) ax;
