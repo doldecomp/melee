@@ -1937,7 +1937,7 @@ static inline void psUpdateProjectionCache(psdisp_Cache* cache,
                                            f32 perspective)
 {
     GXGetProjectionv((f32*) &cache->projection);
-    if (cache->projection.type == perspective) {
+    if (perspective == cache->projection.type) {
         psComposeProjectionRow(&cache->projected_x, cache->view_mtx[0],
                                cache->view_mtx[2], cache->projection.x_scale,
                                cache->projection.x_offset, true);
