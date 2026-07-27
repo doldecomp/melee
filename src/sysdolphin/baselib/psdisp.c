@@ -1454,7 +1454,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
             GXWGFifo.u8 = a;
         }
         if (pp->kind & DispTexture) {
-            GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 1;
+            GXWGFifo.u8 = 1;
         }
     } else {
         if (HSD_PSDisp_804D790C != (s32) (u8) (s32) ax) {
