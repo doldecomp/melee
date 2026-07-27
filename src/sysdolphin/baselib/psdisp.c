@@ -277,8 +277,8 @@ static inline void setupChanCtrl(HSD_Particle* pp)
         HSD_PSDisp_804D7930 = chan_state;
         GXSetNumChans(1);
         switch (chan_state) {
-        default:
-            GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_REG, GX_SRC_REG, 0,
+        case Trail:
+            GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_VTX, GX_SRC_VTX, 0,
                           GX_DF_NONE, GX_AF_NONE);
             break;
         case DispLighting:
@@ -297,8 +297,8 @@ static inline void setupChanCtrl(HSD_Particle* pp)
             GXSetChanCtrl(GX_ALPHA0, GX_FALSE, GX_SRC_VTX, GX_SRC_VTX, 0,
                           GX_DF_NONE, GX_AF_NONE);
             break;
-        case Trail:
-            GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_VTX, GX_SRC_VTX, 0,
+        default:
+            GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_REG, GX_SRC_REG, 0,
                           GX_DF_NONE, GX_AF_NONE);
             break;
         }
