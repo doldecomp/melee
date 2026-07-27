@@ -2140,7 +2140,11 @@ void psDispParticles(s32 arg0, u32 arg1)
                         }
                     }
 
-                    form_bank = ((HSD_PSFormGroup***) sp7F0)[pp->bank];
+                    {
+                        HSD_PSFormGroup*** form_banks = sp7F0;
+                        form_banks += pp->bank;
+                        form_bank = *form_banks;
+                    }
                     if (form_bank != NULL) {
                         form_group = form_bank[pp->texGroup];
                     } else {
@@ -2180,8 +2184,11 @@ void psDispParticles(s32 arg0, u32 arg1)
                                               GX_TG_TEX0, GX_TEXMTX0, GX_FALSE,
                                               GX_PTIDENTITY);
                         }
-                        tex_group = ((
-                            HSD_PSTexGroup***) sp7F4)[pp->bank][pp->texGroup];
+                        {
+                            HSD_PSTexGroup*** tex_banks = sp7F4;
+                            tex_banks += pp->bank;
+                            tex_group = (*tex_banks)[pp->texGroup];
+                        }
                         if (tex_group != NULL) {
                             fmt = tex_group->fmt;
                             tex_table = tex_group->texTable;
