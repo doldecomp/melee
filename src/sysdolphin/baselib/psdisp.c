@@ -1378,15 +1378,18 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
         }
         pp->appsrt->frameNum = HSD_PSDisp_804D6380;
     }
-    cur_pos.x = pp->appsrt->x70 +
-                (pp->appsrt->x6C * pp->pos.z +
-                 (pp->appsrt->ssx * pp->pos.x + pp->appsrt->ssy * pp->pos.y));
-    cur_pos.y = pp->appsrt->x80 +
-                (pp->appsrt->x7C * pp->pos.z +
-                 (pp->appsrt->x74 * pp->pos.x + pp->appsrt->x78 * pp->pos.y));
-    cur_pos.z = pp->appsrt->x90 +
-                (pp->appsrt->x8C * pp->pos.z +
-                 (pp->appsrt->x84 * pp->pos.x + pp->appsrt->x88 * pp->pos.y));
+    cur_pos.x = pp->appsrt->ssy * pp->pos.y;
+    cur_pos.y = pp->appsrt->x78 * pp->pos.y;
+    cur_pos.z = pp->appsrt->x88 * pp->pos.y;
+    cur_pos.x = pp->appsrt->ssx * pp->pos.x + cur_pos.x;
+    cur_pos.y = pp->appsrt->x74 * pp->pos.x + cur_pos.y;
+    cur_pos.z = pp->appsrt->x84 * pp->pos.x + cur_pos.z;
+    cur_pos.x = pp->appsrt->x6C * pp->pos.z + cur_pos.x;
+    cur_pos.y = pp->appsrt->x7C * pp->pos.z + cur_pos.y;
+    cur_pos.z = pp->appsrt->x8C * pp->pos.z + cur_pos.z;
+    cur_pos.x = pp->appsrt->x70 + cur_pos.x;
+    cur_pos.y = pp->appsrt->x80 + cur_pos.y;
+    cur_pos.z = pp->appsrt->x90 + cur_pos.z;
     if (pp->kind & Tornado) {
         f32 x;
         f32 y;
