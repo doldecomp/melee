@@ -1618,9 +1618,9 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
             f32 w1inv;
             f32 f16;
             f32 f20;
-            f32 f12;
-            f32 f8;
             f32 f11;
+            f32 f8;
+            f32 f12;
             f32 f13;
             f32 s808;
             f32 s804;
