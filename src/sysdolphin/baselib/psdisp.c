@@ -1153,8 +1153,12 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
 {
     f32 abs_angle;
     psdisp_Cache* cache = &HSD_PSDisp_804D0FC0;
-    Vec3 right;
-    Vec3 up;
+    f32 right_x;
+    f32 right_y;
+    f32 right_z;
+    f32 up_x;
+    f32 up_y;
+    f32 up_z;
     f32 angle;
     f32 x;
     f32 y;
@@ -1165,19 +1169,19 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
     y = pp->pos.y;
     z = pp->pos.z;
     if (texform != NULL) {
-        right.x = cache->inverse_view_mtx[0][0] * pp->size;
-        right.y = cache->inverse_view_mtx[1][0] * pp->size;
-        right.z = cache->inverse_view_mtx[2][0] * pp->size;
-        up.x = -cache->inverse_view_mtx[0][1] * pp->size;
-        up.y = -cache->inverse_view_mtx[1][1] * pp->size;
-        up.z = -cache->inverse_view_mtx[2][1] * pp->size;
+        right_x = cache->inverse_view_mtx[0][0] * pp->size;
+        right_y = cache->inverse_view_mtx[1][0] * pp->size;
+        right_z = cache->inverse_view_mtx[2][0] * pp->size;
+        up_x = -cache->inverse_view_mtx[0][1] * pp->size;
+        up_y = -cache->inverse_view_mtx[1][1] * pp->size;
+        up_z = -cache->inverse_view_mtx[2][1] * pp->size;
     } else {
-        right.x = HSD_PSDisp_804D7914 * pp->size;
-        up.x = HSD_PSDisp_804D7918 * pp->size;
-        right.y = HSD_PSDisp_804D791C * pp->size;
-        up.y = HSD_PSDisp_804D7920 * pp->size;
-        right.z = HSD_PSDisp_804D7924 * pp->size;
-        up.z = HSD_PSDisp_804D7928 * pp->size;
+        right_x = HSD_PSDisp_804D7914 * pp->size;
+        up_x = HSD_PSDisp_804D7918 * pp->size;
+        right_y = HSD_PSDisp_804D791C * pp->size;
+        up_y = HSD_PSDisp_804D7920 * pp->size;
+        right_z = HSD_PSDisp_804D7924 * pp->size;
+        up_z = HSD_PSDisp_804D7928 * pp->size;
     }
     if ((pp->kind & Trail) || (pp->kind & DirVec)) {
         f32 x;
@@ -1279,25 +1283,30 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
         f32 t2;
         f32 t3;
         f32 t4;
+        f32 rx = right_x;
+        f32 ry = right_y;
+        f32 rz = right_z;
+        f32 ux = up_x;
+        f32 uy = up_y;
+        f32 uz = up_z;
 
-        axis.x = right.y * up.z - right.z * up.y;
-        axis.y = right.z * up.x - right.x * up.z;
-        axis.z = right.x * up.y - right.y * up.x;
+        axis.x = ry * uz - rz * uy;
+        axis.y = rz * ux - rx * uz;
+        axis.z = rx * uy - ry * ux;
         PSMTXRotAxisRad(mtx, &axis, angle);
-        t1 = mtx[1][0] * right.x + mtx[1][1] * right.y;
-        t2 = mtx[1][0] * up.x + mtx[1][1] * up.y;
-        t3 = mtx[2][0] * right.x + mtx[2][1] * right.y;
-        t4 = mtx[2][0] * up.x + mtx[2][1] * up.y;
-        right.x =
-            mtx[0][2] * right.z + (mtx[0][0] * right.x + mtx[0][1] * right.y);
-        right.y = mtx[1][2] * right.z + t1;
-        right.z = mtx[2][2] * right.z + t3;
-        up.x = mtx[0][2] * up.z + (mtx[0][0] * up.x + mtx[0][1] * up.y);
-        up.y = mtx[1][2] * up.z + t2;
-        up.z = mtx[2][2] * up.z + t4;
+        t1 = mtx[1][0] * rx + mtx[1][1] * ry;
+        t2 = mtx[1][0] * ux + mtx[1][1] * uy;
+        t3 = mtx[2][0] * rx + mtx[2][1] * ry;
+        t4 = mtx[2][0] * ux + mtx[2][1] * uy;
+        right_x = mtx[0][2] * rz + (mtx[0][0] * rx + mtx[0][1] * ry);
+        right_y = mtx[1][2] * rz + t1;
+        right_z = mtx[2][2] * rz + t3;
+        up_x = mtx[0][2] * uz + (mtx[0][0] * ux + mtx[0][1] * uy);
+        up_y = mtx[1][2] * uz + t2;
+        up_z = mtx[2][2] * uz + t4;
     }
-    psDispSubMakePolygon(pp, texform, x, y, z, right.x, right.y, right.z, up.x,
-                         up.y, up.z);
+    psDispSubMakePolygon(pp, texform, x, y, z, right_x, right_y, right_z, up_x,
+                         up_y, up_z);
 }
 
 static inline void psUpdateAppSRT(HSD_Particle* pp, psdisp_Cache* cache)
