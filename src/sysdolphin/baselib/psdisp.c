@@ -2023,6 +2023,7 @@ void psDispParticles(s32 arg0, u32 arg1)
             while (pp != NULL) {
                 HSD_PSTexGroup* tex_group = NULL;
                 HSD_PSFormGroup* form_group = NULL;
+                HSD_PSFormGroup** form_bank;
                 u8* form = NULL;
                 void* image;
                 void* tlut;
@@ -2139,8 +2140,12 @@ void psDispParticles(s32 arg0, u32 arg1)
                         }
                     }
 
-                    form_group =
-                        ((HSD_PSFormGroup***) sp7F0)[pp->bank][pp->texGroup];
+                    form_bank = ((HSD_PSFormGroup***) sp7F0)[pp->bank];
+                    if (form_bank != NULL) {
+                        form_group = form_bank[pp->texGroup];
+                    } else {
+                        form_group = NULL;
+                    }
                     if (form_group != NULL && form_group->formTable != NULL) {
                         form = form_group->formTable[pp->poseNum];
                     } else {
