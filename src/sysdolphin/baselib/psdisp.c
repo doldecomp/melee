@@ -22,6 +22,12 @@ typedef struct {
 } psdisp_ParticleSortBucket;
 
 typedef struct {
+    GXTlutFmt fmt;
+    u32 tlut_name;
+    u16 n_entries;
+} psdisp_Tlut;
+
+typedef struct {
     f32 type;
     f32 x_scale;
     f32 x_offset;
@@ -2046,6 +2052,8 @@ static inline void psUpdateProjectionCache(psdisp_Cache* cache,
 #pragma inline_depth(3)
 void psDispParticles(s32 arg0, u32 arg1)
 {
+    s32 var_r16;
+    s32 var_r15;
     void* sp7F4;
     void* sp7F0;
     s32 sp7B4;
@@ -2056,9 +2064,7 @@ void psDispParticles(s32 arg0, u32 arg1)
     u8 sp7A4;
     s32 sp7A0;
     void* sp79C;
-    u16 sp790;
-    u32 sp78C;
-    GXTlutFmt sp788;
+    psdisp_Tlut tlut_obj;
     GXTexObj sp764;
     HSD_Particle* sp760;
     HSD_Particle* sp75C;
@@ -2071,12 +2077,10 @@ void psDispParticles(s32 arg0, u32 arg1)
     GXColor sp6D4;
     GXColor sp6D0;
     u32 prev_kind;
-    s32 var_r16;
-    s32 var_r15;
     HSD_Particle* pp;
     psdisp_Cache* cache;
     /// @todo Recover this stack space from the original inline hierarchy.
-    PAD_STACK(0x70);
+    PAD_STACK(0x68);
 
     var_r16 = 0;
     var_r15 = 0;
@@ -2201,9 +2205,9 @@ void psDispParticles(s32 arg0, u32 arg1)
                         sp7A5 = alpha0;
                         var_r16 = pp->aCmpMode;
                         sp7A4 = alpha1;
-                        GXSetAlphaCompare((pp->aCmpMode >> 3) & 7, sp7A5,
-                                          (pp->aCmpMode >> 6) & 3,
-                                          pp->aCmpMode & 7, sp7A4);
+                        GXSetAlphaCompare((var_r16 >> 3) & 7, sp7A5,
+                                          (var_r16 >> 6) & 3, var_r16 & 7,
+                                          sp7A4);
                     }
 
                     psSetupParticleRenderState(pp);
@@ -2301,14 +2305,15 @@ void psDispParticles(s32 arg0, u32 arg1)
                                         tlut = palettes[0];
                                     }
                                     if (tlut != sp79C) {
-                                        sp788 = (GXTlutFmt) (u8)
-                                                    tex_group->tlutfmt;
-                                        sp78C = GX_TLUT0;
-                                        sp790 =
+                                        tlut_obj.fmt = (GXTlutFmt) (u8)
+                                                           tex_group->tlutfmt;
+                                        tlut_obj.tlut_name = GX_TLUT0;
+                                        tlut_obj.n_entries =
                                             (fmt == GX_TF_C4) ? 0x10 : 0x100;
-                                        GXInitTlutObj(&sp71C, tlut, sp788,
-                                                      sp790);
-                                        GXLoadTlut(&sp71C, sp78C);
+                                        GXInitTlutObj(&sp71C, tlut,
+                                                      tlut_obj.fmt,
+                                                      tlut_obj.n_entries);
+                                        GXLoadTlut(&sp71C, tlut_obj.tlut_name);
                                         sp7B0 = NULL;
                                     }
                                 }
