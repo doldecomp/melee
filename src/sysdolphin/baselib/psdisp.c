@@ -2042,7 +2042,7 @@ void psDispParticles(s32 arg0, u32 arg1)
                 if ((sp798 == 1) && !(pp->kind & TexEdge)) {
                     break;
                 }
-                if (pp->size >= 1.1920928955078125e-07f) {
+                if (!(pp->size < 1.1920928955078125e-07f)) {
                     if (sp7A0 != 0) {
                         sp79C = NULL;
                         HSD_PSDisp_804D790C = -1;
