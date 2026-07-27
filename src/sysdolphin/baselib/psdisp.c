@@ -273,7 +273,7 @@ static inline void setupChanCtrl(HSD_Particle* pp)
 {
     u32 chan_state = pp->kind & (DispLighting | Trail);
 
-    if ((u32) HSD_PSDisp_804D7930 != chan_state) {
+    if (chan_state != (u32) HSD_PSDisp_804D7930) {
         HSD_PSDisp_804D7930 = chan_state;
         GXSetNumChans(1);
         switch (chan_state) {
@@ -2231,7 +2231,7 @@ void psDispParticles(s32 arg0, u32 arg1)
                                 }
                             }
                         }
-                        if ((image != sp7B0) && (image != NULL)) {
+                        if ((sp7B0 != image) && (image != NULL)) {
                             sp7B0 = image;
                             switch (fmt) {
                             case GX_TF_C4:
