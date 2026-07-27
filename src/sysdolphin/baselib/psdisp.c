@@ -1321,9 +1321,6 @@ static inline void psUpdateAppSRT(HSD_Particle* pp, psdisp_Cache* cache)
     f32 scale_x;
     f32 scale_y;
 
-    if (pp->appsrt == NULL) {
-        return;
-    }
     if (pp->appsrt->frameNum != HSD_PSDisp_804D6380) {
         if (pp->appsrt->status != 2) {
             HSD_MtxSRT(pp->appsrt->mmtx, &pp->appsrt->scale,
