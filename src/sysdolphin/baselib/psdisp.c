@@ -1126,19 +1126,19 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
             }
             for (i = count; i > 0; i--) {
                 f32 s = *(f32*) &it[0];
-                f32 t = *(f32*) &it[4];
-                f32 sx;
+                f32 sx = 2.0f * (s - 0.5f);
+                f32 t;
                 f32 tx;
 
-                it += 8;
                 if (pp->kind & TexFlipS) {
                     s = 1.0f - s;
                 }
+                t = *(f32*) &it[4];
+                it += 8;
+                tx = 2.0f * (t - 0.5f);
                 if (pp->kind & TexFlipT) {
                     t = 1.0f - t;
                 }
-                sx = 2.0f * (s - 0.5f);
-                tx = 2.0f * (t - 0.5f);
                 GXWGFifo.f32 = x + x0 * sx + x1 * tx;
                 GXWGFifo.f32 = y + y0 * sx + y1 * tx;
                 GXWGFifo.f32 = z + z0 * sx + z1 * tx;
@@ -1965,18 +1965,19 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
             }
             for (i = count; i > 0; i--) {
                 f32 s = *(f32*) &it[0];
-                f32 t = *(f32*) &it[4];
-                f32 sx;
+                f32 sx = 2.0f * (s - 0.5f);
+                f32 t;
                 f32 tx;
-                it += 8;
+
                 if (pp->kind & TexFlipS) {
                     s = 1.0f - s;
                 }
+                t = *(f32*) &it[4];
+                it += 8;
+                tx = 2.0f * (t - 0.5f);
                 if (pp->kind & TexFlipT) {
                     t = 1.0f - t;
                 }
-                sx = 2.0f * (s - 0.5f);
-                tx = 2.0f * (t - 0.5f);
                 GXWGFifo.f32 = cur_pos.x + ax * sx + bx * tx;
                 GXWGFifo.f32 = cur_pos.y + ay * sx + by * tx;
                 GXWGFifo.f32 = cur_pos.z;
