@@ -1902,23 +1902,6 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
     }
 }
 
-static inline void psComposeProjectionRow(Vec4* dst, const f32* row,
-                                          const f32* view_w, f32 scale,
-                                          f32 offset, bool perspective)
-{
-    if (perspective) {
-        dst->x = scale * row[0] + offset * view_w[0];
-        dst->y = scale * row[1] + offset * view_w[1];
-        dst->z = scale * row[2] + offset * view_w[2];
-        dst->w = scale * row[3] + offset * view_w[3];
-    } else {
-        dst->x = scale * row[0] + offset;
-        dst->y = scale * row[1] + offset;
-        dst->z = scale * row[2] + offset;
-        dst->w = scale * row[3] + offset;
-    }
-}
-
 static inline void psUpdateBillboardAxes(const Mtx inv_view)
 {
     f32 right;
@@ -1943,19 +1926,57 @@ static inline void psUpdateProjectionCache(psdisp_Cache* cache,
 {
     GXGetProjectionv((f32*) &cache->projection);
     if (perspective == cache->projection.type) {
-        psComposeProjectionRow(&cache->projected_x, cache->view_mtx[0],
-                               cache->view_mtx[2], cache->projection.x_scale,
-                               cache->projection.x_offset, true);
-        psComposeProjectionRow(&cache->projected_y, cache->view_mtx[1],
-                               cache->view_mtx[2], cache->projection.y_scale,
-                               cache->projection.y_offset, true);
+        f32 x_scale = cache->projection.x_scale;
+        f32 w0 = cache->view_mtx[2][0];
+        f32 x_offset = cache->projection.x_offset;
+        f32 w1;
+        f32 w2;
+        f32 w3;
+        f32 y_scale;
+        f32 y_offset;
+        f32 product;
+        f32 y0;
+        f32 y1;
+        f32 y2;
+        f32 y3;
+
+        product = x_offset * w0;
+        cache->projected_x.x = x_scale * cache->view_mtx[0][0] + product;
+        w1 = cache->view_mtx[2][1];
+        product = x_offset * w1;
+        cache->projected_x.y = x_scale * cache->view_mtx[0][1] + product;
+        w2 = cache->view_mtx[2][2];
+        product = x_offset * w2;
+        cache->projected_x.z = x_scale * cache->view_mtx[0][2] + product;
+        w3 = cache->view_mtx[2][3];
+        product = x_offset * w3;
+        cache->projected_x.w = x_scale * cache->view_mtx[0][3] + product;
+        y_scale = cache->projection.y_scale;
+        y_offset = cache->projection.y_offset;
+        y0 = y_offset * w0;
+        y1 = y_offset * w1;
+        y2 = y_offset * w2;
+        y3 = y_offset * w3;
+        cache->projected_y.x = y_scale * cache->view_mtx[1][0] + y0;
+        cache->projected_y.y = y_scale * cache->view_mtx[1][1] + y1;
+        cache->projected_y.z = y_scale * cache->view_mtx[1][2] + y2;
+        cache->projected_y.w = y_scale * cache->view_mtx[1][3] + y3;
     } else {
-        psComposeProjectionRow(&cache->projected_x, cache->view_mtx[0],
-                               cache->view_mtx[2], cache->projection.x_scale,
-                               cache->projection.x_offset, false);
-        psComposeProjectionRow(&cache->projected_y, cache->view_mtx[1],
-                               cache->view_mtx[2], cache->projection.y_scale,
-                               cache->projection.y_offset, false);
+        f32 x_offset = cache->projection.x_offset;
+        f32 x_scale = cache->projection.x_scale;
+        f32 y_offset;
+        f32 y_scale;
+
+        cache->projected_x.x = x_scale * cache->view_mtx[0][0] + x_offset;
+        cache->projected_x.y = x_scale * cache->view_mtx[0][1] + x_offset;
+        cache->projected_x.z = x_scale * cache->view_mtx[0][2] + x_offset;
+        cache->projected_x.w = x_scale * cache->view_mtx[0][3] + x_offset;
+        y_offset = cache->projection.y_offset;
+        y_scale = cache->projection.y_scale;
+        cache->projected_y.x = y_scale * cache->view_mtx[1][0] + y_offset;
+        cache->projected_y.y = y_scale * cache->view_mtx[1][1] + y_offset;
+        cache->projected_y.z = y_scale * cache->view_mtx[1][2] + y_offset;
+        cache->projected_y.w = y_scale * cache->view_mtx[1][3] + y_offset;
     }
     psUpdateBillboardAxes(cache->inverse_view_mtx);
 }
@@ -1996,7 +2017,7 @@ void psDispParticles(s32 arg0, u32 arg1)
     HSD_Particle* pp;
     psdisp_Cache* cache;
     /// @todo Recover this stack space from the original inline hierarchy.
-    PAD_STACK(0x80);
+    PAD_STACK(0x70);
 
     var_r16 = 0;
     var_r15 = 0;
