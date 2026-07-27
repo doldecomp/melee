@@ -286,7 +286,7 @@ static inline void setupChanCtrl(HSD_Particle* pp)
     if (chan_state != (u32) HSD_PSDisp_804D7930) {
         HSD_PSDisp_804D7930 = chan_state;
         GXSetNumChans(1);
-        switch (chan_state) {
+        switch (HSD_PSDisp_804D7930) {
         case Trail:
             GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_VTX, GX_SRC_VTX, 0,
                           GX_DF_NONE, GX_AF_NONE);
