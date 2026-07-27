@@ -1022,6 +1022,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                         f32 sx = 2.0f * (s - 0.5f);
                         f32 t;
                         f32 tx;
+                        s32 converted_alpha;
                         s32 alpha;
 
                         if (pp->kind & TexFlipS) {
@@ -1029,9 +1030,11 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                         }
                         t = *(f32*) &it[4];
                         it += 8;
-                        alpha = ((s32) (255.0f - t * trail_alpha) >= 0)
-                                    ? (s32) (255.0f - t * trail_alpha)
-                                    : 0;
+                        converted_alpha = (s32) (255.0f - t * trail_alpha);
+                        alpha = (s32) (255.0f - t * trail_alpha);
+                        if (converted_alpha < 0) {
+                            alpha = 0;
+                        }
                         if (alpha > 0xFF) {
                             alpha = 0xFF;
                         }
@@ -1780,6 +1783,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
                         f32 sx = 2.0f * (s - 0.5f);
                         f32 t;
                         f32 tx;
+                        s32 converted_alpha;
                         s32 alpha;
 
                         if (pp->kind & TexFlipS) {
@@ -1787,9 +1791,11 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
                         }
                         t = *(f32*) &it[4];
                         it += 8;
-                        alpha = ((s32) (255.0f - t * trail_alpha) >= 0)
-                                    ? (s32) (255.0f - t * trail_alpha)
-                                    : 0;
+                        converted_alpha = (s32) (255.0f - t * trail_alpha);
+                        alpha = (s32) (255.0f - t * trail_alpha);
+                        if (converted_alpha < 0) {
+                            alpha = 0;
+                        }
                         if (alpha > 0xFF) {
                             alpha = 0xFF;
                         }
