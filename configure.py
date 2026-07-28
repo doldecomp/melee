@@ -1212,7 +1212,7 @@ config.libs = [
             Object(Matching, "melee/mn/mnhyaku.c"),
             Object(NonMatching, "melee/mn/mnevent.c"),
             Object(NonMatching, "melee/mn/mndatadel.c"),
-            Object(NonMatching, "melee/mn/mncount.c"),
+            Object(Matching, "melee/mn/mncount.c"),
             Object(NonMatching, "melee/mn/mninfo.c"),
             Object(Matching, "melee/mn/mninfobonus.c"),
             Object(NonMatching, "melee/mn/mnsnap.c"),
