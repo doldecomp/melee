@@ -661,10 +661,12 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
     last = pp;
     p = vbuf;
     c = cbuf;
-    p->x = pp->pos.x;
-    p->y = pp->pos.y;
-    p->z = pp->pos.z;
-    p++;
+    {
+        Vec3* dst = p++;
+        dst->x = pp->pos.x;
+        dst->y = pp->pos.y;
+        dst->z = pp->pos.z;
+    }
     if (pp->kind & Tornado) {
         f32 x, y, z;
         calcTornadoLastPos(pp, &x, &y, &z);
@@ -687,10 +689,12 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
         if (q->size == pp->size && q->appsrt == NULL &&
             !((q->kind ^ pp->kind) & 0xC0100400) && !(q->kind & DispPoint))
         {
-            p->x = q->pos.x;
-            p->y = q->pos.y;
-            p->z = q->pos.z;
-            p++;
+            {
+                Vec3* dst = p++;
+                dst->x = q->pos.x;
+                dst->y = q->pos.y;
+                dst->z = q->pos.z;
+            }
             if (q->kind & Tornado) {
                 f32 x, y, z;
                 calcTornadoLastPos(q, &x, &y, &z);
@@ -911,7 +915,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                 GXWGFifo.u8 = (u8) ((f32) a * pp->trail);
             }
             if (pp->kind & DispTexture) {
-                GXWGFifo.u8 = (pp->kind >> 16) & 0xC;
+                GXWGFifo.u8 = 0;
             }
             {
                 f32 vx = x - x1;
@@ -1071,7 +1075,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
             GXWGFifo.f32 = vz;
         }
         if (pp->kind & DispTexture) {
-            GXWGFifo.u8 = 0;
+            GXWGFifo.u8 = (pp->kind >> 16) & 0xC;
         }
         {
             f32 vx = x - x1;
@@ -2082,7 +2086,7 @@ static inline void psUpdateProjectionCache(psdisp_Cache* cache,
 
 #pragma push
 #pragma inline_depth(3)
-void psDispParticles(s32 arg0, u32 arg1)
+void psDispParticles(u32 target_link, u32 sw)
 {
     s32 var_r16;
     s32 var_r15;
@@ -2120,7 +2124,7 @@ void psDispParticles(s32 arg0, u32 arg1)
     sp7A5 = 0;
     sp7A4 = 0xFF;
     sp7A0 = 1;
-    if (arg1 == 0) {
+    if (sw == 0) {
         if (HSD_PSDisp_804D6380 < 0xFFU) {
             HSD_PSDisp_804D6380 += 1;
             return;
@@ -2132,9 +2136,9 @@ void psDispParticles(s32 arg0, u32 arg1)
     sp7F0 = psNumCmdList;
     sp7B4 = 0;
     do {
-        if (arg0 & (1 << sp7B4)) {
+        if (target_link & (1 << sp7B4)) {
             particleSort(sp7B4, HSD_PSDisp_804D6380, &sp760, &sp75C);
-            if (arg1 == 1) {
+            if (sw == 1) {
                 pp = sp760;
             } else {
                 pp = sp75C;
@@ -2159,7 +2163,7 @@ void psDispParticles(s32 arg0, u32 arg1)
                 u32 width;
                 u32 height;
 
-                if ((arg1 == 1) && !(pp->kind & TexEdge)) {
+                if ((sw == 1) && !(pp->kind & TexEdge)) {
                     break;
                 }
                 if (!(pp->size < 1.1920928955078125e-07f)) {
