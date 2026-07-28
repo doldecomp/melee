@@ -2104,8 +2104,6 @@ void psDispParticles(u32 target_link, u32 sw)
 {
     s32 var_r16;
     s32 var_r15;
-    void* sp7F4;
-    void* sp7F0;
     s32 sp7B4;
     void* sp7B0;
     u32 sp7AC;
@@ -2148,8 +2146,6 @@ void psDispParticles(u32 target_link, u32 sw)
     }
     sp7B4 = 0;
     do {
-        sp7F4 = psTexGroupArray;
-        sp7F0 = psNumCmdList;
         if (target_link & (1 << sp7B4)) {
             particleSort(sp7B4, HSD_PSDisp_804D6380, &sp760, &sp75C);
             if (sw == 1) {
@@ -2160,7 +2156,6 @@ void psDispParticles(u32 target_link, u32 sw)
             while (pp != NULL) {
                 HSD_PSTexGroup* tex_group = NULL;
                 HSD_PSFormGroup* form_group = NULL;
-                HSD_PSFormGroup** form_bank;
                 u8* form = NULL;
                 void* image;
                 void* tlut;
@@ -2192,8 +2187,12 @@ void psDispParticles(u32 target_link, u32 sw)
                         prev_kind &= 0xFEFFFFFF;
                         sp7AC = (u32) -1;
                         HSD_FogSet(NULL);
-                        psSetColor(&HSD_PSDisp_804D7934, 0xFF);
-                        psSetColor(&HSD_PSDisp_804D7938, 0xFF);
+                        HSD_PSDisp_804D7934.r = HSD_PSDisp_804D7934.g =
+                            HSD_PSDisp_804D7934.b = HSD_PSDisp_804D7934.a =
+                                0xFF;
+                        HSD_PSDisp_804D7938.r = HSD_PSDisp_804D7938.g =
+                            HSD_PSDisp_804D7938.b = HSD_PSDisp_804D7938.a =
+                                0xFF;
                         sp6E0 = HSD_PSDisp_804D7934;
                         GXSetChanMatColor(GX_COLOR0A0, sp6E0);
                         sp6DC = HSD_PSDisp_804D7938;
@@ -2281,13 +2280,9 @@ void psDispParticles(u32 target_link, u32 sw)
                         }
                     }
 
-                    {
-                        HSD_PSFormGroup*** form_banks = sp7F0;
-                        form_banks += pp->bank;
-                        form_bank = *form_banks;
-                    }
-                    if (form_bank != NULL &&
-                        (form_group = form_bank[pp->texGroup]) != NULL &&
+                    if (psNumCmdList[pp->bank] != NULL &&
+                        (form_group = psNumCmdList[pp->bank][pp->texGroup]) !=
+                            NULL &&
                         form_group->formTable != NULL)
                     {
                         form = form_group->formTable[pp->poseNum];
@@ -2323,11 +2318,7 @@ void psDispParticles(u32 target_link, u32 sw)
                                               GX_TG_TEX0, GX_TEXMTX0, GX_FALSE,
                                               GX_PTIDENTITY);
                         }
-                        {
-                            HSD_PSTexGroup*** tex_banks = sp7F4;
-                            tex_banks += pp->bank;
-                            tex_group = (*tex_banks)[pp->texGroup];
-                        }
+                        tex_group = psTexGroupArray[pp->bank][pp->texGroup];
                         if (tex_group != NULL) {
                             fmt = tex_group->fmt;
                             tex_table = tex_group->texTable;
