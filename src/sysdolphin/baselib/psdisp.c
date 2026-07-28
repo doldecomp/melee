@@ -1230,12 +1230,12 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
                 return;
             }
             w1inv = -1.0f / w1;
-            prev_xy =
-                cache->projected_x.x * prev_x + cache->projected_x.y * prev_y;
-            prev_y_terms = cache->projected_y.x * prev_x +
-                           cache->projected_y.y * prev_y;
+            prev_xy = cache->projected_x.y * prev_y;
+            prev_y_terms = cache->projected_y.y * prev_y;
             cur_y = cache->projected_x.y * pp->pos.y;
             cur_y_term = cache->projected_y.y * pp->pos.y;
+            prev_xy = cache->projected_x.x * prev_x + prev_xy;
+            prev_y_terms = cache->projected_y.x * prev_x + prev_y_terms;
             x = w0inv * (cache->projected_x.w +
                          (cache->projected_x.z * pp->pos.z +
                           (cache->projected_x.x * pp->pos.x + cur_y))) -
@@ -1244,9 +1244,8 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
             y = w0inv * (cache->projected_y.w +
                          (cache->projected_y.z * pp->pos.z +
                           (cache->projected_y.x * pp->pos.x + cur_y_term))) -
-                w1inv *
-                    (cache->projected_y.w + (cache->projected_y.z * prev_z +
-                                             prev_y_terms));
+                w1inv * (cache->projected_y.w +
+                         (cache->projected_y.z * prev_z + prev_y_terms));
         } else if (pp->kind & Tornado) {
             f32 prev_x;
             f32 prev_y;
@@ -1600,6 +1599,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
             f32 dx = pp->pos.x - pp->vel.x;
             f32 dy = pp->pos.y - pp->vel.y;
             f32 dz = pp->pos.z - pp->vel.z;
+
             prev_pos.x =
                 draw_mtx[0][3] + (draw_mtx[0][2] * dz +
                                   (draw_mtx[0][0] * dx + draw_mtx[0][1] * dy));
@@ -1613,11 +1613,11 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
         psScaleAppSRTAxes(pp, draw_mtx);
     }
     ax = pp->appsrt->x94 * pp->size;
+    bx = ax;
     y_extent = pp->appsrt->x98 * pp->size;
     if (it == NULL) {
         ay = y_extent;
         by = -ay;
-        bx = ax;
     } else {
         ay = 0.0f;
         by = -y_extent;
@@ -1638,12 +1638,12 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
             f32 x1;
             f32 y0;
             f32 y1;
-            f32 f16;
-            f32 f20;
             f32 f11;
             f32 f8;
             f32 f12;
             f32 f13;
+            f32 f16;
+            f32 f20;
             f32 s808;
             f32 s804;
 
@@ -1684,11 +1684,10 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                 return;
             }
             w1inv = -1.0f / w1;
-            x0 = f20 + (f16 * pp->pos.z +
-                        (s808 * pp->pos.x + s804 * pp->pos.y));
+            x0 = f20 +
+                 (f16 * pp->pos.z + (s808 * pp->pos.x + s804 * pp->pos.y));
             x1 = f20 + (f16 * prev_z + (s808 * prev_x + s804 * prev_y));
-            y0 = f13 +
-                 (f11 * pp->pos.z + (f12 * pp->pos.x + f8 * pp->pos.y));
+            y0 = f13 + (f11 * pp->pos.z + (f12 * pp->pos.x + f8 * pp->pos.y));
             y1 = f13 + (f11 * prev_z + (f12 * prev_x + f8 * prev_y));
             vf1 = w0inv * x0 - w1inv * x1;
             vf2 = w0inv * y0 - w1inv * y1;
