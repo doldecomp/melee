@@ -901,8 +901,8 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
             }
             {
                 f32 vx = prev_x - x0;
-                f32 vy = prev_y - y0;
                 f32 vz = prev_z - z0;
+                f32 vy = prev_y - y0;
                 GXWGFifo.f32 = vx;
                 GXWGFifo.f32 = vy;
                 GXWGFifo.f32 = vz;
@@ -965,8 +965,8 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
             }
             {
                 f32 vx = prev_x + x1;
-                f32 vy = prev_y + y1;
                 f32 vz = prev_z + z1;
+                f32 vy = prev_y + y1;
                 GXWGFifo.f32 = vx;
                 GXWGFifo.f32 = vy;
                 GXWGFifo.f32 = vz;
