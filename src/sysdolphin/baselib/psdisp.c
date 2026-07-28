@@ -1208,6 +1208,7 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
             f32 prev_y_terms;
             f32 cur_y;
             f32 prev_xy;
+            f32 cur_yx;
 
             if (pp->kind & Tornado) {
                 calcTornadoLastPos(pp, &prev_x, &prev_y, &prev_z);
@@ -1236,14 +1237,14 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
             cur_y_term = cache->projected_y.y * pp->pos.y;
             prev_xy = cache->projected_x.x * prev_x + prev_xy;
             prev_y_terms = cache->projected_y.x * prev_x + prev_y_terms;
+            cur_yx = cache->projected_y.x * pp->pos.x + cur_y_term;
             x = w0inv * (cache->projected_x.w +
                          (cache->projected_x.z * pp->pos.z +
                           (cache->projected_x.x * pp->pos.x + cur_y))) -
                 w1inv * (cache->projected_x.w +
                          (cache->projected_x.z * prev_z + prev_xy));
             y = w0inv * (cache->projected_y.w +
-                         (cache->projected_y.z * pp->pos.z +
-                          (cache->projected_y.x * pp->pos.x + cur_y_term))) -
+                         (cache->projected_y.z * pp->pos.z + cur_yx)) -
                 w1inv * (cache->projected_y.w +
                          (cache->projected_y.z * prev_z + prev_y_terms));
         } else if (pp->kind & Tornado) {
@@ -2128,7 +2129,7 @@ void psDispParticles(u32 target_link, u32 sw)
     HSD_Particle* pp;
     psdisp_Cache* cache;
     /// @todo Recover this stack space from the original inline hierarchy.
-    PAD_STACK(0x68);
+    PAD_STACK(0x64);
 
     var_r16 = 0;
     var_r15 = 0;
