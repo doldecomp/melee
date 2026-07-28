@@ -23,6 +23,7 @@
 
 #include <math_ppc.h>
 #include <trigf.h>
+#include <dolphin/types.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -42,19 +43,74 @@ struct grShrineRoute_YakumonoParam {
     f32 x1C;
     f32 x20;
     int x24;
-    grZakoGenerator_SpawnDesc x28;
+    grZakoGenerator_SpawnDesc spawn_desc;
 };
 
-/* 20AD58 */ static void grShrineRoute_8020AD58(void* user_data, int joint_id,
-                                                CollData* coll, int coll_x50,
-                                                mpLib_GroundEnum ground_kind,
-                                                float delta_y);
-
-s16 grSh_Route_803E58E0[8] = {
-    0x33, 0x4F, 0x65, 0x66, 0x73, 0x74, 0x83, 0x00
+struct grSh_Route_LightConfig {
+    /* 0x00 */ GXColor color;
+    /* 0x04 */ Vec3 pos;
+    /* 0x10 */ Vec3 interest;
+    /* 0x1C */ s32 type;
+    /* 0x20 */ f32 cutoff;
+    /* 0x24 */ GXSpotFn point_func;
+    /* 0x28 */ f32 ref_br;
+    /* 0x2C */ f32 ref_dist;
+    /* 0x30 */ GXDistAttnFn dist_func;
 };
 
-StageCallbacks grSh_Route_StageCallbacks[7] = {
+/* 2087B8 */ static void grShrineRoute_OnDemoInit(bool);
+/* 2087BC */ static void grShrineRoute_OnInit(void);
+/* 20882C */ static void grShrineRoute_OnLoad(void);
+/* 208850 */ static void grShrineRoute_OnStart(void);
+/* 2088B8 */ static bool grShrineRoute_802088B8(void);
+/* 2088C0 */ static HSD_GObj* grShrineRoute_802088C0(int);
+/* 2089AC */ static void grShrineRoute_802089AC(Ground_GObj*);
+/* 2089D8 */ static bool grShrineRoute_802089D8(Ground_GObj*);
+/* 2089E0 */ static void grShrineRoute_802089E0(Ground_GObj*);
+/* 2089E4 */ static void grShrineRoute_802089E4(Ground_GObj*);
+/* 2089E8 */ static void grShrineRoute_802089E8(Ground_GObj*);
+/* 208A28 */ static bool grShrineRoute_80208A28(Ground_GObj*);
+/* 208A30 */ static void grShrineRoute_80208A30(Ground_GObj*);
+/* 208A34 */ static void grShrineRoute_80208A34(Ground_GObj*);
+/* 208A38 */ static void fn_80208A38(HSD_GObj*);
+/* 208D14 */ static void grShrineRoute_80208D14(Ground_GObj*);
+/* 208F0C */ static bool grShrineRoute_80208F0C(Ground_GObj*);
+/* 208F14 */ static bool grShrineRoute_80208F14(void);
+/* 208F70 */ static void grShrineRoute_80208F70(Ground_GObj*);
+/* 209AEC */ static void grShrineRoute_80209AEC(Ground_GObj*);
+/* 209AF0 */ static void grShrineRoute_80209AF0(Ground_GObj*);
+/* 209BE4 */ static bool grShrineRoute_80209BE4(Ground_GObj*);
+/* 209BEC */ static void grShrineRoute_80209BEC(Ground_GObj*);
+/* 20A100 */ static void grShrineRoute_8020A100(Ground_GObj*);
+/* 20A104 */ static void grShrineRoute_8020A104(Ground_GObj*);
+/* 20A214 */ static bool grShrineRoute_8020A214(Ground_GObj*);
+/* 20A21C */ static void grShrineRoute_8020A21C(Ground_GObj*);
+/* 20A864 */ static void grShrineRoute_8020A864(Ground_GObj*);
+/* 20A868 */ static void grShrineRoute_8020A868(Ground_GObj*);
+/* 20A894 */ static bool grShrineRoute_8020A894(Ground_GObj*);
+/* 20A89C */ static void grShrineRoute_8020A89C(Ground_GObj*);
+/* 20A8A0 */ static void grShrineRoute_8020A8A0(Ground_GObj*);
+/* 20A8A4 */ static void grShrineRoute_8020A8A4(Ground_GObj*);
+/* 20AA40 */ static void grShrineRoute_8020AA40(HSD_GObj*);
+/* 20AB58 */ static HSD_LObj* grShrineRoute_8020AB58(Ground_GObj*);
+/* 20AC44 */ static HSD_LObj* grShrineRoute_8020AC44(HSD_GObj*);
+/* 20AD24 */ static bool grShrineRoute_8020AD24(int);
+/* 20AD58 */ static void onJointCollision(void* user_data, int joint_id,
+                                          CollData* coll, int coll_x50,
+                                          mpLib_GroundEnum ground_kind,
+                                          float delta_y);
+/* 20AE08 */ static s32 grShrineRoute_8020AE08(HSD_GObj*, HSD_GObj*, s32*);
+/* 20AF38 */ static void grShrineRoute_8020AF38(HSD_GObj*, s32);
+/* 20B020 */ static void grShrineRoute_8020B020(HSD_GObj* gobj, int r4,
+                                                bool hide);
+/* 20B0AC */ static void grShrineRoute_8020B0AC(void);
+/* 20B104 */ static DynamicsDesc* grShrineRoute_OnTouchLine(enum_t);
+/* 20B10C */ static bool grShrineRoute_OnCheckShadowRender(Vec3*, int arg,
+                                                           HSD_JObj* jobj);
+
+static s16 grSh_Route_803E58E0[] = { 51, 79, 101, 102, 115, 116, 131, 0 };
+
+static StageCallbacks stage_callbacks[] = {
     {
         grShrineRoute_802089AC,
         grShrineRoute_802089D8,
@@ -108,7 +164,7 @@ StageCallbacks grSh_Route_StageCallbacks[7] = {
 
 StageData grSh_Route_StageData = {
     Gr_Kind_ShrineRoute,
-    grSh_Route_StageCallbacks,
+    stage_callbacks,
     "/GrNSr.dat",
     grShrineRoute_OnInit,
     grShrineRoute_OnDemoInit,
@@ -123,27 +179,6 @@ StageData grSh_Route_StageData = {
 };
 
 static struct grShrineRoute_YakumonoParam* yakumono_param;
-
-extern float grNKr_804DB868;
-extern HSD_LightDesc grSh_Route_803E5D74;
-extern HSD_LightDesc grSh_Route_803E5D90;
-extern Vec3 grSh_Route_803B8360;
-extern Vec3 grSh_Route_803B836C;
-extern Vec3 grSh_Route_803B8378;
-extern Vec3 grSh_Route_803B8384;
-extern Vec3 grSh_Route_803B8390;
-
-extern struct grSh_Route_LightConfig {
-    /* 0x00 */ GXColor x0;
-    /* 0x04 */ Vec3 x4;
-    /* 0x10 */ Vec3 x10;
-    /* 0x1C */ s32 x1C;
-    /* 0x20 */ f32 x20;
-    /* 0x24 */ s32 x24;
-    /* 0x28 */ f32 x28;
-    /* 0x2C */ f32 x2C;
-    /* 0x30 */ s32 x30;
-} grSh_Route_803E5A58[];
 
 void grShrineRoute_OnDemoInit(bool arg) {}
 
@@ -168,7 +203,7 @@ void grShrineRoute_OnLoad(void)
 void grShrineRoute_OnStart(void)
 {
     int val;
-    grZakoGenerator_801CAE04(&yakumono_param->x28);
+    grZakoGenerator_801CAE04(&yakumono_param->spawn_desc);
     val = yakumono_param->x24;
     if (val != 0) {
         val = HSD_Randi(yakumono_param->x24);
@@ -188,7 +223,7 @@ bool grShrineRoute_802088B8(void)
 HSD_GObj* grShrineRoute_802088C0(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grSh_Route_StageCallbacks[gobj_id];
+    StageCallbacks* callbacks = &stage_callbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
@@ -321,12 +356,12 @@ void grShrineRoute_80208D14(Ground_GObj* gobj)
     }
 
     ftCo_800C07F8(gobj, 3, grShrineRoute_8020AE08);
-    mpJointSetCb1(8, gp, grShrineRoute_8020AD58);
-    mpJointSetCb1(9, gp, grShrineRoute_8020AD58);
-    mpJointSetCb1(10, gp, grShrineRoute_8020AD58);
-    mpJointSetCb1(11, gp, grShrineRoute_8020AD58);
-    mpJointSetCb1(12, gp, grShrineRoute_8020AD58);
-    mpJointSetCb1(13, gp, grShrineRoute_8020AD58);
+    mpJointSetCb1(8, gp, onJointCollision);
+    mpJointSetCb1(9, gp, onJointCollision);
+    mpJointSetCb1(10, gp, onJointCollision);
+    mpJointSetCb1(11, gp, onJointCollision);
+    mpJointSetCb1(12, gp, onJointCollision);
+    mpJointSetCb1(13, gp, onJointCollision);
 
     if (Ground_801C2D24(0x94, &center)) {
         HSD_JObj* jobj;
@@ -993,28 +1028,31 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
             }
         }
 
-        /* Compute weighted direction */
-        dir = grSh_Route_803B8360;
-        ref_dist = distances[sorted[1]];
+        {
+            static Vec3 const dir_init = { 0 };
+            /* Compute weighted direction */
+            dir = dir_init;
+            ref_dist = distances[sorted[1]];
 
-        for (i = 1; i < (int) gp->u.shrineroute2.x168; i++) {
-            if (HSD_LObjGetPosition(gp->u.shrineroute2.xC8[sorted[i]],
-                                    &light_pos) != 0)
-            {
-                weight = ref_dist / distances[sorted[i]];
-                lbVector_Sub(&light_pos, &player_pos);
-                if (light_pos.y < 15.0f) {
-                    if (light_pos.y < 0.0f) {
-                        weight = 0.0f;
-                    } else {
-                        weight *= light_pos.y / 15.0f;
+            for (i = 1; i < (int) gp->u.shrineroute2.x168; i++) {
+                if (HSD_LObjGetPosition(gp->u.shrineroute2.xC8[sorted[i]],
+                                        &light_pos) != 0)
+                {
+                    weight = ref_dist / distances[sorted[i]];
+                    lbVector_Sub(&light_pos, &player_pos);
+                    if (light_pos.y < 15.0f) {
+                        if (light_pos.y < 0.0f) {
+                            weight = 0.0f;
+                        } else {
+                            weight *= light_pos.y / 15.0f;
+                        }
                     }
+                    lbVector_Normalize(&light_pos);
+                    light_pos.x *= weight;
+                    light_pos.y *= weight;
+                    light_pos.z *= weight;
+                    lbVector_Add(&dir, &light_pos);
                 }
-                lbVector_Normalize(&light_pos);
-                light_pos.x *= weight;
-                light_pos.y *= weight;
-                light_pos.z *= weight;
-                lbVector_Add(&dir, &light_pos);
             }
         }
 
@@ -1110,29 +1148,197 @@ void grShrineRoute_8020A8A4(Ground_GObj* gobj)
     }
 }
 
+static struct grSh_Route_LightConfig light_config[] = {
+    {
+        { 0x80, 0x66, 0x4D, 0xFF },
+        { 790.0f, -320.0f, 70.0f },
+        { 0.0f, 0.0f, 0.0f },
+        LOBJ_FLAGS_B1,
+        0.0f,
+        GX_SP_OFF,
+        0.01f,
+        800.0f,
+        GX_DA_STEEP,
+    },
+    {
+        { 0x80, 0x80, 0x80, 0xFF },
+        { 510.0f, -10.0f, 70.0f },
+        { 0.0f, 0.0f, 0.0f },
+        LOBJ_FLAGS_B1,
+        0.0f,
+        GX_SP_OFF,
+        0.01f,
+        500.0f,
+        GX_DA_STEEP,
+    },
+    {
+        { 0xB3, 0x99, 0x66, 0xFF },
+        { 840.0f, 210.0f, 40.0f },
+        { 0.0f, 0.0f, 0.0f },
+        LOBJ_FLAGS_B1,
+        0.0f,
+        GX_SP_OFF,
+        0.1f,
+        260.0f,
+        GX_DA_STEEP,
+    },
+    {
+        { 0xFF, 0xCC, 0x66, 0xFF },
+        { 600.0f, 120.0f, 30.0f },
+        { 0.0f, 0.0f, 0.0f },
+        LOBJ_FLAGS_B1,
+        0.0f,
+        GX_SP_OFF,
+        0.01f,
+        500.0f,
+        GX_DA_STEEP,
+    },
+    {
+        { 0x80, 0x80, 0x80, 0xFF },
+        { 800.0f, -130.0f, 28.0f },
+        { 0.0f, 0.0f, 0.0f },
+        LOBJ_FLAGS_B1,
+        0.0f,
+        GX_SP_OFF,
+        0.01f,
+        400.0f,
+        GX_DA_STEEP,
+    },
+    {
+        { 0xCC, 0x99, 0xA5, 0xFF },
+        { 710.0f, -50.0f, 20.0f },
+        { 0.0f, 0.0f, 0.0f },
+        LOBJ_FLAGS_B1,
+        0.0f,
+        GX_SP_OFF,
+        0.01f,
+        500.0f,
+        GX_DA_STEEP,
+    },
+    {
+        { 0x90, 0xC2, 0xFF, 0xFF },
+        { 10.0f, 18.0f, 9.0f },
+        { 0.0f, 0.0f, 0.0f },
+        LOBJ_FLAGS_B1,
+        0.0f,
+        GX_SP_OFF,
+        0.03f,
+        810.0f,
+        GX_DA_STEEP,
+    },
+    {
+        { 0xFF, 0x82, 0x82, 0xFF },
+        { -260.0f, -220.0f, 20.0f },
+        { 0.0f, 0.0f, 0.0f },
+        LOBJ_FLAGS_B1,
+        0.0f,
+        GX_SP_OFF,
+        0.03f,
+        300.0f,
+        GX_DA_STEEP,
+    },
+    {
+        { 0x78, 0xB4, 0xFF, 0xFF },
+        { 244.0f, -288.0f, 22.0f },
+        { 0.0f, 0.0f, 0.0f },
+        LOBJ_FLAGS_B1,
+        0.0f,
+        GX_SP_OFF,
+        0.03f,
+        300.0f,
+        GX_DA_STEEP,
+    },
+    {
+        { 0xF0, 0xF0, 0xF0, 0xFF },
+        { -66.0f, 140.0f, 27.0f },
+        { 0.0f, 0.0f, 0.0f },
+        LOBJ_FLAGS_B1,
+        0.0f,
+        GX_SP_OFF,
+        0.03f,
+        400.0f,
+        GX_DA_STEEP,
+    },
+    {
+        { 0x80, 0x99, 0x66, 0xFF },
+        { 500.0f, -150.0f, 60.0f },
+        { 500.0f, -330.0f, -20.0f },
+        LOBJ_FLAGS_B1 | LOBJ_INFINITE,
+        30.0f,
+        GX_SP_COS2,
+        0.99f,
+        200.0f,
+        GX_DA_STEEP,
+    },
+    {
+        { 0xC8, 0xF0, 0xFF, 0xFF },
+        { 560.0f, 310.0f, 160.0f },
+        { 560.0f, 290.0f, -10.0f },
+        LOBJ_FLAGS_B1 | LOBJ_INFINITE,
+        45.0f,
+        GX_SP_COS2,
+        0.99f,
+        24.0f,
+        GX_DA_STEEP,
+    },
+    {
+        { 0xA4, 0xD8, 0xFF, 0xFF },
+        { 260.0f, 444.0f, 88.0f },
+        { 242.0f, -166.0f, -33.0f },
+        LOBJ_FLAGS_B1 | LOBJ_INFINITE,
+        25.0f,
+        GX_SP_COS2,
+        0.99f,
+        450.0f,
+        GX_DA_STEEP,
+    },
+    {
+        { 0xFF, 0x4D, 0x4D, 0xFF },
+        { -162.0f, -300.0f, 23.0f },
+        { -314.0f, 111.0f, -5.0f },
+        LOBJ_FLAGS_B1 | LOBJ_INFINITE,
+        31.0f,
+        GX_SP_COS2,
+        0.99f,
+        370.0f,
+        GX_DA_STEEP,
+    },
+    {
+        { 0x64, 0x80, 0x4D, 0xFF },
+        { -88.0f, -131.0f, 66.0f },
+        { -91.0f, -227.0f, -25.0f },
+        LOBJ_FLAGS_B1 | LOBJ_INFINITE,
+        45.0f,
+        GX_SP_COS2,
+        0.99f,
+        125.0f,
+        GX_DA_STEEP,
+    },
+};
+
 void grShrineRoute_8020AA40(HSD_GObj* gobj)
 {
     struct grSh_Route_LightConfig* config;
     HSD_LObj* lobj;
-    u32 i;
-    GXColor color;
+    size_t i;
 
     if (gobj != NULL) {
         lobj = HSD_LObjGetNext(GET_LOBJ(gobj));
-        for (i = 0; i < 15; i++, lobj = HSD_LObjGetNext(lobj)) {
-            config = &grSh_Route_803E5A58[i];
+        for (i = 0; i < ARRAY_SIZE(light_config);
+             i++, lobj = HSD_LObjGetNext(lobj))
+        {
+            config = &light_config[i];
             if (lobj != NULL) {
-                color = config->x0;
-                HSD_LObjSetColor(lobj, color);
-                HSD_LObjSetPosition(lobj, &config->x4);
-                HSD_LObjSetDistAttn(lobj, config->x2C, config->x28,
-                                    config->x30);
-                if (config->x1C == 2) {
-                    lobj->flags = 6;
-                } else if (config->x1C == 3) {
-                    lobj->flags = 7;
-                    HSD_LObjSetInterest(lobj, &config->x10);
-                    HSD_LObjSetSpot(lobj, config->x20, config->x24);
+                HSD_LObjSetColor(lobj, config->color);
+                HSD_LObjSetPosition(lobj, &config->pos);
+                HSD_LObjSetDistAttn(lobj, config->ref_dist, config->ref_br,
+                                    config->dist_func);
+                if (config->type == LOBJ_FLAGS_B1) {
+                    lobj->flags = LOBJ_FLAGS_B1 | LOBJ_DIFFUSE;
+                } else if (config->type == (LOBJ_INFINITE | LOBJ_FLAGS_B1)) {
+                    lobj->flags = LOBJ_INFINITE | LOBJ_FLAGS_B1 | LOBJ_DIFFUSE;
+                    HSD_LObjSetInterest(lobj, &config->interest);
+                    HSD_LObjSetSpot(lobj, config->cutoff, config->point_func);
                 }
             } else {
                 OSReport("%s:%d: oioi...\n");
@@ -1141,8 +1347,22 @@ void grShrineRoute_8020AA40(HSD_GObj* gobj)
     }
 }
 
+static float lobj0_shininess = 16.0f;
+
+static HSD_LightDesc lobj0 = {
+    NULL,
+    NULL,
+    LOBJ_FLAGS_B1 | LOBJ_DIFFUSE,
+    0,
+    { 0xFF, 0xFF, 0xFF, 0xFF },
+    NULL,
+    NULL,
+    &lobj0_shininess,
+};
+
 HSD_LObj* grShrineRoute_8020AB58(Ground_GObj* gobj)
 {
+    static Vec3 const pos_init = { 0.0f, 100.0f, 0.0f };
     HSD_LObj* new_lobj;
     HSD_LObj* lobj;
     Vec3 pos;
@@ -1153,9 +1373,9 @@ HSD_LObj* grShrineRoute_8020AB58(Ground_GObj* gobj)
     while ((lobj == NULL ? NULL : lobj->next) != NULL) {
         lobj = lobj == NULL ? NULL : lobj->next;
     }
-    new_lobj = HSD_LObjLoadDesc(&grSh_Route_803E5D74);
+    new_lobj = HSD_LObjLoadDesc(&lobj0);
     if (new_lobj != NULL) {
-        pos = grSh_Route_803B836C;
+        pos = pos_init;
         HSD_LObjSetNext(lobj, new_lobj);
         HSD_LObjSetPosition(new_lobj, &pos);
         HSD_LObjSetFlags(new_lobj, 0x20);
@@ -1164,8 +1384,22 @@ HSD_LObj* grShrineRoute_8020AB58(Ground_GObj* gobj)
     PAD_STACK(8);
 }
 
+static float lobj1_shininess = 16.0f;
+
+static HSD_LightDesc lobj1 = {
+    NULL,
+    NULL,
+    LOBJ_FLAGS_B1 | LOBJ_SPECULAR,
+    0,
+    { 0xFF, 0xFF, 0xFF, 0xFF },
+    NULL,
+    NULL,
+    &lobj1_shininess,
+};
+
 HSD_LObj* grShrineRoute_8020AC44(HSD_GObj* gobj)
 {
+    static Vec3 const pos_init = { 0.0f, 100.0f, 0.0f };
     HSD_LObj* new_lobj;
     HSD_LObj* lobj;
     Vec3 pos;
@@ -1177,9 +1411,9 @@ HSD_LObj* grShrineRoute_8020AC44(HSD_GObj* gobj)
     while ((lobj == NULL ? NULL : lobj->next) != NULL) {
         lobj = lobj == NULL ? NULL : lobj->next;
     }
-    new_lobj = HSD_LObjLoadDesc(&grSh_Route_803E5D90);
+    new_lobj = HSD_LObjLoadDesc(&lobj1);
     if (new_lobj != NULL) {
-        pos = grSh_Route_803B8378;
+        pos = pos_init;
         HSD_LObjSetNext(lobj, new_lobj);
         HSD_LObjSetPosition(new_lobj, &pos);
     }
@@ -1196,9 +1430,9 @@ bool grShrineRoute_8020AD24(int arg)
 }
 
 /// @copydoc mpLib_JointCollisionCallback
-void grShrineRoute_8020AD58(void* user_data, int joint_id, CollData* coll,
-                            int coll_x50, mpLib_GroundEnum ground_kind,
-                            float delta_y)
+void onJointCollision(void* user_data, int joint_id, CollData* coll,
+                      int coll_x50, mpLib_GroundEnum ground_kind,
+                      float delta_y)
 {
     Ground* gp = user_data;
     HSD_GObj* pgobj;
@@ -1224,6 +1458,8 @@ void grShrineRoute_8020AD58(void* user_data, int joint_id, CollData* coll,
 
 s32 grShrineRoute_8020AE08(HSD_GObj* gobj, HSD_GObj* player_gobj, s32* out)
 {
+    static Vec3 const lo_init = { -285.93, -226.1f, 0.0f };
+    static Vec3 const hi_init = { -161.56, -226.1f, 0.0f };
     Vec3 lo;
     Vec3 hi;
     Ground* gp = gobj->user_data;
@@ -1238,8 +1474,8 @@ s32 grShrineRoute_8020AE08(HSD_GObj* gobj, HSD_GObj* player_gobj, s32* out)
         return 0;
     }
 
-    lo = grSh_Route_803B8384;
-    hi = grSh_Route_803B8390;
+    lo = lo_init;
+    hi = hi_init;
     scale = Ground_801C0498();
     lo.x *= scale;
     lo.y *= scale;
