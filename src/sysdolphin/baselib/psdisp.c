@@ -1206,8 +1206,10 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
             f32 w1inv;
             f32 cur_y_term;
             f32 prev_y_terms;
+            f32 prev_y_terms_copy;
             f32 cur_y;
             f32 prev_xy;
+            f32 prev_x_sum;
             f32 cur_yx;
             f32 prev_yx;
 
@@ -1232,18 +1234,19 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
                 return;
             }
             w1inv = -1.0f / w1;
-            prev_xy = cache->projected_x.y * prev_y;
-            prev_y_terms = cache->projected_y.y * prev_y;
-            cur_y = cache->projected_x.y * pp->pos.y;
-            cur_y_term = cache->projected_y.y * pp->pos.y;
-            prev_xy = cache->projected_x.x * prev_x + prev_xy;
-            prev_yx = cache->projected_y.x * prev_x + prev_y_terms;
+            prev_x_sum = (prev_y_terms = cache->projected_y.y * prev_y,
+                          prev_y_terms_copy = prev_y_terms,
+                          prev_xy = cache->projected_x.y * prev_y,
+                          cur_y = cache->projected_x.y * pp->pos.y,
+                          cur_y_term = cache->projected_y.y * pp->pos.y,
+                          cache->projected_x.x * prev_x + prev_xy);
+            prev_yx = cache->projected_y.x * prev_x + prev_y_terms_copy;
             cur_yx = cache->projected_y.x * pp->pos.x + cur_y_term;
             x = w0inv * (cache->projected_x.w +
                          (cache->projected_x.z * pp->pos.z +
                           (cache->projected_x.x * pp->pos.x + cur_y))) -
                 w1inv * (cache->projected_x.w +
-                         (cache->projected_x.z * prev_z + prev_xy));
+                         (cache->projected_x.z * prev_z + prev_x_sum));
             y = w0inv * (cache->projected_y.w +
                          (cache->projected_y.z * pp->pos.z + cur_yx)) -
                 w1inv * (cache->projected_y.w +
@@ -2136,7 +2139,7 @@ void psDispParticles(u32 target_link, u32 sw)
     HSD_Particle* pp;
     psdisp_Cache* cache;
     /// @todo Recover this stack space from the original inline hierarchy.
-    PAD_STACK(0x50);
+    PAD_STACK(0x48);
 
     var_r16 = 0;
     var_r15 = 0;
