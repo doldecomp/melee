@@ -2146,10 +2146,10 @@ void psDispParticles(u32 target_link, u32 sw)
         HSD_PSDisp_804D6380 = 1;
         return;
     }
-    sp7F4 = psTexGroupArray;
-    sp7F0 = psNumCmdList;
     sp7B4 = 0;
     do {
+        sp7F4 = psTexGroupArray;
+        sp7F0 = psNumCmdList;
         if (target_link & (1 << sp7B4)) {
             particleSort(sp7B4, HSD_PSDisp_804D6380, &sp760, &sp75C);
             if (sw == 1) {
