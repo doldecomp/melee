@@ -1665,12 +1665,12 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
             w0 = pp->appsrt->x90 +
                  (pp->appsrt->x8C * pp->pos.z +
                   (pp->appsrt->x84 * pp->pos.x + pp->appsrt->x88 * pp->pos.y));
-            f16 = HSD_PSDisp_804D0FC0.projection.x_scale * pp->appsrt->x6C +
-                  HSD_PSDisp_804D0FC0.projection.x_offset * pp->appsrt->x8C;
             s808 = HSD_PSDisp_804D0FC0.projection.x_scale * pp->appsrt->ssx +
                    HSD_PSDisp_804D0FC0.projection.x_offset * pp->appsrt->x84;
             s804 = HSD_PSDisp_804D0FC0.projection.x_scale * pp->appsrt->ssy +
                    HSD_PSDisp_804D0FC0.projection.x_offset * pp->appsrt->x88;
+            f16 = HSD_PSDisp_804D0FC0.projection.x_scale * pp->appsrt->x6C +
+                  HSD_PSDisp_804D0FC0.projection.x_offset * pp->appsrt->x8C;
             f20 = HSD_PSDisp_804D0FC0.projection.x_scale * pp->appsrt->x70 +
                   HSD_PSDisp_804D0FC0.projection.x_offset * pp->appsrt->x90;
             f12 = HSD_PSDisp_804D0FC0.projection.y_scale * pp->appsrt->x74 +
