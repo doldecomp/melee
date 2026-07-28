@@ -1,7 +1,5 @@
 #include "placeholder.h"
 
-#include "ft/forward.h"
-
 #include "ty/toy.h"
 
 #include <baselib/gobj.h>
@@ -810,9 +808,9 @@ static void mnCount_InitUserData_noinline(MnCountData* userdata)
 
 static MnCountData* mnCount_AllocUserData(void)
 {
-    MnCountData* userdata = HSD_MemAlloc(sizeof(MnCountData));
-    HSD_ASSERTREPORT(0x512, userdata, "Can't get user_data.\n");
-    return userdata;
+    MnCountData* user_data = HSD_MemAlloc(sizeof(*user_data));
+    HSD_ASSERTREPORT(1298, user_data, "Can't get user_data.\n");
+    return user_data;
 }
 
 void mnCount_Create(void)
