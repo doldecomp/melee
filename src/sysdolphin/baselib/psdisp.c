@@ -2187,12 +2187,14 @@ void psDispParticles(u32 target_link, u32 sw)
                         prev_kind &= 0xFEFFFFFF;
                         sp7AC = (u32) -1;
                         HSD_FogSet(NULL);
-                        HSD_PSDisp_804D7934.r = HSD_PSDisp_804D7934.g =
-                            HSD_PSDisp_804D7934.b = HSD_PSDisp_804D7934.a =
-                                0xFF;
-                        HSD_PSDisp_804D7938.r = HSD_PSDisp_804D7938.g =
-                            HSD_PSDisp_804D7938.b = HSD_PSDisp_804D7938.a =
-                                0xFF;
+                        HSD_PSDisp_804D7934.b = 0xFF;
+                        HSD_PSDisp_804D7934.g = 0xFF;
+                        HSD_PSDisp_804D7934.r = 0xFF;
+                        HSD_PSDisp_804D7938.b = 0xFF;
+                        HSD_PSDisp_804D7938.g = 0xFF;
+                        HSD_PSDisp_804D7938.r = 0xFF;
+                        HSD_PSDisp_804D7938.a = 0xFF;
+                        HSD_PSDisp_804D7934.a = 0xFF;
                         sp6E0 = HSD_PSDisp_804D7934;
                         GXSetChanMatColor(GX_COLOR0A0, sp6E0);
                         sp6DC = HSD_PSDisp_804D7938;
