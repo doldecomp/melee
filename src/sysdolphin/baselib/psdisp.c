@@ -585,6 +585,7 @@ static inline HSD_Particle* psDispSubPoint(HSD_Particle* pp)
             p->z = q->pos.z;
             p++;
             if (count == 16) {
+                p = buf;
                 if (pp->kind & DispTexture) {
                     setVtxDesc(0);
                     GXBegin(GX_POINTS, GX_VTXFMT0, 16U);
@@ -592,7 +593,7 @@ static inline HSD_Particle* psDispSubPoint(HSD_Particle* pp)
                     setVtxDesc(1);
                     GXBegin(GX_POINTS, GX_VTXFMT1, 16U);
                 }
-                for (p = buf, i = count; i != 0; i--) {
+                for (i = count; i != 0; i--) {
                     f32 z = p->z;
                     f32 y = p->y;
                     f32 x = p->x;
