@@ -1162,8 +1162,8 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
 {
     f32 abs_angle;
     psdisp_Cache* cache = &HSD_PSDisp_804D0FC0;
-    f32 right_x;
     f32 right_y;
+    f32 right_x;
     f32 right_z;
     f32 up_x;
     f32 up_y;
