@@ -863,7 +863,8 @@ static inline void psSetCurrentMtx(GXPosNrmMtx idx)
 }
 
 static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
-                                        f32 y, f32 z, f32 x0, f32 y0, f32 z0,
+                                        f32 y, f32 z, f32 ppvx, f32 ppvy,
+                                        f32 ppvz, f32 x0, f32 y0, f32 z0,
                                         f32 x1, f32 y1, f32 z1)
 {
     f32 prev_x;
@@ -1303,8 +1304,8 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
         up_y = mtx[1][2] * uz + t2;
         up_z = mtx[2][2] * uz + t4;
     }
-    psDispSubMakePolygon(pp, texform, x, y, z, right_x, right_y, right_z, up_x,
-                         up_y, up_z);
+    psDispSubMakePolygon(pp, texform, x, y, z, pp->vel.x, pp->vel.y, pp->vel.z,
+                         right_x, right_y, right_z, up_x, up_y, up_z);
 }
 
 static inline void psScaleAppSRTAxes(HSD_Particle* pp, Mtx mtx)
@@ -1320,7 +1321,7 @@ static inline void psScaleAppSRTAxes(HSD_Particle* pp, Mtx mtx)
     mtx[2][2] *= pp->size;
 }
 
-static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
+static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
 {
     GXColor draw_color;
     Vec3 cur_pos;
@@ -1346,7 +1347,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
             if (pp->appsrt->status == 1) {
                 pp->appsrt->status = 2;
             }
-            PSMTXConcat(cache->view_mtx, pp->appsrt->mmtx,
+            PSMTXConcat(HSD_PSDisp_804D0FC0.view_mtx, pp->appsrt->mmtx,
                         (MtxPtr) &pp->appsrt->ssx);
             scale_x = pp->appsrt->ssx * pp->appsrt->ssx +
                       pp->appsrt->x74 * pp->appsrt->x74 +
@@ -1366,7 +1367,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
                 temp_mtx[0][3] = pp->appsrt->translate.x;
                 temp_mtx[1][3] = pp->appsrt->translate.y;
                 temp_mtx[2][3] = pp->appsrt->translate.z;
-                PSMTXConcat(cache->view_mtx, temp_mtx, temp_mtx);
+                PSMTXConcat(HSD_PSDisp_804D0FC0.view_mtx, temp_mtx, temp_mtx);
                 HSD_MtxGetScale(temp_mtx, &scale);
                 PSMTXScale((MtxPtr) &pp->appsrt->ssx, scale.x, scale.y,
                            scale.z);
@@ -1492,8 +1493,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
     }
 }
 
-static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
-                                   psdisp_Cache* cache)
+static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
 {
     GXColor draw_color;
     Vec3 cur_pos;
@@ -1523,7 +1523,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
         if (pp->appsrt->status == 1) {
             pp->appsrt->status = 2;
         }
-        PSMTXConcat(cache->view_mtx, pp->appsrt->mmtx,
+        PSMTXConcat(HSD_PSDisp_804D0FC0.view_mtx, pp->appsrt->mmtx,
                     (MtxPtr) &pp->appsrt->ssx);
         scale_x = pp->appsrt->ssx * pp->appsrt->ssx +
                   pp->appsrt->x74 * pp->appsrt->x74 +
@@ -1543,7 +1543,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
             temp_mtx[0][3] = pp->appsrt->translate.x;
             temp_mtx[1][3] = pp->appsrt->translate.y;
             temp_mtx[2][3] = pp->appsrt->translate.z;
-            PSMTXConcat(cache->view_mtx, temp_mtx, temp_mtx);
+            PSMTXConcat(HSD_PSDisp_804D0FC0.view_mtx, temp_mtx, temp_mtx);
             HSD_MtxGetScale(temp_mtx, &scale);
             PSMTXScale((MtxPtr) &pp->appsrt->ssx, scale.x, scale.y, scale.z);
             pp->appsrt->x70 = temp_mtx[0][3];
@@ -1613,7 +1613,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
     if ((pp->kind & Trail) || (pp->kind & DirVec)) {
         f32 vf1;
         f32 vf2;
-        if (0.0f == cache->projection.type) {
+        if (0.0f == HSD_PSDisp_804D0FC0.projection.type) {
             f32 prev_x;
             f32 prev_y;
             f32 prev_z;
@@ -1640,22 +1640,22 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
             w0 = pp->appsrt->x90 +
                  (pp->appsrt->x8C * pp->pos.z +
                   (pp->appsrt->x84 * pp->pos.x + pp->appsrt->x88 * pp->pos.y));
-            f16 = cache->projection.x_scale * pp->appsrt->x6C +
-                  cache->projection.x_offset * pp->appsrt->x8C;
-            s808 = cache->projection.x_scale * pp->appsrt->ssx +
-                   cache->projection.x_offset * pp->appsrt->x84;
-            s804 = cache->projection.x_scale * pp->appsrt->ssy +
-                   cache->projection.x_offset * pp->appsrt->x88;
-            f20 = cache->projection.x_scale * pp->appsrt->x70 +
-                  cache->projection.x_offset * pp->appsrt->x90;
-            f12 = cache->projection.y_scale * pp->appsrt->x74 +
-                  cache->projection.y_offset * pp->appsrt->x84;
-            f8 = cache->projection.y_scale * pp->appsrt->x78 +
-                 cache->projection.y_offset * pp->appsrt->x88;
-            f11 = cache->projection.y_scale * pp->appsrt->x7C +
-                  cache->projection.y_offset * pp->appsrt->x8C;
-            f13 = cache->projection.y_scale * pp->appsrt->x80 +
-                  cache->projection.y_offset * pp->appsrt->x90;
+            f16 = HSD_PSDisp_804D0FC0.projection.x_scale * pp->appsrt->x6C +
+                  HSD_PSDisp_804D0FC0.projection.x_offset * pp->appsrt->x8C;
+            s808 = HSD_PSDisp_804D0FC0.projection.x_scale * pp->appsrt->ssx +
+                   HSD_PSDisp_804D0FC0.projection.x_offset * pp->appsrt->x84;
+            s804 = HSD_PSDisp_804D0FC0.projection.x_scale * pp->appsrt->ssy +
+                   HSD_PSDisp_804D0FC0.projection.x_offset * pp->appsrt->x88;
+            f20 = HSD_PSDisp_804D0FC0.projection.x_scale * pp->appsrt->x70 +
+                  HSD_PSDisp_804D0FC0.projection.x_offset * pp->appsrt->x90;
+            f12 = HSD_PSDisp_804D0FC0.projection.y_scale * pp->appsrt->x74 +
+                  HSD_PSDisp_804D0FC0.projection.y_offset * pp->appsrt->x84;
+            f8 = HSD_PSDisp_804D0FC0.projection.y_scale * pp->appsrt->x78 +
+                 HSD_PSDisp_804D0FC0.projection.y_offset * pp->appsrt->x88;
+            f11 = HSD_PSDisp_804D0FC0.projection.y_scale * pp->appsrt->x7C +
+                  HSD_PSDisp_804D0FC0.projection.y_offset * pp->appsrt->x8C;
+            f13 = HSD_PSDisp_804D0FC0.projection.y_scale * pp->appsrt->x80 +
+                  HSD_PSDisp_804D0FC0.projection.y_offset * pp->appsrt->x90;
             if (0.0f == w0) {
                 return;
             }
@@ -1683,18 +1683,18 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
             f32 s7FC;
             f32 s7F8;
 
-            s800 = cache->projection.x_scale * pp->appsrt->ssx +
-                   cache->projection.x_offset;
-            s7FC = cache->projection.x_scale * pp->appsrt->ssy +
-                   cache->projection.x_offset;
-            s7F8 = cache->projection.x_scale * pp->appsrt->x6C +
-                   cache->projection.x_offset;
-            f17 = cache->projection.y_scale * pp->appsrt->x74 +
-                  cache->projection.y_offset;
-            f18 = cache->projection.y_scale * pp->appsrt->x78 +
-                  cache->projection.y_offset;
-            f20 = cache->projection.y_scale * pp->appsrt->x7C +
-                  cache->projection.y_offset;
+            s800 = HSD_PSDisp_804D0FC0.projection.x_scale * pp->appsrt->ssx +
+                   HSD_PSDisp_804D0FC0.projection.x_offset;
+            s7FC = HSD_PSDisp_804D0FC0.projection.x_scale * pp->appsrt->ssy +
+                   HSD_PSDisp_804D0FC0.projection.x_offset;
+            s7F8 = HSD_PSDisp_804D0FC0.projection.x_scale * pp->appsrt->x6C +
+                   HSD_PSDisp_804D0FC0.projection.x_offset;
+            f17 = HSD_PSDisp_804D0FC0.projection.y_scale * pp->appsrt->x74 +
+                  HSD_PSDisp_804D0FC0.projection.y_offset;
+            f18 = HSD_PSDisp_804D0FC0.projection.y_scale * pp->appsrt->x78 +
+                  HSD_PSDisp_804D0FC0.projection.y_offset;
+            f20 = HSD_PSDisp_804D0FC0.projection.y_scale * pp->appsrt->x7C +
+                  HSD_PSDisp_804D0FC0.projection.y_offset;
             if (pp->kind & Tornado) {
                 f32 tx;
                 f32 ty;
@@ -2112,7 +2112,7 @@ void psDispParticles(s32 arg0, u32 arg1)
     HSD_Particle* pp;
     psdisp_Cache* cache;
     /// @todo Recover this stack space from the original inline hierarchy.
-    PAD_STACK(0x80);
+    PAD_STACK(0x7C);
 
     var_r16 = 0;
     var_r15 = 0;
@@ -2194,10 +2194,11 @@ void psDispParticles(s32 arg0, u32 arg1)
                         HSD_PSDisp_804D792C = -1;
                         GXSetZCompLoc(GX_FALSE);
                         HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(),
-                                              cache->view_mtx);
-                        PSMTXInverse(cache->view_mtx, cache->inverse_view_mtx);
+                                              HSD_PSDisp_804D0FC0.view_mtx);
+                        PSMTXInverse(HSD_PSDisp_804D0FC0.view_mtx,
+                                     HSD_PSDisp_804D0FC0.inverse_view_mtx);
                         psUpdateProjectionCache(cache, 0.0f);
-                        GXLoadPosMtxImm(cache->view_mtx, 0);
+                        GXLoadPosMtxImm(HSD_PSDisp_804D0FC0.view_mtx, 0);
                         billboard_mtx = HSD_PSDisp_803B9628;
                         GXLoadPosMtxImm(billboard_mtx.mtx, 3);
                         HSD_PSDisp_804D7948[0] = 3;
@@ -2400,7 +2401,7 @@ void psDispParticles(s32 arg0, u32 arg1)
 
                     if (pp->kind & DispPoint) {
                         if (pp->appsrt != NULL) {
-                            psDispSubAPPSRTPoint(pp, cache);
+                            psDispSubAPPSRTPoint(pp);
                         } else {
                             if (pp->kind & Trail) {
                                 pp = psDispSubPointTrail(pp);
@@ -2409,7 +2410,7 @@ void psDispParticles(s32 arg0, u32 arg1)
                             }
                         }
                     } else if (pp->appsrt != NULL) {
-                        psDispSubAppSRT(pp, form, cache);
+                        psDispSubAppSRT(pp, form);
                     } else {
                         psDispSub(pp, form);
                     }
