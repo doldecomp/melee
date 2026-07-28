@@ -11,6 +11,7 @@
 
 #include "lb/types.h"
 
+#include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 
