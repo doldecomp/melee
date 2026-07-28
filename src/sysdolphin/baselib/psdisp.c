@@ -1179,10 +1179,10 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
     z = pp->pos.z;
     if (texform != NULL) {
         right_x = cache->inverse_view_mtx[0][0] * pp->size;
-        right_y = cache->inverse_view_mtx[1][0] * pp->size;
-        right_z = cache->inverse_view_mtx[2][0] * pp->size;
         up_x = -cache->inverse_view_mtx[0][1] * pp->size;
+        right_y = cache->inverse_view_mtx[1][0] * pp->size;
         up_y = -cache->inverse_view_mtx[1][1] * pp->size;
+        right_z = cache->inverse_view_mtx[2][0] * pp->size;
         up_z = -cache->inverse_view_mtx[2][1] * pp->size;
     } else {
         right_x = HSD_PSDisp_804D7914 * pp->size;
