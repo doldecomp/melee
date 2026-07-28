@@ -11,7 +11,6 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftKirby/ftkirby.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /* 09CAD4 */ static void ftCo_8009EFA4(Fighter_GObj* gobj);

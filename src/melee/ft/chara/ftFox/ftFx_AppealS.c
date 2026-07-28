@@ -13,8 +13,6 @@
 #include "pl/plbonus.h"
 #include "pl/plbonuslib.h"
 
-#include <common_structs.h>
-
 #define FTFOX_APPEALS_ATTACKID 0x72
 
 bool ftFx_AppealS_CheckIfUsed(Fighter* fp)

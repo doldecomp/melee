@@ -33,7 +33,6 @@
 #include "ftCommon/types.h"
 #include "ftKirby/ftkirby.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 bool ftCo_800C1D38(Fighter_GObj* gobj)

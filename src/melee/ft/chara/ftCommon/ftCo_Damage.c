@@ -54,7 +54,6 @@
 #include "pl/plbonuslib.h"
 #include "sfx/crowdsfx.h"
 
-#include <common_structs.h>
 #include <math.h>
 #include <math_ppc.h>
 #include <trigf.h>

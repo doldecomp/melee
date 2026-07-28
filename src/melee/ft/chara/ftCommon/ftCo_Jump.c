@@ -2,8 +2,6 @@
 
 #include "math.h"
 
-#include <placeholder.h>
-
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
@@ -11,6 +9,7 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
+#include "ft/ft_0C8C.h"
 #include "ft/ft_0DF1.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
@@ -32,6 +31,8 @@
 #include "ftCommon/ftCo_KneeBend.h"
 #include "ftCommon/ftCo_SpecialAir.h"
 #include "ftPeach/ftPe_Float.h"
+
+#include <trigf.h>
 
 ftCo_JumpInput ftCo_Jump_GetInput(Fighter_GObj* gobj)
 {

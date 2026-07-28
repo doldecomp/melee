@@ -28,7 +28,6 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
-#include <common_structs.h>
 #include <baselib/jobj.h>
 
 bool ftCo_800C3A14(Fighter_GObj* gobj)

@@ -7,7 +7,6 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /* 00E9F0 */ void lbShadow_8000E9F0(Vec3*, HSD_Spline*, f32);

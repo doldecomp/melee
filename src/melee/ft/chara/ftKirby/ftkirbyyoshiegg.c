@@ -21,7 +21,6 @@
 #include "ftKirby/ftkirbyspecialdonkey.h"
 #include "lb/lb_00B0.h"
 
-#include <common_structs.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>

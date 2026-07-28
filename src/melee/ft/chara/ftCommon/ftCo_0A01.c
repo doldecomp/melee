@@ -17,6 +17,7 @@
 
 #include "ftCommon/forward.h"
 #include "ftDonkey/forward.h"
+#include "ftKirby/forward.h"
 #include "ftKoopa/forward.h"
 #include "ftMewtwo/forward.h"
 #include "ftPopo/forward.h"

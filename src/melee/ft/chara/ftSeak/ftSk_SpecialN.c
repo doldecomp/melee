@@ -22,8 +22,6 @@
 #include "it/items/itseakneedleheld.h"
 #include "it/items/itseakneedlethrown.h"
 
-#include <common_structs.h>
-
 /* 1120D4 */ static void ftSk_SpecialN_801120D4(Fighter_GObj* gobj);
 /* 112D44 */ static void shootNeedles(Fighter_GObj* gobj);
 

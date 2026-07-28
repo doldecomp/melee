@@ -7,6 +7,7 @@
 #include <platform.h>
 
 #include "dolphin/types.h"
+#include "gm/types.h"
 
 #include "it/forward.h"
 
@@ -15,7 +16,6 @@
 #include <baselib/forward.h>
 #include <melee/gr/forward.h>
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 typedef struct {

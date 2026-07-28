@@ -10,7 +10,6 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 
-#include <common_structs.h>
 #include <math.h>
 #include <trigf.h>
 #include <dolphin/mtx.h>

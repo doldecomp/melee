@@ -13,7 +13,6 @@
 #include "ftCommon/inlines.h"
 #include "ftMars/types.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <baselib/debug.h>
 

@@ -16,7 +16,6 @@
 #include "ft/types.h"
 #include "it/types.h"
 
-#include <common_structs.h>
 #include <baselib/gobj.h>
 
 /** @details Summed with ::Item::xBEC in ::it_80271B60; seems to describe an

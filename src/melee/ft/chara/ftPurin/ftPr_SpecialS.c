@@ -18,7 +18,6 @@
 #include "ftCommon/inlines.h"
 #include "ftPurin/types.h"
 
-#include <common_structs.h>
 #include <math.h>
 #include <baselib/archive.h>
 #include <baselib/gobj.h>

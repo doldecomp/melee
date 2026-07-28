@@ -14,7 +14,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 bool ftCo_800980BC(Fighter_GObj* gobj)

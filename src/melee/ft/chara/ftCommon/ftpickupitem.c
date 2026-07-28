@@ -32,7 +32,6 @@
 #include "it/item.h"
 #include "pl/plbonuslib.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/debug.h>

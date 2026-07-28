@@ -15,7 +15,6 @@
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftNess/ftNs_AttackLw4.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /* 08CC5C */ static void doEnter(Fighter_GObj* gobj);

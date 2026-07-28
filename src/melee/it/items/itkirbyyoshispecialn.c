@@ -14,8 +14,6 @@
 #include "it/itzako.h"
 #include "lb/lb_00B0.h"
 
-#include <common_structs.h>
-
 /* 2F2E68 */ static bool itKirbyyoshispecialn_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2F2E70 */ static void itKirbyyoshispecialn_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2F2E74 */ static bool itKirbyyoshispecialn_UnkMotion0_Coll(Item_GObj* gobj);

@@ -23,7 +23,6 @@
 
 #include "it/it_26B1.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 

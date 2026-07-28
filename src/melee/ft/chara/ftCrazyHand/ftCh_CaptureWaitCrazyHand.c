@@ -11,7 +11,6 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <MetroTRK/intrinsics.h>
 

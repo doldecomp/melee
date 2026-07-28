@@ -10,7 +10,6 @@
 #include "gr/inlines.h"
 #include "gr/types.h"
 
-#include <common_structs.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <sysdolphin/baselib/controller.h>

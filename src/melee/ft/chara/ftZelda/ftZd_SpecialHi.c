@@ -23,7 +23,6 @@
 #include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
 
-#include <common_structs.h>
 #include <math.h>
 #include <trigf.h>
 #include <dolphin/mtx.h>

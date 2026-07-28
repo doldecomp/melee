@@ -43,7 +43,6 @@
 #include "pl/plstale.h"
 #include "pl/pltrick.h"
 
-#include <common_structs.h>
 #include <math.h>
 #include <trigf.h>
 #include <dolphin/mtx.h>

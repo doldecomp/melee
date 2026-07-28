@@ -21,7 +21,6 @@
 
 #include "lb/forward.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <baselib/random.h>
 

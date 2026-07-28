@@ -1,17 +1,17 @@
 #include "gmhowto.h"
 
 #include "gm_unsplit.h"
+#include "gmmain_lib.h"
 #include "gmopening.h"
 
-#include "dolphin/pad.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lbmthp.h"
+#include "mn/inlines.h"
 
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/sobjlib.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbmthp.h>
-#include <melee/mn/inlines.h>
+#include <baselib/controller.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
+#include <baselib/sobjlib.h>
 
 static u32 gm_803DD2C0[] = {
     1,  19, 856, 1,  1,   85, 279, 1,  1,   59,  17,  1,  1,     59, 19,

@@ -7,8 +7,6 @@
 
 #include "lb/types.h"
 
-#include <common_structs.h>
-
 struct ftMars_FighterVars {
     /* 0x222C */ u32 x222C;
     u8 _[FIGHTERVARS_SIZE - 4];

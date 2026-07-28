@@ -3,10 +3,8 @@
 #include "gm_unsplit.h"
 #include "gmtitle.h"
 
-#include "dolphin/pad.h"
-
 #include <stdio.h>
-#include <sysdolphin/baselib/debugconsole_main.h>
+#include <baselib/controller.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>

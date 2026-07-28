@@ -20,7 +20,6 @@
 
 #include "lb/lb_00B0.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /// Create Oil Panic Item

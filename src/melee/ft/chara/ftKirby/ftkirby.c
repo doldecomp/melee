@@ -34,7 +34,6 @@
 #include "lb/lbdvd.h"
 #include "pl/player.h"
 
-#include <common_structs.h>
 #include <stddef.h>
 #include <trigf.h>
 #include <baselib/gobj.h>

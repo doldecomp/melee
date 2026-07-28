@@ -28,7 +28,6 @@
 #include "it/items/itseakneedleheld.h"
 #include "it/items/itseakneedlethrown.h"
 
-#include <common_structs.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>

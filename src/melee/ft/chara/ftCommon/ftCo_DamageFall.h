@@ -1,8 +1,6 @@
 #ifndef GALE01_090824
 #define GALE01_090824
 
-#include "common_structs.h"
-
 #include "ftCommon/forward.h"
 
 #include <dolphin/mtx.h>

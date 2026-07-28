@@ -17,17 +17,15 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
+#include "ft/ft_0C8C.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdynamics.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
-#include "ftCaptain/types.h"
 
 #include "ftCommon/forward.h"
 
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_Throw.h"
@@ -41,10 +39,8 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <math_ppc.h>
 #include <dolphin/mtx.h>
-#include <baselib/debug.h>
 #include <baselib/jobj.h>
 #include <baselib/mtx.h>
 #include <baselib/random.h>

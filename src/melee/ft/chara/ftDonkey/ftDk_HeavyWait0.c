@@ -14,8 +14,6 @@
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftDonkey/types.h"
 
-#include <common_structs.h>
-
 bool ftDk_MS_341_800DF938(HSD_GObj* gobj)
 {
     if (ft_8008A1FC(gobj)) {

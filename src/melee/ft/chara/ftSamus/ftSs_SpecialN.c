@@ -27,7 +27,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 static void ftSamus_801293BC_inner(HSD_GObj* gobj)
