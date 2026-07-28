@@ -869,6 +869,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
     f32 prev_x;
     f32 prev_y;
     f32 prev_z;
+    u8* it = texform;
 
     psSetCurrentMtx(0);
     if (pp->kind & Trail) {
@@ -882,7 +883,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
             prev_z = z - pp->vel.z;
         }
         getClrTrail(pp, &color);
-        if (texform == NULL) {
+        if (it == NULL) {
             if (pp->kind & DispTexture) {
                 setVtxDesc(2);
                 GXBegin(GX_QUADS, GX_VTXFMT2, 4);
@@ -987,7 +988,6 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                 f32 zl = dz * dz;
                 f32 segment_len = sqrtf(zl + (xl + yl));
                 f32 ratio = segment_len / up_len;
-                u8* it = texform;
                 u32 primitive_count = *(u32*) it;
 
                 it += sizeof(u32);
@@ -1053,7 +1053,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                 }
             }
         }
-    } else if (texform == NULL) {
+    } else if (it == NULL) {
         if (pp->kind & DispTexture) {
             setVtxDesc(0);
             GXBegin(GX_QUADS, GX_VTXFMT0, 4);
@@ -1106,7 +1106,6 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
             GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 3;
         }
     } else {
-        u8* it = texform;
         u32 primitive_count = *(u32*) it;
         it += sizeof(u32);
         for (; primitive_count != 0; primitive_count--) {
@@ -1506,6 +1505,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
     f32 y_extent;
     f32 angle;
     f32 abs_angle;
+    u8* it = texform;
 
     if (pp->appsrt->frameNum != HSD_PSDisp_804D6380) {
         f32 scale_x;
@@ -1601,7 +1601,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
     }
     ax = pp->appsrt->x94 * pp->size;
     y_extent = pp->appsrt->x98 * pp->size;
-    if (texform == NULL) {
+    if (it == NULL) {
         ay = y_extent;
         by = -ay;
         bx = ax;
@@ -1745,7 +1745,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
     psSetCurrentMtx(3);
     if (pp->kind & Trail) {
         getClrTrail(pp, &draw_color);
-        if (texform == NULL) {
+        if (it == NULL) {
             if (pp->kind & DispTexture) {
                 setVtxDesc(2);
                 GXBegin(GX_QUADS, GX_VTXFMT2, 4U);
@@ -1846,7 +1846,6 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
                 f32 zl = dz * dz;
                 f32 segment_len = sqrtf(zl + (xl + yl));
                 f32 ratio = segment_len / axis_len;
-                u8* it = texform;
                 u32 primitive_count = *(u32*) it;
 
                 bx *= ratio;
@@ -1911,7 +1910,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
                 }
             }
         }
-    } else if (texform == NULL) {
+    } else if (it == NULL) {
         if (pp->kind & DispTexture) {
             setVtxDesc(0);
             GXBegin(GX_QUADS, GX_VTXFMT0, 4U);
@@ -1960,7 +1959,6 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform,
             GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 3;
         }
     } else {
-        u8* it = texform;
         u32 primitive_count = *(u32*) it;
 
         it += sizeof(u32);
