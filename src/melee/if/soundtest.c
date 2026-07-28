@@ -16,10 +16,7 @@
 #include "lb/lbsnap.h"
 #include "mn/inlines.h"
 #include "ty/toy.h"
-#include "ty/tylist.h"
 
-#include <printf.h>
-#include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 #include <baselib/fog.h>
 #include <baselib/gobj.h>
@@ -27,16 +24,18 @@
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
 #include <baselib/lobj.h>
 #include <baselib/memory.h>
-#include <baselib/particle.h>
-#include <baselib/sislib.h>
 #include <baselib/sobjlib.h>
-#include <MSL/stdio.h>
-#include <MSL/string.h>
 
 /// .data
+
+static void order_data(void)
+{
+    (void) "Remove Target %x (n %x) Id %d\n";
+    (void) "Remove All Over\n";
+}
+
 struct un_803F9F28_t {
     u8 _pad0[0xA8];
     int xA8;

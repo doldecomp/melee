@@ -48,6 +48,14 @@ struct DebugGameOverData {
     /* 18 */ u16 x18;
 };
 
+typedef struct un_804A1F48_t {
+    u16 x0;
+    u16 x2;
+    s32 x4;
+    UNK_T x8;
+} un_804A1F48_t;
+STATIC_ASSERT(sizeof(struct un_804A1F48_t) == 0xC);
+
 /// @note Colloquially known as "Minor Scene"
 struct GameScene {
     /* 00 */ u8 idx;
