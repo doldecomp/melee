@@ -915,7 +915,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                 GXWGFifo.u8 = (u8) ((f32) a * pp->trail);
             }
             if (pp->kind & DispTexture) {
-                GXWGFifo.u8 = 0;
+                GXWGFifo.u8 = (pp->kind >> 16) & 0xC;
             }
             {
                 f32 vx = x - x1;
