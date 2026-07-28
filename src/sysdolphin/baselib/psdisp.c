@@ -1070,7 +1070,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
             GXWGFifo.f32 = vz;
         }
         if (pp->kind & DispTexture) {
-            GXWGFifo.u8 = (pp->kind >> 16) & 0xC;
+            GXWGFifo.u8 = 0;
         }
         {
             f32 vx = x - x1;
@@ -1195,8 +1195,8 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
             f32 w0inv;
             f32 w1;
             f32 w1inv;
-            f64 cur_y;
-            f64 prev_xy;
+            f32 cur_y;
+            f32 prev_xy;
 
             if (pp->kind & Tornado) {
                 calcTornadoLastPos(pp, &prev_x, &prev_y, &prev_z);
@@ -1219,14 +1219,14 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
                 return;
             }
             w1inv = -1.0f / w1;
-            cur_y = (f64) (cache->projected_x.y * pp->pos.y);
-            prev_xy = (f64) (cache->projected_x.x * prev_x +
-                             cache->projected_x.y * prev_y);
+            cur_y = cache->projected_x.y * pp->pos.y;
+            prev_xy =
+                cache->projected_x.x * prev_x + cache->projected_x.y * prev_y;
             x = w0inv * (cache->projected_x.w +
                          (cache->projected_x.z * pp->pos.z +
-                          (cache->projected_x.x * pp->pos.x + (f32) cur_y))) -
+                          (cache->projected_x.x * pp->pos.x + cur_y))) -
                 w1inv * (cache->projected_x.w +
-                         (cache->projected_x.z * prev_z + (f32) prev_xy));
+                         (cache->projected_x.z * prev_z + prev_xy));
             y = w0inv * (cache->projected_y.w +
                          (cache->projected_y.z * pp->pos.z +
                           (cache->projected_y.x * pp->pos.x +
@@ -1483,7 +1483,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
         GXWGFifo.f32 = cur_pos.y;
         GXWGFifo.f32 = cur_pos.z;
         if (pp->kind & DispTexture) {
-            GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 1;
+            GXWGFifo.u8 = 1;
         }
     }
 }
@@ -2109,7 +2109,7 @@ void psDispParticles(s32 arg0, u32 arg1)
     HSD_Particle* pp;
     psdisp_Cache* cache;
     /// @todo Recover this stack space from the original inline hierarchy.
-    PAD_STACK(0x70);
+    PAD_STACK(0x80);
 
     var_r16 = 0;
     var_r15 = 0;
@@ -2264,12 +2264,10 @@ void psDispParticles(s32 arg0, u32 arg1)
                         form_banks += pp->bank;
                         form_bank = *form_banks;
                     }
-                    if (form_bank != NULL) {
-                        form_group = form_bank[pp->texGroup];
-                    } else {
-                        form_group = NULL;
-                    }
-                    if (form_group != NULL && form_group->formTable != NULL) {
+                    if (form_bank != NULL &&
+                        (form_group = form_bank[pp->texGroup]) != NULL &&
+                        form_group->formTable != NULL)
+                    {
                         form = form_group->formTable[pp->poseNum];
                     } else {
                         form = NULL;
