@@ -25,7 +25,6 @@
 #include "it/items/ithammer.h"
 #include "pl/plbonuslib.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /* 0C5408 */ static void ftCo_800C5408(Fighter* fp);

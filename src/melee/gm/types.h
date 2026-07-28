@@ -8,14 +8,27 @@
 
 #include "dolphin/types.h"
 
-#include <melee/ft/forward.h>
 #include <melee/gm/forward.h> // IWYU pragma: export
 #include <melee/gr/forward.h>
 #include <melee/pl/forward.h>
 #include <melee/sc/forward.h>
 
-#include <common_structs.h>
 #include <melee/mn/types.h>
+
+/// @deprecated Replace with inline bitfields
+typedef union UnkFlagStruct {
+    u8 u8;
+    struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    };
+} UnkFlagStruct;
 
 struct UnkMultimanData {
     u16 x0_0 : 1;

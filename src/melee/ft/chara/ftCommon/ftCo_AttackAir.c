@@ -28,7 +28,6 @@
 #include "ftLink/ftLk_AttackAir.h"
 #include "it/it_26B1.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /* 08CE0C */ static void decideFighter(Fighter_GObj* gobj);

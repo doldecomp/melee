@@ -24,7 +24,6 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
-#include <common_structs.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 

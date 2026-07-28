@@ -9,7 +9,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <dolphin/gx.h>
 
 struct ftGameWatch_FighterVars {

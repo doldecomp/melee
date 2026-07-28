@@ -1,7 +1,6 @@
 #ifndef MELEE_FT_FORWARD_H
 #define MELEE_FT_FORWARD_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "gr/forward.h"
@@ -436,5 +435,10 @@ enum EntityKind {
     EntityKind_Item,
     EntityKind_UNKNOWN,
 };
+
+typedef enum GroundOrAir {
+    GA_Ground,
+    GA_Air,
+} GroundOrAir;
 
 #endif

@@ -14,7 +14,6 @@
 #include "ftCrazyHand/ftCh_Squeezing_0.h"
 #include "pl/player.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <MetroTRK/intrinsics.h>
 

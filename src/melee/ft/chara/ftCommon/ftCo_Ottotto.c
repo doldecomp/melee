@@ -34,7 +34,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /* 09A410 */ static void ftCo_8009A410(Fighter_GObj* gobj);

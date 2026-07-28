@@ -20,7 +20,6 @@
 #include "ftCommon/ftCo_Landing.h"
 #include "ftSamus/types.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 void ftSs_SpecialHi_Enter(HSD_GObj* gobj)

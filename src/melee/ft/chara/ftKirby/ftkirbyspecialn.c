@@ -57,7 +57,6 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
-#include <common_structs.h>
 #include <stddef.h>
 #include <trigf.h>
 #include <baselib/debug.h>

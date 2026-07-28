@@ -20,7 +20,6 @@
 #include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/ftCo_Thrown.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 void ftCa_SpecialHiThrow1_Coll(HSD_GObj* gobj)

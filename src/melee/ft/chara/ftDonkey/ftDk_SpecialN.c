@@ -25,7 +25,6 @@
 
 #include "lb/forward.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 static void setCallbacks(HSD_GObj* gobj)

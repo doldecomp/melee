@@ -34,7 +34,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <MetroTRK/intrinsics.h>

@@ -46,7 +46,6 @@
 #include "pl/plbonuslib.h"
 #include "sfx/crowdsfx.h"
 
-#include <common_structs.h>
 #include <math.h>
 #include <trigf.h>
 #include <dolphin/os/OSError.h>

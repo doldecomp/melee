@@ -11,7 +11,6 @@
 #include "ftCommon/ftCo_PassiveWall.h"
 #include "mp/mplib.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 static int const max_input_frames = 254;

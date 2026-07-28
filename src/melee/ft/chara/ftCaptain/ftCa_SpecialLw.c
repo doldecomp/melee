@@ -20,7 +20,6 @@
 #include "ftCaptain/types.h"
 #include "ftCommon/ftCo_Fall.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /// /* literal */ float const ftCa_SpecialHi_804D9220 = 0.0F;

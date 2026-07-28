@@ -12,8 +12,6 @@
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 
-#include <common_structs.h>
-
 /* 09AEA4 */ static void ftCo_8009AEA4(Fighter_GObj* gobj);
 
 void ftCo_8009AE14(Fighter_GObj* gobj)

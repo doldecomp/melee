@@ -24,7 +24,6 @@
 #include "ftCommon/types.h"
 #include "mp/mpcoll.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 bool ftCo_80099F1C(Fighter_GObj* gobj)

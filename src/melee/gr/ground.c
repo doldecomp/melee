@@ -97,7 +97,6 @@
 #include "ty/toy.h"
 #include "ty/tydisplay.h"
 
-#include <common_structs.h>
 #include <math.h>
 #include <math_ppc.h>
 #include <trigf.h>

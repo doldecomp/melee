@@ -37,7 +37,6 @@
 #include "mp/mplib.h"
 #include "pl/player.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 static void ftCh_Init_80156310(HSD_GObj* gobj);

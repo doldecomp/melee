@@ -32,7 +32,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 typedef enum cmd_var_idx {

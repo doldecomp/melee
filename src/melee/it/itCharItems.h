@@ -6,12 +6,14 @@
 #include "platform.h"
 
 #include "baselib/forward.h"
+
+#include "gm/types.h"
+
 #include "it/forward.h"
 #include "lb/forward.h"
 
 #include "lb/types.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 

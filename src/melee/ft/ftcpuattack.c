@@ -6,6 +6,7 @@
 #include "baselib/random.h"
 #include "ft/ftlib.h"
 
+#include "ftKirby/forward.h"
 #include <melee/ft/chara/ftDonkey/forward.h>
 #include <melee/ft/chara/ftKoopa/forward.h>
 #include <melee/ft/chara/ftSamus/forward.h>

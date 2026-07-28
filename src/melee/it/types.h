@@ -21,7 +21,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 

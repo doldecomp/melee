@@ -18,8 +18,6 @@
 #include "ftCommon/ftCo_Throw.h"
 #include "pl/player.h"
 
-#include <common_structs.h>
-
 bool ftCo_800C44CC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

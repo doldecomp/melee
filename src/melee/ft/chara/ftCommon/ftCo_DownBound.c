@@ -26,7 +26,6 @@
 #include "ftCommon/types.h"
 #include "ftSandbag/ftSb_Init.h"
 
-#include <common_structs.h>
 #include <math.h>
 #include <math_ppc.h>
 #include <trigf.h>

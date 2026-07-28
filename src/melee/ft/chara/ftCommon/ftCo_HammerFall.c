@@ -13,7 +13,6 @@
 #include "it/item.h"
 #include "pl/plbonuslib.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 bool ftCo_800C5CD4(Fighter_GObj* gobj)
