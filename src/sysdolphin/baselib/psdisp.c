@@ -1402,8 +1402,9 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
         cur_pos.y = appsrt->x78 * pos_y;
         cur_pos.x = appsrt->ssy * pos_y;
         cur_pos.y = appsrt->x74 * pp->pos.x + cur_pos.y;
-        cur_pos.x = appsrt->ssx * pp->pos.x + cur_pos.x;
-        cur_pos.z = appsrt->x84 * pp->pos.x + cur_pos.z;
+        cur_pos.z =
+            (cur_pos.x = appsrt->ssx * pp->pos.x + cur_pos.x,
+             appsrt->x84 * pp->pos.x + cur_pos.z);
         cur_pos.x = appsrt->x6C * pp->pos.z + cur_pos.x;
         cur_pos.y = appsrt->x7C * pp->pos.z + cur_pos.y;
         cur_pos.z = appsrt->x8C * pp->pos.z + cur_pos.z;
@@ -2139,7 +2140,7 @@ void psDispParticles(u32 target_link, u32 sw)
     HSD_Particle* pp;
     psdisp_Cache* cache;
     /// @todo Recover this stack space from the original inline hierarchy.
-    PAD_STACK(0x48);
+    PAD_STACK(0x44);
 
     var_r16 = 0;
     var_r15 = 0;
