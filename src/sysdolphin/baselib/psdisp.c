@@ -2027,8 +2027,8 @@ static inline void psUpdateProjectionCache(psdisp_Cache* cache,
 {
     GXGetProjectionv((f32*) &cache->projection);
     if (perspective == cache->projection.type) {
-        f32 x_scale = cache->projection.x_scale;
         f32 w0 = cache->view_mtx[2][0];
+        f32 x_scale = cache->projection.x_scale;
         f32 x_offset = cache->projection.x_offset;
         f32 w1;
         f32 w2;
