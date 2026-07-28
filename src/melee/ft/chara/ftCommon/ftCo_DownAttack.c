@@ -17,14 +17,17 @@
 #include "it/types.h"
 
 #include <common_structs.h>
-#include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 
-static Vec4 unk_vec4 = { 14, 0, -3, +3 };
+/** @details Summed with ::Item::xBEC in ::it_80271B60; seems to describe an
+ * upward expansion along the Y-axis and a symmetrical contraction along the
+ * X-axis, rather than its own bounding box.
+ */
+static itECB ecb_offset = { 14.0f, 0.0f, -3.0f, +3.0f };
 
 static inline bool inlineA0(Fighter* fp)
 {
-    if (fp->input.x668 & (HSD_PAD_A | HSD_PAD_B)) {
+    if (fp->input.x668 & HSD_PAD_AB) {
         return true;
     }
     return false;
@@ -44,7 +47,7 @@ int ftCo_800984D4(Fighter_GObj* gobj)
 
 void ftCo_8009856C(Fighter_GObj* gobj, FtMotionId msid)
 {
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -67,26 +70,21 @@ void ftCo_DownAttack_Coll(Fighter_GObj* gobj)
     ft_80084104(gobj);
 }
 
-void ftCo_80098634(Item_FtTrack* arg0)
+void ftCo_80098634(Item_FtTrack* track)
 {
-    Vec4* cur_vec4 = (Vec4*) arg0;
-    Vec3* cur_pos = (Vec3*) arg0;
     Fighter_GObj* cur_gobj;
-    int count = 0;
-    for (cur_gobj = HSD_GObj_Entities->fighters; cur_gobj != NULL;
-         cur_gobj = cur_gobj->next)
+    int i;
+    for (cur_gobj = HSD_GObj_Entities->fighters, i = 0; cur_gobj != NULL;
+         cur_gobj = cur_gobj->next, i++)
     {
         Fighter* fp = cur_gobj->user_data;
-        ++count;
-        cur_vec4->x = unk_vec4.x;
-        cur_vec4->y = unk_vec4.y;
-        cur_vec4->z = unk_vec4.z;
-        cur_vec4->w = unk_vec4.w;
-        ++cur_vec4;
-        cur_pos[16] = fp->cur_pos;
-        ++cur_pos;
+        track->ecb_offset_arr[i].top = ecb_offset.top;
+        track->ecb_offset_arr[i].bottom = ecb_offset.bottom;
+        track->ecb_offset_arr[i].right = ecb_offset.right;
+        track->ecb_offset_arr[i].left = ecb_offset.left;
+        track->ft_pos_arr[i] = fp->cur_pos;
     }
-    arg0->x150_count = count;
+    track->count = i;
 }
 
 bool ftCo_800986B0(Fighter_GObj* gobj)
@@ -100,9 +98,9 @@ bool ftCo_800986B0(Fighter_GObj* gobj)
     return false;
 }
 
-int ftCo_8009872C(Fighter_GObj* gobj)
+bool ftCo_8009872C(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
+    PAD_STACK(4);
     if (ftCo_800986B0(gobj)) {
         ftCo_800987D0(gobj);
         return true;

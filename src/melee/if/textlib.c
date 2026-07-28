@@ -11,6 +11,7 @@
 #include "mn/inlines.h"
 #include "ty/toy.h"
 
+#include <common_structs.h>
 #include <printf.h>
 #include <stdarg.h>
 #include <dolphin/mtx.h>

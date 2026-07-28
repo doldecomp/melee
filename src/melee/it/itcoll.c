@@ -36,10 +36,7 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
-#include <baselib/memory.h>
 #include <baselib/random.h>
-#include <baselib/state.h>
-#include <baselib/tev.h>
 
 /* 271830 */ static void it_80271830(Item* item, f32 arg_angle);
 /* 271B60 */ static void it_80271B60(Item_GObj* item_gobj);
@@ -1246,10 +1243,10 @@ void it_80271B60(Item_GObj* item_gobj)
         HSD_JObjGetTranslation(item_jobj, &sp24);
         cnt = 0U;
 
-        while (cnt < Item_804A0CCC.x150_count) {
-            ecb = &Item_804A0CCC.x0_ecb_arr[cnt];
-            y_pos = Item_804A0CCC.xC0_pos_arr[cnt].y;
-            x_pos = Item_804A0CCC.xC0_pos_arr[cnt].x;
+        while (cnt < Item_804A0CCC.count) {
+            ecb = &Item_804A0CCC.ecb_offset_arr[cnt];
+            y_pos = Item_804A0CCC.ft_pos_arr[cnt].y;
+            x_pos = Item_804A0CCC.ft_pos_arr[cnt].x;
             if (itColl_chkECBOverlap(x_pos, y_pos, &item->xBEC, ecb, &sp24)) {
                 if (ABS(sp24.x - x_pos) < 0.001f) {
                     if (HSD_Randi(2) != 0) {
