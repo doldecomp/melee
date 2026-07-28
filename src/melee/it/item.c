@@ -1,6 +1,5 @@
 #include "item.h"
 
-#include "it_266F.h"
 #include "it_26B1.h"
 #include "math.h"
 
@@ -20,6 +19,7 @@
 #include "it/itanimlist.h"
 #include "it/itcoll.h"
 #include "it/iteffect.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 #include "it/itmaterial.h"
@@ -35,7 +35,6 @@
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/class.h>
 #include <baselib/debug.h>
 #include <baselib/dobj.h>
@@ -148,7 +147,7 @@ void Item_80266FCC(void)
     Item_804A0C64.x64 = it_804D6D28->x148;
 
     Item_804A0CCC.x154.b0 = true;
-    Item_804A0CCC.x150_count = 1;
+    Item_804A0CCC.count = 1;
 
     Item_804A0E24.x = -1;
     Item_804A0E24.y = -1;
@@ -170,7 +169,7 @@ void Item_80266FCC(void)
 
 static void ItUnkHoldKind(HSD_GObj* gobj)
 {
-    Item* it = (Item*) HSD_GObjGetUserData(gobj);
+    Item* it = HSD_GObjGetUserData(gobj);
 
     switch (it->hold_kind) {
     case 4:
