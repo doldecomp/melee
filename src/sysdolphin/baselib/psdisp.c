@@ -1287,21 +1287,20 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
         f32 ry = right_y;
         f32 rz = right_z;
         f32 ux = up_x;
-        f32 uy = up_y;
         f32 uz = up_z;
 
-        axis.x = ry * uz - rz * uy;
+        axis.x = ry * uz - rz * up_y;
         axis.y = rz * ux - rx * uz;
-        axis.z = rx * uy - ry * ux;
+        axis.z = rx * up_y - ry * ux;
         PSMTXRotAxisRad(mtx, &axis, angle);
         t1 = mtx[1][0] * rx + mtx[1][1] * ry;
-        t2 = mtx[1][0] * ux + mtx[1][1] * uy;
+        t2 = mtx[1][0] * ux + mtx[1][1] * up_y;
         t3 = mtx[2][0] * rx + mtx[2][1] * ry;
-        t4 = mtx[2][0] * ux + mtx[2][1] * uy;
+        t4 = mtx[2][0] * ux + mtx[2][1] * up_y;
         right_x = mtx[0][2] * rz + (mtx[0][0] * rx + mtx[0][1] * ry);
         right_y = mtx[1][2] * rz + t1;
         right_z = mtx[2][2] * rz + t3;
-        up_x = mtx[0][2] * uz + (mtx[0][0] * ux + mtx[0][1] * uy);
+        up_x = mtx[0][2] * uz + (mtx[0][0] * ux + mtx[0][1] * up_y);
         up_y = mtx[1][2] * uz + t2;
         up_z = mtx[2][2] * uz + t4;
     }
@@ -1382,8 +1381,8 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp, psdisp_Cache* cache)
     cur_pos.x = pp->appsrt->ssy * pp->pos.y;
     cur_pos.y = pp->appsrt->x78 * pp->pos.y;
     cur_pos.z = pp->appsrt->x88 * pp->pos.y;
-    cur_pos.x = pp->appsrt->ssx * pp->pos.x + cur_pos.x;
     cur_pos.y = pp->appsrt->x74 * pp->pos.x + cur_pos.y;
+    cur_pos.x = pp->appsrt->ssx * pp->pos.x + cur_pos.x;
     cur_pos.z = pp->appsrt->x84 * pp->pos.x + cur_pos.z;
     cur_pos.x = pp->appsrt->x6C * pp->pos.z + cur_pos.x;
     cur_pos.y = pp->appsrt->x7C * pp->pos.z + cur_pos.y;
