@@ -1568,20 +1568,26 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
     }
     {
         Mtx draw_mtx;
+        f32 app_cur_x;
+        f32 app_cur_y;
+        f32 app_cur_z;
 
         PSMTXCopy((MtxPtr) &pp->appsrt->ssx, draw_mtx);
-        cur_pos.z =
+        app_cur_z =
             draw_mtx[2][3] +
             (draw_mtx[2][2] * pp->pos.z +
              (draw_mtx[2][0] * pp->pos.x + draw_mtx[2][1] * pp->pos.y));
-        cur_pos.y =
+        app_cur_y =
             draw_mtx[1][3] +
             (draw_mtx[1][2] * pp->pos.z +
              (draw_mtx[1][0] * pp->pos.x + draw_mtx[1][1] * pp->pos.y));
-        cur_pos.x =
+        app_cur_x =
             draw_mtx[0][3] +
             (draw_mtx[0][2] * pp->pos.z +
              (draw_mtx[0][0] * pp->pos.x + draw_mtx[0][1] * pp->pos.y));
+        cur_pos.x = app_cur_x;
+        cur_pos.y = app_cur_y;
+        cur_pos.z = app_cur_z;
         if (pp->kind & Tornado) {
             f32 x;
             f32 y;
@@ -2130,7 +2136,7 @@ void psDispParticles(u32 target_link, u32 sw)
     HSD_Particle* pp;
     psdisp_Cache* cache;
     /// @todo Recover this stack space from the original inline hierarchy.
-    PAD_STACK(0x5C);
+    PAD_STACK(0x50);
 
     var_r16 = 0;
     var_r15 = 0;
