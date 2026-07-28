@@ -2215,7 +2215,7 @@ void psDispParticles(u32 target_link, u32 sw)
                         HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(),
                                               HSD_PSDisp_804D0FC0.view_mtx);
                         PSMTXInverse(HSD_PSDisp_804D0FC0.view_mtx,
-                                     HSD_PSDisp_804D0FC0.inverse_view_mtx);
+                                     cache->inverse_view_mtx);
                         psUpdateProjectionCache(cache, 0.0f);
                         GXLoadPosMtxImm(HSD_PSDisp_804D0FC0.view_mtx, 0);
                         billboard_mtx = HSD_PSDisp_803B9628;
