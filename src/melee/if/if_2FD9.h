@@ -15,5 +15,6 @@
 /* 2FDA78 */ void fn_802FDA78(HSD_GObj* gobj);
 /* 2FE260 */ void un_802FE260(void);
 /* 2FE390 */ void un_802FE390(void);
+/* 4A1F48 */ extern struct un_804A1F48_t un_804A1F48;
 
 #endif

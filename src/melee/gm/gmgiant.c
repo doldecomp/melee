@@ -1,12 +1,13 @@
 #include "gmgiant.h"
 
 #include "gm_unsplit.h"
+#include "gmmain_lib.h"
 #include "gmmovieend.h"
 #include "gmvsdata.h"
+#include "gmvsmelee.h"
+#include "types.h"
 
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/gmvsmelee.h>
-#include <melee/gm/types.h>
+#include "if/if_2FD9.h"
 
 GameScene gm_803DF060_Scenes[] = {
     {

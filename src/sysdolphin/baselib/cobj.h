@@ -129,6 +129,7 @@ union HSD_CObjDesc {
     HSD_CameraDescFrustum ortho;
     HSD_CameraDescPerspective perspective;
 };
+STATIC_ASSERT(sizeof(HSD_CObjDesc) == 0x40);
 
 struct HSD_CObjInfo {
     HSD_ObjInfo parent;

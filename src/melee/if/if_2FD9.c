@@ -1,4 +1,4 @@
-#include "if_2FC93.h"
+#include "if_2FD9.h"
 
 #include "gm/gm_unsplit.h"
 #include "if/ifall.h"
@@ -7,8 +7,6 @@
 #include "pl/player.h"
 #include "sc/types.h"
 
-#include <printf.h>
-#include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 #include <baselib/dobj.h>
 #include <baselib/fog.h>
@@ -17,14 +15,8 @@
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
-#include <baselib/memory.h>
-#include <baselib/particle.h>
-#include <baselib/sislib.h>
-#include <MSL/stdio.h>
-#include <MSL/string.h>
 
 /// .bss
 /* 4A1F10 */ static struct un_804A1F10_t {
@@ -37,7 +29,9 @@
     unsigned char x30;
     signed char x31;
     unsigned char x32;
+    UNK_T pad_34;
 } un_804A1F10;
+/* 4A1F48 */ struct un_804A1F48_t un_804A1F48;
 
 /// .sdata2
 /* 4DDBA8 */ static char const un_804DDBA8[4] = { 0, 1, 2, 3 };
