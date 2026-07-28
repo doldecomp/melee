@@ -28721,7 +28721,6 @@ mnEvent_804D6C65 = .sbss:0x804D6C65; // type:object size:0x1 scope:global data:b
 mnDataDel_804D6C68 = .sbss:0x804D6C68; // type:object size:0x4 scope:global data:4byte
 mnDataDel_804D6C6C = .sbss:0x804D6C6C; // type:object size:0x4 scope:global data:4byte
 menu_gobj = .sbss:0x804D6C70; // type:object size:0x4 scope:local data:4byte
-menu_jobj = .sbss:0x804D6C74; // type:object size:0x4 scope:local data:4byte
 mnInfo_804D6C78 = .sbss:0x804D6C78; // type:object size:0x8 scope:global data:4byte
 mnInfoBonus_804D6C80 = .sbss:0x804D6C80; // type:object size:0x8 scope:global data:byte
 mnGallery_804D6C88 = .sbss:0x804D6C88; // type:object size:0x4 scope:global data:4byte
