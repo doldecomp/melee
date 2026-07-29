@@ -317,17 +317,15 @@ static inline void setupChanCtrl(HSD_Particle* pp)
 
 static inline void setupChanReg(HSD_Particle* pp)
 {
-    GXColor mat_color;
-    GXColor amb_color;
     GXColor prim_color;
+    GXColor amb_color;
+    GXColor mat_color;
     HSD_LObj* lobj;
 
     if (pp->kind & DispLighting) {
         getColorMatAmb(pp, &mat_color, &amb_color);
         if (pp->kind & PrimEnv) {
-            prim_color.r = 0xFF;
-            prim_color.g = 0xFF;
-            prim_color.b = 0xFF;
+            prim_color.r = prim_color.g = prim_color.b = 0xFF;
         } else {
             getColorPrimEnv(pp, &prim_color, &mat_color);
             amb_color.r = (u8) ((amb_color.r * prim_color.r) >> 8);
@@ -345,9 +343,7 @@ static inline void setupChanReg(HSD_Particle* pp)
         if (lobj != NULL) {
             HSD_MulColor(&amb_color, &lobj->color, &amb_color);
         } else {
-            amb_color.r = 0;
-            amb_color.g = 0;
-            amb_color.b = 0;
+            amb_color.r = amb_color.g = amb_color.b = 0;
         }
         if (amb_color.r != HSD_PSDisp_804D7938.r ||
             amb_color.g != HSD_PSDisp_804D7938.g ||
@@ -1402,9 +1398,8 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
         cur_pos.y = appsrt->x78 * pos_y;
         cur_pos.x = appsrt->ssy * pos_y;
         cur_pos.y = appsrt->x74 * pp->pos.x + cur_pos.y;
-        cur_pos.z =
-            (cur_pos.x = appsrt->ssx * pp->pos.x + cur_pos.x,
-             appsrt->x84 * pp->pos.x + cur_pos.z);
+        cur_pos.z = (cur_pos.x = appsrt->ssx * pp->pos.x + cur_pos.x,
+                     appsrt->x84 * pp->pos.x + cur_pos.z);
         cur_pos.x = appsrt->x6C * pp->pos.z + cur_pos.x;
         cur_pos.y = appsrt->x7C * pp->pos.z + cur_pos.y;
         cur_pos.z = appsrt->x8C * pp->pos.z + cur_pos.z;
