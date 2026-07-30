@@ -547,7 +547,7 @@ static inline HSD_Particle* psDispSubPoint(HSD_Particle* pp)
     f32 fw;
     s32 w;
 
-    psSetCurrentMtx(0);
+    psSetCurrentMtx(GX_PNMTX0);
     fw = (pp->size > 42.5) ? 255.0f : 6.0f * pp->size;
     w = (s32) fw;
     if (prevPointSize != (s32) (u8) w) {
@@ -646,7 +646,7 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
     f32 fw;
     s32 w;
 
-    psSetCurrentMtx(0);
+    psSetCurrentMtx(GX_PNMTX0);
     fw = (pp->size > 42.5) ? 255.0f : 6.0f * pp->size;
     w = (s32) fw;
     if (prevLineWidth != (s32) (u8) w) {
@@ -873,7 +873,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
     f32 prev_z;
     u8* it = texform;
 
-    psSetCurrentMtx(0);
+    psSetCurrentMtx(GX_PNMTX0);
     if (pp->kind & Trail) {
         GXColor color;
 
@@ -1339,13 +1339,13 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
     f32 ax;
     s32 w;
 
-    psSetCurrentMtx(3);
+    psSetCurrentMtx(GX_PNMTX1);
     if (pp->appsrt != NULL) {
         if (pp->appsrt->frameNum != psFrameNum) {
             f32 scale_x;
             f32 scale_y;
 
-            if (pp->appsrt->status != 2) {
+            if (pp->appsrt->status != PS_APPSTATUS_STILL) {
                 HSD_psAppSRT* appsrt = pp->appsrt;
                 Vec3* translate = &appsrt->translate;
                 Vec3* rotate = (Vec3*) &appsrt->rot;
@@ -1354,8 +1354,8 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
 
                 HSD_MtxSRT(mmtx, scale, rotate, translate, NULL);
             }
-            if (pp->appsrt->status == 1) {
-                pp->appsrt->status = 2;
+            if (pp->appsrt->status == PS_APPSTATUS_ONCE) {
+                pp->appsrt->status = PS_APPSTATUS_STILL;
             }
             PSMTXConcat(HSD_PSDisp_804D0FC0.view_mtx, pp->appsrt->mmtx,
                         (MtxPtr) &pp->appsrt->ssx);
@@ -1522,7 +1522,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
         f32 scale_x;
         f32 scale_y;
 
-        if (pp->appsrt->status != 2) {
+        if (pp->appsrt->status != PS_APPSTATUS_STILL) {
             HSD_psAppSRT* appsrt = pp->appsrt;
             Vec3* translate = &appsrt->translate;
             Vec3* rotate = (Vec3*) &appsrt->rot;
@@ -1531,8 +1531,8 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
 
             HSD_MtxSRT(mmtx, scale, rotate, translate, NULL);
         }
-        if (pp->appsrt->status == 1) {
-            pp->appsrt->status = 2;
+        if (pp->appsrt->status == PS_APPSTATUS_ONCE) {
+            pp->appsrt->status = PS_APPSTATUS_STILL;
         }
         PSMTXConcat(HSD_PSDisp_804D0FC0.view_mtx, pp->appsrt->mmtx,
                     (MtxPtr) &pp->appsrt->ssx);
@@ -1763,7 +1763,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
         bx = c * bx - s * by;
         by = s * old_bx + c * by;
     }
-    psSetCurrentMtx(3);
+    psSetCurrentMtx(GX_PNMTX1);
     if (pp->kind & Trail) {
         getClrTrail(pp, &draw_color);
         if (it == NULL) {
@@ -2222,11 +2222,12 @@ void psDispParticles(u32 target_link, u32 sw)
                         PSMTXInverse(HSD_PSDisp_804D0FC0.view_mtx,
                                      cache->inverse_view_mtx);
                         psUpdateProjectionCache(cache, 0.0f);
-                        GXLoadPosMtxImm(HSD_PSDisp_804D0FC0.view_mtx, 0);
+                        GXLoadPosMtxImm(HSD_PSDisp_804D0FC0.view_mtx,
+                                        GX_PNMTX0);
                         billboard_mtx = HSD_PSDisp_803B9628;
-                        GXLoadPosMtxImm(billboard_mtx.mtx, 3);
-                        HSD_PSDisp_804D7948[0] = 3;
-                        psSetCurrentMtx(0);
+                        GXLoadPosMtxImm(billboard_mtx.mtx, GX_PNMTX1);
+                        HSD_PSDisp_804D7948[0] = GX_PNMTX1;
+                        psSetCurrentMtx(GX_PNMTX0);
                         GXEnableTexOffsets(GX_TEXCOORD0, GX_TRUE, GX_TRUE);
                         GXSetCullMode(GX_CULL_BACK);
                         GXSetArray(GX_VA_TEX0, HSD_PSDisp_8040C340, 2U);

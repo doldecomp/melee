@@ -85,6 +85,11 @@ typedef struct _HSD_PSCmdList {
     u8 cmdList[1]; /* 0x3C */
 } HSD_PSCmdList;
 
+enum PS_AppStatus {
+    PS_APPSTATUS_ONCE = 1,
+    PS_APPSTATUS_STILL = 2,
+};
+
 struct HSD_psAppSRT {
     struct HSD_psAppSRT* next; /* 0x0 */
 
