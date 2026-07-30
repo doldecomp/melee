@@ -1651,8 +1651,11 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
         by = s * old_bx + c * by;
     }
     psSetCurrentMtx(GX_PNMTX1);
-    /// @todo Later HSD shares this emission through an AppSRT-aware
-    /// #psDispSubMakePolygon; Melee's emitted code lacks that body.
+    /** @todo Later HSD shares this emission through an AppSRT-aware
+     * #psDispSubMakePolygon; Melee's emitted code lacks that body.
+     * @remarks Positions here stay raw @c GXWGFifo stores, not
+     * @c GXPosition3f32: the inline's argument evaluation forces an extra
+     * live FP register here and grows the frame past the target. */
     if (pp->kind & Trail) {
         getClrTrail(pp, &draw_color);
         if (it == NULL) {
@@ -1922,7 +1925,7 @@ static inline void psUpdateProjectionCache(psdisp_Cache* cache,
 {
     GXGetProjectionv((f32*) &cache->projection);
     if (perspective == cache->projection.type) {
-        f32 w0 = cache->view_mtx[2][0];
+        f32 w0;
         f32 x_scale = cache->projection.x_scale;
         f32 x_offset = cache->projection.x_offset;
         f32 w1;
@@ -1936,6 +1939,7 @@ static inline void psUpdateProjectionCache(psdisp_Cache* cache,
         f32 y2;
         f32 y3;
 
+        w0 = cache->view_mtx[2][0];
         product = x_offset * w0;
         cache->projected_x.x = x_scale * cache->view_mtx[0][0] + product;
         w1 = cache->view_mtx[2][1];
@@ -1967,8 +1971,8 @@ static inline void psUpdateProjectionCache(psdisp_Cache* cache,
         cache->projected_x.y = x_scale * cache->view_mtx[0][1] + x_offset;
         cache->projected_x.z = x_scale * cache->view_mtx[0][2] + x_offset;
         cache->projected_x.w = x_scale * cache->view_mtx[0][3] + x_offset;
-        y_offset = cache->projection.y_offset;
         y_scale = cache->projection.y_scale;
+        y_offset = cache->projection.y_offset;
         cache->projected_y.x = y_scale * cache->view_mtx[1][0] + y_offset;
         cache->projected_y.y = y_scale * cache->view_mtx[1][1] + y_offset;
         cache->projected_y.z = y_scale * cache->view_mtx[1][2] + y_offset;
