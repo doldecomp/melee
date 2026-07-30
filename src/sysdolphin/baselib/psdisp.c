@@ -724,44 +724,24 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
                     GXBegin(GX_LINES, GX_VTXFMT3, 0x20U);
                 }
                 for (i = count; i != 0; i--) {
-                    {
-                        f32 z = p[1].z;
-                        f32 y = p[1].y;
-                        f32 x = p[1].x;
-                        GXWGFifo.f32 = x;
-                        GXWGFifo.f32 = y;
-                        GXWGFifo.f32 = z;
-                    }
+                    GXPosition3f32(p[1].x, p[1].y, p[1].z);
                     {
                         u8 a = c[1].a;
                         u8 b = c[1].b;
                         u8 g = c[1].g;
                         u8 r = c[1].r;
-                        GXWGFifo.u8 = r;
-                        GXWGFifo.u8 = g;
-                        GXWGFifo.u8 = b;
-                        GXWGFifo.u8 = a;
+                        GXColor4u8(r, g, b, a);
                     }
                     if (pp->kind & DispTexture) {
                         GXTexCoord1x8(0);
                     }
-                    {
-                        f32 z = p[0].z;
-                        f32 y = p[0].y;
-                        f32 x = p[0].x;
-                        GXWGFifo.f32 = x;
-                        GXWGFifo.f32 = y;
-                        GXWGFifo.f32 = z;
-                    }
+                    GXPosition3f32(p[0].x, p[0].y, p[0].z);
                     {
                         u8 a = c[0].a;
                         u8 b = c[0].b;
                         u8 g = c[0].g;
                         u8 r = c[0].r;
-                        GXWGFifo.u8 = r;
-                        GXWGFifo.u8 = g;
-                        GXWGFifo.u8 = b;
-                        GXWGFifo.u8 = a;
+                        GXColor4u8(r, g, b, a);
                     }
                     if (pp->kind & DispTexture) {
                         GXTexCoord1x8(1);
@@ -790,44 +770,24 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
             GXBegin(GX_LINES, GX_VTXFMT3, count * 2);
         }
         for (i = count; i != 0; i--) {
-            {
-                f32 z = p[1].z;
-                f32 y = p[1].y;
-                f32 x = p[1].x;
-                GXWGFifo.f32 = x;
-                GXWGFifo.f32 = y;
-                GXWGFifo.f32 = z;
-            }
+            GXPosition3f32(p[1].x, p[1].y, p[1].z);
             {
                 u8 a = c[1].a;
                 u8 b = c[1].b;
                 u8 g = c[1].g;
                 u8 r = c[1].r;
-                GXWGFifo.u8 = r;
-                GXWGFifo.u8 = g;
-                GXWGFifo.u8 = b;
-                GXWGFifo.u8 = a;
+                GXColor4u8(r, g, b, a);
             }
             if (pp->kind & DispTexture) {
                 GXTexCoord1x8(0);
             }
-            {
-                f32 z = p[0].z;
-                f32 y = p[0].y;
-                f32 x = p[0].x;
-                GXWGFifo.f32 = x;
-                GXWGFifo.f32 = y;
-                GXWGFifo.f32 = z;
-            }
+            GXPosition3f32(p[0].x, p[0].y, p[0].z);
             {
                 u8 a = c[0].a;
                 u8 b = c[0].b;
                 u8 g = c[0].g;
                 u8 r = c[0].r;
-                GXWGFifo.u8 = r;
-                GXWGFifo.u8 = g;
-                GXWGFifo.u8 = b;
-                GXWGFifo.u8 = a;
+                GXColor4u8(r, g, b, a);
             }
             if (pp->kind & DispTexture) {
                 GXTexCoord1x8(1);
@@ -897,88 +857,48 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                 setVtxDesc(3);
                 GXBegin(GX_QUADS, GX_VTXFMT3, 4);
             }
-            {
-                f32 vx = prev_x - x0;
-                f32 vz = prev_z - z0;
-                f32 vy = prev_y - y0;
-                GXWGFifo.f32 = vx;
-                GXWGFifo.f32 = vy;
-                GXWGFifo.f32 = vz;
-            }
+            GXPosition3f32(prev_x - x0, prev_y - y0, prev_z - z0);
             {
                 u8 a = color.a;
                 f32 alpha = (f32) a * pp->trail;
                 u8 b = color.b;
                 u8 g = color.g;
                 u8 r = color.r;
-                GXWGFifo.u8 = r;
-                GXWGFifo.u8 = g;
-                GXWGFifo.u8 = b;
-                GXWGFifo.u8 = (u8) alpha;
+                GXColor4u8(r, g, b, (u8) alpha);
             }
             if (pp->kind & DispTexture) {
                 GXWGFifo.u8 = (pp->kind >> 16) & 0xC;
             }
-            {
-                f32 vx = x - x1;
-                f32 vy = y - y1;
-                f32 vz = z - z1;
-                GXWGFifo.f32 = vx;
-                GXWGFifo.f32 = vy;
-                GXWGFifo.f32 = vz;
-            }
+            GXPosition3f32(x - x1, y - y1, z - z1);
             {
                 u8 a = color.a;
                 u8 b = color.b;
                 u8 g = color.g;
                 u8 r = color.r;
-                GXWGFifo.u8 = r;
-                GXWGFifo.u8 = g;
-                GXWGFifo.u8 = b;
-                GXWGFifo.u8 = a;
+                GXColor4u8(r, g, b, a);
             }
             if (pp->kind & DispTexture) {
                 GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 1;
             }
-            {
-                f32 vx = x + x0;
-                f32 vy = y + y0;
-                f32 vz = z + z0;
-                GXWGFifo.f32 = vx;
-                GXWGFifo.f32 = vy;
-                GXWGFifo.f32 = vz;
-            }
+            GXPosition3f32(x + x0, y + y0, z + z0);
             {
                 u8 a = color.a;
                 u8 b = color.b;
                 u8 g = color.g;
                 u8 r = color.r;
-                GXWGFifo.u8 = r;
-                GXWGFifo.u8 = g;
-                GXWGFifo.u8 = b;
-                GXWGFifo.u8 = a;
+                GXColor4u8(r, g, b, a);
             }
             if (pp->kind & DispTexture) {
                 GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 2;
             }
-            {
-                f32 vx = prev_x + x1;
-                f32 vz = prev_z + z1;
-                f32 vy = prev_y + y1;
-                GXWGFifo.f32 = vx;
-                GXWGFifo.f32 = vy;
-                GXWGFifo.f32 = vz;
-            }
+            GXPosition3f32(prev_x + x1, prev_y + y1, prev_z + z1);
             {
                 u8 a = color.a;
                 f32 alpha = (f32) a * pp->trail;
                 u8 b = color.b;
                 u8 g = color.g;
                 u8 r = color.r;
-                GXWGFifo.u8 = r;
-                GXWGFifo.u8 = g;
-                GXWGFifo.u8 = b;
-                GXWGFifo.u8 = (u8) alpha;
+                GXColor4u8(r, g, b, (u8) alpha);
             }
             if (pp->kind & DispTexture) {
                 GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 3;
@@ -1049,10 +969,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                         GXWGFifo.f32 = x1 * tx + (x0 * sx + x);
                         GXWGFifo.f32 = y1 * tx + (y0 * sx + y);
                         GXWGFifo.f32 = z1 * tx + (z0 * sx + z);
-                        GXWGFifo.u8 = r;
-                        GXWGFifo.u8 = g;
-                        GXWGFifo.u8 = b;
-                        GXWGFifo.u8 = alpha;
+                        GXColor4u8(r, g, b, alpha);
                         if (pp->kind & DispTexture) {
                             GXWGFifo.f32 = s;
                             GXWGFifo.f32 = t;
@@ -1069,47 +986,19 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
             setVtxDesc(1);
             GXBegin(GX_QUADS, GX_VTXFMT1, 4);
         }
-        {
-            f32 vx = x - x0;
-            f32 vy = y - y0;
-            f32 vz = z - z0;
-            GXWGFifo.f32 = vx;
-            GXWGFifo.f32 = vy;
-            GXWGFifo.f32 = vz;
-        }
+        GXPosition3f32(x - x0, y - y0, z - z0);
         if (pp->kind & DispTexture) {
             GXWGFifo.u8 = (pp->kind >> 16) & 0xC;
         }
-        {
-            f32 vx = x - x1;
-            f32 vy = y - y1;
-            f32 vz = z - z1;
-            GXWGFifo.f32 = vx;
-            GXWGFifo.f32 = vy;
-            GXWGFifo.f32 = vz;
-        }
+        GXPosition3f32(x - x1, y - y1, z - z1);
         if (pp->kind & DispTexture) {
             GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 1;
         }
-        {
-            f32 vx = x + x0;
-            f32 vy = y + y0;
-            f32 vz = z + z0;
-            GXWGFifo.f32 = vx;
-            GXWGFifo.f32 = vy;
-            GXWGFifo.f32 = vz;
-        }
+        GXPosition3f32(x + x0, y + y0, z + z0);
         if (pp->kind & DispTexture) {
             GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 2;
         }
-        {
-            f32 vx = x + x1;
-            f32 vy = y + y1;
-            f32 vz = z + z1;
-            GXWGFifo.f32 = vx;
-            GXWGFifo.f32 = vy;
-            GXWGFifo.f32 = vz;
-        }
+        GXPosition3f32(x + x1, y + y1, z + z1);
         if (pp->kind & DispTexture) {
             GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 3;
         }
@@ -1463,10 +1352,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
             u8 b = draw_color.b;
             u8 g = draw_color.g;
             u8 r = draw_color.r;
-            GXWGFifo.u8 = r;
-            GXWGFifo.u8 = g;
-            GXWGFifo.u8 = b;
-            GXWGFifo.u8 = (u8) alpha;
+            GXColor4u8(r, g, b, (u8) alpha);
         }
         if (pp->kind & DispTexture) {
             GXTexCoord1x8(0);
@@ -1479,10 +1365,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
             u8 b = draw_color.b;
             u8 g = draw_color.g;
             u8 r = draw_color.r;
-            GXWGFifo.u8 = r;
-            GXWGFifo.u8 = g;
-            GXWGFifo.u8 = b;
-            GXWGFifo.u8 = a;
+            GXColor4u8(r, g, b, a);
         }
         if (pp->kind & DispTexture) {
             GXTexCoord1x8(1);
@@ -2124,7 +2007,7 @@ void psDispParticles(u32 target_link, u32 sw)
     HSD_Particle* pp;
     psdisp_Cache* cache;
     /// @todo Recover this stack space from the original inline hierarchy.
-    PAD_STACK(0x20);
+    PAD_STACK(0x14);
 
     var_r16 = 0;
     var_r15 = 0;
