@@ -57,7 +57,6 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
-#include <common_structs.h>
 #include <stddef.h>
 #include <trigf.h>
 #include <baselib/debug.h>
@@ -1886,7 +1885,8 @@ void ftKb_SpecialN_800F5BA4(Fighter* fp)
     ftKb_DatAttrs* da = fp->dat_attrs;
     if ((s32) fp->kind == FTKIND_KIRBY &&
         (s32) fp->u.kb.hat.kind != FTKIND_KIRBY && !fp->u.kb.hat.x8_b0 &&
-        (u32) fp->victim_gobj == 0U && (u32) fp->dmg.x1860_element != 0xAU &&
+        (u32) fp->victim_gobj == 0U &&
+        (u32) fp->dmg.x1860_element != HitElement_Cape &&
         HSD_Randi((s32) da->specialn_odds_lose_ability_on_hit) == 0)
     {
         ftKb_SpecialN_800F5D04(fp->gobj, 1);
@@ -1940,7 +1940,7 @@ void ftKb_SpecialN_800F5D04(Fighter_GObj* gobj, bool arg1)
         it_802ADA1C(&pos, &vel, fp2->facing_dir);
         ft_PlaySFX(fp, 0x22305, 0x7F, 0x40);
     }
-    new_var->u.kb.hat.kind = 4;
+    new_var->u.kb.hat.kind = FTKIND_KIRBY;
 }
 
 void ftKb_SpecialN_800F5DE8(Fighter_GObj* gobj)
@@ -3526,7 +3526,7 @@ void fn_800F9260(HSD_GObj* gobj)
     s32 pick;
     HSD_JObj* joint;
 
-    if (fp->u.kb.hat.kind != 4) {
+    if (fp->u.kb.hat.kind != FTKIND_KIRBY) {
         if (ftCheckThrowB0(fp)) {
             lb_8000B1CC(
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_LHandN)].joint, NULL,

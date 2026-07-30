@@ -458,7 +458,7 @@ Item_GObj* it_802B7C18(Fighter_GObj* owner, Vec3* pos, f32 facing_dir)
         return NULL;
     }
 
-    spawn.kind = 0x60;
+    spawn.kind = It_Kind_Samus_GBeam;
     spawn.prev_pos = *pos;
     spawn.pos = spawn.prev_pos;
     spawn.facing_dir = facing_dir;

@@ -15,8 +15,6 @@
 
 #include "mp/forward.h"
 
-#include <common_structs.h>
-
 struct _m2c_stack_ftCo_800A3554 {
     /* 0x00 */ char pad_0[0x10];
     /* 0x10 */ f32 f;

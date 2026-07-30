@@ -14,7 +14,6 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 
-#include <common_structs.h>
 #include <baselib/archive.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>

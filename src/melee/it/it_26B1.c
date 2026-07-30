@@ -34,7 +34,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <MetroTRK/intrinsics.h>
@@ -229,7 +228,7 @@ s32 it_8026B47C(HSD_GObj* gobj) // Get heal value of healing items
         return temp_item->xDD4_itemVar.tomato.heal_amount;
     case It_Kind_Foods:
         return temp_item->xDD4_itemVar.foods.heal_amount;
-    case Pokemon_Lucky_Egg:
+    case It_Kind_Lucky_Egg:
         return temp_item->xDD4_itemVar.egg.heal_amount;
     case It_Kind_WhispyHealApple:
         return temp_item->xDD4_itemVar.whispyapple.xDD4_heal;
@@ -248,7 +247,7 @@ bool it_8026B4F0(HSD_GObj* gobj) // Check if item is a healing item
     case It_Kind_Tomato:
     case It_Kind_Foods:
     case It_Kind_Coin:
-    case Pokemon_Lucky_Egg:
+    case It_Kind_Lucky_Egg:
     case It_Kind_WhispyHealApple:
         return true;
     default:
@@ -918,7 +917,7 @@ HSD_GObj* it_8026BE84(BobOmbRain* bobOmbRain)
 
     switch (bobomb_id) {
     case 1:
-        if (it_8026D324(true)) {
+        if (it_8026D324(It_Kind_Box)) {
             gobj = it_80286088(bobOmbRain->x0);
         }
 
@@ -967,7 +966,7 @@ HSD_GObj* it_8026BE84(BobOmbRain* bobOmbRain)
         break;
 
     case 4:
-        if (it_8026D324(4)) {
+        if (it_8026D324(It_Kind_Kusudama)) {
             gobj = it_802896CC(&bobOmbRain->x8_vec);
             if (gobj != NULL) {
                 it_80274F10(gobj);
@@ -1175,7 +1174,7 @@ void it_8026C368(HSD_GObj* gobj)
             it_8029D968(gobj);
             return;
 
-        case Pokemon_Marumine:
+        case It_PKind_Marumine:
             it_802D09D0(gobj);
             return;
 

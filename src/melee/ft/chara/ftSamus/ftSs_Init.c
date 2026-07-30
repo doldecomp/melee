@@ -280,10 +280,10 @@ void ftSs_Init_OnLoad(HSD_GObj* gobj)
 
     PUSH_ATTRS(fp, ftSs_DatAttrs);
 
-    it_8026B3F8(item_list[0], 93);
-    it_8026B3F8(item_list[1], 94);
-    it_8026B3F8(item_list[2], 95);
-    it_8026B3F8(item_list[3], 96);
+    it_8026B3F8(item_list[0], It_Kind_Samus_Bomb);
+    it_8026B3F8(item_list[1], It_Kind_Samus_Charge);
+    it_8026B3F8(item_list[2], It_Kind_Samus_Missile);
+    it_8026B3F8(item_list[3], It_Kind_Samus_GBeam);
 }
 
 void ftSs_Init_80128428(HSD_GObj* gobj)

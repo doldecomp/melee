@@ -16,7 +16,6 @@
 #include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/types.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /* 099D70 */ static void ftCo_80099D70(Fighter_GObj* gobj);

@@ -209,7 +209,7 @@ void fn_8023201C(HSD_GObj* gobj)
         switch (gm_GetCurrentGameMode()) {
         case GM_MENU:
             mnRulePlus_SaveRules();
-            mn_80229860(2);
+            mn_80229860(GM_VS);
             return;
         }
         mnRulePlus_SaveRules();

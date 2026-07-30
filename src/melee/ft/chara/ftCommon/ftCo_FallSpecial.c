@@ -19,7 +19,6 @@
 #include "mp/mplib.h"
 #include "sfx/crowdsfx.h"
 
-#include <common_structs.h>
 #include <math.h>
 #include <dolphin/mtx.h>
 

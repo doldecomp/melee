@@ -12,7 +12,6 @@
 #include "ftCommon/ftCo_Turn.h"
 #include "ftDonkey/types.h"
 
-#include <common_structs.h>
 #include <stddef.h>
 
 void ftDk_HeavyTurn_Anim(HSD_GObj* gobj)

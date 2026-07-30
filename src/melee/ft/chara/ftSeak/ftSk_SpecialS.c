@@ -24,7 +24,6 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
 
-#include <common_structs.h>
 #include <math.h>
 #include <math_ppc.h>
 #include <trigf.h>

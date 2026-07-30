@@ -28,7 +28,6 @@
 #include "it/items/itlinkbow.h"
 #include "lb/lb_00B0.h"
 
-#include <common_structs.h>
 #include <trigf.h>
 #include <dolphin/mtx.h>
 

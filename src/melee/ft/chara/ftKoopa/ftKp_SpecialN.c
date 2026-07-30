@@ -66,7 +66,7 @@ void ftKp_SpecialLw_80134ACC(Fighter_GObj* gobj)
     v.y += da->x28 * fp->x34_scale.y;
     itKoopaFlame_Spawn(gobj, &v, fp->facing_dir, fp->mv.kp.specials.x4,
                        ftKp_SpecialLw_80134ACC_inline(gobj, dirs),
-                       fp->u.kp.x222C, fp->u.kp.x2230, 100);
+                       fp->u.kp.x222C, fp->u.kp.x2230, It_Kind_Koopa_Flame);
     if (fp->mv.kp.specials.x14 == 0) {
         fp->mv.kp.unk1.x4 = Item_8026AE60();
         ft_80089824(gobj);
@@ -403,18 +403,18 @@ void ftKp_SpecialAirNEnd_Coll(Fighter_GObj* gobj)
 static void ftKp_SpecialN_80135780_inline(Fighter_GObj* gobj)
 {
     ftParts_80074B0C(gobj, 0, 1);
-    ftColl_8007B128(gobj, 0x37, Intangible);
-    ftColl_8007B128(gobj, 0x30, Intangible);
-    ftColl_8007B128(gobj, 0x3C, Intangible);
-    ftColl_8007B128(gobj, 0x21, Intangible);
-    ftColl_8007B128(gobj, 0x3D, Intangible);
-    ftColl_8007B128(gobj, 0x22, Intangible);
-    ftColl_8007B128(gobj, 0xF, Intangible);
-    ftColl_8007B128(gobj, 6, Intangible);
-    ftColl_8007B128(gobj, 0x10, Intangible);
-    ftColl_8007B128(gobj, 7, Intangible);
-    ftColl_8007B128(gobj, 0x13, Intangible);
-    ftColl_8007B128(gobj, 0xA, Intangible);
+    ftColl_8007B128(gobj, 0x37, HurtCapsule_Intangible);
+    ftColl_8007B128(gobj, 0x30, HurtCapsule_Intangible);
+    ftColl_8007B128(gobj, 0x3C, HurtCapsule_Intangible);
+    ftColl_8007B128(gobj, 0x21, HurtCapsule_Intangible);
+    ftColl_8007B128(gobj, 0x3D, HurtCapsule_Intangible);
+    ftColl_8007B128(gobj, 0x22, HurtCapsule_Intangible);
+    ftColl_8007B128(gobj, 0xF, HurtCapsule_Intangible);
+    ftColl_8007B128(gobj, 6, HurtCapsule_Intangible);
+    ftColl_8007B128(gobj, 0x10, HurtCapsule_Intangible);
+    ftColl_8007B128(gobj, 7, HurtCapsule_Intangible);
+    ftColl_8007B128(gobj, 0x13, HurtCapsule_Intangible);
+    ftColl_8007B128(gobj, 0xA, HurtCapsule_Intangible);
     ftCommon_8007F5CC(gobj, 0);
 }
 

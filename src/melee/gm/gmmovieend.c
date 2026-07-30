@@ -33,7 +33,7 @@ void gm_801A6254(GameScene* arg0)
     gm_80162968(temp_r30->match_end.frame_count / 60);
     gm_8016247C(temp_r30->match_end.player_standings[0].xE);
     temp_r0 = temp_r30->match_end.result;
-    if (temp_r0 != 7 && temp_r0 != 8 &&
+    if (temp_r0 != OUTCOME_NO_CONTEST && temp_r0 != OUTCOME_RETRY &&
         temp_r30->match_end.player_standings[0].stocks != 0)
     {
         gm_UnlockCKind(temp_r31->x4);

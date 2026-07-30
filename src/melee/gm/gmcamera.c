@@ -284,12 +284,12 @@ void gmCamera_801A26C0(void)
 void gmCamera_801A2798(void)
 {
     unsigned int new_var;
-    if (HSD_PadCopyStatus[3].trigger & 0x200) {
+    if (HSD_PadCopyStatus[3].trigger & PAD_BUTTON_B) {
         new_var = gmCamera_VsCamUiState.x14 + 1;
         gmCamera_VsCamUiState.x14 = new_var % 2;
         return;
     }
-    if (HSD_PadCopyStatus[3].trigger & 0x10) {
+    if (HSD_PadCopyStatus[3].trigger & PAD_TRIGGER_Z) {
         lbAudioAx_80024030(6);
         gmCamera_801A3048(1);
     }
@@ -375,7 +375,7 @@ void gmCamera_801A2AAC(void)
 
     if ((lbSnap_8001D338(0) != 0) || (lbSnap_8001D338(1) != 0)) {
         gmCamera_801A3048(2);
-    } else if (HSD_PadCopyStatus[3].trigger & 0x100) {
+    } else if (HSD_PadCopyStatus[3].trigger & PAD_BUTTON_A) {
         sfxForward();
         switch (gmCamera_VsCamUiState.x44) {
         case 0:
@@ -397,7 +397,7 @@ void gmCamera_801A2AAC(void)
             gmCamera_801A3048(5);
             break;
         }
-    } else if (HSD_PadCopyStatus[3].trigger & 0x200) {
+    } else if (HSD_PadCopyStatus[3].trigger & PAD_BUTTON_B) {
         sfxBack();
         gmCamera_801A3048(0);
     }
@@ -405,7 +405,7 @@ void gmCamera_801A2AAC(void)
 
 void gmCamera_801A2BB0(void)
 {
-    if (HSD_PadCopyStatus[3].trigger & 0x200) {
+    if (HSD_PadCopyStatus[3].trigger & PAD_BUTTON_B) {
         sfxBack();
         gmCamera_801A3048(0);
     }
@@ -459,7 +459,7 @@ static inline void gmCamera_801A2D44_update_selection(HSD_JObj** jobj_b,
     s32* px18;
     f32 translate_x;
 
-    if (HSD_PadCopyStatus[3].trigger & 0x40001) {
+    if (HSD_PadCopyStatus[3].trigger & (PAD_BUTTON_LEFT | PAD_STICK_LEFT)) {
         if (*(px18 = &gcus->x18) != 0) {
             sfxMove();
             *px18 = 0;
@@ -473,7 +473,7 @@ static inline void gmCamera_801A2D44_update_selection(HSD_JObj** jobj_b,
             return;
         }
     }
-    if (HSD_PadCopyStatus[3].trigger & 0x80002) {
+    if (HSD_PadCopyStatus[3].trigger & (PAD_BUTTON_RIGHT | PAD_STICK_RIGHT)) {
         if (*(px18 = &gcus->x18) != 1) {
             sfxMove();
             *px18 = 1;
@@ -499,7 +499,7 @@ void gmCamera_801A2D44(void)
         gmCamera_801A3048(2);
         return;
     }
-    if (HSD_PadCopyStatus[3].trigger & 0x1100) {
+    if (HSD_PadCopyStatus[3].trigger & (PAD_BUTTON_A | PAD_BUTTON_START)) {
         if (gcus->x18 == 0) {
             sfxForward();
             gmCamera_801A3048(7);
@@ -509,7 +509,7 @@ void gmCamera_801A2D44(void)
         gmCamera_801A3048(0);
         return;
     }
-    if (HSD_PadCopyStatus[3].trigger & 0x200) {
+    if (HSD_PadCopyStatus[3].trigger & PAD_BUTTON_B) {
         sfxBack();
         gmCamera_801A3048(0);
         return;

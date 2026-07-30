@@ -23,7 +23,6 @@
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "lb/lbrefract.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /// SpecialLw (Luigi Cyclone)

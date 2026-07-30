@@ -45,7 +45,8 @@
 #define PAD_TRIGGER_LR (1 << 31)     // 0x80000000
 #define PAD_CONFIRM (1ULL << 32)        // 0x100000000
 #define PAD_CANCEL (1ULL << 33)         // 0x200000000
-#define PAD_LRAST (1ULL << 34)          // 0x400000000
+#define PAD_LR_START (1ULL << 34)       // 0x400000000
+#define PAD_LRA_START (1ULL << 35)      // 0x800000000
 #define PAD_ANY_UP (1ULL << 36)         // 0x1000000000
 #define PAD_ANY_DOWN (1ULL << 37)       // 0x2000000000
 #define PAD_ANY_LEFT (1ULL << 38)       // 0x4000000000

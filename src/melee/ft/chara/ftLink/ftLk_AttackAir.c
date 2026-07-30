@@ -17,7 +17,6 @@
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /* 0EB484 */ static void lwOnHit(HSD_GObj* gobj);

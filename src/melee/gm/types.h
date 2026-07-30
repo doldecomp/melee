@@ -8,14 +8,27 @@
 
 #include "dolphin/types.h"
 
-#include <melee/ft/forward.h>
 #include <melee/gm/forward.h> // IWYU pragma: export
 #include <melee/gr/forward.h>
 #include <melee/pl/forward.h>
 #include <melee/sc/forward.h>
 
-#include <common_structs.h>
 #include <melee/mn/types.h>
+
+/// @deprecated Replace with inline bitfields
+typedef union UnkFlagStruct {
+    u8 u8;
+    struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    };
+} UnkFlagStruct;
 
 struct UnkMultimanData {
     u16 x0_0 : 1;
@@ -34,6 +47,14 @@ struct DebugGameOverData {
     /* 16 */ u16 x16;
     /* 18 */ u16 x18;
 };
+
+typedef struct un_804A1F48_t {
+    u16 x0;
+    u16 x2;
+    s32 x4;
+    UNK_T x8;
+} un_804A1F48_t;
+STATIC_ASSERT(sizeof(struct un_804A1F48_t) == 0xC);
 
 /// @note Colloquially known as "Minor Scene"
 struct GameScene {

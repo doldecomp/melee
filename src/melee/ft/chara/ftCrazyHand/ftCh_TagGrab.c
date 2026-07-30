@@ -20,7 +20,6 @@
 #include "lb/lbaudio_ax.h"
 #include "pl/player.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <MetroTRK/intrinsics.h>
 

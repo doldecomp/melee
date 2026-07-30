@@ -19,7 +19,6 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftKirby/ftkirby.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 bool ftCo_800C23A0(Fighter_GObj* gobj)

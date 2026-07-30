@@ -18,7 +18,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /* 08CA38 */ void doEnter(Fighter_GObj* gobj);

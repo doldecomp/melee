@@ -27,7 +27,6 @@
 #include "it/items/itkirbycutterbeam.h"
 #include "lb/lb_00B0.h"
 
-#include <common_structs.h>
 #include <stddef.h>
 #include <trigf.h>
 #include <baselib/gobj.h>

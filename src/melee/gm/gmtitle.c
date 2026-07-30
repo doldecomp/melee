@@ -2,8 +2,6 @@
 
 #include "gm_unsplit.h"
 
-#include "dolphin/pad.h"
-
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/fog.h>

@@ -7,11 +7,9 @@
 #include <platform.h>
 
 #include "lb/lb_00B0.h"
-#include "lb/lbaudio_ax.h"
 #include "lb/lbspdisplay.h"
 #include "mn/inlines.h"
 #include "mn/mnmain.h"
-#include "mn/mnsoundtest.h"
 #include "ty/toy.h"
 #include "ty/types.h"
 
@@ -360,7 +358,7 @@ s32 _tyList_8031305C(void* a, TyListState* state, s8 movedFlag)
             if (state->x29E == 0) {
                 HSD_JObjClearFlagsAll(state->x288, JOBJ_HIDDEN);
                 _tyList_80312904(state->x278, state->x278->x24);
-                if (HSD_PadCopyStatus->button & 0xC00) {
+                if (HSD_PadCopyStatus->button & HSD_PAD_XY) {
                     state->x2A0 = 5;
                 } else {
                     state->x2A0 = 0;

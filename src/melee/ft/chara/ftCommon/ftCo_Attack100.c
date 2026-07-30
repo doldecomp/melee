@@ -2631,7 +2631,7 @@ static void fn_800DB5D8(Fighter_GObj* gobj)
     if (victim_fp->kind == FTKIND_YOSHI) {
         fp->invisible = true;
         fp->accessory1_cb = ftCo_800DB464;
-        ftColl_8007B0C0(gobj, Intangible);
+        ftColl_8007B0C0(gobj, HurtCapsule_Intangible);
         sp18.bone_idx = ftParts_GetBoneIndex(fp, FtPart_XRotN);
         sp18.height = HurtHeight_Mid;
         sp18.is_grabbable = false;
@@ -2693,7 +2693,7 @@ void fn_800DB790(Fighter_GObj* gobj)
     {
         fp->invisible = true;
         fp->accessory1_cb = ftCo_800DB464;
-        ftColl_8007B0C0(gobj, Intangible);
+        ftColl_8007B0C0(gobj, HurtCapsule_Intangible);
         hurt.bone_idx = ftParts_GetBoneIndex(fp, FtPart_XRotN);
         hurt.height = HurtHeight_Mid;
         hurt.is_grabbable = false;
@@ -2798,7 +2798,7 @@ void fn_800DBAE4(Fighter_GObj* gobj)
     {
         fp->invisible = true;
         fp->accessory1_cb = ftCo_800DB464;
-        ftColl_8007B0C0(gobj, Intangible);
+        ftColl_8007B0C0(gobj, HurtCapsule_Intangible);
         hurt.bone_idx = ftParts_GetBoneIndex(fp, FtPart_XRotN);
         hurt.height = HurtHeight_Mid;
         hurt.is_grabbable = false;
@@ -2837,7 +2837,7 @@ void fn_800DBBF8(Fighter_GObj* gobj)
         one = true;
         fp->invisible = one;
         fp->accessory1_cb = ftCo_800DB464;
-        ftColl_8007B0C0(gobj, Intangible);
+        ftColl_8007B0C0(gobj, HurtCapsule_Intangible);
         hurt.bone_idx = ftParts_GetBoneIndex(fp, FtPart_XRotN);
         hurt.height = one;
         hurt.is_grabbable = false;

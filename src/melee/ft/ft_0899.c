@@ -197,7 +197,9 @@ void ft_80089B08(Fighter_GObj* gobj)
                 {
                     s32 next_check = mpLineGetNext(line_id);
                     s32 next_id = next_check;
-                    if (next_check != -1 && (mpLineGetKind(next_id) & 1)) {
+                    if (next_check != -1 &&
+                        (mpLineGetKind(next_id) & CollLine_Floor))
+                    {
                         mpLineGetNormal(next_id, &sp1C);
                         adj_angle = fp->facing_dir * atan2f(sp1C.x, sp1C.y);
                     }
@@ -205,7 +207,9 @@ void ft_80089B08(Fighter_GObj* gobj)
                 {
                     s32 prev_check = mpLineGetPrev(line_id);
                     s32 prev_id = prev_check;
-                    if (prev_check != -1 && (mpLineGetKind(prev_id) & 1)) {
+                    if (prev_check != -1 &&
+                        (mpLineGetKind(prev_id) & CollLine_Floor))
+                    {
                         mpLineGetNormal(prev_id, &sp1C);
                         adj_angle =
                             0.5f * ((fp->facing_dir * atan2f(sp1C.x, sp1C.y)) +

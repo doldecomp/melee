@@ -13,7 +13,6 @@
 #include "ftCrazyHand/ftCh_CaptureWaitCrazyHand.h"
 #include "ftCrazyHand/ftCh_FingerBeam.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <MetroTRK/intrinsics.h>
 

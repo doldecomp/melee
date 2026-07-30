@@ -21,7 +21,6 @@
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "lb/lbrefract.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 static void updateRot(HSD_GObj* gobj)

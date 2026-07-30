@@ -473,7 +473,7 @@ void gm_801BAD70(GameScene* arg0)
             }
             if ((s8) ((struct gm_evlevel*) *lvlpp)
                     ->player_init[player_idx]
-                    ->c_kind == 0x21)
+                    ->c_kind == CHKIND_NONE)
             {
                 s8* t = &ev->x8 + player_idx - 1;
                 s8 v = *t;
@@ -679,7 +679,7 @@ void gm_801BB758(GameScene* arg0)
     s32 t;
 
     gm_8016A164();
-    if (exit->match_end.result == 8) {
+    if (exit->match_end.result == OUTCOME_RETRY) {
         s32 do_save = 0;
         if (ev->x20 != 0) {
             do_save = 1;
@@ -709,7 +709,7 @@ void gm_801BB758(GameScene* arg0)
         gm_SetPendingSceneIndex(1);
         return;
     }
-    if (exit->match_end.result == 7) {
+    if (exit->match_end.result == OUTCOME_NO_CONTEST) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
@@ -768,7 +768,7 @@ void gm_801BB758(GameScene* arg0)
     }
     gm_80173EEC();
     gm_80172898(0x10);
-    if (kind != 0x21) {
+    if (kind != CHKIND_MAX) {
         gm_801736E8(ev->x0, ev->x1, ev->x6, ev->x4, kind, GM_MENU);
         gm_ChangeGameModeAfterCurrentScene(GM_CHALLENGER_APPROACH);
         return;
@@ -1709,7 +1709,7 @@ void gm_801BC670(HSD_GObj* arg0)
         temp_r31->x2C = temp_r30->x0;
         temp_r31->x30 = 0;
     }
-    if (Player_80036394(0) == 7) {
+    if (Player_80036394(0) == FTKIND_SEAK) {
         temp_r31->x38 = 0x13;
     } else {
         temp_r31->x38 = 0x21;

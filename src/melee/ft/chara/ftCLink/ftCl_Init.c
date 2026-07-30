@@ -37,8 +37,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
-
 MotionState ftCl_Init_MotionStateTable[ftLk_MS_SelfCount] = {
     {
         // ftLk_MS_AttackS42 = 341

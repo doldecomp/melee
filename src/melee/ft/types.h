@@ -33,6 +33,7 @@
 #include "ftYoshi/types.h"
 #include "ftZakoBoy/types.h"
 #include "ftZelda/types.h"
+#include "gm/types.h"
 
 #include "it/forward.h"
 
@@ -40,7 +41,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 

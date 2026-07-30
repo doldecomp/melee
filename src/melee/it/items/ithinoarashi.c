@@ -266,7 +266,7 @@ void it_802D64B8(HSD_GObj* gobj, Vec3* pos, u32 arg2, f32 facing_dir)
     Item* ip = GET_ITEM(gobj);
     SpawnItem spawn;
 
-    spawn.kind = 0xCE;
+    spawn.kind = It_Kind_Hinoarashi_Flame;
     spawn.prev_pos = *pos;
     spawn.prev_pos.z = 0.0f;
     it_8026BB88(gobj, &spawn.pos);

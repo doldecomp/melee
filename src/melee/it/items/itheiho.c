@@ -56,7 +56,7 @@ ItemStateTable it_803F83F0[] = {
 
 void it_802D8618(s32 arg0, Vec3* arg1, s32 arg2, s32 arg3)
 {
-    Item_GObj* gobj = it_8027B5B0(0xD2, arg1, NULL, NULL, 1);
+    Item_GObj* gobj = it_8027B5B0(It_Kind_Heiho, arg1, NULL, NULL, 1);
     Item* ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.heiho.x20 = (s8) arg0;
     ip->xDD4_itemVar.heiho.x21 = (s8) arg2;

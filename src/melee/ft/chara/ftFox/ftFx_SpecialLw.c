@@ -23,7 +23,6 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbspdisplay.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 static MotionFlags const ftFx_MF_SpecialLw_Coll =

@@ -39,7 +39,6 @@
 #include "ft/types.h"
 #include "it/it_26B1.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 MotionState ftMh_Init_MotionStateTable[ftMh_MS_SelfCount] = {
@@ -617,8 +616,8 @@ void ftMh_Init_OnLoad(HSD_GObj* gobj)
         UNK_T* items = ftdata->x48_items;
         PUSH_ATTRS(fp, ftMasterHand_SpecialAttrs);
         ftBossLib_8015BDB4(gobj);
-        it_8026B3F8(items[0], 125);
-        it_8026B3F8(items[1], 126);
+        it_8026B3F8(items[0], It_Kind_MasterHand_Laser);
+        it_8026B3F8(items[1], It_Kind_MasterHand_Bullet);
         fp->no_normal_motion = true;
         fp->x2229_b6 = true;
         fp->no_kb = true;

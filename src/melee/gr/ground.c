@@ -97,7 +97,6 @@
 #include "ty/toy.h"
 #include "ty/tydisplay.h"
 
-#include <common_structs.h>
 #include <math.h>
 #include <math_ppc.h>
 #include <trigf.h>
@@ -506,7 +505,7 @@ void Ground_801C0800(StageIdPair* pair)
 
         if (stage_info.ald_yaku_all != NULL) {
             for (i = 1; stage_info.ald_yaku_all[i] != NULL; i++) {
-                Article* a = it_804D6D38[Pokemon_Random - It_Kind_Kuriboh];
+                Article* a = it_804D6D38[It_PKind_Random - It_Kind_Kuriboh];
                 a->xC_itemStates->x0_itemStateDesc[i].xC_script =
                     stage_info.ald_yaku_all[i];
             }

@@ -2386,9 +2386,9 @@ static grBb_TrackEntry grBb_TrackEntries[12] = {
 
 void grBigBlue_801EB004(Ground_GObj* gobj)
 {
-    HSD_JObj* jobj = GET_JOBJ(gobj);
+    HSD_JObj* stage_jobj = GET_JOBJ(gobj);
     Ground* gp = gobj->user_data;
-    HSD_JObj* child;
+    HSD_JObj* jobj;
     Vec3 pos;
     Vec3 end_pos;
     Vec3 diff;
@@ -2397,10 +2397,10 @@ void grBigBlue_801EB004(Ground_GObj* gobj)
     grBb_TrackEntry* entry;
     PAD_STACK(4);
 
-    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+    HSD_JObjSetFlagsAll(stage_jobj, JOBJ_HIDDEN);
 
     pos.x = pos.y = pos.z = 1.0F;
-    HSD_JObjSetScale(jobj, &pos);
+    HSD_JObjSetScale(stage_jobj, &pos);
 
     pos.x = pos.y = pos.z = Ground_801C0498();
 
@@ -2408,10 +2408,10 @@ void grBigBlue_801EB004(Ground_GObj* gobj)
     for (i = 0; i < 12; i++, entry++) {
         HSD_JObj* start_jobj;
         HSD_JObj* end_jobj;
-        child = Ground_801C3FA4(gobj, entry->jobj_index);
+        jobj = Ground_801C3FA4(gobj, entry->jobj_index);
 
         /* goto required for match: skips to assert block on NULL */
-        if (child == NULL) {
+        if (jobj == NULL) {
             goto assert_block;
         }
 
@@ -2425,7 +2425,7 @@ void grBigBlue_801EB004(Ground_GObj* gobj)
             goto assert_block;
         }
 
-        HSD_JObjSetScale(child, &pos);
+        HSD_JObjSetScale(jobj, &pos);
 
         lb_8000B1CC(start_jobj, NULL, &start_pos);
         lb_8000B1CC(end_jobj, NULL, &end_pos);
@@ -2437,7 +2437,7 @@ void grBigBlue_801EB004(Ground_GObj* gobj)
         continue;
 
     assert_block:
-        HSD_ASSERTMSG(2328, child, "jobj");
+        HSD_ASSERT(2328, jobj);
         HSD_ASSERT(2329, start_jobj);
         HSD_ASSERT(2330, end_jobj);
     }

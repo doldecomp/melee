@@ -22,7 +22,6 @@
 #include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 #define FTFOX_SPECIALHI_COLL_FLAG                                             \

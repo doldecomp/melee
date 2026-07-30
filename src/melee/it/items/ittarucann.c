@@ -93,7 +93,7 @@ void it_80295F38(Item_GObj* gobj)
         ip = GET_ITEM(gobj);
         da = ip->xC4_article_data->x4_specialAttributes;
         params = it_803B8610;
-        params.state = 1;
+        params.state = HitCapsule_Enabled;
         params.damage = da->x30;
         params.kb_angle = da->x34;
         params.unkC = da->x38;

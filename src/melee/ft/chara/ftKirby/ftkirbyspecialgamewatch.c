@@ -24,7 +24,6 @@
 #include "it/items/itkirbygamewatchchefpan.h"
 #include "lb/lb_00B0.h"
 
-#include <common_structs.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
@@ -89,8 +88,9 @@ void fn_8010CE5C(Fighter_GObj* gobj)
                                     fp->u.kb.xD8 = fp->u.kb.xD4;
                                     var_r6 = temp_r5;
                                     fp->u.kb.xD4 = temp_r5;
-                                    it_802C837C(gobj, &vec0, 0x9B, var_r6,
-                                                fp2->facing_dir);
+                                    it_802C837C(gobj, &vec0,
+                                                It_Kind_Kirby_GameWatchChef,
+                                                var_r6, fp2->facing_dir);
                                 }
                             }
                         }

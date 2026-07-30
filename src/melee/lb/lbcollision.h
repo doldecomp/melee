@@ -8,6 +8,7 @@
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
+#include <dolphin/gx/GXStruct.h>
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 

@@ -369,7 +369,7 @@ bool grLib_801C9EE8(Vec3* point, float offset)
 
     items = HSD_GObj_Entities->items;
     for (cur_item = items; cur_item != NULL; cur_item = cur_item->next) {
-        if (itGetKind(cur_item) != Pokemon_Random) {
+        if (itGetKind(cur_item) != It_PKind_Random) {
             ip = GET_ITEM(cur_item);
             if (PointInsideColl(&ip->x378_itemColl, point, offset)) {
                 return true;

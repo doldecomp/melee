@@ -16,8 +16,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
-
 struct ftKb_FighterVars {
     /* fp+222C */ struct ftKb_Hat {
         /*  +0   fp+222C */ Item_GObj* x0;

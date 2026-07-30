@@ -6,9 +6,32 @@
 #include "baselib/forward.h"
 
 #include <dolphin/pad.h>
+#include <baselib/rumble.h>
 
-/// @todo Circular dependency
-#include "baselib/rumble.h"
+typedef u32 HSD_Pad;
+
+#define HSD_PAD_DPADLEFT (1 << 0)
+#define HSD_PAD_DPADRIGHT (1 << 1)
+#define HSD_PAD_DPADDOWN (1 << 2)
+#define HSD_PAD_DPADUP (1 << 3)
+#define HSD_PAD_Z (1 << 4)
+#define HSD_PAD_R (1 << 5)
+#define HSD_PAD_L (1 << 6)
+#define HSD_PAD_7 (1 << 7)
+
+/// @remarks Also covers Z-Button macro in-game.
+#define HSD_PAD_A (1 << 8)
+
+#define HSD_PAD_B (1 << 9)
+#define HSD_PAD_X (1 << 10)
+#define HSD_PAD_Y (1 << 11)
+#define HSD_PAD_START (1 << 12)
+
+/// Digital input of either L or R
+#define HSD_PAD_LR (1 << 31)
+
+#define HSD_PAD_AB (HSD_PAD_A | HSD_PAD_B)
+#define HSD_PAD_XY (HSD_PAD_X | HSD_PAD_Y)
 
 #define PAD_ERR_NO_CONTROLLER -1
 
@@ -78,7 +101,7 @@ struct PadLibData {
     /*0x29*/ u8 cross_dir;
     /*0x2A*/ u8 reset_switch_status;
     /*0x2B*/ u8 reset_switch;
-    /*0x2C*/ RumbleInfo rumble_info;
+    /*0x2C*/ struct RumbleInfo rumble_info;
 };
 
 extern HSD_PadStatus HSD_PadMasterStatus[4];

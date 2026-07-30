@@ -7,6 +7,7 @@
 #include "gm/gm_1A3F.h"
 #include "gm/gm_1BA8.h"
 #include "gm/gmmovieend.h"
+#include "if/if_2FD9.h"
 #include "melee/gm/gm_unsplit.h"
 #include "melee/gm/gmcamera.h"
 #include "melee/gm/gmmain_lib.h"
@@ -23,10 +24,6 @@
 #include "melee/lb/types.h"
 #include "melee/mn/types.h"
 #include "mn/inlines.h"
-
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/random.h>
 
 /* 4D68C0 */ static u8 gm_804D68C0;
 /* 4D68C1 */ static u8 gm_804D68C1;
@@ -719,7 +716,7 @@ void gm_801B2298_OnInit(void)
         temp_r31->data.players[i].color = i;
         temp_r31->data.players[i].xE = 0;
         if (i != 0) {
-            temp_r31->data.players[1].c_kind = 0x21;
+            temp_r31->data.players[1].c_kind = CHKIND_NONE;
         }
         gm_80473814.players[i] = temp_r31->data.players[i];
     }

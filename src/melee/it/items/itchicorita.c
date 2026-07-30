@@ -242,7 +242,7 @@ void it_802C9B20(Item_GObj* chicorita_gobj)
     spawn.vel.x = attr->x10 * chicorita->facing_dir;
     spawn.vel.z = spawn.vel.y = 0.0f;
     spawn.x40 = 0;
-    spawn.kind = Pokemon_Chicorita_Leaf;
+    spawn.kind = It_Kind_Chicorita_Leaf;
     spawn.x0_parent_gobj = chicorita->owner;
     spawn.x4_parent_gobj2 = (HSD_GObj*) chicorita_gobj;
     spawn.x44_flag.b0 = 1;

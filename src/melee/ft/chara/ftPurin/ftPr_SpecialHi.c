@@ -19,7 +19,6 @@
 #include "gr/grpstadium.h"
 #include "lb/types.h"
 
-#include <common_structs.h>
 #include <baselib/archive.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>

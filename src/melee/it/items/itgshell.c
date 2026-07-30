@@ -1,6 +1,5 @@
 #include "itgshell.h"
 
-#include "common_structs.h"
 #include "inlines.h"
 
 #include <placeholder.h>
