@@ -32,26 +32,14 @@ typedef struct {
 } psdisp_Tlut;
 
 typedef struct {
-    f32 type;
-    f32 x_scale;
-    f32 x_offset;
-    f32 y_scale;
-    f32 y_offset;
-    f32 z_scale;
-    f32 z_offset;
-} psdisp_Projection;
-
-typedef struct {
     Mtx mtx;
 } psdisp_Mtx;
 
 typedef struct {
-    Mtx view_mtx;
-    Mtx inverse_view_mtx;
-    psdisp_Projection projection;
-    Vec4 projected_x;
-    Vec4 projected_y;
-    u8 x9C_pad[0x10];
+    Mtx vmtx;
+    Mtx rvmtx;
+    f32 prj[GX_PROJECTION_SZ];
+    Mtx pvmtx;
     HSD_Particle* particle_list[17];
 } psdisp_Cache;
 
@@ -91,12 +79,12 @@ typedef struct {
 /* 4D7924 */ static f32 HSD_PSDisp_804D7924;
 /* 4D7928 */ static f32 HSD_PSDisp_804D7928;
 /* 4D792C */ static s32 HSD_PSDisp_804D792C;
-/* 4D7930 */ static s32 HSD_PSDisp_804D7930;
+/* 4D7930 */ static s32 prevChanCtrl;
 /* 4D7934 */ static GXColor prevChanMat;
 /* 4D7938 */ static GXColor prevChanAmb;
-/* 4D793C */ static GXColor HSD_PSDisp_804D793C;
-/* 4D7940 */ static GXColor HSD_PSDisp_804D7940;
-/* 4D7944 */ static GXColor HSD_PSDisp_804D7944;
+/* 4D793C */ static GXColor prevColorPrim;
+/* 4D7940 */ static GXColor prevColorEnv;
+/* 4D7944 */ static GXColor prevColorMat;
 /* 4D7948 */ static s32 HSD_PSDisp_804D7948[2];
 
 STATIC_ASSERT(sizeof(HSD_PSDisp_8040C340) == 0x20);
@@ -287,10 +275,10 @@ static inline void setupChanCtrl(HSD_Particle* pp)
 {
     u32 chan_state = pp->kind & (DispLighting | Trail);
 
-    if (chan_state != (u32) HSD_PSDisp_804D7930) {
-        HSD_PSDisp_804D7930 = chan_state;
+    if (chan_state != (u32) prevChanCtrl) {
+        prevChanCtrl = chan_state;
         GXSetNumChans(1);
-        switch (HSD_PSDisp_804D7930) {
+        switch (prevChanCtrl) {
         case Trail:
             GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_VTX, GX_SRC_VTX, 0,
                           GX_DF_NONE, GX_AF_NONE);
@@ -368,51 +356,47 @@ static inline void setupTevReg(HSD_Particle* pp)
     if ((pp->kind & PrimEnv) ||
         (!(pp->kind & DispLighting) && !(pp->kind & Trail)))
     {
-        if (HSD_PSDisp_804D793C.r != prim_color.r ||
-            HSD_PSDisp_804D793C.g != prim_color.g ||
-            HSD_PSDisp_804D793C.b != prim_color.b ||
-            HSD_PSDisp_804D793C.a != prim_color.a)
+        if (prevColorPrim.r != prim_color.r ||
+            prevColorPrim.g != prim_color.g ||
+            prevColorPrim.b != prim_color.b || prevColorPrim.a != prim_color.a)
         {
-            HSD_PSDisp_804D793C = prim_color;
-            GXSetTevColor(GX_TEVREG0, HSD_PSDisp_804D793C);
+            prevColorPrim = prim_color;
+            GXSetTevColor(GX_TEVREG0, prevColorPrim);
         }
         if (pp->kind & PrimEnv) {
-            if (HSD_PSDisp_804D7940.r != env_color.r ||
-                HSD_PSDisp_804D7940.g != env_color.g ||
-                HSD_PSDisp_804D7940.b != env_color.b ||
-                HSD_PSDisp_804D7940.a != env_color.a)
+            if (prevColorEnv.r != env_color.r ||
+                prevColorEnv.g != env_color.g ||
+                prevColorEnv.b != env_color.b || prevColorEnv.a != env_color.a)
             {
-                HSD_PSDisp_804D7940 = env_color;
-                GXSetTevColor(GX_TEVREG1, HSD_PSDisp_804D7940);
+                prevColorEnv = env_color;
+                GXSetTevColor(GX_TEVREG1, prevColorEnv);
             }
-        } else if (HSD_PSDisp_804D7940.r != 0 || HSD_PSDisp_804D7940.g != 0 ||
-                   HSD_PSDisp_804D7940.b != 0 || HSD_PSDisp_804D7940.a != 0)
+        } else if (prevColorEnv.r != 0 || prevColorEnv.g != 0 ||
+                   prevColorEnv.b != 0 || prevColorEnv.a != 0)
         {
-            HSD_PSDisp_804D7940.r = HSD_PSDisp_804D7940.g =
-                HSD_PSDisp_804D7940.b = HSD_PSDisp_804D7940.a = 0;
-            GXSetTevColor(GX_TEVREG1, HSD_PSDisp_804D7940);
+            prevColorEnv.r = prevColorEnv.g = prevColorEnv.b = prevColorEnv.a =
+                0;
+            GXSetTevColor(GX_TEVREG1, prevColorEnv);
         }
     }
     if (pp->kind & DispLighting) {
         getColorMatAmb(pp, &mat_color, &amb_color);
         if (pp->kind & PrimEnv) {
-            if (HSD_PSDisp_804D7944.r != mat_color.r ||
-                HSD_PSDisp_804D7944.g != mat_color.g ||
-                HSD_PSDisp_804D7944.b != mat_color.b ||
-                HSD_PSDisp_804D7944.a != mat_color.a)
+            if (prevColorMat.r != mat_color.r ||
+                prevColorMat.g != mat_color.g ||
+                prevColorMat.b != mat_color.b || prevColorMat.a != mat_color.a)
             {
-                HSD_PSDisp_804D7944 = mat_color;
-                GXSetTevColor(GX_TEVREG2, HSD_PSDisp_804D7944);
+                prevColorMat = mat_color;
+                GXSetTevColor(GX_TEVREG2, prevColorMat);
             }
         } else {
             mat_color.a = (u8) ((mat_color.a * prim_color.a) >> 8);
-            if (HSD_PSDisp_804D7944.r != mat_color.r ||
-                HSD_PSDisp_804D7944.g != mat_color.g ||
-                HSD_PSDisp_804D7944.b != mat_color.b ||
-                HSD_PSDisp_804D7944.a != mat_color.a)
+            if (prevColorMat.r != mat_color.r ||
+                prevColorMat.g != mat_color.g ||
+                prevColorMat.b != mat_color.b || prevColorMat.a != mat_color.a)
             {
-                HSD_PSDisp_804D7944 = mat_color;
-                GXSetTevColor(GX_TEVREG2, HSD_PSDisp_804D7944);
+                prevColorMat = mat_color;
+                GXSetTevColor(GX_TEVREG2, prevColorMat);
             }
         }
     }
@@ -1065,12 +1049,12 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
     y = pp->pos.y;
     z = pp->pos.z;
     if (texform != NULL) {
-        right_x = cache->inverse_view_mtx[0][0] * pp->size;
-        up_x = -cache->inverse_view_mtx[0][1] * pp->size;
-        right_y = cache->inverse_view_mtx[1][0] * pp->size;
-        up_y = -cache->inverse_view_mtx[1][1] * pp->size;
-        right_z = cache->inverse_view_mtx[2][0] * pp->size;
-        up_z = -cache->inverse_view_mtx[2][1] * pp->size;
+        right_x = cache->rvmtx[0][0] * pp->size;
+        up_x = -cache->rvmtx[0][1] * pp->size;
+        right_y = cache->rvmtx[1][0] * pp->size;
+        up_y = -cache->rvmtx[1][1] * pp->size;
+        right_z = cache->rvmtx[2][0] * pp->size;
+        up_z = -cache->rvmtx[2][1] * pp->size;
     } else {
         right_x = HSD_PSDisp_804D7914 * pp->size;
         up_x = HSD_PSDisp_804D7918 * pp->size;
@@ -1083,7 +1067,7 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
         f32 x;
         f32 y;
 
-        if (0.0f == cache->projection.type) {
+        if (0.0f == cache->prj[0]) {
             f32 prev_x;
             f32 prev_y;
             f32 prev_z;
@@ -1107,37 +1091,37 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
                 prev_y = pp->pos.y - pp->vel.y;
                 prev_z = pp->pos.z - pp->vel.z;
             }
-            w0 = cache->view_mtx[2][3] + (cache->view_mtx[2][2] * pp->pos.z +
-                                          (cache->view_mtx[2][0] * pp->pos.x +
-                                           cache->view_mtx[2][1] * pp->pos.y));
+            w0 = cache->vmtx[2][3] + (cache->vmtx[2][2] * pp->pos.z +
+                                      (cache->vmtx[2][0] * pp->pos.x +
+                                       cache->vmtx[2][1] * pp->pos.y));
             if (0.0f == w0) {
                 return;
             }
             w0inv = -1.0f / w0;
-            w1 = cache->view_mtx[2][3] + (cache->view_mtx[2][2] * prev_z +
-                                          (cache->view_mtx[2][0] * prev_x +
-                                           cache->view_mtx[2][1] * prev_y));
+            w1 = cache->vmtx[2][3] +
+                 (cache->vmtx[2][2] * prev_z +
+                  (cache->vmtx[2][0] * prev_x + cache->vmtx[2][1] * prev_y));
             if (0.0f == w1) {
                 return;
             }
             w1inv = -1.0f / w1;
-            prev_x_sum = (prev_y_terms = cache->projected_y.y * prev_y,
+            prev_x_sum = (prev_y_terms = cache->pvmtx[1][1] * prev_y,
                           prev_y_terms_copy = prev_y_terms,
-                          prev_xy = cache->projected_x.y * prev_y,
-                          cur_y = cache->projected_x.y * pp->pos.y,
-                          cur_y_term = cache->projected_y.y * pp->pos.y,
-                          cache->projected_x.x * prev_x + prev_xy);
-            prev_yx = cache->projected_y.x * prev_x + prev_y_terms_copy;
-            cur_yx = cache->projected_y.x * pp->pos.x + cur_y_term;
-            x = w0inv * (cache->projected_x.w +
-                         (cache->projected_x.z * pp->pos.z +
-                          (cache->projected_x.x * pp->pos.x + cur_y))) -
-                w1inv * (cache->projected_x.w +
-                         (cache->projected_x.z * prev_z + prev_x_sum));
-            y = w0inv * (cache->projected_y.w +
-                         (cache->projected_y.z * pp->pos.z + cur_yx)) -
-                w1inv * (cache->projected_y.w +
-                         (cache->projected_y.z * prev_z + prev_yx));
+                          prev_xy = cache->pvmtx[0][1] * prev_y,
+                          cur_y = cache->pvmtx[0][1] * pp->pos.y,
+                          cur_y_term = cache->pvmtx[1][1] * pp->pos.y,
+                          cache->pvmtx[0][0] * prev_x + prev_xy);
+            prev_yx = cache->pvmtx[1][0] * prev_x + prev_y_terms_copy;
+            cur_yx = cache->pvmtx[1][0] * pp->pos.x + cur_y_term;
+            x = w0inv * (cache->pvmtx[0][3] +
+                         (cache->pvmtx[0][2] * pp->pos.z +
+                          (cache->pvmtx[0][0] * pp->pos.x + cur_y))) -
+                w1inv * (cache->pvmtx[0][3] +
+                         (cache->pvmtx[0][2] * prev_z + prev_x_sum));
+            y = w0inv * (cache->pvmtx[1][3] +
+                         (cache->pvmtx[1][2] * pp->pos.z + cur_yx)) -
+                w1inv * (cache->pvmtx[1][3] +
+                         (cache->pvmtx[1][2] * prev_z + prev_yx));
         } else if (pp->kind & Tornado) {
             f32 prev_x;
             f32 prev_y;
@@ -1150,17 +1134,17 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
             dx = pp->pos.x - prev_x;
             dy = pp->pos.y - prev_y;
             dz = pp->pos.z - prev_z;
-            x = cache->projected_x.z * dz +
-                (cache->projected_x.x * dx + cache->projected_x.y * dy);
-            y = cache->projected_y.z * dz +
-                (cache->projected_y.x * dx + cache->projected_y.y * dy);
+            x = cache->pvmtx[0][2] * dz +
+                (cache->pvmtx[0][0] * dx + cache->pvmtx[0][1] * dy);
+            y = cache->pvmtx[1][2] * dz +
+                (cache->pvmtx[1][0] * dx + cache->pvmtx[1][1] * dy);
         } else {
-            x = cache->projected_x.z * pp->vel.z +
-                (cache->projected_x.x * pp->vel.x +
-                 cache->projected_x.y * pp->vel.y);
-            y = cache->projected_y.z * pp->vel.z +
-                (cache->projected_y.x * pp->vel.x +
-                 cache->projected_y.y * pp->vel.y);
+            x = cache->pvmtx[0][2] * pp->vel.z +
+                (cache->pvmtx[0][0] * pp->vel.x +
+                 cache->pvmtx[0][1] * pp->vel.y);
+            y = cache->pvmtx[1][2] * pp->vel.z +
+                (cache->pvmtx[1][0] * pp->vel.x +
+                 cache->pvmtx[1][1] * pp->vel.y);
         }
         {
             f32 abs_y = y;
@@ -1250,7 +1234,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
             if (pp->appsrt->status == PS_APPSTATUS_ONCE) {
                 pp->appsrt->status = PS_APPSTATUS_STILL;
             }
-            PSMTXConcat(HSD_PSDisp_804D0FC0.view_mtx, pp->appsrt->mmtx,
+            PSMTXConcat(HSD_PSDisp_804D0FC0.vmtx, pp->appsrt->mmtx,
                         (MtxPtr) &pp->appsrt->ssx);
             scale_x = pp->appsrt->ssx * pp->appsrt->ssx +
                       pp->appsrt->x74 * pp->appsrt->x74 +
@@ -1270,7 +1254,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
                 temp_mtx[0][3] = pp->appsrt->translate.x;
                 temp_mtx[1][3] = pp->appsrt->translate.y;
                 temp_mtx[2][3] = pp->appsrt->translate.z;
-                PSMTXConcat(HSD_PSDisp_804D0FC0.view_mtx, temp_mtx, temp_mtx);
+                PSMTXConcat(HSD_PSDisp_804D0FC0.vmtx, temp_mtx, temp_mtx);
                 HSD_MtxGetScale(temp_mtx, &scale);
                 PSMTXScale((MtxPtr) &pp->appsrt->ssx, scale.x, scale.y,
                            scale.z);
@@ -1421,7 +1405,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
         if (pp->appsrt->status == PS_APPSTATUS_ONCE) {
             pp->appsrt->status = PS_APPSTATUS_STILL;
         }
-        PSMTXConcat(HSD_PSDisp_804D0FC0.view_mtx, pp->appsrt->mmtx,
+        PSMTXConcat(HSD_PSDisp_804D0FC0.vmtx, pp->appsrt->mmtx,
                     (MtxPtr) &pp->appsrt->ssx);
         scale_x = pp->appsrt->ssx * pp->appsrt->ssx +
                   pp->appsrt->x74 * pp->appsrt->x74 +
@@ -1441,7 +1425,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
             temp_mtx[0][3] = pp->appsrt->translate.x;
             temp_mtx[1][3] = pp->appsrt->translate.y;
             temp_mtx[2][3] = pp->appsrt->translate.z;
-            PSMTXConcat(HSD_PSDisp_804D0FC0.view_mtx, temp_mtx, temp_mtx);
+            PSMTXConcat(HSD_PSDisp_804D0FC0.vmtx, temp_mtx, temp_mtx);
             HSD_MtxGetScale(temp_mtx, &scale);
             PSMTXScale((MtxPtr) &pp->appsrt->ssx, scale.x, scale.y, scale.z);
             pp->appsrt->x70 = temp_mtx[0][3];
@@ -1518,7 +1502,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
     if ((pp->kind & Trail) || (pp->kind & DirVec)) {
         f32 vf1;
         f32 vf2;
-        if (0.0f == HSD_PSDisp_804D0FC0.projection.type) {
+        if (0.0f == HSD_PSDisp_804D0FC0.prj[0]) {
             f32 prev_x;
             f32 prev_y;
             f32 prev_z;
@@ -1549,22 +1533,22 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
             w0 = pp->appsrt->x90 +
                  (pp->appsrt->x8C * pp->pos.z +
                   (pp->appsrt->x84 * pp->pos.x + pp->appsrt->x88 * pp->pos.y));
-            s808 = HSD_PSDisp_804D0FC0.projection.x_scale * pp->appsrt->ssx +
-                   HSD_PSDisp_804D0FC0.projection.x_offset * pp->appsrt->x84;
-            s804 = HSD_PSDisp_804D0FC0.projection.x_scale * pp->appsrt->ssy +
-                   HSD_PSDisp_804D0FC0.projection.x_offset * pp->appsrt->x88;
-            f16 = HSD_PSDisp_804D0FC0.projection.x_scale * pp->appsrt->x6C +
-                  HSD_PSDisp_804D0FC0.projection.x_offset * pp->appsrt->x8C;
-            f20 = HSD_PSDisp_804D0FC0.projection.x_scale * pp->appsrt->x70 +
-                  HSD_PSDisp_804D0FC0.projection.x_offset * pp->appsrt->x90;
-            f12 = HSD_PSDisp_804D0FC0.projection.y_scale * pp->appsrt->x74 +
-                  HSD_PSDisp_804D0FC0.projection.y_offset * pp->appsrt->x84;
-            f8 = HSD_PSDisp_804D0FC0.projection.y_scale * pp->appsrt->x78 +
-                 HSD_PSDisp_804D0FC0.projection.y_offset * pp->appsrt->x88;
-            f11 = HSD_PSDisp_804D0FC0.projection.y_scale * pp->appsrt->x7C +
-                  HSD_PSDisp_804D0FC0.projection.y_offset * pp->appsrt->x8C;
-            f13 = HSD_PSDisp_804D0FC0.projection.y_scale * pp->appsrt->x80 +
-                  HSD_PSDisp_804D0FC0.projection.y_offset * pp->appsrt->x90;
+            s808 = HSD_PSDisp_804D0FC0.prj[1] * pp->appsrt->ssx +
+                   HSD_PSDisp_804D0FC0.prj[2] * pp->appsrt->x84;
+            s804 = HSD_PSDisp_804D0FC0.prj[1] * pp->appsrt->ssy +
+                   HSD_PSDisp_804D0FC0.prj[2] * pp->appsrt->x88;
+            f16 = HSD_PSDisp_804D0FC0.prj[1] * pp->appsrt->x6C +
+                  HSD_PSDisp_804D0FC0.prj[2] * pp->appsrt->x8C;
+            f20 = HSD_PSDisp_804D0FC0.prj[1] * pp->appsrt->x70 +
+                  HSD_PSDisp_804D0FC0.prj[2] * pp->appsrt->x90;
+            f12 = HSD_PSDisp_804D0FC0.prj[3] * pp->appsrt->x74 +
+                  HSD_PSDisp_804D0FC0.prj[4] * pp->appsrt->x84;
+            f8 = HSD_PSDisp_804D0FC0.prj[3] * pp->appsrt->x78 +
+                 HSD_PSDisp_804D0FC0.prj[4] * pp->appsrt->x88;
+            f11 = HSD_PSDisp_804D0FC0.prj[3] * pp->appsrt->x7C +
+                  HSD_PSDisp_804D0FC0.prj[4] * pp->appsrt->x8C;
+            f13 = HSD_PSDisp_804D0FC0.prj[3] * pp->appsrt->x80 +
+                  HSD_PSDisp_804D0FC0.prj[4] * pp->appsrt->x90;
             if (0.0f == w0) {
                 return;
             }
@@ -1591,18 +1575,18 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
             f32 s7FC;
             f32 s7F8;
 
-            s800 = HSD_PSDisp_804D0FC0.projection.x_scale * pp->appsrt->ssx +
-                   HSD_PSDisp_804D0FC0.projection.x_offset;
-            s7FC = HSD_PSDisp_804D0FC0.projection.x_scale * pp->appsrt->ssy +
-                   HSD_PSDisp_804D0FC0.projection.x_offset;
-            s7F8 = HSD_PSDisp_804D0FC0.projection.x_scale * pp->appsrt->x6C +
-                   HSD_PSDisp_804D0FC0.projection.x_offset;
-            f17 = HSD_PSDisp_804D0FC0.projection.y_scale * pp->appsrt->x74 +
-                  HSD_PSDisp_804D0FC0.projection.y_offset;
-            f18 = HSD_PSDisp_804D0FC0.projection.y_scale * pp->appsrt->x78 +
-                  HSD_PSDisp_804D0FC0.projection.y_offset;
-            f20 = HSD_PSDisp_804D0FC0.projection.y_scale * pp->appsrt->x7C +
-                  HSD_PSDisp_804D0FC0.projection.y_offset;
+            s800 = HSD_PSDisp_804D0FC0.prj[1] * pp->appsrt->ssx +
+                   HSD_PSDisp_804D0FC0.prj[2];
+            s7FC = HSD_PSDisp_804D0FC0.prj[1] * pp->appsrt->ssy +
+                   HSD_PSDisp_804D0FC0.prj[2];
+            s7F8 = HSD_PSDisp_804D0FC0.prj[1] * pp->appsrt->x6C +
+                   HSD_PSDisp_804D0FC0.prj[2];
+            f17 = HSD_PSDisp_804D0FC0.prj[3] * pp->appsrt->x74 +
+                  HSD_PSDisp_804D0FC0.prj[4];
+            f18 = HSD_PSDisp_804D0FC0.prj[3] * pp->appsrt->x78 +
+                  HSD_PSDisp_804D0FC0.prj[4];
+            f20 = HSD_PSDisp_804D0FC0.prj[3] * pp->appsrt->x7C +
+                  HSD_PSDisp_804D0FC0.prj[4];
             if (pp->kind & Tornado) {
                 f32 tx;
                 f32 ty;
@@ -1923,11 +1907,11 @@ static inline void psUpdateBillboardAxes(const Mtx inv_view)
 static inline void psUpdateProjectionCache(psdisp_Cache* cache,
                                            f32 perspective)
 {
-    GXGetProjectionv((f32*) &cache->projection);
-    if (perspective == cache->projection.type) {
+    GXGetProjectionv(cache->prj);
+    if (perspective == cache->prj[0]) {
         f32 w0;
-        f32 x_scale = cache->projection.x_scale;
-        f32 x_offset = cache->projection.x_offset;
+        f32 x_scale = cache->prj[1];
+        f32 x_offset = cache->prj[2];
         f32 w1;
         f32 w2;
         f32 w3;
@@ -1939,46 +1923,46 @@ static inline void psUpdateProjectionCache(psdisp_Cache* cache,
         f32 y2;
         f32 y3;
 
-        w0 = cache->view_mtx[2][0];
+        w0 = cache->vmtx[2][0];
         product = x_offset * w0;
-        cache->projected_x.x = x_scale * cache->view_mtx[0][0] + product;
-        w1 = cache->view_mtx[2][1];
+        cache->pvmtx[0][0] = x_scale * cache->vmtx[0][0] + product;
+        w1 = cache->vmtx[2][1];
         product = x_offset * w1;
-        cache->projected_x.y = x_scale * cache->view_mtx[0][1] + product;
-        w2 = cache->view_mtx[2][2];
+        cache->pvmtx[0][1] = x_scale * cache->vmtx[0][1] + product;
+        w2 = cache->vmtx[2][2];
         product = x_offset * w2;
-        cache->projected_x.z = x_scale * cache->view_mtx[0][2] + product;
-        w3 = cache->view_mtx[2][3];
+        cache->pvmtx[0][2] = x_scale * cache->vmtx[0][2] + product;
+        w3 = cache->vmtx[2][3];
         product = x_offset * w3;
-        cache->projected_x.w = x_scale * cache->view_mtx[0][3] + product;
-        y_scale = cache->projection.y_scale;
-        y_offset = cache->projection.y_offset;
+        cache->pvmtx[0][3] = x_scale * cache->vmtx[0][3] + product;
+        y_scale = cache->prj[3];
+        y_offset = cache->prj[4];
         y0 = y_offset * w0;
         y1 = y_offset * w1;
         y2 = y_offset * w2;
         y3 = y_offset * w3;
-        cache->projected_y.x = y_scale * cache->view_mtx[1][0] + y0;
-        cache->projected_y.y = y_scale * cache->view_mtx[1][1] + y1;
-        cache->projected_y.z = y_scale * cache->view_mtx[1][2] + y2;
-        cache->projected_y.w = y_scale * cache->view_mtx[1][3] + y3;
+        cache->pvmtx[1][0] = y_scale * cache->vmtx[1][0] + y0;
+        cache->pvmtx[1][1] = y_scale * cache->vmtx[1][1] + y1;
+        cache->pvmtx[1][2] = y_scale * cache->vmtx[1][2] + y2;
+        cache->pvmtx[1][3] = y_scale * cache->vmtx[1][3] + y3;
     } else {
-        f32 x_offset = cache->projection.x_offset;
-        f32 x_scale = cache->projection.x_scale;
+        f32 x_offset = cache->prj[2];
+        f32 x_scale = cache->prj[1];
         f32 y_offset;
         f32 y_scale;
 
-        cache->projected_x.x = x_scale * cache->view_mtx[0][0] + x_offset;
-        cache->projected_x.y = x_scale * cache->view_mtx[0][1] + x_offset;
-        cache->projected_x.z = x_scale * cache->view_mtx[0][2] + x_offset;
-        cache->projected_x.w = x_scale * cache->view_mtx[0][3] + x_offset;
-        y_scale = cache->projection.y_scale;
-        y_offset = cache->projection.y_offset;
-        cache->projected_y.x = y_scale * cache->view_mtx[1][0] + y_offset;
-        cache->projected_y.y = y_scale * cache->view_mtx[1][1] + y_offset;
-        cache->projected_y.z = y_scale * cache->view_mtx[1][2] + y_offset;
-        cache->projected_y.w = y_scale * cache->view_mtx[1][3] + y_offset;
+        cache->pvmtx[0][0] = x_scale * cache->vmtx[0][0] + x_offset;
+        cache->pvmtx[0][1] = x_scale * cache->vmtx[0][1] + x_offset;
+        cache->pvmtx[0][2] = x_scale * cache->vmtx[0][2] + x_offset;
+        cache->pvmtx[0][3] = x_scale * cache->vmtx[0][3] + x_offset;
+        y_scale = cache->prj[3];
+        y_offset = cache->prj[4];
+        cache->pvmtx[1][0] = y_scale * cache->vmtx[1][0] + y_offset;
+        cache->pvmtx[1][1] = y_scale * cache->vmtx[1][1] + y_offset;
+        cache->pvmtx[1][2] = y_scale * cache->vmtx[1][2] + y_offset;
+        cache->pvmtx[1][3] = y_scale * cache->vmtx[1][3] + y_offset;
     }
-    psUpdateBillboardAxes(cache->inverse_view_mtx);
+    psUpdateBillboardAxes(cache->rvmtx);
 }
 
 #pragma push
@@ -2064,7 +2048,7 @@ void psDispParticles(u32 target_link, u32 sw)
                         prevPointSize = -1;
                         sp7B0 = NULL;
                         prevLineWidth = -1;
-                        HSD_PSDisp_804D7930 = -1;
+                        prevChanCtrl = -1;
                         psSetupTevInvalidState();
                         sp7A8 = (u32) -1;
                         prev_kind &= 0xFEFFFFFF;
@@ -2079,24 +2063,22 @@ void psDispParticles(u32 target_link, u32 sw)
                         GXSetChanAmbColor(GX_COLOR0A0, sp6DC);
                         psSetupTevInvalidState();
                         psSetupTevCommon();
-                        psSetColor(&HSD_PSDisp_804D793C, 0xFF);
-                        psSetColor(&HSD_PSDisp_804D7940, 0);
-                        psSetColor(&HSD_PSDisp_804D7944, 0xFF);
-                        sp6D8 = HSD_PSDisp_804D793C;
+                        psSetColor(&prevColorPrim, 0xFF);
+                        psSetColor(&prevColorEnv, 0);
+                        psSetColor(&prevColorMat, 0xFF);
+                        sp6D8 = prevColorPrim;
                         GXSetTevColor(GX_TEVREG0, sp6D8);
-                        sp6D4 = HSD_PSDisp_804D7940;
+                        sp6D4 = prevColorEnv;
                         GXSetTevColor(GX_TEVREG1, sp6D4);
-                        sp6D0 = HSD_PSDisp_804D7944;
+                        sp6D0 = prevColorMat;
                         GXSetTevColor(GX_TEVREG2, sp6D0);
                         HSD_PSDisp_804D792C = -1;
                         GXSetZCompLoc(GX_FALSE);
                         HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(),
-                                              HSD_PSDisp_804D0FC0.view_mtx);
-                        PSMTXInverse(HSD_PSDisp_804D0FC0.view_mtx,
-                                     cache->inverse_view_mtx);
+                                              HSD_PSDisp_804D0FC0.vmtx);
+                        PSMTXInverse(HSD_PSDisp_804D0FC0.vmtx, cache->rvmtx);
                         psUpdateProjectionCache(cache, 0.0f);
-                        GXLoadPosMtxImm(HSD_PSDisp_804D0FC0.view_mtx,
-                                        GX_PNMTX0);
+                        GXLoadPosMtxImm(HSD_PSDisp_804D0FC0.vmtx, GX_PNMTX0);
                         billboard_mtx = HSD_PSDisp_803B9628;
                         GXLoadPosMtxImm(billboard_mtx.mtx, GX_PNMTX1);
                         HSD_PSDisp_804D7948[0] = GX_PNMTX1;
