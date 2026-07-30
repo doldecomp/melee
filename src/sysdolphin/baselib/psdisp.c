@@ -2196,14 +2196,9 @@ void psDispParticles(u32 target_link, u32 sw)
                         prev_kind &= 0xFEFFFFFF;
                         sp7AC = (u32) -1;
                         HSD_FogSet(NULL);
-                        prevChanMat.b = 0xFF;
-                        prevChanMat.g = 0xFF;
-                        prevChanMat.r = 0xFF;
-                        prevChanAmb.b = 0xFF;
-                        prevChanAmb.g = 0xFF;
-                        prevChanAmb.r = 0xFF;
-                        prevChanAmb.a = 0xFF;
-                        prevChanMat.a = 0xFF;
+                        prevChanMat.r = prevChanMat.g = prevChanMat.b = 0xFF;
+                        prevChanAmb.r = prevChanAmb.g = prevChanAmb.b = 0xFF;
+                        prevChanMat.a = prevChanAmb.a = 0xFF;
                         sp6E0 = prevChanMat;
                         GXSetChanMatColor(GX_COLOR0A0, sp6E0);
                         sp6DC = prevChanAmb;
