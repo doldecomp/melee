@@ -1,7 +1,6 @@
 #ifndef MELEE_FT_FORWARD_H
 #define MELEE_FT_FORWARD_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "gr/forward.h"
@@ -119,7 +118,7 @@ typedef enum FighterKind {
     /* 1F */ FTKIND_GKOOPS,
     /* 20 */ FTKIND_SANDBAG,
     /* 21 */ FTKIND_NONE,
-    /* 22 */ FTKIND_MAX = FTKIND_NONE
+    /* 21 */ FTKIND_MAX = FTKIND_NONE
 } FighterKind;
 
 typedef enum CharacterKind {
@@ -436,5 +435,10 @@ enum EntityKind {
     EntityKind_Item,
     EntityKind_UNKNOWN,
 };
+
+typedef enum GroundOrAir {
+    GA_Ground,
+    GA_Air,
+} GroundOrAir;
 
 #endif

@@ -117,7 +117,7 @@ bool itSscopebeam_UnkMotion9_Anim(Item_GObj* gobj)
     ScopeBeamFloats* data = &attrs->floats[index];
 
     if (ip->xD44_lifeTimer == data->lifetime) {
-        if (ip->x5D4_hitboxes[0].hit.state >= 1) {
+        if (ip->x5D4_hitboxes[0].hit.state >= HitCapsule_Enabled) {
             ip->x5D4_hitboxes[0].hit.scale =
                 ip->x5D4_hitboxes[0].hit.scale * data->scale;
         }

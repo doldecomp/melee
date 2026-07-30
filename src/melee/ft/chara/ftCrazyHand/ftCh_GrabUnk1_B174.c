@@ -20,7 +20,6 @@
 #include "lb/lb_00B0.h"
 #include "pl/player.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <MetroTRK/intrinsics.h>
 
@@ -165,7 +164,7 @@ void fn_8015B2C0(HSD_GObj* gobj)
 
 bool fn_8015B4EC(Vec3* vec)
 {
-    HSD_GObj* gobj = ftBossLib_8015C3E8(28);
+    HSD_GObj* gobj = ftBossLib_8015C3E8(FTKIND_CREZYH);
     if (gobj != NULL) {
         Fighter* fp = GET_FIGHTER(gobj);
         lb_8000B1CC(fp->parts[FtPart_WaistN].joint, 0, vec);

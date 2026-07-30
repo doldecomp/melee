@@ -23,7 +23,6 @@
 #include "it/it_26B1.h"
 #include "it/types.h"
 
-#include <common_structs.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 

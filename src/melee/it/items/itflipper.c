@@ -219,7 +219,7 @@ static inline void itFlipper_Repel_inline(Item_GObj* gobj, s32 kind, Vec3* pos,
     Item* ip = GET_ITEM(gobj);
     vec->x = vec->y = vec->z = 0.0f;
 
-    if (kind == 0x14) {
+    if (kind == It_Kind_Flipper) {
         vec->x = ip->pos.x - pos->x;
         vec->y = ip->pos.y - pos->y;
         lbVector_NormalizeXY(vec);

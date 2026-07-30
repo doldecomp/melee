@@ -24,8 +24,6 @@
 #include "lb/lbcollision.h"
 #include "mp/mpcoll.h"
 
-#include <common_structs.h>
-
 /* 09EC44 */ static void ftCo_8009EC44(Fighter_GObj* gobj);
 
 static inline void setCamData(ftCommonData* cd, CmSubject* cam)

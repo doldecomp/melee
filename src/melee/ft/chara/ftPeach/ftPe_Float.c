@@ -18,7 +18,6 @@
 #include "ftCommon/ftCo_SpecialAir.h"
 #include "ftPeach/types.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 bool ftPe_Float_CheckContinueInput(Fighter* fp)

@@ -21,8 +21,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
-
 /* 08B498 */ static void decideFighter(Fighter_GObj* gobj);
 /* 08B4D4 */ static void doEnter(Fighter_GObj* gobj);
 

@@ -5,8 +5,6 @@
 
 #include "baselib/debug.h"
 
-#include <common_structs.h>
-
 typedef struct _objheap {
     u32 top;
     u32 curr;

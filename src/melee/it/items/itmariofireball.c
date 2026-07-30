@@ -11,7 +11,6 @@
 #include "it/item.h"
 #include "it/itmaplib.h"
 
-#include <common_structs.h>
 #include <math.h>
 #include <math_ppc.h>
 #include <dolphin/mtx.h>

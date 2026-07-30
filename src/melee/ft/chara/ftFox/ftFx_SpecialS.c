@@ -18,7 +18,6 @@
 #include "ftCommon/inlines.h"
 #include "ftFox/types.h"
 
-#include <common_structs.h>
 #include <melee/it/items/itfoxillusion.h>
 
 static MotionFlags const ftFx_MF_SpecialS_Coll =

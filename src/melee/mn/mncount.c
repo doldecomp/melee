@@ -1,7 +1,5 @@
 #include "placeholder.h"
 
-#include "ft/forward.h"
-
 #include "ty/toy.h"
 
 #include <baselib/gobj.h>
@@ -39,7 +37,6 @@ AnimLoopSettings mnCount_803EFA88[2] = {
 static AnimLoopSettings mnCount_803EFAA0 = { 0.0f, 199.0f, 0.0f };
 static StaticModelDesc model_desc;
 static HSD_GObj* menu_gobj;
-static HSD_JObj* menu_jobj;
 static u16 mnCount_sis_idx[30] = {
     0xC9, 0xCA, 0xCB, 0xCC, 0xCD, 0xCE, 0xCF, 0xD0, 0xD1, 0xD2,
     0xD3, 0xD4, 0xD5, 0xD6, 0xD7, 0xD8, 0xD9, 0xDA, 0xDB, 0xDC,
@@ -810,9 +807,9 @@ static void mnCount_InitUserData_noinline(MnCountData* userdata)
 
 static MnCountData* mnCount_AllocUserData(void)
 {
-    MnCountData* userdata = HSD_MemAlloc(sizeof(MnCountData));
-    HSD_ASSERTREPORT(0x512, userdata, "Can't get user_data.\n");
-    return userdata;
+    MnCountData* user_data = HSD_MemAlloc(sizeof(*user_data));
+    HSD_ASSERTREPORT(1298, user_data, "Can't get user_data.\n");
+    return user_data;
 }
 
 void mnCount_Create(void)

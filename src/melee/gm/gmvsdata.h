@@ -10,6 +10,5 @@ extern MatchExitInfo gm_8047E2A4;
 extern MatchExitInfo gm_80479D98;
 extern ResultsMatchInfo gm_8047C020;
 extern UNK_T gm_804D6860[];
-extern UNK_T un_804A1F48[];
 
 #endif

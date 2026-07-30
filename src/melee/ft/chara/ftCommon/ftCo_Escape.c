@@ -25,7 +25,6 @@
 #include "ftYoshi/ftYs_Guard.h"
 #include "ftYoshi/ftYs_Init.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /* 0992A8 */ static void ftCo_800992A8(Fighter_GObj* gobj, FtMotionId msid,

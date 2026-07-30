@@ -7,8 +7,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
-
 struct ftMewtwo_FighterVars {
     /* 0x222C */ HSD_GObj* x222C_disableGObj;
     /* 0x2230 */ HSD_GObj*

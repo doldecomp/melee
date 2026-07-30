@@ -18,7 +18,6 @@
 #include "mp/mplib.h"
 #include "pl/plbonuslib.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 bool ftCliffCommon_80081298(Fighter_GObj* gobj)

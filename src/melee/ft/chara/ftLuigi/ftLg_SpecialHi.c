@@ -17,7 +17,6 @@
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Landing.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /// 0x80143FC8

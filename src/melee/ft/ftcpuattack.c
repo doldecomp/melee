@@ -6,6 +6,7 @@
 #include "baselib/random.h"
 #include "ft/ftlib.h"
 
+#include "ftKirby/forward.h"
 #include <melee/ft/chara/ftDonkey/forward.h>
 #include <melee/ft/chara/ftKoopa/forward.h>
 #include <melee/ft/chara/ftSamus/forward.h>
@@ -2656,7 +2657,7 @@ bool ftCo_800BB104(Fighter* fp, Fighter* arg1, Vec3* arg2, f32 arg3)
         temp_r0 = arg1->x914[i].state;
         temp_r29 = &arg1->x914[i];
         if (temp_r0 != HitCapsule_Disabled && temp_r0 != HitCapsule_Enabled &&
-            !temp_r29->x43_b2 && temp_r29->element != 8 &&
+            !temp_r29->x43_b2 && temp_r29->element != HitElement_Catch &&
             !lbColl_8000ACFC(fp, temp_r29))
         {
             float dx = temp_r29->x4C.x - temp_r29->x58.x;
@@ -2747,7 +2748,8 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
                 hit = &ip->x5D4_hitboxes[i].hit;
                 if (state != HitCapsule_Disabled &&
                     state != HitCapsule_Enabled && !hit->x43_b2 &&
-                    hit->element != 0xB && !lbColl_8000ACFC(fp, hit) &&
+                    hit->element != HitElement_Inert &&
+                    !lbColl_8000ACFC(fp, hit) &&
                     (ftCo_CpuPredictHitboxPosition(hit, count, &sp94),
                      lbColl_80006094(&hit->x4C, &sp94, arg2, &dst, &spAC,
                                      &spB8, hit->scale, arg3)))
@@ -2771,7 +2773,8 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
                 hit = &ip->x5D4_hitboxes[i].hit;
                 if (state != HitCapsule_Disabled &&
                     state != HitCapsule_Enabled && !hit->x43_b2 &&
-                    hit->element != 0xB && !lbColl_8000ACFC(fp, hit) &&
+                    hit->element != HitElement_Inert &&
+                    !lbColl_8000ACFC(fp, hit) &&
                     (ftCo_CpuPredictHitboxPosition(hit, count, &sp60),
                      lbColl_80006094(&hit->x4C, &sp60, arg2, &dst, &sp78,
                                      &sp84, hit->scale, arg3)))
@@ -2798,7 +2801,7 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
             state = ip->x5D4_hitboxes[i].hit.state;
             hit = &ip->x5D4_hitboxes[i].hit;
             if (state != HitCapsule_Disabled && state != HitCapsule_Enabled &&
-                !hit->x43_b2 && hit->element != 0xB &&
+                !hit->x43_b2 && hit->element != HitElement_Inert &&
                 !lbColl_8000ACFC(fp, hit) &&
                 (ftCo_CpuPredictHitboxPosition(hit, count, &sp2C),
                  lbColl_80006094(&hit->x4C, &sp2C, arg2, &dst, &sp44, &sp50,

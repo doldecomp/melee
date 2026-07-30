@@ -25,7 +25,6 @@
 #include "ftPurin/ftPr_Init.h"
 #include "ftPurin/types.h"
 
-#include <common_structs.h>
 #include <math.h>
 #include <trigf.h>
 #include <baselib/archive.h>

@@ -8,6 +8,7 @@
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
+#include "ft/ft_0C8C.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
@@ -24,10 +25,8 @@
 #include "it/it_26B1.h"
 #include "it/items/itfoxblaster.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbrefract.h"
 
-#include <common_structs.h>
-#include <dolphin/os/OSError.h>
+#include <trigf.h>
 #include <baselib/debug.h>
 #include <melee/it/items/itfoxlaser.h>
 

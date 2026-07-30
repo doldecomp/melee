@@ -28,6 +28,7 @@
 #include "MSL/math.h"
 
 #include <math_ppc.h>
+#include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
@@ -332,7 +333,7 @@ void grKongo_801D577C(Ground_GObj* arg0)
         } else if (angular_vel < 0.0f) {
             angle_delta = gp->u.kongo3.xD8 - gp->u.kongo3.xD4;
         } else {
-            __assert(__FILE__, 505, "0");
+            HSD_ASSERT(505, 0);
         }
         if (angle_delta < 0.0f) {
             angle_delta += M_TAU;
@@ -467,7 +468,7 @@ void grKongo_801D577C(Ground_GObj* arg0)
         HSD_GObj* kept_gobj;
         lbColl_80008D30_arg1 hit = grKg_803B7FB0;
         PAD_STACK(4);
-        hit.state = 1;
+        hit.state = HitCapsule_Enabled;
         hit.damage = *(u32*) &yakumono_param->unk6C;
         hit.kb_angle = *(u32*) &yakumono_param->unk70;
         hit.unkC = *(u32*) &yakumono_param->unk74;
@@ -1632,7 +1633,7 @@ HSD_GObj* grKongo_801D8078(HSD_GObj* gobj)
     Ground_801C4DA0(&pos, &unk);
 
     for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
-        if (itGetKind(cur) == 0xDA) {
+        if (itGetKind(cur) == It_Kind_Klap) {
             f32 dx, dy, dz, dx2, dy2, dz2, r;
 
             it_8026B294(cur, &item_pos);

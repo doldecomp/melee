@@ -238,7 +238,7 @@ void fn_8022F538(HSD_GObj* arg0)
             rules->damage_ratio = data->fields.x5;
             rules->unk_x7 = data->fields.x6;
             rules->stock_count = data->fields.x9;
-            mn_80229860(2);
+            mn_80229860(GM_VS);
             return;
         default:
             data = mn_804D6BD0->user_data;

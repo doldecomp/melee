@@ -28,7 +28,6 @@
 #include "ftCommon/ftCo_SquatWait.h"
 #include "lb/lbcollision.h"
 
-#include <common_structs.h>
 #include <trigf.h>
 #include <dolphin/mtx.h>
 

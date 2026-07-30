@@ -50,10 +50,10 @@ HSD_GObj* it_8028FAF4(Item_GObj* arg0, Vec3* arg1)
 {
     SpawnItem spawn;
     HSD_GObj* gobj;
-    if (it_8026D324(0x12) == 0) {
+    if (it_8026D324(It_Kind_Foods) == 0) {
         return NULL;
     }
-    spawn.kind = 0x12;
+    spawn.kind = It_Kind_Foods;
     spawn.prev_pos = *arg1;
     if (arg0 != NULL) {
         it_8026BB68(arg0, &spawn.pos);

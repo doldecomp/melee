@@ -163,7 +163,7 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type, f32 scale,
     }
     }
     spawn.prev_pos = spawn.pos = sp24;
-    spawn.kind = 0xEA;
+    spawn.kind = It_Kind_Arwing_Laser;
     spawn.facing_dir = scale;
     spawn.x3C_damage = 0;
     spawn.vel.z = 0.0f;
@@ -435,13 +435,13 @@ static void itArwinglaser_UnkMotion3_Phys(Item_GObj* gobj)
     HSD_JObjSetScale(jobj, &scale_vec);
 
     switch (Stage_8022519C(Stage_80225194())) {
-    case 14:
+    case Gr_Kind_Corneria:
         grCorneria_801DDCF0(&corneria_offset);
         ip->pos.x += corneria_offset.x;
         ip->pos.y += corneria_offset.y;
-        /* fallthrough */
-    case 15:
-        return;
+        // fallthrough
+    case Gr_Kind_Venom:
+        break;
     }
 }
 

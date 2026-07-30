@@ -14,7 +14,6 @@
 #include "it/items/itpeachexplode.h"
 #include "lb/lb_00B0.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /* 11C2F4 */ static void reset(HSD_GObj* gobj);

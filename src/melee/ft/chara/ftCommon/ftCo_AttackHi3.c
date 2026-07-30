@@ -14,7 +14,6 @@
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /* 08BA38 */ static void doEnter(Fighter_GObj* gobj);

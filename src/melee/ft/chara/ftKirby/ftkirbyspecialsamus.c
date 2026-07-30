@@ -279,7 +279,8 @@ void ftKb_SsSpecialNStart_Anim(Fighter_GObj* gobj)
         offset.x = 0.0F;
         lb_8000B1CC(fp->parts[FtPart_R3rdNa].joint, &offset, &pos);
         pos.z = 0.0F;
-        if ((fp->u.kb.xA4 = it_802B55C8(gobj, &pos, FtPart_R3rdNa, 0x97,
+        if ((fp->u.kb.xA4 = it_802B55C8(gobj, &pos, FtPart_R3rdNa,
+                                        It_Kind_Kirby_SamusCharge,
                                         fp->facing_dir)) != NULL)
         {
             ftKb_SpecialN_set_cbs(gobj);
@@ -371,7 +372,8 @@ void ftKb_SsSpecialAirNStart_Anim(Fighter_GObj* gobj)
         offset.x = 0.0F;
         lb_8000B1CC(fp->parts[FtPart_R3rdNa].joint, &offset, &pos);
         pos.z = 0.0F;
-        if ((fp->u.kb.xA4 = it_802B55C8(gobj, &pos, FtPart_R3rdNa, 0x97,
+        if ((fp->u.kb.xA4 = it_802B55C8(gobj, &pos, FtPart_R3rdNa,
+                                        It_Kind_Kirby_SamusCharge,
                                         fp->facing_dir)) != NULL)
         {
             ftKb_SpecialN_set_cbs(gobj);

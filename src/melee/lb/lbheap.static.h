@@ -6,6 +6,12 @@
 
 #include <placeholder.h>
 
+/// @remarks @c LbHeapStatus_Create is named by an assert in #lbHeap_80015CA8.
+typedef enum LbHeapStatus {
+    /* 0x00 */ LbHeapStatus_Create,
+    /* 0x01 */ LbHeapStatus_Destroy,
+} LbHeapStatus;
+
 struct Heap {
     /* 10 */ s32 id;
     /* 14 */ Handle* handle;
@@ -13,7 +19,7 @@ struct Heap {
     /* 1C */ u32 size;
     /* 20 */ s32 type;
     /* 24 */ s32 transient;
-    /* 28 */ int status;
+    /* 28 */ LbHeapStatus status;
 };
 STATIC_ASSERT(sizeof(struct Heap) == 0x1C);
 

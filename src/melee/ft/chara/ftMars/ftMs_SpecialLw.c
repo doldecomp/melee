@@ -23,7 +23,6 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbspdisplay.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 static MotionFlags const ftMs_MF_SpecialLw_Coll =
@@ -344,13 +343,13 @@ static inline void ftMs_SpecialLw_80139140_inline(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2219_b0) {
         switch (ftLib_GetKind(gobj)) {
-        case 18:
+        case FTKIND_MARS:
             efSync_Spawn(
                 1265, gobj,
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_RShoulderN)].joint,
                 &fp->facing_dir);
             break;
-        case 26:
+        case FTKIND_EMBLEM:
             efSync_Spawn(
                 1296, gobj,
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_RShoulderN)].joint,

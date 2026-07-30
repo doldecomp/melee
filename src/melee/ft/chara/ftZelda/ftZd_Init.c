@@ -264,8 +264,8 @@ void ftZd_Init_OnLoad(HSD_GObj* gobj)
 
     PUSH_ATTRS(fp, ftZelda_DatAttrs);
 
-    it_8026B3F8(item_list[0], 108);
-    it_8026B3F8(item_list[1], 109);
+    it_8026B3F8(item_list[0], It_Kind_Zelda_DinFire);
+    it_8026B3F8(item_list[1], It_Kind_Zelda_DinFire_Explode);
 }
 
 void ftZd_Init_801393AC(HSD_GObj* gobj)

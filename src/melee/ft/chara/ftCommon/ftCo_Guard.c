@@ -36,7 +36,6 @@
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 
-#include <common_structs.h>
 #include <math.h>
 #include <math_ppc.h>
 #include <baselib/gobj.h>

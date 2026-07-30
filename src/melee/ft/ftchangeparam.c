@@ -2,15 +2,13 @@
 
 #include "placeholder.h"
 
+#include <baselib/debug.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/inlines.h>
 
 float ftCo_CalcYScaledKnockback(float arg0, float scale, float arg2)
 {
-    /// @todo Convert to @c HSD_ASSERT once a byte-matching form is found.
-    if (scale == 0.0F) {
-        __assert("ftchangeparam.c", 0x1E, "scale != 0.0F");
-    }
+    HSD_ASSERT(0x1E, scale != 0.0F);
     if (arg2 == 0.0F) {
         return arg0;
     }

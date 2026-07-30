@@ -13,7 +13,6 @@
 #include "it/item.h"
 #include "it/types.h"
 
-#include <common_structs.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>

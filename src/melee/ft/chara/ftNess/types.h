@@ -9,7 +9,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 struct ftNess_FighterVars {

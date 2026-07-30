@@ -469,7 +469,7 @@ void fn_8024D864(HSD_GObj* gobj)
         sfxForward();
         gm_801BEB74(data->first_event + data->page);
         gm_801677E8(mn_802295AC());
-        mn_80229860(0x2B);
+        mn_80229860(GM_EVENT);
         return;
     }
 

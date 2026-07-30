@@ -6,6 +6,7 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
+#include "ft/ft_0C8C.h"
 #include "ft/ftanim.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
@@ -27,7 +28,6 @@
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
 
-#include <common_structs.h>
 #include <trigf.h>
 #include <dolphin/mtx.h>
 

@@ -13,7 +13,8 @@
 #include "it/it_26B1.h"
 #include "lb/lbvector.h"
 
-#include <common_structs.h>
+#include "mp/forward.h"
+
 #include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/archive.h>

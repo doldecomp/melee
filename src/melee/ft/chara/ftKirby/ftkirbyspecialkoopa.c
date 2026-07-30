@@ -61,7 +61,8 @@ void ftKb_SpecialNKp_800FA588(Fighter_GObj* gobj)
     }
 
     itKoopaFlame_Spawn(gobj, &pos, fp->facing_dir, fp->mv.kb.specialn_kp.x0[1],
-                       new_facing, fp->u.kb.x84, fp->u.kb.x88, 0x9A);
+                       new_facing, fp->u.kb.x84, fp->u.kb.x88,
+                       It_Kind_Kirby_KoopaFlame);
 
     if (fp->mv.kb.specialn_kp.x14 == 0) {
         fp->mv.kb.specialn_kp.x0[1] = Item_8026AE60();

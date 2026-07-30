@@ -896,7 +896,7 @@ void fn_801756E0(s32 slot)
     if (me->player_standings[slot].slot_type == Gm_PKind_NA) {
         goto grey_out;
     }
-    if (me->result == 7 || me->result == 8) {
+    if (me->result == OUTCOME_NO_CONTEST || me->result == OUTCOME_RETRY) {
         skip = 1;
     } else {
         skip = 0;
@@ -1603,7 +1603,7 @@ void fn_80176D3C(Vec3* positions)
             winner = 3;
         }
 
-        if (me->result == 7) {
+        if (me->result == OUTCOME_NO_CONTEST) {
             winner = 1;
         } else if (winner == 0) {
             goto loop_end;

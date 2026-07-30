@@ -62,7 +62,7 @@ void ftMh_Slam_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_380_80155194(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    HSD_GObj* gobj1 = ftBossLib_8015C3E8(28);
+    HSD_GObj* gobj1 = ftBossLib_8015C3E8(FTKIND_CREZYH);
     if (!ftBossLib_8015C31C()) {
         ftCh_Init_8015A2B0(gobj1);
     }

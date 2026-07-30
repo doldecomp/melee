@@ -1440,7 +1440,7 @@ void gm_801B47FC(GameScene* scene)
 static inline void gm_801B4860_inline0(GameScene* scene)
 {
     MatchExitInfo* exit_info = gm_GetGameSceneLeaveDataCallback(scene);
-    if (exit_info->match_end.result != 1) {
+    if (exit_info->match_end.result != OUTCOME_TIMEOUT) {
         UnkAdventureData* tmp = gm_GetAdventureData();
         tmp->x76 = 1;
     } else {

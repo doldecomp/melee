@@ -1,7 +1,5 @@
 #include "ithammerhead.h"
 
-#include "common_structs.h"
-
 #include <platform.h>
 
 #include "db/db.h"

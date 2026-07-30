@@ -3,23 +3,20 @@
 #include "gm_1BFA.h"
 
 #include "gm_unsplit.h"
+#include "gmmain_lib.h"
+#include "types.h"
 
 #include "baselib/memory.h"
-#include "gm/gmmain_lib.h"
-#include "if/textlib.h"
+#include "if/if_2FD9.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbcardgame.h"
 #include "lb/lbcardnew.h"
 #include "lb/lbtime.h"
 #include "ty/toy.h"
-#include "ty/tylist.h"
-
-#include <melee/gm/types.h>
 
 extern UNK_T gm_804D6860[];
 extern StartMeleeData gm_80480530;
 extern MatchExitInfo gm_80479D98;
-extern struct un_804A1F48_t un_804A1F48[];
 
 GameScene gm_803DFE48_Scenes[] = {
     {
@@ -54,7 +51,7 @@ GameScene gm_803DFE48_Scenes[] = {
         gm_801BFF7C,
         {
             GS_PRIZE_INTERFACE,
-            un_804A1F48,
+            &un_804A1F48,
             NULL,
         },
     },
@@ -111,7 +108,7 @@ void gm_801BFBA8(GameScene* arg0)
     gm_80162968(mei->match_end.frame_count / 60);
     gm_8016247C((s32) mei->match_end.player_standings[0].xE);
     temp_r0 = mei->match_end.result;
-    if ((temp_r0 != 7) && (temp_r0 != 8) &&
+    if ((temp_r0 != OUTCOME_NO_CONTEST) && (temp_r0 != OUTCOME_RETRY) &&
         ((s8) mei->match_end.player_standings[0].stocks != 0))
     {
         gm_UnlockCKind((s32) temp_r31->x4);
@@ -133,10 +130,10 @@ static UNK_T* gm_801BFC60(u32 arg0, s32 arg1, u32 arg2, u32 arg3, UNK_T* arg4)
     struct un_804A1F48_t* temp_r3;
 
     if (arg1 == 0) {
-        un_804A1F48->x0 = arg0;
-        un_804A1F48->x4 = arg3;
-        un_804A1F48->x2 = arg2;
-        return (&un_804A1F48->x8);
+        un_804A1F48.x0 = arg0;
+        un_804A1F48.x4 = arg3;
+        un_804A1F48.x2 = arg2;
+        return (&un_804A1F48.x8);
     }
     temp_r3 = HSD_MemAlloc(0xC);
     if (temp_r3 != NULL) {

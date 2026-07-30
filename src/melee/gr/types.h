@@ -1546,7 +1546,6 @@ struct grShrineroute_GroundVars {
         /* +0 */ Vec3 offset;
         /* +C */ HSD_JObj* jobj;
     } platforms[3];
-    /* +44 gp+108 */ HSD_GObj* symbols[6];
 };
 
 struct grShrineroute_GroundVars2 {
@@ -1611,15 +1610,12 @@ struct ScrollVars {
 };
 
 struct grHomeRun_GroundVars {
-    /* +00 gp+C4 */ HSD_GObj** gobjs;
-    /* +04 gp+C8 */ HSD_GObj** jobj_gobjs;
+    /* +00 gp+C4 */ HSD_GObj** parts;
+    /* +04 gp+C8 */ HSD_GObj** back;
     /* +08 gp+CC */ HSD_Text* xCC;
     /* +0C gp+D0 */ HSD_JObj* xD0;
     /* +10 gp+D4 */ HSD_GObj* xD4;
-    /* +14 gp+D8 */ HSD_GObj* rear_gobj;
-    /* +18 gp+DC */ HSD_GObj* rear2_gobj;
-    /* +1C gp+E0 */ HSD_GObj* rear3_gobj;
-    /* +20 gp+E4 */ HSD_GObj* rear4_gobj;
+    /* +14 gp+D8 */ HSD_GObj* bg_gobj[4];
     /* +24 gp+E8 */ struct {
         u8 b0 : 1;
         u8 b1 : 1;
@@ -1666,7 +1662,7 @@ struct Map_GroundVars {
     /* +38 gp+FC    */ float xFC;
     /* +3C gp+100   */ float x100;
     /* +40 gp+104   */ float x104;
-    /* +44 gp+108   */ HSD_GObj* symbols[6];
+    /* +44 gp+108   */ HSD_GObj* symbol[6];
     /* +5C gp+120   */ char pad_5C[0x10];
     /* +6C gp+130   */ struct Map_Chikuwa* chikuwa;
     /* +70 gp+134   */ struct Map_VanishEntry* vanish;
