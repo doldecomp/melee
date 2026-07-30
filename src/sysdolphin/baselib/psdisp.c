@@ -600,7 +600,7 @@ static inline HSD_Particle* psDispSubPoint(HSD_Particle* pp)
                     GXWGFifo.f32 = y;
                     GXWGFifo.f32 = z;
                     if (pp->kind & DispTexture) {
-                        GXWGFifo.u8 = 1;
+                        GXTexCoord1x8(1);
                     }
                 }
                 p = buf;
@@ -630,7 +630,7 @@ static inline HSD_Particle* psDispSubPoint(HSD_Particle* pp)
             GXWGFifo.f32 = y;
             GXWGFifo.f32 = z;
             if (pp->kind & DispTexture) {
-                GXWGFifo.u8 = 1;
+                GXTexCoord1x8(1);
             }
         }
     }
@@ -743,7 +743,7 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
                         GXWGFifo.u8 = a;
                     }
                     if (pp->kind & DispTexture) {
-                        GXWGFifo.u8 = 0;
+                        GXTexCoord1x8(0);
                     }
                     {
                         f32 z = p[0].z;
@@ -764,7 +764,7 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
                         GXWGFifo.u8 = a;
                     }
                     if (pp->kind & DispTexture) {
-                        GXWGFifo.u8 = 1;
+                        GXTexCoord1x8(1);
                     }
                     p += 2;
                     c += 2;
@@ -809,7 +809,7 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
                 GXWGFifo.u8 = a;
             }
             if (pp->kind & DispTexture) {
-                GXWGFifo.u8 = 0;
+                GXTexCoord1x8(0);
             }
             {
                 f32 z = p[0].z;
@@ -830,7 +830,7 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
                 GXWGFifo.u8 = a;
             }
             if (pp->kind & DispTexture) {
-                GXWGFifo.u8 = 1;
+                GXTexCoord1x8(1);
             }
             p += 2;
             c += 2;
@@ -1469,7 +1469,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
             GXWGFifo.u8 = (u8) alpha;
         }
         if (pp->kind & DispTexture) {
-            GXWGFifo.u8 = 0;
+            GXTexCoord1x8(0);
         }
         GXWGFifo.f32 = cur_pos.x;
         GXWGFifo.f32 = cur_pos.y;
@@ -1485,7 +1485,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
             GXWGFifo.u8 = a;
         }
         if (pp->kind & DispTexture) {
-            GXWGFifo.u8 = 1;
+            GXTexCoord1x8(1);
         }
     } else {
         if (prevPointSize != (s32) (u8) w) {
@@ -1503,7 +1503,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
         GXWGFifo.f32 = cur_pos.y;
         GXWGFifo.f32 = cur_pos.z;
         if (pp->kind & DispTexture) {
-            GXWGFifo.u8 = 1;
+            GXTexCoord1x8(1);
         }
     }
 }
