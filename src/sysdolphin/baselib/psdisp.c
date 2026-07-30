@@ -715,24 +715,12 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
                 }
                 for (i = count; i != 0; i--) {
                     GXPosition3f32(p[1].x, p[1].y, p[1].z);
-                    {
-                        u8 a = c[1].a;
-                        u8 b = c[1].b;
-                        u8 g = c[1].g;
-                        u8 r = c[1].r;
-                        GXColor4u8(r, g, b, a);
-                    }
+                    GXColor4u8(c[1].r, c[1].g, c[1].b, c[1].a);
                     if (pp->kind & DispTexture) {
                         GXTexCoord1x8(0);
                     }
                     GXPosition3f32(p[0].x, p[0].y, p[0].z);
-                    {
-                        u8 a = c[0].a;
-                        u8 b = c[0].b;
-                        u8 g = c[0].g;
-                        u8 r = c[0].r;
-                        GXColor4u8(r, g, b, a);
-                    }
+                    GXColor4u8(c[0].r, c[0].g, c[0].b, c[0].a);
                     if (pp->kind & DispTexture) {
                         GXTexCoord1x8(1);
                     }
@@ -761,24 +749,12 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
         }
         for (i = count; i != 0; i--) {
             GXPosition3f32(p[1].x, p[1].y, p[1].z);
-            {
-                u8 a = c[1].a;
-                u8 b = c[1].b;
-                u8 g = c[1].g;
-                u8 r = c[1].r;
-                GXColor4u8(r, g, b, a);
-            }
+            GXColor4u8(c[1].r, c[1].g, c[1].b, c[1].a);
             if (pp->kind & DispTexture) {
                 GXTexCoord1x8(0);
             }
             GXPosition3f32(p[0].x, p[0].y, p[0].z);
-            {
-                u8 a = c[0].a;
-                u8 b = c[0].b;
-                u8 g = c[0].g;
-                u8 r = c[0].r;
-                GXColor4u8(r, g, b, a);
-            }
+            GXColor4u8(c[0].r, c[0].g, c[0].b, c[0].a);
             if (pp->kind & DispTexture) {
                 GXTexCoord1x8(1);
             }
@@ -848,48 +824,24 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                 GXBegin(GX_QUADS, GX_VTXFMT3, 4);
             }
             GXPosition3f32(prev_x - x0, prev_y - y0, prev_z - z0);
-            {
-                u8 a = color.a;
-                f32 alpha = (f32) a * pp->trail;
-                u8 b = color.b;
-                u8 g = color.g;
-                u8 r = color.r;
-                GXColor4u8(r, g, b, (u8) alpha);
-            }
+            GXColor4u8(color.r, color.g, color.b,
+                       (u8) ((f32) color.a * pp->trail));
             if (pp->kind & DispTexture) {
                 GXTexCoord1x8((pp->kind >> 16) & 0xC);
             }
             GXPosition3f32(x - x1, y - y1, z - z1);
-            {
-                u8 a = color.a;
-                u8 b = color.b;
-                u8 g = color.g;
-                u8 r = color.r;
-                GXColor4u8(r, g, b, a);
-            }
+            GXColor4u8(color.r, color.g, color.b, color.a);
             if (pp->kind & DispTexture) {
                 GXTexCoord1x8(((pp->kind >> 16) & 0xC) + 1);
             }
             GXPosition3f32(x + x0, y + y0, z + z0);
-            {
-                u8 a = color.a;
-                u8 b = color.b;
-                u8 g = color.g;
-                u8 r = color.r;
-                GXColor4u8(r, g, b, a);
-            }
+            GXColor4u8(color.r, color.g, color.b, color.a);
             if (pp->kind & DispTexture) {
                 GXTexCoord1x8(((pp->kind >> 16) & 0xC) + 2);
             }
             GXPosition3f32(prev_x + x1, prev_y + y1, prev_z + z1);
-            {
-                u8 a = color.a;
-                f32 alpha = (f32) a * pp->trail;
-                u8 b = color.b;
-                u8 g = color.g;
-                u8 r = color.r;
-                GXColor4u8(r, g, b, (u8) alpha);
-            }
+            GXColor4u8(color.r, color.g, color.b,
+                       (u8) ((f32) color.a * pp->trail));
             if (pp->kind & DispTexture) {
                 GXTexCoord1x8(((pp->kind >> 16) & 0xC) + 3);
             }
@@ -1331,25 +1283,13 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
             GXBegin(GX_LINES, GX_VTXFMT3, 2);
         }
         GXPosition3f32(prev_pos.x, prev_pos.y, prev_pos.z);
-        {
-            u8 a = draw_color.a;
-            f32 alpha = (f32) a * pp->trail;
-            u8 b = draw_color.b;
-            u8 g = draw_color.g;
-            u8 r = draw_color.r;
-            GXColor4u8(r, g, b, (u8) alpha);
-        }
+        GXColor4u8(draw_color.r, draw_color.g, draw_color.b,
+                   (u8) ((f32) draw_color.a * pp->trail));
         if (pp->kind & DispTexture) {
             GXTexCoord1x8(0);
         }
         GXPosition3f32(cur_pos.x, cur_pos.y, cur_pos.z);
-        {
-            u8 a = draw_color.a;
-            u8 b = draw_color.b;
-            u8 g = draw_color.g;
-            u8 r = draw_color.r;
-            GXColor4u8(r, g, b, a);
-        }
+        GXColor4u8(draw_color.r, draw_color.g, draw_color.b, draw_color.a);
         if (pp->kind & DispTexture) {
             GXTexCoord1x8(1);
         }
@@ -1644,65 +1584,25 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                 setVtxDesc(3);
                 GXBegin(GX_QUADS, GX_VTXFMT3, 4U);
             }
-            {
-                f32 vx = -ax + prev_pos.x;
-                f32 vy = -ay + prev_pos.y;
-                GXPosition3f32(vx, vy, prev_pos.z);
-            }
-            {
-                u8 a = draw_color.a;
-                f32 alpha = (f32) a * pp->trail;
-                u8 b = draw_color.b;
-                u8 g = draw_color.g;
-                u8 r = draw_color.r;
-                GXColor4u8(r, g, b, (u8) alpha);
-            }
+            GXPosition3f32(-ax + prev_pos.x, -ay + prev_pos.y, prev_pos.z);
+            GXColor4u8(draw_color.r, draw_color.g, draw_color.b,
+                       (u8) ((f32) draw_color.a * pp->trail));
             if (pp->kind & DispTexture) {
                 GXTexCoord1x8((pp->kind >> 16) & 0xC);
             }
-            {
-                f32 vx = -bx + cur_pos.x;
-                f32 vy = -by + cur_pos.y;
-                GXPosition3f32(vx, vy, cur_pos.z);
-            }
-            {
-                u8 a = draw_color.a;
-                u8 b = draw_color.b;
-                u8 g = draw_color.g;
-                u8 r = draw_color.r;
-                GXColor4u8(r, g, b, a);
-            }
+            GXPosition3f32(-bx + cur_pos.x, -by + cur_pos.y, cur_pos.z);
+            GXColor4u8(draw_color.r, draw_color.g, draw_color.b, draw_color.a);
             if (pp->kind & DispTexture) {
                 GXTexCoord1x8(((pp->kind >> 16) & 0xC) + 1);
             }
-            {
-                f32 vx = ax + cur_pos.x;
-                f32 vy = ay + cur_pos.y;
-                GXPosition3f32(vx, vy, cur_pos.z);
-            }
-            {
-                u8 a = draw_color.a;
-                u8 b = draw_color.b;
-                u8 g = draw_color.g;
-                u8 r = draw_color.r;
-                GXColor4u8(r, g, b, a);
-            }
+            GXPosition3f32(ax + cur_pos.x, ay + cur_pos.y, cur_pos.z);
+            GXColor4u8(draw_color.r, draw_color.g, draw_color.b, draw_color.a);
             if (pp->kind & DispTexture) {
                 GXTexCoord1x8(((pp->kind >> 16) & 0xC) + 2);
             }
-            {
-                f32 vx = bx + prev_pos.x;
-                f32 vy = by + prev_pos.y;
-                GXPosition3f32(vx, vy, prev_pos.z);
-            }
-            {
-                u8 a = draw_color.a;
-                f32 alpha = (f32) a * pp->trail;
-                u8 b = draw_color.b;
-                u8 g = draw_color.g;
-                u8 r = draw_color.r;
-                GXColor4u8(r, g, b, (u8) alpha);
-            }
+            GXPosition3f32(bx + prev_pos.x, by + prev_pos.y, prev_pos.z);
+            GXColor4u8(draw_color.r, draw_color.g, draw_color.b,
+                       (u8) ((f32) draw_color.a * pp->trail));
             if (pp->kind & DispTexture) {
                 GXTexCoord1x8(((pp->kind >> 16) & 0xC) + 3);
             }
@@ -1787,35 +1687,19 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
             setVtxDesc(1);
             GXBegin(GX_QUADS, GX_VTXFMT1, 4U);
         }
-        {
-            f32 vx = -ax + cur_pos.x;
-            f32 vy = -ay + cur_pos.y;
-            GXPosition3f32(vx, vy, cur_pos.z);
-        }
+        GXPosition3f32(-ax + cur_pos.x, -ay + cur_pos.y, cur_pos.z);
         if (pp->kind & DispTexture) {
             GXTexCoord1x8((pp->kind >> 16) & 0xC);
         }
-        {
-            f32 vx = -bx + cur_pos.x;
-            f32 vy = -by + cur_pos.y;
-            GXPosition3f32(vx, vy, cur_pos.z);
-        }
+        GXPosition3f32(-bx + cur_pos.x, -by + cur_pos.y, cur_pos.z);
         if (pp->kind & DispTexture) {
             GXTexCoord1x8(((pp->kind >> 16) & 0xC) + 1);
         }
-        {
-            f32 vx = ax + cur_pos.x;
-            f32 vy = ay + cur_pos.y;
-            GXPosition3f32(vx, vy, cur_pos.z);
-        }
+        GXPosition3f32(ax + cur_pos.x, ay + cur_pos.y, cur_pos.z);
         if (pp->kind & DispTexture) {
             GXTexCoord1x8(((pp->kind >> 16) & 0xC) + 2);
         }
-        {
-            f32 vx = bx + cur_pos.x;
-            f32 vy = by + cur_pos.y;
-            GXPosition3f32(vx, vy, cur_pos.z);
-        }
+        GXPosition3f32(bx + cur_pos.x, by + cur_pos.y, cur_pos.z);
         if (pp->kind & DispTexture) {
             GXTexCoord1x8(((pp->kind >> 16) & 0xC) + 3);
         }
