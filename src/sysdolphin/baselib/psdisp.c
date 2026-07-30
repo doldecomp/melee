@@ -16,6 +16,10 @@
 #include <string.h>
 #include <dolphin/gx.h>
 
+// MSL/math.h defines a non-IEEE FLT_EPSILON
+#undef FLT_EPSILON
+#define FLT_EPSILON 1.19209290e-07F
+
 typedef struct {
     HSD_Particle* head;
     HSD_Particle* tail;
@@ -1272,7 +1276,7 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
         {
             f32 abs_y = y;
             *(s32*) &abs_y &= 0x7FFFFFFF;
-            if (abs_y < 1.17549435e-38f) {
+            if (abs_y < FLT_MIN) {
                 angle = (x >= 0.0f) ? 1.5707964f : -1.5707964f;
             } else {
                 angle = atan2f(x, y);
@@ -1739,7 +1743,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
         {
             f32 abs_v = vf2;
             *(s32*) &abs_v &= 0x7FFFFFFF;
-            if (abs_v < 1.17549435e-38f) {
+            if (abs_v < FLT_MIN) {
                 angle = (-vf1 >= 0.0f) ? 1.5707964f : -1.5707964f;
             } else {
                 angle = atan2f(-vf1, vf2);
@@ -2180,7 +2184,7 @@ void psDispParticles(u32 target_link, u32 sw)
                 if ((sw == 1) && !(pp->kind & TexEdge)) {
                     break;
                 }
-                if (!(pp->size < 1.1920928955078125e-07f)) {
+                if (!(pp->size < FLT_EPSILON)) {
                     if (sp7A0 != 0) {
                         sp79C = NULL;
                         prevPointSize = -1;
