@@ -1793,10 +1793,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                 u8 b = draw_color.b;
                 u8 g = draw_color.g;
                 u8 r = draw_color.r;
-                GXWGFifo.u8 = r;
-                GXWGFifo.u8 = g;
-                GXWGFifo.u8 = b;
-                GXWGFifo.u8 = (u8) alpha;
+                GXColor4u8(r, g, b, (u8) alpha);
             }
             if (pp->kind & DispTexture) {
                 GXWGFifo.u8 = (pp->kind >> 16) & 0xC;
@@ -1813,10 +1810,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                 u8 b = draw_color.b;
                 u8 g = draw_color.g;
                 u8 r = draw_color.r;
-                GXWGFifo.u8 = r;
-                GXWGFifo.u8 = g;
-                GXWGFifo.u8 = b;
-                GXWGFifo.u8 = a;
+                GXColor4u8(r, g, b, a);
             }
             if (pp->kind & DispTexture) {
                 GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 1;
@@ -1833,10 +1827,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                 u8 b = draw_color.b;
                 u8 g = draw_color.g;
                 u8 r = draw_color.r;
-                GXWGFifo.u8 = r;
-                GXWGFifo.u8 = g;
-                GXWGFifo.u8 = b;
-                GXWGFifo.u8 = a;
+                GXColor4u8(r, g, b, a);
             }
             if (pp->kind & DispTexture) {
                 GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 2;
@@ -1854,10 +1845,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                 u8 b = draw_color.b;
                 u8 g = draw_color.g;
                 u8 r = draw_color.r;
-                GXWGFifo.u8 = r;
-                GXWGFifo.u8 = g;
-                GXWGFifo.u8 = b;
-                GXWGFifo.u8 = (u8) alpha;
+                GXColor4u8(r, g, b, (u8) alpha);
             }
             if (pp->kind & DispTexture) {
                 GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 3;
@@ -1927,10 +1915,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                         GXWGFifo.f32 = cur_pos.x + ax * sx + bx * tx;
                         GXWGFifo.f32 = cur_pos.y + ay * sx + by * tx;
                         GXWGFifo.f32 = cur_pos.z;
-                        GXWGFifo.u8 = r;
-                        GXWGFifo.u8 = g;
-                        GXWGFifo.u8 = b;
-                        GXWGFifo.u8 = alpha;
+                        GXColor4u8(r, g, b, (u8) alpha);
                         if (pp->kind & DispTexture) {
                             GXWGFifo.f32 = s;
                             GXWGFifo.f32 = t;
@@ -2139,7 +2124,7 @@ void psDispParticles(u32 target_link, u32 sw)
     HSD_Particle* pp;
     psdisp_Cache* cache;
     /// @todo Recover this stack space from the original inline hierarchy.
-    PAD_STACK(0x44);
+    PAD_STACK(0x20);
 
     var_r16 = 0;
     var_r15 = 0;
