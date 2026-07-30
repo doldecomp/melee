@@ -1768,6 +1768,8 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
         by = s * old_bx + c * by;
     }
     psSetCurrentMtx(GX_PNMTX1);
+    /// @todo Later HSD shares this emission through an AppSRT-aware
+    /// #psDispSubMakePolygon; Melee's emitted code lacks that body.
     if (pp->kind & Trail) {
         getClrTrail(pp, &draw_color);
         if (it == NULL) {
