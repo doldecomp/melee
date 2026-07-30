@@ -72,14 +72,14 @@ typedef struct {
     0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0,
 };
 /* 40C360 */ static u8 HSD_PSDisp_8040C360[0x10] = { 0 };
-/* 4D6380 */ static u8 HSD_PSDisp_804D6380 = 0x7B;
+/* 4D6380 */ static u8 psFrameNum = 0x7B;
 /* 4D0908 */ extern HSD_Particle* hsd_804D0908[146];
 /* 4D0B50 */ extern HSD_PSTexGroup** psTexGroupArray[65];
 /* 4D0C54 */ extern HSD_PSFormGroup** psNumCmdList[65];
 /* 4D0FC0 */ static psdisp_Cache HSD_PSDisp_804D0FC0;
 /* 4D7908 */ static HSD_Fog* HSD_PSDisp_804D7908;
-/* 4D790C */ static s32 HSD_PSDisp_804D790C;
-/* 4D7910 */ static s32 HSD_PSDisp_804D7910;
+/* 4D790C */ static s32 prevPointSize;
+/* 4D7910 */ static s32 prevLineWidth;
 /* 4D7914 */ static f32 HSD_PSDisp_804D7914;
 /* 4D7918 */ static f32 HSD_PSDisp_804D7918;
 /* 4D791C */ static f32 HSD_PSDisp_804D791C;
@@ -88,8 +88,8 @@ typedef struct {
 /* 4D7928 */ static f32 HSD_PSDisp_804D7928;
 /* 4D792C */ static s32 HSD_PSDisp_804D792C;
 /* 4D7930 */ static s32 HSD_PSDisp_804D7930;
-/* 4D7934 */ static GXColor HSD_PSDisp_804D7934;
-/* 4D7938 */ static GXColor HSD_PSDisp_804D7938;
+/* 4D7934 */ static GXColor prevChanMat;
+/* 4D7938 */ static GXColor prevChanAmb;
 /* 4D793C */ static GXColor HSD_PSDisp_804D793C;
 /* 4D7940 */ static GXColor HSD_PSDisp_804D7940;
 /* 4D7944 */ static GXColor HSD_PSDisp_804D7944;
@@ -332,12 +332,11 @@ static inline void setupChanReg(HSD_Particle* pp)
             amb_color.g = (u8) ((amb_color.g * prim_color.g) >> 8);
             amb_color.b = (u8) ((amb_color.b * prim_color.b) >> 8);
         }
-        if (prim_color.r != HSD_PSDisp_804D7934.r ||
-            prim_color.g != HSD_PSDisp_804D7934.g ||
-            prim_color.b != HSD_PSDisp_804D7934.b)
+        if (prim_color.r != prevChanMat.r || prim_color.g != prevChanMat.g ||
+            prim_color.b != prevChanMat.b)
         {
-            HSD_PSDisp_804D7934 = prim_color;
-            GXSetChanMatColor(GX_COLOR0, HSD_PSDisp_804D7934);
+            prevChanMat = prim_color;
+            GXSetChanMatColor(GX_COLOR0, prevChanMat);
         }
         lobj = HSD_LObjGetActiveByID(GX_MAX_LIGHT);
         if (lobj != NULL) {
@@ -345,12 +344,11 @@ static inline void setupChanReg(HSD_Particle* pp)
         } else {
             amb_color.r = amb_color.g = amb_color.b = 0;
         }
-        if (amb_color.r != HSD_PSDisp_804D7938.r ||
-            amb_color.g != HSD_PSDisp_804D7938.g ||
-            amb_color.b != HSD_PSDisp_804D7938.b)
+        if (amb_color.r != prevChanAmb.r || amb_color.g != prevChanAmb.g ||
+            amb_color.b != prevChanAmb.b)
         {
-            HSD_PSDisp_804D7938 = amb_color;
-            GXSetChanAmbColor(GX_COLOR0, HSD_PSDisp_804D7938);
+            prevChanAmb = amb_color;
+            GXSetChanAmbColor(GX_COLOR0, prevChanAmb);
         }
     }
 }
@@ -552,8 +550,8 @@ static inline HSD_Particle* psDispSubPoint(HSD_Particle* pp)
     psSetCurrentMtx(0);
     fw = (pp->size > 42.5) ? 255.0f : 6.0f * pp->size;
     w = (s32) fw;
-    if (HSD_PSDisp_804D790C != (s32) (u8) w) {
-        HSD_PSDisp_804D790C = (u8) w;
+    if (prevPointSize != (s32) (u8) w) {
+        prevPointSize = (u8) w;
         GXSetPointSize((u8) w, GX_TO_ONE);
     }
     last = pp;
@@ -651,8 +649,8 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
     psSetCurrentMtx(0);
     fw = (pp->size > 42.5) ? 255.0f : 6.0f * pp->size;
     w = (s32) fw;
-    if (HSD_PSDisp_804D7910 != (s32) (u8) w) {
-        HSD_PSDisp_804D7910 = (u8) w;
+    if (prevLineWidth != (s32) (u8) w) {
+        prevLineWidth = (u8) w;
         GXSetLineWidth((u8) w, GX_TO_ONE);
     }
     p = vbuf;
@@ -1343,7 +1341,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
 
     psSetCurrentMtx(3);
     if (pp->appsrt != NULL) {
-        if (pp->appsrt->frameNum != HSD_PSDisp_804D6380) {
+        if (pp->appsrt->frameNum != psFrameNum) {
             f32 scale_x;
             f32 scale_y;
 
@@ -1388,7 +1386,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
                 pp->appsrt->x90 = temp_mtx[2][3];
             }
         }
-        pp->appsrt->frameNum = HSD_PSDisp_804D6380;
+        pp->appsrt->frameNum = psFrameNum;
     }
     {
         HSD_psAppSRT* appsrt = pp->appsrt;
@@ -1440,8 +1438,8 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
     ax = pp->size > 42.5 ? 255.0f : 6.0f * pp->size;
     w = (s32) ax;
     if (pp->kind & Trail) {
-        if (HSD_PSDisp_804D7910 != (s32) (u8) w) {
-            HSD_PSDisp_804D7910 = (u8) w;
+        if (prevLineWidth != (s32) (u8) w) {
+            prevLineWidth = (u8) w;
             GXSetLineWidth((u8) w, GX_TO_ONE);
         }
         getClrTrail(pp, &draw_color);
@@ -1486,8 +1484,8 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
             GXWGFifo.u8 = 1;
         }
     } else {
-        if (HSD_PSDisp_804D790C != (s32) (u8) w) {
-            HSD_PSDisp_804D790C = (u8) w;
+        if (prevPointSize != (s32) (u8) w) {
+            prevPointSize = (u8) w;
             GXSetPointSize((u8) w, GX_TO_ONE);
         }
         if (pp->kind & DispTexture) {
@@ -1520,7 +1518,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
     f32 abs_angle;
     u8* it = texform;
 
-    if (pp->appsrt->frameNum != HSD_PSDisp_804D6380) {
+    if (pp->appsrt->frameNum != psFrameNum) {
         f32 scale_x;
         f32 scale_y;
 
@@ -1563,7 +1561,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
             pp->appsrt->x80 = temp_mtx[1][3];
             pp->appsrt->x90 = temp_mtx[2][3];
         }
-        pp->appsrt->frameNum = HSD_PSDisp_804D6380;
+        pp->appsrt->frameNum = psFrameNum;
     }
     {
         Mtx draw_mtx;
@@ -2144,17 +2142,17 @@ void psDispParticles(u32 target_link, u32 sw)
     sp7A4 = 0xFF;
     sp7A0 = 1;
     if (sw == 0) {
-        if (HSD_PSDisp_804D6380 < 0xFFU) {
-            HSD_PSDisp_804D6380 += 1;
+        if (psFrameNum < 0xFFU) {
+            psFrameNum += 1;
             return;
         }
-        HSD_PSDisp_804D6380 = 1;
+        psFrameNum = 1;
         return;
     }
     sp7B4 = 0;
     do {
         if (target_link & (1 << sp7B4)) {
-            particleSort(sp7B4, HSD_PSDisp_804D6380, &sp760, &sp75C);
+            particleSort(sp7B4, psFrameNum, &sp760, &sp75C);
             if (sw == 1) {
                 pp = sp760;
             } else {
@@ -2185,26 +2183,26 @@ void psDispParticles(u32 target_link, u32 sw)
                 if (!(pp->size < 1.1920928955078125e-07f)) {
                     if (sp7A0 != 0) {
                         sp79C = NULL;
-                        HSD_PSDisp_804D790C = -1;
+                        prevPointSize = -1;
                         sp7B0 = NULL;
-                        HSD_PSDisp_804D7910 = -1;
+                        prevLineWidth = -1;
                         HSD_PSDisp_804D7930 = -1;
                         psSetupTevInvalidState();
                         sp7A8 = (u32) -1;
                         prev_kind &= 0xFEFFFFFF;
                         sp7AC = (u32) -1;
                         HSD_FogSet(NULL);
-                        HSD_PSDisp_804D7934.b = 0xFF;
-                        HSD_PSDisp_804D7934.g = 0xFF;
-                        HSD_PSDisp_804D7934.r = 0xFF;
-                        HSD_PSDisp_804D7938.b = 0xFF;
-                        HSD_PSDisp_804D7938.g = 0xFF;
-                        HSD_PSDisp_804D7938.r = 0xFF;
-                        HSD_PSDisp_804D7938.a = 0xFF;
-                        HSD_PSDisp_804D7934.a = 0xFF;
-                        sp6E0 = HSD_PSDisp_804D7934;
+                        prevChanMat.b = 0xFF;
+                        prevChanMat.g = 0xFF;
+                        prevChanMat.r = 0xFF;
+                        prevChanAmb.b = 0xFF;
+                        prevChanAmb.g = 0xFF;
+                        prevChanAmb.r = 0xFF;
+                        prevChanAmb.a = 0xFF;
+                        prevChanMat.a = 0xFF;
+                        sp6E0 = prevChanMat;
                         GXSetChanMatColor(GX_COLOR0A0, sp6E0);
-                        sp6DC = HSD_PSDisp_804D7938;
+                        sp6DC = prevChanAmb;
                         GXSetChanAmbColor(GX_COLOR0A0, sp6DC);
                         psSetupTevInvalidState();
                         psSetupTevCommon();
