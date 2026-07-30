@@ -1066,7 +1066,6 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
             f32 w1inv;
             f32 cur_y_term;
             f32 prev_y_terms;
-            f32 prev_y_terms_copy;
             f32 cur_y;
             f32 prev_xy;
             f32 prev_x_sum;
@@ -1093,13 +1092,12 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
                 return;
             }
             w1inv = -1.0f / w1;
-            prev_x_sum = (prev_y_terms = pvmtx[1][1] * prev_y,
-                          prev_y_terms_copy = prev_y_terms,
-                          prev_xy = pvmtx[0][1] * prev_y,
-                          cur_y = pvmtx[0][1] * pp->pos.y,
-                          cur_y_term = pvmtx[1][1] * pp->pos.y,
-                          pvmtx[0][0] * prev_x + prev_xy);
-            prev_yx = pvmtx[1][0] * prev_x + prev_y_terms_copy;
+            prev_y_terms = pvmtx[1][1] * prev_y;
+            prev_xy = pvmtx[0][1] * prev_y;
+            cur_y = pvmtx[0][1] * pp->pos.y;
+            cur_y_term = pvmtx[1][1] * pp->pos.y;
+            prev_x_sum = pvmtx[0][0] * prev_x + prev_xy;
+            prev_yx = pvmtx[1][0] * prev_x + prev_y_terms;
             cur_yx = pvmtx[1][0] * pp->pos.x + cur_y_term;
             x = w0inv * (pvmtx[0][3] + (pvmtx[0][2] * pp->pos.z +
                                         (pvmtx[0][0] * pp->pos.x + cur_y))) -
