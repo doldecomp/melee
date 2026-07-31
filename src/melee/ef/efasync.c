@@ -884,89 +884,110 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     case 0x45A:
         ret_obj = efLib_CreateGenerator_AppSRT_SetFacingDirScale(0xDD, vlist);
         break;
-    case 0x453:
+    case 0x453: {
+        HSD_Generator* result;
+
         lb_8000B1CC(va_arg(vlist, HSD_JObj*), NULL, &translate);
-        generator = efLib_CreateGenerator_Translate_FacingDir(
+        result = efLib_CreateGenerator_Translate_FacingDir(
             0x234, &translate, *va_arg(vlist, f32*));
-        if (generator != NULL) {
+        if (result != NULL) {
             f32_1 = *va_arg(vlist, f32*);
-            ret_obj = generator;
-            generator->appsrt->scale.x = generator->appsrt->scale.y =
-                generator->appsrt->scale.z = f32_1;
+            ret_obj = result;
+            result->appsrt->scale.x = result->appsrt->scale.y =
+                result->appsrt->scale.z = f32_1;
         }
         break;
-    case 0x454:
+    }
+    case 0x454: {
+        HSD_Generator* result;
+
         lb_8000B1CC(va_arg(vlist, HSD_JObj*), NULL, &translate);
-        generator = efLib_CreateGenerator_Translate_FacingDir(
+        result = efLib_CreateGenerator_Translate_FacingDir(
             0x235, &translate, *va_arg(vlist, f32*));
-        if (generator != NULL) {
+        if (result != NULL) {
             f32_1 = *va_arg(vlist, f32*);
-            ret_obj = generator;
-            generator->appsrt->scale.x = generator->appsrt->scale.y =
-                generator->appsrt->scale.z = f32_1;
+            ret_obj = result;
+            result->appsrt->scale.x = result->appsrt->scale.y =
+                result->appsrt->scale.z = f32_1;
         }
         break;
-    case 0x455:
+    }
+    case 0x455: {
+        HSD_Generator* result;
+
         lb_8000B1CC(va_arg(vlist, HSD_JObj*), NULL, &translate);
-        generator = efLib_CreateGenerator_Translate_FacingDir(
+        result = efLib_CreateGenerator_Translate_FacingDir(
             0x236, &translate, *va_arg(vlist, f32*));
-        if (generator != NULL) {
+        if (result != NULL) {
             f32_1 = *va_arg(vlist, f32*);
-            ret_obj = generator;
-            generator->appsrt->scale.x = generator->appsrt->scale.y =
-                generator->appsrt->scale.z = f32_1;
+            ret_obj = result;
+            result->appsrt->scale.x = result->appsrt->scale.y =
+                result->appsrt->scale.z = f32_1;
         }
         break;
-    case 0x456:
+    }
+    case 0x456: {
+        HSD_Generator* result;
+
         lb_8000B1CC(va_arg(vlist, HSD_JObj*), NULL, &translate);
-        generator = efLib_CreateGenerator_Translate_FacingDir(
+        result = efLib_CreateGenerator_Translate_FacingDir(
             0x23D, &translate, *va_arg(vlist, f32*));
-        if (generator != NULL) {
+        if (result != NULL) {
             f32_1 = *va_arg(vlist, f32*);
-            ret_obj = generator;
-            generator->appsrt->scale.x = generator->appsrt->scale.y =
-                generator->appsrt->scale.z = f32_1;
+            ret_obj = result;
+            result->appsrt->scale.x = result->appsrt->scale.y =
+                result->appsrt->scale.z = f32_1;
         }
         break;
-    case 0x452:
-        generator = efLib_CreateGenerator_AddAppSRT(0x21E);
-        if (generator != NULL) {
+    }
+    case 0x452: {
+        HSD_Generator* result;
+
+        result = efLib_CreateGenerator_AddAppSRT(0x21E);
+        if (result != NULL) {
             lb_8000B1CC(va_arg(vlist, HSD_JObj*), NULL,
-                        &generator->appsrt->translate);
+                        &result->appsrt->translate);
             f32_1 = *va_arg(vlist, f32*);
-            ret_obj = generator;
-            generator->appsrt->scale.x = generator->appsrt->scale.y =
-                generator->appsrt->scale.z = f32_1;
+            ret_obj = result;
+            result->appsrt->scale.x = result->appsrt->scale.y =
+                result->appsrt->scale.z = f32_1;
         }
         break;
+    }
     case 0x45B:
         ret_obj = efLib_CreateGenerator_AppSRT_SetScale(0x8C, vlist);
         break;
     case 0x45C:
         ret_obj = efLib_CreateGenerator_AppSRT_SetScale(0x8D, vlist);
         break;
-    case 0x45D:
-        generator = efLib_CreateGenerator_AddAppSRT(0x23F);
-        if (generator != NULL) {
+    case 0x45D: {
+        HSD_Generator* result;
+
+        result = efLib_CreateGenerator_AddAppSRT(0x23F);
+        if (result != NULL) {
             lb_8000B1CC(va_arg(vlist, HSD_JObj*), NULL,
-                        &generator->appsrt->translate);
+                        &result->appsrt->translate);
             f32_1 = *va_arg(vlist, f32*);
-            ret_obj = generator;
-            generator->appsrt->scale.x = generator->appsrt->scale.y =
-                generator->appsrt->scale.z = f32_1;
+            ret_obj = result;
+            result->appsrt->scale.x = result->appsrt->scale.y =
+                result->appsrt->scale.z = f32_1;
         }
         break;
-    case 0x45E:
-        generator = efLib_CreateGenerator_AddAppSRT(0x240);
-        if (generator != NULL) {
+    }
+    case 0x45E: {
+        HSD_Generator* result;
+
+        result = efLib_CreateGenerator_AddAppSRT(0x240);
+        if (result != NULL) {
             lb_8000B1CC(va_arg(vlist, HSD_JObj*), NULL,
-                        &generator->appsrt->translate);
+                        &result->appsrt->translate);
             f32_1 = *va_arg(vlist, f32*);
-            ret_obj = generator;
-            generator->appsrt->scale.x = generator->appsrt->scale.y =
-                generator->appsrt->scale.z = f32_1;
+            ret_obj = result;
+            result->appsrt->scale.x = result->appsrt->scale.y =
+                result->appsrt->scale.z = f32_1;
         }
         break;
+    }
     case 0x45F:
         ret_obj = efLib_CreateGenerator_AppSRT_SetScale(0x8E, vlist);
         break;
