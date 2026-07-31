@@ -18,6 +18,11 @@
 
 HSD_ObjAllocData efAsync_AllocData;
 
+static inline HSD_JObj* efAsync_GetEffectJObj(EF_Effect* effect)
+{
+    return GET_JOBJ(effect->gobj);
+}
+
 void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
 {
     Vec3 translate;
@@ -726,9 +731,9 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         ret_obj = efLib_Create_Attach(0x23, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
             f32_1 = *va_arg(vlist, f32*);
-            HSD_JObjSetScaleX(GET_JOBJ(((EF_Effect*) ret_obj)->gobj), f32_1);
-            HSD_JObjSetScaleY(GET_JOBJ(((EF_Effect*) ret_obj)->gobj), f32_1);
-            HSD_JObjSetScaleZ(GET_JOBJ(((EF_Effect*) ret_obj)->gobj), f32_1);
+            HSD_JObjSetScaleX(efAsync_GetEffectJObj(ret_obj), f32_1);
+            HSD_JObjSetScaleY(efAsync_GetEffectJObj(ret_obj), f32_1);
+            HSD_JObjSetScaleZ(efAsync_GetEffectJObj(ret_obj), f32_1);
         }
         break;
     case 0x43A:
@@ -748,9 +753,9 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         ret_obj = efLib_Create_Attach(0x24, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
             f32_1 = *va_arg(vlist, f32*);
-            HSD_JObjSetScaleX(GET_JOBJ(((EF_Effect*) ret_obj)->gobj), f32_1);
-            HSD_JObjSetScaleY(GET_JOBJ(((EF_Effect*) ret_obj)->gobj), f32_1);
-            HSD_JObjSetScaleZ(GET_JOBJ(((EF_Effect*) ret_obj)->gobj), f32_1);
+            HSD_JObjSetScaleX(efAsync_GetEffectJObj(ret_obj), f32_1);
+            HSD_JObjSetScaleY(efAsync_GetEffectJObj(ret_obj), f32_1);
+            HSD_JObjSetScaleZ(efAsync_GetEffectJObj(ret_obj), f32_1);
         }
         break;
     case 0x43F: {
