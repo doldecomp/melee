@@ -683,18 +683,21 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         goto block_515;
     case 0x437:
         u32_1 = 0x156;
-    block_515:
-        generator = efLib_CreateGenerator_AddAppSRT(u32_1);
-        if (generator != NULL) {
+    block_515: {
+        HSD_Generator* result;
+
+        result = efLib_CreateGenerator_AddAppSRT(u32_1);
+        if (result != NULL) {
             va_vec3 = va_arg(vlist, Vec3*);
-            psAppSRT = generator->appsrt;
+            psAppSRT = result->appsrt;
             psAppSRT->translate = *va_vec3;
-            generator->appsrt->rot.y = M_PI_2;
+            result->appsrt->rot.y = M_PI_2;
             f32_1 = *va_arg(vlist, f32*);
-            ret_obj = generator;
-            generator->appsrt->rot.z = f32_1;
+            ret_obj = result;
+            result->appsrt->rot.z = f32_1;
         }
         break;
+    }
     case 0x438:
         ret_obj = efLib_Create_Attach(0x22, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
