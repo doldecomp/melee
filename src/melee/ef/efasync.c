@@ -601,8 +601,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (ret_obj != NULL) {
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
             setter_jobj = jobj_1;
-            f32_1 = *va_arg(vlist, f32*);
-            HSD_JObjSetRotationZ(setter_jobj, f32_1);
+            f32_2 = *va_arg(vlist, f32*);
+            HSD_JObjSetRotationZ(setter_jobj, f32_2);
             f32_2 = *va_arg(vlist, f32*);
             scale.x = scale.y = scale.z = f32_2;
             HSD_JObjSetScale(setter_jobj, &scale);
@@ -621,8 +621,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         ret_obj = efLib_Create_Attach_Pos(0x1A, gobj, va_arg(vlist, Vec3*));
         if (ret_obj != NULL) {
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            f32_1 = *va_arg(vlist, f32*);
-            HSD_JObjSetRotationZ(jobj_1, f32_1);
+            f32_2 = *va_arg(vlist, f32*);
+            HSD_JObjSetRotationZ(jobj_1, f32_2);
         }
         break;
     case 0x42D:
@@ -709,8 +709,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     case 0x439:
         ret_obj = efLib_Create_Attach(0x23, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
-            f32_1 = *va_arg(vlist, f32*);
-            efAsync_SetEffectScaleXYZ(ret_obj, f32_1);
+            f32_2 = *va_arg(vlist, f32*);
+            efAsync_SetEffectScaleXYZ(ret_obj, f32_2);
         }
         break;
     case 0x43A:
@@ -729,8 +729,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         efLib_LoadKind = EF_LOADKIND_SYNC;
         ret_obj = efLib_Create_Attach(0x24, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
-            f32_1 = *va_arg(vlist, f32*);
-            efAsync_SetEffectScaleXYZ(ret_obj, f32_1);
+            f32_2 = *va_arg(vlist, f32*);
+            efAsync_SetEffectScaleXYZ(ret_obj, f32_2);
         }
         break;
     case 0x43F: {
@@ -817,13 +817,13 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         ret_obj = efLib_Create_Attach(0x26, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x44A:
-        f32_1 = 0.5f;
+        f32_2 = 0.5f;
         goto block_636;
     case 0x44B:
-        f32_1 = 1.0f;
+        f32_2 = 1.0f;
         goto block_636;
     case 0x44C:
-        f32_1 = 2.0f;
+        f32_2 = 2.0f;
     block_636: {
         HSD_Generator* result;
 
@@ -833,7 +833,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             psAppSRT = result->appsrt;
             psAppSRT->translate = *va_vec3;
             result->appsrt->scale.x = result->appsrt->scale.y =
-                result->appsrt->scale.z = f32_1;
+                result->appsrt->scale.z = f32_2;
         }
         break;
     }
