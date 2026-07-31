@@ -784,15 +784,17 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     case 0x445:
         ret_obj = efLib_CreateGenerator(0x209, va_arg(vlist, Vec3*));
         break;
-    case 0x446:
-        jobj_1 = va_arg(vlist, HSD_JObj*);
+    case 0x446: {
+        HSD_JObj* source_jobj = va_arg(vlist, HSD_JObj*);
+
         va_vec3 = va_arg(vlist, Vec3*);
-        ret_obj =
-            efLib_CreateGenerator_AppSRT_SetPos(0x1B, gobj, jobj_1, va_vec3);
+        ret_obj = efLib_CreateGenerator_AppSRT_SetPos(0x1B, gobj, source_jobj,
+                                                      va_vec3);
         if (ret_obj != NULL) {
             ((EF_Effect*) ret_obj)->lifetime = 0x16;
         }
         break;
+    }
     case 0x447:
         efLib_LoadKind = EF_LOADKIND_SYNC;
         ret_obj = efLib_Create_Attach_Pos(0x28, gobj, va_arg(vlist, Vec3*));
