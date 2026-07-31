@@ -57,8 +57,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
                 f32_1 = 1.5f;
             }
             scale.x = scale.y = scale.z = f32_1;
-            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetScale(jobj_1, &scale);
+            HSD_JObjSetScale(GET_JOBJ(((EF_Effect*) ret_obj)->gobj), &scale);
         }
         break;
     case 0x3E9:
