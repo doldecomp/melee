@@ -326,42 +326,51 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     case 0x407:
         ret_obj = efLib_CreateGenerator(0x3C, va_arg(vlist, Vec3*));
         break;
-    case 0x408:
-        generator = efLib_CreateGenerator_AddAppSRT(0x3E);
-        if (generator != NULL) {
+    case 0x408: {
+        HSD_Generator* result;
+
+        result = efLib_CreateGenerator_AddAppSRT(0x3E);
+        if (result != NULL) {
             va_vec3 = va_arg(vlist, Vec3*);
-            psAppSRT = generator->appsrt;
+            psAppSRT = result->appsrt;
             psAppSRT->translate = *va_vec3;
             f32_1 = *va_arg(vlist, f32*);
-            ret_obj = generator;
-            generator->appsrt->rot.z = f32_1;
+            ret_obj = result;
+            result->appsrt->rot.z = f32_1;
         }
         break;
+    }
     case 0x409:
         ret_obj = hsd_8039EFAC(0, 0, 0xE2, va_arg(vlist, HSD_JObj*));
         break;
-    case 0x40A:
-        generator = efLib_CreateGenerator_AddAppSRT(0x241);
-        if (generator != NULL) {
+    case 0x40A: {
+        HSD_Generator* result;
+
+        result = efLib_CreateGenerator_AddAppSRT(0x241);
+        if (result != NULL) {
             va_vec3 = va_arg(vlist, Vec3*);
-            psAppSRT = generator->appsrt;
+            psAppSRT = result->appsrt;
             psAppSRT->translate = *va_vec3;
             f32_1 = *va_arg(vlist, f32*);
-            ret_obj = generator;
-            generator->appsrt->rot.z = f32_1;
+            ret_obj = result;
+            result->appsrt->rot.z = f32_1;
         }
         break;
-    case 0x40B:
-        generator = efLib_CreateGenerator_AddAppSRT(0x242);
-        if (generator != NULL) {
+    }
+    case 0x40B: {
+        HSD_Generator* result;
+
+        result = efLib_CreateGenerator_AddAppSRT(0x242);
+        if (result != NULL) {
             va_vec3 = va_arg(vlist, Vec3*);
-            psAppSRT = generator->appsrt;
+            psAppSRT = result->appsrt;
             psAppSRT->translate = *va_vec3;
             f32_1 = *va_arg(vlist, f32*);
-            ret_obj = generator;
-            generator->appsrt->rot.z = f32_1;
+            ret_obj = result;
+            result->appsrt->rot.z = f32_1;
         }
         break;
+    }
     case 0x40C:
         ret_obj = efLib_CreateGenerator(0x19, va_arg(vlist, Vec3*));
         break;
