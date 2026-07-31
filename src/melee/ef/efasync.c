@@ -753,19 +753,21 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             HSD_JObjSetScaleZ(GET_JOBJ(((EF_Effect*) ret_obj)->gobj), f32_1);
         }
         break;
-    case 0x43F:
+    case 0x43F: {
+        HSD_Generator* result;
+
         efLib_LoadKind = EF_LOADKIND_SYNC;
-        ret_obj = efLib_CreateGenerator_AddAppSRT(0xCA);
-        if (ret_obj != NULL) {
+        result = efLib_CreateGenerator_AddAppSRT(0xCA);
+        if (result != NULL) {
             va_vec3 = va_arg(vlist, Vec3*);
-            psAppSRT = ((HSD_Generator*) ret_obj)->appsrt;
+            psAppSRT = result->appsrt;
             psAppSRT->translate = *va_vec3;
             f32_1 = *va_arg(vlist, f32*);
-            generator = ret_obj;
-            generator->appsrt->scale.x = generator->appsrt->scale.y =
-                generator->appsrt->scale.z = f32_1;
+            result->appsrt->scale.x = result->appsrt->scale.y =
+                result->appsrt->scale.z = f32_1;
         }
         break;
+    }
     case 0x440:
         va_vec3 = va_arg(vlist, Vec3*);
         translate = *va_vec3;
@@ -779,18 +781,20 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     case 0x442:
         ret_obj = efLib_CreateGenerator(0x1DC, va_arg(vlist, Vec3*));
         break;
-    case 0x443:
-        ret_obj = efLib_CreateGenerator_AddAppSRT(0x1F1);
-        if (ret_obj != NULL) {
+    case 0x443: {
+        HSD_Generator* result;
+
+        result = efLib_CreateGenerator_AddAppSRT(0x1F1);
+        if (result != NULL) {
             va_vec3 = va_arg(vlist, Vec3*);
-            psAppSRT = ((HSD_Generator*) ret_obj)->appsrt;
+            psAppSRT = result->appsrt;
             psAppSRT->translate = *va_vec3;
             f32_1 = *va_arg(vlist, f32*);
-            generator = ret_obj;
-            generator->appsrt->scale.x = generator->appsrt->scale.y =
-                generator->appsrt->scale.z = f32_1;
+            result->appsrt->scale.x = result->appsrt->scale.y =
+                result->appsrt->scale.z = f32_1;
         }
         break;
+    }
     case 0x444:
         ret_obj = efLib_CreateGenerator(0x1FF, va_arg(vlist, Vec3*));
         break;
