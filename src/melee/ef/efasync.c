@@ -82,6 +82,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     u32 color;
     HSD_JObj* jobj_2;
     HSD_JObj* jobj_1;
+    HSD_JObj* jobj_3;
     Vec3* va_vec3;
     s32 count;
     struct {
@@ -1041,11 +1042,11 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             f32_1 = *va_arg(vlist, f32*);
             generator->appsrt->scale.x = generator->appsrt->scale.y =
                 generator->appsrt->scale.z = f32_1;
-            jobj_1 = GET_JOBJ(gobj);
-            (void) jobj_1;
-            f32_2 = HSD_JObjGetRotationY(jobj_1);
+            jobj_3 = GET_JOBJ(gobj);
+            (void) jobj_3;
+            f32_2 = HSD_JObjGetRotationY(jobj_3);
             ret_obj = generator;
-            generator->appsrt->rot.y = jobj_1->rotate.y;
+            generator->appsrt->rot.y = jobj_3->rotate.y;
         }
         break;
     case 0x46B:
@@ -1065,11 +1066,11 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             f32_1 = *va_arg(vlist, f32*);
             generator->appsrt->scale.x = generator->appsrt->scale.y =
                 generator->appsrt->scale.z = f32_1;
-            jobj_1 = gobj->hsd_obj;
-            (void) jobj_1;
-            f32_2 = HSD_JObjGetRotationY(jobj_1);
+            jobj_3 = gobj->hsd_obj;
+            (void) jobj_3;
+            f32_2 = HSD_JObjGetRotationY(jobj_3);
             ret_obj = generator;
-            generator->appsrt->rot.y = jobj_1->rotate.y;
+            generator->appsrt->rot.y = jobj_3->rotate.y;
         }
         break;
     case 0x46D:
