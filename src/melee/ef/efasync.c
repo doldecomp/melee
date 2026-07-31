@@ -635,17 +635,19 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     case 0x42A:
         ret_obj = efLib_CreateGenerator_AppSRT_SetScale(0xCF, vlist);
         break;
-    case 0x42B:
+    case 0x42B: {
+        HSD_JObj* setter_jobj;
+
         efLib_LoadKind = EF_LOADKIND_SYNC;
         ret_obj = efLib_Create_Attach_Pos(0x19, gobj, va_arg(vlist, Vec3*));
         if (ret_obj != NULL) {
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            jobj_2 = jobj_1;
+            setter_jobj = jobj_1;
             f32_1 = *va_arg(vlist, f32*);
-            HSD_JObjSetRotationZ(jobj_2, f32_1);
+            HSD_JObjSetRotationZ(setter_jobj, f32_1);
             f32_2 = *va_arg(vlist, f32*);
             scale.x = scale.y = scale.z = f32_2;
-            HSD_JObjSetScale(jobj_2, &scale);
+            HSD_JObjSetScale(setter_jobj, &scale);
             if (jobj_1 == NULL) {
                 jobj_2 = NULL;
             } else {
@@ -655,6 +657,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
                                    va_arg(vlist, u32));
         }
         break;
+    }
     case 0x42C:
         efLib_LoadKind = EF_LOADKIND_SYNC;
         ret_obj = efLib_Create_Attach_Pos(0x1A, gobj, va_arg(vlist, Vec3*));
