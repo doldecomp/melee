@@ -1290,6 +1290,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     HSD_JObj* sp54;
+    UNUSED int hole;
     HSD_JObj* sp4C;
     HSD_JObj* sp48;
     HSD_JObj* sp44;
@@ -1298,6 +1299,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
     HSD_JObj* sp38;
     HSD_JObj* sp34;
     HSD_JObj* sp30;
+    HSD_JObj* sp2C;
     CSSDoor* doors;
     GameRules* rules;
     HSD_DObj* dobj;
@@ -1418,21 +1420,19 @@ void fn_8025F0E0(HSD_GObj* gobj)
                             val = (u8) mnCharSel_804D6CB0->data.data.players[i]
                                       .handicap;
                         }
-                        {
-                            f32 val_f;
-                            if (val == 0) {
-                                val = 1;
-                            }
-                            {
-                                u8 cpuslider_joint = doors->cpuslider_joint;
-                                val_f = (f32) val;
-                                lb_80011E24(mnCharSel_804D6CC0, &sp3C,
-                                            cpuslider_joint, -1);
-                            }
-                            HSD_ForeachAnim(sp3C, JOBJ_TYPE, TOBJ_MASK,
-                                            HSD_AObjReqAnim, AOBJ_ARG_AF,
-                                            val_f);
+                        /* switch forces MWCC beq/b double-branch (not bne) */
+                        switch (val) {
+                        case 0:
+                            val = 1;
                         }
+                        {
+                            u8 cpuslider_joint = doors->cpuslider_joint;
+                            fval = (f32) val;
+                            lb_80011E24(mnCharSel_804D6CC0, &sp3C,
+                                        cpuslider_joint, -1);
+                        }
+                        HSD_ForeachAnim(sp3C, JOBJ_TYPE, TOBJ_MASK,
+                                        HSD_AObjReqAnim, AOBJ_ARG_AF, fval);
                         HSD_JObjAnimAll(sp3C);
                         HSD_ForeachAnim(sp3C, JOBJ_TYPE, TOBJ_MASK,
                                         HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
@@ -1479,13 +1479,13 @@ void fn_8025F0E0(HSD_GObj* gobj)
                             fval =
                                 (f32) mnCharSel_804D6CB0->data.data.players[i]
                                     .cpu_level;
-                            lb_80011E24(mnCharSel_804D6CC0, &sp30,
+                            lb_80011E24(mnCharSel_804D6CC0, &sp2C,
                                         cpuslider_joint, -1);
                         }
-                        HSD_ForeachAnim(sp30, JOBJ_TYPE, TOBJ_MASK,
+                        HSD_ForeachAnim(sp2C, JOBJ_TYPE, TOBJ_MASK,
                                         HSD_AObjReqAnim, AOBJ_ARG_AF, fval);
-                        HSD_JObjAnimAll(sp30);
-                        HSD_ForeachAnim(sp30, JOBJ_TYPE, TOBJ_MASK,
+                        HSD_JObjAnimAll(sp2C);
+                        HSD_ForeachAnim(sp2C, JOBJ_TYPE, TOBJ_MASK,
                                         HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
                     }
                 }
@@ -1594,7 +1594,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
         }
     }
     HSD_JObjAnimAll(jobj);
-    PAD_STACK(40);
+    PAD_STACK(28);
 }
 
 void fn_8025FAC0(HSD_GObj* gobj)
