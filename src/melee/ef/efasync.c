@@ -671,18 +671,20 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             HSD_JObjSetRotationY(jobj_1, f32_1);
         }
         break;
-    case 0x432:
-        ret_obj = efLib_CreateGenerator_AddAppSRT(0x145);
-        if (ret_obj != NULL) {
+    case 0x432: {
+        HSD_Generator* result;
+
+        result = efLib_CreateGenerator_AddAppSRT(0x145);
+        if (result != NULL) {
             va_vec3 = va_arg(vlist, Vec3*);
-            psAppSRT = ((HSD_Generator*) ret_obj)->appsrt;
+            psAppSRT = result->appsrt;
             psAppSRT->translate = *va_vec3;
             f32_1 = *va_arg(vlist, f32*);
-            generator = ret_obj;
-            generator->appsrt->scale.x = generator->appsrt->scale.y =
-                generator->appsrt->scale.z = f32_1;
+            result->appsrt->scale.x = result->appsrt->scale.y =
+                result->appsrt->scale.z = f32_1;
         }
         break;
+    }
     case 0x433:
         ret_obj = hsd_8039EFAC(0, 0, 0x115, va_arg(vlist, HSD_JObj*));
         break;
