@@ -23,9 +23,15 @@ static inline void efAsync_SetEffectRotationY(EF_Effect* effect, f32 rotation)
     HSD_JObjSetRotationY(GET_JOBJ(effect->gobj), rotation);
 }
 
-static inline void efAsync_SetEffectRotationZ(EF_Effect* effect, f32 rotation)
+static inline void efAsync_SetEffectRotationZFromPtr(EF_Effect* effect,
+                                                     const f32* rotation)
 {
-    HSD_JObjSetRotationZ(GET_JOBJ(effect->gobj), rotation);
+    HSD_JObjSetRotationZ(GET_JOBJ(effect->gobj), *rotation);
+}
+
+static inline void efAsync_SetEffectRandomRotationZ(EF_Effect* effect)
+{
+    HSD_JObjSetRotationZ(GET_JOBJ(effect->gobj), M_TAU * HSD_Randf());
 }
 
 static inline void efAsync_SetEffectScaleXYZ(EF_Effect* effect, f32 scale)
@@ -115,8 +121,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         ret_obj = efLib_Create_Attach_Pos(8, gobj, va_arg(vlist, Vec3*));
         if (ret_obj != NULL) {
             ((EF_Effect*) ret_obj)->state_flags |= EF_STATE_ASYNC;
-            f32_1 = (M_TAU * HSD_Randf());
-            efAsync_SetEffectRotationZ(ret_obj, f32_1);
+            efAsync_SetEffectRandomRotationZ(ret_obj);
         }
         break;
     case 0x3ED:
@@ -142,8 +147,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     case 0x3EE:
         ret_obj = efLib_Create_Attach_Pos(0x27, gobj, va_arg(vlist, Vec3*));
         if (ret_obj != NULL) {
-            f32_1 = (M_TAU * HSD_Randf());
-            efAsync_SetEffectRotationZ(ret_obj, f32_1);
+            efAsync_SetEffectRandomRotationZ(ret_obj);
         }
         break;
     case 0x3EF:
@@ -194,8 +198,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (ret_obj != NULL) {
             ((EF_Effect*) ret_obj)->state_flags |= EF_STATE_ASYNC;
             efAsync_SetEffectFacingDir(ret_obj, *va_arg(vlist, f32*));
-            f32_2 = *va_arg(vlist, f32*);
-            efAsync_SetEffectRotationZ(ret_obj, f32_2);
+            efAsync_SetEffectRotationZFromPtr(ret_obj,
+                                              va_arg(vlist, f32*));
         }
         break;
     case 0x3F8:
@@ -203,8 +207,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (ret_obj != NULL) {
             ((EF_Effect*) ret_obj)->state_flags |= EF_STATE_ASYNC;
             efAsync_SetEffectFacingDir(ret_obj, *va_arg(vlist, f32*));
-            f32_2 = *va_arg(vlist, f32*);
-            efAsync_SetEffectRotationZ(ret_obj, f32_2);
+            efAsync_SetEffectRotationZFromPtr(ret_obj,
+                                              va_arg(vlist, f32*));
         }
         break;
     case 0x3F9:
@@ -212,8 +216,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (ret_obj != NULL) {
             ((EF_Effect*) ret_obj)->state_flags |= EF_STATE_ASYNC;
             efAsync_SetEffectFacingDir(ret_obj, *va_arg(vlist, f32*));
-            f32_2 = *va_arg(vlist, f32*);
-            efAsync_SetEffectRotationZ(ret_obj, f32_2);
+            efAsync_SetEffectRotationZFromPtr(ret_obj,
+                                              va_arg(vlist, f32*));
         }
         break;
     case 0x3FA:
@@ -239,8 +243,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (ret_obj != NULL) {
             ((EF_Effect*) ret_obj)->state_flags |= EF_STATE_ASYNC;
             efAsync_SetEffectFacingDir(ret_obj, *va_arg(vlist, f32*));
-            f32_2 = *va_arg(vlist, f32*);
-            efAsync_SetEffectRotationZ(ret_obj, f32_2);
+            efAsync_SetEffectRotationZFromPtr(ret_obj,
+                                              va_arg(vlist, f32*));
         }
         break;
     case 0x3FE:
@@ -255,8 +259,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (ret_obj != NULL) {
             ((EF_Effect*) ret_obj)->state_flags |= EF_STATE_ASYNC;
             efAsync_SetEffectFacingDir(ret_obj, *va_arg(vlist, f32*));
-            f32_2 = *va_arg(vlist, f32*);
-            efAsync_SetEffectRotationZ(ret_obj, f32_2);
+            efAsync_SetEffectRotationZFromPtr(ret_obj,
+                                              va_arg(vlist, f32*));
         }
         break;
     case 0x400:
@@ -281,8 +285,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         ret_obj = efLib_Create_Attach_Pos(0x18, gobj, va_arg(vlist, Vec3*));
         if (ret_obj != NULL) {
             ((EF_Effect*) ret_obj)->state_flags |= EF_STATE_ASYNC;
-            f32_1 = *va_arg(vlist, f32*);
-            efAsync_SetEffectRotationZ(ret_obj, f32_1);
+            efAsync_SetEffectRotationZFromPtr(ret_obj,
+                                              va_arg(vlist, f32*));
         }
         break;
     case 0x405:
@@ -292,8 +296,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         ret_obj = efLib_Create_Attach_Pos(4, gobj, va_arg(vlist, Vec3*));
         if (ret_obj != NULL) {
             ((EF_Effect*) ret_obj)->state_flags |= EF_STATE_ASYNC;
-            f32_1 = *va_arg(vlist, f32*);
-            efAsync_SetEffectRotationZ(ret_obj, f32_1);
+            efAsync_SetEffectRotationZFromPtr(ret_obj,
+                                              va_arg(vlist, f32*));
         }
         break;
     case 0x407:
@@ -537,15 +541,15 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     case 0x423:
         ret_obj = efLib_Create_Attach(1, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
-            f32_1 = *va_arg(vlist, f32*);
-            efAsync_SetEffectRotationZ(ret_obj, f32_1);
+            efAsync_SetEffectRotationZFromPtr(ret_obj,
+                                              va_arg(vlist, f32*));
         }
         break;
     case 0x424:
         ret_obj = efLib_Create_Attach(2, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
-            f32_1 = *va_arg(vlist, f32*);
-            efAsync_SetEffectRotationZ(ret_obj, f32_1);
+            efAsync_SetEffectRotationZFromPtr(ret_obj,
+                                              va_arg(vlist, f32*));
         }
         break;
     case 0x425:
