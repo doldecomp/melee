@@ -355,6 +355,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             psAppSRT = state.generator->appsrt;
             psAppSRT->translate = *va_vec3;
             jobj_1 = GET_JOBJ(gobj);
+            (void) jobj_1;
             HSD_JObjGetScale(jobj_1, &scale);
             ret_obj = state.generator;
             state.generator->appsrt->scale.x =
@@ -1041,6 +1042,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             generator->appsrt->scale.x = generator->appsrt->scale.y =
                 generator->appsrt->scale.z = f32_1;
             jobj_1 = GET_JOBJ(gobj);
+            (void) jobj_1;
             f32_2 = HSD_JObjGetRotationY(jobj_1);
             ret_obj = generator;
             generator->appsrt->rot.y = jobj_1->rotate.y;
@@ -1064,6 +1066,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             generator->appsrt->scale.x = generator->appsrt->scale.y =
                 generator->appsrt->scale.z = f32_1;
             jobj_1 = gobj->hsd_obj;
+            (void) jobj_1;
             f32_2 = HSD_JObjGetRotationY(jobj_1);
             ret_obj = generator;
             generator->appsrt->rot.y = jobj_1->rotate.y;
