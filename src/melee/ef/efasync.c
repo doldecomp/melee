@@ -620,9 +620,9 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         efLib_LoadKind = EF_LOADKIND_SYNC;
         ret_obj = efLib_Create_Attach_Pos(0x1A, gobj, va_arg(vlist, Vec3*));
         if (ret_obj != NULL) {
-            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            jobj_2 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
             f32_2 = *va_arg(vlist, f32*);
-            HSD_JObjSetRotationZ(jobj_1, f32_2);
+            HSD_JObjSetRotationZ(jobj_2, f32_2);
         }
         break;
     case 0x42D:
@@ -800,7 +800,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             if (gfx_id == 0x447) {
                 f32_1 = *va_arg(vlist, f32*);
                 scale.x = scale.y = scale.z = f32_1;
-                efAsync_SetEffectScale(ret_obj, &scale);
+                jobj_2 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+                HSD_JObjSetScale(jobj_2, &scale);
             }
         }
         break;
@@ -977,7 +978,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (ret_obj != NULL) {
             f32_1 = *va_arg(vlist, f32*);
             scale.x = scale.y = scale.z = f32_1;
-            efAsync_SetEffectScale(ret_obj, &scale);
+            jobj_2 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            HSD_JObjSetScale(jobj_2, &scale);
         }
         break;
     case 0x464:
@@ -985,7 +987,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (ret_obj != NULL) {
             f32_1 = *va_arg(vlist, f32*);
             scale.x = scale.y = scale.z = f32_1;
-            efAsync_SetEffectScale(ret_obj, &scale);
+            jobj_2 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            HSD_JObjSetScale(jobj_2, &scale);
         }
         break;
     case 0x465:
@@ -1002,7 +1005,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (ret_obj != NULL) {
             f32_1 = *va_arg(vlist, f32*);
             scale.x = scale.y = scale.z = f32_1;
-            efAsync_SetEffectScale(ret_obj, &scale);
+            jobj_2 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            HSD_JObjSetScale(jobj_2, &scale);
         }
         break;
     case 0x469:
@@ -1010,7 +1014,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (ret_obj != NULL) {
             f32_1 = *va_arg(vlist, f32*);
             scale.x = scale.y = scale.z = f32_1;
-            efAsync_SetEffectScale(ret_obj, &scale);
+            jobj_2 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            HSD_JObjSetScale(jobj_2, &scale);
         }
         break;
     case 0x46A:
@@ -1032,7 +1037,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (ret_obj != NULL) {
             f32_1 = *va_arg(vlist, f32*);
             scale.x = scale.y = scale.z = f32_1;
-            efAsync_SetEffectScale(ret_obj, &scale);
+            jobj_2 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            HSD_JObjSetScale(jobj_2, &scale);
         }
         break;
     case 0x46C:
@@ -1054,7 +1060,8 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (ret_obj != NULL) {
             f32_1 = *va_arg(vlist, f32*);
             scale.x = scale.y = scale.z = f32_1;
-            efAsync_SetEffectScale(ret_obj, &scale);
+            jobj_2 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            HSD_JObjSetScale(jobj_2, &scale);
         }
         break;
     case 0x46E:
