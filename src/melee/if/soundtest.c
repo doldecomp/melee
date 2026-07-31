@@ -307,18 +307,16 @@ int un_802FF99C(int arg0)
 
 s32 un_802FF9DC(void)
 {
-    struct SmStData {
-        u8 pad0[0x18];
-        s32* x18;
-    }* d = (struct SmStData*) un_804D6DA8;
     s32 i;
+    s32 total;
 
-    un_804D6DB4 = 0;
-    for (i = 0; i < un_804D6DB0; i++) {
-        un_804D6DB4 += d->x18[i];
+    i = un_804D6DB4 = 0;
+    for (; i < un_804D6DB0; i++) {
+        un_804D6DB4 += ((int**) un_804D6DA8)[6][i];
     }
     un_803F9FA4.xF4 = (f32) un_804D6DB4;
-    un_803F9FA4.xF8 = (f32) (un_804D6DB4 + d->x18[un_804D6DB0]);
+    total = un_804D6DB4 + ((int**) un_804D6DA8)[6][un_804D6DB0];
+    un_803F9FA4.xF8 = (f32) total;
     return 0;
 }
 
