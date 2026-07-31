@@ -16,20 +16,12 @@
 #include "lb/lbarchive.h"
 #include "lb/lbdvd.h"
 
-/*
- * TODO: efAsync_Dispatch is the only function left to match, it
- *       currently sits at 98%, and its jump table sits at 53%.
- *       I presume that once the jump table matches then Dispatch
- *       will follow suit (?)
- */
-
 HSD_ObjAllocData efAsync_AllocData;
 
 void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
 {
     Vec3 translate;
     Vec3 scale;
-    Vec3 scale_2;
     HSD_Generator* generator;
     HSD_psAppSRT* psAppSRT;
     EF_Effect* effect;
@@ -41,10 +33,10 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     f32 f32_1;
     s32 u32_2;
     s32 u32_1;
+    u32 color;
     HSD_JObj* jobj_2;
     HSD_JObj* jobj_1;
     Vec3* va_vec3;
-    HSD_GObj* effect_gobj;
     s32 count;
     PAD_STACK(0x20);
     ret_obj = NULL;
@@ -105,6 +97,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
                 } else {
                     rot_y = -M_PI;
                 }
+                psAppSRT = generator->appsrt;
                 psAppSRT->rot.y = rot_y;
             }
         }
@@ -457,10 +450,11 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
             u32_1 = va_arg(vlist, u32);
             if ((u32) (u32_1 + 0xFFA00000) == 0x6060U) {
-                u32_2 = 0x808080;
+                color = 0x808080;
             } else {
-                u32_2 = 0xFFFFFF;
+                color = 0xFFFFFF;
             }
+            u32_2 = color;
 #if 0
                 {
                     int i;
@@ -545,19 +539,22 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             ((EF_Effect*) ret_obj)->update = efLib_Cb_ApplyStoredAlpha;
         }
         break;
-    case 0x41B:
+    case 0x41B: {
+        HSD_Generator* result;
+        HSD_JObj* jobj;
+        Vec3 result_scale;
+
         efLib_LoadKind = EF_LOADKIND_SYNC;
-        ret_obj = efLib_CreateGenerator_AddAppSRT(0x31);
-        if (ret_obj != NULL) {
-            jobj_1 = va_arg(vlist, HSD_JObj*);
-            lb_8000B1CC(jobj_1, NULL,
-                        &((HSD_Generator*) ret_obj)->appsrt->translate);
-            HSD_JObjGetScale(jobj_1, &scale_2);
-            generator = ret_obj;
-            generator->appsrt->scale.x = generator->appsrt->scale.y =
-                generator->appsrt->scale.z = scale_2.y;
+        result = efLib_CreateGenerator_AddAppSRT(0x31);
+        if (result != NULL) {
+            jobj = va_arg(vlist, HSD_JObj*);
+            lb_8000B1CC(jobj, NULL, &result->appsrt->translate);
+            HSD_JObjGetScale(jobj, &result_scale);
+            result->appsrt->scale.x = result->appsrt->scale.y =
+                result->appsrt->scale.z = result_scale.y;
         }
         break;
+    }
     case 0x41C:
         ret_obj = efLib_CreateGenerator(0x5D, va_arg(vlist, Vec3*));
         break;
@@ -604,31 +601,32 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     case 0x426:
         ret_obj = efLib_CreateGenerator(0x7F, va_arg(vlist, Vec3*));
         break;
-    case 0x427:
+    case 0x427: {
+        EF_Effect* node;
+        s32 i;
+
         va_vec3 = va_arg(vlist, Vec3*);
-        u32_1 = 0;
         translate = *va_vec3;
-    loop_406:
-        ret_obj = efLib_Create_Attach_Pos(0x1B, gobj, &translate);
-        if (ret_obj != NULL) {
-            ((EF_Effect*) ret_obj)->update = efLib_Cb_Fall_FromParamY;
-            ((EF_Effect*) ret_obj)->lifetime = 0x28;
-            ((EF_Effect*) ret_obj)->params.y = (0.4f * HSD_Randf()) + 2.8f;
-            f32_1 = (M_TAU * HSD_Randf());
-            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, f32_1);
-            if (u32_1 != 0) {
-                effect->next = ret_obj;
-                effect = (void*) effect->next;
-            } else {
-                effect = ret_obj;
-                ret_obj = effect;
+        for (i = 0; i < 6; i++) {
+            node = efLib_Create_Attach_Pos(0x1B, gobj, &translate);
+            if (node == NULL) {
+                break;
             }
-            if (++u32_1 < 6) {
-                goto loop_406;
+            node->update = efLib_Cb_Fall_FromParamY;
+            node->lifetime = 0x28;
+            node->params.y = (0.4f * HSD_Randf()) + 2.8f;
+            f32_1 = (M_TAU * HSD_Randf());
+            jobj_1 = GET_JOBJ(node->gobj);
+            HSD_JObjSetRotationY(jobj_1, f32_1);
+            if (i != 0) {
+                effect->next = node;
+                effect = effect->next;
+            } else {
+                ret_obj = effect = node;
             }
         }
         break;
+    }
     case 0x428:
         ret_obj = efLib_CreateGenerator_AppSRT_SetScale(0xCA, vlist);
         break;
@@ -1142,29 +1140,100 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     return ret_obj;
 }
 
+static char efAsync_803BFD68[] = "EfCoData.dat";
+static char efAsync_803BFD78[] = "effCommonDataTable";
+static char efAsync_803BFD8C[] = "EfMrData.dat";
+static char efAsync_803BFD9C[] = "effMarioDataTable";
+static char efAsync_803BFDB0[] = "EfSsData.dat";
+static char efAsync_803BFDC0[] = "effSamusDataTable";
+static char efAsync_803BFDD4[] = "EfFxData.dat";
+static char efAsync_803BFDE4[] = "effFoxDataTable";
+static char efAsync_803BFDF4[] = "EfCaData.dat";
+static char efAsync_803BFE04[] = "effCaptainDataTable";
+static char efAsync_803BFE18[] = "EfKbData.dat";
+static char efAsync_803BFE28[] = "effKirbyDataTable";
+static char efAsync_803BFE3C[] = "EfLkData.dat";
+static char efAsync_803BFE4C[] = "effLinkDataTable";
+static char efAsync_803BFE60[] = "EfPkData.dat";
+static char efAsync_803BFE70[] = "effPikachuDataTable";
+static char efAsync_803BFE84[] = "EfDkData.dat";
+static char efAsync_803BFE94[] = "effDonkeyDataTable";
+static char efAsync_803BFEA8[] = "EfYsData.dat";
+static char efAsync_803BFEB8[] = "effYoshiDataTable";
+static char efAsync_803BFECC[] = "EfNsData.dat";
+static char efAsync_803BFEDC[] = "effNessDataTable";
+static char efAsync_803BFEF0[] = "EfPrData.dat";
+static char efAsync_803BFF00[] = "effPurinDataTable";
+static char efAsync_803BFF14[] = "EfKpData.dat";
+static char efAsync_803BFF24[] = "effKoopaDataTable";
+static char efAsync_803BFF38[] = "EfMtData.dat";
+static char efAsync_803BFF48[] = "effMewtwoDataTable";
+static char efAsync_803BFF5C[] = "EfIcData.dat";
+static char efAsync_803BFF6C[] = "effIceclimberDataTable";
+static char efAsync_803BFF84[] = "EfPeData.dat";
+static char efAsync_803BFF94[] = "effPeachDataTable";
+static char efAsync_803BFFA8[] = "EfMsData.dat";
+static char efAsync_803BFFB8[] = "effMarsDataTable";
+static char efAsync_803BFFCC[] = "EfZdData.dat";
+static char efAsync_803BFFDC[] = "effZeldaDataTable";
+static char efAsync_803BFFF0[] = "EfLgData.dat";
+static char efAsync_803C0000[] = "effLuigiDataTable";
+static char efAsync_803C0014[] = "EfGnData.dat";
+static char efAsync_803C0024[] = "effGanonDataTable";
+static char efAsync_803C0038[] = "EfKbMs.dat";
+static char efAsync_803C0044[] = "effKirbyMarsDataTable";
+static char efAsync_803C005C[] = "EfKbZd.dat";
+static char efAsync_803C0068[] = "effKirbyZeldaDataTable";
+static char efAsync_803C0080[] = "EfMnData.dat";
+static char efAsync_803C0090[] = "effMenuDataTable";
+static char efAsync_803C00A4[] = "EfKbMr.dat";
+static char efAsync_803C00B0[] = "effKirbyMarioDataTable";
+static char efAsync_803C00C8[] = "EfKbFx.dat";
+static char efAsync_803C00D4[] = "effKirbyFoxDataTable";
+static char efAsync_803C00EC[] = "EfKbSs.dat";
+static char efAsync_803C00F8[] = "effKirbySamusDataTable";
+static char efAsync_803C0110[] = "EfKbPk.dat";
+static char efAsync_803C011C[] = "effKirbyPikachuDataTable";
+static char efAsync_803C0138[] = "EfKbLg.dat";
+static char efAsync_803C0144[] = "effKirbyLuigiDataTable";
+static char efAsync_803C015C[] = "EfKbCa.dat";
+static char efAsync_803C0168[] = "effKirbyCaptainDataTable";
+static char efAsync_803C0184[] = "EfKbDk.dat";
+static char efAsync_803C0190[] = "effKirbyDonkeyDataTable";
+static char efAsync_803C01A8[] = "EfKbKp.dat";
+static char efAsync_803C01B4[] = "effKirbyKoopaDataTable";
+static char efAsync_803C01CC[] = "EfKbIc.dat";
+static char efAsync_803C01D8[] = "effKirbyIceDataTable";
+static char efAsync_803C01F0[] = "EfKbGn.dat";
+static char efAsync_803C01FC[] = "effKirbyGanonDataTable";
+static char efAsync_803C0214[] = "EfKbFe.dat";
+static char efAsync_803C0220[] = "effKirbyEmblemDataTable";
+static char efAsync_803C0238[] = "EfFeData.dat";
+static char efAsync_803C0248[] = "effEmblemDataTable";
+
 /* 3C025C */ EF_DAT_Entry efAsync_DatEntries[51] = {
-    { "EfCoData.dat", "effCommonDataTable", NULL },
-    { "EfMrData.dat", "effMarioDataTable", NULL },
-    { "EfSsData.dat", "effSamusDataTable", NULL },
-    { "EfFxData.dat", "effFoxDataTable", NULL },
-    { "EfCaData.dat", "effCaptainDataTable", NULL },
-    { "EfKbData.dat", "effKirbyDataTable", NULL },
-    { "EfLkData.dat", "effLinkDataTable", NULL },
-    { "EfPkData.dat", "effPikachuDataTable", NULL },
-    { "EfDkData.dat", "effDonkeyDataTable", NULL },
-    { "EfYsData.dat", "effYoshiDataTable", NULL },
-    { "EfNsData.dat", "effNessDataTable", NULL },
-    { "EfPrData.dat", "effPurinDataTable", NULL },
-    { "EfKpData.dat", "effKoopaDataTable", NULL },
-    { "EfMtData.dat", "effMewtwoDataTable", NULL },
-    { "EfIcData.dat", "effIceclimberDataTable", NULL },
-    { "EfPeData.dat", "effPeachDataTable", NULL },
-    { "EfMsData.dat", "effMarsDataTable", NULL },
-    { "EfZdData.dat", "effZeldaDataTable", NULL },
-    { "EfLgData.dat", "effLuigiDataTable", NULL },
-    { "EfGnData.dat", "effGanonDataTable", NULL },
-    { "EfKbMs.dat", "effKirbyMarsDataTable", NULL },
-    { "EfKbZd.dat", "effKirbyZeldaDataTable", NULL },
+    { efAsync_803BFD68, efAsync_803BFD78, NULL },
+    { efAsync_803BFD8C, efAsync_803BFD9C, NULL },
+    { efAsync_803BFDB0, efAsync_803BFDC0, NULL },
+    { efAsync_803BFDD4, efAsync_803BFDE4, NULL },
+    { efAsync_803BFDF4, efAsync_803BFE04, NULL },
+    { efAsync_803BFE18, efAsync_803BFE28, NULL },
+    { efAsync_803BFE3C, efAsync_803BFE4C, NULL },
+    { efAsync_803BFE60, efAsync_803BFE70, NULL },
+    { efAsync_803BFE84, efAsync_803BFE94, NULL },
+    { efAsync_803BFEA8, efAsync_803BFEB8, NULL },
+    { efAsync_803BFECC, efAsync_803BFEDC, NULL },
+    { efAsync_803BFEF0, efAsync_803BFF00, NULL },
+    { efAsync_803BFF14, efAsync_803BFF24, NULL },
+    { efAsync_803BFF38, efAsync_803BFF48, NULL },
+    { efAsync_803BFF5C, efAsync_803BFF6C, NULL },
+    { efAsync_803BFF84, efAsync_803BFF94, NULL },
+    { efAsync_803BFFA8, efAsync_803BFFB8, NULL },
+    { efAsync_803BFFCC, efAsync_803BFFDC, NULL },
+    { efAsync_803BFFF0, efAsync_803C0000, NULL },
+    { efAsync_803C0014, efAsync_803C0024, NULL },
+    { efAsync_803C0038, efAsync_803C0044, NULL },
+    { efAsync_803C005C, efAsync_803C0068, NULL },
     { NULL, NULL, NULL },
     { NULL, NULL, NULL },
     { NULL, NULL, NULL },
@@ -1174,25 +1243,25 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     { NULL, NULL, NULL },
     { NULL, NULL, NULL },
     { NULL, NULL, NULL },
-    { "EfMnData.dat", "effMenuDataTable", NULL },
-    { "EfKbMr.dat", "effKirbyMarioDataTable", NULL },
-    { "EfKbFx.dat", "effKirbyFoxDataTable", NULL },
-    { "EfKbSs.dat", "effKirbySamusDataTable", NULL },
+    { efAsync_803C0080, efAsync_803C0090, NULL },
+    { efAsync_803C00A4, efAsync_803C00B0, NULL },
+    { efAsync_803C00C8, efAsync_803C00D4, NULL },
+    { efAsync_803C00EC, efAsync_803C00F8, NULL },
     { NULL, NULL, NULL },
-    { "EfKbPk.dat", "effKirbyPikachuDataTable", NULL },
-    { "EfKbLg.dat", "effKirbyLuigiDataTable", NULL },
-    { "EfKbCa.dat", "effKirbyCaptainDataTable", NULL },
-    { "EfKbDk.dat", "effKirbyDonkeyDataTable", NULL },
+    { efAsync_803C0110, efAsync_803C011C, NULL },
+    { efAsync_803C0138, efAsync_803C0144, NULL },
+    { efAsync_803C015C, efAsync_803C0168, NULL },
+    { efAsync_803C0184, efAsync_803C0190, NULL },
     { NULL, NULL, NULL },
-    { "EfKbKp.dat", "effKirbyKoopaDataTable", NULL },
-    { NULL, NULL, NULL },
-    { NULL, NULL, NULL },
+    { efAsync_803C01A8, efAsync_803C01B4, NULL },
     { NULL, NULL, NULL },
     { NULL, NULL, NULL },
-    { "EfKbIc.dat", "effKirbyIceDataTable", NULL },
-    { "EfKbGn.dat", "effKirbyGanonDataTable", NULL },
-    { "EfKbFe.dat", "effKirbyEmblemDataTable", NULL },
-    { "EfFeData.dat", "effEmblemDataTable", NULL },
+    { NULL, NULL, NULL },
+    { NULL, NULL, NULL },
+    { efAsync_803C01CC, efAsync_803C01D8, NULL },
+    { efAsync_803C01F0, efAsync_803C01FC, NULL },
+    { efAsync_803C0214, efAsync_803C0220, NULL },
+    { efAsync_803C0238, efAsync_803C0248, NULL },
     { NULL, NULL, NULL },
 };
 
