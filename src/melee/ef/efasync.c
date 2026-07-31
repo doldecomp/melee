@@ -843,17 +843,19 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         goto block_636;
     case 0x44C:
         f32_1 = 2.0f;
-    block_636:
-        ret_obj = efLib_CreateGenerator_AddAppSRT(0x237);
-        if (ret_obj != NULL) {
+    block_636: {
+        HSD_Generator* result;
+
+        result = efLib_CreateGenerator_AddAppSRT(0x237);
+        if (result != NULL) {
             va_vec3 = va_arg(vlist, Vec3*);
-            psAppSRT = ((HSD_Generator*) ret_obj)->appsrt;
+            psAppSRT = result->appsrt;
             psAppSRT->translate = *va_vec3;
-            generator = ret_obj;
-            generator->appsrt->scale.x = generator->appsrt->scale.y =
-                generator->appsrt->scale.z = f32_1;
+            result->appsrt->scale.x = result->appsrt->scale.y =
+                result->appsrt->scale.z = f32_1;
         }
         break;
+    }
     case 0x44D:
         ret_obj = efLib_CreateGenerator_AppSRT_SetScale(0x48, vlist);
         break;
