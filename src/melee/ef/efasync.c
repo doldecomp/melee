@@ -28,19 +28,16 @@ static inline void efAsync_SetEffectRotationZ(EF_Effect* effect, f32 rotation)
     HSD_JObjSetRotationZ(GET_JOBJ(effect->gobj), rotation);
 }
 
-static inline void efAsync_SetEffectScaleX(EF_Effect* effect, f32 scale)
+static inline void efAsync_SetEffectScaleXYZ(EF_Effect* effect, f32 scale)
 {
-    HSD_JObjSetScaleX(GET_JOBJ(effect->gobj), scale);
-}
+    HSD_JObj* jobj;
 
-static inline void efAsync_SetEffectScaleY(EF_Effect* effect, f32 scale)
-{
-    HSD_JObjSetScaleY(GET_JOBJ(effect->gobj), scale);
-}
-
-static inline void efAsync_SetEffectScaleZ(EF_Effect* effect, f32 scale)
-{
-    HSD_JObjSetScaleZ(GET_JOBJ(effect->gobj), scale);
+    jobj = GET_JOBJ(effect->gobj);
+    HSD_JObjSetScaleX(jobj, scale);
+    jobj = GET_JOBJ(effect->gobj);
+    HSD_JObjSetScaleY(jobj, scale);
+    jobj = GET_JOBJ(effect->gobj);
+    HSD_JObjSetScaleZ(jobj, scale);
 }
 
 static inline void efAsync_SetEffectScale(EF_Effect* effect, Vec3* scale)
@@ -80,7 +77,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     HSD_JObj* jobj_1;
     Vec3* va_vec3;
     s32 count;
-    PAD_STACK(0x1C);
+    PAD_STACK(4);
     ret_obj = NULL;
     switch (gfx_id) {
     case 0x3E8:
@@ -709,9 +706,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         ret_obj = efLib_Create_Attach(0x23, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
             f32_1 = *va_arg(vlist, f32*);
-            efAsync_SetEffectScaleX(ret_obj, f32_1);
-            efAsync_SetEffectScaleY(ret_obj, f32_1);
-            efAsync_SetEffectScaleZ(ret_obj, f32_1);
+            efAsync_SetEffectScaleXYZ(ret_obj, f32_1);
         }
         break;
     case 0x43A:
@@ -731,9 +726,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         ret_obj = efLib_Create_Attach(0x24, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
             f32_1 = *va_arg(vlist, f32*);
-            efAsync_SetEffectScaleX(ret_obj, f32_1);
-            efAsync_SetEffectScaleY(ret_obj, f32_1);
-            efAsync_SetEffectScaleZ(ret_obj, f32_1);
+            efAsync_SetEffectScaleXYZ(ret_obj, f32_1);
         }
         break;
     case 0x43F: {
