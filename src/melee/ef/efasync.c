@@ -82,8 +82,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (ret_obj != NULL) {
             ((EF_Effect*) ret_obj)->state_flags |= EF_STATE_ASYNC;
             f32_1 = (M_TAU * HSD_Randf());
-            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationZ(jobj_1, f32_1);
+            HSD_JObjSetRotationZ(efAsync_GetEffectJObj(ret_obj), f32_1);
         }
         break;
     case 0x3ED:
@@ -110,8 +109,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         ret_obj = efLib_Create_Attach_Pos(0x27, gobj, va_arg(vlist, Vec3*));
         if (ret_obj != NULL) {
             f32_1 = (M_TAU * HSD_Randf());
-            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationZ(jobj_1, f32_1);
+            HSD_JObjSetRotationZ(efAsync_GetEffectJObj(ret_obj), f32_1);
         }
         break;
     case 0x3EF:
@@ -154,8 +152,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
                 rot_y = M_PI_2;
             }
             f32_1 = rot_y;
-            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, f32_1);
+            HSD_JObjSetRotationY(efAsync_GetEffectJObj(ret_obj), f32_1);
         }
         break;
     case 0x3F6:
@@ -287,8 +284,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (ret_obj != NULL) {
             ((EF_Effect*) ret_obj)->state_flags |= EF_STATE_ASYNC;
             f32_1 = *va_arg(vlist, f32*);
-            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationZ(jobj_1, f32_1);
+            HSD_JObjSetRotationZ(efAsync_GetEffectJObj(ret_obj), f32_1);
         }
         break;
     case 0x405:
@@ -299,8 +295,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (ret_obj != NULL) {
             ((EF_Effect*) ret_obj)->state_flags |= EF_STATE_ASYNC;
             f32_1 = *va_arg(vlist, f32*);
-            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationZ(jobj_1, f32_1);
+            HSD_JObjSetRotationZ(efAsync_GetEffectJObj(ret_obj), f32_1);
         }
         break;
     case 0x407:
@@ -537,16 +532,14 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         ret_obj = efLib_Create_Attach(1, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
             f32_1 = *va_arg(vlist, f32*);
-            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationZ(jobj_1, f32_1);
+            HSD_JObjSetRotationZ(efAsync_GetEffectJObj(ret_obj), f32_1);
         }
         break;
     case 0x424:
         ret_obj = efLib_Create_Attach(2, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
             f32_1 = *va_arg(vlist, f32*);
-            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationZ(jobj_1, f32_1);
+            HSD_JObjSetRotationZ(efAsync_GetEffectJObj(ret_obj), f32_1);
         }
         break;
     case 0x425:
@@ -642,8 +635,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
                 rot_y = M_PI_2;
             }
             f32_1 = rot_y;
-            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, f32_1);
+            HSD_JObjSetRotationY(efAsync_GetEffectJObj(ret_obj), f32_1);
         }
         break;
     case 0x430:
@@ -662,8 +654,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
                 rot_y = M_PI_2;
             }
             f32_1 = rot_y;
-            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, f32_1);
+            HSD_JObjSetRotationY(efAsync_GetEffectJObj(ret_obj), f32_1);
         }
         break;
     case 0x432: {
