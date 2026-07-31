@@ -714,8 +714,9 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     case 0x438:
         ret_obj = efLib_Create_Attach(0x22, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
-            jobj_1 = GET_JOBJ(gobj);
-            f32_1 = HSD_JObjGetRotationY(jobj_1);
+            jobj_3 = GET_JOBJ(gobj);
+            (void) jobj_3;
+            f32_1 = HSD_JObjGetRotationY(jobj_3);
             jobj_2 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
             HSD_JObjSetRotationY(jobj_2, f32_1);
             ((EF_Effect*) ret_obj)->update = efLib_Cb_SetScale_FromParamX;
