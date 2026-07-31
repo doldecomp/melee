@@ -442,7 +442,9 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             ((EF_Effect*) ret_obj)->update = efLib_Cb_ApplyStoredAlpha;
         }
         break;
-    case 0x419:
+    case 0x419: {
+        HSD_JObj* child;
+
         efLib_LoadKind = EF_LOADKIND_SYNC;
         ret_obj = efLib_Create_Attach(0xD, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
@@ -468,47 +470,19 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
                     }
                 }
 #else
-            if (jobj_1 == NULL) {
-                jobj_2 = NULL;
-            } else {
-                jobj_2 = jobj_1->child;
-            }
-            efLib_SetTevKonstColor(jobj_2, 0, u32_2, u32_1);
-            if (jobj_2 == NULL) {
-                jobj_2 = NULL;
-            } else {
-                jobj_2 = jobj_2->next;
-            }
-            efLib_SetTevKonstColor(jobj_2, 0, u32_2, u32_1);
-            if (jobj_2 == NULL) {
-                jobj_2 = NULL;
-            } else {
-                jobj_2 = jobj_2->next;
-            }
-            efLib_SetTevKonstColor(jobj_2, 0, u32_2, u32_1);
-            if (jobj_2 == NULL) {
-                jobj_2 = NULL;
-            } else {
-                jobj_2 = jobj_2->next;
-            }
-            efLib_SetTevKonstColor(jobj_2, 0, u32_2, u32_1);
-            if (jobj_2 == NULL) {
-                jobj_2 = NULL;
-            } else {
-                jobj_2 = jobj_2->next;
-            }
-            efLib_SetTevKonstColor(jobj_2, 0, u32_2, u32_1);
-            if (jobj_2 == NULL) {
-                jobj_2 = NULL;
-            } else {
-                jobj_2 = jobj_2->next;
-            }
-            efLib_SetTevKonstColor(jobj_2, 0, u32_2, u32_1);
-            if (jobj_2 == NULL) {
-                jobj_1 = NULL;
-            } else {
-                jobj_1 = jobj_2->next;
-            }
+            child = HSD_JObjGetChild(jobj_1);
+            efLib_SetTevKonstColor(child, 0, u32_2, u32_1);
+            jobj_1 = HSD_JObjGetNext(child);
+            efLib_SetTevKonstColor(jobj_1, 0, u32_2, u32_1);
+            jobj_1 = HSD_JObjGetNext(jobj_1);
+            efLib_SetTevKonstColor(jobj_1, 0, u32_2, u32_1);
+            jobj_1 = HSD_JObjGetNext(jobj_1);
+            efLib_SetTevKonstColor(jobj_1, 0, u32_2, u32_1);
+            jobj_1 = HSD_JObjGetNext(jobj_1);
+            efLib_SetTevKonstColor(jobj_1, 0, u32_2, u32_1);
+            jobj_1 = HSD_JObjGetNext(jobj_1);
+            efLib_SetTevKonstColor(jobj_1, 0, u32_2, u32_1);
+            jobj_1 = HSD_JObjGetNext(jobj_1);
             efLib_SetTevKonstColor(jobj_1, 0, u32_2, u32_1);
 #endif
             ((EF_Effect*) ret_obj)->scale_flags |= EF_SCALE_INHERIT;
@@ -516,6 +490,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
             ((EF_Effect*) ret_obj)->update = efLib_Cb_ApplyStoredAlpha;
         }
         break;
+    }
     case 0x41A:
         efLib_LoadKind = EF_LOADKIND_SYNC;
         ret_obj = efLib_Create_Attach(0xE, gobj, va_arg(vlist, HSD_JObj*));
