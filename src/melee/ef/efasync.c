@@ -84,7 +84,10 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     HSD_JObj* jobj_1;
     Vec3* va_vec3;
     s32 count;
-    PAD_STACK(4);
+    struct {
+        HSD_Generator* generator;
+    } state;
+
     ret_obj = NULL;
     switch (gfx_id) {
     case 0x3E8:
@@ -345,19 +348,21 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     case 0x40C:
         ret_obj = efLib_CreateGenerator(0x19, va_arg(vlist, Vec3*));
         break;
-    case 0x40D:
-        generator = efLib_CreateGenerator_AddAppSRT(0x19);
-        if (generator != NULL) {
+    case 0x40D: {
+        state.generator = efLib_CreateGenerator_AddAppSRT(0x19);
+        if (state.generator != NULL) {
             va_vec3 = va_arg(vlist, Vec3*);
-            psAppSRT = generator->appsrt;
+            psAppSRT = state.generator->appsrt;
             psAppSRT->translate = *va_vec3;
             jobj_1 = GET_JOBJ(gobj);
             HSD_JObjGetScale(jobj_1, &scale);
-            ret_obj = generator;
-            generator->appsrt->scale.x = generator->appsrt->scale.y =
-                generator->appsrt->scale.z = scale.y;
+            ret_obj = state.generator;
+            state.generator->appsrt->scale.x =
+                state.generator->appsrt->scale.y =
+                    state.generator->appsrt->scale.z = scale.y;
         }
         break;
+    }
     case 0x40E:
         ret_obj = efLib_CreateGenerator(0x43, va_arg(vlist, Vec3*));
         break;
