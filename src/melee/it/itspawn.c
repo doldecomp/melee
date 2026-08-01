@@ -105,14 +105,14 @@ bool it_8026C704(void)
 
 /// Decides item kind for spawned items - not sure in which context (i.e from
 /// pokeballs, from capsules, thin air, etc.)
-/// @todo Two callee-saved registers are swapped.
 ItemKind it_8026C75C(ItemPickTable* table)
 {
     bool chk1;
-    bool chk2;
     int saved;
+    bool chk2;
     ItemKind ret;
     ItemKind kind;
+    ItemPickTable* tbl = table;
     PAD_STACK(16);
 
     chk1 = false;
@@ -121,27 +121,27 @@ ItemKind it_8026C75C(ItemPickTable* table)
         chk1 = true;
     }
     chk2 = false;
-    if (table->x8 == 0) {
+    if (tbl->x8 == 0) {
         return -1;
     }
     if (chk1) {
-        if (table->x4[table->size - 1] == It_Kind_M_Ball) {
-            int i_last = table->size - 1;
+        if (tbl->x4[tbl->size - 1] == It_Kind_M_Ball) {
+            int i_last = tbl->size - 1;
             if (i_last < 1) {
                 return -1;
             }
-            saved = table->x8;
+            saved = tbl->x8;
             chk2 = true;
-            table->x8 = table->xC[i_last];
-            table->size--;
+            tbl->x8 = tbl->xC[i_last];
+            tbl->size--;
         }
     }
-    kind = it_8026C65C(table);
+    kind = it_8026C65C(tbl);
 
     ret = kind;
     if (chk1 && chk2) {
-        table->x8 = saved;
-        table->size++;
+        tbl->x8 = saved;
+        tbl->size++;
         if (kind == It_Kind_M_Ball) {
             ret = -1;
         }
