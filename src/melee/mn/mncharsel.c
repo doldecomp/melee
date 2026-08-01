@@ -3019,14 +3019,23 @@ block_392:
 
     PAD_STACK(0x30);
 }
+static inline void animateCharModel(HSD_JObj* jobj, f32 frame)
+{
+    HSD_JObj* child;
+
+    lb_80011E24(jobj, &child, 4, -1);
+    HSD_ForeachAnim(child, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim, AOBJ_ARG_AF,
+                    frame);
+    HSD_JObjAnimAll(child);
+    HSD_ForeachAnim(child, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
+                    AOBJ_ARG_AOV, 0, 0);
+}
+
 void fn_80262648(HSD_GObj* gobj)
 {
     HSD_JObj* sp24;
     u32 pad1;
     u32 pad2;
-    HSD_JObj* jobj4;
-    HSD_JObj* sp14;
-    HSD_JObj* sp10;
     struct CSSCharModel* model = gobj->user_data;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     CSSData* css = mnCharSel_804D6CB0;
@@ -3081,28 +3090,13 @@ void fn_80262648(HSD_GObj* gobj)
             if (port < 4U) {
                 if ((u8) mnCharSel_804D6CF5 == 1) {
                     f32 f24 = (f32) ((s8) (u8) mnCharSel_804D6CF0 * 4);
-                    lb_80011E24(jobj, &jobj4, 4, -1);
-                    HSD_ForeachAnim(jobj4, JOBJ_TYPE, TOBJ_MASK,
-                                    HSD_AObjReqAnim, AOBJ_ARG_AF, f24);
-                    HSD_JObjAnimAll(jobj4);
-                    HSD_ForeachAnim(jobj4, JOBJ_TYPE, TOBJ_MASK,
-                                    HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+                    animateCharModel(jobj, f24);
                 } else {
                     f32 f24 = (f32) (model->x4 * 4);
-                    lb_80011E24(jobj, &sp14, 4, -1);
-                    HSD_ForeachAnim(sp14, JOBJ_TYPE, TOBJ_MASK,
-                                    HSD_AObjReqAnim, AOBJ_ARG_AF, f24);
-                    HSD_JObjAnimAll(sp14);
-                    HSD_ForeachAnim(sp14, JOBJ_TYPE, TOBJ_MASK,
-                                    HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+                    animateCharModel(jobj, f24);
                 }
             } else {
-                lb_80011E24(jobj, &sp10, 4, -1);
-                HSD_ForeachAnim(sp10, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
-                                AOBJ_ARG_AF, 16.0f);
-                HSD_JObjAnimAll(sp10);
-                HSD_ForeachAnim(sp10, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
-                                AOBJ_ARG_AOV, 0, 0);
+                animateCharModel(jobj, 16.0f);
             }
             lb_80011E24(jobj, &sp24, 3, -1);
             HSD_ForeachAnim(sp24, JOBJ_TYPE, MOBJ_MASK, HSD_AObjReqAnim,
