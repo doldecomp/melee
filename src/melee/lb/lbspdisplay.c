@@ -381,35 +381,20 @@ static inline bool approximatelyZeroVec3(Vec3 vec)
     return result;
 }
 
-static inline float vectorMagnitude(Vec3* vec)
+static inline float absf(float x)
 {
-    return sqrtf(vec->z * vec->z + (vec->x * vec->x + vec->y * vec->y));
-}
-
-static inline float rightTriangleSide(float hypotenuse, float side)
-{
-    return sqrtf(hypotenuse * hypotenuse - side * side);
+    if (x < 0.0f) {
+        x = -x;
+    }
+    return x;
 }
 
 static inline float groundHeight(struct DynamicsData* data, Vec3* floor_point)
 {
-    float height = data->desc.lb_unk0.unk_2C.y - floor_point->y;
-
-    if (height < 0.0f) {
-        height = -height;
-    }
-    return height;
+    return absf(data->desc.lb_unk0.unk_2C.y - floor_point->y);
 }
 
-static inline float groundDistanceSquared(float length, float height)
-{
-    return -(height * height - length * length);
-}
-
-struct DynamicsLoopState {
-    s32 index;
-};
-
+/// @todo Only the two global-base registers and one @c li position differ.
 void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                  float pos_y, bool use_floor_fn, Fighter_Part part,
                  int first_active, bool ground_check)
@@ -431,14 +416,14 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
     Vec3 next_bone_pos, coll_dir;
     Vec3 collision_point;
     Vec3 avoidance_axis;
-    u8 _padB[40];
+    u8 _padB[16];
     s32 sp8;
 
     struct DynamicsData* cur;
     HSD_JObj* jobj;
     struct lb_Collider* collider;
     s32 on_ground;
-    struct DynamicsLoopState loop;
+    s32 loop_index = 0;
 
     if ((u8) lb_804D63B8 != 0) {
         return;
@@ -456,12 +441,11 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
     }
 
     on_ground = 0;
-    loop.index = 0;
     {
         s32 i;
         for (i = 0; i < (s32) part; i++) {
             cur = cur->next;
-            loop.index++;
+            loop_index++;
         }
     }
 
@@ -568,7 +552,7 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
 
             /* Apply interaction force */
             force_mag = 0.0f;
-            if (lb_804D63B0 != NULL && first_active <= loop.index) {
+            if (lb_804D63B0 != NULL && first_active <= loop_index) {
                 struct DynamicsData* next_node = cur->next;
                 next_pos = next_node->desc.lb_unk0.unk_2C;
                 force_mag = lb_800101C8(&next_pos, &force_dir);
@@ -667,7 +651,9 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                             collider->position.z - cur->desc.lb_unk0.unk_2C.z;
 
                         {
-                            f32 coll_dist = vectorMagnitude(&coll_dir);
+                            f32 coll_dist = sqrtf(coll_dir.z * coll_dir.z +
+                                                  (coll_dir.x * coll_dir.x +
+                                                   coll_dir.y * coll_dir.y));
 
                             if (coll_dist > collider->radius &&
                                 lbColl_80005C44(
@@ -680,8 +666,9 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                                 if (0.0 != coll_angle) {
                                     f32 adj_radius =
                                         (f32) (0.1 + (f64) collider->radius);
-                                    f32 side_sq = rightTriangleSide(
-                                        coll_dist, adj_radius);
+                                    f32 side_sq =
+                                        sqrtf(coll_dist * coll_dist -
+                                              adj_radius * adj_radius);
                                     {
                                         f32 avoidance_angle =
                                             atan2f(adj_radius, side_sq);
@@ -712,10 +699,12 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
             if (ground_check != 0) {
                 if (on_ground != 0) {
                     Vec3 floor_point, floor_normal;
+                    UNUSED Vec3 unused;
                     int line_id;
                     u32 floor_flags;
                     Vec3 floor_cross;
                     Vec3 gnd_norm;
+                    UNUSED Vec3 unused_b;
 
                     gnd_norm = lb_803B7280.v1;
                     lbVector_Normalize(&link_dir);
@@ -750,6 +739,7 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                     }
                 } else {
                     Vec3 floor_point2, floor_normal2;
+                    UNUSED Vec3 unused2;
                     int line_id2;
                     u32 floor_flags2;
                     Vec3 floor_cross2;
@@ -808,22 +798,19 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                             if (floor_hit3 != 0) {
                                 f32 height_diff =
                                     groundHeight(cur, &floor_point2);
-                                {
-                                    f32 horiz_dist =
-                                        sqrtf(groundDistanceSquared(
-                                            cur->desc.lb_unk0.unk_48,
-                                            height_diff));
-                                    f32 ground_angle =
-                                        ABS(atan2f(horiz_dist, height_diff));
-                                    PSVECCrossProduct(&gnd_norm2, &link_dir,
-                                                      &floor_cross2);
-                                    lbVector_Normalize(&floor_cross2);
-                                    lbVector_RotateAboutUnitAxis(&gnd_norm2,
-                                                                 &floor_cross2,
-                                                                 ground_angle);
-                                    on_ground = 1;
-                                    link_dir = gnd_norm2;
-                                }
+                                f32 horiz_dist =
+                                    sqrtf(-(height_diff * height_diff -
+                                            cur->desc.lb_unk0.unk_48 *
+                                                cur->desc.lb_unk0.unk_48));
+                                f32 ground_angle =
+                                    ABS(atan2f(horiz_dist, height_diff));
+                                PSVECCrossProduct(&gnd_norm2, &link_dir,
+                                                  &floor_cross2);
+                                lbVector_Normalize(&floor_cross2);
+                                lbVector_RotateAboutUnitAxis(
+                                    &gnd_norm2, &floor_cross2, ground_angle);
+                                on_ground = 1;
+                                link_dir = gnd_norm2;
                             } else {
                                 on_ground = 0;
                             }
@@ -926,7 +913,7 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
         PSMTXConcat(parent_mtx, scale_mtx, parent_mtx);
 
         jobj = jobj->child;
-        loop.index += 1;
+        loop_index += 1;
         cur = cur->next;
     }
 
