@@ -3604,9 +3604,8 @@ void fn_802633B0(HSD_GObj* gobj)
             s32 page_off;
             GXColor* name_color = &row_color;
             GXColor* used_name_color = &used_row_color;
-            j = 0;
             page_off = ((s32) tag->x8 / 32) + 1;
-            do {
+            for (j = 0; j < 9; j++) {
                 row_idx = j - page_off;
                 if (row_idx < 0) {
                     HSD_SisLib_803A70A0(tag->name_ls, j + 2, NULL);
@@ -3636,8 +3635,7 @@ void fn_802633B0(HSD_GObj* gobj)
                 HSD_SisLib_803A746C(tag->name_ls, j + 2, 10.0f,
                                     (32.0f * (f32) (j + 1)) +
                                         (f32) ((trunc % 32) - 0x20));
-                j += 1;
-            } while (j < 9);
+            }
         }
 
         if (trigger & HSD_PAD_A) {
