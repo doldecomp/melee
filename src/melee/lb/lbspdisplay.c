@@ -430,9 +430,9 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
     Vec3 clamp_dir, clamp_axis;
     Vec3 convergence_axis, deviation_axis;
     Vec3 next_bone_pos, coll_dir;
+    Vec3 collision_point;
     Vec3 avoidance_axis;
     u8 _padB[32];
-    Vec3 collision_point;
     s32 sp8;
 
     struct DynamicsData* cur;
