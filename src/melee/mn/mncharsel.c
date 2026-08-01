@@ -4158,6 +4158,7 @@ s32 mnCharSel_802640A0(void)
     HSD_JObj* spA4;
     GXColor hard_color;
     HSD_JObj* sp70;
+    CSSDoor* doors;
     s32 row_b;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
@@ -4418,10 +4419,11 @@ s32 mnCharSel_802640A0(void)
         cursor->x7 = 0;
         cursor->x6 = 0;
         cursor->x5 = 2;
-        cursor->xC = (f32) ((15.0f * (f32) i) + -31.0f);
+        cursor->xC = (f32) ((15.0f * (f32) i) - 31.0f);
         cursor->x10 = -21.5f;
     }
 
+    doors = CSS_ALL->doors_data.doors;
     for (i = 0; i < num_players; i++) {
         struct CSSCharModel* model;
         int player;
@@ -4471,7 +4473,7 @@ s32 mnCharSel_802640A0(void)
                 *slot_type = 3;
             }
         }
-        CSS_ALL->doors_data.doors[i].sel_icon = found;
+        doors[i].sel_icon = found;
         model->x8 = model->x10 = 3.4f + icons[found].bound_l;
         model->xC = model->x14 = -3.0f + icons[found].bound_u;
     }
@@ -4604,7 +4606,8 @@ s32 mnCharSel_802640A0(void)
         if (player == mnCharSel_804D6CF9 &&
             (u8) mnCharSel_804D6CF8 < (u8) td->next_tag)
         {
-            u8 mt = mnCharSel_804D6CB0->match_type;
+            CSSData* css = mnCharSel_804D6CB0;
+            u8 mt = css->match_type;
             s32 clear;
             if ((s32) mt < 3) {
                 if ((s32) mt == 0) {
@@ -4620,7 +4623,7 @@ s32 mnCharSel_802640A0(void)
                 clear = 0;
             }
             if (clear != 0) {
-                mnCharSel_804D6CB0->ko_star_counts[player] = 0;
+                css->ko_star_counts[player] = 0;
             }
             mnCharSel_804D6CB0->data.data.players[player].xA =
                 mnCharSel_804D6CF8 - 1;
@@ -5085,24 +5088,24 @@ s32 mnCharSel_802640A0(void)
         mnCharSel_804D6CB0->data.data.players[0].slot_type = 3;
         mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0].slot_type =
             0;
-        CSS_ALL->doors_data.doors[0].p_kind = 0;
-        CSS_ALL->doors_data.doors[0].costume =
+        doors[0].p_kind = 0;
+        doors[0].costume =
             mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0].color;
-        CSS_ALL->doors_data.doors[0].sel_icon_prev =
-            CSS_ALL->doors_data.doors[0].sel_icon;
+        doors[0].sel_icon_prev =
+            doors[0].sel_icon;
         if ((u8) mnCharSel_804D6CB0->match_type == 0x17) {
             mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1]
                 .slot_type = 1;
-            CSS_ALL->doors_data.doors[1].p_kind = 1;
-            CSS_ALL->doors_data.doors[1].costume =
+            doors[1].p_kind = 1;
+            doors[1].costume =
                 mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1]
                     .color;
-            CSS_ALL->doors_data.doors[1].sel_icon_prev =
-                CSS_ALL->doors_data.doors[1].sel_icon;
+            doors[1].sel_icon_prev =
+                doors[1].sel_icon;
         }
     } else {
         for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
-            CSSDoor* door = &CSS_ALL->doors_data.doors[i];
+            CSSDoor* door = &doors[i];
             GameRules* rules;
             door->p_kind = mnCharSel_804D6CB0->data.data.players[i].slot_type;
             door->costume = mnCharSel_804D6CB0->data.data.players[i].color;
