@@ -1906,21 +1906,21 @@ static inline void updateCursorDisplay(HSD_JObj* jobj,
     }
 
     {
-        s8 color_idx;
+        s32 color_idx;
         if ((u8) mnCharSel_804D6CF5 == 1) {
             color_idx = (s8) (u8) mnCharSel_804D6CF0;
         } else if ((u8) mnCharSel_804D6CB0->data.data.rules.is_teams == 0) {
-            color_idx = (s8) cursor->x4;
+            color_idx = cursor->x4;
         } else {
             color_idx =
-                (s8) mnCharSel_804D50E0[all_data->doors_data.doors[cursor->x4]
-                                            .team];
+                mnCharSel_804D50E0[all_data->doors_data.doors[cursor->x4]
+                                       .team];
         }
 
         {
             s32 frame_idx;
             if ((u16) cursor->x8 != 0) {
-                s8 port = (s8) cursor->x4;
+                s32 port = cursor->x4;
                 if ((u8) mnCharSel_804D6CF5 == 1) {
                     if ((s32) port != 0) {
                         port = (s8) (u8) mnCharSel_804D6CF1;
@@ -1930,7 +1930,7 @@ static inline void updateCursorDisplay(HSD_JObj* jobj,
                 }
                 frame_idx = (mnCharSel_804D6CEC & 3) + (port * 4);
             } else {
-                s8 port = (s8) cursor->x4;
+                s32 port = cursor->x4;
                 if ((u8) mnCharSel_804D6CF5 == 1) {
                     if ((s32) port != 0) {
                         port = (s8) (u8) mnCharSel_804D6CF1;
