@@ -4500,13 +4500,15 @@ s32 mnCharSel_802640A0(void)
         td->text->x4C = 1;
         td->text->default_fitting = 1;
         td->text->default_alignment = 1;
-        td->text->font_size.x = 0.058f;
-        td->text->font_size.y = 0.055f;
+        text = td->text;
+        text->font_size.x = 0.058f;
+        text->font_size.y = 0.055f;
         if ((u8) mnCharSel_804D6CF5 == 1) {
             if (i != 0) {
-                td->text->pos_x = 15.6f;
-                td->text->pos_y = 20.2f;
-                td->text->pos_z = 0.0f;
+                text = td->text;
+                text->pos_x = 15.6f;
+                text->pos_y = 20.2f;
+                text->pos_z = 0.0f;
             } else {
                 lb_80011E24(mnCharSel_804D6CC0, &spA4,
                             CSS_ALL->doors_data.tag_box_joint, -1);
@@ -4517,12 +4519,14 @@ s32 mnCharSel_802640A0(void)
                                 AOBJ_ARG_AOV, 0, 0);
                 sp108 = spA4;
                 lb_8000B1CC(sp108, NULL, &spEC);
-                td->text->pos_x = spEC.x - 0.1f;
-                td->text->pos_y = 20.2f;
-                td->text->pos_z = 0.0f;
+                text = td->text;
+                text->pos_x = spEC.x - 0.1f;
+                text->pos_y = 20.2f;
+                text->pos_z = 0.0f;
             }
-            td->text->box_size_x = 200.0f;
-            td->text->box_size_y = 32.0f;
+            text = td->text;
+            text->box_size_x = 200.0f;
+            text->box_size_y = 32.0f;
             HSD_SisLib_803A6B98(td->text, 100.0f, 0.0f,
                                 "\x81\x45\x81\x45\x81\x45\x81\x45");
         } else {
@@ -4535,11 +4539,12 @@ s32 mnCharSel_802640A0(void)
                             HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
             sp108 = tag_name_jobj;
             lb_8000B1CC(sp108, NULL, &spEC);
-            td->text->pos_x = 0.5f + spEC.x;
-            td->text->pos_y = -0.4f - spEC.y;
-            td->text->pos_z = spEC.z;
-            td->text->box_size_x = 160.0f;
-            td->text->box_size_y = 32.0f;
+            text = td->text;
+            text->pos_x = 0.5f + spEC.x;
+            text->pos_y = -0.4f - spEC.y;
+            text->pos_z = spEC.z;
+            text->box_size_x = 160.0f;
+            text->box_size_y = 32.0f;
             HSD_SisLib_803A6B98(td->text, 80.0f, 0.0f,
                                 "\x81\x45\x81\x45\x81\x45\x81\x45");
         }
@@ -4555,13 +4560,16 @@ s32 mnCharSel_802640A0(void)
         lb_8000B1CC(sp108, NULL, &spEC);
         td->name_ls = HSD_SisLib_803A6754(0, ctx);
         td->name_ls->default_fitting = 1;
-        td->name_ls->box_size_x = 154.0f;
-        td->name_ls->box_size_y = 256.0f;
-        td->name_ls->pos_x = spEC.x - 0.6f;
-        td->name_ls->pos_y = (0.8f - spEC.y) - 1.0f;
-        td->name_ls->pos_z = spEC.z;
-        td->name_ls->font_size.x = 0.065f;
-        td->name_ls->font_size.y = 0.065f;
+        text = td->name_ls;
+        text->box_size_x = 154.0f;
+        text->box_size_y = 256.0f;
+        text = td->name_ls;
+        text->pos_x = spEC.x - 0.6f;
+        text->pos_y = (0.8f - spEC.y) - 1.0f;
+        text->pos_z = spEC.z;
+        text = td->name_ls;
+        text->font_size.x = 0.065f;
+        text->font_size.y = 0.065f;
         td->name_ls->x4E = 1;
         td->name_ls->hidden = 1;
         HSD_SisLib_803A6B98(td->name_ls, 0.0f, 0.0f,
