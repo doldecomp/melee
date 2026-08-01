@@ -1745,11 +1745,13 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
 #pragma auto_inline off
 s32 mnCharSel_8025FDEC(u8 door)
 {
+    struct {
+        CSSData* value;
+    } css;
     HSD_JObj* sp10;
     int player;
     s8 c_kind;
     int icon_idx;
-    CSSData* css;
     CSSAllData* all_data = (CSSAllData*) &mnCharSel_803F0A48;
 
     if (mnCharSel_804D6CF5 == 1) {
@@ -1762,8 +1764,8 @@ s32 mnCharSel_8025FDEC(u8 door)
         player = door;
     }
 
-    css = mnCharSel_804D6CB0;
-    c_kind = css->data.data.players[player].c_kind;
+    css.value = mnCharSel_804D6CB0;
+    c_kind = css.value->data.data.players[player].c_kind;
 
     if (c_kind < CKIND_PLAYABLE_COUNT) {
         if (c_kind !=
@@ -1775,7 +1777,7 @@ s32 mnCharSel_8025FDEC(u8 door)
         {
             CSSIcon* icon = all_data->icons;
             for (icon_idx = 0; icon_idx < 0x19; icon_idx++) {
-                if (css->data.data.players[player].c_kind ==
+                if (css.value->data.data.players[player].c_kind ==
                     icon[icon_idx].char_kind)
                 {
                     break;
