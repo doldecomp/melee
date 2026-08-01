@@ -728,12 +728,10 @@ void mnCharSel_8025DB34(u8 arg0)
     if (mnCharSel_803F0DFC.tags[arg0].data->use_tag == 0 &&
         (int) sel_icon < 0x19)
     {
-        mnCharSel_803F0DFC.tags[arg0].data->text
-            ->default_kerning = 1;
+        mnCharSel_803F0DFC.tags[arg0].data->text->default_kerning = 1;
         if (lbLang_IsSavedLanguageUS() != 0 && (int) sel_icon == 0x16) {
-            HSD_SisLib_803A70A0(
-                mnCharSel_803F0DFC.tags[arg0].data->text, 0,
-                (char*) &mnCharSel_803F0A48);
+            HSD_SisLib_803A70A0(mnCharSel_803F0DFC.tags[arg0].data->text, 0,
+                                (char*) &mnCharSel_803F0A48);
         } else {
             HSD_SisLib_803A70A0(
                 mnCharSel_803F0DFC.tags[arg0].data->text, 0,
@@ -2348,8 +2346,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                         .tags[grabbed]
                                                         .data;
                                                 if ((u8) td->use_tag == 0) {
-                                                    td->text
-                                                        ->hidden = 1;
+                                                    td->text->hidden = 1;
                                                 }
                                             }
                                             mnCharSel_803F0DFC.doors[grabbed]
@@ -3874,8 +3871,7 @@ void fn_802633B0(HSD_GObj* gobj)
                     HSD_SisLib_803A70A0(tag->name_ls, j + 2,
                                         GetNameText((s32) (u8) row_idx));
                     row_color = white;
-                    HSD_SisLib_803A74F0(tag->name_ls, j + 2,
-                                        name_color);
+                    HSD_SisLib_803A74F0(tag->name_ls, j + 2, name_color);
                     {
                         s32 p2;
                         CSSData* ddata;
@@ -3886,8 +3882,8 @@ void fn_802633B0(HSD_GObj* gobj)
                                     row_idx)
                             {
                                 used_row_color = gray;
-                                HSD_SisLib_803A74F0(tag->name_ls,
-                                                    j + 2, used_name_color);
+                                HSD_SisLib_803A74F0(tag->name_ls, j + 2,
+                                                    used_name_color);
                                 break;
                             }
                         }
@@ -4679,13 +4675,16 @@ s32 mnCharSel_802640A0(void)
             CSS_ALL->doors_data.xcf = 124.0f;
             CSS_ALL->doors_data.xd3 = HSD_SisLib_803A6754(0, ctx);
             CSS_ALL->doors_data.scroll_flag = 1;
-            CSS_ALL->doors_data.xd3->pos_x = -0.5f;
-            CSS_ALL->doors_data.xd3->pos_y = 9.0f;
-            CSS_ALL->doors_data.xd3->pos_z = 0.0f;
-            CSS_ALL->doors_data.xd3->box_size_x = 248.0f;
-            CSS_ALL->doors_data.xd3->box_size_y = 32.0f;
-            CSS_ALL->doors_data.xd3->font_size.x = 0.08f;
-            CSS_ALL->doors_data.xd3->font_size.y = 0.09f;
+            text = CSS_ALL->doors_data.xd3;
+            text->pos_x = -0.5f;
+            text->pos_y = 9.0f;
+            text->pos_z = 0.0f;
+            text = CSS_ALL->doors_data.xd3;
+            text->box_size_x = 248.0f;
+            text->box_size_y = 32.0f;
+            text = CSS_ALL->doors_data.xd3;
+            text->font_size.x = 0.08f;
+            text->font_size.y = 0.09f;
             CSS_ALL->doors_data.xd3->x4E = 1;
             CSS_ALL->doors_data.xd3->default_kerning = 1;
             CSS_ALL->doors_data.xd3->default_alignment = 1;
@@ -4738,10 +4737,12 @@ s32 mnCharSel_802640A0(void)
                 CSS_ALL->data2.stocks =
                     mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
                         .stocks;
-                lb_80011E24(mnCharSel_804D6CC0, &sp70, CSS_ALL->data2.xf0[0], -1);
+                lb_80011E24(mnCharSel_804D6CC0, &sp70, CSS_ALL->data2.xf0[0],
+                            -1);
                 HSD_JObjSetTranslateX(sp70, 7.5f);
                 for (i = 1; i < 5; i++) {
-                    lb_80011E24(mnCharSel_804D6CC0, &sp70, CSS_ALL->data2.xf0[i], -1);
+                    lb_80011E24(mnCharSel_804D6CC0, &sp70,
+                                CSS_ALL->data2.xf0[i], -1);
                     if ((s32) CSS_ALL->data2.stocks <= i) {
                         HSD_JObjSetFlags(sp70, JOBJ_HIDDEN);
                     } else {
