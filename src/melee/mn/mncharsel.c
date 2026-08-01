@@ -211,8 +211,8 @@ static inline HSD_JObj* inline3(int i, float x)
 
 #define show_kos(x, y)                                                        \
     (lbLang_IsSavedLanguageJP()                                               \
-         ? HSD_SisLib_803A70A0((x), 0, "%d 人抜き", (y))                      \
-         : HSD_SisLib_803A70A0((x), 0, "%d ＫＯｓ", (y)))
+         ? HSD_SisLib_803A70A0((x), 0, "%d \x90\x6c\x94\xb2\x82\xab", (y))    \
+         : HSD_SisLib_803A70A0((x), 0, "%d \x82\x6a\x82\x6e\x82\x93", (y)))
 
 void mnCharSel_8025C020(int arg0)
 {
@@ -291,7 +291,7 @@ void mnCharSel_8025C020(int arg0)
             int target_count = gm_8016332C(hud_index);
             if (target_count != -1U) {
                 if (lbLang_IsSavedLanguageJP() != 0) {
-                    HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%d 個",
+                    HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%d \x8c\xc2",
                                         target_count);
                 } else {
                     HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%d",
@@ -389,36 +389,44 @@ void mnCharSel_8025C020(int arg0)
     case STADIUM_3_MIN_MELEE:
         if (arg0 == 0) {
             if (lbLang_IsSavedLanguageJP()) {
-                HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%d 人抜き",
+                HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0,
+                                    "%d \x90\x6c\x94\xb2\x82\xab",
                                     gm_Get3MinMultimanHighscore(hud_index));
             } else {
-                HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%d ＫＯｓ",
+                HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0,
+                                    "%d \x82\x6a\x82\x6e\x82\x93",
                                     gm_Get3MinMultimanHighscore(hud_index));
             }
         }
         if (lbLang_IsSavedLanguageJP()) {
-            HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, "%d 人抜き",
+            HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0,
+                                "%d \x90\x6c\x94\xb2\x82\xab",
                                 gm_Get3MinMultimanTotalHighscore());
         } else {
-            HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, "%d ＫＯｓ",
+            HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0,
+                                "%d \x82\x6a\x82\x6e\x82\x93",
                                 gm_Get3MinMultimanTotalHighscore());
         }
         break;
     case STADIUM_15_MIN_MELEE:
         if (!arg0) {
             if (lbLang_IsSavedLanguageJP()) {
-                HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%d 人抜き",
+                HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0,
+                                    "%d \x90\x6c\x94\xb2\x82\xab",
                                     gm_Get15MinMultimanHighscore(hud_index));
             } else {
-                HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%d ＫＯｓ",
+                HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0,
+                                    "%d \x82\x6a\x82\x6e\x82\x93",
                                     gm_Get15MinMultimanHighscore(hud_index));
             }
         }
         if (lbLang_IsSavedLanguageJP()) {
-            HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, "%d 人抜き",
+            HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0,
+                                "%d \x90\x6c\x94\xb2\x82\xab",
                                 gm_Get15MinMultimanTotalHighscore());
         } else {
-            HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, "%d ＫＯｓ",
+            HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0,
+                                "%d \x82\x6a\x82\x6e\x82\x93",
                                 gm_Get15MinMultimanTotalHighscore());
         }
         break;
@@ -4923,7 +4931,7 @@ s32 mnCharSel_802640A0(void)
 #undef MODELS
 #undef ANIM
 
-static u8 data_pad[0x10] = { 0 };
+static u8 data_pad[0x18] = { 0 };
 
 void mnCharSel_8026688C_OnEnter(void* arg0)
 {
