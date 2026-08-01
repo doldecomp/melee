@@ -345,6 +345,7 @@ float lb_800103B8(Vec3* a, Vec3* b)
     return lb_800101C8(a, b);
 }
 
+#pragma push
 #pragma dont_inline on
 bool lb_800103D8(Vec3* vec, float x0, float x1, float x2, float x3,
                  float offset)
@@ -365,7 +366,7 @@ bool lb_800103D8(Vec3* vec, float x0, float x1, float x2, float x3,
     }
     return false;
 }
-#pragma dont_inline reset
+#pragma pop
 
 static inline bool approximatelyZeroVec3(Vec3 vec)
 {
