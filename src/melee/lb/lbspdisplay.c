@@ -401,13 +401,6 @@ static inline float groundHeight(struct DynamicsData* data, Vec3* floor_point)
     return height;
 }
 
-struct DynamicsUpdateState {
-    DynamicsDesc* desc;
-    void* colliders;
-    int num_colliders;
-    bool use_floor;
-};
-
 struct DynamicsLoopState {
     s32 index;
 };
@@ -421,8 +414,9 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
     Vec3 natural_dir, current_dir, link_dir;
     Vec3 adj_dir, saved_dir, rotation_axis;
     Mtx bone_mtx, constrained_mtx, trans_mtx, scale_mtx;
+    u8 _padA[4];
     Vec3 local_axis;
-    struct DynamicsUpdateState state;
+    Vec3 euler_angles;
     Quaternion angle_quat, euler_quat, result_quat;
     Vec3 stiffness_axis;
     Vec3 grav_dir, gravity_axis;
@@ -432,7 +426,7 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
     Vec3 next_bone_pos, coll_dir;
     Vec3 collision_point;
     Vec3 avoidance_axis;
-    u8 _padB[32];
+    u8 _padB[44];
     s32 sp8;
 
     struct DynamicsData* cur;
@@ -444,16 +438,11 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
     if ((u8) lb_804D63B8 != 0) {
         return;
     }
-    state.desc = desc;
-    state.colliders = colliders_raw;
-    state.num_colliders = num_colliders;
-    state.use_floor = use_floor_fn;
-
-    if (state.desc == NULL) {
+    if (desc == NULL) {
         return;
     }
 
-    cur = state.desc->data;
+    cur = desc->data;
     if (cur == NULL) {
         return;
     }
@@ -539,7 +528,7 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
             saved_dir = link_dir;
 
             /* Apply stiffness blend toward natural direction */
-            if (cur->desc.lb_unk0.unk_4C * state.desc->pos.x < 1.0) {
+            if (cur->desc.lb_unk0.unk_4C * desc->pos.x < 1.0) {
                 f32 stiff_angle = ABS(lbVector_Angle(&link_dir, &current_dir));
                 if (stiff_angle != 0.0f) {
                     PSVECCrossProduct(&link_dir, &current_dir,
@@ -549,7 +538,7 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                         &link_dir, &stiffness_axis,
                         stiff_angle *
                             (f32) (1.0 - (f64) (cur->desc.lb_unk0.unk_4C *
-                                                state.desc->pos.x)));
+                                                desc->pos.x)));
                 }
             }
 
@@ -649,12 +638,12 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
             }
 
             /* Collider avoidance */
-            if (state.num_colliders != 0) {
+            if (num_colliders != 0) {
                 lbVector_Normalize(&link_dir);
-                collider = (struct lb_Collider*) state.colliders;
+                collider = colliders_raw;
                 {
                     s32 ci;
-                    for (ci = 0; ci < state.num_colliders; ci++) {
+                    for (ci = 0; ci < num_colliders; ci++) {
                         next_bone_pos.x =
                             link_dir.x * cur->desc.lb_unk0.unk_48 +
                             cur->desc.lb_unk0.unk_2C.x;
@@ -731,7 +720,7 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                         f32 end_y = link_dir.y * cur->desc.lb_unk0.unk_48 +
                                     cur->desc.lb_unk0.unk_2C.y;
                         s32 floor_hit;
-                        if (state.use_floor != 0) {
+                        if (use_floor_fn != 0) {
                             floor_hit = lb_800103D8(
                                 &floor_point, end_x, (f32) (1.0 + (f64) end_y),
                                 end_x, (f32) ((f64) end_y - 1.0), pos_y);
@@ -765,7 +754,7 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                     lbVector_Normalize(&link_dir);
                     {
                         s32 floor_hit2;
-                        if (state.use_floor != 0) {
+                        if (use_floor_fn != 0) {
                             floor_hit2 = lb_800103D8(
                                 &floor_point2, cur->desc.lb_unk0.unk_2C.x,
                                 (f32) (1.0 + (f64) cur->desc.lb_unk0.unk_2C.y),
@@ -797,7 +786,7 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                                 link_dir.y * cur->desc.lb_unk0.unk_48 +
                                 cur->desc.lb_unk0.unk_2C.y;
                             s32 floor_hit3;
-                            if (state.use_floor != 0) {
+                            if (use_floor_fn != 0) {
                                 floor_hit3 = lb_800103D8(
                                     &floor_point2, cur->desc.lb_unk0.unk_2C.x,
                                     cur->desc.lb_unk0.unk_2C.y, end_x2, end_y2,
@@ -893,16 +882,16 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
             PSMTXTranspose(parent_mtx, bone_mtx);
             PSMTXMultVec(bone_mtx, &rotation_axis, &local_axis);
             if (!approximatelyZeroVec3(local_axis)) {
-                Quaternion euler_angles;
+                Quaternion rotation;
                 HSD_QuatLib_8037ECE0(&local_axis, &angle_quat, angle_diff);
                 euler_angles.x = jobj->rotate.x;
                 euler_angles.y = jobj->rotate.y;
                 euler_angles.z = jobj->rotate.z;
-                EulerToQuat((Vec3*) &euler_angles, &euler_quat);
+                EulerToQuat(&euler_angles, &euler_quat);
                 HSD_QuatLib_8037EC4C(&angle_quat, &euler_quat, &result_quat);
                 PSMTXQuat(bone_mtx, &result_quat);
-                HSD_QuatLib_8037EB28(bone_mtx, (Vec3*) &euler_angles);
-                HSD_JObjSetRotation(jobj, &euler_angles);
+                HSD_QuatLib_8037EB28(bone_mtx, (Vec3*) &rotation);
+                HSD_JObjSetRotation(jobj, &rotation);
                 HSD_JObjClearFlagsAll(jobj, 0x20000U);
             }
         }
