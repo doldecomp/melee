@@ -4,7 +4,10 @@
 
 #include <sysdolphin/baselib/spline.h>
 
-/// @todo Emitted only to lay out the .sdata2 literal pool in retail order.
+/**
+ * @todo Emitted only to lay out the .sdata2 literal pool in retail order,
+ * which follows per-type tangent helpers defined above #lbShadow_8000E9F0.
+ */
 static void sdata2_order(void)
 {
     (void) -3.0f;
