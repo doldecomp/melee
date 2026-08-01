@@ -531,7 +531,8 @@ void fn_8018B090(HSD_GObj* arg0)
                 (f32) (lbl_80473AB8[idx].xC + (lbl_80473AB8[idx].x14 / 2));
             lbl_803D9DAC.target.y = -(f32) (lbl_80473AB8[idx].x10 + (h / 2));
             lbl_803D9DAC.target.z = -150.0f;
-            d = 0.033333f * (lbl_803D9DAC.target.x - lbl_803D9DAC.current.x);
+            d = lbl_803D9DAC.target.x - lbl_803D9DAC.current.x;
+            d = 0.033333f * d;
             if (d < 0.0f) {
                 d = -d;
             }
