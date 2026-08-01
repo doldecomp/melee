@@ -2246,7 +2246,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                             mnCharSel_804D6CF0;
                                                     }
                                                 } else {
-                                                    player_idx = (s8) grabbed;
+                                                    player_idx = grabbed;
                                                 }
                                                 mnCharSel_804D6CB0->data.data
                                                     .players[player_idx]
@@ -2370,12 +2370,12 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                 .cpu_level =
                                 (s32) ((0.8f * sp88.x) + 0.5f) + 1;
                             {
-                                u8 lvl = mnCharSel_804D6CB0->data.data
-                                             .players[slider_door]
-                                             .cpu_level;
+                                f32 anim_frame = mnCharSel_804D6CB0->data.data
+                                                     .players[slider_door]
+                                                     .cpu_level;
                                 HSD_ForeachAnim(sp98, JOBJ_TYPE, TOBJ_MASK,
                                                 HSD_AObjReqAnim, AOBJ_ARG_AF,
-                                                (f32) lvl);
+                                                anim_frame);
                                 HSD_JObjAnimAll(sp98);
                                 HSD_ForeachAnim(sp98, JOBJ_TYPE, TOBJ_MASK,
                                                 HSD_AObjStopAnim, AOBJ_ARG_AOV,
@@ -2415,12 +2415,13 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                             mnCharSel_804D6CB0->data.data.players[hc_door]
                                 .handicap = (s32) ((0.8f * sp88.x) + 0.5f) + 1;
                             {
-                                u8 hval = (u8) mnCharSel_804D6CB0->data.data
-                                              .players[hc_door]
-                                              .handicap;
+                                f32 anim_frame =
+                                    (u8) mnCharSel_804D6CB0->data.data
+                                        .players[hc_door]
+                                        .handicap;
                                 HSD_ForeachAnim(sp98, JOBJ_TYPE, TOBJ_MASK,
                                                 HSD_AObjReqAnim, AOBJ_ARG_AF,
-                                                (f32) hval);
+                                                anim_frame);
                                 HSD_JObjAnimAll(sp98);
                                 HSD_ForeachAnim(sp98, JOBJ_TYPE, TOBJ_MASK,
                                                 HSD_AObjStopAnim, AOBJ_ARG_AOV,
@@ -2754,8 +2755,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                 cx4 < dp->togglebtn_right)
                                             {
                                                 f32 cy4 = cursor->x10;
-                                                if (cy4 < 0.2f && cy4 > -4.6f)
-                                                {
+                                                if (cy4 < 0.2 && cy4 > -4.6) {
                                                     cursor->x10 = -2.2f;
                                                     {
                                                         u8 new_kind =
