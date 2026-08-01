@@ -691,7 +691,9 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                                     {
                                         f32 avoidance_angle =
                                             atan2f(adj_radius, side_sq);
-                                        avoidance_angle = ABS(avoidance_angle);
+                                        if (avoidance_angle < 0.0f) {
+                                            avoidance_angle = -avoidance_angle;
+                                        }
                                         avoidance_angle -= coll_angle;
                                         if (avoidance_angle > 0.0) {
                                             PSVECCrossProduct(&coll_dir,
