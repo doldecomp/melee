@@ -3857,7 +3857,7 @@ void fn_802633B0(HSD_GObj* gobj)
         break;
     }
     }
-    PAD_STACK(72);
+    PAD_STACK(64);
 }
 void mnCharSel_80264070(void)
 {
