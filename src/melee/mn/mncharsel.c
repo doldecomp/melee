@@ -1940,6 +1940,69 @@ static inline void updateCursorDisplay(HSD_JObj* jobj,
     HSD_JObjAnimAll(jobj);
 }
 
+static inline void updateGrabbedSlider(struct CSSCursorData* cursor,
+                                       CSSDoor* door, s32 door_idx,
+                                       u32 trigger, HSD_JObj** slider_jobj,
+                                       Point3d* pos, bool is_handicap)
+{
+    f32 base_x;
+    f32 anim_frame;
+
+    if (is_handicap) {
+        lb_80011E24(mnCharSel_804D6CC0, slider_jobj, door->cpuslider_joint,
+                    -1);
+    } else {
+        GameRules* rules = gmMainLib_GetGameRules();
+        if ((u8) rules->handicap != 0) {
+            lb_80011E24(mnCharSel_804D6CC0, slider_jobj,
+                        door->cpuslider2_joint, -1);
+        } else {
+            lb_80011E24(mnCharSel_804D6CC0, slider_jobj, door->cpuslider_joint,
+                        -1);
+        }
+    }
+    lb_8000B1CC(*slider_jobj, NULL, pos);
+
+    base_x = HSD_JObjGetTranslationX(*slider_jobj) - pos->x;
+    pos->x = (cursor->xC - -2.9f) + base_x;
+    if (pos->x < 0.0f) {
+        pos->x = 0.0f;
+    }
+    if (pos->x > 10.0f) {
+        pos->x = 10.0f;
+    }
+
+    if (is_handicap) {
+        mnCharSel_804D6CB0->data.data.players[door_idx].handicap =
+            (s32) ((0.8f * pos->x) + 0.5f) + 1;
+        anim_frame =
+            (u8) mnCharSel_804D6CB0->data.data.players[door_idx].handicap;
+    } else {
+        mnCharSel_804D6CB0->data.data.players[door_idx].cpu_level =
+            (s32) ((0.8f * pos->x) + 0.5f) + 1;
+        anim_frame = mnCharSel_804D6CB0->data.data.players[door_idx].cpu_level;
+    }
+
+    HSD_ForeachAnim(*slider_jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
+                    AOBJ_ARG_AF, anim_frame);
+    HSD_JObjAnimAll(*slider_jobj);
+    HSD_ForeachAnim(*slider_jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
+                    AOBJ_ARG_AOV, 0, 0);
+    HSD_JObjSetTranslateX(*slider_jobj, pos->x);
+    cursor->xC = (f32) (-2.9f + (pos->x - base_x));
+    cursor->x10 = (f32) (1.7f + pos->y);
+
+    if (trigger & HSD_PAD_A) {
+        cursor->x5 = 2;
+        if (is_handicap) {
+            door->is_hold_handicap_slider = 0;
+        } else {
+            door->is_hold_cpu_slider = 0;
+        }
+        lbAudioAx_800237A8(0xB7, 0x7F, 0x40);
+    }
+}
+
 void mnCharSel_CursorThink(HSD_GObj* gobj)
 {
     HSD_JObj* sp98;
@@ -2334,100 +2397,18 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                     case 6:
                     case 7: {
                         s32 slider_door = grabbed - 4;
-                        GameRules* rules = gmMainLib_GetGameRules();
-                        if ((u8) rules->handicap != 0) {
-                            lb_80011E24(mnCharSel_804D6CC0, &sp98,
-                                        all_data->doors_data.doors[slider_door]
-                                            .cpuslider2_joint,
-                                        -1);
-                        } else {
-                            lb_80011E24(mnCharSel_804D6CC0, &sp98,
-                                        all_data->doors_data.doors[slider_door]
-                                            .cpuslider_joint,
-                                        -1);
-                        }
-                        lb_8000B1CC(sp98, NULL, &sp88);
-                        {
-                            f32 jx = HSD_JObjGetTranslationX(sp98);
-                            f32 base_x = jx - sp88.x;
-                            sp88.x = (cursor->xC - -2.9f) + base_x;
-                            if (sp88.x < 0.0f) {
-                                sp88.x = 0.0f;
-                            }
-                            if (sp88.x > 10.0f) {
-                                sp88.x = 10.0f;
-                            }
-                            mnCharSel_804D6CB0->data.data.players[slider_door]
-                                .cpu_level =
-                                (s32) ((0.8f * sp88.x) + 0.5f) + 1;
-                            {
-                                f32 anim_frame = mnCharSel_804D6CB0->data.data
-                                                     .players[slider_door]
-                                                     .cpu_level;
-                                HSD_ForeachAnim(sp98, JOBJ_TYPE, TOBJ_MASK,
-                                                HSD_AObjReqAnim, AOBJ_ARG_AF,
-                                                anim_frame);
-                                HSD_JObjAnimAll(sp98);
-                                HSD_ForeachAnim(sp98, JOBJ_TYPE, TOBJ_MASK,
-                                                HSD_AObjStopAnim, AOBJ_ARG_AOV,
-                                                0, 0);
-                            }
-                            HSD_JObjSetTranslateX(sp98, sp88.x);
-                            cursor->xC = (f32) (-2.9f + (sp88.x - base_x));
-                            cursor->x10 = (f32) (1.7f + sp88.y);
-                            if (trigger & HSD_PAD_A) {
-                                cursor->x5 = 2;
-                                all_data->doors_data.doors[slider_door]
-                                    .is_hold_cpu_slider = 0;
-                                lbAudioAx_800237A8(0xB7, 0x7F, 0x40);
-                            }
-                        }
+                        updateGrabbedSlider(
+                            cursor, &all_data->doors_data.doors[slider_door],
+                            slider_door, trigger, &sp98, &sp88, false);
                     } break;
                     case 8:
                     case 9:
                     case 0xA:
                     case 0xB: {
                         s32 hc_door = grabbed - 8;
-                        lb_80011E24(mnCharSel_804D6CC0, &sp98,
-                                    all_data->doors_data.doors[hc_door]
-                                        .cpuslider_joint,
-                                    -1);
-                        lb_8000B1CC(sp98, NULL, (Point3d*) &sp88);
-                        {
-                            f32 jx = HSD_JObjGetTranslationX(sp98);
-                            f32 base_x = jx - sp88.x;
-                            sp88.x = (cursor->xC - -2.9f) + base_x;
-                            if (sp88.x < 0.0f) {
-                                sp88.x = 0.0f;
-                            }
-                            if (sp88.x > 10.0f) {
-                                sp88.x = 10.0f;
-                            }
-                            mnCharSel_804D6CB0->data.data.players[hc_door]
-                                .handicap = (s32) ((0.8f * sp88.x) + 0.5f) + 1;
-                            {
-                                f32 anim_frame =
-                                    (u8) mnCharSel_804D6CB0->data.data
-                                        .players[hc_door]
-                                        .handicap;
-                                HSD_ForeachAnim(sp98, JOBJ_TYPE, TOBJ_MASK,
-                                                HSD_AObjReqAnim, AOBJ_ARG_AF,
-                                                anim_frame);
-                                HSD_JObjAnimAll(sp98);
-                                HSD_ForeachAnim(sp98, JOBJ_TYPE, TOBJ_MASK,
-                                                HSD_AObjStopAnim, AOBJ_ARG_AOV,
-                                                0, 0);
-                            }
-                            HSD_JObjSetTranslateX(sp98, sp88.x);
-                            cursor->xC = (f32) (-2.9f + (sp88.x - base_x));
-                            cursor->x10 = (f32) (1.7f + sp88.y);
-                            if (trigger & HSD_PAD_A) {
-                                cursor->x5 = 2;
-                                all_data->doors_data.doors[hc_door]
-                                    .is_hold_handicap_slider = 0;
-                                lbAudioAx_800237A8(0xB7, 0x7F, 0x40);
-                            }
-                        }
+                        updateGrabbedSlider(
+                            cursor, &all_data->doors_data.doors[hc_door],
+                            hc_door, trigger, &sp98, &sp88, true);
                     } break;
                     }
                     goto block_392;
