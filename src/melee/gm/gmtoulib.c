@@ -112,6 +112,7 @@ void fn_8018A514(int count, float val)
     BracketSrcPtr* srcs;
     int i;
     s32 n;
+    struct lbl_803D9D20_t* table = &lbl_803D9D20;
 
     if (count < 9) {
         region = 0;
@@ -126,19 +127,19 @@ void fn_8018A514(int count, float val)
 
     if (count < 9) {
         for (i = 0; i < count; i++) {
-            src += lbl_803D9D20.x0[i + 0x20];
+            src += ((u8*) table)[i + 0x20];
         }
     } else if (count < 14) {
         for (i = 9; i < count; i++) {
-            src += lbl_803D9D20.x0[i + 0x20];
+            src += ((u8*) table)[i + 0x20];
         }
     } else {
         for (i = 14; i < count; i++) {
-            src += lbl_803D9D20.x0[i + 0x20];
+            src += ((u8*) table)[i + 0x20];
         }
     }
 
-    n = lbl_803D9D20.x0[count + 0x20];
+    n = ((u8*) table)[i + 0x20];
 
     entries = lbl_80473AB8;
     for (i = 0; i < n; i++) {
