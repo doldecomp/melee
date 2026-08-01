@@ -2359,15 +2359,16 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                         {
                             f32 jx = HSD_JObjGetTranslationX(sp98);
                             f32 base_x = jx - sp88.x;
-                            f32 val = (cursor->xC - -2.9f) + base_x;
-                            if (val < 0.0f) {
-                                val = 0.0f;
+                            sp88.x = (cursor->xC - -2.9f) + base_x;
+                            if (sp88.x < 0.0f) {
+                                sp88.x = 0.0f;
                             }
-                            if (val > 10.0f) {
-                                val = 10.0f;
+                            if (sp88.x > 10.0f) {
+                                sp88.x = 10.0f;
                             }
                             mnCharSel_804D6CB0->data.data.players[slider_door]
-                                .cpu_level = (s32) ((0.8f * val) + 0.5f) + 1;
+                                .cpu_level =
+                                (s32) ((0.8f * sp88.x) + 0.5f) + 1;
                             {
                                 u8 lvl = mnCharSel_804D6CB0->data.data
                                              .players[slider_door]
@@ -2380,8 +2381,8 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                 HSD_AObjStopAnim, AOBJ_ARG_AOV,
                                                 0, 0);
                             }
-                            HSD_JObjSetTranslateX(sp98, val);
-                            cursor->xC = (f32) (-2.9f + (val - base_x));
+                            HSD_JObjSetTranslateX(sp98, sp88.x);
+                            cursor->xC = (f32) (-2.9f + (sp88.x - base_x));
                             cursor->x10 = (f32) (1.7f + sp88.y);
                             if (trigger & HSD_PAD_A) {
                                 cursor->x5 = 2;
@@ -2404,15 +2405,15 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                         {
                             f32 jx = HSD_JObjGetTranslationX(sp98);
                             f32 base_x = jx - sp88.x;
-                            f32 val = (cursor->xC - -2.9f) + base_x;
-                            if (val < 0.0f) {
-                                val = 0.0f;
+                            sp88.x = (cursor->xC - -2.9f) + base_x;
+                            if (sp88.x < 0.0f) {
+                                sp88.x = 0.0f;
                             }
-                            if (val > 10.0f) {
-                                val = 10.0f;
+                            if (sp88.x > 10.0f) {
+                                sp88.x = 10.0f;
                             }
                             mnCharSel_804D6CB0->data.data.players[hc_door]
-                                .handicap = (s32) ((0.8f * val) + 0.5f) + 1;
+                                .handicap = (s32) ((0.8f * sp88.x) + 0.5f) + 1;
                             {
                                 u8 hval = (u8) mnCharSel_804D6CB0->data.data
                                               .players[hc_door]
@@ -2425,8 +2426,8 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                 HSD_AObjStopAnim, AOBJ_ARG_AOV,
                                                 0, 0);
                             }
-                            HSD_JObjSetTranslateX(sp98, val);
-                            cursor->xC = (f32) (-2.9f + (val - base_x));
+                            HSD_JObjSetTranslateX(sp98, sp88.x);
+                            cursor->xC = (f32) (-2.9f + (sp88.x - base_x));
                             cursor->x10 = (f32) (1.7f + sp88.y);
                             if (trigger & HSD_PAD_A) {
                                 cursor->x5 = 2;
@@ -2816,8 +2817,8 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                     cx5 < dp->teambtn_right)
                                                 {
                                                     f32 cy5 = cursor->x10;
-                                                    if (cy5 < -1.0f &&
-                                                        cy5 > -5.8f)
+                                                    if (cy5 < -1.0 &&
+                                                        cy5 > -5.8)
                                                     {
                                                         cursor->x10 = -3.4f;
                                                         dp->team =
