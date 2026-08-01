@@ -5153,7 +5153,7 @@ s32 mnCharSel_802640A0(void)
     }
 
     mnCharSel_8025EE8C(mnCharSel_804D6CB0->match_type);
-    PAD_STACK(0xC4);
+    PAD_STACK(0x64);
     return lbAudioAx_80023F28(gmMainLib_8015ECB0());
 }
 
