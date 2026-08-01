@@ -57,6 +57,10 @@ typedef struct CSSAllData {
 
 #define CSS_ALL ((CSSAllData*) &mnCharSel_803F0A48)
 
+extern const f32 mnCharSel_804DC3E4;
+extern const f64 mnCharSel_804DC420;
+extern const f64 mnCharSel_804DC470;
+
 TextKerning* mnCharSel_8025BC20(TextKerning* arg0, u32 arg1)
 {
     TextKerning* kerning;
@@ -1612,7 +1616,7 @@ void fn_8025FAC0(HSD_GObj* gobj)
         } else {
             child = jobj->child;
         }
-        HSD_JObjReqAnimAll(child, 0.0F);
+        HSD_JObjReqAnimAll(child, mnCharSel_804DC3E4);
     }
     HSD_JObjAnimAll(jobj);
 }
@@ -3346,10 +3350,12 @@ void fn_80262F44(HSD_GObj* gobj)
 
             if (mnCharSel_804D6CF7 == 0) {
                 HSD_ForeachAnim(jobj, JOBJ_TYPE, ALL_TYPE_MASK,
-                                HSD_AObjReqAnim, AOBJ_ARG_AF, 0.0);
+                                HSD_AObjReqAnim, AOBJ_ARG_AF,
+                                mnCharSel_804DC420);
             } else if (mnCharSel_804D6CF7 > 100) {
                 HSD_ForeachAnim(jobj, JOBJ_TYPE, ALL_TYPE_MASK,
-                                HSD_AObjReqAnim, AOBJ_ARG_AF, 10.0);
+                                HSD_AObjReqAnim, AOBJ_ARG_AF,
+                                mnCharSel_804DC470);
                 mnCharSel_804D6CF7 = 10;
             }
             mnCharSel_804D6CF7++;
@@ -3412,7 +3418,7 @@ void fn_80263354(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     if (mnCharSel_804D6CEC % 200 == 0) {
-        HSD_JObjReqAnimAll(jobj, 0.0F);
+        HSD_JObjReqAnimAll(jobj, mnCharSel_804DC3E4);
     }
     HSD_JObjAnimAll(jobj);
 }
@@ -5140,3 +5146,7 @@ void mnCharSel_80266D70_OnLeave(void* unused)
     lbAudioAx_8002702C(4, tmp);
     lbAudioAx_80027168();
 }
+
+const f32 mnCharSel_804DC3E4 = 0.0F;
+const f64 mnCharSel_804DC420 = 0.0;
+const f64 mnCharSel_804DC470 = 10.0;
