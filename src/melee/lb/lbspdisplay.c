@@ -66,9 +66,14 @@ const struct {
     0.0f,
 };
 
-char lb_803BA150[] = "active deffect:\0[NULL]\n\n\0\0\0\0"
-                     "free deffect:\0\0\0[NULL]\n\n\n\0\0\0"
-                     "translate\0\0";
+static void order_data(void)
+{
+    (void) "active deffect:";
+    (void) "[NULL]\n\n";
+    (void) "free deffect:";
+    (void) "[NULL]\n\n\n";
+    (void) "translate";
+}
 
 static inline bool checkJObjFlags(HSD_JObj* jobj)
 {
@@ -395,7 +400,7 @@ static inline float groundHeight(struct DynamicsData* data, Vec3* floor_point)
     return absf(data->desc.lb_unk0.unk_2C.y - floor_point->y);
 }
 
-/// @todo Only the two global-base registers and one @c li position differ.
+/// @todo Only the placement of one @c li differs.
 void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                  float pos_y, bool use_floor_fn, Fighter_Part part,
                  int first_active, bool ground_check)
