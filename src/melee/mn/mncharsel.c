@@ -4539,10 +4539,16 @@ s32 mnCharSel_802640A0(void)
                             HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
             sp108 = tag_name_jobj;
             lb_8000B1CC(sp108, NULL, &spEC);
-            text = td->text;
-            text->pos_x = 0.5f + spEC.x;
-            text->pos_y = -0.4f - spEC.y;
-            text->pos_z = spEC.z;
+            {
+                f32 sx, sy, sz;
+                sx = 0.5f + spEC.x;
+                sy = -0.4f - spEC.y;
+                sz = spEC.z;
+                text = td->text;
+                text->pos_x = sx;
+                text->pos_y = sy;
+                text->pos_z = sz;
+            }
             text->box_size_x = 160.0f;
             text->box_size_y = 32.0f;
             HSD_SisLib_803A6B98(td->text, 80.0f, 0.0f,
@@ -4563,10 +4569,16 @@ s32 mnCharSel_802640A0(void)
         text = td->name_ls;
         text->box_size_x = 154.0f;
         text->box_size_y = 256.0f;
-        text = td->name_ls;
-        text->pos_x = spEC.x - 0.6f;
-        text->pos_y = (0.8f - spEC.y) - 1.0f;
-        text->pos_z = spEC.z;
+        {
+            f32 sx, sy, sz;
+            sy = (0.8f - spEC.y) - 1.0f;
+            sx = spEC.x - 0.6f;
+            sz = spEC.z;
+            text = td->name_ls;
+            text->pos_x = sx;
+            text->pos_y = sy;
+            text->pos_z = sz;
+        }
         text = td->name_ls;
         text->font_size.x = 0.065f;
         text->font_size.y = 0.065f;
