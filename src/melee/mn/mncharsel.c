@@ -2201,18 +2201,21 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         }
                                     }
                                     if (icon_count == 0x19) {
+                                        CSSDoor* door;
+
                                         mnCharSel_8025FB50(grabbed, 0);
-                                        {
-                                            CSSDoor* door =
-                                                &all_data->doors_data
-                                                     .doors[grabbed];
-                                            do {
-                                                door->costume = HSD_Randi(
-                                                    (s32) gm_80169238(
-                                                        icons[door->sel_icon]
-                                                            .char_kind));
-                                            } while (isDuplicateCostume(
-                                                grabbed, NULL, 0, false));
+                                        door = &all_data->doors_data
+                                                    .doors[grabbed];
+                                        for (;;) {
+                                            door->costume =
+                                                HSD_Randi((s32) gm_80169238(
+                                                    icons[door->sel_icon]
+                                                        .char_kind));
+                                            if (!isDuplicateCostume(
+                                                    grabbed, NULL, 0, false))
+                                            {
+                                                break;
+                                            }
                                         }
                                         mnCharSel_8025DB34(grabbed);
                                         cursor->x5 = 2;
