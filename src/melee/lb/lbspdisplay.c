@@ -401,6 +401,11 @@ static inline float groundHeight(struct DynamicsData* data, Vec3* floor_point)
     return height;
 }
 
+static inline float groundDistanceSquared(float length, float height)
+{
+    return -(height * height - length * length);
+}
+
 struct DynamicsLoopState {
     s32 index;
 };
@@ -426,7 +431,7 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
     Vec3 next_bone_pos, coll_dir;
     Vec3 collision_point;
     Vec3 avoidance_axis;
-    u8 _padB[44];
+    u8 _padB[40];
     s32 sp8;
 
     struct DynamicsData* cur;
@@ -805,9 +810,9 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                                     groundHeight(cur, &floor_point2);
                                 {
                                     f32 horiz_dist =
-                                        sqrtf(-(height_diff * height_diff -
-                                                cur->desc.lb_unk0.unk_48 *
-                                                    cur->desc.lb_unk0.unk_48));
+                                        sqrtf(groundDistanceSquared(
+                                            cur->desc.lb_unk0.unk_48,
+                                            height_diff));
                                     f32 ground_angle =
                                         ABS(atan2f(horiz_dist, height_diff));
                                     PSVECCrossProduct(&gnd_norm2, &link_dir,
