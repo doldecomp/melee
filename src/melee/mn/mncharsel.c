@@ -2003,6 +2003,21 @@ static inline void updateGrabbedSlider(struct CSSCursorData* cursor,
     }
 }
 
+static inline void updateStockIcons(struct CSSDoorsData2* stock_data,
+                                    HSD_JObj** stock_jobj, s32 i)
+{
+    lb_80011E24(mnCharSel_804D6CC0, stock_jobj, stock_data->xf0[0], -1);
+    HSD_JObjSetTranslateX(*stock_jobj, 7.5f);
+    for (i = 1; i < 5; i++) {
+        lb_80011E24(mnCharSel_804D6CC0, stock_jobj, stock_data->xf0[i], -1);
+        if (stock_data->stocks <= i) {
+            HSD_JObjSetFlags(*stock_jobj, JOBJ_HIDDEN);
+        } else {
+            HSD_JObjClearFlags(*stock_jobj, JOBJ_HIDDEN);
+        }
+    }
+}
+
 void mnCharSel_CursorThink(HSD_GObj* gobj)
 {
     HSD_JObj* sp98;
@@ -2437,24 +2452,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                     (u8) data2.stocks > 1U)
                                 {
                                     data2.stocks = (u8) (data2.stocks - 1);
-                                    lb_80011E24(mnCharSel_804D6CC0, &sp54,
-                                                data2.xf0[0], -1);
-                                    HSD_JObjSetTranslateX(sp54, 7.5f);
-                                    {
-                                        s32 si;
-                                        for (si = 1; si < 5; si++) {
-                                            lb_80011E24(mnCharSel_804D6CC0,
-                                                        &sp54, data2.xf0[si],
-                                                        -1);
-                                            if ((s32) data2.stocks <= si) {
-                                                HSD_JObjSetFlags(sp54,
-                                                                 JOBJ_HIDDEN);
-                                            } else {
-                                                HSD_JObjClearFlags(
-                                                    sp54, JOBJ_HIDDEN);
-                                            }
-                                        }
-                                    }
+                                    updateStockIcons(&data2, &sp54, 1);
                                     mnCharSel_804D6CB0->data.data
                                         .players[(s8) (u8) mnCharSel_804D6CF0]
                                         .stocks = (s8) data2.stocks;
@@ -2468,24 +2466,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                     (u8) data2.stocks < 5U)
                                 {
                                     data2.stocks = (u8) (data2.stocks + 1);
-                                    lb_80011E24(mnCharSel_804D6CC0, &sp50,
-                                                data2.xf0[0], -1);
-                                    HSD_JObjSetTranslateX(sp50, 7.5f);
-                                    {
-                                        s32 si;
-                                        for (si = 1; si < 5; si++) {
-                                            lb_80011E24(mnCharSel_804D6CC0,
-                                                        &sp50, data2.xf0[si],
-                                                        -1);
-                                            if ((s32) data2.stocks <= si) {
-                                                HSD_JObjSetFlags(sp50,
-                                                                 JOBJ_HIDDEN);
-                                            } else {
-                                                HSD_JObjClearFlags(
-                                                    sp50, JOBJ_HIDDEN);
-                                            }
-                                        }
-                                    }
+                                    updateStockIcons(&data2, &sp50, 1);
                                     mnCharSel_804D6CB0->data.data
                                         .players[(s8) (u8) mnCharSel_804D6CF0]
                                         .stocks = (s8) data2.stocks;
@@ -4498,18 +4479,7 @@ s32 mnCharSel_802640A0(void)
                 CSS_ALL->data2.stocks =
                     mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
                         .stocks;
-                lb_80011E24(mnCharSel_804D6CC0, &sp70, CSS_ALL->data2.xf0[0],
-                            -1);
-                HSD_JObjSetTranslateX(sp70, 7.5f);
-                for (i = 1; i < 5; i++) {
-                    lb_80011E24(mnCharSel_804D6CC0, &sp70,
-                                CSS_ALL->data2.xf0[i], -1);
-                    if ((s32) CSS_ALL->data2.stocks <= i) {
-                        HSD_JObjSetFlags(sp70, JOBJ_HIDDEN);
-                    } else {
-                        HSD_JObjClearFlags(sp70, JOBJ_HIDDEN);
-                    }
-                }
+                updateStockIcons(&CSS_ALL->data2, &sp70, 1);
                 mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
                     .stocks = CSS_ALL->data2.stocks;
             }
