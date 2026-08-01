@@ -2084,349 +2084,315 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
             if ((u8) tag->state == 0) {
                 if ((u8) cursor->x5 == 1) {
                     int grabbed = cursor->x6;
-                    if ((s32) grabbed < 8) {
-                        if ((s32) grabbed < 4) {
-                            if ((s32) grabbed >= 0) {
-                                if (cursor->x10 < 0.2f) {
-                                    if ((s32) port != (s32) grabbed ||
-                                        ((s32) port == (s32) grabbed &&
-                                         (u8) all_data->doors_data
-                                                 .doors[grabbed]
-                                                 .p_kind == 3))
-                                    {
-                                        mnCharSel_8025FDEC(grabbed);
-                                        lbAudioAx_800237A8(0xB8, 0x7F, 0x40);
+                    switch (grabbed) {
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                        if (cursor->x10 < 0.2f) {
+                            if ((s32) port != (s32) grabbed ||
+                                ((s32) port == (s32) grabbed &&
+                                 (u8) all_data->doors_data.doors[grabbed]
+                                         .p_kind == 3))
+                            {
+                                mnCharSel_8025FDEC(grabbed);
+                                lbAudioAx_800237A8(0xB8, 0x7F, 0x40);
+                            } else {
+                                mnCharSel_804A0BD0[grabbed]->x5 = 0;
+                                all_data->doors_data.doors[grabbed].sel_icon =
+                                    0x19;
+                                {
+                                    s32 player_idx;
+                                    if ((u8) mnCharSel_804D6CF5 == 1) {
+                                        if ((s32) grabbed != 0) {
+                                            player_idx =
+                                                (s8) (u8) mnCharSel_804D6CF1;
+                                        } else {
+                                            player_idx =
+                                                (s8) (u8) mnCharSel_804D6CF0;
+                                        }
                                     } else {
-                                        mnCharSel_804A0BD0[grabbed]->x5 = 0;
-                                        all_data->doors_data.doors[grabbed]
-                                            .sel_icon = 0x19;
-                                        {
-                                            s32 player_idx;
-                                            if ((u8) mnCharSel_804D6CF5 == 1) {
-                                                if ((s32) grabbed != 0) {
-                                                    player_idx = (s8) (u8)
-                                                        mnCharSel_804D6CF1;
-                                                } else {
-                                                    player_idx = (s8) (u8)
-                                                        mnCharSel_804D6CF0;
-                                                }
-                                            } else {
-                                                player_idx = (s8) grabbed;
-                                            }
-                                            mnCharSel_804D6CB0->data.data
-                                                .players[player_idx]
-                                                .c_kind = CHKIND_NONE;
-                                        }
+                                        player_idx = grabbed;
                                     }
-                                    mnCharSel_8025DB34(grabbed);
-                                    cursor->x5 = 2;
-                                } else {
-                                    u32 a_press = trigger & HSD_PAD_A;
-                                    if (a_press != 0) {
-                                        struct CSSCharModel* m =
-                                            mnCharSel_804A0BD0[grabbed];
-                                        f32 my = m->xC;
-                                        if (my < 6.0f && my > -1.0f) {
-                                            f32 mx = m->x8;
-                                            if ((mx > -30.0f && mx < -24.4f) ||
-                                                (mx > 24.4f && mx < 30.2f))
-                                            {
-                                                s32 icon_count;
-                                                for (icon_count = 0;
-                                                     icon_count < 25;
-                                                     icon_count++)
-                                                {
-                                                    if ((u8) icons[icon_count]
-                                                            .state < 2)
-                                                    {
-                                                        break;
-                                                    }
-                                                }
-                                                if (icon_count == 0x19) {
-                                                    mnCharSel_8025FB50(grabbed,
-                                                                       0);
-                                                    {
-                                                        CSSDoor* door =
-                                                            &all_data
-                                                                 ->doors_data
-                                                                 .doors
-                                                                     [grabbed];
-                                                        s32 dup;
-                                                        do {
-                                                            door->costume = HSD_Randi(
-                                                                (s32) gm_80169238(
-                                                                    icons[door->sel_icon]
-                                                                        .char_kind));
-                                                            {
-                                                                s32 nd;
-                                                                s32 j;
-                                                                if ((u8) mnCharSel_804D6CB0
-                                                                        ->match_type ==
-                                                                    TRAINING_MODE)
-                                                                {
-                                                                    nd = 2;
-                                                                } else {
-                                                                    nd =
-                                                                        mnCharSel_804D6CF5;
-                                                                }
-                                                                dup = 0;
-                                                                for (j = 0;
-                                                                     j <
-                                                                     (s32) nd;
-                                                                     j++)
-                                                                {
-                                                                    if ((s32) grabbed !=
-                                                                            j &&
-                                                                        (u8) all_data
-                                                                                ->doors_data
-                                                                                .doors
-                                                                                    [j]
-                                                                                .p_kind !=
-                                                                            3 &&
-                                                                        (u8) all_data
-                                                                                ->doors_data
-                                                                                .doors
-                                                                                    [j]
-                                                                                .sel_icon <
-                                                                            0x19U &&
-                                                                        all_data->doors_data
-                                                                                .doors
-                                                                                    [j]
-                                                                                .sel_icon ==
-                                                                            door->sel_icon &&
-                                                                        (u8) door
-                                                                                ->costume ==
-                                                                            (u8) all_data
-                                                                                ->doors_data
-                                                                                .doors
-                                                                                    [j]
-                                                                                .costume)
-                                                                    {
-                                                                        dup =
-                                                                            1;
-                                                                        break;
-                                                                    }
-                                                                }
-                                                            }
-                                                        } while (dup != 0);
-                                                    }
-                                                    mnCharSel_8025DB34(
-                                                        grabbed);
-                                                    cursor->x5 = 2;
-                                                    lbAudioAx_800237A8(
-                                                        0xB8, 0x7F, 0x40);
-                                                    goto block_392;
-                                                }
-                                            }
-                                        }
-                                    }
-
+                                    mnCharSel_804D6CB0->data.data
+                                        .players[player_idx]
+                                        .c_kind = CHKIND_NONE;
+                                }
+                            }
+                            mnCharSel_8025DB34(grabbed);
+                            cursor->x5 = 2;
+                        } else {
+                            u32 a_press = trigger & HSD_PAD_A;
+                            if (a_press != 0) {
+                                struct CSSCharModel* m =
+                                    mnCharSel_804A0BD0[grabbed];
+                                f32 my = m->xC;
+                                if (my < 6.0f && my > -1.0f) {
+                                    f32 mx = m->x8;
+                                    if ((mx > -30.0f && mx < -24.4f) ||
+                                        (mx > 24.4f && mx < 30.2f))
                                     {
-                                        struct CSSCharModel* m2 =
-                                            mnCharSel_804A0BD0[grabbed];
-                                        s32 i;
-                                        for (i = 0; i < 0x19; i++) {
-                                            f32 mx = m2->x8;
-                                            if (mx > icons[i].bound_l &&
-                                                mx < icons[i].bound_r)
+                                        s32 icon_count;
+                                        for (icon_count = 0; icon_count < 25;
+                                             icon_count++)
+                                        {
+                                            if ((u8) icons[icon_count].state <
+                                                2)
                                             {
-                                                f32 my = m2->xC;
-                                                if (my < icons[i].bound_u &&
-                                                    my > icons[i].bound_d &&
-                                                    (u8) icons[i].state >= 1)
-                                                {
-                                                    all_data->doors_data
-                                                        .doors[grabbed]
-                                                        .sel_icon = (u8) i;
-                                                    mnCharSel_8025DB34(
-                                                        grabbed);
-                                                    if (trigger & HSD_PAD_A) {
-                                                        s32 player_idx;
-                                                        if ((u8)
-                                                                mnCharSel_804D6CF5 ==
-                                                            1)
+                                                break;
+                                            }
+                                        }
+                                        if (icon_count == 0x19) {
+                                            mnCharSel_8025FB50(grabbed, 0);
+                                            {
+                                                CSSDoor* door =
+                                                    &all_data->doors_data
+                                                         .doors[grabbed];
+                                                s32 dup;
+                                                do {
+                                                    door->costume = HSD_Randi(
+                                                        (s32) gm_80169238(
+                                                            icons[door->sel_icon]
+                                                                .char_kind));
+                                                    {
+                                                        s32 nd;
+                                                        s32 j;
+                                                        if ((u8) mnCharSel_804D6CB0
+                                                                ->match_type ==
+                                                            TRAINING_MODE)
                                                         {
-                                                            if ((s32)
-                                                                    grabbed !=
-                                                                0)
+                                                            nd = 2;
+                                                        } else {
+                                                            nd =
+                                                                mnCharSel_804D6CF5;
+                                                        }
+                                                        dup = 0;
+                                                        for (j = 0;
+                                                             j < (s32) nd; j++)
+                                                        {
+                                                            if ((s32) grabbed !=
+                                                                    j &&
+                                                                (u8) all_data
+                                                                        ->doors_data
+                                                                        .doors
+                                                                            [j]
+                                                                        .p_kind !=
+                                                                    3 &&
+                                                                (u8) all_data
+                                                                        ->doors_data
+                                                                        .doors
+                                                                            [j]
+                                                                        .sel_icon <
+                                                                    0x19U &&
+                                                                all_data->doors_data
+                                                                        .doors
+                                                                            [j]
+                                                                        .sel_icon ==
+                                                                    door->sel_icon &&
+                                                                (u8) door
+                                                                        ->costume ==
+                                                                    (u8) all_data
+                                                                        ->doors_data
+                                                                        .doors
+                                                                            [j]
+                                                                        .costume)
                                                             {
-                                                                player_idx =
-                                                                    (s8) (u8)
-                                                                        mnCharSel_804D6CF1;
-                                                            } else {
-                                                                player_idx =
-                                                                    (s8) (u8)
-                                                                        mnCharSel_804D6CF0;
+                                                                dup = 1;
+                                                                break;
                                                             }
-                                                        } else {
-                                                            player_idx =
-                                                                (s8) grabbed;
                                                         }
-                                                        mnCharSel_804D6CB0
-                                                            ->data.data
-                                                            .players
-                                                                [player_idx]
-                                                            .c_kind =
-                                                            (s8) icons
-                                                                [all_data
-                                                                     ->doors_data
-                                                                     .doors
-                                                                         [grabbed]
-                                                                     .sel_icon]
-                                                                    .char_kind;
-                                                        if ((u8)
-                                                                mnCharSel_804D6CF5 ==
-                                                            1)
-                                                        {
-                                                            lb_80011E24(
-                                                                mnCharSel_804D6CC0,
-                                                                &sp98,
-                                                                icons[i]
-                                                                    .joint_id_1p,
-                                                                -1);
-                                                        } else {
-                                                            lb_80011E24(
-                                                                mnCharSel_804D6CC0,
-                                                                &sp98,
-                                                                icons[i]
-                                                                    .joint_id_vs,
-                                                                -1);
-                                                        }
-                                                        HSD_ForeachAnim(
-                                                            sp98, JOBJ_TYPE,
-                                                            TOBJ_MASK,
-                                                            HSD_AObjReqAnim,
-                                                            AOBJ_ARG_AF, 10.0);
-                                                        icons[i].anim_timer =
-                                                            0xC;
-                                                        mnCharSel_804A0BD0
-                                                            [grabbed]
-                                                                ->x5 = 0;
-                                                        HSD_GObjGXLink_803909D8(
-                                                            mnCharSel_804A0BD0
-                                                                [grabbed]
-                                                                    ->gobj,
-                                                            mnCharSel_804A0BC0
-                                                                [mnCharSel_804D6CF5 -
-                                                                 1]
-                                                                    ->gobj);
+                                                    }
+                                                } while (dup != 0);
+                                            }
+                                            mnCharSel_8025DB34(grabbed);
+                                            cursor->x5 = 2;
+                                            lbAudioAx_800237A8(0xB8, 0x7F,
+                                                               0x40);
+                                            goto block_392;
+                                        }
+                                    }
+                                }
+                            }
+
+                            {
+                                struct CSSCharModel* m2 =
+                                    mnCharSel_804A0BD0[grabbed];
+                                s32 i;
+                                for (i = 0; i < 0x19; i++) {
+                                    f32 mx = m2->x8;
+                                    if (mx > icons[i].bound_l &&
+                                        mx < icons[i].bound_r)
+                                    {
+                                        f32 my = m2->xC;
+                                        if (my < icons[i].bound_u &&
+                                            my > icons[i].bound_d &&
+                                            (u8) icons[i].state >= 1)
+                                        {
+                                            all_data->doors_data.doors[grabbed]
+                                                .sel_icon = (u8) i;
+                                            mnCharSel_8025DB34(grabbed);
+                                            if (trigger & HSD_PAD_A) {
+                                                s32 player_idx;
+                                                if ((u8) mnCharSel_804D6CF5 ==
+                                                    1)
+                                                {
+                                                    if ((s32) grabbed != 0) {
+                                                        player_idx = (s8) (u8)
+                                                            mnCharSel_804D6CF1;
+                                                    } else {
+                                                        player_idx = (s8) (u8)
+                                                            mnCharSel_804D6CF0;
+                                                    }
+                                                } else {
+                                                    player_idx = (s8) grabbed;
+                                                }
+                                                mnCharSel_804D6CB0->data.data
+                                                    .players[player_idx]
+                                                    .c_kind =
+                                                    (s8) icons
+                                                        [all_data->doors_data
+                                                             .doors[grabbed]
+                                                             .sel_icon]
+                                                            .char_kind;
+                                                if ((u8) mnCharSel_804D6CF5 ==
+                                                    1)
+                                                {
+                                                    lb_80011E24(
+                                                        mnCharSel_804D6CC0,
+                                                        &sp98,
+                                                        icons[i].joint_id_1p,
+                                                        -1);
+                                                } else {
+                                                    lb_80011E24(
+                                                        mnCharSel_804D6CC0,
+                                                        &sp98,
+                                                        icons[i].joint_id_vs,
+                                                        -1);
+                                                }
+                                                HSD_ForeachAnim(
+                                                    sp98, JOBJ_TYPE, TOBJ_MASK,
+                                                    HSD_AObjReqAnim,
+                                                    AOBJ_ARG_AF, 10.0);
+                                                icons[i].anim_timer = 0xC;
+                                                mnCharSel_804A0BD0[grabbed]
+                                                    ->x5 = 0;
+                                                HSD_GObjGXLink_803909D8(
+                                                    mnCharSel_804A0BD0[grabbed]
+                                                        ->gobj,
+                                                    mnCharSel_804A0BC0
+                                                        [mnCharSel_804D6CF5 -
+                                                         1]
+                                                            ->gobj);
+                                                all_data->doors_data
+                                                    .doors[grabbed]
+                                                    .selected_since_load = 1;
+                                                cursor->x5 = 2;
+                                                {
+                                                    u8 sel =
                                                         all_data->doors_data
                                                             .doors[grabbed]
-                                                            .selected_since_load =
-                                                            1;
-                                                        cursor->x5 = 2;
-                                                        {
-                                                            u8 sel =
-                                                                all_data
-                                                                    ->doors_data
-                                                                    .doors
-                                                                        [grabbed]
-                                                                    .sel_icon;
-                                                            CSSIcon* sel_icon =
-                                                                &icons[sel];
-                                                            lbAudioAx_80023870(
-                                                                sel_icon->sfx,
-                                                                0x7F, 0x40,
-                                                                sel + 0x8A);
-                                                            gm_80168C5C(
-                                                                (u32) sel_icon
-                                                                    ->char_kind);
-                                                        }
-                                                        lbAudioAx_800237A8(
-                                                            0xB8, 0x7F, 0x40);
-                                                    }
-                                                    break;
+                                                            .sel_icon;
+                                                    CSSIcon* sel_icon =
+                                                        &icons[sel];
+                                                    lbAudioAx_80023870(
+                                                        sel_icon->sfx, 0x7F,
+                                                        0x40, sel + 0x8A);
+                                                    gm_80168C5C(
+                                                        (u32) sel_icon
+                                                            ->char_kind);
                                                 }
+                                                lbAudioAx_800237A8(0xB8, 0x7F,
+                                                                   0x40);
                                             }
-                                        }
-
-                                        if (i == 0x19) {
-                                            mnCharSel_8025D5AC((s32) grabbed,
-                                                               0, 1);
-                                            {
-                                                CSSTagData* td =
-                                                    all_data->doors_data
-                                                        .tags[grabbed]
-                                                        .data;
-                                                if ((u8) td->use_tag == 0) {
-                                                    td->text->hidden = 1;
-                                                }
-                                            }
-                                            all_data->doors_data.doors[grabbed]
-                                                .sel_icon_prev = 0x19;
-                                            if (trigger & HSD_PAD_A) {
-                                                lbAudioAx_80024030(3);
-                                            } else if (trigger & HSD_PAD_B) {
-                                                if (mnCharSel_8025FDEC(
-                                                        grabbed) == 0)
-                                                {
-                                                    mnCharSel_8025DB34(
-                                                        grabbed);
-                                                    cursor->x5 = 2;
-                                                }
-                                            } else {
-                                                mnCharSel_CostumeChange(
-                                                    (s32) grabbed, trigger);
-                                            }
+                                            break;
                                         }
                                     }
                                 }
-                            }
-                        } else {
-                            s32 slider_door = grabbed - 4;
-                            GameRules* rules = gmMainLib_GetGameRules();
-                            if ((u8) rules->handicap != 0) {
-                                lb_80011E24(
-                                    mnCharSel_804D6CC0, &sp98,
-                                    all_data->doors_data.doors[slider_door]
-                                        .cpuslider2_joint,
-                                    -1);
-                            } else {
-                                lb_80011E24(
-                                    mnCharSel_804D6CC0, &sp98,
-                                    all_data->doors_data.doors[slider_door]
-                                        .cpuslider_joint,
-                                    -1);
-                            }
-                            lb_8000B1CC(sp98, NULL, &sp88);
-                            {
-                                f32 jx = HSD_JObjGetTranslationX(sp98);
-                                f32 base_x = jx - sp88.x;
-                                f32 val = (cursor->xC - -2.9f) + base_x;
-                                if (val < 0.0f) {
-                                    val = 0.0f;
-                                }
-                                if (val > 10.0f) {
-                                    val = 10.0f;
-                                }
-                                mnCharSel_804D6CB0->data.data
-                                    .players[slider_door]
-                                    .cpu_level =
-                                    (s32) ((0.8f * val) + 0.5f) + 1;
-                                {
-                                    u8 lvl = mnCharSel_804D6CB0->data.data
-                                                 .players[slider_door]
-                                                 .cpu_level;
-                                    HSD_ForeachAnim(sp98, JOBJ_TYPE, TOBJ_MASK,
-                                                    HSD_AObjReqAnim,
-                                                    AOBJ_ARG_AF, (f32) lvl);
-                                    HSD_JObjAnimAll(sp98);
-                                    HSD_ForeachAnim(sp98, JOBJ_TYPE, TOBJ_MASK,
-                                                    HSD_AObjStopAnim,
-                                                    AOBJ_ARG_AOV, 0, 0);
-                                }
-                                HSD_JObjSetTranslateX(sp98, val);
-                                cursor->xC = (f32) (-2.9f + (val - base_x));
-                                cursor->x10 = (f32) (1.7f + sp88.y);
-                                if (trigger & HSD_PAD_A) {
-                                    cursor->x5 = 2;
-                                    all_data->doors_data.doors[slider_door]
-                                        .is_hold_cpu_slider = 0;
-                                    lbAudioAx_800237A8(0xB7, 0x7F, 0x40);
+
+                                if (i == 0x19) {
+                                    mnCharSel_8025D5AC((s32) grabbed, 0, 1);
+                                    {
+                                        CSSTagData* td =
+                                            all_data->doors_data.tags[grabbed]
+                                                .data;
+                                        if ((u8) td->use_tag == 0) {
+                                            td->text->hidden = 1;
+                                        }
+                                    }
+                                    all_data->doors_data.doors[grabbed]
+                                        .sel_icon_prev = 0x19;
+                                    if (trigger & HSD_PAD_A) {
+                                        lbAudioAx_80024030(3);
+                                    } else if (trigger & HSD_PAD_B) {
+                                        if (mnCharSel_8025FDEC(grabbed) == 0) {
+                                            mnCharSel_8025DB34(grabbed);
+                                            cursor->x5 = 2;
+                                        }
+                                    } else {
+                                        mnCharSel_CostumeChange((s32) grabbed,
+                                                                trigger);
+                                    }
                                 }
                             }
                         }
-                    } else if ((s32) grabbed < 0xC) {
+                        break;
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7: {
+                        s32 slider_door = grabbed - 4;
+                        GameRules* rules = gmMainLib_GetGameRules();
+                        if ((u8) rules->handicap != 0) {
+                            lb_80011E24(mnCharSel_804D6CC0, &sp98,
+                                        all_data->doors_data.doors[slider_door]
+                                            .cpuslider2_joint,
+                                        -1);
+                        } else {
+                            lb_80011E24(mnCharSel_804D6CC0, &sp98,
+                                        all_data->doors_data.doors[slider_door]
+                                            .cpuslider_joint,
+                                        -1);
+                        }
+                        lb_8000B1CC(sp98, NULL, &sp88);
+                        {
+                            f32 jx = HSD_JObjGetTranslationX(sp98);
+                            f32 base_x = jx - sp88.x;
+                            f32 val = (cursor->xC - -2.9f) + base_x;
+                            if (val < 0.0f) {
+                                val = 0.0f;
+                            }
+                            if (val > 10.0f) {
+                                val = 10.0f;
+                            }
+                            mnCharSel_804D6CB0->data.data.players[slider_door]
+                                .cpu_level = (s32) ((0.8f * val) + 0.5f) + 1;
+                            {
+                                u8 lvl = mnCharSel_804D6CB0->data.data
+                                             .players[slider_door]
+                                             .cpu_level;
+                                HSD_ForeachAnim(sp98, JOBJ_TYPE, TOBJ_MASK,
+                                                HSD_AObjReqAnim, AOBJ_ARG_AF,
+                                                (f32) lvl);
+                                HSD_JObjAnimAll(sp98);
+                                HSD_ForeachAnim(sp98, JOBJ_TYPE, TOBJ_MASK,
+                                                HSD_AObjStopAnim, AOBJ_ARG_AOV,
+                                                0, 0);
+                            }
+                            HSD_JObjSetTranslateX(sp98, val);
+                            cursor->xC = (f32) (-2.9f + (val - base_x));
+                            cursor->x10 = (f32) (1.7f + sp88.y);
+                            if (trigger & HSD_PAD_A) {
+                                cursor->x5 = 2;
+                                all_data->doors_data.doors[slider_door]
+                                    .is_hold_cpu_slider = 0;
+                                lbAudioAx_800237A8(0xB7, 0x7F, 0x40);
+                            }
+                        }
+                    } break;
+                    case 8:
+                    case 9:
+                    case 0xA:
+                    case 0xB: {
                         s32 hc_door = grabbed - 8;
                         lb_80011E24(mnCharSel_804D6CC0, &sp98,
                                     all_data->doors_data.doors[hc_door]
@@ -2467,6 +2433,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                 lbAudioAx_800237A8(0xB7, 0x7F, 0x40);
                             }
                         }
+                    } break;
                     }
                     goto block_392;
                 }
