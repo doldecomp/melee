@@ -1878,6 +1878,84 @@ void mnCharSel_CostumeChange(int door, u32 input)
         sfxMove();
     }
 }
+
+static inline void updateCursorDisplay(HSD_JObj* jobj,
+                                       struct CSSCursorData* cursor,
+                                       CSSAllData* all_data)
+{
+    HSD_JObj* state_jobj;
+    HSD_JObj* color_jobj;
+
+    if ((u8) cursor->x5 != 1) {
+        f32 y = cursor->x10;
+        if (y < 0.2f || y > 22.0f) {
+            cursor->x5 = 0;
+        } else {
+            cursor->x5 = 2;
+        }
+    }
+
+    {
+        f32 state = (f32) cursor->x5;
+        lb_80011E24(jobj, &state_jobj, 2, -1);
+        HSD_ForeachAnim(state_jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
+                        AOBJ_ARG_AF, state);
+        HSD_JObjAnimAll(state_jobj);
+        HSD_ForeachAnim(state_jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
+                        AOBJ_ARG_AOV, 0, 0);
+    }
+
+    {
+        s8 color_idx;
+        if ((u8) mnCharSel_804D6CF5 == 1) {
+            color_idx = (s8) (u8) mnCharSel_804D6CF0;
+        } else if ((u8) mnCharSel_804D6CB0->data.data.rules.is_teams == 0) {
+            color_idx = (s8) cursor->x4;
+        } else {
+            color_idx =
+                (s8) mnCharSel_804D50E0[all_data->doors_data.doors[cursor->x4]
+                                            .team];
+        }
+
+        {
+            s32 frame_idx;
+            if ((u16) cursor->x8 != 0) {
+                s8 port = (s8) cursor->x4;
+                if ((u8) mnCharSel_804D6CF5 == 1) {
+                    if ((s32) port != 0) {
+                        port = (s8) (u8) mnCharSel_804D6CF1;
+                    } else {
+                        port = (s8) (u8) mnCharSel_804D6CF0;
+                    }
+                }
+                frame_idx = (mnCharSel_804D6CEC & 3) + (port * 4);
+            } else {
+                s8 port = (s8) cursor->x4;
+                if ((u8) mnCharSel_804D6CF5 == 1) {
+                    if ((s32) port != 0) {
+                        port = (s8) (u8) mnCharSel_804D6CF1;
+                    } else {
+                        port = (s8) (u8) mnCharSel_804D6CF0;
+                    }
+                }
+                frame_idx = color_idx + (port * 4);
+            }
+
+            lb_80011E24(jobj, &color_jobj, 3, -1);
+            HSD_ForeachAnim(color_jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
+                            AOBJ_ARG_AF, (f32) frame_idx);
+            HSD_JObjAnimAll(color_jobj);
+            HSD_ForeachAnim(color_jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
+                            AOBJ_ARG_AOV, 0, 0);
+        }
+    }
+
+    HSD_JObjSetTranslateX(jobj, cursor->xC);
+    HSD_JObjSetTranslateY(jobj, cursor->x10);
+    HSD_JObjSetTranslateZ(jobj, 0.0f);
+    HSD_JObjAnimAll(jobj);
+}
+
 void mnCharSel_CursorThink(HSD_GObj* gobj)
 {
     HSD_JObj* sp98;
@@ -1885,8 +1963,6 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
     HSD_JObj* sp74;
     HSD_JObj* sp54;
     HSD_JObj* sp50;
-    HSD_JObj* sp40;
-    HSD_JObj* sp3C;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     struct CSSCursorData* cursor = gobj->user_data;
     CSSAllData* all_data = CSS_ALL;
@@ -3171,74 +3247,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
     }
 
 block_392:
-    if ((u8) cursor->x5 != 1) {
-        f32 cy10 = cursor->x10;
-        if (cy10 < 0.2f || cy10 > 22.0f) {
-            cursor->x5 = 0;
-        } else {
-            cursor->x5 = 2;
-        }
-    }
-
-    {
-        f32 state_f = (f32) cursor->x5;
-        lb_80011E24(jobj, &sp40, 2, -1);
-        HSD_ForeachAnim(sp40, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
-                        AOBJ_ARG_AF, state_f);
-        HSD_JObjAnimAll(sp40);
-        HSD_ForeachAnim(sp40, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
-                        AOBJ_ARG_AOV, 0, 0);
-    }
-
-    {
-        s8 color_idx;
-        if ((u8) mnCharSel_804D6CF5 == 1) {
-            color_idx = (s8) (u8) mnCharSel_804D6CF0;
-        } else if ((u8) mnCharSel_804D6CB0->data.data.rules.is_teams == 0) {
-            color_idx = (s8) cursor->x4;
-        } else {
-            color_idx =
-                (s8) mnCharSel_804D50E0[all_data->doors_data.doors[cursor->x4]
-                                            .team];
-        }
-
-        {
-            s32 frame_idx;
-            if ((u16) cursor->x8 != 0) {
-                s8 port_val = (s8) cursor->x4;
-                if ((u8) mnCharSel_804D6CF5 == 1) {
-                    if ((s32) port_val != 0) {
-                        port_val = (s8) (u8) mnCharSel_804D6CF1;
-                    } else {
-                        port_val = (s8) (u8) mnCharSel_804D6CF0;
-                    }
-                }
-                frame_idx = (mnCharSel_804D6CEC & 3) + (port_val * 4);
-            } else {
-                s8 port_val2 = (s8) cursor->x4;
-                if ((u8) mnCharSel_804D6CF5 == 1) {
-                    if ((s32) port_val2 != 0) {
-                        port_val2 = (s8) (u8) mnCharSel_804D6CF1;
-                    } else {
-                        port_val2 = (s8) (u8) mnCharSel_804D6CF0;
-                    }
-                }
-                frame_idx = color_idx + (port_val2 * 4);
-            }
-
-            lb_80011E24(jobj, &sp3C, 3, -1);
-            HSD_ForeachAnim(sp3C, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
-                            AOBJ_ARG_AF, (f32) frame_idx);
-            HSD_JObjAnimAll(sp3C);
-            HSD_ForeachAnim(sp3C, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
-                            AOBJ_ARG_AOV, 0, 0);
-        }
-    }
-
-    HSD_JObjSetTranslateX(jobj, cursor->xC);
-    HSD_JObjSetTranslateY(jobj, cursor->x10);
-    HSD_JObjSetTranslateZ(jobj, 0.0f);
-    HSD_JObjAnimAll(jobj);
+    updateCursorDisplay(jobj, cursor, all_data);
 
     PAD_STACK(0x30);
 }
