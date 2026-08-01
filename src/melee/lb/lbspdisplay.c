@@ -812,18 +812,13 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                             if (floor_hit3 != 0) {
                                 f32 height_diff =
                                     groundHeight(cur, &floor_point2);
-                                f32 horiz_sq;
                                 {
-                                    f32 tmp_p27864 =
-                                        -(height_diff * height_diff -
-                                          cur->desc.lb_unk0.unk_48 *
-                                              cur->desc.lb_unk0.unk_48);
-                                    horiz_sq = tmp_p27864;
-                                }
-                                horiz_sq = sqrtf(horiz_sq);
-                                {
+                                    f32 horiz_dist =
+                                        sqrtf(-(height_diff * height_diff -
+                                                cur->desc.lb_unk0.unk_48 *
+                                                    cur->desc.lb_unk0.unk_48));
                                     f32 ground_angle =
-                                        ABS(atan2f(horiz_sq, height_diff));
+                                        ABS(atan2f(horiz_dist, height_diff));
                                     PSVECCrossProduct(&gnd_norm2, &link_dir,
                                                       &floor_cross2);
                                     lbVector_Normalize(&floor_cross2);
