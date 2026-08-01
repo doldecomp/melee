@@ -5089,20 +5089,23 @@ s32 mnCharSel_802640A0(void)
         mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0].slot_type =
             0;
         CSS_ALL->doors_data.doors[0].p_kind = 0;
-        CSS_ALL->doors_data.doors[0].costume =
-            mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0].color;
-        CSS_ALL->doors_data.doors[0].sel_icon_prev =
-            CSS_ALL->doors_data.doors[0].sel_icon;
-        if ((u8) mnCharSel_804D6CB0->match_type == 0x17) {
-            mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1]
-                .slot_type = 1;
-            CSS_ALL->doors_data.doors[1].p_kind = 1;
-            CSS_ALL->doors_data.doors[1].costume =
-                mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1]
-                    .color;
-            CSS_ALL->doors_data.doors[1].sel_icon_prev =
-                CSS_ALL->doors_data.doors[1].sel_icon;
+        {
+            CSSData* css = mnCharSel_804D6CB0;
+            CSS_ALL->doors_data.doors[0].costume =
+                css->data.data.players[mnCharSel_804D6CF0].color;
+            CSS_ALL->doors_data.doors[0].sel_icon_prev =
+                CSS_ALL->doors_data.doors[0].sel_icon;
+            if ((u8) css->match_type != 0x17) {
+                goto doors_done;
+            }
+            css->data.data.players[mnCharSel_804D6CF1].slot_type = 1;
         }
+        CSS_ALL->doors_data.doors[1].p_kind = 1;
+        CSS_ALL->doors_data.doors[1].costume =
+            mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1].color;
+        CSS_ALL->doors_data.doors[1].sel_icon_prev =
+            CSS_ALL->doors_data.doors[1].sel_icon;
+    doors_done:;
     } else {
         for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
             CSSDoor* door = &doors[i];
@@ -5140,8 +5143,12 @@ s32 mnCharSel_802640A0(void)
                 lb_80011E24(mnCharSel_804D6CC0, &sp108, door->cpuslider_joint,
                             -1);
             }
-            if ((u8) mnCharSel_804D6CB0->data.data.players[i].cpu_level == 0) {
-                mnCharSel_804D6CB0->data.data.players[i].cpu_level = 1;
+            {
+                u8* cpu_level =
+                    &mnCharSel_804D6CB0->data.data.players[i].cpu_level;
+                if (*cpu_level == 0) {
+                    *cpu_level = 1;
+                }
             }
             HSD_JObjSetTranslateX(
                 sp108,
