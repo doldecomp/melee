@@ -237,10 +237,11 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type, f32 scale,
     return new_gobj;
 }
 
-void it_802E7654(Item_GObj* owner, HSD_JObj* bone, Vec3* target, s32 type,
-                 s32 arg4, f32 scale)
+Item_GObj* it_802E7654(Item_GObj* owner, HSD_JObj* bone, Vec3* target,
+                       s32 type, s32 arg4, f32 scale)
 {
     SpawnItem spawn;
+    SpawnItem* sp;
     Vec3 sp28;
     Item_GObj* new_gobj;
     Item* ip;
@@ -249,9 +250,8 @@ void it_802E7654(Item_GObj* owner, HSD_JObj* bone, Vec3* target, s32 type,
 
     lb_8000B1CC(bone, NULL, &sp28);
     spawn.kind = It_Kind_Arwing_Laser;
-    *(u32*) &spawn.prev_pos.x = *(u32*) &sp28.x;
-    *(u32*) &spawn.prev_pos.y = *(u32*) &sp28.y;
-    *(u32*) &spawn.prev_pos.z = *(u32*) &sp28.z;
+    spawn.prev_pos = sp28;
+    spawn.prev_pos = spawn.prev_pos;
     *(volatile u32*) &spawn.prev_pos.y = *(u32*) &spawn.prev_pos.y;
     spawn.facing_dir = 0.0f;
     spawn.x3C_damage = 0;
@@ -261,7 +261,8 @@ void it_802E7654(Item_GObj* owner, HSD_JObj* bone, Vec3* target, s32 type,
     spawn.x0_parent_gobj = NULL;
     spawn.x44_flag.b0 = false;
     spawn.x40 = 0;
-    new_gobj = Item_80268B18(&spawn);
+    sp = &spawn;
+    new_gobj = Item_80268B18(sp);
     if (new_gobj != NULL) {
         ip = GET_ITEM(new_gobj);
         jobj = GET_JOBJ(new_gobj);
@@ -294,6 +295,7 @@ void it_802E7654(Item_GObj* owner, HSD_JObj* bone, Vec3* target, s32 type,
         it_802750F8(new_gobj);
         ip->xDCC_flag.b3 = 0;
     }
+    // NOTE: no return
 }
 
 void it_802E79C8(Item_GObj* gobj)
