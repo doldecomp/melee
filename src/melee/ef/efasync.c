@@ -64,7 +64,14 @@ static inline void efAsync_SetEffectFacingDir(EF_Effect* effect,
     HSD_JObjSetRotationY(GET_JOBJ(effect->gobj), rotation);
 }
 
-/// @todo Only differs by register allocation and one stack slot.
+/**
+ * @remarks MWCC allocates the frame bottom-up: outgoing arguments,
+ * compiler-generated temporaries, slots billed per inlined call site, user
+ * locals by declaration order, then register saves. The target keeps one
+ * @c Vec3 (case @c 0x41B) in the compiler-temporary pool, which no
+ * user-declared local can occupy.
+ * @todo Only differs by register allocation and one stack slot.
+ */
 void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
 {
     Vec3 translate;
