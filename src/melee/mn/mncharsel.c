@@ -51,7 +51,11 @@ typedef struct CSSAllData {
     u8 gnw_name[0x1C];
     CSSModeInfo mode_info[24];
     CSSIcon icons[26];
+    CSSDoorsData doors_data;    // 0x3B4
+    struct CSSDoorsData2 data2; // 0x4A4
 } CSSAllData;
+
+#define CSS_ALL ((CSSAllData*) &mnCharSel_803F0A48)
 
 TextKerning* mnCharSel_8025BC20(TextKerning* arg0, u32 arg1)
 {
@@ -724,15 +728,15 @@ void mnCharSel_8025DB34(u8 arg0)
     if (mnCharSel_803F0DFC.tags[arg0].data->use_tag == 0 &&
         (int) sel_icon < 0x19)
     {
-        ((HSD_Text*) mnCharSel_803F0DFC.tags[arg0].data->text)
+        mnCharSel_803F0DFC.tags[arg0].data->text
             ->default_kerning = 1;
         if (lbLang_IsSavedLanguageUS() != 0 && (int) sel_icon == 0x16) {
             HSD_SisLib_803A70A0(
-                (HSD_Text*) mnCharSel_803F0DFC.tags[arg0].data->text, 0,
+                mnCharSel_803F0DFC.tags[arg0].data->text, 0,
                 (char*) &mnCharSel_803F0A48);
         } else {
             HSD_SisLib_803A70A0(
-                (HSD_Text*) mnCharSel_803F0DFC.tags[arg0].data->text, 0,
+                mnCharSel_803F0DFC.tags[arg0].data->text, 0,
                 (char*) gm_80160980(icons[sel_icon].char_kind));
         }
     }
@@ -819,9 +823,9 @@ void mnCharSel_8025DB34(u8 arg0)
         if (mnCharSel_803F0DFC.tags[arg0].data->use_tag == 0 &&
             mnCharSel_803F0DFC.doors[arg0].sel_icon >= 0x19U)
         {
-            ((HSD_Text*) mnCharSel_803F0DFC.tags[arg0].data->text)->hidden = 1;
+            mnCharSel_803F0DFC.tags[arg0].data->text->hidden = 1;
         } else {
-            ((HSD_Text*) mnCharSel_803F0DFC.tags[arg0].data->text)->hidden = 0;
+            mnCharSel_803F0DFC.tags[arg0].data->text->hidden = 0;
         }
     } else {
         /* VS mode */
@@ -1155,9 +1159,9 @@ void mnCharSel_8025DB34(u8 arg0)
             (mnCharSel_803F0DFC.tags[arg0].data->use_tag == 0 &&
              mnCharSel_803F0DFC.doors[arg0].sel_icon >= 0x19U))
         {
-            ((HSD_Text*) mnCharSel_803F0DFC.tags[arg0].data->text)->hidden = 1;
+            mnCharSel_803F0DFC.tags[arg0].data->text->hidden = 1;
         } else {
-            ((HSD_Text*) mnCharSel_803F0DFC.tags[arg0].data->text)->hidden = 0;
+            mnCharSel_803F0DFC.tags[arg0].data->text->hidden = 0;
         }
     }
 
@@ -2344,7 +2348,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                         .tags[grabbed]
                                                         .data;
                                                 if ((u8) td->use_tag == 0) {
-                                                    ((HSD_Text*) td->text)
+                                                    td->text
                                                         ->hidden = 1;
                                                 }
                                             }
@@ -3745,21 +3749,21 @@ void fn_802633B0(HSD_GObj* gobj)
             if (lbLang_IsSavedLanguageUS() != 0 &&
                 (u8) mnCharSel_803F0DFC.doors[tag->port].sel_icon == 0x16)
             {
-                HSD_SisLib_803A70A0((HSD_Text*) tag->name_ls, 0,
+                HSD_SisLib_803A70A0(tag->name_ls, 0,
                                     (char*) &mnCharSel_803F0A48);
             } else {
                 HSD_SisLib_803A70A0(
-                    (HSD_Text*) tag->name_ls, 0,
+                    tag->name_ls, 0,
                     (char*) gm_80160980(
                         icons[mnCharSel_803F0DFC.doors[tag->port].sel_icon]
                             .char_kind));
             }
         } else {
-            HSD_SisLib_803A70A0((HSD_Text*) tag->name_ls, 0,
+            HSD_SisLib_803A70A0(tag->name_ls, 0,
                                 (char*) ((u8*) &mnCharSel_803F0A48 + 0x5B8));
         }
         gray_copy = gray;
-        HSD_SisLib_803A74F0((HSD_Text*) tag->text, 0, &gray_copy);
+        HSD_SisLib_803A74F0(tag->text, 0, &gray_copy);
         HSD_ForeachAnim(list_jobj, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjReqAnim,
                         AOBJ_ARG_AF, 0.0f);
         tag->state = 2;
@@ -3774,7 +3778,7 @@ void fn_802633B0(HSD_GObj* gobj)
         if (t > 0xAU) {
             HSD_ForeachAnim(list_jobj, JOBJ_TYPE, ALL_TYPE_MASK,
                             HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
-            ((HSD_Text*) tag->name_ls)->hidden = 0;
+            tag->name_ls->hidden = 0;
             tag->state = 3;
         }
         return;
@@ -3851,8 +3855,8 @@ void fn_802633B0(HSD_GObj* gobj)
             HSD_JObjSetFlags(arrow_jobj, JOBJ_HIDDEN);
         }
 
-        HSD_SisLib_803A746C((HSD_Text*) tag->name_ls, 0, 0.0f, tag->x8);
-        HSD_SisLib_803A746C((HSD_Text*) tag->name_ls, 1, 0.0f,
+        HSD_SisLib_803A746C(tag->name_ls, 0, 0.0f, tag->x8);
+        HSD_SisLib_803A746C(tag->name_ls, 1, 0.0f,
                             (32.0f * (f32) tag->next_tag) + tag->x8);
         {
             s32 j;
@@ -3865,12 +3869,12 @@ void fn_802633B0(HSD_GObj* gobj)
             do {
                 row_idx = j - page_off;
                 if (row_idx < 0) {
-                    HSD_SisLib_803A70A0((HSD_Text*) tag->name_ls, j + 2, NULL);
+                    HSD_SisLib_803A70A0(tag->name_ls, j + 2, NULL);
                 } else {
-                    HSD_SisLib_803A70A0((HSD_Text*) tag->name_ls, j + 2,
+                    HSD_SisLib_803A70A0(tag->name_ls, j + 2,
                                         GetNameText((s32) (u8) row_idx));
                     row_color = white;
-                    HSD_SisLib_803A74F0((HSD_Text*) tag->name_ls, j + 2,
+                    HSD_SisLib_803A74F0(tag->name_ls, j + 2,
                                         name_color);
                     {
                         s32 p2;
@@ -3882,7 +3886,7 @@ void fn_802633B0(HSD_GObj* gobj)
                                     row_idx)
                             {
                                 used_row_color = gray;
-                                HSD_SisLib_803A74F0((HSD_Text*) tag->name_ls,
+                                HSD_SisLib_803A74F0(tag->name_ls,
                                                     j + 2, used_name_color);
                                 break;
                             }
@@ -3890,7 +3894,7 @@ void fn_802633B0(HSD_GObj* gobj)
                     }
                 }
                 trunc = (s32) tag->x8;
-                HSD_SisLib_803A746C((HSD_Text*) tag->name_ls, j + 2, 10.0f,
+                HSD_SisLib_803A746C(tag->name_ls, j + 2, 10.0f,
                                     (32.0f * (f32) (j + 1)) +
                                         (f32) ((trunc % 32) - 0x20));
                 j += 1;
@@ -3915,21 +3919,21 @@ void fn_802633B0(HSD_GObj* gobj)
                 if (lbLang_IsSavedLanguageUS() != 0 &&
                     (u8) mnCharSel_803F0DFC.doors[tag->port].sel_icon == 0x16)
                 {
-                    HSD_SisLib_803A70A0((HSD_Text*) tag->text, 0,
+                    HSD_SisLib_803A70A0(tag->text, 0,
                                         (char*) &mnCharSel_803F0A48);
                 } else {
                     HSD_SisLib_803A70A0(
-                        (HSD_Text*) tag->text, 0,
+                        tag->text, 0,
                         (char*) gm_80160980(
                             icons[mnCharSel_803F0DFC.doors[tag->port].sel_icon]
                                 .char_kind));
                 }
-                ((HSD_Text*) tag->text)->default_kerning = 1;
+                tag->text->default_kerning = 1;
                 if ((u8) mnCharSel_803F0DFC.doors[tag->port].sel_icon < 0x19U)
                 {
-                    ((HSD_Text*) tag->text)->hidden = 0;
+                    tag->text->hidden = 0;
                 } else {
-                    ((HSD_Text*) tag->text)->hidden = 1;
+                    tag->text->hidden = 1;
                 }
                 {
                     CSSData* ddata = mnCharSel_804D6CB0;
@@ -4000,10 +4004,10 @@ void fn_802633B0(HSD_GObj* gobj)
                         }
                     }
                     {
-                        HSD_SisLib_803A70A0((HSD_Text*) tag->text, 0,
+                        HSD_SisLib_803A70A0(tag->text, 0,
                                             GetNameText(row - 1));
-                        ((HSD_Text*) tag->text)->default_kerning = 0;
-                        ((HSD_Text*) tag->text)->hidden = 0;
+                        tag->text->default_kerning = 0;
+                        tag->text->hidden = 0;
                         {
                             CSSData* ddata2 = mnCharSel_804D6CB0;
                             if ((s32) ddata2->data.data.players[port].xA !=
@@ -4049,7 +4053,7 @@ void fn_802633B0(HSD_GObj* gobj)
     case 4:
         HSD_ForeachAnim(list_jobj, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjReqAnim,
                         AOBJ_ARG_AF, 20.0f);
-        ((HSD_Text*) tag->name_ls)->hidden = 1;
+        tag->name_ls->hidden = 1;
         if ((u8) gmMainLib_GetGameRules()->handicap != 0 &&
             (u8) mnCharSel_804D6CF5 == 4)
         {
@@ -4108,7 +4112,7 @@ void fn_802633B0(HSD_GObj* gobj)
         if (t2 > 0xAU) {
             mnCharSel_8025D1C4((s32) tag->port, 2);
             white_copy = white;
-            HSD_SisLib_803A74F0((HSD_Text*) tag->text, 0, &white_copy);
+            HSD_SisLib_803A74F0(tag->text, 0, &white_copy);
             tag->state = 0;
         }
         break;
@@ -4150,6 +4154,7 @@ s32 mnCharSel_802640A0(void)
     HSD_JObj* tag_name_jobj;
     GXColor spD4;
     GXColor color;
+    GXColor color2;
     HSD_JObj* spA4;
     GXColor hard_color;
     HSD_JObj* sp70;
@@ -4186,13 +4191,13 @@ s32 mnCharSel_802640A0(void)
 
     {
         CSSData* css;
+        css = mnCharSel_804D6CB0;
         mnCharSel_804D6CE0 = NULL;
         mnCharSel_804D6CDC = NULL;
         mnCharSel_804D6CE8 = NULL;
         mnCharSel_804D6CE4 = NULL;
         mnCharSel_804D6CF2 = 0x1E;
         mnCharSel_804D6CF3 = 0;
-        css = mnCharSel_804D6CB0;
 
         if ((u8) css->match_type >= 0xBU) {
             mnCharSel_804D6CF5 = 1;
@@ -4222,11 +4227,12 @@ s32 mnCharSel_802640A0(void)
         }
     }
 
-    gobj = GObj_Create(2, 3, 0x80);
-    mnCharSel_804D6CB8 = gobj;
-    MenMain_cam = MODELS->cam;
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B,
-                            HSD_CObjLoadDesc(MODELS->cam));
+    gobj = mnCharSel_804D6CB8 = GObj_Create(2, 3, 0x80);
+    {
+        HSD_CObj* cobj;
+        cobj = HSD_CObjLoadDesc(MenMain_cam = MODELS->cam);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    }
     GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 0);
     gobj->gxlink_prios = 0x1F;
     HSD_GObj_SetupProc(gobj, mn_8022BA1C, 5);
@@ -4242,8 +4248,10 @@ s32 mnCharSel_802640A0(void)
     GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0x80);
 
     gobj = GObj_Create(0xE, 2, 0);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848,
-                            HSD_FogLoadDesc(MODELS->fog));
+    {
+        HSD_Fog* fog = HSD_FogLoadDesc(MODELS->fog);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848, fog);
+    }
     GObj_SetupGXLink(gobj, (GObj_RenderFunc) (Event) fn_8026407C, 0, 0x80);
 
     gobj = GObj_Create(4, 5, 0x80);
@@ -4454,22 +4462,23 @@ s32 mnCharSel_802640A0(void)
             }
         }
         if (found >= 0x19) {
+            u8* slot_type;
             mnCharSel_804D6CB0->data.data.players[player].c_kind =
                 CKIND_PLAYABLE_COUNT;
-            if ((u8) mnCharSel_804D6CB0->data.data.players[player].slot_type ==
-                1)
-            {
-                mnCharSel_804D6CB0->data.data.players[player].slot_type = 3;
+            slot_type =
+                &mnCharSel_804D6CB0->data.data.players[player].slot_type;
+            if (*slot_type == 1) {
+                *slot_type = 3;
             }
         }
-        mnCharSel_803F0DFC.doors[i].sel_icon = found;
-        model->x10 = model->x8 = 3.4f + icons[found].bound_l;
-        model->x14 = model->xC = -3.0f + icons[found].bound_u;
+        CSS_ALL->doors_data.doors[i].sel_icon = found;
+        model->x8 = model->x10 = 3.4f + icons[found].bound_l;
+        model->xC = model->x14 = -3.0f + icons[found].bound_u;
     }
 
     spE8 = mnCharSel_804DC580;
     for (i = 0; i < num_players; i++) {
-        CSSTag* tag = &mnCharSel_803F0DFC.tags[i];
+        CSSTag* tag = &CSS_ALL->doors_data.tags[i];
         CSSTagData* td;
         int player;
         s32 found;
@@ -4485,21 +4494,20 @@ s32 mnCharSel_802640A0(void)
         td->scroll_amt = 0.0f;
         td->scroll_force = 0.0f;
         td->port = i;
-        text = HSD_SisLib_803A6754(0, ctx);
-        td->text = (TextGlyphTexture*) text;
-        text->x4C = 1;
-        text->default_fitting = 1;
-        text->default_alignment = 1;
-        text->font_size.x = 0.058f;
-        text->font_size.y = 0.055f;
+        td->text = HSD_SisLib_803A6754(0, ctx);
+        td->text->x4C = 1;
+        td->text->default_fitting = 1;
+        td->text->default_alignment = 1;
+        td->text->font_size.x = 0.058f;
+        td->text->font_size.y = 0.055f;
         if ((u8) mnCharSel_804D6CF5 == 1) {
             if (i != 0) {
-                text->pos_x = 15.6f;
-                text->pos_y = 20.2f;
-                text->pos_z = 0.0f;
+                td->text->pos_x = 15.6f;
+                td->text->pos_y = 20.2f;
+                td->text->pos_z = 0.0f;
             } else {
                 lb_80011E24(mnCharSel_804D6CC0, &spA4,
-                            mnCharSel_803F0DFC.tag_box_joint, -1);
+                            CSS_ALL->doors_data.tag_box_joint, -1);
                 HSD_ForeachAnim(spA4, JOBJ_TYPE, JOBJ_MASK, HSD_AObjReqAnim,
                                 AOBJ_ARG_AF, 2.0);
                 HSD_JObjAnimAll(spA4);
@@ -4507,22 +4515,17 @@ s32 mnCharSel_802640A0(void)
                                 AOBJ_ARG_AOV, 0, 0);
                 sp108 = spA4;
                 lb_8000B1CC(sp108, NULL, &spEC);
-                text->pos_x = spEC.x - 0.1f;
-                text->pos_y = 20.2f;
-                text->pos_z = 0.0f;
+                td->text->pos_x = spEC.x - 0.1f;
+                td->text->pos_y = 20.2f;
+                td->text->pos_z = 0.0f;
             }
-            text->box_size_x = 200.0f;
-            text->box_size_y = 32.0f;
-            HSD_SisLib_803A6B98(text, 100.0f, 0.0f,
+            td->text->box_size_x = 200.0f;
+            td->text->box_size_y = 32.0f;
+            HSD_SisLib_803A6B98(td->text, 100.0f, 0.0f,
                                 "\x81\x45\x81\x45\x81\x45\x81\x45");
-            lb_80011E24(mnCharSel_804D6CC0, &sp108,
-                        mnCharSel_803F0DFC.name_list_joint, -1);
         } else {
-            {
-                HSD_JObj** jobj_ptr = &tag_name_jobj;
-                lb_80011E24(mnCharSel_804D6CC0, jobj_ptr, tag->name_jointl,
-                            -1);
-            }
+            lb_80011E24(mnCharSel_804D6CC0, &tag_name_jobj, tag->name_jointl,
+                        -1);
             HSD_ForeachAnim(tag_name_jobj, JOBJ_TYPE, JOBJ_MASK,
                             HSD_AObjReqAnim, AOBJ_ARG_AF, 2.0);
             HSD_JObjAnimAll(tag_name_jobj);
@@ -4530,43 +4533,48 @@ s32 mnCharSel_802640A0(void)
                             HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
             sp108 = tag_name_jobj;
             lb_8000B1CC(sp108, NULL, &spEC);
-            text->pos_x = 0.5f + spEC.x;
-            text->pos_y = -0.4f - spEC.y;
-            text->pos_z = spEC.z;
-            text->box_size_x = 160.0f;
-            text->box_size_y = 32.0f;
-            HSD_SisLib_803A6B98(text, 80.0f, 0.0f,
+            td->text->pos_x = 0.5f + spEC.x;
+            td->text->pos_y = -0.4f - spEC.y;
+            td->text->pos_z = spEC.z;
+            td->text->box_size_x = 160.0f;
+            td->text->box_size_y = 32.0f;
+            HSD_SisLib_803A6B98(td->text, 80.0f, 0.0f,
                                 "\x81\x45\x81\x45\x81\x45\x81\x45");
+        }
+        if ((u8) mnCharSel_804D6CF5 == 1) {
+            lb_80011E24(mnCharSel_804D6CC0, &sp108,
+                        CSS_ALL->doors_data.name_list_joint, -1);
+        } else {
             lb_80011E24(mnCharSel_804D6CC0, &sp108, tag->list_joint, -1);
-            if (i == 3) {
-                HSD_JObjSetTranslateX(sp108, 16.7f);
-            }
+        }
+        if (i == 3) {
+            HSD_JObjSetTranslateX(sp108, 16.7f);
         }
         lb_8000B1CC(sp108, NULL, &spEC);
-        td->name_ls = (TextGlyphTexture*) HSD_SisLib_803A6754(0, ctx);
-        ((HSD_Text*) td->name_ls)->default_fitting = 1;
-        ((HSD_Text*) td->name_ls)->box_size_x = 154.0f;
-        ((HSD_Text*) td->name_ls)->box_size_y = 256.0f;
-        ((HSD_Text*) td->name_ls)->pos_x = spEC.x - 0.6f;
-        ((HSD_Text*) td->name_ls)->pos_y = (0.8f - spEC.y) - 1.0f;
-        ((HSD_Text*) td->name_ls)->pos_z = spEC.z;
-        ((HSD_Text*) td->name_ls)->font_size.x = 0.065f;
-        ((HSD_Text*) td->name_ls)->font_size.y = 0.065f;
-        ((HSD_Text*) td->name_ls)->x4E = 1;
-        ((HSD_Text*) td->name_ls)->hidden = 1;
-        HSD_SisLib_803A6B98((HSD_Text*) td->name_ls, 0.0f, 0.0f,
+        td->name_ls = HSD_SisLib_803A6754(0, ctx);
+        td->name_ls->default_fitting = 1;
+        td->name_ls->box_size_x = 154.0f;
+        td->name_ls->box_size_y = 256.0f;
+        td->name_ls->pos_x = spEC.x - 0.6f;
+        td->name_ls->pos_y = (0.8f - spEC.y) - 1.0f;
+        td->name_ls->pos_z = spEC.z;
+        td->name_ls->font_size.x = 0.065f;
+        td->name_ls->font_size.y = 0.065f;
+        td->name_ls->x4E = 1;
+        td->name_ls->hidden = 1;
+        HSD_SisLib_803A6B98(td->name_ls, 0.0f, 0.0f,
                             "\x81\x45\x81\x45\x81\x45\x81\x45\x81\x45\x81\x45"
                             "\x81\x45\x81\x45\x81\x45\x81\x45\x81\x45");
         color = spE8;
-        HSD_SisLib_803A74F0((HSD_Text*) td->name_ls, 0, &color);
-        HSD_SisLib_803A6B98((HSD_Text*) td->name_ls, 0.0f, 0.0f,
+        HSD_SisLib_803A74F0(td->name_ls, 0, &color);
+        HSD_SisLib_803A6B98(td->name_ls, 0.0f, 0.0f,
                             "\x82\x6d\x82\x60\x82\x6c\x82\x64\x20\x82\x64\x82"
                             "\x6d\x82\x73\x82\x71\x82\x78");
-        color = spE8;
-        HSD_SisLib_803A74F0((HSD_Text*) td->name_ls, 1, &color);
+        color2 = spE8;
+        HSD_SisLib_803A74F0(td->name_ls, 1, &color2);
         found = 0;
         do {
-            HSD_SisLib_803A6B98((HSD_Text*) td->name_ls, 10.0f, 0.0f,
+            HSD_SisLib_803A6B98(td->name_ls, 10.0f, 0.0f,
                                 "\x81\x45\x81\x45\x81\x45\x81\x45");
             found++;
         } while (found < 9);
@@ -4623,8 +4631,8 @@ s32 mnCharSel_802640A0(void)
             td->use_tag = 1;
             name =
                 GetNameText(mnCharSel_804D6CB0->data.data.players[player].xA);
-            HSD_SisLib_803A70A0((HSD_Text*) td->text, 0, name);
-            ((HSD_Text*) td->text)->default_kerning = 0;
+            HSD_SisLib_803A70A0(td->text, 0, name);
+            td->text->default_kerning = 0;
         }
     }
 
@@ -4642,47 +4650,57 @@ s32 mnCharSel_802640A0(void)
                 u8 cpu_level =
                     mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
                         .cpu_level;
-                mnCharSel_803F0DFC.xce = cpu_level;
-                mnCharSel_803F0DFC.xcd = cpu_level;
+                CSS_ALL->doors_data.xce = cpu_level;
+                CSS_ALL->doors_data.xcd = cpu_level;
             }
-            mnCharSel_803F0DFC.xcf = 124.0f;
-            mnCharSel_803F0DFC.xd3 = HSD_SisLib_803A6754(0, ctx);
-            mnCharSel_803F0DFC.scroll_flag = 1;
-            mnCharSel_803F0DFC.xd3->pos_x = -0.5f;
-            mnCharSel_803F0DFC.xd3->pos_y = 9.0f;
-            mnCharSel_803F0DFC.xd3->pos_z = 0.0f;
-            mnCharSel_803F0DFC.xd3->box_size_x = 248.0f;
-            mnCharSel_803F0DFC.xd3->box_size_y = 32.0f;
-            mnCharSel_803F0DFC.xd3->font_size.x = 0.08f;
-            mnCharSel_803F0DFC.xd3->font_size.y = 0.09f;
-            mnCharSel_803F0DFC.xd3->x4E = 1;
-            mnCharSel_803F0DFC.xd3->default_kerning = 1;
-            mnCharSel_803F0DFC.xd3->default_alignment = 1;
-            mnCharSel_803F0DFC.xd3->x4C = 1;
-            HSD_SisLib_803A6B98(mnCharSel_803F0DFC.xd3, 0.0f, 0.0f,
+            CSS_ALL->doors_data.xcf = 124.0f;
+            CSS_ALL->doors_data.xd3 = HSD_SisLib_803A6754(0, ctx);
+            CSS_ALL->doors_data.scroll_flag = 1;
+            CSS_ALL->doors_data.xd3->pos_x = -0.5f;
+            CSS_ALL->doors_data.xd3->pos_y = 9.0f;
+            CSS_ALL->doors_data.xd3->pos_z = 0.0f;
+            CSS_ALL->doors_data.xd3->box_size_x = 248.0f;
+            CSS_ALL->doors_data.xd3->box_size_y = 32.0f;
+            CSS_ALL->doors_data.xd3->font_size.x = 0.08f;
+            CSS_ALL->doors_data.xd3->font_size.y = 0.09f;
+            CSS_ALL->doors_data.xd3->x4E = 1;
+            CSS_ALL->doors_data.xd3->default_kerning = 1;
+            CSS_ALL->doors_data.xd3->default_alignment = 1;
+            CSS_ALL->doors_data.xd3->x4C = 1;
+            HSD_SisLib_803A6B98(CSS_ALL->doors_data.xd3, 0.0f, 0.0f,
                                 "\x82\x75\x82\x64\x82\x71\x82\x78\x20\x82\x64"
                                 "\x82\x60\x82\x72\x82\x78");
-            color = spE4;
-            HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 0, &color);
-            HSD_SisLib_803A6B98(mnCharSel_803F0DFC.xd3, 0.0f, 0.0f,
+            {
+                GXColor color = spE4;
+                HSD_SisLib_803A74F0(CSS_ALL->doors_data.xd3, 0, &color);
+            }
+            HSD_SisLib_803A6B98(CSS_ALL->doors_data.xd3, 0.0f, 0.0f,
                                 "\x82\x64\x82\x60\x82\x72\x82\x78");
-            color = spE0;
-            HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 1, &color);
-            HSD_SisLib_803A6B98(mnCharSel_803F0DFC.xd3, 0.0f, 0.0f,
+            {
+                GXColor color = spE0;
+                HSD_SisLib_803A74F0(CSS_ALL->doors_data.xd3, 1, &color);
+            }
+            HSD_SisLib_803A6B98(CSS_ALL->doors_data.xd3, 0.0f, 0.0f,
                                 "\x82\x6d\x82\x6e\x82\x71\x82\x6c\x82\x60\x82"
                                 "\x6b");
-            color = spDC;
-            HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 2, &color);
-            HSD_SisLib_803A6B98(mnCharSel_803F0DFC.xd3, 0.0f, 0.0f,
+            {
+                GXColor color = spDC;
+                HSD_SisLib_803A74F0(CSS_ALL->doors_data.xd3, 2, &color);
+            }
+            HSD_SisLib_803A6B98(CSS_ALL->doors_data.xd3, 0.0f, 0.0f,
                                 "\x82\x67\x82\x60\x82\x71\x82\x63");
-            color = hard_color;
-            HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 3, &color);
-            HSD_SisLib_803A6B98(mnCharSel_803F0DFC.xd3, 0.0f, 0.0f,
+            {
+                GXColor color = hard_color;
+                HSD_SisLib_803A74F0(CSS_ALL->doors_data.xd3, 3, &color);
+            }
+            HSD_SisLib_803A6B98(CSS_ALL->doors_data.xd3, 0.0f, 0.0f,
                                 "\x82\x75\x82\x64\x82\x71\x82\x78\x20\x82\x67"
                                 "\x82\x60\x82\x71\x82\x63");
-            color = spD4;
-            HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 4, &color);
-            HSD_GObjGXLink_803909D8(mnCharSel_803F0DFC.xd3->entity,
+            {
+                GXColor color = spD4;
+                HSD_SisLib_803A74F0(CSS_ALL->doors_data.xd3, 4, &color);
+            }
+            HSD_GObjGXLink_803909D8(CSS_ALL->doors_data.xd3->entity,
                                     mnCharSel_804D6CBC);
             if ((u8) mnCharSel_804D6CB0->match_type == 0xD) {
                 lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x34, -1);
@@ -4694,21 +4712,21 @@ s32 mnCharSel_802640A0(void)
                 lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x46, -1);
                 HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
             } else {
-                data2.stocks =
+                CSS_ALL->data2.stocks =
                     mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
                         .stocks;
-                lb_80011E24(mnCharSel_804D6CC0, &sp70, data2.xf0[0], -1);
+                lb_80011E24(mnCharSel_804D6CC0, &sp70, CSS_ALL->data2.xf0[0], -1);
                 HSD_JObjSetTranslateX(sp70, 7.5f);
                 for (i = 1; i < 5; i++) {
-                    lb_80011E24(mnCharSel_804D6CC0, &sp70, data2.xf0[i], -1);
-                    if ((s32) data2.stocks <= i) {
+                    lb_80011E24(mnCharSel_804D6CC0, &sp70, CSS_ALL->data2.xf0[i], -1);
+                    if ((s32) CSS_ALL->data2.stocks <= i) {
                         HSD_JObjSetFlags(sp70, JOBJ_HIDDEN);
                     } else {
                         HSD_JObjClearFlags(sp70, JOBJ_HIDDEN);
                     }
                 }
                 mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
-                    .stocks = data2.stocks;
+                    .stocks = CSS_ALL->data2.stocks;
             }
             lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x40, -1);
             lb_8000B1CC(sp108, NULL, &spEC);
@@ -4784,18 +4802,7 @@ s32 mnCharSel_802640A0(void)
             HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
             lb_80011E24(mnCharSel_804D6CC8, &sp108, 3, -1);
             HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
-            /* fallthrough */
-        case EVENT_MATCH:
-        hide_extra:
-            lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x2E, -1);
-            HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
-            lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x34, -1);
-            HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
-            lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x3A, -1);
-            HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
-            lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x44, -1);
-            HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
-            break;
+            goto hide_extra;
         case STADIUM_HOMERUN:
             lb_80011E24(mnCharSel_804D6CC8, &sp108, 4, -1);
             lb_8000B1CC(sp108, NULL, &spEC);
@@ -4918,12 +4925,23 @@ s32 mnCharSel_802640A0(void)
             text->font_size.y = 0.055f;
             text->default_alignment = 2;
             HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
-            goto hide_extra;
+            /* fallthrough */
+        case EVENT_MATCH:
+        hide_extra:
+            lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x2E, -1);
+            HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
+            lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x34, -1);
+            HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
+            lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x3A, -1);
+            HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
+            lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x44, -1);
+            HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
+            break;
         }
     } else {
         u8 mt;
         s32 clear;
-        mnCharSel_803F0DFC.scroll_flag = 0;
+        CSS_ALL->doors_data.scroll_flag = 0;
         text =
             HSD_SisLib_803A5ACC(0, ctx, -12.0f, -23.3f, 0.0f, 450.0f, 32.0f);
         text->default_alignment = 1;
@@ -4950,11 +4968,11 @@ s32 mnCharSel_802640A0(void)
         if (clear != 0) {
             for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
                 lb_80011E24(mnCharSel_804D6CC0, &sp108,
-                            data2.ko_stars[i].joint, -1);
+                            CSS_ALL->data2.ko_stars[i].joint, -1);
                 lb_8000B1CC(sp108, NULL, &spEC);
                 text = HSD_SisLib_803A5ACC(0, ctx, spEC.x, -spEC.y - 0.9f,
                                            spEC.z, 32.0f, 32.0f);
-                data2.ko_stars[i].text = text;
+                CSS_ALL->data2.ko_stars[i].text = text;
                 text->font_size.x = 0.07f;
                 text->font_size.y = 0.07f;
                 mnCharSel_8025D1C4(i, 0);
@@ -4962,7 +4980,7 @@ s32 mnCharSel_802640A0(void)
         } else {
             for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
                 lb_80011E24(mnCharSel_804D6CC0, &sp108,
-                            data2.ko_stars[i].joint, -1);
+                            CSS_ALL->data2.ko_stars[i].joint, -1);
                 HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
             }
         }
@@ -4986,24 +5004,24 @@ s32 mnCharSel_802640A0(void)
         mnCharSel_804D6CB0->data.data.players[0].slot_type = 3;
         mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0].slot_type =
             0;
-        mnCharSel_803F0DFC.doors[0].p_kind = 0;
-        mnCharSel_803F0DFC.doors[0].costume =
+        CSS_ALL->doors_data.doors[0].p_kind = 0;
+        CSS_ALL->doors_data.doors[0].costume =
             mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0].color;
-        mnCharSel_803F0DFC.doors[0].sel_icon_prev =
-            mnCharSel_803F0DFC.doors[0].sel_icon;
+        CSS_ALL->doors_data.doors[0].sel_icon_prev =
+            CSS_ALL->doors_data.doors[0].sel_icon;
         if ((u8) mnCharSel_804D6CB0->match_type == 0x17) {
             mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1]
                 .slot_type = 1;
-            mnCharSel_803F0DFC.doors[1].p_kind = 1;
-            mnCharSel_803F0DFC.doors[1].costume =
+            CSS_ALL->doors_data.doors[1].p_kind = 1;
+            CSS_ALL->doors_data.doors[1].costume =
                 mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1]
                     .color;
-            mnCharSel_803F0DFC.doors[1].sel_icon_prev =
-                mnCharSel_803F0DFC.doors[1].sel_icon;
+            CSS_ALL->doors_data.doors[1].sel_icon_prev =
+                CSS_ALL->doors_data.doors[1].sel_icon;
         }
     } else {
         for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
-            CSSDoor* door = &mnCharSel_803F0DFC.doors[i];
+            CSSDoor* door = &CSS_ALL->doors_data.doors[i];
             GameRules* rules;
             door->p_kind = mnCharSel_804D6CB0->data.data.players[i].slot_type;
             door->costume = mnCharSel_804D6CB0->data.data.players[i].color;

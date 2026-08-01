@@ -425,8 +425,8 @@ struct CSSDoor {
 };
 
 struct CSSTagData {
-    TextGlyphTexture* text;    // 0x00
-    TextGlyphTexture* name_ls; // 0x04
+    HSD_Text* text;    // 0x00
+    HSD_Text* name_ls; // 0x04
     float x8;                  // 0x08
     float scroll_amt;          // 0x0C
     float scroll_force;        // 0x10
