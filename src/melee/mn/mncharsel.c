@@ -3047,18 +3047,20 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                             s32 closest = -1;
                             f32 closest_dist = 9.0f;
                             s32 ci;
-                            for (ci = 0; ci < (s32) n_doors; ci++) {
+                            CSSDoor* dc = &all_data->doors_data.doors[0];
+                            struct CSSCharModel** model_ptr =
+                                &mnCharSel_804A0BD0[0];
+                            for (ci = 0; ci < (s32) n_doors;
+                                 dc++, model_ptr++, ci++)
+                            {
                                 f32 cy7 = cursor->x10;
                                 if (!(cy7 < 0.2f) && !(cy7 > 22.0f)) {
-                                    CSSDoor* dc =
-                                        &all_data->doors_data.doors[ci];
                                     u8 pk2 = dc->p_kind;
                                     if (pk2 != 3 &&
                                         (u8) dc->sel_icon < 0x19U &&
                                         (pk2 != 0 || (s32) cursor->x4 == ci))
                                     {
-                                        struct CSSCharModel* mc =
-                                            mnCharSel_804A0BD0[ci];
+                                        struct CSSCharModel* mc = *model_ptr;
                                         if ((u8) mc->x5 == 0) {
                                             f32 ddx =
                                                 3.8f + (cursor->xC - mc->x8);
@@ -3076,19 +3078,16 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
 
                             if (closest >= 0) {
                                 u8 cport4 = cursor->x4;
-                                mnCharSel_804A0BD0[closest]->x5 =
+                                u8 closest_u8;
+                                mnCharSel_804A0BD0[(u8) closest]->x5 =
                                     (s8) (cport4 + 1);
-                                {
-                                    struct CSSCursorData* my_cursor =
-                                        (struct CSSCursorData*)
-                                            mnCharSel_804A0BC0[cport4];
-                                    my_cursor->x5 = 1;
-                                    my_cursor->x6 = (u8) closest;
-                                }
-                                all_data->doors_data.doors[(u8) closest]
+                                closest_u8 = closest;
+                                mnCharSel_804A0BC0[cport4]->x5 = 1;
+                                mnCharSel_804A0BC0[cport4]->x6 = closest_u8;
+                                all_data->doors_data.doors[closest_u8]
                                     .sel_icon = 0xD;
                                 HSD_GObjGXLink_803909D8(
-                                    mnCharSel_804A0BD0[closest]->gobj,
+                                    mnCharSel_804A0BD0[(u8) closest]->gobj,
                                     mnCharSel_804A0BC0[cport4]->gobj);
                                 lbAudioAx_800237A8(0xB7, 0x7F, 0x40);
                                 cursor->xC =
