@@ -5114,16 +5114,17 @@ s32 mnCharSel_802640A0(void)
             door->sel_icon_prev = door->sel_icon;
             rules = gmMainLib_GetGameRules();
             if ((u8) rules->handicap != 0) {
-                u8 hval;
+                s32 hval;
                 lb_80011E24(mnCharSel_804D6CC0, &sp108, door->cpuslider_joint,
                             -1);
                 if ((u8) gmMainLib_GetGameRules()->handicap == 1) {
-                    hval = gm_801685D4(
+                    hval = (u8) gm_801685D4(
                         (u8) i, mnCharSel_804D6CB0->data.data.players[i].xA);
                 } else {
-                    hval = mnCharSel_804D6CB0->data.data.players[i].handicap;
+                    hval =
+                        (u8) mnCharSel_804D6CB0->data.data.players[i].handicap;
                 }
-                if ((s32) hval != 0) {
+                if (hval != 0) {
                 } else {
                     hval = 1;
                 }
