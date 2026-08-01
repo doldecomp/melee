@@ -2808,150 +2808,178 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                             s32 di;
                             CSSDoor* dp = &all_data->doors_data.doors[0];
                             CSSTag* tp = &all_data->doors_data.tags[0];
-                            for (di = 0; di < (s32) mnCharSel_804D6CF5; di++) {
-                                if (di != 3 ||
-                                    (u8) mnCharSel_804D6CB0->match_type != 1)
+                            for (di = 0; di < (s32) mnCharSel_804D6CF5;
+                                 dp++, tp++, di++)
+                            {
+                                CSSTagData* tag_data;
+
+                                if (di == 3 &&
+                                    (u8) mnCharSel_804D6CB0->match_type == 1)
                                 {
-                                    if ((dp->is_hold_cpu_slider |
-                                         dp->is_hold_handicap_slider) == 0 &&
-                                        (u8) mnCharSel_804A0BD0[di]->x5 == 0 &&
-                                        (u8) ((struct CSSCursorData*)
-                                                  mnCharSel_804A0BC0[di])
-                                                ->x5 != 1)
+                                    continue;
+                                }
+                                if ((dp->is_hold_cpu_slider |
+                                     dp->is_hold_handicap_slider) != 0 ||
+                                    (u8) mnCharSel_804A0BD0[di]->x5 != 0 ||
+                                    (u8) ((struct CSSCursorData*)
+                                              mnCharSel_804A0BC0[di])
+                                            ->x5 == 1)
+                                {
+                                    continue;
+                                }
+
+                                tag_data = tp->data;
+                                if ((u8) tag_data->state == 0) {
+                                    f32 cx4 = cursor->xC;
+                                    if (cx4 > dp->togglebtn_left &&
+                                        cx4 < dp->togglebtn_right)
                                     {
-                                        CSSTagData* tag_data = tp->data;
-                                        if ((u8) tag_data->state == 0) {
-                                            f32 cx4 = cursor->xC;
-                                            if (cx4 > dp->togglebtn_left &&
-                                                cx4 < dp->togglebtn_right)
+                                        f32 cy4 = cursor->x10;
+                                        if (cy4 < 0.2 && cy4 > -4.6) {
+                                            cursor->x10 = -2.2f;
                                             {
-                                                f32 cy4 = cursor->x10;
-                                                if (cy4 < 0.2 && cy4 > -4.6) {
-                                                    cursor->x10 = -2.2f;
+                                                u8 new_kind = dp->p_kind + 1;
+                                                dp->p_kind = new_kind;
+                                                switch ((s32) new_kind) {
+                                                case 3:
+                                                    break;
+                                                case 2:
+                                                    dp->p_kind = 3;
+                                                    break;
+                                                case 4:
+                                                    if ((s8) (u8)
+                                                            HSD_PadCopyStatus
+                                                                [(u8) di]
+                                                                    .err != 0)
                                                     {
-                                                        u8 new_kind =
-                                                            dp->p_kind + 1;
-                                                        dp->p_kind = new_kind;
-                                                        switch ((s32) new_kind)
-                                                        {
-                                                        case 3:
-                                                            break;
-                                                        case 2:
-                                                            dp->p_kind = 3;
-                                                            break;
-                                                        case 4:
-                                                            if ((s8) (u8) HSD_PadCopyStatus
-                                                                    [(u8) di]
-                                                                        .err !=
-                                                                0)
-                                                            {
-                                                                dp->p_kind = 1;
-                                                            } else {
-                                                                dp->p_kind = 0;
-                                                            }
-                                                            break;
-                                                        }
-                                                    }
-                                                    mnCharSel_804D6CB0->data
-                                                        .data.players[di]
-                                                        .slot_type =
-                                                        dp->p_kind;
-                                                    if ((u8) dp->p_kind == 1) {
-                                                        mnCharSel_804D6CB0
-                                                            ->data.data
-                                                            .players[di]
-                                                            .xA = 0x78;
-                                                        tag_data->use_tag = 0;
-                                                        if ((u8) dp->selected_since_load ==
-                                                                0 &&
-                                                            (s32) cursor->x4 !=
-                                                                di)
-                                                        {
-                                                            mnCharSel_8025FB50(
-                                                                (u8) di, 1);
-                                                        }
-                                                    }
-                                                    mnCharSel_8025DB34(
-                                                        (u8) di);
-                                                    sfxMove();
-                                                    goto block_348;
-                                                }
-                                            }
-
-                                            if ((u8) mnCharSel_804D6CB0->data
-                                                        .data.rules.is_teams ==
-                                                    1 &&
-                                                (u8) dp->p_kind != 3)
-                                            {
-                                                f32 cx5 = cursor->xC;
-                                                if (cx5 > dp->teambtn_left &&
-                                                    cx5 < dp->teambtn_right)
-                                                {
-                                                    f32 cy5 = cursor->x10;
-                                                    if (cy5 < -1.0 &&
-                                                        cy5 > -5.8)
-                                                    {
-                                                        cursor->x10 = -3.4f;
-                                                        dp->team =
-                                                            (u8) ((dp->team +
-                                                                   1) %
-                                                                  3);
-                                                        mnCharSel_804D6CB0
-                                                            ->data.data
-                                                            .players[di]
-                                                            .team = dp->team;
-                                                        mnCharSel_8025DB34(
-                                                            (u8) di);
-                                                        sfxMove();
-                                                    }
-                                                }
-                                            }
-
-                                            if (a_press2 != 0) {
-                                                if ((u8) dp->is_hold_cpu_slider ==
-                                                        0 &&
-                                                    (u8) dp->p_kind == 1)
-                                                {
-                                                    GameRules* rules2 =
-                                                        gmMainLib_GetGameRules();
-                                                    if ((u8) rules2
-                                                            ->handicap != 0)
-                                                    {
-                                                        lb_80011E24(
-                                                            mnCharSel_804D6CC0,
-                                                            &sp98,
-                                                            dp->cpuslider2_joint,
-                                                            -1);
+                                                        dp->p_kind = 1;
                                                     } else {
-                                                        lb_80011E24(
-                                                            mnCharSel_804D6CC0,
-                                                            &sp98,
-                                                            dp->cpuslider_joint,
-                                                            -1);
+                                                        dp->p_kind = 0;
                                                     }
+                                                    break;
+                                                }
+                                            }
+                                            mnCharSel_804D6CB0->data.data
+                                                .players[di]
+                                                .slot_type = dp->p_kind;
+                                            if ((u8) dp->p_kind == 1) {
+                                                mnCharSel_804D6CB0->data.data
+                                                    .players[di]
+                                                    .xA = 0x78;
+                                                tag_data->use_tag = 0;
+                                                if ((u8) dp->selected_since_load ==
+                                                        0 &&
+                                                    (s32) cursor->x4 != di)
+                                                {
+                                                    mnCharSel_8025FB50((u8) di,
+                                                                       1);
+                                                }
+                                            }
+                                            mnCharSel_8025DB34((u8) di);
+                                            sfxMove();
+                                            continue;
+                                        }
+                                    }
+
+                                    if ((u8) mnCharSel_804D6CB0->data.data
+                                                .rules.is_teams == 1 &&
+                                        (u8) dp->p_kind != 3)
+                                    {
+                                        f32 cx5 = cursor->xC;
+                                        if (cx5 > dp->teambtn_left &&
+                                            cx5 < dp->teambtn_right)
+                                        {
+                                            f32 cy5 = cursor->x10;
+                                            if (cy5 < -1.0 && cy5 > -5.8) {
+                                                cursor->x10 = -3.4f;
+                                                dp->team =
+                                                    (u8) ((dp->team + 1) % 3);
+                                                mnCharSel_804D6CB0->data.data
+                                                    .players[di]
+                                                    .team = dp->team;
+                                                mnCharSel_8025DB34((u8) di);
+                                                sfxMove();
+                                            }
+                                        }
+                                    }
+
+                                    if (a_press2 != 0) {
+                                        if ((u8) dp->is_hold_cpu_slider == 0 &&
+                                            (u8) dp->p_kind == 1)
+                                        {
+                                            GameRules* rules2 =
+                                                gmMainLib_GetGameRules();
+                                            if ((u8) rules2->handicap != 0) {
+                                                lb_80011E24(
+                                                    mnCharSel_804D6CC0, &sp98,
+                                                    dp->cpuslider2_joint, -1);
+                                            } else {
+                                                lb_80011E24(
+                                                    mnCharSel_804D6CC0, &sp98,
+                                                    dp->cpuslider_joint, -1);
+                                            }
+                                            lb_8000B1CC(sp98, NULL,
+                                                        (Point3d*) &sp88);
+                                            {
+                                                f32 sdx = cursor->x10 -
+                                                          (1.7f + sp88.y);
+                                                f32 sdy = cursor->xC -
+                                                          (-2.9f + sp88.x);
+                                                if ((sdx * sdx + sdy * sdy) <
+                                                    5.0f)
+                                                {
+                                                    cursor->x5 = 1;
+                                                    cursor->x6 = (u8) (di + 4);
+                                                    cursor->xC =
+                                                        (f32) (-2.9f + sp88.x);
+                                                    cursor->x10 =
+                                                        (f32) (1.7f + sp88.y);
+                                                    dp->is_hold_cpu_slider = 1;
+                                                    lbAudioAx_800237A8(
+                                                        0xB7, 0x7F, 0x40);
+                                                }
+                                            }
+                                        }
+
+                                        if ((u8) dp->is_hold_handicap_slider ==
+                                            0)
+                                        {
+                                            GameRules* rules3 =
+                                                gmMainLib_GetGameRules();
+                                            if ((u8) rules3->handicap == 2) {
+                                                u8 pk = dp->p_kind;
+                                                if (pk != 3 &&
+                                                    (pk == 1 ||
+                                                     di == (s32) cursor->x4))
+                                                {
+                                                    lb_80011E24(
+                                                        mnCharSel_804D6CC0,
+                                                        &sp98,
+                                                        dp->cpuslider_joint,
+                                                        -1);
                                                     lb_8000B1CC(
                                                         sp98, NULL,
                                                         (Point3d*) &sp88);
                                                     {
-                                                        f32 sdx =
+                                                        f32 hdx =
                                                             cursor->x10 -
                                                             (1.7f + sp88.y);
-                                                        f32 sdy =
+                                                        f32 hdy =
                                                             cursor->xC -
                                                             (-2.9f + sp88.x);
-                                                        if ((sdx * sdx +
-                                                             sdy * sdy) < 5.0f)
+                                                        if ((hdy * hdy +
+                                                             hdx * hdx) < 5.0f)
                                                         {
                                                             cursor->x5 = 1;
                                                             cursor->x6 =
-                                                                (u8) (di + 4);
+                                                                (u8) (di + 8);
                                                             cursor->xC =
                                                                 (f32) (-2.9f +
                                                                        sp88.x);
                                                             cursor->x10 =
                                                                 (f32) (1.7f +
                                                                        sp88.y);
-                                                            dp->is_hold_cpu_slider =
+                                                            dp->is_hold_handicap_slider =
                                                                 1;
                                                             lbAudioAx_800237A8(
                                                                 0xB7, 0x7F,
@@ -2959,83 +2987,10 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                         }
                                                     }
                                                 }
-
-                                                if ((u8) dp
-                                                        ->is_hold_handicap_slider ==
-                                                    0)
-                                                {
-                                                    GameRules* rules3 =
-                                                        gmMainLib_GetGameRules();
-                                                    if ((u8) rules3
-                                                            ->handicap == 2)
-                                                    {
-                                                        u8 pk = dp->p_kind;
-                                                        if (pk != 3 &&
-                                                            (pk == 1 ||
-                                                             di == (s32) cursor
-                                                                       ->x4))
-                                                        {
-                                                            lb_80011E24(
-                                                                mnCharSel_804D6CC0,
-                                                                &sp98,
-                                                                dp->cpuslider_joint,
-                                                                -1);
-                                                            lb_8000B1CC(
-                                                                sp98, NULL,
-                                                                (Point3d*) &sp88);
-                                                            {
-                                                                f32 hdx =
-                                                                    cursor
-                                                                        ->x10 -
-                                                                    (1.7f +
-                                                                     sp88.y);
-                                                                f32 hdy =
-                                                                    cursor
-                                                                        ->xC -
-                                                                    (-2.9f +
-                                                                     sp88.x);
-                                                                if ((hdy *
-                                                                         hdy +
-                                                                     hdx *
-                                                                         hdx) <
-                                                                    5.0f)
-                                                                {
-                                                                    cursor
-                                                                        ->x5 =
-                                                                        1;
-                                                                    cursor
-                                                                        ->x6 =
-                                                                        (u8) (di +
-                                                                              8);
-                                                                    cursor
-                                                                        ->xC =
-                                                                        (f32) (-2.9f +
-                                                                               sp88.x);
-                                                                    cursor
-                                                                        ->x10 =
-                                                                        (f32) (1.7f +
-                                                                               sp88.y);
-                                                                    dp->is_hold_handicap_slider =
-                                                                        1;
-                                                                    lbAudioAx_800237A8(
-                                                                        0xB7,
-                                                                        0x7F,
-                                                                        0x40);
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
                                             }
-                                        } else {
-                                            goto block_348;
                                         }
-                                    } else {
-                                    block_348:;
                                     }
                                 }
-                                dp++;
-                                tp++;
                             }
                         }
 
