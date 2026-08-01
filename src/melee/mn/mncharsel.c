@@ -2605,75 +2605,12 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                 {
                                     CSSDoor* dk =
                                         &all_data->doors_data.doors[k];
-                                    s32 dup;
+                                    if (isDuplicateCostume(k, NULL, 0, false))
                                     {
-                                        s32 nd2;
-                                        s32 j2;
-                                        nd2 = (u8) mnCharSel_804D6CB0
-                                                          ->match_type ==
-                                                      TRAINING_MODE
-                                                  ? 2
-                                                  : mnCharSel_804D6CF5;
-                                        dup = 0;
-                                        for (j2 = 0; j2 < nd2; j2++) {
-                                            if (k != j2 &&
-                                                (u8) all_data->doors_data
-                                                        .doors[j2]
-                                                        .p_kind != 3 &&
-                                                (u8) all_data->doors_data
-                                                        .doors[j2]
-                                                        .sel_icon < 0x19U &&
-                                                all_data->doors_data.doors[j2]
-                                                        .sel_icon ==
-                                                    dk->sel_icon &&
-                                                (u8) dk->costume ==
-                                                    (u8) all_data->doors_data
-                                                        .doors[j2]
-                                                        .costume)
-                                            {
-                                                dup = 1;
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    if (dup != 0) {
                                         dk->costume = 0;
-                                        for (;;) {
-                                            s32 nd3;
-                                            s32 j3;
-                                            s32 dup2;
-                                            nd3 = (u8) mnCharSel_804D6CB0
-                                                              ->match_type ==
-                                                          TRAINING_MODE
-                                                      ? 2
-                                                      : mnCharSel_804D6CF5;
-                                            dup2 = 0;
-                                            for (j3 = 0; j3 < nd3; j3++) {
-                                                if (k != j3 &&
-                                                    (u8) all_data->doors_data
-                                                            .doors[j3]
-                                                            .p_kind != 3 &&
-                                                    (u8) all_data->doors_data
-                                                            .doors[j3]
-                                                            .sel_icon <
-                                                        0x19U &&
-                                                    all_data->doors_data
-                                                            .doors[j3]
-                                                            .sel_icon ==
-                                                        dk->sel_icon &&
-                                                    (u8) dk->costume ==
-                                                        (u8) all_data
-                                                            ->doors_data
-                                                            .doors[j3]
-                                                            .costume)
-                                                {
-                                                    dup2 = 1;
-                                                    break;
-                                                }
-                                            }
-                                            if (dup2 == 0) {
-                                                break;
-                                            }
+                                        while (isDuplicateCostume(k, NULL, 0,
+                                                                  false))
+                                        {
                                             dk->costume =
                                                 (u8) (dk->costume + 1);
                                         }
