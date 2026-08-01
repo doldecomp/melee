@@ -2305,35 +2305,34 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                 }
                                                 lbAudioAx_800237A8(0xB8, 0x7F,
                                                                    0x40);
+                                                goto block_392;
                                             }
-                                            break;
+                                            goto block_392;
                                         }
                                     }
                                 }
 
-                                if (i == 0x19) {
-                                    mnCharSel_8025D5AC((s32) grabbed, 0, 1);
-                                    {
-                                        CSSTagData* td =
-                                            all_data->doors_data.tags[grabbed]
-                                                .data;
-                                        if ((u8) td->use_tag == 0) {
-                                            td->text->hidden = 1;
-                                        }
+                                mnCharSel_8025D5AC((s32) grabbed, 0, 1);
+                                {
+                                    CSSTagData* td =
+                                        all_data->doors_data.tags[grabbed]
+                                            .data;
+                                    if ((u8) td->use_tag == 0) {
+                                        td->text->hidden = 1;
                                     }
-                                    all_data->doors_data.doors[grabbed]
-                                        .sel_icon_prev = 0x19;
-                                    if (trigger & HSD_PAD_A) {
-                                        lbAudioAx_80024030(3);
-                                    } else if (trigger & HSD_PAD_B) {
-                                        if (mnCharSel_8025FDEC(grabbed) == 0) {
-                                            mnCharSel_8025DB34(grabbed);
-                                            cursor->x5 = 2;
-                                        }
-                                    } else {
-                                        mnCharSel_CostumeChange((s32) grabbed,
-                                                                trigger);
+                                }
+                                all_data->doors_data.doors[grabbed]
+                                    .sel_icon_prev = 0x19;
+                                if (trigger & HSD_PAD_A) {
+                                    lbAudioAx_80024030(3);
+                                } else if (trigger & HSD_PAD_B) {
+                                    if (mnCharSel_8025FDEC(grabbed) == 0) {
+                                        mnCharSel_8025DB34(grabbed);
+                                        cursor->x5 = 2;
                                     }
+                                } else {
+                                    mnCharSel_CostumeChange((s32) grabbed,
+                                                            trigger);
                                 }
                             }
                         }
