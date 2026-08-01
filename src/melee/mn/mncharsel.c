@@ -3036,15 +3036,17 @@ static inline void animateCharModel(HSD_JObj* jobj, f32 frame)
 void fn_80262648(HSD_GObj* gobj)
 {
     HSD_JObj* sp24;
-    u32 pad1;
     u32 pad2;
+    struct {
+        CSSData* value;
+    } css;
     struct CSSCharModel* model = gobj->user_data;
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    CSSData* css = mnCharSel_804D6CB0;
     u8 prev_port = model->x6;
     int n_doors;
 
-    if ((u8) css->match_type == 0x17) {
+    css.value = mnCharSel_804D6CB0;
+    if ((u8) css.value->match_type == 0x17) {
         n_doors = 2;
     } else {
         n_doors = mnCharSel_804D6CF5;
@@ -3067,7 +3069,7 @@ void fn_80262648(HSD_GObj* gobj)
             } else {
                 model->x6 = (u8) mnCharSel_804D6CF0;
             }
-        } else if ((u8) css->data.data.rules.is_teams == 0) {
+        } else if ((u8) css.value->data.data.rules.is_teams == 0) {
             if (p_kind == 1) {
                 model->x6 = 8;
             } else {
