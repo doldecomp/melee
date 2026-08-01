@@ -2598,14 +2598,15 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                             for (loop_i = 0; loop_i < (s32) mnCharSel_804D6CF5;
                                  loop_i++)
                             {
-                                struct CSSCursorData* other =
-                                    mnCharSel_804A0BC0[loop_i];
-                                int other_state = (u8) other->x5;
-                                if (other_state == 1 &&
+                                if ((u8) ((struct CSSCursorData*)
+                                              mnCharSel_804A0BC0[loop_i])
+                                            ->x5 == 1 &&
                                     mnCharSel_8025FDEC((u8) loop_i) == 0)
                                 {
                                     mnCharSel_8025DB34((u8) loop_i);
-                                    other->x5 = 2;
+                                    ((struct CSSCursorData*)
+                                         mnCharSel_804A0BC0[loop_i])
+                                        ->x5 = 2;
                                 }
                             }
                             return;
@@ -2619,10 +2620,11 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                         cursor->x8 = 1;
                         if (trigger & HSD_PAD_A) {
                             sfxMove();
-                            mnCharSel_804D6CB0->data.data.rules.is_teams =
-                                (mnCharSel_804D6CB0->data.data.rules.is_teams +
-                                 1) &
-                                1;
+                            {
+                                u8* is_teams = &mnCharSel_804D6CB0->data.data
+                                                    .rules.is_teams;
+                                *is_teams = (*is_teams + 1) & 1;
+                            }
                             if ((u8) mnCharSel_804D6CB0->data.data.rules
                                     .is_teams == 0)
                             {
@@ -2633,17 +2635,15 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         &all_data->doors_data.doors[k];
                                     s32 dup;
                                     {
-                                        u8 nd2;
+                                        s32 nd2;
                                         s32 j2;
-                                        if ((u8) mnCharSel_804D6CB0
-                                                ->match_type == TRAINING_MODE)
-                                        {
-                                            nd2 = 2;
-                                        } else {
-                                            nd2 = mnCharSel_804D6CF5;
-                                        }
+                                        nd2 = (u8) mnCharSel_804D6CB0
+                                                          ->match_type ==
+                                                      TRAINING_MODE
+                                                  ? 2
+                                                  : mnCharSel_804D6CF5;
                                         dup = 0;
-                                        for (j2 = 0; j2 < (s32) nd2; j2++) {
+                                        for (j2 = 0; j2 < nd2; j2++) {
                                             if (k != j2 &&
                                                 (u8) all_data->doors_data
                                                         .doors[j2]
@@ -2667,20 +2667,16 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                     if (dup != 0) {
                                         dk->costume = 0;
                                         for (;;) {
-                                            u8 nd3;
+                                            s32 nd3;
                                             s32 j3;
                                             s32 dup2;
-                                            if ((u8) mnCharSel_804D6CB0
-                                                    ->match_type ==
-                                                TRAINING_MODE)
-                                            {
-                                                nd3 = 2;
-                                            } else {
-                                                nd3 = mnCharSel_804D6CF5;
-                                            }
+                                            nd3 = (u8) mnCharSel_804D6CB0
+                                                              ->match_type ==
+                                                          TRAINING_MODE
+                                                      ? 2
+                                                      : mnCharSel_804D6CF5;
                                             dup2 = 0;
-                                            for (j3 = 0; j3 < (s32) nd3; j3++)
-                                            {
+                                            for (j3 = 0; j3 < nd3; j3++) {
                                                 if (k != j3 &&
                                                     (u8) all_data->doors_data
                                                             .doors[j3]
