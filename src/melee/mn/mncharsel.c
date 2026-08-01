@@ -3217,7 +3217,7 @@ void fn_80262648(HSD_GObj* gobj)
                             icons[mnCharSel_803F0DFC.doors[model->x4].sel_icon]
                                 .bound_d)
                     {
-                        model->xC = x + 0.02f;
+                        model->xC += 0.02f;
                         if (model->xC <
                             icons[mnCharSel_803F0DFC.doors[model->x4].sel_icon]
                                 .bound_d)
