@@ -2160,16 +2160,16 @@ u64 lbAudioAx_80026E84(CharacterKind c_kind)
     return lbl_803BB3C0[c_kind].x8;
 }
 
-u64 lbAudioAx_80026EBC(ExternalStageId arg0)
+u64 lbAudioAx_80026EBC(StKind stkind)
 {
     const int imax = ARRAY_SIZE(s32_arr_803BB6B0);
-    int id = Stage_8022519C(arg0);
+    GrKind grkind = Stage_8022519C(stkind);
     int shift;
 
-    if (id < 0 || id >= imax) {
+    if (grkind < 0 || grkind >= imax) {
         return 0;
     }
-    if ((shift = s32_arr_803BB6B0[id][0]) == 0x37) {
+    if ((shift = s32_arr_803BB6B0[grkind][0]) == 0x37) {
         return 0;
     }
     return 1ULL << shift;
@@ -2282,7 +2282,7 @@ void lbAudioAx_80027168(void)
 
     if (lbl_804D6438 < lbl_804D6448 + lbl_804D6450) {
         OSReport("******** CAUTION ********\nFGM load size is over\n");
-        __assert(__FILE__, 0xDB3, "0");
+        HSD_ASSERT(0xDB3, 0);
     }
 
     slot = fn_80026650_noinline();
@@ -2322,7 +2322,7 @@ void lbAudioAx_8002785C(void)
 {
     u64 result = 0;
     int i;
-    ExternalStageId stage;
+    StKind stkind;
 
     if (gm_8016B184()) {
         result = lbAudioAx_80026E84(Player_GetPlayerCharacter(0));
@@ -2343,16 +2343,16 @@ void lbAudioAx_8002785C(void)
         }
     }
 
-    stage = Stage_80225194();
-    if (stage == 0xD9 || stage == 0xE5) {
+    stkind = Stage_80225194();
+    if (stkind == 0xD9 || stkind == 0xE5) {
         result |= 0x200004000;
     }
-    if (stage == 0x46 || stage == 0x47) {
+    if (stkind == 0x46 || stkind == 0x47) {
         result |= 0xC00;
     }
 
-    lbl_804D38D8 = (s32) s32_arr_803BB6B0[Stage_8022519C(stage)][1];
-    result |= lbAudioAx_80026EBC(stage);
+    lbl_804D38D8 = (s32) s32_arr_803BB6B0[Stage_8022519C(stkind)][1];
+    result |= lbAudioAx_80026EBC(stkind);
 
     if (result) {
         lbAudioAx_80026F2C(0xC);
@@ -2613,8 +2613,7 @@ void lbAudioAx_8002838C(void)
     AXDriver_8038E30C(0, 2, &rvbStd, (u8*) &lbl_80433B44[0x48], 0xD400);
 
     AXDriver_8038E37C(AXDRIVER_AUX_DELAY, &delay);
-    HSD_ASSERTMSG(0xF72, HSD_AudioGetAuxHeapSize(2, &delay) < 71 * 1024,
-                  "HSD_AudioGetAuxHeapSize(2, &delay) < 71*1024");
+    HSD_ASSERT(0xF72, HSD_AudioGetAuxHeapSize(2, &delay) < 71*1024);
 
     AXDriver_8038E30C(1, 4, &delay, (u8*) &lbl_80433B44[0x3548], 0x11C00);
 

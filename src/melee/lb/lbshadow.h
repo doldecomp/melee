@@ -7,7 +7,6 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /* 00ED54 */ void lbShadow_8000ED54(LbShadow*, HSD_JObj*);

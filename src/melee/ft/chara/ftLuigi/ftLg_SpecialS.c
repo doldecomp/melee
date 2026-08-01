@@ -21,7 +21,6 @@
 
 #include "lb/forward.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <baselib/random.h>
 
@@ -34,8 +33,7 @@ void ftLg_SpecialS_SetGFX(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 /// Luigi's Green Missile Setup (RNG + calculations)
@@ -456,15 +454,14 @@ static inline void ftLuigi_SpecialS_Setup(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     fp->accessory4_cb = NULL;
 }
 
 /// Luigi's grounded Green Missile Launch Motion State handler
 void ftLg_SpecialSLaunch_Enter(HSD_GObj* gobj)
 {
-    u8 _[12];
+    u8 _[4];
 
     Fighter* fp = GET_FIGHTER(gobj);
 

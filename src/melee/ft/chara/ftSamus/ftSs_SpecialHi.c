@@ -20,7 +20,6 @@
 #include "ftCommon/ftCo_Landing.h"
 #include "ftSamus/types.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 void ftSs_SpecialHi_Enter(HSD_GObj* gobj)
@@ -31,8 +30,7 @@ void ftSs_SpecialHi_Enter(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, 353, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftSamus_updateDamageDeathCBs(gobj);
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     ftCommon_8007D7FC(fp);
     fp->cmd_vars[3] = 0;
     fp->cmd_vars[2] = 0;
@@ -51,8 +49,7 @@ void ftSs_SpecialAirHi_Enter(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, 354, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftSamus_updateDamageDeathCBs(gobj);
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     ftCommon_8007D60C(fp);
     fp->cmd_vars[3] = 0;
     fp->cmd_vars[2] = 0;

@@ -2318,19 +2318,19 @@ found:
     return false;
 }
 
-void gm_80164504(u16 stage_id)
+void gm_80164504(u16 stkind)
 {
     u16* stage_unlock_mask;
     s32 i;
-    u8 internal_id;
+    u8 grkind;
     u8 unlock_idx;
     u8 notify_val;
 
     stage_unlock_mask = gmMainLib_8015EDA4();
-    internal_id = Stage_8022519C(stage_id);
+    grkind = Stage_8022519C(stkind);
 
     for (i = 0; i < NUM_UNLOCKABLE_STAGES; i++) {
-        if ((s32) internal_id == (s32) lbl_803B790C[i][1]) {
+        if ((s32) grkind == (s32) lbl_803B790C[i][1]) {
             unlock_idx = lbl_803B790C[i][0];
             goto found_stage;
         }
@@ -3220,7 +3220,7 @@ s32 gm_80166A98(MatchEnd* arg0, u8 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
 
     memzero(arg0, 0x227C);
 
-    arg0->result = 1;
+    arg0->result = OUTCOME_TIMEOUT;
     arg0->x5 = 0;
     arg0->is_teams = 0;
 
@@ -3249,7 +3249,7 @@ s32 gm_80166A98(MatchEnd* arg0, u8 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
 
     for (i = 0; i < 4; i++) {
         arg0->player_standings[i].x30 += 6 - i;
-        if (arg0->player_standings[i].character_kind == 0x21) {
+        if (arg0->player_standings[i].character_kind == CHKIND_NONE) {
             arg0->player_standings[i].slot_type = 3;
         } else if (HSD_PadMasterStatus[(u8) i].err == 0) {
             arg0->player_standings[i].slot_type = 0;
@@ -3257,9 +3257,9 @@ s32 gm_80166A98(MatchEnd* arg0, u8 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
             arg0->player_standings[i].slot_type = 1;
         }
 
-        if (arg0->player_standings[i].character_kind == 0x13) {
-            arg0->player_standings[i].character_kind = 0x12;
-            arg0->player_standings[i].character_id = 7;
+        if (arg0->player_standings[i].character_kind == CKIND_SEAK) {
+            arg0->player_standings[i].character_kind = CKIND_ZELDA;
+            arg0->player_standings[i].character_id = FTKIND_SEAK;
         }
     }
 
@@ -3287,7 +3287,7 @@ void gm_80166CCC(MatchEnd* arg0, MatchEnd* arg1)
     result = arg1->result;
     player_count = 0;
     team_count = 0;
-    if (result == 7 || result == 8) {
+    if (result == OUTCOME_NO_CONTEST || result == OUTCOME_RETRY) {
         arg0->result = result;
     }
     if (arg1->n_winners > 1) {
@@ -3363,7 +3363,7 @@ bool gm_80167140(MatchEnd* me)
 {
     s32 winners;
 
-    if (me->result != 7) {
+    if (me->result != OUTCOME_NO_CONTEST) {
         if (me->is_teams == 1) {
             winners = me->n_team_winners;
         } else {
@@ -3399,18 +3399,18 @@ void fn_8016719C(s32 slot, s32 subchar)
     Vec3 offset;
     lbl_8046B6A0_t* match_info;
     s32 var_r30;
-    s32 stage_id;
+    StKind stkind;
     struct fn_8016719C_xC_bits* temp_r4;
 
     match_info = gm_16AE_GetUnkData_1();
-    stage_id = gm_8016B004();
-    if (Stage_80224DC8(stage_id) != 0) {
+    stkind = gm_8016B004();
+    if (Stage_80224DC8(stkind) != 0) {
         var_r30 = Ground_801C5774();
         Stage_80224E38(&respawn_pos, var_r30);
         offset.z = 0.0f;
         offset.y = 0.0f;
         offset.x = 0.0f;
-        if ((stage_id != 0x4C) && (subchar == 0)) {
+        if ((stkind != 0x4C) && (subchar == 0)) {
             Ground_801C38BC(respawn_pos.x, respawn_pos.y);
             Camera_8002F3AC();
         }
@@ -4385,7 +4385,7 @@ s32 fn_801693A8(void)
 
 static inline bool gm_801693BC_inline(u8 ckind)
 {
-    if (ckind - 0x1B <= 1) {
+    if (ckind - CKIND_BOY <= 1) {
         return true;
     }
     return false;

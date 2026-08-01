@@ -1,12 +1,9 @@
 #ifndef GALE01_1E3734
 #define GALE01_1E3734
 
-#include <placeholder.h>
-
 #include "gr/forward.h"
 #include "it/forward.h"
 #include "lb/forward.h"
-#include "mp/forward.h"
 #include "sc/forward.h"
 #include <baselib/forward.h>
 
@@ -44,5 +41,6 @@
 /* 1E56FC */ DynamicModelDesc* grOnett_801E56FC(void);
 /* 1E5760 */ DynamicsDesc* grOnett_801E5760(enum_t);
 /* 1E5768 */ bool grOnett_801E5768(Vec3*, int, HSD_JObj*);
+/* 3E2858 */ extern StageData grOt_StageData;
 
 #endif

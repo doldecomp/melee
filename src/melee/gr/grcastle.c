@@ -35,12 +35,19 @@
 #include <baselib/random.h>
 #include <MetroTRK/intrinsics.h>
 
+struct unkCastle {
+    /* 0x000 */ u8 _pad[0x10C];
+    /* 0x10C */ HSD_GObj* x10C[5];
+    /* 0x120 */ u8 _pad2[0x134 - 0x120];
+    /* 0x134 */ u8 x134[5];
+};
+
 /* 1CF750 */ static void grCastle_801CF750(void* user_data, int joint_id,
                                            CollData* coll, int coll_x50,
                                            mpLib_GroundEnum ground_kind,
                                            float delta_y);
 
-S16Vec3 grCs_803E0FE8[] = {
+GrJoint grCs_803E0FE8[] = {
     { 4, 6, 1 },
     { 5, 6, 4 },
 };
@@ -91,8 +98,8 @@ StageCallbacks grCs_StageCallbacks[21] = {
 
 char grCs_803E1198[] = "/GrCs.dat";
 
-StageData grCs_803E11A4 = {
-    CASTLE,
+StageData grCs_StageData = {
+    Gr_Kind_Castle,
     grCs_StageCallbacks,
     grCs_803E1198,
     grCastle_801CD37C,
@@ -353,12 +360,12 @@ HSD_GObj* grCastle_801CD4D0(int gobj_id)
             gp->x1C_callback = (HSD_GObjEvent) callbacks->callback3;
         }
 
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
 
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
         }
 
     } else {
@@ -662,7 +669,7 @@ bool grCastle_801CDF54(Vec3* vec)
     int i;
 
     i = 0;
-    if (stage_info.internal_stage_id == 0x2) {
+    if (stage_info.grkind == Gr_Kind_Castle) {
         for (i = 0; i < 9; i += 1) {
             gobj = Ground_801C2BA4(i + 8);
             if (gobj != NULL) {
@@ -1083,7 +1090,7 @@ void grCastle_801CEACC(Ground_GObj* gobj)
     }
 
     switch (gp->map_id) {
-    case PURA:
+    case Gr_Kind_Pura:
         gp->u.castle10.jobjs[0] = Ground_801C3FA4((HSD_GObj*) gobj, 1);
         gp->u.castle10.effect_a[0] = Ground_801C3FA4((HSD_GObj*) gobj, 2);
         gp->u.castle10.effect_b[0] = Ground_801C3FA4((HSD_GObj*) gobj, 3);
@@ -1109,7 +1116,7 @@ void grCastle_801CEACC(Ground_GObj* gobj)
         gp->u.castle10.x120[3] = 0xE;
         break;
 
-    case SHRINE:
+    case Gr_Kind_Shrine:
         gp->u.castle10.jobjs[0] = Ground_801C3FA4((HSD_GObj*) gobj, 1);
         gp->u.castle10.effect_a[0] = Ground_801C3FA4((HSD_GObj*) gobj, 2);
         gp->u.castle10.effect_b[0] = Ground_801C3FA4((HSD_GObj*) gobj, 3);
@@ -1141,7 +1148,7 @@ void grCastle_801CEACC(Ground_GObj* gobj)
         gp->u.castle10.x120[4] = 0xA;
         break;
 
-    case GARDEN:
+    case Gr_Kind_Garden:
         gp->u.castle10.jobjs[0] = Ground_801C3FA4((HSD_GObj*) gobj, 1);
         gp->u.castle10.effect_a[0] = Ground_801C3FA4((HSD_GObj*) gobj, 2);
         gp->u.castle10.effect_b[0] = Ground_801C3FA4((HSD_GObj*) gobj, 3);
@@ -1273,13 +1280,13 @@ void grCastle_801CF0F4(Ground_GObj* gobj)
     HSD_JObjSetScaleZ(jobj, scale);
 
     switch (gp->map_id) {
-    case ONETT:
+    case Gr_Kind_Onett:
         gp->u.castle7.xD0 = grCastle_801CD4D0(0x11);
         return;
-    case BIGBLUE:
+    case Gr_Kind_BigBlue:
         gp->u.castle7.xD0 = grCastle_801CD4D0(7);
         return;
-    case MUTECITY:
+    case Gr_Kind_MuteCity:
         gp->u.castle7.xD0 = grCastle_801CD4D0(5);
         return;
     default:
@@ -1792,7 +1799,7 @@ void grCastle_801D0680(void* arg0, unkCastle* arg1)
 
 static void grCastle_801D06CC_sub(unkCastle* arg0, Ground_GObj* gobj, s32 i)
 {
-    if (ftLib_80086960(gobj) || itGetKind(gobj) != Pokemon_Random) {
+    if (ftLib_80086960(gobj) || itGetKind(gobj) != It_PKind_Random) {
         arg0->x134[i] = 1;
         grMaterial_801C8CDC(arg0->x10C[i]);
         arg0->x10C[i] = NULL;

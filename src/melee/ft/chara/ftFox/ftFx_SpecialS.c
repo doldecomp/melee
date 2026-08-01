@@ -18,7 +18,6 @@
 #include "ftCommon/inlines.h"
 #include "ftFox/types.h"
 
-#include <common_structs.h>
 #include <melee/it/items/itfoxillusion.h>
 
 static MotionFlags const ftFx_MF_SpecialS_Coll =
@@ -39,6 +38,7 @@ void ftFx_SpecialS_CreateGFX(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 /// 0x800E9E78

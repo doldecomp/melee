@@ -67,10 +67,10 @@ void ftPk_SpecialN_Anim(HSD_GObj* gobj)
             sp14.z = 0.0f;
             it_802B338C(gobj, &sp14, fp->facing_dir, pika_attr->x14);
             switch (ftLib_GetKind(gobj)) {
-            case 12:
+            case FTKIND_PIKACHU:
                 ft_PlaySFX(fp, 240076, 127, 64);
                 break;
-            case 23:
+            case FTKIND_PICHU:
                 ft_PlaySFX(fp, 230067, 127, 64);
                 break;
             }
@@ -101,10 +101,10 @@ void ftPk_SpecialAirN_Anim(HSD_GObj* gobj)
             sp14.z = 0.0f;
             it_802B338C(gobj, &sp14, fp->facing_dir, pika_attr->x14);
             switch (ftLib_GetKind(gobj)) {
-            case 12:
+            case FTKIND_PIKACHU:
                 ft_PlaySFX(fp, 240076, 127, 64);
                 break;
-            case 23:
+            case FTKIND_PICHU:
                 ft_PlaySFX(fp, 230067, 127, 64);
                 break;
             }
@@ -169,6 +169,7 @@ void ftPk_SpecialN_SpawnEffect0(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void ftPk_SpecialN_SpawnEffect1(HSD_GObj* gobj)
@@ -185,6 +186,7 @@ void ftPk_SpecialN_SpawnEffect1(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void ftPk_SpecialN_80124DC8(HSD_GObj* gobj)

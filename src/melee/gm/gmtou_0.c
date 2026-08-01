@@ -17,6 +17,7 @@
 
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
+#include "mn/inlines.h"
 #include "mn/mnmain.h"
 #include "mn/mnmainrule.h"
 #include "mn/mnname.h"
@@ -1543,7 +1544,7 @@ static inline void tmSettings_StepDown(s32* menu, TmSettingTable* table,
     s32* ptr;
     s32 val;
 
-    lbAudioAx_80024030(2);
+    sfxMove();
     state->x7 = 5;
     idx = menu[0];
     ptr = menu + idx;
@@ -1563,7 +1564,7 @@ static inline void tmSettings_StepUp(s32* menu, TmSettingTable* table,
     s32* ptr;
     s32 val;
 
-    lbAudioAx_80024030(2);
+    sfxMove();
     state->x8 = 5;
     idx = menu[0];
     ptr = menu + idx;
@@ -1607,7 +1608,7 @@ void fn_801937C4(s32* arg0, u32 arg1, u32 arg2)
         u8* tp;
         s32* dp;
 
-        lbAudioAx_80024030(1);
+        sfxForward();
         idx = arg0[0];
         global = &gm_804771C4;
         arg0[0] = idx + 1;
@@ -1630,7 +1631,7 @@ void fn_801937C4(s32* arg0, u32 arg1, u32 arg2)
             }
         }
     } else if (arg2 & 0x200) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         gm_801A4B60();
     }
@@ -1678,7 +1679,7 @@ void fn_80193B58(s32* arg0, u32 arg1, u32 arg2)
             ptr = arg0 + idx;
             if (*++ptr > (s32) (entry = table->min)[idx][!!*mt]) {
                 *ptr = *ptr - 1;
-                lbAudioAx_80024030(2);
+                sfxMove();
                 state->x7 = 5;
             } else {
                 s32 max = (s32) table->max[idx][!!*mt];
@@ -1690,7 +1691,7 @@ void fn_80193B58(s32* arg0, u32 arg1, u32 arg2)
                 idx = arg0[0];
                 val = arg0[idx + 1];
                 if (val != (s32) entry[idx][!!*mt]) {
-                    lbAudioAx_80024030(2);
+                    sfxMove();
                     state->x7 = 5;
                 }
             }
@@ -1704,14 +1705,14 @@ void fn_80193B58(s32* arg0, u32 arg1, u32 arg2)
             if (*++ptr < (s32) (entry = table->max)[idx][!!*mt]) {
                 if (*ptr + 1 <= clamp_val) {
                     *ptr = *ptr + 1;
-                    lbAudioAx_80024030(2);
+                    sfxMove();
                     state->x8 = 5;
                 } else {
                     *ptr = (s32) table->min[idx][!!*mt];
                     idx = arg0[0];
                     val = arg0[idx + 1];
                     if (val != clamp_val) {
-                        lbAudioAx_80024030(2);
+                        sfxMove();
                         state->x8 = 5;
                     }
                 }
@@ -1720,7 +1721,7 @@ void fn_80193B58(s32* arg0, u32 arg1, u32 arg2)
                 idx = arg0[0];
                 val = arg0[idx + 1];
                 if (val != (s32) entry[idx][!!*mt]) {
-                    lbAudioAx_80024030(2);
+                    sfxMove();
                     state->x8 = 5;
                 }
             }
@@ -1742,7 +1743,7 @@ void fn_80193B58(s32* arg0, u32 arg1, u32 arg2)
     }
 
     if (arg2 & 0x100) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         arg0[0] = arg0[0] + 1;
         if (*mt == 0) {
             u8 x30 = ((TmData*) arg0)->x30;
@@ -1760,7 +1761,7 @@ void fn_80193B58(s32* arg0, u32 arg1, u32 arg2)
             fn_80190520(lbl_804DA6E0, lbl_804DA6E4, 0.0F);
         }
     } else if (arg2 & 0x200) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         arg0[0] = arg0[0] - 1;
     }
 
@@ -1805,7 +1806,7 @@ void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
             ptr = arg0 + idx;
             if (*++ptr > (s32) (entry = table->min)[idx][!!*mt]) {
                 *ptr = *ptr - 1;
-                lbAudioAx_80024030(2);
+                sfxMove();
                 state->x7 = 5;
             } else {
                 s32 max_plus1 = (s32) table->max[idx][!!*mt] + 1;
@@ -1817,7 +1818,7 @@ void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
                 idx = arg0[0];
                 val = arg0[idx + 1];
                 if (val != (s32) entry[idx][!!*mt]) {
-                    lbAudioAx_80024030(2);
+                    sfxMove();
                     state->x7 = 5;
                 }
             }
@@ -1859,7 +1860,7 @@ void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
             if (*++ptr < (s32) (entry = table->max)[idx][!!*mt] + 1) {
                 if (*ptr + 1 <= clamp_val && *ptr + 1 < arg0[2]) {
                     *ptr = *ptr + 1;
-                    lbAudioAx_80024030(2);
+                    sfxMove();
                     state->x8 = 5;
                     goto after_right;
                 }
@@ -1867,7 +1868,7 @@ void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
                 idx = arg0[0];
                 val = arg0[idx + 1];
                 if (val != clamp_val) {
-                    lbAudioAx_80024030(2);
+                    sfxMove();
                     state->x8 = 5;
                 }
             } else {
@@ -1875,12 +1876,12 @@ void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
                 idx = arg0[0];
                 val = arg0[idx + 1];
                 if (val != (s32) entry[idx][!!*mt] + 1) {
-                    lbAudioAx_80024030(2);
+                    sfxMove();
                     state->x8 = 5;
                 }
             }
         } else {
-            lbAudioAx_80024030(2);
+            sfxMove();
             state->x8 = 5;
             idx = arg0[0];
             ptr = arg0 + idx;
@@ -1966,10 +1967,10 @@ post_clamp:
     }
 
     if (arg2 & 0x100) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         arg0[0] = arg0[0] + 1;
     } else if (arg2 & 0x200) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         arg0[0] = arg0[0] - 1;
         if (*mt == 0) {
             fn_8018EC7C();
@@ -2069,7 +2070,7 @@ end:
     }
 
     if (val != arg0[4]) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         if (changed == 0) {
             lbl_804799B8.x7 = 5;
         } else {
@@ -2083,10 +2084,10 @@ end:
     }
 
     if (arg2 & 0x100) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         arg0[0] = arg0[0] + 1;
     } else if (arg2 & 0x200) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         arg0[0] = arg0[0] - 1;
     }
 
@@ -2118,14 +2119,14 @@ void fn_801949B4(s32* arg0, u32 arg1, u32 arg2)
     }
 
     if (arg2 & 0x100) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         if (gm_804771C4.match_type == 0) {
             *arg0 = *arg0 + 1;
         } else {
             *arg0 = 6;
         }
     } else if (arg2 & 0x200) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         *arg0 = *arg0 - 1;
     }
 
@@ -2163,10 +2164,10 @@ void fn_80194BC4(s32* arg0, u32 arg1, u32 arg2)
     }
 
     if (arg2 & 0x100) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         *arg0 = *arg0 + 1;
     } else if (arg2 & 0x200) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         *arg0 = *arg0 - 1;
     }
 
@@ -2184,13 +2185,15 @@ void fn_80194D84(s32* state, u32 buttons, u32 trigger)
     s32 cur_state;
     TmData* tm;
 
-    if (buttons & 0x40001) {
+    if (buttons & (PAD_BUTTON_LEFT | PAD_STICK_LEFT)) {
         if (*state > 6) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             *state -= 1;
         }
-    } else if ((buttons & 0x80002) && (*state < 8)) {
-        lbAudioAx_80024030(2);
+    } else if ((buttons & (PAD_BUTTON_RIGHT | PAD_STICK_RIGHT)) &&
+               (*state < 8))
+    {
+        sfxMove();
         *state += 1;
     }
 
@@ -2198,8 +2201,8 @@ void fn_80194D84(s32* state, u32 buttons, u32 trigger)
         fn_80190ABC(0);
     }
 
-    if (trigger & 0x1100) {
-        lbAudioAx_80024030(1);
+    if (trigger & (PAD_BUTTON_A | PAD_BUTTON_START)) {
+        sfxForward();
         fn_8018EC7C();
         cur_state = *state;
         if (cur_state == 6) {
@@ -2219,8 +2222,8 @@ void fn_80194D84(s32* state, u32 buttons, u32 trigger)
         } else {
             *state = 0;
         }
-    } else if (trigger & 0x200) {
-        lbAudioAx_80024030(0);
+    } else if (trigger & PAD_BUTTON_B) {
+        sfxBack();
         if (gm_804771C4.match_type == 0) {
             *state = 5;
         } else {
@@ -2268,50 +2271,50 @@ void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
     TmData_80194F30* tm_alt = (TmData_80194F30*) state_ptr;
     s32 idx;
 
-    if (trigger & 0x1000) {
-        lbAudioAx_80024030(1);
+    if (trigger & PAD_BUTTON_START) {
+        sfxForward();
         lbl_804D6654 = *state_ptr;
         *state_ptr = 0x11;
         return;
     }
 
-    if (buttons & 0x40001) {
+    if (buttons & (PAD_BUTTON_LEFT | PAD_STICK_LEFT)) {
         switch (*state_ptr) {
         case 12:
-            lbAudioAx_80024030(2);
+            sfxMove();
             *state_ptr = 0xA;
             break;
         case 16:
-            lbAudioAx_80024030(2);
+            sfxMove();
             *state_ptr = 0xC;
             state->x1 = 0;
             break;
         }
-    } else if (buttons & 0x80002) {
+    } else if (buttons & (PAD_BUTTON_RIGHT | PAD_STICK_RIGHT)) {
         switch (*state_ptr) {
         case 11:
             break;
         case 10:
-            lbAudioAx_80024030(2);
+            sfxMove();
             *state_ptr = 0xC;
             break;
         case 12:
             if (state->x0 != 0) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 *state_ptr = 0x10;
             }
             break;
         }
-    } else if (buttons & 0x10008) {
+    } else if (buttons & (PAD_BUTTON_UP | PAD_STICK_UP)) {
         if (*state_ptr != 0x10 || state->x1 == 0) {
             u8* pos_ptr;
             if (*(pos_ptr = &state->x2) != 0) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 *pos_ptr -= 1;
                 fn_80190ABC(5);
             } else {
                 if (*(pos_ptr = &state->x3) != 0) {
-                    lbAudioAx_80024030(2);
+                    sfxMove();
                     *pos_ptr -= 1;
                     state->x4 -= 1;
                     fn_80190ABC(5);
@@ -2323,25 +2326,25 @@ void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
             u8* scroll_ptr;
             idx = *(scroll_ptr = &state->x2) + *(pos_ptr = &state->x3);
             if (tm->x37[idx].x2 > 1) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 idx = *scroll_ptr + *pos_ptr;
                 tm->x37[idx].x2 -= 1;
             }
         }
-    } else if (buttons & 0x20004) {
+    } else if (buttons & (PAD_BUTTON_DOWN | PAD_STICK_DOWN)) {
         if (*state_ptr != 0x10 || state->x1 == 0) {
             u8* pos_ptr;
             u8* scroll_ptr;
             u8 pos = *(scroll_ptr = &state->x2);
             if (pos < 0xB) {
                 if (pos + state->x3 < tm->x2E - 1) {
-                    lbAudioAx_80024030(2);
+                    sfxMove();
                     *scroll_ptr += 1;
                     fn_80190ABC(5);
                 }
             } else {
                 if (pos + *(pos_ptr = &state->x3) < tm->x2E - 1) {
-                    lbAudioAx_80024030(2);
+                    sfxMove();
                     *pos_ptr += 1;
                     state->x4 += 1;
                     fn_80190ABC(5);
@@ -2353,18 +2356,18 @@ void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
             u8* scroll_ptr;
             idx = *(scroll_ptr = &state->x2) + *(pos_ptr = &state->x3);
             if (tm->x37[idx].x2 < 9) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 idx = *scroll_ptr + *pos_ptr;
                 tm->x37[idx].x2 += 1;
             }
         }
     }
 
-    if (trigger & 0x100) {
+    if (trigger & PAD_BUTTON_A) {
         switch (*state_ptr) {
         case 12:
         case 10:
-            lbAudioAx_80024030(1);
+            sfxForward();
             idx = state->x2 + state->x3;
             tm->x37[idx].x4 = tm->x37[idx].x3;
             idx = state->x2 + state->x3;
@@ -2379,16 +2382,16 @@ void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
             if (state->x0 != 1) {
                 u8* flag_ptr;
                 if (*(flag_ptr = &state->x1) != 1) {
-                    lbAudioAx_80024030(1);
+                    sfxForward();
                 }
                 *flag_ptr = 1;
                 return;
             }
             break;
         }
-    } else if (trigger & 0x200) {
+    } else if (trigger & PAD_BUTTON_B) {
         u8* flag_ptr;
-        lbAudioAx_80024030(0);
+        sfxBack();
         if (*state_ptr != 0x10 || *(flag_ptr = &state->x1) == 0) {
             *state_ptr = 6;
             state->xE = 0;
@@ -2431,8 +2434,8 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
     idx = lbl_804799B8.x2 + lbl_804799B8.x3;
     cur_pos = fn_8018F310(fn_8018F6FC(tm->x37[idx].x3));
 
-    if (trigger & 0x1000) {
-        lbAudioAx_80024030(0);
+    if (trigger & PAD_BUTTON_START) {
+        sfxBack();
         idx = lbl_804799B8.x2 + lbl_804799B8.x3;
         tm->x37[idx].x3 = tm->x37[idx].x4;
         idx = lbl_804799B8.x2 + lbl_804799B8.x3;
@@ -2444,7 +2447,7 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
         return;
     }
 
-    if (buttons & 0x40001) {
+    if (buttons & (PAD_BUTTON_LEFT | PAD_STICK_LEFT)) {
         group = (cur_pos / 5) * 5;
         for (i = 1; i < 5; i++) {
             step = fn_801953C8_GetPreviousPosition(i, cur_pos);
@@ -2461,7 +2464,7 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
                 occupied = 0;
             }
             if (occupied != 0) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 idx = lbl_804799B8.x2 + lbl_804799B8.x3;
                 tm->x37[idx].x7 = 0;
                 idx = lbl_804799B8.x2 + lbl_804799B8.x3;
@@ -2472,7 +2475,7 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
                 break;
             }
         }
-    } else if (buttons & 0x80002) {
+    } else if (buttons & (PAD_BUTTON_RIGHT | PAD_STICK_RIGHT)) {
         group = ((cur_pos / 5) + 1) * 5;
         for (i = 1; i < 5; i++) {
             step = cur_pos + i;
@@ -2489,7 +2492,7 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
                 occupied = 0;
             }
             if (occupied != 0) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 idx = lbl_804799B8.x2 + lbl_804799B8.x3;
                 tm->x37[idx].x7 = 0;
                 idx = lbl_804799B8.x2 + lbl_804799B8.x3;
@@ -2500,7 +2503,7 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
                 break;
             }
         }
-    } else if (buttons & 0x10008) {
+    } else if (buttons & (PAD_BUTTON_UP | PAD_STICK_UP)) {
         s32 temp;
 
         for (i = 1; i < 5; i++) {
@@ -2518,7 +2521,7 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
                 occupied = 0;
             }
             if (occupied != 0) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 idx = lbl_804799B8.x2 + lbl_804799B8.x3;
                 tm->x37[idx].x7 = 0;
                 idx = lbl_804799B8.x2 + lbl_804799B8.x3;
@@ -2529,7 +2532,7 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
                 break;
             }
         }
-    } else if (buttons & 0x20004) {
+    } else if (buttons & (PAD_BUTTON_DOWN | PAD_STICK_DOWN)) {
         s32 next_candidate;
 
         for (i = 1; i < 5; i++) {
@@ -2546,7 +2549,7 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
                 occupied = 0;
             }
             if (occupied != 0) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 idx = lbl_804799B8.x2 + lbl_804799B8.x3;
                 tm->x37[idx].x7 = 0;
                 idx = lbl_804799B8.x2 + lbl_804799B8.x3;
@@ -2559,7 +2562,7 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
         }
     }
 
-    if (trigger & 0x100) {
+    if (trigger & PAD_BUTTON_A) {
         if ((fn_8018F6A8(4) & 0x40) && (fn_8018F6A8(4) & 0x20) &&
             gm_804771C4.match_type != 0)
         {
@@ -2568,7 +2571,7 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
                 lbAudioAx_80024030(3);
                 return;
             }
-            lbAudioAx_80024030(1);
+            sfxForward();
             idx = lbl_804799B8.x2 + lbl_804799B8.x3;
             tm->x37[idx].x5 = 1;
             *state_ptr -= 1;
@@ -2579,14 +2582,14 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
             lbAudioAx_80024030(3);
             return;
         }
-        lbAudioAx_80024030(1);
+        sfxForward();
         *state_ptr -= 1;
         idx = fn_801953C8_GetPlayerIndex();
         if (tm->x37[idx].x5 != 0) {
             tm->x37[idx].x5 = 0;
         }
-    } else if (trigger & 0x200) {
-        lbAudioAx_80024030(0);
+    } else if (trigger & PAD_BUTTON_B) {
+        sfxBack();
         idx = lbl_804799B8.x2 + lbl_804799B8.x3;
         tm->x37[idx].x3 = tm->x37[idx].x4;
         idx = lbl_804799B8.x2 + lbl_804799B8.x3;
@@ -2594,20 +2597,20 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
         idx = lbl_804799B8.x2 + lbl_804799B8.x3;
         tm->x37[idx].x5 = tm->x37[idx].x6;
         *state_ptr -= 1;
-    } else if (trigger & 0x400) {
+    } else if (trigger & PAD_BUTTON_X) {
         if ((s32) tm->x37[lbl_804799B8.x2 + lbl_804799B8.x3].x7 <
             (s32) (u8) gm_80169238((u8) fn_8018F6FC(
                 tm->x37[lbl_804799B8.x2 + lbl_804799B8.x3].x3)) -
                 1)
         {
-            lbAudioAx_80024030(2);
+            sfxMove();
             idx = lbl_804799B8.x2 + lbl_804799B8.x3;
             tm->x37[idx].x7++;
         }
-    } else if (trigger & 0x800) {
+    } else if (trigger & PAD_BUTTON_Y) {
         idx = lbl_804799B8.x2 + lbl_804799B8.x3;
         if (tm->x37[idx].x7 != 0) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             idx = lbl_804799B8.x2 + lbl_804799B8.x3;
             tm->x37[idx].x7--;
         }
@@ -2625,24 +2628,26 @@ void fn_80195AF0(s32* state_ptr, u32 buttons, u32 trigger)
     u8* x2;
     u8* x5;
 
-    if (trigger & 0x1000) {
+    if (trigger & PAD_BUTTON_START) {
         lbl_804D6654 = *state_ptr;
         *state_ptr = 0x11;
         return;
     }
 
-    if (buttons & 0x40001) {
+    if (buttons & (PAD_BUTTON_LEFT | PAD_STICK_LEFT)) {
         if (*state_ptr == 0xE) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             *state_ptr = 0xD;
         }
-    } else if ((buttons & 0x80002) && (*state_ptr == 0xD)) {
-        lbAudioAx_80024030(2);
+    } else if ((buttons & (PAD_BUTTON_RIGHT | PAD_STICK_RIGHT)) &&
+               (*state_ptr == 0xD))
+    {
+        sfxMove();
         *state_ptr = 0xE;
     }
 
-    if (trigger & 0x100) {
-        lbAudioAx_80024030(1);
+    if (trigger & PAD_BUTTON_A) {
+        sfxForward();
         tm_alt = (TmData_80194F30*) state_ptr;
         idx = *(x2 = &menu->x2) + *(x3 = &menu->x3);
         tm_alt->x37[idx].xB = tm_alt->x37[idx].x9;
@@ -2668,8 +2673,8 @@ void fn_80195AF0(s32* state_ptr, u32 buttons, u32 trigger)
             fn_80190ABC(4);
             return;
         }
-    } else if (trigger & 0x200) {
-        lbAudioAx_80024030(0);
+    } else if (trigger & PAD_BUTTON_B) {
+        sfxBack();
         tm_alt = (TmData_80194F30*) state_ptr;
         idx = menu->x2 + menu->x3;
         tm_alt->x37[idx].x9 = tm_alt->x37[idx].xB;
@@ -2711,8 +2716,8 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
     u8* ptr;
     u8* x6_tmp;
 
-    if (buttons & 0x40001) {
-        lbAudioAx_80024030(2);
+    if (buttons & (PAD_BUTTON_LEFT | PAD_STICK_LEFT)) {
+        sfxMove();
         if ((*(ptr = menu + 5) % 4) != 0) {
             *ptr -= 1;
             slot = lbl_804799B8.x2 + lbl_804799B8.x3;
@@ -2720,10 +2725,10 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
             fn_80190ABC(5);
             fn_80190ABC(4);
         }
-    } else if (buttons & 0x80002) {
+    } else if (buttons & (PAD_BUTTON_RIGHT | PAD_STICK_RIGHT)) {
         u8* right_x5;
 
-        lbAudioAx_80024030(2);
+        sfxMove();
         if (((s32) (*(right_x5 = menu + 5) % 4) < 3) &&
             ((s32) (*right_x5 + (i = (*(x6_tmp = menu + 6) * 4) + 1)) <
              GetNameCount()))
@@ -2734,8 +2739,8 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
             fn_80190ABC(5);
             fn_80190ABC(4);
         }
-    } else if (buttons & 0x10008) {
-        lbAudioAx_80024030(2);
+    } else if (buttons & (PAD_BUTTON_UP | PAD_STICK_UP)) {
+        sfxMove();
         if (((s32) lbl_804799B8.x5 / 4) != 0) {
             lbl_804799B8.x5 -= 4;
             slot = lbl_804799B8.x2 + lbl_804799B8.x3;
@@ -2749,8 +2754,8 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
             fn_80190ABC(5);
             fn_80190ABC(4);
         }
-    } else if (buttons & 0x20004) {
-        lbAudioAx_80024030(2);
+    } else if (buttons & (PAD_BUTTON_DOWN | PAD_STICK_DOWN)) {
+        sfxMove();
         if ((s32) ((s32) * (ptr = menu + 5) / 4) < 8) {
             if ((s32) (*ptr + (i = (*(x6_tmp = menu + 6) * 4) + 4)) <
                 GetNameCount())
@@ -2777,7 +2782,7 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
         }
     }
 
-    if (trigger & 0x100) {
+    if (trigger & PAD_BUTTON_A) {
         x6_ptr = menu + 6;
         x5 = menu + 5;
         if (GetNameText(*x5 + (*x6_ptr * 4)) != NULL) {
@@ -2789,7 +2794,7 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
             unique =
                 fn_80195CCC_IsUniqueEntry(tm, (s32) count, slot, selected);
             if (unique != 0) {
-                lbAudioAx_80024030(1);
+                sfxForward();
                 slot = *x2_ptr + *menu;
                 tm_alt->x37[slot].x9 = *x5 + (*x6_ptr * 4);
                 fn_80190ABC(5);
@@ -2802,8 +2807,8 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
         return;
     }
 
-    if (trigger & 0x200) {
-        lbAudioAx_80024030(0);
+    if (trigger & PAD_BUTTON_B) {
+        sfxBack();
         slot = menu[2] + menu[3];
         tm_alt->x37[slot].x9 = tm_alt->x37[slot].xB;
         fn_80190ABC(5);
@@ -2822,19 +2827,19 @@ void fn_8019610C(s32* state, u32 buttons, u32 trigger)
 
     i = 1;
 
-    if (buttons & 0x10008) {
+    if (buttons & (PAD_BUTTON_UP | PAD_STICK_UP)) {
         if (*state == 0x12) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             *state = 0x11;
         }
-    } else if ((buttons & 0x20004) != 0) {
+    } else if ((buttons & (PAD_BUTTON_DOWN | PAD_STICK_DOWN)) != 0) {
         if (*state == 0x11) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             *state = 0x12;
         }
     }
 
-    if ((trigger & 0x1100) != 0) {
+    if ((trigger & (PAD_BUTTON_A | PAD_BUTTON_START)) != 0) {
         if (*state == 0x11) {
             lbAudioAx_80024030(i);
             if (gm_804771C4.match_type == 0) {
@@ -2864,11 +2869,11 @@ void fn_8019610C(s32* state, u32 buttons, u32 trigger)
             }
             gm_801A4B60();
         } else {
-            lbAudioAx_80024030(0);
+            sfxBack();
             *state = lbl_804D6654;
         }
-    } else if ((trigger & 0x200) != 0) {
-        lbAudioAx_80024030(0);
+    } else if ((trigger & PAD_BUTTON_B) != 0) {
+        sfxBack();
         *state = lbl_804D6654;
     }
 }
@@ -2886,7 +2891,7 @@ void gm_8019628C_OnFrame(void)
     r29 = fn_8018F640(4);
 
     if (mn_8022F218() != 0) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         HSD_SisLib_803A5E70();
         mn_8022F138(1, 8);
         mn_8022F138(0x19, 0x1C);

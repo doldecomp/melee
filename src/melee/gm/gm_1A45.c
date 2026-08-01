@@ -62,7 +62,9 @@ bool fn_801A46F4(void)
     int i;
     for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         HSD_PadStatus* pad = &HSD_PadMasterStatus[(u8) i];
-        if (pad->err == 0 && (pad->trigger & 8) && (pad->button & HSD_PAD_X)) {
+        if (pad->err == 0 && (pad->trigger & HSD_PAD_DPADUP) &&
+            (pad->button & HSD_PAD_X))
+        {
             return true;
         }
     }
@@ -74,7 +76,7 @@ bool fn_801A47E4(void)
     int i;
     for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         HSD_PadStatus* pad = &HSD_PadMasterStatus[(u8) i];
-        if (pad->err == 0 && (pad->trigger & 0x10)) {
+        if (pad->err == 0 && (pad->trigger & HSD_PAD_Z)) {
             return true;
         }
     }
@@ -108,7 +110,9 @@ void gm_801A4970(int (**arg0)(void))
     var_r26 = 0;
     for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         temp_r3 = &HSD_PadMasterStatus[(u8) i];
-        if ((temp_r3->trigger & 2) && (temp_r3->button & 0x400)) {
+        if ((temp_r3->trigger & HSD_PAD_DPADRIGHT) &&
+            (temp_r3->button & HSD_PAD_X))
+        {
             lbHeap_80015DF8();
             OSReport("[hsdDumpClassStat] -- Report --\n");
             hsdDumpClassStat(NULL, 0, 1);

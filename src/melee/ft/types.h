@@ -33,6 +33,7 @@
 #include "ftYoshi/types.h"
 #include "ftZakoBoy/types.h"
 #include "ftZelda/types.h"
+#include "gm/types.h"
 
 #include "it/forward.h"
 
@@ -40,7 +41,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 
@@ -1786,7 +1786,7 @@ struct Fighter {
         /* fp+222C */ struct ftZakoBoy_FighterVars bo, gl;
         /* fp+222C */ struct ftZelda_FighterVars zd;
     } u;
-    /* fp+2324 */ InternalStageId bury_stage_kind;
+    /* fp+2324 */ GrKind bury_grkind;
     /* fp+2328 */ u32 bury_timer_1;
     /* fp+232C */ u32 bury_timer_2;
     /* fp+2330 */ IntVec2 x2330;

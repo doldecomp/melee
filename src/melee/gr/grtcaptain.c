@@ -43,17 +43,32 @@ static DynamicsDesc* grTCaptain_OnTouchLine(enum_t);
 static bool grTCaptain_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grTCa_StageCallbacks[] = {
-    { grTCaptain_8021FDEC, grTCaptain_8021FE18, grTCaptain_8021FE20,
-      grTCaptain_8021FE24, 0 },
-    { grTCaptain_8021FEB8, grTCaptain_8021FF08, grTCaptain_8021FF10,
-      grTCaptain_8021FF30, 0 },
-    { grTCaptain_8021FE28, grTCaptain_8021FE78, grTCaptain_8021FE80,
-      grTCaptain_8021FEB4, (1 << 30) | (1U << 31) },
-    { NULL, NULL, NULL, NULL, 0 }
+    {
+        grTCaptain_8021FDEC,
+        grTCaptain_8021FE18,
+        grTCaptain_8021FE20,
+        grTCaptain_8021FE24,
+        0,
+    },
+    {
+        grTCaptain_8021FEB8,
+        grTCaptain_8021FF08,
+        grTCaptain_8021FF10,
+        grTCaptain_8021FF30,
+        0,
+    },
+    {
+        grTCaptain_8021FE28,
+        grTCaptain_8021FE78,
+        grTCaptain_8021FE80,
+        grTCaptain_8021FEB4,
+        (1 << 30) | (1 << 31),
+    },
+    { 0 },
 };
 
-StageData grTCa_803E8664 = {
-    TCAPTAIN,
+StageData grTCa_StageData = {
+    Gr_Kind_TCaptain,
     grTCa_StageCallbacks,
     "/GrTCa.dat",
     grTCaptain_OnInit,

@@ -7,6 +7,7 @@
 #include "gm/gm_1A3F.h"
 #include "gm/gm_1BA8.h"
 #include "gm/gmmovieend.h"
+#include "if/if_2FD9.h"
 #include "melee/gm/gm_unsplit.h"
 #include "melee/gm/gmcamera.h"
 #include "melee/gm/gmmain_lib.h"
@@ -22,10 +23,7 @@
 #include "melee/lb/lbtime.h"
 #include "melee/lb/types.h"
 #include "melee/mn/types.h"
-
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/random.h>
+#include "mn/inlines.h"
 
 /* 4D68C0 */ static u8 gm_804D68C0;
 /* 4D68C1 */ static u8 gm_804D68C1;
@@ -627,7 +625,7 @@ void gm_801B1EEC(GameScene* arg0)
 {
     VsModeData* vs_data;
     SSSData* sss;
-    s16 stage_id;
+    s16 stkind;
 
     vs_data = &gmMainLib_804D3EE0->unk_D10;
     sss = gm_GetGameSceneLeaveDataCallback(arg0);
@@ -635,9 +633,9 @@ void gm_801B1EEC(GameScene* arg0)
         gm_SetPendingSceneIndex(0);
         return;
     }
-    stage_id = sss->data.data.rules.xE;
-    gm_80473814.x6 = stage_id;
-    vs_data->data.rules.xE = stage_id;
+    stkind = sss->data.data.rules.xE;
+    gm_80473814.x6 = stkind;
+    vs_data->data.rules.xE = stkind;
     lbAudioAx_80026F2C(0x18);
     lbAudioAx_8002702C(8, lbAudioAx_80026EBC(vs_data->data.rules.xE));
     lbAudioAx_80027168();
@@ -704,7 +702,7 @@ void gm_801B2204(GameScene* arg0)
     if (!gm_80173754(0x1C, gm_804D68C0)) {
         gm_SetPendingSceneIndex(0);
     }
-    lbAudioAx_80024030(1);
+    sfxForward();
 }
 
 void gm_801B2298_OnInit(void)
@@ -718,7 +716,7 @@ void gm_801B2298_OnInit(void)
         temp_r31->data.players[i].color = i;
         temp_r31->data.players[i].xE = 0;
         if (i != 0) {
-            temp_r31->data.players[1].c_kind = 0x21;
+            temp_r31->data.players[1].c_kind = CHKIND_NONE;
         }
         gm_80473814.players[i] = temp_r31->data.players[i];
     }

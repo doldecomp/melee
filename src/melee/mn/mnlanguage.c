@@ -52,7 +52,7 @@ void mnLanguage_8024BFE0(HSD_GObj* arg0_unused)
     }
     temp_r3 = Menu_GetAllInputs();
     if (temp_r3 & 0x20) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_804A04F0.entering_menu = 0;
         mn_80229894(4, 4, 3);
         return;
@@ -63,14 +63,14 @@ void mnLanguage_8024BFE0(HSD_GObj* arg0_unused)
             lbLang_SetSavedLanguage(temp_r31->x0);
             lb_8001CE00();
             lbAudioAx_80027AB0(0xAD);
-            mn_80229860(1);
+            mn_80229860(GM_MENU);
             mn_8022F1A8(1, 9);
             mn_804A04F0.cur_menu = 4;
             mn_804A04F0.hovered_selection = 4;
         }
     } else if (temp_r31->x2 != 0) {
         if (temp_r3 & 4) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             temp_r31->x0 = temp_r31->x0 == 0 ? 1 : 0;
             lang = temp_r31->x0;
             lb_80011E24(mnLanguage_804D6C50->hsd_obj, &sp2C, 1, -1);
@@ -78,7 +78,7 @@ void mnLanguage_8024BFE0(HSD_GObj* arg0_unused)
             mn_8022F3D8(sp2C, -1, JOBJ_MASK);
             HSD_JObjAnimAll(sp2C);
         } else if (temp_r3 & 8) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             temp_r31->x0 = temp_r31->x0 == 0 ? 1 : 0;
             lang = temp_r31->x0;
             lb_80011E24(GET_JOBJ(mnLanguage_804D6C50), &sp24, 1, -1);

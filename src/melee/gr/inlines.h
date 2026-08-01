@@ -40,11 +40,11 @@ static inline void Ground_SetupStageCallbacks(Ground_GObj* gobj,
     if (callbacks->callback3 != NULL) {
         gp->x1C_callback = callbacks->callback3;
     }
-    if (callbacks->callback0 != NULL) {
-        callbacks->callback0(gobj);
+    if (callbacks->on_init != NULL) {
+        callbacks->on_init(gobj);
     }
-    if (callbacks->callback2 != NULL) {
-        HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+    if (callbacks->gobj_proc != NULL) {
+        HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
     }
 }
 

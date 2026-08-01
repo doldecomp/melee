@@ -25,7 +25,6 @@
 
 #include "lb/lb_00B0.h"
 
-#include <common_structs.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 
@@ -51,6 +50,7 @@ void fn_8010B1F4(Fighter_GObj* gobj)
         fp->x2219_b0 = true;
     }
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void fn_8010B2E8(Fighter_GObj* gobj)
@@ -437,7 +437,7 @@ void ftKb_MsSpecialNEnd_Anim(Fighter_GObj* gobj)
         hit_fp = fp;
         i = 0;
         do {
-            if ((s32) hit_fp->x914[0].state == 1) {
+            if ((s32) hit_fp->x914[0].state == HitCapsule_Enabled) {
                 dmg =
                     (u32) (f32) (s32) (ms_da->base_damage +
                                        (fp->mv.kb.specialn_ms.cur_frame / 30) *
@@ -472,7 +472,7 @@ void ftKb_MsSpecialAirNEnd_Anim(Fighter_GObj* gobj)
         hit_fp = fp;
         i = 0;
         do {
-            if ((s32) hit_fp->x914[0].state == 1) {
+            if ((s32) hit_fp->x914[0].state == HitCapsule_Enabled) {
                 dmg =
                     (u32) (f32) (s32) (ms_da->base_damage +
                                        (fp->mv.kb.specialn_ms.cur_frame / 30) *
@@ -535,8 +535,7 @@ void ftKb_SpecialNPe_8010BF90(Fighter_GObj* gobj)
     Fighter_ChangeMotionState(gobj, msid, 0x0C4C708E, fp->cur_anim_frame, 1.0f,
                               0.0f, NULL);
     if (fp->x2219_b0 == true) {
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     }
 }
 
@@ -558,8 +557,7 @@ void ftKb_SpecialNPe_8010C06C(Fighter_GObj* gobj)
     Fighter_ChangeMotionState(gobj, msid, 0x0C4C708E, fp->cur_anim_frame, 1.0f,
                               0.0f, NULL);
     if (fp->x2219_b0 == true) {
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     }
 }
 

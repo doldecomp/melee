@@ -15,7 +15,6 @@
 #include "ftCrazyHand/ftCh_Wait1_0.h"
 #include "ftMasterHand/types.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <MetroTRK/intrinsics.h>
 

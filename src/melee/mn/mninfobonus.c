@@ -197,8 +197,9 @@ void fn_80252C50(HSD_GObj* gobj)
         o->x4C = NULL;
         return;
     } ///< @todo inline button getter
-    if (DbLevel >= 3 && HSD_PadCopyStatus->button & 0x40 &&
-        HSD_PadCopyStatus->button & 0x20 && HSD_PadCopyStatus->button & 0x100)
+    if (DbLevel >= 3 && HSD_PadCopyStatus->button & HSD_PAD_L &&
+        HSD_PadCopyStatus->button & HSD_PAD_R &&
+        HSD_PadCopyStatus->button & HSD_PAD_A)
     {
         o->x0 = 0;
         *mnInfoBonus_804D6C80 = 1;
@@ -206,14 +207,14 @@ void fn_80252C50(HSD_GObj* gobj)
     }
     if (((u64) temp_r3 & 1) != 0) {
         if (o->x0 > 0) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             --o->x0;
             mnInfoBonus_802529B4();
         }
     } else if (((u64) temp_r3 & 2) != 0 &&
                mnInfoBonus_802528F8_wrapper() /* @todo don't inline! */ > 5)
     {
-        lbAudioAx_80024030(2);
+        sfxMove();
         ++o->x0;
         mnInfoBonus_802529B4();
     }

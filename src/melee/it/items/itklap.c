@@ -2,8 +2,8 @@
 
 #include "gr/grkongo.h"
 #include "gr/ground.h"
+#include "it/inlines.h"
 #include "it/it_26B1.h"
-#include "it/it_2725.h"
 #include "it/itcoll.h"
 #include "it/item.h"
 #include "it/ithitbox.h"
@@ -16,16 +16,36 @@
 #include <baselib/random.h>
 
 ItemStateTable it_803F8940[] = {
-    { 0, itKlap_UnkMotion1_Anim, itKlap_UnkMotion1_Phys,
-      itKlap_UnkMotion1_Coll },
-    { 1, itKlap_UnkMotion1_Anim, itKlap_UnkMotion1_Phys,
-      itKlap_UnkMotion1_Coll },
-    { 2, itKlap_UnkMotion2_Anim, itKlap_UnkMotion2_Phys,
-      itKlap_UnkMotion2_Coll },
-    { 3, itKlap_UnkMotion3_Anim, itKlap_UnkMotion3_Phys,
-      itKlap_UnkMotion3_Coll },
-    { 2, itKlap_UnkMotion4_Anim, itKlap_UnkMotion4_Phys,
-      itKlap_UnkMotion4_Coll },
+    {
+        0,
+        itKlap_UnkMotion1_Anim,
+        itKlap_UnkMotion1_Phys,
+        itKlap_UnkMotion1_Coll,
+    },
+    {
+        1,
+        itKlap_UnkMotion1_Anim,
+        itKlap_UnkMotion1_Phys,
+        itKlap_UnkMotion1_Coll,
+    },
+    {
+        2,
+        itKlap_UnkMotion2_Anim,
+        itKlap_UnkMotion2_Phys,
+        itKlap_UnkMotion2_Coll,
+    },
+    {
+        3,
+        itKlap_UnkMotion3_Anim,
+        itKlap_UnkMotion3_Phys,
+        itKlap_UnkMotion3_Coll,
+    },
+    {
+        2,
+        itKlap_UnkMotion4_Anim,
+        itKlap_UnkMotion4_Phys,
+        itKlap_UnkMotion4_Coll,
+    },
 };
 
 void it_802E1820(Item_GObj* gobj)

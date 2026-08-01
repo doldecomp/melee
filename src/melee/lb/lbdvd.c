@@ -184,8 +184,8 @@ void lbDvd_80017960(void)
         }
     }
 
-    if (game_cache->stage_id != 0x148) {
-        Stage_802251B4(game_cache->stage_id);
+    if (game_cache->stkind != 0x148) {
+        Stage_802251B4(game_cache->stkind);
     }
 
     for (i = 0; i < 8; i++) {

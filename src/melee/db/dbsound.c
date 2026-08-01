@@ -4,6 +4,8 @@
 #include "if/textlib.h"
 #include "lb/lbaudio_ax.h"
 
+#include <dolphin/gx/GXStruct.h>
+
 static char db_SoundInfoText_buf[0x70];
 
 int db_804D4AF8 = 1;

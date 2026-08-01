@@ -21,7 +21,7 @@ HSD_GObj* it_802C8B28(Item_GObj* parent, Vec3* pos, u32 bone, float facing_dir)
     SpawnItem spawn;
     PAD_STACK(4);
     if (parent != NULL) {
-        spawn.kind = 0x7B;
+        spawn.kind = It_Kind_CLink_Milk;
         Item_InitSpawnOnPlaneNoInitialCollision(&spawn, parent, pos,
                                                 facing_dir);
         item_gobj = Item_80268B18(&spawn);

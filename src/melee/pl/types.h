@@ -118,9 +118,9 @@ struct StaleMoveTable {
             u16 x12_b0 : 1;
         } x10[6];
     } x5EC;
-    /* +674 */ u32 x674[39];
-    /* +710 */ int x710[39];
-    /* +7AC */ int x7AC[39];
+    /* +674 */ u32 x674[Pl_ItemLog_Terminate];
+    /* +710 */ int x710[Pl_ItemLog_Terminate];
+    /* +7AC */ int x7AC[Pl_ItemLog_Terminate];
     /* +848 */ int x848[30];
     /* +8C0 */ struct pl_x8C0_t {
         int x0;

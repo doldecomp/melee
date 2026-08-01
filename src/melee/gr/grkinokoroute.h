@@ -41,5 +41,6 @@
 /* 208754 */ DynamicsDesc* grKinokoRoute_80208754(enum_t);
 /* 20875C */ bool grKinokoRoute_8020875C(Vec3*, int arg, HSD_JObj* jobj);
 /* 2087B0 */ float grKinokoRoute_802087B0(void);
+/* 3E584C */ extern StageData grNKr_StageData;
 
 #endif

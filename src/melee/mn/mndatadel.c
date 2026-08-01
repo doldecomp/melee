@@ -329,7 +329,7 @@ void fn_8024F1D4(HSD_GObj* gobj)
 
     data = mnDataDel_804D6C68->user_data;
     input = Menu_GetAllInputs();
-    if (input & 0x10) {
+    if (input & MenuInput_Confirm) {
         if (data->cursor_idx != 0) {
             mnDataDel_8024EA6C();
         } else {
@@ -340,7 +340,7 @@ void fn_8024F1D4(HSD_GObj* gobj)
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObj_SetupProc(gobj, fn_8024F840, 0);
         proc->flags_3 = HSD_GObj_804D783C;
-    } else if (input & 0x20) {
+    } else if (input & MenuInput_Back) {
         sfxBack();
         mn_804D6BC8.cooldown = 5;
         data->visible = 0;
@@ -421,7 +421,7 @@ void fn_8024F318(HSD_GObj* gobj)
                 lbAudioAx_800237A8(0xBD, 0x7F, 0x40);
                 return;
             }
-            lbAudioAx_80024030(0);
+            sfxBack();
             user_data->x1 = 0U;
             user_data->x2 = 0U;
             proc = HSD_GObj_SetupProc(temp_gobj, fn_8024F840, 0U);
@@ -517,7 +517,7 @@ void fn_8024F318(HSD_GObj* gobj)
             }
             lbAudioAx_800237A8(0xBE, 0x7F, 0x40);
         } else {
-            lbAudioAx_80024030(0);
+            sfxBack();
         }
         user_data->x1 = 0U;
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
@@ -526,7 +526,7 @@ void fn_8024F318(HSD_GObj* gobj)
         return;
     }
     if (buttons & 0x20) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_804D6BC8.cooldown = 5;
         user_data->x1 = 0U;
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
@@ -535,7 +535,7 @@ void fn_8024F318(HSD_GObj* gobj)
         return;
     }
     if ((buttons & 8) || (buttons & 4)) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         if (user_data->x2 != 0) {
             user_data->x2 = 0U;
             return;
@@ -554,7 +554,7 @@ static inline void fn_8024F840_inline(u64 buttons,
     struct MnDataDelGObjUserData* temp_user_data;
 
     if (buttons & 2) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         temp_user_data = mnDataDel_804D6C68->user_data;
         joint = (HSD_JObj*) mn_80231634(
             (struct mn_80231634_t*)
@@ -617,15 +617,13 @@ void fn_8024F840(HSD_GObj* gobj)
 
     user_data = mnDataDel_804D6C68->user_data;
     if (mn_804D6BC8.cooldown != 0) {
-        mn_804D6BC8.cooldown--;
-        mn_804D6BC8.x2 = 0;
-        mn_804D6BC8.x4 = 0;
+        Menu_DecrementAnimTimer();
         return;
     }
     buttons = Menu_GetAllInputs();
     zero = 0;
     if (buttons & 0x20) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_804A04F0.entering_menu = zero;
         mn_80229894(4, 5U, 3);
         return;
@@ -642,7 +640,7 @@ void fn_8024F840(HSD_GObj* gobj)
         return;
     }
     if (buttons & 1) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         temp_user_data = mnDataDel_804D6C68->user_data;
         joint = (HSD_JObj*) mn_80231634(
             (struct mn_80231634_t*)

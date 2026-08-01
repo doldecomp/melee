@@ -597,8 +597,8 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
     int v;
     PAD_STACK(72);
 
-    if ((u32) input & 0x20) {
-        lbAudioAx_80024030(0);
+    if ((u32) input & MenuInput_Back) {
+        sfxBack();
         i = mn_804A04F0.entering_menu = 0;
         gmMainLib_GetGameRules()->xD =
             ((Diagram3*) mnDiagram3_804D6C20->user_data)->is_name_mode;
@@ -620,8 +620,8 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
         mn_80229894(0x1C, 0, 3);
         return;
     }
-    if (input & 0xC0) {
-        lbAudioAx_80024030(1);
+    if (input & (MenuInput_LTrigger | MenuInput_RTrigger)) {
+        sfxForward();
         gmMainLib_GetGameRules()->xD =
             ((Diagram3*) mnDiagram3_804D6C20->user_data)->is_name_mode;
         mnDiagram2_ClearDetailView(mnDiagram3_804D6C20);
@@ -639,19 +639,19 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
             } while (++i < 0xA);
         }
         HSD_GObjPLink_80390228(gobj);
-        if (input & 0x40) {
+        if (input & MenuInput_LTrigger) {
             mnDiagram2_Init();
             return;
         }
         mnDiagram_Init(0, 0);
         return;
     }
-    if (input & 0xC00) {
+    if (input & (MenuInput_XButton | MenuInput_YButton)) {
         if (GetNameCount() == 0) {
             lbAudioAx_80024030(3);
             return;
         }
-        lbAudioAx_80024030(1);
+        sfxForward();
         data->is_name_mode = (data->is_name_mode == 0) ? 1 : 0;
         if ((data->is_name_mode == 0) &&
             ((s32) (data->scroll_offset + 0xA) >= 0x15))
@@ -716,7 +716,7 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
             Diagram3* cur;
             u8 n;
             f32 spacing;
-            lbAudioAx_80024030(2);
+            sfxMove();
             data->cursor_row = data->cursor_row - 1;
             cur = mnDiagram3_804D6C20->user_data;
             popup = data->popup_gobj->hsd_obj;
@@ -742,7 +742,7 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
             u8 base_idx_u8;
             u8 i_u8;
             f32 spacing;
-            lbAudioAx_80024030(2);
+            sfxMove();
             data->scroll_offset = data->scroll_offset - 1;
             data = mnDiagram3_804D6C20->user_data;
             {
@@ -796,7 +796,7 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
             Diagram3* cur;
             u8 n;
             f32 spacing;
-            lbAudioAx_80024030(2);
+            sfxMove();
             data->cursor_row = data->cursor_row + 1;
             cur = mnDiagram3_804D6C20->user_data;
             popup = data->popup_gobj->hsd_obj;
@@ -822,7 +822,7 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
             u8 base_idx_u8;
             u8 i_u8;
             f32 spacing;
-            lbAudioAx_80024030(2);
+            sfxMove();
             data->scroll_offset = data->scroll_offset + 1;
             data = mnDiagram3_804D6C20->user_data;
             {

@@ -1,7 +1,5 @@
 #include "itmsbomb.h"
 
-#include "common_structs.h"
-
 #include "baselib/jobj.h"
 
 #include "it/forward.h"

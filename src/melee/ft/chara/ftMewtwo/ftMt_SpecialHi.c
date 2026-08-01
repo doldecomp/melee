@@ -2,7 +2,6 @@
 
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 
 #include "forward.h"
@@ -11,6 +10,7 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0892.h"
+#include "ft/ft_0C8C.h"
 #include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcoll.h"
@@ -25,7 +25,6 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
-#include <common_structs.h>
 #include <math_ppc.h>
 #include <trigf.h>
 #include <dolphin/mtx.h>
@@ -54,8 +53,7 @@ void ftMt_SpecialHi_SetStartGFX(HSD_GObj* gobj)
         }
     }
 
-    fp0->pre_hitlag_cb = efLib_PauseAll;
-    fp0->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp0);
 }
 
 /// Setup Teleport End GFX
@@ -74,6 +72,7 @@ void ftMt_SpecialHi_SetEndGFX(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp0);
+    fp0->accessory4_cb = NULL;
 }
 
 /// Mewtwo's grounded Teleport Start Motion State handler

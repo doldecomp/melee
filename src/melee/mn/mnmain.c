@@ -1894,68 +1894,68 @@ void mn_8022C4F4(HSD_GObj* gp)
         mn_804A04F0.entering_menu = 1;
         switch (mn_804A04F0.hovered_selection) {
         case SEL_SPECIAL_VS_CAMERA:
-            lbAudioAx_80024030(1);
+            sfxForward();
             data = gm_GetCurrentSceneExitData();
             data->pending_mode = GM_CAMERA_MODE;
             gm_801A4B60();
             break;
         case SEL_SPECIAL_VS_STAMINA:
-            lbAudioAx_80024030(1);
+            sfxForward();
             data = gm_GetCurrentSceneExitData();
             data->pending_mode = GM_STAMINA_VS;
             gm_801A4B60();
             break;
         case SEL_SPECIAL_VS_SUDDEN_DEATH:
-            lbAudioAx_80024030(1);
+            sfxForward();
             data = gm_GetCurrentSceneExitData();
             data->pending_mode = GM_SUPER_SUDDEN_DEATH_VS;
             gm_801A4B60();
             break;
         case SEL_SPECIAL_VS_GIANT:
-            lbAudioAx_80024030(1);
+            sfxForward();
             data = gm_GetCurrentSceneExitData();
             data->pending_mode = GM_GIANT_VS;
             gm_801A4B60();
             break;
         case SEL_SPECIAL_VS_TINY:
-            lbAudioAx_80024030(1);
+            sfxForward();
             data = gm_GetCurrentSceneExitData();
             data->pending_mode = GM_TINY_VS;
             gm_801A4B60();
             break;
         case SEL_SPECIAL_VS_INVISIBLE:
-            lbAudioAx_80024030(1);
+            sfxForward();
             data = gm_GetCurrentSceneExitData();
             data->pending_mode = GM_INVISIBLE_VS;
             gm_801A4B60();
             break;
         case SEL_SPECIAL_VS_FIXED_CAMERA:
-            lbAudioAx_80024030(1);
+            sfxForward();
             data = gm_GetCurrentSceneExitData();
             data->pending_mode = GM_FIXED_CAMERA_VS;
             gm_801A4B60();
             break;
         case SEL_SPECIAL_VS_SINGLE_BUTTON:
-            lbAudioAx_80024030(1);
+            sfxForward();
             data = gm_GetCurrentSceneExitData();
             data->pending_mode = GM_SINGLE_BUTTON_VS;
             gm_801A4B60();
             break;
         case SEL_SPECIAL_VS_LIGHTNING:
-            lbAudioAx_80024030(1);
+            sfxForward();
             data = gm_GetCurrentSceneExitData();
             data->pending_mode = GM_LIGHTNING_VS;
             gm_801A4B60();
             break;
         case SEL_SPECIAL_VS_SLOMO:
-            lbAudioAx_80024030(1);
+            sfxForward();
             data = gm_GetCurrentSceneExitData();
             data->pending_mode = GM_SLOMO_VS;
             gm_801A4B60();
             break;
         }
     } else if (buttons & MenuInput_Back) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_804A04F0.entering_menu = 0;
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
@@ -1969,10 +1969,10 @@ void mn_8022C4F4(HSD_GObj* gp)
             temp_r3_2->flags_3 = HSD_GObj_804D783C;
         }
     } else if (buttons & MenuInput_Up) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         x2_dec(selection_count);
     } else if (buttons & MenuInput_Down) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         x2_inc(selection_count);
     }
 }
@@ -2007,27 +2007,27 @@ void mn_8022C7CC(HSD_GObj* gp)
         mn_804A04F0.entering_menu = 1;
         switch (mn_804A04F0.hovered_selection) {
         case SEL_STADIUM_TARGET:
-            lbAudioAx_80024030(1);
+            sfxForward();
             gm_801677E8(mn_8022C7CC_inline());
             data = gm_GetCurrentSceneExitData();
             data->pending_mode = GM_TARGET_TEST;
             gm_801A4B60();
             return;
         case SEL_STADIUM_HOMERUN:
-            lbAudioAx_80024030(1);
+            sfxForward();
             gm_801677E8(mn_8022C7CC_inline());
             data = gm_GetCurrentSceneExitData();
             data->pending_mode = GM_HOME_RUN_CONTEST;
             gm_801A4B60();
             return;
         case SEL_STADIUM_MULTIMAN:
-            lbAudioAx_80024030(1);
+            sfxForward();
             mnHyaku_8024CD64(0);
             HSD_GObjPLink_80390228(gp);
             return;
         }
     } else if (buttons & MenuInput_Back) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_804A04F0.entering_menu = 0;
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
@@ -2041,10 +2041,10 @@ void mn_8022C7CC(HSD_GObj* gp)
             think->flags_3 = HSD_GObj_804D783C;
         }
     } else if (buttons & MenuInput_Up) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         x2_dec(selection_count);
     } else if (buttons & MenuInput_Down) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         x2_inc(selection_count);
     }
 }
@@ -2064,23 +2064,23 @@ void mn_8022CA54(HSD_GObj* gp)
         mn_804A04F0.entering_menu = 1;
         switch ((RecordsMenuSelection) mn_804A04F0.hovered_selection) {
         case SEL_RECORDS_VS:
-            lbAudioAx_80024030(1);
+            sfxForward();
             mnDiagram_Init(1, 1);
             HSD_GObjPLink_80390228(gp);
             return;
         case SEL_RECORDS_BONUS:
-            lbAudioAx_80024030(1);
+            sfxForward();
             mnInfoBonus_80252F8C();
             HSD_GObjPLink_80390228(gp);
             return;
         case SEL_RECORDS_MISC:
-            lbAudioAx_80024030(1);
+            sfxForward();
             mnCount_Create();
             HSD_GObjPLink_80390228(gp);
             return;
         }
     } else if (buttons & MenuInput_Back) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_804A04F0.entering_menu = 0;
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
@@ -2093,7 +2093,7 @@ void mn_8022CA54(HSD_GObj* gp)
             think->flags_3 = HSD_GObj_804D783C;
         }
     } else if (buttons & MenuInput_Up) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         if ((RecordsMenuSelection) mn_804A04F0.hovered_selection ==
             SEL_RECORDS_VS)
         {
@@ -2103,7 +2103,7 @@ void mn_8022CA54(HSD_GObj* gp)
             mn_804A04F0.hovered_selection--;
         }
     } else if (buttons & MenuInput_Down) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         if ((RecordsMenuSelection) mn_804A04F0.hovered_selection ==
             SEL_RECORDS_MISC)
         {
@@ -2133,26 +2133,26 @@ void mn_8022CC28(HSD_GObj* gp)
         switch ((RegMatchMenuSelection)
                     mn_804A04F0.hovered_selection) { /* irregular */
         case SEL_REG_CLASSIC:
-            lbAudioAx_80024030(1);
+            sfxForward();
             data = gm_GetCurrentSceneExitData();
             data->pending_mode = GM_CLASSIC;
             gm_801A4B60();
             return;
         case SEL_REG_ADVENTURE:
-            lbAudioAx_80024030(1);
+            sfxForward();
             data = gm_GetCurrentSceneExitData();
             data->pending_mode = GM_ADVENTURE;
             gm_801A4B60();
             return;
         case SEL_REG_ALLSTAR:
-            lbAudioAx_80024030(1);
+            sfxForward();
             data = gm_GetCurrentSceneExitData();
             data->pending_mode = GM_ALLSTAR;
             gm_801A4B60();
             return;
         }
     } else if (buttons & MenuInput_Back) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_804A04F0.entering_menu = 0;
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
@@ -2165,7 +2165,7 @@ void mn_8022CC28(HSD_GObj* gp)
             think->flags_3 = HSD_GObj_804D783C;
         }
     } else if (buttons & MenuInput_Up) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         do {
             if (mn_804A04F0.hovered_selection !=
                 (RegMatchMenuSelection) SEL_REG_CLASSIC)
@@ -2177,7 +2177,7 @@ void mn_8022CC28(HSD_GObj* gp)
             }
         } while (mn_80229938(6, (s32) mn_804A04F0.hovered_selection) == 0);
     } else if (buttons & MenuInput_Down) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         do {
             if ((RegMatchMenuSelection) mn_804A04F0.hovered_selection ==
                 SEL_REG_ALLSTAR)
@@ -2209,12 +2209,12 @@ void mn_8022CE6C(HSD_GObj* gp)
         switch ((DataMenuSelection)
                     mn_804A04F0.hovered_selection) { /* irregular */
         case SEL_DATA_SNAP:
-            lbAudioAx_80024030(1);
+            sfxForward();
             mnSnap_80257F24();
             HSD_GObjPLink_80390228(gp);
             break;
         case SEL_DATA_ARCHIVES:
-            lbAudioAx_80024030(1);
+            sfxForward();
             mnGallery_80259868();
             HSD_GObjPLink_80390228(gp);
             break;
@@ -2225,7 +2225,7 @@ void mn_8022CE6C(HSD_GObj* gp)
             HSD_GObjPLink_80390228(gp);
             break;
         case SEL_DATA_RECORDS:
-            lbAudioAx_80024030(1);
+            sfxForward();
             mn_804D6BC8.cooldown = 5;
             mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
             mn_804A04F0.cur_menu = MENU_KIND_RECORDS;
@@ -2239,13 +2239,13 @@ void mn_8022CE6C(HSD_GObj* gp)
             }
             break;
         case SEL_DATA_SPECIAL:
-            lbAudioAx_80024030(1);
+            sfxForward();
             mnInfo_80252758();
             HSD_GObjPLink_80390228(gp);
             break;
         }
     } else if (buttons & MenuInput_Back) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_804A04F0.entering_menu = 0;
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
@@ -2259,7 +2259,7 @@ void mn_8022CE6C(HSD_GObj* gp)
             think2->flags_3 = HSD_GObj_804D783C;
         }
     } else if (buttons & MenuInput_Up) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         do {
             if (mn_804A04F0.hovered_selection !=
                 (DataMenuSelection) SEL_DATA_SNAP)
@@ -2271,7 +2271,7 @@ void mn_8022CE6C(HSD_GObj* gp)
             }
         } while (mn_80229938(5, (s32) mn_804A04F0.hovered_selection) == 0);
     } else if (buttons & MenuInput_Down) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         do {
             if ((DataMenuSelection) mn_804A04F0.hovered_selection ==
                 SEL_DATA_SPECIAL)
@@ -2303,33 +2303,33 @@ void mn_8022D104(HSD_GObj* gp)
         mn_804A04F0.entering_menu = 1;
         switch (mn_804A04F0.hovered_selection) {
         case SEL_SETTINGS_RUMBLE:
-            lbAudioAx_80024030(1);
+            sfxForward();
             mnVibration_Init(1);
             HSD_GObjPLink_80390228(gp);
             break;
         case SEL_SETTINGS_SOUND:
-            lbAudioAx_80024030(1);
+            sfxForward();
             mnSound_8024A09C(1);
             HSD_GObjPLink_80390228(gp);
             break;
         case SEL_SETTINGS_DISPLAY:
-            lbAudioAx_80024030(1);
+            sfxForward();
             mnDeflicker_8024A6C4(1);
             HSD_GObjPLink_80390228(gp);
             break;
         case SEL_SETTINGS_LANG:
-            lbAudioAx_80024030(1);
+            sfxForward();
             mnLanguage_8024C5C0((HSD_GObj*) 1);
             HSD_GObjPLink_80390228(gp);
             break;
         case SEL_SETTINGS_ERASE:
-            lbAudioAx_80024030(1);
+            sfxForward();
             mnDataDel_80250170();
             HSD_GObjPLink_80390228(gp);
             break;
         }
     } else if (buttons & MenuInput_Back) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_804A04F0.entering_menu = 0;
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
@@ -2343,7 +2343,7 @@ void mn_8022D104(HSD_GObj* gp)
             temp_r3_2->flags_3 = HSD_GObj_804D783C;
         }
     } else if (buttons & MenuInput_Up) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         do {
             if (mn_804A04F0.hovered_selection !=
                 (SettingsMenuSelection) SEL_SETTINGS_RUMBLE)
@@ -2354,7 +2354,7 @@ void mn_8022D104(HSD_GObj* gp)
             }
         } while (mn_80229938(4, mn_804A04F0.hovered_selection) == 0);
     } else if (buttons & 2) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         do {
             if (mn_804A04F0.hovered_selection == (u8) selection_count - 1) {
                 mn_804A04F0.hovered_selection = SEL_SETTINGS_RUMBLE;
@@ -2383,26 +2383,26 @@ void mn_8022D34C(HSD_GObj* gp)
         gm_801677E8(mn_8022C7CC_inline());
         switch (mn_804A04F0.hovered_selection) {
         case SEL_TOY_GALLERY:
-            lbAudioAx_80024030(1);
+            sfxForward();
             data = gm_GetCurrentSceneExitData();
             data->pending_mode = GM_TOY_GALLERY;
             gm_801A4B60();
             return;
         case SEL_TOY_LOTTERY:
-            lbAudioAx_80024030(1);
+            sfxForward();
             data = gm_GetCurrentSceneExitData();
             data->pending_mode = GM_TOY_LOTTERY;
             gm_801A4B60();
             return;
         case SEL_TOY_COLLECTION:
-            lbAudioAx_80024030(1);
+            sfxForward();
             data = gm_GetCurrentSceneExitData();
             data->pending_mode = GM_TOY_COLLECTION;
             gm_801A4B60();
             return;
         }
     } else if (buttons & MenuInput_Back) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_804A04F0.entering_menu = 0;
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
@@ -2415,7 +2415,7 @@ void mn_8022D34C(HSD_GObj* gp)
             think->flags_3 = HSD_GObj_804D783C;
         }
     } else if (buttons & MenuInput_Up) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         do {
             if (mn_804A04F0.hovered_selection !=
                 (TrophyMenuSelection) SEL_TOY_GALLERY)
@@ -2427,7 +2427,7 @@ void mn_8022D34C(HSD_GObj* gp)
             }
         } while (mn_80229938(3, mn_804A04F0.hovered_selection) == 0);
     } else if (buttons & MenuInput_Down) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         do {
             if ((TrophyMenuSelection) mn_804A04F0.hovered_selection ==
                 SEL_TOY_COLLECTION)
@@ -2459,19 +2459,19 @@ void mn_8022D594(HSD_GObj* gp)
         mn_804A04F0.entering_menu = 1;
         switch (mn_804A04F0.hovered_selection) {
         case SEL_VS_MELEE:
-            lbAudioAx_80024030(1);
+            sfxForward();
             data = gm_GetCurrentSceneExitData();
             data->pending_mode = GM_VS;
             gm_801A4B60();
             break;
         case SEL_VS_TOURNAMENT:
-            lbAudioAx_80024030(1);
+            sfxForward();
             data = gm_GetCurrentSceneExitData();
             data->pending_mode = GM_TOURNAMENT;
             gm_801A4B60();
             break;
         case SEL_VS_SPECIAL:
-            lbAudioAx_80024030(1);
+            sfxForward();
             mn_804D6BC8.cooldown = 5;
             mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
             mn_804A04F0.cur_menu = MENU_KIND_SPECIAL;
@@ -2486,18 +2486,18 @@ void mn_8022D594(HSD_GObj* gp)
             }
             break;
         case SEL_VS_RULES:
-            lbAudioAx_80024030(1);
+            sfxForward();
             mn_80231714();
             HSD_GObjPLink_80390228(gp);
             break;
         case SEL_VS_NAME:
-            lbAudioAx_80024030(1);
+            sfxForward();
             mnName_8023AC40();
             HSD_GObjPLink_80390228(gp);
             break;
         }
     } else if (buttons & MenuInput_Back) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_804A04F0.entering_menu = 0;
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
@@ -2511,14 +2511,14 @@ void mn_8022D594(HSD_GObj* gp)
             think2->flags_3 = HSD_GObj_804D783C;
         }
     } else if (buttons & MenuInput_Up) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         if ((VsMenuSelection) mn_804A04F0.hovered_selection == SEL_VS_MELEE) {
             mn_804A04F0.hovered_selection = SEL_VS_NAME;
         } else {
             mn_804A04F0.hovered_selection--;
         }
     } else if (buttons & MenuInput_Down) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         if ((VsMenuSelection) mn_804A04F0.hovered_selection == SEL_VS_NAME) {
             mn_804A04F0.hovered_selection = SEL_VS_MELEE;
         } else {
@@ -2548,7 +2548,7 @@ void mn_8022D7F4(HSD_GObj* gp)
         gm_801677E8(mn_8022C7CC_inline());
         switch (mn_804A04F0.hovered_selection) {
         case SEL_1P_REG:
-            lbAudioAx_80024030(1);
+            sfxForward();
             mn_804D6BC8.cooldown = 5;
             mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
             mn_804A04F0.cur_menu = MENU_KIND_REG;
@@ -2563,7 +2563,7 @@ void mn_8022D7F4(HSD_GObj* gp)
             }
             break;
         case SEL_1P_STADIUM:
-            lbAudioAx_80024030(1);
+            sfxForward();
             mn_804D6BC8.cooldown = 5;
             mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
             mn_804A04F0.cur_menu = MENU_KIND_STADIUM;
@@ -2578,19 +2578,19 @@ void mn_8022D7F4(HSD_GObj* gp)
             }
             break;
         case SEL_1P_EVENT:
-            lbAudioAx_80024030(1);
+            sfxForward();
             mnEvent_8024E838(0, 1);
             HSD_GObjPLink_80390228(gp);
             break;
         case SEL_1P_TRAINING:
-            lbAudioAx_80024030(1);
+            sfxForward();
             data = gm_GetCurrentSceneExitData();
             data->pending_mode = GM_TRAINING;
             gm_801A4B60();
             break;
         }
     } else if (buttons & MenuInput_Back) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_804A04F0.entering_menu = 0;
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
@@ -2604,7 +2604,7 @@ void mn_8022D7F4(HSD_GObj* gp)
             temp_r3_4->flags_3 = HSD_GObj_804D783C;
         }
     } else if (buttons & MenuInput_Up) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         do {
             if (mn_804A04F0.hovered_selection !=
                 (OnePlayerMenuSelection) SEL_1P_REG)
@@ -2615,7 +2615,7 @@ void mn_8022D7F4(HSD_GObj* gp)
             }
         } while (mn_80229938(1, mn_804A04F0.hovered_selection) == 0);
     } else if (buttons & MenuInput_Down) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         do {
             if (mn_804A04F0.hovered_selection == (u8) selection_count - 1) {
                 mn_804A04F0.hovered_selection =
@@ -2648,7 +2648,7 @@ void mn_8022DB10(HSD_GObj* gp)
     if (buttons & MenuInput_Confirm) {
         mn_804D6BC8.cooldown = 5;
         mf->entering_menu = 1;
-        lbAudioAx_80024030(1);
+        sfxForward();
         prev_menu_ptr = &mf->prev_menu;
         selection_ptr = &mf->hovered_selection;
         *prev_menu_ptr = mf->cur_menu;
@@ -2687,17 +2687,17 @@ void mn_8022DB10(HSD_GObj* gp)
             temp_r3_2->flags_3 = HSD_GObj_804D783C;
         }
     } else if (buttons & MenuInput_Back) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mf->entering_menu = 0;
         mn_804D6BC8.cooldown = 5;
         data = gm_GetCurrentSceneExitData();
         data->pending_mode = GM_TITLE;
         gm_801A4B60();
     } else if (buttons & MenuInput_Up) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         decrement_selection(selection_count, MENU_KIND_MAIN);
     } else if (buttons & MenuInput_Down) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         increment_selection(selection_count, MENU_KIND_MAIN);
     }
 }
@@ -2707,7 +2707,7 @@ void mn_8022DD38_OnFrame(void)
     MenuExitData* data;
     if (mn_8022F218() && mn_804A04F0.cur_menu != MENU_KIND_MAIN) {
         lbAudioAx_80023694();
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_8022F268();
         gm_801603B0();
         lb_8001B760(0xB);
@@ -3183,7 +3183,7 @@ void mn_8022F1A8(u16 arg0, u16 arg1)
 
 bool mn_8022F218(void)
 {
-    if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & PAD_LRAST) {
+    if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & PAD_LR_START) {
         return true;
     }
     return false;

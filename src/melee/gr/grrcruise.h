@@ -2,7 +2,6 @@
 #define GALE01_1FF164
 
 #include "gr/forward.h"
-#include "mp/forward.h"
 
 #include <dolphin/mtx.h>
 
@@ -55,5 +54,6 @@
 /* 201BE0 */ void fn_80201BE0(HSD_GObj*, int);
 /* 201C50 */ DynamicsDesc* grRCruise_80201C50(enum_t);
 /* 201C58 */ bool grRCruise_80201C58(Vec3*, int arg, HSD_JObj* jobj);
+/* 3E4ECC */ extern StageData grRc_StageData;
 
 #endif

@@ -23,7 +23,6 @@
 #include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
 
-#include <common_structs.h>
 #include <math.h>
 #include <trigf.h>
 #include <dolphin/mtx.h>
@@ -53,8 +52,7 @@ void ftZd_SpecialHi_801396E0(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 void ftZd_SpecialHi_8013979C(HSD_GObj* gobj)
@@ -72,6 +70,7 @@ void ftZd_SpecialHi_8013979C(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 static void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)

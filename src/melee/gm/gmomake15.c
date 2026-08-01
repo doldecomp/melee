@@ -1,16 +1,17 @@
 #include "gmomake15.h"
 
 #include "gm_unsplit.h"
+#include "gmmain_lib.h"
 #include "gmopening.h"
 
-#include "dolphin/pad.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lbmthp.h"
+#include "mn/inlines.h"
 
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/sobjlib.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbmthp.h>
+#include <baselib/controller.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
+#include <baselib/sobjlib.h>
 
 static HSD_GObj* gm_804D6858;
 
@@ -64,7 +65,7 @@ void gm_801ACF8C_OnFrame(void)
             var_r31)
         {
             if (var_r31 == 0) {
-                lbAudioAx_80024030(1);
+                sfxForward();
             }
             gm_SetPendingGameMode(GM_TITLE);
             gm_SetNewGameModePending();

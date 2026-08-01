@@ -20,6 +20,7 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lbdvd.h"
 #include "lb/types.h"
+#include "mn/inlines.h"
 #include "mn/mnmain.h"
 
 #include "pl/forward.h"
@@ -801,7 +802,7 @@ void gm_8019DF8C_OnFrame(void)
     fn_8018F640(4);
 
     if (mn_8022F218() != 0) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_8022F268();
         gm_801A4B60();
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
@@ -833,10 +834,10 @@ void gm_8019DF8C_OnFrame(void)
                 pressed = fn_8018F674(i);
 
                 /* Abort combo check */
-                if (fn_8018F6A8(i) & 0x200) {
+                if (fn_8018F6A8(i) & PAD_BUTTON_B) {
                     lbl_80479A58.x18[i] = (u8) (lbl_80479A58.x18[i] + 1);
                     if ((u8) lbl_80479A58.x18[i] > 0x5AU) {
-                        lbAudioAx_80024030(1);
+                        sfxForward();
                         gm_SetPendingSceneIndex(0U);
                         gm_801A4B60();
                         return;
@@ -848,15 +849,17 @@ void gm_8019DF8C_OnFrame(void)
             check_confirm: {
                 u8 status = lbl_80479A58.x1D[i].x0;
                 if (status != 2 && status != 1) {
-                    if ((fn_8018F6A8(i) & 0x40) && (fn_8018F6A8(i) & 0x20)) {
+                    if ((fn_8018F6A8(i) & PAD_TRIGGER_L) &&
+                        (fn_8018F6A8(i) & PAD_TRIGGER_R))
+                    {
                         j = get_match_player_index(i);
                         tmd->x37[j].x5 = 1;
                         tmd->x4B8[i].x2 = 1;
                     }
 
-                    if (pressed & 0x40001) {
+                    if (pressed & (PAD_BUTTON_LEFT | PAD_STICK_LEFT)) {
                         u8 chr;
-                        lbAudioAx_80024030(2);
+                        sfxMove();
 
                         j = get_match_player_index(i);
                         tmd->x37[j].x5 = 0;
@@ -880,9 +883,10 @@ void gm_8019DF8C_OnFrame(void)
                         tmd->x4B8[i].x3 = 0;
                         tmd->x37[j].x7 = 0;
 
-                    } else if (pressed & 0x80002) {
+                    } else if (pressed & (PAD_BUTTON_RIGHT | PAD_STICK_RIGHT))
+                    {
                         u8 chr;
-                        lbAudioAx_80024030(2);
+                        sfxMove();
 
                         j = get_match_player_index(i);
                         tmd->x37[j].x5 = 0;
@@ -909,10 +913,10 @@ void gm_8019DF8C_OnFrame(void)
                 }
             }
 
-                if (buttons & 0x1100) {
+                if (buttons & (PAD_BUTTON_A | PAD_BUTTON_START)) {
                     if ((u8) lbl_80479A58.x1D[i].x0 != 2) {
                         u16 char_id;
-                        lbAudioAx_80024030(1);
+                        sfxForward();
                         lbl_80479A58.x1D[i].x0 = 1;
                         char_id = tmd->x4B8[i].x6;
                         if (char_id <= 0x78U) {
@@ -921,15 +925,15 @@ void gm_8019DF8C_OnFrame(void)
                             gm_80167858(i, 0x78, 0xB, 0x14);
                         }
                     }
-                } else if (buttons & 0x200) {
+                } else if (buttons & PAD_BUTTON_B) {
                     if ((u8) lbl_80479A58.x1D[i].x0 == 2) {
-                        lbAudioAx_80024030(0);
+                        sfxBack();
                         lbl_80479A58.x1D[i].x0 = 3;
                     }
                 } else {
                     u8 color_status = lbl_80479A58.x1D[i].x0;
                     if (color_status != 2 && color_status != 1) {
-                        if (buttons & 0x400) {
+                        if (buttons & PAD_BUTTON_X) {
                             /* Down: increment color */
                             if ((s32) tmd->x4B8[i].x3 <
                                 (s32) (gm_80169238(fn_8018F6FC(
@@ -942,7 +946,7 @@ void gm_8019DF8C_OnFrame(void)
                             j = get_match_player_index(i);
                             tmd->x37[j].x7 = tmd->x4B8[i].x3;
 
-                        } else if (buttons & 0x800) {
+                        } else if (buttons & PAD_BUTTON_Y) {
                             /* Up: decrement color */
                             u8 color = tmd->x4B8[i].x3;
                             if (color != 0) {
@@ -964,7 +968,7 @@ void gm_8019DF8C_OnFrame(void)
             } else {
                 stage = (s32) tmd->x28;
             }
-            vsdata.stage_id = (u32) stage;
+            vsdata.stkind = (u32) stage;
         }
         for (i = 0; i < 4; i++) {
             vsdata.slot_type[i] = (Gm_PKind) tmd->x4B8[i].x0;
@@ -1124,7 +1128,7 @@ void gm_8019E634(void)
 void gm_8019ECAC_OnEnter(void* arg0)
 {
     struct {
-        u32 stage_id;
+        StKind stkind;
         CharacterKind char_id[4];
         u32 color[4];
     } local;
@@ -1158,9 +1162,9 @@ void gm_8019ECAC_OnEnter(void* arg0)
 
     fn_80196510();
     if (fn_80196564(tmd)) {
-        local.stage_id = fn_8019655C();
+        local.stkind = fn_8019655C();
     } else {
-        local.stage_id = tmd->x28;
+        local.stkind = tmd->x28;
     }
     fn_80196594(tmd);
     lbDvd_800174BC();
@@ -1171,7 +1175,7 @@ void gm_8019ECAC_OnEnter(void* arg0)
             audio_mask |= lbAudioAx_80026E84(local.char_id[j]);
         }
     }
-    audio_mask |= lbAudioAx_80026EBC(local.stage_id);
+    audio_mask |= lbAudioAx_80026EBC(local.stkind);
     lbAudioAx_80026F2C(0x1C);
     lbAudioAx_8002702C(0xC, audio_mask);
     lbAudioAx_80027168();
@@ -1196,7 +1200,7 @@ void fn_8019EE80(TmVsData* arg0)
     }
 
     if (!fn_80196594(gm_GetTournamentData())) {
-        game_cache->stage_id = arg0->stage_id;
+        game_cache->stkind = arg0->stkind;
     }
 
     lbDvd_80018254();

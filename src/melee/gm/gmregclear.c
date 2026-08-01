@@ -8,6 +8,8 @@
 
 #include "gm/forward.h"
 
+#include "mn/inlines.h"
+
 #include <math_ppc.h>
 #include <dolphin/gx.h>
 #include <sysdolphin/baselib/aobj.h>
@@ -742,8 +744,8 @@ static inline void gm_8017CE34_SetupColors(UnkAdventureData* arg1, s32 count,
 }
 
 s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
-                u8 arg3, u8 arg4, u8 arg5, s32 arg6, ExternalStageId arg7,
-                s32 count, s32 arg9)
+                u8 arg3, u8 arg4, u8 arg5, s32 arg6, StKind arg7, s32 count,
+                s32 arg9)
 {
     u8 colors[16];
     u8 enemy_level;
@@ -844,12 +846,12 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     }
 
     player_ckind = (u8) arg1->x0.ckind;
-    if ((player_ckind == 0x12) && ((u8) arg1->x0.xC.x12 != 0)) {
-        player_ckind = 0x13;
+    if ((player_ckind == CKIND_ZELDA) && ((u8) arg1->x0.xC.x12 != 0)) {
+        player_ckind = CKIND_SEAK;
     } else if (((arg1->x0.x8 & 0x80) != 0) && ((u8) arg1->x0.x9 == 1) &&
-               ((s8) player_ckind == 0xE))
+               ((s8) player_ckind == CKIND_POPONANA))
     {
-        player_ckind = 0x20;
+        player_ckind = CHKIND_POPO;
     }
 
     gm_801B0620(arg0->players, player_ckind, arg1->x0.color, player_stocks,
@@ -914,8 +916,8 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
             }
 
             {
-                s32 stage_id = Stage_8022519C(arg7);
-                stage_flags = Ground_801C5AD0(stage_id);
+                GrKind grkind = Stage_8022519C(arg7);
+                stage_flags = Ground_801C5AD0(grkind);
             }
 
             {
@@ -990,18 +992,20 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
                 arg0->players[player_idx].xC_b2 = 1;
                 arg0->players[player_idx].xE = 0x1B;
             }
-            if ((s32) arg0->players[player_idx].c_kind == 0x1D) {
+            if ((s32) arg0->players[player_idx].c_kind == CKIND_GKOOPS) {
                 arg0->players[player_idx].xC_b1 = 0;
             }
             enemy_ckind = (u8) arg0->players[player_idx].c_kind;
-            if (((s8) enemy_ckind == 0x1A) || ((s8) enemy_ckind == 0x1E)) {
+            if (((s8) enemy_ckind == CKIND_MASTERH) ||
+                ((s8) enemy_ckind == CKIND_CREZYH))
+            {
                 arg0->players[player_idx].xC_b7 = 1;
                 arg0->players[player_idx].hp = 0x12C;
                 arg0->players[player_idx].xD_b2 = 1;
                 arg0->players[player_idx].xD_b0 = 1;
                 arg0->players[player_idx].xD_b2 = 1;
                 arg0->players[player_idx].spawn_dir = -1;
-                if ((s32) arg0->players[player_idx].c_kind == 0x1E) {
+                if ((s32) arg0->players[player_idx].c_kind == CKIND_CREZYH) {
                     arg0->players[player_idx].slot_type = 3;
                 }
                 boss_count += 1;
@@ -1085,7 +1089,9 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
         arg1->xC.xE = 1;
     }
     temp_r0 = arg0->match_end.result;
-    if ((temp_r0 == 7 || temp_r0 == 8) && DbLevel <= 2) {
+    if ((temp_r0 == OUTCOME_NO_CONTEST || temp_r0 == OUTCOME_RETRY) &&
+        DbLevel <= 2)
+    {
         switch (gm_GetCurrentGameMode()) {
         case GM_CLASSIC:
             fn_80162BFC(arg1->ckind, arg1->xC.x18);
@@ -1104,7 +1110,7 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
     if (!(arg1->x8 & 0x80)) {
         arg1->stocks = arg0->match_end.player_standings[0].stocks;
         if (arg1->stocks != 0) {
-            if (arg0->match_end.result == 1) {
+            if (arg0->match_end.result == OUTCOME_TIMEOUT) {
                 arg1->stocks--;
                 if (arg1->stocks == 0) {
                     gm_SetPendingSceneIndex(arg2);
@@ -2429,7 +2435,9 @@ void fn_8017FF1C(HSD_GObj* gobj)
         {
             u64 buttons = gm_GetButtonsTriggered(Player_GetPlayerId(0));
             u64 repeat = gm_801A36C0(Player_GetPlayerId(0));
-            if (((repeat | buttons) & 0x20004) | ((repeat | buttons) & 0)) {
+            if (((repeat | buttons) & (PAD_BUTTON_DOWN | PAD_STICK_DOWN)) |
+                ((repeat | buttons) & 0))
+            {
                 mask = fn_8017F008();
                 if (fn_8016F740(gm_8016B774(), state->xC0, mask, 0) > 0) {
                     mask = fn_8017F008();
@@ -2444,7 +2452,8 @@ void fn_8017FF1C(HSD_GObj* gobj)
             } else {
                 buttons = gm_GetButtonsTriggered(Player_GetPlayerId(0));
                 repeat = gm_801A36C0(Player_GetPlayerId(0));
-                if (((repeat | buttons) & 0x10008) | ((repeat | buttons) & 0))
+                if (((repeat | buttons) & (PAD_BUTTON_UP | PAD_STICK_UP)) |
+                    ((repeat | buttons) & 0))
                 {
                     mask = fn_8017F008();
                     if (fn_8016F870(gm_8016B774(), state->xC0, mask, 0) >= 0) {
@@ -2473,7 +2482,8 @@ void fn_8017FF1C(HSD_GObj* gobj)
 
     for (i = 0; i < 6; i++) {
         if (Player_GetPlayerSlotType(i) == Gm_PKind_Human &&
-            (HSD_PadMasterStatus[(u8) Player_GetPlayerId(i)].trigger & 0x100))
+            (HSD_PadMasterStatus[(u8) Player_GetPlayerId(i)].trigger &
+             HSD_PAD_A))
         {
             state->xFC = state->x104;
             state->x115 = 1;
@@ -2489,7 +2499,7 @@ void fn_8017FF1C(HSD_GObj* gobj)
             {
                 state->xFC = state->x104;
                 state->x116 = 1;
-                lbAudioAx_80024030(1);
+                sfxForward();
                 break;
             }
         }
@@ -3015,7 +3025,7 @@ void fn_80181598(void)
         lbl_804D65D8 += 1;
         if (lbl_804D65D8 >= 0xF0 ||
             (lbl_804D65D8 > 0x3C &&
-             (HSD_PadCopyStatus[state->x0.x10].trigger & 0x100)))
+             (HSD_PadCopyStatus[state->x0.x10].trigger & HSD_PAD_A)))
         {
             gm_8016B328();
             return;
@@ -3027,7 +3037,7 @@ void fn_80181598(void)
         state->x0.xC += 1;
         if (state->x0.xC > 0x3C &&
             (state->x0.xC >= 0xF0 ||
-             (HSD_PadCopyStatus[state->x0.x10].trigger & 0x100)))
+             (HSD_PadCopyStatus[state->x0.x10].trigger & HSD_PAD_A)))
         {
             unk_4 = &state->x0.unk_4;
             idx = gm_CKindToSelKind((u8) *unk_4);
@@ -3483,7 +3493,7 @@ void gm_80182174(void)
 
     gm_8016795C(&lbl_80472ED8.xC);
 
-    ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.c_kind = 0x1B;
+    ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.c_kind = CKIND_BOY;
     ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.slot_type = 1;
     ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.stocks = 1;
     ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.xD_b4 = 1;
@@ -4046,7 +4056,7 @@ void fn_80182F40(HSD_GObj* unused)
     {
         lbAudioAx_80024C84();
         lbAudioAx_80023694();
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_801A4B60();
         gm_SetPendingGameMode(GM_TITLE);
         gm_SetNewGameModePending();

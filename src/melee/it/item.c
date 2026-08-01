@@ -1,6 +1,5 @@
 #include "item.h"
 
-#include "it_266F.h"
 #include "it_26B1.h"
 #include "math.h"
 
@@ -16,9 +15,11 @@
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/it_3F14.h"
+#include "it/it_3F2F.h"
 #include "it/itanimlist.h"
 #include "it/itcoll.h"
 #include "it/iteffect.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 #include "it/itmaterial.h"
@@ -32,9 +33,7 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/class.h>
 #include <baselib/debug.h>
 #include <baselib/dobj.h>
@@ -147,7 +146,7 @@ void Item_80266FCC(void)
     Item_804A0C64.x64 = it_804D6D28->x148;
 
     Item_804A0CCC.x154.b0 = true;
-    Item_804A0CCC.x150_count = 1;
+    Item_804A0CCC.count = 1;
 
     Item_804A0E24.x = -1;
     Item_804A0E24.y = -1;
@@ -169,7 +168,7 @@ void Item_80266FCC(void)
 
 static void ItUnkHoldKind(HSD_GObj* gobj)
 {
-    Item* it = (Item*) HSD_GObjGetUserData(gobj);
+    Item* it = HSD_GObjGetUserData(gobj);
 
     switch (it->hold_kind) {
     case 4:
@@ -247,7 +246,7 @@ static void Item_80267130(HSD_GObj* gobj, SpawnItem* spawnItem)
     HSD_JObjSetTranslate(model, &item_data->pos);
     it_80274658(gobj, it_804D6D28->x6C_float);
     it_802725D4(gobj);
-    it_80271508(gobj, 0);
+    it_80271508(gobj, HurtCapsule_Enabled);
     it_80272280(gobj);
 
     item_data->on_accessory = NULL;
@@ -291,7 +290,7 @@ static void Item_802674AC(SpawnItem* spawnItem)
         return;
     }
 
-    if (kind == Pokemon_Random) {
+    if (kind == It_PKind_Random) {
         spawnItem->hold_kind = 3;
         return;
     }
@@ -326,12 +325,12 @@ static void Item_802674AC(SpawnItem* spawnItem)
         return;
     }
 
-    if (kind < Pokemon_Random) {
+    if (kind < It_PKind_Random) {
         spawnItem->hold_kind = 11;
         return;
     }
 
-    if (kind < Pokemon_Chicorita_Leaf) {
+    if (kind < It_PKind_Terminate) {
         spawnItem->hold_kind = 9;
         return;
     }
@@ -407,7 +406,7 @@ static void Item_802676F4(HSD_GObj* gobj)
     case 0:
         Item_804A0C64.x0++;
 
-        if (item_data->kind == 34) {
+        if (item_data->kind == It_Kind_M_Ball) {
             Item_804A0C64.x1C++;
         }
 
@@ -540,14 +539,14 @@ void Item_80267978(HSD_GObj* gobj)
         // Common items
         item_data->xC4_article_data = it_804D6D24[item_data->kind];
         item_data->xB8_itemLogicTable = &it_803F14C4[item_data->kind];
-    } else if (item_data->kind < Pokemon_Tosakinto) {
+    } else if (item_data->kind < It_PKind_Start) {
         // Character items
         int idx = item_data->kind - It_Kind_Kuriboh;
         item_data->xC4_article_data = it_804D6D38[idx];
         item_data->xB8_itemLogicTable = &it_803F3100[idx];
     } else if (item_data->kind < It_Kind_Old_Kuri) {
         // Pokemon
-        int idx = item_data->kind - Pokemon_Tosakinto;
+        int idx = item_data->kind - It_PKind_Start;
         item_data->xC4_article_data = it_804D6D30[idx];
         item_data->xB8_itemLogicTable = &it_803F23CC[idx];
     } else {
@@ -971,13 +970,13 @@ static HSD_GObj* Item_8026862C(SpawnItem* spawnItem)
         // Common items
         GObj_SetupGXLink(gobj, it_803F1418[spawnItem->kind].x0_renderFunc, 6,
                          0);
-    } else if (spawnItem->kind < Pokemon_Tosakinto) {
+    } else if (spawnItem->kind < It_PKind_Start) {
         // Character items
         int idx = spawnItem->kind - It_Kind_Kuriboh;
         GObj_SetupGXLink(gobj, it_803F2F28[idx].x0_renderFunc, 6, 0);
     } else if (spawnItem->kind < It_Kind_Old_Kuri) {
         // Pokemon
-        int idx = spawnItem->kind - Pokemon_Tosakinto;
+        int idx = spawnItem->kind - It_PKind_Start;
         GObj_SetupGXLink(gobj, it_803F2310[idx].x0_renderFunc, 6, 0);
     } else {
         // Stage items
@@ -1629,7 +1628,7 @@ static bool Item_80269F14(HSD_GObj* gobj)
     Item* temp_item = (Item*) HSD_GObjGetUserData(gobj);
 
     if (temp_item->xDCC_flag.b1 == 0) {
-        if (temp_item->kind == 34) {
+        if (temp_item->kind == It_Kind_M_Ball) {
             if (temp_item->xDCC_flag.b2 == 0) {
                 temp_item->owner = temp_item->xC64_reflectGObj;
                 temp_item->x20_team_id = ftLib_80086EB4(temp_item->owner);

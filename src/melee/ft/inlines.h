@@ -13,7 +13,8 @@
 #include "it/it_26B1.h"
 #include "lb/lbvector.h"
 
-#include <common_structs.h>
+#include "mp/forward.h"
+
 #include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/archive.h>
@@ -48,7 +49,6 @@ static inline void Fighter_SetEffectHitlagCallbacks(Fighter* fp)
 {
     fp->pre_hitlag_cb = efLib_PauseAll;
     fp->post_hitlag_cb = efLib_ResumeAll;
-    fp->accessory4_cb = NULL;
 }
 
 /// @deprecated Use #GET_FIGHTER instead.

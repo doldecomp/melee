@@ -24,6 +24,7 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lbbgflash.h"
 #include "lb/lbmthp.h"
+#include "mn/inlines.h"
 
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -172,7 +173,7 @@ void gm_801A9D0C_OnFrame(void)
             lbBgFlash_8002063C(0x3C);
             gmRegend_ExitTimer = 0x3C;
             lbAudioAx_80023694();
-            lbAudioAx_80024030(1);
+            sfxForward();
         }
     }
 }

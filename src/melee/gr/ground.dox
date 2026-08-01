@@ -13,7 +13,7 @@
  * @brief Restores the in-match camera mode after unpause.
  *
  * Selects standard or fixed camera according to the stage's
- * #UnkStage6B0::x4C_fixed_cam parameter. Both underlying calls only set the
+ * #GroundParam::x4C_fixed_cam parameter. Both underlying calls only set the
  * camera mode, without additional setup. Used when a paused match resumes and
  * no #StartMeleeRules::on_unpause_override is installed.
  */

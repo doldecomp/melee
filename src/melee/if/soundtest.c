@@ -14,11 +14,9 @@
 #include "lb/lbcardnew.h"
 #include "lb/lblanguage.h"
 #include "lb/lbsnap.h"
+#include "mn/inlines.h"
 #include "ty/toy.h"
-#include "ty/tylist.h"
 
-#include <printf.h>
-#include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 #include <baselib/fog.h>
 #include <baselib/gobj.h>
@@ -26,16 +24,18 @@
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
 #include <baselib/lobj.h>
 #include <baselib/memory.h>
-#include <baselib/particle.h>
-#include <baselib/sislib.h>
 #include <baselib/sobjlib.h>
-#include <MSL/stdio.h>
-#include <MSL/string.h>
 
 /// .data
+
+static void order_data(void)
+{
+    (void) "Remove Target %x (n %x) Id %d\n";
+    (void) "Remove All Over\n";
+}
+
 struct un_803F9F28_t {
     u8 _pad0[0xA8];
     int xA8;
@@ -307,18 +307,16 @@ int un_802FF99C(int arg0)
 
 s32 un_802FF9DC(void)
 {
-    struct SmStData {
-        u8 pad0[0x18];
-        s32* x18;
-    }* d = (struct SmStData*) un_804D6DA8;
     s32 i;
+    s32 total;
 
-    un_804D6DB4 = 0;
-    for (i = 0; i < un_804D6DB0; i++) {
-        un_804D6DB4 += d->x18[i];
+    i = un_804D6DB4 = 0;
+    for (; i < un_804D6DB0; i++) {
+        un_804D6DB4 += ((int**) un_804D6DA8)[6][i];
     }
     un_803F9FA4.xF4 = (f32) un_804D6DB4;
-    un_803F9FA4.xF8 = (f32) (un_804D6DB4 + d->x18[un_804D6DB0]);
+    total = un_804D6DB4 + ((int**) un_804D6DA8)[6][un_804D6DB0];
+    un_803F9FA4.xF8 = (f32) total;
     return 0;
 }
 
@@ -366,7 +364,7 @@ bool un_802FFC6C(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80023694();
-        lbAudioAx_80024030(0);
+        sfxBack();
         lbAudioAx_800236DC();
         lbAudioAx_800245D4(0x7F);
         lbAudioAx_800245F4(0x7F);
@@ -398,7 +396,7 @@ void un_802FFD94(int arg0, void* arg1, void* arg2)
     struct un_80304138_objalloc_t* d;
     if (arg0 == 1) {
         d = un_80302DF0();
-        lbAudioAx_80024030(1);
+        sfxForward();
         un_80304210(d, arg1, 0, -60, 0);
         un_80302DF8(un_80302DF0(), arg2);
     }
@@ -408,11 +406,11 @@ int fn_802FFE0C(int arg0)
 {
     switch (arg0) {
     case 0:
-        lbAudioAx_80024030(0);
+        sfxBack();
         un_80304334(un_80302DF0());
         break;
     case 6:
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_SetPendingSceneIndex(4);
         gm_801A4B60();
         break;
@@ -424,7 +422,7 @@ bool fn_802FFE6C(bool update_scene)
 {
     bool res = update_scene;
     if (update_scene == false) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         un_80304334(un_80302DF0());
         res = false;
     }
@@ -435,7 +433,7 @@ bool fn_802FFE6C(bool update_scene)
 bool un_802FFEA4(bool update_scene)
 {
     if (update_scene == true) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_SetPendingSceneIndex(0x4);
         gm_801A4B60();
     }
@@ -542,7 +540,7 @@ void un_802FFF2C(StartMeleeData* arg0)
 bool un_803001DC(bool update_scene)
 {
     if (update_scene == true) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_SetPendingSceneIndex(0x1);
         gm_801A4B60();
     }
@@ -559,7 +557,7 @@ int un_80300218(void)
 int un_80300248(int arg0)
 {
     if (un_803FA258.x4[0] && arg0 == 1) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gmMainLib_8015FB68();
     }
     return 0;
@@ -569,7 +567,7 @@ int un_80300290(int arg0)
 {
     if (arg0 == 1) {
         struct un_80304138_objalloc_t* x = un_80302DF0();
-        lbAudioAx_80024030(1);
+        sfxForward();
         un_80304210(x, &un_803FA658, 0, -60, 0);
         un_80302DF8(un_80302DF0(), fn_802FFE6C);
     }
@@ -579,7 +577,7 @@ int un_80300290(int arg0)
 bool un_803002FC(bool update_scene)
 {
     if (update_scene == true) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_SetPendingSceneIndex(0x2);
         gm_801A4B60();
     }
@@ -639,7 +637,7 @@ s32 un_80300410(s32 arg0)
 {
     if (arg0 == 1) {
         u8* dst;
-        lbAudioAx_80024030(1);
+        sfxForward();
         dst = gmMainLib_8045A6C0;
         dst += un_803FA128.x220;
         dst[0x1868] = un_803FA128.x224;
@@ -807,7 +805,7 @@ int un_80300934(int arg0)
 bool un_80300968(bool update_scene)
 {
     if (update_scene == true) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_ChangeGameModeAfterCurrentScene(GM_HANYU_CSS);
         gm_801A4B60();
     }
@@ -818,7 +816,7 @@ bool un_80300968(bool update_scene)
 bool un_803009A4(bool update_scene)
 {
     if (update_scene == true) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_ChangeGameModeAfterCurrentScene(GM_HANYU_SSS);
         gm_801A4B60();
     }
@@ -865,7 +863,7 @@ int un_80300A88(void)
 bool un_80300AB8(bool update_scene)
 {
     if (update_scene == true) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_SetPendingSceneIndex(0x4);
         gm_801A4B60();
     }
@@ -877,7 +875,7 @@ bool un_80300AF4(int arg0)
 {
     if (arg0 == 1) {
         struct un_803FA258_t* data;
-        lbAudioAx_80024030(1);
+        sfxForward();
         data = &un_803FA258;
         data->x4[1] = 0x3F;
         data->x4[3] = 0xE;
@@ -894,7 +892,7 @@ bool un_80300B58(int arg0)
 {
     if (arg0 == 1) {
         struct un_803FA258_t* data;
-        lbAudioAx_80024030(1);
+        sfxForward();
         {
             struct un_803FA258_t* data = &un_803FA258;
             data->x4[1] = 0x3B;
@@ -965,11 +963,11 @@ void fn_80300CC8(int arg0)
 
     switch (arg0) {
     case 0:
-        lbAudioAx_80024030(0);
+        sfxBack();
         un_80304334(un_80302DF0());
         break;
     case 6:
-        lbAudioAx_80024030(1);
+        sfxForward();
         r29 = gmMainLib_GetTimeMatchTotal();
         r30 = gmMainLib_GetStockMatchTotal();
         r31 = gmMainLib_GetCoinMatchTotal();
@@ -1008,11 +1006,11 @@ void fn_80300DE0(int arg0)
     ptr = gmMainLib_8015D06C(un_804D6DC8);
     switch (arg0) {
     case 0:
-        lbAudioAx_80024030(0);
+        sfxBack();
         un_80304334(un_80302DF0());
         break;
     case 6:
-        lbAudioAx_80024030(1);
+        sfxForward();
         *ptr = (u32) (un_804DDC48 * un_804D6DD0);
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         gm_801A4B60();
@@ -1036,11 +1034,11 @@ void fn_80300ED0(int arg0)
 {
     switch (arg0) {
     case 0:
-        lbAudioAx_80024030(0);
+        sfxBack();
         un_80304334(un_80302DF0());
         break;
     case 6:
-        lbAudioAx_80024030(1);
+        sfxForward();
         gmMainLib_8015D4E8(un_804D6DC8, un_804D6DCC);
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         gm_801A4B60();
@@ -1066,7 +1064,7 @@ s32 un_80300F98(s32 arg0)
 
     if (arg0 == 1) {
         temp_r31 = gmMainLib_GetKOTotal();
-        lbAudioAx_80024030(1);
+        sfxForward();
         *temp_r31 = un_804D6DF4;
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         gm_801A4B60();
@@ -1077,7 +1075,7 @@ s32 un_80300F98(s32 arg0)
 bool un_80300FEC(bool update_scene)
 {
     if (update_scene == true) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_SetPendingSceneIndex(0x4);
         gm_801A4B60();
     }
@@ -1090,7 +1088,7 @@ int un_80301028(int arg0)
     if (arg0 == 1) {
         struct gmm_x0_528_t* ptr = gmMainLib_8015CDD4();
         ptr->x5 = un_804D5908 - 1;
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_ChangeGameModeAfterCurrentScene(GM_ADVENTURE);
         gm_801A4B60();
     }
@@ -1102,7 +1100,7 @@ int un_80301074(int arg0)
     if (arg0 == 1) {
         struct gmm_x0_528_t* ptr = gmMainLib_8015CDC8();
         ptr->x5 = un_804D590C - 1;
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_ChangeGameModeAfterCurrentScene(GM_CLASSIC);
         gm_801A4B60();
     }
@@ -1114,7 +1112,7 @@ int un_803010C0(int arg0)
     if (arg0 == 1) {
         struct gmm_x0_528_t* ptr = gmMainLib_8015CDE0();
         ptr->x5 = un_804D5910 - 1;
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_ChangeGameModeAfterCurrentScene(GM_ALLSTAR);
         gm_801A4B60();
     }
@@ -1125,11 +1123,11 @@ int fn_8030110C(int arg0)
 {
     switch (arg0) {
     case 0:
-        lbAudioAx_80024030(0);
+        sfxBack();
         un_80304334(un_80302DF0());
         break;
     case 6:
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_801BEFA4(un_804D6DF8);
         gm_801BEFC0(un_804D6DFC);
         {
@@ -1161,11 +1159,11 @@ void fn_803011EC(int arg0)
 {
     switch (arg0) {
     case 0:
-        lbAudioAx_80024030(0);
+        sfxBack();
         un_80304334(un_80302DF0());
         break;
     case 6:
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_801BEFA4(un_804D6DF8);
         gm_801BEFC0(un_804D6DFC);
         {
@@ -1205,7 +1203,7 @@ int un_803012D4(int arg0)
 bool un_80301328(bool update_scene)
 {
     if (update_scene == true) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_801BF708(0x0);
         gm_ChangeGameModeAfterCurrentScene(GM_OPENING_MV);
         gm_801A4B60();
@@ -1217,7 +1215,7 @@ bool un_80301328(bool update_scene)
 bool un_8030136C(bool update_scene)
 {
     if (update_scene == true) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_801BF708(0x5);
         gm_ChangeGameModeAfterCurrentScene(GM_OPENING_MV);
         gm_801A4B60();
@@ -1229,7 +1227,7 @@ bool un_8030136C(bool update_scene)
 bool un_803013B0(bool update_scene)
 {
     if (update_scene == true) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_ChangeGameModeAfterCurrentScene(GM_DEBUG_CUTSCENE);
         gm_801A4B60();
     }
@@ -1254,7 +1252,7 @@ int un_80301420(int arg0)
 bool un_80301454(bool update_scene)
 {
     if (update_scene == true) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_ChangeGameModeAfterCurrentScene(GM_BOOT);
         gm_801A4B60();
     }
@@ -1265,7 +1263,7 @@ bool un_80301454(bool update_scene)
 bool un_80301490(bool update_scene)
 {
     if (update_scene == true) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_SetPendingSceneIndex(0xD);
         gm_801A4B60();
     }
@@ -1276,7 +1274,7 @@ bool un_80301490(bool update_scene)
 bool un_803014CC(bool update_scene)
 {
     if (update_scene == true) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_SetPendingSceneIndex(0x7);
         gm_801A4B60();
     }
@@ -1287,7 +1285,7 @@ bool un_803014CC(bool update_scene)
 bool un_80301508(bool update_scene)
 {
     if (update_scene == true) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_SetPendingSceneIndex(0x3);
         gm_801A4B60();
     }
@@ -1298,7 +1296,7 @@ bool un_80301508(bool update_scene)
 bool un_80301544(bool update_scene)
 {
     if (update_scene == true) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_SetPendingSceneIndex(0x9);
         gm_801A4B60();
     }
@@ -1309,7 +1307,7 @@ bool un_80301544(bool update_scene)
 bool un_80301580(bool update_scene)
 {
     if (update_scene == true) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_SetPendingSceneIndex(0xC);
         gm_801A4B60();
     }
@@ -1320,7 +1318,7 @@ bool un_80301580(bool update_scene)
 bool un_803015BC(bool update_scene)
 {
     if (update_scene == true) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_ChangeGameModeAfterCurrentScene(GM_PROGRESSIVE_SCAN);
         gm_801A4B60();
     }
@@ -1331,7 +1329,7 @@ bool un_803015BC(bool update_scene)
 bool un_803015F8(bool update_scene)
 {
     if (update_scene == true) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_SetPendingSceneIndex(0xA);
         gm_801A4B60();
     }
@@ -1537,11 +1535,11 @@ int un_80301B48(int arg0)
 {
     switch (arg0) {
     case 0:
-        lbAudioAx_80024030(0);
+        sfxBack();
         un_80304334(un_80302DF0());
         break;
     case 6:
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_SetPendingSceneIndex(6);
         gm_801A4B60();
         break;
@@ -1589,11 +1587,11 @@ int un_80301C80(int arg0)
 {
     switch (arg0) {
     case 0:
-        lbAudioAx_80024030(0);
+        sfxBack();
         un_80304334(un_80302DF0());
         break;
     case 6:
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_SetPendingSceneIndex(0xB);
         gm_801A4B60();
         break;
@@ -1605,7 +1603,7 @@ void un_80301CE0(int arg0)
 {
     switch (arg0) {
     case 6:
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_SetPendingSceneIndex(0xB);
         gm_801A4B60();
         break;
@@ -1618,7 +1616,7 @@ void un_80301CE0(int arg0)
 bool un_80301D40(bool update_scene)
 {
     if (update_scene == true) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_ChangeGameModeAfterCurrentScene(GM_FIXED_CAMERA_VS);
         gm_801A4B60();
     }
@@ -1629,7 +1627,7 @@ bool un_80301D40(bool update_scene)
 int un_80301D7C(int arg0)
 {
     if (arg0 == 1) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_801BEB74(un_803FA258.x188 - 1);
         gm_ChangeGameModeAfterCurrentScene(GM_EVENT);
         gm_801A4B60();
@@ -1640,7 +1638,7 @@ int un_80301D7C(int arg0)
 bool un_80301DCC(bool update_scene)
 {
     if (update_scene == true) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_SetPendingSceneIndex(0x4);
         gm_801A4B60();
     }
@@ -1651,7 +1649,7 @@ bool un_80301DCC(bool update_scene)
 bool un_80301E08(bool update_scene)
 {
     if (update_scene == true) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_SetPendingSceneIndex(0xE);
         gm_801A4B60();
     }

@@ -453,19 +453,9 @@ void ftKp_SpecialS_80132E30(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    {
-        bool throw_flag;
-        if (fp->throw_flags_b4) {
-            fp->throw_flags_b4 = false;
-            throw_flag = true;
-        } else {
-            throw_flag = false;
-        }
-
-        if (throw_flag) {
-            fp->facing_dir = -fp->facing_dir;
-            fp->mv.kp.unk1.xC = true;
-        }
+    if (ftCheckThrowB4(fp)) {
+        fp->facing_dir = -fp->facing_dir;
+        fp->mv.kp.unk1.xC = true;
     }
 
     if (fp->cmd_vars[0] == 0) {

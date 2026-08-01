@@ -349,7 +349,7 @@ void it_802D2D2C(Item_GObj* gobj)
         spawn.x3C_damage = 0;
         spawn.vel.y = spawn.vel.x = 0.0f;
         spawn.vel.z = 0.0f;
-        spawn.kind = Pokemon_Houou_SacredFire;
+        spawn.kind = It_Kind_Houou_SacredFire;
         spawn.x0_parent_gobj = ip->owner;
         spawn.x4_parent_gobj2 = gobj;
         spawn.x44_flag.b0 = true;

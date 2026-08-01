@@ -62,7 +62,7 @@ struct mpLib_803BF248_t_x4 {
 };
 
 struct mpLib_803BF248_t {
-    InternalStageId id;
+    GrKind id;
     struct mpLib_803BF248_t_x4* (*x4)[20];
 };
 
@@ -730,81 +730,79 @@ static struct mpLib_803BF248_t_x4* mpLib_803BF1F8[20] = {
     &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
 };
 
-/// clang-format off
 static struct mpLib_803BF248_t mpLib_803BF248[0x47] = {
-    { InternalStageID_Unk00, &mpLib_803BDC18 },
-    { TEST, &mpLib_803BDC68 },
-    { CASTLE, &mpLib_803BDCB8 },
-    { RCRUISE, &mpLib_803BDD08 },
-    { KONGO, &mpLib_803BDD58 },
-    { GARDEN, &mpLib_803BDDA8 },
-    { GREATBAY, &mpLib_803BDDF8 },
-    { SHRINE, &mpLib_803BDE48 },
-    { ZEBES, &mpLib_803BDE98 },
-    { KRAID, &mpLib_803BDEE8 },
-    { STORY, &mpLib_803BDF38 },
-    { YORSTER, &mpLib_803BDF88 },
-    { IZUMI, &mpLib_803BDFD8 },
-    { GREENS, &mpLib_803BE028 },
-    { CORNERIA, &mpLib_803BE078 },
-    { VENOM, &mpLib_803BE0C8 },
-    { PSTADIUM, &mpLib_803BE118 },
-    { PURA, &mpLib_803BE168 },
-    { MUTECITY, &mpLib_803BE1B8 },
-    { BIGBLUE, &mpLib_803BE208 },
-    { ONETT, &mpLib_803BE258 },
-    { FOURSIDE, &mpLib_803BE2A8 },
-    { ICEMTN, &mpLib_803BE2F8 },
-    { InternalStageID_Unk23, &mpLib_803BE348 },
-    { INISHIE1, &mpLib_803BE398 },
-    { INISHIE2, &mpLib_803BE3E8 },
-    { InternalStageID_Unk26, &mpLib_803BE438 },
-    { FLATZONE, &mpLib_803BE488 },
-    { OLDPUPUPU, &mpLib_803BE4D8 },
-    { OLDYOSHI, &mpLib_803BE528 },
-    { OLDKONGO, &mpLib_803BE578 },
-    { KINOKOROUTE, &mpLib_803BE5C8 },
-    { SHRINEROUTE, &mpLib_803BE618 },
-    { ZEBESROUTE, &mpLib_803BE668 },
-    { BIGBLUEROUTE, &mpLib_803BE6B8 },
-    { InternalStageID_Unk35, &mpLib_803BE708 },
-    { BATTLE, &mpLib_803BE758 },
-    { LAST, &mpLib_803BE7A8 },
-    { FIGUREGET, &mpLib_803BE7F8 },
-    { PUSHON, &mpLib_803BE848 },
-    { TMARIO, &mpLib_803BE898 },
-    { TCAPTAIN, &mpLib_803BE8E8 },
-    { TCLINK, &mpLib_803BE938 },
-    { TDONKEY, &mpLib_803BE988 },
-    { TDRMARIO, &mpLib_803BE9D8 },
-    { TFALCO, &mpLib_803BEA28 },
-    { TFOX, &mpLib_803BEA78 },
-    { TICECLIMBER, &mpLib_803BEAC8 },
-    { TKIRBY, &mpLib_803BEB18 },
-    { TKOOPA, &mpLib_803BEB68 },
-    { TLINK, &mpLib_803BEBB8 },
-    { TLUIGI, &mpLib_803BEC08 },
-    { TMARS, &mpLib_803BEC58 },
-    { TMEWTWO, &mpLib_803BECA8 },
-    { TNESS, &mpLib_803BECF8 },
-    { TPEACH, &mpLib_803BED48 },
-    { TPICHU, &mpLib_803BED98 },
-    { TPIKACHU, &mpLib_803BEDE8 },
-    { TPURIN, &mpLib_803BEE38 },
-    { TSAMUS, &mpLib_803BEE88 },
-    { TSEAK, &mpLib_803BEED8 },
-    { TYOSHI, &mpLib_803BEF28 },
-    { TZELDA, &mpLib_803BEF78 },
-    { TGAMEWATCH, &mpLib_803BEFC8 },
-    { TEMBLEM, &mpLib_803BF018 },
-    { TGANON, &mpLib_803BF068 },
-    { HEAL, &mpLib_803BF0B8 },
-    { HOMERUN, &mpLib_803BF108 },
-    { FIGURE1, &mpLib_803BF158 },
-    { FIGURE2, &mpLib_803BF1A8 },
-    { FIGURE3, &mpLib_803BF1F8 },
+    { Gr_Kind_Unk00, &mpLib_803BDC18 },
+    { Gr_Kind_Test, &mpLib_803BDC68 },
+    { Gr_Kind_Castle, &mpLib_803BDCB8 },
+    { Gr_Kind_RCruise, &mpLib_803BDD08 },
+    { Gr_Kind_Kongo, &mpLib_803BDD58 },
+    { Gr_Kind_Garden, &mpLib_803BDDA8 },
+    { Gr_Kind_GreatBay, &mpLib_803BDDF8 },
+    { Gr_Kind_Shrine, &mpLib_803BDE48 },
+    { Gr_Kind_Zebes, &mpLib_803BDE98 },
+    { Gr_Kind_Kraid, &mpLib_803BDEE8 },
+    { Gr_Kind_Story, &mpLib_803BDF38 },
+    { Gr_Kind_Yorster, &mpLib_803BDF88 },
+    { Gr_Kind_Izumi, &mpLib_803BDFD8 },
+    { Gr_Kind_Greens, &mpLib_803BE028 },
+    { Gr_Kind_Corneria, &mpLib_803BE078 },
+    { Gr_Kind_Venom, &mpLib_803BE0C8 },
+    { Gr_Kind_PStadium, &mpLib_803BE118 },
+    { Gr_Kind_Pura, &mpLib_803BE168 },
+    { Gr_Kind_MuteCity, &mpLib_803BE1B8 },
+    { Gr_Kind_BigBlue, &mpLib_803BE208 },
+    { Gr_Kind_Onett, &mpLib_803BE258 },
+    { Gr_Kind_Fourside, &mpLib_803BE2A8 },
+    { Gr_Kind_Icemt, &mpLib_803BE2F8 },
+    { Gr_Kind_Unk23, &mpLib_803BE348 },
+    { Gr_Kind_Inishie1, &mpLib_803BE398 },
+    { Gr_Kind_Inishie2, &mpLib_803BE3E8 },
+    { Gr_Kind_Unk26, &mpLib_803BE438 },
+    { Gr_Kind_Flatzone, &mpLib_803BE488 },
+    { Gr_Kind_OldPupupu, &mpLib_803BE4D8 },
+    { Gr_Kind_OldYoshi, &mpLib_803BE528 },
+    { Gr_Kind_OldKongo, &mpLib_803BE578 },
+    { Gr_Kind_KinokoRoute, &mpLib_803BE5C8 },
+    { Gr_Kind_ShrineRoute, &mpLib_803BE618 },
+    { Gr_Kind_ZebesRoute, &mpLib_803BE668 },
+    { Gr_Kind_BigBlueRoute, &mpLib_803BE6B8 },
+    { Gr_Kind_Unk35, &mpLib_803BE708 },
+    { Gr_Kind_Battle, &mpLib_803BE758 },
+    { Gr_Kind_Last, &mpLib_803BE7A8 },
+    { Gr_Kind_FigureGet, &mpLib_803BE7F8 },
+    { Gr_Kind_Pushon, &mpLib_803BE848 },
+    { Gr_Kind_TMario, &mpLib_803BE898 },
+    { Gr_Kind_TCaptain, &mpLib_803BE8E8 },
+    { Gr_Kind_TClink, &mpLib_803BE938 },
+    { Gr_Kind_TDonkey, &mpLib_803BE988 },
+    { Gr_Kind_TDrmario, &mpLib_803BE9D8 },
+    { Gr_Kind_TFalco, &mpLib_803BEA28 },
+    { Gr_Kind_TFox, &mpLib_803BEA78 },
+    { Gr_Kind_TIceclimber, &mpLib_803BEAC8 },
+    { Gr_Kind_TKirby, &mpLib_803BEB18 },
+    { Gr_Kind_TKoopa, &mpLib_803BEB68 },
+    { Gr_Kind_TLink, &mpLib_803BEBB8 },
+    { Gr_Kind_TLuigi, &mpLib_803BEC08 },
+    { Gr_Kind_TMars, &mpLib_803BEC58 },
+    { Gr_Kind_TMewtwo, &mpLib_803BECA8 },
+    { Gr_Kind_TNess, &mpLib_803BECF8 },
+    { Gr_Kind_TPeach, &mpLib_803BED48 },
+    { Gr_Kind_TPichu, &mpLib_803BED98 },
+    { Gr_Kind_TPikachu, &mpLib_803BEDE8 },
+    { Gr_Kind_TPurin, &mpLib_803BEE38 },
+    { Gr_Kind_TSamus, &mpLib_803BEE88 },
+    { Gr_Kind_TSeak, &mpLib_803BEED8 },
+    { Gr_Kind_TYoshi, &mpLib_803BEF28 },
+    { Gr_Kind_TZelda, &mpLib_803BEF78 },
+    { Gr_Kind_TGamewatch, &mpLib_803BEFC8 },
+    { Gr_Kind_TEmblem, &mpLib_803BF018 },
+    { Gr_Kind_TGanon, &mpLib_803BF068 },
+    { Gr_Kind_Heal, &mpLib_803BF0B8 },
+    { Gr_Kind_Homerun, &mpLib_803BF108 },
+    { Gr_Kind_Figure1, &mpLib_803BF158 },
+    { Gr_Kind_Figure2, &mpLib_803BF1A8 },
+    { Gr_Kind_Figure3, &mpLib_803BF1F8 },
 };
-/// clang-format on
 
 extern Vec2 mpLib_803BF718[2];
 extern MapLine mpLib_803BF728;
@@ -837,7 +835,7 @@ void mpPruneEmptyLines(MapCollData* coll_data)
     Vec2* verts = coll_data->verts;
     int i;
 
-    if (stage_info.internal_stage_id == PURA) {
+    if (stage_info.grkind == Gr_Kind_Pura) {
         return;
     }
 
@@ -5050,13 +5048,13 @@ bool mpGetSpeed(int line_id, Vec3* pos, Vec3* speed)
 
 float mpLib_800569EC(u32 unk)
 {
-    return (*mpLib_803BF248[stage_info.internal_stage_id].x4)[(u8) unk]->x0;
+    return (*mpLib_803BF248[stage_info.grkind].x4)[(u8) unk]->x0;
 }
 
 int* mpLib_80056A1C(int arg0, int* arg1)
 {
     struct mpLib_803BF248_t_x4* temp =
-        (*mpLib_803BF248[stage_info.internal_stage_id].x4)[(u8) arg0];
+        (*mpLib_803BF248[stage_info.grkind].x4)[(u8) arg0];
     *arg1 = temp->x14[0];
     return temp->x4;
 }
@@ -5064,7 +5062,7 @@ int* mpLib_80056A1C(int arg0, int* arg1)
 int mpLib_80056A54(int arg0, int* arg1)
 {
     struct mpLib_803BF248_t_x4* temp =
-        (*mpLib_803BF248[stage_info.internal_stage_id].x4)[(u8) arg0];
+        (*mpLib_803BF248[stage_info.grkind].x4)[(u8) arg0];
     *arg1 = temp->x14[2];
     return temp->x14[1];
 }
@@ -5072,7 +5070,7 @@ int mpLib_80056A54(int arg0, int* arg1)
 int* mpLib_80056A8C(int arg0, int* arg1)
 {
     struct mpLib_803BF248_t_x4* temp =
-        (*mpLib_803BF248[stage_info.internal_stage_id].x4)[(u8) arg0];
+        (*mpLib_803BF248[stage_info.grkind].x4)[(u8) arg0];
     *arg1 = temp->x30[0];
     return temp->x20;
 }
@@ -5080,7 +5078,7 @@ int* mpLib_80056A8C(int arg0, int* arg1)
 int mpLib_80056AC4(int arg0, int* arg1)
 {
     struct mpLib_803BF248_t_x4* temp =
-        (*mpLib_803BF248[stage_info.internal_stage_id].x4)[(u8) arg0];
+        (*mpLib_803BF248[stage_info.grkind].x4)[(u8) arg0];
     *arg1 = temp->x30[2];
     return temp->x30[1];
 }
@@ -5088,7 +5086,7 @@ int mpLib_80056AC4(int arg0, int* arg1)
 int* mpLib_80056AFC(int arg0, int* arg1)
 {
     struct mpLib_803BF248_t_x4* temp =
-        (*mpLib_803BF248[stage_info.internal_stage_id].x4)[(u8) arg0];
+        (*mpLib_803BF248[stage_info.grkind].x4)[(u8) arg0];
     *arg1 = temp->x4C[0];
     return temp->x3C;
 }
@@ -5096,7 +5094,7 @@ int* mpLib_80056AFC(int arg0, int* arg1)
 int mpLib_80056B34(int arg0, int* arg1)
 {
     struct mpLib_803BF248_t_x4* temp =
-        (*mpLib_803BF248[stage_info.internal_stage_id].x4)[(u8) arg0];
+        (*mpLib_803BF248[stage_info.grkind].x4)[(u8) arg0];
     *arg1 = temp->x4C[2];
     return temp->x4C[1];
 }
@@ -5234,7 +5232,7 @@ bool mpLib_80056C54(int line_id, Vec3* pos, int* line_id_out, Vec3* vec_out,
         }
     }
     if (line_id != -1) {
-        if (!(mpLineGetKind(line_id) & 1)) {
+        if (!(mpLineGetKind(line_id) & CollLine_Floor)) {
             line_id = -1;
         }
     }

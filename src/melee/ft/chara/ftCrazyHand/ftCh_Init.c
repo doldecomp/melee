@@ -48,7 +48,6 @@
 #include "ftMasterHand/types.h"
 #include "it/it_26B1.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <MetroTRK/intrinsics.h>
 
@@ -627,9 +626,9 @@ void ftCh_Init_OnLoad(HSD_GObj* gobj)
     PUSH_ATTRS(fp, ftCrazyHand_DatAttrs);
 
     ftBossLib_8015BDB4(gobj);
-    it_8026B3F8(items[0], 127);
-    it_8026B3F8(items[1], 128);
-    it_8026B3F8(items[2], 129);
+    it_8026B3F8(items[0], It_Kind_CrazyHand_Laser);
+    it_8026B3F8(items[1], It_Kind_CrazyHand_Bullet);
+    it_8026B3F8(items[2], It_Kind_CrazyHand_Bomb);
     fp->no_normal_motion = 1;
     fp->x2229_b6 = 1;
     fp->no_kb = 1;

@@ -27,7 +27,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <math.h>
 #include <dolphin/mtx.h>
 #include <melee/it/items/itpeachparasol.h>

@@ -514,7 +514,7 @@ void it_802DD7D0(Item_GObj* gobj, HSD_GObj* arg1)
 
 Item_GObj* it_802DD7F0(s32 arg0, Vec3* arg1, Vec3* arg2, s32 arg3)
 {
-    Item_GObj* gobj = it_8027B5B0(0xD3, arg1, NULL, arg2, 1);
+    Item_GObj* gobj = it_8027B5B0(It_Kind_Nokonoko, arg1, NULL, arg2, 1);
     f32 temp_f31;
     PAD_STACK(8);
     if (gobj != NULL) {

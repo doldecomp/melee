@@ -12,19 +12,19 @@
 
 extern struct StageInfo stage_info;
 
-/// One #stage_id_map entry: the #InternalStageId for an #ExternalStageId.
+/// One #stage_id_map entry: the #GrKind for a #StKind.
 struct StageIdMapEntry {
-    InternalStageId internal_id;
+    GrKind grkind;
     s32 unk1;
     s32 unk2;
 };
 struct StageSelection {
-    ExternalStageId external_id;
+    StKind stkind;
     struct StageIdMapEntry* entry;
 };
 
-struct StageSelection selected_stage = { ExternalStageID_IZUMI, NULL };
-StageIdPair default_stage_pair = { IZUMI, ExternalStageID_IZUMI };
+struct StageSelection selected_stage = { St_Kind_Izumi, NULL };
+StageIdPair default_stage_pair = { Gr_Kind_Izumi, St_Kind_Izumi };
 
 f32 Stage_GetCamBoundsLeftOffset(void)
 {
@@ -327,329 +327,186 @@ s32 Stage_80225074(s32 arg0)
         HSD_ASSERT(526, 0);
     }
 
-    tmp = Ground_801C28AC(selected_stage.external_id, r31, &spC);
+    tmp = Ground_801C28AC(selected_stage.stkind, r31, &spC);
     lbAudioAx_80023F28(spC);
     Ground_801C5A84(spC);
     Ground_801C5AA4(tmp);
     return arg0;
 }
 
-ExternalStageId Stage_80225194(void)
+StKind Stage_80225194(void)
 {
-    return selected_stage.external_id;
+    return selected_stage.stkind;
 }
 
-/// Indexed by #ExternalStageId.
+/// Indexed by #StKind.
 struct StageIdMapEntry stage_id_map[] = {
-    { InternalStageID_Unk00, 0, 0 },
-    { TEST, 0, 0 },
-    { IZUMI, 0, 0 },
-    { PSTADIUM, 0, 0 },
-    { CASTLE, 0, 0 },
-    { KONGO, 0, 0 },
-    { ZEBES, 0, 0 },
-    { CORNERIA, 0, 0 },
-    { STORY, 0, 0 },
-    { ONETT, 0, 0 },
-    { MUTECITY, 0, 0 },
-    { RCRUISE, 0, 0 },
-    { GARDEN, 0, 0 },
-    { GREATBAY, 0, 0 },
-    { SHRINE, 0, 0 },
-    { KRAID, 0, 0 },
-    { YORSTER, 0, 0 },
-    { GREENS, 0, 0 },
-    { FOURSIDE, 0, 0 },
-    { INISHIE1, 0, 0 },
-    { INISHIE2, 0, 0 },
-    { InternalStageID_Unk26, 0, 0 },
-    { VENOM, 0, 0 },
-    { PURA, 0, 0 },
-    { BIGBLUE, 0, 0 },
-    { ICEMTN, 0, 0 },
-    { ICEMTN, 0, 0 },
-    { FLATZONE, 0, 0 },
-    { OLDPUPUPU, 0, 0 },
-    { OLDYOSHI, 0, 0 },
-    { OLDKONGO, 0, 0 },
-    { BATTLE, 0, 0 },
-    { LAST, 0, 0 },
-    { TMARIO, 0, 0 },
-    { TCAPTAIN, 0, 0 },
-    { TCLINK, 0, 0 },
-    { TDONKEY, 0, 0 },
-    { TDRMARIO, 0, 0 },
-    { TFALCO, 0, 0 },
-    { TFOX, 0, 0 },
-    { TICECLIMBER, 0, 0 },
-    { TKIRBY, 0, 0 },
-    { TKOOPA, 0, 0 },
-    { TLINK, 0, 0 },
-    { TLUIGI, 0, 0 },
-    { TMARS, 0, 0 },
-    { TMEWTWO, 0, 0 },
-    { TNESS, 0, 0 },
-    { TPEACH, 0, 0 },
-    { TPICHU, 0, 0 },
-    { TPIKACHU, 0, 0 },
-    { TPURIN, 0, 0 },
-    { TSAMUS, 0, 0 },
-    { TSEAK, 0, 0 },
-    { TYOSHI, 0, 0 },
-    { TZELDA, 0, 0 },
-    { TGAMEWATCH, 0, 0 },
-    { TEMBLEM, 0, 0 },
-    { TGANON, 0, 0 },
-    { KINOKOROUTE, 0, 0 },
-    { CASTLE, 0, 0 },
-    { KONGO, 0, 0 },
-    { GARDEN, 0, 0 },
-    { SHRINEROUTE, 0, 0 },
-    { SHRINE, 0, 0 },
-    { ZEBES, 0, 0 },
-    { ZEBESROUTE, 0, 0 },
-    { GREENS, 0, 0 },
-    { GREENS, 0, 0 },
-    { GREENS, 0, 0 },
-    { CORNERIA, 0, 0 },
-    { CORNERIA, 0, 0 },
-    { PSTADIUM, 0, 0 },
-    { BIGBLUEROUTE, 0, 0 },
-    { MUTECITY, 0, 0 },
-    { ONETT, 0, 0 },
-    { ICEMTN, 0, 0 },
-    { ICEMTN, 0, 0 },
-    { BATTLE, 0, 0 },
-    { BATTLE, 0, 0 },
-    { LAST, 0, 0 },
-    { LAST, 0, 0 },
-    { PUSHON, 0, 0 },
-    { FIGUREGET, 0, 0 },
-    { HOMERUN, 0, 0 },
-    { HEAL, 0, 0 },
-    { CASTLE, 0, 0 },
-    { RCRUISE, 0, 0 },
-    { KONGO, 0, 0 },
-    { GARDEN, 0, 0 },
-    { GREATBAY, 0, 0 },
-    { SHRINE, 0, 0 },
-    { ZEBES, 0, 0 },
-    { KRAID, 0, 0 },
-    { STORY, 0, 0 },
-    { YORSTER, 0, 0 },
-    { IZUMI, 0, 0 },
-    { GREENS, 0, 0 },
-    { CORNERIA, 0, 0 },
-    { VENOM, 0, 0 },
-    { PSTADIUM, 0, 0 },
-    { INISHIE1, 0, 0 },
-    { INISHIE2, 0, 0 },
-    { MUTECITY, 0, 0 },
-    { BIGBLUE, 0, 0 },
-    { ONETT, 0, 0 },
-    { FOURSIDE, 0, 0 },
-    { PSTADIUM, 0, 0 },
-    { CASTLE, 0, 0 },
-    { BATTLE, 0, 0 },
-    { CASTLE, 0, 0 },
-    { INISHIE2, 0, 0 },
-    { SHRINE, 0, 0 },
-    { GREATBAY, 0, 0 },
-    { LAST, 0, 0 },
-    { PSTADIUM, 0, 0 },
-    { ICEMTN, 0, 0 },
-    { ICEMTN, 0, 0 },
-    { INISHIE1, 0, 0 },
-    { GREATBAY, 0, 0 },
-    { SHRINE, 0, 0 },
-    { CORNERIA, 0, 0 },
-    { VENOM, 0, 0 },
-    { GREATBAY, 0, 0 },
-    { PSTADIUM, 0, 0 },
-    { BATTLE, 0, 0 },
-    { INISHIE2, 0, 0 },
-    { KONGO, 0, 0 },
-    { SHRINE, 0, 0 },
-    { GREATBAY, 0, 0 },
-    { INISHIE1, 0, 0 },
-    { GREATBAY, 0, 0 },
-    { BIGBLUE, 0, 0 },
-    { ZEBES, 0, 0 },
-    { STORY, 0, 0 },
-    { YORSTER, 0, 0 },
-    { GREENS, 0, 0 },
-    { IZUMI, 0, 0 },
-    { GREENS, 0, 0 },
-    { ICEMTN, 0, 0 },
-    { CORNERIA, 0, 0 },
-    { MUTECITY, 0, 0 },
-    { PSTADIUM, 0, 0 },
-    { PSTADIUM, 0, 0 },
-    { INISHIE1, 0, 0 },
-    { ONETT, 0, 0 },
-    { FOURSIDE, 0, 0 },
-    { BIGBLUE, 0, 0 },
-    { BATTLE, 0, 0 },
-    { BATTLE, 0, 0 },
-    { BATTLE, 0, 0 },
-    { SHRINE, 0, 0 },
-    { GREATBAY, 0, 0 },
-    { SHRINE, 0, 0 },
-    { GREATBAY, 0, 0 },
-    { CASTLE, 0, 0 },
-    { KONGO, 0, 0 },
-    { GREATBAY, 0, 0 },
-    { STORY, 0, 0 },
-    { INISHIE2, 0, 0 },
-    { MUTECITY, 0, 0 },
-    { PSTADIUM, 0, 0 },
-    { IZUMI, 0, 0 },
-    { INISHIE1, 0, 0 },
-    { SHRINE, 0, 0 },
-    { RCRUISE, 0, 0 },
-    { GARDEN, 0, 0 },
-    { IZUMI, 0, 0 },
-    { INISHIE2, 0, 0 },
-    { ONETT, 0, 0 },
-    { PSTADIUM, 0, 0 },
-    { ICEMTN, 0, 0 },
-    { PSTADIUM, 0, 0 },
-    { FLATZONE, 0, 0 },
-    { MUTECITY, 0, 0 },
-    { BATTLE, 0, 0 },
-    { LAST, 0, 0 },
-    { RCRUISE, 0, 0 },
-    { KONGO, 0, 0 },
-    { GREATBAY, 0, 0 },
-    { ZEBES, 0, 0 },
-    { STORY, 0, 0 },
-    { GREENS, 0, 0 },
-    { CORNERIA, 0, 0 },
-    { PSTADIUM, 0, 0 },
-    { INISHIE1, 0, 0 },
-    { MUTECITY, 0, 0 },
-    { ONETT, 0, 0 },
-    { PURA, 0, 0 },
-    { ICEMTN, 0, 0 },
-    { CASTLE, 0, 0 },
-    { SHRINE, 0, 0 },
-    { IZUMI, 0, 0 },
-    { BATTLE, 0, 0 },
-    { YORSTER, 0, 0 },
-    { INISHIE2, 0, 0 },
-    { GARDEN, 0, 0 },
-    { VENOM, 0, 0 },
-    { FOURSIDE, 0, 0 },
-    { LAST, 0, 0 },
-    { FLATZONE, 0, 0 },
-    { KRAID, 0, 0 },
-    { BATTLE, 0, 0 },
-    { SHRINE, 0, 0 },
-    { CASTLE, 0, 0 },
-    { STORY, 0, 0 },
-    { ONETT, 0, 0 },
-    { IZUMI, 0, 0 },
-    { PSTADIUM, 0, 0 },
-    { ZEBES, 0, 0 },
-    { GREATBAY, 0, 0 },
-    { YORSTER, 0, 0 },
-    { ICEMTN, 0, 0 },
-    { MUTECITY, 0, 0 },
-    { RCRUISE, 0, 0 },
-    { FIGURE1, 0, 0 },
-    { BATTLE, 0, 0 },
-    { CORNERIA, 0, 0 },
-    { GARDEN, 0, 0 },
-    { KONGO, 0, 0 },
-    { LAST, 0, 0 },
-    { ZEBES, 0, 0 },
-    { CASTLE, 0, 0 },
-    { INISHIE2, 0, 0 },
-    { KRAID, 0, 0 },
-    { YORSTER, 0, 0 },
-    { FOURSIDE, 0, 0 },
-    { FIGURE2, 0, 0 },
-    { VENOM, 0, 0 },
-    { GREENS, 0, 0 },
-    { SHRINE, 0, 0 },
-    { IZUMI, 0, 0 },
-    { INISHIE1, 0, 0 },
-    { CORNERIA, 0, 0 },
-    { BIGBLUEROUTE, 0, 0 },
-    { GREATBAY, 0, 0 },
-    { OLDPUPUPU, 0, 0 },
-    { FOURSIDE, 0, 0 },
-    { IZUMI, 0, 0 },
-    { INISHIE2, 0, 0 },
-    { PSTADIUM, 0, 0 },
-    { SHRINE, 0, 0 },
-    { SHRINE, 0, 0 },
-    { PURA, 0, 0 },
-    { BIGBLUE, 0, 0 },
-    { BATTLE, 0, 0 },
-    { FLATZONE, 0, 0 },
-    { SHRINE, 0, 0 },
-    { FIGURE3, 0, 0 },
-    { STORY, 0, 0 },
-    { INISHIE1, 0, 0 },
-    { LAST, 0, 0 },
-    { LAST, 0, 0 },
-    { GARDEN, 0, 0 },
-    { STORY, 0, 0 },
-    { CASTLE, 0, 0 },
-    { RCRUISE, 0, 0 },
-    { GREATBAY, 0, 0 },
-    { SHRINE, 0, 0 },
-    { MUTECITY, 0, 0 },
-    { CORNERIA, 0, 0 },
-    { PSTADIUM, 0, 0 },
-    { ONETT, 0, 0 },
-    { ICEMTN, 0, 0 },
-    { INISHIE2, 0, 0 },
-    { PURA, 0, 0 },
-    { LAST, 0, 0 },
-    { FLATZONE, 0, 0 },
-    { VENOM, 0, 0 },
-    { PSTADIUM, 0, 0 },
-    { GREATBAY, 0, 0 },
-    { SHRINE, 0, 0 },
-    { LAST, 0, 0 },
-    { BATTLE, 0, 0 },
-    { PSTADIUM, 0, 0 },
-    { LAST, 0, 0 },
-    { INISHIE2, 0, 0 },
-    { IZUMI, 0, 0 },
-    { FLATZONE, 0, 0 },
-    { CASTLE, 0, 0 },
-    { LAST, 0, 0 },
-    { GREATBAY, 0, 0 },
-    { BATTLE, 0, 0 },
-    { PSTADIUM, 0, 0 },
-    { SHRINE, 0, 0 },
-    { BATTLE, 0, 0 },
+    { Gr_Kind_Unk00, 0, 0 },        { Gr_Kind_Test, 0, 0 },
+    { Gr_Kind_Izumi, 0, 0 },        { Gr_Kind_PStadium, 0, 0 },
+    { Gr_Kind_Castle, 0, 0 },       { Gr_Kind_Kongo, 0, 0 },
+    { Gr_Kind_Zebes, 0, 0 },        { Gr_Kind_Corneria, 0, 0 },
+    { Gr_Kind_Story, 0, 0 },        { Gr_Kind_Onett, 0, 0 },
+    { Gr_Kind_MuteCity, 0, 0 },     { Gr_Kind_RCruise, 0, 0 },
+    { Gr_Kind_Garden, 0, 0 },       { Gr_Kind_GreatBay, 0, 0 },
+    { Gr_Kind_Shrine, 0, 0 },       { Gr_Kind_Kraid, 0, 0 },
+    { Gr_Kind_Yorster, 0, 0 },      { Gr_Kind_Greens, 0, 0 },
+    { Gr_Kind_Fourside, 0, 0 },     { Gr_Kind_Inishie1, 0, 0 },
+    { Gr_Kind_Inishie2, 0, 0 },     { Gr_Kind_Unk26, 0, 0 },
+    { Gr_Kind_Venom, 0, 0 },        { Gr_Kind_Pura, 0, 0 },
+    { Gr_Kind_BigBlue, 0, 0 },      { Gr_Kind_Icemt, 0, 0 },
+    { Gr_Kind_Icemt, 0, 0 },        { Gr_Kind_Flatzone, 0, 0 },
+    { Gr_Kind_OldPupupu, 0, 0 },    { Gr_Kind_OldYoshi, 0, 0 },
+    { Gr_Kind_OldKongo, 0, 0 },     { Gr_Kind_Battle, 0, 0 },
+    { Gr_Kind_Last, 0, 0 },         { Gr_Kind_TMario, 0, 0 },
+    { Gr_Kind_TCaptain, 0, 0 },     { Gr_Kind_TClink, 0, 0 },
+    { Gr_Kind_TDonkey, 0, 0 },      { Gr_Kind_TDrmario, 0, 0 },
+    { Gr_Kind_TFalco, 0, 0 },       { Gr_Kind_TFox, 0, 0 },
+    { Gr_Kind_TIceclimber, 0, 0 },  { Gr_Kind_TKirby, 0, 0 },
+    { Gr_Kind_TKoopa, 0, 0 },       { Gr_Kind_TLink, 0, 0 },
+    { Gr_Kind_TLuigi, 0, 0 },       { Gr_Kind_TMars, 0, 0 },
+    { Gr_Kind_TMewtwo, 0, 0 },      { Gr_Kind_TNess, 0, 0 },
+    { Gr_Kind_TPeach, 0, 0 },       { Gr_Kind_TPichu, 0, 0 },
+    { Gr_Kind_TPikachu, 0, 0 },     { Gr_Kind_TPurin, 0, 0 },
+    { Gr_Kind_TSamus, 0, 0 },       { Gr_Kind_TSeak, 0, 0 },
+    { Gr_Kind_TYoshi, 0, 0 },       { Gr_Kind_TZelda, 0, 0 },
+    { Gr_Kind_TGamewatch, 0, 0 },   { Gr_Kind_TEmblem, 0, 0 },
+    { Gr_Kind_TGanon, 0, 0 },       { Gr_Kind_KinokoRoute, 0, 0 },
+    { Gr_Kind_Castle, 0, 0 },       { Gr_Kind_Kongo, 0, 0 },
+    { Gr_Kind_Garden, 0, 0 },       { Gr_Kind_ShrineRoute, 0, 0 },
+    { Gr_Kind_Shrine, 0, 0 },       { Gr_Kind_Zebes, 0, 0 },
+    { Gr_Kind_ZebesRoute, 0, 0 },   { Gr_Kind_Greens, 0, 0 },
+    { Gr_Kind_Greens, 0, 0 },       { Gr_Kind_Greens, 0, 0 },
+    { Gr_Kind_Corneria, 0, 0 },     { Gr_Kind_Corneria, 0, 0 },
+    { Gr_Kind_PStadium, 0, 0 },     { Gr_Kind_BigBlueRoute, 0, 0 },
+    { Gr_Kind_MuteCity, 0, 0 },     { Gr_Kind_Onett, 0, 0 },
+    { Gr_Kind_Icemt, 0, 0 },        { Gr_Kind_Icemt, 0, 0 },
+    { Gr_Kind_Battle, 0, 0 },       { Gr_Kind_Battle, 0, 0 },
+    { Gr_Kind_Last, 0, 0 },         { Gr_Kind_Last, 0, 0 },
+    { Gr_Kind_Pushon, 0, 0 },       { Gr_Kind_FigureGet, 0, 0 },
+    { Gr_Kind_Homerun, 0, 0 },      { Gr_Kind_Heal, 0, 0 },
+    { Gr_Kind_Castle, 0, 0 },       { Gr_Kind_RCruise, 0, 0 },
+    { Gr_Kind_Kongo, 0, 0 },        { Gr_Kind_Garden, 0, 0 },
+    { Gr_Kind_GreatBay, 0, 0 },     { Gr_Kind_Shrine, 0, 0 },
+    { Gr_Kind_Zebes, 0, 0 },        { Gr_Kind_Kraid, 0, 0 },
+    { Gr_Kind_Story, 0, 0 },        { Gr_Kind_Yorster, 0, 0 },
+    { Gr_Kind_Izumi, 0, 0 },        { Gr_Kind_Greens, 0, 0 },
+    { Gr_Kind_Corneria, 0, 0 },     { Gr_Kind_Venom, 0, 0 },
+    { Gr_Kind_PStadium, 0, 0 },     { Gr_Kind_Inishie1, 0, 0 },
+    { Gr_Kind_Inishie2, 0, 0 },     { Gr_Kind_MuteCity, 0, 0 },
+    { Gr_Kind_BigBlue, 0, 0 },      { Gr_Kind_Onett, 0, 0 },
+    { Gr_Kind_Fourside, 0, 0 },     { Gr_Kind_PStadium, 0, 0 },
+    { Gr_Kind_Castle, 0, 0 },       { Gr_Kind_Battle, 0, 0 },
+    { Gr_Kind_Castle, 0, 0 },       { Gr_Kind_Inishie2, 0, 0 },
+    { Gr_Kind_Shrine, 0, 0 },       { Gr_Kind_GreatBay, 0, 0 },
+    { Gr_Kind_Last, 0, 0 },         { Gr_Kind_PStadium, 0, 0 },
+    { Gr_Kind_Icemt, 0, 0 },        { Gr_Kind_Icemt, 0, 0 },
+    { Gr_Kind_Inishie1, 0, 0 },     { Gr_Kind_GreatBay, 0, 0 },
+    { Gr_Kind_Shrine, 0, 0 },       { Gr_Kind_Corneria, 0, 0 },
+    { Gr_Kind_Venom, 0, 0 },        { Gr_Kind_GreatBay, 0, 0 },
+    { Gr_Kind_PStadium, 0, 0 },     { Gr_Kind_Battle, 0, 0 },
+    { Gr_Kind_Inishie2, 0, 0 },     { Gr_Kind_Kongo, 0, 0 },
+    { Gr_Kind_Shrine, 0, 0 },       { Gr_Kind_GreatBay, 0, 0 },
+    { Gr_Kind_Inishie1, 0, 0 },     { Gr_Kind_GreatBay, 0, 0 },
+    { Gr_Kind_BigBlue, 0, 0 },      { Gr_Kind_Zebes, 0, 0 },
+    { Gr_Kind_Story, 0, 0 },        { Gr_Kind_Yorster, 0, 0 },
+    { Gr_Kind_Greens, 0, 0 },       { Gr_Kind_Izumi, 0, 0 },
+    { Gr_Kind_Greens, 0, 0 },       { Gr_Kind_Icemt, 0, 0 },
+    { Gr_Kind_Corneria, 0, 0 },     { Gr_Kind_MuteCity, 0, 0 },
+    { Gr_Kind_PStadium, 0, 0 },     { Gr_Kind_PStadium, 0, 0 },
+    { Gr_Kind_Inishie1, 0, 0 },     { Gr_Kind_Onett, 0, 0 },
+    { Gr_Kind_Fourside, 0, 0 },     { Gr_Kind_BigBlue, 0, 0 },
+    { Gr_Kind_Battle, 0, 0 },       { Gr_Kind_Battle, 0, 0 },
+    { Gr_Kind_Battle, 0, 0 },       { Gr_Kind_Shrine, 0, 0 },
+    { Gr_Kind_GreatBay, 0, 0 },     { Gr_Kind_Shrine, 0, 0 },
+    { Gr_Kind_GreatBay, 0, 0 },     { Gr_Kind_Castle, 0, 0 },
+    { Gr_Kind_Kongo, 0, 0 },        { Gr_Kind_GreatBay, 0, 0 },
+    { Gr_Kind_Story, 0, 0 },        { Gr_Kind_Inishie2, 0, 0 },
+    { Gr_Kind_MuteCity, 0, 0 },     { Gr_Kind_PStadium, 0, 0 },
+    { Gr_Kind_Izumi, 0, 0 },        { Gr_Kind_Inishie1, 0, 0 },
+    { Gr_Kind_Shrine, 0, 0 },       { Gr_Kind_RCruise, 0, 0 },
+    { Gr_Kind_Garden, 0, 0 },       { Gr_Kind_Izumi, 0, 0 },
+    { Gr_Kind_Inishie2, 0, 0 },     { Gr_Kind_Onett, 0, 0 },
+    { Gr_Kind_PStadium, 0, 0 },     { Gr_Kind_Icemt, 0, 0 },
+    { Gr_Kind_PStadium, 0, 0 },     { Gr_Kind_Flatzone, 0, 0 },
+    { Gr_Kind_MuteCity, 0, 0 },     { Gr_Kind_Battle, 0, 0 },
+    { Gr_Kind_Last, 0, 0 },         { Gr_Kind_RCruise, 0, 0 },
+    { Gr_Kind_Kongo, 0, 0 },        { Gr_Kind_GreatBay, 0, 0 },
+    { Gr_Kind_Zebes, 0, 0 },        { Gr_Kind_Story, 0, 0 },
+    { Gr_Kind_Greens, 0, 0 },       { Gr_Kind_Corneria, 0, 0 },
+    { Gr_Kind_PStadium, 0, 0 },     { Gr_Kind_Inishie1, 0, 0 },
+    { Gr_Kind_MuteCity, 0, 0 },     { Gr_Kind_Onett, 0, 0 },
+    { Gr_Kind_Pura, 0, 0 },         { Gr_Kind_Icemt, 0, 0 },
+    { Gr_Kind_Castle, 0, 0 },       { Gr_Kind_Shrine, 0, 0 },
+    { Gr_Kind_Izumi, 0, 0 },        { Gr_Kind_Battle, 0, 0 },
+    { Gr_Kind_Yorster, 0, 0 },      { Gr_Kind_Inishie2, 0, 0 },
+    { Gr_Kind_Garden, 0, 0 },       { Gr_Kind_Venom, 0, 0 },
+    { Gr_Kind_Fourside, 0, 0 },     { Gr_Kind_Last, 0, 0 },
+    { Gr_Kind_Flatzone, 0, 0 },     { Gr_Kind_Kraid, 0, 0 },
+    { Gr_Kind_Battle, 0, 0 },       { Gr_Kind_Shrine, 0, 0 },
+    { Gr_Kind_Castle, 0, 0 },       { Gr_Kind_Story, 0, 0 },
+    { Gr_Kind_Onett, 0, 0 },        { Gr_Kind_Izumi, 0, 0 },
+    { Gr_Kind_PStadium, 0, 0 },     { Gr_Kind_Zebes, 0, 0 },
+    { Gr_Kind_GreatBay, 0, 0 },     { Gr_Kind_Yorster, 0, 0 },
+    { Gr_Kind_Icemt, 0, 0 },        { Gr_Kind_MuteCity, 0, 0 },
+    { Gr_Kind_RCruise, 0, 0 },      { Gr_Kind_Figure1, 0, 0 },
+    { Gr_Kind_Battle, 0, 0 },       { Gr_Kind_Corneria, 0, 0 },
+    { Gr_Kind_Garden, 0, 0 },       { Gr_Kind_Kongo, 0, 0 },
+    { Gr_Kind_Last, 0, 0 },         { Gr_Kind_Zebes, 0, 0 },
+    { Gr_Kind_Castle, 0, 0 },       { Gr_Kind_Inishie2, 0, 0 },
+    { Gr_Kind_Kraid, 0, 0 },        { Gr_Kind_Yorster, 0, 0 },
+    { Gr_Kind_Fourside, 0, 0 },     { Gr_Kind_Figure2, 0, 0 },
+    { Gr_Kind_Venom, 0, 0 },        { Gr_Kind_Greens, 0, 0 },
+    { Gr_Kind_Shrine, 0, 0 },       { Gr_Kind_Izumi, 0, 0 },
+    { Gr_Kind_Inishie1, 0, 0 },     { Gr_Kind_Corneria, 0, 0 },
+    { Gr_Kind_BigBlueRoute, 0, 0 }, { Gr_Kind_GreatBay, 0, 0 },
+    { Gr_Kind_OldPupupu, 0, 0 },    { Gr_Kind_Fourside, 0, 0 },
+    { Gr_Kind_Izumi, 0, 0 },        { Gr_Kind_Inishie2, 0, 0 },
+    { Gr_Kind_PStadium, 0, 0 },     { Gr_Kind_Shrine, 0, 0 },
+    { Gr_Kind_Shrine, 0, 0 },       { Gr_Kind_Pura, 0, 0 },
+    { Gr_Kind_BigBlue, 0, 0 },      { Gr_Kind_Battle, 0, 0 },
+    { Gr_Kind_Flatzone, 0, 0 },     { Gr_Kind_Shrine, 0, 0 },
+    { Gr_Kind_Figure3, 0, 0 },      { Gr_Kind_Story, 0, 0 },
+    { Gr_Kind_Inishie1, 0, 0 },     { Gr_Kind_Last, 0, 0 },
+    { Gr_Kind_Last, 0, 0 },         { Gr_Kind_Garden, 0, 0 },
+    { Gr_Kind_Story, 0, 0 },        { Gr_Kind_Castle, 0, 0 },
+    { Gr_Kind_RCruise, 0, 0 },      { Gr_Kind_GreatBay, 0, 0 },
+    { Gr_Kind_Shrine, 0, 0 },       { Gr_Kind_MuteCity, 0, 0 },
+    { Gr_Kind_Corneria, 0, 0 },     { Gr_Kind_PStadium, 0, 0 },
+    { Gr_Kind_Onett, 0, 0 },        { Gr_Kind_Icemt, 0, 0 },
+    { Gr_Kind_Inishie2, 0, 0 },     { Gr_Kind_Pura, 0, 0 },
+    { Gr_Kind_Last, 0, 0 },         { Gr_Kind_Flatzone, 0, 0 },
+    { Gr_Kind_Venom, 0, 0 },        { Gr_Kind_PStadium, 0, 0 },
+    { Gr_Kind_GreatBay, 0, 0 },     { Gr_Kind_Shrine, 0, 0 },
+    { Gr_Kind_Last, 0, 0 },         { Gr_Kind_Battle, 0, 0 },
+    { Gr_Kind_PStadium, 0, 0 },     { Gr_Kind_Last, 0, 0 },
+    { Gr_Kind_Inishie2, 0, 0 },     { Gr_Kind_Izumi, 0, 0 },
+    { Gr_Kind_Flatzone, 0, 0 },     { Gr_Kind_Castle, 0, 0 },
+    { Gr_Kind_Last, 0, 0 },         { Gr_Kind_GreatBay, 0, 0 },
+    { Gr_Kind_Battle, 0, 0 },       { Gr_Kind_PStadium, 0, 0 },
+    { Gr_Kind_Shrine, 0, 0 },       { Gr_Kind_Battle, 0, 0 },
 };
 
-InternalStageId Stage_8022519C(ExternalStageId external_id)
+GrKind Stage_8022519C(StKind stkind)
 {
-    return stage_id_map[external_id].internal_id;
+    return stage_id_map[stkind].grkind;
 }
 
-void Stage_802251B4(ExternalStageId external_id)
+void Stage_802251B4(StKind stkind)
 {
-    Ground_801C06B8(stage_id_map[external_id].internal_id);
+    Ground_801C06B8(stage_id_map[stkind].grkind);
 }
 
-void Stage_802251E8(ExternalStageId external_id, s32* _)
+void Stage_802251E8(StKind stkind, s32* _)
 {
     StageIdPair local_data;
 
-    selected_stage.external_id = external_id;
-    selected_stage.entry = &stage_id_map[external_id];
+    selected_stage.stkind = stkind;
+    selected_stage.entry = &stage_id_map[stkind];
 
     local_data = default_stage_pair;
 
-    local_data.internal_id = selected_stage.entry->internal_id;
-    local_data.external_id = selected_stage.external_id;
+    local_data.grkind = selected_stage.entry->grkind;
+    local_data.stkind = selected_stage.stkind;
 
     Ground_801C0754(&local_data);
 }
@@ -660,8 +517,8 @@ void Stage_8022524C(void)
 
     local_data = default_stage_pair;
 
-    local_data.internal_id = selected_stage.entry->internal_id;
-    local_data.external_id = selected_stage.external_id;
+    local_data.grkind = selected_stage.entry->grkind;
+    local_data.stkind = selected_stage.stkind;
 
     Ground_801C0800(&local_data);
 }
@@ -672,32 +529,32 @@ void Stage_80225298(void)
 
     local_data = default_stage_pair;
 
-    local_data.internal_id = selected_stage.entry->internal_id;
-    local_data.external_id = selected_stage.external_id;
+    local_data.grkind = selected_stage.entry->grkind;
+    local_data.stkind = selected_stage.stkind;
 
-    Ground_801C0F78(&local_data);
+    Ground_OnLoad(&local_data);
 }
 
-void Stage_802252E4(ExternalStageId external_id, HSD_GObj* _)
+void Stage_802252E4(StKind stkind, HSD_GObj* _)
 {
     StageIdPair local_data;
 
     local_data = default_stage_pair;
 
-    local_data.internal_id = selected_stage.entry->internal_id;
-    local_data.external_id = external_id;
+    local_data.grkind = selected_stage.entry->grkind;
+    local_data.stkind = stkind;
 
     Ground_801C0FB8(&local_data);
 }
 
-void Stage_8022532C(ExternalStageId external_id, s32 arg1)
+void Stage_8022532C(StKind stkind, s32 arg1)
 {
     StageIdPair local_data;
 
     local_data = default_stage_pair;
 
-    local_data.internal_id = selected_stage.entry->internal_id;
-    local_data.external_id = external_id;
+    local_data.grkind = selected_stage.entry->grkind;
+    local_data.stkind = stkind;
 
     Ground_DemoInit(&local_data, arg1);
 }

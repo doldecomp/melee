@@ -72,8 +72,8 @@ StageCallbacks grTPe_StageCallbacks[4] = {
     },
 };
 
-StageData grTPe_803E914C = {
-    TPEACH,
+StageData grTPe_StageData = {
+    Gr_Kind_TPeach,
     grTPe_StageCallbacks,
     "/GrTPe.dat",
     grTPeach_802228B8,

@@ -877,8 +877,8 @@ void mnDiagram_PopupInputProc(HSD_GObj* gobj)
     HSD_GObjProc* proc;
     Diagram* data = mnDiagram_804D6C10->user_data;
     u64 input = Menu_GetAllInputs();
-    if ((u32) input & 0x20) {
-        lbAudioAx_80024030(0);
+    if ((u32) input & MenuInput_Back) {
+        sfxBack();
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObj_SetupProc(
             gobj, (void (*)(HSD_GObj*)) mnDiagram_InputProc, 0);
@@ -1234,7 +1234,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     u8 sp[64];
     mn_804A04F0.buttons = input;
     count2 = 0;
-    if (input & 0x10) {
+    if (input & MenuInput_Confirm) {
         cur = 1;
         lbAudioAx_80024030(cur);
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
@@ -1313,8 +1313,8 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         mnDiagram_CreatePopup(col_result2, row_result2, 0);
         return;
     }
-    if (input & 0x20) {
-        lbAudioAx_80024030(0);
+    if (input & MenuInput_Back) {
+        sfxBack();
         mn_804A04F0.entering_menu = count2;
         {
             Diagram* d = mnDiagram_804D6C10->user_data;
@@ -1327,8 +1327,8 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         }
         return;
     }
-    if (input & 0xC0) {
-        lbAudioAx_80024030(1);
+    if (input & (MenuInput_LTrigger | MenuInput_RTrigger)) {
+        sfxForward();
         {
             Diagram* d = mnDiagram_804D6C10->user_data;
             gmMainLib_GetGameRules()->xE = (u8) (d->fighter_cursor_pos >> 8);
@@ -1337,7 +1337,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             gmMainLib_GetGameRules()->x11 = (u8) d->name_cursor_pos;
             gmMainLib_GetGameRules()->xD = d->is_name_mode;
             HSD_GObjPLink_80390228(gobj);
-            if (input & 0x40) {
+            if (input & MenuInput_LTrigger) {
                 mnDiagram3_Init(0L);
                 return;
             }
@@ -1345,12 +1345,12 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         }
         return;
     }
-    if (input & 0xC00) {
+    if (input & (MenuInput_XButton | MenuInput_YButton)) {
         if (GetNameCount() == 0) {
             lbAudioAx_80024030(3);
             return;
         }
-        lbAudioAx_80024030(1);
+        sfxForward();
         data->is_name_mode = (data->is_name_mode == 0) ? (1) : (count2);
         if (data->is_name_mode != 0) {
             count = GetNameCount();
@@ -1398,7 +1398,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         if (input & 1) {
             col = (u8) mn_804A04F0.hovered_selection;
             if ((col > 0) && (count > (col - 1))) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 mn_804A04F0.hovered_selection =
                     (mn_804A04F0.hovered_selection & 0xFF00) |
                     ((col - 1) & 0xFF);
@@ -1408,7 +1408,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                 cur = (u8) data->name_cursor_pos;
                 found = (u8) mnDiagram_FindPrevName(cur);
                 if (cur != found) {
-                    lbAudioAx_80024030(2);
+                    sfxMove();
                     data->name_cursor_pos =
                         (data->name_cursor_pos & 0xFF00) | found;
                     mnDiagram_RefreshGrid(mnDiagram_804D6C10,
@@ -1419,7 +1419,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         } else if (input & 2) {
             col = (u8) mn_804A04F0.hovered_selection;
             if ((col < 9) && (count > (col + 1))) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 mn_804A04F0.hovered_selection =
                     (mn_804A04F0.hovered_selection & 0xFF00) |
                     ((col + 1) & 0xFF);
@@ -1453,7 +1453,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                         goto dn_n_inner;
                     }
                     if (col_result3 != 0x78) {
-                        lbAudioAx_80024030(2);
+                        sfxMove();
                         data->name_cursor_pos =
                             (data->name_cursor_pos & 0xFF00) | found;
                         mnDiagram_RefreshGrid(mnDiagram_804D6C10,
@@ -1465,7 +1465,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         } else if (input & 4) {
             row3 = mn_804A04F0.hovered_selection >> 8;
             if ((0 < row3) && (count > (row3 - 1))) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 mn_804A04F0.hovered_selection =
                     ((u8) mn_804A04F0.hovered_selection) | ((row3 - 1) << 8);
                 return;
@@ -1474,7 +1474,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                 cur = data->name_cursor_pos >> 8;
                 found = (u8) mnDiagram_FindPrevNameWrap(cur);
                 if (cur != found) {
-                    lbAudioAx_80024030(2);
+                    sfxMove();
                     data->name_cursor_pos =
                         ((u8) data->name_cursor_pos) | (found << 8);
                     mnDiagram_RefreshGrid(mnDiagram_804D6C10,
@@ -1485,7 +1485,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         } else if (input & 8) {
             row4 = mn_804A04F0.hovered_selection >> 8;
             if ((row4 < 6) && (count > (row4 + 1))) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 mn_804A04F0.hovered_selection =
                     ((u8) mn_804A04F0.hovered_selection) | ((row4 + 1) << 8);
                 return;
@@ -1518,7 +1518,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                         goto rt_n_inner;
                     }
                     if (row_result3 != 0x78) {
-                        lbAudioAx_80024030(2);
+                        sfxMove();
                         data->name_cursor_pos =
                             ((u8) data->name_cursor_pos) | (found << 8);
                         mnDiagram_RefreshGrid(mnDiagram_804D6C10,
@@ -1539,7 +1539,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         if (input & 1) {
             col = (u8) mn_804A04F0.hovered_selection;
             if ((col > new_var) && (count2 > (col - 1))) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 mn_804A04F0.hovered_selection =
                     (mn_804A04F0.hovered_selection & 0xFF00) |
                     ((col - 1) & 0xFF);
@@ -1549,7 +1549,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                 cur = (u8) data->fighter_cursor_pos;
                 found = (u8) mnDiagram_FindPrevFighter(sorted, cur);
                 if (cur != found) {
-                    lbAudioAx_80024030(2);
+                    sfxMove();
                     data->fighter_cursor_pos =
                         (data->fighter_cursor_pos & 0xFF00) | found;
                     mnDiagram_RefreshGrid(mnDiagram_804D6C10,
@@ -1560,7 +1560,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         } else if (input & 2) {
             col = (u8) mn_804A04F0.hovered_selection;
             if ((col < 9) && (count2 > (col + 1))) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 mn_804A04F0.hovered_selection =
                     (mn_804A04F0.hovered_selection & 0xFF00) |
                     ((col + 1) & 0xFF);
@@ -1595,7 +1595,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                 }
 
                 if (col_result4 != 0x19) {
-                    lbAudioAx_80024030(2);
+                    sfxMove();
                     data->fighter_cursor_pos =
                         (data->fighter_cursor_pos & 0xFF00) | found;
                     mnDiagram_RefreshGrid(mnDiagram_804D6C10,
@@ -1606,7 +1606,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         } else if (input & 4) {
             row5 = mn_804A04F0.hovered_selection >> 8;
             if ((row5 > new_var) && (count2 > (row5 - 1))) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 mn_804A04F0.hovered_selection =
                     ((u8) mn_804A04F0.hovered_selection) | ((row5 - 1) << 8);
                 return;
@@ -1615,7 +1615,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                 cur = data->fighter_cursor_pos >> 8;
                 found = (u8) mnDiagram_FindPrevFighterWrap(sorted, cur);
                 if (cur != found) {
-                    lbAudioAx_80024030(2);
+                    sfxMove();
                     data->fighter_cursor_pos =
                         ((u8) data->fighter_cursor_pos) | (found << 8);
                     mnDiagram_RefreshGrid(mnDiagram_804D6C10,
@@ -1626,7 +1626,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         } else if (input & 8) {
             row6 = mn_804A04F0.hovered_selection >> 8;
             if ((row6 < 6) && (count2 > (row6 + 1))) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 mn_804A04F0.hovered_selection =
                     ((u8) mn_804A04F0.hovered_selection) | ((row6 + 1) << 8);
                 return;
@@ -1659,7 +1659,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
                 }
 
                 if (row_result4 != 0x19) {
-                    lbAudioAx_80024030(2);
+                    sfxMove();
                     data->fighter_cursor_pos =
                         ((u8) data->fighter_cursor_pos) | (found << 8);
                     mnDiagram_RefreshGrid(mnDiagram_804D6C10,

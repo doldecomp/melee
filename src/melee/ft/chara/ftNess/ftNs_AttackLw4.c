@@ -12,8 +12,6 @@
 #include "ftCommon/ftCo_Wait.h"
 #include "ftNess/types.h"
 
-#include <common_structs.h>
-
 /// 0x8011659C
 /// https://decomp.me/scratch/xVTx7
 void ftNs_AttackLw4_Enter(

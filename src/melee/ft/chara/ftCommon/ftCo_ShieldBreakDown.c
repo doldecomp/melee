@@ -16,8 +16,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
-
 void ftCo_80098E3C(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;

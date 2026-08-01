@@ -275,7 +275,7 @@ struct PreloadCacheScene {
         u8 field2_0x9;
         u8 field3_0xa;
         u8 field4_0xb;
-        ExternalStageId stage_id;
+        StKind stkind;
         PreloadCacheSceneEntry entries[8];
     } game_cache;
     s32 mode_scene_changes;
@@ -357,7 +357,7 @@ struct lb_80432A68_t {
         u8 x18;
         char x19[7];
         u8 unk20[0x1C];
-    } task_array[11];
+    } task_array[LbCardNewTaskArray_Max];
     /* 0x8AC */ int x8AC;
 }; /* size = 0x8B0 */
 STATIC_ASSERT(sizeof(struct lb_80432A68_t) == 0x8B0);

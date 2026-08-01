@@ -20,8 +20,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
-
 /* 0EBA4C */ static void onAccessory4(HSD_GObj* gobj);
 /* 0EBE64 */ static void doColl(HSD_GObj* gobj);
 
@@ -44,6 +42,7 @@ static void onAccessory4(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void ftLk_SpecialHi_Enter(HSD_GObj* gobj)

@@ -7,7 +7,7 @@
 /* 08D8D8 */ float ftCo_ScaleBy154(float);
 /* 08D8E8 */ bool ftCo_8008D8E8(float);
 /* 08D930 */ void ftCo_Damage_CalcKnockback(Fighter* fp);
-/* 08DB10 */ void ftCo_8008DB10(Fighter_GObj* gobj, enum_t, float);
+/* 08DB10 */ void ftCo_8008DB10(Fighter_GObj* gobj, HitElement, float);
 /* 08DC0C */ void ftCo_Damage_CalcVel(Fighter* fp, float x, float y);
 /* 08DCE0 */ void ftCo_8008DCE0(Fighter_GObj* gobj, int, float facing_dir);
 /* 08E498 */ bool ftCo_Damage_CheckAirMotion(Fighter* fp);

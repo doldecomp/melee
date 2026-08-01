@@ -12,7 +12,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /* 0960CC */ static void doEnter(Fighter_GObj* gobj);

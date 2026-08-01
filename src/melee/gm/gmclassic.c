@@ -631,7 +631,7 @@ void gmClassic_OnLoad(void)
 void gmClassic_OnInit(void)
 {
     struct gmm_x0_528_t* temp_r3 = gmMainLib_8015CDC8();
-    temp_r3->c_kind = 0x21;
+    temp_r3->c_kind = CHKIND_NONE;
     temp_r3->color = 0;
     temp_r3->stocks = 3;
     temp_r3->cpu_level = 0;
@@ -710,8 +710,8 @@ void gmClassic_801B3500(GameScene* arg0)
 
     ally_count = 1;
     ckind = ad->x0.ckind;
-    if (ckind == 0x12 && ad->x0.xC.x12 != 0) {
-        sd->x0D[0] = 0x13;
+    if (ckind == CKIND_ZELDA && ad->x0.xC.x12 != 0) {
+        sd->x0D[0] = CKIND_SEAK;
     } else {
         sd->x0D[0] = ckind;
     }
@@ -770,11 +770,11 @@ void gmClassic_801B3500(GameScene* arg0)
     lbDvd_80018254();
 
     if (entry->x1 == 0x80 && entry->x2 == 1) {
-        gc->stage_id = (u16) gm_801647F8(ad->x0.ckind);
+        gc->stkind = (u16) gm_801647F8(ad->x0.ckind);
     } else if (entry->x1 == 4) {
-        gc->stage_id = 0xAF;
+        gc->stkind = 0xAF;
     } else {
-        gc->stage_id = entry->xC->x00;
+        gc->stkind = entry->xC->x00;
     }
 
     lbDvd_80018254();
@@ -799,13 +799,13 @@ void gmClassic_801B3500(GameScene* arg0)
     }
 
     {
-        ExternalStageId stage_id;
+        StKind stkind;
         if (entry->x1 == 0x80 && entry->x2 == 1) {
-            stage_id = (u16) gm_801647F8(ad->x0.ckind);
+            stkind = (u16) gm_801647F8(ad->x0.ckind);
         } else {
-            stage_id = entry->xC->x00;
+            stkind = entry->xC->x00;
         }
-        audio |= lbAudioAx_80026EBC(stage_id);
+        audio |= lbAudioAx_80026EBC(stkind);
     }
 
     lbAudioAx_80026F2C(0x1C);

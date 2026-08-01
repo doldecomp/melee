@@ -13,8 +13,6 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Attack100.h"
 
-#include <common_structs.h>
-
 void ftCo_8009CA0C(Fighter_GObj* gobj, Fighter_GObj* vic_gobj)
 {
     u8 _[8] = { 0 };

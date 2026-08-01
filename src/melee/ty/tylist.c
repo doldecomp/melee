@@ -7,10 +7,9 @@
 #include <platform.h>
 
 #include "lb/lb_00B0.h"
-#include "lb/lbaudio_ax.h"
 #include "lb/lbspdisplay.h"
+#include "mn/inlines.h"
 #include "mn/mnmain.h"
-#include "mn/mnsoundtest.h"
 #include "ty/toy.h"
 #include "ty/types.h"
 
@@ -359,14 +358,14 @@ s32 _tyList_8031305C(void* a, TyListState* state, s8 movedFlag)
             if (state->x29E == 0) {
                 HSD_JObjClearFlagsAll(state->x288, JOBJ_HIDDEN);
                 _tyList_80312904(state->x278, state->x278->x24);
-                if (HSD_PadCopyStatus->button & 0xC00) {
+                if (HSD_PadCopyStatus->button & HSD_PAD_XY) {
                     state->x2A0 = 5;
                 } else {
                     state->x2A0 = 0;
                 }
             }
             if (movedFlag != 0) {
-                lbAudioAx_80024030(2);
+                sfxMove();
             }
         }
     }
@@ -612,7 +611,7 @@ static inline void tyList_80313BD8_inline(TyListState* state,
         if (p->x24 == g->x0C) {
             state->selectedIdx = p->idx;
             state->x278 = p;
-            lbAudioAx_80024030(2);
+            sfxMove();
             HSD_JObjSetTranslateY(state->x288, p->x30);
         }
         _tyList_80312904(p, _tyList_804A2D6C.x0C);
@@ -693,7 +692,7 @@ static void _tyList_80313BD8(HSD_GObj* gobj)
     }
 
     if (mn_8022F218() != 0) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         Toy_80310660(0);
         _tyList_803148E4(0);
@@ -703,7 +702,7 @@ static void _tyList_80313BD8(HSD_GObj* gobj)
     }
 
     if (Toy_80305B88() & 0x200) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         Toy_80310660(0);
         _tyList_803148E4(0);
@@ -716,7 +715,7 @@ static void _tyList_80313BD8(HSD_GObj* gobj)
     }
 
     if (Toy_80305B88() & 0x1100) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         Toy_80310660(0);
         _tyList_803148E4(1);
@@ -737,7 +736,7 @@ static void _tyList_80313BD8(HSD_GObj* gobj)
             state->x29B = 2;
         }
         _tyList_80312BAC(state, g->x0C);
-        lbAudioAx_80024030(1);
+        sfxForward();
         return;
     }
 
@@ -748,7 +747,7 @@ static void _tyList_80313BD8(HSD_GObj* gobj)
             state->x29B = 0;
         }
         _tyList_80312BAC(state, g->x0C);
-        lbAudioAx_80024030(1);
+        sfxForward();
         return;
     }
 

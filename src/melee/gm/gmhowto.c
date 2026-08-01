@@ -1,16 +1,17 @@
 #include "gmhowto.h"
 
 #include "gm_unsplit.h"
+#include "gmmain_lib.h"
 #include "gmopening.h"
 
-#include "dolphin/pad.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lbmthp.h"
+#include "mn/inlines.h"
 
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/sobjlib.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbmthp.h>
+#include <baselib/controller.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
+#include <baselib/sobjlib.h>
 
 static u32 gm_803DD2C0[] = {
     1,  19, 856, 1,  1,   85, 279, 1,  1,   59,  17,  1,  1,     59, 19,
@@ -73,7 +74,7 @@ void gm_801ACD8C_OnFrame(void)
         if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
             (HSD_PAD_START | HSD_PAD_A))
         {
-            lbAudioAx_80024030(1);
+            sfxForward();
             gm_SetPendingGameMode(GM_TITLE);
             gm_SetNewGameModePending();
         } else if (gmMainLib_8015DB00() != 5) {

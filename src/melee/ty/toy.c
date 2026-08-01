@@ -31,6 +31,7 @@
 #include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
 #include "melee/if/textlib.h"
+#include "mn/inlines.h"
 #include "mn/mnmain.h"
 #include "mn/mnsoundtest.h"
 #include "MSL/math.h"
@@ -1842,7 +1843,7 @@ void Toy_80307470(s32 arg0)
 
     if (tg->x50 == NULL) {
         OSReport("*** BG data aren't being loaded!\n");
-        __assert(__FILE__, 2481, "0");
+        HSD_ASSERT(2481, 0);
     }
 
     if (tg->x0 != NULL) {
@@ -1875,7 +1876,7 @@ void Toy_80307470(s32 arg0)
     }
 
     OSReport("*** Can not Load Panel Label(%s)\n", *label);
-    __assert(__FILE__, 2534, "0");
+    HSD_ASSERT(2534, 0);
 }
 
 void _Toy_803075E8(s32 arg0)
@@ -1896,7 +1897,7 @@ void _Toy_803075E8(s32 arg0)
 
     if (td->archive == NULL) {
         OSReport("*** BG data aren't being loaded!\n");
-        __assert(__FILE__, 2625, "0");
+        HSD_ASSERT(2625, 0);
     }
 
     if (td->gobj != NULL) {
@@ -1938,7 +1939,7 @@ void _Toy_803075E8(s32 arg0)
             }
         } else {
             OSReport("*** Can not Load Back Label(%s)\n", *ptr);
-            __assert(__FILE__, 2677, "0");
+            HSD_ASSERT(2677, 0);
         }
     } else if (td->x54 != 0) {
         tdjobj = ((ToyED8Data*) Toy_sbss_804D6ED8)->x8->x28;
@@ -2224,7 +2225,7 @@ char* Toy_8030813C(int trophy_id)
 
     if (found == 0) {
         OSReport("**** Not Found Toy Model!(%d)\n", id);
-        __assert("toy.c", 2979, "0");
+        HSD_ASSERT(2979, 0);
     }
 
     return ptr;
@@ -2522,7 +2523,7 @@ HSD_GObj* Toy_803087F4(void* arg0)
 
 assert_fail:
     OSReport("*** Cann't Show Model!\n");
-    __assert("toy.c", 3358, "0");
+    HSD_ASSERT(3358, 0);
 
 done:
     return anim->gobj;
@@ -2910,7 +2911,7 @@ void _Toy_80309404(HSD_GObj* gobj)
     }
 
     if (mn_8022F218() != 0) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         Toy_80310660(1);
         HSD_GObj_80390CD4(gobj);
@@ -2923,8 +2924,8 @@ void _Toy_80309404(HSD_GObj* gobj)
     case 0: {
         trigger = Toy_80305B88();
 
-        if (trigger & 0x200) {
-            lbAudioAx_80024030(0);
+        if (trigger & HSD_PAD_B) {
+            sfxBack();
             Toy_80310660(1);
             HSD_GObj_80390CD4(gobj);
             tyList_803147C4();
@@ -2950,7 +2951,9 @@ void _Toy_80309404(HSD_GObj* gobj)
         }
         trigger = Toy_80305B88();
 
-        if (trigger & 0xF) {
+        if (trigger & (HSD_PAD_DPADLEFT | HSD_PAD_DPADRIGHT |
+                       HSD_PAD_DPADDOWN | HSD_PAD_DPADUP))
+        {
         reset_idle_timer:
             state->x58 = 0;
         } else {
@@ -2991,8 +2994,8 @@ void _Toy_80309404(HSD_GObj* gobj)
         }
 
         trigger = Toy_80305B88();
-        if (trigger & 0xD00) {
-            lbAudioAx_80024030(1);
+        if (trigger & (HSD_PAD_A | HSD_PAD_XY)) {
+            sfxForward();
             _Toy_sbss_804D6E80 = HSD_CObjGetTop(cobj);
             _Toy_sbss_804D6E84 = HSD_CObjGetBottom(cobj);
             _Toy_sbss_804D6E88 = HSD_CObjGetRight(cobj);
@@ -3027,7 +3030,7 @@ void _Toy_80309404(HSD_GObj* gobj)
         break;
     case 2:
         trigger = Toy_80305B88();
-        if (trigger & 0x100) {
+        if (trigger & HSD_PAD_A) {
             ToyJObjNode* jobj_node;
 
             _Toy_sbss_804D6E58 ^= 1;
@@ -3048,10 +3051,10 @@ void _Toy_80309404(HSD_GObj* gobj)
 
         trigger = Toy_80305B88();
 
-        if ((trigger & 0x200) || ((f32) state->x5C > 7200.0f)) {
+        if ((trigger & HSD_PAD_B) || ((f32) state->x5C > 7200.0f)) {
             ToyJObjNode* jobj_node;
 
-            lbAudioAx_80024030(0);
+            sfxBack();
             _Toy_sbss_804D6E80 = HSD_CObjGetTop(cobj);
             _Toy_sbss_804D6E84 = HSD_CObjGetBottom(cobj);
             _Toy_sbss_804D6E88 = HSD_CObjGetRight(cobj);
@@ -3102,27 +3105,27 @@ void _Toy_80309404(HSD_GObj* gobj)
         }
 
         button = Toy_80305C44();
-        if (button & 1) {
+        if (button & HSD_PAD_DPADLEFT) {
             state->x50 = (f32) (-0.3f * (dist / 38.0f));
         }
 
         button = Toy_80305C44();
-        if (button & 2) {
+        if (button & HSD_PAD_DPADRIGHT) {
             state->x50 = (f32) (0.3f * (dist / 38.0f));
         }
 
         button = Toy_80305C44();
-        if (button & 8) {
+        if (button & HSD_PAD_DPADUP) {
             state->x54 = (f32) (0.3f * (dist / 38.0f));
         }
 
         button = Toy_80305C44();
-        if (button & 4) {
+        if (button & HSD_PAD_DPADDOWN) {
             state->x54 = (f32) (-0.3f * (dist / 38.0f));
         }
 
         button = Toy_80305C44();
-        if (button & 0x100) {
+        if (button & HSD_PAD_A) {
             tmp = state->x30;
             if (tmp && (tmp < 0.0f)) {
                 state->x50 = (f32) (0.3f * tmp * (dist / 38.0f));
@@ -3130,7 +3133,7 @@ void _Toy_80309404(HSD_GObj* gobj)
         }
 
         button = Toy_80305C44();
-        if (button & 0x100) {
+        if (button & HSD_PAD_A) {
             tmp = state->x30;
             if (tmp && (tmp > 0.0f)) {
                 state->x50 = (f32) (0.3f * tmp * (dist / 38.0f));
@@ -3138,7 +3141,7 @@ void _Toy_80309404(HSD_GObj* gobj)
         }
 
         button = Toy_80305C44();
-        if (button & 0x100) {
+        if (button & HSD_PAD_A) {
             tmp = state->x34;
             if (tmp && (tmp > 0.0f)) {
                 state->x54 = (f32) (0.3f * tmp * (dist / 38.0f));
@@ -3146,7 +3149,7 @@ void _Toy_80309404(HSD_GObj* gobj)
         }
 
         button = Toy_80305C44();
-        if (button & 0x100) {
+        if (button & HSD_PAD_A) {
             tmp = state->x34;
             if (tmp && (tmp < 0.0f)) {
                 state->x54 = (f32) (0.3f * tmp * (dist / 38.0f));
@@ -3155,7 +3158,7 @@ void _Toy_80309404(HSD_GObj* gobj)
 
         if (!state->x50 && !state->x54) {
             button = Toy_80305C44();
-            if (button & 0x100) {
+            if (button & HSD_PAD_A) {
                 _Toy_803102C4(0);
             } else {
                 _Toy_803102C4(1);
@@ -3167,12 +3170,12 @@ void _Toy_80309404(HSD_GObj* gobj)
 
         if (!movement_update) {
             button = Toy_80305C44();
-            if (button & 0x800) {
+            if (button & HSD_PAD_Y) {
                 state->x20 = (f32) - ((0.025f * dist) - state->x20);
                 zoom_update = 1.0f;
             } else {
                 button = Toy_80305C44();
-                if (button & 0x400) {
+                if (button & HSD_PAD_X) {
                     state->x20 = (f32) - ((-0.025f * dist) - state->x20);
                     zoom_update = 1.0f;
                 } else {
@@ -3235,7 +3238,7 @@ void _Toy_80309404(HSD_GObj* gobj)
                 }
                 if (!(tmp > 0.9f)) {
                     trigger = Toy_80305B88();
-                    if (!(trigger & 0x60)) {
+                    if (!(trigger & (HSD_PAD_L | HSD_PAD_R))) {
                         goto skip_trophy_cycle;
                     }
                 }
@@ -3252,7 +3255,7 @@ void _Toy_80309404(HSD_GObj* gobj)
                     cycle_prev: {
                         s32 total;
 
-                        lbAudioAx_80024030(2);
+                        sfxMove();
                         display->selectedIdx = display->selectedIdx - 1;
                         if (display->selectedIdx < 0) {
                             if ((gm_IsCurrently1PMode() != 0) ||
@@ -3354,7 +3357,7 @@ void _Toy_80309404(HSD_GObj* gobj)
                     cycle_next: {
                         s32 total;
 
-                        lbAudioAx_80024030(2);
+                        sfxMove();
                         display->selectedIdx = display->selectedIdx + 1;
                         if ((gm_IsCurrently1PMode() != 0) ||
                             (gm_GetCurrentGameMode() == GM_TOY_LOTTERY))
@@ -3497,8 +3500,8 @@ void _Toy_80309404(HSD_GObj* gobj)
         }
 
         trigger = Toy_80305B88();
-        if (trigger & 0x1000) {
-            lbAudioAx_80024030(2);
+        if (trigger & HSD_PAD_START) {
+            sfxMove();
             state->x58 = 0;
             ed4->x10 = (s32) (ed4->x10 + 1);
             if (ed4->x10 == 6) {
@@ -3509,7 +3512,7 @@ void _Toy_80309404(HSD_GObj* gobj)
         }
 
         trigger = Toy_80305B88();
-        if (trigger & 0x10) {
+        if (trigger & HSD_PAD_Z) {
             ToyCameraControl* camera;
 
             _Toy_80307828(0);
@@ -3655,8 +3658,8 @@ void _Toy_8030B530(HSD_GObj* arg0)
 
         trigger = Toy_80305B88();
 
-        if (trigger & 0x10) {
-            lbAudioAx_80024030(0);
+        if (trigger & HSD_PAD_Z) {
+            sfxBack();
             if ((s8) state->x61 == 0) {
                 Toy_80310660(1);
                 HSD_GObj_80390CD4(arg0);
@@ -3679,7 +3682,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
 
         trigger = Toy_80305B88();
 
-        if (trigger & 0x400) {
+        if (trigger & HSD_PAD_X) {
             _Toy_sbss_804D6E80 = HSD_CObjGetTop(cobj);
             _Toy_sbss_804D6E84 = HSD_CObjGetBottom(cobj);
             _Toy_sbss_804D6E88 = HSD_CObjGetRight(cobj);
@@ -3719,7 +3722,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                     transition->x20 = 0x40000000;
                     state->x5C = 0;
                     state->x61 = 3;
-                    lbAudioAx_80024030(0);
+                    sfxBack();
                     return;
                 }
             }
@@ -3729,7 +3732,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
 
         button = Toy_80305C44();
 
-        if (button & 0x400) {
+        if (button & HSD_PAD_X) {
             u32 btn2;
             btn2 = Toy_80305C44();
             if (btn2 & 2) {
@@ -3944,7 +3947,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
         moved_y = 0.3f * adj_sy;
 
         trigger = Toy_80305B88();
-        if (trigger & 0x1000) {
+        if (trigger & HSD_PAD_START) {
             state->x58 = 0;
             ed4->x10 = ed4->x10 + 1;
             if (ed4->x10 == 6) {
@@ -3958,7 +3961,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
 
         trigger = Toy_80305B88();
 
-        if (trigger & 0x60) {
+        if (trigger & (HSD_PAD_L | HSD_PAD_R)) {
             TyDisplayData* display;
             u32 trig2;
             display = Toy_sbss_804D6EE0;
@@ -3967,7 +3970,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
 
             if (trig2 & 0x441) {
                 s32 total;
-                lbAudioAx_80024030(2);
+                sfxMove();
                 display->selectedIdx = display->selectedIdx - 1;
                 if (display->selectedIdx < 0) {
                     if ((gm_IsCurrently1PMode() != 0) ||
@@ -4049,7 +4052,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                 }
             } else {
                 s32 total;
-                lbAudioAx_80024030(2);
+                sfxMove();
                 display->selectedIdx = display->selectedIdx + 1;
                 if ((gm_IsCurrently1PMode() != 0) ||
                     (gm_GetCurrentGameMode() == GM_TOY_LOTTERY))
@@ -4147,7 +4150,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
         }
 
         trigger = Toy_80305B88();
-        if (trigger & 0x1000) {
+        if (trigger & HSD_PAD_START) {
             _Toy_80307828(0);
         }
 
@@ -4156,12 +4159,12 @@ void _Toy_8030B530(HSD_GObj* arg0)
             f32 bottom = HSD_CObjGetBottom(cobj);
             f32 right = HSD_CObjGetRight(cobj);
             f32 left = HSD_CObjGetLeft(cobj);
-            if (HSD_PadCopyStatus[1].trigger & 0x1000) {
+            if (HSD_PadCopyStatus[1].trigger & HSD_PAD_START) {
                 OSReport("top = %f, bottom = %f, right = %f, left = %f\n", top,
                          bottom, right, left);
                 return;
             }
-            if (HSD_PadCopyStatus[1].button & 8) {
+            if (HSD_PadCopyStatus[1].button & HSD_PAD_DPADUP) {
                 top += 0.001f;
                 bottom += 0.001f;
                 HSD_CObjSetTop(cobj, top);
@@ -4169,7 +4172,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                 OSReport("top = %f, bottom = %f\n", top, bottom);
                 return;
             }
-            if (HSD_PadCopyStatus[1].button & 4) {
+            if (HSD_PadCopyStatus[1].button & HSD_PAD_DPADDOWN) {
                 top -= 0.001f;
                 bottom -= 0.001f;
                 HSD_CObjSetTop(cobj, top);
@@ -4177,7 +4180,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                 OSReport("top = %f, bottom = %f\n", top, bottom);
                 return;
             }
-            if (HSD_PadCopyStatus[1].button & 1) {
+            if (HSD_PadCopyStatus[1].button & HSD_PAD_DPADLEFT) {
                 f32 nr = HSD_CObjGetRight(cobj);
                 f32 nl = HSD_CObjGetLeft(cobj);
                 nr -= 0.001f;
@@ -4187,7 +4190,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                 OSReport("right = %f, left = %f\n", nr, nl);
                 return;
             }
-            if (HSD_PadCopyStatus[1].button & 2) {
+            if (HSD_PadCopyStatus[1].button & HSD_PAD_DPADRIGHT) {
                 f32 nr = HSD_CObjGetRight(cobj);
                 f32 nl = HSD_CObjGetLeft(cobj);
                 nr += 0.001f;
@@ -4326,8 +4329,8 @@ void _Toy_8030E110(HSD_GObj* arg0)
         case 0:
             trigger = Toy_80305B88();
 
-            if (trigger & 0x200) {
-                lbAudioAx_80024030(0);
+            if (trigger & HSD_PAD_B) {
+                sfxBack();
                 Toy_80310660(1);
                 HSD_GObj_80390CD4(arg0);
                 tyList_803147C4();
@@ -4348,8 +4351,8 @@ void _Toy_8030E110(HSD_GObj* arg0)
                 }
                 trigger = Toy_80305B88();
 
-                if (trigger & 0xD00) {
-                    lbAudioAx_80024030(1);
+                if (trigger & (HSD_PAD_A | HSD_PAD_XY)) {
+                    sfxForward();
                     _Toy_sbss_804D6E80 = HSD_CObjGetTop(cobj);
                     _Toy_sbss_804D6E84 = HSD_CObjGetBottom(cobj);
                     _Toy_sbss_804D6E88 = HSD_CObjGetRight(cobj);
@@ -4370,9 +4373,9 @@ void _Toy_8030E110(HSD_GObj* arg0)
         case 2:
             trigger = Toy_80305B88();
 
-            if ((trigger & 0x200) || ((f32) state->x5C > 7200.0f)) {
+            if ((trigger & HSD_PAD_B) || ((f32) state->x5C > 7200.0f)) {
                 ToyJObjNode* jobj_node;
-                lbAudioAx_80024030(0);
+                sfxBack();
                 _Toy_sbss_804D6E80 = HSD_CObjGetTop(cobj);
                 _Toy_sbss_804D6E84 = HSD_CObjGetBottom(cobj);
                 _Toy_sbss_804D6E88 = HSD_CObjGetRight(cobj);
@@ -4408,7 +4411,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
             }
 
             button = Toy_80305C44();
-            if (button & 0x100) {
+            if (button & HSD_PAD_A) {
                 f32 sx = state->x30;
                 if (sx && (sx < 0.0f)) {
                     state->x50 = (f32) (0.3f * sx * (state->x20 / 38.0f));
@@ -4416,7 +4419,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
             }
 
             button = Toy_80305C44();
-            if (button & 0x100) {
+            if (button & HSD_PAD_A) {
                 f32 sx = state->x30;
                 if (sx && (sx > 0.0f)) {
                     state->x50 = (f32) (0.3f * sx * (state->x20 / 38.0f));
@@ -4424,7 +4427,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
             }
 
             button = Toy_80305C44();
-            if (button & 0x100) {
+            if (button & HSD_PAD_A) {
                 f32 sy = state->x34;
                 if (sy && (sy > 0.0f)) {
                     state->x54 = (f32) (0.3f * sy * (state->x20 / 38.0f));
@@ -4432,7 +4435,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
             }
 
             button = Toy_80305C44();
-            if (button & 0x100) {
+            if (button & HSD_PAD_A) {
                 f32 sy = state->x34;
                 if (sy && (sy < 0.0f)) {
                     state->x54 = (f32) (0.3f * sy * (state->x20 / 38.0f));
@@ -4459,7 +4462,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
                         }
                     }
                 }
-                if (button & 0x100) {
+                if (button & HSD_PAD_A) {
                     goto pan_active;
                 }
                 _Toy_803102C4(1);
@@ -4491,7 +4494,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
         default:
         case_default:
             trigger = Toy_80305B88();
-            if (trigger & 0x800) {
+            if (trigger & HSD_PAD_Y) {
                 _Toy_sbss_804D6E54 ^= 1;
             }
 
@@ -4519,7 +4522,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
 
             if ((moved_x == 0.0f) && (moved_y == 0.0f)) {
                 trigger = Toy_80305B88();
-                if (trigger & 0x60) {
+                if (trigger & (HSD_PAD_L | HSD_PAD_R)) {
                     display = Toy_sbss_804D6EE0;
                     {
                         s32 tc;
@@ -4536,7 +4539,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
                         }
                     }
                     if ((state->x30 < 0.0f) || (Toy_80305B88() & 0x441)) {
-                        lbAudioAx_80024030(2);
+                        sfxMove();
                         display->selectedIdx =
                             (s16) (display->selectedIdx - 1);
                         if (display->selectedIdx < 0) {
@@ -4623,7 +4626,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
                         }
                     } else if ((state->x30 > 0.0f) || (Toy_80305B88() & 0x822))
                     {
-                        lbAudioAx_80024030(2);
+                        sfxMove();
                         display->selectedIdx =
                             (s16) (display->selectedIdx + 1);
                         {
@@ -4731,8 +4734,8 @@ void _Toy_8030E110(HSD_GObj* arg0)
 
         after_trophy_cycle:
             trigger = Toy_80305B88();
-            if (trigger & 0x1000) {
-                lbAudioAx_80024030(2);
+            if (trigger & HSD_PAD_START) {
+                sfxMove();
                 state->x58 = 0;
                 M2C_FIELD(ed4, s32*, 0x10) = M2C_FIELD(ed4, s32*, 0x10) + 1;
                 if (M2C_FIELD(ed4, s32*, 0x10) == 6) {
@@ -4743,7 +4746,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
             }
 
             trigger = Toy_80305B88();
-            if (trigger & 0x10) {
+            if (trigger & HSD_PAD_Z) {
                 void* ed4_2;
                 _Toy_80307828(0);
                 ed4_2 = Toy_sbss_804D6ED4;
@@ -5618,8 +5621,8 @@ void _Toy_80310B48(HSD_GObj* gobj)
 
     buttons = Toy_80305B88();
 
-    if (buttons & 0x200) {
-        lbAudioAx_80024030(0);
+    if (buttons & HSD_PAD_B) {
+        sfxBack();
         HSD_GObjPLink_80390228(gobj);
         editor->gobj = NULL;
         ((TyModeState*) Toy_804A284C)->x4 = 1;
@@ -5628,8 +5631,8 @@ void _Toy_80310B48(HSD_GObj* gobj)
 
     buttons = Toy_80305B88();
 
-    if (buttons & 0x1100) {
-        lbAudioAx_80024030(1);
+    if (buttons & (HSD_PAD_A | HSD_PAD_START)) {
+        sfxForward();
         Toy_80311960();
         valptr = (s16*) editor;
         {
@@ -5640,7 +5643,7 @@ void _Toy_80310B48(HSD_GObj* gobj)
                 if (valptr[3] != 0) {
                     Toy_80305918(slot, 0, 0);
                     buttons = Toy_80305B88();
-                    if (buttons & 0x1000) {
+                    if (buttons & HSD_PAD_START) {
                         _Toy_803053C4(slot, (s32) valptr[3], 0);
                     } else {
                         _Toy_803053C4(slot, (s32) valptr[3], 1);
@@ -5666,15 +5669,15 @@ void _Toy_80310B48(HSD_GObj* gobj)
 
     if (!(dirX > 0.0f)) {
         buttons = Toy_80305C44();
-        if (!(buttons & 0x800)) {
+        if (!(buttons & HSD_PAD_Y)) {
             buttons = Toy_80305B88();
-            if (!(buttons & 1)) {
+            if (!(buttons & HSD_PAD_DPADLEFT)) {
                 goto skip_increment;
             }
         }
     }
 
-    lbAudioAx_80024030(2);
+    sfxMove();
     editor->values[(s8) editor->selected_slot] =
         (s16) (editor->values[(s8) editor->selected_slot] + 1);
     if ((s16) editor->values[(s8) editor->selected_slot] >
@@ -5691,15 +5694,15 @@ skip_increment:
 
     if (!(dirX < 0.0f)) {
         buttons = Toy_80305C44();
-        if (!(buttons & 0x400)) {
+        if (!(buttons & HSD_PAD_X)) {
             buttons = Toy_80305B88();
-            if (!(buttons & 2)) {
+            if (!(buttons & HSD_PAD_DPADRIGHT)) {
                 goto skip_decrement;
             }
         }
     }
 
-    lbAudioAx_80024030(2);
+    sfxMove();
     editor->values[(s8) editor->selected_slot] =
         (s16) (editor->values[(s8) editor->selected_slot] - 1);
     if ((s16) editor->values[(s8) editor->selected_slot] < 0) {
@@ -5711,7 +5714,7 @@ skip_increment:
 skip_decrement:
 
     if (!dirX && dirY) {
-        lbAudioAx_80024030(2);
+        sfxMove();
         editor->selected_slot =
             (u8) (s32) ((f32) (s8) editor->selected_slot + dirY);
         if ((s8) editor->selected_slot < 0) {

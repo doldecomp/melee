@@ -64,8 +64,8 @@ static StageCallbacks grTPc_StageCallbacks[] = {
     { NULL, NULL, NULL, NULL, 0 },
 };
 
-StageData grTPc_803E920C = {
-    TPICHU,
+StageData grTPc_StageData = {
+    Gr_Kind_TPichu,
     grTPc_StageCallbacks,
     "/GrTPc.dat",
     grTPichu_80222B9C,

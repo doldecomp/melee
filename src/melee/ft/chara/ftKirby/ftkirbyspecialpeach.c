@@ -24,7 +24,6 @@
 #include "it/items/itpeachtoadspore.h"
 #include "lb/lb_00B0.h"
 
-#include <common_structs.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
@@ -41,8 +40,8 @@ static void fn_8010C288(HSD_GObj* gobj)
         Vec3 pos;
         fp->cmd_vars[2] = true;
         lb_8000B1CC(fp->parts[FtPart_R3rdNa].joint, 0, &pos);
-        fp->u.kb.xD0 =
-            it_802BDE18(gobj, &pos, FtPart_R3rdNa, 134, fp->facing_dir);
+        fp->u.kb.xD0 = it_802BDE18(gobj, &pos, FtPart_R3rdNa,
+                                   It_Kind_Kirby_PeachToad, fp->facing_dir);
         if (fp->u.kb.xD0 != NULL) {
             fp->death2_cb = &ftKb_Init_800EE74C;
             fp->take_dmg_cb = &ftKb_Init_800EE7B8;
@@ -63,7 +62,7 @@ void fn_8010C344(HSD_GObj* arg0)
         lb_8000B1CC(fp->parts[FtPart_R3rdNa].joint, 0, &pos);
         pos.y += 2.5f;
         pos.z = 0;
-        it_802BE214(arg0, &pos, 135, fp->facing_dir);
+        it_802BE214(arg0, &pos, It_Kind_Kirby_PeachToadSpore, fp->facing_dir);
         fp->accessory4_cb = NULL;
     }
 }

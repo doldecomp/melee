@@ -292,19 +292,19 @@ void grLib_801C9E50(s16 val)
 
 bool grLib_801C9E60(Vec3* v)
 {
-    InternalStageId id = stage_info.internal_stage_id;
+    GrKind id = stage_info.grkind;
 
-    if (id == RCRUISE) {
+    if (id == Gr_Kind_RCruise) {
         grRCruise_80201918(v);
         return true;
     }
 
-    if (id == BIGBLUE) {
+    if (id == Gr_Kind_BigBlue) {
         grBigBlue_801EF7D8(v);
         return true;
     }
 
-    if (id == ICEMTN) {
+    if (id == Gr_Kind_Icemt) {
         grIceMt_801FA728(v);
         return true;
     }
@@ -369,7 +369,7 @@ bool grLib_801C9EE8(Vec3* point, float offset)
 
     items = HSD_GObj_Entities->items;
     for (cur_item = items; cur_item != NULL; cur_item = cur_item->next) {
-        if (itGetKind(cur_item) != Pokemon_Random) {
+        if (itGetKind(cur_item) != It_PKind_Random) {
             ip = GET_ITEM(cur_item);
             if (PointInsideColl(&ip->x378_itemColl, point, offset)) {
                 return true;

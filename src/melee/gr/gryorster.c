@@ -26,15 +26,25 @@
                                             mpLib_GroundEnum ground_kind,
                                             float delta_y);
 
-StageCallbacks grYt_StageCallbacks[2] = {
-    { grYorster_80202124, grYorster_80202150, grYorster_80202158,
-      grYorster_8020215C, NULL },
-    { grYorster_802021AC, grYorster_8020224C, grYorster_80202254,
-      grYorster_802022A0, 0xC0000000 }
+StageCallbacks grYt_StageCallbacks[] = {
+    {
+        grYorster_80202124,
+        grYorster_80202150,
+        grYorster_80202158,
+        grYorster_8020215C,
+        0,
+    },
+    {
+        grYorster_802021AC,
+        grYorster_8020224C,
+        grYorster_80202254,
+        grYorster_802022A0,
+        (1 << 30) | (1 << 31),
+    },
 };
 
-StageData grYt_803E51CC = {
-    YORSTER,
+StageData grYt_StageData = {
+    Gr_Kind_Yorster,
     grYt_StageCallbacks,
     "/GrYt.dat",
     grYorster_80201FA4,
@@ -113,11 +123,11 @@ HSD_GObj* grYorster_8020203C(int gobj_id)
         if (callbacks->callback3 != NULL) {
             gp->x1C_callback = callbacks->callback3;
         }
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 221, gobj_id);

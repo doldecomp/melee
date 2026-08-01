@@ -449,7 +449,7 @@ void fn_8024D864(HSD_GObj* gobj)
     inputs = mn_804A04F0.buttons = mn_80229624(4);
 
     if (inputs & MenuInput_Back) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_804A04F0.entering_menu = 0;
         mn_80229894(1, 1, 3);
         return;
@@ -466,10 +466,10 @@ void fn_8024D864(HSD_GObj* gobj)
 
     data = mnEvent_804D6C60->user_data;
     if (inputs & MenuInput_Confirm) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_801BEB74(data->first_event + data->page);
         gm_801677E8(mn_802295AC());
-        mn_80229860(0x2B);
+        mn_80229860(GM_EVENT);
         return;
     }
 
@@ -478,7 +478,7 @@ void fn_8024D864(HSD_GObj* gobj)
         if (data->first_event + 9 < max_events ||
             data->first_event != max_events)
         {
-            lbAudioAx_80024030(2);
+            sfxMove();
             if (data->first_event + 9 < max_events) {
                 data->first_event += 9;
             } else {
@@ -502,7 +502,7 @@ void fn_8024D864(HSD_GObj* gobj)
         }
     } else if (inputs & MenuInput_YButton) {
         if (data->first_event - 9 >= 0 || data->first_event != 0) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             if (data->first_event - 9 >= 0) {
                 data->first_event -= 9;
             } else {
@@ -526,7 +526,7 @@ void fn_8024D864(HSD_GObj* gobj)
     } else if (inputs & MenuInput_Up) {
         page = data->page;
         if (page != 0) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             data->page -= 1;
             lb_80011E24(mnEvent_804D6C60->hsd_obj, &jobj_0A, 0xA, -1);
             lb_80011E24(mnEvent_804D6C60->hsd_obj, &jobj_0C, 0xC, -1);
@@ -548,7 +548,7 @@ void fn_8024D864(HSD_GObj* gobj)
             return;
         }
         if (data->first_event != 0) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             data->first_event -= 1;
             first_event = data->first_event;
             for (i = 0; i < 9; i++) {
@@ -569,7 +569,7 @@ void fn_8024D864(HSD_GObj* gobj)
     } else if (inputs & MenuInput_Down) {
         page = data->page;
         if (page < 8) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             data->page += 1;
             lb_80011E24(mnEvent_804D6C60->hsd_obj, &jobj_0A, 0xA, -1);
             lb_80011E24(mnEvent_804D6C60->hsd_obj, &jobj_0C, 0xC, -1);
@@ -591,7 +591,7 @@ void fn_8024D864(HSD_GObj* gobj)
             return;
         }
         if (data->first_event < mnEvent_8024CE74()) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             data->first_event += 1;
             first_event = data->first_event;
             for (i = 0; i < 9; i++) {

@@ -23,7 +23,6 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbspdisplay.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 static MotionFlags const ftFx_MF_SpecialLw_Coll =
@@ -42,6 +41,7 @@ void ftFx_SpecialLw_CreateLoopGFX(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 /// Create Reflector Start GFX
@@ -55,6 +55,7 @@ void ftFx_SpecialLw_CreateStartGFX(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 void ftFx_SpecialLw_CreateReflectGFX(HSD_GObj* gobj)
@@ -68,6 +69,7 @@ void ftFx_SpecialLw_CreateReflectGFX(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 static inline void ftFox_SpecialLw_SetVars(HSD_GObj* gobj)

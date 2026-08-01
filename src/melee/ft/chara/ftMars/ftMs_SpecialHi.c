@@ -13,7 +13,6 @@
 #include "ftCommon/ftCo_Landing.h"
 #include "ftMars/types.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /// 80138208 00134DE8

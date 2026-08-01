@@ -240,7 +240,7 @@ void it_802CAB10(Item_GObj* gobj)
     spawn.vel.x = attrs->x14 * ip->facing_dir;
     spawn.vel.y = 0.0f;
     spawn.vel.z = 0.0f;
-    spawn.kind = Pokemon_Kamex_HydroPump;
+    spawn.kind = It_Kind_Kamex_HydroPump;
     ip->xDD4_itemVar.pokemon.x64 ^= 1;
     spawn.x0_parent_gobj = ip->owner;
     spawn.x4_parent_gobj2 = (HSD_GObj*) gobj;

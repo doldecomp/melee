@@ -255,7 +255,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     inputs = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS);
     if (inputs & PAD_CANCEL) {
         MnVibrationData* exit_data;
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_804A04F0.entering_menu = 0;
         mn_80229894(4, 0, 3);
         // Clean up text objects - reload data pointer
@@ -289,7 +289,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
             inputs = gm_GetButtonsTriggered(i);
             if (inputs & PAD_CONFIRM) {
                 HSD_JObj* temp_jobj;
-                lbAudioAx_80024030(1);
+                sfxForward();
                 if (GetRumbleSettingOfPort(i) != 0) {
                     HSD_JObj* panel_jobj2;
                     gmMainLib_8015ED4C(i, 0);
@@ -356,7 +356,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
             inputs = gm_GetButtonsTriggered(j);
             if ((inputs & PAD_ANY_LEFT) && data->x0[j + 2] == 1) {
                 u8 state;
-                lbAudioAx_80024030(2);
+                sfxMove();
                 data->x0[j + 2] = 0;
                 state = data->x0[j + 2];
                 panel_jobj =
@@ -367,7 +367,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 inputs = gm_GetButtonsTriggered(j);
                 if ((inputs & PAD_ANY_RIGHT) && data->x0[j + 2] == 0) {
                     u8 state;
-                    lbAudioAx_80024030(2);
+                    sfxMove();
                     data->x0[j + 2] = 1;
                     state = data->x0[j + 2];
                     panel_jobj =
@@ -391,7 +391,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
 
     // Handle A button to toggle rumble setting for selected name
     if (inputs_repeat & (1LL << 32)) {
-        lbAudioAx_80024030(1);
+        sfxForward();
         cursor_row = data->x0[1];
         name_idx = mnVibration_GetNameSlot(data, cursor_row);
         rumble_setting = mnVibration_GetNameRumble(name_idx);
@@ -422,7 +422,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 f32 temp_x;
                 f32 temp_y;
                 f32 temp_z;
-                lbAudioAx_80024030(2);
+                sfxMove();
                 data->x0[1]--;
                 data2 = mnVibration_804D6C28->user_data;
                 (void) data2;
@@ -443,7 +443,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 HSD_JObjSetTranslateZ(cursor_jobj, temp_z);
             }
         } else if (GetNameCount() > 8 && data->scroll_offset != 0) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             data->scroll_offset--;
             mnVibration_RefreshNameRows(mnVibration_804D6C28);
         }
@@ -465,7 +465,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 f32 temp_x;
                 f32 temp_y;
                 f32 temp_z;
-                lbAudioAx_80024030(2);
+                sfxMove();
                 data->x0[1]++;
                 data2 = mnVibration_804D6C28->user_data;
                 cursor_jobj = data->cursor_gobj->hsd_obj;
@@ -487,7 +487,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
         } else if (GetNameCount() > 8) {
             name_idx = mnVibration_GetNameSlot(data, 8);
             if (name_idx != 0xFF) {
-                lbAudioAx_80024030(2);
+                sfxMove();
                 data->scroll_offset++;
                 if (data->scroll_offset >= GetNameCount()) {
                     data->scroll_offset = 0;

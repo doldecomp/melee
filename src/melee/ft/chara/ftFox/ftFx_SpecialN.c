@@ -8,6 +8,7 @@
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
+#include "ft/ft_0C8C.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
@@ -24,10 +25,8 @@
 #include "it/it_26B1.h"
 #include "it/items/itfoxblaster.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbrefract.h"
 
-#include <common_structs.h>
-#include <dolphin/os/OSError.h>
+#include <trigf.h>
 #include <baselib/debug.h>
 #include <melee/it/items/itfoxlaser.h>
 
@@ -666,8 +665,6 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                 }
                 return;
             } else {
-                bool flag;
-
                 it_802ADDD0(fp->u.fx.x222C_blasterGObj, fp->cmd_vars[1]);
                 switch (fp->cmd_vars[3]) {
                 case 1:
@@ -679,13 +676,7 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                     it_802AE608(fp->u.fx.x222C_blasterGObj);
                     break;
                 }
-                if (fp->throw_flags_b0 != 0) {
-                    fp->throw_flags_b0 = 0;
-                    flag = true;
-                } else {
-                    flag = false;
-                }
-                if (flag) {
+                if (ftCheckThrowB0(fp)) {
                     Vec3 sp50;
                     Vec3 sp44;
 

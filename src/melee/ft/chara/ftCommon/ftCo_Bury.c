@@ -48,7 +48,6 @@
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 
-#include <common_structs.h>
 #include <trigf.h>
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
@@ -101,16 +100,16 @@ void ftCo_800C08A0(Fighter_GObj* gobj, Fighter_GObj* arg1, DynamicsDesc* arg2,
 void ftCo_800C09B4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->bury_stage_kind = stage_info.internal_stage_id;
+    fp->bury_grkind = stage_info.grkind;
     fp->bury_timer_1 = 0;
-    switch (fp->bury_stage_kind) {
-    case OLDKONGO:
-    case KONGO:
+    switch (fp->bury_grkind) {
+    case Gr_Kind_OldKongo:
+    case Gr_Kind_Kongo:
         fp->bury_timer_2 = 0;
         return;
-    case SHRINEROUTE:
-    case PUSHON:
-    case ZEBES:
+    case Gr_Kind_ShrineRoute:
+    case Gr_Kind_Pushon:
+    case Gr_Kind_Zebes:
         fp->bury_timer_2 = 0;
         return;
     }
@@ -144,17 +143,17 @@ void ftCo_800C0A98(Fighter_GObj* gobj)
     if (fp->bury_timer_1 != 0) {
         --fp->bury_timer_1;
     }
-    switch (fp->bury_stage_kind) {
-    case OLDKONGO:
-    case KONGO:
+    switch (fp->bury_grkind) {
+    case Gr_Kind_OldKongo:
+    case Gr_Kind_Kongo:
         if (fp->bury_timer_2 != 0) {
             --fp->bury_timer_2;
             return;
         }
         break;
-    case SHRINEROUTE:
-    case PUSHON:
-    case ZEBES:
+    case Gr_Kind_ShrineRoute:
+    case Gr_Kind_Pushon:
+    case Gr_Kind_Zebes:
         if (fp->bury_timer_2 != 0) {
             --fp->bury_timer_2;
             return;
@@ -216,8 +215,8 @@ bool ftCo_800C0C88(ftCommon_BuryType arg0)
 bool ftCo_800C0CB8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->dmg.x1860_element == 9 && fp->ground_or_air == GA_Ground &&
-        !fp->x2227_b6)
+    if (fp->dmg.x1860_element == HitElement_Ground &&
+        fp->ground_or_air == GA_Ground && !fp->x2227_b6)
     {
         ftCo_800C0D0C(gobj);
         return true;

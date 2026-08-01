@@ -16,10 +16,6 @@
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_unsplit.h>
 
-enum {
-    Gm_Player_Other = 6,
-};
-
 /// Sets a bonus flag boolean to true
 static void setFlag(int player, int kind)
 {
@@ -110,13 +106,13 @@ void pl_8003891C(int player)
     pl_80041524(player);
     pl_800418F4(player);
 
-    for (i = 0; i < 39; ++i) {
+    for (i = 0; i < Pl_ItemLog_Terminate; ++i) {
         temp_r31->x0_staleMoveTable.x674[i] = 0;
     }
-    for (i = 0; i < 39; ++i) {
+    for (i = 0; i < Pl_ItemLog_Terminate; ++i) {
         temp_r31->x0_staleMoveTable.x710[i] = 0;
     }
-    for (i = 0; i < 39; ++i) {
+    for (i = 0; i < Pl_ItemLog_Terminate; ++i) {
         temp_r31->x0_staleMoveTable.x7AC[i] = 0;
     }
     for (i = 0; i < 30; ++i) {
@@ -981,7 +977,7 @@ void fn_8003C340(int player)
         setFlag(player, 0x93);
         return;
     }
-    if (temp_r3 == pl_8003E2CC(player, 7)) {
+    if (temp_r3 == pl_8003E2CC(player, Pl_ItemLog_Unk07)) {
         setFlag(player, 0xB3);
     }
     if (pl_8003E420(player) == it_8026B7D8()) {
@@ -989,13 +985,15 @@ void fn_8003C340(int player)
     }
 
     temp_r3_2 = it_8026B7E0();
-    if (temp_r3_2 != 0 && temp_r3_2 == pl_8003E334(player, 0x12)) {
+    if (temp_r3_2 != 0 && temp_r3_2 == pl_8003E334(player, Pl_ItemLog_Unk18)) {
         setFlag(player, 0xA0);
     }
 
     count = 0;
-    for (i = 0; i < 0x27; i++) {
-        if (i >= 6 && i != 0x12 && pl_8003E2CC(player, i) != 0) {
+    for (i = 0; i < Pl_ItemLog_Terminate; i++) {
+        if (i >= Pl_ItemLog_Unk06 && i != Pl_ItemLog_Unk18 &&
+            pl_8003E2CC(player, i) != 0)
+        {
             count++;
         }
     }
@@ -1011,60 +1009,60 @@ void fn_8003C340(int player)
     var_r29 = 0;
     var_r30 = 0;
 
-    for (i = 0; i < 0x27; i++) {
+    for (i = 0; i < Pl_ItemLog_Terminate; i++) {
         temp_r3_3 = pl_8003E2CC(player, i);
         switch (i) {
-        case 11:
-        case 12:
-        case 13:
-        case 22:
-        case 23:
-        case 24:
-        case 28:
+        case Pl_ItemLog_Unk11:
+        case Pl_ItemLog_Unk12:
+        case Pl_ItemLog_Unk13:
+        case Pl_ItemLog_Unk22:
+        case Pl_ItemLog_Unk23:
+        case Pl_ItemLog_Unk24:
+        case Pl_ItemLog_Unk28:
             var_r30 += temp_r3_3;
             break;
-        case 16:
-        case 21:
-        case 25:
+        case Pl_ItemLog_Unk16:
+        case Pl_ItemLog_Unk21:
+        case Pl_ItemLog_Unk25:
             var_r29 += temp_r3_3;
             break;
-        case 8:
-        case 9:
-        case 35:
-        case 37:
+        case Pl_ItemLog_Unk08:
+        case Pl_ItemLog_Unk09:
+        case Pl_ItemLog_Unk35:
+        case Pl_ItemLog_Unk37:
             var_r28 += temp_r3_3;
             break;
-        case 18:
+        case Pl_ItemLog_Unk18:
             var_r27 += temp_r3_3;
             break;
-        case 26:
-        case 27:
-        case 31:
-        case 32:
-        case 33:
+        case Pl_ItemLog_Unk26:
+        case Pl_ItemLog_Unk27:
+        case Pl_ItemLog_Unk31:
+        case Pl_ItemLog_Unk32:
+        case Pl_ItemLog_Unk33:
             var_r26 += temp_r3_3;
             break;
-        case 0:
-        case 1:
-        case 2:
-        case 3:
-        case 4:
-        case 5:
-        case 6:
-        case 7:
-        case 14:
-        case 15:
-        case 17:
-        case 19:
-        case 20:
-        case 30:
-        case 34:
-        case 36:
-        case 38:
+        case Pl_ItemLog_Unk00:
+        case Pl_ItemLog_Unk01:
+        case Pl_ItemLog_Unk02:
+        case Pl_ItemLog_Unk03:
+        case Pl_ItemLog_Unk04:
+        case Pl_ItemLog_Unk05:
+        case Pl_ItemLog_Unk06:
+        case Pl_ItemLog_Unk07:
+        case Pl_ItemLog_Unk14:
+        case Pl_ItemLog_Unk15:
+        case Pl_ItemLog_Unk17:
+        case Pl_ItemLog_Unk19:
+        case Pl_ItemLog_Unk20:
+        case Pl_ItemLog_Unk30:
+        case Pl_ItemLog_Unk34:
+        case Pl_ItemLog_Unk36:
+        case Pl_ItemLog_Unk38:
             var_r25 += temp_r3_3;
             break;
-        case 10:
-        case 29:
+        case Pl_ItemLog_Unk10:
+        case Pl_ItemLog_Unk29:
             var_r24 += temp_r3_3;
             break;
         }
@@ -1101,17 +1099,18 @@ void fn_8003C340(int player)
     {
         setFlag(player, 0xA6);
     }
-    if (pl_8003E2CC(player, 0x1A) + pl_8003E2CC(player, 0x1B) >=
+    if (pl_8003E2CC(player, Pl_ItemLog_Unk26) +
+            pl_8003E2CC(player, Pl_ItemLog_Unk27) >=
         pl_804D6470->x168)
     {
         setFlag(player, 0xAE);
     }
 
-    for (i = 0; i < 0x27; i++) {
+    for (i = 0; i < Pl_ItemLog_Terminate; i++) {
         switch (i) {
-        case 0xA:
-        case 0x19:
-        case 0x1A:
+        case Pl_ItemLog_Unk10:
+        case Pl_ItemLog_Unk25:
+        case Pl_ItemLog_Unk26:
             if (pl_8003E2CC(player, i) == 0) {
                 goto skip;
             }
@@ -1126,13 +1125,13 @@ void fn_8003C340(int player)
     setFlag(player, 0xAF);
 skip:
 
-    if (pl_8003E2CC(player, 7) >= pl_804D6470->x170) {
+    if (pl_8003E2CC(player, Pl_ItemLog_Unk07) >= pl_804D6470->x170) {
         setFlag(player, 0xB5);
     }
-    if (pl_8003E2CC(player, 9) >= pl_804D6470->x174) {
+    if (pl_8003E2CC(player, Pl_ItemLog_Unk09) >= pl_804D6470->x174) {
         setFlag(player, 0xBC);
     }
-    if (pl_8003E2CC(player, 8) >= pl_804D6470->x178) {
+    if (pl_8003E2CC(player, Pl_ItemLog_Unk08) >= pl_804D6470->x178) {
         setFlag(player, 0xBD);
     }
     if (pl_8003E7D4(player, 0xB7) != 0) {

@@ -54,7 +54,6 @@
 #include "pl/plbonuslib.h"
 #include "sfx/crowdsfx.h"
 
-#include <common_structs.h>
 #include <math.h>
 #include <math_ppc.h>
 #include <trigf.h>
@@ -68,7 +67,7 @@ int ftCo_803C5520[2][12] = {
     { 84, 84, 84, 85, 85, 85, 86, 86, 86, 89, 88, 87 },
 };
 
-/* 08DA4C */ static bool ftCo_8008DA4C(Fighter_GObj* gobj, enum_t, enum_t);
+/* 08DA4C */ static bool ftCo_8008DA4C(Fighter_GObj* gobj, HitElement, enum_t);
 /* 08F938 */ static bool doIasa(Fighter_GObj* gobj);
 
 float ftCo_Damage_CalcAngle(Fighter* fp, float f)
@@ -148,22 +147,22 @@ not_squatwait:
     }
 }
 
-bool ftCo_8008DA4C(Fighter_GObj* gobj, enum_t arg1, enum_t arg2)
+bool ftCo_8008DA4C(Fighter_GObj* gobj, HitElement arg1, enum_t arg2)
 {
     Fighter* fp = gobj->user_data;
     bool result;
     if (fp->dmg.x1838_percentTemp) {
         switch (arg1) {
-        case 1:
+        case HitElement_Fire:
             result = ftCo_800BFFD0(fp, arg2 + 11, 0);
             break;
-        case 2:
+        case HitElement_Electric:
             result = ftCo_800BFFD0(fp, arg2 + 15, 0);
             break;
-        case 5:
+        case HitElement_Ice:
             result = ftCo_800BFFD0(fp, arg2 + 31, 0);
             break;
-        case 13:
+        case HitElement_Dark:
             result = ftCo_800BFFD0(fp, arg2 + 35, 0);
             break;
         default:
@@ -174,28 +173,28 @@ bool ftCo_8008DA4C(Fighter_GObj* gobj, enum_t arg1, enum_t arg2)
     return result;
 }
 
-void ftCo_8008DB10(Fighter_GObj* gobj, enum_t arg1, float arg2)
+void ftCo_8008DB10(Fighter_GObj* gobj, HitElement arg1, float arg2)
 {
     if (!GET_FIGHTER(gobj)->dmg.x1838_percentTemp) {
         return;
     }
     switch (arg1) {
-    case 1:
+    case HitElement_Fire:
         if (arg2 > p_ftCommonData->x17C) {
             lbBgFlash_80021C48(3, 0);
         }
         return;
-    case 2:
+    case HitElement_Electric:
         if (arg2 > p_ftCommonData->x180) {
             lbBgFlash_80021C48(4, 0);
         }
         return;
-    case 5:
+    case HitElement_Ice:
         if (arg2 > p_ftCommonData->x184) {
             lbBgFlash_80021C48(5, 0);
         }
         return;
-    case 13:
+    case HitElement_Dark:
         if (arg2 > p_ftCommonData->x188) {
             lbBgFlash_80021C48(6, 0);
         }
@@ -319,7 +318,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         if (kb_level_base < 2) {
             goto block_17;
         }
-        if ((u32) fp->dmg.x1860_element != 5U) {
+        if ((u32) fp->dmg.x1860_element != HitElement_Ice) {
             goto block_17;
         }
         kb_angle = calcAngle(kb_angle);
@@ -422,7 +421,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         if (kb_level_base < 2) {
             goto block_42;
         }
-        if ((u32) fp->dmg.x1860_element != 5U) {
+        if ((u32) fp->dmg.x1860_element != HitElement_Ice) {
             goto block_42;
         }
         msid = 0x5A;
@@ -528,7 +527,7 @@ block_83:
     if (kb_level_base < 2) {
         return;
     }
-    if ((u32) fp->dmg.x1860_element == 5U) {
+    if ((u32) fp->dmg.x1860_element == HitElement_Ice) {
         ftCo_DamageIce_Init(gobj);
     }
 }
@@ -834,7 +833,7 @@ void ftCo_8008EC90(Fighter_GObj* gobj)
     if (fp->x2220_b3 || fp->x2220_b4 || !fp->dmg.kb_applied) {
         inlineB2(gobj);
         goto ret_A8C;
-    } else if (fp->dmg.x1860_element == 10U) {
+    } else if (fp->dmg.x1860_element == HitElement_Cape) {
         if (ftCo_800C3538(gobj)) {
             goto ret_A8C;
         }

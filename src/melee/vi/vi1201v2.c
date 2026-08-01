@@ -99,11 +99,11 @@ void un_80320508(CharacterKind char_kind, int costume)
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(ExternalStageID_LAST, 0);
+    Stage_802251E8(St_Kind_Last, 0);
     Item_80266FA8();
     Item_80266FCC();
     Stage_8022524C();
-    Stage_8022532C(ExternalStageID_LAST, 0x1A);
+    Stage_8022532C(St_Kind_Last, 0x1A);
     ftDemo_ObjAllocInit();
     Player_InitAllPlayers();
     Player_80036E20(char_kind, un_804D7018, 3);
@@ -131,8 +131,8 @@ void un_803205F4(void)
     HSD_JObjReqAnimAll(jobj, 251.0f);
     HSD_GObj_SetupProc(gobj, mn_8022EAE0, 0);
 
-    Player_80036E20(0x1D, un_804D701C, 8);
-    Player_SetPlayerCharacter(1, 0x1D);
+    Player_80036E20(CKIND_GKOOPS, un_804D701C, 8);
+    Player_SetPlayerCharacter(1, CKIND_GKOOPS);
     Player_SetCostumeId(1, 0);
     Player_SetPlayerId(1, 0);
     Player_SetSlottype(1, 2);

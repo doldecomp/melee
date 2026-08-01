@@ -28,7 +28,6 @@
 #include "ftCommon/ftCo_Attack100.h"
 #include "it/it_26B1.h"
 
-#include <common_structs.h>
 #include <baselib/archive.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
@@ -627,4 +626,5 @@ void ftPr_Init_8013C94C(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }

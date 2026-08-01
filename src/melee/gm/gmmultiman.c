@@ -307,7 +307,7 @@ void gm_801B6428(GameScene* arg0)
     temp_r3->rules.xE = gm_801647F8(temp_r3->players[0].c_kind);
     {
         PreloadCacheScene* scene = lbDvd_GetPreloadCacheScene();
-        scene->game_cache.stage_id = temp_r3->rules.xE;
+        scene->game_cache.stkind = temp_r3->rules.xE;
     }
     lbDvd_80018254();
     gm_8016F088(temp_r3);
@@ -338,7 +338,7 @@ void gm_801B65D4(GameScene* arg0)
     temp_r28 = &gmMainLib_804D3EE0->unk_530.unk_584;
     gm_80162968(temp_r3->match_end.frame_count / 60);
     gm_8016247C(temp_r3->match_end.player_standings[0].xE);
-    if (temp_r3->match_end.result == 8) {
+    if (temp_r3->match_end.result == OUTCOME_RETRY) {
         gm_SetPendingSceneIndex(1U);
         return;
     }
@@ -490,7 +490,7 @@ static void gm_801B6AD8_inline(GameScene* scene, int x)
     temp_r31_2->entries[1].color = 0;
     temp_r31_2->entries[2].char_id = CKIND_GIRL;
     temp_r31_2->entries[2].color = 0;
-    temp_r31_2->stage_id = 0x11D;
+    temp_r31_2->stkind = 0x11D;
     lbDvd_80018254();
 }
 
@@ -668,7 +668,7 @@ void gm_801B6F44(GameScene* scene)
 
     temp_r29 = &gmMainLib_804D3EE0->unk_1490;
     temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
-    if (temp_r3->match_end.result == 8) {
+    if (temp_r3->match_end.result == OUTCOME_RETRY) {
         gm_SetPendingSceneIndex(1);
         return;
     }
@@ -743,7 +743,7 @@ void gm_801B74F0(GameScene* scene)
 
     temp_r29 = &gmMainLib_804D3EE0->unk_1490;
     temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
-    if (temp_r3->match_end.result == 8) {
+    if (temp_r3->match_end.result == OUTCOME_RETRY) {
         gm_SetPendingSceneIndex(1);
         return;
     }
@@ -866,7 +866,7 @@ void gm_801B7AA0(GameScene* scene)
 
     temp_r30 = &gmMainLib_804D3EE0->unk_1490;
     temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
-    if (temp_r3->match_end.result == 8) {
+    if (temp_r3->match_end.result == OUTCOME_RETRY) {
         gm_SetPendingSceneIndex(1);
         return;
     }
@@ -929,7 +929,7 @@ void gm_801B8024(GameScene* scene)
 
     temp_r29 = &gmMainLib_804D3EE0->unk_1490;
     temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
-    if (temp_r3->match_end.result == 8) {
+    if (temp_r3->match_end.result == OUTCOME_RETRY) {
         gm_SetPendingSceneIndex(1);
         return;
     }
@@ -989,7 +989,7 @@ void gm_801B8580(GameScene* scene)
 
     temp_r30 = &gmMainLib_804D3EE0->unk_1490;
     temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
-    if (temp_r3->match_end.result == 8) {
+    if (temp_r3->match_end.result == OUTCOME_RETRY) {
         gm_SetPendingSceneIndex(1U);
         return;
     }
@@ -1066,7 +1066,7 @@ void gm_801B8AF8(GameScene* arg0)
 
     temp_r30 = &gmMainLib_804D3EE0->unk_1490;
     temp_r3 = gm_GetGameSceneLeaveDataCallback(arg0);
-    if (temp_r3->match_end.result == 8) {
+    if (temp_r3->match_end.result == OUTCOME_RETRY) {
         gm_SetPendingSceneIndex(1);
         return;
     }

@@ -59,30 +59,48 @@ static const grNKr_Depths grNKr_803B82F4 = {
 };
 
 StageCallbacks grNKr_StageCallbacks[4] = {
-    { grKinokoRoute_80207634, grKinokoRoute_802078E8, grKinokoRoute_802078F0,
-      grKinokoRoute_80207A94, 0 },
-    { grKinokoRoute_80207ADC, grKinokoRoute_80207B20, grKinokoRoute_80207B28,
-      grKinokoRoute_80207B2C, 0 },
-    { grKinokoRoute_80207A98, grKinokoRoute_80207ACC, grKinokoRoute_80207AD4,
-      grKinokoRoute_80207AD8, 0 },
-    { grKinokoRoute_80207B5C, grKinokoRoute_80207C80, grKinokoRoute_80207C88,
-      grKinokoRoute_80208368, 0xC0000000 },
+    {
+        grKinokoRoute_80207634,
+        grKinokoRoute_802078E8,
+        grKinokoRoute_802078F0,
+        grKinokoRoute_80207A94,
+        0,
+    },
+    {
+        grKinokoRoute_80207ADC,
+        grKinokoRoute_80207B20,
+        grKinokoRoute_80207B28,
+        grKinokoRoute_80207B2C,
+        0,
+    },
+    {
+        grKinokoRoute_80207A98,
+        grKinokoRoute_80207ACC,
+        grKinokoRoute_80207AD4,
+        grKinokoRoute_80207AD8,
+        0,
+    },
+    {
+        grKinokoRoute_80207B5C,
+        grKinokoRoute_80207C80,
+        grKinokoRoute_80207C88,
+        grKinokoRoute_80208368,
+        (1 << 30) | (1 << 31),
+    },
 };
 
-static char grNKr_803E5840[] = "/GrNKr.dat";
-
-StageData grNKr_803E584C = {
-    KINOKOROUTE,
+StageData grNKr_StageData = {
+    Gr_Kind_KinokoRoute,
     grNKr_StageCallbacks,
-    grNKr_803E5840,
+    "/GrNKr.dat",
     grKinokoRoute_80207420,
-    (void (*)(int)) grKinokoRoute_8020741C,
+    grKinokoRoute_8020741C,
     grKinokoRoute_80207490,
     grKinokoRoute_802074D8,
     grKinokoRoute_80207544,
     grKinokoRoute_80208754,
     grKinokoRoute_8020875C,
-    1,
+    (1 << 0),
     NULL,
     0,
 };
@@ -147,11 +165,11 @@ Ground_GObj* grKinokoRoute_8020754C(int gobj_id)
         if (callbacks->callback3 != NULL) {
             gp->x1C_callback = callbacks->callback3;
         }
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
         }
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 249, gobj_id);
@@ -510,7 +528,7 @@ void grKinokoRoute_8020836C(Ground_GObj* gobj, int arg1)
         mpJointListAdd(0x33);
 
         for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
-            if (itGetKind(cur) == 0xA0) {
+            if (itGetKind(cur) == It_PKind_Random) {
                 grMaterial_801C8E08(cur);
             }
         }
@@ -525,7 +543,7 @@ void grKinokoRoute_8020836C(Ground_GObj* gobj, int arg1)
         mpLib_80057BC0(0x33);
 
         for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
-            if (itGetKind(cur) == 0xA0) {
+            if (itGetKind(cur) == It_PKind_Random) {
                 grMaterial_801C8E28(cur);
             }
         }

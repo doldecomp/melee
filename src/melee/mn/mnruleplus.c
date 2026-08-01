@@ -19,6 +19,7 @@
 
 #include "mn/forward.h"
 
+#include "mn/inlines.h"
 #include "mn/mnmain.h"
 #include "mn/mnmainrule.h"
 #include "mn/mnstagesw.h"
@@ -195,7 +196,7 @@ void fn_8023201C(HSD_GObj* gobj)
     if (buttons & 0x200) {
         /// A button: confirm stage select (option 5 only)
         if ((u16) mn_804A04F0.hovered_selection == 5) {
-            lbAudioAx_80024030(1);
+            sfxForward();
             mn_804A04F0.entering_menu = 1;
             mnRulePlus_SaveRules();
             mn_804D6BC8.cooldown = 5;
@@ -204,11 +205,11 @@ void fn_8023201C(HSD_GObj* gobj)
         }
     } else if (buttons & 0x100) {
         /// Start button: accept all rules and proceed
-        lbAudioAx_80024030(1);
+        sfxForward();
         switch (gm_GetCurrentGameMode()) {
         case GM_MENU:
             mnRulePlus_SaveRules();
-            mn_80229860(2);
+            mn_80229860(GM_VS);
             return;
         }
         mnRulePlus_SaveRules();
@@ -216,7 +217,7 @@ void fn_8023201C(HSD_GObj* gobj)
         return;
     } else if (buttons & 0x20) {
         /// B button: cancel and go back
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_804A04F0.entering_menu = 0;
         mnRulePlus_SaveRules();
         mn_804D6BC8.cooldown = 5;
@@ -225,7 +226,7 @@ void fn_8023201C(HSD_GObj* gobj)
         return;
     } else if (buttons & 1) {
         /// D-Pad Up: move selection up (with wrap)
-        lbAudioAx_80024030(2);
+        sfxMove();
         do {
             if ((s32) mn_804A04F0.hovered_selection == 0) {
                 mn_804A04F0.hovered_selection = 5;
@@ -239,7 +240,7 @@ void fn_8023201C(HSD_GObj* gobj)
         return;
     } else if (buttons & 2) {
         /// D-Pad Down: move selection down (with wrap)
-        lbAudioAx_80024030(2);
+        sfxMove();
         do {
             if ((s32) mn_804A04F0.hovered_selection == 5) {
                 mn_804A04F0.hovered_selection = 0;
@@ -255,7 +256,7 @@ void fn_8023201C(HSD_GObj* gobj)
         /// D-Pad Left/Right: adjust value for non-stage options
         u8* bounds = mn_803ED2E8.stat[mn_804A04F0.hovered_selection];
         if (buttons & 4) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             if ((u8) mn_804A04F0.confirmed_selection > (u8) bounds[0]) {
                 mn_804A04F0.confirmed_selection -= 1;
                 return;
@@ -264,7 +265,7 @@ void fn_8023201C(HSD_GObj* gobj)
             return;
         }
         if (buttons & 8) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             if ((u8) mn_804A04F0.confirmed_selection < (u8) bounds[1]) {
                 mn_804A04F0.confirmed_selection += 1;
                 return;

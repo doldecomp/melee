@@ -124,27 +124,27 @@ s32 grZakoGenerator_801CA43C(grZakoGenerator_Config* config, HSD_JObj* jobj,
 
 grZakoGenerator_Data* grZakoGenerator_801CA67C(void)
 {
-    grZakoGenerator_Data* data = HSD_MemAlloc(sizeof(grZakoGenerator_Data));
+    grZakoGenerator_Data* pointp = HSD_MemAlloc(sizeof(grZakoGenerator_Data));
     int i;
     PAD_STACK(8);
 
-    HSD_ASSERTMSG(0x52, data, "pointp");
+    HSD_ASSERT(0x52, pointp);
 
     for (i = 0; i < 80; i++) {
-        data->entries[i].x0 = i + 0x20;
-        data->entries[i].x2 = 0;
-        data->entries[i].x4 = 0;
+        pointp->entries[i].x0 = i + 0x20;
+        pointp->entries[i].x2 = 0;
+        pointp->entries[i].x4 = 0;
     }
-    // NOTE: this actually intializes data->sentinel
+    // NOTE: this actually intializes pointp->sentinel
     for (; i < 81; i++) {
-        data->entries[i].x0 = -1;
-        data->entries[i].x2 = 0;
-        data->entries[i].x4 = 0;
+        pointp->entries[i].x0 = -1;
+        pointp->entries[i].x2 = 0;
+        pointp->entries[i].x4 = 0;
     }
 
     lbl_8049F030.xA_b0 = true;
     lbl_8049F030.x8 = 0;
-    return data;
+    return pointp;
 }
 
 void grZakoGenerator_801CA8B4(int arg0)
@@ -193,37 +193,37 @@ void grZakoGenerator_801CA8B4(int arg0)
                             } else if (lbl_8049F030.x0 != NULL) {
                                 s32 desc_idx = k - 0x20;
                                 switch (lbl_8049F030.x0[desc_idx].kind) {
-                                case 0x2B:
+                                case It_Kind_Kuriboh:
                                     gobj = it_8027B5B0(It_Kind_Kuriboh, &pos,
                                                        NULL, NULL, 1);
                                     break;
-                                case 0x2C:
+                                case It_Kind_Leadead:
                                     gobj = it_802EA9FC(&pos, -1);
                                     break;
-                                case 0x2D:
+                                case It_Kind_Octarock:
                                     gobj = it_8027B5B0(It_Kind_Octarock, &pos,
                                                        NULL, NULL, 1);
                                     break;
-                                case 0x2E:
+                                case It_Kind_Ottosea:
                                     gobj = it_8027B5B0(It_Kind_Ottosea, &pos,
                                                        NULL, NULL, 1);
                                     break;
-                                case 0xD3:
+                                case It_Kind_Nokonoko:
                                     gobj = it_802DD7F0(
                                         lbl_8049F030.x0[desc_idx].x2, &pos,
                                         NULL, -1);
                                     break;
-                                case 0xD4:
+                                case It_Kind_Patapata:
                                     gobj = it_802E16F8(
                                         lbl_8049F030.x0[desc_idx].x2, &pos,
                                         -1);
                                     break;
-                                case 0xD5:
+                                case It_Kind_Likelike:
                                     gobj = it_802DC4BC(
                                         lbl_8049F030.x0[desc_idx].x2, &pos,
                                         -1);
                                     break;
-                                case 0xD9:
+                                case It_Kind_Whitebea:
                                     gobj = it_8027B5B0(It_Kind_Whitebea, &pos,
                                                        NULL, NULL, 1);
                                     break;
@@ -257,7 +257,7 @@ void grZakoGenerator_801CAC14(HSD_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     s32 kind = itGetKind(gobj);
 
-    if (kind == 0x9F) {
+    if (kind == It_Kind_Coin) {
         grZakoGenerator_Entry* sentinel = &lbl_8049F030.x4->sentinel;
         if (sentinel->x4 == gobj) {
             sentinel->x4 = NULL;
@@ -278,7 +278,7 @@ void grZakoGenerator_801CACB8(Item_GObj* gobj)
 
     it_8027CE18(gobj);
 
-    if (kind == 0x9F) {
+    if (kind == It_Kind_Coin) {
         grZakoGenerator_Data* data = lbl_8049F030.x4;
         grZakoGenerator_Entry* sentinel = &data->sentinel;
         if (sentinel->x4 == gobj) {
@@ -361,7 +361,7 @@ void grZakoGenerator_801CAF08(void)
                 if (it_8026C1E8(cur)) {
                     Item_8026A8EC(cur);
                 }
-            } else if (kind == 0x9F) {
+            } else if (kind == It_Kind_Coin) {
                 Item_8026A8EC(cur);
             }
         }

@@ -11,6 +11,7 @@
 
 #include <placeholder.h>
 
+#include "baselib/debug.h"
 #include "baselib/fog.h"
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjobject.h"
@@ -2054,8 +2055,7 @@ int fn_8018F4A0(void)
         printf("This is impossible stage num from mnSelStageRandom() -> stage "
                "%d \n",
                temp_r3);
-        /// @todo No byte-matching HSD assert macro form.
-        __assert("gmtoulib.c", 0x53D, "0");
+        HSD_ASSERT(0x53D, 0);
     }
     return temp_r3;
 }
@@ -2252,10 +2252,10 @@ void fn_8018F888(void)
 
 static inline int fn_8018FA24_inline0(int char_kind)
 {
-    if (char_kind < 0x13) {
+    if (char_kind < CKIND_SEAK) {
         return char_kind;
     }
-    if (char_kind == 0x1D) {
+    if (char_kind == CKIND_GKOOPS) {
         return 5;
     }
     return char_kind + 1;
@@ -2623,7 +2623,7 @@ void gm_801905F0(StartMeleeData* arg0)
         }
     }
 
-    sp18.stage_id = arg0->rules.xE;
+    sp18.stkind = arg0->rules.xE;
     for (i = 0; i < 4; i++) {
         sp18.slot_type[i] = arg0->players[i].slot_type;
         sp18.char_id[i] = arg0->players[i].c_kind;

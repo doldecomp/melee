@@ -1,10 +1,12 @@
 #ifndef MELEE_DB_H
 #define MELEE_DB_H
 
-#include <melee/ft/forward.h>
-#include <melee/it/forward.h>
+#include <placeholder.h>
 
-#include <common_structs.h>
+#include "melee/ft/forward.h"
+#include "melee/it/forward.h"
+
+#include <baselib/controller.h>
 
 extern char db_build_timestamp[];
 extern int DbLevel;

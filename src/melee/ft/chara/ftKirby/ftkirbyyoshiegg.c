@@ -21,7 +21,6 @@
 #include "ftKirby/ftkirbyspecialdonkey.h"
 #include "lb/lb_00B0.h"
 
-#include <common_structs.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
@@ -63,7 +62,7 @@ static inline void inlineB0(Fighter_GObj* gobj, ftHurtboxInit* hurt)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs_xBC_t* xBCp;
 
-    ftColl_8007B0C0(gobj, Intangible);
+    ftColl_8007B0C0(gobj, HurtCapsule_Intangible);
     xBCp = &fp->co_attrs.xBC;
     hurt->bone_idx = ftParts_GetBoneIndex(fp, FtPart_TransN);
     hurt->height = HurtHeight_Mid;

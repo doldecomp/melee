@@ -39,6 +39,7 @@ void ftZd_SpecialLw_8013ADB4(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 /// 8013AE30 - 8013AEAC (124 bytes)
@@ -54,6 +55,7 @@ void ftZd_SpecialLw_8013AE30(HSD_GObj* gobj)
     }
 
     Fighter_SetEffectHitlagCallbacks(fp);
+    fp->accessory4_cb = NULL;
 }
 
 /// Zelda_TransformToSubcharacter

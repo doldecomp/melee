@@ -85,7 +85,7 @@ IceMtRowData grIm_803E4068[6] = {
     { 4, 195.0f, -185.0f }, { 5, 190.0f, -200.0f }, { 6, 180.0f, -190.0f },
 };
 
-S16Vec3 grIm_803E40B0[] = {
+GrJoint grIm_803E40B0[] = {
     { 0, 1, 0 },   { 1, 1, 0 },   { 2, 1, 0 },   { 3, 1, 0 },   { 4, 1, 0 },
     { 5, 1, 0 },   { 6, 1, 0 },   { 7, 1, 0 },   { 10, 1, 0 },  { 11, 1, 0 },
     { 12, 1, 0 },  { 13, 1, 0 },  { 14, 1, 0 },  { 15, 1, 0 },  { 16, 1, 0 },
@@ -160,31 +160,81 @@ static void order_data0(void)
 }
 
 StageCallbacks grIm_StageCallbacks[] = {
-    { grIceMt_801F72D4, grIceMt_801F75DC, grIceMt_801F75E4, grIceMt_801F75E8,
-      0 },
-    { grIceMt_801F7D94, grIceMt_801F7EE0, grIceMt_801F7EE8, grIceMt_801F7F1C,
-      0 },
-    { grIceMt_801F7F70, grIceMt_801F8154, grIceMt_801F815C, grIceMt_801F81B4,
-      0 },
-    { grIceMt_801F8208, grIceMt_801F835C, grIceMt_801F8364, grIceMt_801F8398,
-      0 },
-    { grIceMt_801F83EC, grIceMt_801F85BC, grIceMt_801F85C4, grIceMt_801F8608,
-      0 },
-    { grIceMt_801F865C, grIceMt_801F87C0, grIceMt_801F87C8, grIceMt_801F87FC,
-      0 },
-    { grIceMt_801F8850, grIceMt_801F89A4, grIceMt_801F89AC, grIceMt_801F89E0,
-      0 },
-    { NULL, NULL, NULL, NULL, NULL },
-    { grIceMt_801F8A34, grIceMt_801F8B08, grIceMt_801F8B10, grIceMt_801F8C60,
-      0xC0000000 },
-    { grIceMt_801F75FC, grIceMt_801F7720, grIceMt_801F7728, grIceMt_801F77AC,
-      0 },
-    { grIceMt_801F785C, grIceMt_801F796C, grIceMt_801F7A2C, grIceMt_801F7D90,
-      0 },
+    {
+        grIceMt_801F72D4,
+        grIceMt_801F75DC,
+        grIceMt_801F75E4,
+        grIceMt_801F75E8,
+        0,
+    },
+    {
+        grIceMt_801F7D94,
+        grIceMt_801F7EE0,
+        grIceMt_801F7EE8,
+        grIceMt_801F7F1C,
+        0,
+    },
+    {
+        grIceMt_801F7F70,
+        grIceMt_801F8154,
+        grIceMt_801F815C,
+        grIceMt_801F81B4,
+        0,
+    },
+    {
+        grIceMt_801F8208,
+        grIceMt_801F835C,
+        grIceMt_801F8364,
+        grIceMt_801F8398,
+        0,
+    },
+    {
+        grIceMt_801F83EC,
+        grIceMt_801F85BC,
+        grIceMt_801F85C4,
+        grIceMt_801F8608,
+        0,
+    },
+    {
+        grIceMt_801F865C,
+        grIceMt_801F87C0,
+        grIceMt_801F87C8,
+        grIceMt_801F87FC,
+        0,
+    },
+    {
+        grIceMt_801F8850,
+        grIceMt_801F89A4,
+        grIceMt_801F89AC,
+        grIceMt_801F89E0,
+        0,
+    },
+    { 0 },
+    {
+        grIceMt_801F8A34,
+        grIceMt_801F8B08,
+        grIceMt_801F8B10,
+        grIceMt_801F8C60,
+        (1 << 30) | (1 << 31),
+    },
+    {
+        grIceMt_801F75FC,
+        grIceMt_801F7720,
+        grIceMt_801F7728,
+        grIceMt_801F77AC,
+        0,
+    },
+    {
+        grIceMt_801F785C,
+        grIceMt_801F796C,
+        grIceMt_801F7A2C,
+        grIceMt_801F7D90,
+        0,
+    },
 };
 
-StageData grIm_803E4800 = {
-    ICEMTN,
+StageData grIm_StageData = {
+    Gr_Kind_Icemt,
     grIm_StageCallbacks,
     "/GrIm.dat",
     grIceMt_801F686C,
@@ -806,7 +856,7 @@ void grIceMt_801F7F70(Ground_GObj* arg0)
                      grIceMt_801FA500(arg0, jobj), -1, 0x25, 0x109, 0x27E,
                      fn_801F9338);
     grIceMt_801F91EC(arg0, &gp->u.icemt.x108[3], grIceMt_801FA500(arg0, jobj2),
-                     -1, 0x26, 0x109, 0x27E, fn_801F9448);
+                     -1, 38, 265, 638, fn_801F9448);
 }
 
 bool grIceMt_801F8154(Ground_GObj* param1)
@@ -926,7 +976,7 @@ void grIceMt_801F83EC(Ground_GObj* arg0)
     grIceMt_801F8CDC(arg0, (s16*) &sp14, 4, &gp->u.icemt2.xF8[0]);
     r = grIceMt_801FA500(arg0, jobj3);
     grIceMt_801F91EC(arg0, gp->u.icemt.x108, grIceMt_801FA500(arg0, jobj2), r,
-                     0x75, 0x109, 0x27E, fn_801F9558);
+                     117, 265, 638, fn_801F9558);
 }
 
 bool grIceMt_801F85BC(Ground_GObj* param1)
@@ -1330,72 +1380,78 @@ void grIceMt_801F929C(HSD_GObj* arg0, void* arg1)
 void fn_801F9338(void* user_data, int joint_id, CollData* coll, int coll_x50,
                  mpLib_GroundEnum ground_kind, float delta_y)
 {
-    Ground* gp = user_data;
-    HSD_GObj* gobj;
-    s16* s = gp->u.icemt.x100;
-    PAD_STACK(8);
-    if ((s32) coll->x34_flags.b1234 == 1 && s[0] == 0) {
-        gobj = Ground_801C2BA4(2);
-        s[0] = 1;
-        s[1] = 0;
-        grAnime_801C7A04(gobj, s[2], 7, 1.0f);
-        grAnime_801C7B24(gobj, s[2], 7, 0.0f);
-        grAnime_801C78FC(gobj, s[2], 7);
-        if (s[3] != -1) {
-            grAnime_801C7A04(gobj, s[3], 7, 1.0f);
-            grAnime_801C7B24(gobj, s[3], 7, 0.0f);
-            grAnime_801C78FC(gobj, s[3], 7);
+    {
+        HSD_GObj* gobj;
+        Ground* gp = user_data;
+        s16* s = gp->u.icemt.x100;
+        if ((s32) coll->x34_flags.b1234 == 1 && s[0] == 0) {
+            gobj = Ground_801C2BA4(2);
+            s[0] = 1;
+            s[1] = 0;
+            grAnime_801C7A04(gobj, s[2], 7, 1.0f);
+            grAnime_801C7B24(gobj, s[2], 7, 0.0f);
+            grAnime_801C78FC(gobj, s[2], 7);
+            if (s[3] != -1) {
+                grAnime_801C7A04(gobj, s[3], 7, 1.0f);
+                grAnime_801C7B24(gobj, s[3], 7, 0.0f);
+                grAnime_801C78FC(gobj, s[3], 7);
+            }
         }
     }
-    grIceMt_801FA7F0(gp, joint_id, coll, coll_x50, ground_kind, delta_y);
+    grIceMt_801FA7F0(user_data, joint_id, coll, coll_x50, ground_kind,
+                     delta_y);
 }
 
 /// @copydoc mpLib_JointCollisionCallback
 void fn_801F9448(void* user_data, int joint_id, CollData* coll, int coll_x50,
                  mpLib_GroundEnum ground_kind, float delta_y)
 {
-    Ground* gp = user_data;
-    HSD_GObj* gobj;
-    s16* s = &gp->u.icemt.x108[3];
-    PAD_STACK(8);
-    if ((s32) coll->x34_flags.b1234 == 1 && s[0] == 0) {
-        gobj = Ground_801C2BA4(2);
-        s[0] = 1;
-        s[1] = 0;
-        grAnime_801C7A04(gobj, s[2], 7, 1.0f);
-        grAnime_801C7B24(gobj, s[2], 7, 0.0f);
-        grAnime_801C78FC(gobj, s[2], 7);
-        if (s[3] != -1) {
-            grAnime_801C7A04(gobj, s[3], 7, 1.0f);
-            grAnime_801C7B24(gobj, s[3], 7, 0.0f);
-            grAnime_801C78FC(gobj, s[3], 7);
+    {
+        HSD_GObj* gobj;
+        Ground* gp = user_data;
+        s16* s = &gp->u.icemt.x108[3];
+        if ((s32) coll->x34_flags.b1234 == 1 && s[0] == 0) {
+            gobj = Ground_801C2BA4(2);
+            s[0] = 1;
+            s[1] = 0;
+            grAnime_801C7A04(gobj, s[2], 7, 1.0f);
+            grAnime_801C7B24(gobj, s[2], 7, 0.0f);
+            grAnime_801C78FC(gobj, s[2], 7);
+            if (s[3] != -1) {
+                grAnime_801C7A04(gobj, s[3], 7, 1.0f);
+                grAnime_801C7B24(gobj, s[3], 7, 0.0f);
+                grAnime_801C78FC(gobj, s[3], 7);
+            }
         }
     }
-    grIceMt_801FA7F0(gp, joint_id, coll, coll_x50, ground_kind, delta_y);
+    grIceMt_801FA7F0(user_data, joint_id, coll, coll_x50, ground_kind,
+                     delta_y);
 }
 
 /// @copydoc mpLib_JointCollisionCallback
 void fn_801F9558(void* user_data, int joint_id, CollData* coll, int coll_x50,
                  mpLib_GroundEnum ground_kind, float delta_y)
 {
-    Ground* gp = user_data;
-    HSD_GObj* gobj;
-    s16* s = gp->u.icemt.x108;
-    PAD_STACK(8);
-    if ((s32) coll->x34_flags.b1234 == 1 && s[0] == 0) {
-        gobj = Ground_801C2BA4(4);
-        s[0] = 1;
-        s[1] = 0;
-        grAnime_801C7A04(gobj, s[2], 7, 1.0f);
-        grAnime_801C7B24(gobj, s[2], 7, 0.0f);
-        grAnime_801C78FC(gobj, s[2], 7);
-        if (s[3] != -1) {
-            grAnime_801C7A04(gobj, s[3], 7, 1.0f);
-            grAnime_801C7B24(gobj, s[3], 7, 0.0f);
-            grAnime_801C78FC(gobj, s[3], 7);
+    {
+        HSD_GObj* gobj;
+        Ground* gp = user_data;
+        s16* s = gp->u.icemt.x108;
+        if ((s32) coll->x34_flags.b1234 == 1 && s[0] == 0) {
+            gobj = Ground_801C2BA4(4);
+            s[0] = 1;
+            s[1] = 0;
+            grAnime_801C7A04(gobj, s[2], 7, 1.0f);
+            grAnime_801C7B24(gobj, s[2], 7, 0.0f);
+            grAnime_801C78FC(gobj, s[2], 7);
+            if (s[3] != -1) {
+                grAnime_801C7A04(gobj, s[3], 7, 1.0f);
+                grAnime_801C7B24(gobj, s[3], 7, 0.0f);
+                grAnime_801C78FC(gobj, s[3], 7);
+            }
         }
     }
-    grIceMt_801FA7F0(gp, joint_id, coll, coll_x50, ground_kind, delta_y);
+    grIceMt_801FA7F0(user_data, joint_id, coll, coll_x50, ground_kind,
+                     delta_y);
 }
 
 void grIceMt_801F9668(float arg8)

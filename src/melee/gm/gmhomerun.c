@@ -89,7 +89,7 @@ void gm_801B98E8(GameScene* scene)
     lbDvd_800174BC();
     game_cache->entries[1].char_id = CHKIND_SANDBAG;
     game_cache->entries[1].color = 0;
-    game_cache->stage_id = 0x54;
+    game_cache->stkind = 0x54;
     lbDvd_80018254();
     gm_804D68F9 = lbTime_8000AF74(gm_804D68F9, 1);
 }
@@ -173,7 +173,7 @@ void gm_801B9DD8(GameScene* arg0)
     gm_80162968(temp_r3->match_end.frame_count / 60);
     gm_8016247C(temp_r3->match_end.player_standings[0].xE);
     gm_80180BA0();
-    if (temp_r3->match_end.result == 8) {
+    if (temp_r3->match_end.result == OUTCOME_RETRY) {
         gm_SetPendingSceneIndex(1);
         return;
     }

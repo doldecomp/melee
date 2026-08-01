@@ -36,8 +36,8 @@
     },
 };
 
-StageData grTLg_803E8E4C = {
-    TLUIGI,
+StageData grTLg_StageData = {
+    Gr_Kind_TLuigi,
     grTLg_803E8DF0,
     "/GrTLg.dat",
     grTLuigi_80221C14,

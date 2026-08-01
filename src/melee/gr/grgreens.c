@@ -140,31 +140,26 @@ static StageCallbacks grGr_callbacks[] = {
     },
 };
 
-char grGr_803E76C4[] = "/GrGr.dat";
-
-typedef struct grGr_StageData {
-    StageData stage_data;
-    char report_format[0x24];
-} grGr_StageData;
-
-grGr_StageData grGr_803E76D0 = {
-    {
-        GREENS,
-        grGr_callbacks,
-        grGr_803E76C4,
-        grGreens_Init,
-        grGreens_80213458,
-        grGreens_802134F4,
-        grGreens_802134F8,
-        grGreens_8021351C,
-        grGreens_80216E64,
-        grGreens_80216E6C,
-        1,
-        NULL,
-        0,
-    },
-    "%s:%d: couldn t get gobj(id=%d)\n",
+StageData grGr_StageData = {
+    Gr_Kind_Greens,
+    grGr_callbacks,
+    "/GrGr.dat",
+    grGreens_Init,
+    grGreens_80213458,
+    grGreens_802134F4,
+    grGreens_802134F8,
+    grGreens_8021351C,
+    grGreens_80216E64,
+    grGreens_80216E6C,
+    (1 << 0),
+    NULL,
+    0,
 };
+
+static void order_data(void)
+{
+    (void) "%s:%d: couldn t get gobj(id=%d)\n";
+}
 
 static u8 grGr_8049F9E0[0x20];
 
@@ -246,11 +241,11 @@ Ground_GObj* grGreens_80213524(int id)
         if (cbs->callback3 != NULL) {
             gp->x1C_callback = cbs->callback3;
         }
-        if (cbs->callback0 != NULL) {
-            cbs->callback0(gobj);
+        if (cbs->on_init != NULL) {
+            cbs->on_init(gobj);
         }
-        if (cbs->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, cbs->callback2, 4);
+        if (cbs->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, cbs->gobj_proc, 4);
         }
     } else {
         OSReport((char*) grGr_callbacks + 0xCC, "grgreens.c", 281, id);

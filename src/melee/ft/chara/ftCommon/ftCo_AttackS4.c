@@ -42,7 +42,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 typedef enum cmd_var_idx {
@@ -163,8 +162,7 @@ void decideFighter(HSD_GObj* gobj, float stick_x_sign, float stick_angle)
     case FTKIND_PIKACHU:
     case FTKIND_PICHU:
         doEnter(gobj, stick_angle);
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
         return;
     default:
         doEnter(gobj, stick_angle);

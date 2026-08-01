@@ -13,6 +13,7 @@
 #include "lb/lbcardgame.h"
 #include "lb/lblanguage.h"
 #include "lb/lbspdisplay.h"
+#include "mn/inlines.h"
 #include "mn/mncharsel.h"
 #include "mn/mnmain.h"
 #include "mn/mnname.h"
@@ -936,7 +937,7 @@ void mnNameNew_GlyphVariantInput(void)
         AddCharacterToName(&mnNameNew_CurrentNameText[data->cursor_pos * 3],
                            mn_804A04F0.hovered_selection,
                            mn_804A04F0.confirmed_selection, data->mode);
-        lbAudioAx_80024030(1);
+        sfxForward();
         cur_pos = data->cursor_pos;
         old_hover = mn_804A04F0.hovered_selection;
         count = (s32) old_hover;
@@ -1003,7 +1004,7 @@ void mnNameNew_GlyphVariantInput(void)
             }
         }
         if (old_sel != (u8) mn_804A04F0.confirmed_selection) {
-            lbAudioAx_80024030(2);
+            sfxMove();
         }
     }
 }

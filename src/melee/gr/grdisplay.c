@@ -27,7 +27,7 @@ void grDisplay_801C5B90(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode)
     HSD_GObj* cur;
     HSD_CObj* cobj;
     Mtx mtx;
-    Vec3 vec;
+    Vec3 fighter_pos;
     u32 unused[6];
 
     if (jobj != NULL) {
@@ -52,11 +52,13 @@ void grDisplay_801C5B90(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode)
                      cur = cur->next)
                 {
                     LbShadow* shadow = ftLib_800872B0(cur);
-                    ftLib_80086644(cur, &vec);
-                    if (Camera_80030B24() || stage_info.x17C(&vec, -1, jobj)) {
-                        shadow->x0_b4 = 0;
+                    ftLib_80086644(cur, &fighter_pos);
+                    if (Camera_80030B24() || stage_info.on_check_shadow_render(
+                                                 &fighter_pos, -1, jobj))
+                    {
+                        shadow->x0_b4 = false;
                     } else {
-                        shadow->x0_b4 = 1;
+                        shadow->x0_b4 = true;
                     }
                 }
                 lbShadow_8000EFEC();

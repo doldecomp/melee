@@ -28,7 +28,6 @@
 #include "ftDonkey/forward.h"
 #include "ftKirby/forward.h"
 
-#include <common_structs.h>
 #include <stddef.h>
 #include <trigf.h>
 #include <baselib/gobj.h>
@@ -74,8 +73,7 @@ void ftKb_SpecialNDk_800FF8EC(Fighter_GObj* gobj)
         Fighter* fp2 = GET_FIGHTER(gobj);
         fp2->death2_cb = ftKb_Init_800EE74C;
         fp2->take_dmg_cb = ftKb_Init_800EE7B8;
-        fp2->pre_hitlag_cb = efLib_PauseAll;
-        fp2->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp2);
     }
     ftAnim_8006EBA4(gobj);
 }
@@ -109,19 +107,17 @@ void ftKb_SpecialNDk_800FFA10(Fighter_GObj* gobj)
         Fighter* fp2 = GET_FIGHTER(gobj);
         fp2->death2_cb = ftKb_Init_800EE74C;
         fp2->take_dmg_cb = ftKb_Init_800EE7B8;
-        fp2->pre_hitlag_cb = efLib_PauseAll;
-        fp2->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp2);
     }
     ftAnim_8006EBA4(gobj);
 }
 
 static inline void ftKb_DkSpecialNStart_Coll_inline(Fighter_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = gobj->user_data;
     fp->death2_cb = ftKb_Init_800EE74C;
     fp->take_dmg_cb = ftKb_Init_800EE7B8;
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 void ftKb_DkSpecialNStart_Anim(Fighter_GObj* gobj)

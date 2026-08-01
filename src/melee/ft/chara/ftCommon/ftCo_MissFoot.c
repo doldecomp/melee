@@ -12,7 +12,6 @@
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 void ftCo_8009F39C(Fighter_GObj* gobj)

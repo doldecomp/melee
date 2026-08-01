@@ -6,6 +6,9 @@
 #include "platform.h"
 
 #include "baselib/forward.h"
+
+#include "gm/types.h"
+
 #include "it/forward.h"
 #include "lb/forward.h"
 

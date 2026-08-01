@@ -1,5 +1,7 @@
 #include "mncharsel.h"
 
+#include "inlines.h"
+
 #include "mncharsel.static.h"
 
 #include "types.h"
@@ -774,7 +776,7 @@ void mnCharSel_8025DB34(u8 arg0)
                 }
             }
             if ((u8) mnCharSel_804D6CF6 != 3 && (u8) mnCharSel_804D6CF6 != 4) {
-                lbAudioAx_80024030(2);
+                sfxMove();
             }
         }
     }
@@ -1288,6 +1290,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     HSD_JObj* sp54;
+    UNUSED int hole;
     HSD_JObj* sp4C;
     HSD_JObj* sp48;
     HSD_JObj* sp44;
@@ -1296,6 +1299,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
     HSD_JObj* sp38;
     HSD_JObj* sp34;
     HSD_JObj* sp30;
+    HSD_JObj* sp2C;
     CSSDoor* doors;
     GameRules* rules;
     HSD_DObj* dobj;
@@ -1416,21 +1420,19 @@ void fn_8025F0E0(HSD_GObj* gobj)
                             val = (u8) mnCharSel_804D6CB0->data.data.players[i]
                                       .handicap;
                         }
-                        {
-                            f32 val_f;
-                            if (val == 0) {
-                                val = 1;
-                            }
-                            {
-                                u8 cpuslider_joint = doors->cpuslider_joint;
-                                val_f = (f32) val;
-                                lb_80011E24(mnCharSel_804D6CC0, &sp3C,
-                                            cpuslider_joint, -1);
-                            }
-                            HSD_ForeachAnim(sp3C, JOBJ_TYPE, TOBJ_MASK,
-                                            HSD_AObjReqAnim, AOBJ_ARG_AF,
-                                            val_f);
+                        /* switch forces MWCC beq/b double-branch (not bne) */
+                        switch (val) {
+                        case 0:
+                            val = 1;
                         }
+                        {
+                            u8 cpuslider_joint = doors->cpuslider_joint;
+                            fval = (f32) val;
+                            lb_80011E24(mnCharSel_804D6CC0, &sp3C,
+                                        cpuslider_joint, -1);
+                        }
+                        HSD_ForeachAnim(sp3C, JOBJ_TYPE, TOBJ_MASK,
+                                        HSD_AObjReqAnim, AOBJ_ARG_AF, fval);
                         HSD_JObjAnimAll(sp3C);
                         HSD_ForeachAnim(sp3C, JOBJ_TYPE, TOBJ_MASK,
                                         HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
@@ -1477,13 +1479,13 @@ void fn_8025F0E0(HSD_GObj* gobj)
                             fval =
                                 (f32) mnCharSel_804D6CB0->data.data.players[i]
                                     .cpu_level;
-                            lb_80011E24(mnCharSel_804D6CC0, &sp30,
+                            lb_80011E24(mnCharSel_804D6CC0, &sp2C,
                                         cpuslider_joint, -1);
                         }
-                        HSD_ForeachAnim(sp30, JOBJ_TYPE, TOBJ_MASK,
+                        HSD_ForeachAnim(sp2C, JOBJ_TYPE, TOBJ_MASK,
                                         HSD_AObjReqAnim, AOBJ_ARG_AF, fval);
-                        HSD_JObjAnimAll(sp30);
-                        HSD_ForeachAnim(sp30, JOBJ_TYPE, TOBJ_MASK,
+                        HSD_JObjAnimAll(sp2C);
+                        HSD_ForeachAnim(sp2C, JOBJ_TYPE, TOBJ_MASK,
                                         HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
                     }
                 }
@@ -1592,7 +1594,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
         }
     }
     HSD_JObjAnimAll(jobj);
-    PAD_STACK(40);
+    PAD_STACK(28);
 }
 
 void fn_8025FAC0(HSD_GObj* gobj)
@@ -1769,7 +1771,7 @@ s32 mnCharSel_8025FDEC(u8 door)
     css = mnCharSel_804D6CB0;
     c_kind = css->data.data.players[player].c_kind;
 
-    if (c_kind < 0x1A) {
+    if (c_kind < CKIND_PLAYABLE_COUNT) {
         if (c_kind !=
             all_data->icons[mnCharSel_803F0DFC.doors[door].sel_icon].char_kind)
         {
@@ -1871,7 +1873,7 @@ void mnCharSel_CostumeChange(int door, u32 input)
     }
     if (prev_costume != mnCharSel_803F0DFC.doors[door].costume) {
         mnCharSel_8025DB34(door);
-        lbAudioAx_80024030(2);
+        sfxMove();
     }
 }
 
@@ -2112,13 +2114,13 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                             }
                                             mnCharSel_804D6CB0->data.data
                                                 .players[player_idx]
-                                                .c_kind = 0x21;
+                                                .c_kind = CHKIND_NONE;
                                         }
                                     }
                                     mnCharSel_8025DB34(grabbed);
                                     cursor->x5 = 2;
                                 } else {
-                                    u32 a_press = trigger & 0x100;
+                                    u32 a_press = trigger & HSD_PAD_A;
                                     if (a_press != 0) {
                                         struct CSSCharModel* m =
                                             mnCharSel_804A0BD0[grabbed];
@@ -2233,7 +2235,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                         .sel_icon = (u8) i;
                                                     mnCharSel_8025DB34(
                                                         grabbed);
-                                                    if (trigger & 0x100) {
+                                                    if (trigger & HSD_PAD_A) {
                                                         s32 player_idx;
                                                         if ((u8)
                                                                 mnCharSel_804D6CF5 ==
@@ -2346,9 +2348,9 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                             }
                                             mnCharSel_803F0DFC.doors[grabbed]
                                                 .sel_icon_prev = 0x19;
-                                            if (trigger & 0x100) {
+                                            if (trigger & HSD_PAD_A) {
                                                 lbAudioAx_80024030(3);
-                                            } else if (trigger & 0x200) {
+                                            } else if (trigger & HSD_PAD_B) {
                                                 if (mnCharSel_8025FDEC(
                                                         grabbed) == 0)
                                                 {
@@ -2410,7 +2412,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                 HSD_JObjSetTranslateX(sp98, val);
                                 cursor->xC = (f32) (-2.9f + (val - base_x));
                                 cursor->x10 = (f32) (1.7f + sp88.y);
-                                if (trigger & 0x100) {
+                                if (trigger & HSD_PAD_A) {
                                     cursor->x5 = 2;
                                     mnCharSel_803F0DFC.doors[slider_door]
                                         .is_hold_cpu_slider = 0;
@@ -2452,7 +2454,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                             HSD_JObjSetTranslateX(sp98, val);
                             cursor->xC = (f32) (-2.9f + (val - base_x));
                             cursor->x10 = (f32) (1.7f + sp88.y);
-                            if (trigger & 0x100) {
+                            if (trigger & HSD_PAD_A) {
                                 cursor->x5 = 2;
                                 mnCharSel_803F0DFC.doors[hc_door]
                                     .is_hold_handicap_slider = 0;
@@ -2465,7 +2467,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
 
                 if ((cursor->xC > 17.3f) && (cursor->x10 > 22.0f)) {
                     cursor->x8 = 1;
-                    if (trigger & 0x100) {
+                    if (trigger & HSD_PAD_A) {
                         mnCharSel_804D6CF6 = 2;
                         goto block_392;
                     }
@@ -2482,7 +2484,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                             f32 cx = cursor->xC;
                             if (cx > data2.xf8 && cx < data2.xfc) {
                                 cursor->x8 = 1;
-                                if ((trigger & 0x100) &&
+                                if ((trigger & HSD_PAD_A) &&
                                     (u8) data2.stocks > 1U)
                                 {
                                     data2.stocks = (u8) (data2.stocks - 1);
@@ -2507,13 +2509,13 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                     mnCharSel_804D6CB0->data.data
                                         .players[(s8) (u8) mnCharSel_804D6CF0]
                                         .stocks = (s8) data2.stocks;
-                                    lbAudioAx_80024030(2);
+                                    sfxMove();
                                 } else {
                                     goto block_231;
                                 }
                             } else if (cx > data2.x100 && cx < data2.x104) {
                                 cursor->x8 = 1;
-                                if ((trigger & 0x100) &&
+                                if ((trigger & HSD_PAD_A) &&
                                     (u8) data2.stocks < 5U)
                                 {
                                     data2.stocks = (u8) (data2.stocks + 1);
@@ -2538,7 +2540,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                     mnCharSel_804D6CB0->data.data
                                         .players[(s8) (u8) mnCharSel_804D6CF0]
                                         .stocks = (s8) data2.stocks;
-                                    lbAudioAx_80024030(2);
+                                    sfxMove();
                                 } else {
                                     goto block_231;
                                 }
@@ -2560,7 +2562,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                     cx2 < mnCharSel_803F0DFC.xdb)
                                 {
                                     cursor->x8 = 1;
-                                    if ((trigger & 0x100) &&
+                                    if ((trigger & HSD_PAD_A) &&
                                         (u8) mnCharSel_803F0DFC.xcd != 0)
                                     {
                                         mnCharSel_803F0DFC.xcd =
@@ -2571,7 +2573,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                 s8) (u8) mnCharSel_804D6CF0]
                                             .cpu_level =
                                             mnCharSel_803F0DFC.xcd;
-                                        lbAudioAx_80024030(2);
+                                        sfxMove();
                                     } else {
                                         goto block_298;
                                     }
@@ -2579,7 +2581,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                            cx2 < mnCharSel_803F0DFC.xe3)
                                 {
                                     cursor->x8 = 1;
-                                    if ((trigger & 0x100) &&
+                                    if ((trigger & HSD_PAD_A) &&
                                         (u8) mnCharSel_803F0DFC.xcd < 4U)
                                     {
                                         mnCharSel_803F0DFC.xcd =
@@ -2590,7 +2592,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                 s8) (u8) mnCharSel_804D6CF0]
                                             .cpu_level =
                                             mnCharSel_803F0DFC.xcd;
-                                        lbAudioAx_80024030(2);
+                                        sfxMove();
                                     } else {
                                         goto block_298;
                                     }
@@ -2611,7 +2613,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                     f32 cx3 = cursor->xC;
                     if (cx3 > -17.0f && cx3 < 15.0f && cursor->x10 > 22.0f) {
                         cursor->x8 = 1;
-                        if (trigger & 0x100) {
+                        if (trigger & HSD_PAD_A) {
                             s32 loop_i;
                             mnCharSel_804D6CF6 = 3;
                             for (loop_i = 0; loop_i < (s32) mnCharSel_804D6CF5;
@@ -2636,8 +2638,8 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                     u8 mtype = mnCharSel_804D6CB0->match_type;
                     if ((s32) mtype < 0xB && (s32) mtype >= 0) {
                         cursor->x8 = 1;
-                        if (trigger & 0x100) {
-                            lbAudioAx_80024030(2);
+                        if (trigger & HSD_PAD_A) {
+                            sfxMove();
                             mnCharSel_804D6CB0->data.data.rules.is_teams =
                                 (mnCharSel_804D6CB0->data.data.rules.is_teams +
                                  1) &
@@ -2748,7 +2750,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                     }
                 }
                 block_298: {
-                    u32 a_press2 = trigger & 0x100;
+                    u32 a_press2 = trigger & HSD_PAD_A;
                     if (a_press2 != 0) {
                         if ((u8) mnCharSel_804D6CF5 != 1) {
                             s32 di;
@@ -2820,7 +2822,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                     }
                                                     mnCharSel_8025DB34(
                                                         (u8) di);
-                                                    lbAudioAx_80024030(2);
+                                                    sfxMove();
                                                     goto block_348;
                                                 }
                                             }
@@ -2849,7 +2851,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                             .team = dp->team;
                                                         mnCharSel_8025DB34(
                                                             (u8) di);
-                                                        lbAudioAx_80024030(2);
+                                                        sfxMove();
                                                     }
                                                 }
                                             }
@@ -3097,7 +3099,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                            -2.0f);
                             }
                         }
-                    } else if (trigger & 0x200) {
+                    } else if (trigger & HSD_PAD_B) {
                         u8 cport5 = cursor->x4;
                         if ((u8) mnCharSel_803F0DFC.doors[cport5].p_kind !=
                                 3 &&
@@ -3142,7 +3144,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         .players[cursor->x4]
                                         .slot_type = 0;
                                     mnCharSel_8025DB34(cursor->x4);
-                                    lbAudioAx_80024030(2);
+                                    sfxMove();
                                 }
 
                                 {
@@ -3760,7 +3762,7 @@ void fn_802633B0(HSD_GObj* gobj)
                         AOBJ_ARG_AF, 0.0f);
         tag->state = 2;
         tag->timer = 0;
-        lbAudioAx_80024030(2);
+        sfxMove();
         return;
 
     case 2: {
@@ -3893,7 +3895,7 @@ void fn_802633B0(HSD_GObj* gobj)
             } while (j < 9);
         }
 
-        if (trigger & 0x100) {
+        if (trigger & HSD_PAD_A) {
             if ((u8) mnCharSel_804D6CF5 == 1) {
                 lb_80011E24(mnCharSel_804D6CC0, &list_origin_jobj,
                             mnCharSel_803F0DFC.name_list_joint, -1);
@@ -3952,7 +3954,7 @@ void fn_802633B0(HSD_GObj* gobj)
                 mnCharSel_804D6CB0->data.data.players[port].xA = 0x78;
                 tag->use_tag = 0;
                 tag->state = 4;
-                lbAudioAx_80024030(2);
+                sfxMove();
                 goto block_116;
             }
 
@@ -4028,16 +4030,16 @@ void fn_802633B0(HSD_GObj* gobj)
                             row - 1;
                         tag->use_tag = 1;
                         tag->state = 4;
-                        lbAudioAx_80024030(2);
+                        sfxMove();
                     }
                 }
             }
             goto block_116;
         }
     block_116:
-        if (trigger & 0x200) {
+        if (trigger & HSD_PAD_B) {
             tag->state = 4;
-            lbAudioAx_80024030(0);
+            sfxBack();
             return;
         }
         break;
@@ -4450,7 +4452,8 @@ s32 mnCharSel_802640A0(void)
             }
         }
         if (found >= 0x19) {
-            mnCharSel_804D6CB0->data.data.players[player].c_kind = 0x1A;
+            mnCharSel_804D6CB0->data.data.players[player].c_kind =
+                CKIND_PLAYABLE_COUNT;
             if ((u8) mnCharSel_804D6CB0->data.data.players[player].slot_type ==
                 1)
             {
@@ -5165,7 +5168,7 @@ void mnCharSel_802669F4_OnFrame(void)
         lbDvd_80018254();
     }
     if (mn_8022F218() != 0) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         lb_800145F4();
         mn_8022F138(1, 8);
         HSD_SisLib_803A5E70();
@@ -5191,26 +5194,26 @@ void mnCharSel_802669F4_OnFrame(void)
             if ((u8) mnCharSel_804D6CF5 == 4) {
                 lbAudioAx_8002411C(0x147);
             }
-            lbAudioAx_80024030(1);
+            sfxForward();
         }
         break;
     case 2:
         gm_801A4B60();
-        lbAudioAx_80024030(0);
+        sfxBack();
         break;
     case 3:
         mn_8022F138(1, 8);
         HSD_SisLib_803A5E70();
         mn_80231804(mnCharSel_804D6CD4, 1);
         mnCharSel_804D6CF6 = 5;
-        lbAudioAx_80024030(1);
+        sfxForward();
         break;
     case 4:
         mn_8022F138(1, 8);
         HSD_SisLib_803A5E70();
         mnNameNew_EnterFromMnCharSel(mnCharSel_804D6CD4, mnCharSel_804D6CF9);
         mnCharSel_804D6CF6 = 5;
-        lbAudioAx_80024030(1);
+        sfxForward();
         break;
     }
 }

@@ -18,6 +18,7 @@
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbspdisplay.h"
+#include "mn/inlines.h"
 #include "mn/mnmain.h"
 #include "mp/mpcoll.h"
 #include "pl/player.h"
@@ -205,7 +206,7 @@ void gm_801A68D8(void)
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(0, NULL);
+    Stage_802251E8(St_Kind_Dummy, NULL);
     Item_80266FA8();
     Item_80266FCC();
     Stage_8022524C();
@@ -547,7 +548,7 @@ void gm_801A79D4_OnFrame(void)
         gm_804D6740--;
     } else if (gm_GetButtonsTriggered(gm_801BF010()) & PAD_BUTTON_START) {
         lbAudioAx_80023694();
-        lbAudioAx_80024030(1);
+        sfxForward();
         gm_801A4B60();
     }
 }
