@@ -4923,7 +4923,7 @@ s32 mnCharSel_802640A0(void)
 #undef MODELS
 #undef ANIM
 
-static u8 data_pad[0x18] = { 0 };
+static u8 data_pad[0x10] = { 0 };
 
 void mnCharSel_8026688C_OnEnter(void* arg0)
 {
