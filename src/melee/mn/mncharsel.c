@@ -1750,7 +1750,6 @@ s32 mnCharSel_8025FDEC(u8 door)
     s8 c_kind;
     int icon_idx;
     CSSData* css;
-    struct CSSCharModel** model_ptr;
     CSSAllData* all_data = (CSSAllData*) &mnCharSel_803F0A48;
 
     if (mnCharSel_804D6CF5 == 1) {
@@ -1784,18 +1783,19 @@ s32 mnCharSel_8025FDEC(u8 door)
             }
         }
 
-        model_ptr = &mnCharSel_804A0BD0[door];
-        (*model_ptr)->x8 = 3.4f + all_data->icons[icon_idx].bound_l;
-        (*model_ptr)->xC = -3.0f + all_data->icons[icon_idx].bound_u;
+        mnCharSel_804A0BD0[door]->x8 =
+            3.4f + all_data->icons[icon_idx].bound_l;
+        mnCharSel_804A0BD0[door]->xC =
+            -3.0f + all_data->icons[icon_idx].bound_u;
 
         mnCharSel_803F0DFC.doors[door].sel_icon_prev = icon_idx;
         mnCharSel_803F0DFC.doors[door].sel_icon = icon_idx;
 
         HSD_GObjGXLink_803909D8(
-            (*model_ptr)->gobj,
+            mnCharSel_804A0BD0[door]->gobj,
             mnCharSel_804A0BC0[mnCharSel_804D6CF5 - 1]->gobj);
 
-        (*model_ptr)->x5 = 0;
+        mnCharSel_804A0BD0[door]->x5 = 0;
 
         if (mnCharSel_804D6CF5 == 1) {
             lb_80011E24(mnCharSel_804D6CC0, &sp10,
