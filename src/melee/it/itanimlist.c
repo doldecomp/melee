@@ -11,8 +11,8 @@
 #include "it/itcoll.h"
 #include "it/item.h"
 #include "lb/inlines.h"
+#include "lb/lb_013B.h"
 #include "lb/lbcommand.h"
-#include "lb/lbspdisplay.h"
 
 #include <baselib/gobjproc.h>
 

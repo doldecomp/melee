@@ -16,7 +16,7 @@
 #include "ft/ftlib.h"
 #include "gm/gm_1601.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 #include "pl/player.h"

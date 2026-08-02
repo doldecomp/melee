@@ -4,7 +4,6 @@
 
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 
 #include "forward.h"
@@ -22,7 +21,7 @@
 #include "ftZelda/types.h"
 #include "it/items/itzeldadinfire.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>
 

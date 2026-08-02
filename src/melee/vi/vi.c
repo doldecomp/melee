@@ -4,8 +4,8 @@
 #include "dolphin/pad.h"
 #include "gm/gm_1A36.h"
 #include "gm/gm_unsplit.h"
+#include "lb/lb_013B.h"
 #include "lb/lbaudio_ax.h"
-#include "lb/lbspdisplay.h"
 
 char* vi_animation_table[26] = {
     "PlCaDViWaitAJ.dat", "PlDkDViWaitAJ.dat", "PlFxDViWaitAJ.dat",

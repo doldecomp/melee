@@ -16,8 +16,8 @@
 #include "it/itdrop.h"
 #include "it/itspawn.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
-#include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
 
 #include <dolphin/types.h>

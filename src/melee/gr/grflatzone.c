@@ -10,7 +10,7 @@
 #include "gr/types.h"
 #include "it/items/ittools.h"
 #include "it/types.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
 #include <baselib/gobjgxlink.h>

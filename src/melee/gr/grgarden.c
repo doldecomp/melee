@@ -16,7 +16,7 @@
 #include "gr/types.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <baselib/gobj.h>
 #include <baselib/gobjobject.h>

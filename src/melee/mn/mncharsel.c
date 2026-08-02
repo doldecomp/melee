@@ -9,6 +9,8 @@
 #include "baselib/forward.h"
 #include "ft/forward.h"
 
+#include "lb/lb_013B.h"
+
 #include <trigf.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/cobj.h>

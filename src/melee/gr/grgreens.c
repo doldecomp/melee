@@ -3,6 +3,7 @@
 #include <platform.h>
 
 #include "it/ithitbox.h"
+#include "lb/lb_00F9.h"
 
 #include <melee/gr/forward.h>
 
@@ -28,7 +29,6 @@
 #include <melee/it/items/itwhispyapple.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbspdisplay.h>
 #include <melee/mp/mplib.h>
 
 struct grGreens_YakumonoParam {

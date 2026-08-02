@@ -7,6 +7,7 @@
 #include <platform.h>
 
 #include "lb/lb_00B0.h"
+#include "lb/lb_0146.h"
 #include "lb/lbspdisplay.h"
 #include "mn/inlines.h"
 #include "mn/mnmain.h"

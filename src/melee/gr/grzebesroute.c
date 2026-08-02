@@ -8,7 +8,7 @@
 #include "cm/camera.h"
 #include "ft/ftlib.h"
 #include "gr/types.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
 #include <dolphin/mtx.h>

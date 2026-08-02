@@ -28,8 +28,8 @@
 #include "lb/forward.h"
 
 #include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
-#include "lb/lbspdisplay.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 

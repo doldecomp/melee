@@ -1,24 +1,19 @@
 #include "vi/vi0402.h"
 
-#include "types.h"
-
-#include <placeholder.h>
-
 #include "baselib/forward.h"
 
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "gm/gm_unsplit.h"
+#include "lb/lb_013B.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbspdisplay.h"
 #include "pl/player.h"
 #include "sc/types.h"
-#include "vi/types.h"
 #include "vi/vi.h"
 
 #include <baselib/cobj.h>
-#include <baselib/displayfunc.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
