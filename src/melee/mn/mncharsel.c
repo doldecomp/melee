@@ -2645,65 +2645,65 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                     continue;
                                 }
                                 if ((dp->is_hold_cpu_slider |
-                                     dp->is_hold_handicap_slider) != 0 ||
-                                    (u8) mnCharSel_804A0BD0[di]->x5 != 0 ||
+                                     dp->is_hold_handicap_slider) == 0 &&
+                                    (u8) mnCharSel_804A0BD0[di]->x5 == 0 &&
                                     (u8) ((struct CSSCursorData*)
                                               mnCharSel_804A0BC0[di])
-                                            ->x5 == 1)
+                                            ->x5 != 1)
                                 {
-                                    continue;
-                                }
-
-                                tag_data = tp->data;
-                                if ((u8) tag_data->state != 0) {
-                                    continue;
-                                }
-                                cx4 = cursor->xC;
-                                if (cx4 > dp->togglebtn_left &&
-                                    cx4 < dp->togglebtn_right)
-                                {
-                                    f32 cy4 = cursor->x10;
-                                    if (cy4 < 0.2 && cy4 > -4.6) {
-                                        cursor->x10 = -2.2f;
-                                        {
-                                            u8 new_kind = dp->p_kind + 1;
-                                            dp->p_kind = new_kind;
-                                            switch ((s32) new_kind) {
-                                            case 3:
-                                                break;
-                                            case 2:
-                                                dp->p_kind = 3;
-                                                break;
-                                            case 4:
-                                                if ((s8) (u8) HSD_PadCopyStatus
-                                                        [(u8) di]
-                                                            .err != 0)
-                                                {
-                                                    dp->p_kind = 1;
-                                                } else {
-                                                    dp->p_kind = 0;
+                                    tag_data = tp->data;
+                                    if ((u8) tag_data->state != 0) {
+                                        continue;
+                                    }
+                                    cx4 = cursor->xC;
+                                    if (cx4 > dp->togglebtn_left &&
+                                        cx4 < dp->togglebtn_right)
+                                    {
+                                        f32 cy4 = cursor->x10;
+                                        if (cy4 < 0.2 && cy4 > -4.6) {
+                                            cursor->x10 = -2.2f;
+                                            {
+                                                u8 new_kind = dp->p_kind + 1;
+                                                dp->p_kind = new_kind;
+                                                switch ((s32) new_kind) {
+                                                case 3:
+                                                    break;
+                                                case 2:
+                                                    dp->p_kind = 3;
+                                                    break;
+                                                case 4:
+                                                    if ((s8) (u8)
+                                                            HSD_PadCopyStatus
+                                                                [(u8) di]
+                                                                    .err != 0)
+                                                    {
+                                                        dp->p_kind = 1;
+                                                    } else {
+                                                        dp->p_kind = 0;
+                                                    }
+                                                    break;
                                                 }
-                                                break;
                                             }
-                                        }
-                                        mnCharSel_804D6CB0->data.data
-                                            .players[di]
-                                            .slot_type = dp->p_kind;
-                                        if ((u8) dp->p_kind == 1) {
                                             mnCharSel_804D6CB0->data.data
                                                 .players[di]
-                                                .xA = 0x78;
-                                            tag_data->use_tag = 0;
-                                            if ((u8) dp->selected_since_load ==
-                                                    0 &&
-                                                (s32) cursor->x4 != di)
-                                            {
-                                                mnCharSel_8025FB50((u8) di, 1);
+                                                .slot_type = dp->p_kind;
+                                            if ((u8) dp->p_kind == 1) {
+                                                mnCharSel_804D6CB0->data.data
+                                                    .players[di]
+                                                    .xA = 0x78;
+                                                tag_data->use_tag = 0;
+                                                if ((u8) dp->selected_since_load ==
+                                                        0 &&
+                                                    (s32) cursor->x4 != di)
+                                                {
+                                                    mnCharSel_8025FB50((u8) di,
+                                                                       1);
+                                                }
                                             }
+                                            mnCharSel_8025DB34((u8) di);
+                                            sfxMove();
+                                            continue;
                                         }
-                                        mnCharSel_8025DB34((u8) di);
-                                        sfxMove();
-                                        continue;
                                     }
                                 }
 
