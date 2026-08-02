@@ -274,7 +274,7 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
     u16 obj_height;
     u8 tex_fmt;
 
-    PAD_STACK(0x20);
+    PAD_STACK(0x8);
 
     if (sobj->x40 & 1) {
         return;
