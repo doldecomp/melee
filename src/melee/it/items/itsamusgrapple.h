@@ -11,14 +11,16 @@
 
 #include <dolphin/mtx.h>
 
+typedef struct itSamusGrapple_Hitbox {
+    struct spawn_hitbox_0 create_hitbox_0;
+    struct spawn_hitbox_1 create_hitbox_1;
+    struct spawn_hitbox_2 create_hitbox_2;
+    struct spawn_hitbox_3 create_hitbox_3;
+    struct spawn_hitbox_4 create_hitbox_4;
+} itSamusGrapple_Hitbox;
+
 typedef struct itSamusGrapple_HitboxData {
-    struct {
-        struct spawn_hitbox_0 create_hitbox_0;
-        struct spawn_hitbox_1 create_hitbox_1;
-        struct spawn_hitbox_2 create_hitbox_2;
-        struct spawn_hitbox_3 create_hitbox_3;
-        struct spawn_hitbox_4 create_hitbox_4;
-    } create_hitbox;
+    itSamusGrapple_Hitbox create_hitbox;
     u8 x133_0 : 1;
     u8 x133_1 : 1;
     u8 x133_2 : 1;
