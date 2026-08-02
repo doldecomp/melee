@@ -1328,7 +1328,8 @@ typedef struct BracketEntry {
 STATIC_ASSERT(sizeof(struct BracketEntry) == 0xDC);
 
 struct lbl_803D9D20_t {
-    /*  +0 */ u8 x0[0x59];
+    /*  +0 */ u8 x0[0x20];
+    /* +20 */ u8 x20[0x59 - 0x20];
     /* +59 */ u8 x59[0x72 - 0x59];
     /* +72 */ u8 x72[0x8C - 0x72];
 };

@@ -60,16 +60,7 @@ extern char* lbl_804DA6D0;
 static s32 lbl_804D6630;
 static s32 lbl_804D6634;
 extern struct lbl_803B7C80_t {
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
-    s32 unkC;
-    s32 unk10;
-    s32 unk14;
-    s32 unk18;
-    s32 unk1C;
-    s32 unk20;
-    s32 unk24;
+    s32 v[10];
 } lbl_803B7C80;
 typedef struct CamDesc {
     s32 d[14];
@@ -135,19 +126,19 @@ void fn_8018A514(int count, float val)
 
     if (count < 9) {
         for (i = 0; i < count; i++) {
-            src += lbl_803D9D20.x0[i + 0x20];
+            src += lbl_803D9D20.x20[i];
         }
     } else if (count < 14) {
         for (i = 9; i < count; i++) {
-            src += lbl_803D9D20.x0[i + 0x20];
+            src += lbl_803D9D20.x20[i];
         }
     } else {
         for (i = 14; i < count; i++) {
-            src += lbl_803D9D20.x0[i + 0x20];
+            src += lbl_803D9D20.x20[i];
         }
     }
 
-    n = lbl_803D9D20.x0[count + 0x20];
+    n = lbl_803D9D20.x20[i];
 
     entries = lbl_80473AB8;
     for (i = 0; i < n; i++) {
@@ -214,47 +205,53 @@ void fn_8018A970(int arg0)
 
 void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
 {
-    BracketEntry* entries = lbl_80473AB8;
-    BracketEntry* entry;
-    u8* sub;
     s32* p34;
     s32* p3C;
     s32* p44;
     s32* p38;
     s32* p40;
     s32* p48;
-    u8* px3;
-    u8 x3;
+    BracketEntry* entry;
+    s32* pX18;
+    s32* pX10;
+    s32 xC;
+    s32 x14;
+    s32 x10;
+    s32 x18;
+    s32 val;
+    s32 val1;
+    s32 val2;
+    s32 tmp;
+    u8 x2;
+    u8 tm_x2E;
 
     TmData* tm = gm_GetTournamentData();
 
-    entry = &entries[entry_idx];
-    sub = (u8*) entry + slot_idx * (s32) 0x2C;
-
-    p34 = (s32*) (sub + 0x34);
-    p3C = (s32*) (sub + 0x3C);
-    p44 = (s32*) (sub + 0x44);
-    p38 = (s32*) (sub + 0x38);
-    p40 = (s32*) (sub + 0x40);
-    p48 = (s32*) (sub + 0x48);
+    p34 = &lbl_80473AB8[entry_idx].slots[slot_idx].x34;
+    p3C = &lbl_80473AB8[entry_idx].slots[slot_idx].x3C;
+    p44 = &lbl_80473AB8[entry_idx].slots[slot_idx].x44;
+    p38 = &lbl_80473AB8[entry_idx].slots[slot_idx].x38;
+    p40 = &lbl_80473AB8[entry_idx].slots[slot_idx].x40;
+    p48 = &lbl_80473AB8[entry_idx].slots[slot_idx].x48;
+    entry = &lbl_80473AB8[entry_idx];
 
     if (entry->x1 != 0) {
-        px3 = &entry->x3;
+        u8* px3 = &entry->x3;
+        u8 x3 = *px3;
         (void) px3;
-        x3 = *px3;
         if (x3 == 0 && entry->x4 != 0) {
             switch (entry->x4) {
             case 1: {
-                s32 xC = entry->xC;
-                s32* pX18 = &entry->x18;
-                s32* pX10 = &entry->x10;
+                xC = entry->xC;
+                pX18 = &entry->x18;
+                pX10 = &entry->x10;
                 *p3C = xC;
                 *p44 = xC;
                 *p34 = xC;
                 {
-                    s32 x18 = entry->x18;
-                    s32 x10 = *pX10;
-                    s32 val = x10 + x18 - slot_idx * x18;
+                    x18 = *pX18;
+                    x10 = *pX10;
+                    val = x10 + x18 - slot_idx * x18;
                     *p40 = val;
                     *p48 = val;
                     *p38 = val;
@@ -265,36 +262,37 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
             case 2:
                 switch (slot_idx) {
                 case 0: {
-                    s32 xC = entry->xC;
-                    s32* pX10 = &entry->x10;
-                    s32 val1 = xC + 0x2B;
+                    xC = entry->xC;
+                    val1 = xC + 0x2B;
+                    pX10 = &entry->x10;
+                    pX18 = &entry->x18;
                     *p3C = val1;
                     *p44 = val1;
                     *p34 = val1;
                     {
-                        s32 x10 = entry->x10;
-                        s32 x18 = entry->x18;
-                        s32 val2 = x10 + x18;
+                        x10 = *pX10;
+                        x18 = *pX18;
+                        val2 = x10 + x18;
                         *p40 = val2;
                         *p48 = val2;
                         *p38 = val2;
                     }
-                    *p40 = *pX10 + entry->x18 / 2;
+                    *p40 = *pX10 + *pX18 / 2;
                     break;
                 }
                 case 1: {
-                    s32 xC = entry->xC;
-                    s32 x14 = entry->x14;
-                    s32* pX10 = &entry->x10;
-                    s32* pX18 = &entry->x18;
-                    s32 val1 = xC + x14;
+                    xC = entry->xC;
+                    x14 = entry->x14;
+                    val1 = xC + x14;
+                    pX10 = &entry->x10;
+                    pX18 = &entry->x18;
                     *p3C = val1;
                     *p44 = val1;
                     *p34 = val1;
                     {
-                        s32 x10 = entry->x10;
-                        s32 x18 = *pX18;
-                        s32 val2 = x10 + x18;
+                        x10 = *pX10;
+                        x18 = *pX18;
+                        val2 = x10 + x18;
                         *p40 = val2;
                         *p48 = val2;
                         *p38 = val2;
@@ -303,20 +301,20 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                     break;
                 }
                 default: {
-                    BracketEntry* ep = &entries[entry_idx];
-                    s32 x14 = ep->x14;
-                    s32 xC = ep->xC;
-                    s32 val1 = xC + x14 / 2;
+                    x14 = lbl_80473AB8[entry_idx].x14;
+                    xC = lbl_80473AB8[entry_idx].xC;
+                    val1 = xC + x14 / 2;
                     *p3C = val1;
                     *p44 = val1;
                     *p34 = val1;
                     {
-                        s32 x10 = ep->x10;
+                        x10 = lbl_80473AB8[entry_idx].x10;
                         *p40 = x10;
                         *p48 = x10;
                         *p38 = x10;
                     }
-                    *p40 = ep->x10 + ep->x18 / 2;
+                    *p40 = lbl_80473AB8[entry_idx].x10 +
+                           lbl_80473AB8[entry_idx].x18 / 2;
                     break;
                 }
                 }
@@ -324,16 +322,16 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
             case 3:
                 switch (slot_idx) {
                 case 0: {
-                    s32 xC = entry->xC;
-                    s32* pX10 = &entry->x10;
-                    s32* pX18 = &entry->x18;
+                    xC = entry->xC;
+                    pX10 = &entry->x10;
+                    pX18 = &entry->x18;
                     *p3C = xC;
                     *p44 = xC;
                     *p34 = xC;
                     {
-                        s32 x10 = entry->x10;
-                        s32 x18 = *pX18;
-                        s32 val = x10 + x18;
+                        x10 = *pX10;
+                        x18 = *pX18;
+                        val = x10 + x18;
                         *p40 = val;
                         *p48 = val;
                         *p38 = val;
@@ -342,18 +340,18 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                     break;
                 }
                 case 1: {
-                    s32 xC = entry->xC;
-                    s32 x14 = entry->x14;
-                    s32* pX10 = &entry->x10;
-                    s32* pX18 = &entry->x18;
-                    s32 val1 = xC + x14;
+                    xC = entry->xC;
+                    x14 = entry->x14;
+                    val1 = xC + x14;
+                    pX10 = &entry->x10;
+                    pX18 = &entry->x18;
                     *p3C = val1;
                     *p44 = val1;
                     *p34 = val1;
                     {
-                        s32 x10 = entry->x10;
-                        s32 x18 = *pX18;
-                        s32 val = x10 + x18;
+                        x10 = *pX10;
+                        x18 = *pX18;
+                        val = x10 + x18;
                         *p40 = val;
                         *p48 = val;
                         *p38 = val;
@@ -362,12 +360,12 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                     break;
                 }
                 case 2: {
-                    s32 xC = entry->xC;
+                    xC = entry->xC;
                     *p3C = xC;
                     *p44 = xC;
                     *p34 = xC;
                     {
-                        s32 x10 = entry->x10;
+                        x10 = entry->x10;
                         *p40 = x10;
                         *p48 = x10;
                         *p38 = x10;
@@ -376,50 +374,50 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                     break;
                 }
                 default: {
-                    BracketEntry* ep = &entries[entry_idx];
-                    s32 xC = ep->xC;
-                    s32 x14 = ep->x14;
-                    s32 val1 = xC + x14;
+                    xC = lbl_80473AB8[entry_idx].xC;
+                    x14 = lbl_80473AB8[entry_idx].x14;
+                    val1 = xC + x14;
                     *p3C = val1;
                     *p44 = val1;
                     *p34 = val1;
                     {
-                        s32 x10 = ep->x10;
+                        x10 = lbl_80473AB8[entry_idx].x10;
                         *p40 = x10;
                         *p48 = x10;
                         *p38 = x10;
                     }
-                    *p40 = ep->x10 + ep->x18 / 3;
+                    *p40 = lbl_80473AB8[entry_idx].x10 +
+                           lbl_80473AB8[entry_idx].x18 / 3;
                     break;
                 }
                 }
                 break;
             }
         } else {
-            BracketEntry* ep = &entries[entry_idx];
-            s32 x14 = ep->x14;
-            s32* pX18 = &ep->x18;
-            s32 xC = ep->xC;
-            s32 val1 = xC + slot_idx * (x14 / (s32) x3);
+            x14 = lbl_80473AB8[entry_idx].x14;
+            xC = lbl_80473AB8[entry_idx].xC;
+            val1 = xC + slot_idx * (x14 / (s32) x3);
+            pX18 = &lbl_80473AB8[entry_idx].x18;
             *p3C = val1;
             *p44 = val1;
             *p34 = val1;
             {
-                s32 x18 = ep->x18;
-                u8 x2 = ep->x2;
-                s32 x10 = ep->x10;
-                s32 val2 = x10 + x18 - x18 * x2;
+                x18 = lbl_80473AB8[entry_idx].x18;
+                x2 = lbl_80473AB8[entry_idx].x2;
+                x10 = lbl_80473AB8[entry_idx].x10;
+                val2 = x10 + x18 - x18 * x2;
                 *p40 = val2;
                 *p48 = val2;
                 *p38 = val2;
             }
-            *p40 = ep->x10 + *pX18 * ep->x2;
+            *p40 = lbl_80473AB8[entry_idx].x10 +
+                   *pX18 * lbl_80473AB8[entry_idx].x2;
 
             if (*px3 == 1) {
-                u8 tm_x2E = tm->x2E;
+                tm_x2E = tm->x2E;
                 if (tm_x2E == 6) {
                     if (entry_idx == 5 && slot_idx == 1) {
-                        s32 tmp = *p48 + 0x46;
+                        tmp = *p48 + 0x46;
                         *p48 = tmp;
                         *p38 = tmp;
                     }
@@ -427,23 +425,23 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                     if ((entry_idx == 0xA && slot_idx == 0) ||
                         (entry_idx == 0xB && slot_idx == 1))
                     {
-                        s32 tmp = *p48 + 0x3C;
+                        tmp = *p48 + 0x3C;
                         *p48 = tmp;
                         *p38 = tmp;
                     }
                 } else if (tm_x2E == 0x18) {
                     if (entry_idx == 0x17 && slot_idx == 1) {
-                        s32 tmp = *p48 + 0x28;
+                        tmp = *p48 + 0x28;
                         *p48 = tmp;
                         *p38 = tmp;
                     }
                 } else if (tm_x2E == 0x30) {
                     if (entry_idx == 0x2E && slot_idx == 1) {
-                        s32 tmp = *p48 + 0x1E;
+                        tmp = *p48 + 0x1E;
                         *p48 = tmp;
                         *p38 = tmp;
                     } else if (entry_idx == 0x2F && slot_idx == 1) {
-                        s32 tmp = *p48 - 0x1E;
+                        tmp = *p48 - 0x1E;
                         *p48 = tmp;
                         *p38 = tmp;
                     }
@@ -452,17 +450,20 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
         }
     }
 
-    HSD_JObjSetTranslateX(jobj, (f32) *p44);
-    HSD_JObjSetTranslateY(jobj, -(f32) *p48);
-}
-static inline f32 gmTournament_GetBracketSlideYForward(u8* p)
-{
-    return 0.3f * (f32) lbl_804D6630 + (f32) * (s32*) (p + 0x48);
+    HSD_JObjSetTranslateX(jobj,
+                          (f32) lbl_80473AB8[entry_idx].slots[slot_idx].x44);
+    HSD_JObjSetTranslateY(jobj,
+                          -(f32) lbl_80473AB8[entry_idx].slots[slot_idx].x48);
 }
 
-static inline f32 gmTournament_GetBracketSlideYReverse(u8* p)
+static inline f32 gmTournament_GetBracketSlideYForward(BracketEntrySlot* slot)
 {
-    return (f32) * (s32*) (p + 0x48) - 0.3f * (f32) lbl_804D6630;
+    return -(0.3f * (f32) lbl_804D6630 + (f32) slot->x48);
+}
+
+static inline f32 gmTournament_GetBracketSlideYReverse(BracketEntrySlot* slot)
+{
+    return -((f32) slot->x48 - 0.3f * (f32) lbl_804D6630);
 }
 
 void fn_8018B090(HSD_GObj* arg0)
@@ -470,9 +471,6 @@ void fn_8018B090(HSD_GObj* arg0)
     TmData* tm = gm_GetTournamentData();
     s32 var_r24 = 0;
     s32 idx = fn_8018F74C();
-    BracketEntry* base;
-    u8* bb;
-    u8* p;
     s32 i;
 
     switch (tm->cur_option) {
@@ -480,44 +478,51 @@ void fn_8018B090(HSD_GObj* arg0)
         lbl_804D6630 = 0;
         return;
     case 21:
-        base = &lbl_80473AB8[idx];
-        bb = (u8*) base;
-        if (base->x18 != 0) {
-            p = bb;
-            for (i = 0; i < 4; i++, p += 0x2C) {
-                if (p[0x30] != 0) {
-                    HSD_JObj* jobj = (*(HSD_GObj**) (p + 0x2C))->hsd_obj;
-                    if (bb[2] != 0) {
+        if (lbl_80473AB8[idx].x18 != 0) {
+            for (i = 0; i < 4; i++) {
+                if (lbl_80473AB8[idx].slots[i].x30 != 0) {
+                    HSD_JObj* jobj;
+                    HSD_JObj* jobj2;
+                    jobj = lbl_80473AB8[idx].slots[i].x2C->hsd_obj;
+                    jobj2 = jobj;
+                    if (lbl_80473AB8[idx].x2 != 0) {
                         HSD_JObjSetTranslateY(
-                            jobj, -gmTournament_GetBracketSlideYReverse(p));
+                            jobj2, gmTournament_GetBracketSlideYReverse(
+                                       &lbl_80473AB8[idx].slots[i]));
                     } else {
-                        s8 t0 = bb[4];
-                        if (t0 != 1) {
-                            if (t0 >= 1 && t0 < 4) {
-                                if (i <= 1) {
-                                    HSD_JObjSetTranslateY(
-                                        jobj,
-                                        -gmTournament_GetBracketSlideYForward(
-                                            p));
-                                } else {
-                                    HSD_JObjSetTranslateY(
-                                        jobj,
-                                        -gmTournament_GetBracketSlideYReverse(
-                                            p));
-                                }
+                        switch (lbl_80473AB8[idx].x4) {
+                        case 1:
+                            if (i == 0) {
+                                HSD_JObjSetTranslateY(
+                                    jobj2,
+                                    gmTournament_GetBracketSlideYForward(
+                                        &lbl_80473AB8[idx].slots[i]));
                             } else {
                                 HSD_JObjSetTranslateY(
-                                    jobj,
-                                    -gmTournament_GetBracketSlideYForward(p));
+                                    jobj2,
+                                    gmTournament_GetBracketSlideYReverse(
+                                        &lbl_80473AB8[idx].slots[i]));
                             }
-                        } else if (i == 0) {
+                            break;
+                        case 2:
+                        case 3:
+                            if (i <= 1) {
+                                HSD_JObjSetTranslateY(
+                                    jobj2,
+                                    gmTournament_GetBracketSlideYForward(
+                                        &lbl_80473AB8[idx].slots[i]));
+                            } else {
+                                HSD_JObjSetTranslateY(
+                                    jobj2,
+                                    gmTournament_GetBracketSlideYReverse(
+                                        &lbl_80473AB8[idx].slots[i]));
+                            }
+                            break;
+                        default:
                             HSD_JObjSetTranslateY(
-                                jobj,
-                                -gmTournament_GetBracketSlideYForward(p));
-                        } else {
-                            HSD_JObjSetTranslateY(
-                                jobj,
-                                -gmTournament_GetBracketSlideYReverse(p));
+                                jobj2, gmTournament_GetBracketSlideYForward(
+                                           &lbl_80473AB8[idx].slots[i]));
+                            break;
                         }
                     }
                 }
@@ -525,17 +530,19 @@ void fn_8018B090(HSD_GObj* arg0)
         }
         lbl_804D6630 += 1;
         return;
-    case 22:
-        base = &lbl_80473AB8[idx];
-        if (base->x18 != 0) {
+    case 22: {
+        s32 h = lbl_80473AB8[idx].x18;
+        if (h != 0) {
             f32 d;
             lbl_803D9DAC.current.x = 320.0f;
             lbl_803D9DAC.current.y = -240.0f;
             lbl_803D9DAC.current.z = 0.0f;
-            lbl_803D9DAC.target.x = (f32) (base->xC + (base->x14 / 2));
-            lbl_803D9DAC.target.y = -(f32) (base->x10 + (base->x18 / 2));
+            lbl_803D9DAC.target.x =
+                (f32) (lbl_80473AB8[idx].xC + (lbl_80473AB8[idx].x14 / 2));
+            lbl_803D9DAC.target.y = -(f32) (lbl_80473AB8[idx].x10 + (h / 2));
             lbl_803D9DAC.target.z = -150.0f;
-            d = 0.033333f * (lbl_803D9DAC.target.x - lbl_803D9DAC.current.x);
+            d = lbl_803D9DAC.target.x - lbl_803D9DAC.current.x;
+            d = 0.033333f * d;
             if (d < 0.0f) {
                 d = -d;
             }
@@ -551,14 +558,12 @@ void fn_8018B090(HSD_GObj* arg0)
             }
             lbl_803D9DAC.step.z = 1.0f + d;
         }
+    }
         lbl_804D6630 = 0;
         /* fallthrough */
     case 23:
-        base = &lbl_80473AB8[idx];
-        bb = (u8*) base;
-        if (base->x18 != 0) {
-            s32 t5 = lbl_804D6630 / 6;
-            s32 t3 = t5 >> 0x1F;
+        if (lbl_80473AB8[idx].x18 != 0) {
+            s32 amount = lbl_804D6630 / 6;
             lbl_804D6630 += 1;
             if (mn_8022F410(&lbl_803D9DAC.current.x, &lbl_803D9DAC.target.x,
                             lbl_803D9DAC.step.x) < 0)
@@ -589,258 +594,215 @@ void fn_8018B090(HSD_GObj* arg0)
             }
             fn_80190520(lbl_803D9DAC.current.x, lbl_803D9DAC.current.y,
                         lbl_803D9DAC.current.z);
-            if (base->x4 != 1) {
-                p = bb;
-                for (i = 0; i < 4; i++, p += 0x2C) {
-                    if (p[0x30] != 0) {
-                        HSD_JObj* jobj = (*(HSD_GObj**) (p + 0x2C))->hsd_obj;
-                        mn_8022F470((int*) (p + 0x48), (int*) (p + 0x40),
-                                    t5 + t3);
-                        HSD_JObjSetTranslateY(jobj,
-                                              -(f32) * (s32*) (p + 0x48));
+            if (lbl_80473AB8[idx].x4 != 1) {
+                for (i = 0; i < 4; i++) {
+                    if (lbl_80473AB8[idx].slots[i].x30 != 0) {
+                        mn_8022F470((int*) &lbl_80473AB8[idx].slots[i].x48,
+                                    (int*) &lbl_80473AB8[idx].slots[i].x40,
+                                    amount);
+                        HSD_JObjSetTranslateY(
+                            lbl_80473AB8[idx].slots[i].x2C->hsd_obj,
+                            -(f32) lbl_80473AB8[idx].slots[i].x48);
                     }
                 }
                 return;
             }
-            if (bb[0x30] != 0) {
-                *(s32*) (bb + 0x40) = *(s32*) (bb + 0x48);
-            }
-            if (bb[0x5C] != 0) {
-                *(s32*) (bb + 0x6C) = *(s32*) (bb + 0x74);
-            }
-            if (bb[0x88] != 0) {
-                *(s32*) (bb + 0x58 + 0x40) = *(s32*) (bb + 0x58 + 0x48);
-            }
-            if (bb[0x58 + 0x5C] != 0) {
-                *(s32*) (bb + 0x84 + 0x40) = *(s32*) (bb + 0x84 + 0x48);
-                return;
+            for (i = 0; i < 4; i++) {
+                if (lbl_80473AB8[idx].slots[i].x30 != 0) {
+                    lbl_80473AB8[idx].slots[i].x40 =
+                        lbl_80473AB8[idx].slots[i].x48;
+                }
             }
         }
         return;
     case 24:
-        base = &lbl_80473AB8[idx];
-        bb = (u8*) base;
-        if (base->x18 != 0) {
-            s32 sp[10];
-            sp[0] = lbl_803B7C80.unk0;
-            sp[1] = lbl_803B7C80.unk4;
-            sp[2] = lbl_803B7C80.unk8;
-            sp[3] = lbl_803B7C80.unkC;
-            sp[4] = lbl_803B7C80.unk10;
-            sp[5] = lbl_803B7C80.unk14;
-            sp[6] = lbl_803B7C80.unk18;
-            sp[7] = lbl_803B7C80.unk1C;
-            sp[8] = lbl_803B7C80.unk20;
-            sp[9] = lbl_803B7C80.unk24;
+        if (lbl_80473AB8[idx].x18 != 0) {
+            struct lbl_803B7C80_t sp;
+            s32* arr;
+            sp = lbl_803B7C80;
+            arr = sp.v;
             lbl_804D6630 += 1;
-            p = bb;
-            for (i = 0; i < 4; i++, p += 0x2C) {
-                if (p[0x30] != 0) {
-                    HSD_JObj* jobj = (*(HSD_GObj**) (p + 0x2C))->hsd_obj;
-                    if (bb[2] != 0) {
+            for (i = 0; i < 4; i++) {
+                if (lbl_80473AB8[idx].slots[i].x30 != 0) {
+                    HSD_JObj* jobj = lbl_80473AB8[idx].slots[i].x2C->hsd_obj;
+                    if (lbl_80473AB8[idx].x2 != 0) {
                         HSD_JObjSetTranslateY(
-                            jobj, -((f32) * (s32*) (p + 0x40) -
-                                    (0.1f * (f32) sp[lbl_804D6630 % 10])));
+                            jobj, -((f32) lbl_80473AB8[idx].slots[i].x40 -
+                                    (0.1f * (f32) arr[lbl_804D6630 % 10])));
                     } else {
-                        s8 t0 = bb[4];
-                        if (t0 != 1) {
-                            if (t0 >= 1 && t0 < 4) {
-                                if (i <= 1) {
-                                    HSD_JObjSetTranslateY(
-                                        jobj, -((0.1f *
-                                                 (f32) sp[lbl_804D6630 % 10]) +
-                                                (f32) * (s32*) (p + 0x40)));
-                                } else {
-                                    HSD_JObjSetTranslateY(
-                                        jobj,
-                                        -((f32) * (s32*) (p + 0x40) -
-                                          (0.1f *
-                                           (f32) sp[lbl_804D6630 % 10])));
-                                }
+                        switch (lbl_80473AB8[idx].x4) {
+                        case 1:
+                            if (i == 0) {
+                                HSD_JObjSetTranslateY(
+                                    jobj,
+                                    -((0.1f * (f32) arr[lbl_804D6630 % 10]) +
+                                      (f32) lbl_80473AB8[idx].slots[i].x40));
                             } else {
                                 HSD_JObjSetTranslateY(
                                     jobj,
-                                    -((0.1f * (f32) sp[lbl_804D6630 % 10]) +
-                                      (f32) * (s32*) (p + 0x40)));
+                                    -((f32) lbl_80473AB8[idx].slots[i].x40 -
+                                      (0.1f * (f32) arr[lbl_804D6630 % 10])));
                             }
-                        } else if (i == 0) {
+                            break;
+                        case 2:
+                        case 3:
+                            if (i <= 1) {
+                                HSD_JObjSetTranslateY(
+                                    jobj,
+                                    -((0.1f * (f32) arr[lbl_804D6630 % 10]) +
+                                      (f32) lbl_80473AB8[idx].slots[i].x40));
+                            } else {
+                                HSD_JObjSetTranslateY(
+                                    jobj,
+                                    -((f32) lbl_80473AB8[idx].slots[i].x40 -
+                                      (0.1f * (f32) arr[lbl_804D6630 % 10])));
+                            }
+                            break;
+                        default:
                             HSD_JObjSetTranslateY(
-                                jobj, -((0.1f * (f32) sp[lbl_804D6630 % 10]) +
-                                        (f32) * (s32*) (p + 0x40)));
-                        } else {
-                            HSD_JObjSetTranslateY(
-                                jobj, -((f32) * (s32*) (p + 0x40) -
-                                        (0.1f * (f32) sp[lbl_804D6630 % 10])));
+                                jobj, -((0.1f * (f32) arr[lbl_804D6630 % 10]) +
+                                        (f32) lbl_80473AB8[idx].slots[i].x40));
+                            break;
                         }
                     }
                 }
             }
-            return;
         }
         return;
     case 25:
-        base = &lbl_80473AB8[idx];
-        bb = (u8*) base;
-        if (bb[0x30] != 0) {
-            *(s32*) (bb + 0x48) = *(s32*) (bb + 0x40);
-        }
-        if (bb[0x5C] != 0) {
-            *(s32*) (bb + 0x74) = *(s32*) (bb + 0x6C);
-        }
-        if (bb[0x88] != 0) {
-            *(s32*) (bb + 0x58 + 0x48) = *(s32*) (bb + 0x58 + 0x40);
-        }
-        if (bb[0x58 + 0x5C] != 0) {
-            *(s32*) (bb + 0x84 + 0x48) = *(s32*) (bb + 0x84 + 0x40);
-            return;
+        for (i = 0; i < 4; i++) {
+            if (lbl_80473AB8[idx].slots[i].x30 != 0) {
+                lbl_80473AB8[idx].slots[i].x48 =
+                    lbl_80473AB8[idx].slots[i].x40;
+            }
         }
         return;
-    case 32:
-        base = &lbl_80473AB8[idx];
-        bb = (u8*) base;
-        if (base->x18 != 0) {
-            fn_80190520((f32) (base->xC + (base->x14 / 2)),
-                        -(f32) (base->x10 + (base->x18 / 2)), -150.0f);
-            if (bb[0x4C] == 0) {
-                *(s32*) (bb + 0x3C) = base->xC + (base->x14 / 2);
-            } else {
-                s32 t = *(s32*) (bb + 0x40);
-                *(s32*) (bb + 0x40) = *(s32*) (bb + 0x38);
-                *(s32*) (bb + 0x38) = t;
-            }
-            if (bb[0x78] == 0) {
-                *(s32*) (bb + 0x68) = base->xC + (base->x14 / 2);
-            } else {
-                s32 t = *(s32*) (bb + 0x6C);
-                *(s32*) (bb + 0x6C) = *(s32*) (bb + 0x64);
-                *(s32*) (bb + 0x64) = t;
-            }
-            if (bb[0x58 + 0x78] == 0) {
-                *(s32*) (bb + 0x58 + 0x3C) = base->xC + (base->x14 / 2);
-            } else {
-                s32 t = *(s32*) (bb + 0x58 + 0x40);
-                *(s32*) (bb + 0x58 + 0x40) = *(s32*) (bb + 0x58 + 0x38);
-                *(s32*) (bb + 0x58 + 0x38) = t;
-            }
-            if (bb[0x84 + 0x78] == 0) {
-                *(s32*) (bb + 0x84 + 0x3C) = base->xC + (base->x14 / 2);
-            } else {
-                s32 t = *(s32*) (bb + 0x84 + 0x40);
-                *(s32*) (bb + 0x84 + 0x40) = *(s32*) (bb + 0x84 + 0x38);
-                *(s32*) (bb + 0x84 + 0x38) = t;
+    case 32: {
+        s32 h = lbl_80473AB8[idx].x18;
+        if (h != 0) {
+            fn_80190520(
+                (f32) (lbl_80473AB8[idx].xC + (lbl_80473AB8[idx].x14 / 2)),
+                -(f32) (lbl_80473AB8[idx].x10 + (h / 2)), -150.0f);
+            for (i = 0; i < 4; i++) {
+                if (lbl_80473AB8[idx].slots[i].x4C == 0) {
+                    lbl_80473AB8[idx].slots[i].x3C =
+                        lbl_80473AB8[idx].xC + (lbl_80473AB8[idx].x14 / 2);
+                } else {
+                    s32 t = lbl_80473AB8[idx].slots[i].x40;
+                    lbl_80473AB8[idx].slots[i].x40 =
+                        lbl_80473AB8[idx].slots[i].x38;
+                    lbl_80473AB8[idx].slots[i].x38 = t;
+                }
             }
         } else {
             fn_801904D0();
         }
+    }
         tm->cur_option = 0x21;
         return;
     case 33:
-        base = &lbl_80473AB8[idx];
-        bb = (u8*) base;
-        if (base->x18 != 0) {
-            p = bb;
-            for (i = 0; i < 4; i++, p += 0x2C) {
-                if (p[0x30] == 0) {
+        if (lbl_80473AB8[idx].x18 != 0) {
+            for (i = 0; i < 4; i++) {
+                if (lbl_80473AB8[idx].slots[i].x30 == 0) {
                     var_r24 += 1;
                 } else {
-                    s32 t5 = *(s32*) (p + 0x4C);
+                    u8 t5 = lbl_80473AB8[idx].slots[i].x4C;
                     if (t5 == 0) {
                         lbl_804D6634 = i;
-                        if (base->x4 != 1) {
-                            HSD_JObj* jobj =
-                                (*(HSD_GObj**) (p + 0x2C))->hsd_obj;
-                            s32 v;
-                            mn_8022F470((int*) (p + 0x44), (int*) (p + 0x3C),
+                        if (lbl_80473AB8[idx].x4 != 1) {
+                            mn_8022F470((int*) &lbl_80473AB8[idx].slots[i].x44,
+                                        (int*) &lbl_80473AB8[idx].slots[i].x3C,
                                         2);
-                            v = *(s32*) (p + 0x44);
-                            if (v == *(s32*) (p + 0x3C)) {
+                            if (lbl_80473AB8[idx].slots[i].x44 ==
+                                lbl_80473AB8[idx].slots[i].x3C)
+                            {
                                 var_r24 += 1;
                             }
-                            HSD_JObjSetTranslateX(jobj, (f32) v);
+                            HSD_JObjSetTranslateX(
+                                lbl_80473AB8[idx].slots[i].x2C->hsd_obj,
+                                (f32) lbl_80473AB8[idx].slots[i].x44);
                         } else {
                             var_r24 += 1;
                         }
                     } else {
-                        HSD_JObj* jobj = (*(HSD_GObj**) (p + 0x2C))->hsd_obj;
-                        s32 v;
-                        mn_8022F470((int*) (p + 0x48), (int*) (p + 0x40),
+                        mn_8022F470((int*) &lbl_80473AB8[idx].slots[i].x48,
+                                    (int*) &lbl_80473AB8[idx].slots[i].x40,
                                     t5 + ((t5 + 1) / 2));
-                        v = *(s32*) (p + 0x48);
-                        if (v == *(s32*) (p + 0x40)) {
+                        if (lbl_80473AB8[idx].slots[i].x48 ==
+                            lbl_80473AB8[idx].slots[i].x40)
+                        {
                             var_r24 += 1;
                         }
-                        HSD_JObjSetTranslateY(jobj, -(f32) v);
+                        HSD_JObjSetTranslateY(
+                            lbl_80473AB8[idx].slots[i].x2C->hsd_obj,
+                            -(f32) lbl_80473AB8[idx].slots[i].x48);
                     }
                 }
             }
             if (var_r24 == 4) {
-                u8* w = bb + lbl_804D6634 * 0x2C;
-                *(s32*) (w + 0x3C) =
-                    *(s16*) &lbl_803D9D20.x0[tm->entrants * 4 + 0xFC];
-                *(s32*) (w + 0x40) =
-                    *(s16*) &lbl_803D9D20.x0[tm->entrants * 4 + 0xFE];
+                lbl_80473AB8[idx].slots[lbl_804D6634].x3C =
+                    lbl_803D9E1C[tm->entrants][0];
+                lbl_80473AB8[idx].slots[lbl_804D6634].x40 =
+                    lbl_803D9E1C[tm->entrants][1];
                 tm->cur_option = 0x22;
-                return;
             }
         } else {
             tm->cur_option = 0x22;
-            return;
         }
         return;
     case 34:
-        base = &lbl_80473AB8[idx];
-        bb = (u8*) base;
-        if (base->x18 != 0) {
+        if (lbl_80473AB8[idx].x18 != 0) {
             if (tm->x33 == 5) {
-                u8* w = bb + lbl_804D6634 * 0x2C;
-                HSD_JObj* jobj = (*(HSD_GObj**) (w + 0x2C))->hsd_obj;
-                mn_8022F470((int*) (w + 0x44), (int*) (w + 0x3C), 2);
-                HSD_JObjSetTranslateX(jobj, (f32) * (s32*) (w + 0x44));
-                if (*(s32*) (w + 0x44) == *(s32*) (w + 0x3C)) {
+                mn_8022F470((int*) &lbl_80473AB8[idx].slots[lbl_804D6634].x44,
+                            (int*) &lbl_80473AB8[idx].slots[lbl_804D6634].x3C,
+                            2);
+                HSD_JObjSetTranslateX(
+                    lbl_80473AB8[idx].slots[lbl_804D6634].x2C->hsd_obj,
+                    (f32) lbl_80473AB8[idx].slots[lbl_804D6634].x44);
+                if (lbl_80473AB8[idx].slots[lbl_804D6634].x44 ==
+                    lbl_80473AB8[idx].slots[lbl_804D6634].x3C)
+                {
                     tm->cur_option = 0x23;
-                    return;
                 }
             } else {
                 lbl_804D6630 = 0;
                 tm->cur_option = 0x24;
-                return;
             }
         } else {
             lbl_804D6630 = 0;
             tm->cur_option = 0x24;
-            return;
         }
         return;
     case 35:
-        base = &lbl_80473AB8[idx];
-        bb = (u8*) base;
-        if (base->x18 != 0) {
+        if (lbl_80473AB8[idx].x18 != 0) {
             if (tm->x33 == 5) {
-                u8* w = bb + lbl_804D6634 * 0x2C;
-                HSD_JObj* jobj = (*(HSD_GObj**) (w + 0x2C))->hsd_obj;
-                mn_8022F470((int*) (w + 0x48), (int*) (w + 0x40), 2);
-                HSD_JObjSetTranslateY(jobj, -(f32) * (s32*) (w + 0x48));
-                if (*(s32*) (w + 0x48) == *(s32*) (w + 0x40)) {
+                mn_8022F470((int*) &lbl_80473AB8[idx].slots[lbl_804D6634].x48,
+                            (int*) &lbl_80473AB8[idx].slots[lbl_804D6634].x40,
+                            2);
+                HSD_JObjSetTranslateY(
+                    lbl_80473AB8[idx].slots[lbl_804D6634].x2C->hsd_obj,
+                    -(f32) lbl_80473AB8[idx].slots[lbl_804D6634].x48);
+                if (lbl_80473AB8[idx].slots[lbl_804D6634].x48 ==
+                    lbl_80473AB8[idx].slots[lbl_804D6634].x40)
+                {
                     tm->x33 = 6;
-                    return;
                 }
             } else {
                 lbl_804D6630 = 0;
                 tm->cur_option = 0x24;
-                return;
             }
         } else {
             lbl_804D6630 = 0;
             tm->cur_option = 0x24;
-            return;
         }
         return;
-    case 36:
-        base = &lbl_80473AB8[idx];
-        if (base->x18 != 0) {
+    case 36: {
+        s32 h = lbl_80473AB8[idx].x18;
+        if (h != 0) {
             f32 d;
-            lbl_803D9DAC.current.x = (f32) (base->xC + (base->x14 / 2));
-            lbl_803D9DAC.current.y = -(f32) ((base->x18 / 2) + base->x10);
+            lbl_803D9DAC.current.x =
+                (f32) (lbl_80473AB8[idx].xC + (lbl_80473AB8[idx].x14 / 2));
+            lbl_803D9DAC.current.y = -(f32) ((h / 2) + lbl_80473AB8[idx].x10);
             lbl_803D9DAC.current.z = -150.0f;
             lbl_803D9DAC.target.x = 320.0f;
             lbl_803D9DAC.target.y = -240.0f;
@@ -861,12 +823,11 @@ void fn_8018B090(HSD_GObj* arg0)
             }
             lbl_803D9DAC.step.z = d;
         }
+    }
         tm->cur_option = 0x25;
         return;
     case 37:
-        base = &lbl_80473AB8[idx];
-        (void) base;
-        if (base->x18 == 0) {
+        if (lbl_80473AB8[idx].x18 == 0) {
             lbl_804D6630 = 0x78;
         }
         if (lbl_804D6630 < 0x78) {
@@ -886,9 +847,7 @@ void fn_8018B090(HSD_GObj* arg0)
         tm->cur_option = 0x26;
         return;
     case 38:
-        base = &lbl_80473AB8[idx];
-        bb = (u8*) base;
-        if (base->x18 == 0) {
+        if (lbl_80473AB8[idx].x18 == 0) {
             lbl_804D6630 = 0x78;
         }
         if (lbl_804D6630 < 0x78) {
@@ -898,38 +857,38 @@ void fn_8018B090(HSD_GObj* arg0)
         {
             s32 r = 0;
             BracketEntry* src;
-            u8* sb;
-            u8* pick;
-            if (bb[0x4C] != 0) {
-                r = 1;
-                if (bb[0x78] != 0) {
-                    r = 2;
-                    if (bb[0xA4] != 0) {
-                        r = 3;
-                        if (bb[0x58 + 0x78] != 0) {
-                            r = 4;
-                        }
-                    }
+            u8* next_entry;
+            u8* next_slot;
+            for (i = 0; i < 4; i++) {
+                if (lbl_80473AB8[idx].slots[i].x4C == 0) {
+                    break;
                 }
+                r = i + 1;
             }
             src = &lbl_80473AB8[fn_8018F74C()];
-            sb = (u8*) src;
-            sb[1] = 0;
-            ((u8*) &lbl_80473AB8[sb[5]] + sb[6] * 0x2C)[0x30] = 1;
-            pick = sb + r * 0x2C;
-            ((u8*) &lbl_80473AB8[sb[5]] + sb[6] * 0x2C)[0x50] = pick[0x50];
-            ((u8*) &lbl_80473AB8[sb[5]] + sb[6] * 0x2C)[0x51] = pick[0x51];
-            ((u8*) &lbl_80473AB8[sb[5]] + sb[6] * 0x2C)[0x52] = pick[0x52];
-            ((u8*) &lbl_80473AB8[sb[5]] + sb[6] * 0x2C)[0x4D] = pick[0x4D];
-            ((u8*) &lbl_80473AB8[sb[5]] + sb[6] * 0x2C)[0x4E] = pick[0x4E];
-            ((u8*) &lbl_80473AB8[sb[5]] + sb[6] * 0x2C)[0x4F] = pick[0x4F];
-            pick[0x30] = 0;
-            pick[0x4E] = 3;
+            src->x1 = 0;
+            next_entry = &src->x5;
+            next_slot = &src->x6;
+            lbl_80473AB8[*next_entry].slots[*next_slot].x30 = 1;
+            lbl_80473AB8[*next_entry].slots[*next_slot].x50 =
+                src->slots[r].x50;
+            lbl_80473AB8[*next_entry].slots[*next_slot].x51 =
+                src->slots[r].x51;
+            lbl_80473AB8[*next_entry].slots[*next_slot].x52 =
+                src->slots[r].x52;
+            lbl_80473AB8[*next_entry].slots[*next_slot].x4D =
+                src->slots[r].x4D;
+            lbl_80473AB8[*next_entry].slots[*next_slot].x4E =
+                src->slots[r].x4E;
+            lbl_80473AB8[*next_entry].slots[*next_slot].x4F =
+                src->slots[r].x4F;
+            src->slots[r].x30 = 0;
+            src->slots[r].x4E = 3;
             tm->cur_option = 0x27;
         }
         break;
     }
-    PAD_STACK(0x48);
+    PAD_STACK(0x30);
 }
 
 /* 3D9EE8 */ static char lbl_803D9EE8[] = {
