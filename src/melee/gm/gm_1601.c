@@ -1256,10 +1256,10 @@ void fn_80162068(MatchEnd* match_end)
 }
 void fn_80162170(MatchEnd* arg0)
 {
-    MatchPlayerData* p;
-    s32 i;
-    s32 j;
     MatchEnd* cur;
+    s32 i;
+    MatchPlayerData* p;
+    s32 j;
     MatchPlayerData* q;
     s32 play_time;
 
@@ -4472,20 +4472,7 @@ static inline s8* fn_801695BC_rand_color(s32 ncolors, s8* colors)
     return &colors[HSD_Randi(ncolors)];
 }
 
-static inline s32 fn_801695BC_get_color(s32 i, u8* colors)
-{
-    return (s8) colors[i];
-}
-
-static inline void fn_801695BC_init_colors(u8 ncolors, s8* colors)
-{
-    s32 i;
-    for (i = 0; i < ncolors; i++) {
-        colors[i] = (s8) i;
-    }
-}
-
-s32 fn_801695BC(u8 arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
+void fn_801695BC(u8 arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
 {
     s32 tmp2;
     s8 tmp;
@@ -4498,7 +4485,9 @@ s32 fn_801695BC(u8 arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
     ncolors = gm_80169238_noinline(arg0);
     if ((s8) arg0 != 0x21) {
         ncolors_s32 = ncolors;
-        fn_801695BC_init_colors(ncolors, colors);
+        for (i = 0; i < ncolors; i++) {
+            colors[i] = (s8) i;
+        }
         if ((s8) arg1 == (s8) arg0) {
             colors[(s8) arg2] = -1;
         }
@@ -4509,22 +4498,19 @@ s32 fn_801695BC(u8 arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
             colors[i] = tmp;
         }
         color_i = 0;
-        {
-            u8* p;
-            for (i = 0, p = arg3; (s8) arg4[i] != -2; i++, p++) {
-                if ((s8) arg0 == (s8) *p) {
-                    if (colors[color_i % ncolors_s32] == -1) {
-                        color_i += 1;
-                    }
-                    arg4[i] = colors[color_i % ncolors_s32];
+        for (i = 0; (s8) arg4[i] != -2; i++) {
+            if ((s8) arg0 == (s8) arg3[i]) {
+                if (colors[color_i % ncolors_s32] == -1) {
                     color_i += 1;
                 }
+                arg4[i] = colors[color_i % ncolors_s32];
+                color_i += 1;
             }
         }
         for (i = 1; (s8) arg4[i] != -2; i++) {
             if ((s8) arg0 == (s8) arg3[i] && (s8) arg0 == (s8) arg3[i - 1]) {
                 if (HSD_Randi(2) != 0) {
-                    tmp2 = fn_801695BC_get_color(i, arg4);
+                    tmp2 = (s8) arg4[i];
                     arg4[i] = arg4[i - 1];
                     arg4[i - 1] = tmp2;
                 }

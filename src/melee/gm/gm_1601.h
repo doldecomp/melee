@@ -209,7 +209,7 @@
 /* 169540 */ void* gm_80169540(void);
 /* 169550 */ void fn_80169550(int slot);
 /* 169574 */ void fn_80169574(ssize_t size, s8* buf);
-/* 1695BC */ long fn_801695BC(u8, u8, u8, u8*, u8*);
+/* 1695BC */ void fn_801695BC(u8, u8, u8, u8*, u8*);
 /* 1697FC */ void fn_801697FC(signed char, signed char, signed char,
                               signed char, signed char*);
 /* 16989C */ void fn_8016989C(unsigned char*, u8, u8, u8*, u8*);
