@@ -425,16 +425,16 @@ struct CSSDoor {
 };
 
 struct CSSTagData {
-    TextGlyphTexture* text;    // 0x00
-    TextGlyphTexture* name_ls; // 0x04
-    float x8;                  // 0x08
-    float scroll_amt;          // 0x0C
-    float scroll_force;        // 0x10
-    int timer;                 // 0x14
-    u8 next_tag;               // 0x18
-    u8 port;                   // 0x19
-    u8 state;                  // 0x1A
-    u8 use_tag;                // 0x1B
+    HSD_Text* text;     // 0x00
+    HSD_Text* name_ls;  // 0x04
+    float x8;           // 0x08
+    float scroll_amt;   // 0x0C
+    float scroll_force; // 0x10
+    int timer;          // 0x14
+    u8 next_tag;        // 0x18
+    u8 port;            // 0x19
+    u8 state;           // 0x1A
+    u8 use_tag;         // 0x1B
 };
 
 struct CSSTag {
