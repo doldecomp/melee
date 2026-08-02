@@ -1,6 +1,7 @@
 #include "gmresult.h"
 
 #include "gm/types.h"
+#include "lb/lb_013B.h"
 
 /// @todo .sdata order hack
 static void order_sdata(void)

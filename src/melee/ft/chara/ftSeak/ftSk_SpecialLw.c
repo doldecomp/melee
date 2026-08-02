@@ -1,6 +1,5 @@
 #include "ftSeak/ftSk_SpecialLw.h"
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -12,10 +11,9 @@
 #include "ftCommon/inlines.h"
 #include "ftZelda/ftZd_SpecialLw.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <math.h>
-#include <baselib/gobj.h>
 
 static MotionFlags const ftSk_MF_SpecialLw_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus |

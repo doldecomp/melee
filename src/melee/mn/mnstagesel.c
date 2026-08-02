@@ -6,6 +6,8 @@
 
 #include "placeholder.h"
 
+#include "lb/lb_013B.h"
+
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -25,7 +27,6 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/lblanguage.h>
-#include <melee/lb/lbspdisplay.h>
 #include <melee/lb/types.h>
 #include <melee/mn/mnmain.h>
 

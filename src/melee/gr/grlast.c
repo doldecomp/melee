@@ -1,6 +1,7 @@
 #include "grlast.h"
 
 #include "baselib/psstructs.h"
+#include "lb/lb_00F9.h"
 
 #include <math.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -19,7 +20,6 @@
 #include <melee/gr/inlines.h>
 #include <melee/gr/stage.h>
 #include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbspdisplay.h>
 #include <melee/lb/lbvector.h>
 
 /* 21A620 */ static void grLast_OnDemoInit(enum_t);

@@ -9,11 +9,11 @@
 #include "db/db.h"
 #include "gm/gmscdata.h"
 #include "if/ifcoget.h"
+#include "lb/lb_013B.h"
 #include "lb/lb_0195.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcardgame.h"
 #include "lb/lbheap.h"
-#include "lb/lbspdisplay.h"
 
 #include <dolphin/os/OSThread.h>
 #include <baselib/controller.h>
@@ -22,7 +22,6 @@
 #include <baselib/hsd_392C.h>
 #include <baselib/initialize.h>
 #include <baselib/leak.h>
-#include <baselib/particle.h>
 #include <baselib/perf.h>
 #include <baselib/sobjlib.h>
 

@@ -13,7 +13,7 @@
 #include "cm/camera.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbvector.h"
 #include "lb/types.h"
 #include "mp/mplib.h"

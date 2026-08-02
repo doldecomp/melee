@@ -17,14 +17,15 @@
 #include "gr/types.h"
 #include "it/items/itkyasarin.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
-#include "lb/lbspdisplay.h"
 #include "mp/mplib.h"
 #include "sysdolphin/baselib/gobjgxlink.h"
 #include "sysdolphin/baselib/gobjproc.h"
 #include "sysdolphin/baselib/random.h"
 
 #include <baselib/jobj.h>
+
 GrJoint grI2_803E4A60[] = {
     { 0, 1, 1 },  { 12, 3, 1 },  { 13, 4, 1 },  { 14, 15, 0 }, { 3, 5, 0 },
     { 4, 6, 0 },  { 5, 7, 0 },   { 6, 8, 0 },   { 7, 9, 0 },   { 8, 10, 0 },

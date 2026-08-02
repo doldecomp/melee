@@ -84,6 +84,7 @@
 #include "it/itzako.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbdvd.h"
 #include "lb/lbshadow.h"

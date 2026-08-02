@@ -15,6 +15,8 @@
 #include "gr/stage.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
+#include "lb/lb_013B.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbshadow.h"
@@ -24,7 +26,6 @@
 #include "pl/player.h"
 #include "sc/types.h"
 #include "ty/toy.h"
-#include "ty/tylist.h"
 
 #include "vi/forward.h"
 

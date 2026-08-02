@@ -1,46 +1,47 @@
 #include "gmresultplayer.h"
 
+#include "gm_1601.h"
+#include "gm_1A45.h"
 #include "gm_unsplit.h"
+#include "gmresult.h"
 #include "math.h"
 #include "placeholder.h"
+#include "types.h"
 
 #include "cm/camera.h"
+#include "ef/efasync.h"
+#include "ef/eflib.h"
 
-#include "gm/forward.h"
+#include "forward.h"
 
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/displayfunc.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/mobj.h>
-#include <sysdolphin/baselib/mtx.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/tobj.h>
-#include <melee/ef/efasync.h>
-#include <melee/ef/eflib.h>
-#include <melee/ft/ftdemo.h>
-#include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_1A45.h>
-#include <melee/gm/gmresult.h>
-#include <melee/gm/types.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/stage.h>
-#include <melee/if/ifcoget.h>
-#include <melee/it/item.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbbgflash.h>
-#include <melee/lb/lbspdisplay.h>
-#include <melee/mn/mnmain.h>
-#include <melee/mp/mpcoll.h>
-#include <melee/pl/player.h>
-#include <melee/sc/types.h>
+#include "ft/ftdemo.h"
+#include "gr/ground.h"
+#include "gr/stage.h"
+#include "if/ifcoget.h"
+#include "it/item.h"
+#include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
+#include "lb/lbarchive.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lbbgflash.h"
+#include "lb/lbspdisplay.h"
+#include "mn/mnmain.h"
+#include "mp/mpcoll.h"
+#include "pl/player.h"
+#include "sc/types.h"
+
+#include <baselib/aobj.h>
+#include <baselib/cobj.h>
+#include <baselib/controller.h>
+#include <baselib/displayfunc.h>
+#include <baselib/dobj.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
+#include <baselib/jobj.h>
+#include <baselib/mobj.h>
+#include <baselib/random.h>
+#include <baselib/tobj.h>
 
 extern ResultsData lbl_8046DBE8;
 

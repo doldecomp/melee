@@ -6,7 +6,7 @@
 #include "inlines.h"
 #include "types.h"
 
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>

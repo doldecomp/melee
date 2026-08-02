@@ -7,7 +7,6 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0852.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0D4D.h"
 #include "ft/ftanim.h"
@@ -27,7 +26,7 @@
 
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_013B.h"
 #include "mn/types.h"
 #include "pl/player.h"
 #include "pl/plbonuslib.h"

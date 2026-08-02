@@ -51,13 +51,31 @@ melee/lb/lbshadow.c:
 	.sdata      start:0x804D3728 end:0x804D3740
 	.sdata2     start:0x804D7B30 end:0x804D7BA0
 
+melee/lb/lb_00F9.c:
+	.text       start:0x8000F9F8 end:0x80011AC4
+	.rodata     start:0x803B7280 end:0x803B72A8
+	.data       start:0x803BA150 end:0x803BA1C0
+	.sdata      start:0x804D3740 end:0x804D3750
+	.sbss       start:0x804D63A0 end:0x804D63C0
+	.sdata2     start:0x804D7BA0 end:0x804D7C08
+
 melee/lb/lbspdisplay.c:
-	.text       start:0x8000F9F8 end:0x80014ABC
-	.rodata     start:0x803B7280 end:0x803B72C0
-	.data       start:0x803BA150 end:0x803BA2C0
-	.sdata      start:0x804D3740 end:0x804D3778
-	.sbss       start:0x804D63A0 end:0x804D63C8
-	.sdata2     start:0x804D7BA0 end:0x804D7C80
+	.text       start:0x80011AC4 end:0x80013BB0
+	.rodata     start:0x803B72A8 end:0x803B72C0
+	.data       start:0x803BA1C0 end:0x803BA248
+	.sdata      start:0x804D3750 end:0x804D3760
+	.sdata2     start:0x804D7C08 end:0x804D7C50
+
+melee/lb/lb_013B.c:
+	.text       start:0x80013BB0 end:0x80014638
+	.data       start:0x803BA248 end:0x803BA2C0
+	.sbss       start:0x804D63C0 end:0x804D63C8
+	.sdata2     start:0x804D7C50 end:0x804D7C70
+
+melee/lb/lb_0146.c:
+	.text       start:0x80014638 end:0x80014ABC
+	.sdata      start:0x804D3760 end:0x804D3778
+	.sdata2     start:0x804D7C70 end:0x804D7C80
 
 melee/lb/lbarq.c:
 	.text       start:0x80014ABC end:0x80014E24

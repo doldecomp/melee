@@ -8,7 +8,7 @@
 
 #include <platform.h>
 
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <baselib/forward.h>
 

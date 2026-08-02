@@ -19,7 +19,6 @@
 #include "ft/ft_0DF0.h"
 #include "ft/ftchangeparam.h"
 #include "ft/ftcolanim.h"
-#include "ft/ftmaterial.h"
 #include "ft/ftmetal.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Damage.h"
@@ -37,7 +36,7 @@
 #include "it/items/itfflowerflame.h"
 #include "it/items/itrabbitc.h"
 #include "it/items/itsword.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_013B.h"
 
 #include "mp/forward.h"
 
@@ -48,7 +47,6 @@
 
 #include <math.h>
 #include <trigf.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>

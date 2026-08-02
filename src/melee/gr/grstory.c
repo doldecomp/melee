@@ -11,7 +11,7 @@
 #include "it/it_26B1.h"
 #include "it/items/itheiho.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <baselib/gobjproc.h>
 #include <baselib/random.h>

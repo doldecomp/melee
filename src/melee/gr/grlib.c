@@ -5,8 +5,6 @@
 #include "ground.h"
 #include "grrcruise.h"
 
-#include <placeholder.h>
-
 #include "baselib/forward.h"
 
 #include "baselib/psappsrt.h"
@@ -17,15 +15,15 @@
 #include "gr/types.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "lb/types.h" // IWYU pragma: keep
 #include "sc/types.h"
 
 #include <math.h>
+#include <baselib/generator.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
-#include <baselib/particle.h>
 
 /* 1C9BC8 */ static void grLib_801C9BC8(HSD_GObj*);
 /* 1C9C40 */ static void grLib_801C9C40(HSD_GObj*);

@@ -5,7 +5,6 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
@@ -29,7 +28,7 @@
 #include "lb/forward.h"
 
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <baselib/forward.h>
 

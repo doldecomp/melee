@@ -5,7 +5,6 @@
 
 #include "cm/camera.h"
 #include "ft/ft_0C88.h"
-#include "ft/ft_0C8C.h"
 #include "ft/ftafterimage.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
@@ -14,9 +13,10 @@
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_09F4.h"
 #include "ftCommon/ftCo_0A01.h"
+#include "lb/lb_00F9.h"
+#include "lb/lb_0146.h"
 #include "lb/lbcollision.h"
 #include "lb/lbgx.h"
-#include "lb/lbspdisplay.h"
 
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>

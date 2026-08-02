@@ -10,6 +10,7 @@
 #include "gm/forward.h"
 
 #include "it/itspawn.h"
+#include "lb/lb_00F9.h"
 
 #include <math.h>
 #include <sysdolphin/baselib/controller.h>
@@ -38,7 +39,6 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbbgflash.h>
 #include <melee/lb/lbrefract.h>
-#include <melee/lb/lbspdisplay.h>
 #include <melee/lb/lbtime.h>
 #include <melee/mn/types.h>
 #include <melee/mp/mpcoll.h>
