@@ -186,17 +186,55 @@ static void order_data(void)
     (void) "!(jobj->flags & JOBJ_USE_QUATERNION)";
 }
 
+static inline void un_8031FD18_SetupCamera(void)
+{
+    HSD_CObj* cobj;
+    HSD_GObj* camera_gobj;
+
+    camera_gobj = GObj_Create(0x13, 0x14, 0);
+    cobj =
+        lb_80013B14((HSD_CameraDescPerspective*) un_804D6FE0->cameras->desc);
+    HSD_GObjObject_80390A70(camera_gobj, HSD_GObj_804D784B, cobj);
+    GObj_SetupGXLinkMax(camera_gobj,
+                        (void (*)(HSD_GObj*, int))(Event) fn_8031FB90, 8);
+    HSD_CObjAddAnim(cobj, un_804D6FE0->cameras->anims[0]);
+    HSD_CObjReqAnim(cobj, 0.0f);
+    HSD_CObjAnim(cobj);
+    HSD_GObj_SetupProc(camera_gobj, fn_8031FC30, 0);
+}
+
+static inline void un_8031FD18_SetupKoopa(void)
+{
+    HSD_GObj* koopa_gobj;
+    HSD_JObj* jobj;
+
+    koopa_gobj = GObj_Create(0xE, 0xF, 0);
+    jobj = HSD_JObjLoadJoint(un_804D6FEC);
+    HSD_GObjObject_80390A70(koopa_gobj, HSD_GObj_804D7849, jobj);
+    GObj_SetupGXLink(koopa_gobj, HSD_GObj_JObjCallback, 0xB, 0);
+
+    HSD_JObjSetScaleX(jobj, 0.55f);
+    HSD_JObjSetScaleY(jobj, 0.55f);
+    HSD_JObjSetScaleZ(jobj, 0.55f);
+
+    lb_8000C1C0(jobj, un_804D6FF0);
+    lb_8000C290(jobj, un_804D6FF0);
+    HSD_GObj_SetupProc(koopa_gobj, un_8031F9B4, 0);
+}
+
+/// @todo Only differs by callee-saved allocation in the head/loop cluster.
 void un_8031FD18_OnEnter(void* arg)
 {
     u8* input = arg;
     u8 char_index;
-    HSD_CObj* cobj;
-    HSD_GObj* gobj;
+    HSD_GObj* stand_gobj;
     HSD_JObj* jobj;
     HSD_JObj* child;
-    HSD_Fog* fog;
-    HSD_LObj* lobj;
     f32 scale;
+    HSD_Fog* fog;
+    HSD_GObj* fog_gobj;
+    HSD_LObj* lobj;
+    HSD_GObj* light_gobj;
     char pad[24];
 
     un_804D6FFC = input[0];
@@ -219,16 +257,7 @@ void un_8031FD18_OnEnter(void* arg)
     Toy_803124BC();
     un_804D6FE8 = lbArchive_LoadSymbols(gm_80160438(char_index), NULL);
 
-    gobj = GObj_Create(0x13, 0x14, 0);
-    cobj =
-        lb_80013B14((HSD_CameraDescPerspective*) un_804D6FE0->cameras->desc);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
-    GObj_SetupGXLinkMax(gobj, (void (*)(HSD_GObj*, int))(Event) fn_8031FB90,
-                        8);
-    HSD_CObjAddAnim(cobj, un_804D6FE0->cameras->anims[0]);
-    HSD_CObjReqAnim(cobj, 0.0f);
-    HSD_CObjAnim(cobj);
-    HSD_GObj_SetupProc(gobj, fn_8031FC30, 0);
+    un_8031FD18_SetupCamera();
 
     un_8031FD18_SetupScene();
     Stage_802251E8(St_Kind_Last, 0);
@@ -237,24 +266,13 @@ void un_8031FD18_OnEnter(void* arg)
     Stage_8022524C();
     Stage_8022532C(St_Kind_Last, 0x19);
 
-    gobj = GObj_Create(0xE, 0xF, 0);
-    jobj = HSD_JObjLoadJoint(un_804D6FEC);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
-    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
+    un_8031FD18_SetupKoopa();
 
-    HSD_JObjSetScaleX(jobj, 0.55f);
-    HSD_JObjSetScaleY(jobj, 0.55f);
-    HSD_JObjSetScaleZ(jobj, 0.55f);
-
-    lb_8000C1C0(jobj, un_804D6FF0);
-    lb_8000C290(jobj, un_804D6FF0);
-    HSD_GObj_SetupProc(gobj, un_8031F9B4, 0);
-
-    gobj = GObj_Create(0xE, 0xF, 0);
+    stand_gobj = GObj_Create(0xE, 0xF, 0);
     jobj = HSD_JObjLoadJoint(un_804D6FE4->models[0]->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
-    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
-    HSD_GObj_SetupProc(gobj, un_8031F990, 0);
+    HSD_GObjObject_80390A70(stand_gobj, HSD_GObj_804D7849, jobj);
+    GObj_SetupGXLink(stand_gobj, HSD_GObj_JObjCallback, 0xB, 0);
+    HSD_GObj_SetupProc(stand_gobj, un_8031F990, 0);
 
     if (jobj == NULL) {
         child = NULL;
@@ -278,18 +296,18 @@ void un_8031FD18_OnEnter(void* arg)
     lb_8000C1C0(jobj, un_804D6FF0);
     lb_8000C290(jobj, un_804D6FF0);
 
-    gobj = GObj_Create(0xB, 3, 0);
+    fog_gobj = GObj_Create(0xB, 3, 0);
     fog = HSD_FogLoadDesc(un_804D6FE0->fogs->desc);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848, fog);
-    GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
-    HSD_GObj_SetupProc(gobj, fn_8031FCBC, 0);
+    HSD_GObjObject_80390A70(fog_gobj, HSD_GObj_804D7848, fog);
+    GObj_SetupGXLink(fog_gobj, HSD_GObj_FogCallback, 0, 0);
+    HSD_GObj_SetupProc(fog_gobj, fn_8031FCBC, 0);
     un_804D6FF4 = fog->color;
     un_804D6FF8 = 0;
 
-    gobj = GObj_Create(0xB, 3, 0);
+    light_gobj = GObj_Create(0xB, 3, 0);
     lobj = lb_80011AC4(un_804D6FE0->lights);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
-    GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
+    HSD_GObjObject_80390A70(light_gobj, HSD_GObj_804D784A, lobj);
+    GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0, 0);
 
     lbAudioAx_80024E50(0);
 }
