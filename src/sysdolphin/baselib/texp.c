@@ -811,10 +811,8 @@ static int AssignAlphaKonst(HSD_TETev* tev, int idx, HSD_TExpRes* res)
 
 static int TExpAssignReg(HSD_TExp* texp, HSD_TExpRes* res)
 {
-    HSD_TETev* tev;
+    HSD_TETev* tev = (HSD_TETev*) texp;
     int i, val;
-
-    tev = &texp->tev;
 
     if (tev->c_ref > 0) {
         if (tev->kcsel != HSD_TE_UNDEF) {
@@ -827,7 +825,9 @@ static int TExpAssignReg(HSD_TExp* texp, HSD_TExpRes* res)
                     }
                 }
             }
-        } else if (IsThroughColor(texp) && tev->c_in[3].type == HSD_TE_CNST) {
+        } else if (IsThroughColor((HSD_TExp*) tev) &&
+                   tev->c_in[3].type == HSD_TE_CNST)
+        {
             if (AssignColorKonst(tev, 3, res) < 0) {
                 val = AssignColorReg(tev, 3, res);
                 if (val < 0) {
@@ -871,7 +871,9 @@ static int TExpAssignReg(HSD_TExp* texp, HSD_TExpRes* res)
                 }
             }
         } else {
-            if (IsThroughAlpha(texp) && tev->a_in[3].type == HSD_TE_CNST) {
+            if (IsThroughAlpha((HSD_TExp*) tev) &&
+                tev->a_in[3].type == HSD_TE_CNST)
+            {
                 if (AssignAlphaReg(tev, 3, res) < 0) {
                     val = AssignAlphaKonst(tev, 3, res);
                     if (val < 0) {
