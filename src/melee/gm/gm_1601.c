@@ -1256,10 +1256,10 @@ void fn_80162068(MatchEnd* match_end)
 }
 void fn_80162170(MatchEnd* arg0)
 {
-    MatchPlayerData* p;
-    s32 i;
-    s32 j;
     MatchEnd* cur;
+    s32 i;
+    MatchPlayerData* p;
+    s32 j;
     MatchPlayerData* q;
     s32 play_time;
 
