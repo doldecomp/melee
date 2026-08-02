@@ -159,15 +159,16 @@ void fn_8031FCBC(HSD_GObj* gobj)
 static inline void un_8031FD18_SetupScene(void)
 {
     s32 i;
-    HSD_JObj* jobj;
     HSD_GObj* gobj;
+    HSD_JObj* jobj;
 
     for (i = 0; un_804D6FE0->models[i] != NULL; i++) {
         gobj = GObj_Create(0xE, 0xF, 0);
         jobj = HSD_JObjLoadJoint(un_804D6FE0->models[i]->joint);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
         GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
-        gm_8016895C(jobj, un_804D6FE0->models[i], 0);
+        gm_8016895C(jobj, un_804D6FE0->models[i],
+                    (un_804D6FE0->models[i] != NULL) * 0);
         HSD_JObjReqAnimAll(jobj, 0.0f);
         HSD_JObjAnimAll(jobj);
         HSD_GObj_SetupProc(gobj, fn_8031FAA8, 0);
@@ -188,8 +189,8 @@ static void order_data(void)
 
 static inline void un_8031FD18_SetupCamera(void)
 {
-    HSD_CObj* cobj;
     HSD_GObj* camera_gobj;
+    HSD_CObj* cobj;
 
     camera_gobj = GObj_Create(0x13, 0x14, 0);
     cobj =
@@ -222,7 +223,7 @@ static inline void un_8031FD18_SetupKoopa(void)
     HSD_GObj_SetupProc(koopa_gobj, un_8031F9B4, 0);
 }
 
-/// @todo Only differs by callee-saved allocation in the head/loop cluster.
+/// @todo Only differs by loop induction/callback register allocation.
 void un_8031FD18_OnEnter(void* arg)
 {
     u8* input = arg;
