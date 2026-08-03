@@ -21,7 +21,7 @@ extern Mtx HSD_identityMtx;
 #define DEG_TO_RAD 0.017453292519943295
 #define RAD_TO_DEG 57.29577951308232
 
-static inline int vec_normalize_check(Vec3* src, Vec3* dst)
+static inline int vec_normalize_check_inline(Vec3* src, Vec3* dst)
 {
     if (!src || !dst) {
         return -1;
@@ -34,6 +34,8 @@ static inline int vec_normalize_check(Vec3* src, Vec3* dst)
     PSVECNormalize(src, dst);
     return 0;
 }
+
+#define vec_normalize_check(src, dst) vec_normalize_check_inline((src), (dst))
 
 static inline f32 atan2f_check(s8 y, s8 x)
 {

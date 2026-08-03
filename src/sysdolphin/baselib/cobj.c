@@ -656,6 +656,20 @@ static inline f64 cobj_fabsf_p(f32* v)
     return __fabsf(*v);
 }
 
+int (vec_normalize_check)(Vec3* src, Vec3* dst)
+{
+    if (!src || !dst) {
+        return -1;
+    }
+    if (fabsf_bitwise(src->x) <= FLT_MIN && fabsf_bitwise(src->y) <= FLT_MIN &&
+        fabsf_bitwise(src->z) <= FLT_MIN)
+    {
+        return -1;
+    }
+    PSVECNormalize(src, dst);
+    return 0;
+}
+
 static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
 {
     int res;
