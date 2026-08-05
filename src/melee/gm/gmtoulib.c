@@ -1651,7 +1651,8 @@ void fn_8018E618(int arg0, f32 farg0, int arg1)
         cobj_data->cobj_data.cobj = cobj;
         {
             HSD_CObj** cobj_ptr = &cobj_data->cobj_data.cobj;
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, *cobj_ptr);
+            u8* kind_ptr = &HSD_GObj_804D784B;
+            HSD_GObjObject_80390A70(gobj, *kind_ptr, *cobj_ptr);
         }
     }
     GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 1);
