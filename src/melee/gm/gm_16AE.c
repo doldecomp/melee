@@ -1895,6 +1895,7 @@ void fn_8016E2BC(void)
     int i;
     bool single_is_teams;
     bool is_teams;
+    lbl_8046B6A0_t* tmp;
     PAD_STACK(0xC);
 
     Player_80036DA4();
@@ -1928,6 +1929,7 @@ void fn_8016E2BC(void)
         for (i = 0; i < 6; i++) {
             if (Player_GetPlayerSlotType(i) != Gm_PKind_NA) {
                 getSpawnPoint(i, &sp18);
+                tmp = &lbl_8046B6A0;
                 if (Player_GetFacingDirection(i) == 0.0F) {
                     if (Stage_80224DC8(lbl_8046B6A0.x24C8.xE) != 0) {
                         Player_SetFacingDirection(i, 1.0F);
@@ -1947,7 +1949,7 @@ void fn_8016E2BC(void)
                                                Player_GetTeam(i), is_teams,
                                                Player_GetPlayerSlotType(i))));
                 Player_80031AD0(i);
-                if (lbl_8046B6A0.FighterMatchInfo[i].x4_b4) {
+                if (tmp->FighterMatchInfo[i].x4_b4) {
                     lbAudioAx_800237A8(0x41F4E, 0x7F, 0x40);
                 }
             }
