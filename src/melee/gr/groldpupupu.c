@@ -50,12 +50,6 @@ static void* grOp_804D6A9C;
 static int grOp_804D48A0[1][2] = { { 4, 0 } };
 static int grOp_804D48A8[1][2] = { { 5, 1 } };
 static int grOp_804D48B0[1][2] = { { 2, 3 } };
-static int grOp_804D48C8[1][2] = { { 4, 0 } };
-static int grOp_804D48D0[1][2] = { { 5, 1 } };
-static int grOp_804D48D8[1][2] = { { 2, 3 } };
-
-static int grOp_804D48E0[1][2] = { { 0, 0 } };
-
 typedef struct grOldPupupuSpawnDesc {
     s8 x0;
     s8 x1;
@@ -559,6 +553,11 @@ bool fn_802112F4(Ground_GObj* gobj, HSD_GObj* fighter_gobj, Vec3* vel)
     vel->x = 0.0F;
     return false;
 }
+
+static int grOp_804D48C8[1][2] = { { 4, 0 } };
+static int grOp_804D48D0[1][2] = { { 5, 1 } };
+static int grOp_804D48D8[1][2] = { { 2, 3 } };
+static int grOp_804D48E0[1][2] = { { 1, 0 } };
 
 void grOldPupupu_802113E0(Ground_GObj* gobj)
 {
