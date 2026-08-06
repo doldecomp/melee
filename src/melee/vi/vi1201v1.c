@@ -50,14 +50,14 @@
 /* 4D6FFC */ static u8 un_804D6FFC;
 /* 4D6FFD */ static u8 un_804D6FFD;
 /* 4D7000 */ static void* un_804D7000;
-/* 4D7004 */ un_804D7004_t un_804D7004;
+/* 4D7004 */ u8 un_804D7004[8]; ///< @todo #ViCharaDesc?
 
 Vec3 player_spawn = { 0.0f, 0.0f, 0.0f };
 
 void un_8031F980(int arg0, int arg1)
 {
-    M2C_FIELD(&un_804D7004, u8*, 0) = arg0;
-    M2C_FIELD(&un_804D7004, u8*, 1) = arg1;
+    un_804D7004[0] = arg0;
+    un_804D7004[1] = arg1;
 }
 
 void un_8031F990(HSD_GObj* gobj)
