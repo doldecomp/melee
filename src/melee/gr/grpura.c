@@ -290,11 +290,136 @@ StageData grPu_StageData = {
     0,
 };
 
-static void order_data(void)
+void grPura_80211CFC(bool num) {}
+
+/* 4D6AA0 */ static void* yakumono_param;
+
+void grPura_80211D00(void)
 {
-    (void) "%s:%d: couldn t get gobj(id=%d)\n";
-    (void) "grpura.c";
+    UNUSED u32 unused1;
+    UNUSED u32 unused2;
+    UNUSED u32 unused3;
+    Vec3 cam_offset;
+
+    yakumono_param = Ground_GetYakumonoParam();
+    stage_info.unk8C.b4 = 0;
+    stage_info.unk8C.b5 = 1;
+    setupStageCallbacks(0);
+    setupStageCallbacks(1);
+    setupStageCallbacks(4);
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    Stage_UnkSetVec3TCam_Offset(&cam_offset);
+    Ground_801C3880(0.8f * (Stage_GetCamBoundsTopOffset() - cam_offset.y));
+    Ground_801C3890(0.8f * (Stage_GetCamBoundsBottomOffset() - cam_offset.y));
+    Ground_801C38A0(0.8f * (Stage_GetCamBoundsLeftOffset() - cam_offset.x));
+    Ground_801C38AC(0.8f * (Stage_GetCamBoundsRightOffset() - cam_offset.x));
 }
+
+void grPura_80211DD8(void) {}
+
+void grPura_80211DDC(void)
+{
+    grZakoGenerator_801CAE04(NULL);
+}
+
+bool grPura_80211E00(void)
+{
+    return false;
+}
+
+HSD_GObj* grPura_80211E08_noinline(int gobj_id)
+{
+    return setupStageCallbacks(gobj_id);
+};
+
+HSD_GObj* grPura_80211E08_noinline2(int gobj_id)
+{
+    return grPura_80211E08_noinline(gobj_id);
+};
+
+HSD_GObj* setupStageCallbacks(int gobj_id)
+{
+    Ground_GObj* gobj;
+    StageCallbacks* callbacks = &stage_callbacks[gobj_id];
+
+    gobj = Ground_GetStageGObj(gobj_id);
+
+    if (gobj != NULL) {
+        /// @todo ::Ground_SetupStageCallbacks
+        Ground* gp = GET_GROUND(gobj);
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
+        if (callbacks->callback3 != NULL) {
+            gp->x1C_callback = callbacks->callback3;
+        }
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
+        }
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
+        }
+    } else {
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 264, gobj_id);
+    }
+
+    return gobj;
+}
+
+void stageGObj0_OnInit(Ground_GObj* arg0)
+{
+    Ground* gp = arg0->user_data;
+    grAnime_801C8138(arg0, gp->map_id, 0);
+}
+
+bool stageGObj0_Callback1(Ground_GObj* arg0)
+{
+    return false;
+}
+
+void stageGObj0_GObjProc(Ground_GObj* arg0) {}
+
+void stageGObj0_Callback3(Ground_GObj* arg0) {}
+
+void stageGObj27_OnInit(Ground_GObj* arg0)
+{
+    Ground* gp = arg0->user_data;
+    grAnime_801C8138(arg0, gp->map_id, 0);
+}
+
+bool stageGObj27_Callback1(Ground_GObj* arg0)
+{
+    return false;
+}
+
+void stageGObj27_GObjProc(Ground_GObj* arg0) {}
+
+void stageGObj27_Callback3(Ground_GObj* arg0) {}
+
+void stageGObj4_OnInit(Ground_GObj* arg0)
+{
+    Ground_JObjInline1(arg0);
+    grPura_80212CD4(arg0);
+    grPura_802125F0(arg0);
+    grPura_80212FC0(arg0);
+}
+
+bool stageGObj4_Callback1(Ground_GObj* arg0)
+{
+    return false;
+}
+
+void stageGObj4_GObjProc(Ground_GObj* arg0)
+{
+    grPura_80212EF4(arg0);
+    Ground_801C2FE0(arg0);
+    grPura_80213030(arg0);
+    mpLib_80055E24(0x18);
+    lb_800115F4();
+}
+
+void stageGObj4_Callback3(Ground_GObj* arg0) {}
 
 GXColor grPu_803E6AA0[] = {
     { 0x00, 0x00, 0x00, 0xFF },
@@ -302,6 +427,65 @@ GXColor grPu_803E6AA0[] = {
     { 0x1E, 0x46, 0x00, 0xFF },
     { 0x87, 0x87, 0x00, 0xFF },
 };
+
+void stageGObj1_OnInit(Ground_GObj* arg0)
+{
+    unsigned int uVar1;
+    Ground* gp = GET_GROUND(arg0);
+    PAD_STACK(16);
+    grAnime_801C8138(arg0, gp->map_id, 0);
+    gp->x11_flags.b012 = 2;
+    gp->u.pura.xC4 = HSD_Randi(4);
+    do {
+        uVar1 = HSD_Randi(4);
+    } while (gp->u.pura.xC4 == (gp->u.pura.xC6 = uVar1));
+    Ground_801C205C(&grPu_803E6AA0[gp->u.pura.xC4]);
+    Camera_SetBackgroundColor(grPu_803E6AA0[gp->u.pura.xC4].r,
+                              grPu_803E6AA0[gp->u.pura.xC4].g,
+                              grPu_803E6AA0[gp->u.pura.xC4].b);
+    gp->u.pura.xC8 = 0;
+}
+
+bool stageGObj1_Callback1(Ground_GObj* arg0)
+{
+    return false;
+}
+
+void stageGObj1_GObjProc(Ground_GObj* arg0)
+{
+    GXColor spilC;
+    GXColor sp18;
+    Ground* gp = arg0->user_data;
+    f32 t;
+    s16 cur;
+    unsigned int uVar1;
+    UNUSED u8 _pad4[4];
+    PAD_STACK(8);
+
+    if ((s16) gp->u.pura.xC8 < 0xE10) {
+        spilC = grPu_803E6AA0[gp->u.pura.xC6];
+        sp18 = grPu_803E6AA0[gp->u.pura.xC4];
+        cur = gp->u.pura.xC8;
+        t = (f32) cur / 3600.0f;
+        gp->u.pura.xC8 = cur + 1;
+        sp18.r =
+            (s8) (t * (f32) ((u8) spilC.r - (u8) sp18.r) + (f32) (u8) sp18.r);
+        sp18.g =
+            (s8) (t * (f32) ((u8) spilC.g - (u8) sp18.g) + (f32) (u8) sp18.g);
+        sp18.b =
+            (s8) (t * (f32) ((u8) spilC.b - (u8) sp18.b) + (f32) (u8) sp18.b);
+        Ground_801C205C(&sp18);
+        Camera_SetBackgroundColor(sp18.r, sp18.g, sp18.b);
+        return;
+    }
+    gp->u.pura.xC4 = gp->u.pura.xC6;
+    do {
+        uVar1 = HSD_Randi(4);
+    } while ((s16) gp->u.pura.xC4 == (gp->u.pura.xC6 = uVar1));
+    gp->u.pura.xC8 = 0;
+}
+
+void stageGObj1_Callback3(Ground_GObj* arg0) {}
 
 /* 3E6AB0 */ static struct GrPuModelDesc grPu_803E6AB0[] = {
     { 0, 1.0F, 2 },   { 1, 1.0F, 3 },   { 2, 1.0F, 5 },   { 3, 1.0F, 6 },
@@ -313,7 +497,7 @@ GXColor grPu_803E6AA0[] = {
     { 24, 1.0F, 25 }, { 25, 1.0F, 26 }, { -1, 1.0F, -1 },
 };
 
-static void order_data2(void)
+static void order_data(void)
 {
     (void) "GrdIzumiStar_TopN_joint";
 }
@@ -485,196 +669,6 @@ u16 grPu_803E6E20[1024] ATTRIBUTE_ALIGN(32) = {
 };
 
 struct HSD_ImageDesc grPu_803E7620 = { &grPu_803E6E20, 32, 32, 4, 0, 0, 0 };
-
-void grPura_80211CFC(bool num) {}
-
-/* 4D6AA0 */ static void* yakumono_param;
-
-void grPura_80211D00(void)
-{
-    UNUSED u32 unused1;
-    UNUSED u32 unused2;
-    UNUSED u32 unused3;
-    Vec3 cam_offset;
-
-    yakumono_param = Ground_GetYakumonoParam();
-    stage_info.unk8C.b4 = 0;
-    stage_info.unk8C.b5 = 1;
-    setupStageCallbacks(0);
-    setupStageCallbacks(1);
-    setupStageCallbacks(4);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Stage_UnkSetVec3TCam_Offset(&cam_offset);
-    Ground_801C3880(0.8f * (Stage_GetCamBoundsTopOffset() - cam_offset.y));
-    Ground_801C3890(0.8f * (Stage_GetCamBoundsBottomOffset() - cam_offset.y));
-    Ground_801C38A0(0.8f * (Stage_GetCamBoundsLeftOffset() - cam_offset.x));
-    Ground_801C38AC(0.8f * (Stage_GetCamBoundsRightOffset() - cam_offset.x));
-}
-
-void grPura_80211DD8(void) {}
-
-void grPura_80211DDC(void)
-{
-    grZakoGenerator_801CAE04(NULL);
-}
-
-bool grPura_80211E00(void)
-{
-    return false;
-}
-
-HSD_GObj* grPura_80211E08_noinline(int gobj_id)
-{
-    return setupStageCallbacks(gobj_id);
-};
-
-HSD_GObj* grPura_80211E08_noinline2(int gobj_id)
-{
-    return grPura_80211E08_noinline(gobj_id);
-};
-
-HSD_GObj* setupStageCallbacks(int gobj_id)
-{
-    Ground_GObj* gobj;
-    StageCallbacks* callbacks = &stage_callbacks[gobj_id];
-
-    gobj = Ground_GetStageGObj(gobj_id);
-
-    if (gobj != NULL) {
-        /// @todo ::Ground_SetupStageCallbacks
-        Ground* gp = GET_GROUND(gobj);
-        gp->x8_callback = NULL;
-        gp->xC_callback = NULL;
-        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
-        if (callbacks->callback3 != NULL) {
-            gp->x1C_callback = callbacks->callback3;
-        }
-        if (callbacks->on_init != NULL) {
-            callbacks->on_init(gobj);
-        }
-        if (callbacks->gobj_proc != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
-        }
-    } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 264, gobj_id);
-    }
-
-    return gobj;
-}
-
-void stageGObj0_OnInit(Ground_GObj* arg0)
-{
-    Ground* gp = arg0->user_data;
-    grAnime_801C8138(arg0, gp->map_id, 0);
-}
-
-bool stageGObj0_Callback1(Ground_GObj* arg0)
-{
-    return false;
-}
-
-void stageGObj0_GObjProc(Ground_GObj* arg0) {}
-
-void stageGObj0_Callback3(Ground_GObj* arg0) {}
-
-void stageGObj27_OnInit(Ground_GObj* arg0)
-{
-    Ground* gp = arg0->user_data;
-    grAnime_801C8138(arg0, gp->map_id, 0);
-}
-
-bool stageGObj27_Callback1(Ground_GObj* arg0)
-{
-    return false;
-}
-
-void stageGObj27_GObjProc(Ground_GObj* arg0) {}
-
-void stageGObj27_Callback3(Ground_GObj* arg0) {}
-
-void stageGObj4_OnInit(Ground_GObj* arg0)
-{
-    Ground_JObjInline1(arg0);
-    grPura_80212CD4(arg0);
-    grPura_802125F0(arg0);
-    grPura_80212FC0(arg0);
-}
-
-bool stageGObj4_Callback1(Ground_GObj* arg0)
-{
-    return false;
-}
-
-void stageGObj4_GObjProc(Ground_GObj* arg0)
-{
-    grPura_80212EF4(arg0);
-    Ground_801C2FE0(arg0);
-    grPura_80213030(arg0);
-    mpLib_80055E24(0x18);
-    lb_800115F4();
-}
-
-void stageGObj4_Callback3(Ground_GObj* arg0) {}
-
-void stageGObj1_OnInit(Ground_GObj* arg0)
-{
-    unsigned int uVar1;
-    Ground* gp = GET_GROUND(arg0);
-    PAD_STACK(16);
-    grAnime_801C8138(arg0, gp->map_id, 0);
-    gp->x11_flags.b012 = 2;
-    gp->u.pura.xC4 = HSD_Randi(4);
-    do {
-        uVar1 = HSD_Randi(4);
-    } while (gp->u.pura.xC4 == (gp->u.pura.xC6 = uVar1));
-    Ground_801C205C(&grPu_803E6AA0[gp->u.pura.xC4]);
-    Camera_SetBackgroundColor(grPu_803E6AA0[gp->u.pura.xC4].r,
-                              grPu_803E6AA0[gp->u.pura.xC4].g,
-                              grPu_803E6AA0[gp->u.pura.xC4].b);
-    gp->u.pura.xC8 = 0;
-}
-
-bool stageGObj1_Callback1(Ground_GObj* arg0)
-{
-    return false;
-}
-
-void stageGObj1_GObjProc(Ground_GObj* arg0)
-{
-    GXColor spilC;
-    GXColor sp18;
-    Ground* gp = arg0->user_data;
-    f32 t;
-    s16 cur;
-    unsigned int uVar1;
-    UNUSED u8 _pad4[4];
-    PAD_STACK(8);
-
-    if ((s16) gp->u.pura.xC8 < 0xE10) {
-        spilC = grPu_803E6AA0[gp->u.pura.xC6];
-        sp18 = grPu_803E6AA0[gp->u.pura.xC4];
-        cur = gp->u.pura.xC8;
-        t = (f32) cur / 3600.0f;
-        gp->u.pura.xC8 = cur + 1;
-        sp18.r =
-            (s8) (t * (f32) ((u8) spilC.r - (u8) sp18.r) + (f32) (u8) sp18.r);
-        sp18.g =
-            (s8) (t * (f32) ((u8) spilC.g - (u8) sp18.g) + (f32) (u8) sp18.g);
-        sp18.b =
-            (s8) (t * (f32) ((u8) spilC.b - (u8) sp18.b) + (f32) (u8) sp18.b);
-        Ground_801C205C(&sp18);
-        Camera_SetBackgroundColor(sp18.r, sp18.g, sp18.b);
-        return;
-    }
-    gp->u.pura.xC4 = gp->u.pura.xC6;
-    do {
-        uVar1 = HSD_Randi(4);
-    } while ((s16) gp->u.pura.xC4 == (gp->u.pura.xC6 = uVar1));
-    gp->u.pura.xC8 = 0;
-}
-
-void stageGObj1_Callback3(Ground_GObj* arg0) {}
 
 void stageGObj2_OnInit(Ground_GObj* arg0)
 {
