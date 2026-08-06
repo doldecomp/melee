@@ -1,4 +1,41 @@
-#include "grpura.static.h"
+#include "grpura.h"
+
+#include "grdisplay.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
+#include "types.h"
+
+#include <platform.h>
+
+#include "cm/camera.h"
+#include "cm/types.h"
+#include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
+#include "lb/lbspdisplay.h"
+#include "mp/mplib.h"
+
+#include <dolphin/mtx.h>
+#include <baselib/debug.h>
+#include <baselib/dobj.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
+#include <baselib/random.h>
+#include <baselib/tobj.h>
+
+struct GrPuModelDesc {
+    /* 0x0 */ s32 x0;
+    /* 0x4 */ f32 x4;
+    /* 0x8 */ s32 x8;
+};
+
+struct GrPuVtxMapEntry {
+    /* 0x0 */ GrJoint joint;
+    /* 0x6 */ s16 x06;
+    /* 0x8 */ HSD_JObj* jobj;
+};
 
 /* 211CFC */ static void grPura_80211CFC(bool);
 /* 211D00 */ static void grPura_80211D00(void);
@@ -282,52 +319,54 @@ static void order_data2(void)
 }
 
 /* 3E6C0C */ static struct GrPuVtxMapEntry grPu_803E6C0C[] = {
-    { 20, 2, 21, 0, NULL },
-    { 21, 2, 22, 0, NULL },
-    { 22, 2, 23, 0, NULL },
-    { 23, 2, 24, 0, NULL },
-    { 24, 2, 25, 0, NULL },
-    { 25, 2, 26, 0, NULL },
-    { 26, 2, 27, 0, NULL },
-    { 39, 2, 28, 0, NULL },
-    { 284, 12, 21, 0, NULL },
-    { 285, 12, 23, 0, NULL },
-    { 267, 12, 24, 0, NULL },
-    { 261, 12, 25, 0, NULL },
-    { 262, 12, 26, 0, NULL },
-    { 275, 12, 27, 0, NULL },
-    { 276, 12, 28, 0, NULL },
-    { 277, 12, 29, 0, NULL },
-    { 269, 12, 30, 0, NULL },
-    { 270, 12, 31, 0, NULL },
-    { 272, 12, 32, 0, NULL },
-    { 286, 12, 33, 0, NULL },
-    { 180, 8, 23, 0, NULL },
-    { 181, 8, 51, 0, NULL },
-    { 182, 8, 27, 0, NULL },
-    { 183, 8, 30, 0, NULL },
-    { 184, 8, 31, 0, NULL },
-    { 513, 25, 10, 0, NULL },
-    { 514, 25, 13, 0, NULL },
-    { 520, 25, 16, 0, NULL },
-    { 521, 25, 19, 0, NULL },
-    { 522, 25, 22, 0, NULL },
-    { 496, 25, 25, 0, NULL },
-    { 497, 25, 28, 0, NULL },
-    { 500, 25, 31, 0, NULL },
-    { 523, 25, 32, 0, NULL },
-    { 524, 25, 29, 0, NULL },
-    { 527, 25, 26, 0, NULL },
-    { 528, 25, 23, 0, NULL },
-    { 525, 25, 20, 0, NULL },
-    { 526, 25, 17, 0, NULL },
-    { 494, 25, 14, 0, NULL },
-    { 495, 25, 11, 0, NULL },
-    { -1, 0, 0, 0, NULL },
+    { { 20, 2, 21 }, 0, NULL },
+    { { 21, 2, 22 }, 0, NULL },
+    { { 22, 2, 23 }, 0, NULL },
+    { { 23, 2, 24 }, 0, NULL },
+    { { 24, 2, 25 }, 0, NULL },
+    { { 25, 2, 26 }, 0, NULL },
+    { { 26, 2, 27 }, 0, NULL },
+    { { 39, 2, 28 }, 0, NULL },
+    { { 284, 12, 21 }, 0, NULL },
+    { { 285, 12, 23 }, 0, NULL },
+    { { 267, 12, 24 }, 0, NULL },
+    { { 261, 12, 25 }, 0, NULL },
+    { { 262, 12, 26 }, 0, NULL },
+    { { 275, 12, 27 }, 0, NULL },
+    { { 276, 12, 28 }, 0, NULL },
+    { { 277, 12, 29 }, 0, NULL },
+    { { 269, 12, 30 }, 0, NULL },
+    { { 270, 12, 31 }, 0, NULL },
+    { { 272, 12, 32 }, 0, NULL },
+    { { 286, 12, 33 }, 0, NULL },
+    { { 180, 8, 23 }, 0, NULL },
+    { { 181, 8, 51 }, 0, NULL },
+    { { 182, 8, 27 }, 0, NULL },
+    { { 183, 8, 30 }, 0, NULL },
+    { { 184, 8, 31 }, 0, NULL },
+    { { 513, 25, 10 }, 0, NULL },
+    { { 514, 25, 13 }, 0, NULL },
+    { { 520, 25, 16 }, 0, NULL },
+    { { 521, 25, 19 }, 0, NULL },
+    { { 522, 25, 22 }, 0, NULL },
+    { { 496, 25, 25 }, 0, NULL },
+    { { 497, 25, 28 }, 0, NULL },
+    { { 500, 25, 31 }, 0, NULL },
+    { { 523, 25, 32 }, 0, NULL },
+    { { 524, 25, 29 }, 0, NULL },
+    { { 527, 25, 26 }, 0, NULL },
+    { { 528, 25, 23 }, 0, NULL },
+    { { 525, 25, 20 }, 0, NULL },
+    { { 526, 25, 17 }, 0, NULL },
+    { { 494, 25, 14 }, 0, NULL },
+    { { 495, 25, 11 }, 0, NULL },
+    { { -1, 0, 0 }, 0, NULL },
     { 0 },
     { 0 },
 };
 
+/// GX texture data requires 32-byte alignment; the DOL pads 4 bytes before
+/// this image to reach 0x803E6E20.
 u16 grPu_803E6E20[1024] ATTRIBUTE_ALIGN(32) = {
     0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
     0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
@@ -811,11 +850,12 @@ void grPura_80212FC0(HSD_GObj* arg0)
 {
     u32 var_r30;
     for (var_r30 = 0; var_r30 < 0x2A; var_r30++) {
-        if (grPu_803E6C0C[var_r30].x00 != -1) {
-            HSD_GObj* temp_r3 = Ground_801C2BA4(grPu_803E6C0C[var_r30].x02);
+        if (grPu_803E6C0C[var_r30].joint.x != -1) {
+            HSD_GObj* temp_r3 =
+                Ground_801C2BA4(grPu_803E6C0C[var_r30].joint.y);
             if (temp_r3 != NULL) {
-                grPu_803E6C0C[var_r30].x08 =
-                    Ground_801C3FA4(temp_r3, grPu_803E6C0C[var_r30].x04);
+                grPu_803E6C0C[var_r30].jobj =
+                    Ground_801C3FA4(temp_r3, grPu_803E6C0C[var_r30].joint.z);
             }
         }
     }
@@ -828,9 +868,9 @@ void grPura_80213030(Ground_GObj* arg0)
     u32 var_r30;
 
     for (var_r30 = 0; var_r30 < 0x2A; var_r30++) {
-        if (grPu_803E6C0C[var_r30].x08 != NULL) {
-            lb_8000B1CC(grPu_803E6C0C[var_r30].x08, NULL, &spC);
-            mpVtxSetPos(grPu_803E6C0C[var_r30].x00, spC.x, spC.y);
+        if (grPu_803E6C0C[var_r30].jobj != NULL) {
+            lb_8000B1CC(grPu_803E6C0C[var_r30].jobj, NULL, &spC);
+            mpVtxSetPos(grPu_803E6C0C[var_r30].joint.x, spC.x, spC.y);
         }
     }
     mpJointUpdateBounding(0);
