@@ -2841,6 +2841,11 @@ static void __THPHuffDecodeDCTCompV(register THPFileInfo* info,
 #define OS_GQR_S8 0x0006
 #define OS_GQR_S16 0x0007
 
+#define OS_FASTCAST_U8 2
+#define OS_FASTCAST_U16 3
+#define OS_FASTCAST_S8 4
+#define OS_FASTCAST_S16 5
+
 struct THPLCSizeEntry {
     u32 id;
     u32 size;
