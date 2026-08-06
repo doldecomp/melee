@@ -25,6 +25,12 @@
 #include <baselib/random.h>
 #include <baselib/tobj.h>
 
+struct GrPuModelDesc {
+    /* 0x0 */ s32 x0;
+    /* 0x4 */ f32 x4;
+    /* 0x8 */ s32 x8;
+};
+
 struct GrPuVtxMapEntry {
     /* 0x00 */ s16 x00;
     /* 0x02 */ s16 x02;
