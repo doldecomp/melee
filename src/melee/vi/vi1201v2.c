@@ -36,18 +36,6 @@
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-
-typedef struct un_80400304_t {
-    Vec3 player_spawn;
-    char use_quaternion_assert[0x28];
-    char vi1201v2_dat[0x10];
-    char visual1201v2_scene[0x14];
-    char tykoopa_dat[0x0C];
-    char toykoopa_model_topn_joint[0x1C];
-    char gmrgstnd_dat[0x10];
-    char stand_scene[0x0C];
-} un_80400304_t;
 
 /// @todo .sdata2 order hack
 static void order_sdata2(void)
@@ -57,12 +45,7 @@ static void order_sdata2(void)
 }
 
 Vec3 un_804002F8 = { 0.0f, 0.0f, 0.0f };
-un_80400304_t un_80400304 = {
-    { 0.0f, 0.0f, 0.0f }, "!(jobj->flags & JOBJ_USE_QUATERNION)",
-    "Vi1201v2.dat",       "visual1201v2Scene",
-    "TyKoopa.dat",        "ToyKoopaModel_TopN_joint",
-    "GmRgStnd.dat",       "standScene",
-};
+Vec3 un_80400304 = { 0.0f, 0.0f, 0.0f };
 
 static SceneDesc* un_804D7010;
 static SceneDesc* un_804D7014;
@@ -70,16 +53,16 @@ static HSD_Archive* un_804D7018;
 static HSD_Archive* un_804D701C;
 static HSD_Joint* un_804D7020;
 static HSD_JObj* un_804D7024;
-GXColor un_804D7028;
+static GXColor un_804D7028;
 static s32 un_804D702C;
-HSD_GObj* un_804D7030;
-HSD_GObj* un_804D7034;
-un_804D7004_t un_804D7038;
+static HSD_GObj* un_804D7030;
+static HSD_GObj* un_804D7034;
+/* 4D7038 */ u8 un_804D7038[8]; ///< @todo #ViCharaDesc?
 
 void un_803204B0(int arg0, int arg1)
 {
-    M2C_FIELD(&un_804D7038, u8*, 0) = arg0;
-    M2C_FIELD(&un_804D7038, u8*, 1) = arg1;
+    un_804D7038[0] = arg0;
+    un_804D7038[1] = arg1;
 }
 
 void un_803204C0(HSD_GObj* gobj)
@@ -138,7 +121,7 @@ void un_803205F4(void)
     Player_SetPlayerId(1, 0);
     Player_SetSlottype(1, 2);
     Player_SetFacingDirection(1, -1.0f);
-    Player_80032768(1, &un_80400304.player_spawn);
+    Player_80032768(1, &un_80400304);
     Player_80036F34(1, 0xF);
     Player_SetScale(1, 1.0f / Player_80032BB0(1));
 
@@ -227,38 +210,28 @@ void fn_80320A1C(HSD_GObj* gobj)
     HSD_FogInterpretAnim(gobj->hsd_obj);
 }
 
-void un_80320A40_OnEnter(void* arg)
+static inline void un_80320A40_LoadAssets(u8* input)
 {
-    u8* input = arg;
-    u8 char_index;
-    HSD_CObj* cobj;
-    HSD_GObj* gobj;
-    HSD_Fog* fog;
-    HSD_JObj* child;
-    HSD_JObj* jobj;
-    HSD_LObj* lobj;
-    f32 scale;
-    PAD_STACK(16);
+    u8 char_index = input[0];
 
-    efLib_Init();
-    efAsync_LoadSync(0);
-    lbAudioAx_80023F28(0x5C);
-    lbAudioAx_80024E50(1);
-
-    char_index = input[0];
-
-    un_804D701C = lbArchive_LoadSymbols(un_80400304.vi1201v2_dat, &un_804D7010,
-                                        un_80400304.visual1201v2_scene, NULL);
     {
-        char* toykoopa_joint = un_80400304.toykoopa_model_topn_joint;
-        char* tykoopa_dat = un_80400304.tykoopa_dat;
-        lbArchive_LoadSymbols(tykoopa_dat, &un_804D7020, toykoopa_joint, NULL);
+        char* vi_dat = "Vi1201v2.dat";
+        char* vi_scene = "visual1201v2Scene";
+        un_804D701C =
+            lbArchive_LoadSymbols(vi_dat, &un_804D7010, vi_scene, NULL);
     }
-    lbArchive_LoadSymbols(un_80400304.gmrgstnd_dat, &un_804D7014,
-                          un_80400304.stand_scene, NULL);
+    lbArchive_LoadSymbols("TyKoopa.dat", &un_804D7020,
+                          "ToyKoopaModel_TopN_joint", NULL);
+    lbArchive_LoadSymbols("GmRgStnd.dat", &un_804D7014, "standScene", NULL);
     Toy_803124BC();
     un_804D7018 =
         lbArchive_LoadSymbols(viGetCharAnimByIndex(char_index), NULL);
+}
+
+static inline void un_80320A40_SetupCamera(void)
+{
+    HSD_GObj* gobj;
+    HSD_CObj* cobj;
 
     gobj = GObj_Create(0x13, 0x14, 0);
     cobj =
@@ -270,9 +243,12 @@ void un_80320A40_OnEnter(void* arg)
     HSD_CObjReqAnim(cobj, 0.0f);
     HSD_CObjAnim(cobj);
     HSD_GObj_SetupProc(gobj, un_80320984, 0);
+}
 
-    un_803207C4();
-    un_80320508(input[0], input[1]);
+static inline void un_80320A40_SetupKoopa(void)
+{
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
 
     gobj = GObj_Create(0xE, 0xF, 0);
     un_804D7030 = gobj;
@@ -285,6 +261,14 @@ void un_80320A40_OnEnter(void* arg)
     lb_8000C1C0(jobj, un_804D7024);
     lb_8000C290(jobj, un_804D7024);
     HSD_GObj_SetupProc(gobj, un_803204E4, 0x17);
+}
+
+static inline void un_80320A40_SetupStand(void)
+{
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    HSD_JObj* child;
+    f32 scale;
 
     gobj = GObj_Create(0xE, 0xF, 0);
     un_804D7034 = gobj;
@@ -314,22 +298,53 @@ void un_80320A40_OnEnter(void* arg)
 
     lb_8000C1C0(jobj, un_804D7024);
     lb_8000C290(jobj, un_804D7024);
+}
 
-    gobj = GObj_Create(0xB, 3, 0);
+/// @todo .data order hack
+static void order_data(void)
+{
+    (void) "!(jobj->flags & JOBJ_USE_QUATERNION)";
+}
+
+void un_80320A40_OnEnter(void* arg)
+{
+    u8* input = arg;
+    HSD_Fog* fog;
+    HSD_GObj* fog_gobj;
+    HSD_LObj* lobj;
+    HSD_GObj* light_gobj;
+
+    efLib_Init();
+    efAsync_LoadSync(0);
+    lbAudioAx_80023F28(0x5C);
+    lbAudioAx_80024E50(1);
+
+    un_80320A40_LoadAssets(input);
+
+    un_80320A40_SetupCamera();
+
+    un_803207C4();
+    un_80320508(input[0], input[1]);
+
+    un_80320A40_SetupKoopa();
+
+    un_80320A40_SetupStand();
+
+    fog_gobj = GObj_Create(0xB, 3, 0);
     fog = HSD_FogLoadDesc(un_804D7010->fogs->desc);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848, fog);
-    GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
+    HSD_GObjObject_80390A70(fog_gobj, HSD_GObj_804D7848, fog);
+    GObj_SetupGXLink(fog_gobj, HSD_GObj_FogCallback, 0, 0);
     HSD_Fog_8037DE7C(fog, un_804D7010->fogs->anims[0]->aobjdesc);
     HSD_FogReqAnim(fog, 0.0f);
     HSD_FogInterpretAnim(fog);
-    HSD_GObj_SetupProc(gobj, fn_80320A1C, 0x17);
+    HSD_GObj_SetupProc(fog_gobj, fn_80320A1C, 0x17);
     un_804D7028 = fog->color;
     un_804D702C = 0;
 
-    gobj = GObj_Create(0xB, 3, 0);
+    light_gobj = GObj_Create(0xB, 3, 0);
     lobj = lb_80011AC4(un_804D7010->lights);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
-    GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
+    HSD_GObjObject_80390A70(light_gobj, HSD_GObj_804D784A, lobj);
+    GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0, 0);
 
     lbAudioAx_80024E50(0);
 }
