@@ -27,8 +27,9 @@ static u16* __THPHuffmanCodeTab;
 static THPSample* Gbase ATTRIBUTE_ALIGN(32);
 static u32 Gwid ATTRIBUTE_ALIGN(32);
 static f32* Gq ATTRIBUTE_ALIGN(32);
+static void* __THPLCTableBase[28];
 static u8* __THPLCWork512[3];
-extern u8* __THPLCWork672[3];
+static u8* __THPLCWork672[3];
 static u32 __THPOldGQR5;
 static u32 __THPOldGQR6;
 static u8* __THPWorkArea;
@@ -2840,10 +2841,30 @@ static void __THPHuffDecodeDCTCompV(register THPFileInfo* info,
 #define OS_GQR_S8 0x0006
 #define OS_GQR_S16 0x0007
 
-#define OS_FASTCAST_U8 2
-#define OS_FASTCAST_U16 3
-#define OS_FASTCAST_S8 4
-#define OS_FASTCAST_S16 5
+struct THPLCSizeEntry {
+    u32 id;
+    u32 size;
+};
+
+static struct THPLCSizeEntry __THPLCSizeTableA[5] = {
+    { 0, 0x1000 },
+    { 1, 0x400 },
+    { 2, 0x400 },
+    { 3, 0x400 },
+    { 4, 0x400 },
+};
+
+static struct THPLCSizeEntry __THPLCSizeTableB[9] = {
+    { 0, 0x1000 },
+    { 1, 0x200 },
+    { 2, 0x200 },
+    { 3, 0x200 },
+    { 4, 0x200 },
+    { 5, 0x200 },
+    { 6, 0x200 },
+    { 7, 0x200 },
+    { 8, 0x200 },
+};
 
 // clang-format off
 static inline void OSInitFastCast(void) {
@@ -2870,32 +2891,48 @@ static inline void OSInitFastCast(void) {
 
 #endif
 }
-// clang-format off
-
+// clang-format on
 
 BOOL THPInit(void)
 {
-    u8* base;
-    //OSRegisterVersion(__THPVersion);
-    base = (u8*)(0xE000 << 16);
+    void* base;
+    u32 hid2 = PPCMfhid2();
+    int i;
 
-    __THPLCWork512[0] = base;
-    base += 0x2000;
-    __THPLCWork512[1] = base;
-    base += 0x800;
-    __THPLCWork512[2] = base;
-    base += 0x200;
+    if ((hid2 & 0x10000000) == 0) {
+        DCInvalidateRange((void*) 0xE0000000, 0x4000);
+        LCEnable();
+    }
 
-    base              = (u8*)(0xE000 << 16);
-    __THPLCWork672[0] = base;
-    base += 0x2A00;
-    __THPLCWork672[1] = base;
-    base += 0xA80;
-    __THPLCWork672[2] = base;
-    base += 0xA80;
+    base                = (void*) 0xE0000000;
+    __THPLCTableBase[0] = base;
+    for (i = 0; i < 5; i++) {
+        base = (u8*) base + __THPLCSizeTableA[i].size;
+        __THPLCTableBase[1 + i] = base;
+    }
+    for (i = 0; i < 4; i++) {
+        base = (u8*) base + __THPLCSizeTableB[i].size;
+        __THPLCTableBase[6 + i] = base;
+    }
 
-    //OSInitFastCast();
+    base                 = (void*) 0xE0000000;
+    __THPLCTableBase[10] = base;
+    for (i = 0; i < 9; i++) {
+        base = (u8*) base + __THPLCSizeTableB[i].size;
+        __THPLCTableBase[11 + i] = base;
+    }
+    for (i = 0; i < 8; i++) {
+        base = (u8*) base + __THPLCSizeTableB[i].size;
+        __THPLCTableBase[20 + i] = base;
+    }
 
-    __THPInitFlag = TRUE;
-    return TRUE;
+    __THPLCWork512[0] = (u8*) 0xE0000000;
+    __THPLCWork512[1] = __THPLCWork512[0] + 0x2000;
+    __THPLCWork512[2] = __THPLCWork512[1] + 0x800;
+
+    __THPLCWork672[0] = (u8*) 0xE0000000;
+    __THPLCWork672[1] = __THPLCWork672[0] + 0x2A00;
+    __THPLCWork672[2] = __THPLCWork672[1] + 0xA00;
+
+    OSInitFastCast();
 }
