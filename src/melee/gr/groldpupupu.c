@@ -346,6 +346,14 @@ bool grOldPupupu_80210D08(Ground_GObj* gobj)
     return false;
 }
 
+static inline HSD_JObj* grOldPupupu_GetSpawnJObj(HSD_GObj* gobj)
+{
+    HSD_JObj* jobj = gobj->hsd_obj;
+    (void) jobj;
+    HSD_ASSERT(0x216, jobj);
+    return jobj;
+}
+
 void grOldPupupu_80210D10(Ground_GObj* gobj)
 {
     f32 cam_left;
@@ -365,8 +373,10 @@ void grOldPupupu_80210D10(Ground_GObj* gobj)
     s32 i;
     s32 index;
 
-    PAD_STACK(0x10);
-    gp = GET_GROUND(gobj);
+    PAD_STACK(8);
+    /// @todo Reusing @p gobj as the pointer carrier selects retail registers.
+    gobj = (Ground_GObj*) GET_GROUND(gobj);
+    gp = (Ground*) gobj;
     timer = gp->u.oldpupupu2.xC4;
     gp->u.oldpupupu2.xC4 = timer - 1;
     if (timer < 0) {
@@ -404,9 +414,7 @@ void grOldPupupu_80210D10(Ground_GObj* gobj)
             HSD_GObj* spawn;
             spawn = grOldPupupu_802108B4_noinline(2);
             if (spawn != NULL) {
-                jobj = spawn->hsd_obj;
-                (void) jobj;
-                HSD_ASSERT(0x216, jobj);
+                jobj = grOldPupupu_GetSpawnJObj(spawn);
                 HSD_JObjSetTranslateX(jobj, direction * x);
                 HSD_JObjSetTranslateY(jobj, y);
                 HSD_JObjSetTranslateZ(jobj, z);
