@@ -1506,9 +1506,10 @@ static inline HSD_GObj* grIceMt_801F71E8_noinline2(int id)
     return grIceMt_801F71E8_inner2(id);
 }
 
-int grIceMt_801F9ACC(s16* seg, float y, GrIceMtSegmentLookup ev,
+int grIceMt_801F9ACC(s16* seg_, float y, GrIceMtSegmentLookup ev,
                      Ground_GObj* arg3)
 {
+    s16* seg = seg_;
     s32 did = 0;
     HSD_GObj* mgobj;
     HSD_JObj* jobj;
