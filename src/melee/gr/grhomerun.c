@@ -393,7 +393,7 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
         gp->u.homerun.parts[0] = gobj2;
     }
 
-    for (i = 63; i >= 0; i--) {
+    for (i = 63; i > 0; i--) {
         gobj2 = gp->u.homerun.parts[i];
         if (gobj2 != NULL) {
             break;
