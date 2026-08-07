@@ -50,12 +50,6 @@ static void* grOp_804D6A9C;
 static int grOp_804D48A0[1][2] = { { 4, 0 } };
 static int grOp_804D48A8[1][2] = { { 5, 1 } };
 static int grOp_804D48B0[1][2] = { { 2, 3 } };
-static int grOp_804D48C8[1][2] = { { 4, 0 } };
-static int grOp_804D48D0[1][2] = { { 5, 1 } };
-static int grOp_804D48D8[1][2] = { { 2, 3 } };
-
-static int grOp_804D48E0[1][2] = { { 0, 0 } };
-
 typedef struct grOldPupupuSpawnDesc {
     s8 x0;
     s8 x1;
@@ -144,20 +138,6 @@ StageData grOp_StageData = {
     0,
 };
 
-static void order_data(void)
-{
-    (void) "%s:%d: couldn t get gobj(id=%d)\n";
-    (void) "groldpupupu.c";
-}
-
-static grOldPupupuSpawnDesc grOp_803E67B0[10] = {
-    { -1, 1, 1 }, { 1, 1, 3 },   { 1, 1, 5 },  { -1, 1, 7 },  { -1, 0, 9 },
-    { 1, 0, 11 }, { -1, 0, 13 }, { 1, 0, 15 }, { -1, 0, 17 }, { 1, 0, 19 },
-};
-
-static int grOp_803E67D8[3] = { 0, 1, 2 };
-static Vec3 grOp_803E67E4[2] = { { -1.0F, 0.0F, 0.0F }, { 1.0F, 0.0F, 0.0F } };
-
 void grOldPupupu_802107DC(bool arg) {}
 
 void grOldPupupu_802107E0(void)
@@ -191,16 +171,8 @@ bool grOldPupupu_802108AC(void)
 {
     return false;
 }
-#pragma push
-#pragma dont_inline on
-HSD_GObj* grOldPupupu_802108B4_noinline(int arg0);
-HSD_GObj* grOldPupupu_802108B4_noinline(int arg0)
-{
-    return grOldPupupu_802108B4(arg0);
-}
-#pragma dont_inline reset
-#pragma pop
-
+/// Spells out #Ground_SetupStageCallbacks so that this function stays
+/// out-of-line in #grOldPupupu_80210D10.
 HSD_GObj* grOldPupupu_802108B4(int arg0)
 {
     HSD_GObj* gobj;
@@ -209,14 +181,33 @@ HSD_GObj* grOldPupupu_802108B4(int arg0)
     gobj = Ground_GetStageGObj(arg0);
 
     if (gobj != NULL) {
-        Ground_SetupStageCallbacks(gobj, callbacks);
+        Ground* gp = GET_GROUND(gobj);
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
+        if (callbacks->callback3 != NULL) {
+            gp->x1C_callback = callbacks->callback3;
+        }
+        if (callbacks->on_init != NULL) {
+            callbacks->on_init(gobj);
+        }
+        if (callbacks->gobj_proc != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->gobj_proc, 4);
+        }
     } else {
-        OSReport((char*) grOp_StageCallbacks + 0xF4,
-                 (char*) grOp_StageCallbacks + 0x118, 0xD9, arg0);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 217, arg0);
     }
 
     return gobj;
 }
+
+static grOldPupupuSpawnDesc grOp_803E67B0[10] = {
+    { -1, 1, 1 }, { 1, 1, 3 },   { 1, 1, 5 },  { -1, 1, 7 },  { -1, 0, 9 },
+    { 1, 0, 11 }, { -1, 0, 13 }, { 1, 0, 15 }, { -1, 0, 17 }, { 1, 0, 19 },
+};
+
+static int grOp_803E67D8[3] = { 0, 1, 2 };
+static Vec3 grOp_803E67E4[2] = { { -1.0F, 0.0F, 0.0F }, { 1.0F, 0.0F, 0.0F } };
 
 void grOldPupupu_8021099C(Ground_GObj* gobj)
 {
@@ -352,6 +343,14 @@ bool grOldPupupu_80210D08(Ground_GObj* gobj)
     return false;
 }
 
+static inline HSD_JObj* grOldPupupu_GetSpawnJObj(HSD_GObj* gobj)
+{
+    HSD_JObj* jobj = gobj->hsd_obj;
+    (void) jobj;
+    HSD_ASSERT(0x216, jobj);
+    return jobj;
+}
+
 void grOldPupupu_80210D10(Ground_GObj* gobj)
 {
     f32 cam_left;
@@ -371,8 +370,10 @@ void grOldPupupu_80210D10(Ground_GObj* gobj)
     s32 i;
     s32 index;
 
-    PAD_STACK(0x10);
-    gp = GET_GROUND(gobj);
+    PAD_STACK(8);
+    /// @todo Reusing @p gobj as the pointer carrier selects retail registers.
+    gobj = (Ground_GObj*) GET_GROUND(gobj);
+    gp = (Ground*) gobj;
     timer = gp->u.oldpupupu2.xC4;
     gp->u.oldpupupu2.xC4 = timer - 1;
     if (timer < 0) {
@@ -408,11 +409,9 @@ void grOldPupupu_80210D10(Ground_GObj* gobj)
         z = -150.0F * direction;
         for (i = 0; i < count; i++) {
             HSD_GObj* spawn;
-            spawn = grOldPupupu_802108B4_noinline(2);
+            spawn = grOldPupupu_802108B4(2);
             if (spawn != NULL) {
-                jobj = spawn->hsd_obj;
-                (void) jobj;
-                HSD_ASSERT(0x216, jobj);
+                jobj = grOldPupupu_GetSpawnJObj(spawn);
                 HSD_JObjSetTranslateX(jobj, direction * x);
                 HSD_JObjSetTranslateY(jobj, y);
                 HSD_JObjSetTranslateZ(jobj, z);
@@ -560,6 +559,33 @@ bool fn_802112F4(Ground_GObj* gobj, HSD_GObj* fighter_gobj, Vec3* vel)
     return false;
 }
 
+static int grOp_804D48C8[1][2] = { { 4, 0 } };
+static int grOp_804D48D0[1][2] = { { 5, 1 } };
+static int grOp_804D48D8[1][2] = { { 2, 3 } };
+static int grOp_804D48E0[1][2] = { { 1, 0 } };
+
+static inline void grOldPupupu_SyncSecondary(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    Ground* other_gp = Ground_801C2BA4(1)->user_data;
+    other_gp->u.oldpupupu.xC4 = gp->u.oldpupupu.xC4;
+    other_gp->u.oldpupupu.xC8 = gp->u.oldpupupu.xC8;
+    other_gp->u.oldpupupu.xCC = 0;
+    other_gp->u.oldpupupu.xD4 = gp->u.oldpupupu.xD8;
+    other_gp->u.oldpupupu.xD0 = 1;
+}
+
+static inline void grOldPupupu_Advance(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    gp->u.oldpupupu.xC4 += 1;
+    if (gp->u.oldpupupu.xC4 >= 3) {
+        gp->u.oldpupupu.xC4 = 0;
+    }
+    gp->u.oldpupupu.xC8 = grOp_803E67D8[gp->u.oldpupupu.xC4];
+    gp->u.oldpupupu.xD4 = 1;
+}
+
 void grOldPupupu_802113E0(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
@@ -571,8 +597,6 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
         switch (gp->u.oldpupupu.xC8) {
         case 0:
             if (gp->u.oldpupupu.xD4 != 0) {
-                Ground* other_gp;
-
                 gp->u.oldpupupu.xD4 = 0;
                 gp->u.oldpupupu.xCC = 0;
                 gp->u.oldpupupu.xD0 =
@@ -580,13 +604,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                 grAnime_801C8138(
                     gobj, gp->map_id,
                     grOp_804D48C8[gp->u.oldpupupu.xCC][gp->u.oldpupupu.xD8]);
-                gp = gobj->user_data;
-                other_gp = Ground_801C2BA4(1)->user_data;
-                other_gp->u.oldpupupu.xC4 = gp->u.oldpupupu.xC4;
-                other_gp->u.oldpupupu.xC8 = gp->u.oldpupupu.xC8;
-                other_gp->u.oldpupupu.xCC = 0;
-                other_gp->u.oldpupupu.xD4 = gp->u.oldpupupu.xD8;
-                other_gp->u.oldpupupu.xD0 = 1;
+                grOldPupupu_SyncSecondary(gobj);
                 gp->u.oldpupupu.xCC = randrange((s32) yakumono_param->x30,
                                                 (s32) yakumono_param->x2C);
             }
@@ -594,8 +612,6 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
             gp->u.oldpupupu.xD0 -= 1;
             if (grAnime_801C83D0(gobj, 0, 7) != 0) {
                 if (gp->u.oldpupupu.xD0 > 0) {
-                    Ground* other_gp;
-
                     gp->u.oldpupupu.xCC -= 1;
                     if (gp->u.oldpupupu.xCC <= 0) {
                         gp->u.oldpupupu.xCC = 0;
@@ -606,26 +622,15 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                             randrange((s32) yakumono_param->x30,
                                       (s32) yakumono_param->x2C);
                     }
-                    gp = gobj->user_data;
-                    other_gp = Ground_801C2BA4(1)->user_data;
-                    other_gp->u.oldpupupu.xC4 = gp->u.oldpupupu.xC4;
-                    other_gp->u.oldpupupu.xC8 = gp->u.oldpupupu.xC8;
-                    other_gp->u.oldpupupu.xCC = 0;
-                    other_gp->u.oldpupupu.xD4 = gp->u.oldpupupu.xD8;
-                    other_gp->u.oldpupupu.xD0 = 1;
+                    grOldPupupu_SyncSecondary(gobj);
                     return;
                 }
 
                 {
                     Ground* other_gp;
 
-                    gp = gobj->user_data;
-                    gp->u.oldpupupu.xC4 += 1;
-                    if (gp->u.oldpupupu.xC4 >= 3) {
-                        gp->u.oldpupupu.xC4 = 0;
-                    }
-                    gp->u.oldpupupu.xC8 = grOp_803E67D8[gp->u.oldpupupu.xC4];
-                    gp->u.oldpupupu.xD4 = 1;
+                    grOldPupupu_Advance(gobj);
+                    /* grOldPupupu_SyncSecondary would recolor gp here. */
                     gp = gobj->user_data;
                     other_gp = Ground_801C2BA4(1)->user_data;
                     other_gp->u.oldpupupu.xC4 = gp->u.oldpupupu.xC4;
@@ -647,7 +652,6 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                 } stack;
                 s32 side;
                 f32 side_f;
-                Ground* other_gp;
 
                 gp->u.oldpupupu.xCC = 0;
                 HSD_JObjGetTranslation(gobj->hsd_obj, &stack.pos);
@@ -665,27 +669,9 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                     grAnime_801C8138(gobj, gp->map_id,
                                      grOp_804D48D0[gp->u.oldpupupu.xCC]
                                                   [gp->u.oldpupupu.xD8]);
-                    gp = gobj->user_data;
-                    gp->u.oldpupupu.xC4 += 1;
-                    if (gp->u.oldpupupu.xC4 >= 3) {
-                        gp->u.oldpupupu.xC4 = 0;
-                    }
-                    gp->u.oldpupupu.xC8 = grOp_803E67D8[gp->u.oldpupupu.xC4];
-                    gp->u.oldpupupu.xD4 = 1;
-                    gp = gobj->user_data;
-                    other_gp = Ground_801C2BA4(1)->user_data;
-                    other_gp->u.oldpupupu.xC4 = gp->u.oldpupupu.xC4;
-                    other_gp->u.oldpupupu.xC8 = gp->u.oldpupupu.xC8;
-                    other_gp->u.oldpupupu.xCC = 0;
-                    other_gp->u.oldpupupu.xD4 = gp->u.oldpupupu.xD8;
-                    other_gp->u.oldpupupu.xD0 = 1;
-                    gp = gobj->user_data;
-                    other_gp = Ground_801C2BA4(1)->user_data;
-                    other_gp->u.oldpupupu.xC4 = gp->u.oldpupupu.xC4;
-                    other_gp->u.oldpupupu.xC8 = gp->u.oldpupupu.xC8;
-                    other_gp->u.oldpupupu.xCC = 0;
-                    other_gp->u.oldpupupu.xD4 = gp->u.oldpupupu.xD8;
-                    other_gp->u.oldpupupu.xD0 = 1;
+                    grOldPupupu_Advance(gobj);
+                    grOldPupupu_SyncSecondary(gobj);
+                    grOldPupupu_SyncSecondary(gobj);
                 } else {
                     gp->u.oldpupupu.xD8 = side_f;
                     gp->u.oldpupupu.xD4 = 0;
@@ -694,55 +680,27 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                     grAnime_801C8138(gobj, gp->map_id,
                                      grOp_804D48D8[gp->u.oldpupupu.xCC]
                                                   [gp->u.oldpupupu.xD8]);
-                    gp = gobj->user_data;
-                    other_gp = Ground_801C2BA4(1)->user_data;
-                    other_gp->u.oldpupupu.xC4 = gp->u.oldpupupu.xC4;
-                    other_gp->u.oldpupupu.xC8 = gp->u.oldpupupu.xC8;
-                    other_gp->u.oldpupupu.xCC = 0;
-                    other_gp->u.oldpupupu.xD4 = gp->u.oldpupupu.xD8;
-                    other_gp->u.oldpupupu.xD0 = 1;
+                    grOldPupupu_SyncSecondary(gobj);
                 }
             }
 
             if (gp->u.oldpupupu.xC8 == 1 && grAnime_801C83D0(gobj, 0, 7) != 0)
             {
-                Ground* other_gp;
-
-                gp = gobj->user_data;
-                gp->u.oldpupupu.xC4 += 1;
-                if (gp->u.oldpupupu.xC4 >= 3) {
-                    gp->u.oldpupupu.xC4 = 0;
-                }
-                gp->u.oldpupupu.xC8 = grOp_803E67D8[gp->u.oldpupupu.xC4];
-                gp->u.oldpupupu.xD4 = 1;
-                gp = gobj->user_data;
-                other_gp = Ground_801C2BA4(1)->user_data;
-                other_gp->u.oldpupupu.xC4 = gp->u.oldpupupu.xC4;
-                other_gp->u.oldpupupu.xC8 = gp->u.oldpupupu.xC8;
-                other_gp->u.oldpupupu.xCC = 0;
-                other_gp->u.oldpupupu.xD4 = gp->u.oldpupupu.xD8;
-                other_gp->u.oldpupupu.xD0 = 1;
+                grOldPupupu_Advance(gobj);
+                grOldPupupu_SyncSecondary(gobj);
                 return;
             }
             break;
 
         case 2:
             if (gp->u.oldpupupu.xD4 != 0) {
-                Ground* other_gp;
-
                 gp->u.oldpupupu.xD4 = 0;
                 gp->u.oldpupupu.xCC = 0;
                 gp->u.oldpupupu.xD0 = 0;
                 grAnime_801C8138(
                     gobj, gp->map_id,
                     grOp_804D48D0[gp->u.oldpupupu.xCC][gp->u.oldpupupu.xD8]);
-                gp = gobj->user_data;
-                other_gp = Ground_801C2BA4(1)->user_data;
-                other_gp->u.oldpupupu.xC4 = gp->u.oldpupupu.xC4;
-                other_gp->u.oldpupupu.xC8 = gp->u.oldpupupu.xC8;
-                other_gp->u.oldpupupu.xCC = 0;
-                other_gp->u.oldpupupu.xD4 = gp->u.oldpupupu.xD8;
-                other_gp->u.oldpupupu.xD0 = 1;
+                grOldPupupu_SyncSecondary(gobj);
             }
 
             if (grAnime_801C83D0(gobj, 0, 7) == 0) {
@@ -775,22 +733,8 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                     }
                 }
             } else {
-                Ground* other_gp;
-
-                gp = gobj->user_data;
-                gp->u.oldpupupu.xC4 += 1;
-                if (gp->u.oldpupupu.xC4 >= 3) {
-                    gp->u.oldpupupu.xC4 = 0;
-                }
-                gp->u.oldpupupu.xC8 = grOp_803E67D8[gp->u.oldpupupu.xC4];
-                gp->u.oldpupupu.xD4 = 1;
-                gp = gobj->user_data;
-                other_gp = Ground_801C2BA4(1)->user_data;
-                other_gp->u.oldpupupu.xC4 = gp->u.oldpupupu.xC4;
-                other_gp->u.oldpupupu.xC8 = gp->u.oldpupupu.xC8;
-                other_gp->u.oldpupupu.xCC = 0;
-                other_gp->u.oldpupupu.xD4 = gp->u.oldpupupu.xD8;
-                other_gp->u.oldpupupu.xD0 = 1;
+                grOldPupupu_Advance(gobj);
+                grOldPupupu_SyncSecondary(gobj);
             }
             break;
         }
