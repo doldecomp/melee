@@ -1455,7 +1455,7 @@ config.libs = [
             Object(Matching, "melee/vi/vi0102.c"),
             Object(NonMatching, "melee/vi/vi0401.c"),
             Object(Matching, "melee/vi/vi0402.c"),
-            Object(NonMatching, "melee/vi/vi0501.c"),
+            Object(Matching, "melee/vi/vi0501.c"),
             Object(Matching, "melee/vi/vi0502.c"),
             Object(Matching, "melee/vi/vi0601.c"),
             Object(Matching, "melee/vi/vi0801.c"),
