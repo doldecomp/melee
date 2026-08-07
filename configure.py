@@ -1145,7 +1145,7 @@ config.libs = [
             Object(Matching, "melee/gr/grfigureget.c"),
             Object(Matching, "melee/gr/grbattle.c"),
             Object(Matching, "melee/gr/grlast.c"),
-            Object(NonMatching, "melee/gr/grhomerun.c"),
+            Object(Matching, "melee/gr/grhomerun.c"),
             Object(Matching, "melee/gr/grheal.c"),
             # Break the Targets stages
             Object(Matching, "melee/gr/grtmario.c"),
