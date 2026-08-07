@@ -228,8 +228,10 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
     gp->u.unk.xD4 = (intptr_t) GObj_Create(0x11, 0x13, 0);
     cobj = lb_80013B14(&cobj_desc);
     HSD_CObjSetPerspective(cobj, 30.0F, 1.4F);
-    HSD_GObjObject_80390A70((HSD_GObj*) gp->u.unk.xD4, HSD_GObj_804D784B,
-                            cobj);
+    {
+        u8 kind = HSD_GObj_804D784B;
+        HSD_GObjObject_80390A70((HSD_GObj*) gp->u.unk.xD4, kind, cobj);
+    }
     GObj_SetupGXLinkMax((HSD_GObj*) gp->u.unk.xD4,
                         (GObj_RenderFunc) (Event) fn_8021EB10, 7);
     ((HSD_GObj*) gp->u.unk.xD4)->gxlink_prios = 2;
