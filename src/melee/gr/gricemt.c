@@ -1,60 +1,18 @@
 #include "gricemt.static.h"
 
-struct grIceMt_YakumonoParam {
-    float x0;
-    int x4;
-    float x8;
-    float xC;
-    float x10;
-    float x14;
-    float x18;
-    float x1C;
-    float x20;
-    float x24;
-    float x28;
-    float x2C;
-    float x30;
-    float x34;
-    u16 x38;
-    u16 x3A;
-    float x3C;
-    float x40;
-    float x44;
-    float x48;
-    float x4C;
-    float x50;
-    float x54;
-    float x58;
-    float x5C;
-    float x60;
-    float x64;
-    float x68;
-    float x6C;
-    float x70;
-    float x74;
-    float x78;
-    float x7C;
-    float x80;
-    float x84;
-    float x88;
-    float x8C;
-    float x90;
-    float x94;
-    float x98;
-    float x9C;
-    float xA0;
-    float xA4;
-    float xA8;
-    s16* xAC;
-    s16* xB0;
-    s16* xB4;
-    s16 xB8;
-    s16 pad;
-    grZakoGenerator_SpawnDesc xBC;
-    float xC0;
-    float xC4;
-    float xC8;
-    float xCC;
+#include <dolphin/types.h>
+
+typedef int (*GrIceMtCb)(Ground_GObj* gobj, int* out);
+
+/* 1FA364 */ bool grIceMt_801FA364(void* state, float* out, GrIceMtCb cb,
+                                   Ground_GObj* gobj);
+/* 1F9150 */ static int fn_801F9150(Ground_GObj* gobj, int* out);
+/* 1F9ACC */ static int grIceMt_801F9ACC(s16*, float, GrIceMtSegmentLookup,
+                                         Ground_GObj*);
+
+struct IceMtTimerCursor {
+    s16 pad[0x6E];
+    s16 xDC;
 };
 
 static struct grIceMt_YakumonoParam* yakumono_param;
@@ -161,6 +119,7 @@ static void order_data0(void)
 
 StageCallbacks grIm_StageCallbacks[] = {
     {
+        // 0
         grIceMt_801F72D4,
         grIceMt_801F75DC,
         grIceMt_801F75E4,
@@ -168,6 +127,7 @@ StageCallbacks grIm_StageCallbacks[] = {
         0,
     },
     {
+        // 1
         grIceMt_801F7D94,
         grIceMt_801F7EE0,
         grIceMt_801F7EE8,
@@ -175,6 +135,7 @@ StageCallbacks grIm_StageCallbacks[] = {
         0,
     },
     {
+        // 2
         grIceMt_801F7F70,
         grIceMt_801F8154,
         grIceMt_801F815C,
@@ -182,6 +143,7 @@ StageCallbacks grIm_StageCallbacks[] = {
         0,
     },
     {
+        // 3
         grIceMt_801F8208,
         grIceMt_801F835C,
         grIceMt_801F8364,
@@ -189,6 +151,7 @@ StageCallbacks grIm_StageCallbacks[] = {
         0,
     },
     {
+        // 4
         grIceMt_801F83EC,
         grIceMt_801F85BC,
         grIceMt_801F85C4,
@@ -196,6 +159,7 @@ StageCallbacks grIm_StageCallbacks[] = {
         0,
     },
     {
+        // 5
         grIceMt_801F865C,
         grIceMt_801F87C0,
         grIceMt_801F87C8,
@@ -203,14 +167,19 @@ StageCallbacks grIm_StageCallbacks[] = {
         0,
     },
     {
+        // 6
         grIceMt_801F8850,
         grIceMt_801F89A4,
         grIceMt_801F89AC,
         grIceMt_801F89E0,
         0,
     },
-    { 0 },
     {
+        // 7
+        0,
+    },
+    {
+        // 8
         grIceMt_801F8A34,
         grIceMt_801F8B08,
         grIceMt_801F8B10,
@@ -218,6 +187,7 @@ StageCallbacks grIm_StageCallbacks[] = {
         (1 << 30) | (1 << 31),
     },
     {
+        // 9
         grIceMt_801F75FC,
         grIceMt_801F7720,
         grIceMt_801F7728,
@@ -225,6 +195,7 @@ StageCallbacks grIm_StageCallbacks[] = {
         0,
     },
     {
+        // 10
         grIceMt_801F785C,
         grIceMt_801F796C,
         grIceMt_801F7A2C,
@@ -537,8 +508,6 @@ void fn_801F75EC(HSD_GObj* arg0)
     GET_GROUND(arg0)->u.icemt.xD8 = 0;
 }
 
-/// @note This function treats xF4 area as s16 indices during initialization.
-/// The same memory is later interpreted as pointers by other functions.
 void grIceMt_801F75FC(Ground_GObj* arg0)
 {
     u32 iVar1;
@@ -546,33 +515,31 @@ void grIceMt_801F75FC(Ground_GObj* arg0)
     Ground* gp = GET_GROUND(arg0);
     PAD_STACK(8);
 
-    /// @todo @c sizeof surrounding struct
-    memzero(&gp->u.icemt.xDC, 24);
+    memzero(&gp->u.icemt9.x18, sizeof(gp->u.icemt9.x18));
 
-    /// @todo @c sizeof surrounding struct
-    memzero(&gp->u.icemt.xF4, 20);
+    memzero(&gp->u.icemt9.x30, sizeof(gp->u.icemt9.x30));
 
     do {
         iVar1 = HSD_Randi(6);
-        val = gp->u.icemt.xF4[iVar1];
+        val = gp->u.icemt9.x30[iVar1];
     } while (val != 0);
-    gp->u.icemt.xF4[iVar1] = *(s16*) yakumono_param;
-    gp->u.icemt.xC4 = (s16) grIm_803E4068[iVar1].id;
+    gp->u.icemt9.x30[iVar1] = *(s16*) yakumono_param;
+    gp->u.icemt9.x0 = (s16) grIm_803E4068[iVar1].id;
     do {
         iVar1 = HSD_Randi(6);
-        val = gp->u.icemt.xF4[iVar1];
+        val = gp->u.icemt9.x30[iVar1];
     } while (val != 0);
-    gp->u.icemt.xF4[iVar1] = *(s16*) yakumono_param;
-    gp->u.icemt.xC6 = (s16) grIm_803E4068[iVar1].id;
-    grIceMt_801FA0BC(&gp->u.icemt.xC4);
-    gp->u.icemt.xDA = 0;
-    gp->u.icemt.xC8 = 0;
-    gp->u.icemt.xCE = 0;
-    gp->u.icemt.xCA = 0;
-    gp->u.icemt.xCC = 0;
-    gp->u.icemt.xD0 = -1;
-    gp->u.icemt.xD4 = 0;
-    gp->u.icemt.xD8 = 1;
+    gp->u.icemt9.x30[iVar1] = *(s16*) yakumono_param;
+    gp->u.icemt9.x2 = (s16) grIm_803E4068[iVar1].id;
+    grIceMt_801FA0BC(&gp->u.icemt9.x0);
+    gp->u.icemt9.x16 = 0;
+    gp->u.icemt9.x4 = 0;
+    gp->u.icemt9.xA = 0;
+    gp->u.icemt9.x6 = 0;
+    gp->u.icemt9.x8 = 0;
+    gp->u.icemt9.xC = -1;
+    gp->u.icemt9.x10 = 0;
+    gp->u.icemt9.x14 = 1;
     Ground_801C10B8(arg0, fn_801F75EC);
     return;
 }
@@ -588,12 +555,10 @@ void grIceMt_801F7728(Ground_GObj* gobj)
     float y;
     u32 unused2;
     Ground* gp = gobj->user_data;
-    if (gp->u.icemt.xD8 == 0) {
-        grIceMt_801FA364(&gp->u.icemt.xC8, &y,
-                         (HSD_GObjEvent) (Event) fn_801F8E58, gobj);
-        grIceMt_801F9ACC((HSD_GObj*) &gp->u.icemt.xC4,
-                         grIceMt_801F96E0(&gp->u.icemt, -y), fn_801F9038,
-                         gobj);
+    if (gp->u.icemt9.x14 == 0) {
+        grIceMt_801FA364(&gp->u.icemt9.x4, &y, fn_801F8E58, gobj);
+        grIceMt_801F9ACC(&gp->u.icemt9.x0, grIceMt_801F96E0(&gp->u.icemt, -y),
+                         fn_801F9038, gobj);
         grIceMt_801F9668(y);
     }
 }
@@ -691,8 +656,7 @@ void grIceMt_801F7A2C(Ground_GObj* arg0)
         return;
     }
     if (!((UnkFlagStruct*) &gp->u.icemt.xD8)->b2) {
-        var_r30 = grIceMt_801FA364(&gp->u.icemt.xC8, &sp30,
-                                   (HSD_GObjEvent) (Event) fn_801F9150, arg0);
+        var_r30 = grIceMt_801FA364(&gp->u.icemt.xC8, &sp30, fn_801F9150, arg0);
         if (((UnkFlagStruct*) &gp->u.icemt.xD8)->b4) {
             fighter = Ground_801C57A4();
             if (fighter != NULL) {
@@ -745,8 +709,8 @@ void grIceMt_801F7A2C(Ground_GObj* arg0)
         }
         sp30 = gp->u.icemt.xD4;
     }
-    grIceMt_801F9ACC((Ground_GObj*) &gp->u.icemt.xC4,
-                     grIceMt_801F96E0(&gp->u.icemt, -sp30), fn_801F91A8, arg0);
+    grIceMt_801F9ACC(&gp->u.icemt.xC4, grIceMt_801F96E0(&gp->u.icemt, -sp30),
+                     fn_801F91A8, arg0);
     grIceMt_801F9668(sp30);
     if (gp->u.icemt.xC4 == -1) {
         ((UnkFlagStruct*) &gp->u.icemt.xD8)->b2 = 1;
@@ -1221,7 +1185,7 @@ static inline s32 grIceMt_GetRandomIndex(s32 max, s32* list)
     return list[max != 0 ? HSD_Randi(max) : 0];
 }
 
-static inline void grIceMt_GetRandomTimer(s32* out)
+static inline void grIceMt_GetRandomTimer(int* out)
 {
     s32 a;
     s32 b;
@@ -1239,43 +1203,37 @@ static inline void grIceMt_GetRandomTimer(s32* out)
     *out = a;
 }
 
-s32 fn_801F8E58(Ground_GObj* arg0, s32* out)
+int fn_801F8E58(Ground_GObj* arg0, int* out)
 {
-    typedef struct IceMtTimerCursor {
-        s16 pad[0x6E];
-        s16 xDC;
-    } IceMtTimerCursor;
-    IceMtTimerCursor* timer;
-    IceMtTimerCursor* timer_base;
+    Ground* gp;
+    Ground* gp1;
     s32* p;
     s32 i;
     s32 max;
     s32 list[12];
     s32 chosen;
 
-    timer_base = timer = arg0->user_data;
+    gp1 = gp = arg0->user_data;
     p = &list[max = 0];
-    for (i = 0; i < 12; i++) {
-        if (timer->xDC == 0 && (Stage_80225194() != 0xD4 || i >= 4)) {
+    for (i = 0; i < (ssize_t) ARRAY_SIZE(gp->u.icemt9.x18); i++) {
+        if (gp->u.icemt9.x18[0] == 0 && (Stage_80225194() != 212 || i >= 4)) {
             *p = i;
             p++;
             max++;
         }
-        timer = (IceMtTimerCursor*) ((s16*) timer + 1);
     }
 
-    HSD_ASSERT(0x81D, max);
+    HSD_ASSERT(2077, max);
     chosen = grIceMt_GetRandomIndex(max, list);
 
-    timer = timer_base;
-    for (i = 0; i < 12; i++) {
-        if (timer->xDC > 0) {
-            timer->xDC--;
+    gp = gp1;
+    for (i = 0; i < ARRAY_SIZE(gp->u.icemt9.x18); i++) {
+        if (gp->u.icemt9.x18[i] > 0) {
+            gp->u.icemt9.x18[i]--;
         }
-        timer = (IceMtTimerCursor*) ((s16*) timer + 1);
     }
 
-    (&timer_base->xDC)[chosen] = ((s16*) yakumono_param)[1];
+    gp1->u.icemt9.x18[chosen] = yakumono_param->x2;
     grIceMt_GetRandomTimer(out);
     return chosen;
 }
@@ -1304,7 +1262,7 @@ int fn_801F9038(Ground_GObj* gobj)
     return grIm_803E4068[idx].id;
 }
 
-s32 fn_801F9150(HSD_GObj* arg0, s32* out)
+int fn_801F9150(HSD_GObj* arg0, int* out)
 {
     Ground* gp = arg0->user_data;
     s16 next = 0;
@@ -1548,10 +1506,9 @@ static inline HSD_GObj* grIceMt_801F71E8_noinline2(int id)
     return grIceMt_801F71E8_inner2(id);
 }
 
-int grIceMt_801F9ACC(Ground_GObj* gobj, float y, GrIceMtSegmentLookup ev,
+int grIceMt_801F9ACC(s16* seg, float y, GrIceMtSegmentLookup ev,
                      Ground_GObj* arg3)
 {
-    s16* seg = (s16*) gobj;
     s32 did = 0;
     HSD_GObj* mgobj;
     HSD_JObj* jobj;
@@ -1780,14 +1737,12 @@ typedef struct grIceMt_FA364_State {
     /* 0xC */ f32 cur;
 } grIceMt_FA364_State;
 
-bool grIceMt_801FA364(void* state_, f32* out, HSD_GObjEvent cb_,
-                      Ground_GObj* gobj)
+bool grIceMt_801FA364(void* state_, f32* out, GrIceMtCb cb, Ground_GObj* gobj)
 {
     grIceMt_FA364_State* state = state_;
-    s32 (*cb)(HSD_GObj*, s32*) = (s32 (*)(HSD_GObj*, s32*))(Event) cb_;
     bool ret = true;
     f32 result;
-    s32 next_delay;
+    int next_delay;
     s16 tmp;
 
     switch (state->phase) {
@@ -1795,7 +1750,7 @@ bool grIceMt_801FA364(void* state_, f32* out, HSD_GObjEvent cb_,
         tmp = state->delay;
         state->delay = tmp - 1;
         if (tmp < 0) {
-            state->idx = cb((HSD_GObj*) gobj, &next_delay);
+            state->idx = cb(gobj, &next_delay);
             state->delay = (s16) next_delay;
             state->phase = 1;
             state->lerp_count = ((s16*) yakumono_param)[0x34 / 2];
