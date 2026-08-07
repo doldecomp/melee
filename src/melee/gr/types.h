@@ -698,6 +698,23 @@ struct grIceMt_GroundVars2 {
     /* +30 gp+F4 */ HSD_GObj* xF8[20];
 };
 
+struct grIceMt_GObj9_GroundVars {
+    /*  +0 gp+C4 */ s16 x0;
+    /*  +2 gp+C6 */ s16 x2;
+    /*  +4 gp+C8 */ s16 x4;
+    /*  +6 gp+CA */ s16 x6;
+    /*  +8 gp+CC */ s16 x8;
+    /*  +A gp+CE */ s16 xA;
+    /*  +C gp+D0 */ s16 xC;
+    /*  +E gp+D2 */ s16 xE;
+    /* +10 gp+D4 */ f32 x10;
+    /* +14 gp+D8 */ s16 x14;
+    /* +16 gp+DA */ s16 x16;
+    /* +18 gp+DC */ s16 x18[12];
+    /* +30 gp+F4 */ s16 x30[10];
+    /* 0x01C */ char pad_1C[0xFC];
+}; /* size = 0x140 */
+
 typedef struct grInishie1_Block {
     s16 status;
     s16 x2;
@@ -1787,6 +1804,7 @@ struct Ground {
         struct grGarden_GroundVars2 garden2;
         struct grIceMt_GroundVars icemt;
         struct grIceMt_GroundVars2 icemt2;
+        struct grIceMt_GObj9_GroundVars icemt9;
         struct grInishie1_GroundVars inishie1;
         struct grInishie1_GroundVars2 inishie12;
         struct grInishie1_GroundVars3 inishie13;
