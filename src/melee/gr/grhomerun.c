@@ -305,6 +305,7 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
     Vec3 pos1;
     Vec3 pos2;
     Vec3 cam_interest;
+    HSD_GObj* fighter;
     CmSubject* subject;
     Ground* gp;
     Ground* gp2;
@@ -320,17 +321,17 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
     f32 x;
 
     gp = gobj->user_data;
-    gobj2 = Ground_801C57A4();
-    if (gobj2 != NULL) {
-        ftLib_80086644(gobj2, &pos0);
-        subject = ftLib_80086B74(gobj2);
+    fighter = Ground_801C57A4();
+    if (fighter != NULL) {
+        ftLib_80086644(fighter, &pos0);
+        subject = ftLib_80086B74(fighter);
         if (subject != NULL) {
             subject->x8 = 1;
             subject->xC_b1 = 1;
         }
-        gobj2 = Ground_801C57C8();
-        if (gobj2 != NULL) {
-            subject = ftLib_80086B74(gobj2);
+        fighter = Ground_801C57C8();
+        if (fighter != NULL) {
+            subject = ftLib_80086B74(fighter);
             if (subject != NULL) {
                 subject->x8 = 1;
                 subject->xC_b1 = 1;
@@ -394,8 +395,7 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
     }
 
     for (i = 63; i > 0; i--) {
-        gobj2 = gp->u.homerun.parts[i];
-        if (gobj2 != NULL) {
+        if ((gobj2 = gp->u.homerun.parts[i]) != NULL) {
             break;
         }
     }
