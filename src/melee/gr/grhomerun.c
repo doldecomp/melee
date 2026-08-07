@@ -722,15 +722,16 @@ void grHomeRun_8021E4FC(Ground_GObj* arg) {}
 HSD_GObj* grHomeRun_8021E500(int arg0)
 {
     s32 gobj_id;
+    HSD_JObj* jobj;
+    Ground* gp;
     HSD_GObj* gobj;
     HSD_JObj* child;
-    Ground* gp;
-    s32 quot;
     s32 idx;
+    s32 quot;
     f32 offset;
-    HSD_JObj* jobj;
 
     quot = arg0 / grHr_804D6ADC;
+    (void) quot;
     idx = quot % 4;
     if (idx == 0) {
         if (grHr_804D6ADC - 1 != arg0 % grHr_804D6ADC) {
@@ -766,6 +767,7 @@ HSD_GObj* grHomeRun_8021E500(int arg0)
     (void) jobj;
     HSD_ASSERT(0x3D6, jobj);
     gp = gobj->user_data;
+    (void) gp;
     HSD_ASSERT(0x3D7, gp);
 
     HSD_JObjSetScaleX(jobj, grHr_804D6AE4 * HSD_JObjGetScaleX(jobj));
