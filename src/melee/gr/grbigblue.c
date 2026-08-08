@@ -1924,7 +1924,6 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
     Vec3 normal;
     u8 pad[4];
     Vec3 euler;
-    f32 half_h;
     f32 surface_y;
 
     HSD_JObjGetTranslation2(jobj, &pos);
@@ -2082,10 +2081,9 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
 
         surface_y = grBigBlue_801EC58C(&pos2, NULL, 500.0f);
 
-        half_h = 52.0f * Ground_801C0498() / 2 + 4.0f;
-        ace_result =
-            grBigBlue_801EACE8(jobj, &pos, &y_check,
-                               68.0f * Ground_801C0498() / 2 + 10.0f, half_h);
+        ace_result = grBigBlue_801EACE8(jobj, &pos, &y_check,
+                                        68.0f * Ground_801C0498() / 2 + 10.0f,
+                                        52.0f * Ground_801C0498() / 2 + 4.0f);
 
         if (ace_result == 0 || (ace_result == 1 && pos.y < y_check)) {
             if (bounds_y <= surface_y) {
@@ -2104,26 +2102,23 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
         }
 
         {
-            f32 target_y = gp->u.bigblue.platform.target_y;
-            f32 diff;
-            (void) target_y;
-            diff = pos.y - target_y;
+            f32 diff = pos.y - gp->u.bigblue.platform.target_y;
             if (diff < 0.0f) {
                 diff = -diff;
             }
             if (diff < 0.5f) {
                 vel_y = 0.0f;
-            } else if (pos.y < target_y) {
-                f32 max = yakumono_param->x128;
-                vel_y = (target_y - pos.y) / yakumono_param->x124;
-                if (vel_y > max) {
-                    vel_y = max;
+            } else if (pos.y < gp->u.bigblue.platform.target_y) {
+                vel_y = (gp->u.bigblue.platform.target_y - pos.y) /
+                        yakumono_param->x124;
+                if (vel_y > yakumono_param->x128) {
+                    vel_y = yakumono_param->x128;
                 }
             } else {
-                f32 min = -yakumono_param->x130;
-                vel_y = (target_y - pos.y) / yakumono_param->x12C;
-                if (vel_y < min) {
-                    vel_y = min;
+                vel_y = (gp->u.bigblue.platform.target_y - pos.y) /
+                        yakumono_param->x12C;
+                if (vel_y < -yakumono_param->x130) {
+                    vel_y = -yakumono_param->x130;
                 }
             }
         }
