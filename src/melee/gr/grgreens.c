@@ -446,7 +446,7 @@ static inline int get_whispy_dir(Ground_GObj* gobj, Vec3* pos)
 
 void grGreens_80213C10(Ground_GObj* gobj)
 {
-    Ground_GObj* bg_gobj = Ground_801C2BA4(4);
+    Ground_GObj* bg_gobj = Ground_GetMapGObj(4);
     Ground* gp = GET_GROUND(gobj);
     Ground* bg_gp = GET_GROUND(bg_gobj);
     UNUSED u8 pad0[0x18];

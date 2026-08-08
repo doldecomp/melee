@@ -51,7 +51,8 @@ grIceMt_801F91EC(HSD_GObj* param_1, s16* param_2, int param_3, int param_4,
                                      CollData* coll, int coll_x50,
                                      mpLib_GroundEnum ground_kind,
                                      float delta_y);
-/* 1F96E0 */ static float grIceMt_801F96E0(struct grIceMt_GroundVars*, float);
+/* 1F96E0 */ static float grIceMt_801F96E0(struct grIceMt_GObj9_GObj10_x0*,
+                                           float);
 /* 1FA7F0 */ static void grIceMt_801FA7F0(void* user_data, int joint_id,
                                           CollData* coll, int coll_x50,
                                           mpLib_GroundEnum ground_kind,
@@ -99,11 +100,13 @@ struct grIceMt_YakumonoParam {
     float x8C;
     float x90;
     float x94;
-    float x98;
+    s16 ft_max_y;
+    s16 x9E;
     float x9C;
     float xA0;
-    float xA4;
-    float xA8;
+    s16 xA4;
+    s16 xA6;
+    s16 xA8;
     s16* xAC;
     s16* xB0;
     s16* xB4;

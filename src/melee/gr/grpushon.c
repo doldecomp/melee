@@ -132,7 +132,7 @@ void grPushOn_80218330(void)
     Vec3 vec;
 
     grPushOn_802183E4(2);
-    gobj = Ground_801C57A4();
+    gobj = Ground_GetP1Fighter();
     if (gobj != NULL) {
         ftLib_80086644(gobj, &vec);
         Ground_801C38BC(vec.x, vec.y);
@@ -242,7 +242,7 @@ bool grPushOn_80218670(Ground_GObj* arg)
 
 bool fn_80218678(void)
 {
-    HSD_GObj* gobj = Ground_801C2BA4(1);
+    HSD_GObj* gobj = Ground_GetMapGObj(1);
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
         if (gp != NULL) {
@@ -263,7 +263,7 @@ void grPushOn_802186C8(Ground_GObj* gobj)
     vec = grPushOn_803B8440;
     Ground_801C3D44(fn_80218678, 25.0f, 20.0f);
     {
-        HSD_GObj* gobj2 = Ground_801C57A4();
+        HSD_GObj* gobj2 = Ground_GetP1Fighter();
         if (gobj2 != NULL) {
             ftLib_80086644(gobj2, &vec);
             Ground_801C0498();
@@ -338,7 +338,7 @@ void grPushOn_80218888(Ground_GObj* gobj)
     GET_GROUND(0);
 
     gp = GET_GROUND(gobj);
-    player = Ground_801C57A4();
+    player = Ground_GetP1Fighter();
     if (player != NULL) {
         ftLib_80086644(player, &player_pos);
     } else {

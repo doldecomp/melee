@@ -753,7 +753,7 @@ void fn_801D94F0(Ground_GObj* gobj)
 void grZebes_801D9508(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    HSD_GObj* map_a_gobj = Ground_801C2BA4(6);
+    HSD_GObj* map_a_gobj = Ground_GetMapGObj(6);
     PAD_STACK(0x10);
     HSD_ASSERT(909, map_a_gobj);
     gp->u.zebes.x4 = (u32) Ground_801C3FA4(map_a_gobj, 14);

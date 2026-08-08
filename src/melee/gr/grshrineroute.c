@@ -393,7 +393,7 @@ bool grShrineRoute_80208F14(void)
     HSD_GObj* gobj;
     Ground* gp;
 
-    gobj = Ground_801C2BA4(4);
+    gobj = Ground_GetMapGObj(4);
     if (gobj != NULL) {
         gp = GET_GROUND(gobj);
         if (gp != NULL) {
@@ -422,7 +422,7 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
     s32 track_plat = 0;
     PAD_STACK(56);
 
-    player = Ground_801C57A4();
+    player = Ground_GetP1Fighter();
     if (player != NULL) {
         ftLib_80086644(player, &sp7C);
     } else {
@@ -478,7 +478,7 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
                         }
                         grMaterial_801C9604((HSD_GObj*) gobj,
                                             yakumono_param->x0, 0);
-                        temp = Ground_801C2BA4(2);
+                        temp = Ground_GetMapGObj(2);
                         if (temp != NULL) {
                             grMaterial_801C9604(temp, yakumono_param->x0, 0);
                         }
@@ -557,7 +557,7 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
             HSD_JObjSetFlagsAll(Ground_801C3FA4((HSD_GObj*) gobj, 1),
                                 JOBJ_HIDDEN);
             {
-                HSD_GObj* gr2 = Ground_801C2BA4(2);
+                HSD_GObj* gr2 = Ground_GetMapGObj(2);
                 if (gr2 != NULL) {
                     HSD_JObjSetFlagsAll(Ground_801C3FA4(gr2, 0), JOBJ_HIDDEN);
                 }
@@ -641,7 +641,7 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
             }
             grMaterial_801C9604((HSD_GObj*) gobj, yakumono_param->xC, 0);
             {
-                HSD_GObj* gr2 = Ground_801C2BA4(2);
+                HSD_GObj* gr2 = Ground_GetMapGObj(2);
                 if (gr2 != NULL) {
                     grMaterial_801C9604(gr2, yakumono_param->xC, 0);
                 }
@@ -659,7 +659,7 @@ void grShrineRoute_80208F70(Ground_GObj* gobj)
             HSD_JObjClearFlagsAll(j19, JOBJ_HIDDEN);
             HSD_JObjClearFlagsAll(Ground_801C3FA4((HSD_GObj*) gobj, 1),
                                   JOBJ_HIDDEN);
-            gr2 = Ground_801C2BA4(2);
+            gr2 = Ground_GetMapGObj(2);
             if (gr2 != NULL) {
                 HSD_JObjClearFlagsAll(Ground_801C3FA4(gr2, 0), JOBJ_HIDDEN);
             }
@@ -961,7 +961,7 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
     GET_GROUND(0);
 
     gp = GET_GROUND(gobj);
-    player = Ground_801C57A4();
+    player = Ground_GetP1Fighter();
     if (player != NULL) {
         ftLib_80086644(player, &player_pos);
     } else {
@@ -1509,7 +1509,7 @@ void grShrineRoute_8020AF38(HSD_GObj* gobj, s32 arg1)
     HSD_JObj* jobj;
     HSD_GObj* pgobj;
 
-    pgobj = Ground_801C57A4();
+    pgobj = Ground_GetP1Fighter();
 
     if (gp->u.map.symbol[ix] != NULL) {
         HSD_GObj** symbol = gp->u.map.symbol;

@@ -1255,7 +1255,7 @@ void fn_801D2ED0(HSD_GObj* gobj, int unused)
         HSD_CObjEndCurrent();
     }
     lb_800122C8(&wrapper->desc, 0, 0, 1);
-    vision_gobj = Ground_801C2BA4(PsType_Display);
+    vision_gobj = Ground_GetMapGObj(PsType_Display);
     HSD_ASSERT(0x6D2, vision_gobj);
     gp2 = GET_GROUND(vision_gobj);
     HSD_ASSERT(0x6D3, gp2);
@@ -1274,7 +1274,7 @@ void grStadium_801D2FD0(Ground_GObj* gobj, int unused)
         lb_800122C8(&copy->desc, 0, 36, 0);
         wrapper->flag = true;
 
-        vision_gobj = Ground_801C2BA4(PsType_Display);
+        vision_gobj = Ground_GetMapGObj(PsType_Display);
         HSD_ASSERT(0x6EA, vision_gobj);
         gp2 = GET_GROUND(vision_gobj);
         HSD_ASSERT(0x6EB, gp2);
@@ -1294,7 +1294,7 @@ void grStadium_801D3084(HSD_GObj* gobj, int unused)
     if (!new_var->flag) {
         lb_800122C8(&new_var->desc, new_var->x1A, new_var->x1C, 0);
         new_var->flag = true;
-        vision_gobj = Ground_801C2BA4(PsType_Display);
+        vision_gobj = Ground_GetMapGObj(PsType_Display);
         HSD_ASSERT(0x703, vision_gobj);
         new_var2 = HSD_GObjGetUserData(vision_gobj);
         gp2 = (Ground*) new_var2;
@@ -1485,7 +1485,7 @@ void grStadium_801D3460(Ground_GObj* gobj)
     HSD_ASSERT(0x780, gp2->win_static_p);
     HSD_ASSERT(0x781, gp2->win_dynamic_p);
     HSD_SisLib_803A7664(gp2->win_dynamic_p);
-    temp_r29 = GET_GROUND(Ground_801C2BA4(2));
+    temp_r29 = GET_GROUND(Ground_GetMapGObj(2));
 
     HSD_SisLib_804D1124[1][2].textures = &grPs_8049F040;
 
@@ -1697,7 +1697,7 @@ void grStadium_801D3B4C(int arg0, int slot_type)
     Ground* gp;
 
     if (stage_info.grkind == Gr_Kind_PStadium) {
-        gobj = Ground_801C2BA4(PsType_Display);
+        gobj = Ground_GetMapGObj(PsType_Display);
         gp = GET_GROUND(gobj);
         gp->u.display.xEE = arg0;
         gp->u.display.xF0 = slot_type;
@@ -1864,35 +1864,35 @@ void grStadium_801D3F40(Ground_GObj* arg0, int arg1)
 void grStadium_801D4040(void)
 {
     if (stage_info.grkind == Gr_Kind_PStadium) {
-        grStadium_801D2528(Ground_801C2BA4(PsType_Display), 0xB, 0);
+        grStadium_801D2528(Ground_GetMapGObj(PsType_Display), 0xB, 0);
     }
 }
 
 void grStadium_801D4084(void)
 {
     if (stage_info.grkind == Gr_Kind_PStadium) {
-        grStadium_801D2528(Ground_801C2BA4(PsType_Display), 0xA, 0);
+        grStadium_801D2528(Ground_GetMapGObj(PsType_Display), 0xA, 0);
     }
 }
 
 void grStadium_801D40C8(void)
 {
     if (stage_info.grkind == Gr_Kind_PStadium) {
-        grStadium_801D2528(Ground_801C2BA4(PsType_Display), 0xC, 0);
+        grStadium_801D2528(Ground_GetMapGObj(PsType_Display), 0xC, 0);
     }
 }
 
 void grStadium_801D410C(void)
 {
     if (stage_info.grkind == Gr_Kind_PStadium) {
-        grStadium_801D2528(Ground_801C2BA4(PsType_Display), 0xD, 0);
+        grStadium_801D2528(Ground_GetMapGObj(PsType_Display), 0xD, 0);
     }
 }
 
 void grStadium_801D4150(void)
 {
     if (stage_info.grkind == Gr_Kind_PStadium) {
-        grStadium_801D2528(Ground_801C2BA4(PsType_Display), 1, 0);
+        grStadium_801D2528(Ground_GetMapGObj(PsType_Display), 1, 0);
     }
 }
 
@@ -1915,7 +1915,7 @@ void fn_801D4220(int un0, int un1, UNK_T un2, bool cancelflag)
     Ground* gp;
 
     HSD_ASSERT(0x969, !cancelflag);
-    map_gobj = Ground_801C2BA4(2);
+    map_gobj = Ground_GetMapGObj(2);
     HSD_ASSERT(0x96A, map_gobj);
     gp = GET_GROUND(map_gobj);
     HSD_ASSERT(0x96B, gp);
@@ -1929,7 +1929,7 @@ bool grStadium_801D42B8(void)
     HSD_GObj* map_gobj;
     Ground* gp;
 
-    map_gobj = Ground_801C2BA4(2);
+    map_gobj = Ground_GetMapGObj(2);
     HSD_ASSERT(0x978, map_gobj);
     gp = grStadium_801D4354(map_gobj);
     HSD_ASSERT(0x979, gp);
@@ -2103,7 +2103,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
     }
 
     if (Stage_80225194() == 0xF0) {
-        temp_r3 = Ground_801C2BA4(PsType_Display);
+        temp_r3 = Ground_GetMapGObj(PsType_Display);
         if (temp_r3 != NULL) {
             temp_r3_2 = GET_GROUND(temp_r3);
             if (temp_r3_2 != NULL) {
@@ -2148,7 +2148,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
             }
             grAnime_801C65B0(temp_r31->u.stadium.xD0);
             temp_r31->u.stadium.xD0 = NULL;
-            map_gobj = Ground_801C2BA4(2);
+            map_gobj = Ground_GetMapGObj(2);
             HSD_ASSERT(0x99A, map_gobj);
             gp = GET_GROUND(map_gobj);
             HSD_ASSERT(0x99B, gp);
@@ -2167,7 +2167,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
         break;
     case 2:
         temp_r31->u.display.xD8 = NULL;
-        temp_r3_6 = Ground_801C2BA4(1);
+        temp_r3_6 = Ground_GetMapGObj(1);
         if (temp_r3_6 != NULL) {
             temp_r0_2 = temp_r31->u.stadium.xDE;
 
@@ -2293,7 +2293,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
 bool grStadium_801D4FF8(int pl_slot)
 {
     if (stage_info.grkind == Gr_Kind_PStadium) {
-        Ground_GObj* gobj = Ground_801C2BA4(PsType_Display);
+        Ground_GObj* gobj = Ground_GetMapGObj(PsType_Display);
         if (gobj != NULL) {
             Ground* gp = GET_GROUND(gobj);
             if (gp != NULL && gp->u.display.xE4 == 8 &&

@@ -225,7 +225,7 @@ void grFourside_801F2F34(Ground_GObj* gobj)
     gobj->render_cb = fn_801F3F74;
     gp->u.fourside.x0 = Ground_801C3FA4(gobj, 2);
     gp->u.fourside.x4 = Ground_801C3FA4(gobj, 3);
-    pHVar1 = Ground_801C2BA4(4);
+    pHVar1 = Ground_GetMapGObj(4);
     if (pHVar1) {
         gp->u.fourside.x8 = pHVar1->hsd_obj;
     } else {
@@ -259,7 +259,7 @@ void grFourside_801F30A0(void* user_data, int joint_id, CollData* coll,
     s32 val;
     PAD_STACK(3 * 4);
 
-    gobj = Ground_801C2BA4(5);
+    gobj = Ground_GetMapGObj(5);
     val = M2C_FIELD(coll, u8*, 0x34);
     gp1 = GET_GROUND(gobj);
     val = ((val >> 3) & 0xF);
@@ -691,7 +691,7 @@ void grFourside_801F3CC8(Ground_GObj* gobj)
     switch (gp->u.fourside2.x0) {
     case 0:
         if (gp->u.fourside2.x4 <= 0) {
-            other = Ground_801C2BA4(5);
+            other = Ground_GetMapGObj(5);
             other_gp = other->user_data;
             if (other_gp->u.fourside2.x1 == 2 || other_gp->u.fourside2.x0 == 0)
             {
@@ -723,7 +723,7 @@ void grFourside_801F3CC8(Ground_GObj* gobj)
         break;
     case 2:
         if (gp->u.fourside2.x4 <= 0) {
-            other = Ground_801C2BA4(5);
+            other = Ground_GetMapGObj(5);
             other_gp = other->user_data;
             if (other_gp->u.fourside2.x1 == 2 || other_gp->u.fourside2.x0 == 0)
             {
@@ -760,7 +760,7 @@ void grFourside_801F3F0C(Ground_GObj* arg) {}
 
 int grFourside_801F3F10(void)
 {
-    HSD_GObj* gobj = Ground_801C2BA4(3);
+    HSD_GObj* gobj = Ground_GetMapGObj(3);
     Ground* gp = GET_GROUND(gobj);
     if ((gp->u.fourside2.x0 == 1 && gp->u.fourside2.x1 == 0) ||
         (gp->u.fourside2.x0 == 3 && gp->u.fourside2.x4 <= 700))
