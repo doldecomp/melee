@@ -11,6 +11,8 @@ block_relocations:
 - source: 0x804DBCF0
 # GXColor in dbbonus
 - source: 0x803EAE10
+# GXColor in lbcollision that spells a vi0401 string-pool address
+- source: 0x804D36E4
 # Bitmasks in psdisptev
 - source: .text:0x803A3A60
 - source: .text:0x803A3A68
