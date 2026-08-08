@@ -1,6 +1,7 @@
 #include "itwhitebea.h"
 
 #include "cm/camera.h"
+#include "gr/gricemt.h"
 #include "gr/stage.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
@@ -656,8 +657,6 @@ bool itWhitebea_UnkMotion6_Coll(Item_GObj* gobj)
     it_8026E414(gobj, it_802E4558);
     return it_8027C794(gobj);
 }
-
-void grIceMt_801FA6D8(void);
 
 void it_802E4558(Item_GObj* gobj)
 {
