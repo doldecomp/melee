@@ -72,7 +72,7 @@ typedef int (*GrIceMtCb)(Ground_GObj* gobj, int* out);
                                           Ground_GObj* gobj);
 /* 1FA4CC */ static int fn_801FA4CC(int num);
 /* 1FA500 */ static int grIceMt_801FA500(HSD_GObj*, HSD_JObj*);
-/* 1FA6D8 */ static void grIceMt_801FA6D8(HSD_GObj*);
+/* 1FA6D8 */ void grIceMt_801FA6D8(void);
 /* 1FA854 */ static void grIceMt_801FA854(void);
 /* 1FA8F8 */ static DynamicsDesc* grIceMt_801FA8F8(enum_t id);
 /* 1FA900 */ static bool grIceMt_801FA900(Vec3* a, int id, HSD_JObj* jobj);
@@ -82,10 +82,10 @@ struct IceMtTimerCursor {
     s16 xDC;
 };
 
+static HSD_GObj* grIm_804D69E8;
+static HSD_GObj* grIm_804D69EC;
+static HSD_GObj* grIm_804D69F0;
 static struct grIceMt_YakumonoParam* yakumono_param;
-HSD_GObj* grIm_804D69F0;
-HSD_GObj* grIm_804D69EC;
-HSD_GObj* grIm_804D69E8;
 
 typedef struct GrIm825C {
     struct {
@@ -173,16 +173,12 @@ s16 grIm_803E4544[] = {
     210, 211, 212, 213, 214, 215, 216,
 };
 
-static void order_sdata2(void)
+void grIceMt_801F6868(bool id)
 {
     (void) -20.0f;
     (void) 0.0f;
     (void) 0.5f;
     (void) S32_TO_F32;
-}
-
-static void order_data0(void)
-{
     (void) __FILE__;
     (void) "i<ICEMT_FIELD_MAX";
 }
@@ -292,8 +288,6 @@ static const GrIm588 grIm_804DB598 = { 1, 2 };
 static const GrIm588 grIm_804DB59C = { 3, 4 };
 static const GrIm588 grIm_804DB5A0 = { 1, 2 };
 static const GrIm588 grIm_804DB5A4 = { 3, 4 };
-
-void grIceMt_801F6868(bool id) {}
 
 void grIceMt_801F686C(void)
 {
@@ -491,14 +485,10 @@ HSD_GObj* grIceMt_801F71E8(int gobj_id)
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 860, gobj_id);
     }
 
-    return gobj;
-}
-
-static void order_data1(void)
-{
     (void) "block_num<=BLOCK_COLL_JOBJ_MAX";
     (void) "coll_jobj";
     (void) "block_jobj";
+    return gobj;
 }
 
 void stageGObj0_OnInit(Ground_GObj* gobj)
@@ -1259,34 +1249,36 @@ static inline void grIceMt_GetRandomTimer(int* out)
 int fn_801F8E58(Ground_GObj* arg0, int* out)
 {
     Ground* gp;
-    Ground* gp1;
     s32* p;
     s32 i;
     s32 max;
     s32 list[12];
     s32 chosen;
 
-    gp1 = gp = arg0->user_data;
+    arg0 = (Ground_GObj*) (gp = arg0->user_data);
     p = &list[max = 0];
-    for (i = 0; i < (ssize_t) ARRAY_SIZE(gp->u.icemt9.x18); i++) {
+    for (i = 0; i < 12; i++) {
         if (gp->u.icemt9.x18[0] == 0 && (Stage_80225194() != 212 || i >= 4)) {
             *p = i;
             p++;
             max++;
         }
+        gp = (Ground*) ((u8*) gp + 2);
     }
 
     HSD_ASSERT(2077, max);
     chosen = grIceMt_GetRandomIndex(max, list);
 
-    gp = gp1;
-    for (i = 0; i < ARRAY_SIZE(gp->u.icemt9.x18); i++) {
-        if (gp->u.icemt9.x18[i] > 0) {
-            gp->u.icemt9.x18[i]--;
+    gp = (Ground*) arg0;
+    for (i = 0; i < 12; i++) {
+        if (gp->u.icemt9.x18[0] > 0) {
+            gp->u.icemt9.x18[0]--;
         }
+        gp = (Ground*) ((u8*) gp + 2);
     }
 
-    gp1->u.icemt9.x18[chosen] = yakumono_param->x2;
+    gp = (Ground*) arg0;
+    gp->u.icemt9.x18[chosen] = yakumono_param->x2;
     grIceMt_GetRandomTimer(out);
     return chosen;
 }
@@ -1874,7 +1866,7 @@ int grIceMt_801FA500(HSD_GObj* arg0, HSD_JObj* arg1)
     return -1;
 }
 
-void grIceMt_801FA6D8(HSD_GObj* param1)
+void grIceMt_801FA6D8(void)
 {
     HSD_GObj* gobj;
     Ground* gp;
