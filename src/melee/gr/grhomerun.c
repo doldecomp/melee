@@ -322,7 +322,7 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
     f32 x;
 
     gp = gobj->user_data;
-    fighter = Ground_801C57A4();
+    fighter = Ground_GetP1Fighter();
     if (fighter != NULL) {
         ftLib_80086644(fighter, &pos0);
         subject = ftLib_80086B74(fighter);
@@ -330,7 +330,7 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
             subject->x8 = 1;
             subject->xC_b1 = 1;
         }
-        fighter = Ground_801C57C8();
+        fighter = Ground_GetP1Fighter2();
         if (fighter != NULL) {
             subject = ftLib_80086B74(fighter);
             if (subject != NULL) {
@@ -800,7 +800,7 @@ void fn_8021E994(void* user_data, int joint_id, CollData* coll, int coll_x50,
     Ground* gp;
     s32 collKind = coll->x34_flags.b1234;
     Ground* new_var;
-    gobj = Ground_801C2BA4(0xA);
+    gobj = Ground_GetMapGObj(0xA);
     if (gobj != NULL) {
         gp = (new_var = GET_GROUND(gobj));
         if (gp == NULL) {

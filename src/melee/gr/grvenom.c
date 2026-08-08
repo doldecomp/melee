@@ -250,7 +250,7 @@ void grVenom_8020362C(void)
             grVe_804D6A38 = grVe_804D6A38 - 1;
             if (grVe_804D6A38 <= 0) {
                 s32 combined;
-                Ground* gp = Ground_801C2BA4(7)->user_data;
+                Ground* gp = Ground_GetMapGObj(7)->user_data;
                 group_a =
                     gp->u.venom2.xE0_state.b3 | gp->u.venom2.xE0_state.b4;
                 group_b =
@@ -372,7 +372,7 @@ void grVenom_8020362C(void)
                     data->arwing.arwing_gobj[grVe_804D6A34] =
                         grVenom_80203EAC(2);
                 } else {
-                    Ground* gp = Ground_801C2BA4(7)->user_data;
+                    Ground* gp = Ground_GetMapGObj(7)->user_data;
                     group_a =
                         gp->u.venom2.xE0_state.b3 | gp->u.venom2.xE0_state.b4;
                     group_b =
@@ -733,7 +733,7 @@ void grVenom_80204284(Ground_GObj* gobj)
             } else {
                 ifStatus_802F6898();
                 un_802FF570();
-                if (Ground_801C2BA4(1) == NULL) {
+                if (Ground_GetMapGObj(1) == NULL) {
                     ifStatus_802F68F0();
                     un_802FF620();
                     gp->u.venom.xC8 = -1;
@@ -1112,7 +1112,7 @@ void grVenom_802052E0(Ground_GObj* gobj, Vec3* pos)
 
     if (gobj != NULL) {
         gp = gobj->user_data;
-        Ground_801C2BA4(5);
+        Ground_GetMapGObj(5);
         jobj = Ground_801C3FA4(gobj, 5);
         lb_8000B1CC(jobj, NULL, &jobj_pos);
         new_var = spawn_table;
@@ -1510,7 +1510,7 @@ void grVenom_80205F30(Ground_GObj* gobj)
 
             if ((other = (HSD_GObj*) base[gp->u.venom.xC8 + 8]) != NULL) {
                 other_gp = other->user_data;
-                Ground_801C2BA4(5);
+                Ground_GetMapGObj(5);
                 lb_8000B1CC(Ground_801C3FA4(other, 5), NULL, &sp64);
                 {
                     VenomSpawnData* spawn_data =
@@ -1594,7 +1594,7 @@ void grVenom_80205F30(Ground_GObj* gobj)
                     NULL)
                 {
                     far_other_gp = far_other->user_data;
-                    Ground_801C2BA4(5);
+                    Ground_GetMapGObj(5);
                     lb_8000B1CC(Ground_801C3FA4(far_other, 5), NULL, &sp50);
                     {
                         VenomSpawnData* spawn_data =
@@ -1768,7 +1768,7 @@ bool grVenom_80206BF0(int arg0)
     Ground* gp;
     PAD_STACK(32);
 
-    if (Ground_801C2BA4(8) != NULL) {
+    if (Ground_GetMapGObj(8) != NULL) {
         return 0;
     }
     if (arg0 == 2) {
@@ -1791,12 +1791,12 @@ void grVenom_80206CB0(s32 arg0)
 {
     HSD_GObj* gobj;
 
-    gobj = Ground_801C2BA4(8);
+    gobj = Ground_GetMapGObj(8);
     if (gobj != NULL) {
         if (arg0 != 0) {
             Ground_801C4A08(gobj);
         }
-        gobj = Ground_801C2BA4(1);
+        gobj = Ground_GetMapGObj(1);
         if (gobj != NULL) {
             Ground_801C4A08(gobj);
         }
@@ -1837,7 +1837,7 @@ bool grVenom_80206D7C(Vec3* pos, int arg1, HSD_JObj* arg2)
     Ground* gp;
 
     lb_8000B1CC(arg2, NULL, &sp20);
-    gobj = Ground_801C2BA4(5);
+    gobj = Ground_GetMapGObj(5);
     if (gobj != NULL) {
         gp = gobj->user_data;
         if (gp != NULL && (HSD_JObj*) gp->u.venom.xD0 == arg2) {

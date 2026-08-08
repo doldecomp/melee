@@ -886,7 +886,7 @@ void fn_801FBF6C(Item_GObj* item_gobj, Ground* gp, Vec3* pos, HSD_GObj* arg3,
         return;
     }
 
-    map_gobj = Ground_801C2BA4(3);
+    map_gobj = Ground_GetMapGObj(3);
     HSD_ASSERT(1061, map_gobj);
 
     new_var = map_gobj;
@@ -1038,7 +1038,7 @@ void fn_801FBEB8(void* user_data, int joint_id, CollData* coll, int coll_x50,
 {
     s32 id = get_block_id(joint_id);
     if (fabsf_inline(delta_y) > 0.7) {
-        HSD_GObj* gobj = Ground_801C2BA4(3);
+        HSD_GObj* gobj = Ground_GetMapGObj(3);
         grInishie1_801FB0AC(gobj, id);
         grInishie1_801FBCEC(gobj, id);
     }

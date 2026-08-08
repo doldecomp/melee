@@ -101,34 +101,34 @@ static void grLast_OnDemoInit(enum_t arg0)
     if (arg0 != 26) {
         return;
     }
-    gobj = Ground_801C2BA4(4);
+    gobj = Ground_GetMapGObj(4);
     if (gobj != NULL) {
         Ground_801C4A08(gobj);
     }
-    gobj = Ground_801C2BA4(5);
+    gobj = Ground_GetMapGObj(5);
     if (gobj != NULL) {
         Ground_801C4A08(gobj);
     }
-    gobj = Ground_801C2BA4(6);
+    gobj = Ground_GetMapGObj(6);
     if (gobj != NULL) {
         Ground_801C4A08(gobj);
     }
-    gobj = Ground_801C2BA4(7);
+    gobj = Ground_GetMapGObj(7);
     if (gobj != NULL) {
         Ground_801C4A08(gobj);
     }
-    gobj = Ground_801C2BA4(8);
+    gobj = Ground_GetMapGObj(8);
     if (gobj != NULL) {
         Ground_801C4A08(gobj);
     }
-    gobj = Ground_801C2BA4(9);
+    gobj = Ground_GetMapGObj(9);
     if (gobj != NULL) {
         Ground_801C4A08(gobj);
     }
-    gobj = Ground_801C2BA4(1);
+    gobj = Ground_GetMapGObj(1);
     HSD_ASSERT(80, gobj);
 
-    gobj = Ground_801C2BA4(3);
+    gobj = Ground_GetMapGObj(3);
     HSD_ASSERT(83, gobj);
 
     gp = GET_GROUND(gobj);
@@ -814,7 +814,7 @@ static void grLast_8021B920(Ground_GObj* gobj_, int arg1)
                 do_anime(gp->u.map.lv_gobj[i], i, 0);
             }
         }
-        grAnime_801C8098(Ground_801C2BA4(4), 0x10, 7, 0, 0.0F, 1.0F);
+        grAnime_801C8098(Ground_GetMapGObj(4), 0x10, 7, 0, 0.0F, 1.0F);
         gp->u.map.xC4_b26 = false;
         grLast_8021C640();
         break;
@@ -823,8 +823,8 @@ static void grLast_8021B920(Ground_GObj* gobj_, int arg1)
         for (i = 0; i < 5; i++) {
             do_anime(gp->u.map.lv_gobj[i], i, 1);
         }
-        grAnime_801C7A94(Ground_801C2BA4(4), 0x10, 7, 0.0F);
-        grLib_801C9854(GET_JOBJ(Ground_801C2BA4(4)));
+        grAnime_801C7A94(Ground_GetMapGObj(4), 0x10, 7, 0.0F);
+        grLib_801C9854(GET_JOBJ(Ground_GetMapGObj(4)));
         gp->u.map.xC4_b26 = true;
         break;
     case 3:
@@ -868,17 +868,17 @@ static void grLast_8021B920(Ground_GObj* gobj_, int arg1)
             do_anime(gp->u.map.lv_gobj[i], i, 8);
         }
 
-        temp_r28_10 = GET_GROUND(Ground_801C2BA4(7));
-        lb_8000B1CC(Ground_801C3FA4(Ground_801C2BA4(7), 5), NULL, &sp40);
+        temp_r28_10 = GET_GROUND(Ground_GetMapGObj(7));
+        lb_8000B1CC(Ground_801C3FA4(Ground_GetMapGObj(7), 5), NULL, &sp40);
         temp_r28_10->u.last.xE0 = grLib_801C96F8(0x7531, 0x1E, &sp40);
 
         gp->u.map.xC4_b26 = false;
         break;
     case 10:
         grLast_8021C40C(gobj, grNLa_804DBBD4, 120.0F);
-        grAnime_801C7A94(Ground_801C2BA4(7), 5, 7, 0.0F);
+        grAnime_801C7A94(Ground_GetMapGObj(7), 5, 7, 0.0F);
 
-        grlib_inline(GET_GROUND(Ground_801C2BA4(7)));
+        grlib_inline(GET_GROUND(Ground_GetMapGObj(7)));
 
         gp->u.map.xC4_b26 = true;
         grLast_8021C6AC();

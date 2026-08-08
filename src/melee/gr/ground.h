@@ -67,7 +67,7 @@
 /* 1C28AC */ bool Ground_801C28AC(StKind, u32, s32*);
 /* 1C2AD8 */ s32* Ground_801C2AD8(void);
 /* 1C2AE8 */ float Ground_801C2AE8(StKind);
-/* 1C2BA4 */ Ground_GObj* Ground_801C2BA4(int index);
+/* 1C2BA4 */ Ground_GObj* Ground_GetMapGObj(int index);
 /* 1C2C8C */ bool Ground_801C2C8C(void*);
 /* 1C2CF4 */ HSD_JObj* Ground_801C2CF4(s32);
 /* 1C2D0C */ void Ground_801C2D0C(s32 i, HSD_JObj* jobj);
@@ -141,8 +141,8 @@
 /* 1C5774 */ s32 Ground_801C5774(void);
 /* 1C5784 */ void Ground_801C5784(s32);
 /* 1C5794 */ s32 Ground_801C5794(void);
-/* 1C57A4 */ HSD_GObj* Ground_801C57A4(void);
-/* 1C57C8 */ HSD_GObj* Ground_801C57C8(void);
+/* 1C57A4 */ Fighter_GObj* Ground_GetP1Fighter(void);
+/* 1C57C8 */ Fighter_GObj* Ground_GetP1Fighter2(void);
 /* 1C57F0 */ f32 Ground_801C57F0(int);
 /* 1C5800 */ void Ground_EnableMatchCamera(void);
 /* 1C5840 */ s32 Ground_801C5840(void);

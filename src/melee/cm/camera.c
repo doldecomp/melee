@@ -1432,7 +1432,7 @@ static inline bool fighter_z_out_of_range(Vec3* fighter_pos)
     HSD_GObj* gobj;
 
     if (Camera_80030AF8()) {
-        gobj = Ground_801C57A4();
+        gobj = Ground_GetP1Fighter();
         if (gobj != NULL) {
             ftLib_80086644(gobj, fighter_pos);
             if (ABS(fighter_pos->z) > 30.0f) {
