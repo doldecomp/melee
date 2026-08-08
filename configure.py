@@ -504,7 +504,7 @@ config.libs = [
             Object(Matching, "melee/lb/lbheap.c"),
             Object(Matching, "melee/lb/lbfile.c"),
             Object(Matching, "melee/lb/lbarchive.c"),
-            Object(Equivalent, "melee/lb/lbdvd.c"),
+            Object(Matching, "melee/lb/lbdvd.c"),
             Object(Matching, "melee/lb/lb_0192.c"),
             Object(Matching, "melee/lb/lb_0195.c"),
             Object(Matching, "melee/lb/lbcardnew.c"),
