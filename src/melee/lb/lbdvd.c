@@ -487,31 +487,6 @@ static inline void inline_pad(void)
     (void) pad;
 }
 
-static inline void inline_cleanup_entries(void)
-{
-    int j = 0;
-    PreloadEntry* cleanup_entry;
-
-    for (; j < (signed) ARRAY_SIZE(preloadCache.entries); j++) {
-        cleanup_entry = &preloadCache.entries[j];
-        if (cleanup_entry->load_score < 0) {
-            if (cleanup_entry->state == 1) {
-                if (preloadCache.entries[j].archive != NULL) {
-                    lbHeap_80015CA8(cleanup_entry->heap,
-                                    cleanup_entry->archive->addr);
-                }
-                if (cleanup_entry->raw_data != NULL) {
-                    lbHeap_80015CA8(cleanup_entry->heap,
-                                    cleanup_entry->raw_data->addr);
-                }
-                *cleanup_entry = lbDvd_803BA68C;
-            } else if (cleanup_entry->state == 4) {
-                cleanup_entry->state = 3;
-            }
-        }
-    }
-}
-
 void lbDvd_80018254(void)
 {
     bool enabled;
@@ -543,7 +518,29 @@ void lbDvd_80018254(void)
     }
 
     inline_pad();
-    inline_cleanup_entries();
+
+    {
+        PreloadEntry* cleanup_entry;
+        int j;
+        for (j = 0; j < (signed) ARRAY_SIZE(preloadCache.entries); j++) {
+            cleanup_entry = &preloadCache.entries[j];
+            if (cleanup_entry->load_score < 0) {
+                if (cleanup_entry->state == 1) {
+                    if (preloadCache.entries[j].archive != NULL) {
+                        lbHeap_80015CA8(cleanup_entry->heap,
+                                        cleanup_entry->archive->addr);
+                    }
+                    if (cleanup_entry->raw_data != NULL) {
+                        lbHeap_80015CA8(cleanup_entry->heap,
+                                        cleanup_entry->raw_data->addr);
+                    }
+                    *cleanup_entry = lbDvd_803BA68C;
+                } else if (cleanup_entry->state == 4) {
+                    cleanup_entry->state = 3;
+                }
+            }
+        }
+    }
 
     lbDvd_80017CC4();
     OSRestoreInterrupts(enabled);
