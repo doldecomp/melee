@@ -1203,6 +1203,7 @@ static inline void grIceMt_GetRandomTimer(int* out)
     *out = a;
 }
 
+/// @todo Only differs by an r30/r31 allocation swap.
 int fn_801F8E58(Ground_GObj* arg0, int* out)
 {
     Ground* gp;
@@ -1213,10 +1214,11 @@ int fn_801F8E58(Ground_GObj* arg0, int* out)
     s32 list[12];
     s32 chosen;
 
-    gp1 = gp = arg0->user_data;
+    gp1 = arg0->user_data;
+    gp = gp1;
     p = &list[max = 0];
     for (i = 0; i < (ssize_t) ARRAY_SIZE(gp->u.icemt9.x18); i++) {
-        if (gp->u.icemt9.x18[0] == 0 && (Stage_80225194() != 212 || i >= 4)) {
+        if (gp->u.icemt9.x18[i] == 0 && (Stage_80225194() != 212 || i >= 4)) {
             *p = i;
             p++;
             max++;
