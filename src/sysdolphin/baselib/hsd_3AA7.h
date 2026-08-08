@@ -35,10 +35,10 @@ typedef struct CardState {
 } CardState;
 
 /* 3AA790 */ s32 fn_803AA790(void);
-/* 3AAA48 */ s32 hsd_803AAA48(void);
+/* 3AAA48 */ void hsd_803AAA48(void);
 /* 3AC168 */ s32 fn_803AC168(s32* cmd_buf);
-/* 3AC258 */ void fn_803AC258(CardState* card_state, s32 block_idx);
-/* 3AC2A4 */ void fn_803AC2A4(s32 card_state);
+/* 3AC258 */ s32 fn_803AC258(CardState* card_state, s32 block_idx);
+/* 3AC2A4 */ s32 fn_803AC2A4(CardState* card_state);
 /* 3AC2D4 */ UNK_RET fn_803AC2D4(UNK_PARAMS);
 /* 3AC2E0 */ void fn_803AC2E0(void);
 /* 3AC334 */ UNK_RET fn_803AC334(UNK_PARAMS);
@@ -80,6 +80,6 @@ typedef struct CardState {
 /* 3B2550 */ int hsd_803B2550(s32*, const char*, void (*)(int, int));
 /* 3B2674 */ s32 hsd_803B2674(CardState* state);
 /* 3B26CC */ s32 fn_803B26CC(CardState* state, s32 file_id, s32 seq_num,
-                             s32 version, s32 callback);
+                             s32 version, void (*callback)(s32, s32));
 
 #endif
