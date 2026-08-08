@@ -619,7 +619,7 @@ void fn_8024B2B0(mnSoundTest_GObj* arg0)
             user_data->unk4 = 0;
             anim_idx = data_3[user_data->unk3];
             lb_80011E24(GET_JOBJ(mnSoundTest_804D6C40), &sp48, 0x15, -1);
-            HSD_JObjReqAnimAll(sp48, (f32) data_4[anim_idx + 30]);
+            HSD_JObjReqAnimAll(sp48, (f32) data_4[anim_idx]);
             mn_8022F3D8(sp48, 0xFFU, 0xA0);
             HSD_JObjAnimAll(sp48);
         } else if (inputs & MenuInput_Right) {
@@ -630,7 +630,7 @@ void fn_8024B2B0(mnSoundTest_GObj* arg0)
             user_data->unk4 = 0;
             anim_idx = data_3[user_data->unk3];
             lb_80011E24(GET_JOBJ(mnSoundTest_804D6C40), &sp3C, 0x15, -1);
-            HSD_JObjReqAnimAll(sp3C, (f32) data_4[anim_idx + 30]);
+            HSD_JObjReqAnimAll(sp3C, (f32) data_4[anim_idx]);
             mn_8022F3D8(sp3C, 0xFFU, 0xA0);
             HSD_JObjAnimAll(sp3C);
         }
