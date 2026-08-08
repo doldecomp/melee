@@ -45,16 +45,13 @@ struct unk_series {
 /* 4DDC9C */ extern f32 un_804DDC9C;
 /* 4DDCA0 */ extern f32 un_804DDCA0;
 
-struct un_80304138_objalloc_t* un_804D6E40;
-struct un_80304138_objalloc_t_x8* un_804D6E48;
-
-unsigned char un_804D6E4C;
+extern struct un_80304138_objalloc_t* un_804D6E40;
+extern struct un_80304138_objalloc_t* un_804D6E44;
+extern struct un_80304138_objalloc_t_x8* un_804D6E48;
+extern unsigned char un_804D6E4C;
 
 /// .bss
 /* 4A2688 */ static HSD_ObjAllocData un_804A2688;
-
-/// .sbss
-/* 4D6E44 */ static struct un_80304138_objalloc_t* un_804D6E44;
 
 GXColor white = { 0xFF, 0xFF, 0xFF, 0xFF };
 GXColor red = { 0xFF, 0x80, 0x80, 0xFF };

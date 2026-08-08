@@ -64,15 +64,21 @@
 STATIC_ASSERT(sizeof(struct DevText_Pool) == 0x6B0);
 
 /// .sbss
-/* 4D6E18 */ static DevText* devtext_drawlist;
-/* 4D6E1C */ static HSD_GObj* devtext_gobj;
-/* 4D6E20 */ static HSD_CObj* devtext_cobj;
-/* 4D6E24 */ static int devtext_setup_classifier;
-/* 4D6E28 */ static int devtext_setup_p_link;
-/* 4D6E2C */ static int devtext_setup_priority;
-/* 4D6E30 */ static int devtext_setup_gx_link;
-/* 4D6E34 */ static int devtext_setup_render_priority;
-/* 4D6E38 */ static DevText* devtext_poolhead;
+/* 4D6E4C */ unsigned char un_804D6E4C;
+/* 4D6E48 */ struct un_80304138_objalloc_t_x8* un_804D6E48;
+/* 4D6E44 */ struct un_80304138_objalloc_t* un_804D6E44;
+/* 4D6E40 */ struct un_80304138_objalloc_t* un_804D6E40;
+/* 4D6E38 */ DevText* devtext_poolhead[2];
+/* 4D6E34 */ int devtext_setup_render_priority;
+/* 4D6E30 */ int devtext_setup_gx_link;
+/* 4D6E2C */ int devtext_setup_priority;
+/* 4D6E28 */ int devtext_setup_p_link;
+/* 4D6E24 */ int devtext_setup_classifier;
+/* 4D6E20 */ HSD_CObj* devtext_cobj;
+/* 4D6E1C */ HSD_GObj* devtext_gobj;
+/* 4D6E18 */ DevText* devtext_drawlist;
+
+#define devtext_poolhead devtext_poolhead[0]
 
 int DevText_StrLen(char* str)
 {
