@@ -185,7 +185,7 @@ void grZebesRoute_8020B42C(Ground_GObj* gobj)
     HSD_GObj* fighter;
     s32 timer;
 
-    fighter = Ground_801C57A4();
+    fighter = Ground_GetP1Fighter();
     if (fighter != NULL) {
         ftLib_80086644(fighter, &pos);
         if (pos.y < -50.0f) {
@@ -214,7 +214,7 @@ void fn_8020B4D8(void* user_data, int joint_id, CollData* coll, int coll_x50,
     Ground* gp = user_data;
     PAD_STACK(8);
     if ((s32) coll->x34_flags.b1234 == 1) {
-        if (Ground_801C57A4() == coll->x0_gobj) {
+        if (Ground_GetP1Fighter() == coll->x0_gobj) {
             if (ground_kind == 1) {
                 stage_info.flags |= 0x10;
             }

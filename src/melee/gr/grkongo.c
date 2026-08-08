@@ -1276,7 +1276,7 @@ void grKongo_801D52F8(void) {}
 
 void grKongo_801D52FC(void)
 {
-    HSD_GObj* gobj = Ground_801C2BA4(5);
+    HSD_GObj* gobj = Ground_GetMapGObj(5);
     ftCo_800C0764(gobj, 2, fn_801D8134);
     grZakoGenerator_801CAE04(NULL);
 }

@@ -151,7 +151,7 @@ static void order_data(void)
 void grBigBlueRoute_8020B864(bool arg)
 {
     HSD_GObj* gobj;
-    gobj = Ground_801C2BA4(0x1F);
+    gobj = Ground_GetMapGObj(0x1F);
     if (gobj != NULL) {
         Ground_801C4A08(gobj);
     }
@@ -178,7 +178,7 @@ void grBigBlueRoute_8020B920(void)
     Vec3 fighter_pos;
     HSD_GObj* fighter;
 
-    fighter = Ground_801C57A4();
+    fighter = Ground_GetP1Fighter();
     if (fighter != NULL) {
         ftLib_80086644(fighter, &fighter_pos);
         grBigBlueRoute_8020DED4(&fighter_pos);
@@ -383,7 +383,7 @@ void grBigBlueRoute_8020BF38(Ground_GObj* gobj)
     int i;
     HSD_JObj* jobj;
 
-    fighter = Ground_801C57A4();
+    fighter = Ground_GetP1Fighter();
     Ground_801C3D44(0, 30.0f, 4000.0f);
 
     if (fighter != NULL) {
@@ -743,7 +743,7 @@ void grBigBlueRoute_8020CD20(Ground_GObj* gobj)
     f32 frac;
     UNUSED u8 pad3[20];
 
-    fighter = Ground_801C57A4();
+    fighter = Ground_GetP1Fighter();
     if (fighter != NULL) {
         ftLib_80086644(fighter, &fighter_pos);
     } else {

@@ -608,7 +608,7 @@ void Ground_801C0C2C(HSD_GObj* arg0)
     f32 ypos;
 
     if (stage_info.unk8C.b6 || stage_info.unk8C.b7) {
-        HSD_GObj* gobj = Ground_801C57A4();
+        HSD_GObj* gobj = Ground_GetP1Fighter();
         if (gobj != NULL && !ftLib_8008701C(gobj)) {
             ftLib_80086644(gobj, &sp50);
             if (stage_info.unk8C.b6) {
@@ -753,7 +753,7 @@ void Ground_801C1158(void)
 {
     switch (stage_info.grkind) {
     case Gr_Kind_PStadium:
-        grStadium_801D39A0(Ground_801C2BA4(1));
+        grStadium_801D39A0(Ground_GetMapGObj(1));
         break;
     case Gr_Kind_Corneria:
     case Gr_Kind_Venom:
@@ -1557,7 +1557,7 @@ float Ground_801C2AE8(StKind stkind)
     }
 }
 
-Ground_GObj* Ground_801C2BA4(int index)
+Ground_GObj* Ground_GetMapGObj(int index)
 {
     return stage_info.map_gobjs[index];
 }
@@ -3197,12 +3197,12 @@ s32 Ground_801C5794(void)
     return stage_info.x740;
 }
 
-HSD_GObj* Ground_801C57A4(void)
+Fighter_GObj* Ground_GetP1Fighter(void)
 {
     return Player_GetEntity(0);
 }
 
-HSD_GObj* Ground_801C57C8(void)
+Fighter_GObj* Ground_GetP1Fighter2(void)
 {
     return Player_GetEntityAtIndex(0, 1);
 }

@@ -846,7 +846,7 @@ void grPura_80212FC0(HSD_GObj* arg0)
     for (var_r30 = 0; var_r30 < 0x2A; var_r30++) {
         if (grPu_803E6C0C[var_r30].joint.x != -1) {
             HSD_GObj* temp_r3 =
-                Ground_801C2BA4(grPu_803E6C0C[var_r30].joint.y);
+                Ground_GetMapGObj(grPu_803E6C0C[var_r30].joint.y);
             if (temp_r3 != NULL) {
                 grPu_803E6C0C[var_r30].jobj =
                     Ground_801C3FA4(temp_r3, grPu_803E6C0C[var_r30].joint.z);

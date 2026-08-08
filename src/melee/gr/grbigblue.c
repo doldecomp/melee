@@ -1317,7 +1317,7 @@ void fn_801E8560(void* user_data, int joint_id, CollData* coll, int coll_x50,
 bool grBigBlue_801E8794(void* exclude, Vec3* pos, bool checkSecondary,
                         f32 rangeX, f32 rangeY)
 {
-    Ground* gp = GET_GROUND(Ground_801C2BA4(32));
+    Ground* gp = GET_GROUND(Ground_GetMapGObj(32));
     bool result = false;
     int i;
     f32 dist;
@@ -1364,7 +1364,7 @@ bool grBigBlue_801E8794(void* exclude, Vec3* pos, bool checkSecondary,
 
 void grBigBlue_801E8978(int index, void* data, void* extra)
 {
-    u8* gp = (u8*) GET_GROUND(Ground_801C2BA4(32));
+    u8* gp = (u8*) GET_GROUND(Ground_GetMapGObj(32));
     if (extra != NULL) {
         *(void**) (gp + 0xE0) = extra;
     }
@@ -1374,14 +1374,14 @@ void grBigBlue_801E8978(int index, void* data, void* extra)
 
 void* grBigBlue_801E89DC(int arg)
 {
-    u8* gp = (u8*) GET_GROUND(Ground_801C2BA4(32));
+    u8* gp = (u8*) GET_GROUND(Ground_GetMapGObj(32));
     gp += arg * 4;
     return *(void**) (gp + 0xC8);
 }
 
 void grBigBlue_801E8A1C(int idx)
 {
-    Ground* gp = GET_GROUND(Ground_801C2BA4(32));
+    Ground* gp = GET_GROUND(Ground_GetMapGObj(32));
     BobOmbRain spawn;
     ItemKind* candPtr;
     ItemKind* validPtr;
@@ -1438,7 +1438,7 @@ static f32 grBigBlue_801E8B84_noinline_2(f32 right, f32 left, f32 bottom,
 
 f32 grBigBlue_801E8B84(f32 right, f32 left, f32 bottom, f32 top)
 {
-    Ground* gp = Ground_801C2BA4(33)->user_data;
+    Ground* gp = Ground_GetMapGObj(33)->user_data;
     u8 state;
     s32 i = 0;
     f32 result = grBb_804DB310;
@@ -1546,7 +1546,7 @@ void grBigBlue_801E8D64(Ground_GObj* gobj)
     HSD_JObjSetScale(jobj, &scale);
 
     {
-        HSD_GObj* other = Ground_801C2BA4(32);
+        HSD_GObj* other = Ground_GetMapGObj(32);
         Ground* other_gp = other->user_data;
         *(s32*) ((u8*) other_gp + 0xCC) = 1;
     }
@@ -1641,12 +1641,12 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
 
         switch (state) {
         case 0:
-            if (((grBb_GroundStateFlag*) Ground_801C2BA4(32)->user_data)
+            if (((grBb_GroundStateFlag*) Ground_GetMapGObj(32)->user_data)
                     ->xCC != 0)
             {
                 s32 i;
                 HSD_JObj* cars_avail = NULL;
-                Ground* manager = GET_GROUND(Ground_801C2BA4(32));
+                Ground* manager = GET_GROUND(Ground_GetMapGObj(32));
                 s32 count = 0;
 
                 for (i = 0; i < 3; i++) {
@@ -1758,7 +1758,7 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
 
                     *(f32*) (bp + 0xD8) = yakumono_param->xD0;
                     bp[0xC4] = 3;
-                    mgp = Ground_801C2BA4(32)->user_data;
+                    mgp = Ground_GetMapGObj(32)->user_data;
                     idx = 0;
                     p = mgp;
 
@@ -1784,11 +1784,11 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
                     *(f32*) (bp + 0xD8) = 0.0f;
                     {
                         grBb_GroundStateFlag* manager =
-                            Ground_801C2BA4(32)->user_data;
+                            Ground_GetMapGObj(32)->user_data;
                         manager->xCC = 0;
                     }
                     {
-                        u8* mgp2 = (u8*) Ground_801C2BA4(32)->user_data;
+                        u8* mgp2 = (u8*) Ground_GetMapGObj(32)->user_data;
                         if (jobj != NULL) {
                             *(u32*) (mgp2 + 0xE0) = (u32) jobj;
                         }
@@ -1897,7 +1897,7 @@ void grBigBlue_801E9F3C(Ground_GObj* gobj)
     HSD_JObjSetScale(jobj, &v);
 
     ((u8*) gp)[0xC4] = 0;
-    *(s32*) ((u8*) GET_GROUND(Ground_801C2BA4(32)) + 0xD0) = 0;
+    *(s32*) ((u8*) GET_GROUND(Ground_GetMapGObj(32)) + 0xD0) = 0;
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
@@ -1953,7 +1953,7 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
 
     switch ((s8) gp->u.bigblue.x0) {
     case 0:
-        if (*(s32*) ((u8*) GET_GROUND(Ground_801C2BA4(32)) + 0xD0) != 0) {
+        if (*(s32*) ((u8*) GET_GROUND(Ground_GetMapGObj(32)) + 0xD0) != 0) {
             gp->u.bigblue.platform.xC8_timer = 0;
             gp->u.bigblue.platform.xD0_timer = 0;
             gp->u.bigblue.platform.xCC_timer = 0;
@@ -2210,7 +2210,7 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
             gp->u.bigblue.platform.xEC = 0.0f;
             gp->u.bigblue.platform.velocity.z = 0.0f;
             gp->u.bigblue.platform.velocity.y = 0.0f;
-            *(u32*) &GET_GROUND(Ground_801C2BA4(32))->u.bigblue.xD0 = 0;
+            *(u32*) &GET_GROUND(Ground_GetMapGObj(32))->u.bigblue.xD0 = 0;
             gp->u.bigblue.x0 = 0;
         }
         break;
@@ -2224,7 +2224,7 @@ void grBigBlue_801EAB4C(Ground_GObj* arg) {}
 
 bool grBigBlue_801EAB50(Vec3* pos, s32 flag, f32 rangeX, f32 rangeY)
 {
-    HSD_GObj* gobj = Ground_801C2BA4(32);
+    HSD_GObj* gobj = Ground_GetMapGObj(32);
     Ground* gp = gobj->user_data;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     s32 result = false;
@@ -2284,7 +2284,7 @@ s32 grBigBlue_801EACE8(HSD_JObj* exclude, Vec3* point, f32* out_y,
     f32* p_right;
     s32 i;
 
-    gobj = Ground_801C2BA4(32);
+    gobj = Ground_GetMapGObj(32);
 
     left_bound = point->x - half_range_x;
     right_bound = point->x + half_range_x;
@@ -2337,7 +2337,7 @@ s32 grBigBlue_801EACE8(HSD_JObj* exclude, Vec3* point, f32* out_y,
     }
 
     /* Route platform */
-    gobj = Ground_801C2BA4(36);
+    gobj = Ground_GetMapGObj(36);
     jobj = (HSD_JObj*) gobj->hsd_obj;
     gp = gobj->user_data;
 
@@ -2996,7 +2996,7 @@ void grBigBlue_801EBAF8(Ground_GObj* gobj)
     lbVector_Rotate(&vel, 4, *(f32*) (gp + 0xF8));
 
     {
-        HSD_GObj* car = Ground_801C2BA4(2);
+        HSD_GObj* car = Ground_GetMapGObj(2);
         HSD_JObj* car_jobj;
         if (car != NULL && (car_jobj = car->hsd_obj) != NULL) {
             HSD_JObjSetTranslate(car_jobj, &vel);
@@ -3005,7 +3005,7 @@ void grBigBlue_801EBAF8(Ground_GObj* gobj)
     }
 
     {
-        HSD_GObj* car = Ground_801C2BA4(1);
+        HSD_GObj* car = Ground_GetMapGObj(1);
         if (car != NULL && (car_jobj = car->hsd_obj) != NULL) {
             HSD_JObjSetTranslate(car_jobj, &vel);
             HSD_JObjSetRotationZ(car_jobj, *(f32*) (gp + 0xF8));
@@ -3831,7 +3831,7 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
 
         /* Track reference adjustment */
         {
-            HSD_GObj* map_gobj = Ground_801C2BA4(34);
+            HSD_GObj* map_gobj = Ground_GetMapGObj(34);
             u8* gp2;
 
             HSD_ASSERT(3255, map_gobj);
@@ -4810,7 +4810,7 @@ void fn_801EF60C(void* user_data, int joint_id, CollData* coll, int coll_x50,
 
 void grBigBlue_801EF7D8(Vec3* pos)
 {
-    HSD_GObj* gobj = Ground_801C2BA4(34);
+    HSD_GObj* gobj = Ground_GetMapGObj(34);
 
     if (gobj != NULL && gobj->user_data != NULL) {
         pos->x = grBb_804DB3F0;

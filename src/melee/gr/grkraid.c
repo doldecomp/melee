@@ -268,7 +268,7 @@ void grKraid_801FE6D4(Ground_GObj* gobj)
 
 void grKraid_801FE6D8(HSD_JObj* hand, float param2)
 {
-    Ground* map = Ground_801C2BA4(3)->user_data;
+    Ground* map = Ground_GetMapGObj(3)->user_data;
     Vec handpos;
     f32 rot;
     f32 min;
@@ -397,11 +397,11 @@ void grKraid_801FEA00(Ground_GObj* gobj)
     switch (gp->u.kraid2.x0) {
     case 0:
         if (gp->u.kraid2.xC <= 0) {
-            Ground* map = Ground_801C2BA4(3)->user_data;
+            Ground* map = Ground_GetMapGObj(3)->user_data;
             if ((int) map->u.kraid.x4 == 0) {
                 grKraid_801FEE54(gobj);
                 HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-                HSD_JObjClearFlagsAll(Ground_801C2BA4(1)->hsd_obj,
+                HSD_JObjClearFlagsAll(Ground_GetMapGObj(1)->hsd_obj,
                                       JOBJ_HIDDEN);
                 grKraid_801FF068(gobj, 3);
                 Ground_801C53EC(420001);
@@ -444,7 +444,7 @@ void grKraid_801FEA00(Ground_GObj* gobj)
         break;
     case 3:
         if (gp->u.kraid2.x1 == 5) {
-            Ground* map = Ground_801C2BA4(3)->user_data;
+            Ground* map = Ground_GetMapGObj(3)->user_data;
             if ((int) map->u.kraid.x4 == 0 && gp->u.kraid2.xC >= 147 &&
                 gp->u.kraid2.xC <= 169)
             {
@@ -459,7 +459,7 @@ void grKraid_801FEA00(Ground_GObj* gobj)
             }
             gp->u.kraid2.xC++;
         } else {
-            Ground* map = Ground_801C2BA4(3)->user_data;
+            Ground* map = Ground_GetMapGObj(3)->user_data;
             if ((int) map->u.kraid.x4 == 0 && gp->u.kraid2.xC >= 123 &&
                 gp->u.kraid2.xC <= 138)
             {
@@ -486,7 +486,7 @@ void grKraid_801FEA00(Ground_GObj* gobj)
             gp->u.kraid2.xC = yakumono_param->kraid_wait_time +
                               yakumono_param->kraid_wait_time_add;
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-            HSD_JObjSetFlagsAll(Ground_801C2BA4(1)->hsd_obj, JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(Ground_GetMapGObj(1)->hsd_obj, JOBJ_HIDDEN);
             gp->u.kraid2.xC =
                 yakumono_param->kraid_wait_time +
                 ((s32) yakumono_param->kraid_wait_time_add != 0
@@ -514,7 +514,7 @@ void grKraid_801FEE54(HSD_GObj* gobj)
     gp->u.kraid2.x5 = 0;
     gp->u.kraid2.x2 = iVar3;
     HSD_JObjSetTranslateX(jobj, yakumono_param->kraid_pos_x[iVar3]);
-    HSD_JObjSetTranslateX(Ground_801C2BA4(1)->hsd_obj,
+    HSD_JObjSetTranslateX(Ground_GetMapGObj(1)->hsd_obj,
                           yakumono_param->kraid_pos_x[iVar3]);
     if (yakumono_param->kraid_pos_x[iVar3] == 0.0f) {
         if (HSD_Randi(2) != 0) {
@@ -539,7 +539,7 @@ void grKraid_801FF068(HSD_GObj* gobj, int val)
     gp->u.kraid.x1 = val;
     grAnime_801C8138(gobj, gp->map_id, gp->u.kraid.x1);
     temp = gp->u.kraid.x1;
-    gobj = Ground_801C2BA4(1);
+    gobj = Ground_GetMapGObj(1);
     gp = GET_GROUND(gobj);
     gp->u.kraid.x1 = temp;
     grAnime_801C8138(gobj, gp->map_id, gp->u.kraid.x1);

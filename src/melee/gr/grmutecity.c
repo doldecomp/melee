@@ -933,7 +933,7 @@ void grMuteCity_801F04B8(Ground_GObj* gobj)
             }
             break;
         case 24: {
-            HSD_GObj* bg_gobj = Ground_801C2BA4(0x1D);
+            HSD_GObj* bg_gobj = Ground_GetMapGObj(0x1D);
             if (bg_gobj != NULL) {
                 if (param != 0) {
                     grMaterial_801C9604(bg_gobj, (s32) yakumono_param->x4, 0);
@@ -1975,7 +1975,7 @@ bool grMuteCity_801F2C10(Vec3* pos, int arg, HSD_JObj* jobj)
     f32 new_var;
     PAD_STACK(8);
 
-    gobj = Ground_801C2BA4(0x1E);
+    gobj = Ground_GetMapGObj(0x1E);
     if (gobj != NULL) {
         gp = gobj->user_data;
         if (gp != NULL) {

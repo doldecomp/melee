@@ -567,7 +567,7 @@ static int grOp_804D48E0[1][2] = { { 1, 0 } };
 static inline void grOldPupupu_SyncSecondary(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
-    Ground* other_gp = Ground_801C2BA4(1)->user_data;
+    Ground* other_gp = Ground_GetMapGObj(1)->user_data;
     other_gp->u.oldpupupu.xC4 = gp->u.oldpupupu.xC4;
     other_gp->u.oldpupupu.xC8 = gp->u.oldpupupu.xC8;
     other_gp->u.oldpupupu.xCC = 0;
@@ -632,7 +632,7 @@ void grOldPupupu_802113E0(Ground_GObj* gobj)
                     grOldPupupu_Advance(gobj);
                     /* grOldPupupu_SyncSecondary would recolor gp here. */
                     gp = gobj->user_data;
-                    other_gp = Ground_801C2BA4(1)->user_data;
+                    other_gp = Ground_GetMapGObj(1)->user_data;
                     other_gp->u.oldpupupu.xC4 = gp->u.oldpupupu.xC4;
                     other_gp->u.oldpupupu.xC8 = gp->u.oldpupupu.xC8;
                     other_gp->u.oldpupupu.xCC = 0;
@@ -753,7 +753,7 @@ bool grOldPupupu_80211C14(Ground_GObj* gobj)
 void grOldPupupu_80211C1C(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
-    Ground* other_gp = Ground_801C2BA4(7)->user_data;
+    Ground* other_gp = Ground_GetMapGObj(7)->user_data;
     PAD_STACK(8);
 
     if (other_gp->u.oldpupupu.xC8 == 2 && other_gp->u.oldpupupu.xD4 != 0) {

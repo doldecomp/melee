@@ -121,7 +121,7 @@ void grKinokoRoute_80207420(void)
 void grKinokoRoute_80207490(void)
 {
     Vec3 pos;
-    HSD_GObj* gobj = Ground_801C57A4();
+    HSD_GObj* gobj = Ground_GetP1Fighter();
     if (gobj != NULL) {
         ftLib_80086644(gobj, &pos);
         Ground_801C38BC(pos.x, 20.0f + pos.y);
@@ -255,7 +255,7 @@ void grKinokoRoute_802078F0(Ground_GObj* gobj)
 
     cursor.gp = gobj->user_data;
 
-    fighter = Ground_801C57A4();
+    fighter = Ground_GetP1Fighter();
     if (fighter != NULL) {
         ftLib_80086644(fighter, &pos);
     } else {
@@ -364,7 +364,7 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
 
     fighter_pos = grNKr_803B82E8;
     scale = Ground_801C0498();
-    fighter = Ground_801C57A4();
+    fighter = Ground_GetP1Fighter();
     if (fighter != NULL) {
         ftLib_80086644(fighter, &fighter_pos);
     } else {
@@ -417,11 +417,11 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
                                 grKinokoRoute_80208480);
                 }
                 gp->u.kinokoroute2.zone_idx = 2;
-                ground_gobj = Ground_801C2BA4(0);
+                ground_gobj = Ground_GetMapGObj(0);
                 if (ground_gobj != NULL) {
                     Ground_801C4A08(ground_gobj);
                 }
-                ground_gobj = Ground_801C2BA4(2);
+                ground_gobj = Ground_GetMapGObj(2);
                 if (ground_gobj != NULL) {
                     Ground_801C4A08(ground_gobj);
                 }
@@ -466,11 +466,11 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
             reb0_jobj = Ground_801C2CF4(4);
             HSD_ASSERT(654, reb0_jobj);
             HSD_JObjSetTranslate(reb0_jobj, &gp->u.kinokoroute2.reb0_pos);
-            ground_gobj = Ground_801C2BA4(0);
+            ground_gobj = Ground_GetMapGObj(0);
             if (ground_gobj != NULL) {
                 Ground_801C4A08(ground_gobj);
             }
-            ground_gobj = Ground_801C2BA4(2);
+            ground_gobj = Ground_GetMapGObj(2);
             if (ground_gobj != NULL) {
                 Ground_801C4A08(ground_gobj);
             }
@@ -575,7 +575,7 @@ void grKinokoRoute_802084B4(HSD_GObj* gobj)
 
     HSD_JObjSetFlagsAll(gp->jobj, JOBJ_HIDDEN);
 
-    gobj2 = Ground_801C2BA4(3);
+    gobj2 = Ground_GetMapGObj(3);
     if (gobj2 != NULL) {
         void* gp2 = gobj2->user_data;
         if (gp2 != NULL) {
