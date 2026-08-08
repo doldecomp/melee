@@ -1,12 +1,12 @@
 { lib
-, stdenv
+, stdenvNoCC
 , decomp-toolkit
 , devkitppc
 , fetchurl
 , mwcc
 , objdiff
 , ninja
-, python3
+, python3Minimal
 , wibo
 }:
 let
@@ -15,7 +15,7 @@ let
     hash = "sha256-6GMMjcxhTSKzFmS6MyQvEkO7m+T91ATtbDXYt9pI8hk=";
   };
 in
-stdenv.mkDerivation {
+stdenvNoCC.mkDerivation {
   name = "doldecomp-melee";
 
   src = lib.cleanSourceWith {
@@ -43,7 +43,7 @@ stdenv.mkDerivation {
     decomp-toolkit
     devkitppc
     ninja
-    python3
+    python3Minimal
     wibo
   ];
 
@@ -62,8 +62,7 @@ stdenv.mkDerivation {
 
   installPhase = ''
     runHook preInstall
-    mkdir -p $out
-    cp build/GALE01/main.dol $out/
+    ninja progress > $out
     runHook postInstall
   '';
 }

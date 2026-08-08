@@ -35,6 +35,8 @@ typedef bool (*Predicate)(void);
 #define MWERKS_GEKKO
 #endif
 
+#define dingus
+
 #ifndef ATTRIBUTE_ALIGN
 #if defined(__MWERKS__) || defined(__GNUC__)
 #define ATTRIBUTE_ALIGN(num) __attribute__((aligned(num)))
