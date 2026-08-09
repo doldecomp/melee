@@ -15,11 +15,8 @@
 
 /* 4D7980 */ extern volatile s32 hsd_804D7980;
 /* 4D7984 */ extern volatile s32 hsd_804D7984;
-typedef struct CardOpStatus {
-    s32 status;
-    s32 xferred;
-} CardOpStatus;
-/* 4D7988 */ extern CardOpStatus hsd_804D7988;
+/* 4D7988 */ extern s32 hsd_804D7988;
+/* 4D798C */ extern s32 hsd_804D798C;
 /* 4D7998 */ extern s32 hsd_804D7998;
 /* 4D799C */ extern s32 hsd_804D799C;
 
@@ -49,6 +46,15 @@ typedef struct HsdCmdEntry {
     s32 f4;
     s32 f5;
 } HsdCmdEntry;
+
+typedef struct CardContext {
+    /* 0x0000 */ s32 x0;
+    /* 0x0004 */ CardState* x4;
+    /* 0x0008 */ void (*x8)(s32, s32);
+    /* 0x000C */ s32 xC;
+    /* 0x0010 */ CardCmd x10[128];
+    /* 0x1210 */ HsdCmdEntry x1210[32];
+} CardContext;
 
 typedef struct CardQueueEntry {
     /* 0x00 */ s32 x0;
@@ -139,7 +145,7 @@ s32 fn_803AA790(void)
         return result;
     case 6:
         result = fn_803B26CC((CardState*) arg0, entry->x8, entry->xC,
-                             entry->x10, (s32) entry->x14);
+                             entry->x10, (void (*)(s32, s32)) entry->x14);
         if (result < 0) {
             if (entry->x14 != NULL) {
                 entry->x14(0, result);
@@ -152,510 +158,587 @@ s32 fn_803AA790(void)
     }
 }
 
-s32 hsd_803AAA48(void)
-{
-    s32 result;
-    s32 r;
-    s32 retries;
-    BOOL intr2;
+#define CMD_TYPE cmd[0]
+#define CMD_STATE ((CardState*) cmd[1])
+#define CMD_X8 cmd[2]
+#define CMD_XC cmd[3]
+#define CMD_X10 cmd[4]
+#define CMD_X14 cmd[5]
+#define CMD_X18 ((void*) cmd[6])
+#define CMD_X1C cmd[7]
+#define CMD_X20 cmd[8]
 
+static inline s32 retryCardFastOpen(s32 chan, s32 file_no,
+                                    CARDFileInfo* file_info)
+{
+    s32 i;
+    s32 result;
+
+    i = 0;
+    do {
+        result = CARDFastOpen(chan, file_no, file_info);
+        if (result != -1) {
+            break;
+        }
+        i++;
+    } while (i < 10);
+
+    return result;
+}
+static inline s32 retryCardReadAsync(CARDFileInfo* file_info, void* buffer,
+                                     s32 length, s32 offset,
+                                     CARDCallback callback)
+{
+    s32 i;
+    s32 result;
+
+    i = 0;
+    do {
+        result = CARDReadAsync(file_info, buffer, length, offset, callback);
+        if (result != -1) {
+            break;
+        }
+        i++;
+    } while (i < 10);
+
+    return result;
+}
+static inline s32 retryCardWriteAsync(CARDFileInfo* file_info, void* buffer,
+                                      s32 length, s32 offset,
+                                      CARDCallback callback)
+{
+    s32 i;
+    s32 result;
+
+    i = 0;
+    do {
+        result = CARDWriteAsync(file_info, buffer, length, offset, callback);
+        if (result != -1) {
+            break;
+        }
+        i++;
+    } while (i < 10);
+
+    return result;
+}
+static inline s32 retryCardClose(CARDFileInfo* file_info)
+{
+    s32 i;
+    s32 result;
+
+    i = 0;
+    do {
+        result = CARDClose(file_info);
+        if (result != -1) {
+            break;
+        }
+        i++;
+    } while (i < 10);
+
+    return result;
+}
+static inline s32 retryCardCreateAsync(s32 chan, char* filename, s32 size,
+                                       CARDFileInfo* file_info,
+                                       CARDCallback callback)
+{
+    s32 i;
+    s32 result;
+
+    i = 0;
+    do {
+        result = CARDCreateAsync(chan, filename, size, file_info, callback);
+        if (result != -1) {
+            break;
+        }
+        i++;
+    } while (i < 10);
+
+    return result;
+}
+static inline s32 retryCardGetStatus(s32 chan, s32 file_no, CARDStat* stat)
+{
+    s32 i;
+    s32 result;
+
+    i = 0;
+    do {
+        result = CARDGetStatus(chan, file_no, stat);
+        if (result != -1) {
+            break;
+        }
+        i++;
+    } while (i < 10);
+
+    return result;
+}
+static inline s32 retryCardSetStatusAsync(s32 chan, s32 file_no,
+                                          CARDStat* stat,
+                                          CARDCallback callback)
+{
+    s32 i;
+    s32 result;
+
+    i = 0;
+    do {
+        result = CARDSetStatusAsync(chan, file_no, stat, callback);
+        if (result != -1) {
+            break;
+        }
+        i++;
+    } while (i < 10);
+
+    return result;
+}
+static inline int setupCardIcons(s32* cmd)
+{
+    u32 bit;
+    s32 k;
+
+    k = (bit = 0);
+    for (; k < 8 && CMD_STATE->icon_speed[(int) k] != 0;) {
+        CMD_STATE->stat.iconFormat =
+            (CMD_STATE->stat.iconFormat & ~(CARD_STAT_ICON_MASK << bit)) |
+            (CMD_STATE->icon_format[(int) k] << bit);
+        CMD_STATE->stat.iconSpeed =
+            (CMD_STATE->stat.iconSpeed & ~(CARD_STAT_SPEED_MASK << bit)) |
+            (CMD_STATE->icon_speed[k++] << bit);
+        bit += 2;
+    }
+    return k;
+}
+static inline void unpackCardStat(s32* cmd, CARDStat* stat)
+{
+    s32 k;
+
+    CMD_STATE->x3B0 = stat->bannerFormat & 3;
+    for (k = 0; k < 8; k++) {
+        CMD_STATE->icon_format[k] =
+            (stat->iconFormat >> (2 * k)) & CARD_STAT_ICON_MASK;
+        CMD_STATE->icon_speed[k] =
+            (stat->iconSpeed >> (2 * k)) & CARD_STAT_SPEED_MASK;
+    }
+    CMD_STATE->x24 = hsd_803AC340(&CMD_STATE->x3B0);
+    {
+        u32 used = CMD_STATE->x24 + CMD_STATE->x8;
+        used += 0x2F;
+        CMD_STATE->x460 = stat->length / CMD_STATE->x8 - used / CMD_STATE->x8;
+    }
+}
+static inline void rollbackCardCommands(CardContext* context, s32 snap)
+{
+    s32 saved = snap;
+
+    while (saved != hsd_804D7984) {
+        ((CardBufEntry*) &context->x4)[saved].xC = 0;
+        saved = (saved + 1) % 128;
+    }
+    hsd_804D7984 = snap;
+}
+static inline void initHeaderBlockCommand(s32* buf, CardState* state,
+                                          u32 block, s32 file_id, s32 seq_num,
+                                          s32 version)
+{
+    buf[0] = 11;
+    buf[1] = (s32) state;
+    buf[2] = block;
+    buf[3] = file_id;
+    buf[4] = seq_num;
+    buf[5] = version;
+}
+static inline s32 queueHeaderBlock(CardState* state, u32 block, s32 file_id,
+                                   s32 seq_num, s32 version)
+{
+    s32 buf[9];
+
+    initHeaderBlockCommand(buf, state, block, file_id, seq_num, version);
+    return fn_803AC168(buf);
+}
+static inline s32 queueHeaderBlocks(CardState* state, s32 file_id, s32 seq_num,
+                                    s32 version)
+{
+    u32 i;
+    int result;
+
+    for (i = 0; i < (0x2F + state->x24 + state->x8) / state->x8; i++) {
+        result = queueHeaderBlock(state, i, file_id, seq_num, version);
+        if (result < 0) {
+            return result;
+        }
+    }
+    return 0;
+}
+
+void hsd_803AAA48(void)
+{
+    s32 r;
+    s32 chan;
     while (1) {
-        CardBufEntry* op = (CardBufEntry*) hsd_804D1138;
-        CardBufEntry* entry;
-        CardCmd* cmd;
+        CardContext* ctx = (CardContext*) hsd_804D1138;
+        CardState** state = &ctx->x4;
+        s32* cmd;
         s32 type;
         BOOL intr = OSDisableInterrupts();
+        BOOL intr2;
         s32 busy;
         if (hsd_804D799C == 1) {
             busy = 1;
         } else {
             busy = 0;
         }
-        result = OSRestoreInterrupts(intr);
+        OSRestoreInterrupts(intr);
         if (busy) {
-            return result;
+            return;
         }
 
-        if (hsd_804D7988.status < 0) {
-            while (op[hsd_804D7980].x10 != 0) {
-                op[hsd_804D7980].x10 = 0;
+        if (hsd_804D7988 < 0) {
+            while (((CardBufEntry*) hsd_804D1138)[hsd_804D7980].x10 != 0) {
+                ((CardBufEntry*) hsd_804D1138)[hsd_804D7980].x10 = 0;
                 hsd_804D7980 = (hsd_804D7980 + 1) % 128;
             }
         }
 
-        entry = &op[hsd_804D7980];
-        cmd = (CardCmd*) &entry->x10;
-        type = cmd->type;
+        cmd = (s32*) &((CardBufEntry*) ctx)[hsd_804D7980];
+        type = *(cmd += 4);
 
         switch ((u32) type) {
         case 0:
-            if (op->x0 != 0) {
-                if (op->x0 == 3) {
-                    s32 file = op->xC;
-                    s32 blocks_before = fn_803AC6B8((CardState*) op->x4, file);
-                    s32 file_blocks = fn_803AC634((CardState*) op->x4, file);
-                    s32 total = fn_803AC7DC((CardState*) op->x4);
+            if (ctx->x0 != 0) {
+                if (ctx->x0 == 3) {
+                    s32 file = ctx->xC;
+                    s32 blocks_before = fn_803AC6B8(*state, file);
+                    s32 file_blocks = fn_803AC634(*state, file);
+                    s32 total = fn_803AC7DC(*state);
                     s32 map[64];
                     s32 j;
                     for (j = 0; j < file_blocks; j++) {
                         map[j] = -1;
                     }
                     for (j = 1; j <= total; j++) {
-                        s32 fidx = ((CardState*) op->x4)->x170[j];
+                        s32 fidx = (*state)->x170[j];
                         if (fidx >= 0) {
                             s32 logical = fidx - blocks_before;
                             if (logical >= 0 && logical < file_blocks) {
                                 if (map[logical] < 0) {
                                     map[logical] = j;
                                 } else if (fn_803ACB74(
-                                               ((CardState*) op->x4)
-                                                   ->x270[map[logical]],
-                                               ((CardState*) op->x4)
-                                                   ->x270[j]) < 0)
+                                               (*state)->x270[map[logical]],
+                                               (*state)->x270[j]) < 0)
                                 {
-                                    ((CardState*) op->x4)
-                                        ->x170[map[logical]] *= -1;
+                                    (*state)->x170[map[logical]] *= -1;
                                     map[logical] = j;
                                 } else {
-                                    ((CardState*) op->x4)->x170[j] *= -1;
+                                    (*state)->x170[j] *= -1;
                                 }
                             }
                         }
                     }
                 }
-                if (op->x8 != 0) {
-                    ((void (*)(s32, s32)) op->x8)(op->xC, hsd_804D7988.status);
+                if (ctx->x8 != 0) {
+                    ctx->x8(ctx->xC, hsd_804D7988);
                 }
-                op->x0 = 0;
+                ctx->x0 = 0;
             }
-            hsd_804D7988.status = 0;
+            hsd_804D7988 = 0;
             hsd_804D799C = 2;
-            if (hsd_804D7990 != hsd_804D7994 ||
-                CMD_QUEUE((u8*) hsd_804D1138)[hsd_804D7990].type != 0)
+            if (hsd_804D7990 == hsd_804D7994 &&
+                CMD_QUEUE((u8*) ctx)[hsd_804D7990].type == 0)
             {
-                result = fn_803AA790();
-                if (result >= 0) {
-                    hsd_804D799C = 0;
-                    continue;
-                }
+                return;
             }
-            return result;
-        case 5:
-            if (hsd_804D7988.status == 2) {
-                cmd->type = 0;
-                hsd_804D7980 = (hsd_804D7980 + 1) % 128;
-                continue;
+            if (fn_803AA790() < 0) {
+                return;
             }
-            for (retries = 0; retries < 10; retries++) {
-                r = CARDFastOpen(cmd->state->x4, cmd->state->x20,
-                                 &cmd->state->file_info);
-                if (r != -1) {
-                    break;
-                }
-            }
-            if (r < 0) {
-                hsd_804D7988.status = r;
-                continue;
-            }
-            hsd_804D7988.xferred = CARDGetXferredBytes(cmd->state->x4);
-            intr2 = OSDisableInterrupts();
-            for (retries = 0; retries < 10; retries++) {
-                r = CARDReadAsync(&cmd->state->file_info, cmd->state->x0,
-                                  cmd->state->x8, cmd->x1C,
-                                  (void (*)(s32, s32)) hsd_803A949C);
-                if (r != -1) {
-                    break;
-                }
-            }
-            hsd_804D799C = 1;
-            result = OSRestoreInterrupts(intr2);
-            if (r < 0) {
-                hsd_804D7988.status = r;
-                hsd_804D799C = 0;
-                for (retries = 0; retries < 10; retries++) {
-                    if (CARDClose(&cmd->state->file_info) != -1) {
-                        break;
-                    }
-                }
-                continue;
-            }
-            return result;
-        case 11:
-            for (retries = 0; retries < 10; retries++) {
-                r = CARDFastOpen(cmd->state->x4, cmd->state->x20,
-                                 &cmd->state->file_info);
-                if (r != -1) {
-                    break;
-                }
-            }
-            if (r < 0) {
-                hsd_804D7988.status = r;
-                continue;
-            }
-            hsd_804D7988.xferred = CARDGetXferredBytes(cmd->state->x4);
-            if (cmd->x8 == 0) {
-                memset(cmd->state->digest, 0, 0x30);
-            }
-            intr2 = OSDisableInterrupts();
-            for (retries = 0; retries < 10; retries++) {
-                r = CARDReadAsync(&cmd->state->file_info, cmd->state->x0,
-                                  cmd->state->x8, cmd->x8 * cmd->state->x8,
-                                  (void (*)(s32, s32)) hsd_803A949C);
-                if (r != -1) {
-                    break;
-                }
-            }
-            hsd_804D799C = 1;
-            result = OSRestoreInterrupts(intr2);
-            if (r < 0) {
-                hsd_804D7988.status = r;
-                hsd_804D799C = 0;
-                for (retries = 0; retries < 10; retries++) {
-                    if (CARDClose(&cmd->state->file_info) != -1) {
-                        break;
-                    }
-                }
-                continue;
-            }
-            return result;
-        case 10:
-            if (hsd_804D7988.status == 2) {
-                cmd->type = 0;
-                hsd_804D7980 = (hsd_804D7980 + 1) % 128;
-                continue;
-            }
-            for (retries = 0; retries < 10; retries++) {
-                r = CARDFastOpen(cmd->state->x4, cmd->state->x20,
-                                 &cmd->state->file_info);
-                if (r != -1) {
-                    break;
-                }
-            }
-            if (r < 0) {
-                hsd_804D7988.status = r;
-                continue;
-            }
-            hsd_804D7988.xferred = CARDGetXferredBytes(cmd->state->x4);
-            if (cmd->x8 == 0) {
-                memset(cmd->state->digest, 0, 0x30);
-            }
-            intr2 = OSDisableInterrupts();
-            for (retries = 0; retries < 10; retries++) {
-                r = CARDReadAsync(&cmd->state->file_info, cmd->state->x0,
-                                  cmd->state->x8, cmd->x8 * cmd->state->x8,
-                                  (void (*)(s32, s32)) hsd_803A949C);
-                if (r != -1) {
-                    break;
-                }
-            }
-            hsd_804D799C = 1;
-            result = OSRestoreInterrupts(intr2);
-            if (r < 0) {
-                hsd_804D7988.status = r;
-                hsd_804D799C = 0;
-                for (retries = 0; retries < 10; retries++) {
-                    if (CARDClose(&cmd->state->file_info) != -1) {
-                        break;
-                    }
-                }
-                continue;
-            }
-            return result;
-        case 6:
-            if (hsd_804D7988.status == 2) {
-                hsd_804D7988.status = 0;
-            } else {
-                hsd_804D7988.status = 1;
-            }
-            cmd->type = 0;
-            hsd_804D7980 = (hsd_804D7980 + 1) % 128;
+            hsd_804D799C = 0;
             continue;
-        case 2:
-            if (hsd_804D7988.status != 1) {
-                for (retries = 0; retries < 10; retries++) {
-                    s32 file_no = cmd->state->x20;
-                    r = CARDFastOpen(cmd->state->x4, file_no,
-                                     &cmd->state->file_info);
-                    if (r != -1) {
-                        break;
-                    }
-                }
-                if (r < 0) {
-                    hsd_804D7988.status = r;
-                    continue;
-                }
-                hsd_804D7988.xferred = CARDGetXferredBytes(cmd->state->x4);
-                intr2 = OSDisableInterrupts();
-                for (retries = 0; retries < 10; retries++) {
-                    r = CARDReadAsync(&cmd->state->file_info, cmd->state->x0,
-                                      cmd->state->x8, cmd->x1C,
-                                      (void (*)(s32, s32)) hsd_803A949C);
-                    if (r != -1) {
-                        break;
-                    }
-                }
-                hsd_804D799C = 1;
-                result = OSRestoreInterrupts(intr2);
-                if (r < 0) {
-                    hsd_804D7988.status = r;
-                    hsd_804D799C = 0;
-                    for (retries = 0; retries < 10; retries++) {
-                        if (CARDClose(&cmd->state->file_info) != -1) {
-                            break;
-                        }
-                    }
-                    continue;
-                }
-                return result;
+        case 5:
+            if (hsd_804D7988 == 2) {
+                CMD_TYPE = 0;
+                hsd_804D7980 = (hsd_804D7980 + 1) % 128;
+                continue;
             }
-            cmd->type = 0;
+            r = retryCardFastOpen(CMD_STATE->x4, CMD_STATE->x20,
+                                  &CMD_STATE->file_info);
+            if (r < 0) {
+                hsd_804D7988 = r;
+                continue;
+            }
+            hsd_804D798C = CARDGetXferredBytes(CMD_STATE->x4);
+            intr2 = OSDisableInterrupts();
+            r = retryCardReadAsync(&CMD_STATE->file_info, CMD_STATE->x0,
+                                   CMD_STATE->x8, CMD_X1C,
+                                   (void (*)(s32, s32)) hsd_803A949C);
+            hsd_804D799C = 1;
+            OSRestoreInterrupts(intr2);
+            if (r < 0) {
+                hsd_804D7988 = r;
+                hsd_804D799C = 0;
+                retryCardClose(&CMD_STATE->file_info);
+                continue;
+            }
+            return;
+        case 11:
+            r = retryCardFastOpen(CMD_STATE->x4, CMD_STATE->x20,
+                                  &CMD_STATE->file_info);
+            if (r < 0) {
+                hsd_804D7988 = r;
+                continue;
+            }
+            hsd_804D798C = CARDGetXferredBytes(CMD_STATE->x4);
+            if (CMD_X8 == 0) {
+                memset(CMD_STATE->digest, 0, 0x30);
+            }
+            intr2 = OSDisableInterrupts();
+            r = retryCardReadAsync(&CMD_STATE->file_info, CMD_STATE->x0,
+                                   CMD_STATE->x8, CMD_X8 * CMD_STATE->x8,
+                                   (void (*)(s32, s32)) hsd_803A949C);
+            hsd_804D799C = 1;
+            OSRestoreInterrupts(intr2);
+            if (r < 0) {
+                hsd_804D7988 = r;
+                hsd_804D799C = 0;
+                retryCardClose(&CMD_STATE->file_info);
+                continue;
+            }
+            return;
+        case 10:
+            if (hsd_804D7988 == 2) {
+                CMD_TYPE = 0;
+                hsd_804D7980 = (hsd_804D7980 + 1) % 128;
+                continue;
+            }
+            r = retryCardFastOpen(CMD_STATE->x4, CMD_STATE->x20,
+                                  &CMD_STATE->file_info);
+            if (r < 0) {
+                hsd_804D7988 = r;
+                continue;
+            }
+            hsd_804D798C = CARDGetXferredBytes(CMD_STATE->x4);
+            if (CMD_X8 == 0) {
+                memset(CMD_STATE->digest, 0, 0x30);
+            }
+            intr2 = OSDisableInterrupts();
+            r = retryCardReadAsync(&CMD_STATE->file_info, CMD_STATE->x0,
+                                   CMD_STATE->x8, CMD_X8 * CMD_STATE->x8,
+                                   (void (*)(s32, s32)) hsd_803A949C);
+            hsd_804D799C = 1;
+            OSRestoreInterrupts(intr2);
+            if (r < 0) {
+                hsd_804D7988 = r;
+                hsd_804D799C = 0;
+                retryCardClose(&CMD_STATE->file_info);
+                continue;
+            }
+            return;
+        case 6:
+            if (hsd_804D7988 == 2) {
+                hsd_804D7988 = 0;
+                CMD_TYPE = 0;
+                hsd_804D7980 = (hsd_804D7980 + 1) % 128;
+                continue;
+            } else {
+                hsd_804D7988 = 1;
+                CMD_TYPE = 0;
+                hsd_804D7980 = (hsd_804D7980 + 1) % 128;
+                continue;
+            }
+        case 2:
+            if (hsd_804D7988 != 1) {
+                r = retryCardFastOpen(CMD_STATE->x4, CMD_STATE->x20,
+                                      &CMD_STATE->file_info);
+                if (r < 0) {
+                    hsd_804D7988 = r;
+                    continue;
+                }
+                hsd_804D798C = CARDGetXferredBytes(CMD_STATE->x4);
+                intr2 = OSDisableInterrupts();
+                r = retryCardReadAsync(&CMD_STATE->file_info, CMD_STATE->x0,
+                                       CMD_STATE->x8, CMD_X1C,
+                                       (void (*)(s32, s32)) hsd_803A949C);
+                hsd_804D799C = 1;
+                OSRestoreInterrupts(intr2);
+                if (r < 0) {
+                    hsd_804D7988 = r;
+                    hsd_804D799C = 0;
+                    retryCardClose(&CMD_STATE->file_info);
+                    continue;
+                }
+                return;
+            }
+            CMD_TYPE = 0;
             hsd_804D7980 = (hsd_804D7980 + 1) % 128;
             continue;
         case 15:
-            if (hsd_804D7988.status != 1) {
-                for (retries = 0; retries < 10; retries++) {
-                    s32 file_no = cmd->state->x20;
-                    r = CARDFastOpen(cmd->state->x4, file_no,
-                                     &cmd->state->file_info);
-                    if (r != -1) {
-                        break;
-                    }
-                }
+            if (hsd_804D7988 != 1) {
+                r = retryCardFastOpen(CMD_STATE->x4, CMD_STATE->x20,
+                                      &CMD_STATE->file_info);
                 if (r < 0) {
-                    hsd_804D7988.status = r;
+                    hsd_804D7988 = r;
                     continue;
                 }
-                hsd_804D7988.xferred = CARDGetXferredBytes(cmd->state->x4);
+                hsd_804D798C = CARDGetXferredBytes(CMD_STATE->x4);
                 intr2 = OSDisableInterrupts();
-                for (retries = 0; retries < 10; retries++) {
-                    r = CARDReadAsync(&cmd->state->file_info, cmd->state->x0,
-                                      cmd->state->x8, cmd->x1C,
-                                      (void (*)(s32, s32)) hsd_803A949C);
-                    if (r != -1) {
-                        break;
-                    }
-                }
+                r = retryCardReadAsync(&CMD_STATE->file_info, CMD_STATE->x0,
+                                       CMD_STATE->x8, CMD_X1C,
+                                       (void (*)(s32, s32)) hsd_803A949C);
                 hsd_804D799C = 1;
-                result = OSRestoreInterrupts(intr2);
+                OSRestoreInterrupts(intr2);
                 if (r < 0) {
-                    hsd_804D7988.status = r;
+                    hsd_804D7988 = r;
                     hsd_804D799C = 0;
-                    for (retries = 0; retries < 10; retries++) {
-                        if (CARDClose(&cmd->state->file_info) != -1) {
-                            break;
-                        }
-                    }
+                    retryCardClose(&CMD_STATE->file_info);
                     continue;
                 }
-                return result;
+                return;
             }
-            cmd->type = 0;
+            CMD_TYPE = 0;
             hsd_804D7980 = (hsd_804D7980 + 1) % 128;
-            (void) hsd_804D7980;
             continue;
         case 4:
-            if (hsd_804D7988.status != 1) {
-                memset(cmd->x18, 0, cmd->x20);
+            if (hsd_804D7988 != 1) {
+                memset(CMD_X18, 0, CMD_X20);
             }
-            cmd->type = 0;
+            CMD_TYPE = 0;
             hsd_804D7980 = (hsd_804D7980 + 1) % 128;
             continue;
         case 1:
-            if (hsd_804D7988.status != 1) {
+            if (hsd_804D7988 != 1) {
                 s32 hdr_offset;
                 s32 rem;
-                for (retries = 0; retries < 10; retries++) {
-                    r = CARDFastOpen(cmd->state->x4, cmd->state->x20,
-                                     &cmd->state->file_info);
-                    if (r != -1) {
-                        break;
-                    }
-                }
+                signed int size;
+                r = retryCardFastOpen(CMD_STATE->x4, CMD_STATE->x20,
+                                      &CMD_STATE->file_info);
                 if (r < 0) {
-                    hsd_804D7988.status = r;
+                    hsd_804D7988 = r;
                     continue;
                 }
-                if (cmd->x10 > 0) {
+                if (CMD_X10 > 0) {
                     hdr_offset = 0;
                 } else {
-                    hdr_offset = (cmd->state->x24 + 0x30) % cmd->state->x8;
+                    hdr_offset = (CMD_STATE->x24 + 0x30) % CMD_STATE->x8;
                 }
-                if (cmd->x20 > 0 && cmd->x18 != NULL) {
-                    memcpy(cmd->state->x0 + hdr_offset + 0x20, cmd->x18,
-                           cmd->x20);
+                size = CMD_X20;
+                if (size > 0 && CMD_X18 != NULL) {
+                    memcpy(&CMD_STATE->x0[hdr_offset + 0x20], CMD_X18, size);
                 }
-                rem = (cmd->state->x8 - hdr_offset) - cmd->x20 - 0x20;
+                rem = (CMD_STATE->x8 - hdr_offset) - size - 0x20;
                 if (rem != 0) {
-                    memset(cmd->state->x0 + cmd->x20 + 0x20 + hdr_offset, 0,
-                           rem);
+                    memset(&CMD_STATE->x0[hdr_offset + size + 0x20], 0, rem);
                 }
-                memset(cmd->state->x0 + hdr_offset, 0, 0x20);
-                cmd->state->x0[hdr_offset + 0x10] = (u8) (cmd->x10 >> 8);
-                cmd->state->x0[hdr_offset + 0x11] = (u8) cmd->x10;
-                cmd->state->x0[hdr_offset + 0x12] = (u8) cmd->x14;
-                fn_803AC3F8(cmd->state, cmd->state->x0 + hdr_offset + 0x13,
-                            cmd->x8);
-                hsd_803B2FA0(cmd->state->x0 + hdr_offset,
-                             cmd->state->x8 - hdr_offset);
-                hsd_804D7988.xferred = CARDGetXferredBytes(cmd->state->x4);
+                memset(CMD_STATE->x0 + hdr_offset, 0, 0x20);
+                CMD_STATE->x0[hdr_offset + 0x10] = (u8) (CMD_X10 >> 8);
+                CMD_STATE->x0[hdr_offset + 0x11] = (u8) CMD_X10;
+                CMD_STATE->x0[hdr_offset + 0x12] = (u8) CMD_X14;
+                fn_803AC3F8(CMD_STATE, &CMD_STATE->x0[hdr_offset + 0x13],
+                            CMD_X8);
+                hsd_803B2FA0(CMD_STATE->x0 + hdr_offset,
+                             CMD_STATE->x8 - hdr_offset);
+                hsd_804D798C = CARDGetXferredBytes(CMD_STATE->x4);
                 intr2 = OSDisableInterrupts();
-                for (retries = 0; retries < 10; retries++) {
-                    r = CARDWriteAsync(&cmd->state->file_info, cmd->state->x0,
-                                       cmd->state->x8, cmd->x1C,
-                                       (void (*)(s32, s32)) hsd_803A949C);
-                    if (r != -1) {
-                        break;
-                    }
-                }
+                r = retryCardWriteAsync(&CMD_STATE->file_info, CMD_STATE->x0,
+                                        CMD_STATE->x8, CMD_X1C,
+                                        (void (*)(s32, s32)) hsd_803A949C);
                 hsd_804D799C = 1;
-                result = OSRestoreInterrupts(intr2);
+                OSRestoreInterrupts(intr2);
                 if (r < 0) {
-                    hsd_804D7988.status = r;
+                    hsd_804D7988 = r;
                     hsd_804D799C = 0;
-                    for (retries = 0; retries < 10; retries++) {
-                        if (CARDClose(&cmd->state->file_info) != -1) {
-                            break;
-                        }
-                    }
+                    retryCardClose(&CMD_STATE->file_info);
                     continue;
                 }
-                return result;
+                return;
             }
-            cmd->type = 0;
+            CMD_TYPE = 0;
             hsd_804D7980 = (hsd_804D7980 + 1) % 128;
             continue;
         case 16:
-            if (hsd_804D7988.status != 1) {
-                for (retries = 0; retries < 10; retries++) {
-                    r = CARDFastOpen(cmd->state->x4, cmd->state->x20,
-                                     &cmd->state->file_info);
-                    if (r != -1) {
-                        break;
-                    }
-                }
+            if (hsd_804D7988 != 1) {
+                r = retryCardFastOpen(CMD_STATE->x4, CMD_STATE->x20,
+                                      &CMD_STATE->file_info);
                 if (r < 0) {
-                    hsd_804D7988.status = r;
+                    hsd_804D7988 = r;
                     continue;
                 }
-                hsd_803B2FA0(cmd->state->x0, cmd->state->x8);
-                hsd_804D7988.xferred = CARDGetXferredBytes(cmd->state->x4);
+                hsd_803B2FA0(CMD_STATE->x0, CMD_STATE->x8);
+                hsd_804D798C = CARDGetXferredBytes(CMD_STATE->x4);
                 intr2 = OSDisableInterrupts();
-                for (retries = 0; retries < 10; retries++) {
-                    r = CARDWriteAsync(&cmd->state->file_info, cmd->state->x0,
-                                       cmd->state->x8, cmd->x1C,
-                                       (void (*)(s32, s32)) hsd_803A949C);
-                    if (r != -1) {
-                        break;
-                    }
-                }
+                r = retryCardWriteAsync(&CMD_STATE->file_info, CMD_STATE->x0,
+                                        CMD_STATE->x8, CMD_X1C,
+                                        (void (*)(s32, s32)) hsd_803A949C);
                 hsd_804D799C = 1;
-                result = OSRestoreInterrupts(intr2);
+                OSRestoreInterrupts(intr2);
                 if (r < 0) {
-                    hsd_804D7988.status = r;
+                    hsd_804D7988 = r;
                     hsd_804D799C = 0;
-                    for (retries = 0; retries < 10; retries++) {
-                        if (CARDClose(&cmd->state->file_info) != -1) {
-                            break;
-                        }
-                    }
+                    retryCardClose(&CMD_STATE->file_info);
                     continue;
                 }
-                return result;
+                return;
             }
-            cmd->type = 0;
+            CMD_TYPE = 0;
             hsd_804D7980 = (hsd_804D7980 + 1) % 128;
             continue;
         case 7:
             intr2 = OSDisableInterrupts();
-            for (retries = 0; retries < 10; retries++) {
-                r = CARDCreateAsync(cmd->state->x4, (char*) cmd->x8, cmd->xC,
-                                    &cmd->state->file_info,
-                                    (void (*)(s32, s32)) hsd_803A949C);
-                if (r != -1) {
-                    break;
-                }
-            }
+            r = retryCardCreateAsync(CMD_STATE->x4, (char*) CMD_X8, CMD_XC,
+                                     &CMD_STATE->file_info,
+                                     (void (*)(s32, s32)) hsd_803A949C);
             hsd_804D799C = 1;
-            result = OSRestoreInterrupts(intr2);
+            OSRestoreInterrupts(intr2);
             if (r < 0) {
-                hsd_804D7988.status = r;
+                hsd_804D7988 = r;
                 hsd_804D799C = 0;
                 continue;
             }
-            return result;
+            return;
         case 8:
-            if (hsd_804D7988.status != 1) {
-                s32 k;
-                s32 bit;
-                for (retries = 0; retries < 10; retries++) {
-                    r = CARDGetStatus(cmd->state->x4, cmd->state->x20,
-                                      &cmd->state->stat);
-                    if (r != -1) {
-                        break;
-                    }
-                }
+            if (hsd_804D7988 != 1) {
+                int k;
+                r = retryCardGetStatus(CMD_STATE->x4, CMD_STATE->x20,
+                                       &CMD_STATE->stat);
                 if (r < 0) {
-                    hsd_804D7988.status = r;
+                    hsd_804D7988 = r;
                     continue;
                 }
-                cmd->state->stat.commentAddr = 0;
-                cmd->state->stat.iconAddr = 0x40;
-                cmd->state->stat.bannerFormat =
-                    (cmd->state->stat.bannerFormat & ~3) | cmd->state->x3B0;
-                bit = 0;
-                for (k = 0; k < 8 && cmd->state->icon_speed[k] != 0; k++) {
-                    cmd->state->stat.iconFormat =
-                        (cmd->state->stat.iconFormat & ~(3 << bit)) |
-                        (cmd->state->icon_format[k] << bit);
-                    cmd->state->stat.iconSpeed =
-                        (cmd->state->stat.iconSpeed & ~(3 << bit)) |
-                        (cmd->state->icon_speed[k] << bit);
-                    bit += 2;
-                }
+                CMD_STATE->stat.commentAddr = 0;
+                CMD_STATE->stat.iconAddr = 0x40;
+                CMD_STATE->stat.bannerFormat =
+                    (CMD_STATE->stat.bannerFormat & ~3) | CMD_STATE->x3B0;
+                k = setupCardIcons(cmd);
                 for (; k < 8; k++) {
-                    cmd->state->stat.iconFormat =
-                        cmd->state->stat.iconFormat & ~(3 << bit);
-                    cmd->state->stat.iconSpeed =
-                        cmd->state->stat.iconSpeed & ~(3 << bit);
-                    bit += 2;
+                    CMD_STATE->stat.iconFormat =
+                        CMD_STATE->stat.iconFormat &
+                        ~(CARD_STAT_ICON_MASK << (2 * k));
+                    CMD_STATE->stat.iconSpeed =
+                        CMD_STATE->stat.iconSpeed &
+                        ~(CARD_STAT_SPEED_MASK << (2 * k));
                 }
                 intr2 = OSDisableInterrupts();
-                for (retries = 0; retries < 10; retries++) {
-                    r = CARDSetStatusAsync(cmd->state->x4, cmd->state->x20,
-                                           &cmd->state->stat,
-                                           (void (*)(s32, s32)) hsd_803A949C);
-                    if (r != -1) {
-                        break;
-                    }
-                }
+                r = retryCardSetStatusAsync(CMD_STATE->x4, CMD_STATE->x20,
+                                            &CMD_STATE->stat,
+                                            (void (*)(s32, s32)) hsd_803A949C);
                 hsd_804D799C = 1;
-                result = OSRestoreInterrupts(intr2);
+                OSRestoreInterrupts(intr2);
                 if (r < 0) {
-                    hsd_804D7988.status = r;
+                    hsd_804D7988 = r;
                     hsd_804D799C = 0;
                     continue;
                 }
-                return result;
+                return;
             }
-            cmd->type = 0;
+            CMD_TYPE = 0;
             hsd_804D7980 = (hsd_804D7980 + 1) % 128;
             continue;
         case 9:
-            if (hsd_804D7988.status != 1) {
+            if (hsd_804D7988 != 1) {
                 s32 icon_size;
                 s32 pos;
-                for (retries = 0; retries < 10; retries++) {
-                    r = CARDFastOpen(cmd->state->x4, cmd->state->x20,
-                                     &cmd->state->file_info);
-                    if (r != -1) {
-                        break;
-                    }
-                }
+                r = retryCardFastOpen(CMD_STATE->x4, CMD_STATE->x20,
+                                      &CMD_STATE->file_info);
                 if (r < 0) {
-                    hsd_804D7988.status = r;
+                    hsd_804D7988 = r;
                     continue;
                 }
-                switch (cmd->state->x3B0) {
+                switch (CMD_STATE->x3B0) {
                 case 2:
                     icon_size = 0x1800;
                     break;
@@ -666,189 +749,158 @@ s32 hsd_803AAA48(void)
                     icon_size = 0;
                     break;
                 }
-                if (cmd->x8 == 0) {
-                    memcpy(cmd->state->x0, cmd->state->x370, 0x40);
+                if (CMD_X8 == 0) {
+                    memcpy(CMD_STATE->x0, CMD_STATE->x370, 0x40);
                     pos = 0x40;
                     if (icon_size > 0) {
-                        memcpy(cmd->state->x0 + 0x40, (void*) cmd->xC,
+                        memcpy(CMD_STATE->x0 + 0x40, (void*) CMD_XC,
                                icon_size);
                         pos = icon_size + 0x40;
                     }
-                    memset(cmd->state->digest, 0, 0x30);
-                    if (cmd->state->x24 > cmd->state->x8) {
-                        memcpy(&cmd->state->x0[pos], (void*) cmd->x10,
-                               cmd->state->x8 - pos);
-                        hsd_803B2B20(cmd->state->x0, cmd->state->x8,
-                                     &cmd->state->digest[cmd->x8 * 0x10]);
+                    memset(CMD_STATE->digest, 0, 0x30);
+                    if (CMD_STATE->x24 > CMD_STATE->x8) {
+                        memcpy(&CMD_STATE->x0[pos], (void*) CMD_X10,
+                               CMD_STATE->x8 - pos);
+                        hsd_803B2B20(CMD_STATE->x0, CMD_STATE->x8,
+                                     &CMD_STATE->digest[CMD_X8 * 0x10]);
                     } else {
-                        memcpy(&cmd->state->x0[pos], (void*) cmd->x10,
-                               cmd->state->x24 - pos);
-                        hsd_803B2B20(cmd->state->x0, cmd->state->x24,
-                                     &cmd->state->digest[cmd->x8 * 0x10]);
-                        memcpy(&cmd->state->x0[cmd->state->x24],
-                               cmd->state->digest, 0x30);
+                        memcpy(&CMD_STATE->x0[pos], (void*) CMD_X10,
+                               CMD_STATE->x24 - pos);
+                        hsd_803B2B20(CMD_STATE->x0, CMD_STATE->x24,
+                                     &CMD_STATE->digest[CMD_X8 * 0x10]);
+                        memcpy(&CMD_STATE->x0[CMD_STATE->x24],
+                               CMD_STATE->digest, 0x30);
                     }
                 } else {
-                    u32 used = cmd->state->x8 * cmd->x8;
-                    u32 remaining = cmd->state->x24 - used;
-                    s32 data_off = (used - 0x40) - icon_size;
-                    if (remaining > cmd->state->x8) {
-                        memcpy(cmd->state->x0, (u8*) cmd->x10 + data_off,
-                               cmd->state->x8);
-                        hsd_803B2B20(cmd->state->x0, cmd->state->x8,
-                                     &cmd->state->digest[cmd->x8 * 0x10]);
+                    u32 remaining = CMD_STATE->x24 - CMD_STATE->x8 * CMD_X8;
+                    s32 data_off = (CMD_STATE->x8 * CMD_X8 - 0x40) - icon_size;
+                    if (remaining > CMD_STATE->x8) {
+                        memcpy(CMD_STATE->x0, (u8*) CMD_X10 + data_off,
+                               CMD_STATE->x8);
+                        hsd_803B2B20(CMD_STATE->x0, CMD_STATE->x8,
+                                     &CMD_STATE->digest[CMD_X8 * 0x10]);
                     } else {
-                        memcpy(cmd->state->x0, (u8*) cmd->x10 + data_off,
+                        memcpy(CMD_STATE->x0, (u8*) CMD_X10 + data_off,
                                remaining);
-                        hsd_803B2B20(cmd->state->x0, remaining,
-                                     &cmd->state->digest[cmd->x8 * 0x10]);
-                        memcpy(&cmd->state->x0[remaining], cmd->state->digest,
+                        hsd_803B2B20(CMD_STATE->x0, remaining,
+                                     &CMD_STATE->digest[CMD_X8 * 0x10]);
+                        memcpy(&CMD_STATE->x0[remaining], CMD_STATE->digest,
                                0x30);
                     }
                 }
                 intr2 = OSDisableInterrupts();
-                for (retries = 0; retries < 10; retries++) {
-                    r = CARDWriteAsync(&cmd->state->file_info, cmd->state->x0,
-                                       cmd->state->x8,
-                                       cmd->x8 * cmd->state->x8,
-                                       (void (*)(s32, s32)) hsd_803A949C);
-                    if (r != -1) {
-                        break;
-                    }
-                }
+                r = retryCardWriteAsync(&CMD_STATE->file_info, CMD_STATE->x0,
+                                        CMD_STATE->x8, CMD_STATE->x8 * CMD_X8,
+                                        (void (*)(s32, s32)) hsd_803A949C);
                 hsd_804D799C = 1;
-                result = OSRestoreInterrupts(intr2);
+                OSRestoreInterrupts(intr2);
                 if (r < 0) {
                     hsd_804D799C = 0;
-                    for (retries = 0; retries < 10; retries++) {
-                        if (CARDClose(&cmd->state->file_info) != -1) {
-                            break;
-                        }
-                    }
-                    hsd_804D7988.status = r;
+                    retryCardClose(&CMD_STATE->file_info);
+                    hsd_804D7988 = r;
                     continue;
                 }
-                return result;
+                return;
             }
-            cmd->type = 0;
+            CMD_TYPE = 0;
             hsd_804D7980 = (hsd_804D7980 + 1) % 128;
             continue;
         case 12: {
+            s32 retries;
             CARDStat stat;
-            cmd->state->x20 = cmd->x8;
-            for (retries = 0; retries < 10; retries++) {
-                r = CARDGetStatus(cmd->state->x4, cmd->state->x20, &stat);
+            s32 i;
+            s32 file_no;
+            CMD_STATE->x20 = CMD_X8;
+            file_no = CMD_STATE->x20;
+            chan = CMD_STATE->x4;
+            for (i = 0; i < 10; i++) {
+                r = CARDGetStatus(chan, file_no, &stat);
                 if (r != -1) {
                     break;
                 }
             }
             if (r < 0) {
-                hsd_804D7988.status = r;
+                hsd_804D7988 = r;
                 hsd_804D799C = 0;
             } else {
-                s32 k;
-                cmd->state->x3B0 = stat.bannerFormat & 3;
-                for (k = 0; k < 8; k++) {
-                    cmd->state->icon_format[k] =
-                        (stat.iconFormat >> (2 * k)) & 3;
-                    cmd->state->icon_speed[k] =
-                        (stat.iconSpeed >> (2 * k)) & 3;
-                }
-                cmd->state->x24 = hsd_803AC340(&cmd->state->x3B0);
-                cmd->state->x460 =
-                    stat.length / cmd->state->x8 -
-                    (cmd->state->x24 + cmd->state->x8 + 0x2F) / cmd->state->x8;
+                unpackCardStat(cmd, &stat);
                 if (stat.iconAddr != 0x40) {
-                    hsd_804D7988.status = -0x106;
+                    hsd_804D7988 = -0x106;
                     hsd_804D799C = 0;
                 } else {
-                    cmd->type = 0;
+                    CMD_TYPE = 0;
                     hsd_804D7980 = (hsd_804D7980 + 1) % 128;
                 }
             }
             continue;
         }
         case 13:
-            for (retries = 0; retries < 10; retries++) {
-                r = CARDFastOpen(cmd->state->x4, cmd->state->x20,
-                                 &cmd->state->file_info);
-                if (r != -1) {
-                    break;
-                }
-            }
+            r = retryCardFastOpen(CMD_STATE->x4, CMD_STATE->x20,
+                                  &CMD_STATE->file_info);
             if (r < 0) {
-                hsd_804D7988.status = r;
+                hsd_804D7988 = r;
                 continue;
             }
             intr2 = OSDisableInterrupts();
-            for (retries = 0; retries < 10; retries++) {
-                r = CARDReadAsync(&cmd->state->file_info, cmd->state->x0,
-                                  cmd->state->x8, cmd->x1C,
-                                  (void (*)(s32, s32)) hsd_803A949C);
-                if (r != -1) {
-                    break;
-                }
-            }
+            r = retryCardReadAsync(&CMD_STATE->file_info, CMD_STATE->x0,
+                                   CMD_STATE->x8, CMD_X1C,
+                                   (void (*)(s32, s32)) hsd_803A949C);
             hsd_804D799C = 1;
-            result = OSRestoreInterrupts(intr2);
+            OSRestoreInterrupts(intr2);
             if (r < 0) {
-                hsd_804D7988.status = r;
+                hsd_804D7988 = r;
                 hsd_804D799C = 0;
-                for (retries = 0; retries < 10; retries++) {
-                    if (CARDClose(&cmd->state->file_info) != -1) {
-                        break;
-                    }
-                }
+                retryCardClose(&CMD_STATE->file_info);
                 continue;
             }
-            return result;
+            return;
         case 14:
-            r = fn_803AD16C(cmd->state);
+            r = fn_803AD16C(CMD_STATE);
             if (r < 0) {
-                hsd_804D7988.status = r;
+                hsd_804D7988 = r;
                 hsd_804D799C = 0;
             } else {
-                cmd->type = 0;
+                CMD_TYPE = 0;
                 hsd_804D7980 = (hsd_804D7980 + 1) % 128;
             }
             continue;
-        case 17:
+        case 17: {
+            s32 blk;
+
             fn_803AC2D4();
-            r = fn_803ACF30(cmd->state, 0, 0, 0);
+            r = fn_803ACF30(CMD_STATE, 0, 0, 0);
             if (r < 0) {
                 fn_803AC2E0();
-                hsd_804D7988.status = r;
+                hsd_804D7988 = r;
                 hsd_804D799C = 0;
-            } else {
-                s32 blk = 0;
-                while (1) {
-                    if (blk > cmd->state->x460) {
-                        fn_803AC2A4((s32) cmd->state);
-                        if (r < 0) {
-                            fn_803AC2E0();
-                            hsd_804D7988.status = r;
-                            hsd_804D799C = 0;
-                        } else {
-                            fn_803AC334();
-                            cmd->type = 0;
-                            hsd_804D7980 = (hsd_804D7980 + 1) % 128;
-                        }
-                        break;
-                    }
-                    fn_803AC258(cmd->state, blk);
-                    if (r < 0) {
-                        fn_803AC2E0();
-                        hsd_804D7988.status = r;
-                        hsd_804D799C = 0;
-                        break;
-                    }
-                    blk++;
+                continue;
+            }
+            for (blk = 0; blk <= CMD_STATE->x460; blk++) {
+                r = fn_803AC258(CMD_STATE, blk);
+                if (r < 0) {
+                    fn_803AC2E0();
+                    hsd_804D7988 = r;
+                    hsd_804D799C = 0;
+                    goto next;
                 }
             }
+            r = fn_803AC2A4(CMD_STATE);
+            if (r < 0) {
+                fn_803AC2E0();
+                hsd_804D7988 = r;
+                hsd_804D799C = 0;
+                continue;
+            }
+            fn_803AC334();
+            CMD_TYPE = 0;
+            hsd_804D7980 = (hsd_804D7980 + 1) % 128;
             continue;
-        default:
-            return result;
         }
+        default:
+            return;
+        }
+    next:
+        continue;
     }
 }
 
@@ -885,7 +937,7 @@ s32 fn_803AC168(s32* cmd_buf)
     return 0;
 }
 
-void fn_803AC258(CardState* card_state, s32 block_idx)
+s32 fn_803AC258(CardState* card_state, s32 block_idx)
 {
     s32 buf[9];
     buf[0] = 13;
@@ -895,15 +947,15 @@ void fn_803AC258(CardState* card_state, s32 block_idx)
     buf[6] = 0;
     buf[8] = 0;
     buf[7] = fn_803ACBE8(card_state, block_idx);
-    fn_803AC168(buf);
+    return fn_803AC168(buf);
 }
 
-void fn_803AC2A4(s32 card_state)
+s32 fn_803AC2A4(CardState* card_state)
 {
     s32 buf[9];
     buf[0] = 14;
-    buf[1] = card_state;
-    fn_803AC168(buf);
+    buf[1] = (s32) card_state;
+    return fn_803AC168(buf);
 }
 
 void fn_803AC2D4(void)
@@ -4706,7 +4758,7 @@ void hsd_803B2374(void)
     for (i = 0; i < 128; i++) {
         hsd_804D1148[i][0] = 0;
     }
-    hsd_804D7988.status = 0;
+    hsd_804D7988 = 0;
 }
 
 void hsd_803B24E4(s32* ctx, int channel, int file_no, void* work_buf)
@@ -4804,56 +4856,29 @@ s32 hsd_803B2674(CardState* state)
     return blocks;
 }
 
-static inline s32 fn_803B26CC_queue(s32* buf)
-{
-    return fn_803AC168(buf);
-}
-
 s32 fn_803B26CC(CardState* state, s32 file_id, s32 seq_num, s32 version,
-                s32 callback)
+                void (*callback)(s32, s32))
 {
-    s32 buf[11];
-    u32 i;
     s32 result;
-    s32 saved;
-    s32 snap;
-    CardBufEntry* entries = (CardBufEntry*) hsd_804D1138;
-    PAD_STACK(24);
+    CardContext* context = (CardContext*) hsd_804D1138;
+    PAD_STACK(8);
 
     state->x24 = hsd_803AC340(&state->x3B0);
     hsd_804D7998 = hsd_804D7984;
 
-    result = 0;
-    for (i = 0; i < (0x2F + state->x24 + state->x8) / state->x8; i++) {
-        buf[0] = 11;
-        buf[1] = (s32) state;
-        buf[2] = (s32) i;
-        buf[3] = file_id;
-        buf[4] = seq_num;
-        buf[5] = version;
-        result = fn_803B26CC_queue(buf);
-        if (result < 0) {
-            break;
-        }
-    }
+    result = queueHeaderBlocks(state, file_id, seq_num, version);
 
     if (result < 0) {
-        snap = hsd_804D7998;
-        if (snap >= 0) {
-            saved = snap;
-            while (saved != hsd_804D7984) {
-                entries[saved].x10 = 0;
-                saved = (saved + 1) % 128;
-            }
-            hsd_804D7984 = snap;
+        if (hsd_804D7998 >= 0) {
+            rollbackCardCommands(context, hsd_804D7998);
         }
         return result;
     }
 
-    entries[0].x0 = 5;
-    entries[0].x4 = (s32) state;
-    entries[0].x8 = callback;
-    entries[0].xC = 0;
+    context->x0 = 5;
+    context->x4 = state;
+    context->x8 = callback;
+    context->xC = 0;
     hsd_804D7998 = -1;
     return 0;
 }
