@@ -2606,28 +2606,6 @@ static void Ground_801C4640(HSD_GObj* gobj, int unused)
     HSD_LObjSetupInit(HSD_CObjGetCurrent());
 }
 
-static LightList** Ground_801C466C_inline(void)
-{
-    StageCallbacks* callbacks;
-    UnkArchiveStruct* archive;
-    int i;
-    int count;
-
-    archive = grDatFiles_GetArchive();
-    callbacks = stage_datas[stage_info.grkind]->callbacks;
-    count = archive->unk4->unkC;
-    archive = grDatFiles_GetArchive();
-
-    for (i = 0; i < count; i++) {
-        if (callbacks->flags_b0 == 1) {
-            archive = grDatFiles_801C6330(i);
-            return Ground_801C20E0(archive, archive->unk4->unk8[i].x18);
-        }
-        callbacks++;
-    }
-    return NULL;
-}
-
 /* 3E065C */ static HSD_LightAnim Ground_803E065C[] = { 0 };
 /* 3E066C */ static HSD_WObjDesc Ground_803E066C = {
     NULL,
@@ -2678,20 +2656,42 @@ static LightList** Ground_801C466C_inline(void)
 
 void Ground_801C466C(void)
 {
+    union {
+        LightList** lights;
+        void* callback;
+    } r28_carrier;
     Vec3 sp10; /* compiler-managed */
+    int i;
+    int count;
     HSD_GObj* temp_r3;
     HSD_LObj* temp_r3_2;
     LightList** var_r27_2;
     HSD_LObj* var_r27;
     HSD_LObj* var_r26_2;
-    LightList** var_r28_2;
     LightList** var_r3;
     float var_f31;
     int temp_r28;
     Vec3* sp10p;
+    StageCallbacks* callbacks;
+    UnkArchiveStruct* archive;
+    LightList** selected;
 
-    if ((var_r28_2 = Ground_801C466C_inline()) == NULL) {
-        var_r28_2 = Ground_803E06C8;
+    archive = grDatFiles_GetArchive();
+    callbacks = stage_datas[stage_info.grkind]->callbacks;
+    count = archive->unk4->unkC;
+    archive = grDatFiles_GetArchive();
+    for (i = 0; i < count; i++) {
+        if (callbacks->flags_b0 == 1) {
+            archive = grDatFiles_801C6330(i);
+            selected = Ground_801C20E0(archive, archive->unk4->unk8[i].x18);
+            goto light_selected;
+        }
+        callbacks++;
+    }
+    selected = NULL;
+light_selected:
+    if ((r28_carrier.lights = selected) == NULL) {
+        r28_carrier.lights = Ground_803E06C8;
     }
     temp_r3 = GObj_Create(0xD, 3, 0);
     if (temp_r3 == NULL) {
@@ -2699,7 +2699,7 @@ void Ground_801C466C(void)
         while (true) {
         }
     }
-    temp_r3_2 = lb_80011AC4(var_r28_2);
+    temp_r3_2 = lb_80011AC4(r28_carrier.lights);
     if (temp_r3_2 == NULL) {
         OSReport("%s:%d: couldn t get lobj\n", __FILE__, 0xEB1);
         while (true) {
@@ -2736,9 +2736,10 @@ void Ground_801C466C(void)
     HSD_LObjReqAnimAll(temp_r3_2, 0.0F);
     HSD_ForeachAnim(temp_r3_2, LOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjSetRate,
                     AOBJ_ARG_AF, 1.0);
-    var_r27_2 = var_r28_2;
+    var_r27_2 = r28_carrier.lights;
     var_r26_2 = temp_r3_2;
-    if ((*var_r28_2)->anims != NULL) {
+    if ((*r28_carrier.lights)->anims != NULL) {
+        r28_carrier.callback = HSD_AObjSetFlags;
         while (var_r26_2 != NULL) {
             if (Ground_801C43C4((*var_r27_2)->anims[0]) != 0) {
                 if (var_r26_2->aobj != NULL) {
@@ -2746,12 +2747,12 @@ void Ground_801C466C(void)
                 }
                 if (var_r26_2->position != NULL) {
                     HSD_ForeachAnim(var_r26_2->position, WOBJ_TYPE,
-                                    ALL_TYPE_MASK, HSD_AObjSetFlags,
+                                    ALL_TYPE_MASK, r28_carrier.callback,
                                     AOBJ_ARG_AU, AOBJ_LOOP);
                 }
                 if (var_r26_2->interest != NULL) {
                     HSD_ForeachAnim(var_r26_2->interest, WOBJ_TYPE,
-                                    ALL_TYPE_MASK, HSD_AObjSetFlags,
+                                    ALL_TYPE_MASK, r28_carrier.callback,
                                     AOBJ_ARG_AU, AOBJ_LOOP);
                 }
             }
