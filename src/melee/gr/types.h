@@ -361,8 +361,7 @@ typedef struct grZakoGenerator_Entry {
 } grZakoGenerator_Entry;
 
 typedef struct grZakoGenerator_Data {
-    /* +0 */ grZakoGenerator_Entry entries[80];
-    /* +3C0 */ grZakoGenerator_Entry sentinel;
+    /* +0 */ grZakoGenerator_Entry entries[81];
 } grZakoGenerator_Data;
 
 struct grCorneria_GroundVars {
