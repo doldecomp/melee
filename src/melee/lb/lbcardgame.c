@@ -9,15 +9,13 @@
 #include "lb/lbcardnew.h"
 #include "lb/lblanguage.h"
 
-#include <dolphin/card.h>
+#include <dolphin/card.h> // IWYU pragma: keep
 #include <dolphin/os.h>
 #include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/hsd_3AA7.h>
 #include <sysdolphin/baselib/jobj.h>
 
 #define _p(x) (lb_80433318.x)

@@ -6,19 +6,7 @@
 
 #include <Gecko_setjmp.h>
 #include <string.h>
-
-extern __jmp_buf hsd_804D2648;
-extern u8 hsd_804D2E70[2084];
-extern u8* hsd_804D79A0;
-extern u8* hsd_804D79A4;
-extern s32 hsd_804D79A8;
-extern s32 hsd_804D79AC;
-extern u8 hsd_804D79B0;
-extern u8* hsd_804D79B8;
-extern u8* hsd_804D79BC;
-extern s32 hsd_804D79C0;
-extern s32 hsd_804D79C4;
-extern u8 hsd_804D79C8;
+#include <baselib/hsd_3A94.h>
 
 #define HSD_804D2648_BUF ((u8*) &hsd_804D2648)
 

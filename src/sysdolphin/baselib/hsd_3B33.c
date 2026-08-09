@@ -3,6 +3,7 @@
 #include "hsd_3A94.h"
 
 #include <__mem.h>
+#include <Runtime/Gecko_setjmp.h> // IWYU pragma: keep
 
 void hsd_803B3344(u8 byte)
 {
