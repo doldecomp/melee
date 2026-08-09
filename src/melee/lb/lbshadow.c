@@ -410,8 +410,7 @@ void lbShadow_8000F38C(s32 arg0)
             upVec.x = lbShadow_804D7B70;
             lightPos.y = lbShadow_804D7B70;
             lightDir.y = lbShadow_804D7B70;
-            upVec.y = 1.0F;
-            lightPos.z = 1.0F;
+            lightPos.z = upVec.y = lbShadow_804D7B88;
             lightDir.z = lbShadow_804D7B70;
             upVec.z = lbShadow_804D7B70;
         } else {
