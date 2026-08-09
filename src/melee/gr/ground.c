@@ -2956,6 +2956,21 @@ static inline float vec_len(Vec3* v)
     return sqrtf(x2 + y2 + z2);
 }
 
+/// MSL sqrtf expansion with caller-owned volatile storage. Keeping each
+/// expansion's temporary in the caller preserves the retail stack-slot order.
+static inline float sqrtf_store(float x, volatile float* y)
+{
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        *y = (float) (x * guess);
+        return *(volatile float*) y;
+    }
+    return x;
+}
+
 /// @todo replace with fog.h inlines
 #define FOG_ASSERT(line, cond)                                                \
     ((cond) ? (void) 0 : __assert("fog.h", line, #cond))
@@ -2984,6 +2999,7 @@ void Ground_801C4FAC(HSD_CObj* cobj)
     Vec3 sp38;
     Vec3 sp2C;
     Vec3 sp20;
+    float sqrt_tmp[3];
 
     if (stage_info.unk8C.b3) {
         HSD_CObjGetEyeVector(cobj, &sp74);
@@ -2997,7 +3013,9 @@ void Ground_801C4FAC(HSD_CObj* cobj)
             sp44 = stage_info.x16C;
         }
         if (sp74.z < 0) {
-            xz_inv_len = 1.0f / sqrtf((sp74.x * sp74.x) + (sp74.z * sp74.z));
+            xz_inv_len =
+                1.0f / sqrtf_store((sp74.x * sp74.x) + (sp74.z * sp74.z),
+                                   &sqrt_tmp[2]);
             xz_x_weight = xz_inv_len * fabsf(sp74.x);
             xz_z_weight = xz_inv_len * fabsf(sp74.z);
             sp50.x *= xz_x_weight;
@@ -3025,26 +3043,23 @@ void Ground_801C4FAC(HSD_CObj* cobj)
         if (stage_info.x12C != NULL) {
             fog = GET_FOG(stage_info.x12C);
             if (fog != NULL) {
-                dx = sp38.x;
-                dy = sp38.y;
+                dx = sp38.x - sp20.x;
+                dy = sp38.y - sp20.y;
                 dz = sp38.z;
-                dx -= sp20.x;
-                dy -= sp20.y;
                 dz -= sp20.z;
                 dx2 = dx * dx;
                 dy2 = dy * dy;
                 dz2 = dz * dz;
-                phi_f31 = sqrtf(dx2 + dy2 + dz2);
-                dx = sp2C.x;
-                dy = sp2C.y;
-                dz = sp2C.z;
-                dx -= sp20.x;
-                dy -= sp20.y;
-                dz -= sp20.z;
+                phi_f31 = sqrtf_store(dx2 + dy2 + dz2, &sqrt_tmp[1]);
+                dx = sp2C.x - sp20.x;
+                dz = sp2C.y;
+                dy = sp2C.z;
+                dz -= sp20.y;
+                dy -= sp20.z;
                 dx2 = dx * dx;
-                dy2 = dy * dy;
-                dz2 = dz * dz;
-                phi_f30 = sqrtf(dx2 + dy2 + dz2);
+                dy2 = dz * dz;
+                dz2 = dy * dy;
+                phi_f30 = sqrtf_store(dx2 + dy2 + dz2, &sqrt_tmp[0]);
                 if (phi_f30 < 10) {
                     phi_f30 = 10;
                 }
