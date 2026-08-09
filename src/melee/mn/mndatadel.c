@@ -28,6 +28,9 @@
 #include "sysdolphin/baselib/debug.h"
 #include "ty/toy.h"
 
+HSD_Text* mnDataDel_804D6C6C;
+HSD_GObj* mnDataDel_804D6C68;
+
 static void sdata2_order(void)
 {
     (void) S32_TO_F32;
@@ -97,11 +100,22 @@ void mnDataDel_8024E940(void)
     lb_8001CE00();
 }
 
+static inline void mnDataDel_8024EA6C_inline(HSD_JObj** jobj, f32 frame,
+                                            f32 start_frame)
+{
+    HSD_JObjReqAnimAll(*jobj, start_frame);
+    mn_8022F3D8(*jobj, 0xFFU, MOBJ_MASK);
+    HSD_JObjAnimAll(*jobj);
+    HSD_JObjReqAnimAll(*jobj, frame);
+    mn_8022F3D8(*jobj, 0xFFU, (enum _HSD_TypeMask) 0x480);
+    HSD_JObjAnimAll(*jobj);
+}
+
 void mnDataDel_8024EA6C(void)
 {
-    f32 temp_f31;
     f32 temp_f30;
     struct MnDataDelGObjUserData* temp_r31;
+    u32* data;
     enum_t lang;
     int i;
     s32 temp_ret;
@@ -111,22 +125,20 @@ void mnDataDel_8024EA6C(void)
 
     temp_f30 = 1.0f;
     temp_r31 = mnDataDel_804D6C68->user_data;
+    i = (temp_ret = 0);
+    data = &mnDataDel_803EF8AC[i];
 
-    for (i = 0; i < 6; i++) {
+    do {
         temp_ret = mn_80231634(
             (struct mn_80231634_t*) ((struct MnDataDelGObjUserData*)
                                          mnDataDel_804D6C68->user_data)
-                ->x10[mnDataDel_803EF8AC[i]]);
+                ->x10[*data]);
         lb_80011E24((HSD_JObj*) temp_ret, &sp18, 1, -1);
-        temp_f31 = mn_8022F298(sp18);
-        HSD_JObjReqAnimAll(sp18, temp_f30);
-        mn_8022F3D8(sp18, 0xFFU, MOBJ_MASK);
-        HSD_JObjAnimAll(sp18);
-        HSD_JObjReqAnimAll(sp18, temp_f31);
-        mn_8022F3D8(sp18, 0xFFU, (enum _HSD_TypeMask) 0x480);
-        HSD_JObjAnimAll(sp18);
+        mnDataDel_8024EA6C_inline(&sp18, mn_8022F298(sp18), temp_f30);
         temp_r31->x3[i] = 1;
-    }
+        data++;
+        i++;
+    } while (i < 6);
 
     lang = lbLang_GetSavedLanguage();
     gmMainLib_8015FBA4();
@@ -778,6 +790,7 @@ void mnDataDel_8024FE4C(u8 arg0)
     s32 i;
     StaticModelDesc* assets;
     struct MnDataDelGObjUserData* user_data;
+    u8* cursor;
     PAD_STACK(0x14);
 
     assets = &mnDataDel_804A0918;
@@ -803,9 +816,13 @@ void mnDataDel_8024FE4C(u8 arg0)
     user_data->x3[5] = 0;
     user_data->xC = NULL;
     GObj_InitUserData(gobj, 0U, HSD_Free, user_data);
-    for (i = 0; i < (int) ARRAY_SIZE(user_data->x10); i++) {
-        lb_80011E24(root, &user_data->x10[i], i, -1);
-    }
+    i = (enabled = 0);
+    cursor = (u8*) user_data + i * 4;
+    do {
+        lb_80011E24(root, (HSD_JObj**) (cursor + 0x10), i, -1);
+        i++;
+        cursor += 4;
+    } while (i < (int) ARRAY_SIZE(user_data->x10));
     proc = HSD_GObj_SetupProc(gobj, fn_8024FD40, 0U);
     proc->flags_3 = HSD_GObj_804D783C;
     assets = &mnDataDel_804A0928;
