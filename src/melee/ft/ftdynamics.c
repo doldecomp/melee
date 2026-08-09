@@ -275,7 +275,29 @@ void ftCo_8009DA38(Fighter* fp)
     }
 }
 
-/// #ftCo_8009DB50
+void ftCo_8009DB50(Fighter* fp)
+{
+    KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_PURIN];
+    PAD_STACK(2 * 4);
+    fp->dynamics_num = hat->hat_dynamics[4]->dynamicsNum;
+    HSD_ASSERTREPORT(455, fp->dynamics_num < Ft_Dynamics_NumMax,
+                     "fighter dynamics num over!\n");
+    {
+        ssize_t i;
+        for (i = 0; i < fp->dynamics_num; i++) {
+            s32 bone_id =
+                hat->hat_dynamics[4]->ftDynamicBones->array[i].bone_id;
+            fp->parts[bone_id].flags_b0 = true;
+            lb_8000FD48(
+                fp->parts[bone_id].joint, &fp->dynamic_bone_sets[i].dyn_desc,
+                hat->hat_dynamics[4]->ftDynamicBones->array[i].dyn_desc.count);
+            fp->dynamic_bone_sets[i].bone_id = FtPart_TopN;
+            lb_80011710(
+                &hat->hat_dynamics[4]->ftDynamicBones->array[i].dyn_desc,
+                &fp->dynamic_bone_sets[i].dyn_desc);
+        }
+    }
+}
 
 static inline bool inlineA0(Fighter* fp)
 {
@@ -340,30 +362,6 @@ void ftCo_8009DC54(Fighter* fp)
             bone_idx++;
             dyn_idx++;
         } while (i < 2);
-    }
-}
-
-void ftCo_8009DB50(Fighter* fp)
-{
-    KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_PURIN];
-    PAD_STACK(2 * 4);
-    fp->dynamics_num = hat->hat_dynamics[4]->dynamicsNum;
-    HSD_ASSERTREPORT(455, fp->dynamics_num < Ft_Dynamics_NumMax,
-                     "fighter dynamics num over!\n");
-    {
-        ssize_t i;
-        for (i = 0; i < fp->dynamics_num; i++) {
-            s32 bone_id =
-                hat->hat_dynamics[4]->ftDynamicBones->array[i].bone_id;
-            fp->parts[bone_id].flags_b0 = true;
-            lb_8000FD48(
-                fp->parts[bone_id].joint, &fp->dynamic_bone_sets[i].dyn_desc,
-                hat->hat_dynamics[4]->ftDynamicBones->array[i].dyn_desc.count);
-            fp->dynamic_bone_sets[i].bone_id = FtPart_TopN;
-            lb_80011710(
-                &hat->hat_dynamics[4]->ftDynamicBones->array[i].dyn_desc,
-                &fp->dynamic_bone_sets[i].dyn_desc);
-        }
     }
 }
 
