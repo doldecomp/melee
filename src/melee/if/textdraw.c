@@ -64,15 +64,21 @@
 STATIC_ASSERT(sizeof(struct DevText_Pool) == 0x6B0);
 
 /// .sbss
-/* 4D6E18 */ static DevText* devtext_drawlist;
-/* 4D6E1C */ static HSD_GObj* devtext_gobj;
-/* 4D6E20 */ static HSD_CObj* devtext_cobj;
-/* 4D6E24 */ static int devtext_setup_classifier;
-/* 4D6E28 */ static int devtext_setup_p_link;
-/* 4D6E2C */ static int devtext_setup_priority;
-/* 4D6E30 */ static int devtext_setup_gx_link;
-/* 4D6E34 */ static int devtext_setup_render_priority;
-/* 4D6E38 */ static DevText* devtext_poolhead;
+/* 4D6E4C */ unsigned char un_804D6E4C;
+/* 4D6E48 */ struct un_80304138_objalloc_t_x8* un_804D6E48;
+/* 4D6E44 */ struct un_80304138_objalloc_t* un_804D6E44;
+/* 4D6E40 */ struct un_80304138_objalloc_t* un_804D6E40;
+/* 4D6E38 */ DevText* devtext_poolhead[2];
+/* 4D6E34 */ int devtext_setup_render_priority;
+/* 4D6E30 */ int devtext_setup_gx_link;
+/* 4D6E2C */ int devtext_setup_priority;
+/* 4D6E28 */ int devtext_setup_p_link;
+/* 4D6E24 */ int devtext_setup_classifier;
+/* 4D6E20 */ HSD_CObj* devtext_cobj;
+/* 4D6E1C */ HSD_GObj* devtext_gobj;
+/* 4D6E18 */ DevText* devtext_drawlist;
+
+#define devtext_poolhead devtext_poolhead[0]
 
 int DevText_StrLen(char* str)
 {
@@ -205,7 +211,7 @@ void DevText_SetupCObj(void)
 
 void DevText_Draw(DevText* text)
 {
-    GXColor color;
+    int index;
     PAD_STACK(4);
     hsd_80391A04(text->scale_x, text->scale_y, text->line_width);
     if ((text->flags & DEVTEXT_FLAG_HIDEBACKGROUND) == 0) {
@@ -225,16 +231,21 @@ void DevText_Draw(DevText* text)
         }
     }
     if ((text->flags & DEVTEXT_FLAG_HIDETEXT) == 0) {
-        GXColor* color_ptr = &color;
-        int y = text->y;
+        GXColor* color_ptr;
+        int col;
         int row;
+        int x;
+        int y = text->y;
         for (row = 0; row < text->h; row++) {
-            int x = text->x;
-            int col;
+            x = text->x;
             for (col = 0; col < text->w; col++) {
-                int index = (col + text->w * row) * 2;
-                s8 chr = text->buf[index];
-                u8 color_idx = ((u8) text->buf[index + 1] & 0xC0) >> 6;
+                GXColor color;
+                s8 chr;
+                u8 color_idx;
+                color_ptr = &color;
+                index = (col + text->w * row) * 2;
+                chr = text->buf[index];
+                color_idx = ((u8) text->buf[index + 1] & 0xC0) >> 6;
                 if (chr) {
                     color = text->text_colors[color_idx];
                     DrawASCII(chr, x, y, color_ptr);

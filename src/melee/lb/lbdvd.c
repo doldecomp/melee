@@ -407,25 +407,40 @@ struct lbDvd_803B72C0_t {
     int x8;
 };
 
+static inline void inline1_inner(struct lbDvd_803B72C0_t* data)
+{
+    const char* x4 = data->x4;
+    int x8 = data->x8;
+    u8 tmp = data->x0;
+    int temp_r3_2 = DVDConvertPathToEntrynum(lbFile_80016204(x4));
+    lbDvd_80017740(tmp, temp_r3_2, 2, 2, 0, 1, 9, 0x80, x8);
+}
+
 static inline void inline1(void)
 {
     struct lbDvd_803B72C0_t spA0 = { 2, "LbRb.dat" };
     if (preloadCache.new_scene.is_heap_persistent[0]) {
-        const char* x4 = spA0.x4;
-        int x8 = spA0.x8;
-        u8 tmp = spA0.x0;
-        int temp_r3_2 = DVDConvertPathToEntrynum(lbFile_80016204(x4));
-        lbDvd_80017740(tmp, temp_r3_2, 2, 2, 0, 1, 9, 0x80, x8);
+        inline1_inner(&spA0);
     }
+}
+
+static inline void inline2_inner(struct lbDvd_803B72C0_t* data)
+{
+    int effect_index;
+    int entry_num;
+    u8 type;
+    const char* filename;
+
+    filename = data->x4;
+    effect_index = data->x8;
+    type = data->x0;
+    entry_num = DVDConvertPathToEntrynum(lbFile_80016204(filename));
+    lbDvd_80017740(type, entry_num, 3, 3, 0, 1, 8, 0x40, effect_index);
 }
 
 static inline void inline2(void)
 {
-    int effect_index;
     int i;
-    int entry_num;
-    u8 type;
-    const char* filename;
     struct lbDvd_803B72C0_t sp28[4] = {
         { 3, "EfMnData.dat", 0x1F },
         { 3, "EfCoData.dat" },
@@ -434,11 +449,7 @@ static inline void inline2(void)
     };
     if (preloadCache.new_scene.is_heap_persistent[1]) {
         for (i = 0; i < ARRAY_SIZE(sp28); i++) {
-            filename = sp28[i].x4;
-            effect_index = sp28[i].x8;
-            type = sp28[i].x0;
-            entry_num = DVDConvertPathToEntrynum(lbFile_80016204(filename));
-            lbDvd_80017740(type, entry_num, 3, 3, 0, 1, 8, 0x40, effect_index);
+            inline2_inner(&sp28[i]);
         }
     }
 }
@@ -483,8 +494,33 @@ static inline void inline_preload_entries(bool* enabled)
 
 static inline void inline_pad(void)
 {
-    u8 pad[0x18];
+    u8 pad[0x10];
     (void) pad;
+}
+
+static inline void inline_cleanup_entries(void)
+{
+    PreloadEntry* cleanup_entry;
+    int j = 0;
+
+    for (; j < (signed) ARRAY_SIZE(preloadCache.entries); j++) {
+        cleanup_entry = &preloadCache.entries[j];
+        if (cleanup_entry->load_score < 0) {
+            if (cleanup_entry->state == 1) {
+                if (preloadCache.entries[j].archive != NULL) {
+                    lbHeap_80015CA8(cleanup_entry->heap,
+                                    cleanup_entry->archive->addr);
+                }
+                if (cleanup_entry->raw_data != NULL) {
+                    lbHeap_80015CA8(cleanup_entry->heap,
+                                    cleanup_entry->raw_data->addr);
+                }
+                *cleanup_entry = lbDvd_803BA68C;
+            } else if (cleanup_entry->state == 4) {
+                cleanup_entry->state = 3;
+            }
+        }
+    }
 }
 
 void lbDvd_80018254(void)
@@ -518,29 +554,7 @@ void lbDvd_80018254(void)
     }
 
     inline_pad();
-
-    {
-        PreloadEntry* cleanup_entry;
-        int j;
-        for (j = 0; j < (signed) ARRAY_SIZE(preloadCache.entries); j++) {
-            cleanup_entry = &preloadCache.entries[j];
-            if (cleanup_entry->load_score < 0) {
-                if (cleanup_entry->state == 1) {
-                    if (preloadCache.entries[j].archive != NULL) {
-                        lbHeap_80015CA8(cleanup_entry->heap,
-                                        cleanup_entry->archive->addr);
-                    }
-                    if (cleanup_entry->raw_data != NULL) {
-                        lbHeap_80015CA8(cleanup_entry->heap,
-                                        cleanup_entry->raw_data->addr);
-                    }
-                    *cleanup_entry = lbDvd_803BA68C;
-                } else if (cleanup_entry->state == 4) {
-                    cleanup_entry->state = 3;
-                }
-            }
-        }
-    }
+    inline_cleanup_entries();
 
     lbDvd_80017CC4();
     OSRestoreInterrupts(enabled);
