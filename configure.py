@@ -1096,7 +1096,7 @@ config.libs = [
         "gr (Ground, stages)",
         [
             # Main
-            Object(NonMatching, "melee/gr/ground.c"),
+            Object(Matching, "melee/gr/ground.c"),
             Object(Matching, "melee/gr/grdisplay.c"),
             Object(Matching, "melee/gr/grdatfiles.c"),
             Object(NonMatching, "melee/gr/granime.c"),
