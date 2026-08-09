@@ -1218,6 +1218,7 @@ static inline bool find_light_override(UnkArchiveStruct* archive,
 }
 
 static inline bool find_light_override_in_dat(UnkStageDat* dat,
+                                              UnkStageDat* array_dat,
                                               HSD_LightDesc* desc, bool* b6,
                                               bool* b7, bool* b5)
 {
@@ -1227,7 +1228,7 @@ static inline bool find_light_override_in_dat(UnkStageDat* dat,
     (void) dat;
     if (count != 0) {
         for (i = 0; i < count; i++) {
-            LightOverrideEntry* arr = dat->unk18;
+            LightOverrideEntry* arr = array_dat->unk18;
             if (arr[i].desc == desc) {
                 *b6 = arr[i].b;
                 *b7 = arr[i].a;
@@ -1243,7 +1244,6 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lightset)
 {
     LightList** out;
     LightList** clean;
-    bool found;
     LightList** walker;
     bool b6, b7, b5;
     bool matched;
@@ -1254,8 +1254,10 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lightset)
     walker = lightset;
     matched = 0;
     while (*walker != NULL) {
-        found = find_light_override(archive, (*walker)->desc, &b6, &b7, &b5);
-        if (found != 0 && (b6 != 0 || b7 != 0 || b5 != 0)) {
+        if (find_light_override(archive, (*walker)->desc, &b6, &b7, &b5) !=
+                0 &&
+            (b6 != 0 || b7 != 0 || b5 != 0))
+        {
             matched = 1;
             break;
         }
@@ -1268,12 +1270,15 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lightset)
 
     out = lightset;
     while (*out != NULL) {
-        HSD_LightDesc* desc = get_light_desc_inline(out);
-        u16* flags = &desc->flags;
-        if (*flags & 3) {
-            found =
-                find_light_override_in_dat(archive->unk4, desc, &b6, &b7, &b5);
-            if (found == 0 || (b6 == 0 && b7 == 0 && b5 == 0)) {
+        HSD_LightDesc* desc = *(HSD_LightDesc**) *out;
+        UnkStageDat* dat;
+        u16* flags;
+        if (*(flags = &desc->flags) & 3) {
+            dat = archive->unk4;
+            if (find_light_override_in_dat(dat, archive->unk4, desc, &b6, &b7,
+                                           &b5) == 0 ||
+                (b6 == 0 && b7 == 0 && b5 == 0))
+            {
                 clean = out;
                 do {
                     if ((clean[0] = clean[1]) == NULL) {
