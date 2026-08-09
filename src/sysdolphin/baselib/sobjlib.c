@@ -246,14 +246,17 @@ void HSD_SObjLib_803A49E0(HSD_GObj* gobj, int unused)
     }
 }
 
+static inline GXColor discard_color(GXColor color)
+{
+    return color;
+}
+
 void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
 {
     f32 x_cos;
     f32 origin_x;
     f32 origin_y;
     f32 angle;
-    f32 center_width;
-    f32 center_height;
     f32 sin_half;
     f32 cos_val;
     f32 cos_half;
@@ -274,8 +277,6 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
     u16 obj_height;
     u8 tex_fmt;
 
-    PAD_STACK(0x8);
-
     if (sobj->x40 & 1) {
         return;
     }
@@ -288,10 +289,8 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
         origin_x = sobj->x10;
         origin_y = sobj->x14;
     } else {
-        center_width = (f32) obj_width * sobj->x1C;
-        center_height = (f32) obj_height * sobj->x20;
-        origin_x = (center_width / 2.0F) + sobj->x10;
-        origin_y = (center_height / 2.0F) + sobj->x14;
+        origin_x = (((f32) obj_width * sobj->x1C) / 2.0F) + sobj->x10;
+        origin_y = (((f32) obj_height * sobj->x20) / 2.0F) + sobj->x14;
     }
 
     GXClearVtxDesc();
@@ -318,12 +317,8 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
         }
     }
 
-    {
-        bool is_ci_texture = (u8) (tex_fmt - GX_TF_C4) <= 1U;
-
-        if (is_ci_texture) {
-            GXLoadTlut(&sobj->x70_tlutobj, GX_TLUT0);
-        }
+    if ((u8) (tex_fmt - GX_TF_C4) <= 1U) {
+        GXLoadTlut(&sobj->x70_tlutobj, GX_TLUT0);
     }
     if (!(sobj->x40 & 0x10)) {
         GXLoadTexObj(&sobj->x50_texobj, GX_TEXMAP0);
@@ -406,9 +401,7 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
         GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_OR, GX_ALWAYS, 0);
 
         if (sobj->x40 & 4) {
-            GXColor z_color = sobj->x3C_color;
-
-            GXSetTevColor(GX_TEVREG0, z_color);
+            GXSetTevColor(GX_TEVREG0, sobj->x3C_color);
             GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_TEXC, GX_CC_C0,
                             GX_CC_ZERO);
             GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
@@ -487,6 +480,9 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
                            GX_LO_CLEAR);
         }
     }
+
+    (void) discard_color(sobj->x38_color);
+    (void) discard_color(sobj->x3C_color);
 
     sin_half = 0.5F * sinf(sobj->x18);
     angle = sobj->x18;
