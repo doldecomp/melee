@@ -1815,7 +1815,7 @@ config.libs = [
                 "sysdolphin/baselib/psappsrt.c",
                 extra_cflags=["-Cpp_exceptions on"],
             ),
-            Object(NonMatching, "sysdolphin/baselib/sobjlib.c"),
+            Object(Matching, "sysdolphin/baselib/sobjlib.c"),
             Object(NonMatching, "sysdolphin/baselib/sislib.c"),
             Object(Matching, "sysdolphin/baselib/hsd_40FF.c"),
             Object(NonMatching, "sysdolphin/baselib/hsd_3A94.c"),
