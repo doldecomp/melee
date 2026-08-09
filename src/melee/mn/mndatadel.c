@@ -101,7 +101,7 @@ void mnDataDel_8024E940(void)
 }
 
 static inline void mnDataDel_8024EA6C_inline(HSD_JObj** jobj, f32 frame,
-                                            f32 start_frame)
+                                             f32 start_frame)
 {
     HSD_JObjReqAnimAll(*jobj, start_frame);
     mn_8022F3D8(*jobj, 0xFFU, MOBJ_MASK);
