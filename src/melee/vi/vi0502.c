@@ -79,7 +79,7 @@ void vi0502_8031E124(CharacterKind player_kind, int player_costume,
     Stage_802251E8(St_Kind_Greens, 0);
     Item_80266FA8();
     Item_80266FCC();
-    Ground_801C04BC(0.7f);
+    Ground_SetParamY(0.7f);
     Stage_8022524C();
     Stage_8022532C(St_Kind_Greens, 0);
 

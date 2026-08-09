@@ -681,6 +681,7 @@ struct grIceMt_GroundVars {
     /* +44 gp+108 */ s16 x108[8];
 };
 
+/// @todo ::Map_GroundVars?
 struct grIceMt_GObj1_GroundVars {
     /*  +0:0 gp+C4:0 */ u8 x0_b0 : 1;
     /*  +0:1 gp+C4:1 */ u8 x0_b1 : 1;
@@ -713,9 +714,13 @@ struct grIceMt_FA364_State {
     /*  +C */ f32 cur;
 };
 
+struct grIceMt_GObj9_GObj10_UnderUpperIdPair {
+    /* +0 */ s16 under;
+    /* +2 */ s16 upper;
+};
+
 struct grIceMt_GObj9_GObj10_x0 {
-    /*  +0 gp+C4 */ s16 map_idx_0;
-    /*  +2 gp+C6 */ s16 map_idx_1;
+    /*  +0 gp+C4 */ struct grIceMt_GObj9_GObj10_UnderUpperIdPair ids;
     /*  +4 gp+C8 */ struct grIceMt_FA364_State state;
 };
 
@@ -1928,7 +1933,7 @@ struct StageParam {
  * @todo Most fields are still unidentified.
  */
 struct GroundParam {
-    f32 x0;
+    float y;
     s16 x4;
     u8 x6_pad[2];
     s16 x8;

@@ -1819,7 +1819,6 @@ config.libs = [
             Object(NonMatching, "sysdolphin/baselib/sislib.c"),
             Object(Matching, "sysdolphin/baselib/hsd_40FF.c"),
             Object(NonMatching, "sysdolphin/baselib/hsd_3A94.c"),
-            Object(NonMatching, "sysdolphin/baselib/hsd_3AA7.c"),
             Object(Matching, "sysdolphin/baselib/hsd_3B27.c"),
             Object(Matching, "sysdolphin/baselib/hsd_3B2B.c"),
             Object(Matching, "sysdolphin/baselib/hsd_3B2E.c"),

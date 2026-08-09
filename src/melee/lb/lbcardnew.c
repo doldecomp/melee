@@ -3,12 +3,10 @@
 #include "lbcardnew.static.h"
 
 #include <dolphin/card.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/hsd_3AA7.h>
+#include <baselib/hsd_3A94.h>
 #include <sysdolphin/baselib/hsd_3B27.h>
 #include <sysdolphin/baselib/memory.h>
-#include <melee/lb/lb_0195.h>
-#include <MSL/strtoul.h>
+#include <MSL/strtoul.h> // IWYU pragma: keep
 
 #define _p(x) (lb_80432A68.x)
 
