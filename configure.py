@@ -641,7 +641,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_09C4.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Shouldered.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureCaptain.c"),
-            Object(NonMatching, "melee/ft/ftdynamics.c"),
+            Object(Matching, "melee/ft/ftdynamics.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_BarrelWait.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_StopWall.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_StopCeil.c"),
@@ -1096,7 +1096,7 @@ config.libs = [
         "gr (Ground, stages)",
         [
             # Main
-            Object(NonMatching, "melee/gr/ground.c"),
+            Object(Matching, "melee/gr/ground.c"),
             Object(Matching, "melee/gr/grdisplay.c"),
             Object(Matching, "melee/gr/grdatfiles.c"),
             Object(NonMatching, "melee/gr/granime.c"),
