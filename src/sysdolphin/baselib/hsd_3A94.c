@@ -81,22 +81,29 @@ typedef struct CardQueueEntry {
     fn_803ACFC0((state), (block_idx), (file_id), (seq_num), (payload),        \
                 (payload_len), (file_idx))
 
-/* 4D1138 */ u8 hsd_804D1138[0x10];
-/* 4D1148 */ static u32 hsd_804D1148[0x80][0x9];
-/* 4D2348 */ static __baselib_UnkType003 hsd_804D2348;
-/* 4D2648 */ __jmp_buf hsd_804D2648;
-/* 4D2E70 */ u8 hsd_804D2E70[2084];
-/* 4D7980 */ static volatile s32 hsd_804D7980;
-/* 4D7984 */ static volatile s32 hsd_804D7984;
-/* 4D7988 */ static s32 hsd_804D7988;
-/* 4D798C */ static s32 hsd_804D798C;
-/* 4D7990 */ s32 hsd_804D7990;
-/* 4D7994 */ s32 hsd_804D7994;
-/* 4D7998 */ static s32 hsd_804D7998;
-/* 4D799C */ static s32 hsd_804D799C;
+/* 4D1138 */ extern u8 hsd_804D1138[0x10];
+/* 4D1148 */ extern u32 hsd_804D1148[0x80][0x9];
+/* 4D2348 */ extern __baselib_UnkType003 hsd_804D2348;
+/* 4D2648 */ extern __jmp_buf hsd_804D2648;
+/* 4D2E70 */ extern u8 hsd_804D2E70[2084];
+/* 4D7980 */ extern volatile s32 hsd_804D7980;
+/* 4D7984 */ extern volatile s32 hsd_804D7984;
+/* 4D7988 */ extern s32 hsd_804D7988;
+/* 4D798C */ extern s32 hsd_804D798C;
+/* 4D7990 */ extern s32 hsd_804D7990;
+/* 4D7994 */ extern s32 hsd_804D7994;
+/* 4D7998 */ extern s32 hsd_804D7998;
+/* 4D799C */ extern s32 hsd_804D799C;
 /* 4D79A0 */ u8* hsd_804D79A0;
 /* 4D79A4 */ u8* hsd_804D79A4;
 /* 4D79A8 */ s32 hsd_804D79A8;
+/* 4D79AC */ s32 hsd_804D79AC;
+/* 4D79B0 */ u8 hsd_804D79B0;
+/* 4D79B8 */ u8* hsd_804D79B8;
+/* 4D79BC */ u8* hsd_804D79BC;
+/* 4D79C0 */ s32 hsd_804D79C0;
+/* 4D79C4 */ s32 hsd_804D79C4;
+/* 4D79C8 */ u8 hsd_804D79C8;
 /* 3A949C */ void hsd_803A949C(s32 chan, s32 arg1);
 
 static inline s32 hsd_803A949C_Close(CardState* state)

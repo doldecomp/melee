@@ -1103,7 +1103,7 @@ config.libs = [
             Object(NonMatching, "melee/gr/grmaterial.c"),
             Object(Matching, "melee/gr/grlib.c"),
             Object(Matching, "melee/gr/grdynamicattr.c"),
-            Object(NonMatching, "melee/gr/grzakogenerator.c"),
+            Object(Matching, "melee/gr/grzakogenerator.c"),
             # Individual stages
             Object(Matching, "melee/gr/grfzerocar.c"),
             Object(Matching, "melee/gr/grizumi.c"),
@@ -1818,6 +1818,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/sobjlib.c"),
             Object(NonMatching, "sysdolphin/baselib/sislib.c"),
             Object(Matching, "sysdolphin/baselib/hsd_40FF.c"),
+            Object(Matching, "sysdolphin/baselib/hsd_4D11.c"),
             Object(NonMatching, "sysdolphin/baselib/hsd_3A94.c"),
             Object(Matching, "sysdolphin/baselib/hsd_3B27.c"),
             Object(Matching, "sysdolphin/baselib/hsd_3B2B.c"),
