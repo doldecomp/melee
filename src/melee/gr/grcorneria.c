@@ -490,7 +490,7 @@ void grCorneria_801DD2C0(int unused)
     grCn_804D69AC = true;
 }
 
-extern Vec3 grCn_803B8090;
+extern const Vec3 grCn_803B8090;
 
 void grCorneria_801DD350(void)
 {
@@ -834,7 +834,7 @@ void grCorneria_801DDDA8(HSD_GObj* gobj, Vec3* vec)
     }
 }
 
-extern Vec3 grCn_803B809C;
+extern const Vec3 grCn_803B809C;
 
 void grCorneria_801DDE88(HSD_GObj* gobj)
 {
@@ -882,7 +882,7 @@ void grCorneria_801DDE88(HSD_GObj* gobj)
     }
 }
 
-extern Vec3 grCn_803B80A8;
+extern const Vec3 grCn_803B80A8;
 
 /// Bounds shared by #grCorneria_801DE024 and #grCorneria_801DED50. Volatile
 /// reads keep MWCC from duplicating them later in the literal pool.
@@ -1143,7 +1143,7 @@ s32 grCorneria_801DEC94(Vec3* pos)
     return 0;
 }
 
-extern Vec3 grCn_803B80B4;
+extern const Vec3 grCn_803B80B4;
 
 static int grCn_803E21B0[] = { 1, 1, 1, 1, 1 };
 
@@ -2519,9 +2519,9 @@ static inline void grCn_HideJointPair(HSD_GObj* gobj, s16* joints)
     }
 }
 
-static inline void grCn_SetupSmashTaunt(
-    struct grSmashTaunt_GroundVars* gv, int line, int arg3, int arg4,
-    HSD_GObj* gobj)
+static inline void grCn_SetupSmashTaunt(struct grSmashTaunt_GroundVars* gv,
+                                        int line, int arg3, int arg4,
+                                        HSD_GObj* gobj)
 {
     int joint1;
     int joint0;
@@ -2561,12 +2561,14 @@ void grCorneria_801E25C4(HSD_GObj* gobj, struct grSmashTaunt_GroundVars* gv,
     grCn_SetupSmashTaunt(gv, line, arg3, arg4, gobj);
 }
 
+#pragma dont_inline on
 void grCorneria_801E2738(HSD_GObj* gobj, void* ptr, u32 idx1, u32 idx2)
 {
     grCorneria_801E25C4(gobj, ptr, grCn_803E2204[idx1][idx2].data[0],
                         grCn_803E2204[idx1][idx2].data[1],
                         grCn_803E2204[idx1][idx2].data[2]);
 }
+#pragma dont_inline reset
 
 const GXColor grCn_804DB24C = { 0xFF, 0xFF, 0xFF, 0xFF };
 
@@ -2855,3 +2857,8 @@ f32 grCorneria_801E2FCC(void)
 const f32 grCn_804DB260 = 107.0f;
 const f32 grCn_804DB264 = 106.0f;
 const f32 grCn_804DB268 = -3.4028235e38f;
+
+const Vec3 grCn_803B8090 = { 1.0f, 0.0f, 0.0f };
+const Vec3 grCn_803B809C = { 0.0f, 0.0f, 0.0f };
+const Vec3 grCn_803B80A8 = { 0.0f, 0.0f, 0.0f };
+const Vec3 grCn_803B80B4 = { 0.0f, 0.0f, 0.0f };
