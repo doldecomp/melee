@@ -2519,42 +2519,46 @@ static inline void grCn_HideJointPair(HSD_GObj* gobj, s16* joints)
     }
 }
 
-/// @todo Only differs by a callee-saved register permutation.
-void grCorneria_801E25C4(HSD_GObj* gobj, struct grSmashTaunt_GroundVars* gv,
-                         int line, int arg3, int arg4)
+static inline void grCn_SetupSmashTaunt(
+    struct grSmashTaunt_GroundVars* gv, int line, int arg3, int arg4,
+    HSD_GObj* gobj)
 {
-    struct grSmashTaunt_GroundVars* v = gv;
-    s16 joint1;
-    s16 joint0;
+    int joint1;
+    int joint0;
     int i;
     s16* joints;
-    PAD_STACK(8);
-
-    v->line = line;
-    v->sis_data_idx = arg3;
-    v->sound_id = arg4;
-    joint0 = grCn_803E21F0[v->line][0];
-    joint1 = grCn_803E21F0[v->line][1];
+    gv->line = line;
+    gv->sis_data_idx = arg3;
+    gv->sound_id = arg4;
     joints = &grCn_803E21F0[i = 0][0];
+    joint0 = grCn_803E21F0[gv->line][0];
+    joint1 = grCn_803E21F0[gv->line][1];
     do {
-        if (i != 0 && v->line != i) {
+        if (i != 0 && gv->line != i) {
             grCn_HideJointPair(gobj, joints);
         }
         i++;
         joints += 2;
     } while (i < 5);
-    v->jobj0 = Ground_801C3FA4(gobj, joint0);
-    v->jobj1 = Ground_801C3FA4(gobj, joint1);
-    v->jobj2 = Ground_801C3FA4(gobj, 5);
-    v->joint_idx0 = joint0;
-    v->joint_idx1 = joint1;
-    v->joint_idx2 = 5;
-    v->state = 0;
-    v->timer = 0xA;
+    gv->jobj0 = Ground_801C3FA4(gobj, joint0);
+    gv->jobj1 = Ground_801C3FA4(gobj, joint1);
+    gv->jobj2 = Ground_801C3FA4(gobj, 5);
+    gv->joint_idx0 = joint0;
+    gv->joint_idx1 = joint1;
+    gv->joint_idx2 = 5;
+    gv->state = 0;
+    gv->timer = 0xA;
     grAnime_801C8098(gobj, joint0, 7, 0, 0.0f, 1.0f);
     grAnime_801C8098(gobj, joint1, 7, 0, 0.0f, 1.0f);
     grAnime_801C8098(gobj, 5, 7, 0, 0.0f, 1.0f);
     HSD_JObjAnimAll(gobj->hsd_obj);
+}
+
+void grCorneria_801E25C4(HSD_GObj* gobj, struct grSmashTaunt_GroundVars* gv,
+                         int line, int arg3, int arg4)
+{
+    PAD_STACK(8);
+    grCn_SetupSmashTaunt(gv, line, arg3, arg4, gobj);
 }
 
 void grCorneria_801E2738(HSD_GObj* gobj, void* ptr, u32 idx1, u32 idx2)
