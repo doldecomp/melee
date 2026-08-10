@@ -490,10 +490,9 @@ void grCorneria_801DD2C0(int unused)
     grCn_804D69AC = true;
 }
 
-extern Vec3 grCn_803B8090;
-
 void grCorneria_801DD350(void)
 {
+    static Vec3 const light_pos_init = { 1.0f, 0.0f, 0.0f };
     Ground* gp;
     u8 _pad[8];
     Vec3 light_pos;
@@ -511,7 +510,7 @@ void grCorneria_801DD350(void)
     grCorneria_801DD534(0xB);
     Ground_801C39C0();
     Ground_801C3BB4();
-    light_pos = grCn_803B8090;
+    light_pos = light_pos_init;
     lb_80011A50(&light_pos, -1, 1.0f, 0.0f, 1.0471976f, -100000.0f, 100000.0f,
                 100000.0f, -100000.0f);
     grCn_804D69AC = true;
@@ -834,15 +833,14 @@ void grCorneria_801DDDA8(HSD_GObj* gobj, Vec3* vec)
     }
 }
 
-extern Vec3 grCn_803B809C;
-
 void grCorneria_801DDE88(HSD_GObj* gobj)
 {
+    static Vec3 const sp2C_init = { 0.0f, 0.0f, 0.0f };
     Vec3 sp2C;
     Vec3 sp20;
     Ground* gp = GET_GROUND(gobj);
 
-    sp2C = grCn_803B809C;
+    sp2C = sp2C_init;
     if (gobj != NULL) {
         Ground* gp2 = HSD_GObjGetUserData(gobj);
         Ground* ship = GET_GROUND(Ground_GetMapGObj(3));
@@ -882,8 +880,6 @@ void grCorneria_801DDE88(HSD_GObj* gobj)
     }
 }
 
-extern Vec3 grCn_803B80A8;
-
 /// Bounds shared by #grCorneria_801DE024 and #grCorneria_801DED50. Volatile
 /// reads keep MWCC from duplicating them later in the literal pool.
 static const f32 grCn_ArwingMinX = -10.0f;
@@ -891,8 +887,9 @@ static const f32 grCn_ArwingMaxX = 2000.0f;
 
 static inline void grCorneria_801DE024_inline(Ground_GObj* gobj)
 {
+    static Vec3 const pos_init = { 0.0f, 0.0f, 0.0f };
     Ground* gp = GET_GROUND(gobj);
-    Vec3 pos = grCn_803B80A8;
+    Vec3 pos = pos_init;
     grCorneria_801DDDA8(gobj, &pos);
     switch (gp->u.arwing.xD8) {
     case 0:
@@ -1143,8 +1140,6 @@ s32 grCorneria_801DEC94(Vec3* pos)
     return 0;
 }
 
-extern Vec3 grCn_803B80B4;
-
 static int grCn_803E21B0[] = { 1, 1, 1, 1, 1 };
 
 static inline int randi(int max)
@@ -1184,13 +1179,14 @@ static inline Ground* get_arwing_ground(HSD_GObj* gobj)
 
 void grCorneria_801DED50(Ground_GObj* gobj)
 {
+    static Vec3 const pos_init = { 0.0f, 0.0f, 0.0f };
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = gobj->hsd_obj;
     HSD_JObj* arwing;
     HSD_GObj* far_arwing;
     Ground* ship_gp;
     Ground* arwing_gp;
-    Vec3 pos = grCn_803B80B4;
+    Vec3 pos = pos_init;
     PAD_STACK(6);
 
     if (grCn_804D69AC) {
@@ -2519,50 +2515,56 @@ static inline void grCn_HideJointPair(HSD_GObj* gobj, s16* joints)
     }
 }
 
-/// @todo Only differs by a callee-saved register permutation.
-void grCorneria_801E25C4(HSD_GObj* gobj, struct grSmashTaunt_GroundVars* gv,
-                         int line, int arg3, int arg4)
+static inline void grCn_SetupSmashTaunt(struct grSmashTaunt_GroundVars* gv,
+                                        int line, int arg3, int arg4,
+                                        HSD_GObj* gobj)
 {
-    struct grSmashTaunt_GroundVars* v = gv;
-    s16 joint1;
-    s16 joint0;
+    int joint1;
+    int joint0;
     int i;
     s16* joints;
-    PAD_STACK(8);
-
-    v->line = line;
-    v->sis_data_idx = arg3;
-    v->sound_id = arg4;
-    joint0 = grCn_803E21F0[v->line][0];
-    joint1 = grCn_803E21F0[v->line][1];
+    gv->line = line;
+    gv->sis_data_idx = arg3;
+    gv->sound_id = arg4;
     joints = &grCn_803E21F0[i = 0][0];
+    joint0 = grCn_803E21F0[gv->line][0];
+    joint1 = grCn_803E21F0[gv->line][1];
     do {
-        if (i != 0 && v->line != i) {
+        if (i != 0 && gv->line != i) {
             grCn_HideJointPair(gobj, joints);
         }
         i++;
         joints += 2;
     } while (i < 5);
-    v->jobj0 = Ground_801C3FA4(gobj, joint0);
-    v->jobj1 = Ground_801C3FA4(gobj, joint1);
-    v->jobj2 = Ground_801C3FA4(gobj, 5);
-    v->joint_idx0 = joint0;
-    v->joint_idx1 = joint1;
-    v->joint_idx2 = 5;
-    v->state = 0;
-    v->timer = 0xA;
+    gv->jobj0 = Ground_801C3FA4(gobj, joint0);
+    gv->jobj1 = Ground_801C3FA4(gobj, joint1);
+    gv->jobj2 = Ground_801C3FA4(gobj, 5);
+    gv->joint_idx0 = joint0;
+    gv->joint_idx1 = joint1;
+    gv->joint_idx2 = 5;
+    gv->state = 0;
+    gv->timer = 0xA;
     grAnime_801C8098(gobj, joint0, 7, 0, 0.0f, 1.0f);
     grAnime_801C8098(gobj, joint1, 7, 0, 0.0f, 1.0f);
     grAnime_801C8098(gobj, 5, 7, 0, 0.0f, 1.0f);
     HSD_JObjAnimAll(gobj->hsd_obj);
 }
 
+void grCorneria_801E25C4(HSD_GObj* gobj, struct grSmashTaunt_GroundVars* gv,
+                         int line, int arg3, int arg4)
+{
+    PAD_STACK(8);
+    grCn_SetupSmashTaunt(gv, line, arg3, arg4, gobj);
+}
+
+#pragma dont_inline on
 void grCorneria_801E2738(HSD_GObj* gobj, void* ptr, u32 idx1, u32 idx2)
 {
     grCorneria_801E25C4(gobj, ptr, grCn_803E2204[idx1][idx2].data[0],
                         grCn_803E2204[idx1][idx2].data[1],
                         grCn_803E2204[idx1][idx2].data[2]);
 }
+#pragma dont_inline reset
 
 const GXColor grCn_804DB24C = { 0xFF, 0xFF, 0xFF, 0xFF };
 
@@ -2799,10 +2801,6 @@ DynamicsDesc* grCorneria_801E2EE4(enum_t arg)
     return NULL;
 }
 
-extern const f32 grCn_804DB260;
-extern const f32 grCn_804DB264;
-extern const f32 grCn_804DB268;
-
 bool grCorneria_801E2EEC(Vec3* v, int arg1, HSD_JObj* jobj)
 {
     Vec3 sp14;
@@ -2816,11 +2814,13 @@ bool grCorneria_801E2EEC(Vec3* v, int arg1, HSD_JObj* jobj)
     if (temp_r3 != NULL) {
         temp_r3_2 = temp_r3->user_data;
         if (temp_r3_2 != NULL && temp_r3_2->u.corneria.x12C == jobj) {
-            temp_f31 = grCn_804DB264 * Ground_801C0498();
-            temp_f31_2 = ((v->y - sp14.y) *
-                          ((grCn_804DB260 * Ground_801C0498()) / temp_f31)) +
-                         sp14.x;
-            if (v->x > -((grCn_804DB260 * Ground_801C0498()) - temp_f31_2)) {
+            /// @todo float order hack
+            (void) 107.0f;
+            temp_f31 = 106.0f * Ground_801C0498();
+            temp_f31_2 =
+                ((v->y - sp14.y) * ((107.0f * Ground_801C0498()) / temp_f31)) +
+                sp14.x;
+            if (v->x > -((107.0f * Ground_801C0498()) - temp_f31_2)) {
                 return false;
             }
         }
@@ -2843,11 +2843,5 @@ f32 grCorneria_801E2FCC(void)
             return (Ground_801C0498() * -35.0f - gp->u.corneria.xD0) + 5.0f;
         }
     }
-    return grCn_804DB268;
+    return -3.4028235e38f;
 }
-
-/// Defined after all readers so MWCC loads the named symbols instead of
-/// folding the values back into the literal pool.
-const f32 grCn_804DB260 = 107.0f;
-const f32 grCn_804DB264 = 106.0f;
-const f32 grCn_804DB268 = -3.4028235e38f;
