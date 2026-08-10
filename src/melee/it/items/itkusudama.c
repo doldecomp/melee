@@ -184,6 +184,40 @@ static inline void it_80289BE8_inline(Item_GObj* gobj, f32 vel_scale,
     vel->z = 0.0f;
 }
 
+static inline ItemKind it_80289BE8_spawn_random(Item_GObj* gobj, f32 vel_scale,
+                                                Vec3* pos, Vec3* vel)
+{
+    ItemKind rand_kind = it_8026F3AC();
+    if (rand_kind != -1) {
+        Item_GObj* spawned_gobj;
+        it_80289BE8_inline(gobj, vel_scale, pos, vel);
+        spawned_gobj = it_8026F5C8(gobj, rand_kind, pos);
+        if (spawned_gobj) {
+            it_8026F53C(spawned_gobj, vel, true);
+            it_80274ED8();
+            return rand_kind;
+        } else {
+            return -1;
+        }
+    }
+}
+
+static inline void it_80289BE8_spawn(Item_GObj* gobj, ItemKind kind,
+                                     f32 vel_scale, Vec3* pos, Vec3* vel,
+                                     ItemKind* out_spawned)
+{
+    Item_GObj* spawned_gobj;
+
+    it_80289BE8_inline(gobj, vel_scale, pos, vel);
+
+    spawned_gobj = it_8026F5C8(gobj, kind, pos);
+    if (spawned_gobj) {
+        it_8026F53C(spawned_gobj, vel, true);
+        it_80274ED8();
+        *out_spawned = kind;
+    }
+}
+
 /// @todo .sdata2 order hack
 static void sdata2_order(void)
 {
@@ -204,19 +238,17 @@ static void sdata2_order(void)
 }
 
 /// @todo Only differs by register allocation.
-void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
+void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 food_weight, s32 arg3)
 {
-    ItemKind prev_kind;
+    Item* ip = GET_ITEM(gobj);
+    itKusudamaAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
     ItemKind spawned[15];
     Vec3 pos;
     Vec3 vel;
-    itKusudamaAttributes* attr;
-    Item* ip = GET_ITEM(gobj);
-    int i;
     s32 count;
-    PAD_STACK(8);
-
-    attr = ip->xC4_article_data->x4_specialAttributes;
+    int i;
+    ItemKind prev_kind;
+    PAD_STACK(4);
 
     pos = ip->pos;
     pos.y -= 5.0f;
@@ -234,97 +266,51 @@ void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
     }
 
     if (!it_8026D324(It_Kind_Foods)) {
-        arg2 = 0;
+        food_weight = 0;
     }
 
     for (i = 0; i < 15; i++) {
         spawned[i] = -1;
     }
 
-    i = HSD_Randi(arg1 + arg2 + arg3);
+    i = HSD_Randi(arg1 + food_weight + arg3);
     if (i < arg1) {
-        ItemKind kind;
+        int kind = attr->x10;
         count = attr->x14;
-        (void) count;
-        kind = (ItemKind) attr->x10;
-        if (attr->x10 == It_Kind_M_Ball && it_8026C704() == true) {
-            i = HSD_Randi(arg2 + arg3);
+        if (kind == It_Kind_M_Ball && it_8026C704() == true) {
+            i = HSD_Randi(food_weight + arg3);
             goto food_or_random;
-        }
-        if (!it_8026D324(kind)) {
-            i = HSD_Randi(arg2 + arg3);
+        } else if (!it_8026D324(kind)) {
+            i = HSD_Randi(food_weight + arg3);
             goto food_or_random;
         }
         for (i = 0; i < count; i++) {
-            Item_GObj* spawned_gobj;
             if (kind == It_Kind_M_Ball && it_8026C704() == true) {
                 break;
             }
-            it_80289BE8_inline(gobj, 1.4f, &pos, &vel);
-            spawned_gobj = it_8026F5C8(gobj, kind, &pos);
-            if (spawned_gobj != NULL) {
-                it_8026F53C(spawned_gobj, &vel, true);
-                it_80274ED8();
-                spawned[i] = kind;
-            }
+            it_80289BE8_spawn(gobj, kind, 1.4f, &pos, &vel, &spawned[i]);
         }
-        {
-            ItemKind* spawn_ptr = &spawned[i];
-            for (; i < count; spawn_ptr++, i++) {
-                ItemKind rand_kind = it_8026F3AC();
-                Vec3 vel;
-                Vec3 pos;
-                PAD_STACK(8);
-                if (rand_kind != -1) {
-                    Item_GObj* spawned_gobj;
-                    it_80289BE8_inline(gobj, 1.2f, &pos, &vel);
-                    spawned_gobj = it_8026F5C8(gobj, rand_kind, &pos);
-                    if (spawned_gobj != NULL) {
-                        it_8026F53C(spawned_gobj, &vel, true);
-                        it_80274ED8();
-                        prev_kind = rand_kind;
-                    } else {
-                        prev_kind = -1;
-                    }
-                }
-                *spawn_ptr = prev_kind;
-            }
+        for (; i < count; i++) {
+            Vec3 vel;
+            Vec3 pos;
+            PAD_STACK(8);
+            spawned[i] = it_80289BE8_spawn_random(gobj, 1.2f, &pos, &vel);
         }
     } else {
         i -= arg1;
     food_or_random:
-        if (i < arg2) {
+        if (i < food_weight) {
             count = HSD_Randi(5) + 10;
             for (i = 0; i < count; i++) {
-                Item_GObj* spawned_gobj;
-                it_80289BE8_inline(gobj, 1.8f, &pos, &vel);
-                spawned_gobj = it_8026F5C8(gobj, It_Kind_Foods, &pos);
-                if (spawned_gobj != NULL) {
-                    it_8026F53C(spawned_gobj, &vel, true);
-                    it_80274ED8();
-                    spawned[i] = It_Kind_Foods;
-                }
+                it_80289BE8_spawn(gobj, It_Kind_Foods, 1.8f, &pos, &vel,
+                                  &spawned[i]);
             }
         } else {
             Vec3 vel;
             Vec3 pos;
-            count = HSD_Randi(2);
-            count += 3;
+            count = HSD_Randi(2) + 3;
             for (i = 0; i < count; i++) {
-                ItemKind rand_kind = it_8026F3AC();
-                if (rand_kind != -1) {
-                    Item_GObj* spawned_gobj;
-                    it_80289BE8_inline(gobj, 1.2f, &pos, &vel);
-                    spawned_gobj = it_8026F5C8(gobj, rand_kind, &pos);
-                    if (spawned_gobj != NULL) {
-                        it_8026F53C(spawned_gobj, &vel, true);
-                        it_80274ED8();
-                        prev_kind = rand_kind;
-                    } else {
-                        prev_kind = -1;
-                    }
-                }
-                spawned[i] = prev_kind;
+                spawned[i] = it_80289BE8_spawn_random(gobj, 1.2f, &pos, &vel);
             }
         }
     }
