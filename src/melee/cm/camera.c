@@ -2462,11 +2462,11 @@ void Camera_8002D318(void* unused)
     Vec3* pos;
     HSD_GObj* gobj;
     f32 half_z;
+    f32 horiz_dist;
     f32 distance;
     f32 delta;
-    u8 _pad[24];
+    u8 _pad[16];
     CmSubject* subject;
-    f32 horiz_dist;
     CameraBounds bounds_copy;
     CameraBounds bounds;
 
@@ -2480,7 +2480,7 @@ void Camera_8002D318(void* unused)
         if ((gobj = Player_GetEntity(cm_80452C68.x2C4)) != NULL &&
             (subject = ftLib_80086B74(gobj)) != NULL)
         {
-            pos = &subject->x1C;
+            pos = get_subject_x1C(subject);
             half_z = 0.5f * subject->x34.z;
             cm_80452C68.transform.target_interest.x =
                 -((half_z * cosf(cm_80452C68.yaw_offset)) - pos->x);
@@ -2495,15 +2495,18 @@ void Camera_8002D318(void* unused)
         delta = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
         cm_80452C68.transform.fov += delta * cm_803BCCA0.x70;
 
-        if ((s32) cm_80452C68.x2C4 != 10 && (s32) cm_80452C68.x2C4 != 11 &&
-            (s32) cm_80452C68.x2C4 >= 0 && (s32) cm_80452C68.x2C4 < 6 &&
-            (gobj = Player_GetEntity(cm_80452C68.x2C4)) != NULL &&
-            (subject = ftLib_80086B74(gobj)) != NULL)
         {
-            distance = (2.0f * subject->x34.z) /
-                       tanf(MTXDegToRad(cm_80452C68.transform.target_fov));
-        } else {
-            distance = 1000.0f;
+            s32 slot = cm_80452C68.x2C4;
+
+            if (slot != 10 && slot != 11 && slot >= 0 && slot < 6 &&
+                (gobj = Player_GetEntity(slot)) != NULL &&
+                (subject = ftLib_80086B74(gobj)) != NULL)
+            {
+                distance = (2.0f * subject->x34.z) /
+                           tanf(MTXDegToRad(cm_80452C68.transform.target_fov));
+            } else {
+                distance = 1000.0f;
+            }
         }
 
         horiz_dist = distance * cosf(cm_80452C68.pitch_offset);
@@ -2536,10 +2539,10 @@ void Camera_8002D85C(void* unused)
     CmSubject* subject;
     HSD_GObj* gobj;
     Vec3* subj_pos;
-    f32 distance;
-    f32 delta;
     f32 horiz_dist;
-    u8 _pad[24];
+    f32 delta;
+    f32 distance;
+    u8 _pad[16];
     CameraBounds bounds2;
     CameraBounds bounds;
 
@@ -2551,7 +2554,7 @@ void Camera_8002D85C(void* unused)
         Camera_80030DF8();
         gobj = Player_GetEntity(cm_80452C68.x2C4);
         if (gobj != NULL && (subject = ftLib_80086B74(gobj)) != NULL) {
-            subj_pos = &subject->x1C;
+            subj_pos = get_subject_x1C(subject);
             cm_80452C68.transform.target_interest.x = subj_pos->x;
             cm_80452C68.transform.target_interest.y = subj_pos->y;
             cm_80452C68.transform.target_interest.z = subj_pos->z;
@@ -2563,15 +2566,18 @@ void Camera_8002D85C(void* unused)
         delta = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
         cm_80452C68.transform.fov += delta * cm_803BCCA0.x70;
 
-        if ((s32) cm_80452C68.x2C4 != 10 && (s32) cm_80452C68.x2C4 != 11 &&
-            (s32) cm_80452C68.x2C4 >= 0 && (s32) cm_80452C68.x2C4 < 6 &&
-            (gobj = Player_GetEntity(cm_80452C68.x2C4)) != NULL &&
-            (subject = ftLib_80086B74(gobj)) != NULL)
         {
-            distance = (2.0f * subject->x34.z) /
-                       tanf(MTXDegToRad(cm_80452C68.transform.target_fov));
-        } else {
-            distance = 1000.0f;
+            s32 slot = cm_80452C68.x2C4;
+
+            if (slot != 10 && slot != 11 && slot >= 0 && slot < 6 &&
+                (gobj = Player_GetEntity(slot)) != NULL &&
+                (subject = ftLib_80086B74(gobj)) != NULL)
+            {
+                distance = (2.0f * subject->x34.z) /
+                           tanf(MTXDegToRad(cm_80452C68.transform.target_fov));
+            } else {
+                distance = 1000.0f;
+            }
         }
 
         if (cm_80452C68.pitch_offset > Stage_GetCamAngleRadiansUp()) {
