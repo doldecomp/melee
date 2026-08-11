@@ -58,26 +58,28 @@
                                          f32 speed);
 /* 0301D0 */ static void fn_800301D0(HSD_GObj*, int);
 
-/// .bss
 /* 452C68 */ static Camera cm_80452C68;
 /* 453004 */ CameraDebugMode cm_80453004;
 
-/// .data
-/* 3BCB18 */ static CameraModeCallbacks cm_803BCB18 = { Camera_8002B3D4,
-                                                        Camera_8002CDDC,
-                                                        Camera_8002D318,
-                                                        Camera_8002D85C,
-                                                        Camera_8002DDC4,
-                                                        Camera_8002C908,
-                                                        Camera_8002E490,
-                                                        0,
-                                                        0 };
+/* 3BCB18 */ static CameraModeCallbacks cm_803BCB18 = {
+    Camera_8002B3D4,
+    Camera_8002CDDC,
+    Camera_8002D318,
+    Camera_8002D85C,
+    Camera_8002DDC4,
+    Camera_8002C908,
+    Camera_8002E490,
+    0,
+    0,
+};
 /* 3BCB3C */ static HSD_WObjDesc cm_803BCB3C = {
     NULL, { 0.0f, 40.241425f, 300.241f }, 0
 };
-/* 3BCB50 */ static HSD_WObjDesc cm_803BCB50 = { NULL,
-                                                 { 0.0f, 10.0f, 0.0f },
-                                                 0 };
+/* 3BCB50 */ static HSD_WObjDesc cm_803BCB50 = {
+    NULL,
+    { 0.0f, 10.0f, 0.0f },
+    0,
+};
 /* 3BCB64 */ static HSD_CameraDescPerspective cm_803BCB64 = {
     0,
     0,
@@ -93,37 +95,23 @@
     30.0f,
     1.2173333f
 };
-/* 3BCB9C */ static f32 cm_803BCB9C[5] = { 0.0f, 1.5f, 1.32f, 1.16f, 1.0f };
-/// /* 3BCC4C */ static void* jumptable_803BCC4C[8] = {
-///     (void*)0x8002a4f8,
-///     (void*)0x8002a554,
-///     (void*)0x8002a6c0,
-///     (void*)0x8002a6c0,
-///     (void*)0x8002a52c,
-///     (void*)0x8002a6c0,
-///     (void*)0x8002a700,
-///     (void*)0x8002a728,
-/// };
-/// Defined at the bottom of this file so that references use full
-/// symbol-relative addressing (matching the original); see cm_803BCCA0 there.
+/* 3BCB9C */ static float cm_803BCB9C[] = { 0.0f, 1.5f, 1.32f, 1.16f, 1.0f };
+
+/// @todo Fix placement
 /* 3BCCA0 */ extern CameraUnkGlobals cm_803BCCA0;
 
-/// .rodata
 /* 3B73B8 */ static Vec3 const cm_WorldForward = { 0.0f, 0.0f, -1.0f };
 /* 3B73C4 */ static Vec3 const cm_803B73C4 = { 0.0f };
 /* 3B73D0 */ static Vec3 const cm_WorldUp = { 0.0f, 1.0f, 0.0f };
 /* 3B73DC */ static Vec3 const cm_803B73DC = { 0.0f, 1.0f, 0.0f };
 
-/// .sbss
-/* 4D646C */ char gap_10_804D646C_sbss[4];
 /* 4D6468 */ CmSubject* cm_804D6468;
 /* 4D6464 */ HSD_CObj* cm_804D6464;
 /* 4D6460 */ CmSubject* cm_804D6460;
 /* 4D645C */ CmSubject* cm_804D645C;
 /* 4D6458 */ CmSubject* cm_804D6458;
 
-/// sdata2
-
+/// @todo sdata2 order hack
 static inline void camera_sdata2_order(void)
 {
     (void) -3.402823466e+38F;
@@ -186,7 +174,6 @@ void Camera_80028B9C(int n_subjects)
     Vec3* eye_pos;
     int i;
 
-    camera_sdata2_order();
     interest_pos = &cm_803BCB64.interest->pos;
     cm_80452C68.transform.interest = *interest_pos;
     cm_80452C68.transform.target_interest = *interest_pos;
@@ -4490,12 +4477,12 @@ HSD_CObj* Camera_800310B8(void)
 
 void Camera_800310E8(void)
 {
-    cm_80452C68.x398_b0 = 0;
-    cm_80452C68.x398_b1 = 0;
-    cm_80452C68.x398_b2 = 0;
-    cm_80452C68.x398_b3 = 0;
-    cm_80452C68.x398_b4 = 0;
-    cm_80452C68.x398_b5 = 0;
+    cm_80452C68.x398_b0 = false;
+    cm_80452C68.x398_b1 = false;
+    cm_80452C68.x398_b2 = false;
+    cm_80452C68.x398_b3 = false;
+    cm_80452C68.x398_b4 = false;
+    cm_80452C68.x398_b5 = false;
 }
 
 f32 Camera_80031144(void)
@@ -4627,6 +4614,7 @@ void Camera_800313E0(HSD_GObj* gobj, u64 prios)
 /* 3BCC88 */ static char lbl_803BCC88[0x14] = "snapshot! ptr=%08x\n";
 /* 3BCC9C */ DATA char gap_07_803BCC9C_data[4] = "";
 
+/// @todo Move to its own split
 /* 3BCCA0 */ CameraUnkGlobals cm_803BCCA0 = {
     83.0f,  1000.0f, -30.0f,  5.0f,  -7.0f,  17.5f,  -17.5f, 0.0f,  0.0682f,
     60.0f,  120.0f,  0.05f,   0.1f,  120.0f, 900.0f, 0.15f,  38.0f, 0.1f,
@@ -4636,6 +4624,3 @@ void Camera_800313E0(HSD_GObj* gobj, u64 prios)
     0.004f, 0.2f,    0.025f,  0.2f,  0.003f, 0.2f,   0.025f, 0.2f,  0.02f,
     1.0f,   0.14f,   1200.0f, -0.2f, 1.2f,   0.0f,
 };
-
-/* 4D393A */ static char gap_09_804D393A_sdata[4] = "";
-/* 4D7F0C */ const char gap_11_804D7F0C_sdata2[4] = "";
