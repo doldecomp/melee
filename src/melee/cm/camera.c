@@ -115,13 +115,63 @@
 /* 3B73DC */ static Vec3 const cm_803B73DC = { 0.0f, 1.0f, 0.0f };
 
 /// .sbss
-/* 4D6458 */ static CmSubject* cm_804D6458;
-/* 4D645C */ static CmSubject* cm_804D645C;
-/* 4D6460 */ static CmSubject* cm_804D6460;
-/* 4D6464 */ static HSD_CObj* cm_804D6464;
+/* 4D646C */ char gap_10_804D646C_sbss[4];
 /* 4D6468 */ CmSubject* cm_804D6468;
+/* 4D6464 */ HSD_CObj* cm_804D6464;
+/* 4D6460 */ CmSubject* cm_804D6460;
+/* 4D645C */ CmSubject* cm_804D645C;
+/* 4D6458 */ CmSubject* cm_804D6458;
 
 /// sdata2
+
+static inline void camera_sdata2_order(void)
+{
+    (void) -3.402823466e+38F;
+    (void) 1.0F;
+    (void) 0.1F;
+    (void) 16384.0F;
+    (void) -1.0F;
+    (void) 0.0F;
+    (void) 1.0;
+    (void) 4503601774854144.0;
+    (void) 0.65F;
+    (void) 0.35F;
+    (void) 0.5F;
+    (void) -0.5F;
+    (void) 3.402823466e+38F;
+    (void) 40.0F;
+    (void) 80.0F;
+    (void) 5000.0F;
+    (void) 4920.0F;
+    (void) 10.0F;
+    (void) 390.0F;
+    (void) 99999.0F;
+    (void) 0.0001F;
+    (void) 1000.0F;
+    (void) 0.017453292F;
+    (void) 1.570796371F;
+    (void) 0.001F;
+    (void) -0.001F;
+    (void) 30.0F;
+    (void) 0.85F;
+    (void) 0.5;
+    (void) 3.0;
+    (void) 0.999F;
+    (void) -0.999F;
+    (void) 5.0F;
+    (void) 20.0F;
+    (void) 3.0F;
+    (void) 0.125;
+    (void) 2.0F;
+    (void) 2000.0F;
+    (void) -2000.0F;
+    (void) -1.0;
+    (void) 4.0F;
+    (void) 0.39269908169872414;
+    (void) 0.19634954084936207;
+    (void) 6.283185307179586;
+    (void) 3.141592653589793;
+}
 
 static inline float vec_len(Vec3* offset)
 {
@@ -136,6 +186,7 @@ void Camera_80028B9C(int n_subjects)
     Vec3* eye_pos;
     int i;
 
+    camera_sdata2_order();
     interest_pos = &cm_803BCB64.interest->pos;
     cm_80452C68.transform.interest = *interest_pos;
     cm_80452C68.transform.target_interest = *interest_pos;
@@ -4558,15 +4609,19 @@ void Camera_800313E0(HSD_GObj* gobj, u64 prios)
     HSD_GObj_80390ED0(gobj, 4);
 }
 
-/* 3BCC70 */ static char lbl_803BCC70[0x17] = "rate>0.0F&&rate<=1.0F";
-/* 3BCC88 */ static char lbl_803BCC88[0x17] = "snapshot! ptr=%08x\n";
+/* 3BCC70 */ static char lbl_803BCC70[0x16] = "rate>0.0F&&rate<=1.0F";
+/* 3BCC88 */ static char lbl_803BCC88[0x14] = "snapshot! ptr=%08x\n";
+/* 3BCC9C */ DATA char gap_07_803BCC9C_data[4] = "";
 
-// /* 3BCCA0 */ static CameraUnkGlobals cm_803BCCA0 = {
-//     83.0f,  1000.0f, -30.0f,  5.0f,  -7.0f,  17.5f,  -17.5f, 0.0f,  0.0682f,
-//     60.0f,  120.0f,  0.05f,   0.1f,  120.0f, 900.0f, 0.15f,  38.0f, 0.1f,
-//     0.1f,   0.001f,  0.1f,    1.0f,  1.0f,   0.6f,   0.6f,   0.05f, 0.1f,
-//     29.0f,  0.1f,    0.1f,    0.1f,  0.1f,   0.5f,   0.5f,   0.4f,  -11.0f,
-//     400.0f, 0.2f,    4.0f,    0.05f, 1.0f,   -7.0f,  7.0f,   0.5f,  0.5f,
-//     0.004f, 0.2f,    0.025f,  0.2f,  0.003f, 0.2f,   0.025f, 0.2f,  0.02f,
-//     1.0f,   0.14f,   1200.0f, -0.2f, 1.2f,   0.0f,
-// };
+/* 3BCCA0 */ CameraUnkGlobals cm_803BCCA0 = {
+    83.0f,  1000.0f, -30.0f,  5.0f,  -7.0f,  17.5f,  -17.5f, 0.0f,  0.0682f,
+    60.0f,  120.0f,  0.05f,   0.1f,  120.0f, 900.0f, 0.15f,  38.0f, 0.1f,
+    0.1f,   0.001f,  0.1f,    1.0f,  1.0f,   0.6f,   0.6f,   0.05f, 0.1f,
+    29.0f,  0.1f,    0.1f,    0.1f,  0.1f,   0.5f,   0.5f,   0.4f,  -11.0f,
+    400.0f, 0.2f,    4.0f,    0.05f, 1.0f,   -7.0f,  7.0f,   0.5f,  0.5f,
+    0.004f, 0.2f,    0.025f,  0.2f,  0.003f, 0.2f,   0.025f, 0.2f,  0.02f,
+    1.0f,   0.14f,   1200.0f, -0.2f, 1.2f,   0.0f,
+};
+
+/* 4D393A */ static char gap_09_804D393A_sdata[4] = "";
+/* 4D7F0C */ const char gap_11_804D7F0C_sdata2[4] = "";
