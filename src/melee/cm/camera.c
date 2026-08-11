@@ -2199,22 +2199,80 @@ static inline bool get_subject_pos(Vec3* pos, s8* slot_ptr)
     return valid;
 }
 
+#pragma inline_depth(8)
+static inline void get_subject_pos_out(Vec3* pos, s8* slot_ptr,
+                                       bool* valid_out)
+{
+    CmSubject* subject;
+    HSD_GObj* gobj;
+    s32 slot;
+
+    slot = *slot_ptr;
+    *valid_out = true;
+    if (slot == 0xB) {
+        *valid_out = false;
+    } else if (slot == 0xA) {
+        Stage_UnkSetVec3TCam_Offset(pos);
+    } else {
+        gobj = Player_GetEntity(slot);
+        if (gobj != NULL && (subject = ftLib_80086B74(gobj)) != NULL) {
+            *pos = subject->x1C;
+        } else {
+            *valid_out = false;
+        }
+    }
+}
+
+static inline void camera_cddc_select(s8* slot_ptr)
+{
+    Vec3* pos_ptr;
+    bool valid;
+
+    if (*slot_ptr == 11) {
+        return;
+    }
+    pos_ptr = &cm_80452C68.x308;
+    goto loop_check;
+
+loop_next:
+    *slot_ptr = Camera_8002BA00(*slot_ptr, 1);
+
+loop_check:
+    if (*slot_ptr == 10) {
+        goto loop_next;
+    }
+    get_subject_pos_out(pos_ptr, slot_ptr, &valid);
+    if (!valid) {
+        goto loop_next;
+    }
+    {
+        HSD_GObj* gobj = Player_GetEntity(*slot_ptr);
+        if (gobj == NULL || ftLib_8008701C(gobj)) {
+            goto loop_next;
+        }
+    }
+}
+
+static inline Vec3*
+camera_cddc_target_interest(CameraTransformState* transform)
+{
+    return &transform->target_interest;
+}
+
 static inline void track_subject(CameraTransformState* transform,
                                  Vec3* interest_diff, Vec3* eye_diff)
 {
     Vec3* copy_src;
     Vec3* target_pos;
-    Vec3* target_interest;
     Vec3* position_ptr;
     f32* coeff_ptr;
     f32 coeff;
 
     Camera_8002C5B4(&cm_80452C68.x2D0);
 
-    target_interest = &transform->target_interest;
     copy_src = &cm_80452C68.transform.target_interest;
     *copy_src = cm_80452C68.x308;
-    lbVector_Add(target_interest, &cm_80452C68.x314);
+    lbVector_Add(camera_cddc_target_interest(transform), &cm_80452C68.x314);
 
     cm_80452C68.transform.target_position = *copy_src;
     target_pos = &transform->target_position;
@@ -2230,7 +2288,8 @@ static inline void track_subject(CameraTransformState* transform,
     eye_diff->z *= coeff;
     lbVector_Add(position_ptr, eye_diff);
 
-    lbVector_Diff(target_interest, &transform->interest, interest_diff);
+    lbVector_Diff(camera_cddc_target_interest(transform), &transform->interest,
+                  interest_diff);
     coeff = *coeff_ptr;
     interest_diff->x *= coeff;
     interest_diff->y *= coeff;
@@ -2411,8 +2470,7 @@ void Camera_8002CB0C(CameraBounds* bounds)
 void Camera_8002CDDC(void* unused)
 {
     s8* slot_ptr;
-    Vec3* pos_ptr;
-    s32 valid;
+    CameraTransformState* late_transform;
     HSD_GObj* gobj;
     CmSubject* subject;
     CameraBounds bounds;
@@ -2426,53 +2484,8 @@ void Camera_8002CDDC(void* unused)
     Camera_800293E0();
     Camera_8002958C(&bounds, &cm_80452C68.transform);
     slot_ptr = &cm_80452C68.x2C4;
-    if (*slot_ptr == 11) {
-        goto after_loop;
-    }
-    pos_ptr = &cm_80452C68.x308;
-    goto loop_check;
-
-loop_next:
-    *slot_ptr = Camera_8002BA00(*slot_ptr, 1);
-
-loop_check: {
-    s8 slot = *slot_ptr;
-    if (slot == 10) {
-        goto loop_next;
-    }
-    valid = true;
-    if (slot == 11) {
-        valid = false;
-        goto check_valid;
-    }
-    if (slot == 10) {
-        Stage_UnkSetVec3TCam_Offset(pos_ptr);
-        goto check_valid;
-    }
-    gobj = Player_GetEntity(slot);
-    if (gobj == NULL) {
-        goto set_invalid;
-    }
-    subject = ftLib_80086B74(gobj);
-    if (subject == NULL) {
-        goto set_invalid;
-    }
-    *pos_ptr = subject->x1C;
-    goto check_valid;
-}
-set_invalid:
-    valid = false;
-
-check_valid:
-    if (!valid) {
-        goto loop_next;
-    }
-    gobj = Player_GetEntity(*slot_ptr);
-    if (gobj == NULL || ftLib_8008701C(gobj)) {
-        goto loop_next;
-    }
-
-after_loop:
+    late_transform = &cm_80452C68.transform;
+    camera_cddc_select(slot_ptr);
     Camera_8002CB0C(&bounds);
     if (*slot_ptr != 10 && *slot_ptr != 11 &&
         (gobj = Player_GetEntity(*slot_ptr)) != NULL &&
@@ -2481,7 +2494,7 @@ after_loop:
         Camera_80029124(&subject->x1C, 0) == CAM_BOUNDS_INSIDE &&
         ABS(subject->x1C.z) < 30.0f)
     {
-        track_subject(&cm_80452C68.transform, &interest_diff, &eye_diff);
+        track_subject(late_transform, &interest_diff, &eye_diff);
         cm_80452C68.transform.target_fov = cm_803BCCA0.x6C;
         delta = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
         cm_80452C68.transform.fov += delta * cm_803BCCA0.x70;
@@ -2498,6 +2511,7 @@ after_loop:
     update_avg_bounds_width();
 }
 
+#pragma inline_depth(2)
 static inline f32 compute_orbit_distance(s32 slot)
 {
     f32 distance;
