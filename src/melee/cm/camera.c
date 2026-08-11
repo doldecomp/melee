@@ -2149,45 +2149,43 @@ static inline bool get_subject_pos(Vec3* pos, s8* slot_ptr)
 }
 
 static inline void track_subject(CameraTransformState* transform,
-                                 Vec3* pos_ptr, f32* target_fov, f32* fov_rate)
+                                 Vec3* interest_diff, Vec3* eye_diff)
 {
-    f32 coeff;
-    f32 delta;
-    Vec3 interest_diff;
-    Vec3 eye_diff;
-    Vec3* target_interest;
     Vec3* copy_src;
+    Vec3* target_pos;
+    Vec3* target_interest;
+    Vec3* position_ptr;
+    f32* coeff_ptr;
+    f32 coeff;
 
     Camera_8002C5B4(&cm_80452C68.x2D0);
 
     target_interest = &transform->target_interest;
     copy_src = &cm_80452C68.transform.target_interest;
-    *copy_src = *pos_ptr;
+    *copy_src = cm_80452C68.x308;
     lbVector_Add(target_interest, &cm_80452C68.x314);
 
     cm_80452C68.transform.target_position = *copy_src;
-    pos_ptr = &transform->target_position;
-    lbVector_Add(pos_ptr, &cm_80452C68.pause_eye_offset);
+    target_pos = &transform->target_position;
+    lbVector_Add(target_pos, &cm_80452C68.pause_eye_offset);
 
-    copy_src = &transform->position;
-    lbVector_Diff(pos_ptr, copy_src, &eye_diff);
+    position_ptr = &transform->position;
+    lbVector_Diff(target_pos, position_ptr, eye_diff);
 
-    coeff = cm_803BCCA0.x84;
-    eye_diff.x *= coeff;
-    eye_diff.y *= coeff;
-    eye_diff.z *= coeff;
-    lbVector_Add(copy_src, &eye_diff);
+    coeff_ptr = &cm_803BCCA0.x84;
+    coeff = *coeff_ptr;
+    eye_diff->x *= coeff;
+    eye_diff->y *= coeff;
+    eye_diff->z *= coeff;
+    lbVector_Add(position_ptr, eye_diff);
 
-    lbVector_Diff(target_interest, &transform->interest, &interest_diff);
-    coeff = cm_803BCCA0.x84;
-    interest_diff.x *= coeff;
-    interest_diff.y *= coeff;
-    interest_diff.z *= coeff;
-    lbVector_Add(&transform->interest, &interest_diff);
+    lbVector_Diff(target_interest, &transform->interest, interest_diff);
+    coeff = *coeff_ptr;
+    interest_diff->x *= coeff;
+    interest_diff->y *= coeff;
+    interest_diff->z *= coeff;
+    lbVector_Add(&transform->interest, interest_diff);
 
-    cm_80452C68.transform.target_fov = *target_fov;
-    delta = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
-    cm_80452C68.transform.fov += delta * *fov_rate;
 }
 
 /// @todo this and Camera_8002C908 share the body of track_subject, there
@@ -2362,37 +2360,82 @@ void Camera_8002CB0C(CameraBounds* bounds)
 
 void Camera_8002CDDC(void* unused)
 {
+    s8* slot_ptr;
     Vec3* pos_ptr;
+    s32 valid;
     HSD_GObj* gobj;
     CmSubject* subject;
     CameraBounds bounds;
+    Vec3 eye_diff;
+    Vec3 interest_diff;
+    f32 delta;
     CameraBounds bounds_copy;
     CameraBounds bounds2;
 
     Camera_80030DF8();
     Camera_800293E0();
     Camera_8002958C(&bounds, &cm_80452C68.transform);
-    if (cm_80452C68.x2C4 != 11) {
-        pos_ptr = &cm_80452C68.x308;
-        while (cm_80452C68.x2C4 == 10 ||
-               !get_subject_pos(pos_ptr, &cm_80452C68.x2C4) ||
-               (gobj = Player_GetEntity(cm_80452C68.x2C4)) == NULL ||
-               ftLib_8008701C(gobj))
-        {
-            cm_80452C68.x2C4 = Camera_8002BA00(cm_80452C68.x2C4, 1);
-        }
+    slot_ptr = &cm_80452C68.x2C4;
+    if (*slot_ptr == 11) {
+        goto after_loop;
+    }
+    pos_ptr = &cm_80452C68.x308;
+    goto loop_check;
+
+loop_next:
+    *slot_ptr = Camera_8002BA00(*slot_ptr, 1);
+
+loop_check: {
+    s8 slot = *slot_ptr;
+    if (slot == 10) {
+        goto loop_next;
+    }
+    valid = true;
+    if (slot == 11) {
+        valid = false;
+        goto check_valid;
+    }
+    if (slot == 10) {
+        Stage_UnkSetVec3TCam_Offset(pos_ptr);
+        goto check_valid;
+    }
+    gobj = Player_GetEntity(slot);
+    if (gobj == NULL) {
+        goto set_invalid;
+    }
+    subject = ftLib_80086B74(gobj);
+    if (subject == NULL) {
+        goto set_invalid;
+    }
+    *pos_ptr = subject->x1C;
+    goto check_valid;
+}
+set_invalid:
+    valid = false;
+
+check_valid:
+    if (!valid) {
+        goto loop_next;
+    }
+    gobj = Player_GetEntity(*slot_ptr);
+    if (gobj == NULL || ftLib_8008701C(gobj)) {
+        goto loop_next;
     }
 
+after_loop:
     Camera_8002CB0C(&bounds);
-    if (cm_80452C68.x2C4 != 10 && cm_80452C68.x2C4 != 11 &&
-        (gobj = Player_GetEntity(cm_80452C68.x2C4)) != NULL &&
+    if (*slot_ptr != 10 && *slot_ptr != 11 &&
+        (gobj = Player_GetEntity(*slot_ptr)) != NULL &&
         (subject = ftLib_80086B74(gobj)) != NULL && Camera_8002928C(subject) &&
         !subject->x8 &&
         Camera_80029124(&subject->x1C, 0) == CAM_BOUNDS_INSIDE &&
         ABS(subject->x1C.z) < 30.0f)
     {
-        track_subject(&cm_80452C68.transform, pos_ptr, &cm_803BCCA0.x6C,
-                      &cm_803BCCA0.x70);
+        track_subject(&cm_80452C68.transform, &interest_diff, &eye_diff);
+        cm_80452C68.transform.target_fov = cm_803BCCA0.x6C;
+        delta = cm_80452C68.transform.target_fov -
+                cm_80452C68.transform.fov;
+        cm_80452C68.transform.fov += delta * cm_803BCCA0.x70;
         return;
     }
 
