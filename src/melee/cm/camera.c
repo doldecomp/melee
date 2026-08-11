@@ -2185,7 +2185,6 @@ static inline void track_subject(CameraTransformState* transform,
     interest_diff->y *= coeff;
     interest_diff->z *= coeff;
     lbVector_Add(&transform->interest, interest_diff);
-
 }
 
 /// @todo this and Camera_8002C908 share the body of track_subject, there
@@ -2433,8 +2432,7 @@ after_loop:
     {
         track_subject(&cm_80452C68.transform, &interest_diff, &eye_diff);
         cm_80452C68.transform.target_fov = cm_803BCCA0.x6C;
-        delta = cm_80452C68.transform.target_fov -
-                cm_80452C68.transform.fov;
+        delta = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
         cm_80452C68.transform.fov += delta * cm_803BCCA0.x70;
         return;
     }
@@ -2447,28 +2445,6 @@ after_loop:
     update_zoom_distance();
     update_bounds(&bounds2, &bounds_copy);
     update_avg_bounds_width();
-}
-
-static inline void approach_vec3(Vec3* target, Vec3* cur, f32 smooth)
-{
-    f32 dy;
-    f32 ix;
-    f32 z;
-    f32 iy, iz;
-    f32 x;
-
-    x = target->x;
-    ix = cur->x;
-    x -= ix;
-    dy = target->y;
-    iy = cur->y;
-    dy -= iy;
-    z = target->z;
-    iz = cur->z;
-    cur->x = x * smooth + ix;
-    ix = z - iz;
-    cur->y = dy * smooth + cur->y;
-    cur->z = ix * smooth + cur->z;
 }
 
 static inline f32 compute_orbit_distance(s32 slot)
@@ -2508,6 +2484,14 @@ void Camera_8002D318(void* unused)
     f32 horiz_dist;
     f32 distance;
     f32 delta;
+    f32 smooth;
+    f32 dx;
+    f32 dz;
+    f32 dy;
+    f32 smooth2;
+    f32 dx2;
+    f32 dz2;
+    f32 dy2;
     u8 _pad[16];
     CmSubject* subject;
     CameraBounds bounds_copy;
@@ -2530,8 +2514,16 @@ void Camera_8002D318(void* unused)
             cm_80452C68.transform.target_interest.y = pos->y;
             cm_80452C68.transform.target_interest.z =
                 (half_z * sinf(cm_80452C68.yaw_offset)) + pos->z;
-            approach_vec3(&cm_80452C68.transform.target_interest,
-                          &cm_80452C68.transform.interest, cm_803BCCA0.x64);
+            dx = cm_80452C68.transform.target_interest.x -
+                 cm_80452C68.transform.interest.x;
+            smooth = cm_803BCCA0.x64;
+            dy = cm_80452C68.transform.target_interest.y -
+                 cm_80452C68.transform.interest.y;
+            dz = cm_80452C68.transform.target_interest.z -
+                 cm_80452C68.transform.interest.z;
+            cm_80452C68.transform.interest.x += dx * smooth;
+            cm_80452C68.transform.interest.y += dy * smooth;
+            cm_80452C68.transform.interest.z += dz * smooth;
         }
 
         cm_80452C68.transform.target_fov = cm_803BCCA0.x6C;
@@ -2562,8 +2554,16 @@ void Camera_8002D318(void* unused)
         cm_80452C68.transform.target_position.z =
             horiz_dist * cosf(cm_80452C68.yaw_offset) +
             cm_80452C68.transform.target_interest.z;
-        approach_vec3(&cm_80452C68.transform.target_position,
-                      &cm_80452C68.transform.position, cm_803BCCA0.x68);
+        dx2 = cm_80452C68.transform.target_position.x -
+              cm_80452C68.transform.position.x;
+        smooth2 = cm_803BCCA0.x68;
+        dy2 = cm_80452C68.transform.target_position.y -
+              cm_80452C68.transform.position.y;
+        dz2 = cm_80452C68.transform.target_position.z -
+              cm_80452C68.transform.position.z;
+        cm_80452C68.transform.position.x += dx2 * smooth2;
+        cm_80452C68.transform.position.y += dy2 * smooth2;
+        cm_80452C68.transform.position.z += dz2 * smooth2;
         return;
     }
 
@@ -2585,6 +2585,14 @@ void Camera_8002D85C(void* unused)
     f32 horiz_dist;
     f32 delta;
     f32 distance;
+    f32 smooth;
+    f32 dx;
+    f32 dz;
+    f32 dy;
+    f32 smooth2;
+    f32 dx2;
+    f32 dz2;
+    f32 dy2;
     u8 _pad[16];
     CameraBounds bounds2;
     CameraBounds bounds;
@@ -2601,8 +2609,16 @@ void Camera_8002D85C(void* unused)
             cm_80452C68.transform.target_interest.x = subj_pos->x;
             cm_80452C68.transform.target_interest.y = subj_pos->y;
             cm_80452C68.transform.target_interest.z = subj_pos->z;
-            approach_vec3(&cm_80452C68.transform.target_interest,
-                          &cm_80452C68.transform.interest, cm_803BCCA0.x64);
+            dx = cm_80452C68.transform.target_interest.x -
+                 cm_80452C68.transform.interest.x;
+            smooth = cm_803BCCA0.x64;
+            dy = cm_80452C68.transform.target_interest.y -
+                 cm_80452C68.transform.interest.y;
+            dz = cm_80452C68.transform.target_interest.z -
+                 cm_80452C68.transform.interest.z;
+            cm_80452C68.transform.interest.x += dx * smooth;
+            cm_80452C68.transform.interest.y += dy * smooth;
+            cm_80452C68.transform.interest.z += dz * smooth;
         }
 
         cm_80452C68.transform.target_fov = cm_803BCCA0.x6C;
@@ -2646,8 +2662,16 @@ void Camera_8002D85C(void* unused)
         cm_80452C68.transform.target_position.z =
             horiz_dist * cosf(cm_80452C68.yaw_offset) +
             cm_80452C68.transform.target_interest.z;
-        approach_vec3(&cm_80452C68.transform.target_position,
-                      &cm_80452C68.transform.position, cm_803BCCA0.x68);
+        dx2 = cm_80452C68.transform.target_position.x -
+              cm_80452C68.transform.position.x;
+        smooth2 = cm_803BCCA0.x68;
+        dy2 = cm_80452C68.transform.target_position.y -
+              cm_80452C68.transform.position.y;
+        dz2 = cm_80452C68.transform.target_position.z -
+              cm_80452C68.transform.position.z;
+        cm_80452C68.transform.position.x += dx2 * smooth2;
+        cm_80452C68.transform.position.y += dy2 * smooth2;
+        cm_80452C68.transform.position.z += dz2 * smooth2;
         return;
     }
 
