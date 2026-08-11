@@ -33,24 +33,46 @@ struct mpColl_80458810_t {
 };
 
 static struct mpColl_80458810_t mpColl_80458810;
+static int mpColl_804D6488;
+static int mpColl_804D648C;
+static float mpColl_804D6490_max_x;
+static int mpColl_804D6494_line_id;
+static u32 mpColl_804D6498_flags;
 static bool mpColl_IsEcbTiny;
 static bool (*mpColl_804D64A0)(Fighter_GObj*, int);
 static Fighter_GObj* mpColl_804D64A4;
 static Event mpColl_804D64A8;
 int mpColl_804D64AC;
-int mpColl_804D6488;
-int mpColl_804D648C;
 
-/// @todo float order hack
-const float mpColl_804D7F9C = -F32_MAX;
-const float mpColl_804D7FA0 = F32_MAX;
-const float flt_804D7FF8 = 5.0F;
-const f64 flt_804D8000 = -0.75;
-const f64 flt_804D8008 = 0.75;
-const float flt_804D8010 = -3.0F;
-
-/// @todo float order hack
-const float flt_804D7FD8 = 6.0F;
+static void sdata2_order(void)
+{
+    (void) 45000.0f;
+    (void) -45000.0f;
+    (void) 0.5f;
+    (void) -F32_MAX;
+    (void) F32_MAX;
+    (void) 0.0f;
+    (void) 1.0f;
+    (void) -1.0f;
+    (void) 10.0f;
+    (void) 8.0f;
+    (void) 4.0f;
+    (void) -4.0f;
+    (void) 0.001f;
+    (void) 2.0f;
+    (void) -2.0f;
+    (void) -0.0f;
+    (void) 3.0f;
+    (void) 1.5f;
+    (void) 6.0f;
+    (void) 6.283185307179586;
+    (void) -6.283185307179586;
+    (void) 4503601774854144.0;
+    (void) 5.0f;
+    (void) -0.75;
+    (void) 0.75;
+    (void) -3.0f;
+}
 
 #define CollisionFlagAir_StayAirborne 0x1
 #define CollisionFlagAir_PlatformPassCallback 0x2
@@ -876,7 +898,7 @@ void mpCollSetFacingDir(CollData* coll, int facing_dir)
 
 static float six(void)
 {
-    return flt_804D7FD8;
+    return 6.0F;
 }
 
 #define M_TAU 6.283185307179586
@@ -956,8 +978,8 @@ bool mpColl_80043754(mpColl_Callback cb, CollData* coll, u32 flags)
     y = max_inline(y, dist_top_y);
     x = max_inline(x, y);
 
-    if (x > flt_804D7FD8) {       // 6.0F float order hack
-        steps = x / flt_804D7FD8; // 6.0F float order hack
+    if (x > 6.0F) {
+        steps = x / 6.0F;
         steps = steps + 1;
         vel.x /= steps;
         vel.y /= steps;
@@ -1752,10 +1774,6 @@ bool mpColl_80044E10_RightWall(CollData* coll)
     return hit_wall;
 }
 
-float mpColl_804D6490_max_x;
-int mpColl_804D6494_line_id;
-u32 mpColl_804D6498_flags;
-
 bool mpColl_800454A4_RightWall(CollData* coll)
 {
     u32 flags;
@@ -2083,7 +2101,7 @@ bool mpColl_80046224_LeftWall(CollData* coll)
     int* arr = mpColl_80458810.left;
     int i;
 
-    mpColl_804D6490_max_x = *(float*) &mpColl_804D7FA0;
+    mpColl_804D6490_max_x = F32_MAX;
     for (i = 0; i < mpColl_804D648C; arr++, i++) {
         float f30;
         float f29;
@@ -3395,7 +3413,7 @@ bool mpColl_80049EAC_LeftWall(CollData* coll)
     int i;
 
     mpColl_804D6490_max_x = F32_MAX;
-    for (i = 0; i < mpColl_804D6488; arr++, i++) {
+    for (i = 0; i < mpColl_804D648C; arr++, i++) {
         float top;
         float mid;
         float bot;
@@ -4188,7 +4206,7 @@ bool mpColl_8004BDD4_LeftWall(CollData* coll)
     int line_id2;
 
     hit_wall = false;
-    mpColl_804D6488 = 0;
+    mpColl_804D648C = 0;
     if (mpLib_80054ED8(coll->ceiling.index)) {
         int temp;
         line_id1 = mpLib_80053950_Ceiling(coll->ceiling.index);

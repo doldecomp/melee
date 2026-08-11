@@ -542,7 +542,7 @@ config.libs = [
     MeleeLib(
         "mp (Map)",
         [
-            Object(NonMatching, "melee/mp/mpcoll.c"),
+            Object(Matching, "melee/mp/mpcoll.c"),
             Object(NonMatching, "melee/mp/mplib.c"),
             Object(NonMatching, "melee/mp/mpisland.c"),
         ],
