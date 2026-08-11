@@ -174,6 +174,7 @@ void Camera_80028B9C(int n_subjects)
     Vec3* eye_pos;
     int i;
 
+    camera_sdata2_order();
     interest_pos = &cm_803BCB64.interest->pos;
     cm_80452C68.transform.interest = *interest_pos;
     cm_80452C68.transform.target_interest = *interest_pos;
