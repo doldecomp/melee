@@ -1054,6 +1054,8 @@ void mpColl_80043ADC(CollData* coll)
     coll->cur_pos.x = sp10.x;
 }
 
+#pragma push
+#pragma dont_inline on
 bool mpColl_80043BBC(CollData* coll, int* line_id_out)
 {
     int line_id = mpLinePrevNonFloor(coll->floor.index);
@@ -1075,6 +1077,7 @@ bool mpColl_80043BBC(CollData* coll, int* line_id_out)
     return false;
 }
 
+#pragma pop
 void mpColl_80043C6C(CollData* coll, int line_id, bool ignore_bottom)
 {
     float f1;
@@ -1136,6 +1139,8 @@ void mpColl_80043C6C(CollData* coll, int line_id, bool ignore_bottom)
     }
 }
 
+#pragma push
+#pragma dont_inline on
 bool mpColl_80043E90(CollData* coll, int* line_id_out)
 {
     int line_id = mpLineNextNonFloor(coll->floor.index);
@@ -1157,6 +1162,7 @@ bool mpColl_80043E90(CollData* coll, int* line_id_out)
     return false;
 }
 
+#pragma pop
 void mpColl_80043F40(CollData* coll, int line_id, bool ignore_bottom)
 {
     float f1;
@@ -2331,19 +2337,24 @@ static inline void mpCollFloorInline(CollData* coll, bool ecb_unlocked,
 }
 
 bool mpColl_80046904(CollData* coll, u32 flags)
-{                          // Physics_CollisionAirCallback
-    bool prev_b6;          // r31
-    int squeeze_flags;     // r30
-    int old_squeeze_flags; // r29
-    int squeeze_flags_all; // r28
-    int left_right_flags;  // r23
-    bool touched_floor;    // r22
-    bool platform_pass;    // r25
-    bool stay_airborne;    // r24
-    PAD_STACK(0x8);
+{
+    bool prev_b6;
+    int squeeze_flags;
+    int old_squeeze_flags;
+    int squeeze_flags_all;
+    u32 dead;
+    u32 fl = flags | (dead = 0);
+    CollData* c = coll;
+    bool platform_pass;
+    bool stay_airborne;
+    int left_right_flags;
+    bool touched_floor;
+    UNUSED unsigned char _wpad[8];
+    int wid_floorA;
+    int wid_floorB;
 
-    platform_pass = flags & CollisionFlagAir_PlatformPassCallback;
-    stay_airborne = flags & CollisionFlagAir_StayAirborne;
+    platform_pass = fl & CollisionFlagAir_PlatformPassCallback;
+    stay_airborne = fl & CollisionFlagAir_StayAirborne;
 
     left_right_flags = 0;
     touched_floor = false;
@@ -2360,102 +2371,112 @@ bool mpColl_80046904(CollData* coll, u32 flags)
         x_after_collide_right = 0.0F;
         old_squeeze_flags = squeeze_flags;
         x_after_collide_left = 0.0F;
-        prev_b6 = coll->x34_flags.b6;
+        prev_b6 = c->x34_flags.b6;
         squeeze_flags = 0;
-        if (mpColl_80045B74_LeftWall(coll)) {     // Physics_LeftWallCheckAir
-            if (mpColl_80046224_LeftWall(coll)) { // Physics_LeftWallCollideAir
+        if (mpColl_80045B74_LeftWall(c)) {     // Physics_LeftWallCheckAir
+            if (mpColl_80046224_LeftWall(c)) { // Physics_LeftWallCollideAir
                 left_right_flags |= 1;
                 squeeze_flags |= 8;
             }
-            x_after_collide_left = coll->cur_pos.x;
+            x_after_collide_left = c->cur_pos.x;
         }
 
-        if (mpColl_80044E10_RightWall(coll)) { // Physics_RightWallCheckAir
-            if (mpColl_800454A4_RightWall(
-                    coll)) { // Physics_RightWallCollideAir
+        if (mpColl_80044E10_RightWall(c)) {     // Physics_RightWallCheckAir
+            if (mpColl_800454A4_RightWall(c)) { // Physics_RightWallCollideAir
                 left_right_flags |= 2;
                 squeeze_flags |= 4;
             }
-            x_after_collide_right = coll->cur_pos.x;
+            x_after_collide_right = c->cur_pos.x;
         }
 
-        if (mpColl_80045B74_LeftWall(coll)) {     // Physics_LeftWallCheckAir
-            if (mpColl_80046224_LeftWall(coll)) { // Physics_LeftWallCollideAir
+        if (mpColl_80045B74_LeftWall(c)) {     // Physics_LeftWallCheckAir
+            if (mpColl_80046224_LeftWall(c)) { // Physics_LeftWallCollideAir
                 left_right_flags |= 1;
                 squeeze_flags |= 8;
             }
-            x_after_collide_left = coll->cur_pos.x;
+            x_after_collide_left = c->cur_pos.x;
         }
 
-        if (mpColl_80044E10_RightWall(coll)) { // Physics_RightWallCheckAir
-            if (mpColl_800454A4_RightWall(
-                    coll)) { // Physics_RightWallCollideAir
+        if (mpColl_80044E10_RightWall(c)) {     // Physics_RightWallCheckAir
+            if (mpColl_800454A4_RightWall(c)) { // Physics_RightWallCollideAir
                 left_right_flags |= 2;
                 squeeze_flags |= 4;
             }
-            x_after_collide_right = coll->cur_pos.x;
+            x_after_collide_right = c->cur_pos.x;
         }
 
         if ((squeeze_flags & 0xC) == 0xC) {
-            mpCollSqueezeHorizontal(coll, true, x_after_collide_right,
+            mpCollSqueezeHorizontal(c, true, x_after_collide_right,
                                     x_after_collide_left);
         }
 
         y_after_collide_ceiling = 0.0F;
         y_after_collide_floor = 0.0F;
 
-        if (mpColl_80044AD8_Ceiling(coll, left_right_flags) &&
+        if (mpColl_80044AD8_Ceiling(c, left_right_flags) &&
             mpColl_80044C74_Ceiling(
-                coll)) { // Physics_CeilingCheck, Physics_CeilingCollideAir
-            mpCollCeilingInline(coll);
+                c)) { // Physics_CeilingCheck, Physics_CeilingCollideAir
+            mpCollCeilingInline(c);
 
             squeeze_flags |= 1;
-            y_after_collide_ceiling = coll->cur_pos.y;
+            y_after_collide_ceiling = c->cur_pos.y;
         }
 
         if (platform_pass) {
             r3 = mpColl_80044628_Floor(
-                coll, mpColl_804D64A0, mpColl_804D64A4,
+                c, mpColl_804D64A0, mpColl_804D64A4,
                 left_right_flags); // Physics_FloorCheckAir
         } else {
             r3 = mpColl_80044628_Floor(
-                coll, NULL, NULL,
+                c, NULL, NULL,
                 left_right_flags); // Physics_FloorCheckAir
         }
 
         if (r3) {
             if (stay_airborne) {
-                if (mpColl_80044948_Floor(
-                        coll)) { // Physics_FloorCollideStayAirborne
-                    mpCollFloorInline(coll, false, squeeze_flags);
+                if (mpColl_80044948_Floor(c)) {
+                    if (mpColl_80043BBC(c, &wid_floorA)) {
+                        mpColl_80043C6C(c, wid_floorA,
+                                        false && !(squeeze_flags & 1));
+                    }
+                    if (mpColl_80043E90(c, &wid_floorA)) {
+                        mpColl_80043F40(c, wid_floorA,
+                                        false && !(squeeze_flags & 1));
+                    }
                 }
             } else {
                 bool ecb_unlocked = false;
 
-                if (coll->ecb.bottom.y > 0.0F) {
+                if (c->ecb.bottom.y > 0.0F) {
                     ecb_unlocked = true;
                 }
 
                 if (mpColl_80044838_Floor(
-                        coll, ecb_unlocked &&
-                                  !(squeeze_flags &
-                                    1))) { // Physics_SnapToFloorNoEdgePass
-                    mpCollFloorInline(coll, ecb_unlocked, squeeze_flags);
-
-                    coll->x34_flags.b5 = true;
+                        c, ecb_unlocked &&
+                               !(squeeze_flags &
+                                 1))) { // Physics_SnapToFloorNoEdgePass
+                    if (mpColl_80043BBC(c, &wid_floorB)) {
+                        mpColl_80043C6C(c, wid_floorB,
+                                        ecb_unlocked && !(squeeze_flags & 1));
+                    }
+                    if (mpColl_80043E90(c, &wid_floorB)) {
+                        mpColl_80043F40(c, wid_floorB,
+                                        ecb_unlocked && !(squeeze_flags & 1));
+                    }
+                    c->x34_flags.b5 = true;
                     touched_floor = true;
                 }
             }
 
-            y_after_collide_floor = coll->cur_pos.y;
+            y_after_collide_floor = c->cur_pos.y;
             squeeze_flags |= 2;
-            if (mpColl_80044AD8_Ceiling(coll, left_right_flags) &&
+            if (mpColl_80044AD8_Ceiling(c, left_right_flags) &&
                 mpColl_80044C74_Ceiling(
-                    coll)) { // Physics_CeilingCheck, Physics_CeilingCollideAir
-                mpCollCeilingInline(coll);
+                    c)) { // Physics_CeilingCheck, Physics_CeilingCollideAir
+                mpCollCeilingInline(c);
 
                 squeeze_flags |= 1;
-                y_after_collide_ceiling = coll->cur_pos.y;
+                y_after_collide_ceiling = c->cur_pos.y;
             }
         }
         if ((squeeze_flags & 3) == 3) {
@@ -2465,53 +2486,52 @@ bool mpColl_80046904(CollData* coll, u32 flags)
             } else {
                 airborne = true;
             }
-            mpCollSqueezeVertical(coll, airborne, y_after_collide_ceiling,
+            mpCollSqueezeVertical(c, airborne, y_after_collide_ceiling,
                                   y_after_collide_floor);
         }
         squeeze_flags_all |= squeeze_flags;
-    } while (prev_b6 != coll->x34_flags.b6 ||
-             squeeze_flags != old_squeeze_flags);
+    } while (prev_b6 != c->x34_flags.b6 || squeeze_flags != old_squeeze_flags);
 
-    if (!touched_floor && flags & CollisionFlagAir_CanGrabLedge) {
-        bool on_edge = coll->env_flags & Collide_LeftEdge ||
-                       coll->env_flags & Collide_RightEdge;
+    if (!touched_floor && fl & CollisionFlagAir_CanGrabLedge) {
+        bool on_edge = c->env_flags & Collide_LeftEdge ||
+                       c->env_flags & Collide_RightEdge;
 
-        if (!on_edge && coll->cur_pos.y < coll->prev_pos.y) {
-            if (coll->facing_dir == 1 || coll->facing_dir == 0) {
+        if (!on_edge && c->cur_pos.y < c->prev_pos.y) {
+            if (c->facing_dir == 1 || c->facing_dir == 0) {
                 if (mpColl_80044164(
-                        coll,
-                        &coll->ledge_id_left)) { // Physics_CheckForLeftLedge
+                        c,
+                        &c->ledge_id_left)) { // Physics_CheckForLeftLedge
                     on_edge = true;
-                    coll->env_flags |= Collide_LeftLedgeGrab;
+                    c->env_flags |= Collide_LeftLedgeGrab;
                 } else {
                     on_edge = false;
                 }
                 if (on_edge) {
-                    coll->env_flags |= Collide_LeftLedgeGrab;
+                    c->env_flags |= Collide_LeftLedgeGrab;
                 }
             }
-            if (coll->facing_dir == -1 || coll->facing_dir == 0) {
+            if (c->facing_dir == -1 || c->facing_dir == 0) {
                 if (mpColl_800443C4(
-                        coll,
-                        &coll->ledge_id_right)) { // Physics_CheckForRightLedge
+                        c,
+                        &c->ledge_id_right)) { // Physics_CheckForRightLedge
                     on_edge = true;
-                    coll->env_flags |= Collide_RightLedgeGrab;
+                    c->env_flags |= Collide_RightLedgeGrab;
                 } else {
                     on_edge = false;
                 }
                 if (on_edge) {
-                    coll->env_flags |= Collide_RightLedgeGrab;
+                    c->env_flags |= Collide_RightLedgeGrab;
                 }
             }
         }
     }
 
     if (!(squeeze_flags_all & 8)) {
-        coll->env_flags &= ~Collide_LeftWallMask;
+        c->env_flags &= ~Collide_LeftWallMask;
     }
 
     if (!(squeeze_flags_all & 4)) {
-        coll->env_flags &= ~Collide_RightWallMask;
+        c->env_flags &= ~Collide_RightWallMask;
     }
 
     return touched_floor;
