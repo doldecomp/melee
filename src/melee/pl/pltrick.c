@@ -207,7 +207,9 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
                  ft_800898B4_t* ev_data, u16 attack_instance, s32 arg5,
                  s32 source_ply)
 {
-    Fighter* attacker_fp2;
+    struct {
+        Fighter* fp;
+    } fp2;
     Fighter* attacker_fp;
     Fighter* victim_fp;
     plActionStats* acp;
@@ -275,8 +277,8 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
 
                 acp = Player_GetActionStats(attacker_fp->player_id);
                 ev_reload.x2070_int = *(s32*) &victim_fp->dmg.x18d4;
-                attacker_fp2 = GET_FIGHTER(attacker_gobj);
-                acp2 = Player_GetActionStats(attacker_fp2->player_id);
+                fp2.fp = GET_FIGHTER(attacker_gobj);
+                acp2 = Player_GetActionStats(fp2.fp->player_id);
                 ev_hits.x2070_int = ev_reload.x2070_int;
                 {
                     union Struct2070* ev_hits_ptr = &ev_hits;
@@ -292,8 +294,7 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
 
                 attack_id2 = ev_reload.x2073;
                 if (attack_id2 == 0x63) {
-                    pl_8003FE40(attacker_fp2->player_id,
-                                attacker_fp2->x221F_b4);
+                    pl_8003FE40(fp2.fp->player_id, fp2.fp->x221F_b4);
                 }
 
                 if (!ev_data->x10_b7 &&
@@ -313,8 +314,8 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
                         }
                     }
 
-                    pl_8003DFF4(attacker_fp2->player_id,
-                                attacker_fp2->x221F_b4, attack_id2);
+                    pl_8003DFF4(fp2.fp->player_id, fp2.fp->x221F_b4,
+                                attack_id2);
                 }
 
                 if (attacked_from_behind) {
@@ -323,7 +324,7 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
                     acp->x568++;
                 }
 
-                if (attack_id == 8 || attack_id == 0xB) {
+                if (ev.x2073 == 8 || ev.x2073 == 0xB) {
                     acp->x574++;
                 } else {
                     acp->x570++;
