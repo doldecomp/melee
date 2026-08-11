@@ -379,11 +379,33 @@ HSD_TObjDesc tobjdesc1 = {
     NULL,
 };
 
+static char lbRefract_filename[12] = "LbRf.dat";
+static char lbRefract_symbol[12] = "lbRefData";
+
 /// @todo Only differs by register allocation.
 void lbRefract_800222A4(void)
 {
+    struct lbRefract_DataLayout {
+        Mtx texture_mtx;
+        f32 texture_offset[6];
+        HSD_ImageDesc imagedesc0;
+        HSD_TexLODDesc lod0;
+        HSD_TObjDesc tobj0;
+        HSD_ImageDesc imagedesc1;
+        HSD_TexLODDesc lod1;
+        HSD_TObjDesc tobj1;
+        char filename[12];
+        char symbol[12];
+    };
+
+    lbRefract_CallbackData cb;
+    struct lbRefract_DataLayout* data =
+        (struct lbRefract_DataLayout*) &texture_mtx;
+    u32 i;
+    void* buf;
+
     lbl_804336D0.refractionUserCount = 0;
-    lbArchive_LoadSymbols("LbRf.dat", &refract_data, "lbRefData", 0);
+    lbArchive_LoadSymbols(data->filename, &refract_data, data->symbol, 0);
     {
         s32 buf_size = GXGetTexBufferSize(0x140, 0xF0, 4, 0, 0);
         lbl_804336D0.image_ptr = HSD_MemAlloc(buf_size);
@@ -392,37 +414,28 @@ void lbRefract_800222A4(void)
     lbl_804336D0.unk_C = HSD_MemAlloc(*refract_data * 4);
     lbl_804336D0.unk_8 = HSD_MemAlloc(*refract_data * 0x18);
 
-    {
-        lbRefract_CallbackData cb;
-        size_t i;
-        size_t j;
-        j = 0;
-        for (i = 0; i < *refract_data; i++) {
-            void* buf;
-            buf = HSD_MemAlloc(GXGetTexBufferSize(0x20, 0x20, 3, 0, 0));
-            lbRefract_8002219C(&cb, (s32) buf, 3, 0x20, 0x20);
-            lbRefract_80021CE8(&cb, (s32) i);
+    for (i = 0; i < *refract_data; i++) {
+        buf = HSD_MemAlloc(GXGetTexBufferSize(0x20, 0x20, 3, 0, 0));
+        lbRefract_8002219C(&cb, (s32) buf, 3, 0x20, 0x20);
+        lbRefract_80021CE8(&cb, (s32) i);
 
-            {
-                HSD_ImageDesc* dst = &lbl_804336D0.unk_8[i];
-                *dst = imagedesc0;
-            }
-
-            tobjdesc1.imagedesc = &lbl_804336D0.unk_8[i];
-
-            lbl_804336D0.unk_C[i] = HSD_TObjLoadDesc(&tobjdesc1);
-
-            imagedesc0.image_ptr = lbl_804336D0.image_ptr;
-            imagedesc0.format = 4;
-            imagedesc0.width = 320;
-            imagedesc0.height = 240;
-
-            lbl_804336D0.unk_8[j].image_ptr = buf;
-            lbl_804336D0.unk_8[j].format = 3;
-            lbl_804336D0.unk_8[j].width = 32;
-            lbl_804336D0.unk_8[j].height = 32;
-            j++;
+        {
+            HSD_ImageDesc* dst = &lbl_804336D0.unk_8[i];
+            *dst = data->imagedesc0;
         }
+
+        data->tobj1.imagedesc = &lbl_804336D0.unk_8[i];
+        lbl_804336D0.unk_C[i] = HSD_TObjLoadDesc(&data->tobj1);
+
+        data->imagedesc0.image_ptr = lbl_804336D0.image_ptr;
+        data->imagedesc0.format = 4;
+        data->imagedesc0.width = 320;
+        data->imagedesc0.height = 240;
+
+        lbl_804336D0.unk_8[(s32) i].image_ptr = buf;
+        lbl_804336D0.unk_8[(s32) i].format = 3;
+        lbl_804336D0.unk_8[(s32) i].width = 32;
+        lbl_804336D0.unk_8[(s32) i].height = 32;
     }
 }
 
