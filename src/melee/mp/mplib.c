@@ -5565,12 +5565,16 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
         s16 start;
         s16 count;
     };
-    CollLine* line_base = groundCollLine;
-    CollJoint* j0_r9 = &groundCollJoint[joint_id0];
-    CollJoint* j1_r10 = &groundCollJoint[joint_id1];
+    CollLine* line_base;
+    CollJoint* j0_r9;
     int i;
-    int vstart0;
     int vcount0;
+    int vstart0;
+    CollJoint* j1_r10;
+
+    line_base = groundCollLine;
+    j0_r9 = &groundCollJoint[joint_id0];
+    j1_r10 = &groundCollJoint[joint_id1];
 
     for (i = 0; i < 5; i++) {
         int j;
