@@ -5757,6 +5757,7 @@ void mpLib_80058614_Floor(void)
     int count_r5;
     int i;
     int j;
+    float* left;
     PAD_STACK(8);
 
     joint_r7 = groundCollJoint;
@@ -5771,9 +5772,10 @@ void mpLib_80058614_Floor(void)
         return;
     }
 
+    left = &mpLib_80458868[1].left;
     mpLib_80458868[1].right = -F32_MAX;
     mpLib_80458868[1].top = -F32_MAX;
-    mpLib_80458868[1].left = F32_MAX;
+    *left = F32_MAX;
     mpLib_80458868[1].bottom = F32_MAX;
 
     for (i = 0; i < count_r8; i++, joint_r7++) {
@@ -5824,8 +5826,8 @@ void mpLib_80058614_Floor(void)
                 if (mpLib_80458868[1].right < x0) {
                     mpLib_80458868[1].right = x0;
                 }
-                if (mpLib_80458868[1].left > x0) {
-                    mpLib_80458868[1].left = x0;
+                if (*left > x0) {
+                    *left = x0;
                 }
                 if (mpLib_80458868[1].top < y1) {
                     mpLib_80458868[1].top = y1;
@@ -5836,8 +5838,8 @@ void mpLib_80058614_Floor(void)
                 if (mpLib_80458868[1].right < x1) {
                     mpLib_80458868[1].right = x1;
                 }
-                if (mpLib_80458868[1].left > x1) {
-                    mpLib_80458868[1].left = x1;
+                if (*left > x1) {
+                    *left = x1;
                 }
             }
             if (count_r29 != 0) {
