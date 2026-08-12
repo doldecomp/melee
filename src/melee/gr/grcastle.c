@@ -1460,8 +1460,7 @@ static inline void grCastle_UpdateSatellite(Ground* gp)
                    ->user_data)
                   ->u.castle2.xC4 == 0)))
     {
-        s16 timer = gp->u.castle12.xD2;
-        gp->u.castle12.xD2 = timer - 1;
+        gp->u.castle12.xD2 = gp->u.castle12.xD2 - 1;
         if ((s16) gp->u.castle12.xD2 < 0) {
             s32 base = yakumono_param->x2;
             s32 range_end = yakumono_param->x0;
@@ -1492,17 +1491,10 @@ static inline void grCastle_UpdateSatellite(Ground* gp)
                 total = weights.w[0] + weights.w[1] + weights.w[2];
                 rand = total != 0 ? HSD_Randi(total) : 0;
 
-                slot = 0;
-                rand -= *wp;
-                if (rand >= 0) {
-                    slot = 1;
-                    rand -= *++wp;
-                    if (rand >= 0) {
-                        slot = 2;
-                        rand -= *++wp;
-                        if (rand >= 0) {
-                            slot = 3;
-                        }
+                for (slot = 0; slot < 3; slot++) {
+                    rand -= wp[slot];
+                    if (rand < 0) {
+                        break;
                     }
                 }
                 if (slot == 3) {
@@ -1524,14 +1516,15 @@ static inline void grCastle_UpdateSatellite(Ground* gp)
                         idx = random_idx;
                     }
                     entity = HSD_GObj_Entities->x14;
-
-                    while (entity != NULL) {
-                        if ((s32) ((Ground*) entity->user_data)->map_id ==
-                            (s16) targets.e[idx].map_id)
-                        {
-                            break;
+                    {
+                        s32 want = (s16) targets.e[idx].map_id;
+                        for (; entity != NULL; entity = entity->next) {
+                            if ((s32) ((Ground*) entity->user_data)->map_id ==
+                                want)
+                            {
+                                break;
+                            }
                         }
-                        entity = entity->next;
                     }
                     if (entity != NULL) {
                         sat_gp->u.castle7.xD4 = (u32) Ground_801C3FA4(
