@@ -17,7 +17,7 @@ jobs:
     name: Ninja
     runs-on: ubuntu-latest
     if: github.repository == 'doldecomp/melee'
-    container: ghcr.io/doldecomp/build-melee:main
+    container: ghcr.io/doldecomp/melee-build:main
     strategy:
       fail-fast: false
       matrix:
@@ -246,7 +246,7 @@ jobs:
     if: github.repository == 'doldecomp/melee'
     env:
       REGISTRY: ghcr.io
-      IMAGE: doldecomp/build-melee:main
+      IMAGE: doldecomp/melee-build:main
     steps:
     - uses: actions/checkout@v6
       with:
