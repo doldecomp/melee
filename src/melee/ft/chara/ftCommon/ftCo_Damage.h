@@ -35,6 +35,6 @@
 /* 090324 */ void ftCo_DamageFlyRoll_IASA(Fighter_GObj* gobj);
 /* 09035C */ void ftCo_DamageFlyRoll_Phys(Fighter_GObj* gobj);
 /* 0904C0 */ void ftCo_DamageFlyRoll_Coll(Fighter_GObj* gobj);
-/* 3C5520 */ extern int ftCo_803C5520[2][12];
+/* 3C5520 */ extern int ftCo_803C5520[2][4][3];
 
 #endif
