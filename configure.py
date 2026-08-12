@@ -533,7 +533,7 @@ config.libs = [
             Object(Matching, "melee/pl/player.c"),
             Object(Matching, "melee/pl/plstale.c"),
             Object(Matching, "melee/pl/plattack.c"),
-            Object(NonMatching, "melee/pl/pltrick.c"),
+            Object(Matching, "melee/pl/pltrick.c"),
             Object(Matching, "melee/pl/plbonus.c"),
             Object(Matching, "melee/pl/plbonuslib.c"),
             Object(Matching, "melee/pl/pl_040D.c"),
@@ -554,7 +554,7 @@ config.libs = [
             Object(Matching, "melee/ef/eflib.c"),
             Object(NonMatching, "melee/ef/efsync.c"),
             Object(Matching, "melee/ef/efalt.c"),
-            Object(NonMatching, "melee/ef/efasync.c"),
+            Object(Matching, "melee/ef/efasync.c"),
         ],
     ),
     MeleeLib(
