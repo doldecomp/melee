@@ -5745,8 +5745,9 @@ void mpLib_80058614_Floor(void)
 {
     // CollLine* var_r31;
     CollJoint* joint_r7;
-    int count_r8;
+    CollJoint* scan_r3;
     int count_r5;
+    int count_r8;
     int i;
     int j;
     float* bottom;
@@ -5756,10 +5757,10 @@ void mpLib_80058614_Floor(void)
     PAD_STACK(8);
 
     bottom = (float*) mpLib_80458868;
-    joint_r7 = groundCollJoint;
+    scan_r3 = (joint_r7 = groundCollJoint);
     count_r8 = mpLib_804D64B4->joint_count;
-    for (count_r5 = 0; count_r5 < count_r8; count_r5++) {
-        if (joint_r7[count_r5].xE) {
+    for (count_r5 = 0; count_r5 < count_r8; count_r5++, scan_r3++) {
+        if (scan_r3->xE) {
             break;
         }
     }
