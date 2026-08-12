@@ -5757,6 +5757,7 @@ void mpLib_80058614_Floor(void)
     int count_r5;
     int i;
     int j;
+    float* top;
     float* left;
     PAD_STACK(8);
 
@@ -5772,9 +5773,10 @@ void mpLib_80058614_Floor(void)
         return;
     }
 
+    top = &mpLib_80458868[1].top;
     left = &mpLib_80458868[1].left;
     mpLib_80458868[1].right = -F32_MAX;
-    mpLib_80458868[1].top = -F32_MAX;
+    *top = -F32_MAX;
     *left = F32_MAX;
     mpLib_80458868[1].bottom = F32_MAX;
 
@@ -5817,8 +5819,8 @@ void mpLib_80058614_Floor(void)
                 x1 = v1->pos.x;
                 y1 = v1->pos.y;
 
-                if (mpLib_80458868[1].top < y0) {
-                    mpLib_80458868[1].top = y0;
+                if (*top < y0) {
+                    *top = y0;
                 }
                 if (mpLib_80458868[1].bottom > y0) {
                     mpLib_80458868[1].bottom = y0;
@@ -5829,8 +5831,8 @@ void mpLib_80058614_Floor(void)
                 if (*left > x0) {
                     *left = x0;
                 }
-                if (mpLib_80458868[1].top < y1) {
-                    mpLib_80458868[1].top = y1;
+                if (*top < y1) {
+                    *top = y1;
                 }
                 if (mpLib_80458868[1].bottom > y1) {
                     mpLib_80458868[1].bottom = y1;
