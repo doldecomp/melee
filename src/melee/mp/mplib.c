@@ -5749,11 +5749,11 @@ void mpLib_80058614_Floor(void)
     int count_r5;
     int count_r8;
     int i;
-    int j;
     float* bottom;
     float* top;
     float* left;
     float* right;
+    int j;
     PAD_STACK(8);
 
     bottom = (float*) mpLib_80458868;
