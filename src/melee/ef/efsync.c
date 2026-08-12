@@ -16,6 +16,16 @@
 
 extern EF_DAT_Entry efAsync_DatEntries[51];
 
+static inline EF_Effect* efSync_GetEffect(void* ret_obj)
+{
+    return (EF_Effect*) ret_obj;
+}
+
+static inline HSD_Generator* efSync_GetGenerator(HSD_Generator* generator)
+{
+    return generator;
+}
+
 // Routes gfx_id to a specific spawn handler:
 //
 // .--------------------------------------------.
@@ -30,16 +40,6 @@ extern EF_DAT_Entry efAsync_DatEntries[51];
 //
 // Effects attach to a parent gobj and optionally a jobj for
 // position/rotation inheritance. Note there's variadic args!
-static inline EF_Effect* efSync_GetEffect(void* ret_obj)
-{
-    return (EF_Effect*) ret_obj;
-}
-
-static inline HSD_Generator* efSync_GetGenerator(HSD_Generator* generator)
-{
-    return generator;
-}
-
 void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
 {
     va_list vlist;
