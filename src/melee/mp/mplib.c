@@ -5592,7 +5592,9 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
 
         pair = (struct pair*) j0_r9->inner + i;
         count = pair->count;
-        lines = &line_base[idx = pair->start];
+        idx = pair->start;
+        lines = &line_base[idx];
+        (void) idx;
         for (j = 0; j < count; j++, idx++) {
             temp = lines[j].x0->prev_id1;
             if (temp != -1) {
