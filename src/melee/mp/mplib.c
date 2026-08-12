@@ -5757,10 +5757,13 @@ void mpLib_80058614_Floor(void)
     int count_r5;
     int i;
     int j;
+    float* bottom;
     float* top;
     float* left;
+    float* right;
     PAD_STACK(8);
 
+    bottom = (float*) mpLib_80458868;
     joint_r7 = groundCollJoint;
     count_r8 = mpLib_804D64B4->joint_count;
     for (count_r5 = 0; count_r5 < count_r8; count_r5++) {
@@ -5773,12 +5776,13 @@ void mpLib_80058614_Floor(void)
         return;
     }
 
-    top = &mpLib_80458868[1].top;
-    left = &mpLib_80458868[1].left;
-    mpLib_80458868[1].right = -F32_MAX;
+    top = bottom + 4;
+    left = bottom + 6;
+    right = bottom + 7;
+    *right = -F32_MAX;
     *top = -F32_MAX;
     *left = F32_MAX;
-    mpLib_80458868[1].bottom = F32_MAX;
+    *(bottom += 5) = F32_MAX;
 
     for (i = 0; i < count_r8; i++, joint_r7++) {
         joint_r7->xE = false;
@@ -5822,11 +5826,11 @@ void mpLib_80058614_Floor(void)
                 if (*top < y0) {
                     *top = y0;
                 }
-                if (mpLib_80458868[1].bottom > y0) {
-                    mpLib_80458868[1].bottom = y0;
+                if (*bottom > y0) {
+                    *bottom = y0;
                 }
-                if (mpLib_80458868[1].right < x0) {
-                    mpLib_80458868[1].right = x0;
+                if (*right < x0) {
+                    *right = x0;
                 }
                 if (*left > x0) {
                     *left = x0;
@@ -5834,11 +5838,11 @@ void mpLib_80058614_Floor(void)
                 if (*top < y1) {
                     *top = y1;
                 }
-                if (mpLib_80458868[1].bottom > y1) {
-                    mpLib_80458868[1].bottom = y1;
+                if (*bottom > y1) {
+                    *bottom = y1;
                 }
-                if (mpLib_80458868[1].right < x1) {
-                    mpLib_80458868[1].right = x1;
+                if (*right < x1) {
+                    *right = x1;
                 }
                 if (*left > x1) {
                     *left = x1;
