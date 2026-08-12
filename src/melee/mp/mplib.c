@@ -5578,26 +5578,25 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
         struct pair* pair; /* r4 */
         int count;         /* r0 */
         int temp;          /* r0 */
-        CollLine* lines;   /* r5 */
 
         pair = (struct pair*) j0_r9->inner + i;
         count = pair->count;
         idx = pair->start;
-        lines = &line_base[idx];
+        pair = (struct pair*) &line_base[idx];
         (void) idx;
         for (j = 0; j < count; j++, idx++) {
-            temp = lines[j].x0->prev_id1;
+            temp = ((CollLine*) pair)[j].x0->prev_id1;
             if (temp != -1) {
                 temp = line_base[temp].x0->next_id1;
                 if (temp != -1 && idx != temp) {
-                    lines[j].x0->prev_id1 = -1;
+                    ((CollLine*) pair)[j].x0->prev_id1 = -1;
                 }
             }
-            temp = lines[j].x0->next_id1;
+            temp = ((CollLine*) pair)[j].x0->next_id1;
             if (temp != -1) {
                 temp = line_base[temp].x0->prev_id1;
                 if (temp != -1 && idx != temp) {
-                    lines[j].x0->next_id1 = -1;
+                    ((CollLine*) pair)[j].x0->next_id1 = -1;
                 }
             }
         }
@@ -5605,20 +5604,20 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
         pair = (struct pair*) j1_r10->inner + i;
         count = pair->count;
         idx = pair->start;
-        lines = &line_base[idx];
+        pair = (struct pair*) &line_base[idx];
         for (j = 0; j < count; j++, idx++) {
-            temp = lines[j].x0->prev_id1;
+            temp = ((CollLine*) pair)[j].x0->prev_id1;
             if (temp != -1) {
                 temp = line_base[temp].x0->next_id1;
                 if (temp != -1 && idx != temp) {
-                    lines[j].x0->prev_id1 = -1;
+                    ((CollLine*) pair)[j].x0->prev_id1 = -1;
                 }
             }
-            temp = lines[j].x0->next_id1;
+            temp = ((CollLine*) pair)[j].x0->next_id1;
             if (temp != -1) {
                 temp = line_base[temp].x0->prev_id1;
                 if (temp != -1 && idx != temp) {
-                    lines[j].x0->next_id1 = -1;
+                    ((CollLine*) pair)[j].x0->next_id1 = -1;
                 }
             }
         }
