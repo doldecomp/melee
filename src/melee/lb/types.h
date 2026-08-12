@@ -141,7 +141,7 @@ struct ShieldDesc {
 };
 
 struct lbRefract_CallbackData {
-    s32 buffer;      /// @brief Base address of texture buffer.
+    void* buffer;    /// @brief Base address of texture buffer.
     s32 format;      /// @brief Texture format (3=IA4, 4=IA8, 6=RGBA8).
     s32 width;       /// @brief Texture width in pixels.
     s32 height;      /// @brief Texture height in pixels.
