@@ -174,6 +174,23 @@ static void fn_80021F70(lbRefract_CallbackData* data, s32 row, u32 col, s32 r,
         (b >> 3) | ((g * 8 & 0x7E0 & ~0xF800) | ((r << 8) & 0xF800));
 }
 
+static void fn_80021FB4(lbRefract_CallbackData* data, s32 row, u32 col,
+                        u8 arg6, u8 arg7, u8 arg8, u8 arg9)
+{
+    u8* base;
+    s32 offset;
+
+    base = (u8*) data->buffer + ((col >> 2) * data->row_stride) +
+           ((row << 4) & 0xFFFFFFC0);
+    row &= 3;
+    offset = (row + ((col << 2) & 0xC)) * 2;
+    base[offset] = arg9;
+    base += offset;
+    base[1] = arg6;
+    base[0x20] = arg7;
+    base[0x21] = arg8;
+}
+
 static void fn_80021FF8(lbRefract_CallbackData* data, s32 row, u32 col,
                         s32* arg3, s32* arg4, s32* arg5, s32* arg6)
 {
@@ -238,23 +255,6 @@ static void fn_8002206C(lbRefract_CallbackData* data, s32 row, u32 col,
         }
         *arg5 = val;
     }
-}
-
-static void fn_80021FB4(lbRefract_CallbackData* data, s32 row, u32 col,
-                        u8 arg6, u8 arg7, u8 arg8, u8 arg9)
-{
-    u8* base;
-    s32 offset;
-
-    base = (u8*) data->buffer + ((col >> 2) * data->row_stride) +
-           ((row << 4) & 0xFFFFFFC0);
-    row &= 3;
-    offset = (row + ((col << 2) & 0xC)) * 2;
-    base[offset] = arg9;
-    base += offset;
-    base[1] = arg6;
-    base[0x20] = arg7;
-    base[0x21] = arg8;
 }
 
 static void lbRefract_ReadTexCoordRGBA8(lbRefract_CallbackData* data, s32 row,
