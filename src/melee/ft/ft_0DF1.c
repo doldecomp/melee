@@ -48,8 +48,9 @@
 
 bool ftCo_800DF1C8(Fighter* fp)
 {
-    if (ABS(fp->input.cstick1.x) < p_ftCommonData->x3C &&
-        ABS(fp->input.cstick.x) >= p_ftCommonData->x3C)
+    if (ABS(fp->input.cstick1.x) <
+            p_ftCommonData->dash_smash_stick_threshold &&
+        ABS(fp->input.cstick.x) >= p_ftCommonData->dash_smash_stick_threshold)
     {
         return true;
     }

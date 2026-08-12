@@ -138,9 +138,10 @@ static inline void getAccelAndTarget(Fighter* fp, float* accel,
                                      float* target_vel)
 {
     ftCo_DatAttrs* co_attrs = &fp->co_attrs;
-    *accel = fp->input.lstick.x * fp->co_attrs.dash_run_acceleration_a;
-    *accel += fp->input.lstick.x > 0 ? +co_attrs->dash_run_acceleration_b
-                                     : -co_attrs->dash_run_acceleration_b;
+    *accel =
+        fp->input.lstick.x * fp->co_attrs.dash_run_acceleration_stick_based;
+    *accel += fp->input.lstick.x > 0 ? +co_attrs->dash_run_acceleration_base
+                                     : -co_attrs->dash_run_acceleration_base;
     *target_vel = fp->input.lstick.x * co_attrs->dash_run_terminal_velocity;
 }
 

@@ -57,8 +57,9 @@ typedef enum cmd_var_idx {
 static bool checkLStick(Fighter* fp)
 {
     if (fp->input.x668 & HSD_PAD_A &&
-        ABS(fp->input.lstick.x) >= p_ftCommonData->x3C &&
-        fp->x670_timer_lstick_tilt_x < p_ftCommonData->x40)
+        ABS(fp->input.lstick.x) >=
+            p_ftCommonData->dash_smash_stick_threshold &&
+        fp->x670_timer_lstick_tilt_x < p_ftCommonData->dash_smash_window)
     {
         return true;
     }
@@ -88,7 +89,8 @@ bool ftCo_AttackS4_CheckInput(Fighter_GObj* gobj)
 static bool checkFacingDir(Fighter* fp)
 {
     if (fp->input.x668 & HSD_PAD_A &&
-        fp->input.lstick.x * fp->facing_dir >= p_ftCommonData->x3C)
+        fp->input.lstick.x * fp->facing_dir >=
+            p_ftCommonData->dash_smash_stick_threshold)
     {
         return true;
     } else {

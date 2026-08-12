@@ -44,7 +44,8 @@ bool ftCo_Walk_CheckInput_Ottotto(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->input.lstick.x * fp->facing_dir >= p_ftCommonData->x474 &&
+    if (fp->input.lstick.x * fp->facing_dir >=
+            p_ftCommonData->teeter_walk_threshold &&
         ftWalkCommon_800DFC70(gobj))
     {
         ftCo_Walk_Enter(gobj, 0.0F);

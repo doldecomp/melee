@@ -622,7 +622,7 @@ void Fighter_ResetInputData_80068854(Fighter_GObj* gobj)
     fp->input.x668 = 0;
     fp->input.held_inputs = 0;
 
-    fp->x672_input_timer_counter = 0xFE;
+    fp->trigger_analog_timer = 0xFE;
     fp->x671_timer_lstick_tilt_y = 0xFE;
     fp->x670_timer_lstick_tilt_x = 0xFE;
 
@@ -680,7 +680,7 @@ static void Fighter_UnkInitLoad_80068914_Inner1(Fighter_GObj* gobj)
             fp->x673 = fp->x674 = fp->x675 =
 
                 fp->x670_timer_lstick_tilt_x = fp->x671_timer_lstick_tilt_y =
-                    fp->x672_input_timer_counter = 0xFE;
+                    fp->trigger_analog_timer = 0xFE;
 
     fp->x67C = fp->x67D = fp->x67E = fp->x681 = fp->x682 = fp->x67F =
         fp->x680 = fp->x683 = fp->x684 = fp->x685 = fp->x686 = fp->x687 =
@@ -1838,23 +1838,31 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 fp->input.x650 = (tempf0 > tempf1) ? tempf0 : tempf1;
             }
 
-            if (ABS(fp->input.lstick.x) <= p_ftCommonData->x0) {
+            if (ABS(fp->input.lstick.x) <=
+                p_ftCommonData->horizontal_stick_deadzone)
+            {
                 fp->input.lstick.x = 0.0f;
             }
 
-            if (ABS(fp->input.lstick.y) <= p_ftCommonData->x4) {
+            if (ABS(fp->input.lstick.y) <=
+                p_ftCommonData->vertical_stick_deadzone)
+            {
                 fp->input.lstick.y = 0.0f;
             }
 
-            if (ABS(fp->input.cstick.x) <= p_ftCommonData->x0) {
+            if (ABS(fp->input.cstick.x) <=
+                p_ftCommonData->horizontal_stick_deadzone)
+            {
                 fp->input.cstick.x = 0.0f;
             }
 
-            if (ABS(fp->input.cstick.y) <= p_ftCommonData->x4) {
+            if (ABS(fp->input.cstick.y) <=
+                p_ftCommonData->vertical_stick_deadzone)
+            {
                 fp->input.cstick.y = 0.0f;
             }
 
-            if (fp->input.x650 <= p_ftCommonData->x10) {
+            if (fp->input.x650 <= p_ftCommonData->analog_shoulder_deadzone) {
                 fp->input.x650 = 0.0f;
             }
 
@@ -1882,7 +1890,7 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 if (!gm_801A45E8(0)) {
                     if (fp->input.held_inputs & HSD_PAD_Z) {
                         fp->input.held_inputs |= HSD_PAD_LR | HSD_PAD_A;
-                        fp->input.x650 = p_ftCommonData->x14;
+                        fp->input.x650 = p_ftCommonData->z_press_analog_value;
                     }
                 }
             }
@@ -1895,9 +1903,11 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 fp->x676_x = 0xFE;
             }
 
-            if (fp->input.lstick.x >= p_ftCommonData->x8_someStickThreshold) {
+            if (fp->input.lstick.x >=
+                p_ftCommonData->horizontal_stick_smash_deadzone)
+            {
                 if (fp->input.lstick1.x >=
-                    p_ftCommonData->x8_someStickThreshold)
+                    p_ftCommonData->horizontal_stick_smash_deadzone)
                 {
                     // Fighter_ClampThreeValues
                     fp->x670_timer_lstick_tilt_x++;
@@ -1919,10 +1929,10 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                     fp->x2228_b7 = 1;
                 }
             } else if (fp->input.lstick.x <=
-                       -p_ftCommonData->x8_someStickThreshold)
+                       -p_ftCommonData->horizontal_stick_smash_deadzone)
             {
                 if (fp->input.lstick1.x <=
-                    -p_ftCommonData->x8_someStickThreshold)
+                    -p_ftCommonData->horizontal_stick_smash_deadzone)
                 {
                     // Fighter_ClampThreeValues
                     fp->x670_timer_lstick_tilt_x++;
@@ -1955,8 +1965,12 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 fp->x677_y = 0xFE;
             }
 
-            if (fp->input.lstick.y >= p_ftCommonData->xC) {
-                if (fp->input.lstick1.y >= p_ftCommonData->xC) {
+            if (fp->input.lstick.y >=
+                p_ftCommonData->vertical_stick_smash_deadzone)
+            {
+                if (fp->input.lstick1.y >=
+                    p_ftCommonData->vertical_stick_smash_deadzone)
+                {
                     // Fighter_ClampThreeValues
                     fp->x671_timer_lstick_tilt_y++;
                     if (fp->x671_timer_lstick_tilt_y > 0xFE) {
@@ -1976,8 +1990,12 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                     fp->x671_timer_lstick_tilt_y = 0;
                     fp->x2229_b0 = 0;
                 }
-            } else if (fp->input.lstick.y <= -p_ftCommonData->xC) {
-                if (fp->input.lstick1.y <= -p_ftCommonData->xC) {
+            } else if (fp->input.lstick.y <=
+                       -p_ftCommonData->vertical_stick_smash_deadzone)
+            {
+                if (fp->input.lstick1.y <=
+                    -p_ftCommonData->vertical_stick_smash_deadzone)
+                {
                     // Fighter_ClampThreeValues
                     fp->x671_timer_lstick_tilt_y++;
                     if (fp->x671_timer_lstick_tilt_y > 0xFE) {
@@ -2005,7 +2023,7 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
 
             if (lb_8000D148(fp->input.lstick1.x, fp->input.lstick1.y,
                             fp->input.lstick.x, fp->input.lstick.y, 0.0f, 0.0f,
-                            p_ftCommonData->x8_someStickThreshold))
+                            p_ftCommonData->horizontal_stick_smash_deadzone))
             {
                 fp->x67A_y = 0;
                 fp->x679_x = 0;
@@ -2017,12 +2035,12 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 fp->x678 = 0xFE;
             }
 
-            if (fp->input.x650 >= p_ftCommonData->x18) {
-                if (fp->input.x654 >= p_ftCommonData->x18) {
+            if (fp->input.x650 >= p_ftCommonData->shield_press_threshold) {
+                if (fp->input.x654 >= p_ftCommonData->shield_press_threshold) {
                     // Fighter_ClampThreeValues
-                    fp->x672_input_timer_counter++;
-                    if (fp->x672_input_timer_counter > 0xFE) {
-                        fp->x672_input_timer_counter = 0xFE;
+                    fp->trigger_analog_timer++;
+                    if (fp->trigger_analog_timer > 0xFE) {
+                        fp->trigger_analog_timer = 0xFE;
                     }
                     fp->x675++;
                     if (fp->x675 > 0xFE) {
@@ -2036,12 +2054,12 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                     fp->x67B = 0;
                     fp->x678 = 0;
                     fp->x675 = 0;
-                    fp->x672_input_timer_counter = 0;
+                    fp->trigger_analog_timer = 0;
                 }
             } else {
                 fp->x67B = 0xFE;
                 fp->x675 = 0xFE;
-                fp->x672_input_timer_counter = 0xFE;
+                fp->trigger_analog_timer = 0xFE;
             }
 
             if (fp->input.x668 & HSD_PAD_A) {

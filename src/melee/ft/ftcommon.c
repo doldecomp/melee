@@ -638,7 +638,7 @@ void ftCommon_UpdateFacing(Fighter* fp)
 
 void ftCommon_8007DA24(Fighter* fp)
 {
-    if (ABS(fp->input.lstick.x) > p_ftCommonData->x0) {
+    if (ABS(fp->input.lstick.x) > p_ftCommonData->horizontal_stick_deadzone) {
         ftCommon_UpdateFacing(fp);
     }
 }
@@ -1282,7 +1282,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     dst->input = src->input;
     dst->x670_timer_lstick_tilt_x = src->x670_timer_lstick_tilt_x;
     dst->x671_timer_lstick_tilt_y = src->x671_timer_lstick_tilt_y;
-    dst->x672_input_timer_counter = src->x672_input_timer_counter;
+    dst->trigger_analog_timer = src->trigger_analog_timer;
     dst->x673 = src->x673;
     dst->x674 = src->x674;
     dst->x675 = src->x675;

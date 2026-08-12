@@ -130,7 +130,7 @@ void ftCo_Turn_IASA(Fighter_GObj* gobj)
     fn_800C9C2C(gobj);
     if (fp->mv.co.turn.just_turned && fp->mv.co.turn.x8) {
         if (fp->input.lstick.x * fp->mv.co.turn.facing_after >=
-            p_ftCommonData->x3C)
+            p_ftCommonData->dash_smash_stick_threshold)
         {
             ftCo_Dash_Enter(gobj, 0);
         }
@@ -163,8 +163,8 @@ bool fn_800C9C2C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.lstick.x * fp->mv.co.turn.facing_after >=
-            p_ftCommonData->x3C &&
-        fp->x670_timer_lstick_tilt_x < p_ftCommonData->x40)
+            p_ftCommonData->dash_smash_stick_threshold &&
+        fp->x670_timer_lstick_tilt_x < p_ftCommonData->dash_smash_window)
     {
         fp->mv.co.turn.x8 = fp->mv.co.turn.facing_after;
         return true;

@@ -95,8 +95,9 @@ void ftCo_RunBrake_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_ApplyFrictionGround(fp, p_ftCommonData->x60_someFrictionMul *
-                                         fp->co_attrs.gr_friction);
+    ftCommon_ApplyFrictionGround(
+        fp, p_ftCommonData->run_dash_turn_friction_multiplier *
+                fp->co_attrs.gr_friction);
     ftCommon_ApplyGroundMovement(gobj);
 }
 

@@ -102,8 +102,8 @@ int ftCo_80094EA4(HSD_GObj* gobj)
     } else {
         return false;
     }
-    if (ABS(stick_x) >= p_ftCommonData->x3C &&
-        var_f28 < p_ftCommonData->x40 + p_ftCommonData->x44)
+    if (ABS(stick_x) >= p_ftCommonData->dash_smash_stick_threshold &&
+        var_f28 < p_ftCommonData->dash_smash_window + p_ftCommonData->x44)
     {
         msid = stick_x * fp->facing_dir >= 0.0f ? ftCo_MS_HeavyThrowF4
                                                 : ftCo_MS_HeavyThrowB4;
@@ -405,8 +405,8 @@ void ftCo_80095A30(HSD_GObj* gobj)
     if (var_f1 < 0.0f) {
         var_f1 = -var_f1;
     }
-    if (var_f1 >= p_ftCommonData->x3C &&
-        fp->x673 < p_ftCommonData->x40 + p_ftCommonData->x44)
+    if (var_f1 >= p_ftCommonData->dash_smash_stick_threshold &&
+        fp->x673 < p_ftCommonData->dash_smash_window + p_ftCommonData->x44)
     {
         if (fp->input.lstick.x * fp->facing_dir >= 0.0f) {
             var_r0 = 0x6C;
@@ -538,7 +538,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                 }
                 {
                     float fsm = -fp->cmd_timer / fp->frame_speed_mul;
-                    float cd_xB4 = co_attrs->xB4;
+                    float cd_xB4 = co_attrs->heavy_throw_velocity_multiplier;
                     float base_throw_speed =
                         cd_xB4 * ((ftCo_ItemThrowAttrs*)
                                       Fighter_804D6550)[fp->motion_id -

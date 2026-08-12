@@ -35,8 +35,9 @@ bool ftCo_Dash_CheckInput(Fighter_GObj* gobj)
         lsx_abs = -lsx_abs;
     }
 
-    if ((lsx_abs >= p_ftCommonData->x3C) &&
-        ((int) fp->x670_timer_lstick_tilt_x < p_ftCommonData->x40))
+    if ((lsx_abs >= p_ftCommonData->dash_smash_stick_threshold) &&
+        ((int) fp->x670_timer_lstick_tilt_x <
+         p_ftCommonData->dash_smash_window))
     {
         if ((fp->input.lstick.x * fp->facing_dir) < 0.0F) {
             ftCo_Turn_Enter_Smash(gobj);
@@ -155,9 +156,10 @@ void ftCo_Dash_Phys(Fighter_GObj* gobj)
         ftCo_DatAttrs* attrs = &fp->co_attrs;
         float accel, target_vel;
         getAccelAndTarget(fp, &accel, &target_vel);
-        ftCommon_8007C98C(fp, accel, target_vel,
-                          attrs->gr_friction *
-                              p_ftCommonData->x60_someFrictionMul);
+        ftCommon_8007C98C(
+            fp, accel, target_vel,
+            attrs->gr_friction *
+                p_ftCommonData->run_dash_turn_friction_multiplier);
     }
     ftCommon_ApplyGroundMovement(gobj);
 }

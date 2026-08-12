@@ -4841,7 +4841,7 @@ static inline int ftCo_800AA42C_inline0(float clamp, float dist, float near,
     if (dist < near) {
         return 0;
     }
-    raw = 127.0F * p_ftCommonData->x0;
+    raw = 127.0F * p_ftCommonData->horizontal_stick_deadzone;
     if (raw > clamp) {
         raw = clamp;
     }
@@ -5868,7 +5868,7 @@ void ftCo_800AD42C(Fighter* fp)
         ftCo_800B463C(fp, CpuCmd_ReleaseY);
         ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
         ftCo_800B463C(fp, CpuCmd_PressY);
-        ftCo_800B46B8(fp, CpuCmd_WaitFor, p_ftCommonData->x74 + 1);
+        ftCo_800B46B8(fp, CpuCmd_WaitFor, p_ftCommonData->tap_jump_window + 1);
         ftCo_800B463C(fp, CpuCmd_ReleaseY);
         ftCo_800B46B8(fp, CpuCmd_WaitFor, 5);
         ftCo_800B463C(fp, CpuCmd_Done);

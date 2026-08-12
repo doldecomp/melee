@@ -267,7 +267,7 @@ void ftGw_SpecialLw_IASA(HSD_GObj* gobj)
                 stick_range = -stick_range;
             }
 
-            if (stick_range > p_ftCommonData->x0) {
+            if (stick_range > p_ftCommonData->horizontal_stick_deadzone) {
                 float facing_dir = fp->facing_dir;
 
                 ftCommon_UpdateFacing(fp);
@@ -304,7 +304,7 @@ void ftGw_SpecialAirLw_IASA(HSD_GObj* gobj)
                 stick_range = -stick_range;
             }
 
-            if (stick_range > p_ftCommonData->x0) {
+            if (stick_range > p_ftCommonData->horizontal_stick_deadzone) {
                 float facingDir = fp->facing_dir;
                 ftCommon_UpdateFacing(fp);
 

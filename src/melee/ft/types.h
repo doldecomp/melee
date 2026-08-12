@@ -54,40 +54,61 @@ struct FighterPartsTable {
 };
 
 /// Points to data in PlCo.dat
+/// when the game reads the stick, it reads it using an integer value
+/// with a max value of 80, this means the sticks only have 161 values (80 per
+/// side + zero) possible analog values The same thing happens to the triggers,
+/// but it gets quantified to 140 instead
 struct ftCommonData {
-    /*   +0 */ float x0;
-    /*   +4 */ float x4;
-    /*   +8 */ float x8_someStickThreshold;
-    /*   +C */ float xC;
-    /*  +10 */ float x10;
-    /*  +14 */ float x14;
-    /*  +18 */ float x18;
+    /*   +0 */ float horizontal_stick_deadzone; // 0.28
+    /*   +4 */ float vertical_stick_deadzone;   // 0.28
+    // Surprisingly these are 0.25 in vanilla, which is lower than the
+    // absolute stick deadzone above, which is always applied, which is 0.28
+    /*   +8 */ float horizontal_stick_smash_deadzone; // 0.25
+    /*   +C */ float vertical_stick_smash_deadzone;   // 0.25
+    /*  +10 */ float analog_shoulder_deadzone;        // 0.3
+    /*  +14 */ float z_press_analog_value;            // 0.35
+    /*  +18 */ float shield_press_threshold;          // 0.25
     /*  +1C */ int x1C;
     /*  +20 */ float x20_radians;
-    /*  +24 */ float x24;
-    /*  +28 */ float x28;
-    /*  +2C */ float x2C;
-    /*  +30 */ float x30;
+    // Yet another threshold that's lower than the global deadzone, so in
+    // practical terms it goes unused
+    /*  +24 */ float walk_stick_threshold; // 0.18
+    /*  +28 */ float walk_middle_animation_stick_threshold;
+    /*  +2C */ float walk_fast_stick_threshold;
+    // this is the ease out for the walk
+    // strangely enough, this also affects the actual maximum possible
+    // acceleration i.e if this is 0.5 then the maximum possible acceleration
+    // when walking will be 0.5 * walk_acceleration
+    /*  +30 */ float walk_accel_taper_gain;
     /*  +34 */ float x34;
     /*  +38 */ float x38_someLStickXThreshold;
-    /*  +3C */ float x3C;
-    /*  +40 */ int x40;
+    /*  +3C */ float dash_smash_stick_threshold;
+    // Frames since the stick left the deadzone where a dash or a smash can be
+    // input
+    /*  +40 */ int dash_smash_window;
     /*  +44 */ float x44;
     /*  +48 */ float x48;
     /*  +4C */ float x4C;
     /*  +50 */ float x50;
     /*  +54 */ float x54;
     /*  +58 */ float x58_someLStickXThreshold;
-    /*  +5C */ float x5C;
-    /*  +60 */ float x60_someFrictionMul;
+    // ease out for the run
+    /*  +5C */ float run_accel_taper_gain;
+    // Extra frictino multiplier applied to run/dash/turn, since it's 1.0 it
+    // has no effect
+    /*  +60 */ float run_dash_turn_friction_multiplier; // 1.0
     /*  +64 */ float x64;
     /*  +68 */ float x68;
-    /*  +6C */ float x6C;
-    /*  +70 */ float tap_jump_threshold;
-    /*  +6C */ int x74;
+    // the game adds extra friction when the player's speed is above walk speed
+    // only in wait and turn state
+    /*  +6C */ float friction_when_above_walk_speed; // 2.0
+    /*  +70 */ float tap_jump_threshold;             // 0.6625
+    // Frames since the stick left the deadzone where a tap jump can be input
+    /*  +74 */ int tap_jump_window; // 4
     /*  +78 */ float x78;
     /*  +7C */ float tap_jump_release_threshold;
-    /*  +80 */ float x80;
+    // For some strange reason, some ground states have a smaller threshold
+    /*  +80 */ float relaxed_tap_jump_threshold; // 0.5625
     /*  +84 */ float x84;
     /*  +88 */ float x88;
     /*  +8C */ int x8C;
@@ -223,7 +244,9 @@ struct ftCommonData {
     /* +294 */ float x294;
     /* +298 */ float x298;
     /* +29C */ float x29C;
-    /* +2A0 */ int x2A0;
+    // Frames after trigger becomes non 0 where a full press
+    // results in a powershield
+    /* +2A0 */ int powershield_input_window;
     /* +2A4 */ float x2A4;
     /* +2A8 */ float x2A8;
     /* +2AC */ float x2AC;
@@ -331,7 +354,7 @@ struct ftCommonData {
     /* +468 */ float x468;
     /* +46C */ float x46C;
     /* +470 */ float x470;
-    /* +474 */ float x474;
+    /* +474 */ float teeter_walk_threshold; // 0.75
     /* +478 */ float x478;
     /* +47C */ float x47C;
     /* +480 */ float x480;
@@ -688,16 +711,19 @@ struct ftCo_DatAttrs_xBC_t {
 };
 
 typedef struct ftCo_DatAttrs {
-    /* +000 fp+110 */ float walk_init_vel;
-    /* +004 fp+114 */ float walk_accel;
+    // multiplciative walk acceleration, this is based on how much
+    // the control stick is pushed
+    /* +000 fp+110 */ float walk_accel_stick_based;
+    // base walk acceleration, this is always applied when walking
+    /* +004 fp+114 */ float walk_accel_base;
     /* +008 fp+118 */ float walk_max_vel;
     /* +00C fp+11C */ float slow_walk_max;
     /* +010 fp+120 */ float mid_walk_point;
     /* +014 fp+124 */ float fast_walk_min;
     /* +018 fp+128 */ float gr_friction;
     /* +01C fp+12C */ float dash_initial_velocity;
-    /* +020 fp+130 */ float dash_run_acceleration_a;
-    /* +024 fp+134 */ float dash_run_acceleration_b;
+    /* +020 fp+130 */ float dash_run_acceleration_stick_based;
+    /* +024 fp+134 */ float dash_run_acceleration_base;
     /* +028 fp+138 */ float dash_run_terminal_velocity;
     /* +02C fp+13C */ float run_animation_scaling;
     /* +030 fp+140 */ float max_run_brake_frames;
@@ -727,14 +753,16 @@ typedef struct ftCo_DatAttrs {
     /* +090 fp+1A0 */ float initial_shield_size;
     /* +094 fp+1A4 */ float shield_break_initial_velocity;
     /* +098 fp+1A8 */ int rapid_jab_window;
-    /* +09C fp+1AC */ float x9C;
-    /* +0A0 fp+1B0 */ int xA0;
-    /* +0A4 fp+1B4 */ int xA4;
+    /* +09C fp+1AC */ float clank_animation_length;
+    /* +0A0 fp+1B0 */ int hit_spark_variant; // 0 = normal spark, 1 = none
+    /* +0A4 fp+1B4 */ int unused; // This is unused in the entire codebase
     /* +0A8 fp+1B8 */ float ledge_jump_horizontal_velocity;
     /* +0AC fp+1BC */ float ledge_jump_vertical_velocity;
     /* +0B0 fp+1C0 */ float item_throw_velocity_multiplier;
-    /* +0B4 fp+1C4 */ float xB4;
-    /* +0B8 fp+1C8 */ float xB8;
+    /* +0B4 fp+1C4 */ float heavy_throw_velocity_multiplier;
+    // which % of the existing velocity is kept when performing a side special
+    // 1.0 = keep all momentum, 0.0 = stop dead in its tracks
+    /* +0B8 fp+1C8 */ float side_special_ground_speed_retention;
     /* +0BC fp+1CC */ ftCo_DatAttrs_xBC_t xBC;
     /* +0DC fp+1EC */ float xDC;
     /* +0E0 fp+1F0 */ float kirby_b_star_damage;
@@ -755,16 +783,17 @@ typedef struct ftCo_DatAttrs {
     /* +12C fp+23C */ float x12C;
     /* +130 fp+240 */ Vec3 x130;
     /* +13C fp+24C */ float x13C;
-    /* +140 fp+250 */ float x140;
+    // When hit by a screw attack item, the speed is hard set to (0, this, 0)
+    /* +140 fp+250 */ float screw_attack_launch_velocity;
     /* +144 fp+254 */ float x144;
-    /* +148 fp+258 */ float x148;
+    /* +148 fp+258 */ float wall_jump_min_approach_speed;
     /* +14C fp+25C */ float damageice_ice_size;
     /* +150 fp+260 */ float x150_damageice_unk;
     /* +154 fp+264 */ float x154_damageice_unk;
     /* +158 fp+268 */ float damageicejump_vel_y;
     /* +15C fp+26C */ float damageicejump_vel_x_mult;
     /* +160 fp+270 */ float respawn_platform_scale;
-    /* +164 fp+274 */ float x164;
+    /* +164 fp+274 */ float warp_star_hitbox_scale;
     /* +168 fp+278 */ float x168;
     /* +16C fp+27C */ int camera_zoom_target_bone;
     /* +170 fp+280 */ Vec3 x170;
@@ -1268,7 +1297,9 @@ struct Fighter {
     } input;
     /*  fp+670 */ u8 x670_timer_lstick_tilt_x;
     /*  fp+671 */ u8 x671_timer_lstick_tilt_y;
-    /*  fp+672 */ u8 x672_input_timer_counter;
+    // How much time has passed since the analog trigger became non 0
+    // used at the very least for powershield detection
+    /*  fp+672 */ u8 trigger_analog_timer;
     /*  fp+673 */ u8 x673;
     /*  fp+674 */ u8 x674;
     /*  fp+674 */ u8 x675;

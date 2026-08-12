@@ -45,7 +45,7 @@ void ft_80084F3C(Fighter_GObj* gobj)
     f32 friction = co->gr_friction;
     PAD_STACK(8);
     if (ABS(fp->gr_vel) > co->walk_max_vel) {
-        friction *= p_ftCommonData->x6C;
+        friction *= p_ftCommonData->friction_when_above_walk_speed;
     }
     ftCommon_ApplyFrictionGround(fp, friction);
     ftCommon_ApplyGroundMovement(gobj);
@@ -61,7 +61,7 @@ void ft_80084FA8(Fighter_GObj* gobj)
         var_f2 = -var_f2;
     }
     if (var_f2 > co->walk_max_vel) {
-        var_f1 *= p_ftCommonData->x6C;
+        var_f1 *= p_ftCommonData->friction_when_above_walk_speed;
     }
     ft_80085030(gobj, var_f1, fp->facing_dir);
 }

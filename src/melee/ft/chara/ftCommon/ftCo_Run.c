@@ -141,13 +141,13 @@ void ftCo_Run_Phys(Fighter_GObj* gobj)
     if (target_vel) {
         float gr_frac = fp->gr_vel / target_vel;
         if ((gr_frac > 0.0F) && (gr_frac < 1.0F)) {
-            accel *= (1.0F - gr_frac) * p_ftCommonData->x5C;
+            accel *= (1.0F - gr_frac) * p_ftCommonData->run_accel_taper_gain;
         }
     }
     fp->mv.co.run.x4 = target_vel * p_ftCommonData->x440;
     ftCommon_8007C98C(fp, accel, target_vel,
                       attrs->gr_friction *
-                          p_ftCommonData->x60_someFrictionMul);
+                          p_ftCommonData->run_dash_turn_friction_multiplier);
     ftCommon_ApplyGroundMovement(gobj);
 }
 

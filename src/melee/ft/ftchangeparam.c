@@ -66,8 +66,9 @@ void ftCo_800CF6E8(ftCo_DatAttrs* attr, f32 scale)
         attr->item_throw_velocity_multiplier =
             ftCo_CalcYScaledKnockback(attr->item_throw_velocity_multiplier,
                                       scale, Fighter_804D6524->x58);
-        attr->xB4 =
-            ftCo_CalcYScaledKnockback(attr->xB4, scale, Fighter_804D6524->x5C);
+        attr->heavy_throw_velocity_multiplier =
+            ftCo_CalcYScaledKnockback(attr->heavy_throw_velocity_multiplier,
+                                      scale, Fighter_804D6524->x5C);
         cur = &attr->xBC.size;
         *cur = ftCo_CalcYScaledKnockback(*cur, scale, Fighter_804D6524->x60);
         cur = &attr->xDC;
@@ -88,8 +89,8 @@ void ftCo_800CF6E8(ftCo_DatAttrs* attr, f32 scale)
             attr->landingairlw_lag, scale, Fighter_804D6524->x80);
         attr->name_tag_height = ftCo_CalcYScaledKnockback(
             attr->name_tag_height, scale, Fighter_804D6524->x84);
-        attr->x140 = ftCo_CalcYScaledKnockback(attr->x140, scale,
-                                               Fighter_804D6524->x88);
+        attr->screw_attack_launch_velocity = ftCo_CalcYScaledKnockback(
+            attr->screw_attack_launch_velocity, scale, Fighter_804D6524->x88);
         attr->damageicejump_vel_y = ftCo_CalcYScaledKnockback(
             attr->damageicejump_vel_y, scale, Fighter_804D6524->x8C);
         attr->damageicejump_vel_x_mult = ftCo_CalcYScaledKnockback(
@@ -197,8 +198,8 @@ void ftCo_800D105C(Fighter_GObj* fgp)
 
     /// if bunnyhood != NULL
     if (fp->x197C != NULL) {
-        fp->co_attrs.dash_run_acceleration_a *= Fighter_804D6520->x4;
-        fp->co_attrs.dash_run_acceleration_b *= Fighter_804D6520->x8;
+        fp->co_attrs.dash_run_acceleration_stick_based *= Fighter_804D6520->x4;
+        fp->co_attrs.dash_run_acceleration_base *= Fighter_804D6520->x8;
         fp->co_attrs.dash_run_terminal_velocity *= Fighter_804D6520->xC;
         fp->co_attrs.jump_h_initial_velocity *= Fighter_804D6520->x10;
         fp->co_attrs.jump_v_initial_velocity *= Fighter_804D6520->x14;

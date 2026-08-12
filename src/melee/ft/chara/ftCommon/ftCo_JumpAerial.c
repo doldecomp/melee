@@ -51,7 +51,7 @@ bool ft_did_jump(Fighter* fp, bool arg1)
 {
     if (fp->x1968_jumpsUsed < fp->co_attrs.max_jumps &&
         ((fp->input.lstick.y >= p_ftCommonData->tap_jump_threshold &&
-          fp->x671_timer_lstick_tilt_y < p_ftCommonData->x74) ||
+          fp->x671_timer_lstick_tilt_y < p_ftCommonData->tap_jump_window) ||
          fp->input.x668 & HSD_PAD_XY) &&
         !(arg1 && (fp->x68A < p_ftCommonData->x1C)))
     {
