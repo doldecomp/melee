@@ -6757,7 +6757,6 @@ void mpLib_80059E60(void)
 void mpLib_DrawCrosses(s16* idx, int len, GXColor arg2)
 {
     Vec3 sp34;
-    s16* idx_ptr;
     int i;
     Vec3* vtx;
     int idx_i;
@@ -6765,15 +6764,14 @@ void mpLib_DrawCrosses(s16* idx, int len, GXColor arg2)
     PAD_STACK(4);
 
     vtx = mpLib_80458888;
-    for (idx_ptr = &idx[idx_i = 0], out_count = 0;
+    for (idx_i = 0, out_count = 0;
          idx_i < len && out_count < (signed) ARRAY_SIZE(mpLib_80458888);
          idx_i++)
     {
-        if (Ground_801C2D24(*idx_ptr, &sp34)) {
+        if (Ground_801C2D24(idx[idx_i], &sp34)) {
             vtx[out_count] = sp34;
             out_count += 1;
         }
-        idx_ptr += 1;
     }
 
     if (!out_count) {
