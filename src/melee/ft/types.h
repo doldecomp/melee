@@ -53,38 +53,24 @@ struct FighterPartsTable {
     u32 parts_num;
 };
 
-/// Points to data in PlCo.dat
-/// when the game reads the stick, it reads it using an integer value
-/// with a max value of 80, this means the sticks only have 161 values (80 per
-/// side + zero) possible analog values The same thing happens to the triggers,
-/// but it gets quantified to 140 instead
+/// @todo Determine size and add remaining members.
 struct ftCommonData {
-    /*   +0 */ float horizontal_stick_deadzone; // 0.28
-    /*   +4 */ float vertical_stick_deadzone;   // 0.28
-    // Surprisingly these are 0.25 in vanilla, which is lower than the
-    // absolute stick deadzone above, which is always applied, which is 0.28
-    /*   +8 */ float horizontal_stick_smash_deadzone; // 0.25
-    /*   +C */ float vertical_stick_smash_deadzone;   // 0.25
-    /*  +10 */ float analog_shoulder_deadzone;        // 0.3
-    /*  +14 */ float z_press_analog_value;            // 0.35
-    /*  +18 */ float shield_press_threshold;          // 0.25
+    /*   +0 */ float horizontal_stick_deadzone;
+    /*   +4 */ float vertical_stick_deadzone;
+    /*   +8 */ float horizontal_stick_smash_deadzone;
+    /*   +C */ float vertical_stick_smash_deadzone;
+    /*  +10 */ float analog_shoulder_deadzone;
+    /*  +14 */ float z_press_analog_value;
+    /*  +18 */ float shield_press_threshold;
     /*  +1C */ int x1C;
     /*  +20 */ float x20_radians;
-    // Yet another threshold that's lower than the global deadzone, so in
-    // practical terms it goes unused
-    /*  +24 */ float walk_stick_threshold; // 0.18
+    /*  +24 */ float walk_stick_threshold;
     /*  +28 */ float walk_middle_animation_stick_threshold;
     /*  +2C */ float walk_fast_stick_threshold;
-    // this is the ease out for the walk
-    // strangely enough, this also affects the actual maximum possible
-    // acceleration i.e if this is 0.5 then the maximum possible acceleration
-    // when walking will be 0.5 * walk_acceleration
     /*  +30 */ float walk_accel_taper_gain;
     /*  +34 */ float x34;
     /*  +38 */ float x38_someLStickXThreshold;
     /*  +3C */ float dash_smash_stick_threshold;
-    // Frames since the stick left the deadzone where a dash or a smash can be
-    // input
     /*  +40 */ int dash_smash_window;
     /*  +44 */ float x44;
     /*  +48 */ float x48;
@@ -92,23 +78,16 @@ struct ftCommonData {
     /*  +50 */ float x50;
     /*  +54 */ float x54;
     /*  +58 */ float x58_someLStickXThreshold;
-    // ease out for the run
     /*  +5C */ float run_accel_taper_gain;
-    // Extra frictino multiplier applied to run/dash/turn, since it's 1.0 it
-    // has no effect
-    /*  +60 */ float run_dash_turn_friction_multiplier; // 1.0
+    /*  +60 */ float run_dash_turn_friction_multiplier;
     /*  +64 */ float x64;
     /*  +68 */ float x68;
-    // the game adds extra friction when the player's speed is above walk speed
-    // only in wait and turn state
-    /*  +6C */ float friction_when_above_walk_speed; // 2.0
-    /*  +70 */ float tap_jump_threshold;             // 0.6625
-    // Frames since the stick left the deadzone where a tap jump can be input
-    /*  +74 */ int tap_jump_window; // 4
+    /*  +6C */ float friction_when_above_walk_speed;
+    /*  +70 */ float tap_jump_threshold;
+    /*  +74 */ int tap_jump_window;
     /*  +78 */ float x78;
     /*  +7C */ float tap_jump_release_threshold;
-    // For some strange reason, some ground states have a smaller threshold
-    /*  +80 */ float relaxed_tap_jump_threshold; // 0.5625
+    /*  +80 */ float relaxed_tap_jump_threshold;
     /*  +84 */ float x84;
     /*  +88 */ float x88;
     /*  +8C */ int x8C;
@@ -244,8 +223,6 @@ struct ftCommonData {
     /* +294 */ float x294;
     /* +298 */ float x298;
     /* +29C */ float x29C;
-    // Frames after trigger becomes non 0 where a full press
-    // results in a powershield
     /* +2A0 */ int powershield_input_window;
     /* +2A4 */ float x2A4;
     /* +2A8 */ float x2A8;
@@ -354,7 +331,7 @@ struct ftCommonData {
     /* +468 */ float x468;
     /* +46C */ float x46C;
     /* +470 */ float x470;
-    /* +474 */ float teeter_walk_threshold; // 0.75
+    /* +474 */ float teeter_walk_threshold;
     /* +478 */ float x478;
     /* +47C */ float x47C;
     /* +480 */ float x480;
@@ -504,8 +481,7 @@ struct ftCommonData {
     /* +6CC */ int x6CC;
     /* +6D0 */ float x6D0;
     /* +6D4 */ int x6D4;
-    /// @todo expand to actual size
-    /* +6D8 */ int x6D8[1];
+    /* +6D8 */ int x6D8[1]; ///< @todo expand to actual size
     /* +6DC */ GXColor x6DC_colorsByPlayer[4];
     /* +6EC */ u8 x6EC[0x6F0 - 0x6EC];
     /* +6F0 */ float metal_armor;
@@ -525,8 +501,8 @@ struct ftCommonData {
     /* +728 */ float x728;
     /* +72C */ float x72C;
     /* +730 */ float x730;
-    /* +734 */ float x734; ///< leadead capture timer decrement
-    /* +738 */ float x738; ///< leadead grab break threshold
+    /* +734 */ float leadead_grab_timer_step;
+    /* +738 */ float leadead_grab_break_threshold;
     /* +73C */ int x73C;
     /* +740 */ float x740;
     /* +744 */ float x744;
@@ -580,7 +556,6 @@ struct ftCommonData {
     /* +804 */ float x804;
     /* +804 */ Vec3 x808;
     /* +814 */ int x814;
-    // lots of more data following, exact size to be determined
 };
 
 typedef struct _FtSFXArr {
