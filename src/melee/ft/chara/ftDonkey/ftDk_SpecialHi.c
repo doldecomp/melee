@@ -115,7 +115,8 @@ void ftDk_SpecialAirHi_Phys(HSD_GObj* gobj)
     } else {
         grav_mul = donkey_attr->SpecialHi.x50_AERIAL_GRAVITY;
     }
-    ftCommon_Fall(fp, grav_mul * fp->co_attrs.grav, fp->co_attrs.terminal_vel);
+    ftCommon_Fall(fp, grav_mul * fp->co_attrs.gravity,
+                  fp->co_attrs.terminal_velocity);
     ftCommon_8007D344(fp, 0, donkey_attr->SpecialHi.x60_AERIAL_MOBILITY,
                       donkey_attr->SpecialHi.x58_AERIAL_HORIZONTAL_VELOCITY);
 }

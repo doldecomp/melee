@@ -66,7 +66,7 @@ void ftCo_Turn_Enter(Fighter_GObj* gobj, FtMotionId msid, MotionFlags flags,
 void ftCo_Turn_Enter_Basic(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    float frames = fp->co_attrs.frames_to_change_direction_on_standing_turn;
+    float frames = fp->co_attrs.standing_turn_frames;
     PAD_STACK(8);
     ftCo_Turn_Enter(gobj, ftCo_MS_Turn, Ft_MF_None, 0.0F, frames, 0.0F);
 }

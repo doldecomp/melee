@@ -1629,14 +1629,14 @@ void ftCo_Catch_Phys(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCommon_ApplyFrictionGround(fp, p_ftCommonData->x64 *
-                                         fp->co_attrs.gr_friction);
+                                         fp->co_attrs.ground_friction);
     ftCommon_ApplyGroundMovement(gobj);
 }
 
 void ftCo_CatchDash_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ft_80085030(gobj, p_ftCommonData->x64 * fp->co_attrs.gr_friction,
+    ft_80085030(gobj, p_ftCommonData->x64 * fp->co_attrs.ground_friction,
                 fp->facing_dir);
 }
 void ftCo_Catch_Coll(Fighter_GObj* gobj)
@@ -2232,7 +2232,7 @@ void ftCo_CatchCut_Phys(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->ground_or_air == GA_Ground) {
         ftCommon_ApplyFrictionGround(fp, p_ftCommonData->x64 *
-                                             fp->co_attrs.gr_friction);
+                                             fp->co_attrs.ground_friction);
         ftCommon_ApplyGroundMovement(gobj);
         return;
     }
@@ -2985,7 +2985,7 @@ void ftCo_CaptureJump_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     PAD_STACK(8);
-    ftCommon_Fall(fp, fp->co_attrs.grav, fp->co_attrs.terminal_vel);
+    ftCommon_Fall(fp, fp->co_attrs.gravity, fp->co_attrs.terminal_velocity);
     ftCommon_8007D268(fp);
 }
 

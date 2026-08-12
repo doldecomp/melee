@@ -189,7 +189,7 @@ void ftCo_PassiveWall_Phys(Fighter_GObj* gobj)
         if (fp->fall_fast) {
             ftCommon_FallFast(fp);
         } else {
-            ftCommon_Fall(fp, co->grav, co->terminal_vel);
+            ftCommon_Fall(fp, co->gravity, co->terminal_velocity);
         }
         ftCommon_8007D140(fp, 0.0F, 0.0F, fp->co_attrs.aerial_friction);
     }

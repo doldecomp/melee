@@ -16,7 +16,7 @@ void ft_80084E1C(Fighter_GObj* gobj, float threshold, float drift_max,
     if (fp->fall_fast) {
         ftCommon_FallFast(fp);
     } else {
-        ftCommon_Fall(fp, co_attrs->grav, co_attrs->terminal_vel);
+        ftCommon_Fall(fp, co_attrs->gravity, co_attrs->terminal_velocity);
     }
 
     if (ABS(fp->input.lstick.x) >= threshold) {
@@ -34,7 +34,7 @@ void ft_80084EEC(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* co_attrs = getFtAttrs(fp);
 
-    ftCommon_Fall(fp, co_attrs->grav, co_attrs->terminal_vel);
+    ftCommon_Fall(fp, co_attrs->gravity, co_attrs->terminal_velocity);
     ftCommon_ApplyFrictionAir(fp, co_attrs->aerial_friction);
 }
 
@@ -42,7 +42,7 @@ void ft_80084F3C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* co = &fp->co_attrs;
-    f32 friction = co->gr_friction;
+    f32 friction = co->ground_friction;
     PAD_STACK(8);
     if (ABS(fp->gr_vel) > co->walk_max_vel) {
         friction *= p_ftCommonData->friction_when_above_walk_speed;
@@ -56,7 +56,7 @@ void ft_80084FA8(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* co = &fp->co_attrs;
     f32 var_f2 = fp->gr_vel;
-    f32 var_f1 = co->gr_friction;
+    f32 var_f1 = co->ground_friction;
     if (var_f2 < 0.0F) {
         var_f2 = -var_f2;
     }
@@ -72,7 +72,7 @@ void ft_80085004(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     co_attrs = &fp->co_attrs;
 
-    ft_80085030(gobj, co_attrs->gr_friction, fp->facing_dir1);
+    ft_80085030(gobj, co_attrs->ground_friction, fp->facing_dir1);
 }
 
 void ft_80085030(Fighter_GObj* gobj, float gr_friction, float facing_dir)
@@ -93,7 +93,7 @@ void ft_80085088(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     co_attrs = &fp->co_attrs;
 
-    ft_800850E0(gobj, co_attrs->gr_friction, fp->facing_dir);
+    ft_800850E0(gobj, co_attrs->ground_friction, fp->facing_dir);
 }
 
 void ft_800850B4(Fighter_GObj* gobj)
@@ -102,7 +102,7 @@ void ft_800850B4(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     co_attrs = &fp->co_attrs;
 
-    ft_800850E0(gobj, co_attrs->gr_friction, fp->facing_dir1);
+    ft_800850E0(gobj, co_attrs->ground_friction, fp->facing_dir1);
 }
 
 void ft_800850E0(Fighter_GObj* gobj, float arg8, float arg9)

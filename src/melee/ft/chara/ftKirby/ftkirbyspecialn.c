@@ -575,7 +575,7 @@ void ftKb_SpecialHi_800F3B28(Fighter_GObj* gobj)
         var_f5 = 0.0f;
         temp_f3 = fp->gr_vel;
         temp_f2 =
-            temp_f1 * (fp->mv.co.common.x58.x * fp->co_attrs.gr_friction);
+            temp_f1 * (fp->mv.co.common.x58.x * fp->co_attrs.ground_friction);
         var_f1_2 = ABS(fp->gr_vel);
         if (ABS(temp_f2) > var_f1_2) {
             var_f4 = -fp->gr_vel;

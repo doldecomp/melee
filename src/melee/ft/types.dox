@@ -114,3 +114,30 @@
 /** @var ftCommonData::leadead_grab_break_threshold
  * @brief Leadead grab break threshold.
  */
+
+/** @var ftCo_DatAttrs::walk_accel_mul
+ * @brief Multiplciative walk acceleration, based on how much the control stick
+ * is pushed.
+ */
+
+/** @var ftCo_DatAttrs::walk_accel_base
+ * @brief Base walk acceleration, always applied when walking.
+ */
+
+/** @var ftCo_DatAttrs::hit_spark_variant
+ * @brief `0` = normal spark, `1` = none.
+ */
+
+/** @var ftCo_DatAttrs::unused_0
+ * @brief Not used anywhere in the codebase.
+ */
+
+/** @var ftCo_DatAttrs::specials_ground_speed_retention
+ * @brief What percentage of the existing velocity is kept when performing a
+ * side special. `1.0` = keep all momentum, `0.0` = stop dead in its tracks.
+ */
+
+/** @var ftCo_DatAttrs::screw_attack_launch_velocity
+ * @brief When hit by a screw attack item, the speed is hard set to
+ * (0, this, 0).
+ */

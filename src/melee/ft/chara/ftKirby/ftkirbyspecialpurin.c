@@ -963,7 +963,7 @@ void ftKb_PrSpecialNTurn_Phys(Fighter_GObj* gobj)
 void ftKb_PrSpecialNEnd_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_ApplyFrictionGround(fp, fp->co_attrs.gr_friction);
+    ftCommon_ApplyFrictionGround(fp, fp->co_attrs.ground_friction);
     ftCommon_ApplyGroundMovement(gobj);
 }
 

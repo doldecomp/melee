@@ -110,8 +110,8 @@ void ftCo_ItemParasolOpen_Phys(Fighter_GObj* gobj)
 
     {
         float mul = p_ftCommonData->x590;
-        float grav = ca->grav * mul;
-        float terminal_vel = ca->terminal_vel * mul;
+        float grav = ca->gravity * mul;
+        float terminal_vel = ca->terminal_velocity * mul;
         ftCommon_Fall(fp, grav, terminal_vel);
         {
             float drift, target_vel;

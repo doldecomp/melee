@@ -1366,8 +1366,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
         if (animflags_bool) {
             if (!fp->x594_b0 && !fp->x594_b0) {
                 !fp;
-                ftCommon_ClampGrVel(fp,
-                                    fp->co_attrs.dash_run_terminal_velocity);
+                ftCommon_ClampGrVel(fp, fp->co_attrs.dash_max_velocity);
             }
         }
 
@@ -2217,8 +2216,8 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
                        usually 1. last factor was 1 when I looked*/
                     /*effective friction - ground multiplier is
                        usually 1. last factor was 1 when I looked*/
-                    ft_GetGroundFrictionMultiplier(fp) * pAttr->gr_friction *
-                        p_ftCommonData->x200);
+                    ft_GetGroundFrictionMultiplier(fp) *
+                        pAttr->ground_friction * p_ftCommonData->x200);
 
                 // set knockback velocity to ground_kb_vel * surfaceTangent
                 p_kb_vel->x = pNormal->y * fp->xF0_ground_kb_vel;
@@ -2271,7 +2270,8 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
                     fp,
                     /* effectiveFriction - the last constant variable differs
                        from the one for the knockback friction above*/
-                    ft_GetGroundFrictionMultiplier(fp) * pAttr->gr_friction *
+                    ft_GetGroundFrictionMultiplier(fp) *
+                        pAttr->ground_friction *
                         p_ftCommonData->x3EC_shieldGroundFrictionMultiplier);
 
                 /* effectiveFriction - the last constant variable differs from

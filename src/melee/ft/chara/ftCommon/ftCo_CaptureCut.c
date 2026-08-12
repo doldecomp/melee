@@ -54,7 +54,7 @@ void ftCo_CaptureCut_Phys(Fighter_GObj* gobj)
 
     if (fp->ground_or_air == GA_Ground) {
         ftCommon_ApplyFrictionGround(fp, p_ftCommonData->x36C *
-                                             fp->co_attrs.gr_friction);
+                                             fp->co_attrs.ground_friction);
         ftCommon_ApplyGroundMovement(gobj);
         return;
     }

@@ -158,7 +158,7 @@ void ftCo_Dash_Phys(Fighter_GObj* gobj)
         getAccelAndTarget(fp, &accel, &target_vel);
         ftCommon_8007C98C(
             fp, accel, target_vel,
-            attrs->gr_friction *
+            attrs->ground_friction *
                 p_ftCommonData->run_dash_turn_friction_multiplier);
     }
     ftCommon_ApplyGroundMovement(gobj);

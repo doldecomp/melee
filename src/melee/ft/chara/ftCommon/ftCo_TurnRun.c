@@ -93,12 +93,12 @@ void ftCo_TurnRun_Phys(Fighter_GObj* gobj)
 
     if (!target_vel) {
         ftCommon_ApplyFrictionGround(
-            fp, co_attrs->gr_friction *
+            fp, co_attrs->ground_friction *
                     p_ftCommonData->run_dash_turn_friction_multiplier);
     } else if (fp->mv.co.turnrun.accel_mul * accel < 0) {
         if (accel > 0) {
             if (fp->gr_vel + accel > target_vel) {
-                accel -= co_attrs->gr_friction *
+                accel -= co_attrs->ground_friction *
                          p_ftCommonData->run_dash_turn_friction_multiplier;
                 if (fp->gr_vel + accel < target_vel) {
                     accel = target_vel - fp->gr_vel;
@@ -106,7 +106,7 @@ void ftCo_TurnRun_Phys(Fighter_GObj* gobj)
             }
         } else {
             if (fp->gr_vel + accel < target_vel) {
-                accel += co_attrs->gr_friction *
+                accel += co_attrs->ground_friction *
                          p_ftCommonData->run_dash_turn_friction_multiplier;
                 if (fp->gr_vel + accel > target_vel) {
                     accel = target_vel - fp->gr_vel;
@@ -116,7 +116,7 @@ void ftCo_TurnRun_Phys(Fighter_GObj* gobj)
         fp->xE4_ground_accel_1 = accel;
     } else {
         ftCommon_ApplyFrictionGround(
-            fp, co_attrs->gr_friction *
+            fp, co_attrs->ground_friction *
                     p_ftCommonData->run_dash_turn_friction_multiplier);
     }
     ftCommon_ApplyGroundMovement(gobj);

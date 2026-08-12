@@ -160,7 +160,8 @@ void ftFx_SpecialHiHoldAir_Phys(HSD_GObj* gobj)
     if (fp->mv.fx.SpecialHi.gravityDelay != 0) {
         fp->mv.fx.SpecialHi.gravityDelay -= 1;
     } else {
-        ftCommon_Fall(fp, da->x60_FOX_FIREFOX_FALL_ACCEL, ca->terminal_vel);
+        ftCommon_Fall(fp, da->x60_FOX_FIREFOX_FALL_ACCEL,
+                      ca->terminal_velocity);
     }
 
     ftCommon_ApplyFrictionAir(fp, da->x5C_FOX_FIREFOX_AIR_MOMENTUM_PRESERVE_X);

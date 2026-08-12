@@ -639,7 +639,7 @@ void ftCo_800A101C(Fighter* arg0, int arg1, int arg2, int arg3)
             temp_r30->xFC[i].facing_dir = 1.0F;
         }
     }
-    temp_f3_2 = arg0->co_attrs.grav;
+    temp_f3_2 = arg0->co_attrs.gravity;
     temp_f1 = arg0->co_attrs.jump_v_initial_velocity *
               arg0->co_attrs.air_jump_v_multiplier;
     if ((temp_f3_2 < 0.00001f) && (temp_f3_2 > -0.00001f)) {
@@ -1771,7 +1771,7 @@ static inline bool ftCo_IsAlly_dontinline(Fighter* fp0, Fighter* fp1)
 
 static inline float ftCo_800A3908_inline0(Fighter* fp, s32 t)
 {
-    return fp->co_attrs.grav * sqrtf((f32) t);
+    return fp->co_attrs.gravity * sqrtf((f32) t);
 }
 
 bool ftCo_800A3908(Fighter* fp, bool arg1)
@@ -1803,7 +1803,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
 
     PAD_STACK(0x20);
 
-    grav = fp->co_attrs.grav;
+    grav = fp->co_attrs.gravity;
     if (grav < 0.00001f && grav > -0.00001f) {
         ok = 1;
     } else {
@@ -1812,7 +1812,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     if (ok != 0) {
         frames = 0x3E8;
     } else {
-        frames = -(-fp->co_attrs.terminal_vel - fp->pos_delta.y) / grav;
+        frames = -(-fp->co_attrs.terminal_velocity - fp->pos_delta.y) / grav;
     }
     data2 = &fp->x1A88;
     for (island = mpIsland_80458E88.next; island != NULL;
@@ -1850,10 +1850,11 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                 land_y = fp->cur_pos.y + (fp->pos_delta.y * t -
                                           0.5 * ftCo_800A3908_inline0(fp, t));
             } else {
-                land_y = fp->cur_pos.y +
-                         ((fp->pos_delta.y * frames -
-                           0.5 * (fp->co_attrs.grav * sqrtf((f32) frames))) -
-                          (f32) (t - frames) * fp->co_attrs.terminal_vel);
+                land_y =
+                    fp->cur_pos.y +
+                    ((fp->pos_delta.y * frames -
+                      0.5 * (fp->co_attrs.gravity * sqrtf((f32) frames))) -
+                     (f32) (t - frames) * fp->co_attrs.terminal_velocity);
             }
             if (arg1 != 0) {
                 if (!(land_y + data->x558 < ey)) {
@@ -1972,7 +1973,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
 
 static inline float ftCo_GetTerminalVelocity(Fighter* fp)
 {
-    return fp->co_attrs.terminal_vel;
+    return fp->co_attrs.terminal_velocity;
 }
 
 static inline bool ftCo_800A4038_inline1(int line_id)
@@ -1982,7 +1983,7 @@ static inline bool ftCo_800A4038_inline1(int line_id)
 
 static inline float ftCo_800A4038_inline2(Fighter* fp)
 {
-    return -(-fp->co_attrs.terminal_vel - fp->pos_delta.y);
+    return -(-fp->co_attrs.terminal_velocity - fp->pos_delta.y);
 }
 
 bool ftCo_800A4038(Fighter* fp, bool arg1)
@@ -2009,7 +2010,7 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
 
     PAD_STACK(0x8);
 
-    grav = fp->co_attrs.grav;
+    grav = fp->co_attrs.gravity;
     if (grav < 0.00001f && grav > -0.00001f) {
         ok = 1;
     } else {
@@ -2055,12 +2056,13 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
             } else if (t < frames) {
                 land_y = fp->cur_pos.y +
                          (fp->pos_delta.y * t -
-                          0.5 * (fp->co_attrs.grav * sqrtf((f32) t)));
+                          0.5 * (fp->co_attrs.gravity * sqrtf((f32) t)));
             } else {
-                land_y = fp->cur_pos.y +
-                         ((fp->pos_delta.y * frames -
-                           0.5 * (fp->co_attrs.grav * sqrtf((f32) frames))) -
-                          (f32) (t - frames) * ftCo_GetTerminalVelocity(fp));
+                land_y =
+                    fp->cur_pos.y +
+                    ((fp->pos_delta.y * frames -
+                      0.5 * (fp->co_attrs.gravity * sqrtf((f32) frames))) -
+                     (f32) (t - frames) * ftCo_GetTerminalVelocity(fp));
             }
             if (arg1 != 0) {
                 if (!(land_y + data->x558 < ey)) {
@@ -4516,12 +4518,12 @@ void ftCo_800A9904(Fighter* fp)
         } else {
             x_time = dx / fp->pos_delta.x;
         }
-        gravity = *(grav_p = &fp->co_attrs.grav);
+        gravity = *(grav_p = &fp->co_attrs.gravity);
         if (ftCo_IsNearlyZero(gravity)) {
             terminal_time = 1000.0F;
         } else {
             terminal_time =
-                -(-fp->co_attrs.terminal_vel - fp->pos_delta.y) / gravity;
+                -(-fp->co_attrs.terminal_velocity - fp->pos_delta.y) / gravity;
         }
         if (terminal_time <= 0.0F) {
             predicted_y = (fp->pos_delta.y * x_time) + fp->cur_pos.y;
@@ -4700,12 +4702,12 @@ void ftCo_800A9CB4(Fighter* fp)
     } else {
         x_time = 0.0f;
     }
-    gravity = *(grav_p = &fp->co_attrs.grav);
+    gravity = *(grav_p = &fp->co_attrs.gravity);
     if (ftCo_IsNearlyZero(gravity)) {
         terminal_time = 1000.0f;
     } else {
         terminal_time =
-            -(-fp->co_attrs.terminal_vel - fp->pos_delta.y) / gravity;
+            -(-fp->co_attrs.terminal_velocity - fp->pos_delta.y) / gravity;
     }
     if (terminal_time <= 0.0f) {
         y_pos = (fp->pos_delta.y * x_time) + fp->cur_pos.y;
@@ -4718,9 +4720,10 @@ void ftCo_800A9CB4(Fighter* fp)
                                   sqrt_terminal_time_store);
         sqrt_x_time = *grav_p;
         x_delta_abs = x_time - terminal_time;
-        y_pos = fp->cur_pos.y + (fp->pos_delta.y * terminal_time -
-                                 0.5 * (sqrt_x_time * sqrt_term_time) -
-                                 (x_delta_abs * fp->co_attrs.terminal_vel));
+        y_pos =
+            fp->cur_pos.y + (fp->pos_delta.y * terminal_time -
+                             0.5 * (sqrt_x_time * sqrt_term_time) -
+                             (x_delta_abs * fp->co_attrs.terminal_velocity));
     }
     if (x_time < 0.0) {
         ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, 0x7F);
@@ -5415,7 +5418,7 @@ void ftCo_800ABBA8(Fighter* fp)
             }
         }
         if (result != 0) {
-            g = -fp->co_attrs.grav;
+            g = -fp->co_attrs.gravity;
             v = fp->pos_delta.y;
             h = sp74.y -
                 (fp->coll_data.cur_pos.y + fp->coll_data.ecb.bottom.y);
@@ -5492,7 +5495,7 @@ void ftCo_800ABBA8(Fighter* fp)
     } else {
         vf0 = dxx / v;
     }
-    grav_ptr = &fp->co_attrs.grav;
+    grav_ptr = &fp->co_attrs.gravity;
     (void) grav_ptr;
     g = *grav_ptr;
     if (g < 0.00001f && g > -0.00001f) {
@@ -5503,7 +5506,7 @@ void ftCo_800ABBA8(Fighter* fp)
     if (ok != 0) {
         vf5 = 1000.0f;
     } else {
-        vf5 = -(-fp->co_attrs.terminal_vel - fp->pos_delta.y) / g;
+        vf5 = -(-fp->co_attrs.terminal_velocity - fp->pos_delta.y) / g;
     }
     if (vf5 <= 0.0f) {
         land_y = fp->pos_delta.y * vf0 + fp->cur_pos.y;

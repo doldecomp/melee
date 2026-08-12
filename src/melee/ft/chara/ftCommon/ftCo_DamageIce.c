@@ -349,8 +349,8 @@ void ftCo_DamageIce_Phys(Fighter_GObj* gobj)
     ftCo_DatAttrs* co = &fp->co_attrs;
     if (fp->ground_or_air == GA_Air) {
         ftCommon_8007CEF4(fp);
-        ftCommon_Fall(fp, co->grav * p_ftCommonData->damageice_gravity_mult,
-                      co->terminal_vel);
+        ftCommon_Fall(fp, co->gravity * p_ftCommonData->damageice_gravity_mult,
+                      co->terminal_velocity);
     } else {
         ft_80084F3C(gobj);
     }

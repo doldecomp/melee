@@ -608,10 +608,10 @@ void ftCo_LightThrowDash_Phys(Fighter_GObj* gobj)
         if (cd != NULL) {
             // Needed for matching register allocation.
         }
-        ft_80085030(gobj, (cd->x404 * fp->co_attrs.gr_friction) * cd->x40C,
+        ft_80085030(gobj, (cd->x404 * fp->co_attrs.ground_friction) * cd->x40C,
                     fp->facing_dir);
     } else {
-        ft_80085030(gobj, p_ftCommonData->x404 * fp->co_attrs.gr_friction,
+        ft_80085030(gobj, p_ftCommonData->x404 * fp->co_attrs.ground_friction,
                     fp->facing_dir);
     }
 }

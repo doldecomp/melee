@@ -180,7 +180,7 @@ void ftKb_ZdSpecialAirN_Phys(Fighter_GObj* gobj)
             fp->mv.zd.specialn.x0 = new_var;
         } else {
             ftCommon_Fall(fp, da->specialn_zd_fall_acceleration,
-                          co_attrs->terminal_vel);
+                          co_attrs->terminal_velocity);
         }
     }
 

@@ -131,7 +131,7 @@ void ftPk_SpecialAirHiStart0_Phys(HSD_GObj* gobj)
         if ((signed) fp->mv.pk.specialhi.x0 != 0) {
             fp->mv.pk.specialhi.x0--;
         } else {
-            ftCommon_Fall(fp, sa->x64, da->terminal_vel);
+            ftCommon_Fall(fp, sa->x64, da->terminal_velocity);
         }
     }
 

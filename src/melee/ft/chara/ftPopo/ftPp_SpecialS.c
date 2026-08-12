@@ -353,7 +353,7 @@ void ftPp_SpecialS1_Phys(Fighter_GObj* gobj)
         target_vel =
             fp->mv.pp.specials.x1C > 0.0F ? temp_r30->x38 : -temp_r30->x38;
         ftCommon_8007CA80(fp, fp->mv.pp.specials.x1C, target_vel,
-                          fp->co_attrs.gr_friction);
+                          fp->co_attrs.ground_friction);
         temp_r5 = GET_FIGHTER(gobj);
         {
             ftIceClimberAttributes* da = temp_r5->dat_attrs;
@@ -363,7 +363,7 @@ void ftPp_SpecialS1_Phys(Fighter_GObj* gobj)
         ftCommon_ClampGrVel(fp, temp_r30->x38);
         ftCommon_ApplyGroundMovementNoSlide(gobj);
     } else {
-        float friction = fp->co_attrs.gr_friction;
+        float friction = fp->co_attrs.ground_friction;
         ftCommon_ApplyFrictionGround(fp, friction);
         ftCommon_ClampGrVel(fp, temp_r30->x38);
         ftCommon_ApplyGroundMovementNoSlide(gobj);
@@ -411,7 +411,7 @@ void ftPp_SpecialS2_Phys(Fighter_GObj* gobj)
         target_vel = temp_r31->mv.pp.specials.x1C > 0.0F ? temp_r30->x38
                                                          : -temp_r30->x38;
         ftCommon_8007CA80(temp_r31, temp_r31->mv.pp.specials.x1C, target_vel,
-                          temp_r31->co_attrs.gr_friction);
+                          temp_r31->co_attrs.ground_friction);
         temp_r5 = GET_FIGHTER(gobj);
         {
             ftIceClimberAttributes* da = temp_r5->dat_attrs;
@@ -421,7 +421,7 @@ void ftPp_SpecialS2_Phys(Fighter_GObj* gobj)
         ftCommon_ClampGrVel(temp_r31, temp_r30->x38);
         ftCommon_ApplyGroundMovementNoSlide(gobj);
     } else {
-        float friction = temp_r31->co_attrs.gr_friction;
+        float friction = temp_r31->co_attrs.ground_friction;
         ftCommon_ApplyFrictionGround(temp_r31, friction);
         ftCommon_ClampGrVel(temp_r31, temp_r30->x38);
         ftCommon_ApplyGroundMovementNoSlide(gobj);
