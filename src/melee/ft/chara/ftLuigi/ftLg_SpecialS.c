@@ -151,7 +151,7 @@ void ftLg_SpecialAirSStart_Phys(HSD_GObj* gobj)
 
     if (fp->cmd_vars[0] != 0) {
         ftCommon_Fall(fp, da->x20_LUIGI_GREENMISSILE_FALLING_SPEED,
-                      ca->terminal_vel);
+                      ca->terminal_velocity);
     }
 
     ftCommon_ApplyFrictionAir(fp, da->x1C_LUIGI_GREENMISSILE_UNK2);
@@ -763,7 +763,7 @@ void ftLg_SpecialAirSEnd_Phys(HSD_GObj* gobj)
     ftLuigiAttributes* sa = getFtSpecialAttrsD(fp);
 
     ftCommon_Fall(fp, sa->x40_LUIGI_GREENMISSILE_GRAVITY_MUL,
-                  fp->co_attrs.terminal_vel);
+                  fp->co_attrs.terminal_velocity);
     ftCommon_ApplyFrictionAir(fp, sa->x3C_LUIGI_GREENMISSILE_X_DECEL);
 }
 

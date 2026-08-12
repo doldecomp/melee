@@ -358,7 +358,8 @@ void ftKb_NsSpecialAirNStart_Phys(Fighter_GObj* gobj)
     if (fp->mv.kb.specialn_ns.falling_acceleration_delay != 0) {
         fp->mv.kb.specialn_ns.falling_acceleration_delay--;
     } else {
-        ftCommon_Fall(fp, da->specialn_ns_gravity, fp->co_attrs.terminal_vel);
+        ftCommon_Fall(fp, da->specialn_ns_gravity,
+                      fp->co_attrs.terminal_velocity);
     }
     airFriction = fp->co_attrs.aerial_friction;
     ftCommon_ApplyFrictionAir(fp, airFriction);

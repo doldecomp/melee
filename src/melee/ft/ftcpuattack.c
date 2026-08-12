@@ -232,18 +232,18 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
     if (list == NULL) {
         return 0;
     }
-    fpTermNeg = -fp->co_attrs.terminal_vel;
-    tgtTermNeg = -target->co_attrs.terminal_vel;
+    fpTermNeg = -fp->co_attrs.terminal_velocity;
+    tgtTermNeg = -target->co_attrs.terminal_velocity;
     fpX = fp->cur_pos.x;
     fpY = fp->cur_pos.y;
     fpVx = fp->pos_delta.x;
     fpVy = fp->pos_delta.y;
-    fpGrav = fp->co_attrs.grav;
+    fpGrav = fp->co_attrs.gravity;
     tgtX = target->cur_pos.x;
     tgtY = target->cur_pos.y;
     tgtVx = target->pos_delta.x;
     tgtVy = target->pos_delta.y;
-    tgtGrav = target->co_attrs.grav;
+    tgtGrav = target->co_attrs.gravity;
     if (target->facing_dir > 0.0) {
         rangeF = target->x1A88.x55C;
         rangeB = target->x1A88.x560;
@@ -437,18 +437,18 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     if (list == NULL) {
         return 0;
     }
-    fpTermNeg = -fp->co_attrs.terminal_vel;
-    tgtTermNeg = -target->co_attrs.terminal_vel;
+    fpTermNeg = -fp->co_attrs.terminal_velocity;
+    tgtTermNeg = -target->co_attrs.terminal_velocity;
     fpX = fp->cur_pos.x;
     fpY = fp->cur_pos.y;
     fpVx = fp->pos_delta.x;
     fpVy = fp->pos_delta.y;
-    fpGrav = fp->co_attrs.grav;
+    fpGrav = fp->co_attrs.gravity;
     tgtX = target->cur_pos.x;
     tgtY = target->cur_pos.y;
     tgtVx = target->pos_delta.x;
     tgtVy = target->pos_delta.y;
-    tgtGrav = target->co_attrs.grav;
+    tgtGrav = target->co_attrs.gravity;
     if (target->facing_dir > 0.0) {
         rangeF = target->x1A88.x55C;
         rangeB = target->x1A88.x560;
@@ -633,7 +633,7 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
     }
     attrs = x50->xCC;
     count = 0;
-    fpTermNeg = -fp->co_attrs.terminal_vel;
+    fpTermNeg = -fp->co_attrs.terminal_velocity;
     fpY = fp->cur_pos.y;
     x50Vy = x50->x44;
     x50TermNeg = -attrs->x14;
@@ -642,7 +642,7 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
     fpX = fp->cur_pos.x;
     fpVx = fp->pos_delta.x;
     fpVy = fp->pos_delta.y;
-    fpGrav = fp->co_attrs.grav;
+    fpGrav = fp->co_attrs.gravity;
     x50X = x50->x4C;
     x50Y = x50->x50;
     x50Vx = x50->x40;

@@ -93,7 +93,7 @@ void ftCo_AttackDash_IASA(Fighter_GObj* gobj)
 void ftCo_AttackDash_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ft_80085030(gobj, p_ftCommonData->x50 * fp->co_attrs.gr_friction,
+    ft_80085030(gobj, p_ftCommonData->x50 * fp->co_attrs.ground_friction,
                 fp->facing_dir);
 }
 

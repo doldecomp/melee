@@ -223,7 +223,7 @@ void ftLg_SpecialAirHi_Phys(HSD_GObj* gobj)
         return;
     }
     ftCommon_Fall(fp, luigiAttrs->x68_LUIGI_SUPERJUMP_GRAVITY_START,
-                  ca->terminal_vel);
+                  ca->terminal_velocity);
     ftCommon_8007CF58(fp);
 }
 

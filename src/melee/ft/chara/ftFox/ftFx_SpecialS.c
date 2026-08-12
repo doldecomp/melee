@@ -188,7 +188,7 @@ void ftFx_SpecialAirSStart_Phys(HSD_GObj* gobj)
     if (fp->mv.fx.SpecialS.gravityDelay != 0) {
         fp->mv.fx.SpecialS.gravityDelay--;
     } else {
-        ftCommon_Fall(fp, da->x30_FOX_ILLUSION_UNK2, ca->terminal_vel);
+        ftCommon_Fall(fp, da->x30_FOX_ILLUSION_UNK2, ca->terminal_velocity);
     }
     ftCommon_ApplyFrictionAir(fp, da->x2C_FOX_ILLUSION_UNK1);
 }
@@ -530,7 +530,7 @@ void ftFx_SpecialAirSEnd_Phys(HSD_GObj* gobj)
         fp->mv.fx.SpecialS.gravityDelay--;
     } else {
         ftCommon_Fall(fp, da->x48_FOX_ILLUSION_TERMINAL_VELOCITY,
-                      ca->terminal_vel);
+                      ca->terminal_velocity);
     }
     ftCommon_ApplyFrictionAir(fp, da->x40_FOX_ILLUSION_AIR_MUL_X);
     ftFox_SpecialS_SetPhys(gobj);

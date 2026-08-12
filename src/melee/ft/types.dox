@@ -1,1 +1,143 @@
 /// @file melee/ft/types.h
+
+/** @struct ftCommonData
+ * @brief Points to data in `PlCo.dat`.
+ * @details When the game reads the stick, it reads it using an integer value
+ * with a max value of 80, this means the sticks only have 161 values (80 per
+ * side + zero) possible analog values The same thing happens to the triggers,
+ * but it gets quantified to 140 instead.
+ */
+
+/** @var ftCommonData::horizontal_stick_deadzone
+ * @details @datvalue{GALE01, PlCo.dat, 0.28}
+ */
+/** @var ftCommonData::vertical_stick_deadzone
+ * @details @datvalue{GALE01, PlCo.dat, 0.28}
+ */
+
+/** @name Stick Smash Deadzones
+ * @details Surprisingly these are 0.25 in vanilla, which is lower than the
+ * absolute stick deadzone above, which is always applied, which is 0.28.
+ * @{
+ * @var ftCommonData::horizontal_stick_smash_deadzone
+ * @var ftCommonData::vertical_stick_smash_deadzone
+ * @}
+ */
+
+/** @var ftCommonData::horizontal_stick_smash_deadzone
+ * @details @datvalue{GALE01, PlCo.dat, 0.25}
+ */
+
+/** @var ftCommonData::vertical_stick_smash_deadzone
+ * @details @datvalue{GALE01, PlCo.dat, 0.25}
+ */
+
+/** @var ftCommonData::analog_shoulder_deadzone
+ * @details @datvalue{GALE01, PlCo.dat, 0.3}
+ */
+
+/** @var ftCommonData::z_press_analog_value
+ * @details @datvalue{GALE01, PlCo.dat, 0.35}
+ */
+
+/** @var ftCommonData::shield_press_threshold
+ * @details @datvalue{GALE01, PlCo.dat, 0.25}
+ */
+
+/** @var ftCommonData::walk_stick_threshold
+ * @details Yet another threshold that's lower than the global deadzone, so in
+ * practical terms it goes unused.
+ *
+ * @datvalue{GALE01, PlCo.dat, 0.18}
+ */
+
+/** @var ftCommonData::walk_accel_taper_gain
+ * @brief Ease out for the walk.
+ * @details Also affects the maximum possible acceleration, i.e. if this is 0.5
+ * then the maximum possible acceleration when walking will be 0.5 *
+ * `walk_acceleration`.
+ * */
+
+/** @var ftCommonData::dash_smash_window
+ * @brief Frames since the stick left the deadzone where a dash or a smash
+ * can be input.
+ */
+
+/** @var ftCommonData::run_accel_taper_gain
+ * @brief Ease out for the run.
+ */
+
+/** @var ftCommonData::run_dash_turn_friction_multiplier
+ * @brief Extra frictino multiplier applied to run/dash/turn, since it's 1.0 it
+ * has no effect.
+ */
+
+/** @var ftCommonData::run_dash_turn_friction_multiplier
+ * @details @datvalue{GALE01, PlCo.dat, 1.0}
+ */
+
+/** @var ftCommonData::friction_when_above_walk_speed
+ * @brief The game adds extra friction when the player's speed is above walk
+ * speed only in wait and turn state.
+ * @details @datvalue{GALE01, PlCo.dat, 2.0}
+ */
+
+/** @var ftCommonData::tap_jump_threshold
+ * @details @datvalue{GALE01, PlCo.dat, 0.6625}
+ */
+
+/** @var ftCommonData::tap_jump_window
+ * @brief Frames since the stick left the deadzone where a tap jump can be
+ * input.
+ * @details @datvalue{GALE01, PlCo.dat, 4}
+ *
+ */
+
+/** @var ftCommonData::relaxed_tap_jump_threshold
+ * @brief For some strange reason, some ground states have a smaller threshold.
+ * @details @datvalue{GALE01, PlCo.dat, 0.5625}
+ */
+
+/** @var ftCommonData::powershield_input_window
+ * @brief Frames after trigger becomes non 0 where a full press results in a
+ * powershield.
+ */
+
+/** @var ftCommonData::teeter_walk_threshold
+ * @details @datvalue{GALE01, PlCo.dat, 0.75}
+ */
+
+/** @var ftCommonData::leadead_grab_timer_step
+ * @brief Leadead capture timer decrement.
+ */
+
+/** @var ftCommonData::leadead_grab_break_threshold
+ * @brief Leadead grab break threshold.
+ */
+
+/** @var ftCo_DatAttrs::walk_accel_mul
+ * @brief Multiplciative walk acceleration, based on how much the control stick
+ * is pushed.
+ */
+
+/** @var ftCo_DatAttrs::walk_accel_base
+ * @brief Base walk acceleration, always applied when walking.
+ */
+
+/** @var ftCo_DatAttrs::hit_spark_variant
+ * @brief `0` = normal spark, `1` = none.
+ */
+
+/** @var ftCo_DatAttrs::unused_0
+ * @brief Not used anywhere in the codebase.
+ */
+
+/** @var ftCo_DatAttrs::specials_ground_speed_retention
+ * @brief What percentage of the existing velocity is kept when performing a
+ * side special. `1.0` = keep all momentum, `0.0` = stop dead in its tracks.
+ */
+
+/** @var ftCo_DatAttrs::screw_attack_launch_velocity
+ * @brief When hit by a screw attack item, the speed is hard set to
+ * (0, this, 0).
+ */

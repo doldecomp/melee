@@ -56,7 +56,7 @@ int ftCo_80091A4C(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->input.x668 & (HSD_PAD_R | HSD_PAD_L) &&
-        fp->x672_input_timer_counter < p_ftCommonData->x2A0)
+        fp->trigger_analog_timer < p_ftCommonData->powershield_input_window)
     {
         ftCo_800939B4(gobj);
         return true;
@@ -75,7 +75,7 @@ bool ftCo_80091AD8(Fighter_GObj* gobj, int mv_x20)
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(8);
     if (fp->input.x668 & (HSD_PAD_R | HSD_PAD_L) &&
-        fp->x672_input_timer_counter < p_ftCommonData->x2A0)
+        fp->trigger_analog_timer < p_ftCommonData->powershield_input_window)
     {
         ftCo_800939B4(gobj);
         ret0 = true;
@@ -302,7 +302,8 @@ void ftCo_800921DC(HSD_GObj* gobj)
     fp->mv.co.guard.x2C = 0;
     {
         float lightshield_amount =
-            (fp->input.x650 - p_ftCommonData->x10) / (1 - p_ftCommonData->x10);
+            (fp->input.x650 - p_ftCommonData->analog_shoulder_deadzone) /
+            (1 - p_ftCommonData->analog_shoulder_deadzone);
         if (lightshield_amount < 0) {
             lightshield_amount = fp->mv.co.guard.x2C;
         }
@@ -387,12 +388,13 @@ bool ftCo_800925A4(HSD_GObj* gobj)
         fp->mv.co.guard.x2C = fp->lightshield_amount;
         {
             fp->lightshield_amount =
-                (fp->input.x650 - p_ftCommonData->x10) /
-                            (1 - p_ftCommonData->x10) <
+                (fp->input.x650 - p_ftCommonData->analog_shoulder_deadzone) /
+                            (1 - p_ftCommonData->analog_shoulder_deadzone) <
                         0
                     ? fp->mv.co.guard.x2C
-                    : (fp->input.x650 - p_ftCommonData->x10) /
-                          (1 - p_ftCommonData->x10);
+                    : (fp->input.x650 -
+                       p_ftCommonData->analog_shoulder_deadzone) /
+                          (1 - p_ftCommonData->analog_shoulder_deadzone);
         }
         fp->shield_health -= p_ftCommonData->x278 *
                              ((fp->lightshield_amount *
@@ -867,9 +869,9 @@ void ftCo_GuardSetOff_Coll(Fighter_GObj* gobj)
 bool ftCo_80093694(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->mv.co.guard.x0 < p_ftCommonData->x2A0 &&
+    if (fp->mv.co.guard.x0 < p_ftCommonData->powershield_input_window &&
         fp->input.x668 & (HSD_PAD_R | HSD_PAD_L) &&
-        fp->x672_input_timer_counter < p_ftCommonData->x2A0)
+        fp->trigger_analog_timer < p_ftCommonData->powershield_input_window)
     {
         ftCo_80093850(gobj);
         return true;
@@ -920,7 +922,7 @@ void ftCo_8009388C(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftCo_MS_GuardReflect,
                               Ft_MF_SkipAnim | Ft_MF_KeepGfx,
                               fp->cur_anim_frame, 1, 0, NULL);
-    fp->x672_input_timer_counter = 0xFE;
+    fp->trigger_analog_timer = 0xFE;
     fp->x221A_b7 = false;
     fp->x221B_b0 = false;
     fp->x221C_b3 = true;
@@ -958,7 +960,7 @@ void ftCo_80093A50(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, 182, Ft_MF_SkipAnim, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
-    fp->x672_input_timer_counter = 0xFE;
+    fp->trigger_analog_timer = 0xFE;
     fp->x221C_b3 = true;
     fp->x221C_b1 = true;
     fp->x221C_b2 = true;

@@ -173,7 +173,7 @@ void ftZd_SpecialAirN_Phys(HSD_GObj* gobj)
         if (var1 != 0) {
             fp->mv.zd.specialn.x0 = var1 - 1;
         } else {
-            ftCommon_Fall(fp, sa->xC, da->terminal_vel);
+            ftCommon_Fall(fp, sa->xC, da->terminal_velocity);
         }
     }
 

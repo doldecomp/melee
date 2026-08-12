@@ -48,8 +48,9 @@ typedef enum cmd_var_idx {
 void on21EC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (ABS(fp->input.lstick.x) >= p_ftCommonData->x3C &&
-        fp->x673 < p_ftCommonData->x40 + p_ftCommonData->x44)
+    if (ABS(fp->input.lstick.x) >=
+            p_ftCommonData->dash_smash_stick_threshold &&
+        fp->x673 < p_ftCommonData->dash_smash_window + p_ftCommonData->x44)
     {
         fp->x2070.count_thrown_items = true;
         fp->u.lk.x4 = true;

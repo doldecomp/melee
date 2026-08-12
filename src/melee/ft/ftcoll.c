@@ -1384,7 +1384,7 @@ void ftColl_80078538(Fighter_GObj* gobj, Vec3* pos, u32 dmg, float ignored,
     }
 
     if (dmg >= 1) {
-        switch (fp->co_attrs.xA0) {
+        switch (fp->co_attrs.hit_spark_variant) {
         case 0:
             if (HSD_Randi((s32) p_ftCommonData->x3F4) == 0) {
                 efSync_Spawn(0x3EF, 0, pos, &fp->facing_dir);

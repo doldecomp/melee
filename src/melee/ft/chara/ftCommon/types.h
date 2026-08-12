@@ -220,7 +220,7 @@ union ftCommon_MotionVars {
     } escapeair;
     struct {
         /* fp+2340 */ float x0;
-        /* fp+2344 */ float anim_start;
+        /* fp+2344 */ float anim_speed;
     } rebound;
     struct {
         /* fp+2340 */ u8 pad_x0[4];

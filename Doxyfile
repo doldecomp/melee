@@ -280,8 +280,11 @@ ALIASES                = offset{1}="\xrefitem offset \"Offset\" \"Member Offsets
                          glossary{1}="\glossary{\1,\1}" \
                          glossary{2}="[\1](\ref glossary_\2)" \
                          g{1}="\glossary{\1}" \
-                         g{2}="\glossary{\1,\2}"
-
+                         g{2}="\glossary{\1,\2}" \
+                         datheader="Version|File|Value^^-|-|-" \
+                         datrow{3}="`\1`|`\2`|`\3`" \
+                         datfooter="" \
+                         datvalue{3}="\datheader^^\datrow{\1, \2, \3}^^\datfooter"
 
 # Set the OPTIMIZE_OUTPUT_FOR_C tag to YES if your project consists of C sources
 # only. Doxygen will then generate output that is more tailored for C. For

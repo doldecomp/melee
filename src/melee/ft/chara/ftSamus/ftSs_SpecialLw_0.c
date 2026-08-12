@@ -192,7 +192,7 @@ void ftSs_SpecialLw_Phys(HSD_GObj* gobj)
 
     if (fp->cmd_vars[0]) {
         float samus_attr_xC = samus_attr->xC;
-        ftCommon_8007CADC(fp, 0.0f, ftAttr->walk_init_vel * samus_attr_xC,
+        ftCommon_8007CADC(fp, 0.0f, ftAttr->walk_accel_mul * samus_attr_xC,
                           ftAttr->walk_max_vel * samus_attr_xC);
         ftCommon_ApplyGroundMovement(gobj);
     } else {

@@ -138,10 +138,10 @@ static inline void getAccelAndTarget(Fighter* fp, float* accel,
                                      float* target_vel)
 {
     ftCo_DatAttrs* co_attrs = &fp->co_attrs;
-    *accel = fp->input.lstick.x * fp->co_attrs.dash_run_acceleration_a;
-    *accel += fp->input.lstick.x > 0 ? +co_attrs->dash_run_acceleration_b
-                                     : -co_attrs->dash_run_acceleration_b;
-    *target_vel = fp->input.lstick.x * co_attrs->dash_run_terminal_velocity;
+    *accel = fp->input.lstick.x * fp->co_attrs.dash_accel_mul;
+    *accel += fp->input.lstick.x > 0 ? +co_attrs->dash_accel_base
+                                     : -co_attrs->dash_accel_base;
+    *target_vel = fp->input.lstick.x * co_attrs->dash_max_velocity;
 }
 
 /// used for all fighters except Kirby and Purin

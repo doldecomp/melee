@@ -66,7 +66,7 @@ void ftCo_Turn_Enter(Fighter_GObj* gobj, FtMotionId msid, MotionFlags flags,
 void ftCo_Turn_Enter_Basic(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    float frames = fp->co_attrs.frames_to_change_direction_on_standing_turn;
+    float frames = fp->co_attrs.standing_turn_frames;
     PAD_STACK(8);
     ftCo_Turn_Enter(gobj, ftCo_MS_Turn, Ft_MF_None, 0.0F, frames, 0.0F);
 }
@@ -130,7 +130,7 @@ void ftCo_Turn_IASA(Fighter_GObj* gobj)
     fn_800C9C2C(gobj);
     if (fp->mv.co.turn.just_turned && fp->mv.co.turn.x8) {
         if (fp->input.lstick.x * fp->mv.co.turn.facing_after >=
-            p_ftCommonData->x3C)
+            p_ftCommonData->dash_smash_stick_threshold)
         {
             ftCo_Dash_Enter(gobj, 0);
         }
@@ -163,8 +163,8 @@ bool fn_800C9C2C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.lstick.x * fp->mv.co.turn.facing_after >=
-            p_ftCommonData->x3C &&
-        fp->x670_timer_lstick_tilt_x < p_ftCommonData->x40)
+            p_ftCommonData->dash_smash_stick_threshold &&
+        fp->x670_timer_lstick_tilt_x < p_ftCommonData->dash_smash_window)
     {
         fp->mv.co.turn.x8 = fp->mv.co.turn.facing_after;
         return true;

@@ -276,7 +276,7 @@ void ftPe_SpecialAirHiStart_Phys(HSD_GObj* gobj)
         fp->self_vel.y = fp->self_vel.y * da->x8C;
         fp->self_vel.z = fp->self_vel.z * da->x8C;
     } else {
-        ftCommon_Fall(fp, da->x88, ca->terminal_vel);
+        ftCommon_Fall(fp, da->x88, ca->terminal_velocity);
         ftCommon_8007CF58(fp);
     }
 }
@@ -339,7 +339,7 @@ void ftPe_SpecialHiEnd_Phys(HSD_GObj* gobj)
         float vel_y = fp->self_vel.y;
         ft_80085154(gobj);
         fp->self_vel.y = vel_y;
-        ftCommon_Fall(fp, ca->grav, ca->terminal_vel);
+        ftCommon_Fall(fp, ca->gravity, ca->terminal_velocity);
     } else {
         ft_80084FA8(gobj);
     }
@@ -357,7 +357,7 @@ void ftPe_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
     fp->self_vel.y *= da->x8C;
     fp->self_vel.z *= da->x8C;
     fp->self_vel.y = vel_y;
-    ftCommon_Fall(fp, ca->grav, ca->terminal_vel);
+    ftCommon_Fall(fp, ca->gravity, ca->terminal_velocity);
 }
 
 void ftPe_SpecialHi_8011E064(HSD_GObj* gobj)

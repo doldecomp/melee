@@ -171,7 +171,7 @@ void ftSs_SpecialLwBomb_Phys(HSD_GObj* gobj)
     ftCo_DatAttrs* ft_attr = &fp->co_attrs;
 
     if (fp->cmd_vars[0]) {
-        ftCommon_8007CADC(fp, 0.0f, ft_attr->walk_init_vel * samus_attr->x64,
+        ftCommon_8007CADC(fp, 0.0f, ft_attr->walk_accel_mul * samus_attr->x64,
                           ft_attr->walk_max_vel * samus_attr->x5C);
         ftCommon_ApplyGroundMovement(gobj);
     } else {
