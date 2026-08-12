@@ -5661,8 +5661,8 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
             // find every line with the first vert
             for (var_r25 = 0; var_r25 < 5; var_r25++) {
                 int i_r23;
-                int lstart_r24;
                 int lcount_r22;
+                int lstart_r24;
                 CollLine* lines; /* r5 */
                 lstart_r24 = ((struct pair*) j0_r9->inner)[var_r25].start;
                 (void) lstart_r24;
