@@ -361,8 +361,7 @@ typedef struct grZakoGenerator_Entry {
 } grZakoGenerator_Entry;
 
 typedef struct grZakoGenerator_Data {
-    /* +0 */ grZakoGenerator_Entry entries[80];
-    /* +3C0 */ grZakoGenerator_Entry sentinel;
+    /* +0 */ grZakoGenerator_Entry entries[81];
 } grZakoGenerator_Data;
 
 struct grCorneria_GroundVars {
@@ -656,46 +655,95 @@ struct grGarden_GroundVars2 { // Klaptrap
 };
 
 struct grIceMt_GroundVars {
-    /* +00 gp+C4 */ s16 xC4;
-    /* +02 gp+C6 */ s16 xC6;
-    /* +04 gp+C8 */ s16 xC8;
-    /* +06 gp+CA */ s16 xCA;
-    /* +08 gp+CC */ s16 xCC;
-    /* +0A gp+CE */ s16 xCE;
-    /* +0C gp+D0 */ s16 xD0;
-    /* +0E gp+D2 */ s16 pad_0;
-    /* +10 gp+D4 */ f32 xD4;
-    /* +14 gp+D8 */ s16 xD8;
-    /* +16 gp+DA */ s16 xDA;
-    /* +18 gp+DC */ s16 xDC;
-    /* +1A gp+DE */ s16 xDE;
-    /* +1C gp+E0 */ s16 xE0;
-    /* +1C gp+E0 */ s16 pad_1;
-    /* +20 gp+E4 */ f32 xE4;
-    /* +24 gp+E8 */ u32 xE8;
-    /* +28 gp+EC */ u32 xEC;
-    /* +2C gp+F0 */ u32 pad_2;
-    /* +30 gp+F4 */ s16 xF4[2];
-    /* +34 gp+F8 */ u32 pad_3[2];
+    /*  +0 gp+C4 */ s16 x0;
+    /*  +2 gp+C6 */ s16 x2;
+    /*  +4 gp+C8 */ s16 x4;
+    /*  +6 gp+CA */ s16 x6;
+    /*  +8 gp+CC */ s16 x8;
+    /*  +A gp+CE */ s16 xA;
+    /*  +C gp+D0 */ s16 xC;
+    /*  +E gp+D2 */ s16 xE;
+    /* +10 gp+D4 */ f32 x10;
+    /* +14 gp+D8 */ s16 x14;
+    /* +16 gp+DA */ s16 x16;
+    /* +18 gp+DC */ s16 x18;
+    /* +1A gp+DE */ s16 x1A;
+    /* +1C gp+E0 */ s16 x1C;
+    /* +1E gp+E2 */ s16 x1E;
+    /* +20 gp+E4 */ f32 x20;
+    /* +24 gp+E8 */ u32 x24;
+    /* +28 gp+EC */ u32 x28;
+    /* +2C gp+F0 */ u32 x2C;
+    /* +30 gp+F4 */ s16 x30[2];
+    /* +34 gp+F8 */ u32 x34[2];
     /* +44 gp+10E */ s16 x100[4];
     /* +44 gp+108 */ s16 x108[8];
 };
 
-struct grIceMt_GroundVars2 {
-    /* +00 gp+C4 */ f32 xC4;
-    /* +04 gp+C8 */ HSD_JObj* xC8;
-    /* +08 gp+CC */ HSD_JObj* xCC;
-    /* +0C gp+D0 */ HSD_JObj* xD0;
-    /* +10 gp+D4 */ HSD_JObj* xD4;
-    /* +14 gp+D8 */ HSD_JObj* xD8;
-    /* +18 gp+DC */ HSD_JObj* xDC;
-    /* +1C gp+E0 */ HSD_JObj* xE0;
-    /* +20 gp+E4 */ HSD_JObj* xE4;
-    /* +24 gp+E8 */ HSD_JObj* xE8;
-    /* +28 gp+EC */ HSD_JObj* xEC;
-    /* +2C gp+F0 */ HSD_JObj* xF0;
-    /* +30 gp+F4 */ HSD_JObj* xF4;
-    /* +30 gp+F4 */ HSD_GObj* xF8[20];
+/// @todo ::Map_GroundVars?
+struct grIceMt_GObj1_GroundVars {
+    /*  +0:0 gp+C4:0 */ u8 x0_b0 : 1;
+    /*  +0:1 gp+C4:1 */ u8 x0_b1 : 1;
+    /*  +4   gp+C8   */ HSD_JObj* x4;
+    /*  +8   gp+CC   */ HSD_JObj* x8;
+    /*  +C   gp+D0   */ HSD_JObj* xC;
+    /* +10   gp+D4   */ HSD_JObj* x10;
+    /* +14   gp+D8   */ HSD_JObj* x14;
+    /* +18   gp+DC   */ HSD_JObj* x18;
+    /* +1C   gp+E0   */ HSD_JObj* x1C;
+    /* +20   gp+E4   */ HSD_JObj* x20;
+    /* +24   gp+E8   */ HSD_JObj* x24;
+    /* +28   gp+EC   */ HSD_JObj* x28;
+    /* +2C   gp+F0   */ HSD_JObj* x2C;
+    /* +30   gp+F4   */ HSD_JObj* x30;
+    /* +34   gp+F8   */ HSD_GObj* x34[20];
+};
+
+struct grIceMt_BG_GroundVars {
+    /*  +0 gp+C4 */ float x0;
+};
+
+struct grIceMt_FA364_State {
+    /*  +0 */ s16 phase;
+    /*  +2 */ s16 delay;
+    /*  +4 */ s16 lerp_count;
+    /*  +6 */ s16 burst_count;
+    /*  +8 */ s16 idx;
+    /*  +A */ s16 pad;
+    /*  +C */ f32 cur;
+};
+
+struct grIceMt_GObj9_GObj10_UnderUpperIdPair {
+    /* +0 */ s16 under;
+    /* +2 */ s16 upper;
+};
+
+struct grIceMt_GObj9_GObj10_x0 {
+    /*  +0 gp+C4 */ struct grIceMt_GObj9_GObj10_UnderUpperIdPair ids;
+    /*  +4 gp+C8 */ struct grIceMt_FA364_State state;
+};
+
+struct grIceMt_GObj9_GroundVars {
+    /*  +0 gp+C4 */ struct grIceMt_GObj9_GObj10_x0 x0;
+    /* +14 gp+D8 */ s16 x14;
+    /* +16 gp+DA */ s16 x16;
+    /* +18 gp+DC */ s16 x18[12];
+    /* +30 gp+F4 */ s16 x30[10];
+    /* 0x01C */ char pad_1C[0xFC];
+};
+
+struct grIceMt_GObj10_GroundVars {
+    /*  +0   gp+C4 */ struct grIceMt_GObj9_GObj10_x0 x0;
+    /* +14:0 gp+D8:0 */ u8 x14_b0 : 1;
+    /* +14:1 gp+D8:1 */ u8 x14_b1 : 1;
+    /* +14:2 gp+D8:2 */ u8 x14_b2 : 1;
+    /* +14:3 gp+D8:3 */ u8 x14_b3 : 1;
+    /* +14:4 gp+D8:4 */ u8 x14_b4 : 1;
+    /* +16 gp+DA */ s16 x16;
+    /* +18 gp+DC */ s16 x18;
+    /* +1A gp+DE */ s16 x1A;
+    /* +1C gp+E0 */ s16 x1C;
+    /* +20 gp+E4 */ float x20;
 };
 
 typedef struct grInishie1_Block {
@@ -1786,7 +1834,10 @@ struct Ground {
         struct grGarden_GroundVars garden;
         struct grGarden_GroundVars2 garden2;
         struct grIceMt_GroundVars icemt;
-        struct grIceMt_GroundVars2 icemt2;
+        struct grIceMt_GObj1_GroundVars icemt1;
+        struct grIceMt_BG_GroundVars icemt_bg;
+        struct grIceMt_GObj9_GroundVars icemt9;
+        struct grIceMt_GObj10_GroundVars icemt10;
         struct grInishie1_GroundVars inishie1;
         struct grInishie1_GroundVars2 inishie12;
         struct grInishie1_GroundVars3 inishie13;
@@ -1881,7 +1932,7 @@ struct StageParam {
  * @todo Most fields are still unidentified.
  */
 struct GroundParam {
-    f32 x0;
+    float y;
     s16 x4;
     u8 x6_pad[2];
     s16 x8;

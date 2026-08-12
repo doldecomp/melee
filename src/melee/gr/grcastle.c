@@ -286,7 +286,7 @@ void grCastle_801CD338(bool arg0)
     HSD_GObj* gobj;
     HSD_JObj* jobj;
 
-    gobj = Ground_801C2BA4(6);
+    gobj = Ground_GetMapGObj(6);
     if (gobj != NULL) {
         jobj = Ground_801C3FA4(gobj, 4);
         if (jobj != NULL) {
@@ -671,7 +671,7 @@ bool grCastle_801CDF54(Vec3* vec)
     i = 0;
     if (stage_info.grkind == Gr_Kind_Castle) {
         for (i = 0; i < 9; i += 1) {
-            gobj = Ground_801C2BA4(i + 8);
+            gobj = Ground_GetMapGObj(i + 8);
             if (gobj != NULL) {
                 jobj = Ground_801C3FA4(gobj, 0);
                 lb_8000B1CC(jobj, NULL, vec);
@@ -796,9 +796,9 @@ void grCastle_801CE260(Ground_GObj* gobj)
     grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
 
     gp->u.castle11.xC4.b0 = 0;
-    gp->u.icemt.xC6 = gp->map_id - 8;
+    gp->u.icemt.x2 = gp->map_id - 8;
     gp->u.arwing.xCC = 0;
-    gp->u.flatzone.xCA = yakumono_param->entries[gp->u.icemt.xC6].x0;
+    gp->u.flatzone.xCA = yakumono_param->entries[gp->u.icemt.x2].x0;
 
     gp2 = GET_GROUND(gobj);
     *(u32*) &gp2->u.arwing.xD8 = (u32) Camera_80029044(2);

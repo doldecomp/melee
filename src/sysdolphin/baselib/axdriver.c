@@ -615,7 +615,7 @@ int AXDriver_8038CFF4(int sound_id, u8 volume, u8 pan, int track, int channel)
 
     enabled = OSDisableInterrupts();
     v->flags = (v->flags & ~SMSTATE_MASK) | SMSTATE_ACTIVE;
-    unk_inline(v, &AXDriver_804D7790);
+    unk_inline(v, &AXDriver_804D7794);
     AXDriver_804D77D0++;
     OSRestoreInterrupts(enabled);
 

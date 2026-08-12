@@ -5587,18 +5587,17 @@ sysdolphin/baselib/sislib.c:
 	.sbss       start:0x804D7968 end:0x804D7980
 	.sdata2     start:0x804DEAA8 end:0x804DEB10
 
+sysdolphin/baselib/hsd_4D11.c:
+	.bss        start:0x804D1138 end:0x804D3694
+	.sbss       start:0x804D7980 end:0x804D79A0
+
 sysdolphin/baselib/hsd_40FF.c:
 	.data       start:0x8040FF80 end:0x80430B40
 
 sysdolphin/baselib/hsd_3A94.c:
-	.text       start:0x803A949C end:0x803AA790
-	.data       start:0x80430B40 end:0x80430B84
-	.bss        start:0x804D1138 end:0x804D3694
-	.sbss       start:0x804D7980 end:0x804D79C9
-
-sysdolphin/baselib/hsd_3AA7.c:
-	.text       start:0x803AA790 end:0x803B27F4
-	.data       start:0x80430B84 end:0x80430BD0
+	.text       start:0x803A949C end:0x803B27F4
+	.data       start:0x80430B40 end:0x80430BD0
+	.sbss       start:0x804D79A0 end:0x804D79C9
 
 sysdolphin/baselib/hsd_3B27.c:
 	.text       start:0x803B27F4 end:0x803B2B20

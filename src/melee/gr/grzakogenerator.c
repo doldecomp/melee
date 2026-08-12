@@ -135,7 +135,6 @@ grZakoGenerator_Data* grZakoGenerator_801CA67C(void)
         pointp->entries[i].x2 = 0;
         pointp->entries[i].x4 = 0;
     }
-    // NOTE: this actually intializes pointp->sentinel
     for (; i < 81; i++) {
         pointp->entries[i].x0 = -1;
         pointp->entries[i].x2 = 0;
@@ -258,9 +257,11 @@ void grZakoGenerator_801CAC14(HSD_GObj* gobj)
     s32 kind = itGetKind(gobj);
 
     if (kind == It_Kind_Coin) {
-        grZakoGenerator_Entry* sentinel = &lbl_8049F030.x4->sentinel;
-        if (sentinel->x4 == gobj) {
-            sentinel->x4 = NULL;
+        int i;
+        for (i = 80; i < ARRAY_SIZE(lbl_8049F030.x4->entries); i++) {
+            if (lbl_8049F030.x4->entries[i].x4 == gobj) {
+                lbl_8049F030.x4->entries[i].x4 = NULL;
+            }
         }
     } else {
         s32 idx = ip->xDD4_itemVar.zako.idx;
@@ -279,11 +280,12 @@ void grZakoGenerator_801CACB8(Item_GObj* gobj)
     it_8027CE18(gobj);
 
     if (kind == It_Kind_Coin) {
-        grZakoGenerator_Data* data = lbl_8049F030.x4;
-        grZakoGenerator_Entry* sentinel = &data->sentinel;
-        if (sentinel->x4 == gobj) {
-            sentinel->x0 = -1;
-            data->sentinel.x4 = NULL;
+        int i;
+        for (i = 80; i < ARRAY_SIZE(lbl_8049F030.x4->entries); i++) {
+            if (lbl_8049F030.x4->entries[i].x4 == gobj) {
+                lbl_8049F030.x4->entries[i].x0 = -1;
+                lbl_8049F030.x4->entries[i].x4 = NULL;
+            }
         }
     } else {
         s32 idx = ip->xDD4_itemVar.zako.idx;
@@ -330,11 +332,14 @@ HSD_GObj* grZakoGenerator_801CAE04(grZakoGenerator_SpawnDesc* arg0)
 
 void grZakoGenerator_801CAEB0(int arg0, int arg1)
 {
-    s16 val = arg1;
-    if (lbl_8049F030.x4->sentinel.x0 == -1) {
-        lbl_8049F030.x4->sentinel.x0 = val;
-        lbl_8049F030.x4->sentinel.x8 = arg0;
-        lbl_8049F030.x4->sentinel.x4 = NULL;
+    int i;
+
+    for (i = 80; i < ARRAY_SIZE(lbl_8049F030.x4->entries); i++) {
+        if (lbl_8049F030.x4->entries[i].x0 == -1) {
+            lbl_8049F030.x4->entries[i].x0 = (s16) arg1;
+            lbl_8049F030.x4->entries[i].x8 = arg0;
+            lbl_8049F030.x4->entries[i].x4 = NULL;
+        }
     }
 }
 

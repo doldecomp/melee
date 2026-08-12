@@ -448,35 +448,35 @@ void grRCruise_801FFADC(Ground_GObj* arg0)
             HSD_JObjSetTranslate(temp_r29_2, &sp64);
             HSD_JObjAddTranslationZ(temp_r29_2, -350.0f * Ground_801C0498());
         }
-        gobj = Ground_801C2BA4(2);
+        gobj = Ground_GetMapGObj(2);
         if (gobj != NULL) {
             HSD_JObj* jobj;
             if ((jobj = gobj->hsd_obj) != NULL) {
                 HSD_JObjSetTranslate(jobj, &sp64);
             }
         }
-        gobj = Ground_801C2BA4(1);
+        gobj = Ground_GetMapGObj(1);
         if (gobj != NULL) {
             HSD_JObj* jobj;
             if ((jobj = gobj->hsd_obj) != NULL) {
                 HSD_JObjSetTranslate(jobj, &sp64);
             }
         }
-        gobj = Ground_801C2BA4(5);
+        gobj = Ground_GetMapGObj(5);
         if (gobj != NULL) {
             HSD_JObj* jobj;
             if ((jobj = gobj->hsd_obj) != NULL) {
                 HSD_JObjSetTranslate(jobj, &sp64);
             }
         }
-        gobj = Ground_801C2BA4(6);
+        gobj = Ground_GetMapGObj(6);
         if (gobj != NULL) {
             HSD_JObj* jobj;
             if ((jobj = gobj->hsd_obj) != NULL) {
                 HSD_JObjSetTranslate(jobj, &sp64);
             }
         }
-        gobj = Ground_801C2BA4(4);
+        gobj = Ground_GetMapGObj(4);
         if (gobj != NULL) {
             HSD_JObj* jobj;
             if ((jobj = gobj->hsd_obj) != NULL) {
@@ -682,7 +682,7 @@ void grRCruise_8020071C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = Ground_801C3FA4(gobj, 8);
-    HSD_JObj* jobj5 = Ground_801C3FA4(Ground_801C2BA4(5), 8);
+    HSD_JObj* jobj5 = Ground_801C3FA4(Ground_GetMapGObj(5), 8);
     f32 abs_rot = ABS(gp->u.rcruise.x18);
     f32 wrapped = abs_rot - (360.0f * (s32) (abs_rot / 360.0f));
 
@@ -1013,9 +1013,9 @@ void grRCruise_80201288(HSD_JObj* jobj, void (*callback)(HSD_DObj*, u32),
 static inline void set_hidden_a(int i)
 {
     int joint = lbl_803E5014[i].x0;
-    HSD_GObj* gobj5 = Ground_801C2BA4(5);
+    HSD_GObj* gobj5 = Ground_GetMapGObj(5);
     if (gobj5 != NULL) {
-        HSD_GObj* gobj1 = Ground_801C2BA4(1);
+        HSD_GObj* gobj1 = Ground_GetMapGObj(1);
         if (gobj1 != NULL) {
             HSD_JObj* jobj = Ground_801C3FA4(gobj5, joint);
             if (jobj != NULL) {
@@ -1032,9 +1032,9 @@ static inline void set_hidden_a(int i)
 static inline void set_hidden_b(int i)
 {
     int joint = lbl_803E5014[i].x0;
-    HSD_GObj* gobj5 = Ground_801C2BA4(5);
+    HSD_GObj* gobj5 = Ground_GetMapGObj(5);
     if (gobj5 != NULL) {
-        HSD_GObj* gobj1 = Ground_801C2BA4(1);
+        HSD_GObj* gobj1 = Ground_GetMapGObj(1);
         if (gobj1 != NULL) {
             HSD_JObj* jobj = Ground_801C3FA4(gobj5, joint);
             if (jobj != NULL) {
@@ -1131,7 +1131,7 @@ void grRCruise_80201588(Ground_GObj* gobj)
 
 void grRCruise_80201918(Vec3* vec)
 {
-    HSD_GObj* gobj = Ground_801C2BA4(3);
+    HSD_GObj* gobj = Ground_GetMapGObj(3);
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
         if (gp != NULL) {

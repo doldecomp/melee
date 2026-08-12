@@ -288,7 +288,7 @@ s32 fn_8021F424(void)
     Ground_GObj* ground;
     Ground* gp;
 
-    ground = Ground_801C2BA4(1);
+    ground = Ground_GetMapGObj(1);
     if (ground != NULL) {
         gp = ground->user_data;
         if ((gp != NULL) && (gp->u.unk.xC4 != 0)) {
@@ -432,7 +432,7 @@ void grHeal_8021F79C(s32 arg0, s32 idx, s32 arg2)
     BobOmbRain bobomb_rain;
     PAD_STACK(4);
 
-    gp = Ground_801C2BA4(0);
+    gp = Ground_GetMapGObj(0);
     jobj = Ground_801C3FA4(gp, idx);
     bobomb_rain.x0 = gp;
     bobomb_rain.x4 = NULL;

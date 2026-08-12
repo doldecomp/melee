@@ -26,15 +26,15 @@
 /// @todo
 /* 09CB40 */ static void ftCo_8009CB40(Fighter* fp, ssize_t bone_idx, bool,
                                        FigaTree*);
-/* 09D18C */ static void ftCo_8009D18C(Fighter* fp);
-/* 09D2A4 */ static void ftCo_8009D2A4(Fighter* fp);
-/* 09D3BC */ static void ftCo_8009D3BC(Fighter* fp);
-/* 09D4D4 */ static void ftCo_8009D4D4(Fighter* fp);
-/* 09D5EC */ static void ftCo_8009D5EC(Fighter* fp);
-/* 09D81C */ static void ftCo_8009D81C(Fighter* fp);
-/* 09D920 */ static void ftCo_8009D920(Fighter* fp);
-/* 09DA38 */ static void ftCo_8009DA38(ftKb_Fighter* fp);
-/* 09DB50 */ static void ftCo_8009DB50(Fighter* fp);
+/* 09D18C */ void ftCo_8009D18C(Fighter* fp);
+/* 09D2A4 */ void ftCo_8009D2A4(Fighter* fp);
+/* 09D3BC */ void ftCo_8009D3BC(Fighter* fp);
+/* 09D4D4 */ void ftCo_8009D4D4(Fighter* fp);
+/* 09D5EC */ void ftCo_8009D5EC(Fighter* fp);
+/* 09D81C */ void ftCo_8009D81C(Fighter* fp);
+/* 09D920 */ void ftCo_8009D920(Fighter* fp);
+/* 09DA38 */ void ftCo_8009DA38(ftKb_Fighter* fp);
+/* 09DB50 */ void ftCo_8009DB50(Fighter* fp);
 /* 09DD94 */ static void ftCo_8009DD94(Fighter_GObj*, bool);
 /* 09E1D4 */ static HSD_JObj* ftCo_8009E1D4(HSD_JObj*, HSD_JObj*, HSD_JObj*);
 /* 09E4A8 */ static void ftCo_8009E4A8(Fighter* fp);

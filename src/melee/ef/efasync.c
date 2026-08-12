@@ -23,6 +23,11 @@ static inline void efAsync_SetEffectRotationY(EF_Effect* effect, f32 rotation)
     HSD_JObjSetRotationY(GET_JOBJ(effect->gobj), rotation);
 }
 
+static inline HSD_JObj* efAsync_GetEffectJObj(EF_Effect* effect)
+{
+    return GET_JOBJ(effect->gobj);
+}
+
 static inline void efAsync_SetEffectRotationZFromPtr(EF_Effect* effect,
                                                      const f32* rotation)
 {
@@ -38,6 +43,8 @@ static inline void efAsync_SetEffectScaleXYZ(EF_Effect* effect, f32 scale)
 {
     HSD_JObj* jobj;
 
+    jobj = effect->gobj->hsd_obj;
+    (void) jobj->scale.x;
     jobj = GET_JOBJ(effect->gobj);
     HSD_JObjSetScaleX(jobj, scale);
     jobj = GET_JOBJ(effect->gobj);
@@ -64,14 +71,6 @@ static inline void efAsync_SetEffectFacingDir(EF_Effect* effect,
     HSD_JObjSetRotationY(GET_JOBJ(effect->gobj), rotation);
 }
 
-/**
- * @remarks MWCC allocates the frame bottom-up: outgoing arguments,
- * compiler-generated temporaries, slots billed per inlined call site, user
- * locals by declaration order, then register saves. The target keeps one
- * @c Vec3 (case @c 0x41B) in the compiler-temporary pool, which no
- * user-declared local can occupy.
- * @todo Only differs by register allocation and one stack slot.
- */
 void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
 {
     Vec3 translate;
@@ -457,7 +456,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         efLib_LoadKind = EF_LOADKIND_SYNC;
         ret_obj = efLib_Create_Attach(0xD, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
-            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            jobj_1 = efAsync_GetEffectJObj(ret_obj);
             u32_1 = va_arg(vlist, u32);
             if ((u32) (u32_1 + 0xFFA00000) == 0x6060U) {
                 color = 0x808080;
@@ -510,16 +509,15 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     case 0x41B: {
         HSD_Generator* result;
         HSD_JObj* jobj;
-        Vec3 result_scale;
 
         efLib_LoadKind = EF_LOADKIND_SYNC;
         result = efLib_CreateGenerator_AddAppSRT(0x31);
         if (result != NULL) {
             jobj = va_arg(vlist, HSD_JObj*);
             lb_8000B1CC(jobj, NULL, &result->appsrt->translate);
-            HSD_JObjGetScale(jobj, &result_scale);
+            HSD_JObjGetScale(jobj, &scale);
             result->appsrt->scale.x = result->appsrt->scale.y =
-                result->appsrt->scale.z = result_scale.y;
+                result->appsrt->scale.z = scale.y;
         }
         break;
     }
@@ -720,13 +718,15 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         break;
     }
     case 0x438:
+        PAD_STACK(4);
         ret_obj = efLib_Create_Attach(0x22, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
             jobj_3 = GET_JOBJ(gobj);
             (void) jobj_3;
-            f32_1 = HSD_JObjGetRotationY(jobj_3);
+            HSD_JObjGetRotationY(jobj_3);
+            f32_2 = jobj_3->rotate.y;
             jobj_2 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_2, f32_1);
+            HSD_JObjSetRotationY(jobj_2, f32_2);
             ((EF_Effect*) ret_obj)->update = efLib_Cb_SetScale_FromParamX;
             ((EF_Effect*) ret_obj)->params.x = *va_arg(vlist, f32*);
         }
@@ -1421,6 +1421,9 @@ void efAsync_Spawn(HSD_GObj* gobj, void* queue_head, u32 spawn_kind,
     queued->gfx_id = gfx_id;
     queued->jobj = jobj;
     switch (spawn_kind) {
+    case EF_SPAWN_ATTACH:
+    case EF_SPAWN_POS:
+        break;
     case EF_SPAWN_POS_OFFSET:
         queued->params = *va_arg(vlist, Vec3*);
         break;

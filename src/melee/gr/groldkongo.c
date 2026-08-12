@@ -165,7 +165,7 @@ void grOldKongo_8020F4E4(void) {}
 void grOldKongo_8020F4E8(void)
 {
     HSD_GObj* gobj;
-    gobj = Ground_801C2BA4(1);
+    gobj = Ground_GetMapGObj(1);
     ftCo_800C0764(gobj, 2, grOldKongo_80210454);
     grZakoGenerator_801CAE04(NULL);
 }

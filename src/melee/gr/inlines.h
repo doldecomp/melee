@@ -149,7 +149,7 @@ Ground_UpdateStarFoxSequence(Ground_GObj* gobj, Ground* gp,
     ifStatus_802F6898();
     un_802FF570();
 
-    if (Ground_801C2BA4(sequence_gobj_id) == NULL) {
+    if (Ground_GetMapGObj(sequence_gobj_id) == NULL) {
         if (grCorneria_801E2598(gp->u.starfox.xC4.word,
                                 gp->u.starfox.arwing_slot))
         {

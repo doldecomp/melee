@@ -62,8 +62,6 @@ void un_8031D9E4(int arg0, int arg1, int arg2)
     un_804D6F84[3] = arg2;
 }
 
-/// @todo 99.32%: regswap in the spawn loop -- the counts[i-1] address temp
-///       lands in r27; target uses r25 (shifting the two loop walkers).
 void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
                  int spawn_count)
 {
@@ -80,6 +78,8 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
     f32 scale;
     Vec3* pos;
 
+    PAD_STACK(8);
+
     Camera_80028B9C(6);
     lb_8000FCDC();
     mpColl_80041C78();
@@ -88,7 +88,7 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
     Item_80266FA8();
     Item_80266FCC();
     un_804D6F80 = Ground_801C0498();
-    Ground_801C04BC(0.7f);
+    Ground_SetParamY(0.7f);
     Stage_8022524C();
     Stage_8022532C(St_Kind_Greens, 0);
     ftDemo_ObjAllocInit();
@@ -121,7 +121,7 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
         jobj = GET_JOBJ(un_804A2E98[i - 1]);
         HSD_JObjReqAnimAll(jobj, 140.0f);
         HSD_JObjAnimAll(jobj);
-        HSD_JObjGetTranslation2(GET_JOBJ(un_804A2E98[i - 1]), &v);
+        HSD_JObjGetTranslation2((HSD_JObj*) un_804A2E98[i - 1]->hsd_obj, &v);
         scale = getScale();
         v.x *= scale;
         v.y *= scale;

@@ -51,8 +51,9 @@ grIceMt_801F91EC(HSD_GObj* param_1, s16* param_2, int param_3, int param_4,
                                      CollData* coll, int coll_x50,
                                      mpLib_GroundEnum ground_kind,
                                      float delta_y);
-/* 1F96E0 */ static float grIceMt_801F96E0(struct grIceMt_GroundVars*, float);
-/* 1FA7F0 */ static void grIceMt_801FA7F0(void* user_data, int joint_id,
+/* 1F96E0 */ static float
+grIceMt_801F96E0(struct grIceMt_GObj9_GObj10_UnderUpperIdPair*, float);
+/* 1FA7F0 */ static void onJointCollision(void* user_data, int joint_id,
                                           CollData* coll, int coll_x50,
                                           mpLib_GroundEnum ground_kind,
                                           float delta_y);

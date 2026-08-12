@@ -207,7 +207,7 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
                  ft_800898B4_t* ev_data, u16 attack_instance, s32 arg5,
                  s32 source_ply)
 {
-    Fighter* attacker_fp2;
+    Fighter* fp2;
     Fighter* attacker_fp;
     Fighter* victim_fp;
     plActionStats* acp;
@@ -270,13 +270,15 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
             }
 
             attack_id = ev.x2073;
-            if (attack_id < 0x64) {
+            attack_id2 = attack_id;
+            if (attack_id2 < 0x64) {
                 struct plAttackStats* temp;
 
                 acp = Player_GetActionStats(attacker_fp->player_id);
                 ev_reload.x2070_int = *(s32*) &victim_fp->dmg.x18d4;
-                attacker_fp2 = GET_FIGHTER(attacker_gobj);
-                acp2 = Player_GetActionStats(attacker_fp2->player_id);
+                fp2 = GET_FIGHTER(attacker_gobj);
+                acp2 = Player_GetActionStats(
+                    GET_FIGHTER(attacker_gobj)->player_id);
                 ev_hits.x2070_int = ev_reload.x2070_int;
                 {
                     union Struct2070* ev_hits_ptr = &ev_hits;
@@ -292,8 +294,7 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
 
                 attack_id2 = ev_reload.x2073;
                 if (attack_id2 == 0x63) {
-                    pl_8003FE40(attacker_fp2->player_id,
-                                attacker_fp2->x221F_b4);
+                    pl_8003FE40(fp2->player_id, fp2->x221F_b4);
                 }
 
                 if (!ev_data->x10_b7 &&
@@ -313,8 +314,7 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
                         }
                     }
 
-                    pl_8003DFF4(attacker_fp2->player_id,
-                                attacker_fp2->x221F_b4, attack_id2);
+                    pl_8003DFF4(fp2->player_id, fp2->x221F_b4, attack_id2);
                 }
 
                 if (attacked_from_behind) {
@@ -369,13 +369,13 @@ void pl_800384DC(HSD_GObj* gobj, int arg1, void* arg2)
     ft_800898B4_t* ev_data;
     union Struct2070 ev;
     union Struct2070 ev2;
-    union Struct2070 ev3;
     union Struct2070 ev4;
-    PAD_STACK(16);
+    union Struct2070 ev3;
+    PAD_STACK(20);
 
     fp = GET_FIGHTER(gobj);
     ev_data = arg2;
-    ev.x2070_int = arg1;
+    ev = *(union Struct2070*) &arg1;
 
     if (ev.x2073 != 0 && ev.x2073 < 0x64) {
         struct plAttackStats* temp;
@@ -383,7 +383,10 @@ void pl_800384DC(HSD_GObj* gobj, int arg1, void* arg2)
         ev2.x2070_int = ev.x2070_int;
         acp = Player_GetActionStats(fp->player_id);
         ev3.x2070_int = ev.x2070_int;
-        pl_80037BC0_inline(&acp->hits, &ev3);
+        {
+            union Struct2070* ev3_ptr = &ev3;
+            pl_80037BC0_inline(&acp->hits, ev3_ptr);
+        }
 
         if (ev_data != NULL) {
             temp = &acp->hits;
@@ -401,7 +404,10 @@ void pl_800384DC(HSD_GObj* gobj, int arg1, void* arg2)
                                     acp->x358_hits.by_attack_counts[attack_id])
         {
             ev4.x2070_int = ev.x2070_int;
-            pl_80037BC0_inline(&acp->x358_hits, &ev4);
+            {
+                union Struct2070* ev4_ptr = &ev4;
+                pl_80037BC0_inline(&acp->x358_hits, ev4_ptr);
+            }
 
             if (ev_data != NULL) {
                 temp = &acp->x358_hits;

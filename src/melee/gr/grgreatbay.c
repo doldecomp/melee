@@ -1134,7 +1134,7 @@ bool grGreatBay_801F66A4(void)
     Ground* gp;
 
     if (stage_info.grkind == Gr_Kind_GreatBay) {
-        gobj = Ground_801C2BA4(1);
+        gobj = Ground_GetMapGObj(1);
         if (gobj != NULL) {
             gp = GET_GROUND(gobj);
             if (gp != NULL) {
