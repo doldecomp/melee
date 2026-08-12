@@ -115,7 +115,7 @@ jobs:
             run_ninja
             cp "$report" "$expected"
 
-            git checkout "$head"
+            git checkout -f "$head"
             run_ninja
 
             build/tools/objdiff-cli report changes -o "$changes" "$expected" "$report"
