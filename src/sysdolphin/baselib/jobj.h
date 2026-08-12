@@ -370,11 +370,6 @@ static inline f32 HSD_JObjGetRotationY(HSD_JObj* jobj)
     return jobj->rotate.y;
 }
 
-static inline void HSD_JObjCheckRotationY(HSD_JObj* jobj)
-{
-    HSD_ASSERT(730, jobj);
-}
-
 static inline f32 HSD_JObjGetRotationZ(HSD_JObj* jobj)
 {
     HSD_ASSERT(745, jobj);
