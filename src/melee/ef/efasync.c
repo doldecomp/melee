@@ -723,7 +723,7 @@ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         if (ret_obj != NULL) {
             jobj_3 = GET_JOBJ(gobj);
             (void) jobj_3;
-            HSD_JObjCheckRotationY(jobj_3);
+            HSD_JObjGetRotationY(jobj_3);
             f32_2 = jobj_3->rotate.y;
             jobj_2 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
             HSD_JObjSetRotationY(jobj_2, f32_2);
