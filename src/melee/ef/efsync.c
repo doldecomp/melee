@@ -310,8 +310,8 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         ret_obj = hsd_8039EFAC(0, 0xB, 0x2AF9, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4D8: {
-        HSD_Generator* generator = efSync_GetGenerator(
-            efLib_CreateGenerator_AddAppSRT(0x61U));
+        HSD_Generator* generator =
+            efSync_GetGenerator(efLib_CreateGenerator_AddAppSRT(0x61U));
         if (generator != NULL) {
             va_vec3 = va_arg(vlist, Vec3*);
             psAppSRT = generator->appsrt;
@@ -533,8 +533,8 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         ret_obj = efLib_CreateGenerator(0x6AU, va_arg(vlist, Vec3*));
         break;
     case 0x504: {
-        HSD_Generator* generator = efSync_GetGenerator(
-            efLib_CreateGenerator_AddAppSRT(0x6DU));
+        HSD_Generator* generator =
+            efSync_GetGenerator(efLib_CreateGenerator_AddAppSRT(0x6DU));
         if (generator != NULL) {
             va_vec3 = va_arg(vlist, Vec3*);
             psAppSRT = generator->appsrt;
@@ -547,8 +547,8 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         break;
     }
     case 0x505: {
-        HSD_Generator* generator = efSync_GetGenerator(
-            efLib_CreateGenerator_AddAppSRT(0x79U));
+        HSD_Generator* generator =
+            efSync_GetGenerator(efLib_CreateGenerator_AddAppSRT(0x79U));
         if (generator != NULL) {
             va_vec3 = va_arg(vlist, Vec3*);
             psAppSRT = generator->appsrt;
