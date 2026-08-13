@@ -792,26 +792,31 @@ f32 it_80270CD8(Item* ip, HitCapsule* hit)
 
 void it_80270E30(Item_GObj* arg_item_gobj)
 {
+    Item* arg_item;
     u32 index;
-    f32 sp18;
-    Vec3 hurt_pos;
-    DamageLogEntry* damage_log;
+    UNUSED f32 unused_float1;
+    struct {
+        Vec3 v;
+    } hurt_pos;
+    struct {
+        DamageLogEntry* v;
+    } damage_log;
     HSD_GObj* item_owner_gobj;
     f32 knockback_cap;
-    UNUSED f32 unused_float0;
     f32 dir;
-    UNUSED f32 unused_float1;
     f32 knockback;
     f32 max_knockback;
     UNUSED f32 unused_float2;
     UNUSED f32 unused_float3;
     UNUSED f32 unused_float4;
+    f32 sp18;
     UNUSED s32 unused_int0;
-    UNUSED s32 unused_int1;
     s32 element;
     Item* item;
-    Item* arg_item;
     DamageLogEntry* temp_r29;
+    struct {
+        Vec3* v;
+    } hurt_pos_p;
     u32 index2;
     HitCapsule* hit2;
     ItemAttr* attr;
@@ -823,76 +828,84 @@ void it_80270E30(Item_GObj* arg_item_gobj)
     if (it_804D6D18 != 0U) {
         arg_item = arg_item_gobj->user_data;
         max_knockback = -1.0f;
-        damage_log = it_804A0E70;
-        index = 0;
-        while (index < it_804D6D18) {
-            hit = damage_log->x8;
-            attr = arg_item->xCC_item_attr;
-            (void) attr;
-            if (hit->x28 != 0) {
-                knockback = (0.01f * hit->x24 *
-                             ((it_804D6D28->x80_float[11] *
-                               (attr->x1C_damage_mul *
-                                ((it_804D6D28->x80_float[10] *
-                                  it_804D6D28->x80_float[8]) +
-                                 (it_804D6D28->x80_float[9] *
-                                  (it_804D6D28->x80_float[10] * hit->x28))))) +
-                              it_804D6D28->x80_float[12])) +
-                            hit->x2C;
-            } else {
-                knockback = ((0.01f * hit->x24) *
-                             ((it_804D6D28->x80_float[11] *
-                               (attr->x1C_damage_mul *
-                                ((it_804D6D28->x80_float[8] *
-                                  (arg_item->xC9C + (f32) arg_item->xCA0)) +
-                                 (it_804D6D28->x80_float[9] *
-                                  (hit->damage * (arg_item->xC9C +
-                                                  (f32) arg_item->xCA0)))))) +
-                              it_804D6D28->x80_float[12])) +
-                            hit->x2C;
-            }
-            knockback_cap = it_804D6D28->x80_float[7];
-            if (knockback >= knockback_cap) {
-                knockback = knockback_cap;
-            }
-            if (!arg_item->xDCF_flag.b1) {
-                if ((arg_item->hold_kind == 4) || (arg_item->hold_kind == 6)) {
-                    sp18 = hit->damage;
-                    hit2 = damage_log->x8;
-                    arg_item2 = arg_item_gobj->user_data;
-                    hurt_coll_pos = &hit2->hurt_coll_pos;
-                    element = hit_effect_ids[hit2->element];
-                    switch (element) {
-                    case Ef_Id_Unk1000:
-                        efSync_Spawn(Ef_Id_Unk1000, arg_item_gobj,
-                                     hurt_coll_pos, &sp18);
-                        break;
-                    case Ef_Id_Unk1001:
-                    case Ef_Id_Unk1002:
-                    case Ef_Id_Unk1004:
-                    case Ef_Id_Unk1046:
-                    case Ef_Id_Unk1145:
-                        efSync_Spawn(hit_effect_ids[hit2->element],
-                                     arg_item_gobj, hurt_coll_pos, arg_item2);
-                        break;
-                    case Ef_Id_Unk1005:
-                        efSync_Spawn(hit_effect_ids[hit2->element],
-                                     arg_item_gobj, hurt_coll_pos,
-                                     &arg_item2->facing_dir);
-                        break;
-                    }
+        {
+            hurt_pos_p.v = &hurt_pos.v;
+            damage_log.v = it_804A0E70;
+            index = 0;
+            while (index < it_804D6D18) {
+                hit = damage_log.v->x8;
+                attr = arg_item->xCC_item_attr;
+                (void) attr;
+                if (hit->x28 != 0) {
+                    knockback =
+                        (0.01f * hit->x24 *
+                         ((it_804D6D28->x80_float[11] *
+                           (attr->x1C_damage_mul *
+                            ((it_804D6D28->x80_float[10] *
+                              it_804D6D28->x80_float[8]) +
+                             (it_804D6D28->x80_float[9] *
+                              (it_804D6D28->x80_float[10] * hit->x28))))) +
+                          it_804D6D28->x80_float[12])) +
+                        hit->x2C;
                 } else {
-                    hurt_pos = hit->hurt_coll_pos;
-                    efSync_Spawn(Ef_Id_Unk1000, arg_item_gobj, &hurt_pos,
-                                 &damage_log->x8->damage);
+                    knockback =
+                        ((0.01f * hit->x24) *
+                         ((it_804D6D28->x80_float[11] *
+                           (attr->x1C_damage_mul *
+                            ((it_804D6D28->x80_float[8] *
+                              (arg_item->xC9C + (f32) arg_item->xCA0)) +
+                             (it_804D6D28->x80_float[9] *
+                              (hit->damage *
+                               (arg_item->xC9C + (f32) arg_item->xCA0)))))) +
+                          it_804D6D28->x80_float[12])) +
+                        hit->x2C;
                 }
+                knockback_cap = it_804D6D28->x80_float[7];
+                if (knockback >= knockback_cap) {
+                    knockback = knockback_cap;
+                }
+                if (!arg_item->xDCF_flag.b1) {
+                    if ((arg_item->hold_kind == 4) ||
+                        (arg_item->hold_kind == 6))
+                    {
+                        sp18 = hit->damage;
+                        hit2 = damage_log.v->x8;
+                        arg_item2 = arg_item_gobj->user_data;
+                        hurt_coll_pos = &hit2->hurt_coll_pos;
+                        element = hit_effect_ids[hit2->element];
+                        switch (element) {
+                        case Ef_Id_Unk1000:
+                            efSync_Spawn(Ef_Id_Unk1000, arg_item_gobj,
+                                         hurt_coll_pos, &sp18);
+                            break;
+                        case Ef_Id_Unk1001:
+                        case Ef_Id_Unk1002:
+                        case Ef_Id_Unk1004:
+                        case Ef_Id_Unk1046:
+                        case Ef_Id_Unk1145:
+                            efSync_Spawn(hit_effect_ids[hit2->element],
+                                         arg_item_gobj, hurt_coll_pos,
+                                         arg_item2);
+                            break;
+                        case Ef_Id_Unk1005:
+                            efSync_Spawn(hit_effect_ids[hit2->element],
+                                         arg_item_gobj, hurt_coll_pos,
+                                         &arg_item2->facing_dir);
+                            break;
+                        }
+                    } else {
+                        hurt_pos.v = hit->hurt_coll_pos;
+                        efSync_Spawn(Ef_Id_Unk1000, arg_item_gobj,
+                                     hurt_pos_p.v, &damage_log.v->x8->damage);
+                    }
+                }
+                if (knockback > max_knockback) {
+                    max_knockback = knockback;
+                    index2 = index;
+                }
+                damage_log.v++;
+                index++;
             }
-            if (knockback > max_knockback) {
-                max_knockback = knockback;
-                index2 = index;
-            }
-            damage_log++;
-            index++;
         }
         temp_r29 = &it_804A0E70[index2];
         switch (temp_r29->x0) {
