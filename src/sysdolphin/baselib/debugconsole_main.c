@@ -599,7 +599,7 @@ void hsd_80394434(void* text)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
     s32* x4_ptr = (s32*) sp + 1;
-    s32 x = sp->x4;
+    s32 x = *x4_ptr;
     s32 y = sp->x8;
     s32 mode = sp->x0_b7;
     s32 interlace = sp->x0_b6;
