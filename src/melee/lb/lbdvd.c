@@ -161,12 +161,12 @@ done:
     return entry;
 }
 
-void lbDvd_800178E8(int arg0, char* arg1, int arg2, int arg3, int arg4,
+void lbDvd_800178E8(int arg0, const char* name, int arg2, int arg3, int arg4,
                     int arg5, int arg6, u8 arg7, int arg8)
 {
     u8 _[8];
-    int temp_r3 = DVDConvertPathToEntrynum(lbFile_80016204(arg1));
-    lbDvd_80017740(arg0, temp_r3, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
+    int entry = DVDConvertPathToEntrynum(lbFileGetFullName(name));
+    lbDvd_80017740(arg0, entry, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
 }
 
 void lbDvd_80017960(void)
@@ -220,7 +220,7 @@ void lbDvd_80017960(void)
     }
 }
 
-void lbDvd_80017A80(void)
+static void lbDvd_80017A80(void)
 {
     preloadCache.persistent_heap = 6;
     lbDvd_80017CC4();
@@ -283,9 +283,10 @@ void lbDvd_CachePreloadedFile(s32 index)
         } else {
             preloadEntry->state = 2;
             preloadEntry->load_score = 9999;
-            lbFile_800164A4(
-                preloadEntry->entry_num, (u32) preloadEntry->raw_data->addr,
-                &preloadEntry->size, 2, lbDvd_80017E64, (void*) index);
+            lbFile_800164A4(preloadEntry->entry_num,
+                            (uintptr_t) preloadEntry->raw_data->addr,
+                            &preloadEntry->size, 2, lbDvd_80017E64,
+                            (void*) index);
         }
     }
 }
@@ -412,7 +413,7 @@ static inline void inline1_inner(struct lbDvd_803B72C0_t* data)
     const char* x4 = data->x4;
     int x8 = data->x8;
     u8 tmp = data->x0;
-    int temp_r3_2 = DVDConvertPathToEntrynum(lbFile_80016204(x4));
+    int temp_r3_2 = DVDConvertPathToEntrynum(lbFileGetFullName(x4));
     lbDvd_80017740(tmp, temp_r3_2, 2, 2, 0, 1, 9, 0x80, x8);
 }
 
@@ -434,7 +435,7 @@ static inline void inline2_inner(struct lbDvd_803B72C0_t* data)
     filename = data->x4;
     effect_index = data->x8;
     type = data->x0;
-    entry_num = DVDConvertPathToEntrynum(lbFile_80016204(filename));
+    entry_num = DVDConvertPathToEntrynum(lbFileGetFullName(filename));
     lbDvd_80017740(type, entry_num, 3, 3, 0, 1, 8, 0x40, effect_index);
 }
 
@@ -457,7 +458,7 @@ static inline void inline2(void)
 HSD_Archive* lbDvd_8001819C(const char* basename)
 {
     HSD_Archive* archive;
-    char* filename = lbFile_80016204(basename);
+    char* filename = lbFileGetFullName(basename);
     archive = lbDvd_GetPreloadedArchive(DVDConvertPathToEntrynum(filename));
     if (DbLevel != 0 && preloadCache.preloaded && archive == NULL) {
         HSD_ASSERTREPORT(948, 0, "[LbDvd] %s is not PRELOADed.\n", filename);

@@ -889,7 +889,7 @@ struct grInishie2_GroundVars3 {
 struct grStadium_GroundVars {
     /* +0 gp+C4:0 */ u8 xC4_b0 : 1;
     /* +0 gp+C4:1 */ u8 xC4_b1 : 1;
-    /* +0 gp+C8:0 */ u32 xC8;
+    /* +0 gp+C8:0 */ size_t xC8; ///< file size
     /* +4 gp+CC   */ HSD_MObj* xCC;
     /* +4 gp+D0   */ UnkArchiveStruct* xD0;
     /* +4 gp+D4   */ float xD4;

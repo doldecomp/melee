@@ -178,20 +178,20 @@ int lbHeap_80015BB8(int arg0)
     return lbHeap_80431FA0.heap_array[arg0].status;
 }
 
-void* lbHeap_80015BD0(int arg0, int arg1)
+void* lbHeap_80015BD0(int heap_id, size_t size)
 {
     Handle* result;
     int enabled = OSDisableInterrupts();
-    struct Heap* p = &lbHeap_80431FA0.heap_array[arg0];
+    struct Heap* p = &lbHeap_80431FA0.heap_array[heap_id];
 
     if (p->status == LbHeapStatus_Create) {
         if (p->type == 0) {
             int cur_heap = HSD_GetHeap();
             HSD_SetHeap(p->id);
-            result = HSD_MemAlloc(arg1);
+            result = HSD_MemAlloc(size);
             HSD_SetHeap(cur_heap);
         } else {
-            result = lbMemory_80014FC8(p->handle, arg1);
+            result = lbMemory_80014FC8(p->handle, size);
             if (p->type == 3) {
                 result = result->x4_lo;
             }

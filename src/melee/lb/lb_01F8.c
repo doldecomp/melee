@@ -17,7 +17,7 @@ struct lbl_804335B8_t {
     /* 0x70 */ struct HSD_ImageDesc x70;
     /* 0x88 */ struct HSD_SObjDesc x88;
     /* 0x90 */ struct HSD_SObj* x90;
-    /* 0x94 */ u32 unk94;
+    /* 0x94 */ void* unk94;
     /* 0x98 */ u32 unk98;
     /* 0x9C */ char pad_9C[0xA0 - 0x9C];
 }; /* size = 0xA0 */
@@ -99,7 +99,7 @@ void lbMthp8001FAA0(const char* filename, int width, int height)
     memset(&header, 0, 0x1CU);
     header.w = width;
     header.h = height;
-    THPDec_8032F8D4(lbl_804335B8.unk94, context);
+    THPDec_8032F8D4((uintptr_t) lbl_804335B8.unk94, context);
     decode_buf = HSD_MemAlloc(THPDec_8032FD40(context, header.h));
     decoded = THPVideoDecode(&header, &output, decode_buf,
                              (void*) lbl_804335B8.unk94, context);
