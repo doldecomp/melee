@@ -1572,8 +1572,8 @@ void ftData_800859A8(Fighter* fp)
 
 void ftData_80085A14(FighterKind kind)
 {
-    u32 sp18;
-    u32 a_head;
+    void* sp18;
+    void* a_head;
     ftData* temp_r27 = gFtDataList[kind];
     u32 temp_r0;
     int i;
@@ -1593,7 +1593,8 @@ void ftData_80085A14(FighterKind kind)
                     HSD_ASSERTREPORT(0x9AF, 0, "fighter figatree over! %x\n",
                                      temp_r0);
                 }
-                temp_r27->xC[i].x14 = (a_head + temp_r27->xC[i].x4);
+                temp_r27->xC[i].x14 =
+                    (uintptr_t) ((u8*) a_head + temp_r27->xC[i].x4);
             }
         }
         ftData_Table_Unk0[kind].data = (void*) a_head;

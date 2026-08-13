@@ -262,7 +262,7 @@ struct PreloadEntry {
     s16 load_score;
     u8 field8_0xa;
     u8 field9_0xb;
-    u32 size;
+    size_t size;
     HSD_AllocEntry* raw_data;
     HSD_AllocEntry* archive;
     s32 effect_index;

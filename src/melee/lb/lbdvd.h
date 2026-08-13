@@ -17,9 +17,9 @@ typedef void (*lbDvd_Callback)(int, int index, int, int);
 /* 017740 */ void* lbDvd_80017740(int type, int entry_num, int transient_heap,
                                   int heap, u32 size, int load_state,
                                   int load_score, u8, int effect_index);
-/* 0178E8 */ void lbDvd_800178E8(int, char*, int, int, int, int, int, u8, int);
+/* 0178E8 */ void lbDvd_800178E8(int, const char* name, int, int, int, int,
+                                 int, u8, int);
 /* 017960 */ void lbDvd_80017960(void);
-/* 017A80 */ void lbDvd_80017A80(void);
 /* 017AB0 */ void lbDvd_CachePreloadedFile(s32 index);
 /* 017CC4 */ void lbDvd_80017CC4(void);
 /* 017E64 */ void lbDvd_80017E64(int, int, void*, bool);

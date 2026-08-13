@@ -1909,7 +1909,8 @@ void grStadium_801D4194(Ground_GObj* arg0)
     HSD_SisLib_803A6368(gp2->win_static_p, 3);
 }
 
-void fn_801D4220(int un0, int un1, UNK_T un2, bool cancelflag)
+/// HSD_DevComCallback
+static void fn_801D4220(int dcreq, int args, void* buf, bool cancelflag)
 {
     Ground_GObj* map_gobj;
     Ground* gp;
@@ -2153,8 +2154,8 @@ void grStadium_801D4548(Ground_GObj* gobj)
             gp = GET_GROUND(map_gobj);
             HSD_ASSERT(0x99B, gp);
             gp->u.stadium.xC4_b1 = true;
-            lbFile_80016580(datfiles[var_r29], (u32) gp->u.stadium.xCC,
-                            (void*) &gp->u.stadium.xC8, fn_801D4220, NULL);
+            lbFile_80016580(datfiles[var_r29], gp->u.stadium.xCC,
+                            &gp->u.stadium.xC8, fn_801D4220, NULL);
             temp_r31->u.stadium.xDC = 1;
             return;
         }

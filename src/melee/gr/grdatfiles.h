@@ -8,7 +8,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 1C5FC0 */ void grDatFiles_801C5FC0(HSD_Archive*, void* data, u32 length);
+/* 1C5FC0 */ void grDatFiles_801C5FC0(HSD_Archive*, void* data, size_t length);
 /* 1C6038 */ void grDatFiles_801C6038(void*, s32, s32);
 /* 1C6228 */ static void grDatFiles_801C6228(UnkStageDat*);
 /* 1C6288 */ void grDatFiles_801C6288(void);
