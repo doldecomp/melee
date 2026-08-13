@@ -4340,25 +4340,40 @@ done:
 void mpLeftWallGetBottom(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    int new_id;
+    struct {
+        int id;
+    } w;
     int line_offset;
 
     LINEID_CHECK(4510, line_id);
 
     if (line_id != -1) {
     }
-    kind = mpLineGetKindInline(line_id);
-    new_id = line_id;
-    do {
-        line_offset = new_id * sizeof(CollLine);
-        new_id = mpLineGetPrev(new_id);
-    } while (new_id != -1 &&
-             !(kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND)));
 
+    kind = mpLineGetKindInline(line_id);
+    w.id = line_id;
+again:
+    {
+        MapLine* line;
+        int next;
+        line = ((CollLine*) ((int) groundCollLine
+                             + w.id * sizeof(CollLine)))->x0;
+        line_offset = w.id * sizeof(CollLine);
+        next = line->prev_id1;
+        w.id = mpLineGetPrevCheckInline(line, next);
+    }
+    if (w.id == -1) {
+        goto done;
+    }
+    if (kind == (groundCollLine[w.id].flags & LINE_FLAG_KIND)) {
+        (void) line_id;
+        goto again;
+    }
+done:
     {
         CollVtx* vtx =
-            &groundCollVtx[groundCollLine[line_offset / sizeof(CollLine)]
-                               .x0->v0_idx];
+            &groundCollVtx[((CollLine*) ((int) groundCollLine + line_offset))
+                               ->x0->v0_idx];
         pos_out->x = vtx->pos.x;
         pos_out->y = vtx->pos.y;
         pos_out->z = 0.0F;
