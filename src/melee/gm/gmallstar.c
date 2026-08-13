@@ -741,8 +741,7 @@ void gm_801B60A4_OnLoad(void)
     u32 index;
     int temp;
     gm_803DEBE8_t tmp;
-    u8* q;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     data = &gm_80473A18;
     gmMainLib_8015CDE0();
@@ -768,15 +767,17 @@ void gm_801B60A4_OnLoad(void)
 
     for (index = 0; index < 25; index++) {
         gm_803DEBE8_t* opponent = &gm_803DEBE8[index];
-        opponent->x2 = HSD_Randi(2) == 0 ? opponent->x0 : opponent->x1;
+        opponent->x2 = ((u8*) opponent)[HSD_Randi(2)];
     }
 
     for (index = 0; index < 0x17; index++) {
-        u32 swap_idx = index + HSD_Randi(0x18 - index);
-        gm_803DEBE8_t* swap = &gm_803DEBE8[swap_idx];
+        u32 rand_offset = HSD_Randi(0x18 - index);
         tmp = gm_803DEBE8[index];
-        gm_803DEBE8[index] = *swap;
-        *swap = tmp;
+        {
+            gm_803DEBE8_t* swap = &gm_803DEBE8[index + rand_offset];
+            gm_803DEBE8[index] = *swap;
+            *swap = tmp;
+        }
     }
 
     data->x74 = 0;
