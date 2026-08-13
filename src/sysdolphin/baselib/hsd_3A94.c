@@ -3351,15 +3351,15 @@ s32 fn_803AF3F0(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         s32 ofs = state->x20;
         s32 fd = state->x4;
         s32 retries;
-        s32 r;
+        s32 open_result;
         for (retries = 0; retries < 10; retries++) {
-            r = CARDFastOpen(fd, ofs, &state->file_info);
-            if (r != -1) {
+            open_result = CARDFastOpen(fd, ofs, &state->file_info);
+            if (open_result != -1) {
                 break;
             }
         }
-        if (r < 0) {
-            return r;
+        if (open_result < 0) {
+            return open_result;
         }
     }
 
