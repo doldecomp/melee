@@ -5849,17 +5849,29 @@ void mpLib_80058560(void)
 void mpLib_80058614_Floor(void)
 {
     // CollLine* var_r31;
-    CollJoint* joint_r7;
+    CollJoint* jp;
     int count_r8;
     int count_r5;
     int i;
     int j;
+    CollLine* linebase;
+    CollLine* line_r31;
+    int count_r30;
+    int count_r29;
+    MapJoint* j_inner;
+    CollVtx* v0;
+    CollVtx* v1;
+    float* top_p;
+    float* bottom_p;
+    float* right_p;
+    float* left_p;
+    CollJoint* joint_r7;
     PAD_STACK(8);
 
-    joint_r7 = groundCollJoint;
+    jp = (joint_r7 = groundCollJoint);
     count_r8 = mpLib_804D64B4->joint_count;
-    for (count_r5 = 0; count_r5 < count_r8; count_r5++) {
-        if (joint_r7[count_r5].xE) {
+    for (count_r5 = 0; count_r5 < count_r8; count_r5++, jp++) {
+        if (jp->xE) {
             break;
         }
     }
@@ -5868,10 +5880,10 @@ void mpLib_80058614_Floor(void)
         return;
     }
 
-    mpLib_80458868[1].right = -F32_MAX;
-    mpLib_80458868[1].top = -F32_MAX;
-    mpLib_80458868[1].left = F32_MAX;
-    mpLib_80458868[1].bottom = F32_MAX;
+    *(right_p = &mpLib_80458868[1].right) = -F32_MAX;
+    *(top_p = &mpLib_80458868[1].top) = -F32_MAX;
+    *(left_p = &mpLib_80458868[1].left) = F32_MAX;
+    *(bottom_p = &mpLib_80458868[1].bottom) = F32_MAX;
 
     for (i = 0; i < count_r8; i++, joint_r7++) {
         joint_r7->xE = false;
@@ -5882,17 +5894,13 @@ void mpLib_80058614_Floor(void)
         }
 
         {
-            CollLine* line_r31;
-            int count_r30;
-            int count_r29;
-            MapJoint* j_inner = joint_r7->inner;
-            line_r31 = &groundCollLine[j_inner->floor_start];
-            count_r30 = j_inner->floor_count;
+            j_inner = joint_r7->inner;
             count_r29 = j_inner->dynamic_count;
+            (void) groundCollVtx[count_r30 = j_inner->floor_count];
+            linebase = groundCollLine;
+            line_r31 = &linebase[j_inner->floor_start];
 
             for (j = 0; j < count_r30; j++, line_r31++) {
-                CollVtx* v0;
-                CollVtx* v1;
                 float x0;
                 float y0;
                 float x1;
@@ -5912,36 +5920,36 @@ void mpLib_80058614_Floor(void)
                 x1 = v1->pos.x;
                 y1 = v1->pos.y;
 
-                if (mpLib_80458868[1].top < y0) {
-                    mpLib_80458868[1].top = y0;
+                if (*top_p < y0) {
+                    *top_p = y0;
                 }
-                if (mpLib_80458868[1].bottom > y0) {
-                    mpLib_80458868[1].bottom = y0;
+                if (*bottom_p > y0) {
+                    *bottom_p = y0;
                 }
-                if (mpLib_80458868[1].right < x0) {
-                    mpLib_80458868[1].right = x0;
+                if (*right_p < x0) {
+                    *right_p = x0;
                 }
-                if (mpLib_80458868[1].left > x0) {
-                    mpLib_80458868[1].left = x0;
+                if (*left_p > x0) {
+                    *left_p = x0;
                 }
-                if (mpLib_80458868[1].top < y1) {
-                    mpLib_80458868[1].top = y1;
+                if (*top_p < y1) {
+                    *top_p = y1;
                 }
-                if (mpLib_80458868[1].bottom > y1) {
-                    mpLib_80458868[1].bottom = y1;
+                if (*bottom_p > y1) {
+                    *bottom_p = y1;
                 }
-                if (mpLib_80458868[1].right < x1) {
-                    mpLib_80458868[1].right = x1;
+                if (*right_p < x1) {
+                    *right_p = x1;
                 }
-                if (mpLib_80458868[1].left > x1) {
-                    mpLib_80458868[1].left = x1;
+                if (*left_p > x1) {
+                    *left_p = x1;
                 }
             }
             if (count_r29 != 0) {
                 count_r30 = count_r29;
                 j = 0;
                 count_r29 = 0;
-                line_r31 = &groundCollLine[joint_r7->inner->dynamic_start];
+                line_r31 = &linebase[joint_r7->inner->dynamic_start];
                 goto block_8;
             }
         }
