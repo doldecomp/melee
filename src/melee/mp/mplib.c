@@ -5685,65 +5685,64 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
     CollJoint* j0_r9;
     CollJoint* j1_r10;
     CollLine* line_base;
+    int vi;
     int i;
-    MapJoint* cd0;
-    int vstart0;
     int vcount0;
+    int vstart0;
+    struct { CollLine* p; } ln;
 
-    {
-        CollJoint* joint = &groundCollJoint[joint_id0];
-        j0_r9 = joint;
-    }
-    {
-        CollJoint* joint = &groundCollJoint[joint_id1];
-        j1_r10 = joint;
-    }
+    j0_r9 = &groundCollJoint[joint_id0];
+    j1_r10 = &groundCollJoint[joint_id1];
     line_base = groundCollLine;
     for (i = 0; i < 5; i++) {
-        int j;
-        int idx;
         struct pair* pair; /* r4 */
         int count;         /* r0 */
         int temp;          /* r0 */
-        CollLine* lines;   /* r5 */
-
-        pair = (struct pair*) j0_r9->inner + i;
-        count = pair->count;
-        lines = &line_base[idx = pair->start];
-        for (j = 0; j < count; j++, idx++) {
-            temp = lines[j].x0->prev_id1;
-            if (temp != -1) {
-                temp = line_base[temp].x0->next_id1;
-                if (temp != -1 && idx != temp) {
-                    lines[j].x0->prev_id1 = -1;
+        {
+            int j;
+            int idx;
+            pair = (struct pair*) j0_r9->inner + i;
+            count = pair->count;
+            (void) line_base[idx = pair->start];
+            ln.p = &line_base[idx];
+            for (j = 0; j < count; j++, idx++) {
+                temp = ln.p[j].x0->prev_id1;
+                if (temp != -1) {
+                    temp = line_base[temp].x0->next_id1;
+                    if (temp != -1 && idx != temp) {
+                        ln.p[j].x0->prev_id1 = -1;
+                    }
                 }
-            }
-            temp = lines[j].x0->next_id1;
-            if (temp != -1) {
-                temp = line_base[temp].x0->prev_id1;
-                if (temp != -1 && idx != temp) {
-                    lines[j].x0->next_id1 = -1;
+                temp = ln.p[j].x0->next_id1;
+                if (temp != -1) {
+                    temp = line_base[temp].x0->prev_id1;
+                    if (temp != -1 && idx != temp) {
+                        ln.p[j].x0->next_id1 = -1;
+                    }
                 }
             }
         }
-
-        pair = (struct pair*) j1_r10->inner + i;
-        count = pair->count;
-        idx = pair->start;
-        lines = &line_base[idx];
-        for (j = 0; j < count; j++, idx++) {
-            temp = lines[j].x0->prev_id1;
-            if (temp != -1) {
-                temp = line_base[temp].x0->next_id1;
-                if (temp != -1 && idx != temp) {
-                    lines[j].x0->prev_id1 = -1;
+        {
+            int j;
+            int idx;
+            pair = (struct pair*) j1_r10->inner + i;
+            count = pair->count;
+            (void) line_base[idx = pair->start];
+            ln.p = &line_base[idx];
+            for (j = 0; j < count; j++, idx++) {
+                temp = ln.p[j].x0->prev_id1;
+                if (temp != -1) {
+                    temp = line_base[temp].x0->next_id1;
+                    if (temp != -1 && idx != temp) {
+                        ln.p[j].x0->prev_id1 = -1;
+                    }
                 }
-            }
-            temp = lines[j].x0->next_id1;
-            if (temp != -1) {
-                temp = line_base[temp].x0->prev_id1;
-                if (temp != -1 && idx != temp) {
-                    lines[j].x0->next_id1 = -1;
+                temp = ln.p[j].x0->next_id1;
+                if (temp != -1) {
+                    temp = line_base[temp].x0->prev_id1;
+                    if (temp != -1 && idx != temp) {
+                        ln.p[j].x0->next_id1 = -1;
+                    }
                 }
             }
         }
@@ -5752,23 +5751,14 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
     mpLib_GetJointVtxRange(j0_r9, &vstart0, &vcount0);
 
     // for every pair of verts
-    for (i = 0; i < vcount0; i++, vstart0++) {
+    for (vi = 0; vi < vcount0; vi++, vstart0++) {
         CollVtx* v0_r29;
         int v;       /* r28 */
         int vcount1; /* r27 */
         int vid_r26; /* r26 */
-        int vstart1_r4;
-        MapJoint* cd1 = j1_r10->inner;
-        {
-            CollVtx* vtx = &groundCollVtx[vstart0];
-            v0_r29 = vtx;
-        }
-        {
-            int start = cd1->vtx_start;
-            vstart1_r4 = start;
-        }
-        vcount1 = cd1->vtx_count;
-        vid_r26 = vstart1_r4;
+        v0_r29 = &groundCollVtx[vstart0];
+        vcount1 = j1_r10->inner->vtx_count;
+        vid_r26 = j1_r10->inner->vtx_start;
         for (v = 0; v < vcount1; v++, vid_r26++) {
             int var_r25;
             CollVtx* v1 = &groundCollVtx[vid_r26];
@@ -5782,58 +5772,48 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
 
             // find every line with the first vert
             for (var_r25 = 0; var_r25 < 5; var_r25++) {
-                int i_r23;
                 int lstart_r24;
+                int i_r23;
                 int lcount_r22;
-                CollLine* lines; /* r5 */
-                lstart_r24 = ((struct pair*) j0_r9->inner)[var_r25].start;
-                (void) lstart_r24;
                 lcount_r22 = ((struct pair*) j0_r9->inner)[var_r25].count;
-                lines = &line_base[lstart_r24];
+                (void) line_base[lstart_r24 = ((struct pair*) j0_r9->inner)[var_r25].start];
                 for (i_r23 = 0; i_r23 < lcount_r22;
-                     i_r23++, lines++, lstart_r24++)
+                     i_r23++, lstart_r24++)
                 {
-                    int j;
-                    s16 lstart_r20;
-                    s16 lcount_r17;
-                    CollLine* iter_r3;
-                    if (vstart0 == lines->x0->v0_idx) {
+                    if (vstart0 == line_base[lstart_r24].x0->v0_idx) {
+                        int j;
+                        int lstart_r20;
+                        s16 lcount_r17;
                         // if the first vert is that line's v0
                         // find every line with the second vert as v1
                         for (j = 0; j < 5; j++) {
                             int k;
-                            lstart_r20 =
-                                ((struct pair*) j1_r10->inner)[j].start;
                             lcount_r17 =
                                 ((struct pair*) j1_r10->inner)[j].count;
-                            iter_r3 = &line_base[lstart_r20];
-                            for (k = 0; k < lcount_r17; k++) {
-                                if (vid_r26 == iter_r3->x0->v1_idx) {
-                                    lines->x0->prev_id1 = lstart_r20 + k;
-                                    iter_r3->x0->next_id1 = lstart_r24;
+                            (void) line_base[lstart_r20 = ((struct pair*) j1_r10->inner)[j].start];
+                            for (k = 0; k < lcount_r17; k++, lstart_r20++) {
+                                if (vid_r26 == line_base[lstart_r20].x0->v1_idx) {
+                                    line_base[lstart_r24].x0->prev_id1 = lstart_r20;
+                                    line_base[lstart_r20].x0->next_id1 = lstart_r24;
                                 }
-                                iter_r3++;
                             }
                         }
-                    } else if (vstart0 == lines->x0->v1_idx) {
+                    } else if (vstart0 == line_base[lstart_r24].x0->v1_idx) {
+                        int j;
+                        int lstart_r20;
+                        s16 lcount_r17;
                         // else if the first vert is that line's v1
                         // find every line with the second vert as v0
                         for (j = 0; j < 5; j++) {
                             int k;
                             lcount_r17 =
                                 ((struct pair*) j1_r10->inner)[j].count;
-                            {
-                                s16 start =
-                                    ((struct pair*) j1_r10->inner)[j].start;
-                                lstart_r20 = start;
-                            }
-                            iter_r3 = &line_base[lstart_r20];
-                            for (k = 0; k < lcount_r17; k++) {
-                                if (vid_r26 == iter_r3->x0->v0_idx) {
-                                    lines->x0->next_id1 = lstart_r20 + k;
-                                    iter_r3->x0->prev_id1 = lstart_r24;
+                            (void) line_base[lstart_r20 = ((struct pair*) j1_r10->inner)[j].start];
+                            for (k = 0; k < lcount_r17; k++, lstart_r20++) {
+                                if (vid_r26 == line_base[lstart_r20].x0->v0_idx) {
+                                    line_base[lstart_r24].x0->next_id1 = lstart_r20;
+                                    line_base[lstart_r20].x0->prev_id1 = lstart_r24;
                                 }
-                                iter_r3++;
                             }
                         }
                     }
