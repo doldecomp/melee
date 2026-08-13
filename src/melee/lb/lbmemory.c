@@ -13,12 +13,12 @@ struct MemEntry {
 };
 
 struct LBMgr {
-    OSAlarm alarm;                  // 0x00
-    u8* src;                        // 0x28
-    u8* dst;                        // 0x2C
-    u32 size;                       // 0x30
-    u32 offset;                     // 0x34
-    u32 cb_arg;                     // 0x38
+    OSAlarm alarm; // 0x00
+    u8* src;       // 0x28
+    u8* dst;       // 0x2C
+    u32 size;      // 0x30
+    u32 offset;    // 0x34
+    u32 cb_arg;    // 0x38
     HSD_DevComCallback cb;
 };
 

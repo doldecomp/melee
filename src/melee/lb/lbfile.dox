@@ -4,7 +4,8 @@
  *
  * Reads files into the heap synchronously, with optional preload caching.
  *
- * The target file is typically specified by its "base name", which omits the .usd or .dat extension.
+ * The target file is typically specified by its "base name", which omits the
+ * .usd or .dat extension.
  */
 
 void lbFile_800161C4(int file, uintptr_t src, uintptr_t dest, size_t size,
@@ -29,11 +30,14 @@ void lbFile_8001668C(const char* basename, void* dst, size_t* size);
  * @param basename Base (extensionless) file name to read
  * @param[out] dst Address of read contents
  * @param[out] size Size of read contents
- * @returns True iff the file was already preloaded, rather than read from disc.
+ * @returns True iff the file was already preloaded, rather than read from
+ * disc.
  */
-bool lbFile_800168A0(int heap_id, const char* basename, void** dst, size_t* size);
+bool lbFile_800168A0(int heap_id, const char* basename, void** dst,
+                     size_t* size);
 
 /**
- * @brief Same as lbFile_800168A0, but with an implicit heap_id=0 and no preload cache.
+ * @brief Same as lbFile_800168A0, but with an implicit heap_id=0 and no
+ * preload cache.
  */
 void lbFile_80016760(const char* basename, void** dst, size_t* size);
