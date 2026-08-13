@@ -6757,25 +6757,19 @@ void mpLib_80059E60(void)
 void mpLib_DrawCrosses(s16* idx, int len, GXColor arg2)
 {
     Vec3 sp34;
-    s16* idx_ptr;
-    Vec3* out_vtx;
     int i;
     Vec3* vtx;
     int idx_i;
     int out_count;
-    PAD_STACK(4);
 
-    out_vtx = (vtx = mpLib_80458888);
-    for (idx_ptr = &idx[idx_i = 0], out_count = 0;
+    for (idx_i = 0, out_count = 0;
          idx_i < len && out_count < (signed) ARRAY_SIZE(mpLib_80458888);
          idx_i++)
     {
-        if (Ground_801C2D24(*idx_ptr, &sp34)) {
+        if (Ground_801C2D24(idx[idx_i], &sp34)) {
+            mpLib_80458888[out_count] = sp34;
             out_count += 1;
-            *out_vtx = sp34;
-            out_vtx++;
         }
-        idx_ptr += 1;
     }
 
     if (!out_count) {
@@ -6785,13 +6779,18 @@ void mpLib_DrawCrosses(s16* idx, int len, GXColor arg2)
     mpLib_SetupDraw(arg2);
     GXBegin(GX_LINES, GX_VTXFMT0, out_count * 6);
     for (i = 0; i < out_count; i++) {
-        GXPosition3f32(vtx->x - 3.0F, vtx->y, vtx->z);
-        GXPosition3f32(3.0F + vtx->x, vtx->y, vtx->z);
-        GXPosition3f32(vtx->x, vtx->y - 3.0F, vtx->z);
-        GXPosition3f32(vtx->x, 3.0F + vtx->y, vtx->z);
-        GXPosition3f32(vtx->x, vtx->y, vtx->z - 3.0F);
-        GXPosition3f32(vtx->x, vtx->y, 3.0F + vtx->z);
-        vtx++;
+        GXPosition3f32(mpLib_80458888[i].x - 3.0F, mpLib_80458888[i].y,
+                       mpLib_80458888[i].z);
+        GXPosition3f32(3.0F + mpLib_80458888[i].x, mpLib_80458888[i].y,
+                       mpLib_80458888[i].z);
+        GXPosition3f32(mpLib_80458888[i].x, mpLib_80458888[i].y - 3.0F,
+                       mpLib_80458888[i].z);
+        GXPosition3f32(mpLib_80458888[i].x, 3.0F + mpLib_80458888[i].y,
+                       mpLib_80458888[i].z);
+        GXPosition3f32(mpLib_80458888[i].x, mpLib_80458888[i].y,
+                       mpLib_80458888[i].z - 3.0F);
+        GXPosition3f32(mpLib_80458888[i].x, mpLib_80458888[i].y,
+                       3.0F + mpLib_80458888[i].z);
     }
 }
 
