@@ -4131,26 +4131,37 @@ static inline u32 mpLineGetKindInline(int line_id)
 void mpFloorGetRight(int line_id, Vec3* pos_out)
 {
     u32 kind;
-    int new_id;
+    struct {
+        int id;
+    } w;
     int line_offset;
 
     LINEID_CHECK(4465, line_id);
 
-    new_id = line_id;
+    w.id = line_id;
     kind = mpLineGetKindInline(line_id);
-    do {
+again:
+    {
         MapLine* line;
-        line_offset = new_id * sizeof(CollLine);
-        line = ((CollLine*) (line_offset + (int) groundCollLine))->x0;
-        new_id = line->next_id1;
-        new_id = mpLineGetNextCheckInline(line, new_id);
-    } while (new_id != -1 &&
-             kind == (groundCollLine[new_id].flags & LINE_FLAG_KIND));
-
+        int next;
+        line = ((CollLine*) ((int) groundCollLine
+                             + w.id * sizeof(CollLine)))->x0;
+        line_offset = w.id * sizeof(CollLine);
+        next = line->next_id1;
+        w.id = mpLineGetNextCheckInline(line, next);
+    }
+    if (w.id == -1) {
+        goto done;
+    }
+    if (kind == (groundCollLine[w.id].flags & LINE_FLAG_KIND)) {
+        (void) line_id;
+        goto again;
+    }
+done:
     {
         CollVtx* vtx =
-            &groundCollVtx[groundCollLine[line_offset / sizeof(CollLine)]
-                               .x0->v1_idx];
+            &groundCollVtx[((CollLine*) ((int) groundCollLine + line_offset))
+                               ->x0->v1_idx];
         pos_out->x = vtx->pos.x;
         pos_out->y = vtx->pos.y;
         pos_out->z = 0.0F;
