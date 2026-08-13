@@ -43,10 +43,11 @@
 /* 271D2C */ static void it_80271D2C(Item_GObj* arg_item_gobj);
 /* 271F78 */ static void it_80271F78(Item_GObj* arg_item_gobj);
 
-// return true if (pos_x, pos_y), expanded by the sum of two ECBs, encloses
-// target.
-static inline bool itColl_chkECBOverlap(f32 pos_x, f32 pos_y, itECB* ecb_a,
-                                        itECB* ecb_b, Vec3* target)
+/** @returns `true` if (@p pos_x, @p pos_y), expanded by the sum of two ECBs,
+ * encloses target.
+ */
+static bool itColl_chkECBOverlap(f32 pos_x, f32 pos_y, itECB* ecb_a,
+                                 itECB* ecb_b, Vec3* target)
 {
     f32 top;
     f32 left;
@@ -121,22 +122,6 @@ static s32 hit_effect_ids[17] = {
     /* [HitElement_Leadead]  */ 0,
 };
 
-static inline void it_8026FA2C_inline(Item* arg_item0, HitCapsule* arg_hit,
-                                      s32 arg2, Item* arg_item3, bool arg_chk)
-{
-    HitCapsule* hit;
-    int i;
-
-    for (i = 0; i < ARRAY_SIZE(arg_item0->x5D4_hitboxes); i++) {
-        hit = &arg_item0->x5D4_hitboxes[i].hit;
-        if (hit->state != HitCapsule_Disabled && hit->x4 == arg_hit->x4 &&
-            lbColl_80008688(hit, arg2, arg_item3) && arg_chk)
-        {
-            it_804D6D1C[i] = 0;
-        }
-    }
-}
-
 void it_8026FA2C(Item* arg_item0, HitCapsule* arg_hit, s32 arg2,
                  Item* arg_item3, bool arg_chk)
 {
@@ -150,26 +135,6 @@ void it_8026FA2C(Item* arg_item0, HitCapsule* arg_hit, s32 arg2,
         {
             it_804D6D1C[i] = 0;
         }
-    }
-}
-
-static inline void it_8026FAC4_inline(Item* arg_item0, HitCapsule* arg_hit,
-                                      s32 arg2, Item* arg3, bool chk)
-{
-    HSD_GObj* item_gobj;
-    Item* item;
-
-    if (arg_item0->xAC4_ignoreItemID != 0) {
-        item_gobj = HSD_GObj_Entities->items;
-        while (item_gobj != NULL) {
-            item = GET_ITEM(item_gobj);
-            if (item->xAC4_ignoreItemID == arg_item0->xAC4_ignoreItemID) {
-                it_8026FA2C_inline(item, arg_hit, arg2, arg3, chk);
-            }
-            item_gobj = item_gobj->next;
-        }
-    } else {
-        it_8026FA2C_inline(arg_item0, arg_hit, arg2, arg3, chk);
     }
 }
 
@@ -194,8 +159,8 @@ void it_8026FAC4(Item* arg_item0, HitCapsule* arg_hit, s32 arg2, void* arg3,
     }
 }
 
-static inline void it_8026FC00_inline(Item* arg_item, HitCapsule* arg_hit,
-                                      int arg2, Fighter* arg3)
+static void it_8026FC00_inline(Item* arg_item, HitCapsule* arg_hit, int arg2,
+                               Fighter* arg3)
 {
     int i;
     for (i = 0; i < ARRAY_SIZE(arg_item->x5D4_hitboxes); i++) {
@@ -296,7 +261,7 @@ void it_8026FE68(Item* arg_item0, HitCapsule* hit1, Item* arg_item2,
         } else {
             var_r26 = 3;
         }
-        it_8026FAC4_inline(arg_item2, hit3, var_r26, arg_item0, true);
+        it_8026FAC4(arg_item2, hit3, var_r26, arg_item0, true);
         if (dmg_int > arg_item2->xC48) {
             arg_item2->xC48 = dmg_int;
             arg_item2->xCF4_fighterGObjUnk = NULL;
@@ -333,7 +298,7 @@ void it_8026FE68(Item* arg_item0, HitCapsule* hit1, Item* arg_item2,
         } else {
             var_r26 = 3;
         }
-        it_8026FAC4_inline(arg_item0, hit1, var_r26, arg_item2, false);
+        it_8026FAC4(arg_item0, hit1, var_r26, arg_item2, false);
         if (dmg_int > arg_item0->xC48) {
             arg_item0->xC48 = dmg_int;
             arg_item0->xCF4_fighterGObjUnk = NULL;
@@ -364,8 +329,8 @@ void it_8026FE68(Item* arg_item0, HitCapsule* hit1, Item* arg_item2,
     }
 }
 
-static inline void it_8026FAC4_outline(Item* ip, HitCapsule* hit, s32 arg2,
-                                       void* arg3, bool chk)
+static void it_8026FAC4_noinline(Item* ip, HitCapsule* hit, s32 arg2,
+                                 void* arg3, bool chk)
 {
     it_8026FAC4(ip, hit, arg2, arg3, chk);
 }
@@ -407,7 +372,7 @@ void it_802701BC(Item_GObj* gobj)
                                 fp->x34_scale.y, fp->cur_pos.z))
                         {
                             f32 pos_x;
-                            it_8026FAC4_outline(ip, new_var, 0, fp, 0);
+                            it_8026FAC4_noinline(ip, new_var, 0, fp, 0);
                             pos_x = ABS(fp->cur_pos.x - ip->pos.x);
                             if (pos_x < ip->xD10) {
                                 ip->grab_victim = ip->atk_victim = fp->gobj;
@@ -426,9 +391,8 @@ void it_802701BC(Item_GObj* gobj)
     }
 }
 
-static inline void it_8026F9AC_outline(s32 arg0, void* fighter,
-                                       HitCapsule* hit, Item* arg_item,
-                                       HurtCapsule* hurt)
+static void it_8026F9AC_noinline(s32 arg0, void* fighter, HitCapsule* hit,
+                                 Item* arg_item, HurtCapsule* hurt)
 {
     it_8026F9AC(arg0, fighter, hit, arg_item, hurt);
 }
@@ -500,7 +464,7 @@ void it_802703E8(Item_GObj* arg_item_gobj)
                     if (dmg > arg_item->xCA4) {
                         arg_item->xCA4 = dmg;
                     }
-                    it_8026F9AC_outline(
+                    it_8026F9AC_noinline(
                         1, fighter, hit, arg_item,
                         &arg_item->xACC_itemHurtbox[hurt_index]);
                     it_8027B378(fighter->gobj, arg_item->entity, dmg);
@@ -526,8 +490,8 @@ void it_802703E8(Item_GObj* arg_item_gobj)
     }
 }
 
-static inline bool it_802706D0_sub(Item_GObj* arg_item_gobj, Item* item,
-                                   Item* arg_item, HitCapsule* hit)
+static bool it_802706D0_sub(Item_GObj* arg_item_gobj, Item* item,
+                            Item* arg_item, HitCapsule* hit)
 {
     bool chk2 = false;
     u32 i;
@@ -562,7 +526,7 @@ static inline bool it_802706D0_sub(Item_GObj* arg_item_gobj, Item* item,
     return chk2;
 }
 
-static inline s32 it_802706D0_sub2(Item* item, Item* arg_item)
+static s32 it_802706D0_sub2(Item* item, Item* arg_item)
 {
     s32 n = 0;
     u32 i;
@@ -589,7 +553,7 @@ static inline void it_802706D0_sub3(Item* item, Item* arg_item,
     f32 dir;
     s32 dmg;
     ItemKind kind;
-    it_8026FAC4_outline(item, hit, (hit->x41_b4) ? 8 : 0, arg_item, 0);
+    it_8026FAC4_noinline(item, hit, (hit->x41_b4) ? 8 : 0, arg_item, 0);
     if (ABS(item->x40_vel.x) < it_804D6D28->xD4) {
         if (item->pos.x > arg_item->pos.x) {
             dir = -1.0f;
@@ -611,7 +575,7 @@ static inline void it_802706D0_sub3(Item* item, Item* arg_item,
     if (dmg > arg_item->xCA4) {
         arg_item->xCA4 = dmg;
     }
-    it_8026F9AC_outline(2, item, hit, arg_item, arg_hurt);
+    it_8026F9AC_noinline(2, item, hit, arg_item, arg_hurt);
     it_8027B408(item->entity, arg_item->entity, dmg);
     kind = arg_item->kind;
     if ((kind == It_PKind_Random) &&
