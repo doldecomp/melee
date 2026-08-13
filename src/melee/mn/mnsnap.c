@@ -394,6 +394,7 @@ void mnSnap_80253964(void)
     s32 j;
     s32 page = mnSnap_804A0A10.cur_page;
     s32 base = page * 4;
+    page = page;
 
     PAD_STACK(8);
 
