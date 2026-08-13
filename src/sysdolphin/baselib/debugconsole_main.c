@@ -1572,6 +1572,40 @@ static inline void ps_clear_nodes(struct ParticleScreenState* sp)
     sp->x0_b5 = 1;
 }
 
+static inline void hsd_80395D88_dump_gpr(OSContext* ctx)
+{
+    int i;
+
+    OSReport("- GPR -----------------------------------------------\n");
+    i = 0;
+    do {
+        OSReport("R%02d=%08X(%11d) R%02d=%08X(%11d)\n", i, ctx->gpr[i],
+                 ctx->gpr[i], i + 0x10, ctx->gpr[i + 0x10],
+                 ctx->gpr[i + 0x10]);
+        i++;
+    } while (i < 0x10);
+}
+
+static inline void hsd_80395D88_dump_misc(OSContext* ctx)
+{
+    int i;
+
+    OSReport("- MISC ----------------------------------------------\n");
+    OSReport("SRR0=%08X SRR1=%08X\n", ((u32*) ctx)[0x198 / 4],
+             ((u32*) ctx)[0x19C / 4]);
+    OSReport("CR  =%08X LR  =%08X\n", ((u32*) ctx)[0x80 / 4],
+             ((u32*) ctx)[0x84 / 4]);
+    OSReport("CTR =%08X XER =%08X\n", ((u32*) ctx)[0x88 / 4],
+             ((u32*) ctx)[0x8C / 4]);
+    OSReport("FPSCR=%08X\n", ((u32*) ctx)[0x194 / 4]);
+    i = 0;
+    do {
+        OSReport("GQR%d=%08X GQR%d=%08X\n", i, ((u32*) ctx)[i], i + 4,
+                 ((u32*) ctx)[0x1B4 / 4 + i]);
+        i++;
+    } while (i < 4);
+}
+
 bool hsd_80395D88(void* data)
 {
     switch (hsd_80395550(data)) {
@@ -1601,40 +1635,14 @@ bool hsd_80395D88(void* data)
             ps_remove_node(&hsd_804CF810, data);
             return false;
         case 6: {
-            int i;
-            OSContext* ctx;
             OSContext** ctx_ptr;
             int saved;
 
             if (*(ctx_ptr = &hsd_804CF810.xD4) != NULL) {
                 saved = hsd_80393D2C(1);
-                ctx = *ctx_ptr;
-                OSReport(
-                    "- GPR -----------------------------------------------\n");
-                i = 0;
-                do {
-                    OSReport("R%02d=%08X(%11d) R%02d=%08X(%11d)\n", i,
-                             ctx->gpr[i], ctx->gpr[i], i + 0x10,
-                             ctx->gpr[i + 0x10], ctx->gpr[i + 0x10]);
-                    i++;
-                } while (i < 0x10);
+                hsd_80395D88_dump_gpr(*ctx_ptr);
                 hsd_80394950(*ctx_ptr);
-                ctx = *ctx_ptr;
-                OSReport(
-                    "- MISC ----------------------------------------------\n");
-                OSReport("SRR0=%08X SRR1=%08X\n", ((u32*) ctx)[0x198 / 4],
-                         ((u32*) ctx)[0x19C / 4]);
-                OSReport("CR  =%08X LR  =%08X\n", ((u32*) ctx)[0x80 / 4],
-                         ((u32*) ctx)[0x84 / 4]);
-                OSReport("CTR =%08X XER =%08X\n", ((u32*) ctx)[0x88 / 4],
-                         ((u32*) ctx)[0x8C / 4]);
-                OSReport("FPSCR=%08X\n", ((u32*) ctx)[0x194 / 4]);
-                i = 0;
-                do {
-                    OSReport("GQR%d=%08X GQR%d=%08X\n", i, ((u32*) ctx)[i],
-                             i + 4, ((u32*) ctx)[0x1B4 / 4 + i]);
-                    i++;
-                } while (i < 4);
+                hsd_80395D88_dump_misc(*ctx_ptr);
                 hsd_80393D2C(saved);
             }
             ps_remove_node(&hsd_804CF810, data);
