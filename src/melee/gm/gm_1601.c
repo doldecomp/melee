@@ -2808,11 +2808,25 @@ u32 fn_801656A8(MatchEnd* arg0, u32 arg1)
     return ret;
 }
 
+static inline s32 fn_8016588C_clamp(s32 v)
+{
+    s32 lim = (1 << 24) - 1;
+    s32 result = v;
+
+    if (lim < 0) {
+        lim = -lim;
+    }
+    if (v > lim) {
+        result = lim;
+    } else if (v < -lim) {
+        result = -lim;
+    }
+    return result;
+}
+
 s32 fn_8016588C(lbl_8046B6A0_24C_t* arg0, s32 arg1)
 {
     s32 v;
-    s32 lim;
-    s32 result;
 
     PAD_STACK(0x18);
 
@@ -2822,71 +2836,25 @@ s32 fn_8016588C(lbl_8046B6A0_24C_t* arg0, s32 arg1)
         } else {
             v = arg0->x58[arg1].x9;
         }
-        lim = (1 << 24) - 1;
-        result = v;
-        if (lim < 0) {
-            lim = -lim;
-        }
-        if (v > lim) {
-            result = lim;
-        } else if (v < -lim) {
-            result = -lim;
-        }
+        return fn_8016588C_clamp(v);
     } else if (arg0->x5 == 2) {
-        result = ((MatchPlayerData*) arg0->x58)[arg1].x1C;
-        lim = (1 << 24) - 1;
-        if (lim < 0) {
-            lim = -lim;
-        }
-        if (result > lim) {
-            result = lim;
-        } else if (result < -lim) {
-            result = -lim;
-        }
+        return fn_8016588C_clamp(((MatchPlayerData*) arg0->x58)[arg1].x1C);
     } else if (arg0->x5 == 1) {
         if ((s8) arg0->x58[arg1].x8 != 0) {
-            result = (s8) arg0->x58[arg1].x8;
+            v = (s8) arg0->x58[arg1].x8;
         } else {
-            result = arg0->x58[arg1].x28 / 60 + 0xFF000001;
+            v = arg0->x58[arg1].x28 / 60 + 0xFF000001;
         }
-        lim = (1 << 24) - 1;
-        if (lim < 0) {
-            lim = -lim;
-        }
-        if (result > lim) {
-            result = lim;
-        } else if (result < -lim) {
-            result = -lim;
-        }
+        return fn_8016588C_clamp(v);
     } else if (arg0->x5 == 3) {
         pl_80039450(arg1);
-        result = fn_8016FFD4(arg0, 2, (u8) arg1);
-        lim = (1 << 24) - 1;
-        if (lim < 0) {
-            lim = -lim;
-        }
-        if (result > lim) {
-            result = lim;
-        } else if (result < -lim) {
-            result = -lim;
-        }
+        return fn_8016588C_clamp(fn_8016FFD4(arg0, 2, (u8) arg1));
     } else {
         u16 a = arg0->x58[arg1].xA;
-        v = arg0->x58[arg1].x20 - (arg0->x58[arg1].x24 - a) +
-            a * (s8) arg0->xC;
-        lim = (1 << 24) - 1;
-        result = v;
-        if (lim < 0) {
-            lim = -lim;
-        }
-        if (v > lim) {
-            result = lim;
-        } else if (v < -lim) {
-            result = -lim;
-        }
+        return fn_8016588C_clamp(arg0->x58[arg1].x20 -
+                                 (arg0->x58[arg1].x24 - a) +
+                                 a * (s8) arg0->xC);
     }
-
-    return result;
 }
 
 struct fn_80165AC0_loser_bits {
