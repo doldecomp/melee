@@ -384,7 +384,7 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
             return ftCo_CpuSelectAttack(fp, cpu, &sp3C[i]);
         }
     }
-    HSD_ASSERT(0xFA, NULL);
+    HSD_ASSERT(0xFA, 0);
 }
 
 int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
@@ -586,13 +586,12 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
             return ftCo_CpuSelectAttack(fp, cpu, &sp40[i]);
         }
     }
-    HSD_ASSERT(0x1C5, NULL);
+    HSD_ASSERT(0x1C5, 0);
 }
 
 int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
 {
     ftCo_AttackEntry sp34[32];
-    u8 operand_pad[4];
     ftCo_x50_t* x50 = arg1;
     ftCo_x50_attr* attrs;
     ftCo_AttackEntry* list = arg2;
@@ -652,6 +651,8 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
         f32 relx;
         f32 dirx;
         f32 scale;
+        f32 upper;
+        f32 lower;
         found = false;
         if (list->x20 > cpu->level) {
             list++;
@@ -728,14 +729,14 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
             dirx = list->x08 * fp->x34_scale.y;
             diry = list->x0C * fp->x34_scale.y;
         } else {
-            dirx = -list->x0C * fp->x34_scale.y;
-            (void) dirx;
-            diry = -list->x08 * fp->x34_scale.y;
+            dirx = fp->x34_scale.y * -list->x0C;
+            diry = fp->x34_scale.y * -list->x08;
         }
         scale = fp->x34_scale.y;
-        if (list->x14 * scale > relPredY &&
-            relPredY + yBound > list->x10 * scale && dirx < relx + sizeHalf &&
-            diry > relx - sizeHalf)
+        upper = list->x14 * scale;
+        lower = list->x10 * scale;
+        if (upper > relPredY && lower < relPredY + yBound &&
+            dirx < relx + sizeHalf && diry > relx - sizeHalf)
         {
             if (cpu->xC8 != 0) {
                 for (j = 0; j < cpu->xC8; j++) {
@@ -769,15 +770,13 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
     }
     inv = 1.0 / sum;
     acc = 0.0f;
-    sel = sp34;
-    for (i = 0; i < count; i++) {
+    for (i = 0, sel = sp34; i < count; i++, sel++) {
         acc += sel->weight;
         if (acc * inv >= r) {
             return sp34[i].cmd;
         }
-        sel++;
     }
-    HSD_ASSERT(0x26A, NULL);
+    HSD_ASSERT(0x26A, 0);
 }
 
 int ftCo_800B6208(ftCo_AttackEntry* arr)
