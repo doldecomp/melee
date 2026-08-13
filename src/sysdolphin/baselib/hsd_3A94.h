@@ -66,8 +66,8 @@ typedef struct CardState {
 /* 3ADE4C */ s32 fn_803ADE4C(s32 card_state, s32 channel, s32 callback);
 /* 3ADF90 */ s32 fn_803ADF90(struct CardState*, s32, s32, s32, s32);
 /* 3AE7F8 */ s32 fn_803AE7F8(struct CardState*, s32, s32, s32, s32);
-/* 3AF3F0 */ s32 fn_803AF3F0(s32, s32, s32, s32, s32);
-/* 3B0120 */ s32 fn_803B0120(s32, s32, s32, s32, s32);
+/* 3AF3F0 */ s32 fn_803AF3F0(CardState* state, s32, s32, s32, s32);
+/* 3B0120 */ s32 fn_803B0120(CardState* state, s32, s32, s32, s32);
 /* 3B0E9C */ s32 fn_803B0E9C(struct CardState*, s32, s32, s32, s32);
 /* 3B1338 */ s32 fn_803B1338(CardState* state, s32);
 /* 3B1F78 */ s32 fn_803B1F78(CardState* state, s32 channel, s32 file_id,
