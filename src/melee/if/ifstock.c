@@ -661,7 +661,7 @@ void ifStock_802F98E8(unsigned char player, int b)
     }
 }
 
-HSD_GObj* ifStock_802F9F48(int arg)
+static inline HSD_GObj* ifStock_802F9F48_inline(int arg)
 {
     struct ifStock_804A1378* q = &ifStock_804A1378;
     HSD_GObj* gobj = GObj_Create(14, 15, 0);
@@ -684,6 +684,10 @@ HSD_GObj* ifStock_802F9F48(int arg)
     HSD_AObjSetRate(jobj2->u.dobj->mobj->tobj->aobj, 0.0f);
     HSD_JObjAnimAll(jobj);
     return gobj;
+}
+HSD_GObj* ifStock_802F9F48(int arg)
+{
+    return ifStock_802F9F48_inline(arg);
 }
 
 HSD_GObj* ifStock_802FA118(int arg)
