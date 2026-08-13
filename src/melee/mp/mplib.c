@@ -1020,6 +1020,7 @@ void mpLibLoad(MapCollData* coll_data)
 int mpLineGetNext(int line_id)
 {
     s16 result = groundCollLine[line_id].x0->next_id1;
+    int ret = result;
 
     if (result != -1) {
         u32 flags = groundCollLine[result].flags;
@@ -1029,7 +1030,7 @@ int mpLineGetNext(int line_id)
             CollVtx* v0 = &groundCollVtx[groundCollLine[result].x0->v0_idx];
 
             if (SQ(v1->pos.x - v0->pos.x) + SQ(v1->pos.y - v0->pos.y) < 4.0) {
-                return result;
+                return ret;
             }
         }
     }
@@ -1040,6 +1041,7 @@ int mpLineGetNext(int line_id)
 int mpLineGetPrev(int line_id)
 {
     s16 result = groundCollLine[line_id].x0->prev_id1;
+    int ret = result;
 
     if (result != -1) {
         u32 flags = groundCollLine[result].flags;
@@ -1049,7 +1051,7 @@ int mpLineGetPrev(int line_id)
             CollVtx* v1 = &groundCollVtx[groundCollLine[result].x0->v1_idx];
 
             if (SQ(v0->pos.x - v1->pos.x) + SQ(v0->pos.y - v1->pos.y) < 4.0) {
-                return result;
+                return ret;
             }
         }
     }
@@ -1567,14 +1569,21 @@ void mpLib_8004ED5C(int line_id, float* x0_out, float* y0_out, float* x1_out,
 {
     bool calculated_distance = false;
     CollLine* line = mpLineGetCollLine(line_id);
-    float* x_base = &groundCollVtx[0].pos.x;
-    float* y_base = mpVtxGetYBase();
 
-    float x0_f0 = x_base[line->x0->v0_idx * 6];
-    float y0_f1 = y_base[line->x0->v0_idx * 6];
-    float x1_f2 = x_base[line->x0->v1_idx * 6];
-    float y1_f3 = y_base[line->x0->v1_idx * 6];
+    int i0;
+    int i1;
+    float x0_f0;
+    float y0_f1;
+    float x1_f2;
+    float y1_f3;
     float distance;
+
+    i0 = line->x0->v0_idx;
+    x0_f0 = groundCollVtx[i0].pos.x;
+    y0_f1 = groundCollVtx[i0].pos.y;
+    i1 = line->x0->v1_idx;
+    x1_f2 = groundCollVtx[i1].pos.x;
+    y1_f3 = groundCollVtx[i1].pos.y;
 
     if (mpLineGetPrev(line_id) != -1) {
         distance = sqrtf(SQ(x0_f0 - x1_f2) + SQ(y0_f1 - y1_f3));
