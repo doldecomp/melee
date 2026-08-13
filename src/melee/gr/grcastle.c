@@ -179,8 +179,6 @@ typedef struct grCastle_PlatSubObj {
 static struct grCastle_YakumonoParam* yakumono_param;
 static struct lb_80011A50_t* grCs_804D6974;
 
-static const Vec3 grCs_803B7E9C = { -257.0f, 13.5f, -252.0f };
-
 typedef struct grCastle_DynEntry {
     s16 depth;
     s16 type;
@@ -190,29 +188,13 @@ typedef struct grCastle_DynEntries {
     grCastle_DynEntry e[4];
 } grCastle_DynEntries;
 
-static const grCastle_DynEntries grCs_803B7EA8 = { {
-    { 66, 6 },
-    { 76, 6 },
-    { 85, 6 },
-    { 94, 6 },
-} };
-
-static const Quaternion grCs_803B7EB8 = { 0.0f, 0.0f, 0.0f, 0.0f };
-
 typedef struct grCastle_BlinkTable {
     s16 data[19];
 } grCastle_BlinkTable;
 
-static const grCastle_BlinkTable grCs_803B7EC8 = {
-    { 0x201, 0x201, 0x201, 0x201, 0x201, 0x201, 0x101, 0x101, 0x101, 0x101,
-      0x101, 0x101, 0x101, 0x101, 0x101, 0x102, 0x102, 0x102, 0x1ff }
-};
-
 typedef struct grCastle_WeightTable {
     s32 w[3];
 } grCastle_WeightTable;
-
-static const grCastle_WeightTable grCs_803B7EF0 = { { 100, 100, 100 } };
 
 typedef struct grCastle_TargetEntry {
     s16 map_id;
@@ -223,20 +205,6 @@ typedef struct grCastle_TargetTable {
     grCastle_TargetEntry e[11];
 } grCastle_TargetTable;
 
-static const grCastle_TargetTable grCs_803B7EFC = { {
-    { 3, 16 },
-    { 3, 17 },
-    { 3, 14 },
-    { 3, 15 },
-    { 3, 18 },
-    { 3, 19 },
-    { 3, 21 },
-    { 3, 22 },
-    { 3, 20 },
-    { 6, 2 },
-    { 6, 5 },
-} };
-
 typedef struct grCastle_CallbackTable {
     unkCastleCallback callbacks[5];
 } grCastle_CallbackTable;
@@ -245,41 +213,9 @@ typedef struct grCastle_CallbackTable2 {
     unkCastleCallback2 callbacks[5];
 } grCastle_CallbackTable2;
 
-/// Per-object damage-received callbacks, dispatched through the yaku item's
-/// x18 slot (it_802E6AEC -> it_2E6A_Logic117_DmgReceived). Wrapped in a
-/// struct so grCastle_801CFBD4 copies them with a struct assignment, which
-/// reproduces the original inline block-copy codegen (exact match; verified
-/// no regression in any other symbol of this unit).
-static const grCastle_CallbackTable grCs_803B7F28 = { {
-    grCastle_801D0550,
-    grCastle_801D059C,
-    grCastle_801D05E8,
-    grCastle_801D0634,
-    grCastle_801D0680,
-} };
-
-/// Per-object touched callbacks, dispatched through the yaku item's x1C slot
-/// (it_802E6AEC -> it_802E7054 with item->toucher).
-static const grCastle_CallbackTable2 grCs_803B7F3C = { {
-    grCastle_801D06CC,
-    grCastle_801D0744,
-    grCastle_801D07BC,
-    grCastle_801D0834,
-    grCastle_801D08AC,
-} };
-
 typedef struct grCastle_YOffsets {
     f32 v[6];
 } grCastle_YOffsets;
-
-static const grCastle_YOffsets grCs_803B7F50 = { {
-    4.0f,
-    6.0f,
-    7.0f,
-    6.0f,
-    4.0f,
-    -1.0f,
-} };
 
 void grCastle_801CD338(bool arg0)
 {
@@ -330,6 +266,70 @@ void grCastle_801CD37C(void)
                                     -10000.0f, 10000.0f, 10000.0f, -10000.0f);
     }
 }
+
+static const Vec3 grCs_803B7E9C = { -257.0f, 13.5f, -252.0f };
+
+static const grCastle_DynEntries grCs_803B7EA8 = { {
+    { 66, 6 },
+    { 76, 6 },
+    { 85, 6 },
+    { 94, 6 },
+} };
+
+static const Quaternion grCs_803B7EB8 = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+static const grCastle_BlinkTable grCs_803B7EC8 = {
+    { 0x201, 0x201, 0x201, 0x201, 0x201, 0x201, 0x101, 0x101, 0x101, 0x101,
+      0x101, 0x101, 0x101, 0x101, 0x101, 0x102, 0x102, 0x102, 0x1ff }
+};
+
+static const grCastle_WeightTable grCs_803B7EF0 = { { 100, 100, 100 } };
+
+static const grCastle_TargetTable grCs_803B7EFC = { {
+    { 3, 16 },
+    { 3, 17 },
+    { 3, 14 },
+    { 3, 15 },
+    { 3, 18 },
+    { 3, 19 },
+    { 3, 21 },
+    { 3, 22 },
+    { 3, 20 },
+    { 6, 2 },
+    { 6, 5 },
+} };
+
+/// Per-object damage-received callbacks, dispatched through the yaku item's
+/// x18 slot (it_802E6AEC -> it_2E6A_Logic117_DmgReceived). Wrapped in a
+/// struct so grCastle_801CFBD4 copies them with a struct assignment, which
+/// reproduces the original inline block-copy codegen (exact match; verified
+/// no regression in any other symbol of this unit).
+static const grCastle_CallbackTable grCs_803B7F28 = { {
+    grCastle_801D0550,
+    grCastle_801D059C,
+    grCastle_801D05E8,
+    grCastle_801D0634,
+    grCastle_801D0680,
+} };
+
+/// Per-object touched callbacks, dispatched through the yaku item's x1C slot
+/// (it_802E6AEC -> it_802E7054 with item->toucher).
+static const grCastle_CallbackTable2 grCs_803B7F3C = { {
+    grCastle_801D06CC,
+    grCastle_801D0744,
+    grCastle_801D07BC,
+    grCastle_801D0834,
+    grCastle_801D08AC,
+} };
+
+static const grCastle_YOffsets grCs_803B7F50 = { {
+    4.0f,
+    6.0f,
+    7.0f,
+    6.0f,
+    4.0f,
+    -1.0f,
+} };
 
 void grCastle_801CD4A0(void) {}
 
@@ -1443,11 +1443,83 @@ void grCastle_801CF7B0(Ground_GObj* gobj)
                             : x2;
 }
 
-static inline void grCastle_UpdateSatellite(Ground* gp)
+/// Randomize the satellite respawn timer from #yakumono_param.
+static inline void grCastle_ResetSatelliteTimer(Ground* gp)
+{
+    s32 base = yakumono_param->x2;
+    s32 range_end = yakumono_param->x0;
+
+    if (base > range_end) {
+        s32 diff = base - range_end;
+        base = range_end + (diff != 0 ? HSD_Randi(diff) : 0);
+    } else if (base < range_end) {
+        s32 diff = range_end - base;
+        base = base + (diff != 0 ? HSD_Randi(diff) : 0);
+    }
+    gp->u.castle12.xD2 = base;
+}
+
+/// Pick the next satellite slot by weighted random choice and attach it to a
+/// random map joint.
+static inline void grCastle_PickSatellite(Ground* gp, s32* wp)
 {
     u8 pad[52];
     grCastle_TargetTable targets;
+    s32 total;
+    s32 slot;
+    s32 rand;
+    s32* p;
+    Ground* sat_gp;
     (void) pad;
+
+    total = wp[0] + wp[1];
+    total += wp[2];
+    rand = total != 0 ? HSD_Randi(total) : 0;
+
+    for (p = wp, slot = 0; slot < 3; slot++, p++) {
+        rand -= *p;
+        if (rand < 0) {
+            break;
+        }
+    }
+    if (slot == 3) {
+        slot = 0;
+    }
+    gp->u.castle12.xD0 = slot;
+
+    sat_gp = (Ground*) ((HSD_GObj*) gp->u.castle12.xC4[gp->u.castle12.xD0])
+                 ->user_data;
+
+    {
+        s32 idx;
+        HSD_GObj* entity;
+
+        targets = grCs_803B7EFC;
+        {
+            s32 random_idx = HSD_Randi(11);
+            idx = random_idx;
+        }
+        entity = HSD_GObj_Entities->x14;
+        {
+            s32 want = (s16) targets.e[idx].map_id;
+            for (; entity != NULL; entity = entity->next) {
+                if ((s32) ((Ground*) entity->user_data)->map_id == want) {
+                    break;
+                }
+            }
+        }
+        if (entity != NULL) {
+            sat_gp->u.castle7.xD4 =
+                (u32) Ground_801C3FA4(entity, (s32) targets.e[idx].jobj_idx);
+            sat_gp->u.castle7.xC4 = 1;
+        }
+    }
+}
+
+void grCastle_801CF868(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    s32* wp;
 
     if ((gp->u.castle12.xC4[0] != 0 || gp->u.castle12.xC4[1] != 0 ||
          gp->u.castle12.xC4[2] != 0) &&
@@ -1460,94 +1532,22 @@ static inline void grCastle_UpdateSatellite(Ground* gp)
                    ->user_data)
                   ->u.castle2.xC4 == 0)))
     {
-        s16 timer = gp->u.castle12.xD2;
-        gp->u.castle12.xD2 = timer - 1;
+        gp->u.castle12.xD2 = gp->u.castle12.xD2 - 1;
         if ((s16) gp->u.castle12.xD2 < 0) {
-            s32 base = yakumono_param->x2;
-            s32 range_end = yakumono_param->x0;
+            grCastle_WeightTable weights;
+            s16 cur_slot;
 
-            if (base > range_end) {
-                s32 diff = base - range_end;
-                base = range_end + (diff != 0 ? HSD_Randi(diff) : 0);
-            } else if (base < range_end) {
-                s32 diff = range_end - base;
-                base = base + (diff != 0 ? HSD_Randi(diff) : 0);
+            grCastle_ResetSatelliteTimer(gp);
+            weights = grCs_803B7EF0;
+            cur_slot = gp->u.castle12.xD0;
+            if (cur_slot != -1) {
+                weights.w[cur_slot] /= yakumono_param->x6;
             }
-            gp->u.castle12.xD2 = base;
 
-            {
-                grCastle_WeightTable weights = grCs_803B7EF0;
-                s16 cur_slot = gp->u.castle12.xD0;
-                s32 total;
-                s32 rand;
-                s32 slot;
-                s32* wp;
-                Ground* sat_gp;
-
-                if (cur_slot != -1) {
-                    weights.w[cur_slot] /= yakumono_param->x6;
-                }
-
-                wp = weights.w;
-                total = weights.w[0] + weights.w[1] + weights.w[2];
-                rand = total != 0 ? HSD_Randi(total) : 0;
-
-                slot = 0;
-                rand -= *wp;
-                if (rand >= 0) {
-                    slot = 1;
-                    rand -= *++wp;
-                    if (rand >= 0) {
-                        slot = 2;
-                        rand -= *++wp;
-                        if (rand >= 0) {
-                            slot = 3;
-                        }
-                    }
-                }
-                if (slot == 3) {
-                    slot = 0;
-                }
-                gp->u.castle12.xD0 = slot;
-
-                sat_gp = (Ground*) ((HSD_GObj*)
-                                        gp->u.castle12.xC4[gp->u.castle12.xD0])
-                             ->user_data;
-
-                {
-                    s32 idx;
-                    HSD_GObj* entity;
-
-                    targets = grCs_803B7EFC;
-                    {
-                        s32 random_idx = HSD_Randi(11);
-                        idx = random_idx;
-                    }
-                    entity = HSD_GObj_Entities->x14;
-
-                    while (entity != NULL) {
-                        if ((s32) ((Ground*) entity->user_data)->map_id ==
-                            (s16) targets.e[idx].map_id)
-                        {
-                            break;
-                        }
-                        entity = entity->next;
-                    }
-                    if (entity != NULL) {
-                        sat_gp->u.castle7.xD4 = (u32) Ground_801C3FA4(
-                            entity, (s32) targets.e[idx].jobj_idx);
-                        sat_gp->u.castle7.xC4 = 1;
-                    }
-                }
-            }
+            wp = weights.w;
+            grCastle_PickSatellite(gp, wp);
         }
     }
-}
-
-void grCastle_801CF868(Ground_GObj* gobj)
-{
-    Ground* gp = GET_GROUND(gobj);
-    grCastle_UpdateSatellite(gp);
 }
 
 void fn_801CFAFC(Item_GObj* item, Ground* gp, Vec3* pos, HSD_GObj* gobj)

@@ -8385,7 +8385,7 @@ void ftCo_800B2AFC(Fighter* fp)
 
 static inline int ftCo_800B33B0_IsIgnoredFloor(int line1)
 {
-    return ftCo_800A1B38_noinline(line1) != 0;
+    return ftCo_800A1B38_noinline(line1);
 }
 
 static inline void ftCo_CpuUpdateRecoveryScale(Fighter* fp,
@@ -8454,8 +8454,12 @@ void ftCo_800B33B0(Fighter* fp)
                                   (Fighter_GObj*) found);
         }
     }
-    if (result != 0 && ftCo_800B33B0_IsIgnoredFloor(line1)) {
-    } else {
+    if (result == 0) {
+        goto assign;
+    }
+    switch (ftCo_800B33B0_IsIgnoredFloor(line1)) {
+    case 0:
+    assign:
         found = result;
     }
     if (found != 0) {
