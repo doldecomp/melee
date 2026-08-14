@@ -1948,11 +1948,11 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
             case 0xBC:
                 /* PoseNum with random */
                 {
-                    int randRange;
+                    f32 randRange;
 
                     pp->poseNum = *pc++;
                     randRange = *pc++;
-                    pp->poseNum = (u8) (s32) ((f32) randRange * HSD_Randf() +
+                    pp->poseNum = (u8) (s32) (randRange * HSD_Randf() +
                                               (f32) pp->poseNum);
                     {
                         u8 bank = pp->bank;
