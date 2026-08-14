@@ -2867,9 +2867,9 @@ do_life:
         /* Tornado rotational physics */
         HSD_Generator* gp = pp->gen;
         f32 sinA, sinB, cosA, cosB;
-        f32 R;
-        f32 d, e, nd, vz;
         f32 t0, t1, t2, t3, t4;
+        f32 d, e, nd, vz;
+        f32 R;
 
         sinA = sinf(pp->grav);
         sinB = sinf(pp->fric);
