@@ -1392,8 +1392,8 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
     s32 scratch_r6_5;
     s32 scratch_r7_2;
     s32 scratch_r7_4;
-    s32 work_r24;
     s32 work_r25;
+    s32 work_r24;
     s32 work_r26;
     s32 work_r3;
     s32 work_r3_2;
