@@ -8,7 +8,7 @@
 #include <baselib/debug.h>
 #include <baselib/memory.h>
 
-/* 3B73E8 */ mpIsland_Palette mpIsland_TerrainPalette = { {
+/* 3B73E8 */ mpIsland_Palette const mpIsland_TerrainPalette = { {
     { mp_Terrain_Rock, { 0x80, 0x60, 0x60, 0xFF } },
     { mp_Terrain_Grass, { 0x40, 0xFF, 0x40, 0xFF } },
     { mp_Terrain_Dirt, { 0xC0, 0x60, 0x60, 0xFF } },
@@ -31,7 +31,6 @@
     { -1, { 0x00, 0x00, 0x00, 0x00 } },
 } };
 
-/* 4D8158 */ const float mpIsland_804D8158 = 0.0F;
 /* 458E88 */ struct mpIsland_80458E88_t mpIsland_80458E88;
 
 void mpIsland_8005A6F8(void)
@@ -81,7 +80,7 @@ void mpIsland_8005A728(void)
     prev = NULL;
     if ((count = map->floor_count) != 0) {
         line_idx = map->floor_start;
-        z_val = mpIsland_804D8158;
+        z_val = 0.0f;
         while (count != 0) {
             seg.p = HSD_MemAlloc(0x2C);
             mpIsland_AssertSeg(seg.p);
@@ -146,7 +145,7 @@ void mpIsland_8005A728(void)
     count = map->ceiling_count;
     if (count) {
         line_idx = map->ceiling_start;
-        z_val = mpIsland_804D8158;
+        z_val = 0.0f;
         while (count != 0) {
             seg.p = HSD_MemAlloc(0x2C);
             mpIsland_AssertSeg(seg.p);
@@ -321,7 +320,7 @@ void mpIsland_8005AE1C(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
     vtx = mpGetGroundCollVtx();
     cur = *arg0;
     end = arg2 + arg3;
-    z_val = mpIsland_804D8158;
+    z_val = 0.0f;
 
     goto loop1_check;
 loop1_body:
@@ -372,7 +371,7 @@ loop1_check:
     }
 
     cur = *arg1;
-    z_val = mpIsland_804D8158;
+    z_val = 0.0f;
 
     goto loop2_check;
 loop2_body:
