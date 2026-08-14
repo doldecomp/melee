@@ -494,12 +494,12 @@ void fn_8024B2B0(mnSoundTest_GObj* arg0)
     u8 stack_pad2[8];
     HSD_JObj* sp3C;
     HSD_GObjProc* proc;
-    mnSoundTest_GObj* gobj;
-    HSD_JObj* jobj;
-    soundtest_user_data* menu_data;
-    soundtest_user_data* reset_data;
-    u64 inputs;
     u8 state;
+    HSD_JObj* jobj;
+    mnSoundTest_GObj* gobj;
+    soundtest_user_data* reset_data;
+    soundtest_user_data* menu_data;
+    u64 inputs;
     u8 anim_idx;
     u16 sound_id;
     soundtest_user_data* user_data;
@@ -525,11 +525,7 @@ void fn_8024B2B0(mnSoundTest_GObj* arg0)
         return;
     }
     if (inputs & (MenuInput_Up | MenuInput_Down)) {
-        state = 0;
-        if ((u8) user_data->unk0 == 0) {
-            state = 1;
-        }
-        user_data->unk0 = state;
+        user_data->unk0 = (u8) user_data->unk0 == 0 ? 1 : 0;
         state = user_data->unk0;
         gobj = mnSoundTest_804D6C40;
         mnSoundTest_8024ABF8(gobj, state == 0);
