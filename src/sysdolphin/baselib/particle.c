@@ -1587,7 +1587,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                 /* Aim velocity toward JObj */
                 {
                     HSD_JObj* jobj = hsd_804D08E8[*pc++ + pp->pJObjOfs];
-                    f32 dz, dy, dx, dist_sq, dist;
+                    f32 dz, dy, dx, dist_sq;
                     f32 vel_mag_sq;
 
                     if (jobj == NULL) {
@@ -1619,9 +1619,17 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     if (dist_sq == 0.0) {
                         break;
                     }
-                    dist = sqrtf(dist_sq);
+                    if (dist_sq > 0.0F) {
+                        double guess = __frsqrte((double) dist_sq);
+                        volatile f32 result;
+                        guess = 0.5 * guess * (3.0 - guess * guess * dist_sq);
+                        guess = 0.5 * guess * (3.0 - guess * guess * dist_sq);
+                        guess = 0.5 * guess * (3.0 - guess * guess * dist_sq);
+                        result = (f32) (dist_sq * guess);
+                        dist_sq = result;
+                    }
                     {
-                        f32 scale = vel_mag_sq / dist;
+                        f32 scale = vel_mag_sq / dist_sq;
                         pp->vel.x = dx * scale;
                         pp->vel.y = dy * scale;
                         pp->vel.z = dz * scale;
@@ -2184,7 +2192,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                 {
                     s32 step;
                     s8 delta;
-                    f32 rand_val;
+                    f32 rand_r;
+                    f32 rand_g;
+                    f32 rand_b;
+                    f32 rand_a;
                     f32 val;
 
                     if (pp->primColCount != 0) {
@@ -2236,11 +2247,11 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                                   16);
                     }
 
-                    rand_val = HSD_Randf();
+                    rand_r = HSD_Randf();
 
                     delta = (s8) *pc++;
-                    rand_val *= (f32) (delta * 2);
-                    val = rand_val + (f32) pp->primColTarget.r;
+                    rand_r *= (f32) (delta * 2);
+                    val = rand_r + (f32) pp->primColTarget.r;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
@@ -2248,7 +2259,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         val = 255.0F;
                     }
                     pp->primColTarget.r = (u8) (s32) val;
-                    val = rand_val + (f32) pp->envColTarget.r;
+                    val = rand_r + (f32) pp->envColTarget.r;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
@@ -2257,10 +2268,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     }
                     pp->envColTarget.r = (u8) (s32) val;
 
-                    rand_val = HSD_Randf();
+                    rand_g = HSD_Randf();
                     delta = (s8) *pc++;
-                    rand_val *= (f32) (delta * 2);
-                    val = rand_val + (f32) pp->primColTarget.g;
+                    rand_g *= (f32) (delta * 2);
+                    val = rand_g + (f32) pp->primColTarget.g;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
@@ -2268,7 +2279,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         val = 255.0F;
                     }
                     pp->primColTarget.g = (u8) (s32) val;
-                    val = rand_val + (f32) pp->envColTarget.g;
+                    val = rand_g + (f32) pp->envColTarget.g;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
@@ -2277,10 +2288,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     }
                     pp->envColTarget.g = (u8) (s32) val;
 
-                    rand_val = HSD_Randf();
+                    rand_b = HSD_Randf();
                     delta = (s8) *pc++;
-                    rand_val *= (f32) (delta * 2);
-                    val = rand_val + (f32) pp->primColTarget.b;
+                    rand_b *= (f32) (delta * 2);
+                    val = rand_b + (f32) pp->primColTarget.b;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
@@ -2288,7 +2299,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         val = 255.0F;
                     }
                     pp->primColTarget.b = (u8) (s32) val;
-                    val = rand_val + (f32) pp->envColTarget.b;
+                    val = rand_b + (f32) pp->envColTarget.b;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
@@ -2297,10 +2308,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     }
                     pp->envColTarget.b = (u8) (s32) val;
 
-                    rand_val = HSD_Randf();
+                    rand_a = HSD_Randf();
                     delta = (s8) *pc++;
-                    rand_val *= (f32) (delta * 2);
-                    val = rand_val + (f32) pp->primColTarget.a;
+                    rand_a *= (f32) (delta * 2);
+                    val = rand_a + (f32) pp->primColTarget.a;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
@@ -2308,7 +2319,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         val = 255.0F;
                     }
                     pp->primColTarget.a = (u8) (s32) val;
-                    val = rand_val + (f32) pp->envColTarget.a;
+                    val = rand_a + (f32) pp->envColTarget.a;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
