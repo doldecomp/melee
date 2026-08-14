@@ -65,7 +65,7 @@ typedef union {
     u8 bytes[4];
 } ParticleFloatBytes;
 
-static const f32 particle_zero = 0.0F;
+static volatile const f32 particle_zero = 0.0F;
 
 void hsd_803983A4(HSD_Generator* gen)
 {
@@ -2887,12 +2887,12 @@ do_life:
 
         pp->vel.z += gp->aux.tornado.vel;
 
-        if ((R = gp->radius) < *(volatile const f32*) &particle_zero) {
+        if ((R = gp->radius) < particle_zero) {
             R = -R;
         }
         {
             f32 ang;
-            if ((ang = gp->angle) < *(volatile const f32*) &particle_zero) {
+            if ((ang = gp->angle) < particle_zero) {
                 ang = -ang;
             }
             R = pp->vel.y * (pp->vel.z * tanf(ang) + R);
