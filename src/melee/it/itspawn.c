@@ -345,6 +345,7 @@ void it_8026CF04(void)
     u32 cumulative;
     u32 idx;
     s32* counts;
+    s32* p;
 
     counts = it_804D6D28->x128;
     sum = counts[0];
@@ -357,13 +358,13 @@ void it_8026CF04(void)
         monster.x4 = HSD_MemAlloc(monster.size * 4);
         monster.xC = HSD_MemAlloc(monster.size * 4);
         idx = i = 0;
-        counts = &it_804D6D28->x128[0];
-        (void) counts;
+        item_common = it_804D6D28;
         cumulative = 0;
         for (; i < 4; i++, idx++) {
             monster.x4[i] = It_Kind_Kuriboh + i;
             monster.xC[idx] = cumulative;
-            cumulative += counts[i];
+            (void) monster.xC[(u32) (p = &item_common->x128[idx])];
+            cumulative += *p;
         }
     }
 }
