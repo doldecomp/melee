@@ -2148,9 +2148,9 @@ void grStadium_801D4548(Ground_GObj* gobj)
             temp_r31->u.stadium.xD8 = temp_r4_4 + 1;
             if (temp_r4_4 > yakumono_param->x18) {
                 grAnime_801C7A04(temp_r31->u.stadium.xE4, 0, 7, 0.0f);
-                temp_r27_3 = GET_JOBJ(
-                    temp_r3_7 = grStadium_801D10F8(temp_r31->u.stadium.xDE));
-                (void) temp_r27_3;
+                (void) (temp_r27_3 = GET_JOBJ(temp_r3_7 = grStadium_801D10F8(
+                                                  temp_r31->u.stadium.xDE)),
+                        !temp_r27_3);
                 HSD_JObjSetScaleY(temp_r27_3, temp_f30);
                 HSD_JObjSetTranslateY(temp_r27_3, -10.0F);
                 temp_r31->u.stadium.xE8 = temp_r3_7;
@@ -2209,7 +2209,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
         return;
     case 6: {
         Ground* temp_r3_9 = temp_r31->u.stadium.xE4->user_data;
-        PAD_STACK(0x10);
+        PAD_STACK(0xC);
         temp_r3_9->u.stadium.xC4_b0 = true;
         mpLib_80058560();
         if (temp_r31->u.stadium.xDE == 5) {
