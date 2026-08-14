@@ -923,19 +923,20 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
             case 0xA0:
                 /* Set size interpolation target */
                 {
-                    pp->sizeCount = *pc++;
+                    u8* p = pc;
+                    pp->sizeCount = *p++;
                     {
                         u16 cnt = pp->sizeCount;
                         if (cnt & 0x80) {
-                            cnt = ((cnt & 0x7F) << 8) + *pc++;
+                            cnt = ((cnt & 0x7F) << 8) + *p++;
                             pp->sizeCount = cnt;
                         }
                     }
-                    fbytes[0] = pc[0];
-                    fbytes[1] = pc[1];
-                    fbytes[2] = pc[2];
-                    fbytes[3] = pc[3];
-                    pc += 4;
+                    fbytes[0] = *p++;
+                    fbytes[1] = *p++;
+                    fbytes[2] = *p++;
+                    fbytes[3] = *p++;
+                    pc = p;
                     pp->sizeTarget = fval;
                     if (pp->sizeCount == 0) {
                         pp->size = pp->sizeTarget;
@@ -1576,21 +1577,20 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
             case 0xB6:
                 /* Rotate interpolation setup */
                 {
-                    pp->rotateCount = *pc++;
+                    u8* p = pc;
+                    pp->rotateCount = *p++;
                     {
                         u16 cnt = pp->rotateCount;
                         if (cnt & 0x80) {
-                            cnt = ((cnt & 0x7F) << 8) + *pc++;
+                            cnt = ((cnt & 0x7F) << 8) + *p++;
                             pp->rotateCount = cnt;
                         }
                     }
-                    {
-                        fbytes[0] = pc[0];
-                        fbytes[1] = pc[1];
-                        fbytes[2] = pc[2];
-                        fbytes[3] = pc[3];
-                        pc += 4;
-                    }
+                    fbytes[0] = *p++;
+                    fbytes[1] = *p++;
+                    fbytes[2] = *p++;
+                    fbytes[3] = *p++;
+                    pc = p;
                     pp->rotateTarget += fval;
                     if (pp->rotateCount == 0) {
                         pp->rotate = pp->rotateTarget;
@@ -2094,11 +2094,15 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                                            (s32) pp->primColTarget.a)) >>
                                   16);
                     }
-                    pp->primColCount = *pc++;
-                    cnt = pp->primColCount;
-                    if (cnt & 0x80) {
-                        cnt = ((cnt & 0x7F) << 8) + *pc++;
-                        pp->primColCount = cnt;
+                    {
+                        u8* p = pc;
+                        pp->primColCount = *p++;
+                        cnt = pp->primColCount;
+                        if (cnt & 0x80) {
+                            cnt = ((cnt & 0x7F) << 8) + *p++;
+                            pp->primColCount = cnt;
+                        }
+                        pc = p;
                     }
                     pp->primColTarget = pp->primCol;
                     if (opcode & 1) {
@@ -2152,11 +2156,15 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                                            (s32) pp->envColTarget.a)) >>
                                   16);
                     }
-                    pp->envColCount = *pc++;
-                    cnt = pp->envColCount;
-                    if (cnt & 0x80) {
-                        cnt = ((cnt & 0x7F) << 8) + *pc++;
-                        pp->envColCount = cnt;
+                    {
+                        u8* p = pc;
+                        pp->envColCount = *p++;
+                        cnt = pp->envColCount;
+                        if (cnt & 0x80) {
+                            cnt = ((cnt & 0x7F) << 8) + *p++;
+                            pp->envColCount = cnt;
+                        }
+                        pc = p;
                     }
                     pp->envColTarget = pp->envCol;
                     if (opcode & 1) {
