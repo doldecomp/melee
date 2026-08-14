@@ -47,12 +47,19 @@ void mpIsland_8005A6F8(void)
     mpIsland_80458E88.x20 = NULL;
 }
 
+static inline void mpIsland_AssertSeg(mp_UnkStruct0* mpisp)
+{
+    HSD_ASSERT(62, mpisp);
+}
+
 void mpIsland_8005A728(void)
 {
     MapCollData* map;
     CollLine* lines;
     CollVtx* vtx;
-    mp_UnkStruct0* mpisp;
+    struct {
+        mp_UnkStruct0* p;
+    } seg;
     float z_val;
     int count;
     int line_idx;
@@ -60,7 +67,6 @@ void mpIsland_8005A728(void)
     int next;
     int hidden;
     mp_UnkStruct0* prev;
-    mp_UnkStruct0** ceiling_tail;
     u8 visited[0x600];
     PAD_STACK(0x10);
 
@@ -68,7 +74,6 @@ void mpIsland_8005A728(void)
     lines = mpGetGroundCollLine();
     vtx = mpGetGroundCollVtx();
     mpIsland_8005A6F8();
-    ceiling_tail = &mpIsland_80458E88.xC;
 
     memzero(visited, 0x600u);
 
@@ -78,14 +83,14 @@ void mpIsland_8005A728(void)
         line_idx = map->floor_start;
         z_val = mpIsland_804D8158;
         while (count != 0) {
-            mpisp = HSD_MemAlloc(0x2C);
-            HSD_ASSERT(62, mpisp);
+            seg.p = HSD_MemAlloc(0x2C);
+            mpIsland_AssertSeg(seg.p);
             if (prev) {
-                prev->next = mpisp;
+                prev->next = seg.p;
             } else {
-                mpIsland_80458E88.next = mpisp;
+                mpIsland_80458E88.next = seg.p;
             }
-            prev = mpisp;
+            prev = seg.p;
             end_idx = line_idx;
             next = !line_idx;
             hidden = 0;
@@ -103,19 +108,19 @@ void mpIsland_8005A728(void)
                 }
                 end_idx = next;
             }
-            mpisp->x20 = hidden ? 2 : 0;
-            mpisp->next = NULL;
-            mpisp->x24 = (short) line_idx;
-            mpisp->x26 = (short) end_idx;
-            mpisp->x4 = lines[line_idx].x0->v0_idx;
-            mpisp->x6 = lines[end_idx].x0->v1_idx;
-            mpisp->x8.x = vtx[mpisp->x4].pos.x;
-            mpisp->x8.y = vtx[mpisp->x4].pos.y;
-            mpisp->x8.z = z_val;
-            mpisp->x14.x = vtx[mpisp->x6].pos.x;
-            mpisp->x14.y = vtx[mpisp->x6].pos.y;
-            mpisp->x14.z = z_val;
-            mpisp->x28 = mpJointFromLine(line_idx);
+            seg.p->x20 = hidden ? 2 : 0;
+            seg.p->next = NULL;
+            seg.p->x24 = (short) line_idx;
+            seg.p->x26 = (short) end_idx;
+            seg.p->x4 = lines[line_idx].x0->v0_idx;
+            seg.p->x6 = lines[end_idx].x0->v1_idx;
+            seg.p->x8.x = vtx[seg.p->x4].pos.x;
+            seg.p->x8.y = vtx[seg.p->x4].pos.y;
+            seg.p->x8.z = z_val;
+            seg.p->x14.x = vtx[seg.p->x6].pos.x;
+            seg.p->x14.y = vtx[seg.p->x6].pos.y;
+            seg.p->x14.z = z_val;
+            seg.p->x28 = mpJointFromLine(line_idx);
             count--;
             line_idx++;
             {
@@ -137,19 +142,20 @@ void mpIsland_8005A728(void)
 
     /* Process ceiling segments */
     prev = NULL;
+    (void) seg.p;
     count = map->ceiling_count;
     if (count) {
         line_idx = map->ceiling_start;
         z_val = mpIsland_804D8158;
         while (count != 0) {
-            mpisp = HSD_MemAlloc(0x2C);
-            HSD_ASSERT(0x3E, mpisp);
+            seg.p = HSD_MemAlloc(0x2C);
+            mpIsland_AssertSeg(seg.p);
             if (prev) {
-                prev->next = mpisp;
+                prev->next = seg.p;
             } else {
-                mpIsland_80458E88.x4 = mpisp;
+                mpIsland_80458E88.x4 = seg.p;
             }
-            prev = mpisp;
+            prev = seg.p;
             end_idx = line_idx;
             next = !line_idx;
             hidden = 0;
@@ -168,19 +174,19 @@ void mpIsland_8005A728(void)
                 }
                 end_idx = next;
             }
-            mpisp->x20 = hidden ? 2 : 0;
-            mpisp->next = NULL;
-            mpisp->x24 = (short) line_idx;
-            mpisp->x26 = (short) end_idx;
-            mpisp->x4 = lines[line_idx].x0->v1_idx;
-            mpisp->x6 = lines[end_idx].x0->v0_idx;
-            mpisp->x8.x = vtx[mpisp->x4].pos.x;
-            mpisp->x8.y = vtx[mpisp->x4].pos.y;
-            mpisp->x8.z = z_val;
-            mpisp->x14.x = vtx[mpisp->x6].pos.x;
-            mpisp->x14.y = vtx[mpisp->x6].pos.y;
-            mpisp->x14.z = z_val;
-            mpisp->x28 = mpJointFromLine(line_idx);
+            seg.p->x20 = hidden ? 2 : 0;
+            seg.p->next = NULL;
+            seg.p->x24 = (short) line_idx;
+            seg.p->x26 = (short) end_idx;
+            seg.p->x4 = lines[line_idx].x0->v1_idx;
+            seg.p->x6 = lines[end_idx].x0->v0_idx;
+            seg.p->x8.x = vtx[seg.p->x4].pos.x;
+            seg.p->x8.y = vtx[seg.p->x4].pos.y;
+            seg.p->x8.z = z_val;
+            seg.p->x14.x = vtx[seg.p->x6].pos.x;
+            seg.p->x14.y = vtx[seg.p->x6].pos.y;
+            seg.p->x14.z = z_val;
+            seg.p->x28 = mpJointFromLine(line_idx);
             count--;
             line_idx++;
             {
@@ -198,7 +204,7 @@ void mpIsland_8005A728(void)
         }
     }
 
-    *ceiling_tail = prev;
+    mpIsland_80458E88.xC = prev;
 }
 
 mp_UnkStruct0* mpIsland_8005AB54(int surface_idx)
