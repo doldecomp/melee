@@ -653,7 +653,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
     HSD_Particle* pp = pp_arg;
     HSD_Particle* prev = prev_arg;
     u8* pc;
-    int operand;
+    u16 operand;
     u8 opcode;
     u8 cls;
     HSD_Particle* child;
