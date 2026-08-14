@@ -1526,18 +1526,21 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                                   16);
                     }
                     {
-                        pp->aCmpCount = *pc++;
+                        u8* p = pc;
+                        pp->aCmpCount = *p++;
                         {
                             u16 cnt = pp->aCmpCount;
                             if (cnt & 0x80) {
-                                cnt = ((cnt & 0x7F) << 8) + *pc++;
+                                cnt = ((cnt & 0x7F) << 8) + *p++;
                                 pp->aCmpCount = cnt;
                             }
                         }
+                        pc = p;
+                        pp->aCmpMode = *pc++;
+                        pp->aCmpParam1Target = pc[0];
+                        pp->aCmpParam2Target = pc[1];
+                        pc += 2;
                     }
-                    pp->aCmpMode = *pc++;
-                    pp->aCmpParam1Target = *pc++;
-                    pp->aCmpParam2Target = *pc++;
                     if (pp->aCmpCount == 0) {
                         pp->aCmpParam1 = pp->aCmpParam1Target;
                         pp->aCmpParam2 = pp->aCmpParam2Target;
