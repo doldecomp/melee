@@ -154,13 +154,13 @@ void gm_801BFCFC(GameScene* arg0)
     s32 var_r27_2;
     u32* temp_r29;
     u8* var_r27;
+    u32 var_r28_3;
     u8* var_r28;
     UNK_T* temp_r3;
     u8* var_r28_2;
     u32 var_r25_2;
     int var_r25;
     u32* temp_r29_2;
-    u32 var_r28_3;
     UNK_T* var_r31;
     s32 var_r30;
     u8* var_r26;
