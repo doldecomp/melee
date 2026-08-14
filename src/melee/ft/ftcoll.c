@@ -3410,7 +3410,6 @@ void ftColl_8007BE3C(Fighter_GObj* gobj)
 {
     Fighter* fp;
     int* data_ptr;
-    HSD_GObj* source;
     Item* ip;
     Fighter_GObj* fighter_victim;
     Fighter_GObj* item_victim;
@@ -3418,6 +3417,7 @@ void ftColl_8007BE3C(Fighter_GObj* gobj)
     Fighter* victim_fp;
     Fighter* owner_fp;
     int dmg_count;
+    HSD_GObj* source;
     bool should_process;
     PAD_STACK(46);
 
@@ -3465,15 +3465,15 @@ void ftColl_8007BE3C(Fighter_GObj* gobj)
     }
 
     {
-        switch (((HSD_GObj*) fp->dmg.x1894)->classifier) {
+        switch ((source = (HSD_GObj*) fp->dmg.x1894)->classifier) {
         case HSD_GOBJ_CLASS_FIGHTER:
-            source = (HSD_GObj*) fp->dmg.x1894;
             fighter_victim = fp->gobj;
             {
                 float dmg_amount = fp->dmg.x1898;
-                plStale_UpdateStaleMovesFromFighter(source, fighter_victim);
-                ftColl_80076444(source, fighter_victim);
-                src_fp = source->user_data;
+                HSD_GObj* s2 = source;
+                plStale_UpdateStaleMovesFromFighter(s2, fighter_victim);
+                ftColl_80076444(s2, fighter_victim);
+                src_fp = s2->user_data;
                 victim_fp = fighter_victim->user_data;
                 pl_8003EB30(dmg_amount, src_fp->player_id, src_fp->x221F_b4,
                             victim_fp->player_id, victim_fp->x221F_b4,
@@ -3481,16 +3481,16 @@ void ftColl_8007BE3C(Fighter_GObj* gobj)
             }
             break;
         case HSD_GOBJ_CLASS_ITEM:
-            source = (HSD_GObj*) fp->dmg.x1894;
             item_victim = fp->gobj;
             {
                 float dmg_amount = fp->dmg.x1898;
-                plStale_UpdateStaleMovesFromItem(source, item_victim);
-                ftColl_8007646C(source, item_victim);
-                ip = source->user_data;
+                HSD_GObj* s2 = source;
+                plStale_UpdateStaleMovesFromItem(s2, item_victim);
+                ftColl_8007646C(s2, item_victim);
+                ip = s2->user_data;
                 {
-                    HSD_GObj* owner_gobj = ip->owner;
-                    if (ftLib_80086960(owner_gobj)) {
+                    HSD_GObj* tail_owner_gobj = ip->owner;
+                    if (ftLib_80086960(tail_owner_gobj)) {
                         owner_fp = ip->owner->user_data;
                         victim_fp = item_victim->user_data;
                         pl_8003EB30(dmg_amount, owner_fp->player_id,
