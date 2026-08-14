@@ -129,8 +129,8 @@ static bool inline link_fighter_compare(Fighter* fp)
 static inline void it_802A2568_inline(ItemLink* link, HSD_JObj* jobj,
                                       HSD_GObj* gobj, Vec3* pos)
 {
-    link->gobj = gobj;
     link->jobj = jobj;
+    link->gobj = gobj;
     link->vel = *pos;
     link->pos = *pos;
     link->x2C_b0 = 0;
@@ -1205,25 +1205,6 @@ void it_802A49B0(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
     }
 }
 
-static inline f64 it_802A6A78_normalize_diff(Vec3* a, Vec3* b, Vec3* vec)
-{
-    f64 len;
-    f32 inv;
-    vec->x = a->x - b->x;
-    vec->y = a->y - b->y;
-    vec->z = a->z - b->z;
-    len = sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
-    if (len == 0.0F) {
-        inv = 0.0F;
-    } else {
-        inv = 1.0F / len;
-    }
-    vec->x *= inv;
-    vec->y *= inv;
-    vec->z *= inv;
-    return len;
-}
-
 s32 it_802A4BFC(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* attr,
                 Fighter* fp)
 {
@@ -1278,7 +1259,7 @@ s32 it_802A4BFC(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* attr,
 
     while (link_1 != NULL) {
         if (link_1->x2C_b0) {
-            len = it_802A6A78_normalize_diff(&link_1->pos, &link_0->pos, &vec);
+            len = it_802A3C98(&link_1->pos, &link_0->pos, &vec);
             if (len > attr->x30) {
                 link_1->pos.x = (vec.x * attr->x30) + link_0->pos.x;
                 link_1->pos.y = (vec.y * attr->x30) + link_0->pos.y;
@@ -1287,7 +1268,7 @@ s32 it_802A4BFC(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* attr,
             link_1->coll_data.last_pos = link_1->coll_data.cur_pos;
             link_1->coll_data.cur_pos = link_1->pos;
         } else {
-            len = it_802A6A78_normalize_diff(arg1, &link_0->pos, &vec);
+            len = it_802A3C98(arg1, &link_0->pos, &vec);
             if (len > attr->x30) {
                 link_1->pos.x = (vec.x * attr->x30) + link_0->pos.x;
                 link_1->pos.y = (vec.y * attr->x30) + link_0->pos.y;
@@ -1871,7 +1852,7 @@ bool it_802A6A78(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
             link_1->coll_data.last_pos = link_1->coll_data.cur_pos;
             link_1->coll_data.cur_pos = link_1->pos;
         } else {
-            len = it_802A6A78_normalize_diff(arg1, &link_0->pos, &vec);
+            len = it_802A3C98(arg1, &link_0->pos, &vec);
             if (len > arg2->x30) {
                 link_1->pos.x = (vec.x * arg2->x30) + link_0->pos.x;
                 link_1->pos.y = (vec.y * arg2->x30) + link_0->pos.y;
