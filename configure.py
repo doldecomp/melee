@@ -512,7 +512,7 @@ config.libs = [
             Object(NonMatching, "melee/lb/lbsnap.c"),
             Object(Matching, "melee/lb/lbgx.c"),
             Object(Matching, "melee/lb/lbanim.c"),
-            Object(NonMatching, "melee/lb/lbmthp.c"),
+            Object(Matching, "melee/lb/lbmthp.c"),
             Object(Matching, "melee/lb/lb_01F8.c"),
             Object(NonMatching, "melee/lb/lbbgflash.c"),
             Object(Matching, "melee/lb/lbrefract.c"),
