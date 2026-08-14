@@ -195,10 +195,12 @@ static inline void drawTimeText(HSD_Text* x, HSD_Text* y, int hours,
 static inline HSD_JObj* inline3(int i, float x)
 {
     HSD_JObj* sp5C;
+    HSD_JObj* anim_jobj;
     float temp_f1_6 = x + 1;
     lb_80011E24(mnCharSel_804D6CC0, &sp5C, i, -1);
-    HSD_ForeachAnim(sp5C, JOBJ_TYPE, MOBJ_MASK, HSD_AObjReqAnim, AOBJ_ARG_AF,
-                    temp_f1_6);
+    anim_jobj = sp5C;
+    HSD_ForeachAnim(anim_jobj, JOBJ_TYPE, MOBJ_MASK, HSD_AObjReqAnim,
+                    AOBJ_ARG_AF, temp_f1_6);
     HSD_JObjAnimAll(sp5C);
     HSD_ForeachAnim(sp5C, JOBJ_TYPE, MOBJ_MASK, HSD_AObjStopAnim, AOBJ_ARG_AOV,
                     0, 0);
