@@ -2055,9 +2055,10 @@ void grStadium_801D4548(Ground_GObj* gobj)
         if (temp_r3_4 < 0) {
             if (temp_r31->u.stadium.xDE == 5) {
                 int sp60[] = { 3, 4, 6, 9 };
+                int idx;
                 do {
-                    var_r4 = sp60[HSD_Randi(ARRAY_SIZE(sp60))];
-                } while (temp_r31->u.stadium.xE2 == var_r4);
+                    idx = HSD_Randi(ARRAY_SIZE(sp60));
+                } while (temp_r31->u.stadium.xE2 == (var_r4 = sp60[idx]));
             } else {
                 var_r4 = 5;
             }
