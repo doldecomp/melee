@@ -153,14 +153,14 @@ size_t fn_8001EBF0(THPDecComp* data)
     height = data->height;
     unk_104_val = data->unk_104;
 
-    data->unk_9C.val1 = (u16) width;
-
     wh = width * height;
+
+    data->unk_9C.val1 = (u16) width;
 
     height = data->height;
     data->unk_9C._pad = (u16) height;
 
-    size = aligned_100 * unk_104_val;
+    size = unk_104_val * aligned_100;
 
     data->unk_9C.val2 = 4;
 
