@@ -2014,11 +2014,11 @@ void grStadium_801D4548(Ground_GObj* gobj)
     HSD_JObj* temp_r27_3;
     HSD_JObj* temp_r27_5;
     HSD_JObj* temp_r30;
+    f32 var_f30;
     f32 temp_f29;
     f32 temp_f30;
     f32 temp_f31;
     f32 var_f29;
-    f32 var_f30;
     s16 temp_r0_2;
     s32 temp_r0_4;
     s32 temp_r0_5;
