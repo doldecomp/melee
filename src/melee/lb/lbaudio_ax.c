@@ -2568,6 +2568,8 @@ void lbAudioAx_8002835C(void)
     HSD_ObjAllocInit(&lbl_80433710.alloc, 0x48, 4);
 }
 
+int lbl_80433B44[0x1F124 / 4];
+
 void lbAudioAx_8002838C(void)
 {
     struct AXFX_REVERBSTD rvbStd;
