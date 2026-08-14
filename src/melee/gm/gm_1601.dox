@@ -29,7 +29,7 @@ struct lbl_8046B488_t;
 /* 160840 */ u8 fn_80160840(u8);
 /* 160854 */ u32 gm_80160854(u8, u8, u8,
                              u8);     ///< gets the player hud color index
-/* 160968 */ GXColor gm_80160968(u8); ///< gets the player hud color
+/* 160968 */ GXColor gm_80160968(u32); ///< gets the player hud color
 /* 160980 */ const char* gm_80160980(u8 ckind);
 /* 1609E0 */ const char* fn_801609E0(u8 ckind);
 /* 160A60 */ const char* gm_80160A60(int);

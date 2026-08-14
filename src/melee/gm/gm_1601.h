@@ -30,7 +30,7 @@
 /* 1607F4 */ u8 fn_801607F4(int);
 /* 160840 */ u8 fn_80160840(u8);
 /* 160854 */ u32 gm_80160854(u8, u8, u8, u8);
-/* 160968 */ GXColor gm_80160968(u8);
+/* 160968 */ GXColor gm_80160968(u32);
 /* 160980 */ const char* gm_80160980(u8 ckind);
 /* 1609E0 */ const char* fn_801609E0(u8 ckind);
 /* 160A60 */ const char* gm_80160A60(int);
