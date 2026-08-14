@@ -1213,7 +1213,8 @@ void mnCharSel_8025DB34(u8 arg0)
                 }
                 mnCharSel_804D6CB0->data.data.players[port].color = var_r5;
             }
-            mnCharSel_8025D5AC((int) arg0, hud_idx + (color_value * 0x1E), 0);
+            hud_idx += color_value * 0x1E;
+            mnCharSel_8025D5AC((int) arg0, hud_idx, 0);
         }
     }
 }
