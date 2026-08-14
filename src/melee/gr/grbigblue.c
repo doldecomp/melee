@@ -1169,8 +1169,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                     gp->u.bigblue.data[i].xC.z = pos.y + (pos.y - coll_y);
                 }
 
-                y_diff = pos.y -
-                         (target_y = gp->u.bigblue.data[i].xC.z);
+                y_diff = pos.y - (target_y = gp->u.bigblue.data[i].xC.z);
                 if (y_diff < 0.0f) {
                     y_diff = -y_diff;
                 }
