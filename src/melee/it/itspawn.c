@@ -369,9 +369,18 @@ void it_8026CF04(void)
     }
 }
 
-static inline bool it_8026D018_inline(f32 weight, int chk, s32* stage_info,
-                                      u64 stage_mask)
+static inline bool it_8026D018_inline(void)
 {
+    s32* stage_info;
+    u64 stage_mask;
+    int chk;
+    f32 weight;
+
+    stage_mask = it_804A0E30.x18;
+    stage_info = Ground_801C2AD8();
+    chk = gm_8016AE80();
+    weight = gm_8016AE94();
+
     if (stage_mask == 0 || stage_info == NULL || chk == -1) {
         return false;
     }
@@ -383,32 +392,44 @@ static inline bool it_8026D018_inline(f32 weight, int chk, s32* stage_info,
     return true;
 }
 
+static inline void it_8026D018_inline2(void)
+{
+    s32* stage_info;
+    u64 stage_mask;
+    f32 weight;
+
+    stage_mask = it_804A0E30.x18;
+    stage_info = Ground_801C2AD8();
+    weight = gm_8016AE94();
+
+    if ((stage_mask != 0) && (stage_info != NULL)) {
+        stage_mask >>= 6;
+        it_8026CA4C(&it_804A0E50, stage_info, stage_mask, 6, weight);
+        if (it_804A0E50.x8 != 0) {
+            it_8026CD50(stage_info, stage_mask, weight);
+        }
+    }
+}
+
+static inline void it_8026D018_inline3(f32 randf, s32* range)
+{
+    s32 diff = range[1] - range[0];
+
+    (void) diff;
+    it_804A0E30.x0 = diff * randf + range[0];
+    it_804A0E30.x0 *= Ground_801C2AE8(Stage_80225194());
+}
+
 void it_8026D018(void)
 {
     if (!gm_8016B238() && (gm_8016AE80() != -1)) {
         it_804A0E30.x18 = gm_8016AEA4();
-        if (it_8026D018_inline(gm_8016AE94(), gm_8016AE80(), Ground_801C2AD8(),
-                               it_804A0E30.x18))
-        {
-            u64 stage_mask = it_804A0E30.x18;
-            s32* stage_info = Ground_801C2AD8();
-            f32 weight = gm_8016AE94();
-            if ((stage_mask != 0) && (stage_info != NULL)) {
-                u64 monster_mask = stage_mask >> 6;
-                it_8026CA4C(&it_804A0E50, stage_info, monster_mask, 6, weight);
-                if (it_804A0E50.x8 != 0) {
-                    it_8026CD50(stage_info, monster_mask, weight);
-                }
-            }
+        if (it_8026D018_inline()) {
+            it_8026D018_inline2();
             it_8026CF04();
             HSD_GObj_SetupProc(GObj_Create(5, 7, 0), fn_8026C88C, 0);
-            {
-                s32* range = &it_804D6D28->xFC[gm_8016AE80() * 2];
-                f32 randf = HSD_Randf();
-                f32 diff = range[1] - range[0];
-                it_804A0E30.x0 = diff * randf + range[0];
-                it_804A0E30.x0 *= Ground_801C2AE8(Stage_80225194());
-            }
+            it_8026D018_inline3(HSD_Randf(),
+                                &it_804D6D28->xFC[gm_8016AE80() * 2]);
         }
     }
 }
