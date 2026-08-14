@@ -1210,7 +1210,7 @@ config.libs = [
             Object(NonMatching, "melee/mn/mnvibration.c"),
             Object(NonMatching, "melee/mn/mnsound.c"),
             Object(Matching, "melee/mn/mndeflicker.c"),
-            Object(NonMatching, "melee/mn/mnsoundtest.c"),
+            Object(Matching, "melee/mn/mnsoundtest.c"),
             Object(Matching, "melee/mn/mnlanguage.c"),
             Object(Matching, "melee/mn/mnhyaku.c"),
             Object(NonMatching, "melee/mn/mnevent.c"),
