@@ -500,7 +500,7 @@ config.libs = [
             Object(Matching, "melee/lb/lb_013B.c"),
             Object(Matching, "melee/lb/lb_0146.c"),
             Object(Matching, "melee/lb/lbarq.c"),
-            Object(NonMatching, "melee/lb/lbmemory.c"),
+            Object(Matching, "melee/lb/lbmemory.c"),
             Object(Matching, "melee/lb/lbheap.c"),
             Object(Matching, "melee/lb/lbfile.c"),
             Object(Matching, "melee/lb/lbarchive.c"),
