@@ -23,7 +23,7 @@ jump:
     // Check for possible carry from TBL to TBU
     mftbu r5
     cmpw r3, r5
-    bne jump
+    bne OSGetTime
 
     blr
     // clang-format on
