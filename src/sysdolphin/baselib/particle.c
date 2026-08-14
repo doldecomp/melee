@@ -1556,12 +1556,11 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         }
                     }
                     {
-                        u8* p = pc;
-                        fbytes[0] = *p++;
-                        fbytes[1] = *p++;
-                        fbytes[2] = *p++;
-                        fbytes[3] = *p++;
-                        pc = p;
+                        fbytes[0] = pc[0];
+                        fbytes[1] = pc[1];
+                        fbytes[2] = pc[2];
+                        fbytes[3] = pc[3];
+                        pc += 4;
                     }
                     pp->rotateTarget += fval;
                     if (pp->rotateCount == 0) {
