@@ -2032,9 +2032,6 @@ void grStadium_801D4548(Ground_GObj* gobj)
     Ground* gp;
     HSD_JObj* temp_r27_4;
     Ground* temp_r3_2;
-    Ground* temp_r3_9;
-    Ground* temp_r6;
-    PAD_STACK(0x10);
 
     temp_r31 = GET_GROUND(gobj);
     temp_f31 = Ground_801C0498();
@@ -2131,7 +2128,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
         return;
     case 3:
         if (temp_r31->u.stadium.xD8++ > yakumono_param->x10) {
-            temp_r6 = GET_GROUND(temp_r31->u.stadium.xE4);
+            Ground* temp_r6 = GET_GROUND(temp_r31->u.stadium.xE4);
             temp_r6->u.stadium.xC4_b1 = true;
             temp_r31->u.stadium.xDC = 4;
             temp_r31->u.stadium.xD8 = 0;
@@ -2212,8 +2209,9 @@ void grStadium_801D4548(Ground_GObj* gobj)
         grStadium_801D435C(gobj);
         Camera_80030E44(1, NULL);
         return;
-    case 6:
-        temp_r3_9 = temp_r31->u.stadium.xE4->user_data;
+    case 6: {
+        Ground* temp_r3_9 = temp_r31->u.stadium.xE4->user_data;
+        PAD_STACK(0x10);
         temp_r3_9->u.stadium.xC4_b0 = true;
         mpLib_80058560();
         if (temp_r31->u.stadium.xDE == 5) {
@@ -2228,6 +2226,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
         }
         temp_r31->u.stadium.xDC = 0;
         break;
+    }
     }
 }
 
