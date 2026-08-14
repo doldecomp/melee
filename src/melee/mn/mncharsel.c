@@ -701,23 +701,23 @@ bool mnCharSel_8025DAA0(int door)
 void mnCharSel_8025DB34(u8 arg0)
 {
     HSD_JObj* sp90;
+    HSD_JObj* sp34;
+    HSD_JObj* sp38;
     HSD_JObj* sp84;
     HSD_JObj* sp80;
     HSD_JObj* sp7C;
     HSD_JObj* sp78;
+    HSD_JObj* sp3C;
+    HSD_JObj* sp40;
     HSD_JObj* sp6C;
     HSD_JObj* sp68;
+    HSD_JObj* sp44;
     HSD_JObj* sp60;
     HSD_JObj* sp5C;
     HSD_JObj* sp58;
+    HSD_JObj* sp48;
     HSD_JObj* sp50;
     HSD_JObj* sp4C;
-    HSD_JObj* sp48;
-    HSD_JObj* sp44;
-    HSD_JObj* sp40;
-    HSD_JObj* sp3C;
-    HSD_JObj* sp38;
-    HSD_JObj* sp34;
     f32 temp_f31;
     u8 sel_icon;
     u8 hud_idx;
@@ -726,7 +726,7 @@ void mnCharSel_8025DB34(u8 arg0)
     int num_doors;
     f32 var_f1;
 
-    PAD_STACK(0x40);
+    PAD_STACK(0x3C);
 
     sel_icon = mnCharSel_803F0DFC.doors[arg0].sel_icon;
     hud_idx = icons[sel_icon].ft_hudindex;
