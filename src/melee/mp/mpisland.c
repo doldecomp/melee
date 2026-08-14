@@ -429,6 +429,7 @@ loop2_check:
 void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
                        int arg3, int arg4, int arg5, bool arg6)
 {
+    UNUSED u8 _q0[8];
     mp_UnkStruct0* cur;
     float z_val;
     u8 visited[0x600];
@@ -438,7 +439,6 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
     CollLine* lines;
     CollVtx* vtx;
     CollJoint* joints;
-    MapJoint* inner;
     int line_idx;
     int end_idx;
     int start_idx;
@@ -450,7 +450,7 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
     float min_x;
     float max_x;
     int i;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     type_flag = arg3 | 0x10;
     prev = NULL;
@@ -475,11 +475,10 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
     joints = &joints[arg2];
     lines = mpGetGroundCollLine();
     vtx = mpGetGroundCollVtx();
-    inner = joints->inner;
-    z_val = mpIsland_804D8158;
+    z_val = 0.0F;
 
-    end_total = inner->dynamic_start + inner->dynamic_count;
-    line_idx = inner->dynamic_start;
+    end_total = joints->inner->dynamic_start + joints->inner->dynamic_count;
+    line_idx = joints->inner->dynamic_start;
 
     for (; line_idx < end_total;) {
         if (visited[line_idx] != 0 ||
@@ -529,9 +528,8 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
 
             HSD_ASSERT(0x206, !loop);
         } else {
-            start_idx = end_idx;
+            i = start_idx = end_idx;
             min_x = -F32_MAX;
-            i = start_idx;
             max_x = F32_MAX;
             cycle_start = i;
 
@@ -546,23 +544,25 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
                         start_idx = i;
                     }
                 }
-                i = lines[i].x0->prev_id0;
-            } while (i != cycle_start);
+                link = lines[i].x0->prev_id0;
+                (void) lines[link];
+                i = link;
+            } while (link != cycle_start);
         }
 
         if ((mpisp = *arg1) != NULL) {
             *arg1 = mpisp->next;
         } else {
             mpisp = HSD_MemAlloc(0x2C);
-            HSD_ASSERT(0x3E, mpisp);
+            mpIsland_AssertSeg(mpisp);
         }
 
         mpisp->x20 = arg6 ? 0 : 2;
         mpisp->next = NULL;
-        mpisp->x26 = (short) start_idx;
         mpisp->x24 = (short) end_idx;
-        mpisp->x6 = lines[start_idx].x0->v1_idx;
+        mpisp->x26 = (short) start_idx;
         mpisp->x4 = lines[end_idx].x0->v0_idx;
+        mpisp->x6 = lines[start_idx].x0->v1_idx;
         mpisp->x8.x = vtx[mpisp->x4].pos.x;
         mpisp->x8.y = vtx[mpisp->x4].pos.y;
         mpisp->x8.z = z_val;
