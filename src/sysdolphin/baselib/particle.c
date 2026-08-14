@@ -1979,7 +1979,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
             case 0xBD:
                 /* Normalize velocity to target speed */
                 {
-                    f32 base_speed, random_range, target_speed;
+                    f32 base_speed, random_range;
                     f32 mag;
 
                     {
@@ -1996,15 +1996,15 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         random_range = fval;
                         pc = p;
                     }
-                    target_speed = base_speed + random_range * HSD_Randf();
+                    base_speed += random_range * HSD_Randf();
                     mag = pp->vel.x * pp->vel.x + pp->vel.y * pp->vel.y +
                           pp->vel.z * pp->vel.z;
                     mag = sqrtf(mag);
                     if (mag > 0.0F) {
-                        target_speed /= mag;
-                        pp->vel.x *= target_speed;
-                        pp->vel.y *= target_speed;
-                        pp->vel.z *= target_speed;
+                        base_speed /= mag;
+                        pp->vel.x *= base_speed;
+                        pp->vel.y *= base_speed;
+                        pp->vel.z *= base_speed;
                     }
                 }
                 break;
