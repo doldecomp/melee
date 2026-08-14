@@ -195,8 +195,7 @@ void ftCo_800C0B20(Fighter_GObj* gobj)
                 /// @todo Eliminate cast
                 lbColl_80008D30(&hit, (lbColl_80008D30_arg1*) unk_anim);
 
-                ftColl_80078384(fp, &fp->hurt_capsules[hurt_idx],
-                                &hit);
+                ftColl_80078384(fp, &fp->hurt_capsules[hurt_idx], &hit);
             }
             pl_8003EC30(fp->player_id, fp->x221F_b4, 1, f);
         }
