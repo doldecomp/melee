@@ -1711,12 +1711,11 @@ typedef union StadiumColor {
     u32 packed;
 } StadiumColor;
 
-static const U8Vec4 grPs_803B7F8C[] = {
-    { 0, 0, 0, 0x50 },
-    { 0, 0, 0, 0x40 },
-    { 0, 0, 0, 0x30 },
-    { 0, 0, 0, 0x20 },
-};
+typedef struct StadiumAlphaPresets {
+    U8Vec4 entries[4];
+} StadiumAlphaPresets;
+
+extern const StadiumAlphaPresets grPs_803B7F8C;
 
 static inline u8 grStadium_ScaleColor(u8 value)
 {
@@ -1730,7 +1729,13 @@ static inline u8 grStadium_ScaleColor(u8 value)
 void grStadium_801D3BBC(Ground_GObj* arg0)
 {
     UNUSED u64 pad;
-    StadiumColor colors[5];
+    union {
+        StadiumColor entries[5];
+        struct {
+            StadiumColor head;
+            StadiumAlphaPresets presets;
+        } s;
+    } colors;
     HSD_Text* dynamic_text;
     u8 color_state;
     HSD_GObj* player_gobj;
@@ -1794,11 +1799,8 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
         dynamic_text->x34.y = 1.0F;
         gp2->win_dynamic_p->default_kerning = 1;
     }
-    colors[1].vector = grPs_803B7F8C[0];
-    colors[2].vector = grPs_803B7F8C[1];
-    colors[3].vector = grPs_803B7F8C[2];
-    colors[4].vector = grPs_803B7F8C[3];
-    vertical_offset = colors[player_num].packed;
+    colors.s.presets = grPs_803B7F8C;
+    vertical_offset = colors.entries[player_num].packed;
     text_offset = 0;
     player_num = 0;
     do {
@@ -1811,14 +1813,17 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
             {
                 slot_type = Player_GetPlayerSlotType(player_num);
                 color_state = gm_8016B168();
-                colors[0].color = gm_80160968(
+                colors.entries[0].color = gm_80160968(
                     gm_80160854(player_num, Player_GetTeam(player_num),
                                 color_state, slot_type));
-                colors[0].color.r = grStadium_ScaleColor(colors[0].color.r);
-                colors[0].color.g = grStadium_ScaleColor(colors[0].color.g);
-                colors[0].color.b = grStadium_ScaleColor(colors[0].color.b);
-                colors[0].color.a = 0xFF;
-                gp2->win_dynamic_p->text_color = colors[0].color;
+                colors.entries[0].color.r =
+                    grStadium_ScaleColor(colors.entries[0].color.r);
+                colors.entries[0].color.g =
+                    grStadium_ScaleColor(colors.entries[0].color.g);
+                colors.entries[0].color.b =
+                    grStadium_ScaleColor(colors.entries[0].color.b);
+                colors.entries[0].color.a = 0xFF;
+                gp2->win_dynamic_p->text_color = colors.entries[0].color;
                 character_name = gm_80160A60(player_num);
                 if (character_name != NULL) {
                     HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF58,
@@ -1831,6 +1836,13 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
         player_num += 1;
     } while (player_num < 6);
 }
+
+const StadiumAlphaPresets grPs_803B7F8C = { {
+    { 0, 0, 0, 0x50 },
+    { 0, 0, 0, 0x40 },
+    { 0, 0, 0, 0x30 },
+    { 0, 0, 0, 0x20 },
+} };
 
 void grStadium_801D3F40(Ground_GObj* arg0, int arg1)
 {
