@@ -6553,9 +6553,17 @@ void ftCo_800AEA8C(Fighter* fp)
         result = mpCheckFloor(x2, above, x, below, 0.0f, &floor_pos, &line_id,
                               flags, &floor_normal, -1, -1, -1, NULL,
                               (Fighter_GObj*) found);
-        if (result == 0 || ftCo_800A1B38_noinline(line_id) == 0) {
-            found = result;
+        if (result == 0) {
+            goto do_assign;
         }
+        if (ftCo_800A1B38_noinline(line_id) == 0) {
+            goto do_assign;
+        }
+        (void) result;
+        goto after_assign;
+    do_assign:
+        found = result;
+    after_assign:;
         if (found != 0) {
             f32 floor_x;
             f32 floor_y;

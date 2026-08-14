@@ -102,7 +102,7 @@ static lbAudioAx_PoolAlloc lbl_80433710;
 /* 4338A4 */ static int lbl_804338A4[0x38];
 /* 433984 */ static int lbl_80433984[0x38];
 /* 433A64 */ static int lbl_80433A64[0x38];
-/* 433B44 */ static int lbl_80433B44[0x1F124 / 4];
+/* 433B44 */ extern int lbl_80433B44[0x1F124 / 4];
 
 char lbl_803BB300[0x40] = "";
 char lbl_803BB340[0x40] = "/audio/";

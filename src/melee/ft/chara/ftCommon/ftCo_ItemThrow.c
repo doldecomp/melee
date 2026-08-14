@@ -58,6 +58,11 @@ typedef struct ftCo_ItemThrowAttrs {
     float x8;
 } ftCo_ItemThrowAttrs;
 
+typedef struct ftCo_ItemThrowCmd {
+    /* +0:0  */ u32 pad : 20;
+    /* +0:20 */ s32 angle : 12;
+} ftCo_ItemThrowCmd;
+
 bool ftCo_80094E54(Fighter* fp)
 {
     if (fp->input.x668 & HSD_PAD_A &&
@@ -478,18 +483,22 @@ void ftCo_80095D5C(Fighter* fp, Vec3* arg1)
 {
     float vel;
     float angle;
+    float vel_mul;
     u8* array_element;
+    ftCo_DatAttrs* co_attrs = getFtAttrs(fp);
     u32 cmd_var0 = fp->cmd_vars[0];
 
     vel = 1;
     if (cmd_var0 != 0) {
         vel = 0.01f * ((cmd_var0 >> 12) & 0x3FF);
     }
-    array_element = (u8*) Fighter_804D6550 + (fp->motion_id * 3);
-    vel *= fp->co_attrs.item_throw_velocity_multiplier *
-           *(float*) (array_element - 0x468);
+    array_element = (u8*) Fighter_804D6550;
+    vel_mul = co_attrs->item_throw_velocity_multiplier;
+    co_attrs = (ftCo_DatAttrs*) (array_element + fp->motion_id * 12);
+    array_element = (u8*) co_attrs;
+    vel *= vel_mul * *(float*) (array_element - 0x468);
     if (cmd_var0 != 0) {
-        int int_angle = (s32) (cmd_var0 << 20) >> 20;
+        int int_angle = ((ftCo_ItemThrowCmd*) fp->cmd_vars)->angle;
         if (int_angle == 361) {
             angle = *(float*) (array_element - 0x464);
         } else {

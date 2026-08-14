@@ -117,7 +117,6 @@ Handle* lbMemory_80014FC8(Handle* arg0, size_t size)
     Handle* memp_kouho;
     void* end;
     u32 least_leftover;
-    u32 aligned_size;
     u32 leftover;
     u32 available_space;
     void* start;
@@ -125,7 +124,7 @@ Handle* lbMemory_80014FC8(Handle* arg0, size_t size)
 
     least_leftover = 0x40000000U;
     HSD_ASSERT(0xCC, _p(free_mem));
-    aligned_size = ((size + 0x1F) & 0xFFFFFFE0);
+    size = ((size + 0x1F) & 0xFFFFFFE0);
     start = arg0->x4_lo;
     iter = (Handle*) &arg0->xC_prev;
     memp_kouho = NULL;
@@ -133,8 +132,9 @@ Handle* lbMemory_80014FC8(Handle* arg0, size_t size)
     while (1) {
         end = (iter->x0_next != NULL) ? iter->x0_next->x4_lo : arg0->x8_hi;
         available_space = (u32) end - (u32) start;
-        if (available_space >= aligned_size) {
-            leftover = available_space - aligned_size;
+        if (available_space >= size) {
+            leftover = available_space;
+            leftover = leftover - size;
             if (leftover <= least_leftover) {
                 least_leftover = leftover;
                 lo = start;
@@ -153,7 +153,7 @@ Handle* lbMemory_80014FC8(Handle* arg0, size_t size)
         Handle* result;
         POP_HANDLE(&_p(free_mem), result);
 
-        result->x8_hi = (void*) aligned_size;
+        result->x8_hi = (void*) size;
         result->x4_lo = lo;
         result->x0_next = memp_kouho->x0_next;
         memp_kouho->x0_next = result;
