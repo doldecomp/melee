@@ -4190,58 +4190,61 @@ s32 mnCharSel_802640A0(void)
     }
 
     doors = mnCharSel_803F0DFC.doors;
-    for (i = 0; i < num_players; i++) {
-        struct CSSCharModel* model;
-        int player;
-        s32 found;
-        gobj = GObj_Create(4, 5, 0x80);
-        jobj = HSD_JObjLoadJoint(ANIM[2].joint);
-        model = HSD_MemAlloc(0x18);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
-        GObj_InitUserData(gobj, 4, HSD_Free, model);
-        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 2, 0x80);
-        HSD_GObj_SetupProc(gobj, fn_80262648, 2);
-        HSD_JObjAddAnimAll(jobj, ANIM[2].anim, ANIM[2].matanim,
-                           ANIM[2].shapeanim);
-        HSD_JObjReqAnimAll(jobj, 0.0f);
-        HSD_ForeachAnim(jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
-                        AOBJ_ARG_AOV, 0, 0);
-        mnCharSel_804A0BD0[i] = model;
-        model->gobj = gobj;
-        model->x4 = i;
-        model->x5 = 0;
-        model->x6 = 0xFF;
-        model->x7 = 0;
-        if ((u8) mnCharSel_804D6CF5 == 1) {
-            if (i != 0) {
-                player = mnCharSel_804D6CF1;
+    {
+        CSSDoor* door = doors;
+        for (i = 0; i < num_players; i++, door++) {
+            struct CSSCharModel* model;
+            int player;
+            s32 found;
+            gobj = GObj_Create(4, 5, 0x80);
+            jobj = HSD_JObjLoadJoint(ANIM[2].joint);
+            model = HSD_MemAlloc(0x18);
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+            GObj_InitUserData(gobj, 4, HSD_Free, model);
+            GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 2, 0x80);
+            HSD_GObj_SetupProc(gobj, fn_80262648, 2);
+            HSD_JObjAddAnimAll(jobj, ANIM[2].anim, ANIM[2].matanim,
+                               ANIM[2].shapeanim);
+            HSD_JObjReqAnimAll(jobj, 0.0f);
+            HSD_ForeachAnim(jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
+                            AOBJ_ARG_AOV, 0, 0);
+            mnCharSel_804A0BD0[i] = model;
+            model->gobj = gobj;
+            model->x4 = i;
+            model->x5 = 0;
+            model->x6 = 0xFF;
+            model->x7 = 0;
+            if ((u8) mnCharSel_804D6CF5 == 1) {
+                if (i != 0) {
+                    player = mnCharSel_804D6CF1;
+                } else {
+                    player = mnCharSel_804D6CF0;
+                }
             } else {
-                player = mnCharSel_804D6CF0;
+                player = i;
             }
-        } else {
-            player = i;
-        }
-        for (found = 0; found < 0x19; found++) {
-            u8 ck = mnCharSel_804D6CB0->data.data.players[player].c_kind;
-            if ((s8) ck == icons[found].char_kind &&
-                gm_IsCKindUnlocked(ck) != 0)
-            {
-                break;
+            for (found = 0; found < 0x19; found++) {
+                u8 ck = mnCharSel_804D6CB0->data.data.players[player].c_kind;
+                if ((s8) ck == icons[found].char_kind &&
+                    gm_IsCKindUnlocked(ck) != 0)
+                {
+                    break;
+                }
             }
-        }
-        if (found >= 0x19) {
-            u8* slot_type;
-            mnCharSel_804D6CB0->data.data.players[player].c_kind =
-                CKIND_PLAYABLE_COUNT;
-            slot_type =
-                &mnCharSel_804D6CB0->data.data.players[player].slot_type;
-            if (*slot_type == 1) {
-                *slot_type = 3;
+            if (found >= 0x19) {
+                u8* slot_type;
+                mnCharSel_804D6CB0->data.data.players[player].c_kind =
+                    CKIND_PLAYABLE_COUNT;
+                slot_type =
+                    &mnCharSel_804D6CB0->data.data.players[player].slot_type;
+                if (*slot_type == 1) {
+                    *slot_type = 3;
+                }
             }
+            door->sel_icon = found;
+            model->x8 = model->x10 = 3.4f + icons[found].bound_l;
+            model->xC = model->x14 = -3.0f + icons[found].bound_u;
         }
-        doors[i].sel_icon = found;
-        model->x8 = model->x10 = 3.4f + icons[found].bound_l;
-        model->xC = model->x14 = -3.0f + icons[found].bound_u;
     }
 
     spE8 = mnCharSel_804DC580;
