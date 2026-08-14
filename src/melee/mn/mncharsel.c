@@ -724,7 +724,6 @@ void mnCharSel_8025DB34(u8 arg0)
     u8 sel_icon;
     u8 hud_idx;
     u8 var_r5;
-    u8 var_r23;
     int num_doors;
     f32 var_f1;
 
@@ -1126,6 +1125,7 @@ void mnCharSel_8025DB34(u8 arg0)
                             AOBJ_ARG_AOV, 0, 0);
         } else {
             /* Teams mode */
+            int var_r23;
             HSD_JObjClearFlags(sp90, JOBJ_HIDDEN);
             var_r23 = mnCharSel_803F0DFC.doors[arg0].team;
             temp_f31 = (f32) mnCharSel_804D50D0[var_r23];
@@ -1140,8 +1140,7 @@ void mnCharSel_8025DB34(u8 arg0)
                 var_r23 += 4;
             }
             {
-                u8 team_color_idx = var_r23;
-                temp_f31 = (f32) mnCharSel_804D50D0[team_color_idx];
+                temp_f31 = (f32) mnCharSel_804D50D0[var_r23];
                 lb_80011E24(mnCharSel_804D6CC0, &sp38,
                             mnCharSel_803F0DFC.doors[arg0].bg_joint, -1);
                 HSD_ForeachAnim(sp38, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
@@ -1149,7 +1148,7 @@ void mnCharSel_8025DB34(u8 arg0)
                 HSD_JObjAnimAll(sp38);
                 HSD_ForeachAnim(sp38, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
                                 AOBJ_ARG_AOV, 0, 0);
-                temp_f31 = (f32) mnCharSel_804D50D0[team_color_idx];
+                temp_f31 = (f32) mnCharSel_804D50D0[var_r23];
                 lb_80011E24(mnCharSel_804D6CC0, &sp34,
                             mnCharSel_803F0DFC.doors[arg0].emblem_joint, -1);
                 HSD_ForeachAnim(sp34, JOBJ_TYPE, MOBJ_MASK, HSD_AObjReqAnim,
@@ -1197,7 +1196,7 @@ void mnCharSel_8025DB34(u8 arg0)
                 }
             }
             {
-                s8 port;
+                int port;
                 if ((u8) mnCharSel_804D6CF5 == 1) {
                     if ((int) arg0 != 0) {
                         port = (s8) (u8) mnCharSel_804D6CF1;
@@ -1205,7 +1204,7 @@ void mnCharSel_8025DB34(u8 arg0)
                         port = (s8) (u8) mnCharSel_804D6CF0;
                     }
                 } else {
-                    port = (s8) arg0;
+                    port = arg0;
                 }
                 mnCharSel_804D6CB0->data.data.players[port].color = var_r5;
             }

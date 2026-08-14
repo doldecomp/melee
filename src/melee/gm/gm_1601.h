@@ -192,9 +192,9 @@
 /* 168FC4 */ void gm_80168FC4(void);
 /* 169000 */ s32 fn_80169000(void* arg0, void* arg1);
 /* 169238 */ u8 gm_80169238(u8);
-/* 169264 */ u8 gm_80169264(u8);
-/* 169290 */ u8 gm_80169290(u8);
-/* 1692BC */ u8 gm_801692BC(u8);
+/* 169264 */ int gm_80169264(u8);
+/* 169290 */ int gm_80169290(u8);
+/* 1692BC */ int gm_801692BC(u8);
 /* 1692E8 */ void gm_801692E8(u32 secs, datetime* datetime);
 /* 169364 */ struct lbl_8046B488_t* gm_1601_GetUnkData(void);
 /* 169370 */ u8 gm_80169370(s32);

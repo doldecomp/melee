@@ -4285,7 +4285,7 @@ static inline u8 gm_80169238_noinline(u8 ckind)
     return gm_80169238_inner(ckind);
 }
 
-u8 gm_80169264(u8 ckind)
+int gm_80169264(u8 ckind)
 {
     if (ckind >= ARRAY_SIZE(lbl_803D51A0)) {
         return 0;
@@ -4293,7 +4293,7 @@ u8 gm_80169264(u8 ckind)
     return lbl_803D51A0[ckind].x1;
 }
 
-u8 gm_80169290(u8 ckind)
+int gm_80169290(u8 ckind)
 {
     if (ckind >= ARRAY_SIZE(lbl_803D51A0)) {
         return 0;
@@ -4301,7 +4301,7 @@ u8 gm_80169290(u8 ckind)
     return lbl_803D51A0[ckind].x3;
 }
 
-u8 gm_801692BC(u8 ckind)
+int gm_801692BC(u8 ckind)
 {
     if (ckind >= ARRAY_SIZE(lbl_803D51A0)) {
         return 0;
