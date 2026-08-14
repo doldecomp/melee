@@ -233,14 +233,14 @@ u32 lbMemory_8001529C(Handle* h, void (*arg1)(u32), u32 arg2)
     return 0;
 }
 
-static char assert_p_size[] = "!p->size";
+static char lbl_803BA368[0x18] = "!p->size\0\0\0\0!cancelflag";
 
 static inline void start_ram_copy(u32 old, u32 current, u32 size, Handle* next)
 {
     struct LBMgr* p = &_p(x6A0_mgr);
     int enabled = OSDisableInterrupts();
 
-    HSD_ASSERTMSG(0x14F, !p->size, assert_p_size);
+    HSD_ASSERTMSG(0x14F, !p->size, &lbl_803BA368[0]);
     p->src = (u8*) old;
     p->dst = (u8*) current;
     p->size = size;
@@ -267,7 +267,7 @@ static void lbMemory_80015320(int arg0, int _handle, void* arg2,
     current = (u32) _p(x6E4);
     null_or_old = NULL;
 
-    HSD_ASSERT(0x188, !cancelflag);
+    HSD_ASSERTMSG(0x188, !cancelflag, &lbl_803BA368[0xC]);
 
     if (handle != null_or_old) {
         loaded_old = handle->x4_lo;
