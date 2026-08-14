@@ -2054,9 +2054,6 @@ void grStadium_801D435C(Ground_GObj* arg0)
 
 void grStadium_801D4548(Ground_GObj* gobj)
 {
-    s32 sp6C;
-    s32 sp68;
-    s32 sp64;
     Ground* temp_r31;
     Ground_GObj* temp_r3_7;
     int temp_r0_3;
@@ -2067,8 +2064,6 @@ void grStadium_801D4548(Ground_GObj* gobj)
     int temp_r3_8;
     int temp_r4_4;
     int temp_r4_8;
-    int var_r28;
-    int var_r28_2;
     HSD_JObj* temp_r27_2;
     HSD_JObj* temp_r27_3;
     HSD_JObj* temp_r27_5;
@@ -2081,33 +2076,15 @@ void grStadium_801D4548(Ground_GObj* gobj)
     s16 temp_r0_2;
     s32 temp_r0_4;
     s32 temp_r0_5;
-    s32 temp_r27_6;
-    s32 temp_r27_7;
-    s32 temp_r3_10;
-    s32 temp_r3_11;
-    s32 temp_r3_12;
-    s32 temp_r3_13;
     s32 temp_r5_2;
     s32 var_r29;
-    s32 var_r3;
-    s32 var_r3_10;
-    s32 var_r3_11;
-    s32 var_r3_12;
-    s32 var_r3_13;
-    s32 var_r3_2;
-    s32 var_r3_3;
-    s32 var_r3_4;
-    s32 var_r3_5;
-    s32 var_r3_6;
-    s32 var_r3_7;
-    s32 var_r3_8;
-    s32 var_r3_9;
     s32 var_r4;
     Ground* gp;
     HSD_JObj* temp_r27_4;
     Ground* temp_r3_2;
     Ground* temp_r3_9;
     Ground* temp_r6;
+    PAD_STACK(0x10);
 
     temp_r31 = GET_GROUND(gobj);
     temp_f31 = Ground_801C0498();
@@ -2203,7 +2180,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
         temp_r31->u.stadium.xDC = 3;
         return;
     case 3:
-        if (++temp_r31->u.stadium.xD8 > yakumono_param->x10) {
+        if (temp_r31->u.stadium.xD8++ > yakumono_param->x10) {
             temp_r6 = GET_GROUND(temp_r31->u.stadium.xE4);
             temp_r6->u.stadium.xC4_b1 = true;
             temp_r31->u.stadium.xDC = 4;
@@ -2215,19 +2192,21 @@ void grStadium_801D4548(Ground_GObj* gobj)
         break;
     case 4:
         temp_r27_2 = GET_JOBJ(temp_r31->u.stadium.xE4);
-        temp_f29 = -((temp_f31 * (0.95f / yakumono_param->x14)) -
-                     HSD_JObjGetScaleY(temp_r27_2));
+        temp_r30 = temp_r27_2;
+        temp_f29 = HSD_JObjGetScaleY(temp_r30);
+        temp_f29 -= temp_f31 * (0.95f / yakumono_param->x14);
         temp_f30 = 0.05f * temp_f31;
         if (temp_f29 > temp_f30) {
-            HSD_JObjSetScaleY(temp_r27_2, temp_f29);
+            HSD_JObjSetScaleY(temp_r30, temp_f29);
         } else {
-            HSD_JObjSetScaleY(temp_r27_2, 0.05F);
+            HSD_JObjSetScaleY(temp_r30, 0.05F);
             temp_r4_4 = temp_r31->u.stadium.xD8;
             temp_r31->u.stadium.xD8 = temp_r4_4 + 1;
             if (temp_r4_4 > yakumono_param->x18) {
                 grAnime_801C7A04(temp_r31->u.stadium.xE4, 0, 7, 0.0f);
-                temp_r3_7 = grStadium_801D10F8(temp_r31->u.stadium.xDE);
-                temp_r27_3 = GET_JOBJ(temp_r3_7);
+                temp_r27_3 = GET_JOBJ(
+                    temp_r3_7 = grStadium_801D10F8(temp_r31->u.stadium.xDE));
+                (void) temp_r27_3;
                 HSD_JObjSetScaleY(temp_r27_3, temp_f30);
                 HSD_JObjSetTranslateY(temp_r27_3, -10.0F);
                 temp_r31->u.stadium.xE8 = temp_r3_7;
@@ -2241,7 +2220,8 @@ void grStadium_801D4548(Ground_GObj* gobj)
         Camera_80030E44(1, NULL);
         return;
     case 5:
-        temp_r0_3 = ++temp_r31->u.stadium.xD8;
+        temp_r31->u.stadium.xD8++;
+        temp_r0_3 = temp_r31->u.stadium.xD8;
         if (temp_r0_3 <= yakumono_param->x14) {
             float tmp;
             temp_r30 = temp_r31->u.stadium.xE8->hsd_obj;
@@ -2257,9 +2237,9 @@ void grStadium_801D4548(Ground_GObj* gobj)
                 var_f29 = 0.0f;
             }
             HSD_JObjSetTranslateY(temp_r30, var_f29);
+            temp_r27_4 = temp_r31->u.stadium.xE4->hsd_obj;
             temp_r5_2 = yakumono_param->x14;
             temp_r3_8 = temp_r31->u.stadium.xD8;
-            temp_r27_4 = temp_r31->u.stadium.xE4->hsd_obj;
             temp_r0_5 = temp_r5_2 / 2;
             if (temp_r3_8 > temp_r0_5) {
                 var_f30 = -10.0f * temp_f31 *
@@ -2271,6 +2251,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
             HSD_JObjSetTranslateY(temp_r27_4, var_f30);
         } else {
             temp_r27_5 = temp_r31->u.stadium.xE8->hsd_obj;
+            (void) temp_r27_5;
             HSD_JObjSetScaleY(temp_r27_5, temp_f31);
             HSD_JObjSetTranslateY(temp_r27_5, 0.0F);
             temp_r31->u.stadium.xDC = 6;
