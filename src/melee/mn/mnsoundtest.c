@@ -495,12 +495,12 @@ void fn_8024B2B0(mnSoundTest_GObj* arg0)
     HSD_JObj* sp3C;
     HSD_GObjProc* proc;
     u8 state;
-    HSD_JObj* jobj;
+    u8 anim_idx;
     mnSoundTest_GObj* gobj;
     soundtest_user_data* reset_data;
     soundtest_user_data* menu_data;
     u64 inputs;
-    u8 anim_idx;
+    HSD_JObj* jobj;
     u16 sound_id;
     soundtest_user_data* user_data;
     s32 audio_id;
@@ -555,8 +555,7 @@ void fn_8024B2B0(mnSoundTest_GObj* arg0)
     }
     if ((u8) user_data->unk0 == 0) {
         if (inputs & MenuInput_AButton) {
-            sound_id = user_data->unk1;
-            if ((u32) user_data->unk2 == sound_id) {
+            if ((u32) user_data->unk2 == (sound_id = user_data->unk1)) {
                 menu_data = mnSoundTest_804D6C40->user_data;
                 lbAudioAx_800236DC();
                 menu_data->unk2 = 0x50;
@@ -615,7 +614,7 @@ void fn_8024B2B0(mnSoundTest_GObj* arg0)
             user_data->unk4 = 0;
             anim_idx = data_3[user_data->unk3];
             lb_80011E24(GET_JOBJ(mnSoundTest_804D6C40), &sp48, 0x15, -1);
-            HSD_JObjReqAnimAll(sp48, (f32) data_4[anim_idx + 30]);
+            HSD_JObjReqAnimAll(sp48, (f32) data_4[anim_idx]);
             mn_8022F3D8(sp48, 0xFFU, 0xA0);
             HSD_JObjAnimAll(sp48);
         } else if (inputs & MenuInput_Right) {
@@ -626,7 +625,7 @@ void fn_8024B2B0(mnSoundTest_GObj* arg0)
             user_data->unk4 = 0;
             anim_idx = data_3[user_data->unk3];
             lb_80011E24(GET_JOBJ(mnSoundTest_804D6C40), &sp3C, 0x15, -1);
-            HSD_JObjReqAnimAll(sp3C, (f32) data_4[anim_idx + 30]);
+            HSD_JObjReqAnimAll(sp3C, (f32) data_4[anim_idx]);
             mn_8022F3D8(sp3C, 0xFFU, 0xA0);
             HSD_JObjAnimAll(sp3C);
         }
