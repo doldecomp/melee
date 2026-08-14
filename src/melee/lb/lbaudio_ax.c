@@ -2584,7 +2584,7 @@ void lbAudioAx_8002838C(void)
     ARInit((u32*) &lbl_80433B44[0x38], 0x10);
     ARQInit();
     AIInit(NULL);
-    PAD_STACK(8);
+    PAD_STACK(4);
 
     lbl_804D643C = offsets_arr_803BC4E4[0][0];
     lbl_804D6440 = offsets_arr_803BC4E4[0x33][0];
