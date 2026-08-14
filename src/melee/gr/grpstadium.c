@@ -2182,6 +2182,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
             HSD_JObjSetTranslateY(temp_r30, var_f29);
             temp_r27_4 = temp_r31->u.stadium.xE4->hsd_obj;
             temp_r5_2 = yakumono_param->x14;
+            (void) temp_r5_2;
             temp_r3_8 = temp_r31->u.stadium.xD8;
             temp_r0_5 = temp_r5_2 / 2;
             if (temp_r3_8 > temp_r0_5) {
