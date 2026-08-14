@@ -590,13 +590,12 @@ bool ftColl_80076ED8(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
                      HitCapsule* hit1)
 {
     float dmg = inlineB3(fp0, hit0, fp1);
-    PAD_STACK(24);
+    PAD_STACK(16);
     if (inlineB1(hit0)) {
         if (dmg_log0_idx == 0 && !fp1->dmg.x189C_unk_num_frames) {
             if (checkTipLog(fp1, hit0) == HitCapsule_Disabled) {
-                float temp_dmg = dmg;
-                temp_dmg *= 0.5f;
-                if (!((int) temp_dmg) && dmg) {
+                float temp_dmg;
+                if (!((int) (temp_dmg = 0.5f * dmg)) && dmg) {
                     temp_dmg = 1;
                 }
 
@@ -630,38 +629,54 @@ bool ftColl_80076ED8(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
     } else {
         DmgLogEntry* entry;
         bool inner_ret;
-        int int_dmg;
+        struct {
+            size_t v;
+        } i;
+        struct {
+            int v;
+        } int_dmg;
 
+        i.v = 0;
         if (dmg) {
             if ((int) dmg) {
-                int_dmg = dmg;
+                int_dmg.v = dmg;
             } else {
-                int_dmg = 1;
+                int_dmg.v = 1;
             }
         } else {
-            int_dmg = 0;
+            int_dmg.v = 0;
         }
 
         {
-            size_t i;
-            dmg_log1_idx = (i = 0);
+            dmg_log1_idx = (i.v = 0);
             inner_ret = false;
-            for (; i < ARRAY_SIZE(fp0->x914); i++) {
-                HitCapsule* cur = &fp0->x914[i];
+            for (; i.v < ARRAY_SIZE(fp0->x914); i.v++) {
+                HitCapsule* cur = &fp0->x914[i.v];
                 if (cur->state != HitCapsule_Disabled && cur->x4 == hit0->x4) {
                     lbColl_80008688(cur, 0, fp1);
                 }
             }
         }
 
-        if (int_dmg > fp0->dmg.x1914) {
-            fp0->dmg.x1914 = int_dmg;
+        if (int_dmg.v > fp0->dmg.x1914) {
+            fp0->dmg.x1914 = int_dmg.v;
         }
 
         if (fp1->x1988 == 0 && fp1->x198C == 0 && !fp1->x221D_b6 &&
             hit1->state == HitCapsule_Disabled)
         {
-            int dmg_count = getEnvDmg(dmg);
+            struct {
+                int v;
+            } dmg_count;
+            if (dmg) {
+                if ((int) dmg) {
+                    dmg_count.v = dmg;
+                } else {
+                    dmg_count.v = 1;
+                }
+            } else {
+                dmg_count.v = 0;
+            }
             if (fp1->x221C_b4) {
                 fp1->dmg.x1834 = fp1->dmg.x1834 - dmg;
                 if (fp1->dmg.x1834 < 0) {
@@ -671,7 +686,7 @@ bool ftColl_80076ED8(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
             }
 
             { /// @todo inline
-                if (inlineB2(fp1, dmg, dmg_count)) {
+                if (inlineB2(fp1, dmg, dmg_count.v)) {
                     Fighter* fp = fp0;
                     if (fp0->x1064_thrownHitbox.owner != NULL) {
                         fp = fp0->x1064_thrownHitbox.owner->user_data;
