@@ -893,6 +893,9 @@ void mnCharSel_8025DB34(u8 arg0)
                 break;
             case 0:
                 if (gmMainLib_GetGameRules()->handicap != 0) {
+                    int cpu_level;
+                    u8 cpuslider_joint;
+
                     if (gmMainLib_GetGameRules()->handicap == 2) {
                         var_f1 = 0.0f;
                     } else {
@@ -900,11 +903,12 @@ void mnCharSel_8025DB34(u8 arg0)
                     }
                     HSD_ForeachAnim(sp90, JOBJ_TYPE, ALL_TYPE_MASK,
                                     HSD_AObjReqAnim, AOBJ_ARG_AF, var_f1);
-                    temp_f31 =
-                        (f32) mnCharSel_804D6CB0->data.data.players[arg0]
-                            .cpu_level;
-                    lb_80011E24(mnCharSel_804D6CC0, &sp6C,
-                                mnCharSel_803F0DFC.doors[arg0].cpuslider_joint,
+                    cpu_level =
+                        mnCharSel_804D6CB0->data.data.players[arg0].cpu_level;
+                    temp_f31 = (f32) cpu_level;
+                    cpuslider_joint =
+                        mnCharSel_803F0DFC.doors[arg0].cpuslider_joint;
+                    lb_80011E24(mnCharSel_804D6CC0, &sp6C, cpuslider_joint,
                                 -1);
                     HSD_ForeachAnim(sp6C, JOBJ_TYPE, TOBJ_MASK,
                                     HSD_AObjReqAnim, AOBJ_ARG_AF, temp_f31);
