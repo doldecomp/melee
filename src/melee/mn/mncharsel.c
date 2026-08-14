@@ -1174,24 +1174,25 @@ void mnCharSel_8025DB34(u8 arg0)
 
     /* Final: costume color assignment */
     {
+        int color_value;
         u8 final_icon = mnCharSel_803F0DFC.doors[arg0].sel_icon;
         if (final_icon < 0x19U) {
             if ((u8) mnCharSel_804D6CF5 == 1 ||
                 (u8) mnCharSel_804D6CB0->data.data.rules.is_teams == 0)
             {
-                var_r5 = mnCharSel_803F0DFC.doors[arg0].costume;
+                color_value = var_r5 = mnCharSel_803F0DFC.doors[arg0].costume;
             } else {
                 u8 team_idx = mnCharSel_803F0DFC.doors[arg0].team;
                 u8 ckind = icons[final_icon].char_kind;
                 switch ((int) team_idx) {
                 default:
-                    var_r5 = gm_80169264(ckind);
+                    color_value = var_r5 = gm_80169264(ckind);
                     break;
                 case 1:
-                    var_r5 = gm_801692BC(ckind);
+                    color_value = var_r5 = gm_801692BC(ckind);
                     break;
                 case 2:
-                    var_r5 = gm_80169290(ckind);
+                    color_value = var_r5 = gm_80169290(ckind);
                     break;
                 }
             }
@@ -1208,7 +1209,7 @@ void mnCharSel_8025DB34(u8 arg0)
                 }
                 mnCharSel_804D6CB0->data.data.players[port].color = var_r5;
             }
-            mnCharSel_8025D5AC((int) arg0, hud_idx + (var_r5 * 0x1E), 0);
+            mnCharSel_8025D5AC((int) arg0, hud_idx + (color_value * 0x1E), 0);
         }
     }
 }
