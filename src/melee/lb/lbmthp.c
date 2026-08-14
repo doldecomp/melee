@@ -144,23 +144,19 @@ size_t fn_8001EBF0(THPDecComp* data)
     u32 height;
     u32 wh;
     u32 wh_div4;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     data->unk_104 = 0x20;
 
-    width = data->width;
-    aligned_100 = ALIGN_32(data->unk_100);
-    height = data->height;
     unk_104_val = data->unk_104;
-
-    data->unk_9C.val1 = (u16) width;
-
+    aligned_100 = ALIGN_32(data->unk_100);
+    size = aligned_100 * unk_104_val;
+    width = data->width;
+    height = data->height;
     wh = width * height;
-
+    data->unk_9C.val1 = (u16) width;
     height = data->height;
     data->unk_9C._pad = (u16) height;
-
-    size = aligned_100 * unk_104_val;
 
     data->unk_9C.val2 = 4;
 
