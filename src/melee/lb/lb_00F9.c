@@ -72,7 +72,7 @@ const struct {
 /* 4D63AC */ static struct lb_80011A50_t* lb_804D63AC;
 /* 4D63B0 */ static struct lb_80011A50_t* lb_804D63B0;
 /* 4D63B4 */ static enum_t lb_804D63B4;
-/* 4D63B8 */ static u8 lb_804D63B8[8];
+/* 4D63B8 */ static u8 lb_804D63B8;
 
 static void order_data(void)
 {
@@ -439,7 +439,7 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
     s32 on_ground;
     s32 loop_index = 0;
 
-    if (lb_804D63B8[0] != 0) {
+    if ((u8) lb_804D63B8 != 0) {
         return;
     }
     if (desc == NULL) {
