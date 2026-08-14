@@ -372,7 +372,10 @@ s32 fn_8001F13C(THPDecComp* streamPlayer)
     return OSRestoreInterrupts(intr);
 }
 
-s32 fn_8001F294(void);
+s32 fn_8001F294(void)
+{
+    return MoviePlayer.unk_110;
+}
 
 static inline u32 lbMthp_GetFrame(u32** rate_table, u32 counter)
 {
@@ -583,11 +586,6 @@ void lbMthp_8001F800(void)
 
         MoviePlayer.power = 0;
     }
-}
-
-s32 fn_8001F294(void)
-{
-    return MoviePlayer.unk_110;
 }
 
 void lbMthp_8001F87C(void)
