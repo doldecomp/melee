@@ -1416,16 +1416,18 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
             case 0xAB:
                 /* Velocity scale */
                 {
+                    f32 scale;
                     u8* p = pc;
                     fbytes[0] = *p++;
                     fbytes[1] = *p++;
                     fbytes[2] = *p++;
                     fbytes[3] = *p++;
                     pc = p;
+                    scale = fval;
+                    pp->vel.x *= scale;
+                    pp->vel.y *= scale;
+                    pp->vel.z *= scale;
                 }
-                pp->vel.x *= fval;
-                pp->vel.y *= fval;
-                pp->vel.z *= fval;
                 break;
 
             case 0xAC:
@@ -2008,7 +2010,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                 /* Normalize velocity to target speed */
                 {
                     f32 base_speed, random_range;
-                    f32 mag;
+                    f32 mag, root;
 
                     {
                         u8* p = pc;
@@ -2027,9 +2029,9 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     base_speed += random_range * HSD_Randf();
                     mag = pp->vel.x * pp->vel.x + pp->vel.y * pp->vel.y +
                           pp->vel.z * pp->vel.z;
-                    mag = sqrtf(mag);
-                    if (mag > 0.0F) {
-                        base_speed /= mag;
+                    root = sqrtf(mag);
+                    if (root > 0.0) {
+                        base_speed /= root;
                         pp->vel.x *= base_speed;
                         pp->vel.y *= base_speed;
                         pp->vel.z *= base_speed;
@@ -2643,18 +2645,20 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
             case 0xE8:
                 /* Trail control */
                 {
+                    f32 trail;
                     u8* p = pc;
                     fbytes[0] = *p++;
                     fbytes[1] = *p++;
                     fbytes[2] = *p++;
                     fbytes[3] = *p++;
                     pc = p;
-                }
-                if (fval < 0.0F) {
-                    pp->kind &= ~Trail;
-                } else {
-                    pp->kind |= Trail;
-                    pp->trail = fval;
+                    trail = fval;
+                    if (trail < 0.0F) {
+                        pp->kind &= ~Trail;
+                    } else {
+                        pp->kind |= Trail;
+                        pp->trail = trail;
+                    }
                 }
                 break;
 
