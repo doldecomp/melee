@@ -1075,8 +1075,8 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                     p++;
                 }
             }
-            if (!(x58[arg1].x3 & 1) && rankings[arg1] == 0 &&
-                x58[arg1].x20 == 0)
+            if (!(*((u8*) x58 + arg1 * sizeof(*x58) + 3) & 1) &&
+                rankings[arg1] == 0 && x58[arg1].x20 == 0)
             {
                 return 1;
             }
@@ -1098,13 +1098,15 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                         p++;
                     }
                 }
-                if (!(x58[arg1].x3 & 1) && x58[arg1].x5 == 0 &&
-                    x58[arg1].x20 == 0)
+                if (!(*((u8*) x58 + arg1 * sizeof(*x58) + 3) & 1) &&
+                    x58[arg1].x5 == 0 && x58[arg1].x20 == 0)
                 {
                     return 1;
                 }
             } else {
-                if (!(x58[arg1].x3 & 1) && x58[arg1].x20 == 0) {
+                if (!(*((u8*) x58 + arg1 * sizeof(*x58) + 3) & 1) &&
+                    x58[arg1].x20 == 0)
+                {
                     return 1;
                 }
             }
