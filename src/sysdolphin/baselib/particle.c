@@ -1602,17 +1602,18 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                 /* Aim velocity toward JObj */
                 {
                     HSD_JObj* jobj = hsd_804D08E8[*pc++ + pp->pJObjOfs];
-                    f32 dx, dy, dz, dist_sq, dist;
+                    f32 dz, dy, dx, dist_sq, dist;
                     f32 vel_mag_sq;
 
                     if (jobj == NULL) {
                         break;
                     }
                     HSD_JObjSetupMatrix(jobj);
-                    vel_mag_sq = pp->vel.x * pp->vel.x + pp->vel.y * pp->vel.y;
+                    vel_mag_sq = pp->vel.x * pp->vel.x +
+                                 pp->vel.y * pp->vel.y +
+                                 pp->vel.z * pp->vel.z;
                     dx = jobj->mtx[0][3];
                     dx -= pp->pos.x;
-                    vel_mag_sq += pp->vel.z * pp->vel.z;
                     dy = jobj->mtx[1][3];
                     dy -= pp->pos.y;
                     dz = jobj->mtx[2][3];
