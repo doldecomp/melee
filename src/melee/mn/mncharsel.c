@@ -4511,11 +4511,11 @@ s32 mnCharSel_802640A0(void)
                     lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x46, -1);
                     HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
                 } else {
-                    CSS_ALL->data2.stocks =
+                    data2.stocks =
                         css->data.data.players[mnCharSel_804D6CF0].stocks;
-                    updateStockIcons(&CSS_ALL->data2, &sp70, 1);
+                    updateStockIcons(&data2, &sp70, 1);
                     mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
-                        .stocks = CSS_ALL->data2.stocks;
+                        .stocks = data2.stocks;
                 }
             }
             lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x40, -1);
