@@ -576,7 +576,7 @@ config.libs = [
             Object(Matching, "melee/ft/ft_0819.c"),
             Object(Matching, "melee/ft/ft_081B.c"),
             Object(Matching, "melee/ft/ft_084E.c"),
-            Object(NonMatching, "melee/ft/ft_0852.c"),
+            Object(Matching, "melee/ft/ft_0852.c"),
             Object(Matching, "melee/ft/ftdata.c"),
             Object(Matching, "melee/ft/ftmotionstates.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Init.c"),

@@ -16,6 +16,15 @@ ft_8045993C_t ft_8045993C[6];
 int ft_8045996C[FTKIND_MAX];
 UnkCostumeStruct lbl_804599F0[5];
 
+/// @todo bss order hack
+static void order_bss(void)
+{
+    (void) gFtDataList;
+    (void) ft_8045993C;
+    (void) ft_8045996C;
+    (void) lbl_804599F0;
+}
+
 void ft_8008521C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
