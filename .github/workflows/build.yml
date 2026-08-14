@@ -271,7 +271,7 @@ jobs:
     - run: |
         CACHIX_AUTH_TOKEN=${{ secrets.CACHIX_AUTH_TOKEN }} cachix watch-exec doldecomp-melee -- nix develop
     - run: nix flake check
-    - run: nix build -L
+    - run: nix develop --command ninja
 
   update-wiki:
     name: Update wiki TU list

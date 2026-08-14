@@ -37,7 +37,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
 
   postPatch = ''
     ln -sfT ${mwcc}/GC tools/mwcc_compiler
-    cp ${main-dol} orig/GALE01/sys/main.dol
+    ln -sfT ${main-dol} orig/GALE01/sys/main.dol
   '';
 
   nativeBuildInputs = [
@@ -55,7 +55,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   '';
 
   configureFlags = [
-    "--wrapper=${wibo}/bin/wibo"
+    "--wrapper=wibo"
     "--dtk=${decomp-toolkit}/bin/dtk"
     "--objdiff=${objdiff}/bin/objdiff-cli"
     "--binutils=${devkitppc}/bin"

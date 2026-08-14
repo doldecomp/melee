@@ -36,7 +36,7 @@
           }).config.build.wrapper;
 
         devShells.default = legacyPackages.mkShellNoCC {
-          shellHook = ''
+          shellHook = packages.default.postPatch + ''
             ./configure.py ${toString packages.default.configureFlags}
           '';
           packages = packages.default.nativeBuildInputs ++ [
