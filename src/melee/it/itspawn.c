@@ -18,7 +18,7 @@
 #include <baselib/memory.h>
 #include <baselib/random.h>
 
-ItemPickTable monster;
+ItemPickTable it_804A0E60;
 ItemPickTable it_804A0E50;
 RandomItemSpawner it_804A0E30;
 
@@ -353,17 +353,17 @@ void it_8026CF04(void)
     sum += counts[2];
     sum += counts[3];
     if (sum != 0) {
-        monster.x8 = sum;
-        monster.size = 4;
-        monster.x4 = HSD_MemAlloc(monster.size * 4);
-        monster.xC = HSD_MemAlloc(monster.size * 4);
+        it_804A0E60.x8 = sum;
+        it_804A0E60.size = 4;
+        it_804A0E60.x4 = HSD_MemAlloc(it_804A0E60.size * 4);
+        it_804A0E60.xC = HSD_MemAlloc(it_804A0E60.size * 4);
         idx = i = 0;
         item_common = it_804D6D28;
         cumulative = 0;
         for (; i < 4; i++, idx++) {
-            monster.x4[i] = It_Kind_Kuriboh + i;
-            monster.xC[idx] = cumulative;
-            (void) monster.xC[(u32) (p = &item_common->x128[idx])];
+            it_804A0E60.x4[i] = It_Kind_Kuriboh + i;
+            it_804A0E60.xC[idx] = cumulative;
+            (void) it_804A0E60.xC[(u32) (p = &item_common->x128[idx])];
             cumulative += *p;
         }
     }
