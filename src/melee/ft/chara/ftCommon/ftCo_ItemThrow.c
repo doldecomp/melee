@@ -580,7 +580,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                                     ftCommon_8007EBAC(fp, 27, 0);
                                 }
                                 Item_8026AD20(fp->item_gobj, &vec2, &vec1,
-                                              throw_speed);
+                                              throw_speed, 1);
                             } else {
                                 if (itIsHeavy(fp->item_gobj) == 1) {
                                     ftCommon_8007EBAC(fp, 28, 0);
@@ -588,7 +588,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                                     ftCommon_8007EBAC(fp, 26, 0);
                                 }
                                 Item_8026AD20(fp->item_gobj, &vec2, &vec1,
-                                              throw_speed);
+                                              throw_speed, 0);
                             }
                         }
                     }
