@@ -1164,7 +1164,9 @@ void it_802A4758(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
         len = it_802A3C98(&link_1->pos, &link_0->pos, &vec);
 
         if (len > arg2->x30) {
-            test_comp(&link_1->pos, &link_0->pos, &vec, &arg2->x30);
+            link_1->pos.x = (vec.x * arg2->x30) + link_0->pos.x;
+            link_1->pos.y = (vec.y * arg2->x30) + link_0->pos.y;
+            link_1->pos.z = (vec.z * arg2->x30) + link_0->pos.z;
         }
 
         link_0 = link_1;
@@ -1643,12 +1645,6 @@ static inline f32 my_sqrt(f32 x)
     return x * guess;
 }
 
-static void it_802A4758_no_inline(ItemLink* link_0, Vec3* arg1,
-                                  itLinkHookshotAttributes* arg2, f32 arg8)
-{
-    it_802A4758(link_0, arg1, arg2, arg8);
-}
-
 void it_802A6474(ItemLink* link_0, ItemLink* link_1, Vec3* pos,
                  itLinkHookshotAttributes* attrs)
 {
@@ -1689,7 +1685,7 @@ void it_802A6474(ItemLink* link_0, ItemLink* link_1, Vec3* pos,
         cur_link = prev_link;
         prev_link = prev_link->prev;
     }
-    it_802A4758_no_inline(cur_link, pos, attrs, attrs->x30);
+    it_802A4758(cur_link, pos, attrs, attrs->x30);
 
     cur_link = link_1;
     limit_reached = 0;
