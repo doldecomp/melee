@@ -4063,40 +4063,46 @@ s32 mnCharSel_802640A0(void)
     icons[row_b].bound_u = ICONROWHT_TOP_TOP;
     icons[row_b].bound_d = ICONROWHT_MID_TOP;
 
-    for (i = 0; i < 0x19; i++) {
-        icons[i].state = gm_IsCKindUnlocked(icons[i].char_kind);
-        icons[i].anim_timer = 0;
-        if ((u8) mnCharSel_804D6CF5 == 1) {
-            lb_80011E24(mnCharSel_804D6CC0, &sp108, icons[i].joint_id_1p, -1);
-        } else {
-            lb_80011E24(mnCharSel_804D6CC0, &sp108, icons[i].joint_id_vs, -1);
-        }
-        switch (i) {
-        case 0:
-        case 8:
-        case 9:
-        case 17:
-        case 18:
-        case 24:
-            if ((u8) icons[i].state == 0) {
-                HSD_JObjSetFlags(sp108, JOBJ_HIDDEN);
+    {
+        s32 icon_idx;
+        for (icon_idx = 0; icon_idx < 0x19; icon_idx++) {
+            icons[icon_idx].state =
+                gm_IsCKindUnlocked(icons[icon_idx].char_kind);
+            icons[icon_idx].anim_timer = 0;
+            if ((u8) mnCharSel_804D6CF5 == 1) {
+                lb_80011E24(mnCharSel_804D6CC0, &sp108,
+                            icons[icon_idx].joint_id_1p, -1);
             } else {
-                sp108 = HSD_JObjGetParent(sp108);
-                icons[i].state = 2;
-                HSD_ForeachAnim(sp108, JOBJ_TYPE, ALL_TYPE_MASK,
-                                HSD_AObjReqAnim, AOBJ_ARG_AF, 20.0);
-                HSD_JObjAnimAll(sp108);
+                lb_80011E24(mnCharSel_804D6CC0, &sp108,
+                            icons[icon_idx].joint_id_vs, -1);
             }
-            break;
-        default:
-            if ((u8) icons[i].state == 0) {
-                HSD_ForeachAnim(sp108, JOBJ_TYPE, ALL_TYPE_MASK,
-                                HSD_AObjReqAnim, AOBJ_ARG_AF, 30.0);
-                HSD_JObjAnimAll(sp108);
-            } else {
-                icons[i].state = 2;
+            switch (icon_idx) {
+            case 0:
+            case 8:
+            case 9:
+            case 17:
+            case 18:
+            case 24:
+                if ((u8) icons[icon_idx].state == 0) {
+                    HSD_JObjSetFlags(sp108, JOBJ_HIDDEN);
+                } else {
+                    sp108 = HSD_JObjGetParent(sp108);
+                    icons[icon_idx].state = 2;
+                    HSD_ForeachAnim(sp108, JOBJ_TYPE, ALL_TYPE_MASK,
+                                    HSD_AObjReqAnim, AOBJ_ARG_AF, 20.0);
+                    HSD_JObjAnimAll(sp108);
+                }
+                break;
+            default:
+                if ((u8) icons[icon_idx].state == 0) {
+                    HSD_ForeachAnim(sp108, JOBJ_TYPE, ALL_TYPE_MASK,
+                                    HSD_AObjReqAnim, AOBJ_ARG_AF, 30.0);
+                    HSD_JObjAnimAll(sp108);
+                } else {
+                    icons[icon_idx].state = 2;
+                }
+                break;
             }
-            break;
         }
     }
 
