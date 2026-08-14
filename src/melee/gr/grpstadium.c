@@ -1687,11 +1687,9 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
         } s;
     } colors;
     HSD_Text* dynamic_text;
-    u8 color_state;
     HSD_GObj* player_gobj;
     HSD_GObj* current_player_gobj;
     s32 player_num;
-    u8 slot_type;
     f32 scaled_color;
     s32 vertical_offset;
     s32 player_index;
@@ -1761,11 +1759,9 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
             if (current_player_gobj != NULL &&
                 gm_8016C6C0(current_player_gobj) == 0)
             {
-                slot_type = Player_GetPlayerSlotType(player_num);
-                color_state = gm_8016B168();
-                colors.entries[0].color = gm_80160968(
-                    gm_80160854(player_num, Player_GetTeam(player_num),
-                                color_state, slot_type));
+                colors.entries[0].color = gm_80160968(gm_80160854(
+                    player_num, Player_GetTeam(player_num), gm_8016B168(),
+                    Player_GetPlayerSlotType(player_num)));
                 colors.entries[0].color.r =
                     grStadium_ScaleColor(colors.entries[0].color.r);
                 colors.entries[0].color.g =
