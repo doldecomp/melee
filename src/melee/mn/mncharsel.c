@@ -1878,9 +1878,9 @@ void mnCharSel_CostumeChange(int door, u32 input)
 }
 
 static inline void updateCursorDisplay(HSD_JObj* jobj,
-                                       struct CSSCursorData* cursor,
-                                       CSSAllData* all_data)
+                                       struct CSSCursorData* cursor)
 {
+    CSSAllData* all_data = CSS_ALL;
     HSD_JObj* state_jobj;
     HSD_JObj* color_jobj;
 
@@ -3021,7 +3021,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
     }
 
 block_392:
-    updateCursorDisplay(jobj, cursor, all_data);
+    updateCursorDisplay(jobj, cursor);
 
     PAD_STACK(0x30);
 }
