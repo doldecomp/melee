@@ -1,1 +1,1 @@
-import ./.nix
+(builtins.getFlake (toString ./.)).packages.${builtins.currentSystem}.default

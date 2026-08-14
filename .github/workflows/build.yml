@@ -243,7 +243,7 @@ jobs:
   build-nix:
     name: Nix
     runs-on: ubuntu-latest
-    if: github.repository == 'doldecomp/melee'
+    if: github.repository == 'doldecomp/melee' || github.repository == 'r-burns/doldecomp-melee'
     env:
       REGISTRY: ghcr.io
       IMAGE: doldecomp/melee-build:main
@@ -251,33 +251,27 @@ jobs:
     - uses: actions/checkout@v6
       with:
         fetch-depth: 1
-        sparse-checkout: |
-          src/
-          extern/
-          tools/
-          config/
-          .nix/
     - name: Log into container registry
       uses: docker/login-action@v4
       with:
         registry: ${{ env.REGISTRY }}
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
+    - uses: cachix/install-nix-action@v31
     - name: Grab Melee DOL
       run: |
         image="$REGISTRY/$IMAGE"
         docker pull "$image"
         container_id=$(docker create "$image")
         docker cp "$container_id":/orig .
-    - uses: cachix/install-nix-action@v31
-      with:
-        nix_path: nixpkgs=channel:nixos-unstable
+        nix-store --add-fixed sha256 orig/GALE01/sys/main.dol
     - uses: cachix/cachix-action@v17
       with:
         name: doldecomp-melee
-        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-    - run: nix-build
-    - run: nix-shell --run "echo OK"
+    - run: |
+        CACHIX_AUTH_TOKEN=${{ secrets.CACHIX_AUTH_TOKEN }} cachix watch-exec doldecomp-melee -- nix develop
+    - run: nix flake check
+    - run: nix develop --command ninja
 
   update-wiki:
     name: Update wiki TU list
