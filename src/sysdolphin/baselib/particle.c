@@ -1432,13 +1432,16 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                 /* Size interpolation with random */
                 {
                     f32 range;
-                    pp->sizeCount = *pc++;
                     {
-                        u16 cnt = pp->sizeCount;
+                        u8* count_pc = pc;
+                        u16 cnt;
+                        pp->sizeCount = *count_pc++;
+                        cnt = pp->sizeCount;
                         if (cnt & 0x80) {
-                            cnt = ((cnt & 0x7F) << 8) + *pc++;
+                            cnt = ((cnt & 0x7F) << 8) + *count_pc++;
                             pp->sizeCount = cnt;
                         }
+                        pc = count_pc;
                     }
                     {
                         u8* p = pc + 1;
