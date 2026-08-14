@@ -1,8 +1,9 @@
-{ lib
-, fetchFromGitHub
-, git
-, rustPlatform
-, stdenv
+{
+  lib,
+  fetchFromGitHub,
+  git,
+  rustPlatform,
+  stdenv,
 }:
 
 rustPlatform.buildRustPackage rec {
@@ -26,7 +27,10 @@ rustPlatform.buildRustPackage rec {
   meta = with lib; {
     description = "A GameCube & Wii decompilation toolkit";
     homepage = "https://github.com/encounter/decomp-toolkit";
-    license = with licenses; [ asl20 mit ];
+    license = with licenses; [
+      asl20
+      mit
+    ];
     maintainers = with maintainers; [ r-burns ];
     mainProgram = "dtk";
   };
