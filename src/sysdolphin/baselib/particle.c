@@ -1631,7 +1631,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         result = (f32) (vel_mag_sq * guess);
                         vel_mag_sq = result;
                     }
-                    dist_sq = dy * dy + dx * dx;
+                    dist_sq = dx * dx + dy * dy;
                     dist_sq += dz * dz;
                     if (dist_sq == 0.0) {
                         break;
