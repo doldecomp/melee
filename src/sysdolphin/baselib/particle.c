@@ -55,6 +55,8 @@ typedef union {
     u8 bytes[4];
 } ParticleFloatBytes;
 
+static const f32 particle_zero = 0.0F;
+
 void hsd_803983A4(HSD_Generator* gen)
 {
     HSD_JObj* jobj;
@@ -1581,8 +1583,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     }
                     HSD_JObjSetupMatrix(jobj);
                     vel_mag_sq = pp->vel.x * pp->vel.x +
-                                 pp->vel.y * pp->vel.y +
-                                 pp->vel.z * pp->vel.z;
+                                 pp->vel.y * pp->vel.y + pp->vel.z * pp->vel.z;
                     dx = jobj->mtx[0][3];
                     dx -= pp->pos.x;
                     dy = jobj->mtx[1][3];
@@ -2854,12 +2855,12 @@ do_life:
 
         pp->vel.z += gp->aux.tornado.vel;
 
-        if ((R = gp->radius) < 0.0F) {
+        if ((R = gp->radius) < *(volatile const f32*) &particle_zero) {
             R = -R;
         }
         {
             f32 ang;
-            if ((ang = gp->angle) < 0.0F) {
+            if ((ang = gp->angle) < *(volatile const f32*) &particle_zero) {
                 ang = -ang;
             }
             R = pp->vel.y * (pp->vel.z * tanf(ang) + R);
@@ -2905,8 +2906,6 @@ do_life:
     /* JObj attachment - update JObj position to match particle */
     if (pp->kind & 0x8000) {
         s32 jobj_idx = (pp->kind >> 12) & 7;
-        HSD_JObj* jobj;
-        HSD_JObj** jobj_slot;
 
         /* Allocate JObj if slot is empty */
         if (hsd_804D08E8[jobj_idx] == NULL) {
@@ -2917,20 +2916,21 @@ do_life:
             }
         }
 
-        jobj_slot = &hsd_804D08E8[jobj_idx];
-        jobj = *jobj_slot;
+        {
+            HSD_JObj* jobj;
 
-        if (jobj != NULL) {
-            HSD_JObjSetupMatrix(jobj);
+            if ((jobj = hsd_804D08E8[jobj_idx]) != NULL) {
+                HSD_JObjSetupMatrix(jobj);
 
-            jobj = *jobj_slot;
-            HSD_JObjAddTranslationX(jobj, pp->pos.x - jobj->mtx[0][3]);
+                jobj = hsd_804D08E8[jobj_idx];
+                HSD_JObjAddTranslationX(jobj, pp->pos.x - jobj->mtx[0][3]);
 
-            jobj = *jobj_slot;
-            HSD_JObjAddTranslationY(jobj, pp->pos.y - jobj->mtx[1][3]);
+                jobj = hsd_804D08E8[jobj_idx];
+                HSD_JObjAddTranslationY(jobj, pp->pos.y - jobj->mtx[1][3]);
 
-            jobj = *jobj_slot;
-            HSD_JObjAddTranslationZ(jobj, pp->pos.z - jobj->mtx[2][3]);
+                jobj = hsd_804D08E8[jobj_idx];
+                HSD_JObjAddTranslationZ(jobj, pp->pos.z - jobj->mtx[2][3]);
+            }
         }
     }
 
