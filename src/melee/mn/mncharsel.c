@@ -3892,17 +3892,21 @@ static GXColor mnCharSel_804DC594 = { 220, 0, 0, 255 };
 s32 mnCharSel_802640A0(void)
 {
     HSD_JObj* sp108;
+    u8 spF8[0x10];
     Point3d spEC;
     GXColor spE8;
     GXColor spE4;
     GXColor spE0;
     GXColor spDC;
-    HSD_JObj* tag_name_jobj;
     GXColor spD4;
     GXColor color;
     GXColor color2;
-    HSD_JObj* spA4;
     GXColor hard_color;
+    u8 spA8[0x24];
+    HSD_JObj* spA4;
+    u8 spA0[4];
+    HSD_JObj* tag_name_jobj;
+    u8 sp74[0x28];
     HSD_JObj* sp70;
     CSSDoor* doors;
     s32 row_b;
@@ -4933,7 +4937,7 @@ s32 mnCharSel_802640A0(void)
     }
 
     mnCharSel_8025EE8C(mnCharSel_804D6CB0->match_type);
-    PAD_STACK(0x64);
+    PAD_STACK(4);
     return lbAudioAx_80023F28(gmMainLib_8015ECB0());
 }
 
