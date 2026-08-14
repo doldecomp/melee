@@ -1436,28 +1436,8 @@ bool grStadium_801D32D0(Ground_GObj* gobj)
 
 static const GXColor grPs_804DAF3C = { 0xFF, 0xFF, 0xFF, 0xFF };
 
-/// @todo is there a way to prevent these being upcast to double
-/// when passed to variadic sislib functions?
-extern const float grPs_804DAF2C;
-extern const float grPs_804DAF30;
-extern const float grPs_804DAF34;
-extern const float grPs_804DAF38;
-extern const float grPs_804DAF40;
-extern const float grPs_804DAF44;
-extern const float grPs_804DAF48;
-extern const float grPs_804DAF4C;
-extern const float grPs_804DAF50;
-extern const float grPs_804DAF54;
-extern const float grPs_804DAF58;
-extern const float grPs_804DAF5C;
-extern const float grPs_804DAF64;
-extern const float grPs_804DAF68;
-extern const float grPs_804DAF6C;
-extern const float grPs_804DAF74;
-
-/// @todo This is only size 0x100 in the object, but a single
-/// TextGlyphTexture is size 0x200. Should TextGlyphTexture be smaller?
-static TextGlyphTexture grPs_8049F040;
+/// Half the size of a #TextGlyphTexture; the stage's I4 glyph scratch.
+static u8 grPs_8049F040[0x100];
 
 void grStadium_801D3460(Ground_GObj* gobj)
 {
@@ -1487,7 +1467,7 @@ void grStadium_801D3460(Ground_GObj* gobj)
     HSD_SisLib_803A7664(gp2->win_dynamic_p);
     temp_r29 = GET_GROUND(Ground_GetMapGObj(2));
 
-    HSD_SisLib_804D1124[1][2].textures = &grPs_8049F040;
+    HSD_SisLib_804D1124[1][2].textures = (TextGlyphTexture*) grPs_8049F040;
 
     HSD_SisLib_803A6530(1, 5, 6);
     temp_r0 = temp_r29->u.stadium.xDE;
@@ -1536,29 +1516,19 @@ void grStadium_801D3460(Ground_GObj* gobj)
 
     gp2->win_dynamic_p->default_fitting = 1;
     if (var_r28 == 1) {
-        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF30, grPs_804DAF4C,
-                            sp38[0]);
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, 124.0F, 70.0F, sp38[0]);
     } else if (var_r28 == 2) {
-        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF2C, grPs_804DAF4C,
-                            sp38[0]);
-        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF50, grPs_804DAF4C,
-                            sp38[1]);
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, 62.0F, 70.0F, sp38[0]);
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, 186.0F, 70.0F, sp38[1]);
     } else if (var_r28 == 3) {
-        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF2C, grPs_804DAF54,
-                            sp38[0]);
-        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF50, grPs_804DAF54,
-                            sp38[1]);
-        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF30, grPs_804DAF38,
-                            sp38[2]);
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, 62.0F, 60.0F, sp38[0]);
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, 186.0F, 60.0F, sp38[1]);
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, 124.0F, 80.0F, sp38[2]);
     } else if (var_r28 == 4) {
-        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF2C, grPs_804DAF54,
-                            sp38[0]);
-        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF50, grPs_804DAF54,
-                            sp38[1]);
-        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF2C, grPs_804DAF38,
-                            sp38[2]);
-        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF50, grPs_804DAF38,
-                            sp38[3]);
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, 62.0F, 60.0F, sp38[0]);
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, 186.0F, 60.0F, sp38[1]);
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, 62.0F, 80.0F, sp38[2]);
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, 186.0F, 80.0F, sp38[3]);
     }
 
     gp2->win_dynamic_p->default_fitting = 0;
@@ -1568,14 +1538,12 @@ void grStadium_801D3460(Ground_GObj* gobj)
     temp_r4->x34.y = 0.625f;
 
     if ((rules->x10 == 0) | !rules->x0_6) {
-        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF58, grPs_804DAF5C,
-                            "00:00 00");
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, 125.0F, 120.0F, "00:00 00");
         return;
     }
     temp_r29_2 = gm_8016AEEC();
-    HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF58, grPs_804DAF5C,
-                        "%02d:%02d %02d", temp_r29_2 / 60, temp_r29_2 % 60,
-                        gm_8016AF0C());
+    HSD_SisLib_803A6B98(gp2->win_dynamic_p, 125.0F, 120.0F, "%02d:%02d %02d",
+                        temp_r29_2 / 60, temp_r29_2 % 60, gm_8016AF0C());
 }
 
 const GXColor grPs_804DAF60 = { 0xC0, 0xC0, 0xFF, 0xFF };
@@ -1609,8 +1577,8 @@ void grStadium_801D384C(Ground_GObj* gobj)
         temp_r6 = gp2->win_dynamic_p;
         temp_r6->text_color = sp2C;
         gp2->win_dynamic_p->default_alignment = 1;
-        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF58, grPs_804DAF68,
-                            "%d", temp_r29, temp_r6);
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, 125.0F, 52.0F, "%d", temp_r29,
+                            temp_r6);
     } else {
         HSD_SisLib_803A6368(gp2->win_static_p, 0xD);
         gp2->win_dynamic_p->default_kerning = 0;
@@ -1618,8 +1586,7 @@ void grStadium_801D384C(Ground_GObj* gobj)
         temp_r3_3->x34.x = 1.5f;
         temp_r3_3->x34.y = 1.5f;
         gp2->win_dynamic_p->text_color = sp2C;
-        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF6C, grPs_804DAF68,
-                            "%3d", temp_r29);
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, -3.0F, 52.0F, "%3d", temp_r29);
     }
 }
 
@@ -1662,34 +1629,17 @@ void grStadium_801D3A0C(Ground_GObj* gobj)
         temp_r3 = gp2->win_dynamic_p;
         temp_r3->x34.x = 0.625F;
         temp_r3->x34.y = 1.5F;
-        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF58, grPs_804DAF74,
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, 125.0F, 56.0F,
                             "Ｐｌａｙｅｒ %d Ｄｅｆｅａｔｅｄ",
                             gp->u.display.xEE + 1);
     } else {
         temp_r3 = gp2->win_dynamic_p;
         temp_r3->x34.x = 0.42F;
         temp_r3->x34.y = 1.2F;
-        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF58, grPs_804DAF74,
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, 125.0F, 56.0F,
                             "Computer Player Defeated");
     }
 }
-
-const float grPs_804DAF2C = 62;
-const float grPs_804DAF30 = 124;
-const float grPs_804DAF34 = 40;
-const float grPs_804DAF38 = 80;
-const float grPs_804DAF40 = 0.3125;
-const float grPs_804DAF44 = 0.625;
-const float grPs_804DAF48 = 0.26;
-const float grPs_804DAF4C = 70;
-const float grPs_804DAF50 = 186;
-const float grPs_804DAF54 = 60;
-const float grPs_804DAF58 = 125;
-const float grPs_804DAF5C = 120;
-const float grPs_804DAF64 = 1.5;
-const float grPs_804DAF68 = 52;
-const float grPs_804DAF6C = -3;
-const float grPs_804DAF74 = 56;
 
 void grStadium_801D3B4C(int arg0, int slot_type)
 {
@@ -1826,7 +1776,7 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
                 gp2->win_dynamic_p->text_color = colors.entries[0].color;
                 character_name = gm_80160A60(player_num);
                 if (character_name != NULL) {
-                    HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF58,
+                    HSD_SisLib_803A6B98(gp2->win_dynamic_p, 125.0F,
                                         (f32) (vertical_offset + text_offset),
                                         "%s", character_name);
                 }
