@@ -2,9 +2,9 @@
 #define MSL_MATH_H
 
 #include <platform.h>
+
 #include <math_ppc.h>
 #include <trigf.h>
-
 #include <MetroTRK/intrinsics.h>
 
 #define MSL_HI(x) *(int*) &x

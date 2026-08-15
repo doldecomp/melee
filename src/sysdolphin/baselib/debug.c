@@ -14,7 +14,8 @@ static __io_proc logFunc;
 
 #pragma peephole off
 
-static int report_func(__file_handle arg0, unsigned char* arg1, size_t* arg2, __idle_proc arg3)
+static int report_func(__file_handle arg0, unsigned char* arg1, size_t* arg2,
+                       __idle_proc arg3)
 {
     if (reportCallback != NULL) {
         reportCallback(arg1, *arg2);
