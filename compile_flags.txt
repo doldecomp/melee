@@ -13,7 +13,6 @@
 -isystemsrc/sysdolphin
 -isystemextern/dolphin/include
 -isystemextern/dolphin/src
--isystembuild/GALE01/include
 -Wall
 -Wextra
 -Werror
