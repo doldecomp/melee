@@ -147,7 +147,7 @@ jobs:
             set -x
             config_args=""
 
-            # TODO: Add to build image
+            # TODO: Migrate to nix and install dependencies to environment
             apk add --update --no-cache clang-extra-tools
             export PIP_CACHE_DIR=/dev/null
             python -m venv --upgrade-deps venv
@@ -158,7 +158,9 @@ jobs:
 
             ninja 'build/${{matrix.version}}/config.json'
 
-            pre-commit run clang-check --all-files
+            pre-commit run --show-diff-on-failure --color=always --verbose \
+              clang-check \
+              --all-files
           ;;
           *) exit 1 ;;
         esac
