@@ -26,6 +26,8 @@ final: prev: {
     hash = "sha256-3CFQRRNCQ1C9oXp8ZegjcbRREqXfwenydJqLerDv9kY=";
   };
 
+  melee-docs = final.callPackage ./melee-docs.nix { };
+
   melee-gcc-native = final.pkgsi686Linux.callPackage ./melee-gcc-native.nix { };
 
   aurora-src = final.fetchFromGitHub {
