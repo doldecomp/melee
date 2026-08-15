@@ -496,7 +496,7 @@ config.libs = [
             Object(Matching, "melee/lb/lbvector.c"),
             Object(NonMatching, "melee/lb/lbshadow.c"),
             Object(Testing, "melee/lb/lb_00F9.c"),
-            Object(Matching , "melee/lb/lbspdisplay.c"),
+            Object(Matching, "melee/lb/lbspdisplay.c"),
             Object(Matching, "melee/lb/lb_013B.c"),
             Object(Matching, "melee/lb/lb_0146.c"),
             Object(Matching, "melee/lb/lbarq.c"),
