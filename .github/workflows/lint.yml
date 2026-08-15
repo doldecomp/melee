@@ -34,6 +34,13 @@ jobs:
       with:
         python-version: "3.12"
 
+    # TODO: Install on build image
+    - name: Install clang-tools
+      if: matrix.hook == 'clang-check'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y clang-tools
+
     - uses: pre-commit/action@v3.0.1
       with:
         extra_args: ${{ matrix.hook }} --from-ref ${{ steps.ref.outputs.from }} --to-ref HEAD
