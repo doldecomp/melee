@@ -32,15 +32,3 @@ COPY /reqs/gen-pages.txt /tmp/reqs/
 RUN setup.sh
 COPY .github/packages/gen-pages/entrypoint.sh /usr/local/bin
 ENTRYPOINT ["entrypoint.sh"]
-
-# TODO
-FROM rust:latest AS check-issues
-COPY .github/packages/check-issues/setup.sh /usr/local/bin
-COPY . /input
-ENV DEBIAN_FRONTEND=noninteractive
-ENV LANG=C
-RUN setup.sh
-RUN rm -rf /input
-VOLUME [ "/input" ]
-COPY .github/packages/check-issues/entrypoint.sh /usr/local/bin
-ENTRYPOINT ["entrypoint.sh"]

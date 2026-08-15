@@ -146,39 +146,6 @@ jobs:
         name: ${{matrix.version}}_report
         path: build/${{matrix.version}}/report.json
 
-  check-issues:
-    name: Issues
-    runs-on: ubuntu-latest
-    env:
-      REGISTRY: ghcr.io
-
-    steps:
-    - name: Get image name
-      env:
-        IMAGE_SUFFIX: check-issues:latest
-      run: |
-        echo "IMAGE=$IMAGE_REPO/$IMAGE_SUFFIX" >> $GITHUB_ENV
-
-    - name: Checkout Melee repository
-      uses: actions/checkout@v6
-
-    - name: Log into container registry
-      uses: docker/login-action@v4
-      with:
-        registry: ${{ env.REGISTRY }}
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Pull build image
-      run: docker pull "$REGISTRY/$IMAGE"
-
-    - name: Check for code issues
-      run: |
-        docker run --rm \
-          --user "$(id -u):$(id -g)" \
-          --volume "$PWD:/input:ro" \
-            "$REGISTRY/$IMAGE"
-
   gen-pages:
     name: Generate pages
     runs-on: ubuntu-latest
@@ -239,6 +206,18 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+
+  native-build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        fetch-depth: 1
+    - uses: cachix/install-nix-action@v31
+    - uses: cachix/cachix-action@v17
+      with:
+        name: doldecomp-melee
+    - run: nix build .#melee-gcc-native -L
 
   build-nix:
     name: Nix

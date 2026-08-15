@@ -44,7 +44,9 @@ text_start_grammar = (
 
 # For splits.txt: file header and indented section lines
 # A header line: not indented, ends with colon
-file_header = (~pp.White()) + pp.Word(pp.alphas, pp.alphanums + "/._") + ":" + pp.LineEnd()
+file_header = (
+    (~pp.White()) + pp.Word(pp.alphas, pp.alphanums + "/._") + ":" + pp.LineEnd()
+)
 # An indented line: starts with whitespace
 indented_line = pp.LineStart() + pp.White() + pp.restOfLine
 
@@ -54,7 +56,7 @@ file_grammar = block[...] + pp.StringEnd()
 
 
 def parse_text_symbols(content: str) -> SymbolData:
-    label_pattern = pp.Regex(r'\btype:label\b')
+    label_pattern = pp.Regex(r"\btype:label\b")
     result: SymbolData = {}
     for line in content.splitlines():
         line_stripped = line.strip()
@@ -163,10 +165,7 @@ def parse_json_units(content: str) -> SymbolData:
 
 
 def parse_symbols_dispatch(
-    content: str,
-    *,
-    text_mode: bool = False,
-    unit_mode: bool = False
+    content: str, *, text_mode: bool = False, unit_mode: bool = False
 ) -> SymbolData:
     match (text_mode, unit_mode):
         case (True, True):
@@ -205,26 +204,31 @@ def main() -> None:
         )
     )
 
-    parser.add_argument("baseline", help="Baseline (old) symbol file (use '-' for stdin)")
+    parser.add_argument(
+        "baseline", help="Baseline (old) symbol file (use '-' for stdin)"
+    )
     parser.add_argument("current", help="Current (new) symbol file (use '-' for stdin)")
 
     parser.add_argument(
-        "-t", "--text",
+        "-t",
+        "--text",
         action="store_true",
-        help="Input is in text format (symbols.txt for functions; splits.txt when used with -u)"
+        help="Input is in text format (symbols.txt for functions; splits.txt when used with -u)",
     )
     parser.add_argument(
-        "-u", "--units",
+        "-u",
+        "--units",
         action="store_true",
-        help="Compare compilation units by .text section address (works with both text and JSON)"
+        help="Compare compilation units by .text section address (works with both text and JSON)",
     )
     parser.add_argument(
-        "-p", "--percent",
-        choices=['none', 'eq', 'ne', 'lt', 'gt'],
-        default='none',
+        "-p",
+        "--percent",
+        choices=["none", "eq", "ne", "lt", "gt"],
+        default="none",
         help="Filter by fuzzy_match_percent (current vs baseline): "
-             "eq (equal), ne (not equal), lt (current < baseline), gt (current > baseline). "
-             "Default 'none' shows only name differences. (JSON only)"
+        "eq (equal), ne (not equal), lt (current < baseline), gt (current > baseline). "
+        "Default 'none' shows only name differences. (JSON only)",
     )
 
     args = parser.parse_args()
@@ -233,17 +237,23 @@ def main() -> None:
         print("Error: both input files cannot be stdin.", file=sys.stderr)
         sys.exit(1)
 
-    if args.percent != 'none' and args.text:
-        print("Error: --percent requires JSON input (do not use --text).", file=sys.stderr)
+    if args.percent != "none" and args.text:
+        print(
+            "Error: --percent requires JSON input (do not use --text).", file=sys.stderr
+        )
         sys.exit(1)
 
     baseline_content = read_file_content(args.baseline)
     current_content = read_file_content(args.current)
 
-    baseline_data = parse_symbols_dispatch(baseline_content, text_mode=args.text, unit_mode=args.units)
-    current_data = parse_symbols_dispatch(current_content, text_mode=args.text, unit_mode=args.units)
+    baseline_data = parse_symbols_dispatch(
+        baseline_content, text_mode=args.text, unit_mode=args.units
+    )
+    current_data = parse_symbols_dispatch(
+        current_content, text_mode=args.text, unit_mode=args.units
+    )
 
-    if args.percent != 'none':
+    if args.percent != "none":
         all_addrs = set(baseline_data.keys()) | set(current_data.keys())
 
         rows = []
@@ -258,19 +268,25 @@ def main() -> None:
             if not name:
                 continue
 
-            fuzzy_baseline = baseline_data.get(addr, (None, 0.0))[1] if addr in baseline_data else 0.0
-            fuzzy_current = current_data.get(addr, (None, 0.0))[1] if addr in current_data else 0.0
+            fuzzy_baseline = (
+                baseline_data.get(addr, (None, 0.0))[1]
+                if addr in baseline_data
+                else 0.0
+            )
+            fuzzy_current = (
+                current_data.get(addr, (None, 0.0))[1] if addr in current_data else 0.0
+            )
 
             op = args.percent
             match op:
-                case 'eq':
-                    show = (fuzzy_baseline == fuzzy_current)
-                case 'ne':
-                    show = (fuzzy_baseline != fuzzy_current)
-                case 'lt':
-                    show = (fuzzy_current < fuzzy_baseline)
-                case 'gt':
-                    show = (fuzzy_current > fuzzy_baseline)
+                case "eq":
+                    show = fuzzy_baseline == fuzzy_current
+                case "ne":
+                    show = fuzzy_baseline != fuzzy_current
+                case "lt":
+                    show = fuzzy_current < fuzzy_baseline
+                case "gt":
+                    show = fuzzy_current > fuzzy_baseline
                 case _:
                     assert False, f"Unexpected operator: {op}"
 
@@ -283,7 +299,9 @@ def main() -> None:
                 max_new_len = max(max_new_len, len(new_pct))
 
         for name, old_pct, new_pct in rows:
-            print(f"{name:>{max_name_len}} | fuzzy_match  |   {old_pct:>{max_old_len}} -> {new_pct:>{max_new_len}}")
+            print(
+                f"{name:>{max_name_len}} | fuzzy_match  |   {old_pct:>{max_old_len}} -> {new_pct:>{max_new_len}}"
+            )
     else:
         common_addrs = set(baseline_data.keys()) & set(current_data.keys())
         for addr in sorted(common_addrs):

@@ -60,7 +60,7 @@ class DoxygenAwesomeTabs {
                     tabsOverview.classList.add("tabs-overview");
                     let tabsOverviewContainer = document.createElement("div");
                     tabsOverviewContainer.classList.add(
-                        "tabs-overview-container"
+                        "tabs-overview-container",
                     );
                     tabLinkList.forEach((tabLink) => {
                         tabsOverview.appendChild(tabLink);

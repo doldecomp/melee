@@ -60,16 +60,19 @@ html {
      * font-family: the normal font for text, headlines, menus
      * font-family-monospace: used for preformatted text in memtitle, code, fragments
      */
-    --font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-        Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    --font-family-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo,
-        Consolas, Liberation Mono, monospace;
+    --font-family:
+        -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+        Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    --font-family-monospace:
+        ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono,
+        monospace;
 
     /* font sizes */
     --page-font-size: 15.6px;
     --navigation-font-size: 14.4px;
     --toc-font-size: 13.4px;
-    --code-font-size: 14px; /* affects code, fragment */
+    --code-font-size: 14px;
+    /* affects code, fragment */
     --title-font-size: 22px;
 
     /* content text properties. These only affect the page content, not the navigation or any other ui elements */
@@ -177,7 +180,8 @@ html {
         --page-font-size: 16px;
         --navigation-font-size: 16px;
         --toc-font-size: 15px;
-        --code-font-size: 15px; /* affects code, fragment */
+        --code-font-size: 15px;
+        /* affects code, fragment */
         --title-font-size: 22px;
     }
 }
@@ -367,9 +371,7 @@ a.anchor {
     display: block;
 }
 
-/*
- Title and top navigation
- */
+/* Title and top navigation */
 
 #top {
     background: var(--header-background);
@@ -582,9 +584,7 @@ a.anchor {
     padding: 0 var(--spacing-large);
 }
 
-/*
- Search box
- */
+/* Search box */
 
 #MSearchBox {
     height: var(--searchbar-height);
@@ -818,9 +818,7 @@ html.dark-mode iframe#MSearchResults {
     }
 }
 
-/*
- Tree view
- */
+/* Tree view */
 
 #side-nav {
     padding: 0 !important;
@@ -916,9 +914,7 @@ html.dark-mode iframe#MSearchResults {
     width: 1px;
 }
 
-/*
- Contents
- */
+/* Contents */
 
 div.header {
     border-bottom: 1px solid var(--separator-color);
@@ -1029,7 +1025,8 @@ html.dark-mode div.contents .dotgraph iframe {
 h2.groupheader {
     border-bottom: 0px;
     color: var(--page-foreground-color);
-    box-shadow: 100px 0 var(--page-background-color),
+    box-shadow:
+        100px 0 var(--page-background-color),
         -100px 0 var(--page-background-color),
         100px 0.75px var(--separator-color),
         -100px 0.75px var(--separator-color),
@@ -1087,6 +1084,7 @@ blockquote::after {
 blockquote p {
     margin: var(--spacing-small) 0 var(--spacing-medium) 0;
 }
+
 .paramname {
     font-weight: 600;
     color: var(--primary-dark-color);
@@ -1132,9 +1130,7 @@ h6.glow {
     max-width: 100%;
 }
 
-/*
- Table of Contents
- */
+/* Table of Contents */
 
 div.contents .toc {
     max-height: var(--toc-max-height);
@@ -1253,9 +1249,7 @@ div.toc li a.aboveActive {
     }
 }
 
-/*
- Code & Fragments
- */
+/* Code & Fragments */
 
 code,
 div.fragment,
@@ -1395,7 +1389,8 @@ div.fragment span.lineno a {
 }
 
 div.fragment .line:first-child .lineno {
-    box-shadow: -999999px 0px 0 999999px var(--fragment-linenumber-background),
+    box-shadow:
+        -999999px 0px 0 999999px var(--fragment-linenumber-background),
         -999998px 0px 0 999999px var(--fragment-linenumber-border);
 }
 
@@ -1408,9 +1403,7 @@ div.line.glow {
     box-shadow: none;
 }
 
-/*
- dl warning, attention, note, deprecated, bug, ...
- */
+/* dl warning, attention, note, deprecated, bug, ... */
 
 dl.bug dt a,
 dl.deprecated dt a,
@@ -1519,9 +1512,7 @@ dl.post dt {
     color: var(--invariant-color-dark);
 }
 
-/*
- memitem
- */
+/* memitem */
 
 div.memdoc,
 div.memproto,
@@ -1543,7 +1534,8 @@ div.memitem {
 }
 
 h2.memtitle {
-    box-shadow: 0px var(--spacing-medium) 0 -1px var(--fragment-background),
+    box-shadow:
+        0px var(--spacing-medium) 0 -1px var(--fragment-background),
         var(--box-shadow);
 }
 
@@ -1667,9 +1659,7 @@ table.mlabels > tbody > tr:first-child {
     margin: 0;
 }
 
-/*
- reflist
- */
+/* reflist */
 
 dl.reflist {
     box-shadow: var(--box-shadow);
@@ -1700,9 +1690,7 @@ dl.reflist dd {
     background: none;
 }
 
-/*
- Table
- */
+/* Table */
 
 .contents table:not(.memberdecls):not(.mlabels):not(.fieldtable):not(.memname),
 .contents
@@ -2076,9 +2064,7 @@ div.dynheader img[src="closed.png"] {
     }
 }
 
-/*
- Horizontal Rule
- */
+/* Horizontal Rule */
 
 hr {
     margin-top: var(--spacing-large);
@@ -2089,10 +2075,14 @@ hr {
 }
 
 .contents hr {
-    box-shadow: 100px 0 0 var(--separator-color),
-        -100px 0 0 var(--separator-color), 500px 0 0 var(--separator-color),
-        -500px 0 0 var(--separator-color), 1500px 0 0 var(--separator-color),
-        -1500px 0 0 var(--separator-color), 2000px 0 0 var(--separator-color),
+    box-shadow:
+        100px 0 0 var(--separator-color),
+        -100px 0 0 var(--separator-color),
+        500px 0 0 var(--separator-color),
+        -500px 0 0 var(--separator-color),
+        1500px 0 0 var(--separator-color),
+        -1500px 0 0 var(--separator-color),
+        2000px 0 0 var(--separator-color),
         -2000px 0 0 var(--separator-color);
 }
 
@@ -2113,9 +2103,7 @@ hr {
     }
 }
 
-/*
- Directories
- */
+/* Directories */
 div.directory {
     border-top: 1px solid var(--separator-color);
     border-bottom: 1px solid var(--separator-color);
@@ -2212,9 +2200,7 @@ html.dark-mode .iconfclosed {
     filter: hue-rotate(180deg) invert();
 }
 
-/*
- Class list
- */
+/* Class list */
 
 .classindex dl.odd {
     background: var(--odd-color);
@@ -2225,9 +2211,7 @@ html.dark-mode .iconfclosed {
     background-color: transparent;
 }
 
-/*
- Class Index Doxygen 1.8
-*/
+/* Class Index Doxygen 1.8 */
 
 table.classindex {
     margin-left: 0;
@@ -2252,9 +2236,7 @@ div.qindex {
     padding: var(--spacing-small) 0;
 }
 
-/*
-  Footer and nav-path
- */
+/* Footer and nav-path */
 
 #nav-path {
     width: 100%;
@@ -2339,9 +2321,7 @@ li.navelem:first-child:before {
     color: var(--primary-color);
 }
 
-/*
- Scrollbars for Webkit
-*/
+/* Scrollbars for Webkit */
 
 #nav-tree::-webkit-scrollbar,
 div.fragment::-webkit-scrollbar,
@@ -2440,9 +2420,7 @@ div.contents .toc {
     overflow-y: overlay;
 }
 
-/*
- Scrollbars for Firefox
-*/
+/* Scrollbars for Firefox */
 
 #nav-tree,
 div.fragment,
@@ -2459,9 +2437,7 @@ div.contents .toc,
     scrollbar-width: thin;
 }
 
-/*
-  Optional Dark mode toggle button
-*/
+/* Optional Dark mode toggle button */
 
 doxygen-awesome-dark-mode-toggle {
     display: inline-block;
@@ -2499,9 +2475,7 @@ html.dark-mode doxygen-awesome-dark-mode-toggle:hover {
     background-color: rgba(0, 0, 0, 0.18);
 }
 
-/*
- Optional fragment copy button
-*/
+/* Optional fragment copy button */
 .doxygen-awesome-fragment-wrapper {
     position: relative;
 }
@@ -2573,9 +2547,7 @@ doxygen-awesome-fragment-copy-button.success {
     }
 }
 
-/*
- Optional paragraph link button
-*/
+/* Optional paragraph link button */
 
 a.anchorlink {
     font-size: 90%;
@@ -2584,7 +2556,9 @@ a.anchorlink {
     text-decoration: none;
     opacity: 0.15;
     display: none;
-    transition: opacity 0.1s ease-in-out, color 0.1s ease-in-out;
+    transition:
+        opacity 0.1s ease-in-out,
+        color 0.1s ease-in-out;
 }
 
 a.anchorlink svg {
@@ -2608,9 +2582,7 @@ h4:hover a.anchorlink {
     display: inline-block;
 }
 
-/*
- Optional tab feature
-*/
+/* Optional tab feature */
 
 .tabbed ul {
     padding-inline-start: 0px;
@@ -2670,7 +2642,8 @@ h4:hover a.anchorlink {
 
 .tabs-overview button.tab-button.active {
     color: var(--primary-color);
-    box-shadow: 0 1px 0 0 var(--primary-color),
+    box-shadow:
+        0 1px 0 0 var(--primary-color),
         inset 0 -1px 0 0 var(--primary-color);
 }
 
