@@ -137,9 +137,13 @@ static void fn_8019EFC4(HSD_PadStatus* pad)
             s32 i;
             for (i = 10; i > 0; i--) {
                 if (i > lbl_80479A98.x70) {
-                    HSD_JObjSetFlags(lbl_80479A98.x2C[i - 1], JOBJ_HIDDEN);
+                    HSD_JObjSetFlags(
+                        ((HSD_JObj**) ((u8*) &lbl_80479A98 + 0x28))[i],
+                        JOBJ_HIDDEN);
                 } else {
-                    HSD_JObjClearFlags(lbl_80479A98.x2C[i - 1], JOBJ_HIDDEN);
+                    HSD_JObjClearFlags(
+                        ((HSD_JObj**) ((u8*) &lbl_80479A98 + 0x28))[i],
+                        JOBJ_HIDDEN);
                 }
             }
         }

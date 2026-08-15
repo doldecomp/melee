@@ -16,9 +16,6 @@
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/devcom.h>
 #include <sysdolphin/baselib/sobjlib.h>
-#include <melee/lb/lbanim.h>
-#include <melee/lb/types.h>
-#include <MSL/string.h>
 #include <Runtime/runtime.h>
 
 struct lbl_803BAFE8_t {
@@ -31,6 +28,7 @@ struct lbl_803BAFE8_t {
     /* 0x14 */ s32 x14;
 }; /* size = 0x18 */
 
+/* 01F294 */ static s32 fn_8001F294(void);
 /* 4333E0 */ static struct lbl_804333E0_t MoviePlayer;
 
 void fn_8001E910(int arg0, int arg1, void* arg2, int cancelflag)
@@ -144,23 +142,19 @@ size_t fn_8001EBF0(THPDecComp* data)
     u32 height;
     u32 wh;
     u32 wh_div4;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     data->unk_104 = 0x20;
 
-    width = data->width;
-    aligned_100 = ALIGN_32(data->unk_100);
-    height = data->height;
     unk_104_val = data->unk_104;
-
-    data->unk_9C.val1 = (u16) width;
-
+    aligned_100 = ALIGN_32(data->unk_100);
+    size = aligned_100 * unk_104_val;
+    width = data->width;
+    height = data->height;
     wh = width * height;
-
+    data->unk_9C.val1 = (u16) width;
     height = data->height;
     data->unk_9C._pad = (u16) height;
-
-    size = aligned_100 * unk_104_val;
 
     data->unk_9C.val2 = 4;
 
@@ -376,7 +370,14 @@ s32 fn_8001F13C(THPDecComp* streamPlayer)
     return OSRestoreInterrupts(intr);
 }
 
-s32 fn_8001F294(void);
+/// @todo Stripped code leading to function that can't be inlined?
+#pragma push
+#pragma dont_inline on
+s32 fn_8001F294(void)
+{
+    return MoviePlayer.unk_110;
+}
+#pragma pop
 
 static inline u32 lbMthp_GetFrame(u32** rate_table, u32 counter)
 {
@@ -587,11 +588,6 @@ void lbMthp_8001F800(void)
 
         MoviePlayer.power = 0;
     }
-}
-
-s32 fn_8001F294(void)
-{
-    return MoviePlayer.unk_110;
 }
 
 void lbMthp_8001F87C(void)

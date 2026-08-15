@@ -1319,7 +1319,7 @@ void fn_8022AFEC(HSD_GObj* gp)
         if (data->hovered_selection != mn_804A04F0.hovered_selection) {
             selection_changed = true;
         }
-        data2 = gp->user_data;
+        data2 = HSD_GObjGetUserData(gp);
         option_count = mn_803EB6B0[data2->menu_kind].selection_count & 0xFF;
         {
             int i;
@@ -1359,7 +1359,8 @@ void fn_8022AFEC(HSD_GObj* gp)
     }
     mn_8022ADD8(gp, selection_changed);
     final_data = gp->user_data;
-    if ((u8) selection_changed != false) {
+    state = (u8) selection_changed;
+    if ((s32) state != false) {
         hovered_selection = mn_804A04F0.hovered_selection;
     } else {
         hovered_selection = final_data->hovered_selection;
@@ -1378,7 +1379,7 @@ void fn_8022AFEC(HSD_GObj* gp)
         }
         break;
     case MENU_STATE_IDLE:
-        if (selection_changed != false) {
+        if ((s32) state != false) {
             mn_80229A7C_dontinline(final_data, final_data->menu_kind,
                                    hovered_selection);
         }

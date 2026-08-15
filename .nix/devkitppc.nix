@@ -1,25 +1,27 @@
-{ stdenvNoCC, lib
-, buildEnv
-, fetchFromGitHub
-, fetchpatch
-, makeWrapper
-, overrideCC
-, pkgsCross
+{
+  stdenvNoCC,
+  lib,
+  buildEnv,
+  fetchFromGitHub,
+  fetchpatch,
+  makeWrapper,
+  overrideCC,
+  pkgsCross,
 }:
 
 let
-  version = "46.1";
+  version = "50";
 
   tag = "devkitPPC_r${version}";
 
-  ppcCrossGcc      = pkgsCross.ppc-embedded.buildPackages.gcc14.cc;
+  ppcCrossGcc = pkgsCross.ppc-embedded.buildPackages.gcc.cc;
   ppcCrossBinutils = pkgsCross.ppc-embedded.buildPackages.binutils-unwrapped;
 
   gcc' = ppcCrossGcc.overrideAttrs (oa: {
     patches = oa.patches ++ [
       (fetchpatch {
-        url = "https://raw.githubusercontent.com/devkitPro/buildscripts/${tag}/dkppc/patches/gcc-14.2.0.patch";
-        hash = "sha256-b8JY41BUl9NT3QyaXwh/M5OfeqSEQ7WtvPUyHRS4904=";
+        url = "https://raw.githubusercontent.com/devkitPro/buildscripts/${tag}/patches/gcc-15.2.0-7.patch";
+        hash = "sha256-o+R4TSAXJAi2Wgry/hozm83atJjku6JyKwIWfhk8QXk=";
       })
     ];
   });
@@ -27,8 +29,8 @@ let
   bintools' = ppcCrossBinutils.overrideAttrs (oa: {
     patches = oa.patches ++ [
       (fetchpatch {
-        url = "https://raw.githubusercontent.com/devkitPro/buildscripts/devkitPPC_r47/dkppc/patches/binutils-${oa.version}.patch";
-        hash = "sha256-IOqa20LQYBxfR1KKxkp0hVV21CKd9IZrvNeEyuW09us=";
+        url = "https://raw.githubusercontent.com/devkitPro/buildscripts/${tag}/patches/binutils-2.46.0-1.patch";
+        hash = "sha256-EHXIn7Atkz5dkkRZr68W8u/mXRTJ2Kpb5dlrwM6YSgY=";
       })
     ];
   });

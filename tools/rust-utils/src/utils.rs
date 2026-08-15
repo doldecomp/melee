@@ -35,10 +35,6 @@ lazy_static! {
                 .expect("Failed to parse obj_files glob.")
         )
         .add(
-            Glob::new(&format!("{}/ldscript.lcf", *ROOT_STR))
-                .expect("Failed to parse ldscript glob.")
-        )
-        .add(
             Glob::new(&format!(
                 "{}/config/**/{{symbols,splits}}.txt",
                 *ROOT_STR

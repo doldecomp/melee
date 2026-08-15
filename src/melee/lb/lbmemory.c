@@ -117,7 +117,6 @@ Handle* lbMemory_80014FC8(Handle* arg0, size_t size)
     Handle* memp_kouho;
     void* end;
     u32 least_leftover;
-    u32 aligned_size;
     u32 leftover;
     u32 available_space;
     void* start;
@@ -125,7 +124,7 @@ Handle* lbMemory_80014FC8(Handle* arg0, size_t size)
 
     least_leftover = 0x40000000U;
     HSD_ASSERT(0xCC, _p(free_mem));
-    aligned_size = ((size + 0x1F) & 0xFFFFFFE0);
+    size = ((size + 0x1F) & 0xFFFFFFE0);
     start = arg0->x4_lo;
     iter = (Handle*) &arg0->xC_prev;
     memp_kouho = NULL;
@@ -133,8 +132,9 @@ Handle* lbMemory_80014FC8(Handle* arg0, size_t size)
     while (1) {
         end = (iter->x0_next != NULL) ? iter->x0_next->x4_lo : arg0->x8_hi;
         available_space = (u32) end - (u32) start;
-        if (available_space >= aligned_size) {
-            leftover = available_space - aligned_size;
+        if (available_space >= size) {
+            leftover = available_space;
+            leftover = leftover - size;
             if (leftover <= least_leftover) {
                 least_leftover = leftover;
                 lo = start;
@@ -153,7 +153,7 @@ Handle* lbMemory_80014FC8(Handle* arg0, size_t size)
         Handle* result;
         POP_HANDLE(&_p(free_mem), result);
 
-        result->x8_hi = (void*) aligned_size;
+        result->x8_hi = (void*) size;
         result->x4_lo = lo;
         result->x0_next = memp_kouho->x0_next;
         memp_kouho->x0_next = result;
@@ -233,12 +233,14 @@ u32 lbMemory_8001529C(Handle* h, void (*arg1)(u32), u32 arg2)
     return 0;
 }
 
-static void start_ram_copy(u32 old, u32 current, u32 size, Handle* next)
+static char lbl_803BA368[0x18] = "!p->size\0\0\0\0!cancelflag";
+
+static inline void start_ram_copy(u32 old, u32 current, u32 size, Handle* next)
 {
     struct LBMgr* p = &_p(x6A0_mgr);
     int enabled = OSDisableInterrupts();
 
-    HSD_ASSERT(0x14F, !p->size);
+    HSD_ASSERTMSG(0x14F, !p->size, &lbl_803BA368[0]);
     p->src = (u8*) old;
     p->dst = (u8*) current;
     p->size = size;
@@ -253,34 +255,42 @@ static void start_ram_copy(u32 old, u32 current, u32 size, Handle* next)
 static void lbMemory_80015320(int arg0, int _handle, void* arg2,
                               int cancelflag)
 {
+    void* null_or_old;
     Handle* handle = (Handle*) _handle;
     void** currentp;
+    void* old;
     u32 current;
-    u32 old;
+    void* copy_src;
+    void* loaded_old;
 
     currentp = &_p(x6E4);
     current = (u32) _p(x6E4);
+    null_or_old = NULL;
 
-    HSD_ASSERT(0x188, !cancelflag);
+    HSD_ASSERTMSG(0x188, !cancelflag, &lbl_803BA368[0xC]);
 
-    if (handle != NULL) {
-        if ((old = (u32) handle->x4_lo) != current) {
+    if (handle != null_or_old) {
+        loaded_old = handle->x4_lo;
+        if ((old = loaded_old) != (void*) current) {
+            null_or_old = old;
             handle->x4_lo = (void*) current;
             *currentp = (void*) ((u32) handle->x4_lo + (u32) handle->x8_hi);
+            copy_src = null_or_old;
 
             if ((u32) handle->x4_lo < 0x80000000U) {
-                HSD_DevComRequest(0, old, current, OSRoundUp32B(handle->x8_hi),
-                                  0x1B, 1, lbMemory_80015320, handle->x0_next);
+                HSD_DevComRequest(0, (u32) copy_src, current,
+                                  OSRoundUp32B(handle->x8_hi), 0x1B, 1,
+                                  lbMemory_80015320, handle->x0_next);
                 return;
             } else {
-                start_ram_copy(old, current, OSRoundUp32B(handle->x8_hi),
-                               handle->x0_next);
+                start_ram_copy((u32) copy_src, current,
+                               OSRoundUp32B(handle->x8_hi), handle->x0_next);
                 return;
             }
         }
 
         *currentp = (void*) ((u32) old + (u32) handle->x8_hi);
-        lbMemory_80015320(0, (int) handle->x0_next, NULL, 0);
+        lbMemory_80015320(0, (int) handle->x0_next, null_or_old, 0);
         return;
     }
 

@@ -404,14 +404,19 @@ void ftKb_SpecialHi_800F3570(Fighter_GObj* gobj)
     f32 pos_y;
     f32 slide_speed;
     f32 pos_x;
+    f32 pos_x_alias;
+    f32 normal_y;
     f32 top_y;
     f32 bottom_y;
     f32 floor_normal_x_sign;
+    f32 normal_y_slide;
     Fighter* fp = GET_FIGHTER(gobj);
     struct ftKb_Init_803CB490_layout* p =
         (struct ftKb_Init_803CB490_layout*) ftKb_Init_803CB490;
     ftKb_DatAttrs* dat_attr = fp->dat_attrs;
-    PAD_STACK(12);
+    {
+        UNUSED u8 pad2[12];
+    }
 
     fp->mv.kb.specialhi.x18 = fp->coll_data.floor.normal;
     fp->mv.kb.specialhi.xC4 =
@@ -419,15 +424,17 @@ void ftKb_SpecialHi_800F3570(Fighter_GObj* gobj)
         atan2f(fp->mv.kb.specialhi.x18.x, fp->mv.kb.specialhi.x18.y);
     if (0.0f != fp->mv.kb.specialhi.x18.x) {
         pos_y = fp->cur_pos.y;
+        pos_x_alias = fp->cur_pos.x;
         slide_speed = dat_attr->speciallw_slide_max_speed;
-        top_y = pos_y + slide_speed;
+        top_y = pos_y;
+        top_y = top_y + slide_speed;
         floor_normal_x_sign = fp->mv.kb.specialhi.x18.x > 0.0f ? 1.0f : -1.0f;
-        bottom_y = pos_y - slide_speed;
         pos_x = fp->cur_pos.x;
+        bottom_y = pos_y - slide_speed;
+        normal_y_slide = (normal_y = fp->mv.kb.specialhi.x18.y) * slide_speed;
         if (mpCheckAllRemap(NULL, 0, NULL, &sp1C, -1, -1, pos_x, top_y,
-                            (fp->mv.kb.specialhi.x18.y * slide_speed *
-                             floor_normal_x_sign) +
-                                pos_x,
+                            (normal_y_slide * floor_normal_x_sign) +
+                                pos_x_alias,
                             bottom_y) == 0)
         {
             sp1C = p->vec;
@@ -435,8 +442,7 @@ void ftKb_SpecialHi_800F3570(Fighter_GObj* gobj)
         if (fp->mv.kb.specialhi.x18.x > 0.0f) {
             if (sp1C.x < 0.0f) {
                 fp->mv.kb.specialhi.x18 = p->vec;
-                fp->mv.kb.specialhi.xC4 = 0.0f;
-                fp->xE4_ground_accel_1 = 0.0f;
+                fp->xE4_ground_accel_1 = (fp->mv.kb.specialhi.xC4 = 0.0f);
                 fp->gr_vel = 0.0f;
             }
         } else if (sp1C.x > 0.0f) {

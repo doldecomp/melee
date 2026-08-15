@@ -1668,6 +1668,18 @@ static inline s32 getIconOffset(unsigned long icon_idx)
 {
     return icon_idx * sizeof(CSSIcon);
 }
+
+static inline s32 getPlayerForDoor(u8 door)
+{
+    if (mnCharSel_804D6CF5 == 1) {
+        if (door != 0) {
+            return mnCharSel_804D6CF1;
+        }
+        return mnCharSel_804D6CF0;
+    }
+    return door;
+}
+
 void mnCharSel_8025FB50(u8 door, s32 arg1)
 {
     s32 icon_idx;
@@ -1683,17 +1695,9 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
         icon_offset = getIconOffset(icon_idx);
     } while (icons[icon_idx].state == 0);
 
-    if (mnCharSel_804D6CF5 == 1) {
-        if (door != 0) {
-            player = mnCharSel_804D6CF1;
-        } else {
-            player = mnCharSel_804D6CF0;
-        }
-    } else {
-        player = door;
-    }
+    player = getPlayerForDoor(door);
 
-    char_kinds = &all_data->icons[0].char_kind;
+    char_kinds = &icons[0].char_kind;
     mnCharSel_804D6CB0->data.data.players[player].c_kind =
         char_kinds[icon_offset];
 

@@ -33,9 +33,6 @@ ATTRIBUTE_NORETURN void HSD_Panic(char*, u32, char*);
             : (OSReport(__VA_ARGS__), __assert(__FILE__, __LINE__, #cond)))
 #endif
 
-int report_func(__file_handle arg0, unsigned char* arg1, size_t* arg2,
-                __idle_proc arg3);
-
 void HSD_SetReportCallback(ReportCallback cb);
 void HSD_SetPanicCallback(PanicCallback cb);
 

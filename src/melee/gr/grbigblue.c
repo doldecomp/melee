@@ -1169,8 +1169,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                     gp->u.bigblue.data[i].xC.z = pos.y + (pos.y - coll_y);
                 }
 
-                target_y = gp->u.bigblue.data[i].xC.z;
-                y_diff = pos.y - target_y;
+                y_diff = pos.y - (target_y = gp->u.bigblue.data[i].xC.z);
                 if (y_diff < 0.0f) {
                     y_diff = -y_diff;
                 }
@@ -2381,23 +2380,23 @@ static grBb_TrackEntry grBb_TrackEntries[12] = {
 
 void grBigBlue_801EB004(Ground_GObj* gobj)
 {
-    HSD_JObj* stage_jobj = GET_JOBJ(gobj);
+    HSD_JObj* stage_jobj = gobj->hsd_obj;
     Ground* gp = gobj->user_data;
     HSD_JObj* jobj;
     Vec3 pos;
-    Vec3 end_pos;
+    Vec3 scale;
     Vec3 diff;
     Vec3 start_pos;
+    Vec3 end_pos;
     u32 i;
     grBb_TrackEntry* entry;
-    PAD_STACK(4);
-
+    f32 fval;
+    u32 idx;
     HSD_JObjSetFlagsAll(stage_jobj, JOBJ_HIDDEN);
+    scale.x = scale.y = scale.z = 1.0F;
+    HSD_JObjSetScale(stage_jobj, &scale);
 
-    pos.x = pos.y = pos.z = 1.0F;
-    HSD_JObjSetScale(stage_jobj, &pos);
-
-    pos.x = pos.y = pos.z = Ground_801C0498();
+    scale.x = scale.y = scale.z = Ground_801C0498();
 
     entry = grBb_TrackEntries;
     for (i = 0; i < 12; i++, entry++) {
@@ -2420,7 +2419,7 @@ void grBigBlue_801EB004(Ground_GObj* gobj)
             goto assert_block;
         }
 
-        HSD_JObjSetScale(jobj, &pos);
+        HSD_JObjSetScale(jobj, &scale);
 
         lb_8000B1CC(start_jobj, NULL, &start_pos);
         lb_8000B1CC(end_jobj, NULL, &end_pos);
@@ -2437,7 +2436,7 @@ void grBigBlue_801EB004(Ground_GObj* gobj)
         HSD_ASSERT(2330, end_jobj);
     }
 
-    gp->u.bigblue.prev_lane = 0x7F;
+    gp->u.bigblue.prev_lane = 0xFFFF;
 
     gp->u.bigblue.cur_lane = 4;
 
@@ -2447,7 +2446,7 @@ void grBigBlue_801EB004(Ground_GObj* gobj)
     M2C_FIELD(gp, f32*, 0xCC) = 10.0F * Ground_801C0498();
 
     {
-        f32 fval = 0.0F * Ground_801C0498();
+        fval = 0.0F * Ground_801C0498();
 
         M2C_FIELD(gp, f32*, 0xD0) = fval;
         M2C_FIELD(gp, f32*, 0xD4) = fval;
@@ -2461,35 +2460,28 @@ void grBigBlue_801EB004(Ground_GObj* gobj)
         gp->u.bigblue.b2 = 0;
     }
 
-    {
-        u32 idx = gp->u.bigblue.cur_lane;
-        HSD_JObj* active =
-            Ground_801C3FA4(gobj, grBb_TrackEntries[idx].jobj_index);
+    idx = gp->u.bigblue.cur_lane;
+    jobj = Ground_801C3FA4(gobj, grBb_TrackEntries[idx].jobj_index);
 
-        HSD_JObjClearFlagsAll(active, JOBJ_HIDDEN);
+    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
 
-        pos.x = 0.0F;
-        pos.y = yakumono_param->x0 * Ground_801C0498();
-        pos.z = 0.0F;
+    pos.x = 0.0F;
+    pos.y = yakumono_param->x0 * Ground_801C0498();
+    pos.z = 0.0F;
 
-        HSD_JObjSetTranslate(active, &pos);
-    }
+    HSD_JObjSetTranslate(jobj, &pos);
 
-    {
-        u32 idx2 = gp->u.bigblue.next_lane;
-        HSD_JObj* next =
-            Ground_801C3FA4(gobj, grBb_TrackEntries[idx2].jobj_index);
-        u32 active_idx;
+    idx = gp->u.bigblue.next_lane;
+    jobj = Ground_801C3FA4(gobj, grBb_TrackEntries[idx].jobj_index);
 
-        HSD_JObjClearFlagsAll(next, JOBJ_HIDDEN);
+    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
 
-        active_idx = gp->u.bigblue.cur_lane;
-        pos.x += grBb_TrackEntries[active_idx].delta.x;
-        pos.y += grBb_TrackEntries[active_idx].delta.y;
-        pos.z += grBb_TrackEntries[active_idx].delta.z;
+    idx = gp->u.bigblue.cur_lane;
+    pos.x += grBb_TrackEntries[idx].delta.x;
+    pos.y += grBb_TrackEntries[idx].delta.y;
+    pos.z += grBb_TrackEntries[idx].delta.z;
 
-        HSD_JObjSetTranslate(next, &pos);
-    }
+    HSD_JObjSetTranslate(jobj, &pos);
 }
 
 void grBigBlue_801EB4AC(Ground_GObj* gobj)

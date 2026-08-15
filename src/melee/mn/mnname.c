@@ -1441,8 +1441,7 @@ void mnName_8023A290(void)
         lb_80011E24(jobj, &sp20, 7, -1);
         {
             f32 x1 = HSD_JObjGetTranslationX(sp24);
-            f32 x2 = HSD_JObjGetTranslationX(sp20);
-            HSD_JObjSetTranslateX(sp24, x2);
+            HSD_JObjSetTranslateX(sp24, HSD_JObjGetTranslationX(sp20));
             HSD_JObjSetTranslateX(sp20, x1);
         }
     }

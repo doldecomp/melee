@@ -40,7 +40,7 @@ class DoxygenAwesomeDarkModeToggle extends HTMLElement {
 
     static _staticConstructor = (function () {
         DoxygenAwesomeDarkModeToggle.enableDarkMode(
-            DoxygenAwesomeDarkModeToggle.userPreference
+            DoxygenAwesomeDarkModeToggle.userPreference,
         );
         // Update the color scheme when the browsers preference changes
         // without user interaction on the website.
@@ -63,7 +63,7 @@ class DoxygenAwesomeDarkModeToggle extends HTMLElement {
         $(function () {
             $(document).ready(function () {
                 const toggleButton = document.createElement(
-                    "doxygen-awesome-dark-mode-toggle"
+                    "doxygen-awesome-dark-mode-toggle",
                 );
                 toggleButton.title = DoxygenAwesomeDarkModeToggle.title;
                 toggleButton.updateIcon();
@@ -79,7 +79,7 @@ class DoxygenAwesomeDarkModeToggle extends HTMLElement {
                         if (document.visibilityState === "visible") {
                             toggleButton.updateIcon();
                         }
-                    }
+                    },
                 );
 
                 $(document).ready(function () {
@@ -115,11 +115,11 @@ class DoxygenAwesomeDarkModeToggle extends HTMLElement {
         return (
             (!DoxygenAwesomeDarkModeToggle.systemPreference &&
                 localStorage.getItem(
-                    DoxygenAwesomeDarkModeToggle.prefersDarkModeInLightModeKey
+                    DoxygenAwesomeDarkModeToggle.prefersDarkModeInLightModeKey,
                 )) ||
             (DoxygenAwesomeDarkModeToggle.systemPreference &&
                 !localStorage.getItem(
-                    DoxygenAwesomeDarkModeToggle.prefersLightModeInDarkModeKey
+                    DoxygenAwesomeDarkModeToggle.prefersLightModeInDarkModeKey,
                 ))
         );
     }
@@ -130,22 +130,22 @@ class DoxygenAwesomeDarkModeToggle extends HTMLElement {
             if (DoxygenAwesomeDarkModeToggle.systemPreference) {
                 localStorage.setItem(
                     DoxygenAwesomeDarkModeToggle.prefersLightModeInDarkModeKey,
-                    true
+                    true,
                 );
             } else {
                 localStorage.removeItem(
-                    DoxygenAwesomeDarkModeToggle.prefersDarkModeInLightModeKey
+                    DoxygenAwesomeDarkModeToggle.prefersDarkModeInLightModeKey,
                 );
             }
         } else {
             if (!DoxygenAwesomeDarkModeToggle.systemPreference) {
                 localStorage.setItem(
                     DoxygenAwesomeDarkModeToggle.prefersDarkModeInLightModeKey,
-                    true
+                    true,
                 );
             } else {
                 localStorage.removeItem(
-                    DoxygenAwesomeDarkModeToggle.prefersLightModeInDarkModeKey
+                    DoxygenAwesomeDarkModeToggle.prefersLightModeInDarkModeKey,
                 );
             }
         }
@@ -168,13 +168,13 @@ class DoxygenAwesomeDarkModeToggle extends HTMLElement {
         DoxygenAwesomeDarkModeToggle.darkModeEnabled =
             DoxygenAwesomeDarkModeToggle.userPreference;
         DoxygenAwesomeDarkModeToggle.enableDarkMode(
-            DoxygenAwesomeDarkModeToggle.darkModeEnabled
+            DoxygenAwesomeDarkModeToggle.darkModeEnabled,
         );
     }
 
     static onUserPreferenceChanged() {
         DoxygenAwesomeDarkModeToggle.enableDarkMode(
-            DoxygenAwesomeDarkModeToggle.darkModeEnabled
+            DoxygenAwesomeDarkModeToggle.darkModeEnabled,
         );
     }
 
@@ -195,5 +195,5 @@ class DoxygenAwesomeDarkModeToggle extends HTMLElement {
 
 customElements.define(
     "doxygen-awesome-dark-mode-toggle",
-    DoxygenAwesomeDarkModeToggle
+    DoxygenAwesomeDarkModeToggle,
 );

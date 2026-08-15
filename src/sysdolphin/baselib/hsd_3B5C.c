@@ -274,7 +274,6 @@ void hsd_803B5EA0(s32 arg0)
     s32 work_r29;
     s32 work_r3;
     s32 work_r3_4;
-    u32 scratch_r8;
     u32 work_r3_3;
     u8 scratch_r0_6;
     s32 scratch_r27;
@@ -289,10 +288,9 @@ void hsd_803B5EA0(s32 arg0)
     } else {
         work_r3 = 0;
     }
-    ((JpegWorkData*) &base[0x118])->prev_dc[arg0] += work_r3;
+    ((s32*) &base[0x818])[arg0] += work_r3;
     work_r29 = 1;
-    ((JpegWorkData*) &base[0x118])->coeff[0] =
-        ((JpegWorkData*) &base[0x118])->prev_dc[arg0];
+    ((JpegWorkData*) &base[0x118])->coeff[0] = ((s32*) &base[0x818])[arg0];
     while (work_r29 < 0x40) {
         if ((scratch_r3_2 = hsd_803B5D70(1, arg0)) == 0) {
             while (work_r29 < 0x40) {
@@ -302,12 +300,10 @@ void hsd_803B5EA0(s32 arg0)
             }
             return;
         } else {
-            scratch_r8 = hsd_803B5C4C(scratch_r3_2) - 1;
-            work_r3_3 = scratch_r8;
-            while (work_r3_3 != 0) {
+            work_r3_3 = hsd_803B5C4C(scratch_r3_2) - 1;
+            while (work_r3_3--) {
                 ((JpegWorkData*) &base[0x118])
                     ->coeff[lbl_80431638[work_r29++]] = 0;
-                work_r3_3 -= 1;
             }
             scratch_r27 = hsd_803B5D70(1, arg0);
             work_r3_4 = hsd_803B5C4C(scratch_r27);
