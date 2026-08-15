@@ -207,6 +207,18 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v5
 
+  native-build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        fetch-depth: 1
+    - uses: cachix/install-nix-action@v31
+    - uses: cachix/cachix-action@v17
+      with:
+        name: doldecomp-melee
+    - run: nix build .#melee-gcc-native -L
+
   build-nix:
     name: Nix
     runs-on: ubuntu-latest
