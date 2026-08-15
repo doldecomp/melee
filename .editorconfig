@@ -12,10 +12,11 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 charset = utf-8
 
-[*.s]
+[{*.s,*.c,*.h,*.dox,Doxyfile,LICENSE,COPYING,COPYING.LESSER}]
+# clang-format handles indentation
 indent_style = unset
 
-[{*.yml,.clang-format,*.nix}]
+[{*.yml,*.yaml,.clang-format,.clangd,*.nix,flake.lock,*.json,*.xml,*.iml}]
 indent_size = 2
 
 [Makefile]
@@ -29,3 +30,6 @@ indent_style = tab
 
 [*.md]
 indent_style = unset
+
+[*.sha1]
+insert_final_newline = false

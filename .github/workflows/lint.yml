@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        hook: ['clang-format', 'style-check']
+        hook: ['clang-format', 'style-check', 'editorconfig-checker']
     steps:
     - uses: actions/checkout@v6
       with:
