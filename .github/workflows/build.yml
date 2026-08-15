@@ -140,8 +140,7 @@ jobs:
           ;;
           'clang')
             config_args=""
-            apt update
-            apt install -y clang-tools
+            apk add --no-cache clang-extra-tools
 
             run_configure
 
