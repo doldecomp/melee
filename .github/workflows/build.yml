@@ -48,6 +48,23 @@ jobs:
         mode='${{matrix.mode}}'
         root='build/${{matrix.version}}'
         report="$root/report.json"
+        head="$(git rev-parse HEAD)"
+
+        function get_upstream {
+            local ref
+            case '${{github.event_name}}' in
+              'pull_request')
+                git fetch origin HEAD
+                ref='FETCH_HEAD'
+              ;;
+              'push')
+                ref='HEAD^'
+              ;;
+              *) exit 1 ;;
+            esac
+            git rev-parse "$ref"
+        }
+        upstream="$(get_upstream)"
 
         config_args=$(printf '%s ' \
           '--compilers /compilers' \
@@ -64,18 +81,6 @@ jobs:
           git switch --discard-changes --detach "$1"
         }
 
-        function checkout_upstream {
-            case '${{github.event_name}}' in
-              'pull_request')
-                git fetch origin HEAD
-                checkout FETCH_HEAD
-              ;;
-              'push')
-                checkout 'HEAD^'
-              ;;
-              *) exit 1 ;;
-            esac
-        }
 
         case "$mode" in
           'link')
@@ -111,13 +116,12 @@ jobs:
           'diff')
             expected="$root/baseline.json"
             changes="$root/changes.json"
-            head="$(git rev-parse HEAD)"
 
             function run_ninja {
               ninja all_source "$report"
             }
 
-            checkout_upstream
+            checkout "$upstream"
             run_configure
             run_ninja
             cp "$report" "$expected"
@@ -140,6 +144,7 @@ jobs:
           ;;
           'clang')
             config_args=""
+            # TODO: Add to build image
             apk add --no-cache clang-extra-tools
 
             run_configure
@@ -147,6 +152,8 @@ jobs:
             ninja 'build/${{matrix.version}}/config.json'
 
             cat compile_commands.json
+
+            pre-commit run clang-check --all-files
           ;;
           *) exit 1 ;;
         esac
