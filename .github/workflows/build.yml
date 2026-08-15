@@ -147,8 +147,9 @@ jobs:
             config_args=""
             # TODO: Add to build image
             apk add --update --no-cache clang-extra-tools
-            python -m ensurepip
-            pip install --no-cache --upgrade pip setuptools -r reqs/lint.txt
+            python -m venv --upgrade-deps venv
+            . venv/bin/activate
+            pip install --no-cache-dir -r reqs/lint.txt
 
             run_configure
 
