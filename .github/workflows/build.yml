@@ -22,7 +22,7 @@ jobs:
       fail-fast: false
       matrix:
         version: [GALE01]
-        mode: ['link', 'diff', 'test']
+        mode: ['link', 'diff', 'test', 'clang']
     steps:
     - name: Checkout
       uses: actions/checkout@v6
@@ -48,6 +48,23 @@ jobs:
         mode='${{matrix.mode}}'
         root='build/${{matrix.version}}'
         report="$root/report.json"
+        head="$(git rev-parse HEAD)"
+
+        function get_upstream {
+            local ref
+            case '${{github.event_name}}' in
+              'pull_request')
+                git fetch origin HEAD
+                ref='FETCH_HEAD'
+              ;;
+              'push')
+                ref='HEAD^'
+              ;;
+              *) exit 1 ;;
+            esac
+            git rev-parse "$ref"
+        }
+        upstream="$(get_upstream)"
 
         config_args=$(printf '%s ' \
           '--compilers /compilers' \
@@ -59,6 +76,11 @@ jobs:
         function run_configure {
           echo "$config_args" | xargs python configure.py
         }
+
+        function checkout {
+          git switch --discard-changes --detach "$1"
+        }
+
 
         case "$mode" in
           'link')
@@ -94,28 +116,17 @@ jobs:
           'diff')
             expected="$root/baseline.json"
             changes="$root/changes.json"
-            head="$(git rev-parse HEAD)"
 
             function run_ninja {
               ninja all_source "$report"
             }
 
-            case '${{github.event_name}}' in
-              'pull_request')
-                git fetch origin HEAD
-                git checkout FETCH_HEAD
-              ;;
-              'push')
-                git checkout 'HEAD^'
-              ;;
-              *) exit 1 ;;
-            esac
-
+            checkout "$upstream"
             run_configure
             run_ninja
             cp "$report" "$expected"
 
-            git checkout -f "$head"
+            checkout "$head"
             run_ninja
 
             build/tools/objdiff-cli report changes -o "$changes" "$expected" "$report"
@@ -130,6 +141,27 @@ jobs:
 
             run_configure
             ninja
+          ;;
+          'clang')
+            config_args=""
+
+            # TODO: Migrate to nix and install to environment
+            apk add --update --no-cache clang-extra-tools jq
+
+            run_configure
+
+            ninja 'build/${{matrix.version}}/config.json'
+
+            jq -r --arg root "$(realpath .)" \
+              '.[] | select(.file | startswith($root + "/src/")) | .file' \
+              compile_commands.json |
+              xargs -P $(nproc) -I {} sh -c '
+                echo "Checking: {}"
+                clang-check -p . \
+                  -extra-arg=-fno-caret-diagnostics \
+                  -extra-arg=-fdiagnostics-format=clang \
+                  "{}"
+              '
           ;;
           *) exit 1 ;;
         esac
