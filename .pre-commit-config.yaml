@@ -17,3 +17,13 @@ repos:
       language: system
       pass_filenames: true
       types_or: [c]
+    - id: clang-check
+      name: clang-check
+      entry: clang-check
+      language: system
+      types_or: [c]
+      files: ^src/
+      args:
+        - -p=.
+        - -extra-arg=-fno-caret-diagnostics
+        - -extra-arg=-fdiagnostics-format=clang
