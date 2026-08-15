@@ -1530,11 +1530,11 @@ int hsd_803AC340(void* header)
 }
 
 void hsd_803AC3E0(struct CardState* file_desc, int file_idx, int file_size,
-                  int file_flags, int data_size)
+                  int file_flags, u8* data)
 {
     file_desc->x28[file_idx] = file_flags;
     file_desc->x4C[file_idx] = file_size;
-    file_desc->x70[file_idx].size = data_size;
+    file_desc->x70[file_idx].ptr = data;
 }
 
 void fn_803AC3F8(void* arg0, u8* data, s32 file_idx)

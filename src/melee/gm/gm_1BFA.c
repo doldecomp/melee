@@ -135,7 +135,7 @@ static UNK_T* gm_801BFC60(u32 arg0, s32 arg1, u32 arg2, u32 arg3, UNK_T* arg4)
         un_804A1F48.x2 = arg2;
         return (&un_804A1F48.x8);
     }
-    temp_r3 = HSD_MemAlloc(0xC);
+    temp_r3 = HSD_MemAlloc(sizeof(struct un_804A1F48_t));
     if (temp_r3 != NULL) {
         temp_r3->x0 = arg0;
         temp_r3->x4 = arg3;

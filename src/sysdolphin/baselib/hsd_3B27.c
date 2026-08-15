@@ -2,6 +2,7 @@
 
 #include "hsd_3A94.h"
 
+#include <stddef.h>
 #include <string.h>
 
 typedef struct {
@@ -101,7 +102,7 @@ int hsd_803B2928(s32* arg0, const char* arg1, int arg2, int arg3,
     return 0;
 }
 
-int hsd_803B29D8(s32* ctx, int channel, int size, UNK_T callback)
+int hsd_803B29D8(s32* ctx, int channel, u8* data, UNK_T callback)
 {
     s32 read_idx = hsd_804D7990;
     u8* base = hsd_804D1138;
@@ -120,7 +121,7 @@ int hsd_803B29D8(s32* ctx, int channel, int size, UNK_T callback)
         entry->type = 1;
         entry->f1 = (s32) ctx;
         entry->f2 = channel;
-        entry->f3 = size;
+        entry->f3 = (s32) data;
         entry->f5 = (s32) callback;
         hsd_804D7994 = next % 32;
     }
@@ -128,14 +129,14 @@ int hsd_803B29D8(s32* ctx, int channel, int size, UNK_T callback)
     return 0;
 }
 
-int hsd_803B2A4C(s32* arg0, int arg1, int arg2, void (*arg3)(int, int))
+int hsd_803B2A4C(s32* arg0, int arg1, u8* arg2, void (*arg3)(int, int))
 {
     u8* base = hsd_804D1138;
     s32 read_idx;
     s32 write_idx;
     HsdCmdEntry* entry;
 
-    if (arg0[arg1 + 19] <= 0) {
+    if (arg0[arg1 + offsetof(CardState, x4C) / sizeof(s32)] <= 0) {
         return -257;
     }
 
@@ -154,7 +155,7 @@ int hsd_803B2A4C(s32* arg0, int arg1, int arg2, void (*arg3)(int, int))
         entry->type = 2;
         entry->f1 = (s32) arg0;
         entry->f2 = arg1;
-        entry->f3 = arg2;
+        entry->f3 = (s32) arg2;
         entry->f5 = (s32) arg3;
         hsd_804D7994 = next % 32;
     }
