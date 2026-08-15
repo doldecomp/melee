@@ -19,28 +19,9 @@ COPY .github/packages/build-linux/melee-mwcc /usr/local/bin
 FROM linux-base AS linux-rw
 VOLUME ["/input", "/output"]
 
-FROM linux-rw AS build-linux
-COPY .github/packages/build-linux/setup.sh /usr/local/bin
-RUN setup.sh
-ENV MAKE_FLAGS="GENERATE_MAP=1"
-COPY .github/packages/build-linux/entrypoint.sh /usr/local/bin
-ENTRYPOINT ["entrypoint.sh"]
-
 FROM linux-rw AS gen-pages
 COPY .github/packages/gen-pages/setup.sh /usr/local/bin
 COPY /reqs/gen-pages.txt /tmp/reqs/
 RUN setup.sh
 COPY .github/packages/gen-pages/entrypoint.sh /usr/local/bin
-ENTRYPOINT ["entrypoint.sh"]
-
-# TODO
-FROM rust:latest AS check-issues
-COPY .github/packages/check-issues/setup.sh /usr/local/bin
-COPY . /input
-ENV DEBIAN_FRONTEND=noninteractive
-ENV LANG=C
-RUN setup.sh
-RUN rm -rf /input
-VOLUME [ "/input" ]
-COPY .github/packages/check-issues/entrypoint.sh /usr/local/bin
 ENTRYPOINT ["entrypoint.sh"]

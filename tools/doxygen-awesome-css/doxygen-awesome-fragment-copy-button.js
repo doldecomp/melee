@@ -47,7 +47,7 @@ class DoxygenAwesomeFragmentCopyButton extends HTMLElement {
                         fragmentWrapper.className =
                             "doxygen-awesome-fragment-wrapper";
                         const fragmentCopyButton = document.createElement(
-                            "doxygen-awesome-fragment-copy-button"
+                            "doxygen-awesome-fragment-copy-button",
                         );
                         fragmentCopyButton.innerHTML =
                             DoxygenAwesomeFragmentCopyButton.copyIcon;
@@ -56,7 +56,7 @@ class DoxygenAwesomeFragmentCopyButton extends HTMLElement {
 
                         fragment.parentNode.replaceChild(
                             fragmentWrapper,
-                            fragment
+                            fragment,
                         );
                         fragmentWrapper.appendChild(fragment);
                         fragmentWrapper.appendChild(fragmentCopyButton);
@@ -77,14 +77,14 @@ class DoxygenAwesomeFragmentCopyButton extends HTMLElement {
         let numberOfTrailingNewlines = 0;
         while (
             textContent.charAt(
-                textContent.length - (numberOfTrailingNewlines + 1)
+                textContent.length - (numberOfTrailingNewlines + 1),
             ) == "\n"
         ) {
             numberOfTrailingNewlines++;
         }
         textContent = textContent.substring(
             0,
-            textContent.length - numberOfTrailingNewlines
+            textContent.length - numberOfTrailingNewlines,
         );
         navigator.clipboard.writeText(textContent);
         this.classList.add("success");
@@ -98,5 +98,5 @@ class DoxygenAwesomeFragmentCopyButton extends HTMLElement {
 
 customElements.define(
     "doxygen-awesome-fragment-copy-button",
-    DoxygenAwesomeFragmentCopyButton
+    DoxygenAwesomeFragmentCopyButton,
 );

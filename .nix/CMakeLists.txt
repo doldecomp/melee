@@ -5,11 +5,13 @@ project(melee-native LANGUAGES C)
 include(GNUInstallDirs)
 
 set(SOURCES
-    src/sysdolphin/baselib/jobj.c
     src/sysdolphin/baselib/gobj.c
+    src/sysdolphin/baselib/wobj.c
 )
 
 add_library(melee STATIC ${SOURCES})
+
+target_compile_definitions(melee PRIVATE BUGFIX)
 
 target_include_directories(melee PRIVATE
     $ENV{AURORA_SRC}/include

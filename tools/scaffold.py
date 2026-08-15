@@ -19,10 +19,13 @@ def wip(msg: str = "") -> NoReturn:
 def main() -> None:
     def sanitize_path(s: str) -> tuple[Path, str]:
         p = Path(s).resolve()
-        s = f"{MODULE}/{(p.parent / p.stem)
-                        .relative_to(SRC_ROOT)
-                        .as_posix()
-                        .replace("\\", "/")}"
+        s = (
+            p.parent.joinpath(p.stem)
+            .relative_to(SRC_ROOT)
+            .as_posix()
+            .replace("\\", "/")
+        )
+        s = f"{MODULE}/{s}"
 
         return p, s
 
