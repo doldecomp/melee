@@ -152,9 +152,9 @@ jobs:
             run_configure
 
             ninja 'build/${{matrix.version}}/config.json'
-            git diff --name-only --diff-filter=AM --no-renames "$upstream" "$head" -- \
-              'src/**/*.c' 'src/**/*.h' |
-              xargs -P $(nproc) -I {} sh -c '
+
+            git ls-files -z -- 'src/**/*.c' 'src/**/*.h' |
+              xargs -0 -P $(nproc) -I {} sh -c '
                 echo "Checking: {}"
                 clang-check -p . \
                   -extra-arg=-fno-caret-diagnostics \
