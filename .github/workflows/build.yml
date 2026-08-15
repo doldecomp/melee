@@ -61,7 +61,7 @@ jobs:
         }
 
         function checkout {
-          git switch --discard-changes "$1"
+          git switch --discard-changes --detach "$1"
         }
 
         function checkout_upstream {
