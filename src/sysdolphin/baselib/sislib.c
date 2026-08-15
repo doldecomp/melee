@@ -14,11 +14,12 @@
 #include "dolphin/gx.h"
 #include "dolphin/mtx.h"
 
-#include <printf.h>
+#include <printf.h> // IWYU pragma: keep
 #include <stdarg.h>
 #include <stdio.h>
 #include <dolphin/os.h>
-#include <melee/lb/lbarchive.h>
+#include <sysdolphin/baselib/sislib_font.h>
+#include <melee/lb/lbarchive.h> ///< @todo Circular include
 
 static HSD_WObjDesc HSD_SisLib_8040C490 = {
     NULL,
@@ -66,9 +67,6 @@ sislib_UnkAlloc3* HSD_SisLib_804D797C;
 /// sislib_UnknownType001 HSD_SisLib_8040C490 = { 0, 1.0F };
 
 /// u8 HSD_SisLib_8040C490[0x60] = { 0 };
-
-static u8
-    HSD_SisLib_8040CD40; /* unable to generate initializer: unknown type */
 
 static HSD_Archive* HSD_SisLib_804D1110[5];
 SIS* HSD_SisLib_804D1124[5];
@@ -1755,7 +1753,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
     u16 saved_x6C;
     u8 saved_kerning;
 
-    u8 *data = &HSD_SisLib_8040CD40;
+    u8 *data = HSD_SisLib_FontAtlas;
     u8 *default_kerning = HSD_SisLib_8040CB00;
 
     if (gobj != NULL) {
