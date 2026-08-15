@@ -44,8 +44,3 @@
 -Wno-uninitialized
 -Wno-unknown-pragmas
 -Wno-unsequenced
--Wno-unused-but-set-variable
--Wno-unused-function
--Wno-unused-parameter
--Wno-unused-value
--Wno-unused-variable
