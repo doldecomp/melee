@@ -104,6 +104,6 @@
 /* 802A7AF0 */ void it_802A7AF0(HSD_GObj* arg0);
 /* 802A7B34 */ void it_802A7B34(HSD_GObj* arg0);
 /* 802A7D40 */ void it_802A7D40(Item_GObj* arg0, Item_GObj* arg1);
-extern Vec3 it_803B8650;
+extern const Vec4 it_803B8650;
 
 #endif
