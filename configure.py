@@ -1819,6 +1819,7 @@ config.libs = [
             ),
             Object(Matching, "sysdolphin/baselib/sobjlib.c"),
             Object(NonMatching, "sysdolphin/baselib/sislib.c"),
+            Object(Matching, "sysdolphin/baselib/sislib_font.c"),
             Object(Matching, "sysdolphin/baselib/hsd_4D11.c"),
             Object(NonMatching, "sysdolphin/baselib/hsd_3A94.c"),
             Object(Matching, "sysdolphin/baselib/hsd_3B27.c"),

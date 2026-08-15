@@ -23,6 +23,6 @@ block_relocations:
 
 extract:
 - symbol: HSD_SisLib_FontAtlas
-  header: sysdolphin/baselib/sislib_font.h
+  header: sysdolphin/baselib/sislib_font.static.h
   binary: sysdolphin/baselib/sislib_font.bin
   header_type: symbol
