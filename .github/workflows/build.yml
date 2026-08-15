@@ -22,7 +22,7 @@ jobs:
       fail-fast: false
       matrix:
         version: [GALE01]
-        mode: ['link', 'diff', 'test']
+        mode: ['link', 'diff', 'test', 'clang']
     steps:
     - name: Checkout
       uses: actions/checkout@v6
@@ -58,6 +58,23 @@ jobs:
 
         function run_configure {
           echo "$config_args" | xargs python configure.py
+        }
+
+        function checkout {
+          git switch --discard-changes "$1"
+        }
+
+        function checkout_upstream {
+            case '${{github.event_name}}' in
+              'pull_request')
+                git fetch origin HEAD
+                checkout FETCH_HEAD
+              ;;
+              'push')
+                checkout 'HEAD^'
+              ;;
+              *) exit 1 ;;
+            esac
         }
 
         case "$mode" in
@@ -100,22 +117,12 @@ jobs:
               ninja all_source "$report"
             }
 
-            case '${{github.event_name}}' in
-              'pull_request')
-                git fetch origin HEAD
-                git checkout FETCH_HEAD
-              ;;
-              'push')
-                git checkout 'HEAD^'
-              ;;
-              *) exit 1 ;;
-            esac
-
+            checkout_upstream
             run_configure
             run_ninja
             cp "$report" "$expected"
 
-            git checkout -f "$head"
+            checkout "$head"
             run_ninja
 
             build/tools/objdiff-cli report changes -o "$changes" "$expected" "$report"
@@ -131,6 +138,18 @@ jobs:
             run_configure
             ninja
           ;;
+          'clang')
+            config_args=""
+            sudo apt update
+            sudo apt install -y clang-tools
+
+            run_configure
+
+            ninja 'build/${{matrix.version}}/config.json'
+
+            cat compile_commands.json
+
+
           *) exit 1 ;;
         esac
     - name: Upload map
