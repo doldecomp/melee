@@ -31,6 +31,7 @@ typedef struct AfterimageVtx {
 void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 {
     Fighter* fp;
+    int unused;
     itSword_UnkBytes* params;
     f32* distPtr;
     u32 n4;
