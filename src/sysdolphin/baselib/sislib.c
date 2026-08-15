@@ -1755,7 +1755,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
 
     u8 *data = HSD_SisLib_FontAtlas;
     u8 *default_kerning = HSD_SisLib_8040CB00;
-
+    #error test
     if (gobj != NULL) {
         if (pass != 2U) {
             return;

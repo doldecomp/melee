@@ -147,20 +147,17 @@ jobs:
             set -x
             config_args=""
 
-            # TODO: Migrate to nix and install dependencies to environment
             apk add --update --no-cache clang-extra-tools
-            export PIP_CACHE_DIR=/dev/null
-            python -m venv --upgrade-deps venv
-            . venv/bin/activate
-            pip install --no-cache-dir -r reqs/lint.txt
 
             run_configure
 
             ninja 'build/${{matrix.version}}/config.json'
 
-            pre-commit run --show-diff-on-failure --color=always --verbose \
-              clang-check \
-              --all-files
+            find src -type f \( -name '*.c' -o -name '*.h' \) |
+              xargs -n 1 -P $(nproc) clang-check \
+                -p . \
+                -extra-arg=-fno-caret-diagnostics \
+                -extra-arg=-fdiagnostics-format=clang
           ;;
           *) exit 1 ;;
         esac
