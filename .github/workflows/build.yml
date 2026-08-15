@@ -152,12 +152,14 @@ jobs:
             run_configure
 
             ninja 'build/${{matrix.version}}/config.json'
-
             find src -type f \( -name '*.c' -o -name '*.h' \) |
-              xargs -n 1 -P $(nproc) clang-check \
-                -p . \
-                -extra-arg=-fno-caret-diagnostics \
-                -extra-arg=-fdiagnostics-format=clang
+              xargs -n 1 -P $(nproc) -I {} sh -c '
+                echo "Checking: {}"
+                clang-check -p . \
+                  -extra-arg=-fno-caret-diagnostics \
+                  -extra-arg=-fdiagnostics-format=clang \
+                  "{}"
+              '
           ;;
           *) exit 1 ;;
         esac
