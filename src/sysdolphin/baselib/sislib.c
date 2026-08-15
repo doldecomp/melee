@@ -18,8 +18,14 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <dolphin/os.h>
-#include <sysdolphin/baselib/sislib_font.h>
 #include <melee/lb/lbarchive.h> ///< @todo Circular include
+
+/// @todo Fix CI to have access to generated headers
+#ifdef __MWERKS__
+#include <sysdolphin/baselib/sislib_font.h>
+#else
+extern u8 HSD_SisLib_FontAtlas[];
+#endif
 
 static HSD_WObjDesc HSD_SisLib_8040C490 = {
     NULL,
