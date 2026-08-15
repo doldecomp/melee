@@ -33,6 +33,7 @@ jobs:
           extern/
           tools/
           config/
+          reqs/
           .github/scripts/
     - name: Git config
       run: |
@@ -145,8 +146,10 @@ jobs:
           'clang')
             set -x
             config_args=""
+
             # TODO: Add to build image
             apk add --update --no-cache clang-extra-tools
+            export PIP_CACHE_DIR=/dev/null
             python -m venv --upgrade-deps venv
             . venv/bin/activate
             pip install --no-cache-dir -r reqs/lint.txt
