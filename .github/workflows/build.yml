@@ -33,7 +33,6 @@ jobs:
           extern/
           tools/
           config/
-          reqs/lint.txt
           .github/scripts/
     - name: Git config
       run: |
