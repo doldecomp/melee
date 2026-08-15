@@ -85,12 +85,14 @@ typedef bool (*Predicate)(void);
 #endif
 #endif
 
+#ifndef AT_ADDRESS
 #ifdef PERMUTER
 #define AT_ADDRESS(x) = FIXEDADDR(x)
 #elif defined(__MWERKS__) && !defined(M2CTX)
 #define AT_ADDRESS(x) : (x)
 #else
 #define AT_ADDRESS(x)
+#endif
 #endif
 
 #ifdef __PPCGEKKO__

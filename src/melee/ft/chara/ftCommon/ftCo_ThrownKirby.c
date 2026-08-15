@@ -37,23 +37,6 @@ static void sdata2_order(void)
     (void) +1.0f;
 }
 
-// moved here for linking purposes
-extern double __frsqrte(double);
-
-extern inline float sqrtf(float x)
-{
-    volatile float y;
-    if (x > 0.0f) {
-        double guess = __frsqrte((double) x); // returns an approximation to
-        guess = .5 * guess * (3.0 - guess * guess * x); // now have 12 sig bits
-        guess = .5 * guess * (3.0 - guess * guess * x); // now have 24 sig bits
-        guess = .5 * guess * (3.0 - guess * guess * x); // now have 32 sig bits
-        y = (float) (x * guess);
-        return y;
-    }
-    return x;
-}
-
 typedef float (*KirbyVelocityFunc)(Fighter_GObj* gobj, Vec3* victim_self_vel,
                                    float victim_facing_dir);
 typedef float (*GetFloatFunc)(Fighter_GObj* gobj);

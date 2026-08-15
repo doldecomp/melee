@@ -5,20 +5,6 @@
 #include <trigf.h>
 #include <MSL/math.h>
 
-inline float sqrtf(float x)
-{
-    volatile float y;
-    if (x > 0.0f) {
-        double guess = __frsqrte((double) x); // returns an approximation to
-        guess = .5 * guess * (3.0 - guess * guess * x); // now have 12 sig bits
-        guess = .5 * guess * (3.0 - guess * guess * x); // now have 24 sig bits
-        guess = .5 * guess * (3.0 - guess * guess * x); // now have 32 sig bits
-        y = (float) (x * guess);
-        return y;
-    }
-    return x;
-}
-
 s32 MatToQuat(Mtx m, Quaternion* q)
 {
     f32 q3[3];
