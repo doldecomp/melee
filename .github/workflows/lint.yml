@@ -13,7 +13,6 @@ jobs:
       matrix:
         hook:
           - clang-format
-          - clang-check
           - editorconfig-checker
           - style-check
     steps:
@@ -29,18 +28,6 @@ jobs:
         else
           echo "from=${{ github.event.before }}" >> $GITHUB_OUTPUT
         fi
-
-    # TODO: Install on build image
-    - name: Install clang-tools
-      if: matrix.hook == 'clang-check'
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y clang-tools
-
-    - name: Generate compilation database
-      if: matrix.hook == 'clang-check' || matrix.hook == 'clang-format'
-      run: |
-        python configure.py
 
     - uses: pre-commit/action@v3.0.1
       with:
