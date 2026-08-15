@@ -8,6 +8,12 @@
 
 #include <sysdolphin/baselib/gobj.h>
 
+struct CardEntry {
+    int file_size;
+    int file_flags;
+    u8* data;
+};
+
 /* 019BB8 */ int lb_80019BB8(int card_result);
 /* 019C38 */ struct CardTask* lb_80019C38(void);
 /* 019CB0 */ int lb_80019CB0(int result);

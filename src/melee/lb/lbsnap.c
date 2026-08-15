@@ -305,10 +305,10 @@ int lbSnap_8001DF20(void)
 {
     struct Unk80433380_0* snap = _p(x0);
     struct Unk803BACC8* tmp;
-    lbSnap_803BACC8.x14 = lbSnap_GetSaveDataOffset(snap);
+    lbSnap_803BACC8.entries[0].file_size = lbSnap_GetSaveDataOffset(snap);
     tmp = &lbSnap_803BACC8;
-    lbSnap_803BACC8.x1C = snap;
-    return lb_8001C4A8(&tmp->x14, &lbSnap_803BACC8);
+    lbSnap_803BACC8.entries[0].data = (u8*) snap;
+    return lb_8001C4A8(tmp->entries, &lbSnap_803BACC8);
 }
 #pragma pop
 
@@ -327,9 +327,9 @@ int lbSnap_8001DF6C(int chan)
         int chan_arg = chan;
         _p(slot)[chan].card_result = 8;
         lbSnap_8001D4A4(chan_arg, text);
-        desc->x14 = lbSnap_GetSaveDataOffset(_p(x0));
-        desc->x1C = _p(x0);
-        ret = lb_8001BB48(chan, text, &desc->x14, desc, _p(x4_string),
+        desc->entries[0].file_size = lbSnap_GetSaveDataOffset(_p(x0));
+        desc->entries[0].data = (u8*) _p(x0);
+        ret = lb_8001BB48(chan, text, desc->entries, desc, _p(x4_string),
                           _p(x44_LbMcSnap_MemSnapIconData)[0].offset,
                           _p(x44_LbMcSnap_MemSnapIconData)[1].size, 0);
     }
@@ -349,8 +349,8 @@ int lbSnap_8001E058(int chan, int index)
     ret = ptr->card_result;
     if (ret == 0) {
         lbSnap_FormatTime(chan, index, text);
-        lbSnap_803BACC8.x1C = _p(x0);
-        ret = lb_8001BF04(chan, text, &lbSnap_803BACC8.x14, _p(x4_string),
+        lbSnap_803BACC8.entries[0].data = (u8*) _p(x0);
+        ret = lb_8001BF04(chan, text, lbSnap_803BACC8.entries, _p(x4_string),
                           _p(x44_LbMcSnap_MemSnapIconData)[0].offset,
                           _p(x44_LbMcSnap_MemSnapIconData)[1].size, 0);
     }

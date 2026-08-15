@@ -1853,6 +1853,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                 GXPosition3f32(min_x, neg_max_y, depth);
                 GXTexCoord2f32(0.0F, 1.0F);
             }
+            GXEnd();
         }
         GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_TEXA, GX_CA_A0, GX_CA_ZERO);
         if (text->x4E != 0) {
@@ -2208,6 +2209,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                             GXPosition3f32(glyph_x, neg_quad_bottom, glyph_depth);
                                             GXTexCoord2f32(uv_left, uv_bottom);
                                         }
+                                        GXEnd();
                                     }
                                     text->current_width = (f32) ((text->x88 * (text->x80.x * (32.0F + text->x78.x))) + text->current_width);
                                     if ((u8) text->kerning != 0) {

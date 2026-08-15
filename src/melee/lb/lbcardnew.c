@@ -311,10 +311,6 @@ void lb_8001A4CC(const char* filename, UNK_T file_entries)
     task->x8 = file_entries;
 }
 
-struct CardEntry {
-    int file_size, file_flags, data_size;
-};
-
 struct SnapshotNode {
     struct SnapshotNode* next;
     u32 time;
@@ -331,7 +327,7 @@ inline void setup_card_entries(void* ctx, void* icon, struct CardEntry* entry)
     while (entry->file_size != -1) {
         if (entry->file_size != 0) {
             hsd_803AC3E0(ctx, i, entry->file_size, entry->file_flags,
-                         entry->data_size);
+                         entry->data);
         }
         i++;
         entry++;
@@ -530,8 +526,8 @@ int lb_8001ACEC(UNK_T file_entries)
         cached_flag = _p(xF4)[i];
         cached_data = _p(xD0)[i];
         if (_p(xF4)[i] != 0) {
-            hsd_result = hsd_803B29D8(&_p(unk_A8), i, entries[i].data_size,
-                                      fn_8001A0B0);
+            hsd_result =
+                hsd_803B29D8(&_p(unk_A8), i, entries[i].data, fn_8001A0B0);
             _p(unk_38)[i].unk_0 = convert_hsdcard_error(hsd_result);
             _p(unk_38)[i].unk_4 = hsd_result;
             file_error = _p(unk_38)[i].unk_0;
@@ -564,8 +560,8 @@ int lb_8001AE38(UNK_T file_entries)
         cached_flag = _p(xF4)[i];
         cached_data = _p(xD0)[i];
         if (_p(xF4)[i] != 0) {
-            hsd_result = hsd_803B2A4C(&_p(unk_A8), i, entries[i].data_size,
-                                      fn_8001A0B0);
+            hsd_result =
+                hsd_803B2A4C(&_p(unk_A8), i, entries[i].data, fn_8001A0B0);
             _p(unk_38)[i].unk_0 = convert_hsdcard_error(hsd_result);
             _p(unk_38)[i].unk_4 = hsd_result;
             file_error = _p(unk_38)[i].unk_0;
@@ -1122,7 +1118,7 @@ int lb_8001C4A8(void* file_entries, void* icon_data)
         while (entry->file_size != -1) {
             if (entry->file_size != 0) {
                 hsd_803AC3E0((struct CardState*) ctx, i, entry->file_size,
-                             entry->file_flags, entry->data_size);
+                             entry->file_flags, entry->data);
             }
             i++;
             entry++;
