@@ -151,8 +151,6 @@ jobs:
 
             run_configure
 
-            ninja 'build/${{matrix.version}}/config.json'
-
             jq -r --arg root "$(realpath .)" \
               '.[] | select(.file | startswith($root + "/src/")) | .file' \
               compile_commands.json |
