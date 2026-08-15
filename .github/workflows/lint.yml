@@ -37,6 +37,11 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y clang-tools
 
+    - name: Generate compilation database
+      if: matrix.hook == 'clang-check' || matrix.hook == 'clang-format'
+      run: |
+        python configure.py
+
     - uses: pre-commit/action@v3.0.1
       with:
         extra_args: ${{ matrix.hook }} --from-ref ${{ steps.ref.outputs.from }} --to-ref HEAD
