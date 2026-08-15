@@ -215,8 +215,8 @@ if not is_windows():
 if not args.asm:
     config.asm_dir = None
 
-# Handled internally
-config.generate_compile_commands = False
+config.generate_compile_commands = False  # Handled internally
+config.extra_clang_flags.extend([f"-isystembuild/{config.version}/include"])
 
 # Tool versions
 config.binutils_tag = "2.42-2"
@@ -336,6 +336,7 @@ includes_base = [
     "src/MSL",
     "src/Runtime",
     "extern/dolphin/include",
+    f"build/{config.version}/include",
 ]
 
 cflags_melee = [
@@ -417,6 +418,7 @@ def SysdolphinLib(lib_name: str, objects: Objects) -> Library:
         includes=[
             *includes_base,
             "src/sysdolphin",
+            f"build/{config.version}/GALE01/sysdolphin",
         ],
         category="hsd",
     )

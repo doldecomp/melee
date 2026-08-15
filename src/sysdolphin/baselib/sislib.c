@@ -18,9 +18,8 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <dolphin/os.h>
+#include <sysdolphin/baselib/sislib_font.h>
 #include <melee/lb/lbarchive.h> ///< @todo Circular include
-
-extern u8 HSD_SisLib_FontAtlas[]; ///< @note Embedded DOL asset
 
 static HSD_WObjDesc HSD_SisLib_8040C490 = {
     NULL,
