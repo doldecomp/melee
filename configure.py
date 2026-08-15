@@ -216,7 +216,6 @@ if not args.asm:
     config.asm_dir = None
 
 config.generate_compile_commands = False  # Handled internally
-config.extra_clang_flags.extend([f"-isystembuild/{config.version}/include"])
 
 # Tool versions
 config.binutils_tag = "2.42-2"
@@ -262,8 +261,7 @@ config.progress_data_fancy_item = "Event Matches"
 # Can be overridden in libraries or objects
 config.scratch_preset_id = 63
 
-# Base flags, common to most GC/Wii games.
-# Generally leave untouched, with overrides added below.
+# GC/Wii compiler flags
 cflags_base = [
     "-nowraplines",
     "-cwd source",
@@ -343,7 +341,68 @@ cflags_melee = [
     *cflags_base,
 ]
 
+
 config.linker_version = "GC/1.3.2"
+
+# Native compiler flags
+clang_flags_base = [
+    "-xc",
+    "-std=c99",
+    "-nostdinc",
+    "-fno-builtin",
+    "--target=ppc32-none-eabi",
+    "-fno-short-enums",
+    "-DBUGFIX",
+    "-Isrc/melee",
+    "-Isrc/melee/ft/chara",
+    "-isystemsrc",
+    "-isystemsrc/MSL",
+    "-isystemsrc/Runtime",
+    "-isystemsrc/sysdolphin",
+    "-isystemextern/dolphin/include",
+    "-isystemextern/dolphin/src",
+    f"-isystembuild/{config.version}/include",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Werror=c2x-extensions",
+    "-Werror=implicit-function-declaration",
+    "-Werror=implicit-int",
+    "-Werror=incompatible-pointer-types",
+    "-Werror=pointer-type-mismatch",
+    "-Werror=strict-prototypes",
+    "-Werror=typedef-redefinition",
+    "-Wno-bitfield-constant-conversion",
+    "-Wno-builtin-macro-redefined",
+    "-Wno-for-loop-analysis",
+    "-Wno-format",
+    "-Wno-fortify-source",
+    "-Wno-gnu-folding-constant",
+    "-Wno-incompatible-library-redeclaration",
+    "-Wno-integer-overflow",
+    "-Wno-missing-braces",
+    "-Wno-missing-field-initializers",
+    "-Wno-return-type",
+    "-Wno-self-assign",
+    "-Wno-sign-compare",
+    "-Wno-sometimes-uninitialized",
+    "-Wno-switch",
+    "-Wno-tautological-bitwise-compare",
+    "-Wno-tautological-compare",
+    "-Wno-undefined-internal",
+    "-Wno-uninitialized",
+    "-Wno-unknown-pragmas",
+    "-Wno-unsequenced",
+    "-Wno-unused-but-set-variable",
+    "-Wno-unused-function",
+    "-Wno-unused-parameter",
+    "-Wno-unused-value",
+    "-Wno-unused-variable",
+]
+
+
+config.extra_clang_flags.extend(clang_flags_base)
+
 
 Objects = list[Object]
 
@@ -1885,11 +1944,6 @@ def generate_compile_commands():
     objects = config.objects()
     build_config = load_build_config(config, config.out_path() / "config.json")
 
-    compile_flags = [
-        *Path("compile_flags.txt").read_text().splitlines(),
-        *config.extra_clang_flags,
-    ]
-
     clangd_config = []
 
     def add_unit(build_obj: BuildConfigUnit) -> None:
@@ -1911,7 +1965,7 @@ def generate_compile_commands():
             "output": obj.src_obj_path,
             "arguments": [
                 "clang",
-                *[*compile_flags, *obj.options["extra_clang_flags"]],
+                *[*config.extra_clang_flags, *obj.options["extra_clang_flags"]],
                 "-c",
                 obj.src_path,
                 "-o",
