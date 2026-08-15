@@ -143,15 +143,15 @@ jobs:
             ninja
           ;;
           'clang')
+            set -x
             config_args=""
             # TODO: Add to build image
             apk add --no-cache clang-extra-tools
+            pip install -r reqs/lint.txt
 
             run_configure
 
             ninja 'build/${{matrix.version}}/config.json'
-
-            cat compile_commands.json
 
             pre-commit run clang-check --all-files
           ;;
