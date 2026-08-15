@@ -3,6 +3,7 @@
 
 #include <placeholder.h>
 #include <platform.h>
+#error test
 
 #include "ft/inlines.h" // IWYU pragma: export
 #include "ft/types.h"
