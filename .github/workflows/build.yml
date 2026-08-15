@@ -147,14 +147,16 @@ jobs:
             config_args=""
 
             # TODO: Migrate to nix and install to environment
-            apk add --update --no-cache clang-extra-tools
+            apk add --update --no-cache clang-extra-tools jq
 
             run_configure
 
             ninja 'build/${{matrix.version}}/config.json'
 
-            git ls-files -z -- 'src/**/*.c' 'src/**/*.h' |
-              xargs -0 -P $(nproc) -I {} sh -c '
+            jq -r --arg root "$(realpath .)" \
+              '.[] | select(.file | startswith($root + "/src/")) | .file' \
+              compile_commands.json |
+              xargs -P $(nproc) -I {} sh -c '
                 echo "Checking: {}"
                 clang-check -p . \
                   -extra-arg=-fno-caret-diagnostics \
