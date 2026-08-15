@@ -144,9 +144,9 @@ jobs:
             ninja
           ;;
           'clang')
-            set -x
             config_args=""
 
+            # TODO: Migrate to nix and install to environment
             apk add --update --no-cache clang-extra-tools
 
             run_configure
