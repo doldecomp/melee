@@ -148,8 +148,7 @@ jobs:
             ninja 'build/${{matrix.version}}/config.json'
 
             cat compile_commands.json
-
-
+          ;;
           *) exit 1 ;;
         esac
     - name: Upload map
