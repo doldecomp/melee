@@ -147,7 +147,7 @@ jobs:
             config_args=""
             # TODO: Add to build image
             apk add --no-cache clang-extra-tools
-            pip install -r reqs/lint.txt
+            python -m pip install -r reqs/lint.txt
 
             run_configure
 
