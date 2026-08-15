@@ -31,6 +31,7 @@ jobs:
         fi
 
     - uses: actions/setup-python@v5
+      if: matrix.hook == 'editorconfig-checker'
       with:
         python-version: "3.12"
 
