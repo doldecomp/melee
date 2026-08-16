@@ -62,16 +62,29 @@ static GXColor* (*ifMagnify_803F9828[])(void) = {
     Ground_801C062C, Ground_801C067C, Ground_801C0640,
 };
 
-static s32 ifMagnify_803F984C[0x10] = {
-    0,          0x10001,    0x01020102, 0x02020202, 0x303,      0x10304,
-    0x01020405, 0x02020505, 0x03030606, 0x03040607, 0x04050708, 0x05050808,
-    0x06060606, 0x06070607, 0x07080708, 0x08080808,
+static u8 ifMagnify_803F984C[16][4] = {
+    { 0, 0, 0, 0 }, { 0, 1, 0, 1 }, { 1, 2, 1, 2 }, { 2, 2, 2, 2 },
+    { 0, 0, 3, 3 }, { 0, 1, 3, 4 }, { 1, 2, 4, 5 }, { 2, 2, 5, 5 },
+    { 3, 3, 6, 6 }, { 3, 4, 6, 7 }, { 4, 5, 7, 8 }, { 5, 5, 8, 8 },
+    { 6, 6, 6, 6 }, { 6, 7, 6, 7 }, { 7, 8, 7, 8 }, { 8, 8, 8, 8 },
 };
 
-typedef struct ifMagnifyImageDescBase {
-    u8 pad[0x74];
-    HSD_ImageDesc image_descs[5];
-} ifMagnifyImageDescBase;
+static inline bool ifMagnify_IsHUDVisible(void)
+{
+    if ((gm_16AE_GetUnkData_0()->hud_enabled == 0) || ifAll_IsHUDHidden() ||
+        Camera_80030130())
+    {
+        return false;
+    }
+    return true;
+}
+
+static inline void ifMagnify_GetPlayerColor(GXColor* color, s32 slot)
+{
+    *color =
+        gm_80160968(gm_80160854((u8) slot, Player_GetTeam(slot), gm_8016B168(),
+                                Player_GetPlayerSlotType(slot)));
+}
 
 s32 ifMagnify_802FB6E8(s32 slot)
 {
@@ -82,93 +95,93 @@ s32 ifMagnify_802FB6E8(s32 slot)
     (void) 2.0f;
     (void) 4503599627370496.0;
     if (ifMagnify_802FC998(slot) != 0) {
-        return ifMagnify_804A1DE0.player[slot].state.unk;
+        return ifMagnify_804A1DE0.player[slot].state.edge;
     }
     return 0;
 }
 
-ifMagnifyPlayer* ifMagnify_802FB73C(ifMagnifyPlayer* arg0, Vec2* arg1,
-                                    Vec2* arg2)
+ifMagnifyPlayer* ifMagnify_802FB73C(ifMagnifyPlayer* player, Vec2* pos,
+                                    Vec2* out)
 {
-    f32 temp_f1;
-    f32 temp_f1_2;
-    f32 temp_f1_3;
-    f32 temp_f2;
-    f32 temp_f3;
-    f32 temp_f4;
+    f32 x_clamped;
+    f32 y_clamped;
+    f32 out_x;
+    f32 x;
+    f32 ratio;
+    f32 y;
 
-    temp_f2 = arg1->x;
-    temp_f4 = arg1->y;
-    if (0.0f == temp_f2) {
-        if (temp_f4 > 0.0f) {
-            arg2->y = 162.7f;
+    x = pos->x;
+    y = pos->y;
+    if (0.0f == x) {
+        if (y > 0.0f) {
+            out->y = 162.7f;
         } else {
-            arg2->y = -162.7f;
+            out->y = -162.7f;
         }
-        arg2->x = 0.0f;
+        out->x = 0.0f;
     } else {
-        temp_f3 = temp_f4 / temp_f2;
-        if ((temp_f3 > 0.6438464f) || (temp_f3 < -0.6438464f)) {
-            if (temp_f4 > 0.0f) {
-                arg2->y = 162.7f;
+        ratio = y / x;
+        if ((ratio > 0.6438464f) || (ratio < -0.6438464f)) {
+            if (y > 0.0f) {
+                out->y = 162.7f;
             } else {
-                arg2->y = -162.7f;
+                out->y = -162.7f;
             }
-            temp_f1 = arg2->y;
-            temp_f1 = temp_f1 * temp_f2;
-            temp_f1 /= temp_f4;
-            if (temp_f1 < -252.70001f) {
-                arg2->x = -252.70001f;
-            } else if (temp_f1 > 252.70001f) {
-                arg2->x = 252.70001f;
+            x_clamped = out->y;
+            x_clamped = x_clamped * x;
+            x_clamped /= y;
+            if (x_clamped < -252.70001f) {
+                out->x = -252.70001f;
+            } else if (x_clamped > 252.70001f) {
+                out->x = 252.70001f;
             } else {
-                arg2->x = temp_f1;
+                out->x = x_clamped;
             }
         } else {
-            if (temp_f2 > 0.0f) {
-                arg2->x = 252.70001f;
+            if (x > 0.0f) {
+                out->x = 252.70001f;
             } else {
-                arg2->x = -252.70001f;
+                out->x = -252.70001f;
             }
-            temp_f1_2 = arg2->x;
-            temp_f1_2 = temp_f1_2 * temp_f4;
-            temp_f1_2 /= temp_f2;
-            if (temp_f1_2 < -162.7f) {
-                arg2->y = -162.7f;
-            } else if (temp_f1_2 > 162.7f) {
-                arg2->y = 162.7f;
+            y_clamped = out->x;
+            y_clamped = y_clamped * y;
+            y_clamped /= x;
+            if (y_clamped < -162.7f) {
+                out->y = -162.7f;
+            } else if (y_clamped > 162.7f) {
+                out->y = 162.7f;
             } else {
-                arg2->y = temp_f1_2;
+                out->y = y_clamped;
             }
         }
     }
 
-    temp_f1_3 = arg2->x;
-    temp_f2 = -252.70001f;
-    if (temp_f1_3 == temp_f2) {
-        arg0->state.unk = 2;
-        return arg0;
+    out_x = out->x;
+    x = -252.70001f;
+    if (out_x == x) {
+        player->state.edge = 2;
+        return player;
     }
-    temp_f2 = 252.70001f;
-    if (temp_f1_3 == temp_f2) {
-        arg0->state.unk = 4;
-        return arg0;
+    x = 252.70001f;
+    if (out_x == x) {
+        player->state.edge = 4;
+        return player;
     }
-    temp_f2 = 162.7f;
-    if (arg2->y == temp_f2) {
-        arg0->state.unk = 1;
-        return arg0;
+    x = 162.7f;
+    if (out->y == x) {
+        player->state.edge = 1;
+        return player;
     }
-    arg0->state.unk = 3;
-    return arg0;
+    player->state.edge = 3;
+    return player;
 }
 
-void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
+void ifMagnify_802FB8C0(HSD_GObj* gobj, int code)
 {
     UNUSED u8 top_pad[8];
     S32Vec2 screen_pos;
-    Vec2 out;
-    Vec2 pos;
+    Vec2 edge_pos;
+    Vec2 dir;
     Vec3 translate;
     GXColor color;
     GXColor color_copy;
@@ -179,46 +192,38 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
     bool is_colored;
     bool should_display;
     s32 arrow_kind;
-    u8 operand_pad[12];
+    u8 operand_pad[8];
 
-    if (arg1 != 0) {
+    if (code != 0) {
         return;
     }
 
-    player = arg0->user_data;
+    player = gobj->user_data;
     slot = player - ifMagnify_804A1DE0.player;
     is_colored = false;
-    if ((gm_16AE_GetUnkData_0()->hud_enabled == 0) || ifAll_IsHUDHidden() ||
-        Camera_80030130())
-    {
-        should_display = false;
-    } else {
-        should_display = true;
-    }
+    should_display = ifMagnify_IsHUDVisible();
     if (should_display && player->state.is_offscreen) {
         fighter_gobj = Player_GetEntity(slot);
         if (fighter_gobj != NULL) {
             ftLib_80086A58(fighter_gobj, &screen_pos);
-            pos.x = screen_pos.x - 320.0f;
-            pos.y = -((f32) screen_pos.y - 240.0f);
+            dir.x = screen_pos.x - 320.0f;
+            dir.y = -((f32) screen_pos.y - 240.0f);
 
-            HSD_JObjSetRotationZ(player->jobj, atan2f(pos.y, pos.x));
+            HSD_JObjSetRotationZ(player->jobj, atan2f(dir.y, dir.x));
 
-            ifMagnify_802FB73C(player, &pos, &out);
-            translate.x = 0.09125f * out.x;
-            translate.y = 0.1f * out.y;
+            ifMagnify_802FB73C(player, &dir, &edge_pos);
+            translate.x = 0.09125f * edge_pos.x;
+            translate.y = 0.1f * edge_pos.y;
             translate.z = 0.0f;
             HSD_JObjSetTranslate((HSD_JObj*) player->gobj->hsd_obj,
                                  &translate);
 
-            HSD_GObj_JObjCallback(arg0, arg1);
-            if ((player->state.unk == 4) || (player->state.unk == 2)) {
-                color = gm_80160968(
-                    gm_80160854((u8) slot, Player_GetTeam(slot), gm_8016B168(),
-                                Player_GetPlayerSlotType(slot)));
+            HSD_GObj_JObjCallback(gobj, code);
+            if ((player->state.edge == 4) || (player->state.edge == 2)) {
+                ifMagnify_GetPlayerColor(&color, slot);
                 cp = &color_copy;
                 color_copy = color;
-                if (player->state.unk == 2) {
+                if (player->state.edge == 2) {
                     arrow_kind = 1;
                 } else {
                     arrow_kind = 2;
@@ -263,13 +268,12 @@ static inline void ifMagnify_GetCornerColors(GXColor* colors, Vec3* world_pos)
         } else {
             x_class = 2.0f;
         }
-        color_ids =
-            (u8*) &ifMagnify_803F984C[(s32) x_class + ((s32) y_class * 4)];
+        color_ids = ifMagnify_803F984C[((s32) y_class * 4) + (s32) x_class];
         colors[j] = *ifMagnify_803F9828[color_ids[j]]();
     }
 }
 
-void ifMagnify_802FBBDC(HSD_GObj* arg0)
+void ifMagnify_802FBBDC(HSD_GObj* gobj)
 {
     UNUSED u8 top_pad[8];
     int i;
@@ -304,18 +308,12 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
         magnify->player[i].state.is_offscreen = 0;
     }
 
-    if ((gm_16AE_GetUnkData_0()->hud_enabled == 0) || ifAll_IsHUDHidden() ||
-        Camera_80030130())
-    {
-        should_display = false;
-    } else {
-        should_display = true;
-    }
+    should_display = ifMagnify_IsHUDVisible();
     if (should_display) {
-        cobj = arg0->hsd_obj;
+        cobj = gobj->hsd_obj;
         HSD_CObjGetOrtho(cobj, &top, &bottom, &left, &right);
         if (HSD_CObjSetCurrent(cobj) != 0) {
-            HSD_GObj_80390ED0(arg0, 7);
+            HSD_GObj_80390ED0(gobj, 7);
             HSD_CObjEndCurrent();
         }
 
@@ -339,7 +337,7 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
                 continue;
             }
 
-            Player_80036978(i, (s32) &world_pos);
+            Player_80036978(i, &world_pos);
             is_outside = true;
             if (!(world_pos.x < Stage_GetCamBoundsLeftOffset()) &&
                 !(world_pos.x > Stage_GetCamBoundsRightOffset()))
@@ -448,7 +446,6 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
 
         HSD_CObjSetOrtho(cobj, top, bottom, left, right);
     }
-    PAD_STACK(4);
 }
 
 void ifMagnify_802FC3BC(void) {}
@@ -466,27 +463,24 @@ void ifMagnify_802FC3C0(s32 slot)
         HSD_GObjPLink_80390228(player->gobj);
     }
 
-    gobj = GObj_Create(0xE, 0xF, 0);
+    gobj = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
     GObj_InitUserData(gobj, 0xE, (void (*)(void*)) ifMagnify_802FC3BC, player);
 
     jobj = HSD_JObjLoadJoint(
         (*(DynamicModelDesc**) ifMagnify_804A1DE0.model_desc)->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
-    GObj_SetupGXLink(gobj, (void (*)(HSD_GObj*, int)) ifMagnify_802FB8C0, 0xB,
-                     0);
+    GObj_SetupGXLink(gobj, ifMagnify_802FB8C0, 0xB, 0);
 
     lb_80011E24(jobj, &child, 2, -1);
     if (slot == 0) {
         player->idesc = child->u.dobj->next->mobj->tobj->imagedesc;
     } else {
-        ifMagnifyImageDescBase* base =
-            (ifMagnifyImageDescBase*) &ifMagnify_804A1DE0;
+        ifMagnify* base = &ifMagnify_804A1DE0;
 
         base->image_descs[slot - 1] = *ifMagnify_804A1DE0.player[0].idesc;
         player->idesc =
-            (base =
-                 (ifMagnifyImageDescBase*) ((HSD_ImageDesc*) &ifMagnify_804A1DE0 +
-                                            (slot - 1)))
+            (base = (ifMagnify*) ((HSD_ImageDesc*) &ifMagnify_804A1DE0 +
+                                  (slot - 1)))
                 ->image_descs;
         player->idesc->image_ptr = HSD_MemAlloc(
             (GXGetTexBufferSize(player->idesc->width, player->idesc->height,
@@ -500,12 +494,7 @@ void ifMagnify_802FC3C0(s32 slot)
 
     {
         GXColor color;
-        u8 teams_enabled;
-        u8 slot_type;
-        slot_type = Player_GetPlayerSlotType(slot);
-        teams_enabled = gm_8016B168();
-        color = gm_80160968(gm_80160854((u8) slot, Player_GetTeam(slot),
-                                        teams_enabled, slot_type));
+        ifMagnify_GetPlayerColor(&color, slot);
 
         mobj = player->jobj->u.dobj->mobj;
         mobj->mat->diffuse.r = color.r;
@@ -525,7 +514,7 @@ void ifMagnify_802FC3C0(s32 slot)
 
 void ifMagnify_802FC618(void)
 {
-    u8* player0 = (u8*) &ifMagnify_804A1DE0 + 0x14;
+    ifMagnifyPlayer* player0 = &ifMagnify_804A1DE0.player[0];
     HSD_GObj* gobj;
     HSD_CObj* cobj;
     HSD_ImageDesc* idesc;
@@ -534,21 +523,21 @@ void ifMagnify_802FC618(void)
     int pad;
     HSD_RectS16 viewport;
 
-    gobj = GObj_Create(14, 15, 0);
+    gobj = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
     cobj = lb_80013B14((HSD_CameraDescPerspective*) &ifMagnify_803F97E8);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(gobj, (GObj_RenderFunc) (Event) ifMagnify_802FBBDC, 0);
     gobj->gxlink_prios = 0x10;
 
-    idesc = *(HSD_ImageDesc**) (player0 + 8);
+    idesc = player0->idesc;
     half_height = 0.1f * idesc->height;
     half_width = 0.1f * idesc->width;
     HSD_CObjSetOrtho(cobj, half_height, -half_height, -half_width, half_width);
 
     viewport.xmin = 0;
-    viewport.xmax = (*(HSD_ImageDesc**) (player0 + 8))->width;
+    viewport.xmax = player0->idesc->width;
     viewport.ymin = 0;
-    viewport.ymax = (*(HSD_ImageDesc**) (player0 + 8))->height;
+    viewport.ymax = player0->idesc->height;
     HSD_CObjSetViewport(cobj, &viewport);
     HSD_CObjSetScissorx4(cobj, (u16) viewport.xmin, (u16) viewport.xmax,
                          (u16) viewport.ymin, (u16) viewport.ymax);
@@ -559,11 +548,14 @@ void ifMagnify_802FC750(void)
     ifMagnify* base = &ifMagnify_804A1DE0;
     s32 i;
 
+    /// @todo Member accesses in the body fold into the condition's address.
     for (i = 0; i < 6; i++) {
-        if (*(HSD_GObj**) ((u8*) base + (i << 4) + 0x14) != NULL) {
+        if (base->player[i].gobj != NULL) {
             HSD_GObjPLink_80390228(
-                *(HSD_GObj**) ((u32) base + (i << 4) + 0x14));
-            *(HSD_GObj**) ((u32) base + (i << 4) + 0x14) = NULL;
+                *(HSD_GObj**) ((u32) base + i * (s32) sizeof(ifMagnifyPlayer) +
+                               (s32) offsetof(ifMagnify, player)));
+            *(HSD_GObj**) ((u32) base + i * (s32) sizeof(ifMagnifyPlayer) +
+                           (s32) offsetof(ifMagnify, player)) = NULL;
         }
     }
 }
@@ -622,22 +614,18 @@ void ifMagnify_802FC870(void)
 
 void ifMagnify_802FC8E8(void)
 {
-    ifMagnify_804A1DE0.player[0].state.ignore_offscreen = 1;
-    ifMagnify_804A1DE0.player[1].state.ignore_offscreen = 1;
-    ifMagnify_804A1DE0.player[2].state.ignore_offscreen = 1;
-    ifMagnify_804A1DE0.player[3].state.ignore_offscreen = 1;
-    ifMagnify_804A1DE0.player[4].state.ignore_offscreen = 1;
-    ifMagnify_804A1DE0.player[5].state.ignore_offscreen = 1;
+    int i;
+    for (i = 0; i < 6; i++) {
+        ifMagnify_804A1DE0.player[i].state.ignore_offscreen = 1;
+    }
 }
 
 void ifMagnify_802FC940(void)
 {
-    ifMagnify_804A1DE0.player[0].state.ignore_offscreen = 0;
-    ifMagnify_804A1DE0.player[1].state.ignore_offscreen = 0;
-    ifMagnify_804A1DE0.player[2].state.ignore_offscreen = 0;
-    ifMagnify_804A1DE0.player[3].state.ignore_offscreen = 0;
-    ifMagnify_804A1DE0.player[4].state.ignore_offscreen = 0;
-    ifMagnify_804A1DE0.player[5].state.ignore_offscreen = 0;
+    int i;
+    for (i = 0; i < 6; i++) {
+        ifMagnify_804A1DE0.player[i].state.ignore_offscreen = 0;
+    }
 }
 
 bool ifMagnify_802FC998(s32 ply_slot)

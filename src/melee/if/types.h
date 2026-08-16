@@ -9,6 +9,7 @@
 #include <baselib/forward.h>
 
 #include <dolphin/gx.h>
+#include <baselib/tobj.h>
 
 struct IfDamageFlags {
     u8 explode_animation : 1;
@@ -116,7 +117,7 @@ typedef struct ifMagnifyPlayer {
     struct {
         u8 is_offscreen : 1;
         u8 ignore_offscreen : 1;
-        u8 unk : 6;
+        u8 edge : 6;
     } state;
 } ifMagnifyPlayer;
 
@@ -127,7 +128,7 @@ struct ifMagnify {
     int xC;
     int x10;
     ifMagnifyPlayer player[6];
-    u8 image_descs[5 * 0x18];
+    HSD_ImageDesc image_descs[5];
     u8 pad[0xF0 - 0xEC];
 };
 
