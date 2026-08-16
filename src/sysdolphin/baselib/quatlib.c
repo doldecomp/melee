@@ -2,8 +2,8 @@
 
 #include <placeholder.h>
 
-#include <trigf.h>
 #include <math.h>
+#include <trigf.h>
 
 s32 MatToQuat(Mtx m, Quaternion* q)
 {

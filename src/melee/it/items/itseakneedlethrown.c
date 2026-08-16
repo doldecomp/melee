@@ -17,10 +17,10 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
+#include <math.h>
 #include <trigf.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
-#include <math.h>
 
 ItemStateTable it_803F6F50[] = {
     { 0, itSeakneedlethrown_UnkMotion0_Anim,

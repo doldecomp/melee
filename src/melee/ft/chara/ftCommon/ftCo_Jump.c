@@ -1,7 +1,5 @@
 #include "ftCo_Jump.h"
 
-#include <math.h>
-
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
@@ -32,6 +30,7 @@
 #include "ftCommon/ftCo_SpecialAir.h"
 #include "ftPeach/ftPe_Float.h"
 
+#include <math.h>
 #include <trigf.h>
 
 ftCo_JumpInput ftCo_Jump_GetInput(Fighter_GObj* gobj)

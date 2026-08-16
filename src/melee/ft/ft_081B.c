@@ -32,9 +32,9 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
-#include <math.h>
 
 void ft_80081B38(Fighter_GObj* gobj)
 {

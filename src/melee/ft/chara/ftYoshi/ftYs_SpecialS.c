@@ -4,7 +4,6 @@
 
 #include "ftYs_Init.h"
 #include "ftYs_SpecialHi.h"
-#include <math.h>
 #include "placeholder.h"
 
 #include "baselib/forward.h"
@@ -38,6 +37,7 @@
 #include "lb/lb_00B0.h"
 #include "mp/mplib.h"
 
+#include <math.h>
 #include <trigf.h>
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>

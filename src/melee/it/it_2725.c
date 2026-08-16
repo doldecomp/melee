@@ -6,7 +6,6 @@
 #include "iteffect.h"
 #include "ithitbox.h"
 #include "itmaplib.h"
-#include <math.h>
 
 #include "baselib/jobj.h"
 #include "baselib/random.h"
@@ -24,6 +23,7 @@
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
 
+#include <math.h>
 #include <baselib/gobjobject.h>
 
 extern f32 it_804DC73C;

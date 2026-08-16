@@ -1,7 +1,6 @@
 #include "itsonans.h"
 
 #include "inlines.h"
-#include <math.h>
 
 #include "ef/eflib.h"
 #include "it/inlines.h"
@@ -14,6 +13,8 @@
 #include "it/item.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
+
+#include <math.h>
 
 ItemStateTable it_803F7CA0[] = {
     { 0, itSonans_UnkMotion0_Anim, itSonans_UnkMotion0_Phys,

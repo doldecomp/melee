@@ -14,6 +14,8 @@
 #include "ty/tylist.h"
 
 #include <printf.h>
+#include <stdio.h>
+#include <string.h>
 #include <dolphin/mtx.h>
 #include <baselib/archive.h>
 #include <baselib/cobj.h>
@@ -31,8 +33,6 @@
 #include <baselib/particle.h>
 #include <baselib/random.h>
 #include <baselib/sislib.h>
-#include <stdio.h>
-#include <string.h>
 
 /// .data
 /* 3F9A00 */ static int un_803F9A00[] = {

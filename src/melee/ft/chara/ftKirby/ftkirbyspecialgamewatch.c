@@ -24,10 +24,10 @@
 #include "it/items/itkirbygamewatchchefpan.h"
 #include "lb/lb_00B0.h"
 
+#include <math.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
-#include <math.h>
 
 static MotionFlags const ftKb_MF_GwSpecialN_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit;

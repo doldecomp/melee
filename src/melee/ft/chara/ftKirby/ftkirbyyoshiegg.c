@@ -21,10 +21,10 @@
 #include "ftKirby/ftkirbyspecialdonkey.h"
 #include "lb/lb_00B0.h"
 
+#include <math.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
-#include <math.h>
 
 static void fn_8010AA64(Fighter_GObj* gobj)
 {

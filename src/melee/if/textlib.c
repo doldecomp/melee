@@ -11,8 +11,11 @@
 #include "mn/inlines.h"
 #include "ty/toy.h"
 
+#include <math.h>
 #include <printf.h>
 #include <stdarg.h>
+#include <stdio.h>
+#include <string.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 #include <baselib/fog.h>
@@ -26,9 +29,6 @@
 #include <baselib/memory.h>
 #include <baselib/particle.h>
 #include <baselib/sislib.h>
-#include <math.h>
-#include <stdio.h>
-#include <string.h>
 
 struct unk_series {
     s16 values[26];

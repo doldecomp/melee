@@ -9,7 +9,6 @@
 #include "ftCo_AttackS4.h"
 #include "ftCo_Guard.h"
 #include "ftCo_SpecialS.h"
-#include <math.h>
 
 #include <platform.h>
 
@@ -34,6 +33,7 @@
 
 #include <baselib/forward.h>
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 /* 09A410 */ static void ftCo_8009A410(Fighter_GObj* gobj);

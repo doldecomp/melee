@@ -12,8 +12,8 @@
 #include "it/items/types.h"
 #include "it/itmaplib.h"
 #include "it/itzako.h"
-#include <math.h>
 
+#include <math.h>
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>

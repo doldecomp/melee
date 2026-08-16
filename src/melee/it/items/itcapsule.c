@@ -1,7 +1,5 @@
 #include "itcapsule.h"
 
-#include <math.h>
-
 #include <platform.h>
 
 #include "it/inlines.h"
@@ -16,6 +14,7 @@
 #include "it/types.h"
 #include "lb/lb_00F9.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>

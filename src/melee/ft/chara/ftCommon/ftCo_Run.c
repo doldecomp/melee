@@ -1,7 +1,5 @@
 #include "ftCo_Run.h"
 
-#include <math.h>
-
 #include <placeholder.h>
 
 #include "ft/fighter.h"
@@ -23,6 +21,8 @@
 #include "ftCommon/ftCo_RunBrake.h"
 #include "ftCommon/ftCo_SpecialS.h"
 #include "ftCommon/ftCo_TurnRun.h"
+
+#include <math.h>
 
 bool fn_800CA5F0(Fighter_GObj* gobj)
 {

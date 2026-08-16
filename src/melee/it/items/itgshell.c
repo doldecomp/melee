@@ -21,8 +21,8 @@
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 
-#include <sysdolphin/baselib/random.h>
 #include <math.h>
+#include <sysdolphin/baselib/random.h>
 
 typedef struct itGShell_Attrs {
     float x0;

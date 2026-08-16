@@ -9,8 +9,8 @@
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 
-#include <baselib/random.h>
 #include <math.h>
+#include <baselib/random.h>
 
 ItemStateTable it_803F93A8[] = {
     { 0, itCrazyhandbomb_UnkMotion0_Anim, itCrazyhandbomb_UnkMotion0_Phys,

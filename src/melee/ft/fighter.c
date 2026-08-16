@@ -82,6 +82,7 @@
 #include "pl/pltrick.h"
 #include "sfx/crowdsfx.h"
 
+#include <math.h>
 #include <math_ppc.h>
 #include <trigf.h>
 #include <dolphin/gx.h>
@@ -97,7 +98,6 @@
 #include <baselib/lobj.h>
 #include <baselib/mtx.h>
 #include <baselib/random.h>
-#include <math.h>
 
 extern struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX];
 

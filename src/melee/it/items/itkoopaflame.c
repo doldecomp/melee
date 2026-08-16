@@ -10,6 +10,7 @@
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
 
+#include <math.h>
 #include <trigf.h>
 #include <sysdolphin/baselib/random.h>
 #include <melee/db/db.h>
@@ -23,7 +24,6 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/lb/lbvector.h>
-#include <math.h>
 
 #define itkpf_Floor 1
 #define itkpf_Ceiling 2

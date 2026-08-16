@@ -22,10 +22,10 @@
 #include "ftKirby/ftkirby.h"
 #include "it/items/itpikachutjoltground.h"
 
+#include <math.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
-#include <math.h>
 
 void ftKb_SpecialNPk_800F9FD4(Fighter_GObj* gobj)
 {

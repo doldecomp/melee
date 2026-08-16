@@ -25,8 +25,8 @@
 #include "mp/forward.h"
 
 #include "mp/mplib.h"
-#include <math.h>
 
+#include <math.h>
 #include <math_ppc.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>

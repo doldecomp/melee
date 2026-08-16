@@ -9,7 +9,6 @@
 #include "ftCo_Guard.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_SpecialS.h"
-#include <math.h>
 
 #include <platform.h>
 
@@ -42,6 +41,7 @@
 
 #include <baselib/forward.h>
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 typedef enum cmd_var_idx {

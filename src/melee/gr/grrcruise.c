@@ -6,7 +6,6 @@
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
-#include <math.h>
 #include "placeholder.h"
 #include "stage.h"
 #include "types.h"
@@ -21,6 +20,7 @@
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 
+#include <math.h>
 #include <math_ppc.h>
 #include <trigf.h>
 #include <baselib/archive.h>

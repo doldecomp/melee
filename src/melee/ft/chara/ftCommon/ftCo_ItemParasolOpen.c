@@ -1,7 +1,6 @@
 #include "ftCo_ItemParasolOpen.h"
 
 #include "ftCo_ItemParasolFall.h"
-#include <math.h>
 
 #include "ft/fighter.h"
 
@@ -24,6 +23,8 @@
 #include "ftCommon/inlines.h"
 
 #include "ftPeach/forward.h"
+
+#include <math.h>
 
 bool ftCo_800CEE70(Fighter_GObj* gobj)
 {

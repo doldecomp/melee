@@ -2,11 +2,11 @@
 
 #include "lbcardnew.static.h"
 
+#include <strtoul.h> // IWYU pragma: keep
 #include <dolphin/card.h>
 #include <baselib/hsd_3A94.h>
 #include <sysdolphin/baselib/hsd_3B27.h>
 #include <sysdolphin/baselib/memory.h>
-#include <strtoul.h> // IWYU pragma: keep
 
 #define _p(x) (lb_80432A68.x)
 

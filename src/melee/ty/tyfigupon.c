@@ -1,6 +1,5 @@
 #include "tyfigupon.h"
 
-#include <math.h>
 #include "placeholder.h"
 #include "platform.h"
 #include "stddef.h"
@@ -43,12 +42,12 @@
 #include "lb/lbvector.h"
 #include "mn/inlines.h"
 #include "mn/mnmain.h"
-#include <math.h>
 #include "sc/types.h"
 #include "ty/inlines.h"
 #include "ty/toy.h"
 #include "ty/types.h"
 
+#include <math.h>
 #include <math_ppc.h>
 #include <trigf.h>
 

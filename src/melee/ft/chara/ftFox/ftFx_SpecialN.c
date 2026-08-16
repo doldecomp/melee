@@ -1,7 +1,6 @@
 #include "ftFx_SpecialN.h"
 
 #include "ftFx_Init.h"
-#include <math.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -26,6 +25,7 @@
 #include "it/items/itfoxblaster.h"
 #include "lb/lb_00B0.h"
 
+#include <math.h>
 #include <trigf.h>
 #include <baselib/debug.h>
 #include <melee/it/items/itfoxlaser.h>

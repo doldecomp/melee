@@ -1,7 +1,6 @@
 #include "item.h"
 
 #include "it_26B1.h"
-#include <math.h>
 
 #include "cm/camera.h"
 #include "db/db.h"
@@ -33,6 +32,7 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/class.h>
 #include <baselib/debug.h>

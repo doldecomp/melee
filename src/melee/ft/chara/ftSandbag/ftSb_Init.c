@@ -1,7 +1,5 @@
 #include "ftSb_Init.h"
 
-#include <math.h>
-
 #include <platform.h>
 
 #include "forward.h"
@@ -12,6 +10,8 @@
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 #include "lb/lb_00B0.h"
+
+#include <math.h>
 
 MotionState ftSb_Init_MotionStateTable[ftSb_MS_SelfCount] = {
     {

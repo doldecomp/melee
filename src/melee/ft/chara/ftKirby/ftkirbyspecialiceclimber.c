@@ -26,10 +26,10 @@
 #include "it/items/itclimbersice.h"
 #include "lb/lb_00B0.h"
 
+#include <math.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
-#include <math.h>
 
 /* 1090D4 */ static void fn_801090D4(Fighter_GObj*);
 

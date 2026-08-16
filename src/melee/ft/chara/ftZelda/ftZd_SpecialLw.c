@@ -1,7 +1,5 @@
 #include "ftZd_SpecialLw.h"
 
-#include <math.h>
-
 #include <platform.h>
 
 #include "ef/efsync.h"
@@ -23,6 +21,7 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 /// 8013ADB4 - 8013AE30 (124 bytes)

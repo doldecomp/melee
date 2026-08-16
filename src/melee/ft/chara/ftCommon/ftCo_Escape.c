@@ -1,7 +1,6 @@
 #include "ftCo_Escape.h"
 
 #include "ftCo_ItemThrow.h"
-#include <math.h>
 
 #include <platform.h>
 
@@ -25,6 +24,7 @@
 #include "ftYoshi/ftYs_Guard.h"
 #include "ftYoshi/ftYs_Init.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 /* 0992A8 */ static void ftCo_800992A8(Fighter_GObj* gobj, FtMotionId msid,

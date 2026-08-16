@@ -34,13 +34,13 @@
 #include "lb/lbdvd.h"
 #include "pl/player.h"
 
+#include <math.h>
 #include <stddef.h>
 #include <trigf.h>
 #include <baselib/gobj.h>
 #include <baselib/id.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
-#include <math.h>
 
 void ftAnim_80070458(Fighter* fp, CostumeTObjList*, u32 tobj_idx, float frame);
 void fn_800F9260(HSD_GObj*);

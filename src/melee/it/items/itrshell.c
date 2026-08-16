@@ -17,8 +17,9 @@
 #include "it/item.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
-#include <math.h>
 #include "sysdolphin/baselib/random.h"
+
+#include <math.h>
 
 typedef struct itRShell_Attrs {
     float x0;

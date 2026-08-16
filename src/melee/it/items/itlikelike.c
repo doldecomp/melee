@@ -1,7 +1,5 @@
 #include "itlikelike.h"
 
-#include <math.h>
-
 #include <placeholder.h>
 #include <platform.h>
 
@@ -26,6 +24,7 @@
 #include "lb/types.h"
 #include "mp/mpcoll.h"
 
+#include <math.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
 

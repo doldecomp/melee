@@ -4,13 +4,14 @@
 #include "it_3F14.h"
 #include "iteffect.h"
 #include "ithitbox.h"
-#include <math.h>
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
+
+#include <math.h>
 
 static void sdata2_order(void)
 {

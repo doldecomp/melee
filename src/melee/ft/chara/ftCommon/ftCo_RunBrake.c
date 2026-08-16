@@ -1,7 +1,5 @@
 #include "ftCo_RunBrake.h"
 
-#include <math.h>
-
 #include <placeholder.h>
 
 #include "ft/fighter.h"
@@ -20,6 +18,8 @@
 #include "ftCommon/ftCo_Jump.h"
 #include "ftCommon/ftCo_Squat.h"
 #include "ftCommon/ftCo_TurnRun.h"
+
+#include <math.h>
 
 bool ftCo_RunBrake_CheckInput(Fighter_GObj* gobj)
 {

@@ -14,8 +14,8 @@
 #include "it/item.h"
 #include "it/items/itnesspkthundertrail.h"
 #include "lb/lbvector.h"
-#include <math.h>
 
+#include <math.h>
 #include <string.h>
 #include <trigf.h>
 

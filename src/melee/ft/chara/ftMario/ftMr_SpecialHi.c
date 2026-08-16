@@ -1,7 +1,6 @@
 #include "ftMr_SpecialHi.h"
 
 #include "inlines.h"
-#include <math.h>
 #include "types.h"
 
 #include <platform.h>
@@ -16,6 +15,7 @@
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Landing.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 void ftMr_SpecialHi_Enter(HSD_GObj* gobj)

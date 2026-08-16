@@ -17,9 +17,9 @@
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 
+#include <math.h>
 #include <trigf.h>
 #include <baselib/jobj.h>
-#include <math.h>
 
 typedef struct ArwingLaserAttr {
     /* +0 */ ItemAttr* x0;

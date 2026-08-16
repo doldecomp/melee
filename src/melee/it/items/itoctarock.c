@@ -1,7 +1,6 @@
 #include "itoctarock.h"
 
 #include "inlines.h"
-#include <math.h>
 #include "placeholder.h"
 
 #include "cm/camera.h"
@@ -19,6 +18,8 @@
 #include "lb/lb_00B0.h"
 #include "mp/mpcoll.h"
 #include "sysdolphin/baselib/random.h"
+
+#include <math.h>
 
 ItemStateTable it_803F8B48[] = {
     {

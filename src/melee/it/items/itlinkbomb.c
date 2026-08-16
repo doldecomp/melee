@@ -20,6 +20,7 @@
 #include "it/itmaplib.h"
 #include "lb/lb_00F9.h"
 #include "mp/mpcoll.h"
+
 #include <math.h>
 
 const Vec3 it_803B8640 = { 0 };

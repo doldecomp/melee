@@ -1,7 +1,6 @@
 #include "ftLk_SpecialN.h"
 
 #include "ftLk_Init.h"
-#include <math.h>
 #include "placeholder.h"
 
 #include <platform.h>
@@ -28,6 +27,7 @@
 #include "it/items/itlinkbow.h"
 #include "lb/lb_00B0.h"
 
+#include <math.h>
 #include <trigf.h>
 #include <dolphin/mtx.h>
 

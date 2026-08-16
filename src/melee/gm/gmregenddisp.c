@@ -14,6 +14,7 @@
 #include "ty/tydisplay.h"
 #include "ty/types.h"
 
+#include <math.h>
 #include <baselib/archive.h>
 #include <baselib/cobj.h>
 #include <baselib/debug.h>
@@ -25,7 +26,6 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/random.h>
-#include <math.h>
 
 void fn_801A7FB4(HSD_GObj* gobj)
 {

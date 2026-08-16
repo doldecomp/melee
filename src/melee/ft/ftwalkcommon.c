@@ -3,7 +3,6 @@
 #include "fighter.h"
 #include "ft_081B.h"
 #include "ftcommon.h"
-#include <math.h>
 
 #include "ft/forward.h"
 
@@ -16,6 +15,7 @@
 
 #include <baselib/forward.h>
 
+#include <math.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/debug.h>

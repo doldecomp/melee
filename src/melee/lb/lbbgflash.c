@@ -43,6 +43,7 @@ typedef struct BgFlashData {
 
 extern BgFlashData lbl_80433658;
 
+#include <math.h>
 #include <trigf.h>
 #include <dolphin/gx.h>
 #include <baselib/cobj.h>
@@ -59,7 +60,6 @@ extern BgFlashData lbl_80433658;
 #include <baselib/quatlib.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbvector.h>
-#include <math.h>
 
 /* 021C18 */ static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd,
                                      int arg2);

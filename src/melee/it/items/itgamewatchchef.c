@@ -1,7 +1,6 @@
 #include "itgamewatchchef.h"
 
 #include "inlines.h"
-#include <math.h>
 #include "placeholder.h"
 
 #include "db/db.h"
@@ -12,6 +11,7 @@
 #include "it/item.h"
 #include "it/itzako.h"
 
+#include <math.h>
 #include <baselib/jobj.h>
 
 ItemStateTable it_803F79E0[] = {

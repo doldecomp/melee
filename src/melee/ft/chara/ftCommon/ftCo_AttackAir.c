@@ -3,7 +3,6 @@
 #include "ftCo_AirCatch.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_LandingAir.h"
-#include <math.h>
 
 #include <platform.h>
 
@@ -28,6 +27,7 @@
 #include "ftLink/ftLk_AttackAir.h"
 #include "it/it_26B1.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 /* 08CE0C */ static void decideFighter(Fighter_GObj* gobj);

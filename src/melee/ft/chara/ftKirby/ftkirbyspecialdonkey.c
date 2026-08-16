@@ -28,12 +28,12 @@
 #include "ftDonkey/forward.h"
 #include "ftKirby/forward.h"
 
+#include <math.h>
 #include <stddef.h>
 #include <trigf.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
-#include <math.h>
 
 /// @todo This is some kind of inline within #ftKb_DkSpecialN_Anim that's
 ///       shared by #ftKb_DkSpecialAirN_Anim

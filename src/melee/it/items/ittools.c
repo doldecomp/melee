@@ -1,7 +1,6 @@
 #include "ittools.h"
 
 #include "inlines.h"
-#include <math.h>
 #include "placeholder.h"
 
 #include "ft/ftlib.h"
@@ -13,6 +12,7 @@
 #include "it/item.h"
 #include "it/ithitbox.h"
 
+#include <math.h>
 #include <baselib/jobj.h>
 
 ItemStateTable it_803F9260[] = {

@@ -1,7 +1,5 @@
 #include "ftFx_SpecialLw.h"
 
-#include <math.h>
-
 #include <platform.h>
 
 #include "ef/efsync.h"
@@ -22,6 +20,7 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 static MotionFlags const ftFx_MF_SpecialLw_Coll =

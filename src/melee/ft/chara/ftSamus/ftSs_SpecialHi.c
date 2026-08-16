@@ -1,7 +1,6 @@
 #include "ftSs_SpecialHi.h"
 
 #include "inlines.h"
-#include <math.h>
 
 #include <platform.h>
 
@@ -20,6 +19,7 @@
 #include "ftCommon/ftCo_Landing.h"
 #include "ftSamus/types.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 void ftSs_SpecialHi_Enter(HSD_GObj* gobj)

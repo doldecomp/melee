@@ -1,7 +1,5 @@
 #include <math.h>
 
-#include <platform.h>
-
 #define EXP_MASK 0x7F800000
 #define EXP_ZERO 0x3F800000 // hex representation of (float)0.0f
 #define MANT_MASK 0x007FFFFF

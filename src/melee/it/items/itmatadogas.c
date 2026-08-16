@@ -13,8 +13,8 @@
 #include "it/item.h"
 #include "it/itmaplib.h"
 
-#include <baselib/random.h>
 #include <math.h>
+#include <baselib/random.h>
 
 ItemStateTable it_803F7B58[] = {
     { 0, it_802CB118, it_802CB14C, it_802CB150 },

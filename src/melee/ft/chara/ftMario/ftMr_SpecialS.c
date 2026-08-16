@@ -1,7 +1,6 @@
 #include "ftMr_SpecialS.h"
 
 #include "ftMr_Init.h"
-#include <math.h>
 #include "types.h"
 
 #include <platform.h>
@@ -23,6 +22,7 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 static void setCallbacks(Fighter* fp)
