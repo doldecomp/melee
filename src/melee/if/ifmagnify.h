@@ -22,6 +22,5 @@
 /* 2FC940 */ void ifMagnify_802FC940(void);
 /* 2FC998 */ bool ifMagnify_802FC998(s32 ply_slot);
 /* 4A1DE0 */ extern ifMagnify ifMagnify_804A1DE0;
-/* 4D57E8 */ extern char ifMagnify_804D57E8[];
 
 #endif

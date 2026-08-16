@@ -30,24 +30,29 @@
 #include <baselib/memory.h>
 #include <baselib/mobj.h>
 #include <baselib/tobj.h>
+#include <baselib/wobj.h>
 
-/* 3F97E8 */ extern HSD_CameraDescPerspective ifMagnify_803F97E8;
-static char ifMagnify_803F988C[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
-static char ifMagnify_804D57F0[] = "jobj.h";
-static char ifMagnify_804D57F8[] = "jobj";
-/* 4DDB08 */ extern f32 ifMagnify_804DDB08;
-/* 4DDB28 */ extern f32 ifMagnify_804DDB28;
-/* 4DDB2C */ extern f32 ifMagnify_804DDB2C;
-/* 4DDB30 */ extern f32 ifMagnify_804DDB30;
-/* 4DDB34 */ extern f32 ifMagnify_804DDB34;
-/* 4DDB38 */ extern f32 ifMagnify_804DDB38;
-/* 4DDB3C */ extern f32 ifMagnify_804DDB3C;
-/* 4DDB40 */ extern f32 ifMagnify_804DDB40;
-/* 4DDB44 */ extern f32 ifMagnify_804DDB44;
-/* 4DDB48 */ extern f32 ifMagnify_804DDB48;
-/* 4DDB4C */ extern f32 ifMagnify_804DDB4C;
-/* 4DDB50 */ extern f64 ifMagnify_804DDB50;
-/* 4DDB60 */ extern int ifMagnify_804DDB60;
+static HSD_WObjDesc ifMagnify_803F97C0 = { NULL,
+                                           { 0.0F, 0.0F, 300.0F },
+                                           NULL };
+static HSD_WObjDesc ifMagnify_803F97D4 = { NULL, { 0.0F, 0.0F, 0.0F }, NULL };
+
+static HSD_CameraDescFrustum ifMagnify_803F97E8 = {
+    NULL,
+    0,
+    PROJ_ORTHO,
+    { 0, 640, 0, 480 },
+    { 0, 640, 0, 480 },
+    &ifMagnify_803F97C0,
+    &ifMagnify_803F97D4,
+    0.0F,
+    NULL,
+    0.1F,
+    32768.0F,
+};
+
+static char ifMagnify_804D57E8[] = "lupe";
+static const int ifMagnify_804DDB60 = 0;
 
 ifMagnify ifMagnify_804A1DE0;
 
@@ -70,6 +75,12 @@ typedef struct ifMagnifyImageDescBase {
 
 s32 ifMagnify_802FB6E8(s32 slot)
 {
+    (void) 0.0f;
+    (void) 3.0f;
+    (void) 0.5f;
+    (void) 1.0f;
+    (void) 2.0f;
+    (void) 4503599627370496.0;
     if (ifMagnify_802FC998(slot) != 0) {
         return ifMagnify_804A1DE0.player[slot].state.unk;
     }
@@ -90,42 +101,42 @@ ifMagnifyPlayer* ifMagnify_802FB73C(ifMagnifyPlayer* arg0, Vec2* arg1,
     temp_f4 = arg1->y;
     if (0.0f == temp_f2) {
         if (temp_f4 > 0.0f) {
-            arg2->y = ifMagnify_804DDB28;
+            arg2->y = 162.7f;
         } else {
-            arg2->y = ifMagnify_804DDB2C;
+            arg2->y = -162.7f;
         }
-        arg2->x = ifMagnify_804DDB08;
+        arg2->x = 0.0f;
     } else {
         temp_f3 = temp_f4 / temp_f2;
-        if ((temp_f3 > ifMagnify_804DDB30) || (temp_f3 < ifMagnify_804DDB34)) {
+        if ((temp_f3 > 0.6438464f) || (temp_f3 < -0.6438464f)) {
             if (temp_f4 > 0.0f) {
-                arg2->y = ifMagnify_804DDB28;
+                arg2->y = 162.7f;
             } else {
-                arg2->y = ifMagnify_804DDB2C;
+                arg2->y = -162.7f;
             }
             temp_f1 = arg2->y;
             temp_f1 = temp_f1 * temp_f2;
             temp_f1 /= temp_f4;
-            if (temp_f1 < ifMagnify_804DDB38) {
-                arg2->x = ifMagnify_804DDB38;
-            } else if (temp_f1 > ifMagnify_804DDB3C) {
-                arg2->x = ifMagnify_804DDB3C;
+            if (temp_f1 < -252.70001f) {
+                arg2->x = -252.70001f;
+            } else if (temp_f1 > 252.70001f) {
+                arg2->x = 252.70001f;
             } else {
                 arg2->x = temp_f1;
             }
         } else {
             if (temp_f2 > 0.0f) {
-                arg2->x = ifMagnify_804DDB3C;
+                arg2->x = 252.70001f;
             } else {
-                arg2->x = ifMagnify_804DDB38;
+                arg2->x = -252.70001f;
             }
             temp_f1_2 = arg2->x;
             temp_f1_2 = temp_f1_2 * temp_f4;
             temp_f1_2 /= temp_f2;
-            if (temp_f1_2 < ifMagnify_804DDB2C) {
-                arg2->y = ifMagnify_804DDB2C;
-            } else if (temp_f1_2 > ifMagnify_804DDB28) {
-                arg2->y = ifMagnify_804DDB28;
+            if (temp_f1_2 < -162.7f) {
+                arg2->y = -162.7f;
+            } else if (temp_f1_2 > 162.7f) {
+                arg2->y = 162.7f;
             } else {
                 arg2->y = temp_f1_2;
             }
@@ -133,15 +144,18 @@ ifMagnifyPlayer* ifMagnify_802FB73C(ifMagnifyPlayer* arg0, Vec2* arg1,
     }
 
     temp_f1_3 = arg2->x;
-    if (temp_f1_3 == ifMagnify_804DDB38) {
+    temp_f2 = -252.70001f;
+    if (temp_f1_3 == temp_f2) {
         arg0->state.unk = 2;
         return arg0;
     }
-    if (temp_f1_3 == ifMagnify_804DDB3C) {
+    temp_f2 = 252.70001f;
+    if (temp_f1_3 == temp_f2) {
         arg0->state.unk = 4;
         return arg0;
     }
-    if (arg2->y == ifMagnify_804DDB28) {
+    temp_f2 = 162.7f;
+    if (arg2->y == temp_f2) {
         arg0->state.unk = 1;
         return arg0;
     }
@@ -524,14 +538,14 @@ void ifMagnify_802FC618(void)
     HSD_RectS16 viewport;
 
     gobj = GObj_Create(14, 15, 0);
-    cobj = lb_80013B14(&ifMagnify_803F97E8);
+    cobj = lb_80013B14((HSD_CameraDescPerspective*) &ifMagnify_803F97E8);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(gobj, (GObj_RenderFunc) (Event) ifMagnify_802FBBDC, 0);
     gobj->gxlink_prios = 0x10;
 
     idesc = *(HSD_ImageDesc**) (player0 + 8);
-    half_height = ifMagnify_804DDB4C * idesc->height;
-    half_width = ifMagnify_804DDB4C * idesc->width;
+    half_height = 0.1f * idesc->height;
+    half_width = 0.1f * idesc->width;
     HSD_CObjSetOrtho(cobj, half_height, -half_height, -half_width, half_width);
 
     viewport.xmin = 0;
@@ -559,7 +573,7 @@ void ifMagnify_802FC750(void)
 
 void ifMagnify_802FC7C0(ifMagnify* magnify)
 {
-    volatile int default_val = ifMagnify_804DDB60;
+    volatile int default_val = *(volatile int*) &ifMagnify_804DDB60;
     GXColor* result;
 
     result = Ground_801C0604();
@@ -599,7 +613,8 @@ void ifMagnify_802FC870(void)
     memzero(&ifMagnify_804A1DE0, 0x74);
     ifMagnify_802FC7C0(&ifMagnify_804A1DE0);
     archive = ifAll_GetArchive();
-    lbArchive_LoadSections(*archive, (void**) &ifMagnify_804A1DE0, "lupe", 0);
+    lbArchive_LoadSections(*archive, (void**) &ifMagnify_804A1DE0,
+                           ifMagnify_804D57E8, 0);
     i = 0;
     do {
         ifMagnify_802FC3C0(i);
