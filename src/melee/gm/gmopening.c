@@ -115,8 +115,7 @@ void* fn_801A9FCC(void)
     lines[1].next = &lines[2];
     lines[2].unk_04 = 0;
 
-    ms = (u32) ((f32) (u32) lbMthp_8001F5D4() /
-                (f32) (*(u32*) 0x800000F8 / 4 / 1000));
+    ms = (u32) lbMthp_8001F5D4() / (f32) OSMillisecondsToTicks(1);
     idx = 2;
     sprintf(lines[idx].text, "\\cffff00%3d", ms);
 
