@@ -49,6 +49,8 @@
 
 #include <math.h>
 
+static size_t const _tyDisplay_804D6F10_len = 300;
+
 /* 31830C */ static void _tyDisplay_8031830C(TySortElem*, s32, s32);
 /* 318714 */ static void _tyDisplay_80318714(TySortElem*, s32, s32);
 /* 318B1C */ static void _tyDisplay_80318B1C(s32 arg0);
@@ -1740,7 +1742,8 @@ void tyDisplay_OnEnter_8031B460(void* arg0)
     int i;
     PAD_STACK(8);
 
-    _tyDisplay_804D6F10 = HSD_MemAlloc(sizeof(*_tyDisplay_804D6F10) * 300);
+    _tyDisplay_804D6F10 =
+        HSD_MemAlloc(sizeof(*_tyDisplay_804D6F10) * _tyDisplay_804D6F10_len);
     _tyDisplay_804D6F14 = HSD_MemAlloc(sizeof(*_tyDisplay_804D6F14));
     _tyDisplay_804D6F18 = HSD_MemAlloc(sizeof(*_tyDisplay_804D6F18));
     _tyDisplay_804D6F1C = HSD_MemAlloc(sizeof(*_tyDisplay_804D6F1C));

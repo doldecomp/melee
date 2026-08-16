@@ -624,6 +624,7 @@ int lb_8001B14C(void)
     int count;
     int i;
     struct SnapshotNode** scan;
+    static size_t const nodes_len = 127;
 
     head = NULL;
     disk_id = DVDGetCurrentDiskID();
@@ -634,7 +635,7 @@ int lb_8001B14C(void)
     if (_p(free_files) != NULL) {
         *_p(free_files) = _p(unused_files);
     }
-    nodes = HSD_MemAlloc(sizeof(*nodes) * 0x7F);
+    nodes = HSD_MemAlloc(sizeof(*nodes) * nodes_len);
     node = nodes;
     company = (char*) stat[0].company;
     game = (char*) stat[0].gameName;

@@ -82,6 +82,8 @@
 /* 4D5A40 */ static GXColor _Toy_color_E2E2E2FF = { 0xE2, 0xE2, 0xE2, 0xFF };
 /* 4D5A44 */ static GXColor _Toy_color_FF8020FF = { 0xFF, 0x80, 0x20, 0xFF };
 
+static size_t const unk_array_len = 293;
+
 /// @warning do not sort. Private members cannot be declared @c static.
 /* 4D6EE0 */ TyDisplayData* Toy_sbss_804D6EE0;
 /* 4D6EDC */ s16* Toy_sbss_804D6EDC;
@@ -114,8 +116,8 @@
 /* 4D6E78 */ s32 _Toy_sbss_804D6E78;
 /* 4D6E74 */ s32 _Toy_sbss_804D6E74;
 /* 4D6E70 */ s32 _Toy_sbss_804D6E70;
-/* 4D6E6C */ TyViewData* _Toy_sbss_804D6E6C; /* 4D6E68 */
-Toy6E68* _Toy_sbss_804D6E68;
+/* 4D6E6C */ TyViewData* _Toy_sbss_804D6E6C;
+/* 4D6E68 */ Toy6E68* _Toy_sbss_804D6E68;
 /* 4D6E64 */ s16* _Toy_sbss_804D6E64;
 /* 4D6E60 */ s32 _Toy_sbss_804D6E60;
 /* 4D6E5C */ void** _Toy_sbss_804D6E5C;
