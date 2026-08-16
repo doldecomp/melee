@@ -3,6 +3,7 @@
 #include "synth.static.h"
 
 #include <math.h>
+#include <string.h>
 #include <dolphin/ai.h>
 #include <dolphin/ar.h>
 #include <dolphin/os.h>
