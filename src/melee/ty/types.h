@@ -195,6 +195,7 @@ struct TyViewData {
     s8 x4;
     char pad_5[0x3];
 };
+STATIC_ASSERT(sizeof(struct TyViewData) == 0x8);
 
 struct TyFiguponData {
     /* 0x00 */ HSD_GObj* x0;
