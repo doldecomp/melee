@@ -33,8 +33,8 @@ final: prev: {
   aurora-src = final.fetchFromGitHub {
     owner = "r-burns";
     repo = "aurora";
-    rev = "e85052286f6d9c4defefedce0adee38d6e2476f1";
-    hash = "sha256-N7Rp95Bll8zcYmB+vYRRRq7pGsr/3XMz+vRrjcn61ec=";
+    rev = "e6a6f02ace4146e8a2f648d5c274dbb7dd89665c";
+    hash = "sha256-jvnfdnRF5HtZ792lwUs0WYASwG/dHIkp9JaisLdntUc=";
   };
 
   default = final.melee;
