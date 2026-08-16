@@ -69,6 +69,13 @@ static u8 ifMagnify_803F984C[16][4] = {
     { 6, 6, 6, 6 }, { 6, 7, 6, 7 }, { 7, 8, 7, 8 }, { 8, 8, 8, 8 },
 };
 
+static inline void ifMagnify_GetPlayerColor(GXColor* color, s32 slot)
+{
+    *color =
+        gm_80160968(gm_80160854((u8) slot, Player_GetTeam(slot), gm_8016B168(),
+                                Player_GetPlayerSlotType(slot)));
+}
+
 s32 ifMagnify_802FB6E8(s32 slot)
 {
     (void) 0.0f;
@@ -209,9 +216,7 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
 
             HSD_GObj_JObjCallback(arg0, arg1);
             if ((player->state.unk == 4) || (player->state.unk == 2)) {
-                color = gm_80160968(
-                    gm_80160854((u8) slot, Player_GetTeam(slot), gm_8016B168(),
-                                Player_GetPlayerSlotType(slot)));
+                ifMagnify_GetPlayerColor(&color, slot);
                 cp = &color_copy;
                 color_copy = color;
                 if (player->state.unk == 2) {
@@ -493,12 +498,7 @@ void ifMagnify_802FC3C0(s32 slot)
 
     {
         GXColor color;
-        u8 teams_enabled;
-        u8 slot_type;
-        slot_type = Player_GetPlayerSlotType(slot);
-        teams_enabled = gm_8016B168();
-        color = gm_80160968(gm_80160854((u8) slot, Player_GetTeam(slot),
-                                        teams_enabled, slot_type));
+        ifMagnify_GetPlayerColor(&color, slot);
 
         mobj = player->jobj->u.dobj->mobj;
         mobj->mat->diffuse.r = color.r;
