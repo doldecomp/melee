@@ -142,7 +142,7 @@ void HSD_GObjProc_8038FCE4(HSD_GObjProc* gproc)
     }
 }
 
-inline void assertProc(HSD_GObjProc* gproc)
+static inline void assertProc(HSD_GObjProc* gproc)
 {
     HSD_ASSERT(31, gproc);
 }

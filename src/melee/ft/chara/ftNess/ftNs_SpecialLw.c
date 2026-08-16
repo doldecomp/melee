@@ -663,7 +663,7 @@ bool ftNs_SpecialLwHold_GroundOrAir(
     return true;
 }
 
-inline void MagnetStateVarCalc(HSD_GObj* gobj)
+static inline void MagnetStateVarCalc(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.ns.speciallw.x10 = fp->mv.ns.speciallw.x10 - 1;

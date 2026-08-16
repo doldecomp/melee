@@ -135,7 +135,7 @@ bool ftFx_SpecialN_CheckBlasterAction(HSD_GObj* gobj)
     return true;
 }
 
-inline void ftFox_SpecialN_SetNULL(HSD_GObj* gobj)
+static inline void ftFox_SpecialN_SetNULL(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
     fp->take_dmg_cb = NULL;
@@ -229,7 +229,7 @@ void ftFx_SpecialN_CreateBlasterShot(HSD_GObj* gobj)
     }
 }
 
-inline void ftFox_SpecialN_SetCall(HSD_GObj* gobj)
+static inline void ftFox_SpecialN_SetCall(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
     fp->take_dmg_cb = ftFx_Init_800E5588;

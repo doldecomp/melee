@@ -90,7 +90,7 @@ void grDynamicAttr_801CA224(void)
     }
 }
 
-inline f32 do_sqrtf(f32 x)
+static inline f32 do_sqrtf(f32 x)
 {
     return sqrtf(x);
 }

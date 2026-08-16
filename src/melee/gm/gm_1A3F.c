@@ -58,7 +58,7 @@ void gm_801A3F48(GameScene* scene)
     tyDisplay_8031C8B8();
 }
 
-inline u8 nextScene(GameScene* scenes)
+static inline u8 nextScene(GameScene* scenes)
 {
     int i;
     u8 next_scene;
@@ -78,7 +78,7 @@ inline u8 nextScene(GameScene* scenes)
     return next_scene;
 }
 
-inline GameScene* findScene(GameScene* scene)
+static inline GameScene* findScene(GameScene* scene)
 {
     int i, j;
     for (i = gm_80479D30.routing.curr_scene_idx; i < 0xFF; i++) {
@@ -243,7 +243,7 @@ bool gm_Is1PMode(u8 mode)
     return false;
 }
 
-inline GameMode* findMode(u8 idx)
+static inline GameMode* findMode(u8 idx)
 {
     GameMode* cur;
     for (cur = gm_GetAllGameModes(); cur->idx != GM_COUNT; cur++) {

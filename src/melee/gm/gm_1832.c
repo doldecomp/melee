@@ -1977,7 +1977,7 @@ int fn_8018846C(void)
     return result;
 }
 
-inline int fn_801884F8_inline(void)
+static inline int fn_801884F8_inline(void)
 {
     int result;
     TrainingModeState* state = &lbl_80473700;
@@ -2738,7 +2738,7 @@ void gm_80189CDC(StartMeleeData* arg0)
     }
 }
 
-inline void resetText(HSD_Text* text)
+static inline void resetText(HSD_Text* text)
 {
     text->x34.x = 0.7f;
     text->x34.y = 0.6f;

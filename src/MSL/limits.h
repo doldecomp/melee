@@ -36,17 +36,17 @@ extern "C" {
 namespace std {
     template <typename T> class numeric_limits {
     public:
-        inline static T min();
-        inline static T max();
+        static inline T min();
+        static inline T max();
     };
 
     template <> class numeric_limits<char> {
     public:
-        inline static char min()
+        static inline char min()
         {
             return -0x80;
         }
-        inline static char max()
+        static inline char max()
         {
             return 0x7F;
         }
@@ -54,11 +54,11 @@ namespace std {
 
     template <> class numeric_limits<short> {
     public:
-        inline static short min()
+        static inline short min()
         {
             return -0x8000;
         }
-        inline static short max()
+        static inline short max()
         {
             return 0x7FFF;
         }
@@ -66,11 +66,11 @@ namespace std {
 
     template <> class numeric_limits<int> {
     public:
-        inline static int min()
+        static inline int min()
         {
             return -0x80000000;
         }
-        inline static int max()
+        static inline int max()
         {
             return 0x7FFFFFFF;
         }
@@ -78,11 +78,11 @@ namespace std {
 
     template <> class numeric_limits<long> {
     public:
-        inline static long min()
+        static inline long min()
         {
             return -0x80000000;
         }
-        inline static long max()
+        static inline long max()
         {
             return 0x7FFFFFFF;
         }
@@ -90,11 +90,11 @@ namespace std {
 
     template <> class numeric_limits<unsigned char> {
     public:
-        inline static unsigned char min()
+        static inline unsigned char min()
         {
             return 0x0;
         }
-        inline static unsigned char max()
+        static inline unsigned char max()
         {
             return 0xFF;
         }
@@ -102,11 +102,11 @@ namespace std {
 
     template <> class numeric_limits<unsigned short> {
     public:
-        inline static unsigned short min()
+        static inline unsigned short min()
         {
             return 0x0;
         }
-        inline static unsigned short max()
+        static inline unsigned short max()
         {
             return 0xFFFF;
         }
@@ -114,11 +114,11 @@ namespace std {
 
     template <> class numeric_limits<unsigned int> {
     public:
-        inline static unsigned int min()
+        static inline unsigned int min()
         {
             return 0x0;
         }
-        inline static unsigned int max()
+        static inline unsigned int max()
         {
             return 0xFFFFFFFF;
         }
@@ -126,11 +126,11 @@ namespace std {
 
     template <> class numeric_limits<unsigned long> {
     public:
-        inline static unsigned long min()
+        static inline unsigned long min()
         {
             return 0x0;
         }
-        inline static unsigned long max()
+        static inline unsigned long max()
         {
             return 0xFFFFFFFF;
         }

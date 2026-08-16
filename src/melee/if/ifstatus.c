@@ -105,10 +105,10 @@ jobj_flagCheckSetMtxDirtySub(HSD_JObj* jobj) // jobj @ r30 when inlined
     }
 }
 
-inline void jobj_translate_x(HSD_JObj* jobj, float dx);
-inline void jobj_translate_y(HSD_JObj* jobj, float dy);
+static inline void jobj_translate_x(HSD_JObj* jobj, float dx);
+static inline void jobj_translate_y(HSD_JObj* jobj, float dy);
 
-inline void jobj_unk_x(UnkX* value, s32 i)
+static inline void jobj_unk_x(UnkX* value, s32 i)
 {
     HSD_JObj* jobj_r30 = value->x54_jobj[i];
     //@c8
@@ -125,7 +125,7 @@ inline void jobj_unk_x(UnkX* value, s32 i)
     }
 }
 
-inline void jobj_unk_y(UnkX* value, s32 i)
+static inline void jobj_unk_y(UnkX* value, s32 i)
 {
     HSD_JObj* jobj_r30 = value->x54_jobj[i];
     //@184
@@ -145,7 +145,7 @@ inline void jobj_unk_y(UnkX* value, s32 i)
     }
 }
 
-inline void jobj_translate_x(HSD_JObj* jobj, float dx)
+static inline void jobj_translate_x(HSD_JObj* jobj, float dx)
 {
     //@108
     ASSERT_NOT_NULL(jobj, 1102);
@@ -153,7 +153,7 @@ inline void jobj_translate_x(HSD_JObj* jobj, float dx)
     jobj->translate.x += dx;
 }
 
-inline void jobj_translate_y(HSD_JObj* jobj, float dy)
+static inline void jobj_translate_y(HSD_JObj* jobj, float dy)
 {
     //@1b0
     ASSERT_NOT_NULL(jobj, 1114);
@@ -161,7 +161,7 @@ inline void jobj_translate_y(HSD_JObj* jobj, float dy)
     jobj->translate.y += dy;
 }
 
-inline void jobj_unk(UnkX* value)
+static inline void jobj_unk(UnkX* value)
 {
     //@b0
     s32 i;
@@ -173,7 +173,7 @@ inline void jobj_unk(UnkX* value)
     }
 }
 
-inline void* jobj_get(HSD_JObj* jobj_r30, UnkX* value, s32 i)
+static inline void* jobj_get(HSD_JObj* jobj_r30, UnkX* value, s32 i)
 {
     return value->x54_jobj[i];
 }
@@ -220,7 +220,7 @@ void ifStatus_PercentOnDeathAnimationThink(UnkX* value, s32 arg1, s32 arg2)
     }
 }
 
-inline f32 offset_rand(void)
+static inline f32 offset_rand(void)
 {
     return HSD_Randf() - 0.5f;
 }
@@ -642,7 +642,7 @@ void ifStatus_802F5B48(HSD_GObj* gobj)
     }
 }
 
-inline IfDamageState* getPlayerByHUDParent(HSD_GObj* parent)
+static inline IfDamageState* getPlayerByHUDParent(HSD_GObj* parent)
 {
     s32 var_ctr;
     for (var_ctr = 0; var_ctr < 6; var_ctr++) {

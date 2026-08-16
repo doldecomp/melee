@@ -96,7 +96,7 @@ void itEgg_Logic3_Spawned(Item_GObj* gobj)
     it_80288EFC(gobj);
 }
 
-inline s32 attrRand(itEgg_ItemVars* attrs)
+static inline s32 attrRand(itEgg_ItemVars* attrs)
 {
     return HSD_Randi(attrs->rand_max);
 }

@@ -322,7 +322,7 @@ void ftCo_80095744(Fighter_GObj* gobj, int* arg1)
     Item_8026ABD8(fp->item_gobj, &vec, 1);
 }
 
-inline float getAnimSpeed(Fighter_GObj* gobj, int msid)
+static inline float getAnimSpeed(Fighter_GObj* gobj, int msid)
 {
     Fighter* fp;
     float speed = 1;

@@ -74,7 +74,7 @@ HSD_GObj* it_8028FAF4(Item_GObj* arg0, Vec3* arg1)
     return gobj;
 }
 
-inline u32 getRandMax(Article* article)
+static inline u32 getRandMax(Article* article)
 {
     itFoodsAttributes* attr = article->x4_specialAttributes;
     return attr->x0;

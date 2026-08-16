@@ -28,12 +28,12 @@ void GObj_PReorder(HSD_GObj* gobj, HSD_GObj* hiprio_gobj)
 
 extern HSD_ObjAllocData gobj_alloc_data;
 
-inline HSD_GObj* gobj_allocate(void)
+static inline HSD_GObj* gobj_allocate(void)
 {
     return HSD_ObjAlloc(&gobj_alloc_data);
 }
 
-inline void gobj_first_lower_prio(HSD_GObj* gobj)
+static inline void gobj_first_lower_prio(HSD_GObj* gobj)
 {
     HSD_GObj* var_r4 = plinklow_gobjs[gobj->p_link];
     while (var_r4 != NULL && var_r4->p_priority > gobj->p_priority) {
@@ -42,7 +42,7 @@ inline void gobj_first_lower_prio(HSD_GObj* gobj)
     GObj_PReorder(gobj, var_r4);
 }
 
-inline void gobj_first_higher_prio(HSD_GObj* gobj)
+static inline void gobj_first_higher_prio(HSD_GObj* gobj)
 {
     HSD_GObj* var_r4 = ((HSD_GObj**) HSD_GObj_Entities)[gobj->p_link];
     while (var_r4 != NULL && var_r4->p_priority < gobj->p_priority) {

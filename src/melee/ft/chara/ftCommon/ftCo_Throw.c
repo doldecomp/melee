@@ -265,7 +265,7 @@ bool fn_800DD6E4(Fighter_GObj* gobj, int arg)
     return false;
 }
 
-inline static bool ftCo_800DD724_inline1(Fighter* fp)
+static inline bool ftCo_800DD724_inline1(Fighter* fp)
 {
     if (fp->throw_flags_b4) {
         fp->throw_flags_b4 = 0;
@@ -274,7 +274,7 @@ inline static bool ftCo_800DD724_inline1(Fighter* fp)
     return false;
 }
 
-inline static bool ftCo_800DD724_inline2(Fighter* fp)
+static inline bool ftCo_800DD724_inline2(Fighter* fp)
 {
     if (fp->throw_flags_b3) {
         fp->throw_flags_b3 = 0;

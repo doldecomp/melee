@@ -255,7 +255,7 @@ bool lbArchive_800171CC(HSD_Archive** dst, const char* filename, void* symbols,
     return preloaded;
 }
 
-inline void Locate(HSD_Archive* archive, intptr_t base_addr)
+static inline void Locate(HSD_Archive* archive, intptr_t base_addr)
 {
     u32 i;
     u32* ptr;

@@ -96,7 +96,7 @@ static void inlineA0(Item_GObj* gobj)
     }
 }
 
-inline void reset(Item_GObj* gobj)
+static inline void reset(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->owner != NULL) {

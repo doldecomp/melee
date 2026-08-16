@@ -3015,12 +3015,12 @@ static inline bool ftCo_800A648C_inline1(Item* ip)
     return false;
 }
 
-inline HSD_GObj* ftCo_800A648C_inline2(void)
+static inline HSD_GObj* ftCo_800A648C_inline2(void)
 {
     return HSD_GObj_Entities->items;
 }
 
-inline HSD_GObj* ftCo_800A648C_inline3(HSD_GObj* cur)
+static inline HSD_GObj* ftCo_800A648C_inline3(HSD_GObj* cur)
 {
     return cur->next;
 }

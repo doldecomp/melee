@@ -110,7 +110,7 @@ struct HSD_LObjInfo {
 #define HSD_LOBJ_INFO(i) ((HSD_LObjInfo*) (i))
 #define HSD_LOBJ_METHOD(o) HSD_LOBJ_INFO(HSD_OBJECT_METHOD((o)))
 
-inline u8 HSD_LObjGetPriority(HSD_LObj* lobj)
+static inline u8 HSD_LObjGetPriority(HSD_LObj* lobj)
 {
     HSD_ASSERT(367, lobj);
     return lobj->priority;

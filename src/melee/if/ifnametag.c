@@ -352,7 +352,7 @@ void un_802FD468(void)
     HSD_GObjPLink_80390228(un_804D6D68);
 }
 
-inline HSD_GObj* un_802FD4C8_inline(int arg0)
+static inline HSD_GObj* un_802FD4C8_inline(int arg0)
 {
     return GObj_Create(0xE, arg0, 0);
 }
