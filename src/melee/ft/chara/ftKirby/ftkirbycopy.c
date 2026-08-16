@@ -185,15 +185,6 @@ void ftKb_SpecialN_800EF040(Fighter_GObj* gobj, int arg1, KirbyHatStruct* hat)
 
 char ftKb_Init_804D3DAC[2] = "0";
 
-typedef struct ftKirbyCopyData {
-    u8 pad_0[0x1C60];
-    ftKirby_CostumeArchive* costume_archives[FTKIND_MAX];
-    u8 pad_1CE4[0xB8];
-    char parts_dobj_over[0x24];
-    char source_name[0xC];
-    char fighter_dobj_over[0x18];
-} ftKirbyCopyData;
-
 /// @todo `byte_base` is always zero; it reproduces retail's shift-derived
 /// offset initialization, suggesting the original code indexed bones by
 /// element index rather than byte offset.
@@ -229,12 +220,10 @@ static inline void ftKb_SpecialN_800EF0E4_finish(Fighter* fp, s32 total_dobjs)
 void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftKirbyCopyData* data = (ftKirbyCopyData*) ftKb_Init_MotionStateTable;
     HSD_Joint* current_joint;
     s32 joint_idx;
     HSD_Joint* root;
     s32 total_dobjs;
-    s32 insert_part_off;
     s32 part_off;
     HSD_DObj** dst;
     s32 byte_base;
@@ -247,10 +236,10 @@ void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
     u8* arg2_cur;
 
     ftPartsPObjSetDefaultClass();
-    root = data->costume_archives[arg1][fp->x619_costume_id].joint;
-    ftKb_SpecialN_800EF0E4_insert_joint_refs(
-        &total_dobjs, root, fp, &insert_part_off, &current_joint, &joint_idx,
-        &byte_base);
+    root = ftKb_Init_803C9FC8[arg1][fp->x619_costume_id].joint;
+    ftKb_SpecialN_800EF0E4_insert_joint_refs(&total_dobjs, root, fp, &part_off,
+                                             &current_joint, &joint_idx,
+                                             &byte_base);
     joint_idx = 0;
     arg2_cur = arg2;
     byte_off = byte_base << 2;
@@ -291,8 +280,9 @@ void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
                     break;
                 }
                 if (total_dobjs >= 0x20) {
-                    OSReport(data->parts_dobj_over);
-                    __assert(data->source_name, 0x43E, ftKb_Init_804D3DAC);
+                    OSReport(ftKb_Init_assert_msg_0);
+                    __assert(ftKb_Init_assert_msg_1, 0x43E,
+                             ftKb_Init_804D3DAC);
                 }
                 dst = (HSD_DObj**) fp->u.gw.x2244_chefVar2;
                 *(HSD_DObj**) ((u8*) dst + dst_off) = dobj;
@@ -307,8 +297,8 @@ void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
                 group_count += 1;
             }
             if (group_count >= 0x80) {
-                OSReport(data->fighter_dobj_over);
-                __assert(data->source_name, 0x44C, ftKb_Init_804D3DAC);
+                OSReport(ftKb_Init_assert_msg_2);
+                __assert(ftKb_Init_assert_msg_1, 0x44C, ftKb_Init_804D3DAC);
             }
             ((FighterBone*) ((u8*) fp->parts + part_off))->flags_b6 = true;
         }
@@ -348,7 +338,6 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
     HSD_Joint* current_joint;
     s32 joint_idx;
     HSD_Joint* root = (HSD_Joint*) hat->hat_dynamics[2];
-    ftKirbyCopyData* data = (ftKirbyCopyData*) ftKb_Init_MotionStateTable;
     s32 byte_off;
     Fighter* fp = GET_FIGHTER(gobj);
     s32 total_dobjs;
@@ -402,8 +391,8 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
                         break;
                     }
                     if (total_dobjs >= 0x20) {
-                        OSReport(data->parts_dobj_over);
-                        __assert(data->source_name, 0x4B9,
+                        OSReport(ftKb_Init_assert_msg_0);
+                        __assert(ftKb_Init_assert_msg_1, 0x4B9,
                                  ftKb_Init_804D3DAC);
                     }
                     dst = (HSD_DObj**) fp->u.gw.x224C_greenhouseGObj;
@@ -419,8 +408,9 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
                     group_count += 1;
                 }
                 if (group_count >= 0x80) {
-                    OSReport(data->fighter_dobj_over);
-                    __assert(data->source_name, 0x4C7, ftKb_Init_804D3DAC);
+                    OSReport(ftKb_Init_assert_msg_2);
+                    __assert(ftKb_Init_assert_msg_1, 0x4C7,
+                             ftKb_Init_804D3DAC);
                 }
             }
             part_off += 0x10;
