@@ -23,7 +23,7 @@
 #include <dolphin/mtx.h>
 #include <MetroTRK/intrinsics.h>
 
-inline void func_8015ADD0_inline(HSD_GObj* gobj)
+static inline void func_8015ADD0_inline(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;

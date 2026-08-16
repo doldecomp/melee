@@ -288,7 +288,7 @@ void ftSk_SpecialS_80110AEC(HSD_GObj* gobj)
     }
 }
 
-inline void ftSeakSpecialS_LoopChainHitCollisions(HSD_GObj* gobj)
+static inline void ftSeakSpecialS_LoopChainHitCollisions(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     int i;
@@ -301,7 +301,7 @@ inline void ftSeakSpecialS_LoopChainHitCollisions(HSD_GObj* gobj)
     ftSk_SpecialS_ZeroHitboxPositions(gobj);
 }
 
-inline void ftSeakSpecialS_LoopChainHitActivate(HSD_GObj* gobj)
+static inline void ftSeakSpecialS_LoopChainHitActivate(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     int i;
@@ -314,7 +314,7 @@ inline void ftSeakSpecialS_LoopChainHitActivate(HSD_GObj* gobj)
     fp->x2219_b3 = true;
 }
 
-inline float sumOfSquares(float a, float b)
+static inline float sumOfSquares(float a, float b)
 {
     float c;
 

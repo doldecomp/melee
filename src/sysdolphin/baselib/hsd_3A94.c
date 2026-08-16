@@ -1627,7 +1627,7 @@ u32 fn_803AC634(struct CardState* file_desc, s32 file_idx)
     }
 }
 
-inline u32 fn_803AC6B8_first_block_count(struct CardState* file_desc)
+static inline u32 fn_803AC6B8_first_block_count(struct CardState* file_desc)
 {
     if (file_desc->x4C[0] <= 0) {
         return 0;
@@ -1720,7 +1720,7 @@ static inline s32 fn_803AC6B8_blocks_before(struct CardState* file_desc,
     return total;
 }
 
-inline u32 fn_803AC7DC_block_count(struct CardState* file_desc, s32 file_idx)
+static inline u32 fn_803AC7DC_block_count(struct CardState* file_desc, s32 file_idx)
 {
     if (file_desc->x4C[file_idx] <= 0) {
         return 0;
@@ -1789,7 +1789,7 @@ s32 fn_803AC7DC(CardState* state)
     return total + extra;
 }
 
-inline s32 fn_803ACB74(s32 seq_a, s32 seq_b)
+static inline s32 fn_803ACB74(s32 seq_a, s32 seq_b)
 {
     s32 diff;
 
@@ -4960,7 +4960,7 @@ void hsd_803B24E4(s32* ctx, int channel, int file_no, void* work_buf)
     ctx[0] = (s32) work_buf;
 }
 
-inline HsdCmdEntry* hsd_803B2550_inline(u8* arg0, s32 arg1)
+static inline HsdCmdEntry* hsd_803B2550_inline(u8* arg0, s32 arg1)
 {
     return &((HsdCmdEntry*) (arg0 + 0x1210))[arg1];
 }

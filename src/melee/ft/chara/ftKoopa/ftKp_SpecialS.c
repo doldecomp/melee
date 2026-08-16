@@ -383,7 +383,7 @@ void ftKp_SpecialSHit_Anim(HSD_GObj* gobj)
     }
 }
 
-inline void inlineA0(HSD_GObj* gobj)
+static inline void inlineA0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.kp.specials.x4) {
@@ -487,7 +487,7 @@ void ftKp_SpecialAirSEndB_Anim(HSD_GObj* gobj)
     doEndBAnim(gobj, ftCo_Fall_Enter);
 }
 
-inline void ftKoopa_SpecialS_ChangeAction(HSD_GObj* gobj,
+static inline void ftKoopa_SpecialS_ChangeAction(HSD_GObj* gobj,
                                           ftKoopa_MotionState kp_msid_f,
                                           ftCommon_MotionState victim_msid_f,
                                           ftKoopa_MotionState kp_msid_b,
@@ -529,7 +529,7 @@ void ftKp_SpecialAirSHit_IASA(HSD_GObj* gobj)
     }
 }
 
-inline void ftKp_SpecialSWait_IASA_inline(HSD_GObj* gobj)
+static inline void ftKp_SpecialSWait_IASA_inline(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.kp.specials.x4) {

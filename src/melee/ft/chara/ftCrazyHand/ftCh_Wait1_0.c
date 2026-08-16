@@ -136,7 +136,7 @@ static void ftCh_Init_80156310(HSD_GObj* gobj)
     ftCh_Init_80156018(gobj);
 }
 
-inline void doAnim0(HSD_GObj* gobj)
+static inline void doAnim0(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
@@ -154,7 +154,7 @@ inline void doAnim0(HSD_GObj* gobj)
     fp->u.mh.x2258 = 0x156;
 }
 
-inline void doAnim1(HSD_GObj* gobj)
+static inline void doAnim1(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;

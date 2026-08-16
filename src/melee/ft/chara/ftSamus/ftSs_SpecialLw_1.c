@@ -107,12 +107,12 @@ void ftSs_SpecialAirLw_Enter(HSD_GObj* gobj)
     ftSamus_SpecialLw_StartAction_inner(gobj);
 }
 
-inline static void setSamusBits(Fighter* fp, int val)
+static inline void setSamusBits(Fighter* fp, int val)
 {
     fp->mv.ss.unk6.x0 = val;
 }
 
-inline static void checkStateVar1(HSD_GObj* gobj)
+static inline void checkStateVar1(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 

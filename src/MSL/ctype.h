@@ -23,23 +23,23 @@ extern const unsigned char __upper_map[];
 #define __control (__motion_char | __control_char)
 #define __zero_fill(c) ((int) (unsigned char) (c))
 
-inline int isalpha(int c)
+static inline int isalpha(int c)
 {
     return (int) (__ctype_map[(unsigned char) c] & __letter);
 }
-inline int isdigit(int c)
+static inline int isdigit(int c)
 {
     return (int) (__ctype_map[(unsigned char) c] & __digit);
 }
-inline int isspace(int c)
+static inline int isspace(int c)
 {
     return (int) (__ctype_map[(unsigned char) c] & __whitespace);
 }
-inline int isupper(int c)
+static inline int isupper(int c)
 {
     return (int) (__ctype_map[(unsigned char) c] & __upper_case);
 }
-inline int isxdigit(int c)
+static inline int isxdigit(int c)
 {
     return (int) (__ctype_map[(unsigned char) c] & __hex_digit);
 }

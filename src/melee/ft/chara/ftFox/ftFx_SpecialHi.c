@@ -737,7 +737,7 @@ void ftFx_SpecialHiBound_Coll(HSD_GObj* gobj)
     }
 }
 
-inline void ftFox_SpecialHiBound_SetVars(HSD_GObj* gobj)
+static inline void ftFox_SpecialHiBound_SetVars(HSD_GObj* gobj)
 {
     vf32 f; // I have a feeling this is a Vec3 struct however
     Fighter* fp = fp = gobj->user_data;

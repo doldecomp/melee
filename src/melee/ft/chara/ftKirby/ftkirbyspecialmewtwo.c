@@ -195,7 +195,7 @@ check:
     efLib_DestroyAll(gobj);
 }
 
-inline void ftKb_SpecialNMt_SetRecoil(Fighter_GObj* gobj)
+static inline void ftKb_SpecialNMt_SetRecoil(Fighter_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = da = fp->dat_attrs;
@@ -607,7 +607,7 @@ void ftKb_MtSpecialAirNLoopFull_Anim(Fighter_GObj* gobj)
     ft->u.kb.x9C = da->specialn_mt_charge_time;
 }
 
-inline Item_GObj* ftKb_MtSpecialAirNCancel_Anim_inline(Item_GObj* arg0)
+static inline Item_GObj* ftKb_MtSpecialAirNCancel_Anim_inline(Item_GObj* arg0)
 {
     return arg0;
 }

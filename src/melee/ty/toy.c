@@ -73,7 +73,7 @@ int Toy_GetTrophyTotal(void)
     }
 }
 
-inline static u16* idk(void)
+static inline u16* idk(void)
 {
     if (gm_IsCurrently1PMode() || gm_GetCurrentGameMode() == GM_TOY_LOTTERY) {
         return &Toy_804A284C[5];
@@ -217,7 +217,7 @@ bool _Toy_80304CC8_noinline(int arg0)
     return Toy_80304CC8(arg0);
 }
 
-inline static unsigned short* Toy_80304D30_idk(void)
+static inline unsigned short* Toy_80304D30_idk(void)
 {
     if (gm_IsCurrently1PMode() || gm_GetCurrentGameMode() == GM_TOY_LOTTERY) {
         return &Toy_804A284C[5];
@@ -226,12 +226,12 @@ inline static unsigned short* Toy_80304D30_idk(void)
     }
 }
 
-inline static int Toy_80304D30_48C0(int arg0)
+static inline int Toy_80304D30_48C0(int arg0)
 {
     return Toy_80304D30_idk()[arg0] & 0xFF;
 }
 
-inline static bool Toy_80304D30_4B0C(int arg0)
+static inline bool Toy_80304D30_4B0C(int arg0)
 {
     unsigned short* v;
     unsigned short s;
@@ -1809,7 +1809,7 @@ typedef union ToyPanelLabelData {
     char* ptrs[1];
 } ToyPanelLabelData;
 
-inline static void Toy_AddPanelAnims(HSD_JObj* jobj,
+static inline void Toy_AddPanelAnims(HSD_JObj* jobj,
                                      HSD_ShapeAnimJoint* shapanim,
                                      HSD_MatAnimJoint* matanim,
                                      HSD_AnimJoint* anim)

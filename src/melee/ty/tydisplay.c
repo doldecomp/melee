@@ -2362,7 +2362,7 @@ s32 tyDisplay_8031C454(s32 arg0)
     return result;
 }
 
-inline void* un_8031C5E4_inline(HSD_Archive** arg0, u8 arg1, const char* arg2)
+static inline void* un_8031C5E4_inline(HSD_Archive** arg0, u8 arg1, const char* arg2)
 {
     return HSD_ArchiveGetPublicAddress(arg0[arg1], arg2);
 }

@@ -51,7 +51,7 @@ u32 HSD_FObjGetState(HSD_FObj* fobj)
     return fobj->flags & 0xF;
 }
 
-inline void HSD_FObjReqAnim(HSD_FObj* fobj, f32 startframe)
+static inline void HSD_FObjReqAnim(HSD_FObj* fobj, f32 startframe)
 {
     if (fobj == NULL) {
         return;
@@ -84,7 +84,7 @@ void HSD_FObjReqAnimAll(HSD_FObj* fobj, f32 startframe)
     }
 }
 
-inline void FObj_FlushKeyData(HSD_FObj* fobj, void* obj,
+static inline void FObj_FlushKeyData(HSD_FObj* fobj, void* obj,
                               HSD_ObjUpdateFunc obj_update, f32 rate)
 {
     if (fobj->op_intrp == HSD_A_OP_KEY) {
@@ -295,7 +295,7 @@ static u32 FObjAnimKey(HSD_FObj* fobj)
     return HSD_FObjSetState(fobj, st == FOBJ_LOAD_DATA0 ? 3 : 4);
 }
 
-inline u32 FObjLoadData(HSD_FObj* fobj)
+static inline u32 FObjLoadData(HSD_FObj* fobj)
 {
     if ((unsigned) (fobj->ad - fobj->ad_head) >= fobj->length) {
         return 6;

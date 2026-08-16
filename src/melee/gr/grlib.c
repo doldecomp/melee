@@ -111,7 +111,7 @@ void grLib_801C98A0(HSD_JObj* jobj)
     }
 }
 
-inline HSD_JObj* jobj_child(HSD_JObj* node)
+static inline HSD_JObj* jobj_child(HSD_JObj* node)
 {
     if (node == NULL) {
         return NULL;
@@ -119,7 +119,7 @@ inline HSD_JObj* jobj_child(HSD_JObj* node)
     return node->child;
 }
 
-inline HSD_JObj* jobj_next(HSD_JObj* node)
+static inline HSD_JObj* jobj_next(HSD_JObj* node)
 {
     if (node == NULL) {
         return NULL;

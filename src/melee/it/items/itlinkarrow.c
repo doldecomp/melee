@@ -220,7 +220,7 @@ HSD_GObj* it_802A83E0(f32 facing_dir, Fighter_GObj* arg1, Vec3* arg2,
     return gobj;
 }
 
-inline HSD_JObj* itLinkArrow_802A850C_inline(HSD_Joint* joint)
+static inline HSD_JObj* itLinkArrow_802A850C_inline(HSD_Joint* joint)
 {
     HSD_JObj* jobj;
     if (joint != NULL) {
@@ -229,7 +229,7 @@ inline HSD_JObj* itLinkArrow_802A850C_inline(HSD_Joint* joint)
     return jobj;
 }
 
-inline void itLinkArrow_802A850C_inline_2(Item_GObj* gobj, Quaternion* quat)
+static inline void itLinkArrow_802A850C_inline_2(Item_GObj* gobj, Quaternion* quat)
 {
     int i;
     Item* item;

@@ -1704,7 +1704,7 @@ typedef struct mnDiagram_MainOverlay {
     /* 0x38 */ HSD_Text* text[6];
 } mnDiagram_MainOverlay;
 
-inline Vec3* mnDiagram_PopupAnimProc_Inline(mnDiagram_AnimTable* arg0,
+static inline Vec3* mnDiagram_PopupAnimProc_Inline(mnDiagram_AnimTable* arg0,
                                             int arg1)
 {
     return &arg0->points[arg1];
@@ -1815,7 +1815,7 @@ void mnDiagram_PopupAnimProc(void* arg0)
     }
 }
 
-inline void mnDiagram_FormatPopupNumber(char* buf, u32 val)
+static inline void mnDiagram_FormatPopupNumber(char* buf, u32 val)
 {
     int digit_count = mn_GetDigitCount(val);
     int i;

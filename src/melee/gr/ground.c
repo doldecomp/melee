@@ -1086,7 +1086,7 @@ HSD_GObj* Ground_801C1E84(void)
 /// extern s8 HSD_GObj_804D7848;
 /// extern float @330;
 
-inline HSD_FogDesc* foo(void)
+static inline HSD_FogDesc* foo(void)
 {
     StageCallbacks* phi_r29;
     StageCallbacks* temp_r29;

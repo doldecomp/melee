@@ -149,7 +149,7 @@ void un_8032074C(HSD_GObj* gobj)
     }
 }
 
-inline HSD_GObj* GET_EVENTDATA(void)
+static inline HSD_GObj* GET_EVENTDATA(void)
 {
     return GObj_Create(0xE, 0xF, 0);
 }

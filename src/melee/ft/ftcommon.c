@@ -918,7 +918,7 @@ void ftCommon_8007E2F4(Fighter* fp, s16 val)
     fp->x1A6A = val;
 }
 
-inline void _func_8007E2FC_inline(HSD_GObj* gobj)
+static inline void _func_8007E2FC_inline(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     fp->xE4_ground_accel_1 = 0;
@@ -1489,7 +1489,7 @@ void ftCommon_8007F8E8(HSD_GObj* gobj)
 
 extern void (*ftData_UnkMotionStates1[])(HSD_GObj*);
 
-inline void _func_8007F948_inline(HSD_GObj* gobj)
+static inline void _func_8007F948_inline(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->x197C == NULL || fp->x1980 == NULL) {
@@ -1588,7 +1588,7 @@ void ftCommon_8007FC7C(HSD_GObj* gobj, float arg8)
     ft_PlaySFX(fp, 0x11F, 0x7F, 0x40);
 }
 
-inline float fminf(float a, float b)
+static inline float fminf(float a, float b)
 {
     float result = a;
     if (a > b) {

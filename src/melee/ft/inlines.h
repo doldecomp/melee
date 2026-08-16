@@ -299,7 +299,7 @@ static inline int ftGetFacingDirInt2(Fighter_GObj* gobj)
 #define gmScriptEventUpdatePtr(event, type)                                   \
     (event = (void*) ((uintptr_t) event + 4))
 
-inline CommandInfo* getCmdScript(Fighter* fp)
+static inline CommandInfo* getCmdScript(Fighter* fp)
 {
     return &fp->x3E4_fighterCmdScript;
 }

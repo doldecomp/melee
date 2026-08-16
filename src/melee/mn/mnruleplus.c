@@ -356,7 +356,7 @@ void mn_802324E4(u8 time_limit, MenuRulesPlusData* data)
     mnRulePlus_AnimZeros(jobjs);
 }
 
-inline void mn_80232660_inline(HSD_JObj* jobj)
+static inline void mn_80232660_inline(HSD_JObj* jobj)
 {
     AnimLoopSettings* settings;
     AnimLoopSettings* p294;

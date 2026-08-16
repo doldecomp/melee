@@ -276,7 +276,7 @@ void ftNs_SpecialNRelease_Anim(HSD_GObj* gobj)
 }
 
 /// Inline to set all variables and match ASM register data
-inline void SetPKFlashAttr(HSD_GObj* gobj)
+static inline void SetPKFlashAttr(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftNessAttributes* sa = fp->dat_attrs;
@@ -528,7 +528,7 @@ void ftNs_SpecialAirNRelease_IASA(HSD_GObj* gobj)
 void ftNs_SpecialAirNEnd_IASA(HSD_GObj* gobj) {}
 
 /// Inline to set remaining frames of gravity delay
-inline void GravityDelay(HSD_GObj* gobj)
+static inline void GravityDelay(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 

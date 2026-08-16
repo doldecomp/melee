@@ -83,7 +83,7 @@ bool ftCo_800C1718(Fighter_GObj* gobj)
 }
 #pragma pop
 
-inline bool ftCo_800C1718_inline(Fighter_GObj* gobj)
+static inline bool ftCo_800C1718_inline(Fighter_GObj* gobj)
 {
     u32 pad = 0;
     Fighter* fp = GET_FIGHTER(gobj);
@@ -151,7 +151,7 @@ bool ftCo_800C17CC(Fighter_GObj* gobj)
     return 0;
 }
 
-inline float fake_sqrtf(float x)
+static inline float fake_sqrtf(float x)
 {
     u32 pad = 0;
     u32 pad2 = 0;

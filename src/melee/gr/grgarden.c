@@ -300,7 +300,7 @@ bool grGarden_80203248(Ground_GObj* arg)
     return false;
 }
 
-inline float absoluteValue(float fVar1)
+static inline float absoluteValue(float fVar1)
 {
     if (fVar1 < 0.0f) {
         fVar1 = -fVar1;

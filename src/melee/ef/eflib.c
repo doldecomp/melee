@@ -86,7 +86,7 @@ void inline eflib_create_generator_add_appsrt(HSD_Generator** generator,
     }
 }
 
-inline EF_Effect* eflib_create_effect_and_attach(int gfx_id, HSD_GObj* gobj,
+static inline EF_Effect* eflib_create_effect_and_attach(int gfx_id, HSD_GObj* gobj,
                                                  HSD_JObj* jobj)
 {
     EF_Effect* effect = efLib_Create(gfx_id, gobj);
@@ -106,7 +106,7 @@ inline EF_Effect* eflib_create_effect_and_attach(int gfx_id, HSD_GObj* gobj,
     return effect;
 }
 
-inline HSD_Generator* eflib_generator_add_appsrt(HSD_Generator* generator,
+static inline HSD_Generator* eflib_generator_add_appsrt(HSD_Generator* generator,
                                                  s32 status)
 {
     HSD_psAppSRT* psAppSRT;

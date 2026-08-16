@@ -133,7 +133,7 @@ void DevText_EraseFirstLine(DevText* text)
     memzero(start_of_line, line_length);
 }
 
-inline int DevText_Clamp(int val, int max)
+static inline int DevText_Clamp(int val, int max)
 {
     if (max <= val) {
         return max - 1;
@@ -267,7 +267,7 @@ void DevText_Erase(DevText* text)
 }
 #pragma pop
 
-inline void DevText_AdvanceLine(DevText* text)
+static inline void DevText_AdvanceLine(DevText* text)
 {
     text->cursor_x = 0;
     if (text->cursor_y < text->h - 1) {

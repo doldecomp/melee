@@ -428,7 +428,7 @@ void it_8026E0F4(Item_GObj* gobj)
     }
 }
 
-inline bool it_8026E_inline(Item_GObj* gobj)
+static inline bool it_8026E_inline(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     bool cond;

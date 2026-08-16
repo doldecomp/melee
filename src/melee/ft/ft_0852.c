@@ -37,7 +37,7 @@ void ft_8008521C(HSD_GObj* gobj)
     fp->self_vel.z = pos.z - fp->cur_pos.z;
 }
 
-inline void ft_800852B0_Reset_ft_8045993C(ftData** list, int i)
+static inline void ft_800852B0_Reset_ft_8045993C(ftData** list, int i)
 {
     // Bitfields seem off but it is what it is
     ((ft_8045993C_t*) &list[FTKIND_MAX])[i].pad_x0 = 0;

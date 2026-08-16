@@ -194,7 +194,7 @@ static inline u8 mnVibration_GetNameSlot(MnVibrationData* data, s32 j)
     return (u8) name_idx;
 }
 
-inline u8 mnVibration_GetNameRumble(s32 name_idx)
+static inline u8 mnVibration_GetNameRumble(s32 name_idx)
 {
     return GetPersistentNameData(name_idx)->rumble_toggle;
 }

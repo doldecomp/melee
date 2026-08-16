@@ -98,7 +98,7 @@ bool lb_8000B134(HSD_JObj* jobj)
     return false;
 }
 
-inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
+static inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
 {
     if (jobj == NULL) {
         return NULL;
@@ -433,7 +433,7 @@ void lb_8000C2F8(HSD_JObj* jobj, HSD_JObj* constraint)
     lb_8000C290(jobj, constraint);
 }
 
-inline HSD_RObj* robj_next(HSD_RObj* robj)
+static inline HSD_RObj* robj_next(HSD_RObj* robj)
 {
     if (robj != NULL) {
         return robj->next;
@@ -744,7 +744,7 @@ s32 lb_8000CDA8(s32 i)
     return lb_803BA020[i];
 }
 
-inline HSD_LObj* lobj_next(HSD_LObj* lobj)
+static inline HSD_LObj* lobj_next(HSD_LObj* lobj)
 {
     if (lobj == NULL) {
         return NULL;

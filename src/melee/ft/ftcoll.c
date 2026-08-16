@@ -147,7 +147,7 @@ void ftColl_800764DC(Fighter_GObj* gobj)
     }
 }
 
-inline void comboCount_Push(Fighter* fp)
+static inline void comboCount_Push(Fighter* fp)
 {
     Vec3* pos = &fp->coll_data.floor.normal;
     float temp_f2;
@@ -515,7 +515,7 @@ void ftColl_80076CBC(Fighter* fp0, HitCapsule* hit0, Fighter* fp1)
 }
 
 /// @todo #ftColl_80076808
-inline void inlineB0(Fighter* fp0, HitCapsule* hitbox, Fighter* fp1, int arg3)
+static inline void inlineB0(Fighter* fp0, HitCapsule* hitbox, Fighter* fp1, int arg3)
 {
     size_t i;
     for (i = 0; i < ARRAY_SIZE(fp0->x914); i++) {
@@ -1537,12 +1537,12 @@ void ftColl_80078998(HSD_GObj* arg0, HSD_GObj* arg1, float arg2)
 }
 #pragma pop
 
-inline HitCapsule* HitCapsuleGetPtr(Fighter* fp, u32 i)
+static inline HitCapsule* HitCapsuleGetPtr(Fighter* fp, u32 i)
 {
     return &fp->x914[i];
 }
 
-inline void ftGrabDist(Fighter* this_fp, Fighter* victim_fp)
+static inline void ftGrabDist(Fighter* this_fp, Fighter* victim_fp)
 {
     float grab_dist = victim_fp->cur_pos.x - this_fp->cur_pos.x;
     if (grab_dist < 0) {
@@ -3093,7 +3093,7 @@ void ftColl_8007B6A0(Fighter_GObj* gobj)
     ftCo_800BFFD0(fp, 9, false);
 }
 
-inline enum_t inlineC0(Fighter* fp)
+static inline enum_t inlineC0(Fighter* fp)
 {
     return ftCo_800C0694(fp);
 }

@@ -1260,7 +1260,7 @@ HSD_CObj* HSD_CObjAlloc(void)
     return cobj;
 }
 
-inline static void CObjResetFlags(HSD_CObj* cobj, u32 flags)
+static inline void CObjResetFlags(HSD_CObj* cobj, u32 flags)
 {
     if (cobj == NULL) {
         return;

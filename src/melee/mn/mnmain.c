@@ -1126,12 +1126,12 @@ static inline void UpdateAnimationLoop(HSD_JObj* jobj,
     }
 }
 
-inline f32 GetAnimStartFrame(AnimLoopSettings* anim_loop)
+static inline f32 GetAnimStartFrame(AnimLoopSettings* anim_loop)
 {
     return anim_loop->start_frame;
 }
 
-inline f32 GetAnimEndFrame(AnimLoopSettings* anim_loop)
+static inline f32 GetAnimEndFrame(AnimLoopSettings* anim_loop)
 {
     return anim_loop->end_frame;
 }
@@ -1763,7 +1763,7 @@ int mn_8022C010(int menu_kind, int selection)
 
 MenuFlow mn_804A04F0;
 
-inline void mn_8022C068(HSD_LObj* lobj, int unused, int div)
+static inline void mn_8022C068(HSD_LObj* lobj, int unused, int div)
 {
     int diff;
 

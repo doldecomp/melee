@@ -299,7 +299,7 @@ void fn_80258ED0(HSD_GObj* gobj)
     }
 }
 
-inline void fn_802590C4_inline(HSD_GObj* gobj)
+static inline void fn_802590C4_inline(HSD_GObj* gobj)
 {
     s32 i;
     struct mnGallery_804D6C88_userdata* tmp;

@@ -251,7 +251,7 @@ s32 it_802E609C(it_802E5FXX_struct* vars, SpawnItem* spawn)
     return var_r30;
 }
 
-inline void it_802E614C(Item_GObj* parent_gobj1, Item_GObj* parent_gobj2,
+static inline void it_802E614C(Item_GObj* parent_gobj1, Item_GObj* parent_gobj2,
                         SpawnItem* spawn, Vec3* pos, Vec3* vel)
 {
     spawn->kind = It_Kind_Unk4;
