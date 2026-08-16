@@ -271,9 +271,8 @@ static inline void ifMagnify_GetCornerColors(GXColor* colors, Vec3* world_pos)
 
 void ifMagnify_802FBBDC(HSD_GObj* arg0)
 {
+    UNUSED u8 top_pad[8];
     int i;
-    f32 mix2;
-    f32 right;
     ifMagnify* magnify;
     HSD_CObj* cobj;
     ifMagnifyPlayer* player;
@@ -281,7 +280,9 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
     f32 top;
     f32 bottom;
     f32 left;
+    f32 right;
     Vec3 interest_pos;
+    GXColor result;
     GXColor colors[4];
     Vec3 world_pos;
     f32 x_blend;
@@ -293,8 +294,8 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
     f32 y_class;
     f32 mix0;
     f32 mix1;
+    f32 mix2;
     f32 mix3;
-    GXColor result;
     bool should_display;
     bool is_outside;
 
@@ -327,7 +328,7 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
                 continue;
             }
 
-            scale = 0.125f * ftLib_80086B80(fighter_gobj);
+            scale = ftLib_80086B80(fighter_gobj) / 8.0f;
             HSD_CObjSetOrtho(cobj, top * scale, bottom * scale, left * scale,
                              right * scale);
             ftLib_80086B90(fighter_gobj, &interest_pos);
@@ -424,13 +425,13 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
             mix1 = x_blend * y_blend;
             mix2 = x_blend * y_inv;
             mix3 = x_inv * y_inv;
-            result.a = (u8) ((colors[1].a * mix0) + (colors[0].a * mix1) +
+            result.a = (u8) ((colors[0].a * mix1) + (colors[1].a * mix0) +
                              (colors[2].a * mix2) + (colors[3].a * mix3));
-            result.r = (u8) ((colors[1].r * mix0) + (colors[0].r * mix1) +
+            result.r = (u8) ((colors[0].r * mix1) + (colors[1].r * mix0) +
                              (colors[2].r * mix2) + (colors[3].r * mix3));
-            result.g = (u8) ((colors[1].g * mix0) + (colors[0].g * mix1) +
+            result.g = (u8) ((colors[0].g * mix1) + (colors[1].g * mix0) +
                              (colors[2].g * mix2) + (colors[3].g * mix3));
-            result.b = (u8) ((colors[1].b * mix0) + (colors[0].b * mix1) +
+            result.b = (u8) ((colors[0].b * mix1) + (colors[1].b * mix0) +
                              (colors[2].b * mix2) + (colors[3].b * mix3));
 
             HSD_SetEraseColor(result.r, result.g, result.b, result.a);
@@ -447,7 +448,7 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
 
         HSD_CObjSetOrtho(cobj, top, bottom, left, right);
     }
-    PAD_STACK(8);
+    PAD_STACK(4);
 }
 
 void ifMagnify_802FC3BC(void) {}
