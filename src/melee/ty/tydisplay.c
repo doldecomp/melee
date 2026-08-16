@@ -1,6 +1,5 @@
 #include "tydisplay.h"
 
-#include "math.h"
 #include "placeholder.h"
 #include "platform.h"
 #include "stddef.h"
@@ -44,13 +43,11 @@
 #include "melee/if/textlib.h"
 #include "mn/inlines.h"
 #include "mn/mnmain.h"
-#include "MSL/math.h"
 #include "sc/types.h"
 #include "ty/toy.h"
 #include "ty/types.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
+#include <math.h>
 
 /* 31830C */ static void _tyDisplay_8031830C(TySortElem*, s32, s32);
 /* 318714 */ static void _tyDisplay_80318714(TySortElem*, s32, s32);
@@ -2365,7 +2362,8 @@ s32 tyDisplay_8031C454(s32 arg0)
     return result;
 }
 
-inline void* un_8031C5E4_inline(HSD_Archive** arg0, u8 arg1, const char* arg2)
+static inline void* un_8031C5E4_inline(HSD_Archive** arg0, u8 arg1,
+                                       const char* arg2)
 {
     return HSD_ArchiveGetPublicAddress(arg0[arg1], arg2);
 }

@@ -14,7 +14,6 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
-#include <trigf.h>
 #include <baselib/mtx.h>
 #include <baselib/random.h>
 

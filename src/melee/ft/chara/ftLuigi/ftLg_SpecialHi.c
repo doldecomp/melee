@@ -1,6 +1,5 @@
 #include "ftLg_SpecialHi.h"
 
-#include "math.h"
 #include "types.h"
 
 #include <platform.h>
@@ -17,6 +16,7 @@
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Landing.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 /// 0x80143FC8

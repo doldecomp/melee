@@ -1,10 +1,8 @@
 #include "mtx.h"
 
 #include "debug.h"
-#include "math.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
+#include <math.h>
 
 #define EPSILON 0.0000000001f
 #define FLOAT_MIN 1.1754943E-38f
@@ -13,7 +11,7 @@ HSD_ObjAllocData HSD_Mtx_804C2310;
 HSD_ObjAllocData HSD_Mtx_804C233C;
 
 /// Calculates the determinant of the top 3x3 section of a 3x4 matrix
-inline f32 HSD_CalcDeterminantMatrix3x4(Mtx m)
+static inline f32 HSD_CalcDeterminantMatrix3x4(Mtx m)
 {
     return m[0][0] * m[1][1] * m[2][2] + m[0][1] * m[1][2] * m[2][0] +
            m[0][2] * m[1][0] * m[2][1] - m[2][0] * m[1][1] * m[0][2] -
@@ -204,7 +202,7 @@ void HSD_MtxInverseTranspose(Mtx src, Mtx dest)
     }
 }
 
-inline f32 calcVal(f32 x, f32 y)
+static inline f32 calcVal(f32 x, f32 y)
 {
     if (fabsf_bitwise(x) <= FLOAT_MIN) {
         if (y >= 0) {

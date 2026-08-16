@@ -4,7 +4,6 @@
 #include "gm_1A45.h"
 #include "gm_unsplit.h"
 #include "gmresult.h"
-#include "math.h"
 #include "placeholder.h"
 #include "types.h"
 
@@ -30,6 +29,7 @@
 #include "pl/player.h"
 #include "sc/types.h"
 
+#include <math.h>
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
 #include <baselib/controller.h>

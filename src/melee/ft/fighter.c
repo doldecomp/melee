@@ -82,8 +82,7 @@
 #include "pl/pltrick.h"
 #include "sfx/crowdsfx.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
+#include <math.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <baselib/controller.h>
@@ -97,7 +96,6 @@
 #include <baselib/lobj.h>
 #include <baselib/mtx.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
 
 extern struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX];
 
@@ -2733,7 +2731,7 @@ void Fighter_8006CFE0(Fighter_GObj* gobj)
     }
 }
 
-inline void setBit(Fighter_GObj* gobj)
+static inline void setBit(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2219_b7 = 1;

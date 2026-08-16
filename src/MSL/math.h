@@ -4,7 +4,6 @@
 #include <platform.h>
 
 #include <math_ppc.h>
-#include <trigf.h>
 #include <MetroTRK/intrinsics.h>
 
 #define MSL_HI(x) *(int*) &x
@@ -93,6 +92,13 @@ static inline double fabs(double f)
     return __fabs(f);
 }
 
+float acosf(float);
+float asinf(float);
+float atan2f(float y, float x);
+float atanf(float);
+float cosf(float);
+float sinf(float);
+float tanf(float);
 double frexp(double x, int* exponent);
 float fabsf__Ff(float);
 float tanf(float x);
@@ -102,5 +108,16 @@ float cosf(float x);
 float sinf(float x);
 void __sinit_trigf_c(void);
 float logf(float);
+
+static inline float fmodf(float a, float b)
+{
+    long long quotient;
+
+    if (__fabsf(b) > __fabsf(a)) {
+        return a;
+    }
+    quotient = a / b;
+    return a - b * quotient;
+}
 
 #endif

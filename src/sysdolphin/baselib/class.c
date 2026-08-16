@@ -310,18 +310,19 @@ void* hsdNew(HSD_ClassInfo* i)
     return cls;
 }
 
-inline HSD_ClassInfo* HSD_GetClassInfo(HSD_Obj* object)
+static inline HSD_ClassInfo* HSD_GetClassInfo(HSD_Obj* object)
 {
     return object->parent.class_info;
 }
 
-inline HSD_ClassInfo* HSD_PushClassInfo(HSD_ClassInfo* class_info)
+static inline HSD_ClassInfo* HSD_PushClassInfo(HSD_ClassInfo* class_info)
 {
     HSD_ClassInfo* ret;
     return ret = class_info;
 }
 
-inline bool hsdChangeClass_inline(HSD_Obj* object, HSD_ClassInfo* class_info)
+static inline bool hsdChangeClass_inline(HSD_Obj* object,
+                                         HSD_ClassInfo* class_info)
 {
     HSD_ClassInfo* var_r29;
     HSD_ClassInfo* var_r28;

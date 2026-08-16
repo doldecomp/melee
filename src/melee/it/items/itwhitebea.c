@@ -17,7 +17,7 @@
 #include "mp/mplib.h"
 #include "sysdolphin/baselib/random.h"
 
-#include <MSL/math.h>
+#include <math.h>
 
 ItemStateTable it_803F8A88[] = {
     { 0, itWhitebea_UnkMotion0_Anim, itWhitebea_UnkMotion0_Phys,

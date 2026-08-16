@@ -3,7 +3,6 @@
 #include "ftCo_CargoFall.h"
 #include "ftCo_CargoWait.h"
 #include "ftCo_Damage.h"
-#include "math.h"
 
 #include <platform.h>
 
@@ -21,6 +20,7 @@
 #include "ftCommon/ftCo_Thrown.h"
 #include "ftDonkey/types.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 /* 09C02C */ static void ftCo_8009C02C(Fighter_GObj* gobj, FtMotionId msid);

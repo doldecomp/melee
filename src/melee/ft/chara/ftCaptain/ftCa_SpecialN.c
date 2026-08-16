@@ -1,6 +1,5 @@
 #include "ftCa_SpecialN.h"
 
-#include "math.h"
 #include "types.h"
 
 #include <platform.h>
@@ -17,6 +16,7 @@
 #include "ftCommon/inlines.h"
 #include "lb/lb_00F9.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 /// Create Aesthetic Wind Effect for Warlock Punch

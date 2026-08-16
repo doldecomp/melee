@@ -20,12 +20,14 @@
 #include "mp/mpcoll.h"
 
 #include <math.h>
-#include <math_ppc.h>
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
+
+/* 2E614C */ static void it_802E614C(Item_GObj*, Item_GObj*, SpawnItem*, Vec3*,
+                                     Vec3*);
 
 const Vec3 it_803B8718 = { 0.0f, 0.0f, 0.0f };
 const Vec3 it_803B8724 = { 0.0f, 0.0f, 0.0f };
@@ -252,8 +254,9 @@ s32 it_802E609C(it_802E5FXX_struct* vars, SpawnItem* spawn)
     return var_r30;
 }
 
-inline void it_802E614C(Item_GObj* parent_gobj1, Item_GObj* parent_gobj2,
-                        SpawnItem* spawn, Vec3* pos, Vec3* vel)
+static inline void it_802E614C(Item_GObj* parent_gobj1,
+                               Item_GObj* parent_gobj2, SpawnItem* spawn,
+                               Vec3* pos, Vec3* vel)
 {
     spawn->kind = It_Kind_Unk4;
     spawn->prev_pos = *pos;

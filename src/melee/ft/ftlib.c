@@ -31,7 +31,6 @@
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 
-#include <trigf.h>
 #include <baselib/cobj.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
@@ -218,7 +217,7 @@ Fighter_GObj* ftLib_80086368(Vec3* v, Fighter_GObj* gobj, float facing_dir)
     return result;
 }
 
-inline s32 sgn(float x)
+static inline s32 sgn(float x)
 {
     if (x < 0.0f) {
         return -1;
@@ -446,7 +445,7 @@ CollData* ftLib_80086984(HSD_GObj* gobj)
     return Fighter_GetCollData(fp);
 }
 
-inline void vector_add(Vec3* dst, Vec3* src, float x, float y, float z)
+static inline void vector_add(Vec3* dst, Vec3* src, float x, float y, float z)
 {
     dst->x = src->x + x;
     dst->y = src->y + y;
@@ -584,7 +583,7 @@ enum_t ftLib_GetMotionId(HSD_GObj* gobj)
     return fp->motion_id;
 }
 
-inline void helper(HSD_GObj* gobj, s32 arg1, s32 arg2, s32 val)
+static inline void helper(HSD_GObj* gobj, s32 arg1, s32 arg2, s32 val)
 {
     Fighter* fp = gobj->user_data;
 

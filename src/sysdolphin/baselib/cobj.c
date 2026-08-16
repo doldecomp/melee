@@ -13,8 +13,6 @@
 #include <placeholder.h>
 
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
@@ -1262,7 +1260,7 @@ HSD_CObj* HSD_CObjAlloc(void)
     return cobj;
 }
 
-inline static void CObjResetFlags(HSD_CObj* cobj, u32 flags)
+static inline void CObjResetFlags(HSD_CObj* cobj, u32 flags)
 {
     if (cobj == NULL) {
         return;

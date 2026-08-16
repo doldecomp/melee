@@ -3,7 +3,6 @@
 #include "ftCo_ItemThrow.h"
 #include "ftCo_Wait.h"
 #include "ftpickupitem.h"
-#include "math.h"
 
 #include <platform.h>
 
@@ -20,6 +19,7 @@
 #include "ft/types.h"
 #include "it/it_26B1.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 /* 08B788 */ static void decideAngle(Fighter_GObj* gobj);

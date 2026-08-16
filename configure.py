@@ -1150,7 +1150,7 @@ config.libs = [
             Object(Matching, "melee/gm/gmlightning.c"),
             Object(NonMatching, "melee/gm/gm_1BA8.c"),
             Object(Matching, "melee/gm/gm_1BF9.c"),
-            Object(NonMatching, "melee/gm/gm_1BFA.c"),
+            Object(Matching, "melee/gm/gm_1BFA.c"),
         ],
     ),
     MeleeLib(

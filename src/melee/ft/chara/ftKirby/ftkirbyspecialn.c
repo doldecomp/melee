@@ -57,12 +57,11 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
+#include <math.h>
 #include <stddef.h>
-#include <trigf.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
 
 static MotionFlags const ftKb_MF_SpecialN_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx;
@@ -707,7 +706,7 @@ void ftKb_SpecialLw1_Anim(Fighter_GObj* gobj)
     }
 }
 
-inline void ftKbUnkInline(Fighter_GObj* gobj, int val)
+static inline void ftKbUnkInline(Fighter_GObj* gobj, int val)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x221C_b4 = val;
@@ -3495,7 +3494,7 @@ static inline void fn_800F9260_DrMario(HSD_GObj* gobj, Fighter* fp, Vec3* pos)
                         fp->facing_dir);
 }
 
-inline s32 fn_800F9260_inline(HSD_GObj* gobj)
+static inline s32 fn_800F9260_inline(HSD_GObj* gobj)
 {
     Fighter* fp2;
     s32 candidates[9];

@@ -29,7 +29,7 @@ extern inline float sqrtf(float x)
 #pragma pop
 #endif
 
-inline float sqrtf_accurate(float x)
+static inline float sqrtf_accurate(float x)
 {
     volatile float y;
     if (x > 0.0f) {

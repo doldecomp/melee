@@ -17,8 +17,6 @@
 #include "lb/lb_00B0.h"
 #include "pl/player.h"
 
-#include <trigf.h>
-
 void ftPp_SpecialHi_80122898(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;

@@ -195,7 +195,7 @@ void ftKb_KpSpecialNStart_Anim(Fighter_GObj* gobj)
     }
 }
 
-inline ftKb_DatAttrs* ftKb_KpSpecialN_Anim_inline(Fighter* arg0)
+static inline ftKb_DatAttrs* ftKb_KpSpecialN_Anim_inline(Fighter* arg0)
 {
     return arg0->dat_attrs;
 }

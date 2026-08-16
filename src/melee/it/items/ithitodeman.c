@@ -179,7 +179,7 @@ bool it_802D4564(Item_GObj* gobj)
     return false;
 }
 
-inline Article* it_802D472C_inline(Item* ip)
+static inline Article* it_802D472C_inline(Item* ip)
 {
     return ip->xC4_article_data;
 }

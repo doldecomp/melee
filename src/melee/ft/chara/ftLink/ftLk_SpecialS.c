@@ -31,7 +31,6 @@
 #include <baselib/forward.h>
 
 #include <math.h>
-#include <trigf.h>
 #include <dolphin/mtx.h>
 
 typedef enum cmd_var_idx {

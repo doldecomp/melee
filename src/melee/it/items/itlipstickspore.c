@@ -17,9 +17,8 @@
 #include "it/item.h"
 #include "it/types.h"
 
-#include <trigf.h>
+#include <math.h>
 #include <baselib/gobj.h>
-#include <MSL/math.h>
 
 /* 29A5F8 */ static bool itLipstickspore_UnkMotion1_Coll(Item_GObj* gobj);
 

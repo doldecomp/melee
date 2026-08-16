@@ -1,6 +1,5 @@
 #include "ftCh_GrabUnk1_B174.h"
 
-#include "math.h"
 #include "types.h"
 
 #include <placeholder.h>
@@ -20,6 +19,7 @@
 #include "lb/lb_00B0.h"
 #include "pl/player.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 #include <MetroTRK/intrinsics.h>
 

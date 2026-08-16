@@ -2,7 +2,6 @@
 
 #include "ftCo_CaptureDamageKoopa.h"
 #include "ftCo_Lift.h"
-#include "math.h"
 
 #include <platform.h>
 
@@ -18,6 +17,7 @@
 #include "ftCommon/types.h"
 #include "ftKoopa/ftKp_Init.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 

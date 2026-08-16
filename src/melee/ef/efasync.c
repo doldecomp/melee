@@ -3,7 +3,6 @@
 #include "efdata.h"
 #include "eflib.h"
 #include "efsync.h"
-#include "math.h"
 #include "types.h"
 
 #include "baselib/gobj.h"
@@ -15,6 +14,8 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbarchive.h"
 #include "lb/lbdvd.h"
+
+#include <math.h>
 
 HSD_ObjAllocData efAsync_AllocData;
 

@@ -11,7 +11,7 @@
 #include "it/itzako.h"
 #include "lb/lb_00B0.h"
 
-#include <MSL/math.h>
+#include <math.h>
 
 ItemStateTable it_803F8FD0[] = {
     { 0, itGreatfoxlaser_UnkMotion1_Anim, itGreatfoxlaser_UnkMotion1_Phys,

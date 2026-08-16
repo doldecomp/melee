@@ -16,7 +16,6 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <trigf.h>
 
 /* 2B37F0 */ static void itPikachutjoltground_UnkMotion1_Phys(Item_GObj*);
 

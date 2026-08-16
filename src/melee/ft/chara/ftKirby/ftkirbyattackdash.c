@@ -15,11 +15,10 @@
 
 #include "ftKirby/forward.h"
 
+#include <math.h>
 #include <stddef.h>
-#include <trigf.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
 
 /* 0F1FDC */ static void fn_800F1FDC(Fighter_GObj* gobj);
 /* 0F20C4 */ static void fn_800F20C4(Fighter_GObj* gobj);

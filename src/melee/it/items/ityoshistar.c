@@ -1,11 +1,11 @@
 #include "ityoshistar.h"
 
 #include "inlines.h"
-#include "math.h"
 
 #include "it/inlines.h"
 #include "it/it_2725.h"
 
+#include <math.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <melee/db/db.h>

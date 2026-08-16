@@ -14,7 +14,7 @@
 #include "tobj.h"
 #include "wobj.h"
 
-#include <__mem.h>
+#include <math.h>
 #include <stdarg.h>
 #include <MetroTRK/intrinsics.h>
 
@@ -114,6 +114,8 @@ void HSD_AObjStopAnim(HSD_AObj* aobj, void* obj, HSD_ObjUpdateFunc func)
     aobj->flags |= AOBJ_NO_ANIM;
 }
 
+#pragma push
+#pragma dont_inline on
 void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
                            HSD_ObjUpdateFunc update_func)
 {
@@ -138,7 +140,7 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
             HSD_FObjStopAnimAll(aobj->fobj, obj, update_func, rate);
             y = aobj->end_frame - aobj->rewind_frame;
             x = aobj->curr_frame - aobj->rewind_frame;
-            aobj->curr_frame = fmod(x, y) + aobj->rewind_frame;
+            aobj->curr_frame = fmodf(x, y) + aobj->rewind_frame;
             HSD_FObjReqAnimAll(aobj->fobj, aobj->curr_frame);
         } else {
             aobj->curr_frame = aobj->end_frame;
@@ -168,16 +170,7 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
         HSD_AObj_804D7630 += 1;
     }
 }
-
-float fmod(float a, float b)
-{
-    long long quotient;
-    if (__fabs(b) > __fabs(a)) {
-        return a;
-    }
-    quotient = a / b;
-    return a - b * quotient;
-}
+#pragma pop
 
 HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)
 {
