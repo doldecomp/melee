@@ -95,93 +95,93 @@ s32 ifMagnify_802FB6E8(s32 slot)
     (void) 2.0f;
     (void) 4503599627370496.0;
     if (ifMagnify_802FC998(slot) != 0) {
-        return ifMagnify_804A1DE0.player[slot].state.unk;
+        return ifMagnify_804A1DE0.player[slot].state.edge;
     }
     return 0;
 }
 
-ifMagnifyPlayer* ifMagnify_802FB73C(ifMagnifyPlayer* arg0, Vec2* arg1,
-                                    Vec2* arg2)
+ifMagnifyPlayer* ifMagnify_802FB73C(ifMagnifyPlayer* player, Vec2* pos,
+                                    Vec2* out)
 {
-    f32 temp_f1;
-    f32 temp_f1_2;
-    f32 temp_f1_3;
-    f32 temp_f2;
-    f32 temp_f3;
-    f32 temp_f4;
+    f32 x_clamped;
+    f32 y_clamped;
+    f32 out_x;
+    f32 x;
+    f32 ratio;
+    f32 y;
 
-    temp_f2 = arg1->x;
-    temp_f4 = arg1->y;
-    if (0.0f == temp_f2) {
-        if (temp_f4 > 0.0f) {
-            arg2->y = 162.7f;
+    x = pos->x;
+    y = pos->y;
+    if (0.0f == x) {
+        if (y > 0.0f) {
+            out->y = 162.7f;
         } else {
-            arg2->y = -162.7f;
+            out->y = -162.7f;
         }
-        arg2->x = 0.0f;
+        out->x = 0.0f;
     } else {
-        temp_f3 = temp_f4 / temp_f2;
-        if ((temp_f3 > 0.6438464f) || (temp_f3 < -0.6438464f)) {
-            if (temp_f4 > 0.0f) {
-                arg2->y = 162.7f;
+        ratio = y / x;
+        if ((ratio > 0.6438464f) || (ratio < -0.6438464f)) {
+            if (y > 0.0f) {
+                out->y = 162.7f;
             } else {
-                arg2->y = -162.7f;
+                out->y = -162.7f;
             }
-            temp_f1 = arg2->y;
-            temp_f1 = temp_f1 * temp_f2;
-            temp_f1 /= temp_f4;
-            if (temp_f1 < -252.70001f) {
-                arg2->x = -252.70001f;
-            } else if (temp_f1 > 252.70001f) {
-                arg2->x = 252.70001f;
+            x_clamped = out->y;
+            x_clamped = x_clamped * x;
+            x_clamped /= y;
+            if (x_clamped < -252.70001f) {
+                out->x = -252.70001f;
+            } else if (x_clamped > 252.70001f) {
+                out->x = 252.70001f;
             } else {
-                arg2->x = temp_f1;
+                out->x = x_clamped;
             }
         } else {
-            if (temp_f2 > 0.0f) {
-                arg2->x = 252.70001f;
+            if (x > 0.0f) {
+                out->x = 252.70001f;
             } else {
-                arg2->x = -252.70001f;
+                out->x = -252.70001f;
             }
-            temp_f1_2 = arg2->x;
-            temp_f1_2 = temp_f1_2 * temp_f4;
-            temp_f1_2 /= temp_f2;
-            if (temp_f1_2 < -162.7f) {
-                arg2->y = -162.7f;
-            } else if (temp_f1_2 > 162.7f) {
-                arg2->y = 162.7f;
+            y_clamped = out->x;
+            y_clamped = y_clamped * y;
+            y_clamped /= x;
+            if (y_clamped < -162.7f) {
+                out->y = -162.7f;
+            } else if (y_clamped > 162.7f) {
+                out->y = 162.7f;
             } else {
-                arg2->y = temp_f1_2;
+                out->y = y_clamped;
             }
         }
     }
 
-    temp_f1_3 = arg2->x;
-    temp_f2 = -252.70001f;
-    if (temp_f1_3 == temp_f2) {
-        arg0->state.unk = 2;
-        return arg0;
+    out_x = out->x;
+    x = -252.70001f;
+    if (out_x == x) {
+        player->state.edge = 2;
+        return player;
     }
-    temp_f2 = 252.70001f;
-    if (temp_f1_3 == temp_f2) {
-        arg0->state.unk = 4;
-        return arg0;
+    x = 252.70001f;
+    if (out_x == x) {
+        player->state.edge = 4;
+        return player;
     }
-    temp_f2 = 162.7f;
-    if (arg2->y == temp_f2) {
-        arg0->state.unk = 1;
-        return arg0;
+    x = 162.7f;
+    if (out->y == x) {
+        player->state.edge = 1;
+        return player;
     }
-    arg0->state.unk = 3;
-    return arg0;
+    player->state.edge = 3;
+    return player;
 }
 
-void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
+void ifMagnify_802FB8C0(HSD_GObj* gobj, int code)
 {
     UNUSED u8 top_pad[8];
     S32Vec2 screen_pos;
-    Vec2 out;
-    Vec2 pos;
+    Vec2 edge_pos;
+    Vec2 dir;
     Vec3 translate;
     GXColor color;
     GXColor color_copy;
@@ -194,11 +194,11 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
     s32 arrow_kind;
     u8 operand_pad[8];
 
-    if (arg1 != 0) {
+    if (code != 0) {
         return;
     }
 
-    player = arg0->user_data;
+    player = gobj->user_data;
     slot = player - ifMagnify_804A1DE0.player;
     is_colored = false;
     should_display = ifMagnify_IsHUDVisible();
@@ -206,24 +206,24 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
         fighter_gobj = Player_GetEntity(slot);
         if (fighter_gobj != NULL) {
             ftLib_80086A58(fighter_gobj, &screen_pos);
-            pos.x = screen_pos.x - 320.0f;
-            pos.y = -((f32) screen_pos.y - 240.0f);
+            dir.x = screen_pos.x - 320.0f;
+            dir.y = -((f32) screen_pos.y - 240.0f);
 
-            HSD_JObjSetRotationZ(player->jobj, atan2f(pos.y, pos.x));
+            HSD_JObjSetRotationZ(player->jobj, atan2f(dir.y, dir.x));
 
-            ifMagnify_802FB73C(player, &pos, &out);
-            translate.x = 0.09125f * out.x;
-            translate.y = 0.1f * out.y;
+            ifMagnify_802FB73C(player, &dir, &edge_pos);
+            translate.x = 0.09125f * edge_pos.x;
+            translate.y = 0.1f * edge_pos.y;
             translate.z = 0.0f;
             HSD_JObjSetTranslate((HSD_JObj*) player->gobj->hsd_obj,
                                  &translate);
 
-            HSD_GObj_JObjCallback(arg0, arg1);
-            if ((player->state.unk == 4) || (player->state.unk == 2)) {
+            HSD_GObj_JObjCallback(gobj, code);
+            if ((player->state.edge == 4) || (player->state.edge == 2)) {
                 ifMagnify_GetPlayerColor(&color, slot);
                 cp = &color_copy;
                 color_copy = color;
-                if (player->state.unk == 2) {
+                if (player->state.edge == 2) {
                     arrow_kind = 1;
                 } else {
                     arrow_kind = 2;
@@ -273,7 +273,7 @@ static inline void ifMagnify_GetCornerColors(GXColor* colors, Vec3* world_pos)
     }
 }
 
-void ifMagnify_802FBBDC(HSD_GObj* arg0)
+void ifMagnify_802FBBDC(HSD_GObj* gobj)
 {
     UNUSED u8 top_pad[8];
     int i;
@@ -310,10 +310,10 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
 
     should_display = ifMagnify_IsHUDVisible();
     if (should_display) {
-        cobj = arg0->hsd_obj;
+        cobj = gobj->hsd_obj;
         HSD_CObjGetOrtho(cobj, &top, &bottom, &left, &right);
         if (HSD_CObjSetCurrent(cobj) != 0) {
-            HSD_GObj_80390ED0(arg0, 7);
+            HSD_GObj_80390ED0(gobj, 7);
             HSD_CObjEndCurrent();
         }
 
@@ -337,7 +337,7 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
                 continue;
             }
 
-            Player_80036978(i, (s32) &world_pos);
+            Player_80036978(i, &world_pos);
             is_outside = true;
             if (!(world_pos.x < Stage_GetCamBoundsLeftOffset()) &&
                 !(world_pos.x > Stage_GetCamBoundsRightOffset()))
@@ -469,8 +469,7 @@ void ifMagnify_802FC3C0(s32 slot)
     jobj = HSD_JObjLoadJoint(
         (*(DynamicModelDesc**) ifMagnify_804A1DE0.model_desc)->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
-    GObj_SetupGXLink(gobj, (void (*)(HSD_GObj*, int)) ifMagnify_802FB8C0, 0xB,
-                     0);
+    GObj_SetupGXLink(gobj, ifMagnify_802FB8C0, 0xB, 0);
 
     lb_80011E24(jobj, &child, 2, -1);
     if (slot == 0) {
@@ -527,7 +526,7 @@ void ifMagnify_802FC618(void)
     gobj = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
     cobj = lb_80013B14((HSD_CameraDescPerspective*) &ifMagnify_803F97E8);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
-    GObj_SetupGXLinkMax(gobj, (GObj_RenderFunc) (Event) ifMagnify_802FBBDC, 0);
+    GObj_SetupGXLinkMax(gobj, (GObj_RenderFunc) ifMagnify_802FBBDC, 0);
     gobj->gxlink_prios = 0x10;
 
     idesc = player0->idesc;

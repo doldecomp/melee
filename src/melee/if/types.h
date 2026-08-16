@@ -117,7 +117,7 @@ typedef struct ifMagnifyPlayer {
     struct {
         u8 is_offscreen : 1;
         u8 ignore_offscreen : 1;
-        u8 unk : 6;
+        u8 edge : 6;
     } state;
 } ifMagnifyPlayer;
 
