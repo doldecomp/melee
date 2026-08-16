@@ -159,8 +159,8 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
     GXColor color;
     GXColor color_copy;
     GXColor* cp;
-    HSD_GObj* fighter_gobj;
     ifMagnifyPlayer* player;
+    HSD_GObj* fighter_gobj;
     s32 slot;
     bool is_colored;
     bool should_display;
@@ -223,6 +223,42 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
     }
 }
 
+static inline void ifMagnify_GetCornerColors(GXColor* colors, Vec3* world_pos)
+{
+    int j;
+    u8* color_ids;
+    f32 x_class;
+    f32 y_class;
+
+    for (j = 0; j < 4; j++) {
+        if (world_pos->y > Stage_GetCamBoundsTopOffset()) {
+            y_class = 0.0f;
+        } else if (world_pos->y < Stage_GetCamBoundsBottomOffset()) {
+            y_class = 3.0f;
+        } else if (world_pos->y > (0.5f * (Stage_GetCamBoundsTopOffset() +
+                                           Stage_GetCamBoundsBottomOffset())))
+        {
+            y_class = 1.0f;
+        } else {
+            y_class = 2.0f;
+        }
+        if (world_pos->x < Stage_GetCamBoundsLeftOffset()) {
+            x_class = 0.0f;
+        } else if (world_pos->x > Stage_GetCamBoundsRightOffset()) {
+            x_class = 3.0f;
+        } else if (world_pos->x < (0.5f * (Stage_GetCamBoundsLeftOffset() +
+                                           Stage_GetCamBoundsRightOffset())))
+        {
+            x_class = 1.0f;
+        } else {
+            x_class = 2.0f;
+        }
+        color_ids =
+            (u8*) &ifMagnify_803F984C[(s32) x_class + ((s32) y_class * 4)];
+        colors[j] = *ifMagnify_803F9828[color_ids[j]]();
+    }
+}
+
 void ifMagnify_802FBBDC(HSD_GObj* arg0)
 {
     int i;
@@ -230,8 +266,8 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
     f32 right;
     ifMagnify* magnify;
     HSD_CObj* cobj;
-    HSD_GObj* fighter_gobj;
     ifMagnifyPlayer* player;
+    HSD_GObj* fighter_gobj;
     f32 top;
     f32 bottom;
     f32 left;
@@ -249,8 +285,6 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
     f32 mix1;
     f32 mix3;
     GXColor result;
-    int j;
-    u8* color_ids;
     bool should_display;
     bool is_outside;
 
@@ -372,35 +406,7 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
             }
             y_inv = 1.0f - y_blend;
             (void) y_inv;
-            for (j = 0; j < 4; j++) {
-                if (world_pos.y > Stage_GetCamBoundsTopOffset()) {
-                    y_class = 0.0f;
-                } else if (world_pos.y < Stage_GetCamBoundsBottomOffset()) {
-                    y_class = 3.0f;
-                } else if (world_pos.y >
-                           (0.5f * (Stage_GetCamBoundsTopOffset() +
-                                    Stage_GetCamBoundsBottomOffset())))
-                {
-                    y_class = 1.0f;
-                } else {
-                    y_class = 2.0f;
-                }
-                if (world_pos.x < Stage_GetCamBoundsLeftOffset()) {
-                    x_class = 0.0f;
-                } else if (world_pos.x > Stage_GetCamBoundsRightOffset()) {
-                    x_class = 3.0f;
-                } else if (world_pos.x <
-                           (0.5f * (Stage_GetCamBoundsLeftOffset() +
-                                    Stage_GetCamBoundsRightOffset())))
-                {
-                    x_class = 1.0f;
-                } else {
-                    x_class = 2.0f;
-                }
-                color_ids = (u8*) &ifMagnify_803F984C[(s32) x_class +
-                                                      ((s32) y_class * 4)];
-                colors[j] = *ifMagnify_803F9828[color_ids[j]]();
-            }
+            ifMagnify_GetCornerColors(colors, &world_pos);
 
             y_blend = 1.0f - y_inv;
             x_blend = 1.0f - x_inv;
@@ -408,14 +414,14 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
             mix1 = x_blend * y_blend;
             mix2 = x_blend * y_inv;
             mix3 = x_inv * y_inv;
-            result.r = (u8) ((colors[3].r * mix3) + (colors[2].r * mix2) +
-                             (colors[0].r * mix1) + (colors[1].r * mix0));
-            result.g = (u8) ((colors[3].g * mix3) + (colors[2].g * mix2) +
-                             (colors[0].g * mix1) + (colors[1].g * mix0));
-            result.b = (u8) ((colors[3].b * mix3) + (colors[2].b * mix2) +
-                             (colors[0].b * mix1) + (colors[1].b * mix0));
-            result.a = (u8) ((colors[3].a * mix3) + (colors[2].a * mix2) +
-                             (colors[0].a * mix1) + (colors[1].a * mix0));
+            result.a = (u8) ((colors[1].a * mix0) + (colors[0].a * mix1) +
+                             (colors[2].a * mix2) + (colors[3].a * mix3));
+            result.r = (u8) ((colors[1].r * mix0) + (colors[0].r * mix1) +
+                             (colors[2].r * mix2) + (colors[3].r * mix3));
+            result.g = (u8) ((colors[1].g * mix0) + (colors[0].g * mix1) +
+                             (colors[2].g * mix2) + (colors[3].g * mix3));
+            result.b = (u8) ((colors[1].b * mix0) + (colors[0].b * mix1) +
+                             (colors[2].b * mix2) + (colors[3].b * mix3));
 
             HSD_SetEraseColor(result.r, result.g, result.b, result.a);
             HSD_CObjEraseScreen(cobj, 1, 0, 1);
