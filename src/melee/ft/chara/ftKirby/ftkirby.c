@@ -2517,7 +2517,6 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
 /* 0F6AC8 */ static void fn_800F6AC8(HSD_GObj* gobj);
 /* 10C288 */ static void fn_8010C288(HSD_GObj* gobj);
 
-
 void ftKb_Init_800EE528(void)
 {
     /// @todo Bad cast.
