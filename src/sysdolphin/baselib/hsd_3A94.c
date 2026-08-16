@@ -81,6 +81,8 @@ typedef struct CardQueueEntry {
     fn_803ACFC0((state), (block_idx), (file_id), (seq_num), (payload),        \
                 (payload_len), (file_idx))
 
+/* 3A949C */ static void hsd_803A949C(s32 chan, s32 arg1);
+/* 3ACB74 */ static s32 fn_803ACB74(s32 seq_a, s32 seq_b);
 /* 4D1138 */ extern u8 hsd_804D1138[0x10];
 /* 4D1148 */ extern u32 hsd_804D1148[0x80][0x9];
 /* 4D2348 */ extern __baselib_UnkType003 hsd_804D2348;
@@ -104,7 +106,6 @@ typedef struct CardQueueEntry {
 /* 4D79C0 */ s32 hsd_804D79C0;
 /* 4D79C4 */ s32 hsd_804D79C4;
 /* 4D79C8 */ u8 hsd_804D79C8;
-/* 3A949C */ void hsd_803A949C(s32 chan, s32 arg1);
 
 static inline s32 hsd_803A949C_Close(CardState* state)
 {
@@ -1720,7 +1721,8 @@ static inline s32 fn_803AC6B8_blocks_before(struct CardState* file_desc,
     return total;
 }
 
-static inline u32 fn_803AC7DC_block_count(struct CardState* file_desc, s32 file_idx)
+static inline u32 fn_803AC7DC_block_count(struct CardState* file_desc,
+                                          s32 file_idx)
 {
     if (file_desc->x4C[file_idx] <= 0) {
         return 0;

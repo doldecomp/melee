@@ -49,6 +49,8 @@
 #include <melee/mn/mnvibration.h>
 #include <melee/sc/types.h>
 
+/* 22C068 */ static void mn_8022C068(HSD_LObj*, int, int);
+
 static HSD_GObj* mn_804D6BA8;
 static HSD_GObj* mn_804D6BAC;
 static HSD_GObj* mn_804D6BB0;

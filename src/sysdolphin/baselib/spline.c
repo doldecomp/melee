@@ -7,6 +7,9 @@
 #include <math.h>
 #include <MetroTRK/intrinsics.h>
 
+static void splGetCardinalPoint(Vec3*, Vec3*, f32, f32);
+static void splGetBezierPoint(Vec3*, Vec3*, f32);
+
 f32 splGetHelmite(f32 fterm, f32 time, f32 p0, f32 p1, f32 d0, f32 d1)
 {
     f32 _3t2_T2;
@@ -155,7 +158,8 @@ static inline f32* spl_GetCoeffs(HSD_Spline* spl, s32 idx)
     return spl->segPoly[idx];
 }
 
-static inline f32 spl_IterateSimpsonsMiddle(const f32 coeffs[5], const f32 dx, f32 t)
+static inline f32 spl_IterateSimpsonsMiddle(const f32 coeffs[5], const f32 dx,
+                                            f32 t)
 {
     f32 var_f24 = 0.0F;
     s32 i;
