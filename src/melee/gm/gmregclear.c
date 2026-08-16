@@ -2650,7 +2650,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
 
     special_score = 0;
     coins = arg4->x58[0].xE;
-    memzero(state, 0x120);
+    memzero(state, sizeof(*state));
     state->xD4 = -1;
     state->xD8 = 0;
     state->xE0 = -1;

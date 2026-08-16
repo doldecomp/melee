@@ -206,10 +206,10 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
     jobj2 = jobj;
     Ground_801C2ED0(jobj2, gp->map_id);
 
-    gp->u.homerun.parts = HSD_MemAlloc(0x100);
+    gp->u.homerun.parts = HSD_MemAlloc(sizeof(*gp->u.homerun.parts) * 64);
     HSD_ASSERTMSG(0x17A, gp->u.homerun.parts, "gp->u.map.parts");
 
-    gp->u.homerun.back = HSD_MemAlloc(0x40);
+    gp->u.homerun.back = HSD_MemAlloc(sizeof(*gp->u.homerun.back) * 16);
     HSD_ASSERTMSG(0x17B, gp->u.homerun.back, "gp->u.map.back");
 
     HSD_JObjSetScaleX(jobj2, grHr_804D6AE4 * HSD_JObjGetScaleX(jobj));

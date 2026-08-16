@@ -261,7 +261,7 @@ int _Toy_80304D30(void)
     if (un_80304470()) {
         return 0;
     }
-    memzero(sp14, 36);
+    memzero(sp14, sizeof(sp14));
     count = 0;
     for (i = 0; i < 0x125; i++) {
         if (Toy_80304CC8(i)) {
@@ -5237,7 +5237,7 @@ void Toy_80310324(void)
             sym + 4, _Toy_803FDEA0[0], NULL);
     }
 
-    memzero(_Toy_sbss_804D6E68, 0x64);
+    memzero(_Toy_sbss_804D6E68, sizeof(*_Toy_sbss_804D6E68));
     _Toy_8030FA50();
     memzero(Toy_sbss_804D6ED4, 0xE4);
     Toy_80306D70(0);
@@ -5283,7 +5283,7 @@ void Toy_80310324(void)
     }
 
     if (var_r0 != 0) {
-        memzero(&toy->anim, 0x14);
+        memzero(&toy->anim, sizeof(toy->anim));
         _Toy_8030FE48(Toy_sbss_804D6EE0, 0);
         tg6 = (ToyGlobalsS_*) Toy_sbss_804D6EE0;
         Toy_803087F4(tg6->x140);
@@ -5748,7 +5748,7 @@ void _Toy_803114E8(void)
 
     (void) pad;
 
-    _Toy_sbss_804D6E5C = HSD_MemAlloc(0x18);
+    _Toy_sbss_804D6E5C = HSD_MemAlloc(sizeof(*_Toy_sbss_804D6E5C) * 6);
     data = _Toy_sbss_804D6E5C;
 
     _Toy_sbss_804D6E98 =
@@ -5955,7 +5955,7 @@ void Toy_OnEnter_80311AB0(void* arg0)
     Toy_sbss_804D6EDC = HSD_MemAlloc(sizeof(*Toy_sbss_804D6EDC) * 0x125);
     _Toy_sbss_804D6E64 = HSD_MemAlloc(sizeof(*_Toy_sbss_804D6E64) * 0x125 * 3);
     Toy_sbss_804D6EE0 = HSD_MemAlloc(sizeof(*Toy_sbss_804D6EE0));
-    _Toy_sbss_804D6E6C = HSD_MemAlloc(8);
+    _Toy_sbss_804D6E6C = HSD_MemAlloc(sizeof(*_Toy_sbss_804D6E6C));
 
     memzero(_Toy_sbss_804D6E68, sizeof(*_Toy_sbss_804D6E68));
     memzero(Toy_sbss_804D6ED8, sizeof(*Toy_sbss_804D6ED8));

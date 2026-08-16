@@ -894,11 +894,11 @@ void mpLibLoad(MapCollData* coll_data)
     int i;
 
     joint_prev = NULL;
-    groundCollVtx = HSD_MemAlloc(0xC000);
+    groundCollVtx = HSD_MemAlloc(sizeof(*groundCollVtx) * 2048);
     HSD_ASSERT(412, groundCollVtx);
-    groundCollLine = HSD_MemAlloc(0x3000);
+    groundCollLine = HSD_MemAlloc(sizeof(*groundCollLine) * 1536);
     HSD_ASSERT(413, groundCollLine);
-    groundCollJoint = HSD_MemAlloc(0x3400);
+    groundCollJoint = HSD_MemAlloc(sizeof(*groundCollJoint) * 256);
     HSD_ASSERT(414, groundCollJoint);
     grDynamicAttr_801CA0B4();
     if (coll_data == NULL) {

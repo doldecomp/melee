@@ -634,7 +634,7 @@ int lb_8001B14C(void)
     if (_p(free_files) != NULL) {
         *_p(free_files) = _p(unused_files);
     }
-    nodes = HSD_MemAlloc(0x5F4);
+    nodes = HSD_MemAlloc(sizeof(*nodes) * 0x7F);
     node = nodes;
     company = (char*) stat[0].company;
     game = (char*) stat[0].gameName;

@@ -74,7 +74,7 @@ void mpIsland_8005A728(void)
     vtx = mpGetGroundCollVtx();
     mpIsland_8005A6F8();
 
-    memzero(visited, 0x600u);
+    memzero(visited, sizeof(visited));
 
     /* Process floor segments */
     prev = NULL;
@@ -468,7 +468,7 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
     }
     *arg0 = prev;
 
-    memzero(visited, 0x600u);
+    memzero(visited, sizeof(visited));
 
     joints = mpGetGroundCollJoint();
     joints = &joints[arg2];

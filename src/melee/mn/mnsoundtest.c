@@ -819,7 +819,7 @@ void mnSoundTest_8024BCA0(int arg0)
     proc = HSD_GObj_SetupProc(gobj, (void (*)(mnSoundTest_GObj*)) fn_8024BAF0,
                               0U);
     proc->flags_3 = HSD_GObj_804D783C;
-    user_data = HSD_MemAlloc(0x20);
+    user_data = HSD_MemAlloc(sizeof(*user_data));
     if (user_data == NULL) {
         OSReport(mnSoundTest_803EF4F4);
         __assert(mnSoundTest_803EF50C, 0x5F4U, mnSoundTest_803EF51C);
