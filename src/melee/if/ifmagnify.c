@@ -69,6 +69,16 @@ static u8 ifMagnify_803F984C[16][4] = {
     { 6, 6, 6, 6 }, { 6, 7, 6, 7 }, { 7, 8, 7, 8 }, { 8, 8, 8, 8 },
 };
 
+static inline bool ifMagnify_IsHUDVisible(void)
+{
+    if ((gm_16AE_GetUnkData_0()->hud_enabled == 0) || ifAll_IsHUDHidden() ||
+        Camera_80030130())
+    {
+        return false;
+    }
+    return true;
+}
+
 static inline void ifMagnify_GetPlayerColor(GXColor* color, s32 slot)
 {
     *color =
@@ -182,7 +192,7 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
     bool is_colored;
     bool should_display;
     s32 arrow_kind;
-    u8 operand_pad[12];
+    u8 operand_pad[8];
 
     if (arg1 != 0) {
         return;
@@ -191,13 +201,7 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
     player = arg0->user_data;
     slot = player - ifMagnify_804A1DE0.player;
     is_colored = false;
-    if ((gm_16AE_GetUnkData_0()->hud_enabled == 0) || ifAll_IsHUDHidden() ||
-        Camera_80030130())
-    {
-        should_display = false;
-    } else {
-        should_display = true;
-    }
+    should_display = ifMagnify_IsHUDVisible();
     if (should_display && player->state.is_offscreen) {
         fighter_gobj = Player_GetEntity(slot);
         if (fighter_gobj != NULL) {
@@ -304,13 +308,7 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
         magnify->player[i].state.is_offscreen = 0;
     }
 
-    if ((gm_16AE_GetUnkData_0()->hud_enabled == 0) || ifAll_IsHUDHidden() ||
-        Camera_80030130())
-    {
-        should_display = false;
-    } else {
-        should_display = true;
-    }
+    should_display = ifMagnify_IsHUDVisible();
     if (should_display) {
         cobj = arg0->hsd_obj;
         HSD_CObjGetOrtho(cobj, &top, &bottom, &left, &right);
@@ -448,7 +446,6 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
 
         HSD_CObjSetOrtho(cobj, top, bottom, left, right);
     }
-    PAD_STACK(4);
 }
 
 void ifMagnify_802FC3BC(void) {}
