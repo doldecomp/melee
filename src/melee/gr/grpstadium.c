@@ -1958,6 +1958,8 @@ static struct VecScalar {
 void grStadium_801D435C(Ground_GObj* arg0)
 {
     struct VecScalar* cur;
+    f32 part;
+    f32 total;
     Ground* gp = HSD_GObjGetUserData(arg0);
     f32 temp_f1_2;
     f32 temp_f1_3;
@@ -1965,11 +1967,12 @@ void grStadium_801D435C(Ground_GObj* arg0)
     int var_r28;
     Vec3 spC;
 
-    if (gp->u.stadium.xD4 == 0.0F) {
+    if ((part = gp->u.stadium.xD4) == 0.0F) {
         int i;
         cur = lbl_803E1630;
         for (i = 0; i < ARRAY_SIZE(lbl_803E1630); i++) {
-            gp->u.stadium.xD4 += cur++->scalar;
+            part = cur++->scalar;
+            gp->u.stadium.xD4 = (total = gp->u.stadium.xD4) - -part;
         }
     }
     var_r28 = 0;
