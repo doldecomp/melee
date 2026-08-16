@@ -43,15 +43,15 @@ struct ftKb_Init_803CB4EC_t {
     Vec3 vec;
 };
 
-struct ftKb_Init_803CB4EC_t ftKb_Init_803CB4EC = {
-    { 0, 2, 3, 4, 5, 6 },
-    { 0.0F, 1.0F, 0.0F },
-};
-
 bool ftKb_Init_803CB490[] = {
     false, true,  false, false, false, false, true,  true,
     false, false, false, true,  true,  true,  false, false,
     true,  true,  true,  true,  false, true,  true,
+};
+
+struct ftKb_Init_803CB4EC_t ftKb_Init_803CB4EC = {
+    { 0, 2, 3, 4, 5, 6 },
+    { 0.0F, 1.0F, 0.0F },
 };
 
 static inline bool fbKb_SpecialLw_IASA_Inline(Fighter_GObj* gobj)
