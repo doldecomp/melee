@@ -1,7 +1,6 @@
 #include "ftFx_SpecialN.h"
 
 #include "ftFx_Init.h"
-#include "math.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -26,7 +25,7 @@
 #include "it/items/itfoxblaster.h"
 #include "lb/lb_00B0.h"
 
-#include <trigf.h>
+#include <math.h>
 #include <baselib/debug.h>
 #include <melee/it/items/itfoxlaser.h>
 
@@ -136,7 +135,7 @@ bool ftFx_SpecialN_CheckBlasterAction(HSD_GObj* gobj)
     return true;
 }
 
-inline void ftFox_SpecialN_SetNULL(HSD_GObj* gobj)
+static inline void ftFox_SpecialN_SetNULL(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
     fp->take_dmg_cb = NULL;
@@ -230,7 +229,7 @@ void ftFx_SpecialN_CreateBlasterShot(HSD_GObj* gobj)
     }
 }
 
-inline void ftFox_SpecialN_SetCall(HSD_GObj* gobj)
+static inline void ftFox_SpecialN_SetCall(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
     fp->take_dmg_cb = ftFx_Init_800E5588;

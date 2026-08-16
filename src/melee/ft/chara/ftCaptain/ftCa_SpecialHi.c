@@ -1,7 +1,5 @@
 #include "ftCa_SpecialHi.h"
 
-#include "math.h"
-
 #include <platform.h>
 
 #include "ft/fighter.h"
@@ -20,6 +18,7 @@
 #include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/ftCo_Thrown.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 void ftCa_SpecialHiThrow1_Coll(HSD_GObj* gobj)

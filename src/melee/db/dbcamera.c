@@ -10,7 +10,6 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <trigf.h>
 /* 4A03C0 */ static char db_CameraInfoDisplay_buf[0xC0];
 
 /// @todo does the padding mean this should be in another file before this one?

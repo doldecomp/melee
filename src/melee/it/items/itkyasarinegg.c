@@ -137,7 +137,7 @@ bool itKyasarinegg_UnkMotion4_Anim(Item_GObj* gobj)
     it_802751D8(gobj);
 }
 
-inline bool it_damage_inline(Item_GObj* gobj)
+static inline bool it_damage_inline(Item_GObj* gobj)
 {
     Item* egg = GET_ITEM(gobj);
     itKyasarinEggAttributes* ap;

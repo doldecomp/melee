@@ -1,6 +1,5 @@
 #include "lbshadow.h"
 
-#include <math_ppc.h>
 #include <dolphin/gx/GXVert.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>

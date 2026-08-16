@@ -1,5 +1,4 @@
 #include "ft_0892.h"
-#include "math.h"
 
 #include "ft/fighter.h"
 #include "ft/ftcommon.h"
@@ -15,8 +14,7 @@
 #include "it/it_26B1.h"
 #include "it/items/itpeachparasol.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
+#include <math.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 

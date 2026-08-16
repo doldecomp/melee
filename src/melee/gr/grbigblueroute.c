@@ -21,7 +21,6 @@
 #include "lb/lbshadow.h"
 #include "lb/lbvector.h"
 
-#include <trigf.h>
 #include <dolphin/os.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>

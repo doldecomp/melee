@@ -28,11 +28,10 @@
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 
+#include <math.h>
 #include <stddef.h>
-#include <trigf.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
 
 struct ftKb_Init_803CB490_layout {
     char pad[0x74];

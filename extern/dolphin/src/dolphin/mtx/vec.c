@@ -1,5 +1,5 @@
 #include <dolphin.h>
-#include <math_ppc.h>
+#include <math.h>
 #include <dolphin/mtx.h>
 
 // defines to make asm work

@@ -3,7 +3,7 @@
 #include <string.h>
 #include <dolphin/os.h>
 
-inline void Locate(HSD_Archive* archive)
+static inline void Locate(HSD_Archive* archive)
 {
     u32 i;
     u32* ptr;

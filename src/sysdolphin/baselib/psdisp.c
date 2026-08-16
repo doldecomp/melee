@@ -12,7 +12,6 @@
 #include "baselib/state.h"
 #include "baselib/util.h"
 
-#include <math_ppc.h>
 #include <string.h>
 #include <dolphin/gx.h>
 

@@ -27,7 +27,7 @@ bool ftMh_MS_343_80151428(Vec3* vec)
     return false;
 }
 
-inline void func_80151484_inline1(HSD_GObj* gobj)
+static inline void func_80151484_inline1(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;

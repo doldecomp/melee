@@ -1156,7 +1156,7 @@ config.libs = [
             Object(Matching, "melee/gm/gmlightning.c"),
             Object(NonMatching, "melee/gm/gm_1BA8.c"),
             Object(Matching, "melee/gm/gm_1BF9.c"),
-            Object(NonMatching, "melee/gm/gm_1BFA.c"),
+            Object(Matching, "melee/gm/gm_1BFA.c"),
         ],
     ),
     MeleeLib(
@@ -1494,7 +1494,7 @@ config.libs = [
             Object(Matching, "melee/if/if_2F6E.c"),
             Object(NonMatching, "melee/if/if_2F72.c"),
             Object(NonMatching, "melee/if/ifstock.c"),
-            Object(NonMatching, "melee/if/ifmagnify.c"),
+            Object(Matching, "melee/if/ifmagnify.c"),
             Object(Matching, "melee/if/ifnametag.c"),
             Object(Matching, "melee/if/ifhazard.c"),
             Object(Matching, "melee/if/if_2FD9.c"),

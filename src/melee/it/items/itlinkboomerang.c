@@ -17,9 +17,6 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
-
 #define HYPOT(x, y) sqrtf((x) * (x) + (y) * (y))
 #define VEC_XY_LENGTH(v) HYPOT((v)->x, (v)->y)
 

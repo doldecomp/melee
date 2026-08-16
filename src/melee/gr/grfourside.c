@@ -21,7 +21,6 @@
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
-#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjobject.h>

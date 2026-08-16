@@ -30,24 +30,29 @@
 #include <baselib/memory.h>
 #include <baselib/mobj.h>
 #include <baselib/tobj.h>
+#include <baselib/wobj.h>
 
-/* 3F97E8 */ extern HSD_CameraDescPerspective ifMagnify_803F97E8;
-static char ifMagnify_803F988C[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
-static char ifMagnify_804D57F0[] = "jobj.h";
-static char ifMagnify_804D57F8[] = "jobj";
-/* 4DDB08 */ extern f32 ifMagnify_804DDB08;
-/* 4DDB28 */ extern f32 ifMagnify_804DDB28;
-/* 4DDB2C */ extern f32 ifMagnify_804DDB2C;
-/* 4DDB30 */ extern f32 ifMagnify_804DDB30;
-/* 4DDB34 */ extern f32 ifMagnify_804DDB34;
-/* 4DDB38 */ extern f32 ifMagnify_804DDB38;
-/* 4DDB3C */ extern f32 ifMagnify_804DDB3C;
-/* 4DDB40 */ extern f32 ifMagnify_804DDB40;
-/* 4DDB44 */ extern f32 ifMagnify_804DDB44;
-/* 4DDB48 */ extern f32 ifMagnify_804DDB48;
-/* 4DDB4C */ extern f32 ifMagnify_804DDB4C;
-/* 4DDB50 */ extern f64 ifMagnify_804DDB50;
-/* 4DDB60 */ extern int ifMagnify_804DDB60;
+static HSD_WObjDesc ifMagnify_803F97C0 = { NULL,
+                                           { 0.0F, 0.0F, 300.0F },
+                                           NULL };
+static HSD_WObjDesc ifMagnify_803F97D4 = { NULL, { 0.0F, 0.0F, 0.0F }, NULL };
+
+static HSD_CameraDescFrustum ifMagnify_803F97E8 = {
+    NULL,
+    0,
+    PROJ_ORTHO,
+    { 0, 640, 0, 480 },
+    { 0, 640, 0, 480 },
+    &ifMagnify_803F97C0,
+    &ifMagnify_803F97D4,
+    0.0F,
+    NULL,
+    0.1F,
+    32768.0F,
+};
+
+static char ifMagnify_804D57E8[] = "lupe";
+static const int ifMagnify_804DDB60 = 0;
 
 ifMagnify ifMagnify_804A1DE0;
 
@@ -63,11 +68,6 @@ static s32 ifMagnify_803F984C[0x10] = {
     0x06060606, 0x06070607, 0x07080708, 0x08080808,
 };
 
-typedef struct ifMagnifyImageDescCopy {
-    u8 pad[0x5C];
-    HSD_ImageDesc image_descs[6];
-} ifMagnifyImageDescCopy;
-
 typedef struct ifMagnifyImageDescBase {
     u8 pad[0x74];
     HSD_ImageDesc image_descs[5];
@@ -75,6 +75,12 @@ typedef struct ifMagnifyImageDescBase {
 
 s32 ifMagnify_802FB6E8(s32 slot)
 {
+    (void) 0.0f;
+    (void) 3.0f;
+    (void) 0.5f;
+    (void) 1.0f;
+    (void) 2.0f;
+    (void) 4503599627370496.0;
     if (ifMagnify_802FC998(slot) != 0) {
         return ifMagnify_804A1DE0.player[slot].state.unk;
     }
@@ -95,42 +101,42 @@ ifMagnifyPlayer* ifMagnify_802FB73C(ifMagnifyPlayer* arg0, Vec2* arg1,
     temp_f4 = arg1->y;
     if (0.0f == temp_f2) {
         if (temp_f4 > 0.0f) {
-            arg2->y = ifMagnify_804DDB28;
+            arg2->y = 162.7f;
         } else {
-            arg2->y = ifMagnify_804DDB2C;
+            arg2->y = -162.7f;
         }
-        arg2->x = ifMagnify_804DDB08;
+        arg2->x = 0.0f;
     } else {
         temp_f3 = temp_f4 / temp_f2;
-        if ((temp_f3 > ifMagnify_804DDB30) || (temp_f3 < ifMagnify_804DDB34)) {
+        if ((temp_f3 > 0.6438464f) || (temp_f3 < -0.6438464f)) {
             if (temp_f4 > 0.0f) {
-                arg2->y = ifMagnify_804DDB28;
+                arg2->y = 162.7f;
             } else {
-                arg2->y = ifMagnify_804DDB2C;
+                arg2->y = -162.7f;
             }
             temp_f1 = arg2->y;
             temp_f1 = temp_f1 * temp_f2;
             temp_f1 /= temp_f4;
-            if (temp_f1 < ifMagnify_804DDB38) {
-                arg2->x = ifMagnify_804DDB38;
-            } else if (temp_f1 > ifMagnify_804DDB3C) {
-                arg2->x = ifMagnify_804DDB3C;
+            if (temp_f1 < -252.70001f) {
+                arg2->x = -252.70001f;
+            } else if (temp_f1 > 252.70001f) {
+                arg2->x = 252.70001f;
             } else {
                 arg2->x = temp_f1;
             }
         } else {
             if (temp_f2 > 0.0f) {
-                arg2->x = ifMagnify_804DDB3C;
+                arg2->x = 252.70001f;
             } else {
-                arg2->x = ifMagnify_804DDB38;
+                arg2->x = -252.70001f;
             }
             temp_f1_2 = arg2->x;
             temp_f1_2 = temp_f1_2 * temp_f4;
             temp_f1_2 /= temp_f2;
-            if (temp_f1_2 < ifMagnify_804DDB2C) {
-                arg2->y = ifMagnify_804DDB2C;
-            } else if (temp_f1_2 > ifMagnify_804DDB28) {
-                arg2->y = ifMagnify_804DDB28;
+            if (temp_f1_2 < -162.7f) {
+                arg2->y = -162.7f;
+            } else if (temp_f1_2 > 162.7f) {
+                arg2->y = 162.7f;
             } else {
                 arg2->y = temp_f1_2;
             }
@@ -138,15 +144,18 @@ ifMagnifyPlayer* ifMagnify_802FB73C(ifMagnifyPlayer* arg0, Vec2* arg1,
     }
 
     temp_f1_3 = arg2->x;
-    if (temp_f1_3 == ifMagnify_804DDB38) {
+    temp_f2 = -252.70001f;
+    if (temp_f1_3 == temp_f2) {
         arg0->state.unk = 2;
         return arg0;
     }
-    if (temp_f1_3 == ifMagnify_804DDB3C) {
+    temp_f2 = 252.70001f;
+    if (temp_f1_3 == temp_f2) {
         arg0->state.unk = 4;
         return arg0;
     }
-    if (arg2->y == ifMagnify_804DDB28) {
+    temp_f2 = 162.7f;
+    if (arg2->y == temp_f2) {
         arg0->state.unk = 1;
         return arg0;
     }
@@ -164,14 +173,12 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
     GXColor color;
     GXColor color_copy;
     GXColor* cp;
-    HSD_GObj* fighter_gobj;
     ifMagnifyPlayer* player;
+    HSD_GObj* fighter_gobj;
     s32 slot;
     bool is_colored;
     bool should_display;
     s32 arrow_kind;
-    u8 slot_type;
-    u8 teams_enabled;
     u8 operand_pad[12];
 
     if (arg1 != 0) {
@@ -206,11 +213,9 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
 
             HSD_GObj_JObjCallback(arg0, arg1);
             if ((player->state.unk == 4) || (player->state.unk == 2)) {
-                slot_type = Player_GetPlayerSlotType(slot);
-                teams_enabled = gm_8016B168();
-                color =
-                    gm_80160968(gm_80160854((u8) slot, Player_GetTeam(slot),
-                                            teams_enabled, slot_type));
+                color = gm_80160968(
+                    gm_80160854((u8) slot, Player_GetTeam(slot), gm_8016B168(),
+                                Player_GetPlayerSlotType(slot)));
                 cp = &color_copy;
                 color_copy = color;
                 if (player->state.unk == 2) {
@@ -228,19 +233,56 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
     }
 }
 
+static inline void ifMagnify_GetCornerColors(GXColor* colors, Vec3* world_pos)
+{
+    int j;
+    u8* color_ids;
+    f32 x_class;
+    f32 y_class;
+
+    for (j = 0; j < 4; j++) {
+        if (world_pos->y > Stage_GetCamBoundsTopOffset()) {
+            y_class = 0.0f;
+        } else if (world_pos->y < Stage_GetCamBoundsBottomOffset()) {
+            y_class = 3.0f;
+        } else if (world_pos->y > (0.5f * (Stage_GetCamBoundsTopOffset() +
+                                           Stage_GetCamBoundsBottomOffset())))
+        {
+            y_class = 1.0f;
+        } else {
+            y_class = 2.0f;
+        }
+        if (world_pos->x < Stage_GetCamBoundsLeftOffset()) {
+            x_class = 0.0f;
+        } else if (world_pos->x > Stage_GetCamBoundsRightOffset()) {
+            x_class = 3.0f;
+        } else if (world_pos->x < (0.5f * (Stage_GetCamBoundsLeftOffset() +
+                                           Stage_GetCamBoundsRightOffset())))
+        {
+            x_class = 1.0f;
+        } else {
+            x_class = 2.0f;
+        }
+        color_ids =
+            (u8*) &ifMagnify_803F984C[(s32) x_class + ((s32) y_class * 4)];
+        colors[j] = *ifMagnify_803F9828[color_ids[j]]();
+    }
+}
+
 void ifMagnify_802FBBDC(HSD_GObj* arg0)
 {
+    UNUSED u8 top_pad[8];
     int i;
-    f32 mix2;
-    f32 right;
     ifMagnify* magnify;
     HSD_CObj* cobj;
-    HSD_GObj* fighter_gobj;
     ifMagnifyPlayer* player;
+    HSD_GObj* fighter_gobj;
     f32 top;
     f32 bottom;
     f32 left;
+    f32 right;
     Vec3 interest_pos;
+    GXColor result;
     GXColor colors[4];
     Vec3 world_pos;
     f32 x_blend;
@@ -252,10 +294,8 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
     f32 y_class;
     f32 mix0;
     f32 mix1;
+    f32 mix2;
     f32 mix3;
-    GXColor result;
-    int j;
-    u8* color_ids;
     bool should_display;
     bool is_outside;
 
@@ -288,7 +328,7 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
                 continue;
             }
 
-            scale = 0.125f * ftLib_80086B80(fighter_gobj);
+            scale = ftLib_80086B80(fighter_gobj) / 8.0f;
             HSD_CObjSetOrtho(cobj, top * scale, bottom * scale, left * scale,
                              right * scale);
             ftLib_80086B90(fighter_gobj, &interest_pos);
@@ -377,35 +417,7 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
             }
             y_inv = 1.0f - y_blend;
             (void) y_inv;
-            for (j = 0; j < 4; j++) {
-                if (world_pos.y > Stage_GetCamBoundsTopOffset()) {
-                    y_class = 0.0f;
-                } else if (world_pos.y < Stage_GetCamBoundsBottomOffset()) {
-                    y_class = 3.0f;
-                } else if (world_pos.y >
-                           (0.5f * (Stage_GetCamBoundsTopOffset() +
-                                    Stage_GetCamBoundsBottomOffset())))
-                {
-                    y_class = 1.0f;
-                } else {
-                    y_class = 2.0f;
-                }
-                if (world_pos.x < Stage_GetCamBoundsLeftOffset()) {
-                    x_class = 0.0f;
-                } else if (world_pos.x > Stage_GetCamBoundsRightOffset()) {
-                    x_class = 3.0f;
-                } else if (world_pos.x <
-                           (0.5f * (Stage_GetCamBoundsLeftOffset() +
-                                    Stage_GetCamBoundsRightOffset())))
-                {
-                    x_class = 1.0f;
-                } else {
-                    x_class = 2.0f;
-                }
-                color_ids = (u8*) &ifMagnify_803F984C[(s32) x_class +
-                                                      ((s32) y_class * 4)];
-                colors[j] = *ifMagnify_803F9828[color_ids[j]]();
-            }
+            ifMagnify_GetCornerColors(colors, &world_pos);
 
             y_blend = 1.0f - y_inv;
             x_blend = 1.0f - x_inv;
@@ -413,14 +425,14 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
             mix1 = x_blend * y_blend;
             mix2 = x_blend * y_inv;
             mix3 = x_inv * y_inv;
-            result.r = (u8) ((colors[3].r * mix3) + (colors[2].r * mix2) +
-                             (colors[0].r * mix1) + (colors[1].r * mix0));
-            result.g = (u8) ((colors[3].g * mix3) + (colors[2].g * mix2) +
-                             (colors[0].g * mix1) + (colors[1].g * mix0));
-            result.b = (u8) ((colors[3].b * mix3) + (colors[2].b * mix2) +
-                             (colors[0].b * mix1) + (colors[1].b * mix0));
-            result.a = (u8) ((colors[3].a * mix3) + (colors[2].a * mix2) +
-                             (colors[0].a * mix1) + (colors[1].a * mix0));
+            result.a = (u8) ((colors[0].a * mix1) + (colors[1].a * mix0) +
+                             (colors[2].a * mix2) + (colors[3].a * mix3));
+            result.r = (u8) ((colors[0].r * mix1) + (colors[1].r * mix0) +
+                             (colors[2].r * mix2) + (colors[3].r * mix3));
+            result.g = (u8) ((colors[0].g * mix1) + (colors[1].g * mix0) +
+                             (colors[2].g * mix2) + (colors[3].g * mix3));
+            result.b = (u8) ((colors[0].b * mix1) + (colors[1].b * mix0) +
+                             (colors[2].b * mix2) + (colors[3].b * mix3));
 
             HSD_SetEraseColor(result.r, result.g, result.b, result.a);
             HSD_CObjEraseScreen(cobj, 1, 0, 1);
@@ -436,7 +448,7 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
 
         HSD_CObjSetOrtho(cobj, top, bottom, left, right);
     }
-    PAD_STACK(8);
+    PAD_STACK(4);
 }
 
 void ifMagnify_802FC3BC(void) {}
@@ -467,12 +479,15 @@ void ifMagnify_802FC3C0(s32 slot)
     if (slot == 0) {
         player->idesc = child->u.dobj->next->mobj->tobj->imagedesc;
     } else {
-        ifMagnifyImageDescCopy* copy_base =
-            (ifMagnifyImageDescCopy*) &ifMagnify_804A1DE0;
+        ifMagnifyImageDescBase* base =
+            (ifMagnifyImageDescBase*) &ifMagnify_804A1DE0;
 
-        copy_base->image_descs[slot] = *ifMagnify_804A1DE0.player[0].idesc;
-        player->idesc = &((ifMagnifyImageDescBase*) &ifMagnify_804A1DE0)
-                             ->image_descs[slot - 1];
+        base->image_descs[slot - 1] = *ifMagnify_804A1DE0.player[0].idesc;
+        player->idesc =
+            (base =
+                 (ifMagnifyImageDescBase*) ((HSD_ImageDesc*) &ifMagnify_804A1DE0 +
+                                            (slot - 1)))
+                ->image_descs;
         player->idesc->image_ptr = HSD_MemAlloc(
             (GXGetTexBufferSize(player->idesc->width, player->idesc->height,
                                 player->idesc->format, 0, 0) +
@@ -520,14 +535,14 @@ void ifMagnify_802FC618(void)
     HSD_RectS16 viewport;
 
     gobj = GObj_Create(14, 15, 0);
-    cobj = lb_80013B14(&ifMagnify_803F97E8);
+    cobj = lb_80013B14((HSD_CameraDescPerspective*) &ifMagnify_803F97E8);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(gobj, (GObj_RenderFunc) (Event) ifMagnify_802FBBDC, 0);
     gobj->gxlink_prios = 0x10;
 
     idesc = *(HSD_ImageDesc**) (player0 + 8);
-    half_height = ifMagnify_804DDB4C * idesc->height;
-    half_width = ifMagnify_804DDB4C * idesc->width;
+    half_height = 0.1f * idesc->height;
+    half_width = 0.1f * idesc->width;
     HSD_CObjSetOrtho(cobj, half_height, -half_height, -half_width, half_width);
 
     viewport.xmin = 0;
@@ -555,7 +570,7 @@ void ifMagnify_802FC750(void)
 
 void ifMagnify_802FC7C0(ifMagnify* magnify)
 {
-    volatile int default_val = ifMagnify_804DDB60;
+    volatile int default_val = *(volatile int*) &ifMagnify_804DDB60;
     GXColor* result;
 
     result = Ground_801C0604();
@@ -595,7 +610,8 @@ void ifMagnify_802FC870(void)
     memzero(&ifMagnify_804A1DE0, 0x74);
     ifMagnify_802FC7C0(&ifMagnify_804A1DE0);
     archive = ifAll_GetArchive();
-    lbArchive_LoadSections(*archive, (void**) &ifMagnify_804A1DE0, "lupe", 0);
+    lbArchive_LoadSections(*archive, (void**) &ifMagnify_804A1DE0,
+                           ifMagnify_804D57E8, 0);
     i = 0;
     do {
         ifMagnify_802FC3C0(i);

@@ -15,8 +15,6 @@
 /* 2E5F00 */ void it_802E5F00(Item_GObj*, Vec3*, Vec3*, s32);
 /* 2E5F8C */ s32 it_802E5F8C(Item_GObj*, Vec3*, s32, s32, f32, f32);
 /* 2E609C */ s32 it_802E609C(it_802E5FXX_struct*, SpawnItem*);
-/* 2E614C */ void it_802E614C(Item_GObj*, Item_GObj*, SpawnItem*, Vec3*,
-                              Vec3*);
 /* 2E61C4 */ s32 it_802E61C4(Item_GObj*, s32, s32);
 /* 2E628C */ void it_802E628C(Item_GObj*, f32, f32);
 /* 2E6380 */ s32 it_802E6380(Item_GObj*, it_802E5FXX_struct*);

@@ -1,7 +1,6 @@
 #include "ftNs_SpecialLw.h"
 
 #include "ftNs_Init.h"
-#include "math.h"
 
 #include <platform.h>
 
@@ -21,6 +20,7 @@
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 /// SpecialLw (PSI Magnet)
@@ -663,7 +663,7 @@ bool ftNs_SpecialLwHold_GroundOrAir(
     return true;
 }
 
-inline void MagnetStateVarCalc(HSD_GObj* gobj)
+static inline void MagnetStateVarCalc(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.ns.speciallw.x10 = fp->mv.ns.speciallw.x10 - 1;

@@ -1,7 +1,5 @@
 #include "ftCo_Fall.h"
 
-#include "math.h"
-
 #include <placeholder.h>
 
 #include "ft/fighter.h"
@@ -32,6 +30,8 @@
 #include "ftCrazyHand/ftCh_TagCancel.h"
 #include "ftMasterHand/ftMh_Wait1_2.h"
 #include "ftPeach/ftPe_Float.h"
+
+#include <math.h>
 
 static inline bool ftCo_Fall_inline(Fighter_GObj* gobj)
 {

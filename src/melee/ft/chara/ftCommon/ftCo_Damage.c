@@ -55,8 +55,6 @@
 #include "sfx/crowdsfx.h"
 
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <baselib/mtx.h>
 #include <baselib/random.h>

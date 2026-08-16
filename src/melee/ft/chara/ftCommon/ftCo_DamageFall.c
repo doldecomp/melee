@@ -7,7 +7,6 @@
 #include "ftCo_HammerWait.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_SpecialAir.h"
-#include "math.h"
 
 #include <placeholder.h>
 #include <platform.h>
@@ -27,6 +26,8 @@
 #include "ftCommon/ftCo_JumpAerial.h"
 
 #include <baselib/forward.h>
+
+#include <math.h>
 
 void ftCo_80090574(Fighter_GObj* gobj)
 {

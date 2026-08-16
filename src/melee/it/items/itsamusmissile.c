@@ -12,7 +12,6 @@
 #include "it/itgroundcoll.h"
 #include "lb/lbvector.h"
 
-#include <trigf.h>
 #include <baselib/mtx.h>
 
 ItemStateTable it_803F7340[] = {
@@ -203,7 +202,7 @@ void* it_802B66A8(Item_GObj* gobj)
     return efSync_Spawn(0x485, gobj, itGetJObjGrandchild(gobj));
 }
 
-inline void isSamusmissile_MotionAnim(Item_GObj* gobj)
+static inline void isSamusmissile_MotionAnim(Item_GObj* gobj)
 {
     it_802B63F8(gobj);
     {

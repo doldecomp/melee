@@ -24,10 +24,10 @@
 
 #include "ftZelda/forward.h"
 
+#include <math.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
 
 extern float ftKb_Init_803CB770[];
 

@@ -50,7 +50,6 @@ typedef struct CardState {
 /* 3AC634 */ u32 fn_803AC634(struct CardState* file_desc, s32 file_idx);
 /* 3AC6B8 */ s32 fn_803AC6B8(struct CardState* file_desc, s32 file_count);
 /* 3AC7DC */ s32 fn_803AC7DC(CardState*);
-/* 3ACB74 */ s32 fn_803ACB74(s32 seq_a, s32 seq_b);
 /* 3ACBE8 */ s32 fn_803ACBE8(CardState* state, s32 block_idx);
 /* 3ACC0C */ s32 fn_803ACC0C(CardState* state, s32 block_idx, s32 file_id,
                              s32 seq_num, void* expected_data, s32 data_size);

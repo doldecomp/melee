@@ -1,6 +1,5 @@
 #include "tyfigupon.h"
 
-#include "math.h"
 #include "placeholder.h"
 #include "platform.h"
 #include "stddef.h"
@@ -43,14 +42,12 @@
 #include "lb/lbvector.h"
 #include "mn/inlines.h"
 #include "mn/mnmain.h"
-#include "MSL/math.h"
 #include "sc/types.h"
 #include "ty/inlines.h"
 #include "ty/toy.h"
 #include "ty/types.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
+#include <math.h>
 
 /* 314AA8 */ static void _tyFigupon_80314AA8(HSD_JObj*, char*, char*, char*);
 /* 314B54 */ static s32 _tyFigupon_80314B54(void);

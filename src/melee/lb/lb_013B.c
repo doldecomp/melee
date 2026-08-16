@@ -5,8 +5,6 @@
 #include "lb/lbcommand.h"
 #include "lb/types.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
 #include <dolphin/pad.h>
 #include <baselib/rumble.h>
 

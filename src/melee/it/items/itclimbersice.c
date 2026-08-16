@@ -15,7 +15,7 @@
 #include "it/itgroundcoll.h"
 #include "it/itmaplib.h"
 
-#include <MSL/math.h>
+#include <math.h>
 
 ItemStateTable it_803F7668[] = {
     { -1, itClimbersice_UnkMotion0_Anim, itClimbersice_UnkMotion0_Phys,
