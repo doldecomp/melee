@@ -12,6 +12,8 @@ stdenv.mkDerivation {
     fileset = lib.fileset.unions [
       ../src/sysdolphin
       ../src/Runtime
+      ../src/placeholder.h
+      ../src/m2c_macros.h
     ];
   };
 

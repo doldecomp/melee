@@ -17,7 +17,6 @@
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
 #include <dolphin/vi.h>
-#include <MetroTRK/intrinsics.h>
 
 static HSD_ClassInfo* default_class;
 static HSD_CObj* current;

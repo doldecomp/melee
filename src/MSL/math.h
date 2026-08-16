@@ -110,6 +110,8 @@ float cosf(float x);
 float sinf(float x);
 void __sinit_trigf_c(void);
 float logf(float);
+float expf(float);
+float powf(float, float);
 
 static inline float fmodf(float a, float b)
 {
