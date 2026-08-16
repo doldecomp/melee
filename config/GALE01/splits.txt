@@ -1295,7 +1295,7 @@ melee/ft/chara/ftKirby/ftkirby.c:
 
 melee/ft/chara/ftKirby/ftkirbycopy.c:
 	.text       start:0x800EEC34 end:0x800F1F68
-	.data       start:0x803CA104 end:0x803CA308
+	.data       start:0x803CA104 end:0x803CA304
 	.sdata      start:0x804D3D98 end:0x804D3DAE
 	.sdata2     start:0x804D9360 end:0x804D9364
 

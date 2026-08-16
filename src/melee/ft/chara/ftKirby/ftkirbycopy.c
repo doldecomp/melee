@@ -219,36 +219,35 @@ void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKirbyCopyData* data = (ftKirbyCopyData*) ftKb_Init_MotionStateTable;
-    HSD_Joint* current_joint;
-    s32 joint_idx;
-    HSD_Joint* root;
-    s32 total_dobjs;
-    s32 insert_part_off;
-    s32 part_off;
-    HSD_DObj** dst;
-    s32 byte_base;
     s32 dst_off;
+    s32 total_dobjs;
+    HSD_DObj** dst;
     HSD_JObj* jobj;
     HSD_DObj* dobj;
-    HSD_DObj* tail;
-    s32 byte_off;
-    HSD_MObj* mobj;
+    s32 part_off;
     u8* arg2_cur;
+    HSD_Joint* current_joint;
+    s32 byte_off;
+    HSD_Joint* root;
+    s32 joint_idx;
+    s32 byte_base;
+    HSD_MObj* mobj;
+    HSD_DObj* tail;
 
     ftPartsPObjSetDefaultClass();
     root = data->costume_archives[arg1][fp->x619_costume_id].joint;
-    ftKb_SpecialN_800EF0E4_insert_joint_refs(&total_dobjs, root, fp,
-                                             &insert_part_off, &current_joint,
-                                             &joint_idx, &byte_base);
+    ftKb_SpecialN_800EF0E4_insert_joint_refs(
+        &total_dobjs, root, fp, &byte_off, &current_joint, &joint_idx,
+        &byte_base);
     joint_idx = 0;
     arg2_cur = arg2;
     byte_off = byte_base << 2;
     part_off = 0;
     while (current_joint != NULL) {
-        s32 group_count;
         FighterBone* parts_base = fp->parts;
         FighterBone* parts = parts_base;
         FighterBone* bone;
+        s32 group_count;
         group_count = 0;
         bone = (FighterBone*) ((u8*) parts + part_off);
         while (!bone->flags_b1) {
