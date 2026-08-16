@@ -856,6 +856,7 @@ config.libs = [
             Object(NonMatching, "melee/ft/chara/ftKirby/ftkirby.c"),
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbyattackdash.c"),
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialhi.c"),
+            Object(NonMatching, "melee/ft/chara/ftKirby/ftkirbyspeciallw.c"),
             Object(NonMatching, "melee/ft/chara/ftKirby/ftkirbyspecialn.c"),
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialpikachu.c"),
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialkoopa.c"),
