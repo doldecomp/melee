@@ -33,7 +33,7 @@ final: prev: {
   aurora-src = final.fetchFromGitHub {
     owner = "r-burns";
     repo = "aurora";
-    rev = "melee";
+    rev = "e85052286f6d9c4defefedce0adee38d6e2476f1";
     hash = "sha256-N7Rp95Bll8zcYmB+vYRRRq7pGsr/3XMz+vRrjcn61ec=";
   };
 
