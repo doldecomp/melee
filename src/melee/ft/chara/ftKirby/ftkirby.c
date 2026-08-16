@@ -3230,17 +3230,12 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
         byte_off = byte_base << 2;
         part_off = 0;
         while (current_joint != NULL) {
-            HSD_Joint* joint = current_joint;
-            FighterBone* parts = fp->parts;
-            FighterBone* bone;
             group_count = 0;
-            bone = (FighterBone*) ((u8*) parts + part_off);
-            while (!bone->flags_b1) {
-                bone = (FighterBone*) ((u8*) bone + 0x10);
+            while (!((FighterBone*) ((u8*) fp->parts + part_off))->flags_b1) {
                 part_off += 0x10;
             }
-            jobj = ((FighterBone*) ((u8*) parts + part_off))->joint;
-            dobj = HSD_DObjLoadDesc(joint->u.dobjdesc);
+            jobj = ((FighterBone*) ((u8*) fp->parts + part_off))->joint;
+            dobj = HSD_DObjLoadDesc(current_joint->u.dobjdesc);
             if (dobj != NULL) {
                 tail = HSD_JObjGetDObj(jobj);
                 ((FighterBone*) ((u8*) fp->parts + part_off))->flags2_b7 =
