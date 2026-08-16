@@ -114,6 +114,8 @@ void HSD_AObjStopAnim(HSD_AObj* aobj, void* obj, HSD_ObjUpdateFunc func)
     aobj->flags |= AOBJ_NO_ANIM;
 }
 
+static float aobj_fmod(float a, float b);
+
 void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
                            HSD_ObjUpdateFunc update_func)
 {
@@ -138,7 +140,7 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
             HSD_FObjStopAnimAll(aobj->fobj, obj, update_func, rate);
             y = aobj->end_frame - aobj->rewind_frame;
             x = aobj->curr_frame - aobj->rewind_frame;
-            aobj->curr_frame = fmod(x, y) + aobj->rewind_frame;
+            aobj->curr_frame = aobj_fmod(x, y) + aobj->rewind_frame;
             HSD_FObjReqAnimAll(aobj->fobj, aobj->curr_frame);
         } else {
             aobj->curr_frame = aobj->end_frame;
@@ -169,7 +171,7 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
     }
 }
 
-float fmod(float a, float b)
+static float aobj_fmod(float a, float b)
 {
     long long quotient;
     if (__fabs(b) > __fabs(a)) {
