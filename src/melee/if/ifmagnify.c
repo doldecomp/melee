@@ -179,8 +179,6 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
     bool is_colored;
     bool should_display;
     s32 arrow_kind;
-    u8 slot_type;
-    u8 teams_enabled;
     u8 operand_pad[12];
 
     if (arg1 != 0) {
@@ -215,11 +213,9 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
 
             HSD_GObj_JObjCallback(arg0, arg1);
             if ((player->state.unk == 4) || (player->state.unk == 2)) {
-                slot_type = Player_GetPlayerSlotType(slot);
-                teams_enabled = gm_8016B168();
-                color =
-                    gm_80160968(gm_80160854((u8) slot, Player_GetTeam(slot),
-                                            teams_enabled, slot_type));
+                color = gm_80160968(
+                    gm_80160854((u8) slot, Player_GetTeam(slot), gm_8016B168(),
+                                Player_GetPlayerSlotType(slot)));
                 cp = &color_copy;
                 color_copy = color;
                 if (player->state.unk == 2) {
