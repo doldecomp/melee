@@ -62,10 +62,11 @@ static GXColor* (*ifMagnify_803F9828[])(void) = {
     Ground_801C062C, Ground_801C067C, Ground_801C0640,
 };
 
-static s32 ifMagnify_803F984C[0x10] = {
-    0,          0x10001,    0x01020102, 0x02020202, 0x303,      0x10304,
-    0x01020405, 0x02020505, 0x03030606, 0x03040607, 0x04050708, 0x05050808,
-    0x06060606, 0x06070607, 0x07080708, 0x08080808,
+static u8 ifMagnify_803F984C[16][4] = {
+    { 0, 0, 0, 0 }, { 0, 1, 0, 1 }, { 1, 2, 1, 2 }, { 2, 2, 2, 2 },
+    { 0, 0, 3, 3 }, { 0, 1, 3, 4 }, { 1, 2, 4, 5 }, { 2, 2, 5, 5 },
+    { 3, 3, 6, 6 }, { 3, 4, 6, 7 }, { 4, 5, 7, 8 }, { 5, 5, 8, 8 },
+    { 6, 6, 6, 6 }, { 6, 7, 6, 7 }, { 7, 8, 7, 8 }, { 8, 8, 8, 8 },
 };
 
 typedef struct ifMagnifyImageDescBase {
@@ -263,8 +264,7 @@ static inline void ifMagnify_GetCornerColors(GXColor* colors, Vec3* world_pos)
         } else {
             x_class = 2.0f;
         }
-        color_ids =
-            (u8*) &ifMagnify_803F984C[(s32) x_class + ((s32) y_class * 4)];
+        color_ids = ifMagnify_803F984C[(s32) x_class + ((s32) y_class * 4)];
         colors[j] = *ifMagnify_803F9828[color_ids[j]]();
     }
 }
@@ -466,7 +466,7 @@ void ifMagnify_802FC3C0(s32 slot)
         HSD_GObjPLink_80390228(player->gobj);
     }
 
-    gobj = GObj_Create(0xE, 0xF, 0);
+    gobj = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
     GObj_InitUserData(gobj, 0xE, (void (*)(void*)) ifMagnify_802FC3BC, player);
 
     jobj = HSD_JObjLoadJoint(
@@ -525,7 +525,7 @@ void ifMagnify_802FC3C0(s32 slot)
 
 void ifMagnify_802FC618(void)
 {
-    u8* player0 = (u8*) &ifMagnify_804A1DE0 + 0x14;
+    ifMagnifyPlayer* player0 = &ifMagnify_804A1DE0.player[0];
     HSD_GObj* gobj;
     HSD_CObj* cobj;
     HSD_ImageDesc* idesc;
@@ -534,21 +534,21 @@ void ifMagnify_802FC618(void)
     int pad;
     HSD_RectS16 viewport;
 
-    gobj = GObj_Create(14, 15, 0);
+    gobj = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
     cobj = lb_80013B14((HSD_CameraDescPerspective*) &ifMagnify_803F97E8);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(gobj, (GObj_RenderFunc) (Event) ifMagnify_802FBBDC, 0);
     gobj->gxlink_prios = 0x10;
 
-    idesc = *(HSD_ImageDesc**) (player0 + 8);
+    idesc = player0->idesc;
     half_height = 0.1f * idesc->height;
     half_width = 0.1f * idesc->width;
     HSD_CObjSetOrtho(cobj, half_height, -half_height, -half_width, half_width);
 
     viewport.xmin = 0;
-    viewport.xmax = (*(HSD_ImageDesc**) (player0 + 8))->width;
+    viewport.xmax = player0->idesc->width;
     viewport.ymin = 0;
-    viewport.ymax = (*(HSD_ImageDesc**) (player0 + 8))->height;
+    viewport.ymax = player0->idesc->height;
     HSD_CObjSetViewport(cobj, &viewport);
     HSD_CObjSetScissorx4(cobj, (u16) viewport.xmin, (u16) viewport.xmax,
                          (u16) viewport.ymin, (u16) viewport.ymax);
