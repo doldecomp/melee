@@ -26,7 +26,6 @@
 #include "lb/lb_00B0.h"
 
 #include <math.h>
-#include <trigf.h>
 #include <baselib/debug.h>
 #include <melee/it/items/itfoxlaser.h>
 

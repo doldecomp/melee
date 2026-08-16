@@ -7,7 +7,6 @@
 #include "mn/types.h"
 
 #include <math.h>
-#include <trigf.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>

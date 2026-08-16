@@ -31,7 +31,6 @@
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 
-#include <trigf.h>
 #include <baselib/cobj.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>

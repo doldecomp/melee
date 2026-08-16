@@ -11,7 +11,6 @@
 #include <melee/lb/forward.h>
 
 #include <math.h>
-#include <trigf.h>
 #include <sysdolphin/baselib/random.h>
 #include <melee/db/db.h>
 #include <melee/ef/eflib.h>

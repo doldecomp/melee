@@ -9,8 +9,6 @@
 #include "baselib/util.h"
 
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
 #include <dolphin/os.h>
 #include <melee/lb/lb_00CE.h>
 

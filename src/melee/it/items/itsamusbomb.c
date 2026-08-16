@@ -17,7 +17,6 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <math_ppc.h>
 #include <baselib/mtx.h>
 
 ItemStateTable it_803F7220[] = {

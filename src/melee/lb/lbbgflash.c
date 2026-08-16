@@ -44,7 +44,6 @@ typedef struct BgFlashData {
 extern BgFlashData lbl_80433658;
 
 #include <math.h>
-#include <trigf.h>
 #include <dolphin/gx.h>
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>

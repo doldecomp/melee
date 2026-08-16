@@ -26,7 +26,6 @@
 #include "ftPurin/types.h"
 
 #include <math.h>
-#include <trigf.h>
 #include <baselib/archive.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>

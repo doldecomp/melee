@@ -46,7 +46,6 @@
 #include "pl/player.h"
 
 #include <math.h>
-#include <math_ppc.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/ftcmdscript.h>
 #include <MetroTRK/intrinsics.h>

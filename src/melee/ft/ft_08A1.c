@@ -15,8 +15,6 @@
 #include "it/items/itpeachparasol.h"
 
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 

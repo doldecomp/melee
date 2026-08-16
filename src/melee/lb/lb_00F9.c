@@ -18,8 +18,6 @@
 #include "lb/types.h"
 
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 #include <baselib/displayfunc.h>

@@ -48,8 +48,6 @@
 #include "ty/types.h"
 
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
 
 /* 314AA8 */ static void _tyFigupon_80314AA8(HSD_JObj*, char*, char*, char*);
 /* 314B54 */ static s32 _tyFigupon_80314B54(void);

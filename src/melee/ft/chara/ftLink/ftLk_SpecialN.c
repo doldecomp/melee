@@ -28,7 +28,6 @@
 #include "lb/lb_00B0.h"
 
 #include <math.h>
-#include <trigf.h>
 #include <dolphin/mtx.h>
 
 typedef enum cmd_var_idx {

@@ -17,7 +17,6 @@
 
 #include <math.h>
 #include <stddef.h>
-#include <trigf.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
 

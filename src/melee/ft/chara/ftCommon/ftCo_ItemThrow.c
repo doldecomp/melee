@@ -33,7 +33,6 @@
 #include <baselib/forward.h>
 
 #include <math.h>
-#include <trigf.h>
 
 /* 094D70 */ bool ftCo_800951D0(Fighter_GObj* gobj);
 /* 094E7C */ static bool ftCo_800952DC(Fighter_GObj* gobj);

@@ -19,7 +19,6 @@
 #include "mp/mplib.h"
 
 #include <math.h>
-#include <math_ppc.h>
 #include <baselib/gobjproc.h>
 #include <baselib/random.h>
 #include <sysdolphin/baselib/lobj.h>

@@ -12,7 +12,6 @@
 #include "it/itgroundcoll.h"
 #include "lb/lbvector.h"
 
-#include <trigf.h>
 #include <baselib/mtx.h>
 
 ItemStateTable it_803F7340[] = {

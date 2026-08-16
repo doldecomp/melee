@@ -25,8 +25,6 @@
 #include "lb/lbcollision.h"
 
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
 #include <baselib/jobj.h>
 
 /// @todo Fix common data struct

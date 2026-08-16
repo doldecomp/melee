@@ -21,7 +21,6 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <trigf.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 

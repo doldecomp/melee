@@ -46,7 +46,6 @@
 #include "sfx/crowdsfx.h"
 
 #include <math.h>
-#include <trigf.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>

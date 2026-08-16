@@ -48,8 +48,6 @@
 #include "ty/types.h"
 
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
 
 /* 31830C */ static void _tyDisplay_8031830C(TySortElem*, s32, s32);
 /* 318714 */ static void _tyDisplay_80318714(TySortElem*, s32, s32);

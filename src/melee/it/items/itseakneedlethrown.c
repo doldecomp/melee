@@ -18,7 +18,6 @@
 #include "mp/mplib.h"
 
 #include <math.h>
-#include <trigf.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 

@@ -21,7 +21,6 @@
 #include "pl/player.h"
 
 #include <math.h>
-#include <trigf.h>
 
 static void sdata2_order(void)
 {

@@ -14,7 +14,6 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <trigf.h>
 #include <baselib/random.h>
 
 ItemStateTable it_803F7D60[] = {

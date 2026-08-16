@@ -3,8 +3,6 @@
 #include "particle.h"
 
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/psappsrt.h>

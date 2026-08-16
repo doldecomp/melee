@@ -17,7 +17,6 @@
 
 #include <math.h>
 #include <string.h>
-#include <trigf.h>
 
 /* 2AC000 */ static bool itNesspkthunderball_UnkMotion0_Coll(Item_GObj* gobj);
 

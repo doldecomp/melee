@@ -20,7 +20,6 @@
 #include "mp/mpcoll.h"
 
 #include <math.h>
-#include <math_ppc.h>
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjproc.h>

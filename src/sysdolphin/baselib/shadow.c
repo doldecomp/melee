@@ -17,7 +17,6 @@
 #include "util.h"
 
 #include <math.h>
-#include <trigf.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 
