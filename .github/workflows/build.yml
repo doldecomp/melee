@@ -233,7 +233,7 @@ jobs:
   build-nix:
     name: Nix
     runs-on: ubuntu-latest
-    if: github.repository == 'doldecomp/melee' || github.repository == 'r-burns/doldecomp-melee'
+    if: github.repository == 'doldecomp/melee'
     env:
       REGISTRY: ghcr.io
       IMAGE: doldecomp/melee-build:main
