@@ -764,20 +764,22 @@ void ftKb_SpecialAirLwStart_Coll(Fighter_GObj* gobj)
         fp3->mv.kb.speciallw.x54[1].z = fp3->mv.kb.speciallw.x24[1].z =
             fp->mv.kb.speciallw.x18.z;
         fp3->mv.kb.speciallw.x88[5] = fp3->mv.kb.speciallw.x88[1] = angle;
-        fp3->mv.kb.speciallw.x54[2].x = fp3->mv.kb.speciallw.x24[2].x =
-            fp->mv.kb.speciallw.x18.x;
-        fp3->mv.kb.speciallw.x54[2].y = fp3->mv.kb.speciallw.x24[2].y =
-            fp->mv.kb.speciallw.x18.y;
-        fp3->mv.kb.speciallw.x54[2].z = fp3->mv.kb.speciallw.x24[2].z =
-            fp->mv.kb.speciallw.x18.z;
-        fp3->mv.kb.speciallw.x88[6] = fp3->mv.kb.speciallw.x88[2] = angle;
-        fp3->mv.kb.speciallw.x54[3].x = fp3->mv.kb.speciallw.x24[3].x =
-            fp->mv.kb.speciallw.x18.x;
-        fp3->mv.kb.speciallw.x54[3].y = fp3->mv.kb.speciallw.x24[3].y =
-            fp->mv.kb.speciallw.x18.y;
-        fp3->mv.kb.speciallw.x54[3].z = fp3->mv.kb.speciallw.x24[3].z =
-            fp->mv.kb.speciallw.x18.z;
-        fp3->mv.kb.speciallw.x88[7] = fp3->mv.kb.speciallw.x88[3] = angle;
+        {
+            s32 i;
+            for (i = 1; i < 3; i++) {
+                fp3->mv.kb.speciallw.x54[i + 1].x =
+                    fp3->mv.kb.speciallw.x24[i + 1].x =
+                        fp->mv.kb.speciallw.x18.x;
+                fp3->mv.kb.speciallw.x54[i + 1].y =
+                    fp3->mv.kb.speciallw.x24[i + 1].y =
+                        fp->mv.kb.speciallw.x18.y;
+                fp3->mv.kb.speciallw.x54[i + 1].z =
+                    fp3->mv.kb.speciallw.x24[i + 1].z =
+                        fp->mv.kb.speciallw.x18.z;
+                fp3->mv.kb.speciallw.x88[i + 5] =
+                    fp3->mv.kb.speciallw.x88[i + 1] = angle;
+            }
+        }
         fp3->mv.kb.speciallw.x18.x = fp->mv.kb.speciallw.x18.x;
         fp3->mv.kb.speciallw.x18.y = fp->mv.kb.speciallw.x18.y;
         fp3->mv.kb.speciallw.x18.z = fp->mv.kb.speciallw.x18.z;
@@ -857,20 +859,22 @@ void ftKb_SpecialAirLw_Coll(Fighter_GObj* gobj)
         fp3->mv.kb.speciallw.x54[1].z = fp3->mv.kb.speciallw.x24[1].z =
             fp->mv.kb.speciallw.x18.z;
         fp3->mv.kb.speciallw.x88[5] = fp3->mv.kb.speciallw.x88[1] = angle;
-        fp3->mv.kb.speciallw.x54[2].x = fp3->mv.kb.speciallw.x24[2].x =
-            fp->mv.kb.speciallw.x18.x;
-        fp3->mv.kb.speciallw.x54[2].y = fp3->mv.kb.speciallw.x24[2].y =
-            fp->mv.kb.speciallw.x18.y;
-        fp3->mv.kb.speciallw.x54[2].z = fp3->mv.kb.speciallw.x24[2].z =
-            fp->mv.kb.speciallw.x18.z;
-        fp3->mv.kb.speciallw.x88[6] = fp3->mv.kb.speciallw.x88[2] = angle;
-        fp3->mv.kb.speciallw.x54[3].x = fp3->mv.kb.speciallw.x24[3].x =
-            fp->mv.kb.speciallw.x18.x;
-        fp3->mv.kb.speciallw.x54[3].y = fp3->mv.kb.speciallw.x24[3].y =
-            fp->mv.kb.speciallw.x18.y;
-        fp3->mv.kb.speciallw.x54[3].z = fp3->mv.kb.speciallw.x24[3].z =
-            fp->mv.kb.speciallw.x18.z;
-        fp3->mv.kb.speciallw.x88[7] = fp3->mv.kb.speciallw.x88[3] = angle;
+        {
+            s32 i;
+            for (i = 1; i < 3; i++) {
+                fp3->mv.kb.speciallw.x54[i + 1].x =
+                    fp3->mv.kb.speciallw.x24[i + 1].x =
+                        fp->mv.kb.speciallw.x18.x;
+                fp3->mv.kb.speciallw.x54[i + 1].y =
+                    fp3->mv.kb.speciallw.x24[i + 1].y =
+                        fp->mv.kb.speciallw.x18.y;
+                fp3->mv.kb.speciallw.x54[i + 1].z =
+                    fp3->mv.kb.speciallw.x24[i + 1].z =
+                        fp->mv.kb.speciallw.x18.z;
+                fp3->mv.kb.speciallw.x88[i + 5] =
+                    fp3->mv.kb.speciallw.x88[i + 1] = angle;
+            }
+        }
         fp3->mv.kb.speciallw.x18.x = fp->mv.kb.speciallw.x18.x;
         fp3->mv.kb.speciallw.x18.y = fp->mv.kb.speciallw.x18.y;
         fp3->mv.kb.speciallw.x18.z = fp->mv.kb.speciallw.x18.z;
