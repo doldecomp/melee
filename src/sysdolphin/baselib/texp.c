@@ -4,7 +4,7 @@
 
 #include <placeholder.h>
 
-#include <__mem.h>
+#include <string.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/tev.h>
 #include <sysdolphin/baselib/texpdag.h>

@@ -2,7 +2,7 @@
 
 #include "debug.h"
 
-#include <__mem.h>
+#include <string.h>
 
 HSD_ObjAllocData hsd_iddata;
 

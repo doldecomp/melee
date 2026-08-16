@@ -5,7 +5,6 @@
 #include "memory.h"
 #include "object.h" // IWYU pragma: keep
 
-#include <__mem.h>
 #include <string.h>
 #include <dolphin/os.h>
 
