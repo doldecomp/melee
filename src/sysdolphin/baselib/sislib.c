@@ -7,6 +7,7 @@
 #include "gobjplink.h"
 #include "gobjuserdata.h"
 #include "memory.h"
+#include "sislib_font.h"
 #include "state.h"
 #include "tev.h"
 #include "wobj.h"
@@ -14,11 +15,11 @@
 #include "dolphin/gx.h"
 #include "dolphin/mtx.h"
 
-#include <printf.h>
+#include <printf.h> // IWYU pragma: keep
 #include <stdarg.h>
 #include <stdio.h>
 #include <dolphin/os.h>
-#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbarchive.h> ///< @todo Circular include
 
 static HSD_WObjDesc HSD_SisLib_8040C490 = {
     NULL,
@@ -66,9 +67,6 @@ sislib_UnkAlloc3* HSD_SisLib_804D797C;
 /// sislib_UnknownType001 HSD_SisLib_8040C490 = { 0, 1.0F };
 
 /// u8 HSD_SisLib_8040C490[0x60] = { 0 };
-
-static u8
-    HSD_SisLib_8040CD40; /* unable to generate initializer: unknown type */
 
 static HSD_Archive* HSD_SisLib_804D1110[5];
 SIS* HSD_SisLib_804D1124[5];
@@ -1755,7 +1753,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
     u16 saved_x6C;
     u8 saved_kerning;
 
-    u8 *data = &HSD_SisLib_8040CD40;
+    u8 *data = HSD_SisLib_FontAtlas;
     u8 *default_kerning = HSD_SisLib_8040CB00;
 
     if (gobj != NULL) {
@@ -1855,6 +1853,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                 GXPosition3f32(min_x, neg_max_y, depth);
                 GXTexCoord2f32(0.0F, 1.0F);
             }
+            GXEnd();
         }
         GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_TEXA, GX_CA_A0, GX_CA_ZERO);
         if (text->x4E != 0) {
@@ -2210,6 +2209,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                             GXPosition3f32(glyph_x, neg_quad_bottom, glyph_depth);
                                             GXTexCoord2f32(uv_left, uv_bottom);
                                         }
+                                        GXEnd();
                                     }
                                     text->current_width = (f32) ((text->x88 * (text->x80.x * (32.0F + text->x78.x))) + text->current_width);
                                     if ((u8) text->kerning != 0) {

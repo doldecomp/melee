@@ -23,7 +23,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   src = lib.fileset.toSource {
     root = ../.;
     fileset = lib.fileset.unions [
-      ../compile_flags.txt
       ../config
       ../configure.py
       ../extern

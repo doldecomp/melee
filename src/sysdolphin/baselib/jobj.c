@@ -7,7 +7,6 @@
 #include "dobj.h"
 #include "fobj.h"
 #include "id.h"
-#include "math.h"
 #include "mobj.h"
 #include "mtx.h"
 #include "pobj.h"
@@ -16,8 +15,6 @@
 
 #include <__mem.h>
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 

@@ -18,8 +18,14 @@ block_relocations:
 - source: .text:0x803A3A68
 - source: .text:0x803A3AE8
 - source: .text:0x803A3AF8
-# Raw texture array that creates spurious relocs
+# HSD_SisLib_FontAtlas texture data
 - source: .data:0x8040CD40
   end:    .data:0x80430B40
 # Another bitmask, not a pointer (would point to the middle of a function)
 - target: 0x80020000
+
+extract:
+- symbol: HSD_SisLib_FontAtlas
+  header: sysdolphin/baselib/sislib_font.static.h
+  binary: sysdolphin/baselib/sislib_font.bin
+  header_type: symbol

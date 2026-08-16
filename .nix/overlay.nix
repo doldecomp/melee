@@ -12,7 +12,7 @@ final: prev: {
     })
   ];
 
-  clang-format-minimal = final.runCommand "clang-format-minimal" {} ''
+  clang-format-minimal = final.runCommand "clang-format-minimal" { } ''
     mkdir -p $out/bin/
     cp ${final.clang.cc}/bin/clang-format $out/bin/
   '';
@@ -24,6 +24,17 @@ final: prev: {
         nix-store --add-fixed sha256 main.dol
     '';
     hash = "sha256-3CFQRRNCQ1C9oXp8ZegjcbRREqXfwenydJqLerDv9kY=";
+  };
+
+  melee-docs = final.callPackage ./melee-docs.nix { };
+
+  melee-gcc-native = final.pkgsi686Linux.callPackage ./melee-gcc-native.nix { };
+
+  aurora-src = final.fetchFromGitHub {
+    owner = "r-burns";
+    repo = "aurora";
+    rev = "melee";
+    hash = "sha256-N7Rp95Bll8zcYmB+vYRRRq7pGsr/3XMz+vRrjcn61ec=";
   };
 
   default = final.melee;
