@@ -2513,7 +2513,6 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
     },
 };
 
-/* 0F1CA0 */ static bool fn_800F1CA0(HSD_GObj* gobj);
 /* 0F6AC8 */ static void fn_800F6AC8(HSD_GObj* gobj);
 /* 10C288 */ static void fn_8010C288(HSD_GObj* gobj);
 

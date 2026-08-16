@@ -37,9 +37,11 @@ static void fn_80109714(HSD_GObj*);
 static void fn_801097B8(HSD_GObj*);
 void fn_800F64C8(Fighter_GObj*, float);
 
+#pragma force_active on
 char ftKb_Init_assert_msg_0[] = "fighter parts model dobj num over!\n";
 char ftKb_Init_assert_msg_1[] = "ftkirby.c";
 char ftKb_Init_assert_msg_2[] = "fighter dobj num over!\n";
+#pragma force_active reset
 
 void ftKb_SpecialN_800EEC34(int arg0, int arg1, int arg2)
 {
@@ -1366,7 +1368,8 @@ void ftKb_SpecialN_800F1BAC(Fighter_GObj* gobj, s32 kind, bool arg2)
     fp->death1_cb = ftKb_Init_800EE7B8;
 }
 
-static bool fn_800F1CA0(HSD_GObj* gobj)
+#pragma force_active on
+bool fn_800F1CA0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     u32 val = fp->u.kb.hat.kind;
@@ -1381,6 +1384,7 @@ static bool fn_800F1CA0(HSD_GObj* gobj)
         return false;
     }
 }
+#pragma force_active reset
 
 s32 ftKb_SpecialN_800F1CD8(HSD_GObj* gobj)
 {
