@@ -549,11 +549,14 @@ void ifMagnify_802FC750(void)
     ifMagnify* base = &ifMagnify_804A1DE0;
     s32 i;
 
+    /// @todo Member accesses in the body fold into the condition's address.
     for (i = 0; i < 6; i++) {
-        if (*(HSD_GObj**) ((u8*) base + (i << 4) + 0x14) != NULL) {
+        if (base->player[i].gobj != NULL) {
             HSD_GObjPLink_80390228(
-                *(HSD_GObj**) ((u32) base + (i << 4) + 0x14));
-            *(HSD_GObj**) ((u32) base + (i << 4) + 0x14) = NULL;
+                *(HSD_GObj**) ((u32) base + i * (s32) sizeof(ifMagnifyPlayer) +
+                               (s32) offsetof(ifMagnify, player)));
+            *(HSD_GObj**) ((u32) base + i * (s32) sizeof(ifMagnifyPlayer) +
+                           (s32) offsetof(ifMagnify, player)) = NULL;
         }
     }
 }
