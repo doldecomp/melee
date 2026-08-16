@@ -151,7 +151,6 @@ static u8 gm_8049E558[0x170];
 
 void gm_801BFCFC(GameScene* arg0)
 {
-    u32* KP;
     u8* var_r28;
     u32* temp_r29_2;
     u8* p3;
@@ -163,7 +162,6 @@ void gm_801BFCFC(GameScene* arg0)
     int var_r25_2;
     void** temp_r3;
     s32 var_r30;
-    unsigned char _pad[8];
     gm_GetGameSceneLoadDataCallback(arg0);
     var_r31 = 0;
     gm_GetChallengerData();
@@ -176,11 +174,12 @@ void gm_801BFCFC(GameScene* arg0)
     p3 = gm_8049E558;
     {
         int var_r25;
-        for (var_r25 = 0, KP = (u32*) 1; var_r25 < 0x42; var_r25++) {
+        u32 KP;
+        for (var_r25 = 0, KP = 1; var_r25 < 0x42; var_r25++) {
             if (gm_8017219C(var_r25) != 0) {
                 temp_r3 = gm_801BFC60(var_r25, var_r30, 0,
                                       *gmMainLib_8015D804(var_r25), var_r31);
-                gm_8049E558[var_r25] = (u8) KP;
+                gm_8049E558[var_r25] = KP;
                 var_r31 = temp_r3;
                 var_r30 += 1;
             }
@@ -192,7 +191,7 @@ void gm_801BFCFC(GameScene* arg0)
     for (var_r25_2 = 0; var_r25_2 < 0x125; var_r25_2++) {
         if (gmMainLib_8015DA1C(var_r25_2) != 0) {
             if (gmMainLib_8015DA90(var_r25_2) == 0) {
-                KP = gmMainLib_8015D970(var_r25_2);
+                u32* KP = gmMainLib_8015D970(var_r25_2);
                 *KP = lbTime_8000AFBC();
                 gmMainLib_8015DA40(var_r25_2);
                 Toy_SetUnlockState((s16) var_r25_2, 1);
