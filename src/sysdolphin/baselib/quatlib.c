@@ -104,7 +104,7 @@ s32 HSD_QuatLib_8037ECE0(Vec3* axis, Quaternion* q, f32 angle)
     f32 s;
 
     len = sqrtf(axis->x * axis->x + axis->y * axis->y + axis->z * axis->z);
-    if (__fabsf(len) < 1.1754944E-38F) {
+    if (fabsf(len) < 1.1754944E-38F) {
         return -1;
     }
     inv_len = 1.0F / len;
