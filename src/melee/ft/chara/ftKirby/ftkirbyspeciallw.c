@@ -54,6 +54,14 @@ struct ftKb_Init_803CB4EC_t ftKb_Init_803CB4EC = {
     { 0.0F, 1.0F, 0.0F },
 };
 
+char ftKb_Init_803CB510[] = "Other Dead_Proc Existence";
+char ftKb_Init_803CB52C[] = "ftkirbyspecials.c";
+
+#ifdef __MWERKS__
+__declspec(section ".sdata")
+#endif
+char ftKb_Init_804D3DB0[2] = "0";
+
 static inline bool fbKb_SpecialLw_IASA_Inline(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

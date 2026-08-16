@@ -67,11 +67,6 @@ static MotionFlags const ftKb_MF_SpecialN_Loop_Coll =
 static MotionFlags const ftKb_MF_SpecialN_LoopRumble_Coll =
     ftKb_MF_SpecialN_Loop_Coll | Ft_MF_SkipRumble;
 
-char ftKb_Init_803CB510[] = "Other Dead_Proc Existence";
-char ftKb_Init_803CB52C[] = "ftkirbyspecials.c";
-
-char ftKb_Init_804D3DB0[2] = "0";
-
 /// Forward declarations
 void fn_800F9260(HSD_GObj*);
 void fn_800F64C8(Fighter_GObj*, float);
