@@ -3,7 +3,7 @@
 #include "initialize.h"
 #include "memory.h"
 
-#include <__mem.h>
+#include <string.h>
 #include <dolphin/os/OSAlloc.h>
 
 static objheap obj_heap = { 0, 0, -1, -1 };

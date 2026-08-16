@@ -4,7 +4,7 @@
 
 #include <placeholder.h>
 
-#include <__mem.h>
+#include <string.h>
 #include <dolphin/gx.h>
 
 static struct {
