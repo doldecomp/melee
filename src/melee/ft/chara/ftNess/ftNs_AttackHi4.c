@@ -28,7 +28,6 @@
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
 
-#include <trigf.h>
 #include <dolphin/mtx.h>
 
 void ftNs_AttackHi4_YoyoUpdateHitPos(HSD_GObj* gobj)

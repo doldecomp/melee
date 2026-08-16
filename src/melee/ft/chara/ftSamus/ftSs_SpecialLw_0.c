@@ -28,7 +28,6 @@
 #include "ftCommon/ftCo_SquatWait.h"
 #include "lb/lbcollision.h"
 
-#include <trigf.h>
 #include <dolphin/mtx.h>
 
 void ftSs_Init_80128944(HSD_GObj* gobj, float farg1, float farg2)

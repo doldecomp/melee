@@ -1,7 +1,5 @@
 #include "itsamusbomb.h"
 
-#include "math.h"
-
 #include <placeholder.h>
 #include <platform.h>
 
@@ -18,7 +16,7 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
-#include <math_ppc.h>
+#include <math.h>
 #include <baselib/mtx.h>
 
 ItemStateTable it_803F7220[] = {

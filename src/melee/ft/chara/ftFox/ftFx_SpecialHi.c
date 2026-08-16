@@ -1,7 +1,5 @@
 #include "ftFx_SpecialHi.h"
 
-#include "math.h"
-
 #include <platform.h>
 
 #include "ef/eflib.h"
@@ -22,6 +20,7 @@
 #include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 #define FTFOX_SPECIALHI_COLL_FLAG                                             \

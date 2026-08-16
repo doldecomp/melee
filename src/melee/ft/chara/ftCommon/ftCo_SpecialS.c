@@ -1,7 +1,5 @@
 #include "ftCo_SpecialS.h"
 
-#include "math.h"
-
 #include <platform.h>
 
 #include "ft/fighter.h"
@@ -12,6 +10,7 @@
 
 #include <baselib/forward.h>
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 /* 0960CC */ static void doEnter(Fighter_GObj* gobj);

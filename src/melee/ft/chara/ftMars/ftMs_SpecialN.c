@@ -1,7 +1,5 @@
 #include "ftMs_SpecialN.h"
 
-#include "math.h"
-
 #include <placeholder.h>
 #include <platform.h>
 
@@ -32,6 +30,7 @@
 
 #include <baselib/forward.h>
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 void ftMs_SpecialN_Enter(HSD_GObj* gobj)

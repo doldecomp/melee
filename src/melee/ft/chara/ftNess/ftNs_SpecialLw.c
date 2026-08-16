@@ -1,7 +1,6 @@
 #include "ftNs_SpecialLw.h"
 
 #include "ftNs_Init.h"
-#include "math.h"
 
 #include <platform.h>
 
@@ -21,6 +20,7 @@
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 /// SpecialLw (PSI Magnet)

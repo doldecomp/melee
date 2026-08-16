@@ -2,7 +2,6 @@
 
 #include "ftMh_Damage_0.h"
 #include "ftMh_Wait1_2.h"
-#include "math.h"
 #include "types.h"
 
 #include <platform.h>
@@ -16,6 +15,7 @@
 #include "ft/types.h"
 #include "pl/player.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/debug.h>
 

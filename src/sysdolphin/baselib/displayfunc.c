@@ -11,7 +11,6 @@
 #include "baselib/tev.h"
 #include "baselib/util.h"
 
-#include <math_ppc.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <Runtime/__mem.h>

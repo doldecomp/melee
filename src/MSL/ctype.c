@@ -1,4 +1,4 @@
-#include <MSL/ctype.h>
+#include <ctype.h>
 
 #define ctrl __control_char
 #define motn __motion_char

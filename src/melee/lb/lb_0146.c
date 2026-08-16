@@ -1,7 +1,5 @@
 #include "lb/types.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
 #include <dolphin/gx/GXCull.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXLighting.h>

@@ -1,7 +1,6 @@
 #include "ithassam.h"
 
 #include "inlines.h"
-#include "math.h"
 
 #include "cm/camera.h"
 #include "ef/eflib.h"
@@ -21,7 +20,7 @@
 #include "it/types.h"
 #include "lb/lbvector.h"
 
-#include <trigf.h>
+#include <math.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 

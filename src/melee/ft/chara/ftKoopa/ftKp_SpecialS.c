@@ -37,7 +37,6 @@
 
 #include <baselib/forward.h>
 
-#include <trigf.h>
 #include <baselib/gobj.h>
 
 static s32 ftKp_SpecialS_set_dir(Fighter_GObj* gobj)

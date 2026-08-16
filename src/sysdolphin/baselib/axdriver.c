@@ -2,7 +2,7 @@
 
 #include "axdriver.static.h"
 
-#include <math_ppc.h>
+#include <math.h>
 #include <string.h>
 #include <dolphin/axfx.h>
 #include <dolphin/dvd.h>

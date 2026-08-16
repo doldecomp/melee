@@ -29,7 +29,7 @@
 #include "sysdolphin/baselib/gobjplink.h"
 #include "sysdolphin/baselib/jobj.h"
 
-#include <math_ppc.h>
+#include <math.h>
 
 /* 2A5770 */ static void it_802A5770_inline(ItemLink* link_1,
                                             itLinkHookshotAttributes* arg2,

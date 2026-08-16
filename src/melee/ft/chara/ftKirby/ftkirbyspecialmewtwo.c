@@ -30,10 +30,10 @@
 #include "it/items/itmewtwoshadowball.h"
 #include "lb/lb_00B0.h"
 
+#include <math.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
 
 /* 3B7570 */ static Vec3 const ftKb_Init_803B7570 = { 0.0f, 4.0f, 0.0f };
 /* 3B757C */ static Vec3 const ftKb_Init_803B757C = { 0.0f, 4.0f, 0.0f };

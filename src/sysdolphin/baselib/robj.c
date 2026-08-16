@@ -16,7 +16,6 @@
 
 #include <__mem.h>
 #include <math.h>
-#include <math_ppc.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 

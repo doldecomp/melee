@@ -1,7 +1,5 @@
 #include "ftMt_SpecialN.h"
 
-#include "math.h"
-
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 
@@ -32,7 +30,7 @@
 #include "it/items/itmewtwoshadowball.h"
 #include "lb/lb_00B0.h"
 
-#include <trigf.h>
+#include <math.h>
 #include <dolphin/mtx.h>
 
 /// SpecialN/SpecialAirN

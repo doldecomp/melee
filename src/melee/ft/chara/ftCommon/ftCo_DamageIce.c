@@ -39,7 +39,6 @@
 
 #include <baselib/forward.h>
 
-#include <math_ppc.h>
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 #include <baselib/mtx.h>

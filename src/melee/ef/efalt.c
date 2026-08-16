@@ -6,7 +6,8 @@
 #include "baselib/gobj.h"
 #include "baselib/jobj.h"
 #include "baselib/particle.h"
-#include "MSL/math.h"
+
+#include <math.h>
 
 #define EFALT_VA_ARG(t) (*((t*) __va_arg(vlist_arg, _var_arg_typeof(t))))
 

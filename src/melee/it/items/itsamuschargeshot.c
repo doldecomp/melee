@@ -14,8 +14,6 @@
 #include "it/item.h"
 #include "lb/lbvector.h"
 
-#include <trigf.h>
-
 ItemStateTable it_803F7288[] = {
     { 0, itSamuschargeshot_UnkMotion0_Anim, itSamuschargeshot_UnkMotion0_Phys,
       itSamuschargeshot_UnkMotion0_Coll },

@@ -14,7 +14,6 @@
 #include "lb/types.h"
 
 #include <math.h>
-#include <math_ppc.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>

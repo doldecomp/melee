@@ -26,8 +26,6 @@
 #include "mp/forward.h"
 
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <MetroTRK/intrinsics.h>
 

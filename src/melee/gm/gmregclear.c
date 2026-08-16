@@ -10,7 +10,6 @@
 
 #include "mn/inlines.h"
 
-#include <math_ppc.h>
 #include <dolphin/gx.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/controller.h>

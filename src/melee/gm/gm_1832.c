@@ -38,7 +38,6 @@
 #include "pl/player.h"
 #include "sc/types.h"
 
-#include <math_ppc.h>
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
 #include <baselib/dobj.h>

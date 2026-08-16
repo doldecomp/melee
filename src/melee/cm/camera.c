@@ -39,8 +39,6 @@
 #include "pl/player.h"
 
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
 #include <baselib/controller.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>

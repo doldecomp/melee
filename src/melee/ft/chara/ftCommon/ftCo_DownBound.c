@@ -27,8 +27,6 @@
 #include "ftSandbag/ftSb_Init.h"
 
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 

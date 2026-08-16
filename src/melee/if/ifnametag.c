@@ -13,6 +13,8 @@
 #include "sc/types.h"
 
 #include <printf.h>
+#include <stdio.h>
+#include <string.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 #include <baselib/fog.h>
@@ -28,8 +30,6 @@
 #include <baselib/particle.h>
 #include <baselib/sislib.h>
 #include <baselib/wobj.h>
-#include <MSL/stdio.h>
-#include <MSL/string.h>
 
 /// .data
 /// IfAll.dat::ScInfPnm_scene_models

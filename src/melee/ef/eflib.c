@@ -29,10 +29,9 @@
 #include "ftCommon/ftCo_Bury.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbspdisplay.h"
-#include "MSL/math.h"
 
+#include <math.h>
 #include <runtime.h>
-#include <trigf.h>
 // externs
 extern u32* ptclref_804D0E5C[65];
 extern EF_DAT_Entry efAsync_DatEntries[51];

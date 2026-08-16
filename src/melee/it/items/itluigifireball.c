@@ -13,7 +13,6 @@
 #include "it/item.h"
 #include "it/itmaplib.h"
 
-#include <math_ppc.h>
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 #include <baselib/mtx.h>

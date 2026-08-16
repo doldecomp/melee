@@ -11,7 +11,7 @@
 
 #include "lb/lb_013B.h"
 
-#include <trigf.h>
+#include <math.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>

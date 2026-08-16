@@ -17,7 +17,7 @@
 #include "it/items/itnesspkflash.h"
 #include "lb/lb_00B0.h"
 
-#include <MSL/math.h>
+#include <math.h>
 
 static u32 ftKb_Init_804D3DB8[] = {
     0x0001AE17,

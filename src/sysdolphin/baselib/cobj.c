@@ -13,8 +13,6 @@
 #include <placeholder.h>
 
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>

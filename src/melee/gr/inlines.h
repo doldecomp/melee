@@ -9,10 +9,10 @@
 #include "if/ifcoget.h"
 #include "if/ifstatus.h"
 #include "lb/lb_00B0.h"
-#include "MSL/math.h"
 
 #include <baselib/forward.h>
 
+#include <math.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>

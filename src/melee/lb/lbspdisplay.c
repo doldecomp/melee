@@ -25,8 +25,6 @@
 #include "lb/lbdvd.h"
 #include "lb/types.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
 #include <baselib/cobj.h>
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>

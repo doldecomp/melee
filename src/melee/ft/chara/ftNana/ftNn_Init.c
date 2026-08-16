@@ -21,8 +21,8 @@
 #include "ftPopo/ftPp_SpecialS.h"
 #include "ftPopo/types.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
-#include <MSL/math.h>
 
 /* 1238E4 */ void ftNn_Init_801238E4(Fighter_GObj* gobj);
 /* 1232A4 */ void ftNn_Init_801232A4(Fighter_GObj* gobj);

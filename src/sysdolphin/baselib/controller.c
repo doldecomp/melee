@@ -5,8 +5,6 @@
 #include "baselib/rumble.h"
 #include "baselib/util.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/pad.h>
 

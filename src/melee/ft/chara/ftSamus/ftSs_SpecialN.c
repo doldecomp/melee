@@ -1,7 +1,6 @@
 #include "ftSs_SpecialN.h"
 
 #include "inlines.h"
-#include "math.h"
 
 #include <platform.h>
 
@@ -27,6 +26,7 @@
 
 #include <baselib/forward.h>
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 static void ftSamus_801293BC_inner(HSD_GObj* gobj)

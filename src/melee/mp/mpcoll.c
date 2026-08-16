@@ -1,6 +1,5 @@
 #include "mp/mpcoll.h"
 
-#include "math.h"
 #include "platform.h"
 #include "stdbool.h"
 
@@ -21,7 +20,7 @@
 
 #include "mp/mplib.h"
 
-#include <trigf.h>
+#include <math.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 
