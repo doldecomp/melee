@@ -401,11 +401,9 @@ void ftKb_SpecialHi_800F3570(Fighter_GObj* gobj)
 {
     UNUSED u8 pad[24];
     Vec3 sp1C;
-    f32 pos_y;
+    f32 pos;
     f32 slide_speed;
-    f32 pos_x;
     f32 pos_x_alias;
-    f32 normal_y;
     f32 top_y;
     f32 bottom_y;
     f32 floor_normal_x_sign;
@@ -423,16 +421,16 @@ void ftKb_SpecialHi_800F3570(Fighter_GObj* gobj)
         fp->facing_dir *
         atan2f(fp->mv.kb.specialhi.x18.x, fp->mv.kb.specialhi.x18.y);
     if (0.0f != fp->mv.kb.specialhi.x18.x) {
-        pos_y = fp->cur_pos.y;
+        pos = fp->cur_pos.y;
         pos_x_alias = fp->cur_pos.x;
         slide_speed = dat_attr->speciallw_slide_max_speed;
-        top_y = pos_y;
+        top_y = pos;
         top_y = top_y + slide_speed;
         floor_normal_x_sign = fp->mv.kb.specialhi.x18.x > 0.0f ? 1.0f : -1.0f;
-        pos_x = fp->cur_pos.x;
-        bottom_y = pos_y - slide_speed;
-        normal_y_slide = (normal_y = fp->mv.kb.specialhi.x18.y) * slide_speed;
-        if (mpCheckAllRemap(NULL, 0, NULL, &sp1C, -1, -1, pos_x, top_y,
+        bottom_y = pos - slide_speed;
+        pos = fp->cur_pos.x;
+        normal_y_slide = fp->mv.kb.specialhi.x18.y * slide_speed;
+        if (mpCheckAllRemap(NULL, 0, NULL, &sp1C, -1, -1, pos, top_y,
                             (normal_y_slide * floor_normal_x_sign) +
                                 pos_x_alias,
                             bottom_y) == 0)
