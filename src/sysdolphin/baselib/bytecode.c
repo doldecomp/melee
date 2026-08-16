@@ -10,7 +10,6 @@
 
 #include <math.h>
 #include <dolphin/os.h>
-#include <melee/lb/lb_00CE.h>
 
 typedef union {
     void* p;

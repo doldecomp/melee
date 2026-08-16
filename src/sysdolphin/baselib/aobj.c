@@ -17,7 +17,6 @@
 #include <math.h>
 #include <stdarg.h>
 #include <string.h>
-#include <MetroTRK/intrinsics.h>
 
 HSD_ObjAllocData aobj_alloc_data;
 
