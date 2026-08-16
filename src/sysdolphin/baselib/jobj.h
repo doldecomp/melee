@@ -246,7 +246,8 @@ static inline void HSD_JObjSetMtxDirtyOutOfLine(HSD_JObj* jobj)
     HSD_JObjSetMtxDirtyOutOfLineLeaf(jobj);
 }
 
-static inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
+/// @todo Non-static inline
+inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
 {
     if (!jobj || !HSD_JObjMtxIsDirty(jobj)) {
         return;
