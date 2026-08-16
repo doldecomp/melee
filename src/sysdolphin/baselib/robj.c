@@ -14,8 +14,8 @@
 
 #include <placeholder.h>
 
-#include <__mem.h>
 #include <math.h>
+#include <string.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 

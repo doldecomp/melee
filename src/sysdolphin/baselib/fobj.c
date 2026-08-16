@@ -3,7 +3,7 @@
 #include "debug.h"
 #include "spline.h"
 
-#include <__mem.h>
+#include <string.h>
 
 HSD_ObjAllocData fobj_alloc_data;
 

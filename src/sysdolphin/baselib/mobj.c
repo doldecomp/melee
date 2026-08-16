@@ -7,7 +7,7 @@
 #include "tev.h"
 #include "texp.h"
 
-#include <__mem.h>
+#include <string.h>
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/os.h>
 
