@@ -52,6 +52,10 @@ static void fn_80109714(HSD_GObj*);
 static void fn_801097B8(HSD_GObj*);
 void fn_800F64C8(Fighter_GObj*, float);
 
+char ftKb_Init_assert_msg_0[] = "fighter parts model dobj num over!\n";
+char ftKb_Init_assert_msg_1[] = "ftkirby.c";
+char ftKb_Init_assert_msg_2[] = "fighter dobj num over!\n";
+
 void ftKb_SpecialN_800EEC34(int arg0, int arg1, int arg2)
 {
     int i;
