@@ -109,4 +109,15 @@ float sinf(float x);
 void __sinit_trigf_c(void);
 float logf(float);
 
+static inline float fmodf(float a, float b)
+{
+    long long quotient;
+
+    if (__fabsf(b) > __fabsf(a)) {
+        return a;
+    }
+    quotient = a / b;
+    return a - b * quotient;
+}
+
 #endif
