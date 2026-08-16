@@ -221,7 +221,7 @@ void gm_801A4BD4(void)
     gm_801A4B40(0);
     gm_801A4B50(0);
 
-    lb_80019880(1.0F / 60 * OS_TIMER_CLOCK);
+    lb_80019880(OSSecondsToTicks(1.0F / 60));
     HSD_GObj_803912E0(&gm_80479D48.initdata);
     gm_80479D48.initdata.gproc_pri_max = 0x18;
     HSD_SObjLib_804D7960 =

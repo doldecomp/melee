@@ -223,8 +223,8 @@ struct StartMeleeRules {
     u64 x20; // item mask
     int x28;
     float x2C;
-    float x30; // damage ratio
-    float x34; // game speed
+    float x30; ///< damage ratio
+    float x34; ///< game speed
     void (*on_unpause_override)(
         int); ///< on unpause callback. When set, this method is called with
               ///< the pauser playerId when a player unpauses the match. If not
