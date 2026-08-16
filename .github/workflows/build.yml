@@ -9,6 +9,7 @@ env:
 permissions:
   contents: read
   id-token: write
+  packages: read
   pages: write
 
 jobs:
