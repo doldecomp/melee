@@ -191,8 +191,9 @@ struct _Toy_804A26B8_t {
 STATIC_ASSERT(sizeof(struct _Toy_804A26B8_t) == 0xC);
 
 struct TyViewData {
-    u8 pad[4];
+    char pad_0[0x4];
     s8 x4;
+    char pad_5[0x3];
 };
 
 struct TyFiguponData {
