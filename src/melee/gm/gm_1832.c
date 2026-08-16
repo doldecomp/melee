@@ -2363,7 +2363,7 @@ void fn_80188EE8(HSD_GObj* gobj)
 #pragma dont_inline off
 static inline u32 gm_801891F4_GetTickRate(void)
 {
-    return *(u32*) 0x800000F8 >> 2;
+    return OS_TIMER_CLOCK;
 }
 
 void fn_801891F4(void)

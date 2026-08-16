@@ -78,14 +78,14 @@ s32 hsd_80393328(void)
     }
     result = 1;
     startTick = OSGetTick();
-    ticksPerUnit = (*(u32*) 0x800000F8 >> 2) & 0xFFFFFFFFFFFFFFFF;
+    ticksPerUnit = OS_TIMER_CLOCK & 0xFFFFFFFFFFFFFFFF;
     do {
         hsd_80392E80();
         if (hsd_804D78B0 == 0) {
             result = 0;
             break;
         }
-    } while ((u32) (OSGetTick() - startTick) / ticksPerUnit < 3);
+    } while ((OSGetTick() - startTick) / ticksPerUnit < 3);
 
     if (result != 0) {
         hsd_804D78B4 = 0;
@@ -361,11 +361,8 @@ int hsd_80393A5C(char* filename, int data, int size)
     }
 
     FIOFclose(fd);
-    elapsed = (f32) (OSGetTick() - start) / (f32) (*(u32*) 0x800000F8 >> 2);
-    {
-        f32 bits = 8.0F * (f32) size;
-        OSReport(messages->done, filename, size, elapsed,
-                 bits / elapsed * kbps_scale());
-    }
+    elapsed = (OSGetTick() - start) / OSSecondsToTicks(1.0F);
+    OSReport(messages->done, filename, size, elapsed,
+             8.0F * size / elapsed * kbps_scale());
     return size;
 }

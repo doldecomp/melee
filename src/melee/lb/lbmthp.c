@@ -496,7 +496,7 @@ s32 lbMthp_8001F5C4(void)
     return MoviePlayer.unk_84;
 }
 
-s32 lbMthp_8001F5D4(void)
+u32 lbMthp_8001F5D4(void)
 {
     return MoviePlayer.unk_134;
 }
