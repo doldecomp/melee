@@ -6,6 +6,7 @@
 #include "baselib/forward.h"
 
 #include "cm/camera.h"
+#include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_FallSpecial.h"
 #include "ft/fighter.h"
@@ -53,14 +54,6 @@ struct ftKb_Init_803CB4EC_t ftKb_Init_803CB4EC = {
     { 0, 2, 3, 4, 5, 6 },
     { 0.0F, 1.0F, 0.0F },
 };
-
-char ftKb_Init_803CB510[] = "Other Dead_Proc Existence";
-char ftKb_Init_803CB52C[] = "ftkirbyspecials.c";
-
-#ifdef __MWERKS__
-__declspec(section ".sdata")
-#endif
-char ftKb_Init_804D3DB0[2] = "0";
 
 static inline bool fbKb_SpecialLw_IASA_Inline(Fighter_GObj* gobj)
 {
@@ -941,4 +934,16 @@ void ftKb_SpecialAirLwEnd_Coll(Fighter_GObj* gobj)
     fp2->mv.kb.speciallw.x18 = p->vec;
     fp2->mv.kb.speciallw.x84 = 0.0f;
     ftPartSetRotX(fp, 0, 0.0f);
+}
+
+void ftKb_SpecialAirLw_800F5318(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCommon_8007F5CC(gobj, 1);
+    fp->x221E_b4 = true;
+    fp->x2225_b2 = true;
+    fp->dmg.x1834 = 0.0f;
+    fp->x221C_b4 = false;
+    ftPartSetRotX(fp, 0, 0.0f);
+    efLib_DestroyAll(gobj);
 }
