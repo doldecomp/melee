@@ -210,6 +210,27 @@ static inline void ftKb_SpecialN_800EF0E4_insert_joint_refs(
     *joint = root;
 }
 
+static inline void ftKb_SpecialN_800EF438_insert_joint_refs(
+    s32* total_dobjs, HSD_Joint* root, Fighter* fp, s32* part_idx,
+    HSD_Joint** joint, s32* joint_idx, s32* byte_base)
+{
+    *part_idx = (*total_dobjs = (*byte_base = 0));
+    *joint = root;
+    *joint_idx = 0;
+    while (*joint != NULL) {
+        FighterBone* parts = fp->parts;
+        FighterBone* bone = &parts[*part_idx];
+        while (!bone->flags_b1) {
+            bone++;
+            (*part_idx)++;
+        }
+        HSD_IDInsertToTable(NULL, (u32) *joint, parts[*part_idx].joint);
+        (*part_idx)++;
+        ftAnim_GetNextJointInTree(joint, joint_idx);
+    }
+    *joint = root;
+}
+
 static inline void ftKb_SpecialN_800EF0E4_finish(Fighter* fp, s32 total_dobjs)
 {
     fp->u.gw.x2240_chefVar1 = total_dobjs;
@@ -340,41 +361,39 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
 {
     HSD_Joint* current_joint;
     s32 joint_idx;
-    HSD_Joint* root = (HSD_Joint*) hat->hat_dynamics[2];
+    HSD_JObj* jobj;
+    HSD_Joint* root = (HSD_Joint*) (jobj = (HSD_JObj*) hat->hat_dynamics[2]);
     ftKirbyCopyData* data = (ftKirbyCopyData*) ftKb_Init_MotionStateTable;
     s32 byte_off;
     Fighter* fp = GET_FIGHTER(gobj);
     s32 total_dobjs;
-    s32 insert_part_off;
+    s32 insert_part_idx;
     s32 dst_off;
     HSD_DObj* dobj;
     HSD_MObj* mobj;
-    HSD_JObj* jobj;
     HSD_DObj* tail;
     s32 group_count;
 
     PAD_STACK(4);
     if (root != NULL) {
         s32 byte_base;
-        s32 part_off;
         ftPartsPObjSetDefaultClass();
-        ftKb_SpecialN_800EF0E4_insert_joint_refs(
-            &total_dobjs, root, fp, &insert_part_off, &current_joint,
+        ftKb_SpecialN_800EF438_insert_joint_refs(
+            &total_dobjs, root, fp, &insert_part_idx, &current_joint,
             &joint_idx, &byte_base);
         joint_idx = 0;
-        byte_off = byte_base << 2;
-        part_off = 0;
+        byte_off = total_dobjs << 2;
+        insert_part_idx = 0;
         while (current_joint != NULL) {
             group_count = 0;
-            while (!((FighterBone*) ((u8*) fp->parts + part_off))->flags_b1) {
-                part_off += 0x10;
+            while (!fp->parts[insert_part_idx].flags_b1) {
+                insert_part_idx++;
             }
-            jobj = ((FighterBone*) ((u8*) fp->parts + part_off))->joint;
+            jobj = fp->parts[insert_part_idx].joint;
             dobj = HSD_DObjLoadDesc(current_joint->u.dobjdesc);
             if (dobj != NULL) {
                 tail = HSD_JObjGetDObj(jobj);
-                ((FighterBone*) ((u8*) fp->parts + part_off))->flags2_b7 =
-                    true;
+                fp->parts[insert_part_idx].flags2_b7 = true;
                 HSD_DObjResolveRefsAll(dobj, current_joint->u.dobjdesc);
                 if (tail == NULL) {
                     HSD_JObjAddDObj(jobj, dobj);
@@ -415,7 +434,7 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
                     __assert(data->source_name, 0x4C7, ftKb_Init_804D3DAC);
                 }
             }
-            part_off += 0x10;
+            insert_part_idx++;
             ftAnim_GetNextJointInTree(&current_joint, &joint_idx);
         }
         fp->u.gw.x2248_manholeGObj = (HSD_GObj*) total_dobjs;
