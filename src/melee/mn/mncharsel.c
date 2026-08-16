@@ -1212,14 +1212,14 @@ void mnCharSel_8025DB34(u8 arg0)
     }
 }
 
-inline HSD_JObj* lb_80011E24_inline(int i)
+static inline HSD_JObj* lb_80011E24_inline(int i)
 {
     HSD_JObj* jobj;
     lb_80011E24(mnCharSel_804D6CC0, &jobj, i, -1);
     return jobj;
 }
 
-inline void anim_inline(int i, float f)
+static inline void anim_inline(int i, float f)
 {
     HSD_JObj* jobj;
     lb_80011E24(mnCharSel_804D6CC0, &jobj, i, -1);

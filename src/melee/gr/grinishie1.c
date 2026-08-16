@@ -861,7 +861,7 @@ void grInishie1_801FBCEC(HSD_GObj* gobj, u32 index)
     Camera_80030E44(2, &effect_pos);
 }
 
-inline Item* GET_ITEM2(Item_GObj* arg0)
+static inline Item* GET_ITEM2(Item_GObj* arg0)
 {
     return arg0->user_data;
 }

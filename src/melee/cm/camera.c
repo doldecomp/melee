@@ -679,8 +679,8 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
     new_bounds->z_pos = z_pos;
 }
 
-inline float get_follow_speed(float temp_f4, float spread,
-                              CameraUnkGlobals* globals)
+static inline float get_follow_speed(float temp_f4, float spread,
+                                     CameraUnkGlobals* globals)
 {
     if (spread > temp_f4) {
         return globals->x30;
@@ -693,7 +693,7 @@ inline float get_follow_speed(float temp_f4, float spread,
     }
 }
 
-inline float get_delta(float temp_f)
+static inline float get_delta(float temp_f)
 {
     if (temp_f > 0.0001f) {
         return 1.0f / temp_f;
@@ -1002,7 +1002,7 @@ void Camera_8002A28C(CameraBounds* arg0)
 
 /// @note doesnt check all stages...
 /// probably was a bandaid for problem stages
-inline float get_stage_floor_height(GrKind kind)
+static inline float get_stage_floor_height(GrKind kind)
 {
     float height = -F32_MAX;
     switch (kind) {
@@ -1567,17 +1567,17 @@ void Camera_8002B3D4(void* arg0)
     update_avg_bounds_width();
 }
 
-inline HSD_PadStatus* get_slot_pad(u8 arg0)
+static inline HSD_PadStatus* get_slot_pad(u8 arg0)
 {
     return &HSD_PadCopyStatus[arg0];
 }
 
-inline f32 get_stick_x(HSD_PadStatus* arg0)
+static inline f32 get_stick_x(HSD_PadStatus* arg0)
 {
     return arg0->nml_stickX;
 }
 
-inline f32 get_stick_y(HSD_PadStatus* arg0)
+static inline f32 get_stick_y(HSD_PadStatus* arg0)
 {
     return arg0->nml_stickY;
 }

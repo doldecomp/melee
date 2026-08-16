@@ -166,7 +166,7 @@ void ftNs_SpecialHiStopGFX(HSD_GObj* gobj) // Removes GFX
 }
 #pragma pop
 
-inline bool check_distance(Vec3* pos, Vec3* pair)
+static inline bool check_distance(Vec3* pos, Vec3* pair)
 {
     if ((ABS(pos->x - pair->x) < 8.333333015441895f) &&
         (ABS(pos->y - pair->y) < 12.333333015441895f))
@@ -639,7 +639,7 @@ block_stuff: {
 }
 }
 
-inline void
+static inline void
 NessFloatMath_PKThunder2(HSD_GObj* gobj) // Required for 0x80118570 to match
 {
     Fighter* fp;
@@ -1156,7 +1156,7 @@ void ftNs_SpecialAirHiRebound_IASA(HSD_GObj* gobj)
     return;
 }
 
-inline void ThunderPhysTimer(HSD_GObj* gobj)
+static inline void ThunderPhysTimer(HSD_GObj* gobj)
 {
     Fighter* temp_fp;
     s32 thunderPhysTimer;
@@ -1305,7 +1305,7 @@ void ftNs_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
     }
 }
 
-inline void ftNess_atan2(HSD_GObj* gobj)
+static inline void ftNess_atan2(HSD_GObj* gobj)
 {
     Fighter* fighter_data2 = GET_FIGHTER(gobj);
 
@@ -1318,7 +1318,7 @@ inline void ftNess_atan2(HSD_GObj* gobj)
             (float) M_PI_2);
 }
 
-inline void* getFtSpecialAttrs2(Fighter* fp)
+static inline void* getFtSpecialAttrs2(Fighter* fp)
 {
     u8 _[4] = { 0 };
 

@@ -2731,7 +2731,7 @@ void Fighter_8006CFE0(Fighter_GObj* gobj)
     }
 }
 
-inline void setBit(Fighter_GObj* gobj)
+static inline void setBit(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2219_b7 = 1;

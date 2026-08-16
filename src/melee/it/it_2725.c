@@ -1023,7 +1023,7 @@ void it_80274574(Item_GObj* item_gobj)
     it_80274594(item_gobj);
 }
 
-inline void HSD_JObjSetScale_2(HSD_JObj* jobj, Vec3* scale)
+static inline void HSD_JObjSetScale_2(HSD_JObj* jobj, Vec3* scale)
 {
     ((jobj) ? ((void) 0) : __assert("jobj.h", 760, "jobj"));
     jobj->scale = *scale;
@@ -1341,7 +1341,7 @@ void it_80274F28(Item* item, s8 arg1, HSD_GObjEvent arg2,
     item->grabbed_for_victim = arg3;
 }
 
-inline HSD_JObj* get_bone_by_id(Item_GObj* item_gobj, int bone_id)
+static inline HSD_JObj* get_bone_by_id(Item_GObj* item_gobj, int bone_id)
 {
     Item* item = GET_ITEM(item_gobj);
     HSD_JObj* jobj = GET_JOBJ(item_gobj);

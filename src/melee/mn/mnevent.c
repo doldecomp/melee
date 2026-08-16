@@ -271,7 +271,7 @@ void mnEvent_8024D5B0(HSD_GObj* gobj, u8 event)
     HSD_SisLib_803A6B98(temp_r3_2, 0.0f, 0.0f, mnEvent_804D5044);
 }
 
-inline MnEventData* GET_EVENTDATA(HSD_GObj* gobj)
+static inline MnEventData* GET_EVENTDATA(HSD_GObj* gobj)
 {
     return gobj->user_data;
 }

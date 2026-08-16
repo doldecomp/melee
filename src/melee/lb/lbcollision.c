@@ -311,7 +311,7 @@ float lbColl_80005FC0(Vec3* arg0, Vec3* arg1, Vec3* arg2, float* arg3)
     return x * x + y * y;
 }
 
-inline bool end(Vec3* a, Vec3* b, float unk_sum)
+static inline bool end(Vec3* a, Vec3* b, float unk_sum)
 {
     float y = a->y - b->y;
     float x = a->x - b->x;
@@ -1472,7 +1472,7 @@ block_39:
     return 1;
 }
 
-inline float sqrDistance(Vec3* a, Vec3* b)
+static inline float sqrDistance(Vec3* a, Vec3* b)
 {
     float x = a->x - b->x;
     float y = a->y - b->y;
@@ -1765,7 +1765,7 @@ bool lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2, s32 arg3,
     return 0;
 }
 
-inline void checkPos(HurtCapsule* hurt, Mtx mtx, float arg5)
+static inline void checkPos(HurtCapsule* hurt, Mtx mtx, float arg5)
 {
     if (!hurt->skip_update_pos) {
         lb_8000B1CC(hurt->bone, &hurt->a_offset, &hurt->a_pos);
@@ -1780,7 +1780,7 @@ inline void checkPos(HurtCapsule* hurt, Mtx mtx, float arg5)
     }
 }
 
-inline void mtxConcat(HurtCapsule* hurt, Mtx mtx)
+static inline void mtxConcat(HurtCapsule* hurt, Mtx mtx)
 {
     Mtx sp34;
     if (mtx != NULL) {
@@ -1788,7 +1788,7 @@ inline void mtxConcat(HurtCapsule* hurt, Mtx mtx)
     }
 }
 
-inline MtxPtr pickMtx(HurtCapsule* hurt, Mtx mtx)
+static inline MtxPtr pickMtx(HurtCapsule* hurt, Mtx mtx)
 {
     MtxPtr var_r9;
     Mtx sp34;
@@ -1800,7 +1800,7 @@ inline MtxPtr pickMtx(HurtCapsule* hurt, Mtx mtx)
     return var_r9;
 }
 
-inline float getHit1C(HitCapsule* hit, float arg3)
+static inline float getHit1C(HitCapsule* hit, float arg3)
 {
     float var_f1;
     if (hit->x43_b1) {

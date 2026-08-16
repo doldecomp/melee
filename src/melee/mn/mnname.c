@@ -104,7 +104,7 @@ int GetNameCount(void)
     return count;
 }
 
-inline int GetNumNameList(void)
+static inline int GetNumNameList(void)
 {
     int i;
     int count = 0;
@@ -124,7 +124,7 @@ bool IsNameListFull(void)
     return true;
 }
 
-inline bool checkStringRest(char* ptr)
+static inline bool checkStringRest(char* ptr)
 {
     char* term = &mnName_StringTerminator;
     char* cmp = &mnName_804D4BF0;
@@ -909,7 +909,7 @@ mnName_FindAnimLoop(AnimLoopSettings* const* tableBase, f32 frame)
     HSD_ASSERTREPORT(0x3DC, NULL, "But AnimFrame!!!\n");
 }
 
-inline f32 mnName_80238C34_inline(HSD_JObj* jobj)
+static inline f32 mnName_80238C34_inline(HSD_JObj* jobj)
 {
     return mn_8022F298(jobj);
 }

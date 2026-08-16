@@ -89,7 +89,7 @@ Vec3 zOne = { 0, 0, 1 };
 Vec3 yOne = { 0, 1, 0 };
 Vec3 zOne2 = { 0, 0, 1 };
 
-inline f32 HSD_MtxColMagFloat(MtxPtr mtx, int col)
+static inline f32 HSD_MtxColMagFloat(MtxPtr mtx, int col)
 {
     return sqrtf((mtx[0][col] * mtx[0][col]) + (mtx[1][col] * mtx[1][col]) +
                  (mtx[2][col] * mtx[2][col]));

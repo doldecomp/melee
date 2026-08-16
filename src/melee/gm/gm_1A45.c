@@ -254,7 +254,7 @@ GameSceneHandler* gm_FindGameSceneHandler(u8 kind)
     return NULL;
 }
 
-inline u64 maybe_gm_801A48A4(u8 i)
+static inline u64 maybe_gm_801A48A4(u8 i)
 {
     u64 temp_ret = gm_801A48A4(i);
     if (gm_80479D58.unk_10.unk_38_0) {

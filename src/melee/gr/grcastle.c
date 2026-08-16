@@ -1059,7 +1059,7 @@ void grCastle_801CE9E8(Ground_GObj* gobj)
 
 void grCastle_801CEAC8(Ground_GObj* gobj) {}
 
-inline void zero(Ground* gp, int i, f32 zero)
+static inline void zero(Ground* gp, int i, f32 zero)
 {
     gp->u.castle10.jobjs[i] = NULL;
     gp->u.castle10.effect_a[i] = NULL;

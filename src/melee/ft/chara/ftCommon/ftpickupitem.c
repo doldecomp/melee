@@ -82,7 +82,7 @@ bool ftpickupitem_80094150(Fighter_GObj* gobj, Item_GObj* item_gobj)
     return false;
 }
 
-inline itPickup* ftpickupitem_800942A0_inline(Fighter* fp)
+static inline itPickup* ftpickupitem_800942A0_inline(Fighter* fp)
 {
     return &fp->x294_itPickup;
 }

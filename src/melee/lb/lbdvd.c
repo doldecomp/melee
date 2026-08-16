@@ -100,7 +100,7 @@ void lbDvd_80017700(int arg0)
     }
 }
 
-inline int same(int a, s32 b)
+static inline int same(int a, s32 b)
 {
     int result = 0;
     if (a == b) {

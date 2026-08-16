@@ -342,7 +342,7 @@ static inline HSD_RObj* inlined_HSD_RObjGetByType(HSD_RObj* robj, u32 type,
     return NULL;
 }
 
-inline f32 HSD_MtxColMagFloat(MtxPtr mtx, int col)
+static inline f32 HSD_MtxColMagFloat(MtxPtr mtx, int col)
 {
     return sqrtf((mtx[0][col] * mtx[0][col]) + (mtx[1][col] * mtx[1][col]) +
                  (mtx[2][col] * mtx[2][col]));

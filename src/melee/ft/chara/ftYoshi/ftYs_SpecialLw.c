@@ -45,7 +45,7 @@ void fn_8012E644(Fighter_GObj* gobj)
     fp->accessory4_cb = NULL;
 }
 
-inline void ftYoshi_SpecialLw_SetVars(HSD_GObj* arg0)
+static inline void ftYoshi_SpecialLw_SetVars(HSD_GObj* arg0)
 {
     Fighter* fp = GET_FIGHTER(arg0);
 

@@ -330,7 +330,7 @@ void grBattle_GObj4_Callback2(Ground_GObj* gobj) {}
 
 void grBattle_GObj4_Callback3(Ground_GObj* gobj) {}
 
-inline void reset_bg_timer(Ground* gp)
+static inline void reset_bg_timer(Ground* gp)
 {
     gp->u.battle_bg.timer = HSD_Randi(1200) + 2400;
 }

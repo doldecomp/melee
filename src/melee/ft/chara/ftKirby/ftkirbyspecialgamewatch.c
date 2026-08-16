@@ -163,7 +163,7 @@ bool ftKb_SpecialNGw_8010D160(Fighter_GObj* gobj)
 }
 
 /// #ftGameWatch_SpecialN_SetVars with callback arg
-inline void setGwVars(HSD_GObj* fighter_gobj)
+static inline void setGwVars(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->cmd_vars[0] = 0;

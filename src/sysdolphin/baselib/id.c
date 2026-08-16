@@ -23,12 +23,12 @@ void HSD_IDSetup(void)
     memset(&default_table, 0, sizeof(HSD_IDTable));
 }
 
-inline u32 hash(u32 id)
+static inline u32 hash(u32 id)
 {
     return id % 0x65;
 }
 
-inline IDEntry* IDEntryAlloc(void)
+static inline IDEntry* IDEntryAlloc(void)
 {
     IDEntry* entry;
 
@@ -67,7 +67,7 @@ void HSD_IDInsertToTable(HSD_IDTable* table, u32 id, void* data)
     }
 }
 
-inline void IDEntryFree(IDEntry* entry)
+static inline void IDEntryFree(IDEntry* entry)
 {
     HSD_ObjFree(HSD_IDGetAllocData(), entry);
 }

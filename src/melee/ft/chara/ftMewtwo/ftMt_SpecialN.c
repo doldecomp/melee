@@ -359,7 +359,7 @@ void ftMt_SpecialN_PlayChargeSFX(HSD_GObj* gobj)
     }
 }
 
-inline void ftMewtwo_SpecialN_SetCall(HSD_GObj* gobj)
+static inline void ftMewtwo_SpecialN_SetCall(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     fp->death2_cb = ftMt_Init_OnDeath2;
@@ -367,7 +367,7 @@ inline void ftMewtwo_SpecialN_SetCall(HSD_GObj* gobj)
     fp->death3_cb = ftMt_Init_OnDeath2;
 }
 
-inline void ftMewtwo_SpecialN_ChangeAction(HSD_GObj* gobj)
+static inline void ftMewtwo_SpecialN_ChangeAction(HSD_GObj* gobj)
 
 {
     Fighter* fp = getFighter(gobj);
@@ -409,7 +409,7 @@ void ftMt_SpecialN_Enter(HSD_GObj* gobj)
     ftMewtwo_SpecialN_ChangeAction(gobj);
 }
 
-inline void ftMewtwo_SpecialAirN_ChangeAction(HSD_GObj* gobj)
+static inline void ftMewtwo_SpecialAirN_ChangeAction(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
@@ -497,8 +497,8 @@ void ftMt_SpecialNStart_Anim(HSD_GObj* gobj)
     }
 }
 
-inline void ftMewtwo_SpecialN_CreateHeldShadow(HSD_GObj* gobj, Vec3* pos1,
-                                               Vec3* pos2)
+static inline void ftMewtwo_SpecialN_CreateHeldShadow(HSD_GObj* gobj,
+                                                      Vec3* pos1, Vec3* pos2)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -584,7 +584,7 @@ void ftMt_SpecialNLoopFull_Anim(HSD_GObj* gobj)
         mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
 }
 
-inline void ftMewtwo_SpecialN_RemoveShadowBall2(HSD_GObj* gobj)
+static inline void ftMewtwo_SpecialN_RemoveShadowBall2(HSD_GObj* gobj)
 {
     if (gobj != NULL) {
         Fighter* fp = getFighter(gobj);
