@@ -114,8 +114,8 @@
 /* 4D6E78 */ s32 _Toy_sbss_804D6E78;
 /* 4D6E74 */ s32 _Toy_sbss_804D6E74;
 /* 4D6E70 */ s32 _Toy_sbss_804D6E70;
-/* 4D6E6C */ TyViewData* _Toy_sbss_804D6E6C;
-/* 4D6E68 */ Toy6E68* _Toy_sbss_804D6E68;
+/* 4D6E6C */ TyViewData* _Toy_sbss_804D6E6C; /* 4D6E68 */
+Toy6E68* _Toy_sbss_804D6E68;
 /* 4D6E64 */ s16* _Toy_sbss_804D6E64;
 /* 4D6E60 */ s32 _Toy_sbss_804D6E60;
 /* 4D6E5C */ void** _Toy_sbss_804D6E5C;

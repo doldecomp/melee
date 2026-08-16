@@ -30,7 +30,7 @@ struct grFlatzone_YakumonoParam {
     s32 unk20;
     f32 unk24;
     f32 unk28;
-    s32 unk2C;
+    int unk2C;
     s32 unk30;
     s32 unk34;
     f32 unk38;
@@ -398,7 +398,7 @@ void grFlatzone_80217648(Ground_GObj* gobj)
     gp->u.flatzone2.xC8 = 1.0f;
     gp->u.flatzone2.xCC = NULL;
     gp->u.flatzone2.xD0 = -1;
-    gp->u.flatzone2.xD4 = 0;
+    gp->u.flatzone2.timer = 0;
 }
 
 bool grFlatzone_802176B4(Ground_GObj* gobj)
@@ -451,23 +451,23 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
     }
     switch (gp->u.flatzone2.xD0) {
     case 0:
-        if ((s32) gp->u.flatzone2.xD4 ==
+        if ((s32) gp->u.flatzone2.timer ==
             (s32) ((s32) yakumono_param->unk20 / 2))
         {
             if (gp->u.flatzone2.xC8 == 1.0f) {
-                grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
+                grAnime_801C8138(gobj, gp->map_id, 0);
             } else {
-                grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 2);
+                grAnime_801C8138(gobj, gp->map_id, 2);
             }
             HSD_JObjRemoveAnimAll(jobj);
         }
-        gp->u.unk.xD4 -= 1;
-        if (gp->u.unk.xD4 <= 0) {
-            gp->u.unk.xD0 = 1;
-            gp->u.unk.xD4 = yakumono_param->unk2C *
-                            (yakumono_param->unk30 +
-                             rand_int_inner(yakumono_param->unk34 -
-                                            yakumono_param->unk30));
+        gp->u.flatzone2.timer -= 1;
+        if (gp->u.flatzone2.timer <= 0) {
+            gp->u.flatzone2.xD0 = 1;
+            gp->u.flatzone2.timer = yakumono_param->unk2C *
+                                    (yakumono_param->unk30 +
+                                     rand_int_inner(yakumono_param->unk34 -
+                                                    yakumono_param->unk30));
             if (gp->u.flatzone2.xC8 == 1.0f) {
                 grAnime_801C8138(gobj, gp->map_id, 0);
             } else {
@@ -476,15 +476,15 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
         }
         break;
     case 1:
-        if ((gp->u.unk.xD4 % yakumono_param->unk2C) == 1) {
+        if ((gp->u.flatzone2.timer % yakumono_param->unk2C) == 1) {
             HSD_JObjGetTranslation(jobj, &pos);
             pos.x += yakumono_param->unk38 * gp->u.flatzone2.xC8;
             HSD_JObjSetTranslate(jobj, &pos);
         }
-        gp->u.flatzone2.xD4 -= 1;
-        if (gp->u.flatzone2.xD4 <= 0) {
+        gp->u.flatzone2.timer -= 1;
+        if (gp->u.flatzone2.timer <= 0) {
             gp->u.flatzone2.xD0 = 2;
-            gp->u.flatzone2.xD4 = 0;
+            gp->u.flatzone2.timer = 0;
             if (gp->u.flatzone2.xC8 == 1.0f) {
                 grAnime_801C8138(gobj, gp->map_id, 1);
             } else {
@@ -500,7 +500,7 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
             f32 other_z;
             s32 line_id;
             gp->u.unk.xD0 = 3;
-            gp->u.unk.xD4 = yakumono_param->unk3C;
+            gp->u.flatzone2.timer = yakumono_param->unk3C;
             HSD_JObjGetTranslation(jobj, &pos);
             pos.x = (36.0f * gp->u.flatzone2.xC8) + pos.x;
             pos.y -= 27.0f;
@@ -526,10 +526,10 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
         }
         break;
     case 3:
-        gp->u.flatzone2.xD4 -= 1;
-        if ((s32) gp->u.flatzone2.xD4 <= 1) {
+        gp->u.flatzone2.timer -= 1;
+        if ((s32) gp->u.flatzone2.timer <= 1) {
             gp->u.flatzone2.xD0 = 4;
-            gp->u.flatzone2.xD4 = 0;
+            gp->u.flatzone2.timer = 0;
         }
         break;
     case 4:
