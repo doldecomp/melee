@@ -69,11 +69,6 @@ static u8 ifMagnify_803F984C[16][4] = {
     { 6, 6, 6, 6 }, { 6, 7, 6, 7 }, { 7, 8, 7, 8 }, { 8, 8, 8, 8 },
 };
 
-typedef struct ifMagnifyImageDescBase {
-    u8 pad[0x74];
-    HSD_ImageDesc image_descs[5];
-} ifMagnifyImageDescBase;
-
 s32 ifMagnify_802FB6E8(s32 slot)
 {
     (void) 0.0f;
@@ -264,7 +259,7 @@ static inline void ifMagnify_GetCornerColors(GXColor* colors, Vec3* world_pos)
         } else {
             x_class = 2.0f;
         }
-        color_ids = ifMagnify_803F984C[(s32) x_class + ((s32) y_class * 4)];
+        color_ids = ifMagnify_803F984C[((s32) y_class * 4) + (s32) x_class];
         colors[j] = *ifMagnify_803F9828[color_ids[j]]();
     }
 }
@@ -479,14 +474,12 @@ void ifMagnify_802FC3C0(s32 slot)
     if (slot == 0) {
         player->idesc = child->u.dobj->next->mobj->tobj->imagedesc;
     } else {
-        ifMagnifyImageDescBase* base =
-            (ifMagnifyImageDescBase*) &ifMagnify_804A1DE0;
+        ifMagnify* base = &ifMagnify_804A1DE0;
 
         base->image_descs[slot - 1] = *ifMagnify_804A1DE0.player[0].idesc;
         player->idesc =
-            (base =
-                 (ifMagnifyImageDescBase*) ((HSD_ImageDesc*) &ifMagnify_804A1DE0 +
-                                            (slot - 1)))
+            (base = (ifMagnify*) ((HSD_ImageDesc*) &ifMagnify_804A1DE0 +
+                                  (slot - 1)))
                 ->image_descs;
         player->idesc->image_ptr = HSD_MemAlloc(
             (GXGetTexBufferSize(player->idesc->width, player->idesc->height,
@@ -622,22 +615,18 @@ void ifMagnify_802FC870(void)
 
 void ifMagnify_802FC8E8(void)
 {
-    ifMagnify_804A1DE0.player[0].state.ignore_offscreen = 1;
-    ifMagnify_804A1DE0.player[1].state.ignore_offscreen = 1;
-    ifMagnify_804A1DE0.player[2].state.ignore_offscreen = 1;
-    ifMagnify_804A1DE0.player[3].state.ignore_offscreen = 1;
-    ifMagnify_804A1DE0.player[4].state.ignore_offscreen = 1;
-    ifMagnify_804A1DE0.player[5].state.ignore_offscreen = 1;
+    int i;
+    for (i = 0; i < 6; i++) {
+        ifMagnify_804A1DE0.player[i].state.ignore_offscreen = 1;
+    }
 }
 
 void ifMagnify_802FC940(void)
 {
-    ifMagnify_804A1DE0.player[0].state.ignore_offscreen = 0;
-    ifMagnify_804A1DE0.player[1].state.ignore_offscreen = 0;
-    ifMagnify_804A1DE0.player[2].state.ignore_offscreen = 0;
-    ifMagnify_804A1DE0.player[3].state.ignore_offscreen = 0;
-    ifMagnify_804A1DE0.player[4].state.ignore_offscreen = 0;
-    ifMagnify_804A1DE0.player[5].state.ignore_offscreen = 0;
+    int i;
+    for (i = 0; i < 6; i++) {
+        ifMagnify_804A1DE0.player[i].state.ignore_offscreen = 0;
+    }
 }
 
 bool ifMagnify_802FC998(s32 ply_slot)
