@@ -4,7 +4,7 @@
 
 #include <platform.h>
 
-#include <__mem.h>
+#include <string.h>
 
 HSD_ObjAllocData slist_alloc_data;
 HSD_ObjAllocData dlist_alloc_data;

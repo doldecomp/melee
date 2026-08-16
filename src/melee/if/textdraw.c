@@ -5,6 +5,8 @@
 #include "if/types.h"
 
 #include <printf.h>
+#include <stdio.h>
+#include <string.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 #include <baselib/fog.h>
@@ -21,8 +23,6 @@
 #include <baselib/sislib.h>
 #include <baselib/video.h>
 #include <baselib/wobj.h>
-#include <MSL/stdio.h>
-#include <MSL/string.h>
 
 /// .data
 /* 3FDC20 */ static HSD_WObjDesc devtext_eyepos = {

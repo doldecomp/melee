@@ -133,7 +133,7 @@ void grStory_801E322C(Ground_GObj* gobj) {}
 
 void grStory_801E3230(Ground_GObj* gobj) {}
 
-inline int randi(int max)
+static inline int randi(int max)
 {
     return max ? HSD_Randi(max) : 0;
 }
@@ -224,7 +224,7 @@ void grStory_801E3414(Ground_GObj* gobj) {}
 
 /// floating point random number centered at 0
 /// with an amplitude of 1
-inline f32 frand_amp1(void)
+static inline f32 frand_amp1(void)
 {
     return 2.0F * (HSD_Randf() - 0.5F);
 }

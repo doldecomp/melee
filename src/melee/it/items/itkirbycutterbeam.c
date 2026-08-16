@@ -11,7 +11,6 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <trigf.h>
 
 ItemStateTable it_803F6798[] = {
     NULL,

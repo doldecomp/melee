@@ -52,7 +52,7 @@ static inline float my_sqrtf(float x)
     return x;
 }
 
-inline float my_sqrtf_accurate(float x)
+static inline float my_sqrtf_accurate(float x)
 {
     volatile float y;
     if (x > 0.0f) {

@@ -15,8 +15,8 @@
 #include "it/items/itwhitebea.h"
 #include "it/itmaplib.h"
 
+#include <math.h>
 #include <baselib/jobj.h>
-#include <MSL/math.h>
 
 ItemStateTable it_803F5D28[] = { {
                                      0,

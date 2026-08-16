@@ -792,7 +792,7 @@ bool NameContainsOnlySpaces(void)
 }
 #pragma pop
 
-inline void CopyCurrentNameToNametag(struct NameTagData* nametag)
+static inline void CopyCurrentNameToNametag(struct NameTagData* nametag)
 {
     s32 idx;
     u8* text;
@@ -856,7 +856,7 @@ s32 WriteCharactersForNameAtIndex(u8 arg0, s32 arg1)
     return ret;
 }
 
-inline char** AddCharacterToName_getGlyphs(GlyphRow* arg0, u8 arg1)
+static inline char** AddCharacterToName_getGlyphs(GlyphRow* arg0, u8 arg1)
 {
     return (char**) &arg0[arg1];
 }

@@ -452,8 +452,8 @@ s32 it_8026B7E8(HSD_GObj* gobj) // Get bit 1 of 0xDC8 word
     return ip->xDC8_word.flags.x1;
 }
 
-inline void RunCallbackUnk(HSD_GObjInteraction proc, HSD_GObj* gobj0,
-                           HSD_GObj* gobj1)
+static inline void RunCallbackUnk(HSD_GObjInteraction proc, HSD_GObj* gobj0,
+                                  HSD_GObj* gobj1)
 {
     if (proc != NULL) {
         proc(gobj0, gobj1);

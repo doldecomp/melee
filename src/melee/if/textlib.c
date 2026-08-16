@@ -11,8 +11,11 @@
 #include "mn/inlines.h"
 #include "ty/toy.h"
 
+#include <math.h>
 #include <printf.h>
 #include <stdarg.h>
+#include <stdio.h>
+#include <string.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 #include <baselib/fog.h>
@@ -26,9 +29,6 @@
 #include <baselib/memory.h>
 #include <baselib/particle.h>
 #include <baselib/sislib.h>
-#include <MSL/math.h>
-#include <MSL/stdio.h>
-#include <MSL/string.h>
 
 struct unk_series {
     s16 values[26];
@@ -133,7 +133,7 @@ void DevText_EraseFirstLine(DevText* text)
     memzero(start_of_line, line_length);
 }
 
-inline int DevText_Clamp(int val, int max)
+static inline int DevText_Clamp(int val, int max)
 {
     if (max <= val) {
         return max - 1;
@@ -267,7 +267,7 @@ void DevText_Erase(DevText* text)
 }
 #pragma pop
 
-inline void DevText_AdvanceLine(DevText* text)
+static inline void DevText_AdvanceLine(DevText* text)
 {
     text->cursor_x = 0;
     if (text->cursor_y < text->h - 1) {

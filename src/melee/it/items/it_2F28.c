@@ -15,7 +15,6 @@
 #include "it/types.h"
 
 #include <math.h>
-#include <math_ppc.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <melee/it/item.h>

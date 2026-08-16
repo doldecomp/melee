@@ -46,7 +46,7 @@ void ftZd_SpecialN_8013A8AC(HSD_GObj* gobj)
     fp->accessory4_cb = NULL;
 }
 
-inline void startActionHelper(HSD_GObj* gobj)
+static inline void startActionHelper(HSD_GObj* gobj)
 {
     ftZelda_DatAttrs* attributes;
     Fighter* fighter2; // r5

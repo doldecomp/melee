@@ -146,7 +146,7 @@ void ftMt_SpecialAirLw_Phys(HSD_GObj* gobj)
     ftCommon_ApplyFrictionAir(fp, ca->aerial_friction);
 }
 
-inline void ftMewtwo_SpecialLw_SetCall(HSD_GObj* gobj)
+static inline void ftMewtwo_SpecialLw_SetCall(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->u.mt.x222C_disableGObj != NULL) {

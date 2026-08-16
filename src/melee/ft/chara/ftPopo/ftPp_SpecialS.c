@@ -14,7 +14,6 @@
 #include "pl/player.h"
 
 #include <math.h>
-#include <trigf.h>
 
 static inline void setRefGObjFlagAndClear(Fighter* fp)
 {

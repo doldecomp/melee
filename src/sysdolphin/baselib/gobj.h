@@ -130,7 +130,6 @@ HSD_GObj* GObj_Create(u16 classifier, u8 p_link, u8 priority);
 void HSD_GObj_JObjCallback(HSD_GObj* gobj, int arg1);
 void HSD_GObj_80390CD4(HSD_GObj* gobj);
 void HSD_GObj_80390CFC(void);
-void render_gobj(HSD_GObj* cur, int i);
 void HSD_GObj_80390FC0(void);
 void HSD_GObj_LObjCallback(HSD_GObj* gobj, int unused);
 void HSD_GObj_FogCallback(HSD_GObj* gobj, int unused);

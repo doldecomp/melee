@@ -75,7 +75,6 @@ typedef struct _MenuInputState {
 /* 22BEDC */ void mn_8022BEDC(HSD_GObj*);
 /* 22BFBC */ GXColor* mn_8022BFBC(int);
 /* 22C010 */ int mn_8022C010(int, int);
-/* 22C068 */ void mn_8022C068(HSD_LObj*, int, int);
 /* 22C128 */ void fn_8022C128(HSD_GObj*);
 /* 22C304 */ void mn_8022C304(void);
 /* 22C4F4 */ void mn_8022C4F4(HSD_GObj*);

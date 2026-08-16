@@ -18,7 +18,7 @@
 #include "it/items/itzeldadinfireexplode.h"
 #include "it/itgroundcoll.h"
 
-#include <MSL/math.h>
+#include <math.h>
 
 /* 2C4434 */ static bool itZeldadinfire_UnkMotion1_Coll(Item_GObj* gobj);
 

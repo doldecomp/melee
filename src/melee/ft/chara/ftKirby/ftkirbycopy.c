@@ -1,33 +1,21 @@
-#include "ftkirby.h"
-
 #include "ftKb_Init.static.h"
 
-#include "ftkirbyattackdash.h"
+#include "ftkirby.h"
 #include "ftkirbyspecialdonkey.h"
-#include "ftkirbyspecialhi.h"
 #include "ftkirbyspecialiceclimber.h"
-#include "ftkirbyspecialmars.h"
 #include "ftkirbyspecialpeach.h"
-#include "ftkirbyspecialpikachu.h"
-#include "ftkirbyspecialzelda.h"
 
 #include "ef/efasync.h"
 #include "ft/chara/ftKirby/ftkirbyspecialmewtwo.h"
 #include "ft/fighter.h"
 #include "ft/ft_0877.h"
 #include "ft/ftanim.h"
-#include "ft/ftcamera.h"
-#include "ft/ftCo_800C7220.h"
-#include "ft/ftCo_800C739C.h"
-#include "ft/ftcolanim.h"
 #include "ft/ftdynamics.h"
 #include "ft/ftmaterial.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ftKirby/ftkirbyspecialgamewatch.h"
-#include "ftKirby/ftkirbyspecialpurin.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbarchive.h"
@@ -35,12 +23,9 @@
 #include "pl/player.h"
 
 #include <stddef.h>
-#include <trigf.h>
 #include <baselib/gobj.h>
 #include <baselib/id.h>
 #include <baselib/jobj.h>
-#include <baselib/random.h>
-#include <MSL/math.h>
 
 void ftAnim_80070458(Fighter* fp, CostumeTObjList*, u32 tobj_idx, float frame);
 void fn_800F9260(HSD_GObj*);
@@ -252,9 +237,9 @@ void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
 
     ftPartsPObjSetDefaultClass();
     root = data->costume_archives[arg1][fp->x619_costume_id].joint;
-    ftKb_SpecialN_800EF0E4_insert_joint_refs(
-        &total_dobjs, root, fp, &insert_part_off, &current_joint, &joint_idx,
-        &byte_base);
+    ftKb_SpecialN_800EF0E4_insert_joint_refs(&total_dobjs, root, fp,
+                                             &insert_part_off, &current_joint,
+                                             &joint_idx, &byte_base);
     joint_idx = 0;
     arg2_cur = arg2;
     byte_off = byte_base << 2;
@@ -407,8 +392,7 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
                     }
                     if (total_dobjs >= 0x20) {
                         OSReport(data->parts_dobj_over);
-                        __assert(data->source_name, 0x4B9,
-                                 ftKb_Init_804D3DAC);
+                        __assert(data->source_name, 0x4B9, ftKb_Init_804D3DAC);
                     }
                     dst = (HSD_DObj**) fp->u.gw.x224C_greenhouseGObj;
                     *(HSD_DObj**) ((u8*) dst + dst_off) = dobj;

@@ -13,8 +13,8 @@
 #include "robj.h"
 #include "spline.h"
 
-#include <__mem.h>
 #include <math.h>
+#include <string.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 
@@ -127,7 +127,7 @@ void HSD_JObjWalkTree(HSD_JObj* jobj, HSD_JObjWalkTreeCallback cb,
     }
 }
 
-inline bool has_scl(HSD_JObj* jobj)
+static inline bool has_scl(HSD_JObj* jobj)
 {
     bool result = false;
     if (jobj != NULL && jobj->scl != NULL) {
@@ -608,7 +608,7 @@ void HSD_JObjSetDefaultClass(HSD_ClassInfo* info)
     default_class = info;
 }
 
-inline HSD_JObj* JObjLoadJointSub(HSD_Joint* joint, HSD_JObj* parent)
+static inline HSD_JObj* JObjLoadJointSub(HSD_Joint* joint, HSD_JObj* parent)
 {
     HSD_JObj* jobj;
     HSD_ClassInfo* info;
@@ -946,7 +946,7 @@ void HSD_JObjAddDObj(HSD_JObj* jobj, HSD_DObj* dobj)
     jobj->u.dobj = dobj;
 }
 
-inline HSD_RObj* robj_set_next(HSD_RObj* robj, HSD_RObj* next)
+static inline HSD_RObj* robj_set_next(HSD_RObj* robj, HSD_RObj* next)
 {
     if (robj == NULL) {
         return next;
@@ -1063,7 +1063,7 @@ HSD_JObj* HSD_JObjGetCurrent(void)
     return current_jobj;
 }
 
-inline HSD_JObj* jobj_get_joint2(HSD_JObj* jobj)
+static inline HSD_JObj* jobj_get_joint2(HSD_JObj* jobj)
 {
     while (jobj != NULL) {
         if ((jobj->flags & JOBJ_EFFECTOR) == JOBJ_JOINT2) {
@@ -1074,7 +1074,7 @@ inline HSD_JObj* jobj_get_joint2(HSD_JObj* jobj)
     return NULL;
 }
 
-inline HSD_JObj* jobj_get_effector(HSD_JObj* jobj)
+static inline HSD_JObj* jobj_get_effector(HSD_JObj* jobj)
 {
     while (jobj != NULL) {
         if ((jobj->flags & JOBJ_EFFECTOR) == JOBJ_EFFECTOR) {

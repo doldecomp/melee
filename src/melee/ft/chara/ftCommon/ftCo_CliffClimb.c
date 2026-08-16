@@ -2,7 +2,6 @@
 
 #include "ftCo_CliffAttack.h"
 #include "ftCo_StopCeil.h"
-#include "math.h"
 
 #include <platform.h>
 
@@ -17,6 +16,7 @@
 #include "ftCommon/types.h"
 #include "mp/mplib.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 /* 09AAFC */ static bool ftCo_8009AAFC(Fighter_GObj* gobj, bool arg1,

@@ -649,7 +649,7 @@ void HSD_LObjDeleteCurrent(HSD_LObj* lobj)
     }
 }
 
-inline void LObjRemoveAll(void)
+static inline void LObjRemoveAll(void)
 {
     int i;
     for (i = 0; i < MAX_GXLIGHT; i++) {
@@ -682,7 +682,7 @@ void HSD_LObjSetCurrentAll(HSD_LObj* lobj)
     HSD_LObjAddCurrent(lobj);
 }
 
-inline void LObjReplaceAll(HSD_LObj* lobj)
+static inline void LObjReplaceAll(HSD_LObj* lobj)
 {
     int i;
     HSD_LObj* cur;

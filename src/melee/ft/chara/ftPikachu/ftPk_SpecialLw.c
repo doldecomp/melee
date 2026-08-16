@@ -1,7 +1,5 @@
 #include "ftPk_SpecialLw.h"
 
-#include "math.h"
-
 #include <platform.h>
 
 #include "cm/camera.h"
@@ -21,6 +19,7 @@
 #include "ftPikachu/types.h"
 #include "it/items/itpikachuthunder.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 bool ftPk_SpecialLw_CheckProperty(HSD_GObj* gobj)

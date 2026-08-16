@@ -28,7 +28,6 @@
 #include "ftCommon/ftCo_SquatWait.h"
 #include "lb/lbcollision.h"
 
-#include <trigf.h>
 #include <dolphin/mtx.h>
 
 void ftSs_Init_80128944(HSD_GObj* gobj, float farg1, float farg2)
@@ -87,7 +86,7 @@ float ftSs_Init_80128AC8(HSD_GObj* gobj, float farg1, float farg2)
     return (-da->x4 * value) + 1.5707963705062866f;
 }
 
-inline void ftSamus_80128B1C_inner(HSD_GObj* gobj, float angle)
+static inline void ftSamus_80128B1C_inner(HSD_GObj* gobj, float angle)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     struct ftCo_DatAttrs* ftAttr = &fp->co_attrs;

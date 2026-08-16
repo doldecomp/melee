@@ -14,7 +14,6 @@
 #include "it/items/itnesspkfire.h"
 #include "lb/lb_00B0.h"
 
-#include <trigf.h>
 #include <dolphin/mtx.h>
 
 /// https://decomp.me/scratch/apf7Y

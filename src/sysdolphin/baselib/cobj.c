@@ -13,13 +13,10 @@
 #include <placeholder.h>
 
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
 #include <dolphin/vi.h>
-#include <MetroTRK/intrinsics.h>
 
 static HSD_ClassInfo* default_class;
 static HSD_CObj* current;
@@ -629,7 +626,7 @@ static float upvec2roll(HSD_CObj* cobj, Vec3* up)
     if (HSD_CObjGetEyeVector(cobj, &eye) != 0) {
         dot = 0.0f;
     } else {
-        dot = __fabsf(VECDotProduct(up, &eye));
+        dot = fabsf(VECDotProduct(up, &eye));
         dot = 1.0f - dot;
         if (dot < FLT_MIN) {
             dot = 0.0f;
@@ -653,7 +650,7 @@ static inline f32 vec_get_x(Vec3* v)
 
 static inline f64 cobj_fabsf_p(f32* v)
 {
-    return __fabsf(*v);
+    return fabsf(*v);
 }
 
 static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
@@ -1262,7 +1259,7 @@ HSD_CObj* HSD_CObjAlloc(void)
     return cobj;
 }
 
-inline static void CObjResetFlags(HSD_CObj* cobj, u32 flags)
+static inline void CObjResetFlags(HSD_CObj* cobj, u32 flags)
 {
     if (cobj == NULL) {
         return;

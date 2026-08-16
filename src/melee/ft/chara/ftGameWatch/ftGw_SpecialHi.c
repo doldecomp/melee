@@ -1,7 +1,6 @@
 #include "ftGw_SpecialHi.h"
 
 #include "ftGw_Init.h"
-#include "math.h"
 #include "types.h"
 
 #include <platform.h>
@@ -21,6 +20,7 @@
 #include "it/items/itgamewatchrescue.h"
 #include "lb/lb_00B0.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 static void ftGw_SpecialHi_ItemRescueEnterHitlag(HSD_GObj* gobj);

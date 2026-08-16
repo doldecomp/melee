@@ -5,6 +5,7 @@
 
 #include <placeholder.h>
 
+#include <math.h>
 #include <string.h>
 #include <dolphin/gx/GXBump.h>
 #include <dolphin/gx/GXEnum.h>
@@ -22,7 +23,6 @@
 #include <baselib/memory.h>
 #include <baselib/pobj.h>
 #include <baselib/state.h>
-#include <MetroTRK/intrinsics.h>
 
 extern f32 lbl_803BB0E0[6];
 
@@ -115,8 +115,8 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
             if (param0) {
                 f32 rem;
                 {
-                    f32 abs_dist = __fabsf(dist);
-                    f32 abs_param0 = __fabsf(param0);
+                    f32 abs_dist = fabsf(dist);
+                    f32 abs_param0 = fabsf(param0);
                     if (abs_param0 > abs_dist) {
                         rem = dist;
                     } else {

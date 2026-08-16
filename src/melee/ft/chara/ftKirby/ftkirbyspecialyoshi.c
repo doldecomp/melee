@@ -30,10 +30,10 @@
 #include "it/items/ityoshiegglay.h"
 #include "lb/lb_00B0.h"
 
+#include <math.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
 
 /* 1095DC */ static void fn_801095DC(HSD_GObj*);
 /* 109680 */ static void fn_80109680(HSD_GObj*);

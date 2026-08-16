@@ -7,7 +7,6 @@
 #include "mn/types.h"
 
 #include <math.h>
-#include <trigf.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -49,6 +48,8 @@
 #include <melee/mn/mnsoundtest.h>
 #include <melee/mn/mnvibration.h>
 #include <melee/sc/types.h>
+
+/* 22C068 */ static void mn_8022C068(HSD_LObj*, int, int);
 
 static HSD_GObj* mn_804D6BA8;
 static HSD_GObj* mn_804D6BAC;
@@ -1127,12 +1128,12 @@ static inline void UpdateAnimationLoop(HSD_JObj* jobj,
     }
 }
 
-inline f32 GetAnimStartFrame(AnimLoopSettings* anim_loop)
+static inline f32 GetAnimStartFrame(AnimLoopSettings* anim_loop)
 {
     return anim_loop->start_frame;
 }
 
-inline f32 GetAnimEndFrame(AnimLoopSettings* anim_loop)
+static inline f32 GetAnimEndFrame(AnimLoopSettings* anim_loop)
 {
     return anim_loop->end_frame;
 }
@@ -1764,7 +1765,7 @@ int mn_8022C010(int menu_kind, int selection)
 
 MenuFlow mn_804A04F0;
 
-inline void mn_8022C068(HSD_LObj* lobj, int unused, int div)
+static inline void mn_8022C068(HSD_LObj* lobj, int unused, int div)
 {
     int diff;
 

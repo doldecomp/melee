@@ -223,13 +223,13 @@ void fn_8020B4D8(void* user_data, int joint_id, CollData* coll, int coll_x50,
 }
 
 /// @todo Useless wrapper
-inline HSD_LObj* HSD_LObjGetNext_padstack(HSD_LObj* arg0)
+static inline HSD_LObj* HSD_LObjGetNext_padstack(HSD_LObj* arg0)
 {
     return HSD_LObjGetNext(arg0);
 }
 
 /// @todo ::HSD_LObjGetType
-inline int HSD_LObjGetType_padstack(HSD_LObj* lobj)
+static inline int HSD_LObjGetType_padstack(HSD_LObj* lobj)
 {
     return lobj->flags & LOBJ_TYPE_MASK;
 }

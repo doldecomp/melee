@@ -115,7 +115,7 @@ void grAnime_801C6620(HSD_PObj* arg0, HSD_ShapeAnim* arg1)
     }
 }
 
-inline HSD_TexAnim* HSD_TexAnimFindById(HSD_TexAnim* cur, int id)
+static inline HSD_TexAnim* HSD_TexAnimFindById(HSD_TexAnim* cur, int id)
 {
     while (cur != NULL) {
         if ((signed) cur->id == id) {
@@ -141,7 +141,7 @@ void grAnime_801C6710(HSD_TObj* tobj, HSD_TexAnim* texanim)
     }
 }
 
-inline void grAnime_801C6710_all(HSD_TObj* tobj, HSD_TexAnim* texanim)
+static inline void grAnime_801C6710_all(HSD_TObj* tobj, HSD_TexAnim* texanim)
 {
     if (tobj != NULL) {
         while (tobj != NULL) {
@@ -225,7 +225,7 @@ void grAnime_801C68F4(HSD_RObj* robj, HSD_RObjAnimJoint* robjanimjoint)
     }
 }
 
-inline void grAnime_801C6960(HSD_RObj* robj, HSD_RObjAnimJoint* arg1)
+static inline void grAnime_801C6960(HSD_RObj* robj, HSD_RObjAnimJoint* arg1)
 {
     HSD_RObj* phi_r31;
     HSD_RObjAnimJoint* phi_r30;
@@ -638,8 +638,8 @@ arg4);
     }
 }*/
 
-inline bool grAnime_801C6F50_wrapped(HSD_JObj* obj, int flags, void* func,
-                                     u32 type, void* param)
+static inline bool grAnime_801C6F50_wrapped(HSD_JObj* obj, int flags,
+                                            void* func, u32 type, void* param)
 {
     HSD_ASSERT(0x33A, obj);
     if (flags & 0x20) {

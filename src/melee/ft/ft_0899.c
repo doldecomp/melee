@@ -1,7 +1,5 @@
 #include "ft_0899.h"
 
-#include "math.h"
-
 #include "db/dbsound.h"
 #include "ft/fighter.h"
 #include "ft/ftparts.h"
@@ -11,8 +9,7 @@
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
+#include <math.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 

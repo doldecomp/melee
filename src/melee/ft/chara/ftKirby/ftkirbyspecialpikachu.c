@@ -22,10 +22,10 @@
 #include "ftKirby/ftkirby.h"
 #include "it/items/itpikachutjoltground.h"
 
+#include <math.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
 
 void ftKb_SpecialNPk_800F9FD4(Fighter_GObj* gobj)
 {
@@ -49,7 +49,7 @@ void ftKb_SpecialNPk_800F9FD4(Fighter_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-inline void ftKb_SpecialN_set_cbs(Fighter_GObj* gobj)
+static inline void ftKb_SpecialN_set_cbs(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->death2_cb = (void (*)(HSD_GObj*)) ftKb_Init_800EE74C;

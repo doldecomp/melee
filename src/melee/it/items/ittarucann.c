@@ -20,8 +20,8 @@
 #include "it/itmaplib.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
-#include "MSL/math.h"
 
+#include <math.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
@@ -58,7 +58,7 @@ ItemStateTable it_803F63C0[] = {
       itTarucann_UnkMotion9_Coll },
 };
 
-inline void inline_itTarucann_SetRotationZ(HSD_GObj* gobj)
+static inline void inline_itTarucann_SetRotationZ(HSD_GObj* gobj)
 {
     HSD_JObj* jobj;
     Item* ip;
@@ -582,7 +582,7 @@ bool itTarucann_UnkMotion7_Anim(Item_GObj* gobj)
     return it_802961E8(gobj);
 }
 
-inline void inline_itTarucann_UnkMotion7_Phys(Item_GObj* gobj)
+static inline void inline_itTarucann_UnkMotion7_Phys(Item_GObj* gobj)
 {
     Item* ip2 = GET_ITEM(gobj);
     ip2->x40_vel.x = ip2->xDD4_itemVar.tarucann.x10;
@@ -637,7 +637,7 @@ void it_802975F4(Item_GObj* gobj)
     Item_8026AE84(ip, 0x12A, 0x7F, 0x40);
 }
 
-inline void itTarucann_UnkMotion9_Anim_inline(HSD_GObj* gobj)
+static inline void itTarucann_UnkMotion9_Anim_inline(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xDD4_itemVar.tarucann.x20 == 0) {

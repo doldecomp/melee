@@ -6,7 +6,6 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 
-#include <trigf.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>

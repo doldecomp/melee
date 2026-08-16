@@ -1,6 +1,5 @@
 #include "lb_00F9.h"
 
-#include "math.h"
 #include "platform.h"
 #include "stddef.h"
 
@@ -18,8 +17,7 @@
 #include "lb/lbvector.h"
 #include "lb/types.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
+#include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 #include <baselib/displayfunc.h>

@@ -20,15 +20,6 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Determine reference commit
-      id: ref
-      run: |
-        if [ "${{ github.event_name }}" = "pull_request" ]; then
-          echo "from=${{ github.event.pull_request.base.sha }}" >> $GITHUB_OUTPUT
-        else
-          echo "from=${{ github.event.before }}" >> $GITHUB_OUTPUT
-        fi
-
     - uses: pre-commit/action@v3.0.1
       with:
-        extra_args: ${{ matrix.hook }} --from-ref ${{ steps.ref.outputs.from }} --to-ref HEAD
+        extra_args: ${{ matrix.hook }} --all-files

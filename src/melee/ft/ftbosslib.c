@@ -2,7 +2,6 @@
 
 #include "ft_0877.h"
 #include "ftlib.h"
-#include "math.h"
 
 #include "cm/camera.h"
 #include "ft/inlines.h"
@@ -19,7 +18,7 @@
 
 #include "pl/player.h"
 
-#include <math_ppc.h>
+#include <math.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>

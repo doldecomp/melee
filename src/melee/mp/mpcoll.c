@@ -1,6 +1,5 @@
 #include "mp/mpcoll.h"
 
-#include "math.h"
 #include "platform.h"
 #include "stdbool.h"
 
@@ -21,7 +20,7 @@
 
 #include "mp/mplib.h"
 
-#include <trigf.h>
+#include <math.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 
@@ -117,14 +116,14 @@ void mpCollPrev(CollData* cd)
 }
 
 /// 80041DD0 https://decomp.me/scratch/1KPLe
-inline void clamp_above(float* value, float min)
+static inline void clamp_above(float* value, float min)
 {
     if (*value < min) {
         *value = min;
     }
 }
 
-inline void clamp_below(float* value, float max)
+static inline void clamp_below(float* value, float max)
 {
     if (*value > max) {
         *value = max;
@@ -336,7 +335,7 @@ void mpColl_80042384(CollData* cd)
 }
 
 /// 800424DC https://decomp.me/scratch/DhzDB
-inline void update_min_max(float* min, float* max, float val)
+static inline void update_min_max(float* min, float* max, float val)
 {
     if (*min > val) {
         *min = val;
@@ -459,7 +458,7 @@ void mpColl_LoadECB_JObj(CollData* coll, u32 flags)
 }
 
 /// 8004293C https://decomp.me/scratch/H4EUT
-inline void update_min_max_2(float* min, float* max, float val)
+static inline void update_min_max_2(float* min, float* max, float val)
 {
     if (*max < val) {
         *max = val;
@@ -468,14 +467,14 @@ inline void update_min_max_2(float* min, float* max, float val)
     }
 }
 
-inline void clamp_above_2(float* value, float min)
+static inline void clamp_above_2(float* value, float min)
 {
     if (*value < min) {
         *value = min;
     }
 }
 
-inline void clamp_below_2(float* value, float max)
+static inline void clamp_below_2(float* value, float max)
 {
     if (*value > max) {
         *value = max;
@@ -671,7 +670,7 @@ void mpColl_LoadECB(CollData* coll)
 #pragma pop
 
 /// 80042DB0 https://decomp.me/scratch/GbMpk
-inline void Vec2_Interpolate(float time, Vec2* dest, Vec2* src)
+static inline void Vec2_Interpolate(float time, Vec2* dest, Vec2* src)
 {
     dest->x += time * (src->x - dest->x);
     dest->y += time * (src->y - dest->y);
@@ -923,7 +922,7 @@ void mpColl_800436E4(CollData* coll, float arg1)
 }
 
 /// 80043754 https://decomp.me/scratch/JEEcj
-inline float max_inline(float a, float b)
+static inline float max_inline(float a, float b)
 {
     return (a > b) ? a : b;
 }

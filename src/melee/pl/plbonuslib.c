@@ -9,6 +9,7 @@
 
 #include <platform.h>
 
+#include <math.h>
 #include <ft/ft_0877.h>
 #include <ft/ft_0892.h>
 #include <ft/ftlib.h>
@@ -17,7 +18,6 @@
 #include <if/ifmagnify.h>
 #include <it/it_26B1.h>
 #include <MetroTRK/intrinsics.h>
-#include <MSL/math.h>
 
 /// @todo Lots of 6s in here
 /// pl_8004049C seems to indicate it might have actually been
@@ -88,7 +88,7 @@ bool pl_8003D60C(int arg0)
     }
 }
 
-inline bool unk_cond(int arg0, int temp_r23)
+static inline bool unk_cond(int arg0, int temp_r23)
 {
     if (temp_r23 == 6 || temp_r23 == arg0 ||
         pl_CheckIfSameTeam(arg0, temp_r23))
@@ -99,7 +99,7 @@ inline bool unk_cond(int arg0, int temp_r23)
     }
 }
 
-inline bool between_A1_D0(int x)
+static inline bool between_A1_D0(int x)
 {
     if (x >= 0xA1 && x < 0xD0) {
         return true;
@@ -525,7 +525,7 @@ u32 pl_8003E420(int arg0)
     return sum;
 }
 
-inline int match_item_kind(int kind)
+static inline int match_item_kind(int kind)
 {
     if (kind >= It_Common_Start && kind < It_Common_End) {
         return kind;
@@ -880,8 +880,8 @@ void fn_8003EE2C(int arg0, int arg1)
     }
 }
 
-inline unsigned int plBonusLib_8003F294_inline(plActionStats* stats,
-                                               int attack)
+static inline unsigned int plBonusLib_8003F294_inline(plActionStats* stats,
+                                                      int attack)
 {
     return pl_800386D8(stats, attack);
 }

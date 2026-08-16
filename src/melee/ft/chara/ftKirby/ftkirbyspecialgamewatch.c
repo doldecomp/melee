@@ -24,10 +24,10 @@
 #include "it/items/itkirbygamewatchchefpan.h"
 #include "lb/lb_00B0.h"
 
+#include <math.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
 
 static MotionFlags const ftKb_MF_GwSpecialN_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit;
@@ -163,7 +163,7 @@ bool ftKb_SpecialNGw_8010D160(Fighter_GObj* gobj)
 }
 
 /// #ftGameWatch_SpecialN_SetVars with callback arg
-inline void setGwVars(HSD_GObj* fighter_gobj)
+static inline void setGwVars(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->cmd_vars[0] = 0;

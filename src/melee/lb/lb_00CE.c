@@ -7,8 +7,6 @@
 #include <baselib/forward.h>
 
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
 
 static void sdata2_order(void)
 {

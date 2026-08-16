@@ -21,9 +21,8 @@
 #include "mp/mplib.h"
 #include "sysdolphin/baselib/random.h"
 
-#include <trigf.h>
+#include <math.h>
 #include <baselib/jobj.h>
-#include <MSL/math.h>
 
 ItemStateTable it_803F8EB0[] = {
     {
@@ -1045,7 +1044,7 @@ Item_GObj* it_802EA9FC(Vec3* pos, s32 facing_dir)
     return gobj;
 }
 
-inline f32 it_802EAAEC_inline(Item* ip2)
+static inline f32 it_802EAAEC_inline(Item* ip2)
 {
     return ip2->xDD4_itemVar.leadead.x3C;
 }
