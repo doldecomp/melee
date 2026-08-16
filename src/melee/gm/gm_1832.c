@@ -2363,7 +2363,7 @@ void fn_80188EE8(HSD_GObj* gobj)
 #pragma dont_inline off
 static inline u32 gm_801891F4_GetTickRate(void)
 {
-    return *(u32*) 0x800000F8 >> 2;
+    return OS_TIMER_CLOCK;
 }
 
 void fn_801891F4(void)
@@ -2754,7 +2754,7 @@ HSD_Text* fn_8018A000(void)
     PAD_STACK(0x10);
     data = lbl_803D9828;
     state = &lbl_80473700;
-    memzero(state->result_cache, 0x10);
+    memzero(state->result_cache, sizeof(state->result_cache));
     lbl_804D6628 =
         lbArchive_80016DBC("GmTrain", &lbl_804D662C, &data[0xA0], 0);
     fn_80189B88();

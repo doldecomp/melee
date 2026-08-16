@@ -174,7 +174,7 @@ void mnLanguage_8024C3C4(HSD_GObj* arg0_unused)
                        mnLanguage_804A08D8.xC);
     HSD_JObjReqAnimAll(jobj, 0.0F);
     HSD_JObjAnimAll(jobj);
-    user_data = HSD_MemAlloc(8);
+    user_data = HSD_MemAlloc(sizeof(*user_data));
     HSD_ASSERTREPORT(0x163, user_data, "Can't get user_data.\n");
     lang = lbLang_GetSavedLanguage();
     user_data->x0 = lang;

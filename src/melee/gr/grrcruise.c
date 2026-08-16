@@ -281,7 +281,7 @@ bool grRCruise_801FF6CC(Ground_GObj* arg)
 void grRCruise_801FF6D4(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    if (gp->u.unk.xD4 == 0) {
+    if (gp->u.rcruise.x10 == 0) {
         grRCruise_80201588(gobj);
         grRCruise_8020071C(gobj);
         grRCruise_80200C04(gobj);

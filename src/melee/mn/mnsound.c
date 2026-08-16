@@ -267,7 +267,7 @@ void mnSound_80249C08(int unused)
                        model->shapeanim_joint);
     HSD_JObjReqAnimAll(jobj, 0.0F);
     {
-        Menu* alloc = HSD_MemAlloc(8);
+        Menu* alloc = HSD_MemAlloc(sizeof(Menu));
         user_data = alloc;
     }
     HSD_ASSERTREPORT(0x22CU, user_data, "Can't get user_data.\n");

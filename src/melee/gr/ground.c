@@ -721,7 +721,7 @@ void Ground_801C10B8(HSD_GObj* arg0, HSD_GObjEvent arg1)
         HSD_GObj* unk4;
         HSD_GObjEvent unk8;
     }* temp_r3;
-    temp_r3 = HSD_MemAlloc(0xC);
+    temp_r3 = HSD_MemAlloc(sizeof(*temp_r3));
     if (temp_r3 != NULL) {
         temp_r3->unk0 = stage_info.x6A4;
         temp_r3->unk4 = arg0;

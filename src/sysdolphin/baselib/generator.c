@@ -78,7 +78,7 @@ void hsd_8039D214(HSD_Generator* gen)
 
 void hsd_8039D354(u32 unused)
 {
-    HSD_ObjAllocInit(&hsd_804D0F90.alloc_data, 0x94, 4);
+    HSD_ObjAllocInit(&hsd_804D0F90.alloc_data, sizeof(HSD_Generator), 4);
     hsd_804D78FC = NULL;
     hsd_804D78E0 = 0;
     hsd_804D78DA = 0;
@@ -320,7 +320,7 @@ HSD_Generator* hsd_8039D9C8(void)
 
     gen = HSD_ObjAlloc(&hsd_804D0F90.alloc_data);
     if (gen != NULL) {
-        memset(gen, 0, 0x94);
+        memset(gen, 0, sizeof(*gen));
     }
     if (gen == NULL) {
         return NULL;

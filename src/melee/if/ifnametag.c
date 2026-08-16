@@ -290,7 +290,7 @@ void NameTag_Create(int slot)
         HSD_JObjAnimAll(jobj);
     }
     {
-        unsigned char* user_data = HSD_MemAlloc(1);
+        unsigned char* user_data = HSD_MemAlloc(sizeof(*user_data));
         GObj_InitUserData(gobj, 0, mn_8022EB04, user_data);
         *user_data = slot;
     }

@@ -442,7 +442,7 @@ void if_802F7D08(s32 slot)
 
 void if_802F7E24(void)
 {
-    memzero(lbl_804A1340, 0x34);
+    memzero(lbl_804A1340, sizeof(lbl_804A1340));
     lbArchive_LoadSections(*ifAll_GetArchive(), lbl_804A1340, lbl_803F9780, 0);
 }
 

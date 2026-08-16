@@ -54,7 +54,7 @@ struct lbl_804333E0_t {
     /* 0x128 */ s32 file_entrynum;
     /* 0x12C */ u32* rate_table;
     /* 0x130 */ s32 unk_130;
-    /* 0x134 */ s32 unk_134;
+    /* 0x134 */ u32 unk_134; ///< OS ticks
     /* 0x138 */ s32 unk_138;
     /* 0x13C */ u32 unk_13C;
     /* 0x140 */ void* unk_140;
@@ -138,7 +138,7 @@ STATIC_ASSERT(sizeof(struct THPDecComp) == sizeof(struct lbl_804333E0_t));
                                   void* buf, size_t heap_size, int loop);
 /* 01F578 */ void lbMthp_8001F578(void);
 /* 01F5C4 */ s32 lbMthp_8001F5C4(void);
-/* 01F5D4 */ s32 lbMthp_8001F5D4(void);
+/* 01F5D4 */ u32 lbMthp_8001F5D4(void);
 /* 01F5E4 */ s32 lbMthp_8001F5E4(void);
 /* 01F5F4 */ s32 lbMthp_8001F5F4(void);
 /* 01F604 */ s32 lbMthp_8001F604(void);

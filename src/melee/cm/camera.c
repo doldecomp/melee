@@ -210,7 +210,7 @@ void Camera_80028B9C(int n_subjects)
     cm_80452C68.x399_b4 = 0;
     cm_80452C68.x399_b5 = 0;
     cm_80452C68.x399_b6 = 0;
-    memzero(&cm_80452C68.x380, 0x18);
+    memzero(&cm_80452C68.x380, sizeof(cm_80452C68.x380));
     cm_80452C68.x399_b7 = 0;
     cm_80452C68.x39A_b0 = 0;
     cm_80452C68.x39A_b1 = 0;

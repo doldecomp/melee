@@ -178,7 +178,7 @@ void mnHyaku_8024CB94(u8 arg0)
     HSD_JObjReqAnimAll(jobj, 0.0F);
     HSD_JObjAnimAll(jobj);
 
-    user_data = HSD_MemAlloc(8);
+    user_data = HSD_MemAlloc(sizeof(*user_data));
     HSD_ASSERTREPORT(360, user_data, "Can't get user_data.\n");
     user_data->cursor = arg0;
     user_data->text = 0;
