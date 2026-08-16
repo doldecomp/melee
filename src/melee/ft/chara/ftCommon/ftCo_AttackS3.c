@@ -3,7 +3,7 @@
 #include "ftCo_ItemThrow.h"
 #include "ftCo_Wait.h"
 #include "ftpickupitem.h"
-#include "math.h"
+#include <math.h>
 
 #include <platform.h>
 

@@ -9,7 +9,7 @@
 #include "ftCo_AttackS4.h"
 #include "ftCo_Guard.h"
 #include "ftCo_SpecialS.h"
-#include "math.h"
+#include <math.h>
 
 #include <platform.h>
 

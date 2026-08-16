@@ -1,7 +1,7 @@
 #include "ithassam.h"
 
 #include "inlines.h"
-#include "math.h"
+#include <math.h>
 
 #include "cm/camera.h"
 #include "ef/eflib.h"

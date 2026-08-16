@@ -1,7 +1,7 @@
 #include "ftSs_SpecialHi.h"
 
 #include "inlines.h"
-#include "math.h"
+#include <math.h>
 
 #include <platform.h>
 

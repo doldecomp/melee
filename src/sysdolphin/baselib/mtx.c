@@ -1,7 +1,7 @@
 #include "mtx.h"
 
 #include "debug.h"
-#include "math.h"
+#include <math.h>
 
 #include <math_ppc.h>
 #include <trigf.h>

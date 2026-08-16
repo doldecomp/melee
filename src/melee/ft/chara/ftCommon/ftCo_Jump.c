@@ -1,6 +1,6 @@
 #include "ftCo_Jump.h"
 
-#include "math.h"
+#include <math.h>
 
 #include "ft/fighter.h"
 

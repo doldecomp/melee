@@ -6,7 +6,7 @@
 #include "iteffect.h"
 #include "ithitbox.h"
 #include "itmaplib.h"
-#include "math.h"
+#include <math.h>
 
 #include "baselib/jobj.h"
 #include "baselib/random.h"

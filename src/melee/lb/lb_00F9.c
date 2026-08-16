@@ -1,6 +1,6 @@
 #include "lb_00F9.h"
 
-#include "math.h"
+#include <math.h>
 #include "platform.h"
 #include "stddef.h"
 

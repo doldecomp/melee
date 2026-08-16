@@ -4,7 +4,7 @@
 
 #include "ftYs_Init.h"
 #include "ftYs_SpecialHi.h"
-#include "math.h"
+#include <math.h>
 #include "placeholder.h"
 
 #include "baselib/forward.h"

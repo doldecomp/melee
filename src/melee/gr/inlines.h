@@ -9,7 +9,7 @@
 #include "if/ifcoget.h"
 #include "if/ifstatus.h"
 #include "lb/lb_00B0.h"
-#include "MSL/math.h"
+#include <math.h>
 
 #include <baselib/forward.h>
 

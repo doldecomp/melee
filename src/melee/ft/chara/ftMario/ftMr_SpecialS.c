@@ -1,7 +1,7 @@
 #include "ftMr_SpecialS.h"
 
 #include "ftMr_Init.h"
-#include "math.h"
+#include <math.h>
 #include "types.h"
 
 #include <platform.h>

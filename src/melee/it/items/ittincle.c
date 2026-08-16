@@ -12,7 +12,7 @@
 #include "lb/lb_00B0.h"
 
 #include <baselib/random.h>
-#include <MSL/math.h>
+#include <math.h>
 
 /* 2EC870 */ static void it_802EC870(Item_GObj*, int);
 

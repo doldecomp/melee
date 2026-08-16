@@ -21,8 +21,8 @@
 #include <baselib/sislib.h>
 #include <baselib/video.h>
 #include <baselib/wobj.h>
-#include <MSL/stdio.h>
-#include <MSL/string.h>
+#include <stdio.h>
+#include <string.h>
 
 /// .data
 /* 3FDC20 */ static HSD_WObjDesc devtext_eyepos = {

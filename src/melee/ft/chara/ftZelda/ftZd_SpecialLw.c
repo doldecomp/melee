@@ -1,6 +1,6 @@
 #include "ftZd_SpecialLw.h"
 
-#include "math.h"
+#include <math.h>
 
 #include <platform.h>
 

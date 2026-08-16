@@ -1,6 +1,6 @@
 #include "ftSb_Init.h"
 
-#include "math.h"
+#include <math.h>
 
 #include <platform.h>
 

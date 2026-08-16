@@ -19,7 +19,7 @@
 
 #include <trigf.h>
 #include <baselib/jobj.h>
-#include <MSL/math.h>
+#include <math.h>
 
 typedef struct ArwingLaserAttr {
     /* +0 */ ItemAttr* x0;

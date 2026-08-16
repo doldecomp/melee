@@ -1,7 +1,7 @@
 #include "ftFx_SpecialN.h"
 
 #include "ftFx_Init.h"
-#include "math.h"
+#include <math.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

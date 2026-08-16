@@ -34,7 +34,7 @@
 
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
-#include <MSL/math.h>
+#include <math.h>
 
 void ft_80081B38(Fighter_GObj* gobj)
 {

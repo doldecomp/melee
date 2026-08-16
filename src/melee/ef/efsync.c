@@ -12,7 +12,7 @@
 #include "baselib/psstructs.h"
 #include "baselib/random.h"
 #include "ft/inlines.h"
-#include "MSL/math.h"
+#include <math.h>
 
 extern EF_DAT_Entry efAsync_DatEntries[51];
 

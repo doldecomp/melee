@@ -1,7 +1,7 @@
 #include "ftCo_Escape.h"
 
 #include "ftCo_ItemThrow.h"
-#include "math.h"
+#include <math.h>
 
 #include <platform.h>
 

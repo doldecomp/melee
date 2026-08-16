@@ -22,7 +22,7 @@
 #include <baselib/gobjproc.h>
 #include <baselib/random.h>
 #include <sysdolphin/baselib/lobj.h>
-#include <MSL/math.h>
+#include <math.h>
 
 struct grPushOn_Entry {
     s32 x0;

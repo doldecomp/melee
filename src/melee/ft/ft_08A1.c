@@ -1,5 +1,5 @@
 #include "ft_0892.h"
-#include "math.h"
+#include <math.h>
 
 #include "ft/fighter.h"
 #include "ft/ftcommon.h"

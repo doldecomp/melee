@@ -12,7 +12,7 @@
 #include <trigf.h>
 #include <dolphin/os.h>
 #include <melee/lb/lb_00CE.h>
-#include <MSL/math.h>
+#include <math.h>
 
 typedef union {
     void* p;

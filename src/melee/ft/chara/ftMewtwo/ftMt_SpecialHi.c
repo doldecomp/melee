@@ -28,7 +28,7 @@
 #include <math_ppc.h>
 #include <trigf.h>
 #include <dolphin/mtx.h>
-#include <MSL/math.h>
+#include <math.h>
 /// Create Teleport Start GFX
 void ftMt_SpecialHi_CreateGFX(HSD_GObj* gobj)
 {

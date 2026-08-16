@@ -1,6 +1,6 @@
 #include "ftMt_SpecialN.h"
 
-#include "math.h"
+#include <math.h>
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"

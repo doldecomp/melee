@@ -15,7 +15,7 @@
 
 #include <trigf.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
+#include <math.h>
 
 ItemStateTable it_803F7D60[] = {
     { 0, itUnknown_UnkMotion0_Anim, itUnknown_UnkMotion0_Phys,

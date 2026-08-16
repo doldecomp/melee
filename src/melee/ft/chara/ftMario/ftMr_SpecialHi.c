@@ -1,7 +1,7 @@
 #include "ftMr_SpecialHi.h"
 
 #include "inlines.h"
-#include "math.h"
+#include <math.h>
 #include "types.h"
 
 #include <platform.h>

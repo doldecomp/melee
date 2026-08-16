@@ -24,7 +24,7 @@
 #include "pl/player.h"
 
 #include <dolphin/mtx.h>
-#include <MSL/math.h>
+#include <math.h>
 
 /* 1230D0 */ static bool ftNn_Init_801230D0(Fighter_GObj* nana_gobj);
 /* 123218 */ static void fn_80123218(Fighter_GObj* nana_gobj);

@@ -1,6 +1,6 @@
 #include "ftCo_SpecialS.h"
 
-#include "math.h"
+#include <math.h>
 
 #include <platform.h>
 

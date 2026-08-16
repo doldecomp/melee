@@ -1,6 +1,6 @@
 #include "tydisplay.h"
 
-#include "math.h"
+#include <math.h>
 #include "placeholder.h"
 #include "platform.h"
 #include "stddef.h"
@@ -44,7 +44,7 @@
 #include "melee/if/textlib.h"
 #include "mn/inlines.h"
 #include "mn/mnmain.h"
-#include "MSL/math.h"
+#include <math.h>
 #include "sc/types.h"
 #include "ty/toy.h"
 #include "ty/types.h"

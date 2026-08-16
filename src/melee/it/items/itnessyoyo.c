@@ -1,7 +1,7 @@
 #include "itnessyoyo.h"
 
 #include "inlines.h"
-#include "math.h"
+#include <math.h>
 
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjuserdata.h"

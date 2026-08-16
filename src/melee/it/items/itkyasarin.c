@@ -18,7 +18,7 @@
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 #include "it/itzako.h"
-#include "MSL/math.h"
+#include <math.h>
 
 #include <baselib/jobj.h>
 #include <baselib/random.h>

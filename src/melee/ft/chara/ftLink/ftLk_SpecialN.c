@@ -1,7 +1,7 @@
 #include "ftLk_SpecialN.h"
 
 #include "ftLk_Init.h"
-#include "math.h"
+#include <math.h>
 #include "placeholder.h"
 
 #include <platform.h>

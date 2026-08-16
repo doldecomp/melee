@@ -20,7 +20,7 @@
 #include "it/itmaplib.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
-#include "MSL/math.h"
+#include <math.h>
 
 #include <baselib/jobj.h>
 #include <baselib/random.h>

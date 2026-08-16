@@ -1,6 +1,6 @@
 #include "trigf.h"
 
-#include "math.h"
+#include <math.h>
 
 #define __epsilon 3.45266983e-4f
 

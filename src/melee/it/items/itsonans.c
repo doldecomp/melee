@@ -1,7 +1,7 @@
 #include "itsonans.h"
 
 #include "inlines.h"
-#include "math.h"
+#include <math.h>
 
 #include "ef/eflib.h"
 #include "it/inlines.h"

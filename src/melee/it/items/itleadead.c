@@ -23,7 +23,7 @@
 
 #include <trigf.h>
 #include <baselib/jobj.h>
-#include <MSL/math.h>
+#include <math.h>
 
 ItemStateTable it_803F8EB0[] = {
     {

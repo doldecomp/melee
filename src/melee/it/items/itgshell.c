@@ -22,7 +22,7 @@
 #include "it/itmaplib.h"
 
 #include <sysdolphin/baselib/random.h>
-#include <MSL/math.h>
+#include <math.h>
 
 typedef struct itGShell_Attrs {
     float x0;

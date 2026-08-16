@@ -25,7 +25,7 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
+#include <math.h>
 
 void fn_801A7FB4(HSD_GObj* gobj)
 {

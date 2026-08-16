@@ -4,7 +4,7 @@
 #include "gm_1A45.h"
 #include "gm_unsplit.h"
 #include "gmresult.h"
-#include "math.h"
+#include <math.h>
 #include "placeholder.h"
 #include "types.h"
 

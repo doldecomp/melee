@@ -24,7 +24,7 @@
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
+#include <math.h>
 
 static void fn_8010AA64(Fighter_GObj* gobj)
 {

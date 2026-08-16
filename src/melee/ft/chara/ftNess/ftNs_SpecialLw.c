@@ -1,7 +1,7 @@
 #include "ftNs_SpecialLw.h"
 
 #include "ftNs_Init.h"
-#include "math.h"
+#include <math.h>
 
 #include <platform.h>
 

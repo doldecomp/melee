@@ -23,7 +23,7 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/lb/lbvector.h>
-#include <MSL/math.h>
+#include <math.h>
 
 #define itkpf_Floor 1
 #define itkpf_Ceiling 2

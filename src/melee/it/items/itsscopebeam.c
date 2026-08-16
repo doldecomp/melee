@@ -7,7 +7,7 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "lb/lbvector.h"
-#include "MSL/math.h"
+#include <math.h>
 
 #include <trigf.h>
 #include <baselib/random.h>

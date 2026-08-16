@@ -18,7 +18,7 @@
 #include <melee/it/items/inlines.h>
 #include <melee/lb/lbrefract.h>
 #include <melee/lb/lbvector.h>
-#include <MSL/math.h>
+#include <math.h>
 
 ItemStateTable it_803F67D0[] = {
     { 0, itFoxlaser_UnkMotion1_Anim, itFoxlaser_UnkMotion1_Phys,

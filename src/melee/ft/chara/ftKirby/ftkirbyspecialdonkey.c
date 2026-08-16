@@ -33,7 +33,7 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
+#include <math.h>
 
 /// @todo This is some kind of inline within #ftKb_DkSpecialN_Anim that's
 ///       shared by #ftKb_DkSpecialAirN_Anim

@@ -97,7 +97,7 @@
 #include <baselib/lobj.h>
 #include <baselib/mtx.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
+#include <math.h>
 
 extern struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX];
 

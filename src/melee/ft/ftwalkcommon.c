@@ -3,7 +3,7 @@
 #include "fighter.h"
 #include "ft_081B.h"
 #include "ftcommon.h"
-#include "math.h"
+#include <math.h>
 
 #include "ft/forward.h"
 

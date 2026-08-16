@@ -19,7 +19,7 @@
 
 #include <trigf.h>
 #include <baselib/gobj.h>
-#include <MSL/math.h>
+#include <math.h>
 
 /* 29A5F8 */ static bool itLipstickspore_UnkMotion1_Coll(Item_GObj* gobj);
 

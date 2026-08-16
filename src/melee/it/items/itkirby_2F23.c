@@ -9,7 +9,7 @@
 #include "it/itmaplib.h"
 
 #include <MetroTRK/intrinsics.h>
-#include <MSL/math.h>
+#include <math.h>
 
 ItemStateTable it_803F9450[] = {
     { -1, itKirby_2F23_UnkMotion0_Anim, itKirby_2F23_UnkMotion0_Phys,

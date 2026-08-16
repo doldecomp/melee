@@ -3,7 +3,7 @@
 #include "ftCo_AirCatch.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_LandingAir.h"
-#include "math.h"
+#include <math.h>
 
 #include <platform.h>
 

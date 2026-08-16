@@ -28,8 +28,8 @@
 #include <baselib/particle.h>
 #include <baselib/sislib.h>
 #include <baselib/wobj.h>
-#include <MSL/stdio.h>
-#include <MSL/string.h>
+#include <stdio.h>
+#include <string.h>
 
 /// .data
 /// IfAll.dat::ScInfPnm_scene_models

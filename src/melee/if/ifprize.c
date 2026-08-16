@@ -31,8 +31,8 @@
 #include <baselib/particle.h>
 #include <baselib/random.h>
 #include <baselib/sislib.h>
-#include <MSL/stdio.h>
-#include <MSL/string.h>
+#include <stdio.h>
+#include <string.h>
 
 /// .data
 /* 3F9A00 */ static int un_803F9A00[] = {

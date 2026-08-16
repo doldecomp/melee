@@ -1,6 +1,6 @@
 #include "itsamusbomb.h"
 
-#include "math.h"
+#include <math.h>
 
 #include <placeholder.h>
 #include <platform.h>

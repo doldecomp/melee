@@ -2,7 +2,7 @@
 
 #include "ft_0877.h"
 #include "ftlib.h"
-#include "math.h"
+#include <math.h>
 
 #include "cm/camera.h"
 #include "ft/inlines.h"

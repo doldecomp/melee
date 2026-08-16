@@ -3,7 +3,7 @@
 #include "ftCo_CargoFall.h"
 #include "ftCo_CargoWait.h"
 #include "ftCo_Damage.h"
-#include "math.h"
+#include <math.h>
 
 #include <platform.h>
 

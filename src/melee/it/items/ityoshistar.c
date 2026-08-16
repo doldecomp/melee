@@ -1,7 +1,7 @@
 #include "ityoshistar.h"
 
 #include "inlines.h"
-#include "math.h"
+#include <math.h>
 
 #include "it/inlines.h"
 #include "it/it_2725.h"

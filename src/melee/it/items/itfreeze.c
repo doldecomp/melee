@@ -16,7 +16,7 @@
 #include "it/itmaplib.h"
 
 #include <baselib/jobj.h>
-#include <MSL/math.h>
+#include <math.h>
 
 ItemStateTable it_803F5D28[] = { {
                                      0,

@@ -6,7 +6,7 @@
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
-#include "math.h"
+#include <math.h>
 #include "placeholder.h"
 #include "stage.h"
 #include "types.h"

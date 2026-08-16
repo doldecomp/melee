@@ -2,7 +2,7 @@
 
 #include "itbombhei.static.h"
 
-#include "math.h"
+#include <math.h>
 
 #include "it/it_26B1.h"
 #include "it/it_2725.h"

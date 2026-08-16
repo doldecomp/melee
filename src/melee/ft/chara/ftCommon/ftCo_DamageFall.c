@@ -7,7 +7,7 @@
 #include "ftCo_HammerWait.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_SpecialAir.h"
-#include "math.h"
+#include <math.h>
 
 #include <placeholder.h>
 #include <platform.h>

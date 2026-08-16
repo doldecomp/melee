@@ -1,6 +1,6 @@
 #include "ftCa_SpecialN.h"
 
-#include "math.h"
+#include <math.h>
 #include "types.h"
 
 #include <platform.h>

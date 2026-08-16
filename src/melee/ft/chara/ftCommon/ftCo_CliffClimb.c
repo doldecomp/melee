@@ -2,7 +2,7 @@
 
 #include "ftCo_CliffAttack.h"
 #include "ftCo_StopCeil.h"
-#include "math.h"
+#include <math.h>
 
 #include <platform.h>
 

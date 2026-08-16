@@ -1,7 +1,7 @@
 #include "itoctarock.h"
 
 #include "inlines.h"
-#include "math.h"
+#include <math.h>
 #include "placeholder.h"
 
 #include "cm/camera.h"

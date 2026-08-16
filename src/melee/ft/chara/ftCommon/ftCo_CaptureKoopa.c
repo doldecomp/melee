@@ -2,7 +2,7 @@
 
 #include "ftCo_CaptureDamageKoopa.h"
 #include "ftCo_Lift.h"
-#include "math.h"
+#include <math.h>
 
 #include <platform.h>
 

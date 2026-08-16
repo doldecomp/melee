@@ -1,3 +1,3 @@
-#include <MSL/errno.h>
+#include <errno.h>
 
 int errno;

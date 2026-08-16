@@ -4,7 +4,7 @@
 #include "it_3F14.h"
 #include "iteffect.h"
 #include "ithitbox.h"
-#include "math.h"
+#include <math.h>
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"

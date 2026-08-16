@@ -62,7 +62,7 @@
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
+#include <math.h>
 
 static MotionFlags const ftKb_MF_SpecialN_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx;

@@ -1,6 +1,6 @@
 #include "ftLg_SpecialHi.h"
 
-#include "math.h"
+#include <math.h>
 #include "types.h"
 
 #include <platform.h>

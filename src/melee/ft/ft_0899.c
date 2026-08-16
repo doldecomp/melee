@@ -1,6 +1,6 @@
 #include "ft_0899.h"
 
-#include "math.h"
+#include <math.h>
 
 #include "db/dbsound.h"
 #include "ft/fighter.h"

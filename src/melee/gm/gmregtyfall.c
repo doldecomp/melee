@@ -1,7 +1,7 @@
 #include "gmregtyfall.h"
 
 #include "gm_unsplit.h"
-#include "math.h"
+#include <math.h>
 
 #include "cm/camera.h"
 #include "dolphin/pad.h"

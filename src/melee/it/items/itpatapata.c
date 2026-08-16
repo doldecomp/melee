@@ -20,7 +20,7 @@
 #include "it/itzako.h"
 #include "lb/lb_00B0.h"
 #include "mp/mpcoll.h"
-#include "MSL/math.h"
+#include <math.h>
 
 #include <baselib/jobj.h>
 #include <baselib/random.h>

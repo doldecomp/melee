@@ -1,7 +1,7 @@
 #include "ftCo_ItemParasolOpen.h"
 
 #include "ftCo_ItemParasolFall.h"
-#include "math.h"
+#include <math.h>
 
 #include "ft/fighter.h"
 

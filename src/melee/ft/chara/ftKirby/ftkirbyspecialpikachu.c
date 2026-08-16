@@ -25,7 +25,7 @@
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
+#include <math.h>
 
 void ftKb_SpecialNPk_800F9FD4(Fighter_GObj* gobj)
 {

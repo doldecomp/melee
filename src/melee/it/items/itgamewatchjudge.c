@@ -1,7 +1,7 @@
 #include "itgamewatchjudge.h"
 
 #include "inlines.h"
-#include "math.h"
+#include <math.h>
 #include "placeholder.h"
 
 #include "baselib/jobj.h"
