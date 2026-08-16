@@ -39,9 +39,9 @@ static inline void ftPurin_SpecialHi_SetVars(HSD_GObj* gobj)
     }
 }
 
-static inline void ftPurin_SpecialHi_SetActionFromFacingDirection(HSD_GObj* gobj,
-                                                           u32 left_id,
-                                                           u32 right_id)
+static inline void
+ftPurin_SpecialHi_SetActionFromFacingDirection(HSD_GObj* gobj, u32 left_id,
+                                               u32 right_id)
 {
     Fighter* fighter = GET_FIGHTER(gobj);
 

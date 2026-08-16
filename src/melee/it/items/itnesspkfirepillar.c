@@ -31,11 +31,9 @@ ItemStateTable it_803F6B60[1] = { 0, itNesspkfirepillar_UnkMotion0_Anim,
                                   itNesspkfirepillar_UnkMotion0_Phys,
                                   itNesspkfirepillar_UnkMotion0_Coll };
 
-static inline void itNesspkfirepillar_INLINE_SpawnItem_Init(SpawnItem* spawnitem,
-                                                     Vec3* offset,
-                                                     f32 facing_dir,
-                                                     HSD_GObj* parent1_gobj,
-                                                     HSD_GObj* parent2_gobj)
+static inline void itNesspkfirepillar_INLINE_SpawnItem_Init(
+    SpawnItem* spawnitem, Vec3* offset, f32 facing_dir, HSD_GObj* parent1_gobj,
+    HSD_GObj* parent2_gobj)
 {
     spawnitem->kind = It_Kind_Ness_PKFire_Flame;
     spawnitem->prev_pos = *offset;

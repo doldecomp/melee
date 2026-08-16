@@ -85,7 +85,7 @@ void HSD_FObjReqAnimAll(HSD_FObj* fobj, f32 startframe)
 }
 
 static inline void FObj_FlushKeyData(HSD_FObj* fobj, void* obj,
-                              HSD_ObjUpdateFunc obj_update, f32 rate)
+                                     HSD_ObjUpdateFunc obj_update, f32 rate)
 {
     if (fobj->op_intrp == HSD_A_OP_KEY) {
         HSD_FObjInterpretAnim(fobj, obj, obj_update, rate);

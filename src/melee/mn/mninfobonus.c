@@ -287,7 +287,8 @@ static inline void mnInfoBonus_inline_SetGObjFlag(HSD_GObjProc* gobjproc)
     gobjproc->flags_3 = HSD_GObj_804D783C;
 }
 
-static inline void mnInfoBonus_80252F8C_inline0(struct mnInfoBonus_804A09B0_t* o)
+static inline void
+mnInfoBonus_80252F8C_inline0(struct mnInfoBonus_804A09B0_t* o)
 {
     HSD_GObj* gobj;
     HSD_JObj* jobj;

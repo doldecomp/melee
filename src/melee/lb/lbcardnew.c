@@ -318,7 +318,8 @@ struct SnapshotNode {
     u16 blocks;
 };
 
-static inline void setup_card_entries(void* ctx, void* icon, struct CardEntry* entry)
+static inline void setup_card_entries(void* ctx, void* icon,
+                                      struct CardEntry* entry)
 {
     int i;
 
@@ -738,7 +739,8 @@ static inline struct CardTask* setup_task(int a, int b)
     return task;
 }
 
-static inline void lb_8001A4CC_dontinline(const char* filename, void* file_entries)
+static inline void lb_8001A4CC_dontinline(const char* filename,
+                                          void* file_entries)
 {
     lb_8001A4CC(filename, file_entries);
 }
@@ -847,10 +849,10 @@ int lb_8001BB48(int chan, char* filename, void* file_entries, void* save_data,
     return lb_80019CB0(0x10);
 }
 
-static inline int lb_8001BB48_inline(int chan, char* filename, void* file_entries,
-                              void* save_data, const char* write_buf,
-                              int write_offset, int write_len,
-                              UNK_T status_out)
+static inline int lb_8001BB48_inline(int chan, char* filename,
+                                     void* file_entries, void* save_data,
+                                     const char* write_buf, int write_offset,
+                                     int write_len, UNK_T status_out)
 {
     int new_var;
     lb_80019EF0(chan, save_data, status_out, 0);

@@ -292,7 +292,7 @@ bool itHassam_UnkMotion1_Coll(Item_GObj* gobj)
 }
 
 static inline void itHassam_802CE400_sub(HSD_GObj* gobj, int msid,
-                                  Item_StateChangeFlags flags)
+                                         Item_StateChangeFlags flags)
 {
     Item* ip = gobj->user_data;
     Item_80268E5C(gobj, msid, flags);

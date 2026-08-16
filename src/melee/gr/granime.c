@@ -638,8 +638,8 @@ arg4);
     }
 }*/
 
-static inline bool grAnime_801C6F50_wrapped(HSD_JObj* obj, int flags, void* func,
-                                     u32 type, void* param)
+static inline bool grAnime_801C6F50_wrapped(HSD_JObj* obj, int flags,
+                                            void* func, u32 type, void* param)
 {
     HSD_ASSERT(0x33A, obj);
     if (flags & 0x20) {

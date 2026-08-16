@@ -881,7 +881,7 @@ void fn_8003EE2C(int arg0, int arg1)
 }
 
 static inline unsigned int plBonusLib_8003F294_inline(plActionStats* stats,
-                                               int attack)
+                                                      int attack)
 {
     return pl_800386D8(stats, attack);
 }

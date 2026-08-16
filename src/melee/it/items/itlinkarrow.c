@@ -229,7 +229,8 @@ static inline HSD_JObj* itLinkArrow_802A850C_inline(HSD_Joint* joint)
     return jobj;
 }
 
-static inline void itLinkArrow_802A850C_inline_2(Item_GObj* gobj, Quaternion* quat)
+static inline void itLinkArrow_802A850C_inline_2(Item_GObj* gobj,
+                                                 Quaternion* quat)
 {
     int i;
     Item* item;

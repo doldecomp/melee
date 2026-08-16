@@ -497,8 +497,8 @@ void ftMt_SpecialNStart_Anim(HSD_GObj* gobj)
     }
 }
 
-static inline void ftMewtwo_SpecialN_CreateHeldShadow(HSD_GObj* gobj, Vec3* pos1,
-                                               Vec3* pos2)
+static inline void ftMewtwo_SpecialN_CreateHeldShadow(HSD_GObj* gobj,
+                                                      Vec3* pos1, Vec3* pos2)
 {
     Fighter* fp = getFighter(gobj);
 

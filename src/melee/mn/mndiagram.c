@@ -1705,7 +1705,7 @@ typedef struct mnDiagram_MainOverlay {
 } mnDiagram_MainOverlay;
 
 static inline Vec3* mnDiagram_PopupAnimProc_Inline(mnDiagram_AnimTable* arg0,
-                                            int arg1)
+                                                   int arg1)
 {
     return &arg0->points[arg1];
 }

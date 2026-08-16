@@ -487,11 +487,11 @@ void ftKp_SpecialAirSEndB_Anim(HSD_GObj* gobj)
     doEndBAnim(gobj, ftCo_Fall_Enter);
 }
 
-static inline void ftKoopa_SpecialS_ChangeAction(HSD_GObj* gobj,
-                                          ftKoopa_MotionState kp_msid_f,
-                                          ftCommon_MotionState victim_msid_f,
-                                          ftKoopa_MotionState kp_msid_b,
-                                          ftCommon_MotionState victim_msid_b)
+static inline void
+ftKoopa_SpecialS_ChangeAction(HSD_GObj* gobj, ftKoopa_MotionState kp_msid_f,
+                              ftCommon_MotionState victim_msid_f,
+                              ftKoopa_MotionState kp_msid_b,
+                              ftCommon_MotionState victim_msid_b)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
     fp->throw_flags = 0;

@@ -515,7 +515,8 @@ void ftColl_80076CBC(Fighter* fp0, HitCapsule* hit0, Fighter* fp1)
 }
 
 /// @todo #ftColl_80076808
-static inline void inlineB0(Fighter* fp0, HitCapsule* hitbox, Fighter* fp1, int arg3)
+static inline void inlineB0(Fighter* fp0, HitCapsule* hitbox, Fighter* fp1,
+                            int arg3)
 {
     size_t i;
     for (i = 0; i < ARRAY_SIZE(fp0->x914); i++) {

@@ -680,7 +680,7 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
 }
 
 static inline float get_follow_speed(float temp_f4, float spread,
-                              CameraUnkGlobals* globals)
+                                     CameraUnkGlobals* globals)
 {
     if (spread > temp_f4) {
         return globals->x30;
