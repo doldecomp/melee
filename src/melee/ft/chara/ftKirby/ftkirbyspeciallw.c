@@ -775,8 +775,7 @@ void ftKb_SpecialAirLwStart_Coll(Fighter_GObj* gobj)
                         fp->mv.kb.speciallw.x18.y;
                 vi++;
                 fp3->mv.kb.speciallw.x54[vi].z =
-                    fp3->mv.kb.speciallw.x24[vi].z =
-                        fp->mv.kb.speciallw.x18.z;
+                    fp3->mv.kb.speciallw.x24[vi].z = fp->mv.kb.speciallw.x18.z;
                 ai++;
                 fp3->mv.kb.speciallw.x88[ai + 4] =
                     fp3->mv.kb.speciallw.x88[ai] = angle;
@@ -873,8 +872,7 @@ void ftKb_SpecialAirLw_Coll(Fighter_GObj* gobj)
                         fp->mv.kb.speciallw.x18.y;
                 vi++;
                 fp3->mv.kb.speciallw.x54[vi].z =
-                    fp3->mv.kb.speciallw.x24[vi].z =
-                        fp->mv.kb.speciallw.x18.z;
+                    fp3->mv.kb.speciallw.x24[vi].z = fp->mv.kb.speciallw.x18.z;
                 ai++;
                 fp3->mv.kb.speciallw.x88[ai + 4] =
                     fp3->mv.kb.speciallw.x88[ai] = angle;

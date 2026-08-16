@@ -238,9 +238,9 @@ void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
 
     ftPartsPObjSetDefaultClass();
     root = data->costume_archives[arg1][fp->x619_costume_id].joint;
-    ftKb_SpecialN_800EF0E4_insert_joint_refs(
-        &total_dobjs, root, fp, &byte_off, &current_joint, &joint_idx,
-        &byte_base);
+    ftKb_SpecialN_800EF0E4_insert_joint_refs(&total_dobjs, root, fp, &byte_off,
+                                             &current_joint, &joint_idx,
+                                             &byte_base);
     joint_idx = 0;
     arg2_cur = arg2;
     byte_off = byte_base << 2;
