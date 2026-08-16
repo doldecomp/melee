@@ -151,92 +151,84 @@ static u8 gm_8049E558[0x170];
 
 void gm_801BFCFC(GameScene* arg0)
 {
-    s32 var_r27_2;
-    u32* temp_r29;
-    u8* var_r27;
-    u32 var_r28_3;
+    u32* KP;
     u8* var_r28;
-    UNK_T* temp_r3;
-    u8* var_r28_2;
-    u32 var_r25_2;
-    int var_r25;
     u32* temp_r29_2;
-    UNK_T* var_r31;
-    s32 var_r30;
+    u8* p3;
     u8* var_r26;
-
-    PAD_STACK(8);
-
+    int var_r28_3;
+    s32 var_r27_2_s11;
+    s32 var_r27_2;
+    void** var_r31;
+    int var_r25_2;
+    void** temp_r3;
+    s32 var_r30;
+    unsigned char _pad[8];
     gm_GetGameSceneLoadDataCallback(arg0);
-    var_r31 = NULL;
+    var_r31 = 0;
     gm_GetChallengerData();
     var_r30 = 0;
     memzero(gm_8049E558, 0x42);
-    memzero(&gm_8049E558[0x44], 0x125);
+    p3 = &gm_8049E558[0x44];
+    memzero(p3, 0x125);
     Toy_803124BC();
-
-    /// @remarks these for loops were converted from the do-whiles with very
-    /// little scrutiny... take them with a grain of salt
-    var_r28 = gm_8049E558;
-    for (var_r25 = 0; (s32) var_r25 < 0x42; var_r25++) {
-        if (gm_8017219C(var_r25) != 0) {
-            temp_r3 = gm_801BFC60(var_r25, var_r30, 0,
-                                  *gmMainLib_8015D804((s32) var_r25), var_r31);
-            *var_r28 = 1;
-            var_r31 = (void**) temp_r3;
-            var_r30 += 1;
+    var_r27_2_s11 = var_r27_2;
+    p3 = gm_8049E558;
+    {
+        int var_r25;
+        for (var_r25 = 0, KP = (u32*) 1; var_r25 < 0x42; var_r25++) {
+            if (gm_8017219C(var_r25) != 0) {
+                temp_r3 = gm_801BFC60(var_r25, var_r30, 0,
+                                      *gmMainLib_8015D804(var_r25), var_r31);
+                gm_8049E558[var_r25] = (u8) KP;
+                var_r31 = temp_r3;
+                var_r30 += 1;
+            }
+        }
+    }
+    var_r26 = p3;
+    var_r26 += 0x44;
+    var_r28 = var_r26;
+    for (var_r25_2 = 0; var_r25_2 < 0x125; var_r25_2++) {
+        if (gmMainLib_8015DA1C(var_r25_2) != 0) {
+            if (gmMainLib_8015DA90(var_r25_2) == 0) {
+                KP = gmMainLib_8015D970(var_r25_2);
+                *KP = lbTime_8000AFBC();
+                gmMainLib_8015DA40(var_r25_2);
+                Toy_SetUnlockState((s16) var_r25_2, 1);
+            }
+            *var_r28 = Toy_803048C0(var_r25_2);
+            var_r31 =
+                (void**) gm_801BFC60(0x3E, var_r30, var_r25_2,
+                                     *gmMainLib_8015D970(var_r25_2), var_r31);
+            var_r30 = var_r30 + 1;
         }
         var_r28 += 1;
     }
 
-    var_r26 = gm_8049E558;
-    var_r26 += 0x44;
-    var_r28_2 = var_r26;
-    for (var_r25_2 = 0; (s32) var_r25_2 < 0x125; var_r25_2++) {
-        if (gmMainLib_8015DA1C(var_r25_2) != 0) {
-            if (gmMainLib_8015DA90(var_r25_2) == 0) {
-                temp_r29 = gmMainLib_8015D970((s32) var_r25_2);
-                *temp_r29 = lbTime_8000AFBC();
-                gmMainLib_8015DA40(var_r25_2);
-                Toy_SetUnlockState((s32) (s16) var_r25_2, 1);
-            }
-            *var_r28_2 = Toy_803048C0((s32) var_r25_2);
-            var_r31 = (void**) gm_801BFC60(
-                0x3E, var_r30, var_r25_2, *gmMainLib_8015D970((s32) var_r25_2),
-                var_r31);
-            var_r30 += 1;
-        }
-        var_r28_2 += 1;
-    }
-
     gm_80173EEC();
     gm_80172898(0xFFFFU);
-
-    var_r27 = gm_8049E558;
-    for (var_r28_3 = 0; (s32) var_r28_3 < 0x42; var_r28_3++) {
-        if (((u8) *var_r27 == 0) && (gm_8017219C(var_r28_3) != 0)) {
-            var_r31 = (void**) gm_801BFC60(
-                var_r28_3, var_r30, 0, *gmMainLib_8015D804((s32) var_r28_3),
-                var_r31);
+    for (var_r28_3 = 0; var_r28_3 < 0x42; var_r28_3++, p3++) {
+        if (*p3 == 0 && gm_8017219C(var_r28_3) != 0) {
+            var_r31 = gm_801BFC60(var_r28_3, var_r30, 0,
+                                  *gmMainLib_8015D804(var_r28_3), var_r31);
             var_r30 += 1;
         }
-        var_r27 += 1;
     }
 
-    for (var_r27_2 = 0; var_r27_2 < 0x125; var_r27_2++) {
-        if ((((s32) *var_r26 < Toy_803048C0(var_r27_2)) ||
-             (Toy_803048C0(var_r27_2) == 0)) &&
-            (gmMainLib_8015DA1C((u32) var_r27_2) != 0))
+    for (var_r27_2_s11 = 0; var_r27_2_s11 < 0x125; var_r27_2_s11++) {
+        if ((*var_r26 < Toy_803048C0(var_r27_2_s11) ||
+             Toy_803048C0(var_r27_2_s11) == 0) &&
+            gmMainLib_8015DA1C(var_r27_2_s11) != 0)
         {
-            if (gmMainLib_8015DA90((u32) var_r27_2) == 0) {
-                temp_r29_2 = gmMainLib_8015D970(var_r27_2);
+            if (gmMainLib_8015DA90(var_r27_2_s11) == 0) {
+                temp_r29_2 = gmMainLib_8015D970(var_r27_2_s11);
                 *temp_r29_2 = lbTime_8000AFBC();
-                gmMainLib_8015DA40((u32) var_r27_2);
-                Toy_SetUnlockState((s32) (s16) var_r27_2, 1);
+                gmMainLib_8015DA40(var_r27_2_s11);
+                Toy_SetUnlockState((s32) ((s16) var_r27_2_s11), 1);
             }
-            var_r31 =
-                (void**) gm_801BFC60(0x3E, var_r30, var_r27_2,
-                                     *gmMainLib_8015D970(var_r27_2), var_r31);
+            var_r31 = gm_801BFC60(0x3E, var_r30, var_r27_2_s11,
+                                  *gmMainLib_8015D970(var_r27_2_s11), var_r31);
             var_r30 += 1;
         }
         var_r26 += 1;
