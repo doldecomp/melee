@@ -383,10 +383,10 @@ static void MakeTextureMtx(HSD_TObj* tobj)
         __assert(__FILE__, 589, "tobj->repeat_s && tobj->repeat_t");
     }
 
-    scale.x = __fabsf(tobj->scale.x) < FLT_EPSILON
+    scale.x = fabsf(tobj->scale.x) < FLT_EPSILON
                   ? 0.0F
                   : (f32) tobj->repeat_s / tobj->scale.x;
-    scale.y = __fabsf(tobj->scale.y) < FLT_EPSILON
+    scale.y = fabsf(tobj->scale.y) < FLT_EPSILON
                   ? 0.0F
                   : (f32) tobj->repeat_t / tobj->scale.y;
     scale.z = tobj->scale.z;

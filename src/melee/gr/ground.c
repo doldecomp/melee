@@ -202,16 +202,6 @@ static u8* Ground_804D6950;
 static ssize_t const buffer_size = 64;
 static ssize_t const Gr_CObj_Max = ARRAY_SIZE(stage_info.x694);
 
-/// @todo Move elsewhere.
-static inline f32 fabsf(f32 x)
-{
-    if (x < 0) {
-        return -x;
-    } else {
-        return x;
-    }
-}
-
 static void Ground_OnStart(void) {}
 
 static void Ground_801BFFAC(bool arg0) {}
@@ -3020,8 +3010,8 @@ void Ground_801C4FAC(HSD_CObj* cobj)
             xz_inv_len =
                 1.0f / sqrtf_store((sp74.x * sp74.x) + (sp74.z * sp74.z),
                                    &sqrt_tmp[2]);
-            xz_x_weight = xz_inv_len * fabsf(sp74.x);
-            xz_z_weight = xz_inv_len * fabsf(sp74.z);
+            xz_x_weight = xz_inv_len * ABS(sp74.x);
+            xz_z_weight = xz_inv_len * ABS(sp74.z);
             sp50.x *= xz_x_weight;
             sp50.y *= xz_x_weight;
             sp50.z *= xz_x_weight;
@@ -3359,13 +3349,13 @@ u32 Ground_801C5AD0(s32 i)
 void Ground_801C5AEC(Vec3* v, Vec3* arg1, Vec3* arg2, Vec3* arg3)
 {
     lbVector_EulerAnglesFromONB(v, arg1, arg2, arg3);
-    if (!(fabsf(v->x) < 30000)) {
+    if (!(ABS(v->x) < 30000)) {
         v->x = 0;
     }
-    if (!(fabsf(v->y) < 30000)) {
+    if (!(ABS(v->y) < 30000)) {
         v->y = 0;
     }
-    if (!(fabsf(v->z) < 30000)) {
+    if (!(ABS(v->z) < 30000)) {
         v->z = 0;
     }
 }

@@ -87,6 +87,8 @@ static inline s32 __fpclassifyd(double x)
 
 #define ABS(x) ((x) < 0 ? -(x) : (x))
 
+#define fabsf __fabsf
+
 static inline double fabs(double f)
 {
     return __fabs(f);
@@ -113,7 +115,7 @@ static inline float fmodf(float a, float b)
 {
     long long quotient;
 
-    if (__fabsf(b) > __fabsf(a)) {
+    if (fabsf(b) > fabsf(a)) {
         return a;
     }
     quotient = a / b;

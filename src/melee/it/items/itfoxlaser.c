@@ -88,15 +88,6 @@ void it_8029C6CC(f32 angle, f32 vel, HSD_GObj* parent, Vec3* vec, int kind)
     it_8029C504(parent, vec, 1, kind, angle, vel);
 }
 
-static inline f32 fabsf(f32 x)
-{
-    if (x < 0) {
-        return -x;
-    } else {
-        return +x;
-    }
-}
-
 bool itFoxlaser_UnkMotion1_Anim(Item_GObj* item_gobj)
 {
     Item* ip = GET_ITEM(item_gobj);
