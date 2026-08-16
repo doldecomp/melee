@@ -342,12 +342,6 @@ static inline HSD_RObj* inlined_HSD_RObjGetByType(HSD_RObj* robj, u32 type,
     return NULL;
 }
 
-static inline f32 HSD_MtxColMagFloat(MtxPtr mtx, int col)
-{
-    return sqrtf((mtx[0][col] * mtx[0][col]) + (mtx[1][col] * mtx[1][col]) +
-                 (mtx[2][col] * mtx[2][col]));
-}
-
 static void resolveCnsOrientation(HSD_RObj* robj, void* obj,
                                   void (*update_func)(void*, int,
                                                       HSD_ObjData*))
@@ -378,7 +372,7 @@ static void resolveCnsOrientation(HSD_RObj* robj, void* obj,
             if (sval > 1e-10F) {
                 sval = 1.0F / sval;
             }
-            sval *= HSD_MtxColMagFloat(jobj->mtx, i);
+            sval *= HSD_MtxColMag(jobj->mtx, i);
             v.x *= sval;
             v.y *= sval;
             v.z *= sval;
@@ -397,7 +391,7 @@ static void resolveCnsOrientation(HSD_RObj* robj, void* obj,
             if (sval > 1e-10F) {
                 sval = 1.0F / sval;
             }
-            sval *= HSD_MtxColMagFloat(jobj->mtx, i);
+            sval *= HSD_MtxColMag(jobj->mtx, i);
             v.x *= sval;
             v.y *= sval;
             v.z *= sval;
