@@ -45,8 +45,8 @@ static inline s32 SfxLoadStreamDataSize(s32 size)
     return size + 8;
 }
 
-void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
-                                    int cancelflag)
+static void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
+                                           bool cancelflag)
 {
     BOOL intr;
     s32 i;
@@ -155,7 +155,7 @@ void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
 }
 
 static void HSD_SynthSFXHeaderLoadCallback(int result, int length, void* addr,
-                                           int cancelflag)
+                                           bool cancelflag)
 {
     AXVPB** unused;
     s32 header_size;
@@ -189,7 +189,7 @@ static void HSD_SynthSFXHeaderLoadCallback(int result, int length, void* addr,
         return;
     }
     HSD_Synth_804D7730 = NULL;
-    HSD_SynthSFXSampleLoadCallback(NULL, 0, NULL, 0);
+    HSD_SynthSFXSampleLoadCallback(0, 0, NULL, 0);
 }
 
 void HSD_SynthSFXLoadNewProc(void)
@@ -1363,7 +1363,7 @@ extern u32 HSD_Synth_804D7770;
 extern u32 HSD_Synth_804D7774;
 
 void HSD_SynthPStreamHeaderCallback(int arg0, int arg1, void* arg2,
-                                    int cancelflag)
+                                    bool cancelflag)
 {
     u32* entry = arg2;
     struct HSD_SynthSFXNode* node;
