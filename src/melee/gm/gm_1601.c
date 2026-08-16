@@ -692,9 +692,9 @@ u32 gm_80160854(u8 slot, u8 team, u8 is_teams, u8 slot_type)
     return 0;
 }
 
-GXColor gm_80160968(u8 arg0)
+GXColor gm_80160968(u32 arg0)
 {
-    return lbl_803B7864[arg0];
+    return lbl_803B7864[(u8) arg0];
 }
 
 const char* gm_80160980_noinline(u8 ckind);

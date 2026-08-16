@@ -780,16 +780,16 @@ static inline HSD_GObj* ifStatus_CreateMarkGObj(void)
     return GObj_Create(0xE, 0xF, 0);
 }
 
-void ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
+HSD_GObj* ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
 {
+    CharacterKind chara;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
     HSD_TObj* tobj;
     Vec3* vec;
     HSD_MObj* mobj;
     GXColor color;
-    CharacterKind chara;
-    s32 slot;
+    u8 slot;
     u8 team;
     u8 hud_color;
     HudIndex* hud = ifStatus_GetHUDInfo();
@@ -838,6 +838,7 @@ void ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
     mobj->mat->diffuse.r = color.r;
     mobj->mat->diffuse.g = color.g;
     mobj->mat->diffuse.b = color.b;
+    return state->next;
 }
 
 void ifStatus_802F6508(s32 arg0)

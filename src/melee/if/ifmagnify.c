@@ -156,21 +156,23 @@ ifMagnifyPlayer* ifMagnify_802FB73C(ifMagnifyPlayer* arg0, Vec2* arg1,
 
 void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
 {
-    Vec2 pos;
+    UNUSED u8 top_pad[8];
     S32Vec2 screen_pos;
     Vec2 out;
+    Vec2 pos;
     Vec3 translate;
     GXColor color;
     GXColor color_copy;
+    GXColor* cp;
     HSD_GObj* fighter_gobj;
     ifMagnifyPlayer* player;
     s32 slot;
     bool is_colored;
     bool should_display;
-    u8 arrow_kind;
+    s32 arrow_kind;
     u8 slot_type;
     u8 teams_enabled;
-    u8 operand_pad[20];
+    u8 operand_pad[12];
 
     if (arg1 != 0) {
         return;
@@ -209,13 +211,14 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
                 color =
                     gm_80160968(gm_80160854((u8) slot, Player_GetTeam(slot),
                                             teams_enabled, slot_type));
+                cp = &color_copy;
                 color_copy = color;
                 if (player->state.unk == 2) {
                     arrow_kind = 1;
                 } else {
                     arrow_kind = 2;
                 }
-                un_802FD928((u8) slot, arrow_kind, &color_copy);
+                un_802FD928((u8) slot, arrow_kind, cp);
                 is_colored = true;
             }
         }

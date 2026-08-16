@@ -15,7 +15,7 @@
 /* 2F5E50 */ void ifStatus_802F5E50(HSD_GObj* gobj, s32 arg1);
 /* 2F5EC0 */ HSD_GObj* ifStatus_802F5EC0(IfDamageState* state, s32 player_idx);
 /* 2F6194 */ HSD_GObj* ifStatus_802F6194(HSD_GObj*, s32);
-/* 2F61FC */ void ifStatus_802F61FC(IfDamageState* state, s32 player_idx);
+/* 2F61FC */ HSD_GObj* ifStatus_802F61FC(IfDamageState* state, s32 player_idx);
 /* 2F6508 */ void ifStatus_802F6508(s32);
 /* 2F665C */ void ifStatus_802F665C(int);
 /* 2F66A4 */ void ifStatus_802F66A4(void);
