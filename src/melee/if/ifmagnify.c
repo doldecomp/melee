@@ -63,11 +63,6 @@ static s32 ifMagnify_803F984C[0x10] = {
     0x06060606, 0x06070607, 0x07080708, 0x08080808,
 };
 
-typedef struct ifMagnifyImageDescCopy {
-    u8 pad[0x5C];
-    HSD_ImageDesc image_descs[6];
-} ifMagnifyImageDescCopy;
-
 typedef struct ifMagnifyImageDescBase {
     u8 pad[0x74];
     HSD_ImageDesc image_descs[5];
@@ -467,12 +462,15 @@ void ifMagnify_802FC3C0(s32 slot)
     if (slot == 0) {
         player->idesc = child->u.dobj->next->mobj->tobj->imagedesc;
     } else {
-        ifMagnifyImageDescCopy* copy_base =
-            (ifMagnifyImageDescCopy*) &ifMagnify_804A1DE0;
+        ifMagnifyImageDescBase* base =
+            (ifMagnifyImageDescBase*) &ifMagnify_804A1DE0;
 
-        copy_base->image_descs[slot] = *ifMagnify_804A1DE0.player[0].idesc;
-        player->idesc = &((ifMagnifyImageDescBase*) &ifMagnify_804A1DE0)
-                             ->image_descs[slot - 1];
+        base->image_descs[slot - 1] = *ifMagnify_804A1DE0.player[0].idesc;
+        player->idesc =
+            (base =
+                 (ifMagnifyImageDescBase*) ((HSD_ImageDesc*) &ifMagnify_804A1DE0 +
+                                            (slot - 1)))
+                ->image_descs;
         player->idesc->image_ptr = HSD_MemAlloc(
             (GXGetTexBufferSize(player->idesc->width, player->idesc->height,
                                 player->idesc->format, 0, 0) +
