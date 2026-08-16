@@ -124,7 +124,7 @@ HSD_MemoryEntry* GetMemoryEntry(s32 idx)
         ssize_t i;
         bool found;
         HSD_MemoryEntry* entry;
-        usize_t size = idx * 4;
+        size_t size = idx * 4;
         if (memory_list[idx] == NULL) {
             entry = HSD_MemAlloc(sizeof(HSD_MemoryEntry));
             if (entry == NULL) {
