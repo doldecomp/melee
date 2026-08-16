@@ -181,6 +181,7 @@ typedef enum StadiumGrType {
 /// Size of the Home-Run Contest parts array, named by an assert in
 /// #grHomeRun_8021CB20.
 typedef enum Gr_Homerun_Parts {
+    /* 0x10 */ Gr_Homerun_Parts_Back = 16,
     /* 0x40 */ Gr_Homerun_Parts_Max = 64,
 } Gr_Homerun_Parts;
 

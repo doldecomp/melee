@@ -49,6 +49,8 @@
 
 #include <math.h>
 
+static size_t const _tyDisplay_804D6F10_len = 300;
+
 /* 31830C */ static void _tyDisplay_8031830C(TySortElem*, s32, s32);
 /* 318714 */ static void _tyDisplay_80318714(TySortElem*, s32, s32);
 /* 318B1C */ static void _tyDisplay_80318B1C(s32 arg0);
@@ -497,7 +499,7 @@ void _tyDisplay_80318CB4(s32 arg0)
 
     PAD_STACK(0x3C);
 
-    memzero(grid, 0x12E4);
+    memzero(grid, sizeof(*grid));
     grid->x08_min_z = -3.5f;
     grid->x04_min_x = -3.5f;
     grid->x10_max_z = 3.5f;
@@ -795,7 +797,7 @@ void _tyDisplay_80319540(s32 arg0)
     TyDspGrid* grid = _tyDisplay_804D6F14;
     PAD_STACK(0x18);
 
-    memzero(grid, 0x12E4);
+    memzero(grid, sizeof(*grid));
 
     row = 0;
     col = 0;
@@ -929,7 +931,7 @@ void _tyDisplay_80319994(s32 arg0)
     PAD_STACK(0x38);
 
     pivot = arg0;
-    memzero(grid, 0x12E4);
+    memzero(grid, sizeof(*grid));
     grid->x08_min_z = -3.5f;
     grid->x04_min_x = -3.5f;
     grid->x10_max_z = 3.5f;
@@ -1740,10 +1742,11 @@ void tyDisplay_OnEnter_8031B460(void* arg0)
     int i;
     PAD_STACK(8);
 
-    _tyDisplay_804D6F10 = HSD_MemAlloc(0x4B0);
-    _tyDisplay_804D6F14 = HSD_MemAlloc(0x12E4);
-    _tyDisplay_804D6F18 = HSD_MemAlloc(0x80);
-    _tyDisplay_804D6F1C = HSD_MemAlloc(0x108);
+    _tyDisplay_804D6F10 =
+        HSD_MemAlloc(sizeof(*_tyDisplay_804D6F10) * _tyDisplay_804D6F10_len);
+    _tyDisplay_804D6F14 = HSD_MemAlloc(sizeof(*_tyDisplay_804D6F14));
+    _tyDisplay_804D6F18 = HSD_MemAlloc(sizeof(*_tyDisplay_804D6F18));
+    _tyDisplay_804D6F1C = HSD_MemAlloc(sizeof(*_tyDisplay_804D6F1C));
     Toy_sbss_804D6ED4 = HSD_MemAlloc(0xE4);
 
     cfg = _tyDisplay_804D6F18;
@@ -1770,8 +1773,8 @@ void tyDisplay_OnEnter_8031B460(void* arg0)
     }
 
     Toy_8031263C();
-    memzero(_tyDisplay_804D6F1C, 0x108);
-    memzero(_tyDisplay_804D6F18, 0x80);
+    memzero(_tyDisplay_804D6F1C, sizeof(*_tyDisplay_804D6F1C));
+    memzero(_tyDisplay_804D6F18, sizeof(*_tyDisplay_804D6F18));
     memzero(Toy_sbss_804D6ED4, 0xE4);
 
     cfg->x08 = Toy_GetTrophyTotal();
@@ -1831,7 +1834,7 @@ void tyDisplay_OnEnter_8031B460(void* arg0)
     _tyDisplay_8031B1FC();
 
     if ((s32) _tyDisplay_804D6F20 != 0) {
-        memzero(grid, 0x12E4);
+        memzero(grid, sizeof(*grid));
         grid->x08_min_z = -3.5f;
         grid->x04_min_x = -3.5f;
         grid->x10_max_z = 3.5f;

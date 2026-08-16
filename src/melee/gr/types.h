@@ -179,7 +179,7 @@ struct GroundVars_unk {
     int xC8;
     int xCC;
     int xD0;
-    int xD4;
+    HSD_GObj* text_gobj;
     int xD8;
     int xDC;
     int xE0;
@@ -254,8 +254,8 @@ struct GroundVars_flatzone2 {
     s32 xC4;
     f32 xC8;
     grDynamicAttr_UnkStruct* xCC;
-    s32 xD0;
-    s32 xD4;
+    int xD0;
+    int timer;
 };
 
 /// @todo Should be merged with #grOldKongo_GroundVars
@@ -1062,7 +1062,7 @@ struct grRCruise_GroundVars {
     /* +04 gp+C8 */ struct lb_80011A50_t* x4;
     /* +08 gp+CC */ f32 x8;
     /* +0C gp+D0 */ s32 xC;
-    /* +10 gp+D4 */ u32 x10;
+    /* +10 gp+D4 */ int x10;
     /* +14 gp+D8 */ f32 x14;
     /* +18 gp+DC */ f32 x18;
     /* +1C gp+E0 */ f32 x1C;

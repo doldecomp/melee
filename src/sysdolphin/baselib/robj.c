@@ -675,7 +675,7 @@ HSD_RObj* HSD_RObjAlloc(void)
 {
     HSD_RObj* new = HSD_ObjAlloc(HSD_RObjGetAllocData());
     HSD_ASSERT(1032, new);
-    memset(new, 0, 0x1C);
+    memset(new, 0, sizeof(*new));
     return new;
 }
 

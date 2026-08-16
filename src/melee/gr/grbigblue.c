@@ -713,8 +713,8 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                     s32 found;
                     s32 retries;
 
-                    memzero(&pos, 0xC);
-                    memzero(&neg_pos, 0xC);
+                    memzero(&pos, sizeof(pos));
+                    memzero(&neg_pos, sizeof(neg_pos));
                     pos.x = 10.0f + Stage_GetBlastZoneRightOffset();
                     neg_pos.x = -(10.0f + Stage_GetBlastZoneRightOffset());
 
@@ -1660,7 +1660,7 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
                 if (count <= 1) {
                     f32 height;
 
-                    memzero(&pos, 0xC);
+                    memzero(&pos, sizeof(pos));
                     pos.x = Stage_GetBlastZoneLeftOffset() - 50.0f;
                     height = grBigBlue_801EC58C(&pos, NULL, 500.0f);
                     if (height != -3.4028235e38f) {
@@ -1965,8 +1965,8 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
             f32 range;
             s32 r;
 
-            memzero(&pos, 0xC);
-            memzero(&half_bot, 0xC);
+            memzero(&pos, sizeof(pos));
+            memzero(&half_bot, sizeof(half_bot));
             pos.x = Stage_GetBlastZoneRightOffset();
             half_bot.x = -Stage_GetBlastZoneRightOffset();
 

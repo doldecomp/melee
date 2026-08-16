@@ -2037,7 +2037,7 @@ void mnNameNew_8023E32C(s32 arg0)
     HSD_JObjAddAnimAll(root_jobj, setup_desc[1], setup_desc[2], setup_desc[3]);
     HSD_JObjReqAnimAll(root_jobj, 0.0f);
     HSD_JObjAnimAll(root_jobj);
-    user_data = HSD_MemAlloc(0x6C);
+    user_data = HSD_MemAlloc(sizeof(*user_data));
     HSD_ASSERTREPORT(0x717U, user_data, "Can't get user_data.\n");
     GObj_InitUserData(gobj, 0U, HSD_Free, user_data);
     InitNameEntryUIState(user_data, arg0);

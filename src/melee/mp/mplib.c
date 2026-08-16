@@ -73,6 +73,11 @@ struct mpLib_803BF248_t {
                                             float* int_y);
 /* 4D64B0 */ static bool didCheckBounding;
 /* 4D64B4 */ static MapCollData* mpLib_804D64B4;
+
+static size_t const groundCollVtx_count = 2048;
+static size_t const groundCollLine_count = 1536;
+static size_t const groundCollJoint_count = 256;
+
 /* 4D64B8 */ static CollVtx* groundCollVtx;
 /* 4D64BC */ static CollLine* groundCollLine;
 /* 4D64C0 */ static CollJoint* groundCollJoint;
@@ -894,11 +899,13 @@ void mpLibLoad(MapCollData* coll_data)
     int i;
 
     joint_prev = NULL;
-    groundCollVtx = HSD_MemAlloc(0xC000);
+    groundCollVtx = HSD_MemAlloc(sizeof(*groundCollVtx) * groundCollVtx_count);
     HSD_ASSERT(412, groundCollVtx);
-    groundCollLine = HSD_MemAlloc(0x3000);
+    groundCollLine =
+        HSD_MemAlloc(sizeof(*groundCollLine) * groundCollLine_count);
     HSD_ASSERT(413, groundCollLine);
-    groundCollJoint = HSD_MemAlloc(0x3400);
+    groundCollJoint =
+        HSD_MemAlloc(sizeof(*groundCollJoint) * groundCollJoint_count);
     HSD_ASSERT(414, groundCollJoint);
     grDynamicAttr_801CA0B4();
     if (coll_data == NULL) {

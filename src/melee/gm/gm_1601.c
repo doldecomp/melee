@@ -3038,9 +3038,9 @@ void gm_80166378(lbl_8046B6A0_24C_t* arg0_raw)
 
     PAD_STACK(60);
 
-    memzero(arg0->player_standings, 0x3F0);
-    memzero(arg0->team_standings, 0x3C);
-    memzero(arg0->_x448, 4);
+    memzero(arg0->player_standings, sizeof(arg0->player_standings));
+    memzero(arg0->team_standings, sizeof(arg0->team_standings));
+    memzero(arg0->_x448, sizeof(arg0->_x448));
     arg0->frame_count = gm_8016AEDC();
     arg0->x7 = fn_8016B728();
     for (i = 0; i < 6; i++) {
@@ -3186,7 +3186,7 @@ s32 gm_80166A98(MatchEnd* arg0, u8 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
     s32 score3;
     u32 i;
 
-    memzero(arg0, 0x227C);
+    memzero(arg0, sizeof(*arg0));
 
     arg0->result = OUTCOME_TIMEOUT;
     arg0->x5 = 0;
@@ -3909,7 +3909,7 @@ void gm_80168710(MatchEnd* arg0, VsModeData* arg1)
     s32 j;
 
     best = -1;
-    memzero(buf, 4);
+    memzero(buf, sizeof(buf));
     for (j = 0; j < 4; j++) {
         if (arg0->player_standings[j].slot_type == 0) {
             if ((s32) arg0->player_standings[j].is_big_loser > best) {

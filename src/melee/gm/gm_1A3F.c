@@ -150,7 +150,7 @@ void gm_801A4014(GameMode* mode)
             ;
         gmMainLib_8015FBA4();
         gm_GetAllGameModes();
-        memzero(&gm_80479D30, 0x14);
+        memzero(&gm_80479D30, sizeof(gm_80479D30));
         gm_801A3EF4();
         gmMainLib_8046B0F0.x0 = true;
         gm_ChangeGameModeAfterCurrentScene(GM_BOOT);
