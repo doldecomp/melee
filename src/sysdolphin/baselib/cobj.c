@@ -16,7 +16,7 @@
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
-#include <dolphin/vi/vifuncs.h>
+#include <dolphin/vi.h> // IWYU pragma: keep
 
 static HSD_ClassInfo* default_class;
 static HSD_CObj* current;
