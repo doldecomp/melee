@@ -16,7 +16,7 @@ charset = utf-8
 # clang-format handles indentation
 indent_style = unset
 
-[{*.yml,*.yaml,.clang-format,.clangd,*.nix,flake.lock,*.json,*.xml,*.iml}]
+[{*.yml,*.yaml,.clang-format,.clang-tidy,.clangd,*.nix,flake.lock,*.json,*.xml,*.iml}]
 indent_size = 2
 
 [Makefile]
