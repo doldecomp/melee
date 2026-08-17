@@ -48,11 +48,11 @@ char* strcpy(char* dst, const char* src)
 
     if (align) {
         if ((*destb = *fromb) == 0) {
-            return (dst);
+            return dst;
         }
         for (align = 3u - align; align; align--) {
             if ((*(++destb) = *(++fromb)) == 0) {
-                return (dst);
+                return dst;
             }
         }
         ++destb;
@@ -64,7 +64,7 @@ char* strcpy(char* dst, const char* src)
     k2 = K2;
 
     /*	Load a word and test for a null byte. */
-    w = *((unsigned int*) (fromb));
+    w = *((unsigned int*) fromb);
     /*
      *	Here we need to test if one of the bytes in w is 0, in
      *	which case we have reached the end of the string.  If we
@@ -108,11 +108,11 @@ char* strcpy(char* dst, const char* src)
     for (;;) {
         /*	Put the tested word into the incremented destination. */
         destb += sizeof(int);
-        *((unsigned int*) (destb)) = w;
+        *((unsigned int*) destb) = w;
 
         /*	Load a word and increment source for testing. */
         fromb += sizeof(int);
-        w = *((unsigned int*) (fromb));
+        w = *((unsigned int*) fromb);
 
         t = w + k2;
         t & w;
@@ -126,11 +126,11 @@ adjust:
     destb += sizeof(int);
 bytecopy:
     if ((*destb = *fromb) == 0) {
-        return (dst);
+        return dst;
     }
     for (;;) {
         if ((*(++destb) = *(++fromb)) == 0) {
-            return (dst);
+            return dst;
         }
     }
 }
@@ -149,7 +149,7 @@ char* strncpy(char* dst, const char* src, unsigned long n)
             break;
         }
     }
-    return (dst);
+    return dst;
 }
 
 int strcmp(const char* str1, const char* str2)
@@ -184,7 +184,7 @@ int strcmp(const char* str1, const char* str2)
     if (align) {
         /*	Continuation of test of first byte. */
         if (l1 == 0u) {
-            return (0);
+            return 0;
         }
         for (align = 3u - align; align; align--) {
             l1 = *(++left);
@@ -194,7 +194,7 @@ int strcmp(const char* str1, const char* str2)
                 return result;
             }
             if (l1 == 0u) {
-                return (0);
+                return 0;
             }
         }
         left++;
@@ -241,7 +241,7 @@ adjust:
     }
 bytecopy:
     if (l1 == 0u) {
-        return (0);
+        return 0;
     }
     for (;;) {
         r1 = *(++left);
@@ -251,7 +251,7 @@ bytecopy:
             return result;
         }
         if (r1 == 0u) {
-            return (0);
+            return 0;
         }
     }
 }
@@ -272,7 +272,7 @@ int strncmp(const char* str1, const char* str2, unsigned long n)
             }
         }
     }
-    return (0);
+    return 0;
 }
 
 char* strchr(const char* str, int chr)

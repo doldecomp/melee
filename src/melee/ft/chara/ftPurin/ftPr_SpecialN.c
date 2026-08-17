@@ -54,7 +54,7 @@ static void sdata2_order(void)
 
 static inline void ftPr_JObjSetRotationY(HSD_JObj* jobj, f32 y, f32* base)
 {
-    ((jobj) ? ((void) 0) : __assert("jobj.h", 660, "jobj"));
+    (jobj ? ((void) 0) : __assert("jobj.h", 660, "jobj"));
     ((!(jobj->flags & JOBJ_USE_QUATERNION))
          ? ((void) 0)
          : __assert("jobj.h", 661, (char*) &base[8]));
@@ -308,7 +308,7 @@ void ftPr_SpecialS_8013DD54(HSD_GObj* gobj, bool arg1)
     if (fp->mv.pr.specialn.x34.y == 0.0f) {
         playRollSFX(gobj);
     } else {
-        if (fp->mv.pr.specialn.x34.x == ((arg1) ? -1.0f : 1.0f)) {
+        if (fp->mv.pr.specialn.x34.x == (arg1 ? -1.0f : 1.0f)) {
             if (fp->mv.pr.specialn.x14 < fp->mv.pr.specialn.x34.y) {
                 playRollSFX(gobj);
             }

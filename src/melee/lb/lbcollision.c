@@ -98,7 +98,7 @@ int lbColl_80005BB0(HitCapsule* arg0, int arg1)
         temp_r6 = arg0->sfx_severity;
         if (temp_r6 == 2) {
             return lbAudioAx_80024184(
-                *(lbColl_803B9880 + (temp_r0 * 3) + (temp_r6)), 127, 64, arg1);
+                *(lbColl_803B9880 + (temp_r0 * 3) + temp_r6), 127, 64, arg1);
         }
     }
 

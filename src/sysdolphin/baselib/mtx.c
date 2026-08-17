@@ -440,20 +440,20 @@ void HSD_MtxScaledAdd(Mtx arg0, Mtx arg1, Mtx arg2, f32 arg3)
     f32* arr1 = (&arg1[0][0]);
     f32* arr2 = (&arg2[0][0]);
 
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
 
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
 
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
-    *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
+    *arr2++ = *arr1++ + (arg3 * *arr0++);
 }
 
 void* HSD_VecAlloc(void)

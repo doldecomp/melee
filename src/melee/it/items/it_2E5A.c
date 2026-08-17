@@ -309,7 +309,7 @@ void it_802E628C(Item_GObj* item_gobj, f32 arg8, f32 arg9)
     if (((arg8 >= (temp_f0 / 3)) && (arg8 <= (2 * (temp_f0 / 3)))) ||
         ((arg8 >= (4 * (temp_f0 / 3))) && (arg8 <= (5 * (temp_f0 / 3)))))
     {
-        var_f30 += attr->x10 * cosf((temp_f1));
+        var_f30 += attr->x10 * cosf(temp_f1);
     }
     item->x40_vel.x = var_f30;
     temp_f0 = attr->x20;

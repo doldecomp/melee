@@ -1181,8 +1181,7 @@ HSD_GObj* mn_80230E38(int arg0)
             if (i == 1 &&
                 ((struct mn_8022FB88_arg1_t*) mn_804D6BD0->user_data)->x2 == 1)
             {
-                HSD_JObjReqAnim(jobj_parts[7],
-                                ((&mn_804D4B88))[selected == i]);
+                HSD_JObjReqAnim(jobj_parts[7], (&mn_804D4B88)[selected == i]);
             } else {
                 HSD_JObjReqAnim(jobj_parts[7], ((f32*) (mn_803EC600 + 0x10) +
                                                 i * 2)[selected == i]);

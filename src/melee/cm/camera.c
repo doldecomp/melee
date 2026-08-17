@@ -536,7 +536,7 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
                         base_pos.y =
                             (Stage_GetCamBoundsBottomOffset() > base_ground)
                                 ? (Stage_GetCamBoundsBottomOffset())
-                                : (base_ground);
+                                : base_ground;
                     }
                 }
                 test_pos.x =
@@ -558,7 +558,7 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
                         test_pos.y = (Stage_GetCamBoundsBottomOffset() >
                                       x_extent_ground)
                                          ? (Stage_GetCamBoundsBottomOffset())
-                                         : (x_extent_ground);
+                                         : x_extent_ground;
                     }
                 }
                 if (test_pos.x < min_x) {
@@ -586,7 +586,7 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
                         test_pos.y =
                             (Stage_GetCamBoundsBottomOffset() > alt_x_ground)
                                 ? (Stage_GetCamBoundsBottomOffset())
-                                : (alt_x_ground);
+                                : alt_x_ground;
                     }
                 }
                 if (test_pos.x < min_x) {
@@ -614,7 +614,7 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
                         test_pos.y = (Stage_GetCamBoundsBottomOffset() >
                                       y_extent_ground)
                                          ? (Stage_GetCamBoundsBottomOffset())
-                                         : (y_extent_ground);
+                                         : y_extent_ground;
                     }
                 }
                 if (test_pos.y < min_y) {
@@ -642,7 +642,7 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
                         test_pos.y =
                             (Stage_GetCamBoundsBottomOffset() > alt_y_ground)
                                 ? (Stage_GetCamBoundsBottomOffset())
-                                : (alt_y_ground);
+                                : alt_y_ground;
                     }
                 }
                 if (test_pos.y < min_y) {

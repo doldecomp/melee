@@ -1551,7 +1551,7 @@ void fn_803AC3F8(void* arg0, u8* data, s32 file_idx)
     for (i = 0; i < 3 && i < 9; i++) {
         s32 idx = start + i;
         data[0] = idx;
-        data[1] = ((((u32) file_desc->x4C[idx]) >> ((0, 0x10))) & 0x3F) |
+        data[1] = ((((u32) file_desc->x4C[idx]) >> (0, 0x10)) & 0x3F) |
                   ((file_desc->x28[idx] << 6) & 0xC0);
         data[2] = (u32) file_desc->x4C[idx] >> 8;
         data[3] = file_desc->x4C[idx];
