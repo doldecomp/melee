@@ -218,8 +218,8 @@ static inline s32 random_adder(s32 temp_f0, s32 temp_f2)
         return random_adder_b(temp_f0, temp_f2);
     }
 #else
-    temp_r28_2 = (s32) temp_f0;
-    var_r29 = (s32) temp_f2;
+    temp_r28_2 = temp_f0;
+    var_r29 = temp_f2;
 
     if (temp_f2 > temp_f0) {
         temp_r3 = var_r29 - temp_r28_2;
@@ -338,12 +338,12 @@ void grKongo_801D577C(Ground_GObj* arg0)
             angle_delta += M_TAU;
         }
         if (angle_delta < limit_angle || angle_delta < ABS(gp->u.kongo3.xE0)) {
-            if ((s16) gp->u.kongo3.xC4 == 3) {
+            if (gp->u.kongo3.xC4 == 3) {
                 gp->u.kongo3.xC4 = 0;
             }
             break;
         }
-        if ((s16) gp->u.kongo3.xC4 == 2) {
+        if (gp->u.kongo3.xC4 == 2) {
             gp->u.kongo3.xC4 = 3;
         }
         break;
@@ -365,7 +365,7 @@ void grKongo_801D577C(Ground_GObj* arg0)
             }
         }
         gp->u.kongo2.xCC -= 1;
-        if ((s16) gp->u.kongo2.xCC < 0) {
+        if (gp->u.kongo2.xCC < 0) {
             f32 spin_step;
             gp->u.kongo3.xC4 = 1;
             if (HSD_Randi(2) != 0) {

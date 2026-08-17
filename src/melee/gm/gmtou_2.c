@@ -227,16 +227,16 @@ void fn_8019C048(HSD_GObj* gobj)
 
     if ((s8) (u8) HSD_PadMasterStatus[(u8) idx].err != 0) {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-        HSD_SisLib_803A7548(tmd->x524[2], (s32) idx, 0.0f, 0.0f);
+        HSD_SisLib_803A7548(tmd->x524[2], idx, 0.0f, 0.0f);
         return;
     }
 
     HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
 
     if (lbl_80479A58.x1D[idx].x0 == 4) {
-        HSD_SisLib_803A7548(tmd->x524[2], (s32) idx, 0.0f, 0.0f);
+        HSD_SisLib_803A7548(tmd->x524[2], idx, 0.0f, 0.0f);
     } else {
-        HSD_SisLib_803A7548(tmd->x524[2], (s32) idx, 1.0f, 1.0f);
+        HSD_SisLib_803A7548(tmd->x524[2], idx, 1.0f, 1.0f);
     }
 
     players = tmd->x30;
@@ -273,7 +273,7 @@ void fn_8019C048(HSD_GObj* gobj)
 
     state = lbl_80479A58.x1D[idx].x0;
     if (state == 0 && lbl_80479A58.x38[idx] == 6) {
-        if (lbl_80479A58.x1D[idx].x1 != 0 && (u8) tmd->x4B8[idx].x0 != 0) {
+        if (lbl_80479A58.x1D[idx].x1 != 0 && tmd->x4B8[idx].x0 != 0) {
             lbl_80479A58.x1D[idx].x0 = 1;
             lbl_80479A58.x1D[idx].x1 = 0;
         }
@@ -384,9 +384,7 @@ void fn_8019C744(HSD_GObj* gobj)
         lbl_80479A58.x10[idx] = 0;
     }
 
-    if (((s8) HSD_PadMasterStatus[(u8) idx].err != 0) &&
-        (tmd->x4B8[idx].x0 != 1))
-    {
+    if ((HSD_PadMasterStatus[(u8) idx].err != 0) && (tmd->x4B8[idx].x0 != 1)) {
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         var_f1 = gmTournament_GetPlayerX(tmd->x30, idx);
         fn_8018FDC4(jobj, 0.3f + var_f1, 10.1f, 666.0f);
@@ -819,7 +817,7 @@ void gm_8019DF8C_OnFrame(void)
 
     if (confirmed == (s32) tmd->x30) {
         lbl_80479A58.x0 += 1;
-        if ((u32) lbl_80479A58.x0 >= 0x1EU) {
+        if (lbl_80479A58.x0 >= 0x1EU) {
             for (j = 0; j < (s32) tmd->x2E; j++) {
                 tmd->x37[j].xF = tmd->x37[j].xE;
             }
@@ -836,7 +834,7 @@ void gm_8019DF8C_OnFrame(void)
                 /* Abort combo check */
                 if (fn_8018F6A8(i) & PAD_BUTTON_B) {
                     lbl_80479A58.x18[i] = (u8) (lbl_80479A58.x18[i] + 1);
-                    if ((u8) lbl_80479A58.x18[i] > 0x5AU) {
+                    if (lbl_80479A58.x18[i] > 0x5AU) {
                         sfxForward();
                         gm_SetPendingSceneIndex(0U);
                         gm_801A4B60();
@@ -914,7 +912,7 @@ void gm_8019DF8C_OnFrame(void)
             }
 
                 if (buttons & (PAD_BUTTON_A | PAD_BUTTON_START)) {
-                    if ((u8) lbl_80479A58.x1D[i].x0 != 2) {
+                    if (lbl_80479A58.x1D[i].x0 != 2) {
                         u16 char_id;
                         sfxForward();
                         lbl_80479A58.x1D[i].x0 = 1;
@@ -926,7 +924,7 @@ void gm_8019DF8C_OnFrame(void)
                         }
                     }
                 } else if (buttons & PAD_BUTTON_B) {
-                    if ((u8) lbl_80479A58.x1D[i].x0 == 2) {
+                    if (lbl_80479A58.x1D[i].x0 == 2) {
                         sfxBack();
                         lbl_80479A58.x1D[i].x0 = 3;
                     }
@@ -1026,7 +1024,7 @@ void gm_8019E634(void)
     }
 
     /* Handicap adjustment */
-    if ((u8) gmMainLib_GetGameRules()->handicap == 1) {
+    if (gmMainLib_GetGameRules()->handicap == 1) {
         union {
             u32 word;
             u8 bytes[4];
@@ -1039,7 +1037,7 @@ void gm_8019E634(void)
             if (i < (s32) tmd->x30) {
                 s32 id = results_base[i];
                 j = get_match_player_index_xF(id);
-                hbuf.bytes[i] = (u8) tmd->x37[j].x2;
+                hbuf.bytes[i] = tmd->x37[j].x2;
             }
         }
 

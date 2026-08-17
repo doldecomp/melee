@@ -711,7 +711,7 @@ void grAnime_801C7228(HSD_JObj* obj, int flags, void* func, u32 type,
                                           param);
             }
             pobj = dobj->pobj;
-            if (((int) (flags & 0x100) != 0) && (pobj != NULL) &&
+            if (((flags & 0x100) != 0) && (pobj != NULL) &&
                 ((pobj->flags & 0x3000) == 0x1000))
             {
                 if (pobj->u.unk != NULL) {
@@ -1209,7 +1209,7 @@ void grAnime_801C8138(HSD_GObj* gobj, enum_t arg1, bool arg2)
     } else {
         flag = 0;
     }
-    if ((s32) flag != 0) {
+    if (flag != 0) {
         grAnime_801C752C(jobj, 1, 0x77A4, HSD_AObjSetFlags, 3, 0x20000000);
     }
     HSD_JObjAnimAll(jobj);

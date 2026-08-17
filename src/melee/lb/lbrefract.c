@@ -138,7 +138,7 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
         }
         y += y_step;
     }
-    DCFlushRange((void*) cb->buffer, cb->buffer_size);
+    DCFlushRange(cb->buffer, cb->buffer_size);
 }
 
 static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, s32 row,
@@ -272,10 +272,10 @@ static void lbRefract_ReadTexCoordRGBA8(lbRefract_CallbackData* data, s32 row,
         *(u32*) out_a = base[offset];
     }
     if (out_r != NULL) {
-        *(u32*) out_r = (base + offset)[1];
+        *out_r = (base + offset)[1];
     }
     if (out_g != NULL) {
-        *(u32*) out_g = (base + offset)[0x20];
+        *out_g = (base + offset)[0x20];
     }
     if (out_b != NULL) {
         *(u32*) out_b = (base + offset)[0x21];
@@ -478,7 +478,7 @@ void lbRefract_80022560(void)
     if (lbl_804336D0.refractionUserCount != 0) {
         GXSetTexCopySrc(0, 0, 0x280, 0x1E0);
         GXSetTexCopyDst(0x140, 0xF0, 4, 1);
-        GXCopyTex((void*) lbl_804336D0.image_ptr, 0);
+        GXCopyTex(lbl_804336D0.image_ptr, 0);
         GXPixModeSync();
         GXInvalidateTexAll();
     }

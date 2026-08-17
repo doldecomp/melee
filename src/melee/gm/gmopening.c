@@ -55,7 +55,7 @@ void gm_801A9DD0(HSD_GObj* arg0, u16 arg1, u16 arg2, int arg3, int arg4)
     Vec3 interest = gm_803B7D74;
 
     far_val = 2.0f;
-    bottom = (f32) (-(s32) (u16) arg2);
+    bottom = (f32) (-(s32) arg2);
     right = (f32) arg1;
     top = 0.0f;
     left = 0.0f;
@@ -115,7 +115,7 @@ void* fn_801A9FCC(void)
     lines[1].next = &lines[2];
     lines[2].unk_04 = 0;
 
-    ms = (u32) lbMthp_8001F5D4() / (f32) OSMillisecondsToTicks(1);
+    ms = lbMthp_8001F5D4() / (f32) OSMillisecondsToTicks(1);
     idx = 2;
     sprintf(lines[idx].text, "\\cffff00%3d", ms);
 
@@ -190,7 +190,7 @@ void gm_801AA28C_OnFrame(void)
 
     lbMthp_8001F578();
     temp_r3 = lbMthp_8001F5C4();
-    if ((u32) gm_804D67EC > 0x1518) {
+    if (gm_804D67EC > 0x1518) {
         gm_804D67EC += 1;
     } else {
         gm_804D67EC = (u32) temp_r3;
@@ -210,7 +210,7 @@ void gm_801AA28C_OnFrame(void)
             gm_804D67E1 = 1;
         }
     }
-    if (((u8) gm_804D67E2 == 0) && ((u32) gm_804D67EC >= 0x1374U)) {
+    if ((gm_804D67E2 == 0) && (gm_804D67EC >= 0x1374U)) {
         gmMainLib_8015F500();
         gm_804D67E2 = 1;
     }
@@ -224,11 +224,11 @@ void gm_801AA28C_OnFrame(void)
         temp_r3_3->x14 = 290.0f;
         gm_804D67D4 = temp_r3_2;
     }
-    if ((gm_804D67D4 != NULL) && ((u32) gm_804D67EC >= 0x202)) {
+    if ((gm_804D67D4 != NULL) && (gm_804D67EC >= 0x202)) {
         HSD_GObjPLink_80390228(gm_804D67D4);
         gm_804D67D4 = NULL;
     }
-    if ((gm_804D67D8 == NULL) && ((u32) gm_804D67EC >= 0x3B6) &&
+    if ((gm_804D67D8 == NULL) && (gm_804D67EC >= 0x3B6) &&
         (gm_804D67EC < 0x3CE))
     {
         gm_804D67D8 = gmTitle_801A12C4();

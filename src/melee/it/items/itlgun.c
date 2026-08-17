@@ -171,7 +171,7 @@ bool itLGun_Logic16_DmgDealt(Item_GObj* gobj)
 
 bool itLGun_Logic16_Clanked(Item_GObj* gobj)
 {
-    itColl_BounceOffVictim((Item_GObj*) gobj);
+    itColl_BounceOffVictim(gobj);
     return false;
 }
 

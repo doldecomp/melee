@@ -1060,8 +1060,8 @@ void it_80279E24(Item_GObj* item_gobj)
                 it_80279E24_inline(item_gobj);
             }
         }
-        if ((s32) item->xDD4_itemVar.pokemon_spawn.x54 <=
-            (s32) item->xDD4_itemVar.pokemon_spawn.x58)
+        if (item->xDD4_itemVar.pokemon_spawn.x54 <=
+            item->xDD4_itemVar.pokemon_spawn.x58)
         {
             item->xDD4_itemVar.pokemon_spawn.x5C = 2;
             return;

@@ -63,8 +63,7 @@ int HSD_Leak_80387DF8(int indent)
     scan = (u32*) lbCommand_803B9840;
     lc = &HSD_Leak_80407B58;
 
-    heap_start_phys =
-        (u32*) ((u32) OSGetConsoleSimulatedMemSize() + 0x80000000);
+    heap_start_phys = (u32*) (OSGetConsoleSimulatedMemSize() + 0x80000000);
     heap_start_align = ((u32) scan + 32) & 0x0FFFFFE0;
     val = OSGetPhysicalMemSize();
 
@@ -126,7 +125,7 @@ int HSD_Leak_80387DF8(int indent)
             *ep = (u32) heap_start_phys & ~1u;
         } else if (scan <= heap_start_phys && heap_start_phys < (u32*) val) {
         } else if (heap_start_phys != NULL) {
-            u32* block = (u32*) heap_start_phys;
+            u32* block = heap_start_phys;
             if (block[0] == HEAP_MAGIC) {
                 u32 reg_idx = block[1];
                 if ((u32) (reg_idx + 0x10000) != 0xFFFF && reg_idx < *cap_ptr)

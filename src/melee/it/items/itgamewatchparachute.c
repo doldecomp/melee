@@ -82,7 +82,7 @@ void itGameWatchParachute_Logic74_PickedUp(Item_GObj* item_gobj)
 
     temp_r3 = item_gobj->user_data;
     temp_r3->xDAC_itcmd_var0 = 0;
-    if ((HSD_GObj*) temp_r3->owner != NULL) {
+    if (temp_r3->owner != NULL) {
         Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
         Item_802694CC(item_gobj);
     }

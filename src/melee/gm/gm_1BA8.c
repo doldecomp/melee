@@ -531,7 +531,7 @@ void gm_801BAD70(GameScene* arg0)
                 if (c != 0x21) {
                     r3b[0x60] = c;
                     ev->x0 = c;
-                    ev->x4C[0] = (s8) c;
+                    ev->x4C[0] = c;
                 }
             }
         }
@@ -568,9 +568,7 @@ void gm_801BAD70(GameScene* arg0)
     }
     if (level == 0x2B) {
         u8 c = ev->x50[2];
-        if ((s8) (u8) ev->x4C[0] == (s8) (u8) ev->x4C[2] &&
-            (u8) ev->x50[0] == c)
-        {
+        if ((s8) (u8) ev->x4C[0] == (s8) (u8) ev->x4C[2] && ev->x50[0] == c) {
             if (c <= 2) {
                 c = c + 1;
             } else {
@@ -598,7 +596,7 @@ void gm_801BAD70(GameScene* arg0)
                 x5_flag = 1;
                 if ((s8) ev->x0 == bonus->c_kind) {
                     u8 c;
-                    if ((u8) ev->x1 == (c = bonus->color)) {
+                    if (ev->x1 == (c = bonus->color)) {
                         if (c <= 2) {
                             c = c + 1;
                         } else {
@@ -645,7 +643,7 @@ void gm_801BAD70(GameScene* arg0)
             gm_801BA938(ev, 0, 4, 1);
             break;
         case 2:
-            cache->entries[0].char_id = (s8) ev->x4C[0];
+            cache->entries[0].char_id = ev->x4C[0];
             cache->entries[0].color = ev->x50[0];
             lbDvd_80018254();
             lbDvd_80018C2C(0xC7);
@@ -657,7 +655,7 @@ void gm_801BAD70(GameScene* arg0)
             break;
         case 4:
             lbDvd_80018C6C();
-            cache->entries[0].char_id = (s8) ev->x4C[0];
+            cache->entries[0].char_id = ev->x4C[0];
             cache->entries[0].color = ev->x50[0];
             lbDvd_80018254();
             lbDvd_80017700(4);
@@ -991,7 +989,7 @@ static inline void gm_801BC00C_inline(gm_801BAB40_src* event_entry)
     u8 costume = event_entry->color;
     struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
 
-    if ((s8) ev2->x0 == (s8) ckind && (u8) ev2->x1 == costume) {
+    if ((s8) ev2->x0 == (s8) ckind && ev2->x1 == costume) {
         if (costume <= 2) {
             costume += 1;
         } else {
@@ -1957,7 +1955,7 @@ void gm_801BCC9C(HSD_GObj* arg0)
         cd = ((struct gm_evspawn**) (inner + 0x10))[ev->x20];
         ev2 = &gmMainLib_804D3EE0->unk_530;
         costume = cd->unk3;
-        if ((s8) ev2->x0 == cd->unk0 && (u8) ev2->x1 == costume) {
+        if ((s8) ev2->x0 == cd->unk0 && ev2->x1 == costume) {
             if (costume <= 2) {
                 costume += 1;
             } else {
@@ -2648,7 +2646,7 @@ void gm_801BDE94(HSD_GObj* arg0)
                     ((struct gm_evx10*) tbl[level]->x10)->unk1C;
                 struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
                 u8 color = sp->unk3;
-                if ((s8) ev2->x0 == sp->unk0 && (u8) ev2->x1 == color) {
+                if ((s8) ev2->x0 == sp->unk0 && ev2->x1 == color) {
                     if (color <= 2) {
                         color += 1;
                     } else {
@@ -2688,7 +2686,7 @@ void gm_801BDE94(HSD_GObj* arg0)
                     ((struct gm_evx10*) tbl[level]->x10)->unk20;
                 struct EventData* ev2 = &gmMainLib_804D3EE0->unk_530;
                 u8 color = sp->unk3;
-                if ((s8) ev2->x0 == sp->unk0 && (u8) ev2->x1 == color) {
+                if ((s8) ev2->x0 == sp->unk0 && ev2->x1 == color) {
                     if (color <= 2) {
                         color += 1;
                     } else {
@@ -3325,7 +3323,7 @@ void gm_801BF128(void)
             count += 1;
         }
         c += 1;
-    } while ((s32) c < 0x1A);
+    } while (c < 0x1A);
     character_pool[count] = 0x1A;
     for (i = 0; i < count; i++) {
         for (j = i + 1; j < count; j++) {
@@ -3375,7 +3373,7 @@ void gm_801BF128(void)
             count += 1;
         }
         c += 1;
-    } while ((s32) c < 0x1D);
+    } while (c < 0x1D);
     stage_pool[count] = 0x1D;
     for (i = 0; i < count; i++) {
         for (j = i + 1; j < count; j++) {

@@ -411,15 +411,15 @@ void fn_80184AB8(HSD_GObj* arg0)
     jobj = arg0->hsd_obj;
     HSD_JObjAnimAll(jobj);
 
-    if ((u16) lbl_804735A8.x38 < 0x8CU) {
+    if (lbl_804735A8.x38 < 0x8CU) {
         lbl_804735A8.x38 = (u16) (lbl_804735A8.x38 + 1);
     } else {
         lbl_804735A8.x0 = 1;
         return;
     }
 
-    if ((s32) lbl_8047368C.model_scale_kind != 3) {
-        if ((u8) lbl_8047368C.xEE < 0xAU) {
+    if (lbl_8047368C.model_scale_kind != 3) {
+        if (lbl_8047368C.xEE < 0xAU) {
             lb_80011E24(jobj, &sp110, 0x12, -1);
             HSD_TObjReqAnimAll(sp110->u.dobj->mobj->tobj,
                                (f32) (lbl_8047368C.xEE % 10));
@@ -445,17 +445,17 @@ void fn_80184AB8(HSD_GObj* arg0)
         case 0x2D:
             break;
         case 0x46:
-            if ((s32) lbl_8047368C.model_scale_kind == 4 ||
-                (s32) lbl_8047368C.model_scale_kind == 1)
+            if (lbl_8047368C.model_scale_kind == 4 ||
+                lbl_8047368C.model_scale_kind == 1)
             {
                 lbl_804D6608 = lbAudioAx_800237A8(0x7C863, 0x7F, 0x40);
                 return;
             }
-            if ((s32) lbl_8047368C.model_scale_kind == 2) {
+            if (lbl_8047368C.model_scale_kind == 2) {
                 lbl_804D6608 = lbAudioAx_800237A8(0x7C837, 0x7F, 0x40);
                 return;
             }
-            if ((u8) lbl_8047368C.x100[0] != 0) {
+            if (lbl_8047368C.x100[0] != 0) {
                 lbl_804D6608 = lbAudioAx_800237A8(0x7C847, 0x7F, 0x40);
                 return;
             }
@@ -468,7 +468,7 @@ void fn_80184AB8(HSD_GObj* arg0)
             return;
         case 0x5:
             for (i = 0; i < (s32) lbl_8047368C.xEF; i++) {
-                if (i != 0 || (u8) lbl_8047368C.xED == 0x78) {
+                if (i != 0 || lbl_8047368C.xED == 0x78) {
                     fn_80160DE8(lbl_804735A8.x4[7 + i], lbl_8047368C.xF1[i], 0,
                                 0, lbl_804D6604->x57C[lbl_8047368C.xEF].x18[i],
                                 lbl_804D6604->x57C[lbl_8047368C.xEF].x24[i]);
@@ -481,7 +481,7 @@ void fn_80184AB8(HSD_GObj* arg0)
             }
             return;
         case 0x6:
-            if ((s32) lbl_8047368C.model_scale_kind == 4) {
+            if (lbl_8047368C.model_scale_kind == 4) {
                 i = 0;
                 name = gm_80160980(lbl_8047368C.xF4[0]);
                 if (lbLang_IsSavedLanguageUS()) {
@@ -533,12 +533,12 @@ void fn_8018504C(void)
     int new_var;
     PAD_STACK(16);
     new_var = 0x32;
-    if ((u16) lbl_804735A8.x3A < 0x31U) {
+    if (lbl_804735A8.x3A < 0x31U) {
         lbl_804735A8.x3A = (u16) (lbl_804735A8.x3A + 1);
     } else {
         lbl_804735A8.x3A = 0;
     }
-    if ((u16) lbl_804735A8.x3C < 0x31U) {
+    if (lbl_804735A8.x3C < 0x31U) {
         lbl_804735A8.x3C = (u16) (lbl_804735A8.x3C + 1);
     }
     HSD_JObjReqAnimAll(
@@ -549,10 +549,8 @@ void fn_8018504C(void)
         lbl_804735A8.x4[4],
         (f32) (lbl_804735A8.x3A + ((lbl_8047368C.xEE * 0x32) - new_var)));
     HSD_JObjAnimAll(lbl_804735A8.x4[4]);
-    if (((u16) lbl_804735A8.x38 == 0x2D) &&
-        ((s32) lbl_8047368C.model_scale_kind == 3))
-    {
-        switch ((s32) lbl_8047368C.game_type) {
+    if ((lbl_804735A8.x38 == 0x2D) && (lbl_8047368C.model_scale_kind == 3)) {
+        switch (lbl_8047368C.game_type) {
         case 1:
             lbAudioAx_800237A8(0x7C864, 0x7F, 0x40);
             return;
@@ -604,7 +602,7 @@ s32 fn_801851C0(void)
         Player_SetCostumeId(result, i);
         pos = data->offset[lbl_8047368C.xF4[0]];
         Player_80032768(result, &pos);
-        if ((u8) lbl_8047368C.xF4[0] == 0xE) {
+        if (lbl_8047368C.xF4[0] == 0xE) {
             pos.x += data->samus_extra.x;
             pos.y += data->samus_extra.y;
             pos.z += data->samus_extra.z;
@@ -1022,7 +1020,7 @@ void fn_801861B8(void)
         text->font_size.x = 1.0f;
         text->font_size.y = 1.0f;
         ((HSD_Text*) lbl_804735A8.x4[10 + i])->default_alignment = 1;
-        if ((s32) lbl_8047368C.model_scale_kind == 4) {
+        if (lbl_8047368C.model_scale_kind == 4) {
             HSD_SisLib_803A6B98((HSD_Text*) lbl_804735A8.x4[10 + i],
                                 340.0f + lbl_804D6604->x57C[1].x00[0],
                                 lbl_804D6604->x57C[1].x0C[0], " ");
@@ -1105,11 +1103,11 @@ void fn_80186634(void* arg0)
                             lb_80011AC4(lbl_804D65FC->lights));
     GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
 
-    if ((s32) lbl_8047368C.model_scale_kind != 3) {
+    if (lbl_8047368C.model_scale_kind != 3) {
         lbl_8047368C.game_type = 0;
     }
 
-    switch ((s32) lbl_8047368C.model_scale_kind) {
+    switch (lbl_8047368C.model_scale_kind) {
     case 3:
         gobj2 = GObj_Create(0x13, 0x14, 0);
         cobj1 = HSD_CObjLoadDesc(lbl_804D65FC->cameras[0].desc);
@@ -1119,7 +1117,7 @@ void fn_80186634(void* arg0)
         gobj2->gxlink_prios = 0x801;
         gobj3 = GObj_Create(0x13, 0x15, 0);
         HSD_GObjObject_80390A70(gobj3, HSD_GObj_804D784B, cobj2);
-        if ((s32) lbl_8047368C.model_scale_kind == 4) {
+        if (lbl_8047368C.model_scale_kind == 4) {
             GObj_SetupGXLinkMax(gobj3, (GObj_RenderFunc) (Event) fn_8018569C,
                                 8);
         } else {
@@ -1156,7 +1154,7 @@ void fn_80186634(void* arg0)
         gobj2->gxlink_prios = 0x801;
         gobj3 = GObj_Create(0x13, 0x15, 0);
         HSD_GObjObject_80390A70(gobj3, HSD_GObj_804D784B, cobj2);
-        if ((s32) lbl_8047368C.model_scale_kind == 4) {
+        if (lbl_8047368C.model_scale_kind == 4) {
             GObj_SetupGXLinkMax(gobj3, (GObj_RenderFunc) (Event) fn_8018569C,
                                 8);
         } else {
@@ -1193,7 +1191,7 @@ void fn_80186634(void* arg0)
         gobj2->gxlink_prios = 0x801;
         gobj3 = GObj_Create(0x13, 0x15, 0);
         HSD_GObjObject_80390A70(gobj3, HSD_GObj_804D784B, cobj2);
-        if ((s32) lbl_8047368C.model_scale_kind == 4) {
+        if (lbl_8047368C.model_scale_kind == 4) {
             GObj_SetupGXLinkMax(gobj3, (GObj_RenderFunc) (Event) fn_8018569C,
                                 8);
         } else {
@@ -2396,7 +2394,7 @@ void fn_801891F4(void)
 
         if (buttons & PAD_ANY_UP) {
             sfxMove();
-            if ((u8) sub->x00 != 0) {
+            if (sub->x00 != 0) {
                 sub->x00--;
                 if (sub->x00 == 5) {
                     sub->x00 = 4;
@@ -2408,7 +2406,7 @@ void fn_801891F4(void)
 
         if (buttons & PAD_ANY_DOWN) {
             sfxMove();
-            if ((u8) sub->x00 < 8) {
+            if (sub->x00 < 8) {
                 sub->x00++;
                 if (sub->x00 == 5) {
                     sub->x00 = 6;
@@ -2845,7 +2843,7 @@ void fn_8018A364(int arg0_int)
         total_time = data->x0.xC.x20 + gm_8016AEDC();
         ((u8_bits*) &arg0->_x448[0])->b5 = 1;
 
-        if ((u8) data->x0.cpu_level == 4) {
+        if (data->x0.cpu_level == 4) {
             ((u8_bits*) &arg0->_x448[0])->b2 = 1;
         }
 
@@ -2860,11 +2858,11 @@ void fn_8018A364(int arg0_int)
             ((u8_bits*) &arg0->_x448[1])->b1 = 1;
         }
 
-        if ((u8) data->x0.xC.xE != 0) {
+        if (data->x0.xC.xE != 0) {
             ((u8_bits*) &arg0->_x448[2])->b5 = 1;
         }
 
-        if ((u8) data->x0.xC.xF != 0) {
+        if (data->x0.xC.xF != 0) {
             ((u8_bits*) &arg0->_x448[2])->b4 = 1;
         }
 
@@ -2874,7 +2872,7 @@ void fn_8018A364(int arg0_int)
             ((u8_bits*) &arg0->_x448[0])->b1 = 1;
         }
 
-        if ((u8) data->x0.xC.xD != 0) {
+        if (data->x0.xC.xD != 0) {
             ((u8_bits*) &arg0->_x448[1])->b0 = 1;
             return;
         }

@@ -426,9 +426,7 @@ void ftPp_SpecialS2_Phys(Fighter_GObj* gobj)
         ftCommon_ApplyGroundMovementNoSlide(gobj);
     }
     temp_r31->mv.pp.specials.x14 += 1;
-    if (((u32) temp_r31->cmd_vars[2] != 0) &&
-        (temp_r31->input.x668 & HSD_PAD_B))
-    {
+    if ((temp_r31->cmd_vars[2] != 0) && (temp_r31->input.x668 & HSD_PAD_B)) {
         temp_r31->mv.pp.specials.x10 += 1;
     }
     if (temp_r31->mv.pp.specials.x10 != 0 &&

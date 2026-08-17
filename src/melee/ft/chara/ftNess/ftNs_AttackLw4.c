@@ -40,7 +40,7 @@ void ftNs_AttackLw4_Anim(
     fp->mv.ns.attacklw4.yoyoCurrentFrame++;
     if (ftNs_AttackHi4_YoyoThink_IsRemove(gobj) == false) {
         ftNs_AttackHi4_YoyoCheckTimedRehit(gobj);
-        if (((s32) fp->mv.ns.attacklw4.yoyoCurrentFrame == 13) &&
+        if ((fp->mv.ns.attacklw4.yoyoCurrentFrame == 13) &&
             ((s32) fp->mv.ns.attacklw4.isChargeDisable == false) &&
             (ftNs_AttackHi4_YoyoCheckNoObstruct(gobj) != false))
         {

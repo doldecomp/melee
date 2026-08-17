@@ -173,9 +173,8 @@ void ifStock_802F8298(HSD_GObj* gobj)
         HSD_JObjClearFlagsAll(stock->player[user_data->player].x3C,
                               JOBJ_HIDDEN);
         if (stock->player[user_data->player].stocks >= 10) {
-            HSD_JObjReqAnimAll(
-                stock->player[user_data->player].x44,
-                (int) (stock->player[user_data->player].stocks / 10));
+            HSD_JObjReqAnimAll(stock->player[user_data->player].x44,
+                               (stock->player[user_data->player].stocks / 10));
             HSD_JObjReqAnimAll(stock->player[user_data->player].x40,
                                stock->player[user_data->player].stocks % 10);
         } else {
@@ -726,14 +725,14 @@ void ifStock_802FA2D0(int arg)
         HSD_JObjReqAnimAll(ifStock_804A1378.jobj_a, arg % 10);
         HSD_JObjReqAnimAll(ifStock_804A1378.jobj_b, (arg / 10) % 10);
         HSD_JObjReqAnimAll(ifStock_804A1378.jobj_c, (arg / 100) % 10);
-        HSD_JObjReqAnimAll(ifStock_804A1378.jobj_d, (int) (arg / 1000));
+        HSD_JObjReqAnimAll(ifStock_804A1378.jobj_d, (arg / 1000));
     } else if (arg >= 100) {
         HSD_JObjReqAnimAll(ifStock_804A1378.jobj_b, arg % 10);
         HSD_JObjReqAnimAll(ifStock_804A1378.jobj_c, (arg / 10) % 10);
-        HSD_JObjReqAnimAll(ifStock_804A1378.jobj_d, (int) (arg / 100));
+        HSD_JObjReqAnimAll(ifStock_804A1378.jobj_d, (arg / 100));
     } else if (arg >= 10) {
         HSD_JObjReqAnimAll(ifStock_804A1378.jobj_c, arg % 10);
-        HSD_JObjReqAnimAll(ifStock_804A1378.jobj_d, (int) (arg / 10));
+        HSD_JObjReqAnimAll(ifStock_804A1378.jobj_d, (arg / 10));
     } else {
         HSD_JObjReqAnimAll(ifStock_804A1378.jobj_d, arg);
     }
@@ -872,8 +871,7 @@ void fn_802FAC34(HSD_GObj* arg)
                 }
                 ifStock_804A1ACC.x10C[i] = ifStock_802F96D0(
                     ifStock_804A1ACC.x1[i], ifStock_804A1ACC.x83[i],
-                    2.45f * (i % 5) + -21.0f,
-                    -(2.45f * (int) (i / 5) - 11.0f));
+                    2.45f * (i % 5) + -21.0f, -(2.45f * (i / 5) - 11.0f));
                 if (i == 0) {
                     HSD_GObj_SetupProc(ifStock_804A1ACC.x10C[i], fn_802FA8C0,
                                        17);

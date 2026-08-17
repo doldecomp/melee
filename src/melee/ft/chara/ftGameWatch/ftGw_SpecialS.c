@@ -39,7 +39,7 @@ void ftGw_SpecialS_ItemJudgementSetup(HSD_GObj* gobj)
             it_802C7774(fp->facing_dir, gobj, &sp20,
                         ftParts_GetBoneIndex(fp, FtPart_RThumbNb),
                         fp->u.gw.x222C_judgeVar1);
-        if ((s32) fp->u.gw.x222C_judgeVar1 == 6) {
+        if (fp->u.gw.x222C_judgeVar1 == 6) {
             sp14.z = 0.0f;
             sp14.x = 0.0f;
             sp14.y = 5.0f;
@@ -253,7 +253,7 @@ void ftGw_SpecialS_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((u32) fp->cmd_vars[0] == 1U) {
+    if (fp->cmd_vars[0] == 1U) {
         fp->cmd_vars[0] = 2U;
     }
 
@@ -342,7 +342,7 @@ static void ftGw_SpecialS_GroundToAir(HSD_GObj* gobj)
     Fighter_ChangeMotionState(
         gobj, fp->u.gw.x222C_judgeVar1 + ftGw_MS_SpecialAirS1,
         transition_flags, fp->cur_anim_frame, 1.0f, 0.0f, NULL);
-    if ((u32) fp->cmd_vars[0] == 1) {
+    if (fp->cmd_vars[0] == 1) {
         fp->cmd_vars[0] = 2;
     }
     ftGameWatch_SpecialS_SetCall(gobj);

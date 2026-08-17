@@ -131,7 +131,7 @@ static inline void ftMewtwo_SetGrabVictim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_GObj* victimGObj;
 
-    if ((u32) fp->cmd_vars[0] != 0) {
+    if (fp->cmd_vars[0] != 0) {
         victimGObj = fp->victim_gobj;
         if (victimGObj != NULL) {
             ftCommon_8007E2F4(fp, 0);

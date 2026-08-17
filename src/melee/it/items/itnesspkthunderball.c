@@ -60,7 +60,7 @@ void it_802AB468(Item_GObj* gobj, f32* out, s32 unused)
             if (out == NULL) {
                 return;
             }
-            *out = *(f32*) &ip->xDD4_itemVar.pkthunder.xEEC;
+            *out = *(&ip->xDD4_itemVar.pkthunder.xEEC);
             return;
         }
         if (out == NULL) {

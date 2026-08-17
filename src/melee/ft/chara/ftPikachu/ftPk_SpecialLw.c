@@ -281,7 +281,7 @@ void ftPk_SpecialAirLwLoop0_Anim(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, 365, 0, 0.0f, 1.0f, 0.0f, 0);
         fighter_copy->cmd_vars[0] = 0;
         fighter_copy->take_dmg_cb = NULL;
-        fighter_copy->self_vel.y = (float) pika_attr->xB4;
+        fighter_copy->self_vel.y = pika_attr->xB4;
         fp = GET_FIGHTER(gobj);
         efAsync_Spawn(gobj, &fp->x60C, 0, 1216,
                       fighter_copy->parts[FtPart_TopN].joint);

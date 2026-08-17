@@ -642,7 +642,7 @@ s32 fn_803AA790(void)
         return result;
     case 6:
         result = fn_803B26CC((CardState*) arg0, entry->x8, entry->xC,
-                             entry->x10, (void (*)(s32, s32)) entry->x14);
+                             entry->x10, entry->x14);
         if (result < 0) {
             if (entry->x14 != NULL) {
                 entry->x14(0, result);

@@ -65,8 +65,8 @@ void gm_801BFA6C(GameScene* arg0)
 
     temp_r31 = gm_GetGameSceneLoadDataCallback(arg0);
     temp_r3 = gm_GetChallengerData();
-    temp_r31->x0 = (u8) temp_r3->x4;
-    temp_r31->x1 = (u8) temp_r3->x2;
+    temp_r31->x0 = temp_r3->x4;
+    temp_r31->x1 = temp_r3->x2;
     lb_8001C550();
     lb_8001D164(0);
     lb_8001CE00();
@@ -109,7 +109,7 @@ void gm_801BFBA8(GameScene* arg0)
     gm_8016247C((s32) mei->match_end.player_standings[0].xE);
     temp_r0 = mei->match_end.result;
     if ((temp_r0 != OUTCOME_NO_CONTEST) && (temp_r0 != OUTCOME_RETRY) &&
-        ((s8) mei->match_end.player_standings[0].stocks != 0))
+        (mei->match_end.player_standings[0].stocks != 0))
     {
         gm_UnlockCKind((s32) temp_r31->x4);
     } else {
@@ -197,9 +197,8 @@ void gm_801BFCFC(GameScene* arg0)
                 Toy_SetUnlockState((s16) var_r25_2, 1);
             }
             *var_r28 = Toy_803048C0(var_r25_2);
-            var_r31 =
-                (void**) gm_801BFC60(0x3E, var_r30, var_r25_2,
-                                     *gmMainLib_8015D970(var_r25_2), var_r31);
+            var_r31 = gm_801BFC60(0x3E, var_r30, var_r25_2,
+                                  *gmMainLib_8015D970(var_r25_2), var_r31);
             var_r30 = var_r30 + 1;
         }
         var_r28 += 1;

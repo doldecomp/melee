@@ -182,7 +182,7 @@ void fn_80252C50(HSD_GObj* gobj)
     // r29,0` operation using i = 0
     i = 0;
     temp_r3 = Menu_GetAllInputs();
-    if (((u64) temp_r3 & 0x20) != 0) {
+    if ((temp_r3 & 0x20) != 0) {
         lbAudioAx_80024030(i);
         mn_804A04F0.entering_menu = i;
         mn_80229894(0x1C, 1U, 3);
@@ -205,13 +205,13 @@ void fn_80252C50(HSD_GObj* gobj)
         *mnInfoBonus_804D6C80 = 1;
         mnInfoBonus_802529B4();
     }
-    if (((u64) temp_r3 & 1) != 0) {
+    if ((temp_r3 & 1) != 0) {
         if (o->x0 > 0) {
             sfxMove();
             --o->x0;
             mnInfoBonus_802529B4();
         }
-    } else if (((u64) temp_r3 & 2) != 0 &&
+    } else if ((temp_r3 & 2) != 0 &&
                mnInfoBonus_802528F8_wrapper() /* @todo don't inline! */ > 5)
     {
         sfxMove();

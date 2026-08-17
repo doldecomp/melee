@@ -27,8 +27,8 @@ void ftCo_800CDF5C(Fighter_GObj* fighter_gobj)
     }
     ftAnim_8006EBA4(fighter_gobj);
     fighter->accessory4_cb = ftCo_800CE1D4;
-    if ((Item_GObj*) fighter->item_gobj != NULL) {
-        it_8028E938((Item_GObj*) fighter->item_gobj);
+    if (fighter->item_gobj != NULL) {
+        it_8028E938(fighter->item_gobj);
     }
 }
 
@@ -49,8 +49,8 @@ void ftCo_800CE010(Fighter_GObj* fighter_gobj)
     ftAnim_8006EBA4(fighter_gobj);
     ftCommon_ClampAirDrift(fighter);
     fighter->accessory4_cb = ftCo_800CE1D4;
-    if ((Item_GObj*) fighter->item_gobj != NULL) {
-        it_8028E938((Item_GObj*) fighter->item_gobj);
+    if (fighter->item_gobj != NULL) {
+        it_8028E938(fighter->item_gobj);
     }
 }
 

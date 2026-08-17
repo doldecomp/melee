@@ -269,7 +269,7 @@ CmSubject* Camera_80029044(int arg0)
 {
     CmSubject* subject = cm_804D6458;
 
-    if ((CmSubject*) cm_804D6458 == NULL) {
+    if (cm_804D6458 == NULL) {
         OSReport("couldn't get CmSubject struct.\n", arg0);
         while (true) {
         };
@@ -277,7 +277,7 @@ CmSubject* Camera_80029044(int arg0)
 
     cm_804D6458 = subject->prev;
     subject->next = NULL;
-    if ((CmSubject*) cm_804D6460 != NULL) {
+    if (cm_804D6460 != NULL) {
         cm_804D6468->next = subject;
     } else {
         cm_804D6460 = subject;
@@ -1526,7 +1526,7 @@ static inline void update_avg_bounds_width(void)
 {
     f32 left_off;
 
-    if (((s16) cm_80452C68.x2B8) > 0x3E8) {
+    if ((cm_80452C68.x2B8) > 0x3E8) {
         cm_80452C68.x2B4 = cm_80452C68.x2B0;
         cm_80452C68.x2B8 = 1;
     }
@@ -4405,7 +4405,7 @@ void Camera_80030E44(enum_t arg0, Vec3* arg1)
     case 1:
         pgobj = &cm_80452C68.xA0;
         if (cm_80452C68.xA0 == NULL) {
-            *pgobj = (HSD_GObj*) grLib_801C9CEC(arg0);
+            *pgobj = grLib_801C9CEC(arg0);
         }
         result = 10;
         break;

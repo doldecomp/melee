@@ -437,7 +437,7 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
     s32 on_ground;
     s32 loop_index = 0;
 
-    if ((u8) lb_804D63B8 != 0) {
+    if (lb_804D63B8 != 0) {
         return;
     }
     if (desc == NULL) {

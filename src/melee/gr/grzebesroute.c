@@ -195,7 +195,7 @@ void grZebesRoute_8020B42C(Ground_GObj* gobj)
         Ground_801C38BC(pos.x, pos.y);
     }
 
-    timer = *(s16*) &gp->u.zebes2.xC4;
+    timer = *(&gp->u.zebes2.xC4);
     if (timer > 0) {
         gp->u.zebes2.xC4 = timer - 1;
     } else {

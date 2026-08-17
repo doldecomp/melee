@@ -40,7 +40,7 @@ bool ftCo_8009AE38(Fighter_GObj* gobj)
 void ftCo_8009AEA4(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    FtMotionId msid = (float) fp->dmg.x1830_percent < p_ftCommonData->x488
+    FtMotionId msid = fp->dmg.x1830_percent < p_ftCommonData->x488
                           ? ftCo_MS_CliffAttackQuick
                           : ftCo_MS_CliffAttackSlow;
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);

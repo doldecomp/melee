@@ -101,9 +101,9 @@ void lbMthp8001FAA0(const char* filename, int width, int height)
     header.h = height;
     THPDec_8032F8D4((uintptr_t) lbl_804335B8.unk94, context);
     decode_buf = HSD_MemAlloc(THPDec_8032FD40(context, header.h));
-    decoded = THPVideoDecode(&header, &output, decode_buf,
-                             (void*) lbl_804335B8.unk94, context);
-    if ((u16) lbl_804335B8.x6C == 0x280) {
+    decoded = THPVideoDecode(&header, &output, decode_buf, lbl_804335B8.unk94,
+                             context);
+    if (lbl_804335B8.x6C == 0x280) {
         THPDec_80331340(decoded, lbl_804335B8.x20, lbl_804335B8.x44,
                         lbl_804335B8.x68);
     } else {

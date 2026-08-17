@@ -63,7 +63,7 @@ void ftKb_SpecialNIc_80108D64(Fighter_GObj* gobj)
     new_var = 0;
     fp->throw_flags = 0;
     fp->cmd_vars[0] = new_var;
-    ((Fighter*) fp)->u.kb.xC0 = NULL;
+    (fp)->u.kb.xC0 = NULL;
     Fighter_ChangeMotionState(gobj, ftKb_MS_PpSpecialN, 0, 0.0F, 1.0F, 0.0F,
                               NULL);
     ftAnim_8006EBA4(gobj);

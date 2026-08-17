@@ -182,7 +182,7 @@ void un_8031D288_OnEnter(void* data)
         HSD_JObjAnimAll(jobj);
         HSD_GObj_SetupProc(gobj, vi0401_8031D18C, 0x17);
         if (idx.i == 0) {
-            lb_80011E24(jobj, (HSD_JObj**) &un_804D6F58, 1, -1);
+            lb_80011E24(jobj, (&un_804D6F58), 1, -1);
         }
     }
 
