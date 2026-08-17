@@ -785,7 +785,7 @@ static inline s32 retryCardSetStatusAsync(s32 chan, s32 file_no,
 
     return result;
 }
-static inline int setupCardIcons(s32* cmd)
+static inline int setupCardIcons(const s32* cmd)
 {
     u32 bit;
     s32 k;
@@ -802,7 +802,7 @@ static inline int setupCardIcons(s32* cmd)
     }
     return k;
 }
-static inline void unpackCardStat(s32* cmd, CARDStat* stat)
+static inline void unpackCardStat(const s32* cmd, CARDStat* stat)
 {
     s32 k;
 

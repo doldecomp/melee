@@ -1136,7 +1136,8 @@ void it_802A44CC(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
     }
 }
 
-static inline void test_comp(Vec3* vec0, Vec3* vec1, Vec3* vec2, f32* arg2)
+static inline void test_comp(Vec3* vec0, Vec3* vec1, Vec3* vec2,
+                             const f32* arg2)
 {
     vec0->x = (vec2->x * *arg2) + vec1->x;
     vec0->y = (vec2->y * *arg2) + vec1->y;

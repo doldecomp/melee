@@ -3,6 +3,7 @@ Checks: >
   -*,
   portability-restrict-system-includes,
   readability-duplicate-include,
+  readability-non-const-parameter,
   readability-redundant-casting,
   readability-redundant-declaration,
   readability-redundant-parentheses,

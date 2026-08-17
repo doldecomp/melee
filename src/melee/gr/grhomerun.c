@@ -818,7 +818,7 @@ void fn_8021E994(void* user_data, int joint_id, CollData* coll, int coll_x50,
     }
 }
 
-void grHomeRun_8021EA30(f32* pos)
+void grHomeRun_8021EA30(const f32* pos)
 {
     float new_var;
     f32 result;

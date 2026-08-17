@@ -211,7 +211,7 @@ static inline int lbSnap_GetTiledColumn(int x)
     return (x / 4) * 24;
 }
 
-void lbSnap_8001DA5C(u8* arg0)
+void lbSnap_8001DA5C(const u8* arg0)
 {
     u8* dst = lbSnap_GetMemSnapIconData();
     int dst_x;

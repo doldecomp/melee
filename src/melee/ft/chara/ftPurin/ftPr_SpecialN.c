@@ -576,9 +576,9 @@ void ftPr_SpecialAirNChargeFull_Anim(HSD_GObj* gobj)
     ftPartSetRotY(fp, FtPart_TopN, M_PI_2);
 }
 
-static inline void ftPr_SpecialAirNChargeRelease_Anim_inline(HSD_GObj* gobj,
-                                                             Vec3* scale,
-                                                             f32* scale_base)
+static inline void
+ftPr_SpecialAirNChargeRelease_Anim_inline(HSD_GObj* gobj, Vec3* scale,
+                                          const f32* scale_base)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);

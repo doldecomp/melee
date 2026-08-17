@@ -16,7 +16,7 @@ typedef struct {
 
 #define CMD_QUEUE(base) ((HsdCmdEntry*) ((base) + 0x1210))
 
-int hsd_803B27F4(s32* arg0, const char* arg1, int arg2, int arg3,
+int hsd_803B27F4(const s32* arg0, const char* arg1, int arg2, int arg3,
                  void (*arg4)(int, int))
 {
     s32 read_idx = hsd_804D7990;
@@ -102,7 +102,7 @@ int hsd_803B2928(s32* arg0, const char* arg1, int arg2, int arg3,
     return 0;
 }
 
-int hsd_803B29D8(s32* ctx, int channel, u8* data, UNK_T callback)
+int hsd_803B29D8(const s32* ctx, int channel, const u8* data, UNK_T callback)
 {
     s32 read_idx = hsd_804D7990;
     u8* base = hsd_804D1138;
@@ -129,7 +129,8 @@ int hsd_803B29D8(s32* ctx, int channel, u8* data, UNK_T callback)
     return 0;
 }
 
-int hsd_803B2A4C(s32* arg0, int arg1, u8* arg2, void (*arg3)(int, int))
+int hsd_803B2A4C(const s32* arg0, int arg1, const u8* arg2,
+                 void (*arg3)(int, int))
 {
     u8* base = hsd_804D1138;
     s32 read_idx;

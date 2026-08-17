@@ -1535,7 +1535,8 @@ void fn_801935B8(void)
 
 /// Step the selected setting down, wrapping to its maximum.
 static inline void tmSettings_StepDown(s32* menu, TmSettingTable* table,
-                                       struct Lbl804799B8_t* state, int* mt)
+                                       struct Lbl804799B8_t* state,
+                                       const int* mt)
 {
     s32 idx;
     s32* ptr;
@@ -1555,7 +1556,8 @@ static inline void tmSettings_StepDown(s32* menu, TmSettingTable* table,
 
 /// Step the selected setting up, wrapping to its minimum.
 static inline void tmSettings_StepUp(s32* menu, TmSettingTable* table,
-                                     struct Lbl804799B8_t* state, int* mt)
+                                     struct Lbl804799B8_t* state,
+                                     const int* mt)
 {
     s32 idx;
     s32* ptr;

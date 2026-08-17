@@ -1622,7 +1622,8 @@ Fighter_GObj* fn_8017A67C(CharacterKind kind, int arg1, int arg2)
     return (Fighter_GObj*) gobj;
 }
 
-static inline void inline1(HSD_ImageDesc* imgs, int slot, u16* w, u16* h)
+static inline void inline1(HSD_ImageDesc* imgs, int slot, const u16* w,
+                           const u16* h)
 {
     imgs[slot].image_ptr = NULL;
     lb_800121FC(&imgs[slot], *w, *h, 5, 0);
@@ -1675,7 +1676,7 @@ static inline PackedS16x4* fn_8017AA78_get_score_entry(int i,
     return &state->score_tbl[i];
 }
 
-void fn_8017AA78(u8* arg0)
+void fn_8017AA78(const u8* arg0)
 {
     ResultsDisplayData* disp = &lbl_8046E1B0;
     u32* p5;

@@ -411,7 +411,7 @@ static inline void it_8026D018_inline2(void)
     }
 }
 
-static inline void it_8026D018_inline3(f32 randf, s32* range)
+static inline void it_8026D018_inline3(f32 randf, const s32* range)
 {
     s32 diff = range[1] - range[0];
 

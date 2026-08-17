@@ -2721,7 +2721,7 @@ void mn_8022DD38_OnFrame(void)
     }
 }
 
-static inline void mn_8022DDA8_inline(u16* sp2B4)
+static inline void mn_8022DDA8_inline(const u16* sp2B4)
 {
     int temp_r29;
     HSD_GObj* gobj;
@@ -3262,7 +3262,7 @@ void mn_8022F3D8(HSD_JObj* jobj, u8 arg1, HSD_TypeMask mask)
  * -1 if it was decreased toward the target value,
  * and 0 if it was already at the target and was unchanged.
  */
-int mn_8022F410(float* x, float* target, float dx)
+int mn_8022F410(float* x, const float* target, float dx)
 {
     if (*x == *target) {
         return 0;
@@ -3277,7 +3277,7 @@ int mn_8022F410(float* x, float* target, float dx)
 }
 
 /// Same as mn_8022F410, but for int values instead of float.
-int mn_8022F470(int* x, int* target, int dx)
+int mn_8022F470(int* x, const int* target, int dx)
 {
     if (*x == *target) {
         return 0;

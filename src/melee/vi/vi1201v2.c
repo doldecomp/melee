@@ -210,7 +210,7 @@ void fn_80320A1C(HSD_GObj* gobj)
     HSD_FogInterpretAnim(gobj->hsd_obj);
 }
 
-static inline void un_80320A40_LoadAssets(u8* input)
+static inline void un_80320A40_LoadAssets(const u8* input)
 {
     u8 char_index = input[0];
 

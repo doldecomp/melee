@@ -6,7 +6,7 @@
 
 #include <string.h>
 
-int assign_reg(int num, u32* unused, HSD_TExpDag* list, int* order)
+int assign_reg(int num, u32* unused, HSD_TExpDag* list, const int* order)
 {
     u8 color_refs[4] = { 0 };
     u8 alpha_refs[4] = { 0 };
@@ -300,7 +300,7 @@ static void make_dependancy_mtx(int num, HSD_TExpDag* list, u32* dep_mtx)
     }
 }
 
-void make_full_dependancy_mtx(int num, u32* dep, u32* full)
+void make_full_dependancy_mtx(int num, const u32* dep, u32* full)
 {
     int i, j, k;
     bool changed;
