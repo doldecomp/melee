@@ -74,7 +74,7 @@ jobs:
           '--sym off')
 
         function run_configure {
-          echo "$config_args" | xargs python configure.py || exit "$?"
+          echo "$config_args" | xargs python configure.py
         }
 
         function checkout {
@@ -90,7 +90,7 @@ jobs:
               '--reloc-diffs none' \
               "$config_args")
 
-            run_configure
+            run_configure || exit "$?"
 
             set +e
 
@@ -115,7 +115,7 @@ jobs:
           'diff')
             expected="$root/baseline.json"
             changes="$root/changes.json"
-            run_configure
+            run_configure || exit "$?"
 
             function run_ninja {
               ninja all_source "$report"
