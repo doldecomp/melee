@@ -1233,7 +1233,7 @@ void _Toy_8030663C(void)
     s32 var_r31;
     s32 var_r30;
     u16* var_r29;
-    s16* var_r28;
+    TySortRow* var_r28;
     int var_r27;
 
     var_r29 = (u16*) ((u8*) Toy_804A284C + 0xA);
@@ -1251,17 +1251,17 @@ void _Toy_8030663C(void)
             src = gmMainLib_GetTrophyFlags();
         }
         if ((u8) * (u16*) ((u8*) src + var_r30) != 0) {
-            *var_r28 = _Toy_803064B8(var_r27, 0);
+            var_r28->key[0] = _Toy_803064B8(var_r27, 0);
             var_r31 += 1;
-            var_r28 += 3;
+            var_r28++;
         }
         var_r27 += 1;
         var_r30 += 2;
     } while (var_r27 < 0x125);
     {
         s32 var2_r27;
-        s16* var2_r28;
-        s16* var2_r29;
+        TySortRow* var2_r28;
+        TySortRow* var2_r29;
         int var2_r30;
 
         var2_r29 = _Toy_sbss_804D6E64;
@@ -1271,11 +1271,11 @@ void _Toy_8030663C(void)
             var2_r27 = 0;
             goto loop_13_check;
         loop_13_body:
-            if (*var2_r28 == _Toy_803064B8(var2_r30, 1)) {
-                var2_r29[1] = *var2_r28;
-                var2_r29 += 3;
+            if (var2_r28->key[0] == _Toy_803064B8(var2_r30, 1)) {
+                var2_r29->key[1] = var2_r28->key[0];
+                var2_r29++;
             } else {
-                var2_r28 += 3;
+                var2_r28++;
                 var2_r27 += 1;
             loop_13_check:
                 if (var2_r27 < var_r31) {
@@ -1286,11 +1286,11 @@ void _Toy_8030663C(void)
         } while (var2_r30 < 0x125);
     }
     {
-        s16* var3_r27;
+        TySortRow* var3_r27;
         s32 var3_r28;
-        s16* var3_r29;
+        TySortRow* var3_r29;
         int var3_r30;
-        s16* new_var;
+        TySortRow* new_var;
 
         var3_r29 = _Toy_sbss_804D6E64;
         var3_r30 = 0;
@@ -1300,20 +1300,20 @@ void _Toy_8030663C(void)
             goto loop_23_check;
         loop_23_body:
             if (lbLang_IsSavedLanguageJP() != 0) {
-                if (*var3_r27 == _Toy_803064B8(var3_r30, 2)) {
-                    var3_r29[2] = *var3_r27;
-                    var3_r29 += 3;
+                if (var3_r27->key[0] == _Toy_803064B8(var3_r30, 2)) {
+                    var3_r29->key[2] = var3_r27->key[0];
+                    var3_r29++;
                 } else {
                     goto block_22;
                 }
             } else {
                 new_var = var3_r27;
-                if (*new_var == _Toy_803064B8(var3_r30, 3)) {
-                    var3_r29[2] = *new_var;
-                    var3_r29 += 3;
+                if (new_var->key[0] == _Toy_803064B8(var3_r30, 3)) {
+                    var3_r29->key[2] = new_var->key[0];
+                    var3_r29++;
                 } else {
                 block_22:
-                    var3_r27 += 3;
+                    var3_r27++;
                     var3_r28 += 1;
                 loop_23_check:
                     if (var3_r28 < var_r31) {
@@ -1333,29 +1333,25 @@ void Toy_803067BC(s32 arg0, s32 arg1)
     s32 i;
     s16* dest;
     s32 count;
-    s32 base;
+    uintptr_t keys;
 
-    base = (s32) _Toy_sbss_804D6E64;
+    // Integer-domain on purpose: a pointer sum emits the base register first.
+    keys = (uintptr_t) _Toy_sbss_804D6E64->key;
 
     if (arg1 == 0) {
-        src = (s16*) ((arg0 << 1) + base);
-        i = 0;
-        offset = 0;
-        while (i < *gmMainLib_GetTrophyCount()) {
-            M2C_FIELD(Toy_sbss_804D6EDC, s16*, offset) = *src;
-            src += 3;
-            i++;
-            offset += 2;
+        src = (s16*) ((arg0 << 1) + keys);
+        for (i = 0; i < *gmMainLib_GetTrophyCount(); i++) {
+            Toy_sbss_804D6EDC[i] = src[i * TY_SORT_KEY_COUNT];
         }
         return;
     }
 
     count = *gmMainLib_GetTrophyCount();
-    src = (s16*) ((arg0 << 1) + base);
-    dest = (s16*) ((s8*) Toy_sbss_804D6EDC + (offset = count << 1));
+    src = (s16*) ((arg0 << 1) + keys);
+    dest = (s16*) ((u8*) Toy_sbss_804D6EDC + (offset = count << 1));
     while (count-- != 0) {
         *dest-- = *src;
-        src += 3;
+        src += TY_SORT_KEY_COUNT;
     }
 }
 
@@ -4967,7 +4963,7 @@ void _Toy_8030FE48(void* arg0, s32 arg1)
     void* sym2;
     s32 var_r7;
     s32 start;
-    ptr = &_Toy_sbss_804D6E64[(s8) toy[0x195]];
+    ptr = &_Toy_sbss_804D6E64->key[(s8) toy[0x195]];
     *(s16*) (data + 0x154) = *(s16*) sel;
 
     goto loop_check;
@@ -5949,7 +5945,7 @@ void Toy_OnEnter_80311AB0(void* arg0)
     Toy_sbss_804D6EDC =
         HSD_MemAlloc(sizeof(*Toy_sbss_804D6EDC) * unk_array_len);
     _Toy_sbss_804D6E64 =
-        HSD_MemAlloc(sizeof(*_Toy_sbss_804D6E64) * unk_array_len * 3);
+        HSD_MemAlloc(sizeof(*_Toy_sbss_804D6E64) * unk_array_len);
     Toy_sbss_804D6EE0 = HSD_MemAlloc(sizeof(*Toy_sbss_804D6EE0));
     _Toy_sbss_804D6E6C = HSD_MemAlloc(sizeof(*_Toy_sbss_804D6E6C));
 
@@ -5957,8 +5953,7 @@ void Toy_OnEnter_80311AB0(void* arg0)
     memzero(Toy_sbss_804D6ED8, sizeof(*Toy_sbss_804D6ED8));
     memzero(Toy_sbss_804D6ED4, sizeof(TyLightArray_));
     memzero(Toy_sbss_804D6EDC, sizeof(*Toy_sbss_804D6EDC) * unk_array_len);
-    memzero(_Toy_sbss_804D6E64,
-            sizeof(*_Toy_sbss_804D6E64) * unk_array_len * 3);
+    memzero(_Toy_sbss_804D6E64, sizeof(*_Toy_sbss_804D6E64) * unk_array_len);
     memzero(Toy_sbss_804D6EE0, sizeof(*Toy_sbss_804D6EE0));
     memzero(_Toy_sbss_804D6E6C, 8);
 
