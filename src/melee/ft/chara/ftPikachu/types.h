@@ -16,13 +16,11 @@ struct ftPikachu_FighterVars {
 };
 
 typedef struct _ftPikachuAttributes {
-    float x0;
-    float x4;
-    float x8;
-    float xC;
-    float x10;
-    u32 x14;
-    u32 x18;
+    Vec2 specialn_spawn_offset;
+    Vec2 specialairn_spawn_offset;
+    float specialairn_landing_lag;
+    ItemKind specialn_itkind;
+    ItemKind specialairn_itkind;
     float x1C;
     float x20;
     float x24;
