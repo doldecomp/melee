@@ -417,7 +417,7 @@ void _tyList_80313464(TyListArg* arg)
 
     if (Toy_80304924(val) != 0) {
         arg->jobjs[1] =
-            _tyList_80313508((state)->gobj, "ToyFigureListMarkN_Top_joint",
+            _tyList_80313508(state->gobj, "ToyFigureListMarkN_Top_joint",
                              -8.4f, arg->x30, 0.0f);
     }
 }

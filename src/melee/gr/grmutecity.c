@@ -1225,7 +1225,7 @@ void grMuteCity_801F106C(s32 i)
     }
 }
 
-static inline f32 grMc_DistanceSquared(f32* a, f32* b)
+static inline f32 grMc_DistanceSquared(const f32* a, const f32* b)
 {
     return SQ(a[0] - b[0]) + SQ(a[1] - b[1]) + SQ(a[2] - b[2]);
 }
@@ -1766,7 +1766,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
                 if (!car->x22_flags.b0 && (u32) car->x24 == 0) {
                     Item_GObj* item_gobj = grMaterial_801C8CFC(
                         0, 2, car_gp, jobj, grMuteCity_801F1A0C,
-                        ((grMc_SpeedFn*) (grMc_803E3C6C))[car_idx], NULL);
+                        ((grMc_SpeedFn*) grMc_803E3C6C)[car_idx], NULL);
                     if (item_gobj != NULL) {
                         grMaterial_801C8DE0(item_gobj, 0.0f, 0.0f, -12.0f,
                                             0.0f, 0.0f, 2.0f, 15.0f);

@@ -110,8 +110,6 @@ typedef struct mnSnap_State {
 static mnSnap_State mnSnap_804A0A10;
 static void* mnSnap_thumb_imgs[4];
 
-void mnSnap_80254298(void);
-
 static inline s32* mnSnap_GetCardResult(void)
 {
     return &mnSnap_804A0A10.card_result;
@@ -172,7 +170,7 @@ static inline s32* mnSnap_GetLoadIdx(mnSnap_State* snap)
     return &snap->load_idx;
 }
 
-static inline void* mnSnap_GetThumbImage(s32* load_idx)
+static inline void* mnSnap_GetThumbImage(const s32* load_idx)
 {
     void* image = mnSnap_thumb_imgs[*load_idx % 4];
     return image;
@@ -183,7 +181,8 @@ static inline HSD_DObj* mnSnap_GetDObj(HSD_JObj* jobj)
     return jobj->u.dobj;
 }
 
-static inline HSD_JObj* mnSnap_GetThumbJObj(s32* load_idx, mnSnap_State* snap)
+static inline HSD_JObj* mnSnap_GetThumbJObj(const s32* load_idx,
+                                            mnSnap_State* snap)
 {
     return snap->thumb_jobjs[*load_idx];
 }
@@ -193,7 +192,8 @@ static inline HSD_ImageDesc* mnSnap_GetImageDesc(HSD_JObj* jobj)
     return jobj->u.dobj->next->next->mobj->tobj->imagedesc;
 }
 
-static inline s32 mnSnap_GetLoadPhotoIdx(mnSnap_State* snap, s32* load_idx)
+static inline s32 mnSnap_GetLoadPhotoIdx(mnSnap_State* snap,
+                                         const s32* load_idx)
 {
     return *load_idx + (snap->cur_page * 4);
 }
@@ -694,8 +694,8 @@ void mnSnap_8025409C(s32 dlg_type)
     mnSnap_804A0A10.right_btn = right;
 }
 
-static inline void mnSnap_RefreshSlotSelection(mnSnap_State* snap, s32* p50,
-                                               s32* p51)
+static inline void mnSnap_RefreshSlotSelection(mnSnap_State* snap,
+                                               const s32* p50, s32* p51)
 {
     mnSnap_80253964();
     mnSnap_80253E90(0);
@@ -801,7 +801,7 @@ s32 mnSnap_8025441C(u64 buttons)
     if (buttons & 0x200) {
         if (mnSnap_804A0A10.dlg_type == 0) {
             *result = 2;
-        } else if (((&mnSnap_804A0A10.left_btn))[mnSnap_804A0A10.btn_idx] ==
+        } else if ((&mnSnap_804A0A10.left_btn)[mnSnap_804A0A10.btn_idx] ==
                    mnSnap_804A0A10.no_jobj)
         {
             *result = 2;

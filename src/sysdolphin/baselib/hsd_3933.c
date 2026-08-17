@@ -101,8 +101,6 @@ static void (*lbl_8040A93C[32])(void*, void*) = {
 };
 
 extern int hsd_804D78A0;
-extern s32 hsd_804D78A8;
-extern s32 hsd_804D78AC;
 
 // @TODO: Currently 90.11% match - needs register allocation fix
 void hsd_80393440(void* request, void* response)

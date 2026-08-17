@@ -84,16 +84,7 @@ static char* gmRegend_AllstarThpFiles[] = {
 
 void gm_801A9B30_OnEnter(UNK_T unused)
 {
-    struct {
-        int x0;
-        int x4;
-        int x8;
-        int xC;
-        float x10;
-        float x14;
-        u8 pad[0x40 - 0x18];
-        u32 x40;
-    }* thp_disp;
+    HSD_SObj* thp_disp;
     s32 ckind;
     HSD_GObj* gobj;
     HSD_GObj* sobj_gobj;

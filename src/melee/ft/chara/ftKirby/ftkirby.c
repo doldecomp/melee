@@ -41,10 +41,9 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
-void ftAnim_80070458(Fighter* fp, CostumeTObjList*, u32 tobj_idx, float frame);
 void fn_800F9260(HSD_GObj*);
 void ftCommon_8007D9A0(Fighter* fp);
-void fn_8010B1F4(Fighter_GObj*);
+
 static void fn_801095DC(HSD_GObj*);
 static void fn_80109680(HSD_GObj*);
 static void fn_80109714(HSD_GObj*);
@@ -3722,7 +3721,7 @@ void ftKb_SpecialN_800F13F0(Fighter_GObj* gobj)
     ftKb_SpecialN_800EF69C(gobj, 0x16, ft_80459B88.hats[FTKIND_DRMARIO]);
 }
 
-u8* ftKb_SpecialN_800F1420(Fighter_GObj* gobj, u32* arg1)
+u8* ftKb_SpecialN_800F1420(Fighter_GObj* gobj, const u32* arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     FtPartsVisLookup* lookup = fp->x5AC.xC[4];

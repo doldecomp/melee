@@ -27,8 +27,6 @@
 #include <baselib/memory.h>
 #include <baselib/sislib.h>
 
-extern HSD_PadStatus HSD_PadCopyStatus[4];
-
 static mnSoundTest_GObj* mnSoundTest_804D6C40;
 static u8 mnSoundTest_804D6C44;
 static s32 mnSoundTest_804D6C48;
@@ -41,7 +39,6 @@ typedef struct {
     void* shapeanim_joint;
 } SoundTestModelDesc;
 
-void fn_8024B2B0(mnSoundTest_GObj*);
 static SoundTestModelDesc mnSoundTest_804A08C8;
 
 AnimLoopSettings vec_0 = {
@@ -499,7 +496,7 @@ static inline void mnSoundTest_ToggleView(soundtest_user_data* ud)
 }
 
 static inline void mnSoundTest_PlaySampleAnim(HSD_JObj* jobj, HSD_JObj** pj,
-                                              u8* p)
+                                              const u8* p)
 {
     s32 sound_kind;
     lb_80011E24(jobj, pj, 4, -1);

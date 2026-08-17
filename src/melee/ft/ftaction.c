@@ -1179,9 +1179,9 @@ void ftAction_80072CD8(Fighter_GObj* gobj, CommandInfo* cmd)
         return;
     }
 
-    ++(cmd)->u;
-    ++(cmd)->u;
-    ++(cmd)->u;
+    ++cmd->u;
+    ++cmd->u;
+    ++cmd->u;
 }
 
 void ftAction_80072E24(Fighter_GObj* gobj, CommandInfo* cmd)
@@ -1234,9 +1234,9 @@ void ftAction_80072E4C(Fighter_GObj* gobj, CommandInfo* cmd)
         }
     }
     if ((sp60 == 0) || (cmd_flag != 0)) {
-        ++(cmd)->u;
-        ++(cmd)->u;
-        ++(cmd)->u;
+        ++cmd->u;
+        ++cmd->u;
+        ++cmd->u;
     }
     ftCommon_8007EBAC(fp, 0x16U, 0U);
 }

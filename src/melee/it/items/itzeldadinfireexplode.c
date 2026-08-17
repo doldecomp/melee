@@ -132,7 +132,7 @@ bool itZeldadinfireexplode_UnkMotion0_Anim(Item_GObj* gobj)
 void itZeldadinfireexplode_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-#ifndef BUGFIX
+#ifdef MUST_MATCH
     ip->x40_vel.z = ip->x40_vel.y = ip->x40_vel.z = 0.0F;
 #else
     itResetVelocity(ip);

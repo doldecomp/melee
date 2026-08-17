@@ -919,7 +919,7 @@ typedef struct unk_struct_x14 {
     f32 unk10;
 } unk_struct_x14;
 
-static inline void grKongo_801D6AFC_apply(f32* deltas,
+static inline void grKongo_801D6AFC_apply(const f32* deltas,
                                           _struct_grKg_803E188C_0x18* entries)
 {
     int i;
@@ -1640,7 +1640,7 @@ HSD_GObj* grKongo_801D8078(HSD_GObj* gobj)
             it_8026B294(cur, &item_pos);
 
             dx = pos.x - item_pos.x;
-            dz = pos.z - ((0, item_pos.z));
+            dz = pos.z - (0, item_pos.z);
             dy = pos.y - item_pos.y;
             dx2 = dx * dx;
             dy2 = dy * dy;

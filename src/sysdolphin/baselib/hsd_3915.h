@@ -11,10 +11,10 @@
 /* 391664 */ f32 DrawASCII(int chr, float x, float y, GXColor* color);
 /* 391A04 */ void hsd_80391A04(float scale_x, float scale_y, int line_width);
 /* 391AC8 */ s32 hsd_80391AC8(char*, GXColor*, f32, f32);
-/* 391E18 */ void hsd_80391E18(u8* list, f32 x1, f32 y1, f32 x2, f32 y2);
+/* 391E18 */ void hsd_80391E18(const u8* list, f32 x1, f32 y1, f32 x2, f32 y2);
 /* 391F28 */ void hsd_80391F28(GXColor*, f32, f32, f32, f32, f32);
 /* 392194 */ void hsd_80392194(u8* dst, s32 flags, void* unused1,
-                               void* unused2, u8* src);
+                               void* unused2, const u8* src);
 /* 3921B8 */ void hsd_803921B8(void*, s32, s32, s32, s32, s32, s32, void*);
 /* 3922FC */ void hsd_803922FC(void*, s32, s32, s32, s32, s32, s32, s32,
                                void*);

@@ -643,8 +643,6 @@ void grVenom_802040AC(Ground_GObj* arg) {}
 
 void grVenom_802040B0(Ground_GObj* arg) {}
 
-StKind Stage_80225194(void);
-
 void fn_802040B4(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -1363,11 +1361,6 @@ s32 grVenom_80205DF8(Vec3* pos)
 }
 
 /// grVenom_80205E84
-
-float Stage_GetBlastZoneBottomOffset(void);
-float Stage_GetBlastZoneLeftOffset(void);
-float Stage_GetBlastZoneRightOffset(void);
-float Stage_GetBlastZoneTopOffset(void);
 
 s32 grVenom_80205E84(Vec3* pos)
 {

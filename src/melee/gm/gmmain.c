@@ -39,7 +39,6 @@
 #include <baselib/sislib.h>
 #include <baselib/video.h>
 
-extern GXRenderModeObj GXNtsc480IntDf;
 extern PadLibData HSD_PadLibData;
 extern s32* seed_ptr;
 

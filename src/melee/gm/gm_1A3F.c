@@ -5,6 +5,7 @@
 
 #include "db/db.h"
 #include "dolphin/vi/vifuncs.h"
+#include "gm/gm_1A36.h"
 #include "gm/gmscdata.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbdvd.h"

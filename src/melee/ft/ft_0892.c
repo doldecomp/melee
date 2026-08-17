@@ -178,29 +178,29 @@ void ft_80089768(Vec2* ptr)
     s->x4 = 0;
     s->x8 = 0.0f;
     s->xC = 6;
-    s->x10_b7 = 0;
-    s->x11_b4 = 0;
-    s->x10_b6 = 0;
-    s->x10_b5 = 0;
-    s->x10_b4 = 0;
-    s->x10_b3 = 0;
-    s->x10_b2 = 0;
-    s->x10_b1 = 0;
-    s->x10_b0 = 0;
-    s->x11_b7 = 0;
-    s->x11_b6 = 0;
-    s->x11_b5 = 0;
-    s->x11_b3 = 0;
+    s->x10_b7 = false;
+    s->x11_b4 = false;
+    s->x10_b6 = false;
+    s->x10_b5 = false;
+    s->x10_b4 = false;
+    s->x10_b3 = false;
+    s->x10_b2 = false;
+    s->x10_b1 = false;
+    s->x10_b0 = false;
+    s->x11_b7 = false;
+    s->x11_b6 = false;
+    s->x11_b5 = false;
+    s->x11_b3 = false;
 }
 
 void ft_80089824(Fighter_GObj* gobj)
 {
-    Fighter* fp;
-    s32 temp;
-
-    fp = GET_FIGHTER(gobj);
-    ((s32*) &temp)[0] = fp->x2070.x2070_int;
-    fp->x2070.x2070_int = ((s32*) &temp)[0];
+    Fighter* fp = GET_FIGHTER(gobj);
+    /// @todo Weird volatile noop
+#ifdef MUST_MATCH
+    volatile int temp = fp->x2070.x2070_int;
+    fp->x2070.x2070_int = temp;
+#endif
     ft_80089460(fp);
     fp->x2074.x2088 = plAttack_80037B08();
     pl_80037C60(gobj, 0);

@@ -48,7 +48,7 @@ void lb_8001C600(void)
     }
 }
 
-const char* lb_8001C658(void)
+static const char* lb_8001C658(void)
 {
     OSCalendarTime time;
     const char* gamedata_str;
@@ -70,7 +70,7 @@ const char* lb_8001C658(void)
     return _p(_1C);
 }
 
-int lb_8001C820(void)
+static int lb_8001C820(void)
 {
     int var_r0;
 
@@ -103,7 +103,7 @@ int lb_8001C8BC(void)
 
 #pragma push
 #pragma dont_inline on
-int lb_8001CAF4(void)
+enum_t lb_8001CAF4(void)
 {
     int temp_r5 = _p(x4);
     _p(x4) = 0;
@@ -128,7 +128,7 @@ int lb_8001CAF4(void)
 }
 #pragma pop
 
-void lb_8001CBAC(s32 arg0)
+void lb_8001CBAC(int arg0)
 {
     _p(x8) = arg0;
 }
@@ -154,7 +154,7 @@ void fn_8001CC30(int arg0)
     }
 }
 
-bool lb_8001CC4C(void)
+int lb_8001CC4C(void)
 {
     return lb_8001BA44(0, "SuperSmashBros0110290334", &_p(x4));
 }
@@ -232,12 +232,12 @@ u8 lb_8001CE78(void)
     return GM_COUNT;
 }
 
-void fn_8001CEC0(HSD_GObj* gobj)
+static void fn_8001CEC0(HSD_GObj* gobj)
 {
     HSD_JObjAnimAll(gobj->hsd_obj);
 }
 
-void fn_8001CEE4(HSD_GObj* gobj, int arg1)
+static void fn_8001CEE4(HSD_GObj* gobj, int arg1)
 {
     if (_p(x10) == 1) {
         HSD_GObj_803910D8(gobj, arg1);

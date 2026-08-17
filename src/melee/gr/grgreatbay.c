@@ -724,7 +724,15 @@ void grGreatBay_801F5914(void* user_data, int joint_id, CollData* coll,
     PAD_STACK(12);
 
     temp_r0 = coll->x34_flags.b1234;
-    if (temp_r0 == 1 || (s32) temp_r0 == 2 || temp_r0 == 3) {
+    if (temp_r0 == 1 ||
+    /// @todo Redundant cast necessary to match
+#ifdef MUST_MATCH
+        (s32) temp_r0 == 2 ||
+#else
+        temp_r0 == 2 ||
+#endif
+        temp_r0 == 3)
+    {
         gp->u.greatbay.xD4 = ((u32) coll->env_flags & Collide_LedgeGrabMask);
         gp->u.greatbay.xD8 += 1;
         gp->u.greatbay.xE0 += coll_x50 / 100.0f;

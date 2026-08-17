@@ -151,7 +151,6 @@
 /* 1661E0 */ s32 fn_801661E0(MatchEnd*);
 /* 166378 */ void gm_80166378(struct lbl_8046B6A0_24C_t*);
 /* 166A98 */ long gm_80166A98(MatchEnd*, u8, s8, u8, s8, u8, s8, u8, u8, u8);
-/* 166CBC */ s32 gmCamera_801A2640(void);
 /* 166CBC */ u8 fn_80166CBC(MatchEnd*, ssize_t index);
 /* 166CCC */ void gm_80166CCC(MatchEnd*, MatchEnd*);
 /* 167140 */ bool gm_80167140(MatchEnd*);
@@ -209,7 +208,7 @@
 /* 169540 */ void* gm_80169540(void);
 /* 169550 */ void fn_80169550(int slot);
 /* 169574 */ void fn_80169574(ssize_t size, s8* buf);
-/* 1695BC */ void fn_801695BC(u8, u8, u8, u8*, u8*);
+/* 1695BC */ void fn_801695BC(u8, u8, u8, const u8*, u8*);
 /* 1697FC */ void fn_801697FC(signed char, signed char, signed char,
                               signed char, signed char*);
 /* 16989C */ void fn_8016989C(unsigned char*, u8, u8, u8*, u8*);

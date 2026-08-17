@@ -220,7 +220,7 @@ void lbDvd_80017960(void)
     }
 }
 
-static void lbDvd_80017A80(void)
+static void lbDvd_80017A80(u32 unused)
 {
     preloadCache.persistent_heap = 6;
     lbDvd_80017CC4();

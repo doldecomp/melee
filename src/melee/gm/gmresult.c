@@ -36,7 +36,6 @@ extern HSD_Archive* lbl_804D65B8;
 #include "dolphin/gx/GXStruct.h"
 #include "dolphin/types.h"
 #include "gm/gm_1601.h"
-#include "gm/types.h"
 #include "if/ifcoget.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbarchive.h"

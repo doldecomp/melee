@@ -441,8 +441,6 @@ void ftKb_LkSpecialNStart_Anim(Fighter_GObj* gobj)
     }
 }
 
-extern ftLk_SpecialN_Vec3Group const ftKb_Init_803B7548;
-
 void ftKb_LkSpecialNLoop_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

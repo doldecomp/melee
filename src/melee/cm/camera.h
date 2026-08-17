@@ -22,7 +22,6 @@
 /* 02928C */ bool Camera_8002928C(CmSubject*);
 /* 0293E0 */ void Camera_800293E0(void);
 /* 02958C */ void Camera_8002958C(CameraBounds*, CameraTransformState*);
-/* 029AAC */ void Camera_80028F5C(CmSubject*, s32);
 /* 029BC4 */ void Camera_80029BC4(CameraBounds*, CameraTransformState*);
 /* 029C88 */ void Camera_80029C88(CameraBounds*, CameraTransformState*, f32);
 /* 029CF8 */ void Camera_80029CF8(CameraBounds*, CameraTransformState*);

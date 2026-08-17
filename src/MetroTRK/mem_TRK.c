@@ -1,7 +1,5 @@
 #include <MetroTRK/mem_TRK.h>
 
-void TRK_fill_mem(void* dest, int val, size_t count);
-
 void* TRK_memcpy(void* dst, const void* src, unsigned long n)
 {
     const unsigned char* s = (const unsigned char*) src - 1;

@@ -43,8 +43,6 @@ void grLib_801C99C0(s32, s32, HSD_JObj*, s32);
 
 // forward declare for B4B8
 void efLib_render_callback(HSD_GObj*, int);
-void efLib_particles_proc_main(HSD_GObj*);
-void efLib_particles_proc_aux(HSD_GObj*);
 
 // Particle linkNo skip masks (bits 16+) for hsd_8039CEAC / hsd_8039EE24
 // Set bit = skip processing for that linkNo
@@ -90,7 +88,7 @@ static inline EF_Effect*
 eflib_create_effect_and_attach(int gfx_id, HSD_GObj* gobj, HSD_JObj* jobj)
 {
     EF_Effect* effect = efLib_Create(gfx_id, gobj);
-    if ((effect) != NULL) {
+    if (effect != NULL) {
         HSD_JObj* effect_jobj;
         if ((effect_jobj = GET_JOBJ(effect->gobj)) == NULL) {
             HSD_GObjPLink_80390228(effect->gobj);
@@ -541,7 +539,7 @@ EF_Effect* efLib_Create(int gfx_id, HSD_GObj* parent_gobj)
 EF_Effect* efLib_Create_Attach(u32 gfx_id, HSD_GObj* gobj, HSD_JObj* jobj)
 {
     EF_Effect* effect = efLib_Create(gfx_id, gobj);
-    if ((effect) != NULL) {
+    if (effect != NULL) {
         HSD_JObj* effect_jobj;
         if ((effect_jobj = GET_JOBJ(effect->gobj)) == NULL) {
             HSD_GObjPLink_80390228(effect->gobj);
@@ -584,10 +582,11 @@ EF_Effect* efLib_Create_Attach_Scale(u32 gfx_id, HSD_GObj* gobj,
 EF_Effect* efLib_Create_AttachChild_Scale(u32 gfx_id, HSD_GObj* gobj,
                                           HSD_JObj* jobj)
 {
-    // --- PLS DONT INLINE ------------------------------------------------
+    /// @todo Prevents inline
+#ifdef MUST_MATCH
     extern EF_Effect* efLib_Create_Attach(u32 gfx_id, HSD_GObj * gobj,
                                           HSD_JObj * jobj);
-    // --------------------------------------------------------------------
+#endif
 
     EF_Effect* effect = efLib_Create_Attach(gfx_id, gobj, jobj);
 
@@ -608,10 +607,11 @@ EF_Effect* efLib_Create_AttachChild_Scale(u32 gfx_id, HSD_GObj* gobj,
 EF_Effect* efLib_Create_Attach_Scale_FacingDir(u32 gfx_id, HSD_GObj* gobj,
                                                HSD_JObj* jobj)
 {
-    // --- PLS DONT INLINE ------------------------------------------------
+    /// @todo Prevents inline
+#ifdef MUST_MATCH
     extern EF_Effect* efLib_Create_Attach(u32 gfx_id, HSD_GObj * gobj,
                                           HSD_JObj * jobj);
-    // --------------------------------------------------------------------
+#endif
 
     EF_Effect* effect = efLib_Create_Attach(gfx_id, gobj, jobj);
     PAD_STACK(4);
@@ -774,7 +774,7 @@ HSD_Generator* efLib_CreateGenerator_Attach_AddAppSRT(s32 gfx_id,
     HSD_Generator* generator = hsd_8039EFAC(0, gfx_id / 1000, gfx_id, jobj);
     if (generator != NULL) {
         HSD_psAppSRT* appsrt;
-        if ((appsrt = (generator)->appsrt) == NULL) {
+        if ((appsrt = generator->appsrt) == NULL) {
             appsrt = psAddGeneratorAppSRT_begin(generator, 0);
         }
         if (appsrt != NULL) {
@@ -783,8 +783,8 @@ HSD_Generator* efLib_CreateGenerator_Attach_AddAppSRT(s32 gfx_id,
             hsd_8039D4DC(generator);
             return NULL;
         }
-        (generator)->type &= 0xFFFFF9FF;
-        (generator)->type |= PSAPPSRT_UNK_B11;
+        generator->type &= 0xFFFFF9FF;
+        generator->type |= PSAPPSRT_UNK_B11;
     }
     return generator;
 }

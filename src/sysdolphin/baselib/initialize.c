@@ -23,7 +23,6 @@
 #include <dolphin/vi.h>
 
 extern OSHeapHandle HSD_Synth_804D6018;
-extern GXRenderModeObj GXNtsc480IntDf;
 
 static void* FrameBuffer[HSD_VI_XFB_MAX];
 static HSD_MemReport memReport;
@@ -269,7 +268,7 @@ static void HSD_ObjInit(void)
     HSD_ZListInitAllocData();
 }
 
-#ifndef BUGFIX
+#ifdef MUST_MATCH
 static char str_pix_fmt_neq_gx_pf_rgb565_z16[] = "pix_fmt != GX_PF_RGB565_Z16";
 #endif
 

@@ -800,7 +800,7 @@ void grIzumi_801CCEA0(HSD_GObj* gobj, int renderpass)
 
 static inline bool check_flag_4020(HSD_JObj* jobj)
 {
-    if ((jobj->flags & (0x4020)) != 0) {
+    if ((jobj->flags & 0x4020) != 0) {
         return false;
     } else {
         return true;

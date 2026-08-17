@@ -38,7 +38,7 @@ static u32 TRK_ISR_OFFSETS[NUM_EXCEPTIONS] = {
 };
 
 extern int TRK_main(void);
-extern int InitMetroTRKCommTable(int hwId);
+
 void __TRK_copy_vectors(void);
 
 SECTION_INIT void __TRK_reset(void)

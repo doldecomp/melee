@@ -1051,8 +1051,7 @@ void it_8028B850(HSD_GObj*, float);
 void it_8028B648(HSD_GObj*, float);
 void it_8028B6B0(HSD_GObj*, float);
 void it_8028B618(HSD_GObj*, float);
-void it_802BDD40(HSD_GObj*, float);
-void it_802BDDB4(HSD_GObj*, float);
+
 static void (*parasol_table_1[7])(HSD_GObj*, float) = {
     it_8028B718, it_8028B780, it_8028B7E8, it_8028B850,
     it_8028B648, it_8028B6B0, it_8028B618,

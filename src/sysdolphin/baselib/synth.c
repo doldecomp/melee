@@ -1204,7 +1204,6 @@ void HSD_Synth_8038AD74(u32 offset, uintptr_t src)
                       HSD_SynthResetStreamCounters, 0);
 }
 
-extern s32 HSD_Synth_804D7764;
 extern u32 HSD_Synth_804D7770;
 extern u32 HSD_Synth_804D7774;
 
@@ -1357,9 +1356,6 @@ void HSD_SynthPStreamFirstHakoHeaderCallback(void)
                       lbl_804C4540[HSD_Synth_804D7768].x0, 0x23, 0,
                       (HSD_DevComCallback) HSD_Synth_8038B120, 0);
 }
-
-extern u32 HSD_Synth_804D7770;
-extern u32 HSD_Synth_804D7774;
 
 void HSD_SynthPStreamHeaderCallback(int arg0, int arg1, void* arg2,
                                     bool cancelflag)

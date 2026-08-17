@@ -443,9 +443,10 @@ void ftCo_800D71D8(Fighter_GObj* gobj)
     }
 }
 
+extern f32 ftCo_804D9018;
+
 bool ftCo_800D730C(Fighter_GObj* gobj, bool arg1)
 {
-    extern f32 ftCo_804D9018;
     s32 unused1;
     struct Fighter_x2D0_t* x2d0;
     s32 canJump;
@@ -534,7 +535,6 @@ static inline struct Fighter_x2D0_t* ftCo_800D74A4_inline(Fighter* fp)
 
 void ftCo_800D74A4(Fighter_GObj* gobj)
 {
-    extern f32 ftCo_804D9018;
     Vec3 vel;
     Fighter* fp;
     struct Fighter_x2D0_t* tmp;
@@ -618,11 +618,12 @@ static FtMotionId fn_800D769C(Fighter* ft, FtMotionId msid)
     return msid;
 }
 
+extern int ftCo_804D9020;
+extern int ftCo_804D9024;
+
 void ft_800D76B8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    extern int ftCo_804D9020;
-    extern int ftCo_804D9024;
 
     if (it_8026B594(fp->item_gobj) == false) {
         Fighter_ChangeMotionState(
@@ -655,8 +656,6 @@ void ft_800D76B8(Fighter_GObj* gobj)
 void ft_800D7770(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    extern int ftCo_804D9020;
-    extern int ftCo_804D9024;
 
     if (it_8026B594(fp->item_gobj) == false) {
         Fighter_ChangeMotionState(gobj, ftCo_MS_ItemScopeAirStart, Ft_MF_None,
@@ -761,7 +760,6 @@ void fn_800D79B4(HSD_GObj* gobj, void (*cb_ground)(HSD_GObj*),
 
     // Use this specific cast to generate the correct 'lfs' instruction for the
     // global int
-    extern int ftCo_804D9024;
 
     if (fp->item_gobj == NULL) {
         return;
@@ -863,13 +861,14 @@ void fn_800D7BDC(Fighter_GObj* gobj)
 
 #pragma pop
 
+extern int ftCo_804D9028;
+extern int ftCo_804D902C;
+
 #pragma push
 #pragma dont_inline on
 
 void fn_800D7C60(Fighter_GObj* gobj)
 {
-    extern int ftCo_804D9028;
-    extern int ftCo_804D902C;
     Fighter* fp = gobj->user_data;
     Fighter_GObj* temp_gobj;
     FtMotionId msid;
@@ -892,7 +891,6 @@ void fn_800D7C60(Fighter_GObj* gobj)
 
 void fn_800D7CEC(Fighter_GObj* gobj)
 {
-    extern int ftCo_804D9028;
     Fighter* fp = gobj->user_data;
     FtMotionId msid;
 
@@ -912,7 +910,6 @@ void fn_800D7CEC(Fighter_GObj* gobj)
 
 void fn_800D7D70(Fighter_GObj* gobj)
 {
-    extern int ftCo_804D9028;
     Fighter* fp = gobj->user_data;
     FtMotionId msid;
 
@@ -1038,13 +1035,14 @@ void fn_800D80F4(Fighter_GObj* gobj)
     }
 }
 
+extern int ftCo_804D9030;
+extern int ftCo_804D9034;
+
 #pragma push
 #pragma dont_inline on
 
 void fn_800D8140(Fighter_GObj* gobj, int arg1)
 {
-    extern int ftCo_804D9030;
-    extern int ftCo_804D9034;
     Fighter* fp = gobj->user_data;
     FtMotionId msid;
     PAD_STACK(8);
@@ -1070,8 +1068,6 @@ void fn_800D8140(Fighter_GObj* gobj, int arg1)
 
 void fn_800D81D0(Fighter_GObj* gobj, int arg1)
 {
-    extern int ftCo_804D9030;
-    extern int ftCo_804D9034;
     Fighter* fp = gobj->user_data;
     FtMotionId msid;
     PAD_STACK(8);
@@ -1181,7 +1177,6 @@ void ftCo_ItemScopeAirFire_Coll(Fighter_GObj* gobj)
 
 static void fn_800D84D4(Fighter_GObj* gobj, int arg1)
 {
-    extern int ftCo_804D9030;
     Fighter* fp = gobj->user_data;
     Vec3 sp20;
     Vec3 sp14;
@@ -2036,7 +2031,7 @@ void fn_800DA054(Fighter_GObj* gobj)
             if (v > spd) {
                 v = spd;
             }
-            fp->gr_vel = (dx > 0.0f) ? (v) : (-v);
+            fp->gr_vel = (dx > 0.0f) ? v : (-v);
         }
     }
 }

@@ -62,7 +62,7 @@ void OSReport_PrintSpaces(s32 count)
     }
 }
 
-#ifndef BUGFIX
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
 static char unused1[] = "entry %d <null>\n";
@@ -470,7 +470,7 @@ HSD_ClassInfo* hsdSearchClassInfo(const char* class_name)
     return NULL;
 }
 
-#ifndef BUGFIX
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
 static char unused5[] = "info_hash";

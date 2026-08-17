@@ -7,6 +7,7 @@
 #include "gm_unsplit.h"
 
 #include "db/db.h"
+#include "gm/gmmain_lib.h"
 #include "gm/gmscdata.h"
 #include "if/ifcoget.h"
 #include "lb/lb_013B.h"

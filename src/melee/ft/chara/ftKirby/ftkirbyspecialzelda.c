@@ -147,7 +147,7 @@ void ftKb_ZdSpecialAirN_Anim(Fighter_GObj* gobj)
         ftColl_CreateReflectHit(gobj, &da->specialn_zd_reflectdesc,
                                 fn_80105FEC);
     }
-    if (fp->cmd_vars[0] == ((0, 0))) {
+    if (fp->cmd_vars[0] == (0, 0)) {
         fp->reflecting = new_var;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {

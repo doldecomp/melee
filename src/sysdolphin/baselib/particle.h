@@ -11,8 +11,9 @@
 #include <sysdolphin/baselib/generator.h>
 
 /* 3983A4 */ void hsd_803983A4(HSD_Generator*);
-/* 3984F4 */ void psInitDataBankLoad(int bank, int* cmdBank, int* texBank,
-                                     u32* ref, int* formBank);
+/* 3984F4 */ void psInitDataBankLoad(int bank, const int* cmdBank,
+                                     const int* texBank, const u32* ref,
+                                     const int* formBank);
 /* 398614 */ void psInitDataBankLocate(HSD_Archive* cmdBank,
                                        HSD_Archive* texBank, int* formBank);
 /* 3989A0 */ void psInitDataBankRelocate(int* cmdBank, int* texBank,

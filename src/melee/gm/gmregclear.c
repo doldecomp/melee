@@ -1131,7 +1131,7 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
     return 1;
 }
 
-s32 fn_8017D9C0(u8* arg0, u8* arg1)
+s32 fn_8017D9C0(const u8* arg0, const u8* arg1)
 {
     u8* base;
     u8* p;

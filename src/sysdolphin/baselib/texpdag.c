@@ -6,7 +6,7 @@
 
 #include <string.h>
 
-int assign_reg(int num, u32* unused, HSD_TExpDag* list, int* order)
+int assign_reg(int num, u32* unused, HSD_TExpDag* list, const int* order)
 {
     u8 color_refs[4] = { 0 };
     u8 alpha_refs[4] = { 0 };
@@ -300,7 +300,7 @@ static void make_dependancy_mtx(int num, HSD_TExpDag* list, u32* dep_mtx)
     }
 }
 
-void make_full_dependancy_mtx(int num, u32* dep, u32* full)
+void make_full_dependancy_mtx(int num, const u32* dep, u32* full)
 {
     int i, j, k;
     bool changed;
@@ -1260,7 +1260,12 @@ int HSD_TExpSimplify(HSD_TExp* texp_)
 
 int HSD_TExpSimplify2(HSD_TExp* texp_)
 {
+/// @todo Redundant cast and assignment matches
+#ifdef MUST_MATCH
     HSD_TExp* texp = (HSD_TExp*) texp_;
+#else
+    HSD_TExp* texp = texp_;
+#endif
     HSD_TExp* src_exp;
     u8 src_sel;
     int i;

@@ -14,7 +14,7 @@
 #include "baselib/memory.h"
 #include "gm/gm_1601.h"
 #include "gm/gm_16F1.h"
-#include "gm/gm_1A3F.h"
+#include "gm/gm_1A36.h"
 #include "gm/gmmain_lib.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"

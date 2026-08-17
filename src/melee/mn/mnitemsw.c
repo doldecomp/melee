@@ -26,7 +26,7 @@
 
 extern StaticModelDesc MenMainCursorIs_Top;
 extern StaticModelDesc MenMainConIs_Top;
-extern HSD_GObj* mnItemSw_804D6BE8;
+
 extern u8 mn_804D6BB5;
 
 struct MnItemSwTable {

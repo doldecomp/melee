@@ -25,6 +25,7 @@ let
     "-requireprotos"
     "-warn" "off"
     "-c"
+    "-DMUST_MATCH"
   ];
 in
 stdenvNoCC.mkDerivation {

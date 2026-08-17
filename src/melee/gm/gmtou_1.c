@@ -4,7 +4,6 @@
 #include "gm_1A3F.h"
 #include "gm_1A45.h"
 #include "gm_unsplit.h"
-#include "gmtou_1.h"
 #include "gmtoulib.h"
 #include "types.h"
 
@@ -29,10 +28,7 @@
 #include <dolphin/os.h>
 #include <baselib/controller.h>
 #include <baselib/dobj.h>
-#include <baselib/fog.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
@@ -2464,8 +2460,6 @@ void fn_8019B81C(s32* state)
     *state = 0x1C;
     lbl_804799D8.x0 = 0;
 }
-
-extern SceneDesc* lbl_804D6670;
 
 void fn_8019B860(TmData* tm)
 {

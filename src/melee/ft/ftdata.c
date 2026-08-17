@@ -14,6 +14,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCaptain/ftCa_Init.h"
+#include "ftCaptain/ftCa_SpecialHi.h"
 #include "ftCaptain/ftCa_SpecialLw.h"
 #include "ftCaptain/ftCa_SpecialN.h"
 #include "ftCaptain/ftCa_SpecialS.h"
@@ -45,6 +46,7 @@
 #include "ftKoopa/ftKp_SpecialHi.h"
 #include "ftKoopa/ftKp_SpecialLw.h"
 #include "ftKoopa/ftKp_SpecialN.h"
+#include "ftKoopa/ftKp_SpecialS.h"
 #include "ftLink/ftLk_Init.h"
 #include "ftLink/ftLk_SpecialHi.h"
 #include "ftLink/ftLk_SpecialLw.h"
@@ -132,8 +134,6 @@
 
 #include <baselib/debug.h>
 #include <baselib/objalloc.h>
-
-extern int ft_8045996C[FTKIND_MAX];
 
 /* 3C0EC0 */ struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX] = {
     { &lbl_804599F0, 5 },       // Mario

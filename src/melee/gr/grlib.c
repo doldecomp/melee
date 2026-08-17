@@ -189,10 +189,6 @@ void grLib_801C9A70(enum_t arg0, Vec3* v)
         break;
     default:
         HSD_ASSERT(290, 0);
-#ifdef BUGFIX
-        // Asserts 0 but the compiler doesn't know that.
-        return;
-#endif
     }
     *v = grLib_8049EF58[i];
 }

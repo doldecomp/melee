@@ -876,7 +876,7 @@ bool it_80277544(Item_GObj* item_gobj)
     item = GET_ITEM(item_gobj);
     if (item->xD5C != 0U && it_80277040(item_gobj) != 0 &&
         ((PSVECAdd(&item->x40_vel, &item->x70_nudge, &sp10),
-          ((SQ(sp10.x) + SQ(sp10.y))) >= it_804D6D28->xCC) ||
+          (SQ(sp10.x) + SQ(sp10.y)) >= it_804D6D28->xCC) ||
          (item->xD5C == 2U)))
     {
         item->xDC8_word.flags.x1F = 1;
