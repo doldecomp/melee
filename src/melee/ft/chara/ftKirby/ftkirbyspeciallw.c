@@ -720,12 +720,50 @@ void ftKb_SpecialLwEnd_Coll(Fighter_GObj* gobj)
     ftPartSetRotX(fp, 0, 0.0f);
 }
 
+static inline void ftKb_SpecialLw_SetStoneVecs(Fighter_GObj* gobj, Fighter* fp,
+                                               ftKb_DatAttrs* da)
+{
+    Fighter* fp3;
+    f32 angle;
+    fp3 = GET_FIGHTER(gobj);
+    angle = fp->mv.kb.specialhi.xC4;
+    fp3->mv.kb.speciallw.x54[0].x = fp3->mv.kb.speciallw.x24[0].x =
+        fp->mv.kb.speciallw.x18.x;
+    fp3->mv.kb.speciallw.x54[0].y = fp3->mv.kb.speciallw.x24[0].y =
+        fp->mv.kb.speciallw.x18.y;
+    fp3->mv.kb.speciallw.x54[0].z = fp3->mv.kb.speciallw.x24[0].z =
+        fp->mv.kb.speciallw.x18.z;
+    fp3->mv.kb.speciallw.x88[4] = fp3->mv.kb.speciallw.x88[0] = angle;
+    {
+        s32 i;
+        for (i = 1; i < 4; i++) {
+            fp3->mv.kb.speciallw.x54[i].x = fp3->mv.kb.speciallw.x24[i].x =
+                fp->mv.kb.speciallw.x18.x;
+            fp3->mv.kb.speciallw.x54[i].y = fp3->mv.kb.speciallw.x24[i].y =
+                fp->mv.kb.speciallw.x18.y;
+            fp3->mv.kb.speciallw.x54[i].z = fp3->mv.kb.speciallw.x24[i].z =
+                fp->mv.kb.speciallw.x18.z;
+            fp3->mv.kb.speciallw.x88[i + 4] = fp3->mv.kb.speciallw.x88[i] =
+                angle;
+        }
+    }
+    fp3->mv.kb.speciallw.x18.x = fp->mv.kb.speciallw.x18.x;
+    fp3->mv.kb.speciallw.x18.y = fp->mv.kb.speciallw.x18.y;
+    fp3->mv.kb.speciallw.x18.z = fp->mv.kb.speciallw.x18.z;
+    fp3->mv.kb.specialhi.xC4 = angle;
+    angle = fp->mv.kb.specialhi.xC4;
+    if (angle < 0.0f) {
+        angle = -angle;
+    }
+    if (angle >= da->speciallw_min_slant_angle_slide) {
+        fp->gr_vel = fp->mv.co.common.x18 * da->speciallw_slide_max_speed;
+    }
+}
+
 void ftKb_SpecialAirLwStart_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    f32 angle;
     Fighter* fp2;
-    Fighter* fp3;
     s32 temp;
     ftKb_DatAttrs* da = fp->dat_attrs;
     struct ftKb_Init_803CB490_layout* p =
@@ -747,51 +785,7 @@ void ftKb_SpecialAirLwStart_Coll(Fighter_GObj* gobj)
         ft_PlaySFX(fp, 0x222E7, 0x7F, 0x40);
         Camera_80030E44(4, &fp->cur_pos);
         ftCommon_8007EBAC(fp, 0xE, 0x14);
-        fp3 = GET_FIGHTER(gobj);
-        angle = fp->mv.kb.specialhi.xC4;
-        fp3->mv.kb.speciallw.x54[0].x = fp3->mv.kb.speciallw.x24[0].x =
-            fp->mv.kb.speciallw.x18.x;
-        fp3->mv.kb.speciallw.x54[0].y = fp3->mv.kb.speciallw.x24[0].y =
-            fp->mv.kb.speciallw.x18.y;
-        fp3->mv.kb.speciallw.x54[0].z = fp3->mv.kb.speciallw.x24[0].z =
-            fp->mv.kb.speciallw.x18.z;
-        fp3->mv.kb.speciallw.x88[4] = fp3->mv.kb.speciallw.x88[0] = angle;
-        fp3->mv.kb.speciallw.x54[1].x = fp3->mv.kb.speciallw.x24[1].x =
-            fp->mv.kb.speciallw.x18.x;
-        fp3->mv.kb.speciallw.x54[1].y = fp3->mv.kb.speciallw.x24[1].y =
-            fp->mv.kb.speciallw.x18.y;
-        fp3->mv.kb.speciallw.x54[1].z = fp3->mv.kb.speciallw.x24[1].z =
-            fp->mv.kb.speciallw.x18.z;
-        fp3->mv.kb.speciallw.x88[5] = fp3->mv.kb.speciallw.x88[1] = angle;
-        {
-            s32 vi = 1;
-            s32 ai = 1;
-            for (; vi < 3;) {
-                fp3->mv.kb.speciallw.x54[vi + 1].x =
-                    fp3->mv.kb.speciallw.x24[vi + 1].x =
-                        fp->mv.kb.speciallw.x18.x;
-                fp3->mv.kb.speciallw.x54[ai + 1].y =
-                    fp3->mv.kb.speciallw.x24[ai + 1].y =
-                        fp->mv.kb.speciallw.x18.y;
-                vi++;
-                fp3->mv.kb.speciallw.x54[vi].z =
-                    fp3->mv.kb.speciallw.x24[vi].z = fp->mv.kb.speciallw.x18.z;
-                ai++;
-                fp3->mv.kb.speciallw.x88[ai + 4] =
-                    fp3->mv.kb.speciallw.x88[ai] = angle;
-            }
-        }
-        fp3->mv.kb.speciallw.x18.x = fp->mv.kb.speciallw.x18.x;
-        fp3->mv.kb.speciallw.x18.y = fp->mv.kb.speciallw.x18.y;
-        fp3->mv.kb.speciallw.x18.z = fp->mv.kb.speciallw.x18.z;
-        fp3->mv.kb.specialhi.xC4 = angle;
-        angle = fp->mv.kb.specialhi.xC4;
-        if (angle < 0.0f) {
-            angle = -angle;
-        }
-        if (angle >= da->speciallw_min_slant_angle_slide) {
-            fp->gr_vel = fp->mv.co.common.x18 * da->speciallw_slide_max_speed;
-        }
+        ftKb_SpecialLw_SetStoneVecs(gobj, fp, da);
     } else {
         fp2 = GET_FIGHTER(gobj);
         fp2->mv.kb.speciallw.x24[0] = p->vec;
@@ -821,9 +815,7 @@ void ftKb_SpecialAirLw_Coll(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
     Fighter* fp2;
-    Fighter* fp3;
     s32 temp;
-    f32 angle;
     struct ftKb_Init_803CB490_layout* p =
         (struct ftKb_Init_803CB490_layout*) ftKb_Init_803CB490;
     PAD_STACK(16);
@@ -844,51 +836,7 @@ void ftKb_SpecialAirLw_Coll(Fighter_GObj* gobj)
         ft_PlaySFX(fp, 0x222E7, 0x7F, 0x40);
         Camera_80030E44(4, &fp->cur_pos);
         ftCommon_8007EBAC(fp, 0xE, 0x14);
-        fp3 = GET_FIGHTER(gobj);
-        angle = fp->mv.kb.specialhi.xC4;
-        fp3->mv.kb.speciallw.x54[0].x = fp3->mv.kb.speciallw.x24[0].x =
-            fp->mv.kb.speciallw.x18.x;
-        fp3->mv.kb.speciallw.x54[0].y = fp3->mv.kb.speciallw.x24[0].y =
-            fp->mv.kb.speciallw.x18.y;
-        fp3->mv.kb.speciallw.x54[0].z = fp3->mv.kb.speciallw.x24[0].z =
-            fp->mv.kb.speciallw.x18.z;
-        fp3->mv.kb.speciallw.x88[4] = fp3->mv.kb.speciallw.x88[0] = angle;
-        fp3->mv.kb.speciallw.x54[1].x = fp3->mv.kb.speciallw.x24[1].x =
-            fp->mv.kb.speciallw.x18.x;
-        fp3->mv.kb.speciallw.x54[1].y = fp3->mv.kb.speciallw.x24[1].y =
-            fp->mv.kb.speciallw.x18.y;
-        fp3->mv.kb.speciallw.x54[1].z = fp3->mv.kb.speciallw.x24[1].z =
-            fp->mv.kb.speciallw.x18.z;
-        fp3->mv.kb.speciallw.x88[5] = fp3->mv.kb.speciallw.x88[1] = angle;
-        {
-            s32 vi = 1;
-            s32 ai = 1;
-            for (; vi < 3;) {
-                fp3->mv.kb.speciallw.x54[vi + 1].x =
-                    fp3->mv.kb.speciallw.x24[vi + 1].x =
-                        fp->mv.kb.speciallw.x18.x;
-                fp3->mv.kb.speciallw.x54[ai + 1].y =
-                    fp3->mv.kb.speciallw.x24[ai + 1].y =
-                        fp->mv.kb.speciallw.x18.y;
-                vi++;
-                fp3->mv.kb.speciallw.x54[vi].z =
-                    fp3->mv.kb.speciallw.x24[vi].z = fp->mv.kb.speciallw.x18.z;
-                ai++;
-                fp3->mv.kb.speciallw.x88[ai + 4] =
-                    fp3->mv.kb.speciallw.x88[ai] = angle;
-            }
-        }
-        fp3->mv.kb.speciallw.x18.x = fp->mv.kb.speciallw.x18.x;
-        fp3->mv.kb.speciallw.x18.y = fp->mv.kb.speciallw.x18.y;
-        fp3->mv.kb.speciallw.x18.z = fp->mv.kb.speciallw.x18.z;
-        fp3->mv.kb.specialhi.xC4 = angle;
-        angle = fp->mv.kb.specialhi.xC4;
-        if (angle < 0.0f) {
-            angle = -angle;
-        }
-        if (angle >= da->speciallw_min_slant_angle_slide) {
-            fp->gr_vel = fp->mv.co.common.x18 * da->speciallw_slide_max_speed;
-        }
+        ftKb_SpecialLw_SetStoneVecs(gobj, fp, da);
     } else {
         fp2 = GET_FIGHTER(gobj);
         fp2->mv.kb.speciallw.x24[0] = p->vec;
