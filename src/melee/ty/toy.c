@@ -1333,13 +1333,12 @@ void Toy_803067BC(s32 arg0, s32 arg1)
     s32 i;
     s16* dest;
     s32 count;
-    s32 j;
-    s16* base;
+    s32 base;
 
-    base = _Toy_sbss_804D6E64;
+    base = (s32) _Toy_sbss_804D6E64;
 
     if (arg1 == 0) {
-        src = base + arg0;
+        src = (s16*) ((arg0 << 1) + base);
         i = 0;
         offset = 0;
         while (i < *gmMainLib_GetTrophyCount()) {
@@ -1352,14 +1351,11 @@ void Toy_803067BC(s32 arg0, s32 arg1)
     }
 
     count = *gmMainLib_GetTrophyCount();
-    src = base + arg0;
-    j = count;
-    dest = Toy_sbss_804D6EDC + count;
-    if (count != 0) {
-        for (; j != 0; j--) {
-            *dest-- = *src;
-            src += 3;
-        }
+    src = (s16*) ((arg0 << 1) + base);
+    dest = (s16*) ((s8*) Toy_sbss_804D6EDC + (offset = count << 1));
+    while (count-- != 0) {
+        *dest-- = *src;
+        src += 3;
     }
 }
 
