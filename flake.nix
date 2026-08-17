@@ -40,7 +40,7 @@
             ./configure.py ${toString packages.default.configureFlags}
           '';
           packages = packages.default.nativeBuildInputs ++ [
-            legacyPackages.clang-format-minimal
+            legacyPackages.clang-tools-minimal
             legacyPackages.clang.cc.python
             (legacyPackages.python3.withPackages (ps: with ps; [ m2c pcpp pyelftools ]))
           ];
