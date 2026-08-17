@@ -20,8 +20,6 @@
 
 #include <baselib/gobj.h>
 
-void ft_8007C224(HSD_GObj* gobj);
-
 void ft_8007C114(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;

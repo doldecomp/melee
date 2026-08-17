@@ -3232,8 +3232,6 @@ void ftColl_8007BA0C(Fighter_GObj* gobj)
     }
 }
 
-extern int ft_804D6570;
-
 static inline int ftColl_GetHitStatus(Fighter* fp)
 {
     int ret = fp->x221D_b6 ? 1 : 0;

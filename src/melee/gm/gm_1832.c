@@ -1450,8 +1450,6 @@ void fn_80187714(void)
 }
 #pragma pop
 
-extern HSD_Archive* lbl_804D6610;
-
 void gm_8018776C_OnFrame(void)
 {
     if (lbl_804736B0.x0 != 0) {

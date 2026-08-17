@@ -1811,7 +1811,6 @@ void fn_8022C128(HSD_GObj* arg0)
     }
 }
 
-extern LightList** MenMain_lights;
 MenuFlow mn_804A04F0;
 
 void mn_8022C304(void)

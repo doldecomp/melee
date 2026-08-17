@@ -2465,8 +2465,6 @@ void fn_8019B81C(s32* state)
     lbl_804799D8.x0 = 0;
 }
 
-extern SceneDesc* lbl_804D6670;
-
 void fn_8019B860(TmData* tm)
 {
     fn_8019A158();

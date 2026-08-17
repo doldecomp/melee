@@ -135,7 +135,6 @@ grIceMt_801FA0BC(struct grIceMt_GObj9_GObj10_UnderUpperIdPair* ids);
                                           Ground_GObj* gobj);
 /* 1FA4CC */ static int fn_801FA4CC(int num);
 /* 1FA500 */ static int grIceMt_801FA500(HSD_GObj*, HSD_JObj*);
-/* 1FA6D8 */ void grIceMt_801FA6D8(void);
 /* 1FA854 */ static void grIceMt_801FA854(void);
 /* 1FA8F8 */ static DynamicsDesc* grIceMt_801FA8F8(enum_t id);
 /* 1FA900 */ static bool grIceMt_801FA900(Vec3* a, int id, HSD_JObj* jobj);

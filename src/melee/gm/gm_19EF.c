@@ -708,8 +708,6 @@ void gm_801A0C6C_OnEnter(void* unused)
     lb_80011E24(temp_r3, &lbl_804D66F4, 1, -1);
 }
 
-extern HSD_Archive* lbl_804D66F0;
-
 void gm_801A0E0C_OnLeave(void* unused)
 {
     lbArchive_80016EFC(lbl_804D66F0);

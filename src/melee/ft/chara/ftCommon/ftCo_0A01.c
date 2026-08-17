@@ -7802,18 +7802,6 @@ void ftCo_800B1AB8(Fighter* fp)
     ftCo_800ADE48(fp);
 }
 
-void ftCo_800B1DA0_noinline(Fighter* fp);
-void ftCo_800B1DA0_noinline(Fighter* fp)
-{
-    ftCo_800B1DA0(fp);
-}
-
-void ftCo_800B1DA0_noinline2(Fighter* fp);
-void ftCo_800B1DA0_noinline2(Fighter* fp)
-{
-    ftCo_800B1DA0_noinline(fp);
-}
-
 void ftCo_800B1DA0(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
@@ -7825,6 +7813,16 @@ void ftCo_800B1DA0(Fighter* fp)
         ftCo_800A8940(fp);
     }
     ftCo_800ADE48(fp);
+}
+
+static inline void ftCo_800B1DA0_noinline(Fighter* fp)
+{
+    ftCo_800B1DA0(fp);
+}
+
+static inline void ftCo_800B1DA0_noinline2(Fighter* fp)
+{
+    ftCo_800B1DA0_noinline(fp);
 }
 
 void ftCo_800B1EF0(Fighter* fp)
@@ -8061,8 +8059,6 @@ void ftCo_800B2790(Fighter* fp)
         ftCo_800B49F4(fp);
     }
 }
-
-void ftCo_800B1DA0(Fighter*); /* static */
 
 static inline bool ftCo_800B2AFC_CheckFloor(Vec3* pos, int* line, u32* flags,
                                             Vec3* normal, int arg4, int arg5,

@@ -5,10 +5,6 @@
 
 /* 4A4B40 */ u32 gTRKDispatchTableSize;
 
-DSError TRKDoCPUType(MessageBuffer* buf);
-DSError TRKDoUnsupported(MessageBuffer* buf);
-DSError TRKDoFlushCache(MessageBuffer* buf);
-
 typedef DSError (*DispatchCallback)(MessageBuffer* buf);
 
 DispatchCallback gTRKDispatchTable[] = {
