@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <dolphin/os/OSContext.h>
+#include <dolphin/os.h> // IWYU pragma: keep
 
 typedef void (*ReportCallback)(const unsigned char*, size_t);
 typedef void (*PanicCallback)(OSContext*, ...);
