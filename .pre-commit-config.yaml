@@ -1,14 +1,17 @@
 repos:
-- repo: https://github.com/pre-commit/mirrors-clang-format
-  rev: v22.1.8
-  hooks:
-  - id: clang-format
-    types_or: [file]
-    files: \.(c|h|dox)$
 - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
   rev: 3.11.1
   hooks:
     - id: editorconfig-checker
+- repo: https://github.com/cpp-linter/cpp-linter-hooks
+  rev: v1.6.0
+  hooks:
+    - id: clang-format
+      types_or: [file]
+      files: \.(c|h|dox)$
+    - id: clang-tidy
+      files: ^src/
+      args: [-p=.,--fix,--fix-errors]
 - repo: local
   hooks:
     - id: style-check
@@ -17,13 +20,3 @@ repos:
       language: system
       pass_filenames: true
       types_or: [c]
-    - id: clang-check
-      name: clang-check
-      entry: clang-check
-      language: system
-      types_or: [c]
-      files: ^src/
-      args:
-        - -p=.
-        - -extra-arg=-fno-caret-diagnostics
-        - -extra-arg=-fdiagnostics-format=clang

@@ -52,7 +52,7 @@
 /* 3C2468 */ extern Fighter_DemoStrings* ftData_803C2468[FTKIND_MAX];
 /* 3C24EC */ extern Fighter_MotionFileStringGetter ftData_803C24EC[FTKIND_MAX];
 /* 3C2570 */ extern Fighter_UnkPtrEvent ftData_UnkDemoCallbacks0[FTKIND_MAX];
-/* 3C25F4 */ extern ftData_UnkCountStruct ftData_UnkIntPairs[FTKIND_MAX];
+/* 3C25F4 */
 /* 3C26FC */ extern u8 ftData_UnkBytePerCharacter[FTKIND_MAX];
 /* 3C2800 */ extern MotionState ftData_MotionStateList[ftCo_MS_Count];
 /* 3C52A0 */ extern MotionState ftData_803C52A0[14];

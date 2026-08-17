@@ -146,22 +146,11 @@ jobs:
             config_args=""
 
             # TODO: Migrate to nix and install to environment
-            apk add --update --no-cache clang-extra-tools jq
+            apk add --update py3-pre-commit
 
             run_configure
-
             ninja 'build/${{matrix.version}}/config.json'
-
-            jq -r --arg root "$(realpath .)" \
-              '.[] | select(.file | startswith($root + "/src/")) | .file' \
-              compile_commands.json |
-              xargs -P $(nproc) -I {} sh -c '
-                echo "Checking: {}"
-                clang-check -p . \
-                  -extra-arg=-fno-caret-diagnostics \
-                  -extra-arg=-fdiagnostics-format=clang \
-                  "{}"
-              '
+            pre-commit run clang-tidy --all-files
           ;;
           *) exit 1 ;;
         esac

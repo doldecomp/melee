@@ -89,5 +89,3 @@ static s16 lbl_803D9E1C[][2] = {
 
 /* 477738 */ MatchEnd gm_80477738; // must not be static
 /* 4771C4 */ TmData gm_804771C4;   // must not be static
-
-extern TmData gm_804771C4;

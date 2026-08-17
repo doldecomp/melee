@@ -39,7 +39,6 @@ typedef struct itSamusGrapple_HitboxData {
     u8 x134_7 : 1;
 } itSamusGrapple_HitboxData;
 
-/* 2A77DC */ void it_802A77DC(Item_GObj* gobj);
 /* 2B7150 */ void itSamusGrapple_Logic53_Spawned(Item_GObj*);
 /* 2B7160 */ void it_802B7160(Fighter_GObj*, itSamusGrapple_HitboxData*);
 /* 2B743C */ void it_802B743C(HSD_GObj*, Item*, s32);

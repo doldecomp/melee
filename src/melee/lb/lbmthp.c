@@ -117,8 +117,8 @@ static void fn_8001E910(int arg0, int arg1, void* arg2, int cancelflag)
         var_r0 = streamPlayer->unk_8C - 1;
     }
     streamPlayer->currPackedSize = *(u32*) streamPlayer->frame_buffers[var_r0];
-    if (((u32) streamPlayer->unk_90 != streamPlayer->unk_8C) &&
-        (streamPlayer->unk_70 != 0))
+    if (streamPlayer->unk_90 != streamPlayer->unk_8C &&
+        streamPlayer->unk_70 != 0)
     {
         intr = OSDisableInterrupts();
         streamPlayer->unk_13C = OSGetTick();
@@ -489,7 +489,7 @@ void fn_8001F2A4(OSAlarm* alarm, OSContext* context)
 
     frame = lbMthp_GetFrame(rate_table, streamPlayer->unk_80);
 
-    if ((u32) streamPlayer->unk_78 == frame) {
+    if (streamPlayer->unk_78 == frame) {
         streamPlayer->unk_80 += 1;
 
         frame = lbMthp_GetFrame(rate_table, streamPlayer->unk_80);
@@ -506,7 +506,7 @@ void fn_8001F2A4(OSAlarm* alarm, OSContext* context)
 
     frame = lbMthp_GetFrame(rate_table, streamPlayer->unk_80);
 
-    if ((u32) streamPlayer->unk_78 != frame) {
+    if (streamPlayer->unk_78 != frame) {
         fn_8001F06C(lbMthp_GetDecoder(streamPlayer));
     }
 }
@@ -520,9 +520,9 @@ void lbMthp_8001F410(const char* filename, u32* rate_table, void* buf,
 
     HSD_ASSERT(833, !MoviePlayer.power);
     MoviePlayer.power = 1;
-    fn_8001EB14((THPDecComp*) &MoviePlayer, filename);
+    fn_8001EB14(&MoviePlayer, filename);
     MoviePlayer.rate_table = rate_table;
-    memoryRequired = fn_8001EBF0((THPDecComp*) &MoviePlayer);
+    memoryRequired = fn_8001EBF0(&MoviePlayer);
     if (buf != NULL) {
         HSD_ASSERT(848, heap_size >= memoryRequired);
         MoviePlayer.unk_140 = NULL;
@@ -531,7 +531,7 @@ void lbMthp_8001F410(const char* filename, u32* rate_table, void* buf,
         MoviePlayer.unk_140 = buf;
     }
     MoviePlayer.unk_68 = loop;
-    fn_8001ECF4((THPDecComp*) &MoviePlayer, buf);
+    fn_8001ECF4(&MoviePlayer, buf);
     MoviePlayer.unk_144 = 0;
     MoviePlayer.unk_148 = 1;
     OSCreateAlarm(&MoviePlayer.alarm);

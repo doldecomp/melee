@@ -816,8 +816,8 @@ loop_24:
             goto loop_24;
         }
     }
-    for (work_r25 = 0; work_r25 < (s32) work_r28; work_r25 += 0x10) {
-        for (work_r26 = 0; work_r26 < (s32) work_r29; work_r26 += 0x10) {
+    for (work_r25 = 0; work_r25 < work_r28; work_r25 += 0x10) {
+        for (work_r26 = 0; work_r26 < work_r29; work_r26 += 0x10) {
             work_r24 = (u8*) base->work.luma;
             for (work_r23 = 0; work_r23 < 4; work_r23++) {
                 hsd_803B5EA0(0);
@@ -923,8 +923,7 @@ loop_24:
                 work_r4_5 += 0x20;
             }
             fn_803B61B4((u8*) base->work.cr);
-            fn_803B6820((u8*) arg2, work_r26, work_r25, (s32) work_r29,
-                        (s32) work_r28);
+            fn_803B6820((u8*) arg2, work_r26, work_r25, work_r29, work_r28);
         }
     }
     return work_r29 * work_r28 * 2;

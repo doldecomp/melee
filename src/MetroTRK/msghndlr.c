@@ -1,14 +1,10 @@
 #include "msghndlr.h"
 
-#include "MetroTRK/dolphin_trk_glue.h"
-#include "MetroTRK/mem_TRK.h"
 #include "MetroTRK/msg.h"
 #include "MetroTRK/msgbuf.h"
 #include "MetroTRK/nubevent.h"
-#include "MetroTRK/target_options.h"
+#include "MetroTRK/targcont.h"
 #include "MetroTRK/targimpl.h"
-
-#include <dolphin/os.h>
 
 extern void __TRK_copy_vectors(void);
 extern void __TRK_reset(void);

@@ -21,6 +21,5 @@
 /* 12EA40 */ void ftYs_SpecialLwLanding_Anim(Fighter_GObj* gobj);
 /* 12EA7C */ void ftYs_SpecialLwLanding_Phys(Fighter_GObj* gobj);
 /* 12EA9C */ void ftYs_SpecialLwLanding_Coll(Fighter_GObj* gobj);
-/* 3B75C0 */ extern Vec3 const ftYs_Unk1_803B75C0;
 
 #endif

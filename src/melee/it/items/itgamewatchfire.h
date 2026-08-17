@@ -17,8 +17,6 @@
 /* 2C6A98 */ void itGamewatchFire_802C6A98(Item_GObj*);
 /* 2C6AB8 */ void itGamewatchFire_PickedUp(Item_GObj*);
 /* 2C6C18 */ void itGamewatchFire_EvtUnk(Item_GObj*, Item_GObj*);
-/*        */ void ftGw_AttackS4_ItemTorchSetFlag(HSD_GObj*);
-/*        */ bool ftGw_AttackS4_ItemCheckTorchRemove(HSD_GObj*);
 /* 3F78E8 */ extern ItemStateTable it_803F78E8[];
 
 #endif

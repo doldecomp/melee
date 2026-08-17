@@ -2664,7 +2664,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                 {
                                     tag_data =
                                         all_data->doors_data.tags[di].data;
-                                    if ((u8) tag_data->state != 0) {
+                                    if (tag_data->state != 0) {
                                         continue;
                                     }
                                     cx4 = cursor->xC;

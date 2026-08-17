@@ -362,7 +362,7 @@ void grFlatzone_802174EC(Ground_GObj* gobj)
             while (true) {
                 s32 next_anim = HSD_Randi(4);
                 next_anim++;
-                if ((u8) gp->u.flatzone3.xCA ==
+                if (gp->u.flatzone3.xCA ==
                     (u8) (gp->u.flatzone3.xC9 = next_anim))
                 {
                     continue;
@@ -451,9 +451,7 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
     }
     switch (gp->u.flatzone2.xD0) {
     case 0:
-        if ((s32) gp->u.flatzone2.timer ==
-            (s32) ((s32) yakumono_param->unk20 / 2))
-        {
+        if ((s32) gp->u.flatzone2.timer == (s32) (yakumono_param->unk20 / 2)) {
             if (gp->u.flatzone2.xC8 == 1.0f) {
                 grAnime_801C8138(gobj, gp->map_id, 0);
             } else {
@@ -656,7 +654,7 @@ void grFlatzone_80217EF0(Ground_GObj* gobj)
      * of the locals area with the pool slot above it. Direct access is the
      * established idiom elsewhere in gr (e.g. grcorneria.c). */
     Ground* gp = gobj->user_data;
-    if ((u8) gp->u.flatzone3.xC4 != 0) {
+    if (gp->u.flatzone3.xC4 != 0) {
         gp->u.unk.xC8 = yakumono_param->unk10;
         gp->u.flatzone3.xC4 = 0;
     }
@@ -726,7 +724,7 @@ void grFlatzone_80218060(s32 arg0)
                         v = randi + 1;
                     }
                 } while (((s16(*)[5]) grFz_803E7A68)[gp->u.flatzone.xC7][(
-                             u8) (gp->u.flatzone3.xC9 = v)] == -1);
+                             gp->u.flatzone3.xC9 = v)] == -1);
             }
             gp->u.flatzone3.xCA = 0;
             gp->u.flatzone.xCC =

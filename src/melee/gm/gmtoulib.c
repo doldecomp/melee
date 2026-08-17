@@ -29,8 +29,7 @@
 #include "sc/types.h"
 
 #include <m2c_macros.h>
-#include <printf.h>
-#include <dolphin/os.h>
+#include <stdio.h>
 #include <baselib/controller.h>
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>
@@ -903,7 +902,12 @@ static GXColor const lbl_804DA67C = { 0xFF, 0xFF, 0, 0xFF };
 void fn_8018C8D4(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                  s32 arg5, s32 arg6, f32 farg0)
 {
+    /// @todo Redundant cast and assignment improves match
+#ifdef BUGFIX
+    BracketEntry* data = arg0;
+#else
     BracketEntry* data = (BracketEntry*) arg0;
+#endif
     f32 thickness;
     f32 neg_thickness;
     GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8, c9;
@@ -1197,7 +1201,12 @@ void fn_8018D50C(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                  s32 arg5, s32 arg6, f32 farg0)
 {
     TmData* tm;
+    /// @todo Redundant cast and assignment improves match
+#ifdef BUGFIX
+    BracketEntry* data = arg0;
+#else
     BracketEntry* data = (BracketEntry*) arg0;
+#endif
     f32 thickness;
     f32 neg_thickness;
     s32 right;

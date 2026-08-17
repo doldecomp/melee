@@ -1,0 +1,4 @@
+---
+Checks: 'readability-redundant-casting,readability-redundant-declaration,readability-duplicate-include'
+WarningsAsErrors: '*'
+---

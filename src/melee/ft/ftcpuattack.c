@@ -141,6 +141,9 @@ typedef struct ftCo_CollData {
 
 /// @todo Fake helper forcing a fresh load of the scale field.
 
+#ifdef BUGFIX
+#define sqrtf_store(x, y) sqrtf(x)
+#else
 /// MSL sqrtf expansion writing through a caller-provided stack slot so each
 /// call site owns a distinct 4-byte temp (retail 0x28..0x34 below sp3C).
 static inline float sqrtf_store(float x, volatile float* y)
@@ -155,6 +158,7 @@ static inline float sqrtf_store(float x, volatile float* y)
     }
     return x;
 }
+#endif
 
 static inline f32 get_scale(Fighter* fp)
 {

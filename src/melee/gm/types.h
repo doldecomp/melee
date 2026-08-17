@@ -610,8 +610,6 @@ struct gmMainLib_8046B0F0_t {
     /* 10 */ int x10, x14;
 };
 
-extern struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;
-
 typedef struct gm_803DF94C_t {
     void (*x0)(HSD_GObj*);
     void (*x4)(int);

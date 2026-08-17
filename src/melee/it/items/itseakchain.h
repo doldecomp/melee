@@ -7,9 +7,9 @@
 #include "it/items/types.h"
 
 /* 2BAEEC */ void it_802BAEEC(Item_GObj*);
-/* 2BAEEC */ void it_802BAEEC(Item_GObj* gobj);
+/* 2BAEEC */
 /* 2BAF0C */ void it_802BAF0C(Item_GObj*);
-/* 2BAF0C */ void it_802BAF0C(Item_GObj* gobj);
+/* 2BAF0C */
 /* 2BAF2C */ int it_802BAF2C(Item* ip, HSD_JObj* jobj);
 /* 2BB20C */ void it_802BB20C(Item_GObj*);
 /* 2BB290 */ Item_GObj* itSeakChain_Spawn(Fighter_GObj* owner_gobj, Vec3* arg1,
@@ -35,7 +35,6 @@
 /* 2BCF84 */ void it_802BCF84(Item_GObj* gobj);
 /* 2BCFC4 */ void it_802BCFC4(Item_GObj* gobj, Vec3* vel);
 /* 2BD10C */ void itSeakChain_Logic54_EvtUnk(Item_GObj*, Item_GObj*);
-/* 2BDBF8 */ void it_802BDBF8(Item_GObj* gobj);
 /* 3F7438 */ extern ItemStateTable it_803F7438[];
 
 #endif

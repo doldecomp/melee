@@ -5,9 +5,9 @@
 
 #include "MetroTRK/msgbuf.h"
 #include "MetroTRK/nubevent.h"
-#include "MetroTRK/trk.h"
 
-#include <dolphin/os.h>
+#include <dolphin/os/OSThread.h>
+#include <MetroTRK/msgcmd.h>
 
 typedef enum ValidMemoryOptions {
     kValidMemoryReadable = 0,
@@ -53,8 +53,6 @@ DSError TRKTargetAccessExtended2(u32, u32, MessageBuffer*, size_t*, bool);
 DSError TRKTargetVersions(DSVersions*);
 DSError TRKTargetSupportMask(DSSupportMask*);
 DSError TRKTargetCheckException(void);
-DSError TRKInitializeTarget(void);
-DSError TRKTargetContinue(void);
 void TRKSwapAndGo(void);
 DSError TRKTargetInterrupt(NubEvent*);
 DSError TRKTargetAddStopInfo(MessageBuffer*);
@@ -65,11 +63,8 @@ u32 TRKTargetGetPC(void);
 DSError TRKTargetSupportRequest(void);
 DSError TRKTargetFlushCache(u8, u32, u32);
 bool TRKTargetStopped(void);
-void TRKTargetSetStopped(bool);
 DSError TRKTargetStop(void);
-u32 TRKTargetTranslate(u32 addr);
 void TRKInterruptHandler(u16);
-void TRKTargetSetInputPendingPtr(void*);
 DSError TRKTargetCPUType(DSCPUType* cpuType);
 void TRKInterruptHandlerEnableInterrupts(void);
 bool TRKTargetStepDone(void);
