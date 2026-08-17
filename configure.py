@@ -2009,7 +2009,7 @@ if args.mode == "configure":
     build_config = load_build_config(config, config.out_path() / "config.json")
 
     if not build_config:
-        raise ValueError("no build config")
+        exit(0)
 
     if not args.allow_auto_splits:
         for unit in build_config["units"]:
