@@ -86,8 +86,6 @@ static struct {
     u16 slomo_counter[4]; ///< Ticks up to 100 when player is eliminated
 } gm_804975F8;
 
-extern MatchExitInfo gm_80479D98;
-
 void gm_801B91C8(GameScene* arg0)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->unk_10D0;

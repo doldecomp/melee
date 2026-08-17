@@ -7,7 +7,6 @@
 #include "ftCo_HammerWait.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_SpecialAir.h"
-#include "math.h"
 
 #include <placeholder.h>
 #include <platform.h>
@@ -27,6 +26,8 @@
 #include "ftCommon/ftCo_JumpAerial.h"
 
 #include <baselib/forward.h>
+
+#include <math.h>
 
 void ftCo_80090574(Fighter_GObj* gobj)
 {
@@ -101,15 +102,15 @@ void ftCo_80090780(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Ground) {
-        ftCommon_8007D5D4((Fighter*) fp);
+        ftCommon_8007D5D4(fp);
     }
     if (ftGetParasolStatus(gobj) != -1) {
         ftCo_800CF4DC(gobj);
     } else {
         Fighter_ChangeMotionState(gobj, 0x26, 0x18001U, 0.0f, 1.0f, 0.0f,
                                   NULL);
-        ftCommon_ClampAirDrift((Fighter*) fp);
-        ftCommon_8007EBAC((Fighter*) fp, 8U, 0U);
+        ftCommon_ClampAirDrift(fp);
+        ftCommon_8007EBAC(fp, 8U, 0U);
     }
 }
 

@@ -33,9 +33,7 @@
 #include <baselib/forward.h>
 
 #include <math.h>
-#include <trigf.h>
 
-/* 094D70 */ bool ftCo_800951D0(Fighter_GObj* gobj);
 /* 094E7C */ static bool ftCo_800952DC(Fighter_GObj* gobj);
 /* 0952C8 */ static UNK_RET lbl_80095728(UNK_PARAMS);
 /* 0952D8 */ static UNK_RET lbl_80095738(UNK_PARAMS);
@@ -323,7 +321,7 @@ void ftCo_80095744(Fighter_GObj* gobj, int* arg1)
     Item_8026ABD8(fp->item_gobj, &vec, 1);
 }
 
-inline float getAnimSpeed(Fighter_GObj* gobj, int msid)
+static inline float getAnimSpeed(Fighter_GObj* gobj, int msid)
 {
     Fighter* fp;
     float speed = 1;

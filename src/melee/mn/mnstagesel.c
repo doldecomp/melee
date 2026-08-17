@@ -714,7 +714,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
                 }* temp_r3_14;
                 g = gobj;
                 jobj = GET_JOBJ(g);
-                temp_r3_14 = HSD_MemAlloc(8);
+                temp_r3_14 = HSD_MemAlloc(sizeof(*temp_r3_14));
                 GObj_InitUserData(g, 4, HSD_Free, temp_r3_14);
                 HSD_GObj_SetupProc(g, fn_8025A090, 1);
                 HSD_JObjReqAnimAll(jobj, 0.0F);
@@ -740,7 +740,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
                                mnStageSel_804D6C98->x70.matanim_joint,
                                mnStageSel_804D6C98->x70.shapeanim_joint);
             jobj = gobj->hsd_obj;
-            temp_r3_16 = HSD_MemAlloc(4);
+            temp_r3_16 = HSD_MemAlloc(sizeof(*temp_r3_16));
             GObj_InitUserData(gobj, 4, HSD_Free, temp_r3_16);
             *temp_r3_16 = 0;
             HSD_GObj_SetupProc(gobj, fn_8025A560, 1);

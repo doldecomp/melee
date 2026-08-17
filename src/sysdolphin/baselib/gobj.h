@@ -16,9 +16,11 @@
 #define HSD_GOBJ_CLASS_ITEMLINK 0x7
 
 #define HSD_GOBJ_CLASS_EFFECT 0x8
+#define HSD_GOBJ_CLASS_SISLIB_UNK 0x9
 #define HSD_GOBJ_CLASS_LIGHT 0xB
 #define HSD_GOBJ_CLASS_GROUND 0xD
 #define HSD_GOBJ_CLASS_UI 0xE
+#define HSD_GOBJ_CLASS_TEXT 0x11
 #define HSD_GOBJ_CLASS_CAMERA 0x13
 
 struct HSD_GObj {
@@ -130,7 +132,6 @@ HSD_GObj* GObj_Create(u16 classifier, u8 p_link, u8 priority);
 void HSD_GObj_JObjCallback(HSD_GObj* gobj, int arg1);
 void HSD_GObj_80390CD4(HSD_GObj* gobj);
 void HSD_GObj_80390CFC(void);
-void render_gobj(HSD_GObj* cur, int i);
 void HSD_GObj_80390FC0(void);
 void HSD_GObj_LObjCallback(HSD_GObj* gobj, int unused);
 void HSD_GObj_FogCallback(HSD_GObj* gobj, int unused);

@@ -27,7 +27,7 @@
 #include <lb/lbaudio_ax.h>
 #include <sc/types.h>
 
-inline int mnInfoBonus_802528F8_inline(int j)
+static inline int mnInfoBonus_802528F8_inline(int j)
 {
     if (*mnInfoBonus_804D6C80) {
         return true;
@@ -35,7 +35,7 @@ inline int mnInfoBonus_802528F8_inline(int j)
     return gm_8016F120(j);
 }
 
-inline void textSize(HSD_Text* text)
+static inline void textSize(HSD_Text* text)
 {
     text->font_size.x = 0.0521F;
     text->font_size.y = 0.0521F;
@@ -74,12 +74,12 @@ int mnInfoBonus_802528F8(void)
     return var_r30;
 }
 
-inline int mnInfoBonus_802528F8_wrapper(void)
+static inline int mnInfoBonus_802528F8_wrapper(void)
 {
     return mnInfoBonus_802528F8();
 }
 
-inline int mnInfoBonus_802529B4_inline0(int i)
+static inline int mnInfoBonus_802529B4_inline0(int i)
 {
     if (*mnInfoBonus_804D6C80 != 0) {
         return 1;
@@ -87,7 +87,7 @@ inline int mnInfoBonus_802529B4_inline0(int i)
     return gm_8016F120(i);
 }
 
-inline int mnInfoBonus_802529B4_inline1(int i)
+static inline int mnInfoBonus_802529B4_inline1(int i)
 {
     return ((u16) gm_8016F208(i) - 2) * 3;
 }
@@ -127,7 +127,7 @@ void mnInfoBonus_802529B4(void)
     }
 }
 
-inline void mnInfoBonus_80252ADC_inline(HSD_Text* text)
+static inline void mnInfoBonus_80252ADC_inline(HSD_Text* text)
 {
     text->x34.x = 0.034F;
     text->x34.y = 0.034F;
@@ -182,7 +182,7 @@ void fn_80252C50(HSD_GObj* gobj)
     // r29,0` operation using i = 0
     i = 0;
     temp_r3 = Menu_GetAllInputs();
-    if (((u64) temp_r3 & 0x20) != 0) {
+    if ((temp_r3 & 0x20) != 0) {
         lbAudioAx_80024030(i);
         mn_804A04F0.entering_menu = i;
         mn_80229894(0x1C, 1U, 3);
@@ -205,13 +205,13 @@ void fn_80252C50(HSD_GObj* gobj)
         *mnInfoBonus_804D6C80 = 1;
         mnInfoBonus_802529B4();
     }
-    if (((u64) temp_r3 & 1) != 0) {
+    if ((temp_r3 & 1) != 0) {
         if (o->x0 > 0) {
             sfxMove();
             --o->x0;
             mnInfoBonus_802529B4();
         }
-    } else if (((u64) temp_r3 & 2) != 0 &&
+    } else if ((temp_r3 & 2) != 0 &&
                mnInfoBonus_802528F8_wrapper() /* @todo don't inline! */ > 5)
     {
         sfxMove();
@@ -220,7 +220,7 @@ void fn_80252C50(HSD_GObj* gobj)
     }
 }
 
-inline HSD_JObj* fn_80252E4C_inline_GetJObjNext(HSD_JObj* jobj)
+static inline HSD_JObj* fn_80252E4C_inline_GetJObjNext(HSD_JObj* jobj)
 {
     if (jobj == NULL) {
         return NULL;
@@ -228,7 +228,7 @@ inline HSD_JObj* fn_80252E4C_inline_GetJObjNext(HSD_JObj* jobj)
     return jobj->next;
 }
 
-inline HSD_JObj* fn_80252E4C_inline_GetJObjChild(HSD_JObj* jobj)
+static inline HSD_JObj* fn_80252E4C_inline_GetJObjChild(HSD_JObj* jobj)
 {
     if (jobj == NULL) {
         return NULL;
@@ -266,7 +266,7 @@ void fn_80252E4C(HSD_GObj* arg0)
     HSD_JObjAnimAll(temp_r30);
 }
 
-inline HSD_JObj* mnInfoBonus_inline_GetJObjNext(HSD_JObj* jobj)
+static inline HSD_JObj* mnInfoBonus_inline_GetJObjNext(HSD_JObj* jobj)
 {
     if (jobj == NULL) {
         return NULL;
@@ -274,7 +274,7 @@ inline HSD_JObj* mnInfoBonus_inline_GetJObjNext(HSD_JObj* jobj)
     return jobj->next;
 }
 
-inline HSD_JObj* mnInfoBonus_inline_GetJObjChild(HSD_JObj* jobj)
+static inline HSD_JObj* mnInfoBonus_inline_GetJObjChild(HSD_JObj* jobj)
 {
     if (jobj == NULL) {
         return NULL;
@@ -282,12 +282,13 @@ inline HSD_JObj* mnInfoBonus_inline_GetJObjChild(HSD_JObj* jobj)
     return jobj->child;
 }
 
-inline void mnInfoBonus_inline_SetGObjFlag(HSD_GObjProc* gobjproc)
+static inline void mnInfoBonus_inline_SetGObjFlag(HSD_GObjProc* gobjproc)
 {
     gobjproc->flags_3 = HSD_GObj_804D783C;
 }
 
-inline void mnInfoBonus_80252F8C_inline0(struct mnInfoBonus_804A09B0_t* o)
+static inline void
+mnInfoBonus_80252F8C_inline0(struct mnInfoBonus_804A09B0_t* o)
 {
     HSD_GObj* gobj;
     HSD_JObj* jobj;

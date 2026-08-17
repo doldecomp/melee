@@ -2,12 +2,11 @@
 
 #include "inlines.h"
 
-#include "db/db.h"
 #include "ft/ftlib.h"
+#include "ftGameWatch/ftGw_AttackS4.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
-#include "it/itzako.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 

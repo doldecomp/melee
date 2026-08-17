@@ -4,7 +4,6 @@
 #include "gm_1A45.h"
 #include "gm_unsplit.h"
 #include "gmresult.h"
-#include "math.h"
 #include "placeholder.h"
 #include "types.h"
 
@@ -30,6 +29,7 @@
 #include "pl/player.h"
 #include "sc/types.h"
 
+#include <math.h>
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
 #include <baselib/controller.h>
@@ -448,13 +448,13 @@ void fn_80178050(HSD_GObj* arg0)
         {
             s32 j;
             for (j = 0; j < 4; j++) {
-                if ((u8) match_end->player_standings[j].slot_type == 0) {
+                if (match_end->player_standings[j].slot_type == 0) {
                     lbl_804D3FC8 = 0;
                     break;
                 }
             }
         }
-        if ((s32) lbl_804D3FC8 != 0) {
+        if (lbl_804D3FC8 != 0) {
             data->x3 = 0x14;
         } else {
             data->x3 = 0x0A;
@@ -501,7 +501,7 @@ void fn_80178050(HSD_GObj* arg0)
                             if (fn_80177B7C(k2) != 0) {
                                 fn_80174B4C(data, k2);
                             }
-                            if (((s8) pad->err != 0) ||
+                            if ((pad->err != 0) ||
                                 (HSD_PadCopyStatus[(u8) k2].trigger &
                                  PAD_BUTTON_START))
                             {
@@ -567,9 +567,9 @@ void fn_80178050(HSD_GObj* arg0)
                         if (fn_80177DD0(k2) != 0) {
                             fn_80174B4C(data, k2);
                         }
-                        if ((s32) lbl_804D3FC8 != 0) {
+                        if (lbl_804D3FC8 != 0) {
                             data->player_data[k2].x0_0 = 0;
-                            if (((s8) pad->err == 0) &&
+                            if ((pad->err == 0) &&
                                 (HSD_PadCopyStatus[(u8) k2].trigger &
                                  PAD_BUTTON_START))
                             {
@@ -578,8 +578,7 @@ void fn_80178050(HSD_GObj* arg0)
                             }
                         }
                     } else if (slot == 3) {
-                        if (((s32) lbl_804D3FC8 != 0) &&
-                            ((s8) pad->err == 0) &&
+                        if ((lbl_804D3FC8 != 0) && (pad->err == 0) &&
                             (HSD_PadCopyStatus[(u8) k2].trigger &
                              PAD_BUTTON_START))
                         {
@@ -595,7 +594,7 @@ void fn_80178050(HSD_GObj* arg0)
             {
                 s32 k3 = 0;
                 do {
-                    if ((u8) match_end->player_standings[k3].slot_type != 3) {
+                    if (match_end->player_standings[k3].slot_type != 3) {
                         if (!data->player_data[k3].x0_1) {
                             HSD_JObjSetFlagsAll(data->player_data[k3].jobjs[8],
                                                 JOBJ_HIDDEN);
@@ -792,11 +791,11 @@ static inline void fn_80178BB4_init_players(ResultsData* data,
                 is_big_loser = match_end->player_standings[(*i)].is_big_loser;
 
                 if (gm_801743A4(match_end->result) == 0 &&
-                    (u8) match_end->is_teams == 0 && (s32) is_big_loser == 0)
+                    match_end->is_teams == 0 && (s32) is_big_loser == 0)
                 {
                     ResultsData* d2 = &lbl_8046DBE8;
                     int tex_id =
-                        (int) gm_80168B34((CharacterKind) ckind, (int) cid, 0);
+                        (int) gm_80168B34((CharacterKind) ckind, cid, 0);
                     HSD_TObj* tobj = d2->x30->u.dobj->next->mobj->tobj;
                     HSD_AObj* aobj = tobj->aobj;
                     HSD_TObjReqAnim(tobj, (f32) tex_id);
@@ -813,9 +812,8 @@ static inline void fn_80178BB4_init_players(ResultsData* data,
                     mn_8022F3D8(d2->x30, 1, TOBJ_MASK);
                 }
 
-                fn_80174FD0(
-                    data->player_data[(*i)].jobjs[5],
-                    (s32) gm_80168B34((CharacterKind) ckind, (int) cid, 0));
+                fn_80174FD0(data->player_data[(*i)].jobjs[5],
+                            (s32) gm_80168B34((CharacterKind) ckind, cid, 0));
 
                 {
                     u32 rank_val;
@@ -831,7 +829,7 @@ static inline void fn_80178BB4_init_players(ResultsData* data,
                     HSD_AObjSetRate(rank_aobj, 0.0f);
                 }
 
-                if ((u8) match_end->x5 != 3) {
+                if (match_end->x5 != 3) {
                     f32 taunt_frame = gm_80168B34(
                         (CharacterKind) (s8) (u8) match_end
                             ->player_standings[(*i)]
@@ -899,7 +897,7 @@ void fn_80178BB4(HSD_GObj* gobj)
         HSD_AObjSetCurrentFrame(aobj, (f32) start);
         HSD_AObjSetEndFrame(aobj, (30.0f + (f32) start) - 1.0f);
         mn_8022F3D8(data->x30, 1, TOBJ_MASK);
-    } else if ((u8) match_end->is_teams == 1) {
+    } else if (match_end->is_teams == 1) {
         int tex_id = data->x5 + 0xB5;
         HSD_TObj* tobj = data->x30->u.dobj->next->mobj->tobj;
         HSD_AObj* aobj = tobj->aobj;
@@ -1016,8 +1014,8 @@ static inline void fn_80179350_update(ResultsData* data, MatchEnd* match_end,
             fn_80178050(arg0);
             break;
         case 4:
-            if ((u8) data->x3 != 0) {
-                data->x3 = (char) ((u8) data->x3 - 1);
+            if (data->x3 != 0) {
+                data->x3 = (char) (data->x3 - 1);
             } else {
                 gm_801A4B60();
             }
@@ -1408,13 +1406,11 @@ void fn_8017A078(s32 arg0)
 
     if (mode == 0) {
         s32 kind = disp->state.char_kind[arg0];
-        if (kind == CKIND_KOOPA && (u8) disp->state.variant[arg0] == 1) {
+        if (kind == CKIND_KOOPA && disp->state.variant[arg0] == 1) {
             eye.z += 6.0f;
-        } else if (kind == CKIND_MARS && (u8) disp->state.variant[arg0] == 1) {
+        } else if (kind == CKIND_MARS && disp->state.variant[arg0] == 1) {
             eye.z += 7.5f;
-        } else if (kind == CKIND_CAPTAIN &&
-                   (u8) disp->state.variant[arg0] == 2)
-        {
+        } else if (kind == CKIND_CAPTAIN && disp->state.variant[arg0] == 2) {
             eye.z += 6.0f;
         }
     }
@@ -1549,8 +1545,7 @@ Fighter_GObj* fn_8017A67C(CharacterKind kind, int arg1, int arg2)
         pos = *(Vec3*) &config->x74;
 
         if ((u32) (kind - 0x12) <= 1U) {
-            if ((int) (s8) match_end->player_standings[arg2].character_id == 7)
-            {
+            if ((int) match_end->player_standings[arg2].character_id == 7) {
                 kind = CKIND_SEAK;
             } else {
                 kind = CKIND_ZELDA;

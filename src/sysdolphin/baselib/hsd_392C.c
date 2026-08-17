@@ -202,8 +202,7 @@ int hsd_80392E80(void)
                         status == 3)
                     {
                         waiting = 0;
-                    } else if ((u32) ((u32) (OSGetTick() - startTick) /
-                                      OS_TIMER_CLOCK) < 3U)
+                    } else if (OSTicksToSeconds(OSGetTick() - startTick) < 3U)
                     {
                         continue;
                     }

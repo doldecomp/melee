@@ -218,7 +218,7 @@ s32 mnDiagram_GetPlayPercentage(u8 is_name_mode, u8 player_index)
     s32 i;
     f32 zero = 0.0f;
 
-    if ((u8) is_name_mode != 0) {
+    if (is_name_mode != 0) {
         total_play_time = 0.0f;
         i = 0;
         do {
@@ -254,8 +254,7 @@ s32 mnDiagram_GetAveragePlayerCount(int is_name_mode, u8 player_index)
     f32 temp_f31_2;
 
     if ((u8) is_name_mode != 0) {
-        if ((u16) GetPersistentNameData((s32) player_index)->match_count != 0)
-        {
+        if (GetPersistentNameData((s32) player_index)->match_count != 0) {
             temp_f31_2 =
                 (f32) GetPersistentNameData((s32) player_index)->match_count;
             return (s32) (100.0f *
@@ -265,7 +264,7 @@ s32 mnDiagram_GetAveragePlayerCount(int is_name_mode, u8 player_index)
         }
         return 0;
     }
-    if ((u16) GetPersistentFighterData((s32) player_index)->match_count != 0) {
+    if (GetPersistentFighterData((s32) player_index)->match_count != 0) {
         temp_f31 =
             (f32) GetPersistentFighterData((s32) player_index)->match_count;
         return (s32) (100.0f *
@@ -1704,8 +1703,8 @@ typedef struct mnDiagram_MainOverlay {
     /* 0x38 */ HSD_Text* text[6];
 } mnDiagram_MainOverlay;
 
-inline Vec3* mnDiagram_PopupAnimProc_Inline(mnDiagram_AnimTable* arg0,
-                                            int arg1)
+static inline Vec3* mnDiagram_PopupAnimProc_Inline(mnDiagram_AnimTable* arg0,
+                                                   int arg1)
 {
     return &arg0->points[arg1];
 }
@@ -1815,7 +1814,7 @@ void mnDiagram_PopupAnimProc(void* arg0)
     }
 }
 
-inline void mnDiagram_FormatPopupNumber(char* buf, u32 val)
+static inline void mnDiagram_FormatPopupNumber(char* buf, u32 val)
 {
     int digit_count = mn_GetDigitCount(val);
     int i;

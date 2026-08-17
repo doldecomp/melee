@@ -42,7 +42,7 @@ Default_PPC gTRKSaveState;
 typedef void (*RegAccessFunc)(void* srcDestPtr, u128 val);
 
 static void TRKExceptionHandler(u16);
-void TRKInterruptHandlerEnableInterrupts(void);
+
 static void GetThreadInfo(int*, int*);
 
 /// Instruction macros
@@ -475,8 +475,6 @@ DSError TRKTargetCPUType(DSCPUType* cpuType)
     cpuType->extended2TypeSize = 8;
     return kNoError;
 }
-
-void TRKUARTInterruptHandler(void);
 
 ASM void TRKInterruptHandler(register u16 val)
 {

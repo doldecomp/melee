@@ -3,6 +3,7 @@
 
 #include <platform.h>
 
+#include <math_ppc.h>
 #include <MetroTRK/intrinsics.h>
 
 #define MSL_HI(x) *(int*) &x
@@ -86,19 +87,36 @@ static inline s32 __fpclassifyd(double x)
 
 #define ABS(x) ((x) < 0 ? -(x) : (x))
 
+#define fabsf __fabsf
+
 static inline double fabs(double f)
 {
     return __fabs(f);
 }
 
+float acosf(float);
+float asinf(float);
+float atan2f(float y, float x);
+float atanf(float);
+float cosf(float);
+float sinf(float);
 double frexp(double x, int* exponent);
 float fabsf__Ff(float);
-float tanf(float x);
 float cos__Ff(float x);
 float sin__Ff(float x);
-float cosf(float x);
-float sinf(float x);
 void __sinit_trigf_c(void);
 float logf(float);
+float expf(float);
+
+static inline float fmodf(float a, float b)
+{
+    long long quotient;
+
+    if (fabsf(b) > fabsf(a)) {
+        return a;
+    }
+    quotient = a / b;
+    return a - b * quotient;
+}
 
 #endif

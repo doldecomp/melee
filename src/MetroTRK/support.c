@@ -65,7 +65,7 @@ DSError TRKSuppAccessFile(u32 file_handle, u8* data, size_t* count,
                                        !(read && file_handle == 0)));
 
                 if (error == kNoError) {
-                    replyBuffer = (MessageBuffer*) TRKGetBuffer(replyBufferId);
+                    replyBuffer = TRKGetBuffer(replyBufferId);
                     TRKSetBufferPosition(replyBuffer, 2);
                 }
 

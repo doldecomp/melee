@@ -30,7 +30,7 @@
 /* 1607F4 */ u8 fn_801607F4(int);
 /* 160840 */ u8 fn_80160840(u8);
 /* 160854 */ u32 gm_80160854(u8, u8, u8, u8);
-/* 160968 */ GXColor gm_80160968(u8);
+/* 160968 */ GXColor gm_80160968(u32);
 /* 160980 */ const char* gm_80160980(u8 ckind);
 /* 1609E0 */ const char* fn_801609E0(u8 ckind);
 /* 160A60 */ const char* gm_80160A60(int);
@@ -151,7 +151,6 @@
 /* 1661E0 */ s32 fn_801661E0(MatchEnd*);
 /* 166378 */ void gm_80166378(struct lbl_8046B6A0_24C_t*);
 /* 166A98 */ long gm_80166A98(MatchEnd*, u8, s8, u8, s8, u8, s8, u8, u8, u8);
-/* 166CBC */ s32 gmCamera_801A2640(void);
 /* 166CBC */ u8 fn_80166CBC(MatchEnd*, ssize_t index);
 /* 166CCC */ void gm_80166CCC(MatchEnd*, MatchEnd*);
 /* 167140 */ bool gm_80167140(MatchEnd*);

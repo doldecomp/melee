@@ -17,7 +17,7 @@
 #include "it/items/itnesspkflash.h"
 #include "lb/lb_00B0.h"
 
-#include <MSL/math.h>
+#include <math.h>
 
 static u32 ftKb_Init_804D3DB8[] = {
     0x0001AE17,
@@ -272,7 +272,7 @@ void ftKb_SpecialNFx_CreateBlasterShot(Fighter_GObj* gobj)
     ftKb_SpecialNFx_800FDF30(gobj);
 }
 
-inline FtMotionId ftKbGetStartMotionId(HSD_GObj* gobj)
+static inline FtMotionId ftKbGetStartMotionId(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     FtMotionId msid = ftKb_MS_FxSpecialNStart;
@@ -339,7 +339,7 @@ void ftKb_SpecialNFx_800FE100(HSD_GObj* gobj)
     HSD_ASSERT(429, 0);
 }
 
-inline FtMotionId ftKbGetAirStartMotionId(HSD_GObj* gobj)
+static inline FtMotionId ftKbGetAirStartMotionId(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     FtMotionId msid = ftKb_MS_FxSpecialAirNStart;
@@ -399,7 +399,7 @@ void ftKb_SpecialNFx_800FE240(HSD_GObj* gobj)
     HSD_ASSERT(465, 0);
 }
 
-inline FtMotionId ftKbGetLoopMotionId(HSD_GObj* gobj)
+static inline FtMotionId ftKbGetLoopMotionId(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     FtMotionId msid = ftKb_MS_FxSpecialNLoop;
@@ -435,7 +435,7 @@ void ftKb_FxSpecialNStart_Anim(HSD_GObj* gobj)
     }
 }
 
-inline FtMotionId ftKbGetEndMotionId(HSD_GObj* gobj)
+static inline FtMotionId ftKbGetEndMotionId(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     FtMotionId msid = ftKb_MS_FxSpecialNEnd;
@@ -507,7 +507,7 @@ void ftKb_FxSpecialNEnd_Anim(Fighter_GObj* gobj)
     }
 }
 
-inline FtMotionId ftKbGetAirLoopMotionId(HSD_GObj* gobj)
+static inline FtMotionId ftKbGetAirLoopMotionId(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     FtMotionId msid = ftKb_MS_FxSpecialAirNLoop;
@@ -543,7 +543,7 @@ void ftKb_FxSpecialAirNStart_Anim(HSD_GObj* gobj)
     }
 }
 
-inline FtMotionId ftKbGetAirEndMotionId(HSD_GObj* gobj)
+static inline FtMotionId ftKbGetAirEndMotionId(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     FtMotionId msid = ftKb_MS_FxSpecialAirNEnd;

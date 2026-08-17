@@ -43,7 +43,7 @@ typedef struct BgFlashData {
 
 extern BgFlashData lbl_80433658;
 
-#include <trigf.h>
+#include <math.h>
 #include <dolphin/gx.h>
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
@@ -59,7 +59,6 @@ extern BgFlashData lbl_80433658;
 #include <baselib/quatlib.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbvector.h>
-#include <MSL/math.h>
 
 /* 021C18 */ static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd,
                                      int arg2);
@@ -210,8 +209,8 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
     case 0:
         if ((u32) mode == 3U) {
             y = 0;
-            while (y <= (s32) data->x38) {
-                if (y == (s32) data->x38) {
+            while (y <= data->x38) {
+                if (y == data->x38) {
                     s32 width;
                     u8 strip_h;
                     s32 neg_y;

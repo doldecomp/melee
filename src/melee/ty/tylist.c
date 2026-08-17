@@ -14,8 +14,6 @@
 #include "ty/toy.h"
 #include "ty/types.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 #include <baselib/archive.h>
@@ -418,9 +416,9 @@ void _tyList_80313464(TyListArg* arg)
     }
 
     if (Toy_80304924(val) != 0) {
-        arg->jobjs[1] = _tyList_80313508(((TyListState*) state)->gobj,
-                                         "ToyFigureListMarkN_Top_joint", -8.4f,
-                                         arg->x30, 0.0f);
+        arg->jobjs[1] =
+            _tyList_80313508((state)->gobj, "ToyFigureListMarkN_Top_joint",
+                             -8.4f, arg->x30, 0.0f);
     }
 }
 
@@ -863,7 +861,7 @@ void _tyList_8031438C(HSD_GObj* gobj)
                 HSD_AObjSetRate(archive->jobjs[0]->u.dobj->mobj->tobj->aobj,
                                 0.0f);
             }
-            HSD_JObjAnimAll((HSD_JObj*) archive->x0[10]);
+            HSD_JObjAnimAll(archive->x0[10]);
         } else {
             TyListWaitData* wait_data = (TyListWaitData*) entry->x4;
             if (wait_data != NULL) {

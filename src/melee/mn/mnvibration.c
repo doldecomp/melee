@@ -12,12 +12,10 @@
 #define HSD_ASSERT(line, cond)                                                \
     ((cond) ? ((void) 0) : __assert(__FILE__, line, #cond))
 
-#include "ft/ft_0C31.h"
 #include "gm/gm_1A36.h"
 #include "gm/gmmain_lib.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
 #include "lb/lbspdisplay.h"
 #include "mn/inlines.h"
 #include "mn/mnmain.h"
@@ -35,7 +33,7 @@
 #include <baselib/sislib.h>
 
 /// --- Externs ---
-extern long HSD_GObj_804D783C;
+
 char* GetNameText(u8 slot);
 int GetNameCount(void);
 void lb_8001CE00(void);
@@ -194,7 +192,7 @@ static inline u8 mnVibration_GetNameSlot(MnVibrationData* data, s32 j)
     return (u8) name_idx;
 }
 
-inline u8 mnVibration_GetNameRumble(s32 name_idx)
+static inline u8 mnVibration_GetNameRumble(s32 name_idx)
 {
     return GetPersistentNameData(name_idx)->rumble_toggle;
 }
@@ -277,8 +275,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     }
 
     // Check animation timer
-    if (data->x0[0] <= ((AnimLoopSettings*) &mnVibration_803EECE0)->end_frame)
-    {
+    if (data->x0[0] <= ((&mnVibration_803EECE0))->end_frame) {
         data->x0[0]++;
         return;
     }
@@ -800,7 +797,7 @@ void mnVibration_Think(HSD_GObj* gobj)
             }
         }
         port_idx += 1;
-    } while ((s32) port_idx < 4);
+    } while (port_idx < 4);
 }
 
 static inline f32 mnVibration_GetCursorYSpacing(f32 base_y, HSD_JObj* jobj)
@@ -834,8 +831,7 @@ void mnVibration_IntroProc(HSD_GObj* arg0)
     data = arg0->user_data;
     {
         HSD_JObj* temp_jobj = data->jobjs[1];
-        frame =
-            mn_8022ED6C(temp_jobj, (AnimLoopSettings*) &mnVibration_803EECE0);
+        frame = mn_8022ED6C(temp_jobj, (&mnVibration_803EECE0));
     }
     if (mnVibration_804DC050 == frame) {
         jobj = ((MnVibrationData*) arg0->user_data)->jobjs[23];
@@ -856,7 +852,7 @@ void mnVibration_IntroProc(HSD_GObj* arg0)
             }
         }
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-        if ((u8) data->x6[0] != 0) {
+        if (data->x6[0] != 0) {
             HSD_JObjClearFlagsAll(data->jobjs[22], JOBJ_HIDDEN);
         }
     } else if (mnVibration_804DC054 == frame) {
@@ -872,7 +868,7 @@ void mnVibration_IntroProc(HSD_GObj* arg0)
             jobj = jobj->next;
         }
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-        if ((u8) data->x6[1] != 0) {
+        if (data->x6[1] != 0) {
             HSD_JObjClearFlagsAll(data->jobjs[21], JOBJ_HIDDEN);
         }
     } else if (mnVibration_804DC058 == frame) {
@@ -893,7 +889,7 @@ void mnVibration_IntroProc(HSD_GObj* arg0)
             jobj4 = jobj3->next;
         }
         HSD_JObjClearFlagsAll(jobj4, JOBJ_HIDDEN);
-        if ((u8) data->x6[2] != 0) {
+        if (data->x6[2] != 0) {
             HSD_JObjClearFlagsAll(data->jobjs[20], JOBJ_HIDDEN);
         }
     } else if (mnVibration_804DC05C == frame) {
@@ -919,7 +915,7 @@ void mnVibration_IntroProc(HSD_GObj* arg0)
             jobj = jobj4->next;
         }
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-        if ((u8) data->x6[3] != 0) {
+        if (data->x6[3] != 0) {
             HSD_JObjClearFlagsAll(data->jobjs[19], JOBJ_HIDDEN);
         }
     } else if (mnVibration_804DC060 == frame) {
@@ -954,7 +950,7 @@ void mnVibration_IntroProc(HSD_GObj* arg0)
         }
     }
 
-    if (frame >= ((AnimLoopSettings*) &mnVibration_803EECE0)->end_frame) {
+    if (frame >= ((&mnVibration_803EECE0))->end_frame) {
         HSD_GObjProc* proc;
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObj_SetupProc(arg0, mnVibration_Think, 0);
@@ -1038,7 +1034,7 @@ void mnVibration_Init(int arg0)
     MnVibrationDataLayout* strings;
 
     strings = (MnVibrationDataLayout*) &mnVibration_803EECE0;
-    assets = (MnVibrationJointAssets*) &mnVibration_804A0868;
+    assets = (&mnVibration_804A0868);
     mn_804D6BC8.cooldown = 5;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
     mn_804A04F0.cur_menu = 19;

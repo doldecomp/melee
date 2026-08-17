@@ -93,7 +93,7 @@ void mnGallery_80258A08(HSD_GObj* gobj, u16 width, u16 height, u32 priority)
     Vec3 interest = { 0, 0, 0 };
 
     far = 2.0f;
-    bottom = (f32) (s32) - (s32) height;
+    bottom = (f32) (-(s32) height);
     right = (f32) width;
     top = 0.0f;
     left = 0.0f;
@@ -299,7 +299,7 @@ void fn_80258ED0(HSD_GObj* gobj)
     }
 }
 
-inline void fn_802590C4_inline(HSD_GObj* gobj)
+static inline void fn_802590C4_inline(HSD_GObj* gobj)
 {
     s32 i;
     struct mnGallery_804D6C88_userdata* tmp;

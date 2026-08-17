@@ -1,7 +1,6 @@
 #include "ithassam.h"
 
 #include "inlines.h"
-#include "math.h"
 
 #include "cm/camera.h"
 #include "ef/eflib.h"
@@ -21,7 +20,7 @@
 #include "it/types.h"
 #include "lb/lbvector.h"
 
-#include <trigf.h>
+#include <math.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
@@ -292,8 +291,8 @@ bool itHassam_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-inline void itHassam_802CE400_sub(HSD_GObj* gobj, int msid,
-                                  Item_StateChangeFlags flags)
+static inline void itHassam_802CE400_sub(HSD_GObj* gobj, int msid,
+                                         Item_StateChangeFlags flags)
 {
     Item* ip = gobj->user_data;
     Item_80268E5C(gobj, msid, flags);

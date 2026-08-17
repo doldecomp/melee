@@ -23,7 +23,6 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <MetroTRK/intrinsics.h>
 

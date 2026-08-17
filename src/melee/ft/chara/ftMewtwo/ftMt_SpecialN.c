@@ -1,7 +1,5 @@
 #include "ftMt_SpecialN.h"
 
-#include "math.h"
-
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 
@@ -32,7 +30,7 @@
 #include "it/items/itmewtwoshadowball.h"
 #include "lb/lb_00B0.h"
 
-#include <trigf.h>
+#include <math.h>
 #include <dolphin/mtx.h>
 
 /// SpecialN/SpecialAirN
@@ -264,9 +262,7 @@ void ftMt_SpecialN_ReleaseShadowBall(HSD_GObj* gobj)
     fp = fp = getFighter(gobj);
     mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
 
-    if (((u32) fp->cmd_vars[1] == 1U) &&
-        (fp->u.mt.x2230_shadowHeldGObj != NULL))
-    {
+    if ((fp->cmd_vars[1] == 1U) && (fp->u.mt.x2230_shadowHeldGObj != NULL)) {
         Vec3 sp38;
         fp->cmd_vars[1] = 2;
         ftMewtwo_SpecialN_GetPos(fp, &sp38);
@@ -319,7 +315,7 @@ void ftMt_SpecialN_PlayChargeSFX(HSD_GObj* gobj)
 
     u8 _[8];
 
-    if ((u32) fp->cmd_vars[2] != 0U) {
+    if (fp->cmd_vars[2] != 0U) {
         if (fp->u.mt.x2234_shadowBallCharge != 0) {
             chargeLevel = (float) fp->u.mt.x2234_shadowBallCharge /
                           mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
@@ -355,13 +351,13 @@ void ftMt_SpecialN_PlayChargeSFX(HSD_GObj* gobj)
                 ft_80088510(fp, shadowBallSFX[0], SFX_VOLUME_MAX, SFX_PAN_MID);
             }
         } else {
-            fp->mv.mt.SpecialN.chargeLevel = (float) 9.999999747378752e-5f;
+            fp->mv.mt.SpecialN.chargeLevel = 9.999999747378752e-5f;
             ft_80088510(fp, shadowBallSFX[0], SFX_VOLUME_MAX, SFX_PAN_MID);
         }
     }
 }
 
-inline void ftMewtwo_SpecialN_SetCall(HSD_GObj* gobj)
+static inline void ftMewtwo_SpecialN_SetCall(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     fp->death2_cb = ftMt_Init_OnDeath2;
@@ -369,7 +365,7 @@ inline void ftMewtwo_SpecialN_SetCall(HSD_GObj* gobj)
     fp->death3_cb = ftMt_Init_OnDeath2;
 }
 
-inline void ftMewtwo_SpecialN_ChangeAction(HSD_GObj* gobj)
+static inline void ftMewtwo_SpecialN_ChangeAction(HSD_GObj* gobj)
 
 {
     Fighter* fp = getFighter(gobj);
@@ -394,7 +390,7 @@ inline void ftMewtwo_SpecialN_ChangeAction(HSD_GObj* gobj)
     fp->mv.mt.SpecialN.isFull = false;
     fp->mv.mt.SpecialN.x2344 = (u32) 0;
 
-    if ((s32) fp->u.mt.x2234_shadowBallCharge == 0) {
+    if (fp->u.mt.x2234_shadowBallCharge == 0) {
         releaseLag = mewtwoAttrs->x10_MEWTWO_SHADOWBALL_RELEASE_LAG;
     }
     fp->mv.mt.SpecialN.releaseLag = releaseLag;
@@ -411,7 +407,7 @@ void ftMt_SpecialN_Enter(HSD_GObj* gobj)
     ftMewtwo_SpecialN_ChangeAction(gobj);
 }
 
-inline void ftMewtwo_SpecialAirN_ChangeAction(HSD_GObj* gobj)
+static inline void ftMewtwo_SpecialAirN_ChangeAction(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
@@ -432,7 +428,7 @@ inline void ftMewtwo_SpecialAirN_ChangeAction(HSD_GObj* gobj)
     fp->mv.mt.SpecialN.isFull = false;
     fp->mv.mt.SpecialN.x2344 = (u32) 0;
 
-    if ((s32) fp->u.mt.x2234_shadowBallCharge == 0) {
+    if (fp->u.mt.x2234_shadowBallCharge == 0) {
         releaseLag = mewtwoAttrs->x10_MEWTWO_SHADOWBALL_RELEASE_LAG;
     }
 
@@ -465,9 +461,7 @@ void ftMt_SpecialNStart_Anim(HSD_GObj* gobj)
 
     u8 _[12];
 
-    if (((u32) fp->cmd_vars[3] == 1U) &&
-        (fp->u.mt.x2230_shadowHeldGObj == NULL))
-    {
+    if ((fp->cmd_vars[3] == 1U) && (fp->u.mt.x2230_shadowHeldGObj == NULL)) {
         sp2C.z = 2.0f;
         sp2C.y = 0.0f;
         sp2C.x = 0.0f;
@@ -499,14 +493,12 @@ void ftMt_SpecialNStart_Anim(HSD_GObj* gobj)
     }
 }
 
-inline void ftMewtwo_SpecialN_CreateHeldShadow(HSD_GObj* gobj, Vec3* pos1,
-                                               Vec3* pos2)
+static inline void ftMewtwo_SpecialN_CreateHeldShadow(HSD_GObj* gobj,
+                                                      Vec3* pos1, Vec3* pos2)
 {
     Fighter* fp = getFighter(gobj);
 
-    if (((u32) fp->cmd_vars[3] == 1U) &&
-        (fp->u.mt.x2230_shadowHeldGObj == NULL))
-    {
+    if ((fp->cmd_vars[3] == 1U) && (fp->u.mt.x2230_shadowHeldGObj == NULL)) {
         HSD_GObj* shadowHeldGObj;
 
         pos1->z = 2.0f;
@@ -549,8 +541,8 @@ void ftMt_SpecialNLoop_Anim(HSD_GObj* gobj)
         ftMt_SpecialN_PlayChargeSFX(gobj);
         if ((s32) fp->mv.mt.SpecialN.x2348 == false) {
             fp->mv.mt.SpecialN.x2344++;
-            if ((s32) fp->mv.mt.SpecialN.x2344 >
-                (s32) mewtwoAttrs->xC_MEWTWO_SHADOWBALL_CHARGE_ITERATIONS)
+            if (fp->mv.mt.SpecialN.x2344 >
+                mewtwoAttrs->xC_MEWTWO_SHADOWBALL_CHARGE_ITERATIONS)
             {
                 fp->mv.mt.SpecialN.x2344 = 0;
                 fp->u.mt.x2234_shadowBallCharge++;
@@ -586,7 +578,7 @@ void ftMt_SpecialNLoopFull_Anim(HSD_GObj* gobj)
         mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
 }
 
-inline void ftMewtwo_SpecialN_RemoveShadowBall2(HSD_GObj* gobj)
+static inline void ftMewtwo_SpecialN_RemoveShadowBall2(HSD_GObj* gobj)
 {
     if (gobj != NULL) {
         Fighter* fp = getFighter(gobj);
@@ -636,9 +628,7 @@ void ftMt_SpecialAirNStart_Anim(HSD_GObj* gobj)
 
     u8 _[12];
 
-    if (((u32) fp->cmd_vars[3] == 1U) &&
-        (fp->u.mt.x2230_shadowHeldGObj == NULL))
-    {
+    if ((fp->cmd_vars[3] == 1U) && (fp->u.mt.x2230_shadowHeldGObj == NULL)) {
         sp2C.z = 2.0f;
         sp2C.y = 0.0f;
         sp2C.x = 0.0f;
@@ -694,8 +684,8 @@ void ftMt_SpecialAirNLoop_Anim(HSD_GObj* gobj)
         ftMt_SpecialN_PlayChargeSFX(gobj);
         if ((s32) fp->mv.mt.SpecialN.x2348 == false) {
             fp->mv.mt.SpecialN.x2344++;
-            if ((s32) fp->mv.mt.SpecialN.x2344 >
-                (s32) mewtwoAttrs->xC_MEWTWO_SHADOWBALL_CHARGE_ITERATIONS)
+            if (fp->mv.mt.SpecialN.x2344 >
+                mewtwoAttrs->xC_MEWTWO_SHADOWBALL_CHARGE_ITERATIONS)
             {
                 fp->mv.mt.SpecialN.x2344 = 0;
                 fp->u.mt.x2234_shadowBallCharge++;
@@ -1140,7 +1130,7 @@ static inline void ftMewtwo_SpecialN_LaunchShadowBall(HSD_GObj* gobj)
 
     if (ftGetKind(fp) == FTKIND_MEWTWO) {
         ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
-        if ((u32) fp->cmd_vars[3] == 1U) {
+        if (fp->cmd_vars[3] == 1U) {
             fp->cmd_vars[3] = 0;
             lb_8000B1CC(fp->parts[FtPart_RShoulderN].joint, NULL, &sp20);
             lb_8000B1CC(fp->parts[FtPart_LHandNb].joint, NULL, &sp2C);

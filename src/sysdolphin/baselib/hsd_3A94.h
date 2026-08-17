@@ -6,8 +6,7 @@
 #include <Gecko_setjmp.h>
 #include <dolphin/card.h>
 
-typedef union CardFileData {
-    int size;
+typedef struct CardFileData {
     u8* ptr;
 } CardFileData;
 
@@ -45,13 +44,12 @@ typedef struct CardState {
 /* 3AC334 */ UNK_RET fn_803AC334(UNK_PARAMS);
 /* 3AC340 */ int hsd_803AC340(void* header);
 /* 3AC3E0 */ void hsd_803AC3E0(struct CardState* file_desc, int file_idx,
-                               int file_size, int file_flags, int data_size);
+                               int file_size, int file_flags, u8* data);
 /* 3AC3F8 */ void fn_803AC3F8(void*, u8*, s32);
 /* 3AC558 */ void hsd_803AC558(struct CardState*, u8*);
 /* 3AC634 */ u32 fn_803AC634(struct CardState* file_desc, s32 file_idx);
 /* 3AC6B8 */ s32 fn_803AC6B8(struct CardState* file_desc, s32 file_count);
 /* 3AC7DC */ s32 fn_803AC7DC(CardState*);
-/* 3ACB74 */ s32 fn_803ACB74(s32 seq_a, s32 seq_b);
 /* 3ACBE8 */ s32 fn_803ACBE8(CardState* state, s32 block_idx);
 /* 3ACC0C */ s32 fn_803ACC0C(CardState* state, s32 block_idx, s32 file_id,
                              s32 seq_num, void* expected_data, s32 data_size);

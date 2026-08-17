@@ -137,7 +137,7 @@ void ftGw_SpecialLw_UpdateBucketModel(HSD_GObj* gobj)
     }
 }
 
-inline void ftGameWatch_SpecialLw_SetVars(HSD_GObj* gobj)
+static inline void ftGameWatch_SpecialLw_SetVars(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[1] = 0;

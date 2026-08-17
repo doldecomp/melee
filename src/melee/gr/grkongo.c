@@ -25,9 +25,8 @@
 #include "mp/forward.h"
 
 #include "mp/mplib.h"
-#include "MSL/math.h"
 
-#include <math_ppc.h>
+#include <math.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjproc.h>
@@ -219,8 +218,8 @@ static inline s32 random_adder(s32 temp_f0, s32 temp_f2)
         return random_adder_b(temp_f0, temp_f2);
     }
 #else
-    temp_r28_2 = (s32) temp_f0;
-    var_r29 = (s32) temp_f2;
+    temp_r28_2 = temp_f0;
+    var_r29 = temp_f2;
 
     if (temp_f2 > temp_f0) {
         temp_r3 = var_r29 - temp_r28_2;
@@ -339,12 +338,12 @@ void grKongo_801D577C(Ground_GObj* arg0)
             angle_delta += M_TAU;
         }
         if (angle_delta < limit_angle || angle_delta < ABS(gp->u.kongo3.xE0)) {
-            if ((s16) gp->u.kongo3.xC4 == 3) {
+            if (gp->u.kongo3.xC4 == 3) {
                 gp->u.kongo3.xC4 = 0;
             }
             break;
         }
-        if ((s16) gp->u.kongo3.xC4 == 2) {
+        if (gp->u.kongo3.xC4 == 2) {
             gp->u.kongo3.xC4 = 3;
         }
         break;
@@ -366,7 +365,7 @@ void grKongo_801D577C(Ground_GObj* arg0)
             }
         }
         gp->u.kongo2.xCC -= 1;
-        if ((s16) gp->u.kongo2.xCC < 0) {
+        if (gp->u.kongo2.xCC < 0) {
             f32 spin_step;
             gp->u.kongo3.xC4 = 1;
             if (HSD_Randi(2) != 0) {
@@ -1173,8 +1172,9 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
 
     mpLib_80057424(4);
     entry = (_struct_grKg_803E188C_0x18*) ((u8*) grKg_803E16E0 + 0x1AC);
+    i = 0;
     line_id = 0x28;
-    for (i = 0; i < 15; i++) {
+    do {
         temp = entry->unk14;
         mpLib_80056758(line_id, 0.0f, temp, 0.0f, temp);
         if ((s32) i == 0) {
@@ -1182,9 +1182,10 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
         } else if (i == 14) {
             mpLib_80056758(line_id + 1, 0.0f, temp, 0.0f, temp);
         }
+        i++;
         line_id += 2;
         entry++;
-    }
+    } while (i < 15);
 }
 
 f32 grKongo_801D8314(void)

@@ -184,7 +184,7 @@ void lbMemFreeToHeap(Handle* h, void* arg1)
     HSD_ASSERT(283, 0);
 }
 
-void fn_80015184(OSAlarm* alarm, OSContext* context)
+static void fn_80015184(OSAlarm* alarm, OSContext* context)
 {
     struct LBMgr* p;
     u32 temp_r3_2;
@@ -253,34 +253,42 @@ static void start_ram_copy(u32 old, u32 current, u32 size, Handle* next)
 static void lbMemory_80015320(int arg0, int _handle, void* arg2,
                               int cancelflag)
 {
+    void* null_or_old;
     Handle* handle = (Handle*) _handle;
     void** currentp;
+    void* old;
     u32 current;
-    u32 old;
+    void* copy_src;
+    void* loaded_old;
 
     currentp = &_p(x6E4);
     current = (u32) _p(x6E4);
+    null_or_old = NULL;
 
     HSD_ASSERT(0x188, !cancelflag);
 
-    if (handle != NULL) {
-        if ((old = (u32) handle->x4_lo) != current) {
+    if (handle != null_or_old) {
+        loaded_old = handle->x4_lo;
+        if ((old = loaded_old) != (void*) current) {
+            null_or_old = old;
             handle->x4_lo = (void*) current;
             *currentp = (void*) ((u32) handle->x4_lo + (u32) handle->x8_hi);
+            copy_src = null_or_old;
 
             if ((u32) handle->x4_lo < 0x80000000U) {
-                HSD_DevComRequest(0, old, current, OSRoundUp32B(handle->x8_hi),
-                                  0x1B, 1, lbMemory_80015320, handle->x0_next);
+                HSD_DevComRequest(0, (u32) copy_src, current,
+                                  OSRoundUp32B(handle->x8_hi), 0x1B, 1,
+                                  lbMemory_80015320, handle->x0_next);
                 return;
             } else {
-                start_ram_copy(old, current, OSRoundUp32B(handle->x8_hi),
-                               handle->x0_next);
+                start_ram_copy((u32) copy_src, current,
+                               OSRoundUp32B(handle->x8_hi), handle->x0_next);
                 return;
             }
         }
 
         *currentp = (void*) ((u32) old + (u32) handle->x8_hi);
-        lbMemory_80015320(0, (int) handle->x0_next, NULL, 0);
+        lbMemory_80015320(0, (int) handle->x0_next, null_or_old, 0);
         return;
     }
 

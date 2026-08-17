@@ -9,10 +9,10 @@
 #include "if/ifcoget.h"
 #include "if/ifstatus.h"
 #include "lb/lb_00B0.h"
-#include "MSL/math.h"
 
 #include <baselib/forward.h>
 
+#include <math.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
@@ -153,7 +153,7 @@ Ground_UpdateStarFoxSequence(Ground_GObj* gobj, Ground* gp,
         if (grCorneria_801E2598(gp->u.starfox.xC4.word,
                                 gp->u.starfox.arwing_slot))
         {
-            if ((s32) gp->u.starfox.xCC-- < 0) {
+            if ((gp->u.starfox.xCC--) < 0) {
                 Ground_GObj* sequence_gobj = create_gobj(sequence_gobj_id);
                 grCorneria_801E2738(
                     sequence_gobj, &GET_GROUND(sequence_gobj)->u,
@@ -161,7 +161,7 @@ Ground_UpdateStarFoxSequence(Ground_GObj* gobj, Ground* gp,
                 gp->u.starfox.arwing_slot++;
                 gp->u.starfox.xCC = 0;
             }
-        } else if ((s32) gp->u.starfox.xCC-- < 0) {
+        } else if ((gp->u.starfox.xCC--) < 0) {
             Ground_801C4A08(gobj);
         }
     }

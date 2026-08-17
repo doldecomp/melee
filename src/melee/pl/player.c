@@ -226,7 +226,7 @@ void Player_80031AD0(int slot)
 
     // the commented line below makes more sense, but is off by one byte.
     // temp_vec = unused_ptr = ftMapping_list;
-    offset_arr = (s8*) (&ftMapping_list[0].extra_internal_id);
+    offset_arr = (&ftMapping_list[0].extra_internal_id);
 
     if (offset_arr[player->player_character * sizeof(ftMapping)] != -1) {
         player->flags.b2 = true;
@@ -1897,7 +1897,7 @@ bool Player_800368F8(int slot)
     return ftLib_80086BB4(player->player_entity[player->transformed[0]]);
 }
 
-void Player_80036978(s32 slot, s32 arg1)
+void Player_80036978(s32 slot, Vec3* pos)
 {
     StaticPlayer* player;
 
@@ -1906,9 +1906,7 @@ void Player_80036978(s32 slot, s32 arg1)
     Player_CheckSlot(slot);
     player = &player_slots[slot];
 
-    /// @todo Eliminate cast.
-    ftLib_80086B90(player->player_entity[player->transformed[0]],
-                   (Vec3*) arg1);
+    ftLib_80086B90(player->player_entity[player->transformed[0]], pos);
 }
 
 void Player_InitOrResetPlayer(s32 slot)

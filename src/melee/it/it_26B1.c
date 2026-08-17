@@ -141,9 +141,9 @@ void it_8026B344(HSD_GObj* gobj,
     Item* ip;
 
     ip = gobj->user_data;
-    pos->x = (f32) ((ip->facing_dir * ip->xBCC_unk.x) + ip->pos.x);
-    pos->y = (f32) (ip->pos.y + ip->xBCC_unk.y);
-    pos->z = (f32) ip->pos.z;
+    pos->x = ((ip->facing_dir * ip->xBCC_unk.x) + ip->pos.x);
+    pos->y = (ip->pos.y + ip->xBCC_unk.y);
+    pos->z = ip->pos.z;
 }
 
 f32 itGetGrabRangeX(HSD_GObj* gobj) // Return item's X-Axis grab range?
@@ -452,8 +452,8 @@ s32 it_8026B7E8(HSD_GObj* gobj) // Get bit 1 of 0xDC8 word
     return ip->xDC8_word.flags.x1;
 }
 
-inline void RunCallbackUnk(HSD_GObjInteraction proc, HSD_GObj* gobj0,
-                           HSD_GObj* gobj1)
+static inline void RunCallbackUnk(HSD_GObjInteraction proc, HSD_GObj* gobj0,
+                                  HSD_GObj* gobj1)
 {
     if (proc != NULL) {
         proc(gobj0, gobj1);
@@ -562,7 +562,6 @@ f32 it_8026B960(HSD_GObj* gobj)
 
 extern void lb_8000B804(HSD_JObj*, HSD_Joint*);
 extern void lb_8000BA0C(HSD_JObj*, f32);
-extern void HSD_JObjRemoveAnimAll(HSD_JObj*);
 
 static inline void What(HSD_GObj* gobj, struct ItemStateDesc* itemStateDesc,
                         Item* ip, HSD_JObj* item_jobj2)
@@ -685,8 +684,6 @@ void it_8026BB44(HSD_GObj* gobj)
     it_80272A3C(gobj->hsd_obj);
 }
 
-extern void ftLib_80086990(HSD_GObj*, Vec3*);
-
 /// Adjust item's position to fp bone
 void it_8026BB68(HSD_GObj* fighter_gobj, Vec3* pos)
 {
@@ -726,9 +723,6 @@ void it_8026BBCC(HSD_GObj* gobj, Vec3* pos)
     pos->z = coll_data->last_pos.z + offset_xz;
 }
 
-extern bool ftLib_80086960(HSD_GObj*);
-extern void ftLib_80086A4C(HSD_GObj*, f32);
-
 /// Check if item owner is a fighter + decrement hitlag
 void it_8026BC14(HSD_GObj* gobj)
 {
@@ -758,8 +752,6 @@ s32 itGetAttackId(HSD_GObj* gobj)
     Item* ip = gobj->user_data;
     return ip->xD88_attackID;
 }
-
-extern void ftLib_80086644(HSD_GObj*, Vec3*);
 
 /// Unknown item ECB / position update
 void it_8026BC90(HSD_GObj* gobj, Vec3* pos)
@@ -1038,8 +1030,6 @@ HSD_GObj* it_8026BE84(BobOmbRain* bobOmbRain)
     return gobj;
 }
 
-extern CollData* ftLib_80086984(HSD_GObj*);
-
 CollData* it_8026C100(HSD_GObj* gobj) // Get item's CollData pointer
 {
     CollData* collDataPtr = NULL;
@@ -1101,7 +1091,7 @@ bool it_8026C1E8(HSD_GObj* gobj)
 void it_8026C220(HSD_GObj* gobj, HSD_GObj* fighter_gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xCB0_source_ply = (u8) ftLib_80086BE0(fighter_gobj);
+    ip->xCB0_source_ply = ftLib_80086BE0(fighter_gobj);
 }
 
 /// Find the closest item to the given position?

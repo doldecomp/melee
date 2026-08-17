@@ -16,7 +16,6 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <trigf.h>
 
 /* 2B37F0 */ static void itPikachutjoltground_UnkMotion1_Phys(Item_GObj*);
 
@@ -55,7 +54,8 @@ Item_GObj* it_802B3368(Item_GObj* gobj)
     return NULL;
 }
 
-Item_GObj* it_802B338C(Item_GObj* owner, Vec3* pos, f32 facing_dir, u32 kind)
+Item_GObj* itPikachuThunderJolt_Spawn(Item_GObj* owner, Vec3* pos,
+                                      f32 facing_dir, ItemKind kind)
 {
     SpawnItem spawn;
     UNUSED u8 _pad[4];

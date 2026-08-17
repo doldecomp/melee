@@ -114,4 +114,11 @@ typedef enum ftPk_Submotion {
     ftPk_SM_SelfCount = ftPk_SM_Count - ftCo_SM_Count,
 } ftPk_Submotion;
 
+enum ftPk_SpecialN_CmdVars {
+    ftPk_SpecialN_Cmd0,
+    ftPk_SpecialN_Cmd1,
+    ftPk_SpecialN_Cmd2,
+    ftPk_SpecialN_Cmd3,
+};
+
 #endif

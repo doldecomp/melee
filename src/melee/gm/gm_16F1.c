@@ -227,13 +227,13 @@ int fn_8016F548(void* arg0, u16 arg1, u8 mask, u8 player_id)
 
     for (i = arg1; (u32) i < 0x101U; i++) {
         if ((s16) lbl_803D5A4C[i].kind < 0xD7) {
-            if ((u8) mask & (u8) fn_8016F180(i)) {
+            if (mask & (u8) fn_8016F180(i)) {
                 if (pl_80039418(player_id, i) != 0) {
                     return i;
                 }
             }
         } else {
-            if ((u8) mask & (u8) fn_8016F180(i)) {
+            if (mask & (u8) fn_8016F180(i)) {
                 if ((unsigned) fn_801701C0(arg0, player_id, i) != 0) {
                     return i;
                 }
@@ -243,13 +243,13 @@ int fn_8016F548(void* arg0, u16 arg1, u8 mask, u8 player_id)
 
     for (i = 0x100; i >= 0; i--) {
         if ((s16) lbl_803D5A4C[i].kind < 0xD7) {
-            if ((u8) mask & (u8) fn_8016F180(i)) {
+            if (mask & (u8) fn_8016F180(i)) {
                 if (pl_80039418(player_id, i) != 0) {
                     return i;
                 }
             }
         } else {
-            if ((u8) mask & (u8) fn_8016F180(i)) {
+            if (mask & (u8) fn_8016F180(i)) {
                 if ((unsigned) fn_801701C0(arg0, player_id, i) != 0) {
                     return i;
                 }
@@ -277,14 +277,14 @@ int fn_8016F740(void* arg0, u16 arg1, u8 mask, u8 player_id)
     for (; (u32) i < 0x101U; i++) {
         if ((s16) lbl_803D5A4C[i].kind < 0xD7) {
             flags = fn_8016F180(i);
-            if ((u8) mask & flags) {
+            if (mask & flags) {
                 if (pl_80039418(player_id, i) != 0) {
                     return i;
                 }
             }
         } else {
             flags = fn_8016F180(i);
-            if ((u8) mask & flags) {
+            if (mask & flags) {
                 if ((unsigned) fn_801701C0(arg0, player_id, i) != 0) {
                     return i;
                 }
@@ -312,14 +312,14 @@ int fn_8016F870(void* arg0, u16 arg1, u8 mask, u8 player_id)
 
         if (kind < 0xD7) {
             flags = fn_8016F180(i);
-            if ((u8) mask & flags) {
+            if (mask & flags) {
                 if (pl_80039418(player_id, i) != 0) {
                     return i;
                 }
             }
         } else {
             flags = fn_8016F180(i);
-            if ((u8) mask & flags) {
+            if (mask & flags) {
                 if ((unsigned) fn_801701C0(arg0, player_id, i) != 0) {
                     return i;
                 }
@@ -343,14 +343,14 @@ int fn_8016F9A8(void* arg0, u16 arg1, u8 mask, u8 player_id)
     for (i = arg1; (u32) i < 0x101; i++) {
         if ((s16) lbl_803D5A4C[i].kind < 0xD7) {
             flags = fn_8016F180(i);
-            if ((u8) mask & flags) {
+            if (mask & flags) {
                 if (pl_80039418(player_id, i) != 0) {
                     count++;
                 }
             }
         } else {
             flags = fn_8016F180(i);
-            if ((u8) mask & flags) {
+            if (mask & flags) {
                 if ((unsigned) fn_801701C0(arg0, player_id, i) != 0) {
                     count++;
                 }
@@ -400,7 +400,7 @@ int fn_8016FAD4(struct lbl_8046B6A0_24C_t* rules, int kind, int flags,
     }
 
     if ((entry->x6 & 2) && (flags & 2)) {
-        u8 pr = rankings[(u8) player];
+        u8 pr = rankings[player];
         if (pr == 0) {
             return lbl_803D5648[entry->x2 - 2] * 2;
         }
@@ -410,21 +410,19 @@ int fn_8016FAD4(struct lbl_8046B6A0_24C_t* rules, int kind, int flags,
     }
 
     if ((entry->x6 & 1) && (flags & 4)) {
-        return (lbl_803D5648[entry->x2 - 2] / 10) *
-               pl_80039418((u8) player, kind);
+        return (lbl_803D5648[entry->x2 - 2] / 10) * pl_80039418(player, kind);
     }
 
     if (entry->x5 == 1) {
         if (kind == 0xE3) {
-            return lbl_803D5648[entry->x2 - 2] * x58[(u8) player].x20;
+            return lbl_803D5648[entry->x2 - 2] * x58[player].x20;
         } else if (kind == 0xE4) {
             return lbl_803D5648[entry->x2 - 2] *
-                   (x58[(u8) player].x24 - x58[(u8) player].xA);
+                   (x58[player].x24 - x58[player].xA);
         } else if (kind == 0xE5) {
-            return lbl_803D5648[entry->x2 - 2] * x58[(u8) player].xA;
+            return lbl_803D5648[entry->x2 - 2] * x58[player].xA;
         } else {
-            return lbl_803D5648[entry->x2 - 2] *
-                   pl_80039418((u8) player, kind);
+            return lbl_803D5648[entry->x2 - 2] * pl_80039418(player, kind);
         }
     }
 
@@ -444,13 +442,13 @@ int fn_8016FFD4(struct lbl_8046B6A0_24C_t* arg0, int arg1, u8 arg2)
     for (i = 0; (u32) i < 0x101U; i++) {
         if ((s16) lbl_803D5A4C[i].kind < 0xD7) {
             if ((arg1 & 0xFF) & (u8) fn_8016F180(i) &&
-                pl_80039418((u8) arg2, i) != 0)
+                pl_80039418(arg2, i) != 0)
             {
                 count += fn_8016FAD4(arg0, i, arg1, arg2);
             }
         } else {
             if ((arg1 & 0xFF) & (u8) fn_8016F180(i)) {
-                if ((unsigned) fn_801701C0(arg0, (u8) arg2, i) != 0) {
+                if ((unsigned) fn_801701C0(arg0, arg2, i) != 0) {
                     count += fn_8016FAD4(arg0, i, arg1, arg2);
                 }
             }
@@ -659,9 +657,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 struct lbl_8046B6A0_24C_58_t* p = x58;
                 int i;
                 for (i = 0; i < 4; i++) {
-                    if (p->x0 != 3 && i != arg1 &&
-                        (u32) p->x20 >= (u32) x58[arg1].x20)
-                    {
+                    if (p->x0 != 3 && i != arg1 && p->x20 >= x58[arg1].x20) {
                         return 0;
                     }
                     p++;
@@ -721,9 +717,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 struct lbl_8046B6A0_24C_58_t* p = x58;
                 int i;
                 for (i = 0; i < 4; i++) {
-                    if (p->x0 != 3 && i != arg1 &&
-                        (u32) p->x40 >= (u32) x58[arg1].x40)
-                    {
+                    if (p->x0 != 3 && i != arg1 && p->x40 >= x58[arg1].x40) {
                         return 0;
                     }
                     p++;
@@ -1124,11 +1118,11 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         u32 vals[4];
         int i, j;
         unsigned int threshold;
-        if ((unsigned) pl_800408B8(arg1) == 0) {
+        if (pl_800408B8(arg1) == 0) {
             return 0;
         }
         threshold = pl_80038914()->x13C;
-        if ((unsigned) pl_800408B8(arg1) < threshold) {
+        if (pl_800408B8(arg1) < threshold) {
             int mode;
             if (fn_80171A88() == 0) {
                 mode = 0;
@@ -1271,7 +1265,7 @@ int fn_80171BA4(void* arg0)
 
     rules = arg0;
     memzero(scores, sizeof(scores));
-    memzero(lbl_804D65A8, 6);
+    memzero(lbl_804D65A8, sizeof(lbl_804D65A8));
     lbl_804D65B0 = Gm_PKind_Human;
 
     player = 0;

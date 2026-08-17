@@ -14,9 +14,8 @@
 
 #include <placeholder.h>
 
-#include <__mem.h>
 #include <math.h>
-#include <math_ppc.h>
+#include <string.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 
@@ -343,12 +342,6 @@ static inline HSD_RObj* inlined_HSD_RObjGetByType(HSD_RObj* robj, u32 type,
     return NULL;
 }
 
-inline f32 HSD_MtxColMagFloat(MtxPtr mtx, int col)
-{
-    return sqrtf((mtx[0][col] * mtx[0][col]) + (mtx[1][col] * mtx[1][col]) +
-                 (mtx[2][col] * mtx[2][col]));
-}
-
 static void resolveCnsOrientation(HSD_RObj* robj, void* obj,
                                   void (*update_func)(void*, int,
                                                       HSD_ObjData*))
@@ -379,7 +372,7 @@ static void resolveCnsOrientation(HSD_RObj* robj, void* obj,
             if (sval > 1e-10F) {
                 sval = 1.0F / sval;
             }
-            sval *= HSD_MtxColMagFloat(jobj->mtx, i);
+            sval *= HSD_MtxColMag(jobj->mtx, i);
             v.x *= sval;
             v.y *= sval;
             v.z *= sval;
@@ -398,7 +391,7 @@ static void resolveCnsOrientation(HSD_RObj* robj, void* obj,
             if (sval > 1e-10F) {
                 sval = 1.0F / sval;
             }
-            sval *= HSD_MtxColMagFloat(jobj->mtx, i);
+            sval *= HSD_MtxColMag(jobj->mtx, i);
             v.x *= sval;
             v.y *= sval;
             v.z *= sval;
@@ -610,7 +603,7 @@ HSD_RObj* HSD_RObjLoadDesc(HSD_RObjDesc* robjdesc)
 
     if (robjdesc != NULL) {
         robj = HSD_RObjAlloc();
-        robj->next = HSD_RObjLoadDesc((HSD_RObjDesc*) robjdesc->next);
+        robj->next = HSD_RObjLoadDesc(robjdesc->next);
         robj->flags = robjdesc->flags;
         switch (robj->flags & ROBJ_TYPE_MASK) {
         case REFTYPE_JOBJ:
@@ -682,7 +675,7 @@ HSD_RObj* HSD_RObjAlloc(void)
 {
     HSD_RObj* new = HSD_ObjAlloc(HSD_RObjGetAllocData());
     HSD_ASSERT(1032, new);
-    memset(new, 0, 0x1C);
+    memset(new, 0, sizeof(*new));
     return new;
 }
 

@@ -19,7 +19,6 @@
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
-#include <math_ppc.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 #include <baselib/gobjgxlink.h>

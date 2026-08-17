@@ -82,8 +82,7 @@
 #include "pl/pltrick.h"
 #include "sfx/crowdsfx.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
+#include <math.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <baselib/controller.h>
@@ -97,11 +96,7 @@
 #include <baselib/lobj.h>
 #include <baselib/mtx.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
 
-extern struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX];
-
-extern MotionState ftData_MotionStateList[ftCo_MS_Count];
 extern MotionState* ftData_CharacterStateTables[FTKIND_MAX];
 
 /// ==== fighter.c variables ====
@@ -1262,8 +1257,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                 } else {
                     ftData_80085CD8(fp, fp, fp->anim_id);
                 }
-                fp->x3E4_fighterCmdScript.u =
-                    (union CmdUnion*) unk_struct_x18->xC;
+                fp->x3E4_fighterCmdScript.u = unk_struct_x18->xC;
                 fp->x3E4_fighterCmdScript.loop_count = 0;
 
                 if (anim_start) {
@@ -2348,7 +2342,7 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
                 VEC_CLEAR(fp->xD4_unk_vel);
             }
             // fp->xB0_position += *pAtkShieldKB
-            PSVECAdd(&fp->cur_pos, (Vec3*) pAtkShieldKB, &fp->cur_pos);
+            PSVECAdd(&fp->cur_pos, pAtkShieldKB, &fp->cur_pos);
         } else {
             // fp@r31.position@0xB0.xyz += selfVel + pAtkShieldKB
             PSVECAdd(&fp->cur_pos, &selfVel, &fp->cur_pos);
@@ -2356,7 +2350,7 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
             fp->cur_pos.y += p_kb_vel->y;
             fp->cur_pos.z += 0;
 
-            PSVECAdd(&fp->cur_pos, (Vec3*) pAtkShieldKB, &fp->cur_pos);
+            PSVECAdd(&fp->cur_pos, pAtkShieldKB, &fp->cur_pos);
         }
         // accumulate wind hazards into the windOffset vector
         ftColl_GetWindOffsetVec(gobj,
@@ -2733,7 +2727,7 @@ void Fighter_8006CFE0(Fighter_GObj* gobj)
     }
 }
 
-inline void setBit(Fighter_GObj* gobj)
+static inline void setBit(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2219_b7 = 1;

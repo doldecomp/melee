@@ -1,24 +1,24 @@
 #include "ithinoarashi.h"
 
 #include "inlines.h"
+#include "itmaril.h"
 
 #include "baselib/random.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/item.h"
 #include "it/items/itmaril.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <trigf.h>
 
 /* 2D60C8 */ static bool itHinoarashi_UnkMotion2_Anim(Item_GObj* gobj);
 

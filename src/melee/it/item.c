@@ -1,7 +1,6 @@
 #include "item.h"
 
 #include "it_26B1.h"
-#include "math.h"
 
 #include "cm/camera.h"
 #include "db/db.h"
@@ -33,6 +32,7 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/class.h>
 #include <baselib/debug.h>
@@ -731,8 +731,6 @@ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
     }
 }
 
-extern void PSMTXIdentity(Mtx); /* extern */
-
 /// Setup Item JObj
 void Item_802680CC(HSD_GObj* gobj)
 {
@@ -748,8 +746,6 @@ void Item_802680CC(HSD_GObj* gobj)
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     }
 }
-
-extern HSD_DObj* HSD_JObjGetDObj(HSD_JObj*);
 
 static void Item_8026814C(HSD_GObj* gobj)
 {
@@ -897,8 +893,6 @@ static void Item_80268560(HSD_GObj* gobj)
                     &ip->xD4_dynamicBones[i].dyn_desc);
     }
 }
-
-extern void ftLib_8008702C(s32);
 
 static void foobar(HSD_GObj* gobj)
 {

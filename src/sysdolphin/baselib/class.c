@@ -5,7 +5,6 @@
 #include "memory.h"
 #include "object.h" // IWYU pragma: keep
 
-#include <__mem.h>
 #include <string.h>
 #include <dolphin/os.h>
 
@@ -125,7 +124,7 @@ HSD_MemoryEntry* GetMemoryEntry(s32 idx)
         ssize_t i;
         bool found;
         HSD_MemoryEntry* entry;
-        usize_t size = idx * 4;
+        size_t size = idx * 4;
         if (memory_list[idx] == NULL) {
             entry = HSD_MemAlloc(sizeof(HSD_MemoryEntry));
             if (entry == NULL) {
@@ -310,18 +309,19 @@ void* hsdNew(HSD_ClassInfo* i)
     return cls;
 }
 
-inline HSD_ClassInfo* HSD_GetClassInfo(HSD_Obj* object)
+static inline HSD_ClassInfo* HSD_GetClassInfo(HSD_Obj* object)
 {
     return object->parent.class_info;
 }
 
-inline HSD_ClassInfo* HSD_PushClassInfo(HSD_ClassInfo* class_info)
+static inline HSD_ClassInfo* HSD_PushClassInfo(HSD_ClassInfo* class_info)
 {
     HSD_ClassInfo* ret;
     return ret = class_info;
 }
 
-inline bool hsdChangeClass_inline(HSD_Obj* object, HSD_ClassInfo* class_info)
+static inline bool hsdChangeClass_inline(HSD_Obj* object,
+                                         HSD_ClassInfo* class_info)
 {
     HSD_ClassInfo* var_r29;
     HSD_ClassInfo* var_r28;

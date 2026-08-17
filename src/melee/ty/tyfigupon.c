@@ -1,13 +1,9 @@
 #include "tyfigupon.h"
 
-#include "math.h"
 #include "placeholder.h"
 #include "platform.h"
 #include "stddef.h"
 #include "toy.h"
-
-#include <placeholder.h>
-#include <platform.h>
 
 #include "baselib/archive.h"
 #include "baselib/cobj.h"
@@ -43,14 +39,12 @@
 #include "lb/lbvector.h"
 #include "mn/inlines.h"
 #include "mn/mnmain.h"
-#include "MSL/math.h"
 #include "sc/types.h"
 #include "ty/inlines.h"
 #include "ty/toy.h"
 #include "ty/types.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
+#include <math.h>
 
 /* 314AA8 */ static void _tyFigupon_80314AA8(HSD_JObj*, char*, char*, char*);
 /* 314B54 */ static s32 _tyFigupon_80314B54(void);
@@ -292,7 +286,7 @@ void _tyFigupon_803152BC(HSD_GObj* arg0)
             HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         }
     } else {
-        temp_r3_2 = HSD_MemAlloc(0x58);
+        temp_r3_2 = HSD_MemAlloc(sizeof(TyFiguponUD));
         if (temp_r3_2 != NULL) {
             GObj_InitUserData(arg0, 0, Toy_RemoveUserData, temp_r3_2);
         }
@@ -699,7 +693,7 @@ void _tyFigupon_80315C44(HSD_GObj* arg0)
             HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         }
     } else {
-        ud = HSD_MemAlloc(0x58);
+        ud = HSD_MemAlloc(sizeof(TyFiguponUD));
         if (ud != NULL) {
             GObj_InitUserData(arg0, 0, Toy_RemoveUserData, ud);
             total = tyFigupon_GetCoinCount();
@@ -747,7 +741,7 @@ void _tyFigupon_80316170(HSD_GObj* arg0)
         ud->x44 -= 0.6f;
         HSD_JObjAddTranslationY(HSD_GObjGetHSDObj(arg0), ud->x44);
     } else {
-        ud = HSD_MemAlloc(0x58);
+        ud = HSD_MemAlloc(sizeof(TyFiguponUD));
         if (ud != NULL) {
             GObj_InitUserData(arg0, 0, Toy_RemoveUserData, ud);
         }
@@ -830,7 +824,7 @@ void _tyFigupon_80316420(s32 arg0)
                 data->x0, (void (*)(HSD_GObj*)) _tyFigupon_80315574, 0);
         }
         data->x24 = 0x12C;
-        ((TyFiguponData*) _tyFigupon_804D6EF0)->x18->hidden = 0;
+        (_tyFigupon_804D6EF0)->x18->hidden = 0;
     }
 }
 static const Vec3 _tyFigupon_803B8968 = { 0.0f, 1.0f, 0.0f };
@@ -1529,11 +1523,11 @@ void tyFigupon_OnEnter_80317D80(void* arg0)
     PAD_STACK(16);
 
     _tyFigupon_804D6EF0 = HSD_MemAlloc(0x34);
-    _tyFigupon_804D6EF4 = HSD_MemAlloc(0x60);
+    _tyFigupon_804D6EF4 = HSD_MemAlloc(sizeof(*_tyFigupon_804D6EF4));
     _tyFigupon_804D6EF8 = HSD_MemAlloc(0x18);
     Toy_sbss_804D6ED4 = HSD_MemAlloc(0xE4);
     memzero(_tyFigupon_804D6EF0, 0x34);
-    memzero(_tyFigupon_804D6EF4, 0x60);
+    memzero(_tyFigupon_804D6EF4, sizeof(*_tyFigupon_804D6EF4));
     memzero(_tyFigupon_804D6EF8, 0x18);
     memzero(Toy_sbss_804D6ED4, 0xE4);
     data = _tyFigupon_804D6EF0;
@@ -1580,7 +1574,7 @@ void tyFigupon_OnEnter_80317D80(void* arg0)
     HSD_JObjReqAnimAll(jobj, 0.0f);
     HSD_JObjAnimAll(jobj);
     HSD_JObjAddTranslationZ(jobj, 0.5f);
-    ud = HSD_MemAlloc(0x58);
+    ud = HSD_MemAlloc(sizeof(TyFiguponUD));
     if (ud != NULL) {
         GObj_InitUserData(data->x8, 0, Toy_RemoveUserData, ud);
     }
@@ -1595,7 +1589,7 @@ void tyFigupon_OnEnter_80317D80(void* arg0)
         }
         ef4->x5E = has_coin_credit;
     }
-    _tyFigupon_803153EC((s8) ef4->x5E, 6, 2, 0, 0);
+    _tyFigupon_803153EC(ef4->x5E, 6, 2, 0, 0);
     tyFigupon_UpdateRemainingCount(ef4);
     setupPercentDisplay(ef4);
     HSD_PadRenewStatus();

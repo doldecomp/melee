@@ -7,6 +7,7 @@
 #include "gm_unsplit.h"
 
 #include "db/db.h"
+#include "gm/gmmain_lib.h"
 #include "gm/gmscdata.h"
 #include "if/ifcoget.h"
 #include "lb/lb_013B.h"
@@ -221,7 +222,7 @@ void gm_801A4BD4(void)
     gm_801A4B40(0);
     gm_801A4B50(0);
 
-    lb_80019880(1.0F / 60 * OS_TIMER_CLOCK);
+    lb_80019880(OSSecondsToTicks(1.0F / 60));
     HSD_GObj_803912E0(&gm_80479D48.initdata);
     gm_80479D48.initdata.gproc_pri_max = 0x18;
     HSD_SObjLib_804D7960 =
@@ -254,7 +255,7 @@ GameSceneHandler* gm_FindGameSceneHandler(u8 kind)
     return NULL;
 }
 
-inline u64 maybe_gm_801A48A4(u8 i)
+static inline u64 maybe_gm_801A48A4(u8 i)
 {
     u64 temp_ret = gm_801A48A4(i);
     if (gm_80479D58.unk_10.unk_38_0) {

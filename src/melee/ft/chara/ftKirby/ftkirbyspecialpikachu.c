@@ -18,103 +18,78 @@
 #include "ftCommon/ftCo_Fall.h"
 
 #include "ftKirby/forward.h"
+#include "ftPikachu/forward.h"
 
-#include "ftKirby/ftkirby.h"
 #include "it/items/itpikachutjoltground.h"
 
 #include <stddef.h>
-#include <baselib/gobj.h>
-#include <baselib/random.h>
-#include <MSL/math.h>
 
-void ftKb_SpecialNPk_800F9FD4(Fighter_GObj* gobj)
+static void doEnter(Fighter_GObj* gobj, ftKirby_MotionState pk_msid,
+                    ftKirby_MotionState pc_msid)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 msid = ftKb_MS_PkSpecialN;
-    PAD_STACK(8);
+    ftKirby_MotionState msid = pk_msid;
     switch (fp->u.kb.hat.kind) {
     case FTKIND_PIKACHU:
         break;
     case FTKIND_PICHU:
-        msid = ftKb_MS_PcSpecialN;
+        msid = pc_msid;
         break;
     default:
         break;
     }
     Fighter_ChangeMotionState(gobj, msid, 0, 0.0f, 1.0f, 0.0f, NULL);
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
+    fp->cmd_vars[ftPk_SpecialN_Cmd0] = fp->cmd_vars[ftPk_SpecialN_Cmd1] =
+        fp->cmd_vars[ftPk_SpecialN_Cmd2] = fp->cmd_vars[ftPk_SpecialN_Cmd3] =
+            false;
     ftAnim_8006EBA4(gobj);
 }
 
-inline void ftKb_SpecialN_set_cbs(Fighter_GObj* gobj)
+void ftKb_SpecialNPk_800F9FD4(Fighter_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    fp->death2_cb = (void (*)(HSD_GObj*)) ftKb_Init_800EE74C;
-    fp->take_dmg_cb = (void (*)(HSD_GObj*)) ftKb_Init_800EE7B8;
+    doEnter(gobj, ftKb_MS_PkSpecialN, ftKb_MS_PcSpecialN);
+    PAD_STACK(8);
 }
 
 void ftKb_SpecialNPk_800FA064(Fighter_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    s32 msid = ftKb_MS_PkSpecialAirN;
+    doEnter(gobj, ftKb_MS_PkSpecialAirN, ftKb_MS_PcSpecialAirN);
     PAD_STACK(8);
-    switch (fp->u.kb.hat.kind) {
-    case FTKIND_PIKACHU:
-        break;
-    case FTKIND_PICHU:
-        msid = ftKb_MS_PcSpecialAirN;
-        break;
-    default:
-        break;
-    }
-    Fighter_ChangeMotionState(gobj, msid, 0, 0.0f, 1.0f, 0.0f, NULL);
-    fp->cmd_vars[3] = 0;
-    fp->cmd_vars[2] = 0;
-    fp->cmd_vars[1] = 0;
-    fp->cmd_vars[0] = 0;
-    ftAnim_8006EBA4(gobj);
 }
 
 void ftKb_PkSpecialN_Anim(Fighter_GObj* gobj)
 {
-    Vec3 sp14;
+    Vec3 it_pos;
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
-    u8 _[4];
+    PAD_STACK(4);
 
-    if (fp->cmd_vars[0] == 1) {
-        fp->cmd_vars[0] = 0;
+    if (fp->cmd_vars[ftPk_SpecialN_Cmd0] == true) {
+        fp->cmd_vars[ftPk_SpecialN_Cmd0] = false;
 
-        if (!fp->cmd_vars[1]) {
-            fp->cmd_vars[1] = 1;
+        if (!fp->cmd_vars[ftPk_SpecialN_Cmd1]) {
+            fp->cmd_vars[ftPk_SpecialN_Cmd1] = true;
             switch (fp->u.kb.hat.kind) {
             case FTKIND_PIKACHU:
-                sp14.x =
-                    (fp->x34_scale.y * (da->specialn_pk_ground_spawn_offset_x *
-                                        fp->facing_dir)) +
-                    fp->cur_pos.x;
-                sp14.y =
-                    (da->specialn_pk_ground_spawn_offset_y * fp->x34_scale.y) +
-                    fp->cur_pos.y;
-                sp14.z = 0.0f;
-                it_802B338C(gobj, &sp14, fp->facing_dir,
-                            da->specialn_pk_grounded_item_id);
+                it_pos.x = (fp->x34_scale.y * (da->specialn_pk_spawn_offset.x *
+                                               fp->facing_dir)) +
+                           fp->cur_pos.x;
+                it_pos.y = (da->specialn_pk_spawn_offset.y * fp->x34_scale.y) +
+                           fp->cur_pos.y;
+                it_pos.z = 0.0f;
+                itPikachuThunderJolt_Spawn(gobj, &it_pos, fp->facing_dir,
+                                           da->specialn_pk_itkind);
                 ft_PlaySFX(fp, 240076, 127, 64);
                 break;
             case FTKIND_PICHU:
-                sp14.x =
-                    (fp->x34_scale.y * (da->specialn_pc_ground_spawn_offset_x *
-                                        fp->facing_dir)) +
-                    fp->cur_pos.x;
-                sp14.y =
-                    (da->specialn_pc_ground_spawn_offset_y * fp->x34_scale.y) +
-                    fp->cur_pos.y;
-                sp14.z = 0.0f;
-                it_802B338C(gobj, &sp14, fp->facing_dir,
-                            da->specialn_pc_grounded_item_id);
+                it_pos.x = (fp->x34_scale.y * (da->specialn_pc_spawn_offset.x *
+                                               fp->facing_dir)) +
+                           fp->cur_pos.x;
+                it_pos.y = (da->specialn_pc_spawn_offset.y * fp->x34_scale.y) +
+                           fp->cur_pos.y;
+                it_pos.z = 0.0f;
+                itPikachuThunderJolt_Spawn(gobj, &it_pos, fp->facing_dir,
+                                           da->specialn_pc_itkind);
                 ft_PlaySFX(fp, 230067, 127, 64);
                 break;
             default:
@@ -129,43 +104,42 @@ void ftKb_PkSpecialN_Anim(Fighter_GObj* gobj)
 
 void ftKb_PkSpecialAirN_Anim(Fighter_GObj* gobj)
 {
-    Vec3 sp14;
+    Vec3 it_pos;
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
-    float freefall_toggle;
+    float landing_lag;
+    PAD_STACK(4);
 
-    u8 _[4];
+    if (fp->cmd_vars[ftPk_SpecialN_Cmd0] == true) {
+        fp->cmd_vars[ftPk_SpecialN_Cmd0] = false;
 
-    if (fp->cmd_vars[0] == 1) {
-        fp->cmd_vars[0] = 0;
-
-        if (!fp->cmd_vars[1]) {
-            fp->cmd_vars[1] = 1;
+        if (!fp->cmd_vars[ftPk_SpecialN_Cmd1]) {
+            fp->cmd_vars[ftPk_SpecialN_Cmd1] = true;
             switch (fp->u.kb.hat.kind) {
             case FTKIND_PIKACHU:
-                sp14.x =
+                it_pos.x =
                     (fp->x34_scale.y *
-                     (da->specialn_pk_air_spawn_offset_x * fp->facing_dir)) +
+                     (da->specialairn_pk_spawn_offset.x * fp->facing_dir)) +
                     fp->cur_pos.x;
-                sp14.y =
-                    (da->specialn_pk_air_spawn_offset_y * fp->x34_scale.y) +
+                it_pos.y =
+                    (da->specialairn_pk_spawn_offset.y * fp->x34_scale.y) +
                     fp->cur_pos.y;
-                sp14.z = 0.0f;
-                it_802B338C(gobj, &sp14, fp->facing_dir,
-                            da->specialn_pk_grounded_item_id);
+                it_pos.z = 0.0f;
+                itPikachuThunderJolt_Spawn(gobj, &it_pos, fp->facing_dir,
+                                           da->specialn_pk_itkind);
                 ft_PlaySFX(fp, 240076, 127, 64);
                 break;
             case FTKIND_PICHU:
-                sp14.x =
+                it_pos.x =
                     (fp->x34_scale.y *
-                     (da->specialn_pc_air_spawn_offset_x * fp->facing_dir)) +
+                     (da->specialairn_pc_spawn_offset.x * fp->facing_dir)) +
                     fp->cur_pos.x;
-                sp14.y =
-                    (da->specialn_pc_air_spawn_offset_y * fp->x34_scale.y) +
+                it_pos.y =
+                    (da->specialairn_pc_spawn_offset.y * fp->x34_scale.y) +
                     fp->cur_pos.y;
-                sp14.z = 0.0f;
-                it_802B338C(gobj, &sp14, fp->facing_dir,
-                            da->specialn_pc_grounded_item_id);
+                it_pos.z = 0.0f;
+                itPikachuThunderJolt_Spawn(gobj, &it_pos, fp->facing_dir,
+                                           da->specialn_pc_itkind);
                 ft_PlaySFX(fp, 230067, 127, 64);
                 break;
             default:
@@ -176,21 +150,21 @@ void ftKb_PkSpecialAirN_Anim(Fighter_GObj* gobj)
 
     switch (fp->u.kb.hat.kind) {
     case FTKIND_PIKACHU:
-        freefall_toggle = da->specialn_pk_freefall_toggle;
+        landing_lag = da->specialairn_pk_landing_lag;
         break;
     case FTKIND_PICHU:
-        freefall_toggle = da->specialn_pc_freefall_toggle;
+        landing_lag = da->specialairn_pc_landing_lag;
         break;
     default:
         break;
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if (0.0f == freefall_toggle) {
+        if (landing_lag == 0.0f) {
             ftCo_Fall_Enter(gobj);
-            return;
+        } else {
+            ftCo_80096900(gobj, 1, 0, true, 1.0f, landing_lag);
         }
-        ftCo_80096900(gobj, 1, 0, 1, 1.0f, freefall_toggle);
     }
 }
 
@@ -208,13 +182,18 @@ void ftKb_PkSpecialAirN_Phys(Fighter_GObj* gobj)
     ft_80084DB0(gobj);
 }
 
+static MotionFlags const coll_mf =
+    Ft_MF_KeepGfx | Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd |
+    Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |
+    Ft_MF_SkipModelFlags | Ft_MF_Unk27;
+
 void ftKb_PkSpecialN_Coll(Fighter_GObj* gobj)
 {
     if (ft_80082708(gobj) == GA_Ground) {
         Fighter* fp = GET_FIGHTER(gobj);
         ftCommon_8007D5D4(fp);
         {
-            s32 msid = ftKb_MS_PkSpecialAirN;
+            ftKirby_MotionState msid = ftKb_MS_PkSpecialAirN;
             f32 anim_frame = fp->cur_anim_frame;
             switch (GET_FIGHTER(gobj)->u.kb.hat.kind) {
             case FTKIND_PIKACHU:
@@ -225,7 +204,7 @@ void ftKb_PkSpecialN_Coll(Fighter_GObj* gobj)
             default:
                 break;
             }
-            Fighter_ChangeMotionState(gobj, msid, 0x0C4C5082, anim_frame, 1.0f,
+            Fighter_ChangeMotionState(gobj, msid, coll_mf, anim_frame, 1.0f,
                                       0.0f, NULL);
         }
     }
@@ -238,7 +217,7 @@ void ftKb_PkSpecialAirN_Coll(Fighter_GObj* gobj)
         ftCommon_8007D7FC(fp);
         fp->self_vel.y = 0.0f;
         {
-            s32 msid = ftKb_MS_PkSpecialN;
+            ftKirby_MotionState msid = ftKb_MS_PkSpecialN;
             f32 anim_frame = fp->cur_anim_frame;
             switch (GET_FIGHTER(gobj)->u.kb.hat.kind) {
             case FTKIND_PIKACHU:
@@ -249,7 +228,7 @@ void ftKb_PkSpecialAirN_Coll(Fighter_GObj* gobj)
             default:
                 break;
             }
-            Fighter_ChangeMotionState(gobj, msid, 0x0C4C5082, anim_frame, 1.0f,
+            Fighter_ChangeMotionState(gobj, msid, coll_mf, anim_frame, 1.0f,
                                       0.0f, NULL);
         }
     }

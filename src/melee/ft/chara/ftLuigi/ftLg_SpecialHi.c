@@ -1,6 +1,5 @@
 #include "ftLg_SpecialHi.h"
 
-#include "math.h"
 #include "types.h"
 
 #include <platform.h>
@@ -17,6 +16,7 @@
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Landing.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 /// 0x80143FC8
@@ -98,7 +98,7 @@ void ftLg_SpecialHi_IASA(HSD_GObj* gobj)
     stick_x = fp->input.lstick.x;
     luigiAttrs = fp->dat_attrs;
     stick_range = stickGetDir(fp->input.lstick.x, 0.0f);
-    if ((u32) fp->cmd_vars[0] == 0U) {
+    if (fp->cmd_vars[0] == 0U) {
         superJump_StickRange =
             luigiAttrs->x5C_LUIGI_SUPERJUMP_MOMENTUM_STICK_RANGE;
         if (stick_range > superJump_StickRange) {
@@ -215,7 +215,7 @@ void ftLg_SpecialAirHi_Phys(HSD_GObj* gobj)
     ftLuigiAttributes* luigiAttrs = getFtSpecialAttrs(fp);
     ftCo_DatAttrs* ca = &fp->co_attrs;
 
-    if ((u32) fp->cmd_vars[0] != 0U) {
+    if (fp->cmd_vars[0] != 0U) {
         ft_80085154(gobj);
         fp->self_vel.x *= luigiAttrs->x6C_LUIGI_SUPERJUMP_VEL_Y;
         fp->self_vel.y *= luigiAttrs->x6C_LUIGI_SUPERJUMP_VEL_Y;
@@ -245,7 +245,7 @@ void ftLg_SpecialHi_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if ((s32) fp->ground_or_air == GA_Air) {
-        if (((u32) fp->cmd_vars[0] == 0U) || (fp->self_vel.y >= 0.0f)) {
+        if ((fp->cmd_vars[0] == 0U) || (fp->self_vel.y >= 0.0f)) {
             ft_80083B68(gobj);
             return;
         }
@@ -263,7 +263,7 @@ void ftLg_SpecialAirHi_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if ((s32) fp->ground_or_air == GA_Air) {
-        if (((u32) fp->cmd_vars[0] == 0U) || (fp->self_vel.y >= 0.0f)) {
+        if ((fp->cmd_vars[0] == 0U) || (fp->self_vel.y >= 0.0f)) {
             ft_80083B68(gobj);
             return;
         }

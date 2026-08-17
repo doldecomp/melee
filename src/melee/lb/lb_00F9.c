@@ -1,6 +1,5 @@
 #include "lb_00F9.h"
 
-#include "math.h"
 #include "platform.h"
 #include "stddef.h"
 
@@ -18,8 +17,7 @@
 #include "lb/lbvector.h"
 #include "lb/types.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
+#include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 #include <baselib/displayfunc.h>
@@ -439,7 +437,7 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
     s32 on_ground;
     s32 loop_index = 0;
 
-    if ((u8) lb_804D63B8 != 0) {
+    if (lb_804D63B8 != 0) {
         return;
     }
     if (desc == NULL) {

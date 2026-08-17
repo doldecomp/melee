@@ -24,7 +24,6 @@
 #include "lb/types.h"
 #include "mp/mplib.h"
 
-#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <baselib/archive.h>
 #include <baselib/gobj.h>
@@ -1060,7 +1059,7 @@ void grCastle_801CE9E8(Ground_GObj* gobj)
 
 void grCastle_801CEAC8(Ground_GObj* gobj) {}
 
-inline void zero(Ground* gp, int i, f32 zero)
+static inline void zero(Ground* gp, int i, f32 zero)
 {
     gp->u.castle10.jobjs[i] = NULL;
     gp->u.castle10.effect_a[i] = NULL;
@@ -1360,8 +1359,7 @@ void grCastle_801CF308(Ground_GObj* gobj)
             grMaterial_801C8CDC((HSD_GObj*) gp->u.castle11.xD8);
             gp->u.castle11.xD8 = 0;
         }
-        ((Ground*) ((HSD_GObj*) gp->u.castle7.xD0)->user_data)->u.castle5.xC4 =
-            1;
+        ((Ground*) (gp->u.castle7.xD0)->user_data)->u.castle5.xC4 = 1;
         gp->u.castle5.xC4 = 5;
         grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
         Ground_801C5440(gp, 0, 0x53027U);
@@ -1376,9 +1374,7 @@ void grCastle_801CF308(Ground_GObj* gobj)
                 HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             }
         }
-        if ((s16) ((Ground*) ((HSD_GObj*) gp->u.castle7.xD0)->user_data)
-                ->u.castle5.xC4 == 0)
-        {
+        if (((Ground*) (gp->u.castle7.xD0)->user_data)->u.castle5.xC4 == 0) {
             gp->u.castle5.xC4 = 0;
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         }
@@ -1501,7 +1497,7 @@ static inline void grCastle_PickSatellite(Ground* gp, s32* wp)
         }
         entity = HSD_GObj_Entities->x14;
         {
-            s32 want = (s16) targets.e[idx].map_id;
+            s32 want = targets.e[idx].map_id;
             for (; entity != NULL; entity = entity->next) {
                 if ((s32) ((Ground*) entity->user_data)->map_id == want) {
                     break;
@@ -1533,7 +1529,7 @@ void grCastle_801CF868(Ground_GObj* gobj)
                   ->u.castle2.xC4 == 0)))
     {
         gp->u.castle12.xD2 = gp->u.castle12.xD2 - 1;
-        if ((s16) gp->u.castle12.xD2 < 0) {
+        if (gp->u.castle12.xD2 < 0) {
             grCastle_WeightTable weights;
             s16 cur_slot;
 

@@ -34,18 +34,16 @@
 #include "lb/lbdvd.h"
 #include "pl/player.h"
 
+#include <math.h>
 #include <stddef.h>
-#include <trigf.h>
 #include <baselib/gobj.h>
 #include <baselib/id.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
 
-void ftAnim_80070458(Fighter* fp, CostumeTObjList*, u32 tobj_idx, float frame);
 void fn_800F9260(HSD_GObj*);
 void ftCommon_8007D9A0(Fighter* fp);
-void fn_8010B1F4(Fighter_GObj*);
+
 static void fn_801095DC(HSD_GObj*);
 static void fn_80109680(HSD_GObj*);
 static void fn_80109714(HSD_GObj*);
@@ -2979,7 +2977,7 @@ void ftKb_SpecialN_800EED50(s32 arg0, s32 arg1)
                 }
             }
         }
-        efAsync_LoadSync((u8) ftKb_Init_803CB46C[arg0]);
+        efAsync_LoadSync(ftKb_Init_803CB46C[arg0]);
     }
 }
 

@@ -1,11 +1,10 @@
-#include "lb/lbvector.h"
+#include "lbvector.h"
 
 #include <platform.h>
 
 #include "lb/lbrefract.h"
 
 #include <math.h>
-#include <math_ppc.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
@@ -250,7 +249,7 @@ void lbVector_Rotate(Vec3* v, int axis, float angle)
     v->z = z;
 }
 
-float dummy(void)
+static float dummy(void)
 {
     return 2.0f;
 } // needed here to force order of floats in .sdata2 section

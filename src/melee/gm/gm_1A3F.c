@@ -5,6 +5,7 @@
 
 #include "db/db.h"
 #include "dolphin/vi/vifuncs.h"
+#include "gm/gm_1A36.h"
 #include "gm/gmscdata.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbdvd.h"
@@ -58,7 +59,7 @@ void gm_801A3F48(GameScene* scene)
     tyDisplay_8031C8B8();
 }
 
-inline u8 nextScene(GameScene* scenes)
+static inline u8 nextScene(GameScene* scenes)
 {
     int i;
     u8 next_scene;
@@ -78,7 +79,7 @@ inline u8 nextScene(GameScene* scenes)
     return next_scene;
 }
 
-inline GameScene* findScene(GameScene* scene)
+static inline GameScene* findScene(GameScene* scene)
 {
     int i, j;
     for (i = gm_80479D30.routing.curr_scene_idx; i < 0xFF; i++) {
@@ -150,7 +151,7 @@ void gm_801A4014(GameMode* mode)
             ;
         gmMainLib_8015FBA4();
         gm_GetAllGameModes();
-        memzero(&gm_80479D30, 0x14);
+        memzero(&gm_80479D30, sizeof(gm_80479D30));
         gm_801A3EF4();
         gmMainLib_8046B0F0.x0 = true;
         gm_ChangeGameModeAfterCurrentScene(GM_BOOT);
@@ -243,7 +244,7 @@ bool gm_Is1PMode(u8 mode)
     return false;
 }
 
-inline GameMode* findMode(u8 idx)
+static inline GameMode* findMode(u8 idx)
 {
     GameMode* cur;
     for (cur = gm_GetAllGameModes(); cur->idx != GM_COUNT; cur++) {

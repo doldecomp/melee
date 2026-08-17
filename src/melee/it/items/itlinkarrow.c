@@ -215,12 +215,12 @@ HSD_GObj* it_802A83E0(f32 facing_dir, Fighter_GObj* arg1, Vec3* arg2,
         /// @todo Use Item_AttachToParent when it inlines here without growing
         /// the stack frame.
         Item_8026AB54(gobj, arg1, arg3);
-        db_80225DD8(gobj, (Fighter_GObj*) arg1);
+        db_80225DD8(gobj, arg1);
     }
     return gobj;
 }
 
-inline HSD_JObj* itLinkArrow_802A850C_inline(HSD_Joint* joint)
+static inline HSD_JObj* itLinkArrow_802A850C_inline(HSD_Joint* joint)
 {
     HSD_JObj* jobj;
     if (joint != NULL) {
@@ -229,7 +229,8 @@ inline HSD_JObj* itLinkArrow_802A850C_inline(HSD_Joint* joint)
     return jobj;
 }
 
-inline void itLinkArrow_802A850C_inline_2(Item_GObj* gobj, Quaternion* quat)
+static inline void itLinkArrow_802A850C_inline_2(Item_GObj* gobj,
+                                                 Quaternion* quat)
 {
     int i;
     Item* item;

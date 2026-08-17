@@ -17,9 +17,8 @@
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 
-#include <trigf.h>
+#include <math.h>
 #include <baselib/jobj.h>
-#include <MSL/math.h>
 
 typedef struct ArwingLaserAttr {
     /* +0 */ ItemAttr* x0;
@@ -378,7 +377,7 @@ static void itArwinglaser_UnkMotion2_Phys(Item_GObj* gobj)
     switch (ip->xDD4_itemVar.arwinglaser.xE38) {
     case 0:
     case 2:
-        if ((s16) ip->xDD4_itemVar.arwinglaser.xE30 == 1) {
+        if (ip->xDD4_itemVar.arwinglaser.xE30 == 1) {
             ip->x40_vel.x = attrs->x0->x4_throw_speed_mul * ip->facing_dir;
             ip->x40_vel.z = 0.0f;
             ip->x40_vel.y = 0.0f;

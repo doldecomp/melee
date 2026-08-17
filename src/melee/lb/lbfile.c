@@ -7,8 +7,6 @@
 
 #include <string.h>
 #include <dolphin/dvd.h>
-#include <dolphin/os/OSError.h>
-#include <dolphin/os/OSInterrupt.h>
 #include <baselib/debug.h>
 #include <baselib/devcom.h>
 
@@ -84,37 +82,19 @@ char* lbFileGetFullName(const char* basename)
     return result;
 }
 
-#ifndef BUGFIX
-typedef struct OldDVDFileInfo {
-    /*0x00*/ DVDCommandBlock cb;
-    /*0x30*/ u32 startAddr;
-    /*0x34*/ u32 length;
-} OldDVDFileInfo;
-#endif
-
-/// @bug OldDVDFileInfo is needed to match stack allocation sizes. However,
-/// the actual DVDFileInfo is 4 bytes longer due to callback.
-/// This means that calls to lbFile_8001634C write 4 bytes past where it should
-/// on the stack.
-///
-/// Get file size:
 size_t lbFile_8001634C(int fileno)
 {
-#ifdef BUGFIX
     DVDFileInfo info;
-#else
-    OldDVDFileInfo info;
-#endif
     size_t length;
     bool intr = OSDisableInterrupts();
 
-    if (!DVDFastOpen(fileno, (DVDFileInfo*) &info)) {
+    if (!DVDFastOpen(fileno, &info)) {
         OSReport("Cannot open file no=%d.", fileno);
         HSD_ASSERT(0xD8, 0);
     }
 
     length = info.length;
-    DVDClose((DVDFileInfo*) &info);
+    DVDClose(&info);
     OSRestoreInterrupts(intr);
     return length;
 }

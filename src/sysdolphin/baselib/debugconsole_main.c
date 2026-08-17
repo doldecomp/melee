@@ -1,16 +1,18 @@
 #include "debugconsole_main.h"
 
 #include <dolphin/pad.h>
-#include <dolphin/vi.h>
+#include <dolphin/vi/vifuncs.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/hsd_3915.h>
-#include <sysdolphin/baselib/hsd_3933.h>
 #include <sysdolphin/baselib/hsd_393C.h>
 #include <sysdolphin/baselib/video.h>
+
+#ifdef MWERKS_GEKKO
 #include <MetroTRK/ppc_reg.h>
+#endif
 
 typedef struct _ExcptNode {
     /* 0x1 */ struct _ExcptNode* next;
@@ -555,42 +557,52 @@ void hsd_80394314(void)
     struct ParticleScreenState* sp = &hsd_804CF810;
 
     memset(sp, 0, sizeof(*sp));
-    hsd_803941E8(&((struct ParticleScreenState*) sp)->x24,
-                 &((struct ParticleScreenState*) sp)->x2C);
+    hsd_803941E8(&(sp)->x24, &(sp)->x2C);
 
     {
         s32 mode;
-        if (((struct ParticleScreenState*) sp)->x28 != 0) {
+        if ((sp)->x28 != 0) {
             mode = 2;
         } else {
             mode = 1;
         }
-        ((struct ParticleScreenState*) sp)->x38 = mode;
+        (sp)->x38 = mode;
     }
 
-    ((struct ParticleScreenState*) sp)->x34 = 0;
-    ((struct ParticleScreenState*) sp)->x30 = &HSD_VIData;
-    ((struct ParticleScreenState*) sp)->x3C =
-        ((u16*) ((struct ParticleScreenState*) sp)->x30)[2];
-    ((struct ParticleScreenState*) sp)->x40 =
-        ((u16*) ((struct ParticleScreenState*) sp)->x30)[4];
-    ((struct ParticleScreenState*) sp)->x44 =
+    (sp)->x34 = 0;
+    (sp)->x30 = &HSD_VIData;
+    (sp)->x3C = ((u16*) (sp)->x30)[2];
+    (sp)->x40 = ((u16*) (sp)->x30)[4];
+
+    /// @todo Redundant cast improves match
+#ifdef BUGFIX
+    (sp)->x44 = (((u16) sp->x3C + 15) * 2) & 0x1FFE0;
+#else
+    (sp)->x44 =
         (((u16) ((struct ParticleScreenState*) sp)->x3C + 15) * 2) & 0x1FFE0;
-    ((struct ParticleScreenState*) sp)->x48 =
-        ((struct ParticleScreenState*) sp)->x44 *
-        ((struct ParticleScreenState*) sp)->x40;
-    ((struct ParticleScreenState*) sp)->x4 = 0;
-    ((struct ParticleScreenState*) sp)->x8 =
-        ((struct ParticleScreenState*) sp)->x40;
-    ((struct ParticleScreenState*) sp)->x18 = 0;
-    ((struct ParticleScreenState*) sp)->x14 = 0;
-    ((struct ParticleScreenState*) sp)->x20 =
-        (u32) (((struct ParticleScreenState*) sp)->x3C - 0x28) / 11;
-    ((struct ParticleScreenState*) sp)->x1C =
-        (u32) (((struct ParticleScreenState*) sp)->x40 - 0x50) / 14;
-    ((struct ParticleScreenState*) sp)->x4C = lbl_804088B8;
-    ((struct ParticleScreenState*) sp)->x50 = 0;
-    ((struct ParticleScreenState*) sp)->xC4 = 0;
+#endif
+
+    (sp)->x48 = (sp)->x44 * (sp)->x40;
+    (sp)->x4 = 0;
+    /// @todo Redundant cast improves match
+#ifdef BUGFIX
+    (sp)->x8 = sp->x40;
+#else
+    (sp)->x8 = ((struct ParticleScreenState*) sp)->x40;
+#endif
+    (sp)->x18 = 0;
+    (sp)->x14 = 0;
+    /// @todo Redundant casts improve match
+#ifdef BUGFIX
+    (sp)->x20 = (u32) (sp->x3C - 0x28) / 11;
+    (sp)->x1C = (u32) (sp->x40 - 0x50) / 14;
+#else
+    (sp)->x20 = (u32) (((struct ParticleScreenState*) sp)->x3C - 0x28) / 11;
+    (sp)->x1C = (u32) (((struct ParticleScreenState*) sp)->x40 - 0x50) / 14;
+#endif
+    (sp)->x4C = lbl_804088B8;
+    (sp)->x50 = 0;
+    (sp)->xC4 = 0;
 }
 
 // @TODO: Currently 94.99% match - obj file has extra addi for lis/addi
@@ -838,7 +850,7 @@ void Exception_ReportCodeline(u16 error, int dsisr, int dar, OSContext* ctx)
 
     OSReport("- UNHANDLED EXCEPTION -------------------------------\n");
     OSReport("DSISR=%08X DAR=%08X\n", dsisr, dar);
-    error = (u16) error;
+    error = error;
     OSReport("ERROR %d: ", error);
 
     switch (error) {
@@ -1219,8 +1231,7 @@ extern u8 lbl_8040B8AC[];
 
 void hsd_80395644(void)
 {
-    struct ParticleScreenState* sp =
-        (struct ParticleScreenState*) &hsd_804CF810;
+    struct ParticleScreenState* sp = (&hsd_804CF810);
     void* saved;
     void** p = &sp->x50;
     s32 val_x20;
@@ -1282,8 +1293,8 @@ s32 hsd_803956D8(void* disp_ptr)
         {
             s32* pp = &sp->x14;
             *pp += sp->x1C;
-            if (!(u8) hsd_80394128(0, *pp)) {
-                if (!(u8) hsd_80394128(0, *pp + 1)) {
+            if (!hsd_80394128(0, *pp)) {
+                if (!hsd_80394128(0, *pp + 1)) {
                     *pp = 0;
                     hsd_80394E8C(&lbl_8040B904);
                 }
@@ -1308,7 +1319,7 @@ void hsd_803957C0(void* input)
     row = hsd_804CF810.x10 + hsd_804CF810.x14;
 
     while (col >= 0) {
-        ch = (u8) hsd_80394128(col, row);
+        ch = hsd_80394128(col, row);
         if (ch != 0) {
             break;
         }
@@ -1457,8 +1468,8 @@ bool hsd_80395A78(void)
             } else {
                 break;
             }
-            while (!(u8) hsd_80394128(hsd_804CF810.x0C + hsd_804CF810.x18,
-                                      hsd_804CF810.x10 + hsd_804CF810.x14))
+            while (!hsd_80394128(hsd_804CF810.x0C + hsd_804CF810.x18,
+                                 hsd_804CF810.x10 + hsd_804CF810.x14))
             {
                 if (hsd_804CF810.x0C > 0) {
                     hsd_804CF810.x0C -= 1;
@@ -1478,7 +1489,7 @@ bool hsd_80395A78(void)
                 new_scroll += 1;
             }
             sum = new_col + new_scroll;
-            if ((u8) hsd_80394128(sum, hsd_804CF810.x10 + hsd_804CF810.x14)) {
+            if (hsd_80394128(sum, hsd_804CF810.x10 + hsd_804CF810.x14)) {
                 hsd_804CF810.x0C = new_col;
                 hsd_804CF810.x18 = new_scroll;
                 return true;
@@ -1704,8 +1715,6 @@ static char* lbl_804D62CC = "+- MEMORY DUMP ------------------------------+";
 static char* lbl_804D62D0 = "|%08X=%08X:%08X:%08X:%08X|";
 static char* lbl_804D62D4 = "+--------------------------------------------+";
 
-extern struct lbl_8040BAF0_t lbl_8040BAF0;
-
 static inline s32 hsd_80396188_calc_col(void)
 {
     return ((hsd_804CF810.x20 - 0x2E) / 2) * 11 + 20;
@@ -1830,7 +1839,7 @@ s32 hsd_803962A8(void* data)
         case 0x400:
             hsd_80393D2C(1);
             addr = (u8*) lbl_8040BAF0.x10;
-            if ((u8) hsd_80394128(0, 0)) {
+            if (hsd_80394128(0, 0)) {
                 OSReport(lbl_804D62D8);
             }
             i = 0;
@@ -2006,8 +2015,6 @@ void hsd_80396884(void)
     }
     hsd_804CF810.x50 = saved;
 }
-
-extern struct lbl_8040BC3C_t lbl_8040BC3C;
 
 extern struct lbl_8040BA5C_t lbl_8040BD74;
 

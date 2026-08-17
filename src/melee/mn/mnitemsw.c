@@ -26,7 +26,7 @@
 
 extern StaticModelDesc MenMainCursorIs_Top;
 extern StaticModelDesc MenMainConIs_Top;
-extern HSD_GObj* mnItemSw_804D6BE8;
+
 extern u8 mn_804D6BB5;
 
 struct MnItemSwTable {
@@ -172,7 +172,7 @@ void mnItemSw_80233B68(MnItemSwData* arg0, u32 arg1)
     }
     if (arg1 & 4) {
         if ((u8) (sel - 0x1F) <= 1U) {
-            if ((u8) mn_804A04F0.confirmed_selection == 5) {
+            if (mn_804A04F0.confirmed_selection == 5) {
                 var_r0 = 0;
             } else {
                 var_r0 = mn_804A04F0.confirmed_selection + 1;
@@ -190,7 +190,7 @@ void mnItemSw_80233B68(MnItemSwData* arg0, u32 arg1)
         }
     } else if (arg1 & 8) {
         if ((u8) (sel - 0x1F) <= 1U) {
-            if ((u8) mn_804A04F0.confirmed_selection == 0) {
+            if (mn_804A04F0.confirmed_selection == 0) {
                 var_r0_2 = 5;
             } else {
                 var_r0_2 = mn_804A04F0.confirmed_selection - 1;
@@ -566,7 +566,7 @@ void fn_80234C24(HSD_GObj* gobj)
         if ((state == 0 || state == 1 || state == 3) &&
             data->menu_kind != (u8) mn_804A04F0.cur_menu)
         {
-            if ((u8) mn_804A04F0.entering_menu != 0) {
+            if (mn_804A04F0.entering_menu != 0) {
                 data->x23 = 4;
             } else if ((mn_804A04F0.buttons & 0x20) != 0) {
                 data->x23 = 2;
@@ -670,11 +670,11 @@ void fn_80234C24(HSD_GObj* gobj)
                 hovered_changed = 1;
             }
             if ((u16) (mn_804A04F0.hovered_selection - 0x1F) <= 1U) {
-                if ((u8) data->x21 != (u8) mn_804A04F0.confirmed_selection) {
+                if (data->x21 != mn_804A04F0.confirmed_selection) {
                     confirmed_changed = 1;
                 }
-            } else if ((u8) data->items[mn_804A04F0.hovered_selection] !=
-                       (u8) mn_804A04F0.confirmed_selection)
+            } else if (data->items[mn_804A04F0.hovered_selection] !=
+                       mn_804A04F0.confirmed_selection)
             {
                 confirmed_changed = 1;
             }
@@ -690,15 +690,15 @@ void fn_80234C24(HSD_GObj* gobj)
         data->cursor = (u8) mn_804A04F0.hovered_selection;
     }
     if (confirmed_changed != 0) {
-        if (((u16) mn_804A04F0.hovered_selection == 0x1F) ||
-            ((u16) mn_804A04F0.hovered_selection == 0x20))
+        if ((mn_804A04F0.hovered_selection == 0x1F) ||
+            (mn_804A04F0.hovered_selection == 0x20))
         {
-            data->x21 = (u8) mn_804A04F0.confirmed_selection;
+            data->x21 = mn_804A04F0.confirmed_selection;
             mnItemSw_SaveSettings(gobj);
             return;
         }
         data->items[mn_804A04F0.hovered_selection] =
-            (u8) mn_804A04F0.confirmed_selection;
+            mn_804A04F0.confirmed_selection;
     }
 }
 

@@ -195,7 +195,7 @@ void fn_8023201C(HSD_GObj* gobj)
 
     if (buttons & 0x200) {
         /// A button: confirm stage select (option 5 only)
-        if ((u16) mn_804A04F0.hovered_selection == 5) {
+        if (mn_804A04F0.hovered_selection == 5) {
             sfxForward();
             mn_804A04F0.entering_menu = 1;
             mnRulePlus_SaveRules();
@@ -252,12 +252,12 @@ void fn_8023201C(HSD_GObj* gobj)
         mn_804A04F0.confirmed_selection =
             data->rule_values.values[mn_804A04F0.hovered_selection];
         return;
-    } else if ((u16) mn_804A04F0.hovered_selection != 5) {
+    } else if (mn_804A04F0.hovered_selection != 5) {
         /// D-Pad Left/Right: adjust value for non-stage options
         u8* bounds = mn_803ED2E8.stat[mn_804A04F0.hovered_selection];
         if (buttons & 4) {
             sfxMove();
-            if ((u8) mn_804A04F0.confirmed_selection > (u8) bounds[0]) {
+            if (mn_804A04F0.confirmed_selection > bounds[0]) {
                 mn_804A04F0.confirmed_selection -= 1;
                 return;
             }
@@ -266,7 +266,7 @@ void fn_8023201C(HSD_GObj* gobj)
         }
         if (buttons & 8) {
             sfxMove();
-            if ((u8) mn_804A04F0.confirmed_selection < (u8) bounds[1]) {
+            if (mn_804A04F0.confirmed_selection < bounds[1]) {
                 mn_804A04F0.confirmed_selection += 1;
                 return;
             }
@@ -356,7 +356,7 @@ void mn_802324E4(u8 time_limit, MenuRulesPlusData* data)
     mnRulePlus_AnimZeros(jobjs);
 }
 
-inline void mn_80232660_inline(HSD_JObj* jobj)
+static inline void mn_80232660_inline(HSD_JObj* jobj)
 {
     AnimLoopSettings* settings;
     AnimLoopSettings* p294;
@@ -668,7 +668,7 @@ void fn_80232F44(HSD_GObj* gobj)
     if ((state == 0 || state == 1 || state == 3) &&
         (u8) data->menu_kind != (u8) mn_804A04F0.cur_menu)
     {
-        if ((u8) mn_804A04F0.entering_menu != 0) {
+        if (mn_804A04F0.entering_menu != 0) {
             data->state = 4;
         } else {
             data->state = 2;
@@ -740,7 +740,7 @@ void fn_80232F44(HSD_GObj* gobj)
             selection_changed = 1;
         }
         if (data->rule_values.values[mn_804A04F0.hovered_selection] !=
-            (u8) mn_804A04F0.confirmed_selection)
+            mn_804A04F0.confirmed_selection)
         {
             value_changed = 1;
         }
@@ -755,7 +755,7 @@ void fn_80232F44(HSD_GObj* gobj)
     }
     if ((s32) value_changed != 0) {
         data->rule_values.values[data->hovered_selection] =
-            (u8) mn_804A04F0.confirmed_selection;
+            mn_804A04F0.confirmed_selection;
         data2 = gobj->user_data;
         gmMainLib_GetGameRules()->stock_time_limit =
             data2->rule_values.time_limit;

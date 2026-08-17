@@ -259,12 +259,12 @@ bool gm_8016B258(int arg0)
 
 void gm_SetGameSpeed(float speed)
 {
-    lb_80019880(1 / 60.0F / speed * OS_TIMER_CLOCK);
+    lb_80019880(OSSecondsToTicks(1 / 60.0F / speed));
 }
 
 void gm_ResetGameSpeed(void)
 {
-    lb_80019880(1 / 60.0F / lbl_8046B6A0.x24C8.x34 * OS_TIMER_CLOCK);
+    lb_80019880(OSSecondsToTicks(1 / 60.0F / lbl_8046B6A0.x24C8.x34));
 }
 
 void gm_8016B328(void)
@@ -1601,7 +1601,7 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
     Player_SetHandicap(arg0, arg1->handicap);
     Player_SetTeam(arg0, arg1->team);
     Player_SetFlagsBit0(arg0, arg1->xC_b0);
-    Player_SetNametagSlotID(arg0, (u8) arg1->xA);
+    Player_SetNametagSlotID(arg0, arg1->xA);
     if (arg1->xC_b1) {
         tmp->unk_A += 5;
         Player_SetFlagsBit3(arg0, 1);
@@ -1995,7 +1995,7 @@ void fn_8016E730(StartMeleeData* arg0)
     gm_801A4B08(gm_AnyControllerPressedStart, gm_AnyControllerPressedZ);
     gm_801A4B40(db_RunEveryFrame);
     gm_801A4B50(1);
-    lb_80019880((0.016666667F / arg0->rules.x34) * OS_TIMER_CLOCK);
+    lb_80019880(OSSecondsToTicks(1.0F / 60 / arg0->rules.x34));
     Camera_80028B9C(0x46);
     Camera_80030688();
     fn_8016DCC0(arg0);

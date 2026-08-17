@@ -206,9 +206,9 @@ void grFigureGet_802196F0(Ground_GObj* gobj)
     gp->u.figureget.x4 = 0;
     gp->u.figureget.x8 = 0;
     gp->u.figureget.xC = 0;
-    memzero(gp->u.figureget.x1C, 0xC);
-    memzero(gp->u.figureget.x28, 0xC);
-    memzero(gp->u.figureget.x34, 0xC);
+    memzero(gp->u.figureget.x1C, sizeof(gp->u.figureget.x1C));
+    memzero(gp->u.figureget.x28, sizeof(gp->u.figureget.x28));
+    memzero(gp->u.figureget.x34, sizeof(gp->u.figureget.x34));
     mpJointSetCb1(0, gp, grFigureGet_80219B10);
 }
 

@@ -7,7 +7,6 @@
 #include "mn/types.h"
 
 #include <math.h>
-#include <trigf.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -49,6 +48,8 @@
 #include <melee/mn/mnsoundtest.h>
 #include <melee/mn/mnvibration.h>
 #include <melee/sc/types.h>
+
+/* 22C068 */ static void mn_8022C068(HSD_LObj*, int, int);
 
 static HSD_GObj* mn_804D6BA8;
 static HSD_GObj* mn_804D6BAC;
@@ -915,7 +916,7 @@ HSD_GObj* mn_80229DC0(void)
                            mn_803EAE8C[mn_804A04F0.cur_menu][2].start_frame);
     }
     HSD_JObjAnimAll(sp8);
-    user_data = HSD_MemAlloc(4);
+    user_data = HSD_MemAlloc(sizeof(*user_data));
     HSD_ASSERTREPORT(0x427, user_data, "Can't get user_data.\n");
     GObj_InitUserData(temp_r31, 0, mn_8022EB04, user_data);
     tmp = mn_804A04F0.cur_menu;
@@ -1127,12 +1128,12 @@ static inline void UpdateAnimationLoop(HSD_JObj* jobj,
     }
 }
 
-inline f32 GetAnimStartFrame(AnimLoopSettings* anim_loop)
+static inline f32 GetAnimStartFrame(AnimLoopSettings* anim_loop)
 {
     return anim_loop->start_frame;
 }
 
-inline f32 GetAnimEndFrame(AnimLoopSettings* anim_loop)
+static inline f32 GetAnimEndFrame(AnimLoopSettings* anim_loop)
 {
     return anim_loop->end_frame;
 }
@@ -1764,7 +1765,7 @@ int mn_8022C010(int menu_kind, int selection)
 
 MenuFlow mn_804A04F0;
 
-inline void mn_8022C068(HSD_LObj* lobj, int unused, int div)
+static inline void mn_8022C068(HSD_LObj* lobj, int unused, int div)
 {
     int diff;
 
@@ -1810,7 +1811,6 @@ void fn_8022C128(HSD_GObj* arg0)
     }
 }
 
-extern LightList** MenMain_lights;
 MenuFlow mn_804A04F0;
 
 void mn_8022C304(void)

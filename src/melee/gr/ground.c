@@ -99,8 +99,6 @@
 #include "ty/tydisplay.h"
 
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
@@ -203,16 +201,6 @@ static u8* Ground_804D6950;
 
 static ssize_t const buffer_size = 64;
 static ssize_t const Gr_CObj_Max = ARRAY_SIZE(stage_info.x694);
-
-/// @todo Move elsewhere.
-static inline f32 fabsf(f32 x)
-{
-    if (x < 0) {
-        return -x;
-    } else {
-        return x;
-    }
-}
 
 static void Ground_OnStart(void) {}
 
@@ -733,7 +721,7 @@ void Ground_801C10B8(HSD_GObj* arg0, HSD_GObjEvent arg1)
         HSD_GObj* unk4;
         HSD_GObjEvent unk8;
     }* temp_r3;
-    temp_r3 = HSD_MemAlloc(0xC);
+    temp_r3 = HSD_MemAlloc(sizeof(*temp_r3));
     if (temp_r3 != NULL) {
         temp_r3->unk0 = stage_info.x6A4;
         temp_r3->unk4 = arg0;
@@ -1088,7 +1076,7 @@ HSD_GObj* Ground_801C1E84(void)
 /// extern s8 HSD_GObj_804D7848;
 /// extern float @330;
 
-inline HSD_FogDesc* foo(void)
+static inline HSD_FogDesc* foo(void)
 {
     StageCallbacks* phi_r29;
     StageCallbacks* temp_r29;
@@ -2962,6 +2950,9 @@ static inline float vec_len(Vec3* v)
     return sqrtf(x2 + y2 + z2);
 }
 
+#ifdef BUGFIX
+#define sqrtf_store(x, y) sqrtf(x)
+#else
 /// MSL sqrtf expansion with caller-owned volatile storage. Keeping each
 /// expansion's temporary in the caller preserves the retail stack-slot order.
 static inline float sqrtf_store(float x, volatile float* y)
@@ -2976,6 +2967,7 @@ static inline float sqrtf_store(float x, volatile float* y)
     }
     return x;
 }
+#endif
 
 /// @todo replace with fog.h inlines
 #define FOG_ASSERT(line, cond)                                                \
@@ -3022,8 +3014,8 @@ void Ground_801C4FAC(HSD_CObj* cobj)
             xz_inv_len =
                 1.0f / sqrtf_store((sp74.x * sp74.x) + (sp74.z * sp74.z),
                                    &sqrt_tmp[2]);
-            xz_x_weight = xz_inv_len * fabsf(sp74.x);
-            xz_z_weight = xz_inv_len * fabsf(sp74.z);
+            xz_x_weight = xz_inv_len * ABS(sp74.x);
+            xz_z_weight = xz_inv_len * ABS(sp74.z);
             sp50.x *= xz_x_weight;
             sp50.y *= xz_x_weight;
             sp50.z *= xz_x_weight;
@@ -3361,13 +3353,13 @@ u32 Ground_801C5AD0(s32 i)
 void Ground_801C5AEC(Vec3* v, Vec3* arg1, Vec3* arg2, Vec3* arg3)
 {
     lbVector_EulerAnglesFromONB(v, arg1, arg2, arg3);
-    if (!(fabsf(v->x) < 30000)) {
+    if (!(ABS(v->x) < 30000)) {
         v->x = 0;
     }
-    if (!(fabsf(v->y) < 30000)) {
+    if (!(ABS(v->y) < 30000)) {
         v->y = 0;
     }
-    if (!(fabsf(v->z) < 30000)) {
+    if (!(ABS(v->z) < 30000)) {
         v->z = 0;
     }
 }

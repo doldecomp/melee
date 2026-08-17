@@ -275,7 +275,7 @@ void ftKb_SpecialNLk800FB800(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(8);
     if (fp->u.kb.x74 != 0) {
-        it_802A8A7C((Item_GObj*) fp->u.kb.x74);
+        it_802A8A7C(fp->u.kb.x74);
         fp->u.kb.x74 = 0;
     }
 }
@@ -285,7 +285,7 @@ void ftKb_SpecialNLk800FB840(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(8);
     if (fp->u.kb.x78 != 0) {
-        it_802AF304((Item_GObj*) fp->u.kb.x78);
+        it_802AF304(fp->u.kb.x78);
         fp->u.kb.x78 = 0;
     }
 }
@@ -418,7 +418,7 @@ void ftKb_LkSpecialNStart_Anim(Fighter_GObj* gobj)
         fp2->mv.lk.specialn.x14 = 0.0F;
         fp2->mv.lk.specialn.x8.x = atan2f(b.y - a.y, b.x - a.x);
         if (fp2->u.kb.x74 != 0) {
-            it_802A8398((Item_GObj*) fp2->u.kb.x74, &b, &a);
+            it_802A8398(fp2->u.kb.x74, &b, &a);
         }
         if (!ftAnim_IsFramesRemaining(gobj)) {
             ftKirby_MotionState msid = ftKb_MS_LkSpecialNLoop;
@@ -441,8 +441,6 @@ void ftKb_LkSpecialNStart_Anim(Fighter_GObj* gobj)
     }
 }
 
-extern ftLk_SpecialN_Vec3Group const ftKb_Init_803B7548;
-
 void ftKb_LkSpecialNLoop_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -455,7 +453,7 @@ void ftKb_LkSpecialNLoop_Anim(Fighter_GObj* gobj)
     fp->mv.lk.specialn.x14 = 0.0F;
     fp->mv.lk.specialn.x8.x = atan2f(b.y - a.y, b.x - a.x);
     if (fp->u.kb.x74 != 0) {
-        it_802A8398((Item_GObj*) fp->u.kb.x74, &b, &a);
+        it_802A8398(fp->u.kb.x74, &b, &a);
     }
 }
 
@@ -491,7 +489,7 @@ void ftKb_LkSpecialAirNStart_Anim(Fighter_GObj* gobj)
         fp->mv.lk.specialn.x14 = 0.0F;
         fp->mv.lk.specialn.x8.x = atan2f(b.y - a.y, b.x - a.x);
         if (fp->u.kb.x74 != 0) {
-            it_802A8398((Item_GObj*) fp->u.kb.x74, &b, &a);
+            it_802A8398(fp->u.kb.x74, &b, &a);
         }
         if (!ftAnim_IsFramesRemaining(gobj)) {
             ftKirby_MotionState msid = ftKb_MS_LkSpecialAirNLoop;
@@ -538,7 +536,7 @@ void ftKb_LkSpecialAirNLoop_Anim(Fighter_GObj* gobj)
     fp->mv.lk.specialn.x14 = 0.0F;
     fp->mv.lk.specialn.x8.x = atan2f(b.y - a.y, b.x - a.x);
     if (fp->u.kb.x74 != 0) {
-        it_802A8398((Item_GObj*) fp->u.kb.x74, &b, &a);
+        it_802A8398(fp->u.kb.x74, &b, &a);
     }
 }
 

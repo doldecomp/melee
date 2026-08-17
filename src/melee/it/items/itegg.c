@@ -96,7 +96,7 @@ void itEgg_Logic3_Spawned(Item_GObj* gobj)
     it_80288EFC(gobj);
 }
 
-inline s32 attrRand(itEgg_ItemVars* attrs)
+static inline s32 attrRand(itEgg_ItemVars* attrs)
 {
     return HSD_Randi(attrs->rand_max);
 }
@@ -169,7 +169,7 @@ bool itEgg_UnkMotion1_Coll(Item_GObj* gobj)
 
 void itEgg_Logic3_PickedUp(Item_GObj* gobj)
 {
-    Item_80268E5C((Item_GObj*) gobj, 2, ITEM_ANIM_UPDATE);
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
 }
 
 bool itEgg_UnkMotion2_Anim(Item_GObj* gobj)

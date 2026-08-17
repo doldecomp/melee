@@ -7,6 +7,8 @@
 #include "MetroTRK/targimpl.h"
 #include "MetroTRK/usr_put.h"
 
+#include <MetroTRK/dolphin_trk.h>
+
 bool gTRKBigEndian;
 
 DSError TRKInitializeNub(void)

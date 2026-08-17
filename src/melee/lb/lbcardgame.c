@@ -29,26 +29,15 @@ static struct {
     0x300,
 };
 
-static struct {
-    u32 pad[5];
-    struct gmm_x1868* x14;
-    struct {
-        u32 x0;
-        u32 x4;
-        UNK_T x8;
-    } unk_arr[8];
-} lb_803BAB74 = { { 0, 3, 0, 0x1790, 0 },
-                  NULL,
-                  {
-                      { 0x1F2C, 1, NULL },
-                      { 0x1F2C, 1, NULL },
-                      { 0x1F2C, 1, NULL },
-                      { 0x1F2C, 1, NULL },
-                      { 0x1F2C, 1, NULL },
-                      { 0x1F2C, 1, NULL },
-                      { 0x1F2C, 1, NULL },
-                      { -1, 0, NULL },
-                  } };
+// save-data manifest
+static struct CardEntry lb_803BAB74[10] = {
+    { 0, 3, NULL },      { 0x1790, 0, NULL }, /* data = gmMainLib_GetSaveData()
+                                               */
+    { 0x1F2C, 1, NULL }, /* data = &gmMainLib_8015CC4C()[0..6] */
+    { 0x1F2C, 1, NULL }, { 0x1F2C, 1, NULL }, { 0x1F2C, 1, NULL },
+    { 0x1F2C, 1, NULL }, { 0x1F2C, 1, NULL }, { 0x1F2C, 1, NULL },
+    { -1, 0, NULL },
+};
 
 void lb_8001C600(void)
 {
@@ -59,7 +48,7 @@ void lb_8001C600(void)
     }
 }
 
-const char* lb_8001C658(void)
+static const char* lb_8001C658(void)
 {
     OSCalendarTime time;
     const char* gamedata_str;
@@ -81,7 +70,7 @@ const char* lb_8001C658(void)
     return _p(_1C);
 }
 
-int lb_8001C820(void)
+static int lb_8001C820(void)
 {
     int var_r0;
 
@@ -97,7 +86,7 @@ int lb_8001C820(void)
 
 u32 lb_8001C87C(void)
 {
-    return lb_8001B7E0(0, "SuperSmashBros0110290334", &lb_803BAB74,
+    return lb_8001B7E0(0, "SuperSmashBros0110290334", lb_803BAB74,
                        &lb_803BAB60, &_p(x4));
 }
 
@@ -107,14 +96,14 @@ int lb_8001C8BC(void)
 {
     HSD_ASSERT(0x140, _p(enable));
 
-    return lb_8001BC18(0, "SuperSmashBros0110290334", (void**) &lb_803BAB74,
+    return lb_8001BC18(0, "SuperSmashBros0110290334", (void**) lb_803BAB74,
                        &lb_803BAB60, lb_8001C658(), lb_8001C820(), _p(x5C)[3],
                        &_p(x4));
 }
 
 #pragma push
 #pragma dont_inline on
-int lb_8001CAF4(void)
+enum_t lb_8001CAF4(void)
 {
     int temp_r5 = _p(x4);
     _p(x4) = 0;
@@ -139,7 +128,7 @@ int lb_8001CAF4(void)
 }
 #pragma pop
 
-void lb_8001CBAC(s32 arg0)
+void lb_8001CBAC(int arg0)
 {
     _p(x8) = arg0;
 }
@@ -151,8 +140,7 @@ enum_t lb_8001CBBC(void)
     if (lb_8001CAF4() != 0) {
         return 0xD;
     }
-    temp_r3 =
-        lb_8001BD34(0, "SuperSmashBros0110290334", &lb_803BAB74, &_p(x4));
+    temp_r3 = lb_8001BD34(0, "SuperSmashBros0110290334", lb_803BAB74, &_p(x4));
     if (temp_r3 != 0 && temp_r3 != 2) {
         _p(x8) = 2;
     }
@@ -166,7 +154,7 @@ void fn_8001CC30(int arg0)
     }
 }
 
-bool lb_8001CC4C(void)
+int lb_8001CC4C(void)
 {
     return lb_8001BA44(0, "SuperSmashBros0110290334", &_p(x4));
 }
@@ -180,7 +168,7 @@ static int dont_inline_helper(void)
     }
 
     temp_r24 = lb_8001C820();
-    return lb_8001BE30(0, "SuperSmashBros0110290334", &lb_803BAB74,
+    return lb_8001BE30(0, "SuperSmashBros0110290334", lb_803BAB74,
                        lb_8001C658(), temp_r24, _p(x5C)[3], &_p(x4),
                        fn_8001CC30);
 }
@@ -244,12 +232,12 @@ u8 lb_8001CE78(void)
     return GM_COUNT;
 }
 
-void fn_8001CEC0(HSD_GObj* gobj)
+static void fn_8001CEC0(HSD_GObj* gobj)
 {
     HSD_JObjAnimAll(gobj->hsd_obj);
 }
 
-void fn_8001CEE4(HSD_GObj* gobj, int arg1)
+static void fn_8001CEE4(HSD_GObj* gobj, int arg1)
 {
     if (_p(x10) == 1) {
         HSD_GObj_803910D8(gobj, arg1);
@@ -320,10 +308,10 @@ void lb_8001D21C(void)
     _p(xC) = 0;
     _p(x10) = 0;
     _p(x14) = 0;
-    lb_803BAB74.x14 = gmMainLib_GetSaveData();
+    lb_803BAB74[1].data = (u8*) gmMainLib_GetSaveData();
 
     for (i = 0; i < 7; i++) {
         struct unk* tmp = gmMainLib_8015CC4C();
-        lb_803BAB74.unk_arr[i].x8 = &tmp[i];
+        lb_803BAB74[2 + i].data = (u8*) &tmp[i];
     }
 }

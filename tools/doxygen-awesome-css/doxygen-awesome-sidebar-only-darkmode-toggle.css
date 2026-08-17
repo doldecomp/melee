@@ -37,8 +37,8 @@ SOFTWARE.
 
     #MSearchField {
         width: calc(
-            var(--side-nav-fixed-width) - calc(2 * var(--spacing-medium)) - 66px -
-                var(--searchbar-height)
+            var(--side-nav-fixed-width) - calc(2 * var(--spacing-medium)) -
+                66px - var(--searchbar-height)
         );
     }
 }

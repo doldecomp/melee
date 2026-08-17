@@ -46,7 +46,6 @@
 #include "pl/player.h"
 
 #include <math.h>
-#include <math_ppc.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/ftcmdscript.h>
 #include <MetroTRK/intrinsics.h>
@@ -1110,7 +1109,12 @@ block_43:
 #pragma dont_inline on
 bool ftCo_800A2718(mp_UnkStruct0* arg0)
 {
+    /// @todo Redundant cast and assignment improves match
+#ifdef BUGFIX
+    mp_UnkStruct0* island = arg0;
+#else
     mp_UnkStruct0* island = (mp_UnkStruct0*) arg0;
+#endif
     if (arg0 == NULL) {
         return false;
     }
@@ -3016,12 +3020,12 @@ static inline bool ftCo_800A648C_inline1(Item* ip)
     return false;
 }
 
-inline HSD_GObj* ftCo_800A648C_inline2(void)
+static inline HSD_GObj* ftCo_800A648C_inline2(void)
 {
     return HSD_GObj_Entities->items;
 }
 
-inline HSD_GObj* ftCo_800A648C_inline3(HSD_GObj* cur)
+static inline HSD_GObj* ftCo_800A648C_inline3(HSD_GObj* cur)
 {
     return cur->next;
 }
@@ -5321,8 +5325,11 @@ static inline void ftCo_800ABBA8_blk155144r(Fighter* fp, Fighter** target)
     *target = data->x44;
 }
 
+#ifdef BUGFIX
+#define sqrtf_store(x, y) sqrtf(x)
+#else
 /* MSL sqrtf with caller-provided volatile slot (retail 0x34/0x38/0x40). */
-static inline float ftCo_800ABBA8_sqrtf_store(float x, volatile float* y)
+static inline float sqrtf_store(float x, volatile float* y)
 {
     if (x > 0.0f) {
         double guess = __frsqrte((double) x);
@@ -5334,6 +5341,7 @@ static inline float ftCo_800ABBA8_sqrtf_store(float x, volatile float* y)
     }
     return x;
 }
+#endif
 
 void ftCo_800ABBA8(Fighter* fp)
 {
@@ -5428,8 +5436,7 @@ void ftCo_800ABBA8(Fighter* fp)
                 ok = 0;
             }
             if (ok == 0) {
-                disc = ftCo_800ABBA8_sqrtf_store(ABS(2.0f * g * h + v * v),
-                                                 &sqrt_tmp[3]);
+                disc = sqrtf_store(ABS(2.0f * g * h + v * v), &sqrt_tmp[3]);
                 t = (-disc - v) / g;
             } else {
                 if (v < 0.00001f && v > -0.00001f) {
@@ -5511,11 +5518,11 @@ void ftCo_800ABBA8(Fighter* fp)
     if (vf5 <= 0.0f) {
         land_y = fp->pos_delta.y * vf0 + fp->cur_pos.y;
     } else if (vf0 < vf5) {
-        tmp = ftCo_800ABBA8_sqrtf_store(vf0, &sqrt_tmp[1]);
+        tmp = sqrtf_store(vf0, &sqrt_tmp[1]);
         land_y =
             fp->cur_pos.y + (fp->pos_delta.y * vf0 - 0.5 * (*grav_ptr * tmp));
     } else {
-        tmp = ftCo_800ABBA8_sqrtf_store(vf5, &sqrt_tmp[0]);
+        tmp = sqrtf_store(vf5, &sqrt_tmp[0]);
         land_y =
             fp->cur_pos.y + (fp->pos_delta.y * vf5 - 0.5 * (*grav_ptr * tmp) -
                              (vf0 - vf5) * ftCo_GetTerminalVelocity(fp));
@@ -7803,18 +7810,6 @@ void ftCo_800B1AB8(Fighter* fp)
     ftCo_800ADE48(fp);
 }
 
-void ftCo_800B1DA0_noinline(Fighter* fp);
-void ftCo_800B1DA0_noinline(Fighter* fp)
-{
-    ftCo_800B1DA0(fp);
-}
-
-void ftCo_800B1DA0_noinline2(Fighter* fp);
-void ftCo_800B1DA0_noinline2(Fighter* fp)
-{
-    ftCo_800B1DA0_noinline(fp);
-}
-
 void ftCo_800B1DA0(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
@@ -7826,6 +7821,16 @@ void ftCo_800B1DA0(Fighter* fp)
         ftCo_800A8940(fp);
     }
     ftCo_800ADE48(fp);
+}
+
+static inline void ftCo_800B1DA0_noinline(Fighter* fp)
+{
+    ftCo_800B1DA0(fp);
+}
+
+static inline void ftCo_800B1DA0_noinline2(Fighter* fp)
+{
+    ftCo_800B1DA0_noinline(fp);
 }
 
 void ftCo_800B1EF0(Fighter* fp)
@@ -8062,8 +8067,6 @@ void ftCo_800B2790(Fighter* fp)
         ftCo_800B49F4(fp);
     }
 }
-
-void ftCo_800B1DA0(Fighter*); /* static */
 
 static inline bool ftCo_800B2AFC_CheckFloor(Vec3* pos, int* line, u32* flags,
                                             Vec3* normal, int arg4, int arg5,

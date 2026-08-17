@@ -60,7 +60,7 @@ void fn_8010B2E8(Fighter_GObj* gobj)
     fp->mv.kb.specialn_ms.cur_frame = 0;
 }
 
-inline void setupStartAccessory(HSD_GObj* gobj, Vec3* scale)
+static inline void setupStartAccessory(HSD_GObj* gobj, Vec3* scale)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj;
@@ -249,7 +249,7 @@ void ftKb_MsSpecialAirNStart_Coll(Fighter_GObj* gobj)
     }
 }
 
-inline FtMotionId getAirSpecialMotionId(Fighter_GObj* gobj)
+static inline FtMotionId getAirSpecialMotionId(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->u.kb.hat.kind == FTKIND_MARS) {
@@ -268,7 +268,7 @@ void ftKb_SpecialNMs_8010B868(Fighter_GObj* gobj)
                               fp->cur_anim_frame, 1.0f, 0.0f, NULL);
 }
 
-inline FtMotionId getGroundSpecialMotionId(Fighter_GObj* gobj)
+static inline FtMotionId getGroundSpecialMotionId(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->u.kb.hat.kind == FTKIND_MARS) {
@@ -396,7 +396,7 @@ void ftKb_SpecialNMs_8010BC40(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     s32 i;
 
-    if ((s32) fp->u.gw.x2238_panicCharge == 0x12) {
+    if (fp->u.gw.x2238_panicCharge == 0x12) {
         i = ftKb_MS_MsSpecialNLoop;
     } else {
         i = ftKb_MS_FeSpecialNLoop;
@@ -410,7 +410,7 @@ void ftKb_SpecialNMs_8010BC90(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     s32 i;
 
-    if ((s32) fp->u.gw.x2238_panicCharge == 0x12) {
+    if (fp->u.gw.x2238_panicCharge == 0x12) {
         i = ftKb_MS_MsSpecialAirNLoop;
     } else {
         i = ftKb_MS_FeSpecialAirNLoop;

@@ -17,10 +17,9 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
-#include <trigf.h>
+#include <math.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
 
 ItemStateTable it_803F6F50[] = {
     { 0, itSeakneedlethrown_UnkMotion0_Anim,
@@ -552,7 +551,7 @@ bool it_2725_Logic109_ShieldBounced(Item_GObj* gobj)
     return false;
 }
 
-inline bool it_2725_Logic109_HitShield_inline(Item_GObj* gobj, Item* ip)
+static inline bool it_2725_Logic109_HitShield_inline(Item_GObj* gobj, Item* ip)
 {
     itSeakNeedleThrownAttributes* attr =
         ip->xC4_article_data->x4_specialAttributes;

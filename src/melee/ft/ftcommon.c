@@ -46,7 +46,6 @@
 #include "sfx/crowdsfx.h"
 
 #include <math.h>
-#include <trigf.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
@@ -919,7 +918,7 @@ void ftCommon_8007E2F4(Fighter* fp, s16 val)
     fp->x1A6A = val;
 }
 
-inline void _func_8007E2FC_inline(HSD_GObj* gobj)
+static inline void _func_8007E2FC_inline(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     fp->xE4_ground_accel_1 = 0;
@@ -1052,8 +1051,7 @@ void it_8028B850(HSD_GObj*, float);
 void it_8028B648(HSD_GObj*, float);
 void it_8028B6B0(HSD_GObj*, float);
 void it_8028B618(HSD_GObj*, float);
-void it_802BDD40(HSD_GObj*, float);
-void it_802BDDB4(HSD_GObj*, float);
+
 static void (*parasol_table_1[7])(HSD_GObj*, float) = {
     it_8028B718, it_8028B780, it_8028B7E8, it_8028B850,
     it_8028B648, it_8028B6B0, it_8028B618,
@@ -1490,7 +1488,7 @@ void ftCommon_8007F8E8(HSD_GObj* gobj)
 
 extern void (*ftData_UnkMotionStates1[])(HSD_GObj*);
 
-inline void _func_8007F948_inline(HSD_GObj* gobj)
+static inline void _func_8007F948_inline(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->x197C == NULL || fp->x1980 == NULL) {
@@ -1589,7 +1587,7 @@ void ftCommon_8007FC7C(HSD_GObj* gobj, float arg8)
     ft_PlaySFX(fp, 0x11F, 0x7F, 0x40);
 }
 
-inline float fminf(float a, float b)
+static inline float fminf(float a, float b)
 {
     float result = a;
     if (a > b) {

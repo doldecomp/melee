@@ -157,7 +157,7 @@ static inline void it_8026C88C_inline(RandomItemSpawner* alloc)
     SpawnItem spawn;
     if (db_AreItemSpawnsEnabled() != 0U) {
         alloc->x0--;
-        if ((s32) alloc->x0 == 0) {
+        if (alloc->x0 == 0) {
             spawn.kind = it_8026C75C(&alloc->x4);
             if ((s32) spawn.kind != -1) {
                 pos = &spawn.prev_pos;

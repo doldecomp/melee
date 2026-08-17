@@ -2,11 +2,11 @@
 
 #include "lbcardnew.static.h"
 
+#include <strtoul.h> // IWYU pragma: keep
 #include <dolphin/card.h>
 #include <baselib/hsd_3A94.h>
 #include <sysdolphin/baselib/hsd_3B27.h>
 #include <sysdolphin/baselib/memory.h>
-#include <MSL/strtoul.h> // IWYU pragma: keep
 
 #define _p(x) (lb_80432A68.x)
 
@@ -311,10 +311,6 @@ void lb_8001A4CC(const char* filename, UNK_T file_entries)
     task->x8 = file_entries;
 }
 
-struct CardEntry {
-    int file_size, file_flags, data_size;
-};
-
 struct SnapshotNode {
     struct SnapshotNode* next;
     u32 time;
@@ -322,7 +318,8 @@ struct SnapshotNode {
     u16 blocks;
 };
 
-inline void setup_card_entries(void* ctx, void* icon, struct CardEntry* entry)
+static inline void setup_card_entries(void* ctx, void* icon,
+                                      struct CardEntry* entry)
 {
     int i;
 
@@ -331,7 +328,7 @@ inline void setup_card_entries(void* ctx, void* icon, struct CardEntry* entry)
     while (entry->file_size != -1) {
         if (entry->file_size != 0) {
             hsd_803AC3E0(ctx, i, entry->file_size, entry->file_flags,
-                         entry->data_size);
+                         entry->data);
         }
         i++;
         entry++;
@@ -530,8 +527,8 @@ int lb_8001ACEC(UNK_T file_entries)
         cached_flag = _p(xF4)[i];
         cached_data = _p(xD0)[i];
         if (_p(xF4)[i] != 0) {
-            hsd_result = hsd_803B29D8(&_p(unk_A8), i, entries[i].data_size,
-                                      fn_8001A0B0);
+            hsd_result =
+                hsd_803B29D8(&_p(unk_A8), i, entries[i].data, fn_8001A0B0);
             _p(unk_38)[i].unk_0 = convert_hsdcard_error(hsd_result);
             _p(unk_38)[i].unk_4 = hsd_result;
             file_error = _p(unk_38)[i].unk_0;
@@ -564,8 +561,8 @@ int lb_8001AE38(UNK_T file_entries)
         cached_flag = _p(xF4)[i];
         cached_data = _p(xD0)[i];
         if (_p(xF4)[i] != 0) {
-            hsd_result = hsd_803B2A4C(&_p(unk_A8), i, entries[i].data_size,
-                                      fn_8001A0B0);
+            hsd_result =
+                hsd_803B2A4C(&_p(unk_A8), i, entries[i].data, fn_8001A0B0);
             _p(unk_38)[i].unk_0 = convert_hsdcard_error(hsd_result);
             _p(unk_38)[i].unk_4 = hsd_result;
             file_error = _p(unk_38)[i].unk_0;
@@ -627,6 +624,7 @@ int lb_8001B14C(void)
     int count;
     int i;
     struct SnapshotNode** scan;
+    static size_t const nodes_len = 127;
 
     head = NULL;
     disk_id = DVDGetCurrentDiskID();
@@ -637,7 +635,7 @@ int lb_8001B14C(void)
     if (_p(free_files) != NULL) {
         *_p(free_files) = _p(unused_files);
     }
-    nodes = HSD_MemAlloc(0x5F4);
+    nodes = HSD_MemAlloc(sizeof(*nodes) * nodes_len);
     node = nodes;
     company = (char*) stat[0].company;
     game = (char*) stat[0].gameName;
@@ -734,7 +732,7 @@ int lb_8001B760(int result)
     return result;
 }
 
-inline struct CardTask* setup_task(int a, int b)
+static inline struct CardTask* setup_task(int a, int b)
 {
     struct CardTask* task = lb_80019C38();
     task->x0 = a;
@@ -742,7 +740,8 @@ inline struct CardTask* setup_task(int a, int b)
     return task;
 }
 
-inline void lb_8001A4CC_dontinline(const char* filename, void* file_entries)
+static inline void lb_8001A4CC_dontinline(const char* filename,
+                                          void* file_entries)
 {
     lb_8001A4CC(filename, file_entries);
 }
@@ -851,10 +850,10 @@ int lb_8001BB48(int chan, char* filename, void* file_entries, void* save_data,
     return lb_80019CB0(0x10);
 }
 
-inline int lb_8001BB48_inline(int chan, char* filename, void* file_entries,
-                              void* save_data, const char* write_buf,
-                              int write_offset, int write_len,
-                              UNK_T status_out)
+static inline int lb_8001BB48_inline(int chan, char* filename,
+                                     void* file_entries, void* save_data,
+                                     const char* write_buf, int write_offset,
+                                     int write_len, UNK_T status_out)
 {
     int new_var;
     lb_80019EF0(chan, save_data, status_out, 0);
@@ -1122,7 +1121,7 @@ int lb_8001C4A8(void* file_entries, void* icon_data)
         while (entry->file_size != -1) {
             if (entry->file_size != 0) {
                 hsd_803AC3E0((struct CardState*) ctx, i, entry->file_size,
-                             entry->file_flags, entry->data_size);
+                             entry->file_flags, entry->data);
             }
             i++;
             entry++;

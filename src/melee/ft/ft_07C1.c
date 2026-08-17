@@ -20,8 +20,6 @@
 
 #include <baselib/gobj.h>
 
-void ft_8007C224(HSD_GObj* gobj);
-
 void ft_8007C114(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -176,7 +174,7 @@ void ft_8007C4BC(Fighter_GObj* gobj)
         HSD_GObj* grab_attacker;
         PAD_STACK(4 * 2);
         if (fp->victim_gobj != NULL) {
-            grab_attacker = (Fighter_GObj*) fp->victim_gobj;
+            grab_attacker = fp->victim_gobj;
         } else if (fp->x221C_b6) {
             grab_attacker = (Fighter_GObj*) fp->dmg.x1868_source;
         } else {

@@ -2,7 +2,7 @@
 
 #include "axdriver.static.h"
 
-#include <math_ppc.h>
+#include <math.h>
 #include <string.h>
 #include <dolphin/axfx.h>
 #include <dolphin/dvd.h>
@@ -196,6 +196,9 @@ u32 AXDriver_8038C678(u32 param_type, u32 param_value)
     }
 }
 
+#ifdef BUGFIX
+#define sqrtf_store(x, y) sqrtf(x)
+#else
 /// MSL sqrtf expansion (src/MSL/math_ppc.h) writing its result through a
 /// caller-provided slot, as in sqrtf_store in lbcollision.c and mplib.c.
 /// Evidence: retail AXDriver_8038BF6C keeps its eight sqrt results in
@@ -215,6 +218,7 @@ static inline float sqrtf_store(float x, volatile float* y)
     }
     return x;
 }
+#endif
 
 void AXDriver_8038BF6C(HSD_SM* v)
 {
@@ -324,7 +328,7 @@ void AXDriver_8038C6C0(HSD_SM* v)
     PAD_STACK(8);
 
     while (v->x30 == (s32) AXDriver_804D778C) {
-        cmd_word = *(u32*) v->cmd_stream;
+        cmd_word = *v->cmd_stream;
         cmd_type = cmd_word >> 0x18U;
 
         cmd_size = AXDriver_8038C678(cmd_type, cmd_word);
@@ -334,7 +338,7 @@ void AXDriver_8038C6C0(HSD_SM* v)
         v->x30 += cmd_size;
         switch (cmd_type) {
         case 2:
-            v->x2A = *(u32*) v->cmd_stream;
+            v->x2A = *v->cmd_stream;
             if (v->x2A == 0) {
                 v->flags |= 0x100000;
             }
@@ -360,7 +364,7 @@ void AXDriver_8038C6C0(HSD_SM* v)
             break;
         case 6:
             v->flags |= 4;
-            v->x1A = *(u32*) v->cmd_stream;
+            v->x1A = *v->cmd_stream;
             break;
         case 7:
             v->flags |= 4;
@@ -369,7 +373,7 @@ void AXDriver_8038C6C0(HSD_SM* v)
             break;
         case 8:
             v->flags |= 8;
-            v->x1C = *(u32*) v->cmd_stream;
+            v->x1C = *v->cmd_stream;
             break;
         case 9:
             v->flags |= 8;
@@ -378,7 +382,7 @@ void AXDriver_8038C6C0(HSD_SM* v)
             break;
         case 10:
             v->flags |= 0x10;
-            v->x1E = *(u32*) v->cmd_stream;
+            v->x1E = *v->cmd_stream;
             break;
         case 11:
             v->flags |= 0x10;
@@ -418,7 +422,7 @@ void AXDriver_8038C6C0(HSD_SM* v)
             }
             break;
         case 18:
-            if (!(((u32) AXDriver_804D603C >> 1U) & 1)) {
+            if (!((AXDriver_804D603C >> 1U) & 1)) {
                 v->flags |= 0x80;
                 v->x24[1] = *v->cmd_stream;
             }

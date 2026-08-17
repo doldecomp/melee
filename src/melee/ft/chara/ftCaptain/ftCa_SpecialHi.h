@@ -4,7 +4,6 @@
 #include <baselib/forward.h>
 
 /* 0E4354 */ void ftCa_SpecialHi_Anim(HSD_GObj* gobj);
-/* 0E4838 */ void ftCa_SpecialLwEndAir_Coll(HSD_GObj* gobj);
 /* 0E49DC */ void ftCa_SpecialHiThrow1_Coll(HSD_GObj* gobj);
 /* 0E4A78 */ void ftCa_SpecialHi_Enter(HSD_GObj* gobj);
 /* 0E4B60 */ void ftCa_SpecialHi_IASA(HSD_GObj* gobj);

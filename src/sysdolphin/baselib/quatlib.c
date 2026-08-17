@@ -2,22 +2,7 @@
 
 #include <placeholder.h>
 
-#include <trigf.h>
-#include <MSL/math.h>
-
-inline float sqrtf(float x)
-{
-    volatile float y;
-    if (x > 0.0f) {
-        double guess = __frsqrte((double) x); // returns an approximation to
-        guess = .5 * guess * (3.0 - guess * guess * x); // now have 12 sig bits
-        guess = .5 * guess * (3.0 - guess * guess * x); // now have 24 sig bits
-        guess = .5 * guess * (3.0 - guess * guess * x); // now have 32 sig bits
-        y = (float) (x * guess);
-        return y;
-    }
-    return x;
-}
+#include <math.h>
 
 s32 MatToQuat(Mtx m, Quaternion* q)
 {
@@ -119,7 +104,7 @@ s32 HSD_QuatLib_8037ECE0(Vec3* axis, Quaternion* q, f32 angle)
     f32 s;
 
     len = sqrtf(axis->x * axis->x + axis->y * axis->y + axis->z * axis->z);
-    if (__fabsf(len) < 1.1754944E-38F) {
+    if (fabsf(len) < 1.1754944E-38F) {
         return -1;
     }
     inv_len = 1.0F / len;

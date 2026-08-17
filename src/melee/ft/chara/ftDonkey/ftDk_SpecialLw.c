@@ -104,8 +104,6 @@ static void ftDonkey_8010DE88_inner(HSD_GObj* gobj)
     Fighter_SetEffectHitlagCallbacks(fp);
 }
 
-static void callback(HSD_GObj* gobj);
-
 static void doAnim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

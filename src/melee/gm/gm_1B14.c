@@ -525,7 +525,7 @@ void gm_801B1B74(GameScene* arg0)
 
     vs_data = &gmMainLib_804D3EE0->unk_D10;
     css = gm_GetGameSceneLoadDataCallback(arg0);
-    if ((u8) gm_804D68C1 != 0) {
+    if (gm_804D68C1 != 0) {
         lb_8001C550();
         lb_8001D164(0);
         lb_8001CE00();
@@ -593,9 +593,9 @@ void gm_801B1C24(GameScene* arg0)
         }
     }
     cache = &lbDvd_GetPreloadCacheScene()->game_cache;
-    cache->entries[2].char_id = (s8) vs->data.players[2].c_kind;
+    cache->entries[2].char_id = vs->data.players[2].c_kind;
     cache->entries[2].color = vs->data.players[2].color;
-    cache->entries[3].char_id = (s8) vs->data.players[3].c_kind;
+    cache->entries[3].char_id = vs->data.players[3].c_kind;
     cache->entries[3].color = vs->data.players[3].color;
     lbDvd_80018254();
     {

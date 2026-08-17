@@ -220,10 +220,10 @@ void ftCa_SpecialLw_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->ground_or_air == GA_Ground) {
-        ftCommon_8007E5AC((Fighter*) fp);
+        ftCommon_8007E5AC(fp);
         ft_80085088(gobj);
     } else {
-        ftPartSetRotZ((Fighter*) fp, 0, 0);
+        ftPartSetRotZ(fp, 0, 0);
         ft_80085134(gobj);
     }
     ftCa_Special_Inline_Friction(fp);
@@ -307,10 +307,10 @@ void ftCa_SpecialLw_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if ((s32) fp->ground_or_air == GA_Ground) {
         if (ft_80082708(gobj) == 0) {
-            ftCommon_8007D5D4((Fighter*) fp);
+            ftCommon_8007D5D4(fp);
         }
     } else if (ft_80081D0C(gobj) != 0) {
-        ftCommon_8007D7FC((Fighter*) fp);
+        ftCommon_8007D7FC(fp);
     }
     {
         if ((fp->cmd_vars[0] != 0) &&

@@ -692,9 +692,9 @@ u32 gm_80160854(u8 slot, u8 team, u8 is_teams, u8 slot_type)
     return 0;
 }
 
-GXColor gm_80160968(u8 arg0)
+GXColor gm_80160968(u32 arg0)
 {
-    return lbl_803B7864[arg0];
+    return lbl_803B7864[(u8) arg0];
 }
 
 const char* gm_80160980_noinline(u8 ckind);
@@ -1075,8 +1075,8 @@ s32 fn_80161154(MatchEnd* arg0)
         if (spC[i]) {
             if (idx == 4) {
                 idx = i;
-            } else if ((u32) arg0->player_standings[idx].x50 <
-                       (u32) arg0->player_standings[i].x50)
+            } else if (arg0->player_standings[idx].x50 <
+                       arg0->player_standings[i].x50)
             {
                 idx = i;
             }
@@ -1087,7 +1087,7 @@ s32 fn_80161154(MatchEnd* arg0)
     for (i = 0; i < 4; i++) {
         if (spC[i] && idx != i) {
             player = &arg0->player_standings[i];
-            if ((u32) player->x50 == (u32) best_player->x50) {
+            if (player->x50 == best_player->x50) {
                 cnt += 1;
             } else {
                 spC[i] = 0;
@@ -1292,7 +1292,7 @@ void fn_80162170(MatchEnd* arg0)
                 u32 sum = nt->play_time_by_fighter[gm_CKindToSelKind(
                               p->character_kind)] +
                           arg0->frame_count / 60;
-                play_time = ((u32) sum > (u32) -1)
+                play_time = (sum > (u32) -1)
                                 ? -1
                                 : nt->play_time_by_fighter[gm_CKindToSelKind(
                                       p->character_kind)] +
@@ -1372,10 +1372,10 @@ s32 gm_8016247C(s32 arg0)
     high_score_ptr = gmMainLib_8015CCFC();
     session_high_score_ptr2 = &gmMainLib_8015EDBC()->x14;
 
-    if ((u32) arg0 > (u32) *high_score_ptr) {
+    if ((u32) arg0 > (*high_score_ptr)) {
         *high_score_ptr = arg0;
     }
-    if ((u32) arg0 > (u32) *session_high_score_ptr2) {
+    if ((u32) arg0 > (*session_high_score_ptr2)) {
         *session_high_score_ptr2 = arg0;
     }
     if ((u32) arg0 > 0x270FU) {
@@ -1652,7 +1652,7 @@ u8 gm_80162D6C(void)
     i = 0;
     min = 4;
     do {
-        if (min > (u8) *gmMainLib_8015D194((u8) i)) {
+        if (min > (*gmMainLib_8015D194((u8) i))) {
             min = *gmMainLib_8015D194((u8) i);
         }
         i += 1;
@@ -1729,7 +1729,7 @@ u8 gm_80162F68(void)
     i = 0;
     min = 4;
     do {
-        if (min > (u8) *gmMainLib_8015D2BC((u8) i)) {
+        if (min > (*gmMainLib_8015D2BC((u8) i))) {
             min = *gmMainLib_8015D2BC((u8) i);
         }
         i += 1;
@@ -1803,7 +1803,7 @@ u8 gm_80163164(void)
     i = 0;
     min = 4;
     do {
-        if (min > (u8) *gmMainLib_8015D3E4((u8) i)) {
+        if (min > (*gmMainLib_8015D3E4((u8) i))) {
             min = *gmMainLib_8015D3E4((u8) i);
         }
         i += 1;
@@ -2747,13 +2747,12 @@ s32 fn_80165548(MatchEnd* me, s32 arg1, s32 team)
     if (me->is_teams == 1) {
         for (i = 0; i < 4; i++) {
             if (me->player_standings[i].slot_type != 3 &&
-                (s32) me->player_standings[i].team == (s32) team)
+                (s32) me->player_standings[i].team == team)
             {
                 result = i;
                 for (j = 0; j < 4; j++) {
                     if (me->player_standings[j].slot_type != 3 &&
-                        (s32) me->player_standings[j].team == (s32) team &&
-                        i != j &&
+                        (s32) me->player_standings[j].team == team && i != j &&
                         me->player_standings[i].is_small_loser >
                             me->player_standings[j].is_small_loser)
                     {
@@ -2905,13 +2904,13 @@ MatchEnd* fn_80165D60(MatchEnd* arg0)
     s32 j;
 
     for (i = 0; i < 6; i++) {
-        if ((u8) arg0->player_standings[i].slot_type != 3) {
+        if (arg0->player_standings[i].slot_type != 3) {
             arg0->player_standings[i].is_small_loser =
                 arg0->player_standings[i].is_big_loser;
             for (j = 0; j < 6; j++) {
-                if ((u8) arg0->player_standings[j].slot_type != 3 && i != j &&
-                    (u8) arg0->player_standings[i].is_big_loser ==
-                        (u8) arg0->player_standings[j].is_big_loser &&
+                if (arg0->player_standings[j].slot_type != 3 && i != j &&
+                    arg0->player_standings[i].is_big_loser ==
+                        arg0->player_standings[j].is_big_loser &&
                     arg0->player_standings[i].x30 <
                         arg0->player_standings[j].x30)
                 {
@@ -2929,7 +2928,7 @@ void fn_80165E7C(MatchEnd* arg0)
     int new_var;
 
     for (i = 0; i < 6; i++) {
-        if ((u8) arg0->player_standings[i].slot_type != 3) {
+        if (arg0->player_standings[i].slot_type != 3) {
             u8 team = arg0->player_standings[i].team;
 
             if (gm_GetCurrentGameMode() == GM_STAMINA_VS || arg0->x5 == 1) {
@@ -3006,13 +3005,13 @@ s32 fn_801661E0(MatchEnd* arg0)
     s32 j;
 
     for (i = 0; i < 5; i++) {
-        if ((u8) arg0->team_standings[i].active != 0) {
+        if (arg0->team_standings[i].active != 0) {
             arg0->team_standings[i].is_small_loser =
                 arg0->team_standings[i].is_big_loser;
             for (j = 0; j < 5; j++) {
-                if ((u8) arg0->team_standings[j].active != 0 && i != j &&
-                    (u8) arg0->team_standings[i].is_big_loser ==
-                        (u8) arg0->team_standings[j].is_big_loser &&
+                if (arg0->team_standings[j].active != 0 && i != j &&
+                    arg0->team_standings[i].is_big_loser ==
+                        arg0->team_standings[j].is_big_loser &&
                     (u32) arg0->team_standings[i].subscore <
                         (u32) arg0->team_standings[j].subscore)
                 {
@@ -3038,9 +3037,9 @@ void gm_80166378(lbl_8046B6A0_24C_t* arg0_raw)
 
     PAD_STACK(60);
 
-    memzero(arg0->player_standings, 0x3F0);
-    memzero(arg0->team_standings, 0x3C);
-    memzero(arg0->_x448, 4);
+    memzero(arg0->player_standings, sizeof(arg0->player_standings));
+    memzero(arg0->team_standings, sizeof(arg0->team_standings));
+    memzero(arg0->_x448, sizeof(arg0->_x448));
     arg0->frame_count = gm_8016AEDC();
     arg0->x7 = fn_8016B728();
     for (i = 0; i < 6; i++) {
@@ -3186,7 +3185,7 @@ s32 gm_80166A98(MatchEnd* arg0, u8 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
     s32 score3;
     u32 i;
 
-    memzero(arg0, 0x227C);
+    memzero(arg0, sizeof(*arg0));
 
     arg0->result = OUTCOME_TIMEOUT;
     arg0->x5 = 0;
@@ -3880,7 +3879,7 @@ void gm_80168638(MatchEnd* arg0)
     u8 spC[4];
     s32 i;
     s8* temp_r3;
-    if ((u8) gmMainLib_GetGameRules()->handicap == 1) {
+    if (gmMainLib_GetGameRules()->handicap == 1) {
         for (i = 0; i < 4; i++) {
             temp_r3 = gmMainLib_8015CE44(i, arg0->player_standings[i].x4);
             if (temp_r3 != NULL) {
@@ -3891,7 +3890,7 @@ void gm_80168638(MatchEnd* arg0)
         }
         fn_80169000(arg0, spC);
         for (i = 0; i < 4; i++) {
-            if ((u8) arg0->player_standings[i].slot_type != 3) {
+            if (arg0->player_standings[i].slot_type != 3) {
                 temp_r3 = gmMainLib_8015CE44(i, arg0->player_standings[i].x4);
                 if (temp_r3 != NULL) {
                     *temp_r3 = (s8) spC[i];
@@ -3909,7 +3908,7 @@ void gm_80168710(MatchEnd* arg0, VsModeData* arg1)
     s32 j;
 
     best = -1;
-    memzero(buf, 4);
+    memzero(buf, sizeof(buf));
     for (j = 0; j < 4; j++) {
         if (arg0->player_standings[j].slot_type == 0) {
             if ((s32) arg0->player_standings[j].is_big_loser > best) {
@@ -4501,7 +4500,7 @@ void fn_801697FC(s8 character, s8 costume, s8 new_character, s8 new_costume,
     if (new_character == character && costume == new_costume) {
         costume = (s8) ((costume + 1) % ncolors);
     }
-    for (i = 0; (s8) buf[i] != -2; i++) {
+    for (i = 0; buf[i] != -2; i++) {
         buf[i] = costume;
     }
 }
@@ -4528,7 +4527,7 @@ void fn_80169900(u8 arg0, struct lbl_8046B488_t* arg1, s8* arg2, s8* arg3)
         dst = arg2;
         src = arg3;
         while (*src != -2) {
-            *dst = (s8) arg1->x0;
+            *dst = arg1->x0;
             src += 1;
             dst += 1;
         }
@@ -4626,7 +4625,7 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
             s32 j;
             count = 0;
             for (j = 0; j < 0x1A; j++) {
-                if ((s8) *list != -1) {
+                if ((*list) != -1) {
                     count += 1;
                     if (count > 0x10) {
                         *list = -1;
@@ -4640,12 +4639,12 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
             s32 idx = 0;
             s8* dst2 = arg1;
             s8* src2 = arg2;
-            while ((s8) *src2 != -2) {
-                while ((s8) lbl_8046B488.x1C0[idx] == -1) {
+            while ((*src2) != -2) {
+                while (lbl_8046B488.x1C0[idx] == -1) {
                     idx = (idx + 1) % 27;
                 }
-                result = Player_800325C8(
-                    (CharacterKind) (s8) lbl_8046B488.x1C0[idx], 0);
+                result =
+                    Player_800325C8((CharacterKind) lbl_8046B488.x1C0[idx], 0);
                 *dst2 = result;
                 idx += 1;
                 src2 += 1;
@@ -4656,7 +4655,7 @@ long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
     case 0:
         dst = arg1;
         src = arg2;
-        while ((s8) *src != -2) {
+        while ((*src) != -2) {
             *dst = -1;
             src += 1;
             dst += 1;
@@ -4723,13 +4722,13 @@ void fn_80169C54(s8 arg0, s8 arg1)
                 p = Player_800325C8((CharacterKind) ch, 0);
                 if ((p != -1) && (p != 4)) {
                     for (k = 0; k < n; k++) {
-                        Player_80031DA8((s32) p, buf[k]);
+                        Player_80031DA8(p, buf[k]);
                     }
                 }
                 p = Player_800325C8((CharacterKind) ch, 1);
                 if ((p != -1) && (p != 4)) {
                     for (k = 0; k < n; k++) {
-                        Player_80031DA8((s32) p, buf[k]);
+                        Player_80031DA8(p, buf[k]);
                     }
                 }
             }
@@ -4740,13 +4739,13 @@ void fn_80169C54(s8 arg0, s8 arg1)
             p = Player_800325C8((CharacterKind) arg0, 0);
             if ((p != -1) && (p != 4)) {
                 for (k = 0; k < n; k++) {
-                    Player_80031DA8((s32) p, buf[k]);
+                    Player_80031DA8(p, buf[k]);
                 }
             }
             p = Player_800325C8((CharacterKind) arg0, 1);
             if ((p != -1) && (p != 4)) {
                 for (k = 0; k < n; k++) {
-                    Player_80031DA8((s32) p, buf[k]);
+                    Player_80031DA8(p, buf[k]);
                 }
             }
         }
@@ -5189,7 +5188,7 @@ void fn_8016A4C8(void)
                     Player_SetMoreFlagsBit5(spawn_slot, 0U);
                 }
                 if (Player_GetPlayerCharacter(spawn_slot) == CKIND_KIRBY &&
-                    (u8) gp->xE != 0)
+                    gp->xE != 0)
                 {
                     Player_SetUnk4D(spawn_slot,
                                     (s32) (s8) (u8) gp->x124[*remaining]);
@@ -5291,7 +5290,7 @@ int gm_8016A9E8(u8 arg0, s8 arg1)
             ptr->arr1[i + 1] = ptr->arr1[i];
         }
         ptr->arr2[0] = arg1;
-        ptr->arr1[0] = (u8) arg0;
+        ptr->arr1[0] = arg0;
         found++;
     }
     return found;

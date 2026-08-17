@@ -925,7 +925,7 @@ struct Fighter_DemoStrings {
         /* fp+2072:7 */ u8 count_specials : 1;
         /* fp+2073 */ u8 x2073;
     };
-    /* fp+2070 */ s32 x2070_int;
+    /* fp+2070 */ int x2070_int;
 };
 
 /// @todo See if this should likewise be instituted for item->xD94 thru

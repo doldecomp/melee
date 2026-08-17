@@ -21,8 +21,6 @@
 #include "mp/mplib.h"
 #include "pl/player.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
 #include <dolphin/types.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
@@ -805,7 +803,7 @@ bool grShrineRoute_80209BE4(Ground_GObj* arg)
     return false;
 }
 
-inline f32 grShrineRoute_8020A8A4_rand(void)
+static inline f32 grShrineRoute_8020A8A4_rand(void)
 {
     return HSD_Randf();
 }

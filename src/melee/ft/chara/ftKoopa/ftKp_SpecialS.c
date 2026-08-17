@@ -1,21 +1,18 @@
+#include "ftKoopa/ftKp_SpecialS.h"
+
 #include "placeholder.h"
 
 #include <platform.h>
 
-#include "cm/camera.h"
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
-#include "ft/ftcliffcommon.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
-#include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
@@ -24,7 +21,6 @@
 #include "ftCommon/ftCo_CaptureDamageKoopa.h"
 #include "ftCommon/ftCo_CaptureKoopa.h"
 #include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/ftCo_Thrown.h"
 #include "ftCommon/ftCo_ThrownKoopa.h"
@@ -32,12 +28,10 @@
 
 #include "ftKoopa/forward.h"
 
-#include "ftKoopa/ftKp_Init.h"
 #include "ftKoopa/types.h"
 
 #include <baselib/forward.h>
 
-#include <trigf.h>
 #include <baselib/gobj.h>
 
 static s32 ftKp_SpecialS_set_dir(Fighter_GObj* gobj)
@@ -384,7 +378,7 @@ void ftKp_SpecialSHit_Anim(HSD_GObj* gobj)
     }
 }
 
-inline void inlineA0(HSD_GObj* gobj)
+static inline void inlineA0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.kp.specials.x4) {
@@ -488,11 +482,11 @@ void ftKp_SpecialAirSEndB_Anim(HSD_GObj* gobj)
     doEndBAnim(gobj, ftCo_Fall_Enter);
 }
 
-inline void ftKoopa_SpecialS_ChangeAction(HSD_GObj* gobj,
-                                          ftKoopa_MotionState kp_msid_f,
-                                          ftCommon_MotionState victim_msid_f,
-                                          ftKoopa_MotionState kp_msid_b,
-                                          ftCommon_MotionState victim_msid_b)
+static inline void
+ftKoopa_SpecialS_ChangeAction(HSD_GObj* gobj, ftKoopa_MotionState kp_msid_f,
+                              ftCommon_MotionState victim_msid_f,
+                              ftKoopa_MotionState kp_msid_b,
+                              ftCommon_MotionState victim_msid_b)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
     fp->throw_flags = 0;
@@ -530,7 +524,7 @@ void ftKp_SpecialAirSHit_IASA(HSD_GObj* gobj)
     }
 }
 
-inline void ftKp_SpecialSWait_IASA_inline(HSD_GObj* gobj)
+static inline void ftKp_SpecialSWait_IASA_inline(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.kp.specials.x4) {

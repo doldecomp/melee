@@ -22,7 +22,7 @@ jobs:
       fail-fast: false
       matrix:
         version: [GALE01]
-        mode: ['link', 'diff', 'test']
+        mode: ['link', 'diff', 'test', 'clang']
     steps:
     - name: Checkout
       uses: actions/checkout@v6
@@ -48,6 +48,23 @@ jobs:
         mode='${{matrix.mode}}'
         root='build/${{matrix.version}}'
         report="$root/report.json"
+        head="$(git rev-parse HEAD)"
+
+        function get_upstream {
+            local ref
+            case '${{github.event_name}}' in
+              'pull_request')
+                git fetch origin HEAD
+                ref='FETCH_HEAD'
+              ;;
+              'push')
+                ref='HEAD^'
+              ;;
+              *) exit 1 ;;
+            esac
+            git rev-parse "$ref"
+        }
+        upstream="$(get_upstream)"
 
         config_args=$(printf '%s ' \
           '--compilers /compilers' \
@@ -59,6 +76,11 @@ jobs:
         function run_configure {
           echo "$config_args" | xargs python configure.py
         }
+
+        function checkout {
+          git switch --discard-changes --detach "$1"
+        }
+
 
         case "$mode" in
           'link')
@@ -94,28 +116,17 @@ jobs:
           'diff')
             expected="$root/baseline.json"
             changes="$root/changes.json"
-            head="$(git rev-parse HEAD)"
 
             function run_ninja {
               ninja all_source "$report"
             }
 
-            case '${{github.event_name}}' in
-              'pull_request')
-                git fetch origin HEAD
-                git checkout FETCH_HEAD
-              ;;
-              'push')
-                git checkout 'HEAD^'
-              ;;
-              *) exit 1 ;;
-            esac
-
+            checkout "$upstream"
             run_configure
             run_ninja
             cp "$report" "$expected"
 
-            git checkout -f "$head"
+            checkout "$head"
             run_ninja
 
             build/tools/objdiff-cli report changes -o "$changes" "$expected" "$report"
@@ -130,6 +141,22 @@ jobs:
 
             run_configure
             ninja
+          ;;
+          'clang')
+            config_args=""
+            export PRE_COMMIT_HOME="$PWD/build/pre-commit"
+
+            # TODO: Migrate to nix and install to environment
+            apk add --update --no-cache clang-extra-tools pre-commit
+
+            run_configure
+            ninja 'build/${{matrix.version}}/config.json'
+
+            pre-commit run \
+              --show-diff-on-failure \
+              --color=always \
+              clang-tidy \
+              --all-files
           ;;
           *) exit 1 ;;
         esac
@@ -146,79 +173,25 @@ jobs:
         name: ${{matrix.version}}_report
         path: build/${{matrix.version}}/report.json
 
-  check-issues:
-    name: Issues
-    runs-on: ubuntu-latest
-    env:
-      REGISTRY: ghcr.io
-
-    steps:
-    - name: Get image name
-      env:
-        IMAGE_SUFFIX: check-issues:latest
-      run: |
-        echo "IMAGE=$IMAGE_REPO/$IMAGE_SUFFIX" >> $GITHUB_ENV
-
-    - name: Checkout Melee repository
-      uses: actions/checkout@v6
-
-    - name: Log into container registry
-      uses: docker/login-action@v4
-      with:
-        registry: ${{ env.REGISTRY }}
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Pull build image
-      run: docker pull "$REGISTRY/$IMAGE"
-
-    - name: Check for code issues
-      run: |
-        docker run --rm \
-          --user "$(id -u):$(id -g)" \
-          --volume "$PWD:/input:ro" \
-            "$REGISTRY/$IMAGE"
-
   gen-pages:
     name: Generate pages
     runs-on: ubuntu-latest
-    needs: build-ninja
-    env:
-      REGISTRY: ghcr.io
-      OUTPUT: ${{github.workspace}}/output
     steps:
-      - name: Get image name
-        env:
-          IMAGE_SUFFIX: gen-pages:latest
-        run: |
-          echo "IMAGE=$IMAGE_REPO/$IMAGE_SUFFIX" >> $GITHUB_ENV
+      - uses: cachix/install-nix-action@v31
+      - uses: cachix/cachix-action@v17
+        with:
+          name: doldecomp-melee
 
       - name: Checkout Melee repository
         uses: actions/checkout@v6
 
-      - name: Log into container registry
-        uses: docker/login-action@v4
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Pull generator image
-        run: docker pull ${{ env.REGISTRY }}/${{ env.IMAGE }}
-
       - name: Generate pages
-        run: |
-          mkdir -p "${{ env.OUTPUT }}"
-          docker run --rm \
-            --user "$(id -u):$(id -g)" \
-            --volume "$PWD:/input:ro" \
-            --volume "${{ env.OUTPUT }}:/output" \
-            ${{ env.REGISTRY }}/${{ env.IMAGE }}
+        run: nix build .#melee-docs -L
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v5
         with:
-          path: ${{ env.OUTPUT }}
+          path: ${{ github.workspace }}/result
 
   deploy-pages:
     concurrency:
@@ -240,10 +213,22 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v5
 
+  native-build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        fetch-depth: 1
+    - uses: cachix/install-nix-action@v31
+    - uses: cachix/cachix-action@v17
+      with:
+        name: doldecomp-melee
+    - run: nix build .#melee-gcc-native -L
+
   build-nix:
     name: Nix
     runs-on: ubuntu-latest
-    if: github.repository == 'doldecomp/melee' || github.repository == 'r-burns/doldecomp-melee'
+    if: github.repository == 'doldecomp/melee'
     env:
       REGISTRY: ghcr.io
       IMAGE: doldecomp/melee-build:main

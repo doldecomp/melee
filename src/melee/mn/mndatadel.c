@@ -14,7 +14,7 @@
 #include "baselib/memory.h"
 #include "gm/gm_1601.h"
 #include "gm/gm_16F1.h"
-#include "gm/gm_1A3F.h"
+#include "gm/gm_1A36.h"
 #include "gm/gmmain_lib.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
@@ -47,7 +47,7 @@ static void sdata2_order(void)
     (void) 0.0500000007f;
 }
 
-inline f32 mnDataDel_8024E940_inline(HSD_JObj* arg0)
+static inline f32 mnDataDel_8024E940_inline(HSD_JObj* arg0)
 {
     return mn_8022F298(arg0);
 }
@@ -309,7 +309,7 @@ void mnDataDel_8024EEC0(void)
         HSD_JObj* yes;
         lb_80011E24(root, &yes, WARN_JOINT_CURSOR_YES, -1);
         lb_80011E24(root, &no, WARN_JOINT_CURSOR_NO, -1);
-        if ((s32) cursor != 0) {
+        if (cursor != 0) {
             HSD_JObjReqAnimAll(yes, 1.0f);
             HSD_JObjReqAnimAll(no, 0.0f);
         } else {
@@ -697,8 +697,8 @@ void fn_8024FBA4(HSD_GObj* gobj)
     }
 }
 
-inline HSD_JObj* fn_8024FC48_inline(int arg0);
-inline HSD_JObj* fn_8024FC48_inline(int arg0)
+static inline HSD_JObj* fn_8024FC48_inline(int arg0);
+static inline HSD_JObj* fn_8024FC48_inline(int arg0)
 {
     return (HSD_JObj*) arg0;
 }
@@ -803,7 +803,7 @@ void mnDataDel_8024FE4C(u8 arg0)
                        assets->shapeanim_joint);
     HSD_JObjReqAnimAll(root, 0.0f);
     HSD_JObjAnimAll(root);
-    user_data = HSD_MemAlloc(0x30);
+    user_data = HSD_MemAlloc(sizeof(*user_data));
     HSD_ASSERTREPORT(0x402, user_data, "Can't get user_data.\n");
     user_data->x0 = arg0;
     user_data->x1 = 0;

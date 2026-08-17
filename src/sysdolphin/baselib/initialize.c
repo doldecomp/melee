@@ -23,7 +23,6 @@
 #include <dolphin/vi.h>
 
 extern OSHeapHandle HSD_Synth_804D6018;
-extern GXRenderModeObj GXNtsc480IntDf;
 
 static void* FrameBuffer[HSD_VI_XFB_MAX];
 static HSD_MemReport memReport;

@@ -12,9 +12,7 @@
 #include "mn/types.h"
 
 /* extern functions referenced in Scenes */
-extern void gm_801BFA6C(GameScene*);
-extern void gm_801BFABC(GameScene*);
-extern void gm_801BFCFC(GameScene*);
+
 extern void gm_801A6254(GameScene*);
 extern void gm_801A6308(GameScene*);
 

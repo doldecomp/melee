@@ -1,7 +1,6 @@
 #include "itgamewatchjudge.h"
 
 #include "inlines.h"
-#include "math.h"
 #include "placeholder.h"
 
 #include "baselib/jobj.h"
@@ -16,6 +15,8 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "it/itzako.h"
+
+#include <math.h>
 
 ItemStateTable it_803F7968[] = {
     { 0, itGamewatchjudge_UnkMotion0_Anim, NULL, NULL },

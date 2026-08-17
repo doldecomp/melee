@@ -25,10 +25,8 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
+#include <math.h>
 #include <dolphin/mtx.h>
-#include <MSL/math.h>
 /// Create Teleport Start GFX
 void ftMt_SpecialHi_CreateGFX(HSD_GObj* gobj)
 {
@@ -298,8 +296,6 @@ static bool ftMewtwo_SpecialHi_CheckTimer(HSD_GObj* gobj)
 
     return true;
 }
-
-static bool ftMewtwo_SpecialHi_CheckTimer(HSD_GObj* gobj);
 
 /// Mewtwo's aerial Teleport Zoom Collision callback
 void ftMt_SpecialAirHiLost_Coll(HSD_GObj* gobj)

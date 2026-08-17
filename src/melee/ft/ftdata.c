@@ -14,6 +14,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCaptain/ftCa_Init.h"
+#include "ftCaptain/ftCa_SpecialHi.h"
 #include "ftCaptain/ftCa_SpecialLw.h"
 #include "ftCaptain/ftCa_SpecialN.h"
 #include "ftCaptain/ftCa_SpecialS.h"
@@ -45,6 +46,7 @@
 #include "ftKoopa/ftKp_SpecialHi.h"
 #include "ftKoopa/ftKp_SpecialLw.h"
 #include "ftKoopa/ftKp_SpecialN.h"
+#include "ftKoopa/ftKp_SpecialS.h"
 #include "ftLink/ftLk_Init.h"
 #include "ftLink/ftLk_SpecialHi.h"
 #include "ftLink/ftLk_SpecialLw.h"
@@ -132,8 +134,6 @@
 
 #include <baselib/debug.h>
 #include <baselib/objalloc.h>
-
-extern int ft_8045996C[FTKIND_MAX];
 
 /* 3C0EC0 */ struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX] = {
     { &lbl_804599F0, 5 },       // Mario
@@ -1597,7 +1597,7 @@ void ftData_80085A14(FighterKind kind)
                     (uintptr_t) ((u8*) a_head + temp_r27->xC[i].x4);
             }
         }
-        ftData_Table_Unk0[kind].data = (void*) a_head;
+        ftData_Table_Unk0[kind].data = a_head;
     }
 }
 
@@ -1663,7 +1663,7 @@ void ftData_80085CD8(Fighter* fp, Fighter* arg1, int msid)
             if (temp_r3_2 != 0) {
                 temp_r3_3 = ftData_80086060(fp);
                 if ((temp_r3_3 != NULL) &&
-                    ((u32) temp_r3->x14 == (u32) temp_r3_3->x5A4))
+                    (temp_r3->x14 == (u32) temp_r3_3->x5A4))
                 {
                     memcpy(fp->x59C, temp_r3_3->x59C, temp_r3->x8);
                     temp_r4 = fp->x59C;
@@ -1716,7 +1716,7 @@ FigaTree* ftData_80085E50(Fighter* arg0, int msid)
             if (temp_r3_2 != 0) {
                 temp_r3_3 = ftData_80086060(arg0);
                 if ((temp_r3_3 != NULL) &&
-                    ((u32) temp_r3->x14 == (u32) temp_r3_3->x5A4))
+                    (temp_r3->x14 == (u32) temp_r3_3->x5A4))
                 {
                     memcpy(arg0->x59C, temp_r3_3->x59C, temp_r3->x8);
                     temp_r4 = arg0->x59C;

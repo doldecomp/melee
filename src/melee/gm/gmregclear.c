@@ -10,7 +10,6 @@
 
 #include "mn/inlines.h"
 
-#include <math_ppc.h>
 #include <dolphin/gx.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/controller.h>
@@ -846,9 +845,9 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     }
 
     player_ckind = (u8) arg1->x0.ckind;
-    if ((player_ckind == CKIND_ZELDA) && ((u8) arg1->x0.xC.x12 != 0)) {
+    if ((player_ckind == CKIND_ZELDA) && (arg1->x0.xC.x12 != 0)) {
         player_ckind = CKIND_SEAK;
-    } else if (((arg1->x0.x8 & 0x80) != 0) && ((u8) arg1->x0.x9 == 1) &&
+    } else if (((arg1->x0.x8 & 0x80) != 0) && (arg1->x0.x9 == 1) &&
                ((s8) player_ckind == CKIND_POPONANA))
     {
         player_ckind = CHKIND_POPO;
@@ -882,7 +881,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
 
     {
         s32 temp_r3_4 = arg1->x0.x8 & 8;
-        if ((temp_r3_4 != 0) && ((u8) arg1->x0.xC.x11 == 0)) {
+        if ((temp_r3_4 != 0) && (arg1->x0.xC.x11 == 0)) {
             s32 base_enemy_count;
             s32 event_enemy_count;
             s32 special_stage;
@@ -922,13 +921,12 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
 
             {
                 u8 player_ckind = (u8) arg1->x0.ckind;
-                gm_8016A22C((s8) (u8) arg2[0], (s8) arg2[1], (s8) arg2[2],
-                            colors[0], colors[1], (s32) colors[2],
-                            special_stage, special_enemy_mode, sp8,
-                            player_ckind, arg1->x0.color, (s32) enemy_level,
-                            (s32) arg3, event_enemy_count, (s32) stage_flags,
-                            (s32) arg5, (s32) arg4, attack_ratio,
-                            defense_ratio);
+                gm_8016A22C((s8) (u8) arg2[0], arg2[1], arg2[2], colors[0],
+                            colors[1], (s32) colors[2], special_stage,
+                            special_enemy_mode, sp8, player_ckind,
+                            arg1->x0.color, (s32) enemy_level, (s32) arg3,
+                            event_enemy_count, (s32) stage_flags, (s32) arg5,
+                            (s32) arg4, attack_ratio, defense_ratio);
             }
             gm_8016A21C(&arg0->rules);
             arg1->x0.xC.x11 = 0;
@@ -1010,7 +1008,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
                 }
                 boss_count += 1;
             }
-            if ((u8) arg0->rules.is_teams == 1) {
+            if (arg0->rules.is_teams == 1) {
                 arg0->players[player_idx].team = 4;
             }
             player_idx += 1;
@@ -1018,14 +1016,14 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
                 break;
             }
         } else {
-            if (((s32) enemy_idx == 0) && ((s32) enemy_kind[1] == 0x1A)) {
+            if ((enemy_idx == 0) && ((s32) enemy_kind[1] == 0x1A)) {
                 arg0->players[player_idx].slot_type = 3;
                 player_idx += 1;
             }
         }
         enemy_idx += 1;
         color_iter += 1;
-        if ((s32) enemy_idx >= 3) {
+        if (enemy_idx >= 3) {
             break;
         }
     }
@@ -1540,7 +1538,7 @@ u8 gm_8017E5FC(u8 difficulty, u8 stage_slot, u8 arg2)
 
 u8 gm_8017E630(u8 difficulty, u8 stage_slot, u8 arg2)
 {
-    return lbl_803D7AC0[stage_slot + (u8) difficulty * 5].pad_6[arg2 * 3 + 2];
+    return lbl_803D7AC0[stage_slot + difficulty * 5].pad_6[arg2 * 3 + 2];
 }
 
 f32 gm_8017E664(u8 difficulty, u8 stage_slot)
@@ -1631,7 +1629,7 @@ void fn_8017E8A4(int arg0_int)
         total_time = adv->x0.xC.x20 + gm_8016AEDC();
         ((u8_bits*) &flags[0])->b6 = 1;
 
-        if ((u8) adv->x0.cpu_level == 4) {
+        if (adv->x0.cpu_level == 4) {
             ((u8_bits*) &flags[0])->b3 = 1;
         }
 
@@ -1641,24 +1639,22 @@ void fn_8017E8A4(int arg0_int)
             ((u8_bits*) &flags[2])->b7 = 1;
         }
 
-        if ((u32) adv->x0.xC.x1C == 0U &&
-            (u32) arg0->player_standings[0].x44 == 0U)
+        if ((u32) adv->x0.xC.x1C == 0U && arg0->player_standings[0].x44 == 0U)
         {
             ((u8_bits*) &flags[1])->b1 = 1;
         }
 
-        if ((u8) adv->x0.xC.xE != 0) {
+        if (adv->x0.xC.xE != 0) {
             ((u8_bits*) &flags[2])->b5 = 1;
         }
 
-        if ((u8) adv->x0.xC.xF != 0) {
+        if (adv->x0.xC.xF != 0) {
             ((u8_bits*) &flags[2])->b4 = 1;
         }
 
-        if ((u8) adv->x0.xC.xD != 0) {
+        if (adv->x0.xC.xD != 0) {
             ((u8_bits*) &flags[1])->b0 = 1;
-        } else if ((s8) arg0->player_standings[0].stocks ==
-                   (s32) main_data->stocks)
+        } else if (arg0->player_standings[0].stocks == (s32) main_data->stocks)
         {
             ((u8_bits*) &arg0->_x448[1])->b2 = 1;
         }
@@ -1746,14 +1742,12 @@ u8 gm_8017ECA0(u8 difficulty, u8 stage_slot, u8 arg2)
 
 u8 gm_8017ECD4(u8 difficulty, u8 stage_slot, u8 arg2)
 {
-    return lbl_803D85F0[stage_slot + ((u8) difficulty * 5)]
-        .pad_14[arg2 * 3 + 1];
+    return lbl_803D85F0[stage_slot + (difficulty * 5)].pad_14[arg2 * 3 + 1];
 }
 
 u8 gm_8017ED08(u8 difficulty, u8 stage_slot, u8 arg2)
 {
-    return lbl_803D85F0[stage_slot + ((u8) difficulty * 5)]
-        .pad_14[arg2 * 3 + 2];
+    return lbl_803D85F0[stage_slot + (difficulty * 5)].pad_14[arg2 * 3 + 2];
 }
 
 f32 gm_8017ED3C(u8 difficulty, u8 stage_slot)
@@ -1802,7 +1796,7 @@ void fn_8017EE40(int arg0_int)
         total_time = allstar->x0.xC.x20 + gm_8016AEDC();
         ((u8_bits*) &arg0->_x448[0])->b7 = 1;
 
-        if ((u8) allstar->x0.cpu_level == 4) {
+        if (allstar->x0.cpu_level == 4) {
             ((u8_bits*) &arg0->_x448[0])->b4 = 1;
         }
 
@@ -1813,23 +1807,22 @@ void fn_8017EE40(int arg0_int)
         }
 
         if ((u32) allstar->x0.xC.x1C == 0U &&
-            (u32) arg0->player_standings[0].x44 == 0U)
+            arg0->player_standings[0].x44 == 0U)
         {
             ((u8_bits*) &arg0->_x448[1])->b1 = 1;
         }
 
-        if ((u8) allstar->x0.xC.xE != 0) {
+        if (allstar->x0.xC.xE != 0) {
             ((u8_bits*) &arg0->_x448[2])->b5 = 1;
         }
 
-        if ((u8) allstar->x0.xC.xF != 0) {
+        if (allstar->x0.xC.xF != 0) {
             ((u8_bits*) &arg0->_x448[2])->b4 = 1;
         }
 
-        if ((u8) allstar->x0.xC.xD != 0) {
+        if (allstar->x0.xC.xD != 0) {
             ((u8_bits*) &arg0->_x448[1])->b0 = 1;
-        } else if ((s8) arg0->player_standings[0].stocks ==
-                   (s32) main_data->stocks)
+        } else if (arg0->player_standings[0].stocks == (s32) main_data->stocks)
         {
             ((u8_bits*) &arg0->_x448[1])->b2 = 1;
         }
@@ -2651,7 +2644,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
 
     special_score = 0;
     coins = arg4->x58[0].xE;
-    memzero(state, 0x120);
+    memzero(state, sizeof(*state));
     state->xD4 = -1;
     state->xD8 = 0;
     state->xE0 = -1;
@@ -2678,7 +2671,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     case 3:
         temp = gm_16AE_GetUnkData_0();
         state->x118 = 1;
-        if ((u8) temp->match_result == OUTCOME_UNK_1P_BONUS_STAGE_END) {
+        if (temp->match_result == OUTCOME_UNK_1P_BONUS_STAGE_END) {
             grPushOn_80219204(Ground_801C1DD4(), (int*) &sp5C, (int*) &sp58);
             special_score = sp5C;
             coins = (u16) sp58;
@@ -3724,29 +3717,29 @@ s32 gm_80182578(void)
         } else {
             mode = gmMainLib_8015D710(gm_CKindToSelKind((u8) idx));
         }
-        if ((u8) lbl_80472ED8.record[0].x0 != 0) {
+        if (lbl_80472ED8.record[0].x0 != 0) {
             u32 score_store = (u32) lbl_80472ED8.record[0].x4;
             if (score_store < score_val) {
                 int i = lbl_80472ED8.record[0].xC;
                 int m = lbl_80472ED8.record[0].x8;
                 switch (m) {
                 case 33:
-                    blocks[0].icons[i] = (u8) lbl_80472ED8.record[0].x0;
+                    blocks[0].icons[i] = lbl_80472ED8.record[0].x0;
                     break;
                 case 34:
-                    blocks[1].icons[i] = (u8) lbl_80472ED8.record[0].x0;
+                    blocks[1].icons[i] = lbl_80472ED8.record[0].x0;
                     break;
                 case 35:
-                    blocks[2].icons[i] = (u8) lbl_80472ED8.record[0].x0;
+                    blocks[2].icons[i] = lbl_80472ED8.record[0].x0;
                     break;
                 case 36:
-                    blocks[3].icons[i] = (u8) lbl_80472ED8.record[0].x0;
+                    blocks[3].icons[i] = lbl_80472ED8.record[0].x0;
                     break;
                 case 37:
-                    blocks[4].icons[i] = (u8) lbl_80472ED8.record[0].x0;
+                    blocks[4].icons[i] = lbl_80472ED8.record[0].x0;
                     break;
                 case 38:
-                    blocks[5].icons[i] = (u8) lbl_80472ED8.record[0].x0;
+                    blocks[5].icons[i] = lbl_80472ED8.record[0].x0;
                     break;
                 }
                 switch (m) {
@@ -3800,49 +3793,49 @@ s32 gm_80182578(void)
             int m = lbl_80472ED8.record[0].x8;
             switch (m) {
             case 33:
-                blocks[0].times[i] = (u16) lbl_80472ED8.record[0].x2;
+                blocks[0].times[i] = lbl_80472ED8.record[0].x2;
                 break;
             case 34:
-                blocks[1].times[i] = (u16) lbl_80472ED8.record[0].x2;
+                blocks[1].times[i] = lbl_80472ED8.record[0].x2;
                 break;
             case 35:
-                blocks[2].times[i] = (u16) lbl_80472ED8.record[0].x2;
+                blocks[2].times[i] = lbl_80472ED8.record[0].x2;
                 break;
             case 36:
-                blocks[3].times[i] = (u16) lbl_80472ED8.record[0].x2;
+                blocks[3].times[i] = lbl_80472ED8.record[0].x2;
                 break;
             case 37:
-                blocks[4].times[i] = (u16) lbl_80472ED8.record[0].x2;
+                blocks[4].times[i] = lbl_80472ED8.record[0].x2;
                 break;
             case 38:
-                blocks[5].times[i] = (u16) lbl_80472ED8.record[0].x2;
+                blocks[5].times[i] = lbl_80472ED8.record[0].x2;
                 break;
             }
         }
         break;
     case 0x23:
     case 0x24:
-        if ((u8) lbl_80472ED8.record[0].x0 != 0) {
+        if (lbl_80472ED8.record[0].x0 != 0) {
             u16 time_store = gm_80182578_GetTime();
             if ((s32) time_store > (s32) time_val) {
                 switch (mode) {
                 case 33:
-                    blocks[0].icons[idx] = (u8) lbl_80472ED8.record[0].x0;
+                    blocks[0].icons[idx] = lbl_80472ED8.record[0].x0;
                     break;
                 case 34:
-                    blocks[1].icons[idx] = (u8) lbl_80472ED8.record[0].x0;
+                    blocks[1].icons[idx] = lbl_80472ED8.record[0].x0;
                     break;
                 case 35:
-                    blocks[2].icons[idx] = (u8) lbl_80472ED8.record[0].x0;
+                    blocks[2].icons[idx] = lbl_80472ED8.record[0].x0;
                     break;
                 case 36:
-                    blocks[3].icons[idx] = (u8) lbl_80472ED8.record[0].x0;
+                    blocks[3].icons[idx] = lbl_80472ED8.record[0].x0;
                     break;
                 case 37:
-                    blocks[4].icons[idx] = (u8) lbl_80472ED8.record[0].x0;
+                    blocks[4].icons[idx] = lbl_80472ED8.record[0].x0;
                     break;
                 case 38:
-                    blocks[5].icons[idx] = (u8) lbl_80472ED8.record[0].x0;
+                    blocks[5].icons[idx] = lbl_80472ED8.record[0].x0;
                     break;
                 }
                 switch (mode) {
@@ -3873,22 +3866,22 @@ s32 gm_80182578(void)
         if ((s32) lbl_80472ED8.record[0].x2 > (s32) time_val) {
             switch (mode) {
             case 33:
-                blocks[0].times[idx] = (u16) lbl_80472ED8.record[0].x2;
+                blocks[0].times[idx] = lbl_80472ED8.record[0].x2;
                 break;
             case 34:
-                blocks[1].times[idx] = (u16) lbl_80472ED8.record[0].x2;
+                blocks[1].times[idx] = lbl_80472ED8.record[0].x2;
                 break;
             case 35:
-                blocks[2].times[idx] = (u16) lbl_80472ED8.record[0].x2;
+                blocks[2].times[idx] = lbl_80472ED8.record[0].x2;
                 break;
             case 36:
-                blocks[3].times[idx] = (u16) lbl_80472ED8.record[0].x2;
+                blocks[3].times[idx] = lbl_80472ED8.record[0].x2;
                 break;
             case 37:
-                blocks[4].times[idx] = (u16) lbl_80472ED8.record[0].x2;
+                blocks[4].times[idx] = lbl_80472ED8.record[0].x2;
                 break;
             case 38:
-                blocks[5].times[idx] = (u16) lbl_80472ED8.record[0].x2;
+                blocks[5].times[idx] = lbl_80472ED8.record[0].x2;
                 break;
             }
         }

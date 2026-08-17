@@ -6,7 +6,6 @@
 #include "ground.h"
 #include "grzakogenerator.h"
 #include "inlines.h"
-#include "math.h"
 #include "placeholder.h"
 #include "stage.h"
 #include "types.h"
@@ -21,8 +20,7 @@
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 
-#include <math_ppc.h>
-#include <trigf.h>
+#include <math.h>
 #include <baselib/archive.h>
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>
@@ -283,7 +281,7 @@ bool grRCruise_801FF6CC(Ground_GObj* arg)
 void grRCruise_801FF6D4(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    if (gp->u.unk.xD4 == 0) {
+    if (gp->u.rcruise.x10 == 0) {
         grRCruise_80201588(gobj);
         grRCruise_8020071C(gobj);
         grRCruise_80200C04(gobj);

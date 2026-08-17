@@ -36,7 +36,6 @@ extern HSD_Archive* lbl_804D65B8;
 #include "dolphin/gx/GXStruct.h"
 #include "dolphin/types.h"
 #include "gm/gm_1601.h"
-#include "gm/types.h"
 #include "if/ifcoget.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbarchive.h"
@@ -956,11 +955,11 @@ void fn_80175880(s32 slot)
             (me->is_teams == 1 &&
              me->team_standings[me->player_standings[slot].team]
                      .is_big_loser == 0 &&
-             ((s8) me->player_standings[slot].stocks > 0 ||
+             (me->player_standings[slot].stocks > 0 ||
               (me->player_standings[slot].x28 == me->frame_count &&
-               (s8) me->player_standings[lbl_8046DBE8.x6].stocks == 0))) ||
+               me->player_standings[lbl_8046DBE8.x6].stocks == 0))) ||
             (gm_801743A4(me->result) &&
-             ((s8) me->player_standings[slot].stocks > 0 ||
+             (me->player_standings[slot].stocks > 0 ||
               me->player_standings[slot].score ==
                   me->player_standings[lbl_8046DBE8.x6].score)))
         {
@@ -1776,7 +1775,7 @@ void gm_80177368_OnEnter(void* arg0_)
 
     PAD_STACK(0x28);
 
-    memzero(&lbl_8046DBE8, 0x5A8);
+    memzero(&lbl_8046DBE8, sizeof(lbl_8046DBE8));
     lbl_8046DBE8.x1 = 0;
     lbl_8046DBE8.x0_0 = false;
     lbl_8046DBE8.x94 = &arg0->match_end;

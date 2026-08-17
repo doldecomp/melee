@@ -171,8 +171,7 @@ extern u8 mn_804DBE0C;
 extern u16 mn_804DBDF8;
 extern u32 mn_804DBE10;
 extern u16 mn_804DBE14;
-extern u8 mn_803EC7DC[][2];
-extern u8 mn_803EC600[];
+
 extern s32 mn_804D6BD4;
 
 void mnItemSw_802358C0(void);
@@ -660,14 +659,13 @@ void mn_80230198(HSD_GObj* gobj, HSD_JObj* jobj, u8 mode)
 }
 
 extern MenuKindData mn_803EB6B0[];
-extern struct mn_803EC818_t mn_803EC818[];
+
 extern f32 mn_804DBE18;
 extern f32 mn_804DBE1C;
 extern f32 mn_804DBE20;
 extern f32 mn_804DBE24;
 extern f32 mn_804DBE28;
 extern f32 mn_804DBE2C;
-extern s32 mn_804D6BD4;
 
 void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
 {
@@ -846,7 +844,7 @@ void mn_802307F8(struct mn_802307F8_t* arg0, s32 arg1, s32 arg2)
         HSD_SisLib_803A5CC4(arg0->text);
         arg0->text = NULL;
     }
-    if ((arg1 == 1) && ((u8) arg0->x2 == 1)) {
+    if ((arg1 == 1) && (arg0->x2 == 1)) {
         text_id = mn_StockCountTextId;
     } else if ((arg1 == 1) || (arg1 == 3) || ((u32) (arg1 - 5) <= 1U)) {
         text_id = mn_803EC818[arg1].x0;
@@ -884,15 +882,13 @@ void mn_802308F0(HSD_GObj* gobj, int arg1, int arg2)
     case 1:
     case 3:
         if (data->text == NULL) {
-            mn_802307F8((struct mn_802307F8_t*) data, kind,
-                        mn_804A04F0.confirmed_selection);
+            mn_802307F8(data, kind, mn_804A04F0.confirmed_selection);
         }
         break;
     case 0:
         if (arg1 != 0 || (arg2 != 0 && (kind == 0 || kind == 2 || kind == 4)))
         {
-            mn_802307F8((struct mn_802307F8_t*) data, kind,
-                        mn_804A04F0.confirmed_selection);
+            mn_802307F8(data, kind, mn_804A04F0.confirmed_selection);
         }
         break;
     case 5:
@@ -1025,8 +1021,6 @@ void fn_802309F0(HSD_GObj* arg0)
         rules->stock_count = data->x9;
     }
 }
-
-extern s32 mn_804D6BD4;
 
 s32 mn_80230D18(struct mn_802307F8_t* arg0, HSD_JObj* arg1, s8 arg2)
 {
@@ -1188,7 +1182,7 @@ HSD_GObj* mn_80230E38(int arg0)
                 ((struct mn_8022FB88_arg1_t*) mn_804D6BD0->user_data)->x2 == 1)
             {
                 HSD_JObjReqAnim(jobj_parts[7],
-                                ((f32*) &mn_804D4B88)[selected == i]);
+                                ((&mn_804D4B88))[selected == i]);
             } else {
                 HSD_JObjReqAnim(jobj_parts[7], ((f32*) (mn_803EC600 + 0x10) +
                                                 i * 2)[selected == i]);
@@ -1385,8 +1379,6 @@ void mn_802317E4(HSD_Archive* archive, int arg1)
 {
     mn_80231804(archive, arg1);
 }
-
-extern s32 mn_804D6BD4;
 
 void mn_80231804(HSD_Archive* archive, int arg1)
 {

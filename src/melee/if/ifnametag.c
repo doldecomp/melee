@@ -13,6 +13,8 @@
 #include "sc/types.h"
 
 #include <printf.h>
+#include <stdio.h>
+#include <string.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 #include <baselib/fog.h>
@@ -28,8 +30,6 @@
 #include <baselib/particle.h>
 #include <baselib/sislib.h>
 #include <baselib/wobj.h>
-#include <MSL/stdio.h>
-#include <MSL/string.h>
 
 /// .data
 /// IfAll.dat::ScInfPnm_scene_models
@@ -290,7 +290,7 @@ void NameTag_Create(int slot)
         HSD_JObjAnimAll(jobj);
     }
     {
-        unsigned char* user_data = HSD_MemAlloc(1);
+        unsigned char* user_data = HSD_MemAlloc(sizeof(*user_data));
         GObj_InitUserData(gobj, 0, mn_8022EB04, user_data);
         *user_data = slot;
     }
@@ -352,7 +352,7 @@ void un_802FD468(void)
     HSD_GObjPLink_80390228(un_804D6D68);
 }
 
-inline HSD_GObj* un_802FD4C8_inline(int arg0)
+static inline HSD_GObj* un_802FD4C8_inline(int arg0)
 {
     return GObj_Create(0xE, arg0, 0);
 }

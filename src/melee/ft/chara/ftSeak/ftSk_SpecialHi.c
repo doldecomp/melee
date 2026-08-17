@@ -28,7 +28,6 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <trigf.h>
 #include <baselib/gobj.h>
 
 static MotionFlags const ftSk_MF_SpecialHi_Coll =
@@ -266,7 +265,7 @@ void ftSk_SpecialHiStart_1_Coll(HSD_GObj* gobj)
 
         if (temp_r3 & Collide_LeftWallMask || temp_r3 & Collide_RightWallMask)
         {
-            ftCommon_8007D60C((Fighter*) fp);
+            ftCommon_8007D60C(fp);
             ftSk_SpecialHi_80113F68(gobj);
             return;
         }

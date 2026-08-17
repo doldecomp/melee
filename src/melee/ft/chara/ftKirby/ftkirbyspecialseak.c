@@ -28,10 +28,10 @@
 #include "it/items/itseakneedleheld.h"
 #include "it/items/itseakneedlethrown.h"
 
+#include <math.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
 
 /* 106DB0 */ static void fn_80106DB0(Fighter_GObj*);
 /* 3CB770 */ static float ftKb_Init_803CB770[] = {

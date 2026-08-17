@@ -311,7 +311,7 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
                 HSD_ASSERTREPORT(366, 0,
                                  "can't find free color ratio register!\n");
             }
-            if ((u8) fp->x61D != 0xFF) {
+            if (fp->x61D != 0xFF) {
                 sp_cnst2 = info->texp_tmpl;
                 sp_cnst2.reg = (u8) reg2;
                 sp_cnst2.comp = 5;
@@ -354,7 +354,7 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
                     sp_tevdesc.u.tevconf.kcsel = lb_8000CCA4(reg2);
                 }
             }
-            if ((u8) fp->x61D != 0xFF) {
+            if (fp->x61D != 0xFF) {
                 sp_tevdesc.u.tevconf.alpha_d = lb_8000CD90(reg2);
                 if (reg2 < 4) {
                     var_r0 = 1;

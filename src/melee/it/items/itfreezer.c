@@ -116,7 +116,7 @@ void itFreezer_UnkMotion2_Phys(Item_GObj* gobj)
         item->xDAC_itcmd_var0 = 0;
         item->xDB0_itcmd_var1 = 1;
     }
-    if ((u32) item->xDB0_itcmd_var1 != false) {
+    if (item->xDB0_itcmd_var1 != false) {
         itFreezerAttributes* attrs =
             item->xC4_article_data->x4_specialAttributes;
         item->x40_vel.y += attrs->x8;

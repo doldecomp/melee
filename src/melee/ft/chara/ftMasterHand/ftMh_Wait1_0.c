@@ -170,7 +170,7 @@ struct MasterHandDataStuff ftMh_Init_803D40D0 = {
       0, 1, 2, 4, 0, 0, 1, 2, 3, 0, 0, 0, 0, 0, 0 }
 };
 
-inline void doAnim0(HSD_GObj* gobj)
+static inline void doAnim0(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
@@ -188,7 +188,7 @@ inline void doAnim0(HSD_GObj* gobj)
     fp->u.mh.x2258 = ftMh_MS_Wait2_0;
 }
 
-inline void doAnim1(HSD_GObj* gobj)
+static inline void doAnim1(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;

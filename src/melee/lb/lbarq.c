@@ -1,20 +1,46 @@
 #include "lbarq.h"
 
-#include <trigf.h>
+#include <placeholder.h>
+
+#include <dolphin/ar.h>
 #include <dolphin/os.h>
 #include <baselib/debug.h>
+
+typedef enum lbArqState {
+    LB_ARQ_STATE_FREE = 0,
+    LB_ARQ_STATE_PENDING = 1,
+    LB_ARQ_STATE_DONE = 2,
+} lbArqState;
+
+typedef struct lbArqNode {
+    /* 0x00 */ struct lbArqNode* next;
+    /* 0x04 */ lbArqState state;
+    /* 0x08 */ ARQRequest arq;
+    /* 0x28 */ lbArqCallback callback;
+    /* 0x2C */ void* callback_arg;
+} lbArqNode;
+
+typedef struct lbArqGlobal {
+    /* 0x000 */ lbArqNode nodes[10];
+    /* 0x1E0 */ lbArqNode* list[3];
+} lbArqGlobal;
+
+typedef struct lbArqHandle {
+    /* 0x00 */ void* unk0;
+    /* 0x04 */ lbArqNode* node;
+} lbArqHandle;
 
 /* 4316C0 */ lbArqGlobal lbArq_804316C0;
 
 #pragma push
 #pragma dont_inline on
-lbArqState lbArq_80014ABC(lbArqNode* arg0)
+static lbArqState lbArq_80014ABC(lbArqNode* arg0)
 {
     return arg0->state;
 }
 #pragma pop
 
-void lbArq_80014AC4(lbArqHandle* handle)
+static void lbArq_80014AC4(lbArqHandle* handle)
 {
     lbArqGlobal* global = &lbArq_804316C0;
     lbArqNode* node = handle->node;
@@ -72,7 +98,7 @@ void lbArq_80014AC4(lbArqHandle* handle)
     }
 }
 
-void lbArq_80014BD0(u32 source, void* dest, size_t length,
+void lbArq_80014BD0(unsigned int source, void* dest, size_t length,
                     lbArqCallback callback, void* callback_arg)
 {
     u32 source_tmp;

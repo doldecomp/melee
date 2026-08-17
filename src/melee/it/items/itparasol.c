@@ -109,7 +109,7 @@ bool itParasol_UnkMotion2_Anim(Item_GObj* item_gobj)
     return false;
 }
 
-inline void decelerateItemX(Item* item, f32 decel_x)
+static inline void decelerateItemX(Item* item, f32 decel_x)
 {
     if (fabsf(item->x40_vel.x) > decel_x) {
         if (item->x40_vel.x > decel_x) {

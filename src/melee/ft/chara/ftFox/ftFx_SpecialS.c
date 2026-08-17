@@ -417,7 +417,7 @@ void ftFx_SpecialAirS_AirToGround(HSD_GObj* gobj)
     fp->cmd_vars[2] = 0;
 }
 
-inline void ftFox_SpecialS_SetVars(HSD_GObj* gobj)
+static inline void ftFox_SpecialS_SetVars(HSD_GObj* gobj)
 {
     float var;
     Fighter* fp = GET_FIGHTER(gobj);
@@ -568,7 +568,7 @@ void ftFx_SpecialAirSEnd_Coll(HSD_GObj* gobj)
     }
 };
 
-inline void ftFox_SpecialSEnd_SetVars(HSD_GObj* gobj)
+static inline void ftFox_SpecialSEnd_SetVars(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftFox_DatAttrs* da = getFtSpecialAttrs(fp);
