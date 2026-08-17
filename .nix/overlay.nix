@@ -3,7 +3,7 @@ final: prev: {
   decomp-toolkit = final.callPackage ./decomp-toolkit.nix { };
   mwcc = final.callPackage ./mwcc.nix { };
   objdiff = final.callPackage ./objdiff.nix { };
-  wibo = final.pkgsi686Linux.callPackage ./wibo.nix { };
+  wibo = final.pkgsi686Linux.pkgsStatic.callPackage ./wibo.nix { };
   melee = final.callPackage ./melee.nix { };
 
   pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
