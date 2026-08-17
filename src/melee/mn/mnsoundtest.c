@@ -496,7 +496,7 @@ static inline void mnSoundTest_ToggleView(soundtest_user_data* ud)
 }
 
 static inline void mnSoundTest_PlaySampleAnim(HSD_JObj* jobj, HSD_JObj** pj,
-                                              u8* p)
+                                              const u8* p)
 {
     s32 sound_kind;
     lb_80011E24(jobj, pj, 4, -1);

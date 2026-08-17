@@ -1357,7 +1357,7 @@ block_done:
     }
 }
 
-void HSD_SisLib_803A7684(HSD_Text* text, u8* cursor, u8 flags)
+void HSD_SisLib_803A7684(HSD_Text* text, const u8* cursor, u8 flags)
 {
     u16 old_x6E;
     s32 new_x6E;

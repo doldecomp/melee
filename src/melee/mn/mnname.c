@@ -124,7 +124,7 @@ bool IsNameListFull(void)
     return true;
 }
 
-static inline bool checkStringRest(char* ptr)
+static inline bool checkStringRest(const char* ptr)
 {
     char* term = &mnName_StringTerminator;
     char* cmp = &mnName_804D4BF0;

@@ -1788,7 +1788,7 @@ int grCorneria_801E08CC(void)
     return -1;
 }
 
-int grCorneria_801E0A74(f32* arg0)
+int grCorneria_801E0A74(const f32* arg0)
 {
     HSD_GObj* gobj;
 

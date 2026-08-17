@@ -4530,7 +4530,7 @@ bool mpLib_80054ED8(int line_id)
     return true;
 }
 
-static inline int mpLineGetNextFrom(MapLine* line, u32* flags_base)
+static inline int mpLineGetNextFrom(MapLine* line, const u32* flags_base)
 {
     int result = line->next_id1;
 
@@ -4550,7 +4550,7 @@ static inline int mpLineGetNextFrom(MapLine* line, u32* flags_base)
     return line->next_id0;
 }
 
-static inline int mpLineGetPrevFrom(MapLine* line, u32* flags_base)
+static inline int mpLineGetPrevFrom(MapLine* line, const u32* flags_base)
 {
     int result = line->prev_id1;
 

@@ -8401,7 +8401,7 @@ static inline int ftCo_800B33B0_IsIgnoredFloor(int line1)
 
 static inline void ftCo_CpuUpdateRecoveryScale(Fighter* fp,
                                                struct Fighter_x1A88_t* data,
-                                               int* timer)
+                                               const int* timer)
 {
     if (*timer % 30 == 0) {
         f32 rand = HSD_Randf();

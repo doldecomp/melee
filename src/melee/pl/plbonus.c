@@ -50,7 +50,7 @@ int pl_800386E8(pl_800386E8_arg0_t* arg0)
 
 #pragma push
 #pragma dont_inline on
-int fn_80038700(int* arg0, int arg1, int arg2)
+int fn_80038700(const int* arg0, int arg1, int arg2)
 {
     int sum = 0;
     int i;

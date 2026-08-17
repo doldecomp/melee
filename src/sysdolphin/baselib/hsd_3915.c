@@ -311,7 +311,7 @@ s32 hsd_80391AC8(char* str, GXColor* color, f32 x, f32 y)
     return (s32) x;
 }
 
-void hsd_80391E18(u8* list, f32 x1, f32 y1, f32 x2, f32 y2)
+void hsd_80391E18(const u8* list, f32 x1, f32 y1, f32 x2, f32 y2)
 {
     f32 dx;
     f32 dy;
@@ -481,7 +481,8 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
     }
 }
 
-void hsd_80392194(u8* dst, s32 flags, void* unused1, void* unused2, u8* src)
+void hsd_80392194(u8* dst, s32 flags, void* unused1, void* unused2,
+                  const u8* src)
 {
     u8 b;
     dst[0] = src[0];

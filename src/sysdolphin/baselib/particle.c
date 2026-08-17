@@ -107,8 +107,8 @@ void hsd_803983A4(HSD_Generator* gen)
 }
 
 // @TODO: Currently 96.40% match - lis hoisting and r29/r30 register swap
-void psInitDataBankLoad(int bank, int* cmdBank, int* texBank, u32* ref,
-                        int* formBank)
+void psInitDataBankLoad(int bank, const int* cmdBank, const int* texBank,
+                        const u32* ref, const int* formBank)
 {
     s32* base = (s32*) hsd_804D08E8;
     u16 version;

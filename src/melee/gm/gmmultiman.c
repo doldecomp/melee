@@ -781,8 +781,8 @@ static inline VsModeData* getMultimanData(void)
     return &gmMainLib_804D3EE0->unk_1490;
 }
 
-static inline void gmMultiman_InitRecord(VsModeData* multiman, u16* record,
-                                         int mode)
+static inline void gmMultiman_InitRecord(VsModeData* multiman,
+                                         const u16* record, int mode)
 {
     UnkMultimanData* data =
         gm_80182DF0(multiman->data.players[0].c_kind, mode);
@@ -799,7 +799,7 @@ static inline void gmMultiman_InitRecord(VsModeData* multiman, u16* record,
 }
 
 static inline void gmMultiman_InitScoreRecord(VsModeData* multiman,
-                                              s32* record, int mode)
+                                              const s32* record, int mode)
 {
     UnkMultimanData* data =
         gm_80182DF0(multiman->data.players[0].c_kind, mode);
