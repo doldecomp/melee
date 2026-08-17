@@ -51,7 +51,6 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-
 /// @todo .sdata2 order hack
 static void order_sdata2(void)
 {
