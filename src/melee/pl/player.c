@@ -23,7 +23,6 @@
 #include "pl/types.h"
 
 #include <dolphin/mtx.h>
-#include <dolphin/os.h>
 #include <baselib/debug.h>
 #include <baselib/gobjplink.h>
 #include <baselib/objalloc.h>
@@ -1682,11 +1681,7 @@ u8 Player_GetFlagsAEBit1(s32 slot)
     return bit1;
 }
 
-#ifdef BUGFIX
-void Player_SetFlagsAEBit1(int slot, u8 bit1)
-#else
 u8 Player_SetFlagsAEBit1(int slot, u8 bit1)
-#endif
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);

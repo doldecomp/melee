@@ -1261,10 +1261,10 @@ int HSD_TExpSimplify(HSD_TExp* texp_)
 int HSD_TExpSimplify2(HSD_TExp* texp_)
 {
 /// @todo Redundant cast and assignment matches
-#ifdef BUGFIX
-    HSD_TExp* texp = texp_;
-#else
+#ifdef MUST_MATCH
     HSD_TExp* texp = (HSD_TExp*) texp_;
+#else
+    HSD_TExp* texp = texp_;
 #endif
     HSD_TExp* src_exp;
     u8 src_sel;

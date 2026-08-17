@@ -124,11 +124,6 @@ static UnkArchiveStruct* grDatFiles_801C62B4(void)
         }
     }
     HSD_ASSERT(229, 0);
-
-#ifdef BUGFIX
-    // Asserts 0 but the compiler doesn't know that.
-    return NULL;
-#endif
 }
 
 UnkArchiveStruct* grDatFiles_GetArchive(void)

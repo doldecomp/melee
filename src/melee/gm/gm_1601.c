@@ -3161,7 +3161,7 @@ void gm_80166378(lbl_8046B6A0_24C_t* arg0_raw)
     fn_801661E0(arg0);
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 float fn_80166A8C(register Vec3* src, register Vec3* dst)
 {
     register float x = src->x;

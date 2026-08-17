@@ -3510,10 +3510,10 @@ void _Toy_80309404(HSD_GObj* gobj)
 
             _Toy_80307828(0);
 /// @todo Redundant cast improves match
-#ifdef BUGFIX
-            camera = Toy_sbss_804D6ED4;
-#else
+#ifdef MUST_MATCH
             camera = (ToyCameraControl*) Toy_sbss_804D6ED4;
+#else
+            camera = Toy_sbss_804D6ED4;
 #endif
             camera->x10 = 0;
             Toy_80306D70(camera->x10);

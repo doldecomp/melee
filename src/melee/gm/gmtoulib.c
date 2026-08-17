@@ -903,10 +903,10 @@ void fn_8018C8D4(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                  s32 arg5, s32 arg6, f32 farg0)
 {
     /// @todo Redundant cast and assignment improves match
-#ifdef BUGFIX
-    BracketEntry* data = arg0;
-#else
+#ifdef MUST_MATCH
     BracketEntry* data = (BracketEntry*) arg0;
+#else
+    BracketEntry* data = arg0;
 #endif
     f32 thickness;
     f32 neg_thickness;
@@ -1202,10 +1202,10 @@ void fn_8018D50C(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
 {
     TmData* tm;
     /// @todo Redundant cast and assignment improves match
-#ifdef BUGFIX
-    BracketEntry* data = arg0;
-#else
+#ifdef MUST_MATCH
     BracketEntry* data = (BracketEntry*) arg0;
+#else
+    BracketEntry* data = arg0;
 #endif
     f32 thickness;
     f32 neg_thickness;

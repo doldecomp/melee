@@ -1664,10 +1664,10 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
         }
     }
 /// @todo Redundant cast improves match
-#ifdef BUGFIX
-    if (hsd_804D79AC != 0) {
-#else
+#ifdef MUST_MATCH
     if ((s32) hsd_804D79AC != 0) {
+#else
+    if (hsd_804D79AC != 0) {
 #endif
         scratch_r6_5 = 8 - hsd_804D79AC;
         hsd_804D79B0 <<= scratch_r6_5;
