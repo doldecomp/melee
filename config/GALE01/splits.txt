@@ -23,6 +23,9 @@ melee/lb/lbcollision.c:
 	.sdata      start:0x804D36A0 end:0x804D3710
 	.sdata2     start:0x804D79F0 end:0x804D7A58
 
+melee/lb/lblanguage.c:
+	.text       start:0x8000AD8C end:0x8000AEC8
+
 melee/lb/lbtime.c:
 	.text       start:0x8000AEC8 end:0x8000B074
 
