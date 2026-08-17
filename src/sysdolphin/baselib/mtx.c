@@ -436,9 +436,9 @@ void HSD_MtxSRTQuat(Mtx arg0, Vec3* arg1, Quaternion* arg2, Vec3* arg3,
 /// might be a fakematch?
 void HSD_MtxScaledAdd(Mtx arg0, Mtx arg1, Mtx arg2, f32 arg3)
 {
-    f32* arr0 = (f32*) &arg0[0][0];
-    f32* arr1 = (f32*) &arg1[0][0];
-    f32* arr2 = (f32*) &arg2[0][0];
+    f32* arr0 = (&arg0[0][0]);
+    f32* arr1 = (&arg1[0][0]);
+    f32* arr2 = (&arg2[0][0]);
 
     *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);
     *(arr2)++ = *(arr1)++ + (arg3 * *(arr0)++);

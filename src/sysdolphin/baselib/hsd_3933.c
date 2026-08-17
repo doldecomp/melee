@@ -277,7 +277,7 @@ void hsd_80393844(void)
                 u8 cmd;
                 memset((u8*) &base[0x105].x4, 0, 0x20);
                 ((MCCPacket*) &base[0x105].x4)->x4_b7 = 1;
-                *(s32*) &base[0x105].x4 = *(s32*) &base[0x10A].x8;
+                *(s32*) &base[0x105].x4 = *(&base[0x10A].x8);
                 cmd = ((u8*) &base[0x10A].x8)[5];
                 if (((u8*) &base[0x105].x4)[5] = cmd, cmd < 0x20U) {
                     if (lbl_8040A93C[cmd] != NULL) {
@@ -352,7 +352,7 @@ int hsd_80393A5C(char* filename, int data, int size)
 
     fd_arg = fd;
     data_p = (u32*) data;
-    written_f = (f32) (u32) FIOFwrite(fd_arg, data_p, size);
+    written_f = (f32) FIOFwrite(fd_arg, data_p, size);
 
     if ((f32) (s32) size != written_f) {
         OSReport(messages->cannot_save);

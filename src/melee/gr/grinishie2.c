@@ -665,7 +665,7 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
 
         } else {
             if (!gp->u.inishie23.xC8_flags.b2) {
-                if ((s16) gp->u.inishie23.xCA < 2) {
+                if (gp->u.inishie23.xCA < 2) {
                     gp->u.inishie23.xC8_flags.b3 ^= 1;
                 } else {
                     f32 temp_f = GET_GROUND(gobj)->u.inishie23.xD8.x +
@@ -689,7 +689,7 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
 
                         var_r3_2 = test_random(temp_r0);
 
-                        if (var_r3_2 >= (s16) yakumono_param->unk48) {
+                        if (var_r3_2 >= yakumono_param->unk48) {
                             gp->u.inishie23.xC8_flags.b3 ^= 1;
                         }
                     }

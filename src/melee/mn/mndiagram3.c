@@ -597,7 +597,7 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
     int v;
     PAD_STACK(72);
 
-    if ((u32) input & MenuInput_Back) {
+    if (input & MenuInput_Back) {
         sfxBack();
         i = mn_804A04F0.entering_menu = 0;
         gmMainLib_GetGameRules()->xD =

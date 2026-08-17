@@ -801,8 +801,7 @@ s32 mnSnap_8025441C(u64 buttons)
     if (buttons & 0x200) {
         if (mnSnap_804A0A10.dlg_type == 0) {
             *result = 2;
-        } else if (((HSD_JObj**) &mnSnap_804A0A10
-                        .left_btn)[mnSnap_804A0A10.btn_idx] ==
+        } else if (((&mnSnap_804A0A10.left_btn))[mnSnap_804A0A10.btn_idx] ==
                    mnSnap_804A0A10.no_jobj)
         {
             *result = 2;
@@ -2537,12 +2536,12 @@ void mnSnap_80257F24(void)
         "MenMainSubCsrSn_Top_joint", csr_animjoint,
         "MenMainSubCsrSn_Top_animjoint", csr_matanim,
         "MenMainSubCsrSn_Top_matanim_joint", csr_shapeanim,
-        "MenMainSubCsrSn_Top_shapeanim_joint", (void**) &snap->photo_joint,
-        "MenMainPhotoSn_Top_joint", (void**) &snap->sub_animjoint,
-        "MenMainSubSn_Top_animjoint", (void**) &snap->sub_matanim,
-        "MenMainSubSn_Top_matanim_joint", (void**) &snap->sub_shapeanim,
-        "MenMainSubSn_Top_shapeanim_joint", (void**) &snap->page_joint,
-        "MenMainSubSn_Top_joint", (void**) &snap->load_joint,
+        "MenMainSubCsrSn_Top_shapeanim_joint", (&snap->photo_joint),
+        "MenMainPhotoSn_Top_joint", (&snap->sub_animjoint),
+        "MenMainSubSn_Top_animjoint", (&snap->sub_matanim),
+        "MenMainSubSn_Top_matanim_joint", (&snap->sub_shapeanim),
+        "MenMainSubSn_Top_shapeanim_joint", (&snap->page_joint),
+        "MenMainSubSn_Top_joint", (&snap->load_joint),
         "MenMainLoadSn_Top_joint", arrows_joint, "MenMainSubSn_Top_joint",
         arrows_animjoint, "MenMainSubSn_Top_animjoint", arrows_matanim,
         "MenMainSubSn_Top_matanim_joint", arrows_shapeanim,
@@ -2562,8 +2561,8 @@ void mnSnap_80257F24(void)
                        (HSD_MatAnimJoint*) *main_matanim,
                        (HSD_ShapeAnimJoint*) *main_shapeanim);
     HSD_JObjReqAnimAll(jobj, 0.0F);
-    lb_80011E24(jobj, (HSD_JObj**) &snap->thumb_jobjs[0], 8, 9, 0xA, 0xB, 0xC,
-                0xD, 6, 2, 1, -1);
+    lb_80011E24(jobj, (&snap->thumb_jobjs[0]), 8, 9, 0xA, 0xB, 0xC, 0xD, 6, 2,
+                1, -1);
 
     slot_jobj_ptr = &snap->slot_a_jobj;
     snap->blank_img =
@@ -2733,8 +2732,8 @@ void mnSnap_80257F24(void)
                        (HSD_ShapeAnimJoint*) *warn_shapeanim);
     HSD_JObjReqAnimAll(jobj, 10.0F);
     HSD_JObjAnimAll(jobj);
-    lb_80011E24(jobj, (HSD_JObj**) &snap->dlg_root, 0, 2, 4, 5, 6, 7, 8, 0xA,
-                0xB, 0xD, -1);
+    lb_80011E24(jobj, (&snap->dlg_root), 0, 2, 4, 5, 6, 7, 8, 0xA, 0xB, 0xD,
+                -1);
 
     snap->dlg_active = 0;
 

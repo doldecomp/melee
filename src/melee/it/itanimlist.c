@@ -372,7 +372,7 @@ loop:
 
 void it_80279AF0(Item_GObj* item_gobj, CommandInfo* cmd)
 {
-    it_80278F2C(item_gobj, (CommandInfo*) cmd);
+    it_80278F2C(item_gobj, cmd);
 }
 
 #pragma pop

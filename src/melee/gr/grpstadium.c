@@ -311,7 +311,7 @@ void grStadium_801D13E0(Ground_GObj* gobj)
 
     Ground_801C2ED0(jobj, gr->map_id);
     grAnime_801C8138(gobj, gr->map_id, 0);
-    mobj = (void*) lbDvd_GetPreloadedArchive(0x7D5);
+    mobj = lbDvd_GetPreloadedArchive(0x7D5);
     gr->u.stadium.xCC = mobj;
     if (mobj == NULL) {
         gr->u.stadium.xCC = HSD_MemAlloc(0x50000);

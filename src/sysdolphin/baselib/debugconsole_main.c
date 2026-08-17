@@ -838,7 +838,7 @@ void Exception_ReportCodeline(u16 error, int dsisr, int dar, OSContext* ctx)
 
     OSReport("- UNHANDLED EXCEPTION -------------------------------\n");
     OSReport("DSISR=%08X DAR=%08X\n", dsisr, dar);
-    error = (u16) error;
+    error = error;
     OSReport("ERROR %d: ", error);
 
     switch (error) {
@@ -1219,8 +1219,7 @@ extern u8 lbl_8040B8AC[];
 
 void hsd_80395644(void)
 {
-    struct ParticleScreenState* sp =
-        (struct ParticleScreenState*) &hsd_804CF810;
+    struct ParticleScreenState* sp = (&hsd_804CF810);
     void* saved;
     void** p = &sp->x50;
     s32 val_x20;
@@ -1282,8 +1281,8 @@ s32 hsd_803956D8(void* disp_ptr)
         {
             s32* pp = &sp->x14;
             *pp += sp->x1C;
-            if (!(u8) hsd_80394128(0, *pp)) {
-                if (!(u8) hsd_80394128(0, *pp + 1)) {
+            if (!hsd_80394128(0, *pp)) {
+                if (!hsd_80394128(0, *pp + 1)) {
                     *pp = 0;
                     hsd_80394E8C(&lbl_8040B904);
                 }
@@ -1308,7 +1307,7 @@ void hsd_803957C0(void* input)
     row = hsd_804CF810.x10 + hsd_804CF810.x14;
 
     while (col >= 0) {
-        ch = (u8) hsd_80394128(col, row);
+        ch = hsd_80394128(col, row);
         if (ch != 0) {
             break;
         }
@@ -1457,8 +1456,8 @@ bool hsd_80395A78(void)
             } else {
                 break;
             }
-            while (!(u8) hsd_80394128(hsd_804CF810.x0C + hsd_804CF810.x18,
-                                      hsd_804CF810.x10 + hsd_804CF810.x14))
+            while (!hsd_80394128(hsd_804CF810.x0C + hsd_804CF810.x18,
+                                 hsd_804CF810.x10 + hsd_804CF810.x14))
             {
                 if (hsd_804CF810.x0C > 0) {
                     hsd_804CF810.x0C -= 1;
@@ -1478,7 +1477,7 @@ bool hsd_80395A78(void)
                 new_scroll += 1;
             }
             sum = new_col + new_scroll;
-            if ((u8) hsd_80394128(sum, hsd_804CF810.x10 + hsd_804CF810.x14)) {
+            if (hsd_80394128(sum, hsd_804CF810.x10 + hsd_804CF810.x14)) {
                 hsd_804CF810.x0C = new_col;
                 hsd_804CF810.x18 = new_scroll;
                 return true;
@@ -1830,7 +1829,7 @@ s32 hsd_803962A8(void* data)
         case 0x400:
             hsd_80393D2C(1);
             addr = (u8*) lbl_8040BAF0.x10;
-            if ((u8) hsd_80394128(0, 0)) {
+            if (hsd_80394128(0, 0)) {
                 OSReport(lbl_804D62D8);
             }
             i = 0;

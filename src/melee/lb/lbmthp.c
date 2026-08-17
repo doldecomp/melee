@@ -46,26 +46,25 @@ void fn_8001E910(int arg0, int arg1, void* arg2, int cancelflag)
     streamPlayer->unk_134 = tick_diff;
     streamPlayer->unk_130 = tick_diff >> 0x1F;
     streamPlayer->unk_108 += 1;
-    if ((u32) streamPlayer->unk_74 != 0U) {
+    if (streamPlayer->unk_74 != 0U) {
         streamPlayer->curr_file_offset += streamPlayer->currPackedSize;
     } else {
         streamPlayer->curr_file_offset = streamPlayer->unk_20;
     }
-    if ((u32) streamPlayer->unk_8C == 0) {
+    if (streamPlayer->unk_8C == 0) {
         var_r0 = streamPlayer->unk_104 - 1;
     } else {
         var_r0 = streamPlayer->unk_8C - 1;
     }
     streamPlayer->currPackedSize = *(u32*) streamPlayer->frame_buffers[var_r0];
-    if (((u32) streamPlayer->unk_90 != (u32) streamPlayer->unk_8C) &&
-        ((s32) streamPlayer->unk_70 != 0))
+    if (((u32) streamPlayer->unk_90 != streamPlayer->unk_8C) &&
+        (streamPlayer->unk_70 != 0))
     {
         intr = OSDisableInterrupts();
         streamPlayer->unk_13C = OSGetTick();
         streamPlayer->unk_138 = (did_request = 0);
-        if (((u32) streamPlayer->unk_74 != (u32) streamPlayer->unk_40) ||
-            (((u32) streamPlayer->unk_74 == (u32) streamPlayer->unk_40) &&
-             did_request))
+        if ((streamPlayer->unk_74 != streamPlayer->unk_40) ||
+            ((streamPlayer->unk_74 == streamPlayer->unk_40) && did_request))
         {
             HSD_ASSERTREPORT(289, (u32)streamPlayer->currPackedSize != 0,
                              "filnum = %d, ofs = %d, by sugano.",
@@ -78,14 +77,14 @@ void fn_8001E910(int arg0, int arg1, void* arg2, int cancelflag)
                 (streamPlayer->currPackedSize + 0x1F) & 0xFFFFFFE0, 0x21, 1,
                 fn_8001E910, NULL);
             streamPlayer->unk_74 += 1;
-            if (((u32) streamPlayer->unk_74 == (u32) streamPlayer->unk_40) &&
-                ((s32) streamPlayer->unk_68 != 0))
+            if ((streamPlayer->unk_74 == streamPlayer->unk_40) &&
+                (streamPlayer->unk_68 != 0))
             {
                 streamPlayer->unk_74 = 0U;
             }
             {
                 var_r3 = streamPlayer->unk_8C + 1;
-                if (var_r3 >= (u32) streamPlayer->unk_104) {
+                if (var_r3 >= streamPlayer->unk_104) {
                     var_r3 = 0;
                 }
                 streamPlayer->unk_8C = var_r3;
@@ -206,12 +205,12 @@ void fn_8001ECF4(THPDecComp* data, void* buf)
     data->unk_64 = 0;
     uv_size = (width * height) >> 2U;
     var_r29 = (u8*) buf + (((count * 4) + 0x1F) & 0xFFFFFFE0);
-    if (((s32) data->unk_6C != 0) && ((s32) data->unk_11C != 0)) {
+    if ((data->unk_6C != 0) && (data->unk_11C != 0)) {
         var_r24 = data->first_frame_size;
         csizep = (u8*) &data->first_frame_size;
         var_r25 = 0;
         data->curr_file_offset = data->first_frame;
-        for (; var_r25 < (u32) data->unk_104; var_r25++) {
+        for (; var_r25 < data->unk_104; var_r25++) {
             data->frame_buffers[var_r25] = (u32) var_r29;
             if (var_r24 == 0) {
                 OSReport("by sugano & yoshiki.\n");
@@ -242,7 +241,7 @@ void fn_8001ECF4(THPDecComp* data, void* buf)
         }
         data->unk_74 = var_r25;
         data->currPackedSize = var_r24;
-        if ((u32) data->unk_74 >= (u32) data->unk_40) {
+        if (data->unk_74 >= data->unk_40) {
             data->unk_74 = 0;
         }
         data->unk_8C = 0;
@@ -434,7 +433,7 @@ void fn_8001F2A4(OSAlarm* alarm, OSContext* context)
 
         frame = lbMthp_GetFrame(rate_table, streamPlayer->unk_80);
 
-        if ((u32) streamPlayer->unk_40 == frame) {
+        if (streamPlayer->unk_40 == frame) {
             if (streamPlayer->unk_68 != 0) {
                 streamPlayer->unk_80 = 0;
             } else {
@@ -543,7 +542,7 @@ void lbMthp_8001F67C(HSD_GObj* gobj, int arg1)
     PAD_STACK(8);
 
     fn_8001EF5C((THPDecComp*) streamPlayer);
-    if ((s32) streamPlayer->unk_148 != 0) {
+    if (streamPlayer->unk_148 != 0) {
         GXInitTexObj(&streamPlayer->unk_178, streamPlayer->unk_50,
                      (u16) streamPlayer->unk_44, (u16) streamPlayer->unk_48,
                      GX_TF_I8, GX_CLAMP, GX_CLAMP, 0U);
@@ -552,17 +551,17 @@ void lbMthp_8001F67C(HSD_GObj* gobj, int arg1)
         GXLoadTexObj(&streamPlayer->unk_178, GX_TEXMAP0);
 
         GXInitTexObj(&streamPlayer->unk_198, streamPlayer->unk_54,
-                     (u16) ((u32) streamPlayer->unk_44 >> 1U),
-                     (u16) ((u32) streamPlayer->unk_48 >> 1U), GX_TF_I8,
-                     GX_CLAMP, GX_CLAMP, 0U);
+                     (u16) (streamPlayer->unk_44 >> 1U),
+                     (u16) (streamPlayer->unk_48 >> 1U), GX_TF_I8, GX_CLAMP,
+                     GX_CLAMP, 0U);
         GXInitTexObjLOD(&streamPlayer->unk_198, GX_NEAR, GX_NEAR, 0.0f, 0.0f,
                         0.0f, 0U, 0U, GX_ANISO_1);
         GXLoadTexObj(&streamPlayer->unk_198, GX_TEXMAP1);
 
         GXInitTexObj(&streamPlayer->unk_1B8, streamPlayer->unk_58,
-                     (u16) ((u32) streamPlayer->unk_44 >> 1U),
-                     (u16) ((u32) streamPlayer->unk_48 >> 1U), GX_TF_I8,
-                     GX_CLAMP, GX_CLAMP, 0U);
+                     (u16) (streamPlayer->unk_44 >> 1U),
+                     (u16) (streamPlayer->unk_48 >> 1U), GX_TF_I8, GX_CLAMP,
+                     GX_CLAMP, 0U);
         GXInitTexObjLOD(&streamPlayer->unk_1B8, GX_NEAR, GX_NEAR, 0.0f, 0.0f,
                         0.0f, 0U, 0U, GX_ANISO_1);
         GXLoadTexObj(&streamPlayer->unk_1B8, GX_TEXMAP2);

@@ -1393,7 +1393,7 @@ s32 it_802A5320(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* attr,
             link_1->pos.x += link_1->vel.x;
             link_1->pos.y += link_1->vel.y;
             link_1->pos.z += link_1->vel.z;
-            if (var_r29 == (s32) ((s32) attr->x2C / 2)) {
+            if (var_r29 == (s32) (attr->x2C / 2)) {
                 f32 width = attr->x30;
                 it_802A3E50(link_1, fp->kind, width);
             } else {

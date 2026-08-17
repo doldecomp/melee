@@ -287,29 +287,26 @@ int lbArchiveRelocate(HSD_Archive* archive, u8* src, size_t file_size,
 
     file_offset = sizeof(HSD_ArchiveHeader);
     if (archive->header.data_size != 0) {
-        archive->data = (u8*) src + file_offset;
+        archive->data = src + file_offset;
         file_offset = archive->header.data_size + sizeof(HSD_ArchiveHeader);
     }
     if (archive->header.nb_reloc != 0) {
-        archive->reloc_info =
-            (HSD_ArchiveRelocationInfo*) ((u8*) src + file_offset);
+        archive->reloc_info = (HSD_ArchiveRelocationInfo*) (src + file_offset);
         file_offset +=
             archive->header.nb_reloc * sizeof(HSD_ArchiveRelocationInfo);
     }
     if (archive->header.nb_public != 0) {
-        archive->public_info =
-            (HSD_ArchivePublicInfo*) ((u8*) src + file_offset);
+        archive->public_info = (HSD_ArchivePublicInfo*) (src + file_offset);
         file_offset +=
             archive->header.nb_public * sizeof(HSD_ArchivePublicInfo);
     }
     if (archive->header.nb_extern != 0) {
-        archive->extern_info =
-            (HSD_ArchiveExternInfo*) ((u8*) src + file_offset);
+        archive->extern_info = (HSD_ArchiveExternInfo*) (src + file_offset);
         file_offset +=
             archive->header.nb_extern * sizeof(HSD_ArchiveExternInfo);
     }
     if (file_offset < archive->header.file_size) {
-        archive->symbols = (char*) ((u8*) src + file_offset);
+        archive->symbols = (char*) (src + file_offset);
     }
 
     Locate(archive, base_addr);

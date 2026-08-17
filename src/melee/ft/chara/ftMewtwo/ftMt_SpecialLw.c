@@ -214,7 +214,7 @@ void ftMt_SpecialLw_CreateDisable(HSD_GObj* gobj)
 
     u8 _[4];
 
-    if ((u32) fp->cmd_vars[0] != 0U) {
+    if (fp->cmd_vars[0] != 0U) {
         mewtwoAttrs = getFtSpecialAttrsD(fp);
 
         lb_8000B1CC(fp->parts[FtPart_L3rdNb].joint, NULL, &sp18);

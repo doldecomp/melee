@@ -436,9 +436,9 @@ void grBigBlueRoute_8020C140(Ground_GObj* gobj)
     Ground* gp = gobj->user_data;
 
     grFZeroCar_801CAFBC(gobj, grBb_Route_carJObjIds, 30, 0);
-    gp->u.car.xCC = (HSD_Spline*) Ground_801C247C(33, 1);
-    gp->u.car.xD0 = (HSD_Spline*) Ground_801C247C(33, 0);
-    gp->u.car.xD4 = (HSD_Spline*) Ground_801C247C(33, 2);
+    gp->u.car.xCC = Ground_801C247C(33, 1);
+    gp->u.car.xD0 = Ground_801C247C(33, 0);
+    gp->u.car.xD4 = Ground_801C247C(33, 2);
     grBigBlueRoute_8020C238(gobj);
     ((UnkFlagStruct*) &gp->u.car.xC4)->b0 = 0;
 }
@@ -457,7 +457,7 @@ void grBigBlueRoute_8020C1DC(Ground_GObj* gobj)
 void grBigBlueRoute_8020C210(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    HSD_Free((void*) gp->u.car.car_info);
+    HSD_Free(gp->u.car.car_info);
 }
 
 void grBigBlueRoute_8020C238(Ground_GObj* gobj)

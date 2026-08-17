@@ -445,11 +445,11 @@ void fn_80196E30(HSD_GObj* gobj)
     jobj = gobj->hsd_obj;
 
     if (cur_option <= 0x1A || cur_option >= 0x1F) {
-        if ((u8) * (x1A_ptr = base_ptr + 0x1A) > 0x77U) {
+        if ((*(x1A_ptr = base_ptr + 0x1A)) > 0x77U) {
             *x1A_ptr = 0x5A;
         }
     } else if (cur_option <= 0x1E) {
-        if ((u8) * (x1A_ptr = base_ptr + 0x1A) > 0x9FU) {
+        if ((*(x1A_ptr = base_ptr + 0x1A)) > 0x9FU) {
             *x1A_ptr = 0x82;
         }
     }
@@ -559,18 +559,18 @@ void fn_80196FFC(HSD_GObj* gobj)
     HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
 
     if ((s8) (u8) HSD_PadMasterStatus[(u8) pnum].err != 0 &&
-        (u8) tm->x4B8[pnum].x0 != 1)
+        tm->x4B8[pnum].x0 != 1)
     {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-        HSD_SisLib_803A7548(tm->x524[2], (s32) pnum, 0.0f, 0.0f);
+        HSD_SisLib_803A7548(tm->x524[2], pnum, 0.0f, 0.0f);
         return;
     }
 
     state = lbl_804799D8.x2A[pnum].state;
     if (state == 4) {
-        HSD_SisLib_803A7548(tm->x524[2], (s32) pnum, 0.0f, 0.0f);
+        HSD_SisLib_803A7548(tm->x524[2], pnum, 0.0f, 0.0f);
     } else {
-        HSD_SisLib_803A7548(tm->x524[2], (s32) pnum, 1.0f, 1.0f);
+        HSD_SisLib_803A7548(tm->x524[2], pnum, 1.0f, 1.0f);
     }
 
     players = tm->x30;
@@ -610,7 +610,7 @@ void fn_80196FFC(HSD_GObj* gobj)
 
     state = lbl_804799D8.x2A[pnum].state;
     if (state == 0 && lbl_804799D8.x44[pnum] == 6) {
-        if (lbl_804799D8.x2A[pnum].done != 0 && (u8) tm->x4B8[pnum].x0 != 0) {
+        if (lbl_804799D8.x2A[pnum].done != 0 && tm->x4B8[pnum].x0 != 0) {
             lbl_804799D8.x2A[pnum].state = 1;
             lbl_804799D8.x2A[pnum].done = 0;
         }
@@ -827,14 +827,13 @@ void fn_80197AF0(HSD_GObj* gobj)
 
     HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
 
-    if (((s8) HSD_PadMasterStatus[(u8) pnum].err != 0) &&
-        ((u8) tm->x4B8[pnum].x0 != 1))
+    if ((HSD_PadMasterStatus[(u8) pnum].err != 0) && (tm->x4B8[pnum].x0 != 1))
     {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         return;
     }
 
-    if ((u8) tm->x4B8[pnum].x0 == 1) {
+    if (tm->x4B8[pnum].x0 == 1) {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     }
 
@@ -940,7 +939,7 @@ void fn_80197FD8(HSD_GObj* gobj)
     HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
 
     port_u8 = (u8) port;
-    if ((s8) HSD_PadMasterStatus[port_u8].err != 0) {
+    if (HSD_PadMasterStatus[port_u8].err != 0) {
         if (tm_data->x4B8[port].x0 != 1) {
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             return;
@@ -1879,7 +1878,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
             t = gm_GetTournamentData();
             t->x2D = 1;
             stype = t->stage_selection_type;
-            if ((stype == 2 && (u8) t->x32 == 0) || stype == 3) {
+            if ((stype == 2 && t->x32 == 0) || stype == 3) {
                 cond = 1;
             } else {
                 cond = 0;
@@ -1890,7 +1889,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                 gm_801A4B60();
                 return;
             }
-            if ((stype == 0 && (u8) t->x32 == 0) || stype == 1) {
+            if ((stype == 0 && t->x32 == 0) || stype == 1) {
                 cond = 1;
             } else {
                 cond = 0;
@@ -1913,10 +1912,8 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                 }
                 {
                     u8 state = lbl_804799D8.x2A[i].state;
-                    if (((state == 2 &&
-                          (u8) lbl_804799D8.x2A[i].cur >= 0x3CU) ||
-                         (state == 4 &&
-                          (u8) lbl_804799D8.x2A[i].cur == 0x82)) &&
+                    if (((state == 2 && lbl_804799D8.x2A[i].cur >= 0x3CU) ||
+                         (state == 4 && lbl_804799D8.x2A[i].cur == 0x82)) &&
                         (s8) err == 0)
                     {
                         ready_count += 1;
@@ -1995,8 +1992,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
 
                         t3->x2D = 1;
                         stype2 = t3->stage_selection_type;
-                        if ((stype2 == 2 && (u8) t3->x32 == 0) || stype2 == 3)
-                        {
+                        if ((stype2 == 2 && t3->x32 == 0) || stype2 == 3) {
                             cond2 = 1;
                         } else {
                             cond2 = 0;
@@ -2007,8 +2003,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
                             gm_801A4B60();
                             return;
                         }
-                        if ((stype2 == 0 && (u8) t3->x32 == 0) || stype2 == 1)
-                        {
+                        if ((stype2 == 0 && t3->x32 == 0) || stype2 == 1) {
                             cond2 = 1;
                         } else {
                             cond2 = 0;

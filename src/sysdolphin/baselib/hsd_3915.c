@@ -210,7 +210,7 @@ f32 DrawASCII(int chr, float x, float y, GXColor* color)
 
     glyph = &lbl_80408630[index * 13];
     i = 0;
-    while (i < 0x29 && (u8) glyph[i] != 0xFF) {
+    while (i < 0x29 && glyph[i] != 0xFF) {
         p0 = glyph[i++];
         p1 = glyph[i++];
         GXBegin(0xA8, 0, 2);
@@ -743,7 +743,7 @@ void hsd_8039254C(void)
     col_pos = 60;
     first = 1;
     line = 1.0F;
-    event_node = (HSD_SList*) hsd_804D7850;
+    event_node = hsd_804D7850;
     default_col = *(GXColor*) &lbl_804DE8E0;
 
     while (event_node != NULL) {

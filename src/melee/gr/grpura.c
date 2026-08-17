@@ -462,18 +462,15 @@ void stageGObj1_GObjProc(Ground_GObj* arg0)
     UNUSED u8 _pad4[4];
     PAD_STACK(8);
 
-    if ((s16) gp->u.pura.xC8 < 0xE10) {
+    if (gp->u.pura.xC8 < 0xE10) {
         spilC = grPu_803E6AA0[gp->u.pura.xC6];
         sp18 = grPu_803E6AA0[gp->u.pura.xC4];
         cur = gp->u.pura.xC8;
         t = (f32) cur / 3600.0f;
         gp->u.pura.xC8 = cur + 1;
-        sp18.r =
-            (s8) (t * (f32) ((u8) spilC.r - (u8) sp18.r) + (f32) (u8) sp18.r);
-        sp18.g =
-            (s8) (t * (f32) ((u8) spilC.g - (u8) sp18.g) + (f32) (u8) sp18.g);
-        sp18.b =
-            (s8) (t * (f32) ((u8) spilC.b - (u8) sp18.b) + (f32) (u8) sp18.b);
+        sp18.r = (s8) (t * (f32) (spilC.r - sp18.r) + (f32) sp18.r);
+        sp18.g = (s8) (t * (f32) (spilC.g - sp18.g) + (f32) sp18.g);
+        sp18.b = (s8) (t * (f32) (spilC.b - sp18.b) + (f32) sp18.b);
         Ground_801C205C(&sp18);
         Camera_SetBackgroundColor(sp18.r, sp18.g, sp18.b);
         return;
@@ -481,7 +478,7 @@ void stageGObj1_GObjProc(Ground_GObj* arg0)
     gp->u.pura.xC4 = gp->u.pura.xC6;
     do {
         uVar1 = HSD_Randi(4);
-    } while ((s16) gp->u.pura.xC4 == (gp->u.pura.xC6 = uVar1));
+    } while (gp->u.pura.xC4 == (gp->u.pura.xC6 = uVar1));
     gp->u.pura.xC8 = 0;
 }
 

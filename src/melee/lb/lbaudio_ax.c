@@ -136,7 +136,7 @@ void fn_80023254(s32 arg0)
         priority = (int*) (base + 0x11E4);
         index = 0;
         do {
-            if (arg0 == (s8) *type && *used == 0 &&
+            if (arg0 == (*type) && *used == 0 &&
                 (u32) ((int (*)[2])(base + 0x11E4))[*list][0] <
                     (u32) *priority)
             {
