@@ -98,7 +98,7 @@ u64 gm_801A48A4(u8 arg0)
     return result;
 }
 
-void gm_801A4970(int (**arg0)(void))
+void gm_801A4970(bool (**arg0)(void))
 {
     HSD_PadStatus* temp_r3;
     s8 var_r26;
@@ -135,7 +135,7 @@ void gm_801A4970(int (**arg0)(void))
         }
     }
 
-    if (arg0[0] != NULL && arg0[0]() != 0) {
+    if (arg0[0] != NULL && arg0[0]()) {
         if (gm_801A45E8(0)) {
             gm_80479D58.unk_10.x0 &= ~1;
         } else {
@@ -143,7 +143,7 @@ void gm_801A4970(int (**arg0)(void))
         }
     }
     if (gm_801A45E8(0)) {
-        if (arg0[1] != NULL && arg0[1]() != 0) {
+        if (arg0[1] != NULL && arg0[1]()) {
             gm_80479D58.unk_10.x2 |= 1;
         }
     }

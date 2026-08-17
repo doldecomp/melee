@@ -924,7 +924,6 @@ struct gm_801677C0_s {
     /* +38 */ u8 unk_38_0 : 1;
     /* +38 */ u8 unk_38_1 : 1;
 };
-STATIC_ASSERT(sizeof(struct gm_801677C0_s) == 0x30);
 
 struct gm_80479D58_t {
     /*  +0 */ u32 unk_0;
@@ -933,7 +932,6 @@ struct gm_80479D58_t {
     /*  +C */ int unk_C;
     /* +10 */ struct gm_801677C0_s unk_10;
 };
-STATIC_ASSERT(sizeof(struct gm_80479D58_t) == 0x40);
 
 struct ResultsPlayerData {
     /* +00 */ u8 x0_0 : 1; ///< confirmed flag

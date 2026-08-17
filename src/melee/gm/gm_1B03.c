@@ -68,7 +68,7 @@
         gm_801B087C,
         gm_801B089C,
         {
-            NULL,
+            GS_TITLE,
             NULL,
             gm_804D6878,
         },

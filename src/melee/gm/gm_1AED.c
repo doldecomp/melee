@@ -76,12 +76,12 @@ static inline bool gm_801AF0D4_inline(void)
     return false;
 }
 
-int gm_801AF0D4(void)
+bool gm_801AF0D4(void)
 {
     int saved_unk1C = gm_80480DA8.unk1C;
 
     if (gm_801AF0D4_inline()) {
-        return 1;
+        return true;
     }
 
     if (gm_801AEDC8() & 0x40001 ? 1 : 0) {
@@ -103,7 +103,7 @@ int gm_801AF0D4(void)
         gm_801AE640(0, gm_80480DA8.unk1C);
         gm_801AE74C(0, !gm_80480DA8.unk1C);
     }
-    return 0;
+    return false;
 }
 
 static inline u8 set_gm_804D6870_inline(void)

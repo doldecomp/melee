@@ -5029,7 +5029,7 @@ void fn_8016A46C(void)
     lbl_8046B488.unk_10_b6 = 1;
 }
 
-void fn_8016A488(s32 arg0)
+void fn_8016A488(int arg0)
 {
     if (gm_16AE_GetUnkData_1()->hud_enabled == true) {
         Player_80031848(arg0);

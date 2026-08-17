@@ -22,7 +22,7 @@
 
 #include <baselib/forward.h>
 
-#include <dolphin/card/CARDBios.h>
+#include <dolphin/card.h>
 #include <dolphin/dvd.h>
 #include <dolphin/gx.h>
 #include <dolphin/os.h>

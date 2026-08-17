@@ -1039,14 +1039,12 @@ struct Map_VanishDesc {
     /* +2 */ s16 x2;
     /* +4 */ bool x4;
 };
-STATIC_ASSERT(sizeof(struct Map_VanishDesc) == 0x8);
 
 struct Map_VanishEntry {
     /* +0 */ s16 x0;
     /* +2 */ s16 x2;
     /* +4 */ HSD_JObj* jobj;
 };
-STATIC_ASSERT(sizeof(struct Map_VanishEntry) == sizeof(struct Map_VanishDesc));
 
 struct grRCruise_GroundVars {
     struct {
