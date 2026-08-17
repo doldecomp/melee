@@ -5,7 +5,6 @@
 #include <dolphin/dvd.h>
 #include <dolphin/gx/GXTexture.h>
 #include <dolphin/os.h>
-#include <dolphin/os/OSCache.h>
 #include <dolphin/thp/thp.h>
 #include <baselib/memory.h>
 #include <baselib/tobj.h>
@@ -13,54 +12,6 @@
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/devcom.h>
 #include <sysdolphin/baselib/sobjlib.h>
-
-/// @todo This is #THPDecComp.
-struct lbl_804333E0_t {
-    /* 0x000 */ char pad_0[0x20];
-    /* 0x020 */ u32 unk_20;
-    /* 0x024 */ char pad_24[0x1C];
-    /* 0x040 */ u32 unk_40;
-    /* 0x044 */ u32 unk_44;
-    /* 0x048 */ u32 unk_48;
-    /* 0x04C */ void** frame_buffers;
-    /* 0x050 */ void* unk_50;
-    /* 0x054 */ void* unk_54;
-    /* 0x058 */ void* unk_58;
-    /* 0x05C */ char pad_5C[0xC];
-    /* 0x068 */ s32 unk_68;
-    /* 0x06C */ char pad_6C[0x4];
-    /* 0x070 */ s32 unk_70;
-    /* 0x074 */ u32 unk_74;
-    /* 0x078 */ s32 unk_78;
-    /* 0x07C */ s32 unk_7C;
-    /* 0x080 */ s32 unk_80;
-    /* 0x084 */ s32 unk_84;
-    /* 0x088 */ s32 unk_88;
-    /* 0x08C */ u32 unk_8C;
-    /* 0x090 */ s32 unk_90;
-    /* 0x094 */ char pad_94[0x70];
-    /* 0x104 */ u32 unk_104;
-    /* 0x108 */ s32 unk_108;
-    /* 0x10C */ s32 unk_10C;
-    /* 0x110 */ s32 unk_110;
-    /* 0x114 */ char pad_114[0xC];
-    /* 0x120 */ u32 curr_file_offset;
-    /* 0x124 */ u32 currPackedSize;
-    /* 0x128 */ s32 file_entrynum;
-    /* 0x12C */ u32* rate_table;
-    /* 0x130 */ s32 unk_130;
-    /* 0x134 */ u32 unk_134; ///< OS ticks
-    /* 0x138 */ s32 unk_138;
-    /* 0x13C */ u32 unk_13C;
-    /* 0x140 */ void* unk_140;
-    /* 0x144 */ s32 unk_144;
-    /* 0x148 */ s32 unk_148;
-    /* 0x14C */ s32 power;
-    /* 0x150 */ OSAlarm alarm;
-    /* 0x178 */ GXTexObj unk_178;
-    /* 0x198 */ GXTexObj unk_198;
-    /* 0x1B8 */ GXTexObj unk_1B8;
-}; /* size = 0x1D8 */
 
 /* Struct used by fn_8001EBF0 for THP decode component init */
 typedef struct THPDecComp {
@@ -112,12 +63,19 @@ typedef struct THPDecComp {
     /* 0x120 */ u32 curr_file_offset;
     /* 0x124 */ u32 currPackedSize;
     /* 0x128 */ s32 file_entrynum;
-    /* 0x12C */ u8 pad12C[0x130 - 0x12C];
+    /* 0x12C */ u32* rate_table;
     /* 0x130 */ s32 unk_130;
     /* 0x134 */ s32 unk_134;
     /* 0x138 */ u32 unk_138;
     /* 0x13C */ u32 unk_13C;
-    char pad[0x1D8 - 0x140];
+    /* 0x140 */ void* unk_140;
+    /* 0x144 */ s32 unk_144;
+    /* 0x148 */ s32 unk_148;
+    /* 0x14C */ s32 power;
+    /* 0x150 */ OSAlarm alarm;
+    /* 0x178 */ GXTexObj unk_178;
+    /* 0x198 */ GXTexObj unk_198;
+    /* 0x1B8 */ GXTexObj unk_1B8;
 } THPDecComp;
 
 struct lbl_803BAFE8_t {
@@ -131,11 +89,11 @@ struct lbl_803BAFE8_t {
 }; /* size = 0x18 */
 
 /* 01F294 */ static s32 fn_8001F294(void);
-/* 4333E0 */ static struct lbl_804333E0_t MoviePlayer;
+/* 4333E0 */ static THPDecComp MoviePlayer;
 
 static void fn_8001E910(int arg0, int arg1, void* arg2, int cancelflag)
 {
-    struct lbl_804333E0_t* streamPlayer = &MoviePlayer;
+    THPDecComp* streamPlayer = &MoviePlayer;
     s32 tick_diff;
     s32 var_r0;
     s32 did_request;
@@ -151,7 +109,7 @@ static void fn_8001E910(int arg0, int arg1, void* arg2, int cancelflag)
     if (streamPlayer->unk_74 != 0U) {
         streamPlayer->curr_file_offset += streamPlayer->currPackedSize;
     } else {
-        streamPlayer->curr_file_offset = streamPlayer->unk_20;
+        streamPlayer->curr_file_offset = streamPlayer->first_frame;
     }
     if (streamPlayer->unk_8C == 0) {
         var_r0 = streamPlayer->unk_104 - 1;
@@ -253,9 +211,9 @@ size_t fn_8001EBF0(THPDecComp* data)
     width = data->width;
     height = data->height;
     wh = width * height;
-    data->unk_9C.val1 = (u16) width;
+    data->unk_9C.val1 = width;
     height = data->height;
-    data->unk_9C._pad = (u16) height;
+    data->unk_9C._pad = height;
 
     data->unk_9C.val2 = 4;
 
@@ -267,7 +225,7 @@ size_t fn_8001EBF0(THPDecComp* data)
     size += wh_div4;
     size += wh_div4;
 
-    size += THPDec_8032FD40(&data->unk_9C, (u16) data->height);
+    size += THPDec_8032FD40(&data->unk_9C, data->height);
 
     data->unk_7C = 0;
     data->unk_78 = 0;
@@ -278,8 +236,8 @@ size_t fn_8001EBF0(THPDecComp* data)
     data->unk_94 = -1;
     data->unk_68 = 0;
 
-    data->unk_A8 = (u16) data->width;
-    data->unk_AA = (u16) data->height;
+    data->unk_A8 = data->width;
+    data->unk_AA = data->height;
     data->unk_AC = 0;
 
     size += ALIGN_32(data->unk_104 * 4);
@@ -509,22 +467,21 @@ static inline u32 lbMthp_GetFrame(u32** rate_table, u32 counter)
     return frame;
 }
 
-static inline void lbMthp_GetPlayer(struct lbl_804333E0_t** streamPlayer,
+static inline void lbMthp_GetPlayer(THPDecComp** streamPlayer,
                                     u32*** rate_table)
 {
     *streamPlayer = &MoviePlayer;
     *rate_table = &(*streamPlayer)->rate_table;
 }
 
-static inline THPDecComp*
-lbMthp_GetDecoder(struct lbl_804333E0_t* streamPlayer)
+static inline THPDecComp* lbMthp_GetDecoder(THPDecComp* streamPlayer)
 {
-    return (THPDecComp*) streamPlayer;
+    return streamPlayer;
 }
 
 void fn_8001F2A4(OSAlarm* alarm, OSContext* context)
 {
-    struct lbl_804333E0_t* streamPlayer;
+    THPDecComp* streamPlayer;
     u32** rate_table;
     u32 frame;
 
@@ -557,7 +514,9 @@ void fn_8001F2A4(OSAlarm* alarm, OSContext* context)
 void lbMthp_8001F410(const char* filename, u32* rate_table, void* buf,
                      size_t heap_size, int loop)
 {
+    THPDecComp* streamPlayer;
     size_t memoryRequired;
+    streamPlayer = &MoviePlayer;
 
     HSD_ASSERT(833, !MoviePlayer.power);
     MoviePlayer.power = 1;
@@ -576,9 +535,7 @@ void lbMthp_8001F410(const char* filename, u32* rate_table, void* buf,
     MoviePlayer.unk_144 = 0;
     MoviePlayer.unk_148 = 1;
     OSCreateAlarm(&MoviePlayer.alarm);
-    OSSetPeriodicAlarm((OSAlarm*) ((uintptr_t) &MoviePlayer +
-                                   offsetof(struct lbl_804333E0_t, alarm)),
-                       OSSecondsToTicks(1.0f / 60),
+    OSSetPeriodicAlarm(&streamPlayer->alarm, OSSecondsToTicks(1.0f / 60),
                        OSSecondsToTicks(1.0f / 60), fn_8001F2A4);
 }
 
@@ -641,30 +598,28 @@ HSD_SObj* lbMthp_8001F624(HSD_GObj* gobj, int width, int height)
 
 void lbMthp_8001F67C(HSD_GObj* gobj, int arg1)
 {
-    struct lbl_804333E0_t* streamPlayer = &MoviePlayer;
+    THPDecComp* streamPlayer = &MoviePlayer;
     PAD_STACK(8);
 
-    fn_8001EF5C((THPDecComp*) streamPlayer);
+    fn_8001EF5C(streamPlayer);
     if (streamPlayer->unk_148 != 0) {
         GXInitTexObj(&streamPlayer->unk_178, streamPlayer->unk_50,
-                     (u16) streamPlayer->unk_44, (u16) streamPlayer->unk_48,
-                     GX_TF_I8, GX_CLAMP, GX_CLAMP, 0U);
+                     streamPlayer->width, streamPlayer->height, GX_TF_I8,
+                     GX_CLAMP, GX_CLAMP, 0U);
         GXInitTexObjLOD(&streamPlayer->unk_178, GX_NEAR, GX_NEAR, 0.0f, 0.0f,
                         0.0f, 0U, 0U, GX_ANISO_1);
         GXLoadTexObj(&streamPlayer->unk_178, GX_TEXMAP0);
 
         GXInitTexObj(&streamPlayer->unk_198, streamPlayer->unk_54,
-                     (u16) (streamPlayer->unk_44 >> 1U),
-                     (u16) (streamPlayer->unk_48 >> 1U), GX_TF_I8, GX_CLAMP,
-                     GX_CLAMP, 0U);
+                     streamPlayer->width / 2, streamPlayer->height / 2,
+                     GX_TF_I8, GX_CLAMP, GX_CLAMP, 0U);
         GXInitTexObjLOD(&streamPlayer->unk_198, GX_NEAR, GX_NEAR, 0.0f, 0.0f,
                         0.0f, 0U, 0U, GX_ANISO_1);
         GXLoadTexObj(&streamPlayer->unk_198, GX_TEXMAP1);
 
         GXInitTexObj(&streamPlayer->unk_1B8, streamPlayer->unk_58,
-                     (u16) (streamPlayer->unk_44 >> 1U),
-                     (u16) (streamPlayer->unk_48 >> 1U), GX_TF_I8, GX_CLAMP,
-                     GX_CLAMP, 0U);
+                     streamPlayer->width / 2, streamPlayer->height / 2,
+                     GX_TF_I8, GX_CLAMP, GX_CLAMP, 0U);
         GXInitTexObjLOD(&streamPlayer->unk_1B8, GX_NEAR, GX_NEAR, 0.0f, 0.0f,
                         0.0f, 0U, 0U, GX_ANISO_1);
         GXLoadTexObj(&streamPlayer->unk_1B8, GX_TEXMAP2);
