@@ -220,7 +220,7 @@ void lbHeap_80015CA8(int arg0, void* arg1)
     OSRestoreInterrupts(enabled);
 }
 
-int lbHeap_80015D6C(u32 heap0, UNK_T cb, u32 heap1)
+int lbHeap_80015D6C(u32 heap0, void (*cb)(u32), u32 heap1)
 {
     int enabled = OSDisableInterrupts();
     struct Heap* p = &lbHeap_80431FA0.heap_array[heap0];
