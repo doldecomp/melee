@@ -185,34 +185,12 @@ typedef struct ftKirbyCopyData {
     char fighter_dobj_over[0x18];
 } ftKirbyCopyData;
 
-/// @todo `byte_base` is always zero; it reproduces retail's shift-derived
-/// offset initialization, suggesting the original code indexed bones by
-/// element index rather than byte offset.
-static inline void ftKb_SpecialN_800EF0E4_insert_joint_refs(
-    s32* total_dobjs, HSD_Joint* root, Fighter* fp, s32* part_off,
-    HSD_Joint** joint, s32* joint_idx, s32* byte_base)
-{
-    *part_off = (*byte_base = (*total_dobjs = 0)) << 4;
-    *joint = root;
-    *joint_idx = 0;
-    while (*joint != NULL) {
-        FighterBone* parts = fp->parts;
-        FighterBone* bone = (FighterBone*) ((u8*) parts + *part_off);
-        while (!bone->flags_b1) {
-            bone = (FighterBone*) ((u8*) bone + 0x10);
-            *part_off += 0x10;
-        }
-        HSD_IDInsertToTable(NULL, (u32) *joint,
-                            ((FighterBone*) ((u8*) parts + *part_off))->joint);
-        *part_off += 0x10;
-        ftAnim_GetNextJointInTree(joint, joint_idx);
-    }
-    *joint = root;
-}
-
-static inline void ftKb_SpecialN_800EF438_insert_joint_refs(
-    s32* total_dobjs, HSD_Joint* root, Fighter* fp, s32* part_idx,
-    HSD_Joint** joint, s32* joint_idx, s32* byte_base)
+/// @todo `byte_base` is only ever written; both callers derive their
+/// destination offset from `total_dobjs` instead.
+static inline void
+ftKb_SpecialN_insert_joint_refs(s32* total_dobjs, HSD_Joint* root, Fighter* fp,
+                                s32* part_idx, HSD_Joint** joint,
+                                s32* joint_idx, s32* byte_base)
 {
     *part_idx = (*total_dobjs = (*byte_base = 0));
     *joint = root;
@@ -231,17 +209,18 @@ static inline void ftKb_SpecialN_800EF438_insert_joint_refs(
     *joint = root;
 }
 
-static inline HSD_JObj*
-ftKb_SpecialN_800EF0E4_find_bone(Fighter* fp, s32* part_off, u8** arg2_cur)
+static inline void ftKb_SpecialN_800EF0E4_find_bone(Fighter* fp, s32* part_idx,
+                                                    s32* arg2_idx,
+                                                    HSD_JObj** jobj)
 {
     FighterBone* parts = fp->parts;
-    FighterBone* bone = (FighterBone*) ((u8*) parts + *part_off);
+    FighterBone* bone = &parts[*part_idx];
     while (!bone->flags_b1) {
-        bone = (FighterBone*) ((u8*) bone + 0x10);
-        (*arg2_cur)++;
-        *part_off += 0x10;
+        bone++;
+        (*arg2_idx)++;
+        (*part_idx)++;
     }
-    return ((FighterBone*) ((u8*) parts + *part_off))->joint;
+    *jobj = parts[*part_idx].joint;
 }
 
 static inline void ftKb_SpecialN_800EF0E4_finish(Fighter* fp, s32 total_dobjs)
@@ -253,86 +232,83 @@ static inline void ftKb_SpecialN_800EF0E4_finish(Fighter* fp, s32 total_dobjs)
 
 void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    ftKirbyCopyData* data = (ftKirbyCopyData*) ftKb_Init_MotionStateTable;
-    s32 dst_off;
-    s32 total_dobjs;
-    HSD_DObj** dst;
-    HSD_JObj* jobj;
-    HSD_DObj* dobj;
     HSD_Joint* current_joint;
-    s32 byte_off;
-    HSD_Joint* root;
     s32 joint_idx;
-    s32 byte_base;
+    HSD_JObj* jobj;
+    HSD_Joint* root;
+    ftKirbyCopyData* data = (ftKirbyCopyData*) ftKb_Init_MotionStateTable;
+    s32 byte_off;
+    Fighter* fp = GET_FIGHTER(gobj);
+    s32 total_dobjs;
+    s32 insert_part_idx;
+    s32 dst_off;
+    HSD_DObj* dobj;
     HSD_MObj* mobj;
     HSD_DObj* tail;
+    s32 group_count;
+    s32 arg2_idx;
+    s32 byte_base;
 
     ftPartsPObjSetDefaultClass();
     root = data->costume_archives[arg1][fp->x619_costume_id].joint;
-    ftKb_SpecialN_800EF0E4_insert_joint_refs(&total_dobjs, root, fp, &byte_off,
-                                             &current_joint, &joint_idx,
-                                             &byte_base);
-    {
-        s32 group_count;
-        u8* arg2_cur;
-        s32 part_off;
-
-        joint_idx = 0;
-        arg2_cur = arg2;
-        byte_off = byte_base << 2;
-        part_off = 0;
-        while (current_joint != NULL) {
-            group_count = 0;
-            jobj = ftKb_SpecialN_800EF0E4_find_bone(fp, &part_off, &arg2_cur);
-            dobj = HSD_DObjLoadDesc(current_joint->u.dobjdesc);
-            *arg2_cur = total_dobjs;
-            if (dobj != NULL) {
-                tail = HSD_JObjGetDObj(jobj);
-                HSD_DObjResolveRefsAll(dobj, current_joint->u.dobjdesc);
-                if (tail == NULL) {
-                    HSD_JObjAddDObj(jobj, dobj);
-                } else {
-                    while (tail != NULL) {
-                        HSD_DObj* nxt = (tail != NULL) ? tail->next : NULL;
-                        if (nxt == NULL) {
-                            break;
-                        }
-                        tail = (tail != NULL) ? tail->next : NULL;
-                    }
-                    lb_8000CE30(tail, dobj);
-                }
-                dst_off = byte_off;
-                for (;;) {
-                    if (dobj == NULL) {
+    ftKb_SpecialN_insert_joint_refs(&total_dobjs, root, fp, &insert_part_idx,
+                                    &current_joint, &joint_idx, &byte_base);
+    joint_idx = 0;
+    arg2_idx = 0;
+    byte_off = total_dobjs << 2;
+    insert_part_idx = 0;
+    while (current_joint != NULL) {
+        group_count = 0;
+        ftKb_SpecialN_800EF0E4_find_bone(fp, &insert_part_idx, &arg2_idx,
+                                         &jobj);
+        dobj = HSD_DObjLoadDesc(current_joint->u.dobjdesc);
+        arg2[arg2_idx] = total_dobjs;
+        if (dobj != NULL) {
+            tail = HSD_JObjGetDObj(jobj);
+            HSD_DObjResolveRefsAll(dobj, current_joint->u.dobjdesc);
+            if (tail == NULL) {
+                HSD_JObjAddDObj(jobj, dobj);
+            } else {
+                while (tail != NULL) {
+                    HSD_DObj* nxt = (tail != NULL) ? tail->next : NULL;
+                    if (nxt == NULL) {
                         break;
                     }
-                    if (total_dobjs >= 0x20) {
-                        OSReport(data->parts_dobj_over);
-                        __assert(data->source_name, 0x43E, ftKb_Init_804D3DAC);
-                    }
-                    dst = (HSD_DObj**) fp->u.gw.x2244_chefVar2;
-                    *(HSD_DObj**) ((u8*) dst + dst_off) = dobj;
-                    mobj = dobj->mobj;
-                    if (mobj != NULL) {
-                        hsdChangeClass(mobj, &ftMObj);
-                    }
-                    dobj = (dobj != NULL) ? dobj->next : NULL;
-                    dst_off += 4;
-                    byte_off += 4;
-                    total_dobjs += 1;
-                    group_count += 1;
+                    tail = (tail != NULL) ? tail->next : NULL;
                 }
-                if (group_count >= 0x80) {
-                    OSReport(data->fighter_dobj_over);
-                    __assert(data->source_name, 0x44C, ftKb_Init_804D3DAC);
-                }
-                ((FighterBone*) ((u8*) fp->parts + part_off))->flags_b6 = true;
+                lb_8000CE30(tail, dobj);
             }
-            arg2_cur++;
-            part_off += 0x10;
-            ftAnim_GetNextJointInTree(&current_joint, &joint_idx);
+            dst_off = byte_off;
+            for (;;) {
+                HSD_DObj** dst;
+                if (dobj == NULL) {
+                    break;
+                }
+                if (total_dobjs >= 0x20) {
+                    OSReport(data->parts_dobj_over);
+                    __assert(data->source_name, 0x43E, ftKb_Init_804D3DAC);
+                }
+                dst = (HSD_DObj**) fp->u.gw.x2244_chefVar2;
+                *(HSD_DObj**) ((u8*) dst + dst_off) = dobj;
+                mobj = dobj->mobj;
+                if (mobj != NULL) {
+                    hsdChangeClass(mobj, &ftMObj);
+                }
+                dobj = (dobj != NULL) ? dobj->next : NULL;
+                dst_off += 4;
+                byte_off += 4;
+                total_dobjs += 1;
+                group_count += 1;
+            }
+            if (group_count >= 0x80) {
+                OSReport(data->fighter_dobj_over);
+                __assert(data->source_name, 0x44C, ftKb_Init_804D3DAC);
+            }
+            fp->parts[insert_part_idx].flags_b6 = true;
         }
+        arg2_idx++;
+        insert_part_idx++;
+        ftAnim_GetNextJointInTree(&current_joint, &joint_idx);
     }
     ftKb_SpecialN_800EF0E4_finish(fp, total_dobjs);
 }
@@ -382,9 +358,9 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
     if (root != NULL) {
         s32 byte_base;
         ftPartsPObjSetDefaultClass();
-        ftKb_SpecialN_800EF438_insert_joint_refs(
-            &total_dobjs, root, fp, &insert_part_idx, &current_joint,
-            &joint_idx, &byte_base);
+        ftKb_SpecialN_insert_joint_refs(&total_dobjs, root, fp,
+                                        &insert_part_idx, &current_joint,
+                                        &joint_idx, &byte_base);
         joint_idx = 0;
         byte_off = total_dobjs << 2;
         insert_part_idx = 0;
