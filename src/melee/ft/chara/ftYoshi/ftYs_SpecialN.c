@@ -2,8 +2,6 @@
 
 #include "placeholder.h"
 
-#include <placeholder.h>
-
 #include "baselib/forward.h"
 
 #include "ft/fighter.h"
