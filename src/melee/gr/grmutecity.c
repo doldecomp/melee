@@ -1225,7 +1225,7 @@ void grMuteCity_801F106C(s32 i)
     }
 }
 
-static inline f32 grMc_DistanceSquared(f32* a, f32* b)
+static inline f32 grMc_DistanceSquared(const f32* a, const f32* b)
 {
     return SQ(a[0] - b[0]) + SQ(a[1] - b[1]) + SQ(a[2] - b[2]);
 }

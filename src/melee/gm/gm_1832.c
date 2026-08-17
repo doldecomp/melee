@@ -813,7 +813,7 @@ void fn_801859C8(HSD_GObj* gobj)
     }
 }
 
-static inline void fn_80185A0C_InitImages(u8* count_ptr, s32* i)
+static inline void fn_80185A0C_InitImages(const u8* count_ptr, s32* i)
 {
     HSD_ImageDesc* img;
 

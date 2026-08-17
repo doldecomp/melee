@@ -217,7 +217,7 @@ static inline void un_8031FD18_SetupKoopa(void)
     HSD_GObj_SetupProc(koopa_gobj, un_8031F9B4, 0);
 }
 
-static inline void un_8031FD18_LoadAssets(u8* input)
+static inline void un_8031FD18_LoadAssets(const u8* input)
 {
     u8 char_index;
 

@@ -158,8 +158,6 @@ void fn_8015B2C0(HSD_GObj* gobj)
         return;
     }
     }
-    // NOTE: maybe add an #ifdef BUGFIX for case 10, like
-    // ftMh_MS_343_801511FC?
 }
 
 bool fn_8015B4EC(Vec3* vec)

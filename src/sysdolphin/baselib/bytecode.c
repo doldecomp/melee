@@ -17,7 +17,7 @@ typedef union {
     f32 f;
 } ByteCodeVal;
 
-float HSD_ByteCodeEval(u8* bytecode, f32* args, s32 nb_args)
+float HSD_ByteCodeEval(u8* bytecode, const f32* args, s32 nb_args)
 {
     HSD_SList* stack;
     int i;

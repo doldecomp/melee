@@ -3354,7 +3354,7 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
 
             st_val = 10;
             byte = target_car[0xD4];
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
             asm { rlwimi byte, st_val, 2, 24, 29 }
 #endif
             target_car[0xD4] = byte;
@@ -3368,7 +3368,7 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                      *(f32*) (bp + 0xE0) > *(f32*) (target_car + 0xE0)))
                 {
                     byte = bp[0xD4];
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
                     asm { rlwimi byte, st_val, 2, 24, 29 }
 #endif
                     bp[0xD4] = byte;
@@ -3383,7 +3383,7 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                      *(f32*) (bp + 0x120) > *(f32*) (target_car + 0xE0)))
                 {
                     byte = bp[0x114];
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
                     asm { rlwimi byte, st_val, 2, 24, 29 }
 #endif
                     bp[0x114] = byte;
@@ -3399,7 +3399,7 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                      *(f32*) (p2 + 0xE0) > *(f32*) (target_car + 0xE0)))
                 {
                     byte = p2[0xD4];
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
                     asm { rlwimi byte, st_val, 2, 24, 29 }
 #endif
                     p2[0xD4] = byte;
@@ -3413,7 +3413,7 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                          *(f32*) (p3 + 0xE0) > *(f32*) (target_car + 0xE0)))
                     {
                         byte = p3[0xD4];
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
                         asm { rlwimi byte, st_val, 2, 24, 29 }
 #endif
                         p3[0xD4] = byte;

@@ -559,7 +559,7 @@ void ftKb_PrSpecialAirNFull_Anim(Fighter_GObj* gobj)
 }
 
 static inline void ftKb_AirScaleAnimStep(Fighter_GObj* gobj, Vec3* scale,
-                                         f32* scale_base)
+                                         const f32* scale_base)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);

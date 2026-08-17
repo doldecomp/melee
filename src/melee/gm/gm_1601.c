@@ -2479,7 +2479,7 @@ bool gm_80164ABC(void)
     return true;
 }
 
-static inline bool is_character_unlocked(u8 idx, u16* ptr)
+static inline bool is_character_unlocked(u8 idx, const u16* ptr)
 {
     if (idx == 0xB || (*ptr & (1LL << idx))) {
         return true;
@@ -2487,7 +2487,7 @@ static inline bool is_character_unlocked(u8 idx, u16* ptr)
     return false;
 }
 
-static inline bool fn_80164B48_check(u8 idx, u16* ptr)
+static inline bool fn_80164B48_check(u8 idx, const u16* ptr)
 {
     if (idx == 0xB || (*ptr & (1LL << idx))) {
         return true;
@@ -3161,7 +3161,7 @@ void gm_80166378(lbl_8046B6A0_24C_t* arg0_raw)
     fn_801661E0(arg0);
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 float fn_80166A8C(register Vec3* src, register Vec3* dst)
 {
     register float x = src->x;
@@ -3798,7 +3798,7 @@ static inline int get_flag_unk(u16 temp_r30)
     return ARRAY_SIZE(lbl_803B790C);
 }
 
-static inline bool check_bit(u8 n, u16* mask)
+static inline bool check_bit(u8 n, const u16* mask)
 {
     if ((n == 0xB) || (*mask & 1LL << n)) {
         return true;
@@ -4439,7 +4439,7 @@ static inline s8* fn_801695BC_rand_color(s32 ncolors, s8* colors)
     return &colors[HSD_Randi(ncolors)];
 }
 
-void fn_801695BC(u8 arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
+void fn_801695BC(u8 arg0, u8 arg1, u8 arg2, const u8* arg3, u8* arg4)
 {
     s32 tmp2;
     s8 tmp;

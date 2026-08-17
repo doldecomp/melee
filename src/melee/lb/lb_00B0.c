@@ -1,7 +1,5 @@
 #include "lb/lb_00B0.h"
 
-#include <placeholder.h>
-
 #include "sc/types.h" // IWYU pragma: keep
 
 #include <math.h>
@@ -762,9 +760,6 @@ HSD_LObj* lb_8000CDC0(HSD_LObj* cur)
         }
         cur = lobj_next(cur);
     }
-#ifdef BUGFIX
-    return NULL;
-#endif
 }
 
 void lb_8000CE30(HSD_DObj* dobj, HSD_DObj* next)

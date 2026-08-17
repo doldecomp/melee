@@ -1719,11 +1719,11 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
                                  j++)
                             {
 /// @todo Cast forces regswap
-#ifdef BUGFIX
-                                temp_r23 = HitCapsuleGetPtr(victim_fp, j);
-#else
+#ifdef MUST_MATCH
                                 temp_r23 = (HitCapsule*) HitCapsuleGetPtr(
                                     victim_fp, j);
+#else
+                                temp_r23 = HitCapsuleGetPtr(victim_fp, j);
 #endif
                                 if ((temp_r23->state != HitCapsule_Disabled) &&
                                     (temp_r23->element !=

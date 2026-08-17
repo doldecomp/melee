@@ -575,30 +575,30 @@ void hsd_80394314(void)
     sp->x40 = ((u16*) sp->x30)[4];
 
     /// @todo Redundant cast improves match
-#ifdef BUGFIX
-    sp->x44 = (((u16) sp->x3C + 15) * 2) & 0x1FFE0;
-#else
+#ifdef MUST_MATCH
     (sp)->x44 =
         (((u16) ((struct ParticleScreenState*) sp)->x3C + 15) * 2) & 0x1FFE0;
+#else
+    sp->x44 = (((u16) sp->x3C + 15) * 2) & 0x1FFE0;
 #endif
 
     sp->x48 = sp->x44 * sp->x40;
     sp->x4 = 0;
     /// @todo Redundant cast improves match
-#ifdef BUGFIX
-    sp->x8 = sp->x40;
-#else
+#ifdef MUST_MATCH
     (sp)->x8 = ((struct ParticleScreenState*) sp)->x40;
+#else
+    sp->x8 = sp->x40;
 #endif
     sp->x18 = 0;
     sp->x14 = 0;
     /// @todo Redundant casts improve match
-#ifdef BUGFIX
-    sp->x20 = (u32) (sp->x3C - 0x28) / 11;
-    sp->x1C = (u32) (sp->x40 - 0x50) / 14;
-#else
+#ifdef MUST_MATCH
     (sp)->x20 = (u32) (((struct ParticleScreenState*) sp)->x3C - 0x28) / 11;
     (sp)->x1C = (u32) (((struct ParticleScreenState*) sp)->x40 - 0x50) / 14;
+#else
+    sp->x20 = (u32) (sp->x3C - 0x28) / 11;
+    sp->x1C = (u32) (sp->x40 - 0x50) / 14;
 #endif
     sp->x4C = lbl_804088B8;
     sp->x50 = 0;

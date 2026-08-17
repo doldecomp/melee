@@ -3884,7 +3884,7 @@ void ftKb_SpecialN_800F13F0(Fighter_GObj* gobj)
     ftKb_SpecialN_800EF69C(gobj, 0x16, ft_80459B88.hats[FTKIND_DRMARIO]);
 }
 
-u8* ftKb_SpecialN_800F1420(Fighter_GObj* gobj, u32* arg1)
+u8* ftKb_SpecialN_800F1420(Fighter_GObj* gobj, const u32* arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     FtPartsVisLookup* lookup = fp->x5AC.xC[4];

@@ -112,8 +112,8 @@ typedef struct _MenuInputState {
 /* 22F298 */ f32 mn_8022F298(HSD_JObj*);
 /* 22F360 */ void mn_8022F360(HSD_AObj* aobj, void* obj, u32 arg2);
 /* 22F3D8 */ void mn_8022F3D8(HSD_JObj*, u8, HSD_TypeMask);
-/* 22F410 */ int mn_8022F410(float* x, float* target, float dx);
-/* 22F470 */ int mn_8022F470(int* x, int* target, int dx);
+/* 22F410 */ int mn_8022F410(float* x, const float* target, float dx);
+/* 22F470 */ int mn_8022F470(int* x, const int* target, int dx);
 /* 22F4CC */ void mn_8022F4CC(void);
 
 /* 4A04F0 */ extern MenuFlow mn_804A04F0;

@@ -1110,10 +1110,10 @@ block_43:
 bool ftCo_800A2718(mp_UnkStruct0* arg0)
 {
     /// @todo Redundant cast and assignment improves match
-#ifdef BUGFIX
-    mp_UnkStruct0* island = arg0;
-#else
+#ifdef MUST_MATCH
     mp_UnkStruct0* island = (mp_UnkStruct0*) arg0;
+#else
+    mp_UnkStruct0* island = arg0;
 #endif
     if (arg0 == NULL) {
         return false;
@@ -5325,9 +5325,7 @@ static inline void ftCo_800ABBA8_blk155144r(Fighter* fp, Fighter** target)
     *target = data->x44;
 }
 
-#ifdef BUGFIX
-#define sqrtf_store(x, y) sqrtf(x)
-#else
+#ifdef MUST_MATCH
 /* MSL sqrtf with caller-provided volatile slot (retail 0x34/0x38/0x40). */
 static inline float sqrtf_store(float x, volatile float* y)
 {
@@ -5341,6 +5339,8 @@ static inline float sqrtf_store(float x, volatile float* y)
     }
     return x;
 }
+#else
+#define sqrtf_store(x, y) sqrtf(x)
 #endif
 
 void ftCo_800ABBA8(Fighter* fp)
@@ -8401,7 +8401,7 @@ static inline int ftCo_800B33B0_IsIgnoredFloor(int line1)
 
 static inline void ftCo_CpuUpdateRecoveryScale(Fighter* fp,
                                                struct Fighter_x1A88_t* data,
-                                               int* timer)
+                                               const int* timer)
 {
     if (*timer % 30 == 0) {
         f32 rand = HSD_Randf();

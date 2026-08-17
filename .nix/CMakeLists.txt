@@ -51,7 +51,7 @@ set(SOURCES
 
 add_library(melee STATIC ${SOURCES})
 
-target_compile_definitions(melee PRIVATE BUGFIX)
+target_compile_definitions(melee PRIVATE)
 
 target_include_directories(melee PRIVATE
     $ENV{AURORA_SRC}/include

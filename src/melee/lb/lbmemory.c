@@ -3,6 +3,7 @@
 #include <platform.h>
 
 #include <dolphin/ar.h>
+#include <dolphin/os/OSAlarm.h>
 #include <baselib/debug.h>
 #include <baselib/devcom.h>
 

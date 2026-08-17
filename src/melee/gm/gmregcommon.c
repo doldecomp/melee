@@ -15,7 +15,7 @@ int gm_8017BE84(u32 arg0)
     return (arg0 >> 3) & 0x1F;
 }
 
-int gm_8017BE8C(s8* opps)
+int gm_8017BE8C(const s8* opps)
 {
     int opp_count = 0;
     int i;
@@ -27,7 +27,8 @@ int gm_8017BE8C(s8* opps)
     return opp_count;
 }
 
-void gmRegSetupEnemyColorTable(s8 ckind, u8 color, s8* ckinds, u8* colors)
+void gmRegSetupEnemyColorTable(s8 ckind, u8 color, const s8* ckinds,
+                               u8* colors)
 {
     u8 ncolors = gm_80169238(ckind);
     int k;

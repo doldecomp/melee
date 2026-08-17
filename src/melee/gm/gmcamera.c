@@ -411,7 +411,7 @@ void gmCamera_801A2BB0(void)
     }
 }
 
-f32 gmCamera_801A2BF0_get_translate_x(s32* px18)
+f32 gmCamera_801A2BF0_get_translate_x(const s32* px18)
 {
     if (*px18 != 0) {
         return 5.0f;
