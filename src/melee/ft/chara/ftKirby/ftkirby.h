@@ -525,7 +525,6 @@ typedef struct ftKirby_CopyName {
 /* 3CA9D0 */ extern ftKirby_CopyName ftKb_Init_803CA9D0[];
 /* 3CB3E8 */ extern Fighter_CostumeStrings* ftKb_Init_803CB3E8[];
 /* 3CB46C */ extern u8 ftKb_Init_803CB46C[];
-/* 4D935C */ extern float const ftKb_Init_804D935C;
 /* 3CB510 */ extern char ftKb_Init_803CB510[];
 /* 3CB52C */ extern char ftKb_Init_803CB52C[];
 /* 3CB540 */ extern enum_t ftKb_Init_803CB540[];

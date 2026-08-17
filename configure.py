@@ -854,7 +854,6 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftLink/ftLk_SpecialN.c"),
             # Kirby
             Object(Matching, "melee/ft/chara/ftKirby/ftkirby.c"),
-            Object(NonMatching, "melee/ft/chara/ftKirby/ftkirbycopy.c"),
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbydata.c"),
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbyattackdash.c"),
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialhi.c"),
