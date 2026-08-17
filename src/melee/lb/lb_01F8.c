@@ -1,6 +1,7 @@
 #include "lbfile.h"
 #include "lbmthp.h"
 
+#include <dolphin/thp/thp.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sobjlib.h>
 #include <sysdolphin/baselib/tobj.h>
@@ -27,7 +28,7 @@ extern struct lbl_804333E0_t Movieplayer;
 
 static struct lbl_804335B8_t lbl_804335B8;
 
-void* lbMthp8001F890(HSD_GObj* gobj)
+HSD_SObj* lbMthp8001F890(HSD_GObj* gobj)
 {
     lbl_804335B8.x70.image_ptr = NULL;
     lbl_804335B8.x70.width = lbl_804335B8.x6C;
