@@ -44,7 +44,7 @@ static void setCallbacks(HSD_GObj* gobj)
 static void resetCmdVarsGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    u32* vars = (u32*) &fp->cmd_vars[0];
+    u32* vars = (&fp->cmd_vars[0]);
     vars[0] = vars[1] = vars[2] = vars[3] = 0;
     ftCommon_8007D7FC(fp);
 }

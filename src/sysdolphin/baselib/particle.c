@@ -1457,7 +1457,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     if (srt == NULL) {
                         break;
                     }
-                    if ((u8) srt->xA2 != 0) {
+                    if (srt->xA2 != 0) {
                         break;
                     }
                     hsd_803983A4(srt->gp);

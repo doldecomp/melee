@@ -127,7 +127,7 @@ static inline void ftGameWatch_SpecialN_ChefLoop(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftGameWatchAttributes* gawAttrs = getFtSpecialAttrsD(fp);
 
-    if ((u32) fp->cmd_vars[2] != 0U) {
+    if (fp->cmd_vars[2] != 0U) {
         fp->cmd_vars[2] = 0U;
         if (((float) fp->mv.gw.SpecialN.maxSausage <
              gawAttrs->x1C_GAMEWATCH_CHEF_MAX) &&
@@ -156,7 +156,7 @@ static inline void ftGameWatch_SpecialAirN_ChefLoop(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftGameWatchAttributes* gawAttrs = getFtSpecialAttrsD(fp);
 
-    if ((u32) fp->cmd_vars[2] != 0U) {
+    if (fp->cmd_vars[2] != 0U) {
         fp->cmd_vars[2] = 0U;
         if (((s32) fp->mv.gw.SpecialN.isChefLoopDisable == false) &&
             ((float) fp->mv.gw.SpecialN.maxSausage <

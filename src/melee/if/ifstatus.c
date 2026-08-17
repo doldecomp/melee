@@ -426,7 +426,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     }
 
     /* Update colors when damage changes */
-    if ((s16) state->old_damage != (s16) state->damage_percent) {
+    if (state->old_damage != state->damage_percent) {
         if (Player_GetMoreFlagsBit2((s8) state->player_slot)) {
             /* Stamina mode: 0-100% range */
             clamped_damage = state->damage_percent;
@@ -918,7 +918,7 @@ void ifStatus_802F66A4(void)
 void ifStatus_802F6788(u8 player_idx)
 {
     IfDamageState* player_hud;
-    s8 p_idx = (u8) player_idx;
+    s8 p_idx = player_idx;
     player_hud = &ifStatus_GetHUDInfo()->players[p_idx & 0xFF];
     if (player_hud->HUD_parent_entity != NULL) {
         HSD_GObjPLink_80390228(player_hud->HUD_parent_entity);

@@ -309,7 +309,7 @@ void mnDataDel_8024EEC0(void)
         HSD_JObj* yes;
         lb_80011E24(root, &yes, WARN_JOINT_CURSOR_YES, -1);
         lb_80011E24(root, &no, WARN_JOINT_CURSOR_NO, -1);
-        if ((s32) cursor != 0) {
+        if (cursor != 0) {
             HSD_JObjReqAnimAll(yes, 1.0f);
             HSD_JObjReqAnimAll(no, 0.0f);
         } else {

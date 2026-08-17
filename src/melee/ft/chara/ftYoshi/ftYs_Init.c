@@ -377,7 +377,7 @@ void ftYs_Init_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg)
 
     attr_r26 = fp->ft_data->ext_attr;
     index = (unk_struct1 = unk_struct_arg)->unk_struct->xC_start_index;
-    ptr2EndIndex = (s32*) (&unk_struct1->unk_struct->x8_end_index);
+    ptr2EndIndex = (&unk_struct1->unk_struct->x8_end_index);
     zero_float = 0.0f;
 
     for (i = 0; i < *ptr2EndIndex; i++) {
@@ -416,7 +416,7 @@ void ftYs_Init_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
         s32 i;
 
         index = unk_struct->xC_start_index;
-        ptr2EndIndex = (s32*) &unk_struct->x8_end_index;
+        ptr2EndIndex = (&unk_struct->x8_end_index);
 
         for (i = 0; i < *ptr2EndIndex; i++) {
             HSD_DObj* dobj_r3 = fp->dobj_list.data[index[i]];

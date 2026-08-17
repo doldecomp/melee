@@ -134,7 +134,7 @@ void it_802DC990(Item_GObj* gobj)
     ip->x40_vel.y = 0.0f;
     coll_inline(ip);
     it_802756E0(gobj);
-    if ((s32) ip->xDD4_itemVar.nokonoko.x20 == 0) {
+    if (ip->xDD4_itemVar.nokonoko.x20 == 0) {
         ip->xDD4_itemVar.nokonoko.x20 = (s32) (da->x8 / da->x0->x4);
     }
     it_802DD4A8(gobj, 2, ITEM_ANIM_UPDATE);

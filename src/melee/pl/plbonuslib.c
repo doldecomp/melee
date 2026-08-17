@@ -921,7 +921,7 @@ void fn_8003F294(int slot, int index)
                 threshold = pl_804D6470->x1C, stats->hits.total, &table->xDAC);
     pl_8003906C(slot, 0x13, 0L, pl_804D6470->x2C, threshold = pl_804D6470->x30,
                 stats->attacks.total, &table->xDB0);
-    threshold = (unsigned int) pl_804D6470->xE4;
+    threshold = pl_804D6470->xE4;
     pl_8003906C(slot, 0x5C, 0L, pl_804D6470->xE0, threshold, table->xD70,
                 &table->xDB4);
     pl_8003906C(slot, 0x99, 0L, pl_804D6470->x130,

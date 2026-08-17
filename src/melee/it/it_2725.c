@@ -645,8 +645,7 @@ void it_80273670(Item_GObj* item_gobj, int arg1, f32 arg8)
         }
         desc = item->xD0_itemStateDesc;
         HSD_JObjAddAnimAll(item_jobj1, desc->x0_anim_joint,
-                           desc->x4_matanim_joint,
-                           (HSD_ShapeAnimJoint*) desc->x8_parameters);
+                           desc->x4_matanim_joint, desc->x8_parameters);
         lb_8000BA0C(item_jobj1, item->x5D0_animFrameSpeed);
         HSD_JObjReqAnimAll(item_jobj1, arg8);
     }

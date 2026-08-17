@@ -90,7 +90,7 @@ void ftCo_800D331C(Fighter_GObj* gobj)
                 temp_r3_2->x2180 = fp->player_id;
             }
         } else if (!fp->x221F_b4) {
-            pl_8004065C((u8) ftLib_80086BE0(fp->victim_gobj),
+            pl_8004065C(ftLib_80086BE0(fp->victim_gobj),
                         ftLib_800874BC(fp->victim_gobj));
         }
     }

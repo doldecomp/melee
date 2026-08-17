@@ -162,7 +162,7 @@ void mnSoundTest_8024A790(mnSoundTest_GObj* arg0)
         mnSoundTest_804D6C48 = temp_r30;
     } else {
         temp_r3 = gm_801601C4(gmMainLib_8015ED74());
-        if (temp_r3 != (s32) mnSoundTest_804D6C48) {
+        if (temp_r3 != mnSoundTest_804D6C48) {
             lbAudioAx_80024614(temp_r3);
             mnSoundTest_804D6C48 = temp_r3;
         }
@@ -175,7 +175,7 @@ void mnSoundTest_8024A790(mnSoundTest_GObj* arg0)
         return;
     }
     temp_r3_2 = gm_80160244(gmMainLib_8015ED74());
-    if (temp_r3_2 != (s32) mnSoundTest_804D6C4C) {
+    if (temp_r3_2 != mnSoundTest_804D6C4C) {
         lbAudioAx_800245F4(temp_r3_2);
         mnSoundTest_804D6C4C = temp_r3_2;
     }
@@ -399,7 +399,7 @@ void fn_8024AED0(mnSoundTest_GObj* arg0)
 
     soundtest_user_data* user_data = mnSoundTest_804D6C40->user_data;
     PAD_STACK(28);
-    if ((u16) mn_804D6BC8.cooldown != 0) {
+    if (mn_804D6BC8.cooldown != 0) {
         Menu_DecrementAnimTimer();
         return;
     }
@@ -433,7 +433,7 @@ void fn_8024AED0(mnSoundTest_GObj* arg0)
             lbAudioAx_80023694();
         }
     }
-    if ((u8) mnSoundTest_804D6C44 == 0) {
+    if (mnSoundTest_804D6C44 == 0) {
         temp_r3_3 = lbAudioAx_80023968(data_3[user_data->unk3]);
         temp_r5 = 0 & 0;
         if (events & MenuInput_AButton) {
@@ -490,7 +490,7 @@ static inline void mnSoundTest_ToggleView(soundtest_user_data* ud)
     s32 state;
     mnSoundTest_GObj* gobj;
 
-    state = ((u8) ud->unk0 == 0) ? 1 : 0;
+    state = (ud->unk0 == 0) ? 1 : 0;
     ud->unk0 = state;
     ud = (soundtest_user_data*) (u32) ud->unk0;
     gobj = mnSoundTest_804D6C40;
@@ -506,7 +506,7 @@ static inline void mnSoundTest_PlaySampleAnim(HSD_JObj* jobj, HSD_JObj** pj,
     HSD_JObjReqAnimAll(*pj, mn_8022F298(*pj));
     mn_8022F3D8(*pj, 0xFFU, MOBJ_MASK);
     HSD_JObjAnimAll(*pj);
-    sound_kind = data_2[*(u8*) p].idx;
+    sound_kind = data_2[*p].idx;
     if (lbAudioAx_80023090(sound_kind) != 0) {
         gmMainLib_8015ED68(sound_kind);
     }
@@ -546,7 +546,7 @@ void fn_8024B2B0(mnSoundTest_GObj* arg0)
     soundtest_user_data* menu_data;
 
     user_data = mnSoundTest_804D6C40->user_data;
-    if ((u16) mn_804D6BC8.cooldown != 0) {
+    if (mn_804D6BC8.cooldown != 0) {
         mn_804D6BC8.cooldown -= 1;
         mn_804D6BC8.x2 = 0;
         mn_804D6BC8.x4 = 0;
@@ -583,10 +583,10 @@ void fn_8024B2B0(mnSoundTest_GObj* arg0)
             lbAudioAx_80023694();
         }
     }
-    if ((u8) mnSoundTest_804D6C44 != 0) {
+    if (mnSoundTest_804D6C44 != 0) {
         return;
     }
-    if ((u8) user_data->unk0 == 0) {
+    if (user_data->unk0 == 0) {
         if (inputs & MenuInput_AButton) {
             if ((u32) user_data->unk2 == (sound_id = user_data->unk1)) {
                 md2 = mnSoundTest_804D6C40->user_data;
@@ -599,8 +599,8 @@ void fn_8024B2B0(mnSoundTest_GObj* arg0)
                 audio_id = mnSoundTest_GetAudioVolume();
                 lbAudioAx_80024614(audio_id);
                 mnSoundTest_804D6C48 = audio_id;
-                p = (u8*) &text_ids[sound_id];
-                lbAudioAx_80023F28(data_2[*(u8*) p].idx);
+                p = (&text_ids[sound_id]);
+                lbAudioAx_80023F28(data_2[*p].idx);
                 user_data->unk2 = sound_id;
                 mnSoundTest_PlaySampleAnim((HSD_JObj*) arg0, &sp54, p);
             }
@@ -617,7 +617,7 @@ void fn_8024B2B0(mnSoundTest_GObj* arg0)
             mnSoundTest_8024A958(mnSoundTest_804D6C40);
         } else if (inputs & MenuInput_Right) {
             user_data->unk1 += 1;
-            if ((u8) user_data->unk1 >= 0x50U) {
+            if (user_data->unk1 >= 0x50U) {
                 user_data->unk1 = 0U;
             }
             mnSoundTest_8024A958(mnSoundTest_804D6C40);
@@ -723,20 +723,20 @@ void fn_8024B8B4(mnSoundTest_GObj* arg0, f32 farg0)
         HSD_JObjAnim(sp14);
         return;
     }
-    if ((u8) user_data->unk0 == 0) {
+    if (user_data->unk0 == 0) {
         lb_80011E24(jobj, &sp20, 5, -1);
-        var_f1 = mn_8022EC18(sp20, (AnimLoopSettings*) &vec_2, MOBJ_MASK);
+        var_f1 = mn_8022EC18(sp20, (&vec_2), MOBJ_MASK);
     }
-    if ((u8) user_data->unk0 != 0) {
+    if (user_data->unk0 != 0) {
         lb_80011E24(jobj, &sp20, 0xE, -1);
-        var_f1 = mn_8022EC18(sp20, (AnimLoopSettings*) &vec_2, MOBJ_MASK);
+        var_f1 = mn_8022EC18(sp20, (&vec_2), MOBJ_MASK);
     }
-    if ((u8) user_data->unk2 != 0x50) {
+    if (user_data->unk2 != 0x50) {
         lb_80011E24(jobj, &sp10, 4, -1);
-        var_f1 = mn_8022EC18(sp10, (AnimLoopSettings*) &vec_4, MOBJ_MASK);
+        var_f1 = mn_8022EC18(sp10, (&vec_4), MOBJ_MASK);
     }
     lb_80011E24(jobj, &sp10, 0xD, -1);
-    mn_8022EC18(sp10, (AnimLoopSettings*) &vec_5, MOBJ_MASK);
+    mn_8022EC18(sp10, (&vec_5), MOBJ_MASK);
 }
 
 void fn_8024BAF0(mnSoundTest_GObj* arg0)
@@ -872,7 +872,7 @@ HSD_GObjProc* mnSoundTest_8024BEE0(s32 arg0)
     archive = mn_804D6BB8;
     mnSoundTest_804D6C44 = 1;
     lbArchive_LoadSections(
-        archive, (void**) &mnSoundTest_804A08C8.joint, mnSoundTest_803EF528,
+        archive, (&mnSoundTest_804A08C8.joint), mnSoundTest_803EF528,
         &mnSoundTest_804A08C8.animjoint, mnSoundTest_803EF540,
         &mnSoundTest_804A08C8.matanim_joint, mnSoundTest_803EF55C,
         &mnSoundTest_804A08C8.shapeanim_joint, mnSoundTest_803EF57C, 0);

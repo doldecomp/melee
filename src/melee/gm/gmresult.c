@@ -956,11 +956,11 @@ void fn_80175880(s32 slot)
             (me->is_teams == 1 &&
              me->team_standings[me->player_standings[slot].team]
                      .is_big_loser == 0 &&
-             ((s8) me->player_standings[slot].stocks > 0 ||
+             (me->player_standings[slot].stocks > 0 ||
               (me->player_standings[slot].x28 == me->frame_count &&
-               (s8) me->player_standings[lbl_8046DBE8.x6].stocks == 0))) ||
+               me->player_standings[lbl_8046DBE8.x6].stocks == 0))) ||
             (gm_801743A4(me->result) &&
-             ((s8) me->player_standings[slot].stocks > 0 ||
+             (me->player_standings[slot].stocks > 0 ||
               me->player_standings[slot].score ==
                   me->player_standings[lbl_8046DBE8.x6].score)))
         {

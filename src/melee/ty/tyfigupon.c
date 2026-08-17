@@ -827,7 +827,7 @@ void _tyFigupon_80316420(s32 arg0)
                 data->x0, (void (*)(HSD_GObj*)) _tyFigupon_80315574, 0);
         }
         data->x24 = 0x12C;
-        ((TyFiguponData*) _tyFigupon_804D6EF0)->x18->hidden = 0;
+        (_tyFigupon_804D6EF0)->x18->hidden = 0;
     }
 }
 static const Vec3 _tyFigupon_803B8968 = { 0.0f, 1.0f, 0.0f };
@@ -1592,7 +1592,7 @@ void tyFigupon_OnEnter_80317D80(void* arg0)
         }
         ef4->x5E = has_coin_credit;
     }
-    _tyFigupon_803153EC((s8) ef4->x5E, 6, 2, 0, 0);
+    _tyFigupon_803153EC(ef4->x5E, 6, 2, 0, 0);
     tyFigupon_UpdateRemainingCount(ef4);
     setupPercentDisplay(ef4);
     HSD_PadRenewStatus();

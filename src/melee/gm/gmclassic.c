@@ -420,7 +420,7 @@ static gmClassicMatchup* gmClassic_801B2BA4(gmClassicMatchup* arg0, u8* arg1,
     s32 stage1;
 
     result = NULL;
-    target_char = (s8) gmMainLib_8015CDC8()->c_kind;
+    target_char = gmMainLib_8015CDC8()->c_kind;
     order = arg1;
     outer = 0;
 
@@ -495,7 +495,7 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
     gm_803DDEC8Struct* ptr;
     gmClassicSceneData* scene_data = (gmClassicSceneData*) gm_803DDC58_Scenes;
 
-    for (ptr = arg0; (u8) ptr->x0 != 0xD; ptr++) {
+    for (ptr = arg0; ptr->x0 != 0xD; ptr++) {
         if (ptr->x1 & 8) {
             gmClassicMatchup* result =
                 gmClassic_801B2BA4(scene_data->matchups.x2B0, o->x80, arg0);
@@ -508,7 +508,7 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
         }
     }
 
-    for (ptr = arg0; (u8) ptr->x0 != 0xD; ptr++) {
+    for (ptr = arg0; ptr->x0 != 0xD; ptr++) {
         u8 flags = ptr->x1;
         if ((flags & 2) && !(flags & 0x20)) {
             gmClassicMatchup* result =
@@ -522,7 +522,7 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
         }
     }
 
-    for (ptr = arg0; (u8) ptr->x0 != 0xD; ptr++) {
+    for (ptr = arg0; ptr->x0 != 0xD; ptr++) {
         u8 flags = ptr->x1;
         if ((flags & 0x10) && !(flags & 0x20)) {
             gmClassicMatchup* result =
@@ -536,7 +536,7 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
         }
     }
 
-    for (ptr = arg0; (u8) ptr->x0 != 0xD; ptr++) {
+    for (ptr = arg0; ptr->x0 != 0xD; ptr++) {
         u8 flags = ptr->x1;
         if (flags == 0 || flags == 4) {
             gmClassicMatchup* result =
@@ -550,8 +550,8 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
         }
     }
 
-    for (ptr = arg0; (u8) ptr->x0 != 0xD; ptr++) {
-        if ((u8) ptr->x1 == 0x80) {
+    for (ptr = arg0; ptr->x0 != 0xD; ptr++) {
+        if (ptr->x1 == 0x80) {
             u8 x2val = ptr->x2;
             switch ((s32) x2val) {
             case 1:
@@ -567,7 +567,7 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
         }
     }
 
-    for (ptr = arg0; (u8) ptr->x0 != 0xD; ptr++) {
+    for (ptr = arg0; ptr->x0 != 0xD; ptr++) {
         if (ptr->x1 & 0x20) {
             ptr->xC = scene_data->matchups.x0C0;
             return ptr;
@@ -848,7 +848,7 @@ void gmClassic_801B3A34(GameScene* arg0)
     sp8 = (u16) gm_8017BE84(arg0->idx);
     spC = temp_r28;
     gm_8017CE34(new_var, (UnkAdventureData*) temp_r29, temp_r31->xC->x02,
-                temp_r31->x6, 1, 0, temp_r31->x4, (int) var_r27, sp8, spC);
+                temp_r31->x6, 1, 0, temp_r31->x4, var_r27, sp8, spC);
     gm_8016F088(new_var);
 }
 
@@ -915,12 +915,12 @@ void gmClassic_801B3B40(GameScene* arg0)
             }
             {
                 u32 diff = sp14 - sp18;
-                if ((u32) *time_ptr < diff) {
+                if ((*time_ptr) < diff) {
                     *time_ptr = sp14 - sp18;
                 }
             }
         } else if (sp18 == 0) {
-            if ((u32) *time_ptr > mei->match_end.frame_count) {
+            if ((*time_ptr) > mei->match_end.frame_count) {
                 *time_ptr = mei->match_end.frame_count;
             }
         }

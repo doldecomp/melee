@@ -634,7 +634,7 @@ void lb_8000C868(HSD_Joint* arg0, HSD_JObj* arg1, HSD_JObj* arg2, float arg8,
         spB4.x = arg1->rotate.x;
         spB4.y = arg1->rotate.y;
         spB4.z = arg1->rotate.z;
-        EulerToQuat(&spB4, (Quaternion*) &sp94);
+        EulerToQuat(&spB4, (&sp94));
     }
 
     sum.x = SQ(spA4.x + sp94.x);

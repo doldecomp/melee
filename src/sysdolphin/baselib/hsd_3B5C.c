@@ -154,19 +154,19 @@ static inline s32 hsd_803B5C4C_read(s32 bits, s32 bit_count)
     u8* scratch_r3;
 
     do {
-        if ((s32) hsd_804D79C4 == 0) {
+        if (hsd_804D79C4 == 0) {
             hsd_804D79C4 = 8;
-            if ((u8*) hsd_804D79B8 >= &hsd_804D79BC[hsd_804D79C0]) {
+            if (hsd_804D79B8 >= &hsd_804D79BC[hsd_804D79C0]) {
                 longjmp(jmp_buf, 1);
             }
             scratch_r3 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r3 + 1;
             hsd_804D79C8 = *scratch_r3;
-            if ((u8) hsd_804D79C8 == 0xFF) {
-                if ((u8) *hsd_804D79B8 != 0) {
+            if (hsd_804D79C8 == 0xFF) {
+                if ((*hsd_804D79B8) != 0) {
                     longjmp(jmp_buf, 1);
                 } else {
-                    if ((u8*) hsd_804D79B8 >= &hsd_804D79BC[hsd_804D79C0]) {
+                    if (hsd_804D79B8 >= &hsd_804D79BC[hsd_804D79C0]) {
                         longjmp(jmp_buf, 1);
                     }
                     hsd_804D79B8 += 1;
@@ -743,37 +743,37 @@ loop_11:
             scratch_r5_9 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_9 + 1;
             M2C_FIELD((quant_table + M2C_FIELD(work_r4_2, u8*, 0)), u8*,
-                      0x40) = (u8) *scratch_r5_9;
+                      0x40) = (*scratch_r5_9);
             scratch_r5_10 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_10 + 1;
             M2C_FIELD((quant_table + work_r4_2[1]), u8*, 0x40) =
-                (u8) *scratch_r5_10;
+                (*scratch_r5_10);
             scratch_r5_11 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_11 + 1;
             M2C_FIELD((quant_table + work_r4_2[2]), u8*, 0x40) =
-                (u8) *scratch_r5_11;
+                (*scratch_r5_11);
             scratch_r5_12 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_12 + 1;
             M2C_FIELD((quant_table + work_r4_2[3]), u8*, 0x40) =
-                (u8) *scratch_r5_12;
+                (*scratch_r5_12);
             scratch_r5_13 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_13 + 1;
             M2C_FIELD((quant_table + work_r4_2[4]), u8*, 0x40) =
-                (u8) *scratch_r5_13;
+                (*scratch_r5_13);
             scratch_r5_14 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_14 + 1;
             M2C_FIELD((quant_table + work_r4_2[5]), u8*, 0x40) =
-                (u8) *scratch_r5_14;
+                (*scratch_r5_14);
             scratch_r5_15 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_15 + 1;
             M2C_FIELD((quant_table + work_r4_2[6]), u8*, 0x40) =
-                (u8) *scratch_r5_15;
+                (*scratch_r5_15);
             scratch_r5_16 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_16 + 1;
             scratch_r0_3 = work_r4_2[7];
             work_r4_2 += 8;
             M2C_FIELD((quant_table + scratch_r0_3), u8*, 0x40) =
-                (u8) *scratch_r5_16;
+                (*scratch_r5_16);
         }
     } else {
         scratch_r0_4 = hsd_804D79B8 + 1;
@@ -815,8 +815,8 @@ loop_24:
             goto loop_24;
         }
     }
-    for (work_r25 = 0; work_r25 < (s32) work_r28; work_r25 += 0x10) {
-        for (work_r26 = 0; work_r26 < (s32) work_r29; work_r26 += 0x10) {
+    for (work_r25 = 0; work_r25 < work_r28; work_r25 += 0x10) {
+        for (work_r26 = 0; work_r26 < work_r29; work_r26 += 0x10) {
             work_r24 = &base[0x118];
             for (work_r23 = 0; work_r23 < 4; work_r23++) {
                 hsd_803B5EA0(0);
@@ -920,8 +920,7 @@ loop_24:
                 work_r4_5 += 0x20;
             }
             fn_803B61B4(&base[0x618]);
-            fn_803B6820((u8*) arg2, work_r26, work_r25, (s32) work_r29,
-                        (s32) work_r28);
+            fn_803B6820((u8*) arg2, work_r26, work_r25, work_r29, work_r28);
         }
     }
     return work_r29 * work_r28 * 2;

@@ -398,15 +398,15 @@ static void mnStageSw_80236178(MnStageSwData* data, u8 idx)
     delta = HSD_JObjGetTranslationY(data->x30) -
             HSD_JObjGetTranslationY(data->x2C);
 
-    if ((u8) idx < 15) {
+    if (idx < 15) {
         ref_jobj = data->x2C;
         HSD_JObjSetTranslateX(jobj, HSD_JObjGetTranslationX(ref_jobj));
-        HSD_JObjSetTranslateY(jobj, delta * (f32) (u8) idx +
+        HSD_JObjSetTranslateY(jobj, delta * (f32) idx +
                                         HSD_JObjGetTranslationY(data->x2C));
     } else {
         ref_jobj = data->x34;
         HSD_JObjSetTranslateX(jobj, HSD_JObjGetTranslationX(ref_jobj));
-        HSD_JObjSetTranslateY(jobj, delta * (f32) ((u8) idx - 15) +
+        HSD_JObjSetTranslateY(jobj, delta * (f32) (idx - 15) +
                                         HSD_JObjGetTranslationY(data->x2C));
     }
 }
@@ -620,7 +620,7 @@ static void fn_80236998(HSD_GObj* gobj)
             changed_hovered = 1;
         }
         if (data->x2[mn_804A04F0.hovered_selection] !=
-            (u8) mn_804A04F0.confirmed_selection)
+            mn_804A04F0.confirmed_selection)
         {
             changed_confirmed = 1;
         }

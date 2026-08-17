@@ -141,9 +141,9 @@ void it_8026B344(HSD_GObj* gobj,
     Item* ip;
 
     ip = gobj->user_data;
-    pos->x = (f32) ((ip->facing_dir * ip->xBCC_unk.x) + ip->pos.x);
-    pos->y = (f32) (ip->pos.y + ip->xBCC_unk.y);
-    pos->z = (f32) ip->pos.z;
+    pos->x = ((ip->facing_dir * ip->xBCC_unk.x) + ip->pos.x);
+    pos->y = (ip->pos.y + ip->xBCC_unk.y);
+    pos->z = ip->pos.z;
 }
 
 f32 itGetGrabRangeX(HSD_GObj* gobj) // Return item's X-Axis grab range?
@@ -1101,7 +1101,7 @@ bool it_8026C1E8(HSD_GObj* gobj)
 void it_8026C220(HSD_GObj* gobj, HSD_GObj* fighter_gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xCB0_source_ply = (u8) ftLib_80086BE0(fighter_gobj);
+    ip->xCB0_source_ply = ftLib_80086BE0(fighter_gobj);
 }
 
 /// Find the closest item to the given position?

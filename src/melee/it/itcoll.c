@@ -1106,7 +1106,7 @@ void it_8027163C(Item_GObj* item_gobj)
         item->xAC8_hurtboxNum = 0;
     }
     if (it_dynams != NULL) {
-        if ((s32) it_dynams->count > 2) {
+        if (it_dynams->count > 2) {
             HSD_ASSERTREPORT(0x415, 0, "item dynamics hit num over!\n");
         }
         cnt = 0U;

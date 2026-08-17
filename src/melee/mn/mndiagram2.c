@@ -207,7 +207,7 @@ void mnDiagram2_UpdateHeader(HSD_GObj* gobj, u8 is_name_mode, u8 entity_idx)
             HSD_JObjRemoveAll(jobj);
         }
         HSD_JObjAddChild(data->x18, mnDiagram_CreateFighterIcon(
-                                        (u8) nametag_slot_or_selkind, 0));
+                                        nametag_slot_or_selkind, 0));
     }
 
     if (data->header_text != NULL) {
@@ -795,9 +795,9 @@ void mnDiagram2_PopulateStatRows(HSD_GObj* gobj, u8 scroll_offset,
     int var_r28;
 
     if (is_name_mode != 0) {
-        var_r28 = (u8) mnDiagram_GetNameByIndex(entity_idx);
+        var_r28 = mnDiagram_GetNameByIndex(entity_idx);
     } else {
-        var_r28 = (u8) mnDiagram_GetFighterByIndex(entity_idx);
+        var_r28 = mnDiagram_GetFighterByIndex(entity_idx);
     }
 
     if (is_name_mode != 0) {
@@ -807,7 +807,7 @@ void mnDiagram2_PopulateStatRows(HSD_GObj* gobj, u8 scroll_offset,
     }
 
     i = 0;
-    idx = (u8) scroll_offset;
+    idx = scroll_offset;
     do {
         int val;
         if (idx >= limit) {
@@ -908,7 +908,7 @@ void mnDiagram2_UpdateScrollArrows(HSD_GObj* gobj)
     mn_8022ED6C(jobj, &base->anim[1]);
     if (data->is_name_mode != 0) {
         if (data->selected_name_idx !=
-            (u8) mnDiagram_GetNextNameIndex(data->selected_name_idx))
+            mnDiagram_GetNextNameIndex(data->selected_name_idx))
         {
             HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         } else {
@@ -916,7 +916,7 @@ void mnDiagram2_UpdateScrollArrows(HSD_GObj* gobj)
         }
     } else {
         if (data->selected_fighter_idx !=
-            (u8) mnDiagram_GetNextFighterIndex(data->selected_fighter_idx))
+            mnDiagram_GetNextFighterIndex(data->selected_fighter_idx))
         {
             HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         } else {
@@ -1116,7 +1116,7 @@ u8 mnDiagram2_GetRankedFighter(u8 stat_type, u8 rank)
     neg1 = -1;
 
     for (i = 0; i < SELKIND_COUNT; i++) {
-        selkind = (u8) mnDiagram_GetFighterByIndex(i);
+        selkind = mnDiagram_GetFighterByIndex(i);
         ptr->idx = selkind;
         if (mn_IsFighterUnlocked(selkind) != 0) {
             ptr->xC = mnDiagram2_GetStatValue(0, stat_type, selkind);

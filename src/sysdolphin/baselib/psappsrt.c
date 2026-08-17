@@ -46,7 +46,7 @@ HSD_psAppSRT* psAddGeneratorAppSRT(s32 status, u16 idnum)
         srt->gp = NULL;
         srt->idnum = idnum;
         hsd_804D78DE += 1;
-        if ((u16) hsd_804D78DE > (u16) hsd_804D78D8) {
+        if (hsd_804D78DE > hsd_804D78D8) {
             hsd_804D78D8 = hsd_804D78DE;
         }
     }
@@ -69,7 +69,7 @@ int psAttachParticleAppSRT(HSD_Particle* pp, HSD_psAppSRT* srt)
         return -1;
     }
     pp->appsrt = srt;
-    return (u16) ++srt->usedCount;
+    return (++srt->usedCount);
 }
 
 int psAttachGeneratorAppSRT(HSD_Generator* gp, HSD_psAppSRT* srt)
@@ -78,7 +78,7 @@ int psAttachGeneratorAppSRT(HSD_Generator* gp, HSD_psAppSRT* srt)
         return -1;
     }
     gp->appsrt = srt;
-    return (u16) ++srt->usedCount;
+    return (++srt->usedCount);
 }
 
 int psRemoveParticleAppSRT(HSD_Particle* pp)

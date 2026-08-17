@@ -433,7 +433,7 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     gc = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_80018C6C();
     slot_idx = 1;
-    gc->entries[0].char_id = (s32) (s8) arg0->x0.ckind;
+    gc->entries[0].char_id = (s32) arg0->x0.ckind;
     gc->entries[0].color = arg0->x0.color;
     lbDvd_80018254();
     lbDvd_80018C2C(0xC7);
@@ -454,7 +454,7 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     gc->stkind = opp_data->x2;
     lbDvd_80018254();
 
-    audio = lbAudioAx_80026E84((CharacterKind) (s8) arg0->x0.ckind);
+    audio = lbAudioAx_80026E84((CharacterKind) arg0->x0.ckind);
     {
         s8* cp = chars_ptr;
         for (i = 0; i < 3; i++) {
@@ -522,13 +522,13 @@ void gm_801B5624(GameScene* arg0)
     data->rules.x14 = ((s32) allstar->x9C % 60) + 1;
     data->rules.x20 &= 0xFFFFFFFFFFFBFCFFULL;
 
-    if ((u8) arg0->idx == 0) {
+    if (arg0->idx == 0) {
         data->players[0].xC_b1 = 1;
     } else {
         data->players[0].xC_b1 = 0;
     }
 
-    if ((u8) arg0->idx == 0x60) {
+    if (arg0->idx == 0x60) {
         u8* cpu_level = &allstar->x0.cpu_level;
         f32 f31;
         f32 f30;
@@ -571,7 +571,7 @@ void gm_801B59AC(GameScene* arg0)
     }
     data->x74 = exit->match_end.player_standings[0].percent;
     data->x9C += exit->match_end.frame_count;
-    if (gm_8017D7AC(exit, &data->x0, 0x69) != 0 && (u8) arg0->idx == 0x60) {
+    if (gm_8017D7AC(exit, &data->x0, 0x69) != 0 && arg0->idx == 0x60) {
         gm_8017CBAC((UnkAdventureData*) data, gmMainLib_8015CDE0(), 0x17);
     }
 }

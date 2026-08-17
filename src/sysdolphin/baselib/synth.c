@@ -1199,7 +1199,7 @@ extern s32 HSD_Synth_804D7764;
 void HSD_Synth_8038AD74(u32 offset, uintptr_t src)
 {
     HSD_DevComRequest(HSD_Synth_804D7764, src,
-                      HSD_Synth_804D7780 + ((u32) HSD_Synth_804D7768 << 16),
+                      HSD_Synth_804D7780 + (HSD_Synth_804D7768 << 16),
                       lbl_804C4540[HSD_Synth_804D7768].x0, 0x23, 0,
                       HSD_SynthResetStreamCounters, 0);
 }
@@ -1251,8 +1251,7 @@ void HSD_Synth_8038ADD0(void)
     if (node->flags & 8) {
         return;
     }
-    pos = (u32) (*(u32*) ((u8*) node->voice[0] + 0x1B2) -
-                 HSD_Synth_804D7780 * 2) >>
+    pos = (*(u32*) ((u8*) node->voice[0] + 0x1B2) - HSD_Synth_804D7780 * 2) >>
           0x11;
     if (pos != HSD_Synth_804D7774) {
         HSD_Synth_804D7774 = pos;
@@ -1323,16 +1322,16 @@ void HSD_Synth_8038B120(void)
             AXSetVoiceSrc(node->voice[i], &HSD_Synth_80407FD8);
             AXSetVoiceCurrentAddr(
                 node->voice[i],
-                (HSD_Synth_804D7780 + ((u32) HSD_Synth_804D7768 << 16)) * 2 +
+                (HSD_Synth_804D7780 + (HSD_Synth_804D7768 << 16)) * 2 +
                     i * lbl_804C4540[HSD_Synth_804D7768].x0 + 2);
             AXSetVoiceEndAddr(
                 node->voice[i],
-                (HSD_Synth_804D7780 + ((u32) HSD_Synth_804D7768 << 16)) * 2 +
+                (HSD_Synth_804D7780 + (HSD_Synth_804D7768 << 16)) * 2 +
                     i * lbl_804C4540[HSD_Synth_804D7768].x0 +
                     lbl_804C4540[HSD_Synth_804D7768].x4);
             AXSetVoiceLoopAddr(
                 node->voice[i],
-                (HSD_Synth_804D7780 + ((u32) HSD_Synth_804D7768 << 16)) * 2 +
+                (HSD_Synth_804D7780 + (HSD_Synth_804D7768 << 16)) * 2 +
                     i * lbl_804C4540[HSD_Synth_804D7768].x0 + 2);
             AXSetVoiceState(node->voice[i], 1);
         }
@@ -1354,7 +1353,7 @@ void HSD_Synth_8038B120(void)
 void HSD_SynthPStreamFirstHakoHeaderCallback(void)
 {
     HSD_DevComRequest(HSD_Synth_804D7764, 0xA0,
-                      HSD_Synth_804D7780 + ((u32) HSD_Synth_804D7768 << 16),
+                      HSD_Synth_804D7780 + (HSD_Synth_804D7768 << 16),
                       lbl_804C4540[HSD_Synth_804D7768].x0, 0x23, 0,
                       (HSD_DevComCallback) HSD_Synth_8038B120, 0);
 }

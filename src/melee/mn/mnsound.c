@@ -127,7 +127,7 @@ void mnSound_802492CC(HSD_GObj* gobj)
     if (events & (MenuInput_Up | MenuInput_Down)) {
         // switch between the two
         sfxMove();
-        if ((u8) menu->unk2 == 0) {
+        if (menu->unk2 == 0) {
             menu->unk2 = 1;
         } else {
             menu->unk2 = 0;
@@ -180,8 +180,8 @@ static inline void mnSound_80249A1C_OnSoundSelected(HSD_GObj* gobj,
     AnimLoopSettings* anim = mnSound_803EEED8;
     Menu* menu = GET_MENU(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    if ((u8) menu->unk2 == 0) {
-        if ((u8) menu->unk1 == 0) {
+    if (menu->unk2 == 0) {
+        if (menu->unk1 == 0) {
             lb_80011E24(jobj, jobj_out, 0xA, -1);
         } else {
             lb_80011E24(jobj, jobj_out, 9, -1);
@@ -227,7 +227,7 @@ void fn_80249A1C(HSD_GObj* arg0)
     temp_r4 = menu->cursor;
     if (temp_r4 != 0) {
         menu->cursor = (u8) (temp_r4 - 1);
-        if ((u8) menu->cursor != 0) {
+        if (menu->cursor != 0) {
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             return;
         }
@@ -261,8 +261,8 @@ void mnSound_80249C08(int unused)
     PAD_STACK(24);
     mnSound_804D6C30 = gobj;
     jobj = HSD_JObjLoadJoint(model->joint);
-    HSD_GObjObject_80390A70((HSD_GObj*) gobj, (u8) HSD_GObj_804D7849, jobj);
-    GObj_SetupGXLink((HSD_GObj*) gobj, HSD_GObj_JObjCallback, 4U, 0x80);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4U, 0x80);
     HSD_JObjAddAnimAll(jobj, model->animjoint, model->matanim_joint,
                        model->shapeanim_joint);
     HSD_JObjReqAnimAll(jobj, 0.0F);

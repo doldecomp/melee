@@ -330,7 +330,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         if (kb_level_base < 2) {
             goto block_17;
         }
-        if ((u32) fp->dmg.x1860_element != HitElement_Ice) {
+        if (fp->dmg.x1860_element != HitElement_Ice) {
             goto block_17;
         }
         kb_angle = calcAngle(kb_angle);
@@ -429,7 +429,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
         if (kb_level_base < 2) {
             goto block_42;
         }
-        if ((u32) fp->dmg.x1860_element != HitElement_Ice) {
+        if (fp->dmg.x1860_element != HitElement_Ice) {
             goto block_42;
         }
         msid = 0x5A;
@@ -467,7 +467,7 @@ block_63:
     fp->x670_timer_lstick_tilt_x = 0xFE;
     fp->x671_timer_lstick_tilt_y = 0xFE;
     fp->post_hitlag_cb = ftCo_Damage_OnExitHitlag;
-    fp->dmg.x18A8 = (float) fp->dmg.kb_applied;
+    fp->dmg.x18A8 = fp->dmg.kb_applied;
     fp->x221C_b6 = true;
     fp->dmg.x18ac_time_since_hit = (s32) 0;
     if (msid == 0x5B) {
@@ -535,7 +535,7 @@ block_83:
     if (kb_level_base < 2) {
         return;
     }
-    if ((u32) fp->dmg.x1860_element == HitElement_Ice) {
+    if (fp->dmg.x1860_element == HitElement_Ice) {
         ftCo_DamageIce_Init(gobj);
     }
 }
@@ -974,7 +974,7 @@ void ftCo_8008F744(Fighter_GObj* gobj)
             fp->x2098 = p_ftCommonData->x4CC;
             ftCommon_8007F86C(gobj);
             if (ftCo_800C5240(gobj)) {
-                ftCo_800C554C((Fighter*) fp);
+                ftCo_800C554C(fp);
             }
         }
     }

@@ -1650,7 +1650,7 @@ static void order_data_110(void)
 void _tyDisplay_8031B328(void)
 {
     TyDspBgData* ptr = _tyDisplay_804D6F1C;
-    ToyCameraControl* scene = (ToyCameraControl*) Toy_sbss_804D6ED4;
+    ToyCameraControl* scene = Toy_sbss_804D6ED4;
     LightList** lightData;
     HSD_FogDesc* fogDesc;
     TyDspBgData* temp3;
@@ -1776,7 +1776,7 @@ void tyDisplay_OnEnter_8031B460(void* arg0)
 
     cfg->x08 = Toy_GetTrophyTotal();
 
-    if ((s32) _tyDisplay_804D6F20 != 0) {
+    if (_tyDisplay_804D6F20 != 0) {
         cfg->x08 = 1;
         _tyDisplay_8031C1D0();
     }
@@ -1817,7 +1817,7 @@ void tyDisplay_OnEnter_8031B460(void* arg0)
             gobj->gxlink_prios = 0x1230000000000000ULL;
         }
 
-        if ((s32) _tyDisplay_804D6F20 != 0) {
+        if (_tyDisplay_804D6F20 != 0) {
             HSD_GObj_SetupProc(cfg2->x00, (HSD_GObjEvent) _tyDisplay_8031A94C,
                                0);
         } else {
@@ -1830,7 +1830,7 @@ void tyDisplay_OnEnter_8031B460(void* arg0)
     _tyDisplay_8031B328();
     _tyDisplay_8031B1FC();
 
-    if ((s32) _tyDisplay_804D6F20 != 0) {
+    if (_tyDisplay_804D6F20 != 0) {
         memzero(grid, 0x12E4);
         grid->x08_min_z = -3.5f;
         grid->x04_min_x = -3.5f;
@@ -1861,7 +1861,7 @@ void _tyDisplay_8031B850(void)
     TyDspBgData* ptr = _tyDisplay_804D6F1C;
     TyDspConfig* pgobj = _tyDisplay_804D6F18;
     HSD_GObj** temp;
-    ToyCameraControl* scene = (ToyCameraControl*) Toy_sbss_804D6ED4;
+    ToyCameraControl* scene = Toy_sbss_804D6ED4;
     HSD_GObj* gobj;
 
     if (ptr->archive != NULL) {
@@ -2414,7 +2414,7 @@ HSD_JObj* tyDisplay_8031C5E4(s32 arg0)
             cat = 0;
         }
         temp = (char*) matanim_names1.entries[(s8) cat];
-        Toy_80306A48(child, NULL, (char*) temp, NULL, archives[c], entry->x05);
+        Toy_80306A48(child, NULL, temp, NULL, archives[c], entry->x05);
     }
     HSD_JObjRemoveAnimAll(child);
     HSD_JObjSetTranslateX(child, entry->x08);

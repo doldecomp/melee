@@ -348,7 +348,7 @@ void grPushOn_80218888(Ground_GObj* gobj)
 
     if (gp->u.pushon.gobj != 0) {
         i = 0;
-        while (i < (s32) gp->u.pushon.count) {
+        while (i < gp->u.pushon.count) {
             HSD_LObj* lobj = gp->u.pushon.lobjs[i];
             s32 type = lobj->flags & 3;
 

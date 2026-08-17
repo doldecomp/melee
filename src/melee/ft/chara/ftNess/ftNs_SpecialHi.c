@@ -452,8 +452,8 @@ void ftNs_SpecialHiStart_Enter(HSD_GObj* gobj) // Ness's grounded PK Thunder
             phi_f0 = M_PI;
         }
         fp->mv.ns.specialhi.aerialVel = (float) phi_f0;
-        fp->mv.ns.specialhi.facingDir = (float) 1.0f;
-        fp->mv.ns.specialhi.unkVar = (float) 0.0f;
+        fp->mv.ns.specialhi.facingDir = 1.0f;
+        fp->mv.ns.specialhi.unkVar = 0.0f;
         ftAnim_8006EBA4(gobj);
     }
 }
@@ -517,8 +517,8 @@ void ftNs_SpecialAirHiStart_Enter(
         phi_f0 = M_PI;
     }
     fp->mv.ns.specialhi.aerialVel = (float) phi_f0;
-    fp->mv.ns.specialhi.facingDir = (float) 1.0f;
-    fp->mv.ns.specialhi.unkVar = (float) 0.0f;
+    fp->mv.ns.specialhi.facingDir = 1.0f;
+    fp->mv.ns.specialhi.unkVar = 0.0f;
     fp->self_vel.y = 0.0f;
     ftAnim_8006EBA4(gobj);
 }
@@ -584,13 +584,12 @@ void ftNs_SpecialHi_Enter(
 
                         Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialHi, 0,
                                                   0.0f, 1.0f, 0.0f, NULL);
-                        fp->gr_vel =
-                            (float) (ness_attr->x54_PK_THUNDER_2_MOMENTUM *
-                                     fp->facing_dir);
+                        fp->gr_vel = (ness_attr->x54_PK_THUNDER_2_MOMENTUM *
+                                      fp->facing_dir);
                         fp = getFighter(gobj);
                         ness_attr2 = getFtSpecialAttrs(fp);
                         fp->mv.ns.specialhi.unkVar =
-                            (float) ness_attr2->x58_PK_THUNDER_2_UNK1;
+                            ness_attr2->x58_PK_THUNDER_2_UNK1;
                         fighter_data2 = GET_FIGHTER(gobj);
                         ftPartSetRotX(fighter_data2, 0,
                                       (fighter_data2->facing_dir *
@@ -666,10 +665,10 @@ NessFloatMath_PKThunder2(HSD_GObj* gobj) // Required for 0x80118570 to match
     }
     fp->mv.ns.specialhi.facingDir = phi_f0;
     fp->mv.ns.specialhi.aerialVel = atan2f(temp_f1, temp_f2);
-    fp->self_vel.x = (float) (ness_attr->x54_PK_THUNDER_2_MOMENTUM *
-                              cosf(fp->mv.ns.specialhi.aerialVel));
-    fp->self_vel.y = (float) (ness_attr->x54_PK_THUNDER_2_MOMENTUM *
-                              sinf(fp->mv.ns.specialhi.aerialVel));
+    fp->self_vel.x = (ness_attr->x54_PK_THUNDER_2_MOMENTUM *
+                      cosf(fp->mv.ns.specialhi.aerialVel));
+    fp->self_vel.y = (ness_attr->x54_PK_THUNDER_2_MOMENTUM *
+                      sinf(fp->mv.ns.specialhi.aerialVel));
 }
 
 /// Ness's PK Thunder 2 Motion State handler if Ness is launching into
@@ -770,8 +769,8 @@ void ftNs_SpecialHiHold_Anim(HSD_GObj* gobj) // Ness's grounded PK Thunder
         }
     }
     if (fp->u.ns.pkthunder_gobj == NULL) {
-        if (((s32) fp->mv.ns.specialhi.thunderTimerLoop1 <= 0) &&
-            ((s32) fp->mv.ns.specialhi.thunderTimerLoop2 <= 0))
+        if ((fp->mv.ns.specialhi.thunderTimerLoop1 <= 0) &&
+            (fp->mv.ns.specialhi.thunderTimerLoop2 <= 0))
         {
             Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialHiEnd, 0, 0.0f,
                                       1.0f, 0.0f, NULL);
@@ -1061,7 +1060,7 @@ void ftNs_SpecialAirHi_Anim(HSD_GObj* gobj)
             phi_f1 = -temp_f1;
         }
 
-        fp1->self_vel.y = (float) -phi_f1;
+        fp1->self_vel.y = (-phi_f1);
         ftCommon_8007D60C(fp1);
 
         if (ness_attr->x70_PK_THUNDER_2_LANDING_LAG == 0) {
@@ -1380,16 +1379,16 @@ void ftNs_SpecialAirHi_Phys(HSD_GObj* gobj)
     fp->self_vel.y = phi_f31 * sinf(fp->mv.ns.specialhi.aerialVel);
     ftNess_atan2(gobj);
     fp->mv.ns.specialhi.unkVector1 = fp->self_vel;
-    if ((u32) fp->cmd_vars[0] == 1U) {
-        fp->mv.ns.specialhi.fallAccel = (float) fp->mv.ns.specialhi.fallAccel -
+    if (fp->cmd_vars[0] == 1U) {
+        fp->mv.ns.specialhi.fallAccel = fp->mv.ns.specialhi.fallAccel -
                                         ness_attr->x50_PK_THUNDER_FALL_ACCEL;
-        if ((float) fp->mv.ns.specialhi.fallAccel <
+        if (fp->mv.ns.specialhi.fallAccel <
             -ness_attr->x54_PK_THUNDER_2_MOMENTUM)
         {
             fp->mv.ns.specialhi.fallAccel =
                 -ness_attr->x54_PK_THUNDER_2_MOMENTUM;
         }
-        fp->cur_pos.y += (float) fp->mv.ns.specialhi.fallAccel;
+        fp->cur_pos.y += fp->mv.ns.specialhi.fallAccel;
     }
 }
 

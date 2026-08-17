@@ -603,7 +603,7 @@ HSD_RObj* HSD_RObjLoadDesc(HSD_RObjDesc* robjdesc)
 
     if (robjdesc != NULL) {
         robj = HSD_RObjAlloc();
-        robj->next = HSD_RObjLoadDesc((HSD_RObjDesc*) robjdesc->next);
+        robj->next = HSD_RObjLoadDesc(robjdesc->next);
         robj->flags = robjdesc->flags;
         switch (robj->flags & ROBJ_TYPE_MASK) {
         case REFTYPE_JOBJ:
