@@ -1576,7 +1576,7 @@ void _tyDisplay_8031B1FC(void)
     gobj4 = ptr->gobj4;
     zero = 0;
     do {
-        UNUSED unsigned char _[(0x10)];
+        UNUSED unsigned char _[0x10];
     } while (zero);
 
     if (ptr->archive == NULL) {

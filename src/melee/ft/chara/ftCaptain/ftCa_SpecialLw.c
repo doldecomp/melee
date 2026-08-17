@@ -315,7 +315,7 @@ void ftCa_SpecialLw_Coll(HSD_GObj* gobj)
     {
         if ((fp->cmd_vars[0] != 0) &&
             /// @todo Pull out these check functions
-            (((((fp->facing_dir == -1) != 0)) &&
+            ((((fp->facing_dir == -1) != 0) &&
               (fp->coll_data.env_flags & Collide_RightWallHug)) ||
              (fp->facing_dir == +1 &&
               (fp->coll_data.env_flags & Collide_LeftWallHug))))

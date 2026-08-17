@@ -1024,7 +1024,7 @@ void it_80274574(Item_GObj* item_gobj)
 
 static inline void HSD_JObjSetScale_2(HSD_JObj* jobj, Vec3* scale)
 {
-    ((jobj) ? ((void) 0) : __assert("jobj.h", 760, "jobj"));
+    (jobj ? ((void) 0) : __assert("jobj.h", 760, "jobj"));
     jobj->scale = *scale;
     if (!(jobj->flags & (1 << 25))) {
         (HSD_JObjSetMtxDirty)(jobj);

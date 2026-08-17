@@ -1669,7 +1669,7 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
                     (this_fp->player_id != victim_fp->player_id))
                 {
                     if ((gm_8016B168()) && !gm_8016B0D4() &&
-                        !(((u8) victim_fp->x2225_b4)))
+                        !((u8) victim_fp->x2225_b4))
                     {
                         var_r0 = (victim_fp->x1064_thrownHitbox.owner != NULL)
                                      ? victim_fp->x119C_teamUnk
@@ -1691,11 +1691,11 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
                                     if ((this_hit->state !=
                                          HitCapsule_Disabled) &&
                                         (!((u8) this_hit->x43_b2) &&
-                                         (((this_hit->element ==
-                                            (u8) HitElement_Catch) == 0)) &&
+                                         ((this_hit->element ==
+                                           (u8) HitElement_Catch) == 0) &&
                                          (this_hit->element !=
                                           (u8) HitElement_Inert) &&
-                                         ((((this_hit->x40_b0) == 1) != 0)) &&
+                                         (((this_hit->x40_b0) == 1) != 0) &&
                                          ((u32) (((u8) this_hit->x42_b5) ==
                                                  1) &&
                                           (((this_hit->x40_b2) &&
@@ -1728,17 +1728,15 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
                                 if ((temp_r23->state != HitCapsule_Disabled) &&
                                     (temp_r23->element !=
                                      (u32) HitElement_Catch) &&
-                                    ((u32) (((u8) temp_r23->x42_b5)) ==
-                                     true) &&
-                                    (((((u8) temp_r23->x40_b2)) &&
+                                    ((u32) ((u8) temp_r23->x42_b5) == true) &&
+                                    ((((u8) temp_r23->x40_b2) &&
                                       (this_fp->ground_or_air == GA_Air)) ||
-                                     ((((u8) temp_r23->x40_b3)) &&
+                                     (((u8) temp_r23->x40_b3) &&
                                       ((int) this_fp->ground_or_air == 0))) &&
-                                    (!(((u8) (temp_r23
-                                                  ->hit_grabbed_victim_only))) ||
-                                     (((victim_fp->victim_gobj == NULL) !=
-                                       0)) ||
-                                     !(((u8) victim_fp->x221B_b5)) ||
+                                    (!((u8) (temp_r23
+                                                 ->hit_grabbed_victim_only)) ||
+                                     ((victim_fp->victim_gobj == NULL) != 0) ||
+                                     !((u8) victim_fp->x221B_b5) ||
                                      (victim_fp->victim_gobj == this_gobj)) &&
                                     (lbColl_8000ACFC(this_fp, temp_r23) ==
                                      false))
@@ -1758,7 +1756,7 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
                                         !((u8) this_fp->x221B_b5) &&
                                         (temp_r23->element !=
                                          (u32) HitElement_Inert) &&
-                                        ((u32) (((u8) temp_r23->x40_b0)) ==
+                                        ((u32) ((u8) temp_r23->x40_b0) ==
                                          true) &&
                                         (var_unk != 0))
                                     {
@@ -1812,8 +1810,8 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
                                                     var_r3 = false;
                                                 }
                                             }
-                                            if ((((u8) this_fp->x221B_b4)) &&
-                                                !(((u8) temp_r23->x42_b4)))
+                                            if (((u8) this_fp->x221B_b4) &&
+                                                !((u8) temp_r23->x42_b4))
                                             {
                                                 var_r3 = false;
                                             }
@@ -2081,7 +2079,7 @@ void ftColl_8007925C(Fighter_GObj* gobj)
             if (hurt->state == HitCapsule_Disabled) {
                 continue;
             }
-            if ((u32)(((u8) hurt->x42_b5)) != true) {
+            if ((u32)((u8) hurt->x42_b5) != true) {
                 continue;
             }
             if (!(((u8) hurt->x40_b2) &&
@@ -2289,7 +2287,7 @@ void ftColl_8007925C(Fighter_GObj* gobj)
                 if ((int) fp->x1988 == 2 || (int) fp->x198C == 2) {
                     continue;
                 }
-                if ((u32)(((u8) hurt->x42_b5)) != true) {
+                if ((u32)((u8) hurt->x42_b5) != true) {
                     continue;
                 }
 

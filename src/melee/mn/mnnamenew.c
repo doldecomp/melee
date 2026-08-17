@@ -400,7 +400,7 @@ void mnNameNew_8023B224(u8 arg0)
 
     PAD_STACK(8);
 
-    temp_r31 = (mnNameNew_804D6C08)->user_data;
+    temp_r31 = mnNameNew_804D6C08->user_data;
     temp_r30 = temp_r31->name_index;
     if (arg0 != 0) {
         lb_8001CE00();
@@ -927,7 +927,7 @@ void mnNameNew_GlyphVariantInput(void)
 
     PAD_STACK(16);
 
-    data = (mnNameNew_804D6C08)->user_data;
+    data = mnNameNew_804D6C08->user_data;
     buttons = mn_80229624((u32) mnNameNew_PortInUse);
     mn_804A04F0.buttons = buttons;
     count = 0;
@@ -1032,7 +1032,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
 
     name_text = mnNameNew_CurrentNameText;
     {
-        NameNewEntry* entry = (mnNameNew_804D6C08)->user_data;
+        NameNewEntry* entry = mnNameNew_804D6C08->user_data;
         data = entry;
     }
     layout = (MnNameNewDataLayout*) mnNameNew_803EDA58;

@@ -37,7 +37,7 @@ HSD_ObjAllocData* HSD_AObjGetAllocData(void)
 
 u32 HSD_AObjGetFlags(HSD_AObj* aobj)
 {
-    return (aobj) ? aobj->flags : 0;
+    return aobj ? aobj->flags : 0;
 }
 
 void HSD_AObjSetFlags(HSD_AObj* aobj, u32 flags)

@@ -1521,7 +1521,7 @@ void _Toy_80306C5C(HSD_GObj* arg0)
         data = base->gobj;
     }
 
-    HSD_LObjAnimAll((arg0)->hsd_obj);
+    HSD_LObjAnimAll(arg0->hsd_obj);
 }
 
 void Toy_RemoveUserData(void* ptr)
@@ -1900,9 +1900,9 @@ void _Toy_803075E8(s32 arg0)
     }
 
     if (td->x54 != 0) {
-        (Toy_sbss_804D6ED8)->x8->x28->x40 = 9;
-        (Toy_sbss_804D6ED8)->x8->x28->x4->x40 = 9;
-        (Toy_sbss_804D6ED8)->x8->x28->x4->x4->x40 = 9;
+        Toy_sbss_804D6ED8->x8->x28->x40 = 9;
+        Toy_sbss_804D6ED8->x8->x28->x4->x40 = 9;
+        Toy_sbss_804D6ED8->x8->x28->x4->x4->x40 = 9;
     }
 
     ptr = (char**) (data + arg0 * 4);
@@ -1935,7 +1935,7 @@ void _Toy_803075E8(s32 arg0)
             HSD_ASSERT(2677, 0);
         }
     } else if (td->x54 != 0) {
-        tdjobj = (Toy_sbss_804D6ED8)->x8->x28;
+        tdjobj = Toy_sbss_804D6ED8->x8->x28;
         switch (arg0) {
         case 2:
             break;
@@ -4378,7 +4378,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
                 _Toy_sbss_804D6E84 = HSD_CObjGetBottom(cobj);
                 _Toy_sbss_804D6E88 = HSD_CObjGetRight(cobj);
                 _Toy_sbss_804D6E8C = HSD_CObjGetLeft(cobj);
-                jobj_node = (ToyJObjNode*) (Toy_sbss_804D6ED8)->xC->x28;
+                jobj_node = (ToyJObjNode*) Toy_sbss_804D6ED8->xC->x28;
                 while (jobj_node != NULL) {
                     jobj_node->x40 = 9;
                     jobj_node = (ToyJObjNode*) jobj_node->x4;
@@ -4901,7 +4901,7 @@ void _Toy_8030FA50(void)
     ((Toy6E68*) state)->x61 = 0;
     ((Toy6E68*) state)->x60 = 4;
     _Toy_80307828(0);
-    (_Toy_sbss_804D6E68)->x58 = 0x95E;
+    _Toy_sbss_804D6E68->x58 = 0x95E;
 
     /* Camera2 (offset 0x04) */
     state[1] = GObj_Create(1U, 2U, 0U);

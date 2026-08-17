@@ -1204,7 +1204,7 @@ void mnName_80239A24(HSD_GObj* gobj)
 
     j = 0;
     do {
-        MnName_GObj* global_data = (MnName_GObj*) (mnName_804D6BF8)->user_data;
+        MnName_GObj* global_data = (MnName_GObj*) mnName_804D6BF8->user_data;
         row = global_data->gobj.gx_link + ((u8) j / 6);
         count = GetNameCount_noinline();
         if ((count % 6) != 0) {
@@ -1348,7 +1348,7 @@ void fn_8023A0BC(HSD_GObj* gobj)
     base = (u8*) mnName_803ED538;
     lb_80011E24(jobj, &sp2C, 2, -1);
 
-    if (((sel = mn_804A04F0.x10)) != 2) {
+    if ((sel = mn_804A04F0.x10) != 2) {
         HSD_SisLib_803A5CC4(mnName_804D6BFC);
         mnName_804D6BFC = NULL;
         HSD_GObjPLink_80390228(gobj);
@@ -1585,7 +1585,7 @@ static inline void mnName_8023A9B4_ResetDisplayOrder(void)
 
 static inline MnName_GObj* mnName_8023A9B4_GetGObj(void)
 {
-    return (MnName_GObj*) (mnName_804D6BF8)->user_data;
+    return (MnName_GObj*) mnName_804D6BF8->user_data;
 }
 
 void mnName_8023A9B4(u8 arg0)

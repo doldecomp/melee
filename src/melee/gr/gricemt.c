@@ -478,7 +478,7 @@ void grIceMt_801F686C(void)
 
 static inline bool rand_zero(s32 n)
 {
-    return ((n) ? HSD_Randi(n) : 0) == 0;
+    return (n ? HSD_Randi(n) : 0) == 0;
 }
 
 void grIceMt_801F7080(void)

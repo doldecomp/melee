@@ -1350,7 +1350,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             return;
         }
         sfxForward();
-        data->is_name_mode = (data->is_name_mode == 0) ? (1) : (count2);
+        data->is_name_mode = (data->is_name_mode == 0) ? 1 : count2;
         if (data->is_name_mode != 0) {
             count = GetNameCount();
             if (((s32) ((u8) mn_804A04F0.hovered_selection)) >= count) {

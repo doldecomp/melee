@@ -124,7 +124,7 @@ bool ft_80087A18(HSD_GObj* gobj)
     if ((fp->x2226_b4) &&
         ((var1 = ftCo_800C06B4(fp), ((var1 == 0x7B) != 0)) ||
          (var1 == 0x80)) &&
-        ((fp->x2226_b5)))
+        (fp->x2226_b5))
     {
         return true;
     }

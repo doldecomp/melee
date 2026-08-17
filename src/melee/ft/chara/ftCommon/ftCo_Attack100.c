@@ -2031,7 +2031,7 @@ void fn_800DA054(Fighter_GObj* gobj)
             if (v > spd) {
                 v = spd;
             }
-            fp->gr_vel = (dx > 0.0f) ? (v) : (-v);
+            fp->gr_vel = (dx > 0.0f) ? v : (-v);
         }
     }
 }

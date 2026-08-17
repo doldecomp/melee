@@ -530,7 +530,7 @@ void ftNs_AttackHi4_YoyoSetUnkRate(HSD_GObj* gobj)
         yoyo_attr = item_article->x4_specialAttributes;
 
         texanim_unk = yoyo_attr->x20_UNK_TEXANIM_MOD;
-        yoyo_float = ((texanim_unk - yoyo_attr->x1C_UNK_TEXANIM_SPEED));
+        yoyo_float = (texanim_unk - yoyo_attr->x1C_UNK_TEXANIM_SPEED);
         yoyo_float =
             yoyo_float * ((float) fp->mv.ns.attackhi4.yoyoCurrentFrame /
                           ness_attr->xAC_YOYO_CHARGE_DURATION);
