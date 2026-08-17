@@ -151,7 +151,12 @@ jobs:
 
             run_configure
             ninja 'build/${{matrix.version}}/config.json'
-            pre-commit run clang-tidy --all-files
+
+            pre-commit run \
+              --show-diff-on-failure \
+              --color=always \
+              clang-tidy \
+              --all-files
           ;;
           *) exit 1 ;;
         esac
