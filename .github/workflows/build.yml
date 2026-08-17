@@ -42,8 +42,7 @@ jobs:
       run: ln -s /orig .
     - name: Build
       run: |
-        set -eou pipefail
-        exit 1
+        set -eoux pipefail
         export RUST_LOG=error
 
         mode='${{matrix.mode}}'
@@ -85,6 +84,7 @@ jobs:
 
         case "$mode" in
           'link')
+            exit 1
             config_args=$(printf '%s ' \
               '--map' \
               '--require-protos' \
@@ -114,6 +114,7 @@ jobs:
             exit "$result"
           ;;
           'diff')
+            exit 1
             expected="$root/baseline.json"
             changes="$root/changes.json"
             run_configure
