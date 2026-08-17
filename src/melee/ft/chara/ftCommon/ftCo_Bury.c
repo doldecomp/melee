@@ -163,6 +163,7 @@ void ftCo_800C0A98(Fighter_GObj* gobj)
 void ftCo_800C0B20(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
+    int hurt_idx;
     DynamicsDesc* unk_anim;
     if (fp->bury_timer_1 == 0) {
         CollData* coll = &fp->coll_data;
@@ -181,17 +182,19 @@ void ftCo_800C0B20(Fighter_GObj* gobj)
         }
         if (unk_anim != NULL) {
             HitCapsule hit;
-            Fighter* fp = GET_FIGHTER(gobj);
-            float f = ftColl_800765F0(fp, NULL, unk_anim->count);
+            float f;
+            fp = GET_FIGHTER(gobj);
+            f = ftColl_800765F0(fp, NULL, unk_anim->count);
+            hurt_idx = 0;
             fp->bury_timer_1 = p_ftCommonData->bury_timer_unk1;
             if (ftColl_80076640(fp, &f)) {
-                FighterHurtCapsule* hurt = &fp->hurt_capsules[0];
-                ftColl_80076764(3, 1, 0, unk_anim, fp, hurt);
+                ftColl_80076764(3, 1, 0, unk_anim, fp,
+                                &fp->hurt_capsules[hurt_idx]);
 
                 /// @todo Eliminate cast
                 lbColl_80008D30(&hit, (lbColl_80008D30_arg1*) unk_anim);
 
-                ftColl_80078384(fp, hurt, &hit);
+                ftColl_80078384(fp, &fp->hurt_capsules[hurt_idx], &hit);
             }
             pl_8003EC30(fp->player_id, fp->x221F_b4, 1, f);
         }
