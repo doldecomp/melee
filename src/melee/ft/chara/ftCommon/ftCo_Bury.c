@@ -3,7 +3,6 @@
 #include "ftCo_AirCatch.h"
 #include "ftCo_AttackAir.h"
 #include "ftCo_BarrelWait.h"
-#include "ftCo_CaptureCut.h"
 #include "ftCo_Damage.h"
 #include "ftCo_EscapeAir.h"
 #include "ftCo_HammerJump.h"
@@ -52,12 +51,14 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-#pragma force_active on
-const double ftCo_804D8C28 = 4503599627370496.0;
-const double ftCo_804D8C30 = 4503601774854144.0;
-const float ftCo_804D8C38 = 0.0F;
-const float ftCo_804D8C3C = 1.0F;
-#pragma force_active reset
+/// @todo .sdata2 order hack
+static void order_sdata2(void)
+{
+    (void) U32_TO_F32;
+    (void) S32_TO_F32;
+    (void) 0.0F;
+    (void) 1.0F;
+}
 
 void ftCo_800C0874(Fighter_GObj* gobj, UNK_T arg1, ftCommon_BuryType arg2)
 {
@@ -268,8 +269,9 @@ void ftCo_800C0D0C(Fighter_GObj* gobj)
 
 void ftCo_Bury_Anim(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
-    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp;
+    PAD_STACK(8);
+    fp = GET_FIGHTER(gobj);
     fp->grab_timer -= p_ftCommonData->x610;
     ftCommon_GrabMash(fp, p_ftCommonData->x614);
     if (fp->grab_timer <= 0) {
@@ -322,8 +324,9 @@ void ftCo_Bury_Phys(Fighter_GObj* gobj)
 
 void ftCo_Bury_Coll(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
-    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp;
+    PAD_STACK(8);
+    fp = GET_FIGHTER(gobj);
     if (!ft_80082888(gobj, &fp->mv.co.bury.coll_box) ||
         fp->mv.co.bury.x20 != fp->coll_data.floor.index ||
         Ground_801C5700(fp->mv.co.bury.x20) != NULL)
@@ -361,7 +364,7 @@ void ftCo_BuryWait_Phys(Fighter_GObj* gobj) {}
 
 void ftCo_BuryWait_Coll(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
+    PAD_STACK(0x10);
     ftCo_Bury_Coll(gobj);
 }
 
@@ -408,8 +411,8 @@ void ftCo_BuryJump_IASA(Fighter_GObj* gobj)
 
 void ftCo_BuryJump_Phys(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(8);
     ftCommon_Fall(fp, fp->co_attrs.gravity, fp->co_attrs.terminal_velocity);
     ftCommon_8007D268(fp);
 }
