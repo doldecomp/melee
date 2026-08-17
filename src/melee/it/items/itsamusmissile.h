@@ -37,9 +37,6 @@ struct _m2c_stack_itSamusmissile_UnkMotion0_Phys {
 /* 2B6B1C */ bool itSamusmissile_UnkMotion1_Anim(Item_GObj*);
 /* 2B6B8C */ void itSamusmissile_UnkMotion1_Phys(Item_GObj* gobj);
 /* 2B6BFC */ bool itSamusmissile_UnkMotion1_Coll(Item_GObj* gobj);
-/* 2B6C28 */
-/* 2B6C7C */
-/* 2B6CD0 */
 /* 2B6D24 */ bool it_2725_Logic52_ShieldBounced(Item_GObj*);
 /* 2B6E4C */ bool it_2725_Logic52_Reflected(Item_GObj*);
 /* 2B701C */ void it_802B701C(Item_GObj*);

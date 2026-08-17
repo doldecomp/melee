@@ -24,7 +24,6 @@
 /* 0DE790 */ void ftCo_ThrownLw_Phys(Fighter_GObj* gobj);
 /* 0DE794 */ void ftCo_ThrownLw_Coll(Fighter_GObj* gobj);
 /* 0DE798 */ void fn_800DE798(Fighter_GObj* gobj);
-/* 0DE798 */
 /* 0DE7C0 */ void ftCo_800DE7C0(Fighter_GObj* gobj, Fighter_GObj* victim,
                                 bool is_upward);
 /* 0DE854 */ void ftCo_800DE854(Fighter_GObj* gobj);

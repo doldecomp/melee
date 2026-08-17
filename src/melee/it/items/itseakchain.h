@@ -7,9 +7,7 @@
 #include "it/items/types.h"
 
 /* 2BAEEC */ void it_802BAEEC(Item_GObj*);
-/* 2BAEEC */
 /* 2BAF0C */ void it_802BAF0C(Item_GObj*);
-/* 2BAF0C */
 /* 2BAF2C */ int it_802BAF2C(Item* ip, HSD_JObj* jobj);
 /* 2BB20C */ void it_802BB20C(Item_GObj*);
 /* 2BB290 */ Item_GObj* itSeakChain_Spawn(Fighter_GObj* owner_gobj, Vec3* arg1,
