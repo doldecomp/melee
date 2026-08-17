@@ -1,4 +1,12 @@
 ---
-Checks: 'readability-redundant-casting,readability-redundant-declaration,readability-duplicate-include'
+Checks: >
+  -*,
+  portability-restrict-system-includes,
+  readability-redundant-casting,
+  readability-redundant-declaration,
+  readability-duplicate-include,
 WarningsAsErrors: '*'
+CheckOptions:
+  - key: portability-restrict-system-includes.Includes
+    value: '*,-MSL/*'
 ---
