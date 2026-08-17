@@ -42,13 +42,14 @@ jobs:
       run: ln -s /orig .
     - name: Build
       run: |
-        set -eoux pipefail
+        set -eou pipefail
         export RUST_LOG=error
 
         mode='${{matrix.mode}}'
         root='build/${{matrix.version}}'
         report="$root/report.json"
         head="$(git rev-parse HEAD)"
+        config_json="$root/config.json"
 
         function get_upstream {
             local ref
@@ -91,6 +92,7 @@ jobs:
               "$config_args")
 
             run_configure
+            ninja "$config_json"
 
             set +e
 
@@ -115,7 +117,9 @@ jobs:
           'diff')
             expected="$root/baseline.json"
             changes="$root/changes.json"
+
             run_configure
+            ninja "$config_json"
 
             function run_ninja {
               ninja all_source "$report"
