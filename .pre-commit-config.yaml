@@ -1,8 +1,4 @@
 repos:
-- repo: https://github.com/editorconfig-checker/editorconfig-checker.python
-  rev: 3.11.1
-  hooks:
-    - id: editorconfig-checker
 - repo: https://github.com/cpp-linter/cpp-linter-hooks
   rev: v1.6.0
   hooks:
@@ -20,3 +16,7 @@ repos:
       language: system
       pass_filenames: true
       types_or: [c]
+- repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+  rev: 3.11.1
+  hooks:
+    - id: editorconfig-checker
