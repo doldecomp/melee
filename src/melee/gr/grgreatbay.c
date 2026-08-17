@@ -726,10 +726,10 @@ void grGreatBay_801F5914(void* user_data, int joint_id, CollData* coll,
     temp_r0 = coll->x34_flags.b1234;
     if (temp_r0 == 1 ||
     /// @todo Redundant cast necessary to match
-#ifdef BUGFIX
-        temp_r0 == 2 ||
-#else
+#ifdef MUST_MATCH
         (s32) temp_r0 == 2 ||
+#else
+        temp_r0 == 2 ||
 #endif
         temp_r0 == 3)
     {

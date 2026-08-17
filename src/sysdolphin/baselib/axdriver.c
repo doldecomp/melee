@@ -196,9 +196,7 @@ u32 AXDriver_8038C678(u32 param_type, u32 param_value)
     }
 }
 
-#ifdef BUGFIX
-#define sqrtf_store(x, y) sqrtf(x)
-#else
+#ifdef MUST_MATCH
 /// MSL sqrtf expansion (src/MSL/math_ppc.h) writing its result through a
 /// caller-provided slot, as in sqrtf_store in lbcollision.c and mplib.c.
 /// Evidence: retail AXDriver_8038BF6C keeps its eight sqrt results in
@@ -218,6 +216,8 @@ static inline float sqrtf_store(float x, volatile float* y)
     }
     return x;
 }
+#else
+#define sqrtf_store(x, y) sqrtf(x)
 #endif
 
 void AXDriver_8038BF6C(HSD_SM* v)

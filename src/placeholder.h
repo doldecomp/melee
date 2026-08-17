@@ -17,7 +17,7 @@ typedef jmp_t jtbl_t[];
     OSPanic(__FILE__, __LINE__, "%s is not implemented!", __func__)
 #elif M2CTX
 #define NOT_IMPLEMENTED
-#elif defined(__MWERKS__) && !defined(BUGFIX)
+#elif defined(__MWERKS__) && defined(MUST_MATCH)
 #define NOT_IMPLEMENTED asm { nop }
 #else
 #define NOT_IMPLEMENTED                                                       \

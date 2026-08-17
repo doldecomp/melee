@@ -3,7 +3,7 @@
 #include "debug.h"
 
 #include <string.h>
-#include <dolphin/os/OSTime.h>
+#include <dolphin/os.h>
 
 s64 start_time;
 

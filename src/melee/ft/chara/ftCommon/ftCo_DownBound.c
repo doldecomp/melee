@@ -185,7 +185,7 @@ void ftCo_80097AF4(Fighter_GObj* gobj)
         }
         {
 /// @todo Re-declaration prevents inlining
-#ifndef BUGFIX
+#ifdef MUST_MATCH
             bool ftCo_80097570(Fighter_GObj * gobj);
 #endif
             bool b = ftCo_80097570(gobj);

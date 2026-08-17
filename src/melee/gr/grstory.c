@@ -324,7 +324,7 @@ bool grStory_801E36D8(Vec3* a, int _, HSD_JObj* jobj)
     }
 }
 
-#ifndef BUGFIX
+#ifdef MUST_MATCH
 static u32 _[] = {
     0xC3920000, 0x42D20000, 0xC3920000, 0x42960000, 0xC3920000, 0x42480000,
     0x43980000, 0x42DC0000, 0x43980000, 0x42B40000, 0,          0,

@@ -197,7 +197,7 @@ void ft_80089824(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     /// @todo Weird volatile noop
-#ifndef BUGFIX
+#ifdef MUST_MATCH
     volatile int temp = fp->x2070.x2070_int;
     fp->x2070.x2070_int = temp;
 #endif

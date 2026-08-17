@@ -583,7 +583,7 @@ EF_Effect* efLib_Create_AttachChild_Scale(u32 gfx_id, HSD_GObj* gobj,
                                           HSD_JObj* jobj)
 {
     /// @todo Prevents inline
-#ifndef BUGFIX
+#ifdef MUST_MATCH
     extern EF_Effect* efLib_Create_Attach(u32 gfx_id, HSD_GObj * gobj,
                                           HSD_JObj * jobj);
 #endif
@@ -608,7 +608,7 @@ EF_Effect* efLib_Create_Attach_Scale_FacingDir(u32 gfx_id, HSD_GObj* gobj,
                                                HSD_JObj* jobj)
 {
     /// @todo Prevents inline
-#ifndef BUGFIX
+#ifdef MUST_MATCH
     extern EF_Effect* efLib_Create_Attach(u32 gfx_id, HSD_GObj * gobj,
                                           HSD_JObj * jobj);
 #endif

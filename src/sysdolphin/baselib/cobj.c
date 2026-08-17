@@ -648,7 +648,7 @@ static inline f32 vec_get_x(Vec3* v)
     return v->x;
 }
 
-#ifndef BUGFIX
+#ifdef MUST_MATCH
 static inline f64 cobj_fabsf_p(f32* v)
 {
     return fabsf(*v);
@@ -667,7 +667,7 @@ static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
     if (res != 0) {
         return res;
     }
-#ifndef BUGFIX
+#ifdef MUST_MATCH
     if (1.0 - cobj_fabsf_p(&eye.y) < 0.0001) {
 #else
     if (1.0 - fabsf(eye.y) < 0.0001) {
