@@ -3,14 +3,12 @@
 
 #include <platform.h>
 
-#include <dolphin/os/OSAlarm.h>
-
-typedef struct _Handle {
-    struct _Handle* x0_next;
+typedef struct Handle {
+    struct Handle* x0_next;
     void* x4_lo;
     // Arena high bound for heap handles; allocation size for child handles.
     void* x8_hi;
-    struct _Handle* xC_prev;
+    struct Handle* xC_prev;
 } Handle;
 
 /* 014E24 */ Handle* lbMemory_80014E24(void* lo, void* hi);
@@ -18,7 +16,6 @@ typedef struct _Handle {
 /* 014F7C */ u32 lbMemory_80014F7C(Handle*);
 /* 014FC8 */ Handle* lbMemory_80014FC8(Handle*, size_t);
 /* 0150F0 */ void lbMemFreeToHeap(Handle*, void*);
-/* 015184 */ void fn_80015184(OSAlarm* alarm, OSContext* context);
 /* 01529C */ u32 lbMemory_8001529C(Handle*, void (*)(u32), u32);
 /* 0154BC */ void lbMemory_800154BC(uintptr_t*, uintptr_t*);
 /* 0154D4 */ Handle* lbMemory_800154D4(void* lo, void* hi);
