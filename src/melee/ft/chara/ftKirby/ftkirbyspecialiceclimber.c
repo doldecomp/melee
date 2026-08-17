@@ -63,7 +63,7 @@ void ftKb_SpecialNIc_80108D64(Fighter_GObj* gobj)
     new_var = 0;
     fp->throw_flags = 0;
     fp->cmd_vars[0] = new_var;
-    (fp)->u.kb.xC0 = NULL;
+    fp->u.kb.xC0 = NULL;
     Fighter_ChangeMotionState(gobj, ftKb_MS_PpSpecialN, 0, 0.0F, 1.0F, 0.0F,
                               NULL);
     ftAnim_8006EBA4(gobj);
@@ -162,7 +162,7 @@ void ftKb_PpSpecialAirN_Coll(Fighter_GObj* gobj)
             it_802C17DC(fp1->u.kb.xC0);
             {
                 Fighter* fp2 = GET_FIGHTER(gobj);
-                if (fp1->u.kb.xC0 == ((0, fp2->u.kb.xC0))) {
+                if (fp1->u.kb.xC0 == (0, fp2->u.kb.xC0)) {
                     fp2->u.kb.xC0 = NULL;
                 }
             }

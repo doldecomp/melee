@@ -929,8 +929,8 @@ void fn_802B8D38(Item_GObj* gobj)
     saved_pos = fp2->cur_pos;
     it_802BA5DC(ip->xDD4_itemVar.samusgrapple.x4,
                 ip->xDD4_itemVar.samusgrapple.x0, &pos, attrs);
-    fp2->cur_pos.x = pos.x + (old_x);
-    fp2->cur_pos.y = pos.y + (old_y);
+    fp2->cur_pos.x = pos.x + old_x;
+    fp2->cur_pos.y = pos.y + old_y;
     {
         f32 tmp;
         tmp = fp2->self_vel.x + (fp2->cur_pos.x - saved_pos.x);

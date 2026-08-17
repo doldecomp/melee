@@ -380,7 +380,7 @@ bool grGarden_8020349C(u32 unk, HSD_GObj* player, Vec3* water)
         if (previous.y > dVar3) {
             dVar3 = ftLib_80086B80(player) / 10.0f;
             current.y = -30.0f;
-            grGarden_80203560((dVar3), &current);
+            grGarden_80203560(dVar3, &current);
             Ground_801C53EC(410000);
         }
         uVar1 = true;

@@ -824,7 +824,7 @@ void _tyFigupon_80316420(s32 arg0)
                 data->x0, (void (*)(HSD_GObj*)) _tyFigupon_80315574, 0);
         }
         data->x24 = 0x12C;
-        (_tyFigupon_804D6EF0)->x18->hidden = 0;
+        _tyFigupon_804D6EF0->x18->hidden = 0;
     }
 }
 static const Vec3 _tyFigupon_803B8968 = { 0.0f, 1.0f, 0.0f };

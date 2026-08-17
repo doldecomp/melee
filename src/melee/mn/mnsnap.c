@@ -799,7 +799,7 @@ s32 mnSnap_8025441C(u64 buttons)
     if (buttons & 0x200) {
         if (mnSnap_804A0A10.dlg_type == 0) {
             *result = 2;
-        } else if (((&mnSnap_804A0A10.left_btn))[mnSnap_804A0A10.btn_idx] ==
+        } else if ((&mnSnap_804A0A10.left_btn)[mnSnap_804A0A10.btn_idx] ==
                    mnSnap_804A0A10.no_jobj)
         {
             *result = 2;

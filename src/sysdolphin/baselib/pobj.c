@@ -371,7 +371,7 @@ HSD_PObj* HSD_PObjAlloc(void)
 void HSD_PObjFree(HSD_PObj* pobj)
 {
     if (pobj) {
-        HSD_CLASS_METHOD(pobj)->destroy((HSD_Class*) (pobj));
+        HSD_CLASS_METHOD(pobj)->destroy((HSD_Class*) pobj);
     }
 }
 

@@ -33,7 +33,7 @@ static s32 lightmask_alpha;
 
 u32 HSD_LObjGetFlags(HSD_LObj* lobj)
 {
-    return (lobj) ? lobj->flags : 0;
+    return lobj ? lobj->flags : 0;
 }
 
 void HSD_LObjSetFlags(HSD_LObj* lobj, u32 flags)

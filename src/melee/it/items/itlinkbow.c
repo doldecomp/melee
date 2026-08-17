@@ -188,7 +188,7 @@ bool itLinkbow_UnkMotion5_Anim(Item_GObj* arg0)
     case 5:
     case 2:
         if ((item->x5CC_currentAnimFrame == 0.0f) ||
-            ((item->x5CC_currentAnimFrame >= 24.0f)))
+            (item->x5CC_currentAnimFrame >= 24.0f))
         {
             itLinkBow_Logic100_Destroyed(arg0);
             return 1;

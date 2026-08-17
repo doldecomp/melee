@@ -356,7 +356,7 @@ static char* long2str(signed long num, char* buff, print_format* format)
     }
 
     if (buff - p + format->precision > 509) {
-        return (0);
+        return 0;
     }
 
     while (digits < format->precision) {

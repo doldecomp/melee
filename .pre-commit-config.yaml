@@ -14,7 +14,8 @@ repos:
   hooks:
     - id: style-check
       name: style-check
-      entry: python tools/check/main.py --fix --quiet
+      entry: python tools/check/main.py
+      args: [--fix,--quiet]
       language: system
       types_or: [c]
       pass_filenames: true

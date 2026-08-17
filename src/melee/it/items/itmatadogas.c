@@ -131,7 +131,7 @@ void itMatadogas_UnkMotion2_Phys(Item_GObj* gobj)
         jobj = gobj->hsd_obj;
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
         Item_SetEffectHitlagCallbacks(item2);
-        ((jobj) ? ((void) 0) : __assert("jobj.h", 660, "jobj"));
+        (jobj ? ((void) 0) : __assert("jobj.h", 660, "jobj"));
         ((!(jobj->flags & JOBJ_USE_QUATERNION))
              ? ((void) 0)
              : __assert("jobj.h", 661,

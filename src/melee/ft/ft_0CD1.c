@@ -48,7 +48,7 @@ void ftCo_800CD278(Fighter_GObj* gobj)
         ft_80084FA8(gobj);
     } else {
         ft_80085030(gobj,
-                    p_ftCommonData->x420 * ((0, fp->co_attrs.ground_friction)),
+                    p_ftCommonData->x420 * (0, fp->co_attrs.ground_friction),
                     fp->facing_dir);
     }
 }

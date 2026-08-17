@@ -64,30 +64,30 @@ typedef struct MnVibrationDataLayout {
 // Local inline JObj functions using the weak HSD_JObjSetMtxDirty pattern
 static inline f32 mnVibration_JObjGetTranslationX(HSD_JObj* jobj)
 {
-    ((jobj) ? ((void) 0)
-            : __assert(mnVibration_804D4FF4, 0x3E1, mnVibration_804D4FFC));
+    (jobj ? ((void) 0)
+          : __assert(mnVibration_804D4FF4, 0x3E1, mnVibration_804D4FFC));
     return jobj->translate.x;
 }
 
 static inline f32 mnVibration_JObjGetTranslationY(HSD_JObj* jobj)
 {
-    ((jobj) ? ((void) 0)
-            : __assert(mnVibration_804D4FF4, 0x3EE, mnVibration_804D4FFC));
+    (jobj ? ((void) 0)
+          : __assert(mnVibration_804D4FF4, 0x3EE, mnVibration_804D4FFC));
     return jobj->translate.y;
 }
 
 static inline f32 mnVibration_JObjGetTranslationZ(HSD_JObj* jobj)
 {
-    ((jobj) ? ((void) 0)
-            : __assert(mnVibration_804D4FF4, 0x3FB, mnVibration_804D4FFC));
+    (jobj ? ((void) 0)
+          : __assert(mnVibration_804D4FF4, 0x3FB, mnVibration_804D4FFC));
     return jobj->translate.z;
 }
 
 static inline void mnVibration_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
 {
     HSD_JObj* temp = jobj;
-    ((jobj) ? ((void) 0)
-            : __assert(mnVibration_804D4FF4, 0x3A4, mnVibration_804D4FFC));
+    (jobj ? ((void) 0)
+          : __assert(mnVibration_804D4FF4, 0x3A4, mnVibration_804D4FFC));
     jobj->translate.x = x;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         (HSD_JObjSetMtxDirty)(temp);
@@ -97,8 +97,8 @@ static inline void mnVibration_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
 static inline void mnVibration_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
 {
     HSD_JObj* temp = jobj;
-    ((jobj) ? ((void) 0)
-            : __assert(mnVibration_804D4FF4, 0x3B3, mnVibration_804D4FFC));
+    (jobj ? ((void) 0)
+          : __assert(mnVibration_804D4FF4, 0x3B3, mnVibration_804D4FFC));
     jobj->translate.y = y;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         (HSD_JObjSetMtxDirty)(temp);
@@ -108,8 +108,8 @@ static inline void mnVibration_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
 static inline void mnVibration_JObjSetTranslateZ(HSD_JObj* jobj, f32 z)
 {
     HSD_JObj* temp = jobj;
-    ((jobj) ? ((void) 0)
-            : __assert(mnVibration_804D4FF4, 0x3C2, mnVibration_804D4FFC));
+    (jobj ? ((void) 0)
+          : __assert(mnVibration_804D4FF4, 0x3C2, mnVibration_804D4FFC));
     jobj->translate.z = z;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         (HSD_JObjSetMtxDirty)(temp);
@@ -275,7 +275,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     }
 
     // Check animation timer
-    if (data->x0[0] <= ((&mnVibration_803EECE0))->end_frame) {
+    if (data->x0[0] <= (&mnVibration_803EECE0)->end_frame) {
         data->x0[0]++;
         return;
     }
@@ -950,7 +950,7 @@ void mnVibration_IntroProc(HSD_GObj* arg0)
         }
     }
 
-    if (frame >= ((&mnVibration_803EECE0))->end_frame) {
+    if (frame >= (&mnVibration_803EECE0)->end_frame) {
         HSD_GObjProc* proc;
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObj_SetupProc(arg0, mnVibration_Think, 0);

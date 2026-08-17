@@ -8,7 +8,7 @@ SECTION_INIT void* memset(void* dst, int val, unsigned long /*size_t*/ n)
 {
     __fill_mem(dst, val, n);
 
-    return (dst);
+    return dst;
 }
 
 #ifdef __MWERKS__
