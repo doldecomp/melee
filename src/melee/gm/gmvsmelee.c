@@ -98,12 +98,12 @@ void gm_801A5598_OnInit(void)
 
 void gm_801A55C4(void)
 {
-    memzero(&gm_804D6730, 6);
+    memzero(&gm_804D6730, sizeof(gm_804D6730));
 }
 
 void gm_801A55EC_OnLoad(void)
 {
-    memzero(&gm_804D6730, 6);
+    memzero(&gm_804D6730, sizeof(gm_804D6730));
 }
 
 void gm_801A5614_OnUnload(void) {}

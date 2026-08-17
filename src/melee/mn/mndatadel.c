@@ -803,7 +803,7 @@ void mnDataDel_8024FE4C(u8 arg0)
                        assets->shapeanim_joint);
     HSD_JObjReqAnimAll(root, 0.0f);
     HSD_JObjAnimAll(root);
-    user_data = HSD_MemAlloc(0x30);
+    user_data = HSD_MemAlloc(sizeof(*user_data));
     HSD_ASSERTREPORT(0x402, user_data, "Can't get user_data.\n");
     user_data->x0 = arg0;
     user_data->x1 = 0;

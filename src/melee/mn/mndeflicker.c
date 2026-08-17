@@ -155,7 +155,7 @@ void mnDeflicker_8024A4BC(HSD_GObj* arg0)
                        mnDeflicker_804A08B8.shapeanim_joint);
     HSD_JObjReqAnimAll(jobj, 0.0F);
     HSD_JObjAnimAll(jobj);
-    user_data = HSD_MemAlloc(8);
+    user_data = HSD_MemAlloc(sizeof(*user_data));
     HSD_ASSERTREPORT(344, user_data, "Can't get user_data.\n");
     user_data->cursor = gmMainLib_8015F4E8();
     user_data->text = NULL;

@@ -4121,7 +4121,7 @@ s32 mnCharSel_802640A0(void)
         struct CSSCursorData* cursor;
         gobj = GObj_Create(4, 5, 0x80);
         jobj = HSD_JObjLoadJoint(ANIM[1].joint);
-        cursor = HSD_MemAlloc(0x14);
+        cursor = HSD_MemAlloc(sizeof(*cursor));
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
         GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 3, 0x80);
         HSD_GObj_SetupProc(gobj, mnCharSel_CursorThink, 1);
@@ -4151,7 +4151,7 @@ s32 mnCharSel_802640A0(void)
         s32 found;
         gobj = GObj_Create(4, 5, 0x80);
         jobj = HSD_JObjLoadJoint(ANIM[2].joint);
-        model = HSD_MemAlloc(0x18);
+        model = HSD_MemAlloc(sizeof(*model));
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
         GObj_InitUserData(gobj, 4, HSD_Free, model);
         GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 2, 0x80);
@@ -4206,7 +4206,7 @@ s32 mnCharSel_802640A0(void)
         int player;
         s32 found;
         gobj = GObj_Create(4, 5, 0x80);
-        td = HSD_MemAlloc(0x1C);
+        td = HSD_MemAlloc(sizeof(*td));
         tag->data = td;
         GObj_InitUserData(gobj, 4, HSD_Free, td);
         HSD_GObj_SetupProc(gobj, fn_802633B0, 4);

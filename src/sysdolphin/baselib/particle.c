@@ -351,7 +351,7 @@ void hsd_80398A08(u32 unused)
     extern u16 hsd_804D78DC;
     s32 i;
 
-    HSD_ObjAllocInit(&hsd_804D0F60.alloc_data, 0x98, 4);
+    HSD_ObjAllocInit(&hsd_804D0F60.alloc_data, sizeof(HSD_Particle), 4);
     PAD_STACK(24);
 
     i = 0;
@@ -404,7 +404,7 @@ HSD_Particle* hsd_80398C04(HSD_Particle** head, int linkNo, int bank, u32 kind,
 
     pp = HSD_ObjAlloc(&hsd_804D0F60.alloc_data);
     if (pp != NULL) {
-        memset(pp, 0, 0x98);
+        memset(pp, 0, sizeof(*pp));
     }
     if (pp == NULL) {
         return NULL;

@@ -407,7 +407,7 @@ void mnDiagram3_Create(int arg0)
     HSD_JObjReqAnimAll(jobj, mnDiagram3_804DC00C);
     HSD_JObjAnimAll(jobj);
 
-    user_data = (Diagram3*) HSD_MemAlloc(0x78);
+    user_data = (Diagram3*) HSD_MemAlloc(sizeof(Diagram3));
     HSD_ASSERTREPORT(0x3FC, user_data, "Can't get user_data.\n");
     mnDiagram3_InitUserData(user_data, arg0);
     GObj_InitUserData(gobj, 0, (void (*)(void*)) mnDiagram3_FreeUserData,

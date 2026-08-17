@@ -82,6 +82,8 @@
 /* 4D5A40 */ static GXColor _Toy_color_E2E2E2FF = { 0xE2, 0xE2, 0xE2, 0xFF };
 /* 4D5A44 */ static GXColor _Toy_color_FF8020FF = { 0xFF, 0x80, 0x20, 0xFF };
 
+static size_t const unk_array_len = 293;
+
 /// @warning do not sort. Private members cannot be declared @c static.
 /* 4D6EE0 */ TyDisplayData* Toy_sbss_804D6EE0;
 /* 4D6EDC */ s16* Toy_sbss_804D6EDC;

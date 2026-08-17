@@ -96,7 +96,7 @@ void lbMthp8001FAA0(const char* filename, int width, int height)
     lbl_804335B8.x68 = HSD_MemAlloc(uv_size);
     DCInvalidateRange(lbl_804335B8.x68, (u32) uv_size);
     context = HSD_MemAlloc(0xC);
-    memset(&header, 0, 0x1CU);
+    memset(&header, 0, sizeof(header));
     header.w = width;
     header.h = height;
     THPDec_8032F8D4((uintptr_t) lbl_804335B8.unk94, context);

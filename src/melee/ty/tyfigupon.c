@@ -289,7 +289,7 @@ void _tyFigupon_803152BC(HSD_GObj* arg0)
             HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         }
     } else {
-        temp_r3_2 = HSD_MemAlloc(0x58);
+        temp_r3_2 = HSD_MemAlloc(sizeof(TyFiguponUD));
         if (temp_r3_2 != NULL) {
             GObj_InitUserData(arg0, 0, Toy_RemoveUserData, temp_r3_2);
         }
@@ -696,7 +696,7 @@ void _tyFigupon_80315C44(HSD_GObj* arg0)
             HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         }
     } else {
-        ud = HSD_MemAlloc(0x58);
+        ud = HSD_MemAlloc(sizeof(TyFiguponUD));
         if (ud != NULL) {
             GObj_InitUserData(arg0, 0, Toy_RemoveUserData, ud);
             total = tyFigupon_GetCoinCount();
@@ -744,7 +744,7 @@ void _tyFigupon_80316170(HSD_GObj* arg0)
         ud->x44 -= 0.6f;
         HSD_JObjAddTranslationY(HSD_GObjGetHSDObj(arg0), ud->x44);
     } else {
-        ud = HSD_MemAlloc(0x58);
+        ud = HSD_MemAlloc(sizeof(TyFiguponUD));
         if (ud != NULL) {
             GObj_InitUserData(arg0, 0, Toy_RemoveUserData, ud);
         }
@@ -1526,11 +1526,11 @@ void tyFigupon_OnEnter_80317D80(void* arg0)
     PAD_STACK(16);
 
     _tyFigupon_804D6EF0 = HSD_MemAlloc(0x34);
-    _tyFigupon_804D6EF4 = HSD_MemAlloc(0x60);
+    _tyFigupon_804D6EF4 = HSD_MemAlloc(sizeof(*_tyFigupon_804D6EF4));
     _tyFigupon_804D6EF8 = HSD_MemAlloc(0x18);
     Toy_sbss_804D6ED4 = HSD_MemAlloc(0xE4);
     memzero(_tyFigupon_804D6EF0, 0x34);
-    memzero(_tyFigupon_804D6EF4, 0x60);
+    memzero(_tyFigupon_804D6EF4, sizeof(*_tyFigupon_804D6EF4));
     memzero(_tyFigupon_804D6EF8, 0x18);
     memzero(Toy_sbss_804D6ED4, 0xE4);
     data = _tyFigupon_804D6EF0;
@@ -1577,7 +1577,7 @@ void tyFigupon_OnEnter_80317D80(void* arg0)
     HSD_JObjReqAnimAll(jobj, 0.0f);
     HSD_JObjAnimAll(jobj);
     HSD_JObjAddTranslationZ(jobj, 0.5f);
-    ud = HSD_MemAlloc(0x58);
+    ud = HSD_MemAlloc(sizeof(TyFiguponUD));
     if (ud != NULL) {
         GObj_InitUserData(data->x8, 0, Toy_RemoveUserData, ud);
     }

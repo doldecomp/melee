@@ -916,7 +916,7 @@ HSD_GObj* mn_80229DC0(void)
                            mn_803EAE8C[mn_804A04F0.cur_menu][2].start_frame);
     }
     HSD_JObjAnimAll(sp8);
-    user_data = HSD_MemAlloc(4);
+    user_data = HSD_MemAlloc(sizeof(*user_data));
     HSD_ASSERTREPORT(0x427, user_data, "Can't get user_data.\n");
     GObj_InitUserData(temp_r31, 0, mn_8022EB04, user_data);
     tmp = mn_804A04F0.cur_menu;
