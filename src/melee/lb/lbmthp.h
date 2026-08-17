@@ -13,7 +13,7 @@ u32 lbMthp_8001F5D4(void);
 int lbMthp_8001F5E4(void);
 int lbMthp_8001F5F4(void);
 int lbMthp_8001F604(void);
-void lbMthp_8001F614(s32 arg0);
+void lbMthp_8001F614(int arg0);
 HSD_SObj* lbMthp_8001F624(HSD_GObj*, int, int);
 void lbMthp_8001F67C(HSD_GObj*, int);
 void lbMthp_8001F800(void);

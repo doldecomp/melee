@@ -575,7 +575,7 @@ int lbMthp_8001F604(void)
     return MoviePlayer.unk_144;
 }
 
-void lbMthp_8001F614(s32 arg0)
+void lbMthp_8001F614(int arg0)
 {
     MoviePlayer.unk_148 = arg0;
 }
