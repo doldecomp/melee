@@ -918,11 +918,11 @@ void mnCharSel_8025DB34(u8 arg0)
                     temp_f31 =
                         (f32) mnCharSel_804D6CB0->data.data.players[arg0]
                             .cpu_level;
-                    lb_80011E24(
-                        mnCharSel_804D6CC0, &sp6C,
-                        mnCharSel_803F0DFC.doors[arg0].cpuslider_joint, -1);
-                    HSD_ForeachAnim(sp6C, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
-                                    AOBJ_ARG_AF, temp_f31);
+                    lb_80011E24(mnCharSel_804D6CC0, &sp6C,
+                                mnCharSel_803F0DFC.doors[arg0].cpuslider_joint,
+                                -1);
+                    HSD_ForeachAnim(sp6C, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjReqAnim, AOBJ_ARG_AF, temp_f31);
                     HSD_JObjAnimAll(sp6C);
                     HSD_ForeachAnim(sp6C, JOBJ_TYPE, TOBJ_MASK,
                                     HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
@@ -943,11 +943,9 @@ void mnCharSel_8025DB34(u8 arg0)
                     if (gmMainLib_GetGameRules()->handicap == 1) {
                         hval = (u8) gm_801685D4(
                             (int) arg0,
-                            mnCharSel_804D6CB0->data.data.players[arg0]
-                                .xA);
+                            mnCharSel_804D6CB0->data.data.players[arg0].xA);
                     } else {
-                        hval = (u8) mnCharSel_804D6CB0->data.data
-                                   .players[arg0]
+                        hval = (u8) mnCharSel_804D6CB0->data.data.players[arg0]
                                    .handicap;
                     }
                     hval = (hval != 0) ? hval : 1;
@@ -955,8 +953,8 @@ void mnCharSel_8025DB34(u8 arg0)
                     lb_80011E24(mnCharSel_804D6CC0, &sp68,
                                 mnCharSel_803F0DFC.doors[arg0].cpuslider_joint,
                                 -1);
-                    HSD_ForeachAnim(sp68, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
-                                    AOBJ_ARG_AF, temp_f31);
+                    HSD_ForeachAnim(sp68, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjReqAnim, AOBJ_ARG_AF, temp_f31);
                     HSD_JObjAnimAll(sp68);
                     HSD_ForeachAnim(sp68, JOBJ_TYPE, TOBJ_MASK,
                                     HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
@@ -964,12 +962,11 @@ void mnCharSel_8025DB34(u8 arg0)
                     if (gmMainLib_GetGameRules()->handicap == 1) {
                         hval2 = (u8) gm_801685D4(
                             (int) arg0,
-                            mnCharSel_804D6CB0->data.data.players[arg0]
-                                .xA);
+                            mnCharSel_804D6CB0->data.data.players[arg0].xA);
                     } else {
-                        hval2 = (u8) mnCharSel_804D6CB0->data.data
-                                    .players[arg0]
-                                    .handicap;
+                        hval2 =
+                            (u8) mnCharSel_804D6CB0->data.data.players[arg0]
+                                .handicap;
                     }
                     hval2 = (hval2 != 0) ? hval2 : 1;
                     temp_f31 = 1.25f * (f32) (hval2 - 1);
@@ -981,8 +978,8 @@ void mnCharSel_8025DB34(u8 arg0)
                     lb_80011E24(
                         mnCharSel_804D6CC0, &sp60,
                         mnCharSel_803F0DFC.doors[arg0].cpuslider2_joint, -1);
-                    HSD_ForeachAnim(sp60, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
-                                    AOBJ_ARG_AF, temp_f31);
+                    HSD_ForeachAnim(sp60, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjReqAnim, AOBJ_ARG_AF, temp_f31);
                     HSD_JObjAnimAll(sp60);
                     HSD_ForeachAnim(sp60, JOBJ_TYPE, TOBJ_MASK,
                                     HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
@@ -993,11 +990,11 @@ void mnCharSel_8025DB34(u8 arg0)
                     temp_f31 =
                         (f32) mnCharSel_804D6CB0->data.data.players[arg0]
                             .cpu_level;
-                    lb_80011E24(
-                        mnCharSel_804D6CC0, &sp5C,
-                        mnCharSel_803F0DFC.doors[arg0].cpuslider_joint, -1);
-                    HSD_ForeachAnim(sp5C, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
-                                    AOBJ_ARG_AF, temp_f31);
+                    lb_80011E24(mnCharSel_804D6CC0, &sp5C,
+                                mnCharSel_803F0DFC.doors[arg0].cpuslider_joint,
+                                -1);
+                    HSD_ForeachAnim(sp5C, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjReqAnim, AOBJ_ARG_AF, temp_f31);
                     HSD_JObjAnimAll(sp5C);
                     HSD_ForeachAnim(sp5C, JOBJ_TYPE, TOBJ_MASK,
                                     HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
@@ -1023,20 +1020,19 @@ void mnCharSel_8025DB34(u8 arg0)
                     if (gmMainLib_GetGameRules()->handicap == 1) {
                         hval3 = (u8) gm_801685D4(
                             (int) arg0,
-                            mnCharSel_804D6CB0->data.data.players[arg0]
-                                .xA);
+                            mnCharSel_804D6CB0->data.data.players[arg0].xA);
                     } else {
-                        hval3 = (u8) mnCharSel_804D6CB0->data.data
-                                    .players[arg0]
-                                    .handicap;
+                        hval3 =
+                            (u8) mnCharSel_804D6CB0->data.data.players[arg0]
+                                .handicap;
                     }
                     hval3 = (hval3 != 0) ? hval3 : 1;
                     temp_f31 = (f32) hval3;
                     lb_80011E24(mnCharSel_804D6CC0, &sp58,
                                 mnCharSel_803F0DFC.doors[arg0].cpuslider_joint,
                                 -1);
-                    HSD_ForeachAnim(sp58, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
-                                    AOBJ_ARG_AF, temp_f31);
+                    HSD_ForeachAnim(sp58, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjReqAnim, AOBJ_ARG_AF, temp_f31);
                     HSD_JObjAnimAll(sp58);
                     HSD_ForeachAnim(sp58, JOBJ_TYPE, TOBJ_MASK,
                                     HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
@@ -1044,12 +1040,11 @@ void mnCharSel_8025DB34(u8 arg0)
                     if (gmMainLib_GetGameRules()->handicap == 1) {
                         hval4 = (u8) gm_801685D4(
                             (int) arg0,
-                            mnCharSel_804D6CB0->data.data.players[arg0]
-                                .xA);
+                            mnCharSel_804D6CB0->data.data.players[arg0].xA);
                     } else {
-                        hval4 = (u8) mnCharSel_804D6CB0->data.data
-                                    .players[arg0]
-                                    .handicap;
+                        hval4 =
+                            (u8) mnCharSel_804D6CB0->data.data.players[arg0]
+                                .handicap;
                     }
                     hval4 = (hval4 != 0) ? hval4 : 1;
                     temp_f31 = 1.25f * (f32) (hval4 - 1);
@@ -1061,8 +1056,8 @@ void mnCharSel_8025DB34(u8 arg0)
                     lb_80011E24(
                         mnCharSel_804D6CC0, &sp50,
                         mnCharSel_803F0DFC.doors[arg0].cpuslider2_joint, -1);
-                    HSD_ForeachAnim(sp50, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
-                                    AOBJ_ARG_AF, temp_f31);
+                    HSD_ForeachAnim(sp50, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjReqAnim, AOBJ_ARG_AF, temp_f31);
                     HSD_JObjAnimAll(sp50);
                     HSD_ForeachAnim(sp50, JOBJ_TYPE, TOBJ_MASK,
                                     HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
@@ -1077,11 +1072,11 @@ void mnCharSel_8025DB34(u8 arg0)
                     temp_f31 =
                         (f32) mnCharSel_804D6CB0->data.data.players[arg0]
                             .cpu_level;
-                    lb_80011E24(
-                        mnCharSel_804D6CC0, &sp4C,
-                        mnCharSel_803F0DFC.doors[arg0].cpuslider_joint, -1);
-                    HSD_ForeachAnim(sp4C, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
-                                    AOBJ_ARG_AF, temp_f31);
+                    lb_80011E24(mnCharSel_804D6CC0, &sp4C,
+                                mnCharSel_803F0DFC.doors[arg0].cpuslider_joint,
+                                -1);
+                    HSD_ForeachAnim(sp4C, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjReqAnim, AOBJ_ARG_AF, temp_f31);
                     HSD_JObjAnimAll(sp4C);
                     HSD_ForeachAnim(sp4C, JOBJ_TYPE, TOBJ_MASK,
                                     HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
@@ -1098,11 +1093,10 @@ void mnCharSel_8025DB34(u8 arg0)
 
         /* Player indicator / status icon */
 
-        temp_f31 = (f32)
-            mnCharSel_804D50CC[mnCharSel_803F0DFC.doors[arg0].p_kind];
-        lb_80011E24(
-            mnCharSel_804D6CC0, &sp48,
-            mnCharSel_803F0DFC.doors[arg0].player_indicator_joint, -1);
+        temp_f31 =
+            (f32) mnCharSel_804D50CC[mnCharSel_803F0DFC.doors[arg0].p_kind];
+        lb_80011E24(mnCharSel_804D6CC0, &sp48,
+                    mnCharSel_803F0DFC.doors[arg0].player_indicator_joint, -1);
         HSD_ForeachAnim(sp48, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjReqAnim,
                         AOBJ_ARG_AF, temp_f31);
         HSD_JObjAnimAll(sp48);
@@ -1121,9 +1115,9 @@ void mnCharSel_8025DB34(u8 arg0)
                 port_color_idx += 4;
             }
 
-
             temp_f31 = (f32) mnCharSel_804D50D8[port_color_idx];
-            lb_80011E24(mnCharSel_804D6CC0, &sp44, mnCharSel_803F0DFC.doors[arg0].bg_joint, -1);
+            lb_80011E24(mnCharSel_804D6CC0, &sp44,
+                        mnCharSel_803F0DFC.doors[arg0].bg_joint, -1);
             HSD_ForeachAnim(sp44, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
                             AOBJ_ARG_AF, temp_f31);
             HSD_JObjAnimAll(sp44);
@@ -1131,7 +1125,8 @@ void mnCharSel_8025DB34(u8 arg0)
                             AOBJ_ARG_AOV, 0, 0);
 
             temp_f31 = (f32) mnCharSel_804D50D8[port_color_idx];
-            lb_80011E24(mnCharSel_804D6CC0, &sp40, mnCharSel_803F0DFC.doors[arg0].emblem_joint, -1);
+            lb_80011E24(mnCharSel_804D6CC0, &sp40,
+                        mnCharSel_803F0DFC.doors[arg0].emblem_joint, -1);
             HSD_ForeachAnim(sp40, JOBJ_TYPE, MOBJ_MASK, HSD_AObjReqAnim,
                             AOBJ_ARG_AF, temp_f31);
             HSD_JObjAnimAll(sp40);
@@ -1144,7 +1139,8 @@ void mnCharSel_8025DB34(u8 arg0)
             var_r23 = *team_ptr;
 
             temp_f31 = (f32) mnCharSel_804D50D0[var_r23];
-            lb_80011E24(mnCharSel_804D6CC0, &sp3C, mnCharSel_803F0DFC.doors[arg0].team_joint, -1);
+            lb_80011E24(mnCharSel_804D6CC0, &sp3C,
+                        mnCharSel_803F0DFC.doors[arg0].team_joint, -1);
             HSD_ForeachAnim(sp3C, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
                             AOBJ_ARG_AF, temp_f31);
             HSD_JObjAnimAll(sp3C);
@@ -1154,9 +1150,9 @@ void mnCharSel_8025DB34(u8 arg0)
                 var_r23 += 4;
             }
             {
-
                 temp_f31 = (f32) mnCharSel_804D50D0[var_r23];
-                lb_80011E24(mnCharSel_804D6CC0, &sp38, mnCharSel_803F0DFC.doors[arg0].bg_joint, -1);
+                lb_80011E24(mnCharSel_804D6CC0, &sp38,
+                            mnCharSel_803F0DFC.doors[arg0].bg_joint, -1);
                 HSD_ForeachAnim(sp38, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
                                 AOBJ_ARG_AF, temp_f31);
                 HSD_JObjAnimAll(sp38);
@@ -1164,9 +1160,8 @@ void mnCharSel_8025DB34(u8 arg0)
                                 AOBJ_ARG_AOV, 0, 0);
 
                 temp_f31 = (f32) mnCharSel_804D50D0[var_r23];
-                lb_80011E24(
-                    mnCharSel_804D6CC0, &sp34,
-                    mnCharSel_803F0DFC.doors[arg0].emblem_joint, -1);
+                lb_80011E24(mnCharSel_804D6CC0, &sp34,
+                            mnCharSel_803F0DFC.doors[arg0].emblem_joint, -1);
                 HSD_ForeachAnim(sp34, JOBJ_TYPE, MOBJ_MASK, HSD_AObjReqAnim,
                                 AOBJ_ARG_AF, temp_f31);
                 HSD_JObjAnimAll(sp34);
