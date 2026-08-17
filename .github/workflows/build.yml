@@ -144,6 +144,7 @@ jobs:
           ;;
           'clang')
             config_args=""
+            export PRE_COMMIT_HOME="$PWD/build/pre-commit"
 
             # TODO: Migrate to nix and install to environment
             apk add --update --no-cache clang-extra-tools pre-commit
