@@ -5,7 +5,6 @@
 #include "gm_1A45.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
-#include "gmtou_2.h"
 #include "gmtoulib.h"
 #include "types.h"
 
@@ -30,10 +29,8 @@
 #include <dolphin/os.h>
 #include <baselib/controller.h>
 #include <baselib/dobj.h>
-#include <baselib/fog.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/mobj.h>

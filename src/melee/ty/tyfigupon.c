@@ -5,9 +5,6 @@
 #include "stddef.h"
 #include "toy.h"
 
-#include <placeholder.h>
-#include <platform.h>
-
 #include "baselib/archive.h"
 #include "baselib/cobj.h"
 #include "baselib/controller.h"
