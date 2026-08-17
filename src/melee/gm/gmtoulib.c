@@ -3,7 +3,6 @@
 #include "gm_1601.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
-#include "gmtoulib.h"
 
 #include "gmtoulib.static.h"
 
@@ -34,10 +33,7 @@
 #include <dolphin/os.h>
 #include <baselib/controller.h>
 #include <baselib/dobj.h>
-#include <baselib/fog.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/hsd_3915.h>
