@@ -1,7 +1,6 @@
 #include "ifstatus.h"
 
 #include "ifall.h"
-#include "m2c_macros.h"
 #include "placeholder.h"
 
 #include "gm/gm_unsplit.h"
@@ -200,18 +199,18 @@ void ifStatus_PercentOnDeathAnimationThink(UnkX* value, s32 arg1, s32 arg2)
         if (fabsf_bitwise(jobj_r30->translate.x) <
             100.0f) { // 100.0f @ lbl_804DDA6C
             float f = (&value->x34_vec.x)[i];
-            jobj_r30 = (void*) jobj_get(jobj_r30, value, i);
+            jobj_r30 = (HSD_JObj*) jobj_get(jobj_r30, value, i);
             ASSERT_NOT_NULL(jobj_r30, 1102);
             jobj_r30->translate.x += f;
             jobj_flagCheckSetMtxDirtySub(jobj_r30);
         }
-        jobj_r30 = (void*) jobj_get(jobj_r30, value, i);
+        jobj_r30 = (HSD_JObj*) jobj_get(jobj_r30, value, i);
         ASSERT_NOT_NULL(jobj_r30, 1006);
 
         if (jobj_r30->translate.y > -100.0f) {
             float f = (&value->x44_vec.x)[i];
-            jobj_r30 = (void*) jobj_get(jobj_r30, value, i);
-            jobj_r30 = (void*) jobj_get(jobj_r30, value, i);
+            jobj_r30 = (HSD_JObj*) jobj_get(jobj_r30, value, i);
+            jobj_r30 = (HSD_JObj*) jobj_get(jobj_r30, value, i);
             ASSERT_NOT_NULL(jobj_r30, 1114);
             jobj_r30->translate.y += f;
             jobj_flagCheckSetMtxDirtySub(jobj_r30);

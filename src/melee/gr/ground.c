@@ -2950,6 +2950,9 @@ static inline float vec_len(Vec3* v)
     return sqrtf(x2 + y2 + z2);
 }
 
+#ifdef BUGFIX
+#define sqrtf_store(x, y) sqrtf(x)
+#else
 /// MSL sqrtf expansion with caller-owned volatile storage. Keeping each
 /// expansion's temporary in the caller preserves the retail stack-slot order.
 static inline float sqrtf_store(float x, volatile float* y)
@@ -2964,6 +2967,7 @@ static inline float sqrtf_store(float x, volatile float* y)
     }
     return x;
 }
+#endif
 
 /// @todo replace with fog.h inlines
 #define FOG_ASSERT(line, cond)                                                \

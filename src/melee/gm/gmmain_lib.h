@@ -1,10 +1,8 @@
 #ifndef GALE01_15CC34
 #define GALE01_15CC34
 
-#include <placeholder.h>
 #include <platform.h>
 
-#include "ft/forward.h"
 #include <melee/gm/forward.h>
 
 #include <melee/gm/types.h>

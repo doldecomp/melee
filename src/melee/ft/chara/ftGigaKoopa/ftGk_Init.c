@@ -13,6 +13,7 @@
 #include "ftKoopa/ftKp_SpecialHi.h"
 #include "ftKoopa/ftKp_SpecialLw.h"
 #include "ftKoopa/ftKp_SpecialN.h"
+#include "ftKoopa/ftKp_SpecialS.h"
 #include "ftKoopa/types.h"
 
 #include "it/forward.h"

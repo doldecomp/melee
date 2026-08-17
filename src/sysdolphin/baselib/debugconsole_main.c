@@ -1,16 +1,18 @@
 #include "debugconsole_main.h"
 
 #include <dolphin/pad.h>
-#include <dolphin/vi.h>
+#include <dolphin/vi/vifuncs.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/hsd_3915.h>
-#include <sysdolphin/baselib/hsd_3933.h>
 #include <sysdolphin/baselib/hsd_393C.h>
 #include <sysdolphin/baselib/video.h>
+
+#ifdef MWERKS_GEKKO
 #include <MetroTRK/ppc_reg.h>
+#endif
 
 typedef struct _ExcptNode {
     /* 0x1 */ struct _ExcptNode* next;
@@ -555,42 +557,52 @@ void hsd_80394314(void)
     struct ParticleScreenState* sp = &hsd_804CF810;
 
     memset(sp, 0, sizeof(*sp));
-    hsd_803941E8(&((struct ParticleScreenState*) sp)->x24,
-                 &((struct ParticleScreenState*) sp)->x2C);
+    hsd_803941E8(&(sp)->x24, &(sp)->x2C);
 
     {
         s32 mode;
-        if (((struct ParticleScreenState*) sp)->x28 != 0) {
+        if ((sp)->x28 != 0) {
             mode = 2;
         } else {
             mode = 1;
         }
-        ((struct ParticleScreenState*) sp)->x38 = mode;
+        (sp)->x38 = mode;
     }
 
-    ((struct ParticleScreenState*) sp)->x34 = 0;
-    ((struct ParticleScreenState*) sp)->x30 = &HSD_VIData;
-    ((struct ParticleScreenState*) sp)->x3C =
-        ((u16*) ((struct ParticleScreenState*) sp)->x30)[2];
-    ((struct ParticleScreenState*) sp)->x40 =
-        ((u16*) ((struct ParticleScreenState*) sp)->x30)[4];
-    ((struct ParticleScreenState*) sp)->x44 =
+    (sp)->x34 = 0;
+    (sp)->x30 = &HSD_VIData;
+    (sp)->x3C = ((u16*) (sp)->x30)[2];
+    (sp)->x40 = ((u16*) (sp)->x30)[4];
+
+    /// @todo Redundant cast improves match
+#ifdef BUGFIX
+    (sp)->x44 = (((u16) sp->x3C + 15) * 2) & 0x1FFE0;
+#else
+    (sp)->x44 =
         (((u16) ((struct ParticleScreenState*) sp)->x3C + 15) * 2) & 0x1FFE0;
-    ((struct ParticleScreenState*) sp)->x48 =
-        ((struct ParticleScreenState*) sp)->x44 *
-        ((struct ParticleScreenState*) sp)->x40;
-    ((struct ParticleScreenState*) sp)->x4 = 0;
-    ((struct ParticleScreenState*) sp)->x8 =
-        ((struct ParticleScreenState*) sp)->x40;
-    ((struct ParticleScreenState*) sp)->x18 = 0;
-    ((struct ParticleScreenState*) sp)->x14 = 0;
-    ((struct ParticleScreenState*) sp)->x20 =
-        (u32) (((struct ParticleScreenState*) sp)->x3C - 0x28) / 11;
-    ((struct ParticleScreenState*) sp)->x1C =
-        (u32) (((struct ParticleScreenState*) sp)->x40 - 0x50) / 14;
-    ((struct ParticleScreenState*) sp)->x4C = lbl_804088B8;
-    ((struct ParticleScreenState*) sp)->x50 = 0;
-    ((struct ParticleScreenState*) sp)->xC4 = 0;
+#endif
+
+    (sp)->x48 = (sp)->x44 * (sp)->x40;
+    (sp)->x4 = 0;
+    /// @todo Redundant cast improves match
+#ifdef BUGFIX
+    (sp)->x8 = sp->x40;
+#else
+    (sp)->x8 = ((struct ParticleScreenState*) sp)->x40;
+#endif
+    (sp)->x18 = 0;
+    (sp)->x14 = 0;
+    /// @todo Redundant casts improve match
+#ifdef BUGFIX
+    (sp)->x20 = (u32) (sp->x3C - 0x28) / 11;
+    (sp)->x1C = (u32) (sp->x40 - 0x50) / 14;
+#else
+    (sp)->x20 = (u32) (((struct ParticleScreenState*) sp)->x3C - 0x28) / 11;
+    (sp)->x1C = (u32) (((struct ParticleScreenState*) sp)->x40 - 0x50) / 14;
+#endif
+    (sp)->x4C = lbl_804088B8;
+    (sp)->x50 = 0;
+    (sp)->xC4 = 0;
 }
 
 // @TODO: Currently 94.99% match - obj file has extra addi for lis/addi

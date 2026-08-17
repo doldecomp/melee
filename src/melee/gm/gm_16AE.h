@@ -82,7 +82,6 @@
 
 /// @todo should take Fighter_GObj*? See ftCo_800A53DC
 /* 16C6C0 */ /* static */ s32 gm_8016C6C0(Item_GObj*);
-/* 16C6C0 */ s32 gm_8016C6C0(Item_GObj*);
 /* 16C75C */ /* static */ int gm_8016C75C(HSD_GObj*);
 /* 16C7D0 */ void fn_8016C7D0(HSD_GObj*);
 /* 16C7F0 */ void fn_8016C7F0(void);

@@ -1109,7 +1109,12 @@ block_43:
 #pragma dont_inline on
 bool ftCo_800A2718(mp_UnkStruct0* arg0)
 {
+    /// @todo Redundant cast and assignment improves match
+#ifdef BUGFIX
+    mp_UnkStruct0* island = arg0;
+#else
     mp_UnkStruct0* island = (mp_UnkStruct0*) arg0;
+#endif
     if (arg0 == NULL) {
         return false;
     }
@@ -5320,8 +5325,11 @@ static inline void ftCo_800ABBA8_blk155144r(Fighter* fp, Fighter** target)
     *target = data->x44;
 }
 
+#ifdef BUGFIX
+#define sqrtf_store(x, y) sqrtf(x)
+#else
 /* MSL sqrtf with caller-provided volatile slot (retail 0x34/0x38/0x40). */
-static inline float ftCo_800ABBA8_sqrtf_store(float x, volatile float* y)
+static inline float sqrtf_store(float x, volatile float* y)
 {
     if (x > 0.0f) {
         double guess = __frsqrte((double) x);
@@ -5333,6 +5341,7 @@ static inline float ftCo_800ABBA8_sqrtf_store(float x, volatile float* y)
     }
     return x;
 }
+#endif
 
 void ftCo_800ABBA8(Fighter* fp)
 {
@@ -5427,8 +5436,7 @@ void ftCo_800ABBA8(Fighter* fp)
                 ok = 0;
             }
             if (ok == 0) {
-                disc = ftCo_800ABBA8_sqrtf_store(ABS(2.0f * g * h + v * v),
-                                                 &sqrt_tmp[3]);
+                disc = sqrtf_store(ABS(2.0f * g * h + v * v), &sqrt_tmp[3]);
                 t = (-disc - v) / g;
             } else {
                 if (v < 0.00001f && v > -0.00001f) {
@@ -5510,11 +5518,11 @@ void ftCo_800ABBA8(Fighter* fp)
     if (vf5 <= 0.0f) {
         land_y = fp->pos_delta.y * vf0 + fp->cur_pos.y;
     } else if (vf0 < vf5) {
-        tmp = ftCo_800ABBA8_sqrtf_store(vf0, &sqrt_tmp[1]);
+        tmp = sqrtf_store(vf0, &sqrt_tmp[1]);
         land_y =
             fp->cur_pos.y + (fp->pos_delta.y * vf0 - 0.5 * (*grav_ptr * tmp));
     } else {
-        tmp = ftCo_800ABBA8_sqrtf_store(vf5, &sqrt_tmp[0]);
+        tmp = sqrtf_store(vf5, &sqrt_tmp[0]);
         land_y =
             fp->cur_pos.y + (fp->pos_delta.y * vf5 - 0.5 * (*grav_ptr * tmp) -
                              (vf0 - vf5) * ftCo_GetTerminalVelocity(fp));

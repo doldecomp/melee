@@ -126,6 +126,7 @@ extern FILE __files[3];
 #define stdout (&__files[1])
 #define stderr (&__files[2])
 
+int printf(const char* format, ...);
 int sprintf(char* s, const char* format, ...);
 int vprintf(const char* format, va_list arg);
 int vsprintf(char* s, const char* format, va_list arg);

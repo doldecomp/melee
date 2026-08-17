@@ -14,9 +14,5 @@
 /* 022998 */ void lbRefract_80022998(HSD_MObj*, u32 rendermode, s32);
 /* 022BB8 */ void lbRefract_80022BB8(void);
 /* 022BD0 */ void lbRefSetUnuse(void);
-/* 022C30 */ float atan2f(float y, float x);
-/* 022D1C */ float acosf(float);
-/* 022DBC */ float asinf(float);
-/* 022E68 */ float atanf(float);
 
 #endif
