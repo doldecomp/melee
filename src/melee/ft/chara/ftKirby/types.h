@@ -217,22 +217,18 @@ struct ftKb_DatAttrs {
     /* +1BC */ float specialn_ns_freefall_toggle;
 
     // Pikachu
-    /* +1C0 */ float specialn_pk_ground_spawn_offset_x;
-    /* +1C4 */ float specialn_pk_ground_spawn_offset_y;
-    /* +1C8 */ float specialn_pk_air_spawn_offset_x;
-    /* +1CC */ float specialn_pk_air_spawn_offset_y;
-    /* +1D0 */ float specialn_pk_freefall_toggle;
-    /* +1D4 */ u32 specialn_pk_grounded_item_id;
-    /* +1D8 */ u32 specialn_pk_air_item_id;
+    /* +1C0 */ Vec2 specialn_pk_spawn_offset;
+    /* +1C8 */ Vec2 specialairn_pk_spawn_offset;
+    /* +1D0 */ float specialairn_pk_landing_lag;
+    /* +1D4 */ ItemKind specialn_pk_itkind;
+    /* +1D8 */ ItemKind specialairn_pk_itkind;
 
     // Pichu
-    /* +1DC */ float specialn_pc_ground_spawn_offset_x;
-    /* +1E0 */ float specialn_pc_ground_spawn_offset_y;
-    /* +1E4 */ float specialn_pc_air_spawn_offset_x;
-    /* +1E8 */ float specialn_pc_air_spawn_offset_y;
-    /* +1EC */ float specialn_pc_freefall_toggle;
-    /* +1F0 */ u32 specialn_pc_grounded_item_id;
-    /* +1F4 */ u32 specialn_pc_air_item_id;
+    /* +1DC */ Vec2 specialn_pc_spawn_offset;
+    /* +1E4 */ Vec2 specialairn_pc_spawn_offset;
+    /* +1EC */ float specialairn_pc_landing_lag;
+    /* +1F0 */ ItemKind specialn_pc_itkind;
+    /* +1F4 */ ItemKind specialairn_pc_itkind;
 
     // Captain Falcon
     /* +1F8 */ float specialn_ca_x_axis_range;
