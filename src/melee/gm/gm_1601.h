@@ -230,7 +230,7 @@
 /* 16A434 */ void gm_8016A434(void);
 /* 16A450 */ void fn_8016A450(void);
 /* 16A46C */ void fn_8016A46C(void);
-/* 16A488 */ void fn_8016A488(long);
+/* 16A488 */ void fn_8016A488(int);
 /* 16A4C8 */ void fn_8016A4C8(void);
 /* 16A92C */ void gm_8016A92C(StartMeleeRules*);
 /* 16A944 */ bool gm_8016A944(UNK_PARAMS);

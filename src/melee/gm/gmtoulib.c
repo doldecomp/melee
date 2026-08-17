@@ -30,6 +30,7 @@
 
 #include <m2c_macros.h>
 #include <stdio.h>
+#include <string.h>
 #include <baselib/controller.h>
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>

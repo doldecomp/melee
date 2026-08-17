@@ -4,7 +4,6 @@
 #include "gmmain_lib.h"
 
 #include "db/db.h"
-#include "dolphin/vi/vifuncs.h"
 #include "gm/gm_1A36.h"
 #include "gm/gmscdata.h"
 #include "lb/lbaudio_ax.h"
@@ -15,6 +14,7 @@
 #include "lb/types.h"
 #include "ty/toy.h"
 
+#include <dolphin/vi.h>
 #include <baselib/controller.h>
 #include <baselib/devcom.h>
 #include <baselib/sislib.h>
