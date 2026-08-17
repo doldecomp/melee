@@ -74,7 +74,7 @@ jobs:
           '--sym off')
 
         function run_configure {
-          echo "$config_args" | xargs python configure.py
+          echo "$config_args" | xargs python configure.py || exit "$?"
         }
 
         function checkout {
