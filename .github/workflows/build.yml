@@ -146,7 +146,7 @@ jobs:
             config_args=""
 
             # TODO: Migrate to nix and install to environment
-            apk add --update --no-cache pre-commit
+            apk add --update --no-cache clang-extra-tools pre-commit
 
             run_configure
             ninja 'build/${{matrix.version}}/config.json'
