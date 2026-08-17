@@ -231,6 +231,19 @@ static inline void ftKb_SpecialN_800EF438_insert_joint_refs(
     *joint = root;
 }
 
+static inline HSD_JObj*
+ftKb_SpecialN_800EF0E4_find_bone(Fighter* fp, s32* part_off, u8** arg2_cur)
+{
+    FighterBone* parts = fp->parts;
+    FighterBone* bone = (FighterBone*) ((u8*) parts + *part_off);
+    while (!bone->flags_b1) {
+        bone = (FighterBone*) ((u8*) bone + 0x10);
+        (*arg2_cur)++;
+        *part_off += 0x10;
+    }
+    return ((FighterBone*) ((u8*) parts + *part_off))->joint;
+}
+
 static inline void ftKb_SpecialN_800EF0E4_finish(Fighter* fp, s32 total_dobjs)
 {
     fp->u.gw.x2240_chefVar1 = total_dobjs;
@@ -270,17 +283,8 @@ void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
         byte_off = byte_base << 2;
         part_off = 0;
         while (current_joint != NULL) {
-            FighterBone* parts_base = fp->parts;
-            FighterBone* parts = parts_base;
-            FighterBone* bone;
             group_count = 0;
-            bone = (FighterBone*) ((u8*) parts + part_off);
-            while (!bone->flags_b1) {
-                bone = (FighterBone*) ((u8*) bone + 0x10);
-                arg2_cur++;
-                part_off += 0x10;
-            }
-            jobj = ((FighterBone*) ((u8*) parts + part_off))->joint;
+            jobj = ftKb_SpecialN_800EF0E4_find_bone(fp, &part_off, &arg2_cur);
             dobj = HSD_DObjLoadDesc(current_joint->u.dobjdesc);
             *arg2_cur = total_dobjs;
             if (dobj != NULL) {
