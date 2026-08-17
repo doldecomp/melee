@@ -338,8 +338,6 @@ void ftKp_Init_OnDeath(HSD_GObj* gobj)
     }
 }
 
-/* static */ void ftKp_SpecialLw_80134D78(HSD_GObj* gobj);
-
 void ftKp_Init_UnkMotionStates3(HSD_GObj* gobj)
 {
     ftKp_SpecialLw_80134D78(gobj);

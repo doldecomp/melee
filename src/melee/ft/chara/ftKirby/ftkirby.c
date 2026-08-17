@@ -41,10 +41,9 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
-void ftAnim_80070458(Fighter* fp, CostumeTObjList*, u32 tobj_idx, float frame);
 void fn_800F9260(HSD_GObj*);
 void ftCommon_8007D9A0(Fighter* fp);
-void fn_8010B1F4(Fighter_GObj*);
+
 static void fn_801095DC(HSD_GObj*);
 static void fn_80109680(HSD_GObj*);
 static void fn_80109714(HSD_GObj*);

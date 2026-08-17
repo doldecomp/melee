@@ -105,8 +105,6 @@ static int gm_803DB25C[0x1A] = {
     // clang-format on
 };
 
-extern Event gm_804D6724;
-
 void gm_801A637C_OnEnter(void* arg0)
 {
     HSD_GObj* temp_r3;

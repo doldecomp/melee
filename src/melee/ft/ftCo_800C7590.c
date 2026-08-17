@@ -22,8 +22,6 @@
 /* 0C74CC */ void fn_800C74CC(Fighter_GObj* gobj);
 /* 0C7568 */ void fn_800C7568(Fighter_GObj* gobj);
 
-/* 0C77E0 */ static void fn_800C77E0(Fighter_GObj* arg0);
-
 static void orderTest(Vec3* ptr)
 {
     ptr->y = (s32) ptr->x;

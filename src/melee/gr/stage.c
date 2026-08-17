@@ -10,8 +10,6 @@
 #include <baselib/debug.h>
 #include <baselib/random.h>
 
-extern struct StageInfo stage_info;
-
 /// One #stage_id_map entry: the #GrKind for a #StKind.
 struct StageIdMapEntry {
     GrKind grkind;

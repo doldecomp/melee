@@ -16,7 +16,6 @@
 #include <melee/mn/mnlanguage.h>
 #include <melee/mn/mnmain.h>
 
-extern HSD_Archive* mn_804D6BB8;
 static HSD_GObj* mnLanguage_804D6C50;
 
 struct {

@@ -7,11 +7,6 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/it/it_26B1.h>
 
-void ftCo_800CE0CC(HSD_GObj*); /* extern */
-void ftCo_800CE14C(HSD_GObj*); /* extern */
-void ftCo_800CE650(HSD_GObj*); /* extern */
-void it_8028E938(Item_GObj*);  /* extern */
-
 /// grounded
 void ftCo_Attack_800CDD14(Fighter_GObj* fighter_gobj)
 {

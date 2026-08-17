@@ -35,7 +35,7 @@
 #include <baselib/sislib.h>
 
 /// --- Externs ---
-extern long HSD_GObj_804D783C;
+
 char* GetNameText(u8 slot);
 int GetNameCount(void);
 void lb_8001CE00(void);

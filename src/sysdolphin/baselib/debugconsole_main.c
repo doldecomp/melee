@@ -1703,8 +1703,6 @@ static char* lbl_804D62CC = "+- MEMORY DUMP ------------------------------+";
 static char* lbl_804D62D0 = "|%08X=%08X:%08X:%08X:%08X|";
 static char* lbl_804D62D4 = "+--------------------------------------------+";
 
-extern struct lbl_8040BAF0_t lbl_8040BAF0;
-
 static inline s32 hsd_80396188_calc_col(void)
 {
     return ((hsd_804CF810.x20 - 0x2E) / 2) * 11 + 20;
@@ -2005,8 +2003,6 @@ void hsd_80396884(void)
     }
     hsd_804CF810.x50 = saved;
 }
-
-extern struct lbl_8040BC3C_t lbl_8040BC3C;
 
 extern struct lbl_8040BA5C_t lbl_8040BD74;
 

@@ -97,9 +97,6 @@
 #include <baselib/mtx.h>
 #include <baselib/random.h>
 
-extern struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX];
-
-extern MotionState ftData_MotionStateList[ftCo_MS_Count];
 extern MotionState* ftData_CharacterStateTables[FTKIND_MAX];
 
 /// ==== fighter.c variables ====

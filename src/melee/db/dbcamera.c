@@ -25,8 +25,6 @@ static u8 db_ShowCameraInfo;
 const GXColor g_bg = { 0x00, 0x00, 0x00, 0x80 };
 const GXColor g_fg = { 0xFF, 0xFF, 0xFF, 0xFF };
 
-extern CameraDebugMode cm_80453004;
-
 void fn_SetupMiscStageVisuals(void)
 {
     db.MiscStageVisualsStatus = 0;

@@ -52,7 +52,6 @@
 
 static Vec3 const ftCo_DamageIce_HurtboxOffset = { 0 };
 static Vec3 const ftCo_803B74BC = { 0 };
-float atan2f(float, float);
 
 void ftCo_80090984(Fighter_GObj* gobj)
 {

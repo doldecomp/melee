@@ -171,8 +171,7 @@ extern u8 mn_804DBE0C;
 extern u16 mn_804DBDF8;
 extern u32 mn_804DBE10;
 extern u16 mn_804DBE14;
-extern u8 mn_803EC7DC[][2];
-extern u8 mn_803EC600[];
+
 extern s32 mn_804D6BD4;
 
 void mnItemSw_802358C0(void);
@@ -660,14 +659,13 @@ void mn_80230198(HSD_GObj* gobj, HSD_JObj* jobj, u8 mode)
 }
 
 extern MenuKindData mn_803EB6B0[];
-extern struct mn_803EC818_t mn_803EC818[];
+
 extern f32 mn_804DBE18;
 extern f32 mn_804DBE1C;
 extern f32 mn_804DBE20;
 extern f32 mn_804DBE24;
 extern f32 mn_804DBE28;
 extern f32 mn_804DBE2C;
-extern s32 mn_804D6BD4;
 
 void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
 {
@@ -1023,8 +1021,6 @@ void fn_802309F0(HSD_GObj* arg0)
         rules->stock_count = data->x9;
     }
 }
-
-extern s32 mn_804D6BD4;
 
 s32 mn_80230D18(struct mn_802307F8_t* arg0, HSD_JObj* arg1, s8 arg2)
 {
@@ -1383,8 +1379,6 @@ void mn_802317E4(HSD_Archive* archive, int arg1)
 {
     mn_80231804(archive, arg1);
 }
-
-extern s32 mn_804D6BD4;
 
 void mn_80231804(HSD_Archive* archive, int arg1)
 {

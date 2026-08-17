@@ -133,8 +133,6 @@
 #include <baselib/debug.h>
 #include <baselib/objalloc.h>
 
-extern int ft_8045996C[FTKIND_MAX];
-
 /* 3C0EC0 */ struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX] = {
     { &lbl_804599F0, 5 },       // Mario
     { &ft_80459B28, 4 },        // Fox

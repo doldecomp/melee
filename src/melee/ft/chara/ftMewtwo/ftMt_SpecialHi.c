@@ -297,8 +297,6 @@ static bool ftMewtwo_SpecialHi_CheckTimer(HSD_GObj* gobj)
     return true;
 }
 
-static bool ftMewtwo_SpecialHi_CheckTimer(HSD_GObj* gobj);
-
 /// Mewtwo's aerial Teleport Zoom Collision callback
 void ftMt_SpecialAirHiLost_Coll(HSD_GObj* gobj)
 {

@@ -438,7 +438,6 @@ char ftPr_Init_assert_msg_0[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
 ftCollisionBox ftPr_Init_803D0610 = {
     +8, +0, -4, +4, +4, +4,
 };
-/* static */ extern char* ftPr_Init_803D05B4[5];
 
 void ftPr_Init_8013C2F8(void)
 {

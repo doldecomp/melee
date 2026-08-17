@@ -1635,7 +1635,6 @@ void mnName_8023A9B4(u8 arg0)
 
 extern char** AutoNamesList;
 extern char** NotAllowedNamesList;
-extern HSD_Text* mnName_804D6BFC;
 
 static inline void mnName_InitNameDisplayOrder(void)
 {
@@ -1725,7 +1724,6 @@ static char mnName_RefuseNameUsName[] = "mnNameRefuseNameUs";
 static char mnName_AutoNameName[] = "mnNameAutoName";
 static char mnName_RefuseNameName[] = "mnNameRefuseName";
 
-extern char** NotAllowedNamesList;
 extern char mnNameNew_NullCharacter;
 
 bool IsNameNotAllowed(char* name)

@@ -2426,8 +2426,6 @@ void lbAudioAx_80027AB0(s32 arg0)
     }
 }
 
-extern int lbl_804D6418;
-
 void lbAudioAx_80027DBC(void)
 {
     HSD_AudioSFXKeyOffAll();

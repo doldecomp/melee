@@ -110,8 +110,6 @@ typedef struct mnSnap_State {
 static mnSnap_State mnSnap_804A0A10;
 static void* mnSnap_thumb_imgs[4];
 
-void mnSnap_80254298(void);
-
 static inline s32* mnSnap_GetCardResult(void)
 {
     return &mnSnap_804A0A10.card_result;

@@ -74,7 +74,6 @@ void ftCo_CaptureLikelike_Anim(Fighter_GObj* gobj)
 
     if (*(int*) &fp->mv.co.mushroom.x4 == 0) {
         if (fp->grab_timer <= 0.0f) {
-            void it_802DB9F4(Item_GObj*);
             it_802DB9F4(fp->mv.co.capturelikelike.x0);
             *(int*) &fp->mv.co.mushroom.x4 = 1;
         }

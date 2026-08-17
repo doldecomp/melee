@@ -663,8 +663,6 @@ bool it_3F14_Logic6_DmgDealt(Item_GObj* gobj)
     return false;
 }
 
-void it_80280B60(Item_GObj*);
-
 bool it_3F14_Logic6_DmgReceived(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
