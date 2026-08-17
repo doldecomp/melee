@@ -734,7 +734,7 @@ config.libs = [
             Object(Matching, "melee/ft/ftcolanim.c"),
             Object(Matching, "melee/ft/ftdevice.c"),
             Object(Matching, "melee/ft/ft_459A.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_Bury.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_Bury.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_FlyReflect.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_PassiveWall.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_PassiveCeil.c"),
