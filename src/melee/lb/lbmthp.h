@@ -1,5 +1,5 @@
-#ifndef MELEE_LB_MTHP_H
-#define MELEE_LB_MTHP_H
+#ifndef GALE01_01E8F8
+#define GALE01_01E8F8
 
 #include <baselib/forward.h>
 
