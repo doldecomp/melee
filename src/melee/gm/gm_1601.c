@@ -1510,21 +1510,21 @@ void gm_801628C4(u32 arg0, u32 arg1)
     temp_r3_3->x4 = (var_r4 > (u32) -1) ? (u32) -1 : var_r4;
 }
 
-long gm_80162968(u32 seconds)
+s32 gm_80162968(u32 seconds)
 {
     u32* ptr = gmMainLib_GetSingleplayerTime();
 
     *ptr = ((*ptr + seconds) > -1) ? -1 : (*ptr + seconds);
 }
 
-long gm_801629B4(s32 amount)
+s32 gm_801629B4(s32 amount)
 {
     u32* ptr = gmMainLib_8015CD80();
 
     *ptr = ((*ptr + amount) > -1) ? -1 : (*ptr + amount);
 }
 
-long gm_GetPlayTime(void)
+s32 gm_GetPlayTime(void)
 {
     u32 a;
     u32 b;
@@ -1534,7 +1534,7 @@ long gm_GetPlayTime(void)
     return a + b > -1 ? -1 : a + b;
 }
 
-long gm_80162A4C(s32 amount)
+s32 gm_80162A4C(s32 amount)
 {
     u32* ptr;
 
@@ -3452,7 +3452,7 @@ void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, GmRouteCallback arg4)
     s8 temp_r31;
     struct lbl_8046B488_t* new_var;
     struct lbl_8046B488_t* new_var2;
-    long long new_var3;
+    s64 new_var3;
     struct lbl_8046B488_t* temp_ptr;
     temp_ptr = gm_1601_GetUnkData();
     temp_ptr->x0 = arg0;
@@ -4581,7 +4581,7 @@ void fn_80169900(u8 arg0, struct lbl_8046B488_t* arg1, s8* arg2, s8* arg3)
 }
 #pragma pop
 
-long fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
+s32 fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
 {
     s8* p;
     s32 count;
