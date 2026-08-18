@@ -64,6 +64,30 @@ u8 mn_804D6BB4;
 
 MenuFlow mn_804A04F0;
 
+static void sdata2_order(void)
+{
+    (void) S32_TO_F32;
+    (void) -9.5f;
+    (void) 9.10000038f;
+    (void) 17.0f;
+    (void) 364.683319f;
+    (void) 38.3877182f;
+    (void) 0.052099999f;
+    (void) 0.0f;
+    (void) 1.0f;
+    (void) 2.0f;
+    (void) 10.0f;
+    (void) -0.200000003f;
+    (void) U32_TO_F32;
+    (void) -0.400000006f;
+    (void) 0.400000006f;
+    (void) 30.0f;
+    (void) 0.600000024f;
+    (void) 0.0174532924f;
+    (void) -0.100000001f;
+    (void) -1.0f;
+}
+
 static u16 mn_803EAE68[] = {
     0x4, 0x5, 0x6, 0x7, 0x8, 0x9, 0xA, 0xB, 0xC, 0xD,
 };
@@ -659,49 +683,6 @@ void mn_80229860(s8 pending_mode)
 }
 
 extern char null_terminator[1];
-
-void mn_8022EA08(char* buf, u32 num)
-{
-    int buf_end = mn_GetDigitCount(num);
-    int i;
-    for (i = 0; i < buf_end; i++) {
-        buf[buf_end - 1 - i] = mn_GetDigitAt(num, i) + '0';
-    }
-    buf[buf_end] = null_terminator[0];
-}
-
-void mn_8022EA78(char* buf, int buf_end, u32 num)
-{
-    int i;
-    for (i = 0; i < buf_end; i++) {
-        buf[buf_end - 1 - i] = mn_GetDigitAt(num, i) + '0';
-    }
-    buf[buf_end] = null_terminator[0];
-}
-
-s32 mn_GetDigitAt(s32 arg0, s32 arg1)
-{
-    return (arg0 / powi(10, arg1)) % 10;
-}
-
-s32 mn_GetDigitCount(s32 num)
-{
-    s32 count;
-    if (num == 0) {
-        return 1;
-    }
-    count = 0;
-    for (;;) {
-        if ((num / powi(10, count)) != 0) {
-            count += 1;
-            if (count < 11) {
-                continue;
-            }
-        }
-        break;
-    }
-    return count;
-}
 
 void mn_80229894(s32 arg0, u16 arg1, s32 arg2)
 {
@@ -1782,7 +1763,34 @@ int mn_8022C010(int menu_kind, int selection)
 
 MenuFlow mn_804A04F0;
 
-static inline void mn_8022C068(HSD_LObj* lobj, int unused, int div)
+static inline void mn_8022C068_inline(HSD_LObj* lobj, int unused, int div)
+{
+    int diff;
+
+    while (!(lobj->flags & LOBJ_POINT)) {
+        lobj = lobj->next;
+    }
+    if (div != 0) {
+        diff = mn_804A04F0.light_color->r - lobj->color.r;
+        if (diff != 0) {
+            lobj->color.r += diff / div;
+        }
+        diff = mn_804A04F0.light_color->g - lobj->color.g;
+        if (diff != 0) {
+            lobj->color.g += diff / div;
+        }
+        diff = mn_804A04F0.light_color->b - lobj->color.b;
+        if (diff != 0) {
+            lobj->color.b += diff / div;
+        }
+    } else {
+        lobj->color.r = mn_804A04F0.light_color->r;
+        lobj->color.g = mn_804A04F0.light_color->g;
+        lobj->color.b = mn_804A04F0.light_color->b;
+    }
+}
+
+static void mn_8022C068(HSD_LObj* lobj, int unused, int div)
 {
     int diff;
 
@@ -1824,7 +1832,7 @@ void fn_8022C128(HSD_GObj* arg0)
     }
     if (mn_804A04F0.light_lerp_frames != 0) {
         mn_804A04F0.light_lerp_frames--;
-        mn_8022C068(lobj, 0, mn_804A04F0.light_lerp_frames);
+        mn_8022C068_inline(lobj, 0, mn_804A04F0.light_lerp_frames);
     }
 }
 
@@ -1844,7 +1852,7 @@ void mn_8022C304(void)
     mn_804A04F0.light_lerp_frames = 0;
     mn_804A04F0.light_color = mn_8022BFBC(
         mn_8022C010(mn_804A04F0.cur_menu, mn_804A04F0.hovered_selection));
-    mn_8022C068(lobj, 0, mn_804A04F0.light_lerp_frames);
+    mn_8022C068_inline(lobj, 0, mn_804A04F0.light_lerp_frames);
 }
 
 static inline void x2_dec(u8 temp_r29)
@@ -2977,9 +2985,24 @@ void mn_8022E978(u8 item_idx, u8 enable)
     }
 }
 
-/// #mn_8022EA08
+void mn_8022EA08(char* buf, u32 num)
+{
+    int buf_end = mn_GetDigitCount(num);
+    int i;
+    for (i = 0; i < buf_end; i++) {
+        buf[buf_end - 1 - i] = mn_GetDigitAt(num, i) + '0';
+    }
+    buf[buf_end] = null_terminator[0];
+}
 
-/// #mn_8022EA78
+void mn_8022EA78(char* buf, int buf_end, u32 num)
+{
+    int i;
+    for (i = 0; i < buf_end; i++) {
+        buf[buf_end - 1 - i] = mn_GetDigitAt(num, i) + '0';
+    }
+    buf[buf_end] = null_terminator[0];
+}
 
 void mn_8022EAE0(HSD_GObj* gobj)
 {
@@ -2991,9 +3014,29 @@ void mn_8022EB04(void* user_data)
     HSD_Free(user_data);
 }
 
-/// #mn_GetDigitAt
+s32 mn_GetDigitAt(s32 arg0, s32 arg1)
+{
+    return (arg0 / powi(10, arg1)) % 10;
+}
 
-/// #mn_GetDigitCount
+s32 mn_GetDigitCount(s32 num)
+{
+    s32 count;
+    if (num == 0) {
+        return 1;
+    }
+    count = 0;
+    for (;;) {
+        if ((num / powi(10, count)) != 0) {
+            count += 1;
+            if (count < 11) {
+                continue;
+            }
+        }
+        break;
+    }
+    return count;
+}
 
 void mn_8022EBDC(void)
 {
