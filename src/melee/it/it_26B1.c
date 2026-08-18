@@ -1109,9 +1109,8 @@ HSD_GObj* it_8026C258(Vec3* pos, f32 facing_dir)
 
         // Decide lock-on type for Samus Missile?
         if ((hold_kind == ITEM_UNK_MATO || hold_kind == ITEM_UNK_LOCKON ||
-             /// @todo Why is this cast to @c short necessary?
-             (short) (hold_kind == ITEM_UNK_ENEMY) ||
-             hold_kind == ITEM_UNK_7) &&
+             /// @todo Why is this cast to @c s16 necessary?
+             (s16) (hold_kind == ITEM_UNK_ENEMY) || hold_kind == ITEM_UNK_7) &&
             ip->grab_victim == NULL &&
             (!ip->xDC8_word.flags.x13 || ip->owner == NULL) &&
             (facing_dir != -1 || !(ip->pos.x > pos->x)) &&

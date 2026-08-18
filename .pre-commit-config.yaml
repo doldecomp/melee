@@ -8,7 +8,11 @@ repos:
       require_serial: true
     - id: clang-tidy
       files: ^src/
-      args: [-p=.,--fix,--fix-errors]
+      args:
+      - -p=.
+      - --experimental-custom-checks
+      - --fix
+      - --fix-errors
       require_serial: true
 - repo: local
   hooks:

@@ -5,7 +5,7 @@
 
 #include <baselib/forward.h>
 
-/* 2FE3F8 */ void un_802FE3F8(int a, int b, short* c, short* d);
+/* 2FE3F8 */ void un_802FE3F8(int a, int b, s16* c, s16* d);
 /* 2FE470 */ void fn_802FE470(HSD_GObj* gobj);
 /* 2FE6A8 */ void un_802FE6A8(void);
 /* 2FE8CC */ void un_802FE8CC(void);

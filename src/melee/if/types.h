@@ -166,9 +166,9 @@ struct un_804D6EF4_t {
     /* +0x0C */ u32 x0C;
     /* +0x10 */ HSD_JObj* jobjs[16];
     /* +0x50 */ HSD_Archive* archive;
-    /* +0x54 */ short x54;
-    /* +0x56 */ short x56;
-    /* +0x58 */ short x58;
+    /* +0x54 */ s16 x54;
+    /* +0x56 */ s16 x56;
+    /* +0x58 */ s16 x58;
     /* +0x5A */ char pad_5A[2];
     /* +0x5C */ s8 x5C;
     /* +0x5D */ s8 x5D;

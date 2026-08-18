@@ -1669,8 +1669,7 @@ void _tyDisplay_8031B328(void)
     {
         scene->x00 = GObj_Create(2, 3, 0);
         lobj = Toy_LoadLObjList(lightData, 0);
-        HSD_GObjObject_80390A70(scene->x00, (unsigned long) HSD_GObj_804D784A,
-                                lobj);
+        HSD_GObjObject_80390A70(scene->x00, (u32) HSD_GObj_804D784A, lobj);
         temp = scene->x00;
         GObj_SetupGXLink(temp, HSD_GObj_LObjCallback, 0x34, 0);
     }
@@ -2158,7 +2157,7 @@ HSD_GObj* _tyDisplay_8031BC54(s32 arg0)
         char* temp2;
         temp2 = (char*) matanim_names.entries[(s8) cat];
         Toy_80306A48(child, NULL, temp2, NULL, data->archives[c2],
-                     (long) entry->x05);
+                     (s32) entry->x05);
     }
     HSD_JObjRemoveAnimAll(child);
 

@@ -66,7 +66,7 @@
 /* 31263C */ void Toy_8031263C(void);
 /* 3127D4 */ void Toy_803127D4(void);
 /* 3FE5E8 */ extern char Toy_str_ScMenFigure_cam_int1_camera[];
-/* 4A284C */ extern unsigned short Toy_804A284C[302];
+/* 4A284C */ extern u16 Toy_804A284C[302];
 /* 4A2AA8 */ extern ToyAnimState Toy_804A2AA8;
 /* 4D6EAC */ extern TyDspEntry* Toy_sbss_804D6EAC;
 /* 4D6EB0 */ extern TyDspEntry* Toy_sbss_804D6EB0;

@@ -1676,7 +1676,7 @@ static inline bool isDuplicateCostume(int door, CSSData* css, u8 door_count,
     return false;
 }
 
-static inline s32 getIconOffset(unsigned long icon_idx)
+static inline s32 getIconOffset(u32 icon_idx)
 {
     return icon_idx * sizeof(CSSIcon);
 }

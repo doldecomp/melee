@@ -222,9 +222,7 @@ void pl_8003D644(int arg0, int arg1, int arg2, int arg3)
             temp_r26->xD64 = 6;
         } else {
             temp_r3_2 = Player_GetStaleMoveTableIndexPtr2(temp_r23);
-            if (((u32) temp_r3_2->xD60 != 0) &&
-                ((s32) temp_r3_2->xD64 == arg0))
-            {
+            if ((temp_r3_2->xD60 != 0) && ((s32) temp_r3_2->xD64 == arg0)) {
                 pl_80038824(temp_r23, 0x79);
                 temp_r3_2->xD60 = 0;
                 temp_r3_2->xD64 = 6;
