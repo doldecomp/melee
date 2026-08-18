@@ -687,9 +687,9 @@ void it_802DF230(Item_GObj* gobj)
     ip->xDD4_itemVar.zgshell.xE0C = 0x14;
 
     jobj = GET_JOBJ(gobj);
-    angle = rad_to_deg * HSD_JObjGetRotationY(jobj);
+    angle = MTXRadToDeg(HSD_JObjGetRotationY(jobj));
     child = HSD_JObjGetChild(jobj);
-    angle += rad_to_deg * HSD_JObjGetRotationY(child);
+    angle += MTXRadToDeg(HSD_JObjGetRotationY(child));
 
     if (-90.0f == angle || 90.f == angle) {
         ip->facing_dir = (angle < 0.0f) ? -1.0f : 1.0f;

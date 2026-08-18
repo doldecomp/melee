@@ -203,8 +203,7 @@ static void fn_80227188(void)
                 HSD_CObjGetEyePosition(cobj, &camera);
                 HSD_CObjGetInterest(cobj, &interest);
                 fov = HSD_CObjGetFov(cobj);
-                ang = rad_to_deg *
-                      atan2f(interest.y - camera.y, -(interest.z - camera.z));
+                ang = MTXRadToDeg(atan2f(interest.y - camera.y, -(interest.z - camera.z)));
                 DevText_Erase(db_CameraInfoDisplay);
                 DevText_SetCursorXY(db_CameraInfoDisplay, 0, 0);
                 if (ABS(camera.z) > 99999.0F) {

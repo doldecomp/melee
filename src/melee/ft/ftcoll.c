@@ -2883,7 +2883,7 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
         if (abs_dx < 1e-5F) {
             angle_int = 0;
         } else {
-            angle_int = (s32) (rad_to_deg * atanf(dy / abs_dx));
+            angle_int = (s32) MTXRadToDeg(atanf(dy / abs_dx));
         }
         angle = (float) angle_int;
     }
