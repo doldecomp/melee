@@ -62,19 +62,19 @@ static void decideAngle(Fighter_GObj* gobj)
         FtMotionId msid;
         float stick_angle = ftCo_GetLStickAngle(fp);
         if (stick_angle > p_ftCommonData->x9C_radians &&
-            ftData_80085FD4(fp, ftCo_MS_AttackS3S)->x8 != NULL)
+            ftData_80085FD4(fp, ftCo_MS_AttackS3S)->x8 != 0)
         {
             msid = ftCo_MS_AttackS3Hi;
         } else if (stick_angle > p_ftCommonData->xA0_radians &&
-                   ftData_80085FD4(fp, ftCo_MS_AttackS3LwS)->x8 != NULL)
+                   ftData_80085FD4(fp, ftCo_MS_AttackS3LwS)->x8 != 0)
         {
             msid = ftCo_MS_AttackS3HiS;
         } else if (stick_angle < p_ftCommonData->xA8_radians &&
-                   ftData_80085FD4(fp, ftCo_MS_AttackLw3)->x8 != NULL)
+                   ftData_80085FD4(fp, ftCo_MS_AttackLw3)->x8 != 0)
         {
             msid = ftCo_MS_AttackS3Lw;
         } else if (stick_angle < p_ftCommonData->xA4_radians &&
-                   ftData_80085FD4(fp, ftCo_MS_AttackHi3)->x8 != NULL)
+                   ftData_80085FD4(fp, ftCo_MS_AttackHi3)->x8 != 0)
         {
             msid = ftCo_MS_AttackS3LwS;
         } else {

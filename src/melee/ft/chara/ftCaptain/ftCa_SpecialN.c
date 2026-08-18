@@ -64,7 +64,7 @@ static float ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
         }
         {
             /// @todo Eliminate @c f.
-            float f = deg_to_rad;
+            float f = MTXDegToRad(1);
             return f * (stick_y * da->specialn_angle_diff / (max - min));
         }
     }

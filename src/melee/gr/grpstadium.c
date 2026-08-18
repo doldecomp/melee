@@ -576,7 +576,7 @@ void grStadium_801D1B48(Ground_GObj* gobj)
         HSD_JObjSetScaleY(jobj, scale);
     }
 
-    HSD_JObjAddRotationZ(gp->u.stadium9.xD4_jobj, -0.5F * deg_to_rad);
+    HSD_JObjAddRotationZ(gp->u.stadium9.xD4_jobj, MTXDegToRad(-0.5F));
 
     if (gp->u.stadium9.xC4_b0) {
         gp->u.stadium9.xC4_b0 = false;

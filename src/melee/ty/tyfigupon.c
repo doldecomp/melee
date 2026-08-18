@@ -113,7 +113,7 @@ static void order_sdata2_0(void)
     /* +60 */ (void) 12.0f;
     /* +64 */ (void) 0.79f;
     /* +68 */ (void) 0.5f;
-    /* +6C */ (void) deg_to_rad;
+    /* +6C */ (void) MTXDegToRad(1);
     /* +70 */ (void) -0.4f;
     /* +74 */ (void) 10.0f;
     /* +78 */ (void) -10.0f;
@@ -551,7 +551,7 @@ void _tyFigupon_803155C8(void)
             }
             HSD_SisLib_803A6368(data->x14, 0);
             Toy_803083D8(ef4->jobjs[0xC], 0x3E7);
-            if ((s16) ef4->x54 == 0) {
+            if (ef4->x54 == 0) {
                 HSD_JObjReqAnimAll(ef4->jobjs[0xE], 1.0f);
                 HSD_JObjAnimAll(jobj);
             }

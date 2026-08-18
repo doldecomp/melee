@@ -36,8 +36,8 @@ void fn_801A0E34(HSD_GObj* arg0)
     if (lbl_80479B10.slot != 99) {
         x = 10.0F * HSD_PadMasterStatus[(u8) lbl_80479B10.slot].nml_stickX;
         y = 10.0F * HSD_PadMasterStatus[(u8) lbl_80479B10.slot].nml_stickY;
-        HSD_JObjSetRotationY(lbl_80479B10.analog_stick, +(deg_to_rad * x));
-        HSD_JObjSetRotationX(lbl_80479B10.analog_stick, -(deg_to_rad * y));
+        HSD_JObjSetRotationY(lbl_80479B10.analog_stick, +MTXDegToRad(x));
+        HSD_JObjSetRotationX(lbl_80479B10.analog_stick, -MTXDegToRad(y));
     }
 }
 

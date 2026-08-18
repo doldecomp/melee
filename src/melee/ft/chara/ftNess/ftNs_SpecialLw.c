@@ -466,7 +466,7 @@ static inline void getAttrStuff(HSD_GObj* arg0)
         temp_r30->facing_dir = -temp_r30->facing_dir;
     }
     ftPartSetRotY(temp_r30, 0,
-                  -((deg_to_rad * (180.0F / temp_r31->x78_PSI_MAGNET_UNK1)) -
+                  -(MTXDegToRad(180.0F / temp_r31->x78_PSI_MAGNET_UNK1) -
                     ftPartGetRotZ(temp_r30, 0)));
 }
 

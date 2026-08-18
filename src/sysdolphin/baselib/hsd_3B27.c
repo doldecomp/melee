@@ -45,12 +45,12 @@ int hsd_803B27F4(const s32* arg0, const char* arg1, int arg2, int arg3,
     return 0;
 }
 
-int hsd_803B286C(s32* arg0, UNK_T arg1, const char* arg2, int arg3, int arg4,
-                 void (*arg5)(int, int))
+int hsd_803B286C(const s32* arg0, UNK_T arg1, const char* arg2, int arg3,
+                 int arg4, void (*arg5)(int, int))
 {
     u8* base = hsd_804D1138;
 
-    memcpy((u8*) arg0 + 0x370, arg2, 64);
+    memcpy(((CardState*) arg0)->x370, arg2, 64);
 
     {
         s32 write_idx;
@@ -74,12 +74,12 @@ int hsd_803B286C(s32* arg0, UNK_T arg1, const char* arg2, int arg3, int arg4,
     return 0;
 }
 
-int hsd_803B2928(s32* arg0, const char* arg1, int arg2, int arg3,
+int hsd_803B2928(const s32* arg0, const char* arg1, int arg2, int arg3,
                  void (*arg4)(int, int))
 {
     u8* base = hsd_804D1138;
 
-    memcpy((u8*) arg0 + 0x370, arg1, 64);
+    memcpy(((CardState*) arg0)->x370, arg1, 64);
 
     {
         s32 write_idx;
@@ -166,7 +166,9 @@ int hsd_803B2A4C(const s32* arg0, int arg1, const u8* arg2,
 
 int hsd_803B2ADC(s32* ctx, UNK_T data)
 {
-    memcpy(&ctx[236], data, 18);
-    ctx[9] = hsd_803AC340(&ctx[236]);
+    CardState* state = (CardState*) ctx;
+
+    memcpy(&state->x3B0, data, 18);
+    state->x24 = hsd_803AC340(&state->x3B0);
     return 0;
 }

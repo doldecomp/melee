@@ -497,7 +497,7 @@ void ftKb_FxSpecialNEnd_Anim(Fighter_GObj* gobj)
     }
 
     if (fp->cmd_vars[3] == 2 && fp->u.kb.xB0 != 0) {
-        unsigned long long pad;
+        u64 pad;
         fp->cmd_vars[3] = 0;
         it_802AE608(fp->u.kb.xB0);
     }

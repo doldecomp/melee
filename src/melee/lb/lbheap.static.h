@@ -6,16 +6,12 @@
 
 #include <placeholder.h>
 
-/// @remarks @c LbHeapStatus_Create is named by an assert in #lbHeap_80015CA8.
-typedef enum LbHeapStatus {
-    /* 0x00 */ LbHeapStatus_Create,
-    /* 0x01 */ LbHeapStatus_Destroy,
-} LbHeapStatus;
-
 struct Heap {
     /* 10 */ s32 id;
     /* 14 */ Handle* handle;
-    /* 18 */ s32 start;
+    /// The heap's base *address*. `s32` would sign-extend when it is cast
+    /// back to a pointer; the same four bytes on GameCube.
+    /* 18 */ uintptr_t start;
     /* 1C */ u32 size;
     /* 20 */ s32 type;
     /* 24 */ s32 transient;
@@ -24,10 +20,10 @@ struct Heap {
 STATIC_ASSERT(sizeof(struct Heap) == 0x1C);
 
 struct lbHeap_HeapState {
-    /* 0x00 */ void* arena_lo;       /* inferred */
-    /* 0x04 */ void* arena_hi;       /* inferred */
-    /* 0x08 */ unsigned int aram_lo; /* inferred */
-    /* 0x0C */ unsigned int aram_hi; /* inferred */
+    /* 0x00 */ void* arena_lo;    /* inferred */
+    /* 0x04 */ void* arena_hi;    /* inferred */
+    /* 0x08 */ uintptr_t aram_lo; /* inferred */
+    /* 0x0C */ uintptr_t aram_hi; /* inferred */
     /* 0x10 */ struct Heap heap_array[6];
 }; /* size = 0xB8 */
 STATIC_ASSERT(sizeof(struct lbHeap_HeapState) == 0xB8);

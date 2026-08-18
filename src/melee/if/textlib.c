@@ -473,7 +473,7 @@ void un_80302FFC(struct un_80304138_objalloc_t* arg0)
             DevText_Printf(arg0->x4, "%02x", *(unsigned char*) x8->x10);
             break;
         case 6:
-            DevText_Printf(arg0->x4, "%04x", *(unsigned short*) x8->x10);
+            DevText_Printf(arg0->x4, "%04x", *(u16*) x8->x10);
             break;
         case 7:
             DevText_Printf(arg0->x4, "%08x", *(int*) x8->x10);
@@ -524,7 +524,7 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
         break;
     }
     case 6: {
-        unsigned short* q = arg0->x8[arg0->x0].x10;
+        u16* q = arg0->x8[arg0->x0].x10;
         int idk = arg0->x8[arg0->x0].x1C;
         if (*q + (idk & 0xFFFF) <= 0xFFFF) {
             *q += idk;
@@ -603,7 +603,7 @@ bool un_80303720(struct un_80304138_objalloc_t* arg0)
         break;
     }
     case 6: {
-        unsigned short* q = x8[arg0->x0].x10;
+        u16* q = x8[arg0->x0].x10;
         int idk = x8[arg0->x0].x1C;
         if (*q - (idk & 0xFFFF) >= 0) {
             *q -= idk;
@@ -697,7 +697,7 @@ void un_80303AC4(struct un_80304138_objalloc_t* arg0)
         int i = j;
         (void) j;
         for (i--; i >= 0; i--) {
-            if (arg0->x8[i].x0 != NULL) {
+            if (arg0->x8[i].x0 != 0) {
                 (void) i;
                 goto up_found;
             }
@@ -714,7 +714,7 @@ void un_80303AC4(struct un_80304138_objalloc_t* arg0)
         int i = j;
         (void) j;
         for (i++; i < arg0->x4->h; i++) {
-            if (arg0->x8[i].x0 != NULL) {
+            if (arg0->x8[i].x0 != 0) {
                 (void) i;
                 goto down_found;
             }

@@ -116,7 +116,7 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, bool arg2)
             }
         } else {
             fighter_2 = fighter->x1988;
-            if (fighter_2 == NULL && fighter->x198C == 0) {
+            if (fighter_2 == 0 && fighter->x198C == 0) {
                 for (i = 0; i < (unsigned) fighter->hurt_capsules_len; i++) {
                     if (lbColl_8000A244(&fighter->hurt_capsules[i].capsule,
                                         arg1, ftCommon_8007F804(fighter),

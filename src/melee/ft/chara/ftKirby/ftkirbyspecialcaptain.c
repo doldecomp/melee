@@ -63,7 +63,7 @@ void ftKb_SpecialNCa_800F99BC(Fighter_GObj* gobj)
     f32 zero = 0.0f;
     PAD_STACK(8);
     (void) zero;
-    (void) deg_to_rad;
+    (void) MTXDegToRad(1);
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
     fp->throw_flags = 0;
@@ -141,10 +141,9 @@ void ftKb_CaSpecialAirN_IASA(Fighter_GObj* gobj)
         if (fp->input.lstick.y < 0.0f) {
             range = -range;
         }
-        angle =
-            deg_to_rad *
-            ((range * da2->specialn_ca_angle_difference) /
-             (da2->specialn_ca_y_axis_range - da2->specialn_ca_x_axis_range));
+        angle = MTXDegToRad(
+            (range * da2->specialn_ca_angle_difference) /
+            (da2->specialn_ca_y_axis_range - da2->specialn_ca_x_axis_range));
         fp->self_vel.y = da->specialn_ca_forward_momentum * sinf(angle);
         fp->self_vel.x =
             da->specialn_ca_forward_momentum * (fp->facing_dir * cosf(angle));
@@ -155,7 +154,7 @@ void ftKb_CaSpecialN_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     bool throw_b1;
-    long long pad;
+    s64 pad;
     if (fp->throw_flags_b1) {
         fp->throw_flags_b1 = false;
         throw_b1 = true;

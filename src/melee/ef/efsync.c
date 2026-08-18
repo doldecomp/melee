@@ -65,7 +65,7 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
 
     efLib_AnimCount = efLib_LoadKind = (u32) (ret_obj = NULL);
     va_start(vlist, gobj);
-    if ((gfx_id == 0x479) && ((u32) efAsync_DatEntries[1].data == NULL)) {
+    if ((gfx_id == 0x479) && (efAsync_DatEntries[1].data == NULL)) {
         gfx_id = 0x506;
     }
     if (gfx_id < 0x250) {

@@ -2162,7 +2162,7 @@ void fn_802545C4(void)
 
     case 21:
         if (mnSnap_804A0A10.dlg_result == 1) {
-            short card_status;
+            s16 card_status;
             {
                 s32 other_slot = mnSnap_804A0A10.active_slot ^ 1;
                 if (lbSnap_8001D338(other_slot) != 0) {
@@ -2267,7 +2267,7 @@ void fn_802545C4(void)
                 mnSnap_804A0A10.dlg_text = NULL;
             }
         } else {
-            short card_status;
+            s16 card_status;
             {
                 s32 other_slot = mnSnap_804A0A10.active_slot ^ 1;
                 if (lbSnap_8001D338(other_slot) != 0) {
@@ -2359,7 +2359,7 @@ void fn_802545C4(void)
                 mnSnap_804A0A10.dlg_text = NULL;
             }
         } else {
-            short card_status;
+            s16 card_status;
             {
                 s32 other_slot = mnSnap_804A0A10.active_slot ^ 1;
                 if (lbSnap_8001D338(other_slot) != 0) {

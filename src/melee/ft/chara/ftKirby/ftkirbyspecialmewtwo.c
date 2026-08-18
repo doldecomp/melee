@@ -167,7 +167,7 @@ void ftKb_SpecialNMt_80107130(Fighter_GObj* gobj)
     Fighter* fp;
     Fighter* fp2;
     ftKb_DatAttrs* da;
-    if (gobj == (NULL & 0xFFFFFFFFu)) {
+    if (gobj == (0L & 0xFFFFFFFFu)) {
         return;
     }
     fp = GET_FIGHTER(gobj);

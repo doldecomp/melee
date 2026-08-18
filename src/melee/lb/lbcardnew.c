@@ -2,7 +2,9 @@
 
 #include "lbcardnew.static.h"
 
-#include <strtoul.h> // IWYU pragma: keep
+#include <ctype.h>
+#include <stdlib.h>
+#include <string.h>
 #include <dolphin/card.h>
 #include <baselib/hsd_3A94.h>
 #include <sysdolphin/baselib/hsd_3B27.h>
@@ -1146,6 +1148,6 @@ void lb_8001C5A4(void)
 void lb_8001C5BC(void)
 {
     hsd_803B2374();
-    lb_80019EF0(NULL, NULL, NULL, NULL);
+    lb_80019EF0(0, NULL, NULL, NULL);
     _p(x8AC) = 0;
 }

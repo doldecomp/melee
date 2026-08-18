@@ -15,10 +15,10 @@ HSD_TExpType HSD_TExpGetType(HSD_TExp* texp)
     if (texp == NULL) {
         return HSD_TE_ZERO;
     }
-    if ((uintptr_t) texp == -1U) {
+    if (texp == HSD_TEXP_TEX) {
         return HSD_TE_TEX;
     }
-    if ((uintptr_t) texp == -2U) {
+    if (texp == HSD_TEXP_RAS) {
         return HSD_TE_RAS;
     }
     return texp->type;

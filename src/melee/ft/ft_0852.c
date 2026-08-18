@@ -66,7 +66,7 @@ void ft_800852B0(void)
             CostumeListsForeachCharacter[i].costume_list[costume_idx].joint =
                 NULL;
             CostumeListsForeachCharacter[i].costume_list[costume_idx].pad_x8 =
-                NULL;
+                0;
         }
         unk0[i].data = NULL;
         pairs[i].data = NULL;

@@ -9,6 +9,7 @@
 
 #include "baselib/forward.h"
 
+#include "baselib/sislib_font.h" // HSD_SisLib_FontAtlas, below
 #include "dolphin/gx/GXStruct.h"
 
 #include <dolphin/mtx.h>
@@ -16,6 +17,10 @@
 typedef struct _TextGlyphTexture {
     /*0x00*/ u8 data[512];
 } TextGlyphTexture;
+
+/// How many glyphs the font atlas holds.
+#define HSD_SISLIB_FONT_GLYPHS                                                \
+    (sizeof(HSD_SisLib_FontAtlas) / sizeof(TextGlyphTexture))
 
 struct TextKerning {
     /*0x00*/ u8 left;
