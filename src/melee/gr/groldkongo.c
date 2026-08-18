@@ -263,20 +263,20 @@ static inline void grOldKongo_8020F888_inline(Ground* gp)
     f32 vel = gp->u.taru.xE4;
 
     if (vel > 0.0f) {
-        if (vel < yakumono_param->rspeed_barrel_rot_accel * deg_to_rad) {
+        if (vel < MTXDegToRad(yakumono_param->rspeed_barrel_rot_accel)) {
             gp->u.taru.xE4 = 0.0f;
             gp->u.taru.xDC = gp->u.taru.xD8;
         } else {
             gp->u.taru.xE4 =
-                vel - yakumono_param->rspeed_barrel_rot_accel * deg_to_rad;
+                vel - MTXDegToRad(yakumono_param->rspeed_barrel_rot_accel);
         }
     } else if (vel < 0.0f) {
-        if (vel > -(yakumono_param->rspeed_barrel_rot_accel * deg_to_rad)) {
+        if (vel > -MTXDegToRad(yakumono_param->rspeed_barrel_rot_accel)) {
             gp->u.taru.xE4 = 0.0f;
             gp->u.taru.xDC = gp->u.taru.xD8;
         } else {
             gp->u.taru.xE4 =
-                vel + yakumono_param->rspeed_barrel_rot_accel * deg_to_rad;
+                vel + MTXDegToRad(yakumono_param->rspeed_barrel_rot_accel);
         }
     }
 }
@@ -301,7 +301,7 @@ void stageGObj1_GObjProc(Ground_GObj* gobj)
         angle_limit =
             0.5f * (gp->u.taru.xE4 *
                     (gp->u.taru.xE4 /
-                     (yakumono_param->rspeed_barrel_rot_accel * deg_to_rad)));
+                     MTXDegToRad(yakumono_param->rspeed_barrel_rot_accel)));
         if (gp->u.taru.xE4 > 0.0f) {
             angle_delta = gp->u.taru.xD8 - gp->u.taru.xDC;
         } else if (gp->u.taru.xE4 < 0.0f) {
@@ -328,10 +328,10 @@ void stageGObj1_GObjProc(Ground_GObj* gobj)
         if (gp->u.taru.xCC < 0) {
             gp->u.taru.xC4 = 1;
             if (HSD_Randi(2) != 0) {
-                x_speed = yakumono_param->rspeed_barrel_rot_accel * deg_to_rad;
+                x_speed = MTXDegToRad(yakumono_param->rspeed_barrel_rot_accel);
             } else {
                 x_speed =
-                    -(yakumono_param->rspeed_barrel_rot_accel * deg_to_rad);
+                    -MTXDegToRad(yakumono_param->rspeed_barrel_rot_accel);
             }
             gp->u.taru.xE0 = x_speed;
             gp->u.taru.xCC = rand_range(yakumono_param->rframe_barrel_roll_b,
@@ -341,7 +341,7 @@ void stageGObj1_GObjProc(Ground_GObj* gobj)
     case 1:
         gp->u.taru.xE4 += gp->u.taru.xE0;
         Ground_ClampSymmetric(
-            gp->u.taru.xE4, yakumono_param->rspeed_barrel_rot_max * deg_to_rad,
+            gp->u.taru.xE4, MTXDegToRad(yakumono_param->rspeed_barrel_rot_max),
             &gp->u.taru.xE4);
         if (gp->u.taru.xCC-- < 0) {
             gp->u.taru.xC4 = 2;

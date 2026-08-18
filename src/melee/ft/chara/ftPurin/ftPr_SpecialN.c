@@ -403,9 +403,8 @@ void ftPr_SpecialNLoop_Anim(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialNFull, mf,
                                   fp->cur_anim_frame, 0, 0, NULL);
     }
-    fp->mv.pr.specialn.x14 +=
-        fp->mv.pr.specialn.x34.x *
-        (fp->mv.pr.specialn.x2C * (deg_to_rad * da->xAC));
+    fp->mv.pr.specialn.x14 += fp->mv.pr.specialn.x34.x *
+                              (fp->mv.pr.specialn.x2C * MTXDegToRad(da->xAC));
     normalizeAndSetRollAngle(gobj);
     ftPartSetRotY(fp, FtPart_TopN, M_PI_2);
 }
@@ -421,9 +420,8 @@ void ftPr_SpecialNFull_Anim(HSD_GObj* gobj)
         fp->mv.pr.specialn.x2C = da->xA4;
         fp->mv.pr.specialn.x30 = 1;
     }
-    fp->mv.pr.specialn.x14 +=
-        fp->mv.pr.specialn.x34.x *
-        (fp->mv.pr.specialn.x2C * (deg_to_rad * da->xAC));
+    fp->mv.pr.specialn.x14 += fp->mv.pr.specialn.x34.x *
+                              (fp->mv.pr.specialn.x2C * MTXDegToRad(da->xAC));
     normalizeAndSetRollAngle(gobj);
     ftPartSetRotY(fp, FtPart_TopN, M_PI_2);
 }
@@ -441,7 +439,7 @@ void ftPr_SpecialNRelease_Anim(HSD_GObj* gobj)
     ftPr_SpecialS_8013D8E4(gobj);
     {
         f32 old_angle = fp->mv.pr.specialn.x14;
-        f32 delta = deg_to_rad * fp->mv.pr.specialn.x2C *
+        f32 delta = MTXDegToRad(fp->mv.pr.specialn.x2C) *
                     (f32) (0.2 * da->x98 * fp->mv.pr.specialn.x34.x);
         fp->mv.pr.specialn.x14 = old_angle + delta;
         normalizeAndSetRollAngle(gobj);
@@ -551,9 +549,8 @@ void ftPr_SpecialAirNChargeLoop_Anim(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialAirNChargeFull, mf,
                                   fp->cur_anim_frame, 0, 0, NULL);
     }
-    fp->mv.pr.specialn.x14 +=
-        fp->mv.pr.specialn.x34.x *
-        (fp->mv.pr.specialn.x2C * (deg_to_rad * da->xAC));
+    fp->mv.pr.specialn.x14 += fp->mv.pr.specialn.x34.x *
+                              (fp->mv.pr.specialn.x2C * MTXDegToRad(da->xAC));
     normalizeAndSetRollAngle(gobj);
     ftPartSetRotY(fp, FtPart_TopN, M_PI_2);
 }
@@ -569,9 +566,8 @@ void ftPr_SpecialAirNChargeFull_Anim(HSD_GObj* gobj)
         fp->mv.pr.specialn.x2C = da->xA4;
         fp->mv.pr.specialn.x30 = 1;
     }
-    fp->mv.pr.specialn.x14 +=
-        fp->mv.pr.specialn.x34.x *
-        (fp->mv.pr.specialn.x2C * (deg_to_rad * da->xAC));
+    fp->mv.pr.specialn.x14 += fp->mv.pr.specialn.x34.x *
+                              (fp->mv.pr.specialn.x2C * MTXDegToRad(da->xAC));
     normalizeAndSetRollAngle(gobj);
     ftPartSetRotY(fp, FtPart_TopN, M_PI_2);
 }

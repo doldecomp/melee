@@ -238,7 +238,7 @@ static void order_sdata2_0(void)
     /* +24 */ (void) 3.5f;
     /* +28 */ (void) 9.0f;
     /* +2C */ (void) 11.0f;
-    /* +30 */ (void) deg_to_rad;
+    /* +30 */ (void) MTXDegToRad(1);
     /* +34 */ (void) 2.0f;
     /* +38 */ (void) 0.1f;
     /* +3C */ (void) 0.5f;

@@ -554,9 +554,9 @@ void ftNs_SpecialHi_Enter(
 
             if (!(temp_f1_2 < (float) M_PI_2)) {
                 if (!(temp_f1_2 >
-                      deg_to_rad *
-                          (90.0f +
-                           ness_attr->x60_PK_THUNDER_2_KNOCKDOWN_ANGLE)))
+                      MTXDegToRad(
+                          90.0f +
+                          ness_attr->x60_PK_THUNDER_2_KNOCKDOWN_ANGLE)))
                 {
                     {
                         float facing_dir;

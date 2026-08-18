@@ -6,13 +6,12 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-/// @todo Fix these to be in a single file, not math.h
-#define M_PI 3.14159265358979323846
-static float const deg_to_rad = M_PI / 180;
+static float const deg_to_rad = MTXDegToRad(1);
 
 ItemStateTable it_803F5AB0[] = {
     { -1, itParasol_UnkMotion0_Anim, itParasol_UnkMotion0_Phys,

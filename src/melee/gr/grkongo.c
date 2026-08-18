@@ -325,8 +325,8 @@ void grKongo_801D577C(Ground_GObj* arg0)
         f32 angular_vel;
         angular_vel = gp->u.kongo3.xE0;
         limit_angle =
-            0.5f * (angular_vel *
-                    (angular_vel / (yakumono_param->unk34 * deg_to_rad)));
+            0.5f *
+            (angular_vel * (angular_vel / MTXDegToRad(yakumono_param->unk34)));
         if (angular_vel > 0.0f) {
             angle_delta = gp->u.kongo3.xD4 - gp->u.kongo3.xD8;
         } else if (angular_vel < 0.0f) {
@@ -350,18 +350,18 @@ void grKongo_801D577C(Ground_GObj* arg0)
     }
     case 0:
         if (gp->u.kongo3.xE0 > 0.0f) {
-            if (gp->u.kongo3.xE0 < yakumono_param->unk34 * deg_to_rad) {
+            if (gp->u.kongo3.xE0 < MTXDegToRad(yakumono_param->unk34)) {
                 gp->u.kongo3.xE0 = 0.0f;
                 gp->u.kongo3.xD8 = gp->u.kongo3.xD4;
             } else {
-                gp->u.kongo3.xE0 -= yakumono_param->unk34 * deg_to_rad;
+                gp->u.kongo3.xE0 -= MTXDegToRad(yakumono_param->unk34);
             }
         } else if (gp->u.kongo3.xE0 < 0.0f) {
-            if (gp->u.kongo3.xE0 > -(yakumono_param->unk34 * deg_to_rad)) {
+            if (gp->u.kongo3.xE0 > -MTXDegToRad(yakumono_param->unk34)) {
                 gp->u.kongo3.xE0 = 0.0f;
                 gp->u.kongo3.xD8 = gp->u.kongo3.xD4;
             } else {
-                gp->u.kongo3.xE0 += yakumono_param->unk34 * deg_to_rad;
+                gp->u.kongo3.xE0 += MTXDegToRad(yakumono_param->unk34);
             }
         }
         gp->u.kongo2.xCC -= 1;
@@ -369,9 +369,9 @@ void grKongo_801D577C(Ground_GObj* arg0)
             f32 spin_step;
             gp->u.kongo3.xC4 = 1;
             if (HSD_Randi(2) != 0) {
-                spin_step = yakumono_param->unk34 * deg_to_rad;
+                spin_step = MTXDegToRad(yakumono_param->unk34);
             } else {
-                spin_step = -(yakumono_param->unk34 * deg_to_rad);
+                spin_step = -MTXDegToRad(yakumono_param->unk34);
             }
             gp->u.kongo3.xDC = spin_step;
             gp->u.kongo2.xCC = rand_range((s32) yakumono_param->unk40,
@@ -381,7 +381,7 @@ void grKongo_801D577C(Ground_GObj* arg0)
     case 1:
         gp->u.kongo3.xE0 += gp->u.kongo3.xDC;
         Ground_ClampSymmetric(gp->u.kongo3.xE0,
-                              yakumono_param->unk38 * deg_to_rad,
+                              MTXDegToRad(yakumono_param->unk38),
                               &gp->u.kongo3.xE0);
         {
             s16 val2 = gp->u.kongo2.xCC;
@@ -878,7 +878,7 @@ void grKongo_801D69B0(HSD_GObj* gobj)
 
 static inline void rad_compare(f32 a, f32 b, f32* ret)
 {
-    f32 c = deg_to_rad * b;
+    f32 c = MTXDegToRad(b);
     if (a > c) {
         *ret = c;
     } else {
@@ -891,7 +891,7 @@ static inline void rad_compare(f32 a, f32 b, f32* ret)
 
 static inline void rad_compare_b(f32 a, f32 b, f32* ret)
 {
-    f32 c = deg_to_rad * b;
+    f32 c = MTXDegToRad(b);
     if (a > c) {
         c = -c;
     } else if (a < -c) {
@@ -903,7 +903,7 @@ static inline void rad_compare_b(f32 a, f32 b, f32* ret)
 
 static inline void rad_compare_c(f32 a, f32 b, f32 d, f32* ret)
 {
-    f32 c = deg_to_rad * b;
+    f32 c = MTXDegToRad(b);
     if (a > c) {
         *ret += d * (a - c);
     } else if (a < -c) {
@@ -1120,8 +1120,8 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
     }
 
     displacement =
-        grKg_803E188C[2].unkC * (((deg_to_rad * yakumono_param->unkA8) /
-                                  (deg_to_rad * yakumono_param->unk90)) -
+        grKg_803E188C[2].unkC * (MTXDegToRad(yakumono_param->unkA8) /
+                                     MTXDegToRad(yakumono_param->unk90) -
                                  1.0f);
     angle = (f32) (0.7853981633974483 *
                    (0.5 *
@@ -1129,21 +1129,21 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
                             6.0f) +
                            ((grKg_803E188C[3].unk14 - grKg_803E188C[2].unk14) /
                             6.0f))));
-    if (angle > (deg_to_rad * yakumono_param->unkAC)) {
-        angle = deg_to_rad * yakumono_param->unkAC;
-    } else if (angle < -(deg_to_rad * yakumono_param->unkAC)) {
-        angle = -(deg_to_rad * yakumono_param->unkAC);
+    if (angle > MTXDegToRad(yakumono_param->unkAC)) {
+        angle = MTXDegToRad(yakumono_param->unkAC);
+    } else if (angle < -MTXDegToRad(yakumono_param->unkAC)) {
+        angle = -MTXDegToRad(yakumono_param->unkAC);
     }
     HSD_JObjSetRotationX(grKg_804D6984.unk0, displacement);
     old_angle = HSD_JObjGetRotationZ(grKg_804D6984.unk0);
     HSD_JObjSetRotationZ(grKg_804D6984.unk0, angle);
-    if (ABS(angle - old_angle) > (deg_to_rad * yakumono_param->unkB0)) {
+    if (ABS(angle - old_angle) > MTXDegToRad(yakumono_param->unkB0)) {
         gp->u.kongo.xC8 = -(angle - old_angle);
     }
 
     displacement =
-        grKg_803E188C[12].unkC * (((deg_to_rad * yakumono_param->unkA8) /
-                                   (deg_to_rad * yakumono_param->unk90)) -
+        grKg_803E188C[12].unkC * ((MTXDegToRad(yakumono_param->unkA8) /
+                                   MTXDegToRad(yakumono_param->unk90)) -
                                   1.0f);
     angle =
         (f32) (0.7853981633974483 *
@@ -1152,15 +1152,15 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
                         6.0f) +
                        ((grKg_803E188C[13].unk14 - grKg_803E188C[12].unk14) /
                         6.0f))));
-    if (angle > (deg_to_rad * yakumono_param->unkAC)) {
-        angle = deg_to_rad * yakumono_param->unkAC;
-    } else if (angle < -(deg_to_rad * yakumono_param->unkAC)) {
-        angle = -(deg_to_rad * yakumono_param->unkAC);
+    if (angle > MTXDegToRad(yakumono_param->unkAC)) {
+        angle = MTXDegToRad(yakumono_param->unkAC);
+    } else if (angle < -MTXDegToRad(yakumono_param->unkAC)) {
+        angle = -MTXDegToRad(yakumono_param->unkAC);
     }
     HSD_JObjSetRotationX(grKg_804D6984.unk4, displacement);
     old_angle = HSD_JObjGetRotationZ(grKg_804D6984.unk4);
     HSD_JObjSetRotationZ(grKg_804D6984.unk4, angle);
-    if (ABS(angle - old_angle) > (deg_to_rad * yakumono_param->unkB0)) {
+    if (ABS(angle - old_angle) > MTXDegToRad(yakumono_param->unkB0)) {
         gp->u.kongo.xD8 = -(angle - old_angle);
     }
 

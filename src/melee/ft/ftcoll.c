@@ -913,7 +913,7 @@ void ftColl_80077688(Item* item, HitCapsule* hurt, Fighter* fp, Vec3* pos,
             if (fp->x221B_b1) {
                 float cos_val;
 
-                val = deg_to_rad * p_ftCommonData->x2D0;
+                val = MTXDegToRad(p_ftCommonData->x2D0);
                 item->xC54 = 0.0f;
                 cos_val = cosf(val);
                 val = sinf(val);

@@ -123,7 +123,7 @@ s32 itLinkArrow_802A81C4(Item_GObj* gobj)
     case 6:
         rand = HSD_Randf();
         lookup_table = &it_803F6A84[ip->xDD4_itemVar.linkarrow.x9C];
-        temp = deg_to_rad * ((lookup_table[8] * rand) + lookup_table[0]);
+        temp = MTXDegToRad((lookup_table[8] * rand) + lookup_table[0]);
         z = ip->xDD4_itemVar.linkarrow.x94 + temp;
         break;
     case 1:
@@ -131,7 +131,7 @@ s32 itLinkArrow_802A81C4(Item_GObj* gobj)
     case 5:
         rand = HSD_Randf();
         lookup_table = &it_803F6A84[ip->xDD4_itemVar.linkarrow.x9C];
-        temp = deg_to_rad * ((lookup_table[8] * rand) + lookup_table[0]);
+        temp = MTXDegToRad((lookup_table[8] * rand) + lookup_table[0]);
         z = ip->xDD4_itemVar.linkarrow.x94 - temp;
         break;
     default:
@@ -674,7 +674,7 @@ bool itLinkarrow_UnkMotion4_Anim(Item_GObj* gobj)
     case 6:
         rand = HSD_Randf();
         temp_r3 = (f32*) &it_803F6A28 + ip->xDD4_itemVar.linkarrow.x9C;
-        var_f32 = deg_to_rad * ((temp_r3[31] * rand) + temp_r3[23]);
+        var_f32 = MTXDegToRad((temp_r3[31] * rand) + temp_r3[23]);
         var_f31 = ip->xDD4_itemVar.linkarrow.x94 + var_f32;
         break;
     case 1:
@@ -682,7 +682,7 @@ bool itLinkarrow_UnkMotion4_Anim(Item_GObj* gobj)
     case 5:
         rand = HSD_Randf();
         temp_r3 = (f32*) &it_803F6A28 + ip->xDD4_itemVar.linkarrow.x9C;
-        var_f32 = deg_to_rad * ((temp_r3[31] * rand) + temp_r3[23]);
+        var_f32 = MTXDegToRad((temp_r3[31] * rand) + temp_r3[23]);
         var_f31 = ip->xDD4_itemVar.linkarrow.x94 - var_f32;
         break;
     default:

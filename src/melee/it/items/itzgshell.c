@@ -694,7 +694,7 @@ void it_802DF230(Item_GObj* gobj)
     if (-90.0f == angle || 90.f == angle) {
         ip->facing_dir = (angle < 0.0f) ? -1.0f : 1.0f;
         ip->xDD4_itemVar.zgshell.xE00 = 0.0f;
-        HSD_JObjSetRotationY(jobj, deg_to_rad * angle);
+        HSD_JObjSetRotationY(jobj, MTXDegToRad(angle));
         HSD_JObjSetRotationY(child, 0.0f);
     } else {
         f32 factor;
@@ -703,7 +703,7 @@ void it_802DF230(Item_GObj* gobj)
                              "*** ZGShell Restoration Rot Y Irregul!\n");
         }
         angle = (f32) ((s32) angle % 360);
-        HSD_JObjSetRotationY(jobj, deg_to_rad * angle);
+        HSD_JObjSetRotationY(jobj, MTXDegToRad(angle));
         HSD_JObjSetRotationY(child, 0.0f);
         if (0.0f == angle) {
             ip->facing_dir = HSD_Randi(2) ? -1.0f : 1.0f;

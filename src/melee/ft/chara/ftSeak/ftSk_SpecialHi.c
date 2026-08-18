@@ -318,7 +318,7 @@ void ftSk_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
         (void) 0.0f;
         (void) 1.0f;
         (void) S32_TO_F32;
-        (void) deg_to_rad;
+        (void) MTXDegToRad(1);
         ftCommon_HandleTeleportCollisions(gobj, fp, collData, &attr->x50,
                                           ftSk_SpecialHi_80113F68);
     }
