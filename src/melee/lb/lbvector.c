@@ -10,12 +10,7 @@
 #include <baselib/cobj.h>
 #include <baselib/debug.h>
 
-static float lbVector_Len(Vec3* vec)
-{
-    return sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
-}
-
-static float lbVector_Len_xy(Vec3* vec)
+static inline float lbVector_Len_xy_accurate(Vec3* vec)
 {
     return sqrtf_accurate(vec->x * vec->x + vec->y * vec->y);
 }
@@ -109,7 +104,8 @@ float lbVector_Angle(Vec3* a, Vec3* b)
 /// 8000D790 - returns the angle between a and b
 float lbVector_AngleXY(Vec3* a, Vec3* b)
 {
-    float lena_lenb = lbVector_Len_xy(a) * lbVector_Len_xy(b);
+    float lena_lenb =
+        lbVector_Len_xy_accurate(a) * lbVector_Len_xy_accurate(b);
 
     if (lena_lenb) {
         float cosine = (a->x * b->x + a->y * b->y) / lena_lenb;

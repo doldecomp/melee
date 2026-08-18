@@ -1115,7 +1115,7 @@ void ftCo_8008FC94(Fighter_GObj* gobj)
 void ftCo_Damage_SetMv8FromKbThreshold(Fighter* fp)
 {
     float kb_vel = fp->ground_or_air == GA_Air
-                       ? sqrtf__Ff(VEC3_SQ_LEN(fp->x8c_kb_vel))
+                       ? sqrtf(VEC3_SQ_LEN(fp->x8c_kb_vel))
                        : ABS(fp->xF0_ground_kb_vel);
     fp->mv.co.damage.x8 =
         kb_vel < p_ftCommonData->x568   ? 0

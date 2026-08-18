@@ -174,7 +174,7 @@ static inline f32 itFlipper_SpinSpeedFromFighter(Item_GObj* gobj,
     ftLib_800866DC(fighter, pos);
     ftLib_80086BEC(fighter, vel);
     return attrs->x18_spinMultiplier *
-           sqrtf__Ff(vel->x * vel->x + vel->y * vel->y);
+           sqrtf(vel->x * vel->x + vel->y * vel->y);
 }
 
 static inline void itFlipper_SpinFromFighter_inline(Item_GObj* gobj, Vec3* vel,

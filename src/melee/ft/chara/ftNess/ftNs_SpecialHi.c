@@ -1327,47 +1327,18 @@ static inline void* getFtSpecialAttrs2(Fighter* fp)
 /// Ness's aerial PK Thunder 2 Physics callback
 void ftNs_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
-    float temp_sqrt;
     ftNessAttributes* ness_attr;
     Fighter* fp;
-    float temp_f0;
-    float temp_f0_2;
-    float temp_f1;
-    float temp_f1_5;
-    float temp_f1_6;
     float temp_f2;
-
-    u8 _[4];
 
     float phi_f1;
     float phi_f31;
-    float temp_fmuls;
-    float temp_fmuls2;
     float temp_add;
 
     fp = getFighter(gobj);
-    temp_f2 = fp->self_vel.x;
-    temp_f1 = fp->self_vel.y;
     ness_attr = getFtSpecialAttrs2(fp);
-    temp_fmuls = temp_f2 * temp_f2;
-    temp_fmuls2 = temp_f1 * temp_f1;
 
-    temp_sqrt = sqrtf(temp_fmuls + temp_fmuls2);
-    if (temp_sqrt < 0.0f) {
-        temp_f1_5 = fp->self_vel.x;
-        temp_f0 = fp->self_vel.y;
-        temp_fmuls = temp_f1_5 * temp_f1_5;
-        temp_fmuls2 = temp_f0 * temp_f0;
-        temp_add = temp_fmuls + temp_fmuls2;
-        phi_f1 = -sqrtf__Ff(temp_add);
-    } else {
-        temp_f1_6 = fp->self_vel.x;
-        temp_f0_2 = fp->self_vel.y;
-        temp_fmuls = temp_f1_6 * temp_f1_6;
-        temp_fmuls2 = temp_f0_2 * temp_f0_2;
-        temp_add = temp_fmuls + temp_fmuls2;
-        phi_f1 = sqrtf__Ff(temp_add);
-    }
+    phi_f1 = ABS(lbVector_Len_xy(&fp->self_vel));
     temp_f2 = phi_f1 - ness_attr->x5C_PK_THUNDER_2_DECELERATION_RATE;
     phi_f31 = temp_f2;
 
