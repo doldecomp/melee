@@ -2774,7 +2774,7 @@ void* fn_80397814(void* arg)
         }
         if (node != NULL) {
             if (node->child != NULL) {
-                hsd_80397520(node->child);
+                hsd_80397520(ps_node_child(node));
             }
             if (node->callback != NULL) {
                 node->callback(node);
