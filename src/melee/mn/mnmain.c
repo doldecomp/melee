@@ -1395,11 +1395,6 @@ void fn_8022AFEC(HSD_GObj* gp)
     }
 }
 
-static inline AnimLoopSettings* GetMenuAnimLoop(MenuKind kind)
-{
-    return mn_803EB6B0[kind].anim_loop;
-}
-
 /// @brief counts the unlocked selections of a menu
 static inline u8 CountUnlockedSelections(MenuKind kind)
 {
@@ -1439,10 +1434,11 @@ HSD_GObj* mn_8022B3A0(u8 state)
     AnimLoopSettings* tmp;
     u32 var_r17_int;
     HSD_JObj* root_jobj;
-    PAD_STACK(8);
+    PAD_STACK(12);
 
     cur_menu = mn_804A04F0.cur_menu;
-    anim_loop = GetMenuAnimLoop(cur_menu);
+    anim_loop =
+        (AnimLoopSettings*) ((u32) mn_803EB6B0[cur_menu].anim_loop + 12) - 1;
     option_count = mn_803EB6B0[cur_menu].selection_count & 0xFF;
     hovered_selection = mn_804A04F0.hovered_selection;
 
