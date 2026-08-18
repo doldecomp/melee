@@ -1422,7 +1422,7 @@ HSD_GObj* mn_8022B3A0(u8 state)
     PAD_STACK(16);
 
     cur_menu = mn_804A04F0.cur_menu;
-    // The round trip keeps the pointer in a temporary, as retail has it.
+    /// @todo Idiomatic spellings put the pointer in a named local, not a temp.
     anim_loop = (AnimLoopSettings*) ((u8*) mn_803EB6B0[cur_menu].anim_loop +
                                      sizeof(AnimLoopSettings)) -
                 1;
