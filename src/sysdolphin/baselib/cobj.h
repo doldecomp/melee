@@ -170,7 +170,7 @@ void HSD_CObjRemoveAnimByFlags(HSD_CObj* cobj, u32 flags);
 void HSD_CObjAddAnim(HSD_CObj* cobj, HSD_CameraAnim* canim);
 void HSD_CObjAnim(HSD_CObj* cobj);
 void HSD_CObjReqAnim(HSD_CObj* cobj, f32 startframe);
-GXProjectionType makeProjectionMtx(HSD_CObj* cobj, Mtx mtx);
+GXProjectionType makeProjectionMtx(HSD_CObj* cobj, Mtx44 mtx);
 void HSD_CObjSetupViewingMtx(HSD_CObj* cobj);
 f32 HSD_CObjGetEyeDistance(HSD_CObj* cobj);
 void HSD_CObjSetUpVector(HSD_CObj* cobj, Vec3* up);
