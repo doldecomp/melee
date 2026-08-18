@@ -43,7 +43,7 @@
 };
 /* 3F9B30 */ static struct un_803F9B30 {
     int x0;
-    unsigned short x4;
+    u16 x4;
 } un_803F9B30[67] = {
     { 0, 0 },   { 1, 1 },   { 2, 2 },   { 3, 3 },   { 4, 4 },   { 5, 5 },
     { 6, 6 },   { 7, 7 },   { 8, 8 },   { 9, 9 },   { 10, 10 }, { 11, 11 },
@@ -59,8 +59,8 @@
     { 66, 0 }
 };
 struct un_802FEBE0_OnEnter_arg0 {
-    unsigned short x0;
-    unsigned short x2;
+    u16 x0;
+    u16 x2;
     int x4;
     struct un_802FEBE0_OnEnter_arg0* x8;
 };
@@ -71,9 +71,9 @@ struct un_803F9D48 {
     unsigned char x1;
     char x2;
     unsigned char x3;
-    unsigned short x4;
-    unsigned short x6;
-    unsigned short x8;
+    u16 x4;
+    u16 x6;
+    u16 x8;
     unsigned char xA;
     unsigned char xB;
     int xC;
@@ -94,7 +94,7 @@ struct un_803F9D48 {
 /* 4D6D98 */ static HSD_Archive* un_804D6D98;
 /* 4D6D9C */ static SceneDesc* un_804D6D9C;
 
-void un_802FE3F8(int a, int b, short* c, short* d)
+void un_802FE3F8(int a, int b, s16* c, s16* d)
 {
     struct un_803F9B30* x;
     for (x = &un_803F9B30[0]; x->x0 != 66; x++) {
@@ -113,13 +113,13 @@ void un_802FE3F8(int a, int b, short* c, short* d)
     }
 }
 
-static inline void un_802FE3F8_inner(int a, int b, short* c, short* d)
+static inline void un_802FE3F8_inner(int a, int b, s16* c, s16* d)
 {
     un_802FE3F8(a, b, c, d);
 }
 
 /// un_802FEBE0_OnEnter will inline un_802FE3F8 otherwise
-static inline void un_802FE3F8_noinline(int a, int b, short* c, short* d)
+static inline void un_802FE3F8_noinline(int a, int b, s16* c, s16* d)
 {
     un_802FE3F8_inner(a, b, c, d);
 }
@@ -292,8 +292,8 @@ void un_802FE918(int a, int b, int c)
 found:
     un_803F9D48.x4 = i;
     if (a == 0x3E) {
-        unsigned short v_x6;
-        un_802FE3F8(a, 2, (short*) &un_803F9D48.x6, (short*) &un_803F9D48.x8);
+        u16 v_x6;
+        un_802FE3F8(a, 2, (s16*) &un_803F9D48.x6, (s16*) &un_803F9D48.x8);
         v_x6 = un_803F9D48.x6;
         r = un_803F9D48.x8;
         HSD_SisLib_803A6530(2, 0x4A, v_x6);
@@ -301,7 +301,7 @@ found:
         HSD_SisLib_803A660C(2, 0x4A, r);
         HSD_SisLib_803A6368(un_803F9D48.x20, 0x4A);
     } else {
-        un_802FE3F8(a, 2, (short*) &un_803F9D48.x6, NULL);
+        un_802FE3F8(a, 2, (s16*) &un_803F9D48.x6, NULL);
         HSD_SisLib_803A6368(un_803F9D48.x20, un_803F9D48.x6);
     }
     gm_801692E8(c, &sp14);
@@ -342,7 +342,7 @@ void un_802FEBE0_OnEnter(void* arg0_)
     i = 0;
 found:
     un_803F9D48.x4 = i;
-    un_802FE3F8_noinline(arg0x0, 2, (short*) &un_803F9D48.x6, NULL);
+    un_802FE3F8_noinline(arg0x0, 2, (s16*) &un_803F9D48.x6, NULL);
     un_803F9D48.x2 = -1;
     un_803F9D48.x1 = 0;
     un_803F9D48.xC = arg0x4;

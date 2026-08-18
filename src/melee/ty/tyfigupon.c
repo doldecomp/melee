@@ -551,7 +551,7 @@ void _tyFigupon_803155C8(void)
             }
             HSD_SisLib_803A6368(data->x14, 0);
             Toy_803083D8(ef4->jobjs[0xC], 0x3E7);
-            if ((s16) ef4->x54 == 0) {
+            if (ef4->x54 == 0) {
                 HSD_JObjReqAnimAll(ef4->jobjs[0xE], 1.0f);
                 HSD_JObjAnimAll(jobj);
             }

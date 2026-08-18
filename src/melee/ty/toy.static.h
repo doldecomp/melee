@@ -77,7 +77,7 @@
 /* 4A26B8 */ static struct _Toy_804A26B8_t _Toy_804A26B8;
 /* 4A26C4 */ static char _Toy_devtext_buf_804A26C4[0x8C];
 /* 4A2750 */ static char _Toy_devtext_buf_804A2750[0xFC];
-/* 4A284C */ unsigned short Toy_804A284C[302];
+/* 4A284C */ u16 Toy_804A284C[302];
 /* 4A2AA8 */ ToyAnimState Toy_804A2AA8;
 /* 4D5A40 */ static GXColor _Toy_color_E2E2E2FF = { 0xE2, 0xE2, 0xE2, 0xFF };
 /* 4D5A44 */ static GXColor _Toy_color_FF8020FF = { 0xFF, 0x80, 0x20, 0xFF };
@@ -96,7 +96,7 @@ static size_t const unk_array_len = 293;
 /* 4D6EC0 */ struct TrophyData* _Toy_sbss_804D6EC0;
 /* 4D6EBC */ void* _Toy_sbss_804D6EBC;
 /* 4D6EB8 */ void* _Toy_sbss_804D6EB8;
-/* 4D6EB4 */ short* _Toy_sbss_804D6EB4;
+/* 4D6EB4 */ s16* _Toy_sbss_804D6EB4;
 /* 4D6EB0 */ TyDspEntry* Toy_sbss_804D6EB0;
 /* 4D6EAC */ TyDspEntry* Toy_sbss_804D6EAC;
 /* 4D6EA8 */ void* _Toy_sbss_804D6EA8;

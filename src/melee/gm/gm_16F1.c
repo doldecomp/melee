@@ -188,7 +188,7 @@ int fn_8016F39C(HSD_Text** arg0, void* arg1, u8 arg2, u16 arg3, u8 arg4,
     idx = arg3;
     while ((u32) idx < 0x101U) {
         matched = 0;
-        if ((s16) lbl_803D5A4C[idx].kind < 0xD7) {
+        if (lbl_803D5A4C[idx].kind < 0xD7) {
             flags = fn_8016F180(idx);
             if (arg4 & flags) {
                 if (pl_80039418(arg5, idx) != 0) {
@@ -226,7 +226,7 @@ int fn_8016F548(void* arg0, u16 arg1, u8 mask, u8 player_id)
     }
 
     for (i = arg1; (u32) i < 0x101U; i++) {
-        if ((s16) lbl_803D5A4C[i].kind < 0xD7) {
+        if (lbl_803D5A4C[i].kind < 0xD7) {
             if (mask & (u8) fn_8016F180(i)) {
                 if (pl_80039418(player_id, i) != 0) {
                     return i;
@@ -242,7 +242,7 @@ int fn_8016F548(void* arg0, u16 arg1, u8 mask, u8 player_id)
     }
 
     for (i = 0x100; i >= 0; i--) {
-        if ((s16) lbl_803D5A4C[i].kind < 0xD7) {
+        if (lbl_803D5A4C[i].kind < 0xD7) {
             if (mask & (u8) fn_8016F180(i)) {
                 if (pl_80039418(player_id, i) != 0) {
                     return i;
@@ -275,7 +275,7 @@ int fn_8016F740(void* arg0, u16 arg1, u8 mask, u8 player_id)
 
     i = temp;
     for (; (u32) i < 0x101U; i++) {
-        if ((s16) lbl_803D5A4C[i].kind < 0xD7) {
+        if (lbl_803D5A4C[i].kind < 0xD7) {
             flags = fn_8016F180(i);
             if (mask & flags) {
                 if (pl_80039418(player_id, i) != 0) {
@@ -341,7 +341,7 @@ int fn_8016F9A8(void* arg0, u16 arg1, u8 mask, u8 player_id)
     }
 
     for (i = arg1; (u32) i < 0x101; i++) {
-        if ((s16) lbl_803D5A4C[i].kind < 0xD7) {
+        if (lbl_803D5A4C[i].kind < 0xD7) {
             flags = fn_8016F180(i);
             if (mask & flags) {
                 if (pl_80039418(player_id, i) != 0) {
@@ -440,7 +440,7 @@ int fn_8016FFD4(struct lbl_8046B6A0_24C_t* arg0, int arg1, u8 arg2)
     int count = 0;
 
     for (i = 0; (u32) i < 0x101U; i++) {
-        if ((s16) lbl_803D5A4C[i].kind < 0xD7) {
+        if (lbl_803D5A4C[i].kind < 0xD7) {
             if ((arg1 & 0xFF) & (u8) fn_8016F180(i) &&
                 pl_80039418(arg2, i) != 0)
             {

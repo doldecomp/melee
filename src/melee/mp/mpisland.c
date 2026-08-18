@@ -109,8 +109,8 @@ void mpIsland_8005A728(void)
             }
             seg.p->x20 = hidden ? 2 : 0;
             seg.p->next = NULL;
-            seg.p->x24 = (short) line_idx;
-            seg.p->x26 = (short) end_idx;
+            seg.p->x24 = (s16) line_idx;
+            seg.p->x26 = (s16) end_idx;
             seg.p->x4 = lines[line_idx].x0->v0_idx;
             seg.p->x6 = lines[end_idx].x0->v1_idx;
             seg.p->x8.x = vtx[seg.p->x4].pos.x;
@@ -175,8 +175,8 @@ void mpIsland_8005A728(void)
             }
             seg.p->x20 = hidden ? 2 : 0;
             seg.p->next = NULL;
-            seg.p->x24 = (short) line_idx;
-            seg.p->x26 = (short) end_idx;
+            seg.p->x24 = (s16) line_idx;
+            seg.p->x26 = (s16) end_idx;
             seg.p->x4 = lines[line_idx].x0->v1_idx;
             seg.p->x6 = lines[end_idx].x0->v0_idx;
             seg.p->x8.x = vtx[seg.p->x4].pos.x;
@@ -558,8 +558,8 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
 
         mpisp->x20 = arg6 ? 0 : 2;
         mpisp->next = NULL;
-        mpisp->x24 = (short) end_idx;
-        mpisp->x26 = (short) start_idx;
+        mpisp->x24 = (s16) end_idx;
+        mpisp->x26 = (s16) start_idx;
         mpisp->x4 = lines[end_idx].x0->v0_idx;
         mpisp->x6 = lines[start_idx].x0->v1_idx;
         mpisp->x8.x = vtx[mpisp->x4].pos.x;
@@ -568,7 +568,7 @@ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
         mpisp->x14.x = vtx[mpisp->x6].pos.x;
         mpisp->x14.y = vtx[mpisp->x6].pos.y;
         mpisp->x14.z = z_val;
-        mpisp->x28 = (short) arg2;
+        mpisp->x28 = (s16) arg2;
 
         mpisp->next = *arg0;
         *arg0 = mpisp;
