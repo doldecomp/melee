@@ -95,6 +95,21 @@ set(SOURCES
     src/melee/gm/gmtou_2.c
     src/melee/gm/gmvsdata.c
     src/melee/gm/gmvsmelee.c
+    src/melee/lb/lb_00CE.c
+    src/melee/lb/lb_013B.c
+    src/melee/lb/lb_0146.c
+    src/melee/lb/lb_0192.c
+    src/melee/lb/lbanim.c
+    src/melee/lb/lbarchive.c
+    src/melee/lb/lbarq.c
+    src/melee/lb/lbcardgame.c
+    src/melee/lb/lbcommand.c
+    src/melee/lb/lbfile.c
+    src/melee/lb/lbheap.c
+    src/melee/lb/lblanguage.c
+    src/melee/lb/lbmemory.c
+    src/melee/lb/lbspdisplay.c
+    src/melee/lb/lbtime.c
 )
 
 add_library(melee STATIC ${SOURCES})
