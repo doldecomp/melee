@@ -45,7 +45,7 @@ int hsd_803B27F4(const s32* arg0, const char* arg1, int arg2, int arg3,
     return 0;
 }
 
-int hsd_803B286C(s32* arg0, UNK_T arg1, const char* arg2, int arg3, int arg4,
+int hsd_803B286C(const s32* arg0, UNK_T arg1, const char* arg2, int arg3, int arg4,
                  void (*arg5)(int, int))
 {
     u8* base = hsd_804D1138;
@@ -74,7 +74,7 @@ int hsd_803B286C(s32* arg0, UNK_T arg1, const char* arg2, int arg3, int arg4,
     return 0;
 }
 
-int hsd_803B2928(s32* arg0, const char* arg1, int arg2, int arg3,
+int hsd_803B2928(const s32* arg0, const char* arg1, int arg2, int arg3,
                  void (*arg4)(int, int))
 {
     u8* base = hsd_804D1138;

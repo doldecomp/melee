@@ -318,7 +318,7 @@ void lbHeap_80015F3C(void)
                     (uintptr_t) lbHeap_80431FA0.arena_hi - curr_heap->size;
                 break;
             case 4:
-                curr_heap->start = (uintptr_t) lbHeap_80431FA0.aram_lo;
+                curr_heap->start = lbHeap_80431FA0.aram_lo;
                 break;
             }
         } else {
