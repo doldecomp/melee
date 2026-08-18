@@ -1395,6 +1395,11 @@ void fn_8022AFEC(HSD_GObj* gp)
     }
 }
 
+static inline AnimLoopSettings* GetMenuAnimLoop(MenuKind kind)
+{
+    return mn_803EB6B0[kind].anim_loop;
+}
+
 /// @brief counts the unlocked selections of a menu
 static inline u8 CountUnlockedSelections(MenuKind kind)
 {
@@ -1427,9 +1432,7 @@ HSD_GObj* mn_8022B3A0(u8 state)
     MainMenuData* user_data;
     StaticModelDesc* top = &MenMainConTop_Top;
     u8 hovered_selection;
-    struct {
-        AnimLoopSettings* p;
-    } anim_loop;
+    AnimLoopSettings* anim_loop;
     struct {
         HSD_JObj* p;
     } jobj;
@@ -1439,7 +1442,7 @@ HSD_GObj* mn_8022B3A0(u8 state)
     PAD_STACK(8);
 
     cur_menu = mn_804A04F0.cur_menu;
-    anim_loop.p = mn_803EB6B0[cur_menu].anim_loop;
+    anim_loop = GetMenuAnimLoop(cur_menu);
     option_count = mn_803EB6B0[cur_menu].selection_count & 0xFF;
     hovered_selection = mn_804A04F0.hovered_selection;
 
@@ -1540,7 +1543,7 @@ HSD_GObj* mn_8022B3A0(u8 state)
     {
         var_r4_3 = &mn_803EB480;
     } else {
-        var_r4_3 = &anim_loop.p[user_data->hovered_selection];
+        var_r4_3 = &anim_loop[user_data->hovered_selection];
     }
     HSD_JObjReqAnimAll(temp_r16_2, var_r4_3->start_frame);
     HSD_JObjAnimAll(temp_r16_2);
