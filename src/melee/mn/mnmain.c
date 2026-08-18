@@ -1398,47 +1398,45 @@ static inline u8 CountUnlockedSelections(MenuKind kind)
 /// @brief sets up a new menu when transitioning from another.
 HSD_GObj* mn_8022B3A0(u8 state)
 {
-    HSD_JObj* sp48[12];
-    HSD_JObj* sp2C[7];
+    HSD_JObj* option_jobjs[12];
+    HSD_JObj* cursor_parts[7];
     int i;
     HSD_GObj* gobj;
     HSD_JObj* cursor_jobj;
-    HSD_JObj* temp_r16_2;
+    HSD_JObj* hover_jobj;
     int idx;
-    u8 var_r16_2;
-    AnimLoopSettings* var_r4_3;
+    u8 unlocked_index;
+    AnimLoopSettings* hover_anim;
     u8 option_count;
     u8 cur_menu;
     MenuKind menu_kind;
     MainMenuData* user_data;
-    StaticModelDesc* top = &MenMainConTop_Top;
+    StaticModelDesc* model = &MenMainConTop_Top;
     u8 hovered_selection;
     AnimLoopSettings* anim_loop;
     struct {
-        HSD_JObj* p;
+        HSD_JObj* value;
     } jobj;
-    AnimLoopSettings* tmp;
-    u32 var_r17_int;
+    u32 unlocked_count;
     HSD_JObj* root_jobj;
-    PAD_STACK(12);
+    PAD_STACK(16);
 
     cur_menu = mn_804A04F0.cur_menu;
-    /// @todo The round trip keeps the pointer out of a named object, which is
-    /// where retail holds it.
+    // The round trip keeps the pointer in a temporary, as retail has it.
     anim_loop = (AnimLoopSettings*) ((u8*) mn_803EB6B0[cur_menu].anim_loop +
                                      sizeof(AnimLoopSettings)) -
                 1;
     option_count = mn_803EB6B0[cur_menu].selection_count & 0xFF;
     hovered_selection = mn_804A04F0.hovered_selection;
 
-    var_r17_int = CountUnlockedSelections(cur_menu);
+    unlocked_count = CountUnlockedSelections(cur_menu);
     gobj = GObj_Create(6, 7, 0x80);
-    root_jobj = HSD_JObjLoadJoint(top->joint);
+    root_jobj = HSD_JObjLoadJoint(model->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root_jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
     HSD_GObj_SetupProc(gobj, fn_8022AFEC, 0);
-    HSD_JObjAddAnimAll(root_jobj, top->animjoint, top->matanim_joint,
-                       top->shapeanim_joint);
+    HSD_JObjAddAnimAll(root_jobj, model->animjoint, model->matanim_joint,
+                       model->shapeanim_joint);
     HSD_JObjReqAnimAll(root_jobj, 0.0F);
     user_data = HSD_MemAlloc(sizeof(MainMenuData));
     HSD_ASSERTREPORT(0x65D, user_data, "Can't get user_data.\n");
@@ -1447,7 +1445,7 @@ HSD_GObj* mn_8022B3A0(u8 state)
     user_data->hovered_selection = mn_804A04F0.hovered_selection;
     user_data->state = state;
     user_data->description = NULL;
-    for (idx = 0; idx < 0x2A; idx++) {
+    for (idx = 0; idx < (int) ARRAY_SIZE(user_data->tree); idx++) {
         lb_80011E24(root_jobj, &user_data->tree[idx], idx, -1);
     }
     if (user_data->state != MENU_STATE_IDLE) {
@@ -1466,72 +1464,76 @@ HSD_GObj* mn_8022B3A0(u8 state)
         HSD_JObjAnim(user_data->tree[3]);
     }
     for (i = 0; i < option_count; i++) {
-        sp48[i] = user_data->tree[mn_803EAE68[i]];
+        option_jobjs[i] = user_data->tree[mn_803EAE68[i]];
     }
     for (i = 0; i < option_count; i++) {
-        top = &MenMainCursor_Top;
+        model = &MenMainCursor_Top;
         if (mn_80229938(mn_804A04F0.cur_menu, i) != 0) {
             menu_kind = mn_804A04F0.cur_menu;
-            var_r16_2 = mn_80229A04(menu_kind, i);
-            HSD_JObjReqAnim(sp48[var_r16_2], var_r17_int);
-            HSD_JObjAnim(sp48[var_r16_2]);
-            cursor_jobj = HSD_JObjLoadJoint(top->joint);
-            HSD_JObjAddAnimAll(cursor_jobj, top->animjoint, top->matanim_joint,
-                               top->shapeanim_joint);
-            lb_8001204C(cursor_jobj, sp2C, mn_803EAE7C, 7);
-            HSD_JObjReqAnim(sp2C[0],
+            unlocked_index = mn_80229A04(menu_kind, i);
+            HSD_JObjReqAnim(option_jobjs[unlocked_index], unlocked_count);
+            HSD_JObjAnim(option_jobjs[unlocked_index]);
+            cursor_jobj = HSD_JObjLoadJoint(model->joint);
+            HSD_JObjAddAnimAll(cursor_jobj, model->animjoint,
+                               model->matanim_joint, model->shapeanim_joint);
+            lb_8001204C(cursor_jobj, cursor_parts, mn_803EAE7C,
+                        ARRAY_SIZE(cursor_parts));
+            HSD_JObjReqAnim(cursor_parts[0],
                             mn_803EB360[i == hovered_selection].start_frame);
-            HSD_JObjAnim(sp2C[0]);
-            jobj.p = sp2C[1];
-            HSD_JObjReqAnimAll(jobj.p, i == hovered_selection);
-            HSD_JObjAnimAll(jobj.p);
-            HSD_JObjReqAnim(jobj.p,
+            HSD_JObjAnim(cursor_parts[0]);
+            jobj.value = cursor_parts[1];
+            HSD_JObjReqAnimAll(jobj.value, i == hovered_selection);
+            HSD_JObjAnimAll(jobj.value);
+            HSD_JObjReqAnim(jobj.value,
                             mn_803EB6B0[mn_804A04F0.cur_menu].start_frame +
                                 GetSelectionFrameOffset(i));
-            mn_8022F3D8(jobj.p, 0xC, TOBJ_MASK);
-            mn_8022F3D8(jobj.p, 0xD, TOBJ_MASK);
-            mn_8022F3D8(jobj.p, 0xE, TOBJ_MASK);
-            mn_8022F3D8(jobj.p, 0xF, TOBJ_MASK);
-            mn_8022F3D8(jobj.p, 0x10, TOBJ_MASK);
-            mn_8022F3D8(jobj.p, 0x11, TOBJ_MASK);
-            mn_8022F3D8(jobj.p, 0x12, TOBJ_MASK);
-            mn_8022F3D8(jobj.p, 0x13, TOBJ_MASK);
-            HSD_JObjAnim(jobj.p);
+            mn_8022F3D8(jobj.value, 0xC, TOBJ_MASK);
+            mn_8022F3D8(jobj.value, 0xD, TOBJ_MASK);
+            mn_8022F3D8(jobj.value, 0xE, TOBJ_MASK);
+            mn_8022F3D8(jobj.value, 0xF, TOBJ_MASK);
+            mn_8022F3D8(jobj.value, 0x10, TOBJ_MASK);
+            mn_8022F3D8(jobj.value, 0x11, TOBJ_MASK);
+            mn_8022F3D8(jobj.value, 0x12, TOBJ_MASK);
+            mn_8022F3D8(jobj.value, 0x13, TOBJ_MASK);
+            HSD_JObjAnim(jobj.value);
             if (i == hovered_selection) {
                 HSD_JObjReqAnimAll(
-                    sp2C[2], mn_803EB378[i == hovered_selection].start_frame);
+                    cursor_parts[2],
+                    mn_803EB378[i == hovered_selection].start_frame);
             } else {
                 HSD_JObjReqAnimAll(
-                    sp2C[2], mn_803EB378[i == hovered_selection].end_frame);
+                    cursor_parts[2],
+                    mn_803EB378[i == hovered_selection].end_frame);
             }
-            HSD_JObjAnimAll(sp2C[2]);
+            HSD_JObjAnimAll(cursor_parts[2]);
             if (i == hovered_selection) {
-                HSD_JObjReqAnim(sp2C[3], mn_803EB390.start_frame);
+                HSD_JObjReqAnim(cursor_parts[3], mn_803EB390.start_frame);
             } else {
-                HSD_JObjSetFlagsAll(sp2C[3], JOBJ_HIDDEN);
+                HSD_JObjSetFlagsAll(cursor_parts[3], JOBJ_HIDDEN);
             }
-            HSD_JObjAnim(sp2C[3]);
+            HSD_JObjAnim(cursor_parts[3]);
             if (i != hovered_selection) {
-                HSD_JObjSetFlagsAll(sp2C[4], JOBJ_HIDDEN);
+                HSD_JObjSetFlagsAll(cursor_parts[4], JOBJ_HIDDEN);
             }
-            HSD_JObjAddChild(sp48[var_r16_2], cursor_jobj);
+            HSD_JObjAddChild(option_jobjs[unlocked_index], cursor_jobj);
         }
     }
-    temp_r16_2 = user_data->tree[14];
-    if (user_data->menu_kind == 0 && user_data->hovered_selection == 4 &&
+    hover_jobj = user_data->tree[14];
+    if (user_data->menu_kind == MENU_KIND_MAIN &&
+        user_data->hovered_selection == SEL_MAIN_DATA &&
         gmMainLib_8015EE90() == 0)
     {
-        var_r4_3 = &mn_803EB438;
-    } else if ((user_data->menu_kind == 1) &&
-               (user_data->hovered_selection == 0) &&
-               (gmMainLib_8015EDD4() == 0))
+        hover_anim = &mn_803EB438;
+    } else if (user_data->menu_kind == MENU_KIND_1P &&
+               user_data->hovered_selection == SEL_1P_REG &&
+               gmMainLib_8015EDD4() == 0)
     {
-        var_r4_3 = &mn_803EB480;
+        hover_anim = &mn_803EB480;
     } else {
-        var_r4_3 = &anim_loop[user_data->hovered_selection];
+        hover_anim = &anim_loop[user_data->hovered_selection];
     }
-    HSD_JObjReqAnimAll(temp_r16_2, var_r4_3->start_frame);
-    HSD_JObjAnimAll(temp_r16_2);
+    HSD_JObjReqAnimAll(hover_jobj, hover_anim->start_frame);
+    HSD_JObjAnimAll(hover_jobj);
 
     mn_80229A7C(user_data, user_data->menu_kind, user_data->hovered_selection);
     return gobj;
@@ -1763,7 +1765,7 @@ int mn_8022C010(int menu_kind, int selection)
 
 MenuFlow mn_804A04F0;
 
-static inline void mn_8022C068_inline(HSD_LObj* lobj, int unused, int div)
+static inline void LerpLightColor(HSD_LObj* lobj, int div)
 {
     int diff;
 
@@ -1790,6 +1792,7 @@ static inline void mn_8022C068_inline(HSD_LObj* lobj, int unused, int div)
     }
 }
 
+/// Out-of-line copy for the one caller that does not inline it.
 static void mn_8022C068(HSD_LObj* lobj, int unused, int div)
 {
     int diff;
@@ -1832,7 +1835,7 @@ void fn_8022C128(HSD_GObj* arg0)
     }
     if (mn_804A04F0.light_lerp_frames != 0) {
         mn_804A04F0.light_lerp_frames--;
-        mn_8022C068_inline(lobj, 0, mn_804A04F0.light_lerp_frames);
+        LerpLightColor(lobj, mn_804A04F0.light_lerp_frames);
     }
 }
 
@@ -1852,7 +1855,7 @@ void mn_8022C304(void)
     mn_804A04F0.light_lerp_frames = 0;
     mn_804A04F0.light_color = mn_8022BFBC(
         mn_8022C010(mn_804A04F0.cur_menu, mn_804A04F0.hovered_selection));
-    mn_8022C068_inline(lobj, 0, mn_804A04F0.light_lerp_frames);
+    LerpLightColor(lobj, mn_804A04F0.light_lerp_frames);
 }
 
 static inline void x2_dec(u8 temp_r29)
