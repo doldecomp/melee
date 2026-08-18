@@ -172,7 +172,7 @@ void it_802AB90C(Item_GObj* gobj)
     it_802725D4(gobj);
 
     if (ip->xDD4_itemVar.pkthunder.xF04 != NULL) {
-        if (ip->xDD4_itemVar.pkthunder.xF00 == NULL &&
+        if (ip->xDD4_itemVar.pkthunder.xF00 == 0 &&
             ip->xDD4_itemVar.pkthunder.xF04 == ip->owner)
         {
             ftNs_SpecialHi_ItemPKThunderRemove(
@@ -194,7 +194,7 @@ void it_802AB9C0(Item_GObj* gobj)
 {
     if (gobj != NULL) {
         Item* ip = GET_ITEM(gobj);
-        if (ip != NULL && ip->xDD4_itemVar.pkthunder.xF00 == NULL) {
+        if (ip != NULL && ip->xDD4_itemVar.pkthunder.xF00 == 0) {
             s32 i;
             ip->owner = NULL;
             ip->xDC8_word.flags.x13 = 0;
