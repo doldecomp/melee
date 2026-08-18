@@ -7,6 +7,7 @@
 
 #include <melee/ft/forward.h>
 
+#include <string.h>
 #include <dolphin/ai.h>
 #include <dolphin/ar.h>
 #include <dolphin/axfx.h>
