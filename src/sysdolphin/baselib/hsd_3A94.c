@@ -4950,13 +4950,11 @@ void hsd_803B2374(void)
 
 void hsd_803B24E4(s32* ctx, int channel, int file_no, void* work_buf)
 {
-    CardState* state = (CardState*) ctx;
-
-    memset(state, 0, sizeof(CardState));
-    state->x20 = -1;
-    state->x4 = channel;
-    state->x8 = file_no;
-    state->x0 = work_buf;
+    memset((CardState*) ctx, 0, sizeof(CardState));
+    ((CardState*) ctx)->x20 = -1;
+    ((CardState*) ctx)->x4 = channel;
+    ((CardState*) ctx)->x8 = file_no;
+    ((CardState*) ctx)->x0 = work_buf;
 }
 
 static inline HsdCmdEntry* hsd_803B2550_inline(u8* arg0, s32 arg1)
