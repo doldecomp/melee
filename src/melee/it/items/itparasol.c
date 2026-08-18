@@ -72,15 +72,6 @@ void it_8028B17C(Item_GObj* item_gobj)
     Item_80268E5C(item_gobj, 1, ITEM_ANIM_UPDATE);
 }
 
-static inline f32 fabsf(f32 x)
-{
-    if (x < 0) {
-        return -x;
-    } else {
-        return +x;
-    }
-}
-
 static inline HSD_JObj* jobj_child(HSD_JObj* jobj)
 {
     if (jobj == NULL) {
@@ -100,7 +91,7 @@ bool itParasol_UnkMotion2_Anim(Item_GObj* item_gobj)
     if (jobj != NULL) {
         jobj = jobj_child(jobj);
         ry = HSD_JObjGetRotationY(jobj);
-        fm = attrs[2] + fabsf(item->x40_vel.y * attrs[3]);
+        fm = attrs[2] + ABS(item->x40_vel.y * attrs[3]);
         fm *= item->facing_dir;
         ry = deg_to_rad * fm + ry;
         HSD_JObjSetRotationY(jobj, ry);
@@ -110,7 +101,7 @@ bool itParasol_UnkMotion2_Anim(Item_GObj* item_gobj)
 
 static inline void decelerateItemX(Item* item, f32 decel_x)
 {
-    if (fabsf(item->x40_vel.x) > decel_x) {
+    if (ABS(item->x40_vel.x) > decel_x) {
         if (item->x40_vel.x > decel_x) {
             item->x40_vel.x -= decel_x;
         }
