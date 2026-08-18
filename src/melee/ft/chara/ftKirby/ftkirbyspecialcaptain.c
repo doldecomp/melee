@@ -154,7 +154,7 @@ void ftKb_CaSpecialN_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     bool throw_b1;
-    long long pad;
+    s64 pad;
     if (fp->throw_flags_b1) {
         fp->throw_flags_b1 = false;
         throw_b1 = true;

@@ -1127,7 +1127,7 @@ void gm_DoPauseChecksAndRoutine(lbl_8046B6A0_t* arg0, int arg1)
                 }
                 gm_801A0FEC(pauser, var_r4);
             }
-            gm_801A4634((long long) arg1);
+            gm_801A4634((s64) arg1);
             if (arg0->x24C8.x4_0) {
                 pauserSlot = gm_GetSlotByPlayerId(pauser);
                 if (arg0->x24C8.on_pause_override != NULL) {

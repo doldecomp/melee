@@ -199,7 +199,7 @@ struct pl_StaleMoveTableExt_t {
     /* +D54 */ unsigned int xD54;
     /* +D58 */ unsigned int xD58;
     /* +D5C */ unsigned int xD5C;
-    /* +D60 */ unsigned long xD60;
+    /* +D60 */ u32 xD60;
     /* +D64 */ int xD64;
     /* +D68 */ int xD68;
     /* +D6C */ int xD6C;

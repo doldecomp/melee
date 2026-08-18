@@ -871,8 +871,8 @@ char* AddCharacterToName(char* arg0, u8 arg1, u8 arg2, u8 arg3)
 
     layout = (MnNameNewDataLayout*) mnNameNew_803EDA58;
     if ((s32) arg3 != 2) {
-        if (((((s32) (temp = arg3)) < ((unsigned short) 2)) & 0xFFFFFFFF) &&
-            (((s32) ((unsigned long) arg3)) >= 0))
+        if (((((s32) (temp = arg3)) < ((u16) 2)) & 0xFFFFFFFF) &&
+            (((s32) ((u32) arg3)) >= 0))
         {
             char null;
             s32 idx;

@@ -53,7 +53,7 @@ char* mnName_8023749C(int slot)
 {
     int j;
     s8 terminator;
-    unsigned short new_var;
+    u16 new_var;
     char** array;
     s8 term;
     char* str;
@@ -197,7 +197,7 @@ void DeleteName(u8 arg0)
     u8 _2[8];
     struct NameTagData temp;
     s32 i;
-    unsigned long long longpos;
+    u64 longpos;
     s32 pos;
     s32 j;
     u16* p;

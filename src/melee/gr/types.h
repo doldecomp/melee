@@ -206,10 +206,10 @@ struct GroundVars_izumi2 {
 };
 
 struct GroundVars_izumi3 {
-    short xC4;
-    short xC6;
-    short xC8;
-    short xCA;
+    s16 xC4;
+    s16 xC6;
+    s16 xC8;
+    s16 xCA;
     HSD_JObj* xCC;
     float xD0;
     float xD4;

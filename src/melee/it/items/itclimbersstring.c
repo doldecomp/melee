@@ -552,7 +552,7 @@ void it_802C3520(Item* ip, Vec3* target)
 
 void it_2725_Logic70_PickedUp(Item_GObj* gobj)
 {
-    short pad;
+    s16 pad;
     void (*new_var)(Item_GObj* gobj);
     Item* ip = gobj->user_data;
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);

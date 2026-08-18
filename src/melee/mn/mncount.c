@@ -603,7 +603,7 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
 void mnCount_HandleUserInput(HSD_GObj* gobj)
 {
     MnCountData* userdata = GET_MNCOUNT(menu_gobj);
-    long long x;
+    s64 x;
     if (mn_804D6BC8.cooldown != 0) {
         Menu_DecrementAnimTimer();
     } else {

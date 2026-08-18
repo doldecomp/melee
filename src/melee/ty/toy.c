@@ -63,7 +63,7 @@
 int Toy_GetTrophyTotal(void)
 {
     if (gm_IsCurrently1PMode() || gm_GetCurrentGameMode() == GM_TOY_LOTTERY) {
-        return (short) Toy_804A284C[0x258 / 2];
+        return (s16) Toy_804A284C[0x258 / 2];
     } else {
         return *gmMainLib_GetTrophyCount();
     }
@@ -90,7 +90,7 @@ bool Toy_80304924(int arg0)
 
 void Toy_80304988(int arg0)
 {
-    unsigned short* v = idk();
+    u16* v = idk();
     v[arg0] = v[arg0] ^ 0x8000;
 }
 
@@ -101,7 +101,7 @@ bool Toy_803049F4(int arg0)
 
 void Toy_80304A58(int arg0)
 {
-    unsigned short* v = idk();
+    u16* v = idk();
     if (Toy_803049F4(arg0)) {
         v[arg0] = v[arg0] ^ 0x4000;
     }
@@ -109,8 +109,8 @@ void Toy_80304A58(int arg0)
 
 bool Toy_80304B0C(int arg0)
 {
-    unsigned short* v;
-    unsigned short s;
+    u16* v;
+    u16 s;
     if (gm_IsCurrently1PMode() || gm_GetCurrentGameMode() == GM_TOY_LOTTERY) {
         s = Toy_804A284C[3] | Toy_804A284C[4];
         v = &s;
@@ -197,7 +197,7 @@ int Toy_80304B94(int option)
 
 bool Toy_80304CC8(int arg0)
 {
-    short* v = _Toy_sbss_804D6EB4;
+    s16* v = _Toy_sbss_804D6EB4;
     if (lbLang_IsSettingUS()) {
         for (; *v != -1; v++) {
             if (*v == arg0) {
@@ -213,7 +213,7 @@ bool _Toy_80304CC8_noinline(int arg0)
     return Toy_80304CC8(arg0);
 }
 
-static inline unsigned short* Toy_80304D30_idk(void)
+static inline u16* Toy_80304D30_idk(void)
 {
     if (gm_IsCurrently1PMode() || gm_GetCurrentGameMode() == GM_TOY_LOTTERY) {
         return &Toy_804A284C[5];
@@ -229,8 +229,8 @@ static inline int Toy_80304D30_48C0(int arg0)
 
 static inline bool Toy_80304D30_4B0C(int arg0)
 {
-    unsigned short* v;
-    unsigned short s;
+    u16* v;
+    u16 s;
     if (gm_IsCurrently1PMode() || gm_GetCurrentGameMode() == GM_TOY_LOTTERY) {
         s = Toy_804A284C[3] | Toy_804A284C[4];
         v = &s;

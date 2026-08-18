@@ -1206,7 +1206,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     s32 i;
     u8* ptr2;
     u8* ptr3;
-    short new_var;
+    s16 new_var;
     u8* sorted = mnDiagram_804A0750.sorted_fighters;
     Diagram* data = mnDiagram_804D6C10->user_data;
     u32 input = mn_80229624(4);
