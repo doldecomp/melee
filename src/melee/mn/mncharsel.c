@@ -688,6 +688,40 @@ void mnCharSel_8025D5AC(int door, int var_r31, bool hidden)
     sethidden(sp44, hidden);
 }
 
+static inline bool isDuplicateCostume(int door, CSSData* css, u8 door_count,
+                                      bool use_args)
+{
+    int num_doors;
+    int j;
+    CSSDoor* base_door = &mnCharSel_803F0DFC.doors[door];
+
+    if (use_args) {
+        if (css->match_type == TRAINING_MODE) {
+            num_doors = 2;
+        } else {
+            num_doors = door_count;
+        }
+    } else {
+        if (mnCharSel_804D6CB0->match_type == TRAINING_MODE) {
+            num_doors = 2;
+        } else {
+            num_doors = mnCharSel_804D6CF5;
+        }
+    }
+
+    for (j = 0; j < num_doors; j++) {
+        CSSDoor* other_door = &mnCharSel_803F0DFC.doors[j];
+        if (door != j && other_door->p_kind != 3 &&
+            other_door->sel_icon < 0x19 &&
+            other_door->sel_icon == base_door->sel_icon &&
+            base_door->costume == other_door->costume)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 #pragma dont_inline on
 bool mnCharSel_8025DAA0(int door)
 {
@@ -741,10 +775,9 @@ void mnCharSel_8025DB34(u8 arg0)
     s32 var_r5;
     s32 var_r23;
     u8* team_ptr;
-    int num_doors;
     f32 var_f1;
 
-    PAD_STACK(0x40);
+    PAD_STACK(0x3C);
 
     sel_icon = mnCharSel_803F0DFC.doors[arg0].sel_icon;
     hud_idx = icons[sel_icon].ft_hudindex;
@@ -768,42 +801,18 @@ void mnCharSel_8025DB34(u8 arg0)
     /* Costume duplicate check */
     {
         u8 new_icon = mnCharSel_803F0DFC.doors[arg0].sel_icon;
-        u8* prev_icon_ptr = &mnCharSel_803F0DFC.doors[arg0].sel_icon_prev;
-        if (*prev_icon_ptr != new_icon) {
-            *prev_icon_ptr = new_icon;
+        if (new_icon != mnCharSel_803F0DFC.doors[arg0].sel_icon_prev) {
+            mnCharSel_803F0DFC.doors[arg0].sel_icon_prev = new_icon;
             {
                 CSSData* css = mnCharSel_804D6CB0;
                 u8 door_count = mnCharSel_804D6CF5;
-                CSSDoor* door2 = &mnCharSel_803F0DFC.doors[arg0];
                 u8 costume_var = 0;
-                int found;
-                for (;;) {
+                while (1) {
                     mnCharSel_803F0DFC.doors[arg0].costume = costume_var;
-                    if (css->match_type == 0x17) {
-                        num_doors = 2;
-                    } else {
-                        num_doors = door_count;
-                    }
-                    {
-                        int j;
-                        for (j = 0; j < num_doors; j++) {
-                            CSSDoor* cur_door = &mnCharSel_803F0DFC.doors[j];
-                            if ((int) arg0 != j && cur_door->p_kind != 3 &&
-                                cur_door->sel_icon < 0x19U &&
-                                cur_door->sel_icon == door2->sel_icon &&
-                                door2->costume == cur_door->costume)
-                            {
-                                found = 1;
-                                goto dup_checked;
-                            }
-                        }
-                    }
-                    found = 0;
-                dup_checked:
-                    if (found == 0) {
+                    if (!isDuplicateCostume(arg0, css, door_count, true)) {
                         break;
                     }
-                    costume_var += 1;
+                    costume_var++;
                 }
             }
             if (mnCharSel_804D6CF6 != 3 && mnCharSel_804D6CF6 != 4) {
@@ -1640,40 +1649,6 @@ void fn_8025FAC0(HSD_GObj* gobj)
 void fn_8025FB2C(HSD_GObj* gobj)
 {
     HSD_JObjAnimAll(GET_JOBJ(gobj));
-}
-
-static inline bool isDuplicateCostume(int door, CSSData* css, u8 door_count,
-                                      bool use_args)
-{
-    int num_doors;
-    int j;
-    CSSDoor* base_door = &mnCharSel_803F0DFC.doors[door];
-
-    if (use_args) {
-        if (css->match_type == TRAINING_MODE) {
-            num_doors = 2;
-        } else {
-            num_doors = door_count;
-        }
-    } else {
-        if (mnCharSel_804D6CB0->match_type == TRAINING_MODE) {
-            num_doors = 2;
-        } else {
-            num_doors = mnCharSel_804D6CF5;
-        }
-    }
-
-    for (j = 0; j < num_doors; j++) {
-        CSSDoor* other_door = &mnCharSel_803F0DFC.doors[j];
-        if (door != j && other_door->p_kind != 3 &&
-            other_door->sel_icon < 0x19 &&
-            other_door->sel_icon == base_door->sel_icon &&
-            base_door->costume == other_door->costume)
-        {
-            return true;
-        }
-    }
-    return false;
 }
 
 static inline s32 getIconOffset(u32 icon_idx)
