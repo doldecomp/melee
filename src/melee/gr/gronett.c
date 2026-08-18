@@ -668,8 +668,10 @@ void grOnett_801E43E0(Ground_GObj* gobj)
                     while (iter != NULL) {
                         ftLib_80086644(iter, &pos);
                         if (pos.y <= 1.0f) {
+                            s8 car = saved_car;
+
                             HSD_Randi(3);
-                            grOnett_801E5140((s8) saved_car);
+                            grOnett_801E5140(car);
                             gp->u.onettcar.x110 = 2;
                             Ground_801C5784(2);
                             break;
