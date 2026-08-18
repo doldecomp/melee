@@ -209,11 +209,9 @@
 /* 169550 */ void fn_80169550(int slot);
 /* 169574 */ void fn_80169574(ssize_t size, s8* buf);
 /* 1695BC */ void fn_801695BC(u8, u8, u8, const u8*, u8*);
-/* 1697FC */ void fn_801697FC(signed char, signed char, signed char,
-                              signed char, signed char*);
-/* 16989C */ void fn_8016989C(unsigned char*, u8, u8, u8*, u8*);
-/* 169900 */ void fn_80169900(unsigned char, struct lbl_8046B488_t*,
-                              signed char*, signed char*);
+/* 1697FC */ void fn_801697FC(s8, s8, s8, s8, s8*);
+/* 16989C */ void fn_8016989C(u8*, u8, u8, u8*, u8*);
+/* 169900 */ void fn_80169900(u8, struct lbl_8046B488_t*, s8*, s8*);
 /* 169A84 */ s32 fn_80169A84(u8, s8*, s8*);
 /* 169C54 */ void fn_80169C54(s8, s8);
 /* 169F50 */ UNK_RET fn_80169F50(s8, s8);

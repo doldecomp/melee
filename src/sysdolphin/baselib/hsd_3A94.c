@@ -1424,7 +1424,7 @@ s32 fn_803AC168(s32* cmd_buf)
     {
         s32 idx = hsd_804D7984;
         hsd_804D7984 = (hsd_804D7984 + 1) % 128;
-        memcpy((u8*) hsd_804D1148[idx], cmd_buf, 36);
+        memcpy((u8*) hsd_804D1148[idx], cmd_buf, sizeof(CardCmd));
     }
 
     if (mode == 2) {
@@ -4950,11 +4950,11 @@ void hsd_803B2374(void)
 
 void hsd_803B24E4(s32* ctx, int channel, int file_no, void* work_buf)
 {
-    memset(ctx, 0, 0x464);
-    ctx[8] = -1;
-    ctx[1] = channel;
-    ctx[2] = file_no;
-    ctx[0] = (s32) work_buf;
+    memset((CardState*) ctx, 0, sizeof(CardState));
+    ((CardState*) ctx)->x20 = -1;
+    ((CardState*) ctx)->x4 = channel;
+    ((CardState*) ctx)->x8 = file_no;
+    ((CardState*) ctx)->x0 = work_buf;
 }
 
 static inline HsdCmdEntry* hsd_803B2550_inline(u8* arg0, s32 arg1)

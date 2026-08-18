@@ -3,6 +3,6 @@
 
 #include <platform.h>
 
-/* 40CD40 */ extern u8 HSD_SisLib_FontAtlas[];
+/* 40CD40 */ extern u8 HSD_SisLib_FontAtlas[0x23E00];
 
 #endif

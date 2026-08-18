@@ -47,7 +47,7 @@ void hsdInitClassInfo(HSD_ClassInfo* class_info, HSD_ClassInfo* parent_info,
         HSD_ASSERT(94, class_info->head.obj_size >= parent_info->head.obj_size);
         HSD_ASSERT(95, class_info->head.info_size >= parent_info->head.info_size);
         memcpy(&class_info->alloc, &parent_info->alloc,
-               parent_info->head.info_size - 0x28);
+               parent_info->head.info_size - sizeof(HSD_ClassInfoHead));
         class_info->head.next = parent_info->head.child;
         parent_info->head.child = class_info;
     }
@@ -83,11 +83,12 @@ HSD_MemoryEntry* GetMemoryEntry(s32 idx)
 
             for (new_nb = 32; idx >= new_nb; new_nb *= 2) {
             }
-            memory_list = (HSD_MemoryEntry**) HSD_MemAlloc(new_nb * 4);
+            memory_list = (HSD_MemoryEntry**) HSD_MemAlloc(
+                new_nb * sizeof(*memory_list));
             if (memory_list == NULL) {
                 return NULL;
             }
-            memset(memory_list, 0, new_nb * 4);
+            memset(memory_list, 0, new_nb * sizeof(*memory_list));
             nb_memory_list = new_nb;
         } else { // Resizes the array
             HSD_MemoryEntry** old_list;
@@ -99,19 +100,20 @@ HSD_MemoryEntry* GetMemoryEntry(s32 idx)
                 new_nb *= 2;
             }
 
-            new_list = HSD_MemAlloc(4 * new_nb);
+            new_list = HSD_MemAlloc(sizeof(*memory_list) * new_nb);
             if (new_list == NULL) {
                 return NULL;
             }
 
-            memcpy(new_list, memory_list, 4 * nb_memory_list);
+            memcpy(new_list, memory_list,
+                   sizeof(*memory_list) * nb_memory_list);
             memset(&new_list[nb_memory_list], 0,
                    4 * (new_nb -
                         nb_memory_list)); // You start *after* existing ptrs
                                           // and make sure memory is zero'd
 
             old_list = memory_list;
-            old_nb = OSRoundDown32B(nb_memory_list * 4);
+            old_nb = OSRoundDown32B(nb_memory_list * sizeof(*memory_list));
             memory_list = new_list;
             nb_memory_list = new_nb;
 

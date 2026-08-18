@@ -21,7 +21,7 @@
 /* 304D30 */ int _Toy_80304D30(void);
 /* 305058 */ s32 Toy_80305058(s32, s32, s32, f32);
 /* 30562C */ void Toy_SetUnlockState(enum_t, bool);
-/* 305918 */ void Toy_80305918(signed char, s32, s32);
+/* 305918 */ void Toy_80305918(s8, s32, s32);
 /* 305B88 */ s32 Toy_80305B88(void);
 /* 305C44 */ s32 Toy_80305C44(void);
 /* 305D00 */ float Toy_80305D00(void);

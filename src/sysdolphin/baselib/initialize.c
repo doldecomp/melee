@@ -83,8 +83,8 @@ static void HSD_DVDInit(void) {}
 void** HSD_AllocateXFB(s32 nbuffer, GXRenderModeObj* rm)
 {
     u32 fb_size;
-    u32 arena_lo;
-    u32 arena_hi;
+    uintptr_t arena_lo;
+    uintptr_t arena_hi;
     s32 i;
 
     if (rm == NULL) {
@@ -117,8 +117,8 @@ void** HSD_AllocateXFB(s32 nbuffer, GXRenderModeObj* rm)
 GXFifoObj* HSD_AllocateFifo(u32 size)
 {
     GXFifoObj* fifo;
-    u32 arena_lo;
-    u32 arena_hi;
+    uintptr_t arena_lo;
+    uintptr_t arena_hi;
 
     arena_lo = OSRoundUp32B(OSGetArenaLo());
     arena_hi = OSRoundDown32B(OSGetArenaHi());
@@ -130,7 +130,7 @@ GXFifoObj* HSD_AllocateFifo(u32 size)
     } else {
         fifo = (void*) arena_lo;
         arena_lo += size;
-        if (arena_lo > (u32) OSGetArenaHi()) {
+        if (arena_lo > (uintptr_t) OSGetArenaHi()) {
             HSD_Panic(__FILE__, 302, "no space remains for gx fifo.\n");
         }
         OSSetArenaLo((void*) arena_lo);
@@ -156,14 +156,15 @@ static void HSD_GXInit(void)
 
 static void HSD_OSInit(void)
 {
-    u32 new_arena_lo;
-    u32 new_arena_hi;
-    u32 old_arena_lo = (u32) OSGetArenaLo();
-    u32 old_arena_hi = (u32) OSGetArenaHi();
+    uintptr_t new_arena_lo;
+    uintptr_t new_arena_hi;
+    uintptr_t old_arena_lo = (uintptr_t) OSGetArenaLo();
+    uintptr_t old_arena_hi = (uintptr_t) OSGetArenaHi();
     memReport.total = OSGetPhysicalMemSize();
-    memReport.system = memReport.total - (u32) OSGetArenaHi() +
-                       (u32) OSGetArenaLo() - memReport.xfb - memReport.gxfifo;
-    old_arena_lo = (u32) OSInitAlloc(
+    memReport.system = memReport.total - (uintptr_t) OSGetArenaHi() +
+                       (uintptr_t) OSGetArenaLo() - memReport.xfb -
+                       memReport.gxfifo;
+    old_arena_lo = (uintptr_t) OSInitAlloc(
         (void*) old_arena_lo, (void*) old_arena_hi, iparam_heap_max_num);
     OSSetArenaLo((void*) old_arena_lo);
 
@@ -224,7 +225,8 @@ OSHeapHandle HSD_CreateMainHeap(void* lo, void* hi)
     current_heap =
         OSCreateHeap(hsd_heap_next_arena_lo, hsd_heap_next_arena_hi);
     OSSetCurrentHeap(current_heap);
-    HSD_ObjSetHeap((u32) hsd_heap_next_arena_hi - (u32) hsd_heap_next_arena_lo,
+    HSD_ObjSetHeap((uintptr_t) hsd_heap_next_arena_hi -
+                       (uintptr_t) hsd_heap_next_arena_lo,
                    NULL);
     return current_heap;
 }

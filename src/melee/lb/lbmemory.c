@@ -349,7 +349,9 @@ void lbMemory_8001564C(void)
 
     _p(x634_max_num_allocs) = 0;
     _p(x630_num_allocs) = 0;
-    _p(free_heap) = (Handle*) (base + 0x638);
+    // The chain below walks _p(x638_heap)[0..5], one Handle (0x10) apart.
+    // Writing it through the array instead does not match.
+    _p(free_heap) = &_p(x638_heap)[0];
     *(void**) (base + 0x638) = base + 0x648;
     *(void**) (base + 0x648) = base + 0x658;
     *(void**) (base + 0x658) = base + 0x668;
@@ -362,6 +364,6 @@ void lbMemory_8001564C(void)
         void* lo = _p(a_arenaLo);
         _p(x69C) = lbMemory_80014E24(lo, hi);
     }
-    *(u32*) (base + 0x6D0) = 0;
+    _p(x6A0_mgr).size = 0; // base + 0x6D0 on PowerPC
 }
 #pragma pop

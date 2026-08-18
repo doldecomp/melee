@@ -40,22 +40,24 @@ s32 HSD_ArchiveParse(HSD_Archive* archive, u8* src, size_t file_size)
     }
     if (archive->header.nb_reloc != 0) { // Relocation Size
         archive->reloc_info =
-            (HSD_ArchiveRelocationInfo*) ((s32) src + offset);
+            (HSD_ArchiveRelocationInfo*) ((uintptr_t) src + offset);
         offset = offset +
                  archive->header.nb_reloc * sizeof(HSD_ArchiveRelocationInfo);
     }
     if (archive->header.nb_public != 0) { // Root Size
-        archive->public_info = (HSD_ArchivePublicInfo*) ((s32) src + offset);
+        archive->public_info =
+            (HSD_ArchivePublicInfo*) ((uintptr_t) src + offset);
         offset =
             offset + archive->header.nb_public * sizeof(HSD_ArchivePublicInfo);
     }
     if (archive->header.nb_extern != 0) { // XRef Size
-        archive->extern_info = (HSD_ArchiveExternInfo*) ((s32) src + offset);
+        archive->extern_info =
+            (HSD_ArchiveExternInfo*) ((uintptr_t) src + offset);
         offset =
             offset + archive->header.nb_extern * sizeof(HSD_ArchiveExternInfo);
     }
     if (offset < archive->header.file_size) { // File Size
-        archive->symbols = (char*) ((s32) src + offset);
+        archive->symbols = (char*) ((uintptr_t) src + offset);
     }
 
     archive->top_ptr = (void*) src;

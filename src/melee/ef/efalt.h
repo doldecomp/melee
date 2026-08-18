@@ -3,6 +3,8 @@
 
 #include <baselib/forward.h>
 
+#include <stdarg.h> // va_list, below
+
 void* efAlt_Spawn(s32, HSD_GObj*, va_list);
 
 #endif

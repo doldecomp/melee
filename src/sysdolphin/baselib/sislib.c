@@ -365,7 +365,7 @@ HSD_Text* HSD_SisLib_803A5ACC(int font_idx, s32 context_id, f32 pos_x,
         list_tail = list_cur;
         list_cur = list_cur->next;
     }
-    text = HSD_SisLib_Alloc(0xA0);
+    text = HSD_SisLib_Alloc(sizeof(HSD_Text));
     if (HSD_SisLib_804D7978 == NULL) {
         HSD_SisLib_804D7978 = text;
     }
@@ -442,7 +442,7 @@ void HSD_SisLib_803A5E70(void)
     used_head = NULL;
     free_head->next = NULL;
     free_head->data = (HSD_Text*) (free_head + 1);
-    free_head->size = HSD_SisLib_804D7968 - 0xC;
+    free_head->size = HSD_SisLib_804D7968 - sizeof(SisBlock);
 }
 
 void HSD_SisLib_803A5F50(s32 font_idx)
@@ -483,7 +483,7 @@ void HSD_SisLib_803A6048(u32 size)
     HSD_SisLib_804D796C = free_head = HSD_MemAlloc(HSD_SisLib_804D7968);
     free_head->next = NULL;
     free_head->data = (HSD_Text*) (free_head + 1);
-    free_head->size = HSD_SisLib_804D7968 - 0xC;
+    free_head->size = HSD_SisLib_804D7968 - sizeof(SisBlock);
     HSD_SisLib_804D7978 = NULL;
     HSD_SisLib_804D797C = NULL;
 
@@ -525,7 +525,7 @@ s32 HSD_SisLib_803A611C(int font_idx, HSD_GObj* parent_gobj, u16 class_id,
         }
         list_cur = list_cur->x0;
     }
-    entry = HSD_SisLib_Alloc(0x10);
+    entry = HSD_SisLib_Alloc(sizeof(sislib_UnkAlloc3));
     if (HSD_SisLib_804D797C == NULL) {
         HSD_SisLib_804D797C = entry;
     }
@@ -842,7 +842,7 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
             sjis_lo = str_cursor[1];
             str_cursor += 1;
         }
-        for (lut_idx = 0; lut_idx < 0x11F; lut_idx++) {
+        for (lut_idx = 0; lut_idx < (s32) HSD_SISLIB_FONT_GLYPHS; lut_idx++) {
             if ((sjis_hi == lut_ptr[lut_idx * 2]) &&
                 (sjis_lo == lut_ptr[lut_idx * 2 + 1]))
             {

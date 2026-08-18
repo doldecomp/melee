@@ -19,7 +19,7 @@ struct lbl_804335B8_t {
     /* 0x88 */ struct HSD_SObjDesc x88;
     /* 0x90 */ struct HSD_SObj* x90;
     /* 0x94 */ void* unk94;
-    /* 0x98 */ u32 unk98;
+    /* 0x98 */ size_t unk98;
     /* 0x9C */ char pad_9C[0xA0 - 0x9C];
 }; /* size = 0xA0 */
 STATIC_ASSERT(sizeof(struct lbl_804335B8_t) == 0xA0);
