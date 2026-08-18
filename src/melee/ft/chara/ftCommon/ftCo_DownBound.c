@@ -183,7 +183,10 @@ void ftCo_80097AF4(Fighter_GObj* gobj)
             ftCommon_8007D7FC(((Fighter*) jobj));
         }
         {
+            /// @todo Prevents inline
+#ifdef MUST_MATCH
             bool ftCo_80097570(Fighter_GObj * gobj);
+#endif
             int b = ftCo_80097570(gobj);
             if (((Fighter*) jobj)->x2226_b1) {
                 b = !b;
