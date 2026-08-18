@@ -1437,8 +1437,11 @@ HSD_GObj* mn_8022B3A0(u8 state)
     PAD_STACK(12);
 
     cur_menu = mn_804A04F0.cur_menu;
-    anim_loop =
-        (AnimLoopSettings*) ((u32) mn_803EB6B0[cur_menu].anim_loop + 12) - 1;
+    /// @todo The round trip keeps the pointer out of a named object, which is
+    /// where retail holds it.
+    anim_loop = (AnimLoopSettings*) ((u8*) mn_803EB6B0[cur_menu].anim_loop +
+                                     sizeof(AnimLoopSettings)) -
+                1;
     option_count = mn_803EB6B0[cur_menu].selection_count & 0xFF;
     hovered_selection = mn_804A04F0.hovered_selection;
 
