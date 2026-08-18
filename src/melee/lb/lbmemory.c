@@ -41,7 +41,7 @@ struct Allocator {
     u8 x6EC[0x6F0 - 0x6EC];
 };
 
-/* 015320 */ static void lbMemory_80015320(int, int, void*, int);
+/* 015320 */ static void lbMemory_80015320(int, int, void*, bool);
 
 struct Allocator lbMemory_804318B0;
 #define _p(x) (lbMemory_804318B0.x)
@@ -227,7 +227,7 @@ u32 lbMemory_8001529C(Handle* h, void (*arg1)(u32), u32 arg2)
     for (iter = h->xC_prev; iter != NULL; iter = iter->x0_next) {
         lo = iter->x4_lo;
         if (lo != *r7) {
-            lbMemory_80015320(0, (int) iter, NULL, 0);
+            lbMemory_80015320(0, (int) iter, NULL, false);
             return 1;
         }
         *r7 = (void*) ((u32) lo + (u32) iter->x8_hi);
@@ -253,7 +253,7 @@ static void start_ram_copy(u32 old, u32 current, u32 size, Handle* next)
 }
 
 static void lbMemory_80015320(int arg0, int _handle, void* arg2,
-                              int cancelflag)
+                              bool cancelflag)
 {
     void* null_or_old;
     Handle* handle = (Handle*) _handle;
@@ -290,7 +290,7 @@ static void lbMemory_80015320(int arg0, int _handle, void* arg2,
         }
 
         *currentp = (void*) ((u32) old + (u32) handle->x8_hi);
-        lbMemory_80015320(0, (int) handle->x0_next, null_or_old, 0);
+        lbMemory_80015320(0, (int) handle->x0_next, null_or_old, false);
         return;
     }
 
