@@ -1404,8 +1404,8 @@ static inline int GetSelectionFrameOffset(int selection)
 /// @brief counts the unlocked selections of a menu
 static inline u8 CountUnlockedSelections(MenuKind kind)
 {
-    u8 count = 0;
     int i;
+    u8 count = 0;
     for (i = 0; i < mn_803EB6B0[kind].selection_count; i++) {
         if (mn_80229938(kind, i) != 0) {
             count++;
@@ -1419,7 +1419,7 @@ HSD_GObj* mn_8022B3A0(u8 state)
 {
     HSD_JObj* sp48[12];
     HSD_JObj* sp2C[7];
-    StaticModelDesc* top = &MenMainConTop_Top;
+    StaticModelDesc* cursor_top;
     HSD_GObj* gobj;
     HSD_JObj* cursor_jobj;
     HSD_JObj* temp_r16_2;
@@ -1430,6 +1430,7 @@ HSD_GObj* mn_8022B3A0(u8 state)
     u8 cur_menu;
     MenuKind menu_kind;
     MainMenuData* user_data;
+    StaticModelDesc* top = &MenMainConTop_Top;
     u8 hovered_selection;
     struct {
         AnimLoopSettings* p;
@@ -1486,15 +1487,16 @@ HSD_GObj* mn_8022B3A0(u8 state)
         sp48[i] = user_data->tree[mn_803EAE68[i]];
     }
     for (i = 0; i < option_count; i++) {
-        StaticModelDesc* top = &MenMainCursor_Top;
+        cursor_top = &MenMainCursor_Top;
         if (mn_80229938(mn_804A04F0.cur_menu, i) != 0) {
             menu_kind = mn_804A04F0.cur_menu;
             var_r16_2 = mn_80229A04(menu_kind, i);
             HSD_JObjReqAnim(sp48[var_r16_2], var_r17_int);
             HSD_JObjAnim(sp48[var_r16_2]);
-            cursor_jobj = HSD_JObjLoadJoint(top->joint);
-            HSD_JObjAddAnimAll(cursor_jobj, top->animjoint, top->matanim_joint,
-                               top->shapeanim_joint);
+            cursor_jobj = HSD_JObjLoadJoint(cursor_top->joint);
+            HSD_JObjAddAnimAll(cursor_jobj, cursor_top->animjoint,
+                               cursor_top->matanim_joint,
+                               cursor_top->shapeanim_joint);
             lb_8001204C(cursor_jobj, sp2C, mn_803EAE7C, 7);
             HSD_JObjReqAnim(sp2C[0],
                             mn_803EB360[i == hovered_selection].start_frame);
