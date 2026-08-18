@@ -7,6 +7,7 @@
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/fobj.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/sislib.h>
