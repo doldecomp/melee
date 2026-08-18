@@ -173,7 +173,7 @@ void lbHeap_80015900(void)
     }
 }
 
-int lbHeap_80015BB8(int arg0)
+LbHeapStatus lbHeap_80015BB8(int arg0)
 {
     return lbHeap_80431FA0.heap_array[arg0].status;
 }

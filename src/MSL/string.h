@@ -2,6 +2,7 @@
 #define _STRING_H_
 
 #include <stddef.h>
+#include <strtoul.h>
 
 char* strcpy(char* dst, const char* src);
 char* strncpy(char* dst, const char* src, size_t num);
