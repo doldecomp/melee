@@ -697,7 +697,7 @@ void un_80303AC4(struct un_80304138_objalloc_t* arg0)
         int i = j;
         (void) j;
         for (i--; i >= 0; i--) {
-            if (arg0->x8[i].x0 != NULL) {
+            if (arg0->x8[i].x0 != 0) {
                 (void) i;
                 goto up_found;
             }
@@ -714,7 +714,7 @@ void un_80303AC4(struct un_80304138_objalloc_t* arg0)
         int i = j;
         (void) j;
         for (i++; i < arg0->x4->h; i++) {
-            if (arg0->x8[i].x0 != NULL) {
+            if (arg0->x8[i].x0 != 0) {
                 (void) i;
                 goto down_found;
             }

@@ -1130,7 +1130,7 @@ void fn_800D8378(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((u32) fp->item_gobj != NULL) {
+    if (fp->item_gobj != NULL) {
         ftCommon_8007E7E4(gobj, 1);
     }
 }

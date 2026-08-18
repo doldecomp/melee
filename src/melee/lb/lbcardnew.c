@@ -1146,6 +1146,6 @@ void lb_8001C5A4(void)
 void lb_8001C5BC(void)
 {
     hsd_803B2374();
-    lb_80019EF0(NULL, NULL, NULL, NULL);
+    lb_80019EF0(0, NULL, NULL, NULL);
     _p(x8AC) = 0;
 }

@@ -130,7 +130,7 @@ static inline void inlineA2(Fighter_GObj* gobj)
     fp->mv.pp.specials.x8 = 0;
     fp->mv.pp.specials.x10 = 0;
     fp->mv.pp.specials.x14 = da->x68;
-    fp->mv.pp.specials.x18 = NULL;
+    fp->mv.pp.specials.x18 = 0;
     fp->mv.pp.specials.x1C = 0;
     if (ftNn_Init_80123954(Player_GetEntityAtIndex(fp->player_id, 1),
                            fp->ground_or_air) == GA_Air)
@@ -173,7 +173,7 @@ static inline void inlineB0(Fighter_GObj* gobj)
     fp->mv.pp.specials.x8 = 0;
     fp->mv.pp.specials.x10 = 0;
     fp->mv.pp.specials.x14 = da->x68;
-    fp->mv.pp.specials.x18 = NULL;
+    fp->mv.pp.specials.x18 = 0;
     fp->mv.pp.specials.x1C = 0;
     if (ftNn_Init_80123954(Player_GetEntityAtIndex(fp->player_id, 1),
                            fp->ground_or_air) == GA_Air)
