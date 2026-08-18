@@ -1424,7 +1424,7 @@ s32 fn_803AC168(s32* cmd_buf)
     {
         s32 idx = hsd_804D7984;
         hsd_804D7984 = (hsd_804D7984 + 1) % 128;
-        memcpy((u8*) hsd_804D1148[idx], cmd_buf, 36);
+        memcpy((u8*) hsd_804D1148[idx], cmd_buf, sizeof(CardCmd));
     }
 
     if (mode == 2) {
