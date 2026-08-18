@@ -190,7 +190,7 @@ static inline void itFlipper_SpinFromFighter_inline(Item_GObj* gobj, Vec3* vel,
         }
         ip->xCF4_fighterGObjUnk = NULL;
     }
-    itFlipper_AddSpinImpulse(gobj, pos, deg_to_rad * speed);
+    itFlipper_AddSpinImpulse(gobj, pos, MTXDegToRad(speed));
 }
 
 void itFlipper_SpinFromFighter(Item_GObj* gobj)
@@ -210,7 +210,7 @@ void itFlipper_SpinFromFighter(Item_GObj* gobj)
         }
         ip->xCF4_fighterGObjUnk = NULL;
     }
-    itFlipper_AddSpinImpulse(gobj, &pos, deg_to_rad * speed);
+    itFlipper_AddSpinImpulse(gobj, &pos, MTXDegToRad(speed));
 }
 
 static inline void itFlipper_Repel_inline(Item_GObj* gobj, s32 kind, Vec3* pos,
@@ -580,7 +580,7 @@ static inline void itFlipper_SpinFromFighterRecv(Item_GObj* gobj, Vec3* vel,
         }
         ip->xCEC_fighterGObj = NULL;
     }
-    itFlipper_AddSpinImpulse(gobj, pos, deg_to_rad * speed);
+    itFlipper_AddSpinImpulse(gobj, pos, MTXDegToRad(speed));
 }
 
 bool itFlipper_DmgReceived(Item_GObj* gobj)

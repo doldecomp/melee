@@ -381,7 +381,7 @@ bool it_2725_Logic52_ShieldBounced(Item_GObj* arg0)
             if (ip->facing_dir == +1.0f) {
                 var_f31 = temp_f1 - M_PI_2_F;
             } else {
-                var_f31 = 270 * deg_to_rad - temp_f1;
+                var_f31 = MTXDegToRad(270) - temp_f1;
             }
             child = HSD_JObjGetChild(jobj);
             HSD_JObjSetRotationX(child, var_f31);

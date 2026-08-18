@@ -652,7 +652,7 @@ bool ftPk_SpecialHi_80127064(HSD_GObj* gobj)
         tempf = lbVector_AngleXY(&vec2, &vec1);
 
         // if the angular difference > the minimum difference, return 1
-        if (tempf > (deg_to_rad * (pika_attr->xA8))) {
+        if (tempf > MTXDegToRad(pika_attr->xA8)) {
             return true;
         }
 

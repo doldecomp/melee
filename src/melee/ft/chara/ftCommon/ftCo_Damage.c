@@ -85,7 +85,7 @@ float ftCo_Damage_CalcAngle(Fighter* fp, float f)
             fp->mv.co.damage.x1A = 1;
             fp->mv.co.damage.x1B = p_ftCommonData->x7F0;
         }
-        return deg_to_rad * fp->dmg.x1848_kb_angle;
+        return MTXDegToRad(fp->dmg.x1848_kb_angle);
     }
     if (fp->ground_or_air == GA_Air) {
         return p_ftCommonData->x144_radians;
@@ -93,12 +93,12 @@ float ftCo_Damage_CalcAngle(Fighter* fp, float f)
         return 0;
     } else {
         float result =
-            deg_to_rad * (p_ftCommonData->x148 *
-                              ((f - p_ftCommonData->x14C) /
-                               (p_ftCommonData->x150 - p_ftCommonData->x14C)) +
-                          1);
-        if (result > deg_to_rad * p_ftCommonData->x148) {
-            result = deg_to_rad * p_ftCommonData->x148;
+            MTXDegToRad(p_ftCommonData->x148 *
+                            ((f - p_ftCommonData->x14C) /
+                             (p_ftCommonData->x150 - p_ftCommonData->x14C)) +
+                        1);
+        if (result > MTXDegToRad(p_ftCommonData->x148)) {
+            result = MTXDegToRad(p_ftCommonData->x148);
         }
         return result;
     }
@@ -614,7 +614,7 @@ void ftCo_8008E5A4(Fighter* fp)
                 float angle = atan2f(kb_y, kb_x);
                 float scale;
                 kb_mag = sqrtf(kb_x * kb_x + kb_y * kb_y);
-                scale = deg_to_rad * p_ftCommonData->x1A8;
+                scale = MTXDegToRad(p_ftCommonData->x1A8);
                 angle += scale * f30;
                 fp->x8c_kb_vel.x = kb_mag * cosf(angle);
                 fp->x8c_kb_vel.y = kb_mag * sinf(angle);

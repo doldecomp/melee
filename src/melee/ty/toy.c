@@ -2480,7 +2480,7 @@ HSD_GObj* Toy_803087F4(void* arg0)
     HSD_JObjSetScaleY(trophy_jobj, scale);
     HSD_JObjSetScaleZ(trophy_jobj, scale);
 
-    rot = deg_to_rad * Toy_803060BC((s32) anim->xC, 5);
+    rot = MTXDegToRad(Toy_803060BC((s32) anim->xC, 5));
     HSD_JObjSetRotationY(trophy_jobj, rot);
 
     if (_Toy_sbss_804D6E9C != NULL) {

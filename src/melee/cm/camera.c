@@ -1104,7 +1104,7 @@ void Camera_8002A768(CameraTransformState* transform, s32 arg1)
     enum_t var_r30;
 
     var_r30 = var_r31 = 0;
-    half_fov = 0.5f * (deg_to_rad * transform->target_fov);
+    half_fov = 0.5f * MTXDegToRad(transform->target_fov);
     forward = cm_WorldForward;
     lbVector_Diff(&transform->target_interest, &transform->target_position,
                   &dist);
@@ -4172,7 +4172,7 @@ bool Camera_800307D0(f32* left, f32* center, f32* right)
 
     cobj = GET_COBJ(cm_80452C68.gobj);
     half_fov =
-        0.5 * (deg_to_rad * HSD_CObjGetFov(cobj) * HSD_CObjGetAspect(cobj));
+        0.5 * (MTXDegToRad(HSD_CObjGetFov(cobj)) * HSD_CObjGetAspect(cobj));
 
     result = true;
     HSD_CObjGetEyePosition(cobj, &eye_pos);

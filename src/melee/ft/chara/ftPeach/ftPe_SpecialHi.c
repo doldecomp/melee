@@ -237,7 +237,7 @@ void ftPe_SpecialHiStart_IASA(HSD_GObj* gobj)
     if (!fp->cmd_vars[0] && abs_lstick_x > da->x7C) {
         float deg = da->x80 * ((abs_lstick_x - da->x7C) / (1.0 - da->x7C));
         float rad =
-            fp->input.lstick.x > 0 ? -(deg * deg_to_rad) : +(deg * deg_to_rad);
+            fp->input.lstick.x > 0 ? -MTXDegToRad(deg) : +MTXDegToRad(deg);
         float abs_lstick_angle = ABS(fp->lstick_angle);
         if (ABS(rad) > abs_lstick_angle) {
             fp->lstick_angle = rad;

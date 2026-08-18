@@ -36,7 +36,7 @@ static float forceFloatOrder0(void)
 /// @todo Float order hack.
 static float forceFloatOrder1(void)
 {
-    return deg_to_rad;
+    return MTXDegToRad(1);
 }
 
 /// @todo Float order hack.
@@ -104,10 +104,7 @@ static inline float calcAngleRadians(HSD_GObj* gobj, float lstick_y)
         left_stick_y = -left_stick_y;
     }
 
-    {
-        float degrees = (left_stick_y * da->xE4) / (da->xE0 - da->xDC);
-        return deg_to_rad * degrees;
-    }
+    return MTXDegToRad(left_stick_y * da->xE4 / (da->xE0 - da->xDC));
 }
 
 /// This is called once each frame during Puff's aerial side special

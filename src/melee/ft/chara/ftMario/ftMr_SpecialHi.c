@@ -79,7 +79,7 @@ void ftMr_SpecialHi_IASA(HSD_GObj* gobj)
                     ((lstick_x - sa->specialhi.momentum_stick_range) /
                      (1.0 - sa->specialhi.momentum_stick_range));
         float rad =
-            fp->input.lstick.x > 0 ? -(deg_to_rad * deg) : +(deg_to_rad * deg);
+            fp->input.lstick.x > 0 ? -MTXDegToRad(deg) : +MTXDegToRad(deg);
         if (abs(rad) > abs(fp->lstick_angle)) {
             fp->lstick_angle = rad;
         }

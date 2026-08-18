@@ -26,9 +26,6 @@
 
 #define SIGNF(x) ((x) > 0.0f ? 1.0f : -1.0f)
 
-static float const deg_to_rad = M_PI / 180;
-static float const rad_to_deg = 180 / M_PI;
-
 #ifdef __MWERKS__
 #pragma push
 #pragma cplusplus on

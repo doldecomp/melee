@@ -913,7 +913,7 @@ void ftColl_80077688(Item* item, HitCapsule* hurt, Fighter* fp, Vec3* pos,
             if (fp->x221B_b1) {
                 float cos_val;
 
-                val = deg_to_rad * p_ftCommonData->x2D0;
+                val = MTXDegToRad(p_ftCommonData->x2D0);
                 item->xC54 = 0.0f;
                 cos_val = cosf(val);
                 val = sinf(val);
@@ -2883,7 +2883,7 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
         if (abs_dx < 1e-5F) {
             angle_int = 0;
         } else {
-            angle_int = (s32) (rad_to_deg * atanf(dy / abs_dx));
+            angle_int = (s32) MTXRadToDeg(atanf(dy / abs_dx));
         }
         angle = (float) angle_int;
     }

@@ -145,7 +145,7 @@ HSD_GObj* it_802AB58C(Item_GObj* owner, Vec3* pos, f32 facing_dir)
         }
         for (i = 0; i < 16; i++) {
             ip->xDD4_itemVar.pkthunder.angles[i] =
-                deg_to_rad * attr->x8_PKTHUNDER_SPAWN_ANGLE;
+                MTXDegToRad(attr->x8_PKTHUNDER_SPAWN_ANGLE);
         }
         for (i = 0; i < 6; i++) {
             ip->xDD4_itemVar.pkthunder.xDD4[i] = NULL;
@@ -220,7 +220,7 @@ void it_802ABA4C(Item_GObj* gobj)
     it_80275158(gobj, attr->x0_PKTHUNDER_LIFETIME);
     for (i = 0; i < 16; i++) {
         ip->xDD4_itemVar.pkthunder.angles[i] =
-            deg_to_rad * attr->x8_PKTHUNDER_SPAWN_ANGLE;
+            MTXDegToRad(attr->x8_PKTHUNDER_SPAWN_ANGLE);
     }
     {
         f32 speed = attr->x4_PKTHUNDER_SPEED;
@@ -327,16 +327,16 @@ void itNesspkthunderball_UnkMotion0_Phys(Item_GObj* gobj)
             angle = lbVector_Angle(&ip->x40_vel, &stick);
             lbVector_CrossprodNormalized(&ip->x40_vel, &stick, &cross);
 
-            if (angle >= deg_to_rad * 45.0f) {
+            if (angle >= MTXDegToRad(45.0f)) {
                 if (cross.z > 0.0f) {
                     ip->xDD4_itemVar.pkthunder.angles[0] +=
-                        deg_to_rad * attr->x10_PKTHUNDER_TURN_RADIUS;
+                        MTXDegToRad(attr->x10_PKTHUNDER_TURN_RADIUS);
                 } else if (cross.z < 0.0f) {
                     ip->xDD4_itemVar.pkthunder.angles[0] -=
-                        deg_to_rad * attr->x10_PKTHUNDER_TURN_RADIUS;
+                        MTXDegToRad(attr->x10_PKTHUNDER_TURN_RADIUS);
                 }
             }
-            if (angle < deg_to_rad * 45.0f) {
+            if (angle < MTXDegToRad(45.0f)) {
                 if (cross.z > 0.0f) {
                     ip->xDD4_itemVar.pkthunder.angles[0] +=
                         angle / (45.0f / attr->x10_PKTHUNDER_TURN_RADIUS);
