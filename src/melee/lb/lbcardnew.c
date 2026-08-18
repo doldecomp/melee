@@ -2,7 +2,7 @@
 
 #include "lbcardnew.static.h"
 
-#include <strtoul.h> // IWYU pragma: keep
+#include <stdlib.h>
 #include <dolphin/card.h>
 #include <baselib/hsd_3A94.h>
 #include <sysdolphin/baselib/hsd_3B27.h>
