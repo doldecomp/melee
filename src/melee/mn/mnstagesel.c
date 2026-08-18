@@ -431,7 +431,12 @@ static inline void make_icon_root(HSD_JObj** icons)
     HSD_JObjAnimAll(icons[0]);
 }
 
-/// @todo Only differs by register allocation.
+static inline HSD_JObj* get_jobj(HSD_GObj* gobj)
+{
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    return jobj;
+}
+
 void mnStageSel_8025A998_OnEnter(void* arg0)
 {
     HSD_JObj* spDC[0x13];
@@ -447,7 +452,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
         struct mnStageSel_804D6C98_t x10;
     }* temp_r3;
 
-    PAD_STACK(0xDC - 0x48);
+    PAD_STACK(0xDC - 0x50);
 
     mnStageSel_804D6C90 = (SSSData*) arg0;
 
@@ -664,19 +669,15 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
                                mnStageSel_804D6C98->x80.shapeanim_joint);
 
             {
-                HSD_JObj* temp_r28 = GET_JOBJ(gobj);
+                HSD_JObj* jobj2;
+                HSD_GObj* g;
+                jobj = get_jobj(gobj);
                 spCC = mnStageSel_803B8550;
-                {
-                    s32 temp_r22_10;
-                    HSD_GObj* g;
-                    HSD_JObj* jobj2;
-                    g = gobj;
-                    jobj2 = temp_r28;
-                    HSD_GObj_SetupProc(g, fn_8025A310, 2);
-                    temp_r22_10 = mnStageSel_804D50A0 + 1;
-                    do_anim(jobj2, temp_r22_10);
-                }
-                HSD_JObjSetTranslate(temp_r28, &spCC);
+                g = gobj;
+                jobj2 = jobj;
+                HSD_GObj_SetupProc(g, fn_8025A310, 2);
+                do_anim(jobj2, mnStageSel_804D50A0 + 1);
+                HSD_JObjSetTranslate(jobj2, &spCC);
             }
         }
 
