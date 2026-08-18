@@ -1395,12 +1395,6 @@ void fn_8022AFEC(HSD_GObj* gp)
     }
 }
 
-/// @brief frame offset of a selection within its menu's cursor animation
-static inline int GetSelectionFrameOffset(int selection)
-{
-    return 2 * selection;
-}
-
 /// @brief counts the unlocked selections of a menu
 static inline u8 CountUnlockedSelections(MenuKind kind)
 {
@@ -1420,6 +1414,7 @@ HSD_GObj* mn_8022B3A0(u8 state)
     HSD_JObj* sp48[12];
     HSD_JObj* sp2C[7];
     StaticModelDesc* cursor_top;
+    int i;
     HSD_GObj* gobj;
     HSD_JObj* cursor_jobj;
     HSD_JObj* temp_r16_2;
@@ -1435,7 +1430,6 @@ HSD_GObj* mn_8022B3A0(u8 state)
     struct {
         AnimLoopSettings* p;
     } anim_loop;
-    int i;
     struct {
         HSD_JObj* p;
     } jobj;
@@ -1483,8 +1477,8 @@ HSD_GObj* mn_8022B3A0(u8 state)
         }
         HSD_JObjAnim(user_data->tree[3]);
     }
-    for (i = 0; i < option_count; i++) {
-        sp48[i] = user_data->tree[mn_803EAE68[i]];
+    for (idx = 0; idx < option_count; idx++) {
+        sp48[idx] = user_data->tree[mn_803EAE68[idx]];
     }
     for (i = 0; i < option_count; i++) {
         cursor_top = &MenMainCursor_Top;
@@ -1504,9 +1498,8 @@ HSD_GObj* mn_8022B3A0(u8 state)
             jobj.p = sp2C[1];
             HSD_JObjReqAnimAll(jobj.p, i == hovered_selection);
             HSD_JObjAnimAll(jobj.p);
-            HSD_JObjReqAnim(jobj.p,
-                            mn_803EB6B0[mn_804A04F0.cur_menu].start_frame +
-                                GetSelectionFrameOffset(i));
+            HSD_JObjReqAnim(
+                jobj.p, mn_803EB6B0[mn_804A04F0.cur_menu].start_frame + 2 * i);
             mn_8022F3D8(jobj.p, 0xC, TOBJ_MASK);
             mn_8022F3D8(jobj.p, 0xD, TOBJ_MASK);
             mn_8022F3D8(jobj.p, 0xE, TOBJ_MASK);
