@@ -2,6 +2,7 @@
 
 #include "placeholder.h"
 
+#include <stddef.h> // offsetof
 #include <dolphin/os/OSInterrupt.h>
 #include <baselib/archive.h>
 #include <baselib/debug.h>
@@ -29,6 +30,12 @@ struct lbHeap_HeapDesc lbHeap_803BA380[5] = {
 #define lbHeap_GetHeapOffsetView(offset)                                      \
     ((struct lbHeap_HeapOffsetView*) ((uintptr_t) (&lbHeap_80431FA0) +        \
                                       (offset)))
+
+/// Offset within lbHeap_80431FA0 of the view overlaying heap_array[idx].
+/// 0x38 for idx 2 on PowerPC.
+#define lbHeap_HeapViewOffset(idx)                                            \
+    (offsetof(struct lbHeap_HeapState, heap_array[idx]) -                     \
+     offsetof(struct lbHeap_HeapOffsetView, heap))
 
 static inline void lbHeap_ResetHeap(struct Heap* heap)
 {
@@ -105,8 +112,9 @@ void lbHeap_80015900(void)
 
     /// @remarks 0 and 1 are reserved for HSD and ARAM
     destroy_i = 2;
-    destroy_cursor = (uintptr_t) &lbHeap_80431FA0.heap_array[destroy_i] - 0x10;
-    heap_offset = 0x38;
+    destroy_cursor = (uintptr_t) &lbHeap_80431FA0.heap_array[destroy_i] -
+                     offsetof(struct lbHeap_HeapOffsetView, heap);
+    heap_offset = lbHeap_HeapViewOffset(2);
     for (; destroy_i < 6; destroy_i++, destroy_cursor += sizeof(struct Heap),
                           heap_offset += sizeof(struct Heap))
     {
@@ -164,7 +172,7 @@ void lbHeap_80015900(void)
     aram_heap->status = LbHeapStatus_Create;
     aram_heap->type = 3;
 
-    for (create_i = 2, heap_offset = 0x38; create_i < 6;
+    for (create_i = 2, heap_offset = lbHeap_HeapViewOffset(2); create_i < 6;
          create_i++, heap_offset += sizeof(struct Heap))
     {
         if (lbHeap_80431FA0.heap_array[create_i].transient == 0) {
