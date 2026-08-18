@@ -1395,6 +1395,25 @@ void fn_8022AFEC(HSD_GObj* gp)
     }
 }
 
+/// @brief frame offset of a selection within its menu's cursor animation
+static inline int GetSelectionFrameOffset(int selection)
+{
+    return 2 * selection;
+}
+
+/// @brief counts the unlocked selections of a menu
+static inline int CountUnlockedSelections(MenuKind kind)
+{
+    int count = 0;
+    int i;
+    for (i = 0; i < mn_803EB6B0[kind].selection_count; i++) {
+        if (mn_80229938(kind, i) != 0) {
+            count++;
+        }
+    }
+    return count;
+}
+
 /// @brief sets up a new menu when transitioning from another.
 HSD_GObj* mn_8022B3A0(u8 state)
 {
@@ -1420,19 +1439,14 @@ HSD_GObj* mn_8022B3A0(u8 state)
     u8 var_r17;
     u32 var_r17_int;
     HSD_JObj* root_jobj;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     cur_menu = mn_804A04F0.cur_menu;
     anim_loop = mn_803EB6B0[cur_menu].anim_loop;
-    option_count = mn_803EB6B0[cur_menu].selection_count;
+    option_count = mn_803EB6B0[cur_menu].selection_count & 0xFF;
     hovered_selection = mn_804A04F0.hovered_selection;
 
-    var_r17 = 0;
-    for (i = 0; i < mn_803EB6B0[cur_menu].selection_count; i++) {
-        if (mn_80229938(cur_menu, i) != 0) {
-            var_r17++;
-        }
-    }
+    var_r17 = CountUnlockedSelections(cur_menu);
 
     var_r17_int = var_r17;
     gobj = GObj_Create(6, 7, 0x80);
@@ -1488,8 +1502,9 @@ HSD_GObj* mn_8022B3A0(u8 state)
             jobj = sp2C[1];
             HSD_JObjReqAnimAll(jobj, i == hovered_selection);
             HSD_JObjAnimAll(jobj);
-            HSD_JObjReqAnim(
-                jobj, mn_803EB6B0[mn_804A04F0.cur_menu].start_frame + 2 * i);
+            HSD_JObjReqAnim(jobj,
+                            mn_803EB6B0[mn_804A04F0.cur_menu].start_frame +
+                                GetSelectionFrameOffset(i));
             mn_8022F3D8(jobj, 0xC, TOBJ_MASK);
             mn_8022F3D8(jobj, 0xD, TOBJ_MASK);
             mn_8022F3D8(jobj, 0xE, TOBJ_MASK);
