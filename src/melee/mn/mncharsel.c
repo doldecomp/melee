@@ -2580,7 +2580,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                             if (mnCharSel_804D6CB0->data.data.rules.is_teams ==
                                 0)
                             {
-                                s32 k;
+                                int k;
                                 for (k = 0; k < (s32) mnCharSel_804D6CF5; k++)
                                 {
                                     if (isDuplicateCostume(k, NULL, 0, false))
