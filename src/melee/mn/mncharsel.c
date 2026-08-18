@@ -749,6 +749,20 @@ bool mnCharSel_8025DAA0(int door)
 }
 #pragma dont_inline off
 
+static inline void pickUniqueCostume(int door)
+{
+    if (mnCharSel_8025DAA0(door) != 0) {
+        int v = 0;
+        for (;;) {
+            mnCharSel_803F0DFC.doors[door].costume = v;
+            if (mnCharSel_8025DAA0(door) == 0) {
+                break;
+            }
+            v += 1;
+        }
+    }
+}
+
 void mnCharSel_8025DB34(u8 arg0)
 {
     HSD_JObj* sp84;
@@ -874,16 +888,7 @@ void mnCharSel_8025DB34(u8 arg0)
                                 HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
             } else {
                 mnCharSel_8025D1C4((int) arg0, 2);
-                if (mnCharSel_8025DAA0((int) arg0) != 0) {
-                    int v = 0;
-                    for (;;) {
-                        mnCharSel_803F0DFC.doors[arg0].costume = v;
-                        if (mnCharSel_8025DAA0((int) arg0) == 0) {
-                            break;
-                        }
-                        v += 1;
-                    }
-                }
+                pickUniqueCostume((int) arg0);
                 mnCharSel_803F0DFC.doors[arg0].dooranim_timer = 0x1E;
                 if (mnCharSel_804D6CF6 != 3 && mnCharSel_804D6CF6 != 4) {
                     lbAudioAx_800237A8(0xB9, 0x7F, 0x40);
@@ -1119,7 +1124,7 @@ void mnCharSel_8025DB34(u8 arg0)
             /* FFA mode */
             s32 port_color_idx;
             HSD_JObjSetFlags(sp90, JOBJ_HIDDEN);
-            port_color_idx = arg0;
+            port_color_idx = (int) arg0;
             if (mnCharSel_803F0DFC.doors[arg0].p_kind != 0) {
                 port_color_idx += 4;
             }
