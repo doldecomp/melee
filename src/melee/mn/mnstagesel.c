@@ -372,23 +372,6 @@ void fn_8025A974(HSD_GObj* gobj, int unused)
 extern HSD_CObjDesc* MenMain_cam;
 static const Vec3 mnStageSel_803B8550 = { 0, -13, 0 };
 
-static inline void anim_x80(HSD_GObj* gobj, Vec3* pos)
-{
-    HSD_JObj* jobj2 = GET_JOBJ(gobj);
-    *pos = mnStageSel_803B8550;
-    {
-        s32 frame;
-        HSD_GObj* g;
-        HSD_JObj* jobj3;
-        g = gobj;
-        jobj3 = jobj2;
-        HSD_GObj_SetupProc(g, fn_8025A310, 2);
-        frame = mnStageSel_804D50A0 + 1;
-        do_anim(jobj3, frame);
-    }
-    HSD_JObjSetTranslate(jobj2, pos);
-}
-
 static inline void make_stage_icon(HSD_JObj** out)
 {
     HSD_GObj* gobj;
@@ -464,7 +447,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
         struct mnStageSel_804D6C98_t x10;
     }* temp_r3;
 
-    PAD_STACK(0xDC - 0x50);
+    PAD_STACK(0xDC - 0x48);
 
     mnStageSel_804D6C90 = (SSSData*) arg0;
 
@@ -680,7 +663,21 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
                                mnStageSel_804D6C98->x80.matanim_joint,
                                mnStageSel_804D6C98->x80.shapeanim_joint);
 
-            anim_x80(gobj, &spCC);
+            {
+                HSD_JObj* temp_r28 = GET_JOBJ(gobj);
+                spCC = mnStageSel_803B8550;
+                {
+                    s32 temp_r22_10;
+                    HSD_GObj* g;
+                    HSD_JObj* jobj2;
+                    g = gobj;
+                    jobj2 = temp_r28;
+                    HSD_GObj_SetupProc(g, fn_8025A310, 2);
+                    temp_r22_10 = mnStageSel_804D50A0 + 1;
+                    do_anim(jobj2, temp_r22_10);
+                }
+                HSD_JObjSetTranslate(temp_r28, &spCC);
+            }
         }
 
         {
