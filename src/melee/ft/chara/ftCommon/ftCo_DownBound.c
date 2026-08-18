@@ -160,50 +160,56 @@ void ftCo_8009794C(Fighter_GObj* gobj)
 
 void ftCo_80097AF4(Fighter_GObj* gobj)
 {
-    HSD_JObj* jobj;
-    Fighter_GObj* temp;
-    Fighter* fp = gobj->user_data;
+    void* jobj;
+    float param_e;
+    float param_a;
     float rot0;
     float rot1;
-    float param_else;
-    float param_true;
-    UNUSED float param_dummy;
+    Fighter* fp;
 
+    fp = (Fighter*) gobj->user_data;
     jobj = fp->parts[ftParts_GetBoneIndex(fp, FtPart_HipN)].joint;
-    HSD_JObjSetupMatrix(jobj);
-    PAD_STACK(48);
+    HSD_JObjSetupMatrix(((HSD_JObj*) jobj));
+    PAD_STACK(50);
     if (fp->x2226_b0) {
-        rot0 = jobj->mtx[0][2];
-        rot1 = jobj->mtx[1][2];
+        rot0 = ((HSD_JObj*) jobj)->mtx[0][2];
+        rot1 = ((HSD_JObj*) jobj)->mtx[1][2];
     } else {
-        rot0 = jobj->mtx[0][1];
-        rot1 = jobj->mtx[1][1];
+        rot0 = ((HSD_JObj*) jobj)->mtx[0][1];
+        rot1 = ((HSD_JObj*) jobj)->mtx[1][1];
     }
     if (ABS(rot0) < ABS(rot1)) {
-        if (GET_FIGHTER(gobj)->ground_or_air == GA_Air) {
-            ftCommon_8007D7FC(fp);
+        if (((Fighter*) (jobj = gobj->user_data))->ground_or_air == GA_Air) {
+            ftCommon_8007D7FC(((Fighter*) jobj));
         }
         {
-/// @todo Re-declaration prevents inlining
+            /// @todo Prevents inline
 #ifdef MUST_MATCH
             bool ftCo_80097570(Fighter_GObj * gobj);
 #endif
-            bool b = ftCo_80097570(gobj);
-            if (fp->x2226_b1) {
+            int b = ftCo_80097570(gobj);
+            if (((Fighter*) jobj)->x2226_b1) {
                 b = !b;
             }
+            b = b ? ftCo_MS_DownBoundU : ftCo_MS_DownBoundD;
             Fighter_ChangeMotionState(
-                temp = gobj, b ? ftCo_MS_DownBoundU : ftCo_MS_DownBoundD,
-                Ft_MF_SkipNametagVis | Ft_MF_KeepColAnimPartHitStatus, 0, 1, 0,
-                NULL);
-            ftCo_800978D4_inline(gobj, &param_true);
-            fp->x67C = 255;
-            fp->x67D = 255;
-            ftCommon_8007E2F4(fp, 511);
+                gobj, b, Ft_MF_SkipNametagVis | Ft_MF_KeepColAnimPartHitStatus,
+                0, 1, 0, NULL);
+            {
+                Fighter* fpa = GET_FIGHTER(gobj);
+                param_a = atan2f(-fpa->coll_data.floor.normal.x,
+                                 fpa->coll_data.floor.normal.y);
+                efAsync_Spawn(gobj, &((Fighter*) gobj->user_data)->x60C, 4,
+                              0x406, fpa->parts[FtPart_TopN].joint, &param_a);
+                ftCo_800976A4(gobj);
+            }
+            ((Fighter*) jobj)->x67C = 255;
+            ((Fighter*) jobj)->x67D = 255;
+            ftCommon_8007E2F4(((Fighter*) jobj), 511);
+            ftCommon_8007CCE8(((Fighter*) jobj));
         }
-        ftCommon_8007CCE8(fp);
     } else {
-        ftCo_800978D4_inline(gobj, &param_else);
+        ftCo_800978D4_inline(gobj, &param_e);
         Camera_80030E44(4, &fp->cur_pos);
         if (fp->facing_dir * rot0 > 0) {
             ft_8008A2BC(gobj);
@@ -212,6 +218,7 @@ void ftCo_80097AF4(Fighter_GObj* gobj)
         }
         ftCommon_8007CCE8(fp);
     }
+    (void) jobj;
 }
 
 static void inlineA1(Fighter_GObj* gobj)
