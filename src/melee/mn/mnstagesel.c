@@ -404,11 +404,9 @@ static inline void make_stage_icon(HSD_JObj** out)
     *out = GET_JOBJ(gobj);
 }
 
-static inline void make_menu_model(HSD_JObj** out)
+static inline void attach_menu_model(HSD_GObj* gobj)
 {
-    HSD_GObj* gobj;
     HSD_JObj* jobj;
-    gobj = GObj_Create(4, 5, 0x80);
     jobj = HSD_JObjLoadJoint(mnStageSel_804D6C98->xA0.joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
@@ -416,11 +414,6 @@ static inline void make_menu_model(HSD_JObj** out)
     HSD_JObjAddAnimAll(jobj, mnStageSel_804D6C98->xA0.animjoint,
                        mnStageSel_804D6C98->xA0.matanim_joint,
                        mnStageSel_804D6C98->xA0.shapeanim_joint);
-    {
-        HSD_GObj* g = gobj;
-        *out = GET_JOBJ(g);
-        HSD_GObj_SetupProc(g, fn_8025A91C, 0);
-    }
 }
 
 static inline void make_bg_model(HSD_JObj** out)
@@ -471,7 +464,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
         struct mnStageSel_804D6C98_t x10;
     }* temp_r3;
 
-    PAD_STACK(0xDC - 0x58);
+    PAD_STACK(0xDC - 0x50);
 
     mnStageSel_804D6C90 = (SSSData*) arg0;
 
@@ -523,9 +516,16 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
 
         {
             HSD_JObj* jobj2;
-            make_menu_model(&jobj2);
-            HSD_JObjReqAnimAll(jobj2, 0.0F);
-            HSD_JObjAnimAll(jobj2);
+            HSD_GObj* gobj;
+            gobj = GObj_Create(4, 5, 0x80);
+            attach_menu_model(gobj);
+            {
+                HSD_GObj* g = gobj;
+                jobj2 = GET_JOBJ(g);
+                HSD_GObj_SetupProc(g, fn_8025A91C, 0);
+                HSD_JObjReqAnimAll(jobj2, 0.0F);
+                HSD_JObjAnimAll(jobj2);
+            }
         }
 
         {
