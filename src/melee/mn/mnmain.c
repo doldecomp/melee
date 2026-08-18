@@ -1395,6 +1395,12 @@ void fn_8022AFEC(HSD_GObj* gp)
     }
 }
 
+/// @brief frame offset of a selection's cursor animation
+static inline int GetSelectionFrameOffset(int selection)
+{
+    return 2 * selection;
+}
+
 /// @brief counts the unlocked selections of a menu
 static inline u8 CountUnlockedSelections(MenuKind kind)
 {
@@ -1413,7 +1419,6 @@ HSD_GObj* mn_8022B3A0(u8 state)
 {
     HSD_JObj* sp48[12];
     HSD_JObj* sp2C[7];
-    StaticModelDesc* cursor_top;
     int i;
     HSD_GObj* gobj;
     HSD_JObj* cursor_jobj;
@@ -1479,20 +1484,19 @@ HSD_GObj* mn_8022B3A0(u8 state)
         }
         HSD_JObjAnim(user_data->tree[3]);
     }
-    for (idx = 0; idx < option_count; idx++) {
-        sp48[idx] = user_data->tree[mn_803EAE68[idx]];
+    for (i = 0; i < option_count; i++) {
+        sp48[i] = user_data->tree[mn_803EAE68[i]];
     }
     for (i = 0; i < option_count; i++) {
-        cursor_top = &MenMainCursor_Top;
+        top = &MenMainCursor_Top;
         if (mn_80229938(mn_804A04F0.cur_menu, i) != 0) {
             menu_kind = mn_804A04F0.cur_menu;
             var_r16_2 = mn_80229A04(menu_kind, i);
             HSD_JObjReqAnim(sp48[var_r16_2], var_r17_int);
             HSD_JObjAnim(sp48[var_r16_2]);
-            cursor_jobj = HSD_JObjLoadJoint(cursor_top->joint);
-            HSD_JObjAddAnimAll(cursor_jobj, cursor_top->animjoint,
-                               cursor_top->matanim_joint,
-                               cursor_top->shapeanim_joint);
+            cursor_jobj = HSD_JObjLoadJoint(top->joint);
+            HSD_JObjAddAnimAll(cursor_jobj, top->animjoint, top->matanim_joint,
+                               top->shapeanim_joint);
             lb_8001204C(cursor_jobj, sp2C, mn_803EAE7C, 7);
             HSD_JObjReqAnim(sp2C[0],
                             mn_803EB360[i == hovered_selection].start_frame);
@@ -1500,8 +1504,9 @@ HSD_GObj* mn_8022B3A0(u8 state)
             jobj.p = sp2C[1];
             HSD_JObjReqAnimAll(jobj.p, i == hovered_selection);
             HSD_JObjAnimAll(jobj.p);
-            HSD_JObjReqAnim(
-                jobj.p, mn_803EB6B0[mn_804A04F0.cur_menu].start_frame + 2 * i);
+            HSD_JObjReqAnim(jobj.p,
+                            mn_803EB6B0[mn_804A04F0.cur_menu].start_frame +
+                                GetSelectionFrameOffset(i));
             mn_8022F3D8(jobj.p, 0xC, TOBJ_MASK);
             mn_8022F3D8(jobj.p, 0xD, TOBJ_MASK);
             mn_8022F3D8(jobj.p, 0xE, TOBJ_MASK);
