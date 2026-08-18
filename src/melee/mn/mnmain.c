@@ -1402,9 +1402,9 @@ static inline int GetSelectionFrameOffset(int selection)
 }
 
 /// @brief counts the unlocked selections of a menu
-static inline int CountUnlockedSelections(MenuKind kind)
+static inline u8 CountUnlockedSelections(MenuKind kind)
 {
-    int count = 0;
+    u8 count = 0;
     int i;
     for (i = 0; i < mn_803EB6B0[kind].selection_count; i++) {
         if (mn_80229938(kind, i) != 0) {
@@ -1422,9 +1422,7 @@ HSD_GObj* mn_8022B3A0(u8 state)
     StaticModelDesc* top = &MenMainConTop_Top;
     HSD_GObj* gobj;
     HSD_JObj* cursor_jobj;
-    int temp_r31;
     HSD_JObj* temp_r16_2;
-    u8 hovered_selection;
     int idx;
     u8 var_r16_2;
     AnimLoopSettings* var_r4_3;
@@ -1432,23 +1430,25 @@ HSD_GObj* mn_8022B3A0(u8 state)
     u8 cur_menu;
     MenuKind menu_kind;
     MainMenuData* user_data;
-    AnimLoopSettings* anim_loop;
+    u8 hovered_selection;
+    struct {
+        AnimLoopSettings* p;
+    } anim_loop;
     int i;
-    HSD_JObj* jobj;
+    struct {
+        HSD_JObj* p;
+    } jobj;
     AnimLoopSettings* tmp;
-    u8 var_r17;
     u32 var_r17_int;
     HSD_JObj* root_jobj;
     PAD_STACK(8);
 
     cur_menu = mn_804A04F0.cur_menu;
-    anim_loop = mn_803EB6B0[cur_menu].anim_loop;
+    anim_loop.p = mn_803EB6B0[cur_menu].anim_loop;
     option_count = mn_803EB6B0[cur_menu].selection_count & 0xFF;
     hovered_selection = mn_804A04F0.hovered_selection;
 
-    var_r17 = CountUnlockedSelections(cur_menu);
-
-    var_r17_int = var_r17;
+    var_r17_int = CountUnlockedSelections(cur_menu);
     gobj = GObj_Create(6, 7, 0x80);
     root_jobj = HSD_JObjLoadJoint(top->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root_jobj);
@@ -1499,21 +1499,21 @@ HSD_GObj* mn_8022B3A0(u8 state)
             HSD_JObjReqAnim(sp2C[0],
                             mn_803EB360[i == hovered_selection].start_frame);
             HSD_JObjAnim(sp2C[0]);
-            jobj = sp2C[1];
-            HSD_JObjReqAnimAll(jobj, i == hovered_selection);
-            HSD_JObjAnimAll(jobj);
-            HSD_JObjReqAnim(jobj,
+            jobj.p = sp2C[1];
+            HSD_JObjReqAnimAll(jobj.p, i == hovered_selection);
+            HSD_JObjAnimAll(jobj.p);
+            HSD_JObjReqAnim(jobj.p,
                             mn_803EB6B0[mn_804A04F0.cur_menu].start_frame +
                                 GetSelectionFrameOffset(i));
-            mn_8022F3D8(jobj, 0xC, TOBJ_MASK);
-            mn_8022F3D8(jobj, 0xD, TOBJ_MASK);
-            mn_8022F3D8(jobj, 0xE, TOBJ_MASK);
-            mn_8022F3D8(jobj, 0xF, TOBJ_MASK);
-            mn_8022F3D8(jobj, 0x10, TOBJ_MASK);
-            mn_8022F3D8(jobj, 0x11, TOBJ_MASK);
-            mn_8022F3D8(jobj, 0x12, TOBJ_MASK);
-            mn_8022F3D8(jobj, 0x13, TOBJ_MASK);
-            HSD_JObjAnim(jobj);
+            mn_8022F3D8(jobj.p, 0xC, TOBJ_MASK);
+            mn_8022F3D8(jobj.p, 0xD, TOBJ_MASK);
+            mn_8022F3D8(jobj.p, 0xE, TOBJ_MASK);
+            mn_8022F3D8(jobj.p, 0xF, TOBJ_MASK);
+            mn_8022F3D8(jobj.p, 0x10, TOBJ_MASK);
+            mn_8022F3D8(jobj.p, 0x11, TOBJ_MASK);
+            mn_8022F3D8(jobj.p, 0x12, TOBJ_MASK);
+            mn_8022F3D8(jobj.p, 0x13, TOBJ_MASK);
+            HSD_JObjAnim(jobj.p);
             if (i == hovered_selection) {
                 HSD_JObjReqAnimAll(
                     sp2C[2], mn_803EB378[i == hovered_selection].start_frame);
@@ -1545,7 +1545,7 @@ HSD_GObj* mn_8022B3A0(u8 state)
     {
         var_r4_3 = &mn_803EB480;
     } else {
-        var_r4_3 = &anim_loop[user_data->hovered_selection];
+        var_r4_3 = &anim_loop.p[user_data->hovered_selection];
     }
     HSD_JObjReqAnimAll(temp_r16_2, var_r4_3->start_frame);
     HSD_JObjAnimAll(temp_r16_2);
