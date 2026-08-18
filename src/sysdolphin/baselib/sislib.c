@@ -842,7 +842,7 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
             sjis_lo = str_cursor[1];
             str_cursor += 1;
         }
-        for (lut_idx = 0; lut_idx < 0x11F; lut_idx++) {
+        for (lut_idx = 0; lut_idx < (s32) HSD_SISLIB_FONT_GLYPHS; lut_idx++) {
             if ((sjis_hi == lut_ptr[lut_idx * 2]) &&
                 (sjis_lo == lut_ptr[lut_idx * 2 + 1]))
             {
