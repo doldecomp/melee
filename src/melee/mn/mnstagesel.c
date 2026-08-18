@@ -552,8 +552,8 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
         for (i = 0xB; i <= 0xF; i++) {
             HSD_JObj* jobj;
             HSD_GObj* gobj = GObj_Create(4, 5, 0x80);
-            HSD_JObj* temp_r23_3;
             s32 temp_r22_7;
+            HSD_JObj* temp_r23_3;
             jobj = HSD_JObjLoadJoint(mnStageSel_804D6C98->x20.joint);
             HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
             GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x83);
@@ -573,11 +573,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
                 break;
             default:
                 temp_r22_7 = mnStageSel_803F06D0[i + 13].x9 - 0x16;
-                HSD_JObjReqAnimAll(temp_r23_3, 0.0F);
-                HSD_JObjReqAnimAllByFlags(temp_r23_3, 0x10, temp_r22_7);
-                HSD_JObjAnimAll(temp_r23_3);
-                HSD_ForeachAnim(temp_r23_3, JOBJ_TYPE, TOBJ_MASK,
-                                HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+                do_anim(temp_r23_3, temp_r22_7);
                 break;
             }
         }
@@ -595,11 +591,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
                                mnStageSel_804D6C98->x10.shapeanim_joint);
             temp_r22_8 = gobj->hsd_obj;
             lb_8000C1C0(temp_r22_8, spDC[0x10]);
-            HSD_JObjReqAnimAll(temp_r22_8, 0.0F);
-            HSD_JObjReqAnimAllByFlags(temp_r22_8, 0x10, 2.0F);
-            HSD_JObjAnimAll(temp_r22_8);
-            HSD_ForeachAnim(temp_r22_8, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
-                            AOBJ_ARG_AOV, 0, 0);
+            do_anim(temp_r22_8, 2);
             mnStageSel_803F06D0[0x1D].x0 = temp_r22_8;
         }
 
@@ -607,8 +599,8 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
             HSD_JObj* jobj;
             HSD_AnimJoint* animjoint;
             HSD_GObj* gobj = GObj_Create(4, 5, 0x80);
-            HSD_JObj* temp_r23_6;
             s32 temp_r22_9;
+            HSD_JObj* temp_r23_6;
             jobj = HSD_JObjLoadJoint(mnStageSel_804D6C98->x0.joint);
             HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
             GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x83);
@@ -630,11 +622,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
                 break;
             default:
                 temp_r22_9 = mnStageSel_803F06D0[i + 5].x9 - 0x14;
-                HSD_JObjReqAnimAll(temp_r23_6, 0.0F);
-                HSD_JObjReqAnimAllByFlags(temp_r23_6, 0x10, temp_r22_9);
-                HSD_JObjAnimAll(temp_r23_6);
-                HSD_ForeachAnim(temp_r23_6, JOBJ_TYPE, TOBJ_MASK,
-                                HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+                do_anim(temp_r23_6, temp_r22_9);
                 break;
             }
         }
@@ -662,11 +650,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
                     jobj = temp_r28;
                     HSD_GObj_SetupProc(g, fn_8025A310, 2);
                     temp_r22_10 = mnStageSel_804D50A0 + 1;
-                    HSD_JObjReqAnimAll(jobj, 0.0F);
-                    HSD_JObjReqAnimAllByFlags(jobj, 0x10, temp_r22_10);
-                    HSD_JObjAnimAll(jobj);
-                    HSD_ForeachAnim(jobj, JOBJ_TYPE, TOBJ_MASK,
-                                    HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+                    do_anim(jobj, temp_r22_10);
                 }
                 HSD_JObjSetTranslate(temp_r28, &spCC);
             }
