@@ -3,10 +3,18 @@
 
 #include <baselib/forward.h>
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
-static float lbVector_Len(Vec3* vec);
-static float lbVector_Len_xy(Vec3* vec);
+static inline float lbVector_Len(Vec3* vec)
+{
+    return sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
+}
+
+static inline float lbVector_Len_xy(Vec3* vec)
+{
+    return sqrtf(vec->x * vec->x + vec->y * vec->y);
+}
 
 float lbVector_Normalize(Vec3* vec);
 float lbVector_NormalizeXY(Vec3* a);
