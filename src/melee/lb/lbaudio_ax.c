@@ -94,8 +94,8 @@ void fn_80023254(s32 arg0)
     int local_arr[0x38];
     int* init;
     int* used;
-    int* local_base = local_arr;
     s8* type;
+    int* local_base = local_arr;
     int* priority;
     int* list = lbl_80433B44;
     int* shift;
