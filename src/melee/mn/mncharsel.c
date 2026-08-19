@@ -3490,13 +3490,7 @@ void fn_802633B0(HSD_GObj* gobj)
     case 3:
         vel = tag->scroll_amt;
         if (vel != 0.0f) {
-            f32 sign;
-            if (vel < 0.0f) {
-                sign = -1.0f;
-            } else {
-                sign = 1.0f;
-            }
-            tag->scroll_force = (10.0f * vel) + sign;
+            tag->scroll_force = (10.0f * vel) + (vel < 0.0f ? -1.0f : 1.0f);
         }
         if (tag->scroll_force != 0.0f) {
             scroll_pos = tag->x8;
