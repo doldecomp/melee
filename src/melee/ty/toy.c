@@ -1821,11 +1821,13 @@ void Toy_80307470(s32 arg0)
     ToyGlobalsS_* tg;
     ToyPanelLabelData* data;
     char** label;
-    HSD_Joint* joint;
+    HSD_Joint* joint[1];
+    HSD_AnimJoint* anim[1];
+    HSD_MatAnimJoint* matanim[1];
     HSD_JObj* loaded_jobj;
     u8 kind;
 
-    PAD_STACK(24);
+    PAD_STACK(16);
 
     data = (ToyPanelLabelData*) _Toy_str_TyLight_dat;
     tg = (ToyGlobalsS_*) Toy_sbss_804D6ED8;
@@ -1841,21 +1843,22 @@ void Toy_80307470(s32 arg0)
     }
 
     label = &data->ptrs[arg0];
-    joint = HSD_ArchiveGetPublicAddress(tg->x50, *(label += 0x188 / 4));
+    joint[0] = HSD_ArchiveGetPublicAddress(tg->x50, *(label += 0x188 / 4));
 
-    if (joint != NULL) {
+    if (joint[0] != NULL) {
         tg->x0 = GObj_Create(9, 9, 0);
 
-        loaded_jobj = HSD_JObjLoadJoint(joint);
+        loaded_jobj = HSD_JObjLoadJoint(joint[0]);
+        anim[0] = HSD_ArchiveGetPublicAddress(
+            tg->x50, (&data->ptrs[arg0 * 3])[0x224 / 4]);
+        matanim[0] = Toy_GetPanelMatAnim(arg0, data, tg);
         Toy_AddPanelAnims(loaded_jobj,
                           HSD_ArchiveGetPublicAddress(
                               tg->x50, (&data->ptrs[arg0 * 3])[0x22C / 4]),
-                          Toy_GetPanelMatAnim(arg0, data, tg),
-                          HSD_ArchiveGetPublicAddress(
-                              tg->x50, (&data->ptrs[arg0 * 3])[0x224 / 4]));
+                          matanim[0], anim[0]);
         HSD_JObjReqAnimAll(loaded_jobj, 0.0f);
-        kind = HSD_GObj_804D7849;
-        HSD_GObjObject_80390A70(tg->x0, kind, loaded_jobj);
+        HSD_GObjObject_80390A70(tg->x0, (kind = HSD_GObj_804D7849),
+                                loaded_jobj);
         GObj_SetupGXLink(tg->x0, HSD_GObj_JObjCallback, 0x3C, 0);
 
         lb_8001204C(loaded_jobj, (HSD_JObj**) &tg->x10, _Toy_803FE3F8, 9);

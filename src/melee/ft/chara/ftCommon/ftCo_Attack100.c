@@ -511,18 +511,16 @@ bool ftCo_800D730C(Fighter_GObj* gobj, bool arg1)
 
 bool ftCo_800D72A0(Fighter* fp)
 {
-    if (fp->x2D0->x2C != -1) {
-        if (fp->x2D0->x2C <= fp->motion_id &&
-            fp->motion_id < fp->x2D0->x2C + fp->x2D0->x28)
-        {
-            return true;
-        }
-    }
-    if (fp->x2D0->x30 != -1) {
-        if (fp->x2D0->x30 <= fp->motion_id &&
-            fp->motion_id < fp->x2D0->x30 + fp->x2D0->x28)
-        {
-            return true;
+    struct Fighter_x2D0_t* p = fp->x2D0;
+    s32 i;
+
+    for (i = 0; i < 2; i++) {
+        if ((&p->x2C)[i] != -1) {
+            if ((&p->x2C)[i] <= fp->motion_id &&
+                fp->motion_id < (&p->x2C)[i] + p->x28)
+            {
+                return true;
+            }
         }
     }
     return false;
