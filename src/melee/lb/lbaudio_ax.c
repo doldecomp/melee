@@ -1978,7 +1978,7 @@ bool lbAudioAx_800265C4(HSD_GObj* arg0, int arg1)
     return false;
 }
 
-static inline int findPendingSfx(void)
+static inline int fn_80026650_inline(void)
 {
     int i;
     int priority;
@@ -2011,7 +2011,7 @@ int fn_80026650(void)
     }
     return -1;
 }
-#pragma dont_inline off
+#pragma dont_inline reset
 
 void fn_800267B0(void)
 {
@@ -2138,7 +2138,7 @@ void fn_80026C04(int arg0, int unused)
         }
     }
 
-    slot = findPendingSfx();
+    slot = fn_80026650_inline();
     if (slot != -1) {
         strcpy(&lbl_803BB340[lbl_804D38D0], lbl_803BBCFC[slot]);
         lbl_80433A64[slot] = HSD_SynthSFXLoad(lbl_803BB340, 2, fn_80026C04, 0);
