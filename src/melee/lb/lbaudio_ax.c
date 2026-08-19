@@ -101,7 +101,6 @@ static inline void fn_80023254_shift(int* list, int count)
     }
 }
 
-/// @todo Only differs by the order of two constant loads.
 void fn_80023254(s32 arg0)
 {
     int used[0x38];
@@ -119,9 +118,8 @@ void fn_80023254(s32 arg0)
     }
 
     list = lbl_80433B44;
-    do {
-        index = 0;
-        do {
+    for (; count <= 0x37; count++) {
+        for (index = 0; index <= 0x37; index++) {
             if (arg0 == s32_arr_803BB5D0[index][0] && used[index] == 0 &&
                 (u32) offsets_arr_803BC4E4[lbl_80433B44[count]][0] <
                     (u32) offsets_arr_803BC4E4[index][0])
@@ -130,10 +128,8 @@ void fn_80023254(s32 arg0)
                 lbl_80433B44[count] = index;
                 used[index] = 1;
             }
-            index++;
-        } while (index <= 0x37);
-        count++;
-    } while (count <= 0x37);
+        }
+    }
 }
 
 s32 lbAudioAx_800233EC(s32 arg0)
