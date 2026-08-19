@@ -142,11 +142,9 @@ void fn_80023254(s32 arg0)
                     (u32) *priority)
             {
                 shift = &shift_base[0x37];
-                if (count < 0x37) {
-                    for (i = count; i < 0x37; i++) {
-                        shift[0] = shift[-1];
-                        shift--;
-                    }
+                for (i = count; i < 0x37; i++) {
+                    shift[0] = shift[-1];
+                    shift--;
                 }
                 *list = index;
                 *used = 1;
