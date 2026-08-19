@@ -110,7 +110,6 @@ void fn_80023254(s32 arg0)
     init = lbl_80433B44;
     used = local_base;
     base = lbl_803BB300;
-    count = 0;
     for (i = 0; i < 7; i++, init += 8, used += 8) {
         init[0] = 0x37;
         used[0] = 0;
@@ -127,7 +126,7 @@ void fn_80023254(s32 arg0)
         init[6] = 0x37;
         used[6] = 0;
         init[7] = 0x37;
-        used[7] = 0;
+        used[7] = count = 0;
     }
 
     shift_base = lbl_80433B44;
