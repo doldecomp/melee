@@ -2627,7 +2627,11 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         cx4 < dp->togglebtn_right)
                                     {
                                         f32 cy4 = cursor->x10;
-                                        if (cy4 < 0.2 && cy4 > -4.6) {
+                                        /* Retail nudges both toggle-box
+                                         * bounds outward by 1/10485760. */
+                                        if (cy4 < 0.20000009536743146 &&
+                                            cy4 > -4.600000095367432)
+                                        {
                                             u8* pk;
                                             cursor->x10 = -2.2f;
                                             {
@@ -2686,7 +2690,9 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         cx5 < dp->teambtn_right)
                                     {
                                         f32 cy5 = cursor->x10;
-                                        if (cy5 < -1.0 && cy5 > -5.8) {
+                                        if (cy5 < -0.9999999046325683 &&
+                                            cy5 > -5.800000095367432)
+                                        {
                                             cursor->x10 = -3.4f;
                                             dp->team =
                                                 (u8) ((dp->team + 1) % 3);
