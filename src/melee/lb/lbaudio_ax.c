@@ -701,7 +701,7 @@ void lbAudioAx_80024614(int arg0)
     if (arg0 > 0x7F) {
         arg0 = 0x7F;
     }
-    lbl_804D388C = arg0;
+    lbl_804D3884 = arg0;
 }
 
 void lbAudioAx_80024634(int arg0)
