@@ -818,7 +818,7 @@ void mnCharSel_8025DB34(u8 arg0)
         mnCharSel_803F0DFC.tags[arg0].data->text->default_kerning = 1;
         if (lbLang_IsSavedLanguageUS() != 0 && (int) sel_icon == 0x16) {
             HSD_SisLib_803A70A0(mnCharSel_803F0DFC.tags[arg0].data->text, 0,
-                                (char*) &mnCharSel_803F0A48);
+                                (char*) mnCharSel_803F0A48.gnw_name);
         } else {
             HSD_SisLib_803A70A0(
                 mnCharSel_803F0DFC.tags[arg0].data->text, 0,
@@ -3452,7 +3452,7 @@ void fn_802633B0(HSD_GObj* gobj)
                 mnCharSel_803F0DFC.doors[tag->port].sel_icon == 0x16)
             {
                 HSD_SisLib_803A70A0(tag->name_ls, 0,
-                                    (char*) &mnCharSel_803F0A48);
+                                    (char*) mnCharSel_803F0A48.gnw_name);
             } else {
                 HSD_SisLib_803A70A0(
                     tag->name_ls, 0,
@@ -3462,7 +3462,9 @@ void fn_802633B0(HSD_GObj* gobj)
             }
         } else {
             HSD_SisLib_803A70A0(tag->name_ls, 0,
-                                (char*) ((u8*) &mnCharSel_803F0A48 + 0x5B8));
+                                "\x82\x6d\x82\x60\x82\x6c\x82\x64\x81\x40"
+                                "\x82\x62\x82\x60\x82\x6d\x82\x62\x82\x64"
+                                "\x82\x6b");
         }
         gray_copy = gray;
         HSD_SisLib_803A74F0(tag->text, 0, &gray_copy);
@@ -3619,7 +3621,7 @@ void fn_802633B0(HSD_GObj* gobj)
                     mnCharSel_803F0DFC.doors[tag->port].sel_icon == 0x16)
                 {
                     HSD_SisLib_803A70A0(tag->text, 0,
-                                        (char*) &mnCharSel_803F0A48);
+                                        (char*) mnCharSel_803F0A48.gnw_name);
                 } else {
                     HSD_SisLib_803A70A0(
                         tag->text, 0,
@@ -4186,10 +4188,6 @@ s32 mnCharSel_802640A0(void)
         model->xC = model->x14 = -3.0f + icons[found].bound_u;
     }
 
-    /* The original pools a name-entry cancel caption here that no
-     * surviving code references. */
-    (void) "\x82\x6d\x82\x60\x82\x6c\x82\x64\x81\x40\x82\x62\x82\x60"
-           "\x82\x6d\x82\x62\x82\x64\x82\x6b";
     spE8 = mnCharSel_804DC580;
     color_ptr = &color;
     color2_ptr = &color2;
