@@ -3850,12 +3850,16 @@ s32 mnCharSel_802640A0(void)
     GXColor spE4;
     GXColor spE0;
     GXColor spDC;
-    HSD_JObj* tag_name_jobj;
+    GXColor hard_color;
     GXColor spD4;
     GXColor color;
     GXColor color2;
-    GXColor hard_color;
-    HSD_JObj* sp70;
+    GXColor color3;
+    GXColor color4;
+    GXColor color5;
+    GXColor color6;
+    GXColor color7;
+    UNUSED u8 unkA8[0x10];
     CSSDoor* doors;
     s32 row_b;
     HSD_GObj* gobj;
@@ -3864,7 +3868,6 @@ s32 mnCharSel_802640A0(void)
     s32 ctx;
     s32 num_players;
     s32 row_a;
-    HSD_JObj* jobj43;
     CSSTag* tag;
     GXColor* color_ptr;
     GXColor* color2_ptr;
@@ -4244,6 +4247,8 @@ s32 mnCharSel_802640A0(void)
             HSD_SisLib_803A6B98(td->text, 100.0f, 0.0f,
                                 "\x81\x45\x81\x45\x81\x45\x81\x45");
         } else {
+            UNUSED u8 unkA0[4];
+            HSD_JObj* tag_name_jobj;
             u8 name_joint = tag->name_jointl;
             lb_80011E24(mnCharSel_804D6CC0, &tag_name_jobj, name_joint, -1);
             HSD_ForeachAnim(tag_name_jobj, JOBJ_TYPE, JOBJ_MASK,
@@ -4410,36 +4415,26 @@ s32 mnCharSel_802640A0(void)
             HSD_SisLib_803A6B98(mnCharSel_803F0DFC.xd3, 0.0f, 0.0f,
                                 "\x82\x75\x82\x64\x82\x71\x82\x78\x20\x82\x64"
                                 "\x82\x60\x82\x72\x82\x78");
-            {
-                GXColor color = spE4;
-                HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 0, &color);
-            }
+            color3 = spE4;
+            HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 0, &color3);
             HSD_SisLib_803A6B98(mnCharSel_803F0DFC.xd3, 0.0f, 0.0f,
                                 "\x82\x64\x82\x60\x82\x72\x82\x78");
-            {
-                GXColor color = spE0;
-                HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 1, &color);
-            }
+            color4 = spE0;
+            HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 1, &color4);
             HSD_SisLib_803A6B98(mnCharSel_803F0DFC.xd3, 0.0f, 0.0f,
                                 "\x82\x6d\x82\x6e\x82\x71\x82\x6c\x82\x60\x82"
                                 "\x6b");
-            {
-                GXColor color = spDC;
-                HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 2, &color);
-            }
+            color5 = spDC;
+            HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 2, &color5);
             HSD_SisLib_803A6B98(mnCharSel_803F0DFC.xd3, 0.0f, 0.0f,
                                 "\x82\x67\x82\x60\x82\x71\x82\x63");
-            {
-                GXColor color = hard_color;
-                HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 3, &color);
-            }
+            color6 = hard_color;
+            HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 3, &color6);
             HSD_SisLib_803A6B98(mnCharSel_803F0DFC.xd3, 0.0f, 0.0f,
                                 "\x82\x75\x82\x64\x82\x71\x82\x78\x20\x82\x67"
                                 "\x82\x60\x82\x71\x82\x63");
-            {
-                GXColor color = spD4;
-                HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 4, &color);
-            }
+            color7 = spD4;
+            HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 4, &color7);
             HSD_GObjGXLink_803909D8(mnCharSel_803F0DFC.xd3->entity,
                                     mnCharSel_804D6CBC);
             if (mnCharSel_804D6CB0->match_type == 0xD) {
@@ -4452,6 +4447,8 @@ s32 mnCharSel_802640A0(void)
                 lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x46, -1);
                 HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
             } else {
+                UNUSED u8 unk74[0x20];
+                HSD_JObj* sp70;
                 data2.stocks =
                     mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
                         .stocks;
@@ -4493,13 +4490,16 @@ s32 mnCharSel_802640A0(void)
             text->font_size.y = 0.055f;
             text->default_alignment = 2;
             HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
-            lb_80011E24(mnCharSel_804D6CC0, &jobj43, 0x43, -1);
-            HSD_ForeachAnim(jobj43, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
-                            AOBJ_ARG_AF, 0.0);
-            HSD_JObjAnimAll(jobj43);
-            HSD_ForeachAnim(jobj43, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
-                            AOBJ_ARG_AOV, 0, 0);
-            sp108 = jobj43;
+            {
+                HSD_JObj* jobj43;
+                lb_80011E24(mnCharSel_804D6CC0, &jobj43, 0x43, -1);
+                HSD_ForeachAnim(jobj43, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
+                                AOBJ_ARG_AF, 0.0);
+                HSD_JObjAnimAll(jobj43);
+                HSD_ForeachAnim(jobj43, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
+                                AOBJ_ARG_AOV, 0, 0);
+                sp108 = jobj43;
+            }
             HSD_JObjSetFlags(sp108, JOBJ_HIDDEN);
             break;
         case STADIUM_TARGET:
@@ -4889,7 +4889,7 @@ s32 mnCharSel_802640A0(void)
     }
 
     mnCharSel_8025EE8C(mnCharSel_804D6CB0->match_type);
-    PAD_STACK(0x54);
+    PAD_STACK(0x20);
     return lbAudioAx_80023F28(gmMainLib_8015ECB0());
 }
 
