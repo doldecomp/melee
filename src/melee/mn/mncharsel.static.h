@@ -2,12 +2,11 @@
 
 #include <melee/mn/types.h>
 
-extern u8 mnCharSel_804D50C8[4];
-extern u8 mnCharSel_804D50CC[4];
-extern u8 mnCharSel_804D50D0[8];
-extern u8 mnCharSel_804D50D8[8];
-extern u8 mnCharSel_804D50E0[3];
-extern u8 mnCharSel_804D5100;
+static u8 mnCharSel_804D50C8[4] = { 1, 2, 4, 8 };
+static u8 mnCharSel_804D50CC[4] = { 1, 0, 0, 2 };
+static u8 mnCharSel_804D50D0[8] = { 2, 0, 1, 0, 5, 3, 4, 0 };
+static u8 mnCharSel_804D50D8[8] = { 2, 0, 8, 1, 7, 7, 7, 7 };
+static u8 mnCharSel_804D50E0[3] = { 0, 1, 3 };
 
 typedef struct CSSSceneModels {
     /* 0x00 */ HSD_CObjDesc* cam;

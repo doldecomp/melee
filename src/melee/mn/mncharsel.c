@@ -177,8 +177,8 @@ void mnCharSel_8025BD30(void)
     }
 }
 
-static inline void drawTimeText(HSD_Text* x, HSD_Text* y, int hours,
-                                int minutes, int seconds, int microseconds)
+static void drawTimeText(HSD_Text* x, HSD_Text* y, int hours, int minutes,
+                         int seconds, int microseconds)
 {
     if (hours == 0) {
         HSD_SisLib_803A70A0(x, 0, "%02d:%02d", minutes, seconds);
@@ -3381,8 +3381,8 @@ void fn_80263354(HSD_GObj* gobj)
 
 /// Nametag list think callback - handles scrolling through nametag list
 
-static GXColor mnCharSel_804DC560 = { 255, 255, 255, 255 };
-static GXColor mnCharSel_804DC564 = { 100, 100, 100, 255 };
+static const GXColor mnCharSel_804DC560 = { 255, 255, 255, 255 };
+static const GXColor mnCharSel_804DC564 = { 100, 100, 100, 255 };
 
 void fn_802633B0(HSD_GObj* gobj)
 {
@@ -3829,12 +3829,12 @@ void fn_8026407C(HSD_GObj* gobj)
 
 extern HSD_CObjDesc* MenMain_cam;
 
-static GXColor mnCharSel_804DC580 = { 255, 255, 0, 255 };
-static GXColor mnCharSel_804DC584 = { 20, 80, 160, 255 };
-static GXColor mnCharSel_804DC588 = { 60, 140, 80, 255 };
-static GXColor mnCharSel_804DC58C = { 160, 160, 0, 255 };
-static GXColor mnCharSel_804DC590 = { 180, 80, 0, 255 };
-static GXColor mnCharSel_804DC594 = { 220, 0, 0, 255 };
+static const GXColor mnCharSel_804DC580 = { 255, 255, 0, 255 };
+static const GXColor mnCharSel_804DC584 = { 20, 80, 160, 255 };
+static const GXColor mnCharSel_804DC588 = { 60, 140, 80, 255 };
+static const GXColor mnCharSel_804DC58C = { 160, 160, 0, 255 };
+static const GXColor mnCharSel_804DC590 = { 180, 80, 0, 255 };
+static const GXColor mnCharSel_804DC594 = { 220, 0, 0, 255 };
 
 #define MODELS ((CSSSceneModels*) mnCharSel_804D6CB4)
 #define ANIM ((CSSAnimSet*) mnCharSel_804D6CD8)
@@ -4186,6 +4186,10 @@ s32 mnCharSel_802640A0(void)
         model->xC = model->x14 = -3.0f + icons[found].bound_u;
     }
 
+    /* The original pools a name-entry cancel caption here that no
+     * surviving code references. */
+    (void) "\x82\x6d\x82\x60\x82\x6c\x82\x64\x81\x40\x82\x62\x82\x60"
+           "\x82\x6d\x82\x62\x82\x64\x82\x6b";
     spE8 = mnCharSel_804DC580;
     color_ptr = &color;
     color2_ptr = &color2;
@@ -4893,8 +4897,6 @@ s32 mnCharSel_802640A0(void)
 
 #undef MODELS
 #undef ANIM
-
-static u8 data_pad[0x18] = { 0 };
 
 void mnCharSel_8026688C_OnEnter(void* arg0)
 {
