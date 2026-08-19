@@ -651,16 +651,6 @@ lbl_803BCA24_fn lbl_803BCA24[] = {
     fn_80025A98, fn_80025B44, fn_80025CBC, fn_80025E38, fn_80025E38,
 };
 
-/// @todo .data order hack
-static void order_data(void)
-{
-    (void) "******** CAUTION ********\nFGM load size is over\n";
-    (void) __FILE__;
-}
-
-static char str_audio_us[0xC] = "/audio/us/";
-static char str_audio[0xC] = "/audio/";
-
 void fn_800244F4(void)
 {
     lbl_804D387C = 0x7F;
@@ -2371,6 +2361,9 @@ void lbAudioAx_8002785C(void)
     }
 }
 
+static char str_audio_us[0xC] = "/audio/us/";
+static char str_audio[0xC] = "/audio/";
+
 void lbAudioAx_80027AB0(s32 arg0)
 {
     enum_t lang;
@@ -2812,16 +2805,4 @@ void lbAudioAx_80028B6C(void)
 void lbAudioAx_80028B90(void)
 {
     lbl_804D38CC = 0x7F;
-}
-
-/// @todo .sdata order hack
-void order_sdata(void)
-{
-    (void) "0";
-}
-
-/// @todo .sdata2 order hack
-void order_sdata2(void)
-{
-    (void) 1.88f;
 }
