@@ -765,16 +765,21 @@ static inline void pickUniqueCostume(int door)
 
 void mnCharSel_8025DB34(u8 arg0)
 {
-    HSD_JObj* sp84;
     HSD_JObj* sp90;
+    /// Unidentified locals; they only reserve the original's stack slots.
+    UNUSED u8 unk88[8];
+    HSD_JObj* sp84;
     HSD_JObj* sp80;
     HSD_JObj* sp7C;
     HSD_JObj* sp78;
+    UNUSED u8 unk70[8];
     HSD_JObj* sp6C;
     HSD_JObj* sp68;
+    UNUSED u8 unk64[4];
     HSD_JObj* sp60;
     HSD_JObj* sp5C;
     HSD_JObj* sp58;
+    UNUSED u8 unk54[4];
     HSD_JObj* sp50;
     HSD_JObj* sp4C;
     HSD_JObj* sp48;
@@ -791,7 +796,7 @@ void mnCharSel_8025DB34(u8 arg0)
     u8* team_ptr;
     f32 var_f1;
 
-    PAD_STACK(0x3C);
+    PAD_STACK(0x20);
 
     sel_icon = mnCharSel_803F0DFC.doors[arg0].sel_icon;
     hud_idx = icons[sel_icon].ft_hudindex;
