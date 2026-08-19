@@ -2636,7 +2636,9 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                             cursor->x10 = -2.2f;
                                             {
                                                 u8 new_kind;
-                                                pk = &dp->p_kind;
+                                                pk = &mnCharSel_803F0DFC
+                                                          .doors[(s8) di]
+                                                          .p_kind;
                                                 new_kind = *pk + 1;
                                                 *pk = new_kind;
                                                 switch ((s32) new_kind) {
