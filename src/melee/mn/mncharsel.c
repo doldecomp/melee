@@ -1676,9 +1676,7 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
 {
     s32 icon_idx;
     s32 icon_offset;
-    int player;
     CSSAllData* all_data = (CSSAllData*) &mnCharSel_803F0A48;
-    u8* char_kinds;
     HSD_JObj* icon_jobj;
 
     do {
@@ -1687,11 +1685,8 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
         icon_offset = getIconOffset(icon_idx);
     } while (icons[icon_idx].state == 0);
 
-    player = getPlayerForDoor(door);
-
-    char_kinds = &icons[0].char_kind;
-    mnCharSel_804D6CB0->data.data.players[player].c_kind =
-        char_kinds[icon_offset];
+    mnCharSel_804D6CB0->data.data.players[getPlayerForDoor(door)].c_kind =
+        (&icons[0].char_kind)[icon_offset];
 
     mnCharSel_803F0DFC.doors[door].sel_icon = (u8) icon_idx;
     if (mnCharSel_803F0DFC.doors[door].sel_icon !=
@@ -1733,6 +1728,7 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
 
     {
         u8 sel = mnCharSel_803F0DFC.doors[door].sel_icon;
+        u8* char_kinds = &icons[0].char_kind;
         lbAudioAx_80023870(all_data->icons[sel].sfx, 0x7F, 0x40, sel + 0x8A);
         gm_80168C5C((u32) char_kinds[sel * sizeof(CSSIcon)]);
     }
