@@ -1986,7 +1986,7 @@ bool lbAudioAx_800265C4(HSD_GObj* arg0, int arg1)
     return false;
 }
 
-int fn_80026650(void)
+static inline int findPendingSfx(void)
 {
     int i;
     int priority;
@@ -2002,10 +2002,24 @@ int fn_80026650(void)
     return -1;
 }
 
-int fn_80026650_noinline(void)
+/// Retail inlines this search into fn_80026C04 but calls it here.
+#pragma dont_inline on
+int fn_80026650(void)
 {
-    return fn_80026650();
+    int i;
+    int priority;
+    for (priority = 4; priority >= 0; priority--) {
+        for (i = 0; i < 0x37; i++) {
+            if (priority == s32_arr_803BB5D0[i][1] && lbl_804338A4[i] == 1 &&
+                lbl_80433984[i] == -1)
+            {
+                return i;
+            }
+        }
+    }
+    return -1;
 }
+#pragma dont_inline off
 
 void fn_800267B0(void)
 {
@@ -2132,7 +2146,7 @@ void fn_80026C04(int arg0, int unused)
         }
     }
 
-    slot = fn_80026650();
+    slot = findPendingSfx();
     if (slot != -1) {
         strcpy(&lbl_803BB340[lbl_804D38D0], lbl_803BBCFC[slot]);
         lbl_80433A64[slot] = HSD_SynthSFXLoad(lbl_803BB340, 2, fn_80026C04, 0);
@@ -2280,7 +2294,7 @@ void lbAudioAx_80027168(void)
         HSD_ASSERT(0xDB3, 0);
     }
 
-    slot = fn_80026650_noinline();
+    slot = fn_80026650();
     if (slot != -1) {
         strcpy(&lbl_803BB340[lbl_804D38D0], lbl_803BBCFC[slot]);
         lbl_80433A64[slot] = HSD_SynthSFXLoad(lbl_803BB340, 2, fn_80026C04, 0);
