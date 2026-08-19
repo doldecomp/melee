@@ -89,76 +89,49 @@ int lbAudioAx_80023220(int idx)
     return 0;
 }
 
-/// @todo Only differs by register allocation.
+/// Shift the priority list down one slot from @p count to make room.
+static inline void fn_80023254_shift(int* list, int count)
+{
+    int* shift = &list[0x37];
+    int i;
+
+    for (i = count; i < 0x37; i++) {
+        shift[0] = shift[-1];
+        shift--;
+    }
+}
+
+/// @todo Only differs by the order of two constant loads.
 void fn_80023254(s32 arg0)
 {
-    int local_arr[0x38];
-    int* shift;
-    s8* type;
-    int* used;
-    int* init;
-    int* clear;
-    int* priority;
-    int* list = lbl_80433B44;
-    int* local_base = local_arr;
+    int used[0x38];
     int count;
     int index;
     int i;
-    char* base;
-    int* shift_base;
+    int* list;
     int zero;
 
-    PAD_STACK(8);
-
-    init = lbl_80433B44;
-    clear = local_base;
-    base = lbl_803BB300;
-    for (i = 0; i < 7; i++, init += 8, clear += 8) {
-        init[0] = 0x37;
-        zero = count = 0;
-        clear[0] = zero;
-        init[1] = 0x37;
-        clear[1] = zero;
-        init[2] = 0x37;
-        clear[2] = zero;
-        init[3] = 0x37;
-        clear[3] = zero;
-        init[4] = 0x37;
-        clear[4] = zero;
-        init[5] = 0x37;
-        clear[5] = zero;
-        init[6] = 0x37;
-        clear[6] = zero;
-        init[7] = 0x37;
-        clear[7] = zero;
+    zero = count = 0;
+    for (i = 0; i < 0x38; i++) {
+        lbl_80433B44[i] = 0x37;
+        used[i] = zero;
     }
 
-    shift_base = lbl_80433B44;
+    list = lbl_80433B44;
     do {
-        used = local_base;
-        type = (s8*) (base + 0x2D0);
-        priority = (int*) (base + 0x11E4);
         index = 0;
         do {
-            if (arg0 == (*type) && *used == 0 &&
-                (u32) ((int (*)[2])(base + 0x11E4))[*list][0] <
-                    (u32) *priority)
+            if (arg0 == s32_arr_803BB5D0[index][0] && used[index] == 0 &&
+                (u32) offsets_arr_803BC4E4[lbl_80433B44[count]][0] <
+                    (u32) offsets_arr_803BC4E4[index][0])
             {
-                shift = &shift_base[0x37];
-                for (i = count; i < 0x37; i++) {
-                    shift[0] = shift[-1];
-                    shift--;
-                }
-                *list = index;
-                *used = 1;
+                fn_80023254_shift(list, count);
+                lbl_80433B44[count] = index;
+                used[index] = 1;
             }
             index++;
-            type += 4;
-            used++;
-            priority += 2;
         } while (index <= 0x37);
         count++;
-        list++;
     } while (count <= 0x37);
 }
 
