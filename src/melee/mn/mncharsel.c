@@ -960,7 +960,6 @@ void mnCharSel_8025DB34(u8 arg0)
             case 1: {
                 if (gmMainLib_GetGameRules()->handicap != 0) {
                     s32 hval;
-                    s32 hval2;
 
                     if (gmMainLib_GetGameRules()->handicap == 2) {
                         var_f1 = 20.0f;
@@ -980,8 +979,8 @@ void mnCharSel_8025DB34(u8 arg0)
                     HSD_ForeachAnim(sp68, JOBJ_TYPE, TOBJ_MASK,
                                     HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
                     sp90 = sp68;
-                    hval2 = getHandicapValue((int) arg0);
-                    temp_f31 = 1.25f * (f32) (hval2 - 1);
+                    hval = getHandicapValue((int) arg0);
+                    temp_f31 = 1.25f * (f32) (hval - 1);
                     HSD_JObjSetTranslateX(sp90, temp_f31);
 
                     temp_f31 =
@@ -1015,8 +1014,8 @@ void mnCharSel_8025DB34(u8 arg0)
             }
             case 3: {
                 if (gmMainLib_GetGameRules()->handicap != 0) {
-                    s32 hval3;
-                    s32 hval4;
+                    s32 hval;
+                    s32 hval2;
 
                     if (mnCharSel_803F0DFC.doors[arg0].p_kind !=
                         mnCharSel_803F0DFC.doors[arg0].p_kind_prev)
@@ -1029,8 +1028,8 @@ void mnCharSel_8025DB34(u8 arg0)
                         HSD_ForeachAnim(sp90, JOBJ_TYPE, ALL_TYPE_MASK,
                                         HSD_AObjReqAnim, AOBJ_ARG_AF, var_f1);
                     }
-                    hval3 = getHandicapValue((int) arg0);
-                    temp_f31 = (f32) hval3;
+                    hval = getHandicapValue((int) arg0);
+                    temp_f31 = (f32) hval;
                     lb_80011E24(mnCharSel_804D6CC0, &sp58,
                                 mnCharSel_803F0DFC.doors[arg0].cpuslider_joint,
                                 -1);
@@ -1040,8 +1039,8 @@ void mnCharSel_8025DB34(u8 arg0)
                     HSD_ForeachAnim(sp58, JOBJ_TYPE, TOBJ_MASK,
                                     HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
                     sp90 = sp58;
-                    hval4 = getHandicapValue((int) arg0);
-                    temp_f31 = 1.25f * (f32) (hval4 - 1);
+                    hval2 = getHandicapValue((int) arg0);
+                    temp_f31 = 1.25f * (f32) (hval2 - 1);
                     HSD_JObjSetTranslateX(sp90, temp_f31);
 
                     temp_f31 =
@@ -1200,7 +1199,7 @@ void mnCharSel_8025DB34(u8 arg0)
                 }
             }
             {
-                s8 port;
+                int port;
                 if (mnCharSel_804D6CF5 == 1) {
                     if ((int) arg0 != 0) {
                         port = (s8) (u8) mnCharSel_804D6CF1;
@@ -1208,7 +1207,7 @@ void mnCharSel_8025DB34(u8 arg0)
                         port = (s8) (u8) mnCharSel_804D6CF0;
                     }
                 } else {
-                    port = (int) arg0;
+                    port = arg0;
                 }
                 mnCharSel_804D6CB0->data.data.players[port].color = var_r5;
             }
