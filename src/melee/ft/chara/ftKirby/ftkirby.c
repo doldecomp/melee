@@ -2745,12 +2745,6 @@ char* ftKb_Init_GetMotionFileString(enum_t arg0)
 
 float const ftKb_Init_803B7548[10] = { 0 };
 
-#pragma force_active on
-char ftKb_Init_assert_msg_0[] = "fighter parts model dobj num over!\n";
-char ftKb_Init_assert_msg_1[] = "ftkirby.c";
-char ftKb_Init_assert_msg_2[] = "fighter dobj num over!\n";
-#pragma force_active reset
-
 void ftKb_SpecialN_800EEC34(int arg0, int arg1, int arg2)
 {
     int i;
@@ -2797,7 +2791,7 @@ void ftKb_SpecialN_800EED50(s32 arg0, s32 arg1)
             item = &ftKb_Init_803C9FC8[arg0][arg1];
             if (item->joint == NULL) {
                 costumes = ftKb_Init_803CB3E8[arg0];
-                cs = &costumes[arg1];
+                cs = &ftKb_Init_803CB3E8[arg0][arg1];
                 if (cs->matanim_joint_name != NULL) {
                     lbArchive_80017040(NULL, costumes[arg1].dat_filename, item,
                                        cs->joint_name, &item->matanim,
@@ -2882,17 +2876,6 @@ void ftKb_SpecialN_800EF040(Fighter_GObj* gobj, int arg1, KirbyHatStruct* hat)
     }
 }
 
-char ftKb_Init_804D3DAC[2] = "0";
-
-typedef struct ftKirbyCopyData {
-    u8 pad_0[0x1C60];
-    ftKirby_CostumeArchive* costume_archives[FTKIND_MAX];
-    u8 pad_1CE4[0xB8];
-    char parts_dobj_over[0x24];
-    char source_name[0xC];
-    char fighter_dobj_over[0x18];
-} ftKirbyCopyData;
-
 /// @todo `byte_base` is only ever written; both callers derive their
 /// destination offset from `total_dobjs` instead.
 static inline void
@@ -2944,7 +2927,6 @@ void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
     s32 joint_idx;
     HSD_JObj* jobj;
     HSD_Joint* root;
-    ftKirbyCopyData* data = (ftKirbyCopyData*) ftKb_Init_MotionStateTable;
     s32 byte_off;
     Fighter* fp = GET_FIGHTER(gobj);
     s32 total_dobjs;
@@ -2958,7 +2940,7 @@ void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
     s32 byte_base;
 
     ftPartsPObjSetDefaultClass();
-    root = data->costume_archives[arg1][fp->x619_costume_id].joint;
+    root = ftKb_Init_803C9FC8[arg1][fp->x619_costume_id].joint;
     ftKb_SpecialN_insert_joint_refs(&total_dobjs, root, fp, &insert_part_idx,
                                     &current_joint, &joint_idx, &byte_base);
     joint_idx = 0;
@@ -2993,8 +2975,8 @@ void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
                     break;
                 }
                 if (total_dobjs >= 0x20) {
-                    OSReport(data->parts_dobj_over);
-                    __assert(data->source_name, 0x43E, ftKb_Init_804D3DAC);
+                    OSReport("fighter parts model dobj num over!\n");
+                    HSD_ASSERT(0x43E, 0);
                 }
                 dst = (HSD_DObj**) fp->u.gw.x2244_chefVar2;
                 *(HSD_DObj**) ((u8*) dst + dst_off) = dobj;
@@ -3009,8 +2991,8 @@ void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
                 group_count += 1;
             }
             if (group_count >= 0x80) {
-                OSReport(data->fighter_dobj_over);
-                __assert(data->source_name, 0x44C, ftKb_Init_804D3DAC);
+                OSReport("fighter dobj num over!\n");
+                HSD_ASSERT(0x44C, 0);
             }
             fp->parts[insert_part_idx].flags_b6 = true;
         }
@@ -3051,7 +3033,6 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
     s32 joint_idx;
     HSD_JObj* jobj;
     HSD_Joint* root = (HSD_Joint*) (jobj = (HSD_JObj*) hat->hat_dynamics[2]);
-    ftKirbyCopyData* data = (ftKirbyCopyData*) ftKb_Init_MotionStateTable;
     s32 byte_off;
     Fighter* fp = GET_FIGHTER(gobj);
     s32 total_dobjs;
@@ -3102,8 +3083,8 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
                         break;
                     }
                     if (total_dobjs >= 0x20) {
-                        OSReport(data->parts_dobj_over);
-                        __assert(data->source_name, 0x4B9, ftKb_Init_804D3DAC);
+                        OSReport("fighter parts model dobj num over!\n");
+                        HSD_ASSERT(0x4B9, 0);
                     }
                     dst = (HSD_DObj**) fp->u.gw.x224C_greenhouseGObj;
                     *(HSD_DObj**) ((u8*) dst + dst_off) = dobj;
@@ -3118,8 +3099,8 @@ void ftKb_SpecialN_800EF438(Fighter_GObj* gobj, KirbyHatStruct* hat)
                     group_count += 1;
                 }
                 if (group_count >= 0x80) {
-                    OSReport(data->fighter_dobj_over);
-                    __assert(data->source_name, 0x4C7, ftKb_Init_804D3DAC);
+                    OSReport("fighter dobj num over!\n");
+                    HSD_ASSERT(0x4C7, 0);
                 }
             }
             insert_part_idx++;
