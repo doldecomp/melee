@@ -1,5 +1,7 @@
 #include "synth.h" // IWYU pragma: export
 
+#include <dolphin/ax.h>
+
 static int HSD_Synth_804D6018 = -1; // audio heap
 static int HSD_Synth_804D6028[2] = { 0 };
 
