@@ -3843,6 +3843,7 @@ static GXColor mnCharSel_804DC594 = { 220, 0, 0, 255 };
 s32 mnCharSel_802640A0(void)
 {
     HSD_JObj* sp108;
+    UNUSED u8 unkF8[16];
     Point3d spEC;
     GXColor spE8;
     GXColor spE4;
@@ -4881,7 +4882,7 @@ s32 mnCharSel_802640A0(void)
     }
 
     mnCharSel_8025EE8C(mnCharSel_804D6CB0->match_type);
-    PAD_STACK(0x64);
+    PAD_STACK(0x54);
     return lbAudioAx_80023F28(gmMainLib_8015ECB0());
 }
 
