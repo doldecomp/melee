@@ -89,7 +89,7 @@ int lbAudioAx_80023220(int idx)
     return 0;
 }
 
-/// @todo Only differs by register allocation and one extra zero constant.
+/// @todo Only differs by register allocation.
 void fn_80023254(s32 arg0)
 {
     int local_arr[0x38];
@@ -101,6 +101,7 @@ void fn_80023254(s32 arg0)
     int* list = lbl_80433B44;
     int* shift;
     int count;
+    int zero;
     int index;
     int* shift_base;
     int i;
@@ -111,24 +112,24 @@ void fn_80023254(s32 arg0)
     init = lbl_80433B44;
     used = local_base;
     base = lbl_803BB300;
-    count = 0;
+    zero = count = 0;
     for (i = 0; i < 7; i++, init += 8, used += 8) {
         init[0] = 0x37;
-        used[0] = 0;
+        used[0] = zero;
         init[1] = 0x37;
-        used[1] = 0;
+        used[1] = zero;
         init[2] = 0x37;
-        used[2] = 0;
+        used[2] = zero;
         init[3] = 0x37;
-        used[3] = 0;
+        used[3] = zero;
         init[4] = 0x37;
-        used[4] = 0;
+        used[4] = zero;
         init[5] = 0x37;
-        used[5] = 0;
+        used[5] = zero;
         init[6] = 0x37;
-        used[6] = 0;
+        used[6] = zero;
         init[7] = 0x37;
-        used[7] = 0;
+        used[7] = zero;
     }
 
     shift_base = lbl_80433B44;
