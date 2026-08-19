@@ -1290,7 +1290,7 @@ config.libs = [
             Object(Matching, "melee/mn/mninfobonus.c"),
             Object(NonMatching, "melee/mn/mnsnap.c"),
             Object(Matching, "melee/mn/mngallery.c"),
-            Object(NonMatching, "melee/mn/mnstagesel.c"),
+            Object(Matching, "melee/mn/mnstagesel.c"),
             Object(NonMatching, "melee/mn/mncharsel.c"),
         ],
     ),
