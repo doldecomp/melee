@@ -200,7 +200,7 @@ void HSD_SynthSFXLoadNewProc(void)
     }
 }
 
-int HSD_SynthSFXLoad(const char* filename, int bankID, int (*cb)(int, int),
+int HSD_SynthSFXLoad(const char* filename, int bankID, void (*cb)(int, int),
                      int mode)
 {
     int entrynum;

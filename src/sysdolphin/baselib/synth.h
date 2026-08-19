@@ -8,8 +8,8 @@ struct HSD_SynthSFXNode;
 /* 388330 */ void* HSD_AudioMalloc(size_t);
 /* 38838C */ void HSD_AudioFree(void*);
 /* 38893C */ void HSD_SynthSFXLoadNewProc(void);
-/* 3889B8 */ int HSD_SynthSFXLoad(const char* filename, int, int (*)(int, int),
-                                  int);
+/* 3889B8 */ int HSD_SynthSFXLoad(const char* filename, int,
+                                  void (*)(int, int), int);
 /* 388B0C */ void HSD_SynthSFXWaitForLoadCompletion(void (*)(void));
 /* 388B50 */ int HSD_SynthSFXGetPendingLoadCount(void);
 /* 388B60 */ int HSD_SynthSFXCancelLoad(int);
