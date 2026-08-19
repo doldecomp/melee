@@ -4,6 +4,7 @@ symbols: config/GALE01/symbols.txt
 splits: config/GALE01/splits.txt
 mw_comment_version: 8
 quick_analysis: true
+globalize_symbols: false
 
 block_relocations:
 # GXColors in dbitem
