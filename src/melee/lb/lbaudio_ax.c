@@ -111,8 +111,9 @@ void fn_80023254(s32 arg0)
     int* list;
     int zero;
 
-    zero = count = 0;
-    for (i = 0; i < 0x38; i++) {
+    PAD_STACK(8);
+
+    for (i = 0; zero = count = 0, i < 0x38; i++) {
         lbl_80433B44[i] = 0x37;
         used[i] = zero;
     }
