@@ -2671,7 +2671,7 @@ void lbAudioAx_8002838C(void)
     lbl_804D6450 = 0;
 }
 
-s32 lbAudioAx_80028690(void)
+void lbAudioAx_80028690(void)
 {
     lbAudioAx_PoolAlloc* st = &lbl_80433710;
     s32 var_r29;
@@ -2759,9 +2759,9 @@ s32 lbAudioAx_80028690(void)
 
     {
         int i;
-        for (i = 0; i < 17; i++) {
-            lbl_80433710.x2C[i] = 0x83D60;
-            lbl_80433710.x70[i] = 0;
+        for (i = 0; i <= 16; i++) {
+            st->x2C[i] = 0x83D60;
+            st->x70[i] = 0;
         }
     }
 
@@ -2781,8 +2781,6 @@ s32 lbAudioAx_80028690(void)
     lbl_804D6434 = 0;
     lbl_804D38C4 = 1.0F;
     lbl_804D38C8 = 1.0F;
-
-    return st->x70[16];
 }
 
 int lbAudioAx_80028B2C(void)

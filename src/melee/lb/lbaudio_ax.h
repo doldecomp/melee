@@ -102,7 +102,7 @@
 /* 027DF8 */ void lbAudioAx_80027DF8(void);
 /* 02835C */ void lbAudioAx_8002835C(void);
 /* 02838C */ void lbAudioAx_8002838C(void);
-/* 028690 */ s32 lbAudioAx_80028690(void);
+/* 028690 */ void lbAudioAx_80028690(void);
 /* 028B2C */ int lbAudioAx_80028B2C(void);
 /* 028B4C */ int lbAudioAx_80028B4C(void);
 /* 028B6C */ void lbAudioAx_80028B6C(void);
