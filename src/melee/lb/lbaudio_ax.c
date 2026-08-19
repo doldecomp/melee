@@ -927,20 +927,19 @@ void lbAudioAx_80024D78(int arg0)
 
 void lbAudioAx_80024DC4(int arg0)
 {
-    lbAudioAx_PoolAlloc* st = &lbl_80433710;
-    s32* p = st->x2C;
-    s32* q = st->x2C;
+    s32* p = lbl_8043373C;
+    s32* q = lbl_8043373C;
     int i;
     for (i = 0; i < 0x10; i++) {
         if (p[i] == arg0) {
-            st->x70[i] = 0xa;
+            lbl_80433780[i] = 0xa;
             return;
         }
     }
     for (i = 0; i < 0x10; i++) {
         if ((u32) q[i] == 0x83D60U) {
-            st->x2C[i] = arg0;
-            st->x70[i] = 0xa;
+            lbl_8043373C[i] = arg0;
+            lbl_80433780[i] = 0xa;
             return;
         }
     }
@@ -1848,7 +1847,7 @@ void lbAudioAx_ObjFree(void* obj)
 {
     if (obj != NULL) {
         void* p = obj;
-        HSD_ObjFree(&lbl_80433710.alloc, p);
+        HSD_ObjFree(&lbl_80433710, p);
     }
 }
 HSD_GObj* lbAudioAx_800263E8(float f1, HSD_GObj* arg1, int sfx_id, int arg3,
@@ -1874,7 +1873,7 @@ HSD_GObj* lbAudioAx_800263E8(float f1, HSD_GObj* arg1, int sfx_id, int arg3,
 
         gobj = GObj_Create(0x17, 0x3E, 0);
         if (gobj != NULL) {
-            userdata = HSD_ObjAlloc(&lbl_80433710.alloc);
+            userdata = HSD_ObjAlloc(&lbl_80433710);
             if (userdata == NULL) {
                 HSD_GObjPLink_80390228(gobj);
                 gobj = NULL;
@@ -2441,8 +2440,8 @@ static inline void lbAudioAx_80027DF8_inline(void)
         s32 i;
         s32* sl;
         s32* t;
-        t = lbl_80433710.x70;
-        sl = lbl_80433710.x2C;
+        t = lbl_80433780;
+        sl = lbl_8043373C;
         for (i = 0; i < 16; t++, sl++, i++) {
             if (*t > 0) {
                 (*t)--;
@@ -2544,8 +2543,8 @@ void lbAudioAx_80027DF8(void)
     fn_80024654(0);
 
     if (lbl_804D641C == 1) {
-        s32* slots = lbl_80433710.x2C;
-        s32* timers = lbl_80433710.x70;
+        s32* slots = lbl_8043373C;
+        s32* timers = lbl_80433780;
         s32 idx;
         for (idx = 0; idx < 0x10; idx++) {
             s32 val = slots[idx];
@@ -2564,7 +2563,7 @@ void lbAudioAx_80027DF8(void)
 
 void lbAudioAx_8002835C(void)
 {
-    HSD_ObjAllocInit(&lbl_80433710.alloc, 0x48, 4);
+    HSD_ObjAllocInit(&lbl_80433710, 0x48, 4);
 }
 
 int lbl_80433B44[0x1F124 / 4];
@@ -2573,7 +2572,6 @@ void lbAudioAx_8002838C(void)
 {
     struct AXFX_REVERBSTD rvbStd;
     struct AXFX_DELAY delay;
-    lbAudioAx_PoolAlloc* st = &lbl_80433710;
     int* p1;
     int* p2;
     int* p3;
@@ -2583,7 +2581,7 @@ void lbAudioAx_8002838C(void)
     ARInit((u32*) &lbl_80433B44[0x38], 0x10);
     ARQInit();
     AIInit(NULL);
-    PAD_STACK(4);
+    PAD_STACK(8);
 
     lbl_804D643C = offsets_arr_803BC4E4[0][0];
     lbl_804D6440 = offsets_arr_803BC4E4[0x33][0];
@@ -2673,7 +2671,6 @@ void lbAudioAx_8002838C(void)
 
 void lbAudioAx_80028690(void)
 {
-    lbAudioAx_PoolAlloc* st = &lbl_80433710;
     s32 var_r29;
 
     lbl_804D3874 = HSD_SynthGetSoundMode();
@@ -2760,8 +2757,8 @@ void lbAudioAx_80028690(void)
     {
         int i;
         for (i = 0; i <= 16; i++) {
-            st->x2C[i] = 0x83D60;
-            st->x70[i] = 0;
+            lbl_8043373C[i] = 0x83D60;
+            lbl_80433780[i] = 0;
         }
     }
 
