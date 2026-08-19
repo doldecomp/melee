@@ -4127,7 +4127,7 @@ s32 mnCharSel_802640A0(void)
         cursor->x10 = -21.5f;
     }
 
-    doors = CSS_ALL->doors_data.doors;
+    doors = mnCharSel_803F0DFC.doors;
     for (i = 0; i < num_players; i++) {
         struct CSSCharModel* model;
         int player;
@@ -4217,7 +4217,7 @@ s32 mnCharSel_802640A0(void)
                 text->pos_z = 0.0f;
             } else {
                 HSD_JObj* spA4;
-                u8 tag_box_joint = CSS_ALL->doors_data.tag_box_joint;
+                u8 tag_box_joint = mnCharSel_803F0DFC.tag_box_joint;
                 lb_80011E24(mnCharSel_804D6CC0, &spA4, tag_box_joint, -1);
                 cc0 = spA4;
                 HSD_ForeachAnim(cc0, JOBJ_TYPE, JOBJ_MASK, HSD_AObjReqAnim,
@@ -4265,7 +4265,7 @@ s32 mnCharSel_802640A0(void)
         }
         if (mnCharSel_804D6CF5 == 1) {
             lb_80011E24(mnCharSel_804D6CC0, &sp108,
-                        CSS_ALL->doors_data.name_list_joint, -1);
+                        mnCharSel_803F0DFC.name_list_joint, -1);
         } else {
             lb_80011E24(mnCharSel_804D6CC0, &sp108, tag->list_joint, -1);
         }
@@ -4381,60 +4381,60 @@ s32 mnCharSel_802640A0(void)
             {
                 u8 cpu_level =
                     css->data.data.players[mnCharSel_804D6CF0].cpu_level;
-                CSS_ALL->doors_data.xce = cpu_level;
-                CSS_ALL->doors_data.xcd = cpu_level;
+                mnCharSel_803F0DFC.xce = cpu_level;
+                mnCharSel_803F0DFC.xcd = cpu_level;
             }
-            CSS_ALL->doors_data.xcf = 124.0f;
-            CSS_ALL->doors_data.xd3 = HSD_SisLib_803A6754(0, ctx);
-            CSS_ALL->doors_data.scroll_flag = 1;
-            text = CSS_ALL->doors_data.xd3;
+            mnCharSel_803F0DFC.xcf = 124.0f;
+            mnCharSel_803F0DFC.xd3 = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_803F0DFC.scroll_flag = 1;
+            text = mnCharSel_803F0DFC.xd3;
             text->pos_x = -0.5f;
             text->pos_y = 9.0f;
             text->pos_z = 0.0f;
-            text = CSS_ALL->doors_data.xd3;
+            text = mnCharSel_803F0DFC.xd3;
             text->box_size_x = 248.0f;
             text->box_size_y = 32.0f;
-            text = CSS_ALL->doors_data.xd3;
+            text = mnCharSel_803F0DFC.xd3;
             text->font_size.x = 0.08f;
             text->font_size.y = 0.09f;
-            CSS_ALL->doors_data.xd3->x4E = 1;
-            CSS_ALL->doors_data.xd3->default_kerning = 1;
-            CSS_ALL->doors_data.xd3->default_alignment = 1;
-            CSS_ALL->doors_data.xd3->x4C = 1;
-            HSD_SisLib_803A6B98(CSS_ALL->doors_data.xd3, 0.0f, 0.0f,
+            mnCharSel_803F0DFC.xd3->x4E = 1;
+            mnCharSel_803F0DFC.xd3->default_kerning = 1;
+            mnCharSel_803F0DFC.xd3->default_alignment = 1;
+            mnCharSel_803F0DFC.xd3->x4C = 1;
+            HSD_SisLib_803A6B98(mnCharSel_803F0DFC.xd3, 0.0f, 0.0f,
                                 "\x82\x75\x82\x64\x82\x71\x82\x78\x20\x82\x64"
                                 "\x82\x60\x82\x72\x82\x78");
             {
                 GXColor color = spE4;
-                HSD_SisLib_803A74F0(CSS_ALL->doors_data.xd3, 0, &color);
+                HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 0, &color);
             }
-            HSD_SisLib_803A6B98(CSS_ALL->doors_data.xd3, 0.0f, 0.0f,
+            HSD_SisLib_803A6B98(mnCharSel_803F0DFC.xd3, 0.0f, 0.0f,
                                 "\x82\x64\x82\x60\x82\x72\x82\x78");
             {
                 GXColor color = spE0;
-                HSD_SisLib_803A74F0(CSS_ALL->doors_data.xd3, 1, &color);
+                HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 1, &color);
             }
-            HSD_SisLib_803A6B98(CSS_ALL->doors_data.xd3, 0.0f, 0.0f,
+            HSD_SisLib_803A6B98(mnCharSel_803F0DFC.xd3, 0.0f, 0.0f,
                                 "\x82\x6d\x82\x6e\x82\x71\x82\x6c\x82\x60\x82"
                                 "\x6b");
             {
                 GXColor color = spDC;
-                HSD_SisLib_803A74F0(CSS_ALL->doors_data.xd3, 2, &color);
+                HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 2, &color);
             }
-            HSD_SisLib_803A6B98(CSS_ALL->doors_data.xd3, 0.0f, 0.0f,
+            HSD_SisLib_803A6B98(mnCharSel_803F0DFC.xd3, 0.0f, 0.0f,
                                 "\x82\x67\x82\x60\x82\x71\x82\x63");
             {
                 GXColor color = hard_color;
-                HSD_SisLib_803A74F0(CSS_ALL->doors_data.xd3, 3, &color);
+                HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 3, &color);
             }
-            HSD_SisLib_803A6B98(CSS_ALL->doors_data.xd3, 0.0f, 0.0f,
+            HSD_SisLib_803A6B98(mnCharSel_803F0DFC.xd3, 0.0f, 0.0f,
                                 "\x82\x75\x82\x64\x82\x71\x82\x78\x20\x82\x67"
                                 "\x82\x60\x82\x71\x82\x63");
             {
                 GXColor color = spD4;
-                HSD_SisLib_803A74F0(CSS_ALL->doors_data.xd3, 4, &color);
+                HSD_SisLib_803A74F0(mnCharSel_803F0DFC.xd3, 4, &color);
             }
-            HSD_GObjGXLink_803909D8(CSS_ALL->doors_data.xd3->entity,
+            HSD_GObjGXLink_803909D8(mnCharSel_803F0DFC.xd3->entity,
                                     mnCharSel_804D6CBC);
             if (mnCharSel_804D6CB0->match_type == 0xD) {
                 lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x34, -1);
@@ -4747,7 +4747,7 @@ s32 mnCharSel_802640A0(void)
     } else {
         u8 mt;
         s32 clear;
-        CSS_ALL->doors_data.scroll_flag = 0;
+        mnCharSel_803F0DFC.scroll_flag = 0;
         text =
             HSD_SisLib_803A5ACC(0, ctx, -12.0f, -23.3f, 0.0f, 450.0f, 32.0f);
         text->default_alignment = 1;
@@ -4810,23 +4810,23 @@ s32 mnCharSel_802640A0(void)
         mnCharSel_804D6CB0->data.data.players[0].slot_type = 3;
         mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0].slot_type =
             0;
-        CSS_ALL->doors_data.doors[0].p_kind = 0;
+        mnCharSel_803F0DFC.doors[0].p_kind = 0;
         {
             CSSData* css = mnCharSel_804D6CB0;
-            CSS_ALL->doors_data.doors[0].costume =
+            mnCharSel_803F0DFC.doors[0].costume =
                 css->data.data.players[mnCharSel_804D6CF0].color;
-            CSS_ALL->doors_data.doors[0].sel_icon_prev =
-                CSS_ALL->doors_data.doors[0].sel_icon;
+            mnCharSel_803F0DFC.doors[0].sel_icon_prev =
+                mnCharSel_803F0DFC.doors[0].sel_icon;
             if (css->match_type != 0x17) {
                 goto doors_done;
             }
             css->data.data.players[mnCharSel_804D6CF1].slot_type = 1;
         }
-        CSS_ALL->doors_data.doors[1].p_kind = 1;
-        CSS_ALL->doors_data.doors[1].costume =
+        mnCharSel_803F0DFC.doors[1].p_kind = 1;
+        mnCharSel_803F0DFC.doors[1].costume =
             mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1].color;
-        CSS_ALL->doors_data.doors[1].sel_icon_prev =
-            CSS_ALL->doors_data.doors[1].sel_icon;
+        mnCharSel_803F0DFC.doors[1].sel_icon_prev =
+            mnCharSel_803F0DFC.doors[1].sel_icon;
     doors_done:;
     } else {
         for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
