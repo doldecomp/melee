@@ -3864,6 +3864,9 @@ s32 mnCharSel_802640A0(void)
     s32 num_players;
     s32 row_a;
     HSD_JObj* jobj43;
+    CSSTag* tag;
+    GXColor* color_ptr;
+    GXColor* color2_ptr;
     s32 i;
     HSD_JObj* cc0;
     u8 match_type = mnCharSel_804D6CB0->match_type;
@@ -4185,8 +4188,10 @@ s32 mnCharSel_802640A0(void)
     }
 
     spE8 = mnCharSel_804DC580;
-    for (i = 0; i < num_players; i++) {
-        CSSTag* tag = &CSS_ALL->doors_data.tags[i];
+    color_ptr = &color;
+    color2_ptr = &color2;
+    tag = &mnCharSel_803F0DFC.tags[0];
+    for (i = 0; i < num_players; i++, tag++) {
         CSSTagData* td;
         int player;
         s32 found;
@@ -4217,8 +4222,8 @@ s32 mnCharSel_802640A0(void)
                 text->pos_z = 0.0f;
             } else {
                 HSD_JObj* spA4;
-                lb_80011E24(mnCharSel_804D6CC0, &spA4,
-                            CSS_ALL->doors_data.tag_box_joint, -1);
+                u8 tag_box_joint = CSS_ALL->doors_data.tag_box_joint;
+                lb_80011E24(mnCharSel_804D6CC0, &spA4, tag_box_joint, -1);
                 cc0 = spA4;
                 HSD_ForeachAnim(cc0, JOBJ_TYPE, JOBJ_MASK, HSD_AObjReqAnim,
                                 AOBJ_ARG_AF, 2.0);
@@ -4238,8 +4243,8 @@ s32 mnCharSel_802640A0(void)
             HSD_SisLib_803A6B98(td->text, 100.0f, 0.0f,
                                 "\x81\x45\x81\x45\x81\x45\x81\x45");
         } else {
-            lb_80011E24(mnCharSel_804D6CC0, &tag_name_jobj, tag->name_jointl,
-                        -1);
+            u8 name_joint = tag->name_jointl;
+            lb_80011E24(mnCharSel_804D6CC0, &tag_name_jobj, name_joint, -1);
             HSD_ForeachAnim(tag_name_jobj, JOBJ_TYPE, JOBJ_MASK,
                             HSD_AObjReqAnim, AOBJ_ARG_AF, 2.0);
             HSD_JObjAnimAll(tag_name_jobj);
@@ -4257,6 +4262,7 @@ s32 mnCharSel_802640A0(void)
                 text->pos_y = sy;
                 text->pos_z = sz;
             }
+            text = td->text;
             text->box_size_x = 160.0f;
             text->box_size_y = 32.0f;
             HSD_SisLib_803A6B98(td->text, 80.0f, 0.0f,
@@ -4295,13 +4301,13 @@ s32 mnCharSel_802640A0(void)
         HSD_SisLib_803A6B98(td->name_ls, 0.0f, 0.0f,
                             "\x81\x45\x81\x45\x81\x45\x81\x45\x81\x45\x81\x45"
                             "\x81\x45\x81\x45\x81\x45\x81\x45\x81\x45");
-        color = spE8;
-        HSD_SisLib_803A74F0(td->name_ls, 0, &color);
+        *color_ptr = spE8;
+        HSD_SisLib_803A74F0(td->name_ls, 0, color_ptr);
         HSD_SisLib_803A6B98(td->name_ls, 0.0f, 0.0f,
                             "\x82\x6d\x82\x60\x82\x6c\x82\x64\x20\x82\x64\x82"
                             "\x6d\x82\x73\x82\x71\x82\x78");
-        color2 = spE8;
-        HSD_SisLib_803A74F0(td->name_ls, 1, &color2);
+        *color2_ptr = spE8;
+        HSD_SisLib_803A74F0(td->name_ls, 1, color2_ptr);
         found = 0;
         do {
             HSD_SisLib_803A6B98(td->name_ls, 10.0f, 0.0f,
@@ -4309,7 +4315,7 @@ s32 mnCharSel_802640A0(void)
             found++;
         } while (found < 9);
         for (found = 0; found < 0x78; found++) {
-            if (GetNameText(found) == NULL) {
+            if (GetNameText((u8) found) == NULL) {
                 break;
             }
         }
@@ -4445,12 +4451,12 @@ s32 mnCharSel_802640A0(void)
                 lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x46, -1);
                 HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
             } else {
-                CSS_ALL->data2.stocks =
+                data2.stocks =
                     mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
                         .stocks;
-                updateStockIcons(&CSS_ALL->data2, &sp70, 1);
+                updateStockIcons(&data2, &sp70, 1);
                 mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
-                    .stocks = CSS_ALL->data2.stocks;
+                    .stocks = data2.stocks;
             }
             lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x40, -1);
             lb_8000B1CC(sp108, NULL, &spEC);
@@ -4773,11 +4779,11 @@ s32 mnCharSel_802640A0(void)
         if (clear != 0) {
             for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
                 lb_80011E24(mnCharSel_804D6CC0, &sp108,
-                            CSS_ALL->data2.ko_stars[i].joint, -1);
+                            data2.ko_stars[i].joint, -1);
                 lb_8000B1CC(sp108, NULL, &spEC);
                 text = HSD_SisLib_803A5ACC(0, ctx, spEC.x, -spEC.y - 0.9f,
                                            spEC.z, 32.0f, 32.0f);
-                CSS_ALL->data2.ko_stars[i].text = text;
+                data2.ko_stars[i].text = text;
                 text->font_size.x = 0.07f;
                 text->font_size.y = 0.07f;
                 mnCharSel_8025D1C4(i, 0);
@@ -4785,7 +4791,7 @@ s32 mnCharSel_802640A0(void)
         } else {
             for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
                 lb_80011E24(mnCharSel_804D6CC0, &sp108,
-                            CSS_ALL->data2.ko_stars[i].joint, -1);
+                            data2.ko_stars[i].joint, -1);
                 HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
             }
         }
