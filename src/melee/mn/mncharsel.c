@@ -833,11 +833,12 @@ void mnCharSel_8025DB34(u8 arg0)
             mnCharSel_803F0DFC.doors[arg0].sel_icon_prev = new_icon;
             {
                 CSSData* css = mnCharSel_804D6CB0;
-                u8 door_count = mnCharSel_804D6CF5;
                 u8 costume_var = 0;
                 while (1) {
                     mnCharSel_803F0DFC.doors[arg0].costume = costume_var;
-                    if (!isDuplicateCostume(arg0, css, door_count, true)) {
+                    if (!isDuplicateCostume(arg0, css, mnCharSel_804D6CF5,
+                                            true))
+                    {
                         break;
                     }
                     costume_var++;
