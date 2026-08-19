@@ -3587,10 +3587,10 @@ void fn_802633B0(HSD_GObj* gobj)
         HSD_SisLib_803A746C(tag->name_ls, 1, 0.0f,
                             (32.0f * (f32) tag->next_tag) + tag->x8);
         {
-            s32 j;
-            s32 trunc;
-            s32 page_off;
             GXColor* name_color = &row_color;
+            s32 j;
+            s32 page_off;
+            s32 trunc;
             GXColor* used_name_color = &used_row_color;
             page_off = ((s32) tag->x8 / 32) + 1;
             for (j = 0; j < 9; j++) {
