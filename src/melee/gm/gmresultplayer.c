@@ -1097,7 +1097,7 @@ int fn_801796F0(int arg0)
     return count;
 }
 
-int fn_80179854(void)
+void fn_80179854(void)
 {
     ResultsDisplayData* disp = &lbl_8046E1B0;
     MatchEnd* match_end = &disp->state.match_end;
