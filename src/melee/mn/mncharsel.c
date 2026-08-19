@@ -207,7 +207,7 @@ static inline u32 getAllStarHighscore(u8 hud)
     return gm_80162FD0(hud);
 }
 
-static inline f32 tenths(f32 v)
+static f32 tenths(f32 v)
 {
     return (f32) (int) (10.0f * v) / 10.0f;
 }
