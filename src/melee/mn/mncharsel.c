@@ -763,6 +763,18 @@ static inline void pickUniqueCostume(int door)
     }
 }
 
+static inline s32 getHandicapValue(int port)
+{
+    s32 hval;
+    if (gmMainLib_GetGameRules()->handicap == 1) {
+        hval = (u8) gm_801685D4(
+            port, mnCharSel_804D6CB0->data.data.players[port].xA);
+    } else {
+        hval = (u8) mnCharSel_804D6CB0->data.data.players[port].handicap;
+    }
+    return hval != 0 ? hval : 1;
+}
+
 void mnCharSel_8025DB34(u8 arg0)
 {
     HSD_JObj* sp90;
@@ -793,10 +805,7 @@ void mnCharSel_8025DB34(u8 arg0)
     s32 hud_idx;
     s32 var_r5;
     s32 var_r23;
-    u8* team_ptr;
     f32 var_f1;
-
-    PAD_STACK(0x20);
 
     sel_icon = mnCharSel_803F0DFC.doors[arg0].sel_icon;
     hud_idx = icons[sel_icon].ft_hudindex;
@@ -959,15 +968,7 @@ void mnCharSel_8025DB34(u8 arg0)
                     }
                     HSD_ForeachAnim(sp90, JOBJ_TYPE, ALL_TYPE_MASK,
                                     HSD_AObjReqAnim, AOBJ_ARG_AF, var_f1);
-                    if (gmMainLib_GetGameRules()->handicap == 1) {
-                        hval = (u8) gm_801685D4(
-                            (int) arg0,
-                            mnCharSel_804D6CB0->data.data.players[arg0].xA);
-                    } else {
-                        hval = (u8) mnCharSel_804D6CB0->data.data.players[arg0]
-                                   .handicap;
-                    }
-                    hval = (hval != 0) ? hval : 1;
+                    hval = getHandicapValue((int) arg0);
                     temp_f31 = (f32) hval;
                     lb_80011E24(mnCharSel_804D6CC0, &sp68,
                                 mnCharSel_803F0DFC.doors[arg0].cpuslider_joint,
@@ -978,16 +979,7 @@ void mnCharSel_8025DB34(u8 arg0)
                     HSD_ForeachAnim(sp68, JOBJ_TYPE, TOBJ_MASK,
                                     HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
                     sp90 = sp68;
-                    if (gmMainLib_GetGameRules()->handicap == 1) {
-                        hval2 = (u8) gm_801685D4(
-                            (int) arg0,
-                            mnCharSel_804D6CB0->data.data.players[arg0].xA);
-                    } else {
-                        hval2 =
-                            (u8) mnCharSel_804D6CB0->data.data.players[arg0]
-                                .handicap;
-                    }
-                    hval2 = (hval2 != 0) ? hval2 : 1;
+                    hval2 = getHandicapValue((int) arg0);
                     temp_f31 = 1.25f * (f32) (hval2 - 1);
                     HSD_JObjSetTranslateX(sp90, temp_f31);
 
@@ -1036,16 +1028,7 @@ void mnCharSel_8025DB34(u8 arg0)
                         HSD_ForeachAnim(sp90, JOBJ_TYPE, ALL_TYPE_MASK,
                                         HSD_AObjReqAnim, AOBJ_ARG_AF, var_f1);
                     }
-                    if (gmMainLib_GetGameRules()->handicap == 1) {
-                        hval3 = (u8) gm_801685D4(
-                            (int) arg0,
-                            mnCharSel_804D6CB0->data.data.players[arg0].xA);
-                    } else {
-                        hval3 =
-                            (u8) mnCharSel_804D6CB0->data.data.players[arg0]
-                                .handicap;
-                    }
-                    hval3 = (hval3 != 0) ? hval3 : 1;
+                    hval3 = getHandicapValue((int) arg0);
                     temp_f31 = (f32) hval3;
                     lb_80011E24(mnCharSel_804D6CC0, &sp58,
                                 mnCharSel_803F0DFC.doors[arg0].cpuslider_joint,
@@ -1056,16 +1039,7 @@ void mnCharSel_8025DB34(u8 arg0)
                     HSD_ForeachAnim(sp58, JOBJ_TYPE, TOBJ_MASK,
                                     HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
                     sp90 = sp58;
-                    if (gmMainLib_GetGameRules()->handicap == 1) {
-                        hval4 = (u8) gm_801685D4(
-                            (int) arg0,
-                            mnCharSel_804D6CB0->data.data.players[arg0].xA);
-                    } else {
-                        hval4 =
-                            (u8) mnCharSel_804D6CB0->data.data.players[arg0]
-                                .handicap;
-                    }
-                    hval4 = (hval4 != 0) ? hval4 : 1;
+                    hval4 = getHandicapValue((int) arg0);
                     temp_f31 = 1.25f * (f32) (hval4 - 1);
                     HSD_JObjSetTranslateX(sp90, temp_f31);
 
@@ -1154,8 +1128,7 @@ void mnCharSel_8025DB34(u8 arg0)
         } else {
             /* Teams mode */
             HSD_JObjClearFlags(sp90, JOBJ_HIDDEN);
-            team_ptr = &mnCharSel_803F0DFC.doors[arg0].team;
-            var_r23 = *team_ptr;
+            var_r23 = mnCharSel_803F0DFC.doors[arg0].team;
 
             temp_f31 = (f32) mnCharSel_804D50D0[var_r23];
             lb_80011E24(mnCharSel_804D6CC0, &sp3C,
@@ -1187,7 +1160,8 @@ void mnCharSel_8025DB34(u8 arg0)
                 HSD_ForeachAnim(sp34, JOBJ_TYPE, MOBJ_MASK, HSD_AObjStopAnim,
                                 AOBJ_ARG_AOV, 0, 0);
             }
-            mnCharSel_804D6CB0->data.data.players[arg0].team = *team_ptr;
+            mnCharSel_804D6CB0->data.data.players[arg0].team =
+                mnCharSel_803F0DFC.doors[arg0].team;
         }
 
         /* Hide/show nametag text */
