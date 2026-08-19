@@ -93,43 +93,44 @@ int lbAudioAx_80023220(int idx)
 void fn_80023254(s32 arg0)
 {
     int local_arr[0x38];
-    int* init;
-    int* used;
+    int* shift;
     s8* type;
-    int* local_base = local_arr;
+    int* used;
+    int* init;
+    int* clear;
     int* priority;
     int* list = lbl_80433B44;
-    int* shift;
+    int* local_base = local_arr;
     int count;
-    int zero;
     int index;
-    int* shift_base;
     int i;
     char* base;
+    int* shift_base;
+    int zero;
 
     PAD_STACK(8);
 
     init = lbl_80433B44;
-    used = local_base;
+    clear = local_base;
     base = lbl_803BB300;
-    zero = count = 0;
-    for (i = 0; i < 7; i++, init += 8, used += 8) {
+    for (i = 0; i < 7; i++, init += 8, clear += 8) {
         init[0] = 0x37;
-        used[0] = zero;
+        zero = count = 0;
+        clear[0] = zero;
         init[1] = 0x37;
-        used[1] = zero;
+        clear[1] = zero;
         init[2] = 0x37;
-        used[2] = zero;
+        clear[2] = zero;
         init[3] = 0x37;
-        used[3] = zero;
+        clear[3] = zero;
         init[4] = 0x37;
-        used[4] = zero;
+        clear[4] = zero;
         init[5] = 0x37;
-        used[5] = zero;
+        clear[5] = zero;
         init[6] = 0x37;
-        used[6] = zero;
+        clear[6] = zero;
         init[7] = 0x37;
-        used[7] = zero;
+        clear[7] = zero;
     }
 
     shift_base = lbl_80433B44;
