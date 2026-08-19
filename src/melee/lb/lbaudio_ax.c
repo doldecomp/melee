@@ -98,9 +98,9 @@ void fn_80023254(s32 arg0)
     int* local_base = local_arr;
     s8* type;
     int* priority;
+    int* shift;
     int count;
     int index;
-    int* shift;
     int* shift_base;
     int i;
     char* base;
