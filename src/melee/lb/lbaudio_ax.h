@@ -87,7 +87,7 @@
 /* 0267B0 */ void fn_800267B0(void);
 /* 0268B4 */ void fn_800268B4(void);
 /* 0269AC */ void fn_800269AC(void);
-/* 026C04 */ int fn_80026C04(int arg0, int);
+/* 026C04 */ void fn_80026C04(int arg0, int);
 /* 026E58 */ bool fn_80026E58(int);
 /* 026E84 */ u64 lbAudioAx_80026E84(CharacterKind);
 /* 026EBC */ u64 lbAudioAx_80026EBC(StKind);

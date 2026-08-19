@@ -1988,8 +1988,8 @@ bool lbAudioAx_800265C4(HSD_GObj* arg0, int arg1)
 
 int fn_80026650(void)
 {
-    int priority;
     int i;
+    int priority;
     for (priority = 4; priority >= 0; priority--) {
         for (i = 0; i < 0x37; i++) {
             if (priority == s32_arr_803BB5D0[i][1] && lbl_804338A4[i] == 1 &&
@@ -2115,10 +2115,9 @@ void fn_800269AC(void)
     }
 }
 
-int fn_80026C04(int arg0, int unused)
+void fn_80026C04(int arg0, int unused)
 {
     int i;
-    int priority;
     int slot;
 
     if (arg0 != -1) {
@@ -2136,11 +2135,8 @@ int fn_80026C04(int arg0, int unused)
     slot = fn_80026650();
     if (slot != -1) {
         strcpy(&lbl_803BB340[lbl_804D38D0], lbl_803BBCFC[slot]);
-        priority = HSD_SynthSFXLoad(lbl_803BB340, 2, fn_80026C04, 0);
-        lbl_80433A64[slot] = priority;
+        lbl_80433A64[slot] = HSD_SynthSFXLoad(lbl_803BB340, 2, fn_80026C04, 0);
     }
-
-    return priority;
 }
 
 bool fn_80026E58(int arg0)
