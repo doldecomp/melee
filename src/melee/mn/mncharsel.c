@@ -732,25 +732,42 @@ void mnCharSel_8025D5AC(int door, int frame, bool hidden)
     sethidden(sp44, hidden);
 }
 
-static inline bool isDuplicateCostume(int door, CSSData* css, u8 door_count,
-                                      bool use_args)
+static inline bool isDuplicateCostumeWith(int door, CSSData* css,
+                                          u8 door_count)
 {
     int num_doors;
     int j;
     CSSDoor* base_door = &mnCharSel_803F0DFC.doors[door];
 
-    if (use_args) {
-        if (css->match_type == TRAINING_MODE) {
-            num_doors = 2;
-        } else {
-            num_doors = door_count;
-        }
+    if (css->match_type == TRAINING_MODE) {
+        num_doors = 2;
     } else {
-        if (mnCharSel_804D6CB0->match_type == TRAINING_MODE) {
-            num_doors = 2;
-        } else {
-            num_doors = mnCharSel_804D6CF5;
+        num_doors = door_count;
+    }
+
+    for (j = 0; j < num_doors; j++) {
+        CSSDoor* other_door = &mnCharSel_803F0DFC.doors[j];
+        if (door != j && other_door->p_kind != 3 &&
+            other_door->sel_icon < 0x19 &&
+            other_door->sel_icon == base_door->sel_icon &&
+            base_door->costume == other_door->costume)
+        {
+            return true;
         }
+    }
+    return false;
+}
+
+static inline bool isDuplicateCostume(int door)
+{
+    int num_doors;
+    int j;
+    CSSDoor* base_door = &mnCharSel_803F0DFC.doors[door];
+
+    if (mnCharSel_804D6CB0->match_type == TRAINING_MODE) {
+        num_doors = 2;
+    } else {
+        num_doors = mnCharSel_804D6CF5;
     }
 
     for (j = 0; j < num_doors; j++) {
@@ -880,8 +897,7 @@ void mnCharSel_8025DB34(u8 arg0)
                 u8 costume_var = 0;
                 while (1) {
                     mnCharSel_803F0DFC.doors[arg0].costume = costume_var;
-                    if (!isDuplicateCostume(arg0, css, mnCharSel_804D6CF5,
-                                            true))
+                    if (!isDuplicateCostumeWith(arg0, css, mnCharSel_804D6CF5))
                     {
                         break;
                     }
@@ -1822,7 +1838,7 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
         u8 costume = 0;
         while (1) {
             mnCharSel_803F0DFC.doors[door].costume = costume;
-            if (!isDuplicateCostume(door, css, door_count, true)) {
+            if (!isDuplicateCostumeWith(door, css, door_count)) {
                 break;
             }
             costume++;
@@ -1970,7 +1986,7 @@ void mnCharSel_CostumeChange(int door, u32 input)
                 (mnCharSel_803F0DFC.doors[door].costume + 1) %
                 gm_80169238(
                     icons[mnCharSel_803F0DFC.doors[door].sel_icon].char_kind);
-        } while (isDuplicateCostume(door, NULL, 0, false));
+        } while (isDuplicateCostume(door));
     } else if (input & HSD_PAD_Y) {
         do {
             if (mnCharSel_803F0DFC.doors[door].costume != 0) {
@@ -1981,7 +1997,7 @@ void mnCharSel_CostumeChange(int door, u32 input)
                                     .char_kind) -
                     1;
             }
-        } while (isDuplicateCostume(door, NULL, 0, false));
+        } while (isDuplicateCostume(door));
     }
     if (prev_costume != mnCharSel_803F0DFC.doors[door].costume) {
         mnCharSel_8025DB34(door);
@@ -2399,9 +2415,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                 HSD_Randi((s32) gm_80169238(
                                                     icons[door->sel_icon]
                                                         .char_kind));
-                                            if (!isDuplicateCostume(
-                                                    grabbed, NULL, 0, false))
-                                            {
+                                            if (!isDuplicateCostume(grabbed)) {
                                                 break;
                                             }
                                         }
@@ -2691,14 +2705,11 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                 int k;
                                 for (k = 0; k < (s32) mnCharSel_804D6CF5; k++)
                                 {
-                                    if (isDuplicateCostume(k, NULL, 0, false))
-                                    {
+                                    if (isDuplicateCostume(k)) {
                                         mnCharSel_803F0DFC.doors[k].costume =
                                             0;
                                         for (;;) {
-                                            if (!isDuplicateCostume(k, NULL, 0,
-                                                                    false))
-                                            {
+                                            if (!isDuplicateCostume(k)) {
                                                 break;
                                             }
                                             mnCharSel_803F0DFC.doors[k]
