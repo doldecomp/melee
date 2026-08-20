@@ -3236,21 +3236,14 @@ void fn_80262648(HSD_GObj* gobj)
 
                         if ((dx * dx + dy * dy) < 8.0f) {
                             if (dy < 0.01f && dy > -0.01f) {
-                                f64 half_pi;
-                                if (dx < 0.0f) {
-                                    half_pi = 1.5707963267948966;
-                                } else {
-                                    half_pi = -1.5707963267948966;
-                                }
-                                angle = (f32) half_pi;
+                                angle =
+                                    (f32) (dx < 0.0f ? 1.5707963267948966
+                                                     : -1.5707963267948966);
                             } else {
-                                f64 base_a;
-                                if (dy < 0.0f) {
-                                    base_a = 0.0;
-                                } else {
-                                    base_a = 3.141592653589793;
-                                }
-                                angle = (f32) (base_a + atanf(dx / dy));
+                                angle =
+                                    (f32) ((dy < 0.0f ? 0.0
+                                                      : 3.141592653589793) +
+                                           atanf(dx / dy));
                             }
                             model->x8 = -((0.01f * sinf(angle)) - model->x8);
                             model->xC = -((0.01f * cosf(angle)) - model->xC);
@@ -3354,21 +3347,11 @@ void fn_80262648(HSD_GObj* gobj)
         } else {
             f32 angle;
             if (dy < 0.01f && dy > -0.01f) {
-                f64 half_pi;
-                if (dx < 0.0f) {
-                    half_pi = 1.5707963267948966;
-                } else {
-                    half_pi = -1.5707963267948966;
-                }
-                angle = (f32) half_pi;
+                angle = (f32) (dx < 0.0f ? 1.5707963267948966
+                                         : -1.5707963267948966);
             } else {
-                f64 base_a;
-                if (dy < 0.0f) {
-                    base_a = 0.0;
-                } else {
-                    base_a = 3.141592653589793;
-                }
-                angle = (f32) (base_a + atanf(dx / dy));
+                angle = (f32) ((dy < 0.0f ? 0.0 : 3.141592653589793) +
+                               atanf(dx / dy));
             }
             model->x10 = (3.0f * sinf(angle)) + model->x10;
             model->x14 = (3.0f * cosf(angle)) + model->x14;
