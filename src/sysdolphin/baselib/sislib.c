@@ -15,10 +15,12 @@
 #include "dolphin/gx.h"
 #include "dolphin/mtx.h"
 
+#include <m2c_macros.h>
 #include <printf.h> // IWYU pragma: keep
 #include <stdarg.h>
 #include <stdio.h>
 #include <dolphin/os.h>
+#include <dolphin/types.h>
 #include <melee/lb/lbarchive.h> ///< @todo Circular include
 
 static HSD_WObjDesc HSD_SisLib_8040C490 = {
@@ -36,25 +38,19 @@ static HSD_WObjDesc HSD_SisLib_8040C4A4 = {
 static u32 HSD_SisLib_804D7968;
 
 static HSD_CameraDescPerspective HSD_SisLib_8040C4B8 = {
+    NULL,
     0,
-    0,
-    1,
-    0,
-    0x280,
-    0,
-    0x1E0,
-    0,
-    0x280,
-    0,
-    0x1E0,
+    PROJ_PERSPECTIVE,
+    { 0, 640, 0, 480 },
+    { 0, 640, 0, 480 },
     &HSD_SisLib_8040C490,
     &HSD_SisLib_8040C4A4,
-    0,
-    0,
-    0,
-    65535,
-    30,
-    1.3333,
+    0.0f,
+    NULL,
+    0.0f,
+    0xFFFF,
+    30.0f,
+    1.3333f,
 };
 
 SisBlock* free_head;
@@ -91,7 +87,7 @@ void* HSD_SisLib_Alloc(s32 size)
     alloc_cur = used_head;
     if (size == 0) {
         OSReport("ZERO byte alloc\n");
-        OSPanic("sislib.c", 0x3C, "");
+        OSPanic(__FILE__, 60, "");
     }
     remainder = size % 4;
     if (remainder != 0) {
@@ -122,7 +118,7 @@ void* HSD_SisLib_Alloc(s32 size)
     }
     if (best == NULL) {
         OSReport("Memory Empty\n");
-        OSPanic("sislib.c", 0x56, "");
+        OSPanic(__FILE__, 0x56, "");
     }
 
     free_cur = free_head;
@@ -137,7 +133,7 @@ void* HSD_SisLib_Alloc(s32 size)
         remaining_size = (free_cur->size - size) - (sizeof(SisBlock));
         if (remaining_size < 0) {
             OSReport("Memory Empty\n");
-            OSPanic("sislib.c", 0x5F, "");
+            OSPanic(__FILE__, 0x5F, "");
         }
 
         free_head = (SisBlock*) (data_ptr + size);
@@ -506,7 +502,7 @@ void fn_803A60EC(void* gobj)
     }
 }
 
-s32 HSD_SisLib_803A611C(int font_idx, HSD_GObj* parent_gobj, u16 class_id,
+int HSD_SisLib_803A611C(int font_idx, HSD_GObj* parent_gobj, u16 class_id,
                         u8 p_link, u8 p_prio, u8 gx_link, u8 gx_prio,
                         u32 render_prio)
 {
@@ -570,7 +566,7 @@ void HSD_SisLib_803A62A0(s32 font_idx, char* archive_name, char* symbol_name)
     HSD_SisLib_804D1110[font_idx] = tmp;
     if (tmp == NULL) {
         OSReport("Cannot open archive %s.\n", archive_name);
-        OSPanic("sislib.c", 0x24A, "");
+        OSPanic(__FILE__, 0x24A, "");
     }
     {
         SIS* sis = HSD_ArchiveGetPublicAddress(HSD_SisLib_804D1110[font_idx],
@@ -578,7 +574,7 @@ void HSD_SisLib_803A62A0(s32 font_idx, char* archive_name, char* symbol_name)
         HSD_SisLib_804D1124[font_idx] = sis;
         if (sis == NULL) {
             OSReport("Cannot find symbol %s.\n", symbol_name);
-            OSPanic("sislib.c", 0x24F, "");
+            OSPanic(__FILE__, 0x24F, "");
         }
     }
 }
@@ -687,7 +683,7 @@ void HSD_SisLib_803A660C(s32 font_idx, s32 dst_idx, s32 src_idx)
     HSD_SisLib_803A6478(dst, src);
 }
 
-HSD_Text* HSD_SisLib_803A6754(int font_idx, s32 context_id)
+HSD_Text* HSD_SisLib_803A6754(int font_idx, int context_id)
 {
     SisBlock* alloc;
     HSD_Text* text;
@@ -842,7 +838,9 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
             sjis_lo = str_cursor[1];
             str_cursor += 1;
         }
-        for (lut_idx = 0; lut_idx < (s32) HSD_SISLIB_FONT_GLYPHS; lut_idx++) {
+        for (lut_idx = 0; lut_idx < ARRAY_SIZE(HSD_SisLib_FontAtlas);
+             lut_idx++)
+        {
             if ((sjis_hi == lut_ptr[lut_idx * 2]) &&
                 (sjis_lo == lut_ptr[lut_idx * 2 + 1]))
             {
@@ -1753,7 +1751,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
     u16 saved_x6C;
     u8 saved_kerning;
 
-    u8 *data = HSD_SisLib_FontAtlas;
+    u8 *data = M2C_BITWISE(u8*, HSD_SisLib_FontAtlas);
     u8 *default_kerning = HSD_SisLib_8040CB00;
 
     if (gobj != NULL) {

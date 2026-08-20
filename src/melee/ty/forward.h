@@ -1,7 +1,7 @@
 #ifndef MELEE_TY_FORWARD_H
 #define MELEE_TY_FORWARD_H
 
-#include <stddef.h>
+#define TY_TROPHY_COUNT 293
 
 struct un_804D6EE0_t;
 typedef struct DigitInit DigitInit;
@@ -64,7 +64,5 @@ typedef struct TySortElem TySortElem;
 typedef struct tyUnkStruct tyUnkStruct;
 typedef struct TyViewData TyViewData;
 typedef struct un_804D6E68_t un_804D6E68_t;
-
-#define TY_TROPHY_COUNT 293
 
 #endif

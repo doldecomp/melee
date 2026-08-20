@@ -1328,8 +1328,8 @@ void fn_80192E6C(void)
     for (j = 0; j <= 0x19; j++) {
         new_var2 = (f32) j;
         gobj = fn_8019035C(1, lbl_804D6650->models[9], 0, 0x1A, 2, 1,
-                           (void (*)(HSD_GObj*)) fn_80191FD4, new_var2);
-        jobj = (HSD_JObj*) gobj->hsd_obj;
+                           fn_80191FD4, new_var2);
+        jobj = gobj->hsd_obj;
         new_var3 = jobj;
         if (j != 0x19) {
             fn_8018FF9C(new_var3, 0.65f, 0.66f, 666.0f);

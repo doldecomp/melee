@@ -173,7 +173,7 @@
 /* 4771C4 */ extern TmData gm_804771C4;
 /* 477738 */ extern MatchEnd gm_80477738;
 /* 473AB8 */ extern BracketEntry lbl_80473AB8[64];
-/* 4D663C */ extern HSD_GObj* lbl_804D663C;
+/* 4D663C */ extern int lbl_804D663C;
 /* 4771B8 */ extern struct TmBoxArrays lbl_804771B8;
 /* 3D9D20 */ extern struct lbl_803D9D20_t lbl_803D9D20;
 /* 3B7D18 */ extern union TmAnimFrameTable lbl_803B7D18;
