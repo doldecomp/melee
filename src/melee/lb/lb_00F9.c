@@ -406,7 +406,6 @@ static inline float groundHeight(struct DynamicsData* data, Vec3* floor_point)
     return absf(data->desc.lb_unk0.unk_2C.y - floor_point->y);
 }
 
-/// @todo Only the placement of one @c li differs.
 void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                  float pos_y, bool use_floor_fn, Fighter_Part part,
                  int first_active, bool ground_check)
@@ -435,7 +434,7 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
     HSD_JObj* jobj;
     struct lb_Collider* collider;
     s32 on_ground;
-    s32 loop_index = 0;
+    s32 loop_index;
 
     if (lb_804D63B8 != 0) {
         return;
@@ -448,11 +447,14 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
     if (cur == NULL) {
         return;
     }
+    /* Keeps loop_index live from function entry. */
+    (void) parent_mtx[loop_index];
     if (part > 0xFF) {
         return;
     }
 
     on_ground = 0;
+    loop_index = 0;
     {
         s32 i;
         for (i = 0; i < (s32) part; i++) {

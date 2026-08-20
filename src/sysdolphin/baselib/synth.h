@@ -3,15 +3,13 @@
 
 #include <placeholder.h>
 
-#include <dolphin/ax.h>
-
 struct HSD_SynthSFXNode;
 
 /* 388330 */ void* HSD_AudioMalloc(size_t);
 /* 38838C */ void HSD_AudioFree(void*);
 /* 38893C */ void HSD_SynthSFXLoadNewProc(void);
-/* 3889B8 */ int HSD_SynthSFXLoad(const char* filename, int, int (*)(int, int),
-                                  int);
+/* 3889B8 */ int HSD_SynthSFXLoad(const char* filename, int,
+                                  void (*)(int, int), int);
 /* 388B0C */ void HSD_SynthSFXWaitForLoadCompletion(void (*)(void));
 /* 388B50 */ int HSD_SynthSFXGetPendingLoadCount(void);
 /* 388B60 */ int HSD_SynthSFXCancelLoad(int);
@@ -19,7 +17,6 @@ struct HSD_SynthSFXNode;
 /* 388D30 */ void HSD_SynthSFXUnloadBank(int);
 /* 388DC8 */ void HSD_Synth_80388DC8(int);
 /* 388E08 */ void HSD_Synth_80388E08(int);
-/* 388EFC */ void HSD_SynthSFXGroupDataReaddress(AXVPB*, void* callback);
 /* 388FF0 */ void HSD_SynthSFXBankDeflag(int);
 /* 389084 */ void HSD_SynthSFXBankDeflagSync(void);
 /* 389094 */ u32 HSD_SynthGetSoundMode(void);

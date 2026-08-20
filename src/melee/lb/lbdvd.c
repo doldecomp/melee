@@ -9,6 +9,7 @@
 
 #include "gm/gm_1B14.h"
 
+#include <string.h>
 #include <dolphin/dvd.h>
 #include <baselib/debug.h>
 #include <melee/db/db.h>

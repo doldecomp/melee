@@ -63,7 +63,7 @@
 int Toy_GetTrophyTotal(void)
 {
     if (gm_IsCurrently1PMode() || gm_GetCurrentGameMode() == GM_TOY_LOTTERY) {
-        return (short) Toy_804A284C[0x258 / 2];
+        return (s16) Toy_804A284C[0x258 / 2];
     } else {
         return *gmMainLib_GetTrophyCount();
     }
@@ -90,7 +90,7 @@ bool Toy_80304924(int arg0)
 
 void Toy_80304988(int arg0)
 {
-    unsigned short* v = idk();
+    u16* v = idk();
     v[arg0] = v[arg0] ^ 0x8000;
 }
 
@@ -101,7 +101,7 @@ bool Toy_803049F4(int arg0)
 
 void Toy_80304A58(int arg0)
 {
-    unsigned short* v = idk();
+    u16* v = idk();
     if (Toy_803049F4(arg0)) {
         v[arg0] = v[arg0] ^ 0x4000;
     }
@@ -109,8 +109,8 @@ void Toy_80304A58(int arg0)
 
 bool Toy_80304B0C(int arg0)
 {
-    unsigned short* v;
-    unsigned short s;
+    u16* v;
+    u16 s;
     if (gm_IsCurrently1PMode() || gm_GetCurrentGameMode() == GM_TOY_LOTTERY) {
         s = Toy_804A284C[3] | Toy_804A284C[4];
         v = &s;
@@ -197,7 +197,7 @@ int Toy_80304B94(int option)
 
 bool Toy_80304CC8(int arg0)
 {
-    short* v = _Toy_sbss_804D6EB4;
+    s16* v = _Toy_sbss_804D6EB4;
     if (lbLang_IsSettingUS()) {
         for (; *v != -1; v++) {
             if (*v == arg0) {
@@ -213,7 +213,7 @@ bool _Toy_80304CC8_noinline(int arg0)
     return Toy_80304CC8(arg0);
 }
 
-static inline unsigned short* Toy_80304D30_idk(void)
+static inline u16* Toy_80304D30_idk(void)
 {
     if (gm_IsCurrently1PMode() || gm_GetCurrentGameMode() == GM_TOY_LOTTERY) {
         return &Toy_804A284C[5];
@@ -229,8 +229,8 @@ static inline int Toy_80304D30_48C0(int arg0)
 
 static inline bool Toy_80304D30_4B0C(int arg0)
 {
-    unsigned short* v;
-    unsigned short s;
+    u16* v;
+    u16 s;
     if (gm_IsCurrently1PMode() || gm_GetCurrentGameMode() == GM_TOY_LOTTERY) {
         s = Toy_804A284C[3] | Toy_804A284C[4];
         v = &s;
@@ -1817,11 +1817,13 @@ void Toy_80307470(s32 arg0)
     ToyGlobalsS_* tg;
     ToyPanelLabelData* data;
     char** label;
-    HSD_Joint* joint;
+    HSD_Joint* joint[1];
+    HSD_AnimJoint* anim[1];
+    HSD_MatAnimJoint* matanim[1];
     HSD_JObj* loaded_jobj;
     u8 kind;
 
-    PAD_STACK(24);
+    PAD_STACK(16);
 
     data = (ToyPanelLabelData*) _Toy_str_TyLight_dat;
     tg = (ToyGlobalsS_*) Toy_sbss_804D6ED8;
@@ -1837,21 +1839,22 @@ void Toy_80307470(s32 arg0)
     }
 
     label = &data->ptrs[arg0];
-    joint = HSD_ArchiveGetPublicAddress(tg->x50, *(label += 0x188 / 4));
+    joint[0] = HSD_ArchiveGetPublicAddress(tg->x50, *(label += 0x188 / 4));
 
-    if (joint != NULL) {
+    if (joint[0] != NULL) {
         tg->x0 = GObj_Create(9, 9, 0);
 
-        loaded_jobj = HSD_JObjLoadJoint(joint);
+        loaded_jobj = HSD_JObjLoadJoint(joint[0]);
+        anim[0] = HSD_ArchiveGetPublicAddress(
+            tg->x50, (&data->ptrs[arg0 * 3])[0x224 / 4]);
+        matanim[0] = Toy_GetPanelMatAnim(arg0, data, tg);
         Toy_AddPanelAnims(loaded_jobj,
                           HSD_ArchiveGetPublicAddress(
                               tg->x50, (&data->ptrs[arg0 * 3])[0x22C / 4]),
-                          Toy_GetPanelMatAnim(arg0, data, tg),
-                          HSD_ArchiveGetPublicAddress(
-                              tg->x50, (&data->ptrs[arg0 * 3])[0x224 / 4]));
+                          matanim[0], anim[0]);
         HSD_JObjReqAnimAll(loaded_jobj, 0.0f);
-        kind = HSD_GObj_804D7849;
-        HSD_GObjObject_80390A70(tg->x0, kind, loaded_jobj);
+        HSD_GObjObject_80390A70(tg->x0, (kind = HSD_GObj_804D7849),
+                                loaded_jobj);
         GObj_SetupGXLink(tg->x0, HSD_GObj_JObjCallback, 0x3C, 0);
 
         lb_8001204C(loaded_jobj, (HSD_JObj**) &tg->x10, _Toy_803FE3F8, 9);
@@ -2476,7 +2479,7 @@ HSD_GObj* Toy_803087F4(void* arg0)
     HSD_JObjSetScaleY(trophy_jobj, scale);
     HSD_JObjSetScaleZ(trophy_jobj, scale);
 
-    rot = deg_to_rad * Toy_803060BC((s32) anim->xC, 5);
+    rot = MTXDegToRad(Toy_803060BC((s32) anim->xC, 5));
     HSD_JObjSetRotationY(trophy_jobj, rot);
 
     if (_Toy_sbss_804D6E9C != NULL) {

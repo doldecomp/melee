@@ -121,7 +121,7 @@ void ftCo_80091BC4(Fighter* fp)
         stick_rad += 2 * (float) M_PI;
     }
 
-    stick_deg = rad_to_deg * stick_rad;
+    stick_deg = MTXRadToDeg(stick_rad);
     if (stick_deg < 0) {
         stick_deg = 0;
     }

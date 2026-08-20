@@ -4,6 +4,7 @@
 
 #include <math.h>
 #include <string.h>
+#include <dolphin/ax.h>
 #include <dolphin/axfx.h>
 #include <dolphin/dvd.h>
 #include <dolphin/os.h>

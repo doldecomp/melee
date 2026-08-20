@@ -1104,7 +1104,7 @@ void Camera_8002A768(CameraTransformState* transform, s32 arg1)
     enum_t var_r30;
 
     var_r30 = var_r31 = 0;
-    half_fov = 0.5f * (deg_to_rad * transform->target_fov);
+    half_fov = 0.5f * MTXDegToRad(transform->target_fov);
     forward = cm_WorldForward;
     lbVector_Diff(&transform->target_interest, &transform->target_position,
                   &dist);
@@ -1900,6 +1900,13 @@ void Camera_8002C010(f32 farg0, f32 farg1)
     }
 }
 
+static inline void Camera_8002C1A8_inline(void)
+{
+    if (lbVector_Len(&cm_80452C68.pause_eye_offset) < 1.0f) {
+        cm_80452C68.pause_eye_distance = 1.0f;
+    }
+}
+
 void Camera_8002C1A8(void)
 {
     CameraInputs inputs;
@@ -1912,10 +1919,10 @@ void Camera_8002C1A8(void)
     f32 substick_y;
     f32 substick_x_val;
     f32 substick_y_val;
-    f32 abs_f1;
     f32 scale;
     s32 dir;
     s8 slot;
+    PAD_STACK(4);
 
     if (cm_80452C68.x305 == 5) {
         return;
@@ -1959,30 +1966,25 @@ void Camera_8002C1A8(void)
         }
 
         if ((pressed & PAD_BUTTON_A) != 0) {
-            abs_f1 = ABS(stick_x);
-            if (abs_f1 > 0.125) {
+            if (ABS(stick_x) > 0.125) {
                 x_move = stick_x;
             }
-            abs_f1 = ABS(stick_y);
-            if (abs_f1 > 0.125) {
+            if (ABS(stick_y) > 0.125) {
                 y_move = stick_y;
             }
             stick_y = 0.0f;
         }
     }
 
-    abs_f1 = ABS(stick_y);
-    if (abs_f1 > 0.125) {
+    if (ABS(stick_y) > 0.125) {
         zoom_dir = -stick_y;
     }
 
-    abs_f1 = ABS(substick_x);
-    if (abs_f1 > 0.125) {
+    if (ABS(substick_x) > 0.125) {
         substick_x_val = substick_x;
     }
 
-    abs_f1 = ABS(substick_y);
-    if (abs_f1 > 0.125) {
+    if (ABS(substick_y) > 0.125) {
         substick_y_val = substick_y;
     }
 
@@ -2011,15 +2013,7 @@ void Camera_8002C1A8(void)
 
     if (x_move != 0.0f || y_move != 0.0f) {
         if (cm_80452C68.x304 == 0xA) {
-            if (sqrtf__Ff(cm_80452C68.pause_eye_offset.z *
-                              cm_80452C68.pause_eye_offset.z +
-                          (cm_80452C68.pause_eye_offset.x *
-                               cm_80452C68.pause_eye_offset.x +
-                           cm_80452C68.pause_eye_offset.y *
-                               cm_80452C68.pause_eye_offset.y)) < 1.0f)
-            {
-                cm_80452C68.pause_eye_distance = 1.0f;
-            }
+            Camera_8002C1A8_inline();
             if (y_move != 0.0f) {
                 cm_80452C68.x314.y += y_move;
             }
@@ -2742,8 +2736,7 @@ static inline void set_bounds_z(CameraBounds* bounds, Vec3* interest,
     Vec3 diff;
 
     lbVector_Diff(interest, position, &diff);
-    bounds->z_pos =
-        sqrtf__Ff((diff.z * diff.z) + ((diff.x * diff.x) + (diff.y * diff.y)));
+    bounds->z_pos = lbVector_Len(&diff);
 }
 
 static inline void
@@ -4172,7 +4165,7 @@ bool Camera_800307D0(f32* left, f32* center, f32* right)
 
     cobj = GET_COBJ(cm_80452C68.gobj);
     half_fov =
-        0.5 * (deg_to_rad * HSD_CObjGetFov(cobj) * HSD_CObjGetAspect(cobj));
+        0.5 * (MTXDegToRad(HSD_CObjGetFov(cobj)) * HSD_CObjGetAspect(cobj));
 
     result = true;
     HSD_CObjGetEyePosition(cobj, &eye_pos);

@@ -157,7 +157,7 @@ bool itSscopebeam_UnkMotion9_Coll(Item_GObj* gobj)
     if ((result & 1) && (coll->env_flags & 0x18000)) {
         f32 angle = -atan2f(coll->floor.normal.x, coll->floor.normal.y);
 
-        if (ABS(angle) <= deg_to_rad) {
+        if (ABS(angle) <= MTXDegToRad(1)) {
             ip->pos = saved_pos;
             *coll = saved_coll;
             it_8026D9A0(gobj);

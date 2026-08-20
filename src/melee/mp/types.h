@@ -38,10 +38,10 @@ struct mp_UnkStruct0 {
     /*  +8 */ Vec3 x8;
     /* +14 */ Vec3 x14;
     /* +20 */ int x20;
-    /* +24 */ short x24;
-    /* +26 */ short x26;
-    /* +28 */ short x28;
-    /* +2A */ short x2A;
+    /* +24 */ s16 x24;
+    /* +26 */ s16 x26;
+    /* +28 */ s16 x28;
+    /* +2A */ s16 x2A;
     /* +2C */ mp_UnkStruct3* ptr;
 };
 

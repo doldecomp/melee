@@ -65,7 +65,7 @@ void gm_801737E8_OnLoad(void)
     }
 }
 
-void fn_80173834(u8 ckind, u8 major, int arg2)
+void fn_80173834(u8 ckind, u8 major, bool arg2)
 {
     bool temp_r31;
     bool temp_r30 = gm_80160474(ckind, major);

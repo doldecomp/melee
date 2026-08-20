@@ -1578,7 +1578,7 @@ void ftData_80085A14(FighterKind kind)
     u32 temp_r0;
     int i;
     u8 _[4];
-    u32 sp10;
+    size_t sp10;
 
     PAD_STACK(4);
 

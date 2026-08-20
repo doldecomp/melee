@@ -1,5 +1,7 @@
 #include "synth.h" // IWYU pragma: export
 
+#include <dolphin/ax.h>
+
 static int HSD_Synth_804D6018 = -1; // audio heap
 static int HSD_Synth_804D6028[2] = { 0 };
 
@@ -38,7 +40,7 @@ static void* HSD_Synth_804C29E0[0x80 / 4];
 static struct {
     /* 00 */ int entrynum;
     /* 04 */ int bankID;
-    /* 08 */ int (*x8)(int, int);
+    /* 08 */ void (*x8)(int, int);
     /* 0C */ int xC;
 } HSD_Synth_804C2A60[6];
 static u32 hsd_SynthSFXLoadBuf[0x20 / 4];

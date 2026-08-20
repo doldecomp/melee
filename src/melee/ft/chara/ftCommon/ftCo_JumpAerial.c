@@ -39,8 +39,7 @@ void ft_800CB6EC(Fighter* fp, s32 arg1)
 {
     if (fp->mv.co.jumpaerial.x0 != 0) {
         fp->mv.co.jumpaerial.x0 -= 1;
-        HSD_JObjAddRotationY(fp->parts->joint,
-                             -(deg_to_rad * (180.0F / arg1)));
+        HSD_JObjAddRotationY(fp->parts->joint, -MTXDegToRad(180.0F / arg1));
         if (fp->mv.co.jumpaerial.x0 == (arg1 / 2)) {
             fp->facing_dir = -fp->facing_dir;
         }

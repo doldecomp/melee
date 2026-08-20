@@ -2,6 +2,7 @@
 
 #include <platform.h>
 
+#include <string.h>
 #include <dolphin/ar.h>
 #include <dolphin/os/OSAlarm.h>
 #include <baselib/debug.h>
@@ -40,7 +41,7 @@ struct Allocator {
     u8 x6EC[0x6F0 - 0x6EC];
 };
 
-/* 015320 */ static void lbMemory_80015320(int, int, void*, int);
+/* 015320 */ static void lbMemory_80015320(int, int, void*, bool);
 
 struct Allocator lbMemory_804318B0;
 #define _p(x) (lbMemory_804318B0.x)
@@ -226,7 +227,7 @@ u32 lbMemory_8001529C(Handle* h, void (*arg1)(u32), u32 arg2)
     for (iter = h->xC_prev; iter != NULL; iter = iter->x0_next) {
         lo = iter->x4_lo;
         if (lo != *r7) {
-            lbMemory_80015320(0, (int) iter, NULL, 0);
+            lbMemory_80015320(0, (int) iter, NULL, false);
             return 1;
         }
         *r7 = (void*) ((u32) lo + (u32) iter->x8_hi);
@@ -252,7 +253,7 @@ static void start_ram_copy(u32 old, u32 current, u32 size, Handle* next)
 }
 
 static void lbMemory_80015320(int arg0, int _handle, void* arg2,
-                              int cancelflag)
+                              bool cancelflag)
 {
     void* null_or_old;
     Handle* handle = (Handle*) _handle;
@@ -289,7 +290,7 @@ static void lbMemory_80015320(int arg0, int _handle, void* arg2,
         }
 
         *currentp = (void*) ((u32) old + (u32) handle->x8_hi);
-        lbMemory_80015320(0, (int) handle->x0_next, null_or_old, 0);
+        lbMemory_80015320(0, (int) handle->x0_next, null_or_old, false);
         return;
     }
 
@@ -348,7 +349,9 @@ void lbMemory_8001564C(void)
 
     _p(x634_max_num_allocs) = 0;
     _p(x630_num_allocs) = 0;
-    _p(free_heap) = (Handle*) (base + 0x638);
+    // The chain below walks _p(x638_heap)[0..5], one Handle (0x10) apart.
+    // Writing it through the array instead does not match.
+    _p(free_heap) = &_p(x638_heap)[0];
     *(void**) (base + 0x638) = base + 0x648;
     *(void**) (base + 0x648) = base + 0x658;
     *(void**) (base + 0x658) = base + 0x668;
@@ -361,6 +364,6 @@ void lbMemory_8001564C(void)
         void* lo = _p(a_arenaLo);
         _p(x69C) = lbMemory_80014E24(lo, hi);
     }
-    *(u32*) (base + 0x6D0) = 0;
+    _p(x6A0_mgr).size = 0; // base + 0x6D0 on PowerPC
 }
 #pragma pop

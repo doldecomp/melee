@@ -245,9 +245,7 @@ void grGarden_80203098(Ground_GObj* gobj)
 {
     int iVar1;
     Ground* gp = GET_GROUND(gobj);
-    if ((grAnime_801C83D0(gobj, 0, 7) != NULL) ||
-        (grAnime_801C84A4(gobj, 0, 7) != NULL))
-    {
+    if (grAnime_801C83D0(gobj, 0, 7) || grAnime_801C84A4(gobj, 0, 7)) {
         if (gp->u.garden.xc8 == 0) {
             gp->u.garden.xc4 = gp->u.garden.xc4 + 1;
             if (3 < gp->u.garden.xc4) {

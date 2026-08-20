@@ -141,7 +141,7 @@ static void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
         hsd_SynthSFXBank[bankID] += hsd_SynthSFXLoadBuf[1];
     } else {
         if (HSD_Synth_804D7730 != NULL) {
-            OSFreeToHeap(HSD_Synth_804D6018, HSD_Synth_804D7730);
+            HSD_AudioFree(HSD_Synth_804D7730);
         }
         HSD_Synth_804D7738 = 0;
     }
@@ -157,9 +157,7 @@ static void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
 static void HSD_SynthSFXHeaderLoadCallback(int result, int length, void* addr,
                                            bool cancelflag)
 {
-    AXVPB** unused;
     s32 header_size;
-    void* p;
     size_t alloc_size;
 
     if (HSD_Synth_804D7738 == 0) {
@@ -172,12 +170,11 @@ static void HSD_SynthSFXHeaderLoadCallback(int result, int length, void* addr,
                          "Can't load SFX file; bank(id=%d) buffer overflow.\n",
                          HSD_Synth_804C2A60[0].bankID);
 
-        alloc_size = hsd_SynthSFXLoadBuf[2] * 8 + 0x18;
+        alloc_size =
+            hsd_SynthSFXLoadBuf[2] * 8 + sizeof(struct SfxLoadStreamNode);
         header_size = hsd_SynthSFXLoadBuf[0];
-        p = OSAllocFromHeap(HSD_Synth_804D6018,
-                            OSRoundUp32B(alloc_size + header_size));
-        HSD_ASSERTREPORT(0x29U, p, "audio heap overflow.\n");
-        HSD_Synth_804D7730 = p;
+        HSD_Synth_804D7730 =
+            HSD_AudioMalloc(OSRoundUp32B(alloc_size + header_size));
         HSD_Synth_804D6028[1] = HSD_DevComRequest(
             HSD_Synth_804C2A60[0].entrynum, 0x20, (u32) HSD_Synth_804D7730,
             OSRoundUp32B(header_size - 0x10), 0x21, 1, NULL, NULL);
@@ -203,7 +200,7 @@ void HSD_SynthSFXLoadNewProc(void)
     }
 }
 
-int HSD_SynthSFXLoad(const char* filename, int bankID, int (*cb)(int, int),
+int HSD_SynthSFXLoad(const char* filename, int bankID, void (*cb)(int, int),
                      int mode)
 {
     int entrynum;
@@ -346,7 +343,7 @@ void HSD_Synth_80388E08(int sfx_id)
             if ((int) cur->prev == sfx_id) {
                 HSD_SynthSFXUnloadBank_inline(cur);
                 *pcur = cur->next;
-                OSFreeToHeap(HSD_Synth_804D6018, cur);
+                HSD_AudioFree(cur);
                 return;
             }
             pcur = &cur->next;

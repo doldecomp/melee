@@ -85,7 +85,7 @@ float ftCo_Damage_CalcAngle(Fighter* fp, float f)
             fp->mv.co.damage.x1A = 1;
             fp->mv.co.damage.x1B = p_ftCommonData->x7F0;
         }
-        return deg_to_rad * fp->dmg.x1848_kb_angle;
+        return MTXDegToRad(fp->dmg.x1848_kb_angle);
     }
     if (fp->ground_or_air == GA_Air) {
         return p_ftCommonData->x144_radians;
@@ -93,12 +93,12 @@ float ftCo_Damage_CalcAngle(Fighter* fp, float f)
         return 0;
     } else {
         float result =
-            deg_to_rad * (p_ftCommonData->x148 *
-                              ((f - p_ftCommonData->x14C) /
-                               (p_ftCommonData->x150 - p_ftCommonData->x14C)) +
-                          1);
-        if (result > deg_to_rad * p_ftCommonData->x148) {
-            result = deg_to_rad * p_ftCommonData->x148;
+            MTXDegToRad(p_ftCommonData->x148 *
+                            ((f - p_ftCommonData->x14C) /
+                             (p_ftCommonData->x150 - p_ftCommonData->x14C)) +
+                        1);
+        if (result > MTXDegToRad(p_ftCommonData->x148)) {
+            result = MTXDegToRad(p_ftCommonData->x148);
         }
         return result;
     }
@@ -614,7 +614,7 @@ void ftCo_8008E5A4(Fighter* fp)
                 float angle = atan2f(kb_y, kb_x);
                 float scale;
                 kb_mag = sqrtf(kb_x * kb_x + kb_y * kb_y);
-                scale = deg_to_rad * p_ftCommonData->x1A8;
+                scale = MTXDegToRad(p_ftCommonData->x1A8);
                 angle += scale * f30;
                 fp->x8c_kb_vel.x = kb_mag * cosf(angle);
                 fp->x8c_kb_vel.y = kb_mag * sinf(angle);
@@ -1115,7 +1115,7 @@ void ftCo_8008FC94(Fighter_GObj* gobj)
 void ftCo_Damage_SetMv8FromKbThreshold(Fighter* fp)
 {
     float kb_vel = fp->ground_or_air == GA_Air
-                       ? sqrtf__Ff(VEC3_SQ_LEN(fp->x8c_kb_vel))
+                       ? sqrtf(VEC3_SQ_LEN(fp->x8c_kb_vel))
                        : ABS(fp->xF0_ground_kb_vel);
     fp->mv.co.damage.x8 =
         kb_vel < p_ftCommonData->x568   ? 0

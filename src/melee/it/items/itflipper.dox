@@ -97,7 +97,7 @@
  * deg); `xDE4` before = 0; `xDE4` after = `0xbf5f66f3` = `-0.8727` (==
  * `-attrs->x24`; same magnitude bits as `x24 = 0x3f5f66f3`). Deduced: `x24` =
  * maximum |spin velocity|; `xDE4` saturates at `+/-x24`. The `angle` arg (=
- * `deg_to_rad * x18 * fighter_speed`, per itFlipper_SpinFromFighter())
+ * `MTXDegToRad(x18) * fighter_speed`, per itFlipper_SpinFromFighter())
  * confirms `x18` scales fighter speed into spin. This hit's `angle + x1C`
  * (~0.936) exceeded `x24`, so it clamped -- `x18`/`x1C` magnitudes are read
  * (11.5 / 0.131) but their exact split is not isolated from a clamped hit.

@@ -79,9 +79,7 @@ void ftCo_800DEAE8(Fighter_GObj* gobj, FtMotionId msid0, FtMotionId msid1)
                           ? &fp->x20_actionStateList[msid1 - fp->x18]
                           : &fp->x1C_actionStateList[msid1];
     fp->allow_interrupt = false;
-    if (fp->facing_dir == -1.0f &&
-        ftData_80085FD4(fp, ms->anim_id)->x8 != NULL)
-    {
+    if (fp->facing_dir == -1.0f && ftData_80085FD4(fp, ms->anim_id)->x8 != 0) {
         Fighter_ChangeMotionState(gobj, msid1, 0, 0.0f, 1.0f, 0.0f, NULL);
     } else {
         Fighter_ChangeMotionState(gobj, msid0, 0, 0.0f, 1.0f, 0.0f, NULL);

@@ -49,6 +49,7 @@ jobs:
         root='build/${{matrix.version}}'
         report="$root/report.json"
         head="$(git rev-parse HEAD)"
+        config_json="$root/config.json"
 
         function get_upstream {
             local ref
@@ -71,6 +72,7 @@ jobs:
           '--max-errors 0' \
           '--verbose' \
           '--version ${{matrix.version}}' \
+          '--no-always-apply' \
           '--sym off')
 
         function run_configure {
@@ -91,11 +93,11 @@ jobs:
               "$config_args")
 
             run_configure
+            ninja "$config_json"
 
             set +e
 
             ninja
-
             result="$?"
 
             while IFS= read -r line; do
@@ -117,12 +119,14 @@ jobs:
             expected="$root/baseline.json"
             changes="$root/changes.json"
 
+            run_configure
+            ninja "$config_json"
+
             function run_ninja {
               ninja all_source "$report"
             }
 
             checkout "$upstream"
-            run_configure
             run_ninja
             cp "$report" "$expected"
 

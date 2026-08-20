@@ -14,12 +14,14 @@
 
 import argparse
 import json
+import os
 import sys
 from collections.abc import Iterator
 from pathlib import Path
 from typing import cast
 
 from tools.project import (
+    BuildConfig,
     BuildConfigUnit,
     Library,
     Object,
@@ -167,6 +169,12 @@ parser.add_argument(
     help="require function prototypes",
 )
 parser.add_argument(
+    "--allow-auto-splits",
+    dest="allow_auto_splits",
+    action="store_true",
+    help="allow dtk auto-splits",
+)
+parser.add_argument(
     "--non-matching",
     dest="non_matching",
     action="store_true",
@@ -183,6 +191,12 @@ parser.add_argument(
     dest="compile_commands",
     action="store_false",
     help="do not generate compile_commands.json",
+)
+parser.add_argument(
+    "--no-always-apply",
+    dest="always_apply",
+    action="store_false",
+    help="do not always run dtk dol apply after linking",
 )
 args = parser.parse_args()
 
@@ -550,7 +564,7 @@ config.libs = [
             Object(Matching, "melee/lb/lb_00CE.c"),
             Object(Matching, "melee/lb/lbvector.c"),
             Object(NonMatching, "melee/lb/lbshadow.c"),
-            Object(Testing, "melee/lb/lb_00F9.c"),
+            Object(Matching, "melee/lb/lb_00F9.c"),
             Object(Matching, "melee/lb/lbspdisplay.c"),
             Object(Matching, "melee/lb/lb_013B.c"),
             Object(Matching, "melee/lb/lb_0146.c"),
@@ -572,7 +586,7 @@ config.libs = [
             Object(NonMatching, "melee/lb/lbbgflash.c"),
             Object(Matching, "melee/lb/lbrefract.c"),
             Object(Matching, "melee/lb/lbtrigf.c"),
-            Object(NonMatching, "melee/lb/lbaudio_ax.c"),
+            Object(Matching, "melee/lb/lbaudio_ax.c"),
         ],
     ),
     MeleeLib(
@@ -664,7 +678,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_SpecialAir.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_FallSpecial.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Lift.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_DownBound.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_DownBound.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DownStand.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Down.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DownAttack.c"),
@@ -802,7 +816,25 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Squat.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_SquatWait.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_SquatRv.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_Attack100.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_0D67.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_Attack100.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_0D72.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_JumpAerialF1.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemScopeStart.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemScopeRapid.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemScopeFire.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemScope.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_Catch.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_0D8E.c"),
+            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_0D95.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_CatchPull.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_CatchWait.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_CatchAttack.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_CatchCut.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_CapturePulled.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureWait.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureJump.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_0DC2.c"),
             # Common throw-related
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureCut.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Throw.c"),
@@ -847,10 +879,16 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftLink/ftLk_SpecialS.c"),
             Object(Matching, "melee/ft/chara/ftLink/ftLk_SpecialN.c"),
             # Kirby
-            Object(NonMatching, "melee/ft/chara/ftKirby/ftkirby.c"),
+            Object(Matching, "melee/ft/chara/ftKirby/ftkirby.c"),
+            Object(Matching, "melee/ft/chara/ftKirby/ftkirbydata.c"),
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbyattackdash.c"),
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialhi.c"),
-            Object(NonMatching, "melee/ft/chara/ftKirby/ftkirbyspecialn.c"),
+            Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspeciallw.c"),
+            Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecials.c"),
+            Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialn.c"),
+            Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialmario.c"),
+            Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialluigi.c"),
+            Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialcaptain.c"),
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialpikachu.c"),
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspecialkoopa.c"),
             Object(Matching, "melee/ft/chara/ftKirby/ftkirbyspeciallink.c"),
@@ -1168,7 +1206,7 @@ config.libs = [
             Object(NonMatching, "melee/gr/grzebes.c"),
             Object(Matching, "melee/gr/grcorneria.c"),
             Object(Matching, "melee/gr/grstory.c"),
-            Object(NonMatching, "melee/gr/gronett.c"),
+            Object(Matching, "melee/gr/gronett.c"),
             Object(NonMatching, "melee/gr/grbigblue.c"),
             Object(NonMatching, "melee/gr/grmutecity.c"),
             Object(Matching, "melee/gr/grfourside.c"),
@@ -1252,7 +1290,8 @@ config.libs = [
     MeleeLib(
         "mn (Menus)",
         [
-            Object(NonMatching, "melee/mn/mnmain.c"),
+            Object(Matching, "melee/mn/mnmain.c"),
+            Object(Matching, "melee/mn/mn_22EC.c"),
             Object(NonMatching, "melee/mn/mnmainrule.c"),
             Object(NonMatching, "melee/mn/mnruleplus.c"),
             Object(NonMatching, "melee/mn/mnitemsw.c"),
@@ -1275,7 +1314,7 @@ config.libs = [
             Object(Matching, "melee/mn/mninfobonus.c"),
             Object(NonMatching, "melee/mn/mnsnap.c"),
             Object(Matching, "melee/mn/mngallery.c"),
-            Object(NonMatching, "melee/mn/mnstagesel.c"),
+            Object(Matching, "melee/mn/mnstagesel.c"),
             Object(NonMatching, "melee/mn/mncharsel.c"),
         ],
     ),
@@ -1933,10 +1972,7 @@ config.progress_report_args = [
 ]
 
 
-def generate_compile_commands():
-    config.validate()
-    objects = config.objects()
-    build_config = load_build_config(config, config.out_path() / "config.json")
+def generate_compile_commands(objects: dict[str, Object], build_config: BuildConfig):
 
     clangd_config = []
 
@@ -1990,10 +2026,39 @@ def generate_compile_commands():
 
 
 if args.mode == "configure":
+    if args.always_apply:
+        config.custom_build_steps = {
+            "post-ok": [
+                {
+                    "outputs": "always_apply",
+                    "rule": "phony",
+                    "implicit": ["apply"],
+                }
+            ]
+        }
+
     # Write build.ninja and objdiff.json
     generate_build(config)
+
+    config.validate()
+    objects = config.objects()
+    build_config = load_build_config(config, config.out_path() / "config.json")
+
+    if not build_config:
+        exit(0)
+
+    if not args.allow_auto_splits:
+        for unit in build_config["units"]:
+            if unit["autogenerated"]:
+                print(
+                    f"\033[31mERROR\033[0m Found an auto-generated split ({unit['name']}).",
+                    "\033[31mERROR\033[0m Make sure the DOL is fully covered in splits.txt.",
+                    sep=os.linesep,
+                )
+                exit(1)
+
     if args.compile_commands:
-        generate_compile_commands()
+        generate_compile_commands(objects, build_config)
 elif args.mode == "progress":
     # Print progress information
     calculate_progress(config)

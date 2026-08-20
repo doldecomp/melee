@@ -149,7 +149,7 @@ void HSD_DevComARAMWakeUp(void)
                 DCStoreRange(HSD_DevCom_804C6330_bufs[req_idx],
                              DEVCOM_BUF_SIZE);
                 ARQPostRequest(devComARQR[req_idx], 0, 0, 1,
-                               (u32) HSD_DevCom_804C6330_bufs[req_idx],
+                               (uintptr_t) HSD_DevCom_804C6330_bufs[req_idx],
                                aramDC->dest, xfer_size, arq_callback);
                 aramDC->dest += xfer_size;
                 aramDC->size -= xfer_size;
@@ -170,7 +170,7 @@ void HSD_DevComARAMWakeUp(void)
                 DCInvalidateRange(HSD_DevCom_804C6330_bufs[req_idx],
                                   DEVCOM_BUF_SIZE);
                 ARQPostRequest(devComARQR[req_idx], 0, 1, 1, aramDC->src,
-                               (u32) HSD_DevCom_804C6330_bufs[req_idx],
+                               (uintptr_t) HSD_DevCom_804C6330_bufs[req_idx],
                                aramDC->size, HSD_DevComARAMCallback);
                 aramstate = 1;
             } else if (aramDC->type == 0x1B) {
@@ -184,10 +184,10 @@ void HSD_DevComARAMWakeUp(void)
                     xfer_size2 = aramDC->size;
                 }
                 ARQPostRequest(&devComARQR[req_idx][1], 0, 1, 1, aramDC->src,
-                               (u32) HSD_DevCom_804C6330_bufs[req_idx],
+                               (uintptr_t) HSD_DevCom_804C6330_bufs[req_idx],
                                xfer_size2, NULL);
                 ARQPostRequest(&devComARQR[req_idx][0], 0, 0, 1,
-                               (u32) HSD_DevCom_804C6330_bufs[req_idx],
+                               (uintptr_t) HSD_DevCom_804C6330_bufs[req_idx],
                                aramDC->dest, xfer_size2, arq_callback2);
                 aramDC->src += xfer_size2;
                 aramDC->dest += xfer_size2;
@@ -298,10 +298,10 @@ static void HSD_DevComDVDCallback(s32 result, DVDFileInfo* unused)
     } else if (type == 0x23) {
         HSD_DevCom_804D77F7 = HSD_DevCom_804D77F6;
         if (dvdDC->size > DEVCOM_BUF_SIZE) {
-            ARQPostRequest(devComARQR[HSD_DevCom_804D77F7], 0, 0, 1,
-                           (u32) HSD_DevCom_804C6330_bufs[HSD_DevCom_804D77F7],
-                           dvdDC->dest, DEVCOM_BUF_SIZE,
-                           HSD_DevComDVDStdCallback);
+            ARQPostRequest(
+                devComARQR[HSD_DevCom_804D77F7], 0, 0, 1,
+                (uintptr_t) HSD_DevCom_804C6330_bufs[HSD_DevCom_804D77F7],
+                dvdDC->dest, DEVCOM_BUF_SIZE, HSD_DevComDVDStdCallback);
             dvdDC->src += DEVCOM_BUF_SIZE;
             dvdDC->dest += DEVCOM_BUF_SIZE;
             dvdDC->size -= DEVCOM_BUF_SIZE;
@@ -309,10 +309,10 @@ static void HSD_DevComDVDCallback(s32 result, DVDFileInfo* unused)
             HSD_DevComDVDWakeUp();
         } else {
             HSD_DevCom_804D77FC[HSD_DevCom_804D77F7] = dvdDC;
-            ARQPostRequest(devComARQR[HSD_DevCom_804D77F7], 0, 0, 1,
-                           (u32) HSD_DevCom_804C6330_bufs[HSD_DevCom_804D77F7],
-                           dvdDC->dest, dvdDC->size,
-                           HSD_DevComDVDARAMEndCallback);
+            ARQPostRequest(
+                devComARQR[HSD_DevCom_804D77F7], 0, 0, 1,
+                (uintptr_t) HSD_DevCom_804C6330_bufs[HSD_DevCom_804D77F7],
+                dvdDC->dest, dvdDC->size, HSD_DevComDVDARAMEndCallback);
             HSD_DevComUnlink(dvdDC);
             HSD_DevCom_804D77F5 = 0;
             HSD_DevComDVDWakeUp();

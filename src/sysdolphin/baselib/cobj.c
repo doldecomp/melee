@@ -197,7 +197,7 @@ void HSD_CObjReqAnim(HSD_CObj* cobj, float startframe)
     HSD_WObjReqAnim(cobj->interest, startframe);
 }
 
-GXProjectionType makeProjectionMtx(HSD_CObj* cobj, Mtx mtx)
+GXProjectionType makeProjectionMtx(HSD_CObj* cobj, Mtx44 mtx)
 {
     GXProjectionType projection_type;
     switch (cobj->projection_type) {
@@ -242,10 +242,8 @@ static bool setupOffscreenCamera(HSD_CObj* cobj)
 
 static bool setupNormalCamera(HSD_CObj* cobj)
 {
-    int unused[4];
-
     GXProjectionType projection_type;
-    Mtx p;
+    Mtx44 p;
 
     f32 x_scale;
     f32 y_scale;
@@ -296,6 +294,9 @@ static bool setupTopHalfCamera(HSD_CObj* cobj)
 {
     int unused[3];
     GXProjectionType projection_type;
+    /// @todo Should be an `Mtx44` like the other three: `makeProjectionMtx`
+    /// writes 4 rows. Changing it here does not match, so the extra row
+    /// currently lands in `unused` above.
     Mtx p;
 
     f32 h_scale;
@@ -376,9 +377,8 @@ static bool setupTopHalfCamera(HSD_CObj* cobj)
 
 static bool setupBottomHalfCamera(HSD_CObj* cobj)
 {
-    int unused[4];
     GXProjectionType projection_type;
-    Mtx p;
+    Mtx44 p;
 
     f32 top, bottom;
     f32 left, right;

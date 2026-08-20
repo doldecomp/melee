@@ -98,7 +98,7 @@ u64 gm_801A48A4(u8 arg0)
     return result;
 }
 
-void gm_801A4970(int (**arg0)(void))
+void gm_801A4970(bool (**arg0)(void))
 {
     HSD_PadStatus* temp_r3;
     s8 var_r26;
@@ -135,7 +135,7 @@ void gm_801A4970(int (**arg0)(void))
         }
     }
 
-    if (arg0[0] != NULL && arg0[0]() != 0) {
+    if (arg0[0] != NULL && arg0[0]()) {
         if (gm_801A45E8(0)) {
             gm_80479D58.unk_10.x0 &= ~1;
         } else {
@@ -143,7 +143,7 @@ void gm_801A4970(int (**arg0)(void))
         }
     }
     if (gm_801A45E8(0)) {
-        if (arg0[1] != NULL && arg0[1]() != 0) {
+        if (arg0[1] != NULL && arg0[1]()) {
             gm_80479D58.unk_10.x2 |= 1;
         }
     }
@@ -326,11 +326,11 @@ void gm_801A4D34(void (*on_frame)(void), GameSceneInfo* arg1)
                 temp_r25->unk_10.x2 = 0;
             }
             temp_r25->unk_10.unk_28 = temp_r25->unk_10.unk_20;
-            if (lb_80019A30(0) == 0) {
+            if (!lb_80019A30(0)) {
                 temp_r25->unk_10.unk_28 |=
                     gm_803DA8C8[temp_r25->unk_10.unk_34];
             }
-            if (lb_80019A30(1) == 0) {
+            if (!lb_80019A30(1)) {
                 temp_r25->unk_10.unk_28 |=
                     ~gm_803DA8C8[temp_r25->unk_10.unk_34];
             }
@@ -345,7 +345,7 @@ void gm_801A4D34(void (*on_frame)(void), GameSceneInfo* arg1)
             if (temp_r25->unk_0 != -2) {
                 temp_r25->unk_0++;
             }
-            if (gm_80479D58.unk_10.unk_38_0 && (lb_80019A30(0) != 0)) {
+            if (gm_80479D58.unk_10.unk_38_0 && lb_80019A30(0)) {
                 if (temp_r25->unk_8 != -2) {
                     temp_r25->unk_8++;
                 }

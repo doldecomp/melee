@@ -203,8 +203,8 @@ static void fn_80227188(void)
                 HSD_CObjGetEyePosition(cobj, &camera);
                 HSD_CObjGetInterest(cobj, &interest);
                 fov = HSD_CObjGetFov(cobj);
-                ang = rad_to_deg *
-                      atan2f(interest.y - camera.y, -(interest.z - camera.z));
+                ang = MTXRadToDeg(
+                    atan2f(interest.y - camera.y, -(interest.z - camera.z)));
                 DevText_Erase(db_CameraInfoDisplay);
                 DevText_SetCursorXY(db_CameraInfoDisplay, 0, 0);
                 if (ABS(camera.z) > 99999.0F) {
@@ -511,7 +511,7 @@ static void fn_80227EB0(HSD_GObj* arg0, Vec3* arg1, Vec3* arg2, f32 arg8,
     cobj = GET_COBJ(arg0);
     dist = HSD_CObjGetEyeDistance(cobj);
     dist =
-        0.03F * (2.0F * (dist * tanf(deg_to_rad * HSD_CObjGetFov(cobj) / 2)));
+        0.03F * (2.0F * (dist * tanf(MTXDegToRad(HSD_CObjGetFov(cobj)) / 2)));
     if (arg8 != 0.0F) {
         HSD_CObjGetLeftVector(cobj, &sp2C);
         PSVECScale(&sp2C, &sp2C, dist * arg8);
@@ -546,7 +546,7 @@ static void fn_80227FE0(HSD_GObj* camera, f32 cstick_x, f32 cstick_y)
         eye_dist = HSD_CObjGetEyeDistance(cobj);
         scale_factor =
             0.03F *
-            (2.0F * (eye_dist * tanf(deg_to_rad * HSD_CObjGetFov(cobj) / 2)));
+            (2.0F * (eye_dist * tanf(MTXDegToRad(HSD_CObjGetFov(cobj)) / 2)));
         if (cstick_x != 0.0F) {
             HSD_CObjGetLeftVector(cobj, &left_vec);
             VECScale(&left_vec, &left_vec, scale_factor * cstick_x);

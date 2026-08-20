@@ -48,7 +48,7 @@
 /* static */ double const ftCo_804D85A0 = 4503601774854144;
 /* static */ float const ftCo_804D85A8 = 1;
 /* static */ float const ftCo_804D85AC = 0.01;
-/* static */ float const ftCo_804D85B0 = deg_to_rad;
+/* static */ float const ftCo_804D85B0 = MTXDegToRad(1);
 
 typedef struct ftCo_ItemThrowAttrs {
     float velocity_mul;
@@ -500,7 +500,7 @@ void ftCo_80095D5C(Fighter* fp, Vec3* arg1)
         if (int_angle == 361) {
             angle = *(float*) (array_element - 0x464);
         } else {
-            angle = deg_to_rad * int_angle;
+            angle = MTXDegToRad(int_angle);
         }
         fp->cmd_vars[0] = 0;
     } else {

@@ -3,10 +3,18 @@
 
 #include <baselib/forward.h>
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
-static float lbVector_Len(Vec3* vec);
-static float lbVector_Len_xy(Vec3* vec);
+static inline float lbVector_Len(Vec3* vec)
+{
+    return sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
+}
+
+static inline float lbVector_Len_xy(Vec3* vec)
+{
+    return sqrtf(vec->x * vec->x + vec->y * vec->y);
+}
 
 float lbVector_Normalize(Vec3* vec);
 float lbVector_NormalizeXY(Vec3* a);
@@ -18,9 +26,6 @@ Vec3* lbVector_CrossprodNormalized(Vec3* a, Vec3* b, Vec3* result);
 
 float lbVector_Angle(Vec3* a, Vec3* b);
 float lbVector_AngleXY(Vec3* a, Vec3* b);
-
-static float sin(float angle);
-static float cos(float angle);
 
 void lbVector_RotateAboutUnitAxis(Vec3* v, Vec3* axis, float angle);
 void lbVector_Rotate(Vec3* v, int axis, float angle);

@@ -457,7 +457,7 @@ static void ftFx_SpecialLw_Turn(HSD_GObj* gobj)
         fp->facing_dir = -fp->facing_dir;
     }
     ftPartSetRotY(fp, 0,
-                  -((180 / da->x9C_FOX_REFLECTOR_TURN_FRAMES * deg_to_rad) -
+                  -(MTXDegToRad(180 / da->x9C_FOX_REFLECTOR_TURN_FRAMES) -
                     ftPartGetRotZ(fp, 0)));
 }
 #pragma pop
@@ -477,7 +477,7 @@ static inline void ftFox_SpecialLw_Turn_Inline(HSD_GObj* gobj)
     }
 
     ftPartSetRotY(fp, 0,
-                  -((deg_to_rad * (180 / da->x9C_FOX_REFLECTOR_TURN_FRAMES)) -
+                  -(MTXDegToRad(180 / da->x9C_FOX_REFLECTOR_TURN_FRAMES) -
                     ftPartGetRotZ(fp, 0)));
 }
 

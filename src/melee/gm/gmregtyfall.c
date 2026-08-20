@@ -85,7 +85,7 @@ static void order_sdata2(void)
 {
     (void) 60.0f;
     (void) 0.0f;
-    (void) deg_to_rad;
+    (void) MTXDegToRad(1);
     (void) 1.0f;
 }
 

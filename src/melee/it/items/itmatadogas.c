@@ -161,8 +161,8 @@ void it_802CB4F0(Item_GObj* gobj, s32 kind, f32 radius)
     it_8026BB88(gobj, &spawn.pos);
     spawn.facing_dir = ip->facing_dir;
     spawn.x3C_damage = 0;
-    spawn.vel.x = radius * cosf(deg_to_rad * rand);
-    spawn.vel.y = radius * sinf(deg_to_rad * rand);
+    spawn.vel.x = radius * cosf(MTXDegToRad(rand));
+    spawn.vel.y = radius * sinf(MTXDegToRad(rand));
     spawn.vel.z = 0.0f;
     spawn.kind = kind;
     spawn.x0_parent_gobj = ip->owner;

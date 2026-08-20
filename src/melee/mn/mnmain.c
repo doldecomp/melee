@@ -64,6 +64,30 @@ u8 mn_804D6BB4;
 
 MenuFlow mn_804A04F0;
 
+static void sdata2_order(void)
+{
+    (void) S32_TO_F32;
+    (void) -9.5f;
+    (void) 9.10000038f;
+    (void) 17.0f;
+    (void) 364.683319f;
+    (void) 38.3877182f;
+    (void) 0.052099999f;
+    (void) 0.0f;
+    (void) 1.0f;
+    (void) 2.0f;
+    (void) 10.0f;
+    (void) -0.200000003f;
+    (void) U32_TO_F32;
+    (void) -0.400000006f;
+    (void) 0.400000006f;
+    (void) 30.0f;
+    (void) 0.600000024f;
+    (void) 0.0174532924f;
+    (void) -0.100000001f;
+    (void) -1.0f;
+}
+
 static u16 mn_803EAE68[] = {
     0x4, 0x5, 0x6, 0x7, 0x8, 0x9, 0xA, 0xB, 0xC, 0xD,
 };
@@ -659,49 +683,6 @@ void mn_80229860(s8 pending_mode)
 }
 
 extern char null_terminator[1];
-
-void mn_8022EA08(char* buf, u32 num)
-{
-    int buf_end = mn_GetDigitCount(num);
-    int i;
-    for (i = 0; i < buf_end; i++) {
-        buf[buf_end - 1 - i] = mn_GetDigitAt(num, i) + '0';
-    }
-    buf[buf_end] = null_terminator[0];
-}
-
-void mn_8022EA78(char* buf, int buf_end, u32 num)
-{
-    int i;
-    for (i = 0; i < buf_end; i++) {
-        buf[buf_end - 1 - i] = mn_GetDigitAt(num, i) + '0';
-    }
-    buf[buf_end] = null_terminator[0];
-}
-
-s32 mn_GetDigitAt(s32 arg0, s32 arg1)
-{
-    return (arg0 / powi(10, arg1)) % 10;
-}
-
-s32 mn_GetDigitCount(s32 num)
-{
-    s32 count;
-    if (num == 0) {
-        return 1;
-    }
-    count = 0;
-    for (;;) {
-        if ((num / powi(10, count)) != 0) {
-            count += 1;
-            if (count < 11) {
-                continue;
-            }
-        }
-        break;
-    }
-    return count;
-}
 
 void mn_80229894(s32 arg0, u16 arg1, s32 arg2)
 {
@@ -1395,53 +1376,67 @@ void fn_8022AFEC(HSD_GObj* gp)
     }
 }
 
+/// @brief frame offset of a selection's cursor animation
+static inline int GetSelectionFrameOffset(int selection)
+{
+    return 2 * selection;
+}
+
+/// @brief counts the unlocked selections of a menu
+static inline u8 CountUnlockedSelections(MenuKind kind)
+{
+    int i;
+    u8 count = 0;
+    for (i = 0; i < mn_803EB6B0[kind].selection_count; i++) {
+        if (mn_80229938(kind, i) != 0) {
+            count++;
+        }
+    }
+    return count;
+}
+
 /// @brief sets up a new menu when transitioning from another.
 HSD_GObj* mn_8022B3A0(u8 state)
 {
-    HSD_JObj* sp48[12];
-    HSD_JObj* sp2C[7];
-    StaticModelDesc* top = &MenMainConTop_Top;
+    HSD_JObj* option_jobjs[12];
+    HSD_JObj* cursor_parts[7];
+    int i;
     HSD_GObj* gobj;
     HSD_JObj* cursor_jobj;
-    int temp_r31;
-    HSD_JObj* temp_r16_2;
-    u8 hovered_selection;
+    HSD_JObj* hover_jobj;
     int idx;
-    u8 var_r16_2;
-    AnimLoopSettings* var_r4_3;
+    u8 unlocked_index;
+    AnimLoopSettings* hover_anim;
     u8 option_count;
     u8 cur_menu;
     MenuKind menu_kind;
     MainMenuData* user_data;
+    StaticModelDesc* model = &MenMainConTop_Top;
+    u8 hovered_selection;
     AnimLoopSettings* anim_loop;
-    int i;
-    HSD_JObj* jobj;
-    AnimLoopSettings* tmp;
-    u8 var_r17;
-    u32 var_r17_int;
+    struct {
+        HSD_JObj* value;
+    } jobj;
+    u32 unlocked_count;
     HSD_JObj* root_jobj;
     PAD_STACK(16);
 
     cur_menu = mn_804A04F0.cur_menu;
-    anim_loop = mn_803EB6B0[cur_menu].anim_loop;
-    option_count = mn_803EB6B0[cur_menu].selection_count;
+    /// @todo Idiomatic spellings put the pointer in a named local, not a temp.
+    anim_loop = (AnimLoopSettings*) ((u8*) mn_803EB6B0[cur_menu].anim_loop +
+                                     sizeof(AnimLoopSettings)) -
+                1;
+    option_count = mn_803EB6B0[cur_menu].selection_count & 0xFF;
     hovered_selection = mn_804A04F0.hovered_selection;
 
-    var_r17 = 0;
-    for (i = 0; i < mn_803EB6B0[cur_menu].selection_count; i++) {
-        if (mn_80229938(cur_menu, i) != 0) {
-            var_r17++;
-        }
-    }
-
-    var_r17_int = var_r17;
+    unlocked_count = CountUnlockedSelections(cur_menu);
     gobj = GObj_Create(6, 7, 0x80);
-    root_jobj = HSD_JObjLoadJoint(top->joint);
+    root_jobj = HSD_JObjLoadJoint(model->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root_jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
     HSD_GObj_SetupProc(gobj, fn_8022AFEC, 0);
-    HSD_JObjAddAnimAll(root_jobj, top->animjoint, top->matanim_joint,
-                       top->shapeanim_joint);
+    HSD_JObjAddAnimAll(root_jobj, model->animjoint, model->matanim_joint,
+                       model->shapeanim_joint);
     HSD_JObjReqAnimAll(root_jobj, 0.0F);
     user_data = HSD_MemAlloc(sizeof(MainMenuData));
     HSD_ASSERTREPORT(0x65D, user_data, "Can't get user_data.\n");
@@ -1450,7 +1445,7 @@ HSD_GObj* mn_8022B3A0(u8 state)
     user_data->hovered_selection = mn_804A04F0.hovered_selection;
     user_data->state = state;
     user_data->description = NULL;
-    for (idx = 0; idx < 0x2A; idx++) {
+    for (idx = 0; idx < (int) ARRAY_SIZE(user_data->tree); idx++) {
         lb_80011E24(root_jobj, &user_data->tree[idx], idx, -1);
     }
     if (user_data->state != MENU_STATE_IDLE) {
@@ -1469,71 +1464,76 @@ HSD_GObj* mn_8022B3A0(u8 state)
         HSD_JObjAnim(user_data->tree[3]);
     }
     for (i = 0; i < option_count; i++) {
-        sp48[i] = user_data->tree[mn_803EAE68[i]];
+        option_jobjs[i] = user_data->tree[mn_803EAE68[i]];
     }
     for (i = 0; i < option_count; i++) {
-        StaticModelDesc* top = &MenMainCursor_Top;
+        model = &MenMainCursor_Top;
         if (mn_80229938(mn_804A04F0.cur_menu, i) != 0) {
             menu_kind = mn_804A04F0.cur_menu;
-            var_r16_2 = mn_80229A04(menu_kind, i);
-            HSD_JObjReqAnim(sp48[var_r16_2], var_r17_int);
-            HSD_JObjAnim(sp48[var_r16_2]);
-            cursor_jobj = HSD_JObjLoadJoint(top->joint);
-            HSD_JObjAddAnimAll(cursor_jobj, top->animjoint, top->matanim_joint,
-                               top->shapeanim_joint);
-            lb_8001204C(cursor_jobj, sp2C, mn_803EAE7C, 7);
-            HSD_JObjReqAnim(sp2C[0],
+            unlocked_index = mn_80229A04(menu_kind, i);
+            HSD_JObjReqAnim(option_jobjs[unlocked_index], unlocked_count);
+            HSD_JObjAnim(option_jobjs[unlocked_index]);
+            cursor_jobj = HSD_JObjLoadJoint(model->joint);
+            HSD_JObjAddAnimAll(cursor_jobj, model->animjoint,
+                               model->matanim_joint, model->shapeanim_joint);
+            lb_8001204C(cursor_jobj, cursor_parts, mn_803EAE7C,
+                        ARRAY_SIZE(cursor_parts));
+            HSD_JObjReqAnim(cursor_parts[0],
                             mn_803EB360[i == hovered_selection].start_frame);
-            HSD_JObjAnim(sp2C[0]);
-            jobj = sp2C[1];
-            HSD_JObjReqAnimAll(jobj, i == hovered_selection);
-            HSD_JObjAnimAll(jobj);
-            HSD_JObjReqAnim(
-                jobj, mn_803EB6B0[mn_804A04F0.cur_menu].start_frame + 2 * i);
-            mn_8022F3D8(jobj, 0xC, TOBJ_MASK);
-            mn_8022F3D8(jobj, 0xD, TOBJ_MASK);
-            mn_8022F3D8(jobj, 0xE, TOBJ_MASK);
-            mn_8022F3D8(jobj, 0xF, TOBJ_MASK);
-            mn_8022F3D8(jobj, 0x10, TOBJ_MASK);
-            mn_8022F3D8(jobj, 0x11, TOBJ_MASK);
-            mn_8022F3D8(jobj, 0x12, TOBJ_MASK);
-            mn_8022F3D8(jobj, 0x13, TOBJ_MASK);
-            HSD_JObjAnim(jobj);
+            HSD_JObjAnim(cursor_parts[0]);
+            jobj.value = cursor_parts[1];
+            HSD_JObjReqAnimAll(jobj.value, i == hovered_selection);
+            HSD_JObjAnimAll(jobj.value);
+            HSD_JObjReqAnim(jobj.value,
+                            mn_803EB6B0[mn_804A04F0.cur_menu].start_frame +
+                                GetSelectionFrameOffset(i));
+            mn_8022F3D8(jobj.value, 0xC, TOBJ_MASK);
+            mn_8022F3D8(jobj.value, 0xD, TOBJ_MASK);
+            mn_8022F3D8(jobj.value, 0xE, TOBJ_MASK);
+            mn_8022F3D8(jobj.value, 0xF, TOBJ_MASK);
+            mn_8022F3D8(jobj.value, 0x10, TOBJ_MASK);
+            mn_8022F3D8(jobj.value, 0x11, TOBJ_MASK);
+            mn_8022F3D8(jobj.value, 0x12, TOBJ_MASK);
+            mn_8022F3D8(jobj.value, 0x13, TOBJ_MASK);
+            HSD_JObjAnim(jobj.value);
             if (i == hovered_selection) {
                 HSD_JObjReqAnimAll(
-                    sp2C[2], mn_803EB378[i == hovered_selection].start_frame);
+                    cursor_parts[2],
+                    mn_803EB378[i == hovered_selection].start_frame);
             } else {
                 HSD_JObjReqAnimAll(
-                    sp2C[2], mn_803EB378[i == hovered_selection].end_frame);
+                    cursor_parts[2],
+                    mn_803EB378[i == hovered_selection].end_frame);
             }
-            HSD_JObjAnimAll(sp2C[2]);
+            HSD_JObjAnimAll(cursor_parts[2]);
             if (i == hovered_selection) {
-                HSD_JObjReqAnim(sp2C[3], mn_803EB390.start_frame);
+                HSD_JObjReqAnim(cursor_parts[3], mn_803EB390.start_frame);
             } else {
-                HSD_JObjSetFlagsAll(sp2C[3], JOBJ_HIDDEN);
+                HSD_JObjSetFlagsAll(cursor_parts[3], JOBJ_HIDDEN);
             }
-            HSD_JObjAnim(sp2C[3]);
+            HSD_JObjAnim(cursor_parts[3]);
             if (i != hovered_selection) {
-                HSD_JObjSetFlagsAll(sp2C[4], JOBJ_HIDDEN);
+                HSD_JObjSetFlagsAll(cursor_parts[4], JOBJ_HIDDEN);
             }
-            HSD_JObjAddChild(sp48[var_r16_2], cursor_jobj);
+            HSD_JObjAddChild(option_jobjs[unlocked_index], cursor_jobj);
         }
     }
-    temp_r16_2 = user_data->tree[14];
-    if (user_data->menu_kind == 0 && user_data->hovered_selection == 4 &&
+    hover_jobj = user_data->tree[14];
+    if (user_data->menu_kind == MENU_KIND_MAIN &&
+        user_data->hovered_selection == SEL_MAIN_DATA &&
         gmMainLib_8015EE90() == 0)
     {
-        var_r4_3 = &mn_803EB438;
-    } else if ((user_data->menu_kind == 1) &&
-               (user_data->hovered_selection == 0) &&
-               (gmMainLib_8015EDD4() == 0))
+        hover_anim = &mn_803EB438;
+    } else if (user_data->menu_kind == MENU_KIND_1P &&
+               user_data->hovered_selection == SEL_1P_REG &&
+               gmMainLib_8015EDD4() == 0)
     {
-        var_r4_3 = &mn_803EB480;
+        hover_anim = &mn_803EB480;
     } else {
-        var_r4_3 = &anim_loop[user_data->hovered_selection];
+        hover_anim = &anim_loop[user_data->hovered_selection];
     }
-    HSD_JObjReqAnimAll(temp_r16_2, var_r4_3->start_frame);
-    HSD_JObjAnimAll(temp_r16_2);
+    HSD_JObjReqAnimAll(hover_jobj, hover_anim->start_frame);
+    HSD_JObjAnimAll(hover_jobj);
 
     mn_80229A7C(user_data, user_data->menu_kind, user_data->hovered_selection);
     return gobj;
@@ -1765,7 +1765,35 @@ int mn_8022C010(int menu_kind, int selection)
 
 MenuFlow mn_804A04F0;
 
-static inline void mn_8022C068(HSD_LObj* lobj, int unused, int div)
+static inline void LerpLightColor(HSD_LObj* lobj, int div)
+{
+    int diff;
+
+    while (!(lobj->flags & LOBJ_POINT)) {
+        lobj = lobj->next;
+    }
+    if (div != 0) {
+        diff = mn_804A04F0.light_color->r - lobj->color.r;
+        if (diff != 0) {
+            lobj->color.r += diff / div;
+        }
+        diff = mn_804A04F0.light_color->g - lobj->color.g;
+        if (diff != 0) {
+            lobj->color.g += diff / div;
+        }
+        diff = mn_804A04F0.light_color->b - lobj->color.b;
+        if (diff != 0) {
+            lobj->color.b += diff / div;
+        }
+    } else {
+        lobj->color.r = mn_804A04F0.light_color->r;
+        lobj->color.g = mn_804A04F0.light_color->g;
+        lobj->color.b = mn_804A04F0.light_color->b;
+    }
+}
+
+/// Out-of-line copy for the one caller that does not inline it.
+static void mn_8022C068(HSD_LObj* lobj, int unused, int div)
 {
     int diff;
 
@@ -1807,7 +1835,7 @@ void fn_8022C128(HSD_GObj* arg0)
     }
     if (mn_804A04F0.light_lerp_frames != 0) {
         mn_804A04F0.light_lerp_frames--;
-        mn_8022C068(lobj, 0, mn_804A04F0.light_lerp_frames);
+        LerpLightColor(lobj, mn_804A04F0.light_lerp_frames);
     }
 }
 
@@ -1827,7 +1855,7 @@ void mn_8022C304(void)
     mn_804A04F0.light_lerp_frames = 0;
     mn_804A04F0.light_color = mn_8022BFBC(
         mn_8022C010(mn_804A04F0.cur_menu, mn_804A04F0.hovered_selection));
-    mn_8022C068(lobj, 0, mn_804A04F0.light_lerp_frames);
+    LerpLightColor(lobj, mn_804A04F0.light_lerp_frames);
 }
 
 static inline void x2_dec(u8 temp_r29)
@@ -2960,9 +2988,24 @@ void mn_8022E978(u8 item_idx, u8 enable)
     }
 }
 
-/// #mn_8022EA08
+void mn_8022EA08(char* buf, u32 num)
+{
+    int buf_end = mn_GetDigitCount(num);
+    int i;
+    for (i = 0; i < buf_end; i++) {
+        buf[buf_end - 1 - i] = mn_GetDigitAt(num, i) + '0';
+    }
+    buf[buf_end] = null_terminator[0];
+}
 
-/// #mn_8022EA78
+void mn_8022EA78(char* buf, int buf_end, u32 num)
+{
+    int i;
+    for (i = 0; i < buf_end; i++) {
+        buf[buf_end - 1 - i] = mn_GetDigitAt(num, i) + '0';
+    }
+    buf[buf_end] = null_terminator[0];
+}
 
 void mn_8022EAE0(HSD_GObj* gobj)
 {
@@ -2974,9 +3017,29 @@ void mn_8022EB04(void* user_data)
     HSD_Free(user_data);
 }
 
-/// #mn_GetDigitAt
+s32 mn_GetDigitAt(s32 arg0, s32 arg1)
+{
+    return (arg0 / powi(10, arg1)) % 10;
+}
 
-/// #mn_GetDigitCount
+s32 mn_GetDigitCount(s32 num)
+{
+    s32 count;
+    if (num == 0) {
+        return 1;
+    }
+    count = 0;
+    for (;;) {
+        if ((num / powi(10, count)) != 0) {
+            count += 1;
+            if (count < 11) {
+                continue;
+            }
+        }
+        break;
+    }
+    return count;
+}
 
 void mn_8022EBDC(void)
 {
@@ -2985,331 +3048,6 @@ void mn_8022EBDC(void)
         mn_8022F0F0(i);
     }
 }
-
-float mn_8022EC18(HSD_JObj* arg0, AnimLoopSettings* arg1, HSD_TypeMask arg2)
-{
-    float temp_f1;
-    float var_f31;
-
-    temp_f1 = mn_8022F298(arg0);
-    if (!(arg1->start_frame <= temp_f1) || !(temp_f1 <= arg1->end_frame)) {
-        HSD_JObjReqAnimAll(arg0, *(volatile float*) &arg1->start_frame);
-        mn_8022F3D8(arg0, 0xFFU, arg2);
-    }
-    if (arg1->loop_frame == -0.1f) {
-        var_f31 = mn_8022F298(arg0);
-        if (var_f31 < arg1->end_frame) {
-            HSD_JObjAnimAll(arg0);
-            var_f31 = mn_8022F298(arg0);
-            if (var_f31 > arg1->end_frame) {
-                var_f31 = arg1->end_frame;
-                HSD_JObjReqAnimAll(arg0, var_f31);
-                mn_8022F3D8(arg0, 0xFFU, arg2);
-                HSD_JObjAnimAll(arg0);
-            }
-        }
-    } else {
-        HSD_JObjAnimAll(arg0);
-        var_f31 = mn_8022F298(arg0);
-        if (var_f31 >= arg1->end_frame) {
-            var_f31 = arg1->loop_frame + (var_f31 - arg1->end_frame);
-            HSD_JObjReqAnimAll(arg0, var_f31);
-            mn_8022F3D8(arg0, 0xFFU, arg2);
-            HSD_JObjAnimAll(arg0);
-        }
-    }
-    return var_f31;
-}
-
-/// @brief updates a jobjs animation in accordance to the passed in anim loop
-/// setting
-/// @param jobj HSD_JObj*
-/// @param anim_loop AnimLoopSettings*
-/// @return the current frame of the jobjs animation
-float mn_8022ED6C(HSD_JObj* jobj, AnimLoopSettings* anim_loop)
-{
-    float end_frame;
-    float cur_frame;
-
-    cur_frame = mn_8022F298(jobj);
-    if (!(anim_loop->start_frame <= cur_frame &&
-          cur_frame <= anim_loop->end_frame))
-    {
-        HSD_JObjReqAnimAll(jobj, *(volatile f32*) &anim_loop->start_frame);
-    }
-    if (anim_loop->loop_frame == -0.1f) {
-        cur_frame = mn_8022F298(jobj);
-        end_frame = anim_loop->end_frame;
-        if (cur_frame < end_frame) {
-            HSD_JObjAnimAll(jobj);
-            cur_frame = mn_8022F298(jobj);
-            end_frame = anim_loop->end_frame;
-            if (cur_frame > end_frame) {
-                cur_frame = end_frame;
-                HSD_JObjReqAnimAll(jobj, cur_frame);
-                HSD_JObjAnimAll(jobj);
-            }
-        }
-    } else {
-        HSD_JObjAnimAll(jobj);
-        cur_frame = mn_8022F298(jobj);
-        end_frame = anim_loop->end_frame;
-        if (cur_frame >= end_frame) {
-            cur_frame = anim_loop->loop_frame + (cur_frame - end_frame);
-            HSD_JObjReqAnimAll(jobj, cur_frame);
-            HSD_JObjAnimAll(jobj);
-        }
-    }
-    return cur_frame;
-}
-
-float mn_8022EE84(HSD_JObj* arg0, AnimLoopSettings* arg1,
-                  enum _HSD_TypeMask arg2)
-{
-    f32 temp_f0;
-    f32 temp_f0_2;
-    f32 temp_f1;
-    f32 var_f31;
-
-    temp_f1 = mn_8022F298(arg0);
-    if (!(arg1->start_frame <= temp_f1) || !(temp_f1 <= arg1->end_frame)) {
-        HSD_JObjReqAnim(arg0, *(volatile float*) &arg1->start_frame);
-        mn_8022F3D8(arg0, 0xFF, arg2);
-    }
-    if (arg1->loop_frame == -0.1f) {
-        var_f31 = mn_8022F298(arg0);
-        if (arg1->end_frame != var_f31) {
-            HSD_JObjAnim(arg0);
-            var_f31 = mn_8022F298(arg0);
-            temp_f0 = arg1->end_frame;
-            if (var_f31 > temp_f0) {
-                var_f31 = temp_f0;
-                HSD_JObjReqAnim(arg0, var_f31);
-                mn_8022F3D8(arg0, 0xFFU, arg2);
-                HSD_JObjAnim(arg0);
-            }
-        }
-    } else {
-        HSD_JObjAnim(arg0);
-        var_f31 = mn_8022F298(arg0);
-        temp_f0_2 = arg1->end_frame;
-        if (var_f31 >= temp_f0_2) {
-            var_f31 = arg1->loop_frame + (var_f31 - temp_f0_2);
-            HSD_JObjReqAnim(arg0, var_f31);
-            mn_8022F3D8(arg0, 0xFFU, arg2);
-            HSD_JObjAnim(arg0);
-        }
-    }
-    return var_f31;
-}
-
-/// @brief updates a jobjs looping animation.
-/// if the end frame is -0.1f, the animation will stop after reaching the end
-/// frame.
-/// @param arg0 HSD_JObj
-/// @param arg1 AnimLoopSettings
-float mn_8022EFD8(HSD_JObj* arg0, AnimLoopSettings* arg1)
-{
-    float temp_f0_2;
-    float temp_f1;
-    float var_f31;
-
-    temp_f1 = mn_8022F298(arg0);
-    if (!(arg1->start_frame <= temp_f1) || !(temp_f1 <= arg1->end_frame)) {
-        HSD_JObjReqAnim(arg0, *(volatile float*) &arg1->start_frame);
-    }
-    if (arg1->loop_frame == -0.1f) {
-        var_f31 = mn_8022F298(arg0);
-        if (arg1->end_frame != var_f31) {
-            HSD_JObjAnim(arg0);
-            var_f31 = mn_8022F298(arg0);
-            if (var_f31 > arg1->end_frame) {
-                var_f31 = arg1->end_frame;
-                HSD_JObjReqAnim(arg0, var_f31);
-                HSD_JObjAnim(arg0);
-            }
-        }
-    } else {
-        HSD_JObjAnim(arg0);
-        var_f31 = mn_8022F298(arg0);
-        temp_f0_2 = arg1->end_frame;
-        if (var_f31 >= temp_f0_2) {
-            var_f31 = arg1->loop_frame + (var_f31 - temp_f0_2);
-            HSD_JObjReqAnim(arg0, var_f31);
-            HSD_JObjAnim(arg0);
-        }
-    }
-    return var_f31;
-}
-
-void mn_8022F0F0(int arg0)
-{
-    HSD_GObj* curr = ((HSD_GObj**) HSD_GObj_Entities)[(u8) arg0];
-    PAD_STACK(8);
-    while (curr != NULL) {
-        HSD_GObj* next = curr->next;
-        HSD_GObjPLink_80390228(curr);
-        curr = next;
-    }
-}
-
-void mn_8022F138(u16 arg0, u16 arg1)
-{
-    int i;
-    PAD_STACK(0x18);
-    for (i = arg0; i <= arg1; i++) {
-        mn_8022F0F0(i);
-    }
-}
-
-static inline void mn_8022F1A8_inline(u8 arg0)
-{
-    HSD_GObj* curr = ((HSD_GObj**) HSD_GObj_Entities)[arg0];
-    PAD_STACK(8);
-    while (curr != NULL) {
-        HSD_GObj* next = curr->next;
-        HSD_GObj_80390CD4(curr);
-        curr = next;
-    }
-}
-
-void mn_8022F1A8(u16 arg0, u16 arg1)
-{
-    int i;
-    PAD_STACK(8);
-    for (i = arg0; i <= arg1; i++) {
-        mn_8022F1A8_inline(i);
-    }
-}
-
-bool mn_8022F218(void)
-{
-    if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & PAD_LR_START) {
-        return true;
-    }
-    return false;
-}
-
-void mn_8022F268(void)
-{
-    gmMainLib_GetGameRules()->force_main_menu = 1;
-}
-
-/// @brief returns the current frame of jobjs animation
-float mn_8022F298(HSD_JObj* jobj)
-{
-    HSD_AObj* aobj;
-    HSD_DObj* dobj;
-    HSD_MObj* mobj;
-    HSD_TObj* tobj;
-
-    aobj = jobj->aobj;
-    if (aobj != NULL) {
-        return aobj->curr_frame;
-    }
-    dobj = jobj->u.dobj;
-    if (dobj != NULL) {
-        mobj = dobj->mobj;
-        if (mobj != NULL) {
-            aobj = mobj->aobj;
-            if (aobj != NULL) {
-                return aobj->curr_frame;
-            }
-            tobj = mobj->tobj;
-            if (tobj != NULL) {
-                aobj = tobj->aobj;
-                if (aobj != NULL) {
-                    return aobj->curr_frame;
-                }
-            }
-        }
-    }
-    if (!(jobj->flags & 0x1000)) {
-        jobj = jobj->child;
-        while (jobj != NULL) {
-            float frame = mn_8022F298(jobj);
-            if (frame != -1.0f) {
-                return frame;
-            }
-            jobj = jobj->next;
-        }
-    }
-    return -1.0f;
-}
-
-void mn_8022F360(HSD_AObj* aobj, void* obj, u32 arg2)
-{
-    HSD_FObj* fobj = aobj->fobj;
-    while (fobj != NULL) {
-        if (fobj->obj_type == arg2 || arg2 == 0xFF) {
-            HSD_FObjStopAnim(fobj, obj, NULL, 0.0F);
-        }
-        fobj = fobj->next;
-    }
-}
-
-void mn_8022F3D8(HSD_JObj* jobj, u8 arg1, HSD_TypeMask mask)
-{
-    HSD_ForeachAnim(jobj, JOBJ_TYPE, mask, mn_8022F360, AOBJ_ARG_AOU, arg1);
-}
-
-#define MY_MAX(x, y) ((x) < (y) ? (y) : (x))
-#define MY_MIN(x, y) ((x) > (y) ? (y) : (x))
-
-/**
- * Moves x toward a target value in increments of dx.
- * Returns +1 if x was increased toward the target value,
- * -1 if it was decreased toward the target value,
- * and 0 if it was already at the target and was unchanged.
- */
-int mn_8022F410(float* x, const float* target, float dx)
-{
-    if (*x == *target) {
-        return 0;
-    }
-    if (*x < *target) {
-        *x = MY_MIN(*x + dx, *target);
-        return +1;
-    } else {
-        *x = MY_MAX(*x - dx, *target);
-        return -1;
-    }
-}
-
-/// Same as mn_8022F410, but for int values instead of float.
-int mn_8022F470(int* x, const int* target, int dx)
-{
-    if (*x == *target) {
-        return 0;
-    }
-    if (*x < *target) {
-        *x = MY_MIN(*x + dx, *target);
-        return +1;
-    } else {
-        *x = MY_MAX(*x - dx, *target);
-        return -1;
-    }
-}
-
-#pragma push
-#pragma dont_inline on
-void mn_8022F4CC(void)
-{
-    if (gm_GetCurrentGameMode() == GM_TOURNAMENT) {
-        HSD_SisLib_803A5E70();
-        mn_8022EBDC();
-        gm_80190EA4();
-        return;
-    }
-    if (gm_GetCurrentGameMode() == GM_MENU) {
-        mn_80229894(2, 3, 3);
-        return;
-    }
-    HSD_SisLib_803A5E70();
-    mn_8022EBDC();
-    mnCharSel_802640A0();
-}
-#pragma pop
 
 /// void fn_8022F538(HSD_GObj*) { OSPanic(__FILE__, __LINE__, "not implemented:
 /// fn_8022F538\n"); } void mn_8022FB88() { OSPanic(__FILE__, __LINE__, "not

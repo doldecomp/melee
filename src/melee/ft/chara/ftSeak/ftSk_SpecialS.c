@@ -40,7 +40,7 @@ void ftSk_SpecialS_80110490(Fighter* fp)
         v2 += (float) M_TAU;
     }
 
-    v3 = v2 * rad_to_deg;
+    v3 = MTXRadToDeg(v2);
 
     if (v3 < 0) {
         v3 = 0;

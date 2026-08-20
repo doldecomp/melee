@@ -364,10 +364,10 @@ bool fn_80177DD0(int slot)
         return fn_80177B7C(slot);
     }
     // The cast here is permuter slop.
-    scroll_max = fn_80174A60(fn_801748EC(unk, data->player_data[slot].page,
-                                         (unsigned long long) slot),
-                             slot) -
-                 10;
+    scroll_max =
+        fn_80174A60(fn_801748EC(unk, data->player_data[slot].page, (u64) slot),
+                    slot) -
+        10;
     if (scroll_max < 0) {
         scroll_max = 0;
     }
@@ -1097,7 +1097,7 @@ int fn_801796F0(int arg0)
     return count;
 }
 
-int fn_80179854(void)
+void fn_80179854(void)
 {
     ResultsDisplayData* disp = &lbl_8046E1B0;
     MatchEnd* match_end = &disp->state.match_end;
