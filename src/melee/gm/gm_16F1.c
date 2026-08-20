@@ -1434,7 +1434,7 @@ static inline bool gm_801721EC_3(u32 j)
 static inline bool gm_801721EC_4(void)
 {
     s32 j;
-    for (j = 0; j < 0x125; j++) {
+    for (j = 0; j < TY_TROPHY_COUNT; j++) {
         if (gm_801721EC_3(j)) {
             return true;
         }

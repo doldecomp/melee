@@ -972,7 +972,7 @@ bool un_80304470(void)
         sum += Toy_80304B94(i);
     }
     count = 0;
-    for (i = 0; i < 0x125; i++) {
+    for (i = 0; i < TY_TROPHY_COUNT; i++) {
         if (i != 0xE6 && i != 0xC9 && Toy_803048C0(i)) {
             count++;
         }
@@ -993,7 +993,7 @@ bool un_80304510(void)
         sum += Toy_80304B94(i);
     }
     count = 0;
-    for (i = 0; i < 0x125; i++) {
+    for (i = 0; i < TY_TROPHY_COUNT; i++) {
         if (Toy_803048C0(i)) {
             count++;
         }

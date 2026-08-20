@@ -82,7 +82,13 @@
 /* 4D5A40 */ static GXColor _Toy_color_E2E2E2FF = { 0xE2, 0xE2, 0xE2, 0xFF };
 /* 4D5A44 */ static GXColor _Toy_color_FF8020FF = { 0xFF, 0x80, 0x20, 0xFF };
 
-static size_t const unk_array_len = 293;
+/// Number of sort keys held per trophy.
+#define TY_SORT_KEY_COUNT 3
+
+/// One row of the trophy sort table: one key per sort mode.
+typedef struct TySortRow {
+    /* 0x0 */ s16 key[TY_SORT_KEY_COUNT];
+} TySortRow;
 
 /// @warning do not sort. Private members cannot be declared @c static.
 /* 4D6EE0 */ TyDisplayData* Toy_sbss_804D6EE0;
@@ -118,7 +124,7 @@ static size_t const unk_array_len = 293;
 /* 4D6E70 */ s32 _Toy_sbss_804D6E70;
 /* 4D6E6C */ TyViewData* _Toy_sbss_804D6E6C;
 /* 4D6E68 */ Toy6E68* _Toy_sbss_804D6E68;
-/* 4D6E64 */ s16* _Toy_sbss_804D6E64;
+/* 4D6E64 */ TySortRow* _Toy_sbss_804D6E64;
 /* 4D6E60 */ s32 _Toy_sbss_804D6E60;
 /* 4D6E5C */ void** _Toy_sbss_804D6E5C;
 /* 4D6E58 */ s32 _Toy_sbss_804D6E58;
@@ -239,7 +245,7 @@ static void order_sdata2_154(void)
 
 // STATIC_ASSERT(sizeof(*Toy_sbss_804D6ED4) == 0xE4);
 // STATIC_ASSERT(sizeof(*_Toy_sbss_804D6EA4) == 0x54);
-// STATIC_ASSERT(sizeof(*_Toy_sbss_804D6E64) == 0x6DE);
+// STATIC_ASSERT(sizeof(*_Toy_sbss_804D6E64) * TY_TROPHY_COUNT == 0x6DE);
 // STATIC_ASSERT(sizeof(*_Toy_sbss_804D6E68) == 0x64);
 // STATIC_ASSERT(sizeof(*_Toy_sbss_804D6E6C) == 0x8);
 // STATIC_ASSERT(sizeof(*Toy_sbss_804D6ED8) == 0x5C);

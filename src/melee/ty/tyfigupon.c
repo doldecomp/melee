@@ -174,7 +174,7 @@ s32 _tyFigupon_80314B54(void)
     s32 i;
     s32 count = 0;
 
-    for (i = 0; i < 0x125; i++) {
+    for (i = 0; i < TY_TROPHY_COUNT; i++) {
         if (Toy_80304CC8(i) != 0) {
             if (Toy_803048C0(i) != 0) {
                 s32 result = (s32) Toy_803060BC(i, 6);
