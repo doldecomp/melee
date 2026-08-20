@@ -313,8 +313,8 @@ int _Toy_80304D30(void)
 
 s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
 {
-    s32 obtained_arr[ty_trophy_count];
-    s32 new_arr[ty_trophy_count];
+    s32 obtained_arr[TY_TROPHY_COUNT];
+    s32 new_arr[TY_TROPHY_COUNT];
     s32 total;
     s32 byte_off;
     u16* default_flags;
@@ -2265,7 +2265,7 @@ s32 Toy_80308354(s16 idx)
         }
     }
 
-    if (i == ty_trophy_count) {
+    if (i == TY_TROPHY_COUNT) {
         HSD_ASSERTREPORT(3114, 0,
                          "*** Error : Not Found Model Name!(To Idx %d)\n",
                          target, entry);
@@ -5946,17 +5946,17 @@ void Toy_OnEnter_80311AB0(void* arg0)
     Toy_sbss_804D6ED8 = HSD_MemAlloc(sizeof(*Toy_sbss_804D6ED8));
     Toy_sbss_804D6ED4 = HSD_MemAlloc(sizeof(TyLightArray_));
     Toy_sbss_804D6EDC =
-        HSD_MemAlloc(sizeof(*Toy_sbss_804D6EDC) * ty_trophy_count);
+        HSD_MemAlloc(sizeof(*Toy_sbss_804D6EDC) * TY_TROPHY_COUNT);
     _Toy_sbss_804D6E64 =
-        HSD_MemAlloc(sizeof(*_Toy_sbss_804D6E64) * ty_trophy_count);
+        HSD_MemAlloc(sizeof(*_Toy_sbss_804D6E64) * TY_TROPHY_COUNT);
     Toy_sbss_804D6EE0 = HSD_MemAlloc(sizeof(*Toy_sbss_804D6EE0));
     _Toy_sbss_804D6E6C = HSD_MemAlloc(sizeof(*_Toy_sbss_804D6E6C));
 
     memzero(_Toy_sbss_804D6E68, sizeof(*_Toy_sbss_804D6E68));
     memzero(Toy_sbss_804D6ED8, sizeof(*Toy_sbss_804D6ED8));
     memzero(Toy_sbss_804D6ED4, sizeof(TyLightArray_));
-    memzero(Toy_sbss_804D6EDC, sizeof(*Toy_sbss_804D6EDC) * ty_trophy_count);
-    memzero(_Toy_sbss_804D6E64, sizeof(*_Toy_sbss_804D6E64) * ty_trophy_count);
+    memzero(Toy_sbss_804D6EDC, sizeof(*Toy_sbss_804D6EDC) * TY_TROPHY_COUNT);
+    memzero(_Toy_sbss_804D6E64, sizeof(*_Toy_sbss_804D6E64) * TY_TROPHY_COUNT);
     memzero(Toy_sbss_804D6EE0, sizeof(*Toy_sbss_804D6EE0));
     memzero(_Toy_sbss_804D6E6C, 8);
 
