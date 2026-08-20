@@ -3003,14 +3003,13 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
 
                             if (closest >= 0) {
                                 u8 cport4 = cursor->x4;
-                                u8 closest_u8;
+                                u8 closest_u8 = closest;
                                 mnCharSel_804A0BD0[(u8) closest]->x5 =
                                     (s8) (cport4 + 1);
-                                closest_u8 = closest;
                                 mnCharSel_804A0BC0[cport4]->x5 = 1;
                                 mnCharSel_804A0BC0[cport4]->x6 = closest_u8;
-                                all_data->doors_data.doors[closest_u8]
-                                    .sel_icon = 0xD;
+                                mnCharSel_803F0DFC.doors[closest_u8].sel_icon =
+                                    0xD;
                                 HSD_GObjGXLink_803909D8(
                                     mnCharSel_804A0BD0[(u8) closest]->gobj,
                                     mnCharSel_804A0BC0[cport4]->gobj);
