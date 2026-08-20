@@ -3948,7 +3948,6 @@ s32 mnCharSel_802640A0(void)
     GXColor color6;
     GXColor color7;
     UNUSED u8 unkA8[0x10];
-    CSSDoor* doors;
     s32 row_b;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
@@ -4224,7 +4223,6 @@ s32 mnCharSel_802640A0(void)
         cursor->x10 = -21.5f;
     }
 
-    doors = mnCharSel_803F0DFC.doors;
     for (i = 0; i < num_players; i++) {
         struct CSSCharModel* model;
         int player;
@@ -4274,7 +4272,7 @@ s32 mnCharSel_802640A0(void)
                 *slot_type = 3;
             }
         }
-        doors[i].sel_icon = found;
+        mnCharSel_803F0DFC.doors[i].sel_icon = found;
         model->x8 = model->x10 = 3.4f + icons[found].bound_l;
         model->xC = model->x14 = -3.0f + icons[found].bound_u;
     }
@@ -4921,7 +4919,7 @@ s32 mnCharSel_802640A0(void)
     doors_done:;
     } else {
         for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
-            CSSDoor* door = &doors[i];
+            CSSDoor* door = &mnCharSel_803F0DFC.doors[i];
             GameRules* rules;
             door->p_kind = mnCharSel_804D6CB0->data.data.players[i].slot_type;
             door->costume = mnCharSel_804D6CB0->data.data.players[i].color;
