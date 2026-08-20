@@ -3187,11 +3187,9 @@ void fn_80262648(HSD_GObj* gobj)
         if (prev_port != port || model->x7 > 0x27U) {
             if (port < 4U) {
                 if (mnCharSel_804D6CF5 == 1) {
-                    f32 f24 = (f32) (mnCharSel_804D6CF0 * 4);
-                    animateCharModel(jobj, f24);
+                    animateCharModel(jobj, (f32) (mnCharSel_804D6CF0 * 4));
                 } else {
-                    f32 f24 = (f32) (model->x4 * 4);
-                    animateCharModel(jobj, f24);
+                    animateCharModel(jobj, (f32) (model->x4 * 4));
                 }
             } else {
                 animateCharModel(jobj, 16.0f);
