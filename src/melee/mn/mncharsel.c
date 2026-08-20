@@ -186,8 +186,10 @@ static void getStickDelta(int port, f32* dx, f32* dy)
         *dy = 0.0f;
         *dx = 0.0f;
     } else {
-        f32 adj = mag_sq - 200.0f;
-        f32 angle = atan2f(stick_x, stick_y);
+        f32 angle;
+        f32 adj;
+        adj = mag_sq - 200.0f;
+        angle = atan2f(stick_x, stick_y);
         *dx = adj * sinf(angle);
         *dy = adj * cosf(angle);
     }
