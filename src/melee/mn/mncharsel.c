@@ -2983,7 +2983,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
 block_392:
     updateCursorDisplay(jobj, cursor);
 
-    PAD_STACK(0x30);
+    PAD_STACK(0x28);
 }
 static inline void animateCharModel(HSD_JObj* jobj, f32 frame)
 {
