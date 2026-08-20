@@ -2406,15 +2406,14 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         }
                                     }
                                     if (icon_count == 0x19) {
-                                        CSSDoor* door;
-
                                         mnCharSel_8025FB50(grabbed, 0);
-                                        door =
-                                            &mnCharSel_803F0DFC.doors[grabbed];
                                         while (true) {
-                                            door->costume =
+                                            mnCharSel_803F0DFC.doors[grabbed]
+                                                .costume =
                                                 HSD_Randi((s32) gm_80169238(
-                                                    icons[door->sel_icon]
+                                                    icons[mnCharSel_803F0DFC
+                                                              .doors[grabbed]
+                                                              .sel_icon]
                                                         .char_kind));
                                             if (!isDuplicateCostume(grabbed)) {
                                                 break;
