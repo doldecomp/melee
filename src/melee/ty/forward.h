@@ -65,6 +65,6 @@ typedef struct tyUnkStruct tyUnkStruct;
 typedef struct TyViewData TyViewData;
 typedef struct un_804D6E68_t un_804D6E68_t;
 
-static size_t const ty_trophy_count = 293;
+size_t const ty_trophy_count = 293;
 
 #endif
