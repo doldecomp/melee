@@ -3645,9 +3645,8 @@ void fn_802633B0(HSD_GObj* gobj)
                 tag->x8 = 0.0f;
             }
             if (tag->next_tag > 7U) {
-                cursor_row = -32.0f * (f32) num_entries;
-                if (tag->x8 < cursor_row) {
-                    tag->x8 = cursor_row;
+                if (tag->x8 < -32.0f * (f32) num_entries) {
+                    tag->x8 = -32.0f * (f32) num_entries;
                 }
             } else {
                 tag->x8 = 0.0f;
