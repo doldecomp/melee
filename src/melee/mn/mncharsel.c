@@ -1375,8 +1375,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
                         AOBJ_ARG_AF, 0.0f);
     }
 
-    i = 0;
-    do {
+    for (i = 0; i < 25; i++) {
         timer = icons[i].anim_timer;
         if (timer != 0) {
             timer = timer - 1;
@@ -1399,8 +1398,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
                 }
             }
         }
-        i += 1;
-    } while (i < 25);
+    }
 
     if (mnCharSel_804D6CF5 == 4) {
         doors = mnCharSel_803F0DFC.doors;
@@ -1823,15 +1821,14 @@ s32 mnCharSel_8025FDEC(u8 door)
         {
             int door_idx = door;
             if (mnCharSel_8025DAA0(door_idx)) {
-                s8 costume = 0;
+                s8 costume;
                 CSSDoor* selected_door = &mnCharSel_803F0DFC.doors[door_idx];
-                do {
+                for (costume = 0;; costume++) {
                     selected_door->costume = costume;
                     if (!mnCharSel_8025DAA0(door_idx)) {
                         break;
                     }
-                    costume++;
-                } while (1);
+                }
             }
         }
 
@@ -4290,12 +4287,10 @@ s32 mnCharSel_802640A0(void)
                             "\x6d\x82\x73\x82\x71\x82\x78");
         *color2_ptr = spE8;
         HSD_SisLib_803A74F0(td->name_ls, 1, color2_ptr);
-        found = 0;
-        do {
+        for (found = 0; found < 9; found++) {
             HSD_SisLib_803A6B98(td->name_ls, 10.0f, 0.0f,
                                 "\x81\x45\x81\x45\x81\x45\x81\x45");
-            found++;
-        } while (found < 9);
+        }
         for (found = 0; found < 0x78; found++) {
             if (GetNameText((u8) found) == NULL) {
                 break;
