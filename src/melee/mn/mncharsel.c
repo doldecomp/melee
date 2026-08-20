@@ -1131,7 +1131,7 @@ void mnCharSel_8025DB34(u8 arg0)
                 port_color_idx += 4;
             }
 
-            temp_f31 = (f32) mnCharSel_804D50D8[(u8) port_color_idx];
+            temp_f31 = (f32) mnCharSel_804D50D8[port_color_idx];
             lb_80011E24(mnCharSel_804D6CC0, &sp44,
                         mnCharSel_803F0DFC.doors[arg0].bg_joint, -1);
             HSD_ForeachAnim(sp44, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
@@ -1140,7 +1140,7 @@ void mnCharSel_8025DB34(u8 arg0)
             HSD_ForeachAnim(sp44, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
                             AOBJ_ARG_AOV, 0, 0);
 
-            temp_f31 = (f32) mnCharSel_804D50D8[(u8) port_color_idx];
+            temp_f31 = (f32) mnCharSel_804D50D8[port_color_idx];
             lb_80011E24(mnCharSel_804D6CC0, &sp40,
                         mnCharSel_803F0DFC.doors[arg0].emblem_joint, -1);
             HSD_ForeachAnim(sp40, JOBJ_TYPE, MOBJ_MASK, HSD_AObjReqAnim,
