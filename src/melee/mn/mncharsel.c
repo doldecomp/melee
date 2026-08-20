@@ -2744,10 +2744,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                     if (a_press2 != 0) {
                         if (mnCharSel_804D6CF5 != 1) {
                             s32 di;
-                            CSSDoor* dp = &all_data->doors_data.doors[0];
-                            for (di = 0; di < (s32) mnCharSel_804D6CF5;
-                                 dp++, di++)
-                            {
+                            for (di = 0; di < (s32) mnCharSel_804D6CF5; di++) {
                                 CSSTagData* tag_data;
                                 f32 cx4;
 
@@ -2756,8 +2753,10 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                 {
                                     continue;
                                 }
-                                if ((dp->is_hold_cpu_slider |
-                                     dp->is_hold_handicap_slider) == 0 &&
+                                if ((mnCharSel_803F0DFC.doors[di]
+                                         .is_hold_cpu_slider |
+                                     mnCharSel_803F0DFC.doors[di]
+                                         .is_hold_handicap_slider) == 0 &&
                                     mnCharSel_804A0BD0[di]->x5 == 0 &&
                                     mnCharSel_804A0BC0[di]->x5 != 1)
                                 {
@@ -2767,8 +2766,10 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         continue;
                                     }
                                     cx4 = cursor->xC;
-                                    if (cx4 > dp->togglebtn_left &&
-                                        cx4 < dp->togglebtn_right)
+                                    if (cx4 > mnCharSel_803F0DFC.doors[di]
+                                                  .togglebtn_left &&
+                                        cx4 < mnCharSel_803F0DFC.doors[di]
+                                                  .togglebtn_right)
                                     {
                                         f32 cy4 = cursor->x10;
                                         /* Retail nudges both toggle-box
@@ -2831,24 +2832,32 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
 
                                 if (mnCharSel_804D6CB0->data.data.rules
                                             .is_teams == 1 &&
-                                    dp->p_kind != 3)
+                                    mnCharSel_803F0DFC.doors[di].p_kind != 3)
                                 {
-                                    cycleTeam(cursor, dp, di);
+                                    cycleTeam(cursor,
+                                              &mnCharSel_803F0DFC.doors[di],
+                                              di);
                                 }
                                 if (a_press2 != 0) {
-                                    if (dp->is_hold_cpu_slider == 0 &&
-                                        dp->p_kind == 1)
+                                    if (mnCharSel_803F0DFC.doors[di]
+                                                .is_hold_cpu_slider == 0 &&
+                                        mnCharSel_803F0DFC.doors[di].p_kind ==
+                                            1)
                                     {
                                         GameRules* rules2 =
                                             gmMainLib_GetGameRules();
                                         if (rules2->handicap != 0) {
                                             lb_80011E24(
                                                 mnCharSel_804D6CC0, &sp98,
-                                                dp->cpuslider2_joint, -1);
+                                                mnCharSel_803F0DFC.doors[di]
+                                                    .cpuslider2_joint,
+                                                -1);
                                         } else {
                                             lb_80011E24(
                                                 mnCharSel_804D6CC0, &sp98,
-                                                dp->cpuslider_joint, -1);
+                                                mnCharSel_803F0DFC.doors[di]
+                                                    .cpuslider_joint,
+                                                -1);
                                         }
                                         lb_8000B1CC(sp98, NULL, (&sp88));
                                         {
@@ -2863,25 +2872,33 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                     (f32) (-2.9f + sp88.x);
                                                 cursor->x10 =
                                                     (f32) (1.7f + sp88.y);
-                                                dp->is_hold_cpu_slider = 1;
+                                                mnCharSel_803F0DFC.doors[di]
+                                                    .is_hold_cpu_slider = 1;
                                                 lbAudioAx_800237A8(0xB7, 0x7F,
                                                                    0x40);
                                             }
                                         }
                                     }
 
-                                    if (dp->is_hold_handicap_slider == 0) {
+                                    if (mnCharSel_803F0DFC.doors[di]
+                                            .is_hold_handicap_slider == 0)
+                                    {
                                         GameRules* rules3 =
                                             gmMainLib_GetGameRules();
                                         if (rules3->handicap == 2) {
-                                            u8 pk = dp->p_kind;
+                                            u8 pk =
+                                                mnCharSel_803F0DFC.doors[di]
+                                                    .p_kind;
                                             if (pk != 3 &&
                                                 (pk == 1 ||
                                                  di == (s32) cursor->x4))
                                             {
                                                 lb_80011E24(
                                                     mnCharSel_804D6CC0, &sp98,
-                                                    dp->cpuslider_joint, -1);
+                                                    mnCharSel_803F0DFC
+                                                        .doors[di]
+                                                        .cpuslider_joint,
+                                                    -1);
                                                 lb_8000B1CC(sp98, NULL,
                                                             (&sp88));
                                                 {
@@ -2901,7 +2918,9 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                         cursor->x10 =
                                                             (f32) (1.7f +
                                                                    sp88.y);
-                                                        dp->is_hold_handicap_slider =
+                                                        mnCharSel_803F0DFC
+                                                            .doors[di]
+                                                            .is_hold_handicap_slider =
                                                             1;
                                                         lbAudioAx_800237A8(
                                                             0xB7, 0x7F, 0x40);
