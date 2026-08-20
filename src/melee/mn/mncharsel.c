@@ -3394,7 +3394,8 @@ void fn_802633B0(HSD_GObj* gobj)
 {
     HSD_JObj* list_jobj;
     HSD_JObj* arrow_jobj;
-    HSD_JObj* handicap_slider_jobj;
+    /// Unidentified locals; they only reserve the original's stack slots.
+    UNUSED u8 unk7C[4];
     GXColor white;
     GXColor gray;
     HSD_JObj* list_origin_jobj;
@@ -3403,6 +3404,8 @@ void fn_802633B0(HSD_GObj* gobj)
     GXColor row_color;
     GXColor used_row_color;
     GXColor white_copy;
+    UNUSED u8 unk34[32];
+    HSD_JObj* handicap_slider_jobj;
     CSSTagData* tag;
     int port;
     s32 num_entries;
@@ -3812,7 +3815,7 @@ void fn_802633B0(HSD_GObj* gobj)
         break;
     }
     }
-    PAD_STACK(64);
+    PAD_STACK(28);
 }
 void mnCharSel_80264070(void)
 {
