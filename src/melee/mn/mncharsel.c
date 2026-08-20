@@ -179,8 +179,8 @@ void mnCharSel_8025BD30(void)
 
 static void getStickDelta(int port, f32* dx, f32* dy)
 {
-    f32 stick_x = (f32) (s8) (u8) HSD_PadCopyStatus[(u8) port].stickX;
-    f32 stick_y = (f32) (s8) (u8) HSD_PadCopyStatus[(u8) port].stickY;
+    f32 stick_x = (f32) HSD_PadCopyStatus[(u8) port].stickX;
+    f32 stick_y = (f32) HSD_PadCopyStatus[(u8) port].stickY;
     f32 mag_sq = (stick_x * stick_x) + (stick_y * stick_y);
     if (mag_sq < 200.0f) {
         *dy = 0.0f;
@@ -891,14 +891,14 @@ void mnCharSel_8025DB34(u8 arg0)
             HSD_ForeachAnim(sp80, JOBJ_TYPE, MOBJ_MASK, HSD_AObjStopAnim,
                             AOBJ_ARG_AOV, 0, 0);
         } else {
-            temp_f31 = (f32) mnCharSel_804D50D8[(s8) (u8) mnCharSel_804D6CF0];
+            temp_f31 = (f32) mnCharSel_804D50D8[mnCharSel_804D6CF0];
             lb_80011E24(mnCharSel_804D6CC0, &sp7C, 0x29, -1);
             HSD_ForeachAnim(sp7C, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
                             AOBJ_ARG_AF, temp_f31);
             HSD_JObjAnimAll(sp7C);
             HSD_ForeachAnim(sp7C, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
                             AOBJ_ARG_AOV, 0, 0);
-            temp_f31 = (f32) mnCharSel_804D50D8[(s8) (u8) mnCharSel_804D6CF0];
+            temp_f31 = (f32) mnCharSel_804D50D8[mnCharSel_804D6CF0];
             lb_80011E24(mnCharSel_804D6CC0, &sp78, 0x2B, -1);
             HSD_ForeachAnim(sp78, JOBJ_TYPE, MOBJ_MASK, HSD_AObjReqAnim,
                             AOBJ_ARG_AF, temp_f31);
@@ -1225,9 +1225,9 @@ void mnCharSel_8025DB34(u8 arg0)
                 int port;
                 if (mnCharSel_804D6CF5 == 1) {
                     if ((int) arg0 != 0) {
-                        port = (s8) (u8) mnCharSel_804D6CF1;
+                        port = mnCharSel_804D6CF1;
                     } else {
-                        port = (s8) (u8) mnCharSel_804D6CF0;
+                        port = mnCharSel_804D6CF0;
                     }
                 } else {
                     port = arg0;
@@ -1622,8 +1622,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
             }
         }
     } else {
-        i = 0;
-        while (i < (s32) mnCharSel_804D6CF5) {
+        for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
             lb_80011E24(mnCharSel_804D6CC0, &sp54,
                         mnCharSel_803F0DFC.doors[i].costume_joint, -1);
             if (mnCharSel_804A0BD0[i]->x5 != 0) {
@@ -1643,7 +1642,6 @@ void fn_8025F0E0(HSD_GObj* gobj)
                 }
                 HSD_MObjSetAlpha(mobj, 1.0f);
             }
-            i += 1;
         }
     }
     HSD_JObjAnimAll(jobj);
@@ -1910,7 +1908,7 @@ static inline void updateCursorDisplay(HSD_JObj* jobj,
     {
         s32 color_idx;
         if (mnCharSel_804D6CF5 == 1) {
-            color_idx = (s8) (u8) mnCharSel_804D6CF0;
+            color_idx = mnCharSel_804D6CF0;
         } else if (mnCharSel_804D6CB0->data.data.rules.is_teams == 0) {
             color_idx = cursor->x4;
         } else {
@@ -1925,9 +1923,9 @@ static inline void updateCursorDisplay(HSD_JObj* jobj,
                 s32 port = cursor->x4;
                 if (mnCharSel_804D6CF5 == 1) {
                     if (port != 0) {
-                        port = (s8) (u8) mnCharSel_804D6CF1;
+                        port = mnCharSel_804D6CF1;
                     } else {
-                        port = (s8) (u8) mnCharSel_804D6CF0;
+                        port = mnCharSel_804D6CF0;
                     }
                 }
                 frame_idx = (mnCharSel_804D6CEC & 3) + (port * 4);
@@ -1935,9 +1933,9 @@ static inline void updateCursorDisplay(HSD_JObj* jobj,
                 s32 port = cursor->x4;
                 if (mnCharSel_804D6CF5 == 1) {
                     if (port != 0) {
-                        port = (s8) (u8) mnCharSel_804D6CF1;
+                        port = mnCharSel_804D6CF1;
                     } else {
-                        port = (s8) (u8) mnCharSel_804D6CF0;
+                        port = mnCharSel_804D6CF0;
                     }
                 }
                 frame_idx = color_idx + (port * 4);
@@ -2092,7 +2090,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
             buttons = HSD_PadCopyStatus[port].button;
             getStickDelta(port, &dx, &dy);
 
-            if ((s8) (u8) HSD_PadCopyStatus[cursor->x4].err != 0) {
+            if (HSD_PadCopyStatus[cursor->x4].err != 0) {
                 if (cursor->x5 != 3) {
                     cursor->xC = (f32) ((15.0f * cursor->x4) - 31.0f);
                     cursor->x10 = -21.5f;
@@ -2239,11 +2237,9 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                     s32 player_idx;
                                     if (mnCharSel_804D6CF5 == 1) {
                                         if ((s32) grabbed != 0) {
-                                            player_idx =
-                                                (s8) (u8) mnCharSel_804D6CF1;
+                                            player_idx = mnCharSel_804D6CF1;
                                         } else {
-                                            player_idx =
-                                                (s8) (u8) mnCharSel_804D6CF0;
+                                            player_idx = mnCharSel_804D6CF0;
                                         }
                                     } else {
                                         player_idx = grabbed;
@@ -2315,10 +2311,10 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                             s32 player_idx;
                                             if (mnCharSel_804D6CF5 == 1) {
                                                 if ((s32) grabbed != 0) {
-                                                    player_idx = (s8) (u8)
+                                                    player_idx =
                                                         mnCharSel_804D6CF1;
                                                 } else {
-                                                    player_idx = (s8) (u8)
+                                                    player_idx =
                                                         mnCharSel_804D6CF0;
                                                 }
                                             } else {
@@ -2450,7 +2446,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                     data2.stocks = (u8) (data2.stocks - 1);
                                     updateStockIcons(&data2, &sp54, 1);
                                     mnCharSel_804D6CB0->data.data
-                                        .players[(s8) (u8) mnCharSel_804D6CF0]
+                                        .players[mnCharSel_804D6CF0]
                                         .stocks = (s8) data2.stocks;
                                     sfxMove();
                                 } else {
@@ -2463,7 +2459,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                     data2.stocks = (u8) (data2.stocks + 1);
                                     updateStockIcons(&data2, &sp50, 1);
                                     mnCharSel_804D6CB0->data.data
-                                        .players[(s8) (u8) mnCharSel_804D6CF0]
+                                        .players[mnCharSel_804D6CF0]
                                         .stocks = (s8) data2.stocks;
                                     sfxMove();
                                 } else {
@@ -2665,10 +2661,9 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                     *pk = 3;
                                                     break;
                                                 case 4:
-                                                    if ((s8) (u8)
-                                                            HSD_PadCopyStatus
-                                                                [(u8) di]
-                                                                    .err != 0)
+                                                    if (HSD_PadCopyStatus
+                                                            [(u8) di]
+                                                                .err != 0)
                                                     {
                                                         *pk = 1;
                                                     } else {
@@ -3055,7 +3050,7 @@ void fn_80262648(HSD_GObj* gobj)
         if (prev_port != port || model->x7 > 0x27U) {
             if (port < 4U) {
                 if (mnCharSel_804D6CF5 == 1) {
-                    f32 f24 = (f32) ((s8) (u8) mnCharSel_804D6CF0 * 4);
+                    f32 f24 = (f32) (mnCharSel_804D6CF0 * 4);
                     animateCharModel(jobj, f24);
                 } else {
                     f32 f24 = (f32) (model->x4 * 4);
@@ -3668,7 +3663,7 @@ void fn_802633B0(HSD_GObj* gobj)
             if ((s32) tag->next_tag == row) {
                 if (IsNameListFull() == 0) {
                     if (mnCharSel_804D6CF5 == 1) {
-                        mnCharSel_804D6CF9 = (s8) (u8) mnCharSel_804D6CF0;
+                        mnCharSel_804D6CF9 = mnCharSel_804D6CF0;
                     } else {
                         mnCharSel_804D6CF9 = (s8) tag->port;
                     }
