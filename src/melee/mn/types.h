@@ -477,17 +477,17 @@ struct CSSDoorsData {
     u8 xca;
     u8 xcb;
     u8 xcc;
-    u8 xcd;
-    u8 xce;
+    u8 cpu_level;
+    u8 cpu_level_shown;
     u8 scroll_flag;
-    float xcf;
+    float cpu_slider_x;
     HSD_Text* xd3;
-    float xd7;
-    float xdb;
-    float xdf;
-    float xe3;
-    float xe7;
-    float xeb;
+    float cpudown_left;
+    float cpudown_right;
+    float cpuup_left;
+    float cpuup_right;
+    float cpubtn_top;
+    float cpubtn_btm;
 };
 
 struct CSSDoorsData2 {

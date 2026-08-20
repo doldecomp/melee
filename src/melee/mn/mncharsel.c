@@ -1665,34 +1665,44 @@ void fn_8025F0E0(HSD_GObj* gobj)
         }
     } else {
         if (mnCharSel_803F0DFC.scroll_flag != 0) {
-            if (mnCharSel_803F0DFC.xcd != mnCharSel_803F0DFC.xce) {
-                if (mnCharSel_803F0DFC.xcd < mnCharSel_803F0DFC.xce) {
-                    mnCharSel_803F0DFC.xcf += 31.0f;
-                    if (mnCharSel_803F0DFC.xcf >=
-                        124.0f - 248.0f * (f32) mnCharSel_803F0DFC.xcd)
+            if (mnCharSel_803F0DFC.cpu_level !=
+                mnCharSel_803F0DFC.cpu_level_shown)
+            {
+                if (mnCharSel_803F0DFC.cpu_level <
+                    mnCharSel_803F0DFC.cpu_level_shown)
+                {
+                    mnCharSel_803F0DFC.cpu_slider_x += 31.0f;
+                    if (mnCharSel_803F0DFC.cpu_slider_x >=
+                        124.0f - 248.0f * (f32) mnCharSel_803F0DFC.cpu_level)
                     {
-                        mnCharSel_803F0DFC.xce = mnCharSel_803F0DFC.xcd;
+                        mnCharSel_803F0DFC.cpu_level_shown =
+                            mnCharSel_803F0DFC.cpu_level;
                     }
                 } else {
-                    mnCharSel_803F0DFC.xcf = mnCharSel_803F0DFC.xcf - 31.0f;
-                    if (mnCharSel_803F0DFC.xcf <=
-                        124.0f - 248.0f * (f32) mnCharSel_803F0DFC.xcd)
+                    mnCharSel_803F0DFC.cpu_slider_x =
+                        mnCharSel_803F0DFC.cpu_slider_x - 31.0f;
+                    if (mnCharSel_803F0DFC.cpu_slider_x <=
+                        124.0f - 248.0f * (f32) mnCharSel_803F0DFC.cpu_level)
                     {
-                        mnCharSel_803F0DFC.xce = mnCharSel_803F0DFC.xcd;
+                        mnCharSel_803F0DFC.cpu_level_shown =
+                            mnCharSel_803F0DFC.cpu_level;
                     }
                 }
             }
-            if (mnCharSel_803F0DFC.xcd == mnCharSel_803F0DFC.xce) {
+            if (mnCharSel_803F0DFC.cpu_level ==
+                mnCharSel_803F0DFC.cpu_level_shown)
+            {
                 mnCharSel_803F0DFC.scroll_flag = 0;
-                mnCharSel_803F0DFC.xcf =
-                    124.0f - 248.0f * (f32) mnCharSel_803F0DFC.xcd;
+                mnCharSel_803F0DFC.cpu_slider_x =
+                    124.0f - 248.0f * (f32) mnCharSel_803F0DFC.cpu_level;
             }
             {
                 int j;
                 for (j = 0; j < 5; j++) {
-                    HSD_SisLib_803A746C(
-                        mnCharSel_803F0DFC.xd3, j,
-                        248.0f * (f32) j + mnCharSel_803F0DFC.xcf, 0.0f);
+                    HSD_SisLib_803A746C(mnCharSel_803F0DFC.xd3, j,
+                                        248.0f * (f32) j +
+                                            mnCharSel_803F0DFC.cpu_slider_x,
+                                        0.0f);
                 }
             }
         }
@@ -2595,46 +2605,50 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                     cpu_level_widget:
                         if (mnCharSel_804D6CB0->match_type <= 0xDU) {
                             f32 cy2 = cursor->x10;
-                            if (cy2 < all_data->doors_data.xe7 &&
-                                cy2 > all_data->doors_data.xeb)
+                            if (cy2 < all_data->doors_data.cpubtn_top &&
+                                cy2 > all_data->doors_data.cpubtn_btm)
                             {
                                 f32 cx2 = cursor->xC;
-                                if (cx2 > all_data->doors_data.xd7 &&
-                                    cx2 < all_data->doors_data.xdb)
+                                if (cx2 > all_data->doors_data.cpudown_left &&
+                                    cx2 < all_data->doors_data.cpudown_right)
                                 {
                                     cursor->x8 = 1;
                                     if ((trigger & HSD_PAD_A) &&
-                                        all_data->doors_data.xcd != 0)
+                                        all_data->doors_data.cpu_level != 0)
                                     {
-                                        all_data->doors_data.xcd =
-                                            (u8) (all_data->doors_data.xcd -
+                                        all_data->doors_data.cpu_level =
+                                            (u8) (all_data->doors_data
+                                                      .cpu_level -
                                                   1);
                                         all_data->doors_data.scroll_flag = 1;
                                         mnCharSel_804D6CB0->data.data
                                             .players[(
                                                 s8) (u8) mnCharSel_804D6CF0]
                                             .cpu_level =
-                                            all_data->doors_data.xcd;
+                                            all_data->doors_data.cpu_level;
                                         sfxMove();
                                     } else {
                                         goto door_clicks;
                                     }
-                                } else if (cx2 > all_data->doors_data.xdf &&
-                                           cx2 < all_data->doors_data.xe3)
+                                } else if (cx2 > all_data->doors_data
+                                                     .cpuup_left &&
+                                           cx2 < all_data->doors_data
+                                                     .cpuup_right)
                                 {
                                     cursor->x8 = 1;
                                     if ((trigger & HSD_PAD_A) &&
-                                        all_data->doors_data.xcd < 4U)
+                                        all_data->doors_data.cpu_level < 4U)
                                     {
-                                        all_data->doors_data.xcd =
-                                            (u8) (all_data->doors_data.xcd +
+                                        all_data->doors_data.cpu_level =
+                                            (u8) (all_data->doors_data
+                                                      .cpu_level +
                                                   1);
                                         all_data->doors_data.scroll_flag = 1;
                                         mnCharSel_804D6CB0->data.data
                                             .players[(
                                                 s8) (u8) mnCharSel_804D6CF0]
                                             .cpu_level =
-                                            all_data->doors_data.xcd;
+                                            all_data->doors_data.cpu_level;
                                         sfxMove();
                                     } else {
                                         goto door_clicks;
@@ -4482,10 +4496,10 @@ s32 mnCharSel_802640A0(void)
             {
                 u8 cpu_level =
                     css->data.data.players[mnCharSel_804D6CF0].cpu_level;
-                mnCharSel_803F0DFC.xce = cpu_level;
-                mnCharSel_803F0DFC.xcd = cpu_level;
+                mnCharSel_803F0DFC.cpu_level_shown = cpu_level;
+                mnCharSel_803F0DFC.cpu_level = cpu_level;
             }
-            mnCharSel_803F0DFC.xcf = 124.0f;
+            mnCharSel_803F0DFC.cpu_slider_x = 124.0f;
             mnCharSel_803F0DFC.xd3 = HSD_SisLib_803A6754(0, ctx);
             mnCharSel_803F0DFC.scroll_flag = 1;
             text = mnCharSel_803F0DFC.xd3;
