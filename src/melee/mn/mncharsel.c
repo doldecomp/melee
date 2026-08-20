@@ -3229,9 +3229,9 @@ void fn_80262648(HSD_GObj* gobj)
                     if (j != (s32) model->x4 && (*bdp)->x5 == 0 &&
                         dp->p_kind != 3 && dp->sel_icon < 0x19U)
                     {
-                        f32 angle;
                         f32 dx;
                         f32 dy;
+                        f32 angle;
                         do {
                             dx = (0.1f * (HSD_Randf() - 0.5f)) +
                                  (model->x8 - (*bdp)->x8);
@@ -3347,8 +3347,8 @@ void fn_80262648(HSD_GObj* gobj)
         f32 tx;
         f32 dy;
 
-        dy = model->x14 - model->xC;
         dx = model->x10 - (tx = model->x8);
+        dy = model->x14 - model->xC;
 
         if ((dx * dx + dy * dy) < 4.0f) {
             model->x10 = tx;
