@@ -3044,7 +3044,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                         {
                             f32 cy8 = cursor->x10;
                             if (cy8 > 0.2f && cy8 < 22.0f) {
-                                if (mnCharSel_804A0BD0[cport5]->x5 == 0) {
+                                if (mnCharSel_804A0BD0[cursor->x4]->x5 == 0) {
                                     mnCharSel_804A0BD0[cport5]->x5 =
                                         (u8) (cport5 + 1);
                                     mnCharSel_804A0BC0[cport5]->x5 = 1;
