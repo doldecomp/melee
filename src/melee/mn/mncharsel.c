@@ -3017,8 +3017,8 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                         }
                     } else if (trigger & HSD_PAD_B) {
                         u8 cport5 = cursor->x4;
-                        if (all_data->doors_data.doors[cport5].p_kind != 3 &&
-                            all_data->doors_data.doors[cport5].sel_icon <
+                        if (mnCharSel_803F0DFC.doors[cursor->x4].p_kind != 3 &&
+                            mnCharSel_803F0DFC.doors[cursor->x4].sel_icon <
                                 0x19U)
                         {
                             f32 cy8 = cursor->x10;
@@ -3028,8 +3028,8 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         (u8) (cport5 + 1);
                                     mnCharSel_804A0BC0[cport5]->x5 = 1;
                                     mnCharSel_804A0BC0[cport5]->x6 = cport5;
-                                    all_data->doors_data.doors[cport5]
-                                        .sel_icon = 0xD;
+                                    mnCharSel_803F0DFC.doors[cport5].sel_icon =
+                                        0xD;
                                     HSD_GObjGXLink_803909D8(
                                         mnCharSel_804A0BD0[cport5]->gobj,
                                         mnCharSel_804A0BC0[cport5]->gobj);
