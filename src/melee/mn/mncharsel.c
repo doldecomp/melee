@@ -3768,8 +3768,7 @@ void fn_802633B0(HSD_GObj* gobj)
                     hval = (u8) mnCharSel_804D6CB0->data.data.players[port2]
                                .handicap;
                 }
-                hval = hval != 0 ? hval : 1;
-                hval_f = (f32) hval;
+                hval_f = (f32) (hval != 0 ? hval : 1);
                 lb_80011E24(mnCharSel_804D6CC0, &handicap_slider_jobj,
                             mnCharSel_803F0DFC.doors[port].cpuslider_joint,
                             -1);
@@ -3793,8 +3792,7 @@ void fn_802633B0(HSD_GObj* gobj)
                             (u8) mnCharSel_804D6CB0->data.data.players[port3]
                                 .handicap;
                     }
-                    hval2 = hval2 != 0 ? hval2 : 1;
-                    hval_f = 1.25f * (f32) (hval2 - 1);
+                    hval_f = 1.25f * (f32) ((hval2 != 0 ? hval2 : 1) - 1);
                     HSD_JObjSetTranslateX(list_jobj, hval_f);
                 }
             }
@@ -4368,11 +4366,10 @@ s32 mnCharSel_802640A0(void)
             mnCharSel_804D6CF8 = td->next_tag;
         }
         if (mnCharSel_804D6CB0->data.data.players[player].xA != 0x78) {
-            char* name;
             td->use_tag = 1;
-            name =
-                GetNameText(mnCharSel_804D6CB0->data.data.players[player].xA);
-            HSD_SisLib_803A70A0(td->text, 0, name);
+            HSD_SisLib_803A70A0(
+                td->text, 0,
+                GetNameText(mnCharSel_804D6CB0->data.data.players[player].xA));
             td->text->default_kerning = 0;
         }
     }
