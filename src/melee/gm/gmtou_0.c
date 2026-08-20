@@ -1644,6 +1644,7 @@ extern f32 lbl_804DA6D8; // 4.5f
 extern f32 lbl_804DA6DC; // 130.0f
 extern f32 lbl_804DA6E0; // -278.0f
 extern f32 lbl_804DA6E4; // 255.0f
+extern f32 lbl_804DA6E8; // 0.0f
 //
 void fn_80193B58(s32* arg0, u32 arg1, u32 arg2)
 {
@@ -1769,7 +1770,6 @@ void fn_80193B58(s32* arg0, u32 arg1, u32 arg2)
     }
 }
 
-/// @todo Only differs by an r6/r7 swap in the second settings block.
 void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
 {
     struct Lbl804799B8_t* state = &lbl_804799B8;
@@ -1850,20 +1850,21 @@ void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
             fn_8018EC7C();
             fn_8018E618(tm->entrants, lbl_804DA6D8, 1);
             fn_80190480(lbl_804DA6DC);
-            fn_80190520(lbl_804DA6E0, lbl_804DA6E4, 0.0F);
+            fn_80190520(lbl_804DA6E0, lbl_804DA6E4, lbl_804DA6E8);
         }
     } else if (arg1 & 0x80002) {
         if (*mt != 0) {
             idx = arg0[0];
-            ptr = arg0 + idx;
-            if (*++ptr < (s32) (entry = table->max)[idx][!!*mt] + 1) {
-                if (*ptr + 1 <= clamp_val && *ptr + 1 < arg0[2]) {
-                    *ptr = *ptr + 1;
+            if (arg0[idx + 1] < (s32) (entry = table->max)[idx][!!*mt] + 1) {
+                if (arg0[idx + 1] + 1 <= clamp_val &&
+                    arg0[idx + 1] + 1 < arg0[2])
+                {
+                    arg0[idx + 1] = arg0[idx + 1] + 1;
                     sfxMove();
                     state->x8 = 5;
                     goto after_right;
                 }
-                *ptr = (s32) table->min[idx][!!*mt];
+                arg0[idx + 1] = (s32) table->min[idx][!!*mt];
                 idx = arg0[0];
                 val = arg0[idx + 1];
                 if (val != clamp_val) {
@@ -1871,7 +1872,7 @@ void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
                     state->x8 = 5;
                 }
             } else {
-                *ptr = (s32) table->min[idx][!!*mt];
+                arg0[idx + 1] = (s32) table->min[idx][!!*mt];
                 idx = arg0[0];
                 val = arg0[idx + 1];
                 if (val != (s32) entry[idx][!!*mt] + 1) {
@@ -1926,7 +1927,7 @@ void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
             fn_8018EC7C();
             fn_8018E618(tm->entrants, lbl_804DA6D8, 1);
             fn_80190480(lbl_804DA6DC);
-            fn_80190520(lbl_804DA6E0, lbl_804DA6E4, 0.0F);
+            fn_80190520(lbl_804DA6E0, lbl_804DA6E4, lbl_804DA6E8);
         }
     }
 
