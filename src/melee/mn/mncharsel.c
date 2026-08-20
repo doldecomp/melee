@@ -2990,19 +2990,18 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                             s32 closest = -1;
                             f32 closest_dist = 9.0f;
                             s32 ci;
-                            CSSDoor* dc = &all_data->doors_data.doors[0];
-                            struct CSSCharModel** model_ptr =
-                                &mnCharSel_804A0BD0[0];
-                            for (ci = 0; ci < (s32) n_doors;
-                                 dc++, model_ptr++, ci++)
-                            {
+                            for (ci = 0; ci < (s32) n_doors; ci++) {
                                 f32 cy7 = cursor->x10;
                                 if (!(cy7 < 0.2f) && !(cy7 > 22.0f)) {
-                                    u8 pk2 = dc->p_kind;
-                                    if (pk2 != 3 && dc->sel_icon < 0x19U &&
+                                    u8 pk2 =
+                                        mnCharSel_803F0DFC.doors[ci].p_kind;
+                                    if (pk2 != 3 &&
+                                        mnCharSel_803F0DFC.doors[ci].sel_icon <
+                                            0x19U &&
                                         (pk2 != 0 || (s32) cursor->x4 == ci))
                                     {
-                                        struct CSSCharModel* mc = *model_ptr;
+                                        struct CSSCharModel* mc =
+                                            mnCharSel_804A0BD0[ci];
                                         if (mc->x5 == 0) {
                                             f32 ddx =
                                                 3.8f + (cursor->xC - mc->x8);
