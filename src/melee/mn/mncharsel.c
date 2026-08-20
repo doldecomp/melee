@@ -3676,16 +3676,13 @@ void fn_802633B0(HSD_GObj* gobj)
                     mnCharSel_804D6CF6 = 4;
                     {
                         s32 k;
-                        struct CSSCursorData** cursor_ptr;
-                        cursor_ptr = mnCharSel_804A0BC0;
                         for (k = 0; k < (s32) mnCharSel_804D6CF5; k++) {
-                            if (((*cursor_ptr)->x5 == 1) &&
+                            if ((mnCharSel_804A0BC0[k]->x5 == 1) &&
                                 (mnCharSel_8025FDEC((u8) k) == 0))
                             {
                                 mnCharSel_8025DB34((u8) k);
-                                (*cursor_ptr)->x5 = 2;
+                                mnCharSel_804A0BC0[k]->x5 = 2;
                             }
-                            cursor_ptr += 1;
                         }
                     }
                     return;
