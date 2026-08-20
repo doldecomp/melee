@@ -2292,7 +2292,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         mnCharSel_8025DB34(grabbed);
                                         cursor->x5 = 2;
                                         lbAudioAx_800237A8(0xB8, 0x7F, 0x40);
-                                        goto block_392;
+                                        goto update_display;
                                     }
                                 }
                             }
@@ -2370,7 +2370,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                             }
                                             lbAudioAx_800237A8(0xB8, 0x7F,
                                                                0x40);
-                                            goto block_392;
+                                            goto update_display;
                                         }
                                         goto cancel_or_costume;
                                     }
@@ -2423,14 +2423,14 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                             hc_door, trigger, &sp98, &sp88, true);
                     } break;
                     }
-                    goto block_392;
+                    goto update_display;
                 }
 
                 if ((cursor->xC > 17.3f) && (cursor->x10 > 22.0f)) {
                     cursor->x8 = 1;
                     if (trigger & HSD_PAD_A) {
                         mnCharSel_804D6CF6 = 2;
-                        goto block_392;
+                        goto update_display;
                     }
                 }
 
@@ -2454,7 +2454,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         .stocks = (s8) data2.stocks;
                                     sfxMove();
                                 } else {
-                                    goto block_231;
+                                    goto cpu_level_widget;
                                 }
                             } else if (cx > data2.x100 && cx < data2.x104) {
                                 cursor->x8 = 1;
@@ -2467,16 +2467,16 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         .stocks = (s8) data2.stocks;
                                     sfxMove();
                                 } else {
-                                    goto block_231;
+                                    goto cpu_level_widget;
                                 }
                             } else {
-                                goto block_231;
+                                goto cpu_level_widget;
                             }
                         } else {
-                            goto block_231;
+                            goto cpu_level_widget;
                         }
                     } else {
-                    block_231:
+                    cpu_level_widget:
                         if (mnCharSel_804D6CB0->match_type <= 0xDU) {
                             f32 cy2 = cursor->x10;
                             if (cy2 < all_data->doors_data.xe7 &&
@@ -2501,7 +2501,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                             all_data->doors_data.xcd;
                                         sfxMove();
                                     } else {
-                                        goto block_298;
+                                        goto door_clicks;
                                     }
                                 } else if (cx2 > all_data->doors_data.xdf &&
                                            cx2 < all_data->doors_data.xe3)
@@ -2521,19 +2521,19 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                             all_data->doors_data.xcd;
                                         sfxMove();
                                     } else {
-                                        goto block_298;
+                                        goto door_clicks;
                                     }
                                 } else {
-                                    goto block_298;
+                                    goto door_clicks;
                                 }
                             } else {
-                                goto block_298;
+                                goto door_clicks;
                             }
                         } else {
-                            goto block_298;
+                            goto door_clicks;
                         }
                     }
-                    goto block_392;
+                    goto update_display;
                 }
 
                 if (mnCharSel_804D6CB0->match_type != 2) {
@@ -2597,13 +2597,13 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                             }
                             mnCharSel_8025EE8C(mnCharSel_804D6CB0->match_type);
                         } else {
-                            goto block_294;
+                            goto try_costume_change;
                         }
                     } else {
-                        goto block_294;
+                        goto try_costume_change;
                     }
                 } else {
-                block_294: {
+                try_costume_change: {
                     u8 cport2 = cursor->x4;
                     if (mnCharSel_804A0BD0[cport2]->x5 == 0 &&
                         mnCharSel_804D6CB0->data.data.rules.is_teams == 0 &&
@@ -2612,7 +2612,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                         mnCharSel_CostumeChange((s32) cport2, trigger);
                     }
                 }
-                block_298: {
+                door_clicks: {
                     u32 a_press2 = trigger & HSD_PAD_A;
                     if (a_press2 != 0) {
                         if (mnCharSel_804D6CF5 != 1) {
@@ -2975,12 +2975,12 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                 }
                 }
             }
-            goto block_392;
+            goto update_display;
         }
-        goto block_392;
+        goto update_display;
     }
 
-block_392:
+update_display:
     updateCursorDisplay(jobj, cursor);
 
     PAD_STACK(0x28);
@@ -3662,7 +3662,7 @@ void fn_802633B0(HSD_GObj* gobj)
                 tag->use_tag = 0;
                 tag->state = 4;
                 sfxMove();
-                goto block_116;
+                goto check_cancel;
             }
 
             if ((s32) tag->next_tag == row) {
@@ -3686,7 +3686,7 @@ void fn_802633B0(HSD_GObj* gobj)
                     }
                     return;
                 }
-                goto block_116;
+                goto check_cancel;
             }
 
             if ((s32) tag->next_tag > row) {
@@ -3698,7 +3698,7 @@ void fn_802633B0(HSD_GObj* gobj)
                             (s32) ddata->data.data.players[p].xA ==
                                 (s32) (row - 1))
                         {
-                            goto block_116;
+                            goto check_cancel;
                         }
                     }
                     {
@@ -3738,9 +3738,8 @@ void fn_802633B0(HSD_GObj* gobj)
                     }
                 }
             }
-            goto block_116;
         }
-    block_116:
+    check_cancel:
         if (trigger & HSD_PAD_B) {
             tag->state = 4;
             sfxBack();
