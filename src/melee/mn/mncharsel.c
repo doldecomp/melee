@@ -2749,7 +2749,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                     (mnCharSel_804A0BC0[di])->x5 != 1)
                                 {
                                     tag_data =
-                                        all_data->doors_data.tags[di].data;
+                                        mnCharSel_803F0DFC.tags[di].data;
                                     if (tag_data->state != 0) {
                                         continue;
                                     }
