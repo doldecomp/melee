@@ -3627,9 +3627,9 @@ void fn_802633B0(HSD_GObj* gobj)
         if (tag->scroll_force) {
             scroll_pos = tag->x8;
             new_pos = scroll_pos + tag->scroll_force;
-            page = (s32) (scroll_pos * 0.03125f);
+            page = (s32) (scroll_pos / 32.0f);
             tag->x8 = new_pos;
-            new_page = (s32) (tag->x8 * 0.03125f);
+            new_page = (s32) (tag->x8 / 32.0f);
             if (tag->x8 > 0.0f) {
                 tag->x8 = 0.0f;
             }
@@ -3737,7 +3737,7 @@ void fn_802633B0(HSD_GObj* gobj)
             lb_8000B1CC(list_origin_jobj, NULL, &list_origin);
             cursor_row = 0.5f * (0.8f + (list_origin.y -
                                          mnCharSel_804A0BC0[tag->port]->x10)) -
-                         (tag->x8 * 0.03125f);
+                         (tag->x8 / 32.0f);
             row = (s32) cursor_row;
 
             if ((s32) cursor_row == 0) {
