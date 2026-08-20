@@ -2047,7 +2047,6 @@ static inline void updateCursorDisplay(HSD_JObj* jobj,
         }
 
         {
-            s32 frame_idx;
             if (cursor->x8 != 0) {
                 s32 port = cursor->x4;
                 if (mnCharSel_804D6CF5 == 1) {
@@ -2057,7 +2056,7 @@ static inline void updateCursorDisplay(HSD_JObj* jobj,
                         port = mnCharSel_804D6CF0;
                     }
                 }
-                frame_idx = (mnCharSel_804D6CEC & 3) + (port * 4);
+                color_idx = (mnCharSel_804D6CEC & 3) + (port * 4);
             } else {
                 s32 port = cursor->x4;
                 if (mnCharSel_804D6CF5 == 1) {
@@ -2067,14 +2066,14 @@ static inline void updateCursorDisplay(HSD_JObj* jobj,
                         port = mnCharSel_804D6CF0;
                     }
                 }
-                frame_idx = color_idx + (port * 4);
+                color_idx = color_idx + (port * 4);
             }
 
             lb_80011E24(jobj, &color_jobj, 3, -1);
             {
                 HSD_JObj* anim_jobj = color_jobj;
                 HSD_ForeachAnim(anim_jobj, JOBJ_TYPE, TOBJ_MASK,
-                                HSD_AObjReqAnim, AOBJ_ARG_AF, (f32) frame_idx);
+                                HSD_AObjReqAnim, AOBJ_ARG_AF, (f32) color_idx);
             }
             HSD_JObjAnimAll(color_jobj);
             HSD_ForeachAnim(color_jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
