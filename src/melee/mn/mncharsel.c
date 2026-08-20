@@ -2167,8 +2167,8 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     struct CSSCursorData* cursor = gobj->user_data;
     CSSAllData* all_data = CSS_ALL;
-    f32 stick_x;
-    f32 stick_y;
+    /// Unidentified local; it only reserves the original's stack slot.
+    UNUSED f32 unk1C;
     u32 trigger;
     int n_doors;
     u32 buttons;
