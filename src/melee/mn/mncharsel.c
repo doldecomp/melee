@@ -1346,27 +1346,6 @@ void mnCharSel_8025DB34(u8 arg0)
     }
 }
 
-static inline HSD_JObj* lb_80011E24_inline(int i)
-{
-    HSD_JObj* jobj;
-    lb_80011E24(mnCharSel_804D6CC0, &jobj, i, -1);
-    return jobj;
-}
-
-static inline void anim_inline(int i, float f)
-{
-    HSD_JObj* jobj;
-    lb_80011E24(mnCharSel_804D6CC0, &jobj, i, -1);
-    {
-        HSD_JObj* anim_jobj = jobj;
-        HSD_ForeachAnim(anim_jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
-                        AOBJ_ARG_AF, f);
-    }
-    HSD_JObjAnimAll(jobj);
-    HSD_ForeachAnim(jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim, AOBJ_ARG_AOV,
-                    0, 0);
-}
-
 void mnCharSel_8025EE8C(u8 idx)
 {
     float mode_frame;
