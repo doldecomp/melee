@@ -2024,6 +2024,22 @@ static inline void updateGrabbedSlider(struct CSSCursorData* cursor,
     }
 }
 
+/// Advances the door's team colour when the cursor clicks its team box.
+static inline void cycleTeam(struct CSSCursorData* cursor, CSSDoor* dp, s32 di)
+{
+    f32 cx5 = cursor->xC;
+    if (cx5 > dp->teambtn_left && cx5 < dp->teambtn_right) {
+        f32 cy5 = cursor->x10;
+        if (cy5 < -0.9999999046325683 && cy5 > -5.800000095367432) {
+            cursor->x10 = -3.4f;
+            dp->team = (u8) ((dp->team + 1) % 3);
+            mnCharSel_804D6CB0->data.data.players[di].team = dp->team;
+            mnCharSel_8025DB34((u8) di);
+            sfxMove();
+        }
+    }
+}
+
 void mnCharSel_CursorThink(HSD_GObj* gobj)
 {
     HSD_JObj* sp98;
@@ -2688,26 +2704,8 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                             .is_teams == 1 &&
                                     dp->p_kind != 3)
                                 {
-                                    f32 cx5 = cursor->xC;
-                                    if (cx5 > dp->teambtn_left &&
-                                        cx5 < dp->teambtn_right)
-                                    {
-                                        f32 cy5 = cursor->x10;
-                                        if (cy5 < -0.9999999046325683 &&
-                                            cy5 > -5.800000095367432)
-                                        {
-                                            cursor->x10 = -3.4f;
-                                            dp->team =
-                                                (u8) ((dp->team + 1) % 3);
-                                            mnCharSel_804D6CB0->data.data
-                                                .players[di]
-                                                .team = dp->team;
-                                            mnCharSel_8025DB34((u8) di);
-                                            sfxMove();
-                                        }
-                                    }
+                                    cycleTeam(cursor, dp, di);
                                 }
-
                                 if (a_press2 != 0) {
                                     if (dp->is_hold_cpu_slider == 0 &&
                                         dp->p_kind == 1)
