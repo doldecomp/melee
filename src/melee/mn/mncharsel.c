@@ -2156,8 +2156,12 @@ static inline void cycleTeam(struct CSSCursorData* cursor, CSSDoor* dp, s32 di)
 void mnCharSel_CursorThink(HSD_GObj* gobj)
 {
     HSD_JObj* sp98;
+    /// Unidentified locals; they only reserve the original's stack slots.
+    UNUSED u8 unk94[4];
     Point3d sp88;
+    UNUSED u8 unk78[16];
     HSD_JObj* sp74;
+    UNUSED u8 unk58[28];
     HSD_JObj* sp54;
     HSD_JObj* sp50;
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -2170,9 +2174,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
     u32 buttons;
     f32 dx;
     f32 dy;
-    f32 mag_sq;
     int grabbed;
-    u8 operand_pad[4];
 
     if (mnCharSel_804D6CB0->match_type == TRAINING_MODE) {
         n_doors = 2;
@@ -3095,8 +3097,6 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
 
 update_display:
     updateCursorDisplay(jobj, cursor);
-
-    PAD_STACK(0x28);
 }
 static inline void animateCharModel(HSD_JObj* jobj, f32 frame)
 {
