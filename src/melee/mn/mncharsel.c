@@ -2695,7 +2695,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                             }
                                             mnCharSel_8025DB34((u8) di);
                                             sfxMove();
-                                            continue;
+                                            break;
                                         }
                                     }
                                 }
