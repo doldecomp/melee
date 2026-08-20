@@ -4255,9 +4255,9 @@ s32 mnCharSel_802640A0(void)
                         mnCharSel_803F0DFC.name_list_joint, -1);
         } else {
             lb_80011E24(mnCharSel_804D6CC0, &sp108, tag->list_joint, -1);
-        }
-        if (i == 3) {
-            HSD_JObjSetTranslateX(sp108, 16.7f);
+            if (i == 3) {
+                HSD_JObjSetTranslateX(sp108, 16.7f);
+            }
         }
         lb_8000B1CC(sp108, NULL, &spEC);
         td->name_ls = HSD_SisLib_803A6754(0, ctx);
