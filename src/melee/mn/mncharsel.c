@@ -3757,19 +3757,10 @@ void fn_802633B0(HSD_GObj* gobj)
         if (gmMainLib_GetGameRules()->handicap != 0 && mnCharSel_804D6CF5 == 4)
         {
             {
-                u8 port2;
-                u8 hval;
+                s32 hval;
                 f32 hval_f;
-                port2 = tag->port;
-                if (gmMainLib_GetGameRules()->handicap == 1) {
-                    hval = (u8) gm_801685D4(
-                        port2,
-                        mnCharSel_804D6CB0->data.data.players[port2].xA);
-                } else {
-                    hval = (u8) mnCharSel_804D6CB0->data.data.players[port2]
-                               .handicap;
-                }
-                hval_f = (f32) (hval != 0 ? hval : 1);
+                hval = getHandicapValue((int) tag->port);
+                hval_f = (f32) hval;
                 lb_80011E24(mnCharSel_804D6CC0, &handicap_slider_jobj,
                             mnCharSel_803F0DFC.doors[port].cpuslider_joint,
                             -1);
@@ -3779,23 +3770,9 @@ void fn_802633B0(HSD_GObj* gobj)
                 HSD_ForeachAnim(handicap_slider_jobj, JOBJ_TYPE, TOBJ_MASK,
                                 HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
                 list_jobj = handicap_slider_jobj;
-                {
-                    u8 port3;
-                    s32 hval2;
-                    f32 hval_f;
-                    port3 = tag->port;
-                    if (gmMainLib_GetGameRules()->handicap == 1) {
-                        hval2 = (u8) gm_801685D4(
-                            port3,
-                            mnCharSel_804D6CB0->data.data.players[port3].xA);
-                    } else {
-                        hval2 =
-                            (u8) mnCharSel_804D6CB0->data.data.players[port3]
-                                .handicap;
-                    }
-                    hval_f = 1.25f * (f32) ((hval2 != 0 ? hval2 : 1) - 1);
-                    HSD_JObjSetTranslateX(list_jobj, hval_f);
-                }
+                hval = getHandicapValue((int) tag->port);
+                hval_f = 1.25f * (f32) (hval - 1);
+                HSD_JObjSetTranslateX(list_jobj, hval_f);
             }
         }
         tag->state = 5;
@@ -3815,7 +3792,7 @@ void fn_802633B0(HSD_GObj* gobj)
         break;
     }
     }
-    PAD_STACK(28);
+    PAD_STACK(16);
 }
 void mnCharSel_80264070(void)
 {
