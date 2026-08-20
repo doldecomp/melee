@@ -2768,7 +2768,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                             {
                                                 u8 new_kind;
                                                 pk = &mnCharSel_803F0DFC
-                                                          .doors[(s8) di]
+                                                          .doors[di]
                                                           .p_kind;
                                                 new_kind = *pk + 1;
                                                 *pk = new_kind;
