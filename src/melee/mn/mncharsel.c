@@ -2662,11 +2662,11 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                             for (loop_i = 0; loop_i < (s32) mnCharSel_804D6CF5;
                                  loop_i++)
                             {
-                                if ((mnCharSel_804A0BC0[loop_i])->x5 == 1 &&
+                                if (mnCharSel_804A0BC0[loop_i]->x5 == 1 &&
                                     mnCharSel_8025FDEC((u8) loop_i) == 0)
                                 {
                                     mnCharSel_8025DB34((u8) loop_i);
-                                    (mnCharSel_804A0BC0[loop_i])->x5 = 2;
+                                    mnCharSel_804A0BC0[loop_i]->x5 = 2;
                                 }
                             }
                             return;
@@ -2748,7 +2748,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                 if ((dp->is_hold_cpu_slider |
                                      dp->is_hold_handicap_slider) == 0 &&
                                     mnCharSel_804A0BD0[di]->x5 == 0 &&
-                                    (mnCharSel_804A0BC0[di])->x5 != 1)
+                                    mnCharSel_804A0BC0[di]->x5 != 1)
                                 {
                                     tag_data =
                                         mnCharSel_803F0DFC.tags[di].data;
@@ -3023,8 +3023,8 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                 if (mnCharSel_804A0BD0[cport5]->x5 == 0) {
                                     mnCharSel_804A0BD0[cport5]->x5 =
                                         (u8) (cport5 + 1);
-                                    (mnCharSel_804A0BC0[cport5])->x5 = 1;
-                                    (mnCharSel_804A0BC0[cport5])->x6 = cport5;
+                                    mnCharSel_804A0BC0[cport5]->x5 = 1;
+                                    mnCharSel_804A0BC0[cport5]->x6 = cport5;
                                     all_data->doors_data.doors[cport5]
                                         .sel_icon = 0xD;
                                     HSD_GObjGXLink_803909D8(
@@ -3062,8 +3062,8 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                     {
                                         mnCharSel_804A0BD0[cport7]->x5 =
                                             (s8) (cport7 + 1);
-                                        (mnCharSel_804A0BC0[cport7])->x5 = 1;
-                                        (mnCharSel_804A0BC0[cport7])->x6 =
+                                        mnCharSel_804A0BC0[cport7]->x5 = 1;
+                                        mnCharSel_804A0BC0[cport7]->x6 =
                                             cport7;
                                         all_data->doors_data.doors[cport7]
                                             .sel_icon = 0xD;
