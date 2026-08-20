@@ -463,7 +463,9 @@ struct CSSKOStar {
 
 struct CSSDoorsData {
     CSSDoor doors[4]; // 0x00
-    CSSTag tags[4];   // 0x90
+};
+
+struct CSSDoorsMisc {
     u8 xc0;
     u8 xc1;
     u8 xc2;
