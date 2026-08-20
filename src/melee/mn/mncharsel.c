@@ -4936,8 +4936,8 @@ s32 mnCharSel_802640A0(void)
             door->p_kind = mnCharSel_804D6CB0->data.data.players[i].slot_type;
             door->costume = mnCharSel_804D6CB0->data.data.players[i].color;
             door->p_kind_prev = 3;
-            door->dooranim_timer = 0;
             door->slideranim_timer = 0;
+            door->dooranim_timer = 0;
             door->is_hold_handicap_slider = 0;
             door->is_hold_cpu_slider = 0;
             door->sel_icon_prev = door->sel_icon;
