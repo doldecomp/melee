@@ -2663,8 +2663,8 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                             }
                                             mnCharSel_804D6CB0->data.data
                                                 .players[di]
-                                                .slot_type = dp->p_kind;
-                                            if (dp->p_kind == 1) {
+                                                .slot_type = *pk;
+                                            if (*pk == 1) {
                                                 mnCharSel_804D6CB0->data.data
                                                     .players[di]
                                                     .xA = 0x78;
