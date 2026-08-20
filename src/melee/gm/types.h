@@ -8,6 +8,7 @@
 
 #include "dolphin/types.h"
 
+#include "ty/forward.h"
 #include <melee/gm/forward.h> // IWYU pragma: export
 #include <melee/gr/forward.h>
 #include <melee/pl/forward.h>
@@ -331,7 +332,7 @@ struct gmm_x1868 {
     /* 0x0448 */ struct gmm_x1CB0 x1CB0;
     /* 0x0468 */ s16 trophy_count;
     /* 0x046A */ u16 trophy_category_flags;
-    /* 0x046C */ u16 trophy_flags[0x125];
+    /* 0x046C */ u16 trophy_flags[TY_TROPHY_COUNT];
     /* 0x06B6 */ u8 padding_trophy_flags[0xE];
     /* 0x06C4 */ struct FighterData x1F2C[SELKIND_COUNT];
     /* 0x1760 */ struct NameTagDataBank x2FF8[2];

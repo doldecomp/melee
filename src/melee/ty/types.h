@@ -91,7 +91,7 @@ struct Toy {
     /* +198 */ char pad_198[0x19A - 0x198];
     /* +19A */ u16 x19A;
     /* +19C */ u16 x19C;
-    /* +19E */ u16 trophyTable[0x125];
+    /* +19E */ u16 trophyTable[TY_TROPHY_COUNT];
     /* +3E8 */ char pad_3E8[0x3EC - 0x3E8];
     /* +3EC */ s16 trophyCount;
 };

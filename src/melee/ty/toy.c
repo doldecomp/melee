@@ -259,7 +259,7 @@ int _Toy_80304D30(void)
     }
     memzero(sp14, sizeof(sp14));
     count = 0;
-    for (i = 0; i < 0x125; i++) {
+    for (i = 0; i < TY_TROPHY_COUNT; i++) {
         if (Toy_80304CC8(i)) {
             if (Toy_80304D30_48C0(i)) {
                 x = Toy_803060BC(i, 6);
@@ -432,7 +432,7 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
         }
         trophy++;
         byte_off += 2;
-    } while (trophy < 0x125);
+    } while (trophy < TY_TROPHY_COUNT);
 
     if (total != 0) {
         s32 use_new;
@@ -480,7 +480,7 @@ void _Toy_803053C4(s32 targetValue, s32 count, s32 flag)
             trophyId = 0;
             i = 0;
 
-            while (trophyId < 0x125) {
+            while (trophyId < TY_TROPHY_COUNT) {
                 list = _Toy_sbss_804D6EB4;
 
                 if (lbLang_IsSettingUS()) {
@@ -537,7 +537,7 @@ void _Toy_803053C4(s32 targetValue, s32 count, s32 flag)
         i = 0;
         default_flags = &Toy_804A284C[5];
 
-        while (i < 0x125) {
+        while (i < TY_TROPHY_COUNT) {
             list = _Toy_sbss_804D6EB4;
 
             if (lbLang_IsSettingUS()) {
@@ -736,7 +736,9 @@ void Toy_80305918(s8 arg0, s32 arg1, s32 arg2)
 
     temp_r26 = (u8*) base + 0x19E;
 
-    for (var_r25 = 0, var_r27 = 0; var_r25 < 0x125; var_r25++, var_r27 += 2) {
+    for (var_r25 = 0, var_r27 = 0; var_r25 < TY_TROPHY_COUNT;
+         var_r25++, var_r27 += 2)
+    {
         s32 skip;
         s16 temp_r0;
 
@@ -1040,7 +1042,7 @@ s16 Toy_803062BC(s32 trophyId)
     s16* table = Toy_sbss_804D6EDC;
     s32 i;
 
-    for (i = 0; i < 0x125; i++) {
+    for (i = 0; i < TY_TROPHY_COUNT; i++) {
         if (trophyId == *table) {
             break;
         }
@@ -1257,7 +1259,7 @@ void _Toy_8030663C(void)
         }
         var_r27 += 1;
         var_r30 += 2;
-    } while (var_r27 < 0x125);
+    } while (var_r27 < TY_TROPHY_COUNT);
     {
         s32 var2_r27;
         TySortRow* var2_r28;
@@ -1283,7 +1285,7 @@ void _Toy_8030663C(void)
                 }
             }
             var2_r30 += 1;
-        } while (var2_r30 < 0x125);
+        } while (var2_r30 < TY_TROPHY_COUNT);
     }
     {
         TySortRow* var3_r27;
@@ -1322,7 +1324,7 @@ void _Toy_8030663C(void)
                 }
             }
             var3_r30 += 1;
-        } while (var3_r30 < 0x125);
+        } while (var3_r30 < TY_TROPHY_COUNT);
     }
 }
 
@@ -2202,7 +2204,7 @@ char* Toy_8030813C(int trophy_id)
 
     if (found == 0) {
         ptr = _Toy_sbss_804D6EA8;
-        for (i = 0x125; i != 0; i--) {
+        for (i = TY_TROPHY_COUNT; i != 0; i--) {
             if (*(s32*) ptr == id) {
                 found = 1;
                 break;
@@ -2259,7 +2261,7 @@ s32 Toy_80308354(s16 idx)
     target = Toy_sbss_804D6EDC[idx];
     entry = _Toy_sbss_804D6EC4;
 
-    for (i = 0; i < 0x125; entry++, i++) {
+    for (i = 0; i < TY_TROPHY_COUNT; entry++, i++) {
         if (target == entry->id) {
             break;
         }
@@ -5825,7 +5827,7 @@ void Toy_80311680(void)
         }
         var_r28++;
         var_r29++;
-    } while (var_r28 < 0x125);
+    } while (var_r28 < TY_TROPHY_COUNT);
     *temp_r31 = 0xF4;
     _Toy_sbss_804D6EA1 = 1;
 }
@@ -5884,7 +5886,7 @@ void Toy_80311960(void)
     save_data = gmMainLib_GetTrophyFlags();
     save_data2 = gmMainLib_GetTrophyCategoryFlags();
 
-    for (i = 0; i < 0x125; i++) {
+    for (i = 0; i < TY_TROPHY_COUNT; i++) {
         save_data[i] = 0;
         ((u16*) (base + 0x194))[i + 5] = 0;
     }
@@ -6151,7 +6153,7 @@ void Toy_8031234C(s32 arg0)
         s32 category;
         dstPtr = saveData;
         srcPtr = (u16*) (toy + 0x194);
-        for (i = 0x125; i != 0; i--) {
+        for (i = TY_TROPHY_COUNT; i != 0; i--) {
             u16 flags = srcPtr[5];
             if (flags & 0x8000) {
                 *dstPtr |= 0x8000;
@@ -6168,7 +6170,7 @@ void Toy_8031234C(s32 arg0)
                 (*stateData & (1 << category)))
             {
                 ptr = saveData;
-                for (j = 0; j < 0x125; j++) {
+                for (j = 0; j < TY_TROPHY_COUNT; j++) {
                     f32 result = Toy_803060BC(j, 6);
                     if ((f32) category == result) {
                         *ptr |= 0x4000;
@@ -6230,7 +6232,7 @@ check:
 }
     i++;
     table1++;
-    if (i < 0x125) {
+    if (i < TY_TROPHY_COUNT) {
         goto loop;
     }
 
@@ -6267,7 +6269,7 @@ void Toy_8031263C(void)
         }
         i++;
         table1++;
-    } while (i < 0x125);
+    } while (i < TY_TROPHY_COUNT);
 
     *table2 |= 4;
     Toy_804A284C[3] |= 4;

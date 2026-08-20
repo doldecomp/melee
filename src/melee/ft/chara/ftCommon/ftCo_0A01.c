@@ -6197,9 +6197,9 @@ static bool ftCo_800ADE48(Fighter* fp)
     cur_cmd = data->x18;
     if (cur_cmd != 0x11) {
         motion_id = fp->motion_id;
-        if (motion_id == 0x125) {
+        if (motion_id == ftCo_MS_BarrelWait) {
             switch_cmd = 1;
-        } else if (motion_id == 0x154) {
+        } else if (motion_id == ftCo_MS_Barrel) {
             switch_cmd = 2;
         } else {
             switch_cmd = 0;
