@@ -5946,17 +5946,17 @@ void Toy_OnEnter_80311AB0(void* arg0)
     Toy_sbss_804D6ED8 = HSD_MemAlloc(sizeof(*Toy_sbss_804D6ED8));
     Toy_sbss_804D6ED4 = HSD_MemAlloc(sizeof(TyLightArray_));
     Toy_sbss_804D6EDC =
-        HSD_MemAlloc(sizeof(*Toy_sbss_804D6EDC) * unk_array_len);
+        HSD_MemAlloc(sizeof(*Toy_sbss_804D6EDC) * trophy_count);
     _Toy_sbss_804D6E64 =
-        HSD_MemAlloc(sizeof(*_Toy_sbss_804D6E64) * unk_array_len);
+        HSD_MemAlloc(sizeof(*_Toy_sbss_804D6E64) * trophy_count);
     Toy_sbss_804D6EE0 = HSD_MemAlloc(sizeof(*Toy_sbss_804D6EE0));
     _Toy_sbss_804D6E6C = HSD_MemAlloc(sizeof(*_Toy_sbss_804D6E6C));
 
     memzero(_Toy_sbss_804D6E68, sizeof(*_Toy_sbss_804D6E68));
     memzero(Toy_sbss_804D6ED8, sizeof(*Toy_sbss_804D6ED8));
     memzero(Toy_sbss_804D6ED4, sizeof(TyLightArray_));
-    memzero(Toy_sbss_804D6EDC, sizeof(*Toy_sbss_804D6EDC) * unk_array_len);
-    memzero(_Toy_sbss_804D6E64, sizeof(*_Toy_sbss_804D6E64) * unk_array_len);
+    memzero(Toy_sbss_804D6EDC, sizeof(*Toy_sbss_804D6EDC) * trophy_count);
+    memzero(_Toy_sbss_804D6E64, sizeof(*_Toy_sbss_804D6E64) * trophy_count);
     memzero(Toy_sbss_804D6EE0, sizeof(*Toy_sbss_804D6EE0));
     memzero(_Toy_sbss_804D6E6C, 8);
 
