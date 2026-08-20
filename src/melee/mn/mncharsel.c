@@ -4934,21 +4934,23 @@ s32 mnCharSel_802640A0(void)
     doors_done:;
     } else {
         for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
-            CSSDoor* door = &mnCharSel_803F0DFC.doors[i];
             GameRules* rules;
-            door->p_kind = mnCharSel_804D6CB0->data.data.players[i].slot_type;
-            door->costume = mnCharSel_804D6CB0->data.data.players[i].color;
-            door->p_kind_prev = 3;
-            door->slideranim_timer = 0;
-            door->dooranim_timer = 0;
-            door->is_hold_handicap_slider = 0;
-            door->is_hold_cpu_slider = 0;
-            door->sel_icon_prev = door->sel_icon;
+            mnCharSel_803F0DFC.doors[i].p_kind =
+                mnCharSel_804D6CB0->data.data.players[i].slot_type;
+            mnCharSel_803F0DFC.doors[i].costume =
+                mnCharSel_804D6CB0->data.data.players[i].color;
+            mnCharSel_803F0DFC.doors[i].p_kind_prev = 3;
+            mnCharSel_803F0DFC.doors[i].slideranim_timer = 0;
+            mnCharSel_803F0DFC.doors[i].dooranim_timer = 0;
+            mnCharSel_803F0DFC.doors[i].is_hold_handicap_slider = 0;
+            mnCharSel_803F0DFC.doors[i].is_hold_cpu_slider = 0;
+            mnCharSel_803F0DFC.doors[i].sel_icon_prev =
+                mnCharSel_803F0DFC.doors[i].sel_icon;
             rules = gmMainLib_GetGameRules();
             if (rules->handicap != 0) {
                 s32 hval;
-                lb_80011E24(mnCharSel_804D6CC0, &sp108, door->cpuslider_joint,
-                            -1);
+                lb_80011E24(mnCharSel_804D6CC0, &sp108,
+                            mnCharSel_803F0DFC.doors[i].cpuslider_joint, -1);
                 if (gmMainLib_GetGameRules()->handicap == 1) {
                     hval = (u8) gm_801685D4(
                         (u8) i, mnCharSel_804D6CB0->data.data.players[i].xA);
@@ -4965,11 +4967,11 @@ s32 mnCharSel_802640A0(void)
                     f32 slider_x = 1.25f * (f32) (hval - 1);
                     HSD_JObjSetTranslateX(sp108, slider_x);
                 }
-                lb_80011E24(mnCharSel_804D6CC0, &sp108, door->cpuslider2_joint,
-                            -1);
+                lb_80011E24(mnCharSel_804D6CC0, &sp108,
+                            mnCharSel_803F0DFC.doors[i].cpuslider2_joint, -1);
             } else {
-                lb_80011E24(mnCharSel_804D6CC0, &sp108, door->cpuslider_joint,
-                            -1);
+                lb_80011E24(mnCharSel_804D6CC0, &sp108,
+                            mnCharSel_803F0DFC.doors[i].cpuslider_joint, -1);
             }
             {
                 u8* cpu_level =
