@@ -2375,7 +2375,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                                0x40);
                                             goto block_392;
                                         }
-                                        goto block_392;
+                                        goto cancel_or_costume;
                                     }
                                 }
 
@@ -2392,14 +2392,17 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                     .sel_icon_prev = 0x19;
                                 if (trigger & HSD_PAD_A) {
                                     lbAudioAx_80024030(3);
-                                } else if (trigger & HSD_PAD_B) {
-                                    if (mnCharSel_8025FDEC(grabbed) == 0) {
-                                        mnCharSel_8025DB34(grabbed);
-                                        cursor->x5 = 2;
-                                    }
                                 } else {
-                                    mnCharSel_CostumeChange((s32) grabbed,
-                                                            trigger);
+                                cancel_or_costume:
+                                    if (trigger & HSD_PAD_B) {
+                                        if (mnCharSel_8025FDEC(grabbed) == 0) {
+                                            mnCharSel_8025DB34(grabbed);
+                                            cursor->x5 = 2;
+                                        }
+                                    } else {
+                                        mnCharSel_CostumeChange((s32) grabbed,
+                                                                trigger);
+                                    }
                                 }
                             }
                         }
