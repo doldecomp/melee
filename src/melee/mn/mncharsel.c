@@ -1326,6 +1326,21 @@ static struct CSSCharModel {
     /* 0x14 */ float x14;
 }* mnCharSel_804A0BD0[4];
 
+static void updateStockIcons(struct CSSDoorsData2* stock_data,
+                             HSD_JObj** stock_jobj, s32 i)
+{
+    lb_80011E24(mnCharSel_804D6CC0, stock_jobj, stock_data->xf0[0], -1);
+    HSD_JObjSetTranslateX(*stock_jobj, 7.5f);
+    for (i = 1; i < 5; i++) {
+        lb_80011E24(mnCharSel_804D6CC0, stock_jobj, stock_data->xf0[i], -1);
+        if (stock_data->stocks <= i) {
+            HSD_JObjSetFlags(*stock_jobj, JOBJ_HIDDEN);
+        } else {
+            HSD_JObjClearFlags(*stock_jobj, JOBJ_HIDDEN);
+        }
+    }
+}
+
 void fn_8025F0E0(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -1540,14 +1555,14 @@ void fn_8025F0E0(HSD_GObj* gobj)
                 if (mnCharSel_803F0DFC.xcd < mnCharSel_803F0DFC.xce) {
                     mnCharSel_803F0DFC.xcf += 31.0f;
                     if (mnCharSel_803F0DFC.xcf >=
-                        -(248.0f * (f32) mnCharSel_803F0DFC.xcd - 124.0f))
+                        124.0f - 248.0f * (f32) mnCharSel_803F0DFC.xcd)
                     {
                         mnCharSel_803F0DFC.xce = mnCharSel_803F0DFC.xcd;
                     }
                 } else {
                     mnCharSel_803F0DFC.xcf = mnCharSel_803F0DFC.xcf - 31.0f;
                     if (mnCharSel_803F0DFC.xcf <=
-                        -(248.0f * (f32) mnCharSel_803F0DFC.xcd - 124.0f))
+                        124.0f - 248.0f * (f32) mnCharSel_803F0DFC.xcd)
                     {
                         mnCharSel_803F0DFC.xce = mnCharSel_803F0DFC.xcd;
                     }
@@ -1556,7 +1571,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
             if (mnCharSel_803F0DFC.xcd == mnCharSel_803F0DFC.xce) {
                 mnCharSel_803F0DFC.scroll_flag = 0;
                 mnCharSel_803F0DFC.xcf =
-                    -(248.0f * (f32) mnCharSel_803F0DFC.xcd - 124.0f);
+                    124.0f - 248.0f * (f32) mnCharSel_803F0DFC.xcd;
             }
             {
                 int j;
@@ -2006,21 +2021,6 @@ static inline void updateGrabbedSlider(struct CSSCursorData* cursor,
             door->is_hold_cpu_slider = 0;
         }
         lbAudioAx_800237A8(0xB7, 0x7F, 0x40);
-    }
-}
-
-static inline void updateStockIcons(struct CSSDoorsData2* stock_data,
-                                    HSD_JObj** stock_jobj, s32 i)
-{
-    lb_80011E24(mnCharSel_804D6CC0, stock_jobj, stock_data->xf0[0], -1);
-    HSD_JObjSetTranslateX(*stock_jobj, 7.5f);
-    for (i = 1; i < 5; i++) {
-        lb_80011E24(mnCharSel_804D6CC0, stock_jobj, stock_data->xf0[i], -1);
-        if (stock_data->stocks <= i) {
-            HSD_JObjSetFlags(*stock_jobj, JOBJ_HIDDEN);
-        } else {
-            HSD_JObjClearFlags(*stock_jobj, JOBJ_HIDDEN);
-        }
     }
 }
 
@@ -4011,7 +4011,7 @@ s32 mnCharSel_802640A0(void)
     } else {
         lb_80011E24(mnCharSel_804D6CC0, &sp108, icons[row_b].joint_id_vs, -1);
     }
-    HSD_JObjSetTranslateY(sp108, ICONROWHT_TOP_TOP);
+    HSD_JObjSetTranslateY(sp108, 20.2f);
     icons[row_b].bound_u = ICONROWHT_TOP_TOP;
     icons[row_b].bound_d = ICONROWHT_MID_TOP;
 
