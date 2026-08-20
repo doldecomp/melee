@@ -1,6 +1,8 @@
 #ifndef MELEE_TY_FORWARD_H
 #define MELEE_TY_FORWARD_H
 
+#include <stddef.h>
+
 struct un_804D6EE0_t;
 typedef struct DigitInit DigitInit;
 typedef struct PosArray PosArray;
@@ -62,5 +64,7 @@ typedef struct TySortElem TySortElem;
 typedef struct tyUnkStruct tyUnkStruct;
 typedef struct TyViewData TyViewData;
 typedef struct un_804D6E68_t un_804D6E68_t;
+
+static size_t const ty_trophy_count = 293;
 
 #endif

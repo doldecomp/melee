@@ -172,10 +172,10 @@ struct Toy26B8 {
     /* 0x199 */ u8 pad_199;
     /* 0x19A */ u16 x19A;
     /* 0x19C */ u16 x19C;
-    /* 0x19E */ u16 trophy_flags[293];
+    /* 0x19E */ u16 trophy_flags[ty_trophy_count];
     /* 0x3E8 */ s16 selectedIdx;
     /* 0x3EA */ s16 selectedTrophyId;
-    /* 0x3EC */ s16 trophy_count;
+    /* 0x3EC */ s16 ty_trophy_count;
     /* 0x3EE */ u8 pad_3EE[0x3F0 - 0x3EE];
     /* 0x3F0 */ union {
         ToyAnimState anim;

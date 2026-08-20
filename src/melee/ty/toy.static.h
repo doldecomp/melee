@@ -82,8 +82,6 @@
 /* 4D5A40 */ static GXColor _Toy_color_E2E2E2FF = { 0xE2, 0xE2, 0xE2, 0xFF };
 /* 4D5A44 */ static GXColor _Toy_color_FF8020FF = { 0xFF, 0x80, 0x20, 0xFF };
 
-static size_t const trophy_count = 293;
-
 /// Number of sort keys held per trophy.
 #define TY_SORT_KEY_COUNT 3
 
@@ -247,7 +245,7 @@ static void order_sdata2_154(void)
 
 // STATIC_ASSERT(sizeof(*Toy_sbss_804D6ED4) == 0xE4);
 // STATIC_ASSERT(sizeof(*_Toy_sbss_804D6EA4) == 0x54);
-// STATIC_ASSERT(sizeof(*_Toy_sbss_804D6E64) * trophy_count == 0x6DE);
+// STATIC_ASSERT(sizeof(*_Toy_sbss_804D6E64) * ty_trophy_count == 0x6DE);
 // STATIC_ASSERT(sizeof(*_Toy_sbss_804D6E68) == 0x64);
 // STATIC_ASSERT(sizeof(*_Toy_sbss_804D6E6C) == 0x8);
 // STATIC_ASSERT(sizeof(*Toy_sbss_804D6ED8) == 0x5C);
