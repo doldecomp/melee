@@ -3081,7 +3081,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
 
                                 {
                                     u8 cport7 = cursor->x4;
-                                    if (all_data->doors_data.doors[cport7]
+                                    if (mnCharSel_803F0DFC.doors[cport7]
                                             .sel_icon >= 0x19U)
                                     {
                                         mnCharSel_804A0BD0[cport7]->x5 =
@@ -3089,7 +3089,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         mnCharSel_804A0BC0[cport7]->x5 = 1;
                                         mnCharSel_804A0BC0[cport7]->x6 =
                                             cport7;
-                                        all_data->doors_data.doors[cport7]
+                                        mnCharSel_803F0DFC.doors[cport7]
                                             .sel_icon = 0xD;
                                         HSD_GObjGXLink_803909D8(
                                             mnCharSel_804A0BD0[cport7]->gobj,
