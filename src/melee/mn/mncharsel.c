@@ -3955,7 +3955,6 @@ s32 mnCharSel_802640A0(void)
     s32 ctx;
     s32 num_players;
     s32 row_a;
-    CSSTag* tag;
     GXColor* color_ptr;
     GXColor* color2_ptr;
     s32 i;
@@ -4280,14 +4279,13 @@ s32 mnCharSel_802640A0(void)
     spE8 = mnCharSel_804DC580;
     color_ptr = &color;
     color2_ptr = &color2;
-    tag = &mnCharSel_803F0DFC.tags[0];
-    for (i = 0; i < num_players; i++, tag++) {
+    for (i = 0; i < num_players; i++) {
         CSSTagData* td;
         int player;
         s32 found;
         gobj = GObj_Create(4, 5, 0x80);
         td = HSD_MemAlloc(sizeof(*td));
-        tag->data = td;
+        mnCharSel_803F0DFC.tags[i].data = td;
         GObj_InitUserData(gobj, 4, HSD_Free, td);
         HSD_GObj_SetupProc(gobj, fn_802633B0, 4);
         td->use_tag = 0;
@@ -4335,7 +4333,7 @@ s32 mnCharSel_802640A0(void)
         } else {
             UNUSED u8 unkA0[4];
             HSD_JObj* tag_name_jobj;
-            u8 name_joint = tag->name_jointl;
+            u8 name_joint = mnCharSel_803F0DFC.tags[i].name_jointl;
             lb_80011E24(mnCharSel_804D6CC0, &tag_name_jobj, name_joint, -1);
             HSD_ForeachAnim(tag_name_jobj, JOBJ_TYPE, JOBJ_MASK,
                             HSD_AObjReqAnim, AOBJ_ARG_AF, 2.0);
@@ -4364,7 +4362,8 @@ s32 mnCharSel_802640A0(void)
             lb_80011E24(mnCharSel_804D6CC0, &sp108,
                         mnCharSel_803F0DFC.name_list_joint, -1);
         } else {
-            lb_80011E24(mnCharSel_804D6CC0, &sp108, tag->list_joint, -1);
+            lb_80011E24(mnCharSel_804D6CC0, &sp108,
+                        mnCharSel_803F0DFC.tags[i].list_joint, -1);
             if (i == 3) {
                 HSD_JObjSetTranslateX(sp108, 16.7f);
             }
@@ -4410,9 +4409,11 @@ s32 mnCharSel_802640A0(void)
             }
         }
         td->next_tag = (u8) (found + 1);
-        lb_80011E24(mnCharSel_804D6CC0, &sp108, tag->x7, -1);
+        lb_80011E24(mnCharSel_804D6CC0, &sp108, mnCharSel_803F0DFC.tags[i].x7,
+                    -1);
         HSD_JObjSetFlags(sp108, JOBJ_HIDDEN);
-        lb_80011E24(mnCharSel_804D6CC0, &sp108, tag->kostar_text_joint, -1);
+        lb_80011E24(mnCharSel_804D6CC0, &sp108,
+                    mnCharSel_803F0DFC.tags[i].kostar_text_joint, -1);
         if (td->next_tag > 7U) {
             HSD_JObjClearFlags(sp108, JOBJ_HIDDEN);
         } else {
