@@ -2799,8 +2799,11 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                 mnCharSel_804D6CB0->data.data
                                                     .players[di]
                                                     .xA = 0x78;
-                                                tag_data->use_tag = 0;
-                                                if (dp->selected_since_load ==
+                                                mnCharSel_803F0DFC.tags[di]
+                                                    .data->use_tag = 0;
+                                                if (mnCharSel_803F0DFC
+                                                            .doors[di]
+                                                            .selected_since_load ==
                                                         0 &&
                                                     (s32) cursor->x4 != di)
                                                 {
