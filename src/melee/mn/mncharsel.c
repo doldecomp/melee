@@ -2725,12 +2725,11 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         }
                                         lb_8000B1CC(sp98, NULL, (&sp88));
                                         {
-                                            f32 sdx =
-                                                cursor->x10 - (1.7f + sp88.y);
-                                            f32 sdy =
+                                            f32 dx =
                                                 cursor->xC - (-2.9f + sp88.x);
-                                            if ((sdx * sdx + sdy * sdy) < 5.0f)
-                                            {
+                                            f32 dy =
+                                                cursor->x10 - (1.7f + sp88.y);
+                                            if ((dx * dx + dy * dy) < 5.0f) {
                                                 cursor->x5 = 1;
                                                 cursor->x6 = (u8) (di + 4);
                                                 cursor->xC =
