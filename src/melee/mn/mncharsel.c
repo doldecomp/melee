@@ -177,6 +177,22 @@ void mnCharSel_8025BD30(void)
     }
 }
 
+static void getStickDelta(int port, f32* dx, f32* dy)
+{
+    f32 stick_x = (f32) (s8) (u8) HSD_PadCopyStatus[(u8) port].stickX;
+    f32 stick_y = (f32) (s8) (u8) HSD_PadCopyStatus[(u8) port].stickY;
+    f32 mag_sq = (stick_x * stick_x) + (stick_y * stick_y);
+    if (mag_sq < 200.0f) {
+        *dy = 0.0f;
+        *dx = 0.0f;
+    } else {
+        f32 adj = mag_sq - 200.0f;
+        f32 angle = atan2f(stick_x, stick_y);
+        *dx = adj * sinf(angle);
+        *dy = adj * cosf(angle);
+    }
+}
+
 static void drawTimeText(HSD_Text* x, HSD_Text* y, int hours, int minutes,
                          int seconds, int microseconds)
 {
@@ -207,9 +223,16 @@ static inline u32 getAllStarHighscore(u8 hud)
     return gm_80162FD0(hud);
 }
 
-static f32 tenths(f32 v)
+/// Centimetres to metres, truncated to one decimal place.
+static inline f32 toMeters(f32 cm)
 {
-    return (f32) (int) (10.0f * v) / 10.0f;
+    return (f32) (int) (10.0f * (cm / 100.0f)) / 10.0f;
+}
+
+/// Centimetres to feet, truncated to one decimal place.
+static inline f32 toFeet(f32 cm)
+{
+    return (f32) (int) (10.0f * (cm / 30.4788f)) / 10.0f;
 }
 
 static inline HSD_JObj* inline3(int i, float x)
@@ -335,10 +358,10 @@ void mnCharSel_8025C020(int arg0)
         if (arg0 == 0) {
             if (lbLang_IsSavedLanguageJP()) {
                 HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%.1f",
-                                    tenths(gm_801631CC(hud_index) / 100.0f));
+                                    toMeters(gm_801631CC(hud_index)));
             } else {
                 HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%.1f",
-                                    tenths(gm_801631CC(hud_index) / 30.4788f));
+                                    toFeet(gm_801631CC(hud_index)));
             }
         }
         if (lbLang_IsSavedLanguageJP()) {
@@ -2033,20 +2056,9 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
 
         if (mnCharSel_804D6CF5 == 1) {
             int port = (u8) mnCharSel_804D6CF0;
-            stick_x = (f32) (s8) (u8) HSD_PadCopyStatus[(u8) port].stickX;
-            stick_y = (f32) (s8) (u8) HSD_PadCopyStatus[(u8) port].stickY;
-            mag_sq = (stick_x * stick_x) + (stick_y * stick_y);
             trigger = HSD_PadCopyStatus[port].trigger;
             buttons = HSD_PadCopyStatus[port].button;
-            if (mag_sq < 200.0f) {
-                dy = 0.0f;
-                dx = 0.0f;
-            } else {
-                f32 adj = mag_sq - 200.0f;
-                f32 angle = atan2f(stick_x, stick_y);
-                dx = adj * sinf(angle);
-                dy = adj * cosf(angle);
-            }
+            getStickDelta(port, &dx, &dy);
             if (buttons & 0x200) {
                 if (mnCharSel_804D6CF3 & mnCharSel_804D50C8[cursor->x4]) {
                     u16 new_timer = cursor->xA + 1;
@@ -2063,20 +2075,9 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
             }
         } else {
             int port = cursor->x4;
-            stick_x = (f32) (s8) (u8) HSD_PadCopyStatus[(u8) port].stickX;
-            stick_y = (f32) (s8) (u8) HSD_PadCopyStatus[(u8) port].stickY;
-            mag_sq = (stick_x * stick_x) + (stick_y * stick_y);
             trigger = HSD_PadCopyStatus[port].trigger;
             buttons = HSD_PadCopyStatus[port].button;
-            if (mag_sq < 200.0f) {
-                dy = 0.0f;
-                dx = 0.0f;
-            } else {
-                f32 adj = mag_sq - 200.0f;
-                f32 angle = atan2f(stick_x, stick_y);
-                dx = adj * sinf(angle);
-                dy = adj * cosf(angle);
-            }
+            getStickDelta(port, &dx, &dy);
 
             if ((s8) (u8) HSD_PadCopyStatus[cursor->x4].err != 0) {
                 if (cursor->x5 != 3) {
