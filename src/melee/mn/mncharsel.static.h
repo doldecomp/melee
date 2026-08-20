@@ -55,6 +55,11 @@ static s8 mnCharSel_804D6CF9;
 #define ICONROWHT_BTM_TOP 6.0F
 #define ICONROWHT_BTM_BTM (-1.0F)
 
+/// Where each icon row is drawn, as opposed to the bounds it is hit-tested
+/// against above.
+#define ICONROWY_TOP 20.2F
+#define ICONROWY_BTM 5.8F
+
 /// Can't be enum bc float, but reused values
 #define ICONBNDS_COL0_L (-30.0F)
 #define ICONBNDS_COL1_L (-24.4F)
