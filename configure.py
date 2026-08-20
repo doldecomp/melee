@@ -192,6 +192,12 @@ parser.add_argument(
     action="store_false",
     help="do not generate compile_commands.json",
 )
+parser.add_argument(
+    "--no-always-apply",
+    dest="always_apply",
+    action="store_false",
+    help="do not always run dtk dol apply after linking",
+)
 args = parser.parse_args()
 
 if any({args.debug, args.asm, args.testing}) or args.sym == "on":
@@ -2020,6 +2026,17 @@ def generate_compile_commands(objects: dict[str, Object], build_config: BuildCon
 
 
 if args.mode == "configure":
+    if args.always_apply:
+        config.custom_build_steps = {
+            "post-ok": [
+                {
+                    "outputs": "always_apply",
+                    "rule": "phony",
+                    "implicit": ["apply"],
+                }
+            ]
+        }
+
     # Write build.ninja and objdiff.json
     generate_build(config)
 
