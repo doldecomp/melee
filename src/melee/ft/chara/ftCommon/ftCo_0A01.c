@@ -50,6 +50,88 @@
 #include <melee/ft/ftcmdscript.h>
 #include <MetroTRK/intrinsics.h>
 
+/// @todo .sdata2 order hack
+static void sdata2_order(void)
+{
+    (void) 0.0f;
+    (void) 30.0;
+    (void) 0.600000024f;
+    (void) 0.800000012f;
+    (void) 0.899999976f;
+    (void) 0.05;
+    (void) S32_TO_F32;
+    (void) 1.0f;
+    (void) 9.0;
+    (void) 18.0;
+    (void) 4.0;
+    (void) 0.0;
+    (void) 0.5;
+    (void) 1000.0f;
+    (void) 5.0;
+    (void) 5.0f;
+    (void) 15.0f;
+    (void) 40.0f;
+    (void) 50.0f;
+    (void) 10.0f;
+    (void) 10.0;
+    (void) 0.5f;
+    (void) 2.0f;
+    (void) 9.99999975e-06f;
+    (void) -9.99999975e-06f;
+    (void) 2.0;
+    (void) 8.5f;
+    (void) 17.0f;
+    (void) 3.5f;
+    (void) 127.0f;
+    (void) 0.0078125f;
+    (void) 1.0;
+    (void) -1.0;
+    (void) -1.0f;
+    (void) 255.0;
+    (void) U32_TO_F32;
+    (void) 3.0;
+    (void) 10000.0f;
+    (void) 1000.0;
+    (void) -10.0f;
+    (void) -5.0;
+    (void) 0.400000006f;
+    (void) 0.200000003f;
+    (void) 0.4;
+    (void) 0.01;
+    (void) -1.0471975430846214;
+    (void) -35.0f;
+    (void) 0.100000001f;
+    (void) -1.30899692f;
+    (void) 120.0f;
+    (void) 20.0f;
+    (void) 0.785398185f;
+    (void) 50.0;
+    (void) 100.0f;
+    (void) 80.0f;
+    (void) 3.14159274f;
+    (void) -1.57079637f;
+    (void) 1.57079637f;
+    (void) 60.0;
+    (void) 4.70000029f;
+    (void) -150.0f;
+    (void) -90.0f;
+    (void) 40.0;
+    (void) 37.5;
+    (void) 0.0500000007f;
+    (void) 0.61086523346602917;
+    (void) 1.3089969288557768;
+    (void) -0.78539815731346607;
+    (void) -0.26179938577115536;
+    (void) 15.0;
+    (void) -1.3089969288557768;
+    (void) 0.26179938577115536;
+    (void) 128.0f;
+    (void) 0.95;
+    (void) 625.0;
+    (void) 0.300000012f;
+    (void) 0.0399999991f;
+}
+
 /**
  * Priority table, mapping ItemKind to priority number,
  * for which items the CPU should prefer to target.
