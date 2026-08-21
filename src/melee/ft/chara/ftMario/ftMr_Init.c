@@ -132,7 +132,7 @@ MotionState ftMr_Init_MotionStateTable[ftMr_MS_SelfCount] = {
     },
 };
 
-MotionState ftMr_Init_UnkMotionStates0[aux_states_count] = {
+MotionState ftMr_Init_UnkMotionStates0[] = {
     {
         ftCo_SM_RunBrake,
         Ft_MF_None,

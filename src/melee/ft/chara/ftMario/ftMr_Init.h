@@ -8,8 +8,6 @@
 #include "ftMario/forward.h"
 #include <baselib/forward.h>
 
-static usize_t const aux_states_count = 2;
-
 /* 0E08CC */ void ftMr_Init_OnDeath(HSD_GObj* gobj);
 /* 0E0920 */ void ftMr_Init_OnLoadForDrMario(Fighter*);
 /* 0E0960 */ void ftMr_Init_OnLoad(HSD_GObj* gobj);
@@ -24,6 +22,6 @@ static usize_t const aux_states_count = 2;
 /* 0E0CAC */ void ftMr_Init_UnkDemoCallbacks0(int, int*, int*);
 /* 0E0CE0 */ char* ftMr_Init_GetMotionFileString(enum_t);
 /* 3C7120 */ extern MotionState ftMr_Init_MotionStateTable[ftMr_MS_SelfCount];
-/* 3C7260 */ extern MotionState ftMr_Init_UnkMotionStates0[aux_states_count];
+/* 3C7260 */ extern MotionState ftMr_Init_UnkMotionStates0[2];
 
 #endif
