@@ -32,7 +32,6 @@
 #include <baselib/jobj.h>
 #include <baselib/psstructs.h>
 #include <baselib/random.h>
-#include <MetroTRK/intrinsics.h>
 
 struct unkCastle {
     /* 0x000 */ u8 _pad[0x10C];

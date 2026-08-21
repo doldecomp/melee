@@ -24,7 +24,6 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
-#include <MetroTRK/intrinsics.h>
 
 /// @todo Float reorder hack
 static float get_zero(void)

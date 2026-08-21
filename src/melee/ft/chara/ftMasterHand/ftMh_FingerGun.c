@@ -18,7 +18,6 @@
 
 #include <dolphin/mtx.h>
 #include <baselib/random.h>
-#include <MetroTRK/intrinsics.h>
 
 void ftMh_FingerBeamEnd_Anim(HSD_GObj* gobj)
 {

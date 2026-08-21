@@ -48,7 +48,6 @@
 #include <math.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/ftcmdscript.h>
-#include <MetroTRK/intrinsics.h>
 
 /// @todo .sdata2 order hack
 static void sdata2_order(void)

@@ -5,7 +5,6 @@
 #include "forward.h"
 
 #include <math.h>
-#include <MetroTRK/intrinsics.h>
 
 static void splGetCardinalPoint(Vec3*, Vec3*, f32, f32);
 static void splGetBezierPoint(Vec3*, Vec3*, f32);
