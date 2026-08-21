@@ -34,6 +34,7 @@
 #include "ty/types.h"
 
 #include <math.h>
+#include <string.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>

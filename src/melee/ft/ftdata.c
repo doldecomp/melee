@@ -132,6 +132,7 @@
 
 #include <baselib/forward.h>
 
+#include <string.h>
 #include <baselib/debug.h>
 #include <baselib/objalloc.h>
 

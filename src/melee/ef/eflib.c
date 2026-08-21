@@ -31,7 +31,7 @@
 #include "lb/lbspdisplay.h"
 
 #include <math.h>
-#include <runtime.h>
+#include <stdarg.h>
 // externs
 extern u32* ptclref_804D0E5C[65];
 extern EF_DAT_Entry efAsync_DatEntries[51];
@@ -505,10 +505,10 @@ EF_Effect* efLib_Create(int gfx_id, HSD_GObj* parent_gobj)
             u8 kind = HSD_GObj_804D7849;
             HSD_GObjObject_80390A70(effect->gobj, kind, jobj);
         }
-        if ((__cvt_fp2unsigned(10.0F * desc->lifetime) % 10) != 0) {
+        if ((u32) (10.0F * desc->lifetime) % 10 != 0) {
             lb_80011C18(jobj, 0x08000000);
         }
-        effect->lifetime = __cvt_fp2unsigned(desc->lifetime);
+        effect->lifetime = (u32) desc->lifetime;
         if (effect->lifetime != 0) {
             ++effect->lifetime;
         }

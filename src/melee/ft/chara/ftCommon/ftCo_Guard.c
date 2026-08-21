@@ -51,7 +51,7 @@ static inline bool inlineA0(Fighter* fp)
     return fp->input.held_inputs & HSD_PAD_LR ? true : false;
 }
 
-int ftCo_80091A4C(Fighter_GObj* gobj)
+bool ftCo_80091A4C(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->input.x668 & (HSD_PAD_R | HSD_PAD_L) &&

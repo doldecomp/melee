@@ -784,9 +784,17 @@ void mnSnap_80254298(void)
     mnSnap_RefreshSlotSelection(snap, p50, p51);
 }
 
+// A function using returns with no value,
+// but needing a non-void return type to match
+#ifdef MUST_MATCH
+#define UNINITIALIZED_RETURN(x) x
+#else
+#define UNINITIALIZED_RETURN(x) void
+#endif
+
 /// Handles Yes/No dialog button inputs. Sets snap->dlg_result to the selection
 /// result.
-s32 mnSnap_8025441C(u64 buttons)
+static UNINITIALIZED_RETURN(s32) mnSnap_8025441C(u64 buttons)
 {
     mnSnap_State* snap = &mnSnap_804A0A10;
     s32* result = &mnSnap_804A0A10.dlg_result;

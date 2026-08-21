@@ -1,5 +1,6 @@
 #include "hsd_3933.h"
 
+#include <string.h>
 #include <dolphin/mcc.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/hsd_3915.h>
