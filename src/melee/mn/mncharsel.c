@@ -3021,10 +3021,12 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                         }
 
                         {
-                            s32 closest = -1;
+                            s32 closest;
                             f32 closest_dist = 9.0f;
                             s32 ci;
-                            for (ci = 0; ci < (s32) n_doors; ci++) {
+                            for (ci = 0, closest = -1; ci < (s32) n_doors;
+                                 ci++)
+                            {
                                 f32 cy7 = cursor->x10;
                                 if (!(cy7 < 0.2f) && !(cy7 > 22.0f)) {
                                     u8 pk2 =
