@@ -9,10 +9,10 @@
 
 #include <math.h>
 
-#ifdef __MWERKS__
-#define EFALT_VA_ARG(t) (*((t*) __va_arg(vlist_arg, _var_arg_typeof(t))))
-#else
+#ifdef __GNUC__
 #define EFALT_VA_ARG(t) va_arg(vlist, typeof(t))
+#else
+#define EFALT_VA_ARG(t) (*((t*) __va_arg(vlist_arg, _var_arg_typeof(t))))
 #endif
 
 extern volatile u32 efLib_LoadKind;
