@@ -8,7 +8,6 @@
 #include <stdbool.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
-#include <baselib/sislib.h>
 
 typedef struct MnName_GObj {
     /* +00 */ HSD_GObj gobj;
@@ -27,7 +26,7 @@ typedef struct MnName_GObj {
 /* 237834 */ void DeleteName(u8);
 /* 2379BC */ bool IsNameValid(int slot);
 /* 237A04 */ void CreateNameAtIndex(s32 slot);
-/* 237A68 */ s32 mnName_SortNames(HSD_GObj*);
+/* 237A68 */ void mnName_SortNames(HSD_GObj*);
 /* 237D94 */ u8 mnName_80237D94(s32, u8);
 /* 237F78 */ void mnName_ConfirmNameDeleteInput(HSD_GObj*);
 /* 23817C */ UNK_RET mnName_MainInput(HSD_GObj*);

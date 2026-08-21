@@ -2248,9 +2248,9 @@ s32 Toy_803082F8(s16 idx)
     return Toy_803063D4((s16) Toy_80308354(idx), 2, 0x128);
 }
 
-void Toy_80308328(s16 idx)
+s32 Toy_80308328(s16 idx)
 {
-    Toy_803063D4(idx, 2, 0x128);
+    return Toy_803063D4(idx, 2, 0x128);
 }
 
 s32 Toy_80308354(s16 idx)

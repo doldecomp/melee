@@ -12,8 +12,6 @@
 #include <sysdolphin/baselib/sislib.h>
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gm_1A3F.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbspdisplay.h>
@@ -303,6 +301,7 @@ static void fn_80235F80(HSD_GObj* gobj)
     u32 buttons;
     s32 count;
     u8* user_data;
+    u8* confirmed;
 
     user_data = mnStageSw_804D6BF0->user_data;
     buttons = mn_804A04F0.buttons = mn_80229624(4U);
@@ -320,7 +319,7 @@ static void fn_80235F80(HSD_GObj* gobj)
     if ((u8) mnStageSw_804D6BF4 == 0) {
         if (buttons & 0x200) {
             if (mn_804A04F0.hovered_selection < NUM_STAGES) {
-                if (mn_804A04F0.confirmed_selection != 0) {
+                if (*(confirmed = &mn_804A04F0.confirmed_selection) != 0) {
                     user_data = mnStageSw_804D6BF0->user_data;
                     count = mnStageSw_CountEnabled(user_data);
                     if (count > 1) {
@@ -332,11 +331,11 @@ static void fn_80235F80(HSD_GObj* gobj)
                         lbAudioAx_80024030(3);
                     } else {
                         sfxMove();
-                        mn_804A04F0.confirmed_selection = 0;
+                        *confirmed = 0;
                     }
                 } else {
                     sfxMove();
-                    mn_804A04F0.confirmed_selection = 1;
+                    *confirmed = 1;
                 }
                 user_data = mnStageSw_804D6BF0->user_data;
                 stage_ids = mnStageSw_803ED4C4;

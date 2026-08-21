@@ -1306,7 +1306,11 @@ s32 hsd_803956D8(void* disp_ptr)
     return 0;
 }
 
-// @TODO: BSS relocation and register allocation differences remain
+static inline void* hsd_803957C0_get_x50(void)
+{
+    return hsd_804CF810.x50;
+}
+
 void hsd_803957C0(void* input)
 {
     s32 col;
@@ -1334,10 +1338,13 @@ void hsd_803957C0(void* input)
         ch = ' ';
     }
 
-    saved = hsd_804CF810.x50;
+    saved = hsd_803957C0_get_x50();
     hsd_804CF810.x50 = &lbl_8040AB20;
-    hsd_804CF810.x8 = (hsd_804CF810.x40 - 40) - (hsd_804CF810.x10 + 1) * 14;
-    hsd_804CF810.x4 = col * 11 + 20;
+    {
+        s32 val_x10 = hsd_804CF810.x10;
+        hsd_804CF810.x4 = col * 11 + 20;
+        hsd_804CF810.x8 = (hsd_804CF810.x40 - 40) - (val_x10 + 1) * 14;
+    }
 
     {
         struct ParticleScreenState* draw_sp = &hsd_804CF810;

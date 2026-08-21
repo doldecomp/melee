@@ -53,5 +53,7 @@ un_80304210(struct un_80304138_objalloc_t* arg0, void* arg1, int arg2,
 /* 3045A0 */ bool un_803045A0(void);
 /* 304690 */ bool un_80304690(void);
 /* 304780 */ bool un_80304780(void);
+/* 304138 */ extern struct un_80304138_objalloc_t* un_804D6E40;
+/* 304138 */ extern struct un_80304138_objalloc_t* un_804D6E44;
 
 #endif

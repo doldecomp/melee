@@ -1,9 +1,10 @@
+#include "gmtou_0.h"
+
 #include "gm_1601.h"
 #include "gm_1A3F.h"
 #include "gm_1A45.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
-#include "gmtou_1.h"
 #include "gmtoulib.h"
 #include "types.h"
 
@@ -24,21 +25,37 @@
 #include "mn/mnnamenew.h"
 #include "sc/types.h"
 
-#include <printf.h>
-#include <dolphin/os.h>
-#include <baselib/controller.h>
+#include <dolphin/pad.h>
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/mobj.h>
-#include <baselib/particle.h>
 #include <baselib/random.h>
 #include <baselib/sislib.h>
 
+/* 4799B8 */ extern struct Lbl804799B8_t lbl_804799B8;
+
+/* 4D6640 */ static HSD_Archive* lbl_804D6640;
+/* 4D6644 */ static HSD_Archive* lbl_804D6644;
+/* 4D6648 */ static HSD_Archive* lbl_804D6648;
+/* 4D664C */ static SceneDesc* lbl_804D664C;
+/* 4D6650 */ static SceneDesc* lbl_804D6650;
+/* 4D6654 */ static enum_t lbl_804D6654;
+/* 4D6658 */ static int lbl_804D6658;
+/* 4D665C */ static int lbl_804D665C;
+
+/// @todo .sbss order hack
+static void sbss_order(void)
+{
+    (void) lbl_804D6650;
+    (void) lbl_804D6658;
+    (void) lbl_804D6654;
+    (void) lbl_804D665C;
+}
+
 /// @todo .sdata2 order hack
-static void sdata2_order(void)
+static void sdata2_order0(void)
 {
     (void) 4.5f;
     (void) 130.0f;
@@ -83,7 +100,12 @@ static void sdata2_order(void)
     (void) 0.200000003f;
     (void) -1.0f;
     (void) 10.0999928f;
-    (void) 28195.498f;
+}
+
+/* 4DA78C */ GXColor const lbl_804DA78C = { 0x46, 0xDC, 0x46, 0xFF };
+
+static void order_sdata2_1(void)
+{
     (void) 124.5f;
     (void) 45.0f;
     (void) 391.0f;
@@ -104,9 +126,6 @@ static void sdata2_order(void)
     (void) 0.850000024f;
     (void) 1.35000002f;
 }
-
-/* 4D664C */ extern SceneDesc* lbl_804D664C;
-/* 4D6650 */ extern SceneDesc* lbl_804D6650;
 
 /* 3D9F80 */ static struct TmSettingTable lbl_803D9F80 = {
     0, 74,  0, 74,  0, 77,  0, 75, 0,  75,  0,  77, 0, 80,  0, 78, 0, 79,
@@ -754,8 +773,6 @@ void fn_80191B5C(void* gobj)
     }
 }
 
-s32 lbl_804D6658;
-
 /// Updates JObj visibility based on current menu option selection.
 void fn_80191CA4(HSD_GObj* gobj)
 {
@@ -860,12 +877,15 @@ static inline bool fn_80191FD4_is_selected(enum CSSIconHud hud, s32 slot,
     return tm->x37[slot].x3 == hud;
 }
 
-/// @todo Only differs by callee-saved register selection in the second block.
 void fn_80191FD4(HSD_GObj* gobj)
 {
     TmData* tm;
     HSD_JObj* jobj;
     HSD_JObj* child;
+    HSD_JObj* sibling2;
+    u8* x3b;
+    u8* x2b;
+    HSD_JObj* child2;
     HSD_JObj* sibling;
     s32 slot;
     u32 idx;
@@ -932,14 +952,16 @@ void fn_80191FD4(HSD_GObj* gobj)
     }
 
     fn_8018FF9C(jobj, 0.9f, 0.9f, 666.0f);
-    child = HSD_JObjGetChild(jobj);
+    if (jobj == NULL) {
+        child2 = NULL;
+    } else {
+        child2 = jobj->child;
+    }
 
     hud = fn_8018F6DC(fn_8018F3BC((s32) idx));
-    x2_ptr = &state->x2;
-    x3_ptr = &state->x3;
-    slot = *x2_ptr + *x3_ptr;
+    slot = *(x2b = &state->x2) + *(x3b = &state->x3);
     if (fn_80191FD4_is_selected(hud, slot, tm)) {
-        fn_8019044C(child, (f32) (state->xA + 0xA));
+        fn_8019044C(child2, (f32) (state->xA + 0xA));
     } else {
         hud = fn_8018F6DC(fn_8018F3BC((s32) idx));
         {
@@ -952,35 +974,38 @@ void fn_80191FD4(HSD_GObj* gobj)
                 flag = 0;
             }
             if (flag == 0) {
-                HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
+                HSD_JObjSetFlagsAll(child2, JOBJ_HIDDEN);
             } else {
-                fn_8019044C(child, 0.0f);
+                fn_8019044C(child2, 0.0f);
             }
         }
     }
 
-    sibling = HSD_JObjGetNext(child);
-    HSD_JObjClearFlagsAll(sibling, JOBJ_HIDDEN);
+    if (child2 == NULL) {
+        sibling2 = NULL;
+    } else {
+        sibling2 = child2->next;
+    }
+    HSD_JObjClearFlagsAll(sibling2, JOBJ_HIDDEN);
 
     hud = fn_8018F6DC(fn_8018F3BC((s32) idx));
     if (lbl_803D9D20.x72[hud] != 0) {
-        if ((s32) tm->x37[*x2_ptr + *x3_ptr].x3 ==
+        if ((s32) tm->x37[*x2b + *x3b].x3 ==
             fn_8018F6DC(fn_8018F3BC((s32) idx)))
         {
-            fn_8019044C(sibling,
-                        (f32) ((tm->x37[*x2_ptr + *x3_ptr].x7 * 0x1E) +
-                               fn_8018F6DC(fn_8018F3BC((s32) idx))));
+            fn_8019044C(sibling2, (f32) ((tm->x37[*x2b + *x3b].x7 * 0x1E) +
+                                         fn_8018F6DC(fn_8018F3BC((s32) idx))));
             return;
         }
-        fn_8019044C(sibling, (f32) fn_8018F6DC(fn_8018F3BC((s32) idx)));
+        fn_8019044C(sibling2, (f32) fn_8018F6DC(fn_8018F3BC((s32) idx)));
         return;
     }
 
     if (fn_8018F3D0(fn_8018F310(fn_8018F3BC((s32) idx))) == 1) {
-        fn_8019044C(sibling, 200.0f);
+        fn_8019044C(sibling2, 200.0f);
         return;
     }
-    HSD_JObjSetFlagsAll(sibling, JOBJ_HIDDEN);
+    HSD_JObjSetFlagsAll(sibling2, JOBJ_HIDDEN);
 }
 
 /// Updates tournament menu cursor JObj visibility and position.
@@ -1154,8 +1179,6 @@ void fn_80192758(HSD_GObj* gobj)
         HSD_JObjSetFlags(child, JOBJ_HIDDEN);
     }
 }
-
-extern s32 lbl_804D665C;
 
 #pragma push
 #pragma inline_depth(0)
@@ -1363,14 +1386,12 @@ void fn_80193230(void)
 }
 #pragma pop
 
-/// .sdata2
-/* 4DA78C */ extern s32 lbl_804DA78C;
-
+/// @todo Fix ::GXColor casts
 void fn_80193308(void)
 {
     HSD_Text* created_text2;
     s32* text_color_word;
-    s32 color;
+    GXColor color;
     TmData* tm;
     HSD_Text* text;
     GXColor* text_color;
@@ -1425,7 +1446,7 @@ void fn_80193308(void)
     idx = 1;
     if ((!tm) && (!tm)) {
     }
-    color_word = &color;
+    color_word = (s32*) &color;
     do {
         created_text = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
         ptr = &tm->x518[idx];
@@ -2208,8 +2229,6 @@ void fn_80194D84(s32* state, u32 buttons, u32 trigger)
         fn_80190ABC(0);
     }
 }
-
-s32 lbl_804D6654;
 
 #pragma pack(push, 1)
 typedef struct TmData_80194F30 {
