@@ -2605,19 +2605,22 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                     cx2 < all_data->misc.cpudown_right)
                                 {
                                     cursor->x8 = 1;
-                                    if ((trigger & HSD_PAD_A) &&
-                                        all_data->misc.cpu_level != 0)
-                                    {
-                                        all_data->misc.cpu_level =
-                                            (u8) (all_data->misc.cpu_level -
-                                                  1);
-                                        all_data->misc.scroll_flag = 1;
-                                        mnCharSel_804D6CB0->data.data
-                                            .players[(
-                                                s8) (u8) mnCharSel_804D6CF0]
-                                            .cpu_level =
-                                            all_data->misc.cpu_level;
-                                        sfxMove();
+                                    if (trigger & HSD_PAD_A) {
+                                        u8* level = &all_data->misc.cpu_level;
+                                        if (all_data->misc.cpu_level != 0) {
+                                            *level = (u8) (all_data->misc
+                                                               .cpu_level -
+                                                           1);
+                                            all_data->misc.scroll_flag = 1;
+                                            mnCharSel_804D6CB0->data.data
+                                                .players
+                                                    [(s8) (u8)
+                                                         mnCharSel_804D6CF0]
+                                                .cpu_level = *level;
+                                            sfxMove();
+                                        } else {
+                                            goto door_clicks;
+                                        }
                                     } else {
                                         goto door_clicks;
                                     }
@@ -2625,19 +2628,22 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                            cx2 < all_data->misc.cpuup_right)
                                 {
                                     cursor->x8 = 1;
-                                    if ((trigger & HSD_PAD_A) &&
-                                        all_data->misc.cpu_level < 4U)
-                                    {
-                                        all_data->misc.cpu_level =
-                                            (u8) (all_data->misc.cpu_level +
-                                                  1);
-                                        all_data->misc.scroll_flag = 1;
-                                        mnCharSel_804D6CB0->data.data
-                                            .players[(
-                                                s8) (u8) mnCharSel_804D6CF0]
-                                            .cpu_level =
-                                            all_data->misc.cpu_level;
-                                        sfxMove();
+                                    if (trigger & HSD_PAD_A) {
+                                        u8* level = &all_data->misc.cpu_level;
+                                        if (all_data->misc.cpu_level < 4U) {
+                                            *level = (u8) (all_data->misc
+                                                               .cpu_level +
+                                                           1);
+                                            all_data->misc.scroll_flag = 1;
+                                            mnCharSel_804D6CB0->data.data
+                                                .players
+                                                    [(s8) (u8)
+                                                         mnCharSel_804D6CF0]
+                                                .cpu_level = *level;
+                                            sfxMove();
+                                        } else {
+                                            goto door_clicks;
+                                        }
                                     } else {
                                         goto door_clicks;
                                     }
