@@ -2010,6 +2010,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
     CSSTagData* current_tag;
     HSD_JObj* state_jobj;
     HSD_JObj* color_jobj;
+    u32 next_port;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     struct CSSCursorData* cursor = gobj->user_data;
     CSSAllData* all_data = CSS_ALL;
@@ -2937,7 +2938,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                             .sel_icon >= 0x19U)
                                     {
                                         mnCharSel_804A0BD0[cport7]->x5 =
-                                            (u8) (cport7 + 1);
+                                            (u8) (next_port = cport7 + 1);
                                         mnCharSel_804A0BC0[cport7]->x5 = 1;
                                         mnCharSel_804A0BC0[cport7]->x6 =
                                             cport7;
