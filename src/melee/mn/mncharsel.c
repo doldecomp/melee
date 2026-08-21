@@ -2982,7 +2982,9 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                 } else {
                                     lb_80011E24(
                                         mnCharSel_804D6CC0, &sp98,
-                                        all_data->tags[cursor->x4].name_jointl,
+                                        all_data
+                                            ->tags[*(volatile u8*) &cursor->x4]
+                                            .name_jointl,
                                         -1);
                                 }
                                 lb_8000B1CC(sp98, NULL, (&sp88));
