@@ -3582,18 +3582,22 @@ void fn_802633B0(HSD_GObj* gobj)
     HSD_JObj* handicap_slider_jobj;
     CSSTagData* tag;
     int port;
-    s32 num_entries;
-    u32 trigger;
-    s32 i;
-    s32 row;
-    u8 match_type;
+    GXColor* name_color;
+    s32 page;
+    s32 new_page;
+    GXColor* used_name_color;
     s32 val;
+    s32 row;
+    s32 j;
+    s32 page_off;
+    u8 match_type;
+    u32 trigger;
+    s32 num_entries;
+    s32 i;
     f32 cursor_row;
     f32 vel;
     f32 scroll_pos;
     f32 new_pos;
-    s32 page;
-    s32 new_page;
 
     tag = gobj->user_data;
     port = tag->port;
@@ -3738,10 +3742,8 @@ void fn_802633B0(HSD_GObj* gobj)
                             (32.0f * (f32) tag->next_tag) + tag->x8);
         {
             int row_idx;
-            GXColor* used_name_color = &used_row_color;
-            s32 j;
-            s32 page_off;
-            GXColor* name_color = &row_color;
+            name_color = &row_color;
+            used_name_color = &used_row_color;
             page_off = ((s32) tag->x8 / 32) + 1;
             for (j = 0; j < 9; j++) {
                 row_idx = j - page_off;
