@@ -4740,11 +4740,11 @@ s32 mnCharSel_802640A0(void)
         if (clear != 0) {
             for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
                 lb_80011E24(mnCharSel_804D6CC0, &sp108,
-                            data2.ko_stars[i].joint, -1);
+                            ((CSSKOStar*) &data2.ko_stars)[i].joint, -1);
                 lb_8000B1CC(sp108, NULL, &spEC);
                 text = HSD_SisLib_803A5ACC(0, ctx, spEC.x, -spEC.y - 0.9f,
                                            spEC.z, 32.0f, 32.0f);
-                data2.ko_stars[i].text = text;
+                ((CSSKOStar*) &data2.ko_stars)[i].text = text;
                 text->font_size.x = 0.07f;
                 text->font_size.y = 0.07f;
                 mnCharSel_8025D1C4(i, 0);
@@ -4752,7 +4752,7 @@ s32 mnCharSel_802640A0(void)
         } else {
             for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
                 lb_80011E24(mnCharSel_804D6CC0, &sp108,
-                            data2.ko_stars[i].joint, -1);
+                            ((CSSKOStar*) &data2.ko_stars)[i].joint, -1);
                 HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
             }
         }
