@@ -4530,24 +4530,26 @@ s32 mnCharSel_802640A0(void)
             HSD_SisLib_803A74F0(mnCharSel_803F0EBC.xd3, 4, &color7);
             HSD_GObjGXLink_803909D8(mnCharSel_803F0EBC.xd3->entity,
                                     mnCharSel_804D6CBC);
-            if (mnCharSel_804D6CB0->match_type == 0xD) {
-                lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x34, -1);
-                HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
-                lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x3D, -1);
-                HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
-                lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x45, -1);
-                HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
-                lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x46, -1);
-                HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
-            } else {
-                UNUSED u8 unk74[0x20];
-                HSD_JObj* sp70;
-                data2.stocks =
+            {
+                CSSData* css = mnCharSel_804D6CB0;
+                if (css->match_type == 0xD) {
+                    lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x34, -1);
+                    HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
+                    lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x3D, -1);
+                    HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
+                    lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x45, -1);
+                    HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
+                    lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x46, -1);
+                    HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
+                } else {
+                    UNUSED u8 unk74[0x20];
+                    HSD_JObj* sp70;
+                    data2.stocks =
+                        css->data.data.players[mnCharSel_804D6CF0].stocks;
+                    updateStockIcons(&data2, &sp70, 1);
                     mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
-                        .stocks;
-                updateStockIcons(&data2, &sp70, 1);
-                mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
-                    .stocks = data2.stocks;
+                        .stocks = data2.stocks;
+                }
             }
             lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x40, -1);
             lb_8000B1CC(sp108, NULL, &spEC);
