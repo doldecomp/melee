@@ -2683,7 +2683,18 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
 
                 if (cursor->xC < -25.5f && cursor->x10 > 22.0f) {
                     u8 mtype = mnCharSel_804D6CB0->match_type;
-                    if ((s32) mtype < 0xB && (s32) mtype >= 0) {
+                    switch ((s32) mtype) {
+                    case VS_MELEE:
+                    case VS_CAMERA:
+                    case VS_STAMINA:
+                    case VS_SUDDEN_DEATH:
+                    case VS_GIANT:
+                    case VS_TINY:
+                    case VS_INVISIBLE:
+                    case VS_FIXED_CAMERA:
+                    case VS_SINGLE_BUTTON:
+                    case VS_LIGHTNING:
+                    case VS_SLOWMO:
                         cursor->x8 = 1;
                         if (trigger & HSD_PAD_A) {
                             sfxMove();
@@ -2719,7 +2730,8 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                         } else {
                             goto try_costume_change;
                         }
-                    } else {
+                        break;
+                    default:
                         goto try_costume_change;
                     }
                 } else {
