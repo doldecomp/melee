@@ -3992,24 +3992,23 @@ s32 mnCharSel_802640A0(void)
         }
     }
 
+    mnCharSel_804D6CE0 = NULL;
+    mnCharSel_804D6CDC = NULL;
+    mnCharSel_804D6CE8 = NULL;
+    mnCharSel_804D6CE4 = NULL;
+    mnCharSel_804D6CF2 = 0x1E;
+    mnCharSel_804D6CF3 = 0;
     {
-        u8* mt_p;
-        mt_p = (u8*) mnCharSel_804D6CB0;
-        mnCharSel_804D6CE0 = NULL;
-        mnCharSel_804D6CDC = NULL;
-        mnCharSel_804D6CE8 = NULL;
-        mnCharSel_804D6CE4 = NULL;
-        mnCharSel_804D6CF2 = 0x1E;
-        mnCharSel_804D6CF3 = 0;
+        u8* mt_p = &mnCharSel_804D6CB0->match_type;
 
-        if (*(mt_p += 2) >= 0xBU) {
+        if (*mt_p >= 0xBU) {
             mnCharSel_804D6CF5 = 1;
             num_players = 1;
         } else {
             mnCharSel_804D6CF5 = 4;
             num_players = 4;
         }
-        if (*mt_p == 0x17) {
+        if (*mt_p == TRAINING_MODE) {
             num_players = 2;
         }
     }
