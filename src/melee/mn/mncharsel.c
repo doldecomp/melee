@@ -838,13 +838,15 @@ static inline f32 getHandicapFrame(int port)
 
 void mnCharSel_8025DB34(u8 arg0)
 {
+    struct {
+        s32 v;
+    } team;
     HSD_JObj* sp90;
     f32 anim_frame;
     u8 joint;
     u8 sel_icon;
     s32 hud_idx;
     s32 color;
-    s32 team;
     f32 door_frame;
 
     sel_icon = mnCharSel_803F0DFC.doors[arg0].sel_icon;
@@ -1111,20 +1113,20 @@ void mnCharSel_8025DB34(u8 arg0)
         } else {
             /* Teams mode */
             HSD_JObjClearFlags(sp90, JOBJ_HIDDEN);
-            team = mnCharSel_803F0DFC.doors[arg0].team;
+            team.v = mnCharSel_803F0DFC.doors[arg0].team;
 
-            anim_frame = (f32) mnCharSel_804D50D0[team];
+            anim_frame = (f32) mnCharSel_804D50D0[team.v];
             joint = mnCharSel_803F0DFC.doors[arg0].team_joint;
             animateJoint(mnCharSel_804D6CC0, joint, TOBJ_MASK, anim_frame);
             if (mnCharSel_803F0DFC.doors[arg0].p_kind != 0) {
-                team += 4;
+                team.v += 4;
             }
             {
-                anim_frame = (f32) mnCharSel_804D50D0[team];
+                anim_frame = (f32) mnCharSel_804D50D0[team.v];
                 joint = mnCharSel_803F0DFC.doors[arg0].bg_joint;
                 animateJoint(mnCharSel_804D6CC0, joint, TOBJ_MASK, anim_frame);
 
-                anim_frame = (f32) mnCharSel_804D50D0[team];
+                anim_frame = (f32) mnCharSel_804D50D0[team.v];
                 joint = mnCharSel_803F0DFC.doors[arg0].emblem_joint;
                 animateJoint(mnCharSel_804D6CC0, joint, MOBJ_MASK, anim_frame);
             }
