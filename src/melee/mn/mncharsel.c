@@ -719,9 +719,44 @@ static inline bool isDuplicateCostumeWith(int door, CSSData* css,
     return false;
 }
 
+static inline bool isDuplicateRandomCostume(CSSDoor* other_door, int door,
+                                            CSSData* css, CSSAllData* all_data,
+                                            s32 door_count, u8 costume)
+{
+    int num_doors;
+    int j;
+    CSSDoor* base_door;
+
+    base_door = &mnCharSel_803F0DFC.doors[door];
+    base_door->costume = costume;
+
+    if (css->match_type == TRAINING_MODE) {
+        num_doors = 2;
+    } else {
+        num_doors = door_count;
+    }
+
+    other_door = all_data->doors_data.doors;
+    for (j = 0; j < num_doors; other_door++, j++) {
+        if (door != j && other_door->p_kind != 3 &&
+            other_door->sel_icon < 0x19 &&
+            other_door->sel_icon == base_door->sel_icon &&
+            base_door->costume == other_door->costume)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 static inline bool equalU8(u8 lhs, u8 rhs)
 {
     return lhs == rhs;
+}
+
+static inline CSSData* getCSSData(void)
+{
+    return mnCharSel_804D6CB0;
 }
 
 /// Variant of isDuplicateCostume that reads the base door's icon and
@@ -1666,11 +1701,12 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
     if (mnCharSel_803F0DFC.doors[door].sel_icon !=
         mnCharSel_803F0DFC.doors[door].sel_icon_prev)
     {
-        CSSData* css = mnCharSel_804D6CB0;
+        CSSData* css = getCSSData();
         u8 costume = 0;
         while (1) {
-            mnCharSel_803F0DFC.doors[door].costume = costume;
-            if (!isDuplicateCostumeWith(door, css, mnCharSel_804D6CF5)) {
+            if (!isDuplicateRandomCostume(NULL, door, css, all_data,
+                                          mnCharSel_804D6CF5, costume))
+            {
                 break;
             }
             costume++;
