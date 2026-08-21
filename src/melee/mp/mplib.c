@@ -6902,6 +6902,7 @@ void mpLib_DrawCrosses(s16* idx, int len, GXColor arg2)
         GXPosition3f32(mpLib_80458888[i].x, mpLib_80458888[i].y,
                        3.0F + mpLib_80458888[i].z);
     }
+    GXEnd();
 }
 
 static const GXColor mpLib_804D8128 = { 0x7D, 0x7D, 0xFF, 0xFF };

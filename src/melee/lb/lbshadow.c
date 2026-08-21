@@ -271,21 +271,10 @@ void lbShadow_8000F214(HSD_Shadow* shadow)
 
     GXBegin(GX_QUADS, GX_VTXFMT0, num_edges);
 
-    GXWGFifo.f32 = x0;
-    GXWGFifo.f32 = y0;
-    GXWGFifo.f32 = z;
-
-    GXWGFifo.f32 = x1;
-    GXWGFifo.f32 = y0;
-    GXWGFifo.f32 = z;
-
-    GXWGFifo.f32 = x1;
-    GXWGFifo.f32 = y1;
-    GXWGFifo.f32 = z;
-
-    GXWGFifo.f32 = x0;
-    GXWGFifo.f32 = y1;
-    GXWGFifo.f32 = z;
+    GXPosition3f32(x0, y0, z);
+    GXPosition3f32(x1, y0, z);
+    GXPosition3f32(x1, y1, z);
+    GXPosition3f32(x0, y1, z);
 
     GXEnd();
 }
