@@ -3111,6 +3111,14 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
 update_display:
     updateCursorDisplay(jobj, cursor);
 }
+static inline int getDoorCount(CSSData* css)
+{
+    if (css->match_type == TRAINING_MODE) {
+        return 2;
+    }
+    return mnCharSel_804D6CF5;
+}
+
 static inline void animateCharModel(HSD_JObj* jobj, f32 frame)
 {
     HSD_JObj* child;
@@ -3129,7 +3137,6 @@ static inline void animateCharModel(HSD_JObj* jobj, f32 frame)
 void fn_80262648(HSD_GObj* gobj)
 {
     HSD_JObj* sp24;
-    u32 pad2;
     struct {
         CSSData* value;
     } css;
@@ -3137,13 +3144,10 @@ void fn_80262648(HSD_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     u8 prev_port = model->x6;
     int n_doors;
+    struct CSSCharModel** bd0;
 
     css.value = mnCharSel_804D6CB0;
-    if (css.value->match_type == 0x17) {
-        n_doors = 2;
-    } else {
-        n_doors = mnCharSel_804D6CF5;
-    }
+    n_doors = getDoorCount(css.value);
 
     {
         u8 door = model->x4;
@@ -3206,8 +3210,9 @@ void fn_80262648(HSD_GObj* gobj)
         u8 status = model->x5;
         if (status == 0) {
             s32 iter;
+            bd0 = mnCharSel_804A0BD0;
             for (iter = 0; iter < 0x14; iter++) {
-                struct CSSCharModel** bdp = mnCharSel_804A0BD0;
+                struct CSSCharModel** bdp = bd0;
                 CSSDoor* dp = mnCharSel_803F0DFC.doors;
                 s32 j;
 
