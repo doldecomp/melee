@@ -719,6 +719,11 @@ static inline bool isDuplicateCostumeWith(int door, CSSData* css,
     return false;
 }
 
+static inline bool equalU8(u8 lhs, u8 rhs)
+{
+    return lhs == rhs;
+}
+
 /// Variant of isDuplicateCostume that reads the base door's icon and
 /// costume once before the scan.
 static inline bool isDuplicateCostumeCached(int door)
@@ -743,7 +748,7 @@ static inline bool isDuplicateCostumeCached(int door)
     for (j = 0; j < num_doors; j++) {
         if (door != j && mnCharSel_803F0DFC.doors[j].p_kind != 3 &&
             mnCharSel_803F0DFC.doors[j].sel_icon < 0x19 &&
-            mnCharSel_803F0DFC.doors[j].sel_icon == sel &&
+            equalU8(mnCharSel_803F0DFC.doors[j].sel_icon, sel) &&
             cost == mnCharSel_803F0DFC.doors[j].costume)
         {
             return true;
@@ -2014,8 +2019,6 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     struct CSSCursorData* cursor = gobj->user_data;
     CSSAllData* all_data = CSS_ALL;
-    /// Unidentified local; it only reserves the original's stack slot.
-    UNUSED f32 unk1C;
     u32 trigger;
     int n_doors;
     u32 buttons;
