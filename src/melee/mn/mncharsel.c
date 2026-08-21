@@ -3556,7 +3556,6 @@ void fn_802633B0(HSD_GObj* gobj)
     f32 new_pos;
     s32 page;
     s32 new_page;
-    int row_idx;
 
     tag = gobj->user_data;
     port = tag->port;
@@ -3700,6 +3699,7 @@ void fn_802633B0(HSD_GObj* gobj)
         HSD_SisLib_803A746C(tag->name_ls, 1, 0.0f,
                             (32.0f * (f32) tag->next_tag) + tag->x8);
         {
+            int row_idx;
             GXColor* name_color = &row_color;
             s32 j;
             s32 page_off;
