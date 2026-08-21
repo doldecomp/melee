@@ -262,7 +262,7 @@ void ftSs_SpecialLw_801290A4(HSD_GObj* gobj)
                               fp->frame_speed_mul, 0.0f, 0);
 }
 
-int ftSs_SpecialLw_80129100(HSD_GObj* gobj, s32* arg1, s32* arg2)
+int ftSs_SpecialLw_80129100(HSD_GObj* gobj, int* arg1, int* arg2)
 {
     if (gobj != NULL) {
         Fighter* fp = GET_FIGHTER(gobj);
