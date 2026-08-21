@@ -1587,6 +1587,7 @@ void ftCommon_8007FC7C(HSD_GObj* gobj, float arg8)
     ft_PlaySFX(fp, 0x11F, 0x7F, 0x40);
 }
 
+#ifdef MUST_MATCH
 static inline float fminf(float a, float b)
 {
     float result = a;
@@ -1595,6 +1596,7 @@ static inline float fminf(float a, float b)
     }
     return result;
 }
+#endif
 
 void ftCommon_8007FDA0(HSD_GObj* gobj)
 {

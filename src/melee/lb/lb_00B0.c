@@ -3,6 +3,7 @@
 #include "sc/types.h" // IWYU pragma: keep
 
 #include <math.h>
+#include <string.h>
 #include <dolphin/mtx.h>
 #include <baselib/aobj.h>
 #include <baselib/dobj.h> // IWYU pragma: keep
@@ -393,6 +394,7 @@ void lb_8000C0E8(HSD_JObj* jobj, s32 i, DynamicModelDesc* arg2)
     lb_8000C07C(jobj, i, arg2->anims, arg2->matanims, arg2->shapeanims);
 }
 
+#ifdef MUST_MATCH
 void memzero(void* mem, int size)
 {
     u8* bytes = mem;
@@ -400,6 +402,7 @@ void memzero(void* mem, int size)
         *bytes++ = 0;
     }
 }
+#endif
 
 void lb_8000C1C0(HSD_JObj* jobj, HSD_JObj* constraint)
 {
