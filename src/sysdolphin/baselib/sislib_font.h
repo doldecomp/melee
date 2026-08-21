@@ -3,6 +3,10 @@
 
 #include <platform.h>
 
-/* 40CD40 */ extern u8 HSD_SisLib_FontAtlas[0x23E00];
+typedef struct TextGlyphTexture {
+    /*0x00*/ u8 data[512];
+} TextGlyphTexture;
+
+/* 40CD40 */ extern TextGlyphTexture HSD_SisLib_FontAtlas[287];
 
 #endif

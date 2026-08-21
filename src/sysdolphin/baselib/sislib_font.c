@@ -1,3 +1,5 @@
 #include "sislib_font.h"
 
-#include <sysdolphin/baselib/sislib_font.static.h>
+TextGlyphTexture HSD_SisLib_FontAtlas[] ATTRIBUTE_ALIGN(32) = {
+#include <sysdolphin/baselib/sislib_font.inc>
+};
