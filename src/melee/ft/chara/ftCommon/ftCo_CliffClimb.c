@@ -48,7 +48,7 @@ bool ftCo_8009AA0C(Fighter_GObj* gobj)
     return false;
 }
 
-bool ftCo_8009AAFC(Fighter_GObj* gobj, int arg1, float stick_x, float angle)
+bool ftCo_8009AAFC(Fighter_GObj* gobj, bool arg1, float stick_x, float angle)
 {
     Fighter* fp = gobj->user_data;
     if (angle > p_ftCommonData->x20_radians ||

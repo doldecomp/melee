@@ -108,7 +108,7 @@ void ftCo_800BFFAC(Fighter* fp)
     lb_80014498(&fp->x488);
 }
 
-bool ftCo_800BFFD0(Fighter* fp, int arg1, int arg2)
+bool ftCo_800BFFD0(Fighter* fp, enum_t arg1, bool arg2)
 {
     s32 tmp;
     if (arg1 >= 0x7B) {

@@ -101,7 +101,7 @@ float ftYs_SpecialN_GetExtAttr34(void)
     return ext_attr->x34;
 }
 
-int ftYs_SpecialN_GetExtAttr38(void)
+bool ftYs_SpecialN_GetExtAttr38(void)
 {
     ftYoshiAttributes* ext_attr = gFtDataList[FTKIND_YOSHI]->ext_attr;
     return ext_attr->x38;

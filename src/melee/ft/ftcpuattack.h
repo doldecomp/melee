@@ -43,7 +43,7 @@ struct ftCo_AttackEntry;
 /* 0BA9A0 */ void ftCo_800BA9A0(Fighter*);
 /* 0BB104 */ bool ftCo_800BB104(Fighter*, Fighter*, Vec3*, float);
 /* 0BB220 */ int ftCo_800BB220(Fighter*, Item* ip, Vec3*, float);
-/* 0BB768 */ int ftCo_800BB768(Fighter*, Fighter*);
+/* 0BB768 */ bool ftCo_800BB768(Fighter*, Fighter*);
 /* 0BB9B4 */ int ftCo_800BB9B4(Fighter*);
 
 #endif

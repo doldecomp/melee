@@ -244,9 +244,9 @@ bool ftpickupitem_80094790(Fighter_GObj* gobj)
         Item_GObj* unk_gobj = ftpickupitem_800942A0(gobj, 3);
         if (unk_gobj != NULL) {
             if (!itIsHeavy(unk_gobj)) {
-                ftpickupitem_80094694(gobj, ftCo_MS_LightGet, 0);
+                ftpickupitem_80094694(gobj, ftCo_MS_LightGet, false);
             } else {
-                ftpickupitem_80094694(gobj, ftCo_MS_HeavyGet, 0);
+                ftpickupitem_80094694(gobj, ftCo_MS_HeavyGet, false);
             }
             return true;
         }
@@ -254,7 +254,7 @@ bool ftpickupitem_80094790(Fighter_GObj* gobj)
     return false;
 }
 
-void ftpickupitem_80094818(Fighter_GObj* gobj, int arg1)
+void ftpickupitem_80094818(Fighter_GObj* gobj, bool arg1)
 {
     Fighter* fp = gobj->user_data;
     PAD_STACK(8);
