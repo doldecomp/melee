@@ -2888,7 +2888,8 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                             }
                         }
                     } else if (trigger & HSD_PAD_B) {
-                        u8 cport5 = cursor->x4;
+                        u8 cport5;
+                        (void) mnCharSel_803F0DFC.doors[cport5 = cursor->x4];
                         if (mnCharSel_803F0DFC.doors[cursor->x4].p_kind != 3 &&
                             mnCharSel_803F0DFC.doors[cursor->x4].sel_icon <
                                 0x19U)
