@@ -1,6 +1,25 @@
 #include "targimpl.h"
 
-#include "metrotrk.h"
+#include "dolphin_trk.h"
+#include "dserror.h"
+#include "flush_cache.h"
+#include "m7xx_m603e_reg.h"
+#include "main_TRK.h"
+#include "memmap.h"
+#include "msgbuf.h"
+#include "msgcmd.h"
+#include "notify.h"
+#include "nubevent.h"
+#include "nubinit.h"
+#include "ppc_except.h"
+#include "ppc_reg.h"
+#include "ppc_targimpl.h"
+#include "support.h"
+
+#ifdef MWERKS_GEKKO
+#include "dolphin_trk_glue.h"
+#include "mpc_7xx_603e.h"
+#endif
 
 static bool TRKTargetCheckStep(void);
 
