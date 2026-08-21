@@ -3088,7 +3088,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                             .sel_icon >= 0x19U)
                                     {
                                         mnCharSel_804A0BD0[cport7]->x5 =
-                                            (s8) (cport7 + 1);
+                                            (u8) (cport7 + 1);
                                         mnCharSel_804A0BC0[cport7]->x5 = 1;
                                         mnCharSel_804A0BC0[cport7]->x6 =
                                             cport7;
@@ -3980,7 +3980,6 @@ s32 mnCharSel_802640A0(void)
     GXColor* color2_ptr;
     s32 i;
     s32 icon;
-    HSD_JObj* cc0;
     u8 match_type = mnCharSel_804D6CB0->match_type;
 
     if (match_type != 0) {
@@ -4144,9 +4143,11 @@ s32 mnCharSel_802640A0(void)
             } else {
                 sp108 = HSD_JObjGetParent(sp108);
                 icons[icon].state = 2;
-                cc0 = sp108;
-                HSD_ForeachAnim(cc0, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjReqAnim,
-                                AOBJ_ARG_AF, 20.0);
+                {
+                    HSD_JObj* anim_jobj = sp108;
+                    HSD_ForeachAnim(anim_jobj, JOBJ_TYPE, ALL_TYPE_MASK,
+                                    HSD_AObjReqAnim, AOBJ_ARG_AF, 20.0);
+                }
                 HSD_JObjAnimAll(sp108);
             }
             break;
@@ -4333,9 +4334,11 @@ s32 mnCharSel_802640A0(void)
                 HSD_JObj* spA4;
                 u8 tag_box_joint = mnCharSel_803F0EBC.tag_box_joint;
                 lb_80011E24(mnCharSel_804D6CC0, &spA4, tag_box_joint, -1);
-                cc0 = spA4;
-                HSD_ForeachAnim(cc0, JOBJ_TYPE, JOBJ_MASK, HSD_AObjReqAnim,
-                                AOBJ_ARG_AF, 2.0);
+                {
+                    HSD_JObj* anim_jobj = spA4;
+                    HSD_ForeachAnim(anim_jobj, JOBJ_TYPE, JOBJ_MASK,
+                                    HSD_AObjReqAnim, AOBJ_ARG_AF, 2.0);
+                }
                 HSD_JObjAnimAll(spA4);
                 HSD_ForeachAnim(spA4, JOBJ_TYPE, JOBJ_MASK, HSD_AObjStopAnim,
                                 AOBJ_ARG_AOV, 0, 0);
