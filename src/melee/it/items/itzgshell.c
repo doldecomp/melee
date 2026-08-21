@@ -1,6 +1,5 @@
 #include "itzgshell.h"
 
-#include "dolphin.h"
 #include "inlines.h"
 
 #include "baselib/random.h"
