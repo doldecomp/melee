@@ -1833,11 +1833,11 @@ void mnCharSel_CostumeChange(int door, u32 input)
 }
 
 static inline void updateCursorDisplay(HSD_JObj* jobj,
-                                       struct CSSCursorData* cursor)
+                                       struct CSSCursorData* cursor,
+                                       HSD_JObj** state_jobj,
+                                       HSD_JObj** color_jobj)
 {
     CSSAllData* all_data = CSS_ALL;
-    HSD_JObj* state_jobj;
-    HSD_JObj* color_jobj;
 
     if (cursor->x5 != 1) {
         f32 y = cursor->x10;
@@ -1851,12 +1851,12 @@ static inline void updateCursorDisplay(HSD_JObj* jobj,
     {
         f32 state = (f32) cursor->x5;
         HSD_JObj* cc0;
-        lb_80011E24(jobj, &state_jobj, 2, -1);
-        cc0 = state_jobj;
+        lb_80011E24(jobj, state_jobj, 2, -1);
+        cc0 = *state_jobj;
         HSD_ForeachAnim(cc0, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
                         AOBJ_ARG_AF, state);
-        HSD_JObjAnimAll(state_jobj);
-        HSD_ForeachAnim(state_jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
+        HSD_JObjAnimAll(*state_jobj);
+        HSD_ForeachAnim(*state_jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
                         AOBJ_ARG_AOV, 0, 0);
     }
 
@@ -1895,15 +1895,15 @@ static inline void updateCursorDisplay(HSD_JObj* jobj,
                 color_idx = color_idx + (port * 4);
             }
 
-            lb_80011E24(jobj, &color_jobj, 3, -1);
+            lb_80011E24(jobj, color_jobj, 3, -1);
             {
-                HSD_JObj* anim_jobj = color_jobj;
+                HSD_JObj* anim_jobj = *color_jobj;
                 HSD_ForeachAnim(anim_jobj, JOBJ_TYPE, TOBJ_MASK,
                                 HSD_AObjReqAnim, AOBJ_ARG_AF, (f32) color_idx);
             }
-            HSD_JObjAnimAll(color_jobj);
-            HSD_ForeachAnim(color_jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
-                            AOBJ_ARG_AOV, 0, 0);
+            HSD_JObjAnimAll(*color_jobj);
+            HSD_ForeachAnim(*color_jobj, JOBJ_TYPE, TOBJ_MASK,
+                            HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
         }
     }
 
@@ -2005,6 +2005,11 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
     UNUSED u8 unk58[28];
     HSD_JObj* sp54;
     HSD_JObj* sp50;
+    s32 cpu_door;
+    u32 a_press;
+    CSSTagData* current_tag;
+    HSD_JObj* state_jobj;
+    HSD_JObj* color_jobj;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     struct CSSCursorData* cursor = gobj->user_data;
     CSSAllData* all_data = CSS_ALL;
@@ -2064,7 +2069,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                 mnCharSel_8025FB50(door & 0xFF, 1);
                             }
                         } else if (door <= 7U) {
-                            s32 cpu_door = door - 4;
+                            cpu_door = door - 4;
                             all_data->doors_data.doors[cpu_door]
                                 .is_hold_cpu_slider = 0;
                         }
@@ -2125,8 +2130,8 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
         all_data->tags[cursor->x4].data->scroll_amt = 0.0f;
 
         {
-            CSSTagData* tag = all_data->tags[cursor->x4].data;
-            if (tag->state != 0) {
+            current_tag = all_data->tags[cursor->x4].data;
+            if (current_tag->state != 0) {
                 if (mnCharSel_804D6CF5 == 1) {
                     lb_80011E24(mnCharSel_804D6CC0, &sp98,
                                 all_data->misc.name_list_joint, -1);
@@ -2209,7 +2214,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                             mnCharSel_8025DB34(door);
                             cursor->x5 = 2;
                         } else {
-                            u32 a_press = trigger & HSD_PAD_A;
+                            a_press = trigger & HSD_PAD_A;
                             if (a_press != 0) {
                                 struct CSSCharModel* m =
                                     mnCharSel_804A0BD0[door];
@@ -2969,7 +2974,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
     }
 
 update_display:
-    updateCursorDisplay(jobj, cursor);
+    updateCursorDisplay(jobj, cursor, &state_jobj, &color_jobj);
 }
 static inline void animateCharModel(HSD_JObj* jobj, f32 frame)
 {
