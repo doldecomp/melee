@@ -30,7 +30,7 @@ struct grBattle_YakumonoParam {
     int bg_prev_color_overlay;
 };
 
-/* 219C98 */ static void grBattle_OnDemoInit(bool);
+/* 219C98 */ static void grBattle_OnDemoInit(int);
 /* 219CA4 */ static void grBattle_OnInit(void);
 /* 219D54 */ static void grBattle_OnLoad(void);
 /* 219D58 */ static void grBattle_OnStart(void);
@@ -138,7 +138,7 @@ StageData grNBa_StageData = {
     0,
 };
 
-void grBattle_OnDemoInit(bool arg0)
+void grBattle_OnDemoInit(int arg0)
 {
     isDemoFight = true;
 }

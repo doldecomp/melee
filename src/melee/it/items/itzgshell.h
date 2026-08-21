@@ -61,7 +61,7 @@
 /* 2DFCB0 */ bool it_2725_Logic11_Clanked(Item_GObj*);
 /* 2DFD60 */ bool it_2725_Logic11_HitShield(Item_GObj*);
 /* 2DFE40 */ bool itZGShell_Logic11_ShieldBounced(Item_GObj*);
-/* 2DFE7C */ int fn_802DFE7C(Item_GObj* gobj);
+/* 2DFE7C */ bool fn_802DFE7C(Item_GObj* gobj);
 /* 2DFED4 */ void it_802DFED4(Item_GObj*, Item_GObj*);
 /* 2DFEF4 */ void itZGShell_Logic11_Destroyed(Item_GObj*);
 /* 2DFF14 */ void it_802DFF14(Item_GObj*, s32);

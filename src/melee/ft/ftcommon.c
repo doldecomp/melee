@@ -1351,7 +1351,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     dst->x221E_b4 = src->x221E_b4;
     if (src->x197C != NULL) {
         it_8026B9A8(src->x197C, dst_gobj, dst->ft_data->x8->x12);
-        it_802950D4(src->x197C, 0);
+        it_802950D4(src->x197C, false);
         ftCommon_8007F948(dst_gobj, src->x197C, src->x2014);
         ftCommon_8007FA00(gobj);
     } else {

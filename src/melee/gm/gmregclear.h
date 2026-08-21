@@ -41,7 +41,7 @@
 /* 17DF28 */ Unk1PData* fn_8017DF28(void);
 /* 17DF90 */ u8 fn_8017DF90(void);
 /* 17DFF4 */ int gm_8017DFF4(int);
-/* 17E068 */ bool gm_8017E068(void);
+/* 17E068 */ int gm_8017E068(void);
 /* 17E0E4 */ int fn_8017E0E4(void);
 /* 17E160 */ bool fn_8017E160(void);
 /* 17E21C */ void fn_8017E21C(void);
