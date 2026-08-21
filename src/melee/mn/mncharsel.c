@@ -1832,11 +1832,10 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
         mnCharSel_803F0DFC.doors[door].sel_icon_prev)
     {
         CSSData* css = mnCharSel_804D6CB0;
-        u8 door_count = mnCharSel_804D6CF5;
         u8 costume = 0;
         while (1) {
             mnCharSel_803F0DFC.doors[door].costume = costume;
-            if (!isDuplicateCostumeWith(door, css, door_count)) {
+            if (!isDuplicateCostumeWith(door, css, mnCharSel_804D6CF5)) {
                 break;
             }
             costume++;
@@ -4289,8 +4288,6 @@ s32 mnCharSel_802640A0(void)
     }
 
     spE8 = mnCharSel_804DC580;
-    color_ptr = &color;
-    color2_ptr = &color2;
     for (i = 0; i < num_players; i++) {
         CSSTagData* td;
         int player;
@@ -4407,11 +4404,13 @@ s32 mnCharSel_802640A0(void)
         HSD_SisLib_803A6B98(td->name_ls, 0.0f, 0.0f,
                             "\x81\x45\x81\x45\x81\x45\x81\x45\x81\x45\x81\x45"
                             "\x81\x45\x81\x45\x81\x45\x81\x45\x81\x45");
+        color_ptr = &color;
         *color_ptr = spE8;
         HSD_SisLib_803A74F0(td->name_ls, 0, color_ptr);
         HSD_SisLib_803A6B98(td->name_ls, 0.0f, 0.0f,
                             "\x82\x6d\x82\x60\x82\x6c\x82\x64\x20\x82\x64\x82"
                             "\x6d\x82\x73\x82\x71\x82\x78");
+        color2_ptr = &color2;
         *color2_ptr = spE8;
         HSD_SisLib_803A74F0(td->name_ls, 1, color2_ptr);
         for (found = 0; found < 9; found++) {
