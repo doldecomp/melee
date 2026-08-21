@@ -2989,6 +2989,7 @@ static inline void animateCharModel(HSD_JObj* jobj, f32 frame)
 void fn_80262648(HSD_GObj* gobj)
 {
     HSD_JObj* sp24;
+    UNUSED u32 pad2;
     struct {
         CSSData* value;
     } css;
