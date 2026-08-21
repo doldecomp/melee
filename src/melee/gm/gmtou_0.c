@@ -1,9 +1,10 @@
+#include "gmtou_0.h"
+
 #include "gm_1601.h"
 #include "gm_1A3F.h"
 #include "gm_1A45.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
-#include "gmtou_1.h"
 #include "gmtoulib.h"
 #include "types.h"
 
@@ -33,8 +34,28 @@
 #include <baselib/random.h>
 #include <baselib/sislib.h>
 
+/* 4799B8 */ extern struct Lbl804799B8_t lbl_804799B8;
+
+/* 4D6640 */ static HSD_Archive* lbl_804D6640;
+/* 4D6644 */ static HSD_Archive* lbl_804D6644;
+/* 4D6648 */ static HSD_Archive* lbl_804D6648;
+/* 4D664C */ static SceneDesc* lbl_804D664C;
+/* 4D6650 */ static SceneDesc* lbl_804D6650;
+/* 4D6654 */ static enum_t lbl_804D6654;
+/* 4D6658 */ static int lbl_804D6658;
+/* 4D665C */ static int lbl_804D665C;
+
+/// @todo .sbss order hack
+static void sbss_order(void)
+{
+    (void) lbl_804D6650;
+    (void) lbl_804D6658;
+    (void) lbl_804D6654;
+    (void) lbl_804D665C;
+}
+
 /// @todo .sdata2 order hack
-static void sdata2_order(void)
+static void sdata2_order0(void)
 {
     (void) 4.5f;
     (void) 130.0f;
@@ -79,7 +100,12 @@ static void sdata2_order(void)
     (void) 0.200000003f;
     (void) -1.0f;
     (void) 10.0999928f;
-    (void) 28195.498f;
+}
+
+/* 4DA78C */ GXColor const lbl_804DA78C = { 0x46, 0xDC, 0x46, 0xFF };
+
+static void order_sdata2_1(void)
+{
     (void) 124.5f;
     (void) 45.0f;
     (void) 391.0f;
@@ -100,9 +126,6 @@ static void sdata2_order(void)
     (void) 0.850000024f;
     (void) 1.35000002f;
 }
-
-/* 4D664C */ extern SceneDesc* lbl_804D664C;
-/* 4D6650 */ extern SceneDesc* lbl_804D6650;
 
 /* 3D9F80 */ static struct TmSettingTable lbl_803D9F80 = {
     0, 74,  0, 74,  0, 77,  0, 75, 0,  75,  0,  77, 0, 80,  0, 78, 0, 79,
@@ -750,8 +773,6 @@ void fn_80191B5C(void* gobj)
     }
 }
 
-s32 lbl_804D6658;
-
 /// Updates JObj visibility based on current menu option selection.
 void fn_80191CA4(HSD_GObj* gobj)
 {
@@ -1159,8 +1180,6 @@ void fn_80192758(HSD_GObj* gobj)
     }
 }
 
-extern s32 lbl_804D665C;
-
 #pragma push
 #pragma inline_depth(0)
 void fn_80192938(void)
@@ -1367,14 +1386,12 @@ void fn_80193230(void)
 }
 #pragma pop
 
-/// .sdata2
-/* 4DA78C */ extern s32 lbl_804DA78C;
-
+/// @todo Fix ::GXColor casts
 void fn_80193308(void)
 {
     HSD_Text* created_text2;
     s32* text_color_word;
-    s32 color;
+    GXColor color;
     TmData* tm;
     HSD_Text* text;
     GXColor* text_color;
@@ -1429,7 +1446,7 @@ void fn_80193308(void)
     idx = 1;
     if ((!tm) && (!tm)) {
     }
-    color_word = &color;
+    color_word = (s32*) &color;
     do {
         created_text = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
         ptr = &tm->x518[idx];
@@ -2212,8 +2229,6 @@ void fn_80194D84(s32* state, u32 buttons, u32 trigger)
         fn_80190ABC(0);
     }
 }
-
-s32 lbl_804D6654;
 
 #pragma pack(push, 1)
 typedef struct TmData_80194F30 {

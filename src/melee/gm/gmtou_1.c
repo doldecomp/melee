@@ -4,6 +4,7 @@
 #include "gm_1A3F.h"
 #include "gm_1A45.h"
 #include "gm_unsplit.h"
+#include "gmtou_0.h"
 #include "gmtoulib.h"
 #include "types.h"
 
@@ -24,18 +25,19 @@
 #include "mn/mnmain.h"
 #include "sc/types.h"
 
-#include <printf.h>
-#include <dolphin/os.h>
 #include <baselib/controller.h>
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/mobj.h>
-#include <baselib/particle.h>
 #include <baselib/random.h>
 #include <baselib/sislib.h>
+
+/* 4799D8 */ extern struct Lbl804799D8_t lbl_804799D8;
+/* 4D6660 */ extern HSD_Archive* lbl_804D6660;
+/* 4D6668 */ extern HSD_Archive* lbl_804D6668;
+/* 4D6664 */ extern HSD_Archive* lbl_804D6664;
 
 /** @todo .sdata2 literal-order anchor (same idiom as gmtou_0.c/gmtou_2.c):
  * retail keeps -19.5f/13.0f at the head of this TU's pool (0x804DA7E0/E4),
