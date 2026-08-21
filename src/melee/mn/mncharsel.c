@@ -4797,6 +4797,7 @@ s32 mnCharSel_802640A0(void)
         }
     }
 
+    (void) icons[num_players];
     gobj = GObj_Create(4, 5, 0x80);
     jobj = HSD_JObjLoadJoint(ANIM[4].joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
