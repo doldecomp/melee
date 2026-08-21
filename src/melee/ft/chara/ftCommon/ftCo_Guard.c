@@ -210,8 +210,7 @@ void ftCo_80091E78(Fighter_GObj* gobj, float arg1)
             HSD_JObjAnimAll(jobj);
             if (fp->mv.co.guard.x4 < 1) {
                 ftAnim_80070108(fp, FtPart_TransN, 1 - fp->mv.co.guard.x4,
-                                fp->mv.co.guard.x4,
-                                fp->ft_data->x20->x0[2]);
+                                fp->mv.co.guard.x4, fp->ft_data->x20->x0[2]);
             }
             if (arg1 < 1) {
                 ftAnim_8006FE9C(fp, FtPart_TransN, arg1, 1 - arg1);
@@ -222,8 +221,7 @@ void ftCo_80091E78(Fighter_GObj* gobj, float arg1)
             ftAnim_80070010(fp, FtPart_TransN, arg1, 1 - arg1,
                             fp->ft_data->x20->x0[2]);
         } else {
-            ftAnim_8006FA58(fp, FtPart_TransN,
-                            fp->ft_data->x20->x0[2]);
+            ftAnim_8006FA58(fp, FtPart_TransN, fp->ft_data->x20->x0[2]);
         }
         {
             scl.x = scl.y = scl.z = inlineB0(fp);

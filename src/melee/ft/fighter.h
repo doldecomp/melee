@@ -163,10 +163,13 @@ struct plAllocInfo;
     float x94;       ///< cmsubject offset mult
     float x98;       ///<
 }* Fighter_804D6524; ///< fighter scale modifiers - used in 0x800d105c
-/* 4D6528 */ extern struct Fighter_804D6528_t {
+/* 4D6528 */ extern struct Fighter_ShakeTable_t {
     Vec2* x0;
     int x4;
-}* Fighter_804D6528;
+}* Fighter_SmashChargeShakeTable; ///< smash-charge shake table
+
+/// Grab-mash shake table
+/* 4D652C */ extern struct Fighter_ShakeTable_t* Fighter_GrabMashShake;
 
 /* 4D6530 */ extern Vec2** Fighter_804D6530;
 /* 4D6534 */ extern UNK_T Fighter_804D6534;

@@ -672,11 +672,6 @@ void ftCommon_8007DB58(HSD_GObj* gobj)
     }
 }
 
-extern struct {
-    Vec2* x0;
-    s32 x4;
-}* Fighter_804D652C;
-
 void ftCommon_InitGrab(Fighter* fp, bool arg1, float timer)
 {
     fp->grab_timer = timer;
@@ -685,7 +680,7 @@ void ftCommon_InitGrab(Fighter* fp, bool arg1, float timer)
     fp->x2224_b6 = arg1;
     if (fp->x2224_b6) {
         fp->x1A52 = 0;
-        fp->x1A53 = Fighter_804D652C->x4;
+        fp->x1A53 = Fighter_GrabMashShake->x4;
     }
 }
 
@@ -1723,7 +1718,7 @@ void ftCommon_8008021C(HSD_GObj* gobj)
         fp->dmg.x18BC += shift.y;
     }
     if (fp->x2224_b5) {
-        Vec2* temp_r3 = &Fighter_804D652C->x0[fp->x1A52];
+        Vec2* temp_r3 = &Fighter_GrabMashShake->x0[fp->x1A52];
         shift.x = temp_r3->x;
         shift.y = temp_r3->y;
         result = &shift;
