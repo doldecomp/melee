@@ -510,7 +510,6 @@ void mnCharSel_8025D1C4(int port, int mode)
     int star_count;
     CSSData* css = mnCharSel_804D6CB0;
     CSSKOStar* stars;
-    u8 joint;
 
     HSD_JObj* sp10;
 
@@ -533,13 +532,15 @@ void mnCharSel_8025D1C4(int port, int mode)
 
     if (show_stars) {
         stars = &data2.ko_stars[port];
-        sis_buf = &data2.ko_stars[port].joint2;
+        {
+            u8* buf = &data2.ko_stars[port].joint2;
+            sis_buf = buf;
+        }
         star_count = css->ko_star_counts[port];
         star_x = data2.ko_stars[port].x4;
-        text = data2.ko_stars[port].text;
+        text = stars->text;
 
-        joint = stars->joint;
-        lb_80011E24(mnCharSel_804D6CC0, &sp10, joint, -1);
+        lb_80011E24(mnCharSel_804D6CC0, &sp10, data2.ko_stars[port].joint, -1);
 
         if (mode == 0 || star_count == 0) {
             text->hidden = 1;
