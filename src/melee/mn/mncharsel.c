@@ -762,6 +762,37 @@ static inline bool isDuplicateCostumeWith(int door, CSSData* css,
     return false;
 }
 
+/// Variant of isDuplicateCostume that reads the base door's icon and
+/// costume once before the scan.
+static inline bool isDuplicateCostumeCached(int door)
+{
+    CSSDoor* base_door = &mnCharSel_803F0DFC.doors[door];
+    u8 sel;
+    u8 cost;
+    int num_doors;
+    int j;
+
+    if (mnCharSel_804D6CB0->match_type == TRAINING_MODE) {
+        num_doors = 2;
+    } else {
+        num_doors = mnCharSel_804D6CF5;
+    }
+
+    sel = base_door->sel_icon;
+    cost = base_door->costume;
+
+    for (j = 0; j < num_doors; j++) {
+        if (door != j && mnCharSel_803F0DFC.doors[j].p_kind != 3 &&
+            mnCharSel_803F0DFC.doors[j].sel_icon < 0x19 &&
+            mnCharSel_803F0DFC.doors[j].sel_icon == sel &&
+            cost == mnCharSel_803F0DFC.doors[j].costume)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 static inline bool isDuplicateCostume(int door)
 {
     int num_doors;
@@ -2709,7 +2740,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                 int k;
                                 for (k = 0; k < (s32) mnCharSel_804D6CF5; k++)
                                 {
-                                    if (isDuplicateCostume(k)) {
+                                    if (isDuplicateCostumeCached(k)) {
                                         mnCharSel_803F0DFC.doors[k].costume =
                                             0;
                                         for (;;) {
