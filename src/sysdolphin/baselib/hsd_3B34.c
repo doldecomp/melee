@@ -4,7 +4,7 @@
 
 #include <placeholder.h>
 
-#include <Gecko_setjmp.h>
+#include <setjmp.h>
 #include <string.h>
 #include <baselib/hsd_3A94.h>
 

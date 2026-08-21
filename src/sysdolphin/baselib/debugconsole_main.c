@@ -1,7 +1,8 @@
 #include "debugconsole_main.h"
 
+#include <string.h>
 #include <dolphin/pad.h>
-#include <dolphin/vi/vifuncs.h>
+#include <dolphin/vi.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>

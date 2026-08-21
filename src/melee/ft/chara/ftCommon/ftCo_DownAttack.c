@@ -32,7 +32,7 @@ static inline bool inlineA0(Fighter* fp)
     return false;
 }
 
-int ftCo_800984D4(Fighter_GObj* gobj)
+bool ftCo_800984D4(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (inlineA0(fp) || ftCo_800DF644(fp)) {
