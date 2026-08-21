@@ -47,6 +47,9 @@ struct Fighter_804D6540_x0_t;
 /* 07500C */ Fighter_Part ftParts_GetBoneIndex(Fighter*, Fighter_Part);
 /* 075028 */ int ftPartsRemap(size_t to_table_idx, size_t from_table_idx,
                               size_t joint_idx);
+/// Upper bound on FighterPartsTable::parts_num; sizes fp->parts.
+#define MAX_FT_PARTS 140
+
 /* 07506C */ u32 ftParts_8007506C(FighterKind ftkind, int part);
 /* 0750C8 */ void ftParts_800750C8(Fighter*, enum_t, bool);
 /* 075240 */ HSD_TObj*
