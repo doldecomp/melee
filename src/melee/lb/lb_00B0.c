@@ -394,15 +394,13 @@ void lb_8000C0E8(HSD_JObj* jobj, s32 i, DynamicModelDesc* arg2)
     lb_8000C07C(jobj, i, arg2->anims, arg2->matanims, arg2->shapeanims);
 }
 
-#ifdef MUST_MATCH
-void memzero(void* mem, int size)
+void memzero(void* mem, ssize_t size)
 {
     u8* bytes = mem;
     while (size--) {
         *bytes++ = 0;
     }
 }
-#endif
 
 void lb_8000C1C0(HSD_JObj* jobj, HSD_JObj* constraint)
 {
