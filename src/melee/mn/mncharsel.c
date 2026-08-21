@@ -783,8 +783,6 @@ static inline bool isDuplicateCostumeCached(int door)
 
     (void) sel;
     (void) cost;
-    (void) sel;
-    (void) cost;
     for (j = 0; j < num_doors; j++) {
         if (door != j && mnCharSel_803F0DFC.doors[j].p_kind != 3 &&
             mnCharSel_803F0DFC.doors[j].sel_icon < 0x19 &&
