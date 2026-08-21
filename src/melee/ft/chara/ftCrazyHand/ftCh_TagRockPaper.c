@@ -13,7 +13,6 @@
 #include "pl/player.h"
 
 #include <dolphin/mtx.h>
-#include <MetroTRK/intrinsics.h>
 
 void fn_8015AAC8(Fighter_GObj* gobj)
 {

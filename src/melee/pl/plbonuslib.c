@@ -17,7 +17,6 @@
 #include <gr/stage.h>
 #include <if/ifmagnify.h>
 #include <it/it_26B1.h>
-#include <MetroTRK/intrinsics.h>
 
 /// @todo Lots of 6s in here
 /// pl_8004049C seems to indicate it might have actually been

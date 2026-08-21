@@ -1019,9 +1019,9 @@ bool un_803045A0(void)
         }
     }
     if (count == ARRAY_SIZE(sp)) {
-        return 1;
+        return true;
     } else {
-        return 0;
+        return false;
     }
 }
 
@@ -1041,9 +1041,9 @@ bool un_80304690(void)
         }
     }
     if (count == ARRAY_SIZE(sp)) {
-        return 1;
+        return true;
     } else {
-        return 0;
+        return false;
     }
 }
 
@@ -1063,8 +1063,8 @@ bool un_80304780(void)
         }
     }
     if (count == ARRAY_SIZE(sp)) {
-        return 1;
+        return true;
     } else {
-        return 0;
+        return false;
     }
 }

@@ -10,32 +10,7 @@
 #define MSL_LO(x) *(1 + (int*) &x)
 
 #define M_PI 3.14159265358979323846
-#define M_TAU 6.283185307179586
 #define M_PI_2 (M_PI / 2)
-#define M_PI_3 (M_PI / 3)
-
-#define M_PI_F 3.14159265358979323846F
-#define M_TAU_F 6.283185307179586F
-#define M_PI_2_F (M_PI_F / 2.0F)
-#define M_PI_3_F (M_PI_F / 3.0F)
-
-#define M_PI_L 3.14159265358979323846L
-#define M_TAU_L 6.283185307179586L
-#define M_PI_2_L (M_PI_L / 2.0L)
-#define M_PI_3_L (M_PI_L / 3.0L)
-
-#define SIGNF(x) ((x) > 0.0f ? 1.0f : -1.0f)
-
-#ifdef __MWERKS__
-#pragma push
-#pragma cplusplus on
-#endif
-
-#define FLT_EPSILON 1.00000001335e-10F
-
-#ifdef __MWERKS__
-#pragma pop
-#endif
 
 enum FloatType {
     FP_NAN = 1,
@@ -81,8 +56,6 @@ static inline s32 __fpclassifyd(double x)
 #define fpclassify(x)                                                         \
     ((sizeof(x) == sizeof(float)) ? __fpclassifyf((float) (x))                \
                                   : __fpclassifyd((double) (x)))
-
-#define ABS(x) ((x) < 0 ? -(x) : (x))
 
 #define fabsf __fabsf
 

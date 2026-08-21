@@ -15,7 +15,6 @@
 #include "pl/player.h"
 
 #include <dolphin/mtx.h>
-#include <MetroTRK/intrinsics.h>
 
 void ftCh_Init_80159F40(HSD_GObj* gobj)
 {

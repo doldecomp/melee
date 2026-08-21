@@ -58,7 +58,6 @@
 #include <dolphin/mtx.h>
 #include <baselib/mtx.h>
 #include <baselib/random.h>
-#include <MetroTRK/intrinsics.h>
 
 int ftCo_803C5520[2][4][3] = {
     {

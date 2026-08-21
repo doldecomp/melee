@@ -530,7 +530,7 @@ static inline void inlineB0(Fighter* fp0, HitCapsule* hitbox, Fighter* fp1,
 static inline HitCapsuleState checkTipLog(UNK_T victim, HitCapsule* hit)
 {
     HitVictim* hit_victims = hit->victims_2;
-    usize_t i;
+    int i;
     for (i = 0; i < ARRAY_SIZE(hit->victims_2); i++) {
         if (hit_victims[i].victim == victim) {
             break;

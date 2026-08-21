@@ -87,13 +87,13 @@ void it_80294EB0(Item_GObj* item_gobj, Vec3* input_pos1, Vec3* input_pos2)
     HSD_JObjSetTranslate(item_jobj_var, &pos_var);
 }
 
-void it_802950D4(Item_GObj* item_gobj, int arg1)
+void it_802950D4(Item_GObj* item_gobj, bool arg1)
 {
     HSD_JObj* item_jobj;
     PAD_STACK(4);
 
     item_jobj = it_80272CC0(item_gobj, 3);
-    if (arg1 != 0) {
+    if (arg1) {
         it_80272A18(item_jobj);
         return;
     }

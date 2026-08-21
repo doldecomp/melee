@@ -6383,7 +6383,14 @@ void mpLib_DrawSnapping(void)
     }
 }
 
-int mpLib_DrawMatchingLines(int value, int flag, const GXColor* color)
+#ifdef MUST_MATCH
+#define UNINITIALIZED(x) x
+#else
+#define UNINITIALIZED(x) void
+#endif
+
+static UNINITIALIZED(int)
+    mpLib_DrawMatchingLines(int value, int flag, const GXColor* color)
 {
     CollLine* line_r31;
     int count_r28;

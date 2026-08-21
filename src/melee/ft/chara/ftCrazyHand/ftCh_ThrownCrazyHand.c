@@ -13,7 +13,6 @@
 #include "ftMasterHand/types.h"
 
 #include <dolphin/mtx.h>
-#include <MetroTRK/intrinsics.h>
 
 void ftCh_GrabUnk1_8015B850(HSD_GObj* gobj, FtMotionId msid)
 {
