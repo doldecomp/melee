@@ -1351,7 +1351,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     dst->x221E_b4 = src->x221E_b4;
     if (src->x197C != NULL) {
         it_8026B9A8(src->x197C, dst_gobj, dst->ft_data->x8->x12);
-        it_802950D4(src->x197C, 0);
+        it_802950D4(src->x197C, false);
         ftCommon_8007F948(dst_gobj, src->x197C, src->x2014);
         ftCommon_8007FA00(gobj);
     } else {
@@ -1587,7 +1587,7 @@ void ftCommon_8007FC7C(HSD_GObj* gobj, float arg8)
     ft_PlaySFX(fp, 0x11F, 0x7F, 0x40);
 }
 
-static inline float fminf(float a, float b)
+static inline float my_fminf(float a, float b)
 {
     float result = a;
     if (a > b) {
@@ -1608,8 +1608,8 @@ void ftCommon_8007FDA0(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     temp_r30 = &fp->co_attrs.x130;
-    phi_f31 = fminf(p_ftCommonData->x710 * fp->x2024 + p_ftCommonData->x708,
-                    p_ftCommonData->x70C);
+    phi_f31 = my_fminf(p_ftCommonData->x710 * fp->x2024 + p_ftCommonData->x708,
+                       p_ftCommonData->x70C);
     temp_f1 = 1.0f / phi_f31;
     sp20 = *temp_r30;
     sp20.x *= temp_f1;

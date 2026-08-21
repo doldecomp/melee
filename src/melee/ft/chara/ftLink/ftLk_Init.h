@@ -18,7 +18,7 @@
 /* 0EB018 */ void ftLk_Init_OnItemInvisible(HSD_GObj* gobj);
 /* 0EB060 */ void ftLk_Init_OnItemVisible(HSD_GObj* gobj);
 /* 0EB0A8 */ void ftLk_Init_OnItemDrop(HSD_GObj* gobj, bool arg1);
-/* 0EB11C */ void ftLk_Init_OnItemPickupExt(HSD_GObj* gobj, int arg1);
+/* 0EB11C */ void ftLk_Init_OnItemPickupExt(HSD_GObj* gobj, bool arg1);
 /* 0EB1FC */ void ftLk_Init_OnItemDropExt(HSD_GObj* gobj, bool arg1);
 /* 0EB250 */ void ftLk_Init_LoadSpecialAttrs(HSD_GObj* gobj);
 /* 0EB2AC */ void ftLk_Init_OnKnockbackEnter(HSD_GObj* gobj);

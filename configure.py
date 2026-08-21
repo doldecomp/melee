@@ -192,6 +192,12 @@ parser.add_argument(
     action="store_false",
     help="do not generate compile_commands.json",
 )
+parser.add_argument(
+    "--no-always-apply",
+    dest="always_apply",
+    action="store_false",
+    help="do not always run dtk dol apply after linking",
+)
 args = parser.parse_args()
 
 if any({args.debug, args.asm, args.testing}) or args.sym == "on":
@@ -580,7 +586,7 @@ config.libs = [
             Object(NonMatching, "melee/lb/lbbgflash.c"),
             Object(Matching, "melee/lb/lbrefract.c"),
             Object(Matching, "melee/lb/lbtrigf.c"),
-            Object(NonMatching, "melee/lb/lbaudio_ax.c"),
+            Object(Matching, "melee/lb/lbaudio_ax.c"),
         ],
     ),
     MeleeLib(
@@ -664,7 +670,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_LandingAir.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Damage.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DamageFall.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_DamageIce.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_DamageIce.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Guard.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftpickupitem.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_ItemThrow.c"),
@@ -1128,7 +1134,7 @@ config.libs = [
             Object(NonMatching, "melee/gm/gmregclear.c"),
             Object(NonMatching, "melee/gm/gm_1832.c"),
             Object(NonMatching, "melee/gm/gmtoulib.c"),
-            Object(NonMatching, "melee/gm/gmtou_0.c"),
+            Object(Matching, "melee/gm/gmtou_0.c"),
             Object(NonMatching, "melee/gm/gmtou_1.c"),
             Object(NonMatching, "melee/gm/gmtou_2.c"),
             Object(NonMatching, "melee/gm/gm_19EF.c"),
@@ -1145,7 +1151,7 @@ config.libs = [
             Object(Matching, "melee/gm/gmvsdata.c"),
             Object(Matching, "melee/gm/gmmovieend.c"),
             Object(NonMatching, "melee/gm/gmregtyfall.c"),
-            Object(NonMatching, "melee/gm/gm_1A7A.c"),
+            Object(Matching, "melee/gm/gm_1A7A.c"),
             Object(Matching, "melee/gm/gmregenddisp.c"),
             Object(Matching, "melee/gm/gm_1A9B.c"),
             Object(Matching, "melee/gm/gmopening.c"),
@@ -1513,7 +1519,7 @@ config.libs = [
             Object(Matching, "melee/if/iftime.c"),
             Object(NonMatching, "melee/if/ifstatus.c"),
             Object(Matching, "melee/if/if_2F6E.c"),
-            Object(NonMatching, "melee/if/if_2F72.c"),
+            Object(Matching, "melee/if/if_2F72.c"),
             Object(NonMatching, "melee/if/ifstock.c"),
             Object(Matching, "melee/if/ifmagnify.c"),
             Object(Matching, "melee/if/ifnametag.c"),
@@ -1524,7 +1530,8 @@ config.libs = [
             Object(Matching, "melee/if/if_2FF2.c"),
             Object(NonMatching, "melee/if/soundtest.c"),
             Object(Matching, "melee/if/textdraw.c"),
-            Object(NonMatching, "melee/if/textlib.c"),
+            Object(Matching, "melee/if/textlib.c"),
+            Object(Matching, "melee/if/textlib_1.c"),
         ],
     ),
     MeleeLib(
@@ -2020,6 +2027,17 @@ def generate_compile_commands(objects: dict[str, Object], build_config: BuildCon
 
 
 if args.mode == "configure":
+    if args.always_apply:
+        config.custom_build_steps = {
+            "post-ok": [
+                {
+                    "outputs": "always_apply",
+                    "rule": "phony",
+                    "implicit": ["apply"],
+                }
+            ]
+        }
+
     # Write build.ninja and objdiff.json
     generate_build(config)
 

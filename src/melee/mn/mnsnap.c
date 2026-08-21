@@ -118,41 +118,37 @@ static inline s32* mnSnap_GetCardResult(void)
 /// Recursively loads snapshot thumbnails from memory card.
 void mnSnap_80253184(void)
 {
-    s32* p50;
     mnSnap_State* snap = &mnSnap_804A0A10;
+    s32* p57;
     s32* p52;
+    s32* p51;
     s32* p4F;
+    s32* p50;
+    s32* p58;
 
     p4F = &snap->cur_page;
-    {
-        s32* load_idx = &snap->load_idx;
-        p52 = load_idx;
-    }
+    p52 = &snap->load_idx;
     p50 = &snap->active_slot;
-    {
-        s32 index = *p52 + (*p4F * 4);
-        snap->card_result = lbSnap_8001E058(*p50, index);
-    }
-    if (*mnSnap_GetCardResult() == 8) {
+    *(p57 = &snap->card_result) = lbSnap_8001E058(*p50, *p52 + (*p4F * 4));
+    if (*p57 == 8) {
         mnSnap_80254298();
         return;
     }
-    if (*mnSnap_GetCardResult() != 11) {
-        s32* flags = &mnSnap_804A0A10.thumb_loaded[0];
-        s32* p51;
-
-        flags[*p52] = 1;
+    if (*p57 != 11) {
+        p58 = &snap->thumb_loaded[0];
+        (void) p58;
+        p58[*p52] = 1;
         *p52 += 1;
         p51 = &snap->pending_loads;
         *p51 -= 1;
         if (*p51 != 0) {
-            *mnSnap_GetCardResult() = lbSnap_8001E058(*p50, *p52 + (*p4F * 4));
-            if (*mnSnap_GetCardResult() == 8) {
+            *p57 = lbSnap_8001E058(*p50, *p52 + (*p4F * 4));
+            if (*p57 == 8) {
                 mnSnap_80254298();
                 return;
             }
-            if (*mnSnap_GetCardResult() != 11) {
-                flags[*p52] = 1;
+            if (*p57 != 11) {
+                p58[*p52] = 1;
                 *p52 += 1;
                 *p51 -= 1;
                 if (*p51 != 0) {
@@ -294,26 +290,33 @@ static inline s32* mnSnap_GetCurPage(mnSnap_State* snap)
     return &snap->cur_page;
 }
 
+static inline void* mnSnap_GetBlankImg(mnSnap_State* snap)
+{
+    return snap->blank_img;
+}
+
 /// Loads a page of snapshot thumbnails and updates navigation arrows.
 void mnSnap_80253640(s32 page)
 {
+    s32 count;
     HSD_JObj* jobj;
     void* img;
     mnSnap_State* snap;
-    s32* p52;
     s32* p4F;
+    s32* p52;
     s32* p50;
     s32* p58;
     s32* p51;
-    s32 count;
     s32* p48;
     s32 i;
     f32 t;
-    PAD_STACK(28);
+    PAD_STACK(20);
 
     snap = &mnSnap_804A0A10;
     p48 = &snap->photo_count[0];
-    p4F = mnSnap_GetCurPage(snap);
+    (void) p48;
+    p4F = &snap->cur_page;
+    (void) p4F;
     p50 = &snap->active_slot;
     (void) p50;
     *p4F = page;
@@ -338,7 +341,8 @@ void mnSnap_80253640(s32 page)
     while (i < count) {
         HSD_DObjClearFlags(snap->thumb_jobjs[i]->u.dobj->next->next, 1);
         jobj = snap->thumb_jobjs[i];
-        img = snap->blank_img;
+        (void) jobj;
+        img = mnSnap_GetBlankImg(snap);
         HSD_ASSERT(193, jobj);
         HSD_ASSERT(194, jobj->u.dobj);
         HSD_ASSERT(195, jobj->u.dobj->next);
@@ -702,16 +706,13 @@ static inline void mnSnap_RefreshSlotSelection(mnSnap_State* snap,
     mnSnap_80253E90(1);
 
     {
-        /* walk strides through card_status (s16 at byte 0x128) */
         s32 i;
-        s16* walk;
         s32 byte_off;
 
-        walk = (s16*) snap;
         i = 0;
         byte_off = 4;
-        for (; i < 2; i++, walk++, byte_off += 8) {
-            if (walk[0x94] != 0) { /* snap->card_status[i] */
+        for (; i < 2; i++, byte_off += 8) {
+            if (snap->card_status[i] != 0) {
                 f32 t;
                 if (*p50 == i) {
                     t = 1.0F;
@@ -748,45 +749,54 @@ void mnSnap_80254298(void)
     HSD_Text** text_slot;
     s32* p50 = &mnSnap_804A0A10.active_slot;
     s32* p51;
-    mnSnap_State* snap = &mnSnap_804A0A10;
     PAD_STACK(24);
 
-    snap->timer = 0xB;
+    (void) p50;
+    mnSnap_804A0A10.timer = 0xB;
     *p50 = 0;
 
-    jobj_slot = &snap->slot_a_jobj;
+    jobj_slot = &mnSnap_804A0A10.slot_a_jobj;
     HSD_JObjReqAnim(*jobj_slot, 0.0F);
     HSD_JObjAnim(*jobj_slot);
 
-    jobj_slot = &snap->slot_b_jobj;
+    jobj_slot = &mnSnap_804A0A10.slot_b_jobj;
     HSD_JObjReqAnim(*jobj_slot, 0.0F);
     HSD_JObjAnim(*jobj_slot);
 
-    p51 = &snap->pending_loads;
+    p51 = &mnSnap_804A0A10.pending_loads;
+    (void) p51;
     *p51 = 0;
-    snap->state = 2;
+    mnSnap_804A0A10.state = 2;
 
-    HSD_JObjSetFlagsAll(snap->fullview_jobj, JOBJ_HIDDEN);
-    snap->dlg_active = 0;
-    text_slot = &snap->dlg_text;
-    snap->dlg_timer = 0;
+    HSD_JObjSetFlagsAll(mnSnap_804A0A10.fullview_jobj, JOBJ_HIDDEN);
+    mnSnap_804A0A10.dlg_active = 0;
+    text_slot = &mnSnap_804A0A10.dlg_text;
+    mnSnap_804A0A10.dlg_timer = 0;
 
     if (*text_slot != NULL) {
         HSD_SisLib_803A5CC4(*text_slot);
         *text_slot = NULL;
     }
 
-    jobj_slot = &snap->submenu_jobj;
+    jobj_slot = &mnSnap_804A0A10.submenu_jobj;
     HSD_JObjReqAnimAll(*jobj_slot, 0.0F);
     HSD_JObjAnimAll(*jobj_slot);
 
-    mnSnap_ShowSubmenu(snap);
-    mnSnap_RefreshSlotSelection(snap, p50, p51);
+    mnSnap_ShowSubmenu(&mnSnap_804A0A10);
+    mnSnap_RefreshSlotSelection(&mnSnap_804A0A10, p50, p51);
 }
+
+// A function using returns with no value,
+// but needing a non-void return type to match
+#ifdef MUST_MATCH
+#define UNINITIALIZED_RETURN(x) x
+#else
+#define UNINITIALIZED_RETURN(x) void
+#endif
 
 /// Handles Yes/No dialog button inputs. Sets snap->dlg_result to the selection
 /// result.
-s32 mnSnap_8025441C(u64 buttons)
+static UNINITIALIZED_RETURN(s32) mnSnap_8025441C(u64 buttons)
 {
     mnSnap_State* snap = &mnSnap_804A0A10;
     s32* result = &mnSnap_804A0A10.dlg_result;

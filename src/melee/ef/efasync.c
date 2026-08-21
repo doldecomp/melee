@@ -16,6 +16,7 @@
 #include "lb/lbdvd.h"
 
 #include <math.h>
+#include <stdarg.h>
 
 HSD_ObjAllocData efAsync_AllocData;
 
@@ -1458,7 +1459,7 @@ void efAsync_Spawn(HSD_GObj* gobj, void* queue_head, u32 spawn_kind,
         HSD_ASSERTREPORT(0xF6U, 0, "[EfASync] unknown type %d\n", spawn_kind);
         break;
     }
-    va_end(sp80);
+    va_end(vlist);
     if ((HSD_GObj_804D7838 != NULL) && (HSD_GObj_804D7838->s_link < 9U)) {
         queued->next = ((EF_QueuedEffect*) queue_head)->next;
         ((EF_QueuedEffect*) queue_head)->next = queued;

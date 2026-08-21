@@ -13,6 +13,7 @@
 #include "lb/lb_00F9.h"
 
 #include <math.h>
+#include <string.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <melee/cm/camera.h>

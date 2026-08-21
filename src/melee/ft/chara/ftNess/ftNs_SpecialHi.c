@@ -27,7 +27,6 @@
 
 #include <math.h>
 #include <dolphin/mtx.h>
-#include <MetroTRK/intrinsics.h>
 
 /// SpecialHi/SpecialAirHi (PK Thunder)
 #define FTNESS_SPECIALHI_COLL_FLAG                                            \

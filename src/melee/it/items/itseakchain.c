@@ -750,7 +750,7 @@ void it_802BC080(ItemLink* link, Vec3* target, Item* ip)
     ip->xDD4_itemVar.seakchain.x10 = env_flags;
 }
 
-int it_802BC94C(ItemLink* arg0, Vec3* arg1, itSeakChain_Attrs* sa, f32 farg0)
+bool it_802BC94C(ItemLink* arg0, Vec3* arg1, itSeakChain_Attrs* sa, f32 farg0)
 {
     u8 _padA[8];
     ItemLink *var_r30, *var_r29;

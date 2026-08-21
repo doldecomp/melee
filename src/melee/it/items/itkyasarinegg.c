@@ -90,12 +90,12 @@ void itKyasarinegg_UnkMotion3_Phys(Item_GObj* gobj)
     Item_ApplyFallingPhysics(gobj);
 }
 
-int itKyasarinegg_UnkMotion3_Coll(Item_GObj* gobj)
+bool itKyasarinegg_UnkMotion3_Coll(Item_GObj* gobj)
 {
     if (it_8026DA08(gobj) != 0) {
         return it_2725_Logic28_DmgDealt(gobj);
     }
-    return 0;
+    return false;
 }
 
 void it_802EFCC0(Item_GObj* gobj)
@@ -112,9 +112,9 @@ void itKyasarinegg_UnkMotion1_Phys(Item_GObj* gobj)
     Item_ApplyFallingPhysics(gobj);
 }
 
-int itKyasarinegg_UnkMotion1_Coll(Item_GObj* gobj)
+bool itKyasarinegg_UnkMotion1_Coll(Item_GObj* gobj)
 {
-    it_8026DFB0(gobj);
+    return it_8026DFB0(gobj);
 }
 
 void it_802EFD84(Item_GObj* gobj)

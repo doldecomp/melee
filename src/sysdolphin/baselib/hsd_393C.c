@@ -1,5 +1,6 @@
 #include "hsd_393C.h"
 
+#include <string.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/video.h>
 

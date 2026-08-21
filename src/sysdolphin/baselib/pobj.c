@@ -16,6 +16,7 @@
 #include "forward.h"
 
 #include <math.h> // IWYU pragma: keep
+#include <string.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
@@ -739,7 +740,7 @@ static void interpretShapeAnimDisplayList(HSD_PObj* pobj, float (*vertex)[3],
                     case GX_VA_TEX5MTXIDX:
                     case GX_VA_TEX6MTXIDX:
                     case GX_VA_TEX7MTXIDX:
-                        GXMatrixIndex1u8(idx);
+                        GXTexCoord1u8(idx);
                         break;
 
                     case GX_VA_POS:

@@ -151,4 +151,27 @@ typedef bool (*Predicate)(void);
 #define WEAK
 #endif
 
+#define M_TAU 6.283185307179586
+#define M_PI_3 (M_PI / 3)
+
+#define M_PI_F 3.14159265358979323846F
+#define M_TAU_F 6.283185307179586F
+#define M_PI_2_F (M_PI_F / 2.0F)
+#define M_PI_3_F (M_PI_F / 3.0F)
+
+#define M_PI_L 3.14159265358979323846L
+#define M_TAU_L 6.283185307179586L
+#define M_PI_2_L (M_PI_L / 2.0L)
+#define M_PI_3_L (M_PI_L / 3.0L)
+
+#define SIGNF(x) ((x) > 0.0f ? 1.0f : -1.0f)
+
+#define FLT_EPSILON 1.00000001335e-10F
+
+#define ABS(x) ((x) < 0 ? -(x) : (x))
+
+#ifndef ARRAY_SIZE
+#define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
+#endif
+
 #endif

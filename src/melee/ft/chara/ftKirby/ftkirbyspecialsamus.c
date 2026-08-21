@@ -19,7 +19,7 @@
 
 #include <math.h>
 
-long ftKb_SpecialNSs_800FCC14(Fighter_GObj* gobj, long* out1, long* out2)
+int ftKb_SpecialNSs_800FCC14(Fighter_GObj* gobj, int* out1, int* out2)
 {
     Fighter* fp;
     ftKb_DatAttrs* da;

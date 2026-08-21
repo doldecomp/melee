@@ -8,8 +8,8 @@
 /* 040ED4 */ void pl_80040ED4(int slot, int, int, int, int, float);
 /* 040FBC */ void pl_80040FBC(int slot, int, int, int, int);
 /* 0410F4 */ void pl_800410F4(int slot, int, int, int, int);
-/* 0411C4 */ void pl_800411C4(int slot, bool);
-/* 041280 */ void pl_80041280(int slot, bool);
+/* 0411C4 */ void pl_800411C4(int slot, int);
+/* 041280 */ void pl_80041280(int slot, int);
 /* 0412D0 */ int pl_800412D0(int slot);
 /* 041300 */ int pl_80041300(int slot);
 /* 04134C */ int pl_8004134C(int slot);

@@ -33,7 +33,6 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00CE.h"
 #include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
 #include "lb/lblanguage.h"
 #include "lb/lbspdisplay.h"
 #include "lb/lbvector.h"
@@ -41,6 +40,9 @@
 #include "mn/inlines.h"
 #include "mn/mnmain.h"
 #include "sc/types.h"
+
+#include "ty/forward.h"
+
 #include "ty/toy.h"
 #include "ty/types.h"
 
@@ -399,11 +401,11 @@ void _tyDisplay_80318B1C(s32 arg0)
     }
     start = rand_result;
 
-    if (arg0 > 0x125) {
+    if (arg0 > TY_TROPHY_COUNT) {
         placed = 0;
         i = 0;
         while (placed < arg0) {
-            if (i >= 0x125) {
+            if (i >= TY_TROPHY_COUNT) {
                 rand_id = HSD_Randi(0x124);
                 check = tyDisplay_8031B9DC(rand_id);
                 while (check->x00 == -1) {
@@ -445,7 +447,7 @@ void _tyDisplay_80318B1C(s32 arg0)
                 }
             }
             i++;
-        } while (i < 0x125);
+        } while (i < TY_TROPHY_COUNT);
     }
 }
 
@@ -1472,7 +1474,7 @@ void _tyDisplay_8031A94C(HSD_GObj* arg0)
             cfg->x78 = NULL;
             while (cfg->x78 == NULL) {
                 cfg->x7C = cfg->x7C + 1;
-                if (cfg->x7C >= 0x125) {
+                if (cfg->x7C >= TY_TROPHY_COUNT) {
                     cfg->x7C = 0;
                 }
                 cfg->x78 = _tyDisplay_8031BC54(cfg->x7C);
@@ -2277,7 +2279,7 @@ s32 tyDisplay_8031C354(s32 id, s32 buf[], s32 max, s32 kind)
     }
 
     count = 0;
-    for (i = 0; i < 0x125; i++) {
+    for (i = 0; i < TY_TROPHY_COUNT; i++) {
         if (i == id) {
             continue;
         }

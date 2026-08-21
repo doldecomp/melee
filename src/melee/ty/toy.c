@@ -34,6 +34,7 @@
 #include "ty/types.h"
 
 #include <math.h>
+#include <string.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
@@ -259,7 +260,7 @@ int _Toy_80304D30(void)
     }
     memzero(sp14, sizeof(sp14));
     count = 0;
-    for (i = 0; i < 0x125; i++) {
+    for (i = 0; i < TY_TROPHY_COUNT; i++) {
         if (Toy_80304CC8(i)) {
             if (Toy_80304D30_48C0(i)) {
                 x = Toy_803060BC(i, 6);
@@ -313,8 +314,8 @@ int _Toy_80304D30(void)
 
 s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
 {
-    s32 obtained_arr[293];
-    s32 new_arr[293];
+    s32 obtained_arr[TY_TROPHY_COUNT];
+    s32 new_arr[TY_TROPHY_COUNT];
     s32 total;
     s32 byte_off;
     u16* default_flags;
@@ -432,7 +433,7 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
         }
         trophy++;
         byte_off += 2;
-    } while (trophy < 0x125);
+    } while (trophy < TY_TROPHY_COUNT);
 
     if (total != 0) {
         s32 use_new;
@@ -480,7 +481,7 @@ void _Toy_803053C4(s32 targetValue, s32 count, s32 flag)
             trophyId = 0;
             i = 0;
 
-            while (trophyId < 0x125) {
+            while (trophyId < TY_TROPHY_COUNT) {
                 list = _Toy_sbss_804D6EB4;
 
                 if (lbLang_IsSettingUS()) {
@@ -537,7 +538,7 @@ void _Toy_803053C4(s32 targetValue, s32 count, s32 flag)
         i = 0;
         default_flags = &Toy_804A284C[5];
 
-        while (i < 0x125) {
+        while (i < TY_TROPHY_COUNT) {
             list = _Toy_sbss_804D6EB4;
 
             if (lbLang_IsSettingUS()) {
@@ -736,7 +737,9 @@ void Toy_80305918(s8 arg0, s32 arg1, s32 arg2)
 
     temp_r26 = (u8*) base + 0x19E;
 
-    for (var_r25 = 0, var_r27 = 0; var_r25 < 0x125; var_r25++, var_r27 += 2) {
+    for (var_r25 = 0, var_r27 = 0; var_r25 < TY_TROPHY_COUNT;
+         var_r25++, var_r27 += 2)
+    {
         s32 skip;
         s16 temp_r0;
 
@@ -1040,7 +1043,7 @@ s16 Toy_803062BC(s32 trophyId)
     s16* table = Toy_sbss_804D6EDC;
     s32 i;
 
-    for (i = 0; i < 0x125; i++) {
+    for (i = 0; i < TY_TROPHY_COUNT; i++) {
         if (trophyId == *table) {
             break;
         }
@@ -1233,7 +1236,7 @@ void _Toy_8030663C(void)
     s32 var_r31;
     s32 var_r30;
     u16* var_r29;
-    s16* var_r28;
+    TySortRow* var_r28;
     int var_r27;
 
     var_r29 = (u16*) ((u8*) Toy_804A284C + 0xA);
@@ -1251,17 +1254,17 @@ void _Toy_8030663C(void)
             src = gmMainLib_GetTrophyFlags();
         }
         if ((u8) * (u16*) ((u8*) src + var_r30) != 0) {
-            *var_r28 = _Toy_803064B8(var_r27, 0);
+            var_r28->key[0] = _Toy_803064B8(var_r27, 0);
             var_r31 += 1;
-            var_r28 += 3;
+            var_r28++;
         }
         var_r27 += 1;
         var_r30 += 2;
-    } while (var_r27 < 0x125);
+    } while (var_r27 < TY_TROPHY_COUNT);
     {
         s32 var2_r27;
-        s16* var2_r28;
-        s16* var2_r29;
+        TySortRow* var2_r28;
+        TySortRow* var2_r29;
         int var2_r30;
 
         var2_r29 = _Toy_sbss_804D6E64;
@@ -1271,11 +1274,11 @@ void _Toy_8030663C(void)
             var2_r27 = 0;
             goto loop_13_check;
         loop_13_body:
-            if (*var2_r28 == _Toy_803064B8(var2_r30, 1)) {
-                var2_r29[1] = *var2_r28;
-                var2_r29 += 3;
+            if (var2_r28->key[0] == _Toy_803064B8(var2_r30, 1)) {
+                var2_r29->key[1] = var2_r28->key[0];
+                var2_r29++;
             } else {
-                var2_r28 += 3;
+                var2_r28++;
                 var2_r27 += 1;
             loop_13_check:
                 if (var2_r27 < var_r31) {
@@ -1283,14 +1286,14 @@ void _Toy_8030663C(void)
                 }
             }
             var2_r30 += 1;
-        } while (var2_r30 < 0x125);
+        } while (var2_r30 < TY_TROPHY_COUNT);
     }
     {
-        s16* var3_r27;
+        TySortRow* var3_r27;
         s32 var3_r28;
-        s16* var3_r29;
+        TySortRow* var3_r29;
         int var3_r30;
-        s16* new_var;
+        TySortRow* new_var;
 
         var3_r29 = _Toy_sbss_804D6E64;
         var3_r30 = 0;
@@ -1300,20 +1303,20 @@ void _Toy_8030663C(void)
             goto loop_23_check;
         loop_23_body:
             if (lbLang_IsSavedLanguageJP() != 0) {
-                if (*var3_r27 == _Toy_803064B8(var3_r30, 2)) {
-                    var3_r29[2] = *var3_r27;
-                    var3_r29 += 3;
+                if (var3_r27->key[0] == _Toy_803064B8(var3_r30, 2)) {
+                    var3_r29->key[2] = var3_r27->key[0];
+                    var3_r29++;
                 } else {
                     goto block_22;
                 }
             } else {
                 new_var = var3_r27;
-                if (*new_var == _Toy_803064B8(var3_r30, 3)) {
-                    var3_r29[2] = *new_var;
-                    var3_r29 += 3;
+                if (new_var->key[0] == _Toy_803064B8(var3_r30, 3)) {
+                    var3_r29->key[2] = new_var->key[0];
+                    var3_r29++;
                 } else {
                 block_22:
-                    var3_r27 += 3;
+                    var3_r27++;
                     var3_r28 += 1;
                 loop_23_check:
                     if (var3_r28 < var_r31) {
@@ -1322,7 +1325,7 @@ void _Toy_8030663C(void)
                 }
             }
             var3_r30 += 1;
-        } while (var3_r30 < 0x125);
+        } while (var3_r30 < TY_TROPHY_COUNT);
     }
 }
 
@@ -1333,29 +1336,25 @@ void Toy_803067BC(s32 arg0, s32 arg1)
     s32 i;
     s16* dest;
     s32 count;
-    s32 base;
+    uintptr_t keys;
 
-    base = (s32) _Toy_sbss_804D6E64;
+    // Integer-domain on purpose: a pointer sum emits the base register first.
+    keys = (uintptr_t) _Toy_sbss_804D6E64->key;
 
     if (arg1 == 0) {
-        src = (s16*) ((arg0 << 1) + base);
-        i = 0;
-        offset = 0;
-        while (i < *gmMainLib_GetTrophyCount()) {
-            M2C_FIELD(Toy_sbss_804D6EDC, s16*, offset) = *src;
-            src += 3;
-            i++;
-            offset += 2;
+        src = (s16*) ((arg0 << 1) + keys);
+        for (i = 0; i < *gmMainLib_GetTrophyCount(); i++) {
+            Toy_sbss_804D6EDC[i] = src[i * TY_SORT_KEY_COUNT];
         }
         return;
     }
 
     count = *gmMainLib_GetTrophyCount();
-    src = (s16*) ((arg0 << 1) + base);
-    dest = (s16*) ((s8*) Toy_sbss_804D6EDC + (offset = count << 1));
+    src = (s16*) ((arg0 << 1) + keys);
+    dest = (s16*) ((u8*) Toy_sbss_804D6EDC + (offset = count << 1));
     while (count-- != 0) {
         *dest-- = *src;
-        src += 3;
+        src += TY_SORT_KEY_COUNT;
     }
 }
 
@@ -2206,7 +2205,7 @@ char* Toy_8030813C(int trophy_id)
 
     if (found == 0) {
         ptr = _Toy_sbss_804D6EA8;
-        for (i = 0x125; i != 0; i--) {
+        for (i = TY_TROPHY_COUNT; i != 0; i--) {
             if (*(s32*) ptr == id) {
                 found = 1;
                 break;
@@ -2249,9 +2248,9 @@ s32 Toy_803082F8(s16 idx)
     return Toy_803063D4((s16) Toy_80308354(idx), 2, 0x128);
 }
 
-void Toy_80308328(s16 idx)
+s32 Toy_80308328(s16 idx)
 {
-    Toy_803063D4(idx, 2, 0x128);
+    return Toy_803063D4(idx, 2, 0x128);
 }
 
 s32 Toy_80308354(s16 idx)
@@ -2263,13 +2262,13 @@ s32 Toy_80308354(s16 idx)
     target = Toy_sbss_804D6EDC[idx];
     entry = _Toy_sbss_804D6EC4;
 
-    for (i = 0; i < 0x125; entry++, i++) {
+    for (i = 0; i < TY_TROPHY_COUNT; entry++, i++) {
         if (target == entry->id) {
             break;
         }
     }
 
-    if (i == 293) {
+    if (i == TY_TROPHY_COUNT) {
         HSD_ASSERTREPORT(3114, 0,
                          "*** Error : Not Found Model Name!(To Idx %d)\n",
                          target, entry);
@@ -4970,7 +4969,7 @@ void _Toy_8030FE48(void* arg0, s32 arg1)
     void* sym2;
     s32 var_r7;
     s32 start;
-    ptr = &_Toy_sbss_804D6E64[(s8) toy[0x195]];
+    ptr = &_Toy_sbss_804D6E64->key[(s8) toy[0x195]];
     *(s16*) (data + 0x154) = *(s16*) sel;
 
     goto loop_check;
@@ -5829,7 +5828,7 @@ void Toy_80311680(void)
         }
         var_r28++;
         var_r29++;
-    } while (var_r28 < 0x125);
+    } while (var_r28 < TY_TROPHY_COUNT);
     *temp_r31 = 0xF4;
     _Toy_sbss_804D6EA1 = 1;
 }
@@ -5888,7 +5887,7 @@ void Toy_80311960(void)
     save_data = gmMainLib_GetTrophyFlags();
     save_data2 = gmMainLib_GetTrophyCategoryFlags();
 
-    for (i = 0; i < 0x125; i++) {
+    for (i = 0; i < TY_TROPHY_COUNT; i++) {
         save_data[i] = 0;
         ((u16*) (base + 0x194))[i + 5] = 0;
     }
@@ -5950,18 +5949,17 @@ void Toy_OnEnter_80311AB0(void* arg0)
     Toy_sbss_804D6ED8 = HSD_MemAlloc(sizeof(*Toy_sbss_804D6ED8));
     Toy_sbss_804D6ED4 = HSD_MemAlloc(sizeof(TyLightArray_));
     Toy_sbss_804D6EDC =
-        HSD_MemAlloc(sizeof(*Toy_sbss_804D6EDC) * unk_array_len);
+        HSD_MemAlloc(sizeof(*Toy_sbss_804D6EDC) * TY_TROPHY_COUNT);
     _Toy_sbss_804D6E64 =
-        HSD_MemAlloc(sizeof(*_Toy_sbss_804D6E64) * unk_array_len * 3);
+        HSD_MemAlloc(sizeof(*_Toy_sbss_804D6E64) * TY_TROPHY_COUNT);
     Toy_sbss_804D6EE0 = HSD_MemAlloc(sizeof(*Toy_sbss_804D6EE0));
     _Toy_sbss_804D6E6C = HSD_MemAlloc(sizeof(*_Toy_sbss_804D6E6C));
 
     memzero(_Toy_sbss_804D6E68, sizeof(*_Toy_sbss_804D6E68));
     memzero(Toy_sbss_804D6ED8, sizeof(*Toy_sbss_804D6ED8));
     memzero(Toy_sbss_804D6ED4, sizeof(TyLightArray_));
-    memzero(Toy_sbss_804D6EDC, sizeof(*Toy_sbss_804D6EDC) * unk_array_len);
-    memzero(_Toy_sbss_804D6E64,
-            sizeof(*_Toy_sbss_804D6E64) * unk_array_len * 3);
+    memzero(Toy_sbss_804D6EDC, sizeof(*Toy_sbss_804D6EDC) * TY_TROPHY_COUNT);
+    memzero(_Toy_sbss_804D6E64, sizeof(*_Toy_sbss_804D6E64) * TY_TROPHY_COUNT);
     memzero(Toy_sbss_804D6EE0, sizeof(*Toy_sbss_804D6EE0));
     memzero(_Toy_sbss_804D6E6C, 8);
 
@@ -6156,7 +6154,7 @@ void Toy_8031234C(s32 arg0)
         s32 category;
         dstPtr = saveData;
         srcPtr = (u16*) (toy + 0x194);
-        for (i = 0x125; i != 0; i--) {
+        for (i = TY_TROPHY_COUNT; i != 0; i--) {
             u16 flags = srcPtr[5];
             if (flags & 0x8000) {
                 *dstPtr |= 0x8000;
@@ -6173,7 +6171,7 @@ void Toy_8031234C(s32 arg0)
                 (*stateData & (1 << category)))
             {
                 ptr = saveData;
-                for (j = 0; j < 0x125; j++) {
+                for (j = 0; j < TY_TROPHY_COUNT; j++) {
                     f32 result = Toy_803060BC(j, 6);
                     if ((f32) category == result) {
                         *ptr |= 0x4000;
@@ -6235,7 +6233,7 @@ check:
 }
     i++;
     table1++;
-    if (i < 0x125) {
+    if (i < TY_TROPHY_COUNT) {
         goto loop;
     }
 
@@ -6272,7 +6270,7 @@ void Toy_8031263C(void)
         }
         i++;
         table1++;
-    } while (i < 0x125);
+    } while (i < TY_TROPHY_COUNT);
 
     *table2 |= 4;
     Toy_804A284C[3] |= 4;

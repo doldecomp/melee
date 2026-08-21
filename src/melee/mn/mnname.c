@@ -16,7 +16,6 @@
 #include "lb/lblanguage.h"
 #include "lb/lbspdisplay.h"
 
-#include <dolphin/os.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -256,7 +255,7 @@ void CreateNameAtIndex(s32 slot)
     InitializePersistentNameData(slot);
 }
 
-s32 mnName_SortNames(HSD_GObj* arg0)
+void mnName_SortNames(HSD_GObj* arg0)
 {
     s32 result;
     u8 idx2;
@@ -264,14 +263,13 @@ s32 mnName_SortNames(HSD_GObj* arg0)
     s32 i;
     u8 idx1;
 
-    arg0 = arg0->user_data;
     PAD_STACK(8);
 
-    if (arg0->p_priority == 0) {
+    if (((HSD_GObj*) arg0->user_data)->p_priority == 0) {
         for (i = 0; 0x78 > i; i++) {
             mnName_NameDisplayOrder[i] = (u8) i;
         }
-        return i;
+        return;
     }
 
     {
@@ -360,7 +358,6 @@ s32 mnName_SortNames(HSD_GObj* arg0)
             }
         }
     }
-    return result;
 }
 
 extern HSD_GObj* mnName_804D6BF8;
@@ -909,9 +906,9 @@ mnName_FindAnimLoop(AnimLoopSettings* const* tableBase, f32 frame)
     HSD_ASSERTREPORT(0x3DC, NULL, "But AnimFrame!!!\n");
 }
 
-static inline f32 mnName_80238C34_inline(HSD_JObj* jobj)
+static inline f32 mnName_80238C34_inline(AnimLoopSettings* anim)
 {
-    return mn_8022F298(jobj);
+    return anim->end_frame;
 }
 
 static inline void mnName_UpdateSelection(u8 do_update, MnName_GObj* data)
@@ -929,40 +926,36 @@ static inline void mnName_UpdateSelection(u8 do_update, MnName_GObj* data)
 void mnName_80238C34(HSD_GObj* arg0, u8 arg1, u8 arg2)
 {
     AnimLoopSettings* const* tableBase = mnName_803B8510;
+    AnimLoopSettings* base = (0, mnName_803ED538);
     MnName_GObj* data = (MnName_GObj*) arg0->user_data;
-    AnimLoopSettings* found;
+    HSD_JObj* jobj2;
+    HSD_JObj* jobj3;
 
     mnName_UpdateSelection(arg1, data);
 
     {
         HSD_JObj* jobj = mnName_802388D4_noinline((HSD_GObj*) data, 0x18U);
-        found = mnName_FindAnimLoop(tableBase, mn_8022F298(jobj));
-        mn_8022ED6C(jobj, found);
+        mn_8022ED6C(jobj,
+                    mnName_FindAnimLoop(mnName_803B8510, mn_8022F298(jobj)));
     }
 
-    {
-        HSD_JObj* jobj = mnName_802388D4_noinline((HSD_GObj*) data, 0x19U);
-        found = mnName_FindAnimLoop(tableBase, mn_8022F298(jobj));
-        mn_8022ED6C(jobj, found);
-    }
+    jobj2 = mnName_802388D4_noinline((HSD_GObj*) data, 0x19U);
+    mn_8022ED6C(jobj2,
+                mnName_FindAnimLoop(mnName_803B8510, mn_8022F298(jobj2)));
 
-    {
-        HSD_JObj* jobj = mnName_802388D4_noinline((HSD_GObj*) data, 0x1AU);
-        found = mnName_FindAnimLoop(tableBase, mn_8022F298(jobj));
-        mn_8022ED6C(jobj, found);
-    }
+    jobj3 = mnName_802388D4_noinline((HSD_GObj*) data, 0x1AU);
+    mn_8022ED6C(jobj3,
+                mnName_FindAnimLoop(mnName_803B8510, mn_8022F298(jobj3)));
 
     {
         HSD_JObj* jobj = (HSD_JObj*) data->gobj.prev_gx;
-        AnimLoopSettings* base = mnName_803ED538;
         f32 result;
 
-        found = mnName_FindAnimLoop(tableBase, mnName_80238C34_inline(jobj));
-        result = mn_8022ED6C(jobj, found);
+        result = mn_8022ED6C(
+            jobj, mnName_FindAnimLoop(mnName_803B8510, mn_8022F298(jobj)));
 
-        found = mnName_FindAnimLoop(tableBase, result);
-        if (found == base + 5) {
-            if (result >= base[5].end_frame) {
+        if (mnName_FindAnimLoop(tableBase, result) == base + 5) {
+            if (result >= mnName_80238C34_inline(&base[5])) {
                 HSD_GObjPLink_80390228(arg0);
             }
         }

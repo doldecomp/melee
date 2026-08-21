@@ -273,7 +273,7 @@ static void collUpdateVars(HSD_GObj* gobj)
     fp->accessory4_cb = ftMr_SpecialS_CreateCape;
 }
 
-static usize_t const transition_flags =
+static size_t const transition_flags =
     Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit | Ft_MF_SkipMatAnim |
     Ft_MF_UpdateCmd | Ft_MF_SkipColAnim | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
     Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;

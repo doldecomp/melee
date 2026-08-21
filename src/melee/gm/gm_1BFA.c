@@ -168,7 +168,7 @@ void gm_801BFCFC(GameScene* arg0)
     var_r30 = 0;
     memzero(gm_8049E558, 0x42);
     p3 = &gm_8049E558[0x44];
-    memzero(p3, 0x125);
+    memzero(p3, TY_TROPHY_COUNT);
     Toy_803124BC();
     var_r27_2_s11 = var_r27_2;
     p3 = gm_8049E558;
@@ -188,7 +188,7 @@ void gm_801BFCFC(GameScene* arg0)
     var_r26 = p3;
     var_r26 += 0x44;
     var_r28 = var_r26;
-    for (var_r25_2 = 0; var_r25_2 < 0x125; var_r25_2++) {
+    for (var_r25_2 = 0; var_r25_2 < TY_TROPHY_COUNT; var_r25_2++) {
         if (gmMainLib_8015DA1C(var_r25_2) != 0) {
             if (gmMainLib_8015DA90(var_r25_2) == 0) {
                 u32* KP = gmMainLib_8015D970(var_r25_2);
@@ -214,7 +214,7 @@ void gm_801BFCFC(GameScene* arg0)
         }
     }
 
-    for (var_r27_2_s11 = 0; var_r27_2_s11 < 0x125; var_r27_2_s11++) {
+    for (var_r27_2_s11 = 0; var_r27_2_s11 < TY_TROPHY_COUNT; var_r27_2_s11++) {
         if ((*var_r26 < Toy_803048C0(var_r27_2_s11) ||
              Toy_803048C0(var_r27_2_s11) == 0) &&
             gmMainLib_8015DA1C(var_r27_2_s11) != 0)

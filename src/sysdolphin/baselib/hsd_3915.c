@@ -2,27 +2,15 @@
 
 #include "hsd_3915.static.h"
 
-#include <math.h>
+#include <math.h> // IWYU pragma: keep
+#include <string.h>
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXGeometry.h>
-#include <dolphin/mcc.h>
-#include <dolphin/os.h>
-#include <dolphin/pad.h>
-#include <dolphin/vi.h>
 #include <baselib/cobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
 #include <baselib/list.h>
 #include <baselib/memory.h>
-#include <baselib/mtx.h>
 #include <baselib/perf.h>
-#include <baselib/psappsrt.h>
-#include <baselib/psstructs.h>
-#include <baselib/random.h>
 #include <baselib/state.h>
-#include <baselib/video.h>
-#include <MetroTRK/ppc_reg.h>
 
 /* 4CF810 */ extern struct ParticleScreenState hsd_804CF810;
 
@@ -501,11 +489,9 @@ typedef struct {
 
 extern GlyphEntry lbl_80408898[4];
 
-// @TODO: Currently 72.88% match - needs register allocation fixes
 void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
                   s32 stride, void* tbl)
 {
-    volatile s32 v_stride;
     s32 bit_x;
     s32 cur_dst;
     u32 max_x;
@@ -521,7 +507,6 @@ void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
     u8* bmp;
     GlyphEntry* entry;
 
-    v_stride = stride;
     bmp = bitmap;
     off_y = 0;
     off_x = 0;
@@ -543,7 +528,7 @@ void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
         s32 col;
         col = x;
         bit_x = off_x;
-        cur_dst = dst + (y * v_stride) + x2;
+        cur_dst = dst + (s32) ((u32) y * (u32) stride) + x2;
         while ((u32) col < max_x) {
             word =
                 *(u32*) (bmp + data_off + (((u32) bit_x >> 2) & 0x3FFFFFFC));
@@ -566,11 +551,9 @@ void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
     }
 }
 
-// @TODO: Currently 85% match - needs register allocation fixes
 void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
                   s32 h, s32 stride, void* tbl)
 {
-    volatile s32 v_stride;
     s32 bit_x;
     s32 cur_dst;
     u32 max_x;
@@ -592,7 +575,6 @@ void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
     if (tbl == NULL) {
         tbl = lbl_80408898;
     }
-    v_stride = stride;
     if (y < 0) {
         off_y = -y;
         y = 0;
@@ -613,7 +595,7 @@ void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
         s32 col;
         col = x;
         bit_x = off_x;
-        cur_dst = dst + (row_idx * v_stride) + x2;
+        cur_dst = dst + (s32) ((u32) row_idx * (u32) stride) + x2;
         while ((u32) col < max_x) {
             word =
                 *(u32*) (bmp + data_off + (((u32) bit_x >> 2) & 0x3FFFFFFC));

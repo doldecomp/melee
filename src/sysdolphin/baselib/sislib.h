@@ -9,14 +9,10 @@
 
 #include "baselib/forward.h"
 
-#include "baselib/sislib_font.h" // HSD_SisLib_FontAtlas, below
+#include "baselib/sislib_font.h"
 #include "dolphin/gx/GXStruct.h"
 
 #include <dolphin/mtx.h>
-
-typedef struct _TextGlyphTexture {
-    /*0x00*/ u8 data[512];
-} TextGlyphTexture;
 
 /// How many glyphs the font atlas holds.
 #define HSD_SISLIB_FONT_GLYPHS                                                \
@@ -135,13 +131,13 @@ s32 HSD_SisLib_803A70A0(HSD_Text*, s32 entry_idx, char* fmt, ...);
 u32 lbl_803A6FEC(s32, s32, bool);
 int HSD_SisLib_803A6B98(HSD_Text* arg0, float, float, const char*, ...);
 s32 HSD_SisLib_803A67EC(u8*, u8*);
-HSD_Text* HSD_SisLib_803A6754(int arg0, s32 arg1);
+HSD_Text* HSD_SisLib_803A6754(int arg0, int arg1);
 void HSD_SisLib_803A660C(s32, s32, s32);
 u8* HSD_SisLib_803A6530(s32, s32, s32);
 u8* HSD_SisLib_803A6478(u8*, u8*);
 void HSD_SisLib_803A6368(HSD_Text*, s32);
 void HSD_SisLib_803A62A0(s32, char*, char*);
-s32 HSD_SisLib_803A611C(int, HSD_GObj*, u16, u8, u8, u8, u8, u32);
+int HSD_SisLib_803A611C(int, HSD_GObj*, u16, u8, u8, u8, u8, u32);
 void lbl_803A60EC(void);
 HSD_Text* HSD_SisLib_803A5ACC(int, s32, f32, f32, f32, f32, f32);
 void* HSD_SisLib_Alloc(s32);
