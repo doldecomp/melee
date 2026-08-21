@@ -125,6 +125,7 @@ float lbVector_AngleXY(Vec3* a, Vec3* b)
 /// Procedure, which is described in the following paper:
 /// https://math.berkeley.edu/~arash/54/notes/6_4.pdf
 
+#ifdef __MWERKS__
 static float sin(float angle)
 {
     if (angle > M_PI) {
@@ -149,6 +150,7 @@ static float cos(float angle)
            0.15527099370956421f * angle * angle * angle +
            0.0056429998949170113f * angle * angle * angle * angle * angle;
 }
+#endif
 
 /// 8000D8F4
 /// Rotates v by angle about the given axis. The axis must have unit length,

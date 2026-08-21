@@ -6,7 +6,7 @@
 #include <string.h>
 #include <dolphin/card.h>
 #include <dolphin/os.h>
-#include <Runtime/Gecko_setjmp.h>
+#include <setjmp.h>
 
 typedef struct {
     u8 x0[0x80 * 0x24];
