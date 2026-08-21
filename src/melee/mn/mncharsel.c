@@ -3539,7 +3539,7 @@ void fn_802633B0(HSD_GObj* gobj)
     f32 new_pos;
     s32 page;
     s32 new_page;
-    s32 row_idx;
+    int row_idx;
 
     tag = gobj->user_data;
     port = tag->port;
@@ -3957,7 +3957,7 @@ s32 mnCharSel_802640A0(void)
     HSD_JObj* jobj;
     HSD_Text* text;
     s32 ctx;
-    u8 num_players;
+    s32 num_players;
     s32 row_a;
     GXColor* color_ptr;
     GXColor* color2_ptr;
