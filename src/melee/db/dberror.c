@@ -1,5 +1,6 @@
 #include "db.h"
 
+#include <stdarg.h>
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/db.h>
 #include <dolphin/os.h>

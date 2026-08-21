@@ -470,7 +470,7 @@ void HSD_SisLib_803A5FBC(void)
 
 /// @todo Currently 97.56% match - extra lwz reload optimized away by
 /// compiler after dual global store
-void HSD_SisLib_803A6048(u32 size)
+void HSD_SisLib_803A6048(size_t size)
 {
     int i;
 

@@ -3,6 +3,7 @@
 #include "hsd_3915.static.h"
 
 #include <math.h>
+#include <string.h>
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/mcc.h>
