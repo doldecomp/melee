@@ -87,7 +87,7 @@ struct StageInfo {
     HSD_JObj* x280[261];
     void* x694[4];
     void* x6A4;
-    /* +6A8 */ struct {
+    /* +6A8 */ struct GroundItemData {
         s32 unk0;
         Article* unk4;
     }** itemdata;
@@ -97,7 +97,7 @@ struct StageInfo {
     /* +6B8 */ void* map_ptcl;
     /* +6BC */ void* map_texg;
     /* +6C0 */ void* yakumono_param;
-    /* +6C4 */ void* map_plit;
+    /* +6C4 */ LightList** map_plit;
     /* +6C8 */ void* x6C8;
     /* +6CC */ DynamicModelDesc* quake_model_set;
     s16 x6D0;
@@ -1920,7 +1920,9 @@ struct StageParam {
     s16 x14;
     s16 x16;
     s16 x18;
-    u8 pad[0x64 - 0x1A];
+    /// Read as `((s16*) param)[0xD + j]` by Ground_801C28CC; an s16 array
+    /// rather than padding. Same 74 bytes either way.
+    s16 x1A[(0x64 - 0x1A) / 2];
 };
 
 /**
@@ -1949,7 +1951,9 @@ struct GroundParam {
     bool x4C_fixed_cam;
     f32 x50, x54, x58, x5C, x60, x64;
     s16 x68;
-    u8 x6C_pad[0xB0 - 0x6A];
+    /// Read as `((s16*) param)[0x35 + j]` by Ground_801C28CC, i.e. this is an
+    /// array of s16, not padding. Same 70 bytes either way.
+    s16 x6A[(0xB0 - 0x6A) / 2];
     /**
      * One row per #StKind this ground serves, looked up by
      * #StageParam::stkind.
@@ -1979,13 +1983,18 @@ struct UnkStageDat_x8_t {
     /*  +C */ HSD_ShapeAnimJoint** unkC;
     /* +10 */ HSD_CameraDescPerspective* x10;
     /* +14 */ UNK_T x14;
-    /* +18 */ UNK_T x18;
+    /* +18 */ LightList** x18;
     /* +1C */ HSD_FogDesc* x1C;
     /* +20 */ GrJoint* unk20;
     /* +24 */ s32 unk24; // size of unk20 array
     /* +28 */ UNK_T x28;
     /* +2C */ s16* x2C;
     /* +30 */ int x30;
+};
+
+struct GroundShadowEntry {
+    HSD_LightAnim* unk0;
+    u8 flag : 1;
 };
 
 struct UnkStageDat {
@@ -2002,7 +2011,7 @@ struct UnkStageDat {
     void* unk18;
     s32 unk1C;
 
-    void* unk20;
+    struct GroundShadowEntry* unk20;
     s32 unk24;
 
     UnkStageDatInternal** unk28;
