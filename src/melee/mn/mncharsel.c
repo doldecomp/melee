@@ -2816,37 +2816,47 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         if (cy4 < 0.20000009536743146 &&
                                             cy4 > -4.600000095367432)
                                         {
-                                            u8* pk;
                                             cursor->x10 = -2.2f;
                                             {
                                                 u8 new_kind;
-                                                pk = &mnCharSel_803F0DFC
-                                                          .doors[door]
-                                                          .p_kind;
-                                                new_kind = *pk + 1;
-                                                *pk = new_kind;
+                                                new_kind = mnCharSel_803F0DFC
+                                                               .doors[door]
+                                                               .p_kind +
+                                                           1;
+                                                mnCharSel_803F0DFC.doors[door]
+                                                    .p_kind = new_kind;
                                                 switch ((s32) new_kind) {
                                                 case 3:
                                                     break;
                                                 case 2:
-                                                    *pk = 3;
+                                                    mnCharSel_803F0DFC
+                                                        .doors[door]
+                                                        .p_kind = 3;
                                                     break;
                                                 case 4:
                                                     if (HSD_PadCopyStatus
                                                             [(u8) door]
                                                                 .err != 0)
                                                     {
-                                                        *pk = 1;
+                                                        mnCharSel_803F0DFC
+                                                            .doors[door]
+                                                            .p_kind = 1;
                                                     } else {
-                                                        *pk = 0;
+                                                        mnCharSel_803F0DFC
+                                                            .doors[door]
+                                                            .p_kind = 0;
                                                     }
                                                     break;
                                                 }
                                             }
                                             mnCharSel_804D6CB0->data.data
                                                 .players[door]
-                                                .slot_type = *pk;
-                                            if (*pk == 1) {
+                                                .slot_type =
+                                                mnCharSel_803F0DFC.doors[door]
+                                                    .p_kind;
+                                            if (mnCharSel_803F0DFC.doors[door]
+                                                    .p_kind == 1)
+                                            {
                                                 mnCharSel_804D6CB0->data.data
                                                     .players[door]
                                                     .xA = 0x78;
