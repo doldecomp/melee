@@ -813,9 +813,12 @@ void fn_801859C8(HSD_GObj* gobj)
     }
 }
 
-static inline void fn_80185A0C_InitImages(const u8* count_ptr, s32* i)
+static inline void fn_80185A0C_Tail(const u8* count_ptr, u8** img_idx, s32* i)
 {
+    s32 k;
     HSD_ImageDesc* img;
+    HSD_CObj* cobj;
+    HSD_GObj* gobj3;
 
     img = lbl_804735E8.x40;
     lbl_804735E8.xE1 = 0;
@@ -826,6 +829,24 @@ static inline void fn_80185A0C_InitImages(const u8* count_ptr, s32* i)
         lb_800121FC(&img[3], 0x17C, 0x190, GX_TF_Z24X8, 0);
         img++;
     }
+
+    for (k = 0; k < 10; (*img_idx)++, k++) {
+        if ((k / (s32) *count_ptr) % 2 != 0) {
+            (*img_idx)[0x90] =
+                (u8) ((*count_ptr - 1) - (k % (s32) *count_ptr));
+        } else {
+            (*img_idx)[0x90] = (u8) (k % (s32) *count_ptr);
+        }
+    }
+
+    HSD_GObj_SetupProc(GObj_Create(0x13, 1, 0), fn_801857C4, 0);
+
+    gobj3 = GObj_Create(0x13, 0x14, 0);
+    cobj = HSD_CObjLoadDesc(lbl_804D6600->cameras->desc);
+    HSD_GObjObject_80390A70(gobj3, HSD_GObj_804D784B, cobj);
+    GObj_SetupGXLinkMax(gobj3, (GObj_RenderFunc) (Event) fn_801852FC, 0);
+    gobj3->gxlink_prios = 0x61;
+    lbl_804D65F0 = gobj3;
 }
 
 s32 fn_80185A0C(void)
@@ -834,8 +855,6 @@ s32 fn_80185A0C(void)
     u8* img_idx;
     HSD_GObj* gobj2;
     HSD_GObj* gobj;
-    HSD_GObj* gobj3;
-    HSD_CObj* cobj;
     HSD_GObjProc* proc;
     s32 i;
     u8 count;
@@ -860,24 +879,7 @@ s32 fn_80185A0C(void)
     img_idx = lbl_804735E8.xD0 - 0x90;
     lbl_804735E8.xDC = gobj2;
     count_ptr = &lbl_804735E8.xE0;
-    fn_80185A0C_InitImages(count_ptr, &i);
-
-    for (i = 0; i < 10; img_idx++, i++) {
-        if ((i / (s32) *count_ptr) % 2 != 0) {
-            img_idx[0x90] = (u8) ((*count_ptr - 1) - (i % (s32) *count_ptr));
-        } else {
-            img_idx[0x90] = (u8) (i % (s32) *count_ptr);
-        }
-    }
-
-    HSD_GObj_SetupProc(GObj_Create(0x13, 1, 0), fn_801857C4, 0);
-
-    gobj3 = GObj_Create(0x13, 0x14, 0);
-    cobj = HSD_CObjLoadDesc(lbl_804D6600->cameras->desc);
-    HSD_GObjObject_80390A70(gobj3, HSD_GObj_804D784B, cobj);
-    GObj_SetupGXLinkMax(gobj3, (GObj_RenderFunc) (Event) fn_801852FC, 0);
-    gobj3->gxlink_prios = 0x61;
-    lbl_804D65F0 = gobj3;
+    fn_80185A0C_Tail(count_ptr, &img_idx, &i);
     return fn_801851C0();
 }
 

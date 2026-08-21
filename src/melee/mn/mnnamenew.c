@@ -30,7 +30,6 @@
 #include "sysdolphin/baselib/random.h"
 #include "sysdolphin/baselib/sislib.h"
 
-#include <dolphin/os.h>
 typedef char* GlyphRow[4];
 
 /// Glyph strings in the keyboard tables are read through
@@ -73,7 +72,7 @@ typedef struct MnNameNewDataLayout {
     char assert_cond[0xC];
 } MnNameNewDataLayout;
 
-extern volatile char mnNameNew_NullCharacter;
+extern char mnNameNew_NullCharacter;
 extern u8 mnNameNew_PortInUse;
 extern char mnNameNew_CurrentNameText[0x10];
 extern u8** AutoNamesList;
@@ -769,20 +768,17 @@ s32 PickAutoName(HSD_GObj* arg0)
     return (s32) null_ch;
 }
 
-#pragma push
-#pragma dont_inline on
+#line 779 "mnnamenew.c"
 bool NameContainsOnlySpaces(void)
 {
     char* text = mnNameNew_CurrentNameText;
-    s32 null_char = mnNameNew_NullCharacter;
-    char space0 = mnNameNew_SpaceCharacter[0];
-    char* sp = mnNameNew_SpaceCharacter;
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        int ch = text[0];
-        if (null_char != ch) {
-            if (space0 != ch || sp[1] != text[1]) {
+        if ((s8) * (&mnNameNew_NullCharacter) != (s8) text[0]) {
+            if ((s8) * (char*) mnNameNew_SpaceCharacter != (s8) text[0] ||
+                ((GlyphChar*) mnNameNew_SpaceCharacter)[1] != text[1])
+            {
                 return false;
             }
         }
@@ -790,7 +786,6 @@ bool NameContainsOnlySpaces(void)
     }
     return true;
 }
-#pragma pop
 
 static inline void CopyCurrentNameToNametag(struct NameTagData* nametag)
 {
@@ -1084,7 +1079,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 cursor = data->cursor_pos;
                 name_text[cursor * 3] = mnNameNew_SpaceCharacter[0];
                 name_text[cursor * 3 + 1] = mnNameNew_SpaceCharacter[1];
-                name_text[cursor * 3 + 2] = (char) mnNameNew_NullCharacter;
+                name_text[cursor * 3 + 2] = mnNameNew_NullCharacter;
                 lbAudioAx_80024030(1);
                 if (data->cursor_pos < 3) {
                     data->cursor_pos = (u8) (data->cursor_pos + 1);
@@ -1154,14 +1149,13 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                         occupied_slots = 1;
                     }
                     if (occupied_slots != 0) {
-                        slot[0] = (char) mnNameNew_NullCharacter;
+                        slot[0] = mnNameNew_NullCharacter;
                         mnNameNew_8023CE4C();
                         return;
                     }
                 }
                 if (cursor != 0) {
-                    name_text[(u8) (cursor - 1) * 3] =
-                        (char) mnNameNew_NullCharacter;
+                    name_text[(u8) (cursor - 1) * 3] = mnNameNew_NullCharacter;
                     data->cursor_pos = (u8) (data->cursor_pos - 1);
                     mnNameNew_8023CE4C();
                     return;
@@ -1394,13 +1388,12 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 n = 0;
             }
             if (n != 0) {
-                name_text[cursor * 3] = (char) mnNameNew_NullCharacter;
+                name_text[cursor * 3] = mnNameNew_NullCharacter;
                 mnNameNew_8023CE4C();
                 return;
             }
             if (cursor != 0) {
-                name_text[(u8) (cursor - 1) * 3] =
-                    (char) mnNameNew_NullCharacter;
+                name_text[(u8) (cursor - 1) * 3] = mnNameNew_NullCharacter;
                 data->cursor_pos = (u8) (data->cursor_pos - 1);
                 mnNameNew_8023CE4C();
                 return;
@@ -1433,7 +1426,7 @@ void mnNameNew_8023CE4C(void)
 {
     Vec3 sp24;
     GXColor name_char_color;
-    GXColor* name_char_color_ptr;
+    GXColor* name_char_color_ptr[1];
     NameNewEntry* data;
     HSD_JObj* jobj_a;
     HSD_JObj* jobj_b;
@@ -1444,8 +1437,6 @@ void mnNameNew_8023CE4C(void)
     s32 i;
     HSD_Text* text;
     f32 z;
-
-    PAD_STACK(4);
 
     data = mnNameNew_GetEntryData();
     jobj_a = data->jobjs[14];
@@ -1459,7 +1450,7 @@ void mnNameNew_8023CE4C(void)
     lb_8000B1CC(jobj_a, &mnNameNew_803EE330, &sp24);
     y_minus = -sp24.y;
     z = sp24.z;
-    name_char_color_ptr = &name_char_color;
+    name_char_color_ptr[0] = &name_char_color;
     text->pos_x = sp24.x;
     i = 0;
     text->pos_y = y_minus;
@@ -1476,7 +1467,7 @@ void mnNameNew_8023CE4C(void)
         HSD_SisLib_803A6B98(text, (char_spacing * (f32) i) / text->font_size.x,
                             0.0f, &mnNameNew_CurrentNameText[i * 3]);
         name_char_color = mnNameNew_804D4F78;
-        HSD_SisLib_803A74F0(text, i, name_char_color_ptr);
+        HSD_SisLib_803A74F0(text, i, name_char_color_ptr[0]);
     }
     data->name_disp_text = text;
 }

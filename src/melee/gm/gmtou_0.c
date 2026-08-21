@@ -24,16 +24,12 @@
 #include "mn/mnnamenew.h"
 #include "sc/types.h"
 
-#include <printf.h>
-#include <dolphin/os.h>
-#include <baselib/controller.h>
+#include <dolphin/pad.h>
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/mobj.h>
-#include <baselib/particle.h>
 #include <baselib/random.h>
 #include <baselib/sislib.h>
 
@@ -860,12 +856,15 @@ static inline bool fn_80191FD4_is_selected(enum CSSIconHud hud, s32 slot,
     return tm->x37[slot].x3 == hud;
 }
 
-/// @todo Only differs by callee-saved register selection in the second block.
 void fn_80191FD4(HSD_GObj* gobj)
 {
     TmData* tm;
     HSD_JObj* jobj;
     HSD_JObj* child;
+    HSD_JObj* sibling2;
+    u8* x3b;
+    u8* x2b;
+    HSD_JObj* child2;
     HSD_JObj* sibling;
     s32 slot;
     u32 idx;
@@ -932,14 +931,16 @@ void fn_80191FD4(HSD_GObj* gobj)
     }
 
     fn_8018FF9C(jobj, 0.9f, 0.9f, 666.0f);
-    child = HSD_JObjGetChild(jobj);
+    if (jobj == NULL) {
+        child2 = NULL;
+    } else {
+        child2 = jobj->child;
+    }
 
     hud = fn_8018F6DC(fn_8018F3BC((s32) idx));
-    x2_ptr = &state->x2;
-    x3_ptr = &state->x3;
-    slot = *x2_ptr + *x3_ptr;
+    slot = *(x2b = &state->x2) + *(x3b = &state->x3);
     if (fn_80191FD4_is_selected(hud, slot, tm)) {
-        fn_8019044C(child, (f32) (state->xA + 0xA));
+        fn_8019044C(child2, (f32) (state->xA + 0xA));
     } else {
         hud = fn_8018F6DC(fn_8018F3BC((s32) idx));
         {
@@ -952,35 +953,38 @@ void fn_80191FD4(HSD_GObj* gobj)
                 flag = 0;
             }
             if (flag == 0) {
-                HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
+                HSD_JObjSetFlagsAll(child2, JOBJ_HIDDEN);
             } else {
-                fn_8019044C(child, 0.0f);
+                fn_8019044C(child2, 0.0f);
             }
         }
     }
 
-    sibling = HSD_JObjGetNext(child);
-    HSD_JObjClearFlagsAll(sibling, JOBJ_HIDDEN);
+    if (child2 == NULL) {
+        sibling2 = NULL;
+    } else {
+        sibling2 = child2->next;
+    }
+    HSD_JObjClearFlagsAll(sibling2, JOBJ_HIDDEN);
 
     hud = fn_8018F6DC(fn_8018F3BC((s32) idx));
     if (lbl_803D9D20.x72[hud] != 0) {
-        if ((s32) tm->x37[*x2_ptr + *x3_ptr].x3 ==
+        if ((s32) tm->x37[*x2b + *x3b].x3 ==
             fn_8018F6DC(fn_8018F3BC((s32) idx)))
         {
-            fn_8019044C(sibling,
-                        (f32) ((tm->x37[*x2_ptr + *x3_ptr].x7 * 0x1E) +
-                               fn_8018F6DC(fn_8018F3BC((s32) idx))));
+            fn_8019044C(sibling2, (f32) ((tm->x37[*x2b + *x3b].x7 * 0x1E) +
+                                         fn_8018F6DC(fn_8018F3BC((s32) idx))));
             return;
         }
-        fn_8019044C(sibling, (f32) fn_8018F6DC(fn_8018F3BC((s32) idx)));
+        fn_8019044C(sibling2, (f32) fn_8018F6DC(fn_8018F3BC((s32) idx)));
         return;
     }
 
     if (fn_8018F3D0(fn_8018F310(fn_8018F3BC((s32) idx))) == 1) {
-        fn_8019044C(sibling, 200.0f);
+        fn_8019044C(sibling2, 200.0f);
         return;
     }
-    HSD_JObjSetFlagsAll(sibling, JOBJ_HIDDEN);
+    HSD_JObjSetFlagsAll(sibling2, JOBJ_HIDDEN);
 }
 
 /// Updates tournament menu cursor JObj visibility and position.

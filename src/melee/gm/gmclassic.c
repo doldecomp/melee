@@ -639,21 +639,32 @@ void gmClassic_OnInit(void)
     temp_r3->x5 = 0;
 }
 
+static inline StKind gmClassic_GetStKind(gm_803DDEC8Struct* entry,
+                                         UnkAllstarData* ad)
+{
+    if (entry->x1 == 0x80 && entry->x2 == 1) {
+        return (u16) gm_801647F8(ad->x0.ckind);
+    }
+    return entry->xC->x00;
+}
+
 void gmClassic_801B3500(GameScene* arg0)
 {
     gmClassicIntroData* sd;
     gm_803DDEC8Struct* entry;
-    UnkAllstarData* ad;
-    int enemy_count;
-    int ally_count;
     int i;
+    UnkAllstarData* ad;
+    int ally_count;
+    int enemy_count;
     struct GameCache* gc;
     int count;
     u64 audio;
     s8 ckind;
+    gm_803DDEC8Struct* new_var;
 
     sd = gm_GetGameSceneLoadDataCallback(arg0);
     entry = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->idx)];
+    new_var = entry;
     ad = gm_GetAllStarData();
     enemy_count = 0;
     ad->x0.x7 = arg0->idx;
@@ -682,9 +693,6 @@ void gmClassic_801B3500(GameScene* arg0)
             break;
         case 3:
             sd->x04 = 3;
-            break;
-        default:
-            sd->x04 = 0;
             break;
         }
     } else {
@@ -789,24 +797,15 @@ void gmClassic_801B3500(GameScene* arg0)
     }
 
     for (i = 0; i < 3; i++) {
-        s8 echar = entry->xC->x02[i];
-        if (echar != 0x21) {
-            audio |= lbAudioAx_80026E84(echar);
+        if (entry->xC->x02[i] != 0x21) {
+            audio |= lbAudioAx_80026E84(new_var->xC->x02[i]);
             if (entry->xC->x02[i] == 4) {
                 audio |= ((u64) 2 << 32) | 0x4000;
             }
         }
     }
 
-    {
-        StKind stkind;
-        if (entry->x1 == 0x80 && entry->x2 == 1) {
-            stkind = (u16) gm_801647F8(ad->x0.ckind);
-        } else {
-            stkind = entry->xC->x00;
-        }
-        audio |= lbAudioAx_80026EBC(stkind);
-    }
+    audio |= lbAudioAx_80026EBC(gmClassic_GetStKind(entry, ad));
 
     lbAudioAx_80026F2C(0x1C);
     lbAudioAx_8002702C(0xC, audio);

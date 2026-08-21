@@ -889,9 +889,7 @@ int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
     }
 
     old_size = alloc->size;
-    required_size = (HSD_SisLib_BytePtr(alloc->next) -
-                     HSD_SisLib_BytePtr(old_buf = alloc->data)) +
-                    0x11;
+    required_size = ((u8*) alloc->next - (u8*) (old_buf = alloc->data)) + 0x11;
     required_size = encoded_len + required_size;
     if (old_size < required_size) {
         alloc->size =
@@ -901,14 +899,13 @@ int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
         copy_idx = 0;
         while (copy_idx < (s32) (((u8*) alloc->next - (u8*) alloc->data) + 1))
         {
-            new_buf[copy_idx] = *copy_src;
+            new_buf[copy_idx] = copy_src[copy_idx];
             copy_idx += 1;
-            copy_src += 1;
         }
         alloc->data = (HSD_Text*) new_buf;
         text->sis_buffer = (SIS*) new_buf;
-        alloc->next =
-            (SisBlock*) (new_buf + ((u8*) alloc->next - (u8*) old_buf));
+        alloc->next = (SisBlock*) (new_buf + ((u8*) alloc->next -
+                                              HSD_SisLib_BytePtr(old_buf)));
         HSD_SisLib_Free(old_buf);
     }
 
@@ -1000,15 +997,17 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
 {
     u8 buffer[128];
     u8 encoded[128];
+    HSD_Text* old_buf;
+    u8* playhead;
     SisBlock* alloc;
+    s32 new_size;
+    s32 tail_len;
+    s32 result;
     s32 old_size;
     u8* entry;
-    s32 new_size;
-    u8* playhead;
     u8* copy_src;
     u8* new_buf;
     s32 copy_idx;
-    s32 result;
     va_list args;
     s32 i;
 
@@ -1027,17 +1026,13 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
             new_size = 0;
         }
         if (old_size < new_size) {
-            HSD_Text* old_buf;
-            s32 tail_len;
             u32 required_size;
 
             result = new_size - old_size;
-            tail_len = HSD_SisLib_BytePtr(alloc->next) - playhead;
-            old_buf = alloc->data;
-            required_size = new_size +
-                            (HSD_SisLib_BytePtr(alloc->next) -
-                             HSD_SisLib_BytePtr(old_buf)) +
-                            1;
+            tail_len = (u8*) alloc->next - playhead;
+            required_size =
+                new_size +
+                ((u8*) alloc->next - (u8*) (old_buf = alloc->data)) + 1;
             if (alloc->size < required_size) {
                 alloc->size +=
                     ((((required_size - alloc->size) >> 7U) + 1) << 7);
@@ -1047,14 +1042,13 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
                 while (copy_idx <
                        (s32) (((u8*) alloc->next - (u8*) alloc->data) + 1))
                 {
-                    new_buf[copy_idx] = *copy_src;
+                    new_buf[copy_idx] = copy_src[copy_idx];
                     copy_idx += 1;
-                    copy_src += 1;
                 }
                 alloc->data = (HSD_Text*) new_buf;
                 text->sis_buffer = (SIS*) new_buf;
                 alloc->next =
-                    (SisBlock*) (new_buf + (HSD_SisLib_BytePtr(alloc->next) -
+                    (SisBlock*) (new_buf + ((u8*) alloc->next -
                                             HSD_SisLib_BytePtr(old_buf)));
                 HSD_SisLib_Free(old_buf);
                 playhead = (u8*) alloc->next - tail_len;
@@ -1062,17 +1056,15 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
             for (i = tail_len; i > 0; i--) {
                 playhead[result + i] = playhead[i];
             }
-            alloc->next =
-                (SisBlock*) (HSD_SisLib_BytePtr(alloc->next) + result);
+            alloc->next = (SisBlock*) ((u8*) alloc->next + result);
         } else if (old_size > new_size) {
             s32 shrink_size = old_size - new_size;
-            s32 tail_len = HSD_SisLib_BytePtr(alloc->next) - playhead;
+            s32 tail_len = (u8*) alloc->next - playhead;
 
             for (i = 0; i < tail_len; i++) {
                 playhead[i] = playhead[shrink_size + i];
             }
-            alloc->next =
-                (SisBlock*) (HSD_SisLib_BytePtr(alloc->next) - shrink_size);
+            alloc->next = (SisBlock*) ((u8*) alloc->next - shrink_size);
         }
         for (i = 0; i < new_size; i++) {
             *playhead++ = encoded[i];

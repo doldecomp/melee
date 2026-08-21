@@ -7,28 +7,21 @@
 #include "if/textdraw.h"
 #include "if/types.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbaudio_ax.h"
 #include "mn/inlines.h"
 #include "ty/toy.h"
 
 #include <math.h>
-#include <printf.h>
+#include <printf.h> // IWYU pragma: keep
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
-#include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 #include <baselib/fog.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
 #include <baselib/lobj.h>
 #include <baselib/memory.h>
-#include <baselib/particle.h>
-#include <baselib/sislib.h>
 
 struct unk_series {
     s16 values[26];
@@ -168,10 +161,13 @@ void DevText_SetCursorX(DevText* text, int x)
     text->cursor_x = DevText_Clamp(x, text->w);
 }
 
+#pragma push
+#pragma dont_inline on
 void DevText_HideCursor(DevText* text)
 {
     text->flags &= ~(1 << 4);
 }
+#pragma pop
 
 void DevText_80302AC0(DevText* text)
 {
@@ -210,11 +206,14 @@ void DevText_HideText(DevText* text)
 }
 #pragma pop
 
+#pragma push
+#pragma dont_inline on
 void DevText_SetScale(DevText* text, f32 x, f32 y)
 {
     text->scale_x = x;
     text->scale_y = y;
 }
+#pragma pop
 
 void DevText_SetXY(DevText* text, int x, int y)
 {
@@ -335,7 +334,8 @@ void un_80302DF8(struct un_80304138_objalloc_t* arg0, void* arg1)
 {
     arg0->xC = arg1;
 }
-
+#pragma push
+#pragma dont_inline on
 int un_80302E00(struct un_80304138_objalloc_t_x8* arg0, int arg1)
 {
     int ret = 0;
@@ -352,6 +352,7 @@ int un_80302E00(struct un_80304138_objalloc_t_x8* arg0, int arg1)
     }
     return ret;
 }
+#pragma pop
 
 int un_80302EA4(struct un_80304138_objalloc_t_x8* arg0)
 {
@@ -412,14 +413,10 @@ static inline GXColor adjust(GXColor c)
     return c;
 }
 
-void un_80302FFC(struct un_80304138_objalloc_t* arg0)
+static inline int un_80302FFC_maxlen(struct un_80304138_objalloc_t_x8* thing)
 {
-    struct un_80304138_objalloc_t_x8* x8 = arg0->x8;
-    struct un_80304138_objalloc_t_x8* thing;
     int cursor_x = 1;
-    int cursor_y;
-    GXColor color;
-    for (thing = x8; thing->x0 != 9; thing++) {
+    for (; thing->x0 != 9; thing++) {
         if (thing->x0 != 0 && thing->x0 != 1) {
             int len = DevText_StrLen(thing->x8);
             if (len + 1 > cursor_x) {
@@ -427,18 +424,22 @@ void un_80302FFC(struct un_80304138_objalloc_t* arg0)
             }
         }
     }
+    return cursor_x;
+}
+
+void un_80302FFC(struct un_80304138_objalloc_t* arg0)
+{
+    struct un_80304138_objalloc_t_x8* x8 = arg0->x8;
+    int cursor_x = un_80302FFC_maxlen(arg0->x8);
+    int cursor_y;
     if (arg0->x1 & 0x10) {
         DevText_StoreColorIndex(arg0->x4, 0);
-        color = adjust(un_804D5A0C);
-        DevText_SetTextColor(arg0->x4, color);
+        DevText_SetTextColor(arg0->x4, adjust(un_804D5A0C));
         DevText_StoreColorIndex(arg0->x4, 1);
-        color = adjust(un_804D5A10);
-        DevText_SetTextColor(arg0->x4, color);
+        DevText_SetTextColor(arg0->x4, adjust(un_804D5A10));
         DevText_StoreColorIndex(arg0->x4, 2);
-        color = adjust(un_804D5A14);
-        DevText_SetTextColor(arg0->x4, color);
-        color = adjust(un_804D5A08);
-        DevText_SetBGColor(arg0->x4, color);
+        DevText_SetTextColor(arg0->x4, adjust(un_804D5A14));
+        DevText_SetBGColor(arg0->x4, adjust(un_804D5A08));
     } else {
         DevText_StoreColorIndex(arg0->x4, 0);
         DevText_SetTextColor(arg0->x4, un_804D5A0C);
@@ -567,11 +568,10 @@ bool un_80303444(struct un_80304138_objalloc_t* arg0)
 bool un_80303720(struct un_80304138_objalloc_t* arg0)
 {
     bool ret = false;
-    struct un_80304138_objalloc_t_x8* x8 = arg0->x8;
-    switch (x8[arg0->x0].x0) {
+    switch (arg0->x8[arg0->x0].x0) {
     case 2: {
-        int* q = x8[arg0->x0].x10;
-        if (*q > x8[arg0->x0].x14) {
+        int* q = arg0->x8[arg0->x0].x10;
+        if (*q > arg0->x8[arg0->x0].x14) {
             *q -= 1;
             ret = true;
             arg0->x1 = arg0->x1 | 1;
@@ -580,18 +580,18 @@ bool un_80303720(struct un_80304138_objalloc_t* arg0)
         break;
     }
     case 3: {
-        int* q = x8[arg0->x0].x10;
-        if (*q - x8[arg0->x0].x1C >= x8[arg0->x0].x14) {
+        int* q = arg0->x8[arg0->x0].x10;
+        if (*q - arg0->x8[arg0->x0].x1C >= arg0->x8[arg0->x0].x14) {
             ret = true;
-            *q -= x8[arg0->x0].x1C;
+            *q -= arg0->x8[arg0->x0].x1C;
             arg0->x1 = arg0->x1 | 1;
             sfxMove();
         }
         break;
     }
     case 5: {
-        unsigned char* q = x8[arg0->x0].x10;
-        int idk = x8[arg0->x0].x1C;
+        unsigned char* q = arg0->x8[arg0->x0].x10;
+        int idk = arg0->x8[arg0->x0].x1C;
         if (*q - (idk & 0xFF) >= 0) {
             *q -= idk;
         } else {
@@ -603,8 +603,8 @@ bool un_80303720(struct un_80304138_objalloc_t* arg0)
         break;
     }
     case 6: {
-        u16* q = x8[arg0->x0].x10;
-        int idk = x8[arg0->x0].x1C;
+        u16* q = arg0->x8[arg0->x0].x10;
+        int idk = arg0->x8[arg0->x0].x1C;
         if (*q - (idk & 0xFFFF) >= 0) {
             *q -= idk;
         } else {
@@ -617,18 +617,22 @@ bool un_80303720(struct un_80304138_objalloc_t* arg0)
     }
     case 4:
     case 7: {
-        int* q = x8[arg0->x0].x10;
-        unsigned int idk = x8[arg0->x0].x1C;
-        *q = *q - idk;
+        unsigned int* q = arg0->x8[arg0->x0].x10;
+        unsigned int idk = arg0->x8[arg0->x0].x1C;
+        if (*q - (idk & 0xFFFFFFFF) >= 0) {
+            *q -= idk;
+        } else {
+            *q += (unsigned int) (0x100000000 - idk);
+        }
         ret = true;
         arg0->x1 = arg0->x1 | 1;
         sfxMove();
         break;
     }
     case 8: {
-        float* q = x8[arg0->x0].x10;
-        if (*q - x8[arg0->x0].x1C >= x8[arg0->x0].x14) {
-            *q -= x8[arg0->x0].x1C;
+        float* q = arg0->x8[arg0->x0].x10;
+        if (*q - arg0->x8[arg0->x0].x1C >= arg0->x8[arg0->x0].x14) {
+            *q -= arg0->x8[arg0->x0].x1C;
             ret = true;
             arg0->x1 = arg0->x1 | 1;
             sfxMove();
@@ -813,35 +817,53 @@ void fn_80303EF4(HSD_GObj* gobj)
     }
 }
 
-#pragma push
-#pragma dont_inline on
+#line 828 "textlib.c"
+static inline int un_80303FD4_first(struct un_80304138_objalloc_t_x8* p)
+{
+    int i;
+    int v;
+    for (i = 0; (v = p->x0) != 9; p++, i++) {
+        if (v != 0) {
+            return i;
+        }
+    }
+    return 0;
+}
+
+#line 840 "textlib.c"
+static inline int un_80303FD4_count(struct un_80304138_objalloc_t_x8* p)
+{
+    int n = 0;
+    while (p->x0 != 9) {
+        n++;
+        p++;
+    }
+    return n;
+}
+
+#line 850 "textlib.c"
 void un_80303FD4(HSD_GObj* arg0, struct un_80304138_objalloc_t* arg1,
                  struct un_80304138_objalloc_t_x8* arg2, int arg3, int arg4,
                  int arg5)
 {
-    struct un_80304138_objalloc_t_x8* new_var2;
+    struct un_80304138_objalloc_t_x8* p2;
+    struct un_80304138_objalloc_t_x8* p;
     int i;
-    int count;
-    int new_var;
-    int count2 = 0;
     int size;
+    int count;
+    int count2 = 0;
     int v;
     void* buf;
     struct un_80304138_objalloc_t* un;
-    PAD_STACK(8);
 
     arg1->x8 = arg2;
-    count = (arg1->x1 = 0);
+    arg1->x1 = 0;
     arg1->prev = NULL;
     arg1->next = NULL;
-    new_var = 0;
     arg1->x10 = arg0;
 
-    while (arg1->x8[count].x0 != 9) {
-        count++;
-    }
-
-    size = un_80302EA4(new_var2 = arg1->x8);
+    count = un_80303FD4_count(arg1->x8);
+    size = un_80302EA4(arg1->x8);
     un_804D6E44 = arg1;
     buf = HSD_MemAlloc(size * count * 2);
     if (buf != NULL) {
@@ -853,28 +875,19 @@ void un_80303FD4(HSD_GObj* arg0, struct un_80304138_objalloc_t* arg1,
         arg1->x4 = DevText_Create(count2 + 0x78, arg4, arg5, size, count, buf);
         if (arg1->x4 != NULL) {
             DevText_Show(arg0, arg1->x4);
-            for (i = new_var; (v = arg1->x8[i].x0) != 0; i++) {
-                if (v == 9) {
-                    i = 0;
-                    break;
-                }
-            }
-            arg1->x0 = i;
+            arg1->x0 = un_80303FD4_first(arg1->x8);
             arg1->xC = NULL;
             DevText_HideCursor(arg1->x4);
             DevText_SetScale(arg1->x4, 10.0f, 17.0f);
             un_804D6E48 = NULL;
-            {
-                struct un_80304138_objalloc_t_x8* p = arg1->x8;
-                while (p->x0 != 9) {
-                    un_80302E00(p, 4);
-                    p++;
-                }
+            p2 = arg1->x8;
+            while (p2->x0 != 9) {
+                un_80302E00(p2, 4);
+                p2++;
             }
         }
     }
 }
-#pragma pop
 
 void un_80304138(void)
 {
