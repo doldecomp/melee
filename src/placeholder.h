@@ -1,8 +1,6 @@
 #ifndef PLACEHOLDER_H
 #define PLACEHOLDER_H
 
-#include <platform.h>
-
 #include <m2c_macros.h> // IWYU pragma: export
 #include <dolphin/os.h>
 
