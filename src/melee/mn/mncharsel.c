@@ -3957,7 +3957,7 @@ s32 mnCharSel_802640A0(void)
     HSD_JObj* jobj;
     HSD_Text* text;
     s32 ctx;
-    s32 num_players;
+    u8 num_players;
     s32 row_a;
     GXColor* color_ptr;
     GXColor* color2_ptr;
