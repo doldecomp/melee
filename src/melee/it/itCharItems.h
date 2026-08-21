@@ -642,8 +642,8 @@ typedef struct itSamusChargeshot_ItemVars {
     /* +C  +DE0 */ f32 xDE0;
     /* +10 +DE4 */ f32 xDE4;
     /* +14 +DE8 */ s32 xDE8;
-    /* +18 +DEC */ s32 xDEC;
-    /* +1C +DF0 */ s32 xDF0;
+    /* +18 +DEC */ int xDEC;
+    /* +1C +DF0 */ int xDF0;
     /* +20 +DF4 */ s32 xDF4;
     /* +24 +DF8 */ s32 xDF8;
     /* +28 +DFC */ s32 xDFC;

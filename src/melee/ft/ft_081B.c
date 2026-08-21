@@ -1232,7 +1232,7 @@ void ft_800849EC(Fighter* fp1, Fighter* fp2)
     mpCopyCollData(&fp1->coll_data, &fp2->coll_data, 2);
 }
 
-int ft_80084A18(Fighter_GObj* gobj)
+bool ft_80084A18(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return mpLib_80054ED8(fp->coll_data.floor.index);

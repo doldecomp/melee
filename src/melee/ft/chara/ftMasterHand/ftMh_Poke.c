@@ -16,7 +16,6 @@
 
 #include <dolphin/mtx.h>
 #include <baselib/random.h>
-#include <MetroTRK/intrinsics.h>
 
 void ftMh_PaperCrush_Coll(HSD_GObj* gobj) {}
 

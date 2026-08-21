@@ -540,7 +540,7 @@ Item_GObj* it_802DD7F0(s32 arg0, Vec3* arg1, Vec3* arg2, s32 arg3)
     return gobj;
 }
 
-int it_802DDA84(Item_GObj* gobj)
+bool it_802DDA84(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     CollData* col = &ip->x378_itemColl;
@@ -552,7 +552,7 @@ int it_802DDA84(Item_GObj* gobj)
     cond = mpColl_800471F8(col);
     ip->pos = col->cur_pos;
     if (cond) {
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }

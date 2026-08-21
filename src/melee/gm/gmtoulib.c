@@ -2388,8 +2388,8 @@ void fn_801902F0(int sis_param)
     if (gm_804771C4.x1C == 0) {
         value = 0;
     }
-    lbl_804D663C = (HSD_GObj*) HSD_SisLib_803A611C(0, (HSD_GObj*) value, 9,
-                                                   0x12, 0, 3, 0, 0x13);
+    lbl_804D663C =
+        HSD_SisLib_803A611C(0, (HSD_GObj*) value, 9, 0x12, 0, 3, 0, 0x13);
 }
 #pragma pop
 

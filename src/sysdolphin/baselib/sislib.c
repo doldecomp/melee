@@ -15,10 +15,12 @@
 #include "dolphin/gx.h"
 #include "dolphin/mtx.h"
 
+#include <m2c_macros.h>
 #include <printf.h> // IWYU pragma: keep
 #include <stdarg.h>
 #include <stdio.h>
 #include <dolphin/os.h>
+#include <dolphin/types.h>
 #include <melee/lb/lbarchive.h> ///< @todo Circular include
 
 static HSD_WObjDesc HSD_SisLib_8040C490 = {
@@ -36,25 +38,19 @@ static HSD_WObjDesc HSD_SisLib_8040C4A4 = {
 static u32 HSD_SisLib_804D7968;
 
 static HSD_CameraDescPerspective HSD_SisLib_8040C4B8 = {
+    NULL,
     0,
-    0,
-    1,
-    0,
-    0x280,
-    0,
-    0x1E0,
-    0,
-    0x280,
-    0,
-    0x1E0,
+    PROJ_PERSPECTIVE,
+    { 0, 640, 0, 480 },
+    { 0, 640, 0, 480 },
     &HSD_SisLib_8040C490,
     &HSD_SisLib_8040C4A4,
-    0,
-    0,
-    0,
-    65535,
-    30,
-    1.3333,
+    0.0f,
+    NULL,
+    0.0f,
+    0xFFFF,
+    30.0f,
+    1.3333f,
 };
 
 SisBlock* free_head;
@@ -91,7 +87,7 @@ void* HSD_SisLib_Alloc(s32 size)
     alloc_cur = used_head;
     if (size == 0) {
         OSReport("ZERO byte alloc\n");
-        OSPanic("sislib.c", 0x3C, "");
+        OSPanic(__FILE__, 60, "");
     }
     remainder = size % 4;
     if (remainder != 0) {
@@ -122,7 +118,7 @@ void* HSD_SisLib_Alloc(s32 size)
     }
     if (best == NULL) {
         OSReport("Memory Empty\n");
-        OSPanic("sislib.c", 0x56, "");
+        OSPanic(__FILE__, 0x56, "");
     }
 
     free_cur = free_head;
@@ -137,7 +133,7 @@ void* HSD_SisLib_Alloc(s32 size)
         remaining_size = (free_cur->size - size) - (sizeof(SisBlock));
         if (remaining_size < 0) {
             OSReport("Memory Empty\n");
-            OSPanic("sislib.c", 0x5F, "");
+            OSPanic(__FILE__, 0x5F, "");
         }
 
         free_head = (SisBlock*) (data_ptr + size);
@@ -474,7 +470,7 @@ void HSD_SisLib_803A5FBC(void)
 
 /// @todo Currently 97.56% match - extra lwz reload optimized away by
 /// compiler after dual global store
-void HSD_SisLib_803A6048(u32 size)
+void HSD_SisLib_803A6048(size_t size)
 {
     int i;
 
@@ -506,7 +502,7 @@ void fn_803A60EC(void* gobj)
     }
 }
 
-s32 HSD_SisLib_803A611C(int font_idx, HSD_GObj* parent_gobj, u16 class_id,
+int HSD_SisLib_803A611C(int font_idx, HSD_GObj* parent_gobj, u16 class_id,
                         u8 p_link, u8 p_prio, u8 gx_link, u8 gx_prio,
                         u32 render_prio)
 {
@@ -570,7 +566,7 @@ void HSD_SisLib_803A62A0(s32 font_idx, char* archive_name, char* symbol_name)
     HSD_SisLib_804D1110[font_idx] = tmp;
     if (tmp == NULL) {
         OSReport("Cannot open archive %s.\n", archive_name);
-        OSPanic("sislib.c", 0x24A, "");
+        OSPanic(__FILE__, 0x24A, "");
     }
     {
         SIS* sis = HSD_ArchiveGetPublicAddress(HSD_SisLib_804D1110[font_idx],
@@ -578,7 +574,7 @@ void HSD_SisLib_803A62A0(s32 font_idx, char* archive_name, char* symbol_name)
         HSD_SisLib_804D1124[font_idx] = sis;
         if (sis == NULL) {
             OSReport("Cannot find symbol %s.\n", symbol_name);
-            OSPanic("sislib.c", 0x24F, "");
+            OSPanic(__FILE__, 0x24F, "");
         }
     }
 }
@@ -687,7 +683,7 @@ void HSD_SisLib_803A660C(s32 font_idx, s32 dst_idx, s32 src_idx)
     HSD_SisLib_803A6478(dst, src);
 }
 
-HSD_Text* HSD_SisLib_803A6754(int font_idx, s32 context_id)
+HSD_Text* HSD_SisLib_803A6754(int font_idx, int context_id)
 {
     SisBlock* alloc;
     HSD_Text* text;
@@ -842,7 +838,9 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
             sjis_lo = str_cursor[1];
             str_cursor += 1;
         }
-        for (lut_idx = 0; lut_idx < (s32) HSD_SISLIB_FONT_GLYPHS; lut_idx++) {
+        for (lut_idx = 0; lut_idx < ARRAY_SIZE(HSD_SisLib_FontAtlas);
+             lut_idx++)
+        {
             if ((sjis_hi == lut_ptr[lut_idx * 2]) &&
                 (sjis_lo == lut_ptr[lut_idx * 2 + 1]))
             {
@@ -891,9 +889,7 @@ int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
     }
 
     old_size = alloc->size;
-    required_size = (HSD_SisLib_BytePtr(alloc->next) -
-                     HSD_SisLib_BytePtr(old_buf = alloc->data)) +
-                    0x11;
+    required_size = ((u8*) alloc->next - (u8*) (old_buf = alloc->data)) + 0x11;
     required_size = encoded_len + required_size;
     if (old_size < required_size) {
         alloc->size =
@@ -903,14 +899,13 @@ int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
         copy_idx = 0;
         while (copy_idx < (s32) (((u8*) alloc->next - (u8*) alloc->data) + 1))
         {
-            new_buf[copy_idx] = *copy_src;
+            new_buf[copy_idx] = copy_src[copy_idx];
             copy_idx += 1;
-            copy_src += 1;
         }
         alloc->data = (HSD_Text*) new_buf;
         text->sis_buffer = (SIS*) new_buf;
-        alloc->next =
-            (SisBlock*) (new_buf + ((u8*) alloc->next - (u8*) old_buf));
+        alloc->next = (SisBlock*) (new_buf + ((u8*) alloc->next -
+                                              HSD_SisLib_BytePtr(old_buf)));
         HSD_SisLib_Free(old_buf);
     }
 
@@ -1002,15 +997,17 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
 {
     u8 buffer[128];
     u8 encoded[128];
+    HSD_Text* old_buf;
+    u8* playhead;
     SisBlock* alloc;
+    s32 new_size;
+    s32 tail_len;
+    s32 result;
     s32 old_size;
     u8* entry;
-    s32 new_size;
-    u8* playhead;
     u8* copy_src;
     u8* new_buf;
     s32 copy_idx;
-    s32 result;
     va_list args;
     s32 i;
 
@@ -1029,17 +1026,13 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
             new_size = 0;
         }
         if (old_size < new_size) {
-            HSD_Text* old_buf;
-            s32 tail_len;
             u32 required_size;
 
             result = new_size - old_size;
-            tail_len = HSD_SisLib_BytePtr(alloc->next) - playhead;
-            old_buf = alloc->data;
-            required_size = new_size +
-                            (HSD_SisLib_BytePtr(alloc->next) -
-                             HSD_SisLib_BytePtr(old_buf)) +
-                            1;
+            tail_len = (u8*) alloc->next - playhead;
+            required_size =
+                new_size +
+                ((u8*) alloc->next - (u8*) (old_buf = alloc->data)) + 1;
             if (alloc->size < required_size) {
                 alloc->size +=
                     ((((required_size - alloc->size) >> 7U) + 1) << 7);
@@ -1049,14 +1042,13 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
                 while (copy_idx <
                        (s32) (((u8*) alloc->next - (u8*) alloc->data) + 1))
                 {
-                    new_buf[copy_idx] = *copy_src;
+                    new_buf[copy_idx] = copy_src[copy_idx];
                     copy_idx += 1;
-                    copy_src += 1;
                 }
                 alloc->data = (HSD_Text*) new_buf;
                 text->sis_buffer = (SIS*) new_buf;
                 alloc->next =
-                    (SisBlock*) (new_buf + (HSD_SisLib_BytePtr(alloc->next) -
+                    (SisBlock*) (new_buf + ((u8*) alloc->next -
                                             HSD_SisLib_BytePtr(old_buf)));
                 HSD_SisLib_Free(old_buf);
                 playhead = (u8*) alloc->next - tail_len;
@@ -1064,17 +1056,15 @@ s32 HSD_SisLib_803A70A0(HSD_Text* text, s32 entry_idx, char* fmt, ...)
             for (i = tail_len; i > 0; i--) {
                 playhead[result + i] = playhead[i];
             }
-            alloc->next =
-                (SisBlock*) (HSD_SisLib_BytePtr(alloc->next) + result);
+            alloc->next = (SisBlock*) ((u8*) alloc->next + result);
         } else if (old_size > new_size) {
             s32 shrink_size = old_size - new_size;
-            s32 tail_len = HSD_SisLib_BytePtr(alloc->next) - playhead;
+            s32 tail_len = (u8*) alloc->next - playhead;
 
             for (i = 0; i < tail_len; i++) {
                 playhead[i] = playhead[shrink_size + i];
             }
-            alloc->next =
-                (SisBlock*) (HSD_SisLib_BytePtr(alloc->next) - shrink_size);
+            alloc->next = (SisBlock*) ((u8*) alloc->next - shrink_size);
         }
         for (i = 0; i < new_size; i++) {
             *playhead++ = encoded[i];
@@ -1753,7 +1743,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
     u16 saved_x6C;
     u8 saved_kerning;
 
-    u8 *data = HSD_SisLib_FontAtlas;
+    u8 *data = M2C_BITWISE(u8*, HSD_SisLib_FontAtlas);
     u8 *default_kerning = HSD_SisLib_8040CB00;
 
     if (gobj != NULL) {

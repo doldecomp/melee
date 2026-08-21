@@ -1826,7 +1826,7 @@ bool ftCo_800B8A9C(Fighter* fp)
         }
         goto done;
     }
-    if (ftCo_800A3134(target) || ftCo_800A3200(target)) {
+    if (ftCo_800A3134(target) != 0 || ftCo_800A3200(target)) {
         struct Fighter_x1A88_t* tmp = &fp->x1A88;
         u8* xc8;
         if (*(xc8 = &fp->x1A88.xC8) < 8U) {

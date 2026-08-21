@@ -22,6 +22,7 @@ typedef struct {
 #include "particle.static.h"
 
 #include <math.h>
+#include <string.h>
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/mcc.h>

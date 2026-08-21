@@ -3,7 +3,7 @@
 
 #include "ft/forward.h"
 
-/* 0D14E4 */ int Fighter_SuperMushroomApply(Fighter_GObj* gobj);
+/* 0D14E4 */ bool Fighter_SuperMushroomApply(Fighter_GObj* gobj);
 /* 0D15D0 */ void ftCo_800D15D0(Fighter_GObj*);
 /* 0D170C */ void ftCo_800D170C(Fighter_GObj* gobj);
 /* 0D1868 */ void ftCo_KinokoGiantStart_Anim(Fighter_GObj* gobj);

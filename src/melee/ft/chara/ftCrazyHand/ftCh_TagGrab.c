@@ -21,7 +21,6 @@
 #include "pl/player.h"
 
 #include <dolphin/mtx.h>
-#include <MetroTRK/intrinsics.h>
 
 static inline void func_8015ADD0_inline(HSD_GObj* gobj)
 {

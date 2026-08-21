@@ -64,10 +64,6 @@
 STATIC_ASSERT(sizeof(struct DevText_Pool) == 0x6B0);
 
 /// .sbss
-/* 4D6E4C */ unsigned char un_804D6E4C;
-/* 4D6E48 */ struct un_80304138_objalloc_t_x8* un_804D6E48;
-/* 4D6E44 */ struct un_80304138_objalloc_t* un_804D6E44;
-/* 4D6E40 */ struct un_80304138_objalloc_t* un_804D6E40;
 /* 4D6E38 */ DevText* devtext_poolhead[2];
 /* 4D6E34 */ int devtext_setup_render_priority;
 /* 4D6E30 */ int devtext_setup_gx_link;

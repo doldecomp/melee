@@ -847,6 +847,7 @@ void fn_802FA8C0(HSD_GObj* arg)
 void fn_802FAC34(HSD_GObj* arg)
 {
     int i;
+    int n[1];
     signed char* q;
     signed char* w;
     if (gm_8016A944()) {
@@ -859,22 +860,23 @@ void fn_802FAC34(HSD_GObj* arg)
                 ifStock_804A1ACC.x83[i] = *q++;
                 ifStock_804A1ACC.x1[i] = *w++;
             }
-            for (i = 0; i < 130; i++) {
-                if (ifStock_804A1ACC.x10C[i]) {
-                    HSD_GObjPLink_80390228(ifStock_804A1ACC.x10C[i]);
+            for (n[0] = 0; n[0] < 130; n[0]++) {
+                if (ifStock_804A1ACC.x10C[n[0]]) {
+                    HSD_GObjPLink_80390228(ifStock_804A1ACC.x10C[n[0]]);
                 }
-                if (ifStock_804A1ACC.x83[i] == -2) {
+                if (ifStock_804A1ACC.x83[n[0]] == -2) {
                     return;
                 }
-                if (ifStock_804A1ACC.x1[i] == -2) {
+                if (ifStock_804A1ACC.x1[n[0]] == -2) {
                     return;
                 }
-                ifStock_804A1ACC.x10C[i] = ifStock_802F96D0(
-                    ifStock_804A1ACC.x1[i], ifStock_804A1ACC.x83[i],
-                    2.45f * (i % 5) + -21.0f, -(2.45f * (i / 5) - 11.0f));
-                if (i == 0) {
-                    HSD_GObj_SetupProc(ifStock_804A1ACC.x10C[i], fn_802FA8C0,
-                                       17);
+                ifStock_804A1ACC.x10C[n[0]] = ifStock_802F96D0(
+                    ifStock_804A1ACC.x1[n[0]], ifStock_804A1ACC.x83[n[0]],
+                    2.45f * (n[0] % 5) + -21.0f,
+                    -(2.45f * (n[0] / 5) - 11.0f));
+                if (n[0] == 0) {
+                    HSD_GObj_SetupProc(ifStock_804A1ACC.x10C[n[0]],
+                                       fn_802FA8C0, 17);
                 }
             }
         }

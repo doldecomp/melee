@@ -22,7 +22,6 @@
 #include "pl/player.h"
 
 #include <dolphin/mtx.h>
-#include <MetroTRK/intrinsics.h>
 
 static inline float my_sqrtf(float x)
 {

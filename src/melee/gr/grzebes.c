@@ -2285,17 +2285,17 @@ static inline void grZebes_SpawnBubbleLine(Vec3* base,
                                            f32* y_start, u8 arg1)
 {
     f32 x_start = grZebes_GetBubbleStartX(base);
-    f32 x_step;
+    f32 x_diff;
 
     *y_start = grZebes_GetBubbleStartY(base);
     {
-        f32 y_step;
+        f32 y_diff;
 
-        x_step = (base[3].x - x_start) / 6.0f;
-        y_step = (base[3].y - *y_start) / 6.0f;
+        x_diff = base[3].x - x_start;
+        y_diff = base[3].y - *y_start;
         for (*ip = 0; *ip < 7; (*ip)++) {
-            grZebes_801DAE70(*ip, arg1, x_step * (f32) *ip + x_start,
-                             y_step * (f32) *ip + *y_start,
+            grZebes_801DAE70(*ip, arg1, x_diff / 6.0f * (f32) *ip + x_start,
+                             y_diff / 6.0f * (f32) *ip + *y_start,
                              scales->values[*ip]);
         }
     }
@@ -2336,11 +2336,8 @@ void grZebes_801DC744(s32 arg0, u8 arg1)
         grZebes_801DAE70(9, arg1, (f32) (0.8 * x_range + x_base),
                          (f32) (0.2 * y_range + y_start), 1.1f);
 
-        {
-            f64 hi_x = 0.8 * x_range + x_base;
-            grZebes_801DAE70(10, arg1, (f32) hi_x,
-                             (f32) (0.8 * y_range + y_start), 1.1f);
-        }
+        grZebes_801DAE70(10, arg1, (f32) (0.8 * x_range + x_base),
+                         (f32) (0.8 * y_range + y_start), 1.1f);
 
         grZebes_801DAE70(11, arg1, (f32) (0.5 * x_range + x_base),
                          (f32) (0.2 * y_range + y_start), 1.2f);

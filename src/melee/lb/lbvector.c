@@ -125,7 +125,7 @@ float lbVector_AngleXY(Vec3* a, Vec3* b)
 /// Procedure, which is described in the following paper:
 /// https://math.berkeley.edu/~arash/54/notes/6_4.pdf
 
-static float sin(float angle)
+static float lbvector_sin(float angle)
 {
     if (angle > M_PI) {
         angle -= M_TAU;
@@ -137,7 +137,7 @@ static float sin(float angle)
            0.0056429998949170113f * angle * angle * angle * angle * angle;
 }
 
-static float cos(float angle)
+static float lbvector_cos(float angle)
 {
     angle += M_PI / 2;
     if (angle > M_PI) {
@@ -162,8 +162,8 @@ void lbVector_RotateAboutUnitAxis(Vec3* v, Vec3* axis, float angle)
     // z-axis by angle, and finally the first two rotations are reversed.
 
     float len_axis_yz = sqrtf(axis->y * axis->y + axis->z * axis->z);
-    float s = sin(angle);
-    float c = cos(angle);
+    float s = lbvector_sin(angle);
+    float c = lbvector_cos(angle);
     float unit_axis_yz_y;
     float unit_axis_yz_z;
     float x, y, z;
@@ -217,8 +217,8 @@ void lbVector_RotateAboutUnitAxis(Vec3* v, Vec3* axis, float angle)
 
 void lbVector_Rotate(Vec3* v, int axis, float angle)
 {
-    float s = sin(angle);
-    float c = cos(angle);
+    float s = lbvector_sin(angle);
+    float c = lbvector_cos(angle);
     float x;
     float y;
     float z;
@@ -451,12 +451,12 @@ Vec3* lbVector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
 /// there is no translational component.
 void lbVector_CreateEulerMatrix(Mtx m, Quaternion* angles)
 {
-    float sx = sin(angles->x);
-    float cx = cos(angles->x);
-    float sy = sin(angles->y);
-    float cy = cos(angles->y);
-    float sz = sin(angles->z);
-    float cz = cos(angles->z);
+    float sx = lbvector_sin(angles->x);
+    float cx = lbvector_cos(angles->x);
+    float sy = lbvector_sin(angles->y);
+    float cy = lbvector_cos(angles->y);
+    float sz = lbvector_sin(angles->z);
+    float cz = lbvector_cos(angles->z);
 
     float sxsy = sx * sy;
     float cxsy = cx * sy;

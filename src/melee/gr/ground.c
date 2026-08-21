@@ -120,7 +120,7 @@
 #include <baselib/wobj.h>
 
 /* 1BFFA8 */ static void Ground_OnStart(void);
-/* 1BFFAC */ static void Ground_801BFFAC(bool);
+/* 1BFFAC */ static void Ground_801BFFAC(int);
 /* 1C0478 */ static void mem_free(void* ptr);
 /* 1C0A70 */ static bool Ground_801C0A70(Vec3* pos);
 /* 1C0C2C */ static void Ground_801C0C2C(HSD_GObj*);
@@ -204,7 +204,7 @@ static ssize_t const Gr_CObj_Max = ARRAY_SIZE(stage_info.x694);
 
 static void Ground_OnStart(void) {}
 
-static void Ground_801BFFAC(bool arg0) {}
+static void Ground_801BFFAC(int arg0) {}
 
 void Ground_801BFFB0(void)
 {

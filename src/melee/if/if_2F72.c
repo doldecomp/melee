@@ -261,45 +261,49 @@ HSD_GObj* fn_802F77F8(HSD_GObj* gobj, u8 slot, u16 arg2)
 
 void fn_802F7994(HSD_GObj* gobj)
 {
-    HSD_JObj* jobj;
-    void** base = lbl_804A1340;
-    void** ptr;
-    void** entry;
     s32 slot;
+    void** entry;
+    HSD_JObj* jobj;
+    void** ptr;
+    void** ptr2;
+    void** ptr3;
+    void** ptr4;
+    void* t0;
+    void* t1;
+    void* t2;
+    void* t3;
+    void* t4;
+    void* t5;
+    void** base = lbl_804A1340;
     s32 idx;
-    void* cmp;
     f32 frame;
+    HSD_GObj* result;
+
+    PAD_STACK(8);
 
     jobj = gobj->hsd_obj;
     frame = lbGetJObjCurrFrame(jobj);
 
-    if (base[1] == gobj) {
+    ptr = base;
+    if ((t0 = ptr[1]) == gobj) {
         slot = 0;
     } else {
-        ptr = base;
-        ptr += 2;
-        cmp = ptr[1];
-        if (cmp == gobj) {
+        if ((t1 = (ptr += 2)[1]) == gobj) {
             slot = 1;
         } else {
-            cmp = ptr[3];
-            (void) cmp;
-            ptr += 2;
-            if (cmp == gobj) {
+            ptr2 = ptr + 2;
+            if ((t2 = ptr[3]) == gobj) {
                 slot = 2;
             } else {
-                cmp = ptr[3];
-                ptr += 2;
-                if (cmp == gobj) {
+                ptr3 = ptr2 + 2;
+                if ((t3 = ptr2[3]) == gobj) {
                     slot = 3;
                 } else {
-                    cmp = ptr[3];
-                    ptr += 2;
-                    if (cmp == gobj) {
+                    ptr4 = ptr3 + 2;
+                    if ((t4 = ptr3[3]) == gobj) {
                         slot = 4;
                     } else {
-                        cmp = ptr[3];
-                        if (cmp == gobj) {
+                        if ((t5 = ptr4[3]) == gobj) {
                             slot = 5;
                         } else {
                             slot = -1;
@@ -313,8 +317,9 @@ void fn_802F7994(HSD_GObj* gobj)
     if (slot >= 0) {
         if (frame > 12.0f && base[slot * 2 + 2] == NULL) {
             idx = (u8) slot << 1;
-            entry = base + idx;
-            base[idx + 2] = fn_802F77F8(*++entry, (u8) slot, 1);
+            entry = base + ((u8) slot << 1);
+            result = fn_802F77F8(*(entry += 2), (u8) slot, 1);
+            base[idx + 2] = result;
             if (base[idx + 2] != NULL) {
                 HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F7670, 0x11);
             }

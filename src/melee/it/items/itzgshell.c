@@ -1,6 +1,5 @@
 #include "itzgshell.h"
 
-#include "dolphin.h"
 #include "inlines.h"
 
 #include "baselib/random.h"
@@ -919,13 +918,13 @@ bool itZGShell_Logic11_ShieldBounced(Item_GObj* gobj)
     return false;
 }
 
-int fn_802DFE7C(Item_GObj* gobj)
+bool fn_802DFE7C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     it_80272940(gobj);
     it_802DDEB4(gobj);
     Item_8026AE84(ip, 0xF1, 0x7FU, 0x40U);
-    return 0;
+    return false;
 }
 
 void it_802DFED4(Item_GObj* gobj, Item_GObj* ref_gobj)

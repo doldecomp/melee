@@ -96,7 +96,7 @@ bool gm_801ADE1C(int arg0, int arg1, f32 arg2, f32 arg3)
     return true;
 }
 
-int gm_801AE050(int arg0, int arg1, int arg2, float arg3, float arg4)
+bool gm_801AE050(int arg0, int arg1, int arg2, float arg3, float arg4)
 {
     HSD_GObj* temp_r3_3;
     HSD_Text* temp_r3_4;
@@ -199,7 +199,7 @@ void gm_801AE544(int arg0, float val)
     }
 }
 
-void gm_801AE640(int arg0, int arg1)
+void gm_801AE640(int arg0, bool arg1)
 {
     struct unkd4d0* var_r31;
     struct unkd4d0_8* var_r30;
@@ -229,7 +229,7 @@ void gm_801AE640(int arg0, int arg1)
     }
 }
 
-void gm_801AE74C(int arg0, int arg1)
+void gm_801AE74C(int arg0, bool arg1)
 {
     struct unkd4d0* var_r31;
     struct unkd4d0_8* var_r30;

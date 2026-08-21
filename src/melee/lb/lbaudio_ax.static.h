@@ -89,14 +89,9 @@ static s32 lbl_804D642C;
 static int lbl_804D6430;
 static int lbl_804D6434;
 
-typedef struct lbAudioAx_PoolAlloc {
-    /* 0x0000 */ HSD_ObjAllocData alloc;
-    /* 0x002C */ s32 x2C[17];
-    /* 0x0070 */ s32 x70[17];
-} lbAudioAx_PoolAlloc;
-STATIC_ASSERT(sizeof(struct lbAudioAx_PoolAlloc) == 0xB4);
-
-static lbAudioAx_PoolAlloc lbl_80433710;
+static HSD_ObjAllocData lbl_80433710;
+static s32 lbl_8043373C[17];
+static s32 lbl_80433780[17];
 
 /* 4337C4 */ static int lbl_804337C4[0x38];
 /* 4338A4 */ static int lbl_804338A4[0x38];

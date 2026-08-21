@@ -174,7 +174,7 @@ s32 _tyFigupon_80314B54(void)
     s32 i;
     s32 count = 0;
 
-    for (i = 0; i < 0x125; i++) {
+    for (i = 0; i < TY_TROPHY_COUNT; i++) {
         if (Toy_80304CC8(i) != 0) {
             if (Toy_803048C0(i) != 0) {
                 s32 result = (s32) Toy_803060BC(i, 6);
@@ -781,6 +781,10 @@ s32 _tyFigupon_8031638C(s16 arg0)
 
 void _tyFigupon_80316420(s32 arg0)
 {
+/// @todo Fake signature
+#ifdef MUST_MATCH
+    void Toy_80308250();
+#endif
     s16 id = arg0;
     struct un_804D6EF4_t* ef4 = _tyFigupon_804D6EF4;
     TyFiguponData* data = _tyFigupon_804D6EF0;
@@ -815,8 +819,7 @@ void _tyFigupon_80316420(s32 arg0)
     Toy_SetUnlockState(arg0, 1);
     Toy_8031234C(1);
     lb_8001CE00();
-    Toy_80308328(id);
-    HSD_SisLib_803A6368(data->x14, count);
+    HSD_SisLib_803A6368(data->x14, Toy_80308328(arg0));
     Toy_803083D8(ef4->jobjs[0xC], id);
     if (((TyModeState*) Toy_804A284C)->x0 == 2) {
         if ((u32) data->x10 == 0) {
@@ -827,6 +830,7 @@ void _tyFigupon_80316420(s32 arg0)
         _tyFigupon_804D6EF0->x18->hidden = 0;
     }
 }
+
 static const Vec3 _tyFigupon_803B8968 = { 0.0f, 1.0f, 0.0f };
 
 void _tyFigupon_803168DC(HSD_GObj* arg0)

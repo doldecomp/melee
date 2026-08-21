@@ -151,23 +151,6 @@ bool ftCo_800C17CC(Fighter_GObj* gobj)
     return 0;
 }
 
-static inline float fake_sqrtf(float x)
-{
-    u32 pad = 0;
-    u32 pad2 = 0;
-    volatile float y;
-
-    if (x > 0.0f) {
-        double guess = __frsqrte((double) x); // returns an approximation to
-        guess = .5 * guess * (3.0 - guess * guess * x); // now have 12 sig bits
-        guess = .5 * guess * (3.0 - guess * guess * x); // now have 24 sig bits
-        guess = .5 * guess * (3.0 - guess * guess * x); // now have 32 sig bits
-        y = (float) (x * guess);
-        return y;
-    }
-    return x;
-}
-
 void ftCo_800C18A8(Fighter_GObj* gobj, ftCommon_MotionState msid, Vec3* normal,
                    Vec3* offset)
 {
@@ -178,6 +161,11 @@ void ftCo_800C18A8(Fighter_GObj* gobj, ftCommon_MotionState msid, Vec3* normal,
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
+
+    /// @todo fix stack padding
+    GET_FIGHTER(0);
+    GET_FIGHTER(0);
+
     vec0.x = fp->cur_pos.x + offset->x;
     vec0.y = fp->cur_pos.y + offset->y;
     vec0.z = fp->cur_pos.z + offset->z;
@@ -216,7 +204,7 @@ void ftCo_800C18A8(Fighter_GObj* gobj, ftCommon_MotionState msid, Vec3* normal,
     {
         float vel_x = fp->self_vel.x + fp->x8c_kb_vel.x;
         float vel_y = fp->self_vel.y + fp->x8c_kb_vel.y;
-        float mag = fake_sqrtf(SQ(vel_x) + SQ(vel_y));
+        float mag = sqrtf(SQ(vel_x) + SQ(vel_y));
         ftCo_80097630(fp, ftCo_DownBound_SfxIds, mag * fp->co_attrs.weight);
     }
 }

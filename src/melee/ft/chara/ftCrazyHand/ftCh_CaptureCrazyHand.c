@@ -14,7 +14,6 @@
 #include "ft/types.h"
 
 #include <dolphin/mtx.h>
-#include <MetroTRK/intrinsics.h>
 
 void fn_8015B548(HSD_GObj* gobj, HSD_GObj* gobj2)
 {

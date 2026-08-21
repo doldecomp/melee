@@ -71,7 +71,7 @@ bool ftCo_80094E54(Fighter* fp)
     return false;
 }
 
-int ftCo_80094EA4(HSD_GObj* gobj)
+bool ftCo_80094EA4(HSD_GObj* gobj)
 {
     float stick_angle;
     float var_f28;
@@ -156,7 +156,7 @@ int ftCo_80094EA4(HSD_GObj* gobj)
     return false;
 }
 
-int ftCo_8009515C(Fighter_GObj* gobj)
+bool ftCo_8009515C(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->item_gobj != NULL && fp->input.x668 & HSD_PAD_A) {
@@ -299,7 +299,7 @@ static void ftCo_80095700(Fighter_GObj* gobj, enum_t arg1)
     }
 }
 
-void ftCo_80095744(Fighter_GObj* gobj, int* arg1)
+void ftCo_80095744(Fighter_GObj* gobj, bool* arg1)
 {
     Vec3 vec;
     Fighter* fp = gobj->user_data;
@@ -313,10 +313,10 @@ void ftCo_80095744(Fighter_GObj* gobj, int* arg1)
             ftCo_Fall_Enter(gobj);
         }
         if (arg1 != NULL) {
-            *arg1 = 1;
+            *arg1 = true;
         }
     } else if (arg1 != NULL) {
-        *arg1 = 0;
+        *arg1 = false;
     }
     Item_8026ABD8(fp->item_gobj, &vec, 1);
 }

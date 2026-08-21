@@ -21,7 +21,6 @@
 
 #include <math.h>
 #include <dolphin/mtx.h>
-#include <MetroTRK/intrinsics.h>
 
 bool fn_8015B4EC(Vec3* vec);
 

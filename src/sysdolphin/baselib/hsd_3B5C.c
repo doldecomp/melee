@@ -2,7 +2,7 @@
 
 #include <placeholder.h>
 
-#include <Gecko_setjmp.h>
+#include <setjmp.h>
 
 extern u8 hsd_804D2E70[2084];
 extern u8* hsd_804D79B8;
