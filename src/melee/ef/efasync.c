@@ -1470,6 +1470,6 @@ void efAsync_Spawn(HSD_GObj* gobj, void* queue_head, u32 spawn_kind,
 
 void efAsync_QueueInit(void)
 {
-    HSD_ObjAllocInit(&efAsync_AllocData,
-                     sizeof(struct EF_QueuedEffect_ObjAlloc), 4U);
+    HSD_ObjAllocInit(&efAsync_AllocData, sizeof(EF_QueuedEffect),
+                     sizeof(EF_QueuedEffect*));
 }

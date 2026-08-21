@@ -144,15 +144,12 @@ static void fn_802270C4(int arg0)
 static void fn_8022713C(int arg0)
 {
     HSD_GObj* gobj;
-    struct {
-        u8 pad[0x10];
-        UnkFlagStruct x10;
-    }* thing;
+    Ground* ground;
 
     for (gobj = HSD_GObj_Entities->x14; gobj != NULL; gobj = gobj->next) {
-        thing = gobj->user_data;
-        if (thing != NULL) {
-            thing->x10.b7 = arg0;
+        ground = gobj->user_data;
+        if (ground != NULL) {
+            ground->x10_flags.b7 = arg0;
         }
     }
 }

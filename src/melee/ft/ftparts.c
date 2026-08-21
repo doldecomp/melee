@@ -25,8 +25,6 @@
 #include <sysdolphin/baselib/util.h>
 #include <melee/lb/lbrefract.h>
 
-#define MAX_FT_PARTS 140
-
 HSD_JObjInfo ftJObj = { ftParts_JObjInfoInit };
 HSD_JObjInfo ftIntpJObj = { ftParts_IntpJObjInfoInit };
 HSD_PObjInfo ftPObj = { ftParts_PObjInfoInit };

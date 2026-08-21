@@ -2511,10 +2511,7 @@ bool Ground_801C43C4(void* arg0)
 {
     UnkStageDat* tmp;
     int max;
-    struct {
-        void* unk0;
-        u8 flag : 1;
-    }* phi_r4;
+    struct GroundShadowEntry* phi_r4;
     int i;
     tmp = grDatFiles_GetArchive()->unk4;
     phi_r4 = tmp->unk20;

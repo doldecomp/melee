@@ -789,7 +789,7 @@ void ftCo_800D481C(Fighter_GObj* gobj, s32 arg1)
     }
 
     Camera_80030E44(4, &fp->cur_pos);
-    ft_800889F4(fp, (FtSFXArr*) fp->ft_data->x4C_sfx->x20);
+    ft_800889F4(fp, fp->ft_data->x4C_sfx->x20);
     ftCo_800D4E50(fp, &fp->cur_pos, 0, 1.5707964f);
     fp->accessory4_cb = fn_800D4DD4;
 }

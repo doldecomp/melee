@@ -560,7 +560,7 @@ struct ftCommonData {
 
 typedef struct _FtSFXArr {
     int num;
-    int* sfx_ids;
+    s32* sfx_ids;
 } FtSFXArr;
 
 struct FtSFX {
@@ -572,7 +572,7 @@ struct FtSFX {
     int x14;
     int x18;
     int x1C;
-    int x20;
+    FtSFXArr* x20;
     int x24;
     int x28;
     int x2C;
@@ -608,6 +608,11 @@ struct FtPartsDesc {
     /*  +4 */ void* (*vis_table)[4];
 };
 
+struct ftData_x20 {
+    /* +0 */ HSD_Joint** x0;
+    /* +4 */ f32 x8;
+};
+
 struct ftData {
     /*  +0 */ struct ftCo_DatAttrs* x0;
     /*  +4 */ void* ext_attr;
@@ -630,10 +635,7 @@ struct ftData {
         u8* x4; ///< an array of Fighter part indices
         HSD_AnimJoint** x8;
     }** x1C;
-    /* +20 */ struct {
-        /* +0 */ UNK_T x0;
-        /* +4 */ HSD_Joint* x8;
-    }* x20;
+    /* +20 */ struct ftData_x20* x20;
     /* +24 */ UNK_T x24;
     /* +28 */ WaitStruct* x28;
     /* +2C */ struct ftDynamics* x2C;

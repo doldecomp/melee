@@ -79,7 +79,7 @@ Vec2* ftCo_800DEEE8(Fighter* fp, Vec2* shift)
 {
     SmashAttr* temp_r6 = &fp->smash_attrs;
     if (temp_r6->state == SmashState_Charging || temp_r6->state == 4) {
-        Vec2* temp_r5 = &Fighter_804D6528->x0[temp_r6->x212C];
+        Vec2* temp_r5 = &Fighter_SmashChargeShakeTable->x0[temp_r6->x212C];
         shift->x = temp_r5->x;
         shift->y = temp_r5->y;
         return shift;
@@ -143,7 +143,7 @@ void ftCo_800DF0D0(Fighter_GObj* gobj)
             attr->state = SmashState_Charging;
             attr->x2124_frameSpeedMul = fp->frame_speed_mul;
             attr->x212C = 0;
-            attr->x212D = Fighter_804D6528->x4;
+            attr->x212D = Fighter_SmashChargeShakeTable->x4;
             attr->x2130_sfxBool = 0;
             ftAnim_SetAnimRate(gobj, 0.0f);
             if (attr->x2128 != 0x7B) {

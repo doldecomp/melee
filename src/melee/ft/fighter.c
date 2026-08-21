@@ -129,8 +129,8 @@ struct Fighter_804D6518_t* Fighter_804D6518 = NULL;
 struct Fighter_804D651C_t* Fighter_804D651C = NULL;
 struct Fighter_804D6520_t* Fighter_804D6520 = NULL;
 struct Fighter_804D6524_t* Fighter_804D6524 = NULL;
-struct Fighter_804D6528_t* Fighter_804D6528 = NULL;
-UNK_T Fighter_804D652C = NULL;
+struct Fighter_ShakeTable_t* Fighter_SmashChargeShakeTable = NULL;
+struct Fighter_ShakeTable_t* Fighter_GrabMashShake = NULL;
 Vec2** Fighter_804D6530 = NULL;
 UNK_T Fighter_804D6534 = NULL;
 struct Fighter_804D653C_t* Fighter_804D6538 = NULL;
@@ -158,10 +158,13 @@ void Fighter_800679B0(void)
     ftCo_800C8F6C(); ///< @todo &fighter_alloc_data+2, +3, +4 are not defined
                      ///< in the fighter.s
     // data section, how does this work?
-    HSD_ObjAllocInit(&fighter_parts_alloc_data, /*size*/ 0x8c0, /*align*/ 4);
-    HSD_ObjAllocInit(&fighter_dobj_list_alloc_data, /*size*/ 0x1f0,
+    HSD_ObjAllocInit(&fighter_parts_alloc_data,
+                     /*size*/ MAX_FT_PARTS * sizeof(struct FighterBone),
                      /*align*/ 4);
-    HSD_ObjAllocInit(&fighter_x2040_alloc_data, /*size*/ 0x80, /*align*/ 4);
+    HSD_ObjAllocInit(&fighter_dobj_list_alloc_data,
+                     /*size*/ (0x1f0 / 4) * sizeof(HSD_DObj*), /*align*/ 4);
+    HSD_ObjAllocInit(&fighter_x2040_alloc_data,
+                     /*size*/ (0x80 / 4) * sizeof(HSD_DObj*), /*align*/ 4);
 
     g_spawnNumCounter = 1;
 
@@ -197,8 +200,8 @@ void Fighter_LoadCommonData(void)
     Fighter_804D6538 = pData[7];
     Fighter_804D6534 = pData[8];
     Fighter_804D6530 = pData[9];
-    Fighter_804D652C = pData[10];
-    Fighter_804D6528 = pData[11];
+    Fighter_GrabMashShake = pData[10];
+    Fighter_SmashChargeShakeTable = pData[11];
     Fighter_804D6524 = pData[12];
     Fighter_804D6520 = pData[13];
     Fighter_804D651C = pData[14];
