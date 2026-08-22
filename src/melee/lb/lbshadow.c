@@ -324,24 +324,26 @@ void lbShadow_8000F38C(s32 arg0)
     s32 noLight;
     HSD_GObj* gobj;
     HSD_GObj* nextGx;
-    s32 hasObj;
     s32 i;
     HSD_Shadow* shadow2;
 
     PAD_STACK(0x10);
 
     noLight = 0;
+    nextGx = (HSD_GObj*) (arg0 - arg0);
 
-    for (gobj = HSD_GObj_Entities->fighters; gobj != NULL; gobj = gobj->next) {
+    for (gobj = gobj = HSD_GObj_Entities->fighters; gobj != NULL;
+         gobj = gobj->next)
+    {
         LbShadow* lbs = ftLib_800872B0(gobj);
         if (lbs != NULL) {
-            lbs->x0_b2 = false;
+            lbs->x0_b2 = (s32) nextGx;
         }
     }
 
     {
-        HSD_LObj* lobj = (HSD_LObj*) (arg0 - arg0);
-        HSD_LObj* fallback = lobj;
+        HSD_LObj* lobj = lobj = (HSD_LObj*) (arg0 - arg0);
+        HSD_LObj* fallback = fallback = lobj;
         {
             HSD_GObj* lgobj;
             for (lgobj = HSD_GObjGXLinkHead[4]; lgobj != NULL;) {
@@ -442,7 +444,7 @@ void lbShadow_8000F38C(s32 arg0)
             {
                 Fighter* fp2 = gobj->user_data;
                 if (fp2->x20A4.shadow != NULL) {
-                    hasObj = 0;
+                    lobj = NULL;
                     HSD_ShadowDeleteObject(fp2->x20A4.shadow, NULL);
 
                     if (fp2->x21FC_flag.b7) {
@@ -451,16 +453,16 @@ void lbShadow_8000F38C(s32 arg0)
                         {
                             HSD_JObj* jobj = (HSD_JObj*) gobj->hsd_obj;
                             HSD_ShadowAddObject(fp2->x20A4.shadow, jobj);
-                            hasObj = 1;
+                            lobj = (HSD_LObj*) 1;
                         }
                         if (fp2->x20A0_accessory != NULL) {
                             HSD_ShadowAddObject(fp2->x20A4.shadow,
                                                 fp2->x20A0_accessory);
-                            hasObj = 1;
+                            lobj = (HSD_LObj*) 1;
                         }
                     }
 
-                    if (hasObj) {
+                    if ((s32) lobj) {
                         fp2->x20A4.x0_b3 = false;
                     } else {
                         fp2->x20A4.x0_b3 = true;
