@@ -3,12 +3,6 @@ run-name: Build Melee & publish GitHub Pages
 
 on: [push, pull_request]
 
-env:
-  UPSTREAM_ORG: doldecomp
-  UPSTREAM_REPO: melee
-  UPSTREAM_FULL: doldecomp/melee
-  UPSTREAM_NIX: doldecomp-melee
-
 permissions:
   contents: read
   id-token: write
@@ -20,7 +14,7 @@ jobs:
     name: Ninja
     runs-on: ubuntu-latest
     if: github.repository == env.UPSTREAM_FULL
-    container: ghcr.io/${{env.UPSTREAM_FULL}}-build:main
+    container: ghcr.io/doldecomp/melee-build:main
     strategy:
       fail-fast: false
       matrix:
@@ -187,7 +181,7 @@ jobs:
       - uses: cachix/install-nix-action@v31
       - uses: cachix/cachix-action@v17
         with:
-          name: ${{env.UPSTREAM_NIX}}
+          name: doldecomp-melee
 
       - name: Checkout Melee repository
         uses: actions/checkout@v6
@@ -231,7 +225,7 @@ jobs:
     - uses: cachix/install-nix-action@v31
     - uses: cachix/cachix-action@v17
       with:
-        name: ${{env.UPSTREAM_NIX}}
+        name: doldecomp-melee
     - run: nix build .#melee-gcc-native -L
 
   build-nix:
@@ -240,7 +234,7 @@ jobs:
     if: github.repository == env.UPSTREAM_FULL
     env:
       REGISTRY: ghcr.io
-      IMAGE: ${{env.UPSTREAM_ORG}}/melee-build:main
+      IMAGE: doldecomp/melee-build:main
     steps:
     - uses: actions/checkout@v6
       with:
@@ -261,9 +255,9 @@ jobs:
         nix-store --add-fixed sha256 orig/GALE01/sys/main.dol
     - uses: cachix/cachix-action@v17
       with:
-        name: ${{env.UPSTREAM_NIX}}
+        name: doldecomp-melee
     - run: |
-        CACHIX_AUTH_TOKEN=${{secrets.CACHIX_AUTH_TOKEN}} cachix watch-exec ${{env.UPSTREAM_NIX}} -- nix develop
+        CACHIX_AUTH_TOKEN=${{secrets.CACHIX_AUTH_TOKEN}} cachix watch-exec doldecomp-melee -- nix develop
     - run: nix flake check
     - run: nix develop --command ninja
 
