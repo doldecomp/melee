@@ -12,10 +12,6 @@
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/synth.h>
 
-typedef struct {
-    s32 v[8];
-} RevHiDims;
-
 void* AXDriverAlloc(size_t size)
 {
     void* ptr = &AXDriver_804D77D4[axfxallocsize];
@@ -1033,16 +1029,7 @@ int AXDriverSetupAux(int channel, AXDriverAuxType type, void* param)
 
 s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param)
 {
-    static const RevHiDims AXDriver_803B95F8 = {
-        { 0x6FD, 0x7CF, 0x91D, 0x1B1, 0x95, 0x2F, 0x49, 0x43 },
-    };
-    static const s32 AXDriver_803B9618[] = {
-        0x6FD,
-        0x7CF,
-        0x1B1,
-        0x95,
-    };
-    s32 result;
+    s32 result = 0;
     int i;
     int k;
 
@@ -1050,24 +1037,19 @@ s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param)
         return 0;
     }
 
-    result = 0;
     switch (type) {
     case AXDRIVER_AUX_OFF:
         break;
 
     case AXDRIVER_AUX_REVERB_HI: {
-        RevHiDims tmp;
-
-        tmp = AXDriver_803B95F8;
+        s32 dims[8] = { 0x6FD, 0x7CF, 0x91D, 0x1B1, 0x95, 0x2F, 0x49, 0x43 };
 
         for (k = 0; k < 3; k++) {
             for (i = 0; i < 3; i++) {
-                result += (tmp.v[i] + 2) * 4;
+                result += (dims[i] + 2) * 4;
+                result += (dims[i + 3] + 2) * 4;
             }
-            for (i = 0; i < 3; i++) {
-                result += (tmp.v[i + 3] + 2) * 4;
-            }
-            result += (tmp.v[k + 5] + 2) * 4;
+            result += (dims[k + 5] + 2) * 4;
             result += ((s32) (32000.0F *
                               ((struct AXFX_REVERBHI*) param)->preDelay)) *
                       4;
@@ -1075,19 +1057,20 @@ s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param)
         break;
     }
 
-    case AXDRIVER_AUX_REVERB_STD:
+    case AXDRIVER_AUX_REVERB_STD: {
+        s32 dims[4] = { 0x6FD, 0x7CF, 0x1B1, 0x95 };
+
         for (k = 0; k < 3; k++) {
             for (i = 0; i < 2; i++) {
-                result += (AXDriver_803B9618[i] + 2) * 4;
-            }
-            for (i = 0; i < 2; i++) {
-                result += (AXDriver_803B9618[i + 2] + 2) * 4;
+                result += (dims[i] + 2) * 4;
+                result += (dims[i + 2] + 2) * 4;
             }
             result += ((s32) (32000.0F *
                               ((struct AXFX_REVERBSTD*) param)->preDelay)) *
                       4;
         }
         break;
+    }
 
     case AXDRIVER_AUX_CHORUS:
         result = 0x1680;
@@ -1095,30 +1078,16 @@ s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param)
 
     case AXDRIVER_AUX_DELAY: {
         struct AXFX_DELAY* delay = (struct AXFX_DELAY*) param;
-        s32 ch0, ch1, ch2;
 
-        ch2 = ((delay->delay[2] - 5) * 32 + 159) / 160 * 640;
-        ch1 = ((delay->delay[1] - 5) * 32 + 159) / 160 * 640;
-        ch0 = ((delay->delay[0] - 5) * 32 + 159) / 160 * 640;
-        ch0 += ch1;
-        result = ch0 + ch2;
+        for (i = 0; i < 3; i++) {
+            result += ((delay->delay[i] - 5) * 32 + 159) / 160 * 640;
+        }
         break;
     }
     }
 
     return result;
 }
-
-const RevHiDims AXDriver_803B95F8 = {
-    { 0x6FD, 0x7CF, 0x91D, 0x1B1, 0x95, 0x2F, 0x49, 0x43 },
-};
-
-const s32 AXDriver_803B9618[] = {
-    0x6FD,
-    0x7CF,
-    0x1B1,
-    0x95,
-};
 
 bool AXDriver_8038E30C(s32 channel, s32 type, void* param, u8* heap,
                        u32 heap_size)
