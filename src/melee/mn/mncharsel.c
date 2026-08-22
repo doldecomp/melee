@@ -4336,8 +4336,11 @@ s32 mnCharSel_802640A0(void)
                                     HSD_AObjReqAnim, AOBJ_ARG_AF, 2.0);
                 }
                 HSD_JObjAnimAll(spA4);
-                HSD_ForeachAnim(spA4, JOBJ_TYPE, JOBJ_MASK, HSD_AObjStopAnim,
-                                AOBJ_ARG_AOV, 0, 0);
+                {
+                    HSD_JObj* anim_jobj = spA4;
+                    HSD_ForeachAnim(anim_jobj, JOBJ_TYPE, JOBJ_MASK,
+                                    HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+                }
                 sp108 = spA4;
                 lb_8000B1CC(sp108, NULL, &spEC);
                 text = td->text;
@@ -4361,8 +4364,11 @@ s32 mnCharSel_802640A0(void)
                                 HSD_AObjReqAnim, AOBJ_ARG_AF, 2.0);
             }
             HSD_JObjAnimAll(tag_name_jobj);
-            HSD_ForeachAnim(tag_name_jobj, JOBJ_TYPE, JOBJ_MASK,
-                            HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+            {
+                HSD_JObj* anim_jobj = tag_name_jobj;
+                HSD_ForeachAnim(anim_jobj, JOBJ_TYPE, JOBJ_MASK,
+                                HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+            }
             sp108 = tag_name_jobj;
             lb_8000B1CC(sp108, NULL, &spEC);
             {
