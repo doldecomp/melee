@@ -3,10 +3,8 @@
 #include "stdio.h"
 
 #ifdef __MWERKS__
-#ifdef MUST_MATCH
 #pragma push
 #pragma ANSI_strict off
-#endif
 #endif
 
 static unsigned int K1 = 0x80808080L; // = K1
@@ -320,7 +318,5 @@ int __StringRead(void* isc, int ch, int Action)
 }
 
 #ifdef __MWERKS__
-#ifdef MUST_MATCH
 #pragma pop
-#endif
 #endif
