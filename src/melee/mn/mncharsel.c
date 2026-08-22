@@ -4273,59 +4273,61 @@ s32 mnCharSel_802640A0(void)
 
     for (i = 0; i < num_players; i++) {
         {
-            int player;
             HSD_GObj* model_gobj = GObj_Create(4, 5, 0x80);
-            struct CSSCharModel* model;
-            model = (jobj = HSD_JObjLoadJoint(ANIM[2].joint),
-                     HSD_MemAlloc(sizeof(*model)));
-            HSD_GObjObject_80390A70(model_gobj, HSD_GObj_804D7849, jobj);
-            GObj_InitUserData(model_gobj, 4, HSD_Free, model);
-            GObj_SetupGXLink(model_gobj, HSD_GObj_JObjCallback, 2, 0x80);
-            HSD_GObj_SetupProc(model_gobj, fn_80262648, 2);
-            HSD_JObjAddAnimAll(jobj, ANIM[2].anim, ANIM[2].matanim,
-                               ANIM[2].shapeanim);
-            HSD_JObjReqAnimAll(jobj, 0.0f);
+            jobj = HSD_JObjLoadJoint(ANIM[2].joint);
             {
-                HSD_JObj* anim_jobj = jobj;
-                HSD_ForeachAnim(anim_jobj, JOBJ_TYPE, TOBJ_MASK,
-                                HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
-            }
-            mnCharSel_804A0BD0[i] = model;
-            model->gobj = model_gobj;
-            model->x4 = i;
-            model->x5 = 0;
-            model->x6 = 0xFF;
-            model->x7 = 0;
-            if (mnCharSel_804D6CF5 == 1) {
-                if (i != 0) {
-                    player = mnCharSel_804D6CF1;
-                } else {
-                    player = mnCharSel_804D6CF0;
-                }
-            } else {
-                player = i;
-            }
-            for (found = 0; found < 0x19; found++) {
-                u8 ck = mnCharSel_804D6CB0->data.data.players[player].c_kind;
-                if ((s8) ck == icons[found].char_kind &&
-                    gm_IsCKindUnlocked(ck) != 0)
+                int player;
+                struct CSSCharModel* model = HSD_MemAlloc(sizeof(*model));
+                HSD_GObjObject_80390A70(model_gobj, HSD_GObj_804D7849, jobj);
+                GObj_InitUserData(model_gobj, 4, HSD_Free, model);
+                GObj_SetupGXLink(model_gobj, HSD_GObj_JObjCallback, 2, 0x80);
+                HSD_GObj_SetupProc(model_gobj, fn_80262648, 2);
+                HSD_JObjAddAnimAll(jobj, ANIM[2].anim, ANIM[2].matanim,
+                                   ANIM[2].shapeanim);
+                HSD_JObjReqAnimAll(jobj, 0.0f);
                 {
-                    break;
+                    HSD_JObj* anim_jobj = jobj;
+                    HSD_ForeachAnim(anim_jobj, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
                 }
-            }
-            if (found >= 0x19) {
-                u8* slot_type;
-                mnCharSel_804D6CB0->data.data.players[player].c_kind =
-                    CKIND_PLAYABLE_COUNT;
-                slot_type =
-                    &mnCharSel_804D6CB0->data.data.players[player].slot_type;
-                if (*slot_type == 1) {
-                    *slot_type = 3;
+                mnCharSel_804A0BD0[i] = model;
+                model->gobj = model_gobj;
+                model->x4 = i;
+                model->x5 = 0;
+                model->x6 = 0xFF;
+                model->x7 = 0;
+                if (mnCharSel_804D6CF5 == 1) {
+                    if (i != 0) {
+                        player = mnCharSel_804D6CF1;
+                    } else {
+                        player = mnCharSel_804D6CF0;
+                    }
+                } else {
+                    player = i;
                 }
+                for (found = 0; found < 0x19; found++) {
+                    u8 ck =
+                        mnCharSel_804D6CB0->data.data.players[player].c_kind;
+                    if ((s8) ck == icons[found].char_kind &&
+                        gm_IsCKindUnlocked(ck) != 0)
+                    {
+                        break;
+                    }
+                }
+                if (found >= 0x19) {
+                    u8* slot_type;
+                    mnCharSel_804D6CB0->data.data.players[player].c_kind =
+                        CKIND_PLAYABLE_COUNT;
+                    slot_type = &mnCharSel_804D6CB0->data.data.players[player]
+                                     .slot_type;
+                    if (*slot_type == 1) {
+                        *slot_type = 3;
+                    }
+                }
+                mnCharSel_803F0DFC.doors[i].sel_icon = found;
+                model->x8 = model->x10 = 3.4f + icons[found].bound_l;
+                model->xC = model->x14 = -3.0f + icons[found].bound_u;
             }
-            mnCharSel_803F0DFC.doors[i].sel_icon = found;
-            model->x8 = model->x10 = 3.4f + icons[found].bound_l;
-            model->xC = model->x14 = -3.0f + icons[found].bound_u;
         }
     }
 
