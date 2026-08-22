@@ -4278,8 +4278,8 @@ s32 mnCharSel_802640A0(void)
                     player = i;
                 }
                 for (found = 0; found < 0x19; found++) {
-                    if ((s8) mnCharSel_804D6CB0->data.data.players[player]
-                                .c_kind == icons[found].char_kind &&
+                    if (mnCharSel_804D6CB0->data.data.players[player].c_kind ==
+                            icons[found].char_kind &&
                         gm_IsCKindUnlocked(
                             mnCharSel_804D6CB0->data.data.players[player]
                                 .c_kind) != 0)
