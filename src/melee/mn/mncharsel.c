@@ -2147,6 +2147,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
     HSD_JObj* sp50;
     s32 cpu_door;
     u32 a_press;
+    UNUSED u32 scan_home;
     CSSTagData* current_tag;
     HSD_JObj* state_jobj;
     HSD_JObj* color_jobj;
@@ -2686,7 +2687,6 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                 0)
                             {
                                 int k;
-                                UNUSED u32 scan_home;
                                 for (k = 0; k < (s32) mnCharSel_804D6CF5; k++)
                                 {
                                     if (isDuplicateCostumeCached(k)) {
