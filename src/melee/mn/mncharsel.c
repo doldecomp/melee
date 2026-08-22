@@ -4256,8 +4256,11 @@ s32 mnCharSel_802640A0(void)
         HSD_JObjAddAnimAll(jobj, ANIM[2].anim, ANIM[2].matanim,
                            ANIM[2].shapeanim);
         HSD_JObjReqAnimAll(jobj, 0.0f);
-        HSD_ForeachAnim(jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
-                        AOBJ_ARG_AOV, 0, 0);
+        {
+            HSD_JObj* anim_jobj = jobj;
+            HSD_ForeachAnim(anim_jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
+                            AOBJ_ARG_AOV, 0, 0);
+        }
         mnCharSel_804A0BD0[i] = model;
         model->gobj = gobj;
         model->x4 = i;
