@@ -189,9 +189,14 @@ void mnCharSel_8025BD30(void)
     (void) "99";
 }
 
+static inline f32 loadStickValue(s8* value)
+{
+    return (f32) *value;
+}
+
 static inline void getStickDelta(int port, f32* dx, f32* dy)
 {
-    f32 stick_x = (f32) HSD_PadCopyStatus[(u8) port].stickX;
+    f32 stick_x = loadStickValue(&HSD_PadCopyStatus[(u8) port].stickX);
     f32 stick_y = (f32) HSD_PadCopyStatus[(u8) port].stickY;
     f32 mag_sq = (stick_x * stick_x) + (stick_y * stick_y);
     if (mag_sq < 200.0f) {
