@@ -804,6 +804,11 @@ static inline bool isDuplicateRandomCostume(CSSDoor* other_door, int door,
     return false;
 }
 
+static inline CSSData* loadCSSValue(CSSData** css)
+{
+    return *css;
+}
+
 static inline bool equalU8(u8 lhs, u8 rhs)
 {
     return lhs == rhs;
@@ -2672,13 +2677,19 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                 0)
                             {
                                 int k;
+                                CSSData* scan_css;
                                 for (k = 0; k < (s32) mnCharSel_804D6CF5; k++)
                                 {
                                     if (isDuplicateCostumeCached(k)) {
                                         mnCharSel_803F0DFC.doors[k].costume =
                                             0;
+                                        scan_css =
+                                            loadCSSValue(&mnCharSel_804D6CB0);
                                         for (;;) {
-                                            if (!isDuplicateCostume(k)) {
+                                            if (!isDuplicateCostumeWith(
+                                                    k, scan_css,
+                                                    mnCharSel_804D6CF5))
+                                            {
                                                 break;
                                             }
                                             mnCharSel_803F0DFC.doors[k]
