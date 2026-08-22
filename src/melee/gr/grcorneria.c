@@ -2562,6 +2562,7 @@ void grCorneria_801E25C4(HSD_GObj* gobj, struct grSmashTaunt_GroundVars* gv,
 }
 
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
 void grCorneria_801E2738(HSD_GObj* gobj, void* ptr, u32 idx1, u32 idx2)
@@ -2571,7 +2572,7 @@ void grCorneria_801E2738(HSD_GObj* gobj, void* ptr, u32 idx1, u32 idx2)
                         grCn_803E2204[idx1][idx2].data[2]);
 }
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 const GXColor grCn_804DB24C = { 0xFF, 0xFF, 0xFF, 0xFF };

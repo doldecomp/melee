@@ -107,9 +107,9 @@ f32 cosf(f32 x)
 }
 
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
-
 f32 sin__Ff(f32 x)
 {
     return sinf(x);
@@ -119,9 +119,8 @@ f32 cos__Ff(f32 x)
 {
     return cosf(x);
 }
-
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 f32 tanf(f32 x)

@@ -7,20 +7,18 @@
 #include "ef/efasync.h"
 #include "gr/grzakogenerator.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
 #include "it/itcoll.h"
 #include "it/item.h"
 #include "it/items/itnokonoko.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 #include "it/itzako.h"
 #include "lb/lb_00B0.h"
 #include "mp/mpcoll.h"
-
-#include <math.h>
 
 typedef struct itGShell_Attrs {
     float x0;
@@ -399,6 +397,7 @@ void itZGShell_Logic11_Dropped(Item_GObj* gobj)
 }
 
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
 bool itZrshell_UnkMotion4_Anim(Item_GObj* gobj)
@@ -407,7 +406,7 @@ bool itZrshell_UnkMotion4_Anim(Item_GObj* gobj)
     return false;
 }
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 void itZrshell_UnkMotion4_Phys(Item_GObj* gobj)
@@ -573,6 +572,7 @@ void it_802DEC80(Item_GObj* gobj)
 }
 
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
 bool itZrshell_UnkMotion8_Anim(Item_GObj* gobj)
@@ -592,7 +592,7 @@ bool itZrshell_UnkMotion8_Anim(Item_GObj* gobj)
     return false;
 }
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 void itZrshell_UnkMotion8_Phys(Item_GObj* gobj)

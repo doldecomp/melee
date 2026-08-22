@@ -21,10 +21,8 @@
 #include "ftKirby/ftkirbyspecialdonkey.h"
 #include "lb/lb_00B0.h"
 
-#include <math.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
-#include <baselib/random.h>
 
 static void fn_8010AA64(Fighter_GObj* gobj)
 {
@@ -112,6 +110,7 @@ void ftKb_SpecialNYs_8010AC78(Fighter_GObj* victim, Fighter_GObj* gobj)
 }
 
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
 void ftCo_KirbyYoshiEgg_Anim(Fighter_GObj* gobj)
@@ -148,7 +147,7 @@ void ftCo_KirbyYoshiEgg_Anim(Fighter_GObj* gobj)
     }
 }
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 void ftCo_KirbyYoshiEgg_IASA(Fighter_GObj* gobj) {}
@@ -185,9 +184,6 @@ void fn_8010B148(Fighter_GObj* gobj)
     ftCommon_8007D5D4(GET_FIGHTER(gobj));
 }
 
-#ifdef MUST_MATCH
-#pragma dont_inline on
-#endif
 void fn_8010B16C(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -197,9 +193,6 @@ void fn_8010B16C(Fighter_GObj* gobj)
     }
     fp->x1828 = 4;
 }
-#ifdef MUST_MATCH
-#pragma dont_inline reset
-#endif
 
 void fn_8010B1D4(Fighter_GObj* gobj)
 {

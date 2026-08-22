@@ -685,7 +685,9 @@ void fn_80185408(int x, float arg8, float arg9, float argA, float argB)
 
 extern float MSL_TrigF_80400770[];
 extern float MSL_TrigF_80400774[];
+
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
 double fn_801855BC(double arg8)
@@ -715,7 +717,7 @@ double fn_801855BC(double arg8)
     return MSL_TrigF_80400774[0];
 }
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 void fn_8018564C(HSD_GObj* gobj)

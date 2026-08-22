@@ -92,6 +92,7 @@ static inline struct MnItemSwTable* mnItemSw_GetTable(void)
 }
 
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
 s32 mnItemSw_80233A98(s32 arg0)
@@ -113,7 +114,7 @@ s32 mnItemSw_80233A98(s32 arg0)
     }
 }
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 void mnItemSw_80233B68(MnItemSwData* arg0, u32 arg1)

@@ -80,6 +80,7 @@ extern StaticModelDesc MenMainCursorSs_Top;
 /// Pragma prevents inlining - function is called from fn_80235F80, not
 /// inlined.
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
 static void mnStageSw_8023593C(HSD_GObj* gobj)
@@ -98,7 +99,7 @@ static void mnStageSw_8023593C(HSD_GObj* gobj)
     }
 }
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 static void mnStageSw_802359C8(MnStageSwData* data)

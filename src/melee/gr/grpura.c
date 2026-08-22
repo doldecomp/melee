@@ -926,6 +926,7 @@ void grPura_80213128(HSD_DObj* dobj)
 }
 
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
 void grPura_80213224(HSD_DObj* dobj)
@@ -935,7 +936,7 @@ void grPura_80213224(HSD_DObj* dobj)
     }
 }
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 void grPura_80213250(HSD_JObj* jobj)

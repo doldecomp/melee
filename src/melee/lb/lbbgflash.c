@@ -998,9 +998,9 @@ typedef struct BgFlashUserData {
 } BgFlashUserData;
 
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
-
 void fn_80021B04(HSD_GObj* gobj)
 {
     BgFlashUserData* data = gobj->user_data;
@@ -1026,9 +1026,8 @@ void fn_80021B04(HSD_GObj* gobj)
         fn_800208B0(0);
     }
 }
-
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd, int arg2) {}

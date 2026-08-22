@@ -465,6 +465,7 @@ void gm_801B1834(GameScene* arg0)
 }
 
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
 void gm_801B18D4(GameScene* arg0)
@@ -483,7 +484,7 @@ void gm_801B18D4(GameScene* arg0)
     gm_801B0474(smd, &((MatchExitInfo*) (src + 1))->match_end);
 }
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 void gm_801B1A2C(GameScene* arg0)
@@ -521,6 +522,7 @@ void gm_801B1AD4(GameScene* arg0)
 }
 
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
 void gm_801B1B74(GameScene* arg0)
@@ -546,7 +548,7 @@ void gm_801B1B74(GameScene* arg0)
     gm_804D68C1 = lbTime_8000AF74((u32) gm_804D68C1, 1);
 }
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 static void gm_801B07E8_layer(CSSData* css_data, s8* c_kind, s8* stocks,

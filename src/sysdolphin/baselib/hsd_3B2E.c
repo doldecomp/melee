@@ -8,9 +8,9 @@ static s32 lbl_80430BD0[13] = {
 };
 
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
-
 static int fn_803B2E04(u8 prev, s32 cur)
 {
     u32 mod7;
@@ -59,9 +59,8 @@ static int fn_803B2E04(u8 prev, s32 cur)
     }
     return val;
 }
-
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 int hsd_803B2FA0(u8* data, int len)
@@ -84,9 +83,9 @@ int hsd_803B2FA0(u8* data, int len)
 }
 
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
-
 static int fn_803B302C(u32 prev, u32 cur)
 {
     u32 mod7;
@@ -139,9 +138,8 @@ static int fn_803B302C(u32 prev, u32 cur)
     cur ^= prev;
     return cur;
 }
-
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 int hsd_803B31CC(u8* data, int len)

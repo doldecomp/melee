@@ -959,7 +959,6 @@ int lb_8001BE30(int chan, const char* filename, UNK_T file_entries,
     return lb_80019CB0(0x10);
 }
 #ifdef MUST_MATCH
-#pragma dont_inline reset
 #pragma pop
 #endif
 

@@ -8,8 +8,9 @@
 #include <melee/gm/types.h>
 #include <melee/lb/lblanguage.h>
 
-/// @todo :: figure out how to force the other functions not to inline this
+/// @todo Figure out how to force the other functions not to inline this
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
 s32 fn_8017AD04(s32 arg0, s32 arg1)
@@ -26,7 +27,7 @@ s32 fn_8017AD04(s32 arg0, s32 arg1)
     return arg0;
 }
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 s32 fn_8017AD28(s32 arg0)

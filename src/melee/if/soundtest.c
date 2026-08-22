@@ -381,6 +381,7 @@ bool fn_802FFCC8(void)
 }
 
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
 void un_802FFCD0(int count, void* data)
@@ -392,7 +393,7 @@ void un_802FFCD0(int count, void* data)
     }
 }
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 void un_802FFD94(int arg0, void* arg1, void* arg2)
@@ -674,13 +675,7 @@ int un_803004B4(int arg0)
     un_802FFD94(arg0, &un_803FA8E8, fn_802FFE6C);
     return 0;
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
-#ifdef MUST_MATCH
-#pragma dont_inline on
-#endif
 int un_803004E8(int arg0)
 {
     un_802FFD94(arg0, &un_803FAA44, fn_802FFE6C);
@@ -753,7 +748,7 @@ int un_80300724(int arg0)
     return 0;
 }
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 void un_80300758(int arg0)
@@ -771,6 +766,7 @@ void un_80300790(int arg0)
 }
 
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
 int un_803007C8(int arg0)
@@ -821,7 +817,7 @@ int un_80300934(int arg0)
     return 0;
 }
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 bool un_80300968(bool update_scene)
@@ -1007,6 +1003,7 @@ void fn_80300CC8(int arg0)
 }
 
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
 int un_80300D78(int arg0)
@@ -1022,7 +1019,7 @@ int un_80300D78(int arg0)
     return 0;
 }
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 void fn_80300DE0(int arg0)
@@ -1045,6 +1042,7 @@ void fn_80300DE0(int arg0)
 }
 
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
 int un_80300E74(int arg0)
@@ -1057,7 +1055,7 @@ int un_80300E74(int arg0)
     return 0;
 }
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 void fn_80300ED0(int arg0)
@@ -1077,6 +1075,7 @@ void fn_80300ED0(int arg0)
 }
 
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
 int un_80300F3C(int arg0)
@@ -1089,7 +1088,7 @@ int un_80300F3C(int arg0)
     return 0;
 }
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 s32 un_80300F98(s32 arg0)
@@ -1215,6 +1214,7 @@ void fn_803011EC(int arg0)
 }
 
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
 int un_80301280(int arg0)
@@ -1235,7 +1235,7 @@ int un_803012D4(int arg0)
     return 0;
 }
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 bool un_80301328(bool update_scene)
@@ -1274,6 +1274,7 @@ bool un_803013B0(bool update_scene)
 }
 
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
 int un_803013EC(int arg0)
@@ -1288,7 +1289,7 @@ int un_80301420(int arg0)
     return 0;
 }
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 bool un_80301454(bool update_scene)

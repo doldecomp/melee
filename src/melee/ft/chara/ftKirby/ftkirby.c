@@ -34,7 +34,6 @@
 #include "lb/lbdvd.h"
 #include "pl/player.h"
 
-#include <math.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/id.h>
@@ -4074,9 +4073,6 @@ void ftKb_SpecialN_800F1BAC(Fighter_GObj* gobj, s32 kind, bool arg2)
     fp->death1_cb = ftKb_Init_800EE7B8;
 }
 
-#ifdef MUST_MATCH
-#pragma force_active on
-#endif
 bool fn_800F1CA0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -4091,9 +4087,6 @@ bool fn_800F1CA0(HSD_GObj* gobj)
         return false;
     }
 }
-#ifdef MUST_MATCH
-#pragma force_active reset
-#endif
 
 s32 ftKb_SpecialN_800F1CD8(HSD_GObj* gobj)
 {

@@ -39,7 +39,6 @@
 #include "pl/player.h"
 
 #include <math.h>
-#include <string.h>
 #include <baselib/controller.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
@@ -748,6 +747,7 @@ void Camera_80029AAC(CameraBounds* bounds, CameraTransformState* transform,
 }
 
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
 void Camera_80029BC4(CameraBounds* bounds, CameraTransformState* transform)
@@ -790,7 +790,7 @@ void Camera_80029C88(CameraBounds* unused, CameraTransformState* transform,
     transform->position.z += dist.z * scale;
 }
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 static inline f32 get_y_bias(f32 spread)

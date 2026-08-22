@@ -1,6 +1,5 @@
 #include "ftCh_CaptureDamageCrazyHand.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "baselib/forward.h"
@@ -12,8 +11,6 @@
 #include "ft/types.h"
 #include "ftCrazyHand/ftCh_CaptureWaitCrazyHand.h"
 #include "ftCrazyHand/ftCh_FingerBeam.h"
-
-#include <dolphin/mtx.h>
 
 void ftCh_GrabUnk1_8015B670(HSD_GObj* gobj)
 {
@@ -27,6 +24,7 @@ void ftCh_GrabUnk1_8015B670(HSD_GObj* gobj)
 }
 
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
 void ftCo_CaptureDamageCrazyHand_Anim(HSD_GObj* gobj)
@@ -39,7 +37,7 @@ void ftCo_CaptureDamageCrazyHand_Anim(HSD_GObj* gobj)
     }
 }
 #ifdef MUST_MATCH
-#pragma dont_inline reset
+#pragma pop
 #endif
 
 void ftCo_CaptureDamageCrazyHand_IASA(HSD_GObj* gobj) {}
