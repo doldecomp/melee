@@ -2691,8 +2691,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                 }
 
                 if (cursor->xC < -25.5f && cursor->x10 > 22.0f) {
-                    u8 mtype = mnCharSel_804D6CB0->match_type;
-                    switch ((s32) mtype) {
+                    switch ((s32) mnCharSel_804D6CB0->match_type) {
                     case VS_MELEE:
                     case VS_CAMERA:
                     case VS_STAMINA:
