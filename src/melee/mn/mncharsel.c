@@ -873,7 +873,8 @@ static inline bool isDuplicateCostumeExact(int door)
     if (mnCharSel_804D6CB0->match_type == TRAINING_MODE) {
         num_doors = 2;
     } else {
-        num_doors = mnCharSel_804D6CF5;
+        u8 door_count = mnCharSel_804D6CF5;
+        num_doors = door_count;
     }
 
     base_door = &mnCharSel_803F0DFC.doors[door];
