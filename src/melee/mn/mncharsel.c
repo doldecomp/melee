@@ -4497,7 +4497,10 @@ s32 mnCharSel_802640A0(void)
                 mnCharSel_804D6CF8 - 1;
             mnCharSel_804D6CF8 = td->next_tag;
         }
-        if (mnCharSel_804D6CB0->data.data.players[player].xA != 0x78) {
+        if (((u8*)
+                 mnCharSel_804D6CB0)[0x7A + player * sizeof(PlayerInitData)] !=
+            0x78)
+        {
             td->use_tag = 1;
             HSD_SisLib_803A70A0(
                 td->text, 0,
