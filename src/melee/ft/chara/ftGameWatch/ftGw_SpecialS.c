@@ -148,12 +148,9 @@ int ftGw_SpecialS_GetRandomInt(HSD_GObj* gobj)
     {
         int result;
 #ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wsometimes-uninitialized"
 #endif
         for (i = 0; i < ARRAY_SIZE(gw_judge1.rollVar); i++) {
 #ifdef __clang__
-#pragma clang diagnostic pop
 #endif
             /// @remarks If this condition is never hit, @c result is
             ///          uninitialized and its value is undefined.
