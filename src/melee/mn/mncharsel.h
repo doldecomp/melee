@@ -9,7 +9,7 @@
 /* 25BD30 */ void mnCharSel_8025BD30(void);
 /* 25C020 */ void mnCharSel_8025C020(int);
 /* 25D1C4 */ void mnCharSel_8025D1C4(int, int);
-/* 25D5AC */ void mnCharSel_8025D5AC(int door, int, bool hidden);
+/* 25D5AC */ void mnCharSel_8025D5AC(int door, int frame, bool hidden);
 /* 25DAA0 */ bool mnCharSel_8025DAA0(int door);
 /* 25DB34 */ void mnCharSel_8025DB34(u8);
 /* 25EE8C */ void mnCharSel_8025EE8C(u8 idx);
