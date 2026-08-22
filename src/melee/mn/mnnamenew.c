@@ -1004,8 +1004,10 @@ void mnNameNew_GlyphVariantInput(void)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void mnNameNew_MainInput(HSD_GObj* arg0)
 {
     u8 sp24[16];
@@ -1415,7 +1417,9 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
         }
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static inline NameNewEntry* mnNameNew_GetEntryData(void)
 {
@@ -1790,8 +1794,10 @@ void fn_8023DAEC(HSD_GObj* arg0)
 static f32 mnNameNew_804D4C10 = 10.0f;
 static GXColor mnNameNew_804D4F68 = { 0, 0, 0, 0xFF };
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void fn_8023DBE8(HSD_GObj* arg0)
 {
     NameNewEntry* data;
@@ -1897,7 +1903,9 @@ void fn_8023DBE8(HSD_GObj* arg0)
         HSD_JObjAnimAll(jobj);
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void mnNameNew_8023E0D8(NameNewEntry* arg0)
 {

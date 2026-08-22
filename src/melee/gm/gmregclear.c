@@ -1608,7 +1608,9 @@ typedef struct {
     u8 b7 : 1, b6 : 1, b5 : 1, b4 : 1, b3 : 1, b2 : 1, b1 : 1, b0 : 1;
 } u8_bits;
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 void fn_8017E8A4(int arg0_int)
 {
     MatchEnd* arg0 = (MatchEnd*) arg0_int;
@@ -1698,7 +1700,9 @@ void fn_8017E8A4(int arg0_int)
 
     PAD_STACK(8);
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 UnkAllstarData* gm_GetAllStarData(void)
 {
@@ -1774,7 +1778,9 @@ bool fn_8017EDDC(void)
     return false;
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 void fn_8017EE40(int arg0_int)
 {
     MatchEnd* arg0 = (MatchEnd*) arg0_int;
@@ -1837,7 +1843,9 @@ void fn_8017EE40(int arg0_int)
         }
     }
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 int fn_8017F008(void)
 {
@@ -1892,7 +1900,9 @@ typedef struct fn_8017F14C_arg {
     /* 0x98 */ s32 x98;
 } fn_8017F14C_arg;
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 s32 fn_8017F14C(void* arg0)
 {
     fn_8017F14C_arg* p = arg0;
@@ -1907,7 +1917,9 @@ s32 fn_8017F14C(void* arg0)
     }
     return 0;
 }
+#ifdef MUST_MATCH
 #pragma dont_inline off
+#endif
 
 s32 fn_8017F1B8(void)
 {
@@ -3265,7 +3277,9 @@ void gm_80181B64(int c_kind, int arg1, s32 arg2)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 int fn_80181BFC(int* arg0)
 {
     int i;
@@ -3282,7 +3296,9 @@ int fn_80181BFC(int* arg0)
     }
     return count;
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 static inline s32 fn_80181C80_CountPlayers(volatile s32* out)
 {

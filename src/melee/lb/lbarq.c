@@ -32,13 +32,17 @@ typedef struct lbArqHandle {
 
 /* 4316C0 */ lbArqGlobal lbArq_804316C0;
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 static lbArqState lbArq_80014ABC(lbArqNode* arg0)
 {
     return arg0->state;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static void lbArq_80014AC4(lbArqHandle* handle)
 {

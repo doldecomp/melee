@@ -1179,7 +1179,9 @@ void ftKb_SpecialNCapture_Anim(Fighter_GObj* gobj)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 void ftKb_SpecialNCapture1_Anim(Fighter_GObj* gobj)
 {
     ftKb_SpecialN_800F5DE8(gobj);
@@ -1189,7 +1191,9 @@ void ftKb_SpecialAirNCapture_Anim(Fighter_GObj* gobj)
 {
     ftKb_SpecialN_800F5EA8(gobj);
 }
+#ifdef MUST_MATCH
 #pragma dont_inline off
+#endif
 
 void ftKb_Eat_Anim(HSD_GObj* gobj)
 {

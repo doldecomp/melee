@@ -12,7 +12,9 @@ static ReportCallback reportCallback;
 static PanicCallback panicCallback;
 static __io_proc logFunc;
 
+#ifdef MUST_MATCH
 #pragma peephole off
+#endif
 
 static int report_func(__file_handle arg0, unsigned char* arg1, size_t* arg2,
                        __idle_proc arg3)

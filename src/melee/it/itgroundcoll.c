@@ -708,8 +708,10 @@ void it_8026E71C(Item_GObj* item_gobj, HSD_GObjEvent arg1)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void it_8026E7E0(Item_GObj* item_gobj, HSD_GObjEvent arg1)
 {
     CollData* coll;
@@ -744,7 +746,9 @@ void it_8026E7E0(Item_GObj* item_gobj, HSD_GObjEvent arg1)
         }
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void it_8026E8C4(Item_GObj* item_gobj, HSD_GObjEvent arg1, HSD_GObjEvent arg2)
 {

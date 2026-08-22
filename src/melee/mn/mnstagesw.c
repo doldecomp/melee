@@ -79,7 +79,9 @@ extern StaticModelDesc MenMainCursorSs_Top;
 /// Stack padding required to match original frame size.
 /// Pragma prevents inlining - function is called from fn_80235F80, not
 /// inlined.
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 static void mnStageSw_8023593C(HSD_GObj* gobj)
 {
     s32 i;
@@ -95,7 +97,9 @@ static void mnStageSw_8023593C(HSD_GObj* gobj)
         }
     }
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 static void mnStageSw_802359C8(MnStageSwData* data)
 {
@@ -503,8 +507,10 @@ static void mnStageSw_80236548(HSD_GObj* gobj, u8 arg1, u8 arg2)
     mn_8022ED6C(hover_anim_jobj, mnStageSw_803ED488);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma inline_depth(0)
+#endif
 static void fn_80236998(HSD_GObj* gobj)
 {
     HSD_JObj* jobj;
@@ -637,7 +643,9 @@ static void fn_80236998(HSD_GObj* gobj)
             mn_804A04F0.confirmed_selection;
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static inline void mnStageSw_SetCursorPosition(MnStageSwData* user_data)
 {

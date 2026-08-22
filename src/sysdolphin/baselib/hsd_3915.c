@@ -662,13 +662,17 @@ block_1: {
 }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void hsd_80392528(Event event)
 {
     fn_80392480(event, 0x80);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static u32 lbl_804D6084;
 static const u32 lbl_804DE8E0 = 0xFFFFFFFF;
@@ -894,8 +898,10 @@ void fn_80392934(void)
 static s32 lbl_804D6088 = 4;
 static s32 lbl_804D608C = 1;
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void fn_80392A08(int mode, int scale, int enable)
 {
     lbl_804D6088 = mode;
@@ -907,7 +913,9 @@ void fn_80392A08(int mode, int scale, int enable)
     }
     hsd_804D7888 = enable;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static s32 lbl_804D6090 = -1;
 static s32 lbl_804D6094 = (s32) 0xFF0000FF;

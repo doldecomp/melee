@@ -855,7 +855,9 @@ void mnDiagram_SortNamesByKOs(void)
 
 /// @brief Counts the number of unlocked fighters.
 /// @return Number of unlocked fighters.
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 int mnDiagram_CountUnlockedFighters(void)
 {
     int i;
@@ -869,7 +871,9 @@ int mnDiagram_CountUnlockedFighters(void)
     }
     return count;
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 void mnDiagram_PopupInputProc(HSD_GObj* gobj)
 {

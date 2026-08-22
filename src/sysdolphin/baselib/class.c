@@ -15,15 +15,19 @@ static HSD_MemoryEntry** memory_list;
 static s32 nb_memory_list;
 static HSD_Hash* current_hash;
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ClassInfoInit(HSD_ClassInfo* info)
 {
     if ((info->head.flags & 1) == 0) {
         (*info->head.info_init)();
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void hsdInitClassInfo(HSD_ClassInfo* class_info, HSD_ClassInfo* parent_info,
                       char* base_class_library, char* type, s32 info_size,
@@ -63,13 +67,17 @@ void OSReport_PrintSpaces(s32 count)
 }
 
 #ifdef MUST_MATCH
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
+#endif
 static char unused1[] = "entry %d <null>\n";
 static char unused2[] = "entry %d - %d <null>\n";
 static char unused3[] = "entry %d(%d)";
 static char unused4[] = "  nb_alloc %d nb_free %d\n";
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 #endif
 
 HSD_MemoryEntry* GetMemoryEntry(s32 idx)
@@ -473,10 +481,14 @@ HSD_ClassInfo* hsdSearchClassInfo(const char* class_name)
 }
 
 #ifdef MUST_MATCH
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
+#endif
 static char unused5[] = "info_hash";
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 #endif
 
 void DumpClassStat(HSD_ClassInfo* info, s32 level)

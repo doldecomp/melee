@@ -13,7 +13,9 @@
 #include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
+#ifdef MUST_MATCH
 #pragma force_active on
+#endif
 
 bool ftCo_800C15F4(Fighter_GObj* gobj)
 {
@@ -55,8 +57,10 @@ bool ftCo_800C15F4(Fighter_GObj* gobj)
     return false;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 bool ftCo_800C1718(Fighter_GObj* gobj)
 {
     Vec3 vec;
@@ -81,7 +85,9 @@ bool ftCo_800C1718(Fighter_GObj* gobj)
     }
     return false;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static inline bool ftCo_800C1718_inline(Fighter_GObj* gobj)
 {

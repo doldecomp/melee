@@ -380,7 +380,9 @@ bool fn_802FFCC8(void)
     return false;
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 void un_802FFCD0(int count, void* data)
 {
     int* arr = data;
@@ -389,7 +391,9 @@ void un_802FFCD0(int count, void* data)
         arr[i] = arr[count];
     }
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 void un_802FFD94(int arg0, void* arg1, void* arg2)
 {
@@ -655,8 +659,10 @@ s32 un_80300410(s32 arg0)
 }
 
 /// these will try to inline un_802FFD94 otherwise
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 int un_80300480(int arg0)
 {
     un_802FFD94(arg0, &un_803FB168, fn_802FFE0C);
@@ -668,9 +674,13 @@ int un_803004B4(int arg0)
     un_802FFD94(arg0, &un_803FA8E8, fn_802FFE6C);
     return 0;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 int un_803004E8(int arg0)
 {
     un_802FFD94(arg0, &un_803FAA44, fn_802FFE6C);
@@ -742,7 +752,9 @@ int un_80300724(int arg0)
     un_802FFD94(arg0, &un_803FC22C, fn_802FFE6C);
     return 0;
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 void un_80300758(int arg0)
 {
@@ -758,7 +770,9 @@ void un_80300790(int arg0)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 int un_803007C8(int arg0)
 {
     un_802FFD94(arg0, &un_803FC63C, fn_802FFE6C);
@@ -806,7 +820,9 @@ int un_80300934(int arg0)
     un_802FFD94(arg0, &un_803FD310, fn_802FFE6C);
     return 0;
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 bool un_80300968(bool update_scene)
 {
@@ -990,7 +1006,9 @@ void fn_80300CC8(int arg0)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 int un_80300D78(int arg0)
 {
     if (arg0 == 1) {
@@ -1003,7 +1021,9 @@ int un_80300D78(int arg0)
     }
     return 0;
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 void fn_80300DE0(int arg0)
 {
@@ -1024,7 +1044,9 @@ void fn_80300DE0(int arg0)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 int un_80300E74(int arg0)
 {
     if (arg0 == 1) {
@@ -1034,7 +1056,9 @@ int un_80300E74(int arg0)
     }
     return 0;
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 void fn_80300ED0(int arg0)
 {
@@ -1052,7 +1076,9 @@ void fn_80300ED0(int arg0)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 int un_80300F3C(int arg0)
 {
     if (arg0 == 1) {
@@ -1062,7 +1088,9 @@ int un_80300F3C(int arg0)
     }
     return 0;
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 s32 un_80300F98(s32 arg0)
 {
@@ -1186,7 +1214,9 @@ void fn_803011EC(int arg0)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 int un_80301280(int arg0)
 {
     if (arg0 == 1) {
@@ -1204,7 +1234,9 @@ int un_803012D4(int arg0)
     }
     return 0;
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 bool un_80301328(bool update_scene)
 {
@@ -1241,7 +1273,9 @@ bool un_803013B0(bool update_scene)
     return false;
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 int un_803013EC(int arg0)
 {
     un_802FFD94(arg0, &un_803FD58C, un_80301B48);
@@ -1253,7 +1287,9 @@ int un_80301420(int arg0)
     un_802FFD94(arg0, &un_803FD864, un_80301C80);
     return 0;
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 bool un_80301454(bool update_scene)
 {

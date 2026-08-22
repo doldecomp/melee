@@ -96,8 +96,10 @@ Item_GObj* it_8027B5B0(ItemKind kind, Vec3* pos, HSD_JObj* jobj, Vec3* vel,
     return gobj;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 
 void it_8027B730(Item_GObj* item_gobj)
 {
@@ -116,7 +118,9 @@ void it_8027B730(Item_GObj* item_gobj)
     it_80275240(item_gobj);
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static inline f32 it_8027B798_CalcAngle(GroundOrAir ground_or_air, s32 angle,
                                         ftCommonData* common_data,
@@ -576,8 +580,10 @@ bool it_8027CA7C(HSD_GObj* gobj)
     return chk;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 
 void it_8027CAD8(Item_GObj* item_gobj)
 {
@@ -617,7 +623,9 @@ void it_8027CBA4(Item_GObj* item_gobj)
     it_8026B3A8(item_gobj);
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 f32 it_8027CBFC(Item_GObj* item_gobj)
 {
@@ -701,8 +709,10 @@ void it_8027CE44(Item_GObj* item_gobj)
     grZakoGenerator_801CACB8(item_gobj);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 
 /// Appears to be a function for Game&Watch items
 void it_8027CE64(Item_GObj* item_gobj, HSD_GObj* fighter_gobj,
@@ -722,4 +732,6 @@ void it_8027CE64(Item_GObj* item_gobj, HSD_GObj* fighter_gobj,
     item->xDD4_itemVar.gamewatch.attr = arg_attr_address;
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif

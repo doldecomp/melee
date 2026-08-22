@@ -113,9 +113,11 @@ lab9:
 #endif // clang-format on
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma optimization_level 0
 #pragma optimizewithasm off
+#endif
 
 ASM void __div2i(void){
 #ifdef __MWERKS__ // clang-format off
@@ -216,10 +218,12 @@ func_end:
 #endif // clang-format on
 }
 
+#ifdef MUST_MATCH
 #pragma pop
 #pragma push
 #pragma optimization_level 0
 #pragma optimizewithasm off
+#endif
 
 ASM void __mod2u(void){
 #ifdef __MWERKS__ // clang-format off
@@ -293,10 +297,12 @@ lab9:
 #endif // clang-format on
 }
 
+#ifdef MUST_MATCH
 #pragma pop
 #pragma push
 #pragma optimization_level 0
 #pragma optimizewithasm off
+#endif
 
 ASM void __mod2i(void){
 #ifdef __MWERKS__ // clang-format off
@@ -383,7 +389,9 @@ no_adjust:
     blr
 #endif // clang-format on
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 ASM void __shl2i(void){
 #ifdef __MWERKS__ // clang-format off

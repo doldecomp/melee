@@ -560,8 +560,10 @@ bool grCorneria_801DD52C(void)
     return false;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 HSD_GObj* grCorneria_801DD534(int arg0)
 {
     HSD_GObj* gobj;
@@ -590,7 +592,9 @@ HSD_GObj* grCorneria_801DD534(int arg0)
 
     return gobj;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void grCorneria_801DD620(Ground_GObj* gobj)
 {
@@ -2557,14 +2561,18 @@ void grCorneria_801E25C4(HSD_GObj* gobj, struct grSmashTaunt_GroundVars* gv,
     grCn_SetupSmashTaunt(gv, line, arg3, arg4, gobj);
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 void grCorneria_801E2738(HSD_GObj* gobj, void* ptr, u32 idx1, u32 idx2)
 {
     grCorneria_801E25C4(gobj, ptr, grCn_803E2204[idx1][idx2].data[0],
                         grCn_803E2204[idx1][idx2].data[1],
                         grCn_803E2204[idx1][idx2].data[2]);
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 const GXColor grCn_804DB24C = { 0xFF, 0xFF, 0xFF, 0xFF };
 
@@ -2681,8 +2689,10 @@ void grCorneria_801E2AF4(void)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 bool grCorneria_801E2B80(void)
 {
     int rand;
@@ -2724,7 +2734,9 @@ bool grCorneria_801E2C34(void)
     }
     return true;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 bool grCorneria_801E2CE8(void)
 {

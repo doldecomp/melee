@@ -199,8 +199,10 @@ void fn_8026C88C(HSD_GObj* gobj)
     it_8026C88C_inline(alloc);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void it_8026CA4C(ItemPickTable* alloc, s32* arg1, u64 arg2, s32 arg3, f32 arg4)
 {
     u64 mask = arg2;
@@ -218,7 +220,9 @@ void it_8026CA4C(ItemPickTable* alloc, s32* arg1, u64 arg2, s32 arg3, f32 arg4)
     }
     alloc->x8 = sum;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 bool it_8026CB3C(Vec3* vec)
 {

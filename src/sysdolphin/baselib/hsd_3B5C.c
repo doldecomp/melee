@@ -194,7 +194,9 @@ s32 hsd_803B5C4C(s32 arg0)
     return hsd_803B5C4C_read(0, arg0);
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 s32 hsd_803B5D70(s32 arg0, s32 arg1)
 {
     s32 value_idx;
@@ -270,9 +272,13 @@ read_huffman_code:
     }
     return 0U;
 }
+#ifdef MUST_MATCH
 #pragma dont_inline off
+#endif
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 void hsd_803B5EA0(s32 arg0)
 {
     u8* base;
@@ -321,7 +327,9 @@ void hsd_803B5EA0(s32 arg0)
         }
     }
 }
+#ifdef MUST_MATCH
 #pragma dont_inline off
+#endif
 
 static void fn_803B61B4(u8* arg0)
 {

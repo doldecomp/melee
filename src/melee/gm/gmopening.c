@@ -87,12 +87,16 @@ void gm_801A9DD0(HSD_GObj* arg0, u16 arg1, u16 arg2, int arg3, int arg4)
     GObj_SetupGXLinkMax(arg0, HSD_SObjLib_803A54EC, (u32) arg3);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
+#endif
 static float unused_floats[] = {
     0.0f, 1600.0, 400.0f, 0.0f, 1330.0f, 130.0f, 0.0f, -3.0f, 0.0f,
 };
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void* fn_801A9FCC(void)
 {

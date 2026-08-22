@@ -1324,8 +1324,10 @@ void gmMainLib_8015F600(int arg0, int arg1)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma inline_depth(3)
+#endif
 void gmMainLib_8015FA34(s32 arg0)
 {
     GXRenderModeObj* var_r3;
@@ -1350,7 +1352,9 @@ void gmMainLib_8015FA34(s32 arg0)
     lbAudioAx_80028690();
     gmMainLib_8015F500();
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 void gmMainLib_8015FB68(void)
 {
     gmMainLib_804D3EE0->thing.x186C = 0;
@@ -1361,8 +1365,10 @@ void gmMainLib_8015FB68(void)
     Toy_80311960();
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void gmMainLib_8015FBA4(void)
 {
     int i;
@@ -1383,7 +1389,9 @@ void gmMainLib_8015FBA4(void)
     lbAudioAx_80028690();
     gmMainLib_8015F500();
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 int gmMainLib_8015FC74(void)
 {

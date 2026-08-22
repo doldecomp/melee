@@ -645,8 +645,10 @@ static inline void mpColl_LoadECB_inline(CollData* coll, enum_t i)
 }
 
 /// 80042D24 https://decomp.me/scratch/2MnVj
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void mpColl_LoadECB(CollData* coll)
 {
     float saved_bottom_x;
@@ -667,7 +669,9 @@ void mpColl_LoadECB(CollData* coll)
     }
     mpColl_80042384(coll);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 /// 80042DB0 https://decomp.me/scratch/GbMpk
 static inline void Vec2_Interpolate(float time, Vec2* dest, Vec2* src)
@@ -1075,8 +1079,10 @@ void mpColl_80043ADC(CollData* coll)
     coll->cur_pos.x = sp10.x;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 bool mpColl_80043BBC(CollData* coll, int* line_id_out)
 {
     int line_id = mpLinePrevNonFloor(coll->floor.index);
@@ -1098,7 +1104,9 @@ bool mpColl_80043BBC(CollData* coll, int* line_id_out)
     return false;
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 void mpColl_80043C6C(CollData* coll, int line_id, bool ignore_bottom)
 {
     float f1;
@@ -1160,8 +1168,10 @@ void mpColl_80043C6C(CollData* coll, int line_id, bool ignore_bottom)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 bool mpColl_80043E90(CollData* coll, int* line_id_out)
 {
     int line_id = mpLineNextNonFloor(coll->floor.index);
@@ -1183,7 +1193,9 @@ bool mpColl_80043E90(CollData* coll, int* line_id_out)
     return false;
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 void mpColl_80043F40(CollData* coll, int line_id, bool ignore_bottom)
 {
     float f1;

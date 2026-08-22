@@ -747,7 +747,9 @@ void Camera_80029AAC(CameraBounds* bounds, CameraTransformState* transform,
     transform->interest.y += offset_y * lerp_factor;
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 void Camera_80029BC4(CameraBounds* bounds, CameraTransformState* transform)
 {
     float cam_dist = (bounds->y_max - bounds->y_min) /
@@ -787,7 +789,9 @@ void Camera_80029C88(CameraBounds* unused, CameraTransformState* transform,
     transform->position.y += dist.y * scale;
     transform->position.z += dist.z * scale;
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 static inline f32 get_y_bias(f32 spread)
 {
@@ -2180,7 +2184,9 @@ static inline bool get_subject_pos(Vec3* pos, const s8* slot_ptr)
     return valid;
 }
 
+#ifdef MUST_MATCH
 #pragma inline_depth(8)
+#endif
 static inline void get_subject_pos_out(Vec3* pos, const s8* slot_ptr,
                                        bool* valid_out)
 {
@@ -2492,7 +2498,9 @@ void Camera_8002CDDC(void* unused)
     update_avg_bounds_width();
 }
 
+#ifdef MUST_MATCH
 #pragma inline_depth(2)
+#endif
 static inline f32 compute_orbit_distance(s32 slot)
 {
     f32 distance;

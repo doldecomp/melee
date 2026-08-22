@@ -26,7 +26,9 @@ void ftCh_GrabUnk1_8015B670(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 void ftCo_CaptureDamageCrazyHand_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -36,7 +38,9 @@ void ftCo_CaptureDamageCrazyHand_Anim(HSD_GObj* gobj)
         ftCh_Init_80159098(fp->victim_gobj);
     }
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 void ftCo_CaptureDamageCrazyHand_IASA(HSD_GObj* gobj) {}
 
