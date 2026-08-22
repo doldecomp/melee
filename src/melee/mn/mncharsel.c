@@ -4150,12 +4150,11 @@ s32 mnCharSel_802640A0(void)
     }
 
     for (i = 0; i < num_players; i++) {
-        struct CSSCharModel* model;
+        struct CSSCharModel* model = (gobj = GObj_Create(4, 5, 0x80),
+                                      jobj = HSD_JObjLoadJoint(ANIM[2].joint),
+                                      HSD_MemAlloc(sizeof(*model)));
         int player;
         s32 found;
-        gobj = GObj_Create(4, 5, 0x80);
-        jobj = HSD_JObjLoadJoint(ANIM[2].joint);
-        model = HSD_MemAlloc(sizeof(*model));
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
         GObj_InitUserData(gobj, 4, HSD_Free, model);
         GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 2, 0x80);
