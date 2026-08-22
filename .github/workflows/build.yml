@@ -19,7 +19,7 @@ jobs:
   build-ninja:
     name: Ninja
     runs-on: ubuntu-latest
-    if: github.repository == ${{env.UPSTREAM_FULL}}
+    if: github.repository == env.UPSTREAM_FULL
     container: ghcr.io/${{env.UPSTREAM_FULL}}-build:main
     strategy:
       fail-fast: false
@@ -208,7 +208,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: gen-pages
     if: >-
-      github.repository == '${{env.UPSTREAM_FULL}}' &&
+      github.repository == env.UPSTREAM_FULL &&
       github.ref_name == github.event.repository.default_branch
     environment:
       name: github-pages
@@ -237,7 +237,7 @@ jobs:
   build-nix:
     name: Nix
     runs-on: ubuntu-latest
-    if: github.repository == '${{env.UPSTREAM_FULL}}'
+    if: github.repository == env.UPSTREAM_FULL
     env:
       REGISTRY: ghcr.io
       IMAGE: ${{env.UPSTREAM_ORG}}/melee-build:main
@@ -272,7 +272,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-ninja
     if: >-
-      github.repository == '${{env.UPSTREAM_FULL}}' &&
+      github.repository == env.UPSTREAM_FULL &&
       github.event_name == 'push' &&
       github.ref_name == github.event.repository.default_branch
     permissions:
