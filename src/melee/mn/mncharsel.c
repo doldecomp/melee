@@ -2686,17 +2686,18 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                 0)
                             {
                                 int k;
-                                CSSData* scan_css;
+                                UNUSED u32 scan_home;
                                 for (k = 0; k < (s32) mnCharSel_804D6CF5; k++)
                                 {
                                     if (isDuplicateCostumeCached(k)) {
                                         mnCharSel_803F0DFC.doors[k].costume =
                                             0;
-                                        scan_css =
-                                            loadCSSValue(&mnCharSel_804D6CB0);
+                                        current_tag =
+                                            (CSSTagData*) loadCSSValue(
+                                                &mnCharSel_804D6CB0);
                                         for (;;) {
                                             if (!isDuplicateCostumeWith(
-                                                    k, scan_css,
+                                                    k, (CSSData*) current_tag,
                                                     mnCharSel_804D6CF5))
                                             {
                                                 break;
