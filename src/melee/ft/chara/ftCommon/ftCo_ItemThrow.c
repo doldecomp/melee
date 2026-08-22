@@ -552,16 +552,19 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                                                         ftCo_MS_LightThrowF]
                                      .x8;
                     float throw_speed = throw_scale * base_throw_speed;
+                    // Needed for matching register allocation.
+                    float item_throw_speed = throw_speed;
                     {
                         vec2.x = fsm * (fp->mv.co.itemthrow4.x8.x - vec0.x) +
                                  vec0.x;
                         {
-                            vec2.y =
+                            float vec1_y =
                                 fsm * (fp->mv.co.itemthrow4.x8.y - vec0.y) +
                                 vec0.y;
+                            vec2.y = vec1_y;
                             vec2.z = 0;
                             pl_8003E978(fp->player_id, fp->x221F_b4,
-                                        fp->item_gobj, vec2.y,
+                                        fp->item_gobj, vec1_y,
                                         base_throw_speed, cd_xB4, throw_speed,
                                         vec0.x, vec0.y, fsm);
                         }
@@ -569,7 +572,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                             FtMoveId msid = fp->motion_id;
                             if (msid == (FtMoveId) ftCo_MS_LightThrowDrop) {
                                 Item_8026AC74(fp->item_gobj, &vec2, &vec1,
-                                              throw_speed);
+                                              item_throw_speed);
                             } else if (msid >= (FtMoveId) ftCo_MS_LightThrowF4)
                             {
                                 if (itIsHeavy(fp->item_gobj) == 1) {
@@ -578,7 +581,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                                     ftCommon_8007EBAC(fp, 27, 0);
                                 }
                                 Item_8026AD20(fp->item_gobj, &vec2, &vec1,
-                                              throw_speed);
+                                              item_throw_speed, 1);
                             } else {
                                 if (itIsHeavy(fp->item_gobj) == 1) {
                                     ftCommon_8007EBAC(fp, 28, 0);
@@ -586,7 +589,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                                     ftCommon_8007EBAC(fp, 26, 0);
                                 }
                                 Item_8026AD20(fp->item_gobj, &vec2, &vec1,
-                                              throw_speed);
+                                              item_throw_speed, 0);
                             }
                         }
                     }

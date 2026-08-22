@@ -2063,7 +2063,7 @@ void Item_8026AC74(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3)
     }
 }
 
-void Item_8026AD20(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3)
+void Item_8026AD20(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3, int arg4)
 {
     Item* item_data = GetItemData(gobj);
     it_802731E0(gobj);
