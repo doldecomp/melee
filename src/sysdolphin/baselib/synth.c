@@ -521,6 +521,7 @@ int HSD_Synth_80389334(int sfx_id, u8 vol, u8 vol2, u8 pan, int priority,
                        float mix_auxA, float mix_auxB)
 {
     AXVPB* voices[2] = { NULL, NULL };
+    UNUSED u8 stack_pad[8];
     AXPBVE ve;
     float vol_norm;
     float vol2_norm;
@@ -541,7 +542,7 @@ int HSD_Synth_80389334(int sfx_id, u8 vol, u8 vol2, u8 pan, int priority,
     AXVPB** voice_ptr;
     struct foo* sample_data;
 
-    PAD_STACK(0x1C);
+    PAD_STACK(0x14);
 
     saved_interrupts = OSDisableInterrupts();
     sfx_entry = HSD_Synth_804C29E0[sfx_id & 0x1F];
@@ -611,10 +612,7 @@ int HSD_Synth_80389334(int sfx_id, u8 vol, u8 vol2, u8 pan, int priority,
             loop_idx = 0;
             while (loop_idx < sfx_entry->unk8) {
                 AXSetVoicePriority(*voice_ptr, priority);
-                {
-                    AXPBVE* ve_ptr = &ve;
-                    AXSetVoiceVe(*voice_ptr, ve_ptr);
-                }
+                AXSetVoiceVe(*voice_ptr, &ve);
                 /// @todo Type pun writes ratioHi+ratioLo as u32; no union in
                 /// AXPBSRC. Needed for match - AXPBSRC lacks a u32 ratio
                 /// field.
