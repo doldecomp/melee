@@ -22,7 +22,7 @@ typedef struct CSSAnimSet {
     /* 0x0C */ HSD_ShapeAnimJoint* shapeanim;
 } CSSAnimSet;
 
-static CSSData* volatile mnCharSel_804D6CB0;
+static CSSData* mnCharSel_804D6CB0;
 static void* mnCharSel_804D6CB4;
 static HSD_GObj* mnCharSel_804D6CB8;
 static HSD_GObj* mnCharSel_804D6CBC;

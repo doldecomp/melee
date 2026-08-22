@@ -864,6 +864,32 @@ static inline bool isDuplicateCostumeCached(int door)
     return false;
 }
 
+static inline bool isDuplicateCostumeExact(int door)
+{
+    int num_doors;
+    int j;
+    CSSDoor* base_door;
+
+    if (mnCharSel_804D6CB0->match_type == TRAINING_MODE) {
+        num_doors = 2;
+    } else {
+        num_doors = mnCharSel_804D6CF5;
+    }
+
+    base_door = &mnCharSel_803F0DFC.doors[door];
+    for (j = 0; j < num_doors; j++) {
+        CSSDoor* other_door = &mnCharSel_803F0DFC.doors[j];
+        if (door != j && other_door->p_kind != 3 &&
+            other_door->sel_icon < 0x19 &&
+            other_door->sel_icon == base_door->sel_icon &&
+            base_door->costume == other_door->costume)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 static inline bool isDuplicateCostume(int door)
 {
     int num_doors;
@@ -989,13 +1015,9 @@ void mnCharSel_8025DB34(u8 arg0)
             mnCharSel_803F0DFC.doors[arg0].sel_icon_prev = new_icon;
             {
                 u8 costume_var;
-                for (costume_var = 0, color = (s32) getCSSDataForCostumeLoop();
-                     ; costume_var++)
-                {
+                for (costume_var = 0;; costume_var++) {
                     mnCharSel_803F0DFC.doors[arg0].costume = costume_var;
-                    if (!isDuplicateCostumeWith(arg0, (CSSData*) color,
-                                                mnCharSel_804D6CF5))
-                    {
+                    if (!isDuplicateCostumeExact(arg0)) {
                         break;
                     }
                 }
@@ -1809,17 +1831,12 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
     if (mnCharSel_803F0DFC.doors[door].sel_icon !=
         mnCharSel_803F0DFC.doors[door].sel_icon_prev)
     {
-        CSSData* css = getCSSData();
-        u8* scan_seed;
-        u8 costume = 0;
-        while (1) {
-            scan_seed = (u8*) all_data;
-            if (!isDuplicateRandomCostume(&scan_seed, door, css, all_data,
-                                          costume))
-            {
+        u8 costume;
+        for (costume = 0;; costume++) {
+            mnCharSel_803F0DFC.doors[door].costume = costume;
+            if (!isDuplicateCostumeExact(door)) {
                 break;
             }
-            costume++;
         }
     }
 
@@ -3739,12 +3756,10 @@ void fn_802633B0(HSD_GObj* gobj)
                     HSD_SisLib_803A74F0(tag->name_ls, j + 2, name_color);
                     {
                         s32 p2;
-                        CSSData* ddata;
-                        ddata = mnCharSel_804D6CB0;
                         for (p2 = 0; p2 < (s32) mnCharSel_804D6CF5; p2++) {
                             if (p2 != (s32) tag->port &&
-                                (s32) ddata->data.data.players[p2].xA ==
-                                    row_idx)
+                                (s32) mnCharSel_804D6CB0->data.data.players[p2]
+                                        .xA == row_idx)
                             {
                                 used_row_color = gray;
                                 HSD_SisLib_803A74F0(tag->name_ls, j + 2,
@@ -3794,9 +3809,9 @@ void fn_802633B0(HSD_GObj* gobj)
                     tag->text->hidden = 1;
                 }
                 {
-                    CSSData* ddata = mnCharSel_804D6CB0;
-                    if (ddata->data.data.players[port].xA != 0x78) {
-                        match_type = ddata->match_type;
+                    if (mnCharSel_804D6CB0->data.data.players[port].xA != 0x78)
+                    {
+                        match_type = mnCharSel_804D6CB0->match_type;
                         if ((s32) match_type < 3) {
                             if ((s32) match_type == 0) {
                                 goto clear;
@@ -3811,7 +3826,7 @@ void fn_802633B0(HSD_GObj* gobj)
                             val = 0;
                         }
                         if (val != 0) {
-                            ddata->ko_star_counts[tag->port] = 0;
+                            mnCharSel_804D6CB0->ko_star_counts[tag->port] = 0;
                         }
                     }
                 }
@@ -3849,11 +3864,10 @@ void fn_802633B0(HSD_GObj* gobj)
             if ((s32) tag->next_tag > row) {
                 {
                     s32 p;
-                    CSSData* ddata = mnCharSel_804D6CB0;
                     for (p = 0; p < (s32) mnCharSel_804D6CF5; p++) {
                         if (p != (s32) port &&
-                            (s32) ddata->data.data.players[p].xA ==
-                                (s32) (row - 1))
+                            (s32) mnCharSel_804D6CB0->data.data.players[p]
+                                    .xA == (s32) (row - 1))
                         {
                             goto check_cancel;
                         }
@@ -3864,11 +3878,11 @@ void fn_802633B0(HSD_GObj* gobj)
                         tag->text->default_kerning = 0;
                         tag->text->hidden = 0;
                         {
-                            CSSData* ddata2 = mnCharSel_804D6CB0;
-                            if ((s32) ddata2->data.data.players[port].xA !=
-                                (s32) (row - 1))
+                            if ((s32) mnCharSel_804D6CB0->data.data
+                                    .players[port]
+                                    .xA != (s32) (row - 1))
                             {
-                                match_type = ddata2->match_type;
+                                match_type = mnCharSel_804D6CB0->match_type;
                                 if ((s32) match_type < 3) {
                                     if ((s32) match_type == 0) {
                                         goto clear2;
@@ -3883,7 +3897,8 @@ void fn_802633B0(HSD_GObj* gobj)
                                     val = 0;
                                 }
                                 if (val != 0) {
-                                    ddata2->ko_star_counts[tag->port] = 0;
+                                    mnCharSel_804D6CB0
+                                        ->ko_star_counts[tag->port] = 0;
                                 }
                             }
                         }
@@ -4306,10 +4321,11 @@ s32 mnCharSel_802640A0(void)
                     player = i;
                 }
                 for (found = 0; found < 0x19; found++) {
-                    u8 ck =
-                        mnCharSel_804D6CB0->data.data.players[player].c_kind;
-                    if ((s8) ck == icons[found].char_kind &&
-                        gm_IsCKindUnlocked(ck) != 0)
+                    if ((s8) mnCharSel_804D6CB0->data.data.players[player]
+                                .c_kind == icons[found].char_kind &&
+                        gm_IsCKindUnlocked(
+                            mnCharSel_804D6CB0->data.data.players[player]
+                                .c_kind) != 0)
                     {
                         break;
                     }
@@ -4495,8 +4511,7 @@ s32 mnCharSel_802640A0(void)
         }
         if (player == mnCharSel_804D6CF9 && mnCharSel_804D6CF8 < td->next_tag)
         {
-            CSSData* css = mnCharSel_804D6CB0;
-            u8 mt = css->match_type;
+            u8 mt = mnCharSel_804D6CB0->match_type;
             s32 clear;
             if ((s32) mt < 3) {
                 if ((s32) mt == 0) {
@@ -4512,7 +4527,7 @@ s32 mnCharSel_802640A0(void)
                 clear = 0;
             }
             if (clear != 0) {
-                css->ko_star_counts[player] = 0;
+                mnCharSel_804D6CB0->ko_star_counts[player] = 0;
             }
             mnCharSel_804D6CB0->data.data.players[player].xA =
                 mnCharSel_804D6CF8 - 1;
@@ -4531,8 +4546,7 @@ s32 mnCharSel_802640A0(void)
     }
 
     if (mnCharSel_804D6CF5 == 1) {
-        CSSData* css = mnCharSel_804D6CB0;
-        switch (css->match_type) {
+        switch (mnCharSel_804D6CB0->match_type) {
         case REG_CLASSIC:
         case REG_ADVENTURE:
         case REG_ALLSTAR:
@@ -4543,7 +4557,8 @@ s32 mnCharSel_802640A0(void)
             spD4 = mnCharSel_804DC594;
             {
                 u8 cpu_level =
-                    css->data.data.players[mnCharSel_804D6CF0].cpu_level;
+                    mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
+                        .cpu_level;
                 mnCharSel_803F0EBC.cpu_level_shown = cpu_level;
                 mnCharSel_803F0EBC.cpu_level = cpu_level;
             }
@@ -5065,7 +5080,7 @@ void mnCharSel_8026688C_OnEnter(void* arg0)
 
     lb_8001C550();
     lb_8001D164(0);
-    mnCharSel_804D6CB0 = arg0;
+    mnCharSel_804D6CB0 = (CSSData*) arg0;
 
     mnCharSel_804D6CF0 = mnCharSel_804D6CB0->unk_0x0 - 1;
 
@@ -5121,25 +5136,30 @@ void mnCharSel_802669F4_OnFrame(void)
     if (mnCharSel_804D6CF6 <= 1) {
         cache = &lbDvd_GetPreloadCacheScene()->game_cache;
         if (mnCharSel_804D6CF5 == 1) {
-            CSSData* css = mnCharSel_804D6CB0;
-            slot_type = css->data.data.players[mnCharSel_804D6CF0].slot_type;
+            slot_type =
+                mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
+                    .slot_type;
             if (!(slot_type != 0 && slot_type != 1) &&
                 mnCharSel_804A0BD0[0]->x5 == 0)
             {
                 cache->entries[0].char_id =
-                    css->data.data.players[mnCharSel_804D6CF0].c_kind;
+                    mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
+                        .c_kind;
                 cache->entries[0].color =
                     mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
                         .color;
             } else {
                 cache->entries[0].char_id = CHKIND_NONE;
             }
-            css = mnCharSel_804D6CB0;
-            slot_type = css->data.data.players[mnCharSel_804D6CF1].slot_type;
+            slot_type =
+                mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1]
+                    .slot_type;
             if (!(slot_type != 0 && slot_type != 1)) {
                 if (mnCharSel_804A0BD0[1]->x5 == 0) {
                     cache->entries[1].char_id =
-                        css->data.data.players[mnCharSel_804D6CF1].c_kind;
+                        mnCharSel_804D6CB0->data.data
+                            .players[mnCharSel_804D6CF1]
+                            .c_kind;
                     cache->entries[1].color = mnCharSel_804D6CB0->data.data
                                                   .players[mnCharSel_804D6CF1]
                                                   .color;
@@ -5155,13 +5175,12 @@ void mnCharSel_802669F4_OnFrame(void)
             }
 
             for (i = 0; i < num_slots; i++) {
-                CSSData* css = mnCharSel_804D6CB0;
-                slot_type = css->data.data.players[i].slot_type;
+                slot_type = mnCharSel_804D6CB0->data.data.players[i].slot_type;
                 if (!(slot_type != 0 && slot_type != 1) &&
                     mnCharSel_804A0BD0[i]->x5 == 0)
                 {
                     cache->entries[i].char_id =
-                        css->data.data.players[i].c_kind;
+                        mnCharSel_804D6CB0->data.data.players[i].c_kind;
                     cache->entries[i].color =
                         mnCharSel_804D6CB0->data.data.players[i].color;
                 } else {
@@ -5226,7 +5245,6 @@ void mnCharSel_80266D70_OnLeave(void* unused)
 {
     int num_slots;
     u64 tmp;
-    CSSData* data;
     int i;
     u8 type;
 
@@ -5246,31 +5264,33 @@ void mnCharSel_80266D70_OnLeave(void* unused)
 
     tmp = 0;
     if (mnCharSel_804D6CF5 == 1) {
-        data = mnCharSel_804D6CB0;
-        type = data->data.data.players[mnCharSel_804D6CF0].slot_type;
+        type = mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
+                   .slot_type;
         if ((type == Gm_PKind_Human || type == Gm_PKind_Cpu) &&
             mnCharSel_804A0BD0[0]->x5 == 0)
         {
             tmp |= lbAudioAx_80026E84(
-                data->data.data.players[mnCharSel_804D6CF0].c_kind);
+                mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
+                    .c_kind);
         }
-        data = mnCharSel_804D6CB0;
-        type = data->data.data.players[mnCharSel_804D6CF1].slot_type;
+        type = mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1]
+                   .slot_type;
         if ((type == Gm_PKind_Human || type == Gm_PKind_Cpu) &&
             mnCharSel_804A0BD0[1]->x5 == 0)
         {
             tmp |= lbAudioAx_80026E84(
-                data->data.data.players[mnCharSel_804D6CF1].c_kind);
+                mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1]
+                    .c_kind);
         }
     } else {
         num_slots = mnCharSel_804D6CB0->match_type == VS_CAMERA ? 3 : 4;
         for (i = 0; i < num_slots; i++) {
-            data = mnCharSel_804D6CB0;
-            type = data->data.data.players[i].slot_type;
+            type = mnCharSel_804D6CB0->data.data.players[i].slot_type;
             if ((type == Gm_PKind_Human || type == Gm_PKind_Cpu) &&
                 mnCharSel_804A0BD0[i]->x5 == 0)
             {
-                tmp |= lbAudioAx_80026E84(data->data.data.players[i].c_kind);
+                tmp |= lbAudioAx_80026E84(
+                    mnCharSel_804D6CB0->data.data.players[i].c_kind);
             }
         }
     }
