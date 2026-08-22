@@ -4701,8 +4701,8 @@ s32 mnCharSel_802640A0(void)
             {
                 f32 sx, sy, sz;
                 sx = 11.0f + spEC.x;
-                sz = spEC.z;
-                sy = -spEC.y;
+                sz = ((volatile Point3d*) &spEC)->z;
+                sy = -((volatile Point3d*) &spEC)->y;
                 text->pos_x = sx;
                 text->pos_y = sy;
                 text->pos_z = sz;
@@ -4739,8 +4739,8 @@ s32 mnCharSel_802640A0(void)
             {
                 f32 sx, sy, sz;
                 sx = 11.0f + spEC.x;
-                sz = spEC.z;
-                sy = -spEC.y;
+                sz = ((volatile Point3d*) &spEC)->z;
+                sy = -((volatile Point3d*) &spEC)->y;
                 text->pos_x = sx;
                 text->pos_y = sy;
                 text->pos_z = sz;
