@@ -4221,13 +4221,13 @@ s32 mnCharSel_802640A0(void)
 
     for (i = mnCharSel_804D6CF5 - 1; i >= 0; i--) {
         struct CSSCursorData* cursor;
-        gobj = GObj_Create(4, 5, 0x80);
+        HSD_GObj* cursor_gobj = GObj_Create(4, 5, 0x80);
         jobj = HSD_JObjLoadJoint(ANIM[1].joint);
         cursor = HSD_MemAlloc(sizeof(*cursor));
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
-        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 3, 0x80);
-        HSD_GObj_SetupProc(gobj, mnCharSel_CursorThink, 1);
-        GObj_InitUserData(gobj, 4, HSD_Free, cursor);
+        HSD_GObjObject_80390A70(cursor_gobj, HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink(cursor_gobj, HSD_GObj_JObjCallback, 3, 0x80);
+        HSD_GObj_SetupProc(cursor_gobj, mnCharSel_CursorThink, 1);
+        GObj_InitUserData(cursor_gobj, 4, HSD_Free, cursor);
         HSD_JObjAddAnimAll(jobj, ANIM[1].anim, ANIM[1].matanim,
                            ANIM[1].shapeanim);
         HSD_JObjReqAnimAll(jobj, 0.0f);
@@ -4235,7 +4235,7 @@ s32 mnCharSel_802640A0(void)
         HSD_ForeachAnim(jobj, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjStopAnim,
                         AOBJ_ARG_AOV, 0, 0);
         mnCharSel_804A0BC0[i] = cursor;
-        cursor->gobj = gobj;
+        cursor->gobj = cursor_gobj;
         cursor->x4 = i;
         cursor->x8 = 0;
         cursor->xA = 0;
