@@ -26,9 +26,7 @@ extern inline float sqrtf(float x)
 }
 
 #ifdef __MWERKS__
-#ifdef MUST_MATCH
 #pragma pop
-#endif
 #endif
 
 static inline float sqrtf_accurate(float x)
