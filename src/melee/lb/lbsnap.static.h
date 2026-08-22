@@ -17,7 +17,7 @@ struct Unk80433380_48 {
     int free_files;
     lbCardNew_SnapshotEntry entries[0x7F];
 };
-STATIC_ASSERT(sizeof(struct Unk80433380_48) == 0x408);
+ASSERT_SIZE(struct Unk80433380_48, 0x408);
 
 struct Unk80433380_0 {
     s32 x0;
@@ -45,7 +45,7 @@ struct Unk80433380 {
     /* 0x4C */ int x4C_cardState[2];
     /* 0x54 */ int x54_stateChanged[3];
 }; /* size = 0x60 */
-STATIC_ASSERT(sizeof(struct Unk80433380) == 0x60);
+ASSERT_SIZE(struct Unk80433380, 0x60);
 // snapshot save descriptor
 struct Unk803BACC8 {
     /* 0x00 */ u8 icon[0x14];

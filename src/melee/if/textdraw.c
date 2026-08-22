@@ -61,7 +61,7 @@
     struct DevText entries[32];
     char pad[0x6B0 - 0x680];
 } devtext_pool;
-STATIC_ASSERT(sizeof(struct DevText_Pool) == 0x6B0);
+ASSERT_SIZE(struct DevText_Pool, 0x6B0);
 
 /// .sbss
 /* 4D6E38 */ DevText* devtext_poolhead[2];

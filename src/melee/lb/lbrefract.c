@@ -56,7 +56,7 @@ struct lbl_804336D0_t {
     HSD_TObj** tobj_list;
     Mtx texture_mtx;
 };
-STATIC_ASSERT(sizeof(struct lbl_804336D0_t) == 0x40);
+ASSERT_SIZE(struct lbl_804336D0_t, 0x40);
 
 static struct lbl_804336D0_t lbl_804336D0;
 static u8* refract_data;

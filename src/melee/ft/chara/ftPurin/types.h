@@ -102,6 +102,6 @@ typedef struct _ftPurinAttributes {
     float xF4;
     u8 _F8[0x100 - 0xF8];
 } ftPurinAttributes;
-STATIC_ASSERT(sizeof(ftPurinAttributes) == 0x100);
+ASSERT_SIZE(ftPurinAttributes, 0x100);
 
 #endif

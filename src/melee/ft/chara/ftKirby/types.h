@@ -66,7 +66,7 @@ struct ftKb_FighterVars {
     /* fp+231C   */ float xF0;
     /* fp+2320:0 */ u8 xF4_b0 : 1;
 };
-STATIC_ASSERT(sizeof(struct ftKb_FighterVars) == FIGHTERVARS_SIZE);
+ASSERT_SIZE(struct ftKb_FighterVars, FIGHTERVARS_SIZE);
 
 struct ftKb_SpecialNMs_DatAttrs {
     /* da+35C */ u32 charge_iterations;
@@ -75,7 +75,7 @@ struct ftKb_SpecialNMs_DatAttrs {
     /* da+368 */ float air_horizontal_momentum_preservation;
     /* da+36C */ float air_horizontal_deceleration_rate;
 };
-STATIC_ASSERT(sizeof(struct ftKb_SpecialNMs_DatAttrs) == 0x14);
+ASSERT_SIZE(struct ftKb_SpecialNMs_DatAttrs, 0x14);
 
 /// @todo Every hat is its own struct.
 struct ftKb_DatAttrs {
@@ -378,7 +378,7 @@ struct ftKb_DatAttrs {
     /* +3EC */ AbsorbDesc specialn_pe_absorbdesc;
     /* +400 */ ReflectDesc specialn_zd_reflectdesc;
 };
-STATIC_ASSERT(sizeof(struct ftKb_DatAttrs) == 0x424);
+ASSERT_SIZE(struct ftKb_DatAttrs, 0x424);
 
 union ftKb_MotionVars {
     struct ftGameWatch_SpecialNVars specialn_gw;

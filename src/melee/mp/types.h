@@ -79,7 +79,7 @@ struct CollVtx {
     /* 0x10 */ float x10;
     /* 0x14 */ float x14;
 }; /* size = 0x18 */
-STATIC_ASSERT(sizeof(struct CollVtx) == 0x18);
+ASSERT_SIZE(struct CollVtx, 0x18);
 
 struct MapJoint {
     /*  +0 */ s16 floor_start;
@@ -115,7 +115,7 @@ struct CollJoint {
     /* 0x2C */ mpLib_JointCollisionCallback cb_1;
     /* 0x30 */ Ground* cb_data_1;
 }; /* size = 0x34 */
-STATIC_ASSERT(sizeof(struct CollJoint) == 0x34);
+ASSERT_SIZE(struct CollJoint, 0x34);
 
 struct MapCollData {
     /*  +0 */ Vec2* verts;

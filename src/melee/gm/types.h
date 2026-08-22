@@ -55,7 +55,7 @@ typedef struct un_804A1F48_t {
     s32 x4;
     UNK_T x8;
 } un_804A1F48_t;
-STATIC_ASSERT(sizeof(struct un_804A1F48_t) == 0xC);
+ASSERT_SIZE(struct un_804A1F48_t, 0xC);
 
 /// @note Colloquially known as "Minor Scene"
 struct GameScene {
@@ -112,7 +112,7 @@ typedef struct {
     u8 x0F;
     u8 (*game_mode_override)(void);
 } GameState;
-STATIC_ASSERT(sizeof(GameState) == 0x14);
+ASSERT_SIZE(GameState, 0x14);
 
 struct sceneData {
     u32 a;
@@ -245,7 +245,7 @@ struct GameRules {
     /* 0x13 */ u8 x13;
     /* 0x14 */ s32 unk_14; /* inferred */
 }; /* size = 0x18 */
-STATIC_ASSERT(sizeof(struct GameRules) == 0x18);
+ASSERT_SIZE(struct GameRules, 0x18);
 
 struct gmm_retval_ED98 {
     u32 x0;
@@ -423,7 +423,7 @@ struct gmm_x0 {
     /* 0x1898 */ struct gmm_x1868 thing;
     /* 0x6E50 */ u8 pad_6E50[0x8518 - 0x6E50];
 };
-STATIC_ASSERT(sizeof(struct gmm_x0) == 0x8518);
+ASSERT_SIZE(struct gmm_x0, 0x8518);
 
 struct lbl_8046B6A0_24C_t {
     UNK_T x0;
@@ -566,7 +566,7 @@ struct lbl_8046B6A0_t {
     /* 0x024C */ struct lbl_8046B6A0_24C_t x24C;
     /* 0x24C8 */ struct StartMeleeRules x24C8;
 }; /* size = 0x2528 */
-STATIC_ASSERT(sizeof(struct lbl_8046B6A0_t) == 0x2528);
+ASSERT_SIZE(struct lbl_8046B6A0_t, 0x2528);
 
 struct datetime {
     u16 year;
@@ -601,7 +601,7 @@ struct gm_8017DB6C_arg0_t {
     /* +1 */ u8 x1;
     /* +2 */ u8 _1[0xC - 0x2];
 };
-STATIC_ASSERT(sizeof(struct gm_8017DB6C_arg0_t) == 0xC);
+ASSERT_SIZE(struct gm_8017DB6C_arg0_t, 0xC);
 
 struct gmMainLib_8046B0F0_t {
     /* 00 */ bool x0;
@@ -623,7 +623,7 @@ struct MatchTeamData {
     /* 0x09 */ u8 is_small_loser;
     /* 0x0A */ u8 active;
 }; // padded to 0x0C
-STATIC_ASSERT(sizeof(struct MatchTeamData) == 0xC);
+ASSERT_SIZE(struct MatchTeamData, 0xC);
 
 struct MatchPlayerData {
     u8 slot_type;
@@ -680,7 +680,7 @@ struct MatchPlayerData {
     int xA0;
     u32 xA4;
 };
-STATIC_ASSERT(sizeof(struct MatchPlayerData) == 0xA8);
+ASSERT_SIZE(struct MatchPlayerData, 0xA8);
 
 struct MatchEnd {
     /* 0x00 */ u32 x0; ///< timer
@@ -704,7 +704,7 @@ struct MatchEnd {
     } x44C[4]; // 0x508 * 4 = 0x1420
     /* 0x186C */ u8 pad_x186C[0x227C - 0x186C];
 };
-STATIC_ASSERT(sizeof(struct MatchEnd) == 0x227C);
+ASSERT_SIZE(struct MatchEnd, 0x227C);
 
 struct MatchExitInfo {
     int x0;
@@ -712,7 +712,7 @@ struct MatchExitInfo {
     int x8;
     MatchEnd match_end;
 };
-STATIC_ASSERT(sizeof(struct MatchExitInfo) == 0x2288);
+ASSERT_SIZE(struct MatchExitInfo, 0x2288);
 
 struct ResultsMatchInfo {
     u8 x0_0 : 1;
@@ -868,7 +868,7 @@ struct TmData {
     HSD_Text* x534[3];
     u8 pad_x540[0x574 - 0x540];
 };
-STATIC_ASSERT(sizeof(struct TmData) == 0x574);
+ASSERT_SIZE(struct TmData, 0x574);
 
 struct NameData {
     // a lot of this is shared with a struct for character stats as well
@@ -992,7 +992,7 @@ struct ResultsData {
     /* +94 */ MatchEnd* x94;
     /* +98 */ struct ResultsPlayerData player_data[6];
 };
-STATIC_ASSERT(sizeof(struct ResultsData) == 0x5A8);
+ASSERT_SIZE(struct ResultsData, 0x5A8);
 
 struct gm_803DE650_t {
     u8 x0;
@@ -1032,14 +1032,14 @@ struct MenuEnterData {
         load_assets; ///< checks if the assets need to be loaded or not
     /* +03 */ s8 x3;
 };
-STATIC_ASSERT(sizeof(struct MenuEnterData) == 0x4);
+ASSERT_SIZE(struct MenuEnterData, 0x4);
 
 /// @brief data passed to OnLeave callback for GM_MENU
 struct MenuExitData {
     /* +00 */ s8 pending_mode; ///< will set the next game mode
     /* +01 */ u8 _1[0x3];
 };
-STATIC_ASSERT(sizeof(struct MenuExitData) == 0x4);
+ASSERT_SIZE(struct MenuExitData, 0x4);
 
 struct gmClassicMatchup;
 
@@ -1110,14 +1110,14 @@ struct gm_8049E548_t {
     /* 0x0E */ s8 unk_E;  /* inferred */
     /* 0x0F */ char pad_F[1];
 }; /* size = 0x10 */
-STATIC_ASSERT(sizeof(struct gm_8049E548_t) == 0x10);
+ASSERT_SIZE(struct gm_8049E548_t, 0x10);
 
 struct TmBoxArrays {
     void* box2;
     void* box3;
     void* box4;
 };
-STATIC_ASSERT(sizeof(struct TmBoxArrays) == 0xC);
+ASSERT_SIZE(struct TmBoxArrays, 0xC);
 
 struct Lbl804799B8_t {
     u8 x0;
@@ -1248,7 +1248,7 @@ struct lbl_8046B488_t {
     /* 0x1C0 */ s8 x1C0[0x1B];
     /* 0x1DB */ char pad_1DB[0x1E0 - 0x1DB];
 }; /* size = 0x1E0 */
-STATIC_ASSERT(sizeof(struct lbl_8046B488_t) == 0x1E0);
+ASSERT_SIZE(struct lbl_8046B488_t, 0x1E0);
 
 typedef struct TmSettingTable {
     u8 pad_0[0x40];
@@ -1257,7 +1257,7 @@ typedef struct TmSettingTable {
 } TmSettingTable;
 STATIC_ASSERT(offsetof(struct TmSettingTable, min) == 0x40);
 STATIC_ASSERT(offsetof(struct TmSettingTable, max) == 0x4C);
-STATIC_ASSERT(sizeof(struct TmSettingTable) == 0x58);
+ASSERT_SIZE(struct TmSettingTable, 0x58);
 
 /// Start/end/loop anim frame triplet for one tournament model anim state.
 typedef struct TmAnimFrames {
@@ -1265,14 +1265,14 @@ typedef struct TmAnimFrames {
     /* 0x2 */ u16 end;
     /* 0x4 */ u16 loop;
 } TmAnimFrames;
-STATIC_ASSERT(sizeof(struct TmAnimFrames) == 0x6);
+ASSERT_SIZE(struct TmAnimFrames, 0x6);
 
 /// Table of anim frame triplets (raw s32 words in ROM), see fn_8019C048.
 typedef union TmAnimFrameTable {
     s32 words[9];
     TmAnimFrames states[6];
 } TmAnimFrameTable;
-STATIC_ASSERT(sizeof(union TmAnimFrameTable) == 0x24);
+ASSERT_SIZE(union TmAnimFrameTable, 0x24);
 
 /// Repeating per-slot unit of BracketEntry, one per tournament bracket
 /// slot starting at 0x2C. Field names keep their slot-0 offsets from the
@@ -1301,7 +1301,7 @@ typedef struct BracketEntrySlot {
     /* +0x28 */ u16 x54;
     /* +0x2A */ u8 pad56[0x2C - 0x2A];
 } BracketEntrySlot;
-STATIC_ASSERT(sizeof(struct BracketEntrySlot) == 0x2C);
+ASSERT_SIZE(struct BracketEntrySlot, 0x2C);
 
 typedef struct BracketEntry {
     /* 0x00 */ u8 x0;
@@ -1326,7 +1326,7 @@ typedef struct BracketEntry {
     /* 0x29 */ u8 pad29[0x2C - 0x29];
     /* 0x2C */ BracketEntrySlot slots[4];
 } BracketEntry;
-STATIC_ASSERT(sizeof(struct BracketEntry) == 0xDC);
+ASSERT_SIZE(struct BracketEntry, 0xDC);
 
 struct lbl_803D9D20_t {
     /*  +0 */ u8 x0[0x20];
@@ -1342,7 +1342,7 @@ struct lbl_803DA0D0_t {
     /* 0xDE */ u8 pad_0xDE[0xE0 - 0xDE];
     /* 0xE0 */ f32 bounce_y[41];
 }; /* size = 0x184 */
-STATIC_ASSERT(sizeof(struct lbl_803DA0D0_t) == 0x184);
+ASSERT_SIZE(struct lbl_803DA0D0_t, 0x184);
 
 typedef struct gm_8019ECAC_OnEnter_t {
     u32 x0;

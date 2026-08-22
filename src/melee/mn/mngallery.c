@@ -40,7 +40,7 @@ struct mnGallery_804D6C88_userdata {
     s32 frame;
     HSD_GObj* gobjs[2];
 };
-STATIC_ASSERT(sizeof(struct mnGallery_804D6C88_userdata) == 0x24);
+ASSERT_SIZE(struct mnGallery_804D6C88_userdata, 0x24);
 
 #define GET_mnGallery_child_userdata(gobj)                                    \
     ((struct mnGallery_child_userdata*) HSD_GObjGetUserData(gobj))
@@ -48,7 +48,7 @@ struct mnGallery_child_userdata {
     HSD_GObj* parent_gobj;
     s32 index;
 };
-STATIC_ASSERT(sizeof(struct mnGallery_child_userdata) == 8);
+ASSERT_SIZE(struct mnGallery_child_userdata, 8);
 
 static void float_order_helper(HSD_SObj* sobj)
 {

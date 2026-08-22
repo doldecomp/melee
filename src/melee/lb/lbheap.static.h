@@ -17,7 +17,7 @@ struct Heap {
     /* 24 */ s32 transient;
     /* 28 */ LbHeapStatus status;
 };
-STATIC_ASSERT(sizeof(struct Heap) == 0x1C);
+ASSERT_SIZE(struct Heap, 0x1C);
 
 struct lbHeap_HeapState {
     /* 0x00 */ void* arena_lo;    /* inferred */
@@ -26,7 +26,7 @@ struct lbHeap_HeapState {
     /* 0x0C */ uintptr_t aram_hi; /* inferred */
     /* 0x10 */ struct Heap heap_array[6];
 }; /* size = 0xB8 */
-STATIC_ASSERT(sizeof(struct lbHeap_HeapState) == 0xB8);
+ASSERT_SIZE(struct lbHeap_HeapState, 0xB8);
 
 /* 431FA0 */ static struct lbHeap_HeapState lbHeap_80431FA0;
 

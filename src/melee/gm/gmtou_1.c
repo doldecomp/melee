@@ -520,13 +520,13 @@ typedef struct TmPlayerAnimFrames {
     u16 end;
     u16 loop;
 } TmPlayerAnimFrames;
-STATIC_ASSERT(sizeof(TmPlayerAnimFrames) == 6);
+ASSERT_SIZE(TmPlayerAnimFrames, 6);
 
 typedef union TmPlayerAnimFrameTable {
     s32 words[9];
     TmPlayerAnimFrames states[6];
 } TmPlayerAnimFrameTable;
-STATIC_ASSERT(sizeof(TmPlayerAnimFrameTable) == sizeof(s32) * 9);
+ASSERT_SIZE(TmPlayerAnimFrameTable, sizeof(s32) * 9);
 
 extern TmPlayerAnimFrameTable lbl_803B7CE0;
 

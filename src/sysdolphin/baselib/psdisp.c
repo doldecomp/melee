@@ -82,8 +82,8 @@ typedef struct {
 /* 4D7944 */ static GXColor prevColorMat;
 /* 4D7948 */ static s32 HSD_PSDisp_804D7948[2];
 
-STATIC_ASSERT(sizeof(HSD_PSDisp_8040C340) == 0x20);
-STATIC_ASSERT(sizeof(HSD_PSDisp_8040C360) == 0x10);
+ASSERT_SIZE(HSD_PSDisp_8040C340, 0x20);
+ASSERT_SIZE(HSD_PSDisp_8040C360, 0x10);
 
 void setVtxDesc(s32 fmt)
 {

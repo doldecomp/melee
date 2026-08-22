@@ -40,7 +40,7 @@ typedef struct itGShell_Attrs {
     float x30;
     Vec x34;
 } itGShell_Attrs;
-STATIC_ASSERT(sizeof(itGShell_Attrs) == 64);
+ASSERT_SIZE(itGShell_Attrs, 64);
 
 ItemStateTable it_803F5BA8[] = {
     { -1, itGshell_UnkMotion0_Anim, itGshell_UnkMotion0_Phys,
