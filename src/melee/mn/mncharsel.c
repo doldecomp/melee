@@ -783,39 +783,6 @@ static inline bool isDuplicateCostumeWith(int door, CSSData* css,
     return false;
 }
 
-static inline bool isDuplicateRandomCostume(u8** other_door, int door,
-                                            CSSData* css, CSSAllData* all_data,
-                                            u8 costume)
-{
-    struct {
-        CSSDoor* value;
-    } base_door;
-    int num_doors;
-    int j;
-
-    base_door.value = &mnCharSel_803F0DFC.doors[door];
-    base_door.value->costume = costume;
-
-    if (css->match_type == TRAINING_MODE) {
-        num_doors = 2;
-    } else {
-        num_doors = mnCharSel_804D6CF5;
-    }
-
-    *other_door += 0x3B4;
-    for (j = 0; j < num_doors; *other_door += sizeof(CSSDoor), j++) {
-        CSSDoor* scan_door = (CSSDoor*) *other_door;
-        if (door != j && scan_door->p_kind != 3 &&
-            scan_door->sel_icon < 0x19 &&
-            scan_door->sel_icon == base_door.value->sel_icon &&
-            base_door.value->costume == scan_door->costume)
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
 static inline CSSData* loadCSSValue(CSSData* volatile* css)
 {
     return *css;
@@ -824,11 +791,6 @@ static inline CSSData* loadCSSValue(CSSData* volatile* css)
 static inline bool equalU8(u8 lhs, u8 rhs)
 {
     return lhs == rhs;
-}
-
-static inline CSSData* getCSSDataForCostumeLoop(void)
-{
-    return mnCharSel_804D6CB0;
 }
 
 /// Variant of isDuplicateCostume that reads the base door's icon and
@@ -973,11 +935,6 @@ static inline f32 getHandicapFrame(int port)
 {
     s32 hval = getHandicapValue(port);
     return (f32) hval;
-}
-
-static inline CSSData* getCSSData(void)
-{
-    return mnCharSel_804D6CB0;
 }
 
 void mnCharSel_8025DB34(u8 arg0)
