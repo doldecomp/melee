@@ -2095,9 +2095,7 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
 #pragma auto_inline off
 s32 mnCharSel_8025FDEC(u8 door)
 {
-    struct {
-        CSSData* value;
-    } css;
+    CSSData* css;
     HSD_JObj* sp10;
     int player;
     s8 c_kind;
@@ -2114,8 +2112,8 @@ s32 mnCharSel_8025FDEC(u8 door)
         player = door;
     }
 
-    css.value = mnCharSel_804D6CB0;
-    c_kind = css.value->data.data.players[player].c_kind;
+    css = mnCharSel_804D6CB0;
+    c_kind = css->data.data.players[player].c_kind;
 
     if (c_kind < CKIND_PLAYABLE_COUNT) {
         if (c_kind !=
@@ -2127,7 +2125,7 @@ s32 mnCharSel_8025FDEC(u8 door)
         {
             CSSIcon* icon = all_data->icons;
             for (icon_idx = 0; icon_idx < 0x19; icon_idx++) {
-                if (css.value->data.data.players[player].c_kind ==
+                if (css->data.data.players[player].c_kind ==
                     icon[icon_idx].char_kind)
                 {
                     break;
@@ -3405,24 +3403,18 @@ void fn_80262648(HSD_GObj* gobj)
 {
     HSD_JObj* sp24;
     union {
-        struct {
-            CSSData* value;
-        } css;
-        struct {
-            struct CSSCharModel** value;
-        } bd0;
-        struct {
-            struct CSSCharModel* value;
-        } model;
+        CSSData* css;
+        struct CSSCharModel** bd0;
+        struct CSSCharModel* model;
     } carrier;
     struct CSSCharModel* model;
-    HSD_JObj* jobj = (carrier.model.value = gobj->user_data,
-                      model = carrier.model.value, GET_JOBJ(gobj));
+    HSD_JObj* jobj = (carrier.model = gobj->user_data, model = carrier.model,
+                      GET_JOBJ(gobj));
     u8 prev_port = model->x6;
     int n_doors;
 
-    carrier.css.value = mnCharSel_804D6CB0;
-    n_doors = getDoorCount(carrier.css.value);
+    carrier.css = mnCharSel_804D6CB0;
+    n_doors = getDoorCount(carrier.css);
 
     {
         u8 p_kind;
@@ -3441,7 +3433,7 @@ void fn_80262648(HSD_GObj* gobj)
             } else {
                 model->x6 = (u8) mnCharSel_804D6CF0;
             }
-        } else if (carrier.css.value->data.data.rules.is_teams == 0) {
+        } else if (carrier.css->data.data.rules.is_teams == 0) {
             if (p_kind == 1) {
                 model->x6 = 8;
             } else {
@@ -3487,9 +3479,9 @@ void fn_80262648(HSD_GObj* gobj)
         u8 status = model->x5;
         if (status == 0) {
             s32 iter;
-            carrier.bd0.value = mnCharSel_804A0BD0;
+            carrier.bd0 = mnCharSel_804A0BD0;
             for (iter = 0; iter < 0x14; iter++) {
-                struct CSSCharModel** bdp = carrier.bd0.value;
+                struct CSSCharModel** bdp = carrier.bd0;
                 CSSDoor* dp = mnCharSel_803F0DFC.doors;
                 s32 j;
 
