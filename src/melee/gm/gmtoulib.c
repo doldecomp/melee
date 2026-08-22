@@ -901,7 +901,7 @@ static GXColor const lbl_804DA67C = { 0xFF, 0xFF, 0, 0xFF };
 
 /// Draws tournament bracket lines for different bracket types (0-3).
 void fn_8018C8D4(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
-                 s32 arg5, s32 arg6, f32 farg0)
+                 s32 arg5)
 {
     /// @todo Redundant cast and assignment improves match
 #ifdef MUST_MATCH
@@ -1199,7 +1199,7 @@ static GXColor const lbl_804DA684 = { 255, 255, 0, 255 };
 
 /// Draws tournament bracket connector lines with optional tail segments.
 void fn_8018D50C(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
-                 s32 arg5, s32 arg6, f32 farg0)
+                 s32 arg5)
 {
     TmData* tm;
     /// @todo Redundant cast and assignment improves match
@@ -1213,7 +1213,7 @@ void fn_8018D50C(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     s32 right;
     s32 bottom;
     GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8, c9;
-    GXColor c10, c11, c12, c13, c14, c15, c16, c17, c18;
+    GXColor c10, c11, c12, c13, c14, c15, c16, c17, c18, c19;
 
     tm = gm_GetTournamentData();
     c0 = lbl_804DA684;
@@ -1352,17 +1352,16 @@ void fn_8018D50C(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                     }
                 }
             } else {
-                bottom = arg2 + 0x1E;
                 c18 = c0;
                 {
                     GXColor* color = &c18;
-                    DrawRectangle((f32) right, (f32) bottom, thickness, -30.0f,
-                                  color);
+                    DrawRectangle((f32) right, (f32) (arg2 + 0x1E), thickness,
+                                  -30.0f, color);
                 }
                 if (data->x20.g == 0 && data->slots[0].x4C != 0) {
-                    c17 = data->x20;
-                    DrawRectangle((f32) right, (f32) bottom, thickness, -30.0f,
-                                  &c17);
+                    c19 = data->x20;
+                    DrawRectangle((f32) right, (f32) (arg2 + 0x1E), thickness,
+                                  -30.0f, &c19);
                 }
             }
         }
@@ -1377,7 +1376,7 @@ static inline int fn_8018DC18_inline0(BracketEntry* data)
 }
 
 void fn_8018DC18(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
-                 s32 arg5, s32 arg6, f32 farg0)
+                 s32 arg5)
 {
     f32 thickness;
     f32 neg_thickness;
@@ -1447,7 +1446,7 @@ void fn_8018DC18(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
 static const GXColor lbl_804DA69C = { 255, 255, 0, 255 };
 
 void fn_8018DF68(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
-                 s32 arg5, s32 arg6, f32 farg0)
+                 s32 arg5)
 {
     GXColor right_color;
     GXColor left_third_color;
@@ -1567,7 +1566,6 @@ void fn_8018E46C(HSD_GObj* gobj, int unused)
 {
     BracketEntry* data;
     s32 temp;
-    int new_var;
     s32 r30;
 
     data = gobj->user_data;
@@ -1583,24 +1581,20 @@ void fn_8018E46C(HSD_GObj* gobj, int unused)
     hsd_80391A04(1.0F, 1.0F, 1);
     switch (data->x3) {
     case 0:
-        new_var = data->x18;
         fn_8018C8D4(data, data->xC - (s32) (0.5f * data->x1C), -data->x10,
-                    data->x14, -new_var, r30, data->xC, 0.5f);
+                    data->x14, -data->x18, r30);
         break;
     case 1:
-        new_var = data->x18;
         fn_8018D50C(data, data->xC - (s32) (0.5f * data->x1C), -data->x10,
-                    data->x14, -new_var, r30, data->xC, 0.5f);
+                    data->x14, -data->x18, r30);
         break;
     case 2:
-        new_var = data->x18;
         fn_8018DC18(data, data->xC - (s32) (0.5f * data->x1C), -data->x10,
-                    data->x14, -new_var, r30, data->xC, 0.5f);
+                    data->x14, -data->x18, r30);
         break;
     case 3:
-        new_var = data->x18;
         fn_8018DF68(data, data->xC - (s32) (0.5f * data->x1C), -data->x10,
-                    data->x14, -new_var, r30, data->xC, 0.5f);
+                    data->x14, -data->x18, r30);
         break;
     }
 }
