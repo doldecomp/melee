@@ -177,9 +177,19 @@ void mnCharSel_8025BD30(void)
             return;
         }
     }
+
+    // Preserve literals from the inlined helpers at their original pool sites.
+    (void) 200.0f;
+    (void) 0.0f;
+    (void) 4503601774854144.0;
+    (void) "%02d:%02d";
+    (void) "%02d";
+    (void) "%d:%02d:%02d";
+    (void) "99:59:59";
+    (void) "99";
 }
 
-static void getStickDelta(int port, f32* dx, f32* dy)
+static inline void getStickDelta(int port, f32* dx, f32* dy)
 {
     f32 stick_x = (f32) HSD_PadCopyStatus[(u8) port].stickX;
     f32 stick_y = (f32) HSD_PadCopyStatus[(u8) port].stickY;
@@ -197,8 +207,8 @@ static void getStickDelta(int port, f32* dx, f32* dy)
     }
 }
 
-static void drawTimeText(HSD_Text* x, HSD_Text* y, int hours, int minutes,
-                         int seconds, int microseconds)
+static inline void drawTimeText(HSD_Text* x, HSD_Text* y, int hours,
+                                int minutes, int seconds, int microseconds)
 {
     if (hours == 0) {
         HSD_SisLib_803A70A0(x, 0, "%02d:%02d", minutes, seconds);
@@ -1279,6 +1289,8 @@ void mnCharSel_8025EE8C(u8 idx)
             mnCharSel_8025DB34(i);
         }
     }
+
+    (void) 7.5f;
 }
 
 static struct CSSCursorData* mnCharSel_804A0BC0[4];
@@ -1294,8 +1306,8 @@ static struct CSSCharModel {
     /* 0x14 */ float x14;
 }* mnCharSel_804A0BD0[4];
 
-static void updateStockIcons(struct CSSDoorsData2* stock_data,
-                             HSD_JObj** stock_jobj, s32 i)
+static inline void updateStockIcons(struct CSSDoorsData2* stock_data,
+                                    HSD_JObj** stock_jobj, s32 i)
 {
     lb_80011E24(mnCharSel_804D6CC0, stock_jobj, stock_data->xf0[0], -1);
     HSD_JObjSetTranslateX(*stock_jobj, 7.5f);
