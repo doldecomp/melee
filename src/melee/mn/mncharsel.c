@@ -4599,14 +4599,18 @@ s32 mnCharSel_802640A0(void)
                     lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x45, -1);
                     HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
                     lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x46, -1);
-                    HSD_JObjSetFlagsAll(sp108, JOBJ_HIDDEN);
+                    {
+                        HSD_JObj* hide_jobj = sp108;
+                        HSD_JObjSetFlagsAll(hide_jobj, JOBJ_HIDDEN);
+                    }
+                    (void) ((u8*) mnCharSel_803F0EBC.xd3)[data2.stocks];
                 } else {
                     UNUSED u8 unk74[0x20];
                     HSD_JObj* sp70;
                     data2.stocks =
                         css->data.data.players[mnCharSel_804D6CF0].stocks;
                     updateStockIcons(&data2, &sp70, 1);
-                    (void) ((u8*) mnCharSel_803F0EBC.xd3)[data2.stocks];
+                    num_players = data2.stocks;
                     mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
                         .stocks = data2.stocks;
                 }
