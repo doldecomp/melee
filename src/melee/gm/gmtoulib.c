@@ -1198,16 +1198,10 @@ void fn_8018C8D4(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
 static GXColor const lbl_804DA684 = { 255, 255, 0, 255 };
 
 /// Draws tournament bracket connector lines with optional tail segments.
-void fn_8018D50C(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
+void fn_8018D50C(BracketEntry* data, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                  s32 arg5)
 {
     TmData* tm;
-    /// @todo Redundant cast and assignment improves match
-#ifdef MUST_MATCH
-    BracketEntry* data = (BracketEntry*) arg0;
-#else
-    BracketEntry* data = arg0;
-#endif
     f32 thickness;
     f32 neg_thickness;
     s32 right;
@@ -1448,15 +1442,19 @@ static const GXColor lbl_804DA69C = { 255, 255, 0, 255 };
 void fn_8018DF68(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                  s32 arg5)
 {
-    GXColor right_color;
-    GXColor left_third_color;
     GXColor line_color;
     GXColor first_color;
-    GXColor slot3_vertical_color;
-    GXColor slot0_horizontal_color;
+    GXColor right_color;
+    GXColor left_third_color;
     GXColor right_third_color;
     GXColor horizontal_color;
     GXColor slot0_vertical_color;
+    GXColor slot0_horizontal_color;
+    GXColor slot1_vertical_color;
+    GXColor slot1_horizontal_color;
+    GXColor slot2_vertical_color;
+    GXColor slot2_horizontal_color;
+    GXColor slot3_vertical_color;
     GXColor slot3_horizontal_color;
     f32 neg_thickness;
     f32 thickness;
@@ -1513,8 +1511,6 @@ void fn_8018DF68(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
             return;
         }
         if (arg0->slots[1].x4C == 0) {
-            GXColor slot1_vertical_color;
-            GXColor slot1_horizontal_color;
             GXColor* entry_color = &arg0->x20;
             slot1_vertical_color = *entry_color;
             DrawRectangle(left_third, arg2, thickness, arg4,
@@ -1529,8 +1525,6 @@ void fn_8018DF68(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
             return;
         }
         if (arg0->slots[2].x4C == 0) {
-            GXColor slot2_horizontal_color;
-            GXColor slot2_vertical_color;
             GXColor* entry_color = &arg0->x20;
             slot2_vertical_color = *entry_color;
             DrawRectangle(right_third, arg2, thickness, arg4,
