@@ -94,40 +94,35 @@ static void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
         for (i = 0; i < count; i++) {
             s32 n;
             s32 nbytes;
-            s32 nshift;
             s32 k;
-            s32 offset;
             s32 id;
             void** bucket;
 
             n = *HSD_Synth_804D7734;
             (void) n;
-            nshift = n << 6;
-            nbytes = SfxLoadStreamDataSize(nshift);
+            nbytes = SfxLoadStreamDataSize(n << 6);
             memcpy((u8*) HSD_Synth_804D7730 + 8, HSD_Synth_804D7734, nbytes);
-            offset = 0;
             for (k = 0; k < n; k++) {
-                u8* e = (u8*) HSD_Synth_804D7730 + offset;
+                u8* e = (u8*) HSD_Synth_804D7730 + k * 0x40;
                 if (e + 0x10 != NULL) {
                     *(u32*) (e + 0x14) += hsd_SynthSFXBank[bankID] * 2;
                 } else {
                     *(u32*) (e + 0x14) = HSD_Synth_804D7784;
                 }
-                *(u32*) ((u8*) HSD_Synth_804D7730 + offset + 0x18) +=
+                *(u32*) ((u8*) HSD_Synth_804D7730 + k * 0x40 + 0x18) +=
                     hsd_SynthSFXBank[bankID] * 2;
-                *(u32*) ((u8*) HSD_Synth_804D7730 + offset + 0x1C) +=
+                *(u32*) ((u8*) HSD_Synth_804D7730 + k * 0x40 + 0x1C) +=
                     hsd_SynthSFXBank[bankID] * 2;
-                offset += 0x40;
             }
             id = base + i;
             HSD_Synth_804D7730->x4 = id;
             bucket = &HSD_Synth_804C29E0[id & 0x1F];
             HSD_Synth_804D7730->x0 = (struct SfxLoadStreamNode*) *bucket;
             *bucket = HSD_Synth_804D7730;
-            HSD_Synth_804D7734 += ((u32) nbytes & ~3) >> 2;
             HSD_Synth_804D7730 =
                 (struct SfxLoadStreamNode*) ((u8*) HSD_Synth_804D7730 +
-                                             ((nshift + 0x10) & ~3));
+                                             (((n << 6) + 0x10) & ~3));
+            HSD_Synth_804D7734 += ((u32) nbytes & ~3) >> 2;
         }
         if (HSD_Synth_804C2A60[0].x8 != NULL) {
             HSD_Synth_804C2A60[0].x8(HSD_Synth_804C2A60[0].entrynum,
