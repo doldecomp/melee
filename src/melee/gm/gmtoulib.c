@@ -917,7 +917,7 @@ void fn_8018C8D4(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     s32 half, center, right, left;
     GXColor c10, c11, c12, c13, c14, c15, c16, c17, c18, c19;
     GXColor c20, c21, c22, c23, c24, c25, c26, c27, c28, c29;
-    GXColor c30, c31;
+    GXColor c30, c31, c32, c33;
 
     c0 = lbl_804DA67C;
     thickness = data->x1C;
@@ -1178,15 +1178,15 @@ void fn_8018C8D4(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                 DrawRectangle((f32) right, (f32) arg2, thickness,
                               (f32) third_h, color);
             }
-            c2 = data->x20;
+            c32 = data->x20;
             {
-                GXColor* color = &c2;
+                GXColor* color = &c32;
                 DrawRectangle((f32) center, (f32) mid_y, (f32) half,
                               neg_thickness, color);
             }
-            c3 = data->x20;
+            c33 = data->x20;
             {
-                GXColor* color = &c3;
+                GXColor* color = &c33;
                 DrawRectangle((f32) center, (f32) mid_y, thickness,
                               (f32) ((arg4 / 6) - 1), color);
             }
@@ -1383,7 +1383,7 @@ void fn_8018DC18(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     s32 right;
     s32 half;
     s32 center;
-    GXColor c0, c1, c2, c3, c4, c5, c6, c7;
+    GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8, c9;
 
     c0 = col;
     thickness = arg0->x1C;
@@ -1435,10 +1435,10 @@ void fn_8018DC18(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
         }
         {
             GXColor* entry_color = &arg0->x20;
-            c7 = *entry_color;
-            DrawRectangle(right, arg2, thickness, arg4, &c7);
-            c7 = *entry_color;
-            DrawRectangle(center, arg5, half + thickness, neg_thickness, &c7);
+            c8 = *entry_color;
+            DrawRectangle(right, arg2, thickness, arg4, &c8);
+            c9 = *entry_color;
+            DrawRectangle(center, arg5, half + thickness, neg_thickness, &c9);
         }
     }
 }
