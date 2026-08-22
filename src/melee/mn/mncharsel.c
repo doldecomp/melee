@@ -4602,6 +4602,7 @@ s32 mnCharSel_802640A0(void)
                     data2.stocks =
                         css->data.data.players[mnCharSel_804D6CF0].stocks;
                     updateStockIcons(&data2, &sp70, 1);
+                    (void) ((u8*) mnCharSel_803F0EBC.xd3)[data2.stocks];
                     mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
                         .stocks = data2.stocks;
                 }
