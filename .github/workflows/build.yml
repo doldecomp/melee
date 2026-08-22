@@ -3,23 +3,23 @@ run-name: Build Melee & publish GitHub Pages
 
 on: [push, pull_request]
 
-permissions:
-  contents: read
-  id-token: write
-  packages: read
-  pages: write
-
 env:
   UPSTREAM_ORG: doldecomp
   UPSTREAM_REPO: melee
   UPSTREAM_FULL: ${{env.UPSTREAM_ORG}}/${{env.UPSTREAM_REPO}}
   UPSTREAM_NIX: ${{env.UPSTREAM_ORG}}-${{env.UPSTREAM_REPO}}
 
+permissions:
+  contents: read
+  id-token: write
+  packages: read
+  pages: write
+
 jobs:
   build-ninja:
     name: Ninja
     runs-on: ubuntu-latest
-    if: github.repository == env.UPSTREAM_FULL
+    if: github.repository == ${{env.UPSTREAM_FULL}}
     container: ghcr.io/${{env.UPSTREAM_FULL}}-build:main
     strategy:
       fail-fast: false
