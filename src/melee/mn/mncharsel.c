@@ -643,11 +643,13 @@ static inline HSD_JObj* animateJoint(HSD_JObj* root, u8 joint, u32 mask,
 {
     HSD_JObj* jobj;
     HSD_JObj* cc0;
+    HSD_JObj* cc1;
     lb_80011E24(root, &jobj, joint, -1);
     cc0 = jobj;
     HSD_ForeachAnim(cc0, JOBJ_TYPE, mask, HSD_AObjReqAnim, AOBJ_ARG_AF, frame);
     HSD_JObjAnimAll(jobj);
-    HSD_ForeachAnim(jobj, JOBJ_TYPE, mask, HSD_AObjStopAnim, AOBJ_ARG_AOV, 0,
+    cc1 = jobj;
+    HSD_ForeachAnim(cc1, JOBJ_TYPE, mask, HSD_AObjStopAnim, AOBJ_ARG_AOV, 0,
                     0);
     return jobj;
 }
