@@ -21,7 +21,7 @@ typedef struct {
     float x4;
     itECB x8;
 } itMsBomb_Attrs;
-STATIC_ASSERT(sizeof(itMsBomb_Attrs) == 24);
+ASSERT_SIZE(itMsBomb_Attrs, 24);
 
 ItemStateTable ItemStateTable_MsBomb[] = {
     { -1, NULL, NULL, itMsbomb_UnkMotion0_Coll },

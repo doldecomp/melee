@@ -14,7 +14,7 @@ struct _m2c_stack_it_802BCA30 {
     /* 0x24 */ Mtx mtx;
     /* 0x54 */ char pad_54[0x14];
 };
-STATIC_ASSERT(sizeof(struct _m2c_stack_it_802BCA30) == 0x68);
+ASSERT_SIZE(struct _m2c_stack_it_802BCA30, 0x68);
 
 struct _m2c_stack_fn_802BB694 {
     /* 0x10 */ Mtx mtx0;
@@ -23,7 +23,7 @@ struct _m2c_stack_fn_802BB694 {
     /* 0x40 */ Vec3 vec;
     /* 0x4C */ char pad_4C[0x14];
 };
-STATIC_ASSERT(sizeof(struct _m2c_stack_fn_802BB694) == 0x60);
+ASSERT_SIZE(struct _m2c_stack_fn_802BB694, 0x60);
 
 struct _m2c_stack_fn_802BB784 {
     char pad_0[0xC];
@@ -32,7 +32,7 @@ struct _m2c_stack_fn_802BB784 {
     /* 0x3C */ Vec3 vec;
     /* 0x4C */ char pad_4C[0x1C];
 }; /* size = 0x68 */
-STATIC_ASSERT(sizeof(struct _m2c_stack_fn_802BB784) == 0x68);
+ASSERT_SIZE(struct _m2c_stack_fn_802BB784, 0x68);
 
 struct _m2c_stack_fn_802BB574 {
     /* 0x00 */ char pad_0[0x10];
@@ -40,7 +40,7 @@ struct _m2c_stack_fn_802BB574 {
     /* 0x40 */ Vec3 vec;
     /* 0x4C */ char pad_4C[0x1C];
 };
-STATIC_ASSERT(sizeof(struct _m2c_stack_fn_802BB574) == 0x68);
+ASSERT_SIZE(struct _m2c_stack_fn_802BB574, 0x68);
 
 struct _m2c_stack_fn_802BB44C {
     /* 0x00 */ char pad_0[0x10];
@@ -48,7 +48,7 @@ struct _m2c_stack_fn_802BB44C {
     /* 0x40 */ Vec3 vec;
     /* 0x4C */ char pad_4C[0x1C];
 };
-STATIC_ASSERT(sizeof(struct _m2c_stack_fn_802BB44C) == 0x68);
+ASSERT_SIZE(struct _m2c_stack_fn_802BB44C, 0x68);
 
 struct _m2c_stack_it_802BCB88 {
     /* 0x00 */ char pad_0[0x18];
@@ -59,7 +59,7 @@ struct _m2c_stack_it_802BCB88 {
     /* 0x6C */ Vec3 pos2;
     /* 0x78 */ char pad_78[0x28];
 }; /* size = 0xA0 */
-STATIC_ASSERT(sizeof(struct _m2c_stack_it_802BCB88) == 0xA0);
+ASSERT_SIZE(struct _m2c_stack_it_802BCB88, 0xA0);
 
 struct _m2c_stack_it_802BCFC4 {
     /* 0x00 */ char pad_0[0x1C];
@@ -68,14 +68,14 @@ struct _m2c_stack_it_802BCFC4 {
     /* 0x54 */ Vec3 pos;       /* inferred */
     /* 0x60 */ char pad_60[0x20];
 }; /* size = 0x80 */
-STATIC_ASSERT(sizeof(struct _m2c_stack_it_802BCFC4) == 0x80);
+ASSERT_SIZE(struct _m2c_stack_it_802BCFC4, 0x80);
 
 struct _m2c_stack_it_802BB290 {
     /* 0x00 */ char pad_0[0x40];
     /* 0x40 */ SpawnItem spawn;
     char pad[0xA8 - 0x8C];
 }; /* size = 0xA8 */
-STATIC_ASSERT(sizeof(struct _m2c_stack_it_802BB290) == 0xA8);
+ASSERT_SIZE(struct _m2c_stack_it_802BB290, 0xA8);
 
 const Vec3 it_803B8680 = { 0 };
 const Vec3 it_803B868C = { 0.0f, 0.0f, 0.1f };

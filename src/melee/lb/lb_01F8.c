@@ -23,7 +23,7 @@ struct lbl_804335B8_t {
     /* 0x98 */ size_t unk98;
     /* 0x9C */ char pad_9C[0xA0 - 0x9C];
 }; /* size = 0xA0 */
-STATIC_ASSERT(sizeof(struct lbl_804335B8_t) == 0xA0);
+ASSERT_SIZE(struct lbl_804335B8_t, 0xA0);
 
 extern struct lbl_804333E0_t Movieplayer;
 

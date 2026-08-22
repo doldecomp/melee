@@ -21,7 +21,7 @@ struct ParticleConsoleState {
     /* 20 */ int x20;
     /* 20 */ UNK_T x24;
 };
-STATIC_ASSERT(sizeof(struct ParticleConsoleState) == 0x28);
+ASSERT_SIZE(struct ParticleConsoleState, 0x28);
 
 /* 4D7890 */ static s32 hsd_804D7890;
 /* 4D7894 */ static int hsd_804D7894;

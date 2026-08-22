@@ -39,7 +39,7 @@ struct ToyAnimState {
     /* 0x11 */ s8 x11;
     /* 0x12 */ u8 pad_12[2];
 };
-STATIC_ASSERT(sizeof(ToyAnimState) == 0x14);
+ASSERT_SIZE(ToyAnimState, 0x14);
 
 /* Used by _Toy_803109A0 for table lookup */
 struct ToyEntry {
@@ -106,7 +106,7 @@ struct TyDspEntry {
     /* 0x08 */ f32 x08;
     /* 0x0C */ f32 x0C;
 };
-STATIC_ASSERT(sizeof(struct TyDspEntry) == 0x10);
+ASSERT_SIZE(struct TyDspEntry, 0x10);
 
 struct ToySubStructS_ {
     u8 pad0[0x10];
@@ -188,14 +188,14 @@ struct _Toy_804A26B8_t {
     UNK_T x4;
     UNK_T x8;
 };
-STATIC_ASSERT(sizeof(struct _Toy_804A26B8_t) == 0xC);
+ASSERT_SIZE(struct _Toy_804A26B8_t, 0xC);
 
 struct TyViewData {
     char pad_0[0x4];
     s8 x4;
     char pad_5[0x3];
 };
-STATIC_ASSERT(sizeof(struct TyViewData) == 0x8);
+ASSERT_SIZE(struct TyViewData, 0x8);
 
 struct TyFiguponData {
     /* 0x00 */ HSD_GObj* x0;
@@ -470,7 +470,7 @@ struct ToyCameraControl {
     /* +14 */ f32 x14;
     /* +18 */ f32 x18;
 };
-STATIC_ASSERT(sizeof(ToyCameraControl) == 0x1C);
+ASSERT_SIZE(ToyCameraControl, 0x1C);
 
 struct ToyTransitionObj {
     u8 pad[0x20];
@@ -535,7 +535,7 @@ struct TyListState {
     /* 0x2A4 */ float x2A4;
     /* 0x2A8 */ float x2A8;
 };
-STATIC_ASSERT(sizeof(struct TyListState) == 0x2AC);
+ASSERT_SIZE(struct TyListState, 0x2AC);
 
 struct TyListData {
     u8 pad[0x28];
@@ -577,7 +577,7 @@ STATIC_ASSERT(offsetof(struct ToyED8Data, jobjs) == 0x18);
 STATIC_ASSERT(offsetof(struct ToyED8Data, x30) == 0x30);
 STATIC_ASSERT(offsetof(struct ToyED8Data, archive) == 0x50);
 STATIC_ASSERT(offsetof(struct ToyED8Data, x54) == 0x54);
-STATIC_ASSERT(sizeof(struct ToyED8Data) == 0x5C);
+ASSERT_SIZE(struct ToyED8Data, 0x5C);
 struct TyArchiveData {
     HSD_GObj* gobj;
     u8 pad[0x4C];
@@ -645,6 +645,6 @@ struct lbl_803FDDE4_t {
         bool flag;
     } values[6];
 };
-STATIC_ASSERT(sizeof(struct lbl_803FDDE4_t) == 0x78);
+ASSERT_SIZE(struct lbl_803FDDE4_t, 0x78);
 
 #endif

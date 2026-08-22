@@ -131,9 +131,9 @@ typedef struct TySortRow {
 /* 4D6E54 */ s32 _Toy_sbss_804D6E54;
 /* 4D6E50 */ s8 _Toy_sbss_804D6E50;
 
-STATIC_ASSERT(sizeof(_Toy_803B8910) == 0x48);
-STATIC_ASSERT(sizeof(_Toy_devtext_buf_804A26C4) == 0x8C);
-STATIC_ASSERT(sizeof(_Toy_devtext_buf_804A2750) == 0xFC);
+ASSERT_SIZE(_Toy_803B8910, 0x48);
+ASSERT_SIZE(_Toy_devtext_buf_804A26C4, 0x8C);
+ASSERT_SIZE(_Toy_devtext_buf_804A2750, 0xFC);
 
 /// @todo .sdata2 order hack
 static void order_sdata2_0(void)

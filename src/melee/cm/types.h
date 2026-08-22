@@ -184,7 +184,7 @@ struct Camera {
     /* 0x39A:7 */ u8 x39A_b7 : 1;
     /* 0x39B */ char pad_39B; /* maybe part of unk_39A[6]? */
 };
-STATIC_ASSERT(sizeof(struct Camera) == 0x39C);
+ASSERT_SIZE(struct Camera, 0x39C);
 
 struct CameraUnkGlobals {
     /*  +0 */ float x0;
