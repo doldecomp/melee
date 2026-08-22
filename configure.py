@@ -360,6 +360,7 @@ clang_flags_base = [
     "-nostdinc",
     "-fno-builtin",
     "--target=ppc32-none-eabi",
+    "-DLINT",
     "-fno-short-enums",
     "-Isrc/melee",
     "-Isrc/melee/ft/chara",
