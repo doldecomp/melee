@@ -168,7 +168,7 @@ struct StaleMoveTable {
     /* +CEC */ int xCEC;
     /* +CF0 */ int xCF0;
 };
-STATIC_ASSERT(sizeof(struct StaleMoveTable) == 0xCF4);
+ASSERT_SIZE(struct StaleMoveTable, 0xCF4);
 
 struct pl_StaleMoveTableExt_t {
     /*   +0 */ StaleMoveTable x0_staleMoveTable;

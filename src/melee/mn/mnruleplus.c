@@ -71,7 +71,7 @@ typedef struct mn_803ED1D0_t {
     AnimLoopSettings x7C[2];
     AnimLoopSettings x94;
 } mn_803ED1D0_t;
-STATIC_ASSERT(sizeof(mn_803ED1D0_t) == 0xA0);
+ASSERT_SIZE(mn_803ED1D0_t, 0xA0);
 
 mn_803ED1D0_t mn_803ED1D0 = {
     { 3, 4, 5, 6, 7, 8, 9 },

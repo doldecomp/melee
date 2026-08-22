@@ -40,7 +40,7 @@
 struct staffInfo_t {
     char pad_0[0x948];
 };
-STATIC_ASSERT(sizeof(struct staffInfo_t) == 0x948);
+ASSERT_SIZE(struct staffInfo_t, 0x948);
 
 /* 4D67F8 */ static struct {
     HSD_Text* win[2];
@@ -50,7 +50,7 @@ STATIC_ASSERT(sizeof(struct staffInfo_t) == 0x948);
 struct staffInfoSortBuf_t {
     char pad_0[0x2E68];
 };
-STATIC_ASSERT(sizeof(struct staffInfoSortBuf_t) == 0x2E68);
+ASSERT_SIZE(struct staffInfoSortBuf_t, 0x2E68);
 
 typedef struct {
     int index;
@@ -106,7 +106,7 @@ typedef struct {
     } sfx_cues[44];
     /* 0x170 */ u8 pad_170[8];
 } StaffRollExtraData;
-STATIC_ASSERT(sizeof(StaffRollExtraData) == 0x178);
+ASSERT_SIZE(StaffRollExtraData, 0x178);
 
 typedef struct StaffRollPtclNode {
     /* 0x00 */ struct StaffRollPtclNode* x0;

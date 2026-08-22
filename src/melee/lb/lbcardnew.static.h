@@ -50,6 +50,6 @@ struct lb_80432A68_t {
     } task_array[LbCardNewTaskArray_Max];
     /* 0x8AC */ int x8AC;
 }; /* size = 0x8B0 */
-STATIC_ASSERT(sizeof(struct lb_80432A68_t) == 0x8B0);
+ASSERT_SIZE(struct lb_80432A68_t, 0x8B0);
 
 /* 432A68 */ static struct lb_80432A68_t lb_80432A68;

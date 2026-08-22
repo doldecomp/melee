@@ -45,8 +45,8 @@ struct Allocator {
 
 struct Allocator lbMemory_804318B0;
 #define _p(x) (lbMemory_804318B0.x)
-STATIC_ASSERT(sizeof(struct MemEntry) == 0xC);
-STATIC_ASSERT(sizeof(lbMemory_804318B0) == 0x6F0);
+ASSERT_SIZE(struct MemEntry, 0xC);
+ASSERT_SIZE(lbMemory_804318B0, 0x6F0);
 
 #define PUSH_HANDLE(list, handle)                                             \
     do {                                                                      \

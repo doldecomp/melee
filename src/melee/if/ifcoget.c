@@ -29,7 +29,7 @@
     int x8;
     HSD_GObj* xC;
 } un_803F9E08 = { 0 };
-STATIC_ASSERT(sizeof(un_803F9E08) == 0x10);
+ASSERT_SIZE(un_803F9E08, 0x10);
 
 static void order_data(void)
 {

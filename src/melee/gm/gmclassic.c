@@ -25,13 +25,13 @@ typedef struct gmClassicMatchup {
     };
     /* 0x05 */ u8 x05;
 } gmClassicMatchup;
-STATIC_ASSERT(sizeof(gmClassicMatchup) == 6);
+ASSERT_SIZE(gmClassicMatchup, 6);
 
 typedef struct gmClassicMatchupData {
     /* 0x00 */ gmClassicMatchup x00;
     /* 0x06 */ u8 pad_06[2];
 } gmClassicMatchupData;
-STATIC_ASSERT(sizeof(gmClassicMatchupData) == 8);
+ASSERT_SIZE(gmClassicMatchupData, 8);
 
 typedef struct gmClassicIntroData {
     /* 0x00 */ s32 x00;
@@ -49,7 +49,7 @@ typedef struct gmClassicIntroData {
     /* 0x1C */ u8 x1C[3];
     /* 0x1F */ u8 x1F;
 } gmClassicIntroData;
-STATIC_ASSERT(sizeof(gmClassicIntroData) == 0x20);
+ASSERT_SIZE(gmClassicIntroData, 0x20);
 
 typedef struct gmClassic_80490880Data {
     /* 0x00 */ gmClassicIntroData x00;
@@ -59,7 +59,7 @@ typedef struct gmClassic_80490880Data {
     /* 0x74 */ u8 x74[0x0C];
     /* 0x80 */ u8 x80[0x10];
 } gmClassic_80490880Data;
-STATIC_ASSERT(sizeof(gmClassic_80490880Data) == 0x90);
+ASSERT_SIZE(gmClassic_80490880Data, 0x90);
 
 typedef struct gmClassic_803DDEC8Data {
     /* 0x000 */ gm_803DDEC8Struct x00[12];
@@ -72,13 +72,13 @@ typedef struct gmClassic_803DDEC8Data {
     /* 0x2B0 */ gmClassicMatchup x2B0[10];
     /* 0x2EC */ u8 pad_2EC[4];
 } gmClassic_803DDEC8Data;
-STATIC_ASSERT(sizeof(gmClassic_803DDEC8Data) == 0x2F0);
+ASSERT_SIZE(gmClassic_803DDEC8Data, 0x2F0);
 
 typedef struct gmClassicSceneData {
     /* 0x000 */ GameScene scenes[26];
     /* 0x270 */ gmClassic_803DDEC8Data matchups;
 } gmClassicSceneData;
-STATIC_ASSERT(sizeof(gmClassicSceneData) == 0x560);
+ASSERT_SIZE(gmClassicSceneData, 0x560);
 
 static gmClassic_80490880Data gmClassic_80490880;
 extern gmClassic_803DDEC8Data gmClassic_803DDEC8;

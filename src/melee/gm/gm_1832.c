@@ -93,7 +93,7 @@ static struct gm_1832_8047368C_t {
     /* 0x1C */ u8 x100[3];
     /* 0x1F */ u8 pad_1F[5];
 } lbl_8047368C;
-STATIC_ASSERT(sizeof(struct gm_1832_8047368C_t) == 0x24);
+ASSERT_SIZE(struct gm_1832_8047368C_t, 0x24);
 
 static HSD_Archive* lbl_804D65F4;
 static HSD_Archive* lbl_804D65F8;
@@ -118,7 +118,7 @@ typedef struct TrainingItemEntry {
     s16 item_id;
     s16 text_id;
 } TrainingItemEntry;
-STATIC_ASSERT(sizeof(TrainingItemEntry) == 4);
+ASSERT_SIZE(TrainingItemEntry, 4);
 
 static inline TrainingItemEntry* TrainingItemTable_Get(void)
 {
@@ -138,7 +138,7 @@ static inline s16 TrainingItemTable_GetTextId(s32 idx)
 typedef struct {
     /* 0x00 */ f32 vals[3];
 } ClassicSlotVals;
-STATIC_ASSERT(sizeof(ClassicSlotVals) == 0xC);
+ASSERT_SIZE(ClassicSlotVals, 0xC);
 
 typedef struct {
     /* 0x00 */ f32 x00;
@@ -146,7 +146,7 @@ typedef struct {
     /* 0x08 */ Vec3 x08;
     /* 0x14 */ u8 pad_14[0x8];
 } ClassicCharLayout;
-STATIC_ASSERT(sizeof(ClassicCharLayout) == 0x1C);
+ASSERT_SIZE(ClassicCharLayout, 0x1C);
 
 typedef struct {
     /* 0x00 */ f32 x00;
@@ -154,7 +154,7 @@ typedef struct {
     /* 0x08 */ f32 x08;
     /* 0x0C */ u8 pad_0C[0x8];
 } ClassicTeamEntry;
-STATIC_ASSERT(sizeof(ClassicTeamEntry) == 0x14);
+ASSERT_SIZE(ClassicTeamEntry, 0x14);
 
 typedef struct {
     /* 0x00 */ f32 x00[3];
@@ -162,7 +162,7 @@ typedef struct {
     /* 0x18 */ f32 x18[3];
     /* 0x24 */ f32 x24[3];
 } ClassicSplashRow;
-STATIC_ASSERT(sizeof(ClassicSplashRow) == 0x30);
+ASSERT_SIZE(ClassicSplashRow, 0x30);
 
 static struct {
     /* 0x000 */ ClassicSlotVals x00[2];
@@ -188,7 +188,7 @@ typedef struct ClassicStageEntry {
     /* 0x04 */ u16 scale1_pct; ///< Divided by 100 to get ratio
     /* 0x06 */ u8 pad_6[0xA];
 } ClassicStageEntry;
-STATIC_ASSERT(sizeof(ClassicStageEntry) == 0x10);
+ASSERT_SIZE(ClassicStageEntry, 0x10);
 
 extern ClassicStageEntry lbl_803D9910[65];
 
@@ -1525,7 +1525,7 @@ static struct gm_1832_804736C0_t {
     u8 x38;
     u8 pad_39[7];
 } lbl_804736C0;
-STATIC_ASSERT(sizeof(struct gm_1832_804736C0_t) == 0x40);
+ASSERT_SIZE(struct gm_1832_804736C0_t, 0x40);
 typedef struct gm_1832_804736C0_t gm_1832_804736C0_t;
 
 void fn_80187910(HSD_GObj* arg0)
