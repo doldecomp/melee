@@ -8159,37 +8159,14 @@ void ftCo_800B2790(Fighter* fp)
     }
 }
 
-static inline bool ftCo_800B2AFC_CheckFloor(Vec3* pos, int* line, u32* flags,
-                                            Vec3* normal, int arg4, int arg5,
-                                            int arg6, float x0, float y0,
-                                            float x1, float y1,
-                                            float tolerance)
+static inline bool ftCo_800B2AFC_IsIgnoredFloor(int line)
 {
-    int result;
-    *line = -1;
-    result = mpCheckFloor(x0, y0, x1, y1, tolerance, pos, line, flags, normal,
-                          arg4, arg5, arg6, NULL, NULL);
-    if (result != 0 && ftCo_800A1B38_noinline(*line) != 0) {
-        return false;
-    }
-    return result;
+    return ftCo_IsIgnoredFloor(line);
 }
 
 void ftCo_800B2AFC(Fighter* fp)
 {
-    UNUSED u8 pad_high[4];
-    u32 flags0;
-    Vec3 floor_pos26;
-    Vec3 floor_normal0;
-    Vec3 floor_pos0;
-    u32 flags1;
-    Vec3 floor_normal1;
-    int line1;
-    int line3;
-    Vec3 floor_pos1;
-    Vec3 floor_normal3;
-    Vec3 floor_pos3;
-    int line0;
+    UNUSED u8 pad_high[8];
 
     switch (fp->x1A88.xC) {
     case 0: {
@@ -8213,17 +8190,30 @@ void ftCo_800B2AFC(Fighter* fp)
             do_act = 1;
         }
         if (do_act != 0) {
+            u32 flags0;
+            int line0;
+            Vec3 floor_normal0;
+            Vec3 floor_pos0;
             f32 x = fp->cur_pos.x;
             f32 x2 = x;
             f32 y = fp->cur_pos.y;
             f32 below;
             f32 above;
+            found = 0;
             below = y - 1000.0f;
             above = 10.0f + y;
-            result = ftCo_800B2AFC_CheckFloor(&floor_pos0, &line0, &flags0,
-                                              &floor_normal0, -1, -1, -1, x2,
-                                              above, x, below, 0.0f);
-            found = result;
+            line0 = -1;
+            result = mpCheckFloor(x2, above, x, below, 0.0f, &floor_pos0,
+                                  &line0, &flags0, &floor_normal0, -1, -1, -1,
+                                  NULL, (Fighter_GObj*) found);
+            if (result == 0) {
+                goto assign0;
+            }
+            switch (ftCo_800B2AFC_IsIgnoredFloor(line0)) {
+            case 0:
+            assign0:
+                found = result;
+            }
             if (found != 0) {
                 f32 floor_x;
                 f32 floor_y;
@@ -8242,6 +8232,7 @@ void ftCo_800B2AFC(Fighter* fp)
         s32 do_act;
         s32 x18;
 
+        PAD_STACK(4);
         data->xF8_b0 = false;
         ftCo_CpuClearTargetModes(data);
         data->xF9_b1 = false;
@@ -8256,16 +8247,30 @@ void ftCo_800B2AFC(Fighter* fp)
             do_act = 1;
         }
         if (do_act != 0) {
+            u32 flags1;
+            int line1;
+            Vec3 floor_normal1;
+            Vec3 floor_pos1;
             f32 x = fp->x1A88.x98.x;
             f32 x2 = x;
             f32 y = fp->x1A88.x98.y;
             f32 below;
             f32 above;
+            found = 0;
             below = y - 1000.0f;
             above = 10.0f + y;
-            found = ftCo_800B2AFC_CheckFloor(&floor_pos1, &line1, &flags1,
-                                             &floor_normal1, -1, -1, -1, x2,
-                                             above, x, below, 0.0f);
+            line1 = -1;
+            result = mpCheckFloor(x2, above, x, below, 0.0f, &floor_pos1,
+                                  &line1, &flags1, &floor_normal1, -1, -1, -1,
+                                  NULL, (Fighter_GObj*) found);
+            if (result == 0) {
+                goto assign1;
+            }
+            switch (ftCo_800B2AFC_IsIgnoredFloor(line1)) {
+            case 0:
+            assign1:
+                found = result;
+            }
             if (found != 0) {
                 f32 floor_x;
                 f32 floor_y;
@@ -8288,8 +8293,8 @@ void ftCo_800B2AFC(Fighter* fp)
         return;
     case 3: {
         struct Fighter_x1A88_t* data = &fp->x1A88;
-        s32 result;
         s32 found;
+        s32 result;
         s32 do_act;
         s32 x18;
 
@@ -8308,16 +8313,29 @@ void ftCo_800B2AFC(Fighter* fp)
         }
         if (do_act != 0) {
             u32 flags3;
+            int line3;
+            Vec3 floor_normal3;
+            Vec3 floor_pos3;
             f32 x = fp->cur_pos.x;
             f32 x2 = x;
             f32 y = fp->cur_pos.y;
             f32 below;
             f32 above;
+            found = 0;
             below = y - 1000.0f;
             above = 10.0f + y;
-            found = ftCo_800B2AFC_CheckFloor(&floor_pos3, &line3, &flags3,
-                                             &floor_normal3, -1, -1, -1, x2,
-                                             above, x, below, 0.0f);
+            line3 = -1;
+            result = mpCheckFloor(x2, above, x, below, 0.0f, &floor_pos3,
+                                  &line3, &flags3, &floor_normal3, -1, -1, -1,
+                                  NULL, (Fighter_GObj*) found);
+            if (result == 0) {
+                goto assign3;
+            }
+            switch (ftCo_800B2AFC_IsIgnoredFloor(line3)) {
+            case 0:
+            assign3:
+                found = result;
+            }
             if (found != 0) {
                 f32 floor_x;
                 f32 floor_y;
@@ -8429,11 +8447,12 @@ void ftCo_800B2AFC(Fighter* fp)
     }
     case 26: {
         struct Fighter_x1A88_t* data = &fp->x1A88;
-        s32 result;
         s32 found;
+        s32 result;
         s32 do_act;
         s32 x18;
 
+        PAD_STACK(16);
         ftCo_CpuInitEnemyTarget(fp, data);
         x18 = data->x18;
         if (x18 != data->x20 && x18 != data->x1C) {
@@ -8449,16 +8468,28 @@ void ftCo_800B2AFC(Fighter* fp)
             u32 flags26;
             int line26;
             Vec3 floor_normal26;
+            Vec3 floor_pos26;
             f32 x = fp->cur_pos.x;
             f32 x2 = x;
             f32 y = fp->cur_pos.y;
             f32 below;
             f32 above;
+            found = 0;
             below = y - 1000.0f;
             above = 10.0f + y;
-            found = ftCo_800B2AFC_CheckFloor(&floor_pos26, &line26, &flags26,
-                                             &floor_normal26, -1, -1, -1, x2,
-                                             above, x, below, 0.0f);
+            PAD_STACK(4);
+            line26 = -1;
+            result = mpCheckFloor(x2, above, x, below, 0.0f, &floor_pos26,
+                                  &line26, &flags26, &floor_normal26, -1, -1,
+                                  -1, NULL, (Fighter_GObj*) found);
+            if (result == 0) {
+                goto assign26;
+            }
+            switch (ftCo_800B2AFC_IsIgnoredFloor(line26)) {
+            case 0:
+            assign26:
+                found = result;
+            }
             if (found != 0) {
                 f32 floor_x;
                 f32 floor_y;
