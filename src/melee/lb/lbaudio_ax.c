@@ -2537,7 +2537,7 @@ void lbAudioAx_80027DF8(void)
 
 void lbAudioAx_8002835C(void)
 {
-    HSD_ObjAllocInit(&lbl_80433710, 0x48, 4);
+    HSD_ObjAllocInit(&lbl_80433710, sizeof(lbAudioAx_UserData), 4);
 }
 
 int lbl_80433B44[0x1F124 / 4];

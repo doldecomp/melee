@@ -156,7 +156,7 @@ void efLib_Init(void)
 {
     HSD_GObj* gobj;
     int i;
-    HSD_ObjAllocInit(&efLib_AllocData, 0x2CU, 4U);
+    HSD_ObjAllocInit(&efLib_AllocData, sizeof(EF_Effect), 4U);
 
     efLib_EffectCount = 0;
 
