@@ -21,10 +21,6 @@
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 
-/// @todo Several differently-signed comparisons appear in asserts, likely
-///       indicating the sign of one of the variables is declared incorrectly
-#pragma clang diagnostic ignored "-Wsign-compare"
-
 static void PObjInfoInit(void);
 
 HSD_PObjInfo hsdPObj = { PObjInfoInit };
