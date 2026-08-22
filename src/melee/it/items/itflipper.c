@@ -506,6 +506,7 @@ bool itFlipper_DmgDealt(Item_GObj* gobj)
 }
 
 #ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
 #endif
 bool itFlipper_Clanked(Item_GObj* gobj)
@@ -557,18 +558,14 @@ bool itFlipper_HitShield(Item_GObj* gobj)
     }
     return false;
 }
-
 #ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
+#pragma pop
 #endif
+
 bool itFlipper_Reflected(Item_GObj* gobj)
 {
     return it_80273030(gobj);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 bool itFlipper_ShieldBounced(Item_GObj* gobj)
 {
