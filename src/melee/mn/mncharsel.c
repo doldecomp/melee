@@ -3997,6 +3997,7 @@ s32 mnCharSel_802640A0(void)
     HSD_JObj* jobj;
     HSD_Text* text;
     s32 ctx;
+    s32 found;
     s32 num_players;
     s32 row_a;
     GXColor* color_ptr;
@@ -4243,8 +4244,9 @@ s32 mnCharSel_802640A0(void)
     }
 
     for (i = mnCharSel_804D6CF5 - 1; i >= 0; i--) {
+        HSD_GObj* cursor_gobj;
         struct CSSCursorData* cursor;
-        HSD_GObj* cursor_gobj = GObj_Create(4, 5, 0x80);
+        cursor_gobj = GObj_Create(4, 5, 0x80);
         jobj = HSD_JObjLoadJoint(ANIM[1].joint);
         cursor = HSD_MemAlloc(sizeof(*cursor));
         HSD_GObjObject_80390A70(cursor_gobj, HSD_GObj_804D7849, jobj);
@@ -4270,16 +4272,16 @@ s32 mnCharSel_802640A0(void)
     }
 
     for (i = 0; i < num_players; i++) {
-        gobj = GObj_Create(4, 5, 0x80);
-        jobj = HSD_JObjLoadJoint(ANIM[2].joint);
         {
             int player;
-            s32 found;
-            struct CSSCharModel* model = HSD_MemAlloc(sizeof(*model));
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
-            GObj_InitUserData(gobj, 4, HSD_Free, model);
-            GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 2, 0x80);
-            HSD_GObj_SetupProc(gobj, fn_80262648, 2);
+            HSD_GObj* model_gobj = GObj_Create(4, 5, 0x80);
+            struct CSSCharModel* model;
+            model = (jobj = HSD_JObjLoadJoint(ANIM[2].joint),
+                     HSD_MemAlloc(sizeof(*model)));
+            HSD_GObjObject_80390A70(model_gobj, HSD_GObj_804D7849, jobj);
+            GObj_InitUserData(model_gobj, 4, HSD_Free, model);
+            GObj_SetupGXLink(model_gobj, HSD_GObj_JObjCallback, 2, 0x80);
+            HSD_GObj_SetupProc(model_gobj, fn_80262648, 2);
             HSD_JObjAddAnimAll(jobj, ANIM[2].anim, ANIM[2].matanim,
                                ANIM[2].shapeanim);
             HSD_JObjReqAnimAll(jobj, 0.0f);
@@ -4289,7 +4291,7 @@ s32 mnCharSel_802640A0(void)
                                 HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
             }
             mnCharSel_804A0BD0[i] = model;
-            model->gobj = gobj;
+            model->gobj = model_gobj;
             model->x4 = i;
             model->x5 = 0;
             model->x6 = 0xFF;
