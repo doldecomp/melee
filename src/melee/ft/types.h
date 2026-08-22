@@ -808,7 +808,7 @@ struct FighterBone {
         u32 flagsC;
     };
 };
-STATIC_ASSERT(sizeof(struct FighterBone) == 0x10);
+ASSERT_SIZE(struct FighterBone, 0x10);
 
 /* fp+2114 */ typedef struct _SmashAttr {
     /* fp+2114 */ SmashState state;
@@ -969,7 +969,7 @@ struct ftDeviceUnk4 {
     int x0;
     UNK_T x4;
 };
-STATIC_ASSERT(sizeof(struct ftDeviceUnk4) == 0x8);
+ASSERT_SIZE(struct ftDeviceUnk4, 0x8);
 
 /// TODO same as ftDeviceUnk3
 struct ftDeviceUnk5 {
@@ -977,7 +977,7 @@ struct ftDeviceUnk5 {
     ftCommon_BuryType x4;
     bool (*cb)(UNK_T, Fighter_GObj*);
 };
-STATIC_ASSERT(sizeof(struct ftDeviceUnk5) == 0xC);
+ASSERT_SIZE(struct ftDeviceUnk5, 0xC);
 
 struct Fighter_x1A88_xFC_t {
     /*  +0 */ HSD_Pad x0;
@@ -992,7 +992,7 @@ struct Fighter_x1A88_xFC_t {
     /*  +C */ Vec3 cur_pos;
     /* +18 */ float facing_dir;
 };
-STATIC_ASSERT(sizeof(struct Fighter_x1A88_xFC_t) == 0x1C);
+ASSERT_SIZE(struct Fighter_x1A88_xFC_t, 0x1C);
 
 struct Fighter_x1A88_t {
     /*   +0 */ HSD_Pad x0;
@@ -1091,12 +1091,12 @@ struct Fighter_x1A88_t {
     /* +574 */ float half_width;
     /* +578 */ float half_height;
 };
-STATIC_ASSERT(sizeof(struct Fighter_x1A88_t) == 0x57C);
+ASSERT_SIZE(struct Fighter_x1A88_t, 0x57C);
 
 struct Fighter_x59C_t {
     u8 x0[0x8000];
 };
-STATIC_ASSERT(sizeof(struct Fighter_x59C_t) == 0x8000);
+ASSERT_SIZE(struct Fighter_x59C_t, 0x8000);
 
 struct UnkPlBonusBits {
     u8 x0, x1;
@@ -1820,7 +1820,7 @@ struct Fighter {
         /* fp+2340 */ union ftZelda_MotionVars zd;
     } mv;
 };
-STATIC_ASSERT(sizeof(struct Fighter) == 0x23EC);
+ASSERT_SIZE(struct Fighter, 0x23EC);
 
 struct gmScriptEventDefault {
     u32 opcode : 6;
@@ -1887,7 +1887,7 @@ struct ft_80459B88_t {
     /* +0 */ Kirby_Unk* x0;
     /* +4 */ KirbyHatStruct* hats[FTKIND_MAX];
 };
-STATIC_ASSERT(sizeof(struct ft_80459B88_t) == 0x88);
+ASSERT_SIZE(struct ft_80459B88_t, 0x88);
 
 struct IKState {
     /* 0x00 */ HSD_JObj* jobj0;
@@ -1922,7 +1922,7 @@ typedef struct DmgLogEntry {
     /* +20 */ float x20;
     /* +24 */ size_t size_of_xC;
 } DmgLogEntry;
-STATIC_ASSERT(sizeof(struct DmgLogEntry) == 0x28);
+ASSERT_SIZE(struct DmgLogEntry, 0x28);
 
 struct ftData_x58_t {
     /* 0x00 */ u8 x0;

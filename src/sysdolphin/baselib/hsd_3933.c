@@ -31,7 +31,7 @@ struct ParticleUsbMessages {
     /* 0x104 */ char dir_too_large[0x14];
     /* 0x118 */ char cannot_use_usb[0x18];
 };
-STATIC_ASSERT(sizeof(struct ParticleUsbMessages) == 0x130);
+ASSERT_SIZE(struct ParticleUsbMessages, 0x130);
 
 /* 4D78C0 */ int hsd_804D78C0;
 /* 4D78BC */ s32 hsd_804D78BC;

@@ -61,7 +61,7 @@ static HSD_WObjDesc interest = {
     30.0f,
     1.18f,
 };
-STATIC_ASSERT(sizeof(un_803F9E60) == 0x38);
+ASSERT_SIZE(un_803F9E60, 0x38);
 
 /// @todo Clean up @c pos values; x and y seem like portions of 20
 /* 3F9E98 */ static HSD_WObjDesc light_position = {

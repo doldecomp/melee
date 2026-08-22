@@ -17,14 +17,14 @@ typedef struct HSD_SObjDesc {
     /* 0x00 */ HSD_ImageDesc* image;
     /* 0x04 */ struct _HSD_Tlut* tlut;
 } HSD_SObjDesc;
-STATIC_ASSERT(sizeof(struct HSD_SObjDesc) == 0x8);
+ASSERT_SIZE(struct HSD_SObjDesc, 0x8);
 
 /// @note #HSD_SObjDesc fits in .sdata
 typedef struct HSD_SObjDesc2 {
     /* 0x00 */ struct HSD_SObjDesc desc;
     /* 0x08 */ HSD_ImageDesc* image2;
 } HSD_SObjDesc2;
-STATIC_ASSERT(sizeof(struct HSD_SObjDesc2) == 0xC);
+ASSERT_SIZE(struct HSD_SObjDesc2, 0xC);
 
 struct HSD_SObj {
     /* 0x00 */ void* x0;

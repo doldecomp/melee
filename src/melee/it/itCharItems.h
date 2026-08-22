@@ -333,7 +333,7 @@ typedef struct ItemLink {
     /* +1D0 */ HSD_GObj* gobj;
     /* +1D4 */ HSD_JObj* jobj;
 } ItemLink;
-STATIC_ASSERT(sizeof(struct ItemLink) == 0x1D8);
+ASSERT_SIZE(struct ItemLink, 0x1D8);
 
 typedef struct {
     ItemLink* x0;
@@ -806,7 +806,7 @@ typedef struct itSeakChain_Attrs {
     /* +64 */ HSD_Joint* x64_joint;
     /* +68 */ HSD_Joint* x68_joint;
 } itSeakChain_Attrs;
-STATIC_ASSERT(sizeof(struct itSeakChain_Attrs) == 0x6C);
+ASSERT_SIZE(struct itSeakChain_Attrs, 0x6C);
 
 typedef struct itClimbersString_ItemVars {
     /* +0  ip+DD4 */ f32 x0;

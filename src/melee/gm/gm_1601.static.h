@@ -25,7 +25,7 @@
 struct lbl_80473700_t {
     /* +0 */ char pad_0[0x114];
 };
-STATIC_ASSERT(sizeof(struct lbl_80473700_t) == 0x114);
+ASSERT_SIZE(struct lbl_80473700_t, 0x114);
 
 struct UnlockableCharacterData {
     /* 0x0 */ u8 idx;

@@ -77,7 +77,7 @@ static u8 mnStageSel_804D6CAE;
 static u8 mnStageSel_804D6CAF;
 
 #ifndef M2CTX
-STATIC_ASSERT(sizeof(mnStageSel_803F06D0[0]) == 0x1C);
+ASSERT_SIZE(mnStageSel_803F06D0[0], 0x1C);
 #endif
 
 struct StageSelUserData {

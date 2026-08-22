@@ -3582,7 +3582,7 @@ typedef struct grBigBlue_CarPhysicsLane {
     f32 angular_velocity;
     f32 x110;
 } grBigBlue_CarPhysicsLane;
-STATIC_ASSERT(sizeof(grBigBlue_CarPhysicsLane) == 0x40);
+ASSERT_SIZE(grBigBlue_CarPhysicsLane, 0x40);
 
 typedef union grBigBlue_CarPhysics {
     u8 raw[0x1D4];
