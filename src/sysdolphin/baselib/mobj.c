@@ -9,7 +9,6 @@
 
 #include <string.h>
 #include <dolphin/gx/GXEnum.h>
-#include <dolphin/os.h>
 
 static HSD_ClassInfo* default_class;
 static HSD_MObj* current_mobj;
@@ -376,14 +375,9 @@ void HSD_MObjCompileTev(HSD_MObj* mobj)
 }
 
 #ifdef MUST_MATCH
-#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
-#endif
 static char unused1[] = "hsdIsDescendantOf(info, &hsdMObj)";
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 #endif
 
 void MObjSetupTev(HSD_MObj* mobj, HSD_TObj* tobj, u32 arg2)
@@ -522,14 +516,10 @@ void HSD_MObjAddShadowTexture(HSD_TObj* tobj)
 }
 
 #ifdef MUST_MATCH
-#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
-#endif
 static char unused2[] = "mobj->rendermode&RENDER_SPECULAR";
-#ifdef MUST_MATCH
 #pragma pop
-#endif
 #endif
 
 void HSD_MObjDeleteShadowTexture(HSD_TObj* tobj)
