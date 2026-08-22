@@ -129,10 +129,14 @@ void UnreserveEXI2Port(void)
     gDBCommTable.close_func();
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma peephole off
+#endif
 void TRK_board_display(char* str)
 {
     OSReport(str);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif

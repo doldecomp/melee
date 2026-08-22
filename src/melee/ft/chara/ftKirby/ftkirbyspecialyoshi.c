@@ -128,12 +128,10 @@ float ftKb_SpecialNYs_80109380(void)
     return cd->specialn_ys_unk3 / cd->specialn_ys_damage_multiplier;
 }
 
-#pragma dont_inline on
 ftDynamics* ftKb_SpecialNYs_801093A0(Fighter_GObj* gobj)
 {
     return ft_80459B88.hats[FTKIND_SAMUS]->hat_dynamics[0];
 }
-#pragma dont_inline reset
 
 void ftKb_SpecialNYs_801093B4(Fighter_GObj* gobj)
 {

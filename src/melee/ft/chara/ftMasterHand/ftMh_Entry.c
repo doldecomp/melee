@@ -156,5 +156,7 @@ static void ftMh_MS_343_801511FC(HSD_GObj* gobj)
         }
         return;
     }
+    default:
+        break;
     }
 }

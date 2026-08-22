@@ -69,6 +69,8 @@ void ft_8007C224(Fighter_GObj* gobj)
         hitbox->x58 = hitbox->x4C;
         lb_8000B1CC(hitbox->jobj, &hitbox->b_offset, &hitbox->x4C);
         break;
+    default:
+        break;
     }
 }
 

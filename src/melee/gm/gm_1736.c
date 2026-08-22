@@ -33,8 +33,10 @@ void gm_801736E8(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 game_mode)
     tmp->x5 = game_mode;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 bool gm_80173754(u8 gameMode, u8 arg1)
 {
     if (gm_801721EC()) {
@@ -48,7 +50,9 @@ bool gm_80173754(u8 gameMode, u8 arg1)
     }
     return false;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 u8 gm_801737D8(void)
 {
@@ -90,8 +94,10 @@ void fn_80173834(u8 ckind, u8 major, bool arg2)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void gm_8017390C(int arg0, int arg1)
 {
     Unk1PData* temp_r3_2;
@@ -144,7 +150,9 @@ void gm_8017390C(int arg0, int arg1)
         break;
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void gm_80173AA4(void)
 {

@@ -1,6 +1,3 @@
-#include "ft/forward.h"
-
-#include "gm/gm_1A36.h"
 #include "mn/types.h"
 #define MNDIAGRAM_SOURCE
 #include "mndiagram.static.h"
@@ -855,7 +852,10 @@ void mnDiagram_SortNamesByKOs(void)
 
 /// @brief Counts the number of unlocked fighters.
 /// @return Number of unlocked fighters.
+#ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
+#endif
 int mnDiagram_CountUnlockedFighters(void)
 {
     int i;
@@ -869,7 +869,9 @@ int mnDiagram_CountUnlockedFighters(void)
     }
     return count;
 }
-#pragma dont_inline reset
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 void mnDiagram_PopupInputProc(HSD_GObj* gobj)
 {

@@ -129,8 +129,10 @@
 /* 4D6D7C */ static int un_804D6D7C;
 
 /// NameTag_Create and un_802FD28C will try to inline this otherwise
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 float un_802FC9B4(unsigned char slot, unsigned char arg1, unsigned char arg2,
                   unsigned char arg3)
 {
@@ -151,7 +153,9 @@ float un_802FC9B4(unsigned char slot, unsigned char arg1, unsigned char arg2,
     }
     return 18.0; // CP Gray
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static void NameTag_RenderCallback(HSD_GObj* gobj, int pass)
 {
@@ -183,8 +187,10 @@ void fn_802FCAC4(HSD_GObj* gobj, int pass)
 }
 
 /// un_802FD4C8 will try to inline this otherwise
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void un_802FCBA0(void)
 {
     HSD_Archive** archive;
@@ -203,7 +209,9 @@ void un_802FCBA0(void)
         un_804A1ED0.shapeanim_joint = x[0]->shapeanims[0];
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static inline bool has_nametag(int slot)
 {

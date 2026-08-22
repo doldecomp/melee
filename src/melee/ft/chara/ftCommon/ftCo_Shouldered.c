@@ -23,7 +23,9 @@
 
 #include <dolphin/mtx.h>
 
+#ifdef MUST_MATCH
 #pragma force_active on
+#endif
 
 /* 09C744 */ static void ftCo_8009C744(Fighter_GObj* gobj);
 

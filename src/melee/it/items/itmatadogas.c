@@ -2,16 +2,13 @@
 
 #include "inlines.h"
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
-#include "ft/ft_0C31.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/item.h"
-#include "it/itmaplib.h"
+#include "it/itgroundcoll.h"
 
 #include <math.h>
 #include <baselib/random.h>
@@ -253,6 +250,8 @@ void it_802CB844(Item_GObj* gobj)
         break;
     case It_Kind_Matadogas_Gas2:
         scale = attrs->x8;
+        break;
+    default:
         break;
     }
 

@@ -380,13 +380,17 @@ int it_802BB938(ItemLink* link, int arg1, float arg2)
     return coll->env_flags & 0x18FFF;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 s32 it_802BBAEC(ItemLink* link, s32 arg1, f32 arg2)
 {
     return it_802BB938(link, arg1, arg2);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void it_802BBB0C(ItemLink* link, Vec3* offset, itSeakChain_Attrs* sa,
                  float scale)

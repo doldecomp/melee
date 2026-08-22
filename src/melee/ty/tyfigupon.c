@@ -44,8 +44,6 @@
 #include "ty/toy.h"
 #include "ty/types.h"
 
-#include <math.h>
-
 /* 314AA8 */ static void _tyFigupon_80314AA8(HSD_JObj*, char*, char*, char*);
 /* 314B54 */ static s32 _tyFigupon_80314B54(void);
 /* 314BE4 */ static void _tyFigupon_80314BE4(HSD_GObj* gobj, int unused);
@@ -168,7 +166,10 @@ void _tyFigupon_80314AA8(HSD_JObj* jobj, char* anim_str, char* matanim_str,
     HSD_JObjReqAnimAll(jobj, 0.0f);
 }
 
+#ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
+#endif
 s32 _tyFigupon_80314B54(void)
 {
     s32 i;
@@ -186,7 +187,9 @@ s32 _tyFigupon_80314B54(void)
     }
     return count;
 }
-#pragma dont_inline reset
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 void _tyFigupon_80314BE4(HSD_GObj* gobj, int unused)
 {

@@ -113,8 +113,10 @@ void fn_800D1C40(Fighter_GObj* gobj)
     fp->take_dmg_cb = ftCo_800D1B04;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftCo_KinokoGiantEnd_Anim(Fighter_GObj* gobj)
 {
     u8 _[8];
@@ -122,7 +124,9 @@ void ftCo_KinokoGiantEnd_Anim(Fighter_GObj* gobj)
         ftCo_800D1B04(gobj);
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftCo_KinokoGiantEnd_Coll(Fighter_GObj* gobj)
 {
@@ -150,8 +154,10 @@ void fn_800D1DB0(Fighter_GObj* gobj)
     fp->take_dmg_cb = ftCo_800D1B04;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftCo_KinokoGiantEndAir_Anim(Fighter_GObj* gobj)
 {
     u8 _[8];
@@ -159,7 +165,9 @@ void ftCo_KinokoGiantEndAir_Anim(Fighter_GObj* gobj)
         ftCo_800D1B04(gobj);
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftCo_KinokoGiantEndAir_Coll(Fighter_GObj* gobj)
 {

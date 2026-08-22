@@ -108,8 +108,10 @@ static inline int DevText_Clamp(int val, int max)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void DevText_SetCursorXY(DevText* text, int x, int y)
 {
     if (text->w <= x) {
@@ -125,66 +127,92 @@ void DevText_SetCursorXY(DevText* text, int x, int y)
     }
     text->cursor_y = y;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void DevText_SetCursorX(DevText* text, int x)
 {
     text->cursor_x = DevText_Clamp(x, text->w);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void DevText_HideCursor(DevText* text)
 {
     text->flags &= ~(1 << 4);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void DevText_80302AC0(DevText* text)
 {
     text->flags |= (1 << 5);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void DevText_ShowBackground(DevText* text)
 {
     text->flags &= ~(1 << 6);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void DevText_HideBackground(DevText* text)
 {
     text->flags |= (1 << 6);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void DevText_ShowText(DevText* text)
 {
     text->flags &= ~(1 << 7);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void DevText_HideText(DevText* text)
 {
     text->flags |= (1 << 7);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void DevText_SetScale(DevText* text, f32 x, f32 y)
 {
     text->scale_x = x;
     text->scale_y = y;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void DevText_SetXY(DevText* text, int x, int y)
 {
@@ -198,18 +226,24 @@ void DevText_SetXY(DevText* text, int x, int y)
     text->y = y;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 u8 DevText_StoreColorIndex(DevText* text, u8 index)
 {
     u8 old = text->current_color;
     text->current_color = index;
     return old;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 GXColor DevText_SetTextColor(DevText* text, GXColor color)
 {
     int index = text->current_color;
@@ -217,25 +251,35 @@ GXColor DevText_SetTextColor(DevText* text, GXColor color)
     text->text_colors[index] = color;
     return old;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 GXColor DevText_SetBGColor(DevText* text, GXColor color)
 {
     GXColor old = text->bg_color;
     text->bg_color = color;
     return old;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void DevText_Erase(DevText* text)
 {
     memzero(text->buf, 2 * text->w * text->h);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static inline void DevText_AdvanceLine(DevText* text)
 {
@@ -276,15 +320,19 @@ void DevText_Print(DevText* text, char* str)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void DevText_PrintInt(DevText* text, int num)
 {
     char str[16];
     DevText_NumToStr(num, str);
     DevText_Print(text, str);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void DevText_Printf(DevText* text, char* format, ...)
 {

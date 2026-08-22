@@ -114,8 +114,10 @@ void HSD_AObjStopAnim(HSD_AObj* aobj, void* obj, HSD_ObjUpdateFunc func)
     aobj->flags |= AOBJ_NO_ANIM;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
                            HSD_ObjUpdateFunc update_func)
 {
@@ -170,7 +172,9 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
         HSD_AObj_804D7630 += 1;
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)
 {

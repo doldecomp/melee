@@ -1138,6 +1138,8 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
                 fp->x2010++;
                 item->xC34_damageDealt = 1;
                 break;
+            default:
+                break;
             }
             pl_8003E17C(fp->player_id, fp->x221F_b4, item->entity);
         }
@@ -1500,8 +1502,10 @@ void ftColl_800788D4(Fighter_GObj* gobj)
     ftColl_8007861C(0, gobj, 0, -10, 0, 0, 0, 0, 0);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftColl_8007891C(Fighter_GObj* arg0, Fighter_GObj* arg1, float arg2)
 {
     Fighter* fp0;
@@ -1515,10 +1519,14 @@ void ftColl_8007891C(Fighter_GObj* arg0, Fighter_GObj* arg1, float arg2)
     pl_8003EB30(arg2, fp0->player_id, fp0->x221F_b4, fp1->player_id,
                 fp1->x221F_b4, fp0->x2070.x2073);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftColl_80078998(HSD_GObj* arg0, HSD_GObj* arg1, float arg2)
 {
     Item* ip;
@@ -1534,7 +1542,9 @@ void ftColl_80078998(HSD_GObj* arg0, HSD_GObj* arg1, float arg2)
                     victim_fp->player_id, victim_fp->x221F_b4, ip->xD90.x2073);
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static inline HitCapsule* HitCapsuleGetPtr(Fighter* fp, u32 i)
 {
@@ -1987,7 +1997,9 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 void ftColl_8007925C(Fighter_GObj* gobj)
 { // clang-format off
     u32 i, j, n, m;
@@ -2346,7 +2358,9 @@ void ftColl_8007925C(Fighter_GObj* gobj)
         }
     }
 } // clang-format on
+#ifdef MUST_MATCH
 #pragma dont_inline off
+#endif
 
 /// Select the accumulated-damage count for knockback (shared by the
 /// ftColl_80079AB0 family).
@@ -2517,8 +2531,10 @@ float ftColl_80079EA8(Fighter* fp, HitCapsule* hit, u32 unk_count)
     return result;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
                      int arg4)
 {
@@ -2799,6 +2815,8 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
             kb = result;
             break;
         }
+        default:
+            break;
         }
 
         if (kb > best_kb.v) {
@@ -2861,6 +2879,8 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
         element = env->element;
         break;
     }
+    default:
+        break;
     }
 
     if ((u32) best_entry->hit0->kb_angle == 0x16A) {
@@ -2942,13 +2962,17 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
         ftColl_8007861C(NULL, gobj, 3, kind, 0, 0, 0, dmg_ptr, 1);
         break;
     }
+    default:
+        break;
     }
 
     if (out->element == HitElement_Electric) {
         fp->x1960_vibrateMult = p_ftCommonData->x1A4;
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftColl_8007AB48(Fighter_GObj* gobj)
 {
@@ -3039,6 +3063,8 @@ void ftColl_8007AD18(Fighter* fp, HitCapsule* arg1)
         lb_8000B1CC(arg1->jobj, &sp10, &arg1->x4C);
         break;
     case HitCapsule_Disabled:
+        break;
+    default:
         break;
     }
 }
@@ -3515,8 +3541,10 @@ float ftColl_8007BBCC(UNUSED Fighter_GObj* gobj)
     return dmg;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftColl_8007BC90(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -3599,10 +3627,14 @@ void ftColl_8007BC90(Fighter_GObj* gobj)
     next_item:;
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftColl_8007BE3C(Fighter_GObj* gobj)
 {
     Fighter* fp;
@@ -3728,4 +3760,6 @@ void ftColl_8007BE3C(Fighter_GObj* gobj)
         }
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif

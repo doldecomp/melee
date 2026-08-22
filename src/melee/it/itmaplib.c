@@ -559,8 +559,10 @@ void it_80276934(Item_GObj* item_gobj, enum_t arg1)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 
 void it_80276CB8(Item_GObj* item_gobj)
 {
@@ -571,7 +573,9 @@ void it_80276CB8(Item_GObj* item_gobj)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void it_80276CEC(Item_GObj* item_gobj)
 {
@@ -666,8 +670,10 @@ bool it_80276D9C(Item_GObj* item_gobj, enum_t arg1)
     return ret_val;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 
 void it_80276FC4(Item_GObj* item_gobj, s32 arg1)
 {
@@ -681,10 +687,14 @@ void it_80276FC4(Item_GObj* item_gobj, s32 arg1)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 
 bool it_80277040(Item_GObj* item_gobj)
 {
@@ -814,7 +824,9 @@ bool it_80277040(Item_GObj* item_gobj)
     return ret_val;
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static inline float sqrtf_accurate_store(float x, volatile float* y)
 {

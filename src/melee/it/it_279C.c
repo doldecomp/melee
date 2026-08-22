@@ -985,8 +985,10 @@ void it_80279C48(Item_GObj* item_gobj)
     item->facing_dir = dir;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 
 void it_80279CDC(Item_GObj* item_gobj, f32 scale)
 {
@@ -997,7 +999,9 @@ void it_80279CDC(Item_GObj* item_gobj, f32 scale)
     it_8026BDB4(item_gobj);
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void it_80279D38(Item_GObj* item_gobj)
 {
@@ -1095,8 +1099,10 @@ void it_80279FF8(Item_GObj* item_gobj)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 
 bool it_8027A09C(Item_GObj* item_gobj)
 {
@@ -1114,7 +1120,9 @@ bool it_8027A09C(Item_GObj* item_gobj)
     return false;
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 bool it_8027A118(Item_GObj* item_gobj, HSD_GObjEvent arg1)
 {

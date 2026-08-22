@@ -9,7 +9,6 @@
 
 #include <string.h>
 #include <dolphin/gx/GXEnum.h>
-#include <dolphin/os.h>
 
 static HSD_ClassInfo* default_class;
 static HSD_MObj* current_mobj;
@@ -379,7 +378,6 @@ void HSD_MObjCompileTev(HSD_MObj* mobj)
 #pragma push
 #pragma force_active on
 static char unused1[] = "hsdIsDescendantOf(info, &hsdMObj)";
-#pragma pop
 #endif
 
 void MObjSetupTev(HSD_MObj* mobj, HSD_TObj* tobj, u32 arg2)

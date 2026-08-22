@@ -1881,8 +1881,10 @@ static void fn_801D4220(int dcreq, int args, void* buf, bool cancelflag)
     gp->u.stadium.xC4_b1 = false;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 bool grStadium_801D42B8(void)
 {
     HSD_GObj* map_gobj;
@@ -1899,7 +1901,9 @@ bool grStadium_801D42B8(void)
         grDatFiles_801C6478(gp->u.stadium.xCC, gp->u.stadium.xC8);
     return true;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 Ground* grStadium_801D4354(Ground_GObj* gobj)
 {

@@ -179,8 +179,10 @@ void it_8027572C(Item_GObj* item_gobj, s32 idx)
     item->x5D4_hitboxes[idx].hit.x40_b0 = 1;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 
 void it_8027574C(Item_GObj* item_gobj)
 {
@@ -189,7 +191,9 @@ void it_8027574C(Item_GObj* item_gobj)
     it_80274D6C(item_gobj);
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void it_80275788(Item_GObj* item_gobj)
 {

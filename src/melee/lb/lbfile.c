@@ -18,14 +18,18 @@ static void lbFile_8001615C(int dcreq, int args, void* buf, bool cancelflag)
     cancel = true;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 static bool discIsDone(void)
 {
     lb_800195D0();
     return cancel;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static void waitForDisc(void)
 {

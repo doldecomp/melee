@@ -9,14 +9,14 @@
 #include "ft/chara/ftLink/ftLk_SpecialN.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itcoll.h"
+#include "it/itdraw.h"
 #include "it/iteffect.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
-#include "lb/lbrefract.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
@@ -334,6 +334,8 @@ void itLinkArrow_Logic98_Destroyed(Item_GObj* gobj)
                         ftKb_SpecialNLk800FB418(
                             item->xDD4_itemVar.linkarrow.xE0);
                         break;
+                    default:
+                        break;
                     }
                 }
             }
@@ -393,6 +395,8 @@ bool itLinkarrow_UnkMotion0_Anim(HSD_GObj* gobj)
                     item->xDD4_itemVar.linkarrow.xE0 = NULL;
                     return true;
                 }
+                break;
+            default:
                 break;
             }
         }
@@ -635,6 +639,8 @@ void it_802A9458(HSD_GObj* gobj)
         scale.x = 0.0f;
         scale.z = 5.0f;
         efSync_Spawn(0x448, gobj, jobj, &scale);
+        break;
+    default:
         break;
     }
 }

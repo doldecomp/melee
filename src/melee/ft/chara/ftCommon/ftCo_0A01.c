@@ -1187,7 +1187,10 @@ block_43:
     return 0;
 }
 
+#ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
+#endif
 bool ftCo_800A2718(mp_UnkStruct0* arg0)
 {
     /// @todo Redundant cast and assignment improves match
@@ -1268,12 +1271,21 @@ bool ftCo_800A2718(mp_UnkStruct0* arg0)
         }
     }
 }
-#pragma dont_inline reset
+#ifdef MUST_MATCH
+#pragma pop
+#endif
+
+#ifdef MUST_MATCH
+#pragma push
+#pragma dont_inline on
+#endif
 static inline bool ftCo_800A2718_dontinline(mp_UnkStruct0* arg0)
 {
     return ftCo_800A2718(arg0);
 }
-#pragma dont_inline reset
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 static inline bool ftCo_800A2718_dontinline2(mp_UnkStruct0* arg0);
 static inline bool ftCo_800A2718_dontinline2(mp_UnkStruct0* arg0)
@@ -4460,8 +4472,10 @@ static inline void ftCo_CpuRecoverDiagonally(Fighter* fp)
 /**
  * Samus recovery logic
  */
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 static void ftCo_800A963C(Fighter* fp, bool unused)
 {
     PAD_STACK(4 * 14);
@@ -4476,7 +4490,9 @@ static void ftCo_800A963C(Fighter* fp, bool unused)
     ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, 0x7F);
     ftCo_800B463C(fp, CpuCmd_Done);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 /**
  * Handles CPU recovery / up-B logic for each character

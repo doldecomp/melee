@@ -134,7 +134,7 @@ typedef bool (*Predicate)(void);
 #define STATIC_ASSERT(cond) _Static_assert((cond), "(" #cond ") failed")
 #endif
 
-#ifdef MUST_MATCH
+#if defined(MUST_MATCH) || defined(LINT)
 #define ASSERT_SIZE(expr, size) STATIC_ASSERT(sizeof(expr) == size)
 #else
 #define ASSERT_SIZE(expr, size)

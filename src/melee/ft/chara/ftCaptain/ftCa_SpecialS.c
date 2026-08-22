@@ -72,6 +72,8 @@ void ftCa_SpecialS_Enter(HSD_GObj* gobj)
         efSync_Spawn(1293, gobj, fp->parts[FtPart_L2ndNb].joint);
         fp->u.ca.during_specials_start = true;
         break;
+    default:
+        break;
     }
     fp->u.ca.during_specials = false;
     Fighter_SetEffectHitlagCallbacks(fp);
@@ -104,6 +106,8 @@ static inline void setupAirStart(HSD_GObj* gobj)
         fp->u.ca.during_specials_start = true;
         break;
     }
+    default:
+        break;
     }
     fp->u.ca.during_specials = false;
     Fighter_SetEffectHitlagCallbacks(fp);
@@ -225,6 +229,8 @@ void ftCa_SpecialS_Anim(HSD_GObj* gobj)
                          &fp->facing_dir);
             fp->u.ca.during_specials = true;
             break;
+        default:
+            break;
         }
         Fighter_SetEffectHitlagCallbacks(fp);
     }
@@ -267,6 +273,8 @@ void ftCa_SpecialAirS_Anim(HSD_GObj* gobj)
             fp->u.ca.during_specials = true;
             break;
         }
+        default:
+            break;
         }
         Fighter_SetEffectHitlagCallbacks(fp);
     }

@@ -375,6 +375,8 @@ s32 ft_80087D0C(Fighter* fighter, s32 sfx_id)
                 sfx -= 0x66;
             }
             break;
+        default:
+            break;
         }
     }
     case 6:

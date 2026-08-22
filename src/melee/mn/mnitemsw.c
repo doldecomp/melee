@@ -91,7 +91,10 @@ static inline struct MnItemSwTable* mnItemSw_GetTable(void)
     return (struct MnItemSwTable*) mnItemSw_803ED340;
 }
 
+#ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
+#endif
 s32 mnItemSw_80233A98(s32 arg0)
 {
     switch (arg0) {
@@ -110,7 +113,9 @@ s32 mnItemSw_80233A98(s32 arg0)
         return (s32) mnItemSw_AnimTable.items[arg0];
     }
 }
-#pragma dont_inline reset
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 void mnItemSw_80233B68(MnItemSwData* arg0, u32 arg1)
 {

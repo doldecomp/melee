@@ -8,11 +8,11 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "it/items/itpikachutjoltair.h"
+#include "it/itgroundcoll.h"
 #include "lb/lbvector.h"
 
 #include <math.h>
@@ -148,6 +148,8 @@ void it_802B3554(Item_GObj* gobj, HSD_GObj* owner)
     case It_Kind_Kirby_PichuTJolt_Ground:
         efSync_Spawn(0x4AD, gobj, jobj);
         ip->xDD4_itemVar.pikachujoltground.xDE0 = 1;
+        break;
+    default:
         break;
     }
     db_80225DD8(gobj, owner);

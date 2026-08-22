@@ -53,8 +53,10 @@
 
 /* 0D20EC */ static void fn_800D20EC(Fighter_GObj* gobj);
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 bool Fighter_PoisonMushroomApply(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -90,7 +92,9 @@ bool Fighter_PoisonMushroomApply(Fighter_GObj* gobj)
     }
     return true;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftCo_800D1F6C(Fighter_GObj* gobj)
 {
@@ -145,8 +149,10 @@ void fn_800D20EC(Fighter_GObj* gobj)
     fp->take_dmg_cb = ftCo_800D1F6C;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftCo_KinokoSmallStart_Anim(Fighter_GObj* gobj)
 {
     u8 _[8];
@@ -154,7 +160,9 @@ void ftCo_KinokoSmallStart_Anim(Fighter_GObj* gobj)
         ftCo_800D1F6C(gobj);
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftCo_KinokoSmallStart_Coll(Fighter_GObj* gobj)
 {
@@ -182,8 +190,10 @@ void fn_800D22AC(Fighter_GObj* gobj)
     fp->take_dmg_cb = ftCo_800D1F6C;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftCo_KinokoSmallStartAir_Anim(Fighter_GObj* gobj)
 {
     u8 _[8];
@@ -191,7 +201,9 @@ void ftCo_KinokoSmallStartAir_Anim(Fighter_GObj* gobj)
         ftCo_800D1F6C(gobj);
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftCo_KinokoSmallStartAir_Coll(Fighter_GObj* gobj)
 {

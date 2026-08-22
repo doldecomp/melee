@@ -288,13 +288,17 @@ void ftPk_SpecialHiStart1_Phys(HSD_GObj* gobj)
     ftCommon_ApplyGroundMovement(gobj);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftPk_SpecialAirHiStart1_Phys(HSD_GObj* gobj)
 {
     ftPk_SpecialHi_8012642C(gobj);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftPk_SpecialHiStart1_Coll(HSD_GObj* gobj)
 {
@@ -397,8 +401,10 @@ void ftPk_SpecialAirHiStart1_Coll(HSD_GObj* gobj)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftPk_SpecialHi_ChangeMotion_Unk02(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -411,7 +417,9 @@ void ftPk_SpecialHi_ChangeMotion_Unk02(HSD_GObj* gobj)
     fp->x2223_b4 = true;
     ftPk_SpecialHi_8012642C(gobj);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftPk_SpecialHi_ChangeMotion_Unk03(HSD_GObj* gobj)
 {

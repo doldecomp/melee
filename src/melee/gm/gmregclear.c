@@ -10,7 +10,6 @@
 
 #include "mn/inlines.h"
 
-#include <dolphin/gx.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -23,34 +22,23 @@
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/tobj.h>
-#include <sysdolphin/baselib/util.h>
 #include <melee/cm/camera.h>
 #include <melee/db/db.h>
-#include <melee/ef/efasync.h>
-#include <melee/ef/eflib.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gm_16AE.h>
 #include <melee/gm/gm_16F1.h>
-#include <melee/gm/gm_17AD.h>
-#include <melee/gm/gm_17BA.h>
 #include <melee/gm/gm_1832.h>
-#include <melee/gm/gm_19EF.h>
 #include <melee/gm/gm_1A36.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gm_1A45.h>
-#include <melee/gm/gm_1A7A.h>
-#include <melee/gm/gm_1ADD.h>
-#include <melee/gm/gm_1AED.h>
 #include <melee/gm/gm_1B03.h>
 #include <melee/gm/gm_1BA8.h>
-#include <melee/gm/gm_1BFA.h>
 #include <melee/gm/gmadventure.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/gmregcommon.h>
-#include <melee/gm/gmtoulib.h>
 #include <melee/gm/types.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grpushon.h>
@@ -60,7 +48,6 @@
 #include <melee/if/ifstatus.h>
 #include <melee/if/ifstock.h>
 #include <melee/if/iftime.h>
-#include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
@@ -70,7 +57,6 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/lb/lbtime.h>
-#include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
 #include <melee/ty/toy.h>
@@ -1608,7 +1594,10 @@ typedef struct {
     u8 b7 : 1, b6 : 1, b5 : 1, b4 : 1, b3 : 1, b2 : 1, b1 : 1, b0 : 1;
 } u8_bits;
 
+#ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
+#endif
 void fn_8017E8A4(int arg0_int)
 {
     MatchEnd* arg0 = (MatchEnd*) arg0_int;
@@ -1698,7 +1687,9 @@ void fn_8017E8A4(int arg0_int)
 
     PAD_STACK(8);
 }
-#pragma dont_inline reset
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 UnkAllstarData* gm_GetAllStarData(void)
 {
@@ -1774,7 +1765,10 @@ bool fn_8017EDDC(void)
     return false;
 }
 
+#ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
+#endif
 void fn_8017EE40(int arg0_int)
 {
     MatchEnd* arg0 = (MatchEnd*) arg0_int;
@@ -1837,7 +1831,9 @@ void fn_8017EE40(int arg0_int)
         }
     }
 }
-#pragma dont_inline reset
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 int fn_8017F008(void)
 {
@@ -1892,7 +1888,9 @@ typedef struct fn_8017F14C_arg {
     /* 0x98 */ s32 x98;
 } fn_8017F14C_arg;
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 s32 fn_8017F14C(void* arg0)
 {
     fn_8017F14C_arg* p = arg0;
@@ -1907,7 +1905,9 @@ s32 fn_8017F14C(void* arg0)
     }
     return 0;
 }
+#ifdef MUST_MATCH
 #pragma dont_inline off
+#endif
 
 s32 fn_8017F1B8(void)
 {
@@ -3265,7 +3265,10 @@ void gm_80181B64(int c_kind, int arg1, s32 arg2)
     }
 }
 
+#ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
+#endif
 int fn_80181BFC(int* arg0)
 {
     int i;
@@ -3282,7 +3285,9 @@ int fn_80181BFC(int* arg0)
     }
     return count;
 }
-#pragma dont_inline reset
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 static inline s32 fn_80181C80_CountPlayers(volatile s32* out)
 {

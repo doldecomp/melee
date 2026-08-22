@@ -2,8 +2,6 @@
 
 #include "debug.h"
 
-#include <placeholder.h>
-
 #include <string.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/tev.h>
@@ -47,6 +45,8 @@ void HSD_TExpFree(HSD_TExp* texp)
     case HSD_TE_CNST:
         hsdFreeMemPiece(texp, sizeof(HSD_TECnst));
         break;
+    default:
+        break;
     }
 }
 
@@ -65,6 +65,8 @@ void HSD_TExpRef(HSD_TExp* texp, u8 sel)
         break;
     case HSD_TE_CNST:
         texp->cnst.ref += 1;
+        break;
+    default:
         break;
     }
 }
@@ -138,6 +140,8 @@ HSD_TExp* HSD_TExpFreeList(HSD_TExp* texp_list, HSD_TExpType type, s32 all)
                         HSD_TExpUnref(ptr, 1);
                         HSD_TExpUnref(ptr, 5);
                     }
+                    break;
+                default:
                     break;
                 }
             }
@@ -362,6 +366,8 @@ static void HSD_TExpColorInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp,
             case HSD_TE_CNST:
                 tev->c_in[idx].exp->cnst.ref += 1;
                 break;
+            default:
+                break;
             }
         } break;
         case HSD_TE_CNST: {
@@ -378,6 +384,8 @@ static void HSD_TExpColorInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp,
                 break;
             case HSD_TE_CNST:
                 tev->c_in[idx].exp->cnst.ref += 1;
+                break;
+            default:
                 break;
             }
         } break;

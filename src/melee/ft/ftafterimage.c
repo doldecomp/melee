@@ -451,6 +451,8 @@ void ftCo_800C2FD8(Fighter_GObj* gobj)
             var_r5 = &da->x78;
             break;
         }
+        default:
+            break;
         }
         var_r29 = 0;
         fp->x20F8 = var_r5->x18;

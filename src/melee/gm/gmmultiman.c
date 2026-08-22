@@ -23,10 +23,14 @@ static MatchExitInfo gm_80495370;
 
 static u8 gm_804D68E8;
 static u8 gm_804D68E9;
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
+#endif
 static u32 pad;
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 static u8 gm_804D68F0;
 static s8 gm_804D68F1;
 

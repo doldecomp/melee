@@ -9,7 +9,9 @@
 #include "lb/lb_013B.h"
 #include "pl/player.h"
 
+#ifdef MUST_MATCH
 #pragma force_active on
+#endif
 
 /* 0BFE74 */ static void ftCo_800BFE74(Fighter_GObj* gobj, CommandInfo* cmd);
 /* 0BFEB4 */ static void ftCo_800BFEB4(Fighter_GObj* gobj, CommandInfo* cmd);
@@ -131,9 +133,11 @@ void ftCo_800C0074(Fighter* fp)
     lb_80014498(&fp->x408);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
 #pragma global_optimizer off
+#endif
 void ft_800C0098(Fighter* fp)
 {
     lb_80014498(&fp->x508);
@@ -152,11 +156,15 @@ void ft_800C0098(Fighter* fp)
         }
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
 #pragma global_optimizer off
+#endif
 void ftCo_800C0134(Fighter* fp)
 {
     lb_80014498(&fp->x488);
@@ -178,10 +186,14 @@ void ftCo_800C0134(Fighter* fp)
         }
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftCo_800C0200(Fighter* fp, int arg1)
 {
     if (arg1 >= 0x7B) {
@@ -275,4 +287,6 @@ void ftCo_800C0408(Fighter_GObj* gobj)
     }
     fp->x2221_b3 = true;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif

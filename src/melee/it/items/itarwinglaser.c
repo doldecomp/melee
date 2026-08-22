@@ -443,6 +443,8 @@ static void itArwinglaser_UnkMotion3_Phys(Item_GObj* gobj)
         // fallthrough
     case Gr_Kind_Venom:
         break;
+    default:
+        break;
     }
 }
 

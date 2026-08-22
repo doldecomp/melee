@@ -98,7 +98,9 @@ static inline bool checkJObjFlags(HSD_JObj* jobj)
     return jobj->flags & (JOBJ_PTCL | JOBJ_SPLINE) ? false : true;
 }
 
+#ifdef MUST_MATCH
 #pragma inline_depth(2)
+#endif
 void lb_80011C18(HSD_JObj* jobj, u32 flags)
 {
     HSD_JObj* cur;
@@ -147,7 +149,9 @@ void lb_80011C18(HSD_JObj* jobj, u32 flags)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma inline_depth(8)
+#endif
 /**
  * @note: The number of HSD_JObjs that get passed into arg1 is the number of
  * variable arguments passed until -1 is passed.
