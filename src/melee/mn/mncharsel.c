@@ -659,6 +659,44 @@ static inline HSD_JObj* animateJoint(HSD_JObj* root, u8 joint, u32 mask,
     return jobj;
 }
 
+static inline HSD_JObj* animateJointPadded(HSD_JObj* root, u8 joint, u32 mask,
+                                           f32 frame)
+{
+    struct {
+        HSD_JObj* jobj;
+        u8 pad[8];
+    } state;
+    HSD_JObj* cc0;
+    HSD_JObj* cc1;
+    lb_80011E24(root, &state.jobj, joint, -1);
+    cc0 = state.jobj;
+    HSD_ForeachAnim(cc0, JOBJ_TYPE, mask, HSD_AObjReqAnim, AOBJ_ARG_AF, frame);
+    HSD_JObjAnimAll(state.jobj);
+    cc1 = state.jobj;
+    HSD_ForeachAnim(cc1, JOBJ_TYPE, mask, HSD_AObjStopAnim, AOBJ_ARG_AOV, 0,
+                    0);
+    return state.jobj;
+}
+
+static inline HSD_JObj* animateJointLeadingPad(HSD_JObj* root, u8 joint,
+                                               u32 mask, f32 frame)
+{
+    struct {
+        HSD_JObj* jobj;
+        u8 pad[0x18];
+    } state;
+    HSD_JObj* cc0;
+    HSD_JObj* cc1;
+    lb_80011E24(root, &state.jobj, joint, -1);
+    cc0 = state.jobj;
+    HSD_ForeachAnim(cc0, JOBJ_TYPE, mask, HSD_AObjReqAnim, AOBJ_ARG_AF, frame);
+    HSD_JObjAnimAll(state.jobj);
+    cc1 = state.jobj;
+    HSD_ForeachAnim(cc1, JOBJ_TYPE, mask, HSD_AObjStopAnim, AOBJ_ARG_AOV, 0,
+                    0);
+    return state.jobj;
+}
+
 void mnCharSel_8025D5AC(int door, int frame, bool hidden)
 {
     HSD_JObj* sp5C;
@@ -905,7 +943,6 @@ void mnCharSel_8025DB34(u8 arg0)
     s32 hud_idx;
     s32 color;
     f32 door_frame;
-
     sel_icon = mnCharSel_803F0DFC.doors[arg0].sel_icon;
     hud_idx = icons[sel_icon].ft_hudindex;
     mnCharSel_8025D5AC((int) arg0, 0, 1);
@@ -1034,8 +1071,8 @@ void mnCharSel_8025DB34(u8 arg0)
                     anim_frame =
                         (f32) mnCharSel_804D6CB0->data.data.players[arg0]
                             .cpu_level;
-                    animateJoint(mnCharSel_804D6CC0, joint, TOBJ_MASK,
-                                 anim_frame);
+                    animateJointPadded(mnCharSel_804D6CC0, joint, TOBJ_MASK,
+                                       anim_frame);
                 }
                 break;
             case 1: {
@@ -1051,7 +1088,21 @@ void mnCharSel_8025DB34(u8 arg0)
                                         HSD_AObjReqAnim, AOBJ_ARG_AF,
                                         door_frame);
                     }
-                    anim_frame = getHandicapFrame((int) arg0);
+                    {
+                        s32 hval;
+                        s32 port = (int) arg0;
+                        if (gmMainLib_GetGameRules()->handicap == 1) {
+                            hval = (u8) gm_801685D4(
+                                port,
+                                mnCharSel_804D6CB0->data.data.players[port]
+                                    .xA);
+                        } else {
+                            hval = (u8) mnCharSel_804D6CB0->data.data
+                                       .players[port]
+                                       .handicap;
+                        }
+                        anim_frame = (f32) (hval != 0 ? hval : 1);
+                    }
                     joint = mnCharSel_803F0DFC.doors[arg0].cpuslider_joint;
                     sp90 = animateJoint(mnCharSel_804D6CC0, joint, TOBJ_MASK,
                                         anim_frame);
@@ -1098,7 +1149,21 @@ void mnCharSel_8025DB34(u8 arg0)
                                             AOBJ_ARG_AF, door_frame);
                         }
                     }
-                    anim_frame = getHandicapFrame((int) arg0);
+                    {
+                        s32 hval;
+                        s32 port = (int) arg0;
+                        if (gmMainLib_GetGameRules()->handicap == 1) {
+                            hval = (u8) gm_801685D4(
+                                port,
+                                mnCharSel_804D6CB0->data.data.players[port]
+                                    .xA);
+                        } else {
+                            hval = (u8) mnCharSel_804D6CB0->data.data
+                                       .players[port]
+                                       .handicap;
+                        }
+                        anim_frame = (f32) (hval != 0 ? hval : 1);
+                    }
                     joint = mnCharSel_803F0DFC.doors[arg0].cpuslider_joint;
                     sp90 = animateJoint(mnCharSel_804D6CC0, joint, TOBJ_MASK,
                                         anim_frame);
@@ -1185,7 +1250,8 @@ void mnCharSel_8025DB34(u8 arg0)
 
                 anim_frame = (f32) mnCharSel_804D50D0[team.v];
                 joint = mnCharSel_803F0DFC.doors[arg0].emblem_joint;
-                animateJoint(mnCharSel_804D6CC0, joint, MOBJ_MASK, anim_frame);
+                animateJointLeadingPad(mnCharSel_804D6CC0, joint, MOBJ_MASK,
+                                       anim_frame);
             }
             mnCharSel_804D6CB0->data.data.players[arg0].team =
                 mnCharSel_803F0DFC.doors[arg0].team;
