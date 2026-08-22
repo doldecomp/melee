@@ -4589,12 +4589,13 @@ s32 mnCharSel_802640A0(void)
             }
             lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x40, -1);
             lb_8000B1CC(sp108, NULL, &spEC);
-            text = mnCharSel_804D6CDC = HSD_SisLib_803A6754(0, ctx);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CDC = text;
             {
                 f32 sx, sy, sz;
                 sx = 13.5f + spEC.x;
-                sz = ((volatile Point3d*) &spEC)->z;
-                sy = -((volatile Point3d*) &spEC)->y;
+                sz = spEC.z;
+                sy = -spEC.y;
                 text->pos_x = sx;
                 text->pos_y = sy;
                 text->pos_z = sz;
@@ -4607,12 +4608,13 @@ s32 mnCharSel_802640A0(void)
             HSD_JObjSetFlags(sp108, JOBJ_HIDDEN);
             lb_80011E24(mnCharSel_804D6CC0, &sp108, 0x41, -1);
             lb_8000B1CC(sp108, NULL, &spEC);
-            text = mnCharSel_804D6CE4 = HSD_SisLib_803A6754(0, ctx);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CE4 = text;
             {
                 f32 sx, sy, sz;
                 sx = 13.5f + spEC.x;
-                sz = ((volatile Point3d*) &spEC)->z;
-                sy = -((volatile Point3d*) &spEC)->y;
+                sz = spEC.z;
+                sy = -spEC.y;
                 text->pos_x = sx;
                 text->pos_y = sy;
                 text->pos_z = sz;
@@ -4636,12 +4638,13 @@ s32 mnCharSel_802640A0(void)
         case STADIUM_TARGET:
             lb_80011E24(mnCharSel_804D6CC8, &sp108, 4, -1);
             lb_8000B1CC(sp108, NULL, &spEC);
-            text = mnCharSel_804D6CDC = HSD_SisLib_803A6754(0, ctx);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CDC = text;
             {
                 f32 sx, sy, sz;
                 sx = 10.9f + spEC.x;
-                sz = ((volatile Point3d*) &spEC)->z;
-                sy = -((volatile Point3d*) &spEC)->y;
+                sz = spEC.z;
+                sy = -spEC.y;
                 text->pos_x = sx;
                 text->pos_y = sy;
                 text->pos_z = sz;
@@ -4650,12 +4653,13 @@ s32 mnCharSel_802640A0(void)
             text->font_size.x = 0.07f;
             text->font_size.y = 0.055f;
             HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
-            text = mnCharSel_804D6CE0 = HSD_SisLib_803A6754(0, ctx);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CE0 = text;
             {
                 f32 sx, sy, sz;
                 sx = 11.6f + spEC.x;
-                sz = ((volatile Point3d*) &spEC)->z;
-                sy = 0.3f - ((volatile Point3d*) &spEC)->y;
+                sz = spEC.z;
+                sy = 0.3f - spEC.y;
                 text->pos_x = sx;
                 text->pos_y = sy;
                 text->pos_z = sz;
@@ -4665,12 +4669,13 @@ s32 mnCharSel_802640A0(void)
             HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
             lb_80011E24(mnCharSel_804D6CC8, &sp108, 5, -1);
             lb_8000B1CC(sp108, NULL, &spEC);
-            text = mnCharSel_804D6CE4 = HSD_SisLib_803A6754(0, ctx);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CE4 = text;
             {
                 f32 sx, sy, sz;
                 sx = 10.9f + spEC.x;
-                sz = ((volatile Point3d*) &spEC)->z;
-                sy = -((volatile Point3d*) &spEC)->y;
+                sz = spEC.z;
+                sy = -spEC.y;
                 text->pos_x = sx;
                 text->pos_y = sy;
                 text->pos_z = sz;
@@ -4679,12 +4684,13 @@ s32 mnCharSel_802640A0(void)
             text->font_size.y = 0.055f;
             text->default_alignment = 2;
             HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
-            text = mnCharSel_804D6CE8 = HSD_SisLib_803A6754(0, ctx);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CE8 = text;
             {
                 f32 sx, sy, sz;
                 sx = 11.6f + spEC.x;
-                sz = ((volatile Point3d*) &spEC)->z;
-                sy = 0.3f - ((volatile Point3d*) &spEC)->y;
+                sz = spEC.z;
+                sy = 0.3f - spEC.y;
                 text->pos_x = sx;
                 text->pos_y = sy;
                 text->pos_z = sz;
@@ -4698,12 +4704,13 @@ s32 mnCharSel_802640A0(void)
         case STADIUM_HOMERUN:
             lb_80011E24(mnCharSel_804D6CC8, &sp108, 4, -1);
             lb_8000B1CC(sp108, NULL, &spEC);
-            text = mnCharSel_804D6CDC = HSD_SisLib_803A6754(0, ctx);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CDC = text;
             {
                 f32 sx, sy, sz;
                 sx = 11.0f + spEC.x;
-                sz = ((volatile Point3d*) &spEC)->z;
-                sy = -((volatile Point3d*) &spEC)->y;
+                sz = spEC.z;
+                sy = -spEC.y;
                 text->pos_x = sx;
                 text->pos_y = sy;
                 text->pos_z = sz;
@@ -4736,12 +4743,13 @@ s32 mnCharSel_802640A0(void)
             }
             lb_80011E24(mnCharSel_804D6CC8, &sp108, 5, -1);
             lb_8000B1CC(sp108, NULL, &spEC);
-            text = mnCharSel_804D6CE4 = HSD_SisLib_803A6754(0, ctx);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CE4 = text;
             {
                 f32 sx, sy, sz;
                 sx = 11.0f + spEC.x;
-                sz = ((volatile Point3d*) &spEC)->z;
-                sy = -((volatile Point3d*) &spEC)->y;
+                sz = spEC.z;
+                sy = -spEC.y;
                 text->pos_x = sx;
                 text->pos_y = sy;
                 text->pos_z = sz;
@@ -4755,12 +4763,13 @@ s32 mnCharSel_802640A0(void)
         case STADIUM_MULTIMAN_100:
             lb_80011E24(mnCharSel_804D6CC8, &sp108, 4, -1);
             lb_8000B1CC(sp108, NULL, &spEC);
-            text = mnCharSel_804D6CDC = HSD_SisLib_803A6754(0, ctx);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CDC = text;
             {
                 f32 sx, sy, sz;
                 sx = 10.9f + spEC.x;
-                sz = ((volatile Point3d*) &spEC)->z;
-                sy = -((volatile Point3d*) &spEC)->y;
+                sz = spEC.z;
+                sy = -spEC.y;
                 text->pos_x = sx;
                 text->pos_y = sy;
                 text->pos_z = sz;
@@ -4769,12 +4778,13 @@ s32 mnCharSel_802640A0(void)
             text->font_size.y = 0.055f;
             text->default_alignment = 2;
             HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
-            text = mnCharSel_804D6CE0 = HSD_SisLib_803A6754(0, ctx);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CE0 = text;
             {
                 f32 sx, sy, sz;
                 sx = 11.6f + spEC.x;
-                sz = ((volatile Point3d*) &spEC)->z;
-                sy = 0.3f - ((volatile Point3d*) &spEC)->y;
+                sz = spEC.z;
+                sy = 0.3f - spEC.y;
                 text->pos_x = sx;
                 text->pos_y = sy;
                 text->pos_z = sz;
@@ -4784,12 +4794,13 @@ s32 mnCharSel_802640A0(void)
             HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
             lb_80011E24(mnCharSel_804D6CC8, &sp108, 5, -1);
             lb_8000B1CC(sp108, NULL, &spEC);
-            text = mnCharSel_804D6CE4 = HSD_SisLib_803A6754(0, ctx);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CE4 = text;
             {
                 f32 sx, sy, sz;
                 sx = 10.9f + spEC.x;
-                sz = ((volatile Point3d*) &spEC)->z;
-                sy = -((volatile Point3d*) &spEC)->y;
+                sz = spEC.z;
+                sy = -spEC.y;
                 text->pos_x = sx;
                 text->pos_y = sy;
                 text->pos_z = sz;
@@ -4798,12 +4809,13 @@ s32 mnCharSel_802640A0(void)
             text->font_size.y = 0.055f;
             text->default_alignment = 2;
             HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
-            text = mnCharSel_804D6CE8 = HSD_SisLib_803A6754(0, ctx);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CE8 = text;
             {
                 f32 sx, sy, sz;
                 sx = 11.6f + spEC.x;
-                sz = ((volatile Point3d*) &spEC)->z;
-                sy = 0.3f - ((volatile Point3d*) &spEC)->y;
+                sz = spEC.z;
+                sy = 0.3f - spEC.y;
                 text->pos_x = sx;
                 text->pos_y = sy;
                 text->pos_z = sz;
@@ -4820,12 +4832,13 @@ s32 mnCharSel_802640A0(void)
         case STADIUM_CRUEL_MELEE:
             lb_80011E24(mnCharSel_804D6CC8, &sp108, 4, -1);
             lb_8000B1CC(sp108, NULL, &spEC);
-            text = mnCharSel_804D6CDC = HSD_SisLib_803A6754(0, ctx);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CDC = text;
             {
                 f32 sx, sy, sz;
                 sx = 16.0f + spEC.x;
-                sz = ((volatile Point3d*) &spEC)->z;
-                sy = -((volatile Point3d*) &spEC)->y;
+                sz = spEC.z;
+                sy = -spEC.y;
                 text->pos_x = sx;
                 text->pos_y = sy;
                 text->pos_z = sz;
@@ -4836,12 +4849,13 @@ s32 mnCharSel_802640A0(void)
             HSD_SisLib_803A6B98(text, 0.0f, 0.0f, NULL);
             lb_80011E24(mnCharSel_804D6CC8, &sp108, 5, -1);
             lb_8000B1CC(sp108, NULL, &spEC);
-            text = mnCharSel_804D6CE4 = HSD_SisLib_803A6754(0, ctx);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CE4 = text;
             {
                 f32 sx, sy, sz;
                 sx = 16.0f + spEC.x;
-                sz = ((volatile Point3d*) &spEC)->z;
-                sy = -((volatile Point3d*) &spEC)->y;
+                sz = spEC.z;
+                sy = -spEC.y;
                 text->pos_x = sx;
                 text->pos_y = sy;
                 text->pos_z = sz;
@@ -4854,7 +4868,8 @@ s32 mnCharSel_802640A0(void)
         case TRAINING_MODE:
             lb_80011E24(mnCharSel_804D6CC4, &sp108, 9, -1);
             lb_8000B1CC(sp108, NULL, &spEC);
-            text = mnCharSel_804D6CDC = HSD_SisLib_803A6754(0, ctx);
+            text = HSD_SisLib_803A6754(0, ctx);
+            mnCharSel_804D6CDC = text;
             {
                 f32 sx, sy, sz;
                 sx = 10.0f + spEC.x;
