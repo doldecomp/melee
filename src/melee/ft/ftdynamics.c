@@ -17,7 +17,9 @@
 #include <baselib/debug.h>
 #include <baselib/jobj.h>
 
+#ifdef MUST_MATCH
 #pragma force_active on
+#endif
 
 static inline void ftCo_8009CB40_inline(struct DynamicsData* data)
 {

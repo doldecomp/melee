@@ -824,7 +824,9 @@ struct TmData {
     u8 x32;
     u8 x33;
     u8 pad_x34[0x37 - 0x34];
+#ifdef MUST_MATCH
 #pragma pack(push, 1)
+#endif
     struct TmUnkMenuData {
         u8 x0;
         u8 x1;
@@ -843,7 +845,9 @@ struct TmData {
         u8 xF;
         u8 pad_X10[0x12 - 0x10];
     } x37[64];
+#ifdef MUST_MATCH
 #pragma pack(pop)
+#endif
     u8 pad_x4B7[0x4B8 - 0x4B7];
     struct UnkSelections {
         u8 x0; ///< slot type

@@ -251,8 +251,10 @@ static inline void ftCo_80092450_inline(Fighter_GObj* gobj)
     fp->x221A_b7 = true;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
+#endif
 
 static void ftCo_80092158(Fighter_GObj* gobj, int arg1, HSD_JObj* arg2)
 {

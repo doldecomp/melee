@@ -432,13 +432,17 @@ s32 fn_8001F13C(THPDecComp* streamPlayer)
 }
 
 /// @todo Stripped code leading to function that can't be inlined?
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 s32 fn_8001F294(void)
 {
     return MoviePlayer.unk_110;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static inline u32 lbMthp_GetFrame(u32** rate_table, u32 counter)
 {

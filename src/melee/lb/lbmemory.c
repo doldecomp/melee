@@ -328,8 +328,10 @@ void lbMemory_800155A4(void)
     _p(x69C) = NULL;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void lbMemory_8001564C(void)
 {
     u32 size[3];
@@ -366,4 +368,6 @@ void lbMemory_8001564C(void)
     }
     _p(x6A0_mgr).size = 0; // base + 0x6D0 on PowerPC
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif

@@ -168,7 +168,9 @@ void _tyFigupon_80314AA8(HSD_JObj* jobj, char* anim_str, char* matanim_str,
     HSD_JObjReqAnimAll(jobj, 0.0f);
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 s32 _tyFigupon_80314B54(void)
 {
     s32 i;
@@ -186,7 +188,9 @@ s32 _tyFigupon_80314B54(void)
     }
     return count;
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 void _tyFigupon_80314BE4(HSD_GObj* gobj, int unused)
 {

@@ -321,8 +321,10 @@ int mn_8022F470(int* x, const int* target, int dx)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void mn_8022F4CC(void)
 {
     if (gm_GetCurrentGameMode() == GM_TOURNAMENT) {
@@ -339,4 +341,6 @@ void mn_8022F4CC(void)
     mn_8022EBDC();
     mnCharSel_802640A0();
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif

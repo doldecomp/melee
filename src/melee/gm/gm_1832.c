@@ -685,7 +685,9 @@ void fn_80185408(int x, float arg8, float arg9, float argA, float argB)
 
 extern float MSL_TrigF_80400770[];
 extern float MSL_TrigF_80400774[];
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 double fn_801855BC(double arg8)
 {
     f64 temp_f2;
@@ -712,7 +714,9 @@ double fn_801855BC(double arg8)
     }
     return MSL_TrigF_80400774[0];
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 void fn_8018564C(HSD_GObj* gobj)
 {
@@ -1379,8 +1383,10 @@ void fn_80186F6C(HSD_GObj* arg0)
 
 extern HSD_Archive* lbl_804D6610;
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 HSD_GObjProc* fn_801873F0(void)
 {
     ftDemo_ObjAllocInit();
@@ -1395,7 +1401,9 @@ HSD_GObjProc* fn_801873F0(void)
     Player_80036F34(0, 6);
     return HSD_GObj_SetupProc(Player_GetEntity(0), fn_80186F6C, 0x16U);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void fn_80187494(HSD_GObj* gobj, int arg1)
 {
@@ -1435,8 +1443,10 @@ void fn_801874FC(void)
 
 /// #fn_801874FC
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void fn_80187714(void)
 {
     Camera_80028B9C(6);
@@ -1450,7 +1460,9 @@ void fn_80187714(void)
     efLib_Init();
     efAsync_LoadSync(0);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void gm_8018776C_OnFrame(void)
 {
@@ -1461,8 +1473,10 @@ void gm_8018776C_OnFrame(void)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void gm_801877A8_OnEnter(void* arg0_)
 {
     struct enterdata* arg0 = arg0_;
@@ -1501,7 +1515,9 @@ void gm_801877A8_OnEnter(void* arg0_)
     fn_801873F0();
     lbAudioAx_80023F28(0x2D);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 typedef struct gm_1832_StageState {
     u8 stage_index : 5;
@@ -2358,7 +2374,9 @@ void fn_80188EE8(HSD_GObj* gobj)
     HSD_JObjAnimAll(cursor_jobj);
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline off
+#endif
 static inline u32 gm_801891F4_GetTickRate(void)
 {
     return OS_TIMER_CLOCK;
@@ -2672,7 +2690,9 @@ void fn_801891F4(void)
         sub->x01 = 0;
     }
 }
+#ifdef MUST_MATCH
 #pragma dont_inline off
+#endif
 
 void fn_80189B88(void)
 {

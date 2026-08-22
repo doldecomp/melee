@@ -1142,7 +1142,9 @@ static inline bool isDuplicateCostume(int door)
     return false;
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 bool mnCharSel_8025DAA0(int door)
 {
     int num_doors;
@@ -1167,7 +1169,9 @@ bool mnCharSel_8025DAA0(int door)
     }
     return false;
 }
+#ifdef MUST_MATCH
 #pragma dont_inline off
+#endif
 
 static inline void pickUniqueCostume(int door)
 {
@@ -2092,7 +2096,9 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma auto_inline off
+#endif
 s32 mnCharSel_8025FDEC(u8 door)
 {
     CSSData* css;
@@ -2183,7 +2189,9 @@ s32 mnCharSel_8025FDEC(u8 door)
     }
     return 1;
 }
+#ifdef MUST_MATCH
 #pragma auto_inline on
+#endif
 void mnCharSel_CostumeChange(int door, u32 input)
 {
     u8 prev_costume = mnCharSel_803F0DFC.doors[door].costume;

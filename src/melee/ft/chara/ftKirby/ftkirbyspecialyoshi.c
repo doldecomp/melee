@@ -128,12 +128,16 @@ float ftKb_SpecialNYs_80109380(void)
     return cd->specialn_ys_unk3 / cd->specialn_ys_damage_multiplier;
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 ftDynamics* ftKb_SpecialNYs_801093A0(Fighter_GObj* gobj)
 {
     return ft_80459B88.hats[FTKIND_SAMUS]->hat_dynamics[0];
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 void ftKb_SpecialNYs_801093B4(Fighter_GObj* gobj)
 {

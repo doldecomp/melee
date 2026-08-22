@@ -3236,8 +3236,10 @@ s32 Ground_801C5840(void)
     return stage_info.x6E4[i];
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma global_optimizer off
+#endif
 /// @todo Why is @c global_optimizer necessary?
 void Ground_801C5878(void)
 {
@@ -3253,7 +3255,9 @@ void Ground_801C5878(void)
         stage_info.x6E4[0] = -1;
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 Item_GObj* Ground_801C58E0(s32 arg0, s32 arg1)
 {

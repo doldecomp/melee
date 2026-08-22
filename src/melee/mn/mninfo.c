@@ -43,8 +43,10 @@ u8 mnInfo_804A0968[0x48];
 HSD_GObj* mnInfo_804D6C78;
 extern GXColor mn_804D4B64;
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 s32 mnInfo_80251A08(s32 arg0)
 {
     switch (arg0) { /* irregular */
@@ -64,10 +66,14 @@ s32 mnInfo_80251A08(s32 arg0)
         return gmMainLib_8015D94C(arg0);
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 s32 mnInfo_80251AA4(void)
 {
     s32 i;
@@ -80,7 +86,9 @@ s32 mnInfo_80251AA4(void)
     }
     return var_r30;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static inline bool mnInfo_80251AFC_inline(s32 i)
 {
@@ -143,8 +151,10 @@ static AnimLoopSettings mnInfo_803EFC08[0x12] = {
     { 2.8395941e29f, 1.7935375e25f, 7.2243537e28f },
 };
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 s32 mnInfo_80251D58(mnInfo_GObj* arg0, s32 arg1, u32 arg2, u32 arg3)
 {
     char sp34[5];
@@ -191,10 +201,14 @@ s32 mnInfo_80251D58(mnInfo_GObj* arg0, s32 arg1, u32 arg2, u32 arg3)
     return HSD_SisLib_803A6B98(text, 0.0f, 40.0f, layout->time_format, sp30,
                                sp2C, sp28);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void mnInfo_80251F04(mnInfo_GObj* arg0, s32 arg1, u32 arg2)
 {
     s16 sp16;
@@ -217,7 +231,9 @@ void mnInfo_80251F04(mnInfo_GObj* arg0, s32 arg1, u32 arg2)
     un_802FE3F8((s32) arg2, 0x4BD, &sp16, NULL);
     HSD_SisLib_803A6368(text, (s32) (u16) sp16);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static inline s32 mnInfo_CountUnlocked(void)
 {
@@ -328,8 +344,10 @@ void fn_80251FE4(void)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 void mnInfo_802522B8(HSD_GObj* gobj)
 {
     s32 count;
@@ -356,7 +374,9 @@ void mnInfo_802522B8(HSD_GObj* gobj)
     }
     mn_8022ED6C(jobj, (AnimLoopSettings*) mnInfo_803EFC08);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void fn_802523B8(HSD_GObj* gobj)
 {
@@ -488,8 +508,10 @@ void fn_80252548(HSD_GObj* gobj)
 
 StaticModelDesc mnInfo_804A0958;
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void mnInfo_80252720(MnInfoData* data)
 {
     data->scroll_idx = 0;
@@ -504,7 +526,9 @@ void mnInfo_80252720(MnInfoData* data)
     data->left_column[3] = NULL;
     data->right_column[3] = NULL;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 s32 mnInfo_80252758(void)
 {

@@ -299,8 +299,10 @@ static inline int lbSnap_GetSaveDataOffset(struct Unk80433380_0* snap)
     return snap->xC + ((int) &snap->x38 - (int) snap);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma global_optimizer off
+#endif
 int lbSnap_8001DF20(void)
 {
     struct Unk80433380_0* snap = _p(x0);
@@ -310,7 +312,9 @@ int lbSnap_8001DF20(void)
     lbSnap_803BACC8.entries[0].data = (u8*) snap;
     return lb_8001C4A8(tmp->entries, &lbSnap_803BACC8);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 int lbSnap_8001DF6C(int chan)
 {

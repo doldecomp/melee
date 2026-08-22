@@ -1390,7 +1390,9 @@ bool fn_800259A0(HSD_GObj* gobj)
     return false;
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 bool fn_800259EC(HSD_GObj* gobj)
 {
     lbAudioAx_UserData* ud;
@@ -1473,7 +1475,9 @@ bool fn_80025A98(HSD_GObj* gobj)
 end:
     return false;
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 bool fn_80025B44(HSD_GObj* gobj)
 {
@@ -1965,7 +1969,9 @@ static inline int fn_80026650_inline(void)
 }
 
 /// Retail inlines this search into fn_80026C04 but calls it here.
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 int fn_80026650(void)
 {
     int i;
@@ -1981,7 +1987,9 @@ int fn_80026650(void)
     }
     return -1;
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 void fn_800267B0(void)
 {

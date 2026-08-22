@@ -893,8 +893,10 @@ void fn_802FAC34(HSD_GObj* arg)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ifStock_802FAEC4(void)
 {
     HSD_GObj* gobj;
@@ -949,7 +951,9 @@ void ifStock_802FAEC4(void)
         lb_80011E24(jobj, &stock->jobj, 0, 1, 2, 3, 4, 5, -1);
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ifStock_802FB390(void)
 {

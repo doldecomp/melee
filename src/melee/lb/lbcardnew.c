@@ -925,8 +925,10 @@ int lb_8001BD34(int chan, const char* filename, UNK_T file_entries,
     return result;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 int lb_8001BE30(int chan, const char* filename, UNK_T file_entries,
                 const char* read_buf, int read_offset, int read_len,
                 UNK_T status_out, UNK_T callback)
@@ -956,8 +958,10 @@ int lb_8001BE30(int chan, const char* filename, UNK_T file_entries,
     task->x8 = file_entries;
     return lb_80019CB0(0x10);
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
 #pragma pop
+#endif
 
 int lb_8001BF04(int chan, char* filename, void* file_entries,
                 const char* write_buf, int write_offset, int write_len,

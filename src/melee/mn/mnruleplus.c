@@ -401,7 +401,9 @@ void mn_80232660(HSD_GObj* gobj, HSD_JObj* jobj, u8 option)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
 {
     UNUSED u8 pad[8];
@@ -591,7 +593,9 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
         }
     }
 }
+#ifdef MUST_MATCH
 #pragma dont_inline off
+#endif
 
 void mn_80232D4C(HSD_GObj* gobj, u32 arg1, u32 arg2)
 {

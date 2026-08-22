@@ -45,8 +45,10 @@ void ftCo_800CDDA0(Fighter_GObj* fighter_gobj)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftCo_800CDE18(Fighter_GObj* fighter_gobj)
 {
     if (ftAnim_IsFramesRemaining(fighter_gobj) == false) {
@@ -63,7 +65,9 @@ void ftCo_800CDE74(Fighter_GObj* fighter_gobj)
 {
     ft_80084DB0(fighter_gobj);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftCo_800CDE94(Fighter* fighter, Vec3* arg1, Vec3* arg2)
 {

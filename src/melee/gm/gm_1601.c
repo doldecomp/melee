@@ -4486,8 +4486,10 @@ void fn_801695BC(u8 arg0, u8 arg1, u8 arg2, const u8* arg3, u8* arg4)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void fn_801697FC(s8 character, s8 costume, s8 new_character, s8 new_costume,
                  s8* buf)
 {
@@ -4504,7 +4506,9 @@ void fn_801697FC(s8 character, s8 costume, s8 new_character, s8 new_costume,
         buf[i] = costume;
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void fn_8016989C(u8* arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
 {
@@ -4514,8 +4518,10 @@ void fn_8016989C(u8* arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
     };
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void fn_80169900(u8 arg0, struct lbl_8046B488_t* arg1, s8* arg2, s8* arg3)
 {
     s32 var_r28 = 0;
@@ -4579,7 +4585,9 @@ void fn_80169900(u8 arg0, struct lbl_8046B488_t* arg1, s8* arg2, s8* arg3)
     }
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 s32 fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
 {

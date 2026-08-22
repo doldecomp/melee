@@ -10,8 +10,10 @@
 #include <baselib/debug.h>
 #include <melee/lb/lbdvd.h>
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void lbArchive_InitializeDAT(HSD_Archive* archive, void* data, size_t length)
 {
     const char* symbol;
@@ -32,7 +34,9 @@ void lbArchive_InitializeDAT(HSD_Archive* archive, void* data, size_t length)
         }
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void lbArchive_LoadSections(HSD_Archive* archive, void** symbol, ...)
 {

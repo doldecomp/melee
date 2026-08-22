@@ -610,7 +610,9 @@ void mnSnap_80253F60(void)
 }
 
 /// Resets the sub-menu view and shows all 5 option buttons.
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 void mnSnap_80254014(void)
 {
     mnSnap_State* snap = &mnSnap_804A0A10;
@@ -627,7 +629,9 @@ void mnSnap_80254014(void)
 
     HSD_JObjSetFlagsAll(snap->move_jobj, JOBJ_HIDDEN);
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 /// Configures the Yes/No dialog button positions based on language setting.
 void mnSnap_8025409C(s32 dlg_type)

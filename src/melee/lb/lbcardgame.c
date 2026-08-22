@@ -101,8 +101,10 @@ int lb_8001C8BC(void)
                        &_p(x4));
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 enum_t lb_8001CAF4(void)
 {
     int temp_r5 = _p(x4);
@@ -126,7 +128,9 @@ enum_t lb_8001CAF4(void)
     }
     return _p(x8);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void lb_8001CBAC(int arg0)
 {

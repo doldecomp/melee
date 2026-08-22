@@ -59,8 +59,10 @@ void ftNs_AttackHi4_YoyoCheckTimedRehit(HSD_GObj* gobj)
     }
 };
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 /// Apply modified damage to D-Smash Yo-Yo hitbox after charge
 static void ftNs_AttackHi4_YoyoApplyDamage(float unk_float, HSD_GObj* gobj)
 {
@@ -88,7 +90,9 @@ static void ftNs_AttackHi4_YoyoApplyDamage(float unk_float, HSD_GObj* gobj)
         }
     }
 };
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static inline void push_ecb(CollData* a, Vec3* b)
 {
@@ -158,8 +162,10 @@ s32 ftNs_AttackHi4_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk,
 
 /// @todo Remove @c dont_inline.
 ///       This is probably a result of incorrectly splitting out the function.
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftNs_AttackHi4_YoyoSetUnkPos(HSD_GObj* gobj, Vec3* pos)
 {
     Vec3 sp20;
@@ -185,7 +191,9 @@ void ftNs_AttackHi4_YoyoSetUnkPos(HSD_GObj* gobj, Vec3* pos)
         pos, 4, -atan2f(collData->floor.normal.x, collData->floor.normal.y));
     lbVector_Add(pos, &sp14);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftNs_AttackHi4_YoyoSetHitPos(HSD_GObj* gobj)
 {

@@ -325,8 +325,10 @@ void ft_800890D0(Fighter* fp, u32 move_id)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 /**
  * Seems to handle move staling damage reduction
  * Each time the move exists in the stale move table, decreases the result
@@ -353,7 +355,9 @@ static f32 ft_80089118(StaleMoveTable* table, int move_id, int arg2)
     }
     return var_f1;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 f32 ft_80089228(Fighter* fp, int attack_id, int arg2, f32 arg3)
 {

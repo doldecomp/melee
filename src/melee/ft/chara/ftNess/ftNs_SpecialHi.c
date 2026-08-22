@@ -136,8 +136,10 @@ static f64 return_float20(void)
     return -M_PI / 2;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 /// 0x80117B70
 /// https://decomp.me/scratch/242L6
 void ftNs_SpecialHiStopGFX(HSD_GObj* gobj) // Removes GFX
@@ -163,7 +165,9 @@ void ftNs_SpecialHiStopGFX(HSD_GObj* gobj) // Removes GFX
         return;
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static inline bool check_distance(Vec3* pos, Vec3* pair)
 {

@@ -193,8 +193,10 @@ static void getColorPrimEnv(HSD_Particle* pp, GXColor* primCol,
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 static void getColorMatAmb(HSD_Particle* pp, GXColor* matCol, GXColor* ambCol)
 {
     if (pp->matColCount) {
@@ -224,7 +226,9 @@ static void getColorMatAmb(HSD_Particle* pp, GXColor* matCol, GXColor* ambCol)
         ambCol->a = pp->ambA;
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static inline void getClrTrail(HSD_Particle* pp, GXColor* color)
 {
@@ -1926,8 +1930,10 @@ static inline void psUpdateProjectionCache(f32 perspective)
     psUpdateBillboardAxes(*(const Mtx*) rvmtx);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma inline_depth(3)
+#endif
 void psDispParticles(u32 target_link, u32 sw)
 {
     s32 var_r16;
@@ -2256,4 +2262,6 @@ void psDispParticles(u32 target_link, u32 sw)
         HSD_StateInvalidate(-1);
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif

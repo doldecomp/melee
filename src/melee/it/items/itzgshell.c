@@ -398,13 +398,17 @@ void itZGShell_Logic11_Dropped(Item_GObj* gobj)
     Item_80268E5C(gobj, 4, 6);
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 bool itZrshell_UnkMotion4_Anim(Item_GObj* gobj)
 {
     it_802DDBE8(gobj);
     return false;
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 void itZrshell_UnkMotion4_Phys(Item_GObj* gobj)
 {
@@ -568,7 +572,9 @@ void it_802DEC80(Item_GObj* gobj)
     ip->jumped_on = fn_802DFE7C;
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 bool itZrshell_UnkMotion8_Anim(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
@@ -585,7 +591,9 @@ bool itZrshell_UnkMotion8_Anim(Item_GObj* gobj)
     }
     return false;
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 void itZrshell_UnkMotion8_Phys(Item_GObj* gobj)
 {

@@ -439,8 +439,10 @@ static void ftFx_SpecialAirLwLoop_Enter(HSD_GObj* gobj)
     ftFx_SpecialLw_CreateReflectHit(gobj);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 /// Fox & Falco's Reflector Turn function
 static void ftFx_SpecialLw_Turn(HSD_GObj* gobj)
 {
@@ -460,7 +462,9 @@ static void ftFx_SpecialLw_Turn(HSD_GObj* gobj)
                   -(MTXDegToRad(180 / da->x9C_FOX_REFLECTOR_TURN_FRAMES) -
                     ftPartGetRotZ(fp, 0)));
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 /// Fox & Falco's Reflector Turn function
 static inline void ftFox_SpecialLw_Turn_Inline(HSD_GObj* gobj)
@@ -710,7 +714,9 @@ void ftFx_SpecialLwHit_Anim(HSD_GObj* gobj)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 /// Fox & Falco's aerial Reflector Hit Animation callback
 void ftFx_SpecialAirLwHit_Anim(HSD_GObj* gobj)
 {
@@ -731,7 +737,9 @@ void ftFx_SpecialAirLwHit_Anim(HSD_GObj* gobj)
         fp->accessory4_cb = ftFx_SpecialLw_CreateLoopGFX;
     }
 }
+#ifdef MUST_MATCH
 #pragma dont_inline off
+#endif
 
 /// 0x800E9844 - Fox & Falco's grounded Reflector Hit IASA callback
 void ftFx_SpecialLwHit_IASA(HSD_GObj* gobj)

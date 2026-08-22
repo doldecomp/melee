@@ -505,7 +505,9 @@ bool itFlipper_DmgDealt(Item_GObj* gobj)
     return false;
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 bool itFlipper_Clanked(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
@@ -556,7 +558,9 @@ bool itFlipper_HitShield(Item_GObj* gobj)
     return false;
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 bool itFlipper_Reflected(Item_GObj* gobj)
 {
     return it_80273030(gobj);

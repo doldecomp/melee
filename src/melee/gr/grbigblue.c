@@ -3033,8 +3033,10 @@ f32 grBigBlue_801EC58C(Vec3* pos, Vec3* normal_out, f32 half_height)
 }
 
 /// @todo Needs register allocation fixes.
+#ifdef MUST_MATCH
 #pragma push
 #pragma fp_contract on
+#endif
 void grBigBlue_801EC6C0(Ground_GObj* gobj)
 {
     typedef struct grBb_StateBits {
@@ -3190,7 +3192,9 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
         }
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void grBigBlue_801ECB50(Ground_GObj* gobj)
 {
@@ -3595,8 +3599,10 @@ typedef union grBigBlue_CarPhysics {
 } grBigBlue_CarPhysics;
 
 /// @todo Currently partial match - complex car physics simulation
+#ifdef MUST_MATCH
 #pragma push
 #pragma fp_contract on
+#endif
 /// @todo The collision scratch vector sits four bytes low.
 void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
 {
@@ -3854,7 +3860,9 @@ heading_converge:
     HSD_JObjSetTranslate(jobj, &gp->data.lanes[lane].pos);
     HSD_JObjSetRotationZ(jobj, f31_rot);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 /// @todo Currently 87.41% match - compiler CSEs gp+offset into one register
 /// (4 NV regs) instead of keeping them separate (5 NV regs, stmw r27)
@@ -4069,8 +4077,10 @@ typedef union grBb_CarGround {
     u8 bytes[0x1D4];
 } grBb_CarGround;
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma fp_contract on
+#endif
 s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
 {
     s32 result = 0;
@@ -4472,10 +4482,14 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
 
     return result;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma fp_contract on
+#endif
 bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
 {
     s32 offset;
@@ -4670,7 +4684,9 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
 
     return 1;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 /// @todo Currently 99.88% match - instructions match but relocations differ
 void grBigBlue_801EF424(Ground_GObj* gobj)

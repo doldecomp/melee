@@ -658,8 +658,10 @@ void grCastle_801CDC44(Ground_GObj* gobj)
 
 void grCastle_801CDF50(Ground_GObj* gobj) {}
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 bool grCastle_801CDF54(Vec3* vec)
 {
     HSD_GObj* gobj;
@@ -679,7 +681,9 @@ bool grCastle_801CDF54(Vec3* vec)
     }
     return false;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void grCastle_801CDFD8(Ground_GObj* gobj)
 {

@@ -499,7 +499,9 @@ static inline void itRshell_StopInit(Item_GObj* gobj)
     it_80272980(gobj);
 }
 
+#ifdef MUST_MATCH
 #pragma inline_depth(8)
+#endif
 void it_8028DAE4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -643,8 +645,10 @@ void it_8028E170(Item_GObj* gobj)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 bool itRshell_UnkMotion6_Anim(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
@@ -663,7 +667,9 @@ bool itRshell_UnkMotion6_Anim(Item_GObj* gobj)
     }
     return false;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void itRshell_UnkMotion6_Phys(Item_GObj* gobj)
 {

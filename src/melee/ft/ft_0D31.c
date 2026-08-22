@@ -177,8 +177,10 @@ void ftCo_800D35FC(Fighter* fp)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 
 void ftCo_800D3680(Fighter_GObj* gobj)
 {
@@ -258,7 +260,9 @@ void ftCo_800D3680(Fighter_GObj* gobj)
     ftCo_800D4E50(temp_r31, &sp2C, 1, 0.0F);
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftCo_800D38B8(Fighter* fp, int arg1)
 {
@@ -279,8 +283,10 @@ void ftCo_DeadLeft_Anim(Fighter_GObj* gobj)
 
 void ftCo_DeadLeft_Cam(Fighter_GObj* gobj) {}
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 
 void ftCo_800D3950(Fighter_GObj* gobj)
 {
@@ -360,7 +366,9 @@ void ftCo_800D3950(Fighter_GObj* gobj)
     ftCo_800D4E50(temp_r31, &sp2C, 1, 3.1415927f);
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftCo_DeadRight_Anim(Fighter_GObj* gobj)
 {
@@ -373,8 +381,10 @@ void ftCo_DeadRight_Anim(Fighter_GObj* gobj)
 
 void ftCo_DeadRight_Cam(Fighter_GObj* gobj) {}
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 
 void ftCo_800D3BC8(Fighter_GObj* gobj)
 {
@@ -455,7 +465,9 @@ void ftCo_800D3BC8(Fighter_GObj* gobj)
     ftCo_800D4E50(temp_r31, &sp30, 1, 1.5707964f);
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftCo_DeadDown_Anim(Fighter_GObj* gobj)
 {
@@ -468,8 +480,10 @@ void ftCo_DeadDown_Anim(Fighter_GObj* gobj)
 
 void ftCo_DeadDown_Cam(Fighter_GObj* gobj) {}
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 
 void ftCo_800D3E40(Fighter_GObj* gobj)
 {
@@ -550,7 +564,9 @@ void ftCo_800D3E40(Fighter_GObj* gobj)
     ftCo_800D4E50(temp_r31, &sp30, 1, 4.712389f);
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftCo_DeadUp_Anim(Fighter_GObj* gobj)
 {

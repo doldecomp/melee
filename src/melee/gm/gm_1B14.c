@@ -464,7 +464,9 @@ void gm_801B1834(GameScene* arg0)
     gm_SetPendingSceneIndex(6);
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 void gm_801B18D4(GameScene* arg0)
 {
     StartMeleeData* smd;
@@ -480,7 +482,9 @@ void gm_801B18D4(GameScene* arg0)
     /// @todo :: figure out how to call this not inlined
     gm_801B0474(smd, &((MatchExitInfo*) (src + 1))->match_end);
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 void gm_801B1A2C(GameScene* arg0)
 {
@@ -516,7 +520,9 @@ void gm_801B1AD4(GameScene* arg0)
     gm_SetPendingSceneIndex(2);
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 void gm_801B1B74(GameScene* arg0)
 {
     VsModeData* vs_data;
@@ -539,7 +545,9 @@ void gm_801B1B74(GameScene* arg0)
     lbDvd_800174BC();
     gm_804D68C1 = lbTime_8000AF74((u32) gm_804D68C1, 1);
 }
+#ifdef MUST_MATCH
 #pragma dont_inline reset
+#endif
 
 static void gm_801B07E8_layer(CSSData* css_data, s8* c_kind, s8* stocks,
                               s8* color, s8* arg4, u8* level)
@@ -643,8 +651,10 @@ void gm_801B1EEC(GameScene* arg0)
 
 void fn_801B1F6C(int unused) {}
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void gm_801B1F70(GameScene* arg0)
 {
     VsModeData* vs;
@@ -685,7 +695,9 @@ void gm_801B1F70(GameScene* arg0)
     gm_8016F088(data);
     gm_80189CDC(data);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void gm_801B2204(GameScene* arg0)
 {

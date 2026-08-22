@@ -673,11 +673,15 @@ HSD_JObj* HSD_JObjLoadJoint(HSD_Joint* arg0)
 }
 
 #ifdef MUST_MATCH
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
+#endif
 static char unused1[] = "jobj_root";
 static char unused2[] = "jobj_root == NULL";
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 #endif
 
 void HSD_JObjResolveRefs(HSD_JObj* jobj, HSD_Joint* joint)
@@ -1540,8 +1544,10 @@ void JObjAmnesia(HSD_ClassInfo* info)
 }
 
 #ifdef MUST_MATCH
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
+#endif
 static char unused3[] = "jobj[%d,%d]";
 static char unused4[] = "SKELETON_ROOT ";
 static char unused5[] = "SKELETON ";
@@ -1553,7 +1559,9 @@ static char unused10[] = "  tra(L): ";
 static char unused11[] = "  rot(G): ";
 static char unused12[] = "  sca(G): ";
 static char unused13[] = "  tra(G): ";
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 #endif
 
 void JObjInfoInit(void)
@@ -1572,8 +1580,12 @@ void JObjInfoInit(void)
 }
 
 #ifdef MUST_MATCH
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
+#endif
 static u32 unused14[6] = { 0 };
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 #endif
