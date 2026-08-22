@@ -21,9 +21,6 @@
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 
-/// @todo Several differently-signed comparisons appear in asserts, likely
-///       indicating the sign of one of the variables is declared incorrectly
-
 static void PObjInfoInit(void);
 
 HSD_PObjInfo hsdPObj = { PObjInfoInit };
