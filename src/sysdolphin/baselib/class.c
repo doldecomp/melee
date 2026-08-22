@@ -67,17 +67,13 @@ void OSReport_PrintSpaces(s32 count)
 }
 
 #ifdef MUST_MATCH
-#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
-#endif
 static char unused1[] = "entry %d <null>\n";
 static char unused2[] = "entry %d - %d <null>\n";
 static char unused3[] = "entry %d(%d)";
 static char unused4[] = "  nb_alloc %d nb_free %d\n";
-#ifdef MUST_MATCH
 #pragma pop
-#endif
 #endif
 
 HSD_MemoryEntry* GetMemoryEntry(s32 idx)
