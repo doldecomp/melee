@@ -3975,6 +3975,7 @@ s32 mnCharSel_802640A0(void)
     GXColor* color_ptr;
     GXColor* color2_ptr;
     s32 i;
+    s32 slot;
     s32 icon;
     u8 match_type = mnCharSel_804D6CB0->match_type;
 
@@ -4243,7 +4244,7 @@ s32 mnCharSel_802640A0(void)
         cursor->x10 = -21.5f;
     }
 
-    for (i = 0; i < num_players; i++) {
+    for (i = 0, slot = 0; i < num_players; i++, slot++) {
         {
             HSD_GObj* model_gobj = GObj_Create(4, 5, 0x80);
             jobj = HSD_JObjLoadJoint(ANIM[2].joint);
@@ -4262,7 +4263,7 @@ s32 mnCharSel_802640A0(void)
                     HSD_ForeachAnim(anim_jobj, JOBJ_TYPE, TOBJ_MASK,
                                     HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
                 }
-                mnCharSel_804A0BD0[i] = model;
+                mnCharSel_804A0BD0[slot] = model;
                 model->gobj = model_gobj;
                 model->x4 = i;
                 model->x5 = 0;
@@ -4297,7 +4298,7 @@ s32 mnCharSel_802640A0(void)
                         *slot_type = 3;
                     }
                 }
-                mnCharSel_803F0DFC.doors[i].sel_icon = found;
+                mnCharSel_803F0DFC.doors[slot].sel_icon = found;
                 model->x8 = model->x10 = 3.4f + icons[found].bound_l;
                 model->xC = model->x14 = -3.0f + icons[found].bound_u;
             }
