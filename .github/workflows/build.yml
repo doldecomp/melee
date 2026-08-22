@@ -6,8 +6,8 @@ on: [push, pull_request]
 env:
   UPSTREAM_ORG: doldecomp
   UPSTREAM_REPO: melee
-  UPSTREAM_FULL: ${{env.UPSTREAM_ORG}}/${{env.UPSTREAM_REPO}}
-  UPSTREAM_NIX: ${{env.UPSTREAM_ORG}}-${{env.UPSTREAM_REPO}}
+  UPSTREAM_FULL: doldecomp/melee
+  UPSTREAM_NIX: doldecomp-melee
 
 permissions:
   contents: read
