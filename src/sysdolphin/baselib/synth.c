@@ -28,6 +28,9 @@ void HSD_AudioFree(void* ptr)
     OSFreeToHeap(HSD_Synth_804D6018, ptr);
 }
 
+static int HSD_Synth_804D6028[2] = { 0 };
+static float HSD_Synth_804D6030 = 1.0f;
+
 struct SfxLoadStreamNode {
     /* 0x00 */ struct SfxLoadStreamNode* x0;
     /* 0x04 */ s32 x4;
@@ -36,9 +39,6 @@ struct SfxLoadStreamNode {
     /* 0x10 */ s32 x10;
     /* 0x14 */ s32 x14;
 };
-
-extern struct SfxLoadStreamNode* HSD_Synth_804D7730;
-extern u32* HSD_Synth_804D7734;
 
 static inline s32 SfxLoadStreamDataSize(s32 size)
 {
@@ -280,7 +280,13 @@ void HSD_SynthSFXAllocateBank(int size)
     hsd_SynthSFXBankNum += 1;
 }
 
-u8 data_pad[0x2C] = { 0 };
+/// @remarks Dead code: mwld strips the body, but MWCC still pools its
+/// literals into `.data`.
+static void HSD_SynthSFXFreeBank(void)
+{
+    HSD_ASSERTREPORT(0x160, hsd_SynthSFXBankNum, "bank stack underflow\n");
+    hsd_SynthSFXBankNum -= 1;
+}
 
 static inline void HSD_SynthSFXUnloadBank_inline(AXVPB* vpb)
 {
@@ -348,7 +354,17 @@ static void HSD_SynthSFXGroupDataReaddressCallback(void* result, int length,
     sfxGroupDataReaddressCounter--;
 }
 
-u8 data_pad_2[0x84] = { 0 };
+/// @remarks Dead code: mwld strips the body, but MWCC still pools its
+/// literals into `.data`.
+static void HSD_SynthSFXRelocateGroup(int bankID, int sfxgroup,
+                                      struct HSD_SynthSFXGroup* group)
+{
+    HSD_ASSERTREPORT(0x18C,
+                     hsd_SynthSFXBank[bankID] + group->arsize <=
+                         hsd_SynthSFXBankHead[bankID + 1],
+                     "Can't relocate SFX group; bank = %d; sfxgroup = %d\n",
+                     bankID, sfxgroup);
+}
 
 void HSD_SynthSFXGroupDataReaddress(AXVPB* arg0, void* callback)
 {
@@ -1181,8 +1197,6 @@ void HSD_SynthResetStreamCounters(int result, int length, void* buf, bool b)
     HSD_Synth_804D7778 = 0;
 }
 
-extern s32 HSD_Synth_804D7764;
-
 void HSD_Synth_8038AD74(u32 offset, uintptr_t src)
 {
     HSD_DevComRequest(HSD_Synth_804D7764, src,
@@ -1190,9 +1204,6 @@ void HSD_Synth_8038AD74(u32 offset, uintptr_t src)
                       lbl_804C4540[HSD_Synth_804D7768].x0, 0x23, 0,
                       HSD_SynthResetStreamCounters, 0);
 }
-
-extern u32 HSD_Synth_804D7770;
-extern u32 HSD_Synth_804D7774;
 
 static inline void HSD_Synth_8038ADD0_inline(u32 pos)
 {
@@ -1530,3 +1541,7 @@ void HSD_SynthInit(int dsp_size, int voices, int stream_size, int bank_size)
     HSD_Synth_804D7780 = ARAlloc(0x30000);
     HSD_Synth_804D7754 = OSGetSoundMode();
 }
+
+/// @remarks Nothing in the DOL references this; it is recovered from the tail
+/// of this TU's `.data`.
+static u8 HSD_Synth_804080FC[0x44] = { 0 };

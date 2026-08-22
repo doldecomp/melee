@@ -3,7 +3,13 @@
 #include <dolphin/ax.h>
 
 static int HSD_Synth_804D6018 = -1; // audio heap
-static int HSD_Synth_804D6028[2] = { 0 };
+
+struct SfxLoadStreamNode;
+
+/// Named after the assertion text pooled in this TU's `.data`.
+struct HSD_SynthSFXGroup {
+    int arsize;
+};
 
 #define USERVOL_NUM 2
 
@@ -49,8 +55,6 @@ static int hsd_SynthSFXBank[0x80 / 4];
 static int hsd_SynthSFXBankHead[0x84 / 4];
 static struct HSD_SynthSFXNode hsd_SynthSFXNodes[0x40];
 
-static float HSD_Synth_804D6030 = 1.0f;
-
 static struct {
     float x1784;
     float x1788;
@@ -70,11 +74,12 @@ static struct {
     /* 0C */ char pad[0x14];
 } lbl_804C4540[3];
 
-static int hsd_SynthSFXBankNum;
-
 /* 4D7720 */ static int HSD_Synth_804D7720;
+/* 4D7724 */ static int hsd_SynthSFXBankNum;
 /* 4D7728 */ static u32 hsd_SynthSFXBankAREnd;
 /* 4D772C */ static volatile int HSD_Synth_804D772C;
+/* 4D7730 */ static struct SfxLoadStreamNode* HSD_Synth_804D7730;
+/* 4D7734 */ static u32* HSD_Synth_804D7734;
 /* 4D7738 */ static int HSD_Synth_804D7738;
 /* 4D773C */ static volatile int sfxGroupDataReaddressCounter;
 /* 4D7740 */ static void (*driverInactivatedCallback)(int);
@@ -86,8 +91,11 @@ static int hsd_SynthSFXBankNum;
 /* 4D7758 */ static u32 HSD_Synth_804D7758;
 /* 4D7754 */ static int HSD_Synth_804D775C;
 /* 4D7760 */ static int HSD_Synth_804D7760;
+/* 4D7764 */ static s32 HSD_Synth_804D7764;
 /* 4D7768 */ static u32 HSD_Synth_804D7768;
 /* 4D776C */ static u32 HSD_Synth_804D776C;
+/* 4D7770 */ static u32 HSD_Synth_804D7770;
+/* 4D7774 */ static u32 HSD_Synth_804D7774;
 /* 4D7778 */ static volatile u8 HSD_Synth_804D7778;
 /* 4D777C */ static s32 HSD_Synth_804D777C;
 /* 4D7780 */ static u32 HSD_Synth_804D7780;
