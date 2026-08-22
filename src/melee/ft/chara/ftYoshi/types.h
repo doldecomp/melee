@@ -79,7 +79,7 @@ typedef struct _ftYoshiAttributes { // x2D4 (fp->dat_attrs)
     float x128;
     u8 x12C[0x138 - 0x12C];
 } ftYoshiAttributes;
-STATIC_ASSERT(sizeof(struct _ftYoshiAttributes) == 0x138);
+ASSERT_SIZE(struct _ftYoshiAttributes, 0x138);
 
 struct ftYs_DatAttrs {
     /*   +0 */ char pad_0[0x10];
@@ -102,7 +102,7 @@ struct ftYs_DatAttrs {
     /* +114 */ char pad_114[0x118 - 0x114];
     /* +118 */ Vec2 speciallw_star_offset;
 };
-STATIC_ASSERT(sizeof(struct ftYs_DatAttrs) == 0x120);
+ASSERT_SIZE(struct ftYs_DatAttrs, 0x120);
 
 struct S_UNK_YOSHI2 {
     s32 x0;

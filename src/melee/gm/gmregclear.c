@@ -145,7 +145,7 @@ struct lbl_80472E48_t {
     /* 0x11 */ char pad_11[3];
     /* 0x14 */ s32 x14[0x1B];
 }; /* size = 0x80 */
-STATIC_ASSERT(sizeof(struct lbl_80472E48_t) == 0x80);
+ASSERT_SIZE(struct lbl_80472E48_t, 0x80);
 
 /// Adventure mode stage data table entry (size 0x1A)
 /// Table has 110 entries: 22 stages × 5 difficulty levels
@@ -157,7 +157,7 @@ typedef struct AdventureStageEntry {
     /* 0x04 */ u16 scale1_pct; ///< Divided by 100 to get ratio
     /* 0x06 */ u8 pad_6[0x14];
 } AdventureStageEntry;
-STATIC_ASSERT(sizeof(AdventureStageEntry) == 0x1A);
+ASSERT_SIZE(AdventureStageEntry, 0x1A);
 
 /// Allstar mode stage data table entry (size 0x1A)
 /// Table has 55 entries: 11 stages × 5 difficulty levels
@@ -171,7 +171,7 @@ typedef struct AllstarStageEntry {
     /* 0x12 */ u16 scale3_pct; ///< Divided by 100 to get ratio
     /* 0x14 */ u8 pad_14[0x6];
 } AllstarStageEntry;
-STATIC_ASSERT(sizeof(AllstarStageEntry) == 0x1A);
+ASSERT_SIZE(AllstarStageEntry, 0x1A);
 
 extern AdventureStageEntry lbl_803D7AC0[110];
 extern AllstarStageEntry lbl_803D85F0[55];
@@ -243,7 +243,7 @@ typedef struct RegClearRecordState {
     /* 0x11 */ u8 x11;
     /* 0x12 */ u8 pad_12[2];
 } RegClearRecordState;
-STATIC_ASSERT(sizeof(RegClearRecordState) == 0x14);
+ASSERT_SIZE(RegClearRecordState, 0x14);
 
 typedef struct RegClearRecordOverlay {
     u8 pad_0[0x6BC];
@@ -265,7 +265,7 @@ typedef struct lbl_80472ED8_t {
     /* 0x6B8 */ RegClearSpawnEntry* x6B8;
     /* 0x6BC */ RegClearRecordState record[0];
 } lbl_80472ED8_t;
-STATIC_ASSERT(sizeof(lbl_80472ED8_t) == 0x6BC);
+ASSERT_SIZE(lbl_80472ED8_t, 0x6BC);
 
 lbl_80472ED8_t lbl_80472ED8;
 

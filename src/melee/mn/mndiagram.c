@@ -37,13 +37,13 @@ typedef struct mnDiagram_804A0750_t {
     u8 sorted_fighters[SELKIND_COUNT];
     u8 pad_19[3];
 } mnDiagram_804A0750_t;
-STATIC_ASSERT(sizeof(mnDiagram_804A0750_t) == 0x1C);
+ASSERT_SIZE(mnDiagram_804A0750_t, 0x1C);
 
 /// Sorted name indices array (120 names)
 typedef struct mnDiagram_804A076C_t {
     u8 sorted_names[0x78];
 } mnDiagram_804A076C_t;
-STATIC_ASSERT(sizeof(mnDiagram_804A076C_t) == 0x78);
+ASSERT_SIZE(mnDiagram_804A076C_t, 0x78);
 
 /// Archive asset pointers struct (for mnDiagram_Init)
 /// Cast from &mnDiagram_804A0750 to access asset arrays
@@ -60,7 +60,7 @@ typedef struct mnDiagram_Assets {
     /* 0xF4 */ void* ConB3[4];
     /* 0x104 */ void* CursorB3[5];
 } mnDiagram_Assets;
-STATIC_ASSERT(sizeof(mnDiagram_Assets) == 0x118);
+ASSERT_SIZE(mnDiagram_Assets, 0x118);
 
 /// User data structure for mnDiagram_PopupCleanup callback.
 /// Overlay of Diagram - only accesses text array.
@@ -1696,7 +1696,7 @@ typedef struct mnDiagram_PopupData {
     /* 0x00 */ HSD_JObj* jobjs[14];
     /* 0x38 */ HSD_Text* text[5];
 } mnDiagram_PopupData;
-STATIC_ASSERT(sizeof(mnDiagram_PopupData) == 0x4C);
+ASSERT_SIZE(mnDiagram_PopupData, 0x4C);
 
 typedef struct mnDiagram_MainOverlay {
     /* 0x00 */ HSD_JObj* jobjs[14];

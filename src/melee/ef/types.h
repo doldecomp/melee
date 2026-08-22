@@ -97,11 +97,11 @@ typedef struct EF_DAT_Entry {
     /* 0x4 */ char* effDataTable_name; // ex. "effCommonDataTable"
     /* 0x8 */ void* data;              // loaded data pointer
 } EF_DAT_Entry;                        /* size = 0xC */
-STATIC_ASSERT(sizeof(EF_DAT_Entry) == 0xC);
+ASSERT_SIZE(EF_DAT_Entry, 0xC);
 
 struct EF_QueuedEffect_ObjAlloc {
     char pad_0[0x24];
 };
-STATIC_ASSERT(sizeof(struct EF_QueuedEffect_ObjAlloc) == 0x24);
+ASSERT_SIZE(struct EF_QueuedEffect_ObjAlloc, 0x24);
 
 #endif
