@@ -65,6 +65,8 @@ void ftCo_800C0874(Fighter_GObj* gobj, UNK_T arg1, ftCommon_BuryType arg2)
     switch (arg2) {
     case BuryType_Unk2:
         ftCo_8009EB18(gobj);
+    default:
+        break;
     }
 }
 
@@ -86,6 +88,8 @@ void ftCo_800C08A0(Fighter_GObj* gobj, Fighter_GObj* arg1, DynamicsDesc* arg2,
         break;
     case BuryType_Unk3:
         fp->bury_timer_2 = p_ftCommonData->bury_timer_unk3;
+        break;
+    default:
         break;
     }
     if (ftColl_80076640(fp, &f) != 0) {
@@ -111,6 +115,8 @@ void ftCo_800C09B4(Fighter_GObj* gobj)
     case Gr_Kind_Zebes:
         fp->bury_timer_2 = 0;
         return;
+    default:
+        break;
     }
 }
 
@@ -132,6 +138,8 @@ bool ftCo_800C0A28(Fighter_GObj* gobj, UNK_T arg1, ftCommon_BuryType arg2)
         }
         break;
     }
+    default:
+        break;
     }
     return true;
 }
@@ -157,6 +165,8 @@ void ftCo_800C0A98(Fighter_GObj* gobj)
             --fp->bury_timer_2;
             return;
         }
+        break;
+    default:
         break;
     }
 }

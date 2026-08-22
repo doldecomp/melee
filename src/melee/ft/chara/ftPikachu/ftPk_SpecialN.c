@@ -76,6 +76,8 @@ void ftPk_SpecialN_Anim(Fighter_GObj* gobj)
             case FTKIND_PICHU:
                 ft_PlaySFX(fp, 230067, 127, 64);
                 break;
+            default:
+                break;
             }
         }
     }
@@ -114,6 +116,8 @@ void ftPk_SpecialAirN_Anim(HSD_GObj* gobj)
                 break;
             case FTKIND_PICHU:
                 ft_PlaySFX(fp, 230067, 127, 64);
+                break;
+            default:
                 break;
             }
         }

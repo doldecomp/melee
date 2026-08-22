@@ -2,7 +2,6 @@
 
 #include "types.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "baselib/forward.h"
@@ -156,6 +155,8 @@ void fn_8015B2C0(HSD_GObj* gobj)
         }
         return;
     }
+    default:
+        break;
     }
 }
 

@@ -45,6 +45,8 @@ void ftCo_800BECB0(Fighter_GObj* gobj)
         it_8026BAE8(fp->item_gobj,
                     fp->x34_scale.y * fp->co_attrs.model_scaling);
     }
+    default:
+        break;
     }
 }
 
@@ -92,6 +94,8 @@ void ftCo_800BED88(Fighter_GObj* gobj)
         DocHelper(gobj, fp);
         break;
     }
+    default:
+        break;
     }
 }
 
@@ -110,6 +114,8 @@ void ftCo_800BEF04(Fighter_GObj* gobj)
         it_8026BAE8(fp->item_gobj,
                     0.8f * (fp->x34_scale.y * fp->co_attrs.model_scaling));
     }
+    default:
+        break;
     }
 }
 

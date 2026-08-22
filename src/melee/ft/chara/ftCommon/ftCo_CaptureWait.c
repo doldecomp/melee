@@ -74,6 +74,8 @@ void fn_800DB6C8(Fighter_GObj* gobj)
             it_802BAA94(victim_fp->u.ss.x223C);
         }
         break;
+    default:
+        break;
     }
 
     ftCommon_8007EBAC(fp, 3, 0);

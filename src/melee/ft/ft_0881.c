@@ -40,6 +40,8 @@ void ft_800881D8(Fighter* fp, int sfx_id, u8 sfx_vol, u8 sfx_pan)
                 }
                 ft_80088770(fp);
             }
+        default:
+            break;
         }
     }
 }

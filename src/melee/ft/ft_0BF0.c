@@ -36,6 +36,8 @@ void ftCo_800BF034(Fighter_GObj* gobj)
             it_802AD590(gobj, ftParts_GetBoneIndex(fp, FtPart_RThumbNb));
         return;
     }
+    default:
+        break;
     }
 }
 
@@ -66,6 +68,8 @@ void ftCo_800BF108(Fighter_GObj* gobj)
             ftParts_GetBoneIndex(fp, FtPart_RThumbNb), fp->facing_dir);
         return;
     }
+    default:
+        break;
     }
 }
 

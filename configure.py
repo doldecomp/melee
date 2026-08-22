@@ -395,7 +395,6 @@ clang_flags_base = [
     "-Wno-self-assign",
     "-Wno-sign-compare",
     "-Wno-sometimes-uninitialized",
-    "-Wno-switch",
     "-Wno-tautological-bitwise-compare",
     "-Wno-tautological-compare",
     "-Wno-undefined-internal",

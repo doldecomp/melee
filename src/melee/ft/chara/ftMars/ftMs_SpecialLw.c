@@ -354,6 +354,8 @@ static inline void ftMs_SpecialLw_80139140_inline(HSD_GObj* gobj)
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_RShoulderN)].joint,
                 &fp->facing_dir);
             break;
+        default:
+            break;
         }
         fp->x2219_b0 = true;
     }

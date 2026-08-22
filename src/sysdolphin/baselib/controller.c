@@ -1,11 +1,9 @@
 #include "controller.h"
 
-#include "placeholder.h"
-
 #include "baselib/rumble.h"
-#include "baselib/util.h"
 
-#include <dolphin/os/OSInterrupt.h>
+#include <math.h>
+#include <dolphin/os.h>
 #include <dolphin/pad.h>
 
 HSD_PadStatus default_status_data = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -153,6 +151,8 @@ void HSD_PadFlushQueue(HSD_FlushType ftype)
             p->qread = p->qwrite != 0 ? p->qwrite - 1 : p->qnum - 1;
             p->qcount = 1;
         }
+        break;
+    default:
         break;
     }
     OSRestoreInterrupts(intr);

@@ -202,6 +202,8 @@ static inline void ftFox_SpecialN_FireBlasterShot(HSD_GObj* gobj, Fighter* fp,
         ft_PlaySFX(fp, falcoSFX[fp->facing_dir == -1], SFX_VOLUME_MAX,
                    SFX_PAN_MID);
         return;
+    default:
+        break;
     }
 }
 
@@ -713,6 +715,8 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                             ft_PlaySFX(fp, 100105, SFX_VOLUME_MAX,
                                        SFX_PAN_MID);
                             return;
+                        default:
+                            break;
                         }
                     default:
                         break;
@@ -728,6 +732,8 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                             ft_PlaySFX(fp, falcoSFX[1 == fp->facing_dir],
                                        SFX_VOLUME_MAX, SFX_PAN_MID);
                             return;
+                        default:
+                            break;
                         }
                         break;
                     }
@@ -746,6 +752,8 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                 case FTKIND_FALCO:
                     ft_PlaySFX(fp, 100096, SFX_VOLUME_MAX, SFX_PAN_MID);
                     return;
+                default:
+                    break;
                 }
             }
             break;
