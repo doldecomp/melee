@@ -3187,10 +3187,12 @@ void fn_80262648(HSD_GObj* gobj)
     n_doors = getDoorCount(carrier.css.value);
 
     {
+        u8 p_kind;
         u8 door = model->x4;
-        u8 p_kind = mnCharSel_803F0DFC.doors[door].p_kind;
 
-        if (p_kind == 3 || mnCharSel_803F0DFC.doors[door].sel_icon >= 0x19U) {
+        if ((p_kind = mnCharSel_803F0DFC.doors[door].p_kind) == 3 ||
+            mnCharSel_803F0DFC.doors[door].sel_icon >= 0x19U)
+        {
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             return;
         }
