@@ -681,20 +681,29 @@ static inline HSD_JObj* animateJointPadded(HSD_JObj* root, u8 joint, u32 mask,
 static inline HSD_JObj* animateJointLeadingPad(HSD_JObj* root, u8 joint,
                                                u32 mask, f32 frame)
 {
-    struct {
-        HSD_JObj* jobj;
-        u8 pad[0x18];
-    } state;
+    HSD_JObj* pad0;
+    HSD_JObj* pad1;
+    HSD_JObj* pad2;
+    HSD_JObj* pad3;
+    HSD_JObj* pad4;
+    HSD_JObj* pad5;
+    HSD_JObj* jobj;
     HSD_JObj* cc0;
     HSD_JObj* cc1;
-    lb_80011E24(root, &state.jobj, joint, -1);
-    cc0 = state.jobj;
+    (void) &pad0;
+    (void) &pad1;
+    (void) &pad2;
+    (void) &pad3;
+    (void) &pad4;
+    (void) &pad5;
+    lb_80011E24(root, &jobj, joint, -1);
+    cc0 = jobj;
     HSD_ForeachAnim(cc0, JOBJ_TYPE, mask, HSD_AObjReqAnim, AOBJ_ARG_AF, frame);
-    HSD_JObjAnimAll(state.jobj);
-    cc1 = state.jobj;
+    HSD_JObjAnimAll(jobj);
+    cc1 = jobj;
     HSD_ForeachAnim(cc1, JOBJ_TYPE, mask, HSD_AObjStopAnim, AOBJ_ARG_AOV, 0,
                     0);
-    return state.jobj;
+    return jobj;
 }
 
 void mnCharSel_8025D5AC(int door, int frame, bool hidden)
