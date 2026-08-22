@@ -1851,7 +1851,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
     s32 ready_count = 0;
     s32 pad_err = 0;
     s32 i;
-    PAD_STACK(0x28);
+    PAD_STACK(0x20);
 
     switch (tm->cur_option) {
     case 0x1B:
@@ -1953,14 +1953,13 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
 
                 {
                     TmData* t2 = gm_GetTournamentData();
-                    BracketEntry* ent = &lbl_80473AB8[fn_8018F74C()];
+                    s32 bi = fn_8018F74C();
                     s32 hmn_count = 0;
                     s32 active_count = 0;
 
-                    ent->slots[0].x4E = t2->x4B8[0].x0;
-                    ent->slots[1].x4E = t2->x4B8[1].x0;
-                    ent->slots[2].x4E = t2->x4B8[2].x0;
-                    ent->slots[3].x4E = t2->x4B8[3].x0;
+                    for (i = 0; i < 4; i++) {
+                        lbl_80473AB8[bi].slots[i].x4E = t2->x4B8[i].x0;
+                    }
 
                     for (i = 0; i < 4; i++) {
                         u8 st = tm->x4B8[i].x0;
