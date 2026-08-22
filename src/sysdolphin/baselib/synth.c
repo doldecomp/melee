@@ -56,7 +56,6 @@ static void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
         u32 data_bytes = header_size - 0x10;
         s32 src_idx = (data_bytes >> 2) - 1;
         u32 total;
-        u32 shift;
         u32 dnw;
         int bankID;
         AXVPB** pp;
@@ -65,20 +64,15 @@ static void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
 
         total = hsd_SynthSFXLoadBuf[2] * 8 + header_size;
         total = (total + 0x37) & ~0x1F;
-        shift = (total - data_bytes) >> 2;
         for (i = src_idx; i >= 0; i--) {
-            ((u32*) HSD_Synth_804D7730)[i + shift] =
+            ((u32*) HSD_Synth_804D7730)[i + ((total - data_bytes) >> 2)] =
                 ((u32*) HSD_Synth_804D7730)[i];
         }
         dnw = total - header_size;
-        *(u32*) ((u8*) HSD_Synth_804D7730 + (dnw & ~3)) =
-            hsd_SynthSFXLoadBuf[4];
-        ((u32*) HSD_Synth_804D7730)[((dnw & ~3) >> 2) + 1] =
-            hsd_SynthSFXLoadBuf[5];
-        ((u32*) HSD_Synth_804D7730)[((dnw & ~3) >> 2) + 2] =
-            hsd_SynthSFXLoadBuf[6];
-        ((u32*) HSD_Synth_804D7730)[((dnw & ~3) >> 2) + 3] =
-            hsd_SynthSFXLoadBuf[7];
+        for (i = 0; i != 4; i++) {
+            ((u32*) HSD_Synth_804D7730)[(dnw >> 2) + i] =
+                hsd_SynthSFXLoadBuf[4 + i];
+        }
         HSD_Synth_804D7734 = (u32*) ((u8*) HSD_Synth_804D7730 + (dnw & ~3));
 
         bankID = HSD_Synth_804C2A60[0].bankID;
@@ -104,7 +98,6 @@ static void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
             s32 k;
             s32 offset;
             s32 id;
-            struct SfxLoadStreamNode* nn;
             void** bucket;
 
             n = *HSD_Synth_804D7734;
@@ -132,7 +125,9 @@ static void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
             HSD_Synth_804D7730->x0 = (struct SfxLoadStreamNode*) *bucket;
             *bucket = HSD_Synth_804D7730;
             HSD_Synth_804D7734 += ((u32) nbytes & ~3) >> 2;
-            HSD_Synth_804D7730 += n;
+            HSD_Synth_804D7730 =
+                (struct SfxLoadStreamNode*) ((u8*) HSD_Synth_804D7730 +
+                                             ((nshift + 0x10) & ~3));
         }
         if (HSD_Synth_804C2A60[0].x8 != NULL) {
             HSD_Synth_804C2A60[0].x8(HSD_Synth_804C2A60[0].entrynum,
