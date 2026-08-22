@@ -1102,8 +1102,6 @@ extern const Vec3 HSD_JObj_803B94C4;
 
 /// @todo Variables @c var_f27 and @c var_f28 are used uninitialized
 ///       whenever 'if' condition is false.
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wsometimes-uninitialized"
 void resolveIKJoint1(HSD_JObj* jobj)
 {
     HSD_JObj* robj_4;
@@ -1253,7 +1251,6 @@ void resolveIKJoint1(HSD_JObj* jobj)
         jobj->mtx[2][3] = spB0.z;
     }
 }
-#pragma clang diagnostic pop
 
 const Vec3 HSD_JObj_803B94C4 = { 0.0F, 0.0F, 0.0F };
 const Vec3 HSD_JObj_803B94D0 = { 1.0F, 1.0F, 1.0F };

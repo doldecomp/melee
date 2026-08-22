@@ -1065,8 +1065,6 @@ int vprintf(const char* format, va_list arg)
     return __pformatter(&__FileWrite, stdout, format, arg);
 }
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wsign-compare"
 int vsnprintf(char* s, size_t n, const char* format, va_list arg)
 {
     int end;
@@ -1079,7 +1077,6 @@ int vsnprintf(char* s, size_t n, const char* format, va_list arg)
     s[(end < n) ? end : n - 1] = '\0';
     return end;
 }
-#pragma clang diagnostic pop
 
 int vsprintf(char* s, const char* format, va_list arg)
 {
