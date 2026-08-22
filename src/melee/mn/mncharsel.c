@@ -3138,6 +3138,14 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
 update_display:
     updateCursorDisplay(jobj, cursor, &state_jobj, &color_jobj);
 }
+static inline int getDoorCount(CSSData* css)
+{
+    if (css->match_type == TRAINING_MODE) {
+        return 2;
+    }
+    return mnCharSel_804D6CF5;
+}
+
 static inline void animateCharModel(HSD_JObj* jobj, f32 frame)
 {
     HSD_JObj* child;
@@ -3156,28 +3164,32 @@ static inline void animateCharModel(HSD_JObj* jobj, f32 frame)
 void fn_80262648(HSD_GObj* gobj)
 {
     HSD_JObj* sp24;
-    UNUSED u32 pad2;
     struct {
         CSSData* value;
     } css;
-    struct CSSCharModel* model = gobj->user_data;
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    u8 prev_port = model->x6;
+    struct {
+        HSD_JObj* value;
+    } jobj;
+    struct {
+        struct CSSCharModel* value;
+    } model_carrier;
+    struct CSSCharModel* model;
+    u8 prev_port;
     int n_doors;
 
+    model_carrier.value = gobj->user_data;
+    model = model_carrier.value;
+    jobj.value = GET_JOBJ(gobj);
+    prev_port = model->x6;
     css.value = mnCharSel_804D6CB0;
-    if (css.value->match_type == TRAINING_MODE) {
-        n_doors = 2;
-    } else {
-        n_doors = mnCharSel_804D6CF5;
-    }
+    n_doors = getDoorCount(css.value);
 
     {
         u8 door = model->x4;
         u8 p_kind = mnCharSel_803F0DFC.doors[door].p_kind;
 
         if (p_kind == 3 || mnCharSel_803F0DFC.doors[door].sel_icon >= 0x19U) {
-            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(jobj.value, JOBJ_HIDDEN);
             return;
         }
 
@@ -3203,7 +3215,7 @@ void fn_80262648(HSD_GObj* gobj)
         }
     }
 
-    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+    HSD_JObjClearFlagsAll(jobj.value, JOBJ_HIDDEN);
     model->x7 = (u8) (model->x7 + 1);
 
     {
@@ -3211,14 +3223,15 @@ void fn_80262648(HSD_GObj* gobj)
         if (prev_port != port || model->x7 > 0x27U) {
             if (port < 4U) {
                 if (mnCharSel_804D6CF5 == 1) {
-                    animateCharModel(jobj, (f32) (mnCharSel_804D6CF0 * 4));
+                    animateCharModel(jobj.value,
+                                     (f32) (mnCharSel_804D6CF0 * 4));
                 } else {
-                    animateCharModel(jobj, (f32) (model->x4 * 4));
+                    animateCharModel(jobj.value, (f32) (model->x4 * 4));
                 }
             } else {
-                animateCharModel(jobj, 16.0f);
+                animateCharModel(jobj.value, 16.0f);
             }
-            lb_80011E24(jobj, &sp24, 3, -1);
+            lb_80011E24(jobj.value, &sp24, 3, -1);
             {
                 HSD_JObj* anim_jobj = sp24;
                 HSD_ForeachAnim(anim_jobj, JOBJ_TYPE, MOBJ_MASK,
@@ -3232,9 +3245,13 @@ void fn_80262648(HSD_GObj* gobj)
     {
         u8 status = model->x5;
         if (status == 0) {
+            struct {
+                struct CSSCharModel** value;
+            } bd0;
             s32 iter;
+            bd0.value = mnCharSel_804A0BD0;
             for (iter = 0; iter < 0x14; iter++) {
-                struct CSSCharModel** bdp = mnCharSel_804A0BD0;
+                struct CSSCharModel** bdp = bd0.value;
                 CSSDoor* dp = mnCharSel_803F0DFC.doors;
                 s32 j;
 
@@ -3380,10 +3397,10 @@ void fn_80262648(HSD_GObj* gobj)
         }
     }
 
-    HSD_JObjSetTranslateX(jobj, model->x10);
-    HSD_JObjSetTranslateY(jobj, model->x14);
-    HSD_JObjSetTranslateZ(jobj, 1.0f);
-    HSD_JObjAnimAll(jobj);
+    HSD_JObjSetTranslateX(jobj.value, model->x10);
+    HSD_JObjSetTranslateY(jobj.value, model->x14);
+    HSD_JObjSetTranslateZ(jobj.value, 1.0f);
+    HSD_JObjAnimAll(jobj.value);
 }
 
 void fn_80262F44(HSD_GObj* gobj)
