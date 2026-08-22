@@ -186,8 +186,10 @@ void db_80225D64(Item_GObj* item, Fighter_GObj* owner)
 }
 
 /// @todo avoid auto-inlining into fn_CheckItemAndPokemonMenu
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void fn_ToggleItemCollisionBubbles(void)
 {
     HSD_GObj* item_gobj;
@@ -205,7 +207,9 @@ void fn_ToggleItemCollisionBubbles(void)
         item_gobj = item_gobj->next;
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void db_80225DD8(Item_GObj* item, Fighter_GObj* owner)
 {

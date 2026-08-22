@@ -925,14 +925,19 @@ void grPura_80213128(HSD_DObj* dobj)
     }
 }
 
+#ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
+#endif
 void grPura_80213224(HSD_DObj* dobj)
 {
     if (dobj != 0) {
         HSD_MObjCompileTev(dobj->mobj);
     }
 }
-#pragma dont_inline reset
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 void grPura_80213250(HSD_JObj* jobj)
 {

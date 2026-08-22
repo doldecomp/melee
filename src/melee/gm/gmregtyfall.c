@@ -89,8 +89,10 @@ static void order_sdata2(void)
     (void) 1.0f;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 bool gm_801A659C(int arg0)
 {
     switch (gm_GetCurrentGameMode()) {
@@ -111,7 +113,9 @@ void gm_801A6630(int arg0)
     *tmp = arg0;
     gm_801A4B60();
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void fn_801A6664(HSD_GObj* arg0)
 {

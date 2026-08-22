@@ -25,8 +25,10 @@ void lbDvd_800174BC(void)
     lbDvd_80017700(4);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void lbDvd_800174E8(int index)
 {
     PreloadEntry* entry = &preloadCache.entries[index];
@@ -38,7 +40,9 @@ void lbDvd_800174E8(int index)
     }
     *entry = lbDvd_803BA68C;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 bool lbDvd_80017598(int heap)
 {

@@ -15,15 +15,19 @@ static HSD_MemoryEntry** memory_list;
 static s32 nb_memory_list;
 static HSD_Hash* current_hash;
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ClassInfoInit(HSD_ClassInfo* info)
 {
     if ((info->head.flags & 1) == 0) {
         (*info->head.info_init)();
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void hsdInitClassInfo(HSD_ClassInfo* class_info, HSD_ClassInfo* parent_info,
                       char* base_class_library, char* type, s32 info_size,

@@ -123,8 +123,10 @@ void gm_801BFBA8(GameScene* arg0)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 static UNK_T* gm_801BFC60(u32 arg0, s32 arg1, u32 arg2, u32 arg3, UNK_T* arg4)
 {
     struct un_804A1F48_t* temp_r3;
@@ -145,7 +147,9 @@ static UNK_T* gm_801BFC60(u32 arg0, s32 arg1, u32 arg2, u32 arg3, UNK_T* arg4)
     }
     return arg4;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static u8 gm_8049E558[0x170];
 

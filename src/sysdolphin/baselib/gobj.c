@@ -210,11 +210,15 @@ void HSD_GObj_JObjCallback(HSD_GObj* gobj, int arg1)
     /// @todo don't inline #HSD_GObj_80390EB8
     ///       is there a file boundary between #HSD_GObj_80390EB8 and
     ///       #HSD_GObj_JObjCallback?
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
     HSD_JObjDispAll(jobj, NULL, HSD_GObj_80390EB8(arg1), 0);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void HSD_GObj_FogCallback(HSD_GObj* gobj, int unused)
 {

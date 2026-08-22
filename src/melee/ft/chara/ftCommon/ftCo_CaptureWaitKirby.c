@@ -39,8 +39,10 @@ void ftCo_800BD6EC_noinline(Fighter_GObj* gobj)
     ftCo_800BD6EC(gobj);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
+#endif
 void ftCo_800BD6EC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -58,7 +60,9 @@ void ftCo_800BD6EC(Fighter_GObj* gobj)
         ftKb_SpecialN_800F5954(fp->victim_gobj);
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static inline void inlineB0(Fighter_GObj* gobj)
 {

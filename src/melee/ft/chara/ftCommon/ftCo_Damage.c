@@ -731,8 +731,10 @@ static bool inlineB0(Fighter* fp)
     return false;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma inline_depth(0)
+#endif
 void ftCo_8008EB58(Fighter_GObj* gobj)
 {
     Fighter* tmp_p21265 = gobj->user_data;
@@ -775,7 +777,9 @@ void ftCo_8008EB58(Fighter_GObj* gobj)
         ftCommon_800804FC(fp);
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static bool inlineB1(Fighter* fp)
 {
@@ -1109,8 +1113,10 @@ void ftCo_8008FC94(Fighter_GObj* gobj)
     ftCommon_8007D5D4(gobj->user_data);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftCo_Damage_SetMv8FromKbThreshold(Fighter* fp)
 {
     float kb_vel = fp->ground_or_air == GA_Air
@@ -1124,7 +1130,9 @@ void ftCo_Damage_SetMv8FromKbThreshold(Fighter* fp)
         : kb_vel < p_ftCommonData->x578 ? p_ftCommonData->x584
                                         : p_ftCommonData->x588;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static inline void inlineD0(Fighter_GObj* gobj)
 {

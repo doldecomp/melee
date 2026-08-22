@@ -386,8 +386,10 @@ void fn_801967E0(s32 arg0)
     return;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 s32 fn_80196CF8(void)
 {
     TmData* tmdata;
@@ -413,7 +415,9 @@ s32 fn_80196CF8(void)
 
     return result;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 /// Cycles animation frame counter and updates JObj animation.
 void fn_80196DBC(HSD_GObj* gobj)
@@ -1161,8 +1165,10 @@ void fn_80198824(HSD_GObj* gobj)
 /// Initializes tournament mode match data.
 /// Initializes tournament mode match data structures.
 /// Type casts used to match target instruction patterns (stw/sth vs stb).
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 void fn_80198BA0(void)
 {
     TmData* td;
@@ -1209,13 +1215,17 @@ void fn_80198BA0(void)
         ptr++;
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 /// @todo Currently 99.63% match - permuter couldn't improve (instruction
 /// scheduling)
 /// Initializes tournament mode text displays.
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 void fn_80198C60(void)
 {
     TmData* td;
@@ -1237,7 +1247,9 @@ void fn_80198C60(void)
     HSD_SisLib_803A6B98(td->x524[3], 320.0F, 250.0F, "    ");
     HSD_SisLib_803A7548(td->x524[3], 0, 1.5F, 1.5F);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 extern SceneDesc* lbl_804D666C;
 extern f32 lbl_804DA808; // 0.0f

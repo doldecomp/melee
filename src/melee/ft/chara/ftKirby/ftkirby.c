@@ -34,7 +34,6 @@
 #include "lb/lbdvd.h"
 #include "pl/player.h"
 
-#include <math.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/id.h>
@@ -3603,8 +3602,10 @@ void ftKb_SpecialN_800F0F5C(Fighter_GObj* gobj)
                         &(fp)->u.kb.x44, &(fp)->u.kb.hat.x14);                \
     } while (0)
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftKb_SpecialN_800F0FC0(Fighter_GObj* gobj)
 {
     u8 part_dobj_indices[0x90];
@@ -3616,7 +3617,9 @@ void ftKb_SpecialN_800F0FC0(Fighter_GObj* gobj)
     }
     LOAD_HAT(gobj, fp, fp, FTKIND_CAPTAIN, hat, part_dobj_indices);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftKb_SpecialN_800F10A4(Fighter_GObj* gobj)
 {
@@ -3625,8 +3628,10 @@ void ftKb_SpecialN_800F10A4(Fighter_GObj* gobj)
 
 /// Load Yoshi's hat for Kirby copy ability.
 /// @note The split Fighter* locals are required for register allocation.
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftKb_SpecialN_800F10D4(Fighter_GObj* gobj)
 {
     u8 part_dobj_indices[0x88];
@@ -3640,7 +3645,9 @@ void ftKb_SpecialN_800F10D4(Fighter_GObj* gobj)
     LOAD_HAT(gobj, fp, fp2, FTKIND_YOSHI, hat, part_dobj_indices);
     ftCo_8009D81C(fp2);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftKb_SpecialN_800F11AC(Fighter_GObj* gobj)
 {
@@ -3651,8 +3658,10 @@ void ftKb_SpecialN_800F11AC(Fighter_GObj* gobj)
 
 /// Load Jigglypuff's hat for Kirby copy ability.
 /// @note The split Fighter* locals are required for register allocation.
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftKb_SpecialN_800F11F0(Fighter_GObj* gobj)
 {
     u8 part_dobj_indices[0x88];
@@ -3666,7 +3675,9 @@ void ftKb_SpecialN_800F11F0(Fighter_GObj* gobj)
     LOAD_HAT(gobj, fp, fp2, FTKIND_PURIN, hat, part_dobj_indices);
     ftCo_8009DB50(fp2);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftKb_SpecialN_800F12C8(Fighter_GObj* gobj)
 {
@@ -3677,8 +3688,10 @@ void ftKb_SpecialN_800F12C8(Fighter_GObj* gobj)
 
 /// Load Dr. Mario's hat for Kirby copy ability.
 /// @note The self-assignment `fp = fp` is required for register allocation.
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftKb_SpecialN_800F130C(Fighter_GObj* gobj)
 {
     u8 part_dobj_indices[0x90];
@@ -3690,7 +3703,9 @@ void ftKb_SpecialN_800F130C(Fighter_GObj* gobj)
     }
     LOAD_HAT(gobj, fp, fp, FTKIND_DRMARIO, hat, part_dobj_indices);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftKb_SpecialN_800F13F0(Fighter_GObj* gobj)
 {
@@ -3729,8 +3744,10 @@ u8* ftKb_SpecialN_800F1420(Fighter_GObj* gobj, const u32* arg1)
     return p;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftKb_SpecialN_800F14B4(Fighter_GObj* gobj)
 {
     u8 part_dobj_indices[0x88];
@@ -3750,7 +3767,9 @@ void ftKb_SpecialN_800F14B4(Fighter_GObj* gobj)
     *(u32*) &fp->x610_color_rgba[1] = *(u32*) ((u8*) hat->hat_dynamics[4] + 8);
     Fighter_UpdateModelScale(gobj);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftKb_SpecialN_800F15D8(Fighter_GObj* gobj)
 {
@@ -4054,7 +4073,6 @@ void ftKb_SpecialN_800F1BAC(Fighter_GObj* gobj, s32 kind, bool arg2)
     fp->death1_cb = ftKb_Init_800EE7B8;
 }
 
-#pragma force_active on
 bool fn_800F1CA0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -4069,7 +4087,6 @@ bool fn_800F1CA0(HSD_GObj* gobj)
         return false;
     }
 }
-#pragma force_active reset
 
 s32 ftKb_SpecialN_800F1CD8(HSD_GObj* gobj)
 {

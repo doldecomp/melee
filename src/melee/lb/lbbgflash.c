@@ -494,7 +494,9 @@ static inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
     return jobj->parent;
 }
 
+#ifdef MUST_MATCH
 #pragma inline_depth(1)
+#endif
 void fn_80020AEC(HSD_JObj* jobj, Mtx out)
 {
     MtxPtr out_mtx = out;
@@ -603,7 +605,9 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
         cur = jobj_parent(cur);
     }
 }
+#ifdef MUST_MATCH
 #pragma inline_depth(8)
+#endif
 void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
                         f32 min_angle, f32 unused)
 {
@@ -993,8 +997,10 @@ typedef struct BgFlashUserData {
     ColorOverlay x4;
 } BgFlashUserData;
 
+#ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
-
+#endif
 void fn_80021B04(HSD_GObj* gobj)
 {
     BgFlashUserData* data = gobj->user_data;
@@ -1020,8 +1026,9 @@ void fn_80021B04(HSD_GObj* gobj)
         fn_800208B0(0);
     }
 }
-
-#pragma dont_inline reset
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd, int arg2) {}
 

@@ -28,7 +28,9 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
+#ifdef MUST_MATCH
 #pragma force_active on
+#endif
 
 /* 0C4858 */ static void ftCo_800C4858(Fighter_GObj* gobj);
 /* 0C48AC */ static void ftCo_800C48AC(Fighter_GObj* gobj);

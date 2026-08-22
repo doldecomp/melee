@@ -22,8 +22,10 @@
 /* 4D6E40 */ struct un_80304138_objalloc_t* un_804D6E40;
 /* 4A2688 */ static HSD_ObjAllocData un_804A2688;
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 int un_80302E00(struct un_80304138_objalloc_t_x8* arg0, int arg1)
 {
     int ret = 0;
@@ -40,7 +42,9 @@ int un_80302E00(struct un_80304138_objalloc_t_x8* arg0, int arg1)
     }
     return ret;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 int un_80302EA4(struct un_80304138_objalloc_t_x8* arg0)
 {

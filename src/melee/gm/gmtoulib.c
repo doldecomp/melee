@@ -1605,8 +1605,10 @@ static inline void gmTournament_InitBracket(s32 entrant_count, f32 anim_frame,
 /// Initializes the tournament bracket camera and optionally resets bracket
 /// data. Removes all existing GObjs from two entity lists, inits lbl_80473AB8
 /// entries, creates camera GObj with CObjDesc loaded from lbl_803B7CA8 rodata.
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 void fn_8018E618(int arg0, f32 farg0, int arg1)
 {
     CamDesc cam;
@@ -1655,7 +1657,9 @@ void fn_8018E618(int arg0, f32 farg0, int arg1)
 
     gmTournament_InitBracket(arg0, farg0, arg1);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void fn_8018E85C(DynamicModelDesc* model, s32 flag)
 {
@@ -1746,23 +1750,31 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
 
 char* const lbl_804DA6C4 = lbl_803D9EE8;
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 void fn_8018EC48(void)
 {
     mn_8022F138(0x19, 0x1C);
     mn_8022F138(0x12, 0x15);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 void fn_8018EC7C(void)
 {
     mn_8022F0F0(0x1B);
     mn_8022F0F0(0x14);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void fn_8018ECA8(s32 char_id, s32 name_type, s32 jobj_idx1, f32 pos_x,
                  f32 pos_y, s32 jobj_idx2)
@@ -1946,8 +1958,10 @@ s32 gm_8018F1B0(MatchEnd* me)
     return 0;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 int fn_8018F310(int arg0)
 {
     int i;
@@ -1958,18 +1972,26 @@ int fn_8018F310(int arg0)
     }
     return -1;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 int fn_8018F3BC(s32 arg0)
 {
     return lbl_803D9D20.x59[arg0];
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 int fn_8018F3D0(int arg0)
 {
     if (arg0 == 0xE || (arg0 >= 0x10 && arg0 <= 0x13) || arg0 == 0xA) {
@@ -1980,7 +2002,9 @@ int fn_8018F3D0(int arg0)
     }
     return 2;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 /* 3D9F0C */ struct lbl_803D9F0C_t lbl_803D9F0C = { -1, -1, -1 };
 
@@ -2000,8 +2024,10 @@ int fn_8018F410(void)
 
 /// #fn_8018F410
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 int fn_8018F4A0(void)
 {
     int temp_r3 = mnStageSel_8025BBD4();
@@ -2013,11 +2039,15 @@ int fn_8018F4A0(void)
     }
     return temp_r3;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 /// Counts available tournament slots and returns the last found index.
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 s32 fn_8018F508(s32* out_index)
 {
     s32 count;
@@ -2045,10 +2075,14 @@ s32 fn_8018F508(s32* out_index)
 
     return count;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 char* fn_8018F5F0(void)
 {
     if (lbLang_IsSavedLanguageUS()) {
@@ -2057,27 +2091,39 @@ char* fn_8018F5F0(void)
         return "SdTou.dat";
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 /// ???
 /// tournament uses the user data as just an int
 /// it controls various menu jobj states ie animation state, visibility, etc
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 u32 fn_8018F62C(HSD_GObj* gobj)
 {
     return (u32) gobj->user_data;
 }
+#ifdef MUST_MATCH
 #pragma dont_inline off
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 TmData* gm_GetTournamentData(void)
 {
     return &gm_804771C4;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 u32 fn_8018F640(int arg0)
 {
     if (arg0 >= 4) {
@@ -2093,10 +2139,14 @@ u32 fn_8018F674(int arg0)
     }
     return gm_801A36C0(arg0);
 }
+#ifdef MUST_MATCH
 #pragma dont_inline off
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 u32 fn_8018F6A8(int arg0)
 {
     if (arg0 >= 4) {
@@ -2104,10 +2154,14 @@ u32 fn_8018F6A8(int arg0)
     }
     return gm_GetButtonsPressed((u8) arg0);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 int fn_8018F6DC(int arg0)
 {
     if (arg0 >= 0x13) {
@@ -2118,10 +2172,14 @@ int fn_8018F6DC(int arg0)
     }
     return arg0;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 CharacterKind fn_8018F6FC(CSSIconHud arg0)
 {
     if (arg0 >= 0x13) {
@@ -2132,18 +2190,26 @@ CharacterKind fn_8018F6FC(CSSIconHud arg0)
     }
     return (CharacterKind) arg0;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 float fn_8018F71C(int arg0, int arg1)
 {
     return arg0 + arg1 * 0x1E;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 int fn_8018F74C(void)
 {
     int i;
@@ -2156,10 +2222,14 @@ int fn_8018F74C(void)
 
     return i;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 int fn_8018F808(void)
 {
     int i;
@@ -2171,7 +2241,9 @@ int fn_8018F808(void)
     }
     return noerrcount;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static inline s32 fn_8018F888_inline0(void)
 {
@@ -2186,8 +2258,10 @@ static inline s32 fn_8018F888_inline0(void)
     return i;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 void fn_8018F888(void)
 {
     s32 i = fn_8018F888_inline0();
@@ -2202,7 +2276,9 @@ void fn_8018F888(void)
 
     lbl_80473AB8[i + 1].x20.g = 0;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static inline int fn_8018FA24_inline0(int char_kind)
 {
@@ -2263,13 +2339,17 @@ void fn_8018FA24(void)
     tmdata[0x30] = player_count;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 void fn_8018FBD8(void* arg0, s32 arg1)
 {
     ((HSD_GObj*) arg0)->user_data = (void*) arg1;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void fn_8018FBE0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                  s32 arg6)
@@ -2294,8 +2374,10 @@ void fn_8018FBE0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 void fn_8018FDC4(HSD_JObj* jobj, float x, float y, float z)
 {
     if ((int) x != 666) {
@@ -2308,10 +2390,14 @@ void fn_8018FDC4(HSD_JObj* jobj, float x, float y, float z)
         HSD_JObjSetTranslateZ(jobj, z);
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 void fn_8018FF9C(HSD_JObj* jobj, float x, float y, float z)
 {
     if ((int) x != 666) {
@@ -2324,10 +2410,14 @@ void fn_8018FF9C(HSD_JObj* jobj, float x, float y, float z)
         HSD_JObjSetScaleZ(jobj, z);
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 HSD_GObj* fn_80190174(HSD_CObjDesc* cobjdesc)
 {
     HSD_GObj* gobj = GObj_Create(0x13, 0x12, 0);
@@ -2337,10 +2427,14 @@ HSD_GObj* fn_80190174(HSD_CObjDesc* cobjdesc)
     gobj->gxlink_prios = 7;
     return gobj;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 HSD_GObj* fn_801901F8(HSD_CObjDesc* cobjdesc)
 {
     HSD_GObj* gobj = GObj_Create(0x13, 0x15, 2);
@@ -2350,10 +2444,14 @@ HSD_GObj* fn_801901F8(HSD_CObjDesc* cobjdesc)
     gobj->gxlink_prios = 0xA;
     return gobj;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 void fn_8019027C(UNK_T lights)
 {
     HSD_GObj* gobj = GObj_Create(0xB, 0x1A, 0);
@@ -2361,11 +2459,15 @@ void fn_8019027C(UNK_T lights)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
     GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 1, 0);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 /// Initializes SIS library text rendering for tournament mode.
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 void fn_801902F0(int sis_param)
 {
     s32 value;
@@ -2379,10 +2481,14 @@ void fn_801902F0(int sis_param)
     lbl_804D663C =
         HSD_SisLib_803A611C(0, (HSD_GObj*) value, 9, 0x12, 0, 3, 0, 0x13);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 HSD_GObj* fn_8019035C(bool arg0, DynamicModelDesc* model, int arg2, int arg3,
                       int arg4, bool arg5, void (*arg6)(HSD_GObj*), f32 arg8)
 {
@@ -2403,18 +2509,26 @@ HSD_GObj* fn_8019035C(bool arg0, DynamicModelDesc* model, int arg2, int arg3,
     }
     return gobj;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
+#endif
 void fn_8019044C(HSD_JObj* jobj, float arg1)
 {
     HSD_JObjReqAnimAll(jobj, arg1);
     HSD_JObjAnimAll(jobj);
 }
+#ifdef MUST_MATCH
 #pragma dont_inline off
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 void fn_80190480(float arg8)
 {
     if ((int) arg8 == 0) {
@@ -2423,7 +2537,9 @@ void fn_80190480(float arg8)
     }
     HSD_CObjSetFov(lbl_803D9DD0.cobj, arg8);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void fn_801904D0(void)
 {
@@ -2432,8 +2548,10 @@ void fn_801904D0(void)
     HSD_CObjSetEyePosition(tmp->cobj, &lbl_803D9DD0.eye_position);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
+#endif
 
 void fn_80190520(f32 x, f32 y, f32 z)
 {
@@ -2454,7 +2572,9 @@ void fn_80190520(f32 x, f32 y, f32 z)
         HSD_CObjSetEyePosition(tmp->cobj, &sp14);
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 /// #fn_80190520
 
