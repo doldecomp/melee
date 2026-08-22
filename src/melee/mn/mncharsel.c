@@ -824,7 +824,7 @@ static inline bool equalU8(u8 lhs, u8 rhs)
     return lhs == rhs;
 }
 
-static inline CSSData* getCSSData(void)
+static inline CSSData* getCSSDataForCostumeLoop(void)
 {
     return mnCharSel_804D6CB0;
 }
@@ -946,6 +946,11 @@ static inline f32 getHandicapFrame(int port)
     return (f32) hval;
 }
 
+static inline CSSData* getCSSData(void)
+{
+    return mnCharSel_804D6CB0;
+}
+
 void mnCharSel_8025DB34(u8 arg0)
 {
     struct {
@@ -981,15 +986,16 @@ void mnCharSel_8025DB34(u8 arg0)
         if (new_icon != mnCharSel_803F0DFC.doors[arg0].sel_icon_prev) {
             mnCharSel_803F0DFC.doors[arg0].sel_icon_prev = new_icon;
             {
-                CSSData* css = mnCharSel_804D6CB0;
-                u8 costume_var = 0;
-                while (1) {
+                u8 costume_var;
+                for (costume_var = 0, color = (s32) getCSSDataForCostumeLoop();
+                     ; costume_var++)
+                {
                     mnCharSel_803F0DFC.doors[arg0].costume = costume_var;
-                    if (!isDuplicateCostumeWith(arg0, css, mnCharSel_804D6CF5))
+                    if (!isDuplicateCostumeWith(arg0, (CSSData*) color,
+                                                mnCharSel_804D6CF5))
                     {
                         break;
                     }
-                    costume_var++;
                 }
             }
             if (mnCharSel_804D6CF6 != 3 && mnCharSel_804D6CF6 != 4) {
