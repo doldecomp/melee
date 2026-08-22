@@ -27,8 +27,11 @@ static u16* __THPHuffmanCodeTab;
 static THPSample* Gbase ATTRIBUTE_ALIGN(32);
 static u32 Gwid ATTRIBUTE_ALIGN(32);
 static f32* Gq ATTRIBUTE_ALIGN(32);
-static u8* __THPLCWork512[3];
-extern u8* __THPLCWork672[3];
+static struct THPLCWork {
+    void* offset[28];
+    u8* work512[3];
+} __THPLC;
+static u8* __THPLCWork672[3];
 static u32 __THPOldGQR5;
 static u32 __THPOldGQR6;
 static u8* __THPWorkArea;
@@ -1730,7 +1733,7 @@ static void __THPDecompressiMCURow512x448(void)
         __THPHuffDecodeDCTCompV(__THPInfo, __THPMCUBuffer[5]);
 
         comp = &__THPInfo->components[0];
-        Gbase = __THPLCWork512[0];
+        Gbase = __THPLC.work512[0];
         Gwid = 512;
         Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
         x_pos = (u32) (cl_num * 16);
@@ -1740,13 +1743,13 @@ static void __THPDecompressiMCURow512x448(void)
         __THPInverseDCTY8(__THPMCUBuffer[3], x_pos + 8);
 
         comp = &__THPInfo->components[1];
-        Gbase = __THPLCWork512[1];
+        Gbase = __THPLC.work512[1];
         Gwid = 256;
         Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
         x_pos /= 2;
         __THPInverseDCTNoYPos(__THPMCUBuffer[4], x_pos);
         comp = &__THPInfo->components[2];
-        Gbase = __THPLCWork512[2];
+        Gbase = __THPLC.work512[2];
         Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
         __THPInverseDCTNoYPos(__THPMCUBuffer[5], x_pos);
 
@@ -1766,9 +1769,9 @@ static void __THPDecompressiMCURow512x448(void)
         }
     }
 
-    LCStoreData(__THPInfo->dLC[0], __THPLCWork512[0], 0x2000);
-    LCStoreData(__THPInfo->dLC[1], __THPLCWork512[1], 0x800);
-    LCStoreData(__THPInfo->dLC[2], __THPLCWork512[2], 0x800);
+    LCStoreData(__THPInfo->dLC[0], __THPLC.work512[0], 0x2000);
+    LCStoreData(__THPInfo->dLC[1], __THPLC.work512[1], 0x800);
+    LCStoreData(__THPInfo->dLC[2], __THPLC.work512[2], 0x800);
 
     __THPInfo->dLC[0] += 0x2000;
     __THPInfo->dLC[1] += 0x800;
@@ -2847,6 +2850,31 @@ static void __THPHuffDecodeDCTCompV(register THPFileInfo* info,
 #define OS_FASTCAST_S8 4
 #define OS_FASTCAST_S16 5
 
+struct THPLCSizeEntry {
+    u32 id;
+    u32 size;
+};
+
+static struct THPLCSizeEntry __THPLCSizeTableA[5] = {
+    { 0, 0x1000 },
+    { 1, 0x400 },
+    { 2, 0x400 },
+    { 3, 0x400 },
+    { 4, 0x400 },
+};
+
+static struct THPLCSizeEntry __THPLCSizeTableB[9] = {
+    { 0, 0x1000 },
+    { 1, 0x200 },
+    { 2, 0x200 },
+    { 3, 0x200 },
+    { 4, 0x200 },
+    { 5, 0x200 },
+    { 6, 0x200 },
+    { 7, 0x200 },
+    { 8, 0x200 },
+};
+
 // clang-format off
 static inline void OSInitFastCast(void) {
 #ifdef __MWERKS__
@@ -2872,32 +2900,57 @@ static inline void OSInitFastCast(void) {
 
 #endif
 }
-// clang-format off
-
+// clang-format on
 
 BOOL THPInit(void)
 {
-    u8* base;
-    //OSRegisterVersion(__THPVersion);
-    base = (u8*)(0xE000 << 16);
+    void* base;
+    struct THPLCSizeEntry* sizes;
+    u32 hid2 = PPCMfhid2();
+    int i;
 
-    __THPLCWork512[0] = base;
-    base += 0x2000;
-    __THPLCWork512[1] = base;
-    base += 0x800;
-    __THPLCWork512[2] = base;
-    base += 0x200;
+    if ((hid2 & 0x10000000) == 0) {
+        DCInvalidateRange((void*) 0xE0000000, 0x4000);
+        LCEnable();
+    }
 
-    base              = (u8*)(0xE000 << 16);
+    base              = (void*) 0xE0000000;
+    __THPLC.offset[0] = base;
+    sizes             = __THPLCSizeTableA;
+    for (i = 0; i < 5; i++) {
+        base = (u8*) base + sizes[i].size;
+        __THPLC.offset[1 + i] = base;
+    }
+    for (i = 0; i < 4; i++) {
+        base = (u8*) base + sizes[i].size;
+        __THPLC.offset[6 + i] = base;
+    }
+
+    base               = (void*) 0xE0000000;
+    __THPLC.offset[10] = base;
+    sizes              = __THPLCSizeTableB;
+    for (i = 0; i < 9; i++) {
+        base = (u8*) base + sizes[i].size;
+        __THPLC.offset[11 + i] = base;
+    }
+    for (i = 0; i < 8; i++) {
+        base = (u8*) base + sizes[i].size;
+        __THPLC.offset[20 + i] = base;
+    }
+
+    base               = (void*) 0xE0000000;
+    __THPLC.work512[0] = base;
+    base               = (u8*) base + 0x2000;
+    __THPLC.work512[1] = base;
+    base               = (u8*) base + 0x800;
+    __THPLC.work512[2] = base;
+
+    base              = (void*) 0xE0000000;
     __THPLCWork672[0] = base;
-    base += 0x2A00;
+    base              = (u8*) base + 0x2800;
     __THPLCWork672[1] = base;
-    base += 0xA80;
+    base              = (u8*) base + 0xA00;
     __THPLCWork672[2] = base;
-    base += 0xA80;
 
-    //OSInitFastCast();
-
-    __THPInitFlag = TRUE;
-    return TRUE;
+    OSInitFastCast();
 }
