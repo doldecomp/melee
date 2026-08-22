@@ -1124,10 +1124,10 @@ void mnCharSel_8025DB34(u8 arg0)
                         1.25f * (f32) (getHandicapValue((int) arg0) - 1);
                     HSD_JObjSetTranslateX(sp90, anim_frame);
 
-                    joint = mnCharSel_803F0DFC.doors[arg0].cpuslider2_joint;
                     anim_frame =
                         (f32) mnCharSel_804D6CB0->data.data.players[arg0]
                             .cpu_level;
+                    joint = mnCharSel_803F0DFC.doors[arg0].cpuslider2_joint;
                     animateJoint(mnCharSel_804D6CC0, joint, TOBJ_MASK,
                                  anim_frame);
                 } else {
