@@ -1315,7 +1315,7 @@ config.libs = [
             Object(NonMatching, "melee/mn/mnsnap.c"),
             Object(Matching, "melee/mn/mngallery.c"),
             Object(Matching, "melee/mn/mnstagesel.c"),
-            Object(NonMatching, "melee/mn/mncharsel.c"),
+            Object(Matching, "melee/mn/mncharsel.c"),
         ],
     ),
     MeleeLib(
