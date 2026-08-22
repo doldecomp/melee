@@ -783,7 +783,7 @@ static inline bool isDuplicateCostumeWith(int door, CSSData* css,
     return false;
 }
 
-static inline bool isDuplicateRandomCostume(CSSDoor* other_door, int door,
+static inline bool isDuplicateRandomCostume(u8** other_door, int door,
                                             CSSData* css, CSSAllData* all_data,
                                             s32 door_count, u8 costume)
 {
@@ -800,12 +800,13 @@ static inline bool isDuplicateRandomCostume(CSSDoor* other_door, int door,
         num_doors = door_count;
     }
 
-    other_door = all_data->doors_data.doors;
-    for (j = 0; j < num_doors; other_door++, j++) {
-        if (door != j && other_door->p_kind != 3 &&
-            other_door->sel_icon < 0x19 &&
-            other_door->sel_icon == base_door->sel_icon &&
-            base_door->costume == other_door->costume)
+    *other_door += 0x3B4;
+    for (j = 0; j < num_doors; *other_door += sizeof(CSSDoor), j++) {
+        CSSDoor* scan_door = (CSSDoor*) *other_door;
+        if (door != j && scan_door->p_kind != 3 &&
+            scan_door->sel_icon < 0x19 &&
+            scan_door->sel_icon == base_door->sel_icon &&
+            base_door->costume == scan_door->costume)
         {
             return true;
         }
@@ -1801,9 +1802,11 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
         mnCharSel_803F0DFC.doors[door].sel_icon_prev)
     {
         CSSData* css = getCSSData();
+        u8* scan_seed;
         u8 costume = 0;
         while (1) {
-            if (!isDuplicateRandomCostume(NULL, door, css, all_data,
+            scan_seed = (u8*) all_data;
+            if (!isDuplicateRandomCostume(&scan_seed, door, css, all_data,
                                           mnCharSel_804D6CF5, costume))
             {
                 break;
