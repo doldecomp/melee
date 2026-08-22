@@ -477,14 +477,10 @@ HSD_ClassInfo* hsdSearchClassInfo(const char* class_name)
 }
 
 #ifdef MUST_MATCH
-#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
-#endif
 static char unused5[] = "info_hash";
-#ifdef MUST_MATCH
 #pragma pop
-#endif
 #endif
 
 void DumpClassStat(HSD_ClassInfo* info, s32 level)
