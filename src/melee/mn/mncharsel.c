@@ -189,7 +189,7 @@ void mnCharSel_8025BD30(void)
     (void) "99";
 }
 
-static inline f32 loadStickValue(s8* value)
+static inline f32 loadStickValue(const s8* value)
 {
     return (f32) *value;
 }
@@ -816,7 +816,7 @@ static inline bool isDuplicateRandomCostume(u8** other_door, int door,
     return false;
 }
 
-static inline CSSData* loadCSSValue(CSSData** css)
+static inline CSSData* loadCSSValue(CSSData* volatile* css)
 {
     return *css;
 }
