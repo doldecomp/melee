@@ -50,7 +50,7 @@ void AXDriverUnlink(HSD_SM* v, HSD_SM** head)
     }
 }
 
-static void unk_inline(HSD_SM* v, HSD_SM** head)
+static inline void unk_inline(HSD_SM* v, HSD_SM** head)
 {
     if (v == NULL) {
         return;
@@ -66,7 +66,7 @@ static void unk_inline(HSD_SM* v, HSD_SM** head)
     *head = v;
 }
 
-static bool tmp(HSD_SM* v)
+static inline bool tmp(HSD_SM* v)
 {
     int idx;
     u32 state;
@@ -151,46 +151,6 @@ void HSD_AudioSFXKeyOffTrack(int track)
         v = v->next;
     }
     OSRestoreInterrupts(enabled);
-}
-
-/// unused function to force data ordering for this assert string
-static void unused(HSD_SM* v)
-{
-    HSD_ASSERT(__LINE__, (v->flags&SMSTATE_MASK) == SMSTATE_ACTIVE);
-}
-
-u32 AXDriver_8038C678(u32 param_type, u32 param_value)
-{
-    switch (param_type) {
-    case 0:
-        return param_value & 0xFFFFFF;
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 14:
-    case 15:
-    case 20:
-    case 21:
-        return false;
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-    case 10:
-    case 11:
-    case 16:
-    case 17:
-    case 18:
-    case 19:
-        return param_value >> 8 & 0xFFFF;
-    case 12:
-    case 13:
-        return param_value >> 16 & 0xFF;
-    default:
-        return false;
-    }
 }
 
 #ifdef MUST_MATCH
@@ -309,6 +269,40 @@ void AXDriver_8038BF6C(HSD_SM* v)
         }
 
         v->flags &= ~flag;
+    }
+}
+
+u32 AXDriver_8038C678(u32 param_type, u32 param_value)
+{
+    switch (param_type) {
+    case 0:
+        return param_value & 0xFFFFFF;
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 14:
+    case 15:
+    case 20:
+    case 21:
+        return false;
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+    case 16:
+    case 17:
+    case 18:
+    case 19:
+        return param_value >> 8 & 0xFFFF;
+    case 12:
+    case 13:
+        return param_value >> 16 & 0xFF;
+    default:
+        return false;
     }
 }
 
