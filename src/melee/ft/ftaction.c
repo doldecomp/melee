@@ -920,6 +920,8 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
                 direction, gobj, behavior, sfx, 127, 127, sfx_param0,
                 sfx_param1, sfx_param2, sp8 + 0x1E, -1));
             break;
+        default:
+            break;
         }
         break;
 
@@ -951,6 +953,8 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
                 direction, gobj, behavior, sfx, 127, 127, sfx_param0,
                 sfx_param1, sfx_param2, sp8 + 0x2A, -1));
             break;
+        default:
+            break;
         }
 
         switch (fp->kind) {
@@ -960,6 +964,8 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
             fp->x2148 = lbAudioAx_800264E4(lbAudioAx_800263E8(
                 direction, gobj, behavior, sfx, 127, 127, sfx_param0,
                 sfx_param1, sfx_param2, sp8 + 0x2A, -1));
+            break;
+        default:
             break;
         }
         break;

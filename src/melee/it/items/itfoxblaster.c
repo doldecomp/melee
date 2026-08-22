@@ -17,7 +17,6 @@
 #include <melee/ft/chara/ftFox/ftFx_SpecialN.h>
 #include <melee/ft/chara/ftKirby/ftkirby.h>
 #include <melee/it/item.h>
-#include <melee/lb/lbrefract.h>
 
 /* 2AE200 */ static void it_802AE200(Item_GObj* item_gobj);
 /* 2AE63C */ static void it_802AE63C(Item_GObj* item_gobj);
@@ -85,6 +84,8 @@ static inline void itFoxBlaster_PlaySFX(Item* item, u32 fox_sfx, u32 falco_sfx)
     case It_Kind_Kirby_FalcoBlaster:
     case It_Kind_Falco_Blaster:
         Item_8026AE84(item, falco_sfx, 0x7F, 0x40);
+        break;
+    default:
         break;
     }
 }
@@ -203,6 +204,8 @@ void it_802ADF10(HSD_GObj* item_gobj)
             item->xDD4_itemVar.foxblaster.xDE4[0] =
                 (s32) efSync_Spawn(1196, item_gobj, &ft_hold_joint_pos,
                                    &item->xDD4_itemVar.foxblaster.angle[0]);
+            break;
+        default:
             break;
         }
 
@@ -605,6 +608,8 @@ void itFoxBlaster_Logic96_PickedUp(Item_GObj* item_gobj)
             ft_special_state =
                 ftKb_SpecialNFx_800FDD4C(item->xDD4_itemVar.foxblaster.owner);
             break;
+        default:
+            break;
         }
         Item_80268E5C(item_gobj, it_803F6E68[ft_special_state],
                       ITEM_ANIM_UPDATE);
@@ -630,6 +635,8 @@ static inline void clear_blaster_references(HSD_GObj* item_gobj)
             case It_Kind_Kirby_FoxBlaster:
             case It_Kind_Kirby_FalcoBlaster:
                 ftKb_SpecialNFx_800FDEB4(item->xDD4_itemVar.foxblaster.owner);
+                break;
+            default:
                 break;
             }
         }
@@ -659,6 +666,8 @@ static inline void clear_blaster(HSD_GObj* item_gobj)
             case It_Kind_Kirby_FoxBlaster:
             case It_Kind_Kirby_FalcoBlaster:
                 ftKb_SpecialNFx_800FDEB4(item->xDD4_itemVar.foxblaster.owner);
+                break;
+            default:
                 break;
             }
         }
@@ -725,6 +734,8 @@ bool itFoxblaster_UnkMotion8_Anim(HSD_GObj* item_gobj)
             ft_special_state =
                 ftKb_SpecialNFx_800FDD4C(item->xDD4_itemVar.foxblaster.owner);
             break;
+        default:
+            break;
         }
         // If the item's current state does not match the fighter's action
         // state, then change it to match and run animations
@@ -753,6 +764,8 @@ bool itFoxblaster_UnkMotion8_Anim(HSD_GObj* item_gobj)
                 ftKb_SpecialNFx_800FDD4C(item->xDD4_itemVar.foxblaster.owner);
             blaster_removed =
                 ftKb_SpecialNFx_800FDD14(item->xDD4_itemVar.foxblaster.owner);
+            break;
+        default:
             break;
         }
         if ((blaster_action == 9) || (blaster_removed == true)) {

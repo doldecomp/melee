@@ -126,6 +126,8 @@ void ftFx_AppealS_Anim(HSD_GObj* gobj)
             }
 
             break;
+        default:
+            break;
         }
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {

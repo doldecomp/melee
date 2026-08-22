@@ -79,6 +79,8 @@ void itLinkBow_Logic100_Destroyed(Item_GObj* arg0)
             case It_Kind_Kirby_LinkBow:
                 ftKb_SpecialNLk800FB444(item->owner);
                 break;
+            default:
+                break;
             }
         }
     }
@@ -109,6 +111,8 @@ void it_802AF32C(HSD_GObj* arg0)
             case It_Kind_Kirby_CLinkBow:
             case It_Kind_Kirby_LinkBow:
                 arg1 = ftKb_SpecialNLk800FB394(item->owner);
+                break;
+            default:
                 break;
             }
             if (item->msid != it_803F6F08[arg1]) {
@@ -146,6 +150,8 @@ void itLinkBow_Logic100_PickedUp(Item_GObj* arg0)
             case It_Kind_Kirby_CLinkBow:
             case It_Kind_Kirby_LinkBow:
                 idx = ftKb_SpecialNLk800FB394(item->owner);
+                break;
+            default:
                 break;
             }
 

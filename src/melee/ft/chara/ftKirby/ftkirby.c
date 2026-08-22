@@ -3908,6 +3908,8 @@ void ftKb_SpecialN_800F16D0(Fighter_GObj* gobj, FighterKind kind)
         it_8026B3F8((Article*) g->hats[13]->hat_dynamics[5],
                     It_Kind_Kirby_YoshiEggLay);
         break;
+    default:
+        break;
     }
 }
 
@@ -3989,6 +3991,8 @@ void ftKb_SpecialN_800F19AC(Fighter_GObj* gobj)
     case FTKIND_GAMEWATCH:
         ftKb_SpecialNGw_8010D0A8(gobj);
         break;
+    default:
+        break;
     }
 }
 
@@ -4035,6 +4039,8 @@ void ftKb_SpecialN_800F1A8C(Fighter_GObj* gobj)
     case FTKIND_GAMEWATCH:
         ftKb_SpecialNGw_8010D0A8(gobj);
         break;
+    default:
+        break;
     }
 }
 
@@ -4047,6 +4053,8 @@ void ftKb_Init_UnkMotionStates3(Fighter_GObj* gobj)
     case FTKIND_KOOPA:
     case FTKIND_GKOOPS:
         ftKb_SpecialNKp_800FA7D4(gobj);
+        break;
+    default:
         break;
     }
 }

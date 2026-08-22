@@ -79,6 +79,8 @@ void it_802B3F88(Item_GObj* gobj, Vec3* pos, CollData* coll, Vec3* vel)
         case It_Kind_Pichu_TJolt_Air:
             Item_8026AF0C(ip, 0x382B6, 127, 64);
             break;
+        default:
+            break;
         }
     }
 }

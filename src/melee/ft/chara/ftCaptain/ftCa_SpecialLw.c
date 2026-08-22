@@ -72,6 +72,8 @@ void ftCa_SpecialHi_800E3EAC(HSD_GObj* gobj)
                 efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 3U, 0x50CU,
                               fp->parts[var_r29].joint, &sp1C);
                 break;
+            default:
+                break;
             }
             fp->x2219_b0 = 1;
             return;

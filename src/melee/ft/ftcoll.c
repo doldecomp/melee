@@ -1138,6 +1138,8 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
                 fp->x2010++;
                 item->xC34_damageDealt = 1;
                 break;
+            default:
+                break;
             }
             pl_8003E17C(fp->player_id, fp->x221F_b4, item->entity);
         }
@@ -2813,6 +2815,8 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
             kb = result;
             break;
         }
+        default:
+            break;
         }
 
         if (kb > best_kb.v) {
@@ -2875,6 +2879,8 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
         element = env->element;
         break;
     }
+    default:
+        break;
     }
 
     if ((u32) best_entry->hit0->kb_angle == 0x16A) {
@@ -2956,6 +2962,8 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
         ftColl_8007861C(NULL, gobj, 3, kind, 0, 0, 0, dmg_ptr, 1);
         break;
     }
+    default:
+        break;
     }
 
     if (out->element == HitElement_Electric) {
@@ -3055,6 +3063,8 @@ void ftColl_8007AD18(Fighter* fp, HitCapsule* arg1)
         lb_8000B1CC(arg1->jobj, &sp10, &arg1->x4C);
         break;
     case HitCapsule_Disabled:
+        break;
+    default:
         break;
     }
 }

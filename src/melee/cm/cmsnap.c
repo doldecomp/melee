@@ -46,6 +46,8 @@ void cmSnap_80031640(HSD_GObj* arg0, int code)
     case CmSnapStatus_Unk4:
         _p(status) += 1;
         break;
+    default:
+        break;
     }
 }
 

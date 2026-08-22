@@ -1029,6 +1029,8 @@ static inline float get_stage_floor_height(GrKind kind)
     case Gr_Kind_Homerun:
         height = grHomeRun_8021EF10();
         break;
+    default:
+        break;
     }
     return height;
 }
@@ -1379,6 +1381,8 @@ void Camera_8002AF68(HSD_CObj* cobj, CameraTransformState* transform)
         break;
     case Gr_Kind_Homerun:
         eye_y_bound = grHomeRun_8021EF10();
+        break;
+    default:
         break;
     }
     if (vec.y < eye_y_bound) {
