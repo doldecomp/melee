@@ -2479,11 +2479,14 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                 {
                                     cursor->x8 = 1;
                                     if (trigger & HSD_PAD_A) {
-                                        u8* level = &all_data->misc.cpu_level;
-                                        if (all_data->misc.cpu_level != 0) {
-                                            *level = (u8) (all_data->misc
-                                                               .cpu_level -
-                                                           1);
+                                        u8* level;
+                                        u8 current_level;
+                                        if ((current_level =
+                                                 *(level = &all_data->misc
+                                                                .cpu_level)) !=
+                                            0)
+                                        {
+                                            *level = (u8) (current_level - 1);
                                             all_data->misc.scroll_flag = 1;
                                             mnCharSel_804D6CB0->data.data
                                                 .players
@@ -2502,11 +2505,14 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                 {
                                     cursor->x8 = 1;
                                     if (trigger & HSD_PAD_A) {
-                                        u8* level = &all_data->misc.cpu_level;
-                                        if (all_data->misc.cpu_level < 4U) {
-                                            *level = (u8) (all_data->misc
-                                                               .cpu_level +
-                                                           1);
+                                        u8* level;
+                                        u8 current_level;
+                                        if ((current_level =
+                                                 *(level = &all_data->misc
+                                                                .cpu_level)) <
+                                            4U)
+                                        {
+                                            *level = (u8) (current_level + 1);
                                             all_data->misc.scroll_flag = 1;
                                             mnCharSel_804D6CB0->data.data
                                                 .players
