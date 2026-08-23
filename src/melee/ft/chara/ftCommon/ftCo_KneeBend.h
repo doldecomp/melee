@@ -1,8 +1,7 @@
 #ifndef GALE01_0CB4E0
 #define GALE01_0CB4E0
 
-#include <placeholder.h>
-
+#include "ft/forward.h"
 #include "ftCommon/forward.h"
 
 /* 0CB4E0 */ void ftCo_KneeBend_Enter(Fighter_GObj* gobj,

@@ -1,6 +1,5 @@
 #include "ftCh_Grab.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "baselib/forward.h"
@@ -13,8 +12,6 @@
 #include "ftCrazyHand/ftCh_Cancel.h"
 #include "ftMasterHand/types.h"
 #include "pl/player.h"
-
-#include <dolphin/mtx.h>
 
 void ftCh_Init_80159F40(HSD_GObj* gobj)
 {

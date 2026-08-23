@@ -7,7 +7,6 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftwalkcommon.h"
-#include "lb/lbvector.h"
 
 #include <melee/ef/efsync.h>
 #include <melee/ft/chara/ftCommon/ftCo_AirCatch.h>
@@ -25,7 +24,6 @@
 #include <melee/ft/ft_0D31.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftlib.h>
-#include <melee/ft/ftmaterial.h>
 #include <melee/gr/stage.h>
 #include <melee/it/items/it_2E5A.h>
 #include <melee/mp/mpcoll.h>

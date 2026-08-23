@@ -1,12 +1,9 @@
 #ifndef MELEE_MN_VIBRATION_H
 #define MELEE_MN_VIBRATION_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include <baselib/forward.h>
-
-#include <dolphin/mtx.h>
 
 extern f32 mnVibration_804DC020;
 extern f32 mnVibration_804DC030;

@@ -1,8 +1,6 @@
 #ifndef MELEE_FT_CHARA_FTKIRBY_INLINES_H
 #define MELEE_FT_CHARA_FTKIRBY_INLINES_H
 
-#include <placeholder.h>
-
 #include "ft/inlines.h"
 #include "ftKirby/ftkirby.h"
 

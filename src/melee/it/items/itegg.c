@@ -2,12 +2,12 @@
 
 #include "ef/efsync.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/it_3F14.h"
 #include "it/itanimlist.h"
+#include "it/itdrop.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 
 #include <baselib/forward.h>

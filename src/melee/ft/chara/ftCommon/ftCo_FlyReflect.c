@@ -7,10 +7,13 @@
 #include "placeholder.h"
 
 #include "cm/camera.h"
+#include "ef/efasync.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ftCommon/inlines.h"
+#include "ft/ftcoll.h"
+#include "ft/ftcommon.h"
+#include "ft/inlines.h"
 #include "ftKirby/ftkirby.h"
-#include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
 #ifdef MUST_MATCH

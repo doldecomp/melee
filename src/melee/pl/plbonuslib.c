@@ -22,6 +22,7 @@
 /// pl_8004049C seems to indicate it might have actually been
 /// `Gm_Player_NumMax`
 
+#ifdef MUST_MATCH
 static inline float my_sqrtf(float x)
 {
     u8 _[4] = { 0 };
@@ -39,6 +40,9 @@ static inline float my_sqrtf(float x)
     }
     return x;
 }
+#else
+#define my_sqrtf(x) sqrtf(x)
+#endif
 
 /* 03D514 */ static void plBonusLib_8003D514(int);
 

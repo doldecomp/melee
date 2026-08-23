@@ -32,7 +32,6 @@
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
 
-#include <math.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>

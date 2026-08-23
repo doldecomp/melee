@@ -6,7 +6,6 @@
 #include "lbcardnew.h"
 #include "lbsnap.h"
 
-#include <dolphin/dvd.h>
 #include <dolphin/vi.h>
 #include <baselib/controller.h>
 #include <baselib/initialize.h>

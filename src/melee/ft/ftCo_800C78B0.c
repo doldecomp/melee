@@ -2,8 +2,6 @@
 
 #include "ftcommon.h"
 
-#include <placeholder.h>
-
 #include "ft/fighter.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"

@@ -3,8 +3,6 @@
 
 #include <platform.h>
 
-#include <melee/gm/forward.h>
-
 int gm_8017BE84(u32 arg0);
 int gm_8017BE8C(const s8*);
 void gmRegSetupEnemyColorTable(s8 ckind, u8 color, const s8* ckinds,

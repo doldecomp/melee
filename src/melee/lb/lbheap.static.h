@@ -4,8 +4,6 @@
 #include "lbheap.h" // IWYU pragma: export
 #include "lbmemory.h"
 
-#include <placeholder.h>
-
 struct Heap {
     /* 10 */ s32 id;
     /* 14 */ Handle* handle;

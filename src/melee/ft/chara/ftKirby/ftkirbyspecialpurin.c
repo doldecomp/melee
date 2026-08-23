@@ -8,7 +8,6 @@
 #include "baselib/forward.h"
 
 #include "cm/camera.h"
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_FallSpecial.h"
 #include "ft/chara/ftCommon/ftCo_Landing.h"

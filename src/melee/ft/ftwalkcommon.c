@@ -15,9 +15,7 @@
 
 #include <baselib/forward.h>
 
-#include <math.h>
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
 
 FtWalkType ftWalkCommon_GetWalkType(HSD_GObj* gobj)

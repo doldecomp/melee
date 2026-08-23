@@ -12,7 +12,6 @@
 #include "it/itmaplib.h"
 #include "it/itzako.h"
 #include "it/types.h"
-#include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
 #include <math.h>

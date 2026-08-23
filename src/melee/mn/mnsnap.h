@@ -1,12 +1,9 @@
 #ifndef MELEE_MN_SNAP_H
 #define MELEE_MN_SNAP_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include <baselib/forward.h>
-
-#include <dolphin/gx.h>
 
 /* 253184 */ void mnSnap_80253184(void);
 /* 253640 */ void mnSnap_80253640(s32 page);

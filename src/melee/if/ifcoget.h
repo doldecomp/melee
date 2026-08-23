@@ -1,8 +1,6 @@
 #ifndef _IFCOGET_H_
 #define _IFCOGET_H_
 
-#include <platform.h>
-
 #include <baselib/forward.h>
 
 /* 2FED14 */ void fn_802FED14(HSD_GObj* gobj);

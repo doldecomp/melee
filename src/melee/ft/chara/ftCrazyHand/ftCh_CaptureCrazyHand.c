@@ -1,6 +1,5 @@
 #include "ftCh_CaptureCrazyHand.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "baselib/forward.h"
@@ -12,8 +11,6 @@
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-
-#include <dolphin/mtx.h>
 
 void fn_8015B548(HSD_GObj* gobj, HSD_GObj* gobj2)
 {

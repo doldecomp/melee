@@ -3,8 +3,6 @@
 
 #include "platform.h"
 
-#include <placeholder.h>
-
 #include "ft/forward.h"
 
 #include "gm/gm_1601.h"

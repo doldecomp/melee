@@ -12,8 +12,6 @@
 #include "object.h"
 #include "util.h"
 
-#include <placeholder.h>
-
 #include <math.h>
 #include <string.h>
 #include <dolphin/mtx.h>

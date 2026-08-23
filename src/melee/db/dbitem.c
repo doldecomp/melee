@@ -8,11 +8,10 @@
 #include "if/textdraw.h"
 #include "if/textlib.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
-#include "it/it_2725.h"
 #include "it/it_3F14.h"
 #include "it/item.h"
+#include "it/itspawn.h"
 #include "it/types.h"
 #include "pl/player.h"
 

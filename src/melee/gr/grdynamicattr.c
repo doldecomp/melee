@@ -2,7 +2,7 @@
 
 #include <platform.h>
 
-#include "gr/types.h"
+#include "gr/types.h" // IWYU pragma: keep
 #include "mp/mplib.h"
 
 #include <math.h>

@@ -10,6 +10,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
@@ -22,7 +23,6 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
-#include <math.h>
 #include <dolphin/mtx.h>
 
 static void setCallbacks(Fighter* fp)

@@ -3,16 +3,6 @@
 
 #include "mndiagram.h" // IWYU pragma: export
 
-#include <placeholder.h>
-
-#include <m2c_macros.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/types.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/mn/mnmain.h>
-#include <melee/mn/mnname.h>
-#include <melee/mn/types.h>
-
 extern char mnDiagram_804D4FA4;
 extern char mnDiagram_804D4FA8[7];
 extern char mnDiagram_804D4FB0[5];

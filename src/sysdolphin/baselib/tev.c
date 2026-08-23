@@ -2,8 +2,6 @@
 
 #include "debug.h"
 
-#include <placeholder.h>
-
 #include <string.h>
 #include <dolphin/gx.h>
 

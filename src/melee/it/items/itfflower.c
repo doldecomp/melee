@@ -6,12 +6,10 @@
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
-
-#include <baselib/gobj.h>
+#include "it/itgroundcoll.h"
 
 /* 292FF0 */ static void it_80292FF0(Item_GObj* gobj);
 /* 293040 */ static bool itFflower_UnkMotion0_Anim(Item_GObj* gobj);

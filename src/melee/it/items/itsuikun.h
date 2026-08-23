@@ -3,7 +3,8 @@
 
 #include <platform.h>
 
-#include "it/item.h"
+#include "it/forward.h"
+
 #include "it/items/types.h"
 
 void itSuikun_Logic14_Spawned(Item_GObj*);

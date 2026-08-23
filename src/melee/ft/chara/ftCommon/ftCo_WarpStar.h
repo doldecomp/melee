@@ -1,7 +1,7 @@
 #ifndef GALE01_0C4724
 #define GALE01_0C4724
 
-#include "ftCommon/forward.h"
+#include "ft/forward.h"
 
 /* 0C4724 */ void ftCo_800C4724(Fighter_GObj* gobj);
 /* 0C4900 */ void ftCo_WarpStarJump_Anim(Fighter_GObj* gobj);

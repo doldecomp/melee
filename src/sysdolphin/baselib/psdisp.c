@@ -1,5 +1,7 @@
 #include "psdisp.h"
 
+#include <placeholder.h>
+
 #include "baselib/cobj.h"
 #include "baselib/fog.h"
 

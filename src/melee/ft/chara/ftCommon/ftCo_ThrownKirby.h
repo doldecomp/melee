@@ -1,7 +1,7 @@
 #ifndef GALE01_0BD9E0
 #define GALE01_0BD9E0
 
-#include "ftKirby/forward.h"
+#include "ft/forward.h"
 
 #include <dolphin/mtx.h>
 

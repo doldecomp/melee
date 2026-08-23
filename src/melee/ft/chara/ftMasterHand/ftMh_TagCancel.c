@@ -10,7 +10,6 @@
 #include "ftCommon/forward.h"
 
 #include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_Lift.h"
 #include "ftCommon/ftCo_Throw.h"
 

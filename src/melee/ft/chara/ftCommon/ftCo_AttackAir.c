@@ -19,7 +19,6 @@
 
 #include "ftCommon/forward.h"
 
-#include "ftCommon/ftCo_AppealS.h"
 #include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_JumpAerial.h"
@@ -27,7 +26,6 @@
 #include "ftLink/ftLk_AttackAir.h"
 #include "it/it_26B1.h"
 
-#include <math.h>
 #include <dolphin/mtx.h>
 
 /* 08CE0C */ static void decideFighter(Fighter_GObj* gobj);

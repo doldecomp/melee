@@ -3,9 +3,6 @@
 #include "ft_0852.h"
 #include "ftCo_800C7070.h"
 #include "ftCo_800C7590.h"
-#include "ftcommon.h"
-
-#include <placeholder.h>
 
 #include "ft/fighter.h"
 #include "ft/types.h"

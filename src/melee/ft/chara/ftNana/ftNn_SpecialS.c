@@ -2,7 +2,6 @@
 
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "ft/chara/ftCommon/ftCo_Fall.h"
 #include "ft/chara/ftCommon/ftCo_FallSpecial.h"
 #include "ft/fighter.h"

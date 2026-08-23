@@ -1,8 +1,6 @@
 #ifndef MELEE_FT_CPUATTACK_H
 #define MELEE_FT_CPUATTACK_H
 
-#include <placeholder.h>
-
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
 

@@ -3,7 +3,8 @@
 
 #include <platform.h>
 
-#include "it/item.h"
+#include "it/forward.h"
+
 #include "it/items/types.h"
 
 void it_802CF3E0(Item_GObj*);

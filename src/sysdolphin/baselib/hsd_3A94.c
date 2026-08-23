@@ -3,7 +3,6 @@
 #include "hsd_3B2B.h"
 #include "hsd_3B2E.h"
 
-#include <setjmp.h>
 #include <string.h>
 #include <dolphin/card.h>
 #include <dolphin/os.h>

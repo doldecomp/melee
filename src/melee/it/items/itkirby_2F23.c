@@ -9,8 +9,6 @@
 #include "it/itmaplib.h"
 #include "lb/lbvector.h"
 
-#include <math.h>
-
 ItemStateTable it_803F9450[] = {
     { -1, itKirby_2F23_UnkMotion0_Anim, itKirby_2F23_UnkMotion0_Phys,
       itKirby_2F23_UnkMotion0_Coll },

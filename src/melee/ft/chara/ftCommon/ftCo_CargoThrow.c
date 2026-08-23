@@ -14,13 +14,10 @@
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/ftCo_Thrown.h"
 #include "ftDonkey/types.h"
 
-#include <math.h>
 #include <dolphin/mtx.h>
 
 /* 09C02C */ static void ftCo_8009C02C(Fighter_GObj* gobj, FtMotionId msid);

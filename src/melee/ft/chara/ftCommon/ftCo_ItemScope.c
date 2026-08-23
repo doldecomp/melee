@@ -1,9 +1,9 @@
 #include "ftCo_Attack100.h"
 
-#include "ft/chara/ftCommon/inlines.h"
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0CDD.h"
-#include "ft/inlines.h"
+#include "ft/ftcommon.h"
 
 FtMotionId fn_800D769C(Fighter* ft, FtMotionId msid);
 

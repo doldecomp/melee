@@ -3,7 +3,6 @@
 
 #include <baselib/gobj.h>
 #include <melee/gm/types.h>
-#include <melee/sc/types.h>
 
 /* 479D30 */ static struct {
     HSD_GObjLibInitDataType initdata;

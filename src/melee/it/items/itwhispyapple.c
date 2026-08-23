@@ -13,7 +13,6 @@
 #include "it/itspawn.h"
 #include "lb/lb_00F9.h"
 
-#include <math.h>
 #include <baselib/random.h>
 
 ItemStateTable it_803F91D0[] = {

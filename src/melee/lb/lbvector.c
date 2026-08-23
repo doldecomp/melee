@@ -1,8 +1,7 @@
 #include "lbvector.h"
 
+#include <placeholder.h>
 #include <platform.h>
-
-#include "lb/lbrefract.h"
 
 #include <math.h>
 #include <dolphin/gx/GXTransform.h>

@@ -1,11 +1,12 @@
 #include "it/items/itfoods.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "it/items/types.h"
+#include "it/itgroundcoll.h"
+#include "it/itspawn.h"
 #include "sysdolphin/baselib/random.h"
 
 #include <baselib/gobj.h>

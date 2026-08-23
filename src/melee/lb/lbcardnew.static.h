@@ -3,10 +3,8 @@
 #include <platform.h>
 
 #include <dolphin/card.h>
-#include <dolphin/os/OSAlarm.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <melee/lb/types.h>
-#include <melee/sc/types.h>
 
 struct lb_80432A68_t {
     /* 0x000 */ UNK_T work_area;

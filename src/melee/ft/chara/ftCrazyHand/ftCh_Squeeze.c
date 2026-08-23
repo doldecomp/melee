@@ -1,6 +1,5 @@
 #include "ftCh_Squeeze.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "baselib/forward.h"
@@ -12,8 +11,6 @@
 #include "ft/types.h"
 #include "ftCrazyHand/ftCh_TagCancel.h"
 #include "pl/player.h"
-
-#include <dolphin/mtx.h>
 
 void ftCh_Init_8015A3F4(HSD_GObj* gobj)
 {

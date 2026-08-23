@@ -3,6 +3,8 @@
 #include "mplib.h"
 #include "types.h"
 
+#include <placeholder.h>
+
 #include "lb/lb_00B0.h"
 
 #include <baselib/debug.h>

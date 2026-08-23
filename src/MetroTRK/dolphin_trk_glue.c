@@ -1,20 +1,23 @@
 #include "dolphin_trk_glue.h"
 
+#include <placeholder.h>
+
+#ifdef MWERKS_GEKKO
 #include "MetroTRK/mem_TRK.h"
 #include "MetroTRK/targimpl.h"
 #include "MetroTRK/trk.h"
+#endif
 
 #include <dolphin/amc/AmcExi2Comm.h>
 #include <dolphin/db/DBInterface.h>
 #include <dolphin/odemu/odemu.h>
-#include <dolphin/os/OSError.h>
 #include <dolphin/os/OSThread.h>
 
 static DBCommTable gDBCommTable = { NULL, NULL, NULL, NULL, NULL, NULL, NULL };
 
 ASM static void TRKLoadContext(OSContext* ctx, register u32 val)
 {
-#ifdef __MWERKS__ // clang-format off
+#ifdef MWERKS_GEKKO // clang-format off
         nofralloc
 
         lwz r0, OSContext.gpr[0](r3)

@@ -19,7 +19,6 @@
 #include "mp/mplib.h"
 #include "sfx/crowdsfx.h"
 
-#include <math.h>
 #include <dolphin/mtx.h>
 
 void ftCo_800968C8(Fighter_GObj* gobj)

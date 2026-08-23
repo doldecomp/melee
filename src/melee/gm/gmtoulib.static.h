@@ -1,5 +1,4 @@
 #include <melee/gm/types.h>
-#include <melee/sc/types.h>
 
 typedef struct BracketSrcEntry {
     /* 0x00 */ u8 x0;

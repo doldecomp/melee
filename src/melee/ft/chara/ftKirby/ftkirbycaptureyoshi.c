@@ -1,7 +1,5 @@
 #include "ftkirbycaptureyoshi.h"
 
-#include <placeholder.h>
-
 #include "ft/chara/ftCommon/ftCo_Lift.h"
 #include "ft/chara/ftCommon/ftCo_Throw.h"
 #include "ft/fighter.h"
@@ -14,7 +12,6 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Attack100.h"
 
-#include <math.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>

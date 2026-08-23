@@ -26,6 +26,8 @@ stdenv.mkDerivation {
     cmake
   ];
 
+  makeFlags = [ "-k" ];
+
   env.AURORA_SRC = aurora-src;
 
   __structuredAttrs = true;

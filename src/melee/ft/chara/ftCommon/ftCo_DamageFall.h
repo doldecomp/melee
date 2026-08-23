@@ -1,7 +1,7 @@
 #ifndef GALE01_090824
 #define GALE01_090824
 
-#include "ftCommon/forward.h"
+#include "ft/forward.h"
 
 #include <dolphin/mtx.h>
 

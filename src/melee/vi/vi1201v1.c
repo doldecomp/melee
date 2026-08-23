@@ -27,8 +27,6 @@
 #include "sc/types.h"
 #include "ty/toy.h"
 
-#include "vi/forward.h"
-
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
 #include <baselib/fog.h>

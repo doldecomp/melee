@@ -10,7 +10,6 @@
 #include <sysdolphin/baselib/hsd_393C.h>
 #include <sysdolphin/baselib/video.h>
 #include <melee/lb/lb_0195.h>
-#include <melee/lb/lbcardnew.h>
 
 void db_ClearFPUExceptions(void)
 {

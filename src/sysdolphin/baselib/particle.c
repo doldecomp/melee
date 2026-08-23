@@ -24,25 +24,14 @@ typedef struct {
 #include <math.h>
 #include <string.h>
 #include <dolphin/gx.h>
-#include <dolphin/gx/GXGeometry.h>
-#include <dolphin/mcc.h>
 #include <dolphin/os.h>
-#include <dolphin/pad.h>
-#include <dolphin/vi.h>
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
-#include <baselib/list.h>
-#include <baselib/memory.h>
 #include <baselib/mtx.h>
-#include <baselib/perf.h>
 #include <baselib/psappsrt.h>
 #include <baselib/psstructs.h>
 #include <baselib/random.h>
-#include <baselib/state.h>
-#include <baselib/video.h>
-#include <MetroTRK/ppc_reg.h>
 
 static HSD_JObj* hsd_804D08E8[8];
 static void* hsd_804D0908[0x144 / 4];

@@ -7,7 +7,6 @@
 #include "object.h"
 
 #include <dolphin/gx/GXPixel.h>
-#include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
 
 static void FogInfoInit(void);

@@ -6,7 +6,6 @@
 #include "lb/lbspdisplay.h"
 #include "sc/types.h"
 
-#include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 #include <baselib/fog.h>
 #include <baselib/gobj.h>

@@ -1,7 +1,6 @@
 #ifndef __GALE01_305058
 #define __GALE01_305058
 
-#include "math.h"
 #include "types.h"
 
 #include <platform.h>

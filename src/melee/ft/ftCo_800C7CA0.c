@@ -17,7 +17,6 @@
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_DownBound.h"
 #include "ftKirby/ftkirby.h"
-#include "lb/lbaudio_ax.h"
 
 #include <baselib/dobj.h>
 #include <baselib/jobj.h>

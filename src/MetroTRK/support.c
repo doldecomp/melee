@@ -4,8 +4,6 @@
 #include "MetroTRK/msgcmd.h"
 #include "MetroTRK/serpoll.h"
 
-#include <dolphin/os.h>
-
 DSError TRKSuppAccessFile(u32 file_handle, u8* data, size_t* count,
                           u8* io_result, bool need_reply, bool read)
 {

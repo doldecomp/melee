@@ -9,6 +9,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ftanim.h"
 
 void ftCo_80098F3C(Fighter_GObj* gobj)

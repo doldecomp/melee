@@ -1,8 +1,6 @@
 #ifndef GALE01_0BFE6C
 #define GALE01_0BFE6C
 
-#include <placeholder.h>
-
 #include "ft/forward.h"
 
 /* 0BFD04 */ void ftCo_800BFD04(Fighter_GObj* gobj);

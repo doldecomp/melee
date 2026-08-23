@@ -24,8 +24,6 @@
 
 #include "ftPeach/forward.h"
 
-#include <math.h>
-
 bool ftCo_800CEE70(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

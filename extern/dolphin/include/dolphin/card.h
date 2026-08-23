@@ -100,6 +100,7 @@ typedef struct CARDID {
     /* 0x1FE */ u16 checkSumInv;
 } CARDID;
 
+// IWYU pragma: begin_exports
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/card/CARDCheck.h>
 #include <dolphin/card/CARDCreate.h>
@@ -113,6 +114,7 @@ typedef struct CARDID {
 #include <dolphin/card/CARDRename.h>
 #include <dolphin/card/CARDStat.h>
 #include <dolphin/card/CARDWrite.h>
+// IWYU pragma: end_exports
 
 #define CARD_ATTR_PUBLIC 0x04u
 #define CARD_ATTR_NO_COPY 0x08u

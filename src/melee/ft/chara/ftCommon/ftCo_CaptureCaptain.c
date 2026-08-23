@@ -1,6 +1,5 @@
 #include "ftCo_CaptureCaptain.h"
 
-#include "ftCo_CaptureCut.h"
 #include "ftCo_Lift.h"
 #include "ftCo_Throw.h"
 
