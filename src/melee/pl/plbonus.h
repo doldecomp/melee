@@ -1,10 +1,11 @@
 #ifndef GALE01_0386D8
 #define GALE01_0386D8
 
+#include <platform.h>
+
 #include <melee/pl/forward.h>
 
 #include <stdbool.h>
-#include <stddef.h>
 
 /* 0386D8 */ unsigned int pl_800386D8(plActionStats*, ssize_t);
 /* 0386E8 */ int pl_800386E8(pl_800386E8_arg0_t*);
