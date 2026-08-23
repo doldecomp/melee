@@ -510,12 +510,26 @@ void dropcallback(void* dropped)
     OSRestoreInterrupts(enabled);
 }
 
+struct foo {
+    void* next;
+    int unk4; // sound ID
+    int unk8; // voice count
+    int unkC; // audio parameter
+    AXPBADDR x10;
+    AXPBADPCM x20;
+    AXPBADPCMLOOP x48;
+};
+
+/** @remarks The per-voice blocks of an SFX entry are 0x40 apart, which is
+ *  less than the AX structures they carry.
+ */
+#define SFX_VOICE(i) ((struct foo*) ((u8*) sfx_entry + (i) * 0x40))
+
 static AXPBMIX lbl_80407FB4 = { 0 };
 
 static AXPBSRC HSD_Synth_80407FD8 = { 1, 0, 0, { 0, 0, 0, 0 } };
 
-/// @todo Currently 96.8% match - remaining r30/r31 base allocation and
-/// r29 loop-counter computation differ.
+/// @todo Only the node pointer is materialised a slot early.
 int HSD_Synth_80389334(int sfx_id, u8 vol, u8 vol2, u8 pan, int priority,
                        u8 itd_flag, float pitch1, float pitch2, float mix_main,
                        float mix_auxA, float mix_auxB)
@@ -527,20 +541,9 @@ int HSD_Synth_80389334(int sfx_id, u8 vol, u8 vol2, u8 pan, int priority,
     float vol2_norm;
     int voice_idx;
     u32 node_idx;
-    int loop_idx;
-    struct foo {
-        void* next;
-        int unk4; // sound ID
-        int unk8; // voice count
-        int unkC; // audio parameter
-        AXPBADDR x10;
-        AXPBADPCM x20;
-        AXPBADPCMLOOP x48;
-    }* sfx_entry;
+    struct foo* sfx_entry;
     struct HSD_SynthSFXNode* sfx_node;
     int saved_interrupts;
-    AXVPB** voice_ptr;
-    struct foo* sample_data;
 
     PAD_STACK(0x14);
 
@@ -607,28 +610,20 @@ int HSD_Synth_80389334(int sfx_id, u8 vol, u8 vol2, u8 pan, int priority,
             ve.currentDelta = 0;
             sfx_node->x24 = ve.currentVolume;
 
-            sample_data = sfx_entry;
-            voice_ptr = voices;
-            loop_idx = 0;
-            while (loop_idx < sfx_entry->unk8) {
-                AXSetVoicePriority(*voice_ptr, priority);
-                AXSetVoiceVe(*voice_ptr, &ve);
-                /// @todo Type pun writes ratioHi+ratioLo as u32; no union in
-                /// AXPBSRC. Needed for match - AXPBSRC lacks a u32 ratio
-                /// field.
+            voice_idx = 0;
+            while (voice_idx < sfx_entry->unk8) {
+                AXSetVoicePriority(voices[voice_idx], priority);
+                AXSetVoiceVe(voices[voice_idx], &ve);
                 *(u32*) &HSD_Synth_80407FD8.ratioHi =
                     (65536.0F *
                      (sfx_node->x18[1] * (sfx_node->x14 * sfx_node->x18[0])));
-                AXSetVoiceSrc(*voice_ptr, &HSD_Synth_80407FD8);
-                AXSetVoiceAddr(*voice_ptr, &sample_data->x10);
-                AXSetVoiceAdpcm(*voice_ptr, &sample_data->x20);
-                AXSetVoiceAdpcmLoop(*voice_ptr, &sample_data->x48);
-                AXSetVoiceState(*voice_ptr, 1U);
-                voice_ptr += 1;
-                sample_data =
-                    (void*) ((u8*) sample_data +
-                             0x40); ///< @todo what is going on here...
-                loop_idx += 1;
+                AXSetVoiceSrc(voices[voice_idx], &HSD_Synth_80407FD8);
+                AXSetVoiceAddr(voices[voice_idx], &SFX_VOICE(voice_idx)->x10);
+                AXSetVoiceAdpcm(voices[voice_idx], &SFX_VOICE(voice_idx)->x20);
+                AXSetVoiceAdpcmLoop(voices[voice_idx],
+                                    &SFX_VOICE(voice_idx)->x48);
+                AXSetVoiceState(voices[voice_idx], 1U);
+                voice_idx += 1;
             }
             HSD_Synth_804D7750 += 0x40;
             if (HSD_Synth_804D7750 < 0) {
