@@ -36,7 +36,7 @@ typedef struct lbArqHandle {
 #pragma push
 #pragma dont_inline on
 #endif
-static lbArqState lbArq_80014ABC(lbArqNode* arg0)
+static lbArqState lbArq_80014ABC(volatile lbArqNode* arg0)
 {
     return arg0->state;
 }
