@@ -150,7 +150,7 @@ struct un_803FA258_t {
 
 /// The menu callbacks in this file use assorted prototypes; the table
 /// stores them all through one signature.
-#define ACT(fn) ((int (*)(int)) fn)
+#define ACT(fn) ((int (*)(int))(Event) fn)
 
 /// .data (defined at the end of this file, so that the functions above
 /// address each block through its own symbol).
@@ -2908,9 +2908,8 @@ bool un_80301E08(bool update_scene)
 /* 803FD24C */ char un_803FD24C[] = "<Create>\n";
 /* 803FD258 */ char un_803FD258[] = "<Delete>\n";
 /* 803FD264 */ char un_803FD264[] = "<SnapMount0>\n";
-/* 803FD274 */ static HSD_ImageDesc un_803FD274 = { NULL,         640, 480,
-                                                    GX_TF_RGB565, 0,   0.0f,
-                                                    0.0f };
+/* 803FD274 */ HSD_ImageDesc un_803FD274 = { NULL, 640,  480, GX_TF_RGB565,
+                                             0,    0.0f, 0.0f };
 /* 803FD28C */ char un_803FD28C[] = "<SnapLoad0>\n";
 /* 803FD29C */ char un_803FD29C[] = "<SnapDelete0>\n";
 /* 803FD2AC */ char un_803FD2AC[] = "<SnapSwap0>\n";
