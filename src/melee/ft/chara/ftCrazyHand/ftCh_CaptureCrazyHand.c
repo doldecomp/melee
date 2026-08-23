@@ -12,8 +12,6 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 
-#include <dolphin/mtx.h>
-
 void fn_8015B548(HSD_GObj* gobj, HSD_GObj* gobj2)
 {
     Fighter* fp = GET_FIGHTER(gobj);

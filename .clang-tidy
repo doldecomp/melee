@@ -24,7 +24,6 @@ CheckOptions:
     #       libc symbols and fixing forward-
     #       declared typedefs
     value: >-
-      extern/.*;
       MetroTRK/.*;
       MSL/.*;
       sysdolphin/.*;

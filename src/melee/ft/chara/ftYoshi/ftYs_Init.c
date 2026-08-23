@@ -26,7 +26,6 @@
 
 #include <baselib/forward.h>
 
-#include <dolphin/os/OSError.h>
 #include <baselib/aobj.h>
 #include <baselib/debug.h>
 #include <baselib/mobj.h>

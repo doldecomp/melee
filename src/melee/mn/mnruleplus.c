@@ -27,8 +27,6 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-#include <dolphin/os.h>
-
 extern StaticModelDesc MenMainConRl_Top;
 extern StaticModelDesc MenMainCursorRl_Top;
 extern StaticModelDesc MenMainCursorTr01_Top;

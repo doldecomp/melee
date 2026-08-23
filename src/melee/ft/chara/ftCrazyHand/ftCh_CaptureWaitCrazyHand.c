@@ -10,8 +10,6 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 
-#include <dolphin/mtx.h>
-
 void ftCh_GrabUnk1_8015B778(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

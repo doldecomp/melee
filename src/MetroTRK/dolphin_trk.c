@@ -8,8 +8,6 @@
 #include "MetroTRK/ppc_except.h"
 #include "MetroTRK/ppc_targimpl.h"
 
-#include <dolphin/os.h>
-
 #define BOOTINFO 0x80000000
 #define MEM2_CACHED 0x90000000
 #define DB_EXCEPTION_MASK 0x44

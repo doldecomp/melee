@@ -15,7 +15,6 @@
 #include <printf.h>
 #include <stdio.h>
 #include <string.h>
-#include <dolphin/mtx.h>
 #include <baselib/archive.h>
 #include <baselib/cobj.h>
 #include <baselib/dobj.h>

@@ -9,7 +9,6 @@
 
 #include <baselib/forward.h>
 
-#include <dolphin/os.h>
 #include <baselib/controller.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
