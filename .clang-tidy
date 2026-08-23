@@ -28,7 +28,6 @@ CheckOptions:
       MetroTRK/.*;
       MSL/.*;
       sysdolphin/.*;
-      .*/(types\|forward)\.h;
 CustomChecks:
   - Name: ban-primitive-c-types
     Query: |
