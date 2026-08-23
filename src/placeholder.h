@@ -23,7 +23,7 @@ typedef jmp_t jtbl_t[];
 #endif
 
 #ifndef MWERKS_GEKKO
-#define __frsqrte(x) sqrtf(x)
+#define __frsqrte(x) sqrt(x)
 #define sqrtf__Ff(x) sqrtf(x)
 #define sqrtf_accurate(x) sqrtf(x)
 #define __fabs(f) fabsf(f)
