@@ -3,7 +3,6 @@
 
 #include <stdbool.h>       // IWYU pragma: export
 #include <stddef.h>        // IWYU pragma: export
-#include <strtoul.h>       // IWYU pragma: export
 #include <dolphin/types.h> // IWYU pragma: export
 
 /// @typedef bool
