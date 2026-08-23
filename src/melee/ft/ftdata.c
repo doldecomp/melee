@@ -112,8 +112,8 @@
 #include "ftSeak/ftSk_SpecialLw.h"
 #include "ftSeak/ftSk_SpecialN.h"
 #include "ftSeak/ftSk_SpecialS.h"
+#include "ftYoshi/ftyoshi.h"
 #include "ftYoshi/ftYs_Guard.h"
-#include "ftYoshi/ftYs_Init.h"
 #include "ftYoshi/ftYs_SpecialHi.h"
 #include "ftYoshi/ftYs_SpecialN.h"
 #include "ftYoshi/ftYs_SpecialS.h"
@@ -1475,7 +1475,7 @@ void ftData_800855C8(FighterKind kind, u8 color)
                            1, 3, 1, 0);
         }
     }
-    if (ftData_UnkBytePerCharacter[kind] != -1) {
+    if (ftData_UnkBytePerCharacter[kind] != (char) -1) {
         efAsync_LoadAsync(ftData_UnkBytePerCharacter[kind]);
     }
     if (ftData_803C23E4[kind] != NULL) {

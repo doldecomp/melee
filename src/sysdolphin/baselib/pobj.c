@@ -1078,7 +1078,10 @@ static void SetupSharedVtxModelMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx,
 
     flags |= GetSetupFlags(jobj, rendermode);
 
-    if (flags | SETUP_JOINT0) {
+#ifdef MUST_MATCH
+    if (flags | SETUP_JOINT0)
+#endif
+    {
         GXSetCurrentMtx(GX_PNMTX0);
         GXLoadPosMtxImm(pmtx, GX_PNMTX0);
         HSD_PerfCountMtxLoad();
@@ -1095,7 +1098,10 @@ static void SetupSharedVtxModelMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx,
             }
         }
     }
-    if (flags | SETUP_JOINT1) {
+#ifdef MUST_MATCH
+    if (flags | SETUP_JOINT1)
+#endif
+    {
         ///@todo Unused stack
         u8 _[4];
         HSD_JObjSetupMatrix(pobj->u.jobj);

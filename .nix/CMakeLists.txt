@@ -425,7 +425,7 @@ set(SOURCES
     src/melee/ft/chara/ftSeak/ftSk_SpecialN.c
     src/melee/ft/chara/ftSeak/ftSk_SpecialS.c
     src/melee/ft/chara/ftYoshi/ftYs_Guard.c
-    src/melee/ft/chara/ftYoshi/ftYs_Init.c
+    src/melee/ft/chara/ftYoshi/ftyoshi.c
     src/melee/ft/chara/ftYoshi/ftYs_SpecialHi.c
     src/melee/ft/chara/ftYoshi/ftYs_SpecialLw.c
     src/melee/ft/chara/ftYoshi/ftYs_SpecialN.c

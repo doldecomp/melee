@@ -896,7 +896,6 @@ void ifStatus_802F66A4(void)
     DynamicModelDesc** mrk;
     DynamicModelDesc** num;
     HSD_Archive** arch;
-    s32 reset;
     arch = ifAll_GetArchive();
     lbArchive_LoadSections(*arch, (void**) &num, num_models_name,
                            (void**) &mrk, mrk_models_name, 0);
@@ -908,10 +907,17 @@ void ifStatus_802F66A4(void)
     hud->unk26C = (*mrk)->anims;
     hud->unk270 = (*mrk)->matanims;
     hud->unk274 = (*mrk)->shapeanims;
-    if (reset != 0) {
-        ifStatus_804D6D60 = 0;
-        memzero(hud, 0x258);
+#ifdef MUST_MATCH
+    {
+        s32 reset;
+        if (reset != 0) {
+#endif
+            ifStatus_804D6D60 = 0;
+            memzero(hud, 0x258);
+#ifdef MUST_MATCH
+        }
     }
+#endif
 }
 
 void ifStatus_802F6788(u8 player_idx)

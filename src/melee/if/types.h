@@ -179,9 +179,17 @@ struct un_80301C64_t {
     s32 x4;
 };
 
+enum soundtest_callback_arg0 {
+    soundtest_callback_0,
+    soundtest_callback_1,
+    soundtest_callback_6 = 6,
+};
+
+typedef bool (*soundtest_callback)(enum soundtest_callback_arg0 arg0);
+
 struct un_80304138_objalloc_t_x8 {
     int x0;
-    int (*x4)(int);
+    soundtest_callback x4;
     char* x8;
     char** xC;
     void* x10;
@@ -196,7 +204,7 @@ struct un_80304138_objalloc_t {
     unsigned char x1;
     DevText* x4;
     struct un_80304138_objalloc_t_x8* x8;
-    int (*xC)(int);
+    soundtest_callback xC;
     HSD_GObj* x10;
     HSD_GObjProc* x14;
     struct un_80304138_objalloc_t* prev;

@@ -401,7 +401,11 @@ void ftMt_SpecialHi_Enter(HSD_GObj* gobj)
     stick_y *= stick_y;
 
     /// @todo Probably a missing @c inline function.
-    mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
+    mewtwoAttrs =
+#ifdef MUST_MATCH
+        mewtwoAttrs =
+#endif
+            getFtSpecialAttrsD(fp);
 
     sqrt_stick = sqrtf(stick_x + stick_y);
 
@@ -468,7 +472,11 @@ void ftMt_SpecialAirHi_Enter(HSD_GObj* gobj)
     stick_x *= stick_x;
     stick_y *= stick_y;
 
-    mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
+    mewtwoAttrs =
+#ifdef MUST_MATCH
+        mewtwoAttrs =
+#endif
+            getFtSpecialAttrsD(fp);
 
     sqrt_stick = sqrtf(stick_x + stick_y);
 

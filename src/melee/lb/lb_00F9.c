@@ -451,7 +451,9 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
         return;
     }
     /* Keeps loop_index live from function entry. */
+#ifdef MUST_MATCH
     (void) parent_mtx[loop_index];
+#endif
     if (part > 0xFF) {
         return;
     }

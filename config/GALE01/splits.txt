@@ -1693,7 +1693,7 @@ melee/ft/chara/ftSamus/ftSs_SpecialLw_1.c:
 	.text       start:0x8012ADF0 end:0x8012B6E8
 	.sdata2     start:0x804D9A08 end:0x804D9A18
 
-melee/ft/chara/ftYoshi/ftYs_Init.c:
+melee/ft/chara/ftYoshi/ftyoshi.c:
 	.text       start:0x8012B6E8 end:0x8012BDA0
 	.rodata     start:0x803B75C0 end:0x803B75CC
 	.data       start:0x803CE6D0 end:0x803CEA98

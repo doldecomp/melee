@@ -5569,7 +5569,6 @@ void _Toy_80310B48(HSD_GObj* gobj)
     u32 buttons;
     s32 changed;
     s32 i;
-    s16* valptr;
 
     PAD_STACK(88);
 
@@ -5637,25 +5636,23 @@ void _Toy_80310B48(HSD_GObj* gobj)
     if (buttons & (HSD_PAD_A | HSD_PAD_START)) {
         sfxForward();
         Toy_80311960();
-        valptr = (s16*) editor;
         {
             s32 slot;
 
             slot = 0;
             do {
-                if (valptr[3] != 0) {
+                if (editor->values[slot] != 0) {
                     Toy_80305918(slot, 0, 0);
                     buttons = Toy_80305B88();
                     if (buttons & HSD_PAD_START) {
-                        _Toy_803053C4(slot, (s32) valptr[3], 0);
+                        _Toy_803053C4(slot, (s32) editor->values[slot], 0);
                     } else {
-                        _Toy_803053C4(slot, (s32) valptr[3], 1);
+                        _Toy_803053C4(slot, (s32) editor->values[slot], 1);
                     }
                 } else if (slot == 2) {
                     Toy_80305918(slot, 0, 0);
                 }
                 slot += 1;
-                valptr += 1;
             } while (slot < 9);
         }
         Toy_80305918(0, 1, 0);

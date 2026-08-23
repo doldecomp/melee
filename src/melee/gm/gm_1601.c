@@ -132,8 +132,14 @@ char* lbl_803D50E4[] = {
 };
 
 static struct lbl_803D5168_t {
+#ifdef MUST_MATCH
     u8 x0;
     u8 x1;
+#else
+    unsigned int x0;
+    unsigned int x1;
+#endif
+
 } lbl_803D5168[] = {
     { 0x22, 0x00 }, { 0x24, 0x01 }, { 0x27, 0x02 }, { 0x38, 0x03 },
     { 0x29, 0x04 }, { 0x2A, 0x05 }, { 0x2B, 0x06 }, { 0x2C, 0x07 },

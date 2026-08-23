@@ -320,7 +320,11 @@ static bool setupTopHalfCamera(HSD_CObj* cobj)
     left = cobj->viewport.xmin;
     right = cobj->viewport.xmax;
     top = cobj->viewport.ymin;
-    bottom = bottom = cobj->viewport.ymax;
+    bottom =
+#ifdef MUST_MATCH
+        bottom =
+#endif
+            cobj->viewport.ymax;
     bottom = bottom < rmode->efbHeight ? bottom : rmode->efbHeight;
     width = right - left;
     height = bottom - top;

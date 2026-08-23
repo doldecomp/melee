@@ -110,14 +110,18 @@ static inline void inlineB2(Fighter_GObj* gobj, Fighter_GObj* thrower_gobj,
     fp->mv.co.thrownkirby.x4 =
         vel_func(thrower_gobj, &fp->self_vel, fp->facing_dir);
     Fighter_UpdateModelScale(gobj);
-    // TODO inline this to HSD_JObjGetScale someway
+/// @todo inline this to ::HSD_JObjGetScale someway
+#ifdef MUST_MATCH
     if (jobj == NULL) {
-        __assert("jobj.h", 0x337, "jobj");
+        __assert("jobj.h", 823, "jobj");
     }
     if (&fp->mv.co.thrownkirby.scale == NULL) {
-        __assert("jobj.h", 0x338, "scale");
+        __assert("jobj.h", 824, "scale");
     }
     fp->mv.co.thrownkirby.scale = jobj->scale;
+#else
+    HSD_JObjSetScale(jobj, &fp->mv.co.thrownkirby.scale);
+#endif
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_SkipThrowException, 0.0f, 1.0f,
                               0.0f, thrower_gobj);
     fp->take_dmg_2_cb = ftCo_800BE7C0;
