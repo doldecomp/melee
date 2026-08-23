@@ -641,7 +641,7 @@ void un_80304344(struct un_80304138_objalloc_t* arg0)
     struct un_80304138_objalloc_t* next = arg0->next;
     struct un_80304138_objalloc_t* w;
     struct un_80304138_objalloc_t_x8* r4;
-    int (*q)(int);
+    soundtest_callback q;
     if (next) {
         next->x1 = next->x1 & ~0x10;
         next->prev = NULL;
