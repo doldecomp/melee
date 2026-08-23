@@ -5,8 +5,6 @@
 
 #include <baselib/forward.h>
 
-#include <dolphin/gx.h>
-
 /* 253184 */ void mnSnap_80253184(void);
 /* 253640 */ void mnSnap_80253640(s32 page);
 /* 253964 */ void mnSnap_80253964(void);

@@ -4,7 +4,6 @@
 #include <platform.h>
 
 #include "MetroTRK/msgbuf.h"
-#include "MetroTRK/trk.h"
 
 typedef unsigned char FCSType;
 

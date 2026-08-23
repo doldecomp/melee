@@ -2,7 +2,7 @@
 #define PLACEHOLDER_H
 
 #include <m2c_macros.h> // IWYU pragma: export
-#include <dolphin/os.h>
+#include <dolphin/os.h> // IWYU pragma: keep
 
 /// A label in a jump table
 typedef void (*jmp_t)(void);

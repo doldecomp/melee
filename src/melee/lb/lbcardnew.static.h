@@ -3,7 +3,6 @@
 #include <platform.h>
 
 #include <dolphin/card.h>
-#include <dolphin/os/OSAlarm.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <melee/lb/types.h>
 

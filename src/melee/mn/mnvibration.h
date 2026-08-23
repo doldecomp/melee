@@ -5,8 +5,6 @@
 
 #include <baselib/forward.h>
 
-#include <dolphin/mtx.h>
-
 extern f32 mnVibration_804DC020;
 extern f32 mnVibration_804DC030;
 extern f32 mnVibration_804DC050; ///< intro-reveal frame, port panel 1

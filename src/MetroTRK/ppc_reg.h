@@ -3,8 +3,6 @@
 
 #include <platform.h>
 
-#include "MetroTRK/trk.h"
-
 /*
  *    Default register block (all registers typically requested by debugger)
  */

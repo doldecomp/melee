@@ -5,7 +5,6 @@
 
 #include <baselib/forward.h>
 
-#include <dolphin/os.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
