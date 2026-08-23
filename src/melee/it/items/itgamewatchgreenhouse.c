@@ -8,7 +8,6 @@
 
 #include "it/items/forward.h"
 
-#include <string.h>
 #include <melee/ft/chara/ftGameWatch/ftGw_Attack11.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

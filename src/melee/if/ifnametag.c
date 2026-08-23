@@ -12,9 +12,6 @@
 #include "pl/player.h"
 #include "sc/types.h"
 
-#include <printf.h>
-#include <stdio.h>
-#include <string.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 #include <baselib/fog.h>
