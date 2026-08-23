@@ -30,50 +30,58 @@
 #include <baselib/sobjlib.h>
 #include <baselib/tobj.h>
 
-/* 2FF88C */ static int un_802FF88C(int);
-/* 2FF934 */ static int un_802FF934(int);
-/* 2FF958 */ static int un_802FF958(int);
-/* 2FF99C */ static int un_802FF99C(int);
-/* 2FF9DC */ static int un_802FF9DC(int);
-/* 2FFB58 */ static int un_802FFB58(int);
-/* 2FFBAC */ static int un_802FFBAC(int);
-/* 2FFC30 */ static int un_802FFC30(int);
-/* 300218 */ static int un_80300218(int);
-/* 300248 */ static int un_80300248(int);
-/* 300338 */ static int un_80300338(int);
-/* 300378 */ static int un_80300378(int);
-/* 3003C4 */ static int un_803003C4(int);
-/* 300410 */ static int un_80300410(int);
-/* 300480 */ static int un_80300480(int);
-/* 3004B4 */ static int un_803004B4(int);
-/* 3004E8 */ static int un_803004E8(int);
-/* 30051C */ static int un_8030051C(int);
-/* 300550 */ static int un_80300550(int);
-/* 300584 */ static int un_80300584(int);
-/* 3005B8 */ static int un_803005B8(int);
-/* 3005EC */ static int un_803005EC(int);
-/* 300620 */ static int un_80300620(int);
-/* 300654 */ static int un_80300654(int);
-/* 300688 */ static int un_80300688(int);
-/* 3006BC */ static int un_803006BC(int);
-/* 3006F0 */ static int un_803006F0(int);
-/* 300724 */ static int un_80300724(int);
-/* 300758 */ static int un_80300758(int);
-/* 300790 */ static int un_80300790(int);
-/* 3007C8 */ static int un_803007C8(int);
-/* 3007FC */ static int un_803007FC(int);
-/* 300830 */ static int un_80300830(int);
-/* 300864 */ static int un_80300864(int);
-/* 300898 */ static int un_80300898(int);
-/* 3008CC */ static int un_803008CC(int);
-/* 300900 */ static int un_80300900(int);
-/* 300934 */ static int un_80300934(int);
-/* 3009E0 */ static int un_803009E0(int);
-/* 300A88 */ static int un_80300A88(int);
-/* 300F98 */ static int un_80300F98(int);
-/* 301634 */ static int un_80301634(int);
-/* 301C80 */ static int un_80301C80(int);
-/* 301CE0 */ static int un_80301CE0(int);
+/* 301074 */ static bool un_80301074(enum soundtest_callback_arg0);
+/* 3010C0 */ static bool un_803010C0(enum soundtest_callback_arg0);
+/* 2FF88C */ static bool un_802FF88C(enum soundtest_callback_arg0);
+/* 301280 */ int un_80301280(int);
+/* 2FF934 */ static bool un_802FF934(enum soundtest_callback_arg0);
+/* 301028 */ static bool un_80301028(enum soundtest_callback_arg0);
+/* 300F3C */ static bool un_80300F3C(enum soundtest_callback_arg0);
+/* 300E74 */ static bool un_80300E74(enum soundtest_callback_arg0);
+/* 300D78 */ static bool un_80300D78(enum soundtest_callback_arg0);
+/* 300290 */ static bool un_80300290(enum soundtest_callback_arg0);
+/* 2FF958 */ static bool un_802FF958(enum soundtest_callback_arg0);
+/* 2FF99C */ static bool un_802FF99C(enum soundtest_callback_arg0);
+/* 2FF9DC */ static bool un_802FF9DC(enum soundtest_callback_arg0);
+/* 2FFB58 */ static bool un_802FFB58(enum soundtest_callback_arg0);
+/* 2FFBAC */ static bool un_802FFBAC(enum soundtest_callback_arg0);
+/* 2FFC30 */ static bool un_802FFC30(enum soundtest_callback_arg0);
+/* 300218 */ static bool un_80300218(enum soundtest_callback_arg0);
+/* 300248 */ static bool un_80300248(enum soundtest_callback_arg0);
+/* 300338 */ static bool un_80300338(enum soundtest_callback_arg0);
+/* 300378 */ static bool un_80300378(enum soundtest_callback_arg0);
+/* 3003C4 */ static bool un_803003C4(enum soundtest_callback_arg0);
+/* 300410 */ static bool un_80300410(enum soundtest_callback_arg0);
+/* 300480 */ static bool un_80300480(enum soundtest_callback_arg0);
+/* 3004B4 */ static bool un_803004B4(enum soundtest_callback_arg0);
+/* 3004E8 */ static bool un_803004E8(enum soundtest_callback_arg0);
+/* 30051C */ static bool un_8030051C(enum soundtest_callback_arg0);
+/* 300550 */ static bool un_80300550(enum soundtest_callback_arg0);
+/* 300584 */ static bool un_80300584(enum soundtest_callback_arg0);
+/* 3005B8 */ static bool un_803005B8(enum soundtest_callback_arg0);
+/* 3005EC */ static bool un_803005EC(enum soundtest_callback_arg0);
+/* 300620 */ static bool un_80300620(enum soundtest_callback_arg0);
+/* 300654 */ static bool un_80300654(enum soundtest_callback_arg0);
+/* 300688 */ static bool un_80300688(enum soundtest_callback_arg0);
+/* 3006BC */ static bool un_803006BC(enum soundtest_callback_arg0);
+/* 3006F0 */ static bool un_803006F0(enum soundtest_callback_arg0);
+/* 300724 */ static bool un_80300724(enum soundtest_callback_arg0);
+/* 300758 */ static bool un_80300758(enum soundtest_callback_arg0);
+/* 300790 */ static bool un_80300790(enum soundtest_callback_arg0);
+/* 3007C8 */ static bool un_803007C8(enum soundtest_callback_arg0);
+/* 3007FC */ static bool un_803007FC(enum soundtest_callback_arg0);
+/* 300830 */ static bool un_80300830(enum soundtest_callback_arg0);
+/* 300864 */ static bool un_80300864(enum soundtest_callback_arg0);
+/* 300898 */ static bool un_80300898(enum soundtest_callback_arg0);
+/* 3008CC */ static bool un_803008CC(enum soundtest_callback_arg0);
+/* 300900 */ static bool un_80300900(enum soundtest_callback_arg0);
+/* 300934 */ static bool un_80300934(enum soundtest_callback_arg0);
+/* 3009E0 */ static bool un_803009E0(enum soundtest_callback_arg0);
+/* 300A88 */ static bool un_80300A88(enum soundtest_callback_arg0);
+/* 300F98 */ static bool un_80300F98(enum soundtest_callback_arg0);
+/* 301634 */ static bool un_80301634(enum soundtest_callback_arg0);
+/* 301C80 */ static bool un_80301C80(enum soundtest_callback_arg0);
+/* 301CE0 */ static bool un_80301CE0(enum soundtest_callback_arg0);
 
 /// .bss (extern)
 /* 45A6C0 */ extern u8 gmMainLib_8045A6C0[];
@@ -733,7 +741,7 @@ bool un_802FF884(char* arg0)
     return false;
 }
 
-int un_802FF88C(int arg0)
+bool un_802FF88C(enum soundtest_callback_arg0 arg0)
 {
     un_804D5858 = 0x7F;
     un_804D6DB8 = 0;
@@ -759,12 +767,12 @@ int un_802FF88C(int arg0)
     return 1;
 }
 
-int un_802FF934(int arg0)
+bool un_802FF934(enum soundtest_callback_arg0 arg0)
 {
     lbAudioAx_80024C08(un_804D6DBC);
 }
 
-int un_802FF958(int arg0)
+bool un_802FF958(enum soundtest_callback_arg0 arg0)
 {
     u8 tmp = un_804D5854;
     lbAudioAx_800245F4(tmp);
@@ -775,7 +783,7 @@ int un_802FF958(int arg0)
     return 0;
 }
 
-int un_802FF99C(int arg0)
+bool un_802FF99C(enum soundtest_callback_arg0 arg0)
 {
     u8 tmp = un_804D6DAC;
     lbAudioAx_80024634(tmp);
@@ -783,7 +791,7 @@ int un_802FF99C(int arg0)
     return 0;
 }
 
-int un_802FF9DC(int arg0)
+bool un_802FF9DC(enum soundtest_callback_arg0 arg0)
 {
     s32 i;
     s32 total;
@@ -798,7 +806,7 @@ int un_802FF9DC(int arg0)
     return 0;
 }
 
-int un_802FFB58(int arg0)
+bool un_802FFB58(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 == 1) {
         lbAudioAx_80023694();
@@ -809,7 +817,7 @@ int un_802FFB58(int arg0)
     return 0;
 }
 
-int un_802FFBAC(int arg0)
+bool un_802FFBAC(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 == 1) {
         if (un_804D585C == un_804D6DB8) {
@@ -829,7 +837,7 @@ int un_802FFBAC(int arg0)
     return 0;
 }
 
-int un_802FFC30(int arg0)
+bool un_802FFC30(enum soundtest_callback_arg0 arg0)
 {
     lbAudioAx_800236DC();
     lbAudioAx_800245D4(0x7F);
@@ -1013,13 +1021,13 @@ bool un_803001DC(bool update_scene)
     return false;
 }
 
-int un_80300218(int arg0)
+bool un_80300218(enum soundtest_callback_arg0 arg0)
 {
     lbLang_SetSavedLanguage(un_803FA258.x0);
     return 0;
 }
 
-int un_80300248(int arg0)
+bool un_80300248(enum soundtest_callback_arg0 arg0)
 {
     if (un_803FA258.x4[0] && arg0 == 1) {
         sfxForward();
@@ -1028,7 +1036,7 @@ int un_80300248(int arg0)
     return 0;
 }
 
-int un_80300290(int arg0)
+bool un_80300290(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 == 1) {
         struct un_80304138_objalloc_t* x = un_80302DF0();
@@ -1050,7 +1058,7 @@ bool un_803002FC(bool update_scene)
     return false;
 }
 
-int un_80300338(int arg0)
+bool un_80300338(enum soundtest_callback_arg0 arg0)
 {
     struct un_803FA128_t* data = (struct un_803FA128_t*) un_803FA128;
     u8* src;
@@ -1065,7 +1073,7 @@ int un_80300338(int arg0)
     return 0;
 }
 
-int un_80300378(int arg0)
+bool un_80300378(enum soundtest_callback_arg0 arg0)
 {
     struct un_803FA128_t* data = (struct un_803FA128_t*) un_803FA128;
     u8* ptr;
@@ -1083,7 +1091,7 @@ int un_80300378(int arg0)
     return 0;
 }
 
-int un_803003C4(int arg0)
+bool un_803003C4(enum soundtest_callback_arg0 arg0)
 {
     struct un_803FA128_t* data = (struct un_803FA128_t*) un_803FA128;
     u8* ptr;
@@ -1101,7 +1109,7 @@ int un_803003C4(int arg0)
     return 0;
 }
 
-int un_80300410(int arg0)
+bool un_80300410(enum soundtest_callback_arg0 arg0)
 {
     struct un_803FA128_t* data = (struct un_803FA128_t*) un_803FA128;
 
@@ -1123,85 +1131,85 @@ int un_80300410(int arg0)
 #pragma push
 #pragma dont_inline on
 #endif
-int un_80300480(int arg0)
+bool un_80300480(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FB168, fn_802FFE0C);
     return 0;
 }
 
-int un_803004B4(int arg0)
+bool un_803004B4(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FA8E8, fn_802FFE6C);
     return 0;
 }
 
-int un_803004E8(int arg0)
+bool un_803004E8(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FAA44, fn_802FFE6C);
     return 0;
 }
 
-int un_8030051C(int arg0)
+bool un_8030051C(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FB60C, fn_802FFE6C);
     return 0;
 }
 
-int un_80300550(int arg0)
+bool un_80300550(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FB728, fn_802FFE6C);
     return 0;
 }
 
-int un_80300584(int arg0)
+bool un_80300584(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FB870, fn_802FFE6C);
     return 0;
 }
 
-int un_803005B8(int arg0)
+bool un_803005B8(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FB98C, fn_802FFE6C);
     return 0;
 }
 
-int un_803005EC(int arg0)
+bool un_803005EC(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FBA9C, fn_802FFE6C);
     return 0;
 }
 
-int un_80300620(int arg0)
+bool un_80300620(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FBB98, fn_802FFE6C);
     return 0;
 }
 
-int un_80300654(int arg0)
+bool un_80300654(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FBCAC, fn_802FFE6C);
     return 0;
 }
 
-int un_80300688(int arg0)
+bool un_80300688(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FBDC0, fn_802FFE6C);
     return 0;
 }
 
-int un_803006BC(int arg0)
+bool un_803006BC(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FBFFC, fn_802FFE6C);
     return 0;
 }
 
-int un_803006F0(int arg0)
+bool un_803006F0(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FC0FC, fn_802FFE6C);
     return 0;
 }
 
-int un_80300724(int arg0)
+bool un_80300724(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FC22C, fn_802FFE6C);
     return 0;
@@ -1210,14 +1218,14 @@ int un_80300724(int arg0)
 #pragma pop
 #endif
 
-int un_80300758(int arg0)
+bool un_80300758(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 == 1) {
         un_802FFCD0(4, (u8*) &un_803FA258 + 0x10);
     }
 }
 
-int un_80300790(int arg0)
+bool un_80300790(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 == 1) {
         un_802FFCD0(4, (u8*) &un_803FA258 + 0x24);
@@ -1228,49 +1236,49 @@ int un_80300790(int arg0)
 #pragma push
 #pragma dont_inline on
 #endif
-int un_803007C8(int arg0)
+bool un_803007C8(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FC63C, fn_802FFE6C);
     return 0;
 }
 
-int un_803007FC(int arg0)
+bool un_803007FC(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FCA40, fn_802FFE6C);
     return 0;
 }
 
-int un_80300830(int arg0)
+bool un_80300830(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FCC38, fn_802FFE6C);
     return 0;
 }
 
-int un_80300864(int arg0)
+bool un_80300864(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FCE4C, fn_802FFE6C);
     return 0;
 }
 
-int un_80300898(int arg0)
+bool un_80300898(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FD064, fn_802FFE6C);
     return 0;
 }
 
-int un_803008CC(int arg0)
+bool un_803008CC(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FDAF8, fn_802FFE6C);
     return 0;
 }
 
-int un_80300900(int arg0)
+bool un_80300900(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FDB9C, fn_802FFE6C);
     return 0;
 }
 
-int un_80300934(int arg0)
+bool un_80300934(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FD310, fn_802FFE6C);
     return 0;
@@ -1301,7 +1309,7 @@ bool un_803009A4(bool update_scene)
     return false;
 }
 
-int un_803009E0(int arg0)
+bool un_803009E0(enum soundtest_callback_arg0 arg0)
 {
     s32* new_var;
     switch (un_804D6DD8) {
@@ -1323,7 +1331,7 @@ int un_803009E0(int arg0)
     return 0;
 }
 
-int un_80300A88(int arg0)
+bool un_80300A88(enum soundtest_callback_arg0 arg0)
 {
     switch (un_804D6DD8) {
     case 2:
@@ -1465,7 +1473,7 @@ void fn_80300CC8(int arg0)
 #pragma push
 #pragma dont_inline on
 #endif
-int un_80300D78(int arg0)
+bool un_80300D78(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 == 1) {
         lbAudioAx_80024030(1);
@@ -1504,7 +1512,7 @@ void fn_80300DE0(int arg0)
 #pragma push
 #pragma dont_inline on
 #endif
-int un_80300E74(int arg0)
+bool un_80300E74(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 == 1) {
         lbAudioAx_80024030(1);
@@ -1537,7 +1545,7 @@ void fn_80300ED0(int arg0)
 #pragma push
 #pragma dont_inline on
 #endif
-int un_80300F3C(int arg0)
+bool un_80300F3C(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 == 1) {
         lbAudioAx_80024030(1);
@@ -1550,7 +1558,7 @@ int un_80300F3C(int arg0)
 #pragma pop
 #endif
 
-int un_80300F98(int arg0)
+bool un_80300F98(enum soundtest_callback_arg0 arg0)
 {
     s32* temp_r31;
 
@@ -1575,7 +1583,7 @@ bool un_80300FEC(bool update_scene)
     return false;
 }
 
-int un_80301028(int arg0)
+bool un_80301028(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 == 1) {
         struct gmm_x0_528_t* ptr = gmMainLib_8015CDD4();
@@ -1587,7 +1595,7 @@ int un_80301028(int arg0)
     return 0;
 }
 
-int un_80301074(int arg0)
+bool un_80301074(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 == 1) {
         struct gmm_x0_528_t* ptr = gmMainLib_8015CDC8();
@@ -1599,7 +1607,7 @@ int un_80301074(int arg0)
     return 0;
 }
 
-int un_803010C0(int arg0)
+bool un_803010C0(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 == 1) {
         struct gmm_x0_528_t* ptr = gmMainLib_8015CDE0();
@@ -1611,7 +1619,7 @@ int un_803010C0(int arg0)
     return 0;
 }
 
-int fn_8030110C(int arg0)
+bool fn_8030110C(enum soundtest_callback_arg0 arg0)
 {
     switch (arg0) {
     case 0:
@@ -1676,7 +1684,7 @@ void fn_803011EC(int arg0)
 #pragma push
 #pragma dont_inline on
 #endif
-int un_80301280(int arg0)
+bool un_80301280(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 == 1) {
         lbAudioAx_80024030(1);
@@ -1685,7 +1693,7 @@ int un_80301280(int arg0)
     return 0;
 }
 
-int un_803012D4(int arg0)
+bool un_803012D4(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 == 1) {
         lbAudioAx_80024030(1);
@@ -1736,13 +1744,13 @@ bool un_803013B0(bool update_scene)
 #pragma push
 #pragma dont_inline on
 #endif
-int un_803013EC(int arg0)
+bool un_803013EC(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FD58C, un_80301B48);
     return 0;
 }
 
-int un_80301420(int arg0)
+bool un_80301420(enum soundtest_callback_arg0 arg0)
 {
     un_802FFD94(arg0, &un_803FD864, un_80301C80);
     return 0;
@@ -1839,7 +1847,7 @@ bool un_803015F8(bool update_scene)
     return false;
 }
 
-int un_80301634(int arg0)
+bool un_80301634(enum soundtest_callback_arg0 arg0)
 {
     HSD_GObj* gobj;
     void* r31;
@@ -1859,7 +1867,7 @@ int un_80301634(int arg0)
     return 0;
 }
 
-int un_803016D8(int arg0)
+bool un_803016D8(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 != 1) {
         return 0;
@@ -1872,7 +1880,7 @@ int un_803016D8(int arg0)
     return 0;
 }
 
-int un_80301734(int arg0)
+bool un_80301734(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 != 1) {
         return 0;
@@ -1885,7 +1893,7 @@ int un_80301734(int arg0)
     return 0;
 }
 
-int un_8030178C(int arg0)
+bool un_8030178C(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 != 1) {
         return 0;
@@ -1901,7 +1909,7 @@ int un_8030178C(int arg0)
     return 0;
 }
 
-int un_80301800(int arg0)
+bool un_80301800(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 != 1) {
         return 0;
@@ -1911,7 +1919,7 @@ int un_80301800(int arg0)
     return 0;
 }
 
-int un_80301840(int arg0)
+bool un_80301840(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 != 1) {
         return 0;
@@ -1928,7 +1936,7 @@ int un_80301840(int arg0)
     return 0;
 }
 
-int un_803018BC(int arg0)
+bool un_803018BC(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 != 1) {
         return 0;
@@ -1942,7 +1950,7 @@ int un_803018BC(int arg0)
     return 0;
 }
 
-int un_8030191C(int arg0)
+bool un_8030191C(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 != 1) {
         return 0;
@@ -1952,7 +1960,7 @@ int un_8030191C(int arg0)
     return 0;
 }
 
-int un_80301964(int arg0)
+bool un_80301964(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 != 1) {
         return 0;
@@ -1988,7 +1996,7 @@ int un_80301964(int arg0)
     return 0;
 }
 
-int un_80301A64(int arg0)
+bool un_80301A64(enum soundtest_callback_arg0 arg0)
 {
     s32 result;
 
@@ -2010,7 +2018,7 @@ int un_80301A64(int arg0)
     return 0;
 }
 
-int un_80301AD4(int arg0)
+bool un_80301AD4(enum soundtest_callback_arg0 arg0)
 {
     s32 result;
 
@@ -2032,7 +2040,7 @@ int un_80301AD4(int arg0)
     return 0;
 }
 
-int un_80301B48(int arg0)
+bool un_80301B48(enum soundtest_callback_arg0 arg0)
 {
     switch (arg0) {
     case 0:
@@ -2084,7 +2092,7 @@ void un_80301C64(un_80301C64_t* arg0)
     arg0->x4 = 0;
 }
 
-int un_80301C80(int arg0)
+bool un_80301C80(enum soundtest_callback_arg0 arg0)
 {
     switch (arg0) {
     case 0:
@@ -2100,7 +2108,7 @@ int un_80301C80(int arg0)
     return 0;
 }
 
-int un_80301CE0(int arg0)
+bool un_80301CE0(enum soundtest_callback_arg0 arg0)
 {
     switch (arg0) {
     case 6:
@@ -2125,7 +2133,7 @@ bool un_80301D40(bool update_scene)
     return false;
 }
 
-int un_80301D7C(int arg0)
+bool un_80301D7C(enum soundtest_callback_arg0 arg0)
 {
     if (arg0 == 1) {
         sfxForward();

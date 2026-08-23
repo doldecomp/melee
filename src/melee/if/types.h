@@ -179,9 +179,16 @@ struct un_80301C64_t {
     s32 x4;
 };
 
+enum soundtest_callback_arg0 {
+    soundtest_callback_0,
+    soundtest_callback_1,
+};
+
+typedef bool (*soundtest_callback)(enum soundtest_callback_arg0 arg0);
+
 struct un_80304138_objalloc_t_x8 {
     int x0;
-    int (*x4)(int);
+    soundtest_callback x4;
     char* x8;
     char** xC;
     void* x10;
