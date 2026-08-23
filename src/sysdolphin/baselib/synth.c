@@ -122,7 +122,7 @@ static void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
             bucket = &HSD_Synth_804C29E0[id & 0x1F];
             HSD_Synth_804D7730->x0 = (struct SfxLoadStreamNode*) *bucket;
             *bucket = HSD_Synth_804D7730;
-            HSD_Synth_804D7734 += ((u32) nbytes & ~3) >> 2;
+            HSD_Synth_804D7734 += (u32) nbytes >> 2;
             HSD_Synth_804D7730 =
                 (struct SfxLoadStreamNode*) ((u8*) HSD_Synth_804D7730 +
                                              (((n << 6) + 0x10) & ~3));
