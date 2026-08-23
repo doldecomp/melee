@@ -3286,11 +3286,6 @@ static inline struct gm_random_history* gm_GetRandomHistory(void)
     return (struct gm_random_history*) gmMainLib_804D3EE0;
 }
 
-/// @todo The reference calls gm_801BF634 / gm_801BF6A8 / gm_801BF6C8 /
-/// gm_801BF6E8 without sign-extending the argument, which their s8
-/// signatures force here (extsb at each call site). Matching this function
-/// needs int-argument signatures for those setters, but that breaks the
-/// setters' own 100% matches, so the s8 signatures are kept.
 void gm_801BF128(void)
 {
     s32 character_pool[29];
@@ -3312,12 +3307,12 @@ void gm_801BF128(void)
             count += 1;
         }
         c += 1;
-    } while (c < 0x1A);
-    character_pool[count] = 0x1A;
+    } while (c < CKIND_PLAYABLE_COUNT);
+    character_pool[count] = CKIND_PLAYABLE_COUNT;
     for (i = 0; i < count; i++) {
         for (j = i + 1; j < count; j++) {
             if ((s32) gm_GetRandomHistory()
-                    ->character_usage[character_pool[j]] <
+                    ->character_usage[character_pool[j]] >
                 (s32) gm_GetRandomHistory()
                     ->character_usage[character_pool[i]])
             {
@@ -3334,8 +3329,8 @@ void gm_801BF128(void)
             dup = 0;
             for (pick = 0; pick < c; pick++) {
                 if (j == gm_801BF648(pick) ||
-                    (j == 0x12 && gm_801BF648(pick) == 0x13) ||
-                    (j == 0x13 && gm_801BF648(pick) == 0x12))
+                    (j == CKIND_ZELDA && gm_801BF648(pick) == CKIND_SEAK) ||
+                    (j == CKIND_SEAK && gm_801BF648(pick) == CKIND_ZELDA))
                 {
                     dup = 1;
                 }
@@ -3366,7 +3361,7 @@ void gm_801BF128(void)
     stage_pool[count] = 0x1D;
     for (i = 0; i < count; i++) {
         for (j = i + 1; j < count; j++) {
-            if ((s32) gm_GetRandomHistory()->stage_usage[stage_pool[j]] <
+            if ((s32) gm_GetRandomHistory()->stage_usage[stage_pool[j]] >
                 (s32) gm_GetRandomHistory()->stage_usage[stage_pool[i]])
             {
                 a = stage_pool[i];
@@ -3382,7 +3377,7 @@ void gm_801BF128(void)
             cur_id = gm_801BF694();
         } while ((s32) gm_801641CC((u8) pick) == (s32) cur_id);
     }
-    gm_801BF684(gm_801641CC((u8) pick));
+    gm_801BF684((u8)gm_801641CC((u8) pick));
     gm_GetRandomHistory()->stage_usage[pick] += 1;
     gm_801BF6A8(HSD_Randi(4));
 }
@@ -3493,7 +3488,7 @@ u8 gm_801BF694(void)
     return gm_8049E548.unk_C;
 }
 
-void gm_801BF6A8(s8 arg0)
+void gm_801BF6A8(int arg0)
 {
     gm_8049E548.unk_A = arg0;
 }
@@ -3503,7 +3498,7 @@ u8 gm_801BF6B8(void)
     return gm_8049E548.unk_A;
 }
 
-void gm_801BF6C8(s8 arg0)
+void gm_801BF6C8(int arg0)
 {
     gm_8049E548.unk_8 = arg0;
 }
@@ -3513,7 +3508,7 @@ int gm_801BF6D8(void)
     return gm_8049E548.unk_8;
 }
 
-void gm_801BF6E8(s8 arg0)
+void gm_801BF6E8(int arg0)
 {
     gm_8049E548.unk_9 = arg0;
 }

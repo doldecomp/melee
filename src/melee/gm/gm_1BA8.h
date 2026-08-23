@@ -92,11 +92,11 @@
 /* 1BF670 */ u8 gm_801BF670(s32);
 /* 1BF684 */ void gm_801BF684(s16);
 /* 1BF694 */ u8 gm_801BF694(void);
-/* 1BF6A8 */ void gm_801BF6A8(s8);
+/* 1BF6A8 */ void gm_801BF6A8(int);
 /* 1BF6B8 */ u8 gm_801BF6B8(void);
-/* 1BF6C8 */ void gm_801BF6C8(s8);
+/* 1BF6C8 */ void gm_801BF6C8(int);
 /* 1BF6D8 */ int gm_801BF6D8(void);
-/* 1BF6E8 */ void gm_801BF6E8(s8);
+/* 1BF6E8 */ void gm_801BF6E8(int);
 /* 1BF6F8 */ int gm_801BF6F8(void);
 /* 1BF708 */ void gm_801BF708(s8);
 /* 1BF718 */ u8 gm_801BF718(void);
