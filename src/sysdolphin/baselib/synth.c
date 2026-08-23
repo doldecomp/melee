@@ -55,8 +55,7 @@ static void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
         s32 j;
         s32 header_size = hsd_SynthSFXLoadBuf[0];
         u32 data_bytes = header_size - 0x10;
-        s32 src_idx = (data_bytes >> 2) - 1;
-        u32 sum;
+        size_t alloc_size;
         u32 total;
         u32 dnw;
         int bankID;
@@ -64,19 +63,17 @@ static void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
         s32 count;
         s32 base;
 
-        dnw = hsd_SynthSFXLoadBuf[2] * 8;
-        sum = dnw + header_size;
-        (void) sum;
-        total = sum + 0x37;
-        total &= ~0x1F;
-        for (j = src_idx; j >= 0; j--) {
+        alloc_size =
+            hsd_SynthSFXLoadBuf[2] * 8 + sizeof(struct SfxLoadStreamNode);
+        total = OSRoundUp32B(alloc_size + header_size);
+        for (j = (data_bytes >> 2) - 1; j >= 0; j--) {
             ((u32*) HSD_Synth_804D7730)[j + ((total - data_bytes) >> 2)] =
                 ((u32*) HSD_Synth_804D7730)[j];
         }
         dnw = total - header_size;
         for (i = 0; i != 4; i++) {
             ((u32*) HSD_Synth_804D7730)[(dnw >> 2) + i] =
-                hsd_SynthSFXLoadBuf[4 + i];
+                hsd_SynthSFXLoadBuf[4U + i];
         }
         HSD_Synth_804D7734 = (u32*) ((u8*) HSD_Synth_804D7730 + (dnw & ~3));
 
