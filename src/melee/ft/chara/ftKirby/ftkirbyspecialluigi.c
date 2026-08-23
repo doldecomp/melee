@@ -1,7 +1,5 @@
 #include "ftkirby.h"
 
-#include "baselib/forward.h"
-
 #include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_Wait.h"
 #include "ft/fighter.h"
@@ -25,9 +23,6 @@
 #include "lb/lb_00B0.h"
 
 #include <stddef.h>
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/random.h>
 
 static void fn_800F98F4(Fighter_GObj*);
 

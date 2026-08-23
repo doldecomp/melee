@@ -23,8 +23,6 @@
 
 #include <baselib/archive.h>
 #include <baselib/gobj.h>
-#include <baselib/jobj.h>
-#include <baselib/objalloc.h>
 
 static inline void ftPurin_SpecialHi_SetVars(HSD_GObj* gobj)
 {

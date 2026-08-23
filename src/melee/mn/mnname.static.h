@@ -7,8 +7,6 @@
 
 #include "mn/types.h"
 
-#include <baselib/forward.h>
-
 #include <dolphin/mtx.h>
 
 /// Loaded section pointers for one of the name-entry menu archive models

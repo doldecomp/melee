@@ -19,7 +19,6 @@
 #include <baselib/archive.h>
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>
-#include <baselib/jobj.h>
 #include <baselib/lobj.h>
 
 #define PUSH_ATTRS(fp, attributeName)                                         \

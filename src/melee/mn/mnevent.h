@@ -4,7 +4,6 @@
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
-#include <baselib/sislib.h>
 
 typedef struct MnEventData {
     /* 0x00 */ u8 page;

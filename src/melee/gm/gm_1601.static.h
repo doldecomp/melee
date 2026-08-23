@@ -9,8 +9,6 @@
 #include "gm/types.h"
 #include "mn/types.h"
 
-#include <baselib/forward.h>
-
 #include <dolphin/mtx.h>
 
 /// struct ResultsData {

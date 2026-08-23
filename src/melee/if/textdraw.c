@@ -12,12 +12,8 @@
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
 #include <baselib/hsd_3915.h>
-#include <baselib/jobj.h>
 #include <baselib/lobj.h>
-#include <baselib/memory.h>
-#include <baselib/sislib.h>
 #include <baselib/video.h>
 #include <baselib/wobj.h>
 

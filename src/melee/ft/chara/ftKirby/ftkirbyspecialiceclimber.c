@@ -29,7 +29,6 @@
 
 #include <stddef.h>
 #include <baselib/gobj.h>
-#include <baselib/random.h>
 
 /* 1090D4 */ static void fn_801090D4(Fighter_GObj*);
 

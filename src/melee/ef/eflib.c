@@ -32,6 +32,7 @@
 
 #include <math.h>
 #include <stdarg.h>
+#include <baselib/generator.h>
 // externs
 extern u32* ptclref_804D0E5C[65];
 extern EF_DAT_Entry efAsync_DatEntries[51];

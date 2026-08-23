@@ -18,7 +18,6 @@
 #include "ftMars/types.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/debug.h>
 
 void ftMs_SpecialS_Enter(HSD_GObj* gobj)
 {

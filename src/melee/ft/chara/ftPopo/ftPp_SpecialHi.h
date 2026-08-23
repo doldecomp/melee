@@ -2,7 +2,6 @@
 #define GALE01_1211B4
 
 #include "ft/forward.h"
-#include <baselib/forward.h>
 
 /* 1211B4 */ void ftPp_SpecialHi_Enter(Fighter_GObj* gobj);
 /* 12122C */ void ftPp_SpecialAirHi_Enter(Fighter_GObj* gobj);

@@ -26,7 +26,6 @@ typedef struct {
 #include <dolphin/gx.h>
 #include <dolphin/os.h>
 #include <baselib/cobj.h>
-#include <baselib/gobj.h>
 #include <baselib/gobjobject.h>
 #include <baselib/mtx.h>
 #include <baselib/psappsrt.h>

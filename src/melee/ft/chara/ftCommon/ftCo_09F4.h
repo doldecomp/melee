@@ -6,8 +6,6 @@
 
 #include "ft/forward.h"
 
-#include <baselib/gobj.h>
-
 /* 09F4A4 */ UNK_RET ftCo_8009F4A4(UNK_PARAMS);
 /* 09F578 */ void ftCo_8009F578(Fighter* fp);
 /* 09F5AC */ void ftCo_8009F5AC(Fighter*);

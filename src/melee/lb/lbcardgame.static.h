@@ -5,7 +5,6 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/cobj.h>
 #include <melee/sc/types.h>
 
 struct lb_80433318_t {

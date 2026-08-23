@@ -28,7 +28,6 @@
 #include <stddef.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
-#include <baselib/random.h>
 
 char ftKb_Init_803CB510[] = "Other Dead_Proc Existence";
 char ftKb_Init_803CB52C[] = "ftkirbyspecials.c";

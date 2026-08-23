@@ -30,8 +30,6 @@
 
 #include <math.h>
 #include <stddef.h>
-#include <baselib/gobj.h>
-#include <baselib/random.h>
 
 static MotionFlags const ftKb_MF_SpecialHi_Coll =
     Ft_MF_KeepGfx | Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_SkipItemVis |

@@ -10,9 +10,7 @@
 #include <baselib/cobj.h>
 #include <baselib/displayfunc.h>
 #include <baselib/dobj.h>
-#include <baselib/gobj.h>
 #include <baselib/gobjobject.h>
-#include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/psstructs.h>
 #include <baselib/tobj.h>

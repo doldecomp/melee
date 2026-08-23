@@ -1,7 +1,6 @@
 #include "lbheap.static.h"
 
 #include <stddef.h> // offsetof
-#include <baselib/archive.h>
 #include <baselib/debug.h>
 #include <baselib/initialize.h>
 #include <baselib/memory.h>

@@ -8,7 +8,6 @@
 
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
-#include <baselib/texp.h>
 
 /* 00B074 */ bool lb_8000B074(HSD_JObj*);
 /* 00B09C */ bool lb_8000B09C(HSD_JObj*);

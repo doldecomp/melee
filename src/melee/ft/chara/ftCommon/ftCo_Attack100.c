@@ -18,7 +18,6 @@
 
 #include "ftCommon/types.h"
 
-#include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/chara/ftCommon/ftpickupitem.h>

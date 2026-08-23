@@ -8,10 +8,8 @@
 
 #include "vi/vi1201v1.h"
 
-#include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
 #include <melee/db/db.h>

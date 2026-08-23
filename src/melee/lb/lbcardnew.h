@@ -6,8 +6,6 @@
 
 #include <melee/lb/forward.h>
 
-#include <sysdolphin/baselib/gobj.h>
-
 struct CardEntry {
     int file_size;
     int file_flags;

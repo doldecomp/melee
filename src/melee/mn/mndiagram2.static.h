@@ -3,6 +3,8 @@
 
 #include "mndiagram2.h" // IWYU pragma: export
 
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
 #include <melee/mn/types.h>
 
 /* Struct for archive data at mnDiagram_804A0834 */

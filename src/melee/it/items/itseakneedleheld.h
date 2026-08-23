@@ -5,8 +5,6 @@
 
 #include "it/items/types.h"
 
-#include <baselib/forward.h>
-
 #include <dolphin/mtx.h>
 
 /* 2B18B0 */ void it_802B18B0(Item_GObj* gobj);

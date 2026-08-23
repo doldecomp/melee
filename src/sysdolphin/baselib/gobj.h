@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h" // IWYU pragma: export
+#include "baselib/forward.h"
 
 #define HSD_GOBJ_GXLINK_NONE ((u8) 0xFF)
 #define HSD_GOBJ_OBJ_NONE 0xFF
@@ -23,7 +23,7 @@
 #define HSD_GOBJ_CLASS_TEXT 0x11
 #define HSD_GOBJ_CLASS_CAMERA 0x13
 
-struct HSD_GObj {
+typedef struct HSD_GObj {
     /*  +0 */ u16 classifier;
     /*  +2 */ u8 p_link;
     /*  +3 */ u8 gx_link;
@@ -42,7 +42,7 @@ struct HSD_GObj {
     /* +2C */ void* user_data;
     /* +30 */ void (*user_data_remove_func)(void* data);
     /* +34 */ void* x34_unk;
-};
+} HSD_GObj;
 
 typedef void (*GObjFunc)(HSD_Obj*);
 
@@ -61,7 +61,7 @@ typedef struct _HSD_GObjLibInitDataType {
 } HSD_GObjLibInitDataType;
 
 /// @todo Belongs in `melee/` somewhere
-typedef struct _HSD_GObjList {
+typedef struct HSD_GObjList {
     /*  +0 */ HSD_GObj* x0;
     /*  +4 */ HSD_GObj* x4;
     /*  +8 */ HSD_GObj* x8;
