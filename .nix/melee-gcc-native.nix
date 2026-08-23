@@ -27,6 +27,9 @@ stdenv.mkDerivation {
   ];
 
   env.AURORA_SRC = aurora-src;
+  env.CFLAGS = ''
+    -fmax-errors=0
+  '';
 
   __structuredAttrs = true;
 }
