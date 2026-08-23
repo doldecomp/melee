@@ -26,6 +26,9 @@
 /// The underlying type of an @c enum, used as a placeholder
 typedef int enum_t;
 
+/// Signed variant of ::size_t
+typedef signed int ssize_t;
+
 /// A @c void callback with no arguments.
 typedef void (*Event)(void);
 
