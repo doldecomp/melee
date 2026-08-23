@@ -52,11 +52,12 @@ static void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
     s32 i;
 
     if (HSD_Synth_804D7738 == 0) {
+        s32 j;
         s32 header_size = hsd_SynthSFXLoadBuf[0];
         u32 data_bytes = header_size - 0x10;
         s32 src_idx = (data_bytes >> 2) - 1;
+        u32 sum;
         u32 total;
-        s32 j;
         u32 dnw;
         int bankID;
         AXVPB** pp;
@@ -64,9 +65,10 @@ static void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
         s32 base;
 
         dnw = hsd_SynthSFXLoadBuf[2] * 8;
-        total = dnw + header_size;
-        (void) total;
-        total = (total + 0x37) & ~0x1F;
+        sum = dnw + header_size;
+        (void) sum;
+        total = sum + 0x37;
+        total &= ~0x1F;
         for (j = src_idx; j >= 0; j--) {
             ((u32*) HSD_Synth_804D7730)[j + ((total - data_bytes) >> 2)] =
                 ((u32*) HSD_Synth_804D7730)[j];
