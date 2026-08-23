@@ -859,6 +859,8 @@ set(SOURCES
     src/melee/vi/vi.c
 )
 
+add_compile_definitions(TARGET_PC)
+
 add_library(melee STATIC ${SOURCES})
 
 target_include_directories(melee PRIVATE
