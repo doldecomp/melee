@@ -14,6 +14,7 @@
 #include "robj.h"
 #include "shadow.h"
 #include "state.h"
+#include "synth.h"
 #include "tev.h"
 #include "video.h"
 
@@ -21,8 +22,6 @@
 #include <dolphin/gx.h>
 #include <dolphin/os.h>
 #include <dolphin/vi.h>
-
-extern OSHeapHandle HSD_Synth_804D6018;
 
 static void* FrameBuffer[HSD_VI_XFB_MAX];
 static HSD_MemReport memReport;
