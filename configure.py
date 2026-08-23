@@ -1875,7 +1875,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/texpdag.c"),
             Object(Matching, "sysdolphin/baselib/leak.c"),
             Object(Matching, "sysdolphin/baselib/debug.c"),
-            Object(NonMatching, "sysdolphin/baselib/synth.c"),
+            Object(Matching, "sysdolphin/baselib/synth.c"),
             Object(Matching, "sysdolphin/baselib/axdriver.c"),
             Object(Matching, "sysdolphin/baselib/devcom.c"),
             Object(Matching, "sysdolphin/baselib/gobjproc.c"),
