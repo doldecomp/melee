@@ -6886,7 +6886,7 @@ static inline void ftCo_CpuUpdateTargetDistance(Fighter* fp)
     }
 }
 
-static inline void ftCo_CpuUpdateFoodItemTarget(Fighter* fp, bool is_food)
+static inline void ftCo_CpuUpdateFoodItemTarget(Fighter* fp, bool* is_food)
 {
     Item_GObj* item_gobj;
     ItemKind kind;
@@ -6897,15 +6897,15 @@ static inline void ftCo_CpuUpdateFoodItemTarget(Fighter* fp, bool is_food)
     if (item_gobj != NULL) {
         kind = GET_ITEM(item_gobj)->kind;
         if (kind == It_Kind_Heart) {
-            is_food = true;
+            *is_food = true;
         } else if (kind == It_Kind_Tomato) {
-            is_food = true;
+            *is_food = true;
         } else if (kind == It_Kind_Foods) {
-            is_food = true;
+            *is_food = true;
         } else {
-            is_food = false;
+            *is_food = false;
         }
-        if (is_food == false) {
+        if (*is_food == false) {
             data->x4C = NULL;
             return;
         }
@@ -6917,6 +6917,35 @@ static inline void ftCo_CpuUpdateFoodItemTarget(Fighter* fp, bool is_food)
     }
 }
 
+static inline void ftCo_CpuApproachFoodItemTarget(Fighter* fp,
+                                                  struct Fighter_x1A88_t* data,
+                                                  Fighter** target_slot,
+                                                  Vec3* approach_pos)
+{
+    Fighter* nearby_fp;
+    f32 dx;
+    f32 dy;
+    f32 dist;
+
+    if (ftCo_CpuShouldAct(fp)) {
+        if (data->x4C != NULL) {
+            ftCo_800A866C(fp);
+        } else {
+            nearby_fp = *target_slot;
+            if (nearby_fp != NULL && fp->ground_or_air != GA_Air) {
+                dy = fp->cur_pos.y - nearby_fp->cur_pos.y;
+                dx = fp->cur_pos.x - nearby_fp->cur_pos.x;
+                dist = sqrtf(dx * dx + dy * dy);
+                if (!(dist > 50.0) &&
+                    ftCo_800A6700(fp, &nearby_fp->cur_pos, approach_pos) != 0)
+                {
+                    ftCo_800A1F3C(fp, approach_pos->x, approach_pos->y, 5.0F);
+                }
+            }
+        }
+    }
+}
+
 void ftCo_800AF290(Fighter* fp)
 {
     Vec3 sp54;
@@ -6924,10 +6953,6 @@ void ftCo_800AF290(Fighter* fp)
     Vec3 sp30;
 
     Fighter* target;
-    Fighter* nearby_fp;
-    f32 dx;
-    f32 dy;
-    f32 dist;
     s32 cmd;
     s32 redirect;
     bool is_food;
@@ -6972,7 +6997,7 @@ void ftCo_800AF290(Fighter* fp)
 
     target = ftCo_800A4BEC(fp);
     *(target_slot = &fp->x1A88.x44) = target;
-    ftCo_CpuUpdateFoodItemTarget(fp, is_food);
+    ftCo_CpuUpdateFoodItemTarget(fp, &is_food);
     ftCo_CpuUpdateSpecialItemTarget(fp);
     ftCo_CpuUpdateTargetDistance(fp);
     target = data->x44;
@@ -6982,23 +7007,7 @@ void ftCo_800AF290(Fighter* fp)
             return;
         }
     }
-    if (ftCo_CpuShouldAct(fp)) {
-        if (data->x4C != NULL) {
-            ftCo_800A866C(fp);
-        } else {
-            nearby_fp = *target_slot;
-            if (nearby_fp != NULL && fp->ground_or_air != GA_Air) {
-                dy = fp->cur_pos.y - nearby_fp->cur_pos.y;
-                dx = fp->cur_pos.x - nearby_fp->cur_pos.x;
-                dist = sqrtf(dx * dx + dy * dy);
-                if (!(dist > 50.0) &&
-                    ftCo_800A6700(fp, &nearby_fp->cur_pos, &sp30) != 0)
-                {
-                    ftCo_800A1F3C(fp, sp30.x, sp30.y, 5.0F);
-                }
-            }
-        }
-    }
+    ftCo_CpuApproachFoodItemTarget(fp, data, target_slot, &sp30);
     ftCo_800ADE48(fp);
 }
 
@@ -7009,10 +7018,6 @@ void ftCo_800AF78C(Fighter* fp)
     Vec3 approach_pos;
 
     Fighter* target;
-    Fighter* nearby_fp;
-    f32 dx;
-    f32 dy;
-    f32 dist;
     s32 cmd;
     s32 should_escape;
     Fighter** target_slot;
@@ -7057,27 +7062,11 @@ void ftCo_800AF78C(Fighter* fp)
 
     *(target_slot = &fp->x1A88.x44) = ftCo_800A4BEC(fp);
 
-    ftCo_CpuUpdateFoodItemTarget(fp, is_food);
+    ftCo_CpuUpdateFoodItemTarget(fp, &is_food);
     ftCo_CpuUpdateSpecialItemTarget(fp);
 
     ftCo_CpuUpdateTargetDistance(fp);
-    if (ftCo_CpuShouldAct(fp)) {
-        if (data->x4C != NULL) {
-            ftCo_800A866C(fp);
-        } else {
-            nearby_fp = *target_slot;
-            if (nearby_fp != NULL && fp->ground_or_air != GA_Air) {
-                dy = fp->cur_pos.y - nearby_fp->cur_pos.y;
-                dx = fp->cur_pos.x - nearby_fp->cur_pos.x;
-                dist = sqrtf(dx * dx + dy * dy);
-                if (!(dist > 50.0) &&
-                    ftCo_800A6700(fp, &nearby_fp->cur_pos, &approach_pos))
-                {
-                    ftCo_800A1F3C(fp, approach_pos.x, approach_pos.y, 5.0F);
-                }
-            }
-        }
-    }
+    ftCo_CpuApproachFoodItemTarget(fp, data, target_slot, &approach_pos);
     ftCo_800ADE48(fp);
 }
 
