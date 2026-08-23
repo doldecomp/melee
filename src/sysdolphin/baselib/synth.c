@@ -12,7 +12,7 @@
 #include <sysdolphin/baselib/devcom.h>
 
 /* 389334 */ static int HSD_Synth_80389334(int sfx_id, u8 vol, u8 vol2, u8 pan,
-                                           int priority, u8 itd_flag,
+                                           int priority, int itd_flag,
                                            float pitch1, float pitch2,
                                            float mix_main, float mix_auxA,
                                            float mix_auxB);
@@ -532,10 +532,9 @@ static AXPBMIX lbl_80407FB4 = { 0 };
 
 static AXPBSRC HSD_Synth_80407FD8 = { 1, 0, 0, { 0, 0, 0, 0 } };
 
-/// @todo Only the node pointer is materialised a slot early.
 int HSD_Synth_80389334(int sfx_id, u8 vol, u8 vol2, u8 pan, int priority,
-                       u8 itd_flag, float pitch1, float pitch2, float mix_main,
-                       float mix_auxA, float mix_auxB)
+                       int itd_flag, float pitch1, float pitch2,
+                       float mix_main, float mix_auxA, float mix_auxB)
 {
     AXVPB* voices[2] = { NULL, NULL };
     UNUSED u8 stack_pad[8];
@@ -581,8 +580,8 @@ int HSD_Synth_80389334(int sfx_id, u8 vol, u8 vol2, u8 pan, int priority,
             node_idx = voices[0]->index;
 
             sfx_node = &hsd_SynthSFXNodes[node_idx];
-            sfx_node->sfx_id = sfx_id;
             sfx_node->x27 = 1;
+            sfx_node->sfx_id = sfx_id;
             sfx_node->flags = 0;
             sfx_node->voice_count = sfx_entry->unk8;
             sfx_node->xB = itd_flag;
@@ -654,7 +653,7 @@ static inline struct HSD_SynthSFXNode* getNode(int sfx_id)
 }
 
 bool HSD_SynthSFXPlayWithGroup(int sfx_id, u8 vol, u8 vol2, u8 pan,
-                               int priority, u8 itd_flag, int group,
+                               int priority, int itd_flag, int group,
                                f32 pitch1, f32 pitch2, f32 mix_main,
                                f32 mix_auxA, f32 mix_auxB)
 {
