@@ -1,8 +1,9 @@
 #include "synth.h" // IWYU pragma: export
 
 #include <dolphin/ax.h>
+#include <dolphin/os.h>
 
-static int HSD_Synth_804D6018 = -1; // audio heap
+OSHeapHandle HSD_Synth_804D6018 = -1; // audio heap
 
 struct SfxLoadStreamNode;
 

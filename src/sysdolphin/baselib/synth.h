@@ -5,6 +5,8 @@
 
 struct HSD_SynthSFXNode;
 
+/* 4D6018 */ extern OSHeapHandle HSD_Synth_804D6018; ///< audio heap
+
 /* 388330 */ void* HSD_AudioMalloc(size_t);
 /* 38838C */ void HSD_AudioFree(void*);
 /* 38893C */ void HSD_SynthSFXLoadNewProc(void);
