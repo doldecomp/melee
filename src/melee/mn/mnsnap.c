@@ -398,7 +398,9 @@ void mnSnap_80253964(void)
     s32 j;
     s32 page = mnSnap_804A0A10.cur_page;
     s32 base = page * 4;
+#ifdef MUST_MATCH
     page = page;
+#endif
 
     PAD_STACK(8);
 
@@ -660,7 +662,9 @@ void mnSnap_8025409C(s32 dlg_type)
     *p5E = 0;
     /// @remark Matching tactic: the self-assign keeps p5E live so MWCC
     /// re-uses its register instead of rematerializing the address below.
+#ifdef MUST_MATCH
     p5E = p5E;
+#endif
 
     if (dlg_type == 1) {
         left = *p38;

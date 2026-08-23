@@ -419,8 +419,6 @@ void mnDiagram3_Create(int arg0)
     HSD_GObj_SetupProc(gobj, mnDiagram3_Think, 0);
 }
 
-#undef __FILE__
-#define __FILE__ "jobj.h"
 static inline void HSD_JObjSetTranslateX_Fake(HSD_JObj* jobj, f32 x)
 {
     HSD_ASSERT(932, jobj);
@@ -447,8 +445,6 @@ static inline void HSD_JObjSetTranslateZ_Fake(HSD_JObj* jobj, f32 z)
         (HSD_JObjSetMtxDirty)(jobj);
     }
 }
-#undef __FILE__
-#define __FILE__ "mndiagram3.c"
 
 void mnDiagram3_Init(void* arg0)
 {

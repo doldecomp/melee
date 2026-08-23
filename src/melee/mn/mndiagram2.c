@@ -604,8 +604,6 @@ int mnDiagram2_GetStatValue(int is_name_mode, u8 stat_type, u8 entity_idx)
     return is_name_mode;
 }
 
-#undef __FILE__
-#define __FILE__ "jobj.h"
 /// @brief Creates a single stat row entry in the VS Records display.
 /// @param gobj The diagram GObj
 /// @param is_name_mode 0 = Fighter mode, 1 = Name mode
@@ -778,8 +776,6 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
         }
     }
 }
-#undef __FILE__
-#define __FILE__ "mndiagram2.c"
 
 /// @brief Populates all 10 visible stat rows in the diagram.
 /// @param gobj The diagram GObj

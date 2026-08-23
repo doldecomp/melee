@@ -1,19 +1,4 @@
 repos:
-- repo: https://github.com/cpp-linter/cpp-linter-hooks
-  rev: v1.6.0
-  hooks:
-    - id: clang-format
-      types_or: [file]
-      files: \.(c|h|dox)$
-      require_serial: true
-    - id: clang-tidy
-      files: ^src/
-      args:
-      - -p=.
-      - --experimental-custom-checks
-      - --fix
-      - --fix-errors
-      require_serial: true
 - repo: local
   hooks:
     - id: style-check
@@ -23,6 +8,21 @@ repos:
       language: system
       types_or: [c]
       pass_filenames: true
+      require_serial: true
+- repo: https://github.com/cpp-linter/cpp-linter-hooks
+  rev: v1.6.0
+  hooks:
+    - id: clang-tidy
+      files: ^src/
+      args:
+      - -p=.
+      - --experimental-custom-checks
+      - --fix
+      - --fix-errors
+      require_serial: true
+    - id: clang-format
+      types_or: [file]
+      files: \.(c|h|dox)$
       require_serial: true
 - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
   rev: 3.11.1

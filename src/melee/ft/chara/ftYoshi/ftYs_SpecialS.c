@@ -1,8 +1,9 @@
 #include "ftYs_SpecialS.h"
 
+#include "ftyoshi.h"
+
 #include "ftYoshi/ftYs_SpecialS.static.h"
 
-#include "ftYs_Init.h"
 #include "placeholder.h"
 
 #include "baselib/forward.h"

@@ -10,7 +10,7 @@
 #include "it/items/itlinkhookshot.h"
 #include "it/items/itsamusgrapple.h"
 
-#include <melee/ft/chara/ftYoshi/ftYs_Init.h>
+#include <melee/ft/chara/ftYoshi/ftyoshi.h>
 
 typedef struct {
     u8 pad_1A4C[0x1A4C];

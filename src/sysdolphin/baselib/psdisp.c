@@ -2111,8 +2111,11 @@ void psDispParticles(u32 target_link, u32 sw)
 
                     if (psNumCmdList[pp->bank] != NULL &&
                         (form_group = psNumCmdList[pp->bank][pp->texGroup]) !=
-                            NULL &&
-                        form_group->formTable != NULL)
+                            NULL
+#ifdef MUST_MATCH
+                        && form_group->formTable != NULL
+#endif
+                    )
                     {
                         form = form_group->formTable[pp->poseNum];
                     } else {
