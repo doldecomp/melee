@@ -855,7 +855,9 @@ void Exception_ReportCodeline(u16 error, int dsisr, int dar, OSContext* ctx)
 
     OSReport("- UNHANDLED EXCEPTION -------------------------------\n");
     OSReport("DSISR=%08X DAR=%08X\n", dsisr, dar);
+#ifdef MUST_MATCH
     error = error;
+#endif
     OSReport("ERROR %d: ", error);
 
     switch (error) {
@@ -1884,7 +1886,10 @@ s32 hsd_803962A8(void* data)
         case 0x100:
             lbl_8040BC3C.x10 = (s32) lbl_8040BAF0.x10;
             lbl_8040BC3C.x18 = &lbl_8040BAF0;
-            if (&lbl_8040BC3C != NULL) {
+#ifdef MUST_MATCH
+            if (&lbl_8040BC3C != NULL)
+#endif
+            {
                 fn_80394DF4(&lbl_8040BC3C);
                 ((ExcptNode*) &lbl_8040BC3C)->next =
                     (ExcptNode*) hsd_804CF810.xD0;
@@ -1900,7 +1905,10 @@ s32 hsd_803962A8(void* data)
             ps_remove_node(&hsd_804CF810, data);
             return 1;
         case 0x1000:
-            if (&lbl_8040BBE8 != NULL) {
+#ifdef MUST_MATCH
+            if (&lbl_8040BBE8 != NULL)
+#endif
+            {
                 fn_80394DF4((void*) &lbl_8040BBE8);
                 ((ExcptNode*) &lbl_8040BBE8)->next =
                     (ExcptNode*) hsd_804CF810.xD0;
@@ -2075,7 +2083,10 @@ s32 hsd_80396A20(void* data)
             ps_remove_node(&hsd_804CF810, node);
             return 1;
         case 0x1000: {
-            if (&lbl_8040BD74 != NULL) {
+#ifdef MUST_MATCH
+            if (&lbl_8040BD74 != NULL)
+#endif
+            {
                 fn_80394DF4(&lbl_8040BD74);
                 lbl_8040BD74.x0 = hsd_804CF810.xD0;
                 hsd_804CF810.xD0 = &lbl_8040BD74;
@@ -2752,8 +2763,11 @@ void* fn_80397814(void* arg)
         *head = NULL;
     }
 
-    /* Link exception node */
-    if (&lbl_8040B8C4 != NULL) {
+/* Link exception node */
+#ifdef MUST_MATCH
+    if (&lbl_8040B8C4 != NULL)
+#endif
+    {
         ((ExcptNode*) &lbl_8040B8C4)->next = NULL;
         hsd_804CF810.xD0 = &lbl_8040B8C4;
         if (((ExcptNode*) &lbl_8040B8C4)->callback != NULL) {

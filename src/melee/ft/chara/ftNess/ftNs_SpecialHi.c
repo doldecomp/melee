@@ -621,7 +621,11 @@ void ftNs_SpecialHi_Enter(
     return;
 
 block_stuff: {
-    fighter_data3 = fighter_data3 = GET_FIGHTER(gobj);
+    fighter_data3 =
+#ifdef MUST_MATCH
+        fighter_data3 =
+#endif
+            GET_FIGHTER(gobj);
     {
         enum_t msid = fighter_data3->motion_id;
         switch (msid) {

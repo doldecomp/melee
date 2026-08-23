@@ -321,7 +321,11 @@ void _tyFigupon_803153EC(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
     num = arg0;
     temp_r30 = _tyFigupon_804D6EF4;
-    digits_s.s.x0 = digits_s.s.x4 = digits_s.s.x8 = (count = (count = 0));
+    digits_s.s.x0 = digits_s.s.x4 = digits_s.s.x8 = (count =
+#ifdef MUST_MATCH
+                                                         count =
+#endif
+                                                             0);
     do {
         digits_s.digits[count++] = num % 10;
         num /= 10;

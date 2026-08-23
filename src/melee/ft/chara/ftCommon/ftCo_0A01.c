@@ -5742,7 +5742,11 @@ void ftCo_800AC5A0(Fighter* fp)
         float kb_x = fp->x8c_kb_vel.x;
         float kb_y = fp->x8c_kb_vel.y;
         float kb_mag;
-        kb_mag = kb_x * kb_x + (kb_mag = kb_y * kb_y);
+        kb_mag = kb_x * kb_x + (
+#ifdef MUST_MATCH
+                                   kb_mag =
+#endif
+                                       kb_y * kb_y);
         kb_mag = sqrtf(kb_mag);
         if (!ftCo_IsNearlyZero(kb_mag)) {
             float x = kb_x * (1.0F / kb_mag);

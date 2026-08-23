@@ -379,7 +379,11 @@ bool hsdIsDescendantOf(void* info, void* p)
         return false;
     }
 
-    var_r31 = var_r31 = info;
+    var_r31 =
+#ifdef MUST_MATCH
+        var_r31 =
+#endif
+            info;
 
     if (!(HSD_CLASS_INFO(info)->head.flags & 1)) {
         var_r31->head.info_init();

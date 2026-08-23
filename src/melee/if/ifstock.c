@@ -780,7 +780,7 @@ void fn_802FA6C4(HSD_GObj* arg)
                 if (ifStock_804A1774.x10C[1 + i]) {
                     HSD_GObjPLink_80390228(ifStock_804A1774.x10C[1 + i]);
                 }
-                if (p[1] == -2) {
+                if (p[1] == (char) -2) {
                     return;
                 }
                 ifStock_804A1774.x10C[1 + i] = ifStock_802F9F48(i);

@@ -750,9 +750,12 @@ void hsd_8039254C(void)
             }
             switch (item->type) {
             case 0:
+#ifdef MUST_MATCH
                 if ((&item->content) == NULL) {
                     char_count = 0;
-                } else {
+                } else
+#endif
+                {
                     char_count = 0;
                     {
                         s32 j = 0;
@@ -944,7 +947,9 @@ void* fn_80392A3C(void)
         u8* counts = &hsd_804CE3F8[0].content.bytes[0];
         u8* colors = &hsd_804CE3F8[0].content.bytes[4];
         // Self-assign forces colors into r5 and green's stack slot to 0x8.
+#ifdef MUST_MATCH
         colors = colors;
+#endif
         hsd_804CE3F8[0].type = 1;
         *(s32*) counts = 1;
         bar_count = count;

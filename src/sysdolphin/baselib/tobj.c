@@ -1138,7 +1138,11 @@ s32 HSD_TObjAssignResources(HSD_TObj* tobj_top)
 
 static int DifferentTluts(HSD_Tlut* t0, HSD_Tlut* t1)
 {
-    return (t0->lut != t0->lut) || (t0->n_entries != t1->n_entries);
+    return
+#ifdef MUST_MATCH
+        (t0->lut != t0->lut) ||
+#endif
+        (t0->n_entries != t1->n_entries);
 }
 
 void HSD_TObjSetup(HSD_TObj* tobj)

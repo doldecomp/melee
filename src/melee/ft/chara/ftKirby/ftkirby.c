@@ -2767,7 +2767,7 @@ void ftKb_SpecialN_800EEC34(int arg0, int arg1, int arg2)
             }
         }
     }
-    if (ftKb_Init_803CB46C[arg0] != -1) {
+    if (ftKb_Init_803CB46C[arg0] != (char) -1) {
         efAsync_LoadAsync(ftKb_Init_803CB46C[arg0]);
     }
 }

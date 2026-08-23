@@ -354,6 +354,51 @@ cflags_melee = [
 config.linker_version = "GC/1.3.2"
 
 # Native compiler flags
+
+clang_includes = [
+    "src/melee",
+    "src/melee/ft/chara",
+]
+
+clang_system_includes = [
+    "src",
+    "src/MSL",
+    "src/Runtime",
+    "src/sysdolphin",
+    "extern/dolphin/include",
+    "extern/dolphin/src",
+    f"build/{config.version}/include",
+]
+
+clang_warnings = [
+    "all",
+    "extra",
+    "error",
+    "c2x-extensions",
+    "implicit-function-declaration",
+    "implicit-int",
+    "incompatible-pointer-types",
+    "pointer-type-mismatch",
+    "strict-prototypes",
+    "typedef-redefinition",
+]
+
+clang_disabled_warnings = [
+    "bitfield-constant-conversion",
+    "integer-overflow",
+    "missing-braces",
+    "missing-field-initializers",
+    "return-type",
+    "sign-compare",
+    "sometimes-uninitialized",
+    "unused-but-set-variable",
+    "unused-function",
+    "unused-parameter",
+    "unused-value",
+    "unused-variable",
+]
+
+
 clang_flags_base = [
     "-xc",
     "-std=c99",
@@ -362,49 +407,10 @@ clang_flags_base = [
     "--target=ppc32-none-eabi",
     "-DLINT",
     "-fno-short-enums",
-    "-Isrc/melee",
-    "-Isrc/melee/ft/chara",
-    "-isystemsrc",
-    "-isystemsrc/MSL",
-    "-isystemsrc/Runtime",
-    "-isystemsrc/sysdolphin",
-    "-isystemextern/dolphin/include",
-    "-isystemextern/dolphin/src",
-    f"-isystembuild/{config.version}/include",
-    "-Wall",
-    "-Wextra",
-    "-Werror",
-    "-Werror=c2x-extensions",
-    "-Werror=implicit-function-declaration",
-    "-Werror=implicit-int",
-    "-Werror=incompatible-pointer-types",
-    "-Werror=pointer-type-mismatch",
-    "-Werror=strict-prototypes",
-    "-Werror=typedef-redefinition",
-    "-Wno-bitfield-constant-conversion",
-    "-Wno-builtin-macro-redefined",
-    "-Wno-for-loop-analysis",
-    "-Wno-format",
-    "-Wno-fortify-source",
-    "-Wno-gnu-folding-constant",
-    "-Wno-incompatible-library-redeclaration",
-    "-Wno-integer-overflow",
-    "-Wno-missing-braces",
-    "-Wno-missing-field-initializers",
-    "-Wno-return-type",
-    "-Wno-self-assign",
-    "-Wno-sign-compare",
-    "-Wno-sometimes-uninitialized",
-    "-Wno-tautological-bitwise-compare",
-    "-Wno-tautological-compare",
-    "-Wno-undefined-internal",
-    "-Wno-uninitialized",
-    "-Wno-unsequenced",
-    "-Wno-unused-but-set-variable",
-    "-Wno-unused-function",
-    "-Wno-unused-parameter",
-    "-Wno-unused-value",
-    "-Wno-unused-variable",
+    *[f"-I{s}" for s in clang_includes],
+    *[f"-isystem{s}" for s in clang_system_includes],
+    *[f"-W{s}" for s in clang_warnings],
+    *[f"-Wno-{s}" for s in clang_disabled_warnings],
 ]
 
 
@@ -962,7 +968,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftSamus/ftSs_SpecialHi.c"),
             Object(Matching, "melee/ft/chara/ftSamus/ftSs_SpecialLw_1.c"),
             # Yoshi
-            Object(Matching, "melee/ft/chara/ftYoshi/ftYs_Init.c"),
+            Object(Matching, "melee/ft/chara/ftYoshi/ftyoshi.c"),
             Object(Matching, "melee/ft/chara/ftYoshi/ftYs_Guard.c"),
             Object(Matching, "melee/ft/chara/ftYoshi/ftYs_SpecialN.c"),
             Object(Matching, "melee/ft/chara/ftYoshi/ftYs_SpecialHi.c"),
