@@ -15,7 +15,7 @@ struct HSD_SynthSFXGroup {
 
 struct HSD_SynthSFXNode {
     /* 00 */ int x0;
-    /* 04 */ struct HSD_SynthSFXNode* next;
+    /* 04 */ int sfx_id;
     /* 08 */ u8 pad8;
     /* 09 */ u8 flags;
     /* 0A */ u8 voice_count;

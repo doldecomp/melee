@@ -578,8 +578,8 @@ int HSD_Synth_80389334(int sfx_id, u8 vol, u8 vol2, u8 pan, int priority,
             node_idx = voices[0]->index;
 
             sfx_node = &hsd_SynthSFXNodes[node_idx];
+            sfx_node->sfx_id = sfx_id;
             sfx_node->x27 = 1;
-            sfx_node->x0 = sfx_id;
             sfx_node->flags = 0;
             sfx_node->voice_count = sfx_entry->unk8;
             sfx_node->xB = itd_flag;
@@ -1437,7 +1437,7 @@ int HSD_Synth_8038B5AC(int entrynum, u8 vol, u8 vol2, int channel)
     }
     voice_node->x27 = 2;
     voice_node->x0 = HSD_Synth_804D7760 = HSD_Synth_804D7750 + idx;
-    voice_node->next = NULL;
+    voice_node->sfx_id = 0;
     voice_node->flags = 8;
     voice_node->voice_count = 1;
     voice_node->xB = (u8) channel;
