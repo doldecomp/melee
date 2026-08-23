@@ -62,7 +62,8 @@ static void HSD_SynthSFXSampleLoadCallback(int result, int length, void* addr,
         s32 count;
         s32 base;
 
-        total = hsd_SynthSFXLoadBuf[2] * 8 + header_size;
+        total = hsd_SynthSFXLoadBuf[2] * 8;
+        total += header_size;
         total = (total + 0x37) & ~0x1F;
         for (i = src_idx; i >= 0; i--) {
             ((u32*) HSD_Synth_804D7730)[i + ((total - data_bytes) >> 2)] =
