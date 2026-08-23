@@ -204,7 +204,7 @@ struct un_80304138_objalloc_t {
     unsigned char x1;
     DevText* x4;
     struct un_80304138_objalloc_t_x8* x8;
-    int (*xC)(int);
+    soundtest_callback xC;
     HSD_GObj* x10;
     HSD_GObjProc* x14;
     struct un_80304138_objalloc_t* prev;

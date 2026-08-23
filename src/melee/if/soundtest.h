@@ -11,7 +11,6 @@
 
 /* 2FF7DC */ void un_802FF7DC(void);
 /* 2FF884 */ bool un_802FF884(char*);
-/* 2FFCC8 */ bool fn_802FFCC8(void);
 /* 2FFCD0 */ void un_802FFCD0(int, void*);
 /* 2FFD94 */ void un_802FFD94(int a, void* b, soundtest_callback c);
 /* 2FFEE0 */ void un_802FFEE0(s32*);

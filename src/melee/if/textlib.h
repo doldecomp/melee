@@ -7,6 +7,8 @@
 #include "baselib/forward.h"
 #include "if/forward.h"
 
+#include "if/types.h"
+
 #include <dolphin/gx.h>
 
 /* 302834 */ DevText* DevText_Create(char, int, int, int, int, char*);
@@ -29,7 +31,8 @@
 /* 302D0C */ void DevText_PrintInt(DevText* text, int num);
 /* 302D4C */ void DevText_Printf(DevText* text, char* format, ...);
 /* 302DF0 */ struct un_80304138_objalloc_t* un_80302DF0(void);
-/* 302DF8 */ void un_80302DF8(struct un_80304138_objalloc_t* arg0, void* arg1);
+/* 302DF8 */ void un_80302DF8(struct un_80304138_objalloc_t* arg0,
+                              soundtest_callback arg1);
 /* 302E00 */ int un_80302E00(struct un_80304138_objalloc_t_x8*, int);
 /* 302EA4 */ int un_80302EA4(struct un_80304138_objalloc_t_x8*);
 /* 302FFC */ void un_80302FFC(struct un_80304138_objalloc_t*);

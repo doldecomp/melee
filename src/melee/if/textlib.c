@@ -349,7 +349,7 @@ struct un_80304138_objalloc_t* un_80302DF0(void)
     return un_804D6E44;
 }
 
-void un_80302DF8(struct un_80304138_objalloc_t* arg0, void* arg1)
+void un_80302DF8(struct un_80304138_objalloc_t* arg0, soundtest_callback arg1)
 {
     arg0->xC = arg1;
 }
