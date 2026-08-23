@@ -19,7 +19,6 @@
 
 #include "ftCommon/forward.h"
 
-#include "ftCommon/ftCo_AppealS.h"
 #include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_JumpAerial.h"

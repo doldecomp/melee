@@ -9,6 +9,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
@@ -17,7 +18,6 @@
 #include "ft/types.h"
 #include "ftCommon/inlines.h"
 
-#include <math.h>
 #include <dolphin/mtx.h>
 
 /* 09855C */ static void ftCo_800989D4(Fighter_GObj* gobj, FtMotionId msid);

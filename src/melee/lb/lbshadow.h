@@ -1,7 +1,6 @@
 #ifndef MELEE_LB_SHADOW_H
 #define MELEE_LB_SHADOW_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include <melee/lb/forward.h>

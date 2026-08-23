@@ -1,9 +1,6 @@
 #ifndef __GALE01_1DCCFC
 #define __GALE01_1DCCFC
 
-#include <placeholder.h>
-#include <platform.h>
-
 #include "gr/forward.h"
 
 /* 1DD654 */ static void grCorneria_801DD654(Ground_GObj*);

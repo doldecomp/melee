@@ -1,7 +1,5 @@
 #include "ftdevice.h"
 
-#include <placeholder.h>
-
 #include "ft/inlines.h"
 
 #include <dolphin/os/OSError.h>

@@ -2,7 +2,6 @@
 
 #include "ftCo_Damage.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "ft/fighter.h"

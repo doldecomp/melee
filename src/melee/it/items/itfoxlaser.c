@@ -5,6 +5,7 @@
 #include "it/inlines.h"
 #include "it/it_2725.h"
 #include "it/itCharItems.h"
+#include "it/itgroundcoll.h"
 #include "it/types.h"
 
 #include "lb/forward.h"
@@ -13,12 +14,9 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <melee/db/db.h>
-#include <melee/it/it_266F.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
 #include <melee/it/items/inlines.h>
-#include <melee/lb/lbrefract.h>
-#include <melee/lb/lbvector.h>
 
 ItemStateTable it_803F67D0[] = {
     { 0, itFoxlaser_UnkMotion1_Anim, itFoxlaser_UnkMotion1_Phys,

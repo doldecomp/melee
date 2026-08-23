@@ -2,6 +2,7 @@
 Checks: >
   -*,
   custom-ban-primitive-c-types,
+  misc-include-cleaner,
   portability-restrict-system-includes,
   readability-duplicate-include,
   readability-non-const-parameter,
@@ -14,6 +15,19 @@ CheckOptions:
     value: '*,-MSL/*'
   - key: readability-redundant-parentheses.AllowedDecls
     value: '::HSD_JObjSetMtxDirty'
+  - key: misc-include-cleaner.MissingIncludes
+    # TODO: Can probably be enabled once
+    #       IgnoreHeaders are resolved.
+    value: false
+  - key: misc-include-cleaner.IgnoreHeaders
+    # TODO: Can be resolved by properly defining
+    #       libc symbols and fixing forward-
+    #       declared typedefs
+    value: >-
+      extern/.*;
+      MetroTRK/.*;
+      MSL/.*;
+      sysdolphin/.*;
 CustomChecks:
   - Name: ban-primitive-c-types
     Query: |

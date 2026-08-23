@@ -4,7 +4,6 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "ft/forward.h"
 #include "ftLink/forward.h" // IWYU pragma: export
 
 #include "ftMars/types.h"

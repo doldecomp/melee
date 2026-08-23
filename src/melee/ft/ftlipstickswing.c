@@ -8,7 +8,6 @@
 #include "it/forward.h"
 
 #include "it/items/itlipstick.h"
-#include "it/items/itstarrod.h"
 #include "lb/lb_00B0.h"
 
 #include <baselib/gobj.h>

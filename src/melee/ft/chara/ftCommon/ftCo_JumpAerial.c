@@ -7,6 +7,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0C8C.h"
@@ -29,8 +30,6 @@
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_SpecialAir.h"
 #include "ftPeach/ftPe_Float.h"
-
-#include <math.h>
 
 /* 0CC3C4 */ static void ftYs_JumpAerial_Anim_Cb(Fighter_GObj* gobj);
 /* 0CC654 */ static void ftNs_JumpAerial_Phys_Cb(Fighter_GObj* gobj);

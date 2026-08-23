@@ -5,7 +5,6 @@
 
 #include "ft/types.h"
 
-#include "ftYoshi/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>

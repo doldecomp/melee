@@ -1,7 +1,6 @@
 #ifndef MELEE_MN_MAIN_H
 #define MELEE_MN_MAIN_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "gm/forward.h"

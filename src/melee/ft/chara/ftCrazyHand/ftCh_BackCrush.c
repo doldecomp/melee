@@ -1,6 +1,5 @@
 #include "ftCh_BackCrush.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "baselib/forward.h"

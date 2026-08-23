@@ -2,7 +2,6 @@
 #define MELEE_GM_LIGHTNING_H
 
 #include <melee/gm/forward.h>
-#include <melee/mn/forward.h>
 
 /* 1BA704 */ void gm_801BA704(GameScene*);
 /* 1BA730 */ void gm_801BA730(GameScene*);

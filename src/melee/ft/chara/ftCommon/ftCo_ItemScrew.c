@@ -19,38 +19,8 @@
 #include "ftCommon/ftCo_Jump.h"
 #include "ftCommon/ftCo_JumpAerial.h"
 
-#include <melee/cm/camera.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftCommon/ftCo_Attack1.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackHi3.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackHi4.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackLw3.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackLw4.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackS3.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackS4.h>
-#include <melee/ft/chara/ftCommon/ftCo_DamageIce.h>
-#include <melee/ft/chara/ftCommon/ftCo_Escape.h>
 #include <melee/ft/chara/ftCommon/ftCo_FallSpecial.h>
-#include <melee/ft/chara/ftCommon/ftCo_Guard.h>
-#include <melee/ft/chara/ftCommon/ftCo_Lift.h>
-#include <melee/ft/chara/ftCommon/ftCo_SpecialS.h>
-#include <melee/ft/ft_0877.h>
-#include <melee/ft/ft_0881.h>
-#include <melee/ft/ft_0CDD.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftchangeparam.h>
-#include <melee/ft/ftlib.h>
-#include <melee/ft/ftmaterial.h>
-#include <melee/ft/ftmetal.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gr/stage.h>
-#include <melee/it/item.h>
-#include <melee/it/items/it_2E5A.h>
-#include <melee/it/items/itkinoko.h>
-#include <melee/pl/pl_040D.h>
-#include <melee/pl/player.h>
-#include <melee/pl/plbonuslib.h>
-#
+
 void ftCo_ItemScrew_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

@@ -4,16 +4,15 @@
 
 #include "ef/efasync.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
-#include "it/it_3F14.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 
 #include "it/items/forward.h"
 
+#include "it/itgroundcoll.h"
 #include "it/itmaplib.h"
 #include "it/types.h"
 #include "mp/mpcoll.h"
@@ -21,9 +20,7 @@
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
-#include <melee/gr/ground.h>
 #include <melee/it/item.h>
-#include <melee/lb/lb_00B0.h>
 
 ItemStateTable it_803F6488[] = {
     { -1, itMball_Motion0_Anim, itMball_Motion0_Phys, itMball_Motion0_Coll },

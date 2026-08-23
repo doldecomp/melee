@@ -1,7 +1,6 @@
 #ifndef _SOUNDTEST_H_
 #define _SOUNDTEST_H_
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "if/forward.h"

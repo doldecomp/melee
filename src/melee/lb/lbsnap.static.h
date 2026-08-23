@@ -3,7 +3,6 @@
 
 #include "lbsnap.h" // IWYU pragma: export
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "it/types.h"

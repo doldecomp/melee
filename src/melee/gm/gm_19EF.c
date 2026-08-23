@@ -7,7 +7,6 @@
 #include "gm_unsplit.h"
 
 #include "dolphin/pad.h"
-#include "it/inlines.h"
 #include "mn/inlines.h"
 
 #include <sysdolphin/baselib/archive.h>
@@ -27,7 +26,6 @@
 #include <melee/lb/lbspdisplay.h>
 #include <melee/sc/types.h>
 #include <melee/ty/toy.h>
-#include <melee/ty/tylist.h>
 
 static HSD_Archive* lbl_804D6698;
 static SceneDesc* lbl_804D669C;

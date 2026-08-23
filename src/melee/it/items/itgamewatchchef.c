@@ -5,13 +5,12 @@
 
 #include "db/db.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/itzako.h"
 
-#include <math.h>
 #include <baselib/jobj.h>
 
 ItemStateTable it_803F79E0[] = {

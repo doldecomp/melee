@@ -1,9 +1,6 @@
 #ifndef GALE01_31E6CC
 #define GALE01_31E6CC
 
-#include <placeholder.h>
-
-#include "sc/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/gx/GXStruct.h>

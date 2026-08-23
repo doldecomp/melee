@@ -3,7 +3,6 @@
 
 #include <placeholder.h>
 
-#include <melee/gm/forward.h>
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 

@@ -1,6 +1,5 @@
 #include "itclimbersblizzard.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "baselib/random.h"
@@ -9,7 +8,6 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itCharItems.h"
@@ -17,6 +15,7 @@
 
 #include "it/items/forward.h"
 
+#include "it/itgroundcoll.h"
 #include "it/itmaplib.h"
 
 #include <math.h>

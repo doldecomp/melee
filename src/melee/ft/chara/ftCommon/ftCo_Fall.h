@@ -1,8 +1,6 @@
 #ifndef GALE01_0CC730
 #define GALE01_0CC730
 
-#include <placeholder.h>
-
 #include "ft/forward.h"
 
 /* 0CC730 */ void ftCo_Fall_Enter(Fighter_GObj* gobj);

@@ -1,8 +1,6 @@
 #ifndef MELEE_VI_0502_H
 #define MELEE_VI_0502_H
 
-#include <placeholder.h>
-
 #include "ft/forward.h"
 #include "vi/forward.h"
 #include <baselib/forward.h>

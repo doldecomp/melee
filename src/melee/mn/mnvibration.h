@@ -1,7 +1,6 @@
 #ifndef MELEE_MN_VIBRATION_H
 #define MELEE_MN_VIBRATION_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include <baselib/forward.h>

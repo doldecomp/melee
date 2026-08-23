@@ -3,16 +3,13 @@
 #include "inlines.h"
 
 #include "baselib/random.h"
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "gr/stage.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/item.h"
-#include "it/itmaplib.h"
 
 /* 2D3F6C */ static void it_802D3F6C(Item_GObj* gobj);
 /* 2D3FA0 */ static void it_802D3FA0(Item_GObj* gobj);

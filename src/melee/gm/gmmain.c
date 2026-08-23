@@ -1,6 +1,4 @@
-#include "gm_1A36.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "db/db.h"

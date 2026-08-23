@@ -1,7 +1,5 @@
 #include <platform.h>
 
-#include <melee/gm/types.h>
-
 static struct {
     u8 x0;
     u8 x1;

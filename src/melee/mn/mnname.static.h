@@ -3,8 +3,6 @@
 
 #include "mnname.h" // IWYU pragma: export
 
-#include <placeholder.h>
-
 #include "mn/forward.h"
 
 #include "mn/types.h"

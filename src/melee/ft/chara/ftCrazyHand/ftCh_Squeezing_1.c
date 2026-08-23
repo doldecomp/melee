@@ -1,6 +1,5 @@
 #include "ftCh_Squeezing_1.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "baselib/forward.h"

@@ -1,8 +1,6 @@
 #ifndef MELEE_EF_INLINES_H
 #define MELEE_EF_INLINES_H
 
-#include <platform.h>
-
 #include <baselib/forward.h>
 
 #include <baselib/gobj.h>

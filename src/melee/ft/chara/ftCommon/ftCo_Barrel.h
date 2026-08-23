@@ -1,12 +1,7 @@
 #ifndef GALE01_0C9058
 #define GALE01_0C9058
 
-#include <placeholder.h>
-
-#include "ftCommon/forward.h"
 #include "it/forward.h"
-
-#include "lb/lbcollision.h"
 
 /* 0C9058 */ void ftCo_Barrel_Death2_Cb(Fighter_GObj* gobj);
 /* 0C9078 */ void ftCo_Barrel_Enter(Fighter_GObj* gobj, Item_GObj*);

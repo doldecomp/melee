@@ -1,9 +1,7 @@
 #ifndef GALE01_0CD140
 #define GALE01_0CD140
 
-#include <placeholder.h>
-
-#include "ftCommon/forward.h"
+#include "ft/forward.h"
 
 /* 0CD140 */ void ftCo_800CD140(Fighter_GObj*, int, int, int, float);
 /* 0CD1BC */ void ftCo_800CD1BC(Fighter_GObj*);

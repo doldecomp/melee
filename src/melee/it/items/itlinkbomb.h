@@ -5,8 +5,6 @@
 
 #include "it/forward.h"
 
-#include "it/inlines.h"
-#include "it/item.h"
 #include "it/items/types.h"
 
 /* 29D968 */ void it_8029D968(Item_GObj*);

@@ -11,7 +11,6 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 
-#include "ftCommon/forward.h"
 #include "ftPopo/forward.h"
 
 #include "ftPopo/ftPp_Init.h"

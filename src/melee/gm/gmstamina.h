@@ -4,7 +4,6 @@
 #include <platform.h>
 
 #include <melee/gm/forward.h>
-#include <melee/mn/forward.h>
 
 /* 1B91C8 */ void gm_801B91C8(GameScene*);
 /* 1B922C */ void gm_801B922C(GameScene*);

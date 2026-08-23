@@ -1,7 +1,5 @@
 #include "spline.h"
 
-#include <placeholder.h>
-
 #include "forward.h"
 
 #include <math.h>

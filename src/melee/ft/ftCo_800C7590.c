@@ -4,8 +4,6 @@
 #include "ftCo_800C78B0.h"
 #include "ftcommon.h"
 
-#include <placeholder.h>
-
 #include "cm/camera.h"
 #include "ft/fighter.h"
 #include "ft/types.h"

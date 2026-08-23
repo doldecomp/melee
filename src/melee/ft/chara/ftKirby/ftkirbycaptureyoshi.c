@@ -1,7 +1,5 @@
 #include "ftkirbycaptureyoshi.h"
 
-#include <placeholder.h>
-
 #include "ft/chara/ftCommon/ftCo_Lift.h"
 #include "ft/chara/ftCommon/ftCo_Throw.h"
 #include "ft/fighter.h"

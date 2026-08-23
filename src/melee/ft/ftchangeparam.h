@@ -1,8 +1,6 @@
 #ifndef GALE01_0CF138
 #define GALE01_0CF138
 
-#include <placeholder.h>
-
 #include "ft/forward.h"
 
 #include "ft/types.h"

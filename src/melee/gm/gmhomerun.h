@@ -1,10 +1,7 @@
 #ifndef MELEE_GM_HOMERUN_H
 #define MELEE_GM_HOMERUN_H
 
-#include <placeholder.h>
-
 #include <melee/gm/forward.h>
-#include <melee/mn/forward.h>
 
 /* 1B98E8 */ void gm_801B98E8(GameScene*);
 /* 1B999C */ void gm_801B999C(GameScene*);

@@ -6,8 +6,6 @@
  * rather than hoisting a shared base pointer.
  */
 
-#include <platform.h>
-
 /// __ln_F[n] = ln(1.0 + n/128) for n = 0 .. 128
 const float __ln_F[0x81] = {
     0.0f,         0.0077821403f, 0.015504186f, 0.023167059f, 0.030771658f,

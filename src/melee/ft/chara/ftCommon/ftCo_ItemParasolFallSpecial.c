@@ -6,25 +6,14 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
 
-#include "ftCommon/ftCo_AirCatch.h"
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_AttackAir.h"
-#include "ftCommon/ftCo_DamageFall.h"
-#include "ftCommon/ftCo_DamageIce.h"
-#include "ftCommon/ftCo_EscapeAir.h"
-#include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
-#include "ftCommon/ftCo_ItemParasolOpen.h"
-#include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_JumpAerial.h"
 #include "ftCommon/ftCo_Landing.h"
-#include "ftCommon/ftCo_SpecialAir.h"
 #include "ftCommon/inlines.h"
 
 #include "ftPeach/forward.h"

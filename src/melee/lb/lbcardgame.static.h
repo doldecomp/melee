@@ -3,7 +3,6 @@
 
 #include "lbcardgame.h" // IWYU pragma: export
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include <dolphin/os/OSAlarm.h>

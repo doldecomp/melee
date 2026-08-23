@@ -11,6 +11,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
@@ -33,7 +34,6 @@
 #include "pl/plbonuslib.h"
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 

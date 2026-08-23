@@ -1,7 +1,6 @@
 #ifndef GALE01_03D514
 #define GALE01_03D514
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "it/forward.h"

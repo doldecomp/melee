@@ -1,8 +1,6 @@
 #ifndef GALE01_12EB48
 #define GALE01_12EB48
 
-#include <placeholder.h>
-
 #include "ft/forward.h"
 #include <baselib/forward.h>
 
