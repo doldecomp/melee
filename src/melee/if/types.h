@@ -182,6 +182,7 @@ struct un_80301C64_t {
 enum soundtest_callback_arg0 {
     soundtest_callback_0,
     soundtest_callback_1,
+    soundtest_callback_6 = 6,
 };
 
 typedef bool (*soundtest_callback)(enum soundtest_callback_arg0 arg0);
