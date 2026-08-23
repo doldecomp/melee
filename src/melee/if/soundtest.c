@@ -1,7 +1,5 @@
 #include "soundtest.h"
 
-#include "placeholder.h"
-
 #include "db/db.h"
 #include "db/dbsound.h"
 
@@ -31,6 +29,51 @@
 #include <baselib/memory.h>
 #include <baselib/sobjlib.h>
 #include <baselib/tobj.h>
+
+/* 2FF88C */ static int un_802FF88C(int);
+/* 2FF934 */ static int un_802FF934(int);
+/* 2FF958 */ static int un_802FF958(int);
+/* 2FF99C */ static int un_802FF99C(int);
+/* 2FF9DC */ static int un_802FF9DC(int);
+/* 2FFB58 */ static int un_802FFB58(int);
+/* 2FFBAC */ static int un_802FFBAC(int);
+/* 2FFC30 */ static int un_802FFC30(int);
+/* 300218 */ static int un_80300218(int);
+/* 300248 */ static int un_80300248(int);
+/* 300338 */ static int un_80300338(int);
+/* 300378 */ static int un_80300378(int);
+/* 3003C4 */ static int un_803003C4(int);
+/* 300410 */ static int un_80300410(int);
+/* 300480 */ static int un_80300480(int);
+/* 3004B4 */ static int un_803004B4(int);
+/* 3004E8 */ static int un_803004E8(int);
+/* 30051C */ static int un_8030051C(int);
+/* 300550 */ static int un_80300550(int);
+/* 300584 */ static int un_80300584(int);
+/* 3005B8 */ static int un_803005B8(int);
+/* 3005EC */ static int un_803005EC(int);
+/* 300620 */ static int un_80300620(int);
+/* 300654 */ static int un_80300654(int);
+/* 300688 */ static int un_80300688(int);
+/* 3006BC */ static int un_803006BC(int);
+/* 3006F0 */ static int un_803006F0(int);
+/* 300724 */ static int un_80300724(int);
+/* 300758 */ static int un_80300758(int);
+/* 300790 */ static int un_80300790(int);
+/* 3007C8 */ static int un_803007C8(int);
+/* 3007FC */ static int un_803007FC(int);
+/* 300830 */ static int un_80300830(int);
+/* 300864 */ static int un_80300864(int);
+/* 300898 */ static int un_80300898(int);
+/* 3008CC */ static int un_803008CC(int);
+/* 300900 */ static int un_80300900(int);
+/* 300934 */ static int un_80300934(int);
+/* 3009E0 */ static int un_803009E0(int);
+/* 300A88 */ static int un_80300A88(int);
+/* 300F98 */ static int un_80300F98(int);
+/* 301634 */ static int un_80301634(int);
+/* 301C80 */ static int un_80301C80(int);
+/* 301CE0 */ static int un_80301CE0(int);
 
 /// .bss (extern)
 /* 45A6C0 */ extern u8 gmMainLib_8045A6C0[];
@@ -147,10 +190,6 @@ struct un_803FA258_t {
     /* 0x188 */ int x188;
     /* 0x18C */ int x18C;
 };
-
-/// The menu callbacks in this file use assorted prototypes; the table
-/// stores them all through one signature.
-#define ACT(fn) ((int (*)(int))(Event) fn)
 
 /// .data (defined at the end of this file, so that the functions above
 /// address each block through its own symbol).
@@ -631,7 +670,7 @@ struct un_803FA258_t {
 /* 804D5978 */ static char un_804D5978[] = "<Init>\n";
 /* 804D5980 */ static char un_804D5980[] = "<Save>\n";
 /* 804D5988 */ static char un_804D5988[] = "<Load>\n";
-/* 804D5990 */ static HSD_SObjDesc un_804D5990 = { &un_803FD274, NULL };
+/* 804D5990 */ HSD_SObjDesc un_804D5990 = { &un_803FD274, NULL };
 /* 804D5998 */ static char un_804D5998[] = "Init";
 /* 804D59A0 */ static char un_804D59A0[] = "Format";
 /* 804D59A8 */ static char un_804D59A8[] = "Create";
@@ -689,12 +728,12 @@ void un_802FF7DC(void)
     data->x188 = syms[7];
 }
 
-bool un_802FF884(char* unused)
+bool un_802FF884(char* arg0)
 {
     return false;
 }
 
-int un_802FF88C(void)
+int un_802FF88C(int arg0)
 {
     un_804D5858 = 0x7F;
     un_804D6DB8 = 0;
@@ -720,12 +759,12 @@ int un_802FF88C(void)
     return 1;
 }
 
-void un_802FF934(void)
+int un_802FF934(int arg0)
 {
     lbAudioAx_80024C08(un_804D6DBC);
 }
 
-int un_802FF958(void)
+int un_802FF958(int arg0)
 {
     u8 tmp = un_804D5854;
     lbAudioAx_800245F4(tmp);
@@ -744,7 +783,7 @@ int un_802FF99C(int arg0)
     return 0;
 }
 
-s32 un_802FF9DC(void)
+int un_802FF9DC(int arg0)
 {
     s32 i;
     s32 total;
@@ -790,7 +829,7 @@ int un_802FFBAC(int arg0)
     return 0;
 }
 
-bool un_802FFC30(void)
+int un_802FFC30(int arg0)
 {
     lbAudioAx_800236DC();
     lbAudioAx_800245D4(0x7F);
@@ -974,7 +1013,7 @@ bool un_803001DC(bool update_scene)
     return false;
 }
 
-int un_80300218(void)
+int un_80300218(int arg0)
 {
     lbLang_SetSavedLanguage(un_803FA258.x0);
     return 0;
@@ -1011,7 +1050,7 @@ bool un_803002FC(bool update_scene)
     return false;
 }
 
-s32 un_80300338(void)
+int un_80300338(int arg0)
 {
     struct un_803FA128_t* data = (struct un_803FA128_t*) un_803FA128;
     u8* src;
@@ -1026,7 +1065,7 @@ s32 un_80300338(void)
     return 0;
 }
 
-s32 un_80300378(void)
+int un_80300378(int arg0)
 {
     struct un_803FA128_t* data = (struct un_803FA128_t*) un_803FA128;
     u8* ptr;
@@ -1044,7 +1083,7 @@ s32 un_80300378(void)
     return 0;
 }
 
-s32 un_803003C4(void)
+int un_803003C4(int arg0)
 {
     struct un_803FA128_t* data = (struct un_803FA128_t*) un_803FA128;
     u8* ptr;
@@ -1062,7 +1101,7 @@ s32 un_803003C4(void)
     return 0;
 }
 
-s32 un_80300410(s32 arg0)
+int un_80300410(int arg0)
 {
     struct un_803FA128_t* data = (struct un_803FA128_t*) un_803FA128;
 
@@ -1171,14 +1210,14 @@ int un_80300724(int arg0)
 #pragma pop
 #endif
 
-void un_80300758(int arg0)
+int un_80300758(int arg0)
 {
     if (arg0 == 1) {
         un_802FFCD0(4, (u8*) &un_803FA258 + 0x10);
     }
 }
 
-void un_80300790(int arg0)
+int un_80300790(int arg0)
 {
     if (arg0 == 1) {
         un_802FFCD0(4, (u8*) &un_803FA258 + 0x24);
@@ -1262,7 +1301,7 @@ bool un_803009A4(bool update_scene)
     return false;
 }
 
-s32 un_803009E0(void)
+int un_803009E0(int arg0)
 {
     s32* new_var;
     switch (un_804D6DD8) {
@@ -1284,7 +1323,7 @@ s32 un_803009E0(void)
     return 0;
 }
 
-int un_80300A88(void)
+int un_80300A88(int arg0)
 {
     switch (un_804D6DD8) {
     case 2:
@@ -1511,7 +1550,7 @@ int un_80300F3C(int arg0)
 #pragma pop
 #endif
 
-s32 un_80300F98(s32 arg0)
+int un_80300F98(int arg0)
 {
     s32* temp_r31;
 
@@ -1800,12 +1839,11 @@ bool un_803015F8(bool update_scene)
     return false;
 }
 
-int un_80301634(void)
+int un_80301634(int arg0)
 {
     HSD_GObj* gobj;
     void* r31;
     void* r3;
-    PAD_STACK(8);
 
     OSReport(un_804D5978);
     lb_8001C550();
@@ -2062,7 +2100,7 @@ int un_80301C80(int arg0)
     return 0;
 }
 
-void un_80301CE0(int arg0)
+int un_80301CE0(int arg0)
 {
     switch (arg0) {
     case 6:
@@ -2133,27 +2171,24 @@ bool un_80301E08(bool update_scene)
 /* 803F9F80 */ char un_803F9F80[] = "FGM Name";
 /* 803F9F8C */ char un_803F9F8C[] = "BGM Name";
 /* 803F9F98 */ char un_803F9F98[] = "-- EXIT --";
+
 /* 803F9FA4 */ struct SoundTestMenuData un_803F9FA4 = {
     {
-        { 0, ACT(un_802FF88C), un_803F9F28, NULL, NULL, 0.0f, 0.0f, 0.0f },
-        { 2, ACT(un_802FF934), un_803F9F38, NULL, &un_804D6DBC, 0.0f, 0.0f,
-          0.0f },
-        { 3, ACT(un_802FF958), un_803F9F44, NULL, &un_804D5850, 0.0f, 127.0f,
+        { 0, un_802FF88C, un_803F9F28, NULL, NULL, 0.0f, 0.0f, 0.0f },
+        { 2, un_802FF934, un_803F9F38, NULL, &un_804D6DBC, 0.0f, 0.0f, 0.0f },
+        { 3, un_802FF958, un_803F9F44, NULL, &un_804D5850, 0.0f, 127.0f,
           1.0f },
-        { 3, ACT(un_802FF958), un_803F9F50, NULL, &un_804D5854, 0.0f, 127.0f,
+        { 3, un_802FF958, un_803F9F50, NULL, &un_804D5854, 0.0f, 127.0f,
           1.0f },
-        { 3, ACT(un_802FF958), un_803F9F5C, NULL, &un_804D5858, 0.0f, 127.0f,
+        { 3, un_802FF958, un_803F9F5C, NULL, &un_804D5858, 0.0f, 127.0f,
           1.0f },
-        { 3, ACT(un_802FF99C), un_803F9F68, NULL, &un_804D6DAC, 0.0f, 127.0f,
+        { 3, un_802FF99C, un_803F9F68, NULL, &un_804D6DAC, 0.0f, 127.0f,
           1.0f },
-        { 2, ACT(un_802FF9DC), un_803F9F74, NULL, &un_804D6DB0, 0.0f, 55.0f,
-          1.0f },
-        { 2, ACT(un_802FFB58), un_803F9F80, NULL, &un_804D6DB4, 0.0f, 0.0f,
-          0.0f },
-        { 2, ACT(un_802FFBAC), un_803F9F8C, NULL, &un_804D6DB8, 0.0f, 98.0f,
-          1.0f },
-        { 1, ACT(un_802FFC6C), un_803F9F98, NULL, NULL, 0.0f, 0.0f, 0.0f },
-        { 9, ACT(un_802FFC30), NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
+        { 2, un_802FF9DC, un_803F9F74, NULL, &un_804D6DB0, 0.0f, 55.0f, 1.0f },
+        { 2, un_802FFB58, un_803F9F80, NULL, &un_804D6DB4, 0.0f, 0.0f, 0.0f },
+        { 2, un_802FFBAC, un_803F9F8C, NULL, &un_804D6DB8, 0.0f, 98.0f, 1.0f },
+        { 1, un_802FFC6C, un_803F9F98, NULL, NULL, 0.0f, 0.0f, 0.0f },
+        { 9, un_802FFC30, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
     },
     "SmSt.dat",
     "smSoundTestLoadData",
@@ -2232,34 +2267,28 @@ bool un_80301E08(bool update_scene)
 /* 803FA4CC */ char un_803FA4CC[] = "Mode Team Test >";
 /* 803FA4E0 */ struct un_80304138_objalloc_t_x8 un_803FA4E0[11] = {
     { 0, NULL, db_build_timestamp, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_803001DC), un_803FA454, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80301420), un_803FA468, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 2, ACT(un_80300218), un_803FA474, un_804D5888, &un_803FA258.x0, 0.0f,
-      2.0f, 0.0f },
-    { 2, ACT(un_80300248), un_803FA480, un_804D5880, &un_803FA258.x4[0], 0.0f,
-      2.0f, 0.0f },
+    { 1, un_803001DC, un_803FA454, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80301420, un_803FA468, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 2, un_80300218, un_803FA474, un_804D5888, &un_803FA258.x0, 0.0f, 2.0f,
+      0.0f },
+    { 2, un_80300248, un_803FA480, un_804D5880, &un_803FA258.x4[0], 0.0f, 2.0f,
+      0.0f },
     { 2, NULL, un_803FA48C, un_803FA440, &DbLevel, 0.0f, 5.0f, 0.0f },
     { 3, NULL, un_803FA498, NULL, &db_804D4AF8, 0.0f, 1.0f, 1.0f },
     { 3, NULL, un_803FA4A8, NULL, &db_804D6B88, 0.0f, 1.0f, 1.0f },
-    { 1, ACT(un_80300290), un_803FA4B8, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_803002FC), un_803FA4CC, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80300290, un_803FA4B8, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_803002FC, un_803FA4CC, NULL, NULL, 0.0f, 0.0f, 0.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
 };
 /* 803FA640 */ char un_803FA640[] = "< Global Data Edit >";
 /* 803FA658 */ struct un_80304138_objalloc_t_x8 un_803FA658[8] = {
     { 0, NULL, un_803FA640, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 6, ACT(un_803003C4), un_804D58A0, NULL, &un_803FA258.xF0, 0.0f, 0.0f,
-      4.0f },
-    { 7, ACT(un_80300410), un_804D58A8, NULL, &un_803FA258.xF4, 0.0f, 0.0f,
-      1.0f },
-    { 6, ACT(un_80300378), un_804D58B0, NULL, &un_803FA258.xF0, 0.0f, 0.0f,
-      2.0f },
-    { 6, ACT(un_80300410), un_804D58B8, NULL, &un_803FA258.xF4, 0.0f, 0.0f,
-      1.0f },
-    { 6, ACT(un_80300338), un_804D58C0, NULL, &un_803FA258.xF0, 0.0f, 0.0f,
-      1.0f },
-    { 5, ACT(un_80300410), un_804D58C8, NULL, &un_803FA258.xF4, 0.0f, 0.0f,
-      1.0f },
+    { 6, un_803003C4, un_804D58A0, NULL, &un_803FA258.xF0, 0.0f, 0.0f, 4.0f },
+    { 7, un_80300410, un_804D58A8, NULL, &un_803FA258.xF4, 0.0f, 0.0f, 1.0f },
+    { 6, un_80300378, un_804D58B0, NULL, &un_803FA258.xF0, 0.0f, 0.0f, 2.0f },
+    { 6, un_80300410, un_804D58B8, NULL, &un_803FA258.xF4, 0.0f, 0.0f, 1.0f },
+    { 6, un_80300338, un_804D58C0, NULL, &un_803FA258.xF0, 0.0f, 0.0f, 1.0f },
+    { 5, un_80300410, un_804D58C8, NULL, &un_803FA258.xF4, 0.0f, 0.0f, 1.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
 };
 /* 803FA758 */ char un_803FA758[] = "<VERSUS MODE>";
@@ -2267,8 +2296,8 @@ bool un_80301E08(bool update_scene)
 /* 803FA77C */ char un_803FA77C[] = "MODE : Rule      >";
 /* 803FA790 */ struct un_80304138_objalloc_t_x8 un_803FA790[4] = {
     { 0, NULL, un_803FA758, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80300480), un_803FA768, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_803004B4), un_803FA77C, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80300480, un_803FA768, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_803004B4, un_803FA77C, NULL, NULL, 0.0f, 0.0f, 0.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
 };
 /* 803FA810 */ char un_803FA810[] = "Time Mode ";
@@ -2296,7 +2325,7 @@ bool un_80301E08(bool update_scene)
     { 3, NULL, un_803FA894, NULL, &un_803FA258.xCC[1], 0.0f, 59.0f, 1.0f },
     { 3, NULL, un_803FA8A4, NULL, &un_803FA258.xCC[2], -1.0f, 99.0f, 1.0f },
     { 8, NULL, un_803FA8B4, NULL, &un_803FA258.xEC, 0.0f, 3.0f, 0.1f },
-    { 1, ACT(un_803004E8), un_803FA8C4, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_803004E8, un_803FA8C4, NULL, NULL, 0.0f, 0.0f, 0.0f },
     { 2, NULL, un_803FA8D8, un_803FA860, &un_803FA258.xCC[3], 0.0f, 6.0f,
       0.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
@@ -2443,22 +2472,22 @@ bool un_80301E08(bool update_scene)
 /* 803FB158 */ char un_803FB158[] = "-----------EXIT";
 /* 803FB168 */ struct un_80304138_objalloc_t_x8 un_803FB168[16] = {
     { 0, NULL, un_803FB080, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_8030051C), un_803FB090, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80300550), un_803FB0A0, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80300584), un_803FB0B0, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_803005B8), un_803FB0C0, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_803005EC), un_803FB0D0, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80300620), un_803FB0E0, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80300654), un_803FB0F0, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80300688), un_803FB100, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_803006BC), un_803FB110, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_803006F0), un_803FB120, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80300724), un_803FB130, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_8030051C, un_803FB090, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80300550, un_803FB0A0, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80300584, un_803FB0B0, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_803005B8, un_803FB0C0, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_803005EC, un_803FB0D0, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80300620, un_803FB0E0, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80300654, un_803FB0F0, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80300688, un_803FB100, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_803006BC, un_803FB110, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_803006F0, un_803FB120, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80300724, un_803FB130, NULL, NULL, 0.0f, 0.0f, 0.0f },
     { 2, NULL, un_803FB140, un_803FAF0C, &un_803FA258.x4[1], 0.0f, 86.0f,
       0.0f },
     { 2, NULL, un_803FB14C, un_804D58FC, &un_803FA258.x4[2], 0.0f, 2.0f,
       0.0f },
-    { 1, ACT(un_802FFEA4), un_803FB158, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_802FFEA4, un_803FB158, NULL, NULL, 0.0f, 0.0f, 0.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
 };
 /* 803FB368 */ char un_803FB368[] = "CKind_Captain";
@@ -2520,7 +2549,7 @@ bool un_80301E08(bool update_scene)
       0.0f },
     { 2, NULL, un_803FB5F4, un_803FB538, &un_803FA258.x14[2], 0.0f, 34.0f,
       0.0f },
-    { 2, ACT(un_80300758), un_803FB600, un_803FB538, &un_803FA258.x14[3], 0.0f,
+    { 2, un_80300758, un_803FB600, un_803FB538, &un_803FA258.x14[3], 0.0f,
       34.0f, 0.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
 };
@@ -2559,8 +2588,8 @@ bool un_80301E08(bool update_scene)
       0.0f },
     { 2, NULL, un_803FB858, un_803FB818, &un_803FA258.x24[3], 0.0f, 4.0f,
       0.0f },
-    { 2, ACT(un_80300790), un_803FB864, un_803FB818, &un_803FA258.x34, 0.0f,
-      4.0f, 0.0f },
+    { 2, un_80300790, un_803FB864, un_803FB818, &un_803FA258.x34, 0.0f, 4.0f,
+      0.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
 };
 /* 803FB950 */ char un_803FB950[] = "< Color >";
@@ -2730,14 +2759,14 @@ bool un_80301E08(bool update_scene)
 /* 803FC4B8 */ char un_803FC4B8[] = "MODE : Yoshiki  >";
 /* 803FC4CC */ struct un_80304138_objalloc_t_x8 un_803FC4CC[10] = {
     { 0, NULL, un_803FC420, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_803007C8), un_803FC42C, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_803007FC), un_803FC440, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80300830), un_803FC454, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80300864), un_803FC468, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80300898), un_803FC47C, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_803008CC), un_803FC490, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80300900), un_803FC4A4, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80300934), un_803FC4B8, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_803007C8, un_803FC42C, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_803007FC, un_803FC440, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80300830, un_803FC454, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80300864, un_803FC468, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80300898, un_803FC47C, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_803008CC, un_803FC490, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80300900, un_803FC4A4, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80300934, un_803FC4B8, NULL, NULL, 0.0f, 0.0f, 0.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
 };
 /* 803FC60C */ char un_803FC60C[] = "< Hanyu Test >";
@@ -2745,8 +2774,8 @@ bool un_80301E08(bool update_scene)
 /* 803FC62C */ char un_803FC62C[] = "Select Stage >";
 /* 803FC63C */ struct un_80304138_objalloc_t_x8 un_803FC63C[4] = {
     { 0, NULL, un_803FC60C, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80300968), un_803FC61C, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_803009A4), un_803FC62C, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80300968, un_803FC61C, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_803009A4, un_803FC62C, NULL, NULL, 0.0f, 0.0f, 0.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
 };
 /* 803FC6BC */ char un_803FC6BC[] = "< Melee Count Set >";
@@ -2770,19 +2799,17 @@ bool un_80301E08(bool update_scene)
 /* 803FC81C */ char un_803FC81C[] = "Default :";
 /* 803FC828 */ struct un_80304138_objalloc_t_x8 un_803FC828[5] = {
     { 0, NULL, un_803FC7EC, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 2, ACT(un_803009E0), un_803FC804, un_803FB538, &un_804D6DC8, 0.0f, 34.0f,
+    { 2, un_803009E0, un_803FC804, un_803FB538, &un_804D6DC8, 0.0f, 34.0f,
       0.0f },
-    { 3, ACT(un_80300A88), un_803FC810, NULL, &un_804D6DCC, 0.0f, 1e+06f,
-      1.0f },
+    { 3, un_80300A88, un_803FC810, NULL, &un_804D6DCC, 0.0f, 1e+06f, 1.0f },
     { 3, NULL, un_803FC81C, NULL, &un_804D6DD4, 0.0f, 1e+06f, 10.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
 };
 /* 803FC8C8 */ struct un_80304138_objalloc_t_x8 un_803FC8C8[5] = {
     { 0, NULL, un_803FC7EC, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 2, ACT(un_803009E0), un_803FC804, un_803FB538, &un_804D6DC8, 0.0f, 34.0f,
+    { 2, un_803009E0, un_803FC804, un_803FB538, &un_804D6DC8, 0.0f, 34.0f,
       0.0f },
-    { 8, ACT(un_80300A88), un_803FC810, NULL, &un_804D6DD0, 0.0f, 1e+06f,
-      0.1f },
+    { 8, un_80300A88, un_803FC810, NULL, &un_804D6DD0, 0.0f, 1e+06f, 0.1f },
     { 3, NULL, un_803FC81C, NULL, &un_804D6DD4, 0.0f, 1e+06f, 10.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
 };
@@ -2800,19 +2827,17 @@ bool un_80301E08(bool update_scene)
 /* 803FCA30 */ char un_803FCA30[] = "Melee  Start";
 /* 803FCA40 */ struct un_80304138_objalloc_t_x8 un_803FCA40[13] = {
     { 0, NULL, un_803FC968, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 3, ACT(un_80300C80), un_803FC97C, NULL, &un_804D6DDC, 0.0f, 999.0f,
-      1.0f },
-    { 1, ACT(un_80300BBC), un_803FC98C, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80300BF8), un_803FC998, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80300C3C), un_803FC9A8, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80300D78), un_803FC9BC, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80300E74), un_803FC9D0, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80300F3C), un_803FC9E8, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 3, ACT(un_80300F98), un_803FC9FC, NULL, &un_804D6DF4, 0.0f, 1e+08f,
-      1.0f },
-    { 1, ACT(un_80300AF4), un_803FCA10, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80300B58), un_803FCA20, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80300AB8), un_803FCA30, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 3, un_80300C80, un_803FC97C, NULL, &un_804D6DDC, 0.0f, 999.0f, 1.0f },
+    { 1, un_80300BBC, un_803FC98C, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80300BF8, un_803FC998, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80300C3C, un_803FC9A8, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80300D78, un_803FC9BC, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80300E74, un_803FC9D0, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80300F3C, un_803FC9E8, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 3, un_80300F98, un_803FC9FC, NULL, &un_804D6DF4, 0.0f, 1e+08f, 1.0f },
+    { 1, un_80300AF4, un_803FCA10, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80300B58, un_803FCA20, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80300AB8, un_803FCA30, NULL, NULL, 0.0f, 0.0f, 0.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
 };
 /* 803FCBE0 */ char un_803FCBE0[] = "< Taniguti Test >";
@@ -2822,13 +2847,10 @@ bool un_80301E08(bool update_scene)
 /* 803FCC28 */ char un_803FCC28[] = "Reg:Allstar >";
 /* 803FCC38 */ struct un_80304138_objalloc_t_x8 un_803FCC38[6] = {
     { 0, NULL, un_803FCBE0, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80300FEC), un_803FCBF4, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 3, ACT(un_80301028), un_803FCC08, NULL, &un_804D5908, 1.0f, 12.0f,
-      1.0f },
-    { 3, ACT(un_80301074), un_803FCC18, NULL, &un_804D590C, 1.0f, 11.0f,
-      1.0f },
-    { 3, ACT(un_803010C0), un_803FCC28, NULL, &un_804D5910, 1.0f, 13.0f,
-      1.0f },
+    { 1, un_80300FEC, un_803FCBF4, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 3, un_80301028, un_803FCC08, NULL, &un_804D5908, 1.0f, 12.0f, 1.0f },
+    { 3, un_80301074, un_803FCC18, NULL, &un_804D590C, 1.0f, 11.0f, 1.0f },
+    { 3, un_803010C0, un_803FCC28, NULL, &un_804D5910, 1.0f, 13.0f, 1.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
 };
 /* 803FCCF8 */ char un_803FCCF8[] = "ADVENTURE";
@@ -2851,11 +2873,11 @@ bool un_80301E08(bool update_scene)
 /* 803FCE34 */ char un_803FCE34[] = "RegularEnding Real >";
 /* 803FCE4C */ struct un_80304138_objalloc_t_x8 un_803FCE4C[7] = {
     { 0, NULL, un_803FCDD4, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_803013B0), un_803FCDE8, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80301328), un_803FCDFC, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_8030136C), un_803FCE0C, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_803012D4), un_803FCE1C, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80301280), un_803FCE34, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_803013B0, un_803FCDE8, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80301328, un_803FCDFC, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_8030136C, un_803FCE0C, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_803012D4, un_803FCE1C, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80301280, un_803FCE34, NULL, NULL, 0.0f, 0.0f, 0.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
 };
 /* 803FCF2C */ char un_803FCF2C[] = "NoChara 0";
@@ -2882,24 +2904,24 @@ bool un_80301E08(bool update_scene)
 /* 803FD058 */ char un_803FD058[] = "Approach :";
 /* 803FD064 */ struct un_80304138_objalloc_t_x8 un_803FD064[14] = {
     { 0, NULL, un_803FCF90, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80301420), un_803FCFA0, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80301490), un_803FCFAC, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80301454), un_803FCFC0, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 2, ACT(un_80301544), un_803FCFD4, un_803FB538, &un_803FA258.x134, 0.0f,
-      34.0f, 0.0f },
-    { 3, ACT(un_80301508), un_803FCFE0, NULL, &un_803FA258.x12C, 0.0f, 65.0f,
+    { 1, un_80301420, un_803FCFA0, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80301490, un_803FCFAC, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80301454, un_803FCFC0, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 2, un_80301544, un_803FCFD4, un_803FB538, &un_803FA258.x134, 0.0f, 34.0f,
+      0.0f },
+    { 3, un_80301508, un_803FCFE0, NULL, &un_803FA258.x12C, 0.0f, 65.0f,
       1.0f },
-    { 3, ACT(un_80301508), un_803FCFEC, NULL, &un_803FA258.x130, 0.0f, 299.0f,
+    { 3, un_80301508, un_803FCFEC, NULL, &un_803FA258.x130, 0.0f, 299.0f,
       1.0f },
-    { 1, ACT(un_803013EC), un_803FD000, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 2, ACT(un_803014CC), un_803FD00C, un_803FB538, &un_803FA258.x138, 0.0f,
-      34.0f, 0.0f },
-    { 1, ACT(un_80301580), un_803FD01C, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_803013EC, un_803FD000, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 2, un_803014CC, un_803FD00C, un_803FB538, &un_803FA258.x138, 0.0f, 34.0f,
+      0.0f },
+    { 1, un_80301580, un_803FD01C, NULL, NULL, 0.0f, 0.0f, 0.0f },
     { 2, NULL, un_803FD034, un_803FB538, &un_803FA258.x13C, 0.0f, 34.0f,
       0.0f },
-    { 1, ACT(un_803015BC), un_803FD044, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 2, ACT(un_803015F8), un_803FD058, un_803FCF5C, &un_803FA258.x140, 0.0f,
-      13.0f, 0.0f },
+    { 1, un_803015BC, un_803FD044, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 2, un_803015F8, un_803FD058, un_803FCF5C, &un_803FA258.x140, 0.0f, 13.0f,
+      0.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
 };
 /* 803FD224 */ char un_803FD224[] = "<Format>\n";
@@ -2908,8 +2930,9 @@ bool un_80301E08(bool update_scene)
 /* 803FD24C */ char un_803FD24C[] = "<Create>\n";
 /* 803FD258 */ char un_803FD258[] = "<Delete>\n";
 /* 803FD264 */ char un_803FD264[] = "<SnapMount0>\n";
-/* 803FD274 */ HSD_ImageDesc un_803FD274 = { NULL, 640,  480, GX_TF_RGB565,
-                                             0,    0.0f, 0.0f };
+/* 803FD274 */ HSD_ImageDesc un_803FD274 = {
+    NULL, 640, 480, GX_TF_RGB565, 0, 0.0f, 0.0f,
+};
 /* 803FD28C */ char un_803FD28C[] = "<SnapLoad0>\n";
 /* 803FD29C */ char un_803FD29C[] = "<SnapDelete0>\n";
 /* 803FD2AC */ char un_803FD2AC[] = "<SnapSwap0>\n";
@@ -2921,20 +2944,17 @@ bool un_80301E08(bool update_scene)
 /* 803FD304 */ char un_803FD304[] = "SnapSwap0 ";
 /* 803FD310 */ struct un_80304138_objalloc_t_x8 un_803FD310[13] = {
     { 0, NULL, un_803FD2BC, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80301634), un_804D5998, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_803016D8), un_804D59A0, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80301734), un_803FD2D0, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_8030178C), un_804D59A8, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80301800), un_804D59B0, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80301840), un_804D59B8, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_803018BC), un_804D59C0, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_8030191C), un_803FD2DC, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 3, ACT(un_80301964), un_803FD2E8, NULL, &un_804D6E0C, 0.0f, 127.0f,
-      1.0f },
-    { 3, ACT(un_80301A64), un_803FD2F4, NULL, &un_804D6E10, 0.0f, 127.0f,
-      1.0f },
-    { 3, ACT(un_80301AD4), un_803FD304, NULL, &un_804D6E14, 0.0f, 127.0f,
-      1.0f },
+    { 1, un_80301634, un_804D5998, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_803016D8, un_804D59A0, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80301734, un_803FD2D0, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_8030178C, un_804D59A8, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80301800, un_804D59B0, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80301840, un_804D59B8, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_803018BC, un_804D59C0, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_8030191C, un_803FD2DC, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 3, un_80301964, un_803FD2E8, NULL, &un_804D6E0C, 0.0f, 127.0f, 1.0f },
+    { 3, un_80301A64, un_803FD2F4, NULL, &un_804D6E10, 0.0f, 127.0f, 1.0f },
+    { 3, un_80301AD4, un_803FD304, NULL, &un_804D6E14, 0.0f, 127.0f, 1.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
 };
 /* 803FD4B0 */ char* un_803FD4B0[5] = { un_804D59C8, un_804D59D0, un_804D59D8,
@@ -2974,7 +2994,7 @@ bool un_80301E08(bool update_scene)
       0.0f },
     { 2, NULL, un_803FD57C, un_803FB538, &un_803FA258.x128, 0.0f, 34.0f,
       0.0f },
-    { 1, ACT(un_80301B48), un_804D59F8, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80301B48, un_804D59F8, NULL, NULL, 0.0f, 0.0f, 0.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
 };
 /* 803FD78C */ char un_803FD78C[] = "<RESULT TEST>";
@@ -3004,8 +3024,8 @@ bool un_80301E08(bool update_scene)
       0.0f },
     { 2, NULL, un_803FD7C0, un_803FB538, &un_803FA258.x144[3], 0.0f, 34.0f,
       0.0f },
-    { 2, ACT(un_80301CE0), un_803FD7CC, un_803FB538, &un_803FA258.x144[4],
-      0.0f, 34.0f, 0.0f },
+    { 2, un_80301CE0, un_803FD7CC, un_803FB538, &un_803FA258.x144[4], 0.0f,
+      34.0f, 0.0f },
     { 3, NULL, un_803FD7DC, NULL, &un_803FA258.x144[5], 1.0f, 4.0f, 1.0f },
     { 3, NULL, un_803FD7E8, NULL, &un_803FA258.x144[6], 1.0f, 4.0f, 1.0f },
     { 3, NULL, un_803FD7F4, NULL, &un_803FA258.x144[7], 1.0f, 4.0f, 1.0f },
@@ -3017,7 +3037,7 @@ bool un_80301E08(bool update_scene)
     { 3, NULL, un_803FD83C, NULL, &un_803FA258.x144[15], 0.0f, 9.0f, 1.0f },
     { 3, NULL, un_803FD848, NULL, &un_803FA258.x144[13], 0.0f, 1.0f, 1.0f },
     { 3, NULL, un_803FD854, NULL, &un_803FA258.x144[14], 0.0f, 1.0f, 1.0f },
-    { 1, ACT(un_80301C80), un_804D59F8, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80301C80, un_804D59F8, NULL, NULL, 0.0f, 0.0f, 0.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
 };
 /* 803FDAC4 */ char un_803FDAC4[] = "< Sakoda Test >";
@@ -3025,16 +3045,16 @@ bool un_80301E08(bool update_scene)
 /* 803FDAE4 */ char un_803FDAE4[] = "FixCamera Start >";
 /* 803FDAF8 */ struct un_80304138_objalloc_t_x8 un_803FDAF8[4] = {
     { 0, NULL, un_803FDAC4, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 3, ACT(un_80301D7C), un_803FDAD4, NULL, &un_803FA258.x188, 1.0f, 51.0f,
+    { 3, un_80301D7C, un_803FDAD4, NULL, &un_803FA258.x188, 1.0f, 51.0f,
       1.0f },
-    { 1, ACT(un_80301D40), un_803FDAE4, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80301D40, un_803FDAE4, NULL, NULL, 0.0f, 0.0f, 0.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
 };
 /* 803FDB78 */ char un_803FDB78[] = "< Sugano Test >";
 /* 803FDB88 */ char un_803FDB88[] = "STAFFROLL START >";
 /* 803FDB9C */ struct un_80304138_objalloc_t_x8 un_803FDB9C[4] = {
     { 0, NULL, un_803FDB78, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80301DCC), un_803FCBF4, NULL, NULL, 0.0f, 0.0f, 0.0f },
-    { 1, ACT(un_80301E08), un_803FDB88, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80301DCC, un_803FCBF4, NULL, NULL, 0.0f, 0.0f, 0.0f },
+    { 1, un_80301E08, un_803FDB88, NULL, NULL, 0.0f, 0.0f, 0.0f },
     { 9, NULL, NULL, NULL, NULL, 0.0f, 0.0f, 0.0f },
 };
