@@ -1,6 +1,8 @@
 #ifndef GALE01_1601C4
 #define GALE01_1601C4
 
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "gm/forward.h"
 #include "mn/forward.h"
@@ -8,6 +10,8 @@
 #include "mn/types.h"
 
 #include "sc/forward.h"
+
+#include <dolphin/gx.h>
 
 #define NUM_UNLOCKABLE_CHARACTERS 11
 #define NUM_UNLOCKABLE_STAGES 11

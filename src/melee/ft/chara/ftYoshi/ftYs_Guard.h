@@ -5,10 +5,7 @@
 
 #include "ft/types.h"
 
-#include "ftYoshi/forward.h"
 #include <baselib/forward.h>
-
-#include <dolphin/mtx.h>
 
 /* 12BDA0 */ void ftYs_Init_8012BDA0(Fighter_GObj* gobj);
 /* 12BE3C */ void ftYs_Init_8012BE3C(HSD_GObj* gobj);

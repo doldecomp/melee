@@ -1,5 +1,7 @@
 #include "lbanim.h"
 
+#include <placeholder.h>
+
 #include <baselib/aobj.h>
 #include <baselib/fobj.h>
 #include <baselib/jobj.h>

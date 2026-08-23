@@ -2,7 +2,6 @@
 
 #include "types.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "baselib/forward.h"

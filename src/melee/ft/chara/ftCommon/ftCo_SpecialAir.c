@@ -7,9 +7,6 @@
 #include "ft/ftdata.h"
 #include "ft/types.h"
 
-#include <baselib/forward.h>
-
-#include <math.h>
 #include <dolphin/mtx.h>
 
 bool ftCo_SpecialAir_CheckInput(Fighter_GObj* gobj)

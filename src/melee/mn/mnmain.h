@@ -1,7 +1,6 @@
 #ifndef MELEE_MN_MAIN_H
 #define MELEE_MN_MAIN_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "gm/forward.h"
@@ -10,7 +9,6 @@
 #include "mn/types.h"
 
 #include <dolphin/gx.h>
-#include <dolphin/mtx.h>
 #include <baselib/object.h>
 
 typedef struct _MainMenuData {

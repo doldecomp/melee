@@ -1,7 +1,7 @@
 #ifndef GALE01_1122D8
 #define GALE01_1122D8
 
-#include "ftSamus/forward.h"
+#include "ft/forward.h"
 
 /* 1291F0 */ void ftSs_SpecialN_801291F0(Fighter_GObj* gobj);
 /* 129258 */ void ftSs_SpecialN_80129258(Fighter_GObj* gobj);

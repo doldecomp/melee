@@ -11,7 +11,6 @@
 #include "it/itzako.h"
 #include "lb/lb_00B0.h"
 
-#include <math.h>
 #include <baselib/random.h>
 
 /* 2EC870 */ static void it_802EC870(Item_GObj*, int);

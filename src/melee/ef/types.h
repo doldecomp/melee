@@ -1,8 +1,6 @@
 #ifndef MELEE_EF_TYPES_H
 #define MELEE_EF_TYPES_H
 
-#include <placeholder.h>
-
 #include "dolphin/mtx.h"
 #include "dolphin/types.h"
 

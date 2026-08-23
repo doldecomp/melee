@@ -14,6 +14,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
@@ -33,7 +34,6 @@
 #include <math.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
-#include <baselib/random.h>
 
 /* 3B7570 */ static Vec3 const ftKb_Init_803B7570 = { 0.0f, 4.0f, 0.0f };
 /* 3B757C */ static Vec3 const ftKb_Init_803B757C = { 0.0f, 4.0f, 0.0f };

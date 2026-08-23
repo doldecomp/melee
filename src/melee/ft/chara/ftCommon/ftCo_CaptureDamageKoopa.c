@@ -3,7 +3,6 @@
 #include "ftCo_CaptureCut.h"
 #include "ftCo_CaptureKoopa.h"
 #include "ftCo_CaptureWaitKoopa.h"
-#include "ftCo_Throw.h"
 
 #include <platform.h>
 

@@ -9,13 +9,10 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/it_3F14.h"
 #include "it/itcoll.h"
 #include "it/item.h"
 #include "it/itgroundcoll.h"
 #include "it/itmaplib.h"
-
-#include <math.h>
 
 ItemStateTable it_803F7668[] = {
     { -1, itClimbersice_UnkMotion0_Anim, itClimbersice_UnkMotion0_Phys,

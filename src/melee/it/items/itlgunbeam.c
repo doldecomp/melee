@@ -11,9 +11,9 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itgroundcoll.h"
 #include "it/types.h"
 #include "lb/lbvector.h"
 
@@ -21,7 +21,6 @@
 #include <baselib/gobj.h>
 #include <baselib/random.h>
 #include <melee/it/item.h>
-#include <melee/lb/lbrefract.h>
 
 /* 2993E0 */ static void it_802993E0(Item_GObj* gobj, int flags);
 /* 299528 */ static void it_80299528(Item_GObj* gobj, int arg1);

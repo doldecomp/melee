@@ -32,7 +32,6 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
-#include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 

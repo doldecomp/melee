@@ -1,10 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTPOPO_TYPES_H
 #define MELEE_FT_CHARA_FTPOPO_TYPES_H
 
-#include <placeholder.h>
 #include <platform.h>
 
-#include "ft/forward.h"
 #include "it/forward.h"
 
 struct ftPopo_FighterVars {

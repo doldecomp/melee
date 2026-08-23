@@ -9,7 +9,6 @@
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_Throw.h"
 
 void ftCo_800BBB8C(Fighter_GObj* gobj, Fighter_GObj* attacker_gobj)

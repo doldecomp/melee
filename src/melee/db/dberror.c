@@ -6,11 +6,9 @@
 #include <dolphin/os.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/debugconsole_main.h>
-#include <sysdolphin/baselib/hsd_3933.h>
 #include <sysdolphin/baselib/hsd_393C.h>
 #include <sysdolphin/baselib/video.h>
 #include <melee/lb/lb_0195.h>
-#include <melee/lb/lbcardnew.h>
 
 void db_ClearFPUExceptions(void)
 {

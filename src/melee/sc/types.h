@@ -1,8 +1,6 @@
 #ifndef MELEE_SC_TYPES_H
 #define MELEE_SC_TYPES_H
 
-#include <placeholder.h>
-
 #include "sc/forward.h" // IWYU pragma: export
 #include <baselib/forward.h>
 

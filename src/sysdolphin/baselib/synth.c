@@ -1,8 +1,9 @@
 #include "synth.h"
 
 #include "synth.static.h"
+#include <placeholder.h>
 
-#include <math.h>
+#include <math.h> // IWYU pragma: keep
 #include <string.h>
 #include <dolphin/ai.h>
 #include <dolphin/ar.h>

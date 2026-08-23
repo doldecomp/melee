@@ -20,7 +20,6 @@
 #include "gr/stage.h"
 #include "it/item.h"
 #include "it/items/itwstar.h"
-#include "lb/lbrefract.h"
 #include "mp/mpcoll.h"
 
 #include <math.h>

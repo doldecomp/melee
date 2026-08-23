@@ -5,6 +5,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
@@ -15,10 +16,7 @@
 
 #include "ftKirby/forward.h"
 
-#include <math.h>
 #include <stddef.h>
-#include <baselib/gobj.h>
-#include <baselib/random.h>
 
 /* 0F1FDC */ static void fn_800F1FDC(Fighter_GObj* gobj);
 /* 0F20C4 */ static void fn_800F20C4(Fighter_GObj* gobj);

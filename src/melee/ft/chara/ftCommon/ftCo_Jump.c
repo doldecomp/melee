@@ -30,8 +30,6 @@
 #include "ftCommon/ftCo_SpecialAir.h"
 #include "ftPeach/ftPe_Float.h"
 
-#include <math.h>
-
 ftCo_JumpInput ftCo_Jump_GetInput(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

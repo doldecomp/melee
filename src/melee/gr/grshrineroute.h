@@ -3,10 +3,6 @@
 
 #include "forward.h"
 
-#include "lb/types.h"
-
-#include <baselib/forward.h>
-
 /* 3E5988 */ extern StageData grSh_Route_StageData;
 
 #endif

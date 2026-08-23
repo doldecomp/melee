@@ -10,7 +10,6 @@
 #include "ft/types.h"
 #include "ftKirby/ftkirby.h"
 
-#include <math.h>
 #include <dolphin/mtx.h>
 
 /* 09EE30 */ static void ftCo_8009EE30(Fighter_GObj* gobj);

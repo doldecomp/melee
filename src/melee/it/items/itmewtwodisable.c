@@ -1,8 +1,8 @@
 #include "itmewtwodisable.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 
 #include <melee/it/forward.h>
@@ -11,7 +11,6 @@
 #include <melee/ft/chara/ftMewtwo/ftMt_SpecialLw.h>
 #include <melee/ft/ftlib.h>
 #include <melee/it/inlines.h>
-#include <melee/it/it_266F.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>

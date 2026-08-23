@@ -1,13 +1,14 @@
 #include "mpc_7xx_603e.h"
 
-#include "MetroTRK/m7xx_m603e_reg.h"
-#include "MetroTRK/ppc_targimpl.h"
+#ifdef MWERKS_GEKKO
+#include "ppc_targimpl.h"
+#endif
 
 static int const target_cpu_minor_type = 84;
 
 ASM void TRKSaveExtended1Block(void)
 {
-#ifdef __MWERKS__ // clang-format off
+#ifdef MWERKS_GEKKO // clang-format off
         nofralloc
 
         lis       r2, gTRKCPUState@h
@@ -141,7 +142,7 @@ ASM void TRKSaveExtended1Block(void)
 
 ASM void TRKRestoreExtended1Block(void)
 {
-#ifdef __MWERKS__ // clang-format off
+#ifdef MWERKS_GEKKO // clang-format off
         nofralloc
 
         lis       r2, gTRKCPUState@h

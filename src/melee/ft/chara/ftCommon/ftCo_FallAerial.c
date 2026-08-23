@@ -1,7 +1,5 @@
 #include "ftCo_FallAerial.h"
 
-#include <placeholder.h>
-
 #include "ft/fighter.h"
 
 #include "ft/forward.h"

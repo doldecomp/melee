@@ -7,6 +7,8 @@
 #include "mn/types.h"
 
 #include <math.h>
+#include <baselib/gobjuserdata.h>
+#include <baselib/memory.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -30,7 +32,6 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbmthp.h>
 #include <melee/mn/inlines.h>
-#include <melee/mn/mncharsel.h>
 #include <melee/mn/mncount.h>
 #include <melee/mn/mndatadel.h>
 #include <melee/mn/mndeflicker.h>

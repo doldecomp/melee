@@ -1,6 +1,5 @@
 #include "ftCo_09F4.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "ft/ftdevice.h"

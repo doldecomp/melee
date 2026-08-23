@@ -8,7 +8,6 @@
 #include "baselib/forward.h"
 
 #include "cm/camera.h"
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_FallSpecial.h"
 #include "ft/chara/ftCommon/ftCo_Landing.h"
@@ -37,7 +36,6 @@
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
-#include <baselib/random.h>
 
 /* 100E0C */ static void fn_80100E0C(Fighter_GObj* gobj);
 /* 100F60 */ static void fn_80100F60(Fighter_GObj* gobj);

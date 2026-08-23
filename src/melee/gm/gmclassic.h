@@ -1,8 +1,6 @@
 #ifndef MELEE_GM_CLASSIC_H
 #define MELEE_GM_CLASSIC_H
 
-#include <placeholder.h>
-
 #include <melee/gm/forward.h>
 
 #include <melee/gm/types.h>

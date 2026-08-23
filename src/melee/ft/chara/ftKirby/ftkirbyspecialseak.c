@@ -1,4 +1,3 @@
-#include "ftkirby.h"
 #include "inlines.h"
 #include "types.h"
 
@@ -12,10 +11,10 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0892.h"
 #include "ft/ftcolanim.h"
-#include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
@@ -28,9 +27,7 @@
 #include "it/items/itseakneedleheld.h"
 #include "it/items/itseakneedlethrown.h"
 
-#include <math.h>
 #include <stddef.h>
-#include <baselib/gobj.h>
 #include <baselib/random.h>
 
 /* 106DB0 */ static void fn_80106DB0(Fighter_GObj*);

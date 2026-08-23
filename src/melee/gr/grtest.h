@@ -1,8 +1,6 @@
 #ifndef GALE01_206E2C
 #define GALE01_206E2C
 
-#include <placeholder.h>
-
 #include "gr/forward.h"
 #include <baselib/forward.h>
 

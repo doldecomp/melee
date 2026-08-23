@@ -7,6 +7,7 @@
 #include "gm/gm_1601.h"
 #include "mn/types.h"
 
+#include <baselib/sislib.h>
 #include <melee/gm/gm_16AE.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/if/textlib.h>
@@ -16,7 +17,6 @@
 #include <melee/pl/player.h>
 #include <melee/pl/plbonus.h>
 #include <melee/pl/plbonuslib.h>
-#include <melee/pl/types.h>
 #include <melee/ty/toy.h>
 
 struct lbl_804D65A8_t {

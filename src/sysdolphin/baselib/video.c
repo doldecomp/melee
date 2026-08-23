@@ -4,7 +4,6 @@
 #include "state.h"
 
 #include <dolphin/gx.h>
-#include <dolphin/os/OSInterrupt.h>
 #include <dolphin/vi.h>
 
 HSD_VIInfo HSD_VIData;

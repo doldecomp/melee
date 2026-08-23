@@ -1,9 +1,6 @@
 #include "ftCo_Barrel.h"
 
-#include "ftCo_CaptureCut.h"
 #include "ftCo_Throw.h"
-
-#include <placeholder.h>
 
 #include "ft/fighter.h"
 
@@ -17,7 +14,6 @@
 
 #include "ftCommon/forward.h"
 
-#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_Damage.h"
 #include "ftCommon/ftCo_Lift.h"
 #include "ftCommon/inlines.h"

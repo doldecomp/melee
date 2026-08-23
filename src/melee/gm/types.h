@@ -14,6 +14,7 @@
 #include <melee/pl/forward.h>
 #include <melee/sc/forward.h>
 
+#include <dolphin/gx.h>
 #include <melee/mn/types.h>
 
 /// @deprecated Replace with inline bitfields

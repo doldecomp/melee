@@ -1,6 +1,5 @@
 #include "ftCh_ThrownCrazyHand.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "baselib/forward.h"
@@ -11,8 +10,6 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftMasterHand/types.h"
-
-#include <dolphin/mtx.h>
 
 void ftCh_GrabUnk1_8015B850(HSD_GObj* gobj, FtMotionId msid)
 {

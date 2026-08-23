@@ -3,6 +3,7 @@
 
 #include <platform.h>
 
+#include "ft/forward.h"
 #include <melee/ft/forward.h>
 
 /* 134ACC */ void ftKp_SpecialLw_80134ACC(Fighter_GObj* gobj);

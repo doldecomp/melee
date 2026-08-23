@@ -29,7 +29,6 @@
 #include "pl/player.h"
 #include "sc/types.h"
 
-#include <math.h>
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
 #include <baselib/controller.h>

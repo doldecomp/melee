@@ -1,7 +1,6 @@
 #ifndef MELEE_LB_HEAP_H
 #define MELEE_LB_HEAP_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 /// @remarks @c LbHeapStatus_Create is named by an assert in #lbHeap_80015CA8.

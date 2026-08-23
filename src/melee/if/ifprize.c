@@ -11,12 +11,8 @@
 #include "lb/lbspdisplay.h"
 #include "sc/types.h"
 #include "ty/toy.h"
-#include "ty/tylist.h"
 
-#include <printf.h>
 #include <stdio.h>
-#include <string.h>
-#include <dolphin/mtx.h>
 #include <baselib/archive.h>
 #include <baselib/cobj.h>
 #include <baselib/dobj.h>
@@ -26,11 +22,8 @@
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
-#include <baselib/memory.h>
-#include <baselib/particle.h>
 #include <baselib/random.h>
 #include <baselib/sislib.h>
 

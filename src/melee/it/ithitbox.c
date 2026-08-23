@@ -1,14 +1,9 @@
 #include "ithitbox.h"
 
 #include "it_2725.h"
-#include "it_3F14.h"
-#include "itmaplib.h"
 
 #include "it/inlines.h"
-#include "it/it_26B1.h"
 #include "it/itcoll.h"
-#include "mp/mpcoll.h"
-#include "mp/mplib.h"
 
 void it_802753DC(Item_GObj* item_gobj)
 {

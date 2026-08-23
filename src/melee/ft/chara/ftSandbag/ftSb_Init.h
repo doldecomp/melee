@@ -1,6 +1,8 @@
 #ifndef GALE01_14F9CC
 #define GALE01_14F9CC
 
+#include "ft/forward.h"
+
 #include "ft/types.h"
 
 #include "ftSandbag/forward.h"

@@ -1,10 +1,6 @@
 #include "fighter.h"
 #include "ft_0CD1.h"
-#include "ftswing.h"
 
-#include "ft/chara/ftCommon/ftCo_Fall.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"

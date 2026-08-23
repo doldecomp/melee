@@ -1,6 +1,4 @@
-#include "gm_1A36.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "db/db.h"
@@ -30,12 +28,9 @@
 #include <dolphin/vi.h>
 #include <baselib/controller.h>
 #include <baselib/debug.h>
-#include <baselib/debugconsole_main.h>
 #include <baselib/hsd_392C.h>
 #include <baselib/hsd_3933.h>
 #include <baselib/initialize.h>
-#include <baselib/particle.h>
-#include <baselib/rumble.h>
 #include <baselib/sislib.h>
 #include <baselib/video.h>
 

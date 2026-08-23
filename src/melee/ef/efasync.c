@@ -17,6 +17,7 @@
 
 #include <math.h>
 #include <stdarg.h>
+#include <baselib/generator.h>
 
 HSD_ObjAllocData efAsync_AllocData;
 

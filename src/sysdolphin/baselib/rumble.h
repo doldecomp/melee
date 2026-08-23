@@ -5,8 +5,6 @@
 
 #include "baselib/forward.h"
 
-#include <dolphin/pad.h>
-
 struct HSD_RumbleData {
     u8 last_status;
     u8 status;

@@ -1,15 +1,17 @@
 #include "itwhitebea.h"
 
+#include <placeholder.h>
+
 #include "cm/camera.h"
 #include "gr/gricemt.h"
 #include "gr/stage.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
 #include "it/item.h"
 #include "it/items/itfreeze.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 #include "it/itzako.h"
@@ -17,32 +19,81 @@
 #include "mp/mplib.h"
 #include "sysdolphin/baselib/random.h"
 
-#include <math.h>
+#include <math.h> // IWYU pragma: keep
 
 ItemStateTable it_803F8A88[] = {
-    { 0, itWhitebea_UnkMotion0_Anim, itWhitebea_UnkMotion0_Phys,
-      itWhitebea_UnkMotion0_Coll },
-    { 1, itWhitebea_UnkMotion1_Anim, itWhitebea_UnkMotion1_Phys,
-      itWhitebea_UnkMotion1_Coll },
-    { 2, itWhitebea_UnkMotion2_Anim, itWhitebea_UnkMotion2_Phys,
-      itWhitebea_UnkMotion2_Coll },
-    { 1, itWhitebea_UnkMotion3_Anim, itWhitebea_UnkMotion3_Phys,
-      itWhitebea_UnkMotion3_Coll },
-    { 3, itWhitebea_UnkMotion4_Anim, itWhitebea_UnkMotion4_Phys,
-      itWhitebea_UnkMotion4_Coll },
-    { 4, itWhitebea_UnkMotion5_Anim, itWhitebea_UnkMotion5_Phys,
-      itWhitebea_UnkMotion5_Coll },
-    { 5, itWhitebea_UnkMotion6_Anim, itWhitebea_UnkMotion6_Phys,
-      itWhitebea_UnkMotion6_Coll },
-    { 6, itWhitebea_UnkMotion7_Anim, itWhitebea_UnkMotion7_Phys,
-      itWhitebea_UnkMotion7_Coll },
-    { 3, itWhitebea_UnkMotion8_Anim, itWhitebea_UnkMotion8_Phys, NULL },
-    { 7, itWhitebea_UnkMotion9_Anim, itWhitebea_UnkMotion9_Phys,
-      itWhitebea_UnkMotion9_Coll },
-    { 3, itWhitebea_UnkMotion10_Anim, itWhitebea_UnkMotion10_Phys,
-      itWhitebea_UnkMotion10_Coll },
-    { 3, itWhitebea_UnkMotion11_Anim, itWhitebea_UnkMotion11_Phys,
-      itWhitebea_UnkMotion11_Coll },
+    {
+        0,
+        itWhitebea_UnkMotion0_Anim,
+        itWhitebea_UnkMotion0_Phys,
+        itWhitebea_UnkMotion0_Coll,
+    },
+    {
+        1,
+        itWhitebea_UnkMotion1_Anim,
+        itWhitebea_UnkMotion1_Phys,
+        itWhitebea_UnkMotion1_Coll,
+    },
+    {
+        2,
+        itWhitebea_UnkMotion2_Anim,
+        itWhitebea_UnkMotion2_Phys,
+        itWhitebea_UnkMotion2_Coll,
+    },
+    {
+        1,
+        itWhitebea_UnkMotion3_Anim,
+        itWhitebea_UnkMotion3_Phys,
+        itWhitebea_UnkMotion3_Coll,
+    },
+    {
+        3,
+        itWhitebea_UnkMotion4_Anim,
+        itWhitebea_UnkMotion4_Phys,
+        itWhitebea_UnkMotion4_Coll,
+    },
+    {
+        4,
+        itWhitebea_UnkMotion5_Anim,
+        itWhitebea_UnkMotion5_Phys,
+        itWhitebea_UnkMotion5_Coll,
+    },
+    {
+        5,
+        itWhitebea_UnkMotion6_Anim,
+        itWhitebea_UnkMotion6_Phys,
+        itWhitebea_UnkMotion6_Coll,
+    },
+    {
+        6,
+        itWhitebea_UnkMotion7_Anim,
+        itWhitebea_UnkMotion7_Phys,
+        itWhitebea_UnkMotion7_Coll,
+    },
+    {
+        3,
+        itWhitebea_UnkMotion8_Anim,
+        itWhitebea_UnkMotion8_Phys,
+        NULL,
+    },
+    {
+        7,
+        itWhitebea_UnkMotion9_Anim,
+        itWhitebea_UnkMotion9_Phys,
+        itWhitebea_UnkMotion9_Coll,
+    },
+    {
+        3,
+        itWhitebea_UnkMotion10_Anim,
+        itWhitebea_UnkMotion10_Phys,
+        itWhitebea_UnkMotion10_Coll,
+    },
+    {
+        3,
+        itWhitebea_UnkMotion11_Anim,
+        itWhitebea_UnkMotion11_Phys,
+        itWhitebea_UnkMotion11_Coll,
+    },
 };
 
 void it_802E31F8(Item_GObj* gobj)

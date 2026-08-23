@@ -4,7 +4,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "ft/dobjlist.h"
+#include "ft/dobjlist.h" // IWYU pragma: keep
 #include "ftGameWatch/types.h"
 #include "ftMars/types.h"
 #include "ftNess/types.h"

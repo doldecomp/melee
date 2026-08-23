@@ -4,8 +4,7 @@
 #include "platform.h"
 
 #include "mn/forward.h" // IWYU pragma: export
-
-#include <baselib/sislib.h>
+#include <baselib/forward.h>
 
 #ifdef M2C
 struct mnInfo_GObj {

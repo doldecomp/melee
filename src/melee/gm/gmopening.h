@@ -1,8 +1,6 @@
 #ifndef MELEE_GM_OPENING_H
 #define MELEE_GM_OPENING_H
 
-#include <placeholder.h>
-
 #include <sysdolphin/baselib/forward.h>
 
 /* 1A9DD0 */ void gm_801A9DD0(HSD_GObj*, u16, u16, int, int);

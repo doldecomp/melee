@@ -6,7 +6,11 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0DF1.h"
 #include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
@@ -16,7 +20,6 @@
 #include "ftCommon/types.h"
 #include "mp/mplib.h"
 
-#include <math.h>
 #include <dolphin/mtx.h>
 
 /* 09AAFC */ static bool ftCo_8009AAFC(Fighter_GObj* gobj, bool arg1,

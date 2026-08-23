@@ -1,3 +1,4 @@
+#include "lb/lblanguage.h"
 #include "mn/types.h"
 #define MNDIAGRAM_SOURCE
 #include "mndiagram.static.h"

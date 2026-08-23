@@ -3,8 +3,6 @@
 
 #include "ftkirby.h" // IWYU pragma: export
 
-#include <placeholder.h>
-
 typedef struct ftKirby_CostumeArchive {
     /* +0 */ HSD_Joint* joint;
     /* +4 */ HSD_MatAnimJoint* matanim;

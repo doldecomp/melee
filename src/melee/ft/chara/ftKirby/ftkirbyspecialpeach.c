@@ -9,6 +9,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
@@ -24,10 +25,8 @@
 #include "it/items/itpeachtoadspore.h"
 #include "lb/lb_00B0.h"
 
-#include <math.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
-#include <baselib/random.h>
 
 /* 10C344 */ static void fn_8010C344(Fighter_GObj* gobj);
 /* 10C44C */ static void fn_8010C44C(Fighter_GObj* gobj);

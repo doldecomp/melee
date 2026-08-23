@@ -3,20 +3,19 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/items/types.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itzako.h"
 #include "it/types.h"
 
 #include <math.h>
 #include <baselib/gobj.h>
-#include <baselib/jobj.h>
 #include <melee/it/item.h>
 
 static void it_802F2A58(Item_GObj*);             /* static */

@@ -4,7 +4,6 @@
 #include "ft/types.h"
 
 #include "ftPopo/forward.h"
-#include <baselib/forward.h>
 
 /* 122EDC */ void ftNn_Init_OnLoad(Fighter_GObj* gobj);
 /* 122F28 */ void ftNn_Init_OnDeath(Fighter_GObj* gobj);

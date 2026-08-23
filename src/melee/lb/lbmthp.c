@@ -2,6 +2,8 @@
 
 #include "lbfile.h"
 
+#include <placeholder.h>
+
 #include <dolphin/dvd.h>
 #include <dolphin/gx/GXTexture.h>
 #include <dolphin/os.h>

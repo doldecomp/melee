@@ -1,7 +1,6 @@
 #include "ftYs_Guard.h"
 
 #include "ftYs_Init.h"
-#include "ftYs_SpecialN.h"
 
 #include <placeholder.h>
 
@@ -27,6 +26,8 @@
 #include "ftYoshi/types.h"
 
 #include <baselib/forward.h>
+
+#include <baselib/jobj.h>
 
 char ftYs_Init_DatFilename[] = "PlYs.dat";
 char ftYs_Init_DataName[] = "ftDataYoshi";

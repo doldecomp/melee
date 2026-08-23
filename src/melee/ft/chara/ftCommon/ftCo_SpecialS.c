@@ -8,9 +8,6 @@
 #include "ft/ftdata.h"
 #include "ft/types.h"
 
-#include <baselib/forward.h>
-
-#include <math.h>
 #include <dolphin/mtx.h>
 
 /* 0960CC */ static void doEnter(Fighter_GObj* gobj);

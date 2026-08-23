@@ -7,9 +7,7 @@
 
 #include "ftCommon/forward.h"
 
-#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_CaptureCut.h"
-#include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/ftCo_Thrown.h"
 #include "ftMasterHand/types.h"
 

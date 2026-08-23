@@ -2,6 +2,7 @@
 Checks: >
   -*,
   custom-ban-primitive-c-types,
+  misc-include-cleaner,
   portability-restrict-system-includes,
   readability-duplicate-include,
   readability-non-const-parameter,
@@ -14,6 +15,9 @@ CheckOptions:
     value: '*,-MSL/*'
   - key: readability-redundant-parentheses.AllowedDecls
     value: '::HSD_JObjSetMtxDirty'
+  - key: misc-include-cleaner.MissingIncludes
+    # TODO: Try enabling
+    value: false
 CustomChecks:
   - Name: ban-primitive-c-types
     Query: |

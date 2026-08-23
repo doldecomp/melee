@@ -1,5 +1,7 @@
 #include "lb/lbfile.h"
 
+#include <placeholder.h>
+
 #include "lb/lb_0195.h"
 #include "lb/lbdvd.h"
 #include "lb/lbheap.h"

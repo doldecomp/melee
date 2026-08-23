@@ -6,6 +6,7 @@
 #include <platform.h>
 
 #include "it/it_2725.h"
+#include "it/itgroundcoll.h"
 
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
@@ -18,7 +19,6 @@
 #include <melee/ft/chara/ftKirby/ftkirby.h>
 #include <melee/ft/chara/ftKoopa/ftKp_SpecialN.h>
 #include <melee/it/inlines.h>
-#include <melee/it/it_266F.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>

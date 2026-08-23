@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include "ftCommon/forward.h"
+#include "ft/forward.h"
 
 /* 09C4F8 */ bool ftCo_8009C4F8(Fighter_GObj* gobj);
 

@@ -14,9 +14,7 @@
 #include "it/it_26B1.h"
 #include "it/items/itpeachparasol.h"
 
-#include <math.h>
 #include <baselib/gobj.h>
-#include <baselib/jobj.h>
 
 bool ft_8008A1FC(Fighter_GObj* gobj)
 {

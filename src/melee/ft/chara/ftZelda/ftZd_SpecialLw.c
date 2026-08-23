@@ -7,7 +7,11 @@
 #include "forward.h"
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
@@ -21,7 +25,6 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
-#include <math.h>
 #include <dolphin/mtx.h>
 
 /// 8013ADB4 - 8013AE30 (124 bytes)

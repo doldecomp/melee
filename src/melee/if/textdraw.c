@@ -4,9 +4,6 @@
 
 #include "if/types.h"
 
-#include <printf.h>
-#include <stdio.h>
-#include <string.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 #include <baselib/fog.h>
@@ -15,12 +12,8 @@
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
 #include <baselib/hsd_3915.h>
-#include <baselib/jobj.h>
 #include <baselib/lobj.h>
-#include <baselib/memory.h>
-#include <baselib/sislib.h>
 #include <baselib/video.h>
 #include <baselib/wobj.h>
 

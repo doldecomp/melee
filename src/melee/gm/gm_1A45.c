@@ -17,6 +17,7 @@
 #include "lb/lbheap.h"
 
 #include <dolphin/os/OSThread.h>
+#include <baselib/class.h>
 #include <baselib/controller.h>
 #include <baselib/gobjproc.h>
 #include <baselib/hsd_3915.h>

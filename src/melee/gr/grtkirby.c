@@ -10,7 +10,6 @@
 #include "lb/forward.h"
 
 #include "lb/lb_00F9.h"
-#include "lb/lbspdisplay.h"
 
 #include <baselib/forward.h>
 

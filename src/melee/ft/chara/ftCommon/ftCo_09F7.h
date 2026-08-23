@@ -1,10 +1,7 @@
 #ifndef GALE01_09F7F8
 #define GALE01_09F7F8
 
-#include <placeholder.h>
-
 #include "ft/forward.h"
-#include "ftCommon/forward.h"
 
 #include <dolphin/mtx.h>
 

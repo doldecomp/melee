@@ -1,13 +1,7 @@
 #ifndef GALE01_12E6F8
 #define GALE01_12E6F8
 
-#include <placeholder.h>
-#include <platform.h>
-
 #include "ft/forward.h"
-#include <baselib/forward.h>
-
-#include <dolphin/mtx.h>
 
 /* 12E6F8 */ void ftYs_SpecialLw_Enter(Fighter_GObj* gobj);
 /* 12E78C */ void ftYs_SpecialAirLw_Enter(Fighter_GObj* gobj);

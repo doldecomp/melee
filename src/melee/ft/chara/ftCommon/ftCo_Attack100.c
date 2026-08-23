@@ -4,82 +4,29 @@
 #include "platform.h"
 #include "stdbool.h"
 
-#include "ft/chara/ftCommon/ftCo_AirCatch.h"
-#include "ft/chara/ftCommon/ftCo_AttackAir.h"
-#include "ft/chara/ftCommon/ftCo_EscapeAir.h"
-#include "ft/chara/ftCommon/ftCo_SpecialAir.h"
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0D27.h"
-#include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
 
-#include "ftCommon/ftCo_CaptureCut.h"
-#include "ftCommon/ftCo_ItemScrew.h"
-#include "ftCommon/ftCo_ItemThrow.h"
-#include "ftCommon/ftCo_Throw.h"
-#include "ftCommon/inlines.h"
 #include "ftCommon/types.h"
-#include "it/inlines.h"
-#include "it/items/itlinkhookshot.h"
-#include "it/items/itsamusgrapple.h"
-#include "it/items/itsscope.h"
-#include "mp/mplib.h"
 
-#include <math.h>
-#include <baselib/gobj.h>
 #include <baselib/jobj.h>
-#include <baselib/random.h>
-#include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftCommon/ftCo_Attack1.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackHi3.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackHi4.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackLw3.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackLw4.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackS3.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackS4.h>
-#include <melee/ft/chara/ftCommon/ftCo_DamageIce.h>
-#include <melee/ft/chara/ftCommon/ftCo_Escape.h>
-#include <melee/ft/chara/ftCommon/ftCo_Fall.h>
-#include <melee/ft/chara/ftCommon/ftCo_FallAerial.h>
-#include <melee/ft/chara/ftCommon/ftCo_FallSpecial.h>
-#include <melee/ft/chara/ftCommon/ftCo_Guard.h>
-#include <melee/ft/chara/ftCommon/ftCo_JumpAerial.h>
-#include <melee/ft/chara/ftCommon/ftCo_Lift.h>
-#include <melee/ft/chara/ftCommon/ftCo_SpecialS.h>
 #include <melee/ft/chara/ftCommon/ftpickupitem.h>
 #include <melee/ft/chara/ftGameWatch/ftGw_Attack100.h>
 #include <melee/ft/chara/ftKirby/ftkirby.h>
-#include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0881.h>
-#include <melee/ft/ft_0CDD.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftchangeparam.h>
-#include <melee/ft/ftcoll.h>
 #include <melee/ft/ftdata.h>
-#include <melee/ft/ftlib.h>
-#include <melee/ft/ftmaterial.h>
-#include <melee/ft/ftmetal.h>
-#include <melee/ft/ftparts.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gr/stage.h>
 #include <melee/it/item.h>
-#include <melee/it/items/it_2E5A.h>
-#include <melee/it/items/itkinoko.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/pl/pl_040D.h>
-#include <melee/pl/player.h>
 #include <melee/pl/plbonuslib.h>
-#include <melee/pl/plstale.h>
 
 /* 0D769C */ FtMotionId fn_800D769C(Fighter* ft, FtMotionId msid);
 /* 0D84D4 */ static void fn_800D84D4(Fighter_GObj*, int);

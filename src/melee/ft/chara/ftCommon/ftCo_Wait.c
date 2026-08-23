@@ -12,7 +12,10 @@
 
 #include <platform.h>
 
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ftcoll.h"
 #include "ft/ftwaitanim.h"
 #include "ft/inlines.h"

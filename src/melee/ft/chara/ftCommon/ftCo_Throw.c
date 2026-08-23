@@ -3,26 +3,15 @@
 #include "stdbool.h"
 
 #include "baselib/jobj.h"
+
+#include "ft/forward.h"
+
+#include "ft/ft_084E.h"
 #include "mp/types.h"
 
-#include <melee/cm/camera.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftCommon/ftCo_Attack1.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackHi3.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackHi4.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackLw3.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackLw4.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackS3.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackS4.h>
 #include <melee/ft/chara/ftCommon/ftCo_CargoWait.h>
 #include <melee/ft/chara/ftCommon/ftCo_Damage.h>
-#include <melee/ft/chara/ftCommon/ftCo_DamageIce.h>
-#include <melee/ft/chara/ftCommon/ftCo_Escape.h>
 #include <melee/ft/chara/ftCommon/ftCo_Fall.h>
-#include <melee/ft/chara/ftCommon/ftCo_FallSpecial.h>
-#include <melee/ft/chara/ftCommon/ftCo_Guard.h>
-#include <melee/ft/chara/ftCommon/ftCo_Lift.h>
-#include <melee/ft/chara/ftCommon/ftCo_SpecialS.h>
 #include <melee/ft/chara/ftCommon/ftCo_Throw.h>
 #include <melee/ft/chara/ftCommon/ftCo_Thrown.h>
 #include <melee/ft/chara/ftFox/ftFx_SpecialN.h>
@@ -30,34 +19,21 @@
 #include <melee/ft/chara/ftSamus/ftSs_Init.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
-#include <melee/ft/ft_0877.h>
-#include <melee/ft/ft_0881.h>
-#include <melee/ft/ft_0CDD.h>
 #include <melee/ft/ft_0DF1.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcamera.h>
-#include <melee/ft/ftchangeparam.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
-#include <melee/ft/ftlib.h>
-#include <melee/ft/ftmaterial.h>
-#include <melee/ft/ftmetal.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/gm/gm_unsplit.h>
-#include <melee/gr/stage.h>
-#include <melee/it/item.h>
-#include <melee/it/items/it_2E5A.h>
-#include <melee/it/items/itkinoko.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbcollision.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
-#include <melee/pl/pl_040D.h>
 #include <melee/pl/player.h>
 #include <melee/pl/plbonuslib.h>
-#include <melee/pl/plstale.h>
 
 void fn_800DD568(Fighter_GObj* gobj);
 void fn_800DD5EC(Fighter_GObj* gobj);

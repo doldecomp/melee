@@ -1,6 +1,10 @@
 #include "ftKp_SpecialN.h"
 
 #include "baselib/random.h"
+
+#include "ft/forward.h"
+
+#include "ft/ft_084E.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/inlines.h"
 

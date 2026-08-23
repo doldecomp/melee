@@ -6,8 +6,6 @@
 #include "it/forward.h"
 #include "lb/forward.h"
 
-#include <dolphin/mtx.h>
-
 /* 278F2C */ void it_80278F2C(Item_GObj*, CommandInfo*);
 /* 2790C0 */ void it_802790C0(Item_GObj*, CommandInfo*);
 /* 279544 */ void it_80279544(Item_GObj*, CommandInfo*);

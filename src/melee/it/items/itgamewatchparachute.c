@@ -2,7 +2,6 @@
 
 #include "inlines.h"
 
-#include "db/db.h"
 #include "ftGameWatch/ftGw_AttackAir.h"
 
 #include "it/forward.h"
@@ -10,7 +9,6 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
-#include "it/itzako.h"
 
 ItemStateTable it_803F78F8[] = {
     {

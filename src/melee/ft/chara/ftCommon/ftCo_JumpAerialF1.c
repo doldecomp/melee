@@ -4,7 +4,6 @@
 #include "ftCo_ItemScrew.h"
 #include "ftCo_JumpAerial.h"
 
-#include "ft/chara/ftKirby/ftkirby.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_084E.h"

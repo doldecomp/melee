@@ -5,8 +5,6 @@
 
 #include "mndiagram3.h" // IWYU pragma: export
 
-#include <placeholder.h>
-
 #include <melee/mn/types.h>
 
 typedef struct mnDiagram3_PosTable {

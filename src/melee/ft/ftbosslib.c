@@ -19,7 +19,6 @@
 #include "pl/player.h"
 
 #include <math.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>

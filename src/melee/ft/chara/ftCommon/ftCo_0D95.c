@@ -1,13 +1,8 @@
 #include "ftCo_Attack100.h"
-#include "ftCo_Fall.h"
 
 #include "ef/efsync.h"
-#include "ft/chara/ftLink/ftLk_Init.h"
 #include "ft/fighter.h"
-#include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ftcommon.h"
-#include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "it/inlines.h"
 #include "it/items/itsamusgrapple.h"

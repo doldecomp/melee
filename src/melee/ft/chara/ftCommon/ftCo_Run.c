@@ -22,8 +22,6 @@
 #include "ftCommon/ftCo_SpecialS.h"
 #include "ftCommon/ftCo_TurnRun.h"
 
-#include <math.h>
-
 bool fn_800CA5F0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

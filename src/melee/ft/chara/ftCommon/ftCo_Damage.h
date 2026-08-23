@@ -1,7 +1,7 @@
 #ifndef GALE01_08D7F0
 #define GALE01_08D7F0
 
-#include "ftCommon/forward.h"
+#include "ft/forward.h"
 
 /* 08D7F0 */ float ftCo_Damage_CalcAngle(Fighter* fp, float kb_applied);
 /* 08D8D8 */ float ftCo_ScaleBy154(float);

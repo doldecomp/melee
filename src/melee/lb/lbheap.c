@@ -1,10 +1,6 @@
 #include "lbheap.static.h"
 
-#include "placeholder.h"
-
 #include <stddef.h> // offsetof
-#include <dolphin/os/OSInterrupt.h>
-#include <baselib/archive.h>
 #include <baselib/debug.h>
 #include <baselib/initialize.h>
 #include <baselib/memory.h>

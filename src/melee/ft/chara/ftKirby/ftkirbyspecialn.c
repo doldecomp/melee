@@ -6,19 +6,17 @@
 #include "baselib/forward.h"
 
 #include "ef/efasync.h"
-#include "ef/eflib.h"
-#include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_Damage.h"
 #include "ft/chara/ftCommon/ftCo_Jump.h"
 #include "ft/chara/ftCommon/ftCo_KneeBend.h"
 #include "ft/chara/ftCommon/ftCo_Throw.h"
 #include "ft/chara/ftCommon/ftCo_ThrownKirby.h"
-#include "ft/chara/ftCommon/ftCo_Wait.h"
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0852.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0892.h"
@@ -33,27 +31,20 @@
 #include "ftCommon/ftCo_CaptureKirby.h"
 #include "ftCommon/ftCo_CaptureWaitKirby.h"
 #include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/inlines.h"
 
 #include "ftKirby/forward.h"
-#include "ftLuigi/forward.h"
 
 #include "it/itCommonItems.h"
 #include "it/items/it_2ADA.h"
 #include "it/items/it_2F28.h"
-#include "it/items/itdrmariopill.h"
 #include "it/items/itkirby_2F23.h"
-#include "it/items/itkirbyhammer.h"
-#include "it/items/itluigifireball.h"
-#include "it/items/itmariofireball.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbanim.h"
 #include "mp/mpcoll.h"
 
 #include <math.h>
 #include <stddef.h>
-#include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
 

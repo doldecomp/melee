@@ -25,7 +25,6 @@
 #include "sc/types.h"
 #include "ty/toy.h"
 
-#include <math.h>
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>

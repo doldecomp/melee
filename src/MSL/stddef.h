@@ -2,7 +2,6 @@
 #define __STDDEF_H__
 
 typedef unsigned short wchar_t;
-typedef signed int ssize_t;
 
 typedef unsigned long size_t;
 

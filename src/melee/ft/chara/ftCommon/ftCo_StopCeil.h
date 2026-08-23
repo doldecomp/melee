@@ -1,7 +1,7 @@
 #ifndef GALE01_09CA98
 #define GALE01_09CA98
 
-#include "ftCommon/forward.h"
+#include "ft/forward.h"
 
 /* 09CA98 */ bool ftCo_8009EF68(Fighter_GObj* gobj);
 /* 09CB78 */ void ftCo_StopCeil_Anim(Fighter_GObj* gobj);

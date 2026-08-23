@@ -7,6 +7,8 @@
 #include "ftCommon/ftCo_CaptureCut.h"
 #include "ftKirby/ftkirby.h"
 
+#include <baselib/jobj.h>
+
 void ftCo_800BD620(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

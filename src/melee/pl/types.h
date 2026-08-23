@@ -1,7 +1,6 @@
 #ifndef MELEE_PL_TYPES_H
 #define MELEE_PL_TYPES_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include <melee/pl/forward.h>

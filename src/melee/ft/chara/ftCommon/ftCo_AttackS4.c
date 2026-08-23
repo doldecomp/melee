@@ -12,9 +12,9 @@
 
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0CDD.h"
 #include "ft/ft_0DF1.h"
@@ -41,7 +41,6 @@
 
 #include <baselib/forward.h>
 
-#include <math.h>
 #include <dolphin/mtx.h>
 
 typedef enum cmd_var_idx {

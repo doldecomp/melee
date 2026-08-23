@@ -11,6 +11,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
@@ -24,11 +25,8 @@
 #include "it/items/itnesspkflash.h"
 #include "lb/lb_00B0.h"
 
-#include <math.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
 
 static void ftKb_NsSpecialNStart_Anim_inline(HSD_GObj* gobj, Vec3* flash_pos)
 {

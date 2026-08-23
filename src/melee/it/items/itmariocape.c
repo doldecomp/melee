@@ -2,7 +2,6 @@
 
 #include "inlines.h"
 
-#include "db/db.h"
 #include "ef/efasync.h"
 #include "ft/chara/ftMario/ftMr_SpecialS.h"
 #include "ft/ftlib.h"

@@ -4,17 +4,17 @@
 
 #include "lbsnap.static.h"
 
+#include "it/itspawn.h"
+
 #define _p(x) (lbSnap_80433380.x)
 #include <placeholder.h>
 
 #include "ft/ft_0877.h"
 #include "gm/gm_unsplit.h"
-#include "it/it_266F.h"
 
 #include <stdio.h>
 #include <dolphin/card.h>
 #include <dolphin/os.h>
-#include <dolphin/os/OSTime.h>
 #include <baselib/debug.h>
 #include <baselib/hsd_3B34.h>
 
