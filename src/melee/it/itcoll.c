@@ -31,7 +31,6 @@
 #include "lb/lbcollision.h"
 #include "lb/lbvector.h"
 
-#include <math.h>
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjproc.h>

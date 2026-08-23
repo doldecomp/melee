@@ -12,7 +12,6 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Attack100.h"
 
-#include <math.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>

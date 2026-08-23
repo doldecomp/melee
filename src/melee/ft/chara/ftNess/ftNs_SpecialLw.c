@@ -22,7 +22,6 @@
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 
-#include <math.h>
 #include <dolphin/mtx.h>
 
 /// SpecialLw (PSI Magnet)

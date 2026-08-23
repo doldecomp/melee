@@ -2,7 +2,6 @@
 #define PLACEHOLDER_H
 
 #include <m2c_macros.h> // IWYU pragma: export
-#include <dolphin/os.h> // IWYU pragma: keep
 
 /// A label in a jump table
 typedef void (*jmp_t)(void);
@@ -11,6 +10,7 @@ typedef void (*jmp_t)(void);
 typedef jmp_t jtbl_t[];
 
 #if defined(__clang__) || defined(__GNUC__)
+#include <dolphin/os.h> // IWYU pragma: keep
 #define NOT_IMPLEMENTED                                                       \
     OSPanic(__FILE__, __LINE__, "%s is not implemented!", __func__)
 #elif M2CTX
@@ -20,6 +20,13 @@ typedef jmp_t jtbl_t[];
 #else
 #define NOT_IMPLEMENTED                                                       \
     OSPanic(__FILE__, __LINE__, "Function is not implemented!")
+#endif
+
+#ifndef MWERKS_GEKKO
+#define __frsqrte(x) sqrt(x)
+#define sqrtf__Ff(x) sqrtf(x)
+#define sqrtf_accurate(x) sqrtf(x)
+#define __fabs(f) fabsf(f)
 #endif
 
 #ifndef UNK_T

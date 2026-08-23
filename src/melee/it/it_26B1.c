@@ -36,7 +36,8 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-static inline float _sqrtfItem(float x)
+#if MUST_MATCH
+static inline float my_sqrtf(float x)
 {
     f64 _half = 0.5;
 
@@ -55,6 +56,9 @@ static inline float _sqrtfItem(float x)
     }
     return x;
 }
+#else
+#define my_sqrtf(x) sqrtf(x)
+#endif
 
 /// Apply Item Damage
 f32 it_8026B1D4(HSD_GObj* gobj, HitCapsule* itemHitboxUnk)
@@ -62,9 +66,9 @@ f32 it_8026B1D4(HSD_GObj* gobj, HitCapsule* itemHitboxUnk)
     f32 ret = itemHitboxUnk->damage;
     const Item* ip = gobj->user_data;
     if (ip->xDC8_word.flags.x14 != 0) {
-        f32 itemSpeed = _sqrtfItem(ip->x40_vel.x * ip->x40_vel.x +
-                                   ip->x40_vel.y * ip->x40_vel.y +
-                                   ip->x40_vel.z * ip->x40_vel.z);
+        f32 itemSpeed = my_sqrtf(ip->x40_vel.x * ip->x40_vel.x +
+                                 ip->x40_vel.y * ip->x40_vel.y +
+                                 ip->x40_vel.z * ip->x40_vel.z);
 
         ret += itemSpeed * it_804D6D28->x80_float[5];
         ret += it_804D6D28->x80_float[6];

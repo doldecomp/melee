@@ -31,7 +31,6 @@
 
 #include <baselib/forward.h>
 
-#include <math.h>
 #include <dolphin/mtx.h>
 
 void ftMs_SpecialN_Enter(HSD_GObj* gobj)

@@ -1,5 +1,7 @@
 #include "itwhitebea.h"
 
+#include <placeholder.h>
+
 #include "cm/camera.h"
 #include "gr/gricemt.h"
 #include "gr/stage.h"
@@ -17,7 +19,7 @@
 #include "mp/mplib.h"
 #include "sysdolphin/baselib/random.h"
 
-#include <math.h>
+#include <math.h> // IWYU pragma: keep
 
 ItemStateTable it_803F8A88[] = {
     {

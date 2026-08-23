@@ -1,8 +1,6 @@
 #include "ft/fighter.h"
 #include "ft/types.h"
 
-#include <math.h>
-
 bool ftCo_800D67C4(Fighter* fp)
 {
     if (fp->input.x668 & HSD_PAD_B) {

@@ -11,7 +11,6 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 
-#include <math.h>
 #include <baselib/gobj.h>
 #include <melee/gm/gm_unsplit.h>
 

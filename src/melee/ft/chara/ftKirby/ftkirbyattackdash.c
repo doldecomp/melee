@@ -16,7 +16,6 @@
 
 #include "ftKirby/forward.h"
 
-#include <math.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>

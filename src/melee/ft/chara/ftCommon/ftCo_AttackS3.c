@@ -23,7 +23,6 @@
 #include "ft/types.h"
 #include "it/it_26B1.h"
 
-#include <math.h>
 #include <dolphin/mtx.h>
 
 /* 08B788 */ static void decideAngle(Fighter_GObj* gobj);

@@ -1,6 +1,5 @@
 #include "gmpause.h"
 
-#include <math.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>

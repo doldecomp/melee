@@ -1,5 +1,6 @@
 #include "lbvector.h"
 
+#include <placeholder.h>
 #include <platform.h>
 
 #include <math.h>

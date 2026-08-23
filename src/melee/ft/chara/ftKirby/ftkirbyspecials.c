@@ -25,7 +25,6 @@
 #include "it/items/itkirbyhammer.h"
 #include "lb/lb_00B0.h"
 
-#include <math.h>
 #include <stddef.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>

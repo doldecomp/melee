@@ -23,8 +23,6 @@
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
 
-#include <math.h>
-
 static double const ROT_VEL_SCALE = 0.03490658476948738;
 
 ItemStateTable it_803F5850[] = {

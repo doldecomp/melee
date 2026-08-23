@@ -24,7 +24,6 @@
 #include "lb/lb_00B0.h"
 #include "mp/mplib.h"
 
-#include <math.h>
 #include <baselib/gobj.h>
 
 ItemStateTable it_803F9378[] = {

@@ -17,6 +17,8 @@
 #include "lb/lb_013B.h"
 #include "lb/types.h"
 
+#include <math.h>
+
 typedef struct BgFlashState {
     u8 active : 1;
     u8 mode : 7;
@@ -43,7 +45,6 @@ typedef struct BgFlashData {
 
 extern BgFlashData lbl_80433658;
 
-#include <math.h>
 #include <dolphin/gx.h>
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>

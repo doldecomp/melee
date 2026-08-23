@@ -3,8 +3,10 @@
 
 #include <platform.h>
 
+#ifdef MWERKS_GEKKO
 #include <math_ppc.h>
 #include <MetroTRK/intrinsics.h>
+#endif
 
 #define MSL_HI(x) *(int*) &x
 #define MSL_LO(x) *(1 + (int*) &x)
@@ -57,26 +59,31 @@ static inline s32 __fpclassifyd(double x)
     ((sizeof(x) == sizeof(float)) ? __fpclassifyf((float) (x))                \
                                   : __fpclassifyd((double) (x)))
 
+#ifdef MWERKS_GEKKO
 #define fabsf __fabsf
-
 static inline double fabs(double f)
 {
     return __fabs(f);
 }
+#endif
 
+double fabs(double);
+double frexp(double x, int* exponent);
 float acosf(float);
 float asinf(float);
 float atan2f(float y, float x);
 float atanf(float);
-float cosf(float);
-float sinf(float);
-double frexp(double x, int* exponent);
-float fabsf__Ff(float);
 float cos__Ff(float x);
-float sin__Ff(float x);
-void __sinit_trigf_c(void);
-float logf(float);
+float cosf(float);
 float expf(float);
+float fabsf(float);
+float fabsf__Ff(float);
+float logf(float);
+float sin__Ff(float x);
+float sinf(float);
+float sqrt(double);
+float sqrtf(float);
+void __sinit_trigf_c(void);
 
 static inline float fmodf(float a, float b)
 {

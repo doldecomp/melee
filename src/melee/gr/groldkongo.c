@@ -23,7 +23,6 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
-#include <math.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>

@@ -9,7 +9,6 @@
 
 #include <baselib/forward.h>
 
-#include <math.h>
 #include <dolphin/mtx.h>
 
 bool ftCo_SpecialAir_CheckInput(Fighter_GObj* gobj)

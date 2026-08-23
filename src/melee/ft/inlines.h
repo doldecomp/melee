@@ -15,7 +15,6 @@
 
 #include "mp/forward.h"
 
-#include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/archive.h>
 #include <baselib/dobj.h>

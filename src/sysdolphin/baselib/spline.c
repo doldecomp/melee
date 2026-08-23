@@ -1,8 +1,10 @@
 #include "spline.h"
 
+#include <placeholder.h>
+
 #include "forward.h"
 
-#include <math.h>
+#include <math.h> // IWYU pragma: keep
 
 static void splGetCardinalPoint(Vec3*, Vec3*, f32, f32);
 static void splGetBezierPoint(Vec3*, Vec3*, f32);
