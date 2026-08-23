@@ -3,6 +3,8 @@
 
 #include <placeholder.h>
 
+#include <dolphin/os/OSAlloc.h>
+
 struct HSD_SynthSFXNode;
 
 /* 4D6018 */ extern OSHeapHandle HSD_Synth_804D6018; ///< audio heap
