@@ -8,7 +8,6 @@
 #include "gm/types.h"
 #include "if/ifprize.h"
 #include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
 #include "lb/lblanguage.h"
 #include "lb/lbspdisplay.h"
 #include "mn/inlines.h"

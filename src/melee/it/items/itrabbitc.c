@@ -4,10 +4,10 @@
 
 #include "it/forward.h"
 
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/items/types.h"
+#include "it/itgroundcoll.h"
 
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>

@@ -1,6 +1,5 @@
 #include "itarwinglaser.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "ef/efsync.h"
@@ -9,10 +8,10 @@
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"

@@ -1,11 +1,9 @@
 #ifndef GALE01_08CD68
 #define GALE01_08CD68
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "ft/forward.h"
-#include "ftCommon/forward.h"
 
 /* 08CD68 */ bool ftCo_AttackAir_CheckItemThrowInput(Fighter_GObj* gobj);
 /* 08CE68 */ FtMotionId ftCo_AttackAir_GetMsidFromCStick(Fighter* fp);

@@ -4,11 +4,10 @@
 #include <platform.h>
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/it_3F14.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 
 ItemStateTable it_803F5FF0[] = {
     { -1, itHarisen_UnkMotion0_Anim, itHarisen_UnkMotion0_Phys,

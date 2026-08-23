@@ -11,7 +11,6 @@
 #include "lb/lbspdisplay.h"
 #include "sc/types.h"
 #include "ty/toy.h"
-#include "ty/tylist.h"
 
 #include <printf.h>
 #include <stdio.h>

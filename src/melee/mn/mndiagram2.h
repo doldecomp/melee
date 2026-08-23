@@ -1,8 +1,6 @@
 #ifndef MELEE_MN_MNDIAGRAM2_H
 #define MELEE_MN_MNDIAGRAM2_H
 
-#include <placeholder.h>
-
 #include <baselib/gobj.h>
 #include <melee/mn/types.h>
 

@@ -5,7 +5,6 @@
 #include <platform.h>
 
 #include "ft/forward.h"
-#include "ftCommon/forward.h"
 
 #include <math.h>
 #include <baselib/gobj.h>

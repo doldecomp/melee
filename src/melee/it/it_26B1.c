@@ -3,13 +3,10 @@
 #include "it_2725.h"
 #include "itanimlist.h"
 
-#include <placeholder.h>
-
 #include "ft/ftlib.h"
 #include "ft/types.h"
 #include "gm/gm_unsplit.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
 #include "it/itanimlist.h"
@@ -30,6 +27,7 @@
 #include "it/items/itsword.h"
 #include "it/items/ittomato.h"
 #include "it/ithitbox.h"
+#include "it/itspawn.h"
 #include "it/types.h"
 
 #include <baselib/forward.h>

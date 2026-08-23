@@ -2,8 +2,6 @@
 
 #include <platform.h>
 
-#include "lb/lbrefract.h"
-
 #include <math.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>

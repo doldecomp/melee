@@ -1,7 +1,6 @@
 #ifndef SYSDOLPHIN_BASELIB_PSAPPSRT_H
 #define SYSDOLPHIN_BASELIB_PSAPPSRT_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "baselib/forward.h"

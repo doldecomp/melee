@@ -10,15 +10,16 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/items/itegg.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
+#include "it/itspawn.h"
 #include "lb/lb_00B0.h"
 #include "sysdolphin/baselib/random.h"
 

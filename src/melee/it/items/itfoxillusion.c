@@ -6,14 +6,13 @@
 #include "ft/chara/ftFox/ftFx_SpecialS.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itCharItems.h"
+#include "it/itdraw.h"
 #include "it/item.h"
 #include "it/types.h"
 
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 

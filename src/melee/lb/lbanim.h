@@ -1,7 +1,6 @@
 #ifndef GALE01_01E560
 #define GALE01_01E560
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include <baselib/forward.h>

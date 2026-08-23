@@ -30,7 +30,6 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbmthp.h>
 #include <melee/mn/inlines.h>
-#include <melee/mn/mncharsel.h>
 #include <melee/mn/mncount.h>
 #include <melee/mn/mndatadel.h>
 #include <melee/mn/mndeflicker.h>

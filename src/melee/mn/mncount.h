@@ -1,7 +1,6 @@
 #ifndef MELEE_MN_MNCOUNT_H
 #define MELEE_MN_MNCOUNT_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "mn/types.h"

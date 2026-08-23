@@ -4,7 +4,6 @@
 
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 
 #include "forward.h"
@@ -21,7 +20,6 @@
 
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
-#include "lb/lbrefract.h"
 
 #include <dolphin/mtx.h>
 

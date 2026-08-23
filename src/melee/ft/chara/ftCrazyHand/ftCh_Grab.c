@@ -1,6 +1,5 @@
 #include "ftCh_Grab.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "baselib/forward.h"

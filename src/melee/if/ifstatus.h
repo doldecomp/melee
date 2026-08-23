@@ -1,7 +1,6 @@
 #ifndef MELEE_IF_STATUS_H
 #define MELEE_IF_STATUS_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "if/forward.h"

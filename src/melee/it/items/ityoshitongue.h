@@ -3,7 +3,6 @@
 
 #include <platform.h>
 
-#include "ft/chara/ftYoshi/forward.h"
 #include "it/forward.h"
 
 #include "it/items/types.h"

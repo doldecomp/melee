@@ -1,7 +1,6 @@
 #include "ftYs_Guard.h"
 
 #include "ftYs_Init.h"
-#include "ftYs_SpecialN.h"
 
 #include <placeholder.h>
 

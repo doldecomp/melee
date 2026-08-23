@@ -15,7 +15,6 @@
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/mn/inlines.h>
 #include <melee/sc/types.h>

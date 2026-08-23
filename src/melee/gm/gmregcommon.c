@@ -3,7 +3,6 @@
 #include <melee/ft/forward.h>
 
 #include <melee/gm/gm_unsplit.h>
-#include <melee/gm/types.h>
 
 #define NUM_OPPONENTS 3
 

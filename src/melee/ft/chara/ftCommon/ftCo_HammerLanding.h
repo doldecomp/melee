@@ -1,7 +1,7 @@
 #ifndef GALE01_0C5F88
 #define GALE01_0C5F88
 
-#include "ftCommon/forward.h"
+#include "ft/forward.h"
 
 /* 0C5F88 */ void ftCo_HammerLanding_Enter(Fighter_GObj* gobj);
 /* 0C6020 */ void ftCo_HammerLanding_Anim(Fighter_GObj* gobj);

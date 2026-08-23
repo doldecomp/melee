@@ -1,8 +1,6 @@
 #ifndef RUNTIME_GECKO_SETJMP_H
 #define RUNTIME_GECKO_SETJMP_H
 
-#include <platform.h>
-
 typedef struct __jmp_buf {
     unsigned long pc;       /*	0: saved PC			*/
     unsigned long cr;       /*	4: saved CR			*/

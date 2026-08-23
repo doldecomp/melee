@@ -8,7 +8,11 @@
 
 #include "ef/efasync.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
@@ -25,7 +29,6 @@
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 

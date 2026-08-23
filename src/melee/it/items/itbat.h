@@ -5,7 +5,6 @@
 
 #include "it/forward.h"
 
-#include "it/item.h"
 #include "it/items/types.h"
 
 Item_GObj* it_80284854(Vec3*);

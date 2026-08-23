@@ -1,7 +1,6 @@
 #ifndef GALE01_093C3C
 #define GALE01_093C3C
 
-#include "ftCommon/forward.h"
 #include "it/forward.h"
 
 /* 093CF4 */ bool ftpickupitem_80094150(Fighter_GObj* arg0, Item_GObj* arg1);

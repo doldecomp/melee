@@ -16,32 +16,11 @@
 #include <sysdolphin/baselib/random.h>
 #include <melee/db/db.h>
 #include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmcamera.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/gmresult.h>
 #include <melee/gm/gmresultplayer.h>
-#include <melee/gm/gmtoulib.h>
-#include <melee/gm/gmvsmelee.h>
 #include <melee/gm/types.h>
-#include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbbgflash.h>
-#include <melee/lb/lbcardgame.h>
-#include <melee/lb/lbcardnew.h>
 #include <melee/lb/lbdvd.h>
-#include <melee/lb/lbmthp.h>
-#include <melee/lb/lbsnap.h>
-#include <melee/lb/lbtime.h>
-#include <melee/lb/types.h>
-#include <melee/mn/mngallery.h>
-#include <melee/mn/mnsnap.h>
 #include <melee/mn/types.h>
-#include <melee/vi/types.h>
-#include <melee/vi/vi0102.h>
-#include <melee/vi/vi0402.h>
-#include <melee/vi/vi0501.h>
-#include <melee/vi/vi1101.h>
-#include <melee/vi/vi1201v1.h>
 
 /* 480F20 */ MatchExitInfo gm_80480F20;
 /* 48E5F8 */ UNK_T gm_8048E5F8[0x2288 / 4];

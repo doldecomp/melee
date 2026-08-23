@@ -1,6 +1,5 @@
 #include "it/forward.h"
 
-#include "it/item.h"
 #include "it/items/types.h"
 
 /* 2D8618 */ void it_802D8618(s32, Vec3*, s32, s32);

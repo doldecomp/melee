@@ -2,7 +2,6 @@
 #define GALE01_0DFBF8
 
 #include "ft/forward.h"
-#include "ftCommon/forward.h"
 
 /* 0DFBF8 */ FtWalkType ftWalkCommon_GetWalkType(Fighter_GObj* gobj);
 /* 0DFC70 */ bool ftWalkCommon_800DFC70(Fighter_GObj* gobj);

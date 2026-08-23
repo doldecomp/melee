@@ -4,26 +4,19 @@
 #include "ftYs_SpecialN.h"
 #include "types.h"
 
-#include <placeholder.h>
-
-#include "ef/efasync.h"
-
 #include "forward.h"
 
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
 
-#include "ft/ft_0877.h"
 #include "ft/ftanim.h"
 #include "ft/ftcamera.h"
-#include "ft/ftcoll.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
 
-#include "ftCommon/ftCo_Guard.h"
 #include "ftYoshi/ftYs_SpecialHi.h"
 #include "ftYoshi/ftYs_SpecialS.h"
 

@@ -14,6 +14,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"

@@ -11,6 +11,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0DF1.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
@@ -21,9 +22,6 @@
 
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/types.h"
-
-#include "it/forward.h"
-
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"

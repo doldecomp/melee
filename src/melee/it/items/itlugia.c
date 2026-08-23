@@ -6,12 +6,11 @@
 #include "ef/eflib.h"
 #include "gr/stage.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/item.h"
-#include "it/itmaplib.h"
+#include "it/itgroundcoll.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 

@@ -4,7 +4,6 @@
 #include "ft/types.h"
 
 #include <melee/ft/forward.h>
-#include <melee/it/forward.h>
 #include <melee/lb/forward.h>
 
 /* 06DBF4 */ void ftAnim_GetNextAnimJointInTree(HSD_AnimJoint**, int*);

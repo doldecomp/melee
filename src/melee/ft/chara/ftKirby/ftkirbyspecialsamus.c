@@ -5,7 +5,11 @@
 #include "ft/chara/ftCommon/ftCo_Escape.h"
 #include "ft/chara/ftCommon/ftCo_FallSpecial.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"

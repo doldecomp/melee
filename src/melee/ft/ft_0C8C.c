@@ -1,7 +1,5 @@
 #include "ft/ft_0C8C.h"
 
-#include <placeholder.h>
-
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
@@ -18,7 +16,6 @@
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_DownSpot.h"
 #include "ftCommon/ftCo_Lift.h"
-#include "ftCrazyHand/ftCh_Init.h"
 #include "ftCrazyHand/ftCh_TagGrab.h"
 #include "ftMasterHand/ftMh_Damage_0.h"
 #include "gm/gm_unsplit.h"

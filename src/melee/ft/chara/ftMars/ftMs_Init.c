@@ -7,7 +7,6 @@
 
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 
 #include "forward.h"

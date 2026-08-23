@@ -3,7 +3,6 @@
 #include "ftYoshi/ftYs_SpecialS.static.h"
 
 #include "ftYs_Init.h"
-#include "ftYs_SpecialHi.h"
 #include "placeholder.h"
 
 #include "baselib/forward.h"

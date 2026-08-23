@@ -1,6 +1,5 @@
 #include "bytecode.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "baselib/debug.h"

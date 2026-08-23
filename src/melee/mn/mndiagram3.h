@@ -1,8 +1,6 @@
 #ifndef MNDIAGRAM3_H
 #define MNDIAGRAM3_H
 
-#include <placeholder.h>
-
 #include <baselib/forward.h>
 
 #include <baselib/gobj.h>

@@ -1,8 +1,6 @@
 #ifndef GALE01_10A930
 #define GALE01_10A930
 
-#include <placeholder.h>
-
 #include "ft/forward.h"
 
 /* 10A930 */ void fn_8010A930(Fighter_GObj*, Fighter_GObj*);

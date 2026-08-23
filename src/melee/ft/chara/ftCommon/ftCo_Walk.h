@@ -1,9 +1,7 @@
 #ifndef GALE01_0C9468
 #define GALE01_0C9468
 
-#include <placeholder.h>
-
-#include "ftCommon/forward.h"
+#include "ft/forward.h"
 
 /* 0C9468 */ bool ftCo_Walk_CheckInput(Fighter_GObj* gobj);
 /* 0C94B4 */ bool ftCo_Walk_CheckInput_Ottotto(Fighter_GObj* gobj);

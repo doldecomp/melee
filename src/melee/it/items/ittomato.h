@@ -1,8 +1,6 @@
 #ifndef GALE01_2841B4
 #define GALE01_2841B4
 
-#include <placeholder.h>
-
 #include "it/forward.h"
 
 #include "it/items/types.h"

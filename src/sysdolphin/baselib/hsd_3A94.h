@@ -2,8 +2,9 @@
 #define GALE01_3A949C
 
 #include <placeholder.h>
+#include <platform.h>
 
-#include <setjmp.h>
+#include <Gecko_setjmp.h>
 #include <dolphin/card.h>
 
 typedef struct CardFileData {

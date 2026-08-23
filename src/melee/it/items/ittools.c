@@ -5,37 +5,76 @@
 
 #include "ft/ftlib.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itcoll.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 
-#include <math.h>
 #include <baselib/jobj.h>
 
 ItemStateTable it_803F9260[] = {
-    { 0, itTools_UnkMotion4_Anim, itTools_UnkMotion4_Phys,
-      itTools_UnkMotion4_Coll },
-    { 1, itTools_UnkMotion4_Anim, itTools_UnkMotion4_Phys,
-      itTools_UnkMotion4_Coll },
-    { 2, itTools_UnkMotion4_Anim, itTools_UnkMotion4_Phys,
-      itTools_UnkMotion4_Coll },
-    { 3, itTools_UnkMotion4_Anim, itTools_UnkMotion4_Phys,
-      itTools_UnkMotion4_Coll },
-    { 4, itTools_UnkMotion4_Anim, itTools_UnkMotion4_Phys,
-      itTools_UnkMotion4_Coll },
-    { 5, itTools_UnkMotion9_Anim, itTools_UnkMotion9_Phys,
-      itTools_UnkMotion9_Coll },
-    { 6, itTools_UnkMotion9_Anim, itTools_UnkMotion9_Phys,
-      itTools_UnkMotion9_Coll },
-    { 7, itTools_UnkMotion9_Anim, itTools_UnkMotion9_Phys,
-      itTools_UnkMotion9_Coll },
-    { 8, itTools_UnkMotion9_Anim, itTools_UnkMotion9_Phys,
-      itTools_UnkMotion9_Coll },
-    { 9, itTools_UnkMotion9_Anim, itTools_UnkMotion9_Phys,
-      itTools_UnkMotion9_Coll },
+    {
+        0,
+        itTools_UnkMotion4_Anim,
+        itTools_UnkMotion4_Phys,
+        itTools_UnkMotion4_Coll,
+    },
+    {
+        1,
+        itTools_UnkMotion4_Anim,
+        itTools_UnkMotion4_Phys,
+        itTools_UnkMotion4_Coll,
+    },
+    {
+        2,
+        itTools_UnkMotion4_Anim,
+        itTools_UnkMotion4_Phys,
+        itTools_UnkMotion4_Coll,
+    },
+    {
+        3,
+        itTools_UnkMotion4_Anim,
+        itTools_UnkMotion4_Phys,
+        itTools_UnkMotion4_Coll,
+    },
+    {
+        4,
+        itTools_UnkMotion4_Anim,
+        itTools_UnkMotion4_Phys,
+        itTools_UnkMotion4_Coll,
+    },
+    {
+        5,
+        itTools_UnkMotion9_Anim,
+        itTools_UnkMotion9_Phys,
+        itTools_UnkMotion9_Coll,
+    },
+    {
+        6,
+        itTools_UnkMotion9_Anim,
+        itTools_UnkMotion9_Phys,
+        itTools_UnkMotion9_Coll,
+    },
+    {
+        7,
+        itTools_UnkMotion9_Anim,
+        itTools_UnkMotion9_Phys,
+        itTools_UnkMotion9_Coll,
+    },
+    {
+        8,
+        itTools_UnkMotion9_Anim,
+        itTools_UnkMotion9_Phys,
+        itTools_UnkMotion9_Coll,
+    },
+    {
+        9,
+        itTools_UnkMotion9_Anim,
+        itTools_UnkMotion9_Phys,
+        itTools_UnkMotion9_Coll,
+    },
 };
 
 Item_GObj* it_802EEFA8(Vec3* pos, s32 arg1, f32 facing_dir)

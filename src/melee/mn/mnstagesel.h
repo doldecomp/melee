@@ -2,7 +2,6 @@
 #define GALE01_2599EC
 
 #include <placeholder.h>
-#include <platform.h>
 
 #include <sysdolphin/baselib/forward.h>
 
