@@ -2167,6 +2167,8 @@ bool un_80301C80(enum soundtest_callback_arg0 arg0)
         gm_SetPendingSceneIndex(0xB);
         gm_801A4B60();
         break;
+    default:
+        break;
     }
     return 0;
 }
@@ -2182,10 +2184,12 @@ bool un_80301CE0(enum soundtest_callback_arg0 arg0)
     case 1:
         un_802FFCD0(4, un_803FA258.x144);
         break;
+    default:
+        break;
     }
 }
 
-bool un_80301D40(bool update_scene)
+bool un_80301D40(enum soundtest_callback_arg0 update_scene)
 {
     if (update_scene == true) {
         sfxForward();
@@ -2207,7 +2211,7 @@ bool un_80301D7C(enum soundtest_callback_arg0 arg0)
     return 0;
 }
 
-bool un_80301DCC(bool update_scene)
+bool un_80301DCC(enum soundtest_callback_arg0 update_scene)
 {
     if (update_scene == true) {
         sfxForward();
@@ -2218,7 +2222,7 @@ bool un_80301DCC(bool update_scene)
     return false;
 }
 
-bool un_80301E08(bool update_scene)
+bool un_80301E08(enum soundtest_callback_arg0 update_scene)
 {
     if (update_scene == true) {
         sfxForward();
