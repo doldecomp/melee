@@ -5,8 +5,6 @@
 
 #include "gm/types.h"
 
-#include <dolphin/mtx.h>
-
 static struct ResultsData lbl_8046DBE8;
 static u32 lbl_804D3F8C;
 u32 lbl_804D3FA0 = 0x817C0000;

@@ -5,7 +5,6 @@
 
 #include <platform.h>
 
-#include <dolphin/os/OSAlarm.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <melee/sc/types.h>
 

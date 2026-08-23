@@ -9,7 +9,6 @@
 #include "mn/types.h"
 #include "sc/types.h"
 
-#include <dolphin/os.h>
 #include <baselib/controller.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>

@@ -12,8 +12,6 @@
 #include "ftCrazyHand/ftCh_TagCancel.h"
 #include "pl/player.h"
 
-#include <dolphin/mtx.h>
-
 void ftCh_Init_8015A3F4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

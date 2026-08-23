@@ -17,8 +17,6 @@
 #include "ftMasterHand/types.h"
 #include "pl/player.h"
 
-#include <dolphin/mtx.h>
-
 void ftCh_Init_80159670(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

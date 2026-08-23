@@ -9,7 +9,6 @@
 #include "mn/types.h"
 
 #include <dolphin/gx.h>
-#include <dolphin/mtx.h>
 #include <baselib/object.h>
 
 typedef struct _MainMenuData {

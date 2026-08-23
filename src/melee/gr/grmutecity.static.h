@@ -3,8 +3,6 @@
 
 #include "platform.h"
 
-#include <dolphin/mtx.h>
-
 typedef struct grMc_CarEntry {
     /* 0x00 */ f32 x0;
     /* 0x04 */ f32 x4;

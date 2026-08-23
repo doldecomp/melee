@@ -2,7 +2,6 @@
 
 #include "ft/inlines.h"
 
-#include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
 
 /// @remarks MWCC lays out unreferenced .bss objects in reverse declaration

@@ -13,7 +13,6 @@
 #include "ft/forward.h"
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/displayfunc.h>

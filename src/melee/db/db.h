@@ -6,6 +6,7 @@
 #include "melee/ft/forward.h"
 #include "melee/it/forward.h"
 
+#include <dolphin/os.h>
 #include <baselib/controller.h>
 
 extern char db_build_timestamp[];

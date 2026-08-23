@@ -33,7 +33,6 @@
 #include "pl/types.h"
 
 #include <math.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/archive.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>

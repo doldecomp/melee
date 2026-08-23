@@ -13,8 +13,6 @@
 #include "ftMasterHand/types.h"
 #include "pl/player.h"
 
-#include <dolphin/mtx.h>
-
 void fn_8015746C(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, ftMh_MS_SweepLoop, 0, 0.0f, 1.0f, 0.0f,

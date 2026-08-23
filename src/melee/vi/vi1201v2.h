@@ -1,8 +1,6 @@
 #ifndef MELEE_VI_1201_V2_H
 #define MELEE_VI_1201_V2_H
 
-#include "dolphin/gx/GXStruct.h"
-
 #include "ft/forward.h"
 #include <baselib/forward.h>
 

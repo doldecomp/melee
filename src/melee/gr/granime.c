@@ -13,7 +13,6 @@
 
 #include <setjmp.h>
 #include <stdarg.h>
-#include <dolphin/os.h>
 #include <baselib/aobj.h>
 #include <baselib/dobj.h>
 #include <baselib/mobj.h>

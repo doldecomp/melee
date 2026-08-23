@@ -4,8 +4,6 @@
 #include "gr/forward.h"
 #include <baselib/forward.h>
 
-#include <dolphin/mtx.h>
-
 /* 3E8974 */ extern StageData grTFc_StageData;
 
 #endif

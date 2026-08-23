@@ -7,8 +7,6 @@
 
 #include <baselib/forward.h>
 
-#include <dolphin/mtx.h>
-
 /* 146CCC */ s32 ftMt_SpecialN_GetChargeLevel(HSD_GObj* gobj, s32* chargeLevel,
                                               s32* chargeCycles);
 /* 146D24 */ bool ftMt_SpecialN_CheckShadowBallRemove(HSD_GObj* gobj);
