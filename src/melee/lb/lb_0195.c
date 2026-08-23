@@ -8,9 +8,6 @@
 
 #include <dolphin/vi.h>
 #include <baselib/controller.h>
-#include <baselib/initialize.h>
-#include <baselib/sislib.h>
-#include <baselib/video.h>
 
 struct lb_804329F0_t {
     union {

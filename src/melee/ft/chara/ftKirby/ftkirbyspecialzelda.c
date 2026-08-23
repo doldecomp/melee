@@ -26,7 +26,6 @@
 
 #include <stddef.h>
 #include <baselib/gobj.h>
-#include <baselib/random.h>
 
 extern float ftKb_Init_803CB770[];
 

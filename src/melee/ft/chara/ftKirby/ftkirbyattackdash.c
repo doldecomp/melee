@@ -17,8 +17,6 @@
 #include "ftKirby/forward.h"
 
 #include <stddef.h>
-#include <baselib/gobj.h>
-#include <baselib/random.h>
 
 /* 0F1FDC */ static void fn_800F1FDC(Fighter_GObj* gobj);
 /* 0F20C4 */ static void fn_800F20C4(Fighter_GObj* gobj);

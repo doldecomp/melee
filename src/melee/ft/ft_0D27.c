@@ -20,6 +20,7 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallAerial.h"
 
+#include <baselib/jobj.h>
 #include <melee/ft/chara/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/chara/ftCommon/ftCo_Lift.h>
 #include <melee/ft/ft_0877.h>

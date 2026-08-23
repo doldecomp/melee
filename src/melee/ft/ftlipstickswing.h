@@ -2,7 +2,6 @@
 #define GALE01_0CDAB4
 
 #include "ft/forward.h"
-#include <baselib/forward.h>
 
 /* 0CDAB4 */ void ftCo_800CDAB4(Fighter_GObj*, int, int, float);
 /* 0CDB14 */ void ftCo_LipstickSwing_Anim(Fighter_GObj* gobj);

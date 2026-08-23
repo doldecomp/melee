@@ -3,7 +3,6 @@
 #include <platform.h>
 
 #include <dolphin/card.h>
-#include <sysdolphin/baselib/cobj.h>
 #include <melee/lb/types.h>
 
 struct lb_80432A68_t {

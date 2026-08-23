@@ -70,6 +70,7 @@ struct Fighter_GObj {
     /* +34 */ void* x34_unk;
 };
 #else
+#include <baselib/gobj.h>
 typedef struct HSD_GObj Fighter_GObj;
 #endif
 

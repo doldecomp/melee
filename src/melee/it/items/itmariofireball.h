@@ -7,8 +7,6 @@
 
 #include "it/items/types.h"
 
-#include <baselib/forward.h>
-
 #include <dolphin/mtx.h>
 
 void it_8029B6F8(Item_GObj*, Vec3*, ItemKind, f32);

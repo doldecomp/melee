@@ -30,6 +30,8 @@
 #include "ftMasterHand/ftMh_Wait1_2.h"
 #include "ftPeach/ftPe_Float.h"
 
+#include <baselib/jobj.h>
+
 static inline bool ftCo_Fall_inline(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

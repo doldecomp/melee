@@ -5,8 +5,6 @@
 
 #include <placeholder.h>
 
-#include "baselib/forward.h"
-
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_Escape.h"
@@ -30,9 +28,6 @@
 #include "ftKirby/forward.h"
 
 #include <stddef.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
 
 /// @todo This is some kind of inline within #ftKb_DkSpecialN_Anim that's
 ///       shared by #ftKb_DkSpecialAirN_Anim

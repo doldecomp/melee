@@ -16,15 +16,8 @@ CheckOptions:
   - key: readability-redundant-parentheses.AllowedDecls
     value: '::HSD_JObjSetMtxDirty'
   - key: misc-include-cleaner.MissingIncludes
-    # TODO: Can probably be enabled once
-    #       IgnoreHeaders are resolved.
+    # TODO: Try enabling
     value: false
-  - key: misc-include-cleaner.IgnoreHeaders
-    # TODO: Can be resolved by properly defining
-    #       libc symbols and fixing forward-
-    #       declared typedefs
-    value: >-
-      /sysdolphin/.*;
 CustomChecks:
   - Name: ban-primitive-c-types
     Query: |

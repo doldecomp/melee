@@ -27,6 +27,8 @@
 
 #include <baselib/forward.h>
 
+#include <baselib/jobj.h>
+
 char ftYs_Init_DatFilename[] = "PlYs.dat";
 char ftYs_Init_DataName[] = "ftDataYoshi";
 char ftYs_Unk2_803CEAB0[] = "PlYsNr.dat";

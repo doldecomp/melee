@@ -8,12 +8,12 @@
 
 #include "baselib/gobj.h"
 #include "baselib/jobj.h"
-#include "baselib/particle.h"
 #include "baselib/psstructs.h"
 #include "baselib/random.h"
 #include "ft/inlines.h"
 
 #include <math.h>
+#include <baselib/generator.h>
 
 extern EF_DAT_Entry efAsync_DatEntries[51];
 

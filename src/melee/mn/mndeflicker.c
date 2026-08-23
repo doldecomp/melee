@@ -9,7 +9,6 @@
 
 #include <baselib/forward.h>
 
-#include <baselib/controller.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -19,7 +18,6 @@
 #include <baselib/gobjuserdata.h>
 #include <baselib/jobj.h>
 #include <baselib/memory.h>
-#include <baselib/object.h>
 #include <baselib/sislib.h>
 
 void mnDeflicker_8024A168(HSD_GObj* gobj);

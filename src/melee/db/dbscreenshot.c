@@ -4,7 +4,7 @@
 
 #include <string.h>
 #include <baselib/controller.h>
-#include <baselib/gobj.h>
+#include <baselib/debug.h>
 #include <baselib/hsd_3933.h>
 #include <baselib/video.h>
 

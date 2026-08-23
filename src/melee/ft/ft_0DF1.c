@@ -11,7 +11,6 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 
-#include <baselib/gobj.h>
 #include <melee/gm/gm_unsplit.h>
 
 bool ftCo_800DF1C8(Fighter* fp)

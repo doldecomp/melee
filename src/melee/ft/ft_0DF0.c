@@ -13,7 +13,6 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 
-#include <baselib/gobj.h>
 #include <melee/ft/ft_0877.h>
 
 void ftCo_800DEE84(Fighter_GObj* gobj, u32 arg1, float arg2, float dmg_mult)

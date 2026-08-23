@@ -14,7 +14,6 @@
 #include "lb/lblanguage.h"
 
 #include <math.h>
-#include <baselib/gobj.h>
 #include <baselib/random.h>
 
 void it_8027870C(s32 arg0)

@@ -6,7 +6,6 @@
 #include "ft/types.h"
 
 #include "ftKoopa/forward.h"
-#include <baselib/forward.h>
 
 /* 132A0C */ void ftKp_Init_OnDeath(Fighter_GObj* gobj);
 /* 132A64 */ void ftKp_Init_UnkMotionStates3(Fighter_GObj* gobj);

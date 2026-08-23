@@ -27,7 +27,6 @@
 
 #include <stddef.h>
 #include <baselib/gobj.h>
-#include <baselib/random.h>
 
 /* 10C344 */ static void fn_8010C344(Fighter_GObj* gobj);
 /* 10C44C */ static void fn_8010C44C(Fighter_GObj* gobj);

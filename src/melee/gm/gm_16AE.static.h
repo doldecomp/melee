@@ -1,7 +1,5 @@
 #include <platform.h>
 
-#include <baselib/forward.h>
-
 #include <melee/gm/types.h>
 
 /* 1693A8 */ s32 fn_801693A8(void);

@@ -20,7 +20,7 @@
 #include "ty/toy.h"
 
 #include <math.h>
-#include <baselib/particle.h>
+#include <baselib/generator.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/debug.h>

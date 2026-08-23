@@ -28,7 +28,6 @@
 #include "it/items/itseakneedlethrown.h"
 
 #include <stddef.h>
-#include <baselib/gobj.h>
 #include <baselib/random.h>
 
 /* 106DB0 */ static void fn_80106DB0(Fighter_GObj*);

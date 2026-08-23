@@ -18,7 +18,6 @@
 #include "ftCommon/ftCo_Damage.h"
 #include "lb/lb_00B0.h"
 
-#include <baselib/gobj.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/pl/plbonuslib.h>
 

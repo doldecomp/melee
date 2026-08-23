@@ -4,8 +4,6 @@
 
 #include <platform.h>
 
-#include <baselib/forward.h>
-
 #include <math.h>
 
 static void sdata2_order(void)

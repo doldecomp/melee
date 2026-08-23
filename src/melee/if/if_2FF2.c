@@ -14,7 +14,6 @@
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/sislib.h>
 #include <baselib/wobj.h>

@@ -7,6 +7,8 @@
 #include "mn/types.h"
 
 #include <math.h>
+#include <baselib/gobjuserdata.h>
+#include <baselib/memory.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>

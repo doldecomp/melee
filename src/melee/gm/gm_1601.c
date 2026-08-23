@@ -34,6 +34,7 @@
 #include "ty/toy.h"
 
 #include <m2c_macros.h>
+#include <baselib/sislib.h>
 #include <baselib/video.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/debugconsole_main.h>

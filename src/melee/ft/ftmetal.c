@@ -1,6 +1,5 @@
 #include "ftmetal.h"
 
-#include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/id.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>

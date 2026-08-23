@@ -3,8 +3,6 @@
 
 #include <placeholder.h>
 
-#include "baselib/forward.h"
-
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 
@@ -23,9 +21,6 @@
 
 #include <math.h>
 #include <stddef.h>
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
-#include <baselib/random.h>
 
 void ftKb_SpecialNCa_800F99BC(Fighter_GObj* gobj)
 {

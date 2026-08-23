@@ -5,8 +5,6 @@
 
 #include "ft/types.h"
 
-#include <sysdolphin/baselib/forward.h>
-
 /* 0C0658 */ ColorOverlay* ftCo_800C0658(Fighter* fp);
 /* 0C0674 */ ColorOverlay* ftCo_800C0674(Fighter_GObj* gobj);
 /* 0C0694 */ enum_t ftCo_800C0694(Fighter* fp);

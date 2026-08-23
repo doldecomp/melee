@@ -4,7 +4,6 @@
 #include <placeholder.h>
 
 #include <melee/mn/forward.h>
-#include <sysdolphin/baselib/forward.h>
 
 #include <melee/gm/types.h>
 

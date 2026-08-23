@@ -1,8 +1,6 @@
 #ifndef MELEE_GM_RESULT_STATIC_H
 #define MELEE_GM_RESULT_STATIC_H
 
-#include "baselib/forward.h"
-
 #include "gm/types.h"
 
 static struct ResultsData lbl_8046DBE8;

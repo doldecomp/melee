@@ -24,7 +24,6 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/memory.h>
-#include <baselib/particle.h>
 #include <baselib/sislib.h>
 #include <baselib/wobj.h>
 
