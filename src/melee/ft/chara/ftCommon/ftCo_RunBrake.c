@@ -19,8 +19,6 @@
 #include "ftCommon/ftCo_Squat.h"
 #include "ftCommon/ftCo_TurnRun.h"
 
-#include <math.h>
-
 bool ftCo_RunBrake_CheckInput(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

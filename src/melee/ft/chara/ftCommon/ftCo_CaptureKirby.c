@@ -13,8 +13,6 @@
 #include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/types.h"
 
-#include <math.h>
-
 float ftCo_800BD19C(Fighter_GObj* gobj, Vec3* pos)
 {
     Fighter* fp = gobj->user_data;

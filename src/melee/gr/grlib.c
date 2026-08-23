@@ -19,7 +19,6 @@
 #include "lb/types.h" // IWYU pragma: keep
 #include "sc/types.h"
 
-#include <math.h>
 #include <baselib/generator.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>

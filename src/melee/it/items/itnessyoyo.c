@@ -17,7 +17,6 @@
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
 
-#include <math.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 

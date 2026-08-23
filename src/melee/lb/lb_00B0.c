@@ -2,7 +2,6 @@
 
 #include "sc/types.h" // IWYU pragma: keep
 
-#include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/aobj.h>
 #include <baselib/dobj.h> // IWYU pragma: keep

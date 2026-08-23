@@ -11,8 +11,6 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
-#include <math.h>
-
 static void sdata2_order(void)
 {
     (void) 0.5f;

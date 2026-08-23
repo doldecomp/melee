@@ -24,7 +24,6 @@ CheckOptions:
     #       libc symbols and fixing forward-
     #       declared typedefs
     value: >-
-      /MSL/math\.h;
       /sysdolphin/.*;
 CustomChecks:
   - Name: ban-primitive-c-types

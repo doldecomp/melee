@@ -859,12 +859,6 @@ set(SOURCES
     src/melee/vi/vi.c
 )
 
-add_compile_definitions(TARGET_PC
-    sqrtf__Ff=sqrtf
-    sqrtf_accurate=sqrtf
-    __frsqrte=sqrt
-)
-
 add_library(melee STATIC ${SOURCES})
 
 target_include_directories(melee PRIVATE

@@ -15,7 +15,6 @@
 
 #include <baselib/forward.h>
 
-#include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/debug.h>
 

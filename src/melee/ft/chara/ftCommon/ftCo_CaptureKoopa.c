@@ -16,7 +16,6 @@
 #include "ftCommon/types.h"
 #include "ftKoopa/ftKp_SpecialS.h"
 
-#include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 

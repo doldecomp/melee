@@ -16,7 +16,6 @@
 #include "it/ithitbox.h"
 #include "it/types.h"
 
-#include <math.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 

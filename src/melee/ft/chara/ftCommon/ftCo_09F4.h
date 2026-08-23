@@ -6,7 +6,6 @@
 
 #include "ft/forward.h"
 
-#include <math.h>
 #include <baselib/gobj.h>
 
 /* 09F4A4 */ UNK_RET ftCo_8009F4A4(UNK_PARAMS);
