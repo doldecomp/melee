@@ -122,7 +122,7 @@ static inline void inlineB2(Fighter_GObj* gobj, Fighter_GObj* thrower_gobj,
     }
     fp->mv.co.thrownkirby.scale = jobj->scale;
 #else
-    HSD_JObjSetScale(jobj, &fp->mv.co.thrownkirby.scale);
+    HSD_JObjGetScale(jobj, &fp->mv.co.thrownkirby.scale);
 #endif
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_SkipThrowException, 0.0f, 1.0f,
                               0.0f, thrower_gobj);
