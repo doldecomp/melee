@@ -1,6 +1,6 @@
 #include "Gecko_setjmp.h"
 
-#include <placeholder.h>
+#include <platform.h>
 
 ASM int __setjmp(register __jmp_buf* env){
 #ifdef MWERKS_GEKKO // clang-format off

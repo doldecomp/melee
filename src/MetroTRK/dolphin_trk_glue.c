@@ -1,7 +1,5 @@
 #include "dolphin_trk_glue.h"
 
-#include <placeholder.h>
-
 #ifdef MWERKS_GEKKO
 #include "mem_TRK.h"
 #include "targimpl.h"
