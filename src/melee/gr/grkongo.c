@@ -136,10 +136,12 @@ StageData grKg_StageData = {
     ARRAY_SIZE(grKg_803E16E0),
 };
 
+#ifdef MUST_MATCH
 static void order_data(void)
 {
     (void) "%s:%d: couldn t get gobj(id=%d)\n";
 }
+#endif
 
 static const lbColl_80008D30_arg1 grKg_803B7FB0 = {
     HitCapsule_Enabled, 1, 361, 0, 0, 180, 0, 0, 0,
@@ -187,71 +189,6 @@ void grKongo_801D557C(Ground_GObj* arg0)
 void grKongo_801D55D4(Ground_GObj* arg)
 {
     return;
-}
-
-/// @todo Investigate these types of patterns in
-/// other files; the Randi check with zero is probably
-/// its own thing
-static inline s32 random_adder_b(s32 a, s32 b)
-{
-    s32 c = a - b;
-    if (c != 0) {
-        c = HSD_Randi(c);
-    } else {
-        c = 0;
-    }
-    return b + c;
-}
-
-static inline s32 random_adder(s32 temp_f0, s32 temp_f2)
-{
-    s32 temp_r28_2;
-    s32 var_r29;
-    s32 temp_r3;
-    s32 temp_r3_2;
-    s32 var_r3;
-    s32 var_r3_2;
-#if 0
-    if (temp_f2 > temp_f0) {
-        return random_adder_b(temp_f2, temp_f0);
-    } else if (temp_f2 < temp_f0) {
-        return random_adder_b(temp_f0, temp_f2);
-    }
-#else
-    temp_r28_2 = temp_f0;
-    var_r29 = temp_f2;
-
-    if (temp_f2 > temp_f0) {
-        temp_r3 = var_r29 - temp_r28_2;
-        if (temp_r3 != 0) {
-            var_r3 = HSD_Randi(temp_r3);
-        } else {
-            var_r3 = 0;
-        }
-        return temp_r28_2 + var_r3;
-    } else if (var_r29 < temp_r28_2) {
-        temp_r3_2 = temp_r28_2 - var_r29;
-        if (temp_r3_2 != 0) {
-            var_r3_2 = HSD_Randi(temp_r3_2);
-        } else {
-            var_r3_2 = 0;
-        }
-        return var_r29 + var_r3_2;
-    }
-    return temp_r28_2;
-#endif
-}
-
-static inline s32 random_adder_f(f32 a, f32 b)
-{
-    s32 ia = a;
-    s32 ib = b;
-    if (ib > ia) {
-        return random_adder_b(ib, ia);
-    } else if (ib < ia) {
-        return random_adder_b(ia, ib);
-    }
-    return ia;
 }
 
 void grKongo_801D55D8(Ground_GObj* arg0)
@@ -671,10 +608,12 @@ static struct _struct_grKg_803E188C_0x18 grKg_803E188C[0xF] = {
     { 0x2D, 0, NULL, 0.10471976f, 0.0f, 0.0f },
 };
 
+#ifdef MUST_MATCH
 static void order_data_1(void)
 {
     (void) "translate";
 }
+#endif
 
 void grKongo_801D828C(HSD_GObj* gobj)
 {
@@ -766,19 +705,6 @@ void grKongo_801D651C(Ground_GObj* gobj)
 bool grKongo_801D6660(Ground_GObj* arg)
 {
     return 0;
-}
-
-static inline Vec3* lbVector_Diff_t(Vec3* a, Vec3* b, Vec3* result)
-{
-    result->x = a->x - b->x;
-    result->y = a->y - b->y;
-    result->z = a->z - b->z;
-    return result;
-}
-
-static inline float lbVector_Len_t(Vec3* vec)
-{
-    return sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
 void grKongo_801D6668(Ground_GObj* arg0)

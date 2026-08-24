@@ -2486,14 +2486,6 @@ bool gm_80164ABC(void)
     return true;
 }
 
-static inline bool is_character_unlocked(u8 idx, const u16* ptr)
-{
-    if (idx == 0xB || (*ptr & (1LL << idx))) {
-        return true;
-    }
-    return false;
-}
-
 static inline bool fn_80164B48_check(u8 idx, const u16* ptr)
 {
     if (idx == 0xB || (*ptr & (1LL << idx))) {
@@ -4348,19 +4340,6 @@ s32 gm_80169394(void)
     return gm_1601_GetUnkData()->unk_10_b3;
 }
 
-s32 fn_801693A8(void)
-{
-    return gm_1601_GetUnkData()->unk_10_b2;
-}
-
-static inline bool gm_801693BC_inline(u8 ckind)
-{
-    if (ckind - CKIND_BOY <= 1) {
-        return true;
-    }
-    return false;
-}
-
 /// Player is Fighting Wireframe
 bool gm_801693BC(int arg0)
 {
@@ -4874,11 +4853,6 @@ void gm_8016A164(void)
         Player_SetSlottype(i, Gm_PKind_NA);
         Player_UnsetFlagsBit1(i);
     }
-}
-
-s32 fn_8016A1E4(void)
-{
-    return gm_1601_GetUnkData()->unk_10_b0;
 }
 
 bool gm_8016A1F8(void)

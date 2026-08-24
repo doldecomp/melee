@@ -647,16 +647,6 @@ void ftNs_AttackHi4_YoyoStartTimedRehit(HSD_GObj* gobj)
     fp->mv.ns.attackhi4.yoyoRehitTimer = (s32) ness_attr->xB4_YOYO_REHIT_RATE;
 }
 
-/**
- * @todo #ftNs_AttackHi4_Anim literally won't match under any circumstances
- *       unless this inline is used to get @c Fighter*.
- */
-static Fighter* GetFighterData(HSD_GObj* gobj)
-{
-    Fighter* fp = gobj->user_data;
-    return fp;
-}
-
 void ftNs_AttackHi4_Anim(HSD_GObj* gobj)
 {
     Vec3 sp24;

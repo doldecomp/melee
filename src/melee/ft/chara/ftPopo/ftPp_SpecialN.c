@@ -150,8 +150,6 @@ static inline void inlineA0(Fighter_GObj* gobj, Fighter* other_fp)
     }
 }
 
-static inline void inlineA1(Item_GObj* item_gobj, Fighter* fp) {}
-
 void ftPp_SpecialN_8011F500(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

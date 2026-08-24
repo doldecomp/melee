@@ -70,12 +70,13 @@ struct grGreens_YakumonoParam {
                                      mpLib_GroundEnum ground_kind,
                                      float delta_y);
 
-/// @todo Emitted only to lay out the .sdata2 literal pool in retail order.
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 1.0f;
     (void) 0.0f;
 }
+#endif
 
 #define Gr_Greens_Block_Status_None 0
 /// "Colum" (sic): the retail assert strings at 0x803E7908/0x803E7924 spell
@@ -156,10 +157,12 @@ StageData grGr_StageData = {
     0,
 };
 
+#ifdef MUST_MATCH
 static void order_data(void)
 {
     (void) "%s:%d: couldn t get gobj(id=%d)\n";
 }
+#endif
 
 static u8 grGr_8049F9E0[0x20];
 
@@ -186,12 +189,6 @@ static inline struct grGreens_BlockVars* getBlock(Ground* gp, int i, int j);
 static inline struct grGreens_BlockVars* getBlock(Ground* gp, int i, int j)
 {
     return &gp->u.greens.x8_blocks[i][j];
-}
-
-static inline Vec* getVec(Ground* gp, int i, int j);
-static inline Vec* getVec(Ground* gp, int i, int j)
-{
-    return &((Vec(*)[6]) gp->u.greens.x4)[i][j];
 }
 
 void grGreens_80213458(bool arg)
@@ -1502,11 +1499,6 @@ void grGreens_802166C4(Ground_GObj* gobj)
             }
         }
     }
-}
-
-static inline int getBlockX18(Ground* gp, int i, int j)
-{
-    return getBlock(gp, i, j)->x18;
 }
 
 void grGreens_80216C20(Ground_GObj* gobj)

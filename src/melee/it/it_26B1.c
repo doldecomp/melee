@@ -565,45 +565,6 @@ f32 it_8026B960(HSD_GObj* gobj)
 extern void lb_8000B804(HSD_JObj*, HSD_Joint*);
 extern void lb_8000BA0C(HSD_JObj*, f32);
 
-static inline void What(HSD_GObj* gobj, struct ItemStateDesc* itemStateDesc,
-                        Item* ip, HSD_JObj* item_jobj2)
-{
-    struct ItemStateDesc* temp_stateDesc;
-    HSD_Joint* temp_joint;
-    HSD_JObj* item_jobj; // r30
-    item_jobj = NULL;
-    ip->xD54_throwNum -= 1;
-    ip->xDC8_word.flags.x14 = 0;
-    if ((s32) ip->anim_id != -1) {
-        ip->xD0_itemStateDesc = itemStateDesc;
-        if (ip->xD0_itemStateDesc != NULL) {
-            HSD_JObjRemoveAnimAll(item_jobj2);
-            temp_joint = ip->xC8_joint;
-            if (temp_joint != NULL) {
-                if (item_jobj2 == NULL) {
-                    item_jobj = NULL;
-                } else {
-                    item_jobj = item_jobj2->child;
-                }
-                lb_8000B804(item_jobj, temp_joint->child);
-            }
-            temp_stateDesc = ip->xD0_itemStateDesc;
-            HSD_JObjAddAnimAll(item_jobj2, temp_stateDesc->x0_anim_joint,
-                               temp_stateDesc->x4_matanim_joint,
-                               temp_stateDesc->x8_parameters);
-            lb_8000BA0C(item_jobj2, ip->x5D0_animFrameSpeed);
-            HSD_JObjReqAnimAll(item_jobj2, 0.0f);
-            Item_80268E40(ip, itemStateDesc);
-        }
-        HSD_JObjAnimAll(item_jobj2);
-        it_80279BE0(gobj);
-        it_802799E4(gobj);
-        return;
-    }
-    HSD_JObjRemoveAnimAll(item_jobj2);
-    ip->x524_cmd.u = NULL;
-}
-
 /// Transfer item on character transformation (Zelda <-> Sheik)
 void it_8026B9A8(HSD_GObj* gobj, HSD_GObj* arg1, Fighter_Part arg2)
 {

@@ -96,11 +96,13 @@ ItemStateTable it_803F9000[] = {
     },
 };
 
-static void data_ordering(void)
+#ifdef MUST_MATCH
+static void order_sdata2(void)
 {
-    HSD_JObjSetRotationY(NULL, 0.0f);
-    HSD_JObjSetRotationY(NULL, 10.0f);
+    (void) 0.0f;
+    (void) 10.0f;
 }
+#endif
 
 void it_802EB5C8(Item_GObj* gobj)
 {

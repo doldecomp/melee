@@ -392,7 +392,6 @@ clang_disabled_warnings = [
     "sign-compare",
     "sometimes-uninitialized",
     "unused-but-set-variable",
-    "unused-function",
     "unused-parameter",
     "unused-value",
     "unused-variable",

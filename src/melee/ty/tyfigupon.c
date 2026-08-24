@@ -54,7 +54,6 @@
 /* 3155C8 */ static void _tyFigupon_803155C8(void);
 /* 315C44 */ static void _tyFigupon_80315C44(HSD_GObj*);
 /* 316170 */ static void _tyFigupon_80316170(HSD_GObj*);
-/* 31638C */ static s32 _tyFigupon_8031638C(s16);
 /* 316420 */ static void _tyFigupon_80316420(s32);
 /* 3168DC */ static void _tyFigupon_803168DC(HSD_GObj*);
 /* 316BF8 */ static void _tyFigupon_80316BF8(HSD_GObj*);
@@ -71,6 +70,7 @@
 /* 4D6F08 */ static HSD_CameraDescPerspective* _tyFigupon_804D6F08;
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data_0(void)
 {
     /*   +0 */ (void) "ToyFigurePonPanel_Top_joint";
@@ -82,8 +82,10 @@ static void order_data_0(void)
     /*  +94 */ (void) "ToyFigurePonCoin_Top_matanim_joint";
     /*  +B8 */ (void) "ToyFigurePonCoin_Top_shapeanim_joint";
 }
+#endif
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void order_sdata2_0(void)
 {
     /*  +0 */ (void) 0.0f;
@@ -137,6 +139,7 @@ static void order_sdata2_0(void)
     /* +C8 */ (void) -13.599999f;
     /* +CC */ (void) 9.599999f;
 }
+#endif
 
 void _tyFigupon_80314AA8(HSD_JObj* jobj, char* anim_str, char* matanim_str,
                          char* shapeanim_str)
@@ -580,11 +583,13 @@ void _tyFigupon_803155C8(void)
 }
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data_108(void)
 {
     /* +108 */ (void) "*** Not Get Figure!\n";
     /* +120 */ (void) __FILE__;
 }
+#endif
 
 static inline s32 tyFigupon_GetCoinCount(void)
 {
@@ -756,35 +761,9 @@ void _tyFigupon_80316170(HSD_GObj* arg0)
     }
 }
 
-s32 _tyFigupon_8031638C(s16 arg0)
-{
-    s32 temp_r0;
-    s32 var_r30;
-
-    temp_r0 = (s32) Toy_803060BC((s32) arg0, 6);
-    var_r30 = 0;
-    switch (temp_r0) {
-    case 0:
-    case 1:
-    case 4:
-    case 6:
-    case 8:
-        break;
-    case 7:
-        if (Toy_803048C0((s32) arg0) > 0xFA) {
-            var_r30 = 1;
-        }
-        break;
-    case 5:
-        var_r30 = 1;
-        break;
-    case 2:
-    case 3:
-        var_r30 = 1;
-        break;
-    }
-    return var_r30;
-}
+#ifdef MUST_MATCH
+s32 _tyFigupon_8031638C(s16 arg0) {}
+#endif
 
 void _tyFigupon_80316420(s32 arg0)
 {
@@ -1361,10 +1340,12 @@ void _tyFigupon_8031753C(void)
 }
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data_4A8(void)
 {
     /* +4A8 */ (void) "ScMenFigure_scene_lights";
 }
+#endif
 
 /* 3FEED4 */ static HSD_WObjDesc _tyFigupon_803FEED4 = {
     NULL,

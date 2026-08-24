@@ -853,26 +853,6 @@ int lb_8001BB48(int chan, char* filename, void* file_entries, void* save_data,
     return lb_80019CB0(0x10);
 }
 
-static inline int lb_8001BB48_inline(int chan, char* filename,
-                                     void* file_entries, void* save_data,
-                                     const char* write_buf, int write_offset,
-                                     int write_len, UNK_T status_out)
-{
-    int new_var;
-    lb_80019EF0(chan, save_data, status_out, 0);
-
-    setup_task(0, 0x10000);
-    new_var = 0x20;
-    setup_task(1, 0x201);
-    lb_8001A4CC_dontinline(filename, file_entries);
-    setup_task(3, -1);
-    memcpy(setup_task(7, 0x10)->x10, filename, new_var);
-    _p(unk_14) = write_buf;
-    _p(unk_18) = write_offset;
-    _p(unk_1C) = write_len;
-    return lb_80019CB0(0x10);
-}
-
 int lb_8001BC18(int chan, char* filename, void** file_entries, void* save_data,
                 const char* write_buf, int write_offset, int write_len,
                 UNK_T status_out)

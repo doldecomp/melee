@@ -10,6 +10,7 @@
 /* 094EA4 */ bool ftCo_80094EA4(Fighter_GObj* gobj);
 /* 094E7C */ bool ftCo_800952DC(Fighter_GObj* gobj);
 /* 0951DC */ bool ftCo_8009563C(Fighter_GObj* gobj);
+/* 0952DC */
 /* 0952E4 */ void ftCo_80095744(Fighter_GObj* gobj, bool*);
 /* 095328 */ bool ftCo_80095328(Fighter_GObj*, bool*);
 /* 095394 */ void ftCo_800957F4(Fighter_GObj* gobj, FtMotionId msid);

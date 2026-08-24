@@ -230,6 +230,7 @@ s16 grIm_803E4544[] = {
     210, 211, 212, 213, 214, 215, 216,
 };
 
+#ifdef MUST_MATCH
 static void order_data(void)
 {
     (void) -20.0f;
@@ -239,6 +240,7 @@ static void order_data(void)
     (void) __FILE__;
     (void) "i<ICEMT_FIELD_MAX";
 }
+#endif
 
 static StageCallbacks stage_callbacks[] = {
     {
@@ -1613,16 +1615,6 @@ float grIceMt_801F993C(int under_id, int upper_id)
 
     return -((y * icemt_field[upper_ix].x8) -
              (y * icemt_field[under_ix].x4 + yakumono_param->x40));
-}
-
-static inline HSD_GObj* grIceMt_801F71E8_inner2(int id)
-{
-    return setupStageCallbacks(id);
-}
-
-static inline HSD_GObj* grIceMt_801F71E8_noinline2(int id)
-{
-    return grIceMt_801F71E8_inner2(id);
 }
 
 bool grIceMt_801F9ACC(struct grIceMt_GObj9_GObj10_UnderUpperIdPair* ids_,

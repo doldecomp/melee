@@ -103,17 +103,6 @@ void ftCo_800976A4(Fighter_GObj* gobj)
     ftCommon_8007EBAC(fp, 9, 0);
 }
 
-/// @todo This is a common inline. Needs to be solved and placed in a header.
-///       Could also be a real library function.
-static inline void inlineA0(Fighter_GObj* gobj, enum_t arg1, enum_t arg2,
-                            Fighter_Part part, float* param)
-{
-    Fighter* fp = gobj->user_data;
-    void* fp_x60C = &fp->x60C;
-    HSD_JObj* jobj = fp->parts[part].joint;
-    efAsync_Spawn(gobj, fp_x60C, arg1, arg2, jobj, &param);
-}
-
 static inline void ftCo_800978D4_inline(Fighter_GObj* gobj, float* param)
 {
     Fighter* fp = gobj->user_data;

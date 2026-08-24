@@ -218,6 +218,7 @@ static inline void it_80289BE8_spawn(Item_GObj* gobj, ItemKind kind,
 }
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 5.0f;
@@ -235,6 +236,7 @@ static void sdata2_order(void)
     (void) 0.45f;
     (void) S32_TO_F32;
 }
+#endif
 
 /// @todo Only differs by register allocation.
 void it_80289BE8(Item_GObj* gobj, s32 arg1, s32 food_weight, s32 arg3)

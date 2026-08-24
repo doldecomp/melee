@@ -320,25 +320,6 @@ static inline int grCn_CheckFar(Vec3* pos)
     return 1;
 }
 
-static inline void grCn_SpawnArwing(s32 slot, u32 type_id, int group)
-{
-    grCn_804D69A4 = slot;
-    arwing_types[slot] = type_id;
-    arwing_groups[slot] = group;
-    arwing_gobjs[grCn_804D69A4] = grCorneria_801DD534(1);
-}
-
-static inline u32 grCn_PickUniqueType(s32 slot, int range, int base)
-{
-    int rand_id = arwing_types[slot];
-    while (rand_id == arwing_types[0] || rand_id == arwing_types[1] ||
-           rand_id == arwing_types[2])
-    {
-        rand_id = HSD_Randi(range) + base;
-    }
-    return rand_id;
-}
-
 void grCorneria_801DCE1C(void)
 {
     Vec3 pos;

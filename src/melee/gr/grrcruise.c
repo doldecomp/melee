@@ -64,20 +64,22 @@ struct grRCruise_YakumonoParam {
                                             mpLib_GroundEnum ground_kind,
                                             float delta_y);
 
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
-    (void) 0.4f;         // 3e cc cc cd
-    (void) 0.0f;         // 00 00 00 00
-    (void) 1.0471976f;   // 3f 86 0a 92
-    (void) -10000.0f;    // c6 1c 40 00
-    (void) 10000.0f;     // 46 1c 40 00
-    (void) 0.017453292f; // 3c 8e fa 35
-    (void) 10.0f;        // 41 20 00 00
-    (void) -1.0f;        // bf 80 00 00
-    (void) -350.0f;      // c3 af 00 00
-    (void) 1.0f;         // 3f 80 00 00
-    (void) 1000.0f;      // 44 7a 00 00
+    (void) 0.4f;
+    (void) 0.0f;
+    (void) 1.0471976f;
+    (void) -10000.0f;
+    (void) 10000.0f;
+    (void) 0.017453292f;
+    (void) 10.0f;
+    (void) -1.0f;
+    (void) -350.0f;
+    (void) 1.0f;
+    (void) 1000.0f;
 }
+#endif
 
 GrJoint grRc_803E4DA8[] = {
     { 0, 1, 1 },   { 1, 1, 1 },   { 2, 1, 1 },   { 3, 1, 1 },   { 4, 1, 1 },

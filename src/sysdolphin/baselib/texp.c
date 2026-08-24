@@ -1034,17 +1034,6 @@ static GXTevKColorID id1[4] = { GX_KCOLOR0, GX_KCOLOR1, GX_KCOLOR2,
                                 GX_KCOLOR3 };
 static GXTevRegID id2[3] = { GX_TEVREG0, GX_TEVREG1, GX_TEVREG2 };
 
-static inline int clamp_color(int c)
-{
-    if (c > 0xFF) {
-        return 0xFF;
-    }
-    if (c < 0) {
-        return 0;
-    }
-    return c;
-}
-
 void HSD_TExpSetReg(HSD_TExp* texp)
 {
     int i;

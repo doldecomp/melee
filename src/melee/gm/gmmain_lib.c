@@ -75,11 +75,6 @@ GXRenderModeObj gmMainLib_803D4A80 = {
     { 8, 8, 0xA, 0xC, 0xA, 8, 8 },
 };
 
-static struct gmm_x0* bss_order(void)
-{
-    return gmMainLib_8045A6C0;
-}
-
 GameRules* gmMainLib_GetGameRules(void)
 {
     return &gmMainLib_804D3EE0->x1850;
@@ -736,16 +731,6 @@ void gmMainLib_8015DB80(void)
     int i;
     for (i = 0; i < 11; i++) {
         gmMainLib_804D3EE0->x39[(u8) i] = 0;
-    }
-}
-
-static inline void gmMainLib_AdjustConfigNameTag(int value, s32 name_tag,
-                                                 struct gmm_x0_528_t** config)
-{
-    if (value == (u8) name_tag) {
-        (*config)[4].c_kind = 0x78;
-    } else if (value > (u8) name_tag && value != 0x78) {
-        (*config)[4].c_kind = value - 1;
     }
 }
 
