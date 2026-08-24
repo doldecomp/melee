@@ -588,6 +588,13 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     HSD_ASSERT(0x1C5, 0);
 }
 
+ftCo_803C6594_t ftCo_803C639C = { 0 };
+ftCo_803C6594_t ftCo_803C61F8 = { 0 };
+
+ftCo_803C6594_t* ftCo_803C6594[Gr_Kind_Count] = {
+    NULL, NULL, NULL, NULL, NULL, NULL, &ftCo_803C639C, &ftCo_803C61F8,
+};
+
 int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
 {
     ftCo_AttackEntry sp34[32];

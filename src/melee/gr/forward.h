@@ -123,6 +123,7 @@ typedef enum GrKind {
     /* 0x44 */ Gr_Kind_Figure1,
     /* 0x45 */ Gr_Kind_Figure2,
     /* 0x46 */ Gr_Kind_Figure3,
+    /* 0x46 */ Gr_Kind_Count = Gr_Kind_Figure3,
 } GrKind;
 
 /** @remarks
