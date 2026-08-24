@@ -2,9 +2,8 @@
 
 #include <placeholder.h>
 
-#ifdef MWERKS_GEKKO
-asm int __setjmp(register __jmp_buf* env)
-{ // clang-format off
+ASM int __setjmp(register __jmp_buf* env){
+#ifdef MWERKS_GEKKO // clang-format off
     nofralloc
     mflr	r5
     mfcr	r6
@@ -35,17 +34,12 @@ asm int __setjmp(register __jmp_buf* env)
     stfd	fp0,env->fpscr	//	save FPSCR
     li		r3,0
     blr
-} // clang-format on
-#else
-int __setjmp(register __jmp_buf* env)
-{
-    NOT_IMPLEMENTED;
+#endif // clang-format on
 }
-#endif
 
-#ifdef MWERKS_GEKKO
-asm void longjmp(register __jmp_buf* env, register int val)
-{ // clang-format off
+ASM void longjmp(register __jmp_buf* env, register int val)
+{
+#ifdef MWERKS_GEKKO // clang-format off
     nofralloc
     lwz		r5,env->pc
     lwz		r6,env->cr
@@ -79,10 +73,5 @@ asm void longjmp(register __jmp_buf* env, register int val)
     bnelr					//	return 'val'
     li		r3,1			//	return 1
     blr
-} // clang-format on
-#else
-void longjmp(register __jmp_buf* env, register int val)
-{
-    NOT_IMPLEMENTED;
+#endif // clang-format on
 }
-#endif

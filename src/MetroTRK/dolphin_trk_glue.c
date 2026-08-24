@@ -3,9 +3,9 @@
 #include <placeholder.h>
 
 #ifdef MWERKS_GEKKO
-#include "MetroTRK/mem_TRK.h"
-#include "MetroTRK/targimpl.h"
-#include "MetroTRK/trk.h"
+#include "mem_TRK.h"
+#include "targimpl.h"
+#include "trk.h"
 #endif
 
 #include <dolphin/amc/AmcExi2Comm.h>

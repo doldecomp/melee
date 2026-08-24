@@ -3162,19 +3162,14 @@ void gm_80166378(lbl_8046B6A0_24C_t* arg0_raw)
     fn_801661E0(arg0);
 }
 
-#ifdef MUST_MATCH
 float fn_80166A8C(register Vec3* src, register Vec3* dst)
 {
+#ifdef MWERKS_GEKKO
     register float x = src->x;
     asm { psq_st x, Vec3.x(dst), 1, qr3 }
     return x;
-}
-#else
-float fn_80166A8C(register Vec3* src, register Vec3* dst)
-{
-    NOT_IMPLEMENTED;
-}
 #endif
+}
 
 // Probably some code to setup or end a 4 player match?
 s32 gm_80166A98(MatchEnd* arg0, u8 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,

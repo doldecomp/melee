@@ -34,7 +34,7 @@ typedef struct lbArqHandle {
 
 /// @todo Non-inlined function forces loop in ::lbArq_80014BD0 to yield to
 ///       interrupts. Pragma solution likely fake.
-#ifdef MWERKS_GEKKO
+#ifdef __MWERKS__
 #pragma push
 #pragma dont_inline on
 #endif
@@ -42,7 +42,7 @@ static lbArqState lbArq_80014ABC(lbArqNode* arg0)
 {
     return arg0->state;
 }
-#ifdef MWERKS_GEKKO
+#ifdef __MWERKS__
 #pragma pop
 #endif
 

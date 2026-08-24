@@ -1,4 +1,3 @@
-#include <placeholder.h>
 #include <platform.h>
 
 #include <__init_cpp_exceptions.h>
@@ -29,8 +28,6 @@ void __init_cpp_exceptions(void)
     if (fragmentID == -2) {
         fragmentID = __register_fragment(_eti_init_info, GetR2());
     }
-#else
-    NOT_IMPLEMENTED;
 #endif
 }
 
