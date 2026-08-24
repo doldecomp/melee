@@ -50,7 +50,7 @@ struct grBigBlueRoute_8020DA9C_t {
 /* 20DA9C */ static int
 grBigBlueRoute_8020DA9C(struct grBigBlueRoute_8020DA9C_t*);
 
-/// @todo Emitted only to lay out the .sdata2 literal pool in retail order.
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 30.0f;
@@ -75,8 +75,7 @@ static void sdata2_order(void)
     (void) 250.0f;
     (void) -3.0f;
 }
-
-void grBigBlue_801E8D04(Ground_GObj*);
+#endif
 
 StageCallbacks grBb_Route_StageCallbacks[38] = {
     { grBigBlueRoute_8020BABC, grBigBlueRoute_8020BB00,
@@ -142,10 +141,12 @@ StageData grBb_Route_StageData = {
 
 static struct grBigBlueRoute_YakumonoParam* yakumono_param;
 
+#ifdef MUST_MATCH
 static void order_data(void)
 {
     (void) "%s:%d: couldn t get gobj(id=%d)\n";
 }
+#endif
 
 void grBigBlueRoute_8020B864(bool arg)
 {

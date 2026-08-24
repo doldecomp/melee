@@ -32,10 +32,6 @@ extern float ftKb_Init_803CB770[];
 /// Forward declarations for functions called before definition
 /* 105AB0 */ static void fn_80105AB0(Fighter_GObj*);
 /* 105A34 */ static void fn_80105A34(Fighter_GObj*);
-/* 1095DC */ static void fn_801095DC(HSD_GObj*);
-/* 109680 */ static void fn_80109680(HSD_GObj*);
-/* 109714 */ static void fn_80109714(HSD_GObj*);
-/* 1097B8 */ static void fn_801097B8(HSD_GObj*);
 
 static inline void ftKb_SpecialNZd_Helper(Fighter_GObj* gobj)
 {

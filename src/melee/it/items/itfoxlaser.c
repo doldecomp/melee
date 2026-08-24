@@ -25,11 +25,6 @@ ItemStateTable it_803F67D0[] = {
       itFoxlaser_UnkMotion1_Coll },
 };
 
-static inline void* getFoxLaser(Item* item)
-{
-    return &item->xDD4_itemVar;
-}
-
 bool it_8029C4D4(Item_GObj* item_gobj, CollData* arg1)
 {
     Item* item = GET_ITEM(item_gobj);

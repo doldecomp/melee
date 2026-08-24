@@ -494,10 +494,12 @@ void stageGObj1_Callback3(Ground_GObj* arg0) {}
     { 24, 1.0F, 25 }, { 25, 1.0F, 26 }, { -1, 1.0F, -1 },
 };
 
+#ifdef MUST_MATCH
 static void order_data(void)
 {
     (void) "GrdIzumiStar_TopN_joint";
 }
+#endif
 
 /* 3E6C0C */ static struct GrPuVtxMapEntry grPu_803E6C0C[] = {
     { { 20, 2, 21 }, 0, NULL },

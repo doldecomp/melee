@@ -55,10 +55,12 @@ void fn_801A7FB4(HSD_GObj* gobj)
 }
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void order_sdata2(void)
 {
     (void) 0.0f;
 }
+#endif
 
 void fn_801A80CC(HSD_GObj* gobj)
 {
@@ -96,6 +98,7 @@ void gm_801A8114(HSD_JObj* arg0, int arg1)
 }
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data_0(void)
 {
     (void) "Captain  ";
@@ -134,6 +137,7 @@ static void order_data_0(void)
     (void) "Sandbag  ";
     (void) "POPO     ";
 }
+#endif
 
 void fn_801A851C(HSD_GObj* gobj)
 {

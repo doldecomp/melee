@@ -1,4 +1,5 @@
 #include "ftCo_Attack100.h"
+#include "ftCo_ItemScopeStart.h"
 
 #include "ef/efsync.h"
 #include "ft/fighter.h"
@@ -8,8 +9,6 @@
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "it/items/itsscope.h"
-
-FtMotionId fn_800D769C(Fighter* ft, FtMotionId msid);
 
 void fn_800D8140(Fighter_GObj* gobj, int arg1)
 {

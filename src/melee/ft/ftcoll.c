@@ -50,6 +50,7 @@
 #include <baselib/random.h>
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 0.0f;
@@ -65,10 +66,9 @@ static void sdata2_order(void)
     (void) 9.99999975e-06f;
     (void) 57.2957802f;
 }
+#endif
 
 /* 07A06C */ void ftColl_8007A06C(Fighter_GObj*, void*, void*, size_t, int);
-/// /* 076808 */ static void ftColl_80076808(Fighter* fp, HitCapsule* hit, int,
-///                                          Fighter* victim, bool);
 
 /// .data
 int ftColl_803C0C40[] = { 141, 142, 143 };

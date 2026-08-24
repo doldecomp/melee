@@ -10,9 +10,10 @@
 #include "lb/lb_00B0.h"
 #include "pl/player.h"
 
-static void fn_800DAECC(Fighter_GObj* gobj);
-static void fn_800DAEEC(Fighter_GObj* gobj);
-static void fn_800DB230(Fighter_GObj* gobj);
+/* 0DAECC */ static void fn_800DAECC(Fighter_GObj* gobj);
+/* 0DAEEC */ static void fn_800DAEEC(Fighter_GObj* gobj);
+/* 0DB230 */ static inline void fn_800DB230_inline(Fighter_GObj* gobj);
+/* 0DB230 */ static void fn_800DB230(Fighter_GObj* gobj);
 
 float ftCo_800DA824(Fighter* fp)
 {

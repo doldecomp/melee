@@ -21,11 +21,6 @@
 
 HSD_ObjAllocData efAsync_AllocData;
 
-static inline void efAsync_SetEffectRotationY(EF_Effect* effect, f32 rotation)
-{
-    HSD_JObjSetRotationY(GET_JOBJ(effect->gobj), rotation);
-}
-
 static inline HSD_JObj* efAsync_GetEffectJObj(EF_Effect* effect)
 {
     return GET_JOBJ(effect->gobj);

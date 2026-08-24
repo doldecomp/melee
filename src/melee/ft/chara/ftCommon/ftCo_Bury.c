@@ -52,6 +52,7 @@
 #include <baselib/jobj.h>
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void order_sdata2(void)
 {
     (void) U32_TO_F32;
@@ -59,6 +60,7 @@ static void order_sdata2(void)
     (void) 0.0F;
     (void) 1.0F;
 }
+#endif
 
 void ftCo_800C0874(Fighter_GObj* gobj, UNK_T arg1, ftCommon_BuryType arg2)
 {

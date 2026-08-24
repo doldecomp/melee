@@ -15,6 +15,12 @@
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 
+/* 2C248C */ static Item_GObj* it_802C248C(Item* ip, HSD_JObj* jobj);
+/* 2C28DC */ static void fn_802C28DC(Item_GObj* gobj);
+/* 2C29E8 */ static void fn_802C29E8(Item_GObj* gobj);
+/* 2C2AF4 */ static void fn_802C2AF4(Item_GObj* gobj);
+/* 2C33B8 */ static void it_802C33B8(Item* ip);
+
 ItemStateTable it_803F76B8[] = {
     { -1, itClimbersstring_UnkMotion3_Anim, NULL, NULL },
     { -1, itClimbersstring_UnkMotion3_Anim, NULL, NULL },

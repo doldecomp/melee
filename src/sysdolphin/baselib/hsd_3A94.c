@@ -1587,14 +1587,6 @@ void hsd_803AC558(struct CardState* file_desc, u8* data)
     }
 }
 
-static inline s32 fn_803AC634_remaining(u32 sector_size,
-                                        struct CardState* file_desc,
-                                        s32 remaining)
-{
-    u32 usable = sector_size - 0x20;
-    return remaining - (s32) (usable - (file_desc->x24 + 48) % sector_size);
-}
-
 u32 fn_803AC634(struct CardState* file_desc, s32 file_idx)
 {
     if (file_desc->x4C[file_idx] <= 0) {
@@ -2013,11 +2005,6 @@ s32 fn_803ACF30(CardState* state, s32 file_id, s32 seq_num, s32 version)
 }
 
 typedef u8* CardSectorPtr;
-
-static inline u8* fn_803ACFC0_payload_dst(CardState* state, s32 hdr_offset)
-{
-    return hdr_offset + state->x0 + 0x20;
-}
 
 static inline u8* fn_803ACFC0_header(CardState* state, s32 hdr_offset)
 {

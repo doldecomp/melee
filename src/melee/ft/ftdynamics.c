@@ -17,9 +17,12 @@
 #include <baselib/debug.h>
 #include <baselib/jobj.h>
 
-#ifdef MUST_MATCH
-#pragma force_active on
-#endif
+/* 09CB40 */ static void ftCo_8009CB40(Fighter* fp, ssize_t bone_idx, bool,
+                                       FigaTree*);
+/* 09DD94 */ static void ftCo_8009DD94(Fighter_GObj*, bool);
+/* 09E1D4 */ static HSD_JObj* ftCo_8009E1D4(HSD_JObj*, HSD_JObj*, HSD_JObj*);
+/* 09E4A8 */ static void ftCo_8009E4A8(Fighter* fp);
+/* 09E614 */ static void ftCo_8009E614(Fighter* fp);
 
 static inline void ftCo_8009CB40_inline(struct DynamicsData* data)
 {
@@ -299,18 +302,6 @@ void ftCo_8009DB50(Fighter* fp)
                 &fp->dynamic_bone_sets[i].dyn_desc);
         }
     }
-}
-
-static inline bool inlineA0(Fighter* fp)
-{
-    u32 temp_r0 = fp->x619_costume_id;
-    if (temp_r0 == 2) {
-        return 0;
-    }
-    if (temp_r0 == 3) {
-        return 1;
-    }
-    return 3;
 }
 
 void ftCo_8009DC54(Fighter* fp)

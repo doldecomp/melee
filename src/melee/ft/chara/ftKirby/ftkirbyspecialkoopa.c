@@ -199,11 +199,6 @@ void ftKb_KpSpecialNStart_Anim(Fighter_GObj* gobj)
     }
 }
 
-static inline ftKb_DatAttrs* ftKb_KpSpecialN_Anim_inline(Fighter* arg0)
-{
-    return arg0->dat_attrs;
-}
-
 void ftKb_KpSpecialN_Anim(Fighter_GObj* gobj)
 {
     PAD_STACK(8);

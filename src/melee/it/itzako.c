@@ -24,6 +24,7 @@
 #include "pl/plbonuslib.h"
 #include "ty/tydisplay.h"
 
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 0.0f;
@@ -44,6 +45,7 @@ static void sdata2_order(void)
     (void) 2.0f;
     (void) 0.5f;
 }
+#endif
 
 const Vec3 it_803B85A8[6] = {
     { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f },

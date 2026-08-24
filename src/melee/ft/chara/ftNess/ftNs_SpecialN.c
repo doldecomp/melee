@@ -97,23 +97,14 @@ void ftNs_SpecialN_ItemPKFlushSetNULL(HSD_GObj* gobj)
     }
 }
 
-/// @todo Float order hack.
-static float return_void(void)
+#ifdef MUST_MATCH
+static float order_sdata2(void)
 {
-    return 0.0f;
+    (void) 0.0f;
+    (void) 3.0f;
+    (void) 1.0f;
 }
-
-/// @todo Float order hack.
-static float return_void2(void)
-{
-    return 3.0f;
-}
-
-/// @todo Float order hack.
-static float return_void3(void)
-{
-    return 1.0f;
-}
+#endif
 
 /// Ness's grounded PK Flash Start Motion State handler
 void ftNs_SpecialNStart_Enter(HSD_GObj* gobj)
