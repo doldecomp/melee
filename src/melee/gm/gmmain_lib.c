@@ -1233,14 +1233,12 @@ void gmMainLib_8015F588(bool arg0)
     HSD_VISetConfigure(var_r3);
 }
 
-/// #gmMainLib_8015F600
-
 static s8 gmMainLib_804D3EE4[] = { 0 };
 
 void gmMainLib_8015F600(int arg0, int arg1)
 {
     s32 lang;
-    PAD_STACK(88);
+    PAD_STACK(80);
 
     if (arg0 == 1) {
         ResetAllPersistentFighterData();
@@ -1283,21 +1281,10 @@ void gmMainLib_8015F600(int arg0, int arg1)
         do {
             struct NameTagData* data;
             struct NameTagDataBank* bank;
-            s32 i;
             s32 idx;
             idx = j + bank_offset;
-            bank = gmMainLib_804D3EE0->thing.x2FF8;
-            data = &bank[(u8) idx / 19].inner[(u8) idx % 19];
 
-            for (i = 0; 120 > i; i++) {
-                data->vs_kos[i] = 0;
-            }
-            gmMainLib_8015EF30((struct gmMainLib_8015EF30_s*) &data->sd_count);
-
-            for (i = 0; 25 > i; i++) {
-                data->play_time_by_fighter[i] = 0;
-            }
-            data->x1A2 = 5;
+            InitializePersistentNameData(idx);
 
             bank = gmMainLib_804D3EE0->thing.x2FF8;
             {
