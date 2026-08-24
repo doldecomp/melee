@@ -1,6 +1,5 @@
 #include "gricemt.h"
 
-#include "gricemt.static.h"
 #include <placeholder.h>
 #include <platform.h>
 

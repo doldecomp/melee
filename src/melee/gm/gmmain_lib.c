@@ -18,6 +18,8 @@
 #include <melee/mn/mnname.h>
 #include <melee/ty/toy.h>
 
+/* 15D888 */ static void gmMainLib_8015D888(u32);
+
 GameRules gmMainLib_803D4A48 = {
     0,
     0x34,
