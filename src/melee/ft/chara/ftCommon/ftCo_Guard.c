@@ -1,3 +1,5 @@
+#include "ftCo_Guard.h"
+
 #include "ftCo_0C35.h"
 #include "ftCo_Attack1.h"
 #include "ftCo_AttackHi3.h"
@@ -7,9 +9,6 @@
 #include "ftCo_AttackS3.h"
 #include "ftCo_AttackS4.h"
 #include "ftCo_Escape.h"
-
-#include "ftCo_Guard.static.h"
-
 #include "ftCo_ItemThrow.h"
 #include "ftCo_Pass.h"
 #include "ftCo_ShieldBreakFly.h"
@@ -40,6 +39,23 @@
 #include <math.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
+
+/* 091BC4 */ static void ftCo_80091BC4(Fighter* fp);
+/* 091E78 */ static void ftCo_80091E78(Fighter_GObj* gobj, float);
+/* 092158 */ static void ftCo_80092158(Fighter_GObj* gobj, int arg1,
+                                       HSD_JObj* arg2);
+/* 0921DC */ static void ftCo_800921DC(Fighter_GObj* gobj);
+/* 0923B4 */ static void ftCo_800923B4(Fighter_GObj* gobj);
+/* 0924C0 */ static void ftCo_800924C0(HSD_GObj* gobj);
+/* 092908 */ static void ftCo_80092908(Fighter_GObj* gobj);
+/* 092C54 */ static void ftCo_80092C54(Fighter_GObj* gobj);
+/* 092E50 */ static void ftCo_80092E50(Fighter_GObj* gobj);
+/* 092F2C */ static void ftCo_80092F2C(Fighter_GObj* gobj, bool);
+/* 093790 */ static void ftCo_80093790(Fighter_GObj* gobj);
+/* 093850 */ static void ftCo_80093850(Fighter_GObj* gobj);
+/* 09388C */ static void ftCo_8009388C(Fighter_GObj* gobj);
+/* 0939B4 */ static void ftCo_800939B4(Fighter_GObj* gobj);
+/* 093A50 */ static void ftCo_80093A50(Fighter_GObj* gobj);
 
 bool ftCo_80091A2C(Fighter_GObj* gobj)
 {
