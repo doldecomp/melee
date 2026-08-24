@@ -59,9 +59,9 @@ void gm_801A3F48(GameScene* scene)
     tyDisplay_8031C8B8();
 }
 
-static inline u8 firstScene(GameScene* scene)
+static inline u8 firstScene(GameScene* scene, u8 sentinel)
 {
-    for (; scene->idx != 0xFF; scene++) {
+    for (; scene->idx != sentinel; scene++) {
         return scene->idx;
     }
     return 0;
@@ -83,7 +83,7 @@ static inline u8 nextScene(GameScene* scenes)
         it++;
     }
 
-    return firstScene(scenes);
+    return firstScene(scenes, next_scene);
 }
 
 static inline GameScene* findScene(GameScene* scene)
@@ -120,8 +120,8 @@ void gm_801A4014(GameMode* mode)
     }
     info = &scene->info;
     handler = (GameSceneHandler*) ((uintptr_t) gm_FindGameSceneHandler(
-                                      info->class_id) |
-                                  (dead = 0));
+                                       info->class_id) |
+                                   (dead = 0));
     gm_801A4BD4();
     gm_801A4B88(info);
     if (handler->OnLoad != NULL) {
