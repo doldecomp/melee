@@ -4342,6 +4342,11 @@ s32 gm_80169394(void)
     return gm_1601_GetUnkData()->unk_10_b3;
 }
 
+s32 fn_801693A8(void)
+{
+    return gm_1601_GetUnkData()->unk_10_b2;
+}
+
 /// Player is Fighting Wireframe
 bool gm_801693BC(int arg0)
 {
