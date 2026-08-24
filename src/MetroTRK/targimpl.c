@@ -1146,10 +1146,3 @@ u32 ConvertAddress(u32 addr)
 {
     return (addr | BOOTINFO);
 }
-
-#define ACTIVE_THREAD_QUEUE (BOOTINFO + ROOT_THREAD_ADDR) // 8 bytes
-#define CURRENT_THREAD (BOOTINFO + CURRENT_THREAD_ADDR)   // 4 bytes
-
-#define INVALID_THREAD(thread)                                                \
-    ((u32) thread == 0xFFFFFFFF || thread == NULL ||                          \
-     (u32) thread == 0x80000000)
