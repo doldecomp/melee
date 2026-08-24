@@ -527,7 +527,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
     Vec3 vec1;
     Vec3 vec2;
 
-    PAD_STACK(0x8);
+    PAD_STACK(0x4);
 
     if (fp->item_gobj != NULL) {
         lb_8000B1CC(it_80272C90(fp->item_gobj), NULL, &vec0);
@@ -542,50 +542,44 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                     fp->cmd_vars[1] = 0;
                 }
                 {
-                    float fsm = -fp->cmd_timer / fp->frame_speed_mul;
+                    ftCo_ItemThrowAttrs* throw_speed_arr =
+                        (ftCo_ItemThrowAttrs*) Fighter_804D6550;
                     float cd_xB4 = co_attrs->heavy_throw_velocity_multiplier;
                     float base_throw_speed =
-                        cd_xB4 * ((ftCo_ItemThrowAttrs*)
-                                      Fighter_804D6550)[fp->motion_id -
-                                                        ftCo_MS_LightThrowF]
-                                     .x8;
+                        cd_xB4 *
+                        throw_speed_arr[fp->motion_id - ftCo_MS_LightThrowF]
+                            .x8;
                     float throw_speed = throw_scale * base_throw_speed;
+                    float fsm = -fp->cmd_timer / fp->frame_speed_mul;
+                    vec2.x =
+                        fsm * (fp->mv.co.itemthrow4.x8.x - vec0.x) + vec0.x;
+                    vec2.y =
+                        fsm * (fp->mv.co.itemthrow4.x8.y - vec0.y) + vec0.y;
+                    vec2.z = 0;
+                    pl_8003E978(fp->player_id, fp->x221F_b4, fp->item_gobj,
+                                vec2.y, base_throw_speed, cd_xB4, throw_speed,
+                                vec0.x, vec0.y, fsm);
                     {
-                        vec2.x = fsm * (fp->mv.co.itemthrow4.x8.x - vec0.x) +
-                                 vec0.x;
-                        {
-                            vec2.y =
-                                fsm * (fp->mv.co.itemthrow4.x8.y - vec0.y) +
-                                vec0.y;
-                            vec2.z = 0;
-                            pl_8003E978(fp->player_id, fp->x221F_b4,
-                                        fp->item_gobj, vec2.y,
-                                        base_throw_speed, cd_xB4, throw_speed,
-                                        vec0.x, vec0.y, fsm);
-                        }
-                        {
-                            FtMoveId msid = fp->motion_id;
-                            if (msid == (FtMoveId) ftCo_MS_LightThrowDrop) {
-                                Item_8026AC74(fp->item_gobj, &vec2, &vec1,
-                                              throw_speed);
-                            } else if (msid >= (FtMoveId) ftCo_MS_LightThrowF4)
-                            {
-                                if (itIsHeavy(fp->item_gobj) == 1) {
-                                    ftCommon_8007EBAC(fp, 29, 0);
-                                } else {
-                                    ftCommon_8007EBAC(fp, 27, 0);
-                                }
-                                Item_8026AD20(fp->item_gobj, &vec2, &vec1,
-                                              throw_speed);
+                        FtMoveId msid = fp->motion_id;
+                        if (msid == (FtMoveId) ftCo_MS_LightThrowDrop) {
+                            Item_8026AC74(fp->item_gobj, &vec2, &vec1,
+                                          throw_speed);
+                        } else if (msid >= (FtMoveId) ftCo_MS_LightThrowF4) {
+                            if (itIsHeavy(fp->item_gobj) == 1) {
+                                ftCommon_8007EBAC(fp, 29, 0);
                             } else {
-                                if (itIsHeavy(fp->item_gobj) == 1) {
-                                    ftCommon_8007EBAC(fp, 28, 0);
-                                } else {
-                                    ftCommon_8007EBAC(fp, 26, 0);
-                                }
-                                Item_8026AD20(fp->item_gobj, &vec2, &vec1,
-                                              throw_speed);
+                                ftCommon_8007EBAC(fp, 27, 0);
                             }
+                            Item_8026AD20(fp->item_gobj, &vec2, &vec1,
+                                          throw_speed, true);
+                        } else {
+                            if (itIsHeavy(fp->item_gobj) == 1) {
+                                ftCommon_8007EBAC(fp, 28, 0);
+                            } else {
+                                ftCommon_8007EBAC(fp, 26, 0);
+                            }
+                            Item_8026AD20(fp->item_gobj, &vec2, &vec1,
+                                          throw_speed, false);
                         }
                     }
                 }
