@@ -92,7 +92,6 @@ static void sdata2_order(void)
 }
 
 /* 4D6688 */ extern HSD_Archive* lbl_804D6688;
-/* 3DA3D0 */ extern char lbl_803DA3D0[];
 /* 3B7D3C */ extern s32 lbl_803B7D3C[4];
 /* 479A58 */ struct TmAnimTimers lbl_80479A58;
 /* 4D6690 */ extern SceneDesc* lbl_804D6690;
@@ -1112,7 +1111,7 @@ void gm_8019E634(void)
         audio_mask = 8;
         for (k = 0; k < (s32) tmd->x30; k++) {
             audio_mask |= lbAudioAx_80026E84((CharacterKind) tmd->x4B8[k].x1);
-            OSReport(lbl_803DA3D0, (s32) tmd->x4B8[k].x1);
+            OSReport("ckind:%d\n", (s32) tmd->x4B8[k].x1);
         }
         lbAudioAx_80026F2C(0x16);
         lbAudioAx_8002702C(6, audio_mask);
