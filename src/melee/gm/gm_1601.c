@@ -4862,6 +4862,11 @@ void gm_8016A164(void)
     }
 }
 
+s32 fn_8016A1E4(void)
+{
+    return gm_1601_GetUnkData()->unk_10_b0;
+}
+
 bool gm_8016A1F8(void)
 {
     if (gm_1601_GetUnkData()->unk_10_b1) {
