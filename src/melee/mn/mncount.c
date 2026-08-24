@@ -580,7 +580,7 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
 #ifdef MUST_MATCH
                             *(char (*)[4]) & buf - 4
 #else
-                            &buf - 4
+                            (char*) buf - 4
 #endif
         );
     } else if (inline_is_row_char(data_row)) {
