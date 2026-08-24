@@ -46,6 +46,7 @@
 /* 4D665C */ static int lbl_804D665C;
 
 /// @todo .sbss order hack
+#ifdef MUST_MATCH
 static void sbss_order(void)
 {
     (void) lbl_804D6650;
@@ -53,8 +54,10 @@ static void sbss_order(void)
     (void) lbl_804D6654;
     (void) lbl_804D665C;
 }
+#endif
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void sdata2_order0(void)
 {
     (void) 4.5f;
@@ -101,9 +104,11 @@ static void sdata2_order0(void)
     (void) -1.0f;
     (void) 10.0999928f;
 }
+#endif
 
 /* 4DA78C */ GXColor const lbl_804DA78C = { 0x46, 0xDC, 0x46, 0xFF };
 
+#ifdef MUST_MATCH
 static void order_sdata2_1(void)
 {
     (void) 124.5f;
@@ -126,6 +131,7 @@ static void order_sdata2_1(void)
     (void) 0.850000024f;
     (void) 1.35000002f;
 }
+#endif
 
 /* 3D9F80 */ static struct TmSettingTable lbl_803D9F80 = {
     0, 74,  0, 74,  0, 77,  0, 75, 0,  75,  0,  77, 0, 80,  0, 78, 0, 79,

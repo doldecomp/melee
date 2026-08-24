@@ -30,15 +30,13 @@
 } un_803F9E08 = { 0 };
 ASSERT_SIZE(un_803F9E08, 0x10);
 
+#ifdef MUST_MATCH
 static void order_data(void)
 {
     (void) "IfCoGet.dat";
-}
-
-static void order_data_1(void)
-{
     (void) "ScInfCgt_scene_data";
 }
+#endif
 
 /// .sbss
 /* 4D6DA0 */ static void* un_804D6DA0;

@@ -483,11 +483,6 @@ void HSD_CObjSetupViewingMtx(HSD_CObj* cobj)
     }
 }
 
-static void setNewProjection(HSD_CObj* cobj, Mtx44 mtx)
-{
-    GXSetProjection(mtx, makeProjectionMtx(cobj, mtx));
-}
-
 bool HSD_CObjSetCurrent(HSD_CObj* cobj)
 {
     HSD_RenderPass render_pass;

@@ -52,23 +52,6 @@ ftPurin_SpecialHi_SetActionFromFacingDirection(HSD_GObj* gobj, u32 left_id,
     }
 }
 
-static inline void startHi(HSD_GObj* gobj, int left_id, int right_id)
-{
-    Fighter* fighter;
-
-    ftPurin_SpecialHi_SetActionFromFacingDirection(gobj, left_id, right_id);
-
-    ftAnim_8006EBA4(gobj);
-
-    fighter = (Fighter*) HSD_GObjGetUserData(gobj);
-
-    if (-1 == fighter->facing_dir) {
-        Fighter_ChangeMotionState(gobj, left_id, 0, 0, 1, 0, NULL);
-    } else {
-        Fighter_ChangeMotionState(gobj, right_id, 0, 0, 1, 0, NULL);
-    }
-}
-
 void ftPr_SpecialHi_Enter(HSD_GObj* gobj)
 {
     ftPurin_SpecialHi_SetActionFromFacingDirection(gobj, 365, 367);

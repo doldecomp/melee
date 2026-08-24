@@ -284,13 +284,13 @@ void HSD_SynthSFXAllocateBank(int size)
     hsd_SynthSFXBankNum += 1;
 }
 
-/// @remarks Dead code: mwld strips the body, but MWCC still pools its
-/// literals into `.data`.
-static void HSD_SynthSFXFreeBank(void)
+#ifdef MUST_MATCH
+static void order_data_0(void)
 {
-    HSD_ASSERTREPORT(0x160, hsd_SynthSFXBankNum, "bank stack underflow\n");
-    hsd_SynthSFXBankNum -= 1;
+    (void) "bank stack underflow\n";
+    (void) "hsd_SynthSFXBankNum";
 }
+#endif
 
 static inline void HSD_SynthSFXUnloadBank_inline(AXVPB* vpb)
 {
@@ -358,17 +358,14 @@ static void HSD_SynthSFXGroupDataReaddressCallback(void* result, int length,
     sfxGroupDataReaddressCounter--;
 }
 
-/// @remarks Dead code: mwld strips the body, but MWCC still pools its
-/// literals into `.data`.
-static void HSD_SynthSFXRelocateGroup(int bankID, int sfxgroup,
-                                      struct HSD_SynthSFXGroup* group)
+#ifdef MUST_MATCH
+static void order_data_1(void)
 {
-    HSD_ASSERTREPORT(0x18C,
-                     hsd_SynthSFXBank[bankID] + group->arsize <=
-                         hsd_SynthSFXBankHead[bankID + 1],
-                     "Can't relocate SFX group; bank = %d; sfxgroup = %d\n",
-                     bankID, sfxgroup);
+    (void) "Can't relocate SFX group; bank = %d; sfxgroup = %d\n";
+    (void) "hsd_SynthSFXBank[bankID] + group->arsize <= "
+           "hsd_SynthSFXBankHead[bankID + 1]";
 }
+#endif
 
 void HSD_SynthSFXGroupDataReaddress(AXVPB* arg0, void* callback)
 {

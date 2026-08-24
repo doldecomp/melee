@@ -31,11 +31,8 @@ typedef enum _HSD_InitParam {
 
 void HSD_InitComponent(void);
 void HSD_GXSetFifoObj(GXFifoObj* fifo);
-static void HSD_DVDInit(void);
 void** HSD_AllocateXFB(s32 nbuffer, GXRenderModeObj* rm);
 GXFifoObj* HSD_AllocateFifo(u32 size);
-static void HSD_GXInit(void);
-static void HSD_OSInit(void);
 OSHeapHandle HSD_GetHeap(void);
 void HSD_SetHeap(OSHeapHandle handle);
 void HSD_GetNextArena(void** lo, void** hi);
@@ -43,7 +40,6 @@ OSHeapHandle HSD_CreateMainHeap(void* lo, void* hi);
 HSD_RenderPass HSD_GetCurrentRenderPass(void);
 void HSD_StartRender(HSD_RenderPass pass);
 void HSD_Init_803755A8(void);
-static void HSD_ObjInit(void);
 void HSD_ObjDumpStat(void);
 bool HSD_SetInitParameter(HSD_InitParam param, ...);
 

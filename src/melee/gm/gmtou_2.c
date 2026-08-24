@@ -37,6 +37,7 @@
 #include <baselib/sislib.h>
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) -19.5f;
@@ -90,9 +91,9 @@ static void sdata2_order(void)
     (void) 0.0799999982f;
     (void) 0.0f;
 }
+#endif
 
 /* 4D6688 */ extern HSD_Archive* lbl_804D6688;
-/* 3DA3D0 */ extern char lbl_803DA3D0[];
 /* 3B7D3C */ extern s32 lbl_803B7D3C[4];
 /* 479A58 */ struct TmAnimTimers lbl_80479A58;
 /* 4D6690 */ extern SceneDesc* lbl_804D6690;
@@ -976,6 +977,15 @@ void gm_8019DF8C_OnFrame(void)
 
 /* 4DA948 */ u32 const lbl_804DA948 = { 0 };
 
+void gm_8019ECAC_OnEnter_inline(void)
+{
+    lbl_804D6688 = lbArchive_80016DBC("GmTou1p", &lbl_804D6690,
+                                      "ScGamTour_scene_data", 0);
+    lbl_804D668C = lbArchive_80016DBC("GmTou4p", &lbl_804D6694,
+                                      "ScGamTour_scene_data", 0);
+    HSD_SisLib_803A62A0(0, fn_8018F5F0(), "SIS_TournamentData");
+}
+
 void gm_8019E634(void)
 {
     s32 indices[4];
@@ -1112,7 +1122,7 @@ void gm_8019E634(void)
         audio_mask = 8;
         for (k = 0; k < (s32) tmd->x30; k++) {
             audio_mask |= lbAudioAx_80026E84((CharacterKind) tmd->x4B8[k].x1);
-            OSReport(lbl_803DA3D0, (s32) tmd->x4B8[k].x1);
+            OSReport("ckind:%d\n", (s32) tmd->x4B8[k].x1);
         }
         lbAudioAx_80026F2C(0x16);
         lbAudioAx_8002702C(6, audio_mask);
@@ -1139,11 +1149,7 @@ void gm_8019ECAC_OnEnter(void* arg0)
     lbAudioAx_80027168();
     lbAudioAx_80027648();
     gm_GetTournamentData();
-    lbl_804D6688 = lbArchive_80016DBC("GmTou1p", &lbl_804D6690,
-                                      "ScGamTour_scene_data", 0);
-    lbl_804D668C = lbArchive_80016DBC("GmTou4p", &lbl_804D6694,
-                                      "ScGamTour_scene_data", 0);
-    HSD_SisLib_803A62A0(0, fn_8018F5F0(), "SIS_TournamentData");
+    gm_8019ECAC_OnEnter_inline();
     fn_8019DD60();
     lbAudioAx_80027648();
     lbAudioAx_80023F28(gmMainLib_8015ECB0());
@@ -1218,8 +1224,10 @@ void fn_8019EF08(TmVsData* arg0)
 }
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data_1(void)
 {
     (void) "ScGamTour_scene_data";
     (void) "ckind:%d\n";
 }
+#endif

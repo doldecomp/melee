@@ -63,12 +63,6 @@ static inline HSD_JObj* it_802BE65C_LoadString(Item* ip)
     return HSD_JObjLoadJoint(attrs->x50_string_joint);
 }
 
-static inline HSD_JObj* it_802BE65C_LoadYoyo(Item* ip)
-{
-    itYoyoAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
-    return HSD_JObjLoadJoint(attrs->x54_yoyo_joint);
-}
-
 HSD_GObj* it_802BE65C(Item* ip, HSD_JObj* bone_jobj)
 {
     ItemLink* prev_link;

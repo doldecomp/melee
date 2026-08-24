@@ -1565,11 +1565,6 @@ static inline CollLine* mpLineGetCollLine(int line_id)
     return &groundCollLine[line_id];
 }
 
-static inline float* mpVtxGetYBase(void)
-{
-    return &groundCollVtx[0].pos.y;
-}
-
 void mpLib_8004ED5C(int line_id, float* x0_out, float* y0_out, float* x1_out,
                     float* y1_out)
 {
