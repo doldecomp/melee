@@ -1,5 +1,3 @@
-/// @file
-/// @todo Assumes @c __PPCGEKKO__.
 #ifndef STDBOOL_H
 #define STDBOOL_H
 
