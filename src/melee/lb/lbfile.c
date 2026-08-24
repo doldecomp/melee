@@ -27,7 +27,7 @@ static void lbFile_8001615C(int dcreq, int args, void* buf, bool cancelflag)
 static bool discIsDone(void)
 {
     lb_800195D0();
-    return cancel;
+    return *(volatile bool*) &cancel;
 }
 #ifdef MUST_MATCH
 #pragma pop
