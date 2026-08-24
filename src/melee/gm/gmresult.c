@@ -13,7 +13,7 @@ static void order_sdata(void)
     (void) "flmsce";
 }
 
-static struct ResultsData lbl_8046DBE8;
+struct ResultsData lbl_8046DBE8;
 static u32 lbl_804D3F8C[2] = { 0x817C817C, 0x817C0000 };
 u32 lbl_804D3FA0 = 0x817C0000;
 u32 lbl_804D3FA4 = 0x817B0000;
@@ -512,7 +512,7 @@ static StatsEntry lbl_803D6858[] = {
     { 0x08, { 0 }, NULL, NULL, NULL },
 };
 
-static StatsList lbl_803D6878[] = {
+StatsList lbl_803D6878[] = {
     { 0, 0x0D, { 0 }, lbl_803D6488 },
     { 1, 0x30, { 0 }, lbl_803D6558 },
     { 2, 0x02, { 0 }, lbl_803D6858 },
