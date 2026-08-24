@@ -76,7 +76,7 @@
 /* 1FCBB0 */ static DynamicsDesc* grInishie1_801FCBB0(enum_t);
 /* 1FCBB8 */ static bool grInishie1_801FCBB8(Vec3*, int arg, HSD_JObj* jobj);
 
-/// @todo Emitted only to lay out the .sdata2 literal pool in retail order.
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 1.0f;
@@ -95,6 +95,7 @@ static void sdata2_order(void)
     (void) -30.0f;
     (void) S32_TO_F32;
 }
+#endif
 
 /// these inlines are probably shared in other places
 static inline s32 test_random(s32 val)
@@ -115,15 +116,6 @@ static inline s32 randi_between(s32 min, s32 max)
 static inline f32 fabsf_inline(f32 x)
 {
     return (x < 0.0f) ? -x : x;
-}
-
-static inline f32 fclamp0(f32 x)
-{
-    f32 ret = x;
-    if (x < 0.0f) {
-        ret = 0.0f;
-    }
-    return ret;
 }
 
 struct grInishie1_YakumonoParam {
@@ -223,10 +215,12 @@ StageData grI1_StageData = {
     ARRAY_SIZE(grI1_803E48C8),
 };
 
+#ifdef MUST_MATCH
 static void order_data(void)
 {
     (void) "%s:%d: couldn t get gobj(id=%d)\n";
 }
+#endif
 
 void grInishie1_801FA908(bool arg) {}
 

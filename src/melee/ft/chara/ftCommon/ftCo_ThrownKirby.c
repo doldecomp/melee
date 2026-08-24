@@ -27,15 +27,17 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 0.0f;
     (void) S32_TO_F32;
-    (void) .5;  // 40 08 00 ..
-    (void) 3.0; // 4f e0 00..
+    (void) .5;
+    (void) 3.0;
     (void) -1.0f;
     (void) +1.0f;
 }
+#endif
 
 typedef float (*KirbyVelocityFunc)(Fighter_GObj* gobj, Vec3* victim_self_vel,
                                    float victim_facing_dir);
@@ -120,7 +122,7 @@ static inline void inlineB2(Fighter_GObj* gobj, Fighter_GObj* thrower_gobj,
     }
     fp->mv.co.thrownkirby.scale = jobj->scale;
 #else
-    HSD_JObjSetScale(jobj, &fp->mv.co.thrownkirby.scale);
+    HSD_JObjGetScale(jobj, &fp->mv.co.thrownkirby.scale);
 #endif
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_SkipThrowException, 0.0f, 1.0f,
                               0.0f, thrower_gobj);

@@ -39,12 +39,14 @@ ItemStateTable it_803F6888[] = {
       itLinkbomb_UnkMotion6_Coll },
 };
 
+#ifdef MUST_MATCH
 static void order_sdata2(void)
 {
     (void) 2.0f;
     (void) 0.5f;
     (void) 0.0f;
 }
+#endif
 
 void it_8029D968(Item_GObj* gobj)
 {

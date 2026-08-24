@@ -52,7 +52,6 @@ typedef struct grTMewtwo_UnkStruct {
 /* 2224B4 */ static DynamicsDesc* grTMewtwo_802224B4(enum_t arg0);
 /* 2225C8 */ static bool grTMewtwo_802225C8(Vec3* arg0, int arg1,
                                             HSD_JObj* arg2);
-/* 3E8FC0 */ static void grTMewtwo_803E8FC0(Ground_GObj* gobj);
 /* 4D6B08 */ static grTMewtwo_UnkStruct* yakumono_param;
 
 static StageCallbacks grTMewtwo_StageCallbacks[4] = {

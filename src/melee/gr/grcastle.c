@@ -1395,12 +1395,12 @@ void grCastle_801CF308(Ground_GObj* gobj)
     }
 }
 
-/// Preserve the original .sdata2 placement of the double-precision 0.5.
-/// @todo Remove this ordering anchor.
-static void grCastle_ForceSdata2Order(void)
+#ifdef MUST_MATCH
+static void order_sdata2(void)
 {
     (void) 0.5;
 }
+#endif
 
 void grCastle_801CF74C(Ground_GObj* gobj) {}
 

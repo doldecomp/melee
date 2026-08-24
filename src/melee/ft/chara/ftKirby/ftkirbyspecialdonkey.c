@@ -29,12 +29,12 @@
 
 #include <stddef.h>
 
-/// @todo This is some kind of inline within #ftKb_DkSpecialN_Anim that's
-///       shared by #ftKb_DkSpecialAirN_Anim
-static double sdata2_order0(void)
+#ifdef MUST_MATCH
+static void sdata2_order0(void)
 {
-    return S32_TO_F32;
+    (void) S32_TO_F32;
 }
+#endif
 
 void ftKb_SpecialNDk_800FF8EC(Fighter_GObj* gobj)
 {

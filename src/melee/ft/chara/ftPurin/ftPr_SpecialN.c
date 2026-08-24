@@ -33,6 +33,7 @@
 #include <melee/ef/efsync.h>
 #include <melee/mp/mplib.h>
 
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 1.5707963267948966;
@@ -50,6 +51,7 @@ static void sdata2_order(void)
     (void) 3.1415926535897931;
     (void) -0.0500000007f;
 }
+#endif
 
 static inline void ftPr_JObjSetRotationY(HSD_JObj* jobj, f32 y, f32* base)
 {

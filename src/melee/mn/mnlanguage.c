@@ -137,16 +137,17 @@ void fn_8024C2E8(HSD_GObj* gobj)
     }
 }
 
-/// Must not be declared inline, for proper .sdata2 float ordering
-static void Menu_InitCenterText_noinline(Menu* menu, u8 val)
+#ifdef MUST_MATCH
+static void order_sdata2(void)
 {
-    HSD_Text* text =
-        HSD_SisLib_803A5ACC(0, 1, -9.5F, 9.1F, 17.0F, 364.68332F, 38.38772F);
-    menu->text = text;
-    text->font_size.x = 0.0521F;
-    text->font_size.y = 0.0521F;
-    HSD_SisLib_803A6368(text, val);
+    (void) -9.5f;
+    (void) 9.1f;
+    (void) 17.0f;
+    (void) 364.68332f;
+    (void) 38.38772f;
+    (void) 0.0521f;
 }
+#endif
 
 void mnLanguage_8024C3C4(HSD_GObj* arg0_unused)
 {

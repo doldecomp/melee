@@ -50,12 +50,15 @@ static f32 it_803F7060[8] = {
     0.87266463f, 0.9599311f,  1.0471976f, 1.134464f
 };
 
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 0.0f;
     (void) 1.0f;
     (void) -1.0f;
 }
+#endif
+
 Item_GObj* it_802AFD8C(Item_GObj* parent, Vec3* pos, u32 kind,
                        float facing_dir)
 {

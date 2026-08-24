@@ -23,6 +23,7 @@ typedef struct HSD_LeakChecker {
 };
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data(void)
 {
     (void) "now registering suspecting memory ...\n";
@@ -32,6 +33,7 @@ static void order_data(void)
     (void) "Non-registered memory block is specified (%p).\n";
     (void) "leak unregister range %p %p\n";
 }
+#endif
 
 static inline u32* HSD_LeakGetCapacityPtr(HSD_LeakChecker* lc)
 {

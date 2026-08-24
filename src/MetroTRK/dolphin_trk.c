@@ -7,6 +7,7 @@
 #include "ppc_except.h"
 #include "ppc_targimpl.h"
 
+// For labels in ::InitMetroTRK
 #ifdef MWERKS_GEKKO
 #include "mpc_7xx_603e.h"
 #endif

@@ -23,6 +23,7 @@ ItemPickTable it_804A0E50;
 RandomItemSpawner it_804A0E30;
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) S32_TO_F32;
@@ -31,6 +32,7 @@ static void sdata2_order(void)
     (void) it_804A0E30;
     (void) it_804A0E50;
 }
+#endif
 
 void it_8026C47C(struct it_8026C47C_arg0_t* arg_struct)
 {
