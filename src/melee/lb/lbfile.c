@@ -20,16 +20,18 @@ static void lbFile_8001615C(int dcreq, int args, void* buf, bool cancelflag)
     cancel = true;
 }
 
-#ifdef MUST_MATCH
+/// @todo Non-inlined function forces loop in ::lbFile_800161C4 to yield to
+///       interrupts. Pragma solution likely fake.
+#ifdef MWERKS_GEKKO
 #pragma push
 #pragma dont_inline on
 #endif
 static bool discIsDone(void)
 {
     lb_800195D0();
-    return *(volatile bool*) &cancel;
+    return cancel;
 }
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 #pragma pop
 #endif
 
