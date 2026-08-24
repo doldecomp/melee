@@ -97,10 +97,12 @@ void vi0102_CameraCallback(HSD_GObj* gobj, int unused)
 }
 
 /// Used to force float ordering of file
+#ifdef MUST_MATCH
 static f32 unused(void)
 {
     return 0.0f;
 }
+#endif
 
 static void vi0102_RunFrame(HSD_GObj* gobj)
 {

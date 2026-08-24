@@ -23,12 +23,14 @@
 #include <math.h>
 #include <dolphin/mtx.h>
 
+#ifdef MUST_MATCH
 static void order_sdata2(void)
 {
     (void) 2.0f;
     (void) 0.0f;
     (void) 4.0f;
 }
+#endif
 
 /// Create Aesthetic Wind Effect for Warlock Punch
 static inline void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* gobj)

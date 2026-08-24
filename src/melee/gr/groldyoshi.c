@@ -308,25 +308,6 @@ void grOldYoshi_8020EC10(Ground_GObj* arg)
 
 void grOldYoshi_8020EFC8(Ground_GObj* arg) {}
 
-static inline s32 randi_between(s32 min, s32 max)
-{
-    if (max > min) {
-        if (min - max != 0) {
-            return max + HSD_Randi(max - min);
-        } else {
-            return max;
-        }
-    } else if (max < min) {
-        if (min - max != 0) {
-            return min + HSD_Randi(max - min);
-        } else {
-            return min;
-        }
-    } // else {
-    //    return min;
-    //}
-}
-
 /// @todo For some reason, the normal GET_GROUND didn't work here
 static inline Ground* grOldYoshi_8020EFCC_inline(Ground_GObj* arg0)
 {

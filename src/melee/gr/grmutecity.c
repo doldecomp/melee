@@ -340,6 +340,7 @@ StageData grMc_StageData = {
     ARRAY_SIZE(grMc_803E30B0),
 };
 
+#ifdef MUST_MATCH
 static void order_data(void)
 {
     (void) "%s:%d: couldn t get gobj(id=%d)\n";
@@ -347,6 +348,7 @@ static void order_data(void)
     (void) "not found car spline (R)\n";
     (void) "not found car spline (L)\n";
 }
+#endif
 
 struct grMc_YakumonoParam {
     int x0;

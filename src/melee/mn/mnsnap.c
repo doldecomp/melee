@@ -110,11 +110,6 @@ typedef struct mnSnap_State {
 static mnSnap_State mnSnap_804A0A10;
 static void* mnSnap_thumb_imgs[4];
 
-static inline s32* mnSnap_GetCardResult(void)
-{
-    return &mnSnap_804A0A10.card_result;
-}
-
 /// Recursively loads snapshot thumbnails from memory card.
 void mnSnap_80253184(void)
 {
@@ -283,11 +278,6 @@ static void mnSnap_8025329C(void)
     } else {
         mnSnap_80254298();
     }
-}
-
-static inline s32* mnSnap_GetCurPage(mnSnap_State* snap)
-{
-    return &snap->cur_page;
 }
 
 static inline void* mnSnap_GetBlankImg(mnSnap_State* snap)

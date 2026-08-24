@@ -40,7 +40,6 @@
 /* 100E0C */ static void fn_80100E0C(Fighter_GObj* gobj);
 /* 100F60 */ static void fn_80100F60(Fighter_GObj* gobj);
 /* 105978 */ static void fn_80105978(Fighter_GObj* gobj);
-/* 105A34 */ static void fn_80105A34(Fighter_GObj* gobj);
 /* 3CB710 */ static float ftKb_Init_803CB710[] = { 0.65F, 0.7F, 0.8F, 1.0F };
 /* 3CB720 */ static float ftKb_Init_803CB720[] = { 1.1F, 1.35F, 1.3F, 1.2F };
 
@@ -570,18 +569,6 @@ static inline void ftKb_AirScaleAnimStep(Fighter_GObj* gobj, Vec3* scale,
         fp->mv.pr.specialn.x8 += 1;
     } else {
         HSD_JObjSetScale(jobj, &fp->u.kb.x8C);
-    }
-}
-
-static inline void ftKb_JObjSetRotationY(HSD_JObj* jobj, f32 y, f32* base)
-{
-    (jobj ? ((void) 0) : __assert("jobj.h", 660, "jobj"));
-    ((!(jobj->flags & JOBJ_USE_QUATERNION))
-         ? ((void) 0)
-         : __assert("jobj.h", 661, (char*) &base[8]));
-    jobj->rotate.y = y;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        HSD_JObjSetMtxDirty(jobj);
     }
 }
 

@@ -1199,12 +1199,6 @@ static inline s32 getHandicapValue(int port)
     return hval != 0 ? hval : 1;
 }
 
-static inline f32 getHandicapFrame(int port)
-{
-    s32 hval = getHandicapValue(port);
-    return (f32) hval;
-}
-
 void mnCharSel_8025DB34(u8 arg0)
 {
     struct {

@@ -31,10 +31,12 @@
 #include <melee/mn/mnmain.h>
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void order_sdata2(void)
 {
     (void) S32_TO_F32;
 }
+#endif
 
 /// Random stage selection
 /// Returns an internal stage ID - 2 (since first 2 internal stage IDs are

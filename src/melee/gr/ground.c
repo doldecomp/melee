@@ -1178,11 +1178,6 @@ typedef struct LightOverrideEntry {
     /* 0x5 */ u8 _pad[3];
 } LightOverrideEntry;
 
-static inline HSD_LightDesc* get_light_desc_inline(LightList** list)
-{
-    return *(HSD_LightDesc**) *list;
-}
-
 static inline bool find_light_override(UnkArchiveStruct* archive,
                                        HSD_LightDesc* desc, bool* b6, bool* b7,
                                        bool* b5)
@@ -2937,14 +2932,6 @@ void Ground_801C4E70(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2,
     stage_info.x160 = vec;
     lb_8000B1CC(arg5, NULL, &vec);
     stage_info.x16C = vec;
-}
-
-static inline float vec_len(Vec3* v)
-{
-    float x2 = v->x * v->x;
-    float y2 = v->y * v->y;
-    float z2 = v->z * v->z;
-    return sqrtf(x2 + y2 + z2);
 }
 
 #ifdef MUST_MATCH

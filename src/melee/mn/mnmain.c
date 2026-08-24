@@ -65,6 +65,7 @@ u8 mn_804D6BB4;
 
 MenuFlow mn_804A04F0;
 
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) S32_TO_F32;
@@ -88,6 +89,7 @@ static void sdata2_order(void)
     (void) -0.100000001f;
     (void) -1.0f;
 }
+#endif
 
 static u16 mn_803EAE68[] = {
     0x4, 0x5, 0x6, 0x7, 0x8, 0x9, 0xA, 0xB, 0xC, 0xD,
@@ -1092,21 +1094,6 @@ void mn_8022A5D0(HSD_GObj* gp, MainMenuSelection selection)
                 }
             }
         }
-    }
-}
-
-static inline void UpdateAnimationLoop(HSD_JObj* jobj,
-                                       AnimLoopSettings* anim_loop,
-                                       bool selection_changed)
-{
-    float cur_frame = mn_8022F298(jobj);
-
-    // Reset animation if selection changed or current frame is outside loop
-    // bounds
-    if (selection_changed || cur_frame < anim_loop->start_frame ||
-        cur_frame > anim_loop->end_frame)
-    {
-        HSD_JObjReqAnimAll(jobj, anim_loop->start_frame);
     }
 }
 

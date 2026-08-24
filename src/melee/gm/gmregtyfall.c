@@ -80,6 +80,7 @@ static struct {
 } gm_804D4278 = { 0xAA, 0xAA, 0xFF, 0xFF };
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void order_sdata2(void)
 {
     (void) 60.0f;
@@ -87,6 +88,7 @@ static void order_sdata2(void)
     (void) MTXDegToRad(1);
     (void) 1.0f;
 }
+#endif
 
 #ifdef MUST_MATCH
 #pragma push
@@ -252,10 +254,12 @@ void fn_801A6A48(HSD_GObj* gobj, int arg1)
 }
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data(void)
 {
     (void) "!(jobj->flags & JOBJ_USE_QUATERNION)";
 }
+#endif
 
 void fn_801A6ACC(HSD_GObj* gobj, int unused)
 {

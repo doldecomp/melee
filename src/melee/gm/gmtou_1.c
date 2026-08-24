@@ -39,15 +39,13 @@
 /* 4D6668 */ extern HSD_Archive* lbl_804D6668;
 /* 4D6664 */ extern HSD_Archive* lbl_804D6664;
 
-/** @todo .sdata2 literal-order anchor (same idiom as gmtou_0.c/gmtou_2.c):
- * retail keeps -19.5f/13.0f at the head of this TU's pool (0x804DA7E0/E4),
- * ahead of literals first used earlier in the section's emission order.
- * Remove once the literals' first uses naturally occur in this order. */
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) -19.5f;
     (void) 13.0f;
 }
+#endif
 
 /* 4799D8 */ struct Lbl804799D8_t lbl_804799D8;
 /* 4799B8 */ struct Lbl804799B8_t lbl_804799B8;

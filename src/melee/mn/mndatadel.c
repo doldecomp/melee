@@ -31,6 +31,7 @@
 HSD_Text* mnDataDel_804D6C6C;
 HSD_GObj* mnDataDel_804D6C68;
 
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) S32_TO_F32;
@@ -46,6 +47,7 @@ static void sdata2_order(void)
     (void) 5.0f;
     (void) 0.0500000007f;
 }
+#endif
 
 static inline f32 mnDataDel_8024E940_inline(HSD_JObj* arg0)
 {

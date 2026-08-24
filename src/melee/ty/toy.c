@@ -1,65 +1,34 @@
-#include "toy.h"
+#include "toy.static.h" // IWYU pragma: associated
 
-#include "m2c_macros.h"
-#include "placeholder.h"
-#include "platform.h"
-#include "stddef.h"
-
-#include "toy.static.h"
-
-#include "tylist.h"
-#include "types.h"
-
-#include "db/db.h"
-#include "gm/gm_1601.h"
-#include "gm/gm_16AE.h"
-#include "gm/gm_16F1.h"
-#include "gm/gm_1A3F.h"
-#include "gm/gm_1A45.h"
-#include "gm/gmmain_lib.h"
-#include "if/textdraw.h"
-#include "if/textlib.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00CE.h"
-#include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lblanguage.h"
-#include "lb/lbspdisplay.h"
-#include "lb/lbvector.h"
-#include "melee/if/textlib.h"
-#include "mn/inlines.h"
-#include "mn/mnmain.h"
-#include "sc/types.h"
-#include "ty/toy.h"
-#include "ty/types.h"
-
-#include <math.h>
-#include <string.h>
-#include <dolphin/gx.h>
-#include <dolphin/mtx.h>
-#include <dolphin/os.h>
-#include <baselib/archive.h>
-#include <baselib/cobj.h>
-#include <baselib/controller.h>
-#include <baselib/debug.h>
-#include <baselib/displayfunc.h>
-#include <baselib/dobj.h>
-#include <baselib/fog.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/lobj.h>
-#include <baselib/memory.h>
-#include <baselib/mobj.h>
-#include <baselib/random.h>
-#include <baselib/sislib.h>
-#include <baselib/sobjlib.h>
-#include <baselib/state.h>
-#include <baselib/tobj.h>
-#include <baselib/wobj.h>
+/* 3053C4 */ static void _Toy_803053C4(s32, s32, s32);
+/* 3062EC */ static void _Toy_803062EC(s32 arg0, u32 arg1, f32 farg0);
+/* 3064B8 */ static s16 _Toy_803064B8(s16 arg0, s8 arg1);
+/* 30663C */ static void _Toy_8030663C(void);
+/* 306A0C */ static void _Toy_80306A0C(HSD_GObj* arg0, int);
+/* 306C5C */ static void _Toy_80306C5C(HSD_GObj* arg0);
+/* 307018 */ static void _Toy_80307018(void);
+/* 30715C */ static void _Toy_8030715C(f32, f32);
+/* 3075E8 */ static void _Toy_803075E8(s32 arg0);
+/* 307828 */ static void _Toy_80307828(int);
+/* 3078E4 */ static void _Toy_803078E4(void);
+/* 307BA0 */ static HSD_JObj* _Toy_80307BA0(HSD_JObj*, s16);
+/* 307F64 */ static void _Toy_80307F64(s32, s32);
+/* 3084A0 */ static void _Toy_803084A0(s32 arg0);
+/* 308DC8 */ static void _Toy_80308DC8(HSD_CObj*);
+/* 308F04 */ static void _Toy_80308F04(HSD_CObj*);
+/* 309338 */ static f32 _Toy_80309338(Vec3* arg0, Vec3* arg1);
+/* 309404 */ static void _Toy_80309404(HSD_GObj*);
+/* 30B530 */ static void _Toy_8030B530(HSD_GObj*);
+/* 30E110 */ static void _Toy_8030E110(HSD_GObj*);
+/* 30FA50 */ static void _Toy_8030FA50(void);
+/* 30FE48 */ static void _Toy_8030FE48(void*, s32);
+/* 3102C4 */ static void _Toy_803102C4(s8 arg0);
+/* 3109A0 */ static void _Toy_803109A0(s32, s32, s32);
+/* 310B48 */ static void _Toy_80310B48(HSD_GObj*);
+/* 3114E8 */ static void _Toy_803114E8(void);
+/* 311788 */ static void _Toy_80311788(void);
+/* 311F5C */ static void _Toy_80311F5C(void);
+/* 312050 */ static void _Toy_80312050(HSD_GObj* gobj, int code);
 
 int Toy_GetTrophyTotal(void)
 {
@@ -1107,6 +1076,7 @@ void _Toy_803062EC(s32 arg0, u32 arg1, f32 farg0)
     }
 }
 
+#ifdef MUST_MATCH
 static char* getViewDatFilename(void)
 {
     if (lbLang_IsSavedLanguageJP()) {
@@ -1115,6 +1085,7 @@ static char* getViewDatFilename(void)
         return "TyMnView.usd";
     }
 }
+#endif
 
 static char* getDataiDatFilename(void)
 {
@@ -1125,6 +1096,7 @@ static char* getDataiDatFilename(void)
     }
 }
 
+#ifdef MUST_MATCH
 static char* getInfoDatFilename(void)
 {
     if (lbLang_IsSavedLanguageJP()) {
@@ -1133,11 +1105,14 @@ static char* getInfoDatFilename(void)
         return "TyMnInfo.usd";
     }
 }
+#endif
 
+#ifdef MUST_MATCH
 static char* getBgDatFilename(void)
 {
     return "TyMnBg.dat";
 }
+#endif
 
 s32 Toy_803063D4(s32 arg0, s32 arg1, s32 arg2)
 {
@@ -1641,11 +1616,13 @@ HSD_LObj* Toy_LoadLObjList(LightList** list, s32* hasAnim)
 }
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data_670(void)
 {
     /* +670 */ (void) "ScMenFigure_ambanim_light";
     /* +68C */ (void) "ScMenFigure_ambfog";
 }
+#endif
 
 void _Toy_80307018(void)
 {
@@ -1687,10 +1664,12 @@ void _Toy_80307018(void)
 }
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data_6C4(void)
 {
     /* +6C4 */ (void) "ScMenFigure_scene_lights";
 }
+#endif
 
 void _Toy_8030715C(f32 cstick_x, f32 cstick_y)
 {
@@ -2527,6 +2506,7 @@ done:
 }
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data_6F4(void)
 {
     /* +7CC */ (void) "3DPos X = %f, Y = %f, Z = %f\n";
@@ -2541,6 +2521,7 @@ static void order_data_6F4(void)
     /* +8A0 */ (void) "top = %f, bottom = %f\n";
     /* +8B8 */ (void) "right = %f, left = %f\n";
 }
+#endif
 
 void _Toy_80308DC8(HSD_CObj* cobj)
 {
@@ -5176,6 +5157,7 @@ void _Toy_803102C4(s8 arg0)
 }
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data_9AC(void)
 {
     /* +9AC */ (void) "*** Error : Didn't Add Ligth!(call otoguro)\n";
@@ -5187,19 +5169,7 @@ static void order_data_9AC(void)
     /* +A30 */ (void) "tyDisplayModelTbl";
     /* +A44 */ (void) "tyDisplayModelUsTbl";
 }
-
-// static void inlineA0(void)
-// {
-//     if (_Toy_sbss_804D6ED0 == NULL) {
-//         _Toy_sbss_804D6ED0 = lbArchive_LoadSymbols(
-//             getDataiDatFilename(), &_Toy_sbss_804D6EC4, "tyInitModelTbl",
-//             &_Toy_sbss_804D6EC0, "tyModelSortTbl", &_Toy_sbss_804D6EBC,
-//             "tyModelSortTbl", &_Toy_sbss_804D6EB8, "tyExpDifferentTbl",
-//             &_Toy_sbss_804D6EB4, "tyNoGetUsTbl", &Toy_sbss_804D6EB0,
-//             "tyDisplayModelTbl", &Toy_sbss_804D6EAC, "tyDisplayModelUsTbl",
-//             NULL);
-//     }
-// }
+#endif
 
 void Toy_803102D0(void)
 {

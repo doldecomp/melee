@@ -62,10 +62,12 @@ static struct grPushon_YakumonoParam* yakumono_param;
                                      float delta_y);
 
 /// @todo .sdata order hack
+#ifdef MUST_MATCH
 static void order_sdata(void)
 {
     (void) "0";
 }
+#endif
 
 Vec3 const grPushOn_803B8440 = { 0 };
 Vec3 const grPushOn_803B844C = { 0 };

@@ -49,12 +49,6 @@
 
 #include <dolphin/mtx.h>
 
-/// @todo Figure out how to use #GET_JOBJ instead.
-static inline HSD_JObj* get_jobj(HSD_GObj* gobj)
-{
-    return gobj->hsd_obj;
-}
-
 MotionState ftCh_Init_MotionStateTable[ftCh_MS_SelfCount] = {
     {
         // ftMh_MS_Wait1_0 = 341
