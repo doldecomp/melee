@@ -382,12 +382,6 @@ static void fn_80235F80(HSD_GObj* gobj)
     }
 }
 
-static void mnStageSw_80236178_noinline(MnStageSwData* data, u8 idx);
-static void mnStageSw_80236178_noinline(MnStageSwData* data, u8 idx)
-{
-    mnStageSw_80236178(data, idx);
-}
-
 /// Position stage icon JObj based on index
 /// Uses stored reference JObjs to calculate X/Y position
 static void mnStageSw_80236178(MnStageSwData* data, u8 idx)

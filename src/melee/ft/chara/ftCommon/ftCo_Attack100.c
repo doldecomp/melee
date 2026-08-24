@@ -29,16 +29,8 @@
 #include <melee/pl/plbonuslib.h>
 
 /* 0D769C */ FtMotionId fn_800D769C(Fighter* ft, FtMotionId msid);
-/* 0D84D4 */ static void fn_800D84D4(Fighter_GObj*, int);
-/* 0D8BFC */ static void fn_800D8BFC(Fighter_GObj* arg0);
-/* 0D9CE8 */ static void fn_800D9CE8(Fighter_GObj* arg0);
 /* 0DA054 */ void fn_800DA054(Fighter_GObj* gobj);
-/* 0DAADC */ static void fn_800DAADC(Fighter_GObj* arg0, Fighter_GObj* arg1);
-/* 0DAD18 */ static bool fn_800DAD18(Fighter_GObj* gobj);
-/* 0DAECC */ static void fn_800DAECC(Fighter_GObj* gobj);
 /* 0DAEEC */ void fn_800DAEEC(Fighter_GObj* gobj);
-/* 0DB230 */ static void fn_800DB230(Fighter_GObj* gobj);
-/* 0DB230 */ static inline void fn_800DB230_inline(Fighter_GObj* gobj);
 
 extern f32 ftCo_804D90D0; // 0.0f
 extern f32 ftCo_804D90D4; // Decrement value

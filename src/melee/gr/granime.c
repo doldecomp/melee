@@ -59,12 +59,14 @@ struct padded_jmp_buf {
 /* 49EE40 */ struct padded_jmp_buf grAnime_8049EE40;
 
 /// @todo .sdata order hack
+#ifdef MUST_MATCH
 static void order_sdata(void)
 {
     (void) "archive";
     (void) "obj";
     (void) "0";
 }
+#endif
 
 void grAnime_801C65B0(UnkArchiveStruct* arg0)
 {

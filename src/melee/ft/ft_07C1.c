@@ -74,31 +74,6 @@ void ft_8007C224(Fighter_GObj* gobj)
     }
 }
 
-static inline void inlineA0(Fighter* fp0, Fighter* fp1, HitCapsule* hit1)
-{
-    lbColl_80008688(hit1, 3, fp0);
-    if (fp1->ground_or_air == GA_Air) {
-        float temp_f1 = fp0->co_attrs.weight / fp1->co_attrs.weight;
-        float temp_f5;
-        if (temp_f1 > 1) {
-            temp_f1 = 1;
-        }
-        temp_f5 = temp_f1 * p_ftCommonData->hit_weight_mul;
-        if (fp0->pos_delta.x * fp1->pos_delta.x >= 0) {
-            fp1->x98_atk_shield_kb.x +=
-                (fp0->pos_delta.x - fp1->pos_delta.x) * temp_f5;
-        } else {
-            fp1->x98_atk_shield_kb.x += fp0->pos_delta.x * temp_f5;
-        }
-        if (fp0->pos_delta.y * fp1->pos_delta.y >= 0) {
-            fp1->x98_atk_shield_kb.y +=
-                (fp0->pos_delta.y - fp1->pos_delta.y) * temp_f5;
-        } else {
-            fp1->x98_atk_shield_kb.y += fp0->pos_delta.y * temp_f5;
-        }
-    }
-}
-
 /// @todo This is just the same inline twice.
 void ft_8007C2E0(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
                  HitCapsule* hit1)

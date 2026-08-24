@@ -86,25 +86,6 @@ static inline void inline_update_entries(HSD_GObj* gobj)
     }
 }
 
-static inline void inline_free_text(HSD_GObj* gobj)
-{
-    MnCountData* userdata = GET_MNCOUNT(gobj);
-    int i;
-
-    for (i = 0; i < MNCOUNT_VISIBLE_ROWS; i++) {
-        if (userdata->labels[i] != NULL) {
-            HSD_SisLib_803A5CC4(userdata->labels[i]);
-            userdata->labels[i] = NULL;
-        }
-        if (userdata->values[i] != NULL) {
-            HSD_SisLib_803A5CC4(userdata->values[i]);
-            userdata->values[i] = NULL;
-        }
-    }
-
-    HSD_SisLib_803A5CC4(userdata->title);
-}
-
 static inline bool mnCount_8025035C_inline(void)
 {
     s32 i;

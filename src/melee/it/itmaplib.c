@@ -11,6 +11,7 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 0.5f;
@@ -25,6 +26,7 @@ static void sdata2_order(void)
     (void) 0.850000024f;
     (void) 0.00999999978f;
 }
+#endif
 
 const Vec3 it_803B8570 = { 0.0f, 0.0f, 0.0f };
 const Vec3 it_803B857C = { 0.0f, 0.0f, 0.0f };

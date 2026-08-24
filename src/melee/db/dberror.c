@@ -10,6 +10,9 @@
 #include <sysdolphin/baselib/video.h>
 #include <melee/lb/lb_0195.h>
 
+/* 228AB4 */ static void fn_HSDPanicHandler(OSContext* ctx);
+/* 228B28 */ static void fn_OSErrorHandler(u16 error, OSContext* ctx, ...);
+
 void db_ClearFPUExceptions(void)
 {
     OSContext* ctx;

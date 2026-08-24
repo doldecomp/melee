@@ -147,14 +147,6 @@ void ftCo_800C8540(Fighter_GObj* gobj)
     }
 }
 
-static inline HSD_DObj* dobj_next(HSD_DObj* dobj)
-{
-    if (dobj != NULL) {
-        return dobj->next;
-    }
-    return NULL;
-}
-
 void ft_800C85B8(Fighter_GObj* gobj)
 {
     HSD_Joint* sp20;

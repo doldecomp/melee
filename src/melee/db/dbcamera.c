@@ -10,6 +10,23 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
+
+/* 2270C4 */ static void fn_802270C4(int arg0);
+/* 22713C */ static void fn_8022713C(int arg0);
+/* 227188 */ static void fn_80227188(void);
+/* 2277E8 */ static void fn_802277E8(HSD_GObj*, int);
+/* 227904 */ static void fn_80227904(HSD_GObj* camera, int port);
+/* 2279E8 */ static void fn_802279E8(HSD_GObj* camera, Vec3* camera_pos,
+                                     Vec3* camera_interest, float cstick_x,
+                                     float cstick_y);
+/* 227B64 */ static void fn_80227B64(HSD_GObj* camera, float x, float y);
+/* 227BA8 */ static void fn_80227BA8(HSD_GObj* camera, Vec3*, float, float);
+/* 227CAC */ static void fn_80227CAC(HSD_GObj* camera, float cstick_y);
+/* 227D38 */ static void fn_80227D38(HSD_GObj* camera, Vec3*, float);
+/* 227EB0 */ static void fn_80227EB0(HSD_GObj* camera, Vec3*, Vec3*, float,
+                                     float);
+/* 227FE0 */ static void fn_80227FE0(HSD_GObj* camera, float x, float y);
+/* 228124 */ static void fn_80228124(HSD_GObj* camera, Vec3*, float, float);
 /* 4A03C0 */ static char db_CameraInfoDisplay_buf[0xC0];
 
 /// @todo does the padding mean this should be in another file before this one?
@@ -312,11 +329,6 @@ void fn_CheckCameraInfo(int player, int buttons_down, int buttons_pressed,
 }
 
 /// #fn_802277E8
-
-static inline HSD_PadStatus* get_pad(u8 i)
-{
-    return &HSD_PadMasterStatus[i];
-}
 
 static inline float cstick_threshold(float cstick, float val)
 {

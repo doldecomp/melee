@@ -203,6 +203,7 @@
 /* 169370 */ u8 gm_80169370(s32);
 /* 169384 */ int gm_80169384(void);
 /* 169394 */ s32 gm_80169394(void);
+/* 1693A8 */ s32 fn_801693A8(void);
 /* 1693BC */ bool gm_801693BC(int);
 /* 169434 */ void fn_80169434(GmRouteCallback fn);
 /* 169444 */ bool fn_80169444(bool);
@@ -221,6 +222,7 @@
 /* 169F50 */ UNK_RET fn_80169F50(s8, s8);
 /* 16A09C */ UNK_RET fn_8016A09C(UNK_PARAMS);
 /* 16A164 */ UNK_RET gm_8016A164(UNK_PARAMS);
+/* 16A1E4 */ s32 fn_8016A1E4(void);
 /* 16A1F8 */ bool gm_8016A1F8(void);
 /* 16A21C */ void gm_8016A21C(StartMeleeRules*);
 /* 16A22C */ s32 gm_8016A22C(s8 ckind0, s8 ckind1, s8 ckind2, u8, u8, int, int,

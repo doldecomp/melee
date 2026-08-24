@@ -33,11 +33,13 @@
 /* 4D67F0 */ HSD_SObjDesc* gm_804D67F0;
 /* 4D67EC */ u32 gm_804D67EC;
 
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 82.0f;
     (void) 290.0f;
 }
+#endif
 
 void gm_801A9DD0(HSD_GObj* arg0, u16 arg1, u16 arg2, int arg3, int arg4)
 {

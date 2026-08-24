@@ -12,6 +12,9 @@
 #include <baselib/particle.h>
 #include <baselib/psstructs.h>
 
+/* 1C6228 */ static void grDatFiles_801C6228(UnkStageDat*);
+/* 1C62B4 */ static UnkArchiveStruct* grDatFiles_801C62B4(void);
+
 /// @todo Merge declaration and definition
 /* static */ extern GroundParam grDatFiles_803E0848;
 
@@ -95,7 +98,7 @@ void grDatFiles_801C6038(void* arg0, s32 arg1, s32 arg2)
     }
 }
 
-static void grDatFiles_801C6228(UnkStageDat* arg0)
+void grDatFiles_801C6228(UnkStageDat* arg0)
 {
     if (arg0 != NULL && arg0->unk28 != NULL && arg0->unk2C != 0) {
         s32 i;
@@ -115,7 +118,7 @@ void grDatFiles_801C6288(void)
     memzero(&grDatFiles_8049EE10, sizeof(grDatFiles_8049EE10));
 }
 
-static UnkArchiveStruct* grDatFiles_801C62B4(void)
+UnkArchiveStruct* grDatFiles_801C62B4(void)
 {
     s32 i;
     for (i = 0; i < 4; i++) {

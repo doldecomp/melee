@@ -1,5 +1,7 @@
 #include "ittaru.h"
 
+#include <placeholder.h>
+
 #include "baselib/jobj.h"
 #include "cm/camera.h"
 #include "ef/efsync.h"
@@ -69,11 +71,12 @@ static inline f32 inline_fabsf(f32 x)
     }
 }
 
-// ensure U32_TO_F32 is in the right place
-static f32 sdata_ordering(u32 u)
+#ifdef MUST_MATCH
+static void order_sdata2(void)
 {
-    return u;
+    (void) U32_TO_F32;
 }
+#endif
 
 void it_802874F0(Item_GObj* gobj)
 {

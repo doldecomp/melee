@@ -84,20 +84,24 @@ ASSERT_SIZE(_tyDisplay_devtext_buf, 0x36);
 ASSERT_SIZE(_tyDisplay_804A2DD0, 0x18);
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data_0(void)
 {
     /*  +0 */ (void) "ToyDspPanel_Top_joint";
     /* +18 */ (void) "ToyDspBg_Top_joint";
 }
+#endif
 
 /// @todo Not de-duplicated in #tyDisplay_8031BB34, therefore not a literal?
 static char _tyDisplay_803FF01C[] = "ToyDspStand_Top_joint";
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data_44(void)
 {
     /* +44 */ (void) "ScMenDisplay_fog";
 }
+#endif
 
 static inline TySortElem* tyDisplay_SortElemAtOffset(TySortElem* base,
                                                      size_t offset)
@@ -228,6 +232,7 @@ void _tyDisplay_8031830C(TySortElem* base, s32 lo, s32 hi)
 }
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void order_sdata2_0(void)
 {
     /*  +0 */ (void) 7.0f;
@@ -245,6 +250,7 @@ static void order_sdata2_0(void)
     /* +38 */ (void) 0.1f;
     /* +3C */ (void) 0.5f;
 }
+#endif
 
 typedef struct TySortElemInt {
     s32 key;
@@ -1188,11 +1194,13 @@ void _tyDisplay_80319EF0(void)
 }
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data_A8(void)
 {
     /* +A8 */ (void) "TyMnDisp.dat";
     /* +B8 */ (void) "TyMnDisp.usd";
 }
+#endif
 
 void _tyDisplay_8031A4EC(HSD_GObj* arg0)
 {
@@ -1617,10 +1625,12 @@ void _tyDisplay_8031B1FC(void)
 static GXColor const _tyDisplay_color_C8C8C8FF = { 0xC8, 0xC8, 0xC8, 0xFF };
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data_110(void)
 {
     /* +110 */ (void) "ScMenDisplay_scene_lights";
 }
+#endif
 
 /* 3FF11C */ static HSD_WObjDesc _tyDisplay_803FF11C = {
     NULL,

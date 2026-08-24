@@ -132,18 +132,6 @@ void it_802B43D0(Item_GObj* gobj, HSD_GObj* owner)
     db_80225DD8(gobj, owner);
 }
 
-static inline void itPikachuTJoltAir_Destroy(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    Item_GObj* linked = ip->xDD4_itemVar.pikachujoltair.xDD8;
-
-    it_802725D4(gobj);
-    if (linked != NULL) {
-        it_802B3544(linked);
-        ip->xDD4_itemVar.pikachujoltair.xDD8 = NULL;
-    }
-}
-
 static inline void itPikachuTJoltAir_Anim_Destroy(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);

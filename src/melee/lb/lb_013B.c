@@ -9,6 +9,10 @@
 #include <baselib/rumble.h>
 
 typedef bool (*lb_803BA248_fn)(ColorOverlay*);
+/* 013BB8 */ static bool lb_80013BB8(ColorOverlay* arg);
+/* 013BE4 */ static bool lb_80013BE4(ColorOverlay* arg);
+/* 013FF0 */ static bool lb_80013FF0(ColorOverlay* arg);
+/* 014234 */ static bool lb_80014234(ColorOverlay* arg);
 
 static struct Fighter_804D653C_t* lb_804D63C0;
 

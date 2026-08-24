@@ -8,6 +8,7 @@
 #include <baselib/hsd_3933.h>
 #include <baselib/video.h>
 
+/* 2289F8 */ static int fn_802289F8(char* arg0, int arg1, int arg2);
 /* 4D6B94 */ int db_ScreenshotNumber;
 /* 4D6B90 */ unsigned int db_ScreenshotPending;
 /* 4D6B8C */ UnkFlagStruct db_5xSpeedStatus;

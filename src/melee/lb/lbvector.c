@@ -244,10 +244,12 @@ void lbVector_Rotate(Vec3* v, int axis, float angle)
     v->z = z;
 }
 
-static float dummy(void)
+#ifdef MUST_MATCH
+static void order_sdata2(void)
 {
-    return 2.0f;
-} // needed here to force order of floats in .sdata2 section
+    (void) 2.0f;
+}
+#endif
 
 /// 8000DC6C - compute a -= 2*<a,b>*b. When b has unit length, this mirrors a
 /// at the plane that is perpendicular to b and contains the origin.

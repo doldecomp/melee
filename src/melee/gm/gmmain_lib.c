@@ -18,6 +18,8 @@
 #include <melee/mn/mnname.h>
 #include <melee/ty/toy.h>
 
+/* 15D888 */ static void gmMainLib_8015D888(u32);
+
 GameRules gmMainLib_803D4A48 = {
     0,
     0x34,
@@ -734,16 +736,6 @@ void gmMainLib_8015DB80(void)
     }
 }
 
-static inline void gmMainLib_AdjustConfigNameTag(int value, s32 name_tag,
-                                                 struct gmm_x0_528_t** config)
-{
-    if (value == (u8) name_tag) {
-        (*config)[4].c_kind = 0x78;
-    } else if (value > (u8) name_tag && value != 0x78) {
-        (*config)[4].c_kind = value - 1;
-    }
-}
-
 s32 gmMainLib_8015DBF4(s32 arg0)
 {
     extern VsModeData gm_80497618;
@@ -1176,6 +1168,8 @@ void gmMainLib_8015F4F4(u8 arg0)
 {
     gmMainLib_GetSaveData()->x1CB0.deflicker = arg0;
 }
+
+struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;
 
 void gmMainLib_8015F500(void)
 {
