@@ -17,6 +17,8 @@
 #include "lb/lb_013B.h"
 #include "lb/types.h"
 
+#include <baselib/wobj.h>
+
 #include <math.h>
 
 typedef struct BgFlashState {
@@ -43,7 +45,7 @@ typedef struct BgFlashData {
     /* 0x44 */ HSD_GObj* x44;
 } BgFlashData;
 
-extern BgFlashData lbl_80433658;
+BgFlashData lbl_80433658;
 
 #include <dolphin/gx.h>
 #include <baselib/cobj.h>
@@ -69,7 +71,31 @@ static GXColor lbl_804D3844 = { 0, 0, 0, 0 };
 static GXColor lbl_804D3848 = { 255, 255, 255, 255 };
 static GXColor lbl_804D384C = { 0, 0, 0, 0 };
 
-extern HSD_CObjDesc lbl_803BB028;
+static HSD_WObjDesc lbl_803BB000 = {
+    NULL,
+    { 320.0f, -240.0f, 415.69220f },
+};
+
+static HSD_WObjDesc lbl_803BB014 = {
+    NULL,
+    { 320.0f, -240.0f, 0.0f },
+};
+
+HSD_CameraDescPerspective lbl_803BB028 = {
+    NULL,
+    0,
+    PROJ_PERSPECTIVE,
+    { 0, 640, 0, 480 },
+    { 0, 640, 0, 480 },
+    &lbl_803BB000,
+    &lbl_803BB014,
+    0.0f,
+    NULL,
+    0.1f,
+    30000.0f,
+    60.0f,
+    1.3333333f,
+};
 
 void fn_8001FC08(void)
 {
@@ -436,7 +462,7 @@ void lbBgFlash_800208EC(int arg0)
 
     lbl_80433658.x44 = GObj_Create(0x14, 0x16, 0);
 
-    temp2 = (temp1 = HSD_CObjLoadDesc(&lbl_803BB028));
+    temp2 = (temp1 = HSD_CObjLoadDesc((HSD_CObjDesc*) &lbl_803BB028));
     temp3 = HSD_GObj_804D784B;
     gobj1_slot = &flash->x44;
     HSD_GObjObject_80390A70(*gobj1_slot, temp3 & 0xFFFFFFFF, temp2);
@@ -471,7 +497,7 @@ void lbBgFlash_800209F4(void)
     gobj1_slot = &flash->x44;
     HSD_GObjObject_80390A70(*gobj1_slot,
                             HSD_GObj_804D784B & 0xFFFFFFFFFFFFFFFF,
-                            HSD_CObjLoadDesc(&lbl_803BB028));
+                            HSD_CObjLoadDesc((HSD_CObjDesc*) &lbl_803BB028));
     GObj_SetupGXLinkMax(*gobj1_slot, HSD_GObj_803910D8, 0xa);
     (*gobj1_slot)->gxlink_prios = 0x10000;
 
@@ -945,7 +971,7 @@ void lbBgFlash_80021410(void* arg0)
     fn_8002113C(data->jobj1, &axis, acos2);
 }
 
-extern HSD_ObjAllocData lbl_804336A0;
+HSD_ObjAllocData lbl_804336A0;
 
 void fn_800219E4(void* arg0)
 {
@@ -959,8 +985,8 @@ typedef struct {
     void* x2C;
 } BgFlashGlobal;
 
-extern BgFlashGlobal* lbl_804D63E0;
-extern struct Fighter_804D653C_t* lbl_804D63DC;
+BgFlashGlobal* lbl_804D63E0;
+struct Fighter_804D653C_t* lbl_804D63DC;
 
 void lbBgFlash_80021A10(f32 arg8)
 {
