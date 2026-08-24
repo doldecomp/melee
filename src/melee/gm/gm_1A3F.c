@@ -61,7 +61,12 @@ void gm_801A3F48(GameScene* scene)
 
 static inline u8 firstScene(GameScene* scene, u8 sentinel)
 {
-    for (; scene->idx != sentinel; scene++) {
+    for (; scene->idx != 0xFF; scene++) {
+        do {
+            if (scene->idx == sentinel) {
+                break;
+            }
+        } while (0);
         return scene->idx;
     }
     return 0;
