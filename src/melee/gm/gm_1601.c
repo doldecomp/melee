@@ -3495,35 +3495,27 @@ void fn_8016758C(void)
     }
 }
 
-struct lbl_803B7A44_t {
-    f32 x0;
-    f32 x4;
-    f32 x8;
-    f32 xC;
-    f32 x10;
-    f32 x14;
-};
-
-extern struct lbl_803B7A44_t lbl_803B7A44;
-
 s32 fn_80167638(s32 arg0, Vec3* arg1, Vec3* arg2)
 {
-    struct lbl_803B7A44_t sp;
+    u8 pad[8];
     lbl_8046B6A0_t* info;
     s8 chr;
     s32 idx;
-    s32 i;
 
     PAD_STACK(8);
 
     info = gm_16AE_GetUnkData_1();
-    idx = 0;
-    for (i = 0; i < ARRAY_SIZE(info->FighterMatchInfo); i++) {
-        if (info->FighterMatchInfo[i].x8 == 0) {
-            idx = i;
-            break;
+    {
+        int i;
+        for (i = 0; i < ARRAY_SIZE(info->FighterMatchInfo); i++) {
+            if (info->FighterMatchInfo[i].x8 == 0) {
+                idx = i;
+                goto done;
+            }
         }
     }
+    idx = 0;
+done:
     chr = Player_GetPlayerCharacter(arg0);
     if (stage_info.unk8C.b4) {
         Stage_80224E38(arg1, arg0);
@@ -3533,8 +3525,12 @@ s32 fn_80167638(s32 arg0, Vec3* arg1, Vec3* arg2)
     } else {
         arg0 = 0;
         Stage_80224E38(arg1, 0);
-        sp = lbl_803B7A44;
-        arg2->x = 16.0f * (&sp.x0)[idx];
+        {
+            float sp[] = {
+                0, 1, -1, 2, 0, 0,
+            };
+            arg2->x = 16.0f * sp[idx];
+        }
         arg2->z = 0.0f;
         arg2->y = 0.0f;
         info = gm_16AE_GetUnkData_1();

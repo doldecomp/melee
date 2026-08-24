@@ -246,7 +246,7 @@ static inline void HSD_JObjSetMtxDirtyOutOfLine(HSD_JObj* jobj)
 }
 
 /// @todo Non-static inline
-#ifndef MUST_MATCH
+#if !defined(__MWERKS__)
 static
 #endif
     inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)

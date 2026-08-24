@@ -29,10 +29,27 @@ lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
                 float hit_radius, float hurt_radius, float broadphase_scale);
 
 /// .sdata
-static GXColor lbColl_804D36C4 = { 0, 0xFF, 0xFF, 0x80 };
-static GXColor lbColl_804D36C8 = { 0, 0x80, 0x80, 0x80 };
-static GXColor lbColl_804D36D4 = { 0, 0x80, 0xFF, 0x80 };
-static GXColor lbColl_804D36D8 = { 0, 0x40, 0x80, 0x80 };
+static GXColor lbColl_804D36A0 = { 0xFF, 0x00, 0x00, 0x80 };
+static GXColor lbColl_804D36A4 = { 0xFF, 0x00, 0xFF, 0x80 };
+static GXColor lbColl_804D36A8 = { 0x80, 0x00, 0x00, 0x80 };
+static GXColor lbColl_804D36AC = { 0xFF, 0xFF, 0x00, 0x80 };
+static GXColor lbColl_804D36B0 = { 0x80, 0x80, 0x00, 0x80 };
+static GXColor lbColl_804D36B4 = { 0x00, 0xFF, 0x00, 0x80 };
+static GXColor lbColl_804D36B8 = { 0x00, 0x80, 0x00, 0x80 };
+static GXColor lbColl_804D36BC = { 0x00, 0x00, 0xFF, 0x80 };
+static GXColor lbColl_804D36C0 = { 0x00, 0x00, 0x80, 0x80 };
+static GXColor lbColl_804D36C4 = { 0x00, 0xFF, 0xFF, 0x80 };
+static GXColor lbColl_804D36C8 = { 0x00, 0x80, 0x80, 0x80 };
+static GXColor lbColl_804D36CC = { 0x00, 0xFF, 0x80, 0x80 };
+static GXColor lbColl_804D36D0 = { 0x00, 0x80, 0x40, 0x80 };
+static GXColor lbColl_804D36D4 = { 0x00, 0x80, 0xFF, 0x80 };
+static GXColor lbColl_804D36D8 = { 0x00, 0x40, 0x80, 0x80 };
+static GXColor lbColl_804D36DC = { 0xFF, 0xFF, 0xFF, 0x80 };
+static GXColor lbColl_804D36E0 = { 0xFF, 0x80, 0x00, 0x80 };
+static GXColor lbColl_804D36E4 = { 0x80, 0x40, 0x00, 0x80 };
+static GXColor lbColl_804D36E8 = { 0xFF, 0xFF, 0xFF, 0x80 };
+static GXColor lbColl_804D36EC = { 0x80, 0x80, 0x80, 0x80 };
+static GXColor lbColl_804D36F0 = { 0xFF, 0xFF, 0x00, 0x80 };
 
 /// .sdata2
 float const lbColl_804D79F0 = 1e-5;
@@ -62,12 +79,9 @@ int lbColl_803B9880[] = {
     0x00035BAF, 0x00035BB2, 0x00035BB5, 0x00083D60, 0x00083D60, 0x0000020D,
 };
 
-extern GXColor lbColl_804D36AC;
-extern GXColor lbColl_804D36B0;
-extern GXColor lbColl_804D36B4;
-extern GXColor lbColl_804D36B8;
-extern GXColor lbColl_804D36BC;
-extern GXColor lbColl_804D36C0;
+static GXColor lbColl_804D36F4 = { 0x80, 0x80, 0x00, 0x80 };
+static GXColor lbColl_804D36F8 = { 0xFF, 0x00, 0x00, 0x80 };
+static GXColor lbColl_804D36FC = { 0x80, 0x00, 0x00, 0x80 };
 
 struct unk {
     GXColor* pad;
@@ -2006,9 +2020,6 @@ bool lbColl_80008820(HitCapsule* capsule, int type, void* victim)
 
 GXColor const lbColl_804D7A50 = { 0 };
 
-extern GXColor lbColl_804D36CC;
-extern GXColor lbColl_804D36D0;
-
 void lbColl_800089B8(HitCapsule* hit, UNK_T arg1)
 {
     size_t i;
@@ -2427,11 +2438,6 @@ void lbColl_80009DD4(Vec3* v0, Vec3* v1, GXColor* clr)
     HSD_StateInitTev();
 }
 
-extern GXColor lbColl_804D36A0;
-extern GXColor lbColl_804D36A4;
-extern GXColor lbColl_804D36A8;
-extern GXColor lbColl_804D36DC;
-
 bool lbColl_80009F54(HitCapsule* hit, u32 arg1, float arg8)
 {
     GXColor* var_r5;
@@ -2469,9 +2475,6 @@ bool lbColl_80009F54(HitCapsule* hit, u32 arg1, float arg8)
     }
     return 0;
 }
-
-extern GXColor lbColl_804D36E8;
-extern GXColor lbColl_804D36EC;
 
 static inline void lbColl_DrawHitResult(MtxPtr mtx, Vec3* a, Vec3* b,
                                         GXColor* c0, GXColor* c1, f32 size)
@@ -2557,9 +2560,6 @@ bool lbColl_8000A244(HurtCapsule* hurt, u32 arg1, Mtx arg2, float arg3)
     return false;
 }
 
-static GXColor lbColl_804D36F8 = { 0xFF, 0, 0, 0x80 };
-static GXColor lbColl_804D36FC = { 0x80, 0, 0, 0x80 };
-
 bool lbColl_8000A10C(struct lbColl_8000A10C_arg0_t* arg0, u32 arg1, f32 arg2)
 {
     GXColor* c = &lbColl_804D36F8;
@@ -2577,9 +2577,6 @@ bool lbColl_8000A10C(struct lbColl_8000A10C_arg0_t* arg0, u32 arg1, f32 arg2)
     return false;
 }
 
-static GXColor lbColl_804D36F0 = { 0xFF, 0xFF, 0, 0x80 };
-static GXColor lbColl_804D36F4 = { 0x80, 0x80, 0, 0x80 };
-
 bool lbColl_8000A1A8(struct Fighter_x1614_t* arg0, int arg1, f32 scale_y)
 {
     u32 var_r0;
@@ -2596,9 +2593,6 @@ bool lbColl_8000A1A8(struct Fighter_x1614_t* arg0, int arg1, f32 scale_y)
     }
     return false;
 }
-
-GXColor lbColl_804D36E0 = { 0 };
-GXColor lbColl_804D36E4 = { 0x80, 0x40, 0x00, 0x80 };
 
 bool lbColl_8000A460(Fighter_x1670_t* hurt, u32 arg1)
 {

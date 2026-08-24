@@ -75,6 +75,11 @@ GXRenderModeObj gmMainLib_803D4A80 = {
     { 8, 8, 0xA, 0xC, 0xA, 8, 8 },
 };
 
+static struct gmm_x0* bss_order(void)
+{
+    return gmMainLib_8045A6C0;
+}
+
 GameRules* gmMainLib_GetGameRules(void)
 {
     return &gmMainLib_804D3EE0->x1850;
@@ -1176,6 +1181,8 @@ void gmMainLib_8015F4F4(u8 arg0)
 {
     gmMainLib_GetSaveData()->x1CB0.deflicker = arg0;
 }
+
+struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;
 
 void gmMainLib_8015F500(void)
 {

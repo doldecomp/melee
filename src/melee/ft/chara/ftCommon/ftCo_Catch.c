@@ -10,7 +10,6 @@
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 
-bool ftCo_800952DC(Fighter_GObj*);
 void fn_800D9CE8(Fighter_GObj*);
 void fn_800DAADC(Fighter_GObj* arg0, Fighter_GObj* arg1);
 
