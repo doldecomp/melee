@@ -2020,9 +2020,6 @@ bool lbColl_80008820(HitCapsule* capsule, int type, void* victim)
 
 GXColor const lbColl_804D7A50 = { 0 };
 
-extern GXColor lbColl_804D36CC;
-extern GXColor lbColl_804D36D0;
-
 void lbColl_800089B8(HitCapsule* hit, UNK_T arg1)
 {
     size_t i;
@@ -2478,9 +2475,6 @@ bool lbColl_80009F54(HitCapsule* hit, u32 arg1, float arg8)
     }
     return 0;
 }
-
-extern GXColor lbColl_804D36E8;
-extern GXColor lbColl_804D36EC;
 
 static inline void lbColl_DrawHitResult(MtxPtr mtx, Vec3* a, Vec3* b,
                                         GXColor* c0, GXColor* c1, f32 size)
