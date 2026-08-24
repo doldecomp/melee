@@ -57,6 +57,7 @@
 /* 4D6EEC */ static s32 _tyList_804D6EEC;
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data_0(void)
 {
     /*  +0 */ (void) "Pos : %f, %f,%f\n";
@@ -66,6 +67,7 @@ static void order_data_0(void)
     /* +50 */ (void) "ToyFigureListMarkN_Top_joint";
     /* +70 */ (void) "tylist.c";
 }
+#endif
 
 /// Formats a number into a string buffer using digit glyphs from the font.
 char* _tyList_80312834(char* buf, u32 num)

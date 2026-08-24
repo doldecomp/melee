@@ -28,7 +28,52 @@
 #include <melee/mp/mplib.h>
 #include <melee/mp/types.h>
 
+typedef struct ftCo_AttackEntry {
+    /* +00 */ s32 cmd;
+    /* +04 */ s32 x04;
+    /* +08 */ f32 x08;
+    /* +0C */ f32 x0C;
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ f32 weight;
+    /* +1C */ s32 x1C;
+    /* +20 */ s32 x20;
+} ftCo_AttackEntry;
+
+typedef struct ftCo_x50_attr {
+    /* +00 */ u8 pad00[0x10];
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+} ftCo_x50_attr;
+
+typedef struct ftCo_x50_t {
+    /* +00 */ u8 pad00[0x40];
+    /* +40 */ f32 x40;
+    /* +44 */ f32 x44;
+    /* +48 */ u8 pad48[0x4C - 0x48];
+    /* +4C */ f32 x4C;
+    /* +50 */ f32 x50;
+    /* +54 */ u8 pad54[0xC0 - 0x54];
+    /* +C0 */ s32 xC0;
+    /* +C4 */ u8 padC4[0xCC - 0xC4];
+    /* +CC */ ftCo_x50_attr* xCC;
+    /* +D0 */ u8 padD0[0xC1C - 0xD0];
+    /* +C1C */ f32 xC1C;
+    /* +C20 */ f32 xC20;
+    /* +C24 */ f32 xC24;
+    /* +C28 */ f32 xC28;
+} ftCo_x50_t;
+
+typedef struct ftCo_CollData {
+    /* +00 */ u8 pad0[4];
+    /* +04 */ Vec3 p;
+    /* +10 */ Vec3 n;
+    /* +1C */ int line;
+    /* +20 */ u32 flags;
+} ftCo_CollData;
+
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 0.0f;
@@ -94,50 +139,7 @@ static void sdata2_order(void)
     (void) 2.0;
     (void) 3.0f;
 }
-
-typedef struct ftCo_AttackEntry {
-    /* +00 */ s32 cmd;
-    /* +04 */ s32 x04;
-    /* +08 */ f32 x08;
-    /* +0C */ f32 x0C;
-    /* +10 */ f32 x10;
-    /* +14 */ f32 x14;
-    /* +18 */ f32 weight;
-    /* +1C */ s32 x1C;
-    /* +20 */ s32 x20;
-} ftCo_AttackEntry;
-
-typedef struct ftCo_x50_attr {
-    /* +00 */ u8 pad00[0x10];
-    /* +10 */ f32 x10;
-    /* +14 */ f32 x14;
-} ftCo_x50_attr;
-
-typedef struct ftCo_x50_t {
-    /* +00 */ u8 pad00[0x40];
-    /* +40 */ f32 x40;
-    /* +44 */ f32 x44;
-    /* +48 */ u8 pad48[0x4C - 0x48];
-    /* +4C */ f32 x4C;
-    /* +50 */ f32 x50;
-    /* +54 */ u8 pad54[0xC0 - 0x54];
-    /* +C0 */ s32 xC0;
-    /* +C4 */ u8 padC4[0xCC - 0xC4];
-    /* +CC */ ftCo_x50_attr* xCC;
-    /* +D0 */ u8 padD0[0xC1C - 0xD0];
-    /* +C1C */ f32 xC1C;
-    /* +C20 */ f32 xC20;
-    /* +C24 */ f32 xC24;
-    /* +C28 */ f32 xC28;
-} ftCo_x50_t;
-
-typedef struct ftCo_CollData {
-    /* +00 */ u8 pad0[4];
-    /* +04 */ Vec3 p;
-    /* +10 */ Vec3 n;
-    /* +1C */ int line;
-    /* +20 */ u32 flags;
-} ftCo_CollData;
+#endif
 
 /// @todo Fake helper forcing a fresh load of the scale field.
 #ifdef MUST_MATCH
@@ -158,11 +160,6 @@ static inline float sqrtf_store(float x, volatile float* y)
 #else
 #define sqrtf_store(x, y) sqrtf(x)
 #endif
-
-static inline f32 get_scale(Fighter* fp)
-{
-    return fp->x34_scale.y;
-}
 
 static inline int ftCo_CpuSelectAttack(Fighter* fp,
                                        struct Fighter_x1A88_t* cpu,

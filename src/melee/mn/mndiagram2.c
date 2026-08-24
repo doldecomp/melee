@@ -46,15 +46,6 @@ int GetNameCount(void);
 #define mnDiagram_GetNextFighterIndex_s(x)                                    \
     ((int) mnDiagram_GetNextFighterIndex(x))
 
-/// @brief Gets entity index based on mode (name or fighter).
-static inline u8 mnDiagram_GetEntityByIndex(u8 is_name_mode, u8 idx)
-{
-    if (is_name_mode != 0) {
-        return mnDiagram_GetNameByIndex(idx);
-    }
-    return mnDiagram_GetFighterByIndex(idx);
-}
-
 /* Union for 64-bit sorting operations */
 typedef union {
     struct {

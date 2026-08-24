@@ -43,6 +43,8 @@
 #include <melee/gm/gm_1A45.h>
 #include <melee/pl/player.h>
 
+/* 166A8C */ static f32 fn_80166A8C(Vec3*, Vec3*);
+
 /// JP character names
 char* lbl_803D4D74[] = {
     "Ｃ．ファルコン",
@@ -2486,14 +2488,6 @@ bool gm_80164ABC(void)
     return true;
 }
 
-static inline bool is_character_unlocked(u8 idx, const u16* ptr)
-{
-    if (idx == 0xB || (*ptr & (1LL << idx))) {
-        return true;
-    }
-    return false;
-}
-
 static inline bool fn_80164B48_check(u8 idx, const u16* ptr)
 {
     if (idx == 0xB || (*ptr & (1LL << idx))) {
@@ -4351,14 +4345,6 @@ s32 gm_80169394(void)
 s32 fn_801693A8(void)
 {
     return gm_1601_GetUnkData()->unk_10_b2;
-}
-
-static inline bool gm_801693BC_inline(u8 ckind)
-{
-    if (ckind - CKIND_BOY <= 1) {
-        return true;
-    }
-    return false;
 }
 
 /// Player is Fighting Wireframe

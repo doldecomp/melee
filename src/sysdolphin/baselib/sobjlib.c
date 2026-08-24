@@ -142,10 +142,12 @@ void HSD_SObjLib_803A4740(HSD_SObj* sobj)
     }
 }
 
+#ifdef MUST_MATCH
 static void order_data(void)
 {
     (void) __FILE__;
 }
+#endif
 
 HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj* gobj, HSD_SObjDesc* desc,
                                GXTexWrapMode wrap_s, GXTexWrapMode wrap_t,

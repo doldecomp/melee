@@ -39,9 +39,6 @@
 /* 109680 */ static void fn_80109680(HSD_GObj*);
 /* 109714 */ static void fn_80109714(HSD_GObj*);
 /* 1097B8 */ static void fn_801097B8(HSD_GObj*);
-/* 10AA64 */ static void fn_8010AA64(HSD_GObj* gobj);
-/* 10C288 */ static void fn_8010C288(HSD_GObj* gobj);
-/* 10C344 */ void fn_8010C344(HSD_GObj* arg0);
 
 void ftKb_SpecialNYs_80109260(Fighter_GObj* gobj, Vec3* vec)
 {

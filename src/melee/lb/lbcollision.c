@@ -120,22 +120,6 @@ int lbColl_80005BB0(HitCapsule* arg0, int arg1)
         -1);
 }
 
-static inline void vector_sub(Vec3* a, Vec3* b, Vec3* result)
-{
-    result->x = a->x - b->x;
-    result->y = a->y - b->y;
-    result->z = a->z - b->z;
-}
-
-static inline bool between(float x, float lo, float hi)
-{
-    if (x < hi && x > lo) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 static inline bool nearzero(float x)
 {
     if (x < 1e-5F && x > -1e-5F) {
@@ -1776,52 +1760,6 @@ bool lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2, s32 arg3,
                                var_f1, arg1->scale, lbColl_804D7A38 * arg5);
     }
     return 0;
-}
-
-static inline void checkPos(HurtCapsule* hurt, Mtx mtx, float arg5)
-{
-    if (!hurt->skip_update_pos) {
-        lb_8000B1CC(hurt->bone, &hurt->a_offset, &hurt->a_pos);
-        lb_8000B1CC(hurt->bone, &hurt->b_offset, &hurt->b_pos);
-
-        if (mtx != NULL) {
-            hurt->b_pos.z = arg5;
-            hurt->a_pos.z = arg5;
-        }
-
-        hurt->skip_update_pos = true;
-    }
-}
-
-static inline void mtxConcat(HurtCapsule* hurt, Mtx mtx)
-{
-    Mtx sp34;
-    if (mtx != NULL) {
-        PSMTXConcat(mtx, HSD_JObjGetMtxPtr(hurt->bone), &sp34[0]);
-    }
-}
-
-static inline MtxPtr pickMtx(HurtCapsule* hurt, Mtx mtx)
-{
-    MtxPtr var_r9;
-    Mtx sp34;
-    if (mtx != NULL) {
-        var_r9 = sp34;
-    } else {
-        var_r9 = HSD_JObjGetMtxPtr(hurt->bone);
-    }
-    return var_r9;
-}
-
-static inline float getHit1C(HitCapsule* hit, float arg3)
-{
-    float var_f1;
-    if (hit->x43_b1) {
-        var_f1 = hit->scale;
-    } else {
-        var_f1 = hit->scale * arg3;
-    }
-    return var_f1;
 }
 
 bool lbColl_80008248(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2, f32 arg3,

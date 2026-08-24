@@ -37,6 +37,7 @@
 #include <baselib/sislib.h>
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) -19.5f;
@@ -90,6 +91,7 @@ static void sdata2_order(void)
     (void) 0.0799999982f;
     (void) 0.0f;
 }
+#endif
 
 /* 4D6688 */ extern HSD_Archive* lbl_804D6688;
 /* 3B7D3C */ extern s32 lbl_803B7D3C[4];
@@ -1222,8 +1224,10 @@ void fn_8019EF08(TmVsData* arg0)
 }
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data_1(void)
 {
     (void) "ScGamTour_scene_data";
     (void) "ckind:%d\n";
 }
+#endif

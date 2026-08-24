@@ -19,27 +19,31 @@
 
 /* 2B37F0 */ static void itPikachutjoltground_UnkMotion1_Phys(Item_GObj*);
 
-ItemStateTable it_803F7190[] = { {
-                                     0,
-                                     itPikachutjoltground_UnkMotion0_Anim,
-                                     itPikachutjoltground_UnkMotion0_Phys,
-                                     itPikachutjoltground_UnkMotion0_Coll,
-                                 },
-                                 {
-                                     1,
-                                     itPikachutjoltground_UnkMotion1_Anim,
-                                     itPikachutjoltground_UnkMotion1_Phys,
-                                     itPikachutjoltground_UnkMotion1_Coll,
-                                 } };
+ItemStateTable it_803F7190[] = {
+    {
+        0,
+        itPikachutjoltground_UnkMotion0_Anim,
+        itPikachutjoltground_UnkMotion0_Phys,
+        itPikachutjoltground_UnkMotion0_Coll,
+    },
+    {
+        1,
+        itPikachutjoltground_UnkMotion1_Anim,
+        itPikachutjoltground_UnkMotion1_Phys,
+        itPikachutjoltground_UnkMotion1_Coll,
+    },
+};
 
-static void data_ordering(void)
+#ifdef MUST_MATCH
+static void order_sdata2(void)
 {
-    HSD_JObjSetRotationY(NULL, 0.0f);
-    fabs(M_TAU);
-    fabs(M_PI);
-    HSD_JObjSetRotationY(NULL, -1.0f);
-    HSD_JObjSetRotationY(NULL, 1.0f);
+    (void) 0.0f;
+    (void) M_TAU;
+    (void) M_PI;
+    (void) -1.0f;
+    (void) +1.0f;
 }
+#endif
 
 Item_GObj* it_802B3368(Item_GObj* gobj)
 {

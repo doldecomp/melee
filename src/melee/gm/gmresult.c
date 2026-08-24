@@ -4,6 +4,7 @@
 #include "lb/lb_013B.h"
 
 /// @todo .sdata order hack
+#ifdef MUST_MATCH
 static void order_sdata(void)
 {
     (void) "P";
@@ -12,6 +13,7 @@ static void order_sdata(void)
     (void) "pnlsce";
     (void) "flmsce";
 }
+#endif
 
 struct ResultsData lbl_8046DBE8;
 static u32 lbl_804D3F8C[2] = { 0x817C817C, 0x817C0000 };
@@ -148,103 +150,6 @@ null_get:
 
 return_true:
     return true;
-}
-
-/// Find the nth non-zero byte in array, returning its index
-/// 8x unrolled loop matching assembly pattern: lbz first, then lbzu for rest
-static s32 find_nth_nonzero(u8* arr, s32 n)
-{
-    s32 i = 0;
-    u8* ptr = arr;
-    s32 outer = 32;
-    u8 val;
-
-    do {
-        /* Iteration 1: lbz (no update) */
-        val = *ptr;
-        if (val != 0) {
-            n--;
-            if (n == 0) {
-                return i;
-            }
-        }
-
-        /* Iteration 2: lbzu (update first, then load) */
-        val = *++ptr;
-        i++;
-        if (val != 0) {
-            n--;
-            if (n == 0) {
-                return i;
-            }
-        }
-
-        /* Iteration 3 */
-        val = *++ptr;
-        i++;
-        if (val != 0) {
-            n--;
-            if (n == 0) {
-                return i;
-            }
-        }
-
-        /* Iteration 4 */
-        val = *++ptr;
-        i++;
-        if (val != 0) {
-            n--;
-            if (n == 0) {
-                return i;
-            }
-        }
-
-        /* Iteration 5 */
-        val = *++ptr;
-        i++;
-        if (val != 0) {
-            n--;
-            if (n == 0) {
-                return i;
-            }
-        }
-
-        /* Iteration 6 */
-        val = *++ptr;
-        i++;
-        if (val != 0) {
-            n--;
-            if (n == 0) {
-                return i;
-            }
-        }
-
-        /* Iteration 7 */
-        val = *++ptr;
-        i++;
-        if (val != 0) {
-            n--;
-            if (n == 0) {
-                return i;
-            }
-        }
-
-        /* Iteration 8 */
-        val = *++ptr;
-        i++;
-        if (val != 0) {
-            n--;
-            if (n == 0) {
-                return i;
-            }
-        }
-
-        /* Final increment for next outer loop */
-        ptr++;
-        i++;
-    } while (--outer > 0);
-
-    return i;
 }
 
 void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
@@ -520,6 +425,7 @@ StatsList lbl_803D6878[] = {
 };
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data(void)
 {
     (void) "Error : Cannot read archive file (File Name : %s).";
@@ -535,6 +441,7 @@ static void order_data(void)
     (void) "Error : gobj dont't get (gmResultAddModel)\n";
     (void) "translate";
 }
+#endif
 
 static inline void fn_80174B4C_blk14829(ResultsData* data, s32 slot,
                                         struct ResultsPlayerData** pdata,

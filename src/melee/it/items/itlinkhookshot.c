@@ -63,10 +63,12 @@ const Vec4 it_803B8650 = { 0 };
 f32 it_804D6D48;
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 0.0F;
 }
+#endif
 
 void it_802A2418(Item_GObj* obj)
 {

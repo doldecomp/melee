@@ -32,10 +32,7 @@
 
 #include <math.h>
 
-/* 0952C8 */ static UNK_RET lbl_80095728(UNK_PARAMS);
-/* 0952D8 */ static UNK_RET lbl_80095738(UNK_PARAMS);
 /* 09549C */ static void ftCo_800958FC(Fighter_GObj* gobj, int);
-/* 095540 */ static UNK_RET ftCo_800959A0(UNK_PARAMS);
 /* 0955D0 */ static void ftCo_80095A30(Fighter_GObj* gobj);
 /* 0958FC */ static void ftCo_80095D5C(Fighter* fp, Vec3* arg1);
 /* 095A9C */ static void ftCo_80095EFC(Fighter_GObj* gobj);

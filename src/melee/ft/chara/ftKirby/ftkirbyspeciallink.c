@@ -81,53 +81,6 @@ static MotionFlags const ftKb_SpecialNLk_coll_mf =
     Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |
     Ft_MF_SkipModelFlags | Ft_MF_Unk27;
 
-static inline void ftKb_SpecialNLk_setCallbacks(Fighter_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    fp->take_dmg_cb = ftKb_SpecialNLk800FB880;
-    fp->death2_cb = ftKb_SpecialNLk800FBA00;
-}
-
-static inline float ftKb_SpecialNLk_GetMaxCharge(Fighter* fp)
-{
-    ftKb_DatAttrs* da = fp->dat_attrs;
-    switch (fp->u.kb.hat.kind) {
-    case FTKIND_LINK:
-        return da->specialn_lk_max_charge;
-    case FTKIND_CLINK:
-        return da->specialn_cl_max_charge;
-    default:
-        break;
-    }
-    return 0;
-}
-
-static inline float ftKb_SpecialNLk_GetFreefallToggle(Fighter* fp)
-{
-    ftKb_DatAttrs* da = fp->dat_attrs;
-    switch (fp->u.kb.hat.kind) {
-    case FTKIND_LINK:
-        return da->specialn_lk_freefall_toggle;
-    case FTKIND_CLINK:
-        return da->specialn_cl_freefall_toggle;
-    default:
-        break;
-    }
-    return 0;
-}
-
-static inline FtMotionId
-ftKb_SpecialNLk_GetMsid(Fighter* fp, FtMotionId lk_msid, FtMotionId cl_msid)
-{
-    switch (fp->u.kb.hat.kind) {
-    case FTKIND_CLINK:
-        return cl_msid;
-    case FTKIND_LINK:
-    default:
-        return lk_msid;
-    }
-}
-
 static inline void ftKb_SpecialNLk_UnsetArrow(Fighter_GObj* gobj)
 {
     if (gobj != NULL) {
