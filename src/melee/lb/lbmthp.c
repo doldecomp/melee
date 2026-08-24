@@ -440,7 +440,8 @@ s32 fn_8001F13C(THPDecComp* streamPlayer)
 #endif
 s32 fn_8001F294(void)
 {
-    return MoviePlayer.unk_110;
+    volatile THPDecComp* streamPlayer = &MoviePlayer;
+    return streamPlayer->unk_110;
 }
 #ifdef MUST_MATCH
 #pragma pop
