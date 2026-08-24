@@ -1,7 +1,6 @@
 #ifndef RUNTIME_RUNTIME_H
 #define RUNTIME_RUNTIME_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 ASM void __div2u(void);

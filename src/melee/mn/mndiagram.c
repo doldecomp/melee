@@ -558,25 +558,6 @@ typedef struct RankEntry {
     u32 value;
 } RankEntry;
 
-static inline int CountTiedFighters(int name, int min_fighter, u32 min_time)
-{
-    int tie_count = 0;
-    int i = tie_count;
-    int offset = tie_count;
-    do {
-        if (mn_IsFighterUnlocked(i) != 0 && i != min_fighter) {
-            if (GetPersistentNameData(name)->play_time_by_fighter[i] ==
-                min_time)
-            {
-                tie_count++;
-            }
-        }
-        i++;
-        offset += 4;
-    } while (i < SELKIND_COUNT);
-    return tie_count;
-}
-
 static inline int CheckAllZeroPlayTime(int name_idx)
 {
     int i = 0;
@@ -952,34 +933,6 @@ static inline u8 mnDiagram_GetVisibleNameFrom2(u8* sorted, int start, int rank)
     return p[0x1C];
 }
 
-static inline u8 mnDiagram_GetVisibleFighterFrom(u8* sorted, int start,
-                                                 int rank)
-{
-    u8* p;
-    u8* p2;
-    int remaining;
-    int idx;
-
-    p = sorted + start;
-    remaining = rank;
-    idx = start;
-    while (remaining > 0) {
-        p2 = p;
-    loop:
-        idx++;
-        p2++;
-        p++;
-        if (idx >= SELKIND_COUNT) {
-            return SELKIND_COUNT;
-        }
-        if (mn_IsFighterUnlocked(*p2) == 0) {
-            goto loop;
-        }
-        remaining--;
-    }
-    return sorted[idx];
-}
-
 static inline s32 mnDiagram_FindPrevFighter(u8* sorted,
                                             SelectableCharacterKind cur)
 {
@@ -1169,17 +1122,6 @@ static inline u8 mnDiagram_GetVisibleFighterCursorFrom2(u8* sorted, int start,
         remaining--;
     }
     return result;
-}
-
-/// @brief Persists the current name/fighter cursor positions and mode into
-///        the shared GameRules block on menu exit / page change.
-static inline void mnDiagram_SaveCursorToGameRules(Diagram* d)
-{
-    gmMainLib_GetGameRules()->xE = (u8) (d->fighter_cursor_pos >> 8);
-    gmMainLib_GetGameRules()->xF = (u8) d->fighter_cursor_pos;
-    gmMainLib_GetGameRules()->unk_x10 = (u8) (d->name_cursor_pos >> 8);
-    gmMainLib_GetGameRules()->x11 = (u8) d->name_cursor_pos;
-    gmMainLib_GetGameRules()->xD = d->is_name_mode;
 }
 
 /// @brief Per-frame input handler for the VS Records "diagram" grid screen.
@@ -1985,11 +1927,13 @@ void mnDiagram_CreatePopupTexts(void* arg0, s32 selkind_or_nametag_slot_id,
 }
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void order_sdata2(void)
 {
     (void) -1.0f;
     (void) S32_TO_F32;
 }
+#endif
 
 void mnDiagram_CreatePopup(s32 arg0, s32 arg1, s32 use_nametag)
 {

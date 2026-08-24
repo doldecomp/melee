@@ -25,6 +25,7 @@
 
 #include <math.h>
 
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 0.0f;
@@ -36,6 +37,7 @@ static void sdata2_order(void)
     (void) -1.0f;
     (void) 1.5707963267948966;
 }
+#endif
 
 static inline float my_sqrtf(float x, volatile float* y)
 {
@@ -796,20 +798,6 @@ void ftPp_SpecialHiThrow2_Phys(Fighter_GObj* gobj)
     }
 
     fp->u.pp.x2240 = sp;
-}
-
-static inline void doFallPhys2(Fighter_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    ftIceClimberAttributes* da = fp->dat_attrs;
-    ftCo_DatAttrs* co = &fp->co_attrs;
-    ftCommon_Fall(fp, da->x9C, da->xA0);
-    if (ABS(fp->input.lstick.x) > da->x80) {
-        ftCommon_8007D344(fp, 0.0f, co->air_drift_stick_mul * da->xB0,
-                          co->air_drift_max * da->xB4);
-    } else if (fp->self_vel.y < 0.0f) {
-        ftCommon_8007CEF4(fp);
-    }
 }
 
 static inline void ftPp_SpecialAirHiThrow2_Phys_inline(Fighter_GObj* gobj,

@@ -51,17 +51,6 @@ static void reset(HSD_GObj* gobj)
     }
 }
 
-static inline void enter(HSD_GObj* gobj, FtMotionId msid)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    ftPe_DatAttrs* da = fp->dat_attrs;
-    fp->x21EC = reset;
-    fp->self_vel.y = 0;
-    fp->gr_vel = da->x34 * fp->facing_dir;
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
-    ftAnim_8006EBA4(gobj);
-}
-
 void ftPe_SpecialS_Enter(HSD_GObj* gobj)
 {
     u8 _[8];

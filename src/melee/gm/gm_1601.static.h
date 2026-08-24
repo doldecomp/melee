@@ -11,13 +11,6 @@
 
 #include <dolphin/mtx.h>
 
-/// struct ResultsData {
-///     /*  +0 */ char pad_0[0x94];
-///     /* +94 */ int x94;
-///     /* +98 */ char pad_98[0x5A8 - 0x98];
-/// };
-/// STATIC_ASSERT(sizeof(struct ResultsData) == 0x5A8);
-
 struct lbl_80473700_t {
     /* +0 */ char pad_0[0x114];
 };
@@ -40,10 +33,6 @@ struct ResultAnimEntry {
     CharacterKind ckind;
     char* path;
 };
-
-/* 166A8C */ static f32 fn_80166A8C(Vec3*, Vec3*);
-/* 1693A8 */ static s32 fn_801693A8(void);
-/* 16A1E4 */ static s32 fn_8016A1E4(void);
 
 /* 3B75F8 */ static const float lbl_803B75F8[] = {
     0.95, 0.8, 1, 0.65, 1,    1,   1, 1, 1,   1, 1, 1, 1, 1, 0.67, 1, 1,

@@ -60,9 +60,9 @@ Default_PPC gTRKSaveState;
 
 typedef void (*RegAccessFunc)(void* srcDestPtr, u128 val);
 
+#ifdef __MWERKS__
 static void TRKExceptionHandler(u16);
-
-static void GetThreadInfo(int*, int*);
+#endif
 
 /// Instruction macros
 #define INSTR_NOP 0x60000000
@@ -605,9 +605,9 @@ L_802CF694:
 #endif // clang-format on
 }
 
+#ifdef __MWERKS__ // clang-format off
 static ASM void TRKExceptionHandler(register u16 id)
 {
-#ifdef __MWERKS__ // clang-format off
     nofralloc
 
     addis         r2, r0, gTRKExceptionStatus@h
@@ -655,8 +655,8 @@ set:
     mfspr        r2, 273
     mfspr        id, 274
     rfi
-#endif // clang-format on
 }
+#endif // clang-format on
 
 #define SUPPORT_TRAP 0x0FE00000
 
@@ -1145,41 +1145,4 @@ void TRKTargetSetInputPendingPtr(void* ptr)
 u32 ConvertAddress(u32 addr)
 {
     return (addr | BOOTINFO);
-}
-
-#define ACTIVE_THREAD_QUEUE (BOOTINFO + ROOT_THREAD_ADDR) // 8 bytes
-#define CURRENT_THREAD (BOOTINFO + CURRENT_THREAD_ADDR)   // 4 bytes
-
-#define INVALID_THREAD(thread)                                                \
-    ((u32) thread == 0xFFFFFFFF || thread == NULL ||                          \
-     (u32) thread == 0x80000000)
-
-static void GetThreadInfo(int* r3, int* r4)
-{
-    int i;
-    OSThread* thread;
-
-    *r3 = 1;
-    *r4 = 0;
-
-    if (INVALID_THREAD(__OSActiveThreadQueue.head)) {
-        return;
-    }
-
-    i = 0;
-    thread = __OSActiveThreadQueue.head;
-
-    while (thread != NULL) {
-        if (thread == __OSCurrentThread) {
-            *r4 = i;
-        }
-
-        i++;
-        thread = (OSThread*) ConvertAddress((u32) thread->linkActive.next);
-        if (INVALID_THREAD(thread)) {
-            break;
-        }
-    }
-
-    *r3 = i;
 }

@@ -61,11 +61,12 @@ void it_802DC69C(Item_GObj* gobj)
     it_802DCB9C(gobj);
 }
 
-static void zero_pad(Item* ip)
+#ifdef MUST_MATCH
+static void order_sdata2(Item* ip)
 {
-    ip->x40_vel.z = 0.0f;
-    ip->x40_vel.y = 0.0f;
+    (void) 0.0f;
 }
+#endif
 
 bool itNokonoko_Logic3_DmgReceived(Item_GObj* gobj)
 {

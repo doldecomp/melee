@@ -203,23 +203,6 @@ void onAccessory4(HSD_GObj* gobj)
     }
 }
 
-static void doEnter(HSD_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    fp->throw_flags = 0;
-    fp->cmd_vars[cmd_unk0_bool] = false;
-    fp->x21EC = on21EC;
-    if (fp->u.lk.used_boomerang) {
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1Empty, Ft_MF_None, 0,
-                                  1, 0, NULL);
-    } else {
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1, Ft_MF_None, 0, 1, 0,
-                                  NULL);
-    }
-    ftAnim_8006EBA4(gobj);
-    fp->accessory4_cb = onAccessory4;
-}
-
 void ftLk_SpecialS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

@@ -42,16 +42,6 @@
 /* 0998EC */ static void ftCo_800998EC(Fighter_GObj* gobj);
 /* 099954 */ static void ftCo_80099954(Fighter_GObj* gobj);
 
-static inline bool inlineA0(Fighter* fp)
-{
-    if (ABS(fp->input.lstick.x) >= p_ftCommonData->x31C &&
-        fp->x670_timer_lstick_tilt_x < p_ftCommonData->x320)
-    {
-        return true;
-    }
-    return false;
-}
-
 static inline bool inlineA1(Fighter* fp)
 {
     if (ABS(fp->input.lstick.x) >= p_ftCommonData->x31C &&

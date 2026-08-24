@@ -91,11 +91,6 @@ bool ftPe_8011D518(HSD_GObj* gobj)
     return false;
 }
 
-static void setupParasol(HSD_GObj* gobj)
-{
-    ftPe_8011D518(gobj);
-}
-
 /// @todo Can maybe use #ensureUnkItem?
 void ftPe_8011D598(HSD_GObj* gobj)
 {

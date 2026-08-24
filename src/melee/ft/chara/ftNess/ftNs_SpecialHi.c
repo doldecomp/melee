@@ -2,6 +2,7 @@
 
 #include "ftNs_Init.h"
 
+#include <placeholder.h>
 #include <platform.h>
 
 #include "ef/eflib.h"
@@ -44,101 +45,30 @@
         Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |                   \
         Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27
 
-/// Setup float order
-static float return_float1(void) // -25264
+#ifdef MUST_MATCH
+static void order_sdata2(void)
 {
-    return 5.0f;
+    (void) 5.0f;
+    (void) 0.0f;
+    (void) 8.333333015441895f;
+    (void) 12.333333015441895f;
+    (void) M_PI_2_F;
+    (void) M_TAU;
+    (void) M_PI;
+    (void) M_PI_2;
+    (void) 1.0f;
+    (void) 0.0;
+    (void) MTXDegToRad(1);
+    (void) 90.0f;
+    (void) -1.0f;
+    (void) 0.5f;
+    (void) 0.5;
+    (void) 3.0;
+    (void) 1e-4f;
+    (void) -1e-4f;
+    (void) -M_PI_2;
 }
-
-static float return_float2(void) // -25260
-{
-    return 0.0f;
-}
-
-static float return_float3(void) // -25256
-{
-    return 8.333333015441895f;
-}
-
-static float return_float4(void) // -25252
-{
-    return 12.333333015441895f;
-}
-
-static float return_float5(void) // -25248
-{
-    return M_PI / 2;
-}
-
-static f64 return_float6(void) // -25236
-{
-    return M_TAU;
-}
-
-static f64 return_float7(void) // -25228
-{
-    return M_PI;
-}
-
-static f64 return_float8(void) // -25220
-{
-    return M_PI / 2;
-}
-
-static float return_float9(void) // -25216
-{
-    return 1.0f;
-}
-
-static f64 return_float10(void) // -25208
-{
-    return 0.0;
-}
-
-static float return_float12(void) // -25200
-{
-    return M_PI / 180;
-}
-
-static float return_float13(void)
-{
-    return 90.0f;
-}
-
-static float return_float14(void)
-{
-    return -1.0f;
-}
-
-static float return_float15(void)
-{
-    return 0.5f;
-}
-
-static f64 return_float16(void)
-{
-    return 0.5;
-}
-
-static f64 return_float17(void)
-{
-    return 3.0;
-}
-
-static float return_float18(void)
-{
-    return 1e-4F;
-}
-
-static float return_float19(void)
-{
-    return -1e-4F;
-}
-
-static f64 return_float20(void)
-{
-    return -M_PI / 2;
-}
+#endif
 
 #ifdef MUST_MATCH
 #pragma push
@@ -1318,8 +1248,7 @@ void ftNs_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
 static inline void ftNess_atan2(HSD_GObj* gobj)
 {
     Fighter* fighter_data2 = GET_FIGHTER(gobj);
-
-    u8 _[4] = { 0 };
+    FORCE_PAD_STACK_4;
 
     ftPartSetRotX(
         fighter_data2, 0,
@@ -1330,8 +1259,7 @@ static inline void ftNess_atan2(HSD_GObj* gobj)
 
 static inline void* getFtSpecialAttrs2(Fighter* fp)
 {
-    u8 _[4] = { 0 };
-
+    FORCE_PAD_STACK_4;
     return fp->dat_attrs;
 }
 

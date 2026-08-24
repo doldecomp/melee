@@ -76,27 +76,6 @@ void ftKb_MrSpecialN_Coll(Fighter_GObj* gobj)
     }
 }
 
-static inline void fn_800F9260_DrMario(HSD_GObj* gobj, Fighter* fp, Vec3* pos)
-{
-    s32 candidates[9];
-    s32 count = 0;
-    int i;
-    s32 pick;
-    Fighter* fp2 = GET_FIGHTER(gobj);
-
-    for (i = 0; i < 9; i++) {
-        if (i != fp2->u.kb.x68 && i != fp2->u.kb.x6C) {
-            candidates[count] = i;
-            count++;
-        }
-    }
-    pick = candidates[HSD_Randi(count)];
-    fp2->u.kb.x6C = fp2->u.kb.x68;
-    fp2->u.kb.x68 = pick;
-    itDrMarioPill_Spawn(gobj, pos, pick, It_Kind_Kirby_DrMarioVitamin,
-                        fp->facing_dir);
-}
-
 static inline s32 fn_800F9260_inline(HSD_GObj* gobj)
 {
     Fighter* fp2;

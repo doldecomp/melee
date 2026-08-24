@@ -36,11 +36,13 @@
 #include <baselib/gobjproc.h>
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void order_sdata2(void)
 {
     (void) 0.55f;
     (void) 1.0f;
 }
+#endif
 
 Vec3 un_804002F8 = { 0.0f, 0.0f, 0.0f };
 Vec3 un_80400304 = { 0.0f, 0.0f, 0.0f };
@@ -299,10 +301,12 @@ static inline void un_80320A40_SetupStand(void)
 }
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data(void)
 {
     (void) "!(jobj->flags & JOBJ_USE_QUATERNION)";
 }
+#endif
 
 void un_80320A40_OnEnter(void* arg)
 {

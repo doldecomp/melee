@@ -16,6 +16,7 @@
 
 #include <baselib/gobjproc.h>
 
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 0.00390599994f;
@@ -25,6 +26,7 @@ static void sdata2_order(void)
     (void) 0.0f;
     (void) 3.40282347e+38f;
 }
+#endif
 
 ItCmd it_803F22A8[16] = {
     it_80278F2C, it_802790C0, it_80279544, it_802795EC,
