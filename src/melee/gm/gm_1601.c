@@ -43,6 +43,8 @@
 #include <melee/gm/gm_1A45.h>
 #include <melee/pl/player.h>
 
+/* 166A8C */ static f32 fn_80166A8C(Vec3*, Vec3*);
+
 /// JP character names
 char* lbl_803D4D74[] = {
     "Ｃ．ファルコン",
