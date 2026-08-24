@@ -132,11 +132,9 @@ bool itZeldadinfireexplode_UnkMotion0_Anim(Item_GObj* gobj)
 void itZeldadinfireexplode_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-#ifdef MUST_MATCH
+    /* Faithful to retail: only y and z are cleared (the doubled z is the
+     * original's typo); x velocity is deliberately left untouched. */
     ip->x40_vel.z = ip->x40_vel.y = ip->x40_vel.z = 0.0F;
-#else
-    itResetVelocity(ip);
-#endif
 }
 
 bool itZeldadinfireexplode_UnkMotion0_Coll(Item_GObj* gobj)
