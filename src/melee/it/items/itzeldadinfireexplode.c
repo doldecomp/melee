@@ -129,11 +129,12 @@ bool itZeldadinfireexplode_UnkMotion0_Anim(Item_GObj* gobj)
     return it_80273130(gobj);
 }
 
+/** @note Faithful to retail: only y and z are cleared (the doubled z is the
+ * original's typo); x velocity is deliberately left untouched.
+ */
 void itZeldadinfireexplode_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    /* Faithful to retail: only y and z are cleared (the doubled z is the
-     * original's typo); x velocity is deliberately left untouched. */
     ip->x40_vel.z = ip->x40_vel.y = ip->x40_vel.z = 0.0F;
 }
 
