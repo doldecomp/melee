@@ -26118,6 +26118,7 @@ gmCamera_VsCameraTextLayout = .bss:0x80479C20; // type:object size:0x10 scope:lo
 controller_map = .bss:0x80479C30; // type:object size:0x100 scope:local data:4byte
 ...bss.0 = .bss:0x80479C30; // type:label scope:local
 gm_80479D30 = .bss:0x80479D30; // type:object size:0x14 scope:local data:byte
+...bss.0 = .bss:0x80479D30; // type:label scope:local
 gm_80479D48 = .bss:0x80479D48; // type:object size:0x10 scope:global
 ...bss.0 = .bss:0x80479D48; // type:label scope:local
 gm_80479D58 = .bss:0x80479D58; // type:object size:0x40 scope:global data:4byte
