@@ -17,9 +17,8 @@
 #include "lb/lb_013B.h"
 #include "lb/types.h"
 
-#include <baselib/wobj.h>
-
 #include <math.h>
+#include <baselib/wobj.h>
 
 typedef struct BgFlashState {
     u8 active : 1;
