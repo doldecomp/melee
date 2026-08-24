@@ -761,9 +761,35 @@ void _tyFigupon_80316170(HSD_GObj* arg0)
     }
 }
 
-#ifdef MUST_MATCH
-s32 _tyFigupon_8031638C(s16 arg0) {}
-#endif
+s32 _tyFigupon_8031638C(s16 arg0)
+{
+    s32 temp_r0;
+    s32 var_r30;
+
+    temp_r0 = (s32) Toy_803060BC((s32) arg0, 6);
+    var_r30 = 0;
+    switch (temp_r0) {
+    case 0:
+    case 1:
+    case 4:
+    case 6:
+    case 8:
+        break;
+    case 7:
+        if (Toy_803048C0((s32) arg0) > 0xFA) {
+            var_r30 = 1;
+        }
+        break;
+    case 5:
+        var_r30 = 1;
+        break;
+    case 2:
+    case 3:
+        var_r30 = 1;
+        break;
+    }
+    return var_r30;
+}
 
 void _tyFigupon_80316420(s32 arg0)
 {
