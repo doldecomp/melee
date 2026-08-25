@@ -2147,18 +2147,17 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                     f32 scale_y = text->font_size.y;
                                     f32 uv_top = 0.0F;
                                     f32 glyph_w = 32.0F * text->x80.x * scale_x;
+                                    f32 quad_right = (text->x88 * glyph_w) + glyph_x;
                                     f32 glyph_y = (scale_y * (line_height_out - glyph_size)) + (text->pos_y + text->current_height);
                                     f32 glyph_h = glyph_size * scale_y;
                                     f32 uv_bottom = 1.0F;
                                     f32 uv_left = 0.0F;
                                     f32 quad_top;
                                     f32 uv_right;
-                                    f32 quad_right;
                                     f32 quad_bottom;
 
                                     quad_top = glyph_y;
                                     uv_right = 1.0F;
-                                    quad_right = (text->x88 * glyph_w) + glyph_x;
                                     quad_bottom = glyph_y + glyph_h;
                                     if ( text->x4E != 0) {
                                         if ((min_x > quad_right) || (max_x < glyph_x) || (min_y > quad_bottom) || (max_y < quad_top)) {
