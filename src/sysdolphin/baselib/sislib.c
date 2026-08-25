@@ -2163,14 +2163,13 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                     quad_top = glyph_y;
                                     uv_right = 1.0F;
                                     quad_bottom = glyph_y + glyph_h;
+#ifdef MUST_MATCH
+                                    (void) (glyph_y = glyph_y);
+#endif
                                     if ( text->x4E != 0) {
                                         if ((min_x > quad_right) || (max_x < glyph_x) || (min_y > quad_bottom) || (max_y < quad_top)) {
                                             goto glyph_draw_done;
                                         }
-#ifdef MUST_MATCH
-                                        (void) (glyph_y = glyph_y);
-#endif
-                                        (void) quad_top;
                                         if (min_x > glyph_x) {
                                             f32 clip_left = min_x - glyph_x;
                                             uv_left = clip_left / glyph_w;
