@@ -2665,6 +2665,19 @@ static inline void cancelQueuedCardCommands(CardBufEntry* entries)
 static inline s32 queueClearDataBlock(CardState* state, const u8* dst,
                                       s32 size)
 {
+#if defined(MUST_MATCH) && defined(__MWERKS__)
+    s32 raw[9];
+
+    raw[-23 + 0] = 4;
+    raw[-23 + 1] = (s32) state;
+    raw[-23 + 4] = 0;
+    raw[-23 + 5] = 0;
+    raw[-23 + 6] = (s32) dst;
+    raw[-23 + 8] = size;
+    raw[-23 + 7] = 0;
+    raw[-23 + 2] = 0;
+    return fn_803AC168((s32*) ((u8*) &raw[0] - 92));
+#else
     s32 cmd[9];
 
     cmd[0] = 4;
@@ -2676,6 +2689,7 @@ static inline s32 queueClearDataBlock(CardState* state, const u8* dst,
     cmd[7] = 0;
     cmd[2] = 0;
     return fn_803AC168(cmd);
+#endif
 }
 
 static inline s32 queueDataBlockFirst(CardState* state, s32 block_idx, u8* dst,
