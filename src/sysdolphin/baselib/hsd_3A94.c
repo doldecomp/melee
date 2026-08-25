@@ -2140,6 +2140,11 @@ static inline s32 fn_803AD16C_queue_cmd(s32* cmd)
     return fn_803AC168(cmd);
 }
 
+static inline int fn_803AD16C_same(s32 lhs, s32 rhs)
+{
+    return lhs == rhs;
+}
+
 s32 fn_803AD16C(CardState* state)
 {
     s32 work[64];
@@ -2292,6 +2297,10 @@ s32 fn_803AD16C(CardState* state)
             s32 dup;
             s32 target_seq;
             s32 ret;
+
+            if (fn_803AD16C_same(file_id, file_id)) {
+                (void) logical;
+            }
 
             if (newmap[logical] < 0) {
                 continue;
