@@ -5,6 +5,7 @@
 #include "gm_unsplit.h"
 
 #include "ft/forward.h"
+#include "pl/forward.h"
 
 #include "vi/vi1201v1.h"
 
@@ -331,14 +332,14 @@ void gm_801BAD70(GameScene* arg0)
 {
     struct EventData* ev = gm_GetEventData();
     StartMeleeData* md = gm_GetGameSceneLoadDataCallback(arg0);
-    u8* r3b = (u8*) md;
+    PlayerInitData* pd = md->players;
     u8 level = ev->unk_535;
     s32 player_idx;
     s32 player_init_off;
     struct gm_804D6900_t** levels;
     gm_803DF94C_t** event_info = gm_803DF94C;
     struct gm_804D6900_t** lvlpp;
-    PAD_STACK(0x18);
+    int i;
 
     lbArchive_LoadSymbols("GmEvent.dat", &gm_804D6900,
                           "sqEventInitDataLevelTbl", 0);
@@ -390,7 +391,7 @@ void gm_801BAD70(GameScene* arg0)
     md->rules.x30 = ((struct gm_evinit*) (*lvlpp)->x8)->x1C;
     md->rules.x34 = ((struct gm_evinit*) (*lvlpp)->x8)->unk20;
     md->rules.x44 = fn_801BBFE8;
-    if (r3b[0] & 1) {
+    if (md->rules.x0_7 & 1) {
         ev->xB_0 = 1;
     }
     if ((((struct gm_evinit*) (*lvlpp)->x8)->unk1 >> 7) & 1) {
@@ -414,14 +415,12 @@ void gm_801BAD70(GameScene* arg0)
         }
         gm_8016A92C(&md->rules);
     }
-    r3b[0x61] = 3;
+
     player_idx = 0;
     player_init_off = 0;
-    r3b[0x85] = 3;
-    r3b[0xA9] = 3;
-    r3b[0xCD] = 3;
-    r3b[0xF1] = 3;
-    r3b[0x115] = 3;
+    for (i = 0; i < 6; i++) {
+        md->players[i].slot_type = Gm_PKind_NA;
+    }
 
     while (player_idx <
            (s32) ((((struct gm_evlevel*) *lvlpp)->flags >> 5) & 7))
@@ -432,93 +431,94 @@ void gm_801BAD70(GameScene* arg0)
             player_init_off += 0x24;
         }
         gm_801BAB40(
-            (PlayerInitData*) (r3b + player_init_off + 0x60),
+            &pd[player_idx],
             (int) ((struct gm_evlevel*) *lvlpp)->player_init[player_idx]);
         if (player_idx == 0) {
-            gm_801B05F4((PlayerInitData*) (r3b + 0x60), ev->x6);
-            ev->x7 = r3b[0x69];
-            if ((s8) r3b[0x60] == 0x21) {
-                r3b[0x60] = ev->x2;
-                r3b[0x63] = ev->x3;
-                r3b[0x6A] = ev->x4;
+            gm_801B05F4(pd, ev->x6);
+            ev->x7 = pd[0].team;
+            if ((s8) pd[0].c_kind == CHKIND_NONE) {
+                pd[0].c_kind = ev->x2;
+                pd[0].color = ev->x3;
+                pd[0].xA = ev->x4;
             }
             {
-                u8 c = r3b[0x60];
+                u8 c = pd[0].c_kind;
                 ev->x0 = c;
                 ev->x4C[0] = (s8) c;
             }
             {
-                u8 c = r3b[0x63];
+                u8 c = pd[0].color;
                 ev->x1 = c;
                 ev->x50[0] = c;
             }
-            md->players[0].xC_b0 = gm_801677F8(ev->x6, r3b[0x6A]);
+            md->players[0].xC_b0 = gm_801677F8(ev->x6, md->players[0].xA);
         } else {
             if (((struct gm_evlevel*) *lvlpp)->player_init[player_idx]->team ==
                 0)
             {
-                r3b[player_init_off + 0x69] = r3b[0x69];
-                ((PlayerInitData*) (r3b + player_init_off + 0x60))->xD_b1 = 1;
+                md->players[player_idx].team = md->players[0].team;
+                md->players[player_idx].xD_b1 = 1;
             }
-            if ((s8) ((struct gm_evlevel*) *lvlpp)
-                    ->player_init[player_idx]
-                    ->c_kind == CHKIND_NONE)
-            {
-                s8* t = &ev->x8 + player_idx - 1;
-                s8 v = *t;
-                if (v == -1) {
-                    u8 nv = gm_801BAC9C(arg0, player_idx);
-                    r3b[player_init_off + 0x60] = nv;
-                    *t = (s8) r3b[player_init_off + 0x60];
-                } else {
-                    r3b[player_init_off + 0x60] = v;
-                }
+        }
+        if ((s8) ((struct gm_evlevel*) *lvlpp)
+                ->player_init[player_idx]
+                ->c_kind == CHKIND_NONE)
+        {
+            s8* t = &ev->x8 + player_idx - 1;
+            s8 v = *t;
+            if (v == -1) {
+                u8 nv = gm_801BAC9C(arg0, player_idx);
+                md->players[player_idx].c_kind = nv;
+                *t = (s8) md->players[player_idx].c_kind;
+            } else {
+                md->players[player_idx].c_kind = v;
             }
-            {
-                s8 c_kind = r3b[player_init_off + 0x60];
-                if (c_kind == (s8) r3b[0x60]) {
-                    u8 c = r3b[player_init_off + 0x63];
-                    if (c == r3b[0x63]) {
-                        if (c <= 2) {
-                            c += 1;
-                        } else {
-                            c = 0;
-                        }
-                        r3b[player_init_off + 0x63] = c;
-                    }
-                }
-            }
-            if ((s8) r3b[0x60] == 0x13 &&
-                (s8) r3b[player_init_off + 0x60] == 0x12)
-            {
-                u8 c = r3b[player_init_off + 0x63];
-                if (c == r3b[0x63]) {
+        }
+        {
+            s8 c_kind = md->players[player_idx].c_kind;
+            if (c_kind == (s8) md->players[0].c_kind) {
+                u8 c = md->players[player_idx].color;
+                if (c == md->players[0].color) {
                     if (c <= 2) {
                         c += 1;
                     } else {
                         c = 0;
                     }
-                    r3b[player_init_off + 0x63] = c;
+                    md->players[player_idx].color = c;
                 }
             }
-            if (player_idx < 4) {
-                ev->x4C[player_idx] = (s8) r3b[player_init_off + 0x60];
-                ev->x50[player_idx] = r3b[player_init_off + 0x63];
+        }
+        if (md->players[0].c_kind == CKIND_SEAK &&
+            md->players[player_idx].c_kind == CKIND_ZELDA)
+        {
+            u8 c = md->players[player_idx].color;
+            if (c == md->players[0].color) {
+                if (c <= 2) {
+                    c += 1;
+                } else {
+                    c = 0;
+                }
+                md->players[player_idx].color = c;
             }
         }
-        player_idx += 1;
+        if (player_idx < 4) {
+            ev->x4C[player_idx] = md->players[player_idx].c_kind;
+            ev->x50[player_idx] = md->players[player_idx].color;
+        }
+
+        player_idx++;
         player_init_off += 0x24;
     }
 
     if (((struct gm_evlevel*) *lvlpp)->kind == 2) {
         if (ev->x20 > 0) {
-            r3b[0x62] = (s8) ev->x24;
-            *(u16*) (r3b + 0x70) = ev->x28;
-            ((PlayerInitData*) (r3b + 0x60))->xC_b1 = 0;
+            md->players[0].stocks = (s8) ev->x24;
+            md->players[0].x10 = ev->x28;
+            md->players[0].xC_b1 = 0;
             {
                 s8 c = ev->x38;
                 if (c != 0x21) {
-                    r3b[0x60] = c;
+                    md->players[0].c_kind = c;
                     ev->x0 = c;
                     ev->x4C[0] = c;
                 }
@@ -527,33 +527,34 @@ void gm_801BAD70(GameScene* arg0)
         {
             struct gm_evspawn_table* spawn_table =
                 ((struct gm_evlevel*) *lvlpp)->x10;
-            gm_801BAB40((PlayerInitData*) (r3b + 0x84),
-                        (int) spawn_table->entries[ev->x20]);
+            gm_801BAB40(md->players, (int) spawn_table->entries[ev->x20]);
         }
-        if ((s8) r3b[0x84] == (s8) r3b[0x60]) {
-            u8 c = r3b[0x87];
-            if (c == r3b[0x63]) {
+        if ((s8) md->players[1].c_kind == (s8) md->players[0].c_kind) {
+            u8 c = md->players[1].color;
+            if (c == md->players[0].color) {
                 if (c <= 2) {
                     c += 1;
                 } else {
                     c = 0;
                 }
-                r3b[0x87] = c;
+                md->players[1].color = c;
             }
         }
-        if ((s8) r3b[0x60] == 0x13 && (s8) r3b[0x84] == 0x12) {
-            u8 c = r3b[0x87];
-            if (c == r3b[0x63]) {
+        if ((s8) md->players[0].c_kind == CKIND_SEAK &&
+            (s8) md->players[1].c_kind == CKIND_ZELDA)
+        {
+            u8 c = md->players[1].color;
+            if (c == md->players[0].color) {
                 if (c <= 2) {
                     c += 1;
                 } else {
                     c = 0;
                 }
-                r3b[0x87] = c;
+                md->players[1].color = c;
             }
         }
-        ev->x4C[1] = (s8) r3b[0x84];
-        ev->x50[1] = r3b[0x87];
+        ev->x4C[1] = (s8) md->players[1].c_kind;
+        ev->x50[1] = md->players[1].color;
     }
     if (level == 0x2B) {
         u8 c = ev->x50[2];
@@ -3377,7 +3378,7 @@ void gm_801BF128(void)
             cur_id = gm_801BF694();
         } while ((s32) gm_801641CC((u8) pick) == (s32) cur_id);
     }
-    gm_801BF684((u8)gm_801641CC((u8) pick));
+    gm_801BF684((u8) gm_801641CC((u8) pick));
     gm_GetRandomHistory()->stage_usage[pick] += 1;
     gm_801BF6A8(HSD_Randi(4));
 }
