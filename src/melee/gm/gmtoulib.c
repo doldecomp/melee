@@ -42,6 +42,11 @@
 #include <baselib/random.h>
 #include <baselib/sislib.h>
 
+/// @todo Split-derived data; types are inferred.
+const u8 lbl_803B7D3C[0x14] = { 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,
+                                0, 2, 0, 0, 0, 3, 0, 0, 0, 0 };
+u8 lbl_804D6638[0x4];
+
 extern SceneDesc* lbl_804D666C;
 extern SceneDesc* lbl_804D6670;
 extern SceneDesc* lbl_804D6674;

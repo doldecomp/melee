@@ -42,6 +42,6 @@
 /* 1B2AF8 */ void gm_801B2AF8(GameScene*);
 /* 1B2B7C */ void gm_801B2B7C_OnInit(void);
 /* 3DD9A0 */ extern GameScene gm_803DD9A0_Scenes[9];
-/* 473814 */ extern struct TrainingMenuData gm_80473814;
+/* 473814 */ extern CssSubStruct gm_80473814;
 
 #endif

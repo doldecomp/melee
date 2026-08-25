@@ -14,8 +14,8 @@ extern UNK_T gmClassic_80470708[];
 extern DebugGameOverData gmClassic_80470850;
 extern UNK_T gmClassic_8047086C;
 extern UNK_T gmClassic_80472AF8;
-extern u8 gm_804908A0[];
-extern UNK_T gmClassic_804D68D0;
+u8 gm_804908A0[112];
+UNK_T gmClassic_804D68D0;
 
 typedef struct gmClassicMatchup {
     /* 0x00 */ u16 x00;

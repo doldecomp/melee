@@ -35,8 +35,8 @@ extern StaticModelDesc MenMainCursorTr03_Top;
 extern StaticModelDesc MenMainCursorTr04_Top;
 extern StaticModelDesc MenMainNmRl_Top;
 extern MenuKindData mn_803EB6B0[];
-extern HSD_GObj* mn_804D6BE0;
-extern f32 mn_804D6BE4;
+HSD_GObj* mn_804D6BE0;
+f32 mn_804D6BE4;
 
 typedef struct _MenuRulesPlusData {
     MenuKind8 menu_kind;

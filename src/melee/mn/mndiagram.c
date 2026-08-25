@@ -28,6 +28,17 @@
 #include "mn/mnmain.h"
 #include "mn/mnname.h"
 
+/// @todo Split-derived data; types are inferred.
+void* mnDiagram_804A0814[4];
+void* mnDiagram_804A07E4[4];
+void* mnDiagram_804A07F4[4];
+void* mnDiagram_804A0804[4];
+void* mnDiagram_804A0824[4];
+HSD_GObj* mnDiagram_804D6C10;
+mnDiagram_ArchiveData mnDiagram_804A0834;
+mnDiagram_ArchiveData mnDiagram_804A0844;
+mnDiagram_ArchiveData mnDiagram_804A0854;
+
 #define GET_DIAGRAM(gobj) ((Diagram*) HSD_GObjGetUserData(gobj))
 
 /// Sorted fighter indices array (25 fighters + padding)

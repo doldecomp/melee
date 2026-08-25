@@ -372,7 +372,7 @@ static gm_803DEBE8_t gm_803DEBE8[25] = {
     { 0xC8, 0xC8, 0, 3 }
 };
 
-static AllstarRoundInfo gm_803DEC4C[26] = {
+static AllstarRoundInfo gm_803DEC4C[13] = {
     { 0, 1 },  { 1, 1 },  { 2, 1 },  { 3, 1 },  { 4, 2 },  { 6, 2 },  { 8, 2 },
     { 10, 2 }, { 12, 3 }, { 15, 3 }, { 18, 3 }, { 21, 3 }, { 24, 1 },
 };

@@ -360,7 +360,7 @@ void mnName_SortNames(HSD_GObj* arg0)
     }
 }
 
-extern HSD_GObj* mnName_804D6BF8;
+HSD_GObj* mnName_804D6BF8;
 
 u8 mnName_80237D94(s32 arg0, u8 arg1)
 {
@@ -1316,7 +1316,7 @@ void mnName_8023A058(HSD_GObj* gobj)
     mnName_80239A24(gobj);
 }
 
-extern HSD_Text* mnName_804D6BFC;
+HSD_Text* mnName_804D6BFC;
 void fn_8023A0BC(HSD_GObj* gobj)
 {
     f32* end_frame;
@@ -1626,8 +1626,8 @@ void mnName_8023A9B4(u8 arg0)
     mnName_80239A24((HSD_GObj*) gobj2);
 }
 
-extern char** AutoNamesList;
-extern char** NotAllowedNamesList;
+char** AutoNamesList;
+char** NotAllowedNamesList;
 
 static inline void mnName_InitNameDisplayOrder(void)
 {

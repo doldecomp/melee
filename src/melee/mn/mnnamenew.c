@@ -73,19 +73,19 @@ typedef struct MnNameNewDataLayout {
 } MnNameNewDataLayout;
 
 extern char mnNameNew_NullCharacter;
-extern u8 mnNameNew_PortInUse;
-extern char mnNameNew_CurrentNameText[0x10];
+u8 mnNameNew_PortInUse;
+char mnNameNew_CurrentNameText[0x10];
 extern u8** AutoNamesList;
 extern char** NotAllowedNamesList;
 extern u8 mn_804D6BB4;
 extern u8 mn_804D6BB5;
 extern u8 mnNameNew_804D4F7C[4];
 extern char mnNameNew_SpaceCharacter[2];
-extern void* mnNameNew_804A06F0[];
-extern void* mnNameNew_804A0700[];
-extern void* mnNameNew_804A0710[];
-extern void* mnNameNew_804A0720[];
-extern HSD_GObj* mnNameNew_804D6C08;
+void* mnNameNew_804A06F0[4];
+void* mnNameNew_804A0700[4];
+void* mnNameNew_804A0710[4];
+void* mnNameNew_804A0720[8];
+HSD_GObj* mnNameNew_804D6C08;
 
 extern StaticModelDesc MenMainBack_Top;
 extern StaticModelDesc MenMainPanel_Top;

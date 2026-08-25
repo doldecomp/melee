@@ -34,6 +34,12 @@
 #include <baselib/random.h>
 #include <baselib/sislib.h>
 
+/// @todo Split-derived data; types are inferred.
+u8 lbl_804D6688[0x4];
+u8 lbl_804D668C[0x4];
+u8 lbl_804D6690[0x4];
+u8 lbl_804D6694[0x4];
+
 /* 4799D8 */ extern struct Lbl804799D8_t lbl_804799D8;
 /* 4D6660 */ extern HSD_Archive* lbl_804D6660;
 /* 4D6668 */ extern HSD_Archive* lbl_804D6668;
@@ -1064,7 +1070,7 @@ void fn_80198584(ResultsData* results)
     }
 }
 
-extern s32 lbl_804D667C;
+s32 lbl_804D667C;
 
 void fn_801985D4(HSD_GObj* gobj)
 {
@@ -1249,7 +1255,7 @@ void fn_80198C60(void)
 #pragma pop
 #endif
 
-extern SceneDesc* lbl_804D666C;
+SceneDesc* lbl_804D666C;
 extern f32 lbl_804DA808; // 0.0f
 extern f32 lbl_804DA82C; // 0.054945f
 extern f32 lbl_804DA830; // 0.08f
@@ -1295,7 +1301,7 @@ void fn_80198D18(void)
     fn_80198BA0();
 }
 
-extern SceneDesc* lbl_804D6674;
+SceneDesc* lbl_804D6674;
 extern f32 lbl_804DA828;
 extern f32 lbl_804DA844;
 extern f32 lbl_804DA848;
@@ -1841,7 +1847,7 @@ void fn_8019A71C(s32* state, u32 unused1, u32 unused2)
         *state = 0x1B;
     }
 }
-extern s32 lbl_804D6678;
+s32 lbl_804D6678;
 
 void gm_8019A828(void)
 {
@@ -2113,7 +2119,7 @@ void fn_8019A86C(TmData* tm, u32 arg1, u32 arg2)
     }
 }
 
-extern u8 lbl_804D6680[8];
+u8 lbl_804D6680[8];
 
 typedef struct TimerFmt {
     s32 d[5];
