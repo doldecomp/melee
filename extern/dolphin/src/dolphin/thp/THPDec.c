@@ -143,90 +143,113 @@ void __THPPrepBitStream(THPFileInfo* info)
     }
 }
 
-s32 THPDec_8032F8D4(u32 file_arg, void* out_arg)
+s32 THPDec_8032F8D4(u8* data, THPDec_8032FD40_Data* out)
 {
-    u8* p = (u8*) file_arg;
-    THPDec_8032FD40_Data* out = (THPDec_8032FD40_Data*) out_arg;
-    u8 sH[8];
-    u8 sV[8];
-    u8 jfif[] = "JFIF";
-    u8 found_jfif;
+    u8 hSample[4];
+    u8 vSample[4];
+    u8 componentId[4];
+    u8 quantizationSelector[4];
     u8 marker;
-    u8 comp_i;
-    u8 sampling;
-    u8 jfif_i;
-    u32 i;
-    u8 ncomp;
-    u16 len;
+    u8 componentCount;
+    u8 tag[5] = "JFIF";
+    u8 i;
+    u8 valid;
+    u32 j;
+    u16 length;
 
-    found_jfif = 0;
+    valid = 0;
     memset(out, 0, 0xC);
-    if (p[0] != 0xFF || p[1] != 0xD8) {
-        return 0;
-    }
-    p += 2;
 
-    do {
-        if (*p != 0xFF) {
+    {
+        u8 soi0 = *data++;
+        u8 soi1 = *data++;
+
+        if (soi0 != 0xFF || soi1 != 0xD8) {
             return 0;
         }
-        p++;
-        while ((s8) *p == 0xFF) {
-            p++;
+    }
+
+    for (;;) {
+        if (*data++ != 0xFF) {
+            return 0;
         }
-        marker = *p;
-        p++;
+
+        while ((s8) *data == 0xFF) {
+            data++;
+        }
+        marker = *data++;
 
         if (marker == 0xC0) {
-            out->_pad = (p[3] << 8) | p[4];
-            out->val1 = (p[5] << 8) | p[6];
-            ncomp = p[7];
-            p += 8;
-            if (ncomp != 3) {
+            out->_pad = data[4] | (data[3] << 8);
+            out->val1 = data[6] | (data[5] << 8);
+            componentCount = data[7];
+            data += 8;
+
+            if (componentCount != 3) {
                 return 0;
             }
-            for (comp_i = 0; comp_i < ncomp; comp_i++) {
-                sampling = p[1];
-                sH[comp_i] = sampling >> 4;
-                sV[comp_i] = sampling & 0xF;
-                p += 3;
+
+            for (i = 0; i < componentCount; i++) {
+                u8 factors;
+
+                componentId[i] = *data++;
+                factors = *data++;
+                hSample[i] = (u8) (factors >> 4);
+                vSample[i] = (u8) (factors & 0xF);
+                quantizationSelector[i] = *data++;
             }
-            if (sH[0] / sH[1] == 2 && sH[0] / sH[2] == 2) {
-                if (sV[0] / sV[1] == 2 && sV[0] / sV[2] == 2) {
+
+            if (hSample[0] / hSample[1] == 2 &&
+                hSample[0] / hSample[2] == 2)
+            {
+                if (vSample[0] / vSample[1] == 2 &&
+                    vSample[0] / vSample[2] == 2)
+                {
                     out->val2 = 4;
-                } else if (sV[0] == sV[1] && sV[0] == sV[2]) {
+                } else if (vSample[0] == vSample[1] &&
+                           vSample[0] == vSample[2])
+                {
                     out->val2 = 2;
                 }
-            } else if (sH[0] == sH[1] && sH[0] == sH[2]) {
-                if (sV[0] == sV[1] && sV[0] == sV[2]) {
+            } else if (hSample[0] == hSample[1] &&
+                       hSample[0] == hSample[2])
+            {
+                if (vSample[0] == vSample[1] &&
+                    vSample[0] == vSample[2])
+                {
                     out->val2 = 1;
                 }
             } else {
                 return 0;
             }
         } else if (marker == 0xE0) {
-            len = (p[0] << 8) | p[1];
-            p += 2;
-            for (jfif_i = 0; jfif_i < 5; jfif_i++) {
-                if (*p != jfif[jfif_i]) {
+            length = *data++;
+            length = (u16) ((length << 8) | *data++);
+            for (i = 0; i < 5; i++) {
+                componentCount = *data++;
+                if (componentCount != tag[i]) {
                     return 0;
                 }
-                p++;
             }
-            found_jfif = 1;
-            for (i = 0; i < len - 7; i++) {
-                p++;
+            valid = 1;
+            for (j = 0; j < (u32) (length - 7); j++) {
+                data++;
             }
         } else if (marker == 0xDA) {
-            return 1;
-        } else if (marker >= 0xC0 && marker <= 0xFE) {
-            len = (p[0] << 8) | p[1];
-            p += 2;
-            for (i = 0; i < len - 2; i++) {
-                p++;
+            break;
+        } else if (0xC0 <= marker && marker <= 0xFE) {
+            length = data[1] | (data[0] << 8);
+            data += 2;
+
+            for (j = 0; j < (u32) (length - 2); j++) {
+                data++;
             }
         }
-    } while (!(out->val2 != 0 && found_jfif != 0));
+
+        if (out->val2 != 0 && valid != 0) {
+            break;
+        }
+    }
 
     return 1;
 }
@@ -425,62 +448,44 @@ void THPDec_803300E0(u32* data)
 
 u8 THPDec_80330158(THPFileInfo* info)
 {
-    u8 jfif[] = "JFIF";
-    u8* start;
-    u8* p;
-    u8* p2;
-    u8* sig;
-    u8 b1;
-    u8 b2;
-    u32 len;
+    u8 tag[5] = "JFIF";
+    u16 length;
+    u32 i;
+    u8 xThumb;
+    u8 yThumb;
+    u16 version;
+    u8 units;
+    u32 segmentLength;
 
-    start = info->file;
-    len = (u16) (start[1] | (start[0] << 8));
-    info->file = start + 2;
-    sig = jfif;
-    p = info->file;
-    info->file = p + 1;
-    if (*p != *sig) {
-        return 3;
-    }
-    p = info->file;
-    info->file = p + 1;
-    if (*p != *++sig) {
-        return 3;
-    }
-    p = info->file;
-    info->file = p + 1;
-    if (*p != *++sig) {
-        return 3;
-    }
-    p = info->file;
-    info->file = p + 1;
-    if (*p != *++sig) {
-        return 3;
-    }
-    p = info->file;
-    info->file = p + 1;
-    if (*p != *++sig) {
-        return 3;
-    }
+    length = (u16) ((info->file[0] << 8) | info->file[1]);
     info->file += 2;
+
+    for (i = 0; i < 5; i++) {
+        if (*(info->file)++ != tag[i]) {
+            return 3;
+        }
+    }
+
+    version = (u16) ((info->file[0] << 8) | info->file[1]);
+    info->file += 2;
+    units = *(info->file)++;
     info->file += 1;
     info->file += 1;
     info->file += 1;
     info->file += 1;
-    info->file += 1;
-    p = info->file;
-    info->file = p + 1;
-    b1 = *p;
-    p2 = info->file;
-    info->file = p2 + 1;
-    b2 = *p2;
-    if (b1 != 0 || b2 != 0) {
+
+    xThumb = *(info->file)++;
+    yThumb = *(info->file)++;
+
+    if (xThumb != 0 || yThumb != 0) {
         return 7;
     }
-    if (len + 4 != (u32) (info->file - info->x0C)) {
+
+    segmentLength = (u32) (info->file - info->x0C);
+    if (length + 4 != segmentLength) {
         return 8;
     }
+
     return 0;
 }
 
