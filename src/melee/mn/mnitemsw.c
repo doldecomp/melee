@@ -24,6 +24,9 @@
 #include <melee/mn/mnmainrule.h>
 #include <melee/sc/types.h>
 
+HSD_GObj* mnItemSw_804D6BE8;
+u8 mnItemSw_804D6BEC;
+
 extern StaticModelDesc MenMainCursorIs_Top;
 extern StaticModelDesc MenMainConIs_Top;
 

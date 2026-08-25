@@ -124,7 +124,7 @@ typedef union {
 f32 mnRulePlus_TimeLimitOffFrame = 1.0f;
 volatile const f64 mn_804DBE38 = 4503599627370496.0;
 const JObjIndices mn_804DBE40 = { 0x02030506 };
-volatile f32 mn_804DBE44 = 0.0f;
+volatile const f32 mn_804DBE44[1] = { 0.0f };
 const JObjIndices mn_804DBE48 = { 0x02030506 };
 const f32 mn_804DBE4C = -9.5f;
 const f32 mn_804DBE50 = 8.0f;
@@ -132,7 +132,7 @@ const f32 mn_804DBE54 = 17.0f;
 const f32 mn_804DBE58 = 364.68332f;
 const f32 mn_804DBE5C = 76.77544f;
 const f32 mn_804DBE60 = 0.0521f;
-volatile const f64 mn_804DBE68 = 4503599627370496.0;
+volatile const f64 mn_804DBE68 = 4503601774854144.0;
 
 static inline void SisLib_ClearText(HSD_Text** text)
 {

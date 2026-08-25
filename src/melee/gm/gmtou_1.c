@@ -41,9 +41,9 @@ u8 lbl_804D6690[0x4];
 u8 lbl_804D6694[0x4];
 
 /* 4799D8 */ extern struct Lbl804799D8_t lbl_804799D8;
-/* 4D6660 */ extern HSD_Archive* lbl_804D6660;
-/* 4D6668 */ extern HSD_Archive* lbl_804D6668;
-/* 4D6664 */ extern HSD_Archive* lbl_804D6664;
+/* 4D6660 */ HSD_Archive* lbl_804D6660;
+/* 4D6668 */ HSD_Archive* lbl_804D6668;
+/* 4D6664 */ HSD_Archive* lbl_804D6664;
 
 #ifdef MUST_MATCH
 static void sdata2_order(void)
@@ -55,7 +55,7 @@ static void sdata2_order(void)
 
 /* 4799D8 */ struct Lbl804799D8_t lbl_804799D8;
 /* 4799B8 */ struct Lbl804799B8_t lbl_804799B8;
-/* 4D6670 */ extern SceneDesc* lbl_804D6670;
+/* 4D6670 */ SceneDesc* lbl_804D6670;
 
 /* 3DA0D0 */ struct lbl_803DA0D0_t lbl_803DA0D0 = {
     0,  1,  2,  3,  5,  6,  12, 6,  6,  7,  9,  8,  6,  9,  4,  9,  10, 11, 12,

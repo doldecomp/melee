@@ -54,6 +54,7 @@ const TmAnimFrameTable lbl_803B7D18 = {
 const u8 lbl_803B7D3C[0x14] = { 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,
                                 0, 2, 0, 0, 0, 3, 0, 0, 0, 0 };
 u8 lbl_804D6638[0x4];
+int lbl_804D663C;
 
 extern SceneDesc* lbl_804D666C;
 extern SceneDesc* lbl_804D6670;

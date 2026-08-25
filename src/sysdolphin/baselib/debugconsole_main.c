@@ -65,8 +65,8 @@ struct ParticleScreenState {
 };
 
 extern u8 lbl_804088B8[];
-/* 4D78C8 */ extern int hsd_804D78C8;
-/* 4D78CC */ extern u32 hsd_804D78CC;
+/* 4D78C8 */ int hsd_804D78C8;
+/* 4D78CC */ u32 hsd_804D78CC;
 
 /* 4CF810 */ static struct ParticleScreenState hsd_804CF810;
 
