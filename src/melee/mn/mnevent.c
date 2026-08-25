@@ -118,7 +118,10 @@ static char mnEvent_803EF7A0[0xD0] = {
 static s32 mnEvent_804D5028 = 0xCABC9FFF;
 static s32 mnEvent_804D502C = 0xFF;
 void* mnEvent_804A08F8[4];
-void* mnEvent_804A0908;
+void* mnEvent_804A0908[4];
+HSD_GObj* mnEvent_804D6C60;
+u8 mnEvent_804D6C64;
+u8 mnEvent_804D6C65;
 static char mnEvent_804D5040[3] = "%d";
 static char mnEvent_804D5044[4] = { 0x81, 0x7C, 0, 0 };
 
@@ -170,7 +173,7 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
 
         icon_pos.y = icon_pos.y + (f32) idx * icon_spacing;
         icon_gobj = GObj_Create(6, 7, 0x80);
-        icon_jobj = HSD_JObjLoadJoint((HSD_Joint*) mnEvent_804A0908);
+        icon_jobj = HSD_JObjLoadJoint((HSD_Joint*) mnEvent_804A0908[0]);
         HSD_GObjObject_80390A70(icon_gobj, HSD_GObj_804D7849, icon_jobj);
         GObj_SetupGXLink(icon_gobj, HSD_GObj_JObjCallback, 4, 0x80);
         mnEvent_8024D4E0(icon_jobj, &icon_pos);

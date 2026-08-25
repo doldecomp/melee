@@ -28,6 +28,8 @@
 #include <melee/mn/mndiagram3.h>
 #include <melee/mn/mnmain.h>
 
+HSD_GObj* mnDiagram2_804D6C18;
+
 /* GetPersistentNameData and GetPersistentFighterData are in gm/gmmain_lib.h */
 
 /* From mnname.c; this TU sees a narrower GetNameText parameter (codegen

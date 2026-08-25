@@ -1511,7 +1511,7 @@ s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u8 arg1, u8 arg2, s32 arg3)
     return (s32) text;
 }
 
-extern const Vec3 mnNameNew_803B8528;
+static const Vec3 mnNameNew_803B8528 = { -0.5f, 0.7f, 0.0f };
 
 static inline void
 mnNameNew_GlyphVariantSetup_InitJobjs(GlyphVariantEntry* user_data,
