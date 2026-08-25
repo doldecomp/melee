@@ -903,65 +903,50 @@ static u8 __THPReadHuffmanTableSpecification(THPFileInfo* info)
 
 static u8 __THPReadScaneHeader(THPFileInfo* info)
 {
-    THPScanInfo* compBase;
-    THPScanInfo* scan;
-    s32 rem;
-    u8 i, ncomp, utmp8;
-    s32 quotient;
-    s32 rows;
-    u16 rowHeight;
-    u16 ySize;
-    u16 rows16;
-    u16 width16;
-    u32 width;
+    u8 numComponents;
+    u8 i;
+    u8* ptr;
+    THPScanInfo* scan = (THPScanInfo*) info;
 
-    scan = (THPScanInfo*) info;
     scan->file += 2;
+    ptr = scan->file;
+    scan->file++;
+    numComponents = *ptr;
 
-    ncomp = (*(scan->file)++);
-
-    if (ncomp != scan->x7C) {
+    if (numComponents != scan->x7C) {
         return 12;
     }
 
-    for (i = 0, compBase = scan; i < ncomp;
-         compBase = (THPScanInfo*) ((u8*) compBase + sizeof(THPScanComp)), i++) {
-        rem = 1;
-        scan->file++;
-        utmp8 = (*(scan->file)++);
-        compBase->components[0].DCTableSelector = (u8) (utmp8 >> 4);
-        compBase->components[0].ACTableSelector = (u8) (utmp8 & 15);
+    for (i = 0; i < numComponents; i++) {
+        u8 selectors;
+        u16 blocksPerRow;
+        u16 rows;
+        s32 shift;
 
-        if ((scan->validHuffmanTabs & (rem << (utmp8 >> 4))) == 0) {
+        selectors = *scan->file++;
+        selectors = *scan->file++;
+
+        scan->components[i].DCTableSelector = (u8) (selectors >> 4);
+        scan->components[i].ACTableSelector = (u8) (selectors & 0xF);
+
+        if (!(scan->validHuffmanTabs & (1 << (selectors >> 4)))) {
             return 15;
         }
-
-        if ((scan->validHuffmanTabs & (rem << ((utmp8 & 15) + 1))) == 0) {
+        if (!(scan->validHuffmanTabs & (1 << ((selectors & 0xF) + 1)))) {
             return 15;
         }
 
         scan->x74 = scan->x50;
         scan->x76 = scan->x52;
-        rowHeight = scan->x8D4;
-        ySize = scan->x76;
-        (void) ySize;
-        width = compBase->components[0].x08;
-        quotient = ySize / rowHeight;
-        rows = rowHeight + ySize;
-        rows--;
-        rows /= rowHeight;
-        rows16 = rows;
-        width16 = width;
 
-        if (ySize - (quotient * rowHeight) == 0) {
-            rem = 0;
-        }
-
-        compBase->components[0].x10 = (u32) scan->x904;
-        scan->x904 += width16 *
-                      (u16) (((u16) ((rows16 + rem) * rowHeight)) >>
-                             (scan->x7B -
-                              compBase->components[0].samplingV));
+        blocksPerRow = scan->components[i].x08;
+        rows = THPROUNDUP(scan->x76, scan->x8D4);
+        rows += (scan->x76 % scan->x8D4 == 0) ? 0 : 1;
+        rows *= scan->x8D4;
+        shift = scan->x7B - scan->components[i].samplingV;
+        rows >>= shift;
+        scan->components[i].x10 = (u32) scan->x904;
+        scan->x904 += blocksPerRow * rows;
     }
 
     scan->file += 3;
