@@ -2729,17 +2729,15 @@ static inline s32 readCardDataBlockFirst(CardState* state, s32 data_block,
     return 0;
 }
 
-static inline s32 readCardDataBlockFinal(CardState* state, s32 data_block,
-                                         u8* dst, s32 length)
+static inline s32 readCardDataBlockFinal(CardState* state, u32 sector_size,
+                                         s32 data_block, u8* dst, s32 length)
 {
-    u32 sector_size;
     u32 read_offset;
     u8* buf;
     s32 retries;
     s32 read_ofs;
     s32 result;
 
-    sector_size = state->x8;
     retries = 0;
     buf = state->x0;
     {
@@ -2915,6 +2913,7 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, u8* arg2, s32 arg3,
             remaining -= chunk;
             dst += chunk;
         } else {
+            u32 sector_size;
             s32 data_block = loadCardDataBlock(block_map[i]);
             if (data_block >= 0) {
                 if (arg3 != 0) {
@@ -2925,8 +2924,9 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, u8* arg2, s32 arg3,
                         return result;
                     }
                 } else {
-                    result = readCardDataBlockFinal(arg0, data_block, dst,
-                                                    remaining);
+                    sector_size = arg0->x8;
+                    result = readCardDataBlockFinal(
+                        arg0, sector_size, data_block, dst, remaining);
                     if (result < 0) {
                         if (result == -0x105) {
                             callback_seq = -259;
