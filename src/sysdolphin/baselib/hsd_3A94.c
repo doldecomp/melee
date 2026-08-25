@@ -2150,6 +2150,23 @@ static inline void fn_803AD16C_own(void* value)
     (void) value;
 }
 
+static inline s32 fn_803AD16C_queue_clear(CardState* state, s32 block, s32 pad,
+                                          s32 file_id)
+{
+    s32 cmd[9];
+
+    cmd[0] = 1;
+    cmd[1] = (s32) state;
+    cmd[3] = block;
+    cmd[4] = 0xFFFF;
+    cmd[5] = 0;
+    cmd[6] = 0;
+    cmd[8] = 0;
+    cmd[7] = pad;
+    cmd[2] = file_id;
+    return fn_803AD16C_queue_cmd(cmd);
+}
+
 static inline s32 fn_803AD16C_queue_read(CardState* state, s32 block)
 {
     s32 cmd[8];
@@ -2198,7 +2215,7 @@ static inline s32 fn_803AD16C_queue_write(CardState* state, s32 block,
 static inline s32 fn_803AD16C_queue_write_last(CardState* state, s32 block,
                                                s32 logical, s32 target_seq)
 {
-    s32 tail[3];
+    s32 tail[2];
     s32 cmd[8];
     u32 size = state->x8;
     u32 temp = state->x24 + size;
@@ -2393,17 +2410,8 @@ s32 fn_803AD16C(CardState* state)
                         if (phys == 0) {
                             ret = -0x101;
                         } else {
-                            s32 cmd[9];
-                            cmd[0] = 1;
-                            cmd[1] = (s32) state;
-                            cmd[3] = phys;
-                            cmd[4] = 0xFFFF;
-                            cmd[5] = 0;
-                            cmd[6] = 0;
-                            cmd[8] = 0;
-                            cmd[7] = pad;
-                            cmd[2] = file_id;
-                            ret = fn_803AD16C_queue_cmd(cmd);
+                            ret = fn_803AD16C_queue_clear(state, phys, pad,
+                                                          file_id);
                         }
                         if (ret < 0 && result == 0) {
                             result = -0x10B;
