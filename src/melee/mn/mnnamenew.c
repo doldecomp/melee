@@ -72,15 +72,15 @@ typedef struct MnNameNewDataLayout {
     char assert_cond[0xC];
 } MnNameNewDataLayout;
 
-extern char mnNameNew_NullCharacter;
+SDATA char mnNameNew_NullCharacter[] = "";
 u8 mnNameNew_PortInUse;
 char mnNameNew_CurrentNameText[0x10];
 extern u8** AutoNamesList;
 extern char** NotAllowedNamesList;
 extern u8 mn_804D6BB4;
 extern u8 mn_804D6BB5;
-extern u8 mnNameNew_804D4F7C[4];
-extern char mnNameNew_SpaceCharacter[2];
+SDATA u8 mnNameNew_804D4F7C[8] = { 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'H' };
+
 void* mnNameNew_804A06F0[4];
 void* mnNameNew_804A0700[4];
 void* mnNameNew_804A0710[4];
@@ -102,6 +102,222 @@ static AnimLoopSettings mnNameNew_803EDA58[3] = {
 /// Contents restored from the target unit's .data section (symbols.txt:
 /// mnNameNew_KeyMap at 0x803EDA7C size 0x268, mnNameNew_GlyphTable at
 /// 0x803EDCE4 size 0x64C); see build/GALE01/asm/melee/mn/mnnamenew.s.
+/// Kana/latin glyph literals for the name-entry keyboard; each is a
+/// Shift-JIS character referenced individually by mnNameNew_KeyMap.
+SDATA char mnNameNew_804D4C14[] = "\x82\xA0";
+SDATA char mnNameNew_804D4C18[] = "\x82\xA2";
+SDATA char mnNameNew_804D4C1C[] = "\x82\xA4";
+SDATA char mnNameNew_804D4C20[] = "\x82\xA6";
+SDATA char mnNameNew_804D4C24[] = "\x82\xA8";
+SDATA char mnNameNew_804D4C28[] = "\x82\xA9";
+SDATA char mnNameNew_804D4C2C[] = "\x82\xAB";
+SDATA char mnNameNew_804D4C30[] = "\x82\xAD";
+SDATA char mnNameNew_804D4C34[] = "\x82\xAF";
+SDATA char mnNameNew_804D4C38[] = "\x82\xB1";
+SDATA char mnNameNew_804D4C3C[] = "\x82\xB3";
+SDATA char mnNameNew_804D4C40[] = "\x82\xB5";
+SDATA char mnNameNew_804D4C44[] = "\x82\xB7";
+SDATA char mnNameNew_804D4C48[] = "\x82\xB9";
+SDATA char mnNameNew_804D4C4C[] = "\x82\xBB";
+SDATA char mnNameNew_804D4C50[] = "\x82\xBD";
+SDATA char mnNameNew_804D4C54[] = "\x82\xBF";
+SDATA char mnNameNew_804D4C58[] = "\x82\xC2";
+SDATA char mnNameNew_804D4C5C[] = "\x82\xC4";
+SDATA char mnNameNew_804D4C60[] = "\x82\xC6";
+SDATA char mnNameNew_804D4C64[] = "\x82\xC8";
+SDATA char mnNameNew_804D4C68[] = "\x82\xC9";
+SDATA char mnNameNew_804D4C6C[] = "\x82\xCA";
+SDATA char mnNameNew_804D4C70[] = "\x82\xCB";
+SDATA char mnNameNew_804D4C74[] = "\x82\xCC";
+SDATA char mnNameNew_804D4C78[] = "\x82\xCD";
+SDATA char mnNameNew_804D4C7C[] = "\x82\xD0";
+SDATA char mnNameNew_804D4C80[] = "\x82\xD3";
+SDATA char mnNameNew_804D4C84[] = "\x82\xD6";
+SDATA char mnNameNew_804D4C88[] = "\x82\xD9";
+SDATA char mnNameNew_804D4C8C[] = "\x82\xDC";
+SDATA char mnNameNew_804D4C90[] = "\x82\xDD";
+SDATA char mnNameNew_804D4C94[] = "\x82\xDE";
+SDATA char mnNameNew_804D4C98[] = "\x82\xDF";
+SDATA char mnNameNew_804D4C9C[] = "\x82\xE0";
+SDATA char mnNameNew_804D4CA0[] = "\x82\xE2";
+SDATA char mnNameNew_804D4CA4[] = "\x82\xE4";
+SDATA char mnNameNew_804D4CA8[] = "\x82\xE6";
+SDATA char mnNameNew_SpaceCharacter[] = "\x81\x40";
+SDATA char mnNameNew_804D4CB0[] = "\x82\xE7";
+SDATA char mnNameNew_804D4CB4[] = "\x82\xE8";
+SDATA char mnNameNew_804D4CB8[] = "\x82\xE9";
+SDATA char mnNameNew_804D4CBC[] = "\x82\xEA";
+SDATA char mnNameNew_804D4CC0[] = "\x82\xEB";
+SDATA char mnNameNew_804D4CC4[] = "\x82\xED";
+SDATA char mnNameNew_804D4CC8[] = "\x82\xF0";
+SDATA char mnNameNew_804D4CCC[] = "\x82\xF1";
+SDATA char mnNameNew_804D4CD0[] = "\x81\x5B";
+SDATA char mnNameNew_804D4CD4[] = "\x81\x42";
+SDATA char mnNameNew_804D4CD8[] = "\x83\x41";
+SDATA char mnNameNew_804D4CDC[] = "\x83\x43";
+SDATA char mnNameNew_804D4CE0[] = "\x83\x45";
+SDATA char mnNameNew_804D4CE4[] = "\x83\x47";
+SDATA char mnNameNew_804D4CE8[] = "\x83\x49";
+SDATA char mnNameNew_804D4CEC[] = "\x83\x4A";
+SDATA char mnNameNew_804D4CF0[] = "\x83\x4C";
+SDATA char mnNameNew_804D4CF4[] = "\x83\x4E";
+SDATA char mnNameNew_804D4CF8[] = "\x83\x50";
+SDATA char mnNameNew_804D4CFC[] = "\x83\x52";
+SDATA char mnNameNew_804D4D00[] = "\x83\x54";
+SDATA char mnNameNew_804D4D04[] = "\x83\x56";
+SDATA char mnNameNew_804D4D08[] = "\x83\x58";
+SDATA char mnNameNew_804D4D0C[] = "\x83\x5A";
+SDATA char mnNameNew_804D4D10[] = "\x83\x5C";
+SDATA char mnNameNew_804D4D14[] = "\x83\x5E";
+SDATA char mnNameNew_804D4D18[] = "\x83\x60";
+SDATA char mnNameNew_804D4D1C[] = "\x83\x63";
+SDATA char mnNameNew_804D4D20[] = "\x83\x65";
+SDATA char mnNameNew_804D4D24[] = "\x83\x67";
+SDATA char mnNameNew_804D4D28[] = "\x83\x69";
+SDATA char mnNameNew_804D4D2C[] = "\x83\x6A";
+SDATA char mnNameNew_804D4D30[] = "\x83\x6B";
+SDATA char mnNameNew_804D4D34[] = "\x83\x6C";
+SDATA char mnNameNew_804D4D38[] = "\x83\x6D";
+SDATA char mnNameNew_804D4D3C[] = "\x83\x6E";
+SDATA char mnNameNew_804D4D40[] = "\x83\x71";
+SDATA char mnNameNew_804D4D44[] = "\x83\x74";
+SDATA char mnNameNew_804D4D48[] = "\x83\x77";
+SDATA char mnNameNew_804D4D4C[] = "\x83\x7A";
+SDATA char mnNameNew_804D4D50[] = "\x83\x7D";
+SDATA char mnNameNew_804D4D54[] = "\x83\x7E";
+SDATA char mnNameNew_804D4D58[] = "\x83\x80";
+SDATA char mnNameNew_804D4D5C[] = "\x83\x81";
+SDATA char mnNameNew_804D4D60[] = "\x83\x82";
+SDATA char mnNameNew_804D4D64[] = "\x83\x84";
+SDATA char mnNameNew_804D4D68[] = "\x83\x86";
+SDATA char mnNameNew_804D4D6C[] = "\x83\x88";
+SDATA char mnNameNew_804D4D70[] = "\x83\x89";
+SDATA char mnNameNew_804D4D74[] = "\x83\x8A";
+SDATA char mnNameNew_804D4D78[] = "\x83\x8B";
+SDATA char mnNameNew_804D4D7C[] = "\x83\x8C";
+SDATA char mnNameNew_804D4D80[] = "\x83\x8D";
+SDATA char mnNameNew_804D4D84[] = "\x83\x8F";
+SDATA char mnNameNew_804D4D88[] = "\x83\x92";
+SDATA char mnNameNew_804D4D8C[] = "\x83\x93";
+SDATA char mnNameNew_804D4D90[] = "\x82\x69";
+SDATA char mnNameNew_804D4D94[] = "\x82\x73";
+SDATA char mnNameNew_804D4D98[] = "\x82\x58";
+SDATA char mnNameNew_804D4D9C[] = "\x81\x44";
+SDATA char mnNameNew_804D4DA0[] = "\x82\x68";
+SDATA char mnNameNew_804D4DA4[] = "\x82\x72";
+SDATA char mnNameNew_804D4DA8[] = "\x82\x57";
+SDATA char mnNameNew_804D4DAC[] = "\x81\x90";
+SDATA char mnNameNew_804D4DB0[] = "\x82\x67";
+SDATA char mnNameNew_804D4DB4[] = "\x82\x71";
+SDATA char mnNameNew_804D4DB8[] = "\x82\x56";
+SDATA char mnNameNew_804D4DBC[] = "\x81\x95";
+SDATA char mnNameNew_804D4DC0[] = "\x82\x66";
+SDATA char mnNameNew_804D4DC4[] = "\x82\x70";
+SDATA char mnNameNew_804D4DC8[] = "\x82\x55";
+SDATA char mnNameNew_804D4DCC[] = "\x81\x93";
+SDATA char mnNameNew_804D4DD0[] = "\x82\x65";
+SDATA char mnNameNew_804D4DD4[] = "\x82\x6F";
+SDATA char mnNameNew_804D4DD8[] = "\x82\x79";
+SDATA char mnNameNew_804D4DDC[] = "\x82\x54";
+SDATA char mnNameNew_804D4DE0[] = "\x81\x97";
+SDATA char mnNameNew_804D4DE4[] = "\x82\x64";
+SDATA char mnNameNew_804D4DE8[] = "\x82\x6E";
+SDATA char mnNameNew_804D4DEC[] = "\x82\x78";
+SDATA char mnNameNew_804D4DF0[] = "\x82\x53";
+SDATA char mnNameNew_804D4DF4[] = "\x81\x48";
+SDATA char mnNameNew_804D4DF8[] = "\x82\x63";
+SDATA char mnNameNew_804D4DFC[] = "\x82\x6D";
+SDATA char mnNameNew_804D4E00[] = "\x82\x77";
+SDATA char mnNameNew_804D4E04[] = "\x82\x52";
+SDATA char mnNameNew_804D4E08[] = "\x81\x49";
+SDATA char mnNameNew_804D4E0C[] = "\x82\x62";
+SDATA char mnNameNew_804D4E10[] = "\x82\x6C";
+SDATA char mnNameNew_804D4E14[] = "\x82\x76";
+SDATA char mnNameNew_804D4E18[] = "\x82\x51";
+SDATA char mnNameNew_804D4E1C[] = "\x81\x81";
+SDATA char mnNameNew_804D4E20[] = "\x82\x61";
+SDATA char mnNameNew_804D4E24[] = "\x82\x6B";
+SDATA char mnNameNew_804D4E28[] = "\x82\x75";
+SDATA char mnNameNew_804D4E2C[] = "\x82\x50";
+SDATA char mnNameNew_804D4E30[] = "\x81\x7B";
+SDATA char mnNameNew_804D4E34[] = "\x82\x60";
+SDATA char mnNameNew_804D4E38[] = "\x82\x6A";
+SDATA char mnNameNew_804D4E3C[] = "\x82\x74";
+SDATA char mnNameNew_804D4E40[] = "\x82\x4F";
+SDATA char mnNameNew_804D4E44[] = "\x81\x7C";
+SDATA char mnNameNew_804D4E48[] = "\x82\x9F";
+SDATA char mnNameNew_804D4E50[] = "\x82\xA1";
+SDATA char mnNameNew_804D4E54[] = "\x82\xA3";
+SDATA char mnNameNew_804D4E58[] = "\x82\xA5";
+SDATA char mnNameNew_804D4E5C[] = "\x82\xA7";
+SDATA char mnNameNew_804D4E60[] = "\x82\xAA";
+SDATA char mnNameNew_804D4E64[] = "\x82\xAC";
+SDATA char mnNameNew_804D4E68[] = "\x82\xAE";
+SDATA char mnNameNew_804D4E6C[] = "\x82\xB0";
+SDATA char mnNameNew_804D4E70[] = "\x82\xB2";
+SDATA char mnNameNew_804D4E74[] = "\x82\xB4";
+SDATA char mnNameNew_804D4E78[] = "\x82\xB6";
+SDATA char mnNameNew_804D4E7C[] = "\x82\xB8";
+SDATA char mnNameNew_804D4E80[] = "\x82\xBA";
+SDATA char mnNameNew_804D4E84[] = "\x82\xBC";
+SDATA char mnNameNew_804D4E88[] = "\x82\xBE";
+SDATA char mnNameNew_804D4E8C[] = "\x82\xC0";
+SDATA char mnNameNew_804D4E90[] = "\x82\xC3";
+SDATA char mnNameNew_804D4E94[] = "\x82\xC1";
+SDATA char mnNameNew_804D4E98[] = "\x82\xC5";
+SDATA char mnNameNew_804D4E9C[] = "\x82\xC7";
+SDATA char mnNameNew_804D4EA0[] = "\x82\xCE";
+SDATA char mnNameNew_804D4EA4[] = "\x82\xCF";
+SDATA char mnNameNew_804D4EA8[] = "\x82\xD1";
+SDATA char mnNameNew_804D4EAC[] = "\x82\xD2";
+SDATA char mnNameNew_804D4EB0[] = "\x82\xD4";
+SDATA char mnNameNew_804D4EB4[] = "\x82\xD5";
+SDATA char mnNameNew_804D4EB8[] = "\x82\xD7";
+SDATA char mnNameNew_804D4EBC[] = "\x82\xD8";
+SDATA char mnNameNew_804D4EC0[] = "\x82\xDA";
+SDATA char mnNameNew_804D4EC4[] = "\x82\xDB";
+SDATA char mnNameNew_804D4EC8[] = "\x82\xE1";
+SDATA char mnNameNew_804D4ECC[] = "\x82\xE3";
+SDATA char mnNameNew_804D4ED0[] = "\x82\xE5";
+SDATA char mnNameNew_804D4ED4[] = " ";
+SDATA char mnNameNew_804D4ED8[] = "\x83\x40";
+SDATA char mnNameNew_804D4EDC[] = "\x83\x42";
+SDATA char mnNameNew_804D4EE0[] = "\x83\x44";
+SDATA char mnNameNew_804D4EE4[] = "\x83\x46";
+SDATA char mnNameNew_804D4EE8[] = "\x83\x48";
+SDATA char mnNameNew_804D4EEC[] = "\x83\x4B";
+SDATA char mnNameNew_804D4EF0[] = "\x83\x4D";
+SDATA char mnNameNew_804D4EF4[] = "\x83\x4F";
+SDATA char mnNameNew_804D4EF8[] = "\x83\x51";
+SDATA char mnNameNew_804D4EFC[] = "\x83\x53";
+SDATA char mnNameNew_804D4F00[] = "\x83\x55";
+SDATA char mnNameNew_804D4F04[] = "\x83\x57";
+SDATA char mnNameNew_804D4F08[] = "\x83\x59";
+SDATA char mnNameNew_804D4F0C[] = "\x83\x5B";
+SDATA char mnNameNew_804D4F10[] = "\x83\x5D";
+SDATA char mnNameNew_804D4F14[] = "\x83\x5F";
+SDATA char mnNameNew_804D4F18[] = "\x83\x61";
+SDATA char mnNameNew_804D4F1C[] = "\x83\x64";
+SDATA char mnNameNew_804D4F20[] = "\x83\x62";
+SDATA char mnNameNew_804D4F24[] = "\x83\x66";
+SDATA char mnNameNew_804D4F28[] = "\x83\x68";
+SDATA char mnNameNew_804D4F2C[] = "\x83\x6F";
+SDATA char mnNameNew_804D4F30[] = "\x83\x70";
+SDATA char mnNameNew_804D4F34[] = "\x83\x72";
+SDATA char mnNameNew_804D4F38[] = "\x83\x73";
+SDATA char mnNameNew_804D4F3C[] = "\x83\x75";
+SDATA char mnNameNew_804D4F40[] = "\x83\x76";
+SDATA char mnNameNew_804D4F44[] = "\x83\x78";
+SDATA char mnNameNew_804D4F48[] = "\x83\x79";
+SDATA char mnNameNew_804D4F4C[] = "\x83\x7B";
+SDATA char mnNameNew_804D4F50[] = "\x83\x7C";
+SDATA char mnNameNew_804D4F54[] = "\x83\x83";
+SDATA char mnNameNew_804D4F58[] = "\x83\x85";
+SDATA char mnNameNew_804D4F5C[] = "\x83\x87";
+SDATA char mnNameNew_804D4F60[] = "\x81\x60";
+SDATA char mnNameNew_804D4F64[] = "\x81\x41";
+SDATA char mnNameNew_804D4F98[] = "";
+
 static MnNameNewKeyMap mnNameNew_KeyMap = {
     { 3, 10, 11, 7, 9, 8, 5, 5 },
     { mnNameNew_804D4C14,       mnNameNew_804D4C18, mnNameNew_804D4C1C,
@@ -167,188 +383,188 @@ static MnNameNewKeyMap mnNameNew_KeyMap = {
 
 static MnNameNewGlyphTable mnNameNew_GlyphTable = {
     {
-        { mnNameNew_804D4C14, mnNameNew_804D4E48, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4C14, mnNameNew_804D4E48, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4C18, mnNameNew_804D4E50, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4C18, mnNameNew_804D4E50, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4C1C, mnNameNew_804D4E54, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4C1C, mnNameNew_804D4E54, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4C20, mnNameNew_804D4E58, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4C20, mnNameNew_804D4E58, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4C24, mnNameNew_804D4E5C, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4C24, mnNameNew_804D4E5C, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4C28, mnNameNew_804D4E60, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4C28, mnNameNew_804D4E60, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4C2C, mnNameNew_804D4E64, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4C2C, mnNameNew_804D4E64, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4C30, mnNameNew_804D4E68, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4C30, mnNameNew_804D4E68, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4C34, mnNameNew_804D4E6C, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4C34, mnNameNew_804D4E6C, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4C38, mnNameNew_804D4E70, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4C38, mnNameNew_804D4E70, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4C3C, mnNameNew_804D4E74, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4C3C, mnNameNew_804D4E74, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4C40, mnNameNew_804D4E78, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4C40, mnNameNew_804D4E78, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4C44, mnNameNew_804D4E7C, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4C44, mnNameNew_804D4E7C, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4C48, mnNameNew_804D4E80, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4C48, mnNameNew_804D4E80, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4C4C, mnNameNew_804D4E84, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4C4C, mnNameNew_804D4E84, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4C50, mnNameNew_804D4E88, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4C50, mnNameNew_804D4E88, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4C54, mnNameNew_804D4E8C, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4C54, mnNameNew_804D4E8C, mnNameNew_NullCharacter,
           NULL },
         { mnNameNew_804D4C58, mnNameNew_804D4E90, mnNameNew_804D4E94,
-          &mnNameNew_NullCharacter },
-        { mnNameNew_804D4C5C, mnNameNew_804D4E98, &mnNameNew_NullCharacter,
+          mnNameNew_NullCharacter },
+        { mnNameNew_804D4C5C, mnNameNew_804D4E98, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4C60, mnNameNew_804D4E9C, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4C60, mnNameNew_804D4E9C, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4C64, &mnNameNew_NullCharacter,
-          &mnNameNew_NullCharacter, NULL },
-        { mnNameNew_804D4C68, &mnNameNew_NullCharacter,
-          &mnNameNew_NullCharacter, NULL },
-        { mnNameNew_804D4C6C, &mnNameNew_NullCharacter,
-          &mnNameNew_NullCharacter, NULL },
-        { mnNameNew_804D4C70, &mnNameNew_NullCharacter,
-          &mnNameNew_NullCharacter, NULL },
-        { mnNameNew_804D4C74, &mnNameNew_NullCharacter,
-          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4C64, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C68, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C6C, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C70, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C74, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
+          NULL },
         { mnNameNew_804D4C78, mnNameNew_804D4EA0, mnNameNew_804D4EA4,
-          &mnNameNew_NullCharacter },
+          mnNameNew_NullCharacter },
         { mnNameNew_804D4C7C, mnNameNew_804D4EA8, mnNameNew_804D4EAC,
-          &mnNameNew_NullCharacter },
+          mnNameNew_NullCharacter },
         { mnNameNew_804D4C80, mnNameNew_804D4EB0, mnNameNew_804D4EB4,
-          &mnNameNew_NullCharacter },
+          mnNameNew_NullCharacter },
         { mnNameNew_804D4C84, mnNameNew_804D4EB8, mnNameNew_804D4EBC,
-          &mnNameNew_NullCharacter },
+          mnNameNew_NullCharacter },
         { mnNameNew_804D4C88, mnNameNew_804D4EC0, mnNameNew_804D4EC4,
-          &mnNameNew_NullCharacter },
-        { mnNameNew_804D4C8C, &mnNameNew_NullCharacter,
-          &mnNameNew_NullCharacter, NULL },
-        { mnNameNew_804D4C90, &mnNameNew_NullCharacter,
-          &mnNameNew_NullCharacter, NULL },
-        { mnNameNew_804D4C94, &mnNameNew_NullCharacter,
-          &mnNameNew_NullCharacter, NULL },
-        { mnNameNew_804D4C98, &mnNameNew_NullCharacter,
-          &mnNameNew_NullCharacter, NULL },
-        { mnNameNew_804D4C9C, &mnNameNew_NullCharacter,
-          &mnNameNew_NullCharacter, NULL },
-        { mnNameNew_804D4CA0, mnNameNew_804D4EC8, &mnNameNew_NullCharacter,
+          mnNameNew_NullCharacter },
+        { mnNameNew_804D4C8C, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4CA4, mnNameNew_804D4ECC, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4C90, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4CA8, mnNameNew_804D4ED0, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4C94, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C98, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4C9C, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4CA0, mnNameNew_804D4EC8, mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4CA4, mnNameNew_804D4ECC, mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4CA8, mnNameNew_804D4ED0, mnNameNew_NullCharacter,
           NULL },
         { mnNameNew_SpaceCharacter, mnNameNew_804D4ED4,
-          &mnNameNew_NullCharacter, NULL },
+          mnNameNew_NullCharacter, NULL },
         { mnNameNew_SpaceCharacter, mnNameNew_804D4ED4,
-          &mnNameNew_NullCharacter, NULL },
-        { mnNameNew_804D4CB0, &mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4CB4, &mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4CB8, &mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4CBC, &mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4CC0, &mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4CC4, &mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4CC8, &mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4CCC, &mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4CD0, &mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4CD4, &mnNameNew_NullCharacter, NULL, NULL },
+          mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4CB0, mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4CB4, mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4CB8, mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4CBC, mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4CC0, mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4CC4, mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4CC8, mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4CCC, mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4CD0, mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4CD4, mnNameNew_NullCharacter, NULL, NULL },
     },
     {
-        { mnNameNew_804D4CD8, mnNameNew_804D4ED8, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4CD8, mnNameNew_804D4ED8, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4CDC, mnNameNew_804D4EDC, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4CDC, mnNameNew_804D4EDC, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4CE0, mnNameNew_804D4EE0, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4CE0, mnNameNew_804D4EE0, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4CE4, mnNameNew_804D4EE4, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4CE4, mnNameNew_804D4EE4, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4CE8, mnNameNew_804D4EE8, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4CE8, mnNameNew_804D4EE8, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4CEC, mnNameNew_804D4EEC, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4CEC, mnNameNew_804D4EEC, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4CF0, mnNameNew_804D4EF0, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4CF0, mnNameNew_804D4EF0, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4CF4, mnNameNew_804D4EF4, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4CF4, mnNameNew_804D4EF4, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4CF8, mnNameNew_804D4EF8, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4CF8, mnNameNew_804D4EF8, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4CFC, mnNameNew_804D4EFC, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4CFC, mnNameNew_804D4EFC, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4D00, mnNameNew_804D4F00, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4D00, mnNameNew_804D4F00, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4D04, mnNameNew_804D4F04, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4D04, mnNameNew_804D4F04, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4D08, mnNameNew_804D4F08, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4D08, mnNameNew_804D4F08, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4D0C, mnNameNew_804D4F0C, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4D0C, mnNameNew_804D4F0C, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4D10, mnNameNew_804D4F10, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4D10, mnNameNew_804D4F10, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4D14, mnNameNew_804D4F14, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4D14, mnNameNew_804D4F14, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4D18, mnNameNew_804D4F18, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4D18, mnNameNew_804D4F18, mnNameNew_NullCharacter,
           NULL },
         { mnNameNew_804D4D1C, mnNameNew_804D4F1C, mnNameNew_804D4F20,
-          &mnNameNew_NullCharacter },
-        { mnNameNew_804D4D20, mnNameNew_804D4F24, &mnNameNew_NullCharacter,
+          mnNameNew_NullCharacter },
+        { mnNameNew_804D4D20, mnNameNew_804D4F24, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4D24, mnNameNew_804D4F28, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4D24, mnNameNew_804D4F28, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4D28, &mnNameNew_NullCharacter,
-          &mnNameNew_NullCharacter, NULL },
-        { mnNameNew_804D4D2C, &mnNameNew_NullCharacter,
-          &mnNameNew_NullCharacter, NULL },
-        { mnNameNew_804D4D30, &mnNameNew_NullCharacter,
-          &mnNameNew_NullCharacter, NULL },
-        { mnNameNew_804D4D34, &mnNameNew_NullCharacter,
-          &mnNameNew_NullCharacter, NULL },
-        { mnNameNew_804D4D38, &mnNameNew_NullCharacter,
-          &mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4D28, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4D2C, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4D30, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4D34, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4D38, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
+          NULL },
         { mnNameNew_804D4D3C, mnNameNew_804D4F2C, mnNameNew_804D4F30,
-          &mnNameNew_NullCharacter },
+          mnNameNew_NullCharacter },
         { mnNameNew_804D4D40, mnNameNew_804D4F34, mnNameNew_804D4F38,
-          &mnNameNew_NullCharacter },
+          mnNameNew_NullCharacter },
         { mnNameNew_804D4D44, mnNameNew_804D4F3C, mnNameNew_804D4F40,
-          &mnNameNew_NullCharacter },
+          mnNameNew_NullCharacter },
         { mnNameNew_804D4D48, mnNameNew_804D4F44, mnNameNew_804D4F48,
-          &mnNameNew_NullCharacter },
+          mnNameNew_NullCharacter },
         { mnNameNew_804D4D4C, mnNameNew_804D4F4C, mnNameNew_804D4F50,
-          &mnNameNew_NullCharacter },
-        { mnNameNew_804D4D50, &mnNameNew_NullCharacter,
-          &mnNameNew_NullCharacter, NULL },
-        { mnNameNew_804D4D54, &mnNameNew_NullCharacter,
-          &mnNameNew_NullCharacter, NULL },
-        { mnNameNew_804D4D58, &mnNameNew_NullCharacter,
-          &mnNameNew_NullCharacter, NULL },
-        { mnNameNew_804D4D5C, &mnNameNew_NullCharacter,
-          &mnNameNew_NullCharacter, NULL },
-        { mnNameNew_804D4D60, &mnNameNew_NullCharacter,
-          &mnNameNew_NullCharacter, NULL },
-        { mnNameNew_804D4D64, mnNameNew_804D4F54, &mnNameNew_NullCharacter,
+          mnNameNew_NullCharacter },
+        { mnNameNew_804D4D50, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4D68, mnNameNew_804D4F58, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4D54, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
           NULL },
-        { mnNameNew_804D4D6C, mnNameNew_804D4F5C, &mnNameNew_NullCharacter,
+        { mnNameNew_804D4D58, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4D5C, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4D60, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4D64, mnNameNew_804D4F54, mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4D68, mnNameNew_804D4F58, mnNameNew_NullCharacter,
+          NULL },
+        { mnNameNew_804D4D6C, mnNameNew_804D4F5C, mnNameNew_NullCharacter,
           NULL },
         { mnNameNew_SpaceCharacter, mnNameNew_804D4ED4,
-          &mnNameNew_NullCharacter, NULL },
+          mnNameNew_NullCharacter, NULL },
         { mnNameNew_SpaceCharacter, mnNameNew_804D4ED4,
-          &mnNameNew_NullCharacter, NULL },
-        { mnNameNew_804D4D70, &mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4D74, &mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4D78, &mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4D7C, &mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4D80, &mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4D84, &mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4D88, &mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4D8C, &mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4F60, &mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4F64, &mnNameNew_NullCharacter, NULL, NULL },
+          mnNameNew_NullCharacter, NULL },
+        { mnNameNew_804D4D70, mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4D74, mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4D78, mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4D7C, mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4D80, mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4D84, mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4D88, mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4D8C, mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4F60, mnNameNew_NullCharacter, NULL, NULL },
+        { mnNameNew_804D4F64, mnNameNew_NullCharacter, NULL, NULL },
     },
     { -0.8f, 0.4f, 0.0f },
 };
@@ -710,7 +926,7 @@ s32 PickAutoName(HSD_GObj* arg0)
     do {
         dup = 0;
         do {
-            null_ch = (s8) mnNameNew_NullCharacter;
+            null_ch = (s8) *mnNameNew_NullCharacter;
             count = 0;
             names = AutoNamesList;
             while (null_ch != (s8) * *names) {
@@ -735,19 +951,19 @@ s32 PickAutoName(HSD_GObj* arg0)
 
     name_idx = 0;
     char_idx = name_idx;
-    cur_text[0] = mnNameNew_NullCharacter;
+    cur_text[0] = *mnNameNew_NullCharacter;
     text = cur_text;
-    cur_text[3] = mnNameNew_NullCharacter;
-    cur_text[6] = mnNameNew_NullCharacter;
-    cur_text[9] = mnNameNew_NullCharacter;
+    cur_text[3] = *mnNameNew_NullCharacter;
+    cur_text[6] = *mnNameNew_NullCharacter;
+    cur_text[9] = *mnNameNew_NullCharacter;
 
     name_ptr = &AutoNamesList[pick];
-    while ((null_ch = (s8) mnNameNew_NullCharacter) !=
+    while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
            (s8) (ch = (*name_ptr)[char_idx]))
     {
         text[0] = ch;
         text[1] = (*name_ptr)[char_idx + 1];
-        text[2] = mnNameNew_NullCharacter;
+        text[2] = *mnNameNew_NullCharacter;
         char_idx += 2;
         name_idx++;
         text += 3;
@@ -775,7 +991,7 @@ bool NameContainsOnlySpaces(void)
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        if ((s8) * (&mnNameNew_NullCharacter) != (s8) text[0]) {
+        if ((s8) * (mnNameNew_NullCharacter) != (s8) text[0]) {
             if ((s8) * (char*) mnNameNew_SpaceCharacter != (s8) text[0] ||
                 ((GlyphChar*) mnNameNew_SpaceCharacter)[1] != text[1])
             {
@@ -795,19 +1011,19 @@ static inline void CopyCurrentNameToNametag(struct NameTagData* nametag)
     s8 null_ch;
 
     text = (u8*) mnNameNew_CurrentNameText;
-    null_ch = (s8) mnNameNew_NullCharacter;
+    null_ch = (s8) *mnNameNew_NullCharacter;
     idx = 0;
     if (null_ch != (s8) *text) {
         u8* ptr;
         ptr = text;
-        while ((null_ch = (s8) mnNameNew_NullCharacter) != (s8) (ch = *ptr)) {
+        while ((null_ch = (s8) *mnNameNew_NullCharacter) != (s8) (ch = *ptr)) {
             nametag->namedata[idx] = (s8) ch;
             idx += 1;
             ptr += 1;
         }
         if (null_ch != (s8) * (text += 3)) {
             ptr = text;
-            while ((null_ch = (s8) mnNameNew_NullCharacter) !=
+            while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
                    (s8) (ch = *ptr))
             {
                 nametag->namedata[idx] = (s8) ch;
@@ -816,7 +1032,7 @@ static inline void CopyCurrentNameToNametag(struct NameTagData* nametag)
             }
             if (null_ch != (s8) * (text += 3)) {
                 ptr = text;
-                while ((null_ch = (s8) mnNameNew_NullCharacter) !=
+                while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
                        (s8) (ch = *ptr))
                 {
                     nametag->namedata[idx] = (s8) ch;
@@ -825,7 +1041,7 @@ static inline void CopyCurrentNameToNametag(struct NameTagData* nametag)
                 }
                 if (null_ch != (s8) * (text += 3)) {
                     ptr = text;
-                    while ((null_ch = (s8) mnNameNew_NullCharacter) !=
+                    while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
                            (s8) (ch = *ptr))
                     {
                         nametag->namedata[idx] = (s8) ch;
@@ -836,7 +1052,7 @@ static inline void CopyCurrentNameToNametag(struct NameTagData* nametag)
             }
         }
     }
-    nametag->namedata[idx] = (s8) mnNameNew_NullCharacter;
+    nametag->namedata[idx] = (s8) *mnNameNew_NullCharacter;
 }
 
 s32 WriteCharactersForNameAtIndex(u8 arg0, s32 arg1)
@@ -892,7 +1108,7 @@ char* AddCharacterToName(char* arg0, u8 arg1, u8 arg2, u8 arg3)
             var_r4 = arg0;
 
             for (idx = layout->character_bytes[arg1][1] * 0;
-                 (null = (mnNameNew_NullCharacter & 0xFFFF) & 0xFFFF) !=
+                 (null = (*mnNameNew_NullCharacter & 0xFFFF) & 0xFFFF) !=
                  (ch = table[arg2 / 2][idx] & (0xFF & 0xFFu));
                  idx++)
             {
@@ -962,7 +1178,7 @@ void mnNameNew_GlyphVariantInput(void)
             mnNameNew_8023CE4C();
             return;
         }
-        null_ch = (s8) mnNameNew_NullCharacter;
+        null_ch = (s8) *mnNameNew_NullCharacter;
         table = mnNameNew_GlyphTable.lower_glyphs[data->x1];
         while (null_ch != (s8) * *table) {
             table++;
@@ -1063,7 +1279,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                         u16 sel2 = mn_804A04F0.hovered_selection;
                         u8** ptrs = (u8**) ((u8*) layout->lower_glyphs +
                                             ((((u8) sel2) << 4) & 0xFF0));
-                        null_char = (s8) mnNameNew_NullCharacter;
+                        null_char = (s8) *mnNameNew_NullCharacter;
                         while ((s8) *ptrs[0] != null_char) {
                             ptrs++;
                             n++;
@@ -1081,7 +1297,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 cursor = data->cursor_pos;
                 name_text[cursor * 3] = mnNameNew_SpaceCharacter[0];
                 name_text[cursor * 3 + 1] = mnNameNew_SpaceCharacter[1];
-                name_text[cursor * 3 + 2] = mnNameNew_NullCharacter;
+                name_text[cursor * 3 + 2] = *mnNameNew_NullCharacter;
                 lbAudioAx_80024030(1);
                 if (data->cursor_pos < 3) {
                     data->cursor_pos = (u8) (data->cursor_pos + 1);
@@ -1147,17 +1363,18 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 (void) cursor;
                 {
                     char* slot = &name_text[cursor * 3];
-                    if ((s8) mnNameNew_NullCharacter != (s8) slot[0]) {
+                    if ((s8) *mnNameNew_NullCharacter != (s8) slot[0]) {
                         occupied_slots = 1;
                     }
                     if (occupied_slots != 0) {
-                        slot[0] = mnNameNew_NullCharacter;
+                        slot[0] = *mnNameNew_NullCharacter;
                         mnNameNew_8023CE4C();
                         return;
                     }
                 }
                 if (cursor != 0) {
-                    name_text[(u8) (cursor - 1) * 3] = mnNameNew_NullCharacter;
+                    name_text[(u8) (cursor - 1) * 3] =
+                        *mnNameNew_NullCharacter;
                     data->cursor_pos = (u8) (data->cursor_pos - 1);
                     mnNameNew_8023CE4C();
                     return;
@@ -1168,7 +1385,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
             case 0x37:
                 lbAudioAx_80024030(1);
                 PickAutoName(mnNameNew_804D6C08);
-                null_char = (s8) mnNameNew_NullCharacter;
+                null_char = (s8) *mnNameNew_NullCharacter;
                 {
                     char* p = name_text;
                     if (null_char != (s8) *p) {
@@ -1207,7 +1424,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     src = name_text;
                     src_iter = src;
                     dest_iter = dest;
-                    for (; (s8) mnNameNew_NullCharacter != (s8) *src_iter;
+                    for (; (s8) *mnNameNew_NullCharacter != (s8) *src_iter;
                          dest_iter++, dest++, len++, src_iter++)
                     {
                         *dest_iter = *src_iter;
@@ -1216,7 +1433,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     src += 3;
                     src_iter = src;
                     dest_iter = dest;
-                    for (; (s8) mnNameNew_NullCharacter != (s8) *src_iter;
+                    for (; (s8) *mnNameNew_NullCharacter != (s8) *src_iter;
                          dest_iter++, dest++, len++, src_iter++)
                     {
                         *dest_iter = *src_iter;
@@ -1225,7 +1442,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     src += 3;
                     src_iter = src;
                     dest_iter = dest;
-                    for (; (s8) mnNameNew_NullCharacter != (s8) *src_iter;
+                    for (; (s8) *mnNameNew_NullCharacter != (s8) *src_iter;
                          dest_iter++, dest++, len++, src_iter++)
                     {
                         *dest_iter = *src_iter;
@@ -1234,16 +1451,16 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     src += 3;
                     src_iter = src;
                     dest_iter = dest;
-                    for (; (s8) mnNameNew_NullCharacter != (s8) *src_iter;
+                    for (; (s8) *mnNameNew_NullCharacter != (s8) *src_iter;
                          dest_iter++, dest++, len++, src_iter++)
                     {
                         *dest_iter = *src_iter;
                     }
                 }
 
-                sp24[len] = (u8) mnNameNew_NullCharacter;
+                sp24[len] = (u8) *mnNameNew_NullCharacter;
 
-                if ((s8) name_text[0] == (s8) mnNameNew_NullCharacter) {
+                if ((s8) name_text[0] == (s8) *mnNameNew_NullCharacter) {
                     n = 1;
                 } else {
                     n = 0;
@@ -1286,7 +1503,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     src = name_text;
                     src_iter = src;
                     dest_iter = dest;
-                    for (; (s8) mnNameNew_NullCharacter != (s8) *src_iter;
+                    for (; (s8) *mnNameNew_NullCharacter != (s8) *src_iter;
                          dest_iter++, dest++, len++, src_iter++)
                     {
                         *dest_iter = *src_iter;
@@ -1295,7 +1512,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     src += 3;
                     src_iter = src;
                     dest_iter = dest;
-                    for (; (s8) mnNameNew_NullCharacter != (s8) *src_iter;
+                    for (; (s8) *mnNameNew_NullCharacter != (s8) *src_iter;
                          dest_iter++, dest++, len++, src_iter++)
                     {
                         *dest_iter = *src_iter;
@@ -1304,7 +1521,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     src += 3;
                     src_iter = src;
                     dest_iter = dest;
-                    for (; (s8) mnNameNew_NullCharacter != (s8) *src_iter;
+                    for (; (s8) *mnNameNew_NullCharacter != (s8) *src_iter;
                          dest_iter++, dest++, len++, src_iter++)
                     {
                         *dest_iter = *src_iter;
@@ -1313,16 +1530,16 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     src += 3;
                     src_iter = src;
                     dest_iter = dest;
-                    for (; (s8) mnNameNew_NullCharacter != (s8) *src_iter;
+                    for (; (s8) *mnNameNew_NullCharacter != (s8) *src_iter;
                          dest_iter++, dest++, len++, src_iter++)
                     {
                         *dest_iter = *src_iter;
                     }
                 }
 
-                sp24[len] = (u8) mnNameNew_NullCharacter;
+                sp24[len] = (u8) *mnNameNew_NullCharacter;
 
-                if ((s8) name_text[0] == (s8) mnNameNew_NullCharacter) {
+                if ((s8) name_text[0] == (s8) *mnNameNew_NullCharacter) {
                     n = 1;
                 } else {
                     n = 0;
@@ -1372,7 +1589,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
         }
         if (buttons & 0x20) {
             lbAudioAx_80024030(0);
-            null_char = (s8) mnNameNew_NullCharacter;
+            null_char = (s8) *mnNameNew_NullCharacter;
             if (null_char == (s8) name_text[0]) {
                 occupied_slots = 1;
             }
@@ -1390,12 +1607,12 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 n = 0;
             }
             if (n != 0) {
-                name_text[cursor * 3] = mnNameNew_NullCharacter;
+                name_text[cursor * 3] = *mnNameNew_NullCharacter;
                 mnNameNew_8023CE4C();
                 return;
             }
             if (cursor != 0) {
-                name_text[(u8) (cursor - 1) * 3] = mnNameNew_NullCharacter;
+                name_text[(u8) (cursor - 1) * 3] = *mnNameNew_NullCharacter;
                 data->cursor_pos = (u8) (data->cursor_pos - 1);
                 mnNameNew_8023CE4C();
                 return;
@@ -1463,7 +1680,7 @@ void mnNameNew_8023CE4C(void)
     text->font_size.y = 0.05f;
     text->text_color = mnNameNew_804D4F6C;
     for (; i < 4; i++) {
-        if ((s8) mnNameNew_NullCharacter ==
+        if ((s8) *mnNameNew_NullCharacter ==
             (s8) mnNameNew_CurrentNameText[i * 3])
         {
             break;
@@ -1977,7 +2194,7 @@ s32 InitNameEntryUIState(NameNewEntry* arg0, s32 arg1)
     arg0->key_text = 0;
     arg0->name_disp_text = 0;
     arg0->desc_text = 0;
-    null_char = (s8) mnNameNew_NullCharacter;
+    null_char = (s8) *mnNameNew_NullCharacter;
     names = AutoNamesList;
     while (null_char != (s8) * *names) {
         names++;
@@ -2066,10 +2283,10 @@ void mnNameNew_EnterFromMnName(UNK_T arg0)
         mn_804A04F0.hovered_selection = 0;
     }
     mnNameNew_PortInUse = 4;
-    text[0] = mnNameNew_NullCharacter;
-    text[3] = mnNameNew_NullCharacter;
-    text[6] = mnNameNew_NullCharacter;
-    text[9] = mnNameNew_NullCharacter;
+    text[0] = *mnNameNew_NullCharacter;
+    text[3] = *mnNameNew_NullCharacter;
+    text[6] = *mnNameNew_NullCharacter;
+    text[9] = *mnNameNew_NullCharacter;
     mnNameNew_8023E32C((s32) arg0);
 }
 
@@ -2169,10 +2386,10 @@ void mnNameNew_EnterFromMnCharSel(HSD_Archive* arg0, s32 arg1)
                               (HSD_GObjEvent) mnNameNew_MainInput, 0U);
     proc->flags_3 = HSD_GObj_804D783C;
 
-    text[0] = mnNameNew_NullCharacter;
-    text[3] = mnNameNew_NullCharacter;
-    text[6] = mnNameNew_NullCharacter;
-    text[9] = mnNameNew_NullCharacter;
+    text[0] = *mnNameNew_NullCharacter;
+    text[3] = *mnNameNew_NullCharacter;
+    text[6] = *mnNameNew_NullCharacter;
+    text[9] = *mnNameNew_NullCharacter;
 
     mnNameNew_8023E32C((s32) name_count);
     lbAudioAx_80023F28(gmMainLib_8015ECB0());
