@@ -60,7 +60,8 @@ typedef struct _MenuRulesPlusData {
 
 typedef struct mn_803ED1D0_t {
     u16 x0[7];
-    u16 xE[6];
+    u16 pad_E;
+    u16 x10[6];
     float text_start_frames[12];
     AnimLoopSettings x4C;
     AnimLoopSettings x58;
@@ -72,6 +73,7 @@ ASSERT_SIZE(mn_803ED1D0_t, 0xA0);
 
 mn_803ED1D0_t mn_803ED1D0 = {
     { 3, 4, 5, 6, 7, 8, 9 },
+    0,
     { 7, 2, 2, 2, 2, 0 },
     { 20.0f, 21.0f, 22.0f, 23.0f, 24.0f, 25.0f, 26.0f, 27.0f, 28.0f, 29.0f,
       30.0f, 31.0f },
@@ -853,7 +855,7 @@ HSD_GObj* mn_80233218(MenuState state)
     }
 
     frame_ptr = mn_803ED1D0.text_start_frames;
-    sub_count_ptr = &mn_803ED1D0.xE[1];
+    sub_count_ptr = &mn_803ED1D0.x10[1];
     for (i = 0; i < (s32) num_options; i++) {
         vis_before = 0;
         for (j = vis_before; j < i; j++) {
