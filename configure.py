@@ -1131,7 +1131,7 @@ config.libs = [
             Object(Testing, "melee/gm/gm_16F1.c"),
             Object(Matching, "melee/gm/gm_1736.c"),
             Object(Testing, "melee/gm/gmresult.c"),
-            Object(NonMatching, "melee/gm/gmresultplayer.c"),
+            Object(Testing, "melee/gm/gmresultplayer.c"),
             Object(Matching, "melee/gm/gm_17AD.c"),
             Object(Matching, "melee/gm/gm_17BA.c"),
             Object(Matching, "melee/gm/gmregcommon.c"),
