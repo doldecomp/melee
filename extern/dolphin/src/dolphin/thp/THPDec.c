@@ -27,11 +27,12 @@ static u16* __THPHuffmanCodeTab;
 static THPSample* Gbase ATTRIBUTE_ALIGN(32);
 static u32 Gwid ATTRIBUTE_ALIGN(32);
 static f32* Gq ATTRIBUTE_ALIGN(32);
-static struct THPLCWork {
+struct THPLCWork {
     u8* offsets512[2][5];
     u8* offsets672[2][9];
     u8* work512[3];
-} __THPLC;
+};
+static struct THPLCWork __THPLC;
 static u8* __THPLCWork672[3];
 static u32 __THPOldGQR5;
 static u32 __THPOldGQR6;
@@ -2856,15 +2857,31 @@ struct THPLCSizeEntry {
     u32 size;
 };
 
+/// THPInit initializes the adjacent LC work objects as one layout.
 struct THPInitWork {
-    u8* offsets512[2][5];
-    u8* offsets672[2][9];
-    u8* work512[3];
+    struct THPLCWork cache;
     u8* work672[3];
 };
 
-extern struct THPLCSizeEntry __THPLCSizeTableA[5];
-extern struct THPLCSizeEntry __THPLCSizeTableB[9];
+static struct THPLCSizeEntry __THPLCSizeTableA[5] = {
+    { 0, 0x1000 },
+    { 1, 0x400 },
+    { 2, 0x400 },
+    { 3, 0x400 },
+    { 4, 0x400 },
+};
+
+static struct THPLCSizeEntry __THPLCSizeTableB[9] = {
+    { 0, 0x1000 },
+    { 1, 0x200 },
+    { 2, 0x200 },
+    { 3, 0x200 },
+    { 4, 0x200 },
+    { 5, 0x200 },
+    { 6, 0x200 },
+    { 7, 0x200 },
+    { 8, 0x200 },
+};
 
 // clang-format off
 static inline void OSInitFastCast(void) {
@@ -2908,7 +2925,7 @@ void THPInit(void)
     base = (u8*) 0xE0000000;
     for (j = 0; j < 2; j++) {
         for (i = 0; i < 5; i++) {
-            work->offsets512[j][i] = base;
+            work->cache.offsets512[j][i] = base;
             base += __THPLCSizeTableA[i].size;
         }
     }
@@ -2916,17 +2933,17 @@ void THPInit(void)
     base = (u8*) 0xE0000000;
     for (j = 0; j < 2; j++) {
         for (i = 0; i < 9; i++) {
-            work->offsets672[j][i] = base;
+            work->cache.offsets672[j][i] = base;
             base += __THPLCSizeTableB[i].size;
         }
     }
 
     base             = (u8*) 0xE0000000;
-    work->work512[0] = base;
+    work->cache.work512[0] = base;
     base += 0x2000;
-    work->work512[1] = base;
+    work->cache.work512[1] = base;
     base += 0x800;
-    work->work512[2] = base;
+    work->cache.work512[2] = base;
 
     base             = (u8*) 0xE0000000;
     work->work672[0] = base;
@@ -2937,23 +2954,3 @@ void THPInit(void)
 
     OSInitFastCast();
 }
-
-struct THPLCSizeEntry __THPLCSizeTableA[5] = {
-    { 0, 0x1000 },
-    { 1, 0x400 },
-    { 2, 0x400 },
-    { 3, 0x400 },
-    { 4, 0x400 },
-};
-
-struct THPLCSizeEntry __THPLCSizeTableB[9] = {
-    { 0, 0x1000 },
-    { 1, 0x200 },
-    { 2, 0x200 },
-    { 3, 0x200 },
-    { 4, 0x200 },
-    { 5, 0x200 },
-    { 6, 0x200 },
-    { 7, 0x200 },
-    { 8, 0x200 },
-};
