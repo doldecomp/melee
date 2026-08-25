@@ -2145,10 +2145,24 @@ static inline int fn_803AD16C_same(s32 lhs, s32 rhs)
     return lhs == rhs;
 }
 
+static inline void fn_803AD16C_own(void* value)
+{
+    (void) value;
+}
+
 static inline s32 fn_803AD16C_queue_read(CardState* state, s32 block)
 {
-    s32 cmd[9];
-    s32 pad = fn_803ACBE8(state, block);
+    s32 cmd[8];
+    u32 size = state->x8;
+    u32 temp = state->x24 + size;
+    u32 num = temp + 0x2F;
+    u32 idx;
+    s32 pad;
+
+    temp = num / size;
+    idx = temp - 1;
+    idx = block + idx;
+    pad = size * idx;
 
     cmd[0] = 0xF;
     cmd[1] = (s32) state;
@@ -2160,8 +2174,17 @@ static inline s32 fn_803AD16C_queue_read(CardState* state, s32 block)
 static inline s32 fn_803AD16C_queue_write(CardState* state, s32 block,
                                           s32 logical, s32 target_seq)
 {
-    s32 cmd[9];
-    s32 pad = fn_803ACBE8(state, block);
+    s32 cmd[8];
+    u32 size = state->x8;
+    u32 temp = state->x24 + size;
+    u32 num = temp + 0x2F;
+    u32 idx;
+    s32 pad;
+
+    temp = num / size;
+    idx = temp - 1;
+    idx = block + idx;
+    pad = size * idx;
 
     cmd[0] = 0x10;
     cmd[1] = (s32) state;
@@ -2169,6 +2192,32 @@ static inline s32 fn_803AD16C_queue_write(CardState* state, s32 block,
     cmd[4] = logical;
     cmd[5] = target_seq;
     cmd[7] = pad;
+    return fn_803AC168(cmd);
+}
+
+static inline s32 fn_803AD16C_queue_write_last(CardState* state, s32 block,
+                                               s32 logical, s32 target_seq)
+{
+    s32 tail[3];
+    s32 cmd[8];
+    u32 size = state->x8;
+    u32 temp = state->x24 + size;
+    u32 num = temp + 0x2F;
+    u32 idx;
+    s32 pad;
+
+    temp = num / size;
+    idx = temp - 1;
+    idx = block + idx;
+    pad = size * idx;
+
+    cmd[0] = 0x10;
+    cmd[1] = (s32) state;
+    cmd[3] = block;
+    cmd[4] = logical;
+    cmd[5] = target_seq;
+    cmd[7] = pad;
+    fn_803AD16C_own(tail);
     return fn_803AC168(cmd);
 }
 
@@ -2188,7 +2237,7 @@ s32 fn_803AD16C(CardState* state)
     s32 ofs;
     s32 blocks_before;
     s32 file_blocks;
-    PAD_STACK(20);
+    PAD_STACK(56);
 
     result = 0;
     for (i = 0; i <= state->x460; i++) {
@@ -2411,8 +2460,8 @@ s32 fn_803AD16C(CardState* state)
                             continue;
                         }
                         {
-                            ret = fn_803AD16C_queue_write(state, dup, logical,
-                                                          target_seq);
+                            ret = fn_803AD16C_queue_write_last(
+                                state, dup, logical, target_seq);
                         }
                     } while (0);
                 }
