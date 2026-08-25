@@ -2143,8 +2143,8 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                     }
                                 }
                                 {
-                                    f32 glyph_size = 32.0F * text->x80.y;
                                     f32 scale_y = text->font_size.y;
+                                    f32 glyph_size = 32.0F * text->x80.y;
                                     f32 uv_top = 0.0F;
                                     f32 glyph_w = 32.0F * text->x80.x * scale_x;
                                     f32 quad_right = (text->x88 * glyph_w) + glyph_x;
