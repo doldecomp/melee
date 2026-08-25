@@ -141,9 +141,9 @@ void hsd_803A949C(s32 chan, s32 arg1)
     CardState* state;
     CardBlock* block;
     s32 result;
+    s32 icon_size;
     s32 remaining;
     s32 remaining11;
-    s32 icon_size;
     s32 offset;
     s32 data_offset;
     s32 hdr_plus_icon;
