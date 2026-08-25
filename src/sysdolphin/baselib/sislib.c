@@ -1750,7 +1750,6 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
 
     u8 *data = M2C_BITWISE(u8*, HSD_SisLib_FontAtlas);
     u8 *default_kerning = HSD_SisLib_8040CB00;
-    UNUSED u8 unused[8];
 
     if (gobj != NULL) {
         if (pass != 2U) {
@@ -2168,7 +2167,10 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                         if ((min_x > quad_right) || (max_x < glyph_x) || (min_y > quad_bottom) || (max_y < quad_top)) {
                                             goto glyph_draw_done;
                                         }
-                                        quad_top = (scale_x = quad_top);
+#ifdef MUST_MATCH
+                                        (void) (glyph_y = glyph_y);
+#endif
+                                        (void) quad_top;
                                         if (min_x > glyph_x) {
                                             f32 clip_left = min_x - glyph_x;
                                             uv_left = clip_left / glyph_w;
