@@ -2004,8 +2004,8 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                         case 10:
                             if (((u32) text->alloc_data == 0U) || (saved_kerning == 0)) {
                                 HSD_SisLib_803A7684(text, sis_cursor, 1U);
-                                text->x78.x = (f32) ((f32) *(s16*) (sis_cursor + 1) * 0.00390625F);
-                                text->x78.y = (f32) ((f32) *(s16*) (sis_cursor + 3) * 0.00390625F);
+                                text->x78.x = (f32) *(s16*) (sis_cursor + 1) / 256.0F;
+                                text->x78.y = (f32) *(s16*) (sis_cursor + 3) / 256.0F;
                             }
                             sis_cursor += 4;
                             break;
@@ -2026,8 +2026,8 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                             break;
                         case 14:
                             HSD_SisLib_803A7684(text, sis_cursor, 3U);
-                            text->x80.x = (f32) ((f32) *(u16*) (sis_cursor + 1) * 0.00390625F);
-                            text->x80.y = (f32) ((f32) *(u16*) (sis_cursor + 3) * 0.00390625F);
+                            text->x80.x = (f32) *(u16*) (sis_cursor + 1) / 256.0F;
+                            text->x80.y = (f32) *(u16*) (sis_cursor + 3) / 256.0F;
                             sis_cursor += 4;
                             break;
                         case 15:
