@@ -28,7 +28,8 @@ static THPSample* Gbase ATTRIBUTE_ALIGN(32);
 static u32 Gwid ATTRIBUTE_ALIGN(32);
 static f32* Gq ATTRIBUTE_ALIGN(32);
 static struct THPLCWork {
-    void* offset[28];
+    u8* offsets512[2][5];
+    u8* offsets672[2][9];
     u8* work512[3];
 } __THPLC;
 static u8* __THPLCWork672[3];
@@ -2855,25 +2856,15 @@ struct THPLCSizeEntry {
     u32 size;
 };
 
-static struct THPLCSizeEntry __THPLCSizeTableA[5] = {
-    { 0, 0x1000 },
-    { 1, 0x400 },
-    { 2, 0x400 },
-    { 3, 0x400 },
-    { 4, 0x400 },
+struct THPInitWork {
+    u8* offsets512[2][5];
+    u8* offsets672[2][9];
+    u8* work512[3];
+    u8* work672[3];
 };
 
-static struct THPLCSizeEntry __THPLCSizeTableB[9] = {
-    { 0, 0x1000 },
-    { 1, 0x200 },
-    { 2, 0x200 },
-    { 3, 0x200 },
-    { 4, 0x200 },
-    { 5, 0x200 },
-    { 6, 0x200 },
-    { 7, 0x200 },
-    { 8, 0x200 },
-};
+extern struct THPLCSizeEntry __THPLCSizeTableA[5];
+extern struct THPLCSizeEntry __THPLCSizeTableB[9];
 
 // clang-format off
 static inline void OSInitFastCast(void) {
@@ -2902,55 +2893,67 @@ static inline void OSInitFastCast(void) {
 }
 // clang-format on
 
-BOOL THPInit(void)
+void THPInit(void)
 {
-    void* base;
-    struct THPLCSizeEntry* sizes;
-    u32 hid2 = PPCMfhid2();
+    u8* base;
     int i;
+    int j;
+    struct THPInitWork* work = (struct THPInitWork*) &__THPLC;
 
-    if ((hid2 & 0x10000000) == 0) {
+    if ((PPCMfhid2() & 0x10000000) == 0) {
         DCInvalidateRange((void*) 0xE0000000, 0x4000);
         LCEnable();
     }
 
-    base              = (void*) 0xE0000000;
-    __THPLC.offset[0] = base;
-    sizes             = __THPLCSizeTableA;
-    for (i = 0; i < 5; i++) {
-        base = (u8*) base + sizes[i].size;
-        __THPLC.offset[1 + i] = base;
-    }
-    for (i = 0; i < 4; i++) {
-        base = (u8*) base + sizes[i].size;
-        __THPLC.offset[6 + i] = base;
+    base = (u8*) 0xE0000000;
+    for (j = 0; j < 2; j++) {
+        for (i = 0; i < 5; i++) {
+            work->offsets512[j][i] = base;
+            base += __THPLCSizeTableA[i].size;
+        }
     }
 
-    base               = (void*) 0xE0000000;
-    __THPLC.offset[10] = base;
-    sizes              = __THPLCSizeTableB;
-    for (i = 0; i < 9; i++) {
-        base = (u8*) base + sizes[i].size;
-        __THPLC.offset[11 + i] = base;
-    }
-    for (i = 0; i < 8; i++) {
-        base = (u8*) base + sizes[i].size;
-        __THPLC.offset[20 + i] = base;
+    base = (u8*) 0xE0000000;
+    for (j = 0; j < 2; j++) {
+        for (i = 0; i < 9; i++) {
+            work->offsets672[j][i] = base;
+            base += __THPLCSizeTableB[i].size;
+        }
     }
 
-    base               = (void*) 0xE0000000;
-    __THPLC.work512[0] = base;
-    base               = (u8*) base + 0x2000;
-    __THPLC.work512[1] = base;
-    base               = (u8*) base + 0x800;
-    __THPLC.work512[2] = base;
+    base             = (u8*) 0xE0000000;
+    work->work512[0] = base;
+    base += 0x2000;
+    work->work512[1] = base;
+    base += 0x800;
+    work->work512[2] = base;
 
-    base              = (void*) 0xE0000000;
-    __THPLCWork672[0] = base;
-    base              = (u8*) base + 0x2800;
-    __THPLCWork672[1] = base;
-    base              = (u8*) base + 0xA00;
-    __THPLCWork672[2] = base;
+    base             = (u8*) 0xE0000000;
+    work->work672[0] = base;
+    base += 0x2800;
+    work->work672[1] = base;
+    base += 0xA00;
+    work->work672[2] = base;
 
     OSInitFastCast();
 }
+
+struct THPLCSizeEntry __THPLCSizeTableA[5] = {
+    { 0, 0x1000 },
+    { 1, 0x400 },
+    { 2, 0x400 },
+    { 3, 0x400 },
+    { 4, 0x400 },
+};
+
+struct THPLCSizeEntry __THPLCSizeTableB[9] = {
+    { 0, 0x1000 },
+    { 1, 0x200 },
+    { 2, 0x200 },
+    { 3, 0x200 },
+    { 4, 0x200 },
+    { 5, 0x200 },
+    { 6, 0x200 },
+    { 7, 0x200 },
+    { 8, 0x200 },
+};

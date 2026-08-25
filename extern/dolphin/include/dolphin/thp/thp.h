@@ -93,7 +93,7 @@ u8 THPDec_80330158(THPFileInfo* info);
 void THPDec_80331340(s32, void*, void*, void*);
 void THPDec_803313D0(s32, void*, void*, void*, u32);
 void THPDec_803300E0(u32* data);
-BOOL THPInit(void);
+void THPInit(void);
 
 #ifdef __cplusplus
 }
