@@ -1666,7 +1666,7 @@ config.libs = [
     DolphinLib(
         "thp",
         [
-            Object(NonMatching, "dolphin/thp/THPDec.c"),
+            Object(Matching, "dolphin/thp/THPDec.c"),
         ],
     ),
     DolphinLib(
