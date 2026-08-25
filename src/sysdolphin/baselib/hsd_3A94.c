@@ -2159,7 +2159,7 @@ s32 fn_803AD16C(CardState* state)
     s32 ofs;
     s32 blocks_before;
     s32 file_blocks;
-    PAD_STACK(48);
+    PAD_STACK(64);
 
     result = 0;
     for (i = 0; i <= state->x460; i++) {
@@ -2346,7 +2346,7 @@ s32 fn_803AD16C(CardState* state)
                     if (newmap[logical] == 0 || dup == 0) {
                         ret = -0x101;
                     } else {
-                        s32 cmd[9];
+                        s32 cmd[8];
                         pad = fn_803ACBE8(state, newmap[logical]);
                         cmd[0] = 0xF;
                         cmd[1] = (s32) state;
@@ -2354,7 +2354,7 @@ s32 fn_803AD16C(CardState* state)
                         cmd[7] = pad;
                         ret = fn_803AC168(cmd);
                         if (ret >= 0) {
-                            s32 cmd2[9];
+                            s32 cmd2[8];
                             pad = fn_803ACBE8(state, dup);
                             cmd2[0] = 0x10;
                             cmd2[1] = (s32) state;
@@ -2373,7 +2373,7 @@ s32 fn_803AD16C(CardState* state)
                 if (newmap[logical] == 0 || dup == 0) {
                     ret = -0x101;
                 } else {
-                    s32 cmd[9];
+                    s32 cmd[8];
                     pad = fn_803ACBE8(state, newmap[logical]);
                     cmd[0] = 0xF;
                     cmd[1] = (s32) state;
@@ -2384,7 +2384,7 @@ s32 fn_803AD16C(CardState* state)
                         ret = cmd_result;
                     }
                     if (ret >= 0) {
-                        s32 cmd2[9];
+                        s32 cmd2[8];
                         pad = fn_803ACBE8(state, dup);
                         cmd2[0] = 0x10;
                         cmd2[1] = (s32) state;
