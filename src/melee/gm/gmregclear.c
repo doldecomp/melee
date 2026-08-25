@@ -558,7 +558,11 @@ void gm_8017C984(UNK_T arg0)
     memzero(arg0, 0x74);
 }
 
-extern u8 lbl_803B7C08[][5];
+static const u8 lbl_803B7C08[3][5] = {
+    { 1, 2, 3, 5, 10 },
+    { 1, 2, 3, 5, 10 },
+    { 10, 10, 10, 10, 10 },
+};
 
 void gm_8017C9A8(DebugGameOverData* arg0, Unk1PData* arg1, u8 arg2)
 {
@@ -2101,7 +2105,7 @@ typedef struct fn_8017FA1C_arg {
     /* 0x11B */ u8 x11B;
 } fn_8017FA1C_arg;
 
-extern Vec3 lbl_803B7C18;
+static const Vec3 lbl_803B7C18 = { -41.0f, -0.25f, 0.0f };
 
 void fn_8017F608(void* arg0)
 {
