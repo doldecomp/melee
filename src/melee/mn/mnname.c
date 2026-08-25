@@ -27,14 +27,14 @@
 #include <baselib/memory.h>
 #include <melee/gm/gmmain_lib.h>
 
-extern char mnName_StringTerminator;
-extern char mnName_804D4BF0;
-
-extern f32 mnName_804D4BD0[2];
-extern f32 mnName_804D4BD8[2];
-extern GXColor mnName_804D4BE0;
-extern GXColor mnName_804D4BE4;
-extern u8 mnName_804D4BE8[3];
+f32 mnName_804D4BD0[2] = { 39.0f, 59.0f };
+f32 mnName_804D4BD8[2] = { 39.0f, 19.0f };
+GXColor mnName_804D4BE0 = { 0, 0, 0, 0xFF };
+GXColor mnName_804D4BE4 = { 0xA6, 0x81, 0x3D, 0xFF };
+u8 mnName_804D4BE8[4] = { 0x93, 0x94, 0x95, 0 };
+char mnName_StringTerminator[1] = "";
+/// SJIS full-width space, compared against a name's first character.
+char mnName_804D4BF0[3] = "　";
 
 extern char* mnNameNew_803EE720[];
 extern char* mnNameNew_803EE724[];
@@ -65,13 +65,13 @@ char* mnName_8023749C(int slot)
 
     new_var = (u8) slot;
     for (j = 0;
-         (j != new_var) && (mnName_StringTerminator != ((s8) array[j][0]));
+         (j != new_var) && (*mnName_StringTerminator != ((s8) array[j][0]));
          j++)
     {
     }
 
     str = array[j];
-    terminator = (s8) mnName_StringTerminator;
+    terminator = (s8) *mnName_StringTerminator;
     if (terminator == str[0]) {
         str = NULL;
     }
@@ -125,8 +125,8 @@ bool IsNameListFull(void)
 
 static inline bool checkStringRest(const char* ptr)
 {
-    char* term = &mnName_StringTerminator;
-    char* cmp = &mnName_804D4BF0;
+    char* term = mnName_StringTerminator;
+    char* cmp = mnName_804D4BF0;
     char c = cmp[0];
     while (*term != *ptr) {
         if (c != *ptr || cmp[1] != ptr[1]) {
@@ -145,7 +145,7 @@ s32 CompareNameStrings(char* str1, char* str2)
     for (i = 0, p2 = str2, p1 = str1;; i++, p1++, p2++) {
         char* ch1 = &str1[i];
 
-        if (mnName_StringTerminator == *ch1) {
+        if (*mnName_StringTerminator == *ch1) {
             if (checkStringRest(&str2[i & 0xFFFFFFFFFFFFFFFF])) {
                 return 0;
             }
@@ -155,7 +155,7 @@ s32 CompareNameStrings(char* str1, char* str2)
         {
             char ch2 = str2[i];
 
-            if (mnName_StringTerminator == ch2) {
+            if (*mnName_StringTerminator == ch2) {
                 if (checkStringRest(&str1[i])) {
                     return 0;
                 }
@@ -239,7 +239,7 @@ void DeleteName(u8 arg0)
 
 bool IsNameValid(int slot)
 {
-    if (mnName_StringTerminator ==
+    if (*mnName_StringTerminator ==
         (s8) GetPersistentNameData((u8) slot)->namedata[0])
     {
         return false;
@@ -250,7 +250,7 @@ bool IsNameValid(int slot)
 void CreateNameAtIndex(s32 slot)
 {
     s32 idx = slot & 0xFF;
-    GetPersistentNameData(idx)->namedata[0] = mnName_StringTerminator;
+    GetPersistentNameData(idx)->namedata[0] = *mnName_StringTerminator;
     GetPersistentNameData(idx)->rumble_toggle = true;
     InitializePersistentNameData(slot);
 }
@@ -287,7 +287,7 @@ void mnName_SortNames(HSD_GObj* arg0)
                 {
                     bool e1, e2;
 
-                    if ((s8) mnName_StringTerminator ==
+                    if ((s8) *mnName_StringTerminator ==
                         (s8) GetPersistentNameData((s32) idx1)->namedata[0])
                     {
                         e1 = 0;
@@ -295,7 +295,7 @@ void mnName_SortNames(HSD_GObj* arg0)
                         e1 = 1;
                     }
                     if (e1 != 0) {
-                        if ((s8) mnName_StringTerminator ==
+                        if ((s8) *mnName_StringTerminator ==
                             (s8) GetPersistentNameData((s32) idx2)
                                 ->namedata[0])
                         {
@@ -310,7 +310,7 @@ void mnName_SortNames(HSD_GObj* arg0)
                         }
                     } else {
                     block_15:
-                        if ((s8) mnName_StringTerminator ==
+                        if ((s8) *mnName_StringTerminator ==
                             (s8) GetPersistentNameData((s32) idx1)
                                 ->namedata[0])
                         {
@@ -319,7 +319,7 @@ void mnName_SortNames(HSD_GObj* arg0)
                             e1 = 1;
                         }
                         if (e1 == 0) {
-                            if ((s8) mnName_StringTerminator ==
+                            if ((s8) *mnName_StringTerminator ==
                                 (s8) GetPersistentNameData((s32) idx2)
                                     ->namedata[0])
                             {
@@ -334,7 +334,7 @@ void mnName_SortNames(HSD_GObj* arg0)
                             }
                         } else {
                         block_24:
-                            if ((s8) mnName_StringTerminator ==
+                            if ((s8) *mnName_StringTerminator ==
                                 (s8) GetPersistentNameData((s32) idx1)
                                     ->namedata[0])
                             {
@@ -469,7 +469,7 @@ void mnName_ConfirmNameDeleteInput(HSD_GObj* arg0)
             nameIdx = mnName_NameDisplayOrder[idx];
             sfxForward();
             {
-                u8 term = mnName_StringTerminator;
+                u8 term = *mnName_StringTerminator;
                 nameIdxInt = (u8) nameIdx;
                 mn_804D6BC8.cooldown = 5;
                 GetPersistentNameData(nameIdxInt)->namedata[0] = term;
@@ -528,7 +528,7 @@ static inline u8 mnName_CountValid(void)
     u8 count = 0;
 
     for (i = 0; i < 0x78; i++) {
-        if ((s8) mnName_StringTerminator ==
+        if ((s8) *mnName_StringTerminator ==
             (s8) GetPersistentNameData((s32) (u8) i)->namedata[0])
         {
             isValid = 0;
@@ -608,7 +608,7 @@ void mnName_MainInput(HSD_GObj* arg0)
             if (mn_804A04F0.hovered_selection < 0x18U) {
                 s32 isValid;
                 u8 nameIdx = mnName_GetHoveredName();
-                if ((s8) mnName_StringTerminator ==
+                if ((s8) *mnName_StringTerminator ==
                     (s8) GetPersistentNameData((s32) nameIdx)->namedata[0])
                 {
                     isValid = 0;
@@ -1212,7 +1212,7 @@ void mnName_80239A24(HSD_GObj* gobj)
         name_idx = mnName_NameDisplayOrder[((u8) j % 6) + (row * 6)];
         {
             s32 is_valid;
-            if ((s8) (u8) mnName_StringTerminator ==
+            if ((s8) (u8) *mnName_StringTerminator ==
                 (s8) GetPersistentNameData((s32) name_idx)->namedata[0])
             {
                 is_valid = 0;
@@ -1222,7 +1222,7 @@ void mnName_80239A24(HSD_GObj* gobj)
             if (is_valid != 0) {
                 char* namedata;
                 s32 is_valid2;
-                if ((s8) (u8) mnName_StringTerminator ==
+                if ((s8) (u8) *mnName_StringTerminator ==
                     (s8) GetPersistentNameData((s32) name_idx)->namedata[0])
                 {
                     is_valid2 = 0;
@@ -1257,8 +1257,7 @@ void mnName_80239A24(HSD_GObj* gobj)
                     }
                 }
             } else {
-                HSD_SisLib_803A6B98(text, 0.0f, 0.0f,
-                                    &mnName_StringTerminator);
+                HSD_SisLib_803A6B98(text, 0.0f, 0.0f, mnName_StringTerminator);
             }
         }
         j++;
