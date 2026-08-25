@@ -2212,15 +2212,12 @@ s32 fn_803AD16C(CardState* state)
             }
 
             {
-                s32 count = 0;
                 for (i = 0; i < file_blocks; i++) {
-                    if (filemap[i] >= 0 && cur_seq == seq[filemap[i]]) {
-                        count++;
-                    } else {
+                    if (filemap[i] < 0 || cur_seq != seq[filemap[i]]) {
                         break;
                     }
                 }
-                if (count == file_blocks) {
+                if (i == file_blocks) {
                     for (i = 0; i < file_blocks; i++) {
                         chosen[i] = filemap[i];
                     }
