@@ -2716,8 +2716,6 @@ static inline void OSInitFastCast(void) {
         oris    r3, r3, OS_GQR_S16
         mtspr   GQR5, r3
   }
-#else
-
 #endif
 }
 // clang-format on
