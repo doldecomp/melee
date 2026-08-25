@@ -291,7 +291,17 @@ void hsd_803A949C(s32 chan, s32 arg1)
             break;
         }
 
-        icon_size = hsd_803A949C_IconSize(state);
+        switch (state->x3B0) {
+        case 2:
+            icon_size = 0x1800;
+            break;
+        case 1:
+            icon_size = 0xE00;
+            break;
+        default:
+            icon_size = 0;
+            break;
+        }
 
         if (CMD_S32(0x18) == 0) {
             if (memcmp(state->x0, state->x370, 0x40) != 0) {
