@@ -34,7 +34,7 @@ GXColor mnName_804D4BE4 = { 0xA6, 0x81, 0x3D, 0xFF };
 u8 mnName_804D4BE8[4] = { 0x93, 0x94, 0x95, 0 };
 char mnName_StringTerminator[1] = "";
 /// SJIS full-width space, compared against a name's first character.
-char mnName_804D4BF0[3] = "　";
+char mnName_804D4BF0[4] = "　";
 
 extern char* mnNameNew_803EE720[];
 extern char* mnNameNew_803EE724[];
