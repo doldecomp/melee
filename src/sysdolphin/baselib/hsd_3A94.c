@@ -542,7 +542,11 @@ void hsd_803A949C(s32 chan, s32 arg1)
                 state->x270[slot] = 0;
             } else {
                 state->x270[slot] = state->x0[offset + 0x12];
-                hsd_803AC558(state, state->x0 + offset + 0x13);
+                {
+                    u8* src13 =
+                        (u8*) (offset + (u32) state->x0);
+                    hsd_803AC558(state, src13 + 0x13);
+                }
             }
         } else {
             if (hsd_803B31CC(state->x0, state->x8) < 0) {
