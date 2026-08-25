@@ -2145,6 +2145,33 @@ static inline int fn_803AD16C_same(s32 lhs, s32 rhs)
     return lhs == rhs;
 }
 
+static inline s32 fn_803AD16C_queue_read(CardState* state, s32 block)
+{
+    s32 cmd[9];
+    s32 pad = fn_803ACBE8(state, block);
+
+    cmd[0] = 0xF;
+    cmd[1] = (s32) state;
+    cmd[3] = block;
+    cmd[7] = pad;
+    return fn_803AC168(cmd);
+}
+
+static inline s32 fn_803AD16C_queue_write(CardState* state, s32 block,
+                                          s32 logical, s32 target_seq)
+{
+    s32 cmd[9];
+    s32 pad = fn_803ACBE8(state, block);
+
+    cmd[0] = 0x10;
+    cmd[1] = (s32) state;
+    cmd[3] = block;
+    cmd[4] = logical;
+    cmd[5] = target_seq;
+    cmd[7] = pad;
+    return fn_803AC168(cmd);
+}
+
 s32 fn_803AD16C(CardState* state)
 {
     s32 work[64];
@@ -2161,7 +2188,7 @@ s32 fn_803AD16C(CardState* state)
     s32 ofs;
     s32 blocks_before;
     s32 file_blocks;
-    PAD_STACK(64);
+    PAD_STACK(20);
 
     result = 0;
     for (i = 0; i <= state->x460; i++) {
@@ -2349,13 +2376,7 @@ s32 fn_803AD16C(CardState* state)
                     if (newmap[logical] == 0 || dup == 0) {
                         ret = -0x101;
                     } else {
-                        s32 cmd[8];
-                        pad = fn_803ACBE8(state, newmap[logical]);
-                        cmd[0] = 0xF;
-                        cmd[1] = (s32) state;
-                        cmd[3] = newmap[logical];
-                        cmd[7] = pad;
-                        ret = fn_803AC168(cmd);
+                        ret = fn_803AD16C_queue_read(state, newmap[logical]);
                         do {
                             if (ret < 0) {
                                 if (ret == -0x101) {
@@ -2364,15 +2385,8 @@ s32 fn_803AD16C(CardState* state)
                                 continue;
                             }
                             {
-                                s32 cmd2[8];
-                                pad = fn_803ACBE8(state, dup);
-                                cmd2[0] = 0x10;
-                                cmd2[1] = (s32) state;
-                                cmd2[3] = dup;
-                                cmd2[4] = logical;
-                                cmd2[5] = target_seq;
-                                cmd2[7] = pad;
-                                ret = fn_803AC168(cmd2);
+                                ret = fn_803AD16C_queue_write(
+                                    state, dup, logical, target_seq);
                             }
                         } while (0);
                     }
@@ -2384,14 +2398,9 @@ s32 fn_803AD16C(CardState* state)
                 if (newmap[logical] == 0 || dup == 0) {
                     ret = -0x101;
                 } else {
-                    s32 cmd[8];
-                    pad = fn_803ACBE8(state, newmap[logical]);
-                    cmd[0] = 0xF;
-                    cmd[1] = (s32) state;
-                    cmd[3] = newmap[logical];
-                    cmd[7] = pad;
                     {
-                        s32 cmd_result = fn_803AC168(cmd);
+                        s32 cmd_result =
+                            fn_803AD16C_queue_read(state, newmap[logical]);
                         ret = cmd_result;
                     }
                     do {
@@ -2402,15 +2411,8 @@ s32 fn_803AD16C(CardState* state)
                             continue;
                         }
                         {
-                            s32 cmd2[8];
-                            pad = fn_803ACBE8(state, dup);
-                            cmd2[0] = 0x10;
-                            cmd2[1] = (s32) state;
-                            cmd2[3] = dup;
-                            cmd2[4] = logical;
-                            cmd2[5] = target_seq;
-                            cmd2[7] = pad;
-                            ret = fn_803AC168(cmd2);
+                            ret = fn_803AD16C_queue_write(state, dup, logical,
+                                                          target_seq);
                         }
                     } while (0);
                 }
