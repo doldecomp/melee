@@ -1781,9 +1781,15 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
             GXSetZMode(0U, 0U, 0U);
             GXSetViewport(0.0F, 0.0F, 640.0F, 480.0F, 0.0F, 1.0F);
             GXSetScissor(0, 0, 0x280, 0x1E0);
+#ifdef MUST_MATCH
+            MTXOrtho((MtxPtr) ((u8*) &projection_m[0][0] - 0x14), 0.0F,
+                     -480.0F, 0.0F, 640.0F, 0.0F, 2.0F);
+            GXSetProjection((MtxPtr) ((u8*) &projection_m[2][3] - 0x40), 0);
+#else
             MTXOrtho((MtxPtr)&projection_m, 0.0F, -480.0F, 0.0F, 640.0F,
                      0.0F, 2.0F);
             GXSetProjection((MtxPtr)&projection_m, 0);
+#endif
             m[0][0] = 1.0F;
             m[0][1] = 0.0F;
             m[0][2] = 0.0F;
