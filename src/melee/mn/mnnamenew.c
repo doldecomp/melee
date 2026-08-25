@@ -70,13 +70,11 @@ typedef struct MnNameNewDataLayout {
     char assert_cond[0xC];
 } MnNameNewDataLayout;
 
-char mnNameNew_NullCharacter[1] = "";
 extern u8 mnNameNew_PortInUse;
 extern u8** AutoNamesList;
 extern char** NotAllowedNamesList;
 extern u8 mn_804D6BB4;
 extern u8 mn_804D6BB5;
-u8 mnNameNew_804D4F7C[8] = { 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'H' };
 
 extern void* mnNameNew_804A06F0[4];
 extern void* mnNameNew_804A0700[4];
@@ -97,472 +95,86 @@ static AnimLoopSettings mnNameNew_803EDA58[3] = {
     { 0.0f, 10.0f, -0.1f },
 };
 
-/// Contents restored from the target unit's .data section (symbols.txt:
-/// mnNameNew_KeyMap at 0x803EDA7C size 0x268, mnNameNew_GlyphTable at
-/// 0x803EDCE4 size 0x64C); see build/GALE01/asm/melee/mn/mnnamenew.s.
-/// Kana/latin glyph literals for the name-entry keyboard; each is a
-/// Shift-JIS character referenced individually by mnNameNew_KeyMap.
-char mnNameNew_804D4C14[4] = "あ";
-char mnNameNew_804D4C18[4] = "い";
-char mnNameNew_804D4C1C[4] = "う";
-char mnNameNew_804D4C20[4] = "え";
-char mnNameNew_804D4C24[4] = "お";
-char mnNameNew_804D4C28[4] = "か";
-char mnNameNew_804D4C2C[4] = "き";
-char mnNameNew_804D4C30[4] = "く";
-char mnNameNew_804D4C34[4] = "け";
-char mnNameNew_804D4C38[4] = "こ";
-char mnNameNew_804D4C3C[4] = "さ";
-char mnNameNew_804D4C40[4] = "し";
-char mnNameNew_804D4C44[4] = "す";
-char mnNameNew_804D4C48[4] = "せ";
-char mnNameNew_804D4C4C[4] = "そ";
-char mnNameNew_804D4C50[4] = "た";
-char mnNameNew_804D4C54[4] = "ち";
-char mnNameNew_804D4C58[4] = "つ";
-char mnNameNew_804D4C5C[4] = "て";
-char mnNameNew_804D4C60[4] = "と";
-char mnNameNew_804D4C64[4] = "な";
-char mnNameNew_804D4C68[4] = "に";
-char mnNameNew_804D4C6C[4] = "ぬ";
-char mnNameNew_804D4C70[4] = "ね";
-char mnNameNew_804D4C74[4] = "の";
-char mnNameNew_804D4C78[4] = "は";
-char mnNameNew_804D4C7C[4] = "ひ";
-char mnNameNew_804D4C80[4] = "ふ";
-char mnNameNew_804D4C84[4] = "へ";
-char mnNameNew_804D4C88[4] = "ほ";
-char mnNameNew_804D4C8C[4] = "ま";
-char mnNameNew_804D4C90[4] = "み";
-char mnNameNew_804D4C94[4] = "む";
-char mnNameNew_804D4C98[4] = "め";
-char mnNameNew_804D4C9C[4] = "も";
-char mnNameNew_804D4CA0[4] = "や";
-char mnNameNew_804D4CA4[4] = "ゆ";
-char mnNameNew_804D4CA8[4] = "よ";
-char mnNameNew_SpaceCharacter[4] = "　";
-char mnNameNew_804D4CB0[4] = "ら";
-char mnNameNew_804D4CB4[4] = "り";
-char mnNameNew_804D4CB8[4] = "る";
-char mnNameNew_804D4CBC[4] = "れ";
-char mnNameNew_804D4CC0[4] = "ろ";
-char mnNameNew_804D4CC4[4] = "わ";
-char mnNameNew_804D4CC8[4] = "を";
-char mnNameNew_804D4CCC[4] = "ん";
-char mnNameNew_804D4CD0[4] = "ー";
-char mnNameNew_804D4CD4[4] = "。";
-char mnNameNew_804D4CD8[4] = "ア";
-char mnNameNew_804D4CDC[4] = "イ";
-char mnNameNew_804D4CE0[4] = "ウ";
-char mnNameNew_804D4CE4[4] = "エ";
-char mnNameNew_804D4CE8[4] = "オ";
-char mnNameNew_804D4CEC[4] = "カ";
-char mnNameNew_804D4CF0[4] = "キ";
-char mnNameNew_804D4CF4[4] = "ク";
-char mnNameNew_804D4CF8[4] = "ケ";
-char mnNameNew_804D4CFC[4] = "コ";
-char mnNameNew_804D4D00[4] = "サ";
-char mnNameNew_804D4D04[4] = "シ";
-char mnNameNew_804D4D08[4] = "ス";
-char mnNameNew_804D4D0C[4] = "セ";
-char mnNameNew_804D4D10[4] = "ソ";
-char mnNameNew_804D4D14[4] = "タ";
-char mnNameNew_804D4D18[4] = "チ";
-char mnNameNew_804D4D1C[4] = "ツ";
-char mnNameNew_804D4D20[4] = "テ";
-char mnNameNew_804D4D24[4] = "ト";
-char mnNameNew_804D4D28[4] = "ナ";
-char mnNameNew_804D4D2C[4] = "ニ";
-char mnNameNew_804D4D30[4] = "ヌ";
-char mnNameNew_804D4D34[4] = "ネ";
-char mnNameNew_804D4D38[4] = "ノ";
-char mnNameNew_804D4D3C[4] = "ハ";
-char mnNameNew_804D4D40[4] = "ヒ";
-char mnNameNew_804D4D44[4] = "フ";
-char mnNameNew_804D4D48[4] = "ヘ";
-char mnNameNew_804D4D4C[4] = "ホ";
-char mnNameNew_804D4D50[4] = "マ";
-char mnNameNew_804D4D54[4] = "ミ";
-char mnNameNew_804D4D58[4] = "ム";
-char mnNameNew_804D4D5C[4] = "メ";
-char mnNameNew_804D4D60[4] = "モ";
-char mnNameNew_804D4D64[4] = "ヤ";
-char mnNameNew_804D4D68[4] = "ユ";
-char mnNameNew_804D4D6C[4] = "ヨ";
-char mnNameNew_804D4D70[4] = "ラ";
-char mnNameNew_804D4D74[4] = "リ";
-char mnNameNew_804D4D78[4] = "ル";
-char mnNameNew_804D4D7C[4] = "レ";
-char mnNameNew_804D4D80[4] = "ロ";
-char mnNameNew_804D4D84[4] = "ワ";
-char mnNameNew_804D4D88[4] = "ヲ";
-char mnNameNew_804D4D8C[4] = "ン";
-char mnNameNew_804D4D90[4] = "Ｊ";
-char mnNameNew_804D4D94[4] = "Ｔ";
-char mnNameNew_804D4D98[4] = "９";
-char mnNameNew_804D4D9C[4] = "．";
-char mnNameNew_804D4DA0[4] = "Ｉ";
-char mnNameNew_804D4DA4[4] = "Ｓ";
-char mnNameNew_804D4DA8[4] = "８";
-char mnNameNew_804D4DAC[4] = "＄";
-char mnNameNew_804D4DB0[4] = "Ｈ";
-char mnNameNew_804D4DB4[4] = "Ｒ";
-char mnNameNew_804D4DB8[4] = "７";
-char mnNameNew_804D4DBC[4] = "＆";
-char mnNameNew_804D4DC0[4] = "Ｇ";
-char mnNameNew_804D4DC4[4] = "Ｑ";
-char mnNameNew_804D4DC8[4] = "６";
-char mnNameNew_804D4DCC[4] = "％";
-char mnNameNew_804D4DD0[4] = "Ｆ";
-char mnNameNew_804D4DD4[4] = "Ｐ";
-char mnNameNew_804D4DD8[4] = "Ｚ";
-char mnNameNew_804D4DDC[4] = "５";
-char mnNameNew_804D4DE0[4] = "＠";
-char mnNameNew_804D4DE4[4] = "Ｅ";
-char mnNameNew_804D4DE8[4] = "Ｏ";
-char mnNameNew_804D4DEC[4] = "Ｙ";
-char mnNameNew_804D4DF0[4] = "４";
-char mnNameNew_804D4DF4[4] = "？";
-char mnNameNew_804D4DF8[4] = "Ｄ";
-char mnNameNew_804D4DFC[4] = "Ｎ";
-char mnNameNew_804D4E00[4] = "Ｘ";
-char mnNameNew_804D4E04[4] = "３";
-char mnNameNew_804D4E08[4] = "！";
-char mnNameNew_804D4E0C[4] = "Ｃ";
-char mnNameNew_804D4E10[4] = "Ｍ";
-char mnNameNew_804D4E14[4] = "Ｗ";
-char mnNameNew_804D4E18[4] = "２";
-char mnNameNew_804D4E1C[4] = "＝";
-char mnNameNew_804D4E20[4] = "Ｂ";
-char mnNameNew_804D4E24[4] = "Ｌ";
-char mnNameNew_804D4E28[4] = "Ｖ";
-char mnNameNew_804D4E2C[4] = "１";
-char mnNameNew_804D4E30[4] = "＋";
-char mnNameNew_804D4E34[4] = "Ａ";
-char mnNameNew_804D4E38[4] = "Ｋ";
-char mnNameNew_804D4E3C[4] = "Ｕ";
-char mnNameNew_804D4E40[4] = "０";
-char mnNameNew_804D4E44[4] = "－";
-char mnNameNew_804D4E48[4] = "ぁ";
-char mnNameNew_804D4E50[4] = "ぃ";
-char mnNameNew_804D4E54[4] = "ぅ";
-char mnNameNew_804D4E58[4] = "ぇ";
-char mnNameNew_804D4E5C[4] = "ぉ";
-char mnNameNew_804D4E60[4] = "が";
-char mnNameNew_804D4E64[4] = "ぎ";
-char mnNameNew_804D4E68[4] = "ぐ";
-char mnNameNew_804D4E6C[4] = "げ";
-char mnNameNew_804D4E70[4] = "ご";
-char mnNameNew_804D4E74[4] = "ざ";
-char mnNameNew_804D4E78[4] = "じ";
-char mnNameNew_804D4E7C[4] = "ず";
-char mnNameNew_804D4E80[4] = "ぜ";
-char mnNameNew_804D4E84[4] = "ぞ";
-char mnNameNew_804D4E88[4] = "だ";
-char mnNameNew_804D4E8C[4] = "ぢ";
-char mnNameNew_804D4E90[4] = "づ";
-char mnNameNew_804D4E94[4] = "っ";
-char mnNameNew_804D4E98[4] = "で";
-char mnNameNew_804D4E9C[4] = "ど";
-char mnNameNew_804D4EA0[4] = "ば";
-char mnNameNew_804D4EA4[4] = "ぱ";
-char mnNameNew_804D4EA8[4] = "び";
-char mnNameNew_804D4EAC[4] = "ぴ";
-char mnNameNew_804D4EB0[4] = "ぶ";
-char mnNameNew_804D4EB4[4] = "ぷ";
-char mnNameNew_804D4EB8[4] = "べ";
-char mnNameNew_804D4EBC[4] = "ぺ";
-char mnNameNew_804D4EC0[4] = "ぼ";
-char mnNameNew_804D4EC4[4] = "ぽ";
-char mnNameNew_804D4EC8[4] = "ゃ";
-char mnNameNew_804D4ECC[4] = "ゅ";
-char mnNameNew_804D4ED0[4] = "ょ";
-char mnNameNew_804D4ED4[2] = " ";
-char mnNameNew_804D4ED8[4] = "ァ";
-char mnNameNew_804D4EDC[4] = "ィ";
-char mnNameNew_804D4EE0[4] = "ゥ";
-char mnNameNew_804D4EE4[4] = "ェ";
-char mnNameNew_804D4EE8[4] = "ォ";
-char mnNameNew_804D4EEC[4] = "ガ";
-char mnNameNew_804D4EF0[4] = "ギ";
-char mnNameNew_804D4EF4[4] = "グ";
-char mnNameNew_804D4EF8[4] = "ゲ";
-char mnNameNew_804D4EFC[4] = "ゴ";
-char mnNameNew_804D4F00[4] = "ザ";
-char mnNameNew_804D4F04[4] = "ジ";
-char mnNameNew_804D4F08[4] = "ズ";
-char mnNameNew_804D4F0C[4] = "ゼ";
-char mnNameNew_804D4F10[4] = "ゾ";
-char mnNameNew_804D4F14[4] = "ダ";
-char mnNameNew_804D4F18[4] = "ヂ";
-char mnNameNew_804D4F1C[4] = "ヅ";
-char mnNameNew_804D4F20[4] = "ッ";
-char mnNameNew_804D4F24[4] = "デ";
-char mnNameNew_804D4F28[4] = "ド";
-char mnNameNew_804D4F2C[4] = "バ";
-char mnNameNew_804D4F30[4] = "パ";
-char mnNameNew_804D4F34[4] = "ビ";
-char mnNameNew_804D4F38[4] = "ピ";
-char mnNameNew_804D4F3C[4] = "ブ";
-char mnNameNew_804D4F40[4] = "プ";
-char mnNameNew_804D4F44[4] = "ベ";
-char mnNameNew_804D4F48[4] = "ペ";
-char mnNameNew_804D4F4C[4] = "ボ";
-char mnNameNew_804D4F50[4] = "ポ";
-char mnNameNew_804D4F54[4] = "ャ";
-char mnNameNew_804D4F58[4] = "ュ";
-char mnNameNew_804D4F5C[4] = "ョ";
-char mnNameNew_804D4F60[4] = "～";
-char mnNameNew_804D4F64[4] = "、";
-char mnNameNew_804D4F98[8] = "";
+#ifdef MUST_MATCH
+static void order_sdata(void)
+{
+    (void) "A ";
+}
+#endif
 
 static MnNameNewKeyMap mnNameNew_KeyMap = {
     { 3, 10, 11, 7, 9, 8, 5, 5 },
-    { mnNameNew_804D4C14,       mnNameNew_804D4C18, mnNameNew_804D4C1C,
-      mnNameNew_804D4C20,       mnNameNew_804D4C24, mnNameNew_804D4C28,
-      mnNameNew_804D4C2C,       mnNameNew_804D4C30, mnNameNew_804D4C34,
-      mnNameNew_804D4C38,       mnNameNew_804D4C3C, mnNameNew_804D4C40,
-      mnNameNew_804D4C44,       mnNameNew_804D4C48, mnNameNew_804D4C4C,
-      mnNameNew_804D4C50,       mnNameNew_804D4C54, mnNameNew_804D4C58,
-      mnNameNew_804D4C5C,       mnNameNew_804D4C60, mnNameNew_804D4C64,
-      mnNameNew_804D4C68,       mnNameNew_804D4C6C, mnNameNew_804D4C70,
-      mnNameNew_804D4C74,       mnNameNew_804D4C78, mnNameNew_804D4C7C,
-      mnNameNew_804D4C80,       mnNameNew_804D4C84, mnNameNew_804D4C88,
-      mnNameNew_804D4C8C,       mnNameNew_804D4C90, mnNameNew_804D4C94,
-      mnNameNew_804D4C98,       mnNameNew_804D4C9C, mnNameNew_804D4CA0,
-      mnNameNew_804D4CA4,       mnNameNew_804D4CA8, mnNameNew_SpaceCharacter,
-      mnNameNew_SpaceCharacter, mnNameNew_804D4CB0, mnNameNew_804D4CB4,
-      mnNameNew_804D4CB8,       mnNameNew_804D4CBC, mnNameNew_804D4CC0,
-      mnNameNew_804D4CC4,       mnNameNew_804D4CC8, mnNameNew_804D4CCC,
-      mnNameNew_804D4CD0,       mnNameNew_804D4CD4 },
-    { mnNameNew_804D4CD8,       mnNameNew_804D4CDC, mnNameNew_804D4CE0,
-      mnNameNew_804D4CE4,       mnNameNew_804D4CE8, mnNameNew_804D4CEC,
-      mnNameNew_804D4CF0,       mnNameNew_804D4CF4, mnNameNew_804D4CF8,
-      mnNameNew_804D4CFC,       mnNameNew_804D4D00, mnNameNew_804D4D04,
-      mnNameNew_804D4D08,       mnNameNew_804D4D0C, mnNameNew_804D4D10,
-      mnNameNew_804D4D14,       mnNameNew_804D4D18, mnNameNew_804D4D1C,
-      mnNameNew_804D4D20,       mnNameNew_804D4D24, mnNameNew_804D4D28,
-      mnNameNew_804D4D2C,       mnNameNew_804D4D30, mnNameNew_804D4D34,
-      mnNameNew_804D4D38,       mnNameNew_804D4D3C, mnNameNew_804D4D40,
-      mnNameNew_804D4D44,       mnNameNew_804D4D48, mnNameNew_804D4D4C,
-      mnNameNew_804D4D50,       mnNameNew_804D4D54, mnNameNew_804D4D58,
-      mnNameNew_804D4D5C,       mnNameNew_804D4D60, mnNameNew_804D4D64,
-      mnNameNew_804D4D68,       mnNameNew_804D4D6C, mnNameNew_SpaceCharacter,
-      mnNameNew_SpaceCharacter, mnNameNew_804D4D70, mnNameNew_804D4D74,
-      mnNameNew_804D4D78,       mnNameNew_804D4D7C, mnNameNew_804D4D80,
-      mnNameNew_804D4D84,       mnNameNew_804D4D88, mnNameNew_804D4D8C,
-      mnNameNew_804D4CD0,       mnNameNew_804D4CD4 },
-    { mnNameNew_804D4D90,       mnNameNew_804D4D94,
-      mnNameNew_SpaceCharacter, mnNameNew_804D4D98,
-      mnNameNew_804D4D9C,       mnNameNew_804D4DA0,
-      mnNameNew_804D4DA4,       mnNameNew_SpaceCharacter,
-      mnNameNew_804D4DA8,       mnNameNew_804D4DAC,
-      mnNameNew_804D4DB0,       mnNameNew_804D4DB4,
-      mnNameNew_SpaceCharacter, mnNameNew_804D4DB8,
-      mnNameNew_804D4DBC,       mnNameNew_804D4DC0,
-      mnNameNew_804D4DC4,       mnNameNew_SpaceCharacter,
-      mnNameNew_804D4DC8,       mnNameNew_804D4DCC,
-      mnNameNew_804D4DD0,       mnNameNew_804D4DD4,
-      mnNameNew_804D4DD8,       mnNameNew_804D4DDC,
-      mnNameNew_804D4DE0,       mnNameNew_804D4DE4,
-      mnNameNew_804D4DE8,       mnNameNew_804D4DEC,
-      mnNameNew_804D4DF0,       mnNameNew_804D4DF4,
-      mnNameNew_804D4DF8,       mnNameNew_804D4DFC,
-      mnNameNew_804D4E00,       mnNameNew_804D4E04,
-      mnNameNew_804D4E08,       mnNameNew_804D4E0C,
-      mnNameNew_804D4E10,       mnNameNew_804D4E14,
-      mnNameNew_804D4E18,       mnNameNew_804D4E1C,
-      mnNameNew_804D4E20,       mnNameNew_804D4E24,
-      mnNameNew_804D4E28,       mnNameNew_804D4E2C,
-      mnNameNew_804D4E30,       mnNameNew_804D4E34,
-      mnNameNew_804D4E38,       mnNameNew_804D4E3C,
-      mnNameNew_804D4E40,       mnNameNew_804D4E44 },
+    { "あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ",
+      "さ", "し", "す", "せ", "そ", "た", "ち", "つ", "て", "と",
+      "な", "に", "ぬ", "ね", "の", "は", "ひ", "ふ", "へ", "ほ",
+      "ま", "み", "む", "め", "も", "や", "ゆ", "よ", "　", "　",
+      "ら", "り", "る", "れ", "ろ", "わ", "を", "ん", "ー", "。" },
+    { "ア", "イ", "ウ", "エ", "オ", "カ", "キ", "ク", "ケ", "コ",
+      "サ", "シ", "ス", "セ", "ソ", "タ", "チ", "ツ", "テ", "ト",
+      "ナ", "ニ", "ヌ", "ネ", "ノ", "ハ", "ヒ", "フ", "ヘ", "ホ",
+      "マ", "ミ", "ム", "メ", "モ", "ヤ", "ユ", "ヨ", "　", "　",
+      "ラ", "リ", "ル", "レ", "ロ", "ワ", "ヲ", "ン", "ー", "。" },
+    { "Ｊ", "Ｔ", "　", "９", "．", "Ｉ", "Ｓ", "　", "８", "＄",
+      "Ｈ", "Ｒ", "　", "７", "＆", "Ｇ", "Ｑ", "　", "６", "％",
+      "Ｆ", "Ｐ", "Ｚ", "５", "＠", "Ｅ", "Ｏ", "Ｙ", "４", "？",
+      "Ｄ", "Ｎ", "Ｘ", "３", "！", "Ｃ", "Ｍ", "Ｗ", "２", "＝",
+      "Ｂ", "Ｌ", "Ｖ", "１", "＋", "Ａ", "Ｋ", "Ｕ", "０", "－" },
 };
 
 static MnNameNewGlyphTable mnNameNew_GlyphTable = {
     {
-        { mnNameNew_804D4C14, mnNameNew_804D4E48, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C18, mnNameNew_804D4E50, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C1C, mnNameNew_804D4E54, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C20, mnNameNew_804D4E58, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C24, mnNameNew_804D4E5C, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C28, mnNameNew_804D4E60, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C2C, mnNameNew_804D4E64, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C30, mnNameNew_804D4E68, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C34, mnNameNew_804D4E6C, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C38, mnNameNew_804D4E70, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C3C, mnNameNew_804D4E74, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C40, mnNameNew_804D4E78, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C44, mnNameNew_804D4E7C, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C48, mnNameNew_804D4E80, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C4C, mnNameNew_804D4E84, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C50, mnNameNew_804D4E88, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C54, mnNameNew_804D4E8C, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C58, mnNameNew_804D4E90, mnNameNew_804D4E94,
-          mnNameNew_NullCharacter },
-        { mnNameNew_804D4C5C, mnNameNew_804D4E98, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C60, mnNameNew_804D4E9C, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C64, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C68, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C6C, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C70, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C74, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C78, mnNameNew_804D4EA0, mnNameNew_804D4EA4,
-          mnNameNew_NullCharacter },
-        { mnNameNew_804D4C7C, mnNameNew_804D4EA8, mnNameNew_804D4EAC,
-          mnNameNew_NullCharacter },
-        { mnNameNew_804D4C80, mnNameNew_804D4EB0, mnNameNew_804D4EB4,
-          mnNameNew_NullCharacter },
-        { mnNameNew_804D4C84, mnNameNew_804D4EB8, mnNameNew_804D4EBC,
-          mnNameNew_NullCharacter },
-        { mnNameNew_804D4C88, mnNameNew_804D4EC0, mnNameNew_804D4EC4,
-          mnNameNew_NullCharacter },
-        { mnNameNew_804D4C8C, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C90, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C94, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C98, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4C9C, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4CA0, mnNameNew_804D4EC8, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4CA4, mnNameNew_804D4ECC, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4CA8, mnNameNew_804D4ED0, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_SpaceCharacter, mnNameNew_804D4ED4,
-          mnNameNew_NullCharacter, NULL },
-        { mnNameNew_SpaceCharacter, mnNameNew_804D4ED4,
-          mnNameNew_NullCharacter, NULL },
-        { mnNameNew_804D4CB0, mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4CB4, mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4CB8, mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4CBC, mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4CC0, mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4CC4, mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4CC8, mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4CCC, mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4CD0, mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4CD4, mnNameNew_NullCharacter, NULL, NULL },
+        { "あ", "ぁ", "", NULL }, { "い", "ぃ", "", NULL },
+        { "う", "ぅ", "", NULL }, { "え", "ぇ", "", NULL },
+        { "お", "ぉ", "", NULL }, { "か", "が", "", NULL },
+        { "き", "ぎ", "", NULL }, { "く", "ぐ", "", NULL },
+        { "け", "げ", "", NULL }, { "こ", "ご", "", NULL },
+        { "さ", "ざ", "", NULL }, { "し", "じ", "", NULL },
+        { "す", "ず", "", NULL }, { "せ", "ぜ", "", NULL },
+        { "そ", "ぞ", "", NULL }, { "た", "だ", "", NULL },
+        { "ち", "ぢ", "", NULL }, { "つ", "づ", "っ", "" },
+        { "て", "で", "", NULL }, { "と", "ど", "", NULL },
+        { "な", "", "", NULL },   { "に", "", "", NULL },
+        { "ぬ", "", "", NULL },   { "ね", "", "", NULL },
+        { "の", "", "", NULL },   { "は", "ば", "ぱ", "" },
+        { "ひ", "び", "ぴ", "" }, { "ふ", "ぶ", "ぷ", "" },
+        { "へ", "べ", "ぺ", "" }, { "ほ", "ぼ", "ぽ", "" },
+        { "ま", "", "", NULL },   { "み", "", "", NULL },
+        { "む", "", "", NULL },   { "め", "", "", NULL },
+        { "も", "", "", NULL },   { "や", "ゃ", "", NULL },
+        { "ゆ", "ゅ", "", NULL }, { "よ", "ょ", "", NULL },
+        { "　", " ", "", NULL },  { "　", " ", "", NULL },
+        { "ら", "", NULL, NULL }, { "り", "", NULL, NULL },
+        { "る", "", NULL, NULL }, { "れ", "", NULL, NULL },
+        { "ろ", "", NULL, NULL }, { "わ", "", NULL, NULL },
+        { "を", "", NULL, NULL }, { "ん", "", NULL, NULL },
+        { "ー", "", NULL, NULL }, { "。", "", NULL, NULL },
     },
     {
-        { mnNameNew_804D4CD8, mnNameNew_804D4ED8, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4CDC, mnNameNew_804D4EDC, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4CE0, mnNameNew_804D4EE0, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4CE4, mnNameNew_804D4EE4, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4CE8, mnNameNew_804D4EE8, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4CEC, mnNameNew_804D4EEC, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4CF0, mnNameNew_804D4EF0, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4CF4, mnNameNew_804D4EF4, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4CF8, mnNameNew_804D4EF8, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4CFC, mnNameNew_804D4EFC, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4D00, mnNameNew_804D4F00, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4D04, mnNameNew_804D4F04, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4D08, mnNameNew_804D4F08, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4D0C, mnNameNew_804D4F0C, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4D10, mnNameNew_804D4F10, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4D14, mnNameNew_804D4F14, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4D18, mnNameNew_804D4F18, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4D1C, mnNameNew_804D4F1C, mnNameNew_804D4F20,
-          mnNameNew_NullCharacter },
-        { mnNameNew_804D4D20, mnNameNew_804D4F24, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4D24, mnNameNew_804D4F28, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4D28, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4D2C, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4D30, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4D34, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4D38, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4D3C, mnNameNew_804D4F2C, mnNameNew_804D4F30,
-          mnNameNew_NullCharacter },
-        { mnNameNew_804D4D40, mnNameNew_804D4F34, mnNameNew_804D4F38,
-          mnNameNew_NullCharacter },
-        { mnNameNew_804D4D44, mnNameNew_804D4F3C, mnNameNew_804D4F40,
-          mnNameNew_NullCharacter },
-        { mnNameNew_804D4D48, mnNameNew_804D4F44, mnNameNew_804D4F48,
-          mnNameNew_NullCharacter },
-        { mnNameNew_804D4D4C, mnNameNew_804D4F4C, mnNameNew_804D4F50,
-          mnNameNew_NullCharacter },
-        { mnNameNew_804D4D50, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4D54, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4D58, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4D5C, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4D60, mnNameNew_NullCharacter, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4D64, mnNameNew_804D4F54, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4D68, mnNameNew_804D4F58, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_804D4D6C, mnNameNew_804D4F5C, mnNameNew_NullCharacter,
-          NULL },
-        { mnNameNew_SpaceCharacter, mnNameNew_804D4ED4,
-          mnNameNew_NullCharacter, NULL },
-        { mnNameNew_SpaceCharacter, mnNameNew_804D4ED4,
-          mnNameNew_NullCharacter, NULL },
-        { mnNameNew_804D4D70, mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4D74, mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4D78, mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4D7C, mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4D80, mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4D84, mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4D88, mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4D8C, mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4F60, mnNameNew_NullCharacter, NULL, NULL },
-        { mnNameNew_804D4F64, mnNameNew_NullCharacter, NULL, NULL },
+        { "ア", "ァ", "", NULL }, { "イ", "ィ", "", NULL },
+        { "ウ", "ゥ", "", NULL }, { "エ", "ェ", "", NULL },
+        { "オ", "ォ", "", NULL }, { "カ", "ガ", "", NULL },
+        { "キ", "ギ", "", NULL }, { "ク", "グ", "", NULL },
+        { "ケ", "ゲ", "", NULL }, { "コ", "ゴ", "", NULL },
+        { "サ", "ザ", "", NULL }, { "シ", "ジ", "", NULL },
+        { "ス", "ズ", "", NULL }, { "セ", "ゼ", "", NULL },
+        { "ソ", "ゾ", "", NULL }, { "タ", "ダ", "", NULL },
+        { "チ", "ヂ", "", NULL }, { "ツ", "ヅ", "ッ", "" },
+        { "テ", "デ", "", NULL }, { "ト", "ド", "", NULL },
+        { "ナ", "", "", NULL },   { "ニ", "", "", NULL },
+        { "ヌ", "", "", NULL },   { "ネ", "", "", NULL },
+        { "ノ", "", "", NULL },   { "ハ", "バ", "パ", "" },
+        { "ヒ", "ビ", "ピ", "" }, { "フ", "ブ", "プ", "" },
+        { "ヘ", "ベ", "ペ", "" }, { "ホ", "ボ", "ポ", "" },
+        { "マ", "", "", NULL },   { "ミ", "", "", NULL },
+        { "ム", "", "", NULL },   { "メ", "", "", NULL },
+        { "モ", "", "", NULL },   { "ヤ", "ャ", "", NULL },
+        { "ユ", "ュ", "", NULL }, { "ヨ", "ョ", "", NULL },
+        { "　", " ", "", NULL },  { "　", " ", "", NULL },
+        { "ラ", "", NULL, NULL }, { "リ", "", NULL, NULL },
+        { "ル", "", NULL, NULL }, { "レ", "", NULL, NULL },
+        { "ロ", "", NULL, NULL }, { "ワ", "", NULL, NULL },
+        { "ヲ", "", NULL, NULL }, { "ン", "", NULL, NULL },
+        { "～", "", NULL, NULL }, { "、", "", NULL, NULL },
     },
     { -0.8f, 0.4f, 0.0f },
 };
@@ -641,6 +253,9 @@ void mnNameNew_8023B224(u8 arg0)
     mn_8022EBDC();
     mnCharSel_802640A0();
 }
+
+u8 mnNameNew_804D4F7C[8] = { 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'H' };
+char mnNameNew_804D4F98[8] = "";
 
 void mnNameNew_8023B314(NameNewEntry* arg0, s32 arg1)
 {
@@ -900,6 +515,8 @@ s32 mnNameNew_8023BAA8(NameNewEntry* arg0, s32 arg1, u8 arg2)
     return (s32) arg2;
 }
 
+char mnNameNew_NullCharacter[] = "";
+
 s32 PickAutoName(HSD_GObj* arg0)
 {
     NameNewEntry* data;
@@ -990,8 +607,8 @@ bool NameContainsOnlySpaces(void)
 
     for (i = 0; i < 4; i++) {
         if ((s8) *mnNameNew_NullCharacter != (s8) text[0]) {
-            if ((s8) * (char*) mnNameNew_SpaceCharacter != (s8) text[0] ||
-                ((GlyphChar*) mnNameNew_SpaceCharacter)[1] != text[1])
+            if ((s8) * (char*) "　" != (s8) text[0] ||
+                ((GlyphChar*) "　")[1] != text[1])
             {
                 return false;
             }
@@ -1262,8 +879,8 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
             if (data->mode != 2 && sel < 0x32U) {
                 key_off = (((u8) sel) << 4) & 0xFF0;
                 key_char = *(u8**) ((u8*) layout->lower_glyphs + key_off);
-                if (mnNameNew_SpaceCharacter[0] == (s8) key_char[0] &&
-                    (s8) mnNameNew_SpaceCharacter[1] == (s8) key_char[1])
+                if ("　"[0] == (s8) key_char[0] &&
+                    (s8) "　"[1] == (s8) key_char[1])
                 {
                     n = 1;
                 } else {
@@ -1293,8 +910,8 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     return;
                 }
                 cursor = data->cursor_pos;
-                name_text[cursor * 3] = mnNameNew_SpaceCharacter[0];
-                name_text[cursor * 3 + 1] = mnNameNew_SpaceCharacter[1];
+                name_text[cursor * 3] = "　"[0];
+                name_text[cursor * 3 + 1] = "　"[1];
                 name_text[cursor * 3 + 2] = *mnNameNew_NullCharacter;
                 lbAudioAx_80024030(1);
                 if (data->cursor_pos < 3) {
