@@ -1,6 +1,8 @@
 #include <dolphin.h>
 #include <dolphin/thp/thp.h>
 
+static char __THP420Error[] = "ERROR: THP only supports 4:2:0!!!\n";
+
 static const u8 __THPJpegNaturalOrder[80] = {
     0,  1,  8,  16, 9,  2,  3,  10, 17, 24, 32, 25, 18, 11, 4,  5,
     12, 19, 26, 33, 40, 48, 41, 34, 27, 20, 13, 6,  7,  14, 21, 28,
@@ -34,12 +36,6 @@ struct THPLCWork {
 };
 static struct THPLCWork __THPLC;
 static u8* __THPLCWork672[3];
-static u32 __THPOldGQR5;
-static u32 __THPOldGQR6;
-static u8* __THPWorkArea;
-static THPCoeff* __THPMCUBuffer[6];
-static THPFileInfo* __THPInfo;
-static BOOL __THPInitFlag = FALSE;
 
 typedef struct THPRestartFields {
     u8 pad[0x8FC];
@@ -204,96 +200,6 @@ s32 THPDec_8032F8D4(u32 file_arg, void* out_arg)
     } while (!(out->val2 != 0 && found_jfif != 0));
 
     return 1;
-}
-
-static inline void __THPGQRSetup(void)
-{
-    register u32 tmp1, tmp2;
-
-#ifdef __MWERKS__ // clang-format off
-    asm {
-        mfspr   tmp1, GQR5;
-        mfspr   tmp2, GQR6;
-    }
-#endif // clang-format on
-
-    __THPOldGQR5 = tmp1;
-    __THPOldGQR6 = tmp2;
-
-#ifdef __MWERKS__ // clang-format off
-    asm {
-        li      r3, 0x0007
-        oris    r3, r3, 0x0007
-        mtspr   GQR5, r3
-        li      r3, 0x3D04
-        oris    r3, r3, 0x3D04
-        mtspr   GQR6, r3
-    }
-#endif // clang-format on
-}
-
-static inline void __THPGQRRestore(void)
-{
-    register u32 tmp1, tmp2;
-    tmp1 = __THPOldGQR5;
-    tmp2 = __THPOldGQR6;
-
-#ifdef __MWERKS__ // clang-format off
-    asm {
-        mtspr   GQR5, tmp1;
-        mtspr   GQR6, tmp2;
-    }
-#endif // clang-format on
-}
-
-static void __THPDecompressYUV(void* tileY, void* tileU, void* tileV)
-{
-    u16 currentY, targetY;
-    __THPInfo->dLC[0] = tileY;
-    __THPInfo->dLC[1] = tileU;
-    __THPInfo->dLC[2] = tileV;
-
-    currentY = __THPInfo->decompressedY;
-    targetY = __THPInfo->yPixelSize;
-
-    __THPGQRSetup();
-    __THPPrepBitStream(__THPInfo);
-
-    if (__THPInfo->xPixelSize == 512 && targetY == 448) {
-        while (currentY < targetY) {
-            __THPDecompressiMCURow512x448();
-            currentY += 16;
-        }
-    } else if (__THPInfo->xPixelSize == 640 && targetY == 480) {
-        while (currentY < targetY) {
-            __THPDecompressiMCURow640x480(__THPInfo);
-            currentY += 16;
-        }
-    } else {
-        while (currentY < targetY) {
-            __THPDecompressiMCURowNxN(__THPInfo, __THPInfo->xPixelSize);
-            currentY += 16;
-        }
-    }
-
-    __THPGQRRestore();
-}
-
-static u8 __THPSetupBuffers(THPFileInfo* info)
-{
-    u8 i;
-    THPCoeff* buffer;
-
-    if (info->cnt != 4) {
-        OSReport("ERROR: THP only supports 4:2:0!!!\n");
-        return 0;
-    }
-
-    buffer = (THPCoeff*) OSRoundUp32B(__THPWorkArea);
-
-    for (i = 0; i < 6; i++) {
-        __THPMCUBuffer[i] = &buffer[i * 64];
-    }
 }
 
 typedef struct THPVideoDecodeHeader {
@@ -709,7 +615,7 @@ s32 THPDec_8032FD40(THPDec_8032FD40_Data* data, u16 num)
     s32 base = data->val0 + 0x4028;
     s32 a;
     if (data->val2 != 4) {
-        OSReport("ERROR: THP only supports 4:2:0!!!\n");
+        OSReport(__THP420Error);
         return 0;
     }
     a = (data->val1 / 2) * (num / 2) * 2 + (data->val1 * num);
@@ -857,8 +763,6 @@ static u8 __THPReadHuffmanTableSpecification(THPFileInfo* info)
     u8* huffmanBits;
     u8 result;
 
-    //__THPHuffmanSizeTab = __THPWorkArea;
-    //__THPHuffmanCodeTab = (u16*)((u32)__THPWorkArea + 256 + 1);
     length = (u16) ((info->file)[0] << 8 | (info->file)[1]);
     info->file += 2;
     length -= 2;
@@ -1686,68 +1590,6 @@ inline void __THPInverseDCTY8(register THPCoeff* in, register u32 xPos)
         }
 #endif // clang-format on
     }
-}
-
-static void __THPDecompressiMCURow512x448(void)
-{
-    u8 cl_num;
-    u32 x_pos;
-    THPComponent* comp;
-
-    LCQueueWait(3);
-
-    for (cl_num = 0; cl_num < __THPInfo->MCUsPerRow; cl_num++) {
-        __THPHuffDecodeDCTCompY(__THPInfo, __THPMCUBuffer[0]);
-        __THPHuffDecodeDCTCompY(__THPInfo, __THPMCUBuffer[1]);
-        __THPHuffDecodeDCTCompY(__THPInfo, __THPMCUBuffer[2]);
-        __THPHuffDecodeDCTCompY(__THPInfo, __THPMCUBuffer[3]);
-        __THPHuffDecodeDCTCompU(__THPInfo, __THPMCUBuffer[4]);
-        __THPHuffDecodeDCTCompV(__THPInfo, __THPMCUBuffer[5]);
-
-        comp = &__THPInfo->components[0];
-        Gbase = __THPLC.work512[0];
-        Gwid = 512;
-        Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
-        x_pos = (u32) (cl_num * 16);
-        __THPInverseDCTNoYPos(__THPMCUBuffer[0], x_pos);
-        __THPInverseDCTNoYPos(__THPMCUBuffer[1], x_pos + 8);
-        __THPInverseDCTY8(__THPMCUBuffer[2], x_pos);
-        __THPInverseDCTY8(__THPMCUBuffer[3], x_pos + 8);
-
-        comp = &__THPInfo->components[1];
-        Gbase = __THPLC.work512[1];
-        Gwid = 256;
-        Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
-        x_pos /= 2;
-        __THPInverseDCTNoYPos(__THPMCUBuffer[4], x_pos);
-        comp = &__THPInfo->components[2];
-        Gbase = __THPLC.work512[2];
-        Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
-        __THPInverseDCTNoYPos(__THPMCUBuffer[5], x_pos);
-
-        if (__THPInfo->RST != 0) {
-            if ((--__THPInfo->currMCU) == 0) {
-                __THPInfo->currMCU = __THPInfo->nMCU;
-                __THPInfo->cnt = 1 + ((__THPInfo->cnt + 6) & 0xFFFFFFF8);
-
-                if (__THPInfo->cnt > 33) {
-                    __THPInfo->cnt = 33;
-                }
-
-                __THPInfo->components[0].predDC = 0;
-                __THPInfo->components[1].predDC = 0;
-                __THPInfo->components[2].predDC = 0;
-            }
-        }
-    }
-
-    LCStoreData(__THPInfo->dLC[0], __THPLC.work512[0], 0x2000);
-    LCStoreData(__THPInfo->dLC[1], __THPLC.work512[1], 0x800);
-    LCStoreData(__THPInfo->dLC[2], __THPLC.work512[2], 0x800);
-
-    __THPInfo->dLC[0] += 0x2000;
-    __THPInfo->dLC[1] += 0x800;
-    __THPInfo->dLC[2] += 0x800;
 }
 
 inline s32 __THPHuffDecodeTab(register THPFileInfo* info,

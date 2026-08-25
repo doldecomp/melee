@@ -64,7 +64,6 @@ typedef struct {
 } THPDec_8032FD40_Data;
 
 
-static u8 __THPSetupBuffers(THPFileInfo*);
 static u8 __THPReadFrameHeader(THPFileInfo*);
 static u8 __THPReadScaneHeader(THPFileInfo*);
 static u8 __THPReadQuantizationTable(THPFileInfo*);
@@ -75,9 +74,6 @@ static u8 __THPHuffGenerateCodeTable(THPFileInfo*, u8 tab_index);
 static int __THPHuffGenerateDecoderTables(THPFileInfo*, u8 tab_index);
 static u8 __THPRestartDefinition(THPFileInfo*);
 static void __THPPrepBitStream(THPFileInfo*);
-static void __THPDecompressYUV(void*, void*, void*);
-static void __THPGQRRestore(void);
-static void __THPDecompressiMCURow512x448(void);
 static void __THPDecompressiMCURow640x480(THPFileInfo*);
 static void __THPDecompressiMCURowNxN(THPFileInfo*, u32);
 static void __THPInverseDCTNoYPos(THPCoeff*, u32);
