@@ -49,8 +49,8 @@ typedef struct {
     /* 0x20 */ f32 x20[4];
 } CharScaleEntry;
 
-extern CharScaleEntry lbl_803D6A18[];
-extern f32 lbl_803D7058[];
+CharScaleEntry lbl_803D6A18[] = { 0 };
+f32 lbl_803D7058[0x890 / sizeof(f32)] = { 0 };
 
 typedef struct {
     GObj_RenderFunc funcs[4];
@@ -76,8 +76,8 @@ typedef struct {
     /* 0x98 */ f32 x98;
 } ResultsPlayerConfig;
 
-extern ResultsPlayerConfig lbl_803B7B68;
-extern HSD_CObjDesc lbl_803D7910;
+ResultsPlayerConfig const lbl_803B7B68 = { 0 };
+HSD_CObjDesc lbl_803D7910 = { 0 };
 
 typedef struct {
     /* 0x00 */ f32 x_off[4];   // indexed by variant (clamped to 3)
@@ -93,14 +93,13 @@ typedef struct {
     /* 0xF08 */ HSD_CObjDesc cobj_desc;
 } CameraKindData;
 
-extern CameraKindData lbl_803D6A08;
+CameraKindData lbl_803D6A08 = { 0 };
 
-extern s32 lbl_804DA3F0;
-extern s32 lbl_804DA3F4;
+s32 const lbl_804DA3F0 = 0x010E0172;
+s32 const lbl_804DA3F4 = 0x007C0114;
 
-extern int lbl_8046E38C[4];
-
-extern HSD_JObj* lbl_8046E39C[4];
+int lbl_8046E38C[4];
+HSD_JObj* lbl_8046E39C[4];
 
 typedef union {
     s16 h[4];
@@ -131,7 +130,7 @@ typedef struct {
     /* 0x22F4 */ u32 x22F4[4][2];
 } lbl_8046E3AC_t;
 
-extern lbl_8046E3AC_t lbl_8046E3AC;
+lbl_8046E3AC_t lbl_8046E3AC;
 
 typedef struct ResultsDisplayData {
     /* 0x000 */ u8 pad_000[0x104];
@@ -143,7 +142,7 @@ typedef struct ResultsDisplayData {
     /* 0x1FC */ lbl_8046E3AC_t state;
 } ResultsDisplayData;
 
-extern ResultsDisplayData lbl_8046E1B0;
+ResultsDisplayData lbl_8046E1B0;
 
 void gm_80177724(struct ResultsMatchInfo* arg0)
 {
@@ -1372,7 +1371,7 @@ void fn_8017A004(void)
 void fn_8017A078(s32 arg0)
 {
     ResultsDisplayData* disp = &lbl_8046E1B0;
-    ResultsPlayerConfig* config = &lbl_803B7B68;
+    ResultsPlayerConfig const* config = &lbl_803B7B68;
     Vec3 eye;
     Vec3 interest;
     ResultsRenderFuncs callbacks;
@@ -1522,7 +1521,7 @@ HSD_GObj* fn_8017A318(s32 arg0)
 
 Fighter_GObj* fn_8017A67C(CharacterKind kind, int arg1, int arg2)
 {
-    ResultsPlayerConfig* config = &lbl_803B7B68;
+    ResultsPlayerConfig const* config = &lbl_803B7B68;
     ResultsDisplayData* disp = &lbl_8046E1B0;
     MatchEnd* match_end = &disp->state.match_end;
     HSD_GObj* gobj = NULL;
@@ -1647,8 +1646,8 @@ void fn_8017A9B4(int slot)
             (u16*) disp->state.dim_h2 + lookup);
 }
 
-extern u32 lbl_803D7018[];
-extern u32 lbl_803D7038[];
+u32 lbl_803D7018[0x20 / sizeof(u32)] = { 0 };
+u32 lbl_803D7038[0x20 / sizeof(u32)] = { 0 };
 
 static s32 lbl_804D3FD0 = 0x00500050;
 static s32 lbl_804D3FD4 = 0x00460034;
