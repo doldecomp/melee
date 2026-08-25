@@ -142,6 +142,7 @@ void hsd_803A949C(s32 chan, s32 arg1)
     CardBlock* block;
     s32 result;
     s32 remaining;
+    s32 remaining11;
     s32 icon_size;
     s32 offset;
     s32 data_offset;
@@ -410,8 +411,8 @@ void hsd_803A949C(s32 chan, s32 arg1)
             }
         } else {
             data_offset = (state->x8 * CMD_S32(0x18)) - 0x40 - icon_size;
-            remaining = state->x24 - state->x8 * CMD_S32(0x18);
-            if ((u32) remaining > state->x8) {
+            remaining11 = state->x24 - state->x8 * CMD_S32(0x18);
+            if ((u32) remaining11 > state->x8) {
                 if (CMD_PTR(0x24) != NULL) {
                     memcpy((u8*) CMD_S32(0x24) + data_offset, state->x0,
                            state->x8);
@@ -421,11 +422,11 @@ void hsd_803A949C(s32 chan, s32 arg1)
             } else {
                 if (CMD_PTR(0x24) != NULL) {
                     memcpy((u8*) CMD_S32(0x24) + data_offset, state->x0,
-                           remaining);
+                           remaining11);
                 }
-                hsd_803B2B20(CMD_STATE->x0, remaining,
+                hsd_803B2B20(CMD_STATE->x0, remaining11,
                              &CMD_STATE->digest[CMD_S32(0x18) * 0x10]);
-                if (memcmp(state->x0 + remaining, CMD_STATE->digest, 0x30) !=
+                if (memcmp(state->x0 + remaining11, CMD_STATE->digest, 0x30) !=
                     0)
                 {
                     hsd_804D7988 = -0x107;
