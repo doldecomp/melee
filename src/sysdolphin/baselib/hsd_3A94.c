@@ -118,18 +118,6 @@ static inline s32 hsd_803A949C_Close(CardState* state)
     return result;
 }
 
-static inline s32 hsd_803A949C_IconSize(CardState* state)
-{
-    switch (state->x3B0) {
-    case 2:
-        return 0x1800;
-    case 1:
-        return 0xE00;
-    default:
-        return 0;
-    }
-}
-
 static inline s32 hsd_803A949C_FileId(CardBlock* block)
 {
     return (block->x10 << 8) | block->x11;
@@ -142,7 +130,6 @@ void hsd_803A949C(s32 chan, s32 arg1)
     CardBlock* block;
     s32 result;
     s32 icon_size;
-    s32 icon_size11;
     s32 remaining;
     s32 remaining11;
     s32 offset;
@@ -383,16 +370,26 @@ void hsd_803A949C(s32 chan, s32 arg1)
             break;
         }
 
-        icon_size11 = hsd_803A949C_IconSize(state);
+        switch (state->x3B0) {
+        case 2:
+            arg1 = 0x1800;
+            break;
+        case 1:
+            arg1 = 0xE00;
+            break;
+        default:
+            arg1 = 0;
+            break;
+        }
 
         if (CMD_S32(0x18) == 0) {
             if (CMD_PTR(0x1c) != NULL) {
                 memcpy((void*) CMD_S32(0x1c), state->x0, 0x40);
             }
-            if (icon_size11 > 0 && CMD_PTR(0x20) != NULL) {
-                memcpy((void*) CMD_S32(0x20), state->x0 + 0x40, icon_size11);
+            if (arg1 > 0 && CMD_PTR(0x20) != NULL) {
+                memcpy((void*) CMD_S32(0x20), state->x0 + 0x40, arg1);
             }
-            hdr_plus_icon = icon_size11 + 0x40;
+            hdr_plus_icon = arg1 + 0x40;
             if (state->x24 > state->x8) {
                 if (CMD_PTR(0x24) != NULL) {
                     memcpy((void*) CMD_S32(0x24), state->x0 + hdr_plus_icon,
@@ -414,7 +411,7 @@ void hsd_803A949C(s32 chan, s32 arg1)
                 }
             }
         } else {
-            data_offset = (state->x8 * CMD_S32(0x18)) - 0x40 - icon_size11;
+            data_offset = (state->x8 * CMD_S32(0x18)) - 0x40 - arg1;
             remaining11 = state->x24 - state->x8 * CMD_S32(0x18);
             if ((u32) remaining11 > state->x8) {
                 if (CMD_PTR(0x24) != NULL) {
