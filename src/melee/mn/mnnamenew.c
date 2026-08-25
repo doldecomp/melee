@@ -80,6 +80,7 @@ extern void* mnNameNew_804A0700[4];
 extern void* mnNameNew_804A0710[4];
 extern void* mnNameNew_804A0720[8];
 extern char mnNameNew_CurrentNameText[0x10];
+extern u8 mnNameNew_804D4F7C[8];
 extern HSD_GObj* mnNameNew_804D6C08;
 
 extern StaticModelDesc MenMainBack_Top;
@@ -94,12 +95,7 @@ static AnimLoopSettings mnNameNew_803EDA58[3] = {
     { 0.0f, 10.0f, -0.1f },
 };
 
-#ifdef MUST_MATCH
-static void order_sdata(void)
-{
-    (void) "A ";
-}
-#endif
+static f32 mnNameNew_804D4C10 = 10.0f;
 
 static MnNameNewKeyMap mnNameNew_KeyMap = {
     { 3, 10, 11, 7, 9, 8, 5, 5 },
@@ -303,9 +299,6 @@ void mnNameNew_8023B224(u8 arg0)
     mnCharSel_802640A0();
 }
 
-u8 mnNameNew_804D4F7C[8] = { 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'H' };
-char mnNameNew_804D4F98[8] = "";
-
 void mnNameNew_8023B314(NameNewEntry* arg0, s32 arg1)
 {
     HSD_Text* text;
@@ -342,10 +335,13 @@ void mnNameNew_8023B314(NameNewEntry* arg0, s32 arg1)
     HSD_SisLib_803A6368(text, (s32) idx);
 }
 
+static GXColor mnNameNew_804D4F68 = { 0, 0, 0, 0xFF };
 static GXColor mnNameNew_804D4F6C = { 0xA6, 0x81, 0x3D, 0xFF };
 static GXColor mnNameNew_804D4F70 = { 0, 0, 0, 0xFF };
 static GXColor mnNameNew_804D4F74 = { 0x74, 0x4F, 0x0B, 0xFF };
 static GXColor mnNameNew_804D4F78 = { 0, 0, 0, 0xFF };
+
+u8 mnNameNew_804D4F7C[8] = { 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'H' };
 
 extern const GXColor mnNameNew_804DBF44;
 extern const GXColor mnNameNew_804DBF48;
@@ -1672,9 +1668,6 @@ void fn_8023DAEC(HSD_GObj* arg0)
     }
 }
 
-static f32 mnNameNew_804D4C10 = 10.0f;
-static GXColor mnNameNew_804D4F68 = { 0, 0, 0, 0xFF };
-
 #ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
@@ -2063,3 +2056,6 @@ void mnNameNew_8023EA08(UNK_T arg0)
 {
     mnNameNew_EnterFromMnCharSel((HSD_Archive*) arg0, 4);
 }
+
+/// @todo Type inferred from the split: 8 bytes, 8-byte aligned, all zero.
+f64 mnNameNew_804D4F98[1] = { 0.0 };
