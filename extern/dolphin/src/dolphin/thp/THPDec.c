@@ -249,6 +249,19 @@ s32 THPDec_8032F8D4(u8* data, THPDec_8032FD40_Data* out)
     return 1;
 }
 
+s32 THPDec_8032FD40(THPDec_8032FD40_Data* data, u16 num)
+{
+    s32 base = data->val0 + 0x4028;
+    s32 a;
+    if (data->val2 != 4) {
+        OSReport(__THP420Error);
+        return 0;
+    }
+    a = (data->val1 / 2) * (num / 2) * 2 + (data->val1 * num);
+    base = base + a;
+    return base;
+}
+
 typedef struct THPVideoDecodeHeader {
     u16 xSize;
     u16 ySize;
@@ -399,21 +412,6 @@ _err_exit:
     return 0;
 }
 
-s32 THPDec_803302EC(u8** data)
-{
-    u32 i;
-    u8* ptr = *data;
-    u16 high = ptr[0];
-    u16 low = ptr[1];
-
-    u16 count = (high << 8) | low;
-    for (i = 0; i < count; i++) {
-        (*data)++;
-    }
-
-    return 0;
-}
-
 void THPDec_803300E0(u32* data)
 {
     s32 val;
@@ -484,6 +482,21 @@ u8 THPDec_80330158(THPFileInfo* info)
     return 0;
 }
 
+s32 THPDec_803302EC(u8** data)
+{
+    u32 i;
+    u8* ptr = *data;
+    u16 high = ptr[0];
+    u16 low = ptr[1];
+
+    u16 count = (high << 8) | low;
+    for (i = 0; i < count; i++) {
+        (*data)++;
+    }
+
+    return 0;
+}
+
 typedef struct THPScanComp {
     /* 0x00 */ u8 x00;
     /* 0x01 */ u8 samplingH;
@@ -535,45 +548,6 @@ typedef struct THPScanInfo {
 
 u8 THPDec_803310CC(THPScanInfo* info);
 
-u8 THPDec_803310CC(THPScanInfo* info)
-{
-    u32 i;
-    s32 j;
-
-    info->x8CC = (u16) THPROUNDUP(info->x70, info->x7A * 8);
-    info->x8D0 = (u16) THPROUNDUP(info->x72, info->x7B * 8);
-    info->x8CE = 0;
-
-    for (i = 0; i < info->x7C; i++) {
-        THPScanComp* c = &info->components[i];
-
-        c->x28 = THPROUNDUP(info->x70 * c->samplingH, info->x7A * 8);
-        c->x24 = THPROUNDUP(info->x72 * c->samplingV, info->x7B * 8);
-        c->x14 = c->samplingH;
-        c->x18 = c->samplingV;
-        c->x1C = c->x14 * c->x18;
-        c->x20 = c->x14 * 8;
-
-        j = c->x1C;
-        if (info->x8CE + c->x1C > 0x10) {
-            return 0x11;
-        }
-
-        while (j-- > 0) {
-            info->x8BC[info->x8CE++] = i;
-        }
-
-        if (info->x8CE > 6) {
-            OSReport("THP does not support anything other than 4:2:0!\n");
-            return 0;
-        }
-
-        c->x06 = 0;
-    }
-
-    return 0;
-}
-
 typedef struct THPDecodeInfo {
     /* 0x000 */ u8 pad00[0x76];
     /* 0x076 */ u16 x76;
@@ -587,70 +561,6 @@ typedef struct THPDecodeInfo {
     /* 0x8F4 */ u8* x8F4;
     /* 0x8F8 */ u8* x8F8;
 } THPDecodeInfo;
-
-void THPDec_80331340(s32 arg0, void* arg1, void* arg2, void* arg3)
-{
-    THPDecodeInfo* info = (THPDecodeInfo*) arg0;
-    info->x8F0 = arg1;
-    info->x8F4 = arg2;
-    info->x8F8 = arg3;
-
-#ifdef __MWERKS__ // clang-format off
-    asm {
-        li      r3, 0x0007
-        oris    r3, r3, 0x0007
-        mtspr   GQR5, r3
-        li      r3, 0x3D04
-        oris    r3, r3, 0x3D04
-        mtspr   GQR6, r3
-    }
-#endif // clang-format on
-
-    __THPPrepBitStream((THPFileInfo*) info);
-    while (info->x8EE < info->x8EA + info->x76) {
-        __THPDecompressiMCURow640x480((THPFileInfo*) info);
-        info->x8EE += info->x8D4;
-    }
-}
-
-void THPDec_803313D0(s32 arg0, void* arg1, void* arg2, void* arg3, u32 x)
-{
-    u32 width = x;
-    THPDecodeInfo* info = (THPDecodeInfo*) arg0;
-    info->x8F0 = arg1;
-    info->x8F4 = arg2;
-    info->x8F8 = arg3;
-
-#ifdef __MWERKS__ // clang-format off
-    asm {
-        li      r3, 0x0007
-        oris    r3, r3, 0x0007
-        mtspr   GQR5, r3
-        li      r3, 0x3D04
-        oris    r3, r3, 0x3D04
-        mtspr   GQR6, r3
-    }
-#endif // clang-format on
-
-    __THPPrepBitStream((THPFileInfo*) info);
-    while (info->x8EE < info->x8EA + info->x76) {
-        __THPDecompressiMCURowNxN((THPFileInfo*) info, width);
-        info->x8EE += info->x8D4;
-    }
-}
-
-s32 THPDec_8032FD40(THPDec_8032FD40_Data* data, u16 num)
-{
-    s32 base = data->val0 + 0x4028;
-    s32 a;
-    if (data->val2 != 4) {
-        OSReport(__THP420Error);
-        return 0;
-    }
-    a = (data->val1 / 2) * (num / 2) * 2 + (data->val1 * num);
-    base = base + a;
-    return base;
-}
 
 typedef struct THPFrameHeaderComp {
     /* 0x00 */ u8 componentID;
@@ -1001,6 +911,45 @@ static int __THPHuffGenerateDecoderTables(THPFileInfo* info, u8 tabIndex)
     return 0;
 }
 
+u8 THPDec_803310CC(THPScanInfo* info)
+{
+    u32 i;
+    s32 j;
+
+    info->x8CC = (u16) THPROUNDUP(info->x70, info->x7A * 8);
+    info->x8D0 = (u16) THPROUNDUP(info->x72, info->x7B * 8);
+    info->x8CE = 0;
+
+    for (i = 0; i < info->x7C; i++) {
+        THPScanComp* c = &info->components[i];
+
+        c->x28 = THPROUNDUP(info->x70 * c->samplingH, info->x7A * 8);
+        c->x24 = THPROUNDUP(info->x72 * c->samplingV, info->x7B * 8);
+        c->x14 = c->samplingH;
+        c->x18 = c->samplingV;
+        c->x1C = c->x14 * c->x18;
+        c->x20 = c->x14 * 8;
+
+        j = c->x1C;
+        if (info->x8CE + c->x1C > 0x10) {
+            return 0x11;
+        }
+
+        while (j-- > 0) {
+            info->x8BC[info->x8CE++] = i;
+        }
+
+        if (info->x8CE > 6) {
+            OSReport("THP does not support anything other than 4:2:0!\n");
+            return 0;
+        }
+
+        c->x06 = 0;
+    }
+
+    return 0;
+}
+
 static u8 __THPRestartDefinition(THPFileInfo* info)
 {
     THPRestartFields* restart = (THPRestartFields*) info;
@@ -1010,6 +959,61 @@ static u8 __THPRestartDefinition(THPFileInfo* info)
     info->file += 2;
     restart->currMCU = restart->nMCU;
     return 0;
+}
+
+#ifdef __MWERKS__
+#pragma function_align 16
+#endif
+
+void THPDec_80331340(s32 arg0, void* arg1, void* arg2, void* arg3)
+{
+    THPDecodeInfo* info = (THPDecodeInfo*) arg0;
+    info->x8F0 = arg1;
+    info->x8F4 = arg2;
+    info->x8F8 = arg3;
+
+#ifdef __MWERKS__ // clang-format off
+    asm {
+        li      r3, 0x0007
+        oris    r3, r3, 0x0007
+        mtspr   GQR5, r3
+        li      r3, 0x3D04
+        oris    r3, r3, 0x3D04
+        mtspr   GQR6, r3
+    }
+#endif // clang-format on
+
+    __THPPrepBitStream((THPFileInfo*) info);
+    while (info->x8EE < info->x8EA + info->x76) {
+        __THPDecompressiMCURow640x480((THPFileInfo*) info);
+        info->x8EE += info->x8D4;
+    }
+}
+
+void THPDec_803313D0(s32 arg0, void* arg1, void* arg2, void* arg3, u32 x)
+{
+    u32 width = x;
+    THPDecodeInfo* info = (THPDecodeInfo*) arg0;
+    info->x8F0 = arg1;
+    info->x8F4 = arg2;
+    info->x8F8 = arg3;
+
+#ifdef __MWERKS__ // clang-format off
+    asm {
+        li      r3, 0x0007
+        oris    r3, r3, 0x0007
+        mtspr   GQR5, r3
+        li      r3, 0x3D04
+        oris    r3, r3, 0x3D04
+        mtspr   GQR6, r3
+    }
+#endif // clang-format on
+
+    __THPPrepBitStream((THPFileInfo*) info);
+    while (info->x8EE < info->x8EA + info->x76) {
+        __THPDecompressiMCURowNxN((THPFileInfo*) info, width);
+        info->x8EE += info->x8D4;
+    }
 }
 
 inline void __THPInverseDCTNoYPos(register THPCoeff* in, register u32 xPos)
@@ -2725,6 +2729,10 @@ static inline void OSInitFastCast(void) {
 #endif
 }
 // clang-format on
+
+#ifdef __MWERKS__
+#pragma function_align 4
+#endif
 
 void THPInit(void)
 {
