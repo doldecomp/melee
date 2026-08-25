@@ -1,4 +1,5 @@
-/// @file Creates trailing "afterimages" for swords in motion
+/// @file
+/// @brief Creates trailing "afterimages" for swords in motion
 
 #include "ftafterimage.h"
 
@@ -10,16 +11,13 @@
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 #include <baselib/state.h>
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/chara/ftLink/types.h>
 #include <melee/ft/chara/ftMars/types.h>
 #include <melee/ft/inlines.h>
 #include <melee/it/it_26B1.h>
-#include <melee/it/item.h>
 #include <melee/it/items/itsword.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
-#include <MSL/math_ppc.h>
 
 typedef struct AfterimageVtx {
     f32 x, y, z;
@@ -32,17 +30,24 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 {
     Fighter* fp;
     itSword_UnkBytes* params;
-    AfterimageVtx vtx_buf[151];
+    f32* distPtr;
+    u32 n4;
     f32 cumDist[3];
-    Vec3 delta, prevPos, crossProd, tempDir;
+    AfterimageVtx vtx_buf[151];
+    f32 d2;
     s32 numVerts;
+    s32 remaining;
+    s32 numSubdiv;
     s32 nextIdx;
 
     if (arg1 != 2) {
         return;
     }
 
-    fp = gobj->user_data;
+    {
+        void* fighter = gobj->user_data;
+        fp = fighter;
+    }
 
     if ((s8) (u8) fp->x2100 <= 1) {
         return;
@@ -70,7 +75,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             params = it_80285300(fp->item_gobj);
             break;
         default:
-            HSD_ASSERTREPORT(0x7C, NULL, "no afterimage item!\n");
+            HSD_ASSERTREPORT(0x7C, 0, "no afterimage item!\n");
             break;
         }
     } else {
@@ -105,6 +110,8 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             params = (itSword_UnkBytes*) &da->x78;
             break;
         }
+        default:
+            break;
         }
     }
 
@@ -126,12 +133,14 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
         cumDist[0] = 0.0f;
         totalDist = 0.0f;
-        prevPos.x = prevPos.y = prevPos.z = 0.0f;
         dp = &cumDist[1];
 
         {
+            Vec3 delta, prevPos;
             s32 i;
             s32 curIdx = ringIdx;
+
+            prevPos.x = prevPos.y = prevPos.z = 0.0f;
 
             for (i = (s8) (u8) fp->x2100 - 1; i >= 0; i--) {
                 struct Fighter_x20B0_t* entry = &fp->x20B0[curIdx];
@@ -141,11 +150,9 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                 delta.z = entry->xC.z * x20FC + entry->x0.z - prevPos.z;
 
                 if (i != (s8) (u8) fp->x2100 - 1) {
-                    f32 d2 = delta.z * delta.z +
-                             (delta.x * delta.x + delta.y * delta.y);
-                    if (d2 > 0.0f) {
-                        d2 = sqrtf(d2);
-                    }
+                    d2 = delta.z * delta.z +
+                         (delta.x * delta.x + delta.y * delta.y);
+                    d2 = sqrtf(d2);
                     totalDist += d2;
                     *dp = totalDist;
                     dp++;
@@ -169,6 +176,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
         }
 
         {
+            Vec3 tempDir, crossProd;
             f32 scaleDiff = x20FC - x20F8;
             s32 curIdx2;
             f32 blendedInner = params->x0 * scaleDiff + x20F8;
@@ -176,8 +184,6 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             f32 interpFactor = 1.0f;
             f32 innerDiff = x20F8 - blendedInner;
             f32 outerDiff = x20FC - blendedOuter;
-            s32 remaining;
-            f32* distPtr;
             AfterimageVtx* vp;
 
             numVerts = 0;
@@ -196,11 +202,10 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             vp = &vtx_buf[0];
 
             while (remaining >= 0) {
-                struct Fighter_x20B0_t* curEntry;
                 f32 outerScale, innerScale;
                 s32 alpha;
 
-                curEntry = &fp->x20B0[curIdx2];
+                struct Fighter_x20B0_t* curEntry = &fp->x20B0[curIdx2];
                 outerScale = interpFactor * outerDiff + blendedOuter;
                 innerScale = interpFactor * innerDiff + blendedInner;
                 numVerts += 2;
@@ -245,10 +250,10 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                         f32 angle =
                             lbVector_Angle(&curEntry->xC, &nextEntry->xC);
                         f32 subdivAngle = angle / AFTERIMAGE_ANGLE_STEP;
-                        s32 numSubdiv = (s32) subdivAngle;
+                        numSubdiv = (s32) subdivAngle;
                         interpFactor = 1.0f - (*distPtr / totalDist);
 
-                        if (numSubdiv != 0) {
+                        if (numSubdiv) {
                             f32 frac;
                             s32 j;
                             f32 cumAngle = 0.0f;
@@ -347,7 +352,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             if (numVerts > 1) {
                 AfterimageVtx* p = &vtx_buf[1];
                 u32 count = (u32) (numVerts - 1);
-                u32 n4 = count >> 2;
+                n4 = count >> 2;
                 if (n4 != 0) {
                     do {
                         GXPosition3f32(p[0].x, p[0].y, p[0].z);
@@ -403,14 +408,13 @@ void ftCo_800C2FD8(Fighter_GObj* gobj)
             return;
         }
         switch (itGetKind(fp->item_gobj)) {
-        case It_Kind_Sword: {
+        case It_Kind_Sword:
             it_802852B8(fp->item_gobj, &fp->x20F8, &fp->x20FC);
             var_r29 = 1;
             break;
-        }
-        default: {
-            HSD_ASSERTREPORT(0x16D, 0, "no afterimage item!\n");
-        }
+        default:
+            HSD_ASSERTREPORT(365, 0, "no afterimage item!\n");
+            break;
         }
         jobj = it_80285314(fp->item_gobj);
     } else {
@@ -446,6 +450,8 @@ void ftCo_800C2FD8(Fighter_GObj* gobj)
             var_r5 = &da->x78;
             break;
         }
+        default:
+            break;
         }
         var_r29 = 0;
         fp->x20F8 = var_r5->x18;

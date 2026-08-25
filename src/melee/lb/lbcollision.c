@@ -17,14 +17,10 @@
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
-#include <baselib/debug.h>
 #include <baselib/jobj.h>
 #include <baselib/mtx.h>
-#include <baselib/particle.h>
 #include <baselib/state.h>
 #include <baselib/tev.h>
-#include <MetroTRK/intrinsics.h>
-#include <MSL/math_ppc.h>
 
 /* 006E58 */ static bool
 lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
@@ -33,10 +29,27 @@ lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
                 float hit_radius, float hurt_radius, float broadphase_scale);
 
 /// .sdata
-static GXColor lbColl_804D36C4 = { 0, 0xFF, 0xFF, 0x80 };
-static GXColor lbColl_804D36C8 = { 0, 0x80, 0x80, 0x80 };
-static GXColor lbColl_804D36D4 = { 0, 0x80, 0xFF, 0x80 };
-static GXColor lbColl_804D36D8 = { 0, 0x40, 0x80, 0x80 };
+static GXColor lbColl_804D36A0 = { 0xFF, 0x00, 0x00, 0x80 };
+static GXColor lbColl_804D36A4 = { 0xFF, 0x00, 0xFF, 0x80 };
+static GXColor lbColl_804D36A8 = { 0x80, 0x00, 0x00, 0x80 };
+static GXColor lbColl_804D36AC = { 0xFF, 0xFF, 0x00, 0x80 };
+static GXColor lbColl_804D36B0 = { 0x80, 0x80, 0x00, 0x80 };
+static GXColor lbColl_804D36B4 = { 0x00, 0xFF, 0x00, 0x80 };
+static GXColor lbColl_804D36B8 = { 0x00, 0x80, 0x00, 0x80 };
+static GXColor lbColl_804D36BC = { 0x00, 0x00, 0xFF, 0x80 };
+static GXColor lbColl_804D36C0 = { 0x00, 0x00, 0x80, 0x80 };
+static GXColor lbColl_804D36C4 = { 0x00, 0xFF, 0xFF, 0x80 };
+static GXColor lbColl_804D36C8 = { 0x00, 0x80, 0x80, 0x80 };
+static GXColor lbColl_804D36CC = { 0x00, 0xFF, 0x80, 0x80 };
+static GXColor lbColl_804D36D0 = { 0x00, 0x80, 0x40, 0x80 };
+static GXColor lbColl_804D36D4 = { 0x00, 0x80, 0xFF, 0x80 };
+static GXColor lbColl_804D36D8 = { 0x00, 0x40, 0x80, 0x80 };
+static GXColor lbColl_804D36DC = { 0xFF, 0xFF, 0xFF, 0x80 };
+static GXColor lbColl_804D36E0 = { 0xFF, 0x80, 0x00, 0x80 };
+static GXColor lbColl_804D36E4 = { 0x80, 0x40, 0x00, 0x80 };
+static GXColor lbColl_804D36E8 = { 0xFF, 0xFF, 0xFF, 0x80 };
+static GXColor lbColl_804D36EC = { 0x80, 0x80, 0x80, 0x80 };
+static GXColor lbColl_804D36F0 = { 0xFF, 0xFF, 0x00, 0x80 };
 
 /// .sdata2
 float const lbColl_804D79F0 = 1e-5;
@@ -66,12 +79,9 @@ int lbColl_803B9880[] = {
     0x00035BAF, 0x00035BB2, 0x00035BB5, 0x00083D60, 0x00083D60, 0x0000020D,
 };
 
-extern GXColor lbColl_804D36AC;
-extern GXColor lbColl_804D36B0;
-extern GXColor lbColl_804D36B4;
-extern GXColor lbColl_804D36B8;
-extern GXColor lbColl_804D36BC;
-extern GXColor lbColl_804D36C0;
+static GXColor lbColl_804D36F4 = { 0x80, 0x80, 0x00, 0x80 };
+static GXColor lbColl_804D36F8 = { 0xFF, 0x00, 0x00, 0x80 };
+static GXColor lbColl_804D36FC = { 0x80, 0x00, 0x00, 0x80 };
 
 struct unk {
     GXColor* pad;
@@ -101,29 +111,13 @@ int lbColl_80005BB0(HitCapsule* arg0, int arg1)
         temp_r6 = arg0->sfx_severity;
         if (temp_r6 == 2) {
             return lbAudioAx_80024184(
-                *(lbColl_803B9880 + (temp_r0 * 3) + (temp_r6)), 127, 64, arg1);
+                *(lbColl_803B9880 + (temp_r0 * 3) + temp_r6), 127, 64, arg1);
         }
     }
 
     return lbAudioAx_80024184(
         *(lbColl_803B9880 + (temp_r0 * 3) + (arg0->sfx_severity)), 127, 64,
         -1);
-}
-
-static inline void vector_sub(Vec3* a, Vec3* b, Vec3* result)
-{
-    result->x = a->x - b->x;
-    result->y = a->y - b->y;
-    result->z = a->z - b->z;
-}
-
-static inline bool between(float x, float lo, float hi)
-{
-    if (x < hi && x > lo) {
-        return true;
-    } else {
-        return false;
-    }
 }
 
 static inline bool nearzero(float x)
@@ -314,7 +308,7 @@ float lbColl_80005FC0(Vec3* arg0, Vec3* arg1, Vec3* arg2, float* arg3)
     return x * x + y * y;
 }
 
-inline bool end(Vec3* a, Vec3* b, float unk_sum)
+static inline bool end(Vec3* a, Vec3* b, float unk_sum)
 {
     float y = a->y - b->y;
     float x = a->x - b->x;
@@ -330,19 +324,18 @@ inline bool end(Vec3* a, Vec3* b, float unk_sum)
 bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                      Vec3* arg4, Vec3* arg5, float arg6, float arg7)
 {
-    u8 operand_pad[8];
     {
-        Vec3 vec4;
         Vec3 arg4_offset;
         Vec3 arg5_offset;
         float temp_f1;
         float unk_sum = arg6 + arg7;
-        vec4 = *arg0;
+        Vec3 vec4 = *arg0;
         (void) vec4;
         arg4_offset = vec4;
         {
             Vec3 arg2_copy;
             arg2_copy = *arg2;
+            (void) arg2_copy;
             arg5_offset = arg2_copy;
         }
 
@@ -463,19 +456,20 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
             float d2_x = arg3_x - arg5_offset.x;
             float arg3_z = arg3->z;
             float d2_z = arg3_z - arg5_offset.z;
-            float d1_dot_d2 = d1_z * d2_z + d1_x * d2_x + d1_y * d2_y;
+            float d1_dot_d2 = d1_x * d2_x + d1_z * d2_z + d1_y * d2_y;
             float d2_z_sq = d2_z * d2_z;
             float d2_len_sq = d2_z_sq + d2_x * d2_x + d2_y * d2_y;
             float offset_delta_x = arg4_offset.x - arg5_offset.x;
             float d1_len_sq = (d1_z * d1_z) + ((d1_x * d1_x) + (d1_y * d1_y));
             float offset_delta_z = arg4_offset.z - arg5_offset.z;
-            float d2_dot_offset_delta = d2_z * offset_delta_z +
-                                        d2_x * offset_delta_x +
-                                        d2_y * offset_delta_y;
+            float d2_y_offset = d2_y * offset_delta_y;
+            float d2_dot_offset_delta =
+                d2_z * offset_delta_z + d2_x * offset_delta_x + d2_y_offset;
             float d1_dot_offset_delta = (d1_z * offset_delta_z) +
                                         d1_x * offset_delta_x +
                                         d1_y * offset_delta_y;
-            float denom = d1_len_sq * d2_len_sq - d1_dot_d2 * d1_dot_d2;
+            float len_product = d1_len_sq * d2_len_sq;
+            float denom = len_product - d1_dot_d2 * d1_dot_d2;
 
             {
                 float arg5_scl;
@@ -648,24 +642,48 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                 arg5->z = d2_z * arg5_scl + arg5_offset.z;
             }
         }
-            PAD_STACK(72);
+            PAD_STACK(84);
             return end(arg4, arg5, unk_sum);
         }
         }
     }
 }
 
+static inline float lbColl_Dot2(float ax, float ay, float bx, float by)
+{
+    return ax * bx + ay * by;
+}
+
+static inline float lbColl_GetY(Vec3* v)
+{
+    return v->y;
+}
+
 bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                      float p, float q, float r)
 {
+    float diff_dc_x;
+    float diff_ac_x;
+    float diff_dc_y;
+    float d_y;
+    float diff_ba_y;
+    float diff_ba_x;
+    float d_x;
     Vec3 a1;
+    float sqdist2_dc;
+    float sqdist2_ba;
+    Vec3 c1;
+    float dot2_diff_dc_ac;
+    float dot2_diff_ba_ac;
+    float determinant;
     float sum_pq = p + q;
-    u8 operand_pad[12];
-
     Vec3 a0;
-    PAD_STACK(72);
+    u8 operand_pad[8];
+
+    PAD_STACK(80);
 
     a0 = *a;
+    (void) a0;
     a1 = a0;
     {
         Vec3 c0;
@@ -674,8 +692,6 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
         (void) c0;
 
         {
-            Vec3 c1;
-
             c1 = c0;
             {
                 float b_x = b->x;
@@ -711,7 +727,8 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                 }
 
                 {
-                    float b_y = b->y;
+                    float loaded_b_y = b->y;
+                    float b_y = loaded_b_y;
                     if (a1.y > b_y) {
                         {
                             float y;
@@ -744,36 +761,37 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                     }
 
                     {
-                        float diff_ba_y = b_y - a1.y;
-                        float d_y = d->y;
-                        float diff_ac_y = a1.y - c1.y;
-                        float diff_dc_y = d_y - c1.y;
-                        float diff_ba_x = b_x - a1.x;
-                        float d_x = d->x;
-                        float diff_dc_x = d_x - c1.x;
+                        float dot2_diff_ba_dc;
+                        float diff_ac_y;
+                        diff_ba_y = b_y - a1.y;
+                        d_y = lbColl_GetY(d);
+                        diff_ac_y = a1.y - c1.y;
+                        diff_dc_y = d_y - c1.y;
+                        diff_ba_x = b_x - a1.x;
+                        d_x = d->x;
+                        diff_dc_x = d_x - c1.x;
 
-                        float dot2_diff_ba_dc =
-                            diff_ba_x * diff_dc_x + diff_ba_y * diff_dc_y;
+                        dot2_diff_ba_dc = lbColl_Dot2(diff_ba_x, diff_ba_y,
+                                                      diff_dc_x, diff_dc_y);
 
-                        float sqdist2_dc =
+                        sqdist2_dc =
                             diff_dc_x * diff_dc_x + diff_dc_y * diff_dc_y;
-                        float sqdist2_ba =
+                        sqdist2_ba =
                             diff_ba_x * diff_ba_x + diff_ba_y * diff_ba_y;
-                        float diff_ac_x = a1.x - c1.x;
+                        diff_ac_x = a1.x - c1.x;
 
-                        float dot2_diff_dc_ac =
+                        dot2_diff_dc_ac =
                             diff_dc_x * diff_ac_x + diff_dc_y * diff_ac_y;
 
-                        float dot2_diff_ba_ac =
+                        dot2_diff_ba_ac =
                             diff_ba_x * diff_ac_x + diff_ba_y * diff_ac_y;
 
-                        float determinant = sqdist2_ba * sqdist2_dc -
-                                            dot2_diff_ba_dc * dot2_diff_ba_dc;
+                        determinant = sqdist2_ba * sqdist2_dc -
+                                      dot2_diff_ba_dc * dot2_diff_ba_dc;
 
                         {
                             float scl_e;
                             float scl_f;
-                            float out0;
                             float out1;
                             if (approximatelyZero(sqdist2_dc)) {
                                 if (approximatelyZero(sqdist2_ba)) {
@@ -911,6 +929,7 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                     (scl_f > lbColl_804D7A00) ||
                                     (scl_f < lbColl_804D7A10))
                                 {
+                                    float out0;
                                     float result0;
                                     float temp_scl_e;
                                     {
@@ -996,16 +1015,17 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
                      float* out_overlap, float hit_radius, float hurt_radius,
                      float broadphase_scale)
 {
-    float hurt_len_sq;
+    float hit_end_min_z;
     float closest_delta_x;
     float hit_start_mid_x;
     float local_delta_x;
     float hurt_mid_z;
+    u8 operand_pad[4];
     Vec3 hit_start_copy;
     Vec3 hurt_start_copy;
     Vec3 hit_delta;
-    Mtx inv_hurt_mtx;
-    float candidate_hit_param;
+    float start_delta_z;
+    float hit_start_dot;
     float scaled_hurt_radius;
     float hurt_mid_x;
     float hurt_mid_y;
@@ -1017,7 +1037,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float allowed_distance;
     float hurt_closest_x;
     float hurt_closest_y;
-    float hurt_closest_z;
+    float hurt_end_x;
     float hit_start_mid_y;
     float hit_param_candidate;
     float closest_delta_y;
@@ -1025,7 +1045,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float local_delta_y;
     float start_delta_x;
     float start_delta_y;
-    float start_delta_z;
+    Mtx inv_hurt_mtx;
     float hurt_delta_x;
     float hit_start_max_x;
     float hit_end_min_x;
@@ -1041,26 +1061,26 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float hit_end_min_y;
     float hit_start_min_y;
     float hit_end_max_y;
-    float hit_end_min_z;
+    float hurt_len_sq;
     float hit_end_max_z;
-    float hit_start_dot;
+    float candidate_hurt_param;
     float hit_end_x;
     float hit_len_sq;
     float hit_end_mid_x;
     float hit_end_y;
     float hit_start_max_z;
     float hit_start_min_z;
-    float hurt_end_x;
+    float hurt_closest_z;
     float hit_end_z;
+    float segment_dot;
     float hurt_end_y;
-    float hurt_end_z;
     float hit_param;
     float local_dist;
     float hurt_param;
     float hurt_param_from_hit_start;
     float hurt_param_from_hit_end;
     float closest_dist;
-    float segment_dot;
+    float hurt_end_z;
     f64 local_rsqrt_estimate;
     f64 local_rsqrt_step1;
     f64 local_rsqrt_step2;
@@ -1165,6 +1185,7 @@ block_39:
     hit_delta.y = hit_end->y - hit_start_copy.y;
     hit_delta.z = hit_end->z - hit_start_copy.z;
     hurt_end_y = hurt_end->y;
+    (void) hurt_end_y;
     start_delta_y = hit_start_copy.y - hurt_start_copy.y;
     hurt_delta_y = hurt_end_y - hurt_start_copy.y;
     hurt_end_x = hurt_end->x;
@@ -1177,8 +1198,8 @@ block_39:
     hurt_end_z = hurt_end->z;
     (void) hurt_end_z;
     start_delta_x = hit_start_copy.x - hurt_start_copy.x;
-    hurt_delta_z = hurt_end_z - hurt_start_copy.z;
     segment_dot = (hit_delta.x * hurt_delta_x) + segment_dot;
+    hurt_delta_z = hurt_end_z - hurt_start_copy.z;
     /* Cache 1.0 constant in a callee-save to avoid reloading it across the
      * several `hit_param = 1.0` / `hurt_param = 1.0` branches below. The
      * variable name is a borrow from the unused-after-broadphase-rejection
@@ -1316,7 +1337,7 @@ block_39:
                 (hurt_param > lbColl_804D7A00) ||
                 (hurt_param < lbColl_804D7A10))
             {
-                float candidate_hurt_param;
+                float candidate_hit_param;
                 float hit_endpoint_dist_sq;
                 float hit_endpoint_param;
                 float hurt_endpoint_param;
@@ -1363,8 +1384,8 @@ block_39:
     closest_delta_x = hit_closest->x - hurt_closest->x;
     closest_delta_z = hit_closest->z - hurt_closest->z;
     closest_dist_sq = (closest_delta_z * closest_delta_z) +
-                      ((closest_delta_x * closest_delta_x) +
-                       (closest_delta_y * closest_delta_y));
+                      ((closest_delta_y * closest_delta_y) +
+                       (closest_delta_x * closest_delta_x));
     if (closest_dist_sq > lbColl_804D79F8) {
         volatile float sp38;
 
@@ -1402,8 +1423,8 @@ block_39:
     HSD_MtxInverse(hurt_mtx, inv_hurt_mtx);
     PSMTXMultVec(inv_hurt_mtx, hit_closest, &hit_start_copy);
     PSMTXMultVec(inv_hurt_mtx, hurt_closest, &hit_delta);
-    local_delta_y = hit_start_copy.y - hit_delta.y;
     local_delta_x = hit_start_copy.x - hit_delta.x;
+    local_delta_y = hit_start_copy.y - hit_delta.y;
     local_delta_z = hit_start_copy.z - hit_delta.z;
     local_dist_sq =
         (local_delta_z * local_delta_z) +
@@ -1432,8 +1453,8 @@ block_39:
     scaled_hurt_radius = (hurt_radius * closest_dist) / local_dist;
     contact_lerp = scaled_hurt_radius / closest_dist;
     allowed_distance = hit_radius + scaled_hurt_radius;
-    hurt_closest_x = hurt_closest->x;
     *out_overlap = allowed_distance - closest_dist;
+    hurt_closest_x = hurt_closest->x;
     out_contact_pos->x =
         (contact_lerp * (hit_closest->x - hurt_closest_x)) + hurt_closest_x;
     hurt_closest_y = hurt_closest->y;
@@ -1448,7 +1469,7 @@ block_39:
     return 1;
 }
 
-inline float sqrDistance(Vec3* a, Vec3* b)
+static inline float sqrDistance(Vec3* a, Vec3* b)
 {
     float x = a->x - b->x;
     float y = a->y - b->y;
@@ -1702,7 +1723,7 @@ bool lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2, s32 arg3,
     MtxPtr var_r9;
     float var_f1;
 
-    if (arg1->state != Intangible) {
+    if (arg1->state != HurtCapsule_Intangible) {
         if (!arg1->skip_update_pos) {
             lb_8000B1CC(arg1->bone, &arg1->a_offset, &arg1->a_pos);
             lb_8000B1CC(arg1->bone, &arg1->b_offset, &arg1->b_pos);
@@ -1739,52 +1760,6 @@ bool lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2, s32 arg3,
                                var_f1, arg1->scale, lbColl_804D7A38 * arg5);
     }
     return 0;
-}
-
-inline void checkPos(HurtCapsule* hurt, Mtx mtx, float arg5)
-{
-    if (!hurt->skip_update_pos) {
-        lb_8000B1CC(hurt->bone, &hurt->a_offset, &hurt->a_pos);
-        lb_8000B1CC(hurt->bone, &hurt->b_offset, &hurt->b_pos);
-
-        if (mtx != NULL) {
-            hurt->b_pos.z = arg5;
-            hurt->a_pos.z = arg5;
-        }
-
-        hurt->skip_update_pos = true;
-    }
-}
-
-inline void mtxConcat(HurtCapsule* hurt, Mtx mtx)
-{
-    Mtx sp34;
-    if (mtx != NULL) {
-        PSMTXConcat(mtx, HSD_JObjGetMtxPtr(hurt->bone), &sp34[0]);
-    }
-}
-
-inline MtxPtr pickMtx(HurtCapsule* hurt, Mtx mtx)
-{
-    MtxPtr var_r9;
-    Mtx sp34;
-    if (mtx != NULL) {
-        var_r9 = sp34;
-    } else {
-        var_r9 = HSD_JObjGetMtxPtr(hurt->bone);
-    }
-    return var_r9;
-}
-
-inline float getHit1C(HitCapsule* hit, float arg3)
-{
-    float var_f1;
-    if (hit->x43_b1) {
-        var_f1 = hit->scale;
-    } else {
-        var_f1 = hit->scale * arg3;
-    }
-    return var_f1;
 }
 
 bool lbColl_80008248(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2, f32 arg3,
@@ -1983,9 +1958,6 @@ bool lbColl_80008820(HitCapsule* capsule, int type, void* victim)
 
 GXColor const lbColl_804D7A50 = { 0 };
 
-extern GXColor lbColl_804D36CC;
-extern GXColor lbColl_804D36D0;
-
 void lbColl_800089B8(HitCapsule* hit, UNK_T arg1)
 {
     size_t i;
@@ -2070,7 +2042,8 @@ void lbColl_80008DA4(GXColor* arg0, GXColor* arg1)
     GXSetTevColor(GX_TEVREG0, *arg0);
     GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_RASC, GX_CC_C0,
                     GX_CC_ZERO);
-    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_ONE, GX_CA_A0, GX_CA_ZERO);
+    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_KONST, GX_CA_A0,
+                    GX_CA_ZERO);
     GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
                     GX_TEVPREV);
     GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
@@ -2403,11 +2376,6 @@ void lbColl_80009DD4(Vec3* v0, Vec3* v1, GXColor* clr)
     HSD_StateInitTev();
 }
 
-extern GXColor lbColl_804D36A0;
-extern GXColor lbColl_804D36A4;
-extern GXColor lbColl_804D36A8;
-extern GXColor lbColl_804D36DC;
-
 bool lbColl_80009F54(HitCapsule* hit, u32 arg1, float arg8)
 {
     GXColor* var_r5;
@@ -2445,9 +2413,6 @@ bool lbColl_80009F54(HitCapsule* hit, u32 arg1, float arg8)
     }
     return 0;
 }
-
-extern GXColor lbColl_804D36E8;
-extern GXColor lbColl_804D36EC;
 
 static inline void lbColl_DrawHitResult(MtxPtr mtx, Vec3* a, Vec3* b,
                                         GXColor* c0, GXColor* c1, f32 size)
@@ -2533,9 +2498,6 @@ bool lbColl_8000A244(HurtCapsule* hurt, u32 arg1, Mtx arg2, float arg3)
     return false;
 }
 
-static GXColor lbColl_804D36F8 = { 0xFF, 0, 0, 0x80 };
-static GXColor lbColl_804D36FC = { 0x80, 0, 0, 0x80 };
-
 bool lbColl_8000A10C(struct lbColl_8000A10C_arg0_t* arg0, u32 arg1, f32 arg2)
 {
     GXColor* c = &lbColl_804D36F8;
@@ -2553,9 +2515,6 @@ bool lbColl_8000A10C(struct lbColl_8000A10C_arg0_t* arg0, u32 arg1, f32 arg2)
     return false;
 }
 
-static GXColor lbColl_804D36F0 = { 0xFF, 0xFF, 0, 0x80 };
-static GXColor lbColl_804D36F4 = { 0x80, 0x80, 0, 0x80 };
-
 bool lbColl_8000A1A8(struct Fighter_x1614_t* arg0, int arg1, f32 scale_y)
 {
     u32 var_r0;
@@ -2572,9 +2531,6 @@ bool lbColl_8000A1A8(struct Fighter_x1614_t* arg0, int arg1, f32 scale_y)
     }
     return false;
 }
-
-GXColor lbColl_804D36E0 = { 0 };
-GXColor lbColl_804D36E4 = { 0x80, 0x40, 0x00, 0x80 };
 
 bool lbColl_8000A460(Fighter_x1670_t* hurt, u32 arg1)
 {
@@ -2611,7 +2567,7 @@ bool lbColl_8000A584(HurtCapsule* hurt, u32 arg1, u32 arg2, Mtx arg3, f32 arg8)
         GXColor* temp_r3;
 
         var_r4 = arg1;
-        if (hurt->state == Intangible) {
+        if (hurt->state == HurtCapsule_Intangible) {
             var_r4 = 2;
         }
         temp_r3 = lbColl_803B9928[var_r4].pad;
@@ -2650,16 +2606,16 @@ bool lbColl_8000A584(HurtCapsule* hurt, u32 arg1, u32 arg2, Mtx arg3, f32 arg8)
     }
 }
 
-bool lbColl_8000A78C(HitResult* hit, u32 arg1, Mtx arg2, f32 pos_z)
+static inline bool lbColl_DrawHit(HitResult* hit, u32 arg1, MtxPtr arg2,
+                                  f32 pos_z, GXColor* color,
+                                  GXColor* secondary_color, MtxPtr hit_mtx,
+                                  Vec3* pos_a, Vec3* pos_b)
 {
     f32 temp_f31;
-    Mtx sp9C;
-    Vec3 sp90;
-    Vec3 sp84;
     MtxPtr var_r31;
     u32 var_r0;
 
-    if (lbColl_804D36C4.a == 0xFF) {
+    if (color->a == 0xFF) {
         var_r0 = 0;
     } else {
         var_r0 = 2;
@@ -2673,21 +2629,31 @@ bool lbColl_8000A78C(HitResult* hit, u32 arg1, Mtx arg2, f32 pos_z)
             hit->skip_update_pos = true;
         }
         if (arg2 != NULL) {
-            PSMTXConcat(arg2, HSD_JObjGetMtxPtr(hit->bone), sp9C);
+            PSMTXConcat(arg2, HSD_JObjGetMtxPtr(hit->bone), hit_mtx);
         }
         temp_f31 = hit->size;
-        sp84 = hit->pos;
-        sp90 = hit->pos;
+        *pos_b = hit->pos;
+        *pos_a = hit->pos;
         if (arg2 != NULL) {
-            var_r31 = sp9C;
+            var_r31 = hit_mtx;
         } else {
             var_r31 = HSD_JObjGetMtxPtr(hit->bone);
         }
-        lbColl_DrawHitResult(var_r31, &sp90, &sp84, &lbColl_804D36C4,
-                             &lbColl_804D36C8, temp_f31);
+        lbColl_DrawHitResult(var_r31, pos_a, pos_b, color, secondary_color,
+                             temp_f31);
         return true;
     }
     return false;
+}
+
+bool lbColl_8000A78C(HitResult* hit, u32 arg1, Mtx arg2, f32 pos_z)
+{
+    Mtx sp9C;
+    Vec3 sp90;
+    Vec3 sp84;
+
+    return lbColl_DrawHit(hit, arg1, arg2, pos_z, &lbColl_804D36C4,
+                          &lbColl_804D36C8, sp9C, &sp90, &sp84);
 }
 
 bool lbColl_8000A95C(HitResult* hit, u32 arg1, Mtx arg2, f32 pos_z)
@@ -2696,39 +2662,8 @@ bool lbColl_8000A95C(HitResult* hit, u32 arg1, Mtx arg2, f32 pos_z)
     Vec3 sp90;
     Vec3 sp84;
 
-    f32 temp_f31;
-    MtxPtr var_r31;
-    u32 var_r0;
-
-    if (lbColl_804D36CC.a == 0xFF) {
-        var_r0 = 0;
-    } else {
-        var_r0 = 2;
-    }
-    if (var_r0 == arg1) {
-        if (!hit->skip_update_pos) {
-            lb_8000B1CC(hit->bone, &hit->offset, &hit->pos);
-            if (arg2 != NULL) {
-                hit->pos.z = pos_z;
-            }
-            hit->skip_update_pos = 1;
-        }
-        if (arg2 != NULL) {
-            PSMTXConcat(arg2, HSD_JObjGetMtxPtr(hit->bone), sp9C);
-        }
-        temp_f31 = hit->size;
-        sp84 = hit->pos;
-        sp90 = hit->pos;
-        if (arg2 != NULL) {
-            var_r31 = sp9C;
-        } else {
-            var_r31 = HSD_JObjGetMtxPtr(hit->bone);
-        }
-        lbColl_DrawHitResult(var_r31, &sp90, &sp84, &lbColl_804D36CC,
-                             &lbColl_804D36D0, temp_f31);
-        return true;
-    }
-    return false;
+    return lbColl_DrawHit(hit, arg1, arg2, pos_z, &lbColl_804D36CC,
+                          &lbColl_804D36D0, sp9C, &sp90, &sp84);
 }
 
 bool lbColl_8000AB2C(HitResult* hit, u32 arg1, MtxPtr arg2, f32 pos_z)
@@ -2737,39 +2672,8 @@ bool lbColl_8000AB2C(HitResult* hit, u32 arg1, MtxPtr arg2, f32 pos_z)
     Vec3 sp90;
     Vec3 sp84;
 
-    f32 temp_f31;
-    MtxPtr var_r31;
-    u32 var_r0;
-
-    if (lbColl_804D36D4.a == 0xFF) {
-        var_r0 = 0;
-    } else {
-        var_r0 = 2;
-    }
-    if (var_r0 == arg1) {
-        if (!hit->skip_update_pos) {
-            lb_8000B1CC(hit->bone, &hit->offset, &hit->pos);
-            if (arg2 != NULL) {
-                hit->pos.z = pos_z;
-            }
-            hit->skip_update_pos = true;
-        }
-        if (arg2 != NULL) {
-            PSMTXConcat(arg2, HSD_JObjGetMtxPtr(hit->bone), sp9C);
-        }
-        temp_f31 = hit->size;
-        sp84 = hit->pos;
-        sp90 = hit->pos;
-        if (arg2 != NULL) {
-            var_r31 = sp9C;
-        } else {
-            var_r31 = HSD_JObjGetMtxPtr(hit->bone);
-        }
-        lbColl_DrawHitResult(var_r31, &sp90, &sp84, &lbColl_804D36D4,
-                             &lbColl_804D36D8, temp_f31);
-        return true;
-    }
-    return false;
+    return lbColl_DrawHit(hit, arg1, arg2, pos_z, &lbColl_804D36D4,
+                          &lbColl_804D36D8, sp9C, &sp90, &sp84);
 }
 
 bool lbColl_8000ACFC(UNK_T victim, HitCapsule* hitbox)

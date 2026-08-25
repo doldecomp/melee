@@ -1,10 +1,12 @@
 #ifndef MELEE_DB_H
 #define MELEE_DB_H
 
-#include <melee/ft/forward.h>
-#include <melee/it/forward.h>
+#include <placeholder.h>
 
-#include <common_structs.h>
+#include "melee/ft/forward.h"
+#include "melee/it/forward.h"
+
+#include <baselib/controller.h>
 
 extern char db_build_timestamp[];
 extern int DbLevel;
@@ -57,27 +59,10 @@ extern int db_MiscVisualEffectsStatus;
 /* 226BD4 */ void fn_CheckAnimationInfo(int player);
 /* 226E00 */ void fn_SetupMiscStageVisuals(void);
 /* 226E0C */ void fn_CheckMiscStageEffects(int arg0);
-/* 2270C4 */ static void fn_802270C4(int arg0);
-/* 22713C */ static void fn_8022713C(int arg0);
 /* 227174 */ void fn_SetupCameraInfo(void);
-/* 227188 */ static void fn_80227188(void);
 /* 227484 */ void fn_CheckCameraInfo(int player, int buttons_down,
                                      int buttons_pressed, f32 cstick_x,
                                      f32 cstick_y);
-/* 2277E8 */ static void fn_802277E8(HSD_GObj*, int);
-/* 227904 */ static void fn_80227904(HSD_GObj* camera, int port);
-/* 2279E8 */ static void fn_802279E8(HSD_GObj* camera, Vec3* camera_pos,
-                                     Vec3* camera_interest, float cstick_x,
-                                     float cstick_y);
-/* 227B64 */ static void fn_80227B64(HSD_GObj* camera, float x, float y);
-/* 227BA8 */ static void fn_80227BA8(HSD_GObj* camera, Vec3*, float, float);
-/* 227CAC */ static void fn_80227CAC(HSD_GObj* camera, float cstick_y);
-/* 227D38 */ static void fn_80227D38(HSD_GObj* camera, Vec3*, float);
-/* 227EB0 */ static void fn_80227EB0(HSD_GObj* camera, Vec3*, Vec3*, float,
-                                     float);
-/* 227FE0 */ static void fn_80227FE0(HSD_GObj* camera, float x, float y);
-/* 228124 */ static void fn_80228124(HSD_GObj* camera, Vec3*, float, float);
-
 /* 22873C */ void fn_CheckMiscVisualEffects(int player);
 /* 2287C4 */ void fn_Setup5xSpeed(UNK_PARAMS);
 /* 2287D8 */ void fn_Check5xSpeed(int player);
@@ -85,16 +70,9 @@ extern int db_MiscVisualEffectsStatus;
 /* 22886C */ void db_InitScreenshot(void);
 /* 22887C */ void db_CheckScreenshot(void);
 /* 22892C */ void db_TakeScreenshotIfPending(void);
-/* 2289F8 */ static int fn_802289F8(char* arg0, int arg1, int arg2);
 /* 228A64 */ void db_ClearFPUExceptions(void);
-/* 228AB4 */ static void fn_HSDPanicHandler(OSContext* ctx);
-/* 228B28 */ static void fn_OSErrorHandler(u16 error, OSContext* ctx, ...);
 /* 228C4C */ void db_SetupCrashHandler(void);
 /* 228CF4 */ void fn_SetupBonusInfo(void);
-/* 228D18 */ static void fn_80228D18(void);
-/* 228D38 */ static void fn_80228D38(void);
-/* 228E54 */ static void fn_80228E54(int arg0, int arg1, int arg2);
-/* 22900C */ static void fn_8022900C(int arg0);
 /* 2291A0 */ void fn_CheckBonusInfo(int arg0);
 /* 229220 */ void fn_SetupObjAllocLimiter(void);
 /* 229240 */ void fn_UpdateObjAllocLimiter(int arg0);

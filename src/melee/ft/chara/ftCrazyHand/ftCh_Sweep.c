@@ -1,6 +1,5 @@
 #include "ftCh_Sweep.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "baselib/forward.h"
@@ -13,10 +12,6 @@
 #include "ftCrazyHand/ftCh_TagCancel.h"
 #include "ftMasterHand/types.h"
 #include "pl/player.h"
-
-#include <common_structs.h>
-#include <dolphin/mtx.h>
-#include <MetroTRK/intrinsics.h>
 
 void fn_8015746C(HSD_GObj* gobj)
 {

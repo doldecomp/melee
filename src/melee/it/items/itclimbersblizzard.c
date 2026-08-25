@@ -1,6 +1,5 @@
 #include "itclimbersblizzard.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "baselib/random.h"
@@ -9,7 +8,6 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itCharItems.h"
@@ -17,6 +15,7 @@
 
 #include "it/items/forward.h"
 
+#include "it/itgroundcoll.h"
 #include "it/itmaplib.h"
 
 #include <math.h>
@@ -115,11 +114,7 @@ void itClimbersBlizzard_802C2358(Item_GObj* gobj)
 bool itClimbersBlizzard_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    if (ip->xD44_lifeTimer <= 0.0f) {
-        return true;
-    }
-    ip->xD44_lifeTimer -= 1.0F;
-    return false;
+    return Item_TickLifetime(ip);
 }
 
 void itClimbersBlizzard_UnkMotion0_Phys(Item_GObj* gobj)

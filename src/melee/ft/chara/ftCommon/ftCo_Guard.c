@@ -1,3 +1,5 @@
+#include "ftCo_Guard.h"
+
 #include "ftCo_0C35.h"
 #include "ftCo_Attack1.h"
 #include "ftCo_AttackHi3.h"
@@ -7,9 +9,6 @@
 #include "ftCo_AttackS3.h"
 #include "ftCo_AttackS4.h"
 #include "ftCo_Escape.h"
-
-#include "ftCo_Guard.static.h"
-
 #include "ftCo_ItemThrow.h"
 #include "ftCo_Pass.h"
 #include "ftCo_ShieldBreakFly.h"
@@ -19,6 +18,7 @@
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
@@ -31,17 +31,31 @@
 #include "ftCommon/ftCo_Jump.h"
 #include "ftCommon/types.h"
 #include "ftYoshi/ftYs_Guard.h"
-#include "ftYoshi/ftYs_Init.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00CE.h"
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 
-#include <common_structs.h>
 #include <math.h>
-#include <math_ppc.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
+
+/* 091BC4 */ static void ftCo_80091BC4(Fighter* fp);
+/* 091E78 */ static void ftCo_80091E78(Fighter_GObj* gobj, float);
+/* 092158 */ static void ftCo_80092158(Fighter_GObj* gobj, int arg1,
+                                       HSD_JObj* arg2);
+/* 0921DC */ static void ftCo_800921DC(Fighter_GObj* gobj);
+/* 0923B4 */ static void ftCo_800923B4(Fighter_GObj* gobj);
+/* 0924C0 */ static void ftCo_800924C0(HSD_GObj* gobj);
+/* 092908 */ static void ftCo_80092908(Fighter_GObj* gobj);
+/* 092C54 */ static void ftCo_80092C54(Fighter_GObj* gobj);
+/* 092E50 */ static void ftCo_80092E50(Fighter_GObj* gobj);
+/* 092F2C */ static void ftCo_80092F2C(Fighter_GObj* gobj, bool);
+/* 093790 */ static void ftCo_80093790(Fighter_GObj* gobj);
+/* 093850 */ static void ftCo_80093850(Fighter_GObj* gobj);
+/* 09388C */ static void ftCo_8009388C(Fighter_GObj* gobj);
+/* 0939B4 */ static void ftCo_800939B4(Fighter_GObj* gobj);
+/* 093A50 */ static void ftCo_80093A50(Fighter_GObj* gobj);
 
 bool ftCo_80091A2C(Fighter_GObj* gobj)
 {
@@ -54,11 +68,11 @@ static inline bool inlineA0(Fighter* fp)
     return fp->input.held_inputs & HSD_PAD_LR ? true : false;
 }
 
-int ftCo_80091A4C(Fighter_GObj* gobj)
+bool ftCo_80091A4C(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->input.x668 & (HSD_PAD_R | HSD_PAD_L) &&
-        fp->x672_input_timer_counter < p_ftCommonData->x2A0)
+        fp->trigger_analog_timer < p_ftCommonData->powershield_input_window)
     {
         ftCo_800939B4(gobj);
         return true;
@@ -73,11 +87,11 @@ int ftCo_80091A4C(Fighter_GObj* gobj)
 /// @todo @c inline of #ftCo_80091A4C and something else.
 bool ftCo_80091AD8(Fighter_GObj* gobj, int mv_x20)
 {
-    u8 _[16] = { 0 };
     bool ret0;
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(8);
     if (fp->input.x668 & (HSD_PAD_R | HSD_PAD_L) &&
-        fp->x672_input_timer_counter < p_ftCommonData->x2A0)
+        fp->trigger_analog_timer < p_ftCommonData->powershield_input_window)
     {
         ftCo_800939B4(gobj);
         ret0 = true;
@@ -110,8 +124,7 @@ void ftCo_80091B90(Fighter_GObj* gobj, int mv_x20)
 
 void ftCo_80091B9C(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.co.guard.x24 = p_ftCommonData->x68;
 }
 
@@ -125,7 +138,7 @@ void ftCo_80091BC4(Fighter* fp)
         stick_rad += 2 * (float) M_PI;
     }
 
-    stick_deg = rad_to_deg * stick_rad;
+    stick_deg = MTXRadToDeg(stick_rad);
     if (stick_deg < 0) {
         stick_deg = 0;
     }
@@ -214,8 +227,7 @@ void ftCo_80091E78(Fighter_GObj* gobj, float arg1)
             HSD_JObjAnimAll(jobj);
             if (fp->mv.co.guard.x4 < 1) {
                 ftAnim_80070108(fp, FtPart_TransN, 1 - fp->mv.co.guard.x4,
-                                fp->mv.co.guard.x4,
-                                ((HSD_Joint**) fp->ft_data->x20->x0)[2]);
+                                fp->mv.co.guard.x4, fp->ft_data->x20->x0[2]);
             }
             if (arg1 < 1) {
                 ftAnim_8006FE9C(fp, FtPart_TransN, arg1, 1 - arg1);
@@ -224,10 +236,9 @@ void ftCo_80091E78(Fighter_GObj* gobj, float arg1)
             }
         } else if (arg1 < 1) {
             ftAnim_80070010(fp, FtPart_TransN, arg1, 1 - arg1,
-                            ((HSD_Joint**) fp->ft_data->x20->x0)[2]);
+                            fp->ft_data->x20->x0[2]);
         } else {
-            ftAnim_8006FA58(fp, FtPart_TransN,
-                            ((HSD_Joint**) fp->ft_data->x20->x0)[2]);
+            ftAnim_8006FA58(fp, FtPart_TransN, fp->ft_data->x20->x0[2]);
         }
         {
             scl.x = scl.y = scl.z = inlineB0(fp);
@@ -237,22 +248,67 @@ void ftCo_80091E78(Fighter_GObj* gobj, float arg1)
     }
 }
 
-#pragma push
-#pragma force_active on
-
-void ftCo_80092158(Fighter_GObj* gobj, int arg1, HSD_JObj* arg2)
+static inline void ftCo_80092158_inline(Fighter_GObj* gobj, int arg1,
+                                        HSD_JObj* arg2)
 {
     int offset = Player_GetUnk45(GET_FIGHTER(gobj)->player_id) << 2;
     u8* color = Fighter_804D650C + offset;
     efSync_Spawn(arg1, gobj, arg2,
                  (color[0] << 16) | (color[1] << 8) | color[2]);
 }
+
+static inline void ftCo_80092450_inline(Fighter_GObj* gobj)
+{
+    AbsorbDesc absorb;
+    Fighter* fp = GET_FIGHTER(gobj);
+    absorb.x0_bone_id = fp->ft_data->x8->x11;
+    absorb.x10_size = 1;
+    absorb.x4_offset.x = absorb.x4_offset.y = absorb.x4_offset.z = 0.0f;
+    ftColl_8007B1B8(gobj, (ShieldDesc*) &absorb, ftCo_80092E50);
+    fp->x221A_b7 = true;
+}
+
+#ifdef MUST_MATCH
+#pragma push
+#pragma force_active on
+#endif
+
+static void ftCo_80092158(Fighter_GObj* gobj, int arg1, HSD_JObj* arg2)
+{
+    /// @remarks Matching tactic: the body lives in #ftCo_80092158_inline and
+    /// the unreachable block below pads this function's pre-inline statement
+    /// count past the auto-inline threshold so the compiler does not inline
+    /// it into #ftCo_GuardReflect_Anim, whose calls must remain
+    /// `bl ftCo_80092158` (it regresses 100 -> 68.76 without this padding;
+    /// same-TU callers that do need the inlined body call
+    /// #ftCo_80092158_inline explicitly and stay byte-identical).
+    if (0) {
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+    }
+    ftCo_80092158_inline(gobj, arg1, arg2);
+}
+
 void ftCo_800921DC(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     Vec3 trans;
     PAD_STACK(12);
-    ftCo_80092158(gobj, 1047, fp->parts[fp->ft_data->x8->x11].joint);
+    ftCo_80092158_inline(gobj, 1047, fp->parts[fp->ft_data->x8->x11].joint);
     fp->x2219_b0 = true;
     fp->mv.co.guard.xC = false;
     fp->mv.co.guard.x0 = 0;
@@ -262,7 +318,8 @@ void ftCo_800921DC(HSD_GObj* gobj)
     fp->mv.co.guard.x2C = 0;
     {
         float lightshield_amount =
-            (fp->input.x650 - p_ftCommonData->x10) / (1 - p_ftCommonData->x10);
+            (fp->input.x650 - p_ftCommonData->analog_shoulder_deadzone) /
+            (1 - p_ftCommonData->analog_shoulder_deadzone);
         if (lightshield_amount < 0) {
             lightshield_amount = fp->mv.co.guard.x2C;
         }
@@ -295,13 +352,32 @@ void ftCo_800923B4(Fighter_GObj* gobj)
 
 void ftCo_80092450(Fighter_GObj* gobj)
 {
-    AbsorbDesc absorb;
-    Fighter* fp = GET_FIGHTER(gobj);
-    absorb.x0_bone_id = fp->ft_data->x8->x11;
-    absorb.x10_size = 1;
-    absorb.x4_offset.x = absorb.x4_offset.y = absorb.x4_offset.z = 0.0f;
-    ftColl_8007B1B8(gobj, (ShieldDesc*) &absorb, ftCo_80092E50);
-    fp->x221A_b7 = true;
+    /// @remarks Matching tactic: the body lives in #ftCo_80092450_inline and
+    /// the unreachable block below pads this function's pre-inline statement
+    /// count past the auto-inline threshold so the compiler does not inline
+    /// it into #ftCo_GuardReflect_Anim, whose call must remain
+    /// `bl ftCo_80092450` (it regresses 100 -> 68.76 without this padding;
+    /// same-TU callers that do need the inlined body call
+    /// #ftCo_80092450_inline explicitly and stay byte-identical).
+    if (0) {
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+        HSD_JObjAnimAll(NULL);
+    }
+    ftCo_80092450_inline(gobj);
 }
 
 void ftCo_800924C0(Fighter_GObj* gobj)
@@ -316,24 +392,25 @@ void ftCo_800924C0(Fighter_GObj* gobj)
     fp->mv.co.guard.x1C = 0;
     fp->mv.co.guard.x14 = 0;
     fp->mv.co.guard.x18 = 0;
-    ftCo_80092450(gobj);
+    ftCo_80092450_inline(gobj);
     ftCo_800921DC(gobj);
 }
 
 bool ftCo_800925A4(HSD_GObj* gobj)
 {
-    u8 _[8] = { 0 };
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(8);
     if (fp->x221B_b0) {
         fp->mv.co.guard.x2C = fp->lightshield_amount;
         {
             fp->lightshield_amount =
-                (fp->input.x650 - p_ftCommonData->x10) /
-                            (1 - p_ftCommonData->x10) <
+                (fp->input.x650 - p_ftCommonData->analog_shoulder_deadzone) /
+                            (1 - p_ftCommonData->analog_shoulder_deadzone) <
                         0
                     ? fp->mv.co.guard.x2C
-                    : (fp->input.x650 - p_ftCommonData->x10) /
-                          (1 - p_ftCommonData->x10);
+                    : (fp->input.x650 -
+                       p_ftCommonData->analog_shoulder_deadzone) /
+                          (1 - p_ftCommonData->analog_shoulder_deadzone);
         }
         fp->shield_health -= p_ftCommonData->x278 *
                              ((fp->lightshield_amount *
@@ -432,12 +509,12 @@ void ftCo_80092908(Fighter_GObj* gobj)
                               NULL);
     {
         HSD_JObj* jobj = fp->parts[fp->ft_data->x8->x11].joint;
-        ftCo_80092158(gobj, 1048, jobj);
+        ftCo_80092158_inline(gobj, 1048, jobj);
         fp->x2219_b0 = true;
         {
             AbsorbDesc absorb;
-            u8 _[8];
             Fighter* fp2 = GET_FIGHTER(gobj);
+            PAD_STACK(8);
             absorb.x0_bone_id = fp2->ft_data->x8->x11;
             absorb.x10_size = 1;
             absorb.x4_offset.x = absorb.x4_offset.y = absorb.x4_offset.z = 0;
@@ -523,8 +600,7 @@ void ftCo_GuardOff_Anim(Fighter_GObj* gobj)
 
 void ftCo_GuardOff_IASA(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     /// @todo #RETURN_IF chain
     if (!fp->mv.co.guard.x1C ||
         (!ftCo_SpecialS_CheckInput(gobj) && !ftCo_Attack100_CheckInput(gobj) &&
@@ -594,7 +670,8 @@ void ftCo_80092F2C(HSD_GObj* gobj, bool arg1)
     fp->x670_timer_lstick_tilt_x = -2;
     fp->post_hitlag_cb = ftCo_800932DC;
     if (!fp->x221C_b2) {
-        ftCo_80092158(gobj, 1049, fp->parts[fp->ft_data->x8->x11].joint);
+        ftCo_80092158_inline(gobj, 1049,
+                             fp->parts[fp->ft_data->x8->x11].joint);
         fp->x2219_b0 = true;
     }
     {
@@ -672,20 +749,10 @@ void ftCo_800932DC(Fighter_GObj* gobj)
     }
 }
 
-static inline void ftCo_80091D58_inline(Fighter* fp)
+static inline void ftCo_80091D58_inline_arg(Fighter* fp, Vec3* scl)
 {
-    Vec3 scl;
-    scl.x = scl.y = scl.z = inlineB0(fp);
-    HSD_JObjSetScale(fp->parts[fp->ft_data->x8->x11].joint, &scl);
-}
-
-static inline void ftCo_80092158_inline(Fighter_GObj* gobj, int arg1,
-                                        HSD_JObj* arg2)
-{
-    int offset = Player_GetUnk45(GET_FIGHTER(gobj)->player_id) << 2;
-    u8* color = Fighter_804D650C + offset;
-    efSync_Spawn(arg1, gobj, arg2,
-                 (color[0] << 16) | (color[1] << 8) | color[2]);
+    scl->x = scl->y = scl->z = inlineB0(fp);
+    HSD_JObjSetScale(fp->parts[fp->ft_data->x8->x11].joint, scl);
 }
 
 static inline void ftCo_80092C54_inline(Fighter_GObj* gobj)
@@ -710,7 +777,8 @@ static inline void ftCo_80092BE8_inline(Fighter_GObj* gobj)
     }
 }
 
-static inline void ftCo_800928CC_inline(Fighter_GObj* gobj)
+static inline void ftCo_800928CC_inline_arg(Fighter_GObj* gobj,
+                                            AbsorbDesc* absorb)
 {
     Fighter* fp = gobj->user_data;
     switch (fp->kind) {
@@ -725,14 +793,12 @@ static inline void ftCo_800928CC_inline(Fighter_GObj* gobj)
             ftCo_80092158_inline(gobj, 1048, jobj);
             fp->x2219_b0 = true;
             {
-                AbsorbDesc absorb;
-                u8 _[8];
                 Fighter* fp2 = GET_FIGHTER(gobj);
-                absorb.x0_bone_id = fp2->ft_data->x8->x11;
-                absorb.x10_size = 1;
-                absorb.x4_offset.x = absorb.x4_offset.y = absorb.x4_offset.z =
-                    0;
-                ftColl_8007B1B8(gobj, (ShieldDesc*) &absorb, ftCo_80092E50);
+                absorb->x0_bone_id = fp2->ft_data->x8->x11;
+                absorb->x10_size = 1;
+                absorb->x4_offset.x = absorb->x4_offset.y =
+                    absorb->x4_offset.z = 0;
+                ftColl_8007B1B8(gobj, (ShieldDesc*) absorb, ftCo_80092E50);
                 fp2->x221A_b7 = true;
             }
             ftCo_80091E78(gobj, 1);
@@ -743,20 +809,22 @@ static inline void ftCo_800928CC_inline(Fighter_GObj* gobj)
 
 void ftCo_GuardSetOff_Anim(Fighter_GObj* gobj)
 {
+    Vec3 scl;
+    u8 _[4];
+    AbsorbDesc absorb;
     Fighter* fp = gobj->user_data;
-    PAD_STACK(24);
+    PAD_STACK(16);
     ftCo_80093BC0(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->mv.co.guard.xC) {
             ftCo_80092BE8_inline(gobj);
         } else {
-            ftCo_800928CC_inline(gobj);
+            ftCo_800928CC_inline_arg(gobj, &absorb);
         }
     } else {
-        ftCo_80091D58_inline(fp);
+        ftCo_80091D58_inline_arg(fp, &scl);
     }
 }
-#pragma pop
 
 void ftCo_GuardSetOff_IASA(Fighter_GObj* gobj) {}
 
@@ -779,9 +847,9 @@ void ftCo_GuardSetOff_Coll(Fighter_GObj* gobj)
 bool ftCo_80093694(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->mv.co.guard.x0 < p_ftCommonData->x2A0 &&
+    if (fp->mv.co.guard.x0 < p_ftCommonData->powershield_input_window &&
         fp->input.x668 & (HSD_PAD_R | HSD_PAD_L) &&
-        fp->x672_input_timer_counter < p_ftCommonData->x2A0)
+        fp->trigger_analog_timer < p_ftCommonData->powershield_input_window)
     {
         ftCo_80093850(gobj);
         return true;
@@ -805,10 +873,10 @@ void ftCo_8009370C(Fighter_GObj* gobj, HSD_GObjEvent on_reflect)
 
 void ftCo_80093790(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(8);
     ftCommon_8007DB24(gobj);
-    ftCo_80092158(gobj, 1050, fp->parts[fp->ft_data->x8->x11].joint);
+    ftCo_80092158_inline(gobj, 1050, fp->parts[fp->ft_data->x8->x11].joint);
     fp->x2219_b0 = true;
     ft_PlaySFX(fp, 128, 127, 64);
 }
@@ -832,7 +900,7 @@ void ftCo_8009388C(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftCo_MS_GuardReflect,
                               Ft_MF_SkipAnim | Ft_MF_KeepGfx,
                               fp->cur_anim_frame, 1, 0, NULL);
-    fp->x672_input_timer_counter = 0xFE;
+    fp->trigger_analog_timer = 0xFE;
     fp->x221A_b7 = false;
     fp->x221B_b0 = false;
     fp->x221C_b3 = true;
@@ -870,14 +938,14 @@ void ftCo_80093A50(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, 182, Ft_MF_SkipAnim, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
-    fp->x672_input_timer_counter = 0xFE;
+    fp->trigger_analog_timer = 0xFE;
     fp->x221C_b3 = true;
     fp->x221C_b1 = true;
     fp->x221C_b2 = true;
     fp->mv.co.guard.x1C = 0;
     fp->mv.co.guard.x14 = p_ftCommonData->x2A4;
     fp->mv.co.guard.x18 = p_ftCommonData->x2B4;
-    ftCo_80092450(gobj);
+    ftCo_80092450_inline(gobj);
     ftCo_8009370C(gobj, ftCo_80093790);
     ftCo_800921DC(gobj);
 }
@@ -893,7 +961,7 @@ void ftCo_80093BC0(Fighter_GObj* gobj)
         if (fp->mv.co.guard.x14 < 0) {
             fp->x221C_b1 = false;
             fp->reflecting = false;
-            ftCo_80092450(gobj);
+            ftCo_80092450_inline(gobj);
         }
     }
     if (fp->x221C_b2) {
@@ -904,17 +972,85 @@ void ftCo_80093BC0(Fighter_GObj* gobj)
     }
 }
 
+static inline void ftCo_80092450_inline2(Fighter_GObj* gobj,
+                                         AbsorbDesc* absorb)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    absorb->x0_bone_id = fp->ft_data->x8->x11;
+    absorb->x10_size = 1;
+    absorb->x4_offset.x = absorb->x4_offset.y = absorb->x4_offset.z = 0.0f;
+    ftColl_8007B1B8(gobj, (ShieldDesc*) absorb, ftCo_80092E50);
+    fp->x221A_b7 = true;
+}
+
+static inline void ftCo_80093BC0_inline(Fighter_GObj* gobj, AbsorbDesc* absorb)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->x221C_b3) {
+        fp->x221C_b3 = false;
+    }
+    if (fp->x221C_b1) {
+        fp->mv.co.guard.x14 -= 1;
+        if (fp->mv.co.guard.x14 < 0) {
+            fp->x221C_b1 = false;
+            fp->reflecting = false;
+            ftCo_80092450_inline2(gobj, absorb);
+        }
+    }
+    if (fp->x221C_b2) {
+        fp->mv.co.guard.x18 -= 1;
+        if (fp->mv.co.guard.x18 < 0) {
+            fp->x221C_b2 = false;
+        }
+    }
+}
+
+static inline void ftCo_80092908_inline2(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    Fighter_ChangeMotionState(gobj, ftCo_MS_Guard, Ft_MF_SkipAnim, 0, 1, 0,
+                              NULL);
+    {
+        HSD_JObj* jobj = fp->parts[fp->ft_data->x8->x11].joint;
+        ftCo_80092158(gobj, 1048, jobj);
+        fp->x2219_b0 = true;
+        ftCo_80092450(gobj);
+        ftCo_80091E78(gobj, 1);
+    }
+}
+
+static inline void ftCo_GuardOn_Anim_inline(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    fp->mv.co.guard.x0 += 1;
+    if (ftCo_800925A4(gobj) == 0) {
+        if (fp->mv.co.guard.x0 >= fp->x2E8) {
+            Fighter* fp2 = gobj->user_data;
+            switch (fp2->kind) {
+            case FTKIND_YOSHI:
+                ftYs_Shield_8012C1D4(gobj);
+                break;
+            default:
+                ftCo_80092908_inline2(gobj);
+                break;
+            }
+        } else {
+            ftCo_80091E78(gobj, fp->mv.co.guard.x0 / fp->x2E8);
+        }
+    }
+}
+
 void ftCo_GuardReflect_Anim(HSD_GObj* gobj)
 {
-    PAD_STACK(12);
-    ftCo_80093BC0(gobj);
-    ftCo_GuardOn_Anim(gobj);
+    AbsorbDesc absorb;
+    PAD_STACK(8);
+    ftCo_80093BC0_inline(gobj, &absorb);
+    ftCo_GuardOn_Anim_inline(gobj);
 }
 
 void ftCo_GuardReflect_IASA(HSD_GObj* gobj)
 {
-    u8 _[16] = { 0 };
-    /// @todo Inline depth.
+    PAD_STACK(16);
     RETURN_IF(inlineC0(gobj, ftCo_80092BE8));
     RETURN_IF(ftCo_8009515C(gobj));
     RETURN_IF(ftCo_8009980C(gobj));

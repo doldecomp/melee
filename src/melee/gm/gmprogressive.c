@@ -2,6 +2,8 @@
 
 #include "gm_unsplit.h"
 
+#include "dolphin/pad.h"
+
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -13,8 +15,8 @@
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lblanguage.h>
+#include <melee/mn/inlines.h>
 #include <melee/sc/types.h>
 
 static struct {
@@ -133,28 +135,30 @@ void gm_801AD620_OnFrame(void)
             gm_80480D70.x10 = 4;
         }
     } else {
-        if ((gm_801A36A0(4) & 0x4000000000) && gm_80480D70.x10 == 2 &&
-            gm_80480D70.x14 == 0)
+        if ((gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & PAD_ANY_LEFT) &&
+            gm_80480D70.x10 == 2 && gm_80480D70.x14 == 0)
         {
-            lbAudioAx_80024030(2);
+            sfxMove();
             gm_80480D70.x10 = 1;
             gm_801AD254(gm_80480D70.x10);
         }
-        if ((gm_801A36A0(4) & 0x8000000000) && gm_80480D70.x10 == 1 &&
-            gm_80480D70.x14 == 0)
+        if ((gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & PAD_ANY_RIGHT) &&
+            gm_80480D70.x10 == 1 && gm_80480D70.x14 == 0)
         {
-            lbAudioAx_80024030(2);
+            sfxMove();
             gm_80480D70.x10 = 2;
             gm_801AD254(gm_80480D70.x10);
         }
-        if ((gm_801A36A0(4) & 0x100000000) && gm_80480D70.x14 == 0) {
+        if ((gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & PAD_CONFIRM) &&
+            gm_80480D70.x14 == 0)
+        {
             if (gm_80480D70.x10 == 1) {
-                lbAudioAx_80024030(1);
+                sfxForward();
                 gm_80480D70.x10 = 3;
                 gm_80480D70.x8->hidden = 1;
                 HSD_JObjSetFlagsAll(gm_80480D70.x4, JOBJ_HIDDEN);
             } else if (gm_80480D70.x10 == 2) {
-                lbAudioAx_80024030(1);
+                sfxForward();
                 gm_80480D70.x14 = 2;
                 gm_801AD254(5);
                 OSSetProgressiveMode(0);

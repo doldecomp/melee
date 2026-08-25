@@ -8,13 +8,11 @@
 #include "ft/chara/ftSamus/ftSs_SpecialN.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "lb/lbvector.h"
-
-#include <trigf.h>
 
 ItemStateTable it_803F7288[] = {
     { 0, itSamuschargeshot_UnkMotion0_Anim, itSamuschargeshot_UnkMotion0_Phys,
@@ -178,6 +176,8 @@ void it_2725_Logic108_Destroyed(Item_GObj* gobj)
                     ftKb_SpecialNSs_800FCD04(
                         ip->xDD4_itemVar.samuschargeshot.xE00);
                     break;
+                default:
+                    break;
                 }
             }
             ip->xDD4_itemVar.samuschargeshot.xE00 = 0;
@@ -214,6 +214,8 @@ void it_2725_Logic108_PickedUp(Item_GObj* gobj)
         efSync_Spawn(0x4A1, gobj, grandchild);
         ip->xDD4_itemVar.samuschargeshot.xDFC = 1;
         return;
+    default:
+        break;
     }
 }
 
@@ -267,6 +269,8 @@ bool itSamuschargeshot_UnkMotion0_Anim(Item_GObj* gobj)
             {
                 return true;
             }
+            break;
+        default:
             break;
         }
     }
@@ -356,6 +360,8 @@ void it_802B5EDC(Item_GObj* gobj)
         case It_Kind_Kirby_SamusCharge:
             efSync_Spawn(0x4A2, gobj, jobj);
             efSync_Spawn(0x4A3, gobj, jobj);
+            break;
+        default:
             break;
         }
     }

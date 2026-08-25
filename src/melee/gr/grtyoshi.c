@@ -1,7 +1,6 @@
 #include <platform.h>
 
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -9,12 +8,10 @@
 
 #include "lb/forward.h"
 
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 
@@ -39,7 +36,7 @@
 /* 223E1C */ static DynamicsDesc* grTYoshi_OnTouchLine(enum_t);
 /* 223E24 */ static bool grTYoshi_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 
-static StageCallbacks grTYs_803E9578[] = {
+static StageCallbacks grTYs_StageCallbacks[] = {
     {
         grTYoshi_80223CD4,
         grTYoshi_80223D00,
@@ -64,9 +61,9 @@ static StageCallbacks grTYs_803E9578[] = {
     { 0 },
 };
 
-StageData grTYs_803E95D4 = {
-    TYOSHI,
-    grTYs_803E9578,
+StageData grTYs_StageData = {
+    Gr_Kind_TYoshi,
+    grTYs_StageCallbacks,
     "/GrTYs.dat",
     grTYoshi_OnInit,
     grTYoshi_OnDemoInit,
@@ -84,15 +81,7 @@ static void grTYoshi_OnDemoInit(bool arg0) {}
 
 static void grTYoshi_OnInit(void)
 {
-    stage_info.unk8C.b4 = 0;
-    stage_info.unk8C.b5 = 1;
-    grTYoshi_80223BEC(0);
-    grTYoshi_80223BEC(1);
-    grTYoshi_80223BEC(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTYoshi_80223BEC);
 }
 
 static void grTYoshi_OnLoad(void) {}
@@ -110,7 +99,7 @@ static bool grTYoshi_80223BE4(void)
 static HSD_GObj* grTYoshi_80223BEC(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTYs_803E9578[gobj_id];
+    StageCallbacks* callbacks = &grTYs_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
@@ -140,11 +129,7 @@ static void grTYoshi_80223D0C(Ground_GObj* arg0) {}
 
 static void grTYoshi_80223D10(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTYoshi_80223D60(Ground_GObj* arg0)
@@ -162,11 +147,7 @@ static void grTYoshi_80223D9C(Ground_GObj* arg0) {}
 
 static void grTYoshi_80223DA0(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTYoshi_80223DF0(Ground_GObj* arg0)

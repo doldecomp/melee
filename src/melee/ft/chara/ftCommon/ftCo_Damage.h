@@ -1,13 +1,13 @@
 #ifndef GALE01_08D7F0
 #define GALE01_08D7F0
 
-#include "ftCommon/forward.h"
+#include "ft/forward.h"
 
 /* 08D7F0 */ float ftCo_Damage_CalcAngle(Fighter* fp, float kb_applied);
 /* 08D8D8 */ float ftCo_ScaleBy154(float);
 /* 08D8E8 */ bool ftCo_8008D8E8(float);
 /* 08D930 */ void ftCo_Damage_CalcKnockback(Fighter* fp);
-/* 08DB10 */ void ftCo_8008DB10(Fighter_GObj* gobj, enum_t, float);
+/* 08DB10 */ void ftCo_8008DB10(Fighter_GObj* gobj, HitElement, float);
 /* 08DC0C */ void ftCo_Damage_CalcVel(Fighter* fp, float x, float y);
 /* 08DCE0 */ void ftCo_8008DCE0(Fighter_GObj* gobj, int, float facing_dir);
 /* 08E498 */ bool ftCo_Damage_CheckAirMotion(Fighter* fp);
@@ -35,6 +35,6 @@
 /* 090324 */ void ftCo_DamageFlyRoll_IASA(Fighter_GObj* gobj);
 /* 09035C */ void ftCo_DamageFlyRoll_Phys(Fighter_GObj* gobj);
 /* 0904C0 */ void ftCo_DamageFlyRoll_Coll(Fighter_GObj* gobj);
-/* 3C5520 */ extern int ftCo_803C5520[2][12];
+/* 3C5520 */ extern int ftCo_803C5520[2][4][3];
 
 #endif

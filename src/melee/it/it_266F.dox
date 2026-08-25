@@ -1,9 +1,5 @@
-/// @file
+/// @file melee/it/it_266F.h
 /// @todo
-
-#include <placeholder.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
 
 /* 4A0E30 */ extern RandomItemSpawner it_804A0E30;
 /* 4A0E50 */ extern HSD_ObjAllocUnk5 it_804A0E50;
@@ -49,7 +45,7 @@
 /* 27137C */ void it_8027137C(HSD_GObj* gobj);
 /* 27146C */ void it_8027146C(HSD_GObj* gobj);
 /* 2714C0 */ void it_802714C0(HSD_GObj* gobj);
-/* 271508 */ void it_80271508(HSD_GObj* gobj, s32 arg1);
+/* 271508 */ void it_80271508(HSD_GObj* gobj, HurtCapsuleState state);
 /* 27163C */ void it_8027163C(HSD_GObj* gobj);
 /* 271A58 */ void it_80271A58(HSD_GObj* gobj);
 /* 2721B8 */ void it_802721B8(HSD_GObj* gobj);

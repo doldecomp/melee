@@ -1,7 +1,10 @@
 #include "it/items/itlinkbow.h"
 
+#include "inlines.h"
+
 #include "ft/chara/ftKirby/ftkirby.h"
 #include "ft/ftlib.h"
+#include "ftLink/ftLk_SpecialN.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
@@ -45,18 +48,7 @@ HSD_GObj* it_802AF1A4(f32 facing_dir, Fighter_GObj* owner_gobj, Vec3* vec,
     f32 pad[1];
 
     spawn.kind = arg4;
-    spawn.prev_pos = *vec;
-    spawn.prev_pos.z = 0.0F;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.z = 0.0F;
-    spawn.vel.y = 0.0F;
-    spawn.vel.x = 0.0F;
-    spawn.x0_parent_gobj = (HSD_GObj*) owner_gobj;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0.0F;
+    Item_InitSpawnOnPlane(&spawn, (HSD_GObj*) owner_gobj, vec, facing_dir);
 
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
@@ -88,6 +80,8 @@ void itLinkBow_Logic100_Destroyed(Item_GObj* arg0)
             case It_Kind_Kirby_LinkBow:
                 ftKb_SpecialNLk800FB444(item->owner);
                 break;
+            default:
+                break;
             }
         }
     }
@@ -118,6 +112,8 @@ void it_802AF32C(HSD_GObj* arg0)
             case It_Kind_Kirby_CLinkBow:
             case It_Kind_Kirby_LinkBow:
                 arg1 = ftKb_SpecialNLk800FB394(item->owner);
+                break;
+            default:
                 break;
             }
             if (item->msid != it_803F6F08[arg1]) {
@@ -156,6 +152,8 @@ void itLinkBow_Logic100_PickedUp(Item_GObj* arg0)
             case It_Kind_Kirby_LinkBow:
                 idx = ftKb_SpecialNLk800FB394(item->owner);
                 break;
+            default:
+                break;
             }
 
             switch (idx) {
@@ -187,7 +185,7 @@ bool itLinkbow_UnkMotion5_Anim(Item_GObj* arg0)
     HSD_JObj* jobj;
     Vec3 scale;
 
-    item = GET_ITEM((HSD_GObj*) arg0);
+    item = GET_ITEM(arg0);
     jobj = HSD_GObjGetHSDObj(arg0);
 
     scale.x = scale.y = scale.z = item->xDD4_itemVar.linkbow.x0;
@@ -197,9 +195,9 @@ bool itLinkbow_UnkMotion5_Anim(Item_GObj* arg0)
     case 5:
     case 2:
         if ((item->x5CC_currentAnimFrame == 0.0f) ||
-            ((item->x5CC_currentAnimFrame >= 24.0f)))
+            (item->x5CC_currentAnimFrame >= 24.0f))
         {
-            itLinkBow_Logic100_Destroyed((Item_GObj*) arg0);
+            itLinkBow_Logic100_Destroyed(arg0);
             return 1;
         }
         break;

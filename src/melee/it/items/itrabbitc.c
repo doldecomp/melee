@@ -1,11 +1,13 @@
 #include "itrabbitc.h"
 
+#include "inlines.h"
+
 #include "it/forward.h"
 
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/items/types.h"
+#include "it/itgroundcoll.h"
 
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
@@ -49,17 +51,7 @@ HSD_GObj* it_80294DC0(Vec3* pos)
     SpawnItem spawn;
 
     spawn.kind = It_Kind_RabbitC;
-    spawn.prev_pos = *pos;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = -1.0f;
-    spawn.x3C_damage = 0;
-    spawn.vel.z = 0.0f;
-    spawn.vel.y = 0.0f;
-    spawn.vel.x = 0.0f;
-    spawn.x0_parent_gobj = 0;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = 1;
-    spawn.x40 = 0;
+    Item_InitSpawn(&spawn, NULL, pos, -1.0f);
     item_gobj = Item_80268B5C(&spawn);
     if (item_gobj != NULL) {
         it_80295138(item_gobj);
@@ -95,13 +87,13 @@ void it_80294EB0(Item_GObj* item_gobj, Vec3* input_pos1, Vec3* input_pos2)
     HSD_JObjSetTranslate(item_jobj_var, &pos_var);
 }
 
-void it_802950D4(Item_GObj* item_gobj, int arg1)
+void it_802950D4(Item_GObj* item_gobj, bool arg1)
 {
     HSD_JObj* item_jobj;
     PAD_STACK(4);
 
     item_jobj = it_80272CC0(item_gobj, 3);
-    if (arg1 != 0) {
+    if (arg1) {
         it_80272A18(item_jobj);
         return;
     }

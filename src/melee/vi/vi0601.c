@@ -8,6 +8,8 @@
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "it/item.h"
+#include "lb/lb_00F9.h"
+#include "lb/lb_013B.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbspdisplay.h"
@@ -168,11 +170,11 @@ void un_8031EBBC_OnEnter(void* unused)
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(7, 0);
+    Stage_802251E8(St_Kind_Corneria, 0);
     Item_80266FA8();
     Item_80266FCC();
     Stage_8022524C();
-    Stage_8022532C(7, 0);
+    Stage_8022532C(St_Kind_Corneria, 0);
 
     erase_colors_vi0601 = Camera_80030758();
     un_8031E9B8();

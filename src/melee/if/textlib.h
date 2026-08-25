@@ -7,6 +7,8 @@
 #include "baselib/forward.h"
 #include "if/forward.h"
 
+#include "if/types.h"
+
 #include <dolphin/gx.h>
 
 /* 302834 */ DevText* DevText_Create(char, int, int, int, int, char*);
@@ -29,7 +31,8 @@
 /* 302D0C */ void DevText_PrintInt(DevText* text, int num);
 /* 302D4C */ void DevText_Printf(DevText* text, char* format, ...);
 /* 302DF0 */ struct un_80304138_objalloc_t* un_80302DF0(void);
-/* 302DF8 */ void un_80302DF8(struct un_80304138_objalloc_t* arg0, void* arg1);
+/* 302DF8 */ void un_80302DF8(struct un_80304138_objalloc_t* arg0,
+                              soundtest_callback arg1);
 /* 302E00 */ int un_80302E00(struct un_80304138_objalloc_t_x8*, int);
 /* 302EA4 */ int un_80302EA4(struct un_80304138_objalloc_t_x8*);
 /* 302FFC */ void un_80302FFC(struct un_80304138_objalloc_t*);
@@ -43,14 +46,17 @@
                               int);
 /* 304138 */ UNK_RET un_80304138(UNK_PARAMS);
 /* 304168 */ HSD_GObj* un_80304168(void* arg0, int arg1, int arg2, int arg3);
-/* 304210 */ void un_80304210(struct un_80304138_objalloc_t* arg0, void* arg1,
-                              int arg2, int arg3, int arg4);
+/* 304210 */ struct un_80304138_objalloc_t*
+un_80304210(struct un_80304138_objalloc_t* arg0, void* arg1, int arg2,
+            int arg3, int arg4);
 /* 304334 */ void un_80304334(struct un_80304138_objalloc_t* arg0);
 /* 304344 */ void un_80304344(struct un_80304138_objalloc_t*);
 /* 304470 */ bool un_80304470(void);
 /* 304510 */ bool un_80304510(void);
-/* 3045A0 */ int un_803045A0(void);
-/* 304690 */ int un_80304690(void);
+/* 3045A0 */ bool un_803045A0(void);
+/* 304690 */ bool un_80304690(void);
 /* 304780 */ bool un_80304780(void);
+/* 304138 */ extern struct un_80304138_objalloc_t* un_804D6E40;
+/* 304138 */ extern struct un_80304138_objalloc_t* un_804D6E44;
 
 #endif

@@ -1,6 +1,7 @@
 #include "mngallery.h"
 
 #include "baselib/debug.h"
+#include "baselib/memory.h"
 #include "mn/inlines.h"
 
 #include <baselib/controller.h>
@@ -39,7 +40,7 @@ struct mnGallery_804D6C88_userdata {
     s32 frame;
     HSD_GObj* gobjs[2];
 };
-STATIC_ASSERT(sizeof(struct mnGallery_804D6C88_userdata) == 0x24);
+ASSERT_SIZE(struct mnGallery_804D6C88_userdata, 0x24);
 
 #define GET_mnGallery_child_userdata(gobj)                                    \
     ((struct mnGallery_child_userdata*) HSD_GObjGetUserData(gobj))
@@ -47,7 +48,7 @@ struct mnGallery_child_userdata {
     HSD_GObj* parent_gobj;
     s32 index;
 };
-STATIC_ASSERT(sizeof(struct mnGallery_child_userdata) == 8);
+ASSERT_SIZE(struct mnGallery_child_userdata, 8);
 
 static void float_order_helper(HSD_SObj* sobj)
 {
@@ -92,7 +93,7 @@ void mnGallery_80258A08(HSD_GObj* gobj, u16 width, u16 height, u32 priority)
     Vec3 interest = { 0, 0, 0 };
 
     far = 2.0f;
-    bottom = (f32) (s32) - (s32) height;
+    bottom = (f32) (-(s32) height);
     right = (f32) width;
     top = 0.0f;
     left = 0.0f;
@@ -167,8 +168,10 @@ static void mnGallery_80258BC4(struct mnGallery_804D6C88_userdata* data)
     data->unk0 = 1;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 static void mnGallery_80258D50(struct mnGallery_804D6C88_userdata* data)
 {
     if (data->unk0 != 0) {
@@ -185,7 +188,9 @@ static void mnGallery_80258D50(struct mnGallery_804D6C88_userdata* data)
         }
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static void mnGallery_80258DBC(HSD_GObj* gobj,
                                struct mnGallery_804D6C88_userdata* data)
@@ -209,7 +214,7 @@ static void mnGallery_80258DBC(HSD_GObj* gobj,
     pressed = buttons & 0x1300;
     if (pressed != 0 || data->unk1 > 0x32 || skip != 0) {
         if (pressed != 0) {
-            lbAudioAx_80024030(0);
+            sfxBack();
         }
         data->state = 1;
         mn_8022BD8C();
@@ -298,7 +303,7 @@ void fn_80258ED0(HSD_GObj* gobj)
     }
 }
 
-inline void fn_802590C4_inline(HSD_GObj* gobj)
+static inline void fn_802590C4_inline(HSD_GObj* gobj)
 {
     s32 i;
     struct mnGallery_804D6C88_userdata* tmp;
@@ -388,8 +393,10 @@ void mnGallery_802591BC(HSD_GObj* gobj)
     HSD_TObjAnim(HSD_JObjGetChild(jobj)->u.dobj->next->mobj->tobj);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 static void mnGallery_80259604(struct mnGallery_804D6C88_userdata* data)
 {
     data->unk0 = 0;
@@ -405,7 +412,9 @@ static void mnGallery_80259604(struct mnGallery_804D6C88_userdata* data)
     data->gobjs[0] = NULL;
     data->gobjs[1] = NULL;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void mnGallery_8025963C(void)
 {

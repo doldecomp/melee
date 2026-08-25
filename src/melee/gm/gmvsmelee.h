@@ -1,7 +1,6 @@
 #ifndef MELEE_GM_VSMELEE_H
 #define MELEE_GM_VSMELEE_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "mn/forward.h"

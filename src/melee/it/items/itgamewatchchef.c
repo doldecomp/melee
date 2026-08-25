@@ -1,14 +1,14 @@
 #include "itgamewatchchef.h"
 
-#include "math.h"
+#include "inlines.h"
 #include "placeholder.h"
 
 #include "db/db.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/itzako.h"
 
 #include <baselib/jobj.h>
@@ -201,12 +201,7 @@ bool itGameWatchChef_Logic112_ShieldBounced(Item_GObj* gobj)
 
 bool itGameWatchChef_Logic112_Reflected(Item_GObj* gobj)
 {
-    const f32 PI_2 = M_PI / 2;
-    Item* ip = GET_ITEM(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    it_80273030(gobj);
-    HSD_JObjSetRotationY(jobj, PI_2 * ip->facing_dir);
-    return false;
+    return itReflectItemAndUpdateRotation(gobj);
 }
 
 void itGameWatchChef_Logic112_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)

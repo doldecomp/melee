@@ -8,7 +8,7 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
-#include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftcommon.h"
@@ -18,7 +18,6 @@
 #include "pl/player.h"
 
 #include <dolphin/mtx.h>
-#include <MetroTRK/intrinsics.h>
 
 void ftMh_BackDisappear_Anim(HSD_GObj* gobj)
 {

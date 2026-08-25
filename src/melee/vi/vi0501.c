@@ -14,6 +14,8 @@
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "it/item.h"
+#include "lb/lb_00F9.h"
+#include "lb/lb_013B.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbshadow.h"
@@ -28,7 +30,6 @@
 #include <dolphin/gx.h>
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
-#include <baselib/displayfunc.h>
 #include <baselib/fog.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -76,19 +77,20 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
     u8* counts;
     f32 scale;
     Vec3* pos;
-    HSD_GObj** gobj_ptr;
+
+    PAD_STACK(8);
 
     Camera_80028B9C(6);
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(PURA, NULL);
+    Stage_802251E8(St_Kind_Greens, NULL);
     Item_80266FA8();
     Item_80266FCC();
     un_804D6F80 = Ground_801C0498();
-    Ground_801C04BC(0.7f);
+    Ground_SetParamY(0.7f);
     Stage_8022524C();
-    Stage_8022532C(PURA, 0);
+    Stage_8022532C(St_Kind_Greens, 0);
     ftDemo_ObjAllocInit();
     Player_InitAllPlayers();
     Player_80036E20(char_kind, un_804D6F78, 3);
@@ -101,8 +103,7 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
     Player_80036F34(0, 8);
 
     counts = (u8*) spawn_count;
-    pos = grLib_801C9A10() + 1;
-    gobj_ptr = un_804A2E98 + 1;
+    pos = grLib_801C9A10();
     for (i = 1; i < 4; i++) {
         Player_80036E20(CKIND_KIRBY, un_804D6F74, 6);
         count = counts[i - 1];
@@ -116,19 +117,17 @@ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode,
         Player_80032768(i, &initial_pos);
         Player_SetUnk4D(i, counts[i - 1]);
         Player_80036F34(i, i + 0xA);
-        gobj_ptr[-1] = Player_GetEntity(i);
-        jobj = GET_JOBJ(gobj_ptr[-1]);
+        un_804A2E98[i - 1] = Player_GetEntity(i);
+        jobj = GET_JOBJ(un_804A2E98[i - 1]);
         HSD_JObjReqAnimAll(jobj, 140.0f);
         HSD_JObjAnimAll(jobj);
-        HSD_JObjGetTranslation2(GET_JOBJ(gobj_ptr[-1]), &v);
+        HSD_JObjGetTranslation2((HSD_JObj*) un_804A2E98[i - 1]->hsd_obj, &v);
         scale = getScale();
         v.x *= scale;
         v.y *= scale;
         v.z *= scale;
-        *pos = v;
+        pos[i] = v;
         HSD_JObjReqAnimAll(jobj, 0.0f);
-        gobj_ptr++;
-        pos++;
     }
     lbAudioAx_80026F2C(0x1C);
     lbAudioAx_8002702C(0xC, 0x80000004000);

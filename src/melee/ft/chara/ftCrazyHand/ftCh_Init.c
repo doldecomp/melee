@@ -2,7 +2,6 @@
 
 #include "types.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "baselib/forward.h"
@@ -48,15 +47,7 @@
 #include "ftMasterHand/types.h"
 #include "it/it_26B1.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
-#include <MetroTRK/intrinsics.h>
-
-/// @todo Figure out how to use #GET_JOBJ instead.
-static inline HSD_JObj* get_jobj(HSD_GObj* gobj)
-{
-    return gobj->hsd_obj;
-}
 
 MotionState ftCh_Init_MotionStateTable[ftCh_MS_SelfCount] = {
     {
@@ -627,9 +618,9 @@ void ftCh_Init_OnLoad(HSD_GObj* gobj)
     PUSH_ATTRS(fp, ftCrazyHand_DatAttrs);
 
     ftBossLib_8015BDB4(gobj);
-    it_8026B3F8(items[0], 127);
-    it_8026B3F8(items[1], 128);
-    it_8026B3F8(items[2], 129);
+    it_8026B3F8(items[0], It_Kind_CrazyHand_Laser);
+    it_8026B3F8(items[1], It_Kind_CrazyHand_Bullet);
+    it_8026B3F8(items[2], It_Kind_CrazyHand_Bomb);
     fp->no_normal_motion = 1;
     fp->x2229_b6 = 1;
     fp->no_kb = 1;
@@ -648,13 +639,13 @@ void ftCh_Init_OnLoad(HSD_GObj* gobj)
     fp->mv.ch.unk0.x40 = -1;
     fp->mv.ch.unk0.x1C = 0.0f;
     fp->mv.ch.unk0.x20 = 0;
-    fp->fv.ch.x222C = ftBossLib_8015C244(gobj, &fp->cur_pos);
-    fp->fv.ch.x2238 = 1.0f;
-    fp->fv.ch.x224C = 0;
-    fp->fv.ch.x2250 = ftMh_MS_Damage2;
-    fp->fv.ch.x2254 = 0;
+    fp->u.ch.x222C = ftBossLib_8015C244(gobj, &fp->cur_pos);
+    fp->u.ch.x2238 = 1.0f;
+    fp->u.ch.x224C = 0;
+    fp->u.ch.x2250 = ftMh_MS_Damage2;
+    fp->u.ch.x2254 = 0;
     fp->x1A88.level = 1;
-    ftBossLib_8015BD24(fp->x1A88.level, &fp->fv.mh.x223C, fp->fv.ch.x2238,
+    ftBossLib_8015BD24(fp->x1A88.level, &fp->u.mh.x223C, fp->u.ch.x2238,
                        ftData_attr->x0, ftData_attr->x8, ftData_attr->x4);
 }
 

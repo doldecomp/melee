@@ -1,6 +1,5 @@
 #include "ftmetal.h"
 
-#include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/id.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
@@ -11,8 +10,6 @@
 #include <melee/ft/ftparts.h>
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00B0.h>
-
-static s8 ftCo_804D3C90 = 0;
 
 void ft_800C8170(Fighter* fp)
 {
@@ -150,14 +147,6 @@ void ftCo_800C8540(Fighter_GObj* gobj)
     }
 }
 
-static inline HSD_DObj* dobj_next(HSD_DObj* dobj)
-{
-    if (dobj != NULL) {
-        return dobj->next;
-    }
-    return NULL;
-}
-
 void ft_800C85B8(Fighter_GObj* gobj)
 {
     HSD_Joint* sp20;
@@ -178,9 +167,7 @@ void ft_800C85B8(Fighter_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     joint = fp->ft_data->x5C;
     sp20 = joint;
-    sp1C = (joint_idx = 0);
-    joint_idx = (dobj_count = 0);
-    dobj_count = 0;
+    joint_idx = (dobj_count = (sp1C = 0));
     while (sp20 != 0) {
         if (ftParts_8007506C(fp->kind, joint_idx) != 0) {
             joint_idx++;
@@ -190,9 +177,8 @@ void ft_800C85B8(Fighter_GObj* gobj)
             ftAnim_GetNextJointInTree(&sp20, &sp1C);
         }
     }
-    part_idx = 0;
     sp20 = joint;
-    sp1C = 0;
+    sp1C = (part_idx = 0);
     while (sp20 != 0) {
         if (ftParts_8007506C(fp->kind, part_idx) != 0) {
             part_idx += 1;

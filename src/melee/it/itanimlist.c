@@ -11,11 +11,12 @@
 #include "it/itcoll.h"
 #include "it/item.h"
 #include "lb/inlines.h"
+#include "lb/lb_013B.h"
 #include "lb/lbcommand.h"
-#include "lb/lbspdisplay.h"
 
 #include <baselib/gobjproc.h>
 
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 0.00390599994f;
@@ -25,6 +26,7 @@ static void sdata2_order(void)
     (void) 0.0f;
     (void) 3.40282347e+38f;
 }
+#endif
 
 ItCmd it_803F22A8[16] = {
     it_80278F2C, it_802790C0, it_80279544, it_802795EC,
@@ -67,8 +69,10 @@ void it_80278F2C(Item_GObj* item_gobj, CommandInfo* cmd)
     it_80278800(item_gobj, ef_id, arg2, &sp20, &sp14, 0, arg6);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 
 void it_802790C0(Item_GObj* item_gobj, CommandInfo* cmd)
 {
@@ -155,10 +159,14 @@ void it_802790C0(Item_GObj* item_gobj, CommandInfo* cmd)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 
 void it_80279544(Item_GObj* item_gobj, CommandInfo* cmd)
 {
@@ -182,10 +190,14 @@ void it_802795EC(Item_GObj* item_gobj, CommandInfo* cmd)
     ++cmd->u;
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 
 void it_80279680(Item_GObj* item_gobj, CommandInfo* cmd)
 {
@@ -199,7 +211,9 @@ void it_802796C4(Item_GObj* item_gobj, CommandInfo* cmd)
     ++cmd->u;
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void it_802796FC(Item_GObj* item_gobj, CommandInfo* cmd)
 {
@@ -229,8 +243,10 @@ void it_80279768(Item_GObj* gobj, CommandInfo* cmd)
     ++cmd->u;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void it_8027978C(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     Item* item = item_gobj->user_data;
@@ -287,10 +303,14 @@ high_opcode: {
 done:
     ++cmd->u;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 
 void it_80279888(Item_GObj* item_gobj, CommandInfo* cmd)
 {
@@ -313,7 +333,9 @@ void it_8027990C(Item_GObj* item_gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void it_80279958(Item_GObj* item_gobj, CommandInfo* cmd)
 {
@@ -367,15 +389,19 @@ loop:
     goto loop;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 
 void it_80279AF0(Item_GObj* item_gobj, CommandInfo* cmd)
 {
-    it_80278F2C(item_gobj, (CommandInfo*) cmd);
+    it_80278F2C(item_gobj, cmd);
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void it_80279B10(Item_GObj* item_gobj, CommandInfo* cmd)
 {

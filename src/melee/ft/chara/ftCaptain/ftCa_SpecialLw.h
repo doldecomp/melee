@@ -26,7 +26,5 @@
 /* 0E48BC */ void ftCa_SpecialAirLw_Coll(HSD_GObj* gobj);
 /* 0E493C */ void ftCa_SpecialAirLwEnd_Coll(HSD_GObj* gobj);
 /* 0E495C */ void ftCa_SpecialAirLwEndAir_Coll(HSD_GObj* gobj);
-/* 0E4A78 */ void ftCa_SpecialHi_Enter(HSD_GObj* gobj);
-/* 0E4CF4 */ void ftCa_SpecialAirHi_Enter(HSD_GObj* gobj);
 
 #endif

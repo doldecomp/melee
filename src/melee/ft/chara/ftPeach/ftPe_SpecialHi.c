@@ -5,7 +5,11 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
@@ -13,7 +17,6 @@
 
 #include "ftCommon/forward.h"
 
-#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_ItemParasolOpen.h"
 #include "ftCommon/ftCo_Landing.h"
@@ -27,7 +30,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <math.h>
 #include <dolphin/mtx.h>
 #include <melee/it/items/itpeachparasol.h>
@@ -43,22 +45,22 @@ void ftPe_SpecialHi_8011D424(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.pe.specialhi.kind == It_Kind_Capsule) {
         fp->mv.pe.specialhi.kind = It_Kind_Peach_Parasol;
-        if (fp->fv.pe.parasol_gobj_0 == NULL) {
+        if (fp->u.pe.parasol_gobj_0 == NULL) {
             Vec3 pos;
             lb_8000B1CC(fp->parts[FtPart_109].joint, NULL, &pos);
             {
                 HSD_GObj* igobj = fp->item_gobj;
                 if (igobj != NULL) {
-                    fp->fv.pe.parasol_gobj_1 = igobj;
+                    fp->u.pe.parasol_gobj_1 = igobj;
                     it_8026BB44(fp->item_gobj);
                     it_8026B724(fp->item_gobj);
                     ftCommon_8007E6DC(gobj, fp->item_gobj, true);
                 }
             }
-            fp->fv.pe.parasol_gobj_0 =
+            fp->u.pe.parasol_gobj_0 =
                 it_802BDA64(gobj, &pos, FtPart_109, fp->facing_dir);
-            fp->item_gobj = fp->fv.pe.parasol_gobj_0;
-            if (fp->fv.pe.parasol_gobj_0 != NULL) {
+            fp->item_gobj = fp->u.pe.parasol_gobj_0;
+            if (fp->u.pe.parasol_gobj_0 != NULL) {
                 fp->death3_cb = ftPe_Init_OnDeath2;
                 fp->take_dmg_cb = ftPe_Init_OnDeath2;
             }
@@ -72,14 +74,14 @@ void ftPe_SpecialHi_8011D424(HSD_GObj* gobj)
 bool ftPe_8011D518(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->fv.pe.parasol_gobj_0 = NULL;
+    fp->u.pe.parasol_gobj_0 = NULL;
     fp->death3_cb = NULL;
     fp->take_dmg_cb = NULL;
     {
-        HSD_GObj* parasol_gobj = fp->fv.pe.parasol_gobj_1;
+        HSD_GObj* parasol_gobj = fp->u.pe.parasol_gobj_1;
         if (parasol_gobj != NULL) {
             fp->item_gobj = parasol_gobj;
-            fp->fv.pe.parasol_gobj_1 = NULL;
+            fp->u.pe.parasol_gobj_1 = NULL;
             it_8026BB20(fp->item_gobj);
             it_8026B73C(fp->item_gobj);
             ftpickupitem_80094818(gobj, true);
@@ -89,17 +91,12 @@ bool ftPe_8011D518(HSD_GObj* gobj)
     return false;
 }
 
-static void setupParasol(HSD_GObj* gobj)
-{
-    ftPe_8011D518(gobj);
-}
-
 /// @todo Can maybe use #ensureUnkItem?
 void ftPe_8011D598(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.pe.parasol_gobj_0 != NULL) {
-        it_802BDB94(fp->fv.pe.parasol_gobj_0);
+    if (fp->u.pe.parasol_gobj_0 != NULL) {
+        it_802BDB94(fp->u.pe.parasol_gobj_0);
         ftPe_8011D518(gobj);
     }
 }
@@ -107,8 +104,8 @@ void ftPe_8011D598(HSD_GObj* gobj)
 static void ensureUnkItem(HSD_GObj* gobj, HSD_GObjEvent cb)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.pe.parasol_gobj_0 != NULL) {
-        cb(fp->fv.pe.parasol_gobj_0);
+    if (fp->u.pe.parasol_gobj_0 != NULL) {
+        cb(fp->u.pe.parasol_gobj_0);
     }
 }
 
@@ -238,7 +235,7 @@ void ftPe_SpecialHiStart_IASA(HSD_GObj* gobj)
     if (!fp->cmd_vars[0] && abs_lstick_x > da->x7C) {
         float deg = da->x80 * ((abs_lstick_x - da->x7C) / (1.0 - da->x7C));
         float rad =
-            fp->input.lstick.x > 0 ? -(deg * deg_to_rad) : +(deg * deg_to_rad);
+            fp->input.lstick.x > 0 ? -MTXDegToRad(deg) : +MTXDegToRad(deg);
         float abs_lstick_angle = ABS(fp->lstick_angle);
         if (ABS(rad) > abs_lstick_angle) {
             fp->lstick_angle = rad;
@@ -277,7 +274,7 @@ void ftPe_SpecialAirHiStart_Phys(HSD_GObj* gobj)
         fp->self_vel.y = fp->self_vel.y * da->x8C;
         fp->self_vel.z = fp->self_vel.z * da->x8C;
     } else {
-        ftCommon_Fall(fp, da->x88, ca->terminal_vel);
+        ftCommon_Fall(fp, da->x88, ca->terminal_velocity);
         ftCommon_8007CF58(fp);
     }
 }
@@ -340,7 +337,7 @@ void ftPe_SpecialHiEnd_Phys(HSD_GObj* gobj)
         float vel_y = fp->self_vel.y;
         ft_80085154(gobj);
         fp->self_vel.y = vel_y;
-        ftCommon_Fall(fp, ca->grav, ca->terminal_vel);
+        ftCommon_Fall(fp, ca->gravity, ca->terminal_velocity);
     } else {
         ft_80084FA8(gobj);
     }
@@ -358,7 +355,7 @@ void ftPe_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
     fp->self_vel.y *= da->x8C;
     fp->self_vel.z *= da->x8C;
     fp->self_vel.y = vel_y;
-    ftCommon_Fall(fp, ca->grav, ca->terminal_vel);
+    ftCommon_Fall(fp, ca->gravity, ca->terminal_velocity);
 }
 
 void ftPe_SpecialHi_8011E064(HSD_GObj* gobj)

@@ -2,7 +2,8 @@
 
 #include "hsd_3A94.h"
 
-#include <__mem.h>
+#include <setjmp.h> // IWYU pragma: keep
+#include <string.h>
 
 void hsd_803B3344(u8 byte)
 {

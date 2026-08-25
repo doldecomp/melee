@@ -3,7 +3,6 @@
 #include <platform.h>
 
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -11,13 +10,11 @@
 
 #include "lb/forward.h"
 
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 void grTZelda_OnDemoInit(bool);                           /* static */
@@ -25,7 +22,7 @@ void grTZelda_OnInit(void);                               /* static */
 void grTZelda_OnLoad(void);                               /* static */
 void grTZelda_OnStart(void);                              /* static */
 bool grTZelda_80223EC8(void);                             /* static */
-HSD_GObj* grTZelda_80223ED0(s32);                         /* static */
+HSD_GObj* grTZelda_80223ED0(int);                         /* static */
 void grTZelda_80223FB8(Ground_GObj*);                     /* static */
 bool grTZelda_80223FE4(Ground_GObj*);                     /* static */
 void grTZelda_80223FEC(Ground_GObj*);                     /* static */
@@ -41,7 +38,7 @@ void grTZelda_802240FC(Ground_GObj*);                     /* static */
 DynamicsDesc* grTZelda_OnTouchLine(enum_t);               /* static */
 bool grTZelda_OnCheckShadowRender(Vec3*, int, HSD_JObj*); /* static */
 
-static StageCallbacks grTZd_803E9638[4] = {
+static StageCallbacks grTZd_StageCallbacks[4] = {
     { grTZelda_80223FB8, grTZelda_80223FE4, grTZelda_80223FEC,
       grTZelda_80223FF0, 0 },
     { grTZelda_80224084, grTZelda_802240D4, grTZelda_802240DC,
@@ -51,9 +48,9 @@ static StageCallbacks grTZd_803E9638[4] = {
     { NULL, NULL, NULL, NULL, 0 }
 };
 
-StageData grTZd_803E9694 = {
-    TZELDA,
-    grTZd_803E9638,
+StageData grTZd_StageData = {
+    Gr_Kind_TZelda,
+    grTZd_StageCallbacks,
     "/GrTZd.dat",
     grTZelda_OnInit,
     grTZelda_OnDemoInit,
@@ -69,16 +66,7 @@ void grTZelda_OnDemoInit(int unused) {}
 
 void grTZelda_OnInit(void)
 {
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-
-    grTZelda_80223ED0(0);
-    grTZelda_80223ED0(1);
-    grTZelda_80223ED0(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTZelda_80223ED0);
 }
 
 void grTZelda_OnLoad(void) {}
@@ -93,10 +81,10 @@ bool grTZelda_80223EC8(void)
     return false;
 }
 
-HSD_GObj* grTZelda_80223ED0(s32 arg0)
+HSD_GObj* grTZelda_80223ED0(int arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTZd_803E9638[arg0];
+    StageCallbacks* callbacks = &grTZd_StageCallbacks[arg0];
 
     gobj = Ground_GetStageGObj(arg0);
 

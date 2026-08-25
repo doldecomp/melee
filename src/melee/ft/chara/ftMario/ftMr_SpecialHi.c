@@ -1,22 +1,24 @@
 #include "ftMr_SpecialHi.h"
 
 #include "inlines.h"
-#include "math.h"
 #include "types.h"
 
 #include <platform.h>
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Landing.h"
 
-#include <common_structs.h>
+#include <math.h>
 #include <dolphin/mtx.h>
 
 void ftMr_SpecialHi_Enter(HSD_GObj* gobj)
@@ -80,7 +82,7 @@ void ftMr_SpecialHi_IASA(HSD_GObj* gobj)
                     ((lstick_x - sa->specialhi.momentum_stick_range) /
                      (1.0 - sa->specialhi.momentum_stick_range));
         float rad =
-            fp->input.lstick.x > 0 ? -(deg_to_rad * deg) : +(deg_to_rad * deg);
+            fp->input.lstick.x > 0 ? -MTXDegToRad(deg) : +MTXDegToRad(deg);
         if (abs(rad) > abs(fp->lstick_angle)) {
             fp->lstick_angle = rad;
         }
@@ -121,7 +123,7 @@ void ftMr_SpecialAirHi_Phys(HSD_GObj* gobj)
         fp->self_vel.y *= sa->specialhi.vel_mul;
         fp->self_vel.z *= sa->specialhi.vel_mul;
     } else {
-        ftCommon_Fall(fp, sa->specialhi.grav, attrs->terminal_vel);
+        ftCommon_Fall(fp, sa->specialhi.grav, attrs->terminal_velocity);
         ftCommon_8007CF58(fp);
     }
 }

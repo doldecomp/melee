@@ -9,38 +9,31 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/inlines.h"
 #include "ftPurin/types.h"
 
-#include <common_structs.h>
 #include <math.h>
 #include <baselib/archive.h>
 #include <baselib/gobj.h>
-#include <baselib/jobj.h>
-#include <baselib/objalloc.h>
 
-/// @todo Float order hack.
-static float forceFloatOrder0(void)
-{
-    return 0;
-}
+static MotionFlags const ftPr_MF_SpecialS_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_SkipHit;
 
-/// @todo Float order hack.
-static float forceFloatOrder1(void)
+#ifdef MUST_MATCH
+static float order_sdata2(void)
 {
-    return deg_to_rad;
+    (void) 0.0f;
+    (void) MTXDegToRad(1);
+    (void) 1.0f;
 }
-
-/// @todo Float order hack.
-static float forceFloatOrder2(void)
-{
-    return 1;
-}
+#endif
 
 void ftPr_SpecialS_Enter(Fighter_GObj* fighter_gobj)
 {
@@ -101,10 +94,7 @@ static inline float calcAngleRadians(HSD_GObj* gobj, float lstick_y)
         left_stick_y = -left_stick_y;
     }
 
-    {
-        float degrees = (left_stick_y * da->xE4) / (da->xE0 - da->xDC);
-        return deg_to_rad * degrees;
-    }
+    return MTXDegToRad(left_stick_y * da->xE4 / (da->xE0 - da->xDC));
 }
 
 /// This is called once each frame during Puff's aerial side special
@@ -116,7 +106,7 @@ void ftPr_SpecialAirS_Phys(HSD_GObj* gobj)
 
     if (fp->cmd_vars[0]) {
         fp->cmd_vars[0] = 0;
-        ++fp->fv.pr.x222C;
+        ++fp->u.pr.x222C;
         {
             float angle = calcAngleRadians(gobj, fp->input.lstick.y);
             fp->self_vel.y = da->xF0 * sinf(angle);
@@ -155,16 +145,14 @@ void ftPr_SpecialAirS_Coll(Fighter_GObj* gobj)
 void ftPr_SpecialS_8013D590(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialAirS, 0x0C4C508AU,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftPr_MS_SpecialAirS,
+                                    ftPr_MF_SpecialS_Coll);
 }
 
 void ftPr_SpecialS_8013D5F0(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialS, 0x0C4C508AU,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftPr_MS_SpecialS,
+                                    ftPr_MF_SpecialS_Coll);
     ftCommon_ClampAirDrift(fp);
 }

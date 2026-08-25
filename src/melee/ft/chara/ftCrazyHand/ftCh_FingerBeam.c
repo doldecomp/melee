@@ -2,7 +2,6 @@
 
 #include "types.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "baselib/forward.h"
@@ -21,9 +20,7 @@
 #include "lb/lbvector.h"
 #include "pl/player.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
-#include <MetroTRK/intrinsics.h>
 
 static inline float my_sqrtf(float x)
 {

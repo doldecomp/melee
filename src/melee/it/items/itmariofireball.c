@@ -3,17 +3,14 @@
 #include "db/db.h"
 #include "ef/efasync.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/it_3F14.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/itmaplib.h"
 
-#include <common_structs.h>
 #include <math.h>
-#include <math_ppc.h>
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 #include <baselib/mtx.h>
@@ -70,9 +67,7 @@ bool itMariofireball_UnkMotion0_Anim(Item_GObj* gobj)
 
 void itMariofireball_UnkMotion0_Phys(Item_GObj* gobj)
 {
-    ItemAttr* attrs = GET_ITEM(gobj)->xCC_item_attr;
-    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 static double calc_dist_2d_accurate(Vec3* v)

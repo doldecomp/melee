@@ -4,8 +4,6 @@
 #include "gobj.h"
 #include "objalloc.h"
 
-#include <placeholder.h>
-
 extern HSD_ObjAllocData gobjproc_alloc_data;
 
 /**
@@ -142,7 +140,7 @@ void HSD_GObjProc_8038FCE4(HSD_GObjProc* gproc)
     }
 }
 
-inline void assertProc(HSD_GObjProc* gproc)
+static inline void assertProc(HSD_GObjProc* gproc)
 {
     HSD_ASSERT(31, gproc);
 }

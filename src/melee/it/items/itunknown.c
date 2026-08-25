@@ -1,19 +1,18 @@
 #include "itunknown.h"
 
+#include "inlines.h"
+
 #include "cm/camera.h"
-#include "ef/eflib.h"
 #include "gr/stage.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/item.h"
-#include "it/itmaplib.h"
 #include "lb/lbvector.h"
 
+#include <math.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
-#include <MSL/trigf.h>
 
 ItemStateTable it_803F7D60[] = {
     { 0, itUnknown_UnkMotion0_Anim, itUnknown_UnkMotion0_Phys,
@@ -156,8 +155,7 @@ void it_802CE8D0(Item_GObj* gobj)
     } else {
         Item_8026AE84(ip, 0x271B, 127, 64);
     }
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool itUnknown_UnkMotion1_Anim(Item_GObj* gobj)
@@ -185,11 +183,7 @@ bool itUnknown_UnkMotion1_Coll(Item_GObj* gobj)
 
 void it_802CEC24(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_EnterAirStateWithHitlag(gobj, 2);
 }
 
 bool itUnknown_UnkMotion2_Anim(Item_GObj* gobj)
@@ -208,8 +202,7 @@ void itUnknown_UnkMotion2_Phys(Item_GObj* gobj)
                 ip->xC4_article_data->x4_specialAttributes;
             ip->x40_vel.y = attr->x8;
             Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-            ip->entered_hitlag = efLib_PauseAll;
-            ip->exited_hitlag = efLib_ResumeAll;
+            Item_SetEffectHitlagCallbacks(ip);
         }
     }
 }
@@ -247,7 +240,7 @@ void it_802CED54(Item_GObj* gobj)
     spawn.x3C_damage = 0;
     spawn.vel = ip->xDD4_itemVar.unknown.x78.vec;
     spawn.x40 = 0;
-    spawn.kind = 0xC7;
+    spawn.kind = It_Kind_Unknown_Swarm;
     spawn.x0_parent_gobj = ip->owner;
     spawn.x4_parent_gobj2 = gobj;
     spawn.x44_flag.b0 = false;
@@ -293,8 +286,7 @@ void it_802CF0D4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool it_802CF120(Item_GObj* gobj)

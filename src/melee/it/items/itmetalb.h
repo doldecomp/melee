@@ -7,10 +7,6 @@
 
 #include "it/items/types.h"
 
-#include <baselib/forward.h>
-
-#include <dolphin/mtx.h>
-
 void itMetalB_Logic32_Spawned(Item_GObj*);
 void it_802953FC(Item_GObj*);
 bool itMetalb_UnkMotion0_Anim(Item_GObj*);

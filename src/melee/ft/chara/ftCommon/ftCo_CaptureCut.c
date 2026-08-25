@@ -1,58 +1,28 @@
 #include "ftCo_CaptureCut.h"
 
+#include "ftCo_Damage.h"
 #include "ftCo_Throw.h"
 #include "placeholder.h"
 #include "platform.h"
+
+#include "forward.h"
 
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
-#include "ftCommon/forward.h"
+#include "ftKirby/forward.h"
 
-#include <melee/cm/camera.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftCommon/ftCo_Attack1.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackHi3.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackHi4.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackLw3.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackLw4.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackS3.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackS4.h>
-#include <melee/ft/chara/ftCommon/ftCo_Damage.h>
-#include <melee/ft/chara/ftCommon/ftCo_DamageIce.h>
-#include <melee/ft/chara/ftCommon/ftCo_Escape.h>
-#include <melee/ft/chara/ftCommon/ftCo_FallSpecial.h>
-#include <melee/ft/chara/ftCommon/ftCo_Guard.h>
-#include <melee/ft/chara/ftCommon/ftCo_Lift.h>
-#include <melee/ft/chara/ftCommon/ftCo_SpecialS.h>
-#include <melee/ft/ft_0877.h>
-#include <melee/ft/ft_0881.h>
-#include <melee/ft/ft_0CDD.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftchangeparam.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftlib.h>
-#include <melee/ft/ftmaterial.h>
-#include <melee/ft/ftmetal.h>
-#include <melee/ft/ftparts.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gr/stage.h>
-#include <melee/it/item.h>
-#include <melee/it/items/it_2E5A.h>
-#include <melee/it/items/itkinoko.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/mp/mpcoll.h>
-#include <melee/mp/mplib.h>
-#include <melee/pl/pl_040D.h>
-#include <melee/pl/player.h>
-#include <melee/pl/plbonuslib.h>
-#include <melee/pl/plstale.h>
+#include "lb/lb_00B0.h"
+#include "mp/mpcoll.h"
+#include "mp/mplib.h"
 
 void ftCo_CaptureCut_Enter(Fighter_GObj* gobj)
 {
@@ -84,7 +54,7 @@ void ftCo_CaptureCut_Phys(Fighter_GObj* gobj)
 
     if (fp->ground_or_air == GA_Ground) {
         ftCommon_ApplyFrictionGround(fp, p_ftCommonData->x36C *
-                                             fp->co_attrs.gr_friction);
+                                             fp->co_attrs.ground_friction);
         ftCommon_ApplyGroundMovement(gobj);
         return;
     }

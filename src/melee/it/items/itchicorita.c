@@ -3,12 +3,12 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/itmaplib.h"
 
 ItemStateTable it_803F7A98[] = {
@@ -242,7 +242,7 @@ void it_802C9B20(Item_GObj* chicorita_gobj)
     spawn.vel.x = attr->x10 * chicorita->facing_dir;
     spawn.vel.z = spawn.vel.y = 0.0f;
     spawn.x40 = 0;
-    spawn.kind = Pokemon_Chicorita_Leaf;
+    spawn.kind = It_Kind_Chicorita_Leaf;
     spawn.x0_parent_gobj = chicorita->owner;
     spawn.x4_parent_gobj2 = (HSD_GObj*) chicorita_gobj;
     spawn.x44_flag.b0 = 1;

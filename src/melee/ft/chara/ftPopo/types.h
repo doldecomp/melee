@@ -1,10 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTPOPO_TYPES_H
 #define MELEE_FT_CHARA_FTPOPO_TYPES_H
 
-#include <placeholder.h>
 #include <platform.h>
 
-#include "ft/forward.h"
 #include "it/forward.h"
 
 struct ftPopo_FighterVars {
@@ -85,7 +83,7 @@ typedef struct ftIceClimberAttributes {
     float x14C;
     u8 _150[0x15C - 0x150];
 } ftIceClimberAttributes;
-STATIC_ASSERT(sizeof(ftIceClimberAttributes) == 0x15C);
+ASSERT_SIZE(ftIceClimberAttributes, 0x15C);
 
 union ftPp_MotionVars {
     struct ftPp_SpecialSVars {

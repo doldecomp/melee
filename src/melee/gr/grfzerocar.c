@@ -3,7 +3,7 @@
 #include "gr/granime.h"
 #include "gr/grdatfiles.h"
 #include "gr/ground.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "sc/types.h"
 
 #include <dolphin/mtx.h>
@@ -47,14 +47,14 @@ grFZeroCarEntry grFZeroCar_803E0BD8[30] = {
 
 static char grFZeroCar_804D4598[8] = "archive";
 
-// For sdata2 ordering
-static void fakeFunc(Vec3);
-static void fakeFunc(Vec3 temp)
+#ifdef MUST_MATCH
+static void order_sdata2(Vec3 temp)
 {
-    f64 f = 1.0;
-    temp.x = 0.0f;
-    temp.y = f;
+    (void) 0.0f;
+    (void) 1.0;
+    (void) 1.0f;
 }
+#endif
 
 static inline void setup_car_child(HSD_JObj* parent, s16 ext_count, s32 offset,
                                    f32 scale_factor)
@@ -83,16 +83,6 @@ static inline void setup_car_child(HSD_JObj* parent, s16 ext_count, s32 offset,
 
     HSD_JObjSetScaleX(parent, scale_factor);
     HSD_JObjSetScaleY(parent, scale_factor);
-}
-
-static inline void multiplyScale(HSD_JObj* jobj, f32 scale)
-{
-    Vec3 scl;
-    HSD_JObjGetScale(jobj, &scl);
-    scl.x *= scale;
-    scl.y *= scale;
-    scl.z *= scale;
-    HSD_JObjSetScale(jobj, &scl);
 }
 
 void grFZeroCar_801CAFBC(HSD_GObj* gobj, void* data, s32 count, s32 mode)

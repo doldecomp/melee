@@ -1,17 +1,17 @@
 #include "itfire.h"
 
+#include "inlines.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "gr/stage.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/item.h"
-#include "it/itmaplib.h"
+#include "it/itgroundcoll.h"
 
 ItemStateTable it_803F7C10[] = {
     { 0, itFire_UnkMotion0_Anim, itFire_UnkMotion0_Phys,
@@ -66,8 +66,7 @@ void it_802CC7D8(Item_GObj* gobj)
     it_8027ADEC(0x463, gobj, gobj->hsd_obj, 1.1f);
     ip->x40_vel.y = attrs->x8;
     Item_80268E5C(gobj, 2, 2);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 static void itFire_UnkMotion2_Anim_inline(Item_GObj* gobj)
@@ -77,8 +76,7 @@ static void itFire_UnkMotion2_Anim_inline(Item_GObj* gobj)
     it_8027ADEC(0x463, gobj, gobj->hsd_obj, 1.1f);
     ip->x40_vel.y = attrs->x8;
     Item_80268E5C(gobj, 2, 2);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool itFire_UnkMotion2_Anim(Item_GObj* gobj)
@@ -109,14 +107,7 @@ bool itFire_UnkMotion2_Coll(Item_GObj* gobj)
 
 void it_802CC944(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 0, 2);
-
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
-    it_80273670(gobj, 0, 0.0f);
+    Item_EnterAirStateWithHitlagAndStateDesc(gobj);
 }
 
 bool itFire_UnkMotion0_Anim(Item_GObj* gobj)
@@ -129,8 +120,7 @@ static void itFire_UnkMotion0_Phys_inline(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Item_80268E5C(gobj, 1, 2);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 void itFire_UnkMotion0_Phys(Item_GObj* gobj)

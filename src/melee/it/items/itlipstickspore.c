@@ -10,16 +10,15 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itcoll.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/types.h"
 
-#include <trigf.h>
+#include <math.h>
 #include <baselib/gobj.h>
-#include <MSL/math.h>
 
 /* 29A5F8 */ static bool itLipstickspore_UnkMotion1_Coll(Item_GObj* gobj);
 
@@ -44,7 +43,7 @@ void it_8029A114(Fighter_GObj* gobj, Vec3* pos, f32 facing_dir, s32 arg4)
     SpawnItem spawn;
     PAD_STACK(8);
 
-    spawn.kind = 0x25;
+    spawn.kind = It_Kind_LipStick_Spore;
     spawn.prev_pos = *pos;
     spawn.prev_pos.z = 0.0f;
     it_8026BB68(gobj, &spawn.pos);
@@ -70,7 +69,7 @@ void it_8029A218(HSD_GObj* owner, Vec3* pos, f32 facing_dir, s32 arg4)
     SpawnItem spawn;
     Item_GObj* item_gobj;
 
-    spawn.kind = 0x25;
+    spawn.kind = It_Kind_LipStick_Spore;
     spawn.prev_pos = *pos;
     spawn.prev_pos.z = 0.0f;
     it_8026BB68(owner, &spawn.pos);

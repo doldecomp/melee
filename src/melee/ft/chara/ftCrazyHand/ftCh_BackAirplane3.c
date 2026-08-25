@@ -1,6 +1,5 @@
 #include "ftCh_BackAirplane3.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "baselib/forward.h"
@@ -17,10 +16,6 @@
 #include "ftCrazyHand/ftCh_ThrownCrazyHand.h"
 #include "ftMasterHand/types.h"
 #include "pl/player.h"
-
-#include <common_structs.h>
-#include <dolphin/mtx.h>
-#include <MetroTRK/intrinsics.h>
 
 void ftCh_Init_80159670(HSD_GObj* gobj)
 {

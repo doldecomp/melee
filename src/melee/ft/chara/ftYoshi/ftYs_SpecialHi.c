@@ -9,15 +9,17 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/inlines.h"
 
 #include "ftYoshi/forward.h"
 
-#include "ftYoshi/ftYs_Init.h"
+#include "ftYoshi/ftyoshi.h"
 #include "ftYoshi/types.h"
 #include "it/items/ityoshieggthrow.h"
 #include "it/items/ityoshitongue.h"
@@ -30,7 +32,7 @@
 static void setDamageCallbacks(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.ys.x2238 != NULL) {
+    if (fp->u.ys.x2238 != NULL) {
         fp->take_dmg_cb = ftYs_Init_8012BA8C;
         fp->death2_cb = ftYs_Init_8012BA8C;
     }
@@ -93,24 +95,16 @@ void fn_8012E110(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftYs_DatAttrs* da = fp->dat_attrs;
-    bool var_r0;
 
-    if (fp->throw_flags_b0) {
-        fp->throw_flags_b0 = 0;
-        var_r0 = true;
-    } else {
-        var_r0 = false;
-    }
-
-    if (var_r0) {
+    if (ftCheckThrowB0(fp)) {
         Vec3 sp30;
         lb_8000B1CC(fp->parts[31].joint, NULL, &sp30);
-        fp->x1984_heldItemSpec = fp->fv.ys.x2238 =
+        fp->x1984_heldItemSpec = fp->u.ys.x2238 =
             it_802B2A10(gobj, &sp30, 0x1F, fp->facing_dir);
         setDamageCallbacks(gobj);
     }
 
-    if (fp->cmd_vars[0] != 0U && fp->fv.ys.x2238 != NULL) {
+    if (fp->cmd_vars[0] != 0U && fp->u.ys.x2238 != NULL) {
         Vec3 sp24;
         Vec3 sp18;
         PAD_STACK(4);
@@ -122,10 +116,10 @@ void fn_8012E110(Fighter_GObj* gobj)
         ftYs_SpecialS_8012DF8C_outline(gobj, &sp18);
         {
             float x4 = fp->mv.ys.specialhi.x4;
-            it_802B28C8(fp->fv.ys.x2238, &sp18, &sp24,
-                        x4 * da->x110 + da->x10C, x4);
+            it_802B28C8(fp->u.ys.x2238, &sp18, &sp24, x4 * da->x110 + da->x10C,
+                        x4);
         }
-        fp->fv.ys.x2238 = NULL;
+        fp->u.ys.x2238 = NULL;
         fp->take_dmg_cb = NULL;
         fp->death2_cb = NULL;
     }
@@ -135,10 +129,10 @@ void ftYs_SpecialS_8012E270(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.ys.x2238 != NULL && fp->mv.ys.specials.x0 == 0) {
-        it_802B2890(fp->fv.ys.x2238);
+    if (fp->u.ys.x2238 != NULL && fp->mv.ys.specials.x0 == 0) {
+        it_802B2890(fp->u.ys.x2238);
     }
-    fp->fv.ys.x2238 = NULL;
+    fp->u.ys.x2238 = NULL;
     fp->take_dmg_cb = NULL;
     fp->death2_cb = NULL;
 }
@@ -151,7 +145,7 @@ void ftYs_SpecialHi_Enter(Fighter_GObj* gobj)
 
     fp->mv.ys.specialhi.x0 = 0;
     fp->mv.ys.specialhi.x4 = 0;
-    fp->fv.ys.x2238 = NULL;
+    fp->u.ys.x2238 = NULL;
     fp->throw_flags = 0;
     fp->cmd_vars[0] = 0;
     Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialHi, 0, 0.0F, 1.0F, 0.0F,
@@ -169,7 +163,7 @@ void ftYs_SpecialAirHi_Enter(Fighter_GObj* gobj)
 
     fp->mv.ys.specialhi.x0 = 0;
     fp->mv.ys.specialhi.x4 = 0;
-    fp->fv.ys.x2238 = NULL;
+    fp->u.ys.x2238 = NULL;
     fp->throw_flags = 0;
     fp->cmd_vars[0] = 0;
     Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialAirHi, 0, 0.0F, 1.0F, 0.0F,
@@ -193,9 +187,8 @@ void fn_8012E3B4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialAirHi, motion_flags,
-                              fp->cur_anim_frame, 1.0F, 0.0F, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftYs_MS_SpecialAirHi,
+                                    motion_flags);
     setDamageCallbacks(gobj);
     setAccessory4Callback(gobj);
     ftCommon_ClampAirDrift(fp);
@@ -205,9 +198,7 @@ void fn_8012E44C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x16C, motion_flags, fp->cur_anim_frame, 1,
-                              0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 0x16C, motion_flags);
     setDamageCallbacks(gobj);
     setAccessory4Callback(gobj);
 }

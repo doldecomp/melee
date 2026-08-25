@@ -8,14 +8,13 @@
 #include "gm/inlines.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
-#include "lb/lbbgflash.h"
-#include "lb/lbmthp.h"
 #include "lb/lbspdisplay.h"
 #include "sc/types.h"
 #include "ty/toy.h"
 #include "ty/tydisplay.h"
 #include "ty/types.h"
 
+#include <math.h>
 #include <baselib/archive.h>
 #include <baselib/cobj.h>
 #include <baselib/debug.h>
@@ -27,15 +26,13 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/random.h>
-#include <baselib/sobjlib.h>
-#include <MSL/math.h>
 
 void fn_801A7FB4(HSD_GObj* gobj)
 {
     HSD_Fog* fog = GET_FOG(gobj);
     int count;
 
-    gm_801A4310();
+    gm_GetCurrentGameMode();
     count = fn_801A7FB4_inline();
 
     if (count <= 5) {
@@ -45,7 +42,7 @@ void fn_801A7FB4(HSD_GObj* gobj)
         return;
     }
 
-    gm_801A4310();
+    gm_GetCurrentGameMode();
     count = fn_801A7FB4_inline2();
 
     if (count <= 0xD) {
@@ -57,10 +54,13 @@ void fn_801A7FB4(HSD_GObj* gobj)
     }
 }
 
+/// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void order_sdata2(void)
 {
     (void) 0.0f;
 }
+#endif
 
 void fn_801A80CC(HSD_GObj* gobj)
 {
@@ -97,6 +97,8 @@ void gm_801A8114(HSD_JObj* arg0, int arg1)
     HSD_JObjSetScaleZ(transJobj, scale);
 }
 
+/// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data_0(void)
 {
     (void) "Captain  ";
@@ -135,6 +137,7 @@ static void order_data_0(void)
     (void) "Sandbag  ";
     (void) "POPO     ";
 }
+#endif
 
 void fn_801A851C(HSD_GObj* gobj)
 {
@@ -221,7 +224,7 @@ void gm_801A8D54(s32* arg0)
     count = 0;
     for (i = 0; i < 0x1A; i++) {
         if ((u32) (i - 0x12) <= 1U) {
-            gm_801A4310();
+            gm_GetCurrentGameMode();
             if ((Toy_803048C0(gm_801A659C(i)) ? true : false) &&
                 gm_801BEFB0() != CKIND_ZELDA && gm_801BEFB0() != CKIND_SEAK)
             {
@@ -229,7 +232,7 @@ void gm_801A8D54(s32* arg0)
                 count++;
             }
         } else {
-            gm_801A4310();
+            gm_GetCurrentGameMode();
             if ((Toy_803048C0(gm_801A659C(i)) ? true : false) &&
                 i != gm_801BEFB0())
             {
@@ -260,6 +263,21 @@ void gm_801A8D54(s32* arg0)
     }
 }
 
+static inline s32 gm_801A9094_get_entry(s32* entries, s32 i)
+{
+    return entries[i];
+}
+
+static inline HSD_Joint* gm_801A9094_get_bg(void)
+{
+    return HSD_ArchiveGetPublicAddress(gm_804D679C, "ToyDspStand_Top_joint");
+}
+
+static inline HSD_GObj* gm_801A9094_create_gobj(void)
+{
+    return GObj_Create(0xE, 0xF, 0);
+}
+
 void gm_801A9094(void)
 {
     s32 sp8C[0x1A];
@@ -270,22 +288,21 @@ void gm_801A9094(void)
     HSD_MatAnimJoint* matanim;
     HSD_GObj* gobj;
     HSD_JObj* root;
-    HSD_JObj* child;
+    HSD_JObj* jobj;
     PAD_STACK(0x84);
 
     gm_801A8D54(sp8C);
     i = 0x19;
     do {
         if (sp8C[i] != 0x1A) {
-            dsp = tyDisplay_8031B9DC(gm_801A659C(sp8C[i]));
+            dsp = tyDisplay_8031B9DC(
+                gm_801A659C(gm_801A9094_get_entry(sp8C, i)));
             joint = HSD_ArchiveGetPublicAddress(
                 gm_804D679C, (const char*) tyDisplay_8031BB34((s8) dsp->x04));
             matanim = HSD_ArchiveGetPublicAddress(
                 gm_804D679C, tyDisplay_8031BB94((s8) dsp->x04));
-            bg_joint = HSD_ArchiveGetPublicAddress(gm_804D679C,
-                                                   "ToyDspStand_Top_joint");
-            gobj = GObj_Create(0xE, 0xF, 0);
-            gm_80480A00[sp8C[i]] = gobj;
+            bg_joint = gm_801A9094_get_bg();
+            gm_80480A00[sp8C[i]] = gobj = gm_801A9094_create_gobj();
             root = HSD_JObjAlloc();
             HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root);
             GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
@@ -293,14 +310,14 @@ void gm_801A9094(void)
             HSD_JObjSetScaleY(root, 1.8f);
             HSD_JObjSetScaleZ(root, 1.8f);
             HSD_ASSERT(0x2F5, joint);
-            child = HSD_JObjLoadJoint(joint);
-            HSD_ASSERTMSG(0x2F7, child, "jobj");
-            HSD_JObjAddChild(root, child);
-            HSD_JObjAddAnimAll(child, NULL, matanim, NULL);
-            HSD_JObjReqAnimAll(child, (f32) dsp->x05);
-            HSD_JObjAnimAll(child);
-            HSD_JObjSetTranslateX(child, dsp->x08);
-            HSD_JObjSetTranslateZ(child, dsp->x0C);
+            jobj = HSD_JObjLoadJoint(joint);
+            HSD_ASSERT(0x2F7, jobj);
+            HSD_JObjAddChild(root, jobj);
+            HSD_JObjAddAnimAll(jobj, NULL, matanim, NULL);
+            HSD_JObjReqAnimAll(jobj, (f32) dsp->x05);
+            HSD_JObjAnimAll(jobj);
+            HSD_JObjSetTranslateX(jobj, dsp->x08);
+            HSD_JObjSetTranslateZ(jobj, dsp->x0C);
             HSD_JObjAddChild(root, HSD_JObjLoadJoint(bg_joint));
             gm_801A85E4(root, i, sp8C[i]);
         }
@@ -313,6 +330,9 @@ void fn_801A9498(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
+static HSD_GObj* gm_804D67B8;
+static HSD_GObj* gm_804D67BC;
+static HSD_GObj* gm_804D67C0;
 static s32 gm_804D67C4;
 
 void fn_801A94BC(HSD_GObj* gobj)
@@ -321,7 +341,7 @@ void fn_801A94BC(HSD_GObj* gobj)
     HSD_CObj* cobj;
 
     cobj = GET_COBJ(gobj);
-    gm_801A4310();
+    gm_GetCurrentGameMode();
     var_r31 = fn_801A7FB4_inline();
     if (var_r31 <= 5) {
         if (cobj->aobj->curr_frame < 160.0f) {
@@ -332,7 +352,7 @@ void fn_801A94BC(HSD_GObj* gobj)
         return;
     }
 
-    gm_801A4310();
+    gm_GetCurrentGameMode();
     var_r31 = fn_801A7FB4_inline2();
     if (var_r31 <= 0xD) {
         if (cobj->aobj->curr_frame < 190.0f) {
@@ -349,27 +369,14 @@ void fn_801A94BC(HSD_GObj* gobj)
     }
 }
 
-static HSD_GObj* gm_804D67B8;
-static HSD_GObj* gm_804D67BC;
-static HSD_GObj* gm_804D67C0;
-
-void gm_801A8114_inline(HSD_JObj* arg0, int arg1);
-void gm_801A8114_inline(HSD_JObj* arg0, int arg1)
+static void gm_801A8114_inline(HSD_JObj* arg0, int arg1)
 {
     gm_801A8114(arg0, arg1);
 }
 
-void gm_801A9630(void)
+static inline void gm_801A9630_init(s32** randoms)
 {
     int i;
-    HSD_CObj* cobj;
-    HSD_Fog* fog;
-    HSD_GObj* cam_gobj;
-    HSD_GObj* gobj;
-    HSD_JObj* jobj;
-    HSD_JObj* child;
-    HSD_JObj* target;
-    HSD_LObj* lobj;
     PAD_STACK(8);
 
     for (i = 0; i < 0x1A; i++) {
@@ -377,17 +384,23 @@ void gm_801A9630(void)
     }
 
     gm_804D67C4 = 0xB4;
+    *randoms = gm_80480AD0;
 
-    for (i = 0; i < 0x1A; i++) {
-        gm_801A4310();
+    for (i = 0; i < 0x1A; i++, (*randoms)++) {
+        gm_GetCurrentGameMode();
         if (Toy_803048C0(gm_801A659C(i)) ? true : false) {
-            gm_80480AD0[i] = HSD_Randi(0x2710);
+            **randoms = HSD_Randi(0x2710);
         } else {
-            gm_80480AD0[i] = 0;
+            **randoms = 0;
         }
     }
+}
 
-    // Fog GObj
+static inline void gm_801A9630_fog(void)
+{
+    HSD_GObj* gobj;
+    HSD_Fog* fog;
+
     gobj = GObj_Create(0xE, 3, 0);
     fog = HSD_FogLoadDesc(gm_804D67A4->fogs->desc);
     HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_804D7848, fog);
@@ -396,8 +409,13 @@ void gm_801A9630(void)
     HSD_FogReqAnim(fog, 0.0f);
     HSD_FogInterpretAnim(fog);
     HSD_GObj_SetupProc(gobj, fn_801A7FB4, 0x17);
+}
 
-    // Light GObj
+static inline void gm_801A9630_light(void)
+{
+    HSD_GObj* gobj;
+    HSD_LObj* lobj;
+
     gobj = GObj_Create(0xB, 3, 0);
     lobj = lb_80011AC4(gm_804D67A4->lights);
     HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_804D784A, lobj);
@@ -406,19 +424,45 @@ void gm_801A9630(void)
     HSD_LObjReqAnimAll(lobj, 0.0f);
     HSD_LObjAnimAll(lobj);
     HSD_GObj_SetupProc(gobj, fn_801A80CC, 0x17);
+}
 
-    // Camera GObj
-    cam_gobj = GObj_Create(0x13, 0x14, 0);
+static inline void gm_801A9630_camera(void)
+{
+    HSD_GObj* gobj;
+    HSD_CObj* cobj;
+
+    gobj = GObj_Create(0x13, 0x14, 0);
     cobj =
         lb_80013B14((HSD_CameraDescPerspective*) gm_804D67A4->cameras[0].desc);
-    HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B, cobj);
-    GObj_SetupGXLinkMax(cam_gobj, HSD_GObj_803910D8, 8);
-    cam_gobj->gxlink_prios = 0x801;
-    child = NULL;
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 8);
+    gobj->gxlink_prios = 0x801;
     HSD_CObjAddAnim(cobj, gm_804D67A4->cameras[0].anims[0]);
     HSD_CObjReqAnim(cobj, 0.0f);
     HSD_CObjAnim(cobj);
-    HSD_GObj_SetupProc(cam_gobj, fn_801A94BC, 0);
+    HSD_GObj_SetupProc(gobj, fn_801A94BC, 0);
+}
+
+void gm_801A9630(void)
+{
+    int i;
+    s32* randoms;
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    HSD_JObj* child;
+    HSD_JObj* target;
+
+    gm_801A9630_init(&randoms);
+
+    // Fog GObj
+    gm_801A9630_fog();
+
+    // Light GObj
+    gm_801A9630_light();
+
+    // Camera GObj
+    child = NULL;
+    gm_801A9630_camera();
 
     // Background JObj GObj 1
     gobj = GObj_Create(0xE, 0xF, 0);
@@ -434,7 +478,10 @@ void gm_801A9630(void)
     // Background JObj GObj 2
     gobj = GObj_Create(0xE, 0xF, 0);
     gm_804D67BC = gobj;
-    jobj = HSD_JObjLoadJoint(gm_804D67AC->models[0]->joint);
+    {
+        HSD_JObj* tmp = HSD_JObjLoadJoint(gm_804D67AC->models[0]->joint);
+        jobj = tmp;
+    }
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
     gm_8016895C(jobj, gm_804D67A4->models[0], 0);
@@ -444,7 +491,7 @@ void gm_801A9630(void)
 
     // Character display setup
     gm_801A9094();
-    gm_801A4B90();
+    gm_GetCurrentSceneEnterData();
 
     // Character JObj GObj 3
     gobj = GObj_Create(0xE, 0xF, 0);
@@ -466,149 +513,4 @@ void gm_801A9630(void)
     lb_8000C1C0(jobj, target);
     lb_8000C290(jobj, target);
     HSD_GObj_SetupProc(gobj, fn_801A80F0, 0x17);
-}
-
-static u8 gm_804D67C8;
-static u8 gm_804D67C9;
-
-char* gm_803DB8B8[] = {
-    "GmRegendSimpleCaptain.thp",   "GmRegendSimpleDonkey.thp",
-    "GmRegendSimpleFox.thp",       "GmRegendSimpleGamewatch.thp",
-    "GmRegendSimpleKirby.thp",     "GmRegendSimpleKoopa.thp",
-    "GmRegendSimpleLink.thp",      "GmRegendSimpleLuigi.thp",
-    "GmRegendSimpleMario.thp",     "GmRegendSimpleMarth.thp",
-    "GmRegendSimpleMewtwo.thp",    "GmRegendSimpleNess.thp",
-    "GmRegendSimplePeach.thp",     "GmRegendSimplePikachu.thp",
-    "GmRegendSimplePoponana.thp",  "GmRegendSimplePurin.thp",
-    "GmRegendSimpleSamus.thp",     "GmRegendSimpleYoshi.thp",
-    "GmRegendSimpleZeldaseak.thp", "GmRegendSimpleZeldaseak.thp",
-    "GmRegendSimpleFalco.thp",     "GmRegendSimpleClink.thp",
-    "GmRegendSimpleDrmario.thp",   "GmRegendSimpleRoy.thp",
-    "GmRegendSimplePichu.thp",     "GmRegendSimpleGanon.thp",
-};
-
-char* gm_803DBBF4[] = {
-    "GmRegendAdventureCaptain.thp",   "GmRegendAdventureDonkey.thp",
-    "GmRegendAdventureFox.thp",       "GmRegendAdventureGamewatch.thp",
-    "GmRegendAdventureKirby.thp",     "GmRegendAdventureKoopa.thp",
-    "GmRegendAdventureLink.thp",      "GmRegendAdventureLuigi.thp",
-    "GmRegendAdventureMario.thp",     "GmRegendAdventureMarth.thp",
-    "GmRegendAdventureMewtwo.thp",    "GmRegendAdventureNess.thp",
-    "GmRegendAdventurePeach.thp",     "GmRegendAdventurePikachu.thp",
-    "GmRegendAdventurePoponana.thp",  "GmRegendAdventurePurin.thp",
-    "GmRegendAdventureSamus.thp",     "GmRegendAdventureYoshi.thp",
-    "GmRegendAdventureZeldaseak.thp", "GmRegendAdventureZeldaseak.thp",
-    "GmRegendAdventureFalco.thp",     "GmRegendAdventureClink.thp",
-    "GmRegendAdventureDrmario.thp",   "GmRegendAdventureRoy.thp",
-    "GmRegendAdventurePichu.thp",     "GmRegendAdventureGanon.thp",
-};
-
-char* gm_803DBF10[] = {
-    "GmRegendAllstarCaptain.thp",   "GmRegendAllstarDonkey.thp",
-    "GmRegendAllstarFox.thp",       "GmRegendAllstarGamewatch.thp",
-    "GmRegendAllstarKirby.thp",     "GmRegendAllstarKoopa.thp",
-    "GmRegendAllstarLink.thp",      "GmRegendAllstarLuigi.thp",
-    "GmRegendAllstarMario.thp",     "GmRegendAllstarMarth.thp",
-    "GmRegendAllstarMewtwo.thp",    "GmRegendAllstarNess.thp",
-    "GmRegendAllstarPeach.thp",     "GmRegendAllstarPikachu.thp",
-    "GmRegendAllstarPoponana.thp",  "GmRegendAllstarPurin.thp",
-    "GmRegendAllstarSamus.thp",     "GmRegendAllstarYoshi.thp",
-    "GmRegendAllstarZeldaseak.thp", "GmRegendAllstarZeldaseak.thp",
-    "GmRegendAllstarFalco.thp",     "GmRegendAllstarClink.thp",
-    "GmRegendAllstarDrmario.thp",   "GmRegendAllstarRoy.thp",
-    "GmRegendAllstarPichu.thp",     "GmRegendAllstarGanon.thp",
-};
-
-void gm_801A9B30_OnEnter(UNK_T unused)
-{
-    struct {
-        int x0;
-        int x4;
-        int x8;
-        int xC;
-        float x10;
-        float x14;
-        u8 pad[0x40 - 0x18];
-        u32 x40;
-    }* temp_r3_3;
-    s32 temp_r31;
-    HSD_GObj* gobj;
-    HSD_GObj* temp_r29;
-    const char* thpfile;
-    s32 var_r3_3;
-    int var_r3;
-
-    gm_804D67C8 = 0x1E;
-    gm_804D67C9 = 0;
-    temp_r29 = GObj_Create(0x13, 0x14, 0);
-    HSD_SObjLib_803A55DC(temp_r29, 0x280, 0x1E0, 8);
-    temp_r29->gxlink_prios = 0x800;
-    lbAudioAx_80026F2C(0x12);
-    lbAudioAx_8002702C(2, 0x10);
-    lbAudioAx_80027168();
-    lbAudioAx_80027648();
-    lbBgFlash_800209F4();
-    gobj = GObj_Create(0xE, 0xF, 0);
-    HSD_GObjObject_80390A70(gobj, HSD_SObjLib_804D7960, NULL);
-    GObj_SetupGXLink(gobj, lbMthp8001F928, 0xB, 0);
-    temp_r31 = gm_801BEFB0();
-    var_r3 = gm_801A4310();
-    if (var_r3 == GM_DEBUG_GOVER) {
-        var_r3 = gm_801BF050();
-    }
-    switch (var_r3) {
-    case GM_CLASSIC_GOVER:
-        thpfile = gm_803DB8B8[temp_r31];
-        break;
-    case GM_ADVENTURE_GOVER:
-        thpfile = gm_803DBBF4[temp_r31];
-        break;
-    default:
-        thpfile = gm_803DBF10[temp_r31];
-        break;
-    }
-    lbMthp8001FAA0(thpfile, 0x230, 0x1A0);
-    temp_r3_3 = lbMthp8001F890(gobj);
-    temp_r3_3->x10 = 320.0F;
-    temp_r3_3->x14 = 240.0F;
-    temp_r3_3->x40 |= 2;
-    switch (gm_801A4310()) {
-    case GM_CLASSIC_GOVER:
-        var_r3_3 = gm_8017DFF4(1);
-        break;
-    case GM_ADVENTURE_GOVER:
-        var_r3_3 = gm_8017DFF4(0);
-        break;
-    default:
-        var_r3_3 = gm_8017DFF4(2);
-        break;
-    }
-    if (var_r3_3 == 4) {
-        lbAudioAx_800237A8(0x9C45, 0x7F, 0x40);
-    } else {
-        lbAudioAx_800237A8(0x9C41, 0x7F, 0x40);
-    }
-}
-
-void gm_801A9D0C_OnFrame(void)
-{
-    if (gm_804D67C8 != 0) {
-        gm_804D67C8--;
-    } else if (gm_804D67C9 != 0) {
-        gm_804D67C9--;
-        if (gm_804D67C9 == 0) {
-            if (gm_801A4310() == GM_DEBUG_GOVER) {
-                gm_801A6630(6);
-            } else {
-                gm_801A6630(1);
-            }
-        }
-    } else {
-        if (gm_801A36A0(gm_801BF010()) & 0x1100) {
-            lbBgFlash_8002063C(0x3C);
-            gm_804D67C9 = 0x3C;
-            lbAudioAx_80023694();
-            lbAudioAx_80024030(1);
-        }
-    }
 }

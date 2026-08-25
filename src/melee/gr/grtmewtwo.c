@@ -3,7 +3,6 @@
 #include <platform.h>
 
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -11,16 +10,14 @@
 
 #include "lb/forward.h"
 
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include "mp/forward.h"
 
 #include "mp/mplib.h"
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 typedef struct grTMewtwo_UnkStruct {
@@ -55,10 +52,9 @@ typedef struct grTMewtwo_UnkStruct {
 /* 2224B4 */ static DynamicsDesc* grTMewtwo_802224B4(enum_t arg0);
 /* 2225C8 */ static bool grTMewtwo_802225C8(Vec3* arg0, int arg1,
                                             HSD_JObj* arg2);
-/* 3E8FC0 */ static void grTMewtwo_803E8FC0(Ground_GObj* gobj);
-/* 4D6B08 */ static grTMewtwo_UnkStruct* grTMewtwo_804D6B08;
+/* 4D6B08 */ static grTMewtwo_UnkStruct* yakumono_param;
 
-static StageCallbacks grTMewtwo_803E8F70[4] = {
+static StageCallbacks grTMewtwo_StageCallbacks[4] = {
     {
         grTMewtwo_8022236C,
         grTMewtwo_80222398,
@@ -89,9 +85,9 @@ static StageCallbacks grTMewtwo_803E8F70[4] = {
     },
 };
 
-StageData grTMewtwo_803E8FCC = {
-    TMEWTWO,
-    grTMewtwo_803E8F70,
+StageData grTMewtwo_StageData = {
+    Gr_Kind_TMewtwo,
+    grTMewtwo_StageCallbacks,
     "/GrTMt.dat",
     grTMewtwo_802221DC,
     grTMewtwo_802221D8,
@@ -108,7 +104,7 @@ void grTMewtwo_802221D8(bool arg0) {}
 
 void grTMewtwo_802221DC(void)
 {
-    grTMewtwo_804D6B08 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grTMewtwo_80222284(0);
@@ -135,7 +131,7 @@ bool grTMewtwo_8022227C(void)
 Ground_GObj* grTMewtwo_80222284(int index)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTMewtwo_803E8F70[index];
+    StageCallbacks* callbacks = &grTMewtwo_StageCallbacks[index];
 
     gobj = Ground_GetStageGObj(index);
 
@@ -165,10 +161,7 @@ void grTMewtwo_802223A4(Ground_GObj* gobj) {}
 
 void grTMewtwo_802223A8(Ground_GObj* gobj)
 {
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    Ground* gp = GET_GROUND(gobj);
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTMewtwo_802223F8(Ground_GObj* gobj)
@@ -186,10 +179,7 @@ void grTMewtwo_80222434(Ground_GObj* gobj) {}
 
 void grTMewtwo_80222438(Ground_GObj* gobj)
 {
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    Ground* gp = GET_GROUND(gobj);
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTMewtwo_80222488(Ground_GObj* gobj)
@@ -208,13 +198,13 @@ static inline DynamicsDesc* inlineA0(int arg0)
 {
     int temp = mpLineGetKind(arg0);
     if (temp == CollLine_Floor) {
-        return grTMewtwo_804D6B08->x0;
+        return yakumono_param->x0;
     } else if (temp == CollLine_Ceiling) {
-        return grTMewtwo_804D6B08->x4;
+        return yakumono_param->x4;
     } else if (temp == CollLine_RightWall) {
-        return grTMewtwo_804D6B08->x8;
+        return yakumono_param->x8;
     } else if (temp == CollLine_LeftWall) {
-        return grTMewtwo_804D6B08->xC;
+        return yakumono_param->xC;
     } else {
         return NULL;
     }
@@ -224,13 +214,13 @@ static inline DynamicsDesc* inlineA1(int arg0)
 {
     int temp = mpLineGetKind(arg0);
     if (temp == CollLine_Floor) {
-        return grTMewtwo_804D6B08->x10;
+        return yakumono_param->x10;
     } else if (temp == CollLine_Ceiling) {
-        return grTMewtwo_804D6B08->x14;
+        return yakumono_param->x14;
     } else if (temp == CollLine_RightWall) {
-        return grTMewtwo_804D6B08->x18;
+        return yakumono_param->x18;
     } else if (temp == CollLine_LeftWall) {
-        return grTMewtwo_804D6B08->x1C;
+        return yakumono_param->x1C;
     } else {
         return NULL;
     }

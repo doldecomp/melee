@@ -1,17 +1,17 @@
 #include "itoctarock.h"
 
-#include "math.h"
+#include "inlines.h"
 #include "placeholder.h"
 
 #include "cm/camera.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
 #include "it/item.h"
 #include "it/items/itoctarockstone.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 #include "it/itzako.h"
@@ -492,18 +492,7 @@ void it_802E5944(Item_GObj* gobj)
 
 void it_802E595C(HSD_JObj* jobj, Item* ip)
 {
-    if (jobj != NULL) {
-        Vec3 zero;
-        Vec3 pos;
-        zero.x = zero.y = zero.z = 0.0f;
-        HSD_JObjGetTranslation(jobj, &pos);
-        ip->x40_vel.x =
-            ip->facing_dir * (pos.z - ip->xDD4_itemVar.octarock.x20.z);
-        ip->x40_vel.y = pos.y - ip->xDD4_itemVar.octarock.x20.y;
-        ip->x40_vel.z = pos.x - ip->xDD4_itemVar.octarock.x20.x;
-        ip->xDD4_itemVar.octarock.x20 = pos;
-        HSD_JObjSetTranslate(jobj, &zero);
-    }
+    itUpdateVelocityFromBone(jobj, ip, &ip->xDD4_itemVar.octarock.x20);
 }
 
 void it_802E5AA4(Item_GObj* gobj, Item_GObj* ref_gobj)

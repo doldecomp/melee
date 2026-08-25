@@ -14,7 +14,7 @@
 void ftCo_8009B040(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    FtMotionId msid = (float) fp->dmg.x1830_percent < p_ftCommonData->x488
+    FtMotionId msid = fp->dmg.x1830_percent < p_ftCommonData->x488
                           ? ftCo_MS_CliffEscapeQuick
                           : ftCo_MS_CliffEscapeSlow;
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);

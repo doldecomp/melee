@@ -1,8 +1,6 @@
 #ifndef MELEE_FT_CHARA_FTNESS_FORWARD_H
 #define MELEE_FT_CHARA_FTNESS_FORWARD_H
 
-#include <platform.h>
-
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 

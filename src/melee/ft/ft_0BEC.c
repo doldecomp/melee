@@ -45,6 +45,8 @@ void ftCo_800BECB0(Fighter_GObj* gobj)
         it_8026BAE8(fp->item_gobj,
                     fp->x34_scale.y * fp->co_attrs.model_scaling);
     }
+    default:
+        break;
     }
 }
 
@@ -62,15 +64,15 @@ static inline void FoxHelper(Fighter_GObj* gobj, Fighter* fp)
 static inline void DocHelper(Fighter_GObj* gobj, Fighter* fp)
 {
     ftCo_DatAttrs* co;
-    fp->item_gobj = itDrMarioPill_802C09C4(gobj, &fp->cur_pos,
-                                           ftMr_SpecialN_VitaminRandom(gobj),
-                                           0x31, 1, 0, fp->facing_dir);
+    fp->item_gobj = itDrMarioPill_802C09C4(
+        gobj, &fp->cur_pos, ftMr_SpecialN_VitaminRandom(gobj),
+        It_Kind_DrMario_Vitamin, 1, 0, fp->facing_dir);
     co = &fp->co_attrs;
     it_8026BAE8(fp->item_gobj,
                 0.71428f * (fp->x34_scale.y * co->model_scaling));
     fp->x1984_heldItemSpec = itDrMarioPill_802C09C4(
-        gobj, &fp->cur_pos, ftMr_SpecialN_VitaminRandom(gobj), 0x31, 0, 0,
-        fp->facing_dir);
+        gobj, &fp->cur_pos, ftMr_SpecialN_VitaminRandom(gobj),
+        It_Kind_DrMario_Vitamin, 0, 0, fp->facing_dir);
     it_8026BAE8(fp->x1984_heldItemSpec,
                 0.71428f * (fp->x34_scale.y * co->model_scaling));
 }
@@ -92,6 +94,8 @@ void ftCo_800BED88(Fighter_GObj* gobj)
         DocHelper(gobj, fp);
         break;
     }
+    default:
+        break;
     }
 }
 
@@ -110,6 +114,8 @@ void ftCo_800BEF04(Fighter_GObj* gobj)
         it_8026BAE8(fp->item_gobj,
                     0.8f * (fp->x34_scale.y * fp->co_attrs.model_scaling));
     }
+    default:
+        break;
     }
 }
 

@@ -77,7 +77,6 @@ void HSD_AObjStopAnim(HSD_AObj* aobj, void* obj, HSD_ObjUpdateFunc func);
 void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
                            HSD_ObjUpdateFunc update_func);
 
-float fmod(float x, float y);
 HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc);
 void HSD_AObjRemove(HSD_AObj* aobj);
 HSD_AObj* HSD_AObjAlloc(void);

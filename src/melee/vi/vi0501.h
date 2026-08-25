@@ -1,10 +1,7 @@
 #ifndef GALE01_31D9F8
 #define GALE01_31D9F8
 
-#include <placeholder.h>
-
 #include "ft/forward.h"
-#include "vi/forward.h"
 #include <baselib/forward.h>
 
 /* 31D9E4 */ void un_8031D9E4(int arg0, int arg1, int arg2);

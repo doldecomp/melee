@@ -1,26 +1,24 @@
 #include "itzgshell.h"
 
-#include "dolphin.h"
+#include "inlines.h"
 
 #include "baselib/random.h"
 #include "cm/camera.h"
 #include "ef/efasync.h"
 #include "gr/grzakogenerator.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
 #include "it/itcoll.h"
 #include "it/item.h"
 #include "it/items/itnokonoko.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 #include "it/itzako.h"
 #include "lb/lb_00B0.h"
 #include "mp/mpcoll.h"
-
-#include <MSL/math.h>
 
 typedef struct itGShell_Attrs {
     float x0;
@@ -82,6 +80,7 @@ void it_802DDB38(Item_GObj* gobj)
     Vec v;
     HSD_JObj* jobj;
     PAD_STACK(4);
+    /// @todo Shared code with #it_8028B8D8.
     if (ip->xDD4_itemVar.zgshell.xDF8 <= 0.0f) {
         jobj = GET_JOBJ(gobj);
         v = attrs->x3C;
@@ -289,9 +288,7 @@ bool itZrshell_UnkMotion0_Coll(Item_GObj* gobj)
     jobj = GET_JOBJ(gobj);
     attrs = ip->xC4_article_data->x4_specialAttributes;
     if (ip->ground_or_air == GA_Ground) {
-        it_80276CB8(gobj);
-        jobj = HSD_JObjGetChild(jobj);
-        HSD_JObjAddRotationY(jobj, attrs->x20 * ABS(ip->x40_vel.x));
+        Item_UpdateRollingShellRotation(gobj, ip, jobj, &attrs->x20);
     }
     return false;
 }
@@ -399,13 +396,18 @@ void itZGShell_Logic11_Dropped(Item_GObj* gobj)
     Item_80268E5C(gobj, 4, 6);
 }
 
+#ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
+#endif
 bool itZrshell_UnkMotion4_Anim(Item_GObj* gobj)
 {
     it_802DDBE8(gobj);
     return false;
 }
-#pragma dont_inline reset
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 void itZrshell_UnkMotion4_Phys(Item_GObj* gobj)
 {
@@ -457,6 +459,7 @@ static inline void it_802DDB38_inline(Item_GObj* gobj, Vec* v)
     Item* ip = GET_ITEM(gobj);
     itZGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     HSD_JObj* jobj;
+    /// @todo Inlined version of #it_802DDB38.
     if (ip->xDD4_itemVar.zgshell.xDF8 <= 0.0f) {
         jobj = GET_JOBJ(gobj);
         *v = attrs->x3C;
@@ -530,9 +533,7 @@ bool itZrshell_UnkMotion6_Coll(Item_GObj* gobj)
     jobj = GET_JOBJ(gobj);
     attrs = ip->xC4_article_data->x4_specialAttributes;
     if (ip->ground_or_air == GA_Ground) {
-        it_80276CB8(gobj);
-        jobj = HSD_JObjGetChild(jobj);
-        HSD_JObjAddRotationY(jobj, attrs->x20 * ABS(ip->x40_vel.x));
+        Item_UpdateRollingShellRotation(gobj, ip, jobj, &attrs->x20);
     }
     if (it_8027770C(gobj)) {
         it_80272980(gobj);
@@ -570,7 +571,10 @@ void it_802DEC80(Item_GObj* gobj)
     ip->jumped_on = fn_802DFE7C;
 }
 
+#ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
+#endif
 bool itZrshell_UnkMotion8_Anim(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
@@ -587,7 +591,9 @@ bool itZrshell_UnkMotion8_Anim(Item_GObj* gobj)
     }
     return false;
 }
-#pragma dont_inline reset
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 void itZrshell_UnkMotion8_Phys(Item_GObj* gobj)
 {
@@ -688,14 +694,14 @@ void it_802DF230(Item_GObj* gobj)
     ip->xDD4_itemVar.zgshell.xE0C = 0x14;
 
     jobj = GET_JOBJ(gobj);
-    angle = rad_to_deg * HSD_JObjGetRotationY(jobj);
+    angle = MTXRadToDeg(HSD_JObjGetRotationY(jobj));
     child = HSD_JObjGetChild(jobj);
-    angle += rad_to_deg * HSD_JObjGetRotationY(child);
+    angle += MTXRadToDeg(HSD_JObjGetRotationY(child));
 
     if (-90.0f == angle || 90.f == angle) {
         ip->facing_dir = (angle < 0.0f) ? -1.0f : 1.0f;
         ip->xDD4_itemVar.zgshell.xE00 = 0.0f;
-        HSD_JObjSetRotationY(jobj, deg_to_rad * angle);
+        HSD_JObjSetRotationY(jobj, MTXDegToRad(angle));
         HSD_JObjSetRotationY(child, 0.0f);
     } else {
         f32 factor;
@@ -704,7 +710,7 @@ void it_802DF230(Item_GObj* gobj)
                              "*** ZGShell Restoration Rot Y Irregul!\n");
         }
         angle = (f32) ((s32) angle % 360);
-        HSD_JObjSetRotationY(jobj, deg_to_rad * angle);
+        HSD_JObjSetRotationY(jobj, MTXDegToRad(angle));
         HSD_JObjSetRotationY(child, 0.0f);
         if (0.0f == angle) {
             ip->facing_dir = HSD_Randi(2) ? -1.0f : 1.0f;
@@ -920,13 +926,13 @@ bool itZGShell_Logic11_ShieldBounced(Item_GObj* gobj)
     return false;
 }
 
-int fn_802DFE7C(Item_GObj* gobj)
+bool fn_802DFE7C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     it_80272940(gobj);
     it_802DDEB4(gobj);
     Item_8026AE84(ip, 0xF1, 0x7FU, 0x40U);
-    return 0;
+    return false;
 }
 
 void it_802DFED4(Item_GObj* gobj, Item_GObj* ref_gobj)
@@ -960,18 +966,7 @@ void it_802DFFA0(Item_GObj* gobj)
 
 void it_802DFFB8(HSD_JObj* jobj, Item* ip)
 {
-    Vec3 vec;
-    Vec3 vec2;
-    if (jobj != NULL) {
-        vec.x = vec.y = vec.z = 0.0F;
-        HSD_JObjGetTranslation(jobj, &vec2);
-        ip->x40_vel.x =
-            ip->facing_dir * (vec2.z - ip->xDD4_itemVar.zgshell.vel.z);
-        ip->x40_vel.y = vec2.y - ip->xDD4_itemVar.zgshell.vel.y;
-        ip->x40_vel.z = vec2.x - ip->xDD4_itemVar.zgshell.vel.x;
-        ip->xDD4_itemVar.zgshell.vel = vec2;
-        HSD_JObjSetTranslate(jobj, &vec);
-    }
+    itUpdateVelocityFromBone(jobj, ip, &ip->xDD4_itemVar.zgshell.vel);
 }
 
 const Vec3 it_803B86E8 = { 0.0f, 0.0f, 0.0f };
@@ -981,7 +976,7 @@ Item_GObj* it_802E0100(s32 arg0, Vec3* pos, s32 facing_int)
     Vec3 vel = it_803B86E8;
     Item_GObj* spawn_gobj;
     PAD_STACK(8);
-    spawn_gobj = it_8027B5B0(0xDB, pos, NULL, &vel, 1);
+    spawn_gobj = it_8027B5B0(It_Kind_ZGShell, pos, NULL, &vel, 1);
     if (spawn_gobj != NULL) {
         Item* spawn_ip = GET_ITEM(spawn_gobj);
         spawn_ip->facing_dir = facing_int;
@@ -1025,8 +1020,10 @@ Item_GObj* it_802E0100(s32 arg0, Vec3* pos, s32 facing_int)
     return spawn_gobj;
 }
 
-// unused debug message? (jimen = じめん = 地面 = "ground")
-static void jimenn(void)
+/// unused debug message? (jimen = じめん = 地面 = "ground")
+#ifdef MUST_MATCH
+static void keep_data(void)
 {
-    OSReport("JIMENN!!!\n");
+    (void) "JIMENN!!!\n";
 }
+#endif

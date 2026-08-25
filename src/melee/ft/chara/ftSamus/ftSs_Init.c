@@ -263,12 +263,12 @@ void ftSs_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0, 0);
-    fp->fv.ss.x222C = 0;
-    fp->fv.ss.x2230 = 0;
-    fp->fv.ss.x2238 = 0;
-    fp->fv.ss.x2244 = 0;
-    fp->fv.ss.x223C = 0;
-    fp->fv.ss.x2240 = 0;
+    fp->u.ss.x222C = 0;
+    fp->u.ss.x2230 = 0;
+    fp->u.ss.x2238 = 0;
+    fp->u.ss.x2244 = 0;
+    fp->u.ss.x223C = 0;
+    fp->u.ss.x2240 = 0;
 }
 
 void ftSs_Init_OnLoad(HSD_GObj* gobj)
@@ -280,10 +280,10 @@ void ftSs_Init_OnLoad(HSD_GObj* gobj)
 
     PUSH_ATTRS(fp, ftSs_DatAttrs);
 
-    it_8026B3F8(item_list[0], 93);
-    it_8026B3F8(item_list[1], 94);
-    it_8026B3F8(item_list[2], 95);
-    it_8026B3F8(item_list[3], 96);
+    it_8026B3F8(item_list[0], It_Kind_Samus_Bomb);
+    it_8026B3F8(item_list[1], It_Kind_Samus_Charge);
+    it_8026B3F8(item_list[2], It_Kind_Samus_Missile);
+    it_8026B3F8(item_list[3], It_Kind_Samus_GBeam);
 }
 
 void ftSs_Init_80128428(HSD_GObj* gobj)
@@ -317,7 +317,7 @@ void ftSs_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* da = fp->dat_attrs;
-    s32 samus_x2230 = fp->fv.ss.x2230;
+    s32 samus_x2230 = fp->u.ss.x2230;
     if (samus_x2230 == da->x18) {
         ftCo_800BFFD0(fp, 53, 0);
     }

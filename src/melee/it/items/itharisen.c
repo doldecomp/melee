@@ -4,11 +4,10 @@
 #include <platform.h>
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/it_3F14.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 
 ItemStateTable it_803F5FF0[] = {
     { -1, itHarisen_UnkMotion0_Anim, itHarisen_UnkMotion0_Phys,
@@ -173,9 +172,7 @@ void itHarisen_Logic24_Thrown(Item_GObj* gobj)
 
 void itHarisen_UnkMotion8_Phys(Item_GObj* gobj)
 {
-    ItemAttr* attr = ((Item*) gobj->user_data)->xCC_item_attr;
-    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 bool itHarisen_UnkMotion7_Coll(Item_GObj* gobj)

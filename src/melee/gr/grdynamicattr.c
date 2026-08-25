@@ -2,11 +2,10 @@
 
 #include <platform.h>
 
-#include "gr/types.h"
+#include "gr/types.h" // IWYU pragma: keep
 #include "mp/mplib.h"
 
 #include <math.h>
-#include <math_ppc.h>
 #include <baselib/debug.h>
 
 static const s32 GC_Id_None = -1;
@@ -91,7 +90,7 @@ void grDynamicAttr_801CA224(void)
     }
 }
 
-inline f32 do_sqrtf(f32 x)
+static inline f32 do_sqrtf(f32 x)
 {
     return sqrtf(x);
 }

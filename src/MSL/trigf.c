@@ -1,4 +1,4 @@
-#include "math.h"
+#include <math.h>
 
 #define __epsilon 3.45266983e-4f
 
@@ -106,8 +106,10 @@ f32 cosf(f32 x)
     }
 }
 
+#ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
-
+#endif
 f32 sin__Ff(f32 x)
 {
     return sinf(x);
@@ -117,8 +119,9 @@ f32 cos__Ff(f32 x)
 {
     return cosf(x);
 }
-
-#pragma dont_inline reset
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 f32 tanf(f32 x)
 {

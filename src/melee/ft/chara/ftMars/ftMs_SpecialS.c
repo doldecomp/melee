@@ -3,18 +3,21 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/inlines.h"
 #include "ftMars/types.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
-#include <baselib/debug.h>
 
 void ftMs_SpecialS_Enter(HSD_GObj* gobj)
 {
@@ -52,8 +55,8 @@ void ftMs_SpecialAirS_Enter(HSD_GObj* gobj)
     MarsAttributes* da = getFtSpecialAttrsD(fp0);
 
     fp0->self_vel.x = fp0->self_vel.x / da->x14;
-    if ((signed) fp0->fv.ms.x222C == 0) {
-        fp0->fv.ms.x222C = 1;
+    if ((signed) fp0->u.ms.x222C == 0) {
+        fp0->u.ms.x222C = 1;
         fp0->self_vel.y = da->x1C;
     } else {
         fp0->self_vel.y = 0;
@@ -154,22 +157,16 @@ void ftMs_SpecialS_801376E8(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
-    ftCommon_8007D5D4(fp);
-
-    Fighter_ChangeMotionState(gobj, 358, transition_flags, fp->cur_anim_frame,
-                              1, 0, 0);
+    ftCommon_GroundToAirStateChange(gobj, fp, 358, transition_flags);
 }
 
 void ftMs_SpecialS_80137748(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->fv.ms.x222C = 0;
+    fp->u.ms.x222C = 0;
 
     // Air_SetAsGrounded2
-    ftCommon_8007D7FC(fp);
-
-    Fighter_ChangeMotionState(gobj, 349, transition_flags, fp->cur_anim_frame,
-                              1, 0, 0);
+    ftCommon_AirToGroundStateChange(gobj, fp, 349, transition_flags);
 }
 
 void ftMs_SpecialS2_Anim(HSD_GObj* gobj)
@@ -250,10 +247,6 @@ void ftMs_SpecialS_80137940(HSD_GObj* gobj)
     case 351:
         msid = 360;
         break;
-#ifdef BUGFIX
-    default:
-        HSD_ASSERT(__LINE__, false);
-#endif
     }
 
     Fighter_ChangeMotionState(gobj, msid, transition_flags, fp->cur_anim_frame,
@@ -265,7 +258,7 @@ void ftMs_SpecialS_801379D0(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     enum_t msid;
 
-    fp->fv.ms.x222C = 0;
+    fp->u.ms.x222C = 0;
     ftCommon_8007D7FC(fp);
 
     switch (fp->motion_id) {
@@ -275,10 +268,6 @@ void ftMs_SpecialS_801379D0(HSD_GObj* gobj)
     case 360:
         msid = 351;
         break;
-#ifdef BUGFIX
-    default:
-        HSD_ASSERT(__LINE__, false);
-#endif
     }
 
     Fighter_ChangeMotionState(gobj, msid, transition_flags, fp->cur_anim_frame,
@@ -398,10 +387,6 @@ void ftMs_SpecialS_80137CBC(HSD_GObj* gobj)
     case 353:
         msid = 362;
         break;
-#ifdef BUGFIX
-    default:
-        HSD_ASSERT(__LINE__, false);
-#endif
     }
 
     Fighter_ChangeMotionState(gobj, msid, transition_flags, fp->cur_anim_frame,
@@ -412,7 +397,7 @@ void ftMs_SpecialS_80137D60(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     enum_t msid;
-    fp->fv.ms.x222C = 0;
+    fp->u.ms.x222C = 0;
 
     // Air_SetAsGrounded2
     ftCommon_8007D7FC(fp);
@@ -536,10 +521,6 @@ void ftMs_SpecialS_80137FF8(HSD_GObj* gobj)
     case 356:
         msid = 365;
         break;
-#ifdef BUGFIX
-    default:
-        HSD_ASSERT(__LINE__, false);
-#endif
     }
 
     Fighter_ChangeMotionState(gobj, msid, transition_flags, fp->cur_anim_frame,
@@ -551,7 +532,7 @@ void ftMs_SpecialS_8013809C(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     enum_t msid;
 
-    fp->fv.ms.x222C = 0;
+    fp->u.ms.x222C = 0;
 
     // Air_SetAsGrounded2
     ftCommon_8007D7FC(fp);
@@ -566,10 +547,6 @@ void ftMs_SpecialS_8013809C(HSD_GObj* gobj)
     case 365:
         msid = 356;
         break;
-#ifdef BUGFIX
-    default:
-        HSD_ASSERT(__LINE__, false);
-#endif
     }
 
     Fighter_ChangeMotionState(gobj, msid, transition_flags, fp->cur_anim_frame,

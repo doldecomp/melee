@@ -254,7 +254,7 @@ void ftZd_Init_OnDeath(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, 0);
-    fp->fv.zd.x222C = 0;
+    fp->u.zd.x222C = 0;
 }
 
 void ftZd_Init_OnLoad(HSD_GObj* gobj)
@@ -264,8 +264,8 @@ void ftZd_Init_OnLoad(HSD_GObj* gobj)
 
     PUSH_ATTRS(fp, ftZelda_DatAttrs);
 
-    it_8026B3F8(item_list[0], 108);
-    it_8026B3F8(item_list[1], 109);
+    it_8026B3F8(item_list[0], It_Kind_Zelda_DinFire);
+    it_8026B3F8(item_list[1], It_Kind_Zelda_DinFire_Explode);
 }
 
 void ftZd_Init_801393AC(HSD_GObj* gobj)

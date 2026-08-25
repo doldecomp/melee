@@ -9,34 +9,6 @@
 
 #include <dolphin/mtx.h>
 
-struct grBigBlueRoute_8020DA9C_t {
-    /* +0 */ char pad_0[0x8];
-    /* +8 */ int x8;
-};
-
-typedef struct {
-    u8 b0 : 1;
-    u8 b1 : 1;
-    u8 b2_5 : 4;
-    u8 b6 : 1;
-    u8 b7 : 1;
-} RouteEntryFlags;
-
-typedef struct {
-    RouteEntryFlags flags;
-    u8 pad_1[3];
-    f32 x4;
-    f32 x8;
-    f32 xC;
-    f32 x10;
-    f32 x14;
-    f32 x18;
-    f32 x1C;
-    f32 x20;
-    f32 x24;
-    void* x28;
-} RouteEntry;
-
 /* 20B864 */ void grBigBlueRoute_8020B864(bool);
 /* 20B89C */ void grBigBlueRoute_8020B89C(void);
 /* 20B920 */ void grBigBlueRoute_8020B920(void);
@@ -68,7 +40,6 @@ typedef struct {
 /* 20C530 */ s32 grBigBlueRoute_8020C530(Ground_GObj*);
 /* 20C85C */ void grBigBlueRoute_8020C85C(Ground_GObj*);
 /* 20CD20 */ void grBigBlueRoute_8020CD20(Ground_GObj*);
-/* 20DA9C */ int grBigBlueRoute_8020DA9C(struct grBigBlueRoute_8020DA9C_t*);
 /* 20DAB4 */ void grBigBlueRoute_8020DAB4(HSD_JObj**, float, int);
 /* 20DD64 */ f32 grBigBlueRoute_8020DD64(Vec3*);
 /* 20DE48 */ DynamicModelDesc* grBigBlueRoute_8020DE48(void);
@@ -76,5 +47,6 @@ typedef struct {
 /* 20DED4 */ void grBigBlueRoute_8020DED4(Vec3*);
 /* 20DF78 */ DynamicsDesc* grBigBlueRoute_8020DF78(enum_t);
 /* 20DF80 */ bool grBigBlueRoute_8020DF80(Vec3*, int arg, HSD_JObj* jobj);
+/* 3E617C */ extern StageData grBb_Route_StageData;
 
 #endif

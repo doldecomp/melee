@@ -4,10 +4,10 @@ function melee_sed {
     find \
         src \
         docs \
-        ldscript.lcf \
         config/GALE01/splits.txt \
         config/GALE01/symbols.txt \
         configure.py \
+        .nix/CMakeLists.txt \
         -type f -exec sed -i "${@}" {} +
 }
 
@@ -15,7 +15,7 @@ function melee_sd {
     {
         find src -type f \( -name '*.c' -o -name '*.h' \) -print0
         find docs -type f -name '*.md' -print0
-        find ldscript.lcf config/GALE01/splits.txt config/GALE01/symbols.txt configure.py -type f -print0
+        find config/GALE01/splits.txt config/GALE01/symbols.txt configure.py .nix/CMakeLists.txt -type f -print0
     } | xargs -0 sd "${@}"
 }
 

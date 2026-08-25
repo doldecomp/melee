@@ -1,5 +1,7 @@
 #include "lb/lbfile.h"
 
+#include <placeholder.h>
+
 #include "lb/lb_0195.h"
 #include "lb/lbdvd.h"
 #include "lb/lbheap.h"
@@ -7,195 +9,170 @@
 
 #include <string.h>
 #include <dolphin/dvd.h>
-#include <dolphin/os/OSError.h>
-#include <dolphin/os/OSInterrupt.h>
 #include <baselib/debug.h>
 #include <baselib/devcom.h>
 
-static char lbFile_803BA508[] = __FILE__;
-
 static bool cancel;
 
-void lbFile_8001615C(int r3, int r4, void* r5, bool cancelflag)
+static void lbFile_8001615C(int dcreq, int args, void* buf, bool cancelflag)
 {
-    if (cancelflag) {
-        __assert(lbFile_803BA508, 71, "!cancelflag");
-    }
+    HSD_ASSERT(71, !cancelflag);
     cancel = true;
 }
 
+/// @todo Non-inlined function forces loop in ::lbFile_800161C4 to yield to
+///       interrupts. Pragma solution likely fake.
+#ifdef __MWERKS__
 #pragma push
 #pragma dont_inline on
-bool lbFile_800161A0(void)
+#endif
+static bool discIsDone(void)
 {
     lb_800195D0();
     return cancel;
 }
+#ifdef __MWERKS__
 #pragma pop
+#endif
 
-void lbFile_800161C4(int file, u32 src, u32 dest, u32 size, int type, int pri)
+static void waitForDisc(void)
+{
+    do {
+    } while (!discIsDone());
+}
+
+void lbFile_800161C4(int file, uintptr_t src, uintptr_t dst, size_t size,
+                     int type, int pri)
 {
     cancel = false;
-    HSD_DevComRequest(file, src, dest, size, type, pri, lbFile_8001615C, 0);
-
-    do {
-        continue;
-    } while (!lbFile_800161A0());
+    HSD_DevComRequest(file, src, dst, size, type, pri, lbFile_8001615C, 0);
+    waitForDisc();
 }
 
 #define MAX_FILENAME_LENGTH 0x20
 const int FILE_EXTENSION_LENGTH = 4; // ".usd" or ".dat"
 const int MAX_BASENAME_LENGTH = MAX_FILENAME_LENGTH - FILE_EXTENSION_LENGTH;
-static char lbFile_80432058[MAX_FILENAME_LENGTH];
 
 /// append file extension (if needed)
-char* lbFile_80016204(const char* basename)
+char* lbFileGetFullName(const char* basename)
 {
+    static char result[MAX_FILENAME_LENGTH];
     const char* cur = basename;
-    s32 pos = 0;
+    int pos = 0;
 
-    while (cur[0] != '\0' && cur[0] != '.') {
+    while (*cur != '\0' && *cur != '.') {
         // no room for file extension?
         if (pos > MAX_BASENAME_LENGTH) {
             OSReport("Error : file name too long %s.", basename);
-            __assert(lbFile_803BA508, 0x99, "NULL");
+            HSD_ASSERT(0x99, NULL);
         }
-        lbFile_80432058[pos++] = cur++[0];
+        result[pos++] = *cur++;
     }
     // keep any existing file extension
     if (cur[0] != '\0' && cur[1] != '\0') {
-        strcpy(lbFile_80432058, basename);
+        strcpy(result, basename);
         // otherwise, append the appropriate extension for the locale
-    } else if (cur[0] == '.') {
-        lbFile_80432058[pos++] = '.';
+    } else if (*cur == '.') {
+        result[pos++] = '.';
         if (lbLang_IsSettingUS()) {
-            strcpy(&lbFile_80432058[pos], "usd");
+            strcpy(&result[pos], "usd");
         } else {
-            strcpy(&lbFile_80432058[pos], "dat");
+            strcpy(&result[pos], "dat");
         }
     } else {
-        lbFile_80432058[pos++] = '.';
+        result[pos++] = '.';
         if (lbLang_IsSavedLanguageUS()) {
-            strcpy(&lbFile_80432058[pos], "usd");
+            strcpy(&result[pos], "usd");
         } else {
-            strcpy(&lbFile_80432058[pos], "dat");
+            strcpy(&result[pos], "dat");
         }
     }
-    return lbFile_80432058;
+    return result;
 }
 
-#ifndef BUGFIX
-typedef struct OldDVDFileInfo {
-    /*0x00*/ DVDCommandBlock cb;
-    /*0x30*/ u32 startAddr;
-    /*0x34*/ u32 length;
-} OldDVDFileInfo;
-#endif
-
-/// @bug OldDVDFileInfo is needed to match stack allocation sizes. However,
-/// the actual DVDFileInfo is 4 bytes longer due to callback.
-/// This means that calls to lbFile_8001634C write 4 bytes past where it should
-/// on the stack.
-///
-/// Get file size:
-size_t lbFile_8001634C(s32 fileno)
+size_t lbFile_8001634C(int fileno)
 {
-#ifdef BUGFIX
     DVDFileInfo info;
-#else
-    OldDVDFileInfo info;
-#endif
     size_t length;
     bool intr = OSDisableInterrupts();
 
-    if (!DVDFastOpen(fileno, (DVDFileInfo*) &info)) {
+    if (!DVDFastOpen(fileno, &info)) {
         OSReport("Cannot open file no=%d.", fileno);
-        __assert(lbFile_803BA508, 0xD8, "0");
+        HSD_ASSERT(0xD8, 0);
     }
 
     length = info.length;
-    DVDClose((DVDFileInfo*) &info);
+    DVDClose(&info);
     OSRestoreInterrupts(intr);
     return length;
 }
 
-s32 lbFile_800163D8(const char* basename)
+size_t lbFileGetSize(const char* basename)
 {
-    s32 entry_num;
-    char* filename = lbFile_80016204(basename);
+    int entry_num;
+    char* filename = lbFileGetFullName(basename);
     entry_num = DVDConvertPathToEntrynum(filename);
-    if (entry_num == -1) {
-        OSReport("file isn't exist %s = %d\n", filename, entry_num);
-        __assert(lbFile_803BA508, 0xEE, "entry_num != -1");
-    }
+    HSD_ASSERTREPORT(0xEE, entry_num != -1, "file isn't exist %s = %d\n",
+                     filename, entry_num);
     return lbFile_8001634C(entry_num);
 }
 
 #define ROUND_UP_32(x) (((x) + 31) & ~31)
 
-void lbFile_800164A4(s32 file, u32 dest, size_t* size, s32 pri,
+void lbFile_800164A4(int file, uintptr_t dst, size_t* size, int pri,
                      HSD_DevComCallback callback, void* args)
 {
     int type;
     *size = lbFile_8001634C(file);
-    type = (dest >= 0x80000000) ? 0x21 : 0x23;
-    HSD_DevComRequest(file, 0, dest, ROUND_UP_32(*size), type, pri, callback,
+    type = (dst >= 0x80000000) ? 0x21 : 0x23;
+    HSD_DevComRequest(file, 0, dst, ROUND_UP_32(*size), type, pri, callback,
                       args);
 }
 
-void lbFile_80016580(const char* basename, u32 src, u32* dest,
+void lbFile_80016580(const char* basename, void* dst, size_t* size,
                      HSD_DevComCallback callback, void* args)
 {
-    char* filename = lbFile_80016204(basename);
-    s32 entry_num = DVDConvertPathToEntrynum(filename);
+    char* filename = lbFileGetFullName(basename);
+    int entry_num = DVDConvertPathToEntrynum(filename);
     PAD_STACK(4);
 
-    if (entry_num == -1) {
-        OSReport("file isn't exist %s = %d\n", filename, entry_num);
-        __assert(lbFile_803BA508, 0x11A, "entry_num != -1");
-    }
+    HSD_ASSERTREPORT(0x11A, entry_num != -1, "file isn't exist %s = %d\n",
+                     filename, entry_num);
 
-    lbFile_800164A4(entry_num, src, dest, 1, callback, args);
+    lbFile_800164A4(entry_num, (uintptr_t) dst, size, 1, callback, args);
 }
 
-void lbFile_8001668C(const char* basename, u32* src, u32* dest)
+void lbFile_8001668C(const char* basename, void* dst, size_t* size)
 {
     cancel = false;
-    lbFile_80016580(basename, (u32) src, dest, lbFile_8001615C, 0);
-    do {
-    } while (!lbFile_800161A0());
+    lbFile_80016580(basename, dst, size, lbFile_8001615C, NULL);
+    waitForDisc();
 }
 
-inline void qwer(s32 a, const char* basename, u32* src, u32* dest)
+static void lbFile_80016760_inline(int heap_id, const char* basename,
+                                   void** dst, size_t* size)
 {
-    *dest = lbFile_800163D8(basename);
-    *src = (u32) lbHeap_80015BD0(a, ROUND_UP_32(*dest));
-    lbFile_80016580(basename, *src, dest, lbFile_8001615C, 0);
-
-    do {
-        continue;
-    } while (!lbFile_800161A0());
+    *size = lbFileGetSize(basename);
+    *dst = lbHeap_80015BD0(heap_id, ROUND_UP_32(*size));
+    lbFile_80016580(basename, *dst, size, lbFile_8001615C, NULL);
+    waitForDisc();
 }
 
-void lbFile_80016760(const char* basename, u32* src, u32* dest)
+void lbFile_80016760(const char* basename, void** dst, size_t* size)
 {
     cancel = false;
-    qwer(0, basename, src, dest);
+    lbFile_80016760_inline(0, basename, dst, size);
 }
 
-inline u32 func_800163D8_inline(const char* basename)
+bool lbFile_800168A0(int heap_id, const char* basename, void** dst,
+                     size_t* size)
 {
-    return lbFile_800163D8(basename);
-}
-
-bool lbFile_800168A0(s32 arg0, const char* basename, u32* src, u32* dest)
-{
-    if ((*src = (u32) lbDvd_8001819C(basename))) {
-        *dest = func_800163D8_inline(basename);
+    if ((*dst = lbDvd_8001819C(basename))) {
+        *size = lbFileGetSize(basename);
         return true;
     } else {
         cancel = false;
-        qwer(arg0, basename, src, dest);
+        lbFile_80016760_inline(heap_id, basename, dst, size);
         return false;
     }
 }

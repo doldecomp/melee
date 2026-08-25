@@ -1,10 +1,7 @@
 #include "ftcmdscript.h"
 
-#include <placeholder.h>
-
 #include <math.h>
 #include <sysdolphin/baselib/debug.h>
-#include <melee/ft/chara/ftCommon/ftCo_0A01.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/types.h>
 #include <melee/lb/lb_00CE.h>

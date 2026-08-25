@@ -9,13 +9,12 @@
 #include "ftCo_Guard.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_SpecialS.h"
-#include "math.h"
 
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0CDD.h"
 #include "ft/ft_0DF1.h"
@@ -42,7 +41,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 typedef enum cmd_var_idx {
@@ -58,8 +56,9 @@ typedef enum cmd_var_idx {
 static bool checkLStick(Fighter* fp)
 {
     if (fp->input.x668 & HSD_PAD_A &&
-        ABS(fp->input.lstick.x) >= p_ftCommonData->x3C &&
-        fp->x670_timer_lstick_tilt_x < p_ftCommonData->x40)
+        ABS(fp->input.lstick.x) >=
+            p_ftCommonData->dash_smash_stick_threshold &&
+        fp->x670_timer_lstick_tilt_x < p_ftCommonData->dash_smash_window)
     {
         return true;
     }
@@ -89,7 +88,8 @@ bool ftCo_AttackS4_CheckInput(Fighter_GObj* gobj)
 static bool checkFacingDir(Fighter* fp)
 {
     if (fp->input.x668 & HSD_PAD_A &&
-        fp->input.lstick.x * fp->facing_dir >= p_ftCommonData->x3C)
+        fp->input.lstick.x * fp->facing_dir >=
+            p_ftCommonData->dash_smash_stick_threshold)
     {
         return true;
     } else {
@@ -163,8 +163,7 @@ void decideFighter(HSD_GObj* gobj, float stick_x_sign, float stick_angle)
     case FTKIND_PIKACHU:
     case FTKIND_PICHU:
         doEnter(gobj, stick_angle);
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
         return;
     default:
         doEnter(gobj, stick_angle);
@@ -177,19 +176,19 @@ static void doEnter(Fighter_GObj* gobj, float stick_angle)
     Fighter* fp = GET_FIGHTER(gobj);
     FtMotionId msid;
     if (stick_angle > p_ftCommonData->xB8_radians &&
-        ftData_80085FD4(fp, ftCo_MS_AttackS4S)->x8 != NULL)
+        ftData_80085FD4(fp, ftCo_MS_AttackS4S)->x8 != 0)
     {
         msid = ftCo_MS_AttackS4Hi;
     } else if (stick_angle > p_ftCommonData->xBC_radians &&
-               ftData_80085FD4(fp, ftCo_MS_AttackS4LwS)->x8 != NULL)
+               ftData_80085FD4(fp, ftCo_MS_AttackS4LwS)->x8 != 0)
     {
         msid = ftCo_MS_AttackS4HiS;
     } else if (stick_angle < p_ftCommonData->xC4_radians &&
-               ftData_80085FD4(fp, ftCo_MS_AttackLw4)->x8 != NULL)
+               ftData_80085FD4(fp, ftCo_MS_AttackLw4)->x8 != 0)
     {
         msid = ftCo_MS_AttackS4Lw;
     } else if (stick_angle < p_ftCommonData->xC0_radians &&
-               ftData_80085FD4(fp, ftCo_MS_AttackHi4)->x8 != NULL)
+               ftData_80085FD4(fp, ftCo_MS_AttackHi4)->x8 != 0)
     {
         msid = ftCo_MS_AttackS4LwS;
     } else {

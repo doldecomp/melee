@@ -6,7 +6,11 @@
 
 #include "ef/efsync.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
@@ -14,11 +18,15 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftCommon/inlines.h"
 #include "ftZelda/types.h"
 #include "it/items/itzeldadinfire.h"
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx.h>
+
+static MotionFlags const ftZd_MF_SpecialSStart_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx;
 
 /// 8013B638 - 8013B6D8 (160 bytes)
 /// https://decomp.me/scratch/QnXK1
@@ -43,7 +51,7 @@ void ftZd_SpecialS_Enter(HSD_GObj* gobj)
     fighter2->mv.zd.specials.x0 = attributes->x10;
     fighter2->mv.zd.specials.x4 = attributes->x14;
     fighter2->mv.zd.specials.x8 = attributes->x18;
-    fighter2->fv.zd.x222C = 0;
+    fighter2->u.zd.x222C = 0;
     fighter2->mv.zd.specials.xC = attributes->x1C;
     fighter2->death2_cb = 0;
     fighter2->take_dmg_cb = 0;
@@ -74,7 +82,7 @@ void ftZd_SpecialAirS_Enter(HSD_GObj* gobj)
     fighter2->mv.zd.specials.x0 = attributes->x10;
     fighter2->mv.zd.specials.x4 = attributes->x14;
     fighter2->mv.zd.specials.x8 = attributes->x18;
-    fighter2->fv.zd.x222C = 0;
+    fighter2->u.zd.x222C = 0;
     fighter2->mv.zd.specials.xC = attributes->x1C;
     fighter2->death2_cb = 0;
     fighter2->take_dmg_cb = 0;
@@ -97,7 +105,7 @@ void ftZd_SpecialSStart_Anim(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
 
-    if (fp->cmd_vars[0] == 1U && fp->fv.zd.x222C == 0U) {
+    if (fp->cmd_vars[0] == 1U && fp->u.zd.x222C == 0U) {
         fp->cmd_vars[0] = 0U;
         lb_8000B1CC(fp->parts[89].joint, NULL, &sp24);
 
@@ -107,7 +115,7 @@ void ftZd_SpecialSStart_Anim(HSD_GObj* gobj)
         sp24.y += attributes->x24;
 
         temp_r3 = it_802C3BAC(gobj, &sp24, fp->facing_dir, temp_f2);
-        fp->fv.zd.x222C = temp_r3;
+        fp->u.zd.x222C = temp_r3;
 
         if (temp_r3 != 0) {
             fp->death2_cb = &ftZd_Init_801393AC;
@@ -140,7 +148,7 @@ void ftZd_SpecialSLoop_Anim(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
 
-    if ((fp->cmd_vars[0] == 1U) && (fp->fv.zd.x222C == 0U)) {
+    if ((fp->cmd_vars[0] == 1U) && (fp->u.zd.x222C == 0U)) {
         fp->cmd_vars[0] = 0U;
         lb_8000B1CC(fp->parts[89].joint, NULL, &sp20);
 
@@ -150,7 +158,7 @@ void ftZd_SpecialSLoop_Anim(HSD_GObj* gobj)
         sp20.y += attributes->x24;
 
         temp_r3_u32 = it_802C3BAC(gobj, &sp20, fp->facing_dir, temp_f2);
-        fp->fv.zd.x222C = temp_r3_u32;
+        fp->u.zd.x222C = temp_r3_u32;
 
         if (temp_r3_u32 != 0) {
             fp->death2_cb = &ftZd_Init_801393AC;
@@ -167,7 +175,7 @@ void ftZd_SpecialSLoop_Anim(HSD_GObj* gobj)
         fp->mv.zd.specials.x4 -= 1;
     }
 
-    temp_r3_u32 = fp->fv.zd.x222C;
+    temp_r3_u32 = fp->u.zd.x222C;
     if (temp_r3_u32 == NULL) {
         if (fp->mv.zd.specials.x0 <= 0 && fp->mv.zd.specials.x4 <= 0) {
             temp_f1 = 0;
@@ -175,10 +183,10 @@ void ftZd_SpecialSLoop_Anim(HSD_GObj* gobj)
                                       NULL);
         }
     } else {
-        temp_r3 = it_802C3AF0(fp->fv.zd.x222C);
+        temp_r3 = itZeldaDinFire_GetOwner(fp->u.zd.x222C);
 
         if (temp_r3 != gobj) {
-            fp->fv.zd.x222C = NULL;
+            fp->u.zd.x222C = NULL;
         }
     }
 }
@@ -201,7 +209,7 @@ void ftZd_SpecialSEnd_Anim(HSD_GObj* gobj)
         fp->mv.zd.specials.x0 = attributes->x10;
         fp->mv.zd.specials.x4 = attributes->x14;
         fp->mv.zd.specials.x8 = attributes->x18;
-        fp->fv.zd.x222C = 0;
+        fp->u.zd.x222C = 0;
         fp->mv.zd.specials.xC = attributes->x1C;
         fp->death2_cb = 0;
         fp->take_dmg_cb = 0;
@@ -225,7 +233,7 @@ void ftZd_SpecialAirSStart_Anim(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
-    if (fp->cmd_vars[0] == 1U && fp->fv.zd.x222C == 0U) {
+    if (fp->cmd_vars[0] == 1U && fp->u.zd.x222C == 0U) {
         fp->cmd_vars[0] = 0U;
         lb_8000B1CC(fp->parts[89].joint, NULL, &sp24);
 
@@ -235,7 +243,7 @@ void ftZd_SpecialAirSStart_Anim(HSD_GObj* gobj)
         sp24.y += attributes->x24;
 
         temp_r3 = it_802C3BAC(gobj, &sp24, fp->facing_dir, temp_f2);
-        fp->fv.zd.x222C = temp_r3;
+        fp->u.zd.x222C = temp_r3;
 
         if (temp_r3 != 0) {
             fp->death2_cb = &ftZd_Init_801393AC;
@@ -267,7 +275,7 @@ void ftZd_SpecialAirSLoop_Anim(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
 
-    if (fp->cmd_vars[0] == 1U && fp->fv.zd.x222C == 0U) {
+    if (fp->cmd_vars[0] == 1U && fp->u.zd.x222C == 0U) {
         fp->cmd_vars[0] = 0U;
         lb_8000B1CC(fp->parts[89].joint, NULL, &sp20);
 
@@ -277,7 +285,7 @@ void ftZd_SpecialAirSLoop_Anim(HSD_GObj* gobj)
         sp20.y += attributes->x24;
 
         temp_r3 = it_802C3BAC(gobj, &sp20, fp->facing_dir, temp_f2);
-        fp->fv.zd.x222C = temp_r3;
+        fp->u.zd.x222C = temp_r3;
 
         if (temp_r3 != NULL) {
             fp->death2_cb = &ftZd_Init_801393AC;
@@ -294,17 +302,17 @@ void ftZd_SpecialAirSLoop_Anim(HSD_GObj* gobj)
         fp->mv.zd.specials.x4 -= 1;
     }
 
-    if (fp->fv.zd.x222C == 0U) {
+    if (fp->u.zd.x222C == 0U) {
         if (fp->mv.zd.specials.x0 <= 0 && fp->mv.zd.specials.x4 <= 0) {
             temp_f1 = 0;
             Fighter_ChangeMotionState(gobj, 348, 0, temp_f1, 1.0, temp_f1,
                                       NULL);
         }
     } else {
-        temp_r3 = it_802C3AF0(fp->fv.zd.x222C);
+        temp_r3 = itZeldaDinFire_GetOwner(fp->u.zd.x222C);
 
         if (temp_r3 != gobj) {
-            fp->fv.zd.x222C = NULL;
+            fp->u.zd.x222C = NULL;
         }
     }
 }
@@ -328,7 +336,7 @@ void ftZd_SpecialAirSEnd_Anim(HSD_GObj* gobj)
             fp->mv.zd.specials.x0 = sa->x10;
             fp->mv.zd.specials.x4 = sa->x14;
             fp->mv.zd.specials.x8 = sa->x18;
-            fp->fv.zd.x222C = 0;
+            fp->u.zd.x222C = 0;
             fp->mv.zd.specials.xC = sa->x1C;
             fp->death2_cb = 0;
             fp->take_dmg_cb = 0;
@@ -450,7 +458,7 @@ void ftZd_SpecialAirSStart_Phys(HSD_GObj* gobj)
         fp->mv.zd.specials.x8 = temp_r3 - 1;
     } else {
         fighterAttr = &fp->co_attrs;
-        ftCommon_Fall(fp, charAttr->x2C, fighterAttr->terminal_vel);
+        ftCommon_Fall(fp, charAttr->x2C, fighterAttr->terminal_velocity);
     }
 
     aerialFriction = fp->co_attrs.aerial_friction;
@@ -477,7 +485,7 @@ void ftZd_SpecialAirSLoop_Phys(HSD_GObj* gobj)
         fp->mv.zd.specials.x8 = temp_r3 - 1;
     } else {
         fighterAttr = &fp->co_attrs;
-        ftCommon_Fall(fp, charAttr->x2C, fighterAttr->terminal_vel);
+        ftCommon_Fall(fp, charAttr->x2C, fighterAttr->terminal_velocity);
     }
 
     aerialFriction = fp->co_attrs.aerial_friction;
@@ -504,7 +512,7 @@ void ftZd_SpecialAirSEnd_Phys(HSD_GObj* gobj)
         fp->mv.zd.specials.x8 = temp_r3 - 1;
     } else {
         fighterAttr = &fp->co_attrs;
-        ftCommon_Fall(fp, charAttr->x2C, fighterAttr->terminal_vel);
+        ftCommon_Fall(fp, charAttr->x2C, fighterAttr->terminal_velocity);
     }
 
     aerialFriction = fp->co_attrs.aerial_friction;
@@ -519,9 +527,8 @@ void ftZd_SpecialSStart_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == 0) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 346, 0x0C4C5082, fp->cur_anim_frame,
-                                  1.0, 0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, 346,
+                                        ftZd_MF_SpecialSStart_Coll);
     }
 }
 
@@ -533,9 +540,8 @@ void ftZd_SpecialSLoop_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == 0) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 347, 0x0C4C5080, fp->cur_anim_frame,
-                                  1.0, 0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, 347,
+                                        ftCommon_GroundAirColl_MF);
     }
 }
 
@@ -546,9 +552,8 @@ void ftZd_SpecialSEnd_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == 0) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 348, 0x0C4C5080, fp->cur_anim_frame,
-                                  1.0, 0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, 348,
+                                        ftCommon_GroundAirColl_MF);
     }
 }
 
@@ -559,9 +564,8 @@ void ftZd_SpecialAirSStart_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != 0) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, 343, 0x0C4C5082, fp->cur_anim_frame,
-                                  1.0, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, 343,
+                                        ftZd_MF_SpecialSStart_Coll);
     }
 }
 
@@ -572,9 +576,8 @@ void ftZd_SpecialAirSLoop_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != 0) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, 344, 0x0C4C5080, fp->cur_anim_frame,
-                                  1.0, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, 344,
+                                        ftCommon_GroundAirColl_MF);
     }
 }
 
@@ -585,8 +588,7 @@ void ftZd_SpecialAirSEnd_Coll(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != 0) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, 345, 0x0C4C5080, fp->cur_anim_frame,
-                                  1.0, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, 345,
+                                        ftCommon_GroundAirColl_MF);
     }
 }

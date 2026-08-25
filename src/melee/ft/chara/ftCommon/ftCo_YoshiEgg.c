@@ -8,7 +8,11 @@
 
 #include "ef/efasync.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
@@ -24,9 +28,7 @@
 
 #include "lb/lb_00B0.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
-#include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
@@ -78,7 +80,7 @@ static inline void inlineA0(Fighter_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         ftCo_DatAttrs_xBC_t* temp_r27;
         ftHurtboxInit hurt;
-        ftColl_8007B0C0(gobj, Intangible);
+        ftColl_8007B0C0(gobj, HurtCapsule_Intangible);
         temp_r27 = &fp->co_attrs.xBC;
         hurt.bone_idx = ftParts_GetBoneIndex(fp, FtPart_TransN);
         hurt.height = HurtHeight_Mid;

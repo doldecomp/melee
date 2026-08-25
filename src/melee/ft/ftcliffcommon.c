@@ -18,7 +18,6 @@
 #include "mp/mplib.h"
 #include "pl/plbonuslib.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 bool ftCliffCommon_80081298(Fighter_GObj* gobj)
@@ -33,7 +32,7 @@ bool ftCliffCommon_80081298(Fighter_GObj* gobj)
         return false;
     }
     if (fp->coll_data.env_flags & Collide_LedgeGrabMask &&
-        (((fp->x2228_b2 & 1) == 0)))
+        ((fp->x2228_b2 & 1) == 0))
     {
         other_gobj = ft_80082E3C(gobj);
         if (other_gobj == NULL) {

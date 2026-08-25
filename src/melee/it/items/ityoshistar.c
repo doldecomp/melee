@@ -1,15 +1,13 @@
 #include "ityoshistar.h"
 
-#include "math.h"
+#include "inlines.h"
 
 #include "it/inlines.h"
 #include "it/it_2725.h"
+#include "it/itgroundcoll.h"
 
-#include <common_structs.h>
 #include <baselib/gobj.h>
-#include <baselib/jobj.h>
 #include <melee/db/db.h>
-#include <melee/it/it_266F.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
 
@@ -80,12 +78,7 @@ bool it_802B312C(Item_GObj* item_gobj)
 
 bool it_802B314C(Item_GObj* item_gobj)
 {
-    const f32 PI_2 = M_PI / 2;
-    Item* item = GET_ITEM(item_gobj);
-    HSD_JObj* jobj = GET_JOBJ(item_gobj);
-    it_80273030(item_gobj);
-    HSD_JObjSetRotationY(jobj, PI_2 * item->facing_dir);
-    return false;
+    return itReflectItemAndUpdateRotation(item_gobj);
 }
 
 void it_802B322C(Item_GObj* item_gobj, HSD_GObj* owner)

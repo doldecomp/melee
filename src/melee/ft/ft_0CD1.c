@@ -4,7 +4,11 @@
 #include "ftswing.h"
 
 #include "ft/chara/ftCommon/ftCo_Fall.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
@@ -33,17 +37,10 @@ void ftCo_800CD1BC(Fighter_GObj* gobj)
 void ftCo_800CD204(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    int y;
     if ((fp->input.held_inputs & HSD_PAD_A) == 0) {
         fp->mv.co.swing.x0 = 0;
     }
-    if (fp->throw_flags_b3) {
-        fp->throw_flags_b3 = 0;
-        y = 1;
-    } else {
-        y = 0;
-    }
-    if (y && fp->mv.co.swing.x0 != 0) {
+    if (ftCheckThrowB3(fp) && fp->mv.co.swing.x0 != 0) {
         ftCo_Attack_800CCF58(gobj, 3);
     }
 }
@@ -55,7 +52,7 @@ void ftCo_800CD278(Fighter_GObj* gobj)
         ft_80084FA8(gobj);
     } else {
         ft_80085030(gobj,
-                    p_ftCommonData->x420 * ((0, fp->co_attrs.gr_friction)),
+                    p_ftCommonData->x420 * (0, fp->co_attrs.ground_friction),
                     fp->facing_dir);
     }
 }

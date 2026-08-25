@@ -3,26 +3,21 @@
 #include "ftKp_Init.h"
 #include "ftKp_SpecialN.h"
 
+#include "ft/forward.h"
+
+#include "ft/ft_084E.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 
-#include <trigf.h>
-#include <melee/cm/camera.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
-#include <melee/ft/ft_0877.h>
-#include <melee/ft/ft_0881.h>
 #include <melee/ft/ft_0892.h>
 #include <melee/ft/ftcliffcommon.h>
-#include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/inlines.h>
-#include <melee/it/item.h>
-#include <melee/it/items/itkoopaflame.h>
-#include <melee/lb/lb_00B0.h>
 
 static inline void ftKp_SpecialHi_Enter_inline(Fighter_GObj* gobj)
 {
@@ -47,8 +42,7 @@ void ftKp_SpecialHi_Enter(Fighter_GObj* gobj)
     fp->mv.kp.specials.x10 = 0;
     efSync_Spawn(0x4DA, gobj, fp->parts->joint);
     fp->x2219_b0 = true;
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -70,8 +64,7 @@ void ftKp_SpecialAirHi_Enter(Fighter_GObj* gobj)
     fp->mv.kp.specials.x10 = 0;
     efSync_Spawn(0x4DA, gobj, fp->parts->joint);
     fp->x2219_b0 = true;
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     ftAnim_8006EBA4(gobj);
     ftKp_SpecialHi_Anim(gobj);
 }
@@ -170,8 +163,7 @@ void ftKp_SpecialHi_Coll(Fighter_GObj* gobj)
                                   1.0f, 0.0f, NULL);
         ftKp_SpecialHi_Enter_inline(gobj);
         ftCommon_ClampSelfVelX(fp, da->x64);
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
         fp->mv.kp.specials.x10 = 0;
     } else {
         fp->mv.kp.specials.x10 = 1;
@@ -223,8 +215,7 @@ void ftKp_SpecialAirHi_Coll(Fighter_GObj* gobj)
     if (fp->self_vel.y >= 0.0f) {
         if (ft_80081D0C(gobj) != GA_Ground) {
             ftKp_SpecialAirHi_Coll_inline(gobj, fp, da);
-            fp->pre_hitlag_cb = efLib_PauseAll;
-            fp->post_hitlag_cb = efLib_ResumeAll;
+            Fighter_SetEffectHitlagCallbacks(fp);
             fp->mv.kp.specials.x10 = 1;
         } else {
             fp->mv.kp.specials.x10 = 0;
@@ -234,8 +225,7 @@ void ftKp_SpecialAirHi_Coll(Fighter_GObj* gobj)
         ftKp_SpecialAirHi_Coll_inline(gobj, fp, da);
         fp->mv.kp.specials.x10 = 1;
         ftKp_SpecialAirHi_Coll_inline_2(gobj);
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     } else {
         fp->mv.kp.specials.x10 = 0;
         if (ftCliffCommon_80081298(gobj) != 0) {

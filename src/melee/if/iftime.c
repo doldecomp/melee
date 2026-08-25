@@ -30,7 +30,7 @@ static DynamicModelDesc ifTime_match_timer_models;
 static bool ifTime_LoadModels(void)
 {
     DynamicModelDesc** ScInfTim_scene_models;
-    lbArchive_LoadSections(*ifAll_802F3690(), (void*) &ScInfTim_scene_models,
+    lbArchive_LoadSections(*ifAll_GetArchive(), (void*) &ScInfTim_scene_models,
                            "ScInfTim_scene_models",
                            &ifTime_data.countdown_timer_models, "tdsce", 0);
     if (*ScInfTim_scene_models != NULL) {
@@ -66,7 +66,7 @@ static inline void ifTime_SetDigit(HSD_JObj* jobj, unsigned int frame)
 
 void ifTime_SetTime(HSD_JObj* jobj, int seconds, int centiseconds)
 {
-    StartMeleeRules* rules = gm_8016AE50();
+    StartMeleeRules* rules = gm_GetRules();
     int hours;
 
     // minutes
@@ -198,7 +198,7 @@ void ifTime_UpdateTimers(HSD_GObj* arg0)
     u8 tmp;
     PAD_STACK(8);
 
-    gm_8016AE50();
+    gm_GetRules();
     seconds = gm_8016AEEC();
     centiseconds = gm_8016AF0C();
     ifTime_SetTime(jobj, seconds, centiseconds);
@@ -216,7 +216,7 @@ void ifTime_UpdateTimers(HSD_GObj* arg0)
         lb_8000C0E8(jobj2, x->countdown_seconds, x->countdown_timer_models[0]);
         HSD_JObjReqAnimAll(jobj2, 0.0f);
         HSD_JObjAnimAll(jobj2);
-        HSD_JObjSetTranslate(jobj2, ifAll_802F3414());
+        HSD_JObjSetTranslate(jobj2, ifAll_GetTimerPosition());
         HSD_GObj_SetupProc(x->countdown_timer, ifTime_UpdateCountdown, 17);
         if (x->match_timer) {
             HSD_GObjPLink_80390228(x->match_timer);
@@ -228,7 +228,7 @@ void ifTime_UpdateTimers(HSD_GObj* arg0)
 
 void ifTime_CreateTimers(void)
 {
-    StartMeleeRules* rules = gm_8016AE50();
+    StartMeleeRules* rules = gm_GetRules();
     HSD_GObj* gobj;
     HSD_JObj* jobj;
     HSD_JObj* digit;
@@ -262,7 +262,7 @@ void ifTime_CreateTimers(void)
         lb_8000C07C(jobj, 0, anims, matanims, shapeanims);
         HSD_JObjReqAnimAll(jobj, 0.0f);
         HSD_GObj_SetupProc(gobj, ifTime_UpdateTimers, 17);
-        HSD_JObjSetTranslate(jobj, ifAll_802F3414());
+        HSD_JObjSetTranslate(jobj, ifAll_GetTimerPosition());
         digit = HSD_JObjGetChild(jobj);
         ifTime_data.digits[0] = digit;
         for (i = 1; i < 10; i++) {

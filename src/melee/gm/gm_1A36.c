@@ -6,12 +6,12 @@
 #include <melee/gm/gmscdata.h>
 #include <melee/gm/types.h>
 
-u64 gm_801A3680(u8 idx)
+u64 gm_GetButtonsPressed(u8 idx)
 {
     return controller_map.x0[idx].button;
 }
 
-u64 gm_801A36A0(u8 idx)
+u64 gm_GetButtonsTriggered(u8 idx)
 {
     return controller_map.x0[idx].trigger;
 }
@@ -100,9 +100,11 @@ static void fn_801A396C(int idx)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
-void gm_801A3A74(void)
+#endif
+void gm_EvaluateAllControllerInputs(void)
 {
     struct gm_controller_map* controller = controller_map.x0;
     int i;
@@ -114,14 +116,17 @@ void gm_801A3A74(void)
         controller_map.x0[i].trigger = HSD_PadCopyStatus[(u8) i].trigger;
         controller_map.x0[i].repeat = HSD_PadCopyStatus[(u8) i].repeat;
         controller_map.x0[i].release = HSD_PadCopyStatus[(u8) i].release;
-        gm_801A3714(i, 0x01100, (u64) 1 << 32);
-        gm_801A3714(i, 0x00200, (u64) 1 << 33);
-        gm_801A3820(i, 0x01060, (u64) 1 << 34);
-        gm_801A3820(i, 0x01160, (u64) 1 << 35);
-        gm_801A3714(i, 0x10008, (u64) 1 << 36);
-        gm_801A3714(i, 0x20004, (u64) 1 << 37);
-        gm_801A3714(i, 0x40001, (u64) 1 << 38);
-        gm_801A3714(i, 0x80002, (u64) 1 << 39);
+        gm_801A3714(i, PAD_BUTTON_A | PAD_BUTTON_START, PAD_CONFIRM);
+        gm_801A3714(i, PAD_BUTTON_B, PAD_CANCEL);
+        gm_801A3820(i, PAD_TRIGGER_L | PAD_TRIGGER_R | PAD_BUTTON_START,
+                    PAD_LR_START);
+        gm_801A3820(
+            i, PAD_TRIGGER_L | PAD_TRIGGER_R | PAD_BUTTON_A | PAD_BUTTON_START,
+            PAD_LRA_START);
+        gm_801A3714(i, PAD_BUTTON_UP | PAD_STICK_UP, PAD_ANY_UP);
+        gm_801A3714(i, PAD_BUTTON_DOWN | PAD_STICK_DOWN, PAD_ANY_DOWN);
+        gm_801A3714(i, PAD_BUTTON_LEFT | PAD_STICK_LEFT, PAD_ANY_LEFT);
+        gm_801A3714(i, PAD_BUTTON_RIGHT | PAD_STICK_RIGHT, PAD_ANY_RIGHT);
         controller_map.xF0(i);
     }
     controller_map.x0[PAD_MAX_CONTROLLERS].button = 0;
@@ -138,7 +143,9 @@ void gm_801A3A74(void)
         controller[PAD_MAX_CONTROLLERS].repeat2 |= controller[i].repeat2;
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void gm_801A3E88(void)
 {
@@ -158,7 +165,7 @@ void gm_801A3E88(void)
 void gm_801A3EF4(void)
 {
     GameMode* scene;
-    for (scene = gm_801A50AC(); scene->idx != GM_COUNT; scene++) {
+    for (scene = gm_GetAllGameModes(); scene->idx != GM_COUNT; scene++) {
         if (scene->Init != NULL) {
             scene->Init();
         }

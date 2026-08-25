@@ -1,6 +1,7 @@
 #include "itmariocape.h"
 
-#include "db/db.h"
+#include "inlines.h"
+
 #include "ef/efasync.h"
 #include "ft/chara/ftMario/ftMr_SpecialS.h"
 #include "ft/ftlib.h"
@@ -21,21 +22,11 @@ Item_GObj* it_802B2560(Fighter_GObj* parent_gobj, float facing_dir, Vec3* pos,
     Item_GObj* gobj;
 
     spawn.kind = kind;
-    spawn.prev_pos = *pos;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0;
-    spawn.x0_parent_gobj = parent_gobj;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawn(&spawn, parent_gobj, pos, facing_dir);
 
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
-        Item_8026AB54(gobj, parent_gobj, part);
-        db_80225DD8(gobj, parent_gobj);
-        return gobj;
+        return Item_AttachToParent(gobj, parent_gobj, part);
     }
     return NULL;
 }
@@ -104,7 +95,7 @@ static void inlineA0(Item_GObj* gobj)
     }
 }
 
-inline void reset(Item_GObj* gobj)
+static inline void reset(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->owner != NULL) {

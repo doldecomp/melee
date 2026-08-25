@@ -1,6 +1,9 @@
 #include "gm_17BA.h"
 
+#include "gm_17AD.h"
 #include "gm_unsplit.h"
+
+#include "gm/inlines.h"
 
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/gmresult.h>
@@ -24,25 +27,13 @@ static const char* lbl_803D79E0[] = {
 int fn_8017BACC(int arg0)
 {
     MatchEnd* m = fn_80174274();
-    int result;
-    if ((result = m->player_standings[arg0].x9C) > 999999) {
-        result = 999999;
-    } else if (result < -999999) {
-        result = -999999;
-    }
-    return result;
+    return gmClampResultStat(m->player_standings[arg0].x9C);
 }
 
 int fn_8017BB30(int arg0)
 {
     MatchEnd* m = fn_80174274();
-    int result;
-    if ((result = m->player_standings[arg0].xA0) > 999999) {
-        result = 999999;
-    } else if (result < -999999) {
-        result = -999999;
-    }
-    return result;
+    return gmClampResultStat(m->player_standings[arg0].xA0);
 }
 
 static inline const char* fn_8017BB94_inline(int arg0, int target)

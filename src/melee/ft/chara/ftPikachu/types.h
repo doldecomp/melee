@@ -4,6 +4,9 @@
 #include <platform.h>
 
 #include "ft/forward.h"
+
+#include "ftCommon/types.h"
+
 #include "it/forward.h"
 
 #include <dolphin/mtx.h>
@@ -13,13 +16,11 @@ struct ftPikachu_FighterVars {
 };
 
 typedef struct _ftPikachuAttributes {
-    float x0;
-    float x4;
-    float x8;
-    float xC;
-    float x10;
-    u32 x14;
-    u32 x18;
+    Vec2 specialn_spawn_offset;
+    Vec2 specialairn_spawn_offset;
+    float specialairn_landing_lag;
+    ItemKind specialn_itkind;
+    ItemKind specialairn_itkind;
     float x1C;
     float x20;
     float x24;
@@ -51,7 +52,7 @@ typedef struct _ftPikachuAttributes {
     float x98; // second zip velocity decay
     float x9C;
 
-    s32 xA0;
+    int xA0;
     float xA4;
     s32 xA8; // minimum stick angle difference between two up b zips
     float xAC;
@@ -71,7 +72,7 @@ typedef struct _ftPikachuAttributes {
     s32 xD8;
     u32 xDC;
 
-    float height_attributes[6];
+    ftCollisionBox height_attributes;
 } ftPikachuAttributes;
 
 union ftPikachu_MotionVars {

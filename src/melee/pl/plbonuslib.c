@@ -9,6 +9,7 @@
 
 #include <platform.h>
 
+#include <math.h>
 #include <ft/ft_0877.h>
 #include <ft/ft_0892.h>
 #include <ft/ftlib.h>
@@ -16,13 +17,12 @@
 #include <gr/stage.h>
 #include <if/ifmagnify.h>
 #include <it/it_26B1.h>
-#include <MetroTRK/intrinsics.h>
-#include <MSL/math.h>
 
 /// @todo Lots of 6s in here
 /// pl_8004049C seems to indicate it might have actually been
 /// `Gm_Player_NumMax`
 
+#ifdef MUST_MATCH
 static inline float my_sqrtf(float x)
 {
     u8 _[4] = { 0 };
@@ -40,6 +40,9 @@ static inline float my_sqrtf(float x)
     }
     return x;
 }
+#else
+#define my_sqrtf(x) sqrtf(x)
+#endif
 
 /* 03D514 */ static void plBonusLib_8003D514(int);
 
@@ -88,7 +91,7 @@ bool pl_8003D60C(int arg0)
     }
 }
 
-inline bool unk_cond(int arg0, int temp_r23)
+static inline bool unk_cond(int arg0, int temp_r23)
 {
     if (temp_r23 == 6 || temp_r23 == arg0 ||
         pl_CheckIfSameTeam(arg0, temp_r23))
@@ -99,7 +102,7 @@ inline bool unk_cond(int arg0, int temp_r23)
     }
 }
 
-inline bool between_A1_D0(int x)
+static inline bool between_A1_D0(int x)
 {
     if (x >= 0xA1 && x < 0xD0) {
         return true;
@@ -129,7 +132,7 @@ void pl_8003D644(int arg0, int arg1, int arg2, int arg3)
 
     temp_r26 = Player_GetStaleMoveTableIndexPtr2(arg0);
     temp_r3 = Player_GetEntityAtIndex(arg0, arg1);
-    temp_r27 = ftLib_80086C0C(temp_r3);
+    temp_r27 = ftLib_GetMotionId(temp_r3);
     temp_r28 = ftLib_800876F4(temp_r3);
     temp_r29 = ftLib_80087700(temp_r3);
     temp_r30 = ft_80089890(temp_r3);
@@ -222,9 +225,7 @@ void pl_8003D644(int arg0, int arg1, int arg2, int arg3)
             temp_r26->xD64 = 6;
         } else {
             temp_r3_2 = Player_GetStaleMoveTableIndexPtr2(temp_r23);
-            if (((u32) temp_r3_2->xD60 != 0) &&
-                ((s32) temp_r3_2->xD64 == arg0))
-            {
+            if ((temp_r3_2->xD60 != 0) && ((s32) temp_r3_2->xD64 == arg0)) {
                 pl_80038824(temp_r23, 0x79);
                 temp_r3_2->xD60 = 0;
                 temp_r3_2->xD64 = 6;
@@ -436,7 +437,7 @@ void pl_8003E17C(int player_id, int arg1,
         kind2 = kind;
     } else { // Not one of the common items
         switch (kind) {
-        case Pokemon_Lucky_Egg:
+        case It_Kind_Lucky_Egg:
             kind2 = It_Kind_L_Gun_Ray;
             break;
         case It_Kind_WhispyApple:
@@ -476,19 +477,17 @@ void pl_8003E17C(int player_id, int arg1,
     }
 }
 
-u32 pl_8003E2CC(int arg0, int pl_itemlog_kind)
+u32 pl_8003E2CC(int arg0, Pl_ItemLog pl_itemlog_kind)
 {
-    HSD_ASSERTMSG(555, pl_itemlog_kind < 39,
-                  "pl_itemlog_kind < Pl_ItemLog_Terminate");
+    HSD_ASSERT(555, pl_itemlog_kind < Pl_ItemLog_Terminate);
 
     return Player_GetStaleMoveTableIndexPtr2(arg0)
         ->x0_staleMoveTable.x674[pl_itemlog_kind];
 }
 
-u32 pl_8003E334(int arg0, int pl_itemlog_kind)
+u32 pl_8003E334(int arg0, Pl_ItemLog pl_itemlog_kind)
 {
-    HSD_ASSERTMSG(564, pl_itemlog_kind < 39,
-                  "pl_itemlog_kind < Pl_ItemLog_Terminate");
+    HSD_ASSERT(564, pl_itemlog_kind < Pl_ItemLog_Terminate);
 
     return Player_GetStaleMoveTableIndexPtr2(arg0)
         ->x0_staleMoveTable.x710[pl_itemlog_kind];
@@ -499,9 +498,10 @@ int pl_8003E39C(int arg0)
     int sum = 0;
     int pl_itemlog_kind;
 
-    for (pl_itemlog_kind = 0; pl_itemlog_kind < 39; pl_itemlog_kind++) {
-        HSD_ASSERTMSG(555, pl_itemlog_kind < 39,
-                      "pl_itemlog_kind < Pl_ItemLog_Terminate");
+    for (pl_itemlog_kind = 0; pl_itemlog_kind < Pl_ItemLog_Terminate;
+         pl_itemlog_kind++)
+    {
+        HSD_ASSERT(555, pl_itemlog_kind < Pl_ItemLog_Terminate);
 
         sum += Player_GetStaleMoveTableIndexPtr2(arg0)
                    ->x0_staleMoveTable.x674[pl_itemlog_kind];
@@ -515,9 +515,10 @@ u32 pl_8003E420(int arg0)
     int sum = 0;
     int pl_itemlog_kind;
 
-    for (pl_itemlog_kind = 0; pl_itemlog_kind < 39; pl_itemlog_kind++) {
-        HSD_ASSERTMSG(564, pl_itemlog_kind < 39,
-                      "pl_itemlog_kind < Pl_ItemLog_Terminate");
+    for (pl_itemlog_kind = 0; pl_itemlog_kind < Pl_ItemLog_Terminate;
+         pl_itemlog_kind++)
+    {
+        HSD_ASSERT(564, pl_itemlog_kind < Pl_ItemLog_Terminate);
 
         sum += Player_GetStaleMoveTableIndexPtr2(arg0)
                    ->x0_staleMoveTable.x710[pl_itemlog_kind];
@@ -525,20 +526,20 @@ u32 pl_8003E420(int arg0)
     return sum;
 }
 
-inline int match_item_kind(int kind)
+static inline int match_item_kind(int kind)
 {
-    if (kind >= 0 && kind < 0x23) {
+    if (kind >= It_Common_Start && kind < It_Common_End) {
         return kind;
     } else {
         switch (kind) {
-        case 0xCD:
-            return 0x23;
-        case 0xE1:
-            return 0x24;
-        case 0xE2:
-            return 0x25;
-        case 0x28:
-            return 0x26;
+        case It_Kind_Lucky_Egg:
+            return Pl_ItemLog_Unk35;
+        case It_Kind_WhispyApple:
+            return Pl_ItemLog_Unk36;
+        case It_Kind_WhispyHealApple:
+            return Pl_ItemLog_Unk37;
+        case It_Kind_Hammer_Head:
+            return Pl_ItemLog_Unk38;
         default:
             return -1;
         }
@@ -549,20 +550,20 @@ void pl_8003E4A4(int slot, bool arg1, void* arg2, int count)
 {
     pl_StaleMoveTableExt_t* table = Player_GetStaleMoveTableIndexPtr2(slot);
     int* moves = arg2;
-    u32 seen[0x27];
+    u32 seen[Pl_ItemLog_Terminate];
     int i;
 
-    for (i = 0; i < 0x27; i++) {
+    for (i = 0; i < Pl_ItemLog_Terminate; i++) {
         seen[i] = 0;
     }
 
     for (i = 0; i < count; i++) {
-        if (match_item_kind(moves[i]) < 0x27) {
+        if (match_item_kind(moves[i]) < Pl_ItemLog_Terminate) {
             seen[match_item_kind(moves[i])] = 1;
         }
     }
 
-    for (i = 0; i < 0x27; i++) {
+    for (i = 0; i < Pl_ItemLog_Terminate; i++) {
         if (seen[i] == 1) {
             table->x0_staleMoveTable.x7AC[i]++;
             if ((u32) table->x0_staleMoveTable.x7AC[i] == pl_804D6470->x138) {
@@ -580,11 +581,10 @@ void pl_8003E70C(Item_GObj* igobj)
     pl_StaleMoveTableExt_t* temp_r31;
     s32 temp_r3;
 
-    HSD_GObj* temp_r30 = it_8026BC78(igobj);
+    HSD_GObj* temp_r30 = itGetOwner(igobj);
 
-    HSD_ASSERTMSG(634, 0xA1 <= itGetKind(igobj) && itGetKind(igobj) < 0xBF,
-                  "It_PKind_Start <= itGetKind(igobj) && itGetKind(igobj) < "
-                  "It_PKind_Terminate");
+    HSD_ASSERT(634, It_PKind_Start <= itGetKind(igobj) &&
+                        itGetKind(igobj) < It_PKind_Terminate);
     RETURN_IF(!ftLib_80086960(temp_r30));
 
     temp_r31 = Player_GetStaleMoveTableIndexPtr2(ftLib_80086BE0(temp_r30));
@@ -594,8 +594,7 @@ void pl_8003E70C(Item_GObj* igobj)
 
 u32 pl_8003E7D4(int arg0, int kind)
 {
-    HSD_ASSERTMSG(649, 0xA1 <= kind && kind < 0xBF,
-                  "It_PKind_Start <= kind && kind < It_PKind_Terminate");
+    HSD_ASSERT(649, It_PKind_Start <= kind && kind < It_PKind_Terminate);
 
     return Player_GetStaleMoveTableIndexPtr2(arg0)
         ->x0_staleMoveTable.total_attack_count_struct.x598[kind];
@@ -604,7 +603,7 @@ u32 pl_8003E7D4(int arg0, int kind)
 void pl_8003E854(int arg0, int arg1, Item_GObj* arg2)
 {
     HSD_GObj* temp_r31 = Player_GetEntityAtIndex(arg0, arg1);
-    HSD_GObj* temp_r3 = it_8026BC78(arg2);
+    HSD_GObj* temp_r3 = itGetOwner(arg2);
     u8 temp_r31_2;
 
     if ((temp_r31 != temp_r3) && (it_8026B7BC(arg2) != 0)) {
@@ -844,7 +843,7 @@ void fn_8003EE2C(int arg0, int arg1)
     }
 
     {
-        Item_GObj* item_gobj = ftLib_80086794(temp_r30);
+        Item_GObj* item_gobj = ftLib_GetItem(temp_r30);
         if (item_gobj != NULL) {
             if (match_item_kind(itGetKind(item_gobj)) != -1 &&
                 it_8026B30C(item_gobj) != 5)
@@ -882,8 +881,8 @@ void fn_8003EE2C(int arg0, int arg1)
     }
 }
 
-inline unsigned int plBonusLib_8003F294_inline(plActionStats* stats,
-                                               int attack)
+static inline unsigned int plBonusLib_8003F294_inline(plActionStats* stats,
+                                                      int attack)
 {
     return pl_800386D8(stats, attack);
 }
@@ -923,7 +922,7 @@ void fn_8003F294(int slot, int index)
                 threshold = pl_804D6470->x1C, stats->hits.total, &table->xDAC);
     pl_8003906C(slot, 0x13, 0L, pl_804D6470->x2C, threshold = pl_804D6470->x30,
                 stats->attacks.total, &table->xDB0);
-    threshold = (unsigned int) pl_804D6470->xE4;
+    threshold = pl_804D6470->xE4;
     pl_8003906C(slot, 0x5C, 0L, pl_804D6470->xE0, threshold, table->xD70,
                 &table->xDB4);
     pl_8003906C(slot, 0x99, 0L, pl_804D6470->x130,
@@ -1384,21 +1383,11 @@ void pl_80040460(int slot, int arg1)
 void pl_8004049C(int player, ItemKind arg1)
 {
     int var_r30 = -1;
-    s32 var_r0;
 
-    RETURN_IF(player == 6);
+    RETURN_IF(player == Gm_Player_NumMax);
 
-    var_r0 = 0;
-    if ((player >= 0) && (player < 6)) {
-        var_r0 = 1;
-    }
-    if (var_r0 == 0) {
-        OSReport("zako ko player illegal ! :%d\n", player);
-        /// @todo Convert to @c HSD_ASSERT once a byte-matching form is
-        /// found.
-        __assert("plbonuslib.c", 1559,
-                 "0 <= player && player < Gm_Player_NumMax");
-    }
+    HSD_ASSERTREPORT(1559, 0 <= player && player < Gm_Player_NumMax,
+                     "zako ko player illegal ! :%d\n", player);
 
     switch (arg1) {
     case It_Kind_Old_Kuri:

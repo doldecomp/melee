@@ -3,11 +3,8 @@
 
 #include "lbcardgame.h" // IWYU pragma: export
 
-#include <placeholder.h>
 #include <platform.h>
 
-#include <dolphin/os/OSAlarm.h>
-#include <sysdolphin/baselib/cobj.h>
 #include <melee/sc/types.h>
 
 struct lb_80433318_t {
@@ -23,7 +20,7 @@ struct lb_80433318_t {
     /* +60 */ int x60;
     /* +64 */ SceneDesc* x64;
 };
-STATIC_ASSERT(sizeof(struct lb_80433318_t) == 0x68);
+ASSERT_SIZE(struct lb_80433318_t, 0x68);
 
 /* 433318 */ static struct lb_80433318_t lb_80433318;
 

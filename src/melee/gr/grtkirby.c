@@ -2,7 +2,6 @@
 #include <platform.h>
 
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -10,13 +9,11 @@
 
 #include "lb/forward.h"
 
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 void grTKirby_80221364(bool);                  /* static */
@@ -24,7 +21,7 @@ void grTKirby_80221368(void);                  /* static */
 void grTkirby_UnkStage0_OnLoad(void);          /* static */
 void grTkirby_UnkStage0_OnStart(void);         /* static */
 bool grTKirby_80221400(void);                  /* static */
-HSD_GObj* grTKirby_80221408(s32);              /* static */
+HSD_GObj* grTKirby_80221408(int);              /* static */
 void grTKirby_802214F0(Ground_GObj*);          /* static */
 bool grTKirby_8022151C(Ground_GObj*);          /* static */
 void grTKirby_80221524(Ground_GObj*);          /* static */
@@ -40,19 +37,34 @@ void grTKirby_80221634(Ground_GObj*);          /* static */
 DynamicsDesc* grTKirby_80221638(enum_t);       /* static */
 bool grTKirby_80221640(Vec3*, int, HSD_JObj*); /* static */
 
-static StageCallbacks grTKb_803E8BB0[4] = {
-    { grTKirby_802214F0, grTKirby_8022151C, grTKirby_80221524,
-      grTKirby_80221528, 0 },
-    { grTKirby_802215BC, grTKirby_8022160C, grTKirby_80221614,
-      grTKirby_80221634, 0 },
-    { grTKirby_8022152C, grTKirby_8022157C, grTKirby_80221584,
-      grTKirby_802215B8, (1 << 31) | (1 << 30) },
-    { NULL, NULL, NULL, NULL, 0 }
+static StageCallbacks grTKb_StageCallbacks[] = {
+    {
+        grTKirby_802214F0,
+        grTKirby_8022151C,
+        grTKirby_80221524,
+        grTKirby_80221528,
+        0,
+    },
+    {
+        grTKirby_802215BC,
+        grTKirby_8022160C,
+        grTKirby_80221614,
+        grTKirby_80221634,
+        0,
+    },
+    {
+        grTKirby_8022152C,
+        grTKirby_8022157C,
+        grTKirby_80221584,
+        grTKirby_802215B8,
+        (1 << 31) | (1 << 30),
+    },
+    { 0 },
 };
 
-StageData grTKb_803E8C0C = {
-    TKIRBY,
-    grTKb_803E8BB0,
+StageData grTKb_StageData = {
+    Gr_Kind_TKirby,
+    grTKb_StageCallbacks,
     "/GrTKb.dat",
     grTKirby_80221368,
     grTKirby_80221364,
@@ -61,23 +73,16 @@ StageData grTKb_803E8C0C = {
     grTKirby_80221400,
     grTKirby_80221638,
     grTKirby_80221640,
-    1,
+    (1 << 0),
+    NULL,
+    0,
 };
 
 void grTKirby_80221364(bool unk) {}
 
 void grTKirby_80221368(void)
 {
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-
-    grTKirby_80221408(0);
-    grTKirby_80221408(1);
-    grTKirby_80221408(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTKirby_80221408);
 }
 
 void grTkirby_UnkStage0_OnLoad(void) {}
@@ -92,10 +97,10 @@ bool grTKirby_80221400(void)
     return false;
 }
 
-HSD_GObj* grTKirby_80221408(s32 arg0)
+HSD_GObj* grTKirby_80221408(int arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTKb_803E8BB0[arg0];
+    StageCallbacks* callbacks = &grTKb_StageCallbacks[arg0];
 
     gobj = Ground_GetStageGObj(arg0);
 

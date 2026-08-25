@@ -12,14 +12,10 @@
 #include "object.h"
 #include "util.h"
 
-#include <placeholder.h>
-
-#include <__mem.h>
 #include <math.h>
-#include <math_ppc.h>
+#include <string.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
-#include <MSL/math_ppc.h>
 
 HSD_ObjAllocData robj_alloc_data;   // robj_alloc_data
 HSD_ObjAllocData rvalue_alloc_data; // rvalue_alloc_data
@@ -344,12 +340,6 @@ static inline HSD_RObj* inlined_HSD_RObjGetByType(HSD_RObj* robj, u32 type,
     return NULL;
 }
 
-inline f32 HSD_MtxColMagFloat(MtxPtr mtx, int col)
-{
-    return sqrtf((mtx[0][col] * mtx[0][col]) + (mtx[1][col] * mtx[1][col]) +
-                 (mtx[2][col] * mtx[2][col]));
-}
-
 static void resolveCnsOrientation(HSD_RObj* robj, void* obj,
                                   void (*update_func)(void*, int,
                                                       HSD_ObjData*))
@@ -380,7 +370,7 @@ static void resolveCnsOrientation(HSD_RObj* robj, void* obj,
             if (sval > 1e-10F) {
                 sval = 1.0F / sval;
             }
-            sval *= HSD_MtxColMagFloat(jobj->mtx, i);
+            sval *= HSD_MtxColMag(jobj->mtx, i);
             v.x *= sval;
             v.y *= sval;
             v.z *= sval;
@@ -399,7 +389,7 @@ static void resolveCnsOrientation(HSD_RObj* robj, void* obj,
             if (sval > 1e-10F) {
                 sval = 1.0F / sval;
             }
-            sval *= HSD_MtxColMagFloat(jobj->mtx, i);
+            sval *= HSD_MtxColMag(jobj->mtx, i);
             v.x *= sval;
             v.y *= sval;
             v.z *= sval;
@@ -611,7 +601,7 @@ HSD_RObj* HSD_RObjLoadDesc(HSD_RObjDesc* robjdesc)
 
     if (robjdesc != NULL) {
         robj = HSD_RObjAlloc();
-        robj->next = HSD_RObjLoadDesc((HSD_RObjDesc*) robjdesc->next);
+        robj->next = HSD_RObjLoadDesc(robjdesc->next);
         robj->flags = robjdesc->flags;
         switch (robj->flags & ROBJ_TYPE_MASK) {
         case REFTYPE_JOBJ:
@@ -681,15 +671,15 @@ void HSD_RObjRemoveAll(HSD_RObj* robj)
 
 HSD_RObj* HSD_RObjAlloc(void)
 {
-    HSD_RObj* new = HSD_ObjAlloc(&robj_alloc_data);
+    HSD_RObj* new = HSD_ObjAlloc(HSD_RObjGetAllocData());
     HSD_ASSERT(1032, new);
-    memset(new, 0, 0x1C);
+    memset(new, 0, sizeof(*new));
     return new;
 }
 
 void HSD_RObjFree(HSD_RObj* robj)
 {
-    HSD_ObjFree(&robj_alloc_data, robj);
+    HSD_ObjFree(HSD_RObjGetAllocData(), robj);
 }
 
 static char HSD_RObj_80406F14[] = "(ptr && nitems) || !ptr";
@@ -825,7 +815,7 @@ static f32 dummy_func(void* unused)
 
 HSD_Rvalue* HSD_RvalueAlloc(void)
 {
-    HSD_Rvalue* rvalue = HSD_ObjAlloc(&rvalue_alloc_data);
+    HSD_Rvalue* rvalue = HSD_ObjAlloc(HSD_RvalueObjGetAllocData());
     HSD_ASSERT(1224, rvalue);
     memset(rvalue, 0, sizeof(HSD_Rvalue));
     return rvalue;
@@ -835,7 +825,7 @@ void HSD_RvalueRemove(HSD_Rvalue* rvalue)
 {
     if (rvalue != NULL) {
         HSD_JObjUnrefThis(rvalue->jobj);
-        HSD_ObjFree(&rvalue_alloc_data, rvalue);
+        HSD_ObjFree(HSD_RvalueObjGetAllocData(), rvalue);
     }
 }
 

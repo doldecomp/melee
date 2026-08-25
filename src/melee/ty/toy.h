@@ -21,7 +21,7 @@
 /* 304D30 */ int _Toy_80304D30(void);
 /* 305058 */ s32 Toy_80305058(s32, s32, s32, f32);
 /* 30562C */ void Toy_SetUnlockState(enum_t, bool);
-/* 305918 */ void Toy_80305918(signed char, long, long);
+/* 305918 */ void Toy_80305918(s8, s32, s32);
 /* 305B88 */ s32 Toy_80305B88(void);
 /* 305C44 */ s32 Toy_80305C44(void);
 /* 305D00 */ float Toy_80305D00(void);
@@ -36,7 +36,7 @@
 /* 306930 */ void Toy_80306930(HSD_GObj*, int);
 /* 306954 */ void Toy_80306954(HSD_GObj* gobj, int);
 /* 306A48 */ void Toy_80306A48(HSD_JObj*, char*, char*, char*, HSD_Archive*,
-                               long);
+                               s32);
 /* 306B18 */ HSD_GObjProc* Toy_80306B18(HSD_GObj* gobj, s32 anim_frame,
                                         s32 val1, s32 val2);
 /* 306BB8 */ void Toy_80306BB8(HSD_GObj* gobj);
@@ -46,10 +46,10 @@
 /* 306EEC */ HSD_LObj* Toy_LoadLObjList(LightList**, s32*);
 /* 307470 */ void Toy_80307470(s32);
 /* 307E84 */ void Toy_80307E84(HSD_GObj* gobj);
-/* 30813C */ char* Toy_8030813C(s16 arg0, enum_t unused);
-/* 308250 */ void Toy_80308250(u8* arg0, s32 arg1, s32 arg2);
+/* 30813C */ char* Toy_8030813C(int trophy_id);
+/* 308250 */ void Toy_80308250(u8* arg0, s16 arg1, s32 arg2);
 /* 3082F8 */ s32 Toy_803082F8(s16 idx);
-/* 308328 */ void Toy_80308328(s32 arg0);
+/* 308328 */ s32 Toy_80308328(s32 idx);
 /* 308354 */ s32 Toy_80308354(s16 idx);
 /* 3083D8 */ void Toy_803083D8(HSD_JObj* jobj, s32 arg1);
 /* 3087F4 */ HSD_GObj* Toy_803087F4(void*);
@@ -66,7 +66,7 @@
 /* 31263C */ void Toy_8031263C(void);
 /* 3127D4 */ void Toy_803127D4(void);
 /* 3FE5E8 */ extern char Toy_str_ScMenFigure_cam_int1_camera[];
-/* 4A284C */ extern unsigned short Toy_804A284C[302];
+/* 4A284C */ extern u16 Toy_804A284C[302];
 /* 4A2AA8 */ extern ToyAnimState Toy_804A2AA8;
 /* 4D6EAC */ extern TyDspEntry* Toy_sbss_804D6EAC;
 /* 4D6EB0 */ extern TyDspEntry* Toy_sbss_804D6EB0;

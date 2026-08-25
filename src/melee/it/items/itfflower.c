@@ -1,16 +1,15 @@
 #include "itfflower.h"
 
+#include "inlines.h"
 #include "itlgunbeam.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
-
-#include <baselib/gobj.h>
+#include "it/itgroundcoll.h"
 
 /* 292FF0 */ static void it_80292FF0(Item_GObj* gobj);
 /* 293040 */ static bool itFflower_UnkMotion0_Anim(Item_GObj* gobj);
@@ -71,18 +70,7 @@ Item_GObj* it_80292D48(Vec3* vec)
     SpawnItem spawn;
 
     spawn.kind = It_Kind_F_Flower;
-    spawn.prev_pos = *vec;
-    spawn.prev_pos.z = 0.0F;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = -1.0F;
-    spawn.x3C_damage = 0;
-    spawn.vel.z = 0.0F;
-    spawn.vel.y = 0.0F;
-    spawn.vel.x = 0.0F;
-    spawn.x0_parent_gobj = NULL;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0.0F;
+    Item_InitSpawnOnPlane(&spawn, NULL, vec, -1.0F);
 
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
@@ -165,9 +153,7 @@ void it_80292FF0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
-    ip->x40_vel.z = 0.0F;
-    ip->x40_vel.y = 0.0F;
-    ip->x40_vel.x = 0.0F;
+    itResetVelocity(ip);
     it_8026B390(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }

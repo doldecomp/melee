@@ -4,20 +4,28 @@
 
 #include <platform.h>
 
-#include "ef/eflib.h"
-
 #include "forward.h"
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/inlines.h"
 #include "ftDonkey/types.h"
 
 #include <dolphin/mtx.h>
+
+static u32 const coll_mf =
+    Ft_MF_KeepGfx | Ft_MF_SkipHit | Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim |
+    Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+    Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
 
 void ftDk_SpecialS_Enter(HSD_GObj* gobj)
 {
@@ -71,7 +79,7 @@ void ftDk_SpecialAirS_Phys(HSD_GObj* gobj)
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
     if (fp->cmd_vars[0]) {
         ftCommon_Fall(fp, donkey_attr->SpecialS.x44_AERIAL_GRAVITY,
-                      ca->terminal_vel);
+                      ca->terminal_velocity);
     }
     ftCommon_ApplyFrictionAir(
         fp, donkey_attr->SpecialS.x40_MOMENTUM_TRANSITION_MODIFIER);
@@ -106,23 +114,17 @@ void ftDk_SpecialAirS_Coll(HSD_GObj* gobj)
 void doAirTransition(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialAirS, 0x0C4C508A,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftDk_MS_SpecialAirS, coll_mf);
     if (fp->x2219_b0 == true) {
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     }
 }
 
 static void doGroundTransition(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialS, 0x0C4C508A,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftDk_MS_SpecialS, coll_mf);
     if (fp->x2219_b0 == true) {
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     }
 }

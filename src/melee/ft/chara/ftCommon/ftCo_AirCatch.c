@@ -28,7 +28,6 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
-#include <common_structs.h>
 #include <baselib/jobj.h>
 
 bool ftCo_800C3A14(Fighter_GObj* gobj)
@@ -134,8 +133,8 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
             lb_8000B1CC(
                 fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
                 NULL, &pos);
-            fp->fv.lk.xC = it_802A2BA4(gobj, &pos, fp->facing_dir, da->xBC);
-            if (fp->fv.lk.xC == NULL) {
+            fp->u.lk.xC = it_802A2BA4(gobj, &pos, fp->facing_dir, da->xBC);
+            if (fp->u.lk.xC == NULL) {
                 ftCo_800968C8(gobj);
             } else {
                 fp->accessory2_cb = it_802A7AF0;
@@ -144,8 +143,8 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
             }
         } else if (fp->mv.co.aircatch.x0 > da->xA4) {
             if (fp->mv.co.aircatch.x0 <= da->xB0) {
-                Item_GObj* tether_gobj = fp->fv.lk.xC;
-                Item* tether_ip = GET_ITEM(fp->fv.lk.xC);
+                Item_GObj* tether_gobj = fp->u.lk.xC;
+                Item* tether_ip = GET_ITEM(fp->u.lk.xC);
                 struct TetherAttributes* tether_data =
                     tether_ip->xC4_article_data->x4_specialAttributes;
 
@@ -169,7 +168,7 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
                                 0, 0, 0, 0, -1, -1, fp->coll_data.cur_pos.x,
                                 jobj->mtx[1][3], var_f3, jobj->mtx[1][3]) != 0)
                         {
-                            it_802A2B10(fp->fv.lk.xC);
+                            it_802A2B10(fp->u.lk.xC);
                             ftCo_800968C8(gobj);
                             return;
                         }
@@ -191,7 +190,7 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
                         ft_PlaySFX(fp, 0x2714C, 0x7F, 0x40);
                     }
                 } else if (fp->mv.co.aircatch.x0 == da->xB0) {
-                    it_802A2B10(fp->fv.lk.xC);
+                    it_802A2B10(fp->u.lk.xC);
                 }
             }
         }
@@ -202,8 +201,8 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
         if (fp->mv.co.aircatch.x0 == da->xBC) {
             Vec3 pos;
             lb_8000B1CC(fp->parts[FtPart_ThrowN].joint, NULL, &pos);
-            fp->fv.ss.x223C = it_802B7C18(gobj, &pos, fp->facing_dir);
-            if (fp->fv.ss.x223C == NULL) {
+            fp->u.ss.x223C = it_802B7C18(gobj, &pos, fp->facing_dir);
+            if (fp->u.ss.x223C == NULL) {
                 ftCo_800968C8(gobj);
             } else {
                 fp->accessory2_cb = it_802BAC80;
@@ -212,7 +211,7 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
             }
         } else if (fp->mv.co.aircatch.x0 > da->xBC) {
             if (fp->mv.co.aircatch.x0 <= da->xC8) {
-                Item_GObj* temp_r29_2 = fp->fv.ss.x223C;
+                Item_GObj* temp_r29_2 = fp->u.ss.x223C;
                 Item* tether_ip = GET_ITEM(temp_r29_2);
                 struct TetherAttributes* tether_data =
                     tether_ip->xC4_article_data->x4_specialAttributes;
@@ -230,7 +229,7 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
                                         jobj->mtx[0][3],
                                     jobj->mtx[1][3]))
                             {
-                                it_802B7B84(fp->fv.ss.x223C);
+                                it_802B7B84(fp->u.ss.x223C);
                                 ftCo_800968C8(gobj);
                                 return;
                             }
@@ -244,7 +243,7 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
                     if (fp->mv.co.aircatch.x0 == da->xC4) {
                         it_802BAA58(temp_r29_2);
                     } else if (fp->mv.co.aircatch.x0 == da->xC8) {
-                        it_802B7B84(fp->fv.ss.x223C);
+                        it_802B7B84(fp->u.ss.x223C);
                     }
                 }
             }
@@ -270,9 +269,9 @@ void ftCo_AirCatch_Phys(Fighter_GObj* gobj)
     if (fp->fall_fast) {
         ftCommon_FallFast(fp);
     } else if (fp->mv.co.aircatch.x0 < 20 && fp->pos_delta.y < 0.0) {
-        ftCommon_Fall(fp, co->grav * 0.2, co->terminal_vel);
+        ftCommon_Fall(fp, co->gravity * 0.2, co->terminal_velocity);
     } else {
-        ftCommon_Fall(fp, co->grav, co->terminal_vel);
+        ftCommon_Fall(fp, co->gravity, co->terminal_velocity);
     }
     ftCommon_8007D268(fp);
 }
@@ -281,7 +280,7 @@ void ftCo_AirCatchHit_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->self_vel = fp->pos_delta;
-    ftCommon_Fall(fp, fp->co_attrs.grav, fp->co_attrs.terminal_vel);
+    ftCommon_Fall(fp, fp->co_attrs.gravity, fp->co_attrs.terminal_velocity);
 }
 
 void ftCo_AirCatch_Coll(Fighter_GObj* gobj)

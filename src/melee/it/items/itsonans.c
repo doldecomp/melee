@@ -1,26 +1,36 @@
 #include "itsonans.h"
 
-#include "math.h"
+#include "inlines.h"
 
-#include "ef/eflib.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/itcoll.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
-#include "it/itmaplib.h"
 
 ItemStateTable it_803F7CA0[] = {
-    { 0, itSonans_UnkMotion0_Anim, itSonans_UnkMotion0_Phys,
-      itSonans_UnkMotion0_Coll },
-    { 1, itSonans_UnkMotion1_Anim, itSonans_UnkMotion1_Phys,
-      itSonans_UnkMotion1_Coll },
-    { -1, itSonans_UnkMotion2_Anim, itSonans_UnkMotion2_Phys,
-      itSonans_UnkMotion2_Coll }
+    {
+        0,
+        itSonans_UnkMotion0_Anim,
+        itSonans_UnkMotion0_Phys,
+        itSonans_UnkMotion0_Coll,
+    },
+    {
+        1,
+        itSonans_UnkMotion1_Anim,
+        itSonans_UnkMotion1_Phys,
+        itSonans_UnkMotion1_Coll,
+    },
+    {
+        -1,
+        itSonans_UnkMotion2_Anim,
+        itSonans_UnkMotion2_Phys,
+        itSonans_UnkMotion2_Coll,
+    },
 };
 
 void it_802CD44C(Item_GObj* gobj)
@@ -158,8 +168,7 @@ void it_802CD9C0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool itSonans_UnkMotion1_Anim(Item_GObj* gobj)
@@ -190,11 +199,7 @@ bool itSonans_UnkMotion1_Coll(Item_GObj* gobj)
 
 void it_802CDAA8(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_EnterAirStateWithHitlag(gobj, 2);
 }
 
 bool itSonans_UnkMotion2_Anim(Item_GObj* gobj)
@@ -214,8 +219,7 @@ void itSonans_UnkMotion2_Phys(Item_GObj* gobj)
         it_802754BC(gobj);
         ip = GET_ITEM(gobj);
         Item_80268E5C(gobj, 0, 2);
-        ip->entered_hitlag = efLib_PauseAll;
-        ip->exited_hitlag = efLib_ResumeAll;
+        Item_SetEffectHitlagCallbacks(ip);
     }
 }
 

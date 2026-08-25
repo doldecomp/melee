@@ -1,9 +1,5 @@
 #include "ftCo_Jump.h"
 
-#include "math.h"
-
-#include <placeholder.h>
-
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
@@ -11,6 +7,7 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
+#include "ft/ft_0C8C.h"
 #include "ft/ft_0DF1.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
@@ -37,7 +34,7 @@ ftCo_JumpInput ftCo_Jump_GetInput(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if ((fp->input.lstick.y >= p_ftCommonData->tap_jump_threshold) &&
-        (fp->x671_timer_lstick_tilt_y < p_ftCommonData->x74))
+        (fp->x671_timer_lstick_tilt_y < p_ftCommonData->tap_jump_window))
     {
         return JumpInput_LStick;
     }
@@ -73,8 +70,8 @@ bool fn_800CAF78(Fighter_GObj* gobj)
         return ftCo_800C5A50(gobj);
     }
 
-    if ((fp->input.lstick.y >= p_ftCommonData->x80) &&
-        (fp->x671_timer_lstick_tilt_y < p_ftCommonData->x74))
+    if ((fp->input.lstick.y >= p_ftCommonData->relaxed_tap_jump_threshold) &&
+        (fp->x671_timer_lstick_tilt_y < p_ftCommonData->tap_jump_window))
     {
         ftCo_KneeBend_Enter(gobj, JumpInput_LStick);
         return true;

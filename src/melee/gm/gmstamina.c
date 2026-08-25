@@ -7,38 +7,15 @@
 
 #include <placeholder.h>
 
-#include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/random.h>
-#include <melee/db/db.h>
 #include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmcamera.h>
 #include <melee/gm/gmmain_lib.h>
-#include <melee/gm/gmresult.h>
-#include <melee/gm/gmresultplayer.h>
-#include <melee/gm/gmtoulib.h>
 #include <melee/gm/gmvsmelee.h>
 #include <melee/gm/types.h>
-#include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbbgflash.h>
-#include <melee/lb/lbcardgame.h>
-#include <melee/lb/lbcardnew.h>
 #include <melee/lb/lbdvd.h>
-#include <melee/lb/lbmthp.h>
-#include <melee/lb/lbsnap.h>
-#include <melee/lb/lbtime.h>
-#include <melee/lb/types.h>
-#include <melee/mn/mngallery.h>
 #include <melee/mn/types.h>
 #include <melee/pl/player.h>
-#include <melee/vi/types.h>
-#include <melee/vi/vi0102.h>
-#include <melee/vi/vi0402.h>
-#include <melee/vi/vi0501.h>
-#include <melee/vi/vi1101.h>
-#include <melee/vi/vi1201v1.h>
 
 GameScene gm_803DF138_Scenes[] = {
     {
@@ -86,12 +63,10 @@ static struct {
     u16 slomo_counter[4]; ///< Ticks up to 100 when player is eliminated
 } gm_804975F8;
 
-extern MatchExitInfo gm_80479D98;
-
 void gm_801B91C8(GameScene* arg0)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->unk_10D0;
-    CSSData* css = gm_801A427C(arg0);
+    CSSData* css = gm_GetGameSceneLoadDataCallback(arg0);
     css->match_type = 2;
     css->ko_star_counts = 0;
     css->data = *vs;
@@ -111,23 +86,22 @@ void gm_801B9254(GameScene* scene)
 void gm_801B927C(GameScene* arg0)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->unk_10D0;
-    SSSData* sss = gm_801A4284(arg0);
+    SSSData* sss = gm_GetGameSceneLeaveDataCallback(arg0);
     if (sss->start_game != 0) {
         *vs = sss->data;
 
         lbAudioAx_80026F2C(0x18);
-        lbAudioAx_8002702C(
-            8, lbAudioAx_80026EBC((enum InternalStageId) sss->force_stage_id));
+        lbAudioAx_8002702C(8, lbAudioAx_80026EBC(sss->force_stage_id));
         lbAudioAx_80027168();
         return;
     }
-    gm_SetPendingScene(0);
+    gm_SetPendingSceneIndex(0);
 }
 
 void gm_801B931C(GameScene* arg0)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->unk_10D0;
-    StartMeleeData* start = gm_801A427C(arg0);
+    StartMeleeData* start = gm_GetGameSceneLoadDataCallback(arg0);
     int i;
 
     gm_80167BC8(vs);

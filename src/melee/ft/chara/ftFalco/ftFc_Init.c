@@ -440,7 +440,7 @@ Fighter_CostumeStrings ftFc_Init_CostumeStrings[] = {
 void ftFc_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->fv.fx.x222C_blasterGObj = 0;
+    fp->u.fx.x222C_blasterGObj = 0;
     ftParts_80074A4C(gobj, 0, 0);
 }
 
@@ -479,7 +479,7 @@ void ftFc_Init_OnLoad(HSD_GObj* gobj)
     sa2 = fp->dat_attrs;
     it_8026B3F8(items[0], sa2[7]);
     it_8026B3F8(items[1], sa2[8]);
-    it_8026B3F8(items[3], 0x39);
+    it_8026B3F8(items[3], It_Kind_Falco_Phantasm);
 }
 
 void ftFc_Init_LoadSpecialAttrs(HSD_GObj* gobj)

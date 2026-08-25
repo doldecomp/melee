@@ -1,31 +1,67 @@
 #include "lbarq.h"
 
-#include <trigf.h>
+#include <placeholder.h>
+
+#include <dolphin/ar.h>
 #include <dolphin/os.h>
 #include <baselib/debug.h>
 
+typedef enum lbArqState {
+    LB_ARQ_STATE_FREE = 0,
+    LB_ARQ_STATE_PENDING = 1,
+    LB_ARQ_STATE_DONE = 2,
+} lbArqState;
+
+typedef struct lbArqNode {
+    /* 0x00 */ struct lbArqNode* next;
+    /* 0x04 */ lbArqState state;
+    /* 0x08 */ ARQRequest arq;
+    /* 0x28 */ lbArqCallback callback;
+    /* 0x2C */ void* callback_arg;
+} lbArqNode;
+
+typedef struct lbArqGlobal {
+    /* 0x000 */ lbArqNode nodes[10];
+    /* 0x1E0 */ lbArqNode* list[3];
+} lbArqGlobal;
+
+typedef struct lbArqHandle {
+    /* 0x00 */ void* unk0;
+    /* 0x04 */ lbArqNode* node;
+} lbArqHandle;
+
 /* 4316C0 */ lbArqGlobal lbArq_804316C0;
 
+/// @todo Non-inlined function forces loop in ::lbArq_80014BD0 to yield to
+///       interrupts. Pragma solution likely fake.
+#ifdef __MWERKS__
 #pragma push
 #pragma dont_inline on
-lbArqState lbArq_80014ABC(lbArqNode* arg0)
+#endif
+static lbArqState lbArq_80014ABC(lbArqNode* arg0)
 {
     return arg0->state;
 }
+#ifdef __MWERKS__
 #pragma pop
+#endif
 
-void lbArq_80014AC4(lbArqHandle* handle)
+static void lbArq_80014AC4(lbArqHandle* handle)
 {
     lbArqGlobal* global = &lbArq_804316C0;
     lbArqNode* node = handle->node;
     lbArqNode** prev;
     lbArqNode** tail;
+    uintptr_t offset;
     BOOL intr;
 
     intr = OSDisableInterrupts();
 
     /* Remove from current list (indexed by state) */
-    prev = &global->list[node->state];
+    offset = node->state * 4;
+    offset += 0x1E0;
+    offset += (uintptr_t) global;
+    prev = (lbArqNode**) offset;
     while (*prev != node) {
         prev = &(*prev)->next;
     }
@@ -68,15 +104,17 @@ void lbArq_80014AC4(lbArqHandle* handle)
     }
 }
 
-void lbArq_80014BD0(u32 source, void* dest, size_t length,
+void lbArq_80014BD0(unsigned int source, void* dest, size_t length,
                     lbArqCallback callback, void* callback_arg)
 {
+    u32 source_tmp;
+    lbArqNode* rp_tmp;
     lbArqGlobal* global = &lbArq_804316C0;
     lbArqNode* rp;
-    lbArqNode* tmp;
     lbArqNode** tail;
-    lbArqNode** free_head;
     BOOL intr;
+    lbArqNode** free_head;
+    lbArqNode* tmp;
 
     PAD_STACK(16);
     DCInvalidateRange(dest, length);
@@ -97,8 +135,10 @@ void lbArq_80014BD0(u32 source, void* dest, size_t length,
     rp->next = NULL;
     rp->state = LB_ARQ_STATE_PENDING;
 
-    ARQPostRequest(&rp->arq, (u32) rp, 1, 0, source, (u32) dest, length,
-                   (ARQCallback) lbArq_80014AC4);
+    rp_tmp = rp;
+    source_tmp = source;
+    ARQPostRequest(&rp->arq, (u32) rp_tmp, 1, 0, source_tmp, (uintptr_t) dest,
+                   length, (ARQCallback) lbArq_80014AC4);
 
     if (rp->callback == NULL) {
         OSRestoreInterrupts(intr);

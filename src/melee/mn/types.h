@@ -3,26 +3,66 @@
 
 #include "platform.h"
 
-#include <placeholder.h>
-
-#include "gm/forward.h"
 #include "mn/forward.h" // IWYU pragma: export
+#include <baselib/forward.h>
 
-#include <baselib/sislib.h>
+#ifdef M2C
+struct mnInfo_GObj {
+    /*  +0 */ u16 classifier;
+    /*  +2 */ u8 p_link;
+    /*  +3 */ u8 gx_link;
+    /*  +4 */ u8 p_priority;
+    /*  +5 */ u8 render_priority;
+    /*  +6 */ u8 obj_kind;
+    /*  +7 */ u8 user_data_kind;
+    /*  +8 */ mnInfo_GObj* next;
+    /*  +C */ mnInfo_GObj* prev;
+    /* +10 */ mnInfo_GObj* next_gx;
+    /* +14 */ mnInfo_GObj* prev_gx;
+    /* +18 */ HSD_GObjProc* proc;
+    /* +1C */ void (*rendered)(mnInfo_GObj* gobj, s32 code);
+    /* +20 */ u64 gxlink_prios;
+    /* +28 */ HSD_JObj* hsd_obj;
+    /* +2C */ MnInfoData* user_data;
+    /* +30 */ void (*user_data_remove_func)(mnInfo_GObj* data);
+    /* +34 */ void* x34_unk;
+};
 
-typedef struct {
+struct mnSoundTest_GObj {
+    /*  +0 */ u16 classifier;
+    /*  +2 */ u8 p_link;
+    /*  +3 */ u8 gx_link;
+    /*  +4 */ u8 p_priority;
+    /*  +5 */ u8 render_priority;
+    /*  +6 */ u8 obj_kind;
+    /*  +7 */ u8 user_data_kind;
+    /*  +8 */ HSD_GObj* next;
+    /*  +C */ HSD_GObj* prev;
+    /* +10 */ HSD_GObj* next_gx;
+    /* +14 */ HSD_GObj* prev_gx;
+    /* +18 */ HSD_GObjProc* proc;
+    /* +1C */ GObj_RenderFunc render_cb;
+    /* +20 */ u64 gxlink_prios;
+    /* +28 */ void* hsd_obj;
+    /* +2C */ soundtest_user_data* user_data;
+    /* +30 */ void (*user_data_remove_func)(void* data);
+    /* +34 */ void* x34_unk;
+};
+#endif
+
+struct Menu {
     u8 cursor;
     u8 unk1;
     u8 unk2;
     u8 unk3;
     HSD_Text* text;
-} Menu;
-/// size 0x8
+};
+ASSERT_SIZE(struct Menu, 0x8);
 
 struct CountEntry {
-    u8 id;
+    u8 selkind;
     u8 pad[3];
-    u32 val;
+    u32 stat_value;
 };
 
 #ifdef M2C
@@ -94,20 +134,20 @@ struct lbl_8046B668_t {
     /* 0x00 */ s8 arr1[0x1C];
     /* 0x1C */ s8 arr2[0x1C];
 };
-STATIC_ASSERT(sizeof(struct lbl_8046B668_t) == 0x38);
+ASSERT_SIZE(struct lbl_8046B668_t, 0x38);
 
 typedef struct PerfLabelLine {
     /* 0x00 */ struct PerfLabelLine* next;
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ char text[0x80];
 } PerfLabelLine; /* size = 0x88 */
-STATIC_ASSERT(sizeof(PerfLabelLine) == 0x88);
+ASSERT_SIZE(PerfLabelLine, 0x88);
 
 typedef struct lbl_8046B378_t {
     /* 0x000 */ PerfLabelLine line0;
     /* 0x088 */ PerfLabelLine line1;
 } lbl_8046B378_t; /* size = 0x110 */
-STATIC_ASSERT(sizeof(lbl_8046B378_t) == 0x110);
+ASSERT_SIZE(lbl_8046B378_t, 0x110);
 
 struct StartMeleeRules {
     u32 x0_0 : 3; // match mode? 1 = stock mode, 2 = coin mode?
@@ -128,11 +168,11 @@ struct StartMeleeRules {
     u32 x2_0 : 1;
     u32 x2_1 : 1;
     u32 x2_2 : 1;
-    u32 x2_3 : 1; ///< single-button mode enabled
-    u32 disable_pausing
-        : 1; ///< When set, pausing is disabled for both active gameplay and
-             ///< pause menus. Sourced from the rules pause option and from
-             ///< several game-mode setups.
+    u32 x2_3 : 1;            ///< single-button mode enabled
+    u32 disable_pausing : 1; ///< When set, pausing is disabled for both active
+                             ///< gameplay and pause menus. Sourced from the
+                             ///< rules pause option and from several game-mode
+                             ///< setups.
     u32 x2_5 : 1;
     u32 x2_6 : 1;
     u32 x2_7 : 1;
@@ -172,7 +212,7 @@ struct StartMeleeRules {
     s8 xB; // item frequency
     s8 xC; // SD penalty
     u8 xD;
-    u16 xE; // InternalStageId
+    u16 xE; // StKind
 
     u32 x10; // time limit
     u8 x14;
@@ -182,8 +222,8 @@ struct StartMeleeRules {
     u64 x20; // item mask
     int x28;
     float x2C;
-    float x30; // damage ratio
-    float x34; // game speed
+    float x30; ///< damage ratio
+    float x34; ///< game speed
     void (*on_unpause_override)(
         int); ///< on unpause callback. When set, this method is called with
               ///< the pauser playerId when a player unpauses the match. If not
@@ -304,6 +344,35 @@ typedef enum CSSIconJointId {
     ICONJOINT_MARS = 0x22
 } CSSIconJointId;
 
+typedef enum SelectableCharacterKind {
+    /* 00 */ SELKIND_CAPTAIN,    // Captain Falcon (Captain)
+    /* 01 */ SELKIND_DONKEY,     // Donkey Kong (Donkey)
+    /* 02 */ SELKIND_FOX,        // Fox
+    /* 03 */ SELKIND_GAMEWATCH,  // Mr. Game & Watch (GameWatch)
+    /* 04 */ SELKIND_KIRBY,      // Kirby
+    /* 05 */ SELKIND_KOOPA,      // Bowser (Koopa)
+    /* 06 */ SELKIND_LINK,       // Link
+    /* 07 */ SELKIND_LUIGI,      // Luigi
+    /* 08 */ SELKIND_MARIO,      // Mario
+    /* 09 */ SELKIND_MARS,       // Marth (Mars)
+    /* 0A */ SELKIND_MEWTWO,     // Mewtwo
+    /* 0B */ SELKIND_NESS,       // Ness
+    /* 0C */ SELKIND_PEACH,      // Peach
+    /* 0D */ SELKIND_PIKACHU,    // Pikachu
+    /* 0E */ SELKIND_POPONANA,   // Ice Climbers (Popo & Nana)
+    /* 0F */ SELKIND_PURIN,      // Jigglypuff (Purin)
+    /* 10 */ SELKIND_SAMUS,      // Samus
+    /* 11 */ SELKIND_YOSHI,      // Yoshi
+    /* 12 */ SELKIND_ZELDA_SEAK, // Zelda + Sheik
+    /* 13 */ SELKIND_FALCO,      // Falco
+    /* 14 */ SELKIND_CLINK,      // Young Link (CLink)
+    /* 15 */ SELKIND_DRMARIO,    // Dr. Mario
+    /* 16 */ SELKIND_EMBLEM,     // Roy (Emblem)
+    /* 17 */ SELKIND_PICHU,      // Pichu
+    /* 18 */ SELKIND_GANON,      // Ganondorf (Ganon)
+    /* 19 */ SELKIND_COUNT
+} SelectableCharacterKind;
+
 struct CSSIcon {
     u8 ft_hudindex; // 0x00 - used for getting combo count @ 8025C0C4
     u8 char_kind;   // 0x01 - icons external ID
@@ -355,16 +424,16 @@ struct CSSDoor {
 };
 
 struct CSSTagData {
-    TextGlyphTexture* text;    // 0x00
-    TextGlyphTexture* name_ls; // 0x04
-    float x8;                  // 0x08
-    float scroll_amt;          // 0x0C
-    float scroll_force;        // 0x10
-    int timer;                 // 0x14
-    u8 next_tag;               // 0x18
-    u8 port;                   // 0x19
-    u8 state;                  // 0x1A
-    u8 use_tag;                // 0x1B
+    HSD_Text* text;     // 0x00
+    HSD_Text* name_ls;  // 0x04
+    float x8;           // 0x08
+    float scroll_amt;   // 0x0C
+    float scroll_force; // 0x10
+    int timer;          // 0x14
+    u8 next_tag;        // 0x18
+    u8 port;            // 0x19
+    u8 state;           // 0x1A
+    u8 use_tag;         // 0x1B
 };
 
 struct CSSTag {
@@ -393,7 +462,9 @@ struct CSSKOStar {
 
 struct CSSDoorsData {
     CSSDoor doors[4]; // 0x00
-    CSSTag tags[4];   // 0x90
+};
+
+struct CSSDoorsMisc {
     u8 xc0;
     u8 xc1;
     u8 xc2;
@@ -407,17 +478,17 @@ struct CSSDoorsData {
     u8 xca;
     u8 xcb;
     u8 xcc;
-    u8 xcd;
-    u8 xce;
+    u8 cpu_level;
+    u8 cpu_level_shown;
     u8 scroll_flag;
-    float xcf;
+    float cpu_slider_x;
     HSD_Text* xd3;
-    float xd7;
-    float xdb;
-    float xdf;
-    float xe3;
-    float xe7;
-    float xeb;
+    float cpudown_left;
+    float cpudown_right;
+    float cpuup_left;
+    float cpuup_right;
+    float cpubtn_top;
+    float cpubtn_btm;
 };
 
 struct CSSDoorsData2 {
@@ -437,7 +508,7 @@ struct CSSDoorsData2 {
 struct mnSnap_804A0B90_t {
     char pad_0[0x96000];
 };
-STATIC_ASSERT(sizeof(struct mnSnap_804A0B90_t) == 0x96000);
+ASSERT_SIZE(struct mnSnap_804A0B90_t, 0x96000);
 
 struct SSSData {
     /* +00 */ u8 unk_stage;
@@ -518,7 +589,7 @@ struct Diagram2 {
 /// Total size: 0x78 bytes
 struct Diagram3 {
     /* 0x00 */ u8 saved_menu;
-    /* 0x01 */ u8 saved_selection;
+    /* 0x01 */ u8 cursor_row;
     /* 0x02 */ u8 pad_2[2];
     /* 0x04 */ u8 scroll_offset;
     /* 0x05 */ u8 anim_state;
@@ -604,5 +675,30 @@ typedef struct NameNewEntry {
     /* 0x64 */ HSD_Text* name_disp_text;
     /* 0x68 */ HSD_Text* desc_text;
 } NameNewEntry; /* size = 0x6C */
+
+/// seems like each menu probably has its own struct, and isnt just #Menu
+struct MnInfoData {
+    /* +00 */ u8 scroll_idx;
+    /* +04 */ u32 anim_timer; ///< decrements from 10 when transitioning from
+                              ///< main menu to special menu
+    /* +08 */ HSD_Text*
+        left_column[4]; ///< date and time of achievement unlock
+    /* +18 */ HSD_Text* right_column[4]; ///< achievement
+    /* +28 */ HSD_Text* description;
+};
+
+struct soundtest_user_data {
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    u16 unk4;
+    f32 unk8;
+    f32 unkC;
+    HSD_Text* unk10;
+    HSD_Text* unk14;
+    HSD_Text* unk18;
+    HSD_Text* unk1C;
+};
 
 #endif

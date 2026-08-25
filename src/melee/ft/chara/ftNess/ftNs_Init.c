@@ -454,11 +454,11 @@ void ftNs_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftParts_80074A4C(gobj, 0, 0);
-    fp->fv.ns.pkflash_gobj = NULL;
-    fp->fv.ns.pkthunder_gobj = NULL;
-    fp->fv.ns.bat_gobj = NULL;
-    fp->fv.ns.yoyo_gobj = NULL;
-    fp->fv.ns.pkthunder_gfx = false;
+    fp->u.ns.pkflash_gobj = NULL;
+    fp->u.ns.pkthunder_gobj = NULL;
+    fp->u.ns.bat_gobj = NULL;
+    fp->u.ns.yoyo_gobj = NULL;
+    fp->u.ns.pkthunder_gfx = false;
 }
 
 void ftNs_Init_OnLoad(HSD_GObj* gobj)

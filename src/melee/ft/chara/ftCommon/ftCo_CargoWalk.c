@@ -12,8 +12,6 @@
 #include "ft/types.h"
 #include "ftDonkey/types.h"
 
-#include <baselib/gobj.h>
-
 /* 09B6C8 */ static void ftCo_8009B6C8(Fighter_GObj* gobj, float anim_start);
 
 bool ftCo_8009B67C(Fighter_GObj* gobj)

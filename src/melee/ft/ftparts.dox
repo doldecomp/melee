@@ -2,11 +2,13 @@
 #define MELEE_FT_FTPARTS_H
 
 #include <platform.h>
+
 #include "ft/forward.h"
-#include "ftCommon/forward.h"
-#include <baselib/forward.h>
 
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+#include <baselib/forward.h>
 
 void ftParts_80074ACC(Fighter_GObj* gobj);
 u32 ftParts_8007506C(s32 ftkind, u32 part);

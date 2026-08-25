@@ -3,8 +3,6 @@
 
 #include "platform.h"
 
-#include <placeholder.h>
-
 #include "dolphin/gx/GXStruct.h"
 
 #include "gr/forward.h"
@@ -40,10 +38,10 @@ struct mp_UnkStruct0 {
     /*  +8 */ Vec3 x8;
     /* +14 */ Vec3 x14;
     /* +20 */ int x20;
-    /* +24 */ short x24;
-    /* +26 */ short x26;
-    /* +28 */ short x28;
-    /* +2A */ short x2A;
+    /* +24 */ s16 x24;
+    /* +26 */ s16 x26;
+    /* +28 */ s16 x28;
+    /* +2A */ s16 x2A;
     /* +2C */ mp_UnkStruct3* ptr;
 };
 
@@ -81,7 +79,7 @@ struct CollVtx {
     /* 0x10 */ float x10;
     /* 0x14 */ float x14;
 }; /* size = 0x18 */
-STATIC_ASSERT(sizeof(struct CollVtx) == 0x18);
+ASSERT_SIZE(struct CollVtx, 0x18);
 
 struct MapJoint {
     /*  +0 */ s16 floor_start;
@@ -111,12 +109,13 @@ struct CollJoint {
     /* 0x10 */ Vec2 bounding_min;
     /* 0x18 */ Vec2 bounding_max;
     /* 0x20 */ HSD_JObj* x20;
-    /* 0x24 */ mpLib_Callback x24;
-    /* 0x28 */ void* x28;
-    /* 0x2C */ mpLib_Callback x2C;
-    /* 0x30 */ Ground* x30;
+    /* 0x24 */ mpLib_JointCollisionCallback
+        cb_0; ///< @todo Possible array here
+    /* 0x28 */ Ground* cb_data_0;
+    /* 0x2C */ mpLib_JointCollisionCallback cb_1;
+    /* 0x30 */ Ground* cb_data_1;
 }; /* size = 0x34 */
-STATIC_ASSERT(sizeof(struct CollJoint) == 0x34);
+ASSERT_SIZE(struct CollJoint, 0x34);
 
 struct MapCollData {
     /*  +0 */ Vec2* verts;

@@ -5,10 +5,13 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
-#include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Attack100.h"
@@ -20,6 +23,7 @@
 #include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/ftCo_SpecialAir.h"
 #include "ftCommon/ftCo_SpecialS.h"
+#include "ftCommon/inlines.h"
 
 #include "ftLink/forward.h"
 
@@ -29,9 +33,7 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <math.h>
-#include <trigf.h>
 #include <dolphin/mtx.h>
 
 typedef enum cmd_var_idx {
@@ -48,13 +50,14 @@ typedef enum cmd_var_idx {
 void on21EC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (ABS(fp->input.lstick.x) >= p_ftCommonData->x3C &&
-        fp->x673 < p_ftCommonData->x40 + p_ftCommonData->x44)
+    if (ABS(fp->input.lstick.x) >=
+            p_ftCommonData->dash_smash_stick_threshold &&
+        fp->x673 < p_ftCommonData->dash_smash_window + p_ftCommonData->x44)
     {
         fp->x2070.count_thrown_items = true;
-        fp->fv.lk.x4 = true;
+        fp->u.lk.x4 = true;
     } else {
-        fp->fv.lk.x4 = false;
+        fp->u.lk.x4 = false;
     }
 }
 
@@ -106,18 +109,18 @@ bool ftLk_SpecialS_Is2071b0_1to13(HSD_GObj* gobj)
 bool ftLk_SpecialS_RemoveBoomerang0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->fv.lk.used_boomerang = false;
-    fp->fv.lk.boomerang_gobj = NULL;
+    fp->u.lk.used_boomerang = false;
+    fp->u.lk.boomerang_gobj = NULL;
     return ftLk_Init_BoomerangExists(gobj);
 }
 
 void ftLk_SpecialS_RemoveBoomerang1(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.lk.boomerang_gobj != NULL) {
-        it_802A07B4(fp->fv.lk.boomerang_gobj);
-        fp->fv.lk.used_boomerang = false;
-        fp->fv.lk.boomerang_gobj = NULL;
+    if (fp->u.lk.boomerang_gobj != NULL) {
+        it_802A07B4(fp->u.lk.boomerang_gobj);
+        fp->u.lk.used_boomerang = false;
+        fp->u.lk.boomerang_gobj = NULL;
         ftLk_Init_BoomerangExists(gobj);
     }
 }
@@ -180,41 +183,24 @@ void onAccessory4(HSD_GObj* gobj)
                 fp->facing_dir, gobj, &pos,
                 ftParts_GetBoneIndex(fp, FtPart_LThumbNb), da->x2C);
             fp->x1984_heldItemSpec = boomerang_gobj;
-            fp->fv.lk.boomerang_gobj = boomerang_gobj;
+            fp->u.lk.boomerang_gobj = boomerang_gobj;
             if (boomerang_gobj != NULL) {
-                fp->fv.lk.used_boomerang = true;
+                fp->u.lk.used_boomerang = true;
                 fp->death3_cb = ftLk_800EAF38;
                 fp->take_dmg_cb = ftLk_800EAF58;
             }
         }
     }
-    if (fp->cmd_vars[cmd_unk0_bool] && fp->fv.lk.boomerang_gobj != NULL &&
-        it_8029FDBC(fp->fv.lk.boomerang_gobj))
+    if (fp->cmd_vars[cmd_unk0_bool] && fp->u.lk.boomerang_gobj != NULL &&
+        it_8029FDBC(fp->u.lk.boomerang_gobj))
     {
         Vec3 pos;
         u8 _[4];
-        f32 angle = calcAnglePos(gobj, &pos, fp->fv.lk.x4 ? da->x20 : da->x24);
-        it_802A0534(fp->fv.lk.boomerang_gobj, &pos, angle);
+        f32 angle = calcAnglePos(gobj, &pos, fp->u.lk.x4 ? da->x20 : da->x24);
+        it_802A0534(fp->u.lk.boomerang_gobj, &pos, angle);
         fp->cmd_vars[cmd_unk0_bool] = false;
         fp->cmd_vars[cmd_specials2_anim_bool] = false;
     }
-}
-
-static void doEnter(HSD_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    fp->throw_flags = 0;
-    fp->cmd_vars[cmd_unk0_bool] = false;
-    fp->x21EC = on21EC;
-    if (fp->fv.lk.used_boomerang) {
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1Empty, Ft_MF_None, 0,
-                                  1, 0, NULL);
-    } else {
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1, Ft_MF_None, 0, 1, 0,
-                                  NULL);
-    }
-    ftAnim_8006EBA4(gobj);
-    fp->accessory4_cb = onAccessory4;
 }
 
 void ftLk_SpecialS_Enter(HSD_GObj* gobj)
@@ -223,7 +209,7 @@ void ftLk_SpecialS_Enter(HSD_GObj* gobj)
     fp->throw_flags = 0;
     fp->cmd_vars[cmd_unk0_bool] = false;
     fp->x21EC = on21EC;
-    if (fp->fv.lk.used_boomerang) {
+    if (fp->u.lk.used_boomerang) {
         Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1Empty, Ft_MF_None, 0,
                                   1, 0, NULL);
     } else {
@@ -241,7 +227,7 @@ void ftLk_SpecialAirS_Enter(HSD_GObj* gobj)
     fp->throw_flags = 0;
     fp->cmd_vars[cmd_unk0_bool] = 0;
     fp->x21EC = on21EC;
-    if (fp->fv.lk.used_boomerang) {
+    if (fp->u.lk.used_boomerang) {
         Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirS1Empty, Ft_MF_None,
                                   0, 1, 0, NULL);
     } else {
@@ -277,8 +263,8 @@ static void doS2Anim(HSD_GObj* gobj, HSD_GObjEvent cb)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->cmd_vars[cmd_specials2_anim_bool]) {
-        if (fp->fv.lk.boomerang_gobj != NULL) {
-            it_802A07B4(fp->fv.lk.boomerang_gobj);
+        if (fp->u.lk.boomerang_gobj != NULL) {
+            it_802A07B4(fp->u.lk.boomerang_gobj);
         }
         fp->cmd_vars[cmd_specials2_anim_bool] = false;
     }
@@ -340,8 +326,8 @@ static inline bool checkBoomerangSomething(HSD_GObj* gobj)
 void ftLk_SpecialS2_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (checkBoomerangSomething(gobj) && fp->fv.lk.boomerang_gobj != NULL) {
-        it_802A07B4(fp->fv.lk.boomerang_gobj);
+    if (checkBoomerangSomething(gobj) && fp->u.lk.boomerang_gobj != NULL) {
+        it_802A07B4(fp->u.lk.boomerang_gobj);
     }
 }
 
@@ -359,8 +345,8 @@ static bool checkAirBoomerangSomething(HSD_GObj* gobj)
 void ftLk_SpecialAirS2_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (checkAirBoomerangSomething(gobj) && fp->fv.lk.boomerang_gobj != NULL) {
-        it_802A07B4(fp->fv.lk.boomerang_gobj);
+    if (checkAirBoomerangSomething(gobj) && fp->u.lk.boomerang_gobj != NULL) {
+        it_802A07B4(fp->u.lk.boomerang_gobj);
     }
 }
 
@@ -403,9 +389,8 @@ void ftLk_SpecialS1_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirS1, coll_mf,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftLk_MS_SpecialAirS1,
+                                        coll_mf);
         fp->accessory4_cb = onAccessory4;
     }
 }
@@ -414,8 +399,8 @@ void ftLk_SpecialS2_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ft_80082708(gobj)) {
-        if (fp->fv.lk.boomerang_gobj != NULL) {
-            it_802A07B4(fp->fv.lk.boomerang_gobj);
+        if (fp->u.lk.boomerang_gobj != NULL) {
+            it_802A07B4(fp->u.lk.boomerang_gobj);
         }
         ftCo_Fall_Enter(gobj);
     }
@@ -426,9 +411,8 @@ void ftLk_SpecialS1Empty_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirS1Empty, coll_mf,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftLk_MS_SpecialAirS1Empty,
+                                        coll_mf);
     }
 }
 
@@ -436,9 +420,7 @@ void ftLk_SpecialAirS1_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1, coll_mf,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftLk_MS_SpecialS1, coll_mf);
         fp->accessory4_cb = onAccessory4;
     }
 }
@@ -447,8 +429,8 @@ void ftLk_SpecialAirS2_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj)) {
-        if (fp->fv.lk.boomerang_gobj != NULL) {
-            it_802A07B4(fp->fv.lk.boomerang_gobj);
+        if (fp->u.lk.boomerang_gobj != NULL) {
+            it_802A07B4(fp->u.lk.boomerang_gobj);
         }
         ftCo_Landing_Enter_Basic(gobj);
     }
@@ -458,8 +440,7 @@ void ftLk_SpecialAirS1Empty_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialS1Empty, coll_mf,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftLk_MS_SpecialS1Empty,
+                                        coll_mf);
     }
 }

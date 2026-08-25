@@ -1,7 +1,6 @@
 #include <platform.h>
 
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -9,13 +8,11 @@
 
 #include "lb/forward.h"
 
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 /* 222B98 */ static void grTPichu_80222B98(bool);
@@ -39,7 +36,7 @@
 /* 222E6C */ static DynamicsDesc* grTPichu_80222E6C(enum_t);
 /* 222E74 */ static bool grTPichu_80222E74(Vec3*, int, HSD_JObj*);
 
-static StageCallbacks grTPc_803E91B0[] = {
+static StageCallbacks grTPc_StageCallbacks[] = {
     {
         grTPichu_80222D24,
         grTPichu_80222D50,
@@ -64,9 +61,9 @@ static StageCallbacks grTPc_803E91B0[] = {
     { NULL, NULL, NULL, NULL, 0 },
 };
 
-StageData grTPc_803E920C = {
-    TPICHU,
-    grTPc_803E91B0,
+StageData grTPc_StageData = {
+    Gr_Kind_TPichu,
+    grTPc_StageCallbacks,
     "/GrTPc.dat",
     grTPichu_80222B9C,
     grTPichu_80222B98,
@@ -80,21 +77,11 @@ StageData grTPc_803E920C = {
     0,
 };
 
-extern StageInfo stage_info;
-
 static void grTPichu_80222B98(bool arg0) {}
 
 static void grTPichu_80222B9C(void)
 {
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-    grTPichu_80222C3C(0);
-    grTPichu_80222C3C(1);
-    grTPichu_80222C3C(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTPichu_80222C3C);
 }
 
 static void grTpichu_UnkStage0_OnLoad(void) {}
@@ -112,7 +99,7 @@ static bool grTPichu_80222C34(void)
 static HSD_GObj* grTPichu_80222C3C(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTPc_803E91B0[gobj_id];
+    StageCallbacks* callbacks = &grTPc_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
@@ -142,11 +129,7 @@ static void grTPichu_80222D5C(Ground_GObj* arg0) {}
 
 static void grTPichu_80222D60(Ground_GObj* gobj)
 {
-    u8 _[4];
-
-    Ground* gp = GET_GROUND(gobj);
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTPichu_80222DB0(Ground_GObj* arg0)
@@ -164,11 +147,7 @@ static void grTPichu_80222DEC(Ground_GObj* arg0) {}
 
 static void grTPichu_80222DF0(Ground_GObj* gobj)
 {
-    u8 _[4];
-
-    Ground* gp = GET_GROUND(gobj);
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTPichu_80222E40(Ground_GObj* arg0)

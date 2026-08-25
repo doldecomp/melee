@@ -1,12 +1,11 @@
 #include "ft/chara/ftCommon/ftCo_DownSpot.h"
 
-#include <placeholder.h>
-
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
 #include "ft/inlines.h"

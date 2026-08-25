@@ -4,23 +4,26 @@
 
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 
 #include "forward.h"
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/inlines.h"
 
 #include "lb/forward.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <baselib/random.h>
 
@@ -33,8 +36,7 @@ void ftLg_SpecialS_SetGFX(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 /// Luigi's Green Missile Setup (RNG + calculations)
@@ -152,7 +154,7 @@ void ftLg_SpecialAirSStart_Phys(HSD_GObj* gobj)
 
     if (fp->cmd_vars[0] != 0) {
         ftCommon_Fall(fp, da->x20_LUIGI_GREENMISSILE_FALLING_SPEED,
-                      ca->terminal_vel);
+                      ca->terminal_velocity);
     }
 
     ftCommon_ApplyFrictionAir(fp, da->x1C_LUIGI_GREENMISSILE_UNK2);
@@ -183,21 +185,16 @@ static u32 const transition_flags0 =
 void ftLg_SpecialSStart_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirSStart,
-                              transition_flags0, fp->cur_anim_frame, 1, 0,
-                              NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftLg_MS_SpecialAirSStart,
+                                    transition_flags0);
 }
 
 /// Luigi's Green Missile Start air -> ground Motion State handler
 void ftLg_SpecialAirSStart_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialSStart, transition_flags0,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftLg_MS_SpecialSStart,
+                                    transition_flags0);
 }
 
 /// Luigi's grounded Green Missile Charge Animation callback
@@ -297,10 +294,8 @@ static u32 const transition_flags1 = transition_flags0 | Ft_MF_KeepGfx;
 void ftLg_SpecialSHold_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirSHold, transition_flags1,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftLg_MS_SpecialAirSHold,
+                                    transition_flags1);
 }
 
 /// Luigi's Green Missile Charge air -> ground Motion State handler
@@ -308,9 +303,8 @@ void ftLg_SpecialAirSHold_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialSHold, transition_flags1,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftLg_MS_SpecialSHold,
+                                    transition_flags1);
 }
 
 /// Luigi's grounded Green Missile Charge Motion State handler
@@ -434,20 +428,16 @@ static u32 const transition_flags2 =
 void ftLg_SpecialSLaunch_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirS, transition_flags2,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftLg_MS_SpecialAirS,
+                                    transition_flags2);
 }
 
 /// Luigi's Green Missile Launch air -> ground Motion State handler
 void ftLg_SpecialAirSLaunch_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialS, transition_flags2,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftLg_MS_SpecialS,
+                                    transition_flags2);
 }
 
 static inline void ftLuigi_SpecialS_RemoveGFX(HSD_GObj* gobj)
@@ -467,15 +457,14 @@ static inline void ftLuigi_SpecialS_Setup(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     fp->accessory4_cb = NULL;
 }
 
 /// Luigi's grounded Green Missile Launch Motion State handler
 void ftLg_SpecialSLaunch_Enter(HSD_GObj* gobj)
 {
-    u8 _[12];
+    u8 _[4];
 
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -591,21 +580,16 @@ void ftLg_SpecialAirSMisfire_Coll(HSD_GObj* gobj)
 void ftLg_SpecialSMisfire_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialAirSMisfire,
-                              transition_flags2, fp->cur_anim_frame, 1, 0,
-                              NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftLg_MS_SpecialAirSMisfire,
+                                    transition_flags2);
 }
 
 /// Luigi's Green Missile Misfire air -> ground Motion State Handler
 void ftLg_SpecialAirSMisfire_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-
-    Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialSMisfire, transition_flags2,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftLg_MS_SpecialSMisfire,
+                                    transition_flags2);
 }
 
 /// Luigi's grounded Green Missile Misfire Motion State handler
@@ -782,7 +766,7 @@ void ftLg_SpecialAirSEnd_Phys(HSD_GObj* gobj)
     ftLuigiAttributes* sa = getFtSpecialAttrsD(fp);
 
     ftCommon_Fall(fp, sa->x40_LUIGI_GREENMISSILE_GRAVITY_MUL,
-                  fp->co_attrs.terminal_vel);
+                  fp->co_attrs.terminal_velocity);
     ftCommon_ApplyFrictionAir(fp, sa->x3C_LUIGI_GREENMISSILE_X_DECEL);
 }
 

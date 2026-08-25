@@ -1,20 +1,17 @@
 
 #include "grtgamewatch.h"
 
-#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/types.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "lb/types.h"
 
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-StageCallbacks grTGw_803E96F8[] = {
+StageCallbacks grTGw_StageCallbacks[] = {
     { grTGameWatch_8022429C, grTGameWatch_802242C8, grTGameWatch_802242D0,
       grTGameWatch_802242D4, 0 },
     { grTGameWatch_80224368, grTGameWatch_802243B8, grTGameWatch_802243C0,
@@ -24,9 +21,9 @@ StageCallbacks grTGw_803E96F8[] = {
     { NULL, NULL, NULL, NULL, 0 }
 };
 
-StageData grTGw_803E9754 = {
-    TGAMEWATCH,
-    grTGw_803E96F8,
+StageData grTGw_StageData = {
+    Gr_Kind_TGamewatch,
+    grTGw_StageCallbacks,
     "/GrTGw.dat",
     grTGameWatch_80224114,
     grTGameWatch_80224110,
@@ -45,16 +42,7 @@ void grTGameWatch_80224110(bool unused)
 
 void grTGameWatch_80224114(void)
 {
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-
-    grTGameWatch_802241B4(0);
-    grTGameWatch_802241B4(1);
-    grTGameWatch_802241B4(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTGameWatch_802241B4);
 }
 
 void grTgamewatch_UnkStage0_OnLoad(void)
@@ -75,7 +63,7 @@ bool grTGameWatch_802241AC(void)
 HSD_GObj* grTGameWatch_802241B4(int id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTGw_803E96F8[id];
+    StageCallbacks* callbacks = &grTGw_StageCallbacks[id];
 
     gobj = Ground_GetStageGObj(id);
 
@@ -111,12 +99,7 @@ void grTGameWatch_802242D4(Ground_GObj* gobj)
 
 void grTGameWatch_802242D8(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
-    PAD_STACK(8);
-
-    Ground_801C2ED0(joint, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTGameWatch_80224328(Ground_GObj* gobj)
@@ -137,12 +120,7 @@ void grTGameWatch_80224364(Ground_GObj* gobj)
 
 void grTGameWatch_80224368(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
-    PAD_STACK(8);
-
-    Ground_801C2ED0(joint, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTGameWatch_802243B8(Ground_GObj* gobj)

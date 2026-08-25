@@ -4,7 +4,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "ft/dobjlist.h"
+#include "ft/dobjlist.h" // IWYU pragma: keep
 #include "ftGameWatch/types.h"
 #include "ftMars/types.h"
 #include "ftNess/types.h"
@@ -15,8 +15,6 @@
 #include "lb/types.h"
 
 #include <baselib/forward.h>
-
-#include <common_structs.h>
 
 struct ftKb_FighterVars {
     /* fp+222C */ struct ftKb_Hat {
@@ -68,7 +66,7 @@ struct ftKb_FighterVars {
     /* fp+231C   */ float xF0;
     /* fp+2320:0 */ u8 xF4_b0 : 1;
 };
-STATIC_ASSERT(sizeof(struct ftKb_FighterVars) == FIGHTERVARS_SIZE);
+ASSERT_SIZE(struct ftKb_FighterVars, FIGHTERVARS_SIZE);
 
 struct ftKb_SpecialNMs_DatAttrs {
     /* da+35C */ u32 charge_iterations;
@@ -77,7 +75,7 @@ struct ftKb_SpecialNMs_DatAttrs {
     /* da+368 */ float air_horizontal_momentum_preservation;
     /* da+36C */ float air_horizontal_deceleration_rate;
 };
-STATIC_ASSERT(sizeof(struct ftKb_SpecialNMs_DatAttrs) == 0x14);
+ASSERT_SIZE(struct ftKb_SpecialNMs_DatAttrs, 0x14);
 
 /// @todo Every hat is its own struct.
 struct ftKb_DatAttrs {
@@ -219,22 +217,18 @@ struct ftKb_DatAttrs {
     /* +1BC */ float specialn_ns_freefall_toggle;
 
     // Pikachu
-    /* +1C0 */ float specialn_pk_ground_spawn_offset_x;
-    /* +1C4 */ float specialn_pk_ground_spawn_offset_y;
-    /* +1C8 */ float specialn_pk_air_spawn_offset_x;
-    /* +1CC */ float specialn_pk_air_spawn_offset_y;
-    /* +1D0 */ float specialn_pk_freefall_toggle;
-    /* +1D4 */ u32 specialn_pk_grounded_item_id;
-    /* +1D8 */ u32 specialn_pk_air_item_id;
+    /* +1C0 */ Vec2 specialn_pk_spawn_offset;
+    /* +1C8 */ Vec2 specialairn_pk_spawn_offset;
+    /* +1D0 */ float specialairn_pk_landing_lag;
+    /* +1D4 */ ItemKind specialn_pk_itkind;
+    /* +1D8 */ ItemKind specialairn_pk_itkind;
 
     // Pichu
-    /* +1DC */ float specialn_pc_ground_spawn_offset_x;
-    /* +1E0 */ float specialn_pc_ground_spawn_offset_y;
-    /* +1E4 */ float specialn_pc_air_spawn_offset_x;
-    /* +1E8 */ float specialn_pc_air_spawn_offset_y;
-    /* +1EC */ float specialn_pc_freefall_toggle;
-    /* +1F0 */ u32 specialn_pc_grounded_item_id;
-    /* +1F4 */ u32 specialn_pc_air_item_id;
+    /* +1DC */ Vec2 specialn_pc_spawn_offset;
+    /* +1E4 */ Vec2 specialairn_pc_spawn_offset;
+    /* +1EC */ float specialairn_pc_landing_lag;
+    /* +1F0 */ ItemKind specialn_pc_itkind;
+    /* +1F4 */ ItemKind specialairn_pc_itkind;
 
     // Captain Falcon
     /* +1F8 */ float specialn_ca_x_axis_range;
@@ -384,7 +378,7 @@ struct ftKb_DatAttrs {
     /* +3EC */ AbsorbDesc specialn_pe_absorbdesc;
     /* +400 */ ReflectDesc specialn_zd_reflectdesc;
 };
-STATIC_ASSERT(sizeof(struct ftKb_DatAttrs) == 0x424);
+ASSERT_SIZE(struct ftKb_DatAttrs, 0x424);
 
 union ftKb_MotionVars {
     struct ftGameWatch_SpecialNVars specialn_gw;
@@ -426,14 +420,8 @@ union ftKb_MotionVars {
         /* fp+2350 */ int x10;
         /* fp+2354 */ int x14;
         /* fp+2358 */ Vec3 x18;
-        /* fp+2364 */ Vec3 x24;
-        /* fp+2370 */ Vec3 x30;
-        /* fp+237C */ Vec3 x3C;
-        /* fp+2388 */ Vec3 x48;
-        /* fp+2394 */ Vec3 x54;
-        /* fp+23A0 */ Vec3 x60;
-        /* fp+23AC */ Vec3 x6C;
-        /* fp+23B8 */ Vec3 x78;
+        /* fp+2364 */ Vec3 x24[4];
+        /* fp+2394 */ Vec3 x54[4];
         /* fp+23C4 */ float x84;
         /*fp+23C8 */ float x88[9];
     } speciallw;

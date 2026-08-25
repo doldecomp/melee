@@ -1,10 +1,8 @@
 #ifndef MELEE_MP_FORWARD_H
 #define MELEE_MP_FORWARD_H
 
-#include <placeholder.h>
 #include <platform.h>
 
-#include "gr/forward.h"
 #include "lb/forward.h"
 
 typedef struct CollJoint CollJoint;
@@ -49,9 +47,10 @@ typedef enum mpLib_GroundEnum {
     mpLib_GroundEnum_Unk2,
 } mpLib_GroundEnum;
 
-typedef void (*mpLib_Callback)(
-    Ground*, s32, CollData*, s32, mpLib_GroundEnum,
-    f32); /// @TODO Fix Ground* to be a void* as it can be a GObj or a Ground*
+typedef void (*mpLib_JointCollisionCallback)(void* user_data, int joint_id,
+                                             CollData* coll, int coll_x50,
+                                             mpLib_GroundEnum ground_kind,
+                                             float delta_y);
 typedef bool (*mpColl_Callback)(CollData*, u32);
 
 typedef enum CollLineKind {
@@ -84,5 +83,32 @@ enum CollJointFlags {
     CollJoint_Enabled = 1 << 16,
     CollJoint_Hidden = 1 << 18,
 };
+
+/// COLLISION FLAGS
+/// @todo These (and #CollData::env_flags) should be a bitfield struct
+#define Collide_LeftWallPush 0x1
+#define Collide_LeftWallHug 0x20
+#define Collide_LeftWallMask 0x3F
+#define Collide_RightWallPush 0x40
+#define Collide_RightWallHug 0x800
+#define Collide_RightWallMask 0xFC0
+#define Collide_WallMask (Collide_LeftWallMask | Collide_RightWallMask)
+
+#define Collide_CeilingPush 0x2000
+#define Collide_CeilingHug 0x4000
+#define Collide_CeilingMask (Collide_CeilingPush | Collide_CeilingHug)
+
+#define Collide_FloorPush 0x8000
+#define Collide_FloorHug 0x10000
+#define Collide_FloorMask (Collide_FloorPush | Collide_FloorHug)
+
+#define Collide_LeftEdge 0x100000
+#define Collide_RightEdge 0x200000
+#define Collide_Edge 0x800000
+#define Collide_LeftLedgeGrab 0x1000000
+#define Collide_RightLedgeGrab 0x2000000
+#define Collide_LedgeGrabMask (Collide_LeftLedgeGrab | Collide_RightLedgeGrab)
+#define Collide_LeftLedgeSlip 0x10000000
+#define Collide_RightLedgeSlip 0x20000000
 
 #endif

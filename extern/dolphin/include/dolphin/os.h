@@ -18,11 +18,13 @@ typedef u32 OSInterruptMask;
 typedef void (*__OSInterruptHandler)(__OSInterrupt interrupt,
                                      OSContext* context);
 
+// IWYU pragma: begin_exports
 #include <dolphin/os/OSAlarm.h>
 #include <dolphin/os/OSAlloc.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSDC.h>
 #include <dolphin/os/OSError.h>
+#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSException.h>
 #include <dolphin/os/OSFont.h>
 #include <dolphin/os/OSIC.h>
@@ -40,6 +42,7 @@ typedef void (*__OSInterruptHandler)(__OSInterrupt interrupt,
 #include <dolphin/os/OSStopwatch.h>
 #include <dolphin/os/OSThread.h>
 #include <dolphin/os/OSTime.h>
+// IWYU pragma: end_exports
 
 // private macro, maybe shouldn't be defined here?
 #define OFFSET(addr, align) (((u32) (addr) & ((align) - 1)))

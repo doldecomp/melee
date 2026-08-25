@@ -1,46 +1,46 @@
 #include "gmresultplayer.h"
 
+#include "gm_1601.h"
+#include "gm_1A45.h"
 #include "gm_unsplit.h"
-#include "math.h"
+#include "gmresult.h"
 #include "placeholder.h"
+#include "types.h"
 
 #include "cm/camera.h"
+#include "ef/efasync.h"
+#include "ef/eflib.h"
 
-#include "gm/forward.h"
+#include "forward.h"
 
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/displayfunc.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/mobj.h>
-#include <sysdolphin/baselib/mtx.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/tobj.h>
-#include <melee/ef/efasync.h>
-#include <melee/ef/eflib.h>
-#include <melee/ft/ftdemo.h>
-#include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_1A45.h>
-#include <melee/gm/gmresult.h>
-#include <melee/gm/types.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/stage.h>
-#include <melee/if/ifcoget.h>
-#include <melee/it/item.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbbgflash.h>
-#include <melee/lb/lbspdisplay.h>
-#include <melee/mn/mnmain.h>
-#include <melee/mp/mpcoll.h>
-#include <melee/pl/player.h>
-#include <melee/sc/types.h>
+#include "ft/ftdemo.h"
+#include "gr/ground.h"
+#include "gr/stage.h"
+#include "if/ifcoget.h"
+#include "it/item.h"
+#include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
+#include "lb/lbarchive.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lbbgflash.h"
+#include "lb/lbspdisplay.h"
+#include "mn/mnmain.h"
+#include "mp/mpcoll.h"
+#include "pl/player.h"
+#include "sc/types.h"
+
+#include <baselib/aobj.h>
+#include <baselib/cobj.h>
+#include <baselib/controller.h>
+#include <baselib/displayfunc.h>
+#include <baselib/dobj.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
+#include <baselib/jobj.h>
+#include <baselib/mobj.h>
+#include <baselib/random.h>
+#include <baselib/tobj.h>
 
 extern ResultsData lbl_8046DBE8;
 
@@ -88,9 +88,8 @@ typedef struct {
 typedef struct {
     /* 0x000 */ u8 pad[0x10];
     /* 0x010 */ CameraKindParams kind[(0x6D0 - 0x10) / 0x30];
-    /* 0x6D0 */ f32 slot_x_off[4];
-    /* 0x6E0 */ f32 slot_y_off[4];
-    /* 0x6F0 */ u8 pad_6F0[0xF08 - 0x6F0];
+    /* 0x6D0 */ f32 slot_off[(0xF00 - 0x6D0) / 0x30][3][4];
+    /* 0xEE0 */ u8 pad_EE0[0xF08 - 0xEE0];
     /* 0xF08 */ HSD_CObjDesc cobj_desc;
 } CameraKindData;
 
@@ -274,13 +273,16 @@ static const float scroll_speed = 0.2F;
 static inline bool scrollDown(int slot, float amount)
 {
     int scroll_max;
+    // Preserve the original register move for the nested call.
+    int arg = slot;
     ResultsData* data = &lbl_8046DBE8;
     amount *= scroll_speed;
 
-    scroll_max = fn_80174A60(fn_801748EC(&lbl_803D6878,
-                                         data->player_data[slot].page, slot),
-                             slot) -
-                 10;
+    scroll_max =
+        fn_80174A60(fn_801748EC(&lbl_803D6878, data->player_data[slot].page,
+                                slot | arg),
+                    slot) -
+        10;
     if (data->player_data[slot].scroll_offset < scroll_max) {
         data->player_data[slot].scroll_offset += amount;
         if (data->player_data[slot].scroll_offset > scroll_max) {
@@ -323,17 +325,19 @@ bool fn_80177B7C(int slot)
 
     {
         float stick_y = HSD_PadCopyStatus[(u8) slot].nml_stickY;
+        float abs_stick_y = stick_y;
         u32 trigger;
         bool result = false;
-        PAD_STACK(8);
+        PAD_STACK(16);
 
-        if (fabsf_bitwise(stick_y) < scroll_deadzone) {
+        *(u32*) &abs_stick_y &= ~0x80000000;
+        if (abs_stick_y < scroll_deadzone) {
             stick_y = 0;
         }
         trigger = HSD_PadCopyStatus[(u8) slot].trigger;
-        if (trigger & 0x40200) {
+        if (trigger & (PAD_BUTTON_B | PAD_STICK_LEFT)) {
             result = pagePrev(slot);
-        } else if (trigger & 0x80100) {
+        } else if (trigger & (PAD_BUTTON_A | PAD_STICK_RIGHT)) {
             result = pageNext(slot);
         } else if (stick_y < 0) {
             result = scrollDown(slot, -stick_y);
@@ -359,10 +363,10 @@ bool fn_80177DD0(int slot)
         return fn_80177B7C(slot);
     }
     // The cast here is permuter slop.
-    scroll_max = fn_80174A60(fn_801748EC(unk, data->player_data[slot].page,
-                                         (unsigned long long) slot),
-                             slot) -
-                 10;
+    scroll_max =
+        fn_80174A60(fn_801748EC(unk, data->player_data[slot].page, (u64) slot),
+                    slot) -
+        10;
     if (scroll_max < 0) {
         scroll_max = 0;
     }
@@ -443,13 +447,13 @@ void fn_80178050(HSD_GObj* arg0)
         {
             s32 j;
             for (j = 0; j < 4; j++) {
-                if ((u8) match_end->player_standings[j].slot_type == 0) {
+                if (match_end->player_standings[j].slot_type == 0) {
                     lbl_804D3FC8 = 0;
                     break;
                 }
             }
         }
-        if ((s32) lbl_804D3FC8 != 0) {
+        if (lbl_804D3FC8 != 0) {
             data->x3 = 0x14;
         } else {
             data->x3 = 0x0A;
@@ -496,8 +500,9 @@ void fn_80178050(HSD_GObj* arg0)
                             if (fn_80177B7C(k2) != 0) {
                                 fn_80174B4C(data, k2);
                             }
-                            if (((s8) pad->err != 0) ||
-                                (HSD_PadCopyStatus[(u8) k2].trigger & 0x1000))
+                            if ((pad->err != 0) ||
+                                (HSD_PadCopyStatus[(u8) k2].trigger &
+                                 PAD_BUTTON_START))
                             {
                                 data->player_data[k2].x0_0 = 1;
                                 fn_80174920(&data->player_data[k2]);
@@ -531,7 +536,8 @@ void fn_80178050(HSD_GObj* arg0)
                                 data->player_data[k2].x0_4 = 0;
                                 fn_80174338();
                             }
-                        } else if (HSD_PadCopyStatus[(u8) k2].trigger & 0x1000)
+                        } else if (HSD_PadCopyStatus[(u8) k2].trigger &
+                                   PAD_BUTTON_START)
                         {
                             fn_80174920(&data->player_data[k2]);
                             data->player_data[k2].x0_0 = 0;
@@ -560,19 +566,20 @@ void fn_80178050(HSD_GObj* arg0)
                         if (fn_80177DD0(k2) != 0) {
                             fn_80174B4C(data, k2);
                         }
-                        if ((s32) lbl_804D3FC8 != 0) {
+                        if (lbl_804D3FC8 != 0) {
                             data->player_data[k2].x0_0 = 0;
-                            if (((s8) pad->err == 0) &&
-                                (HSD_PadCopyStatus[(u8) k2].trigger & 0x1000))
+                            if ((pad->err == 0) &&
+                                (HSD_PadCopyStatus[(u8) k2].trigger &
+                                 PAD_BUTTON_START))
                             {
                                 fn_80174338();
                                 var_r24 = 1;
                             }
                         }
                     } else if (slot == 3) {
-                        if (((s32) lbl_804D3FC8 != 0) &&
-                            ((s8) pad->err == 0) &&
-                            (HSD_PadCopyStatus[(u8) k2].trigger & 0x1000))
+                        if ((lbl_804D3FC8 != 0) && (pad->err == 0) &&
+                            (HSD_PadCopyStatus[(u8) k2].trigger &
+                             PAD_BUTTON_START))
                         {
                             fn_80174338();
                             var_r24 = 1;
@@ -586,7 +593,7 @@ void fn_80178050(HSD_GObj* arg0)
             {
                 s32 k3 = 0;
                 do {
-                    if ((u8) match_end->player_standings[k3].slot_type != 3) {
+                    if (match_end->player_standings[k3].slot_type != 3) {
                         if (!data->player_data[k3].x0_1) {
                             HSD_JObjSetFlagsAll(data->player_data[k3].jobjs[8],
                                                 JOBJ_HIDDEN);
@@ -783,11 +790,11 @@ static inline void fn_80178BB4_init_players(ResultsData* data,
                 is_big_loser = match_end->player_standings[(*i)].is_big_loser;
 
                 if (gm_801743A4(match_end->result) == 0 &&
-                    (u8) match_end->is_teams == 0 && (s32) is_big_loser == 0)
+                    match_end->is_teams == 0 && (s32) is_big_loser == 0)
                 {
                     ResultsData* d2 = &lbl_8046DBE8;
                     int tex_id =
-                        (int) gm_80168B34((CharacterKind) ckind, (int) cid, 0);
+                        (int) gm_80168B34((CharacterKind) ckind, cid, 0);
                     HSD_TObj* tobj = d2->x30->u.dobj->next->mobj->tobj;
                     HSD_AObj* aobj = tobj->aobj;
                     HSD_TObjReqAnim(tobj, (f32) tex_id);
@@ -804,9 +811,8 @@ static inline void fn_80178BB4_init_players(ResultsData* data,
                     mn_8022F3D8(d2->x30, 1, TOBJ_MASK);
                 }
 
-                fn_80174FD0(
-                    data->player_data[(*i)].jobjs[5],
-                    (s32) gm_80168B34((CharacterKind) ckind, (int) cid, 0));
+                fn_80174FD0(data->player_data[(*i)].jobjs[5],
+                            (s32) gm_80168B34((CharacterKind) ckind, cid, 0));
 
                 {
                     u32 rank_val;
@@ -822,7 +828,7 @@ static inline void fn_80178BB4_init_players(ResultsData* data,
                     HSD_AObjSetRate(rank_aobj, 0.0f);
                 }
 
-                if ((u8) match_end->x5 != 3) {
+                if (match_end->x5 != 3) {
                     f32 taunt_frame = gm_80168B34(
                         (CharacterKind) (s8) (u8) match_end
                             ->player_standings[(*i)]
@@ -890,7 +896,7 @@ void fn_80178BB4(HSD_GObj* gobj)
         HSD_AObjSetCurrentFrame(aobj, (f32) start);
         HSD_AObjSetEndFrame(aobj, (30.0f + (f32) start) - 1.0f);
         mn_8022F3D8(data->x30, 1, TOBJ_MASK);
-    } else if ((u8) match_end->is_teams == 1) {
+    } else if (match_end->is_teams == 1) {
         int tex_id = data->x5 + 0xB5;
         HSD_TObj* tobj = data->x30->u.dobj->next->mobj->tobj;
         HSD_AObj* aobj = tobj->aobj;
@@ -929,7 +935,7 @@ bool fn_801791E4(void)
         for (i = 0; i < 4; i++) {
             if (end->player_standings[i].slot_type == Gm_PKind_Human &&
                 HSD_PadMasterStatus[(u8) i].err == 0 &&
-                (HSD_PadCopyStatus[(u8) i].trigger & 0x1000))
+                (HSD_PadCopyStatus[(u8) i].trigger & PAD_BUTTON_START))
             {
                 return true;
             }
@@ -1007,8 +1013,8 @@ static inline void fn_80179350_update(ResultsData* data, MatchEnd* match_end,
             fn_80178050(arg0);
             break;
         case 4:
-            if ((u8) data->x3 != 0) {
-                data->x3 = (char) ((u8) data->x3 - 1);
+            if (data->x3 != 0) {
+                data->x3 = (char) (data->x3 - 1);
             } else {
                 gm_801A4B60();
             }
@@ -1090,16 +1096,17 @@ int fn_801796F0(int arg0)
     return count;
 }
 
-int fn_80179854(void)
+void fn_80179854(void)
 {
     ResultsDisplayData* disp = &lbl_8046E1B0;
     MatchEnd* match_end = &disp->state.match_end;
     GXColor color1 = { 0, 0, 0, 0 };
     GXColor color2 = { 0, 0, 0, 0x3C };
+    HSD_GObj** gobjs = disp->gobjs;
     int i;
     int lookup;
 
-    PAD_STACK(8);
+    PAD_STACK(4);
 
     lbBgFlash_800206D4(&color1, &color2, 0x1E);
 
@@ -1113,13 +1120,29 @@ int fn_80179854(void)
         }
 
         if (match_end->player_standings[i].slot_type != 3 && lookup != 0) {
-            HSD_JObjSetTranslateX(GET_JOBJ(disp->gobjs[i]), -300.0f);
+            HSD_JObjSetTranslateX(GET_JOBJ(gobjs[i]), -300.0f);
             disp->state.x0_6 = 1;
         }
     }
 }
 
 extern s32 ftLib_800876B4(HSD_GObj*);
+
+static inline HSD_ImageDesc* get_player_img2(int slot,
+                                             ResultsDisplayData* disp)
+{
+    return &disp->player_img2[slot];
+}
+
+static inline int get_big_loser(int slot, MatchEnd* match_end)
+{
+    return match_end->player_standings[slot].is_big_loser;
+}
+
+static inline HSD_JObj** get_result_jobjs(ResultsDisplayData* disp)
+{
+    return disp->jobjs;
+}
 
 void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
 {
@@ -1128,26 +1151,25 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
     HSD_JObj* child_jobj;
     HSD_CObj* cobj;
     int lookup;
-    PAD_STACK(24);
+    PAD_STACK(16);
 
     fn_801795D4();
     fn_801796F0(arg2);
 
     cobj = (HSD_CObj*) arg0->hsd_obj;
 
-    lookup =
-        match_end->is_teams == 0
-            ? match_end->player_standings[arg2].is_big_loser
-            : match_end->team_standings[match_end->player_standings[arg2].team]
-                  .is_big_loser;
+    if (match_end->is_teams == 0) {
+        lookup = get_big_loser(arg2, match_end);
+    } else {
+        lookup =
+            match_end->team_standings[match_end->player_standings[arg2].team]
+                .is_big_loser;
+    }
+    cobj = (HSD_CObj*) arg0->hsd_obj;
 
     if (lookup != 0) {
         HSD_JObj* root = (HSD_JObj*) disp->gobjs[arg2]->hsd_obj;
-        if (root == NULL) {
-            child_jobj = NULL;
-        } else {
-            child_jobj = root->child;
-        }
+        child_jobj = root == NULL ? NULL : root->child;
     }
 
     if (HSD_CObjSetCurrent(cobj)) {
@@ -1163,7 +1185,8 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
             Camera_800313E0(arg0, 0);
 
             {
-                HSD_ImageDesc* desc = &disp->player_img2[arg2];
+                HSD_ImageDesc* image_desc = disp->player_img2;
+                HSD_ImageDesc* desc = &image_desc[arg2];
 
                 HSD_ImageDescCopyFromEFB(
                     desc,
@@ -1192,8 +1215,9 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
                 HSD_CObjEndCurrent();
 
                 if (!disp->state.x0_4) {
+                    HSD_ImageDesc* image_desc1 = disp->player_img1;
                     child_jobj->u.dobj->mobj->tobj->imagedesc =
-                        &disp->player_img1[arg2];
+                        &image_desc1[arg2];
                 }
 
                 if (disp->state.x0_4) {
@@ -1216,7 +1240,7 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
                     Camera_800313E0(arg0, 0);
 
                     {
-                        HSD_ImageDesc* desc = &disp->player_img2[arg2];
+                        HSD_ImageDesc* desc = get_player_img2(arg2, disp);
 
                         HSD_ImageDescCopyFromEFB(
                             desc,
@@ -1239,7 +1263,7 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
 
                         disp->state.player_flags[arg2] = 1;
                         {
-                            HSD_JObj* jobj2 = disp->jobjs[arg2];
+                            HSD_JObj* jobj2 = get_result_jobjs(disp)[arg2];
                             jobj2->u.dobj->next->mobj->tobj->imagedesc = desc;
                         }
                     }
@@ -1381,11 +1405,11 @@ void fn_8017A078(s32 arg0)
 
     if (mode == 0) {
         s32 kind = disp->state.char_kind[arg0];
-        if (kind == 5 && (u8) disp->state.variant[arg0] == 1) {
+        if (kind == CKIND_KOOPA && disp->state.variant[arg0] == 1) {
             eye.z += 6.0f;
-        } else if (kind == 9 && (u8) disp->state.variant[arg0] == 1) {
+        } else if (kind == CKIND_MARS && disp->state.variant[arg0] == 1) {
             eye.z += 7.5f;
-        } else if (kind == 0 && (u8) disp->state.variant[arg0] == 2) {
+        } else if (kind == CKIND_CAPTAIN && disp->state.variant[arg0] == 2) {
             eye.z += 6.0f;
         }
     }
@@ -1397,7 +1421,7 @@ void fn_8017A078(s32 arg0)
 
 HSD_GObj* fn_8017A318(s32 arg0)
 {
-    ResultsPlayerConfig* config = &lbl_803B7B68;
+    u32* config = (u32*) &lbl_803B7B68;
     CameraKindData* data = &lbl_803D6A08;
     ResultsDisplayData* disp = &lbl_8046E1B0;
     MatchEnd* match_end = &disp->state.match_end;
@@ -1421,9 +1445,9 @@ HSD_GObj* fn_8017A318(s32 arg0)
     scissor[0] = lbl_804DA3F0;
     scissor[1] = lbl_804DA3F4;
 
-    eye = config->x4C;
-    interest = config->x58;
-    callbacks = config->x64;
+    eye = ((ResultsPlayerConfig*) config)->x4C;
+    interest = ((ResultsPlayerConfig*) config)->x58;
+    callbacks = ((ResultsPlayerConfig*) config)->x64;
     if (match_end->is_teams == 0) {
         slot = match_end->player_standings[arg0].is_big_loser;
     } else {
@@ -1447,13 +1471,10 @@ HSD_GObj* fn_8017A318(s32 arg0)
 
     kind_data = disp->state.char_kind[arg0];
     (void) kind_data;
-    {
-        f32* y_off = data->kind[kind_data].y_off;
-        eye.y += y_off[vi];
+    eye.y += data->kind[kind_data].y_off[vi];
 
-        vi = ((s32) variant <= 2) ? variant : 3;
-        interest.y += y_off[vi];
-    }
+    vi = ((s32) variant <= 2) ? variant : 3;
+    interest.y += data->kind[kind_data].y_off[vi];
 
     vi = ((s32) variant <= 2) ? variant : 3;
     eye.x += data->kind[kind_data].x_off[vi];
@@ -1467,12 +1488,11 @@ HSD_GObj* fn_8017A318(s32 arg0)
             f32 x_off, y_off;
 
             interest.x = interest_x;
-            x_off = data->slot_x_off[slot];
+            x_off = data->slot_off[kind_data][0][slot];
             eye.x += x_off;
             interest.x += x_off;
 
-            y_off = data->slot_y_off[slot];
-            eye.y += y_off;
+            eye.y = eye.y + (y_off = data->slot_off[kind_data][1][slot]);
             interest.y += y_off;
         }
     }
@@ -1482,7 +1502,7 @@ HSD_GObj* fn_8017A318(s32 arg0)
     }
 
     vi = ((s32) variant <= 2) ? variant : 3;
-    if ((1.0f - data->kind[kind_data].z_scale[vi]) < 0.0) {
+    if ((1.0f - data->kind[kind_data].z_scale[vi]) < 0.0f) {
         vi = ((s32) variant <= 2) ? variant : 3;
         eye.z += 100.0f * (1.0f - data->kind[kind_data].z_scale[vi]);
     } else {
@@ -1517,15 +1537,14 @@ Fighter_GObj* fn_8017A67C(CharacterKind kind, int arg1, int arg2)
     }
 
     if (gm_80160438(kind) != NULL) {
-        f32 cz, cy, cx;
+        Vec3 pos;
+        Vec3 pos2;
+        f32 sp[4];
         PAD_STACK(0xC);
-        *(s32*) &cx = *(s32*) &config->x74;
-        *(s32*) &cy = *(s32*) &config->x78;
-        *(s32*) &cz = *(s32*) &config->x7C;
+        pos = *(Vec3*) &config->x74;
 
         if ((u32) (kind - 0x12) <= 1U) {
-            if ((int) (s8) match_end->player_standings[arg2].character_id == 7)
-            {
+            if ((int) match_end->player_standings[arg2].character_id == 7) {
                 kind = CKIND_SEAK;
             } else {
                 kind = CKIND_ZELDA;
@@ -1570,22 +1589,15 @@ Fighter_GObj* fn_8017A67C(CharacterKind kind, int arg1, int arg2)
             }
 
             if (slot_type == 0) {
-                f32 px, py, pz;
-                *(s32*) &px = *(s32*) &config->x80;
-                *(s32*) &py = *(s32*) &config->x84;
-                *(s32*) &pz = *(s32*) &config->x88;
-                py = 100.0f * (f32) (arg2 + 1);
-                Player_80032A04(arg2, (Vec3*) &px);
+                pos2 = *(Vec3*) &config->x80;
+                pos2.y = 100.0f * (f32) (arg2 + 1);
+                Player_80032A04(arg2, &pos2);
                 Player_SetScale(arg2, 1.8f * lbl_803D7058[kind]);
                 Player_80036F34(arg2, variant);
             } else {
-                f32 sp[4];
                 int var_idx;
                 f32 scale;
-                *(s32*) &sp[0] = *(s32*) &config->x8C;
-                *(s32*) &sp[1] = *(s32*) &config->x90;
-                *(s32*) &sp[2] = *(s32*) &config->x94;
-                *(s32*) &sp[3] = *(s32*) &config->x98;
+                *(Vec4*) sp = *(Vec4*) &config->x8C;
                 if (variant <= 2) {
                     var_idx = variant;
                 } else {
@@ -1596,8 +1608,8 @@ Fighter_GObj* fn_8017A67C(CharacterKind kind, int arg1, int arg2)
                 Player_SetScale(
                     arg2,
                     scale * (sp[slot_type] * (20.0f / Player_800360D8(arg2))));
-                cy = 100.0f * (f32) (arg2 + 1);
-                Player_80032A04(arg2, (Vec3*) &cx);
+                pos.y = 100.0f * (f32) (arg2 + 1);
+                Player_80032A04(arg2, &pos);
             }
 
             disp->state.variant[arg2] = (u8) variant;
@@ -1609,7 +1621,8 @@ Fighter_GObj* fn_8017A67C(CharacterKind kind, int arg1, int arg2)
     return (Fighter_GObj*) gobj;
 }
 
-static inline void inline1(HSD_ImageDesc* imgs, int slot, u16* w, u16* h)
+static inline void inline1(HSD_ImageDesc* imgs, int slot, const u16* w,
+                           const u16* h)
 {
     imgs[slot].image_ptr = NULL;
     lb_800121FC(&imgs[slot], *w, *h, 5, 0);
@@ -1650,7 +1663,19 @@ static s32 lbl_804D3FF4 = 0x00060000;
 static s32 lbl_804D3FF8 = 0x000E000E;
 static s32 lbl_804D3FFC = 0x00060000;
 
-void fn_8017AA78(u8* arg0)
+static inline struct MatchTeamData*
+fn_8017AA78_get_team_standings(ResultsDisplayData* disp)
+{
+    return disp->state.match_end.team_standings;
+}
+
+static inline PackedS16x4* fn_8017AA78_get_score_entry(int i,
+                                                       lbl_8046E3AC_t* state)
+{
+    return &state->score_tbl[i];
+}
+
+void fn_8017AA78(const u8* arg0)
 {
     ResultsDisplayData* disp = &lbl_8046E1B0;
     u32* p5;
@@ -1665,7 +1690,7 @@ void fn_8017AA78(u8* arg0)
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(0, NULL);
+    Stage_802251E8(St_Kind_Dummy, NULL);
     Stage_8022524C();
     Item_80266FA8();
     Item_80266FCC();
@@ -1695,6 +1720,7 @@ void fn_8017AA78(u8* arg0)
         a = lbl_804D3FD0;
         (void) a;
         b = lbl_804D3FD4;
+        (void) b;
         state->dim_w1[0] = a;
         state->dim_w1[1] = b;
         a = lbl_804D3FD8;
@@ -1721,16 +1747,17 @@ void fn_8017AA78(u8* arg0)
 
     {
         int i;
+        struct MatchTeamData* team_standings;
         for (i = 0; i < 4; i++) {
             state->player_flags[i] = 0;
             state->costume_override[i] = arg0[i];
-            if (disp->state.match_end.result == 7) {
+            if (disp->state.match_end.result == OUTCOME_NO_CONTEST) {
                 player_standings[i].is_big_loser = 1;
-                disp->state.match_end.team_standings[player_standings[i].team]
-                    .is_big_loser = 1;
+                team_standings = fn_8017AA78_get_team_standings(disp);
+                team_standings[player_standings[i].team].is_big_loser = 1;
             }
             state->x6[i] = 0;
-            state->score_tbl[i].w[0] = p5[0 + i * 2];
+            fn_8017AA78_get_score_entry(i, state)->w[0] = p5[0 + i * 2];
             state->score_tbl[i].w[1] = p5[1 + i * 2];
             state->x22F4[i][0] = p7[i * 2];
             state->x22F4[i][1] = p7[1 + i * 2];

@@ -1,16 +1,20 @@
 
-
 #include "ft/chara/ftPopo/ftPp_SpecialHi.h"
 
 #include "ft/chara/ftCommon/ftCo_FallSpecial.h"
 #include "ft/chara/ftCommon/ftCo_Landing.h"
 #include "ft/chara/ftPopo/ftPp_SpecialS.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ftCommon/inlines.h"
 #include "ftNana/ftNn_Init.h"
 #include "ftPopo/ftPp_Init.h"
 #include "it/items/itclimbersstring.h"
@@ -20,8 +24,8 @@
 #include "pl/player.h"
 
 #include <math.h>
-#include <trigf.h>
 
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 0.0f;
@@ -33,6 +37,7 @@ static void sdata2_order(void)
     (void) -1.0f;
     (void) 1.5707963267948966;
 }
+#endif
 
 static inline float my_sqrtf(float x, volatile float* y)
 {
@@ -87,7 +92,7 @@ bool ftPp_SpecialS_80120FE0(Fighter_GObj* gobj)
 
     if (cmd > 8 && cmd <= 0x53) {
         Item_GObj* item_gobj;
-        if ((item_gobj = fp->fv.pp.x2238) != NULL) {
+        if ((item_gobj = fp->u.pp.x2238) != NULL) {
             Item_GObj* gobj = item_gobj;
             Item* ip = item_gobj->user_data;
             itClimbersStringAttributes* sa =
@@ -103,14 +108,14 @@ bool ftPp_SpecialS_80120FE0(Fighter_GObj* gobj)
                 it_802C3864(gobj);
             }
             if (fp->mv.pp.speciallw.x0 == 0x53) {
-                it_802C2750(fp->fv.pp.x2238);
+                it_802C2750(fp->u.pp.x2238);
             }
         } else {
             goto end;
         }
     } else if (fp->mv.pp.speciallw.x0 == 8) {
         ftPp_SpecialS_801210C8(gobj);
-        if (fp->fv.pp.x2238 == NULL) {
+        if (fp->u.pp.x2238 == NULL) {
             ft_8008A2BC(gobj);
             return true;
         }
@@ -128,9 +133,9 @@ void ftPp_SpecialS_801210C8(Fighter_GObj* arg0)
     float dir;
     lb_8000B1CC(fp->parts[FtPart_L4thNb].joint, NULL, &sp10);
     dir = fp->facing_dir;
-    fp->fv.pp.x2238 = it_802C27D4(arg0, &sp10, fp->motion_id, dir);
-    fp->x1984_heldItemSpec = fp->fv.pp.x2238;
-    if (fp->fv.pp.x2238 != NULL) {
+    fp->u.pp.x2238 = it_802C27D4(arg0, &sp10, fp->motion_id, dir);
+    fp->x1984_heldItemSpec = fp->u.pp.x2238;
+    if (fp->u.pp.x2238 != NULL) {
         fp->death3_cb = ftPp_Init_8011F060;
         fp->take_dmg_cb = ftPp_Init_8011F060;
     }
@@ -139,7 +144,7 @@ void ftPp_SpecialS_801210C8(Fighter_GObj* arg0)
 void ftPp_SpecialS_8012114C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->fv.pp.x2238 = NULL;
+    fp->u.pp.x2238 = NULL;
     fp->death3_cb = NULL;
     fp->take_dmg_cb = NULL;
 }
@@ -147,8 +152,8 @@ void ftPp_SpecialS_8012114C(Fighter_GObj* gobj)
 void ftPp_SpecialS_80121164(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.pp.x2238 != NULL) {
-        it_802C2750(fp->fv.pp.x2238);
+    if (fp->u.pp.x2238 != NULL) {
+        it_802C2750(fp->u.pp.x2238);
         ftPp_SpecialS_8012114C(gobj);
     }
 }
@@ -168,10 +173,10 @@ void ftPp_SpecialHi_Enter(Fighter_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp = GET_FIGHTER(gobj);
     fp->mv.pp.unk_80123954.x0 = 1;
-    fp->fv.pp.x223C = 0;
-    fp->fv.pp.x2240.z = 0.0f;
-    fp->fv.pp.x2240.y = 0.0f;
-    fp->fv.pp.x2240.x = 0.0f;
+    fp->u.pp.x223C = 0;
+    fp->u.pp.x2240.z = 0.0f;
+    fp->u.pp.x2240.y = 0.0f;
+    fp->u.pp.x2240.x = 0.0f;
 }
 void ftPp_SpecialAirHi_Enter(Fighter_GObj* gobj)
 {
@@ -192,10 +197,10 @@ void ftPp_SpecialAirHi_Enter(Fighter_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp = GET_FIGHTER(gobj);
     fp->mv.pp.unk_80123954.x0 = 1;
-    fp->fv.pp.x223C = 0;
-    fp->fv.pp.x2240.z = 0.0f;
-    fp->fv.pp.x2240.y = 0.0f;
-    fp->fv.pp.x2240.x = 0.0f;
+    fp->u.pp.x223C = 0;
+    fp->u.pp.x2240.z = 0.0f;
+    fp->u.pp.x2240.y = 0.0f;
+    fp->u.pp.x2240.x = 0.0f;
 }
 
 static inline bool checkNanaInRange(Fighter_GObj* gobj)
@@ -312,7 +317,7 @@ void ftPp_SpecialHiStart_0_Phys(Fighter_GObj* gobj)
         }
     }
 
-    fp->fv.pp.x2240 = sp;
+    fp->u.pp.x2240 = sp;
 }
 
 void ftPp_SpecialAirHiStart_0_Phys(Fighter_GObj* gobj)
@@ -341,7 +346,7 @@ void ftPp_SpecialAirHiStart_0_Phys(Fighter_GObj* gobj)
         }
     }
 
-    fp->fv.pp.x2240 = sp;
+    fp->u.pp.x2240 = sp;
 }
 
 void ftPp_SpecialHiStart_0_Coll(Fighter_GObj* gobj)
@@ -353,13 +358,7 @@ void ftPp_SpecialHiStart_0_Coll(Fighter_GObj* gobj)
 void ftPp_SpecialAirHiStart_0_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 facingDir;
-    if (fp->facing_dir < 0.0f) {
-        facingDir = -1;
-    } else {
-        facingDir = 1;
-    }
-    if (ft_CheckGroundAndLedge(gobj, facingDir)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftPp_SpecialHi_8012184C(gobj);
         return;
     }
@@ -380,9 +379,7 @@ void ftPp_SpecialHi_8012184C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x15B, 0x0C4C508AU, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 0x15B, ftPp_MF_SpecialHi_Coll);
 }
 
 void ftPp_SpecialHi_801218AC(Fighter_GObj* gobj)
@@ -500,7 +497,7 @@ void ftPp_SpecialHiThrow_0_Phys(Fighter_GObj* gobj)
         }
     }
 
-    fp->fv.pp.x2240 = sp;
+    fp->u.pp.x2240 = sp;
 }
 
 static inline void doFallPhys(Fighter_GObj* gobj)
@@ -534,7 +531,7 @@ void ftPp_SpecialAirHiThrow_0_Phys(Fighter_GObj* gobj)
         }
     }
 
-    fp->fv.pp.x2240 = sp;
+    fp->u.pp.x2240 = sp;
 }
 
 void ftPp_SpecialHiThrow_0_Coll(Fighter_GObj* gobj)
@@ -546,15 +543,8 @@ void ftPp_SpecialHiThrow_0_Coll(Fighter_GObj* gobj)
 void ftPp_SpecialAirHiThrow_0_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 facingDir;
 
-    if (fp->facing_dir < 0.0f) {
-        facingDir = -1;
-    } else {
-        facingDir = 1;
-    }
-
-    if (ft_CheckGroundAndLedge(gobj, facingDir)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftPp_SpecialHi_80121D40(gobj);
         return;
     }
@@ -575,9 +565,7 @@ void ftPp_SpecialHi_80121CE0(Fighter_GObj* gobj)
 void ftPp_SpecialHi_80121D40(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x15C, 0x0C4C508A, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 0x15C, ftPp_MF_SpecialHi_Coll);
 }
 
 void ftPp_SpecialHi_80121DA0(Fighter_GObj* gobj)
@@ -641,15 +629,8 @@ void ftPp_SpecialHiStart_1_Coll(Fighter_GObj* gobj)
 void ftPp_SpecialAirHiStart_1_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 facingDir;
 
-    if (fp->facing_dir < 0.0f) {
-        facingDir = -1;
-    } else {
-        facingDir = 1;
-    }
-
-    if (ft_CheckGroundAndLedge(gobj, facingDir)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftPp_SpecialHi_80122038(gobj);
         return;
     }
@@ -670,9 +651,7 @@ void ftPp_SpecialHi_80121FD8(Fighter_GObj* gobj)
 void ftPp_SpecialHi_80122038(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x15E, 0x0C4C508A, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 0x15E, ftPp_MF_SpecialHi_Coll);
 }
 
 void ftPp_SpecialHi_80122098(Fighter_GObj* gobj)
@@ -735,14 +714,8 @@ void ftPp_SpecialAirHiThrow_1_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* da = fp->dat_attrs;
-    s32 cliffCatchDir;
     PAD_STACK(4);
-    if (fp->facing_dir < 0.0f) {
-        cliffCatchDir = -1;
-    } else {
-        cliffCatchDir = 1;
-    }
-    if (ft_CheckGroundAndLedge(gobj, cliffCatchDir)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftCo_LandingFallSpecial_Enter(gobj, false, da->x78);
         return;
     }
@@ -824,21 +797,7 @@ void ftPp_SpecialHiThrow2_Phys(Fighter_GObj* gobj)
         }
     }
 
-    fp->fv.pp.x2240 = sp;
-}
-
-static inline void doFallPhys2(Fighter_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    ftIceClimberAttributes* da = fp->dat_attrs;
-    ftCo_DatAttrs* co = &fp->co_attrs;
-    ftCommon_Fall(fp, da->x9C, da->xA0);
-    if (ABS(fp->input.lstick.x) > da->x80) {
-        ftCommon_8007D344(fp, 0.0f, co->air_drift_stick_mul * da->xB0,
-                          co->air_drift_max * da->xB4);
-    } else if (fp->self_vel.y < 0.0f) {
-        ftCommon_8007CEF4(fp);
-    }
+    fp->u.pp.x2240 = sp;
 }
 
 static inline void ftPp_SpecialAirHiThrow2_Phys_inline(Fighter_GObj* gobj,
@@ -875,7 +834,7 @@ void ftPp_SpecialAirHiThrow2_Phys(Fighter_GObj* gobj)
         fp = GET_FIGHTER(gobj);
         sp.x = sp.y = sp.z = 0.0f;
         ftPp_SpecialAirHiThrow2_Phys_inline(gobj, &sp);
-        fp->fv.pp.x2240 = sp;
+        fp->u.pp.x2240 = sp;
     }
 }
 
@@ -892,7 +851,7 @@ void ftPp_SpecialAirHiThrow2_Coll(Fighter_GObj* gobj)
     ftIceClimberAttributes* da = fp->dat_attrs;
     CollData* cd = &fp->coll_data;
     PAD_STACK(8);
-    if (ft_CheckGroundAndLedge(gobj, (fp->facing_dir < 0) ? -1 : 1)) {
+    if (ft_CheckGroundAndLedge(gobj, ftGetFacingDirInt(fp))) {
         ftCo_LandingFallSpecial_Enter(gobj, false, da->x78);
     } else if (!ftCliffCommon_80081298(gobj)) {
         if ((cd->env_flags & 0x3F) && fp->self_vel.x > 0.0f) {

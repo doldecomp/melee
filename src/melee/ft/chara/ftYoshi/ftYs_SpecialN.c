@@ -2,8 +2,6 @@
 
 #include "placeholder.h"
 
-#include <placeholder.h>
-
 #include "baselib/forward.h"
 
 #include "ft/fighter.h"
@@ -11,6 +9,8 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
+#include "ft/ft_0852.h"
 #include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
@@ -20,7 +20,8 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/ftCo_YoshiEgg.h"
-#include "ftYoshi/ftYs_Init.h"
+#include "ftCommon/inlines.h"
+#include "ftYoshi/ftyoshi.h"
 #include "ftYoshi/types.h"
 #include "it/items/ityoshiegglay.h"
 #include "it/items/ityoshitongue.h"
@@ -101,7 +102,7 @@ float ftYs_SpecialN_GetExtAttr34(void)
     return ext_attr->x34;
 }
 
-int ftYs_SpecialN_GetExtAttr38(void)
+bool ftYs_SpecialN_GetExtAttr38(void)
 {
     ftYoshiAttributes* ext_attr = gFtDataList[FTKIND_YOSHI]->ext_attr;
     return ext_attr->x38;
@@ -143,11 +144,6 @@ u32 const motion_flags1 =
 static u32 const motion_flags2 = motion_flags1 | Ft_MF_KeepGfx |
                                  Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
                                  Ft_MF_SkipColAnim | Ft_MF_Unk19;
-
-static u32 const motion_flags3 = motion_flags2 | Ft_MF_UpdateCmd |
-                                 Ft_MF_SkipItemVis | Ft_MF_SkipModelPartVis |
-                                 Ft_MF_SkipModelFlags | Ft_MF_Unk27;
-static u32 const motion_flags4 = motion_flags3 | Ft_MF_SkipHit;
 
 void ftYs_SpecialN_Enter(HSD_GObj* gobj)
 {
@@ -226,9 +222,8 @@ void fn_8012D128(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialAirN1_0, motion_flags4,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftYs_MS_SpecialAirN1_0,
+                                    ftYs_MF_SpecialN_CollHit);
     setupCallbacks(gobj, fn_8012D0A0, fn_8012D004, ftCo_800BBB8C);
 }
 
@@ -236,9 +231,8 @@ void fn_8012D1AC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialN1, motion_flags4,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftYs_MS_SpecialN1,
+                                    ftYs_MF_SpecialN_CollHit);
     setupCallbacks(gobj, fn_8012CF7C, fn_8012CEE0, ftCo_800BBB8C);
 }
 
@@ -246,9 +240,8 @@ void fn_8012D230(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialAirN1_2, motion_flags3,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftYs_MS_SpecialAirN1_2,
+                                    ftYs_MF_SpecialN_Coll);
     ftYs_SpecialS_8012DF00(gobj);
 }
 
@@ -256,18 +249,16 @@ void fn_8012D298(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialAirN1_1, motion_flags3,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftYs_MS_SpecialAirN1_1,
+                                    ftYs_MF_SpecialN_Coll);
 }
 
 void fn_8012D2F8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialN1_1, motion_flags3,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftYs_MS_SpecialN1_1,
+                                    ftYs_MF_SpecialN_Coll);
     ftYs_SpecialS_8012DF00(gobj);
 }
 
@@ -275,45 +266,40 @@ void fn_8012D360(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialN1_0, motion_flags3,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftYs_MS_SpecialN1_0,
+                                    ftYs_MF_SpecialN_Coll);
 }
 
 void fn_8012D3C0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialAirN2_1, motion_flags3,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftYs_MS_SpecialAirN2_1,
+                                    ftYs_MF_SpecialN_Coll);
     ftYs_SpecialS_8012DF00(gobj);
 }
 
 void fn_8012D428(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialAirN2_0, motion_flags3,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftYs_MS_SpecialAirN2_0,
+                                    ftYs_MF_SpecialN_Coll);
 }
 
 void fn_8012D488(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialN2_1, motion_flags3,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftYs_MS_SpecialN2_1,
+                                    ftYs_MF_SpecialN_Coll);
     ftYs_SpecialS_8012DF00(gobj);
 }
 
 void fn_8012D4F0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialN2_0, motion_flags3,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftYs_MS_SpecialN2_0,
+                                    ftYs_MF_SpecialN_Coll);
 }
 
 static void checkAnimEnd(Fighter_GObj* gobj, HSD_GObjEvent cb)
@@ -401,7 +387,7 @@ static inline void inlineB0(Fighter_GObj* gobj, HSD_GObjEvent on_anim_end)
                     item_attrs.lifetime = ftYs_SpecialN_GetDatAttr24(gobj);
                     item_attrs.x24 = ftYs_SpecialN_GetDatAttr18(gobj);
                     item_attrs.float3 = ftYs_SpecialN_8012CDB4();
-                    item_attrs.kind = 87;
+                    item_attrs.kind = It_Kind_Yoshi_EggLay;
                     it_802F2F34(gobj, &item_attrs);
                     fp->mv.ys.specialn.x0_b0 = false;
                     fp->cmd_vars[0] = 0;

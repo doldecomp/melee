@@ -3,7 +3,7 @@
 #include "debug.h"
 #include "spline.h"
 
-#include <__mem.h>
+#include <string.h>
 
 HSD_ObjAllocData fobj_alloc_data;
 
@@ -14,7 +14,7 @@ HSD_ObjAllocData* HSD_FObjGetAllocData(void)
 
 void HSD_FObjInitAllocData(void)
 {
-    HSD_ObjAllocInit(&fobj_alloc_data, sizeof(HSD_FObj), 4);
+    HSD_ObjAllocInit(HSD_FObjGetAllocData(), sizeof(HSD_FObj), 4);
 }
 
 void HSD_FObjRemove(HSD_FObj* fobj)
@@ -51,7 +51,7 @@ u32 HSD_FObjGetState(HSD_FObj* fobj)
     return fobj->flags & 0xF;
 }
 
-inline void HSD_FObjReqAnim(HSD_FObj* fobj, f32 startframe)
+static inline void HSD_FObjReqAnim(HSD_FObj* fobj, f32 startframe)
 {
     if (fobj == NULL) {
         return;
@@ -84,8 +84,8 @@ void HSD_FObjReqAnimAll(HSD_FObj* fobj, f32 startframe)
     }
 }
 
-inline void FObj_FlushKeyData(HSD_FObj* fobj, void* obj,
-                              HSD_ObjUpdateFunc obj_update, f32 rate)
+static inline void FObj_FlushKeyData(HSD_FObj* fobj, void* obj,
+                                     HSD_ObjUpdateFunc obj_update, f32 rate)
 {
     if (fobj->op_intrp == HSD_A_OP_KEY) {
         HSD_FObjInterpretAnim(fobj, obj, obj_update, rate);
@@ -295,7 +295,7 @@ static u32 FObjAnimKey(HSD_FObj* fobj)
     return HSD_FObjSetState(fobj, st == FOBJ_LOAD_DATA0 ? 3 : 4);
 }
 
-inline u32 FObjLoadData(HSD_FObj* fobj)
+static inline u32 FObjLoadData(HSD_FObj* fobj)
 {
     if ((unsigned) (fobj->ad - fobj->ad_head) >= fobj->length) {
         return 6;
@@ -419,7 +419,11 @@ void HSD_FObjInterpretAnim(HSD_FObj* fobj, void* obj,
             case 4: {
                 if (fobj->fterm <= fobj->time) {
                     u8 _[8] = { 0 };
-                    state = state = 3;
+                    state =
+#ifdef MUST_MATCH
+                        state =
+#endif
+                            3;
 
                     fterm = fobj->fterm;
                     fobj->time -= fobj->fterm;
@@ -427,12 +431,20 @@ void HSD_FObjInterpretAnim(HSD_FObj* fobj, void* obj,
                     break;
                 }
                 FObjUpdateAnim(fobj, obj, obj_update);
-                state = state = 5;
+                state =
+#ifdef MUST_MATCH
+                    state =
+#endif
+                        5;
                 HSD_FObjSetState(fobj, state);
                 return;
             }
             case 5: {
-                state = state = 4;
+                state =
+#ifdef MUST_MATCH
+                    state =
+#endif
+                        4;
                 HSD_FObjSetState(fobj, state);
                 break;
             }
@@ -472,7 +484,7 @@ HSD_FObj* HSD_FObjLoadDesc(HSD_FObjDesc* desc)
 
 HSD_FObj* HSD_FObjAlloc(void)
 {
-    HSD_FObj* new = HSD_ObjAlloc(&fobj_alloc_data);
+    HSD_FObj* new = HSD_ObjAlloc(HSD_FObjGetAllocData());
     HSD_ASSERT(0x2F3, new);
     memset(new, 0, sizeof(HSD_FObj));
     return new;
@@ -480,5 +492,5 @@ HSD_FObj* HSD_FObjAlloc(void)
 
 void HSD_FObjFree(HSD_FObj* fobj)
 {
-    HSD_ObjFree(&fobj_alloc_data, fobj);
+    HSD_ObjFree(HSD_FObjGetAllocData(), fobj);
 }

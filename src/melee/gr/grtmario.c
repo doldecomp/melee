@@ -4,7 +4,6 @@
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
@@ -13,12 +12,10 @@
 
 #include "lb/forward.h"
 
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 /* 21F840 */ static void grTMario_8021F840(bool);
@@ -26,7 +23,7 @@
 /* 21F8B4 */ static void grTmario_UnkStage0_OnLoad(void);
 /* 21F8B8 */ static void grTmario_UnkStage0_OnStart(void);
 /* 21F8DC */ static bool grTMario_8021F8DC(void);
-/* 21F8E4 */ static HSD_GObj* grTMario_8021F8E4(s32);
+/* 21F8E4 */ static HSD_GObj* grTMario_8021F8E4(int);
 /* 21F9CC */ static void grTMario_8021F9CC(Ground_GObj*);
 /* 21F9F8 */ static bool grTMario_8021F9F8(Ground_GObj*);
 /* 21FA00 */ static void grTMario_8021FA00(Ground_GObj*);
@@ -45,7 +42,7 @@
 /* 21FC50 */ static DynamicsDesc* grTMario_8021FC50(enum_t);
 /* 21FC58 */ static bool grTMario_8021FC58(Vec3*, int, HSD_JObj*);
 
-StageCallbacks grTMr_803E8548[] = {
+StageCallbacks grTMr_StageCallbacks[] = {
     {
         grTMario_8021F9CC,
         grTMario_8021F9F8,
@@ -67,12 +64,12 @@ StageCallbacks grTMr_803E8548[] = {
         grTMario_8021FAD0,
         (1 << 30) | (1 << 31),
     },
-    { NULL, NULL, NULL, NULL, 0 },
+    { 0 },
 };
 
-StageData grTMr_803E85A4 = {
-    TMARIO,
-    grTMr_803E8548,
+StageData grTMr_StageData = {
+    Gr_Kind_TMario,
+    grTMr_StageCallbacks,
     "/GrTMr.dat",
     grTMario_8021F844,
     grTMario_8021F840,
@@ -90,16 +87,7 @@ void grTMario_8021F840(bool unk) {}
 
 void grTMario_8021F844(void)
 {
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-
-    grTMario_8021F8E4(0);
-    grTMario_8021F8E4(1);
-    grTMario_8021F8E4(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTMario_8021F8E4);
 }
 
 void grTmario_UnkStage0_OnLoad(void) {}
@@ -114,10 +102,10 @@ bool grTMario_8021F8DC(void)
     return false;
 }
 
-HSD_GObj* grTMario_8021F8E4(s32 arg0)
+HSD_GObj* grTMario_8021F8E4(int arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTMr_803E8548[arg0];
+    StageCallbacks* callbacks = &grTMr_StageCallbacks[arg0];
 
     gobj = Ground_GetStageGObj(arg0);
 

@@ -9,7 +9,6 @@
 #include <sysdolphin/baselib/object.h>
 #include <melee/ft/chara/ftCommon/ftCo_Attack100.h>
 #include <melee/ft/fighter.h>
-#include <melee/ft/ft_0852.h>
 #include <melee/ft/ftaction.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftdata.h>
@@ -566,9 +565,6 @@ float ftAnim_8006F3DC(Fighter_GObj* fighter_gobj)
                 }
             }
         }
-#ifdef BUGFIX
-        return 0.0F;
-#endif
     } else {
         return lbGetJObjCurrFrame(fp->x8AC_animSkeleton);
     }

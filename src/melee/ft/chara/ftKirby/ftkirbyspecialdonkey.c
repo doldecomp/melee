@@ -5,8 +5,6 @@
 
 #include <placeholder.h>
 
-#include "baselib/forward.h"
-
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_Escape.h"
@@ -16,6 +14,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
@@ -23,35 +22,31 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/inlines.h"
 
+#include "ftDonkey/forward.h"
 #include "ftKirby/forward.h"
 
-#include <common_structs.h>
 #include <stddef.h>
-#include <trigf.h>
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
-#include <baselib/random.h>
-#include <MSL/math.h>
 
-/// @todo This is some kind of inline within #ftKb_DkSpecialN_Anim that's
-///       shared by #ftKb_DkSpecialAirN_Anim
-static double sdata2_order0(void)
+#ifdef MUST_MATCH
+static void sdata2_order0(void)
 {
-    return S32_TO_F32;
+    (void) S32_TO_F32;
 }
+#endif
 
 void ftKb_SpecialNDk_800FF8EC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
     PAD_STACK(8);
-    if (fp->fv.kb.xBC == da->specialn_dk_swings_to_full_charge) {
+    if (fp->u.kb.xBC == da->specialn_dk_swings_to_full_charge) {
         Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialNFull, 0, 0, 1, 0,
                                   NULL);
         fp->mv.dk.specialn.x8 = 1;
-        fp->mv.dk.specialn.xC = fp->fv.kb.xBC;
-        fp->fv.kb.xBC = 0;
+        fp->mv.dk.specialn.xC = fp->u.kb.xBC;
+        fp->u.kb.xBC = 0;
     } else {
         Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialNStart, 0, 0, 1, 0,
                                   NULL);
@@ -72,8 +67,7 @@ void ftKb_SpecialNDk_800FF8EC(Fighter_GObj* gobj)
         Fighter* fp2 = GET_FIGHTER(gobj);
         fp2->death2_cb = ftKb_Init_800EE74C;
         fp2->take_dmg_cb = ftKb_Init_800EE7B8;
-        fp2->pre_hitlag_cb = efLib_PauseAll;
-        fp2->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp2);
     }
     ftAnim_8006EBA4(gobj);
 }
@@ -83,12 +77,12 @@ void ftKb_SpecialNDk_800FFA10(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
     PAD_STACK(8);
-    if (fp->fv.kb.xBC == da->specialn_dk_swings_to_full_charge) {
+    if (fp->u.kb.xBC == da->specialn_dk_swings_to_full_charge) {
         Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialAirNFull, 0, 0, 1, 0,
                                   NULL);
         fp->mv.dk.specialn.x8 = 1;
-        fp->mv.dk.specialn.xC = fp->fv.kb.xBC;
-        fp->fv.kb.xBC = 0;
+        fp->mv.dk.specialn.xC = fp->u.kb.xBC;
+        fp->u.kb.xBC = 0;
     } else {
         Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialAirNStart, 0, 0, 1, 0,
                                   NULL);
@@ -107,19 +101,17 @@ void ftKb_SpecialNDk_800FFA10(Fighter_GObj* gobj)
         Fighter* fp2 = GET_FIGHTER(gobj);
         fp2->death2_cb = ftKb_Init_800EE74C;
         fp2->take_dmg_cb = ftKb_Init_800EE7B8;
-        fp2->pre_hitlag_cb = efLib_PauseAll;
-        fp2->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp2);
     }
     ftAnim_8006EBA4(gobj);
 }
 
 static inline void ftKb_DkSpecialNStart_Coll_inline(Fighter_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = gobj->user_data;
     fp->death2_cb = ftKb_Init_800EE74C;
     fp->take_dmg_cb = ftKb_Init_800EE7B8;
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 void ftKb_DkSpecialNStart_Anim(Fighter_GObj* gobj)
@@ -137,11 +129,11 @@ void ftKb_DkSpecialNLoop_Anim(Fighter_GObj* gobj)
     ftKb_DatAttrs* da = fp->dat_attrs;
     volatile unsigned short pad;
     if (fp->cur_anim_frame == 0.0F) {
-        fp->fv.kb.xBC += 1;
-        if (fp->fv.kb.xBC >= da->specialn_dk_swings_to_full_charge) {
+        fp->u.kb.xBC += 1;
+        if (fp->u.kb.xBC >= da->specialn_dk_swings_to_full_charge) {
             Fighter* fighter2 = fp;
             ftCo_800BFFD0(fighter2, 58, 0);
-            fp->fv.kb.xBC = da->specialn_dk_swings_to_full_charge;
+            fp->u.kb.xBC = da->specialn_dk_swings_to_full_charge;
             {
                 Fighter* fp2 = gobj->user_data;
                 fp2->pre_hitlag_cb = NULL;
@@ -215,7 +207,7 @@ void ftKb_DkSpecialN_Anim(Fighter_GObj* gobj)
         }
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        fp->fv.kb.xBC = 0;
+        fp->u.kb.xBC = 0;
         {
             Fighter* fp2 = gobj->user_data;
             fp2->pre_hitlag_cb = NULL;
@@ -261,7 +253,7 @@ void ftKb_DkSpecialNFull_Anim(Fighter_GObj* gobj)
         }
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        fp->fv.kb.xBC = 0;
+        fp->u.kb.xBC = 0;
         {
             Fighter* fp2 = gobj->user_data;
             fp2->pre_hitlag_cb = NULL;
@@ -287,11 +279,11 @@ void ftKb_DkSpecialAirNLoop_Anim(Fighter_GObj* gobj)
     ftKb_DatAttrs* da = fp->dat_attrs;
     if (fp->cur_anim_frame == 0.0F) {
         new_var = da;
-        fp->fv.kb.xBC += 1;
-        if (fp->fv.kb.xBC >= new_var->specialn_dk_swings_to_full_charge) {
+        fp->u.kb.xBC += 1;
+        if (fp->u.kb.xBC >= new_var->specialn_dk_swings_to_full_charge) {
             Fighter* fighter2 = fp;
             ftCo_800BFFD0(fighter2, 58, 0);
-            fp->fv.kb.xBC = new_var->specialn_dk_swings_to_full_charge;
+            fp->u.kb.xBC = new_var->specialn_dk_swings_to_full_charge;
             {
                 Fighter* fp2 = gobj->user_data;
                 fp2->pre_hitlag_cb = NULL;
@@ -352,7 +344,7 @@ void ftKb_DkSpecialAirN_Anim(Fighter_GObj* gobj)
                         gobj);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        fp->fv.kb.xBC = 0;
+        fp->u.kb.xBC = 0;
         {
             Fighter* fp2 = gobj->user_data;
             fp2->pre_hitlag_cb = NULL;
@@ -388,7 +380,7 @@ void ftKb_DkSpecialAirNFull_Anim(Fighter_GObj* gobj)
         }
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        fp->fv.kb.xBC = 0;
+        fp->u.kb.xBC = 0;
         {
             Fighter* fp2 = gobj->user_data;
             fp2->pre_hitlag_cb = NULL;
@@ -414,8 +406,8 @@ void ftKb_DkSpecialNLoop_IASA(Fighter_GObj* gobj)
             Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialN, 0, 0.0F, 1.0F,
                                       0.0F, NULL);
             new_var = fp;
-            new_var->mv.dk.specialn.xC = fp->fv.kb.xBC;
-            fp->fv.kb.xBC = 0;
+            new_var->mv.dk.specialn.xC = fp->u.kb.xBC;
+            fp->u.kb.xBC = 0;
             ftKb_DkSpecialNStart_Coll_inline(gobj);
             ftAnim_8006EBA4(gobj);
         }
@@ -446,8 +438,8 @@ void ftKb_DkSpecialAirNLoop_IASA(Fighter_GObj* gobj)
     if (fp->input.x668 & HSD_PAD_B) {
         Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialAirN, 0, 0.0F, 1.0F,
                                   0.0F, NULL);
-        fp->mv.dk.specialn.xC = fp->fv.kb.xBC;
-        fp->fv.kb.xBC = 0;
+        fp->mv.dk.specialn.xC = fp->u.kb.xBC;
+        fp->u.kb.xBC = 0;
         ftKb_DkSpecialNStart_Coll_inline(gobj);
         ftAnim_8006EBA4(gobj);
     }
@@ -522,10 +514,8 @@ void ftKb_DkSpecialNStart_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == GA_Ground) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialAirNStart,
-                                  0x0C4C5080U, fp->cur_anim_frame, 1.0f, 0.0f,
-                                  NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftKb_MS_DkSpecialAirNStart,
+                                        ftCommon_GroundAirColl_MF);
         ftKb_DkSpecialNStart_Coll_inline(gobj);
     }
 }
@@ -534,9 +524,8 @@ void ftKb_DkSpecialNLoop_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == GA_Ground) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialAirNLoop, 0x0C4C5080U,
-                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftKb_MS_DkSpecialAirNLoop,
+                                        ftCommon_GroundAirColl_MF);
         ftKb_DkSpecialNStart_Coll_inline(gobj);
     }
 }
@@ -545,10 +534,8 @@ void ftKb_DkSpecialNCancel_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80082708(gobj) == GA_Ground) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialAirNCancel,
-                                  0x0C4C5080U, fp->cur_anim_frame, 1.0f, 0.0f,
-                                  NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftKb_MS_DkSpecialAirNCancel,
+                                        ftCommon_GroundAirColl_MF);
         ftKb_DkSpecialNStart_Coll_inline(gobj);
     }
 }
@@ -557,9 +544,8 @@ void ftKb_DkSpecialN_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_800827A0(gobj) == GA_Ground) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialAirN, 0x0C4D508EU,
-                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftKb_MS_DkSpecialAirN,
+                                        ftDk_MF_SpecialN_Coll);
         ftKb_DkSpecialNStart_Coll_inline(gobj);
     }
 }
@@ -568,9 +554,8 @@ void ftKb_DkSpecialNFull_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_800827A0(gobj) == GA_Ground) {
-        ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialAirNFull, 0x0C4D508EU,
-                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        ftCommon_GroundToAirStateChange(gobj, fp, ftKb_MS_DkSpecialAirNFull,
+                                        ftDk_MF_SpecialN_Coll);
         ftKb_DkSpecialNStart_Coll_inline(gobj);
     }
 }
@@ -579,9 +564,8 @@ void ftKb_DkSpecialAirNStart_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) == GA_Air) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialNStart, 0x0C4C5080U,
-                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_DkSpecialNStart,
+                                        ftCommon_GroundAirColl_MF);
         ftKb_DkSpecialNStart_Coll_inline(gobj);
     }
 }
@@ -590,9 +574,8 @@ void ftKb_DkSpecialAirNLoop_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) == GA_Air) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialNLoop, 0x0C4C5080U,
-                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_DkSpecialNLoop,
+                                        ftCommon_GroundAirColl_MF);
         ftKb_DkSpecialNStart_Coll_inline(gobj);
     }
 }
@@ -601,9 +584,8 @@ void ftKb_DkSpecialAirNCancel_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) == GA_Air) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialNCancel, 0x0C4C5080U,
-                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_DkSpecialNCancel,
+                                        ftCommon_GroundAirColl_MF);
         ftKb_DkSpecialNStart_Coll_inline(gobj);
     }
 }
@@ -612,9 +594,8 @@ void ftKb_DkSpecialAirN_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != GA_Ground) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialN, 0x0C4D508EU,
-                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_DkSpecialN,
+                                        ftDk_MF_SpecialN_Coll);
         ftKb_DkSpecialNStart_Coll_inline(gobj);
     }
 }
@@ -623,9 +604,8 @@ void ftKb_DkSpecialAirNFull_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ft_80081D0C(gobj) != GA_Ground) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialNFull, 0x0C4D508EU,
-                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_DkSpecialNFull,
+                                        ftDk_MF_SpecialN_Coll);
         ftKb_DkSpecialNStart_Coll_inline(gobj);
     }
 }
@@ -633,6 +613,6 @@ void ftKb_DkSpecialAirNFull_Coll(Fighter_GObj* gobj)
 void ftKb_SpecialNPr_80100DE0(Fighter_GObj* gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);
-    ft->fv.kb.xBC = 0;
+    ft->u.kb.xBC = 0;
     efLib_DestroyAll(gobj);
 }

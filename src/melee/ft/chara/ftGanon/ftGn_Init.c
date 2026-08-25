@@ -307,8 +307,8 @@ void ftGn_Init_OnDeath(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, -1);
-    fp->fv.gn.during_specials = false;
-    fp->fv.gn.during_specials_start = false;
+    fp->u.gn.during_specials = false;
+    fp->u.gn.during_specials_start = false;
 }
 
 void ftGn_Init_OnItemPickup(HSD_GObj* gobj, bool flag)

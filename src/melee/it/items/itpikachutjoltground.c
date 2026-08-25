@@ -8,39 +8,42 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "it/items/itpikachutjoltair.h"
+#include "it/itgroundcoll.h"
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <trigf.h>
 
 /* 2B37F0 */ static void itPikachutjoltground_UnkMotion1_Phys(Item_GObj*);
 
-ItemStateTable it_803F7190[] = { {
-                                     0,
-                                     itPikachutjoltground_UnkMotion0_Anim,
-                                     itPikachutjoltground_UnkMotion0_Phys,
-                                     itPikachutjoltground_UnkMotion0_Coll,
-                                 },
-                                 {
-                                     1,
-                                     itPikachutjoltground_UnkMotion1_Anim,
-                                     itPikachutjoltground_UnkMotion1_Phys,
-                                     itPikachutjoltground_UnkMotion1_Coll,
-                                 } };
+ItemStateTable it_803F7190[] = {
+    {
+        0,
+        itPikachutjoltground_UnkMotion0_Anim,
+        itPikachutjoltground_UnkMotion0_Phys,
+        itPikachutjoltground_UnkMotion0_Coll,
+    },
+    {
+        1,
+        itPikachutjoltground_UnkMotion1_Anim,
+        itPikachutjoltground_UnkMotion1_Phys,
+        itPikachutjoltground_UnkMotion1_Coll,
+    },
+};
 
-static void data_ordering(void)
+#ifdef MUST_MATCH
+static void order_sdata2(void)
 {
-    HSD_JObjSetRotationY(NULL, 0.0f);
-    fabs(M_TAU);
-    fabs(M_PI);
-    HSD_JObjSetRotationY(NULL, -1.0f);
-    HSD_JObjSetRotationY(NULL, 1.0f);
+    (void) 0.0f;
+    (void) M_TAU;
+    (void) M_PI;
+    (void) -1.0f;
+    (void) +1.0f;
 }
+#endif
 
 Item_GObj* it_802B3368(Item_GObj* gobj)
 {
@@ -55,7 +58,8 @@ Item_GObj* it_802B3368(Item_GObj* gobj)
     return NULL;
 }
 
-Item_GObj* it_802B338C(Item_GObj* owner, Vec3* pos, f32 facing_dir, u32 kind)
+Item_GObj* itPikachuThunderJolt_Spawn(Item_GObj* owner, Vec3* pos,
+                                      f32 facing_dir, ItemKind kind)
 {
     SpawnItem spawn;
     UNUSED u8 _pad[4];
@@ -148,6 +152,8 @@ void it_802B3554(Item_GObj* gobj, HSD_GObj* owner)
     case It_Kind_Kirby_PichuTJolt_Ground:
         efSync_Spawn(0x4AD, gobj, jobj);
         ip->xDD4_itemVar.pikachujoltground.xDE0 = 1;
+        break;
+    default:
         break;
     }
     db_80225DD8(gobj, owner);

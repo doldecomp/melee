@@ -27,7 +27,7 @@ int HSD_Index2TevStage(int idx);
 int HSD_TevStage2Index(int stage);
 int HSD_TevStage2Num(int stage);
 void HSD_SetTevRegAll(void);
-void ChanUpdateFunc(HSD_Chan*, int, f32*);
+void ChanUpdateFunc(HSD_Chan*, int, const f32*);
 void _HSD_StateInvalidateColorChannel(void);
 void _HSD_StateInvalidateTevStage(void);
 void _HSD_StateInvalidateTevRegister(void);

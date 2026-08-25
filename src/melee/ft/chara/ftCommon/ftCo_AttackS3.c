@@ -3,14 +3,17 @@
 #include "ftCo_ItemThrow.h"
 #include "ftCo_Wait.h"
 #include "ftpickupitem.h"
-#include "math.h"
 
 #include <platform.h>
 
 #include "forward.h"
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0CDD.h"
 #include "ft/ftanim.h"
@@ -20,7 +23,6 @@
 #include "ft/types.h"
 #include "it/it_26B1.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /* 08B788 */ static void decideAngle(Fighter_GObj* gobj);
@@ -63,19 +65,19 @@ static void decideAngle(Fighter_GObj* gobj)
         FtMotionId msid;
         float stick_angle = ftCo_GetLStickAngle(fp);
         if (stick_angle > p_ftCommonData->x9C_radians &&
-            ftData_80085FD4(fp, ftCo_MS_AttackS3S)->x8 != NULL)
+            ftData_80085FD4(fp, ftCo_MS_AttackS3S)->x8 != 0)
         {
             msid = ftCo_MS_AttackS3Hi;
         } else if (stick_angle > p_ftCommonData->xA0_radians &&
-                   ftData_80085FD4(fp, ftCo_MS_AttackS3LwS)->x8 != NULL)
+                   ftData_80085FD4(fp, ftCo_MS_AttackS3LwS)->x8 != 0)
         {
             msid = ftCo_MS_AttackS3HiS;
         } else if (stick_angle < p_ftCommonData->xA8_radians &&
-                   ftData_80085FD4(fp, ftCo_MS_AttackLw3)->x8 != NULL)
+                   ftData_80085FD4(fp, ftCo_MS_AttackLw3)->x8 != 0)
         {
             msid = ftCo_MS_AttackS3Lw;
         } else if (stick_angle < p_ftCommonData->xA4_radians &&
-                   ftData_80085FD4(fp, ftCo_MS_AttackHi3)->x8 != NULL)
+                   ftData_80085FD4(fp, ftCo_MS_AttackHi3)->x8 != 0)
         {
             msid = ftCo_MS_AttackS3LwS;
         } else {

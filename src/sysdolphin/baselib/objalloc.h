@@ -5,8 +5,6 @@
 
 #include "baselib/debug.h"
 
-#include <common_structs.h>
-
 typedef struct _objheap {
     u32 top;
     u32 curr;
@@ -32,7 +30,7 @@ typedef struct _HSD_ObjAllocData {
     u32 align;
     struct _HSD_ObjAllocData* next;
 } HSD_ObjAllocData;
-STATIC_ASSERT(sizeof(struct _HSD_ObjAllocData) == 0x2C);
+ASSERT_SIZE(struct _HSD_ObjAllocData, 0x2C);
 
 static inline u32 HSD_ObjAllocGetUsing(HSD_ObjAllocData* data)
 {

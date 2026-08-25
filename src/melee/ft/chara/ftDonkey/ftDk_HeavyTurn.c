@@ -4,7 +4,7 @@
 #include "ftDk_HeavyWait0.h"
 
 #include "ft/fighter.h"
-#include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
@@ -12,7 +12,6 @@
 #include "ftCommon/ftCo_Turn.h"
 #include "ftDonkey/types.h"
 
-#include <common_structs.h>
 #include <stddef.h>
 
 void ftDk_HeavyTurn_Anim(HSD_GObj* gobj)

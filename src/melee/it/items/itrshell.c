@@ -1,6 +1,6 @@
 #include "itrshell.h"
 
-#include "m2c_macros.h"
+#include "inlines.h"
 
 #include <placeholder.h>
 #include <platform.h>
@@ -8,15 +8,14 @@
 #include "baselib/jobj.h"
 #include "ef/efasync.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
 #include "it/itcoll.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
-#include "MSL/math.h"
 #include "sysdolphin/baselib/random.h"
 
 typedef struct itRShell_Attrs {
@@ -65,6 +64,7 @@ void it_8028CFE0(Item_GObj* gobj)
     Vec v;
     HSD_JObj* jobj;
     PAD_STACK(4);
+    /// @todo Shared code with #it_8028B8D8.
     if (ip->xDD4_itemVar.rshell.xDDC <= 0.0f) {
         jobj = GET_JOBJ(gobj);
         v = attrs->x48;
@@ -363,9 +363,7 @@ bool itRshell_UnkMotion0_Coll(Item_GObj* gobj)
     jobj = GET_JOBJ(gobj);
     attrs = ip->xC4_article_data->x4_specialAttributes;
     if (ip->ground_or_air == GA_Ground) {
-        it_80276CB8(gobj);
-        jobj = HSD_JObjGetChild(jobj);
-        HSD_JObjAddRotationY(jobj, attrs->x38 * ABS(ip->x40_vel.x));
+        Item_UpdateRollingShellRotation(gobj, ip, jobj, &attrs->x38);
     }
     return false;
 }
@@ -498,7 +496,9 @@ static inline void itRshell_StopInit(Item_GObj* gobj)
     it_80272980(gobj);
 }
 
+#ifdef MUST_MATCH
 #pragma inline_depth(8)
+#endif
 void it_8028DAE4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -642,8 +642,10 @@ void it_8028E170(Item_GObj* gobj)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 bool itRshell_UnkMotion6_Anim(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
@@ -662,7 +664,9 @@ bool itRshell_UnkMotion6_Anim(Item_GObj* gobj)
     }
     return false;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void itRshell_UnkMotion6_Phys(Item_GObj* gobj)
 {
@@ -702,9 +706,7 @@ bool itRshell_UnkMotion7_Coll(Item_GObj* gobj)
     jobj = GET_JOBJ(gobj);
     attrs = ip->xC4_article_data->x4_specialAttributes;
     if (ip->ground_or_air == GA_Ground) {
-        it_80276CB8(gobj);
-        jobj = HSD_JObjGetChild(jobj);
-        HSD_JObjAddRotationY(jobj, attrs->x38 * ABS(ip->x40_vel.x));
+        Item_UpdateRollingShellRotation(gobj, ip, jobj, &attrs->x38);
     }
     return false;
 }

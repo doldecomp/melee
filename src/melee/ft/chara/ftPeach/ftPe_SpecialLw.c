@@ -6,10 +6,13 @@
 
 #include "ef/efsync.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
-#include "ft/ftcommon.h"
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
@@ -17,6 +20,7 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftpickupitem.h"
+#include "ftCommon/inlines.h"
 #include "ftPeach/types.h"
 
 #include "it/forward.h"
@@ -65,21 +69,21 @@ ItemKind pickVeg(HSD_GObj* gobj)
 void ftPe_SpecialLw_UnsetVeg(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.pe.veg_gobj != NULL) {
-        fp->fv.pe.veg_gobj = NULL;
+    if (fp->u.pe.veg_gobj != NULL) {
+        fp->u.pe.veg_gobj = NULL;
     }
 }
 
 void ftPe_SpecialLw_8011CFA0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    HSD_GObj* veg_gobj = fp->fv.pe.veg_gobj;
+    HSD_GObj* veg_gobj = fp->u.pe.veg_gobj;
     if (veg_gobj != NULL) {
         HSD_GObj* item_gobj = fp->item_gobj;
         if (veg_gobj == item_gobj &&
             itGetKind(item_gobj) == It_Kind_Peach_Turnip)
         {
-            it_802BD45C(fp->fv.pe.veg_gobj);
+            it_802BD45C(fp->u.pe.veg_gobj);
             ftPe_SpecialLw_UnsetVeg(gobj);
         }
     }
@@ -102,7 +106,7 @@ static void setupVeg(ItemKind kind, HSD_GObj* gobj, Fighter* fp, Vec3* pos)
     HSD_GObj* veg_gobj =
         it_802BD4AC(gobj, pos, fp->ft_data->x8->x10, kind, fp->facing_dir);
     fp->item_gobj = veg_gobj;
-    fp->fv.pe.veg_gobj = veg_gobj;
+    fp->u.pe.veg_gobj = veg_gobj;
     if (veg_gobj != NULL) {
         ftpickupitem_80094818(gobj, false);
         efSync_Spawn(1234, gobj, &fp->cur_pos);
@@ -165,9 +169,7 @@ static MotionFlags const coll_mf = Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim |
 static void handleAirColl(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirLw, coll_mf,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftPe_MS_SpecialAirLw, coll_mf);
     fp->accessory4_cb = spawnVeg;
 }
 
@@ -175,9 +177,7 @@ static void handleColl(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialLw, coll_mf,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftPe_MS_SpecialLw, coll_mf);
     fp->accessory4_cb = spawnVeg;
 }
 

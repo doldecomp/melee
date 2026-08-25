@@ -9,12 +9,12 @@
 #include "gm/gm_1601.h"
 #include "gm/gm_unsplit.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_013B.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbspdisplay.h"
 #include "sc/types.h"
 #include "ty/toy.h"
-#include "ty/tylist.h"
 
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>

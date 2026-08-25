@@ -1,4 +1,4 @@
-#include "ft/fighter.h"
+#include "fighter.h"
 
 #include "ft_07C1.h"
 #include "ft_07C6.h"
@@ -6,42 +6,36 @@
 #include "ft_081B.h"
 #include "ft_0852.h"
 #include "ft_0877.h"
+#include "ft_0881.h"
+#include "ft_0892.h"
 #include "ft_0899.h"
+#include "ft_0C31.h"
+#include "ft_0C88.h"
+#include "ft_0C8C.h"
 #include "ft_0D31.h"
+#include "ft_0DF0.h"
 #include "ftaction.h"
+#include "ftafterimage.h"
 #include "ftanim.h"
 #include "ftcamera.h"
+#include "ftchangeparam.h"
+#include "ftCo_800C7CA0.h"
+#include "ftcolanim.h"
 #include "ftcoll.h"
 #include "ftcommon.h"
+#include "ftdata.h"
+#include "ftdevice.h"
 #include "ftdrawcommon.h"
 #include "ftdynamics.h"
 #include "ftlib.h"
+#include "ftmetal.h"
 #include "ftparts.h"
 #include "placeholder.h"
-
-#include <platform.h>
+#include "types.h"
 
 #include "cm/camera.h"
 #include "db/db.h"
 #include "ef/efasync.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0892.h"
-#include "ft/ft_0C31.h"
-#include "ft/ft_0C88.h"
-#include "ft/ft_0C8C.h"
-#include "ft/ft_0DF0.h"
-#include "ft/ftafterimage.h"
-#include "ft/ftchangeparam.h"
-#include "ft/ftCo_800C7CA0.h"
-#include "ft/ftcolanim.h"
-#include "ft/ftdata.h"
-#include "ft/ftdevice.h"
-#include "ft/ftmaterial.h"
-#include "ft/ftmetal.h"
-#include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
 #include "ftCommon/ftCo_09F4.h"
 #include "ftCommon/ftCo_0A01.h"
 #include "ftCommon/ftCo_0C35.h"
@@ -60,12 +54,12 @@
 #include "ftCommon/ftCo_Rebound.h"
 #include "ftCommon/ftCo_ShieldBreakFly.h"
 #include "ftCommon/ftCo_SpecialS.h"
-#include "ftCrazyHand/ftCh_Init.h"
 #include "ftCrazyHand/ftCh_Wait1_0.h"
 #include "ftKirby/ftkirby.h"
 #include "ftMasterHand/ftMh_Wait1_0.h"
 #include "ftPeach/types.h"
 #include "gm/gm_unsplit.h"
+#include "gr/ground.h"
 #include "gr/stage.h"
 #include "if/ifmagnify.h"
 #include "it/it_26B1.h"
@@ -85,10 +79,9 @@
 #include "pl/pltrick.h"
 #include "sfx/crowdsfx.h"
 
-#include <common_structs.h>
+#include <math.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/controller.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
@@ -100,16 +93,8 @@
 #include <baselib/lobj.h>
 #include <baselib/mtx.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
-#include <MSL/math_ppc.h>
-#include <MSL/trigf.h>
 
-extern struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX];
-
-extern MotionState ftData_MotionStateList[ftCo_MS_Count];
 extern MotionState* ftData_CharacterStateTables[FTKIND_MAX];
-
-extern StageInfo stage_info; // from asm/melee/gm_1A36.s
 
 /// ==== fighter.c variables ====
 /// =============================
@@ -141,8 +126,8 @@ struct Fighter_804D6518_t* Fighter_804D6518 = NULL;
 struct Fighter_804D651C_t* Fighter_804D651C = NULL;
 struct Fighter_804D6520_t* Fighter_804D6520 = NULL;
 struct Fighter_804D6524_t* Fighter_804D6524 = NULL;
-struct Fighter_804D6528_t* Fighter_804D6528 = NULL;
-UNK_T Fighter_804D652C = NULL;
+struct Fighter_ShakeTable_t* Fighter_SmashChargeShakeTable = NULL;
+struct Fighter_ShakeTable_t* Fighter_GrabMashShake = NULL;
 Vec2** Fighter_804D6530 = NULL;
 UNK_T Fighter_804D6534 = NULL;
 struct Fighter_804D653C_t* Fighter_804D6538 = NULL;
@@ -170,10 +155,13 @@ void Fighter_800679B0(void)
     ftCo_800C8F6C(); ///< @todo &fighter_alloc_data+2, +3, +4 are not defined
                      ///< in the fighter.s
     // data section, how does this work?
-    HSD_ObjAllocInit(&fighter_parts_alloc_data, /*size*/ 0x8c0, /*align*/ 4);
-    HSD_ObjAllocInit(&fighter_dobj_list_alloc_data, /*size*/ 0x1f0,
+    HSD_ObjAllocInit(&fighter_parts_alloc_data,
+                     /*size*/ MAX_FT_PARTS * sizeof(struct FighterBone),
                      /*align*/ 4);
-    HSD_ObjAllocInit(&fighter_x2040_alloc_data, /*size*/ 0x80, /*align*/ 4);
+    HSD_ObjAllocInit(&fighter_dobj_list_alloc_data,
+                     /*size*/ (0x1f0 / 4) * sizeof(HSD_DObj*), /*align*/ 4);
+    HSD_ObjAllocInit(&fighter_x2040_alloc_data,
+                     /*size*/ (0x80 / 4) * sizeof(HSD_DObj*), /*align*/ 4);
 
     g_spawnNumCounter = 1;
 
@@ -209,8 +197,8 @@ void Fighter_LoadCommonData(void)
     Fighter_804D6538 = pData[7];
     Fighter_804D6534 = pData[8];
     Fighter_804D6530 = pData[9];
-    Fighter_804D652C = pData[10];
-    Fighter_804D6528 = pData[11];
+    Fighter_GrabMashShake = pData[10];
+    Fighter_SmashChargeShakeTable = pData[11];
     Fighter_804D6524 = pData[12];
     Fighter_804D6520 = pData[13];
     Fighter_804D651C = pData[14];
@@ -562,7 +550,7 @@ void Fighter_UnkProcessDeath_80068354(Fighter_GObj* gobj)
     ftCo_800C89A0(gobj);
     ftCo_800C8FC4(gobj);
     ftColl_8007AFF8(gobj);
-    ftColl_8007B0C0(gobj, 0);
+    ftColl_8007B0C0(gobj, HurtCapsule_Enabled);
 
     if (ftData_OnDeath[fp->kind]) {
         ftData_OnDeath[fp->kind](gobj);
@@ -629,7 +617,7 @@ void Fighter_ResetInputData_80068854(Fighter_GObj* gobj)
     fp->input.x668 = 0;
     fp->input.held_inputs = 0;
 
-    fp->x672_input_timer_counter = 0xFE;
+    fp->trigger_analog_timer = 0xFE;
     fp->x671_timer_lstick_tilt_y = 0xFE;
     fp->x670_timer_lstick_tilt_x = 0xFE;
 
@@ -687,7 +675,7 @@ static void Fighter_UnkInitLoad_80068914_Inner1(Fighter_GObj* gobj)
             fp->x673 = fp->x674 = fp->x675 =
 
                 fp->x670_timer_lstick_tilt_x = fp->x671_timer_lstick_tilt_y =
-                    fp->x672_input_timer_counter = 0xFE;
+                    fp->trigger_analog_timer = 0xFE;
 
     fp->x67C = fp->x67D = fp->x67E = fp->x681 = fp->x682 = fp->x67F =
         fp->x680 = fp->x683 = fp->x684 = fp->x685 = fp->x686 = fp->x687 =
@@ -836,7 +824,7 @@ void Fighter_80068E64(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (stage_info.internal_stage_id == 0x1B) {
+    if (stage_info.grkind == Gr_Kind_Flatzone) {
         fp->x34_scale.z = p_ftCommonData->x7E4_scaleZ;
     } else {
         fp->x34_scale.z = 1.0f;
@@ -977,7 +965,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
             ftColl_8007B62C(gobj, 0);
         }
         if (fp->x221A_b5 != 0) {
-            ftColl_8007B0C0(gobj, 0);
+            ftColl_8007B0C0(gobj, HurtCapsule_Enabled);
         }
     }
 
@@ -1128,7 +1116,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
 
     if (fp->ground_or_air == GA_Ground) {
         if (fp->kind == FTKIND_PEACH) {
-            fp->fv.pe.has_float = true;
+            fp->u.pe.has_float = true;
         }
         fp->x2221_b5 = false;
         fp->x2221_b7 = true;
@@ -1269,8 +1257,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                 } else {
                     ftData_80085CD8(fp, fp, fp->anim_id);
                 }
-                fp->x3E4_fighterCmdScript.u =
-                    (union CmdUnion*) unk_struct_x18->xC;
+                fp->x3E4_fighterCmdScript.u = unk_struct_x18->xC;
                 fp->x3E4_fighterCmdScript.loop_count = 0;
 
                 if (anim_start) {
@@ -1278,8 +1265,8 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                         ftAnim_8006EBE8(gobj, anim_start - anim_speed,
                                         anim_speed,
                                         (anim_blend == -1.0f) ? 0.0f
-                                        : (anim_blend) ? anim_blend
-                                                       : (*unk_byte_ptr)[0]);
+                                        : anim_blend ? anim_blend
+                                                     : (*unk_byte_ptr)[0]);
                     }
                     ftAnim_8006E9B4(gobj);
                     if (fp->x594_b0 != 0U) {
@@ -1299,8 +1286,8 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                     if (fp->x590 != 0U) {
                         ftAnim_8006EBE8(gobj, anim_start, anim_speed,
                                         (anim_blend == -1.0f) ? 0.0f
-                                        : (anim_blend) ? anim_blend
-                                                       : (*unk_byte_ptr)[0]);
+                                        : anim_blend ? anim_blend
+                                                     : (*unk_byte_ptr)[0]);
                     }
                     fp->x3E4_fighterCmdScript.timer = 0.0f;
                 }
@@ -1373,8 +1360,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
         if (animflags_bool) {
             if (!fp->x594_b0 && !fp->x594_b0) {
                 !fp;
-                ftCommon_ClampGrVel(fp,
-                                    fp->co_attrs.dash_run_terminal_velocity);
+                ftCommon_ClampGrVel(fp, fp->co_attrs.dash_max_velocity);
             }
         }
 
@@ -1845,23 +1831,31 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 fp->input.x650 = (tempf0 > tempf1) ? tempf0 : tempf1;
             }
 
-            if (ABS(fp->input.lstick.x) <= p_ftCommonData->x0) {
+            if (ABS(fp->input.lstick.x) <=
+                p_ftCommonData->horizontal_stick_deadzone)
+            {
                 fp->input.lstick.x = 0.0f;
             }
 
-            if (ABS(fp->input.lstick.y) <= p_ftCommonData->x4) {
+            if (ABS(fp->input.lstick.y) <=
+                p_ftCommonData->vertical_stick_deadzone)
+            {
                 fp->input.lstick.y = 0.0f;
             }
 
-            if (ABS(fp->input.cstick.x) <= p_ftCommonData->x0) {
+            if (ABS(fp->input.cstick.x) <=
+                p_ftCommonData->horizontal_stick_deadzone)
+            {
                 fp->input.cstick.x = 0.0f;
             }
 
-            if (ABS(fp->input.cstick.y) <= p_ftCommonData->x4) {
+            if (ABS(fp->input.cstick.y) <=
+                p_ftCommonData->vertical_stick_deadzone)
+            {
                 fp->input.cstick.y = 0.0f;
             }
 
-            if (fp->input.x650 <= p_ftCommonData->x10) {
+            if (fp->input.x650 <= p_ftCommonData->analog_shoulder_deadzone) {
                 fp->input.x650 = 0.0f;
             }
 
@@ -1889,7 +1883,7 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 if (!gm_801A45E8(0)) {
                     if (fp->input.held_inputs & HSD_PAD_Z) {
                         fp->input.held_inputs |= HSD_PAD_LR | HSD_PAD_A;
-                        fp->input.x650 = p_ftCommonData->x14;
+                        fp->input.x650 = p_ftCommonData->z_press_analog_value;
                     }
                 }
             }
@@ -1902,9 +1896,11 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 fp->x676_x = 0xFE;
             }
 
-            if (fp->input.lstick.x >= p_ftCommonData->x8_someStickThreshold) {
+            if (fp->input.lstick.x >=
+                p_ftCommonData->horizontal_stick_smash_deadzone)
+            {
                 if (fp->input.lstick1.x >=
-                    p_ftCommonData->x8_someStickThreshold)
+                    p_ftCommonData->horizontal_stick_smash_deadzone)
                 {
                     // Fighter_ClampThreeValues
                     fp->x670_timer_lstick_tilt_x++;
@@ -1926,10 +1922,10 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                     fp->x2228_b7 = 1;
                 }
             } else if (fp->input.lstick.x <=
-                       -p_ftCommonData->x8_someStickThreshold)
+                       -p_ftCommonData->horizontal_stick_smash_deadzone)
             {
                 if (fp->input.lstick1.x <=
-                    -p_ftCommonData->x8_someStickThreshold)
+                    -p_ftCommonData->horizontal_stick_smash_deadzone)
                 {
                     // Fighter_ClampThreeValues
                     fp->x670_timer_lstick_tilt_x++;
@@ -1962,8 +1958,12 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 fp->x677_y = 0xFE;
             }
 
-            if (fp->input.lstick.y >= p_ftCommonData->xC) {
-                if (fp->input.lstick1.y >= p_ftCommonData->xC) {
+            if (fp->input.lstick.y >=
+                p_ftCommonData->vertical_stick_smash_deadzone)
+            {
+                if (fp->input.lstick1.y >=
+                    p_ftCommonData->vertical_stick_smash_deadzone)
+                {
                     // Fighter_ClampThreeValues
                     fp->x671_timer_lstick_tilt_y++;
                     if (fp->x671_timer_lstick_tilt_y > 0xFE) {
@@ -1983,8 +1983,12 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                     fp->x671_timer_lstick_tilt_y = 0;
                     fp->x2229_b0 = 0;
                 }
-            } else if (fp->input.lstick.y <= -p_ftCommonData->xC) {
-                if (fp->input.lstick1.y <= -p_ftCommonData->xC) {
+            } else if (fp->input.lstick.y <=
+                       -p_ftCommonData->vertical_stick_smash_deadzone)
+            {
+                if (fp->input.lstick1.y <=
+                    -p_ftCommonData->vertical_stick_smash_deadzone)
+                {
                     // Fighter_ClampThreeValues
                     fp->x671_timer_lstick_tilt_y++;
                     if (fp->x671_timer_lstick_tilt_y > 0xFE) {
@@ -2012,7 +2016,7 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
 
             if (lb_8000D148(fp->input.lstick1.x, fp->input.lstick1.y,
                             fp->input.lstick.x, fp->input.lstick.y, 0.0f, 0.0f,
-                            p_ftCommonData->x8_someStickThreshold))
+                            p_ftCommonData->horizontal_stick_smash_deadzone))
             {
                 fp->x67A_y = 0;
                 fp->x679_x = 0;
@@ -2024,12 +2028,12 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 fp->x678 = 0xFE;
             }
 
-            if (fp->input.x650 >= p_ftCommonData->x18) {
-                if (fp->input.x654 >= p_ftCommonData->x18) {
+            if (fp->input.x650 >= p_ftCommonData->shield_press_threshold) {
+                if (fp->input.x654 >= p_ftCommonData->shield_press_threshold) {
                     // Fighter_ClampThreeValues
-                    fp->x672_input_timer_counter++;
-                    if (fp->x672_input_timer_counter > 0xFE) {
-                        fp->x672_input_timer_counter = 0xFE;
+                    fp->trigger_analog_timer++;
+                    if (fp->trigger_analog_timer > 0xFE) {
+                        fp->trigger_analog_timer = 0xFE;
                     }
                     fp->x675++;
                     if (fp->x675 > 0xFE) {
@@ -2043,12 +2047,12 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                     fp->x67B = 0;
                     fp->x678 = 0;
                     fp->x675 = 0;
-                    fp->x672_input_timer_counter = 0;
+                    fp->trigger_analog_timer = 0;
                 }
             } else {
                 fp->x67B = 0xFE;
                 fp->x675 = 0xFE;
-                fp->x672_input_timer_counter = 0xFE;
+                fp->trigger_analog_timer = 0xFE;
             }
 
             if (fp->input.x668 & HSD_PAD_A) {
@@ -2206,8 +2210,8 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
                        usually 1. last factor was 1 when I looked*/
                     /*effective friction - ground multiplier is
                        usually 1. last factor was 1 when I looked*/
-                    ft_GetGroundFrictionMultiplier(fp) * pAttr->gr_friction *
-                        p_ftCommonData->x200);
+                    ft_GetGroundFrictionMultiplier(fp) *
+                        pAttr->ground_friction * p_ftCommonData->x200);
 
                 // set knockback velocity to ground_kb_vel * surfaceTangent
                 p_kb_vel->x = pNormal->y * fp->xF0_ground_kb_vel;
@@ -2260,7 +2264,8 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
                     fp,
                     /* effectiveFriction - the last constant variable differs
                        from the one for the knockback friction above*/
-                    ft_GetGroundFrictionMultiplier(fp) * pAttr->gr_friction *
+                    ft_GetGroundFrictionMultiplier(fp) *
+                        pAttr->ground_friction *
                         p_ftCommonData->x3EC_shieldGroundFrictionMultiplier);
 
                 /* effectiveFriction - the last constant variable differs from
@@ -2337,7 +2342,7 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
                 VEC_CLEAR(fp->xD4_unk_vel);
             }
             // fp->xB0_position += *pAtkShieldKB
-            PSVECAdd(&fp->cur_pos, (Vec3*) pAtkShieldKB, &fp->cur_pos);
+            PSVECAdd(&fp->cur_pos, pAtkShieldKB, &fp->cur_pos);
         } else {
             // fp@r31.position@0xB0.xyz += selfVel + pAtkShieldKB
             PSVECAdd(&fp->cur_pos, &selfVel, &fp->cur_pos);
@@ -2345,7 +2350,7 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
             fp->cur_pos.y += p_kb_vel->y;
             fp->cur_pos.z += 0;
 
-            PSVECAdd(&fp->cur_pos, (Vec3*) pAtkShieldKB, &fp->cur_pos);
+            PSVECAdd(&fp->cur_pos, pAtkShieldKB, &fp->cur_pos);
         }
         // accumulate wind hazards into the windOffset vector
         ftColl_GetWindOffsetVec(gobj,
@@ -2658,21 +2663,21 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1)
     Vec3 vec;
     PAD_STACK(8);
 
-    if (fp->item_gobj && !it_8026B2B4(fp->item_gobj)) {
+    if (fp->item_gobj && !itIsHeavy(fp->item_gobj)) {
         hold_item_bool = true;
     }
 
-    temp_bool = !((fp->x2220_b3 || fp->x2220_b4 || ftCo_8008E984(fp)));
+    temp_bool = !(fp->x2220_b3 || fp->x2220_b4 || ftCo_8008E984(fp));
     vec = vec3_803B7494;
 
     if (fp->motion_id != 0x145 && (unsigned) fp->motion_id - 0x122 > 1 &&
-        fp->dmg.x1860_element != 0xAU && !fp->x2226_b2)
+        fp->dmg.x1860_element != HitElement_Cape && !fp->x2226_b2)
     {
         if ( ///// giant if condition
             hold_item_bool && temp_bool &&
             ((HSD_Randi(p_ftCommonData->x418) < arg1) ||
-             ((((it_8026B30C(fp->item_gobj) == 3) &&
-                it_8026B594(fp->item_gobj))) &&
+             (((it_8026B30C(fp->item_gobj) == 3) &&
+               it_8026B594(fp->item_gobj)) &&
               !HSD_Randi(p_ftCommonData->x41C))))
         {
             if (fp->x1978) {
@@ -2722,7 +2727,7 @@ void Fighter_8006CFE0(Fighter_GObj* gobj)
     }
 }
 
-inline void setBit(Fighter_GObj* gobj)
+static inline void setBit(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2219_b7 = 1;
@@ -2875,10 +2880,10 @@ void Fighter_ProcessHit_8006D1EC(Fighter_GObj* gobj)
 
             } else {
                 switch (fp->kind) {
-                case 0x1B:
+                case FTKIND_MASTERH:
                     ftMh_MS_341_8014FE58(gobj);
                     break;
-                case 0x1C:
+                case FTKIND_CREZYH:
                     ftCh_Init_80156014(gobj);
                     break;
                 default:
@@ -3069,7 +3074,7 @@ void Fighter_Unload_8006DABC(void* user_data)
 {
     /// @remarks This doesn't use #GET_FIGHTER, but since it appears to pass it
     ///          directly it's probably just written directly.
-    Fighter* fp = (Fighter*) (user_data);
+    Fighter* fp = (Fighter*) user_data;
     int kind = fp->kind;
 
     if (ftData_OnUserDataRemove[kind]) {

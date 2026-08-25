@@ -10,15 +10,16 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/items/itegg.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
+#include "it/itspawn.h"
 #include "lb/lb_00B0.h"
 #include "sysdolphin/baselib/random.h"
 
@@ -190,8 +191,7 @@ static inline void it_802D533C_inline(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDAC_itcmd_var0 = 0;
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 void it_802D533C(Item_GObj* gobj)
@@ -274,11 +274,7 @@ void itLucky_UnkMotion6_Phys(Item_GObj* gobj)
 
 void it_802D5560(HSD_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_EnterStateWithEffectHitlag(gobj, 0);
     it_80273670(gobj, 0, 0.0f);
     it_8026BDB4(gobj);
 }
@@ -330,7 +326,7 @@ static inline Item_GObj* it_802D5710_inline(Item_GObj* gobj, Vec3* pos,
 {
     Item* ip = gobj->user_data;
     SpawnItem spawn;
-    spawn.kind = Pokemon_Lucky_Egg;
+    spawn.kind = It_Kind_Lucky_Egg;
     spawn.prev_pos = *pos;
     spawn.prev_pos.z = 0.0f;
     spawn.pos = spawn.prev_pos;
@@ -368,7 +364,7 @@ void it_802D582C(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(12);
     it_8026B390(gobj);
-    ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0f;
+    itResetVelocity(ip);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 

@@ -18,43 +18,12 @@
 
 #include "ftCommon/ftCo_KinokoGiantEnd.h"
 
-#include <melee/cm/camera.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftCommon/ftCo_Attack1.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackHi3.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackHi4.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackLw3.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackLw4.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackS3.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackS4.h>
-#include <melee/ft/chara/ftCommon/ftCo_DamageIce.h>
-#include <melee/ft/chara/ftCommon/ftCo_Escape.h>
-#include <melee/ft/chara/ftCommon/ftCo_FallSpecial.h>
-#include <melee/ft/chara/ftCommon/ftCo_Guard.h>
-#include <melee/ft/chara/ftCommon/ftCo_Lift.h>
-#include <melee/ft/chara/ftCommon/ftCo_SpecialS.h>
-#include <melee/ft/ft_0877.h>
-#include <melee/ft/ft_0881.h>
-#include <melee/ft/ft_0CDD.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftchangeparam.h>
-#include <melee/ft/ftlib.h>
-#include <melee/ft/ftmaterial.h>
-#include <melee/ft/ftmetal.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gr/stage.h>
-#include <melee/it/item.h>
-#include <melee/it/items/it_2E5A.h>
-#include <melee/it/items/itkinoko.h>
-#include <melee/pl/pl_040D.h>
-#include <melee/pl/player.h>
-#include <melee/pl/plbonuslib.h>
-#include <melee/pl/plstale.h>
-
 /* 0D20EC */ static void fn_800D20EC(Fighter_GObj* gobj);
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 bool Fighter_PoisonMushroomApply(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -90,7 +59,9 @@ bool Fighter_PoisonMushroomApply(Fighter_GObj* gobj)
     }
     return true;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftCo_800D1F6C(Fighter_GObj* gobj)
 {
@@ -145,8 +116,10 @@ void fn_800D20EC(Fighter_GObj* gobj)
     fp->take_dmg_cb = ftCo_800D1F6C;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftCo_KinokoSmallStart_Anim(Fighter_GObj* gobj)
 {
     u8 _[8];
@@ -154,7 +127,9 @@ void ftCo_KinokoSmallStart_Anim(Fighter_GObj* gobj)
         ftCo_800D1F6C(gobj);
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftCo_KinokoSmallStart_Coll(Fighter_GObj* gobj)
 {
@@ -182,8 +157,10 @@ void fn_800D22AC(Fighter_GObj* gobj)
     fp->take_dmg_cb = ftCo_800D1F6C;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftCo_KinokoSmallStartAir_Anim(Fighter_GObj* gobj)
 {
     u8 _[8];
@@ -191,7 +168,9 @@ void ftCo_KinokoSmallStartAir_Anim(Fighter_GObj* gobj)
         ftCo_800D1F6C(gobj);
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftCo_KinokoSmallStartAir_Coll(Fighter_GObj* gobj)
 {

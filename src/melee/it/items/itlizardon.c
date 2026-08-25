@@ -1,23 +1,24 @@
 #include "itlizardon.h"
 
+#include "inlines.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/item.h"
-#include "it/itmaplib.h"
+#include "it/itgroundcoll.h"
 #include "lb/lb_00B0.h"
-#include "MSL/math.h"
 #include "sysdolphin/baselib/random.h"
+
+#include <math.h>
 
 ItemStateTable it_803F7BC0[] = { {
                                      0,
@@ -84,8 +85,7 @@ void it_802CB994(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool itLizardon_UnkMotion1_Anim(Item_GObj* gobj)
@@ -141,15 +141,13 @@ void it_802CBAA8(Item_GObj* gobj)
     ip->xDD4_itemVar.lizardon.x74[1] = attrs->x18[1];
     ip->xDD4_itemVar.lizardon.x74[2] = attrs->x18[2];
     ip->xDD4_itemVar.lizardon.x74[3] = attrs->x18[3];
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     ip->on_accessory = it_802CBD24;
 }
 
 bool itLizardon_UnkMotion2_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    PAD_STACK(8);
     if (!it_80272C6C(gobj)) {
         if (ip->xDD4_itemVar.lizardon.x60 <= 0) {
             ip->xDD4_itemVar.lizardon.x60 = 0;
@@ -273,8 +271,7 @@ void it_802CBFE4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool itLizardon_UnkMotion3_Anim(Item_GObj* gobj)
@@ -297,12 +294,7 @@ bool itLizardon_UnkMotion3_Coll(Item_GObj* gobj)
 
 void it_802CC0EC(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
-    it_80273670(gobj, 0, 0.0f);
+    Item_EnterAirStateWithHitlagAndStateDesc(gobj);
 }
 
 bool it_802CC160(Item_GObj* gobj)
@@ -448,19 +440,14 @@ void it_802CC5D4(Item_GObj* gobj)
     it_80275158(gobj, attrs->x0);
     it_80274740(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     it_8026B3A8(gobj);
 }
 
 bool it_802CC650(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    if (ip->xD44_lifeTimer <= 0.0f) {
-        return true;
-    }
-    ip->xD44_lifeTimer -= 1.0f;
-    return false;
+    return Item_TickLifetime(ip);
 }
 
 void it_802CC684(Item_GObj* gobj)

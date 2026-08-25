@@ -5,7 +5,10 @@
 
 #include <platform.h>
 
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftparts.h"
@@ -25,11 +28,11 @@ void ftCl_AppealS_Anim(HSD_GObj* gobj)
 
     fp0 = fp1 = gobj->user_data;
 
-    if (fp0->cmd_vars[1] == 1 && fp1->fv.lk.x18 == NULL) {
+    if (fp0->cmd_vars[1] == 1 && fp1->u.lk.x18 == NULL) {
         HSD_GObj* item_gobj = it_802C8B28(
             gobj, &fp0->cur_pos, ftParts_GetBoneIndex(fp1, FtPart_LThumbNb),
             fp0->facing_dir);
-        fp0->fv.lk.x18 = item_gobj;
+        fp0->u.lk.x18 = item_gobj;
         if (item_gobj != NULL) {
             fp0->death2_cb = ftLk_800EAF58;
             fp0->take_dmg_cb = ftLk_800EAF58;

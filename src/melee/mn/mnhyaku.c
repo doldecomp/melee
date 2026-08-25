@@ -10,6 +10,11 @@
 
 #include "sc/types.h"
 
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjplink.h>
+#include <baselib/gobjuserdata.h>
+#include <baselib/memory.h>
+
 static HSD_GObj* mnHyaku_804D6C58;
 
 void gm_801677E8(void);
@@ -70,22 +75,22 @@ void mnHyaku_8024C68C(HSD_GObj* arg0)
         // load the different multi-man melee modes
         switch (menu->cursor) {
         case 0:
-            mn_80229860(0x21);
+            mn_80229860(GM_10MAN_VS);
             return;
         case 1:
-            mn_80229860(0x22);
+            mn_80229860(GM_100MAN_VS);
             return;
         case 2:
-            mn_80229860(0x23);
+            mn_80229860(GM_3MIN_VS);
             return;
         case 3:
-            mn_80229860(0x24);
+            mn_80229860(GM_15MIN_VS);
             return;
         case 4:
-            mn_80229860(0x25);
+            mn_80229860(GM_ENDLESS_VS);
             return;
         case 5:
-            mn_80229860(0x26);
+            mn_80229860(GM_CRUEL_VS);
             return;
         }
     } else {
@@ -159,25 +164,9 @@ void mnHyaku_8024CAC8(HSD_GObj* gobj)
     }
 }
 
-inline static Menu* allocMenu(u8 arg0, HSD_GObj* gobj)
-{
-    Menu* user_data;
-
-    user_data = HSD_MemAlloc(8);
-    /// @todo Convert to @c HSD_ASSERTREPORT once a byte-matching form is
-    /// found.
-    if (user_data == NULL) {
-        OSReport("Can't get user_data.\n");
-        __assert(__FILE__, 360, "user_data");
-    }
-    user_data->cursor = arg0;
-    user_data->text = 0;
-    GObj_InitUserData(gobj, 0, HSD_Free, user_data);
-    return user_data;
-}
-
 void mnHyaku_8024CB94(u8 arg0)
 {
+    Menu* user_data;
     HSD_GObj* gobj;
     HSD_GObjProc* proc;
     HSD_JObj* jobj;
@@ -194,8 +183,12 @@ void mnHyaku_8024CB94(u8 arg0)
     HSD_JObjReqAnimAll(jobj, 0.0F);
     HSD_JObjAnimAll(jobj);
 
-    menu = allocMenu(arg0, gobj);
-    mnHyaku_8024C68C_inline(jobj, menu->cursor);
+    user_data = HSD_MemAlloc(sizeof(*user_data));
+    HSD_ASSERTREPORT(360, user_data, "Can't get user_data.\n");
+    user_data->cursor = arg0;
+    user_data->text = 0;
+    GObj_InitUserData(gobj, 0, HSD_Free, user_data);
+    mnHyaku_8024C68C_inline(jobj, user_data->cursor);
 
     proc = HSD_GObj_SetupProc(gobj, mnHyaku_8024CAC8, 0U);
     proc->flags_3 = HSD_GObj_804D783C;

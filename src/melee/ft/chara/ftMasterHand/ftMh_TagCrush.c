@@ -2,16 +2,13 @@
 
 #include "ftMh_Wait1_2.h"
 
-#include <platform.h>
-
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
 
-#include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
-#include "ftCrazyHand/ftCh_Init.h"
 #include "ftCrazyHand/ftCh_Squeeze.h"
 
 #include "ftMasterHand/forward.h"
@@ -50,7 +47,7 @@ void ftMh_MS_382_801552F8(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     fp->cmd_vars[1] = 0;
     {
-        HSD_GObj* gobj_2 = ftBossLib_8015C3E8(28);
+        HSD_GObj* gobj_2 = ftBossLib_8015C3E8(FTKIND_CREZYH);
         if (!ftBossLib_8015C31C()) {
             ftCh_Init_8015A3F4(gobj_2);
         }

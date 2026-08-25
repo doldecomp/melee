@@ -2,6 +2,7 @@
 
 #include "placeholder.h"
 
+#include "dolphin/pad.h"
 #include "gm/gm_unsplit.h"
 #include "gm/gmmain_lib.h"
 #include "lb/lbarchive.h"
@@ -10,10 +11,8 @@
 #include "lb/lbspdisplay.h"
 #include "sc/types.h"
 #include "ty/toy.h"
-#include "ty/tylist.h"
 
-#include <printf.h>
-#include <dolphin/mtx.h>
+#include <stdio.h>
 #include <baselib/archive.h>
 #include <baselib/cobj.h>
 #include <baselib/dobj.h>
@@ -23,15 +22,10 @@
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
-#include <baselib/memory.h>
-#include <baselib/particle.h>
 #include <baselib/random.h>
 #include <baselib/sislib.h>
-#include <MSL/stdio.h>
-#include <MSL/string.h>
 
 /// .data
 /* 3F9A00 */ static int un_803F9A00[] = {
@@ -42,7 +36,7 @@
 };
 /* 3F9B30 */ static struct un_803F9B30 {
     int x0;
-    unsigned short x4;
+    u16 x4;
 } un_803F9B30[67] = {
     { 0, 0 },   { 1, 1 },   { 2, 2 },   { 3, 3 },   { 4, 4 },   { 5, 5 },
     { 6, 6 },   { 7, 7 },   { 8, 8 },   { 9, 9 },   { 10, 10 }, { 11, 11 },
@@ -58,8 +52,8 @@
     { 66, 0 }
 };
 struct un_802FEBE0_OnEnter_arg0 {
-    unsigned short x0;
-    unsigned short x2;
+    u16 x0;
+    u16 x2;
     int x4;
     struct un_802FEBE0_OnEnter_arg0* x8;
 };
@@ -70,9 +64,9 @@ struct un_803F9D48 {
     unsigned char x1;
     char x2;
     unsigned char x3;
-    unsigned short x4;
-    unsigned short x6;
-    unsigned short x8;
+    u16 x4;
+    u16 x6;
+    u16 x8;
     unsigned char xA;
     unsigned char xB;
     int xC;
@@ -93,7 +87,7 @@ struct un_803F9D48 {
 /* 4D6D98 */ static HSD_Archive* un_804D6D98;
 /* 4D6D9C */ static SceneDesc* un_804D6D9C;
 
-void un_802FE3F8(int a, int b, short* c, short* d)
+void un_802FE3F8(int a, int b, s16* c, s16* d)
 {
     struct un_803F9B30* x;
     for (x = &un_803F9B30[0]; x->x0 != 66; x++) {
@@ -112,13 +106,13 @@ void un_802FE3F8(int a, int b, short* c, short* d)
     }
 }
 
-static inline void un_802FE3F8_inner(int a, int b, short* c, short* d)
+static inline void un_802FE3F8_inner(int a, int b, s16* c, s16* d)
 {
     un_802FE3F8(a, b, c, d);
 }
 
 /// un_802FEBE0_OnEnter will inline un_802FE3F8 otherwise
-static inline void un_802FE3F8_noinline(int a, int b, short* c, short* d)
+static inline void un_802FE3F8_noinline(int a, int b, s16* c, s16* d)
 {
     un_802FE3F8_inner(a, b, c, d);
 }
@@ -141,7 +135,9 @@ void fn_802FE470(HSD_GObj* gobj)
             break;
         case 1:
             un_803F9D48.x2 = 0xA;
-            if (gm_801A36A0(4) & 0x1100) {
+            if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
+                (PAD_BUTTON_A | PAD_BUTTON_START))
+            {
                 if (un_803F9D48.x2C == NULL) {
                     un_802FE8CC();
                 } else {
@@ -245,29 +241,39 @@ static void setArchive(void)
     }
 }
 
+static inline void un_802FE918_update_x3(unsigned char* x3_ptr, int* r)
+{
+    int old_x3;
+    int k;
+    int new_x3;
+
+    old_x3 = *x3_ptr;
+    for (k = 0; k < 3; k++) {
+        if (k == old_x3) {
+            (*r)++;
+        } else if (*r == k) {
+            new_x3 = *r;
+            break;
+        }
+    }
+    *x3_ptr = new_x3;
+}
+
 void un_802FE918(int a, int b, int c)
 {
     struct un_803F9B30* x;
-    int new_x3;
+    unsigned char* x3_ptr;
     int r;
-    int k;
     int i;
     char sp1C[0x104];
     HSD_Text** text;
     datetime sp14;
 
     lbAudioAx_800236DC();
-    lbAudioAx_80023F28(un_803F9D48.x30[un_803F9D48.x3]);
+    x3_ptr = &un_803F9D48.x3;
+    lbAudioAx_80023F28(un_803F9D48.x30[*x3_ptr]);
     r = HSD_Randi(2);
-    for (k = 0; k < 3; k++) {
-        if (un_803F9D48.x3 == k) {
-            r++;
-        } else if (r == k) {
-            new_x3 = r;
-            break;
-        }
-    }
-    un_803F9D48.x3 = new_x3;
+    un_802FE918_update_x3(x3_ptr, &r);
     gmMainLib_8015D8B0(a);
     for (x = &un_803F9B30[0]; x->x0 != 66; x++) {
         if (x->x0 == a) {
@@ -279,15 +285,16 @@ void un_802FE918(int a, int b, int c)
 found:
     un_803F9D48.x4 = i;
     if (a == 0x3E) {
-        unsigned short v_x8;
-        un_802FE3F8(a, 2, (short*) &un_803F9D48.x6, (short*) &un_803F9D48.x8);
-        v_x8 = un_803F9D48.x8;
-        HSD_SisLib_803A6530(2, 0x4A, un_803F9D48.x6);
+        u16 v_x6;
+        un_802FE3F8(a, 2, (s16*) &un_803F9D48.x6, (s16*) &un_803F9D48.x8);
+        v_x6 = un_803F9D48.x6;
+        r = un_803F9D48.x8;
+        HSD_SisLib_803A6530(2, 0x4A, v_x6);
         HSD_SisLib_803A660C(2, 0x4A, Toy_803063D4(b, 0x4E, 0x174));
-        HSD_SisLib_803A660C(2, 0x4A, v_x8);
+        HSD_SisLib_803A660C(2, 0x4A, r);
         HSD_SisLib_803A6368(un_803F9D48.x20, 0x4A);
     } else {
-        un_802FE3F8(a, 2, (short*) &un_803F9D48.x6, NULL);
+        un_802FE3F8(a, 2, (s16*) &un_803F9D48.x6, NULL);
         HSD_SisLib_803A6368(un_803F9D48.x20, un_803F9D48.x6);
     }
     gm_801692E8(c, &sp14);
@@ -328,7 +335,7 @@ void un_802FEBE0_OnEnter(void* arg0_)
     i = 0;
 found:
     un_803F9D48.x4 = i;
-    un_802FE3F8_noinline(arg0x0, 2, (short*) &un_803F9D48.x6, NULL);
+    un_802FE3F8_noinline(arg0x0, 2, (s16*) &un_803F9D48.x6, NULL);
     un_803F9D48.x2 = -1;
     un_803F9D48.x1 = 0;
     un_803F9D48.xC = arg0x4;

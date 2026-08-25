@@ -1,16 +1,15 @@
 #include "itcerebi.h"
 
+#include "inlines.h"
+
 #include "baselib/random.h"
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "gr/stage.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/item.h"
-#include "it/itmaplib.h"
 
 /* 2D3F6C */ static void it_802D3F6C(Item_GObj* gobj);
 /* 2D3FA0 */ static void it_802D3FA0(Item_GObj* gobj);
@@ -65,8 +64,7 @@ void it_802D3FA0(Item_GObj* gobj)
     jobj = GET_JOBJ(gobj);
     f = 1.0f;
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    item->entered_hitlag = efLib_PauseAll;
-    item->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(item);
     efSync_Spawn(0x472, gobj, jobj, &f);
 }
 
@@ -91,8 +89,7 @@ void it_802D4070(Item_GObj* gobj)
     float* attrs = item->xC4_article_data->x4_specialAttributes;
 
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
-    item->entered_hitlag = efLib_PauseAll;
-    item->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(item);
     if (HSD_Randi(2) != 0) {
         item->x40_vel.x = attrs[1];
     } else {
@@ -124,13 +121,7 @@ bool itCerebi_UnkMotion2_Coll(Item_GObj* gobj)
 
 void it_802D4168(Item_GObj* gobj)
 {
-    Item* item = GET_ITEM(gobj);
-
-    it_802762BC(item);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    item->entered_hitlag = efLib_PauseAll;
-    item->exited_hitlag = efLib_ResumeAll;
-    it_80273670(gobj, 0, 0.0f);
+    Item_EnterAirStateWithHitlagAndStateDesc(gobj);
 }
 
 bool itCerebi_UnkMotion0_Anim(Item_GObj* gobj)
@@ -151,8 +142,7 @@ void itCerebi_UnkMotion0_Phys(Item_GObj* gobj)
         jobj = GET_JOBJ(gobj);
         f = 1.0f;
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-        item->entered_hitlag = efLib_PauseAll;
-        item->exited_hitlag = efLib_ResumeAll;
+        Item_SetEffectHitlagCallbacks(item);
         efSync_Spawn(0x472, gobj, jobj, &f);
     }
 }

@@ -1,7 +1,6 @@
 #include <platform.h>
 
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -9,12 +8,10 @@
 
 #include "lb/forward.h"
 
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 /* 2225D0 */ static void grTNess_802225D0(bool);
@@ -38,7 +35,7 @@
 /* 2228A4 */ static DynamicsDesc* grTNess_802228A4(enum_t);
 /* 2228AC */ static bool grTNess_802228AC(Vec3*, int, HSD_JObj*);
 
-static StageCallbacks grTNs_803E9030[] = {
+static StageCallbacks grTNs_StageCallbacks[] = {
     {
         grTNess_8022275C,
         grTNess_80222788,
@@ -61,9 +58,9 @@ static StageCallbacks grTNs_803E9030[] = {
     { 0 },
 };
 
-StageData grTNs_803E908C = {
-    TNESS,
-    grTNs_803E9030,
+StageData grTNs_StageData = {
+    Gr_Kind_TNess,
+    grTNs_StageCallbacks,
     "/GrTNs.dat",
     grTNess_802225D4,
     grTNess_802225D0,
@@ -82,15 +79,7 @@ static void grTNess_802225D0(bool arg0)
 
 static void grTNess_802225D4(void)
 {
-    stage_info.unk8C.b4 = 0;
-    stage_info.unk8C.b5 = 1;
-    grTNess_80222674(0);
-    grTNess_80222674(1);
-    grTNess_80222674(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTNess_80222674);
 }
 
 static void grTness_UnkStage0_OnLoad(void)
@@ -111,7 +100,7 @@ static bool grTNess_8022266C(void)
 static HSD_GObj* grTNess_80222674(int id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTNs_803E9030[id];
+    StageCallbacks* callbacks = &grTNs_StageCallbacks[id];
 
     gobj = Ground_GetStageGObj(id);
 
@@ -130,31 +119,27 @@ static void grTNess_8022275C(Ground_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTNess_80222788(Ground_GObj* arg0)
+static bool grTNess_80222788(Ground_GObj* gobj)
 {
     return false;
 }
 
-static void grTNess_80222790(Ground_GObj* arg0)
+static void grTNess_80222790(Ground_GObj* gobj)
 {
     return;
 }
 
-static void grTNess_80222794(Ground_GObj* arg0)
+static void grTNess_80222794(Ground_GObj* gobj)
 {
     return;
 }
 
 static void grTNess_80222798(Ground_GObj* gobj)
 {
-    u8 _[8];
-
-    Ground* gp = gobj->user_data;
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
-static bool grTNess_802227E8(Ground_GObj* arg0)
+static bool grTNess_802227E8(Ground_GObj* gobj)
 {
     return false;
 }
@@ -165,21 +150,17 @@ static void grTNess_802227F0(Ground_GObj* gobj)
     Ground_801C2FE0(gobj);
 }
 
-static void grTNess_80222824(Ground_GObj* arg0)
+static void grTNess_80222824(Ground_GObj* gobj)
 {
     return;
 }
 
 static void grTNess_80222828(Ground_GObj* gobj)
 {
-    u8 _[8];
-
-    Ground* gp = gobj->user_data;
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
-static bool grTNess_80222878(Ground_GObj* arg0)
+static bool grTNess_80222878(Ground_GObj* gobj)
 {
     return false;
 }
@@ -189,7 +170,7 @@ static void grTNess_80222880(Ground_GObj* gobj)
     Ground_801C2FE0(gobj);
 }
 
-static void grTNess_802228A0(Ground_GObj* arg0)
+static void grTNess_802228A0(Ground_GObj* gobj)
 {
     return;
 }

@@ -4,10 +4,11 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "melee/ft/dobjlist.h" // IWYU pragma: keep
+
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-#include <melee/ft/dobjlist.h>
 
 struct ftPurin_FighterVars {
     /* 0x222C */ u32 x222C;
@@ -102,6 +103,6 @@ typedef struct _ftPurinAttributes {
     float xF4;
     u8 _F8[0x100 - 0xF8];
 } ftPurinAttributes;
-STATIC_ASSERT(sizeof(ftPurinAttributes) == 0x100);
+ASSERT_SIZE(ftPurinAttributes, 0x100);
 
 #endif

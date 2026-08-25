@@ -3,29 +3,30 @@
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_Fall.h"
-#include "ft/chara/ftPopo/ftPp_SpecialS.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ftCommon/inlines.h"
 #include "ftPopo/ftPp_Init.h"
 #include "ftPopo/ftPp_SpecialHi.h"
 #include "it/items/itclimbersblizzard.h"
 #include "lb/lb_00B0.h"
-#include "pl/player.h"
-
-#include <trigf.h>
 
 void ftPp_SpecialHi_80122898(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     PAD_STACK(16);
-    if (fp->fv.pp.x2230_b0) {
+    if (fp->u.pp.x2230_b0) {
         efLib_DestroyAll(gobj);
         fp = gobj->user_data;
-        fp->fv.pp.x2230_b0 = false;
+        fp->u.pp.x2230_b0 = false;
         fp->death2_cb = NULL;
         fp->take_dmg_cb = NULL;
         ftPartSetRotX(gobj->user_data, 0, 0.0f);
@@ -67,10 +68,10 @@ void ftPp_SpecialLw_Anim(Fighter_GObj* gobj)
     PAD_STACK(16);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = gobj->user_data;
-        if (fp->fv.pp.x2230_b0) {
+        if (fp->u.pp.x2230_b0) {
             efLib_DestroyAll(gobj);
             fp = gobj->user_data;
-            fp->fv.pp.x2230_b0 = false;
+            fp->u.pp.x2230_b0 = false;
             fp->death2_cb = NULL;
             fp->take_dmg_cb = NULL;
             ftPartSetRotX(gobj->user_data, 0, 0.0f);
@@ -84,10 +85,10 @@ void ftPp_SpecialAirLw_Anim(Fighter_GObj* gobj)
     PAD_STACK(16);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = gobj->user_data;
-        if (fp->fv.pp.x2230_b0) {
+        if (fp->u.pp.x2230_b0) {
             efLib_DestroyAll(gobj);
             fp = gobj->user_data;
-            fp->fv.pp.x2230_b0 = false;
+            fp->u.pp.x2230_b0 = false;
             fp->death2_cb = NULL;
             fp->take_dmg_cb = NULL;
             ftPartSetRotX(gobj->user_data, 0, 0.0f);
@@ -148,9 +149,8 @@ void fn_80122B54(Fighter_GObj* gobj)
 static inline void ftPp_SpecialLw_Coll_Land(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialAirLw, 0x0C4C5282,
-                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftPp_MS_SpecialAirLw,
+                                    ftPp_MF_SpecialLw_Coll);
     ftPp_set_cbs(gobj);
     fp->accessory4_cb = fn_80122D2C;
     ftCommon_ClampAirDrift(fp);
@@ -193,7 +193,7 @@ void fn_80122D2C(Fighter_GObj* gobj)
     case 1:
         efSync_Spawn(0x4EC, gobj, fp->parts[FtPart_L4thNb].joint);
         fp->mv.pp.speciallw.x4_b0 = true;
-        fp->fv.pp.x2230_b0 = true;
+        fp->u.pp.x2230_b0 = true;
         ftPp_set_cbs(gobj);
         fp->cmd_vars[0] = 0;
         if (fp->kind == FTKIND_POPO) {

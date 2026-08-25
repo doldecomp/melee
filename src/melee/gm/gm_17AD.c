@@ -1,13 +1,18 @@
 #include "gm_17AD.h"
 
+#include "gm/inlines.h"
+
 #include <melee/pl/forward.h>
 
 #include <melee/gm/gmresult.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lblanguage.h>
 
-/// @todo :: figure out how to force the other functions not to inline this
+/// @todo Figure out how to force the other functions not to inline this
+#ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
+#endif
 s32 fn_8017AD04(s32 arg0, s32 arg1)
 {
     s32 temp_r0;
@@ -21,7 +26,9 @@ s32 fn_8017AD04(s32 arg0, s32 arg1)
     }
     return arg0;
 }
-#pragma dont_inline reset
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 s32 fn_8017AD28(s32 arg0)
 {
@@ -60,12 +67,7 @@ s32 fn_8017ADA8(s32 slot)
 
     me = fn_80174274();
     var_r3 = me->player_standings[slot].x1C;
-    if (var_r3 > 999999) {
-        var_r3 = 999999;
-    } else if (var_r3 < -999999) {
-        var_r3 = -999999;
-    }
-    return var_r3;
+    return gmClampResultStat(var_r3);
 }
 
 s32 fn_8017AE0C(s32 arg0)
@@ -75,12 +77,7 @@ s32 fn_8017AE0C(s32 arg0)
 
     me = fn_80174274();
     var_r3 = me->player_standings[arg0].x20;
-    if (var_r3 > 999999) {
-        var_r3 = 999999;
-    } else if (var_r3 < -999999) {
-        var_r3 = -999999;
-    }
-    return var_r3;
+    return gmClampResultStat(var_r3);
 }
 
 s32 fn_8017AE70(s32 arg0)
@@ -151,12 +148,7 @@ s32 fn_8017B010(s32 arg0)
     me = fn_80174274();
     var_r3 = me->player_standings[arg0].x24 -
              me->player_standings[arg0].self_destructs;
-    if (var_r3 > 999999) {
-        var_r3 = 999999;
-    } else if (var_r3 < -999999) {
-        var_r3 = -999999;
-    }
-    return var_r3;
+    return gmClampResultStat(var_r3);
 }
 
 s32 fn_8017B07C(s32 arg0)
@@ -226,12 +218,7 @@ s32 fn_8017B21C(s32 arg0)
 
     me = fn_80174274();
     var_r3 = me->player_standings[arg0].self_destructs;
-    if (var_r3 > 999999) {
-        var_r3 = 999999;
-    } else if (var_r3 < -999999) {
-        var_r3 = -999999;
-    }
-    return var_r3;
+    return gmClampResultStat(var_r3);
 }
 
 s32 fn_8017B280(s32 arg0)
@@ -241,12 +228,7 @@ s32 fn_8017B280(s32 arg0)
 
     me = fn_80174274();
     var_r3 = me->player_standings[arg0].x40;
-    if (var_r3 > 999999) {
-        var_r3 = 999999;
-    } else if (var_r3 < -999999) {
-        var_r3 = -999999;
-    }
-    return var_r3;
+    return gmClampResultStat(var_r3);
 }
 
 s32 fn_8017B2E4(s32 arg0)
@@ -256,12 +238,7 @@ s32 fn_8017B2E4(s32 arg0)
 
     me = fn_80174274();
     var_r3 = me->player_standings[arg0].x44;
-    if (var_r3 > 999999) {
-        var_r3 = 999999;
-    } else if (var_r3 < -999999) {
-        var_r3 = -999999;
-    }
-    return var_r3;
+    return gmClampResultStat(var_r3);
 }
 
 s32 fn_8017B348(s32 arg0)
@@ -271,12 +248,7 @@ s32 fn_8017B348(s32 arg0)
 
     me = fn_80174274();
     var_r3 = me->player_standings[arg0].x48;
-    if (var_r3 > 999999) {
-        var_r3 = 999999;
-    } else if (var_r3 < -999999) {
-        var_r3 = -999999;
-    }
-    return var_r3;
+    return gmClampResultStat(var_r3);
 }
 
 s32 fn_8017B3AC(s32 arg0)
@@ -286,12 +258,7 @@ s32 fn_8017B3AC(s32 arg0)
 
     me = fn_80174274();
     var_r3 = me->player_standings[arg0].x4C;
-    if (var_r3 > 999999) {
-        var_r3 = 999999;
-    } else if (var_r3 < -999999) {
-        var_r3 = -999999;
-    }
-    return var_r3;
+    return gmClampResultStat(var_r3);
 }
 
 s32 fn_8017B410(s32 arg0)
@@ -306,12 +273,7 @@ s32 fn_8017B410(s32 arg0)
     } else {
         var_r3 = me->player_standings[arg0].x5C / 100;
     }
-    if (var_r3 > 999999) {
-        var_r3 = 999999;
-    } else if (var_r3 < -999999) {
-        var_r3 = -999999;
-    }
-    return var_r3;
+    return gmClampResultStat(var_r3);
 }
 
 s32 fn_8017B4D0(s32 arg0)
@@ -321,12 +283,7 @@ s32 fn_8017B4D0(s32 arg0)
 
     me = fn_80174274();
     var_r3 = me->player_standings[arg0].x6C;
-    if (var_r3 > 999999) {
-        var_r3 = 999999;
-    } else if (var_r3 < -999999) {
-        var_r3 = -999999;
-    }
-    return var_r3;
+    return gmClampResultStat(var_r3);
 }
 
 s32 fn_8017B534(s32 arg0)
@@ -336,12 +293,7 @@ s32 fn_8017B534(s32 arg0)
 
     me = fn_80174274();
     var_r3 = me->player_standings[arg0].x70;
-    if (var_r3 > 999999) {
-        var_r3 = 999999;
-    } else if (var_r3 < -999999) {
-        var_r3 = -999999;
-    }
-    return var_r3;
+    return gmClampResultStat(var_r3);
 }
 
 s32 fn_8017B598(s32 arg0)
@@ -351,12 +303,7 @@ s32 fn_8017B598(s32 arg0)
 
     me = fn_80174274();
     var_r3 = me->player_standings[arg0].x34;
-    if (var_r3 > 999999) {
-        var_r3 = 999999;
-    } else if (var_r3 < -999999) {
-        var_r3 = -999999;
-    }
-    return var_r3;
+    return gmClampResultStat(var_r3);
 }
 
 s32 fn_8017B5FC(s32 arg0)
@@ -366,12 +313,7 @@ s32 fn_8017B5FC(s32 arg0)
 
     me = fn_80174274();
     var_r3 = me->player_standings[arg0].x74;
-    if (var_r3 > 999999) {
-        var_r3 = 999999;
-    } else if (var_r3 < -999999) {
-        var_r3 = -999999;
-    }
-    return var_r3;
+    return gmClampResultStat(var_r3);
 }
 
 s32 fn_8017B660(s32 arg0)
@@ -381,12 +323,7 @@ s32 fn_8017B660(s32 arg0)
 
     me = fn_80174274();
     var_r3 = me->player_standings[arg0].x78;
-    if (var_r3 > 999999) {
-        var_r3 = 999999;
-    } else if (var_r3 < -999999) {
-        var_r3 = -999999;
-    }
-    return var_r3;
+    return gmClampResultStat(var_r3);
 }
 
 s32 fn_8017B6C4(s32 arg0)
@@ -396,12 +333,7 @@ s32 fn_8017B6C4(s32 arg0)
 
     me = fn_80174274();
     var_r3 = me->player_standings[arg0].x7C;
-    if (var_r3 > 999999) {
-        var_r3 = 999999;
-    } else if (var_r3 < -999999) {
-        var_r3 = -999999;
-    }
-    return var_r3;
+    return gmClampResultStat(var_r3);
 }
 
 s32 fn_8017B728(s32 arg0)
@@ -411,12 +343,7 @@ s32 fn_8017B728(s32 arg0)
 
     me = fn_80174274();
     var_r3 = me->player_standings[arg0].x84;
-    if (var_r3 > 999999) {
-        var_r3 = 999999;
-    } else if (var_r3 < -999999) {
-        var_r3 = -999999;
-    }
-    return var_r3;
+    return gmClampResultStat(var_r3);
 }
 
 s32 fn_8017B78C(s32 arg0)
@@ -426,12 +353,7 @@ s32 fn_8017B78C(s32 arg0)
 
     me = fn_80174274();
     var_r3 = me->player_standings[arg0].x88;
-    if (var_r3 > 999999) {
-        var_r3 = 999999;
-    } else if (var_r3 < -999999) {
-        var_r3 = -999999;
-    }
-    return var_r3;
+    return gmClampResultStat(var_r3);
 }
 
 s32 fn_8017B7F0(s32 arg0)
@@ -441,12 +363,7 @@ s32 fn_8017B7F0(s32 arg0)
 
     me = fn_80174274();
     var_r3 = me->player_standings[arg0].x8C;
-    if (var_r3 > 999999) {
-        var_r3 = 999999;
-    } else if (var_r3 < -999999) {
-        var_r3 = -999999;
-    }
-    return var_r3;
+    return gmClampResultStat(var_r3);
 }
 
 s32 fn_8017B854(s32 arg0)
@@ -456,12 +373,7 @@ s32 fn_8017B854(s32 arg0)
 
     me = fn_80174274();
     var_r3 = me->player_standings[arg0].x80;
-    if (var_r3 > 999999) {
-        var_r3 = 999999;
-    } else if (var_r3 < -999999) {
-        var_r3 = -999999;
-    }
-    return var_r3;
+    return gmClampResultStat(var_r3);
 }
 
 s32 fn_8017B8B8(s32 arg0)
@@ -471,12 +383,7 @@ s32 fn_8017B8B8(s32 arg0)
 
     me = fn_80174274();
     var_r3 = me->player_standings[arg0].x90;
-    if (var_r3 > 999999) {
-        var_r3 = 999999;
-    } else if (var_r3 < -999999) {
-        var_r3 = -999999;
-    }
-    return var_r3;
+    return gmClampResultStat(var_r3);
 }
 
 s32 fn_8017B91C(s32 arg0)
@@ -491,12 +398,7 @@ s32 fn_8017B91C(s32 arg0)
     } else {
         var_r3 = (u32) ((f32) me->player_standings[arg0].x94 / 100.0f);
     }
-    if (var_r3 > 999999) {
-        var_r3 = 999999;
-    } else if (var_r3 < -999999) {
-        var_r3 = -999999;
-    }
-    return var_r3;
+    return gmClampResultStat(var_r3);
 }
 
 s32 fn_8017B9F4(s32 arg0)
@@ -511,10 +413,5 @@ s32 fn_8017B9F4(s32 arg0)
     } else {
         var_r3 = (u32) ((f32) me->player_standings[arg0].x98 / 100.0f);
     }
-    if ((s32) var_r3 > 999999) {
-        return 999999;
-    } else if ((s32) var_r3 < -999999) {
-        var_r3 = -999999;
-    }
-    return (s32) var_r3;
+    return gmClampResultStat((s32) var_r3);
 }

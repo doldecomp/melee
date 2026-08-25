@@ -1,7 +1,5 @@
 #include "ft_07C6.h"
 
-#include <placeholder.h>
-
 #include <sysdolphin/baselib/gobj.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>

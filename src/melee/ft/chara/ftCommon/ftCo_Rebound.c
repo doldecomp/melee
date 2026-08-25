@@ -4,6 +4,7 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
@@ -20,7 +21,8 @@ void ftCo_80099D9C(Fighter_GObj* gobj)
                               NULL);
     {
         float fp_x191C = fp->dmg.x191C;
-        fp->mv.co.rebound.anim_start = (fp->co_attrs.x9C + 0.1f) / fp_x191C;
+        fp->mv.co.rebound.anim_speed =
+            (fp->co_attrs.clank_animation_length + 0.1f) / fp_x191C;
         fp->mv.co.rebound.x0 =
             -fp->dmg.facing_dir *
             (fp_x191C * p_ftCommonData->x3D8 + p_ftCommonData->x3DC);
@@ -37,7 +39,7 @@ void ftCo_80099E44(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, ftCo_MS_Rebound, Ft_MF_None, 0,
-                              fp->mv.co.rebound.anim_start, 0, NULL);
+                              fp->mv.co.rebound.anim_speed, 0, NULL);
 }
 
 void ftCo_Rebound_Anim(Fighter_GObj* gobj)

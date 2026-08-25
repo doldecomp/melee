@@ -1,5 +1,7 @@
 #include "itseakchain.h"
 
+#include "inlines.h"
+
 #include "it/items/itseakchain.static.h"
 
 #include "platform.h"
@@ -24,11 +26,11 @@
 #include "it/it_2725.h"
 #include "it/itCharItems.h"
 #include "it/item.h"
+#include "it/items/inlines.h"
 #include "it/items/itlinkhookshot.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
-#include "MSL/math.h"
 
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -43,12 +45,14 @@ ItemStateTable it_803F7438[] = {
     { -1, itSeakchain_UnkMotion4_Anim, NULL, NULL },
 };
 
+#ifdef MUST_MATCH
 static void order_sdata2(void)
 {
     (void) 0.0f;
     (void) 0.1f;
     (void) 1.0f;
 }
+#endif
 
 void it_802BAEEC(Item_GObj* gobj)
 {
@@ -189,15 +193,7 @@ Item_GObj* itSeakChain_Spawn(Fighter_GObj* parent_gobj, Point3d* arg1,
 
     fp = GET_FIGHTER(parent_gobj);
     spawn.kind = It_Kind_Seak_Chain;
-    spawn.prev_pos = *arg1;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = parent_gobj;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawn(&spawn, parent_gobj, arg1, facing_dir);
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         ip = GET_ITEM(gobj);
@@ -330,7 +326,7 @@ void fn_802BB784(Item_GObj* gobj)
 static bool notInSpecialS(Fighter_GObj* gobj)
 {
     if (gobj != NULL) {
-        enum_t msid = ftLib_80086C0C(gobj);
+        enum_t msid = ftLib_GetMotionId(gobj);
         if ((msid >= ftSk_MS_SpecialSStart) &&
             (msid <= ftSk_MS_SpecialAirSEnd))
         {
@@ -385,13 +381,17 @@ int it_802BB938(ItemLink* link, int arg1, float arg2)
     return coll->env_flags & 0x18FFF;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 s32 it_802BBAEC(ItemLink* link, s32 arg1, f32 arg2)
 {
     return it_802BB938(link, arg1, arg2);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void it_802BBB0C(ItemLink* link, Vec3* offset, itSeakChain_Attrs* sa,
                  float scale)
@@ -597,27 +597,27 @@ void it_802BC080(ItemLink* link, Vec3* target, Item* ip)
             ip->xDD4_itemVar.seakchain.history[last_idx - 1 - i].y;
     }
 
-    if (ABS(fp->fv.sk.lstick_delta.x) > attrs->x48) {
-        s32 sign = (fp->fv.sk.lstick_delta.x < 0.0f) ? -1 : 1;
+    if (ABS(fp->u.sk.lstick_delta.x) > attrs->x48) {
+        s32 sign = (fp->u.sk.lstick_delta.x < 0.0f) ? -1 : 1;
         if (ip->facing_dir == sign) {
             ip->xDD4_itemVar.seakchain.history[0].x =
-                fp->fv.sk.lstick_delta.x * attrs->x38;
+                fp->u.sk.lstick_delta.x * attrs->x38;
         } else {
             ip->xDD4_itemVar.seakchain.history[0].x =
-                fp->fv.sk.lstick_delta.x * attrs->x3C;
+                fp->u.sk.lstick_delta.x * attrs->x3C;
         }
     } else {
         ip->xDD4_itemVar.seakchain.history[0].x = 0.0f;
     }
 
-    if (ABS(fp->fv.sk.lstick_delta.y) > attrs->x48) {
-        s32 sign = (fp->fv.sk.lstick_delta.y < 0.0f) ? -1 : 1;
+    if (ABS(fp->u.sk.lstick_delta.y) > attrs->x48) {
+        s32 sign = (fp->u.sk.lstick_delta.y < 0.0f) ? -1 : 1;
         if (sign > 0.0f) {
             ip->xDD4_itemVar.seakchain.history[0].y =
-                fp->fv.sk.lstick_delta.y * attrs->x40;
+                fp->u.sk.lstick_delta.y * attrs->x40;
         } else {
             ip->xDD4_itemVar.seakchain.history[0].y =
-                fp->fv.sk.lstick_delta.y * attrs->x44;
+                fp->u.sk.lstick_delta.y * attrs->x44;
         }
     } else {
         ip->xDD4_itemVar.seakchain.history[0].y = 0.0f;
@@ -755,31 +755,15 @@ void it_802BC080(ItemLink* link, Vec3* target, Item* ip)
     ip->xDD4_itemVar.seakchain.x10 = env_flags;
 }
 
-int it_802BC94C(ItemLink* arg0, Vec3* arg1, itSeakChain_Attrs* sa, f32 farg0)
+bool it_802BC94C(ItemLink* arg0, Vec3* arg1, itSeakChain_Attrs* sa, f32 farg0)
 {
     u8 _padA[8];
     ItemLink *var_r30, *var_r29;
-    Vec3 sp18;
     float var_f1;
 
-    for (var_r29 = arg0, var_r30 = arg0->prev;
-         var_r30 != NULL && !var_r29->x2C_b0;)
-    {
-        var_r29 = var_r30;
-        var_r30 = var_r30->prev;
-    }
-    var_f1 = it_802A3C98(&var_r29->pos, arg1, &sp18);
-    while (var_r30 != NULL && farg0 > var_f1) {
-        var_r29->x2C_b0 = false;
-        var_f1 = it_802A3C98(&var_r30->pos, arg1, &sp18);
-        var_r29 = var_r30;
-        var_r30 = var_r30->prev;
-    }
-    var_f1 -= farg0;
-    if (var_f1 > sa->x4) {
-        var_f1 = sa->x4;
-    }
+    Item_RetractChain(arg0, arg1, farg0, &sa->x4, &var_r30, &var_r29, &var_f1);
     it_802BBC38(var_r29, arg1, sa, var_f1);
+
     if (var_r30 != NULL) {
         return false;
     }

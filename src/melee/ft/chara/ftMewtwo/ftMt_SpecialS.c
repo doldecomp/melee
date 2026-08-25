@@ -5,18 +5,21 @@
 #include "forward.h"
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_CaptureMewtwo.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_Throw.h"
+#include "ftCommon/inlines.h"
 #include "ftMewtwo/types.h"
 
 #include <dolphin/mtx.h>
@@ -112,9 +115,9 @@ void ftMt_SpecialAirS_Enter(HSD_GObj* gobj)
     fp->cmd_vars[1] = 0;
     fp->mv.mt.SpecialS.isConfusionReflect = false;
 
-    if (fp->fv.mt.x223C_isConfusionBoost == false) {
+    if (fp->u.mt.x223C_isConfusionBoost == false) {
         fp->self_vel.y = mewtwoAttrs->x18_MEWTWO_CONFUSION_AIR_BOOST;
-        fp->fv.mt.x223C_isConfusionBoost = true;
+        fp->u.mt.x223C_isConfusionBoost = true;
     }
 
     Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirS, 0, 0.0f, 1.0f, 0.0f,
@@ -130,7 +133,7 @@ static inline void ftMewtwo_SetGrabVictim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_GObj* victimGObj;
 
-    if ((u32) fp->cmd_vars[0] != 0) {
+    if (fp->cmd_vars[0] != 0) {
         victimGObj = fp->victim_gobj;
         if (victimGObj != NULL) {
             ftCommon_8007E2F4(fp, 0);
@@ -212,11 +215,8 @@ void ftMt_SpecialS_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007D5D4(fp);
-
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialAirS,
-                              FTMEWTWO_SPECIALS_COLL_FLAG, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftMt_MS_SpecialAirS,
+                                    FTMEWTWO_SPECIALS_COLL_FLAG);
 
     ftCommon_ClampAirDrift(fp);
 
@@ -235,16 +235,13 @@ void ftMt_SpecialAirS_AirToGround(HSD_GObj* gobj)
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
 
-    ftCommon_8007D7FC(fp);
-
-    Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialS,
-                              FTMEWTWO_SPECIALS_COLL_FLAG, fp->cur_anim_frame,
-                              1.0f, 0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftMt_MS_SpecialS,
+                                    FTMEWTWO_SPECIALS_COLL_FLAG);
 
     ftMewtwo_SpecialS_SetGrab(gobj);
 
     fp->accessory4_cb = ftMt_SpecialS_ReflectThink;
-    fp->fv.mt.x223C_isConfusionBoost = false;
+    fp->u.mt.x223C_isConfusionBoost = false;
 
     ftMewtwo_SpecialS_SetReflect(gobj);
 }

@@ -19,6 +19,7 @@
 #include <melee/lb/lbmthp.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/lb/lbtime.h>
+#include <melee/mn/inlines.h>
 #include <melee/mn/mnmain.h>
 #include <melee/sc/types.h>
 
@@ -67,8 +68,9 @@ static void gmTitle_801A146C(HSD_GObj* gobj)
 
 static inline bool isActiveTitle(void)
 {
-    if (gm_801A4310() == GM_TITLE ||
-        (gm_801A4310() == GM_OPENING_MV && gm_801A42C4() == GS_VS))
+    if (gm_GetCurrentGameMode() == GM_TITLE ||
+        (gm_GetCurrentGameMode() == GM_OPENING_MV &&
+         gm_GetCurrentSceneIndex() == GS_VS))
     {
         return false;
     }
@@ -135,8 +137,9 @@ HSD_GObj* gmTitle_801A165C(void)
                        gmTitle_80479B28.matanim_joint,
                        gmTitle_80479B28.shapeanim_joint);
 
-    if (gm_801A4310() == GM_TITLE ||
-        (gm_801A4310() == GM_OPENING_MV && gm_801A42C4() == GS_VS))
+    if (gm_GetCurrentGameMode() == GM_TITLE ||
+        (gm_GetCurrentGameMode() == GM_OPENING_MV &&
+         gm_GetCurrentSceneIndex() == GS_VS))
     {
         var_r0 = false;
     } else {
@@ -151,7 +154,7 @@ HSD_GObj* gmTitle_801A165C(void)
         HSD_GObj_SetupProc(gobj, gmTitle_801A1630, 0);
     }
     HSD_JObjAnimAll(jobj);
-    if (gm_80164840(CKIND_MARS) || gm_80164840(CKIND_EMBLEM)) {
+    if (gm_IsCKindUnlocked(CKIND_MARS) || gm_IsCKindUnlocked(CKIND_EMBLEM)) {
         var_r0 = true;
     } else {
         var_r0 = false;
@@ -258,7 +261,7 @@ HSD_Archive* gmTitle_801A1AC0(void)
 
 void gmTitle_801A1C18_OnFrame(void)
 {
-    int input = gm_801A36A0(4);
+    int input = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS);
     int* tmp;
     if (gmTitle_804D6714 != 0) {
         gmTitle_804D6714--;
@@ -266,7 +269,7 @@ void gmTitle_801A1C18_OnFrame(void)
     }
     gmTitle_804D6718++;
     if (gmTitle_804D6718 > 600) {
-        tmp = gm_801A4B9C();
+        tmp = gm_GetCurrentSceneExitData();
         *tmp = 0;
         gm_801A4B60();
     } else if (input & HSD_PAD_START) {
@@ -274,25 +277,25 @@ void gmTitle_801A1C18_OnFrame(void)
         lbAudioAx_8002702C(0xC, 0);
         lbAudioAx_80027168();
         lbAudioAx_80027648();
-        lbAudioAx_80024030(1);
+        sfxForward();
         gmMainLib_8015ECBC();
-        tmp = gm_801A4B9C();
+        tmp = gm_GetCurrentSceneExitData();
         *tmp = input;
         gm_801A4B60();
     } else if (DbLevel >= 3) {
         if (input & HSD_PAD_Y) {
-            lbAudioAx_80024030(1);
-            tmp = gm_801A4B9C();
+            sfxForward();
+            tmp = gm_GetCurrentSceneExitData();
             *tmp = input;
             gm_801A4B60();
         } else if (input & HSD_PAD_A) {
-            lbAudioAx_80024030(1);
-            tmp = gm_801A4B9C();
+            sfxForward();
+            tmp = gm_GetCurrentSceneExitData();
             *tmp = input;
             gm_801A4B60();
         } else if (input & HSD_PAD_X) {
-            lbAudioAx_80024030(1);
-            tmp = gm_801A4B9C();
+            sfxForward();
+            tmp = gm_GetCurrentSceneExitData();
             *tmp = input;
             gm_801A4B60();
         }

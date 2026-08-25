@@ -1,7 +1,6 @@
 #include "it_3F14.h"
 
-#include "it_266F.h"
-
+#include "it/itdraw.h"
 #include "it/items/itarwinglaser.h"
 #include "it/items/itheiho.h"
 #include "it/items/itkyasarinegg.h"
@@ -845,9 +844,6 @@ char it_803F1EF0[] = "itPublicData";
 
 Article* it_804A0F60[30];
 DamageLogEntry it_804A0E70[15];
-ItemPickTable it_804A0E60;
-ItemPickTable it_804A0E50;
-RandomItemSpawner it_804A0E30;
 
 it_804D6D40_t* it_804D6D40 ATTRIBUTE_ALIGN(8);
 Article** it_804D6D38 ATTRIBUTE_ALIGN(8);

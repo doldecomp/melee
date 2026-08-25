@@ -43,7 +43,7 @@ static GObjFuncs HSD_GObj_80408610 = {
     HSD_GObj_80408600,
 };
 
-inline void GObj_SetFlag1_inline(HSD_GObjProc* proc, u8 value)
+static inline void GObj_SetFlag1_inline(HSD_GObjProc* proc, u8 value)
 {
     while (proc != NULL) {
         proc->flags_1 = value;
@@ -51,7 +51,7 @@ inline void GObj_SetFlag1_inline(HSD_GObjProc* proc, u8 value)
     }
 }
 
-inline void GObj_SetFlag2_inline(HSD_GObjProc* proc, u8 value)
+static inline void GObj_SetFlag2_inline(HSD_GObjProc* proc, u8 value)
 {
     while (proc != NULL) {
         proc->flags_2 = value;
@@ -146,7 +146,7 @@ u32 HSD_GObj_80390EB8(s32 i)
     return HSD_GObj_804085F0[i];
 }
 
-inline void render_gobj(HSD_GObj* cur, int i)
+static inline void render_gobj(HSD_GObj* cur, int i)
 {
     HSD_GObj* saved = HSD_GObj_804D7814;
     HSD_GObj_804D7814 = cur;
@@ -210,11 +210,15 @@ void HSD_GObj_JObjCallback(HSD_GObj* gobj, int arg1)
     /// @todo don't inline #HSD_GObj_80390EB8
     ///       is there a file boundary between #HSD_GObj_80390EB8 and
     ///       #HSD_GObj_JObjCallback?
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
     HSD_JObjDispAll(jobj, NULL, HSD_GObj_80390EB8(arg1), 0);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void HSD_GObj_FogCallback(HSD_GObj* gobj, int unused)
 {

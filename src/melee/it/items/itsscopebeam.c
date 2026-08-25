@@ -2,15 +2,14 @@
 
 #include "db/db.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "lb/lbvector.h"
-#include "MSL/math.h"
 
+#include <math.h>
 #include <baselib/random.h>
-#include <MSL/trigf.h>
 
 ItemStateTable it_803F6568[] = {
     { 0, itSscopebeam_UnkMotion9_Anim, itSscopebeam_UnkMotion9_Phys,
@@ -117,7 +116,7 @@ bool itSscopebeam_UnkMotion9_Anim(Item_GObj* gobj)
     ScopeBeamFloats* data = &attrs->floats[index];
 
     if (ip->xD44_lifeTimer == data->lifetime) {
-        if (ip->x5D4_hitboxes[0].hit.state >= 1) {
+        if (ip->x5D4_hitboxes[0].hit.state >= HitCapsule_Enabled) {
             ip->x5D4_hitboxes[0].hit.scale =
                 ip->x5D4_hitboxes[0].hit.scale * data->scale;
         }
@@ -158,7 +157,7 @@ bool itSscopebeam_UnkMotion9_Coll(Item_GObj* gobj)
     if ((result & 1) && (coll->env_flags & 0x18000)) {
         f32 angle = -atan2f(coll->floor.normal.x, coll->floor.normal.y);
 
-        if (ABS(angle) <= deg_to_rad) {
+        if (ABS(angle) <= MTXDegToRad(1)) {
             ip->pos = saved_pos;
             *coll = saved_coll;
             it_8026D9A0(gobj);

@@ -3,7 +3,6 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/it_3F14.h"
 #include "it/item.h"
 #include "it/itgroundcoll.h"
 #include "it/itmaplib.h"
@@ -12,6 +11,7 @@
 #include <math.h>
 #include <baselib/random.h>
 
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 1.0f;
@@ -24,6 +24,7 @@ static void sdata2_order(void)
     (void) 4503601774854144.0;
     (void) 60.0f;
 }
+#endif
 
 ItemStateTable it_803F55D0[] = {
     { -1, itDosei_UnkMotion0_Anim, itDosei_UnkMotion0_Phys,
@@ -266,27 +267,6 @@ bool itDosei_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itDosei_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-static inline void itDosei_SetupWalk_Inline(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    HSD_JObj* jobj = gobj->hsd_obj;
-    itDoseiAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-
-    ip->xD5C = 0;
-    ip->xDC8_word.flags.x17 = 1;
-    ip->xDC8_word.flags.x19 = 1;
-    ip->owner = NULL;
-    it_802762B0(ip);
-    Item_80268E5C(gobj, 1, 0xB);
-    itDosei_SetSpeed(gobj, ip, 1.0f);
-    HSD_JObjSetRotationZero(gobj);
-
-    HSD_JObjSetRotationY(gobj->hsd_obj, itDosei_FacingAngle(gobj, 0.0f));
-    ip->x40_vel.x = ip->facing_dir * attr->unk8;
-    ip->x40_vel.z = 0.0f;
-    ip->x40_vel.y = 0.0f;
-}
-
 static inline void itDosei_SetupWalk_FC(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -477,10 +457,7 @@ bool itDosei_UnkMotion5_Anim(Item_GObj* gobj)
 }
 void itDosei_UnkMotion5_Phys(Item_GObj* gobj)
 {
-    Item* ip = gobj->user_data;
-    ItemAttr* attrs = ip->xCC_item_attr;
-    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 void itDosei_Logic7_EnteredAir(Item_GObj* gobj)
@@ -552,9 +529,7 @@ bool itDosei_UnkMotion8_Coll(Item_GObj* gobj)
 void itDosei_80282CD4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->x40_vel.z = 0.0f;
-    ip->x40_vel.y = 0.0f;
-    ip->x40_vel.x = 0.0f;
+    itResetVelocity(ip);
     it_802762B0(ip);
     Item_80268E5C(gobj, 7, 3);
     {

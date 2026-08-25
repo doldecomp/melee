@@ -4,10 +4,9 @@
 #include "ftCo_800C78B0.h"
 #include "ftcommon.h"
 
-#include <placeholder.h>
-
 #include "cm/camera.h"
 #include "ft/fighter.h"
+#include "ft/ftCo_800C7434.h"
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
@@ -19,15 +18,14 @@
 #include "it/items/itleadead.h"
 #include "pl/player.h"
 
-/* 0C74CC */ void fn_800C74CC(Fighter_GObj* gobj);
-/* 0C7568 */ void fn_800C7568(Fighter_GObj* gobj);
+/* 0C77E0 */ static void fn_800C77E0(Fighter_GObj* gobj);
 
-/* 0C77E0 */ static void fn_800C77E0(Fighter_GObj* arg0);
-
-static void orderTest(Vec3* ptr)
+#ifdef MUST_MATCH
+static void order_sdata2(void)
 {
-    ptr->y = (s32) ptr->x;
+    (void) S32_TO_F32;
 }
+#endif
 
 void ftCo_800C7590(Fighter_GObj* gobj)
 {
@@ -66,8 +64,8 @@ void ftCo_800C7590(Fighter_GObj* gobj)
 void ftCo_CaptureLeadead_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->grab_timer -= p_ftCommonData->x734;
-    ftCommon_GrabMash(fp, p_ftCommonData->x738);
+    fp->grab_timer -= p_ftCommonData->leadead_grab_timer_step;
+    ftCommon_GrabMash(fp, p_ftCommonData->leadead_grab_break_threshold);
     if (fp->grab_timer <= 0.0F) {
         it_802EAE80(fp->mv.co.captureleadead.x0);
         ftCo_800C7800(gobj);
@@ -83,7 +81,7 @@ void ftCo_CaptureLeadead_Coll(Fighter_GObj* gobj)
     ft_8008403C(gobj, fn_800C77E0);
 }
 
-static void fn_800C77E0(Fighter_GObj* arg0)
+void fn_800C77E0(Fighter_GObj* arg0)
 {
     ftCo_80090780(arg0);
 }

@@ -9,22 +9,19 @@
 #include "ef/efsync.h"
 #include "gr/grkongo.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/it_3F14.h"
-#include "it/itanimlist.h"
 #include "it/itCommonItems.h"
+#include "it/itdrop.h"
 #include "it/iteffect.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
-
-#include <math.h>
 
 static double const ROT_VEL_SCALE = 0.03490658476948738;
 
@@ -55,7 +52,7 @@ Item_GObj* it_80286088(Item_GObj* parent_gobj)
     if (parent_gobj != NULL && GET_JOBJ(parent_gobj) != NULL) {
         lb_8000B1CC(GET_JOBJ(parent_gobj), NULL, &pos);
 
-        spawn.kind = 1;
+        spawn.kind = It_Kind_Box;
         spawn.prev_pos = pos;
         spawn.pos = spawn.prev_pos;
         spawn.facing_dir = 1.0F;
@@ -149,8 +146,10 @@ void it_80286248(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 bool it_80286340(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
     s32 sum1 = arg1 + arg2;
@@ -167,7 +166,9 @@ bool it_80286340(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     }
     return false;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 /// Check if box bounced off a surface nearly upright. If the bounce angle
 /// relative to vertical is below threshold, clear velocity vectors and
@@ -210,7 +211,7 @@ void fn_80286480(Item_GObj* gobj)
     Item* it = GET_ITEM(gobj);
     PAD_STACK(12);
     it_8026B390(gobj);
-    it->x40_vel.x = it->x40_vel.y = it->x40_vel.z = 0.0F;
+    itResetVelocity(it);
     Item_80268E5C(gobj, 0, 2);
 }
 
@@ -305,9 +306,7 @@ void itBox_Logic1_Thrown(Item_GObj* gobj)
 
 void itBox_UnkMotion4_Phys(Item_GObj* gobj)
 {
-    ItemAttr* attr = ((Item*) gobj->user_data)->xCC_item_attr;
-    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 /// Inline helper: spawn break effect and roll for item spawn.
@@ -368,9 +367,7 @@ bool itBox_UnkMotion4_Coll(Item_GObj* gobj)
             it_802762B0(ip);
             ip = GET_ITEM(gobj);
             it_8026B390(gobj);
-            ip->x40_vel.z = 0.0F;
-            ip->x40_vel.y = 0.0F;
-            ip->x40_vel.x = 0.0F;
+            itResetVelocity(ip);
             Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
         }
     }
@@ -536,9 +533,7 @@ void itBox_Logic1_EnteredAir(Item_GObj* gobj)
     if (it_802863BC(gobj) != 0) {
         ip = GET_ITEM(gobj);
         it_8026B390(gobj);
-        ip->x40_vel.z = 0.0F;
-        ip->x40_vel.y = 0.0F;
-        ip->x40_vel.x = 0.0F;
+        itResetVelocity(ip);
         Item_80268E5C(gobj, 0, 2);
     } else {
         Item_80268E5C(gobj, 5, 2);

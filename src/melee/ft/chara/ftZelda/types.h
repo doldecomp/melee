@@ -7,7 +7,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 struct ftZelda_FighterVars {
@@ -39,7 +38,7 @@ typedef struct ftZelda_DatAttrs {
     float x54;
     float x58;
     float x5C;
-    s32 x60;   // Type confirmed
+    int x60;   // Type confirmed
     float x64; // Type confirmed
     float x68; // Type confirmed
     float x6C; // Type confirmed

@@ -51,13 +51,31 @@ melee/lb/lbshadow.c:
 	.sdata      start:0x804D3728 end:0x804D3740
 	.sdata2     start:0x804D7B30 end:0x804D7BA0
 
+melee/lb/lb_00F9.c:
+	.text       start:0x8000F9F8 end:0x80011AC4
+	.rodata     start:0x803B7280 end:0x803B72A8
+	.data       start:0x803BA150 end:0x803BA1C0
+	.sdata      start:0x804D3740 end:0x804D3750
+	.sbss       start:0x804D63A0 end:0x804D63C0
+	.sdata2     start:0x804D7BA0 end:0x804D7C08
+
 melee/lb/lbspdisplay.c:
-	.text       start:0x8000F9F8 end:0x80014ABC
-	.rodata     start:0x803B7280 end:0x803B72C0
-	.data       start:0x803BA150 end:0x803BA2C0
-	.sdata      start:0x804D3740 end:0x804D3778
-	.sbss       start:0x804D63A0 end:0x804D63C8
-	.sdata2     start:0x804D7BA0 end:0x804D7C80
+	.text       start:0x80011AC4 end:0x80013BB0
+	.rodata     start:0x803B72A8 end:0x803B72C0
+	.data       start:0x803BA1C0 end:0x803BA248
+	.sdata      start:0x804D3750 end:0x804D3760
+	.sdata2     start:0x804D7C08 end:0x804D7C50
+
+melee/lb/lb_013B.c:
+	.text       start:0x80013BB0 end:0x80014638
+	.data       start:0x803BA248 end:0x803BA2C0
+	.sbss       start:0x804D63C0 end:0x804D63C8
+	.sdata2     start:0x804D7C50 end:0x804D7C70
+
+melee/lb/lb_0146.c:
+	.text       start:0x80014638 end:0x80014ABC
+	.sdata      start:0x804D3760 end:0x804D3778
+	.sdata2     start:0x804D7C70 end:0x804D7C80
 
 melee/lb/lbarq.c:
 	.text       start:0x80014ABC end:0x80014E24
@@ -154,13 +172,17 @@ melee/lb/lbbgflash.c:
 	.sdata2     start:0x804D7CE8 end:0x804D7D70
 
 melee/lb/lbrefract.c:
-	.text       start:0x80021CE8 end:0x8002305C
-	.rodata     start:0x803B7300 end:0x803B73B8
+	.text       start:0x80021CE8 end:0x80022C30
 	.data       start:0x803BB0B0 end:0x803BB300
 	.bss        start:0x804336D0 end:0x80433710
 	.sdata      start:0x804D3868 end:0x804D3870
 	.sbss       start:0x804D63E8 end:0x804D63F0
-	.sdata2     start:0x804D7D70 end:0x804D7DD8
+	.sdata2     start:0x804D7D70 end:0x804D7DB0
+
+melee/lb/lbtrigf.c:
+	.text       start:0x80022C30 end:0x8002305C
+	.rodata     start:0x803B7300 end:0x803B73B8
+	.sdata2     start:0x804D7DB0 end:0x804D7DD8
 
 melee/lb/lbaudio_ax.c:
 	.text       start:0x8002305C end:0x80028B9C
@@ -1081,7 +1103,7 @@ melee/ft/ft_0D4D.c:
 
 melee/ft/chara/ftCommon/ftCo_Landing.c:
 	.text       start:0x800D5AEC end:0x800D5F58
-	.data       start:0x803C7030 end:0x803C709C
+	.data       start:0x803C7030 end:0x803C70A0
 	.sdata2     start:0x804D8FE0 end:0x804D8FEC
 
 melee/ft/chara/ftCommon/ftCo_Squat.c:
@@ -1096,12 +1118,89 @@ melee/ft/chara/ftCommon/ftCo_SquatRv.c:
 	.text       start:0x800D65D8 end:0x800D67C4
 	.sdata2     start:0x804D9000 end:0x804D9008
 
+melee/ft/chara/ftCommon/ftCo_0D67.c:
+	.text       start:0x800D67C4 end:0x800D6824
+	.sdata2     start:0x804D9008 end:0x804D9010
+
 melee/ft/chara/ftCommon/ftCo_Attack100.c:
-	.text       start:0x800D67C4 end:0x800DC750
+	.text       start:0x800D6824 end:0x800D72A0
+	.sdata2     start:0x804D9010 end:0x804D9018
+
+melee/ft/chara/ftCommon/ftCo_0D72.c:
+	.text       start:0x800D72A0 end:0x800D730C
+
+melee/ft/chara/ftCommon/ftCo_JumpAerialF1.c:
+	.text       start:0x800D730C end:0x800D769C
+	.sdata2     start:0x804D9018 end:0x804D9020
+
+melee/ft/chara/ftCommon/ftCo_ItemScopeStart.c:
+	.text       start:0x800D769C end:0x800D7BDC
+	.sdata2     start:0x804D9020 end:0x804D9028
+
+melee/ft/chara/ftCommon/ftCo_ItemScopeRapid.c:
+	.text       start:0x800D7BDC end:0x800D8140
+	.sdata2     start:0x804D9028 end:0x804D9030
+
+melee/ft/chara/ftCommon/ftCo_ItemScopeFire.c:
+	.text       start:0x800D8140 end:0x800D86E0
+	.sdata2     start:0x804D9030 end:0x804D9038
+
+melee/ft/chara/ftCommon/ftCo_ItemScope.c:
+	.text       start:0x800D86E0 end:0x800D8990
+	.sdata2     start:0x804D9038 end:0x804D9040
+
+melee/ft/chara/ftCommon/ftCo_Catch.c:
+	.text       start:0x800D8990 end:0x800D8EC8
+	.sdata2     start:0x804D9040 end:0x804D9048
+
+melee/ft/chara/ftCommon/ftCo_0D8E.c:
+	.text       start:0x800D8EC8 end:0x800D9558
+	.sdata      start:0x804D3D08 end:0x804D3D18
+	.sdata2     start:0x804D9048 end:0x804D9068
+
+melee/ft/chara/ftCommon/ftCo_0D95.c:
+	.text       start:0x800D9558 end:0x800D9CE8
 	.rodata     start:0x803B7510 end:0x803B7520
-	.data       start:0x803C709C end:0x803C70D0
-	.sdata      start:0x804D3D08 end:0x804D3D58
-	.sdata2     start:0x804D9008 end:0x804D90F0
+	.sdata      start:0x804D3D18 end:0x804D3D28
+	.sdata2     start:0x804D9068 end:0x804D9098
+
+melee/ft/chara/ftCommon/ftCo_CatchPull.c:
+	.text       start:0x800D9CE8 end:0x800DA1D8
+	.sdata2     start:0x804D9098 end:0x804D90A8
+
+melee/ft/chara/ftCommon/ftCo_CatchWait.c:
+	.text       start:0x800DA1D8 end:0x800DA4FC
+	.sdata2     start:0x804D90A8 end:0x804D90B0
+
+melee/ft/chara/ftCommon/ftCo_CatchAttack.c:
+	.text       start:0x800DA4FC end:0x800DA698
+	.sdata2     start:0x804D90B0 end:0x804D90B8
+
+melee/ft/chara/ftCommon/ftCo_CatchCut.c:
+	.text       start:0x800DA698 end:0x800DA824
+	.sdata2     start:0x804D90B8 end:0x804D90C0
+
+melee/ft/chara/ftCommon/ftCo_CapturePulled.c:
+	.text       start:0x800DA824 end:0x800DB5D8
+	.data       start:0x803C70A0 end:0x803C70B0
+	.sdata      start:0x804D3D28 end:0x804D3D38
+	.sdata2     start:0x804D90C0 end:0x804D90D0
+
+melee/ft/chara/ftCommon/ftCo_CaptureWait.c:
+	.text       start:0x800DB5D8 end:0x800DC070
+	.data       start:0x803C70B0 end:0x803C70C0
+	.sdata      start:0x804D3D38 end:0x804D3D48
+	.sdata2     start:0x804D90D0 end:0x804D90E0
+
+melee/ft/chara/ftCommon/ftCo_CaptureJump.c:
+	.text       start:0x800DC070 end:0x800DC284
+	.sdata2     start:0x804D90E0 end:0x804D90E8
+
+melee/ft/chara/ftCommon/ftCo_0DC2.c:
+	.text       start:0x800DC284 end:0x800DC750
+	.data       start:0x803C70C0 end:0x803C70D0
+	.sdata      start:0x804D3D48 end:0x804D3D58
+	.sdata2     start:0x804D90E8 end:0x804D90F0
 
 melee/ft/chara/ftCommon/ftCo_CaptureCut.c:
 	.text       start:0x800DC750 end:0x800DD100
@@ -1268,8 +1367,12 @@ melee/ft/chara/ftLink/ftLk_SpecialN.c:
 melee/ft/chara/ftKirby/ftkirby.c:
 	.text       start:0x800EE528 end:0x800F1F68
 	.rodata     start:0x803B7548 end:0x803B7570
-	.data       start:0x803C8368 end:0x803CB6D8
+	.data       start:0x803C8368 end:0x803CA304
+	.sdata      start:0x804D3D98 end:0x804D3DAE
 	.sdata2     start:0x804D9350 end:0x804D9364
+
+melee/ft/chara/ftKirby/ftkirbydata.c:
+	.data       start:0x803CA308 end:0x803CB48D
 
 melee/ft/chara/ftKirby/ftkirbyattackdash.c:
 	.text       start:0x800F1F68 end:0x800F21E8
@@ -1279,9 +1382,32 @@ melee/ft/chara/ftKirby/ftkirbyspecialhi.c:
 	.text       start:0x800F21E8 end:0x800F331C
 	.sdata2     start:0x804D9370 end:0x804D9388
 
+melee/ft/chara/ftKirby/ftkirbyspeciallw.c:
+	.text       start:0x800F331C end:0x800F539C
+	.data       start:0x803CB490 end:0x803CB510
+	.sdata2     start:0x804D9388 end:0x804D93A8
+
+melee/ft/chara/ftKirby/ftkirbyspecials.c:
+	.text       start:0x800F539C end:0x800F58AC
+	.data       start:0x803CB510 end:0x803CB540
+	.sdata      start:0x804D3DB0 end:0x804D3DB8
+	.sdata2     start:0x804D93A8 end:0x804D93B0
+
 melee/ft/chara/ftKirby/ftkirbyspecialn.c:
-	.text       start:0x800F331C end:0x800F9FD4
-	.sdata2     start:0x804D9388 end:0x804D93E4
+	.text       start:0x800F58AC end:0x800F9110
+	.sdata2     start:0x804D93B0 end:0x804D93C8
+
+melee/ft/chara/ftKirby/ftkirbyspecialmario.c:
+	.text       start:0x800F9110 end:0x800F9614
+	.sdata2     start:0x804D93C8 end:0x804D93D0
+
+melee/ft/chara/ftKirby/ftkirbyspecialluigi.c:
+	.text       start:0x800F9614 end:0x800F99BC
+	.sdata2     start:0x804D93D0 end:0x804D93D8
+
+melee/ft/chara/ftKirby/ftkirbyspecialcaptain.c:
+	.text       start:0x800F99BC end:0x800F9FD4
+	.sdata2     start:0x804D93D8 end:0x804D93E4
 
 melee/ft/chara/ftKirby/ftkirbyspecialpikachu.c:
 	.text       start:0x800F9FD4 end:0x800FA588
@@ -1289,6 +1415,7 @@ melee/ft/chara/ftKirby/ftkirbyspecialpikachu.c:
 
 melee/ft/chara/ftKirby/ftkirbyspecialkoopa.c:
 	.text       start:0x800FA588 end:0x800FB394
+	.data       start:0x803CB540 end:0x803CB6C0
 	.sdata2     start:0x804D93F0 end:0x804D9408
 
 melee/ft/chara/ftKirby/ftkirbyspeciallink.c:
@@ -1297,12 +1424,13 @@ melee/ft/chara/ftKirby/ftkirbyspeciallink.c:
 
 melee/ft/chara/ftKirby/ftkirbyspecialsamus.c:
 	.text       start:0x800FCC14 end:0x800FDC00
+	.data       start:0x803CB6C0 end:0x803CB6D8
 	.sdata2     start:0x804D9418 end:0x804D944C
 
 melee/ft/chara/ftKirby/ftkirbyspecialfox.c:
 	.text       start:0x800FDC00 end:0x800FED38
 	.data       start:0x803CB6D8 end:0x803CB70C
-	.sdata      start:0x804D3DC8 end:0x804D3DD0
+	.sdata      start:0x804D3DB8 end:0x804D3DD0
 	.sdata2     start:0x804D9450 end:0x804D9478
 
 melee/ft/chara/ftKirby/ftkirbyspecialness.c:
@@ -1331,6 +1459,7 @@ melee/ft/chara/ftKirby/ftkirbyspecialseak.c:
 melee/ft/chara/ftKirby/ftkirbyspecialmewtwo.c:
 	.text       start:0x80106F44 end:0x80108CE8
 	.rodata     start:0x803B7570 end:0x803B7588
+	.data       start:0x803CB828 end:0x803CB838
 	.sdata2     start:0x804D9508 end:0x804D9548
 
 melee/ft/chara/ftKirby/ftkirbyspecialiceclimber.c:
@@ -1352,6 +1481,7 @@ melee/ft/chara/ftKirby/ftkirbyyoshiegg.c:
 
 melee/ft/chara/ftKirby/ftkirbyspecialmars.c:
 	.text       start:0x8010B1F4 end:0x8010C288
+	.sdata      start:0x804D3E00 end:0x804D3E10
 	.sdata2     start:0x804D9570 end:0x804D9580
 
 melee/ft/chara/ftKirby/ftkirbyspecialpeach.c:
@@ -1563,7 +1693,7 @@ melee/ft/chara/ftSamus/ftSs_SpecialLw_1.c:
 	.text       start:0x8012ADF0 end:0x8012B6E8
 	.sdata2     start:0x804D9A08 end:0x804D9A18
 
-melee/ft/chara/ftYoshi/ftYs_Init.c:
+melee/ft/chara/ftYoshi/ftyoshi.c:
 	.text       start:0x8012B6E8 end:0x8012BDA0
 	.rodata     start:0x803B75C0 end:0x803B75CC
 	.data       start:0x803CE6D0 end:0x803CEA98
@@ -2126,7 +2256,7 @@ melee/gm/gmmain.c:
 
 melee/gm/gm_1601.c:
 	.text       start:0x801601C4 end:0x8016AE38
-	.rodata     start:0x803B75F8 end:0x803B7A44
+	.rodata     start:0x803B75F8 end:0x803B7A60
 	.data       start:0x803D4C38 end:0x803D5620
 	.bss        start:0x8046B378 end:0x8046B6A0
 	.sdata      start:0x804D3EF8 end:0x804D3F67
@@ -2141,7 +2271,7 @@ melee/gm/gm_16AE.c:
 
 melee/gm/gm_16F1.c:
 	.text       start:0x8016F180 end:0x801736DC
-	.rodata     start:0x803B7A44 end:0x803B7B18
+	.rodata     start:0x803B7A60 end:0x803B7B18
 	.data       start:0x803D5648 end:0x803D6450
 	.bss        start:0x8046DBC8 end:0x8046DBD8
 	.sbss       start:0x804D65A0 end:0x804D65B8
@@ -2203,24 +2333,26 @@ melee/gm/gm_1832.c:
 melee/gm/gmtoulib.c:
 	.text       start:0x8018A514 end:0x80190ABC
 	.rodata     start:0x803B7D18 end:0x803B7D50
-	.data       start:0x803D9D20 end:0x803D9FD8
+	.data       start:0x803D9D20 end:0x803D9F80
 	.bss        start:0x80473AB8 end:0x804799B8
 	.sdata      start:0x804D4158 end:0x804D4170
-	.sbss       start:0x804D6630 end:0x804D6698
+	.sbss       start:0x804D6630 end:0x804D6640
 	.sdata2     start:0x804DA650 end:0x804DA6D8
 
 melee/gm/gmtou_0.c:
 	.text       start:0x80190ABC end:0x80196510
-	.data       start:0x803D9FD8 end:0x803DA0D0
+	.data       start:0x803D9F80 end:0x803DA0D0
 	.sdata      start:0x804D4170 end:0x804D4190
-	.sdata2     start:0x804DA6D8 end:0x804DA7E8
+	.sbss       start:0x804D6640 end:0x804D6660
+	.sdata2     start:0x804DA6D8 end:0x804DA7E0
 
 melee/gm/gmtou_1.c:
 	.text       start:0x80196510 end:0x8019BA08
 	.data       start:0x803DA0D0 end:0x803DA2E0
 	.bss        start:0x804799B8 end:0x80479A58
 	.sdata      start:0x804D4190 end:0x804D41D0
-	.sdata2     start:0x804DA7E8 end:0x804DA878
+	.sbss       start:0x804D6660 end:0x804D6698
+	.sdata2     start:0x804DA7E0 end:0x804DA878
 
 melee/gm/gmtou_2.c:
 	.text       start:0x8019BA08 end:0x8019EFC4
@@ -2255,11 +2387,17 @@ melee/gm/gmtitle.c:
 	.sdata2     start:0x804DA998 end:0x804DA9B8
 
 melee/gm/gmcamera.c:
-	.text       start:0x801A2224 end:0x801A3680
-	.data       start:0x803DA630 end:0x803DA788
-	.bss        start:0x80479BC8 end:0x80479C30
+	.text       start:0x801A2224 end:0x801A33BC
+	.data       start:0x803DA630 end:0x803DA758
+	.bss        start:0x80479BC8 end:0x80479C20
 	.sdata      start:0x804D4248 end:0x804D4268
-	.sdata2     start:0x804DA9B8 end:0x804DA9E8
+	.sdata2     start:0x804DA9B8 end:0x804DA9D8
+
+melee/gm/gm_1A33.c:
+	.text       start:0x801A33BC end:0x801A3680
+	.data       start:0x803DA758 end:0x803DA788
+	.bss        start:0x80479C20 end:0x80479C30
+	.sdata2     start:0x804DA9D8 end:0x804DA9E8
 
 melee/gm/gm_1A36.c:
 	.text       start:0x801A3680 end:0x801A3F48
@@ -2317,11 +2455,18 @@ melee/gm/gm_1A7A.c:
 	.sdata2     start:0x804DAA18 end:0x804DAA28
 
 melee/gm/gmregenddisp.c:
-	.text       start:0x801A7FB4 end:0x801A9DD0
-	.data       start:0x803DB458 end:0x803DBF78
+	.text       start:0x801A7FB4 end:0x801A9B30
+	.data       start:0x803DB458 end:0x803DB640
 	.bss        start:0x80480A00 end:0x80480B38
 	.sdata      start:0x804D42A0 end:0x804D42B8
-	.sdata2     start:0x804DAA28 end:0x804DAAA8
+	.sbss       start:0x804D67B8 end:0x804D67C8
+	.sdata2     start:0x804DAA28 end:0x804DAAA0
+
+melee/gm/gm_1A9B.c:
+	.text       start:0x801A9B30 end:0x801A9DD0
+	.data       start:0x803DB640 end:0x803DBF78
+	.sbss       start:0x804D67C8 end:0x804D67D0
+	.sdata2     start:0x804DAAA0 end:0x804DAAA8
 
 melee/gm/gmopening.c:
 	.text       start:0x801A9DD0 end:0x801AA644
@@ -2335,6 +2480,7 @@ melee/gm/gmstaffroll.c:
 	.text       start:0x801AA644 end:0x801ACC94
 	.data       start:0x803DBFD8 end:0x803DD2C0
 	.bss        start:0x80480D58 end:0x80480D70
+	.sdata      start:0x804D42B8 end:0x804D42E8
 	.sbss       start:0x804D67F8 end:0x804D6850
 	.sdata2     start:0x804DAAD0 end:0x804DAB90
 
@@ -2402,7 +2548,7 @@ melee/gm/gm_1B14.c:
 melee/gm/gmclassic.c:
 	.text       start:0x801B2BA4 end:0x801B3F40
 	.data       start:0x803DDC58 end:0x803DE1B8
-	.bss        start:0x80490880 end:0x804908A0
+	.bss        start:0x80490880 end:0x80490910
 	.sdata      start:0x804D4318 end:0x804D4330
 	.sbss       start:0x804D68D0 end:0x804D68D8
 
@@ -2480,7 +2626,7 @@ melee/gm/gm_1BA8.c:
 	.bss        start:0x80497758 end:0x8049E558
 	.sdata      start:0x804D4330 end:0x804D44C8
 	.sbss       start:0x804D6900 end:0x804D6940
-	.sdata2     start:0x804DAC78 end:0x804DAC88
+	.sdata2     start:0x804DAC78 end:0x804DAC90
 
 melee/gm/gm_1BF9.c:
 	.text       start:0x801BF948 end:0x801BFA6C
@@ -2727,7 +2873,7 @@ melee/gr/grtest.c:
 	.sdata2     start:0x804DB818 end:0x804DB830
 
 melee/gr/grkinokoroute.c:
-	.text       start:0x8020741C end:0x802087B0
+	.text       start:0x8020741C end:0x802087B8
 	.rodata     start:0x803B82E8 end:0x803B8360
 	.data       start:0x803E57F0 end:0x803E58E0
 	.sdata      start:0x804D47F8 end:0x804D4808
@@ -2735,7 +2881,7 @@ melee/gr/grkinokoroute.c:
 	.sdata2     start:0x804DB830 end:0x804DB880
 
 melee/gr/grshrineroute.c:
-	.text       start:0x802087B0 end:0x8020B160
+	.text       start:0x802087B8 end:0x8020B160
 	.rodata     start:0x803B8360 end:0x803B83A0
 	.data       start:0x803E58E0 end:0x803E5DB0
 	.sdata      start:0x804D4808 end:0x804D4840
@@ -2832,7 +2978,7 @@ melee/gr/grfigureget.c:
 	.rodata     start:0x803B8470 end:0x803B8480
 	.data       start:0x803E7D00 end:0x803E7DA0
 	.sbss       start:0x804D6AC0 end:0x804D6AC8
-	.sdata2     start:0x804DBB40 end:0x804DBB60
+	.sdata2     start:0x804DBB40 end:0x804DBB68
 
 melee/gr/grbattle.c:
 	.text       start:0x80219C98 end:0x8021A620
@@ -3058,13 +3204,17 @@ melee/db/dballoc.c:
 	.sbss       start:0x804D6BA0 end:0x804D6BA8
 
 melee/mn/mnmain.c:
-	.text       start:0x802295AC end:0x8022F538
+	.text       start:0x802295AC end:0x8022EC18
 	.rodata     start:0x803B84E8 end:0x803B8510
 	.data       start:0x803EAE68 end:0x803EC600
 	.bss        start:0x804A04F0 end:0x804A0648
 	.sdata      start:0x804D4B30 end:0x804D4B88
 	.sbss       start:0x804D6BA8 end:0x804D6BD0
-	.sdata2     start:0x804DBD88 end:0x804DBDF0
+	.sdata2     start:0x804DBD88 end:0x804DBDE0
+
+melee/mn/mn_22EC.c:
+	.text       start:0x8022EC18 end:0x8022F538
+	.sdata2     start:0x804DBDE0 end:0x804DBDF0
 
 melee/mn/mnmainrule.c:
 	.text       start:0x8022F538 end:0x8023201C
@@ -3264,6 +3414,7 @@ melee/it/it_26B1.c:
 
 melee/it/itspawn.c:
 	.text       start:0x8026C47C end:0x8026D564
+	.bss        start:0x804A0E30 end:0x804A0E70
 	.sdata2     start:0x804DC698 end:0x804DC6A8
 
 melee/it/itgroundcoll.c:
@@ -3288,7 +3439,7 @@ melee/it/itcoll.c:
 
 melee/it/it_3F14.c:
 	.data       start:0x803F1418 end:0x803F1F00
-	.bss        start:0x804A0E30 end:0x804A0FD8
+	.bss        start:0x804A0E70 end:0x804A0FD8
 	.sbss       start:0x804D6D00 end:0x804D6D48
 
 melee/it/it_2725.c:
@@ -3327,9 +3478,12 @@ melee/it/itanimlist.c:
 melee/it/it_279C.c:
 	.text       start:0x80279C48 end:0x8027B5B0
 	.rodata     start:0x803B8588 end:0x803B85A8
-	.data       start:0x803F2310 end:0x803F5428
+	.data       start:0x803F2310 end:0x803F2F28
 	.sdata      start:0x804D51D0 end:0x804D51E0
 	.sdata2     start:0x804DC7B8 end:0x804DC7D0
+
+melee/it/it_3F2F.c:
+	.data       start:0x803F2F28 end:0x803F5428
 
 melee/it/itzako.c:
 	.text       start:0x8027B5B0 end:0x8027CF00
@@ -3449,7 +3603,7 @@ melee/it/items/itmsbomb.c:
 
 melee/it/items/itflipper.c:
 	.text       start:0x80290938 end:0x80291BE0
-	.data       start:0x803F5F18 end:0x803F5F40
+	.data       start:0x803F5EA8 end:0x803F5F40
 	.sdata      start:0x804D52C0 end:0x804D52D0
 	.sdata2     start:0x804DCAA8 end:0x804DCAE8
 
@@ -4163,7 +4317,7 @@ melee/it/items/it_2E5A.c:
 	.data       start:0x803F8BD8 end:0x803F8C08
 	.sdata2     start:0x804DD790 end:0x804DD800
 
-melee/it/items/it_2E6A.c:
+melee/it/items/ityaku.c:
 	.text       start:0x802E6AEC end:0x802E70BC
 	.rodata     start:0x803B8730 end:0x803B8740
 	.data       start:0x803F8C08 end:0x803F8DE8
@@ -4290,12 +4444,17 @@ melee/if/iftime.c:
 	.sdata2     start:0x804DDA38 end:0x804DDA48
 
 melee/if/ifstatus.c:
-	.text       start:0x802F4910 end:0x802F7288
-	.data       start:0x803F9598 end:0x803F9780
+	.text       start:0x802F4910 end:0x802F6EA4
+	.data       start:0x803F9598 end:0x803F9628
 	.bss        start:0x804A10C8 end:0x804A1340
 	.sdata      start:0x804D57A8 end:0x804D57C8
 	.sbss       start:0x804D6D60 end:0x804D6D68
-	.sdata2     start:0x804DDA48 end:0x804DDAB0
+	.sdata2     start:0x804DDA48 end:0x804DDAA8
+
+melee/if/if_2F6E.c:
+	.text       start:0x802F6EA4 end:0x802F7288
+	.data       start:0x803F9628 end:0x803F9780
+	.sdata2     start:0x804DDAA8 end:0x804DDAB0
 
 melee/if/if_2F72.c:
 	.text       start:0x802F7288 end:0x802F7EFC
@@ -4332,11 +4491,11 @@ melee/if/ifhazard.c:
 	.sbss       start:0x804D6D80 end:0x804D6D90
 	.sdata2     start:0x804DDBA0 end:0x804DDBA8
 
-melee/if/if_2FC93.c:
+melee/if/if_2FD9.c:
 	.text       start:0x802FD910 end:0x802FE3F8
 	.rodata     start:0x803B8780 end:0x803B8790
 	.data       start:0x803F99C8 end:0x803F9A00
-	.bss        start:0x804A1F10 end:0x804A1F48
+	.bss        start:0x804A1F10 end:0x804A1F58
 	.sdata      start:0x804D5820 end:0x804D5830
 	.sbss       start:0x804D6D90 end:0x804D6D98
 	.sdata2     start:0x804DDBA8 end:0x804DDBD0
@@ -4349,29 +4508,48 @@ melee/if/ifprize.c:
 	.sdata2     start:0x804DDBD0 end:0x804DDC00
 
 melee/if/ifcoget.c:
-	.text       start:0x802FED14 end:0x802FF7DC
-	.data       start:0x803F9E08 end:0x803F9F28
-	.bss        start:0x804A1F48 end:0x804A1FD8
-	.sdata      start:0x804D5838 end:0x804D5850
+	.text       start:0x802FED14 end:0x802FF218
+	.data       start:0x803F9E08 end:0x803F9E38
+	.sdata      start:0x804D5838 end:0x804D5848
 	.sbss       start:0x804D6DA0 end:0x804D6DA8
+	.sdata2     start:0x804DDC00 end:0x804DDC28
+
+melee/if/if_2FF2.c:
+	.text       start:0x802FF218 end:0x802FF7DC
+	.data       start:0x803F9E38 end:0x803F9EF0
+	.bss        start:0x804A1F58 end:0x804A1FD8
+	.sdata      start:0x804D5848 end:0x804D5850
+	.sdata2     start:0x804DDC28 end:0x804DDC30
 
 melee/if/soundtest.c:
 	.text       start:0x802FF7DC end:0x80301E44
-	.data       start:0x803F9F28 end:0x803FDC20
-	.sdata      start:0x804D5850 end:0x804D5A40
+	.data       start:0x803F9EF0 end:0x803FDC20
+	.sdata      start:0x804D5850 end:0x804D5A00
+	.sbss       start:0x804D6DA8 end:0x804D6E18
+	.sdata2     start:0x804DDC30 end:0x804DDC58
 
 melee/if/textdraw.c:
-	.text       start:0x80301E44 end:0x803029B4
+	.text       start:0x80301E44 end:0x80302834
 	.rodata     start:0x803B8790 end:0x803B87A8
 	.data       start:0x803FDC20 end:0x803FDC80
 	.bss        start:0x804A1FD8 end:0x804A2688
-	.sbss       start:0x804D6E18 end:0x804D6E50
+	.sbss       start:0x804D6E18 end:0x804D6E40
 	.sdata2     start:0x804DDC58 end:0x804DDC88
 
 melee/if/textlib.c:
-	.text       start:0x803029B4 end:0x80304870
+	.text       start:0x80302834 end:0x80302E00
+	.data       start:0x803FDC80 end:0x803FDCA8
+	.sdata      start:0x804D5A00 end:0x804D5A08
+	.sdata2     start:0x804DDC88 end:0x804DDCA8
+
+melee/if/textlib_1.c:
+	.text       start:0x80302E00 end:0x80304870
 	.rodata     start:0x803B87A8 end:0x803B8844
+	.data       start:0x803FDCA8 end:0x803FDD18
 	.bss        start:0x804A2688 end:0x804A26B8
+	.sdata      start:0x804D5A08 end:0x804D5A40
+	.sbss       start:0x804D6E40 end:0x804D6E50
+	.sdata2     start:0x804DDCA8 end:0x804DDCC8
 
 melee/ty/toy.c:
 	.text       start:0x80304870 end:0x80312834
@@ -4414,7 +4592,7 @@ melee/vi/vi.c:
 melee/vi/vi0102.c:
 	.text       start:0x8031CB00 end:0x8031D020
 	.data       start:0x80400010 end:0x80400038
-	.sbss       start:0x804D6F30 end:0x804D6F3C
+	.sbss       start:0x804D6F30 end:0x804D6F48
 	.sdata2     start:0x804DE040 end:0x804DE050
 
 melee/vi/vi0401.c:
@@ -5428,15 +5606,58 @@ sysdolphin/baselib/gobjinit.c:
 	.text       start:0x803912E0 end:0x80391580
 	.data       start:0x80408620 end:0x8040862C
 
+sysdolphin/baselib/hsd_3915.c:
+	.text       start:0x80391580 end:0x80392CCC
+	.data       start:0x80408630 end:0x8040A540
+	.bss        start:0x804CE3F8 end:0x804CE728
+	.sdata      start:0x804D6070 end:0x804D60A8
+	.sbss       start:0x804D7850 end:0x804D7890
+	.sdata2     start:0x804DE890 end:0x804DE930
+
+sysdolphin/baselib/hsd_392C.c:
+	.text       start:0x80392CCC end:0x803932D0
+	.data       start:0x8040A540 end:0x8040A920
+	.bss        start:0x804CE728 end:0x804CEB40
+	.sdata      start:0x804D60A8 end:0x804D60B0
+	.sbss       start:0x804D7890 end:0x804D78A8
+
+sysdolphin/baselib/hsd_3933.c:
+	.text       start:0x803932D0 end:0x80393C14
+	.data       start:0x8040A920 end:0x8040AB00
+	.bss        start:0x804CEB40 end:0x804CF7E8
+	.sbss       start:0x804D78A8 end:0x804D78C8
+	.sdata2     start:0x804DE930 end:0x804DE948
+
+sysdolphin/baselib/hsd_393C.c:
+	.text       start:0x80393C14 end:0x80394314
+	.bss        start:0x804CF7E8 end:0x804CF810
+
+sysdolphin/baselib/debugconsole_main.c:
+	.text       start:0x80394314 end:0x803983A4
+	.data       start:0x8040AB00 end:0x8040BFB0
+	.bss        start:0x804CF810 end:0x804D08E8
+	.sdata      start:0x804D60B0 end:0x804D6358
+	.sbss       start:0x804D78C8 end:0x804D78D0
+
 sysdolphin/baselib/particle.c:
-	extab       start:0x80005520 end:0x800055F8
-	extabindex  start:0x800056C0 end:0x80005804
-	.text       start:0x80391580 end:0x8039F78C
-	.data       start:0x80408630 end:0x8040C300
-	.bss        start:0x804CE3F8 end:0x804D0FC0
-	.sdata      start:0x804D6070 end:0x804D6380
-	.sbss       start:0x804D7850 end:0x804D7908
-	.sdata2     start:0x804DE890 end:0x804DEA10
+	extab       start:0x80005520 end:0x80005588
+	extabindex  start:0x800056C0 end:0x8000575C
+	.text       start:0x803983A4 end:0x8039D1E4
+	.data       start:0x8040BFB0 end:0x8040C248
+	.bss        start:0x804D08E8 end:0x804D0F90
+	.sdata      start:0x804D6358 end:0x804D6368
+	.sbss       start:0x804D78D0 end:0x804D78F8
+	.sdata2     start:0x804DE948 end:0x804DE9A8
+
+sysdolphin/baselib/generator.c:
+	extab       start:0x80005588 end:0x800055F8
+	extabindex  start:0x8000575C end:0x80005804
+	.text       start:0x8039D1E4 end:0x8039F78C
+	.data       start:0x8040C248 end:0x8040C300
+	.bss        start:0x804D0F90 end:0x804D0FC0
+	.sdata      start:0x804D6368 end:0x804D6380
+	.sbss       start:0x804D78F8 end:0x804D7908
+	.sdata2     start:0x804DE9A8 end:0x804DEA10
 
 sysdolphin/baselib/psdisp.c:
 	extab       start:0x800055F8 end:0x80005618
@@ -5474,24 +5695,23 @@ sysdolphin/baselib/sobjlib.c:
 
 sysdolphin/baselib/sislib.c:
 	.text       start:0x803A5798 end:0x803A949C
-	.data       start:0x8040C490 end:0x8040FF80
+	.data       start:0x8040C490 end:0x8040CD40
 	.bss        start:0x804D1110 end:0x804D1138
 	.sdata      start:0x804D6390 end:0x804D6398
 	.sbss       start:0x804D7968 end:0x804D7980
 	.sdata2     start:0x804DEAA8 end:0x804DEB10
 
-sysdolphin/baselib/hsd_40FF.c:
-	.data       start:0x8040FF80 end:0x80430B40
+sysdolphin/baselib/hsd_4D11.c:
+	.bss        start:0x804D1138 end:0x804D3694
+	.sbss       start:0x804D7980 end:0x804D79A0
+
+sysdolphin/baselib/sislib_font.c:
+	.data       start:0x8040CD40 end:0x80430B40
 
 sysdolphin/baselib/hsd_3A94.c:
-	.text       start:0x803A949C end:0x803AA790
-	.data       start:0x80430B40 end:0x80430B84
-	.bss        start:0x804D1138 end:0x804D3694
-	.sbss       start:0x804D7980 end:0x804D79C9
-
-sysdolphin/baselib/hsd_3AA7.c:
-	.text       start:0x803AA790 end:0x803B27F4
-	.data       start:0x80430B84 end:0x80430BD0
+	.text       start:0x803A949C end:0x803B27F4
+	.data       start:0x80430B40 end:0x80430BD0
+	.sbss       start:0x804D79A0 end:0x804D79C9
 
 sysdolphin/baselib/hsd_3B27.c:
 	.text       start:0x803B27F4 end:0x803B2B20

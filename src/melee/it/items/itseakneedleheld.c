@@ -1,5 +1,7 @@
 #include "itseakneedleheld.h"
 
+#include "inlines.h"
+
 #include "ft/chara/ftKirby/ftkirbyspecialdonkey.h"
 #include "ft/chara/ftSeak/ftSk_SpecialS.h"
 
@@ -65,16 +67,7 @@ Item_GObj* it_802B19AC(Fighter_GObj* parent_gobj, Vec3* cur_pos,
     SpawnItem spawn;
 
     spawn.kind = kind;
-    spawn.prev_pos = *cur_pos;
-    spawn.prev_pos.z = 0.0f;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = parent_gobj;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawnOnPlane(&spawn, parent_gobj, cur_pos, facing_dir);
 
     {
         Item_GObj* gobj = Item_80268B18(&spawn);

@@ -8,11 +8,10 @@
 #include "if/textdraw.h"
 #include "if/textlib.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
-#include "it/it_2725.h"
 #include "it/it_3F14.h"
 #include "it/item.h"
+#include "it/itspawn.h"
 #include "it/types.h"
 #include "pl/player.h"
 
@@ -186,8 +185,10 @@ void db_80225D64(Item_GObj* item, Fighter_GObj* owner)
 }
 
 /// @todo avoid auto-inlining into fn_CheckItemAndPokemonMenu
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void fn_ToggleItemCollisionBubbles(void)
 {
     HSD_GObj* item_gobj;
@@ -205,7 +206,9 @@ void fn_ToggleItemCollisionBubbles(void)
         item_gobj = item_gobj->next;
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void db_80225DD8(Item_GObj* item, Fighter_GObj* owner)
 {
@@ -375,7 +378,7 @@ void db_CheckAndSpawnItem(int player)
         return;
     }
     spawnItem.kind = db_ItemAndPokemonMenu.CurrentlySelectedItem;
-    if (Item_80266F3C() == 0 && spawnItem.kind < 0x23) {
+    if (Item_80266F3C() == 0 && spawnItem.kind < It_Common_End) {
         return;
     }
     Player_LoadPlayerCoords(player, &spawnItem.prev_pos);
@@ -389,18 +392,23 @@ void db_CheckAndSpawnItem(int player)
     spawnItem.x4_parent_gobj2 = spawnItem.x0_parent_gobj;
     spawnItem.x44_flag.b0 = 1;
     spawnItem.x40 = 0;
-    if (spawnItem.kind < 0x23 && Item_804A0C64.x0 >= (u32) it_804D6D28->x0) {
+    if (spawnItem.kind < It_Common_End &&
+        Item_804A0C64.x0 >= (u32) it_804D6D28->x0)
+    {
         OSReport("Item Max Over.\n");
         return;
     }
-    if (spawnItem.kind < 0x2F && Item_804A0C64.x2C >= (u32) it_804D6D28->x14) {
+    if (spawnItem.kind < It_Kind_Octarock_Stone &&
+        Item_804A0C64.x2C >= (u32) it_804D6D28->x14)
+    {
         OSReport("couldn't get Item struct.(CZako)\n");
         return;
     }
-    if (spawnItem.kind < 0xD0 || spawnItem.kind >= 0xEA ||
-        it_804A0F60[spawnItem.kind - 0xD0] != 0)
+    if (spawnItem.kind < It_Kind_Old_Kuri ||
+        spawnItem.kind >= It_Kind_Arwing_Laser ||
+        it_804A0F60[spawnItem.kind - It_Kind_Old_Kuri] != 0)
     {
-        if (spawnItem.kind != 0x22 || it_8026C704() == 0) {
+        if (spawnItem.kind != It_Kind_M_Ball || it_8026C704() == 0) {
             {
                 HSD_GObj* gobj = Item_80268B18(&spawnItem);
                 if (gobj != NULL) {

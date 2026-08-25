@@ -9,18 +9,23 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/inlines.h"
+
+#include "ftPopo/forward.h"
+
 #include "ftPopo/types.h"
 #include "lb/lb_00B0.h"
 #include "pl/player.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
-#include <MSL/math.h>
 
 /* 1230D0 */ static bool ftNn_Init_801230D0(Fighter_GObj* nana_gobj);
 /* 123218 */ static void fn_80123218(Fighter_GObj* nana_gobj);
@@ -78,7 +83,7 @@ void fn_80123218(Fighter_GObj* nana_gobj)
         nana_vec.x = nana_vec.y = nana_vec.z = 0;
         lb_8000B1CC(GET_FIGHTER(nana_gobj)->parts[FtPart_L4thNb].joint, NULL,
                     &nana_vec);
-        popo_fp->fv.pp.x2240 = nana_vec;
+        popo_fp->u.pp.x2240 = nana_vec;
     }
 }
 
@@ -255,9 +260,7 @@ void ftNn_Init_80123720(Fighter_GObj* gobj)
 void ftNn_Init_8012378C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 362, 0x0C4C508A, fp->cur_anim_frame, 1.0f,
-                              0.0f, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 362, ftPp_MF_SpecialHi_Coll);
     fp->accessory4_cb = fn_80123218;
 }
 

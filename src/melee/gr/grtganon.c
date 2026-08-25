@@ -1,23 +1,20 @@
 #include "grtganon.h"
 
-#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/types.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "lb/types.h"
 
 #include "mp/forward.h"
 
 #include "mp/mplib.h"
 
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-StageCallbacks grTGn_803E9880[] = {
+StageCallbacks grTGn_StageCallbacks[] = {
     { grTGanon_8022486C, grTGanon_80224898, grTGanon_802248A0,
       grTGanon_802248A4, 0 },
     { grTGanon_80224938, grTGanon_80224988, grTGanon_80224990,
@@ -27,9 +24,9 @@ StageCallbacks grTGn_803E9880[] = {
     { NULL, NULL, NULL, NULL, 0 }
 };
 
-StageData grTGn_803E98DC = {
-    TGANON,
-    grTGn_803E9880,
+StageData grTGn_StageData = {
+    Gr_Kind_TGanon,
+    grTGn_StageCallbacks,
     "/GrTGn.dat",
     grTGanon_802246DC,
     grTGanon_802246D8,
@@ -41,13 +38,13 @@ StageData grTGn_803E98DC = {
     (1 << 0),
 };
 
-typedef struct grTGnSpecialParams {
+typedef struct grTGn_YakumonoParam {
     DynamicsDesc* x0;
     DynamicsDesc* x4;
     DynamicsDesc* x8;
-} grTGnSpecialParams;
+} grTGn_YakumonoParam;
 
-grTGnSpecialParams* grTGn_804D6B18;
+static grTGn_YakumonoParam* yakumono_param;
 
 void grTGanon_802246D8(bool unused)
 {
@@ -56,7 +53,7 @@ void grTGanon_802246D8(bool unused)
 
 void grTGanon_802246DC(void)
 {
-    grTGn_804D6B18 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
 
@@ -87,7 +84,7 @@ bool grTGanon_8022477C(void)
 HSD_GObj* grTGanon_80224784(int id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTGn_803E9880[id];
+    StageCallbacks* callbacks = &grTGn_StageCallbacks[id];
 
     gobj = Ground_GetStageGObj(id);
 
@@ -123,12 +120,7 @@ void grTGanon_802248A4(Ground_GObj* gobj)
 
 void grTGanon_802248A8(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
-    PAD_STACK(8);
-
-    Ground_801C2ED0(joint, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTGanon_802248F8(Ground_GObj* gobj)
@@ -149,12 +141,7 @@ void grTGanon_80224934(Ground_GObj* gobj)
 
 void grTGanon_80224938(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
-    PAD_STACK(8);
-
-    Ground_801C2ED0(joint, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTGanon_80224988(Ground_GObj* gobj)
@@ -181,15 +168,15 @@ DynamicsDesc* grTGanon_802249B4(enum_t arg0)
             i = mpLineGetKind(arg0);
 
             if (i == CollLine_Ceiling) {
-                return grTGn_804D6B18->x0;
+                return yakumono_param->x0;
             }
 
             if (i == CollLine_RightWall) {
-                return grTGn_804D6B18->x4;
+                return yakumono_param->x4;
             }
 
             if (i == CollLine_LeftWall) {
-                return grTGn_804D6B18->x8;
+                return yakumono_param->x8;
             }
 
             return NULL;

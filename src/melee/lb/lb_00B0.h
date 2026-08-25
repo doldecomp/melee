@@ -1,16 +1,13 @@
 #ifndef GALE01_00B074
 #define GALE01_00B074
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "sc/forward.h"
 #include <baselib/forward.h>
 
-#include <stddef.h>
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
-#include <baselib/texp.h>
 
 /* 00B074 */ bool lb_8000B074(HSD_JObj*);
 /* 00B09C */ bool lb_8000B09C(HSD_JObj*);

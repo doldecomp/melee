@@ -5,7 +5,11 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/types.h"
@@ -27,13 +31,13 @@ void ftGw_Attack11_ItemGreenhouseSetup(HSD_GObj* gobj)
 
     Fighter* fp = getFighter(gobj);
 
-    if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
+    if (fp->u.gw.x224C_greenhouseGObj != NULL) {
         ftGw_Attack11_DecideAction(gobj);
     } else {
         lb_8000B1CC(fp->parts[FtPart_LHandNb].joint, NULL, &sp10);
-        fp->fv.gw.x224C_greenhouseGObj = itGamewatchGreenhouse_Spawn(
+        fp->u.gw.x224C_greenhouseGObj = itGamewatchGreenhouse_Spawn(
             gobj, &sp10, FtPart_LHandNb, fp->facing_dir);
-        if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
+        if (fp->u.gw.x224C_greenhouseGObj != NULL) {
             if (fp->death2_cb == NULL) {
                 fp->death2_cb = ftGw_Init_OnDamage;
             }
@@ -54,16 +58,16 @@ void ftGw_Attack11_DecideAction(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     s32 msid;
 
-    if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
+    if (fp->u.gw.x224C_greenhouseGObj != NULL) {
         msid = fp->motion_id;
         if (msid == ftGw_MS_Attack11) {
-            itGamewatchGreenhouse_802C6430(fp->fv.gw.x224C_greenhouseGObj);
+            itGamewatchGreenhouse_802C6430(fp->u.gw.x224C_greenhouseGObj);
         } else if (msid == ftGw_MS_Attack100Start) {
-            itGamewatchGreenhouse_802C6458(fp->fv.gw.x224C_greenhouseGObj);
+            itGamewatchGreenhouse_802C6458(fp->u.gw.x224C_greenhouseGObj);
         } else if (msid == ftGw_MS_Attack100Loop) {
-            itGamewatchGreenhouse_802C6480(fp->fv.gw.x224C_greenhouseGObj);
+            itGamewatchGreenhouse_802C6480(fp->u.gw.x224C_greenhouseGObj);
         } else if (msid == ftGw_MS_Attack100End) {
-            itGamewatchGreenhouse_802C64A8(fp->fv.gw.x224C_greenhouseGObj);
+            itGamewatchGreenhouse_802C64A8(fp->u.gw.x224C_greenhouseGObj);
         }
 
         if (fp->death2_cb == NULL) {
@@ -86,7 +90,7 @@ void ftGw_Attack11_ItemGreenhouseSetFlag(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftGw_Attack11_ItemGreenhouseExitHitlag(gobj);
-    fp->fv.gw.x224C_greenhouseGObj = NULL;
+    fp->u.gw.x224C_greenhouseGObj = NULL;
 }
 
 /// 0x8014BF7C
@@ -98,8 +102,8 @@ void ftGw_Attack11_ItemGreenhouseRemove(HSD_GObj* gobj)
 
     u8 _[4];
 
-    if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
-        itGamewatchGreenhouse_802C6328(fp->fv.gw.x224C_greenhouseGObj);
+    if (fp->u.gw.x224C_greenhouseGObj != NULL) {
+        itGamewatchGreenhouse_802C6328(fp->u.gw.x224C_greenhouseGObj);
         ftGw_Attack11_ItemGreenhouseSetFlag(gobj);
     }
 }
@@ -110,8 +114,8 @@ void ftGw_Attack11_ItemGreenhouseRemove(HSD_GObj* gobj)
 void ftGw_Attack11_ItemGreenhouseEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
-        itGamewatchGreenhouse_802C6374(fp->fv.gw.x224C_greenhouseGObj);
+    if (fp->u.gw.x224C_greenhouseGObj != NULL) {
+        itGamewatchGreenhouse_802C6374(fp->u.gw.x224C_greenhouseGObj);
     }
 }
 
@@ -119,8 +123,8 @@ void ftGw_Attack11_ItemGreenhouseEnterHitlag(HSD_GObj* gobj)
 void ftGw_Attack11_ItemGreenhouseExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
-        itGamewatchGreenhouse_802C6394(fp->fv.gw.x224C_greenhouseGObj);
+    if (fp->u.gw.x224C_greenhouseGObj != NULL) {
+        itGamewatchGreenhouse_802C6394(fp->u.gw.x224C_greenhouseGObj);
     }
 }
 
@@ -160,7 +164,7 @@ void ftGw_Attack11_Enter(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, ftGw_MS_Attack11, 0, 0.0f, 1.0f, 0.0f,
                                   NULL);
         ftAnim_8006EBA4(gobj);
-        fp->hitlag_mul = (float) fp->co_attrs.jab_2_input_window;
+        fp->hitlag_mul = fp->co_attrs.jab_2_input_window;
         fp->unk_msid = 44;
         fp->x2218_b2 = 0;
         fp->mv.gw.Attack11.unk = 0;

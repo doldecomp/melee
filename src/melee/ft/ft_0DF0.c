@@ -13,39 +13,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 
-#include <baselib/gobj.h>
-#include <melee/cm/camera.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftCommon/ftCo_Attack1.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackHi3.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackHi4.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackLw3.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackLw4.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackS3.h>
-#include <melee/ft/chara/ftCommon/ftCo_AttackS4.h>
-#include <melee/ft/chara/ftCommon/ftCo_DamageIce.h>
-#include <melee/ft/chara/ftCommon/ftCo_Escape.h>
-#include <melee/ft/chara/ftCommon/ftCo_FallSpecial.h>
-#include <melee/ft/chara/ftCommon/ftCo_Guard.h>
-#include <melee/ft/chara/ftCommon/ftCo_Lift.h>
-#include <melee/ft/chara/ftCommon/ftCo_SpecialS.h>
 #include <melee/ft/ft_0877.h>
-#include <melee/ft/ft_0881.h>
-#include <melee/ft/ft_0CDD.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftchangeparam.h>
-#include <melee/ft/ftlib.h>
-#include <melee/ft/ftmaterial.h>
-#include <melee/ft/ftmetal.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gr/stage.h>
-#include <melee/it/item.h>
-#include <melee/it/items/it_2E5A.h>
-#include <melee/it/items/itkinoko.h>
-#include <melee/pl/pl_040D.h>
-#include <melee/pl/player.h>
-#include <melee/pl/plbonuslib.h>
-#include <melee/pl/plstale.h>
 
 void ftCo_800DEE84(Fighter_GObj* gobj, u32 arg1, float arg2, float dmg_mult)
 {
@@ -79,7 +47,7 @@ Vec2* ftCo_800DEEE8(Fighter* fp, Vec2* shift)
 {
     SmashAttr* temp_r6 = &fp->smash_attrs;
     if (temp_r6->state == SmashState_Charging || temp_r6->state == 4) {
-        Vec2* temp_r5 = &Fighter_804D6528->x0[temp_r6->x212C];
+        Vec2* temp_r5 = &Fighter_SmashChargeShakeTable->x0[temp_r6->x212C];
         shift->x = temp_r5->x;
         shift->y = temp_r5->y;
         return shift;
@@ -143,7 +111,7 @@ void ftCo_800DF0D0(Fighter_GObj* gobj)
             attr->state = SmashState_Charging;
             attr->x2124_frameSpeedMul = fp->frame_speed_mul;
             attr->x212C = 0;
-            attr->x212D = Fighter_804D6528->x4;
+            attr->x212D = Fighter_SmashChargeShakeTable->x4;
             attr->x2130_sfxBool = 0;
             ftAnim_SetAnimRate(gobj, 0.0f);
             if (attr->x2128 != 0x7B) {

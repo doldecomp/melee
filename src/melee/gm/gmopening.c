@@ -4,15 +4,17 @@
 #include "gmtitle.h"
 
 #include <stdio.h>
+#include <baselib/controller.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/particle.h>
+#include <sysdolphin/baselib/hsd_3915.h>
 #include <sysdolphin/baselib/sobjlib.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbmthp.h>
+#include <melee/mn/inlines.h>
 #include <melee/mn/types.h>
 
 /* 3B7D68 */ static const Vec3 gm_803B7D68 = { 0.0f, 0.0f, 1.0f };
@@ -31,11 +33,13 @@
 /* 4D67F0 */ HSD_SObjDesc* gm_804D67F0;
 /* 4D67EC */ u32 gm_804D67EC;
 
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 82.0f;
     (void) 290.0f;
 }
+#endif
 
 void gm_801A9DD0(HSD_GObj* arg0, u16 arg1, u16 arg2, int arg3, int arg4)
 {
@@ -53,7 +57,7 @@ void gm_801A9DD0(HSD_GObj* arg0, u16 arg1, u16 arg2, int arg3, int arg4)
     Vec3 interest = gm_803B7D74;
 
     far_val = 2.0f;
-    bottom = (f32) (-(s32) (u16) arg2);
+    bottom = (f32) (-(s32) arg2);
     right = (f32) arg1;
     top = 0.0f;
     left = 0.0f;
@@ -85,12 +89,16 @@ void gm_801A9DD0(HSD_GObj* arg0, u16 arg1, u16 arg2, int arg3, int arg4)
     GObj_SetupGXLinkMax(arg0, HSD_SObjLib_803A54EC, (u32) arg3);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
+#endif
 static float unused_floats[] = {
     0.0f, 1600.0, 400.0f, 0.0f, 1330.0f, 130.0f, 0.0f, -3.0f, 0.0f,
 };
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void* fn_801A9FCC(void)
 {
@@ -113,8 +121,7 @@ void* fn_801A9FCC(void)
     lines[1].next = &lines[2];
     lines[2].unk_04 = 0;
 
-    ms = (u32) ((f32) (u32) lbMthp_8001F5D4() /
-                (f32) (*(u32*) 0x800000F8 / 4 / 1000));
+    ms = lbMthp_8001F5D4() / (f32) OSMillisecondsToTicks(1);
     idx = 2;
     sprintf(lines[idx].text, "\\cffff00%3d", ms);
 
@@ -189,7 +196,7 @@ void gm_801AA28C_OnFrame(void)
 
     lbMthp_8001F578();
     temp_r3 = lbMthp_8001F5C4();
-    if ((u32) gm_804D67EC > 0x1518) {
+    if (gm_804D67EC > 0x1518) {
         gm_804D67EC += 1;
     } else {
         gm_804D67EC = (u32) temp_r3;
@@ -209,7 +216,7 @@ void gm_801AA28C_OnFrame(void)
             gm_804D67E1 = 1;
         }
     }
-    if (((u8) gm_804D67E2 == 0) && ((u32) gm_804D67EC >= 0x1374U)) {
+    if ((gm_804D67E2 == 0) && (gm_804D67EC >= 0x1374U)) {
         gmMainLib_8015F500();
         gm_804D67E2 = 1;
     }
@@ -223,11 +230,11 @@ void gm_801AA28C_OnFrame(void)
         temp_r3_3->x14 = 290.0f;
         gm_804D67D4 = temp_r3_2;
     }
-    if ((gm_804D67D4 != NULL) && ((u32) gm_804D67EC >= 0x202)) {
+    if ((gm_804D67D4 != NULL) && (gm_804D67EC >= 0x202)) {
         HSD_GObjPLink_80390228(gm_804D67D4);
         gm_804D67D4 = NULL;
     }
-    if ((gm_804D67D8 == NULL) && ((u32) gm_804D67EC >= 0x3B6) &&
+    if ((gm_804D67D8 == NULL) && (gm_804D67EC >= 0x3B6) &&
         (gm_804D67EC < 0x3CE))
     {
         gm_804D67D8 = gmTitle_801A12C4();
@@ -253,30 +260,32 @@ void gm_801AA28C_OnFrame(void)
         lbAudioAx_800236DC();
         lbAudioAx_80023694();
         gm_801A4B74();
-        gm_801A42E8(GM_TITLE);
-        gm_801A42D4();
+        gm_SetPendingGameMode(GM_TITLE);
+        gm_SetNewGameModePending();
     } else if (gm_804D67EC > 0x157C) {
-        if (gm_801A36A0(4) & 0x1000) {
+        if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) & HSD_PAD_START) {
             gmMainLib_8015F500();
             lbAudioAx_800236DC();
-            lbAudioAx_80024030(1);
+            sfxForward();
             gm_801A4B60();
             gm_80173EEC();
             gm_80172898(0x100);
-            if (!gm_80173754(1, 0)) {
-                gm_801A42E8(GM_MENU);
+            if (!gm_80173754(GM_MENU, 0)) {
+                gm_SetPendingGameMode(GM_MENU);
             }
-            gm_801A42D4();
+            gm_SetNewGameModePending();
         }
     } else {
-        if (gm_801A36A0(4) & 0x1100) {
+        if (gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS) &
+            (HSD_PAD_START | HSD_PAD_A))
+        {
             gmMainLib_8015F500();
             lbAudioAx_800236DC();
             lbAudioAx_80023694();
-            lbAudioAx_80024030(1);
+            sfxForward();
             gm_801A4B60();
-            gm_801A42E8(GM_TITLE);
-            gm_801A42D4();
+            gm_SetPendingGameMode(GM_TITLE);
+            gm_SetNewGameModePending();
         }
     }
 }

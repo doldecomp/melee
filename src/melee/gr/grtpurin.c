@@ -1,22 +1,20 @@
 #include "grtpurin.h"
 
-#include "gr/grdisplay.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/types.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
+
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "lb/types.h"
 #include "mp/mplib.h"
 
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 
-StageCallbacks grTPr_803E9338[] = {
+StageCallbacks grTPr_StageCallbacks[] = {
     { grTPurin_802232F4, grTPurin_80223320, grTPurin_80223328,
       grTPurin_8022332C, 0 },
     { grTPurin_8022347C, grTPurin_802234CC, grTPurin_802234D4,
@@ -26,9 +24,9 @@ StageCallbacks grTPr_803E9338[] = {
     { NULL, NULL, NULL, NULL, 0 }
 };
 
-StageData grTPr_803E9394 = {
-    TPURIN,
-    grTPr_803E9338,
+StageData grTPr_StageData = {
+    Gr_Kind_TPurin,
+    grTPr_StageCallbacks,
     "/GrTPr.dat",
     grTPurin_80223164,
     grTPurin_80223160,
@@ -44,7 +42,7 @@ typedef struct grTPrSpecialParams {
     DynamicsDesc* x0;
 } grTPrSpecialParams;
 
-grTPrSpecialParams* grTPr_804D6B10;
+static grTPrSpecialParams* yakumono_param;
 
 void grTPurin_80223160(bool unused)
 {
@@ -53,7 +51,7 @@ void grTPurin_80223160(bool unused)
 
 void grTPurin_80223164(void)
 {
-    grTPr_804D6B10 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
 
@@ -84,7 +82,7 @@ bool grTPurin_80223204(void)
 HSD_GObj* grTPurin_8022320C(int id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTPr_803E9338[id];
+    StageCallbacks* callbacks = &grTPr_StageCallbacks[id];
 
     gobj = Ground_GetStageGObj(id);
 
@@ -120,12 +118,7 @@ void grTPurin_8022332C(Ground_GObj* gobj)
 
 void grTPurin_80223330(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
-    PAD_STACK(8);
-
-    Ground_801C2ED0(joint, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTPurin_80223380(Ground_GObj* gobj)
@@ -167,12 +160,7 @@ void grTPurin_80223478(Ground_GObj* gobj)
 
 void grTPurin_8022347C(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
-    PAD_STACK(8);
-
-    Ground_801C2ED0(joint, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTPurin_802234CC(Ground_GObj* gobj)
@@ -199,10 +187,10 @@ DynamicsDesc* grTPurin_802234F8(enum_t arg0)
         if (i != -1) {
             mpLineGetKind(arg0);
             if (i == (0 << 0)) {
-                return grTPr_804D6B10->x0;
+                return yakumono_param->x0;
             }
             if (i == (1 << 0)) {
-                return grTPr_804D6B10->x0;
+                return yakumono_param->x0;
             }
         }
     }

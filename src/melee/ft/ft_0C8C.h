@@ -1,12 +1,10 @@
 #ifndef GALE01_0C8C84
 #define GALE01_0C8C84
 
-#include <placeholder.h>
-
 #include "ft/forward.h"
-#include "ftCommon/forward.h"
 
-extern HSD_MObj* ft_804D6588;
+#define SFX_VOLUME_MAX 127
+#define SFX_PAN_MID 64
 
 /* 0C8C84 */ bool ftCo_800C8C84(Fighter_GObj* gobj);
 /* 0C8D00 */ void ftCo_800C8D00(Fighter_GObj* gobj);
@@ -15,5 +13,6 @@ extern HSD_MObj* ft_804D6588;
 /* 0C8F6C */ void ftCo_800C8F6C(void);
 /* 0C8FC4 */ void ftCo_800C8FC4(Fighter_GObj* gobj);
 /* 0C9034 */ void ftCo_800C9034(Fighter_GObj* gobj);
+/* 4D6588 */ extern HSD_MObj* ft_804D6588;
 
 #endif

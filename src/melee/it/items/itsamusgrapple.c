@@ -5,6 +5,8 @@
 
 #include "baselib/forward.h"
 
+#include "baselib/gobjgxlink.h"
+#include "baselib/gobjuserdata.h"
 #include "dolphin/types.h"
 #include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_0A01.h"
@@ -28,10 +30,10 @@
 #include "it/it_26B1.h"
 #include "it/itCharItems.h"
 #include "it/item.h"
+#include "it/items/inlines.h"
 #include "lb/lbvector.h"
 #include "lb/types.h"
 #include "mp/mpcoll.h"
-#include "mp/mplib.h"
 
 #include <baselib/gobj.h>
 #include <baselib/gobjobject.h>
@@ -39,8 +41,27 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
-extern Vec3 it_803B8674;
-extern itSamusGrapple_HitboxData it_803B8660;
+ItemStateTable it_803F73A8[] = {
+    { -1, NULL, itSamusgrapple_UnkMotion0_Phys, NULL },
+    { -1, NULL, itSamusgrapple_UnkMotion1_Phys, NULL },
+    { -1, NULL, itSamusgrapple_UnkMotion2_Phys, NULL },
+    { -1, NULL, itSamusgrapple_UnkMotion3_Phys, NULL },
+    { -1, NULL, itSamusgrapple_UnkMotion4_Phys, NULL },
+    { -1, NULL, itSamusgrapple_UnkMotion5_Phys, NULL },
+    { -1, NULL, itSamusgrapple_UnkMotion6_Phys, NULL },
+    { -1, NULL, itSamusgrapple_UnkMotion7_Phys, NULL },
+    { -1, NULL, itSamusgrapple_UnkMotion8_Phys, NULL },
+};
+
+const itSamusGrapple_Hitbox it_803B8660 = {
+    { 11, 0, 0, 0, 139, 0, 0 },
+    { 1200, 0 },
+    { 0, 0 },
+    { 361, 100, 0, 1, 0, 0, 1, 0 },
+    { 0, 8, 0, 1, 2, 1, 0 },
+};
+
+const Vec3 it_803B8674 = { 0.0f, 0.0f, 0.0f };
 
 static inline bool samus_grapple_fighter_compare(FtMotionId id)
 {
@@ -101,25 +122,25 @@ static inline void samus_grapple_anim(Item_GObj* gobj)
 
 static inline void samus_grapple_state_sync(Fighter* fp)
 {
-    switch (fp->fv.ss.x2240) {
+    switch (fp->u.ss.x2240) {
     case 0:
         if (fp->input.held_inputs & 8) {
-            fp->fv.ss.x2240++;
+            fp->u.ss.x2240++;
         }
         break;
     case 1:
         if (fp->input.held_inputs & 4) {
-            fp->fv.ss.x2240++;
+            fp->u.ss.x2240++;
         }
         break;
     case 2:
         if (fp->input.held_inputs & 8) {
-            fp->fv.ss.x2240++;
+            fp->u.ss.x2240++;
         }
         break;
     case 3:
         if (fp->input.x668 & 0x100) {
-            fp->fv.ss.x2240++;
+            fp->u.ss.x2240++;
         }
         break;
     }
@@ -283,33 +304,42 @@ void it_802B743C(HSD_GObj* gobj, Item* ip, s32 type)
     HSD_JObjReqAnimAll(jobj->child, 0.0f);
 }
 
-static inline void it_802B75FC_inline(ItemLink* link, Vec* zero, f32 f)
+static inline void samus_grapple_setup_tail(Item* ip, HSD_GObj* link_gobj)
 {
-    CollData* cd = &link->coll_data;
-    link->vel = *zero;
-    link->pos = *zero;
-    link->x2C_b0 = 0;
-    link->x2C_b1 = 0;
-    link->x2C_b2 = 0;
-    cd->cur_pos = link->pos;
-    cd->last_pos = cd->cur_pos;
-    mpColl_80041EE4(cd);
-    mpColl_SetECBSource_Fixed(cd, NULL, f, f, f, f);
+    itSamusGrappleAttributes* attrs2 =
+        ip->xC4_article_data->x4_specialAttributes;
+    HSD_JObj* tail_jobj = HSD_JObjLoadJoint(attrs2->x70);
+    HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849, tail_jobj);
+    GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);
+    HSD_JObjAddAnimAll(tail_jobj->child,
+                       (attrs2->x98 != NULL) ? *attrs2->x98 : NULL,
+                       (attrs2->x9C != NULL) ? *attrs2->x9C : NULL,
+                       (attrs2->xA0 != NULL) ? *attrs2->xA0 : NULL);
+    HSD_JObjReqAnimAll(tail_jobj->child, 0.0f);
 }
 
 HSD_JObj* it_802B75FC(Item* ip, HSD_JObj* jobj_arg, s32 arg2, f32 scale)
 {
     f32 coeff;
     f32 temp;
-    HSD_JObj* result;
+    CollData* first_coll;
+    CollData* last_coll;
+    CollData* link_coll;
+    HSD_GObj* link_gobj;
     ItemLink* prev_link;
+    itSamusGrappleAttributes* attrs;
     ItemLink* head_link;
     ItemLink* tail_link;
+    ItemLink* link_tmp;
+    HSD_GObj* gobj_tmp;
+    ItemLink* link;
+    HSD_JObj* result;
     s32 i;
-    itSamusGrappleAttributes* attrs =
-        ip->xC4_article_data->x4_specialAttributes;
-    Vec3 zero_vel = it_803B8674;
+    Vec3 zero_vel;
     PAD_STACK(4);
+
+    attrs = ip->xC4_article_data->x4_specialAttributes;
+    zero_vel = it_803B8674;
 
     if (arg2 != 0) {
         coeff = attrs->x60;
@@ -342,8 +372,8 @@ HSD_JObj* it_802B75FC(Item* ip, HSD_JObj* jobj_arg, s32 arg2, f32 scale)
 
     prev_link = NULL;
     for (i = 0; i < attrs->x34; i++) {
-        HSD_GObj* link_gobj = GObj_Create(7, 0xA, 0);
-        ItemLink* link;
+        gobj_tmp = GObj_Create(7, 0xA, 0);
+        link_gobj = gobj_tmp;
         if (link_gobj == NULL) {
             while (prev_link != NULL) {
                 HSD_GObjPLink_80390228(prev_link->gobj);
@@ -351,42 +381,33 @@ HSD_JObj* it_802B75FC(Item* ip, HSD_JObj* jobj_arg, s32 arg2, f32 scale)
             }
             return NULL;
         }
-        link = HSD_ObjAlloc(&item_link_alloc_data);
+        link = link_tmp = HSD_ObjAlloc(&item_link_alloc_data);
         GObj_InitUserData(link_gobj, 6, it_802A2474, link);
 
         if (i == 0) {
             link->next = NULL;
+            first_coll = &link->coll_data;
             head_link = link;
-            link->jobj = jobj_arg;
-            link->gobj = link_gobj;
-            it_802B75FC_inline(link, &zero_vel, 1.0f);
+            samus_grapple_init_link(link, jobj_arg, link_gobj, &zero_vel);
+            mpColl_SetECBSource_Fixed(first_coll, NULL, 1.0f, 1.0f, 1.0f,
+                                      1.0f);
             it_802B743C(link_gobj, ip, 0);
         } else if (i == attrs->x34 - 1) {
-            itSamusGrappleAttributes* attrs2;
-            HSD_JObj* tail_jobj;
             prev_link->prev = link;
+            last_coll = &link->coll_data;
             link->prev = NULL;
             tail_link = link;
             link->next = prev_link;
-            link->jobj = jobj_arg;
-            link->gobj = link_gobj;
-            it_802B75FC_inline(link, &zero_vel, 1.5f);
-            attrs2 = ip->xC4_article_data->x4_specialAttributes;
-            tail_jobj = HSD_JObjLoadJoint(attrs2->x70);
-            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849, tail_jobj);
-            GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);
-            HSD_JObjAddAnimAll(tail_jobj->child,
-                               (attrs2->x98 != NULL) ? *attrs2->x98 : NULL,
-                               (attrs2->x9C != NULL) ? *attrs2->x9C : NULL,
-                               (attrs2->xA0 != NULL) ? *attrs2->xA0 : NULL);
-            HSD_JObjReqAnimAll(tail_jobj->child, 0.0f);
+            samus_grapple_init_link(link, jobj_arg, link_gobj, &zero_vel);
+            mpColl_SetECBSource_Fixed(last_coll, NULL, 1.5f, 1.5f, 1.5f, 1.5f);
+            samus_grapple_setup_tail(ip, link_gobj);
             result = link_gobj->hsd_obj;
         } else {
             prev_link->prev = link;
+            link_coll = &link->coll_data;
             link->next = prev_link;
-            link->jobj = jobj_arg;
-            link->gobj = link_gobj;
-            it_802B75FC_inline(link, &zero_vel, 1.0f);
+            samus_grapple_init_link(link, jobj_arg, link_gobj, &zero_vel);
+            mpColl_SetECBSource_Fixed(link_coll, NULL, 1.0f, 1.0f, 1.0f, 1.0f);
             it_802B743C(link_gobj, ip, i % 3);
         }
         link->x1CC = -1;
@@ -407,7 +428,7 @@ void it_802B7B84(Item_GObj* gobj)
                 Fighter* fp = GET_FIGHTER(ip->xDD4_itemVar.samusgrapple.x8);
                 if (fp != NULL) {
                     ip->xDD4_itemVar.samusgrapple.unk_10 = NULL;
-                    fp->fv.ss.x223C = 0;
+                    fp->u.ss.x223C = 0;
                     fp->accessory2_cb = 0;
                     fp->death1_cb = 0;
                     fp->accessory3_cb = 0;
@@ -444,7 +465,7 @@ Item_GObj* it_802B7C18(Fighter_GObj* owner, Vec3* pos, f32 facing_dir)
         return NULL;
     }
 
-    spawn.kind = 0x60;
+    spawn.kind = It_Kind_Samus_GBeam;
     spawn.prev_pos = *pos;
     spawn.pos = spawn.prev_pos;
     spawn.facing_dir = facing_dir;
@@ -461,7 +482,7 @@ Item_GObj* it_802B7C18(Fighter_GObj* owner, Vec3* pos, f32 facing_dir)
         attrs = ip->xC4_article_data->x4_specialAttributes;
         ip->xDD4_itemVar.samusgrapple.x14 = 0;
 
-        if (fp->fv.ss.x2240 >= 4) {
+        if (fp->u.ss.x2240 >= 4) {
             if (fp->ground_or_air == GA_Ground) {
                 ip->xDD4_itemVar.samusgrapple.x16 = 1;
             } else {
@@ -469,7 +490,7 @@ Item_GObj* it_802B7C18(Fighter_GObj* owner, Vec3* pos, f32 facing_dir)
             }
         } else {
             ip->xDD4_itemVar.samusgrapple.x16 = 0;
-            fp->fv.ss.x2240 = 0;
+            fp->u.ss.x2240 = 0;
         }
 
         if (fp->motion_id == 0x165) {
@@ -574,7 +595,6 @@ void itSamusgrapple_UnkMotion0_Phys(Item_GObj* gobj)
 void fn_802B805C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    Fighter_GObj* owner;
     itSamusGrappleAttributes* attrs;
     ItemLink* link;
     Fighter* fp;
@@ -585,9 +605,8 @@ void fn_802B805C(Item_GObj* gobj)
     Mtx m;
     PAD_STACK(28);
 
-    owner = ip->owner;
     attrs = ip->xC4_article_data->x4_specialAttributes;
-    fp = owner->user_data;
+    fp = ip->owner->user_data;
     samus_grapple_state_sync(fp);
 
     link = ip->xDD4_itemVar.samusgrapple.x0;
@@ -787,23 +806,6 @@ void itSamusgrapple_UnkMotion5_Phys(Item_GObj* gobj)
     GET_ITEM(gobj)->xDD4_itemVar.samusgrapple.unk_10 = fn_802B8814;
 }
 
-static inline bool fn_802B895C_inline(Item* ip, Fighter* fp, Vec3* pos)
-{
-    ItemLink* head = ip->xDD4_itemVar.samusgrapple.x0;
-    Vec3* head_pos = &head->pos;
-    if (mpCheckAllRemap(NULL, NULL, NULL, NULL, -1, -1, pos->x, pos->y,
-                        head->pos.x, head->pos.y))
-    {
-        return true;
-    } else if (mpCheckAllRemap(NULL, NULL, NULL, NULL, -1, -1, fp->cur_pos.x,
-                               fp->cur_pos.y, head_pos->x, head_pos->y))
-    {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 void fn_802B895C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -820,7 +822,7 @@ void fn_802B895C(Item_GObj* gobj)
     fp2 = fp;
     samus_grapple_setup_pos(link, &pos, m);
 
-    if (fn_802B895C_inline(ip, fp2, &pos)) {
+    if (itGrappleCheckCollision(ip->xDD4_itemVar.samusgrapple.x0, fp2, &pos)) {
         ftCo_80090780(ip->owner);
         it_802B7B84(gobj);
         return;
@@ -916,7 +918,7 @@ void fn_802B8D38(Item_GObj* gobj)
     fp2 = fp;
     samus_grapple_setup_pos(link, &pos, m);
 
-    if (fn_802B895C_inline(ip, fp2, &pos)) {
+    if (itGrappleCheckCollision(ip->xDD4_itemVar.samusgrapple.x0, fp2, &pos)) {
         ftCo_80090780(ip->owner);
         it_802B7B84(gobj);
         return;
@@ -927,8 +929,8 @@ void fn_802B8D38(Item_GObj* gobj)
     saved_pos = fp2->cur_pos;
     it_802BA5DC(ip->xDD4_itemVar.samusgrapple.x4,
                 ip->xDD4_itemVar.samusgrapple.x0, &pos, attrs);
-    fp2->cur_pos.x = pos.x + (old_x);
-    fp2->cur_pos.y = pos.y + (old_y);
+    fp2->cur_pos.x = pos.x + old_x;
+    fp2->cur_pos.y = pos.y + old_y;
     {
         f32 tmp;
         tmp = fp2->self_vel.x + (fp2->cur_pos.x - saved_pos.x);
@@ -1066,7 +1068,7 @@ s32 it_802B9328(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
     u8 _padA[0x10];
     ItemLink* cur;
     ItemLink* next;
-    Item* grapple_ip = fp->fv.ss.x223C->user_data;
+    Item* grapple_ip = fp->u.ss.x223C->user_data;
     ftSs_DatAttrs* da = fp->ft_data->ext_attr;
     Vec3 dir;
     Vec3 d2;
@@ -1106,7 +1108,7 @@ s32 it_802B9328(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
         grapple_ip->xDD4_itemVar.samusgrapple.x16 == 1)
     {
         if (fp->input.x668 & 0x100) {
-            hitbox_data.create_hitbox = it_803B8660.create_hitbox;
+            hitbox_data.create_hitbox = it_803B8660;
             ftColl_8007AFF8(fp->gobj);
             it_802B7160(fp->gobj, &hitbox_data);
             grapple_ip->xDD4_itemVar.samusgrapple.x16++;
@@ -1185,7 +1187,7 @@ s32 it_802B99A0(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
 {
     u8 _pad[8];
     Vec3 dir;
-    Item* grapple_ip = fp->fv.ss.x223C->user_data;
+    Item* grapple_ip = fp->u.ss.x223C->user_data;
     ItemLink* cur;
     ItemLink* next;
     s32 result;
@@ -1197,7 +1199,7 @@ s32 it_802B99A0(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
         grapple_ip->xDD4_itemVar.samusgrapple.x16 == 1)
     {
         if (fp->input.x668 & 0x100) {
-            hitbox_data.create_hitbox = it_803B8660.create_hitbox;
+            hitbox_data.create_hitbox = it_803B8660;
             ftColl_8007AFF8(fp->gobj);
             it_802B7160(fp->gobj, &hitbox_data);
             grapple_ip->xDD4_itemVar.samusgrapple.x16++;
@@ -1265,7 +1267,7 @@ void it_802B9CE8(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
 {
     ItemLink* prev;
     f32 d;
-    Item* grapple_ip = fp->fv.ss.x223C->user_data;
+    Item* grapple_ip = fp->u.ss.x223C->user_data;
     Fighter* fp2; // permuterslop
     u8 _pad[4];
     Vec3* dir_ptr;
@@ -1279,7 +1281,7 @@ void it_802B9CE8(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
         grapple_ip->xDD4_itemVar.samusgrapple.x16 == 1)
     {
         if (fp2->input.x668 & 0x100) {
-            hitbox_data.create_hitbox = it_803B8660.create_hitbox;
+            hitbox_data.create_hitbox = it_803B8660;
             ftColl_8007AFF8(fp2->gobj);
             it_802B7160(fp2->gobj, &hitbox_data);
             grapple_ip->xDD4_itemVar.samusgrapple.x16++;
@@ -1328,39 +1330,40 @@ void it_802B9CE8(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
 
 bool it_802B9FD4(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs)
 {
-    Vec3* pos_ptr = pos;
+    ItemLink* cur;
     Vec3 dir;
     ItemLink* next;
     Vec3* dir_ptr;
 
     it_802A4454(link);
-    next = link->next;
+    cur = link;
+    next = cur->next;
 
     while (next != NULL) {
         if (next->x2C_b0) {
             next->vel.y -= samus_grapple_calc_grav(next->vel.y);
             it_802A4420(next);
-            if (it_802A3C98(&next->pos, &link->pos, &dir) > attrs->x38) {
+            if (it_802A3C98(&next->pos, &cur->pos, &dir) > attrs->x38) {
                 dir_ptr = &dir;
-                next->pos.x = (dir_ptr->x * attrs->x38) + link->pos.x;
-                next->pos.y = (dir_ptr->y * attrs->x38) + link->pos.y;
-                next->pos.z = (dir_ptr->z * attrs->x38) + link->pos.z;
+                next->pos.x = (dir_ptr->x * attrs->x38) + cur->pos.x;
+                next->pos.y = (dir_ptr->y * attrs->x38) + cur->pos.y;
+                next->pos.z = (dir_ptr->z * attrs->x38) + cur->pos.z;
             }
             it_802A43EC(next);
         } else {
-            if (it_802A3C98(pos_ptr, &link->pos, &dir) > attrs->x38) {
+            if (it_802A3C98(pos, &cur->pos, &dir) > attrs->x38) {
                 dir_ptr = &dir;
-                next->pos.x = (dir_ptr->x * attrs->x38) + link->pos.x;
-                next->pos.y = (dir_ptr->y * attrs->x38) + link->pos.y;
-                next->pos.z = (dir_ptr->z * attrs->x38) + link->pos.z;
+                next->pos.x = (dir_ptr->x * attrs->x38) + cur->pos.x;
+                next->pos.y = (dir_ptr->y * attrs->x38) + cur->pos.y;
+                next->pos.z = (dir_ptr->z * attrs->x38) + cur->pos.z;
                 next->x2C_b0 = 1;
                 it_802A43B8(next);
             } else {
                 return false;
             }
         }
-        link = next;
-        next = link->next;
+        cur = next;
+        next = cur->next;
     }
     return true;
 }
@@ -1422,32 +1425,11 @@ bool it_802BA2D8(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
 {
     ItemLink* next;
     ItemLink* cur;
-    f32 d, remaining, max_dist;
+    f32 remaining;
     u8 _pad[8];
-    Vec3 dir;
 
-    cur = link;
-    next = link->prev;
-
-    while (next != NULL && !cur->x2C_b0) {
-        cur = next;
-        next = next->prev;
-    }
-
-    d = it_802A3C98(&cur->pos, pos, &dir);
-
-    while (next != NULL && target_dist > d) {
-        cur->x2C_b0 = 0;
-        d = it_802A3C98(&next->pos, pos, &dir);
-        cur = next;
-        next = next->prev;
-    }
-
-    remaining = d - target_dist;
-    max_dist = attrs->x38;
-    if (remaining > max_dist) {
-        remaining = max_dist;
-    }
+    Item_RetractChain(link, pos, target_dist, &attrs->x38, &next, &cur,
+                      &remaining);
     it_802B900C(cur, pos, attrs, remaining);
 
     if (next != NULL) {
@@ -1715,8 +1697,8 @@ void it_802BABB8(Item_GObj* gobj)
 void it_802BAC3C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.ss.x223C != NULL) {
-        it_802B7B84(fp->fv.ss.x223C);
+    if (fp->u.ss.x223C != NULL) {
+        it_802B7B84(fp->u.ss.x223C);
         return;
     }
     fp->accessory2_cb = NULL;
@@ -1727,10 +1709,10 @@ void it_802BAC3C(Fighter_GObj* gobj)
 void it_802BAC80(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.ss.x223C != NULL) {
-        Item* ip = GET_ITEM(fp->fv.ss.x223C);
+    if (fp->u.ss.x223C != NULL) {
+        Item* ip = GET_ITEM(fp->u.ss.x223C);
         if (ip->xDD4_itemVar.samusgrapple.unk_10) {
-            ip->xDD4_itemVar.samusgrapple.unk_10(fp->fv.ss.x223C);
+            ip->xDD4_itemVar.samusgrapple.unk_10(fp->u.ss.x223C);
         }
     }
 }
@@ -1743,8 +1725,8 @@ void it_802BACC4(Fighter_GObj* gobj)
     Mtx m;
     Mtx m2;
 
-    if (fp->fv.ss.x223C != NULL) {
-        Item* ip = GET_ITEM(fp->fv.ss.x223C);
+    if (fp->u.ss.x223C != NULL) {
+        Item* ip = GET_ITEM(fp->u.ss.x223C);
         itSamusGrappleAttributes* attrs =
             ip->xC4_article_data->x4_specialAttributes;
         ItemLink* link = ip->xDD4_itemVar.samusgrapple.x0;
@@ -1752,7 +1734,7 @@ void it_802BACC4(Fighter_GObj* gobj)
         samus_grapple_setup_pos(link, &pos, m);
 
         if (it_802BA760(link, &pos, attrs, fp)) {
-            fn_802B7E34_inline(fp->fv.ss.x223C, ip, m2);
+            fn_802B7E34_inline(fp->u.ss.x223C, ip, m2);
         } else {
             it_802A7168(ip, &pos, fp->x34_scale.y);
         }

@@ -8,9 +8,7 @@
 
 #include <melee/lb/types.h>
 
-/* 0189EC */ static void lbDvd_800189EC(int);
-/* 0189EC */ static void lbDvd_800189EC(int);
-/* 3BA638 */ static PreloadCacheScene lbDvd_803BA638 = {
+/* 3BA638 */ static PreloadCacheScene preload_cache_scene = {
     {
         0,
     },

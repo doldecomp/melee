@@ -1,40 +1,80 @@
 #include "ittools.h"
 
-#include "math.h"
+#include "inlines.h"
 #include "placeholder.h"
 
 #include "ft/ftlib.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itcoll.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 
 #include <baselib/jobj.h>
 
 ItemStateTable it_803F9260[] = {
-    { 0, itTools_UnkMotion4_Anim, itTools_UnkMotion4_Phys,
-      itTools_UnkMotion4_Coll },
-    { 1, itTools_UnkMotion4_Anim, itTools_UnkMotion4_Phys,
-      itTools_UnkMotion4_Coll },
-    { 2, itTools_UnkMotion4_Anim, itTools_UnkMotion4_Phys,
-      itTools_UnkMotion4_Coll },
-    { 3, itTools_UnkMotion4_Anim, itTools_UnkMotion4_Phys,
-      itTools_UnkMotion4_Coll },
-    { 4, itTools_UnkMotion4_Anim, itTools_UnkMotion4_Phys,
-      itTools_UnkMotion4_Coll },
-    { 5, itTools_UnkMotion9_Anim, itTools_UnkMotion9_Phys,
-      itTools_UnkMotion9_Coll },
-    { 6, itTools_UnkMotion9_Anim, itTools_UnkMotion9_Phys,
-      itTools_UnkMotion9_Coll },
-    { 7, itTools_UnkMotion9_Anim, itTools_UnkMotion9_Phys,
-      itTools_UnkMotion9_Coll },
-    { 8, itTools_UnkMotion9_Anim, itTools_UnkMotion9_Phys,
-      itTools_UnkMotion9_Coll },
-    { 9, itTools_UnkMotion9_Anim, itTools_UnkMotion9_Phys,
-      itTools_UnkMotion9_Coll },
+    {
+        0,
+        itTools_UnkMotion4_Anim,
+        itTools_UnkMotion4_Phys,
+        itTools_UnkMotion4_Coll,
+    },
+    {
+        1,
+        itTools_UnkMotion4_Anim,
+        itTools_UnkMotion4_Phys,
+        itTools_UnkMotion4_Coll,
+    },
+    {
+        2,
+        itTools_UnkMotion4_Anim,
+        itTools_UnkMotion4_Phys,
+        itTools_UnkMotion4_Coll,
+    },
+    {
+        3,
+        itTools_UnkMotion4_Anim,
+        itTools_UnkMotion4_Phys,
+        itTools_UnkMotion4_Coll,
+    },
+    {
+        4,
+        itTools_UnkMotion4_Anim,
+        itTools_UnkMotion4_Phys,
+        itTools_UnkMotion4_Coll,
+    },
+    {
+        5,
+        itTools_UnkMotion9_Anim,
+        itTools_UnkMotion9_Phys,
+        itTools_UnkMotion9_Coll,
+    },
+    {
+        6,
+        itTools_UnkMotion9_Anim,
+        itTools_UnkMotion9_Phys,
+        itTools_UnkMotion9_Coll,
+    },
+    {
+        7,
+        itTools_UnkMotion9_Anim,
+        itTools_UnkMotion9_Phys,
+        itTools_UnkMotion9_Coll,
+    },
+    {
+        8,
+        itTools_UnkMotion9_Anim,
+        itTools_UnkMotion9_Phys,
+        itTools_UnkMotion9_Coll,
+    },
+    {
+        9,
+        itTools_UnkMotion9_Anim,
+        itTools_UnkMotion9_Phys,
+        itTools_UnkMotion9_Coll,
+    },
 };
 
 Item_GObj* it_802EEFA8(Vec3* pos, s32 arg1, f32 facing_dir)
@@ -279,12 +319,7 @@ bool itTools_Logic22_ShieldBounced(Item_GObj* gobj)
 
 bool itTools_Logic22_Reflected(Item_GObj* gobj)
 {
-    const f32 PI_2 = M_PI / 2;
-    Item* ip = GET_ITEM(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    it_80273030(gobj);
-    HSD_JObjSetRotationY(jobj, PI_2 * ip->facing_dir);
-    return false;
+    return itReflectItemAndUpdateRotation(gobj);
 }
 
 void it_802EFA24(Item_GObj* gobj, Item_GObj* ref_gobj)

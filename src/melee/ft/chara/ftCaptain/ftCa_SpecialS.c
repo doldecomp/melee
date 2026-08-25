@@ -8,13 +8,16 @@
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Landing.h"
@@ -23,7 +26,6 @@
 
 #include "it/it_26B1.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 
@@ -31,8 +33,8 @@ void ftCa_SpecialS_RemoveGFX(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     efLib_DestroyAll(gobj);
-    fp->fv.ca.during_specials = false;
-    fp->fv.ca.during_specials_start = false;
+    fp->u.ca.during_specials = false;
+    fp->u.ca.during_specials_start = false;
 }
 
 static void setCallbacks(HSD_GObj* gobj)
@@ -45,7 +47,7 @@ static void setCallbacks(HSD_GObj* gobj)
 static void resetCmdVarsGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    u32* vars = (u32*) &fp->cmd_vars[0];
+    u32* vars = (&fp->cmd_vars[0]);
     vars[0] = vars[1] = vars[2] = vars[3] = 0;
     ftCommon_8007D7FC(fp);
 }
@@ -63,20 +65,21 @@ void ftCa_SpecialS_Enter(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialSStart, 0, 0, 1, 0, NULL);
     setCallbacks(gobj);
     ftAnim_8006EBA4(gobj);
-    switch (ftLib_800872A4(gobj)) {
+    switch (ftLib_GetKind(gobj)) {
     case FTKIND_CAPTAIN: {
         efSync_Spawn(1169, gobj, fp->parts[FtPart_HeadN].joint);
-        fp->fv.ca.during_specials_start = true;
+        fp->u.ca.during_specials_start = true;
         break;
     }
     case FTKIND_GANON:
         efSync_Spawn(1293, gobj, fp->parts[FtPart_L2ndNb].joint);
-        fp->fv.ca.during_specials_start = true;
+        fp->u.ca.during_specials_start = true;
+        break;
+    default:
         break;
     }
-    fp->fv.ca.during_specials = false;
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->u.ca.during_specials = false;
+    Fighter_SetEffectHitlagCallbacks(fp);
     fp->hurtbox_detect_cb = ftCa_SpecialS_OnDetect;
 
     resetVel(fp);
@@ -86,7 +89,7 @@ void ftCa_SpecialS_Enter(HSD_GObj* gobj)
 
 static inline void setupAirStart(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = gobj->user_data;
     {
         u32* vars = &fp->cmd_vars[0];
         vars[0] = vars[1] = vars[2] = vars[3] = 0;
@@ -95,21 +98,22 @@ static inline void setupAirStart(HSD_GObj* gobj)
                               NULL);
     setCallbacks(gobj);
     ftAnim_8006EBA4(gobj);
-    switch (ftLib_800872A4(gobj)) {
+    switch (ftLib_GetKind(gobj)) {
     case FTKIND_CAPTAIN: {
         efSync_Spawn(1169, gobj, fp->parts[FtPart_HeadN].joint);
-        fp->fv.ca.during_specials_start = true;
+        fp->u.ca.during_specials_start = true;
         break;
     }
     case FTKIND_GANON: {
         efSync_Spawn(1293, gobj, fp->parts[FtPart_L2ndNb].joint);
-        fp->fv.ca.during_specials_start = true;
+        fp->u.ca.during_specials_start = true;
         break;
     }
+    default:
+        break;
     }
-    fp->fv.ca.during_specials = false;
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->u.ca.during_specials = false;
+    Fighter_SetEffectHitlagCallbacks(fp);
     fp->hurtbox_detect_cb = ftCa_SpecialS_OnDetect;
     {
         /// @todo Too much stack for #resetVel.
@@ -188,7 +192,7 @@ void ftCa_SpecialS_OnDetect(HSD_GObj* gobj)
                         itGetKind(detected_gobj) < It_Kind_Octarock_Stone) ||
                        (itGetKind(detected_gobj) >= It_Kind_Old_Kuri &&
                         itGetKind(detected_gobj) < It_Kind_Arwing_Laser) ||
-                       itGetKind(detected_gobj) == Pokemon_Random)
+                       itGetKind(detected_gobj) == It_PKind_Random)
             {
                 switch (fp->motion_id) {
                 case ftCa_MS_SpecialSStart: {
@@ -215,22 +219,23 @@ void ftCa_SpecialSStart_Anim(HSD_GObj* gobj)
 void ftCa_SpecialS_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!fp->fv.ca.during_specials) {
-        switch (ftLib_800872A4(gobj)) {
+    if (!fp->u.ca.during_specials) {
+        switch (ftLib_GetKind(gobj)) {
         case FTKIND_CAPTAIN: {
             efSync_Spawn(1170, gobj, fp->parts[FtPart_TransN].joint,
                          &fp->facing_dir);
-            fp->fv.ca.during_specials = true;
+            fp->u.ca.during_specials = true;
             break;
         }
         case FTKIND_GANON:
             efSync_Spawn(1294, gobj, fp->parts[FtPart_TransN].joint,
                          &fp->facing_dir);
-            fp->fv.ca.during_specials = true;
+            fp->u.ca.during_specials = true;
+            break;
+        default:
             break;
         }
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
@@ -257,23 +262,24 @@ void ftCa_SpecialAirS_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* captainAttrs = fp->dat_attrs;
     u8 _[8];
-    if (!fp->fv.ca.during_specials) {
-        switch (ftLib_800872A4(gobj)) {
+    if (!fp->u.ca.during_specials) {
+        switch (ftLib_GetKind(gobj)) {
         case FTKIND_CAPTAIN: {
             efSync_Spawn(1171, gobj, fp->parts[FtPart_TransN].joint,
                          &fp->facing_dir);
-            fp->fv.ca.during_specials = true;
+            fp->u.ca.during_specials = true;
             break;
         }
         case FTKIND_GANON: {
             efSync_Spawn(1295, gobj, fp->parts[FtPart_TransN].joint,
                          &fp->facing_dir);
-            fp->fv.ca.during_specials = true;
+            fp->u.ca.during_specials = true;
             break;
         }
+        default:
+            break;
         }
-        fp->pre_hitlag_cb = efLib_PauseAll;
-        fp->post_hitlag_cb = efLib_ResumeAll;
+        Fighter_SetEffectHitlagCallbacks(fp);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCommon_8007D60C(fp);

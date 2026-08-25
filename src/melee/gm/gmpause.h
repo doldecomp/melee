@@ -1,8 +1,6 @@
 #ifndef MELEE_GM_GMPAUSE_H
 #define MELEE_GM_GMPAUSE_H
 
-#include "placeholder.h"
-
 #include "baselib/forward.h"
 
 /* 1A0E34 */ void fn_801A0E34(HSD_GObj*);

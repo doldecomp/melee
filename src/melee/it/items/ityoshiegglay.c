@@ -5,16 +5,15 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/items/types.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/types.h"
 
-#include <math_ppc.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <melee/it/item.h>
@@ -106,7 +105,7 @@ void it_802F317C(HSD_GObj* item_gobj)
     Item* item;
 
     item = GET_ITEM(item_gobj);
-    item->x40_vel.x = item->x40_vel.y = item->x40_vel.z = 0.0f;
+    itResetVelocity(item);
     Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
 }
 
@@ -151,7 +150,7 @@ void it_802F3290(Item_GObj* item_gobj)
 
     item_jobj = GET_JOBJ(item_gobj);
     item = GET_ITEM(item_gobj);
-    item->x40_vel.x = item->x40_vel.y = item->x40_vel.z = 0.0f;
+    itResetVelocity(item);
     item->xD44_lifeTimer = 40.0f;
     HSD_JObjSetFlagsAll(item_jobj, JOBJ_HIDDEN);
     it_802756D0(item_gobj);

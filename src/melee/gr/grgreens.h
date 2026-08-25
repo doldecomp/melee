@@ -1,15 +1,11 @@
 #ifndef GALE01_213458
 #define GALE01_213458
 
-#include <placeholder.h>
-#include <platform.h>
-
-#include <melee/ft/forward.h>
-#include <melee/gr/forward.h>
-#include <melee/it/forward.h>
-#include <melee/lb/forward.h>
-#include <melee/mp/forward.h>
-#include <sysdolphin/baselib/forward.h>
+#include "ft/forward.h"
+#include "gr/forward.h"
+#include "it/forward.h"
+#include "lb/forward.h"
+#include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
 
@@ -65,9 +61,8 @@
 /* 215ED8 */ void grGreens_80215ED8(Ground_GObj*, int, int);
 /* 2166C4 */ void grGreens_802166C4(Ground_GObj*);
 /* 216C20 */ void grGreens_80216C20(Ground_GObj*);
-/* 216DE4 */ void fn_80216DE4(Ground*, s32, CollData*, s32, mpLib_GroundEnum,
-                              f32);
 /* 216E64 */ DynamicsDesc* grGreens_80216E64(enum_t);
 /* 216E6C */ bool grGreens_80216E6C(Vec3*, int arg, HSD_JObj* jobj);
+/* 3E76D0 */ extern StageData grGr_StageData;
 
 #endif

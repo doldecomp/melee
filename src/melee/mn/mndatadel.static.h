@@ -1,8 +1,6 @@
 #ifndef MELEE_MN_STATIC_DATADEL_H
 #define MELEE_MN_STATIC_DATADEL_H
 
-#include <placeholder.h>
-
 #include "baselib/forward.h"
 
 #include "baselib/jobj.h"

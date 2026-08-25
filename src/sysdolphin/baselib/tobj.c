@@ -10,9 +10,9 @@
 
 #include <placeholder.h>
 
+#include <string.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <MetroTRK/intrinsics.h>
 
 #define FLT_EPSILON 1.00000001335e-10F
 
@@ -383,10 +383,10 @@ static void MakeTextureMtx(HSD_TObj* tobj)
         __assert(__FILE__, 589, "tobj->repeat_s && tobj->repeat_t");
     }
 
-    scale.x = __fabsf(tobj->scale.x) < FLT_EPSILON
+    scale.x = fabsf(tobj->scale.x) < FLT_EPSILON
                   ? 0.0F
                   : (f32) tobj->repeat_s / tobj->scale.x;
-    scale.y = __fabsf(tobj->scale.y) < FLT_EPSILON
+    scale.y = fabsf(tobj->scale.y) < FLT_EPSILON
                   ? 0.0F
                   : (f32) tobj->repeat_t / tobj->scale.y;
     scale.z = tobj->scale.z;
@@ -1138,7 +1138,11 @@ s32 HSD_TObjAssignResources(HSD_TObj* tobj_top)
 
 static int DifferentTluts(HSD_Tlut* t0, HSD_Tlut* t1)
 {
-    return (t0->lut != t0->lut) || (t0->n_entries != t1->n_entries);
+    return
+#ifdef MUST_MATCH
+        (t0->lut != t0->lut) ||
+#endif
+        (t0->n_entries != t1->n_entries);
 }
 
 void HSD_TObjSetup(HSD_TObj* tobj)

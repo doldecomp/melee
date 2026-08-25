@@ -1,16 +1,14 @@
 #include "itgamewatchbreath.h"
 
+#include "inlines.h"
+
 #include "ftGameWatch/ftGw_AttackAir.h"
 
 #include "it/forward.h"
 
-#include "it/itzako.h"
-
-#include <melee/db/db.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
-#include <melee/it/itzako.h>
 #include <melee/it/types.h>
 
 ItemStateTable it_803F7938[] = {
@@ -25,23 +23,12 @@ HSD_GObj* it_802C720C(HSD_GObj* parent, Vec3* pos, Fighter_Part part,
     Item_GObj* result;
 
     spawn.kind = It_Kind_GameWatch_Breath;
-    spawn.prev_pos = *pos;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
-    spawn.x0_parent_gobj = parent;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
-
+    Item_InitSpawn(&spawn, parent, pos, dir);
     result = Item_80268B18(&spawn);
     if (result != NULL) {
         Item* item = GET_ITEM(result);
         void** attr = item->xC4_article_data->x4_specialAttributes;
-        Item_8026AB54(result, parent, part);
-        db_80225DD8(result, parent);
-        it_8027CE64(result, parent, attr[0]);
+        Item_AttachGameWatchArticle(parent, part, result, attr);
         return result;
     }
     return NULL;
@@ -84,7 +71,7 @@ void itGameWatchBreath_Logic76_PickedUp(Item_GObj* item_gobj)
 
     temp_r3 = item_gobj->user_data;
     temp_r3->xDAC_itcmd_var0 = 0;
-    if ((HSD_GObj*) temp_r3->owner != NULL) {
+    if (temp_r3->owner != NULL) {
         Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
         Item_802694CC(item_gobj);
     }

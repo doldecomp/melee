@@ -11,12 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        hook: ['clang-format', 'style-check']
+        hook:
+          - clang-format
+          - editorconfig-checker
+          - style-check
     steps:
     - uses: actions/checkout@v6
-    - uses: actions/setup-python@v5
       with:
-        python-version: "3.12"
+        fetch-depth: 0
+
     - uses: pre-commit/action@v3.0.1
       with:
         extra_args: ${{ matrix.hook }} --all-files

@@ -5,8 +5,6 @@
 #include "ground.h"
 #include "grrcruise.h"
 
-#include <placeholder.h>
-
 #include "baselib/forward.h"
 
 #include "baselib/psappsrt.h"
@@ -17,20 +15,18 @@
 #include "gr/types.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "lb/types.h" // IWYU pragma: keep
 #include "sc/types.h"
 
-#include <math.h>
+#include <baselib/generator.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
-#include <baselib/particle.h>
 
 /* 1C9BC8 */ static void grLib_801C9BC8(HSD_GObj*);
 /* 1C9C40 */ static void grLib_801C9C40(HSD_GObj*);
 
-extern StageInfo stage_info;
 extern HSD_Generator* hsd_804D78FC;
 
 static VecMtx grLib_8049EF58;
@@ -114,7 +110,7 @@ void grLib_801C98A0(HSD_JObj* jobj)
     }
 }
 
-inline HSD_JObj* jobj_child(HSD_JObj* node)
+static inline HSD_JObj* jobj_child(HSD_JObj* node)
 {
     if (node == NULL) {
         return NULL;
@@ -122,7 +118,7 @@ inline HSD_JObj* jobj_child(HSD_JObj* node)
     return node->child;
 }
 
-inline HSD_JObj* jobj_next(HSD_JObj* node)
+static inline HSD_JObj* jobj_next(HSD_JObj* node)
 {
     if (node == NULL) {
         return NULL;
@@ -192,10 +188,6 @@ void grLib_801C9A70(enum_t arg0, Vec3* v)
         break;
     default:
         HSD_ASSERT(290, 0);
-#ifdef BUGFIX
-        // Asserts 0 but the compiler doesn't know that.
-        return;
-#endif
     }
     *v = grLib_8049EF58[i];
 }
@@ -293,19 +285,19 @@ void grLib_801C9E50(s16 val)
 
 bool grLib_801C9E60(Vec3* v)
 {
-    InternalStageId id = stage_info.internal_stage_id;
+    GrKind id = stage_info.grkind;
 
-    if (id == RCRUISE) {
+    if (id == Gr_Kind_RCruise) {
         grRCruise_80201918(v);
         return true;
     }
 
-    if (id == BIGBLUE) {
+    if (id == Gr_Kind_BigBlue) {
         grBigBlue_801EF7D8(v);
         return true;
     }
 
-    if (id == ICEMTN) {
+    if (id == Gr_Kind_Icemt) {
         grIceMt_801FA728(v);
         return true;
     }
@@ -370,7 +362,7 @@ bool grLib_801C9EE8(Vec3* point, float offset)
 
     items = HSD_GObj_Entities->items;
     for (cur_item = items; cur_item != NULL; cur_item = cur_item->next) {
-        if (itGetKind(cur_item) != Pokemon_Random) {
+        if (itGetKind(cur_item) != It_PKind_Random) {
             ip = GET_ITEM(cur_item);
             if (PointInsideColl(&ip->x378_itemColl, point, offset)) {
                 return true;

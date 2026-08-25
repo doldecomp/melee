@@ -1,11 +1,12 @@
 #include "itgamewatchfire.h"
 
-#include "db/db.h"
+#include "inlines.h"
+
 #include "ft/ftlib.h"
+#include "ftGameWatch/ftGw_AttackS4.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
-#include "it/itzako.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 
@@ -24,23 +25,12 @@ HSD_GObj* itGamewatchFire_Spawn(HSD_GObj* parent, Vec3* pos, Fighter_Part part,
     Item_GObj* result;
 
     spawn.kind = It_Kind_GameWatch_Fire;
-    spawn.prev_pos = *pos;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
-    spawn.x0_parent_gobj = parent;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
-
+    Item_InitSpawn(&spawn, parent, pos, dir);
     result = Item_80268B18(&spawn);
     if (result != NULL) {
         Item* item = GET_ITEM(result);
         void** attr = item->xC4_article_data->x4_specialAttributes;
-        Item_8026AB54(result, parent, part);
-        db_80225DD8(result, parent);
-        it_8027CE64(result, parent, attr[0]);
+        Item_AttachGameWatchArticle(parent, part, result, attr);
         return result;
     }
     return NULL;

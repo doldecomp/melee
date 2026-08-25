@@ -1,7 +1,6 @@
 #ifndef MELEE_FT_FORWARD_H
 #define MELEE_FT_FORWARD_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "gr/forward.h"
@@ -24,6 +23,7 @@ typedef struct Fighter_x1670_t Fighter_x1670_t;
 typedef struct FighterBone FighterBone;
 typedef struct FighterPartsTable FighterPartsTable;
 typedef struct ft_800898B4_t ft_800898B4_t;
+typedef struct ftCo_803C6594_t ftCo_803C6594_t;
 typedef struct ftCo_DatAttrs_xBC_t ftCo_DatAttrs_xBC_t;
 typedef struct ftCommonData ftCommonData;
 typedef struct ftData ftData;
@@ -71,6 +71,7 @@ struct Fighter_GObj {
     /* +34 */ void* x34_unk;
 };
 #else
+#include <baselib/gobj.h>
 typedef struct HSD_GObj Fighter_GObj;
 #endif
 
@@ -119,7 +120,7 @@ typedef enum FighterKind {
     /* 1F */ FTKIND_GKOOPS,
     /* 20 */ FTKIND_SANDBAG,
     /* 21 */ FTKIND_NONE,
-    /* 22 */ FTKIND_MAX = FTKIND_NONE
+    /* 21 */ FTKIND_MAX = FTKIND_NONE
 } FighterKind;
 
 typedef enum CharacterKind {
@@ -150,7 +151,7 @@ typedef enum CharacterKind {
     /* 18 */ CKIND_PICHU,     // Pichu
     /* 19 */ CKIND_GANON,     // Ganondorf (Ganon)
 
-    CKIND_PLAYABLE_COUNT,
+    /* 1A */ CKIND_PLAYABLE_COUNT,
 
     /* 1A */ CKIND_MASTERH = CKIND_PLAYABLE_COUNT, // Master Hand (MasterH)
     /* 1B */ CKIND_BOY,                            // Male Wireframe (Boy)
@@ -160,7 +161,7 @@ typedef enum CharacterKind {
     /* 1F */ CHKIND_SANDBAG,                       // Sandbag
     /* 20 */ CHKIND_POPO,                          // Popo
     /* 21 */ CHKIND_NONE,                          // None
-    /* 22 */ CHKIND_MAX = CHKIND_NONE
+    /* 21 */ CHKIND_MAX = CHKIND_NONE
 } CharacterKind;
 
 static MotionFlags const Ft_MF_None = 0;
@@ -436,5 +437,10 @@ enum EntityKind {
     EntityKind_Item,
     EntityKind_UNKNOWN,
 };
+
+typedef enum GroundOrAir {
+    GA_Ground,
+    GA_Air,
+} GroundOrAir;
 
 #endif

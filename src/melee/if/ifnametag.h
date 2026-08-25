@@ -1,8 +1,6 @@
 #ifndef _IFNAMETAG_H_
 #define _IFNAMETAG_H_
 
-#include <platform.h>
-
 #include "baselib/forward.h"
 
 #define NAMETAG_DISABLED 120

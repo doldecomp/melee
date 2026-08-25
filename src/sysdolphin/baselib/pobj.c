@@ -15,15 +15,11 @@
 
 #include "forward.h"
 
-#include <__mem.h>
 #include <math.h> // IWYU pragma: keep
+#include <string.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
-
-/// @todo Several differently-signed comparisons appear in asserts, likely
-///       indicating the sign of one of the variables is declared incorrectly
-#pragma clang diagnostic ignored "-Wsign-compare"
 
 static void PObjInfoInit(void);
 
@@ -372,7 +368,7 @@ HSD_PObj* HSD_PObjAlloc(void)
 void HSD_PObjFree(HSD_PObj* pobj)
 {
     if (pobj) {
-        HSD_CLASS_METHOD(pobj)->destroy((HSD_Class*) (pobj));
+        HSD_CLASS_METHOD(pobj)->destroy((HSD_Class*) pobj);
     }
 }
 
@@ -535,6 +531,38 @@ static void setupShapeAnimVtxDesc(HSD_PObj* pobj)
     prev_vtxdesc = NULL;
 }
 
+static inline void decode_u8_xyz(void* src_base, f32 dst[3], int scale)
+{
+    u8* src = src_base;
+    dst[0] = (f32) src[0] / scale;
+    dst[1] = (f32) src[1] / scale;
+    dst[2] = (f32) src[2] / scale;
+}
+
+static inline void decode_s8_xyz(void* src_base, f32 dst[3], int scale)
+{
+    s8* src = src_base;
+    dst[0] = (f32) src[0] / scale;
+    dst[1] = (f32) src[1] / scale;
+    dst[2] = (f32) src[2] / scale;
+}
+
+static inline void decode_u16_xyz(void* src_base, f32 dst[3], int scale)
+{
+    u16* src = src_base;
+    dst[0] = (f32) src[0] / scale;
+    dst[1] = (f32) src[1] / scale;
+    dst[2] = (f32) src[2] / scale;
+}
+
+static inline void decode_s16_xyz(void* src_base, f32 dst[3], int scale)
+{
+    s16* src = src_base;
+    dst[0] = (f32) src[0] / scale;
+    dst[1] = (f32) src[1] / scale;
+    dst[2] = (f32) src[2] / scale;
+}
+
 static void get_shape_vertex_xyz(HSD_ShapeSet* shape_set, int shape_id,
                                  int arrayidx, f32 dst[3])
 {
@@ -558,33 +586,21 @@ static void get_shape_vertex_xyz(HSD_ShapeSet* shape_set, int shape_id,
     } else {
         int decimal_point = 1 << shape_set->vertex_desc->frac;
         switch (shape_set->vertex_desc->comp_type) {
-        case GX_U8: {
-            u8* src = src_base;
-            dst[0] = (f32) src[0] / decimal_point;
-            dst[1] = (f32) src[1] / decimal_point;
-            dst[2] = (f32) src[2] / decimal_point;
-        } break;
+        case GX_U8:
+            decode_u8_xyz(src_base, dst, decimal_point);
+            break;
 
-        case GX_S8: {
-            s8* src = src_base;
-            dst[0] = (f32) src[0] / decimal_point;
-            dst[1] = (f32) src[1] / decimal_point;
-            dst[2] = (f32) src[2] / decimal_point;
-        } break;
+        case GX_S8:
+            decode_s8_xyz(src_base, dst, decimal_point);
+            break;
 
-        case GX_U16: {
-            u16* src = src_base;
-            dst[0] = (f32) src[0] / decimal_point;
-            dst[1] = (f32) src[1] / decimal_point;
-            dst[2] = (f32) src[2] / decimal_point;
-        } break;
+        case GX_U16:
+            decode_u16_xyz(src_base, dst, decimal_point);
+            break;
 
-        case GX_S16: {
-            s16* src = src_base;
-            dst[0] = (f32) src[0] / decimal_point;
-            dst[1] = (f32) src[1] / decimal_point;
-            dst[2] = (f32) src[2] / decimal_point;
-        } break;
+        case GX_S16:
+            decode_s16_xyz(src_base, dst, decimal_point);
+            break;
 
         default:
             HSD_Panic(__FILE__, 1145, "unexpected vertex type.\n");
@@ -615,30 +631,18 @@ static void get_shape_normal_xyz(HSD_ShapeSet* shape_set, int shape_id,
     } else {
         int decimal_point = 1 << shape_set->normal_desc->frac;
         switch (shape_set->normal_desc->comp_type) {
-        case GX_U8: {
-            u8* src = src_base;
-            dst[0] = (float) src[0] / decimal_point;
-            dst[1] = (float) src[1] / decimal_point;
-            dst[2] = (float) src[2] / decimal_point;
-        } break;
-        case GX_S8: {
-            s8* src = src_base;
-            dst[0] = (float) src[0] / decimal_point;
-            dst[1] = (float) src[1] / decimal_point;
-            dst[2] = (float) src[2] / decimal_point;
-        } break;
-        case GX_U16: {
-            u16* src = src_base;
-            dst[0] = (float) src[0] / decimal_point;
-            dst[1] = (float) src[1] / decimal_point;
-            dst[2] = (float) src[2] / decimal_point;
-        } break;
-        case GX_S16: {
-            s16* src = src_base;
-            dst[0] = (float) src[0] / decimal_point;
-            dst[1] = (float) src[1] / decimal_point;
-            dst[2] = (float) src[2] / decimal_point;
-        } break;
+        case GX_U8:
+            decode_u8_xyz(src_base, dst, decimal_point);
+            break;
+        case GX_S8:
+            decode_s8_xyz(src_base, dst, decimal_point);
+            break;
+        case GX_U16:
+            decode_u16_xyz(src_base, dst, decimal_point);
+            break;
+        case GX_S16:
+            decode_s16_xyz(src_base, dst, decimal_point);
+            break;
         default:
             HSD_Panic(__FILE__, 1208, "unexpected normal type.");
         }
@@ -732,7 +736,7 @@ static void interpretShapeAnimDisplayList(HSD_PObj* pobj, float (*vertex)[3],
                     case GX_VA_TEX5MTXIDX:
                     case GX_VA_TEX6MTXIDX:
                     case GX_VA_TEX7MTXIDX:
-                        GXMatrixIndex1u8(idx);
+                        GXTexCoord1u8(idx);
                         break;
 
                     case GX_VA_POS:
@@ -1074,7 +1078,10 @@ static void SetupSharedVtxModelMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx,
 
     flags |= GetSetupFlags(jobj, rendermode);
 
-    if (flags | SETUP_JOINT0) {
+#ifdef MUST_MATCH
+    if (flags | SETUP_JOINT0)
+#endif
+    {
         GXSetCurrentMtx(GX_PNMTX0);
         GXLoadPosMtxImm(pmtx, GX_PNMTX0);
         HSD_PerfCountMtxLoad();
@@ -1091,7 +1098,10 @@ static void SetupSharedVtxModelMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx,
             }
         }
     }
-    if (flags | SETUP_JOINT1) {
+#ifdef MUST_MATCH
+    if (flags | SETUP_JOINT1)
+#endif
+    {
         ///@todo Unused stack
         u8 _[4];
         HSD_JObjSetupMatrix(pobj->u.jobj);

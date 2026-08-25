@@ -1,12 +1,12 @@
 #include "ansi_fp.h"
 
-#include "math.h"
+#include <math.h>
 
 #define __HI(x) (((s32*) &x)[0])
 #define __LO(x) (((s32*) &x)[1])
 
 /// @todo somehow make this work with math.h
-inline int _fpclassify(double x)
+static inline int _fpclassify(double x)
 {
     switch (__HI(x) & 0x7FF00000) {
     case 0x7FF00000: {

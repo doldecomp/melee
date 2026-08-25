@@ -9,7 +9,6 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 
-#include <math.h>
 #include <baselib/random.h>
 
 bool it_8026D564(Item_GObj* item_gobj)
@@ -428,7 +427,7 @@ void it_8026E0F4(Item_GObj* gobj)
     }
 }
 
-inline bool it_8026E_inline(Item_GObj* gobj)
+static inline bool it_8026E_inline(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     bool cond;
@@ -708,8 +707,10 @@ void it_8026E71C(Item_GObj* item_gobj, HSD_GObjEvent arg1)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void it_8026E7E0(Item_GObj* item_gobj, HSD_GObjEvent arg1)
 {
     CollData* coll;
@@ -744,7 +745,9 @@ void it_8026E7E0(Item_GObj* item_gobj, HSD_GObjEvent arg1)
         }
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void it_8026E8C4(Item_GObj* item_gobj, HSD_GObjEvent arg1, HSD_GObjEvent arg2)
 {

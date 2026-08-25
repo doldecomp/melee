@@ -1,5 +1,7 @@
 #include "itlgunbeam.h"
 
+#include "inlines.h"
+
 #include <placeholder.h>
 
 #include "db/db.h"
@@ -9,9 +11,9 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itgroundcoll.h"
 #include "it/types.h"
 #include "lb/lbvector.h"
 
@@ -19,7 +21,6 @@
 #include <baselib/gobj.h>
 #include <baselib/random.h>
 #include <melee/it/item.h>
-#include <melee/lb/lbrefract.h>
 
 /* 2993E0 */ static void it_802993E0(Item_GObj* gobj, int flags);
 /* 299528 */ static void it_80299528(Item_GObj* gobj, int arg1);
@@ -32,22 +33,12 @@
       itLgunbeam_UnkMotion0_Coll },
 };
 
-static inline void clamp_angle(float* f)
-{
-    while (*f < -M_PI) {
-        *f += M_TAU;
-    }
-    while (*f > M_PI) {
-        *f -= M_TAU;
-    }
-}
-
 void it_802993E0(Item_GObj* gobj, int flags)
 {
     Item* item = GET_ITEM(gobj);
     Vec3 pos;
     pos.x = pos.y = pos.z = 0.0f;
-    clamp_angle(&item->xDD4_itemVar.lgunbeam.angle0);
+    Item_ClampAngle(&item->xDD4_itemVar.lgunbeam.angle0);
     if (flags & (1 << 0)) {
         pos.x += item->x378_itemColl.floor.normal.x;
         pos.y += item->x378_itemColl.floor.normal.y;
@@ -78,13 +69,7 @@ void it_80299528(Item_GObj* gobj, int arg1)
         float angle2 = atan2f(ip->xDD4_itemVar.lgunbeam.velocity.x,
                               ip->xDD4_itemVar.lgunbeam.velocity.y) -
                        angle1;
-        // note: opposite order as clamp_angle
-        while (angle2 > M_PI) {
-            angle2 -= M_TAU;
-        }
-        while (angle2 < -M_PI) {
-            angle2 += M_TAU;
-        }
+        Item_ClampAngleReverse(&angle2);
         {
             float var_f1;
             if (angle2 == 0.0f) {
@@ -113,7 +98,7 @@ void it_80299528(Item_GObj* gobj, int arg1)
             }
             ip->xDD4_itemVar.lgunbeam.angle0 -= var_f1;
         }
-        clamp_angle(&ip->xDD4_itemVar.lgunbeam.angle0);
+        Item_ClampAngle(&ip->xDD4_itemVar.lgunbeam.angle0);
     }
 }
 
@@ -246,7 +231,7 @@ bool itLgunbeam_UnkMotion0_Coll(HSD_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     int flags2;
     PAD_STACK(0x1E0);
-    clamp_angle(&ip->xDD4_itemVar.lgunbeam.angle0);
+    Item_ClampAngle(&ip->xDD4_itemVar.lgunbeam.angle0);
     flags = 0;
     ip->x378_itemColl.ecb_source.up = 3.0f;
     ip->x378_itemColl.ecb_source.down = 3.0f;
@@ -282,7 +267,7 @@ bool itLGunBeam_Logic39_Reflected(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.lgunbeam.angle0 += M_PI;
-    clamp_angle(&ip->xDD4_itemVar.lgunbeam.angle0);
+    Item_ClampAngle(&ip->xDD4_itemVar.lgunbeam.angle0);
     ip->facing_dir = -ip->facing_dir;
     ip->x40_vel.x = -ip->x40_vel.x;
     ip->x40_vel.y = -ip->x40_vel.y;

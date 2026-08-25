@@ -2,11 +2,11 @@
 
 #include "ft/ftlib.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itcoll.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/itmaplib.h"
 #include "pl/plbonuslib.h"
 
@@ -32,7 +32,7 @@ void itMetalB_Logic32_Spawned(Item_GObj* gobj)
 void it_802953FC(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
-    it->x40_vel.x = it->x40_vel.y = it->x40_vel.z = 0.0f;
+    itResetVelocity(it);
 
     it_8026B390(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);

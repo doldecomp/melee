@@ -3,15 +3,16 @@
 #include "cm/camera.h"
 #include "gm/gm_16AE.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
 #include "it/item.h"
 #include "it/items/itfreeze.h"
 #include "it/items/itwhitebea.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
+#include "it/itspawn.h"
 #include "it/itzako.h"
 #include "lb/lblanguage.h"
 #include "mp/mpcoll.h"
@@ -365,9 +366,7 @@ void it_802E2DF4(Item_GObj* gobj)
 void it_802E2E30(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
-    ip->x40_vel.z = 0.0f;
-    ip->x40_vel.y = 0.0f;
-    ip->x40_vel.x = 0.0f;
+    itResetVelocity(ip);
     ip->xDD4_itemVar.oldottosea.x24 = 0;
     if ((u32) ip->xDD4_itemVar.oldottosea.x20 != 0) {
         Item_80268E5C(gobj, 7, ITEM_ANIM_UPDATE);
@@ -441,9 +440,7 @@ void it_802E3098(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     s32 val;
 
-    ip->x40_vel.z = 0.0f;
-    ip->x40_vel.y = 0.0f;
-    ip->x40_vel.x = 0.0f;
+    itResetVelocity(ip);
 
     if (lbLang_IsSettingJP()) {
         val = 0x37;

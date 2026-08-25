@@ -1,7 +1,6 @@
 #include <platform.h>
 
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -9,13 +8,11 @@
 
 #include "lb/forward.h"
 
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 /* 223864 */ static void grTSeak_OnDemoInit(bool);
@@ -23,7 +20,7 @@
 /* 2238D8 */ static void grTseak_OnLoad(void);
 /* 2238DC */ static void grTseak_OnStart(void);
 /* 223900 */ static bool grTSeak_80223900(void);
-/* 223908 */ static HSD_GObj* grTSeak_80223908(s32);
+/* 223908 */ static HSD_GObj* grTSeak_80223908(int);
 /* 2239F0 */ static void grTSeak_802239F0(Ground_GObj*);
 /* 223A1C */ static bool grTSeak_80223A1C(Ground_GObj*);
 /* 223A24 */ static void grTSeak_80223A24(Ground_GObj*);
@@ -39,7 +36,7 @@
 /* 223B38 */ static DynamicsDesc* grTSeak_OnTouchLine(enum_t);
 /* 223B40 */ static bool grTSeak_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 
-static StageCallbacks grTSk_803E94B8[] = {
+static StageCallbacks grTSk_StageCallbacks[] = {
     {
         grTSeak_802239F0,
         grTSeak_80223A1C,
@@ -64,9 +61,9 @@ static StageCallbacks grTSk_803E94B8[] = {
     { 0 },
 };
 
-StageData grTSk_803E9514 = {
-    TSEAK,
-    grTSk_803E94B8,
+StageData grTSk_StageData = {
+    Gr_Kind_TSeak,
+    grTSk_StageCallbacks,
     "/GrTSk.dat",
     grTSeak_OnInit,
     grTSeak_OnDemoInit,
@@ -82,16 +79,7 @@ void grTSeak_OnDemoInit(bool unk0) {}
 
 void grTSeak_OnInit(void)
 {
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-
-    grTSeak_80223908(0);
-    grTSeak_80223908(1);
-    grTSeak_80223908(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTSeak_80223908);
 }
 
 void grTseak_OnLoad(void) {}
@@ -106,10 +94,10 @@ bool grTSeak_80223900(void)
     return false;
 }
 
-HSD_GObj* grTSeak_80223908(s32 arg0)
+HSD_GObj* grTSeak_80223908(int arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTSk_803E94B8[arg0];
+    StageCallbacks* callbacks = &grTSk_StageCallbacks[arg0];
 
     gobj = Ground_GetStageGObj(arg0);
 

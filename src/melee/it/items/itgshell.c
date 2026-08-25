@@ -1,6 +1,6 @@
 #include "itgshell.h"
 
-#include "common_structs.h"
+#include "inlines.h"
 
 #include <placeholder.h>
 #include <platform.h>
@@ -11,18 +11,17 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
 #include "it/itcoll.h"
 #include "it/item.h"
 #include "it/items/itgshell.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 
 #include <sysdolphin/baselib/random.h>
-#include <MSL/math.h>
 
 typedef struct itGShell_Attrs {
     float x0;
@@ -40,7 +39,7 @@ typedef struct itGShell_Attrs {
     float x30;
     Vec x34;
 } itGShell_Attrs;
-STATIC_ASSERT(sizeof(itGShell_Attrs) == 64);
+ASSERT_SIZE(itGShell_Attrs, 64);
 
 ItemStateTable it_803F5BA8[] = {
     { -1, itGshell_UnkMotion0_Anim, itGshell_UnkMotion0_Phys,
@@ -73,6 +72,7 @@ void it_8028B8D8(Item_GObj* gobj)
     HSD_JObj* jobj;
     PAD_STACK(4);
 
+    /// @todo Shared code used by #it_8028CFE0 and #it_802DDB38.
     if (ip->xDD4_itemVar.gshell.xDDC <= 0.0f) {
         jobj = GET_JOBJ(gobj);
         v = attrs->x34;
@@ -254,9 +254,7 @@ bool itGshell_UnkMotion0_Coll(Item_GObj* gobj)
     jobj = GET_JOBJ(gobj);
     attrs = ip->xC4_article_data->x4_specialAttributes;
     if (ip->ground_or_air == GA_Ground) {
-        it_80276CB8(gobj);
-        jobj = HSD_JObjGetChild(jobj);
-        HSD_JObjAddRotationY(jobj, attrs->x20 * ABS(ip->x40_vel.x));
+        Item_UpdateRollingShellRotation(gobj, ip, jobj, &attrs->x20);
     }
     return false;
 }
@@ -361,14 +359,18 @@ void itGShell_Logic14_Dropped(Item_GObj* gobj)
     Item_80268E5C(gobj, 4, 6);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 bool itGshell_UnkMotion4_Anim(Item_GObj* gobj)
 {
     it_8028B988(gobj);
     return false;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void itGshell_UnkMotion4_Phys(Item_GObj* gobj)
 {
@@ -461,9 +463,7 @@ bool itGshell_UnkMotion6_Coll(Item_GObj* gobj)
     jobj = GET_JOBJ(gobj);
     attrs = ip->xC4_article_data->x4_specialAttributes;
     if (ip->ground_or_air == GA_Ground) {
-        it_80276CB8(gobj);
-        jobj = HSD_JObjGetChild(jobj);
-        HSD_JObjAddRotationY(jobj, attrs->x20 * ABS(ip->x40_vel.x));
+        Item_UpdateRollingShellRotation(gobj, ip, jobj, &attrs->x20);
     }
     if (it_8027770C(gobj)) {
         it_80272980(gobj);
@@ -505,8 +505,10 @@ void it_8028C898(Item_GObj* gobj)
     ip->jumped_on = it_8028CF68;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 bool itGshell_UnkMotion8_Anim(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data; // GET_ITEM(gobj);
@@ -528,7 +530,9 @@ bool itGshell_UnkMotion8_Anim(Item_GObj* gobj)
     }
     return false;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void itGshell_UnkMotion8_Phys(Item_GObj* gobj)
 {

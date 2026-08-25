@@ -409,7 +409,7 @@ void ftFe_Init_OnDeath(HSD_GObj* gobj)
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, 0);
     ftParts_80074A4C(gobj, 2, -1);
-    fp->fv.ms.x222C = 0;
+    fp->u.ms.x222C = 0;
 }
 
 void ftFe_Init_OnItemPickup(HSD_GObj* gobj, bool flag)

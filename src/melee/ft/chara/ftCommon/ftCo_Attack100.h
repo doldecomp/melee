@@ -1,8 +1,11 @@
 #ifndef GALE01_0D67C4
 #define GALE01_0D67C4
 
-#include <melee/ft/forward.h>
-#include <melee/it/forward.h>
+#include <placeholder.h>
+
+#include "ft/forward.h"
+#include "melee/ft/forward.h"
+#include "melee/it/forward.h"
 
 /* 0D67C4 */ bool ftCo_800D67C4(Fighter*);
 /* 0D6824 */ bool ftCo_800D6824(Fighter_GObj*);
@@ -109,10 +112,12 @@
 /* 0D8E94 */ bool fn_800D8E94(Fighter_GObj* gobj);
 /* 0D8EC8 */ bool fn_800D8EC8(Fighter_GObj*);
 /* 0D9228 */ bool fn_800D9228(Fighter_GObj*);
+void fn_800D949C(Fighter_GObj* gobj);
 /* 0D94D8 */ void ftCo_800D94D8(Fighter_GObj* gobj);
 /* 0D952C */ bool fn_800D952C(Fighter_GObj* gobj);
 /* 0D9558 */ bool fn_800D9558(Fighter_GObj*);
 /* 0D9930 */ bool fn_800D9930(Fighter_GObj*);
+void fn_800D9C64(Fighter_GObj* gobj);
 /* 0D9C98 */ void ftCo_800D9C98(Fighter_GObj* gobj);
 /* 0D9E80 */ void ftCo_CatchPull_Anim(Fighter_GObj* gobj);
 /* 0D9F90 */ void ftCo_CatchPull_IASA(Fighter_GObj* gobj);

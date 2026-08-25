@@ -37,8 +37,6 @@
 
 #include <baselib/forward.h>
 
-#include <common_structs.h>
-
 MotionState ftCl_Init_MotionStateTable[ftLk_MS_SelfCount] = {
     {
         // ftLk_MS_AttackS42 = 341
@@ -313,13 +311,13 @@ void ftCl_Init_OnDeath(Fighter_GObj* gobj)
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, 0);
     ftParts_80074A4C(gobj, 2, 0);
-    fp->fv.lk.used_boomerang = false;
-    fp->fv.lk.boomerang_gobj = NULL;
-    fp->fv.lk.xC = 0;
-    fp->fv.lk.arrow_gobj = NULL;
-    fp->fv.lk.x14 = NULL;
-    fp->fv.lk.xC = 0;
-    fp->fv.lk.x18 = NULL;
+    fp->u.lk.used_boomerang = false;
+    fp->u.lk.boomerang_gobj = NULL;
+    fp->u.lk.xC = 0;
+    fp->u.lk.arrow_gobj = NULL;
+    fp->u.lk.x14 = NULL;
+    fp->u.lk.xC = 0;
+    fp->u.lk.x18 = NULL;
 }
 
 void ftCl_Init_OnLoad(HSD_GObj* gobj)
@@ -351,7 +349,7 @@ void ftCl_Init_OnItemPickupExt(HSD_GObj* gobj, bool flag)
 
     Fighter* fp = gobj->user_data;
 
-    if (it_8026B2B4(fp->item_gobj) == true) {
+    if (itIsHeavy(fp->item_gobj) == true) {
         ftParts_80074A4C(gobj, 1, 1);
     }
 
@@ -375,7 +373,7 @@ void ftCl_Init_OnItemDropExt(HSD_GObj* gobj, bool flag)
 
     Fighter* fp = gobj->user_data;
 
-    if (it_8026B2B4(fp->item_gobj) == true) {
+    if (itIsHeavy(fp->item_gobj) == true) {
         ftParts_80074A4C(gobj, 1, 0);
     }
 
@@ -454,7 +452,7 @@ bool ftCl_Init_8014920C(HSD_GObj* gobj)
     if (temp_r0 != 342 && temp_r0 != 343) {
         return true;
     }
-    if (fp->fv.lk.x18 == 0) {
+    if (fp->u.lk.x18 == 0) {
         return true;
     }
     return false;
@@ -471,8 +469,8 @@ void ftCl_Init_801492C4(HSD_GObj* gobj)
 {
     if (gobj != NULL) {
         Fighter* fp = GET_FIGHTER(gobj);
-        if (fp != NULL && fp->fv.lk.x18 != 0) {
-            fp->fv.lk.x18 = 0;
+        if (fp != NULL && fp->u.lk.x18 != 0) {
+            fp->u.lk.x18 = 0;
         };
 
         if (gobj == NULL) {

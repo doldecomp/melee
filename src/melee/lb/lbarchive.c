@@ -4,13 +4,16 @@
 #include "lbheap.h"
 
 #include <stdarg.h>
+#include <string.h>
 #include <dolphin/os.h>
 #include <baselib/archive.h>
 #include <baselib/debug.h>
 #include <melee/lb/lbdvd.h>
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void lbArchive_InitializeDAT(HSD_Archive* archive, void* data, size_t length)
 {
     const char* symbol;
@@ -31,7 +34,9 @@ void lbArchive_InitializeDAT(HSD_Archive* archive, void* data, size_t length)
         }
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void lbArchive_LoadSections(HSD_Archive* archive, void** symbol, ...)
 {
@@ -56,7 +61,7 @@ static inline HSD_Archive* lbArchive_LoadArchive_inline(const char* filename)
     void* data;
     size_t length;
 
-    data = lbHeap_80015BD0(0, OSRoundUp32B(lbFile_800163D8(filename)));
+    data = lbHeap_80015BD0(0, OSRoundUp32B(lbFileGetSize(filename)));
     archive = lbHeap_80015BD0(0, sizeof(HSD_Archive));
     lbFile_8001668C(filename, data, &length);
     lbArchive_InitializeDAT(archive, data, length);
@@ -104,12 +109,12 @@ HSD_Archive* lbArchive_LoadSymbols(const char* filename, void* symbols, ...)
     va_list sections;
     HSD_Archive* archive;
     void* data;
-    u32 length;
+    size_t length;
     u8 _[8];
 
     va_start(sections, symbols);
 
-    data = lbHeap_80015BD0(0, OSRoundUp32B(lbFile_800163D8(filename)));
+    data = lbHeap_80015BD0(0, OSRoundUp32B(lbFileGetSize(filename)));
     archive = lbHeap_80015BD0(0, sizeof(HSD_Archive));
     lbFile_8001668C(filename, data, &length);
     lbArchive_InitializeDAT(archive, data, length);
@@ -124,12 +129,12 @@ HSD_Archive* lbArchive_80016DBC(const char* filename, void* symbols, ...)
     va_list sections;
     HSD_Archive* archive;
     void* data;
-    u32 length;
+    size_t length;
     u8 _[8];
 
     va_start(sections, symbols);
 
-    data = lbHeap_80015BD0(0, OSRoundUp32B(lbFile_800163D8(filename)));
+    data = lbHeap_80015BD0(0, OSRoundUp32B(lbFileGetSize(filename)));
     archive = lbHeap_80015BD0(0, sizeof(HSD_Archive));
     lbFile_8001668C(filename, data, &length);
     lbArchive_InitializeDAT(archive, data, length);
@@ -160,7 +165,7 @@ bool lbArchive_80016F80(HSD_Archive** archive, const char* filename)
         result = true;
     } else {
         HSD_Archive* tmp;
-        data = lbHeap_80015BD0(0, OSRoundUp32B(lbFile_800163D8(filename)));
+        data = lbHeap_80015BD0(0, OSRoundUp32B(lbFileGetSize(filename)));
         tmp = lbHeap_80015BD0(0, sizeof(HSD_Archive));
         lbFile_8001668C(filename, data, &length);
         lbArchive_InitializeDAT(tmp, data, length);
@@ -194,7 +199,7 @@ bool lbArchive_80017040(HSD_Archive** dst, const char* filename, void* symbols,
             size_t length;
             u32 pad;
             u32 pad2;
-            data = lbHeap_80015BD0(0, OSRoundUp32B(lbFile_800163D8(filename)));
+            data = lbHeap_80015BD0(0, OSRoundUp32B(lbFileGetSize(filename)));
             tmp = data;
             archive2 = lbHeap_80015BD0(0, sizeof(HSD_Archive));
             lbFile_8001668C(filename, tmp, &length);
@@ -235,7 +240,7 @@ bool lbArchive_800171CC(HSD_Archive** dst, const char* filename, void* symbols,
             size_t length;
             u32 pad;
             u32 pad2;
-            data = lbHeap_80015BD0(0, OSRoundUp32B(lbFile_800163D8(filename)));
+            data = lbHeap_80015BD0(0, OSRoundUp32B(lbFileGetSize(filename)));
             tmp = data;
             archive2 = lbHeap_80015BD0(0, sizeof(HSD_Archive));
             lbFile_8001668C(filename, tmp, &length);
@@ -255,7 +260,7 @@ bool lbArchive_800171CC(HSD_Archive** dst, const char* filename, void* symbols,
     return preloaded;
 }
 
-inline void Locate(HSD_Archive* archive, intptr_t base_addr)
+static inline void Locate(HSD_Archive* archive, intptr_t base_addr)
 {
     u32 i;
     u32* ptr;
@@ -287,29 +292,26 @@ int lbArchiveRelocate(HSD_Archive* archive, u8* src, size_t file_size,
 
     file_offset = sizeof(HSD_ArchiveHeader);
     if (archive->header.data_size != 0) {
-        archive->data = (u8*) src + file_offset;
+        archive->data = src + file_offset;
         file_offset = archive->header.data_size + sizeof(HSD_ArchiveHeader);
     }
     if (archive->header.nb_reloc != 0) {
-        archive->reloc_info =
-            (HSD_ArchiveRelocationInfo*) ((u8*) src + file_offset);
+        archive->reloc_info = (HSD_ArchiveRelocationInfo*) (src + file_offset);
         file_offset +=
             archive->header.nb_reloc * sizeof(HSD_ArchiveRelocationInfo);
     }
     if (archive->header.nb_public != 0) {
-        archive->public_info =
-            (HSD_ArchivePublicInfo*) ((u8*) src + file_offset);
+        archive->public_info = (HSD_ArchivePublicInfo*) (src + file_offset);
         file_offset +=
             archive->header.nb_public * sizeof(HSD_ArchivePublicInfo);
     }
     if (archive->header.nb_extern != 0) {
-        archive->extern_info =
-            (HSD_ArchiveExternInfo*) ((u8*) src + file_offset);
+        archive->extern_info = (HSD_ArchiveExternInfo*) (src + file_offset);
         file_offset +=
             archive->header.nb_extern * sizeof(HSD_ArchiveExternInfo);
     }
     if (file_offset < archive->header.file_size) {
-        archive->symbols = (char*) ((u8*) src + file_offset);
+        archive->symbols = (char*) (src + file_offset);
     }
 
     Locate(archive, base_addr);

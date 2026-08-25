@@ -11,10 +11,9 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <MSL/trigf.h>
 
 ItemStateTable it_803F6798[] = {
-    NULL,
+    0,
     itKirbycutterbeam_UnkMotion0_Anim,
     itKirbycutterbeam_UnkMotion0_Phys,
     itKirbycutterbeam_UnkMotion0_Coll,

@@ -3,12 +3,12 @@
 #include "cm/camera.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "it/items/itzgshell.h"
 #include "it/items/itzrshell.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 #include "it/itzako.h"
@@ -61,11 +61,12 @@ void it_802DC69C(Item_GObj* gobj)
     it_802DCB9C(gobj);
 }
 
-static void zero_pad(Item* ip)
+#ifdef MUST_MATCH
+static void order_sdata2(Item* ip)
 {
-    ip->x40_vel.z = 0.0f;
-    ip->x40_vel.y = 0.0f;
+    (void) 0.0f;
 }
+#endif
 
 bool itNokonoko_Logic3_DmgReceived(Item_GObj* gobj)
 {
@@ -134,7 +135,7 @@ void it_802DC990(Item_GObj* gobj)
     ip->x40_vel.y = 0.0f;
     coll_inline(ip);
     it_802756E0(gobj);
-    if ((s32) ip->xDD4_itemVar.nokonoko.x20 == 0) {
+    if (ip->xDD4_itemVar.nokonoko.x20 == 0) {
         ip->xDD4_itemVar.nokonoko.x20 = (s32) (da->x8 / da->x0->x4);
     }
     it_802DD4A8(gobj, 2, ITEM_ANIM_UPDATE);
@@ -514,7 +515,7 @@ void it_802DD7D0(Item_GObj* gobj, HSD_GObj* arg1)
 
 Item_GObj* it_802DD7F0(s32 arg0, Vec3* arg1, Vec3* arg2, s32 arg3)
 {
-    Item_GObj* gobj = it_8027B5B0(0xD3, arg1, NULL, arg2, 1);
+    Item_GObj* gobj = it_8027B5B0(It_Kind_Nokonoko, arg1, NULL, arg2, 1);
     f32 temp_f31;
     PAD_STACK(8);
     if (gobj != NULL) {
@@ -540,7 +541,7 @@ Item_GObj* it_802DD7F0(s32 arg0, Vec3* arg1, Vec3* arg2, s32 arg3)
     return gobj;
 }
 
-int it_802DDA84(Item_GObj* gobj)
+bool it_802DDA84(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     CollData* col = &ip->x378_itemColl;
@@ -552,7 +553,7 @@ int it_802DDA84(Item_GObj* gobj)
     cond = mpColl_800471F8(col);
     ip->pos = col->cur_pos;
     if (cond) {
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }

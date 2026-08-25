@@ -1,14 +1,10 @@
 #include "msghndlr.h"
 
-#include "MetroTRK/dolphin_trk_glue.h"
-#include "MetroTRK/mem_TRK.h"
 #include "MetroTRK/msg.h"
 #include "MetroTRK/msgbuf.h"
 #include "MetroTRK/nubevent.h"
-#include "MetroTRK/target_options.h"
+#include "MetroTRK/targcont.h"
 #include "MetroTRK/targimpl.h"
-
-#include <dolphin/os.h>
 
 extern void __TRK_copy_vectors(void);
 extern void __TRK_reset(void);
@@ -200,8 +196,6 @@ DSError TRKDoCPUType(MessageBuffer* buf)
     return TRKSendACK(buf);
 }
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wsometimes-uninitialized"
 DSError TRKDoReadMemory(MessageBuffer* buf)
 {
     u8 buffer[0x800] ATTRIBUTE_ALIGN(32);
@@ -285,10 +279,7 @@ DSError TRKDoReadMemory(MessageBuffer* buf)
 
     return TRKSendACK(buf);
 }
-#pragma clang diagnostic pop
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wsometimes-uninitialized"
 DSError TRKDoWriteMemory(MessageBuffer* b)
 {
     u8 buffer[0x800] ATTRIBUTE_ALIGN(32);
@@ -376,7 +367,6 @@ DSError TRKDoWriteMemory(MessageBuffer* b)
 
     return TRKSendACK(b);
 }
-#pragma clang diagnostic pop
 
 DSError TRKDoReadRegisters(MessageBuffer* b)
 {
@@ -628,8 +618,6 @@ DSError TRKDoContinue(MessageBuffer* b)
     return result;
 }
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wsometimes-uninitialized"
 DSError TRKDoStep(MessageBuffer* b)
 {
     DSError error;
@@ -710,7 +698,6 @@ DSError TRKDoStep(MessageBuffer* b)
 
     return error;
 }
-#pragma clang diagnostic pop
 
 DSError TRKDoStop(MessageBuffer* b)
 {

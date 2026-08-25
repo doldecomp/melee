@@ -1,7 +1,7 @@
 #ifndef GALE01_09B818
 #define GALE01_09B818
 
-#include "ftCommon/forward.h"
+#include "ft/forward.h"
 
 /* 09B818 */ bool ftCo_8009B818(Fighter_GObj* gobj);
 /* 09B8B4 */ void ftCo_CargoTurn_Anim(Fighter_GObj* gobj);

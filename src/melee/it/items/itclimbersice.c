@@ -1,5 +1,7 @@
 #include "itclimbersice.h"
 
+#include <placeholder.h>
+
 #include "baselib/jobj.h"
 #include "db/db.h"
 #include "ef/efasync.h"
@@ -9,30 +11,45 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/it_3F14.h"
 #include "it/itcoll.h"
 #include "it/item.h"
 #include "it/itgroundcoll.h"
 #include "it/itmaplib.h"
 
-#include <MSL/math.h>
-
 ItemStateTable it_803F7668[] = {
-    { -1, itClimbersice_UnkMotion0_Anim, itClimbersice_UnkMotion0_Phys,
-      itClimbersice_UnkMotion0_Coll },
-    { -1, itClimbersice_UnkMotion1_Anim, itClimbersice_UnkMotion1_Phys,
-      itClimbersice_UnkMotion1_Coll },
-    { 0, itClimbersice_UnkMotion2_Anim, itClimbersice_UnkMotion2_Phys,
-      itClimbersice_UnkMotion2_Coll },
-    { 0, itClimbersice_UnkMotion3_Anim, itClimbersice_UnkMotion3_Phys,
-      itClimbersice_UnkMotion3_Coll },
+    {
+        -1,
+        itClimbersice_UnkMotion0_Anim,
+        itClimbersice_UnkMotion0_Phys,
+        itClimbersice_UnkMotion0_Coll,
+    },
+    {
+        -1,
+        itClimbersice_UnkMotion1_Anim,
+        itClimbersice_UnkMotion1_Phys,
+        itClimbersice_UnkMotion1_Coll,
+    },
+    {
+        0,
+        itClimbersice_UnkMotion2_Anim,
+        itClimbersice_UnkMotion2_Phys,
+        itClimbersice_UnkMotion2_Coll,
+    },
+    {
+        0,
+        itClimbersice_UnkMotion3_Anim,
+        itClimbersice_UnkMotion3_Phys,
+        itClimbersice_UnkMotion3_Coll,
+    },
 };
 
-static void fakefunc(f32 f, u32 u, Vec3 vec)
+#ifdef MUST_MATCH
+static void order_sdata2(void)
 {
-    vec.x = 0;
-    vec.x = f * u;
+    (void) 0.0f;
+    (void) U32_TO_F32;
 }
+#endif
 
 static inline void itClimbersIce_sub_x4(Item_GObj* gobj)
 {
@@ -45,7 +62,7 @@ static inline void itClimbersice_Spawn(Item_GObj* gobj, u32 spawn1, u32 spawn2)
 {
     HSD_JObj* child = HSD_JObjGetChild(gobj->hsd_obj);
     Item* ip = GET_ITEM(gobj);
-    if (ip->kind == 0x6A) {
+    if (ip->kind == It_Kind_IceClimber_Ice) {
         f32* facing = &ip->facing_dir;
         efAsync_Spawn(gobj, &ip->xBC0, 3, spawn1, child, facing);
     } else {
@@ -58,7 +75,7 @@ static inline void itClimbersice_Spawn2(Item_GObj* gobj)
     HSD_JObj* child = HSD_JObjGetChild(gobj->hsd_obj);
     HSD_JObj* other;
     Item* ip = GET_ITEM(gobj);
-    if (ip->kind == 0x6A) {
+    if (ip->kind == It_Kind_IceClimber_Ice) {
         other = child;
         efAsync_Spawn(gobj, &ip->xBC0, 0, 0x4E9, other);
     } else {
@@ -129,7 +146,7 @@ void it_2725_Logic90_Destroyed(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xDD4_itemVar.climbersice.x0 != NULL) {
-        if (ip->kind == 0x6A) {
+        if (ip->kind == It_Kind_IceClimber_Ice) {
             ftPp_Init_8011F16C(ip->xDD4_itemVar.climbersice.x0, gobj);
         } else {
             ftKb_SpecialNIc_80108CE8(ip->xDD4_itemVar.climbersice.x0, gobj);
@@ -242,11 +259,7 @@ void it_802C1AE4(Item_GObj* gobj)
 bool itClimbersice_UnkMotion2_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    if (ip->xD44_lifeTimer <= 0.0f) {
-        return true;
-    }
-    ip->xD44_lifeTimer -= 1.0f;
-    return false;
+    return Item_TickLifetime(ip);
 }
 
 static inline void itClimbersice_Phys_inline(Item_GObj* gobj)
@@ -297,19 +310,12 @@ void fn_802C1D44(Item_GObj* gobj)
 bool itClimbersice_UnkMotion3_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    if (ip->xD44_lifeTimer <= 0.0f) {
-        return true;
-    }
-    ip->xD44_lifeTimer -= 1.0f;
-    return false;
+    return Item_TickLifetime(ip);
 }
 
 void itClimbersice_UnkMotion3_Phys(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    ItemAttr* attrs = ip->xCC_item_attr;
-    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
     itClimbersice_Phys_inline(gobj);
 }
 

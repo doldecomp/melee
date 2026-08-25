@@ -6,7 +6,6 @@
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/mtx.h>
-#include <MSL/trigf.h>
 
 /// functions
 void HSD_MulColor(GXColor* arg0, GXColor* arg1, GXColor* dest);

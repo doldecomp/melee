@@ -3,7 +3,7 @@
 #include "initialize.h"
 #include "memory.h"
 
-#include <__mem.h>
+#include <string.h>
 #include <dolphin/os/OSAlloc.h>
 
 static objheap obj_heap = { 0, 0, -1, -1 };
@@ -125,7 +125,7 @@ void HSD_ObjFree(HSD_ObjAllocData* data, void* obj)
     data->used -= 1;
 }
 
-inline void removeAll(HSD_ObjAllocData* data)
+static inline void removeAll(HSD_ObjAllocData* data)
 {
     HSD_ObjAllocData** cur = &alloc_datas;
     while (*cur != NULL) {

@@ -7,7 +7,6 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftwalkcommon.h"
-#include "lb/lbvector.h"
 
 #include <melee/ef/efsync.h>
 #include <melee/ft/chara/ftCommon/ftCo_AirCatch.h>
@@ -25,7 +24,6 @@
 #include <melee/ft/ft_0D31.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftlib.h>
-#include <melee/ft/ftmaterial.h>
 #include <melee/gr/stage.h>
 #include <melee/it/items/it_2E5A.h>
 #include <melee/mp/mpcoll.h>
@@ -111,14 +109,14 @@ void ftCo_800D4FF4(Fighter_GObj* gobj)
     Fighter_UnkProcessDeath_80068354(gobj);
     fp->smash_attrs.x2135 = Player_80032F30(fp->player_id);
 
-    if ((s8) fp->smash_attrs.x2135 == -1) {
+    if (fp->smash_attrs.x2135 == -1) {
         Player_GetSpawnPlatformPos(fp->player_id, &sp44);
         fp->mv.co.turn.facing_after =
             fp->facing_dir * ftCommon_800804EC(fp) + sp44.x;
         fp->mv.co.turn.x8 = sp44.y;
         fp->mv.co.walk.middle_anim_frame = 0.0f;
     } else {
-        Stage_80224E38(&sp14, (s8) fp->smash_attrs.x2135);
+        Stage_80224E38(&sp14, fp->smash_attrs.x2135);
         Player_GetSomePos(fp->player_id, &sp20);
         fp->mv.co.turn.facing_after =
             fp->facing_dir * ftCommon_800804EC(fp) + (sp14.x + sp20.x);

@@ -1,8 +1,6 @@
 #ifndef GALE01_206E2C
 #define GALE01_206E2C
 
-#include <placeholder.h>
-
 #include "gr/forward.h"
 #include <baselib/forward.h>
 
@@ -29,5 +27,6 @@
 /* 207408 */ void grTest_80207408(Ground_GObj*);
 /* 20740C */ struct DynamicsDesc* grTest_8020740C(enum_t);
 /* 207414 */ bool grTest_80207414(Vec3* a, int id, HSD_JObj* jobj);
+/* 3E5764 */ extern StageData grTe_StageData;
 
 #endif

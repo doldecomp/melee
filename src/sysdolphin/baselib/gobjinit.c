@@ -1,7 +1,8 @@
 #include "gobj.h"
-#include "gobjplink.h"
 #include "gobjproc.h"
 #include "memory.h"
+
+#include "baselib/objalloc.h"
 
 static HSD_GObjLibInitDataType HSD_GObj_80408620 = {
     0x3F,
@@ -16,7 +17,6 @@ void HSD_GObj_803912E0(HSD_GObjLibInitDataType* arg0)
 
 extern HSD_ObjAllocData gobj_alloc_data;
 extern HSD_ObjAllocData gobjproc_alloc_data;
-extern struct _unk_gobj_struct HSD_GObj_804CE3E4;
 
 void HSD_GObj_80391304(HSD_GObjLibInitDataType* arg0)
 {

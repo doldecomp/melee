@@ -13,7 +13,6 @@
 #include "ftCommon/forward.h"
 
 #include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_Throw.h"
 
 static inline void doEnter(Fighter_GObj* gobj, Fighter_GObj* victim_gobj,

@@ -34,7 +34,7 @@ typedef struct LbShadow LbShadow;
 typedef enum HurtCapsuleState {
     HurtCapsule_Enabled,
     HurtCapsule_Disabled,
-    Intangible
+    HurtCapsule_Intangible
 } HurtCapsuleState;
 
 typedef enum HitElement {
@@ -108,5 +108,10 @@ typedef enum ECBSourceKind {
     ECBSource_JObj,
     ECBSource_Fixed,
 } ECBSourceKind;
+
+/// Size of the memory card task array.
+typedef enum LbCardNewTaskArray {
+    /* 0x0B */ LbCardNewTaskArray_Max = 11,
+} LbCardNewTaskArray;
 
 #endif

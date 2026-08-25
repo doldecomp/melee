@@ -1,10 +1,7 @@
 #ifndef GALE01_31F990
 #define GALE01_31F990
 
-#include <placeholder.h>
-
 #include "ft/forward.h"
-#include "vi/forward.h"
 #include <baselib/forward.h>
 
 /* 31F980 */ void un_8031F980(int arg0, int arg1);
@@ -17,6 +14,6 @@
 /* 31FCBC */ void fn_8031FCBC(HSD_GObj*);
 /* 31FD18 */ void un_8031FD18_OnEnter(void* arg);
 /* 320490 */ void un_80320490_OnFrame(void);
-/* 4D7004 */ extern un_804D7004_t un_804D7004;
+/* 4D7004 */ extern u8 un_804D7004[8];
 
 #endif

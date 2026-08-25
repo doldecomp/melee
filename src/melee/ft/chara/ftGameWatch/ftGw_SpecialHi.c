@@ -1,26 +1,29 @@
 #include "ftGw_SpecialHi.h"
 
 #include "ftGw_Init.h"
-#include "math.h"
 #include "types.h"
 
 #include <platform.h>
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0881.h"
 #include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Landing.h"
 #include "it/items/itgamewatchrescue.h"
 #include "lb/lb_00B0.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
 
 static void ftGw_SpecialHi_ItemRescueEnterHitlag(HSD_GObj* gobj);
@@ -35,13 +38,13 @@ void ftGw_SpecialHi_ItemRescueSetup(HSD_GObj* gobj)
     HSD_GObj* rescueGObj;
 
     fp = GET_FIGHTER(gobj);
-    if (fp->fv.gw.x226C_rescueGObj == NULL) {
+    if (fp->u.gw.x226C_rescueGObj == NULL) {
         lb_8000B1CC(fp->parts[FtPart_TopN].joint, NULL, &sp10);
         sp10.y = -((2.5f * ftCommon_GetModelScale(fp)) - sp10.y);
         rescueGObj = it_802C8038(gobj, &sp10, FtPart_TopN,
                                  fp->motion_id - ftGw_MS_SpecialHi,
                                  fp->facing_dir, 2.5f);
-        fp->fv.gw.x226C_rescueGObj = rescueGObj;
+        fp->u.gw.x226C_rescueGObj = rescueGObj;
         if (rescueGObj != NULL) {
             fp->death2_cb = ftGw_Init_OnDamage;
             fp->take_dmg_cb = ftGw_Init_OnDamage;
@@ -73,7 +76,7 @@ void ftGw_SpecialHi_ItemRescueSetNULL(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->fv.gw.x226C_rescueGObj = NULL;
+    fp->u.gw.x226C_rescueGObj = NULL;
     fp->death2_cb = NULL;
     fp->take_dmg_cb = NULL;
 }
@@ -83,8 +86,8 @@ void ftGw_SpecialHi_ItemRescueRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.gw.x226C_rescueGObj != NULL) {
-        it_802C8158(fp->fv.gw.x226C_rescueGObj);
+    if (fp->u.gw.x226C_rescueGObj != NULL) {
+        it_802C8158(fp->u.gw.x226C_rescueGObj);
         ftGw_SpecialHi_ItemRescueSetNULL(gobj);
     }
 }
@@ -94,8 +97,8 @@ static void ftGw_SpecialHi_ItemRescueEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.gw.x226C_rescueGObj != NULL) {
-        it_802C81C8(fp->fv.gw.x226C_rescueGObj);
+    if (fp->u.gw.x226C_rescueGObj != NULL) {
+        it_802C81C8(fp->u.gw.x226C_rescueGObj);
     }
 }
 
@@ -104,8 +107,8 @@ static void ftGw_SpecialHi_ItemRescueExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.gw.x226C_rescueGObj != NULL) {
-        it_802C81E8(fp->fv.gw.x226C_rescueGObj);
+    if (fp->u.gw.x226C_rescueGObj != NULL) {
+        it_802C81E8(fp->u.gw.x226C_rescueGObj);
     }
 }
 
@@ -198,7 +201,7 @@ void ftGw_SpecialAirHi_IASA(HSD_GObj* gobj)
     float facing_dir;
     float stick_range_threshold;
 
-    if ((u32) fp->cmd_vars[0] == 0) {
+    if (fp->cmd_vars[0] == 0) {
         stick_x = stickGetDir(fp->input.lstick.x, 0.0f);
         if (stick_x > gawAttrs->x58_GAMEWATCH_RESCUE_STICK_RANGE) {
             stick_range_threshold =

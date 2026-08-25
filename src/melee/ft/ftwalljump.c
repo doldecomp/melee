@@ -11,7 +11,6 @@
 #include "ftCommon/ftCo_PassiveWall.h"
 #include "mp/mplib.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 static int const max_input_frames = 254;
@@ -75,13 +74,17 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
                 }
 
                 {
-                    // not sure what this computes, I guess it checks if we are
-                    // close to the wall and move towards it with sufficent
-                    // speed
-                    float x_diff = fp0->pos_delta.x - wall_pos.x;
-                    x_diff = x_diff < 0 ? -x_diff : x_diff;
+                    // This is relative to the wall, presumably because you can
+                    // walljump off of moving platforms
+                    float wall_relative_velocity =
+                        fp0->pos_delta.x - wall_pos.x;
+                    wall_relative_velocity = wall_relative_velocity < 0
+                                                 ? -wall_relative_velocity
+                                                 : wall_relative_velocity;
 
-                    if (x_diff > fp0->co_attrs.x148) {
+                    if (wall_relative_velocity >
+                        fp0->co_attrs.wall_jump_min_approach_speed)
+                    {
                         // walljump input phase one completed, now start the
                         // walljump input timer and check for the control stick
                         // movement away from the wall in the next phase

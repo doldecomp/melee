@@ -1,7 +1,5 @@
 #include "itmasterhandlaser.h"
 
-#include "math_ppc.h"
-
 #include <placeholder.h>
 #include <platform.h>
 
@@ -26,7 +24,6 @@
 #include "lb/lb_00B0.h"
 #include "mp/mplib.h"
 
-#include <math.h>
 #include <baselib/gobj.h>
 
 ItemStateTable it_803F9378[] = {
@@ -37,25 +34,6 @@ ItemStateTable it_803F9378[] = {
         itMasterhandlaser_UnkMotion0_Coll,
     },
 };
-
-static inline float my_sqrtf(float x)
-{
-    static const double _half = .5;
-    static const double _three = 3.0;
-
-    u8 _[4] = { 0 };
-
-    volatile float y;
-    if (x > 0) {
-        double guess = __frsqrte((double) x);
-        guess = _half * guess * (_three - guess * guess * x);
-        guess = _half * guess * (_three - guess * guess * x);
-        guess = _half * guess * (_three - guess * guess * x);
-        y = (float) (x * guess);
-        return y;
-    }
-    return x;
-}
 
 static inline float sqrtf_store(float x, volatile float* y)
 {

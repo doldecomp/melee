@@ -1,7 +1,7 @@
 #ifndef GALE01_0912A8
 #define GALE01_0912A8
 
-#include "ftCommon/forward.h"
+#include "ft/forward.h"
 
 /* 090984 */ void ftCo_80090984(Fighter_GObj* gobj);
 /* 090B60 */ void ftCo_DamageIce_Init(Fighter_GObj* gobj);

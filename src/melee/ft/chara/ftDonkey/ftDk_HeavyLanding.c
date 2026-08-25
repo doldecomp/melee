@@ -5,7 +5,10 @@
 
 #include <platform.h>
 
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
@@ -13,7 +16,6 @@
 #include "ftDonkey/types.h"
 #include "it/item.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 void ftDk_HeavyLanding_Phys(HSD_GObj* gobj)

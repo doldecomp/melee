@@ -3,17 +3,21 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/inlines.h"
 #include "ftPeach/types.h"
 #include "it/items/itpeachexplode.h"
 #include "lb/lb_00B0.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
 
 /* 11C2F4 */ static void reset(HSD_GObj* gobj);
@@ -45,17 +49,6 @@ static void reset(HSD_GObj* gobj)
     } else {
         fp->mv.pe.specials.x0 = false;
     }
-}
-
-static inline void enter(HSD_GObj* gobj, FtMotionId msid)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    ftPe_DatAttrs* da = fp->dat_attrs;
-    fp->x21EC = reset;
-    fp->self_vel.y = 0;
-    fp->gr_vel = da->x34 * fp->facing_dir;
-    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
-    ftAnim_8006EBA4(gobj);
 }
 
 void ftPe_SpecialS_Enter(HSD_GObj* gobj)
@@ -213,17 +206,14 @@ static void enterAirStart(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->self_vel.x = 0;
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSStart, start_mf,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftPe_MS_SpecialAirSStart,
+                                    start_mf);
 }
 
 static void enterStart(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialSStart, start_mf,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftPe_MS_SpecialSStart, start_mf);
 }
 
 void ftPe_SpecialAirSJump_Anim(HSD_GObj* gobj)
@@ -333,17 +323,14 @@ void ftPe_SpecialAirSEnd_Coll(HSD_GObj* gobj)
 void enterAirEnd(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialAirSEnd_0, end_mf,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftPe_MS_SpecialAirSEnd_0,
+                                    end_mf);
 }
 
 void enterEnd(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialSEnd, end_mf,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftPe_MS_SpecialSEnd, end_mf);
 }
 
 static void doPostEnd(HSD_GObj* gobj)

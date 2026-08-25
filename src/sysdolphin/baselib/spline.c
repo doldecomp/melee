@@ -2,10 +2,10 @@
 
 #include <placeholder.h>
 
-#include "forward.h"
+#include <math.h> // IWYU pragma: keep
 
-#include <math.h>
-#include <MetroTRK/intrinsics.h>
+static void splGetCardinalPoint(Vec3*, Vec3*, f32, f32);
+static void splGetBezierPoint(Vec3*, Vec3*, f32);
 
 f32 splGetHelmite(f32 fterm, f32 time, f32 p0, f32 p1, f32 d0, f32 d1)
 {
@@ -28,7 +28,7 @@ f32 splGetHelmite(f32 fterm, f32 time, f32 p0, f32 p1, f32 d0, f32 d1)
                                      (p1 * (-_2t3_T3 + _3t2_T2))));
 }
 
-inline void splGetCardinalPoint(Vec3* p, Vec3* cp, f32 tension, f32 u)
+static inline void splGetCardinalPoint(Vec3* p, Vec3* cp, f32 tension, f32 u)
 {
     f32 u2 = u * u;
     f32 u3 = u2 * u;
@@ -62,7 +62,7 @@ static void splGetBSplinePoint(Vec3* p, Vec3* cp, f32 u)
     p->z = (cp[0].z * b0) + (cp[1].z * b1) + (cp[2].z * b2) + (cp[3].z * b3);
 }
 
-inline void splGetBezierPoint(Vec3* p, Vec3* cp, f32 u)
+static inline void splGetBezierPoint(Vec3* p, Vec3* cp, f32 u)
 {
     f32 u_1 = 1.0F - u;
     f32 u2 = u * u;
@@ -150,12 +150,13 @@ static f32 splArcLengthPolynomial(const f32 coeffs[5], f32 t)
     return sqrtf__Ff(result);
 }
 
-inline f32* spl_GetCoeffs(HSD_Spline* spl, s32 idx)
+static inline f32* spl_GetCoeffs(HSD_Spline* spl, s32 idx)
 {
     return spl->segPoly[idx];
 }
 
-inline f32 spl_IterateSimpsonsMiddle(const f32 coeffs[5], const f32 dx, f32 t)
+static inline f32 spl_IterateSimpsonsMiddle(const f32 coeffs[5], const f32 dx,
+                                            f32 t)
 {
     f32 var_f24 = 0.0F;
     s32 i;

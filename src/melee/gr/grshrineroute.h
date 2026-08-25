@@ -1,59 +1,8 @@
 #ifndef GALE01_2087B0
 #define GALE01_2087B0
 
-#include <placeholder.h>
-
 #include "forward.h"
 
-#include "it/inlines.h"
-
-#include <baselib/forward.h>
-
-/* 2087B0 */ float grShrineRoute_802087B0(void);
-/* 2087B8 */ void grShrineRoute_OnDemoInit(bool);
-/* 2087BC */ void grShrineRoute_OnInit(void);
-/* 20882C */ void grShrineRoute_OnLoad(void);
-/* 208850 */ void grShrineRoute_OnStart(void);
-/* 2088B8 */ bool grShrineRoute_802088B8(void);
-/* 2088C0 */ HSD_GObj* grShrineRoute_802088C0(int);
-/* 2089AC */ void grShrineRoute_802089AC(Ground_GObj*);
-/* 2089D8 */ bool grShrineRoute_802089D8(Ground_GObj*);
-/* 2089E0 */ void grShrineRoute_802089E0(Ground_GObj*);
-/* 2089E4 */ void grShrineRoute_802089E4(Ground_GObj*);
-/* 2089E8 */ void grShrineRoute_802089E8(Ground_GObj*);
-/* 208A28 */ bool grShrineRoute_80208A28(Ground_GObj*);
-/* 208A30 */ void grShrineRoute_80208A30(Ground_GObj*);
-/* 208A34 */ void grShrineRoute_80208A34(Ground_GObj*);
-/* 208A38 */ void fn_80208A38(HSD_GObj*);
-/* 208D14 */ void grShrineRoute_80208D14(Ground_GObj*);
-/* 208F0C */ bool grShrineRoute_80208F0C(Ground_GObj*);
-/* 208F14 */ bool grShrineRoute_80208F14(void);
-/* 208F70 */ void grShrineRoute_80208F70(Ground_GObj*);
-/* 209AEC */ void grShrineRoute_80209AEC(Ground_GObj*);
-/* 209AF0 */ void grShrineRoute_80209AF0(Ground_GObj*);
-/* 209BE4 */ bool grShrineRoute_80209BE4(Ground_GObj*);
-/* 209BEC */ void grShrineRoute_80209BEC(Ground_GObj*);
-/* 20A100 */ void grShrineRoute_8020A100(Ground_GObj*);
-/* 20A104 */ void grShrineRoute_8020A104(Ground_GObj*);
-/* 20A214 */ bool grShrineRoute_8020A214(Ground_GObj*);
-/* 20A21C */ void grShrineRoute_8020A21C(Ground_GObj*);
-/* 20A864 */ void grShrineRoute_8020A864(Ground_GObj*);
-/* 20A868 */ void grShrineRoute_8020A868(Ground_GObj*);
-/* 20A894 */ bool grShrineRoute_8020A894(Ground_GObj*);
-/* 20A89C */ void grShrineRoute_8020A89C(Ground_GObj*);
-/* 20A8A0 */ void grShrineRoute_8020A8A0(Ground_GObj*);
-/* 20A8A4 */ void grShrineRoute_8020A8A4(Ground_GObj*);
-/* 20AA40 */ void grShrineRoute_8020AA40(HSD_GObj*);
-/* 20AB58 */ HSD_LObj* grShrineRoute_8020AB58(Ground_GObj*);
-/* 20AC44 */ HSD_LObj* grShrineRoute_8020AC44(HSD_GObj*);
-/* 20AD24 */ bool grShrineRoute_8020AD24(int);
-/* 20AD58 */ void grShrineRoute_8020AD58(Ground*, int, CollData*, int, int);
-/* 20AE08 */ s32 grShrineRoute_8020AE08(HSD_GObj*, HSD_GObj*, s32*);
-/* 20AF38 */ void grShrineRoute_8020AF38(HSD_GObj*, s32);
-/* 20B020 */ void grShrineRoute_8020B020(HSD_GObj* gobj, int r4, bool hide);
-/* 20B0AC */ void grShrineRoute_8020B0AC(void);
-/* 20B104 */ DynamicsDesc* grShrineRoute_OnTouchLine(enum_t);
-/* 20B10C */ bool grShrineRoute_OnCheckShadowRender(Vec3*, int arg,
-                                                    HSD_JObj* jobj);
+/* 3E5988 */ extern StageData grSh_Route_StageData;
 
 #endif

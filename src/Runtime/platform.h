@@ -5,14 +5,51 @@
 #include <stddef.h>        // IWYU pragma: export
 #include <dolphin/types.h> // IWYU pragma: export
 
+/// @typedef bool
+/// @note Dolphin's #BOOL macro is not supported.
+/// @typedef BOOL
+/// @deprecated Use #bool instead.
+#undef BOOL
+
+/// @def false
+/// @note Dolphin's #FALSE macro is not supported.
+/// @def FALSE
+/// @deprecated Use #false instead.
+#undef FALSE
+
+/// @def true
+/// @note Dolphin's #TRUE macro is not supported.
+/// @def TRUE
+/// @deprecated Use #true instead.
+#undef TRUE
+
 /// The underlying type of an @c enum, used as a placeholder
 typedef int enum_t;
+
+/// Signed variant of ::size_t
+typedef signed int ssize_t;
 
 /// A @c void callback with no arguments.
 typedef void (*Event)(void);
 
+typedef bool (*Predicate)(void);
+
 #if defined(__MWERKS__) && defined(__PPCGEKKO__)
 #define MWERKS_GEKKO
+#endif
+
+#ifdef __MWERKS__
+#define ASM asm
+#else
+#define ASM
+#endif
+
+#ifndef UNUSED
+#if defined(__clang__) || defined(__GNUC__)
+#define UNUSED __attribute__((unused))
+#else
+#define UNUSED
+#endif
 #endif
 
 #ifndef ATTRIBUTE_ALIGN
@@ -65,6 +102,7 @@ typedef void (*Event)(void);
 #endif
 #endif
 
+#ifndef AT_ADDRESS
 #ifdef PERMUTER
 #define AT_ADDRESS(x) = FIXEDADDR(x)
 #elif defined(__MWERKS__) && !defined(M2CTX)
@@ -72,8 +110,9 @@ typedef void (*Event)(void);
 #else
 #define AT_ADDRESS(x)
 #endif
+#endif
 
-#ifdef __PPCGEKKO__
+#ifdef MWERKS_GEKKO
 #define qr0 0
 #define qr1 1
 #define qr2 2
@@ -112,6 +151,12 @@ typedef void (*Event)(void);
 #define STATIC_ASSERT(cond) _Static_assert((cond), "(" #cond ") failed")
 #endif
 
+#if defined(MUST_MATCH) || defined(LINT)
+#define ASSERT_SIZE(expr, size) STATIC_ASSERT(sizeof(expr) == size)
+#else
+#define ASSERT_SIZE(expr, size)
+#endif
+
 #define RETURN_IF(cond)                                                       \
     do {                                                                      \
         if ((cond)) {                                                         \
@@ -127,6 +172,29 @@ typedef void (*Event)(void);
 #define SDATA
 #define DATA
 #define WEAK
+#endif
+
+#define M_TAU 6.283185307179586
+#define M_PI_3 (M_PI / 3)
+
+#define M_PI_F 3.14159265358979323846F
+#define M_TAU_F 6.283185307179586F
+#define M_PI_2_F (M_PI_F / 2.0F)
+#define M_PI_3_F (M_PI_F / 3.0F)
+
+#define M_PI_L 3.14159265358979323846L
+#define M_TAU_L 6.283185307179586L
+#define M_PI_2_L (M_PI_L / 2.0L)
+#define M_PI_3_L (M_PI_L / 3.0L)
+
+#define SIGNF(x) ((x) > 0.0f ? 1.0f : -1.0f)
+
+#define FLT_EPSILON 1.00000001335e-10F
+
+#define ABS(x) ((x) < 0 ? -(x) : (x))
+
+#ifndef ARRAY_SIZE
+#define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
 #endif
 
 #endif

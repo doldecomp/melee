@@ -4,6 +4,8 @@
 #include "ef/forward.h"
 #include <baselib/forward.h>
 
+#include <stdarg.h>
+
 /* 063930 */ void* efAsync_Dispatch(s32 gfx_id, HSD_GObj* gobj, va_list vlist);
 /* 06729C */ void efAsync_LoadAsync(int index);
 /* 06730C */ void efAsync_OnLoad(HSD_Archive* archive, u8* data, u32 length,

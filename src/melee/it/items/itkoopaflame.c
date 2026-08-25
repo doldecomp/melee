@@ -1,13 +1,17 @@
 #include "itkoopaflame.h"
 
+#include "inlines.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
 #include "it/it_2725.h"
+#include "it/itgroundcoll.h"
 
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
 
+#include <math.h>
 #include <sysdolphin/baselib/random.h>
 #include <melee/db/db.h>
 #include <melee/ef/eflib.h>
@@ -15,13 +19,10 @@
 #include <melee/ft/chara/ftKirby/ftkirby.h>
 #include <melee/ft/chara/ftKoopa/ftKp_SpecialN.h>
 #include <melee/it/inlines.h>
-#include <melee/it/it_266F.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/lb/lbvector.h>
-#include <MSL/math.h>
-#include <MSL/trigf.h>
 
 #define itkpf_Floor 1
 #define itkpf_Ceiling 2
@@ -46,31 +47,11 @@ ItemStateTable ItemStateTable_KoopaFlame[] = {
     },
 };
 
-static inline void clamp_angle(float* f)
-{
-    while (*f < -M_PI) {
-        *f += M_TAU;
-    }
-    while (*f > M_PI) {
-        *f -= M_TAU;
-    }
-}
-
-static inline void clamp_angle_2(float* f)
-{
-    while (*f > M_PI) {
-        *f -= M_TAU;
-    }
-    while (*f < -M_PI) {
-        *f += M_TAU;
-    }
-}
-
 void itKoopaFlame_Update_Direction(Item_GObj* gobj, int flags)
 {
     Item* it = GET_ITEM(gobj);
     Vec vec = it->xDD4_itemVar.koopaflame.xC_direction;
-    clamp_angle(&it->xDD4_itemVar.koopaflame.x24_angle);
+    Item_ClampAngle(&it->xDD4_itemVar.koopaflame.x24_angle);
     if ((flags & itkpf_Floor) != 0) {
         vec.x += it->x378_itemColl.floor.normal.x;
         vec.y += it->x378_itemColl.floor.normal.y;
@@ -100,7 +81,7 @@ void itKoopaFlame_Update_Angle(Item_GObj* gobj, int flags)
                     atan2f(it->xDD4_itemVar.koopaflame.xC_direction.x,
                            it->xDD4_itemVar.koopaflame.xC_direction.y);
         float f0, f1, f2;
-        clamp_angle_2(&f31);
+        Item_ClampAngleReverse(&f31);
         if (f31 == 0.0f) {
             f1 = 0.0f;
         } else {
@@ -119,7 +100,7 @@ void itKoopaFlame_Update_Angle(Item_GObj* gobj, int flags)
             f1 *= f0;
         }
         it->xDD4_itemVar.koopaflame.x24_angle -= f1;
-        clamp_angle(&it->xDD4_itemVar.koopaflame.x24_angle);
+        Item_ClampAngle(&it->xDD4_itemVar.koopaflame.x24_angle);
     }
 }
 
@@ -183,7 +164,7 @@ Item_GObj* itKoopaFlame_Spawn(Fighter_GObj* parent, Vec* pos, f32 facing_dir,
         it->xDD4_itemVar.koopaflame.x24_angle =
             (it->facing_dir == 1.0f) ? it->xDD4_itemVar.koopaflame.x24_angle
                                      : -it->xDD4_itemVar.koopaflame.x24_angle;
-        clamp_angle(&it->xDD4_itemVar.koopaflame.x24_angle);
+        Item_ClampAngle(&it->xDD4_itemVar.koopaflame.x24_angle);
         it->xDD4_itemVar.koopaflame.x40_frame_counter = 0;
         it->xDD4_itemVar.koopaflame.x30 = 0;
         it->xDD4_itemVar.koopaflame.x44_spawned = false;
@@ -280,7 +261,7 @@ bool itKoopaFlame_UnkMotion0_Coll(Item_GObj* gobj)
     Item* it = GET_ITEM(gobj);
     int flags2;
     PAD_STACK(0x1E0);
-    clamp_angle(&it->xDD4_itemVar.koopaflame.x24_angle);
+    Item_ClampAngle(&it->xDD4_itemVar.koopaflame.x24_angle);
     it->x378_itemColl.ecb_source.up = 3.0f;
     it->x378_itemColl.ecb_source.down = 3.0f;
     it->x378_itemColl.ecb_source.front = 3.0f;
@@ -315,7 +296,7 @@ bool itKoopaFlame_Logic111_Reflected(Item_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
     it->xDD4_itemVar.koopaflame.x24_angle += M_PI;
-    clamp_angle(&it->xDD4_itemVar.koopaflame.x24_angle);
+    Item_ClampAngle(&it->xDD4_itemVar.koopaflame.x24_angle);
     it->facing_dir = -it->facing_dir;
     it->x40_vel.x = -it->x40_vel.x;
     it->x40_vel.y = -it->x40_vel.y;
@@ -340,7 +321,7 @@ bool itKoopaFlame_Logic111_ShieldBounced(Item_GObj* gobj)
     it->x40_vel.z = 0.0f;
     it->xDD4_itemVar.koopaflame.x24_angle =
         atan2f(it->x40_vel.y, it->x40_vel.x);
-    clamp_angle(&it->xDD4_itemVar.koopaflame.x24_angle);
+    Item_ClampAngle(&it->xDD4_itemVar.koopaflame.x24_angle);
     return false;
 }
 

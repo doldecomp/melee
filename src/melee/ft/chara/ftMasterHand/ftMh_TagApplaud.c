@@ -2,16 +2,13 @@
 
 #include "ftMh_Wait1_2.h"
 
-#include <platform.h>
-
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
 
-#include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
-#include "ftCrazyHand/ftCh_Init.h"
 #include "ftCrazyHand/ftCh_Throw.h"
 
 #include "ftMasterHand/forward.h"
@@ -56,7 +53,7 @@ void ftMh_TagApplaud_Coll(HSD_GObj* gobj) {}
 void ftMh_MS_383_80155484(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    HSD_GObj* gobj1 = ftBossLib_8015C3E8(28);
+    HSD_GObj* gobj1 = ftBossLib_8015C3E8(FTKIND_CREZYH);
     if (ftBossLib_8015C31C() == 0) {
         ftCh_Init_8015A560(gobj1);
     }

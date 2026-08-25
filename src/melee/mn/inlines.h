@@ -1,12 +1,13 @@
+#ifndef MELEE_MN_INLINES_H
+#define MELEE_MN_INLINES_H
+
 #include "lb/lbaudio_ax.h"
 #include "lb/lbspdisplay.h"
 #include "mn/mnmain.h"
 #include "mn/types.h"
 
 #include <baselib/gobj.h>
-#include <baselib/gobjuserdata.h>
 #include <baselib/jobj.h>
-#include <baselib/memory.h>
 #include <baselib/sislib.h>
 
 typedef enum _MenuInput {
@@ -26,6 +27,7 @@ typedef enum _MenuInput {
 
 #define GET_MENU(gobj) ((Menu*) HSD_GObjGetUserData(gobj))
 #define GET_DIAGRAM(gobj) ((Diagram*) HSD_GObjGetUserData(gobj))
+#define GET_MNINFO(gobj) ((MnInfoData*) HSD_GObjGetUserData(gobj))
 
 static inline void Menu_DecrementAnimTimer(void)
 {
@@ -62,7 +64,7 @@ static inline void sfxMove(void)
     lbAudioAx_80024030(2);
 }
 
-static inline void Menu_InitCenterText(Menu* menu, u8 val)
+static inline void Menu_InitCenterText(Menu* menu, s32 val)
 {
     HSD_Text* text =
         HSD_SisLib_803A5ACC(0, 1, -9.5F, 9.1F, 17.0F, 364.68332F, 38.38772F);
@@ -91,3 +93,5 @@ static inline void inline_test_4(HSD_GObj* gobj, f32 val, u8 loops,
     mn_8022F3D8(jobj, loops, type);
     HSD_JObjAnimAll(jobj);
 }
+
+#endif

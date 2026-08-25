@@ -280,8 +280,11 @@ ALIASES                = offset{1}="\xrefitem offset \"Offset\" \"Member Offsets
                          glossary{1}="\glossary{\1,\1}" \
                          glossary{2}="[\1](\ref glossary_\2)" \
                          g{1}="\glossary{\1}" \
-                         g{2}="\glossary{\1,\2}"
-
+                         g{2}="\glossary{\1,\2}" \
+                         datheader="Version|File|Value^^-|-|-" \
+                         datrow{3}="`\1`|`\2`|`\3`" \
+                         datfooter="" \
+                         datvalue{3}="\datheader^^\datrow{\1, \2, \3}^^\datfooter"
 
 # Set the OPTIMIZE_OUTPUT_FOR_C tag to YES if your project consists of C sources
 # only. Doxygen will then generate output that is more tailored for C. For
@@ -470,7 +473,7 @@ TYPEDEF_HIDES_STRUCT   = YES
 # the optimal cache size from a speed point of view.
 # Minimum value: 0, maximum value: 9, default value: 0.
 
-LOOKUP_CACHE_SIZE      = 0
+LOOKUP_CACHE_SIZE      = 1
 
 # The NUM_PROC_THREADS specifies the number threads doxygen is allowed to use
 # during processing. When set to 0 doxygen will based this on the number of
@@ -876,7 +879,7 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = src include docs
+INPUT                  = src docs extern/dolphin/include
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses

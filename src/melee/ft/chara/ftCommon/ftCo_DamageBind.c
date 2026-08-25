@@ -3,27 +3,25 @@
 #include "ftCo_DamageFall.h"
 #include "ftCo_Lift.h"
 
-#include <placeholder.h>
-
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
 
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_Throw.h"
 #include "pl/player.h"
-
-#include <common_structs.h>
 
 bool ftCo_800C44CC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->dmg.x1860_element == 12 && !fp->x2228_b2) {
+    if (fp->dmg.x1860_element == HitElement_Disable && !fp->x2228_b2) {
         switch (fp->x2070.x2071_b0_3) {
         case 5:
         case 9:

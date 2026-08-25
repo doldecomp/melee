@@ -3,7 +3,6 @@
 #include <platform.h>
 
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -11,37 +10,35 @@
 
 #include "lb/forward.h"
 
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 
-static void grFigure1_OnDemoInit(int);
-static void grFigure1_OnInit(void);
-static void grFigure1_OnLoad(void);
-static void grFigure1_OnStart(void);
-static bool grFigure1_8020E078(void);
-static HSD_GObj* grFigure1_8020E080(int);
-static void grFigure1_8020E168(Ground_GObj*);
-static bool grFigure1_8020E194(Ground_GObj*);
-static void grFigure1_8020E19C(Ground_GObj*);
-static void grFigure1_8020E1A0(Ground_GObj*);
-static void grFigure1_8020E1A4(Ground_GObj*);
-static bool grFigure1_8020E1D0(Ground_GObj*);
-static void grFigure1_8020E1D8(Ground_GObj*);
-static void grFigure1_8020E1FC(Ground_GObj*);
-static void grFigure1_8020E200(Ground_GObj*);
-static bool grFigure1_8020E250(Ground_GObj*);
-static void grFigure1_8020E258(Ground_GObj*);
-static void grFigure1_8020E25C(Ground_GObj*);
-static DynamicsDesc* grFigure1_OnTouchLine(enum_t);
-static bool grFigure1_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
+/* 20DFDC */ static void grFigure1_OnDemoInit(int);
+/* 20DFE0 */ static void grFigure1_OnInit(void);
+/* 20E050 */ static void grFigure1_OnLoad(void);
+/* 20E054 */ static void grFigure1_OnStart(void);
+/* 20E078 */ static bool grFigure1_8020E078(void);
+/* 20E080 */ static HSD_GObj* grFigure1_8020E080(int);
+/* 20E168 */ static void grFigure1_8020E168(Ground_GObj*);
+/* 20E194 */ static bool grFigure1_8020E194(Ground_GObj*);
+/* 20E19C */ static void grFigure1_8020E19C(Ground_GObj*);
+/* 20E1A0 */ static void grFigure1_8020E1A0(Ground_GObj*);
+/* 20E1A4 */ static void grFigure1_8020E1A4(Ground_GObj*);
+/* 20E1D0 */ static bool grFigure1_8020E1D0(Ground_GObj*);
+/* 20E1D8 */ static void grFigure1_8020E1D8(Ground_GObj*);
+/* 20E1FC */ static void grFigure1_8020E1FC(Ground_GObj*);
+/* 20E200 */ static void grFigure1_8020E200(Ground_GObj*);
+/* 20E250 */ static bool grFigure1_8020E250(Ground_GObj*);
+/* 20E258 */ static void grFigure1_8020E258(Ground_GObj*);
+/* 20E25C */ static void grFigure1_8020E25C(Ground_GObj*);
+/* 20E260 */ static DynamicsDesc* grFigure1_OnTouchLine(enum_t);
+/* 20E268 */ static bool grFigure1_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 
-static StageCallbacks grEF1_803E6278[3] = {
+static StageCallbacks grEF1_StageCallbacks[3] = {
     { grFigure1_8020E168, grFigure1_8020E194, grFigure1_8020E19C,
       grFigure1_8020E1A0, 0 },
     { grFigure1_8020E1A4, grFigure1_8020E1D0, grFigure1_8020E1D8,
@@ -50,9 +47,9 @@ static StageCallbacks grEF1_803E6278[3] = {
       grFigure1_8020E25C, 0 }
 };
 
-StageData grEF1_803E62C0 = {
-    FIGURE1,
-    grEF1_803E6278,
+StageData grEF1_StageData = {
+    Gr_Kind_Figure1,
+    grEF1_StageCallbacks,
     "/GrEF1.dat",
     grFigure1_OnInit,
     grFigure1_OnDemoInit,
@@ -66,15 +63,13 @@ StageData grEF1_803E62C0 = {
     0,
 };
 
-UNK_T grEF1_804D6A70;
-
-extern StageInfo stage_info;
+static void* yakumono_param;
 
 static void grFigure1_OnDemoInit(int unused) {}
 
 static void grFigure1_OnInit(void)
 {
-    grEF1_804D6A70 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grFigure1_8020E080(0);
@@ -99,7 +94,7 @@ static bool grFigure1_8020E078(void)
 static HSD_GObj* grFigure1_8020E080(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grEF1_803E6278[gobj_id];
+    StageCallbacks* callbacks = &grEF1_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
@@ -150,11 +145,7 @@ static void grFigure1_8020E1FC(Ground_GObj* arg0) {}
 
 static void grFigure1_8020E200(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grFigure1_8020E250(Ground_GObj* arg0)

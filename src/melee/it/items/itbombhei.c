@@ -2,15 +2,15 @@
 
 #include "itbombhei.static.h"
 
-#include "math.h"
-
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
+
+#include <math.h>
 
 #define GET_ATTRS(ip)                                                         \
     ((itBombHeiAttributes*) ip->xC4_article_data->x4_specialAttributes)
@@ -354,7 +354,7 @@ bool itBombhei_UnkMotion2_Anim(Item_GObj* gobj)
     ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.bombhei.xDD4 -= 1;
     ip->xDD4_itemVar.bombhei.xDEC -= 1.0f;
-    if ((s32) ip->xDD4_itemVar.bombhei.xDD4 <= 0) {
+    if (ip->xDD4_itemVar.bombhei.xDD4 <= 0) {
         it_8027F8E0(gobj);
     }
     if (it_80272C6C(gobj) == 0) {
@@ -493,9 +493,7 @@ bool itBombhei_UnkMotion6_Anim(Item_GObj* gobj)
 
 void itBombhei_UnkMotion6_Phys(Item_GObj* gobj)
 {
-    ItemAttr* attr = ((Item*) gobj->user_data)->xCC_item_attr;
-    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 static inline void fn_8028007C_inline(Item_GObj* gobj)
@@ -593,9 +591,7 @@ bool itBombhei_UnkMotion10_Anim(Item_GObj* gobj)
 
 void itBombhei_UnkMotion10_Phys(Item_GObj* gobj)
 {
-    ItemAttr* attr = ((Item*) gobj->user_data)->xCC_item_attr;
-    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 void fn_80280974(Item_GObj* gobj)
@@ -666,8 +662,6 @@ bool it_3F14_Logic6_DmgDealt(Item_GObj* gobj)
     }
     return false;
 }
-
-void it_80280B60(Item_GObj*);
 
 bool it_3F14_Logic6_DmgReceived(Item_GObj* gobj)
 {

@@ -7,7 +7,6 @@
 
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
 
 #include "forward.h"
@@ -415,7 +414,7 @@ void ftMs_Init_OnDeath(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, 0);
-    fp->fv.ms.x222C = 0;
+    fp->u.ms.x222C = 0;
 }
 
 /// 801362B0 00132E90
@@ -493,7 +492,7 @@ void ftMs_SpecialN_801365A8(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     s32 result;
     if (!fp->x2219_b0) {
-        result = ftLib_800872A4(gobj);
+        result = ftLib_GetKind(gobj);
         switch (result) {
         case 18:
             efSync_Spawn(1266, gobj, fp->parts->joint);
@@ -505,8 +504,7 @@ void ftMs_SpecialN_801365A8(HSD_GObj* gobj)
         fp->x2219_b0 = 1;
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     fp->accessory4_cb = 0;
     return;
 }
@@ -518,7 +516,7 @@ void ftMs_SpecialN_8013666C(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     s32 result;
     if (!fp->x2219_b0) {
-        result = ftLib_800872A4(gobj);
+        result = ftLib_GetKind(gobj);
         switch (result) {
         case 18:
             efSync_Spawn(1267, gobj, fp->parts->joint);
@@ -530,8 +528,7 @@ void ftMs_SpecialN_8013666C(HSD_GObj* gobj)
         fp->x2219_b0 = 1;
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     fp->accessory4_cb = 0;
     return;
 }

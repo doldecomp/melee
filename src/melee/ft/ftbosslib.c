@@ -2,7 +2,6 @@
 
 #include "ft_0877.h"
 #include "ftlib.h"
-#include "math.h"
 
 #include "cm/camera.h"
 #include "ft/inlines.h"
@@ -19,19 +18,19 @@
 
 #include "pl/player.h"
 
-#include <math_ppc.h>
-#include <dolphin/os/OSError.h>
+#include <math.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
-#include <MetroTRK/intrinsics.h>
 
 /// @todo Float reorder hack
+#ifdef MUST_MATCH
 static float get_zero(void)
 {
     return 0.0f;
 }
+#endif
 
 void ftBossLib_8015BD20(HSD_GObj* gobj)
 {
@@ -41,7 +40,7 @@ void ftBossLib_8015BD20(HSD_GObj* gobj)
 void ftBossLib_8015BD24(s32 arg0, float* arg1, float arg2, s32 arg3, s32 arg4,
                         s32 arg5)
 {
-    *arg1 = ((s32) (arg3 / arg0) + HSD_Randi(arg4 - arg5) + arg5) / arg2;
+    *arg1 = ((arg3 / arg0) + HSD_Randi(arg4 - arg5) + arg5) / arg2;
 }
 
 void ftBossLib_8015BDB4(HSD_GObj* arg0)
@@ -230,7 +229,7 @@ HSD_GObj* ftBossLib_8015C3E8(FighterKind kind)
     u8 _[8];
 
     for (cur = HSD_GObj_Entities->fighters; cur; cur = cur->next) {
-        if (kind == ftLib_800872A4(cur)) {
+        if (kind == ftLib_GetKind(cur)) {
             return cur;
         }
     }
@@ -246,7 +245,7 @@ enum_t ftBossLib_8015C44C(FighterKind kind)
 
     if (gobj != NULL) {
         // DataOffset_MotionStateLoad
-        return ftLib_80086C0C(gobj);
+        return ftLib_GetMotionId(gobj);
     } else {
         return ftCo_MS_DeadDown;
     }
@@ -259,7 +258,7 @@ enum_t ftBossLib_8015C4C4(void)
     u8 _[24];
 
     if (gobj) {
-        return GET_FIGHTER(gobj)->fv.mh.x2250;
+        return GET_FIGHTER(gobj)->u.mh.x2250;
     }
 
     return 0;

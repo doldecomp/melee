@@ -1,13 +1,14 @@
-#include <placeholder.h>
+#include <platform.h> // IWYU pragma: keep
 
 #include <stdarg.h>
 
-#ifdef __MWERKS__
-
+#ifdef MWERKS_GEKKO
 #define ALIGN(addr, size) (((uintptr_t) (addr) + ((size) - 1)) & ~((size) - 1))
+#endif
 
 void* __va_arg(va_list v_list, unsigned char type)
 {
+#ifdef MWERKS_GEKKO
     char* addr;
     char* reg = &v_list->gpr;
     int g_reg = v_list->gpr;
@@ -53,13 +54,5 @@ void* __va_arg(va_list v_list, unsigned char type)
     }
 
     return addr;
-}
-
-#else
-
-void* __va_arg(va_list v_list, unsigned char type)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
+}

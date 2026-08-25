@@ -1,6 +1,5 @@
 #include "gmpause.h"
 
-#include <math.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -8,7 +7,6 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <melee/gm/gm_unsplit.h>
-#include <melee/gm/types.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/sc/types.h>
@@ -36,8 +34,8 @@ void fn_801A0E34(HSD_GObj* arg0)
     if (lbl_80479B10.slot != 99) {
         x = 10.0F * HSD_PadMasterStatus[(u8) lbl_80479B10.slot].nml_stickX;
         y = 10.0F * HSD_PadMasterStatus[(u8) lbl_80479B10.slot].nml_stickY;
-        HSD_JObjSetRotationY(lbl_80479B10.analog_stick, +(deg_to_rad * x));
-        HSD_JObjSetRotationX(lbl_80479B10.analog_stick, -(deg_to_rad * y));
+        HSD_JObjSetRotationY(lbl_80479B10.analog_stick, +MTXDegToRad(x));
+        HSD_JObjSetRotationX(lbl_80479B10.analog_stick, -MTXDegToRad(y));
     }
 }
 
@@ -69,7 +67,7 @@ void gm_801A0FEC(s32 slot, u8 flag)
     HSD_JObjAnimAll(lbl_80479B10.background);
 }
 
-void gm_801A10FC(int unused)
+void gm_801A10FC(int slot)
 {
     lbl_80479B10.slot = 99;
     HSD_JObjSetFlagsAll(lbl_80479B10.background, JOBJ_HIDDEN);

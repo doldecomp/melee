@@ -6,18 +6,10 @@
 #include "gr/forward.h"
 #include "it/forward.h"
 #include "lb/forward.h"
-#include "mp/forward.h"
 #include <baselib/forward.h>
 #include <melee/it/forward.h>
 
 #include <dolphin/mtx.h>
-
-struct unkCastle {
-    /* 0x000 */ u8 _pad[0x10C];
-    /* 0x10C */ HSD_GObj* x10C[5];
-    /* 0x120 */ u8 _pad2[0x134 - 0x120];
-    /* 0x134 */ u8 x134[5];
-};
 
 /* 1CD338 */ void grCastle_801CD338(bool);
 /* 1CD37C */ void grCastle_801CD37C(void);
@@ -66,10 +58,8 @@ struct unkCastle {
 /* 1CF300 */ bool grCastle_801CF300(Ground_GObj*);
 /* 1CF308 */ void grCastle_801CF308(Ground_GObj*);
 /* 1CF74C */ void grCastle_801CF74C(Ground_GObj*);
-/* 1CF750 */ void grCastle_801CF750(Ground*, s32, CollData*, s32,
-                                    mpLib_GroundEnum, f32);
 /* 1CF7B0 */ void grCastle_801CF7B0(Ground_GObj*);
-/* 1CF868 */ HSD_JObj* grCastle_801CF868(Ground_GObj*);
+/* 1CF868 */ void grCastle_801CF868(Ground_GObj*);
 /* 1CFAFC */ void fn_801CFAFC(Item_GObj*, Ground*, Vec3*, HSD_GObj*);
 /* 1CFB68 */ void fn_801CFB68(Item_GObj*, Ground*, HSD_GObj*);
 /* 1CFBD4 */ s32 grCastle_801CFBD4(Ground_GObj* gobj, s32 arg1);
@@ -95,5 +85,6 @@ struct unkCastle {
 /* 1D0D24 */ UNK_RET grCastle_801D0D24(UNK_PARAMS);
 /* 1D0D84 */ void grCastle_801D0D84(HSD_JObj*);
 /* 1D0FF0 */ float grCastle_801D0FF0(void);
+/* 3E11A4 */ extern StageData grCs_StageData;
 
 #endif

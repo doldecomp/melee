@@ -1,7 +1,6 @@
 #ifndef GALE01_093C3C
 #define GALE01_093C3C
 
-#include "ftCommon/forward.h"
 #include "it/forward.h"
 
 /* 093CF4 */ bool ftpickupitem_80094150(Fighter_GObj* arg0, Item_GObj* arg1);
@@ -10,7 +9,7 @@
 /* 0943BC */ void ftpickupitem_80094818(HSD_GObj* gobj, bool);
 /* 09447C */ bool ftpickupitem_8009447C(HSD_GObj*, Item_GObj*);
 /* 0945B8 */ void ftpickupitem_Anim(Fighter_GObj* gobj);
-/* 094694 */ void ftpickupitem_80094694(Fighter_GObj*, int, int);
+/* 094694 */ void ftpickupitem_80094694(Fighter_GObj*, FtMotionId, bool);
 /* 0946C4 */ void ftpickupitem_IASA(Fighter_GObj* gobj);
 /* 0946C8 */ void ftpickupitem_Phys(Fighter_GObj* gobj);
 /* 0946E8 */ void ftpickupitem_Coll(Fighter_GObj* gobj);

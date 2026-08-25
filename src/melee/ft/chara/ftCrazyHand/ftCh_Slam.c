@@ -17,9 +17,7 @@
 #include "ftMasterHand/types.h"
 #include "pl/player.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
-#include <MetroTRK/intrinsics.h>
 
 void ftCh_Slam_Anim(HSD_GObj* gobj)
 {

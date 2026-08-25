@@ -1,11 +1,10 @@
-#include <MetroTRK/intrinsics.h>
-#include <MSL/math.h>
+#include <math.h>
 
 const double lbl_804DE190 = 1.8014398509481984e+16;
 
 float fabsf__Ff(float param_1)
 {
-    return __fabsf(param_1);
+    return fabsf(param_1);
 }
 
 double frexp(double x, int* exponent)

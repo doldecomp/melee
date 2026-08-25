@@ -1,7 +1,6 @@
 #ifndef MELEE_FT_CHARA_FTSEAK_TYPES_H
 #define MELEE_FT_CHARA_FTSEAK_TYPES_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "it/forward.h"

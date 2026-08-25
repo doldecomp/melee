@@ -3,7 +3,6 @@
 #include <platform.h>
 
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -11,13 +10,11 @@
 
 #include "lb/forward.h"
 
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 static void grTRoy_802243F4(bool);
@@ -25,7 +22,7 @@ static void grTRoy_802243F8(void);
 static void grTemblem_UnkStage0_OnLoad(void);
 static void grTemblem_UnkStage0_OnStart(void);
 static bool grTRoy_80224490(void);
-static HSD_GObj* grTRoy_80224498(s32 gobj_id);
+static HSD_GObj* grTRoy_80224498(int gobj_id);
 static void grTRoy_80224580(Ground_GObj* gobj);
 static bool grTRoy_802245AC(Ground_GObj*);
 static void grTRoy_802245B4(Ground_GObj*);
@@ -41,7 +38,7 @@ static void grTRoy_802246C4(Ground_GObj*);
 static DynamicsDesc* grTRoy_802246C8(enum_t);
 static bool grTRoy_802246D0(Vec3*, int, HSD_JObj*);
 
-StageCallbacks grTFe_803E97C0[4] = {
+StageCallbacks grTFe_StageCallbacks[4] = {
     {
         grTRoy_80224580,
         grTRoy_802245AC,
@@ -65,9 +62,9 @@ StageCallbacks grTFe_803E97C0[4] = {
     },
 };
 
-StageData grTFe_803E981C = {
-    TEMBLEM,
-    grTFe_803E97C0,
+StageData grTFe_StageData = {
+    Gr_Kind_TEmblem,
+    grTFe_StageCallbacks,
     "/GrTFe.dat",
     grTRoy_802243F8,
     grTRoy_802243F4,
@@ -83,15 +80,7 @@ static void grTRoy_802243F4(bool arg0) {}
 
 static void grTRoy_802243F8(void)
 {
-    stage_info.unk8C.b4 = 0;
-    stage_info.unk8C.b5 = 1;
-    grTRoy_80224498(0);
-    grTRoy_80224498(1);
-    grTRoy_80224498(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTRoy_80224498);
 }
 
 static void grTemblem_UnkStage0_OnLoad(void) {}
@@ -106,10 +95,10 @@ static bool grTRoy_80224490(void)
     return false;
 }
 
-static HSD_GObj* grTRoy_80224498(s32 gobj_id)
+static HSD_GObj* grTRoy_80224498(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTFe_803E97C0[gobj_id];
+    StageCallbacks* callbacks = &grTFe_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
@@ -139,10 +128,7 @@ static void grTRoy_802245B8(Ground_GObj* gobj) {}
 
 static void grTRoy_802245BC(Ground_GObj* gobj)
 {
-    u8 _[8];
-    Ground* gp = GET_GROUND(gobj);
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTRoy_8022460C(Ground_GObj* gobj)
@@ -160,10 +146,7 @@ static void grTRoy_80224648(Ground_GObj* gobj) {}
 
 static void grTRoy_8022464C(Ground_GObj* gobj)
 {
-    u8 _[8];
-    Ground* gp = GET_GROUND(gobj);
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grTRoy_8022469C(Ground_GObj* gobj)

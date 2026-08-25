@@ -1,12 +1,14 @@
 #include "platform.h"
 
-#include <__mem.h>
+#include <string.h>
+
+SECTION_INIT static void __fill_mem(void* dst, int val, unsigned long n);
 
 SECTION_INIT void* memset(void* dst, int val, unsigned long /*size_t*/ n)
 {
     __fill_mem(dst, val, n);
 
-    return (dst);
+    return dst;
 }
 
 #ifdef __MWERKS__
@@ -21,7 +23,7 @@ SECTION_INIT void* memset(void* dst, int val, unsigned long /*size_t*/ n)
     } while (false);
 #endif
 
-SECTION_INIT void __fill_mem(void* dst, int val, unsigned long n)
+SECTION_INIT static void __fill_mem(void* dst, int val, unsigned long n)
 {
     unsigned long v = (unsigned char) val;
     unsigned long i;

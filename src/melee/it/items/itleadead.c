@@ -7,12 +7,12 @@
 #include "ft/ftCo_800C7590.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_3F14.h"
 #include "it/itcoll.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 #include "it/itzako.h"
@@ -21,9 +21,8 @@
 #include "mp/mplib.h"
 #include "sysdolphin/baselib/random.h"
 
+#include <math.h>
 #include <baselib/jobj.h>
-#include <MSL/math.h>
-#include <MSL/trigf.h>
 
 ItemStateTable it_803F8EB0[] = {
     {
@@ -1045,7 +1044,7 @@ Item_GObj* it_802EA9FC(Vec3* pos, s32 facing_dir)
     return gobj;
 }
 
-inline f32 it_802EAAEC_inline(Item* ip2)
+static inline f32 it_802EAAEC_inline(Item* ip2)
 {
     return ip2->xDD4_itemVar.leadead.x3C;
 }
@@ -1062,7 +1061,7 @@ void it_802EAAEC(Item_GObj* gobj, Fighter_GObj* fobj, int part, f32 ignored)
     ip->xDD4_itemVar.leadead.x3C = -12.0f;
     it_8026BD54(gobj);
     ip2 = GET_ITEM(gobj);
-    ip2->x40_vel.x = ip2->x40_vel.y = ip2->x40_vel.z = 0.0f;
+    itResetVelocity(ip2);
     it_80275258(gobj);
     Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
     jobj = it_80272CC0(gobj, 1);

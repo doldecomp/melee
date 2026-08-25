@@ -1,24 +1,19 @@
-#include "gr/grshrine.h"
+#include "grshrine.h"
+
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
 
 #include <platform.h>
 
-#include "gr/granime.h"
-#include "gr/grdisplay.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/types.h"
-
-#include "lb/forward.h"
-
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <math.h>
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 static void grShrine_80201C60(bool);
@@ -43,9 +38,9 @@ static void grShrine_80201F40(Ground_GObj*);
 static DynamicsDesc* grShrine_80201F44(enum_t);
 static bool grShrine_80201F4C(Vec3*, int, HSD_JObj*);
 
-static void* grSh_804D6A18;
+static void* yakumono_param;
 
-static StageCallbacks grSh_803E50E8[3] = {
+static StageCallbacks grSh_StageCallbacks[3] = {
     { grShrine_80201E08, grShrine_80201E34, grShrine_80201E3C,
       grShrine_80201E40, 0 },
     { grShrine_80201E44, grShrine_80201E88, grShrine_80201E90,
@@ -54,9 +49,9 @@ static StageCallbacks grSh_803E50E8[3] = {
       grShrine_80201F40, (1 << 30) | (1 << 31) },
 };
 
-StageData grSh_803E5130 = {
-    SHRINE,
-    grSh_803E50E8,
+StageData grSh_StageData = {
+    Gr_Kind_Shrine,
+    grSh_StageCallbacks,
     "/GrSh.dat",
     grShrine_80201C64,
     grShrine_80201C60,
@@ -76,7 +71,7 @@ static void grShrine_80201C64(void)
 {
     u8 unused0[8];
 
-    grSh_804D6A18 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     grShrine_80201D20(0);
     grShrine_80201D20(1);
     grShrine_80201D20(2);
@@ -108,7 +103,7 @@ static bool grShrine_80201D18(void)
 static HSD_GObj* grShrine_80201D20(s32 arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grSh_803E50E8[arg0];
+    StageCallbacks* callbacks = &grSh_StageCallbacks[arg0];
 
     gobj = Ground_GetStageGObj(arg0);
 

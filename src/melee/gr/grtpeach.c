@@ -3,7 +3,6 @@
 #include <platform.h>
 
 #include "gr/granime.h"
-#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -11,12 +10,10 @@
 
 #include "lb/forward.h"
 
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 /* 2228B4 */ static void grTPeach_802228B4(bool arg0);
@@ -41,7 +38,7 @@
 /* 222B90 */ static bool grTPeach_80222B90(Vec3* arg0, int arg1,
                                            HSD_JObj* arg2);
 
-StageCallbacks grTPe_803E90F0[4] = {
+StageCallbacks grTPe_StageCallbacks[4] = {
     {
         grTPeach_80222A40,
         grTPeach_80222A6C,
@@ -72,9 +69,9 @@ StageCallbacks grTPe_803E90F0[4] = {
     },
 };
 
-StageData grTPe_803E914C = {
-    TPEACH,
-    grTPe_803E90F0,
+StageData grTPe_StageData = {
+    Gr_Kind_TPeach,
+    grTPe_StageCallbacks,
     "/GrTPe.dat",
     grTPeach_802228B8,
     grTPeach_802228B4,
@@ -92,16 +89,7 @@ void grTPeach_802228B4(bool arg0) {}
 
 void grTPeach_802228B8(void)
 {
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-
-    grTPeach_80222958(0);
-    grTPeach_80222958(1);
-    grTPeach_80222958(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTPeach_80222958);
 }
 
 void grTpeach_UnkStage0_OnLoad(void) {}
@@ -119,7 +107,7 @@ bool grTPeach_80222950(void)
 Ground_GObj* grTPeach_80222958(int index)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTPe_803E90F0[index];
+    StageCallbacks* callbacks = &grTPe_StageCallbacks[index];
 
     gobj = Ground_GetStageGObj(index);
 
@@ -148,10 +136,7 @@ void grTPeach_80222A78(Ground_GObj* gobj) {}
 
 void grTPeach_80222A7C(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTPeach_80222ACC(Ground_GObj* gobj)
@@ -169,10 +154,7 @@ void grTPeach_80222B08(Ground_GObj* gobj) {}
 
 void grTPeach_80222B0C(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTPeach_80222B5C(Ground_GObj* gobj)

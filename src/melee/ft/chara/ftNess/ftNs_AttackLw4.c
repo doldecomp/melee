@@ -5,14 +5,16 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Wait.h"
 #include "ftNess/types.h"
-
-#include <common_structs.h>
 
 /// 0x8011659C
 /// https://decomp.me/scratch/xVTx7
@@ -42,7 +44,7 @@ void ftNs_AttackLw4_Anim(
     fp->mv.ns.attacklw4.yoyoCurrentFrame++;
     if (ftNs_AttackHi4_YoyoThink_IsRemove(gobj) == false) {
         ftNs_AttackHi4_YoyoCheckTimedRehit(gobj);
-        if (((s32) fp->mv.ns.attacklw4.yoyoCurrentFrame == 13) &&
+        if ((fp->mv.ns.attacklw4.yoyoCurrentFrame == 13) &&
             ((s32) fp->mv.ns.attacklw4.isChargeDisable == false) &&
             (ftNs_AttackHi4_YoyoCheckNoObstruct(gobj) != false))
         {

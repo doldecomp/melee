@@ -1,14 +1,13 @@
 #ifndef MELEE_LB_SHADOW_H
 #define MELEE_LB_SHADOW_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
+#include <baselib/spline.h>
 
 /* 00E9F0 */ void lbShadow_8000E9F0(Vec3*, HSD_Spline*, f32);
 /* 00ED54 */ void lbShadow_8000ED54(LbShadow*, HSD_JObj*);

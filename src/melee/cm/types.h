@@ -1,8 +1,6 @@
 #ifndef MELEE_CM_TYPES_H
 #define MELEE_CM_TYPES_H
 
-#include <placeholder.h>
-
 #include "cm/forward.h" // IWYU pragma: export
 #include <baselib/forward.h>
 
@@ -78,7 +76,7 @@ struct CameraDebugMode {
     Vec3 free_int_pos;
     Vec3 free_eye_pos;
     float free_fov;
-    u8 _4C[8]; // padding? not sure if this is correct
+    u8 _58[4];
 };
 
 struct Camera {
@@ -184,7 +182,7 @@ struct Camera {
     /* 0x39A:7 */ u8 x39A_b7 : 1;
     /* 0x39B */ char pad_39B; /* maybe part of unk_39A[6]? */
 };
-STATIC_ASSERT(sizeof(struct Camera) == 0x39C);
+ASSERT_SIZE(struct Camera, 0x39C);
 
 struct CameraUnkGlobals {
     /*  +0 */ float x0;
@@ -258,15 +256,8 @@ struct CameraInputs {
     /* +04 */ f32 stick_y;
     /* +08 */ f32 substick_x;
     /* +0C */ f32 substick_y;
-    /// @todo sus unions
-    /* +10 */ union {
-        u32 _u32[2];
-        u64 _u64;
-    } x10;
-    /* +18 */ union {
-        u32 _u32[2];
-        u64 _u64;
-    } x18;
+    /* +10 */ u64 buttons_pressed;
+    /* +18 */ u64 buttons_triggered;
 };
 
 #endif

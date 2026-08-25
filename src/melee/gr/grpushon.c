@@ -1,32 +1,27 @@
 #include "grpushon.h"
 
-#include "placeholder.h"
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "stage.h"
 #include "types.h"
 
+#include <placeholder.h>
 #include <platform.h>
 
 #include "cm/camera.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
-
-#include "gr/forward.h"
-
-#include "gr/granime.h"
-#include "gr/grdisplay.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/stage.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbvector.h"
 #include "lb/types.h"
 #include "mp/mplib.h"
-#include "sysdolphin/baselib/lobj.h"
 
-#include <math_ppc.h>
-#include <baselib/gobjgxlink.h>
+#include <math.h>
 #include <baselib/gobjproc.h>
 #include <baselib/random.h>
+#include <sysdolphin/baselib/lobj.h>
 
 struct grPushOn_Entry {
     s32 x0;
@@ -47,7 +42,7 @@ struct grPushOn_LightConfig {
     s32 dist_func;
 };
 
-static struct {
+struct grPushon_YakumonoParam {
     s32 x0;
     DynamicsDesc* x4;
     DynamicsDesc* x8;
@@ -57,13 +52,22 @@ static struct {
     bool x18;
     struct grPushOn_Entry x1c[0x1E];
     struct grPushOn_Lookup x10c[0x21];
-}* grPushOn_804D6AB8;
+};
+
+static struct grPushon_YakumonoParam* yakumono_param;
+
+/* 2190A0 */ static void fn_802190A0(void* user_data, int joint_id,
+                                     CollData* coll, int coll_x50,
+                                     mpLib_GroundEnum ground_kind,
+                                     float delta_y);
 
 /// @todo .sdata order hack
+#ifdef MUST_MATCH
 static void order_sdata(void)
 {
     (void) "0";
 }
+#endif
 
 Vec3 const grPushOn_803B8440 = { 0 };
 Vec3 const grPushOn_803B844C = { 0 };
@@ -71,18 +75,33 @@ Vec3 const grPushOn_803B8458 = { 0.0f, 100.0f, 0.0f };
 Vec3 const grPushOn_803B8464 = { 0.0f, 100.0f, 0.0f };
 float grPushOn_804D4934 = 16.0f;
 
-StageCallbacks grPushOn_803E7AC8[3] = {
-    { grPushOn_802184CC, grPushOn_80218590, grPushOn_80218598,
-      grPushOn_8021859C, 0 },
-    { grPushOn_802185A0, grPushOn_80218670, grPushOn_802186C8,
-      grPushOn_802187A4, 0xC0000000 },
-    { grPushOn_802187A8, grPushOn_80218880, grPushOn_80218888,
-      grPushOn_80218ED0, 0 },
+StageCallbacks grPushOn_StageCallbacks[] = {
+    {
+        grPushOn_802184CC,
+        grPushOn_80218590,
+        grPushOn_80218598,
+        grPushOn_8021859C,
+        0,
+    },
+    {
+        grPushOn_802185A0,
+        grPushOn_80218670,
+        grPushOn_802186C8,
+        grPushOn_802187A4,
+        (1 << 30) | (1 << 31),
+    },
+    {
+        grPushOn_802187A8,
+        grPushOn_80218880,
+        grPushOn_80218888,
+        grPushOn_80218ED0,
+        0,
+    },
 };
 
-StageData grPushOn_803E7B10 = {
-    PUSHON,
-    grPushOn_803E7AC8,
+StageData grPushOn_StageData = {
+    Gr_Kind_Pushon,
+    grPushOn_StageCallbacks,
     "/GrNPo.dat",
     grPushOn_802182C8,
     grPushOn_802182C4,
@@ -100,7 +119,7 @@ void grPushOn_802182C4(bool arg) {}
 
 void grPushOn_802182C8(void)
 {
-    grPushOn_804D6AB8 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grPushOn_802183E4(0);
@@ -114,7 +133,7 @@ void grPushOn_80218330(void)
     Vec3 vec;
 
     grPushOn_802183E4(2);
-    gobj = Ground_801C57A4();
+    gobj = Ground_GetP1Fighter();
     if (gobj != NULL) {
         ftLib_80086644(gobj, &vec);
         Ground_801C38BC(vec.x, vec.y);
@@ -126,9 +145,9 @@ void grPushOn_80218378(void)
 {
     bool val;
     grZakoGenerator_801CAE04(NULL);
-    val = grPushOn_804D6AB8->x18;
+    val = yakumono_param->x18;
     if (val) {
-        val = HSD_Randi(grPushOn_804D6AB8->x18);
+        val = HSD_Randi(yakumono_param->x18);
     } else {
         val = false;
     }
@@ -145,7 +164,7 @@ bool grPushOn_802183DC(void)
 HSD_GObj* grPushOn_802183E4(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grPushOn_803E7AC8[gobj_id];
+    StageCallbacks* callbacks = &grPushOn_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
@@ -224,7 +243,7 @@ bool grPushOn_80218670(Ground_GObj* arg)
 
 bool fn_80218678(void)
 {
-    HSD_GObj* gobj = Ground_801C2BA4(1);
+    HSD_GObj* gobj = Ground_GetMapGObj(1);
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
         if (gp != NULL) {
@@ -245,7 +264,7 @@ void grPushOn_802186C8(Ground_GObj* gobj)
     vec = grPushOn_803B8440;
     Ground_801C3D44(fn_80218678, 25.0f, 20.0f);
     {
-        HSD_GObj* gobj2 = Ground_801C57A4();
+        HSD_GObj* gobj2 = Ground_GetP1Fighter();
         if (gobj2 != NULL) {
             ftLib_80086644(gobj2, &vec);
             Ground_801C0498();
@@ -288,6 +307,184 @@ void grPushOn_802187A8(Ground_GObj* gobj)
 bool grPushOn_80218880(Ground_GObj* arg)
 {
     return false;
+}
+
+/// @todo Fake padding function
+static inline void pad_stack(GXColor color) {}
+
+void grPushOn_80218888(Ground_GObj* gobj)
+{
+    HSD_GObj* player;
+    Vec3 player_pos;
+    Vec3 light_pos;
+    s32 sorted[20];
+    f32 distances[20];
+    Vec3 pos1;
+    Vec3 pos2;
+    Vec3 dir;
+    GXColor color;
+    Vec3 temp_pos;
+    Ground* gp;
+    s32 count;
+    s32 i;
+    s32 j;
+    s32 best;
+    f32 min_dist;
+    f32 ref_dist;
+    f32 weight;
+    f32 dx;
+    f32 dy;
+    f32 dist_sq;
+    GET_GROUND(0);
+    GET_GROUND(0);
+
+    gp = GET_GROUND(gobj);
+    player = Ground_GetP1Fighter();
+    if (player != NULL) {
+        ftLib_80086644(player, &player_pos);
+    } else {
+        player_pos.z = 0.0f;
+        player_pos.y = 0.0f;
+        player_pos.x = 0.0f;
+    }
+
+    if (gp->u.pushon.gobj != 0) {
+        i = 0;
+        while (i < gp->u.pushon.count) {
+            HSD_LObj* lobj = gp->u.pushon.lobjs[i];
+            s32 type = lobj->flags & 3;
+
+            if (type == 0) {
+                distances[i] = -100.0f;
+            } else if (type == 1 || type == 2) {
+                HSD_LObjGetPosition(lobj, &pos1);
+                dx = player_pos.x - pos1.x;
+                dy = player_pos.y - pos1.y;
+                {
+                    f32 dx2 = dx * dx;
+                    f32 dy2 = dy * dy;
+                    distances[i] = sqrtf(dx2 + dy2);
+                }
+            } else if (type == 3) {
+                HSD_LObjGetPosition(lobj, &pos2);
+                distances[i] = ABS(player_pos.x - pos2.x);
+            } else {
+                HSD_ASSERT(0x1C5, 0);
+            }
+
+            if (distances[i] < 10.0f) {
+                distances[i] = 10.0f;
+            }
+            sorted[i] = i;
+            i += 1;
+        }
+
+        /* Selection sort by distance */
+        for (i = 0; i < (int) gp->u.pushon.count; i++) {
+            count = gp->u.pushon.count;
+            min_dist = 3.4028235e38f;
+            best = 0;
+            for (j = i; j < count; j++) {
+                if (min_dist > distances[sorted[j]]) {
+                    best = j;
+                    min_dist = distances[sorted[j]];
+                }
+            }
+            {
+                s32 tmp = sorted[i];
+                sorted[i] = sorted[best];
+                sorted[best] = tmp;
+            }
+        }
+
+        /* Enable first 5 lights, disable rest */
+        for (i = 0; i < (int) gp->u.pushon.count; i++) {
+            if (i < 5) {
+                HSD_LObjClearFlags(gp->u.pushon.lobjs[sorted[i]], 0x20);
+            } else {
+                HSD_LObjSetFlags(gp->u.pushon.lobjs[sorted[i]], 0x20);
+            }
+        }
+
+        /* Compute weighted direction */
+        dir = grPushOn_803B844C;
+        ref_dist = distances[sorted[1]];
+
+        for (i = 1; i < (int) gp->u.pushon.count; i++) {
+            if (HSD_LObjGetPosition(gp->u.pushon.lobjs[sorted[i]],
+                                    &light_pos) != 0)
+            {
+                weight = ref_dist / distances[sorted[i]];
+                lbVector_Sub(&light_pos, &player_pos);
+                if (light_pos.y < 100.0f) {
+                    if (light_pos.y < 0.0f) {
+                        weight = 0.0f;
+                    } else {
+                        weight *= light_pos.y / 100.0f;
+                    }
+                }
+                lbVector_Normalize(&light_pos);
+                light_pos.x *= weight;
+                light_pos.y *= weight;
+                light_pos.z *= weight;
+                lbVector_Add(&dir, &light_pos);
+            }
+        }
+
+        /* Compute magnitude and normalize direction */
+        dist_sq = sqrtf(dir.z * dir.z + (dir.x * dir.x + dir.y * dir.y));
+        if (dist_sq < 0.01f) {
+            dir.y = 100.0f;
+        }
+        lbVector_Normalize(&dir);
+        dir.x *= 20.0f;
+        dir.y *= 20.0f;
+        dir.z *= 20.0f;
+        lbVector_Add(&dir, &player_pos);
+
+        /* Set spotlight */
+        HSD_LObjSetPosition(gp->u.pushon.point_light, &dir);
+        HSD_LObjSetInterest(gp->u.pushon.point_light, &player_pos);
+        HSD_LObjSetFlags(gp->u.pushon.point_light, 0x400);
+
+        /* Color from 2nd nearest */
+        {
+            f32 dist_diff;
+            dist_diff = distances[sorted[2]] - distances[sorted[1]];
+            HSD_LObjGetColor(gp->u.pushon.lobjs[sorted[1]], &color);
+            if (distances[sorted[2]] - distances[sorted[1]] < 50.0f) {
+                f32 ratio = dist_diff / 50.0f;
+                color.r = color.r * ratio;
+                color.g = color.g * ratio;
+                color.b = color.b * ratio;
+            }
+        }
+        HSD_LObjSetColor(gp->u.pushon.spot_light, color);
+        pad_stack(color);
+
+        /* Copy position from 2nd nearest */
+        if (HSD_LObjGetPosition(gp->u.pushon.lobjs[sorted[1]], &temp_pos) == 0)
+        {
+            temp_pos.z = 0.0f;
+            temp_pos.y = 0.0f;
+            temp_pos.x = 0.0f;
+        }
+        HSD_LObjSetPosition(gp->u.pushon.spot_light, &temp_pos);
+
+        /* Copy interest from 2nd nearest */
+        if (HSD_LObjGetInterest(gp->u.pushon.lobjs[sorted[1]], &temp_pos) == 0)
+        {
+            temp_pos.z = 0.0f;
+            temp_pos.y = 0.0f;
+            temp_pos.x = 0.0f;
+        }
+        HSD_LObjSetInterest(gp->u.pushon.spot_light, &temp_pos);
+
+        /* Copy and modify flags */
+        gp->u.pushon.spot_light->flags = gp->u.pushon.lobjs[sorted[1]]->flags;
+        gp->u.pushon.spot_light->flags &= ~4;
+        gp->u.pushon.spot_light->flags |= 8;
+    }
 }
 
 void grPushOn_80218ED0(Ground_GObj* arg) {}
@@ -400,14 +597,21 @@ HSD_LObj* grPushOn_80218FC0(HSD_GObj* gobj)
 
 /// Ground collision callback for pushon stage elements.
 /// Activates push behavior when collision flags indicate contact (b1234 == 1).
-void fn_802190A0(Ground* gp, s32 joint_id, CollData* coll, s32 unk,
-                 mpLib_GroundEnum ground_enum, f32 arg5)
+/// @copydetails mpLib_JointCollisionCallback
+void fn_802190A0(void* user_data, int joint_id, CollData* coll, int coll_x50,
+                 mpLib_GroundEnum ground_kind, float delta_y)
 {
+    Ground* gp = user_data;
     if (((*(u8*) &coll->x34_flags >> 3U) & 0xF) == 1 &&
-        (ground_enum - 1) <= 1U)
+        (ground_kind - 1) <= 1U)
     {
         gp->u.map.xC4_b0 = true;
     }
+}
+
+static inline GXColor get_light_color(struct grPushOn_LightConfig* entry)
+{
+    return entry->color;
 }
 
 void grPushOn_802190D0(HSD_GObj* gobj)
@@ -416,7 +620,6 @@ void grPushOn_802190D0(HSD_GObj* gobj)
     f32 scale = Ground_801C0498();
     struct grPushOn_LightConfig* entry;
     Vec3 pos;
-    GXColor color;
     HSD_LObj* lobj;
     u32 i;
 
@@ -425,11 +628,10 @@ void grPushOn_802190D0(HSD_GObj* gobj)
     i = 0;
 
     while (i < 9 && lobj != NULL) {
-        HSD_ASSERTMSG(698, (lobj->flags & LOBJ_TYPE_MASK) == LOBJ_POINT,
+        HSD_ASSERTMSG(698, (u32) (lobj->flags & LOBJ_TYPE_MASK) == LOBJ_POINT,
                       "HSD_LObjGetType(lobj)==LOBJ_POINT");
         lobj->flags = LOBJ_POINT | LOBJ_DIFFUSE;
-        color = entry->color;
-        HSD_LObjSetColor(lobj, color);
+        HSD_LObjSetColor(lobj, get_light_color(entry));
         pos = entry->pos;
         pos.x *= scale;
         pos.y *= scale;
@@ -462,8 +664,8 @@ f32 grPushOn_803E7CCC[13] = {
 void grPushOn_80219204(int arg0, int* out1, int* out2)
 {
     int idx = arg0 - 0x99;
-    *out1 = grPushOn_804D6AB8->x1c[idx].x0;
-    *out2 = grPushOn_804D6AB8->x1c[idx].x4;
+    *out1 = yakumono_param->x1c[idx].x0;
+    *out2 = yakumono_param->x1c[idx].x4;
 }
 
 int grPushOn_80219230(int arg0)
@@ -471,171 +673,13 @@ int grPushOn_80219230(int arg0)
     s32 i = 0;
     s32 key;
 
-    while (i < 0x21 && (key = grPushOn_804D6AB8->x10c[i].key) != -1) {
+    while (i < 0x21 && (key = yakumono_param->x10c[i].key) != -1) {
         if (key == arg0) {
-            return grPushOn_804D6AB8->x10c[i].value;
+            return yakumono_param->x10c[i].value;
         }
         i++;
     }
     HSD_ASSERT(861, 0);
-}
-
-void grPushOn_80218888(Ground_GObj* arg0)
-{
-    Vec3 sp10C;
-    Vec3 sp100;
-    s32 light_order[20];
-    f32 light_distances[20];
-    Vec3 sp54;
-    Vec3 sp48;
-    Vec3 sp3C;
-    GXColor sp38;
-    Vec3 sp2C;
-    Ground* gp = arg0->user_data;
-    HSD_GObj* fighter;
-    s32 i;
-    s32 j;
-    PAD_STACK(0x14);
-
-    fighter = Ground_801C57A4();
-    if (fighter != NULL) {
-        ftLib_80086644(fighter, &sp10C);
-    } else {
-        sp10C.z = 0.0f;
-        sp10C.y = 0.0f;
-        sp10C.x = 0.0f;
-    }
-
-    if (gp->u.pushon.gobj != NULL) {
-        for (i = 0; i < gp->u.pushon.count; i++) {
-            HSD_LObj* lobj = gp->u.pushon.lobjs[i];
-            s32 type = lobj->flags & 3;
-            if (type == 0) {
-                light_distances[i] = -100.0f;
-            } else if ((u32) (type - 1) <= 1) {
-                f32 dx;
-                f32 dy;
-                f32 d2;
-                HSD_LObjGetPosition(lobj, &sp54);
-                dx = sp10C.x - sp54.x;
-                dy = sp10C.y - sp54.y;
-                dx *= dx;
-                d2 = dy * dy;
-                light_distances[i] = sqrtf(dx + d2);
-            } else if (type == 3) {
-                f32 dx;
-                HSD_LObjGetPosition(lobj, &sp48);
-                dx = sp10C.x - sp48.x;
-                if (dx < 0.0f) {
-                    dx = -dx;
-                }
-                light_distances[i] = dx;
-            } else {
-                HSD_ASSERT(0x1C5, 0);
-            }
-            if (light_distances[i] < 10.0f) {
-                light_distances[i] = 10.0f;
-            }
-            light_order[i] = i;
-        }
-
-        for (i = 0; i < gp->u.pushon.count; i++) {
-            f32 best = 3.4028235e38f;
-            s32 best_j = 0;
-            s32 tmp;
-            for (j = i; j < gp->u.pushon.count; j++) {
-                f32 d = light_distances[light_order[j]];
-                if (best > d) {
-                    best_j = j;
-                    best = d;
-                }
-            }
-            tmp = light_order[i];
-            light_order[i] = light_order[best_j];
-            light_order[best_j] = tmp;
-        }
-
-        for (i = 0; i < gp->u.pushon.count; i++) {
-            if (i < 5) {
-                HSD_LObjClearFlags(gp->u.pushon.lobjs[light_order[i]], 0x20);
-            } else {
-                HSD_LObjSetFlags(gp->u.pushon.lobjs[light_order[i]], 0x20);
-            }
-        }
-
-        {
-            f32 mindist;
-            f32 sumsq;
-            sp3C = grPushOn_803B844C;
-            mindist = light_distances[light_order[1]];
-            for (i = 1; i < gp->u.pushon.count; i++) {
-                if (HSD_LObjGetPosition(gp->u.pushon.lobjs[light_order[i]],
-                                        &sp100) != 0)
-                {
-                    f32 w = mindist / light_distances[light_order[i]];
-                    lbVector_Sub(&sp100, &sp10C);
-                    if (sp100.y < 100.0f) {
-                        if (sp100.y < 0.0f) {
-                            w = 0.0f;
-                        } else {
-                            w *= sp100.y / 100.0f;
-                        }
-                    }
-                    lbVector_Normalize(&sp100);
-                    sp100.x *= w;
-                    sp100.y *= w;
-                    sp100.z *= w;
-                    lbVector_Add(&sp3C, &sp100);
-                }
-            }
-            sumsq = sqrtf(sumsq = (sp3C.z * sp3C.z) +
-                                  ((sp3C.x * sp3C.x) + (sp3C.y * sp3C.y)));
-            if (sumsq < 0.01f) {
-                sp3C.y = 100.0f;
-            }
-            lbVector_Normalize(&sp3C);
-            sp3C.x *= 20.0f;
-            sp3C.y *= 20.0f;
-            sp3C.z *= 20.0f;
-            lbVector_Add(&sp3C, &sp10C);
-            HSD_LObjSetPosition(gp->u.pushon.point_light, &sp3C);
-            HSD_LObjSetInterest(gp->u.pushon.point_light, &sp10C);
-            HSD_LObjSetFlags(gp->u.pushon.point_light, 0x400);
-
-            {
-                f32 diff = light_distances[light_order[2]] -
-                           light_distances[light_order[1]];
-                HSD_LObjGetColor(gp->u.pushon.lobjs[light_order[1]], &sp38);
-                if (diff < 50.0f) {
-                    f32 t = diff / 50.0f;
-                    sp38.r = (s8) ((f32) (u8) sp38.r * t);
-                    sp38.g = (u8) (s32) ((f32) sp38.g * t);
-                    sp38.b = (u8) (s32) ((f32) sp38.b * t);
-                }
-                HSD_LObjSetColor(gp->u.pushon.spot_light, sp38);
-                if (HSD_LObjGetPosition(gp->u.pushon.lobjs[light_order[1]],
-                                        &sp2C) == 0)
-                {
-                    sp2C.z = 0.0f;
-                    sp2C.y = 0.0f;
-                    sp2C.x = 0.0f;
-                }
-                HSD_LObjSetPosition(gp->u.pushon.spot_light, &sp2C);
-                if (HSD_LObjGetInterest(gp->u.pushon.lobjs[light_order[1]],
-                                        &sp2C) == 0)
-                {
-                    sp2C.z = 0.0f;
-                    sp2C.y = 0.0f;
-                    sp2C.x = 0.0f;
-                }
-                HSD_LObjSetInterest(gp->u.pushon.spot_light, &sp2C);
-                gp->u.pushon.spot_light->flags =
-                    gp->u.pushon.lobjs[light_order[1]]->flags;
-                gp->u.pushon.spot_light->flags &= ~4;
-                gp->u.pushon.spot_light->flags |= 8;
-            }
-        }
-    }
 }
 
 s32 fn_802192A4(void* arg0, HSD_GObj* gobj, s32* result)
@@ -651,7 +695,7 @@ s32 fn_802192A4(void* arg0, HSD_GObj* gobj, s32* result)
             (scale * (-50.0f + grPushOn_803E7CCC[i * 3 + 2]) < sp14.y) &&
             (scale * grPushOn_803E7CCC[i * 3 + 2] > sp14.y))
         {
-            *result = grPushOn_804D6AB8->x0;
+            *result = yakumono_param->x0;
             return 1;
         }
     }
@@ -668,21 +712,21 @@ DynamicsDesc* grPushOn_80219458(enum_t arg0)
         if (joint != -1) {
             if (joint == 1) {
                 mpLineGetKind(arg0);
-                return grPushOn_804D6AB8->x4;
+                return yakumono_param->x4;
             }
             if (joint == 2) {
                 kind = mpLineGetKind(arg0);
-                if (kind == 1) {
-                    return grPushOn_804D6AB8->x8;
+                if (kind == CollLine_Floor) {
+                    return yakumono_param->x8;
                 }
-                if (kind == 2) {
-                    return grPushOn_804D6AB8->xC;
+                if (kind == CollLine_Ceiling) {
+                    return yakumono_param->xC;
                 }
-                if (kind == 4) {
-                    return grPushOn_804D6AB8->x10;
+                if (kind == CollLine_RightWall) {
+                    return yakumono_param->x10;
                 }
-                if (kind == 8) {
-                    return grPushOn_804D6AB8->x14;
+                if (kind == CollLine_LeftWall) {
+                    return yakumono_param->x14;
                 }
                 return NULL;
             }

@@ -1,6 +1,8 @@
-#include "gr/grdatfiles.h"
+#include "grdatfiles.h"
 
-#include "gr/types.h"
+#include "ground.h"
+#include "types.h"
+
 #include "lb/lb_00B0.h"
 #include "lb/lbarchive.h"
 #include "lb/lbheap.h"
@@ -10,17 +12,16 @@
 #include <baselib/particle.h>
 #include <baselib/psstructs.h>
 
-extern StageInfo stage_info;
+/* 1C6228 */ static void grDatFiles_801C6228(UnkStageDat*);
+/* 1C62B4 */ static UnkArchiveStruct* grDatFiles_801C62B4(void);
 
-/// @todo Bad split?
-/* static */ extern UnkStage6B0 grDatFiles_803E0848;
+/// @todo Merge declaration and definition
+/* static */ extern GroundParam grDatFiles_803E0848;
 
-static UnkArchiveStruct grDatFiles_8049EE10[4];
-
-/// @todo Bad split?
+/// @todo Merge declaration and definition
 /* static */ extern UnkStageDat grDatFiles_803E0924;
 
-void grDatFiles_801C5FC0(HSD_Archive* archive, void* data, u32 length)
+void grDatFiles_801C5FC0(HSD_Archive* archive, void* data, size_t length)
 {
     HSD_Archive* map_ptcl;
     HSD_Archive* map_texg;
@@ -97,7 +98,7 @@ void grDatFiles_801C6038(void* arg0, s32 arg1, s32 arg2)
     }
 }
 
-static void grDatFiles_801C6228(UnkStageDat* arg0)
+void grDatFiles_801C6228(UnkStageDat* arg0)
 {
     if (arg0 != NULL && arg0->unk28 != NULL && arg0->unk2C != 0) {
         s32 i;
@@ -110,12 +111,14 @@ static void grDatFiles_801C6228(UnkStageDat* arg0)
     }
 }
 
+static UnkArchiveStruct grDatFiles_8049EE10[4];
+
 void grDatFiles_801C6288(void)
 {
-    memzero(&grDatFiles_8049EE10, 0x30);
+    memzero(&grDatFiles_8049EE10, sizeof(grDatFiles_8049EE10));
 }
 
-static UnkArchiveStruct* grDatFiles_801C62B4(void)
+UnkArchiveStruct* grDatFiles_801C62B4(void)
 {
     s32 i;
     for (i = 0; i < 4; i++) {
@@ -124,14 +127,9 @@ static UnkArchiveStruct* grDatFiles_801C62B4(void)
         }
     }
     HSD_ASSERT(229, 0);
-
-#ifdef BUGFIX
-    // Asserts 0 but the compiler doesn't know that.
-    return NULL;
-#endif
 }
 
-UnkArchiveStruct* grDatFiles_801C6324(void)
+UnkArchiveStruct* grDatFiles_GetArchive(void)
 {
     return grDatFiles_8049EE10;
 }
@@ -158,7 +156,7 @@ UnkArchiveStruct* grDatFiles_801C6478(void* data, s32 length)
 {
     UnkArchiveStruct* arc;
 
-    HSD_Archive* archive = lbHeap_80015BD0(0, 0x44);
+    HSD_Archive* archive = lbHeap_80015BD0(0, sizeof(HSD_Archive));
     lbArchive_InitializeDAT(archive, data, length);
     arc = grDatFiles_801C62B4();
     HSD_ASSERT(290, arc);
@@ -171,11 +169,11 @@ UnkArchiveStruct* grDatFiles_801C6478(void* data, s32 length)
     return arc;
 }
 
-static UnkBgmStruct grDatFiles_803E07E4 = {
+static StageParam grDatFiles_803E07E4 = {
     0, -1, -1, 0, 0, 0, 0, 0, { 0 },
 };
 
-UnkStage6B0 grDatFiles_803E0848 = {
+GroundParam grDatFiles_803E0848 = {
     1,  0x80, { 0 }, 0x1E, 0,  1,     0x8000, 10,
     0,  0,    1,     1,    1,  { 0 }, 40,     10,
     50, 100,  10,    10,   10, 10,    false,  0,

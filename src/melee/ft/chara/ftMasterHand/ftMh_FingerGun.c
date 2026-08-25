@@ -5,7 +5,7 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
-#include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftlib.h"
@@ -18,7 +18,6 @@
 
 #include <dolphin/mtx.h>
 #include <baselib/random.h>
-#include <MetroTRK/intrinsics.h>
 
 void ftMh_FingerBeamEnd_Anim(HSD_GObj* gobj)
 {
@@ -259,8 +258,8 @@ void ftMh_MS_365_8015364C(HSD_GObj* gobj, HSD_JObj* arg1, float arg2,
                 b = true;
             }
 
-            it_802F0AE0(gobj, &vec0, &vec1, 126, b, fp->facing_dir, da->xD4,
-                        da->xD8);
+            it_802F0AE0(gobj, &vec0, &vec1, It_Kind_MasterHand_Bullet, b,
+                        fp->facing_dir, da->xD4, da->xD8);
         }
     }
 }

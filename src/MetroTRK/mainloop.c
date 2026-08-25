@@ -5,6 +5,8 @@
 #include "MetroTRK/serpoll.h"
 #include "MetroTRK/targimpl.h"
 
+#include <MetroTRK/targcont.h>
+
 void TRKHandleRequestEvent(NubEvent* ev)
 {
     TRKDispatchMessage(TRKGetBuffer(ev->fMessageBufferID));

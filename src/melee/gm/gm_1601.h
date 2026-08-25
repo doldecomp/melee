@@ -1,6 +1,8 @@
 #ifndef GALE01_1601C4
 #define GALE01_1601C4
 
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "gm/forward.h"
 #include "mn/forward.h"
@@ -8,6 +10,11 @@
 #include "mn/types.h"
 
 #include "sc/forward.h"
+
+#include <dolphin/gx.h>
+
+#define NUM_UNLOCKABLE_CHARACTERS 11
+#define NUM_UNLOCKABLE_STAGES 11
 
 /* 1601C4 */ int gm_801601C4(s8);
 /* 160244 */ int gm_80160244(s8);
@@ -18,71 +25,71 @@
 /* 160474 */ bool gm_80160474(CharacterKind, GameModeKind);
 /* 1604DC */ char* gm_801604DC(CharacterKind, GameModeKind);
 /* 160564 */ char* gm_80160564(CharacterKind, GameModeKind);
-/* 1605EC */ u8 fn_801605EC(s32);
-/* 160638 */ s8 gm_80160638(s32);
-/* 1606A8 */ u8 fn_801606A8(int);
+/* 1605EC */ u8 gm_SelKindToUnlockIndex(SelectableCharacterKind);
+/* 160638 */ s8 gm_CKindToUnlockIndex(CharacterKind);
+/* 1606A8 */ u8 gm_GetCKindByUnlockIndex(int);
 /* 160710 */ u8 fn_80160710(int);
-/* 16075C */ int gm_8016075C(CharacterKind);
+/* 16075C */ int gm_8016075C(SelectableCharacterKind);
 /* 1607A8 */ u8 fn_801607A8(int);
 /* 1607F4 */ u8 fn_801607F4(int);
 /* 160840 */ u8 fn_80160840(u8);
 /* 160854 */ u32 gm_80160854(u8, u8, u8, u8);
-/* 160968 */ GXColor gm_80160968(u8);
+/* 160968 */ GXColor gm_80160968(u32);
 /* 160980 */ const char* gm_80160980(u8 ckind);
 /* 1609E0 */ const char* fn_801609E0(u8 ckind);
 /* 160A60 */ const char* gm_80160A60(int);
 /* 160B40 */ UNK_RET gm_80160B40(HSD_Text*, u8, u8);
-/* 160C90 */ void gm_80160C90(HSD_Text* text, u8 fighter_id, bool arg2);
+/* 160C90 */ void gm_80160C90(HSD_Text* text, u8 fighter_id, u8 arg2);
 /* 160DE8 */ void fn_80160DE8(HSD_JObj*, u8, s32, u8, f32, f32);
 /* 160F58 */ float fn_80160F58(u8 ckind);
 /* 161004 */ s32 fn_80161004(MatchEnd*);
 /* 161154 */ s32 fn_80161154(MatchEnd*);
 /* 161C90 */ void fn_80161C90(MatchEnd*, int, u16*);
 /* 162068 */ void fn_80162068(MatchEnd*);
-/* 162170 */ s32 fn_80162170(MatchEnd*);
+/* 162170 */ void fn_80162170(MatchEnd*);
 /* 1623A4 */ s32 gm_801623A4(MatchEnd*);
 /* 1623D8 */ int gm_801623D8(void);
 /* 1623FC */ UNK_RET gm_801623FC(int);
-/* 16247C */ long gm_8016247C(long);
+/* 16247C */ s32 gm_8016247C(s32);
 /* 162574 */ void gm_80162574(u8, u8);
 /* 16260C */ void gm_8016260C(u8, u8);
 /* 16279C */ u32 gm_GetVsPlayMatchTotal(void);
 /* 162800 */ u32 gm_80162800(struct MatchEnd*);
 /* 1628C4 */ void gm_801628C4(u32, u32);
-/* 162968 */ long gm_80162968(u32 seconds);
-/* 1629B4 */ long gm_801629B4(s32 amount);
-/* 162A00 */ long gm_GetPlayTime(void);
-/* 162A4C */ long gm_80162A4C(s32 amount);
+/* 162968 */ s32 gm_80162968(u32 seconds);
+/* 1629B4 */ s32 gm_801629B4(s32 amount);
+/* 162A00 */ s32 gm_GetPlayTime(void);
+/* 162A4C */ s32 gm_80162A4C(s32 amount);
 /* 162A98 */ struct gmm_x1868_1A8_t* gm_80162A98(s32);
 /* 162B4C */ void gm_80162B4C(s32 amount);
 /* 162B98 */ void gm_IncrementPowerCount(void);
 /* 162BD8 */ int gm_80162BD8(u8);
 /* 162BFC */ bool fn_80162BFC(s8 ckind, int);
-/* 162C48 */ long gm_80162C48(void);
+/* 162C48 */ s32 gm_80162C48(void);
 /* 162CCC */ bool fn_80162CCC(void);
 /* 162D1C */ bool gm_80162D1C(void);
 /* 162D6C */ u8 gm_80162D6C(void);
 /* 162DD4 */ int gm_80162DD4(u8);
-/* 162DF8 */ long fn_80162DF8(u8 ckind, unsigned long);
-/* 162E44 */ long gm_80162E44(void);
+/* 162DF8 */ s32 fn_80162DF8(u8 ckind, u32);
+/* 162E44 */ s32 gm_80162E44(void);
 /* 162EC8 */ bool gm_80162EC8(void);
 /* 162F18 */ bool gm_80162F18(void);
 /* 162F68 */ u8 gm_80162F68(void);
 /* 162FD0 */ int gm_80162FD0(u8);
-/* 162FF4 */ bool fn_80162FF4(u8 ckind, unsigned long);
-/* 163040 */ long gm_80163040(void);
+/* 162FF4 */ bool fn_80162FF4(u8 ckind, u32);
+/* 163040 */ s32 gm_80163040(void);
 /* 1630C4 */ bool fn_801630C4(void);
 /* 163114 */ bool gm_80163114(void);
 /* 163164 */ u8 gm_80163164(void);
 /* 1631CC */ u32 gm_801631CC(u8);
 /* 1631F0 */ u32 gm_801631F0(void);
 /* 163274 */ u16 gm_80163274(u8);
-/* 163298 */ int gm_80163298(s8 c_kind, u16);
-/* 16332C */ long gm_8016332C(u8);
+/* 163298 */ bool gm_80163298(s8 c_kind, u16);
+/* 16332C */ s32 gm_8016332C(u8);
 /* 163374 */ void gm_80163374(u8, u8*, u8*, u8*, u8*);
 /* 1634D4 */ bool gm_801634D4(u8*, u8*, u8*, u8*);
 /* 16365C */ bool gm_8016365C(u8);
-/* 163690 */ long gm_80163690(u8);
+/* 163690 */ s32 gm_80163690(u8);
 /* 1636D8 */ void gm_801636D8(u8, u8*, u8*, u8*, u8*);
 /* 163838 */ bool gm_80163838(u8*, u8*, u8*, u8*);
 /* 1639C0 */ bool gm_801639C0(u8);
@@ -100,15 +107,15 @@
 /* 163F2C */ int gm_GetCruelHighscore(u8);
 /* 163F50 */ int gm_GetCruelTotalHighscore(void);
 /* 163FA4 */ int fn_80163FA4(u8);
-/* 16400C */ u8 gm_8016400C(u8 ckind);
-/* 164024 */ u8 gm_80164024(u8 ckind);
+/* 16400C */ u8 gm_SelKindToCKind(u8 selkind);
+/* 164024 */ u8 gm_CKindToSelKind(u8 ckind);
 /* 16403C */ bool gm_8016403C(u8 item);
 /* 1640B0 */ void fn_801640B0(u64* item_mask);
 /* 16419C */ float fn_8016419C(u8);
 /* 1641B4 */ float fn_801641B4(u8);
 /* 1641CC */ u16 gm_801641CC(u8);
 /* 1641E4 */ void gm_801641E4(u8 stage, u8 enable);
-/* 164250 */ long gm_80164250(u16);
+/* 164250 */ s32 gm_80164250(u16);
 /* 1642A0 */ bool fn_801642A0(void);
 /* 164330 */ bool gm_80164330(s32);
 /* 164430 */ bool gm_80164430(u16);
@@ -117,8 +124,8 @@
 /* 16468C */ UNK_RET gm_8016468C(UNK_PARAMS);
 /* 1647D0 */ void gm_801647D0(void);
 /* 1647F8 */ int gm_801647F8(u8);
-/* 164840 */ bool gm_80164840(u8 ckind);
-/* 164910 */ void gm_80164910(int);
+/* 164840 */ bool gm_IsCKindUnlocked(u8 ckind);
+/* 164910 */ void gm_UnlockCKind(CharacterKind);
 /* 164A0C */ void gm_80164A0C(u8);
 /* 164ABC */ bool gm_80164ABC(void);
 /* 164B48 */ bool fn_80164B48(void);
@@ -136,9 +143,9 @@
 /* 165388 */ HSD_GObj* gm_80165388(u16, u8, u8, s32);
 /* 1653C8 */ void gm_801653C8(HSD_GObj*);
 /* 1653E8 */ float fn_801653E8(u8);
-/* 165418 */ u8 fn_80165418(MatchEnd*);
-/* 1654A0 */ u8 fn_801654A0(MatchEnd*);
-/* 165548 */ u8 fn_80165548(MatchEnd*, s8, s32);
+/* 165418 */ s32 fn_80165418(MatchEnd*);
+/* 1654A0 */ s32 fn_801654A0(MatchEnd*);
+/* 165548 */ s32 fn_80165548(MatchEnd*, s32, s32);
 /* 1656A8 */ u32 fn_801656A8(MatchEnd*, u32);
 /* 16588C */ s32 fn_8016588C(lbl_8046B6A0_24C_t*, s32);
 /* 165AC0 */ s32 fn_80165AC0(MatchEnd*);
@@ -147,15 +154,14 @@
 /* 165FA4 */ s32 fn_80165FA4(MatchEnd*);
 /* 1661E0 */ s32 fn_801661E0(MatchEnd*);
 /* 166378 */ void gm_80166378(struct lbl_8046B6A0_24C_t*);
-/* 166A98 */ long gm_80166A98(MatchEnd*, s32, s8, u8, s8, u8, s8, u8, u8, u8);
-/* 166CBC */ s32 gmCamera_801A2640(void);
+/* 166A98 */ s32 gm_80166A98(MatchEnd*, u8, s8, u8, s8, u8, s8, u8, u8, u8);
 /* 166CBC */ u8 fn_80166CBC(MatchEnd*, ssize_t index);
 /* 166CCC */ void gm_80166CCC(MatchEnd*, MatchEnd*);
 /* 167140 */ bool gm_80167140(MatchEnd*);
 /* 167194 */ int fn_80167194(MatchEnd*);
 /* 16719C */ void fn_8016719C(s32, s32);
 /* 167320 */ void gm_80167320(int slot, bool);
-/* 167470 */ void gm_80167470(long, long);
+/* 167470 */ void gm_80167470(s32, s32);
 /* 1674C4 */ void gm_801674C4(s8, u8, s8, s8, GmRouteCallback);
 /* 16758C */ void fn_8016758C(void);
 /* 167638 */ s32 fn_80167638(s32, Vec3*, Vec3*);
@@ -174,7 +180,7 @@
 /* 1685D4 */ s8 gm_801685D4(u8, u8);
 /* 168638 */ void gm_80168638(MatchEnd*);
 /* 168710 */ void gm_80168710(MatchEnd*, VsModeData*);
-/* 1688AC */ long gm_801688AC(MatchEnd*);
+/* 1688AC */ s32 gm_801688AC(MatchEnd*);
 /* 168940 */ int gm_80168940(MatchEnd*);
 /* 16895C */ void gm_8016895C(HSD_JObj*, DynamicModelDesc*, int idx);
 /* 1689E4 */ void fn_801689E4(HSD_JObj*, DynamicModelDesc*, int);
@@ -193,10 +199,11 @@
 /* 169290 */ u8 gm_80169290(u8);
 /* 1692BC */ u8 gm_801692BC(u8);
 /* 1692E8 */ void gm_801692E8(u32 secs, datetime* datetime);
-/* 169364 */ struct lbl_8046B488_t* fn_80169364(void);
+/* 169364 */ struct lbl_8046B488_t* gm_1601_GetUnkData(void);
 /* 169370 */ u8 gm_80169370(s32);
 /* 169384 */ int gm_80169384(void);
 /* 169394 */ s32 gm_80169394(void);
+/* 1693A8 */ s32 fn_801693A8(void);
 /* 1693BC */ bool gm_801693BC(int);
 /* 169434 */ void fn_80169434(GmRouteCallback fn);
 /* 169444 */ bool fn_80169444(bool);
@@ -206,29 +213,28 @@
 /* 169540 */ void* gm_80169540(void);
 /* 169550 */ void fn_80169550(int slot);
 /* 169574 */ void fn_80169574(ssize_t size, s8* buf);
-/* 1695BC */ long fn_801695BC(u8, u8, u8, u8*, u8*);
-/* 1697FC */ void fn_801697FC(signed char, signed char, signed char,
-                              signed char, signed char*);
-/* 16989C */ void fn_8016989C(unsigned char*, u8, u8, u8*, u8*);
-/* 169900 */ void fn_80169900(unsigned char, struct lbl_8046B488_t*,
-                              signed char*, signed char*);
-/* 169A84 */ long fn_80169A84(u8, s8*, s8*);
+/* 1695BC */ void fn_801695BC(u8, u8, u8, const u8*, u8*);
+/* 1697FC */ void fn_801697FC(s8, s8, s8, s8, s8*);
+/* 16989C */ void fn_8016989C(u8*, u8, u8, u8*, u8*);
+/* 169900 */ void fn_80169900(u8, struct lbl_8046B488_t*, s8*, s8*);
+/* 169A84 */ s32 fn_80169A84(u8, s8*, s8*);
 /* 169C54 */ void fn_80169C54(s8, s8);
 /* 169F50 */ UNK_RET fn_80169F50(s8, s8);
 /* 16A09C */ UNK_RET fn_8016A09C(UNK_PARAMS);
 /* 16A164 */ UNK_RET gm_8016A164(UNK_PARAMS);
+/* 16A1E4 */ s32 fn_8016A1E4(void);
 /* 16A1F8 */ bool gm_8016A1F8(void);
 /* 16A21C */ void gm_8016A21C(StartMeleeRules*);
-/* 16A22C */ long gm_8016A22C(s8 ckind0, s8 ckind1, s8 ckind2, u8, u8, int,
-                              int, int, u8 color, u8, u8, int opp_count, int,
-                              int, int, int, int, f32, f32);
+/* 16A22C */ s32 gm_8016A22C(s8 ckind0, s8 ckind1, s8 ckind2, u8, u8, int, int,
+                             int, u8 color, u8, u8, int opp_count, int, int,
+                             int, int, int, f32, f32);
 /* 16A404 */ void gm_8016A404(s32 arg0);
 /* 16A414 */ void gm_8016A414(f32 arg8);
 /* 16A424 */ void gm_8016A424(s8 arg0);
 /* 16A434 */ void gm_8016A434(void);
 /* 16A450 */ void fn_8016A450(void);
 /* 16A46C */ void fn_8016A46C(void);
-/* 16A488 */ void fn_8016A488(long);
+/* 16A488 */ void fn_8016A488(int);
 /* 16A4C8 */ void fn_8016A4C8(void);
 /* 16A92C */ void gm_8016A92C(StartMeleeRules*);
 /* 16A944 */ bool gm_8016A944(UNK_PARAMS);

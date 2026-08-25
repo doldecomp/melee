@@ -10,6 +10,8 @@
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "it/item.h"
+#include "lb/lb_00F9.h"
+#include "lb/lb_013B.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbshadow.h"
@@ -28,7 +30,6 @@
 #include <dolphin/gx.h>
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
-#include <baselib/displayfunc.h>
 #include <baselib/fog.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
@@ -38,6 +39,7 @@
 static SceneDesc* un_804D6F30;
 static GXColor erase_colors_vi0102;
 static HSD_Archive* un_804D6F38;
+u8 un_804D6F3C[8];
 
 static Vec3 initial_pos = { 0, 0, 0 };
 
@@ -47,11 +49,11 @@ void vi0102_8031CB00(int mario_costume, int luigi_costume)
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(4, 0);
+    Stage_802251E8(St_Kind_Castle, 0);
     Item_80266FA8();
     Item_80266FCC();
     Stage_8022524C();
-    Stage_8022532C(4, 0);
+    Stage_8022532C(St_Kind_Castle, 0);
 
     ftDemo_ObjAllocInit();
     Player_InitAllPlayers();
@@ -89,27 +91,18 @@ void vi0102_JObjCallback(HSD_GObj* gobj)
 
 void vi0102_CameraCallback(HSD_GObj* gobj, int unused)
 {
-    HSD_CObj* cobj;
     PAD_STACK(8);
     lbShadow_8000F38C(0);
-    cobj = gobj->hsd_obj;
-    if (HSD_CObjSetCurrent(cobj)) {
-        HSD_SetEraseColor(erase_colors_vi0102.r, erase_colors_vi0102.g,
-                          erase_colors_vi0102.b, erase_colors_vi0102.a);
-        cobj = gobj->hsd_obj;
-        HSD_CObjEraseScreen(cobj, 1, 0, 1);
-        vi_8031CA04(gobj);
-        gobj->gxlink_prios = 0x881;
-        HSD_GObj_80390ED0(gobj, 7);
-        HSD_CObjEndCurrent();
-    }
+    vi_RunCamera(gobj, (u8*) &erase_colors_vi0102, 0x881);
 }
 
 /// Used to force float ordering of file
+#ifdef MUST_MATCH
 static f32 unused(void)
 {
     return 0.0f;
 }
+#endif
 
 static void vi0102_RunFrame(HSD_GObj* gobj)
 {

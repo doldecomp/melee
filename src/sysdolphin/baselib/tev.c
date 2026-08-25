@@ -2,9 +2,7 @@
 
 #include "debug.h"
 
-#include <placeholder.h>
-
-#include <__mem.h>
+#include <string.h>
 #include <dolphin/gx.h>
 
 static struct {
@@ -241,8 +239,10 @@ void HSD_SetupTevStage(HSD_TevDesc* desc)
     GXSetTevKAlphaSel(desc->stage, desc->u.tevconf.kasel);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void HSD_SetupTevStageAll(HSD_TevDesc* desc)
 {
     int num = 0;
@@ -259,7 +259,9 @@ void HSD_SetupTevStageAll(HSD_TevDesc* desc)
     GXSetNumTevStages(current_tev);
     current_tev = 0;
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 int HSD_Channel2Num(int chan)
 {
@@ -325,8 +327,10 @@ int HSD_Index2TevStage(int idx)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
+#endif
 int HSD_TevStage2Index(int stage)
 {
     switch (stage) {
@@ -367,7 +371,9 @@ int HSD_TevStage2Index(int stage)
         return 0;
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 int HSD_TevStage2Num(int stage)
 {
@@ -466,9 +472,11 @@ int HSD_TexCoordID2Num(int id)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
-void ChanUpdateFunc(HSD_Chan* chan, int arg1, f32* arg2)
+#endif
+void ChanUpdateFunc(HSD_Chan* chan, int arg1, const f32* arg2)
 {
     if (chan != NULL) {
         switch (arg1) {
@@ -499,7 +507,9 @@ void ChanUpdateFunc(HSD_Chan* chan, int arg1, f32* arg2)
         }
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static HSD_Chan invalid_prev_ch[4] = {
     { NULL, 0, 0, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, 0, 0, 0, 0, 2, 0, NULL },

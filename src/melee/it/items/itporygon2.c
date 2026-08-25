@@ -3,9 +3,8 @@
 #include "it/inlines.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
+#include "it/itgroundcoll.h"
 
-#include <melee/ef/eflib.h>
-#include <melee/it/it_266F.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
 
@@ -36,8 +35,7 @@ void it_802D5B14(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     Item_80268E5C((HSD_GObj*) item_gobj, 0, ITEM_ANIM_UPDATE);
-    item->entered_hitlag = efLib_PauseAll;
-    item->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(item);
 }
 
 bool itPorygon2_UnkMotion0_Anim(Item_GObj* item_gobj)
@@ -65,8 +63,7 @@ void it_802D5C00(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     Item_80268E5C(item_gobj, 1, ITEM_ANIM_UPDATE);
-    item->entered_hitlag = efLib_PauseAll;
-    item->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(item);
     Item_8026AE84(item, 0x273F, 0x7F, 0x40);
 }
 

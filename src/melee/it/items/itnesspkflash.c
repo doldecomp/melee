@@ -11,12 +11,11 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "it/items/itnesspkflashexplode.h"
-#include "MSL/trigf.h"
+#include "it/itgroundcoll.h"
 
 #include <math.h>
 #include <baselib/jobj.h>
@@ -47,11 +46,13 @@ static inline void itNesspkflash_SetScale(HSD_JObj* jobj, Item* ip,
 
 Fighter_GObj* it_802AA7E4(Item_GObj* gobj)
 {
+    /// @todo Use #itGetOwner if it can be made to inline here.
     return GET_ITEM(gobj)->owner;
 }
 
 bool it_802AA7F0(Item_GObj* gobj)
 {
+    /// @todo Use #itGetMotionId if it can be made to inline here.
     Item* it = GET_ITEM(gobj);
     if (it->msid == 0x2) {
         return 1;
@@ -134,6 +135,8 @@ void it_2725_Logic102_Destroyed(Item_GObj* gobj)
                 ftKb_SpecialNNs_800FECBC(
                     ip->xDD4_itemVar.pkflush.xDE0_PKFlash_Owner);
                 break;
+            default:
+                break;
             }
         }
         ip->xDD4_itemVar.pkflush.xDE0_PKFlash_Owner = NULL;
@@ -209,6 +212,8 @@ bool itNesspkflash_UnkMotion0_Anim(Item_GObj* gobj)
                 holding = ftKb_SpecialNNs_800FEC78(
                     ip->xDD4_itemVar.pkflush.xDE0_PKFlash_Owner);
                 break;
+            default:
+                break;
             }
             if (holding != true) {
                 Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
@@ -255,6 +260,8 @@ bool itNesspkflash_UnkMotion1_Anim(Item_GObj* gobj)
                                 ip->facing_dir,
                                 ip->xDD4_itemVar.pkflush.xDD8_PKFlash);
                     break;
+                default:
+                    break;
                 }
                 return true;
             }
@@ -293,6 +300,8 @@ void itNesspkflash_UnkMotion0_Phys(Item_GObj* gobj)
             case It_Kind_Kirby_NessPKFlush:
                 holding = ftKb_SpecialNNs_800FEC78(
                     ip->xDD4_itemVar.pkflush.xDE0_PKFlash_Owner);
+                break;
+            default:
                 break;
             }
             if (holding == true) {

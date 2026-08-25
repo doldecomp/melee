@@ -1,6 +1,6 @@
 #include "ithassam.h"
 
-#include "math.h"
+#include "inlines.h"
 
 #include "cm/camera.h"
 #include "ef/eflib.h"
@@ -11,18 +11,18 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/itmaplib.h"
 #include "it/types.h"
 #include "lb/lbvector.h"
 
+#include <math.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
-#include <MSL/trigf.h>
 
 /* 2CDC5C */ static void itHassam_802CDC5C(Item_GObj* gobj);
 /* 2CDC80 */ static void itHassam_802CDC80(Item_GObj* gobj);
@@ -90,8 +90,7 @@ void itHassam_802CDCB4(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
 
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     it_8027A13C(gobj);
     it_8027A160(ip->xBBC_dynamicBoneTable->bones[2], ip);
 }
@@ -210,8 +209,7 @@ void itHassam_802CE008(Item_GObj* gobj)
     itHassam_ItemVars* attr = ip->xC4_article_data->x4_specialAttributes;
 
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     it_8027A160(ip->xBBC_dynamicBoneTable->bones[2], ip);
     ip->xD44_lifeTimer = attr->x18;
     ip->x40_vel.x = attr->x4 * ip->facing_dir;
@@ -230,15 +228,14 @@ bool itHassam_UnkMotion1_Anim(Item_GObj* gobj)
     attr = ip->xC4_article_data->x4_specialAttributes;
     if (it_80272C6C(gobj) == false) {
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-        ip->entered_hitlag = efLib_PauseAll;
-        ip->exited_hitlag = efLib_ResumeAll;
+        Item_SetEffectHitlagCallbacks(ip);
     }
     it_8027A160(ip->xBBC_dynamicBoneTable->bones[2], ip);
     if (ip->xDB0_itcmd_var1 != 0) {
         jobj = (HSD_JObj*) gobj->hsd_obj;
 
         ip->xDD4_itemVar.hassam.x68 = HSD_JObjGetRotationY(gobj->hsd_obj);
-        ip->xDD4_itemVar.hassam.x68 += deg_to_rad * (180 / attr->x20);
+        ip->xDD4_itemVar.hassam.x68 += MTXDegToRad(180 / attr->x20);
         HSD_JObjSetRotationY(jobj, ip->xDD4_itemVar.hassam.x68);
 
         if (++ip->xDB0_itcmd_var1 > (u32) attr->x20) {
@@ -294,8 +291,8 @@ bool itHassam_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-inline void itHassam_802CE400_sub(HSD_GObj* gobj, int msid,
-                                  Item_StateChangeFlags flags)
+static inline void itHassam_802CE400_sub(HSD_GObj* gobj, int msid,
+                                         Item_StateChangeFlags flags)
 {
     Item* ip = gobj->user_data;
     Item_80268E5C(gobj, msid, flags);
@@ -361,12 +358,7 @@ bool itHassam_UnkMotion2_Coll(Item_GObj* gobj)
 
 void it_802CE640(Item_GObj* gobj)
 {
-    Item* ip = gobj->user_data;
-
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_EnterAirStateWithHitlag(gobj, 3);
 }
 
 bool itHassam_UnkMotion3_Anim(Item_GObj* gobj)

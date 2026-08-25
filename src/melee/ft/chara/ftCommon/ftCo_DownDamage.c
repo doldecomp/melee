@@ -18,8 +18,6 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/types.h"
 
-#include <common_structs.h>
-
 /* 09F184 */ static void ftCo_8009F184(Fighter_GObj* gobj);
 
 bool ftCo_8009F0F0(Fighter_GObj* gobj)

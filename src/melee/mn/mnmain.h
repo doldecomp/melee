@@ -1,14 +1,14 @@
 #ifndef MELEE_MN_MAIN_H
 #define MELEE_MN_MAIN_H
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "gm/forward.h"
 #include "mn/forward.h"
 
+#include "mn/types.h"
+
 #include <dolphin/gx.h>
-#include <dolphin/mtx.h>
 #include <baselib/object.h>
 
 typedef struct _MainMenuData {
@@ -73,7 +73,6 @@ typedef struct _MenuInputState {
 /* 22BEDC */ void mn_8022BEDC(HSD_GObj*);
 /* 22BFBC */ GXColor* mn_8022BFBC(int);
 /* 22C010 */ int mn_8022C010(int, int);
-/* 22C068 */ void mn_8022C068(HSD_LObj*, int, int);
 /* 22C128 */ void fn_8022C128(HSD_GObj*);
 /* 22C304 */ void mn_8022C304(void);
 /* 22C4F4 */ void mn_8022C4F4(HSD_GObj*);
@@ -88,7 +87,7 @@ typedef struct _MenuInputState {
 /* 22DB10 */ void mn_8022DB10(HSD_GObj*);
 /* 22DD38 */ void mn_8022DD38_OnFrame(void);
 /* 22DDA8 */ void mn_8022DDA8_OnEnter(MenuEnterData*);
-/* 22E950 */ bool mn_IsFighterUnlocked(int);
+/* 22E950 */ bool mn_IsFighterUnlocked(SelectableCharacterKind);
 /* 22E978 */ void mn_8022E978(u8 item_idx,
                               u8 enable); ///< set/unset item mask bit
 /* 22EA08 */ void mn_8022EA08(char* buf, u32 num);
@@ -111,8 +110,8 @@ typedef struct _MenuInputState {
 /* 22F298 */ f32 mn_8022F298(HSD_JObj*);
 /* 22F360 */ void mn_8022F360(HSD_AObj* aobj, void* obj, u32 arg2);
 /* 22F3D8 */ void mn_8022F3D8(HSD_JObj*, u8, HSD_TypeMask);
-/* 22F410 */ int mn_8022F410(float* x, float* target, float dx);
-/* 22F470 */ int mn_8022F470(int* x, int* target, int dx);
+/* 22F410 */ int mn_8022F410(float* x, const float* target, float dx);
+/* 22F470 */ int mn_8022F470(int* x, const int* target, int dx);
 /* 22F4CC */ void mn_8022F4CC(void);
 
 /* 4A04F0 */ extern MenuFlow mn_804A04F0;

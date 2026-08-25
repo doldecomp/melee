@@ -4,7 +4,6 @@
 #include <platform.h>
 
 #include "baselib/class.h"
-#include "baselib/fobj.h"
 
 #include "baselib/forward.h" // IWYU pragma: export
 
@@ -71,5 +70,6 @@ void HSD_DObjDisp(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
 void HSD_DObjRemove(HSD_DObj* dobj);
 void HSD_DObjSetDefaultClass(HSD_ClassInfo* info);
 void forceStringAllocation(HSD_DObj* dobj, HSD_MObj* mobj);
+extern HSD_DObjInfo hsdDObj;
 
 #endif

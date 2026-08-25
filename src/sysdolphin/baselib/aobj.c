@@ -14,9 +14,9 @@
 #include "tobj.h"
 #include "wobj.h"
 
-#include <__mem.h>
+#include <math.h>
 #include <stdarg.h>
-#include <MetroTRK/intrinsics.h>
+#include <string.h>
 
 HSD_ObjAllocData aobj_alloc_data;
 
@@ -37,7 +37,7 @@ HSD_ObjAllocData* HSD_AObjGetAllocData(void)
 
 u32 HSD_AObjGetFlags(HSD_AObj* aobj)
 {
-    return (aobj) ? aobj->flags : 0;
+    return aobj ? aobj->flags : 0;
 }
 
 void HSD_AObjSetFlags(HSD_AObj* aobj, u32 flags)
@@ -114,6 +114,10 @@ void HSD_AObjStopAnim(HSD_AObj* aobj, void* obj, HSD_ObjUpdateFunc func)
     aobj->flags |= AOBJ_NO_ANIM;
 }
 
+#ifdef MUST_MATCH
+#pragma push
+#pragma dont_inline on
+#endif
 void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
                            HSD_ObjUpdateFunc update_func)
 {
@@ -138,7 +142,7 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
             HSD_FObjStopAnimAll(aobj->fobj, obj, update_func, rate);
             y = aobj->end_frame - aobj->rewind_frame;
             x = aobj->curr_frame - aobj->rewind_frame;
-            aobj->curr_frame = fmod(x, y) + aobj->rewind_frame;
+            aobj->curr_frame = fmodf(x, y) + aobj->rewind_frame;
             HSD_FObjReqAnimAll(aobj->fobj, aobj->curr_frame);
         } else {
             aobj->curr_frame = aobj->end_frame;
@@ -168,16 +172,9 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
         HSD_AObj_804D7630 += 1;
     }
 }
-
-float fmod(float a, float b)
-{
-    long long quotient;
-    if (__fabs(b) > __fabs(a)) {
-        return a;
-    }
-    quotient = a / b;
-    return a - b * quotient;
-}
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)
 {
@@ -244,7 +241,7 @@ void HSD_AObjRemove(HSD_AObj* aobj)
 
 HSD_AObj* HSD_AObjAlloc(void)
 {
-    HSD_AObj* new = (HSD_AObj*) HSD_ObjAlloc(&aobj_alloc_data);
+    HSD_AObj* new = (HSD_AObj*) HSD_ObjAlloc(HSD_AObjGetAllocData());
     HSD_ASSERT(489, new);
 
     memset(new, 0, sizeof(HSD_AObj));
@@ -259,7 +256,7 @@ void HSD_AObjFree(HSD_AObj* aobj)
         return;
     }
 
-    HSD_ObjFree(&aobj_alloc_data, (HSD_ObjAllocLink*) aobj);
+    HSD_ObjFree(HSD_AObjGetAllocData(), (HSD_ObjAllocLink*) aobj);
 }
 
 static void callbackForeachFunc(HSD_AObj* aobj, void* obj, HSD_Type type,

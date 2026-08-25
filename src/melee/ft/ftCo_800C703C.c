@@ -1,9 +1,5 @@
 #include "ftCo_800C703C.h"
 
-#include "ftcommon.h"
-
-#include <placeholder.h>
-
 #include "ft/fighter.h"
 #include "ft/types.h"
 

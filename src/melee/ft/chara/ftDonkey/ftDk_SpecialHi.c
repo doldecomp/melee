@@ -18,17 +18,22 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftCommon/inlines.h"
 #include "ftDonkey/types.h"
 
 #include <dolphin/mtx.h>
 
+static u32 const coll_mf = Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim |
+                           Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+                           Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags |
+                           Ft_MF_Unk27;
+
 static void setCallbacks(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = gobj->user_data;
     fp->take_dmg_cb = ftDk_Init_8010D774;
     fp->death2_cb = ftDk_Init_8010D774;
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
 }
 
 void ftDk_SpecialHi_Enter(HSD_GObj* gobj)
@@ -110,7 +115,8 @@ void ftDk_SpecialAirHi_Phys(HSD_GObj* gobj)
     } else {
         grav_mul = donkey_attr->SpecialHi.x50_AERIAL_GRAVITY;
     }
-    ftCommon_Fall(fp, grav_mul * fp->co_attrs.grav, fp->co_attrs.terminal_vel);
+    ftCommon_Fall(fp, grav_mul * fp->co_attrs.gravity,
+                  fp->co_attrs.terminal_velocity);
     ftCommon_8007D344(fp, 0, donkey_attr->SpecialHi.x60_AERIAL_MOBILITY,
                       donkey_attr->SpecialHi.x58_AERIAL_HORIZONTAL_VELOCITY);
 }
@@ -122,7 +128,7 @@ void ftDk_SpecialHi_Coll(HSD_GObj* gobj)
 
     if (!ft_80082708(gobj)) {
         ftCommon_8007D60C(fp);
-        Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialAirHi, 0x0C4C5080,
+        Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialAirHi, coll_mf,
                                   fp->cur_anim_frame, 1, 0, NULL);
         setCallbacks(gobj);
         ftCommon_ClampSelfVelX(
@@ -134,21 +140,19 @@ void ftDk_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
-    u8 _[8];
+    u8 _[4];
     if (fp->self_vel.y >= 0) {
         if (ft_80081D0C(gobj)) {
-            ftCommon_8007D7FC(fp);
-            Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialHi, 0x0C4C5080,
-                                      fp->cur_anim_frame, 1, 0, NULL);
+            ftCommon_AirToGroundStateChange(gobj, fp, ftDk_MS_SpecialHi,
+                                            coll_mf);
             setCallbacks(gobj);
             ftCommon_ClampGrVel(
                 fp, donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);
         }
     } else {
         if (ft_CheckGroundAndLedge(gobj, 0)) {
-            ftCommon_8007D7FC(fp);
-            Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialHi, 0x0C4C5080,
-                                      fp->cur_anim_frame, 1, 0, NULL);
+            ftCommon_AirToGroundStateChange(gobj, fp, ftDk_MS_SpecialHi,
+                                            coll_mf);
             setCallbacks(gobj);
             ftCommon_ClampGrVel(
                 fp, donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);

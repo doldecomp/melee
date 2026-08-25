@@ -45,6 +45,12 @@ static MotionFlags const ftYs_MF_SpecialHi =
 
 static MotionFlags const ftYs_MF_MS_368 = ftYs_MF_MS_366 | Ft_MF_SkipParasol;
 
+static MotionFlags const ftYs_MF_SpecialN_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_SkipModel;
+
+static MotionFlags const ftYs_MF_SpecialN_CollHit =
+    ftYs_MF_SpecialN_Coll | Ft_MF_SkipHit;
+
 typedef enum ftYoshi_MotionState {
     ftYs_MS_GuardOn_0 = ftCo_MS_Count,
     ftYs_MS_GuardHold,

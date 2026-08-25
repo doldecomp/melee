@@ -1,5 +1,7 @@
 #include "itpeachexplode.h"
 
+#include "inlines.h"
+
 #include "db/db.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
@@ -28,15 +30,7 @@ Item_GObj* it_802BD158(Item_GObj* gobj, Vec3* pos, bool arg2, float dir)
     Item_GObj* result;
 
     spawn.kind = It_Kind_Peach_Explode;
-    spawn.prev_pos = *pos;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
-    spawn.x0_parent_gobj = gobj;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawn(&spawn, gobj, pos, dir);
     result = Item_80268B18(&spawn);
     if (result != NULL) {
         it_802BD248(result, gobj, arg2);

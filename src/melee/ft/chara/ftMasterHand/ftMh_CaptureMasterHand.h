@@ -8,6 +8,5 @@
 /* 155B78 */ void ftMh_CaptureMasterHand_Phys(HSD_GObj* gobj);
 /* 155B7C */ void ftMh_CaptureMasterHand_Coll(HSD_GObj* gobj);
 /* 155B80 */ void ftMh_CaptureMasterHand_80155B80(HSD_GObj* gobj);
-/* 155C20 */ void ftMh_CaptureDamageMasterHand_Anim(HSD_GObj* gobj);
 
 #endif

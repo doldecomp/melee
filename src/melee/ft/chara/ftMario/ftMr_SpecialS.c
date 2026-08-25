@@ -1,7 +1,6 @@
 #include "ftMr_SpecialS.h"
 
 #include "ftMr_Init.h"
-#include "math.h"
 #include "types.h"
 
 #include <platform.h>
@@ -11,6 +10,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
@@ -18,15 +18,16 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/inlines.h"
 #include "it/items/itmariocape.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>
 
 static void setCallbacks(Fighter* fp)
 {
-    if (fp->fv.mr.x223C_capeGObj != NULL) {
+    if (fp->u.mr.x223C_capeGObj != NULL) {
         fp->death2_cb = ftMr_Init_OnTakeDamage;
         fp->take_dmg_cb = ftMr_Init_OnTakeDamage;
     }
@@ -56,10 +57,10 @@ void ftMr_SpecialS_CreateCape(HSD_GObj* gobj)
                             ftParts_GetBoneIndex(fp, FtPart_RThumbNb),
                             sa->specials.cape_kind);
 
-            fp->fv.mr.x223C_capeGObj = cape;
+            fp->u.mr.x223C_capeGObj = cape;
         }
 
-        fp->x1984_heldItemSpec = fp->fv.mr.x223C_capeGObj;
+        fp->x1984_heldItemSpec = fp->u.mr.x223C_capeGObj;
         setCallbacks(fp);
         fp->accessory4_cb = NULL;
     }
@@ -69,7 +70,7 @@ void ftMr_SpecialS_Reset(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMr_SpecialS_ExitHitlag(gobj);
-    fp->fv.mr.x223C_capeGObj = NULL;
+    fp->u.mr.x223C_capeGObj = NULL;
     fp->death2_cb = NULL;
     fp->take_dmg_cb = NULL;
 }
@@ -78,8 +79,8 @@ void ftMr_SpecialS_RemoveCape(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.mr.x223C_capeGObj != NULL) {
-        it_802B2674(fp->fv.mr.x223C_capeGObj);
+    if (fp->u.mr.x223C_capeGObj != NULL) {
+        it_802B2674(fp->u.mr.x223C_capeGObj);
         ftMr_SpecialS_Reset(gobj);
     }
 }
@@ -87,16 +88,16 @@ void ftMr_SpecialS_RemoveCape(HSD_GObj* gobj)
 void ftMr_SpecialS_EnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.mr.x223C_capeGObj != NULL) {
-        it_802B26C0(fp->fv.mr.x223C_capeGObj);
+    if (fp->u.mr.x223C_capeGObj != NULL) {
+        it_802B26C0(fp->u.mr.x223C_capeGObj);
     }
 }
 
 void ftMr_SpecialS_ExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.mr.x223C_capeGObj != NULL) {
-        it_802B26E0(fp->fv.mr.x223C_capeGObj);
+    if (fp->u.mr.x223C_capeGObj != NULL) {
+        it_802B26E0(fp->u.mr.x223C_capeGObj);
     }
 }
 
@@ -228,8 +229,8 @@ void ftMr_SpecialAirS_Phys(HSD_GObj* gobj)
     if (ftcmd_var0_tmp >= 1U) {
         if (ftcmd_var0_tmp == 1U) {
             fp->cmd_vars[0] = 2U;
-            if (!fp->fv.mr.x2238_isCapeBoost) {
-                fp->fv.mr.x2238_isCapeBoost = true;
+            if (!fp->u.mr.x2238_isCapeBoost) {
+                fp->u.mr.x2238_isCapeBoost = true;
                 fp->self_vel.y = sa->specials.vel.y;
             } else {
                 fp->self_vel.y = 0;
@@ -272,7 +273,7 @@ static void collUpdateVars(HSD_GObj* gobj)
     fp->accessory4_cb = ftMr_SpecialS_CreateCape;
 }
 
-static usize_t const transition_flags =
+static size_t const transition_flags =
     Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit | Ft_MF_SkipMatAnim |
     Ft_MF_UpdateCmd | Ft_MF_SkipColAnim | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
     Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
@@ -280,9 +281,8 @@ static usize_t const transition_flags =
 void ftMr_SpecialS_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirS, transition_flags,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftMr_MS_SpecialAirS,
+                                    transition_flags);
     if ((s32) fp->cmd_vars[0] == 1U) {
         fp->cmd_vars[0] = 2U;
     }
@@ -297,10 +297,9 @@ void ftMr_SpecialAirS_AirToGround(HSD_GObj* gobj)
     u8 _[4];
 
     fp = gobj->user_data;
-    fp->fv.mr.x2238_isCapeBoost = false;
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialS, transition_flags,
-                              fp->cur_anim_frame, 1, 0, NULL);
+    fp->u.mr.x2238_isCapeBoost = false;
+    ftCommon_AirToGroundStateChange(gobj, fp, ftMr_MS_SpecialS,
+                                    transition_flags);
 
     collUpdateVars(gobj);
 }

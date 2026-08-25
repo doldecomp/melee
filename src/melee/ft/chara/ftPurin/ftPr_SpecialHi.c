@@ -2,12 +2,14 @@
 
 #include "ftPr_Init.h"
 
-#include <placeholder.h>
-
 #include "forward.h"
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
@@ -19,11 +21,8 @@
 #include "gr/grpstadium.h"
 #include "lb/types.h"
 
-#include <common_structs.h>
 #include <baselib/archive.h>
 #include <baselib/gobj.h>
-#include <baselib/jobj.h>
-#include <baselib/objalloc.h>
 
 static inline void ftPurin_SpecialHi_SetVars(HSD_GObj* gobj)
 {
@@ -40,28 +39,11 @@ static inline void ftPurin_SpecialHi_SetVars(HSD_GObj* gobj)
     }
 }
 
-inline void ftPurin_SpecialHi_SetActionFromFacingDirection(HSD_GObj* gobj,
-                                                           u32 left_id,
-                                                           u32 right_id)
+static inline void
+ftPurin_SpecialHi_SetActionFromFacingDirection(HSD_GObj* gobj, u32 left_id,
+                                               u32 right_id)
 {
     Fighter* fighter = GET_FIGHTER(gobj);
-
-    if (-1 == fighter->facing_dir) {
-        Fighter_ChangeMotionState(gobj, left_id, 0, 0, 1, 0, NULL);
-    } else {
-        Fighter_ChangeMotionState(gobj, right_id, 0, 0, 1, 0, NULL);
-    }
-}
-
-inline void startHi(HSD_GObj* gobj, int left_id, int right_id)
-{
-    Fighter* fighter;
-
-    ftPurin_SpecialHi_SetActionFromFacingDirection(gobj, left_id, right_id);
-
-    ftAnim_8006EBA4(gobj);
-
-    fighter = (Fighter*) HSD_GObjGetUserData(gobj);
 
     if (-1 == fighter->facing_dir) {
         Fighter_ChangeMotionState(gobj, left_id, 0, 0, 1, 0, NULL);

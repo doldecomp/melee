@@ -1,6 +1,4 @@
-#include "gm_1A36.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "db/db.h"
@@ -22,7 +20,7 @@
 
 #include <baselib/forward.h>
 
-#include <dolphin/card/CARDBios.h>
+#include <dolphin/card.h>
 #include <dolphin/dvd.h>
 #include <dolphin/gx.h>
 #include <dolphin/os.h>
@@ -30,13 +28,12 @@
 #include <dolphin/vi.h>
 #include <baselib/controller.h>
 #include <baselib/debug.h>
+#include <baselib/hsd_392C.h>
+#include <baselib/hsd_3933.h>
 #include <baselib/initialize.h>
-#include <baselib/particle.h>
-#include <baselib/rumble.h>
 #include <baselib/sislib.h>
 #include <baselib/video.h>
 
-extern GXRenderModeObj GXNtsc480IntDf;
 extern PadLibData HSD_PadLibData;
 extern s32* seed_ptr;
 
@@ -110,8 +107,7 @@ static void gmMain_8015FDA4(void)
             db_804D6B20 = false;
         }
     } else {
-        HSD_ASSERTMSG(0xD2, DbLevel == DbLKind_NoDebugRom,
-                      "DbLevel == DbLKind_NoDebugRom");
+        HSD_ASSERT(0xD2, DbLevel == DbLKind_NoDebugRom);
         DbLevel = 0;
     }
 }

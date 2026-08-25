@@ -1,11 +1,12 @@
 #include "it/items/itfoods.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "it/items/types.h"
+#include "it/itgroundcoll.h"
+#include "it/itspawn.h"
 #include "sysdolphin/baselib/random.h"
 
 #include <baselib/gobj.h>
@@ -50,10 +51,10 @@ HSD_GObj* it_8028FAF4(Item_GObj* arg0, Vec3* arg1)
 {
     SpawnItem spawn;
     HSD_GObj* gobj;
-    if (it_8026D324(0x12) == 0) {
+    if (it_8026D324(It_Kind_Foods) == 0) {
         return NULL;
     }
-    spawn.kind = 0x12;
+    spawn.kind = It_Kind_Foods;
     spawn.prev_pos = *arg1;
     if (arg0 != NULL) {
         it_8026BB68(arg0, &spawn.pos);
@@ -74,7 +75,7 @@ HSD_GObj* it_8028FAF4(Item_GObj* arg0, Vec3* arg1)
     return gobj;
 }
 
-inline u32 getRandMax(Article* article)
+static inline u32 getRandMax(Article* article)
 {
     itFoodsAttributes* attr = article->x4_specialAttributes;
     return attr->x0;
@@ -123,7 +124,7 @@ void it_8028FCE8(HSD_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     PAD_STACK(12);
-    item->x40_vel.x = item->x40_vel.y = item->x40_vel.z = 0.0F;
+    itResetVelocity(item);
     Item_8026AE84(item, 0x107, 0x7F, 0x40);
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
 }

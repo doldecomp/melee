@@ -1,5 +1,7 @@
 #include "itpikachutjoltair.h"
 
+#include "inlines.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
@@ -15,9 +17,8 @@
 #include "it/items/itpikachutjoltground.h"
 #include "lb/lb_00B0.h"
 
+#include <math.h>
 #include <baselib/jobj.h>
-#include <MSL/math.h>
-#include <MSL/trigf.h>
 
 /* 2B45E8 */ static bool itPikachutjoltair_UnkMotion0_Coll(Item_GObj* gobj);
 
@@ -78,6 +79,8 @@ void it_802B3F88(Item_GObj* gobj, Vec3* pos, CollData* coll, Vec3* vel)
         case It_Kind_Pichu_TJolt_Air:
             Item_8026AF0C(ip, 0x382B6, 127, 64);
             break;
+        default:
+            break;
         }
     }
 }
@@ -90,16 +93,7 @@ Item_GObj* it_802B4224(HSD_GObj* owner, Item_GObj* gobj, Vec3* pos, s32 kind,
     PAD_STACK(8);
 
     spawn.kind = kind;
-    spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = facing_dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = owner;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawnOnPlane(&spawn, owner, pos, facing_dir);
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
         Item* ip = GET_ITEM(item_gobj);
@@ -136,18 +130,6 @@ void it_802B43D0(Item_GObj* gobj, HSD_GObj* owner)
     Item_80268E5C(gobj, 0, 2);
     Item_802694CC(gobj);
     db_80225DD8(gobj, owner);
-}
-
-static inline void itPikachuTJoltAir_Destroy(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    Item_GObj* linked = ip->xDD4_itemVar.pikachujoltair.xDD8;
-
-    it_802725D4(gobj);
-    if (linked != NULL) {
-        it_802B3544(linked);
-        ip->xDD4_itemVar.pikachujoltair.xDD8 = NULL;
-    }
 }
 
 static inline void itPikachuTJoltAir_Anim_Destroy(Item_GObj* gobj)

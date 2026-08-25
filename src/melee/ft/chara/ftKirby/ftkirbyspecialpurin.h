@@ -1,8 +1,6 @@
 #ifndef GALE01_100DE0
 #define GALE01_100DE0
 
-#include <placeholder.h>
-
 #include "ft/forward.h"
 
 /* 100F94 */ void ftKb_SpecialNPr_80100F94(Fighter_GObj* gobj);

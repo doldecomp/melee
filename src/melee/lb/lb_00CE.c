@@ -1,15 +1,14 @@
 #include "lb/lb_00CE.h"
 
-#include "placeholder.h"
+#ifdef MUST_MATCH
+#include <placeholder.h>
+#endif
 
 #include <platform.h>
 
-#include <baselib/forward.h>
-
 #include <math.h>
-#include <math_ppc.h>
-#include <trigf.h>
 
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) M_PI_2;
@@ -23,6 +22,7 @@ static void sdata2_order(void)
     (void) 0.00001f;
     (void) -0.00001f;
 }
+#endif
 
 f32 expf(f32 arg8)
 {

@@ -1,13 +1,14 @@
-{ lib
-, fetchFromGitHub
-, fontconfig
-, pkg-config
-, rustPlatform
-, stdenv
-, srcOnly
+{
+  lib,
+  fetchFromGitHub,
+  fontconfig,
+  pkg-config,
+  rustPlatform,
+  stdenv,
+  srcOnly,
 }:
 
-rustPlatform.buildRustPackage rec {
+rustPlatform.buildRustPackage (finalAttrs: {
   pname = "objdiff";
   version = "3.0.0";
 
@@ -16,7 +17,7 @@ rustPlatform.buildRustPackage rec {
     src = fetchFromGitHub {
       owner = "encounter";
       repo = "objdiff";
-      rev = "v${version}";
+      rev = "v${finalAttrs.version}";
       hash = "sha256-ycO1koQDRA1WlRmLJrI0xxrIdd+v6IfW+JVAg0cuBa0=";
     };
     patches = [
@@ -25,12 +26,14 @@ rustPlatform.buildRustPackage rec {
   };
 
   cargoBuildFlags = [
-    "--workspace" "--exclude objdiff-wasm"
+    "--workspace"
+    "--exclude objdiff-wasm"
+    "--bin objdiff-cli"
   ];
 
-  cargoTestFlags = cargoBuildFlags;
+  cargoTestFlags = finalAttrs.cargoBuildFlags;
 
-  cargoLock.lockFile = "${src}/Cargo.lock";
+  cargoLock.lockFile = "${finalAttrs.src}/Cargo.lock";
   cargoLock.outputHashes = {
     "gimli-0.32.0" = "sha256-a00uNPu3YbP/z8Xx+MilnAvHMVvDGnDbMqNLmovosQQ=";
     "similar-2.7.0" = "sha256-D25BooCa48IGY7FZQoVW2u8U6BVIcGt7eiwmvT8wsKE=";
@@ -47,7 +50,10 @@ rustPlatform.buildRustPackage rec {
   meta = with lib; {
     description = "A local diffing tool for decompilation projects";
     homepage = "https://github.com/encounter/objdiff";
-    license = with licenses; [ asl20 mit ];
+    license = with licenses; [
+      asl20
+      mit
+    ];
     maintainers = with maintainers; [ r-burns ];
   };
-}
+})

@@ -1,8 +1,6 @@
 #ifndef MELEE_FT_CHARA_FTPIKACHU_FORWARD_H
 #define MELEE_FT_CHARA_FTPIKACHU_FORWARD_H
 
-#include <platform.h>
-
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
@@ -34,6 +32,24 @@ static MotionFlags const ftPk_MF_SpecialAirHi =
 
 static MotionFlags const ftPk_MF_SpecialAirS =
     ftPk_MF_SpecialS | Ft_MF_SkipParasol;
+
+static MotionFlags const ftPk_MF_SpecialN_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx;
+
+static MotionFlags const ftPk_MF_SpecialHiStart_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepColAnimHitStatus;
+
+static MotionFlags const ftPk_MF_SpecialHiMove_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_SkipHit;
+
+static MotionFlags const ftPk_MF_SpecialLw_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus;
+
+static MotionFlags const ftPk_MF_SpecialLwHit_Coll =
+    ftPk_MF_SpecialLw_Coll | Ft_MF_SkipHit;
+
+static MotionFlags const ftPk_MF_SpecialLwHitRumble_Coll =
+    ftPk_MF_SpecialLwHit_Coll | Ft_MF_SkipRumble;
 
 typedef enum ftPikachu_MotionState {
     ftPk_MS_SpecialN = ftCo_MS_Count,
@@ -95,5 +111,12 @@ typedef enum ftPk_Submotion {
     ftPk_SM_Count,
     ftPk_SM_SelfCount = ftPk_SM_Count - ftCo_SM_Count,
 } ftPk_Submotion;
+
+enum ftPk_SpecialN_CmdVars {
+    ftPk_SpecialN_Cmd0,
+    ftPk_SpecialN_Cmd1,
+    ftPk_SpecialN_Cmd2,
+    ftPk_SpecialN_Cmd3,
+};
 
 #endif

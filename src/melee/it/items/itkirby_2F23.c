@@ -7,9 +7,7 @@
 #include "it/item.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
-
-#include <MetroTRK/intrinsics.h>
-#include <MSL/math.h>
+#include "lb/lbvector.h"
 
 ItemStateTable it_803F9450[] = {
     { -1, itKirby_2F23_UnkMotion0_Anim, itKirby_2F23_UnkMotion0_Phys,
@@ -81,7 +79,7 @@ static inline void it_802F258C_scale(Item_GObj* gobj, Vec3* offset)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    f32 dist = sqrtf__Ff(SQ(offset->x) + SQ(offset->y) + SQ(offset->z));
+    f32 dist = lbVector_Len(offset);
 
     if (dist < ip->xDD4_itemVar.kirby2f23.x1D0) {
         Vec3 scale;

@@ -7,6 +7,7 @@
 
 #include "baselib/forward.h"
 
+#include "baselib/random.h"
 #include "ft/fighter.h"
 #include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
@@ -18,9 +19,7 @@
 #include "lb/lbvector.h"
 #include "pl/player.h"
 
-#include <common_structs.h>
 #include <dolphin/mtx.h>
-#include <MetroTRK/intrinsics.h>
 
 static inline float my_sqrtf(float x)
 {

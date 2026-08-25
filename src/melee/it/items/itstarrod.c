@@ -1,17 +1,15 @@
 #include "itstarrod.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/it_3F14.h"
 #include "it/item.h"
 #include "it/items/itstarrodstar.h"
+#include "it/itgroundcoll.h"
 
 typedef struct StarRodAttributes {
     int x0;
@@ -60,7 +58,7 @@ void it_802923F8(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     it_8026B390(gobj);
-    ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0f;
+    itResetVelocity(ip);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
@@ -136,9 +134,7 @@ void itStarRod_Logic22_Thrown(Item_GObj* gobj)
 
 void itStarrod_UnkMotion4_Phys(Item_GObj* gobj)
 {
-    ItemAttr* x = GET_ITEM(gobj)->xCC_item_attr;
-    it_80272860(gobj, x->x10_fall_speed, x->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 bool itStarrod_UnkMotion3_Coll(Item_GObj* gobj)
@@ -153,6 +149,7 @@ bool itStarrod_UnkMotion3_Coll(Item_GObj* gobj)
 
 bool itStarRod_Logic22_DmgDealt(Item_GObj* gobj)
 {
+    /// @todo Use #itGetMotionId if it can be made to inline here.
     Item* ip = GET_ITEM(gobj);
     if (ip->msid == 3 || ip->msid == 4) {
         itColl_BounceOffVictim(gobj);
@@ -183,6 +180,7 @@ bool itStarrod_UnkMotion5_Coll(Item_GObj* gobj)
 
 bool itStarRod_Logic22_Clanked(Item_GObj* gobj)
 {
+    /// @todo Use #itGetMotionId if it can be made to inline here.
     Item* ip = GET_ITEM(gobj);
     if (ip->msid == 3 || ip->msid == 4) {
         itColl_BounceOffVictim(gobj);
@@ -197,6 +195,7 @@ bool itStarRod_Logic22_Reflected(Item_GObj* gobj)
 
 bool itStarRod_Logic22_HitShield(Item_GObj* gobj)
 {
+    /// @todo Use #itGetMotionId if it can be made to inline here.
     Item* ip = GET_ITEM(gobj);
     if (ip->msid == 3 || ip->msid == 4) {
         itColl_BounceOffVictim(gobj);

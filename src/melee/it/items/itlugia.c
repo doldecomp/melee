@@ -1,16 +1,16 @@
 #include "itlugia.h"
 
+#include "inlines.h"
 #include "placeholder.h"
 
 #include "ef/eflib.h"
 #include "gr/stage.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/item.h"
-#include "it/itmaplib.h"
+#include "it/itgroundcoll.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
@@ -51,7 +51,7 @@ static inline float my_sqrtf(float x)
     return x;
 }
 
-inline float my_sqrtf_accurate(float x)
+static inline float my_sqrtf_accurate(float x)
 {
     volatile float y;
     if (x > 0.0f) {
@@ -127,8 +127,7 @@ void it_802D1580(Item_GObj* gobj)
     itLugiaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
     ip->xDD4_itemVar.lugia.xE50.x = -attrs->x4;
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool itLugia_UnkMotion2_Anim(Item_GObj* gobj)
@@ -226,8 +225,7 @@ void it_802D1830(Item_GObj* gobj)
     PAD_STACK(16);
 
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     disc = ip->pos.y - ip->xDD4_itemVar.lugia.x64.y;
     x18 = attrs->x18;
     prod = 8.0f * x18;
@@ -251,8 +249,7 @@ bool itLugia_UnkMotion4_Anim(Item_GObj* gobj)
 
     if (!it_80272C6C(gobj)) {
         Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
-        ip->entered_hitlag = efLib_PauseAll;
-        ip->exited_hitlag = efLib_ResumeAll;
+        Item_SetEffectHitlagCallbacks(ip);
     }
 
     return false;
@@ -284,8 +281,7 @@ void it_802D1A44(Item_GObj* gobj)
     Vec3 pos;
 
     Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     ip->xDD4_itemVar.lugia.xE50.y = 1.0f;
     ip->xDD4_itemVar.lugia.xE50.z = 0.7f;
     ip->xDD4_itemVar.lugia.x88 = 0.4f;
@@ -338,7 +334,7 @@ void it_802D1BBC(Item_GObj* gobj)
         if (ip->xDD4_itemVar.lugia.xE50.y >= 1.0) {
             ip->xDD4_itemVar.lugia.xE50.y =
                 (ip->xDD4_itemVar.lugia.xE50.y - 1.0);
-            it_802D1E8C(gobj, 0xC8, attrs->x1C);
+            it_802D1E8C(gobj, It_Kind_Lugia_Aeroblast, attrs->x1C);
             switch (HSD_Randi(3)) {
             case 0:
                 Item_8026AE84(ip, 0x274D, 0x7F, 0x40);
@@ -355,24 +351,19 @@ void it_802D1BBC(Item_GObj* gobj)
         if (ip->xDD4_itemVar.lugia.xE50.z >= 1.0) {
             ip->xDD4_itemVar.lugia.xE50.z =
                 (ip->xDD4_itemVar.lugia.xE50.z - 1.0);
-            it_802D1E8C(gobj, 0xC9, attrs->x24);
+            it_802D1E8C(gobj, It_Kind_Lugia_Aeroblast2, attrs->x24);
         }
 
         if (ip->xDD4_itemVar.lugia.x88 >= 1.0) {
             ip->xDD4_itemVar.lugia.x88 = (ip->xDD4_itemVar.lugia.x88 - 1.0);
-            it_802D1E8C(gobj, 0xCA, attrs->x2C);
+            it_802D1E8C(gobj, It_Kind_Lugia_Aeroblast3, attrs->x2C);
         }
     }
 }
 
 void it_802D1D40(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
-    it_80273670(gobj, 0, 0.0f);
+    Item_EnterAirStateWithHitlagAndStateDesc(gobj);
 }
 
 bool it_802D1DB4(Item_GObj* gobj)
@@ -389,8 +380,7 @@ void it_802D1DD8(Item_GObj* gobj)
         it_80273454(gobj);
         ip = GET_ITEM(gobj);
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-        ip->entered_hitlag = efLib_PauseAll;
-        ip->exited_hitlag = efLib_ResumeAll;
+        Item_SetEffectHitlagCallbacks(ip);
         old_ip->xDD1_flag.b1 = 1;
     }
 }
@@ -470,14 +460,19 @@ void it_802D208C(Item_GObj* gobj)
         }
 
         target = ip->xDD4_itemVar.lugia.x8C;
-        angle = deg_to_rad * new_angle;
+        angle = MTXDegToRad(new_angle);
         target.x += attrs->x3C * cosf(angle);
         target.y += attrs->x3C * sinf(angle);
 
         // permuterslop
         dx = dz = ip->xDD4_itemVar.lugia.x64.x - target.x;
         dy = ip->xDD4_itemVar.lugia.x64.y - target.y;
-        dz = (dz = ip->xDD4_itemVar.lugia.x64.z) - target.z;
+        dz = (
+#ifdef MUST_MATCH
+                 dz =
+#endif
+                     ip->xDD4_itemVar.lugia.x64.z) -
+             target.z;
         {
             f32 dx2 = dx * dx;
             f32 dy2 = dy * dy;
@@ -522,19 +517,14 @@ void it_802D23F4(Item_GObj* gobj)
     ip->xD44_lifeTimer = attrs->x0;
     it_80274740(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     it_8026B3A8(gobj);
 }
 
 bool it_802D246C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    if (ip->xD44_lifeTimer <= 0.0f) {
-        return true;
-    }
-    ip->xD44_lifeTimer -= 1.0f;
-    return false;
+    return Item_TickLifetime(ip);
 }
 
 void it_802D24A0(Item_GObj* gobj)
@@ -544,13 +534,13 @@ void it_802D24A0(Item_GObj* gobj)
     f32 multiplier = 0.0f;
 
     switch (ip->kind) {
-    case 0xC8:
+    case It_Kind_Lugia_Aeroblast:
         multiplier = attrs[1];
         break;
-    case 0xC9:
+    case It_Kind_Lugia_Aeroblast2:
         multiplier = attrs[2];
         break;
-    case 0xCA:
+    case It_Kind_Lugia_Aeroblast3:
         multiplier = attrs[3];
         break;
     default:

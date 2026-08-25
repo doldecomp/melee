@@ -2,15 +2,13 @@
 
 #include "placeholder.h"
 
+#include <baselib/debug.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/inlines.h>
 
 float ftCo_CalcYScaledKnockback(float arg0, float scale, float arg2)
 {
-    /// @todo Convert to @c HSD_ASSERT once a byte-matching form is found.
-    if (scale == 0.0F) {
-        __assert("ftchangeparam.c", 0x1E, "scale != 0.0F");
-    }
+    HSD_ASSERT(0x1E, scale != 0.0F);
     if (arg2 == 0.0F) {
         return arg0;
     }
@@ -34,8 +32,8 @@ void ftCo_800CF6E8(ftCo_DatAttrs* attr, f32 scale)
             attr->mid_walk_point, scale, Fighter_804D6524->x14);
         attr->fast_walk_min = ftCo_CalcYScaledKnockback(
             attr->fast_walk_min, scale, Fighter_804D6524->x18);
-        attr->dash_run_terminal_velocity = ftCo_CalcYScaledKnockback(
-            attr->dash_run_terminal_velocity, scale, Fighter_804D6524->x1C);
+        attr->dash_max_velocity = ftCo_CalcYScaledKnockback(
+            attr->dash_max_velocity, scale, Fighter_804D6524->x1C);
         attr->run_animation_scaling = ftCo_CalcYScaledKnockback(
             attr->run_animation_scaling, scale, Fighter_804D6524->x20);
         attr->jump_startup_time = ftCo_CalcYScaledKnockback(
@@ -44,10 +42,10 @@ void ftCo_800CF6E8(ftCo_DatAttrs* attr, f32 scale)
             attr->jump_v_initial_velocity, scale, Fighter_804D6524->x28);
         attr->hop_v_initial_velocity = ftCo_CalcYScaledKnockback(
             attr->hop_v_initial_velocity, scale, Fighter_804D6524->x2C);
-        attr->grav = ftCo_CalcYScaledKnockback(attr->grav, scale,
-                                               Fighter_804D6524->x30);
-        attr->terminal_vel = ftCo_CalcYScaledKnockback(
-            attr->terminal_vel, scale, Fighter_804D6524->x34);
+        attr->gravity = ftCo_CalcYScaledKnockback(attr->gravity, scale,
+                                                  Fighter_804D6524->x30);
+        attr->terminal_velocity = ftCo_CalcYScaledKnockback(
+            attr->terminal_velocity, scale, Fighter_804D6524->x34);
         attr->air_drift_stick_mul = ftCo_CalcYScaledKnockback(
             attr->air_drift_stick_mul, scale, Fighter_804D6524->x38);
         attr->aerial_drift_base = ftCo_CalcYScaledKnockback(
@@ -68,8 +66,9 @@ void ftCo_800CF6E8(ftCo_DatAttrs* attr, f32 scale)
         attr->item_throw_velocity_multiplier =
             ftCo_CalcYScaledKnockback(attr->item_throw_velocity_multiplier,
                                       scale, Fighter_804D6524->x58);
-        attr->xB4 =
-            ftCo_CalcYScaledKnockback(attr->xB4, scale, Fighter_804D6524->x5C);
+        attr->heavy_throw_velocity_multiplier =
+            ftCo_CalcYScaledKnockback(attr->heavy_throw_velocity_multiplier,
+                                      scale, Fighter_804D6524->x5C);
         cur = &attr->xBC.size;
         *cur = ftCo_CalcYScaledKnockback(*cur, scale, Fighter_804D6524->x60);
         cur = &attr->xDC;
@@ -90,8 +89,8 @@ void ftCo_800CF6E8(ftCo_DatAttrs* attr, f32 scale)
             attr->landingairlw_lag, scale, Fighter_804D6524->x80);
         attr->name_tag_height = ftCo_CalcYScaledKnockback(
             attr->name_tag_height, scale, Fighter_804D6524->x84);
-        attr->x140 = ftCo_CalcYScaledKnockback(attr->x140, scale,
-                                               Fighter_804D6524->x88);
+        attr->screw_attack_launch_velocity = ftCo_CalcYScaledKnockback(
+            attr->screw_attack_launch_velocity, scale, Fighter_804D6524->x88);
         attr->damageicejump_vel_y = ftCo_CalcYScaledKnockback(
             attr->damageicejump_vel_y, scale, Fighter_804D6524->x8C);
         attr->damageicejump_vel_x_mult = ftCo_CalcYScaledKnockback(
@@ -199,15 +198,15 @@ void ftCo_800D105C(Fighter_GObj* fgp)
 
     /// if bunnyhood != NULL
     if (fp->x197C != NULL) {
-        fp->co_attrs.dash_run_acceleration_a *= Fighter_804D6520->x4;
-        fp->co_attrs.dash_run_acceleration_b *= Fighter_804D6520->x8;
-        fp->co_attrs.dash_run_terminal_velocity *= Fighter_804D6520->xC;
+        fp->co_attrs.dash_accel_mul *= Fighter_804D6520->x4;
+        fp->co_attrs.dash_accel_base *= Fighter_804D6520->x8;
+        fp->co_attrs.dash_max_velocity *= Fighter_804D6520->xC;
         fp->co_attrs.jump_h_initial_velocity *= Fighter_804D6520->x10;
         fp->co_attrs.jump_v_initial_velocity *= Fighter_804D6520->x14;
         fp->co_attrs.jump_h_max_velocity *= Fighter_804D6520->x1C;
         fp->co_attrs.hop_v_initial_velocity *= Fighter_804D6520->x18;
-        fp->co_attrs.grav *= Fighter_804D6520->x20;
-        fp->co_attrs.terminal_vel *= Fighter_804D6520->x24;
+        fp->co_attrs.gravity *= Fighter_804D6520->x20;
+        fp->co_attrs.terminal_velocity *= Fighter_804D6520->x24;
         fp->co_attrs.fast_fall_velocity *= Fighter_804D6520->x28;
         fp->co_attrs.ledge_jump_horizontal_velocity *= Fighter_804D6520->x2C;
         fp->co_attrs.ledge_jump_vertical_velocity *= Fighter_804D6520->x30;
@@ -217,8 +216,8 @@ void ftCo_800D105C(Fighter_GObj* fgp)
     if (fp->is_metal) {
         fp->co_attrs.jump_v_initial_velocity *= Fighter_804D651C->x4;
         fp->co_attrs.hop_v_initial_velocity *= Fighter_804D651C->x8;
-        fp->co_attrs.grav *= Fighter_804D651C->xC;
-        fp->co_attrs.terminal_vel *= Fighter_804D651C->x10;
+        fp->co_attrs.gravity *= Fighter_804D651C->xC;
+        fp->co_attrs.terminal_velocity *= Fighter_804D651C->x10;
         fp->co_attrs.fast_fall_velocity *= Fighter_804D651C->x14;
         fp->co_attrs.weight *= Fighter_804D651C->x18;
         fp->co_attrs.ledge_jump_vertical_velocity *= Fighter_804D651C->x1C;
@@ -226,7 +225,7 @@ void ftCo_800D105C(Fighter_GObj* fgp)
     }
 
     if (fp->x2229_b1) {
-        fp->co_attrs.grav *= Fighter_804D6518->x0;
+        fp->co_attrs.gravity *= Fighter_804D6518->x0;
         fp->co_attrs.weight *= Fighter_804D6518->x4;
     }
 

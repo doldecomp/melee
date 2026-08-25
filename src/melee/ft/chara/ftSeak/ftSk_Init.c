@@ -319,9 +319,9 @@ Fighter_CostumeStrings ftSk_Init_CostumeStrings[] = {
 void ftSk_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->fv.sk.x0 = 0;
-    fp->fv.sk.x4 = 0;
-    fp->fv.sk.x8 = 0;
+    fp->u.sk.x0 = 0;
+    fp->u.sk.x4 = 0;
+    fp->u.sk.x8 = 0;
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, -1);
 }
@@ -335,10 +335,10 @@ void ftSk_Init_OnLoad(HSD_GObj* gobj)
 
     PUSH_ATTRS(fp, ftSeakAttributes);
 
-    it_8026B3F8(item_list[0], 79);
-    it_8026B3F8(item_list[1], 80);
-    it_8026B3F8(item_list[2], 85);
-    it_8026B3F8(item_list[3], 97);
+    it_8026B3F8(item_list[0], It_Kind_Seak_NeedleThrow);
+    it_8026B3F8(item_list[1], It_Kind_Seak_NeedleHeld);
+    it_8026B3F8(item_list[2], It_Kind_Seak_Vanish);
+    it_8026B3F8(item_list[3], It_Kind_Seak_Chain);
 }
 
 void ftSk_Init_80110198(HSD_GObj* gobj)
@@ -350,7 +350,7 @@ void ftSk_Init_80110198(HSD_GObj* gobj)
 void ftSk_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.sk.x0 == 6) {
+    if (fp->u.sk.x0 == 6) {
         ftCo_800BFFD0(fp, 86, 0);
     }
 }

@@ -1,8 +1,8 @@
 #ifndef GALE01_2221D8
 #define GALE01_2221D8
 
-#include "gr/types.h"
+#include "gr/forward.h"
 
-/* 3E8FCC */ extern StageData grTMewtwo_803E8FCC;
+/* 3E8FCC */ extern StageData grTMewtwo_StageData;
 
 #endif

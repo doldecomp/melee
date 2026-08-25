@@ -1,22 +1,14 @@
-/**
- * @file lbrefract.c
- * @brief Refraction visual effects using GX indirect textures.
- *
- * Uses reference counting to track active effect users.
- * Supports IA4, IA8, and RGBA8 texture formats.
- */
-
 #include "lbrefract.h"
 
-#include <placeholder.h>
+#include "lbarchive.h"
+#include "types.h"
 
-#include "dolphin/gx/GXEnum.h"
-#include "lb/lbarchive.h"
-#include "lb/types.h"
+#include <placeholder.h>
 
 #include <math.h>
 #include <string.h>
 #include <dolphin/gx/GXBump.h>
+#include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXLighting.h>
 #include <dolphin/gx/GXPixel.h>
@@ -31,13 +23,9 @@
 #include <baselib/memory.h>
 #include <baselib/pobj.h>
 #include <baselib/state.h>
-#include <MetroTRK/intrinsics.h>
 
-extern HSD_DObjInfo hsdDObj;
-extern HSD_PObjInfo hsdPObj;
 extern f32 lbl_803BB0E0[6];
 
-/// @brief Write IA4 texture coordinate to refraction buffer.
 /* 021F34 */ static void
 lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, s32 row, u32 col,
                            u32 arg3, u8 arg4, u8 intensity, u8 alpha);
@@ -50,63 +38,37 @@ lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, s32 row, u32 col,
                                      s32*, s32*, s32*);
 /* 02206C */ static void fn_8002206C(lbRefract_CallbackData*, s32, u32, s32*,
                                      s32*, s32*, s32*);
-/// @brief Display DObj then reset TEV/indirect stages for refraction cleanup.
-/* 022608 */ static void lbRefract_DObjDispReset(HSD_DObj* dobj, Mtx vmtx,
-                                                 Mtx pmtx, u32 rendermode);
-/// @brief Read RGBA8 texture coordinate addresses from refraction buffer.
 /* 022120 */ static void
 lbRefract_ReadTexCoordRGBA8(lbRefract_CallbackData* data, s32 row, u32 col,
                             u32* out_r, u32* out_g, u8* out_b, u8* out_a);
-/* 022DF8 */ static inline float lbRefract_80022DF8(float x);
-/// @brief Initialize refraction callback data for a texture buffer.
-/* 02219C */ s32 lbRefract_8002219C(lbRefract_CallbackData* data, s32 buffer,
-                                    s32 format, s32 width, s32 height);
-
-static void fn_80022650(void);
-static void fn_80022940(void);
-
-struct lbRefract_DataLayout {
-    /* 0x000 */ Mtx texture_mtx;
-    /* 0x030 */ f32 half_mtx[6];
-    /* 0x048 */ HSD_ImageDesc imagedesc0;
-    /* 0x060 */ HSD_TexLODDesc lod0;
-    /* 0x070 */ HSD_TObjDesc tobj0;
-    /* 0x0CC */ HSD_ImageDesc imagedesc1;
-    /* 0x0E4 */ HSD_TexLODDesc lod1;
-    /* 0x0F4 */ HSD_TObjDesc tobj1;
-    /* 0x150 */ char filename[12];
-    /* 0x15C */ char symbol[12];
-    /* 0x168 */ HSD_DObjInfo dobj_info;
-    /* 0x1AC */ HSD_PObjInfo pobj_info;
-    /* 0x1F4 */ char lib_name[24];
-    /* 0x20C */ char dobj_name[16];
-    /* 0x21C */ char pobj_name[16];
-};
-
-extern struct lbRefract_DataLayout lbl_803BB0B0;
+/* 02219C */ static int lbRefract_8002219C(lbRefract_CallbackData* data,
+                                           void* buffer, s32 format, s32 width,
+                                           s32 height);
+/* 022608 */ static void lbRefract_DObjDispReset(HSD_DObj* dobj, Mtx vmtx,
+                                                 Mtx pmtx, u32 rendermode);
+/* 022650 */ static void fn_80022650(void);
+/* 022940 */ static void fn_80022940(void);
 
 struct lbl_804336D0_t {
     int refractionUserCount;
     void* image_ptr;
-    HSD_ImageDesc* unk_8;
-    HSD_TObj** unk_C;
+    HSD_ImageDesc* imagedesc;
+    HSD_TObj** tobj_list;
     Mtx texture_mtx;
 };
-STATIC_ASSERT(sizeof(struct lbl_804336D0_t) == 0x40);
+ASSERT_SIZE(struct lbl_804336D0_t, 0x40);
 
 static struct lbl_804336D0_t lbl_804336D0;
-static u8* skip8_804D63E8;
+static u8* refract_data;
 
-extern float MSL_TrigF_80400770[], MSL_TrigF_80400774[];
-
-#define SIGN_BIT (1 << 31)
-#define BITWISE(f) (*(u32*) &f)
-#define SIGNED_BITWISE(f) ((s32) BITWISE(f))
-#define GET_SIGN_BIT(f) (SIGNED_BITWISE(f) & SIGN_BIT)
-#define BITWISE_PI_2 0x3FC90FDB
-
-#define NAN MSL_TrigF_80400770[0]
-#define INF MSL_TrigF_80400774[0]
+static inline void lbRefract_WriteTexCoord(lbRefract_CallbackData* cb, s32 row,
+                                           u32 col, f32 y, f32 x, f32 param0)
+{
+    u32 y_tex = (u32) (127.0f * (y * param0) + 128.0f);
+    ((void (*)(lbRefract_CallbackData*, s32, s32, s32, s32, u32,
+               u32)) cb->callback0)(cb, row, col, 0, 0, y_tex,
+                                    (u32) (127.0f * (x * param0) + 128.0f));
+}
 
 void lbRefract_80021CE8(void* arg0, s32 arg1)
 {
@@ -119,9 +81,8 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
     f32 dist;
     f32 param0;
     f32* params;
-    volatile f32 sp18;
 
-    PAD_STACK(20);
+    PAD_STACK(12);
 
     param_idx = arg1 * 2;
     x_step = 2.0f / (f32) (u32) (cb->width - 1);
@@ -133,25 +94,29 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
         x = -1.0f;
         for (row = 0; row < (u32) cb->width; row++) {
             if ((dist_sq = x * x + y_sq) > 0.0f) {
+                f32 sqrt_dist;
+                f32* sqrt_dist_ptr = &sqrt_dist;
                 f64 est = __frsqrte((f64) dist_sq);
+                PAD_STACK(4);
                 est = 0.5 * est * -(((f64) dist_sq * (est * est)) - 3.0);
                 est = 0.5 * est * -(((f64) dist_sq * (est * est)) - 3.0);
-                sp18 = (f32) ((f64) dist_sq *
-                              (0.5 * est *
-                               -(((f64) dist_sq * (est * est)) - 3.0)));
-                dist_sq = sp18;
+                *sqrt_dist_ptr =
+                    (f32) ((f64) dist_sq *
+                           (0.5 * est *
+                            -(((f64) dist_sq * (est * est)) - 3.0)));
+                dist_sq = *sqrt_dist_ptr;
             }
             dist = dist_sq;
             if (dist_sq > 1.0f) {
                 dist = 1.0f;
             }
-            params = *(f32**) (skip8_804D63E8 + 4);
+            params = *(f32**) (refract_data + 4);
             param0 = params[param_idx];
             if (param0) {
                 f32 rem;
                 {
-                    f32 abs_dist = __fabsf(dist);
-                    f32 abs_param0 = __fabsf(param0);
+                    f32 abs_dist = fabsf(dist);
+                    f32 abs_param0 = fabsf(param0);
                     if (abs_param0 > abs_dist) {
                         rem = dist;
                     } else {
@@ -163,20 +128,17 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
             } else {
                 param0 = dist;
             }
-            params = *(f32**) (skip8_804D63E8 + 4);
+            params = *(f32**) (refract_data + 4);
             param0 *= params[param_idx + 1];
             if (param0 > 1.0f) {
                 param0 = 1.0f;
             }
-            ((void (*)(lbRefract_CallbackData*, s32, s32, s32, s32, u32,
-                       u32)) cb->callback0)(
-                cb, row, col, 0, 0, (u32) (127.0f * (y * param0) + 128.0f),
-                (u32) (127.0f * (x * param0) + 128.0f));
+            lbRefract_WriteTexCoord(cb, row, col, y, x, param0);
             x += x_step;
         }
         y += y_step;
     }
-    DCFlushRange((void*) cb->buffer, cb->buffer_size);
+    DCFlushRange(cb->buffer, cb->buffer_size);
 }
 
 static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, s32 row,
@@ -210,6 +172,23 @@ static void fn_80021F70(lbRefract_CallbackData* data, s32 row, u32 col, s32 r,
     offset = (row + ((col * 4) & 0xC)) * 2;
     *(u16*) (base + offset) =
         (b >> 3) | ((g * 8 & 0x7E0 & ~0xF800) | ((r << 8) & 0xF800));
+}
+
+static void fn_80021FB4(lbRefract_CallbackData* data, s32 row, u32 col,
+                        u8 arg6, u8 arg7, u8 arg8, u8 arg9)
+{
+    u8* base;
+    s32 offset;
+
+    base = (u8*) data->buffer + ((col >> 2) * data->row_stride) +
+           ((row << 4) & 0xFFFFFFC0);
+    row &= 3;
+    offset = (row + ((col << 2) & 0xC)) * 2;
+    base[offset] = arg9;
+    base += offset;
+    base[1] = arg6;
+    base[0x20] = arg7;
+    base[0x21] = arg8;
 }
 
 static void fn_80021FF8(lbRefract_CallbackData* data, s32 row, u32 col,
@@ -278,23 +257,6 @@ static void fn_8002206C(lbRefract_CallbackData* data, s32 row, u32 col,
     }
 }
 
-static void fn_80021FB4(lbRefract_CallbackData* data, s32 row, u32 col,
-                        u8 arg6, u8 arg7, u8 arg8, u8 arg9)
-{
-    u8* base;
-    s32 offset;
-
-    base = (u8*) data->buffer + ((col >> 2) * data->row_stride) +
-           ((row << 4) & 0xFFFFFFC0);
-    row &= 3;
-    offset = (row + ((col << 2) & 0xC)) * 2;
-    base[offset] = arg9;
-    base += offset;
-    base[1] = arg6;
-    base[0x20] = arg7;
-    base[0x21] = arg8;
-}
-
 static void lbRefract_ReadTexCoordRGBA8(lbRefract_CallbackData* data, s32 row,
                                         u32 col, u32* out_r, u32* out_g,
                                         u8* out_b, u8* out_a)
@@ -310,10 +272,10 @@ static void lbRefract_ReadTexCoordRGBA8(lbRefract_CallbackData* data, s32 row,
         *(u32*) out_a = base[offset];
     }
     if (out_r != NULL) {
-        *(u32*) out_r = (base + offset)[1];
+        *out_r = (base + offset)[1];
     }
     if (out_g != NULL) {
-        *(u32*) out_g = (base + offset)[0x20];
+        *out_g = (base + offset)[0x20];
     }
     if (out_b != NULL) {
         *(u32*) out_b = (base + offset)[0x21];
@@ -327,7 +289,7 @@ static void lbRefract_ReadTexCoordRGBA8(lbRefract_CallbackData* data, s32 row,
 /// @param width Texture width in pixels.
 /// @param height Texture height in pixels.
 /// @return 0 on success, -1 if format is unsupported.
-s32 lbRefract_8002219C(lbRefract_CallbackData* data, s32 buffer, s32 format,
+int lbRefract_8002219C(lbRefract_CallbackData* data, void* buffer, s32 format,
                        s32 width, s32 height)
 {
     data->buffer = buffer;
@@ -359,46 +321,122 @@ s32 lbRefract_8002219C(lbRefract_CallbackData* data, s32 buffer, s32 format,
     return 0;
 }
 
+Mtx texture_mtx = {
+    { +0.5F, +0.0F, +0.0F, +0.5F },
+    { +0.0F, -0.5F, +0.0F, +0.5F },
+    { +0.0F, +0.0F, +0.0F, +1.0F },
+};
+
+float texture_offset[2][3] = {
+    { -0.5F, +0.0F, +0.0F },
+    { +0.0F, -0.5F, +0.0F },
+};
+
+HSD_ImageDesc imagedesc0 = { NULL, 0, 0, 4, 0, 0.0F, 0.0F };
+HSD_TexLODDesc loddesc0 = { 1, 0.0F, 1, 1, 0 };
+
+HSD_TObjDesc tobjdesc0 = {
+    NULL,
+    NULL,
+    0,
+    0,
+    { 0.0F, 0.0F, 0.0F },
+    { 1.0F, 1.0F, 1.0F },
+    { 0.0F, 0.0F, 0.0F },
+    0,
+    0,
+    1,
+    1,
+    0x83,
+    1.0F,
+    1,
+    &imagedesc0,
+    NULL,
+    &loddesc0,
+    NULL,
+};
+
+HSD_ImageDesc imagedesc1 = { NULL, 0, 0, 3, 0, 0.0F, 0.0F };
+HSD_TexLODDesc loddesc1 = { 1, 0.0F, 1, 1, 0 };
+
+HSD_TObjDesc tobjdesc1 = {
+    NULL,
+    &tobjdesc0,
+    1,
+    1,
+    { 0.0F, 0.0F, 0.0F },
+    { 1.0F, 1.0F, 1.0F },
+    { 0.0F, 0.0F, 0.0F },
+    0,
+    0,
+    1,
+    1,
+    0x81,
+    1.0F,
+    1,
+    &imagedesc1,
+    NULL,
+    &loddesc1,
+    NULL,
+};
+
+/// @todo Only differs by register allocation.
 void lbRefract_800222A4(void)
 {
+    int const image_width = 320;
+    int const image_height = 240;
+
+    /// @todo Refactor data members into a struct
+    struct lbRefract_DataLayout {
+        Mtx texture_mtx;
+        f32 texture_offset[6];
+        HSD_ImageDesc imagedesc0;
+        HSD_TexLODDesc lod0;
+        HSD_TObjDesc tobj0;
+        HSD_ImageDesc imagedesc1;
+        HSD_TexLODDesc lod1;
+        HSD_TObjDesc tobj1;
+    };
+
     lbRefract_CallbackData cb;
+    struct lbRefract_DataLayout* data =
+        (struct lbRefract_DataLayout*) &texture_mtx;
+    size_t i;
     void* buf;
-    u32 i;
 
     lbl_804336D0.refractionUserCount = 0;
-    lbArchive_LoadSymbols(lbl_803BB0B0.filename, &skip8_804D63E8,
-                          lbl_803BB0B0.symbol, 0);
+    lbArchive_LoadSymbols("LbRf.dat", &refract_data, "lbRefData", 0);
     {
-        s32 buf_size = GXGetTexBufferSize(0x140, 0xF0, 4, 0, 0);
+        s32 buf_size =
+            GXGetTexBufferSize(image_width, image_height, GX_TF_RGB565, 0, 0);
         lbl_804336D0.image_ptr = HSD_MemAlloc(buf_size);
-        memset((void*) lbl_804336D0.image_ptr, 0, (u32) buf_size);
+        memset(lbl_804336D0.image_ptr, 0, buf_size);
     }
-    lbl_804336D0.unk_C = HSD_MemAlloc(*skip8_804D63E8 * 4);
-    lbl_804336D0.unk_8 = HSD_MemAlloc(*skip8_804D63E8 * 0x18);
+    lbl_804336D0.tobj_list = HSD_MemAlloc(*refract_data * 4);
+    lbl_804336D0.imagedesc = HSD_MemAlloc(*refract_data * 24);
 
-    for (i = 0; i < *skip8_804D63E8; i++) {
-        buf = HSD_MemAlloc(GXGetTexBufferSize(0x20, 0x20, 3, 0, 0));
-        lbRefract_8002219C(&cb, (s32) buf, 3, 0x20, 0x20);
-        lbRefract_80021CE8(&cb, (s32) i);
+    for (i = 0; i < *refract_data; i++) {
+        buf = HSD_MemAlloc(GXGetTexBufferSize(32, 32, GX_TF_IA8, 0, 0));
+        lbRefract_8002219C(&cb, buf, GX_TF_IA8, 32, 32);
+        lbRefract_80021CE8(&cb, i);
 
         {
-            HSD_ImageDesc* dst = &lbl_804336D0.unk_8[i];
-            *dst = lbl_803BB0B0.imagedesc0;
+            HSD_ImageDesc* dst = &lbl_804336D0.imagedesc[i];
+            *dst = data->imagedesc0;
         }
 
-        lbl_803BB0B0.tobj1.imagedesc = &lbl_804336D0.unk_8[i];
+        tobjdesc1.imagedesc = &lbl_804336D0.imagedesc[i];
+        lbl_804336D0.tobj_list[i] = HSD_TObjLoadDesc(&tobjdesc1);
 
-        lbl_804336D0.unk_C[i] = HSD_TObjLoadDesc(&lbl_803BB0B0.tobj1);
+        imagedesc0.image_ptr = lbl_804336D0.image_ptr;
+        imagedesc0.format = GX_TF_RGB565;
+        imagedesc0.width = image_width;
+        imagedesc0.height = image_height;
 
-        lbl_803BB0B0.imagedesc0.image_ptr = (void*) lbl_804336D0.image_ptr;
-        lbl_803BB0B0.imagedesc0.format = 4;
-        lbl_803BB0B0.imagedesc0.width = 0x140;
-        lbl_803BB0B0.imagedesc0.height = 0xF0;
-
-        lbl_804336D0.unk_8[i].image_ptr = buf;
-        lbl_804336D0.unk_8[i].format = 3;
-        lbl_804336D0.unk_8[i].width = 0x20;
-        lbl_804336D0.unk_8[i].height = 0x20;
+        lbl_804336D0.imagedesc[(s32) i].image_ptr = buf;
+        lbl_804336D0.imagedesc[(s32) i].format = GX_TF_IA8;
+        lbl_804336D0.imagedesc[(s32) i].width = 32;
+        lbl_804336D0.imagedesc[(s32) i].height = 32;
     }
 }
 
@@ -440,7 +478,7 @@ void lbRefract_80022560(void)
     if (lbl_804336D0.refractionUserCount != 0) {
         GXSetTexCopySrc(0, 0, 0x280, 0x1E0);
         GXSetTexCopyDst(0x140, 0xF0, 4, 1);
-        GXCopyTex((void*) lbl_804336D0.image_ptr, 0);
+        GXCopyTex(lbl_804336D0.image_ptr, 0);
         GXPixModeSync();
         GXInvalidateTexAll();
     }
@@ -463,35 +501,26 @@ static void lbRefract_DObjDispReset(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx,
     HSD_StateInvalidate(-1);
 }
 
-struct lbRefract_DataLayout lbl_803BB0B0 = {
-    { { 0 } },
-    { 0 },
-    { 0 },
-    { 0 },
-    { 0 },
-    { 0 },
-    { 0 },
-    { 0 },
-    "",
-    "",
-    { fn_80022650 },
-    { fn_80022940 },
-    "refract_class_library",
-    "refract_dobj",
-    "refract_pobj",
-};
+static HSD_DObjInfo dobj_info = { fn_80022650 };
+static HSD_PObjInfo pobj_info = { fn_80022940 };
 
 static void fn_80022650(void)
 {
-    hsdInitClassInfo(HSD_CLASS_INFO(&lbl_803BB0B0.dobj_info),
-                     HSD_CLASS_INFO(&hsdDObj), lbl_803BB0B0.lib_name,
-                     lbl_803BB0B0.dobj_name, sizeof(HSD_DObjInfo),
-                     sizeof(HSD_DObj));
-    lbl_803BB0B0.dobj_info.disp = lbRefract_DObjDispReset;
+    hsdInitClassInfo(HSD_CLASS_INFO(&dobj_info), HSD_CLASS_INFO(&hsdDObj),
+                     "refract_class_library", "refract_dobj",
+                     sizeof(HSD_DObjInfo), sizeof(HSD_DObj));
+    dobj_info.disp = lbRefract_DObjDispReset;
 }
 
 s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
 {
+    u8* display;
+    s32 offset;
+    s32 total_bytes;
+    u8* ptr;
+    s32 hi;
+    s32 copied;
+    s32 count;
     s32 ret;
     HSD_VtxDescList* verts;
     s32 last_offset;
@@ -509,9 +538,9 @@ s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
     }
 
     verts = pobj->verts;
-    last_offset = -1;
-    pnmtx_offset = -1;
     stride = 0;
+    pnmtx_offset = -1;
+    last_offset = -1;
 
     while (verts != NULL && (attr = verts->attr) != GX_VA_NULL) {
         if (attr < GX_VA_CLR0) {
@@ -572,6 +601,8 @@ s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
             case GX_RGBX8:
                 stride += 4;
                 break;
+            default:
+                break;
             }
             break;
         }
@@ -584,97 +615,45 @@ s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
         return 0;
     }
 
-    {
-        u8* display = pobj->display;
-        s32 offset = 0;
-        s32 total_bytes = pobj->n_display << 5;
-        u8* src = display + pnmtx_offset;
-        u8* dst = display + last_offset;
-
-        while (offset < total_bytes) {
-            u8* ptr;
-            s32 hi;
-            s32 count;
-            s32 copied;
-            if ((display[offset++] & 0xF8) == 0) {
-                break;
-            }
-
-            ptr = display + offset;
-            hi = ptr[0];
-            copied = 0;
-            count = ptr[1];
-            offset += 2;
-            count = (count & ~0xFF00) | (hi << 8);
-
-            if (count > 0) {
-                s32 n = count - 8;
-
-                if (count > 8) {
-                    u32 iters = (u32) (n + 7) >> 3U;
-
-                    if (n > 0) {
-                        do {
-                            dst[offset] = src[offset];
-                            offset += stride;
-                            dst[offset] = src[offset];
-                            offset += stride;
-                            dst[offset] = src[offset];
-                            offset += stride;
-                            dst[offset] = src[offset];
-                            offset += stride;
-                            dst[offset] = src[offset];
-                            offset += stride;
-                            dst[offset] = src[offset];
-                            offset += stride;
-                            dst[offset] = src[offset];
-                            offset += stride;
-                            dst[offset] = src[offset];
-                            offset += stride;
-                            copied += 8;
-                        } while (--iters != 0);
-                    }
-                }
-
-                {
-                    u8* sp = src + offset;
-                    u8* dp = dst + offset;
-
-                    if (copied < count) {
-                        s32 remaining = count - copied;
-
-                        do {
-                            *dp = *sp;
-                            sp += stride;
-                            offset += stride;
-                            dp += stride;
-                        } while (--remaining != 0);
-                    }
-                }
-            }
+    display = pobj->display;
+    offset = 0;
+    total_bytes = pobj->n_display << 5;
+    while (offset < total_bytes) {
+        if ((display[offset++] & 0xF8) == 0) {
+            break;
         }
 
-        DCFlushRange(display, total_bytes);
+        ptr = display + offset;
+        hi = ptr[0];
+        count = hi << 8;
+        count |= ptr[1];
+        offset += 2;
+
+        for (copied = 0; copied < count; copied++) {
+            display[offset + last_offset] = display[offset + pnmtx_offset];
+            offset += stride;
+        }
     }
+
+    DCFlushRange(display, total_bytes);
 
     return 0;
 }
 
 static void fn_80022940(void)
 {
-    hsdInitClassInfo(HSD_CLASS_INFO(&lbl_803BB0B0.pobj_info),
-                     HSD_CLASS_INFO(&hsdPObj), lbl_803BB0B0.lib_name,
-                     lbl_803BB0B0.pobj_name, sizeof(HSD_PObjInfo),
-                     sizeof(HSD_PObj));
-    lbl_803BB0B0.pobj_info.load = lbRefract_PObjLoad;
+    hsdInitClassInfo(HSD_CLASS_INFO(&pobj_info), HSD_CLASS_INFO(&hsdPObj),
+                     "refract_class_library", "refract_pobj",
+                     sizeof(HSD_PObjInfo), sizeof(HSD_PObj));
+    pobj_info.load = lbRefract_PObjLoad;
 }
 
 void lbRefract_80022998(HSD_MObj* mobj, u32 rendermode, s32 arg2)
 {
-    unsigned long long write_z;
-    enum _GXCompare compare;
+    u64 write_z;
+    GXCompare compare;
 
-    HSD_TObjSetup(lbl_804336D0.unk_C[arg2]);
+    HSD_TObjSetup(lbl_804336D0.tobj_list[arg2]);
 
     GXSetNumTexGens(2);
     GXSetTexCoordGen2(GX_TEXCOORD0, GX_TG_MTX3x4, GX_TG_NRM, GX_TEXMTX0,
@@ -682,7 +661,7 @@ void lbRefract_80022998(HSD_MObj* mobj, u32 rendermode, s32 arg2)
     GXSetTexCoordGen2(GX_TEXCOORD1, GX_TG_MTX3x4, GX_TG_POS, 0, GX_FALSE,
                       GX_PTTEXMTX1);
 
-    GXLoadTexMtxImm(lbl_803BB0B0.texture_mtx, GX_PTTEXMTX0, GX_MTX3x4);
+    GXLoadTexMtxImm(texture_mtx, GX_PTTEXMTX0, GX_MTX3x4);
     GXLoadTexMtxImm(lbl_804336D0.texture_mtx, GX_PTTEXMTX1, GX_MTX3x4);
 
     GXSetNumChans(0);
@@ -700,7 +679,7 @@ void lbRefract_80022998(HSD_MObj* mobj, u32 rendermode, s32 arg2)
     GXSetNumIndStages(1);
     GXSetIndTexOrder(GX_INDTEXSTAGE0, GX_TEXCOORD0, GX_TEXMAP0);
     GXSetIndTexCoordScale(GX_INDTEXSTAGE0, GX_ITS_1, GX_ITS_1);
-    GXSetIndTexMtx(GX_ITM_0, (f32(*)[3]) lbl_803BB0E0, 1);
+    GXSetIndTexMtx(GX_ITM_0, texture_offset, 1);
 
     GXSetTevIndirect(GX_TEVSTAGE0, GX_INDTEXSTAGE0, write_z, GX_ITB_ST,
                      GX_ITM_0, GX_ITW_OFF, GX_ITW_OFF, (GXBool) 0, (GXBool) 0,
@@ -731,231 +710,10 @@ void lbRefract_80022BB8(void)
 }
 
 /// @brief Decrement refraction effect user count.
-void lbRefract_80022BD0(void)
+void lbRefSetUnuse(void)
 {
     lbl_804336D0.refractionUserCount -= 1;
     if (lbl_804336D0.refractionUserCount < 0) {
         HSD_ASSERTREPORT(0x31c, 0, "lbRefSetUnuse error!\n");
     }
-}
-
-float atan2f(float y, float x)
-{
-    if (GET_SIGN_BIT(x) == GET_SIGN_BIT(y)) {
-        if (GET_SIGN_BIT(x) != 0) {
-            return x == -0.0f ? (float) -M_PI_2 : atanf(y / x) - (float) M_PI;
-        }
-
-        return x ? atanf(y / x) : (float) M_PI_2;
-    }
-
-    if (x < 0.0f) {
-        return (float) M_PI + atanf(y / x);
-    }
-
-    if (x) {
-        return atanf(y / x);
-    }
-
-    *(u32*) &y = GET_SIGN_BIT(y) + BITWISE_PI_2;
-
-    return y;
-}
-
-float acosf(float x)
-{
-    float result = 1.0F - x * x;
-    if (result > 0) {
-        float guess;
-        guess = __frsqrte(result);
-        guess = 0.5f * guess * (3.0f - guess * guess * result);
-        guess = 0.5f * guess * (3.0f - guess * guess * result);
-        guess = 0.5f * guess * (3.0f - guess * guess * result);
-        result = guess;
-    } else if (result) {
-        result = NAN;
-    } else {
-        result = INF;
-    }
-    return (float) M_PI_2 - atanf(x * result);
-}
-
-float asinf(float x)
-{
-    return atanf(x * lbRefract_80022DF8(-(x * x - 1.0f)));
-}
-
-static inline float lbRefract_80022DF8(float x)
-{
-    if (x > 0.0f) {
-        float guess;
-        guess = __frsqrte(x);
-        guess = 0.5f * guess * (3.0f - guess * guess * x);
-        guess = 0.5f * guess * (3.0f - guess * guess * x);
-        guess = 0.5f * guess * (3.0f - guess * guess * x);
-        return guess;
-    }
-
-    if (x) {
-        return NAN;
-    }
-
-    return INF;
-}
-
-#define SILVER_RATIO_1_CONJUGATE lbRefract3_804D7DD4
-
-#define BITWISE_INF 0x7F800000 /* = +Infinity */
-#define BITWISE_0_5 0x3F000000 /* = 0.5f */
-#define BITWISE_1_0 0x3F800000 /* = 1.0f */
-#define BITWISE_2_0 0x40000000 /* = 2.0f */
-
-#define BITWISE_THRESHOLD_0 0x3F08D5B9 /* = 0.534511148929596f */
-#define BITWISE_THRESHOLD_1 0x3F521801 /* = 0.8206787705421448f */
-#define BITWISE_THRESHOLD_2 0x3F9BF7EC /* = 1.218503475189209f */
-#define BITWISE_THRESHOLD_3 0x3FEF789E /* = 1.870868444442749f */
-
-static const float atanf_lookup[] = {
-    1.0,
-    -0.3333333134651184,
-    0.1999988704919815,
-    -0.14281649887561798,
-    0.11041180044412613,
-    -0.08459755778312683,
-    0.04714243486523628,
-    6.828420162200928,
-    3.239828109741211,
-    2.0,
-    1.4464620351791382,
-    1.1715729236602783,
-    1.039566159248352,
-    7.1350000325764995e-06,
-    8.200000252145401e-07,
-    0.0,
-    6.299999881775875e-07,
-    0.0,
-    0.0,
-    0.0,
-    0.3926900029182434,
-    0.5890486240386963,
-    0.7853981256484985,
-    0.9817469716072083,
-    1.1780970096588135,
-    1.3744460344314575,
-    0.0,
-    9.081698408408556e-06,
-    2.3000000126671694e-08,
-    6.30000016599297e-08,
-    7.040000014058023e-07,
-    2.499999993688107e-07,
-    7.900000014160469e-07,
-    2.414212942123413,
-    1.4966057538986206,
-    1.0,
-    0.6681786179542542,
-    0.4142135679721832,
-    0.1989123672246933,
-    5.620000251838064e-07,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-};
-
-float atanf(float x)
-{
-    float const silver_ratio = 2.4142136573791504f;
-    float const silver_ratio_conjugate = 0.4142135679721832f;
-
-    float result;
-    const float* lookup_ptr;
-    s32 lookup_index = -1;
-    bool x_ge_ratio = false;
-    s32 sign_bit_x = BITWISE(x) & SIGN_BIT;
-
-    BITWISE(x) &= ~SIGN_BIT;
-
-    if (x >= silver_ratio) {
-        x_ge_ratio = true;
-        result = 1.0f / x;
-    } else if (silver_ratio_conjugate < x) {
-        lookup_index = 0;
-        switch (BITWISE(x) & BITWISE_INF) {
-        case BITWISE_0_5: {
-            if (!(SIGNED_BITWISE(x) < BITWISE_THRESHOLD_0)) {
-                lookup_index = 1;
-            }
-
-            if (!(SIGNED_BITWISE(x) < BITWISE_THRESHOLD_1)) {
-                lookup_index += 1;
-            }
-
-            break;
-        }
-        case BITWISE_1_0: {
-            lookup_index = 2;
-            if (!(SIGNED_BITWISE(x) < BITWISE_THRESHOLD_2)) {
-                lookup_index = 3;
-            }
-
-            if (!(SIGNED_BITWISE(x) < BITWISE_THRESHOLD_3)) {
-                lookup_index += 1;
-            }
-
-            break;
-        }
-        case BITWISE_2_0: {
-            lookup_index = 4;
-            break;
-        }
-        }
-        {
-            float offset_39;
-            float offset_33;
-            lookup_ptr = &atanf_lookup[lookup_index];
-            offset_39 = lookup_ptr[39];
-            offset_33 = lookup_ptr[33];
-
-            result = 1.0f / (offset_33 + (x + offset_39));
-            result = __fnmsubs(result, lookup_ptr[7], offset_33) +
-                     __fnmsubs(result, lookup_ptr[13], offset_39);
-        }
-    } else {
-        result = x;
-    }
-
-    {
-        float result_squared = result * result;
-        lookup_ptr = &atanf_lookup[lookup_index];
-
-        // clang-format off
-        result = result *
-            result_squared * (
-                result_squared * (
-                    result_squared * (
-                        result_squared * (
-                            result_squared * (
-                                result_squared * (
-                                    atanf_lookup[6]
-                                ) + atanf_lookup[5]
-                            ) + atanf_lookup[4]
-                        ) + atanf_lookup[3]
-                    ) + atanf_lookup[2]
-                ) + atanf_lookup[1]
-            ) + result;
-        // clang-format on
-
-        result += lookup_ptr[27];
-        result += lookup_ptr[20];
-    }
-
-    if (x_ge_ratio) {
-        result -= (float) M_PI_2;
-        return sign_bit_x ? result : -result;
-    }
-
-    BITWISE(result) |= sign_bit_x;
-    return result;
 }

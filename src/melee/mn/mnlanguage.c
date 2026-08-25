@@ -1,3 +1,5 @@
+#include "baselib/gobjuserdata.h"
+
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
@@ -14,7 +16,6 @@
 #include <melee/mn/mnlanguage.h>
 #include <melee/mn/mnmain.h>
 
-extern HSD_Archive* mn_804D6BB8;
 static HSD_GObj* mnLanguage_804D6C50;
 
 struct {
@@ -50,7 +51,7 @@ void mnLanguage_8024BFE0(HSD_GObj* arg0_unused)
     }
     temp_r3 = Menu_GetAllInputs();
     if (temp_r3 & 0x20) {
-        lbAudioAx_80024030(0);
+        sfxBack();
         mn_804A04F0.entering_menu = 0;
         mn_80229894(4, 4, 3);
         return;
@@ -61,14 +62,14 @@ void mnLanguage_8024BFE0(HSD_GObj* arg0_unused)
             lbLang_SetSavedLanguage(temp_r31->x0);
             lb_8001CE00();
             lbAudioAx_80027AB0(0xAD);
-            mn_80229860(1);
+            mn_80229860(GM_MENU);
             mn_8022F1A8(1, 9);
             mn_804A04F0.cur_menu = 4;
             mn_804A04F0.hovered_selection = 4;
         }
     } else if (temp_r31->x2 != 0) {
         if (temp_r3 & 4) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             temp_r31->x0 = temp_r31->x0 == 0 ? 1 : 0;
             lang = temp_r31->x0;
             lb_80011E24(mnLanguage_804D6C50->hsd_obj, &sp2C, 1, -1);
@@ -76,7 +77,7 @@ void mnLanguage_8024BFE0(HSD_GObj* arg0_unused)
             mn_8022F3D8(sp2C, -1, JOBJ_MASK);
             HSD_JObjAnimAll(sp2C);
         } else if (temp_r3 & 8) {
-            lbAudioAx_80024030(2);
+            sfxMove();
             temp_r31->x0 = temp_r31->x0 == 0 ? 1 : 0;
             lang = temp_r31->x0;
             lb_80011E24(GET_JOBJ(mnLanguage_804D6C50), &sp24, 1, -1);
@@ -136,16 +137,17 @@ void fn_8024C2E8(HSD_GObj* gobj)
     }
 }
 
-/// Must not be declared inline, for proper .sdata2 float ordering
-static void Menu_InitCenterText_noinline(Menu* menu, u8 val)
+#ifdef MUST_MATCH
+static void order_sdata2(void)
 {
-    HSD_Text* text =
-        HSD_SisLib_803A5ACC(0, 1, -9.5F, 9.1F, 17.0F, 364.68332F, 38.38772F);
-    menu->text = text;
-    text->font_size.x = 0.0521F;
-    text->font_size.y = 0.0521F;
-    HSD_SisLib_803A6368(text, val);
+    (void) -9.5f;
+    (void) 9.1f;
+    (void) 17.0f;
+    (void) 364.68332f;
+    (void) 38.38772f;
+    (void) 0.0521f;
 }
+#endif
 
 void mnLanguage_8024C3C4(HSD_GObj* arg0_unused)
 {
@@ -172,7 +174,7 @@ void mnLanguage_8024C3C4(HSD_GObj* arg0_unused)
                        mnLanguage_804A08D8.xC);
     HSD_JObjReqAnimAll(jobj, 0.0F);
     HSD_JObjAnimAll(jobj);
-    user_data = HSD_MemAlloc(8);
+    user_data = HSD_MemAlloc(sizeof(*user_data));
     HSD_ASSERTREPORT(0x163, user_data, "Can't get user_data.\n");
     lang = lbLang_GetSavedLanguage();
     user_data->x0 = lang;

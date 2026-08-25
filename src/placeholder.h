@@ -1,10 +1,7 @@
 #ifndef PLACEHOLDER_H
 #define PLACEHOLDER_H
 
-#include <platform.h>
-
 #include <m2c_macros.h> // IWYU pragma: export
-#include <dolphin/os.h>
 
 /// A label in a jump table
 typedef void (*jmp_t)(void);
@@ -12,16 +9,11 @@ typedef void (*jmp_t)(void);
 /// A jump table
 typedef jmp_t jtbl_t[];
 
-#if defined(__clang__) || defined(__GNUC__)
-#define NOT_IMPLEMENTED                                                       \
-    OSPanic(__FILE__, __LINE__, "%s is not implemented!", __func__)
-#elif M2CTX
-#define NOT_IMPLEMENTED
-#elif defined(__MWERKS__) && !defined(BUGFIX)
-#define NOT_IMPLEMENTED asm { nop }
-#else
-#define NOT_IMPLEMENTED                                                       \
-    OSPanic(__FILE__, __LINE__, "Function is not implemented!")
+#ifndef MWERKS_GEKKO
+#define __frsqrte(x) sqrt(x)
+#define sqrtf__Ff(x) sqrtf(x)
+#define sqrtf_accurate(x) sqrtf(x)
+#define __fabs(f) fabsf(f)
 #endif
 
 #ifndef UNK_T
@@ -59,20 +51,6 @@ typedef jmp_t jtbl_t[];
 #define U32_TO_F32 4503599627370496.0
 #define S32_TO_F32 4503601774854144.0
 
-#ifdef MWERKS_GEKKO
-#define ASM asm
-#else
-#define ASM
-#endif
-
-#ifndef UNUSED
-#if defined(__clang__) || defined(__GNUC__)
-#define UNUSED __attribute__((unused))
-#else
-#define UNUSED
-#endif
-#endif
-
 #define PAD_STACK(bytes)                                                      \
     do {                                                                      \
         UNUSED unsigned char _[(bytes)];                                      \
@@ -103,4 +81,5 @@ typedef jmp_t jtbl_t[];
     do {                                                                      \
         UNUSED u64 _0 = 0, _1 = 0, _2 = 0, _3 = 0;                            \
     } while (0)
+
 #endif

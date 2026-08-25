@@ -1,8 +1,10 @@
 
 #include "mem_funcs.h"
 
+#ifdef MUST_MATCH
 #pragma ANSI_strict off
 #pragma defer_codegen on
+#endif
 
 #define cps ((unsigned char*) src)
 #define cpd ((unsigned char*) dst)

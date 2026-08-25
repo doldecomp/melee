@@ -279,11 +279,11 @@ void ftMt_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) gobj->user_data;
     ftParts_80074A4C(gobj, 0, 0);
-    fp->fv.mt.x222C_disableGObj = NULL;
-    fp->fv.mt.x2230_shadowHeldGObj = NULL;
-    fp->fv.mt.x2234_shadowBallCharge = 0;
-    fp->fv.mt.x2238_shadowBallGObj = NULL;
-    fp->fv.mt.x223C_isConfusionBoost = false;
+    fp->u.mt.x222C_disableGObj = NULL;
+    fp->u.mt.x2230_shadowHeldGObj = NULL;
+    fp->u.mt.x2234_shadowBallCharge = 0;
+    fp->u.mt.x2238_shadowBallGObj = NULL;
+    fp->u.mt.x223C_isConfusionBoost = false;
 }
 
 void ftMt_Init_OnLoad(HSD_GObj* gobj)
@@ -336,7 +336,7 @@ void ftMt_Init_UnkMotionStates4(HSD_GObj* gobj)
     ftMewtwoAttributes* da = fp->dat_attrs;
     float attr_value = da->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
 
-    if (fp->fv.mt.x2234_shadowBallCharge == attr_value) {
+    if (fp->u.mt.x2234_shadowBallCharge == attr_value) {
         ftCo_800BFFD0(fp, 92, 0);
     }
 }

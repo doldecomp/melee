@@ -15,8 +15,6 @@
 #include "ft/ftcommon.h"
 #include "ftDonkey/types.h"
 
-#include <common_structs.h>
-
 void ftCo_8009BC58(Fighter_GObj* gobj)
 {
     u8 _[16] = { 0 };

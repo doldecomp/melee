@@ -7,7 +7,7 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
-#include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftcommon.h"
@@ -44,7 +44,7 @@ void ftMh_Squeeze_Anim(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        if (fp->fv.mh.x2250 == ftMh_MS_Throw) {
+        if (fp->u.mh.x2250 == ftMh_MS_Throw) {
             ftMh_MS_376_80154E78(gobj);
         } else {
             ftMh_MS_379_80155014(gobj);

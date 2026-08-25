@@ -14,6 +14,51 @@
 
 #include <math.h>
 
+ItemStateTable ItemStateTable_Flipper[] = {
+    {
+        -1,
+        itFlipper_Resting_Anim,
+        itFlipper_Resting_Phys,
+        itFlipper_Resting_Coll,
+    },
+    {
+        -1,
+        itFlipper_Falling_Anim,
+        itFlipper_Falling_Phys,
+        itFlipper_Falling_Coll,
+    },
+    {
+        -1,
+        itFlipper_Held_Anim,
+        itFlipper_Held_Phys,
+        NULL,
+    },
+    {
+        0,
+        itFlipper_Inflight_Anim,
+        itFlipper_Inflight_Phys,
+        itFlipper_Inflight_Coll,
+    },
+    {
+        -1,
+        itFlipper_Airborne_Anim,
+        itFlipper_Airborne_Phys,
+        itFlipper_Airborne_Coll,
+    },
+    {
+        1,
+        itFlipper_Active_Anim,
+        itFlipper_Spinning_Phys,
+        itFlipper_Spinning_Coll,
+    },
+    {
+        2,
+        itFlipper_Spinning_Anim,
+        itFlipper_Spinning_Phys,
+        itFlipper_Spinning_Coll,
+    },
+};
+
 HSD_GObj* itFlipper_Spawn(HSD_JObj* jobj)
 {
     u8 _pad[8];
@@ -129,7 +174,7 @@ static inline f32 itFlipper_SpinSpeedFromFighter(Item_GObj* gobj,
     ftLib_800866DC(fighter, pos);
     ftLib_80086BEC(fighter, vel);
     return attrs->x18_spinMultiplier *
-           sqrtf__Ff(vel->x * vel->x + vel->y * vel->y);
+           sqrtf(vel->x * vel->x + vel->y * vel->y);
 }
 
 static inline void itFlipper_SpinFromFighter_inline(Item_GObj* gobj, Vec3* vel,
@@ -145,7 +190,7 @@ static inline void itFlipper_SpinFromFighter_inline(Item_GObj* gobj, Vec3* vel,
         }
         ip->xCF4_fighterGObjUnk = NULL;
     }
-    itFlipper_AddSpinImpulse(gobj, pos, deg_to_rad * speed);
+    itFlipper_AddSpinImpulse(gobj, pos, MTXDegToRad(speed));
 }
 
 void itFlipper_SpinFromFighter(Item_GObj* gobj)
@@ -165,7 +210,7 @@ void itFlipper_SpinFromFighter(Item_GObj* gobj)
         }
         ip->xCF4_fighterGObjUnk = NULL;
     }
-    itFlipper_AddSpinImpulse(gobj, &pos, deg_to_rad * speed);
+    itFlipper_AddSpinImpulse(gobj, &pos, MTXDegToRad(speed));
 }
 
 static inline void itFlipper_Repel_inline(Item_GObj* gobj, s32 kind, Vec3* pos,
@@ -174,7 +219,7 @@ static inline void itFlipper_Repel_inline(Item_GObj* gobj, s32 kind, Vec3* pos,
     Item* ip = GET_ITEM(gobj);
     vec->x = vec->y = vec->z = 0.0f;
 
-    if (kind == 0x14) {
+    if (kind == It_Kind_Flipper) {
         vec->x = ip->pos.x - pos->x;
         vec->y = ip->pos.y - pos->y;
         lbVector_NormalizeXY(vec);
@@ -460,7 +505,10 @@ bool itFlipper_DmgDealt(Item_GObj* gobj)
     return false;
 }
 
+#ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
+#endif
 bool itFlipper_Clanked(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
@@ -510,8 +558,10 @@ bool itFlipper_HitShield(Item_GObj* gobj)
     }
     return false;
 }
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
-#pragma dont_inline reset
 bool itFlipper_Reflected(Item_GObj* gobj)
 {
     return it_80273030(gobj);
@@ -535,7 +585,7 @@ static inline void itFlipper_SpinFromFighterRecv(Item_GObj* gobj, Vec3* vel,
         }
         ip->xCEC_fighterGObj = NULL;
     }
-    itFlipper_AddSpinImpulse(gobj, pos, deg_to_rad * speed);
+    itFlipper_AddSpinImpulse(gobj, pos, MTXDegToRad(speed));
 }
 
 bool itFlipper_DmgReceived(Item_GObj* gobj)

@@ -1,23 +1,29 @@
 #include "ftZd_SpecialLw.h"
 
-#include "math.h"
-
 #include <platform.h>
 
-#include "ef/eflib.h"
 #include "ef/efsync.h"
+
+#include "forward.h"
+
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/inlines.h"
 #include "ftSeak/ftSk_SpecialLw.h"
 #include "ftZelda/types.h"
 #include "it/items/itzeldadinfire.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>
 
@@ -33,8 +39,7 @@ void ftZd_SpecialLw_8013ADB4(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     fp->accessory4_cb = NULL;
 }
 
@@ -50,8 +55,7 @@ void ftZd_SpecialLw_8013AE30(HSD_GObj* gobj)
         fp->x2219_b0 = true;
     }
 
-    fp->pre_hitlag_cb = efLib_PauseAll;
-    fp->post_hitlag_cb = efLib_ResumeAll;
+    Fighter_SetEffectHitlagCallbacks(fp);
     fp->accessory4_cb = NULL;
 }
 
@@ -85,7 +89,7 @@ static void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* gobj)
     fp->gr_vel = fp->gr_vel / attributes->x70;
 
     lb_8000B1CC(fp->parts[FtPart_TopN].joint, NULL, &sp20);
-    lb_800119DC(&sp20, 120, 0.4, 0.003, 60 * deg_to_rad);
+    lb_800119DC(&sp20, 120, 0.4, 0.003, MTXDegToRad(60));
 
     fp->accessory4_cb = &ftZd_SpecialLw_8013ADB4;
 }
@@ -196,9 +200,7 @@ void ftZd_SpecialLw_8013B1CC(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 357, 0x0C4C508E, fp->cur_anim_frame, 1.0,
-                              0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, 357, ftZd_MF_SpecialLw_Coll);
     fp->accessory4_cb = &ftZd_SpecialLw_8013ADB4;
 }
 
@@ -208,9 +210,7 @@ void ftZd_SpecialLw_8013B238(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 355, 0x0C4C508E, fp->cur_anim_frame, 1.0,
-                              0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 355, ftZd_MF_SpecialLw_Coll);
     fp->accessory4_cb = &ftZd_SpecialLw_8013ADB4;
 }
 
@@ -286,9 +286,7 @@ void ftZd_SpecialLw_8013B400(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 358, 0x0C4C508E, fp->cur_anim_frame, 1.0,
-                              0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, 358, ftZd_MF_SpecialLw_Coll);
     fp->accessory4_cb = &ftZd_SpecialLw_8013AE30;
 }
 
@@ -299,9 +297,7 @@ void ftZd_SpecialLw_8013B46C(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 356, 0x0C4C508E, fp->cur_anim_frame, 1.0,
-                              0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, 356, ftZd_MF_SpecialLw_Coll);
     fp->accessory4_cb = &ftZd_SpecialLw_8013AE30;
 }
 
@@ -339,7 +335,7 @@ s32 ftZd_SpecialLw_8013B540(HSD_GObj* gobj)
     actionStateIndex = fp->motion_id;
 
     if (((actionStateIndex == 344) || (actionStateIndex == 347)) &&
-        (fp->fv.zd.x222C != 0U))
+        (fp->u.zd.x222C != 0U))
     {
         return 1;
     }
@@ -353,7 +349,7 @@ bool ftZd_SpecialLw_8013B574(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.zd.x222C != 0) {
+    if (fp->u.zd.x222C != 0) {
         switch (fp->motion_id) {
         case 348:
         case 345:
@@ -375,8 +371,8 @@ void ftZd_SpecialLw_8013B5C4(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    if (fp->fv.zd.x222C != 0) {
-        fp->fv.zd.x222C = 0;
+    if (fp->u.zd.x222C != 0) {
+        fp->u.zd.x222C = 0;
     }
 
     fp->death2_cb = 0;
@@ -389,9 +385,9 @@ void ftZd_SpecialLw_8013B5EC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.zd.x222C != NULL) {
-        it_802C3D44(fp->fv.zd.x222C);
-        fp->fv.zd.x222C = NULL;
+    if (fp->u.zd.x222C != NULL) {
+        it_802C3D44(fp->u.zd.x222C);
+        fp->u.zd.x222C = NULL;
     }
 
     fp->death2_cb = 0;

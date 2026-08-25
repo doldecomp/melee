@@ -1,6 +1,5 @@
 #include "ftCo_09F4.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "ft/ftdevice.h"
@@ -73,8 +72,8 @@ void ftCo_8009F5AC(Fighter* fp)
     if (fp->x2221_b3) {
         {
             Vec3 position;
-            float angle_yz = data->x78_light_rot_yz * deg_to_rad;
-            float angle_x = data->x74_light_rot_x * deg_to_rad *
+            float angle_yz = MTXDegToRad(data->x78_light_rot_yz);
+            float angle_x = MTXDegToRad(data->x74_light_rot_x) *
                             HSD_JObjGetRotationY(GET_JOBJ(fp->gobj)) / M_PI_2;
             position.y = -sinf(-angle_yz);
             position.z = cosf(-angle_yz);

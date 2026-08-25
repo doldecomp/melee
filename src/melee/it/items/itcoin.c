@@ -1,7 +1,6 @@
 #include "itcoin.h"
 
 #include "cm/camera.h"
-#include "gm/gm_1A36.h"
 #include "gm/gm_unsplit.h"
 #include "gr/grfigureget.h"
 #include "gr/ground.h"
@@ -9,12 +8,13 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itcoll.h"
 #include "it/itCommonItems.h"
+#include "it/itdraw.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 #include "it/itzako.h"
@@ -159,9 +159,7 @@ void it_802F1630(Item_GObj* gobj)
     PAD_STACK(16);
 
     ip = GET_ITEM(gobj);
-    ip->x40_vel.z = 0.0F;
-    ip->x40_vel.y = 0.0F;
-    ip->x40_vel.x = 0.0F;
+    itResetVelocity(ip);
 
     itCoin_ResetRotation(gobj);
 

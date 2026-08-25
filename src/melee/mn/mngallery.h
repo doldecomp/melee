@@ -4,7 +4,6 @@
 #include <platform.h>
 
 #include <baselib/forward.h>
-#include <melee/sc/forward.h>
 
 #include <baselib/gobj.h>
 

@@ -1,5 +1,4 @@
 #include "ft_0892.h"
-#include "math.h"
 
 #include "ft/fighter.h"
 #include "ft/ftcommon.h"
@@ -16,16 +15,13 @@
 #include "it/items/itpeachparasol.h"
 
 #include <baselib/gobj.h>
-#include <baselib/jobj.h>
-#include <MSL/math_ppc.h>
-#include <MSL/trigf.h>
 
 bool ft_8008A1FC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
     if ((fp->input.lstick.x * fp->facing_dir < 0.0F) ||
-        (ABS(fp->input.lstick.x) < p_ftCommonData->x24))
+        (ABS(fp->input.lstick.x) < p_ftCommonData->walk_stick_threshold))
     {
         return true;
     }
@@ -39,7 +35,7 @@ static inline bool ft_8008A244_inline(Fighter_GObj* gobj)
 
     var_f2 = temp_r4->input.lstick.x;
     if ((var_f2 * temp_r4->facing_dir < 0.0F) ||
-        (ABS(var_f2) < p_ftCommonData->x24))
+        (ABS(var_f2) < p_ftCommonData->walk_stick_threshold))
     {
         return true;
     }
@@ -59,9 +55,9 @@ bool ft_8008A244(Fighter_GObj* gobj)
 /// Seems to be called to end many actions if no frames are remaining
 void ft_8008A2BC(HSD_GObj* gobj)
 {
-    if (ftLib_800872A4(gobj) == FTKIND_MASTERH) {
+    if (ftLib_GetKind(gobj) == FTKIND_MASTERH) {
         ftMh_MS_389_80151018(gobj);
-    } else if (ftLib_800872A4(gobj) == FTKIND_CREZYH) {
+    } else if (ftLib_GetKind(gobj) == FTKIND_CREZYH) {
         ftCh_GrabUnk1_8015BC88(gobj);
     } else {
         ft_8008A348(gobj, 0);

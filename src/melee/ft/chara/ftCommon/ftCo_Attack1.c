@@ -14,6 +14,7 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0CDD.h"
@@ -29,8 +30,6 @@
 #include "ftCommon/types.h"
 #include "ftGameWatch/ftGw_Attack11.h"
 #include "it/it_26B1.h"
-
-#include <common_structs.h>
 
 /* 08AB50 */ static void onPkPc21EC(Fighter_GObj* gobj);
 /* 08AB84 */ static void decideAttack11(Fighter_GObj* gobj);

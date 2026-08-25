@@ -2,7 +2,6 @@
 
 #include "ftCo_Damage.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "ft/fighter.h"
@@ -10,11 +9,9 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 
-#include <common_structs.h>
 #include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
-#include <MSL/trigf.h>
 
 static void inlineA0(Fighter_GObj* gobj)
 {

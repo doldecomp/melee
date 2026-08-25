@@ -3,7 +3,6 @@
 
 #include <placeholder.h>
 
-#include <melee/ft/forward.h>
 #include <melee/gm/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -40,8 +39,8 @@ struct lbl_804D65A8_t;
 /* 171B64 */ void fn_80171B64(struct lbl_804D65A8_t*);
 /* 171BA4 */ int fn_80171BA4(void*);
 /* 171DC4 */ void fn_80171DC4(void);
-/* 1720B4 */ int gm_801720B4(void);
-/* 1720F8 */ int gm_801720F8(void);
+/* 1720B4 */ bool gm_801720B4(void);
+/* 1720F8 */ bool gm_801720F8(void);
 /* 172140 */ int gm_80172140(UNK_PARAMS);
 /* 172174 */ UNK_RET gm_80172174(UNK_PARAMS);
 /* 17219C */ bool gm_8017219C(u32);
@@ -84,8 +83,8 @@ struct lbl_804D65A8_t;
 /* 172FAC */ bool fn_80172FAC(void);
 /* 173098 */ u8 fn_80173098(int);
 /* 173224 */ u8 gm_80173224(int, int);
-/* 1732D8 */ CharacterKind gm_801732D8(u8);
-/* 17335C */ int gm_8017335C(void);
+/* 1732D8 */ u8 gm_801732D8(u8);
+/* 17335C */ u16 gm_8017335C(void);
 /* 1733D8 */ u8 gm_801733D8(void);
 /* 17341C */ u16 gm_8017341C(void);
 /* 173460 */ u8 gm_80173460(s8);
@@ -95,7 +94,7 @@ struct lbl_804D65A8_t;
 /* 1735F0 */ bool fn_801735F0(void);
 /* 173644 */ bool fn_80173644(void);
 /* 17367C */ bool fn_8017367C(void);
-/* 1736DC */ lbl_8046DBD8_t* gm_801736DC(void);
+/* 1736DC */ lbl_8046DBD8_t* gm_GetChallengerData(void);
 /* 1736E8 */ void gm_801736E8(u8, u8, u8, u8, u8, u8);
 /* 173754 */ bool gm_80173754(u8, u8);
 /* 1737D8 */ u8 gm_801737D8(void);

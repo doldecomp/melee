@@ -1,9 +1,6 @@
 #include "ftCo_Barrel.h"
 
-#include "ftCo_CaptureCut.h"
 #include "ftCo_Throw.h"
-
-#include <placeholder.h>
 
 #include "ft/fighter.h"
 
@@ -17,7 +14,6 @@
 
 #include "ftCommon/forward.h"
 
-#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_Damage.h"
 #include "ftCommon/ftCo_Lift.h"
 #include "ftCommon/inlines.h"
@@ -105,7 +101,7 @@ void ftCo_Barrel_Accessory1_Cb(Fighter_GObj* gobj)
 void fn_800C9290(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_GObj* owner = it_8026BC78(fp->mv.co.barrel.x8);
+    Fighter_GObj* owner = itGetOwner(fp->mv.co.barrel.x8);
     if (ftLib_80086960(owner)) {
         ftColl_8007B8CC(fp, owner);
     }

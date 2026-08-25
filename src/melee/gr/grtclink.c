@@ -1,19 +1,17 @@
 #include "grtclink.h"
 
-#include "gr/grdisplay.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/types.h"
-#include "lb/lbspdisplay.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
+
+#include "lb/lb_00F9.h"
 #include "lb/types.h"
 
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-static StageCallbacks grTCLink_803E86D0[] = {
+static StageCallbacks grTCLink_StageCallbacks[] = {
     {
         grTCLink_802200D0,
         grTCLink_802200FC,
@@ -35,18 +33,12 @@ static StageCallbacks grTCLink_803E86D0[] = {
         grTCLink_80220198,
         (1 << 30) | (1 << 31),
     },
-    {
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        0,
-    },
+    { 0 },
 };
 
-StageData grTCLink_803E872C = {
-    TCLINK,
-    grTCLink_803E86D0,
+StageData grTCLink_StageData = {
+    Gr_Kind_TClink,
+    grTCLink_StageCallbacks,
     "/GrTCl.dat",
     grTCLink_8021FF48,
     grTCLink_8021FF44,
@@ -56,31 +48,18 @@ StageData grTCLink_803E872C = {
     grTCLink_80220218,
     grTCLink_80220220,
     (1 << 0),
+    NULL,
+    0,
 };
 
-void grTCLink_8021FF44(bool unused)
-{
-    return;
-}
+void grTCLink_8021FF44(bool unused) {}
 
 void grTCLink_8021FF48(void)
 {
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-
-    grTCLink_8021FFE8(0);
-    grTCLink_8021FFE8(1);
-    grTCLink_8021FFE8(2);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    Ground_801C4210();
-    Ground_801C42AC();
+    Ground_InitTargetStage(grTCLink_8021FFE8);
 }
 
-void grTclink_UnkStage0_OnLoad(void)
-{
-    return;
-}
+void grTclink_UnkStage0_OnLoad(void) {}
 
 void grTclink_UnkStage0_OnStart(void)
 {
@@ -95,7 +74,7 @@ bool grTCLink_8021FFE0(void)
 HSD_GObj* grTCLink_8021FFE8(int id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grTCLink_803E86D0[id];
+    StageCallbacks* callbacks = &grTCLink_StageCallbacks[id];
 
     gobj = Ground_GetStageGObj(id);
 
@@ -119,24 +98,13 @@ bool grTCLink_802200FC(Ground_GObj* gobj)
     return false;
 }
 
-void grTCLink_80220104(Ground_GObj* gobj)
-{
-    return;
-}
+void grTCLink_80220104(Ground_GObj* gobj) {}
 
-void grTCLink_80220108(Ground_GObj* gobj)
-{
-    return;
-}
+void grTCLink_80220108(Ground_GObj* gobj) {}
 
 void grTCLink_8022010C(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
-    PAD_STACK(8);
-
-    Ground_801C2ED0(joint, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTCLink_8022015C(Ground_GObj* gobj)
@@ -150,19 +118,11 @@ void grTCLink_80220164(Ground_GObj* gobj)
     Ground_801C2FE0(gobj);
 }
 
-void grTCLink_80220198(Ground_GObj* gobj)
-{
-    return;
-}
+void grTCLink_80220198(Ground_GObj* gobj) {}
 
 void grTCLink_8022019C(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
-    PAD_STACK(8);
-
-    Ground_801C2ED0(joint, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, false);
+    Ground_JObjInline1(gobj);
 }
 
 bool grTCLink_802201EC(Ground_GObj* gobj)
@@ -175,10 +135,7 @@ void grTCLink_802201F4(Ground_GObj* gobj)
     Ground_801C2FE0(gobj);
 }
 
-void grTCLink_80220214(Ground_GObj* gobj)
-{
-    return;
-}
+void grTCLink_80220214(Ground_GObj* gobj) {}
 
 DynamicsDesc* grTCLink_80220218(enum_t unused)
 {

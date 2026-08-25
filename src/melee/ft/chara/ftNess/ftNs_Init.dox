@@ -1,4 +1,4 @@
-/// @file
+/// @file melee/ft/chara/ftNess/ftNs_Init.h
 /// @todo Fix formatting
 
 extern MotionState ftNs_Init_MotionStateTable[];

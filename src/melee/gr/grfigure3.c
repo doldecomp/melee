@@ -1,22 +1,17 @@
 #include "grfigure3.h"
 
+#include "granime.h"
+#include "ground.h"
+#include "grzakogenerator.h"
+#include "inlines.h"
+#include "types.h"
+
 #include <platform.h>
 
-#include "gr/granime.h"
-#include "gr/grdisplay.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
-#include "gr/types.h"
-
-#include "lb/forward.h"
-
-#include "lb/lbspdisplay.h"
+#include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 static void grFigure3_8020E504(bool number);
@@ -40,7 +35,7 @@ static void grFigure3_8020E784(Ground_GObj*);
 static DynamicsDesc* grFigure3_8020E788(enum_t);
 static bool grFigure3_8020E790(Vec3* vector, int number, HSD_JObj* jobj);
 
-static StageCallbacks grEF2_803E63D8[3] = {
+static StageCallbacks grEF2_StageCallbacks[3] = {
     { grFigure3_8020E690, grFigure3_8020E6BC, grFigure3_8020E6C4,
       grFigure3_8020E6C8, 0UL },
     { grFigure3_8020E6CC, grFigure3_8020E6F8, grFigure3_8020E700,
@@ -49,9 +44,9 @@ static StageCallbacks grEF2_803E63D8[3] = {
       grFigure3_8020E784, 0UL }
 };
 
-StageData grEF2_803E6420 = {
-    FIGURE3,
-    grEF2_803E63D8,
+StageData grEF3_StageData = {
+    Gr_Kind_Figure3,
+    grEF2_StageCallbacks,
     "/GrEF3.dat",
     grFigure3_8020E508,
     grFigure3_8020E504,
@@ -65,15 +60,13 @@ StageData grEF2_803E6420 = {
     0UL,
 };
 
-void* grEF2_804D6A80;
-
-extern StageInfo stage_info;
+static void* yakumono_param;
 
 static void grFigure3_8020E504(bool number) {}
 
 static void grFigure3_8020E508(void)
 {
-    grEF2_804D6A80 = Ground_801C49F8();
+    yakumono_param = Ground_GetYakumonoParam();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grFigure3_8020E5A8(0);
@@ -98,7 +91,7 @@ static bool grFigure3_8020E5A0(void)
 static HSD_GObj* grFigure3_8020E5A8(int gobj_id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grEF2_803E63D8[gobj_id];
+    StageCallbacks* callbacks = &grEF2_StageCallbacks[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
@@ -147,11 +140,7 @@ static void grFigure3_8020E724(Ground_GObj* arg0) {}
 
 static void grFigure3_8020E728(Ground_GObj* gobj)
 {
-    u8 _[8];
-
-    Ground* gp = gobj->user_data;
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 static bool grFigure3_8020E778(Ground_GObj* arg0)

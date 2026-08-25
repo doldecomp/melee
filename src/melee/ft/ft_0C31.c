@@ -1,42 +1,25 @@
 #include "ft_0C31.h"
 
 #include "ft_081B.h"
-#include "ft_0852.h"
 #include "ftcommon.h"
 
 #include <placeholder.h>
 
-#include "cm/camera.h"
 #include "ef/efasync.h"
-#include "ft/chara/ftKirby/ftkirby.h"
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
 
-#include "ft/ftanim.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
 
-#include "ftCommon/ftCo_Damage.h"
-#include "ftCommon/ftCo_DamageFall.h"
-#include "ftCommon/ftCo_DownBound.h"
-#include "ftCommon/ftCo_Lift.h"
-#include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/types.h"
-#include "ftKirby/ftkirby.h"
-#include "it/it_26B1.h"
-#include "it/items/itgreatfoxlaser.h"
-#include "it/items/itleadead.h"
-#include "it/items/itlikelike.h"
 #include "lb/lbaudio_ax.h"
-#include "lb/lbcollision.h"
-#include "mp/mpcoll.h"
 #include "pl/player.h"
 
-#include <trigf.h>
 #include <dolphin/mtx.h>
 #include <baselib/dobj.h>
 #include <baselib/jobj.h>

@@ -7,9 +7,9 @@
 #include <melee/it/forward.h>
 #include <melee/mn/forward.h>
 
-/* 16AE38 */ lbl_8046B6A0_t* gm_8016AE38(void);
-/* 16AE44 */ lbl_8046B6A0_t* gm_8016AE44(void);
-/* 16AE50 */ struct StartMeleeRules* gm_8016AE50(void);
+/* 16AE38 */ lbl_8046B6A0_t* gm_16AE_GetUnkData_0(void);
+/* 16AE44 */ lbl_8046B6A0_t* gm_16AE_GetUnkData_1(void);
+/* 16AE50 */ struct StartMeleeRules* gm_GetRules(void);
 /* 16AE60 */ UNK_T fn_8016AE60(void);
 /* 16AE80 */ bool gm_8016AE80(void);
 /* 16AE94 */ f32 gm_8016AE94(void);
@@ -53,7 +53,7 @@
 /* 16B3A0 */ bool gm_8016B3A0(void);
 /* 16B3D8 */ bool gm_8016B3D8(void);
 /* 16B41C */ bool gm_8016B41C(void);
-/* 16B498 */ bool gm_8016B498(void);
+/* 16B498 */ bool gm_IsCurrently1PMode(void);
 /* 16B4BC */ bool fn_8016B4BC(void);
 /* 16B510 */ bool fn_8016B510(void);
 /* 16B558 */ int gm_8016B558(void);
@@ -77,12 +77,11 @@
 /* 16C35C */ MatchOutcome gm_GetMatchOutcome(void);
 /* 16C46C */ void fn_8016C46C(int);
 /* 16C4F4 */ void fn_8016C4F4(struct lbl_8046B6A0_24C_t*);
-/* 16C5C0 */ bool gm_8016C5C0(int pl_slot);
+/* 16C5C0 */ int gm_8016C5C0(int pl_slot);
 /* 16C658 */ int gm_8016C658(int);
 
 /// @todo should take Fighter_GObj*? See ftCo_800A53DC
 /* 16C6C0 */ /* static */ s32 gm_8016C6C0(Item_GObj*);
-/* 16C6C0 */ s32 gm_8016C6C0(Item_GObj*);
 /* 16C75C */ /* static */ int gm_8016C75C(HSD_GObj*);
 /* 16C7D0 */ void fn_8016C7D0(HSD_GObj*);
 /* 16C7F0 */ void fn_8016C7F0(void);

@@ -9,12 +9,13 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
-#include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/inlines.h"
 
 #include "ftKirby/forward.h"
 
@@ -23,11 +24,12 @@
 #include "it/items/itkirbygamewatchchefpan.h"
 #include "lb/lb_00B0.h"
 
-#include <common_structs.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
-#include <MSL/math.h>
+
+static MotionFlags const ftKb_MF_GwSpecialN_Coll =
+    ftCommon_GroundAirColl_MF | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit;
 
 /* 10CE5C */ static void fn_8010CE5C(Fighter_GObj* gobj);
 /* 10CFB0 */ static void fn_8010CFB0(Fighter_GObj* gobj);
@@ -72,8 +74,7 @@ void fn_8010CE5C(Fighter_GObj* gobj)
                                 fp = gobj->user_data;
                                 pSausage = sausageCount;
                                 for (i = 5, i -= 5; i < 5; i++) {
-                                    if (i != fp->fv.kb.xD4 &&
-                                        i != fp->fv.kb.xD8)
+                                    if (i != fp->u.kb.xD4 && i != fp->u.kb.xD8)
                                     {
                                         *pSausage++ = i;
                                         var_r28++;
@@ -83,11 +84,12 @@ void fn_8010CE5C(Fighter_GObj* gobj)
                                     int temp_r5 =
                                         sausageCount[HSD_Randi(var_r28)];
                                     int var_r6;
-                                    fp->fv.kb.xD8 = fp->fv.kb.xD4;
+                                    fp->u.kb.xD8 = fp->u.kb.xD4;
                                     var_r6 = temp_r5;
-                                    fp->fv.kb.xD4 = temp_r5;
-                                    it_802C837C(gobj, &vec0, 0x9B, var_r6,
-                                                fp2->facing_dir);
+                                    fp->u.kb.xD4 = temp_r5;
+                                    it_802C837C(gobj, &vec0,
+                                                It_Kind_Kirby_GameWatchChef,
+                                                var_r6, fp2->facing_dir);
                                 }
                             }
                         }
@@ -105,9 +107,9 @@ void fn_8010CFB0(Fighter_GObj* gobj)
     Vec3 pos;
     lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_LThumbNb)].joint,
                 NULL, &pos);
-    fp->fv.kb.xDC = it_802C74D8(
+    fp->u.kb.xDC = it_802C74D8(
         gobj, &pos, ftParts_GetBoneIndex(fp, FtPart_LThumbNb), fp->facing_dir);
-    if (fp->fv.kb.xDC != NULL) {
+    if (fp->u.kb.xDC != NULL) {
         fp->death2_cb = ftKb_Init_800EE74C;
         fp->take_dmg_cb = ftKb_Init_800EE7B8;
     }
@@ -120,14 +122,14 @@ void ftKb_SpecialNGw_8010D074(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_SpecialNGw_8010D130(gobj);
-    fp->fv.kb.xDC = NULL;
+    fp->u.kb.xDC = NULL;
 }
 
 void ftKb_SpecialNGw_8010D0A8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.kb.xDC != NULL) {
-        it_802C760C(fp->fv.kb.xDC);
+    if (fp->u.kb.xDC != NULL) {
+        it_802C760C(fp->u.kb.xDC);
         ftKb_SpecialNGw_8010D074(gobj);
     }
 }
@@ -135,16 +137,16 @@ void ftKb_SpecialNGw_8010D0A8(Fighter_GObj* gobj)
 void fn_8010D100(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.kb.xDC != NULL) {
-        it_802C7658(fp->fv.kb.xDC);
+    if (fp->u.kb.xDC != NULL) {
+        it_802C7658(fp->u.kb.xDC);
     }
 }
 
 void ftKb_SpecialNGw_8010D130(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.kb.xDC != NULL) {
-        it_802C7678(fp->fv.kb.xDC);
+    if (fp->u.kb.xDC != NULL) {
+        it_802C7678(fp->u.kb.xDC);
     }
 }
 
@@ -160,7 +162,7 @@ bool ftKb_SpecialNGw_8010D160(Fighter_GObj* gobj)
 }
 
 /// #ftGameWatch_SpecialN_SetVars with callback arg
-inline void setGwVars(HSD_GObj* fighter_gobj)
+static inline void setGwVars(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->cmd_vars[0] = 0;
@@ -287,9 +289,8 @@ void ftKb_GwSpecialAirN_Coll(Fighter_GObj* gobj)
 void ftKb_SpecialNGw_8010D580(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_GwSpecialAirN, 0x0C4C508C,
-                              fp->cur_anim_frame, 1.0F, 0.0F, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftKb_MS_GwSpecialAirN,
+                                    ftKb_MF_GwSpecialN_Coll);
 
     fp = GET_FIGHTER(gobj);
     fp->accessory4_cb = fn_8010CE5C;
@@ -298,9 +299,8 @@ void ftKb_SpecialNGw_8010D580(Fighter_GObj* gobj)
 void ftKb_SpecialNGw_8010D5F0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_GwSpecialN, 0x0C4C508C,
-                              fp->cur_anim_frame, 1.0F, 0.0F, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftKb_MS_GwSpecialN,
+                                    ftKb_MF_GwSpecialN_Coll);
 
     fp = GET_FIGHTER(gobj);
     fp->accessory4_cb = fn_8010CE5C;

@@ -33,7 +33,7 @@ static s32 lightmask_alpha;
 
 u32 HSD_LObjGetFlags(HSD_LObj* lobj)
 {
-    return (lobj) ? lobj->flags : 0;
+    return lobj ? lobj->flags : 0;
 }
 
 void HSD_LObjSetFlags(HSD_LObj* lobj, u32 flags)
@@ -381,7 +381,11 @@ static void setup_spec_lightobj(HSD_LObj* lobj, Mtx mtx, s32 spec_id)
         GXInitLightColor(&lobj->spec_lightobj, lobj->color);
         lobj->shininess = 50.0F;
 
-        x = x = lobj->shininess;
+        x =
+#ifdef MUST_MATCH
+            x =
+#endif
+                lobj->shininess;
 
         x *= 0.5F;
         GXInitLightAttn(&lobj->spec_lightobj, 0.0F, 0.0F, 1.0F, x, 0.0F,
@@ -649,7 +653,7 @@ void HSD_LObjDeleteCurrent(HSD_LObj* lobj)
     }
 }
 
-inline void LObjRemoveAll(void)
+static inline void LObjRemoveAll(void)
 {
     int i;
     for (i = 0; i < MAX_GXLIGHT; i++) {
@@ -682,7 +686,7 @@ void HSD_LObjSetCurrentAll(HSD_LObj* lobj)
     HSD_LObjAddCurrent(lobj);
 }
 
-inline void LObjReplaceAll(HSD_LObj* lobj)
+static inline void LObjReplaceAll(HSD_LObj* lobj)
 {
     int i;
     HSD_LObj* cur;

@@ -24,36 +24,20 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
-#include <common_structs.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 0.0f;
     (void) S32_TO_F32;
-    (void) .5;  // 40 08 00 ..
-    (void) 3.0; // 4f e0 00..
+    (void) .5;
+    (void) 3.0;
     (void) -1.0f;
     (void) +1.0f;
 }
-
-// moved here for linking purposes
-extern double __frsqrte(double);
-
-extern inline float sqrtf(float x)
-{
-    volatile float y;
-    if (x > 0.0f) {
-        double guess = __frsqrte((double) x); // returns an approximation to
-        guess = .5 * guess * (3.0 - guess * guess * x); // now have 12 sig bits
-        guess = .5 * guess * (3.0 - guess * guess * x); // now have 24 sig bits
-        guess = .5 * guess * (3.0 - guess * guess * x); // now have 32 sig bits
-        y = (float) (x * guess);
-        return y;
-    }
-    return x;
-}
+#endif
 
 typedef float (*KirbyVelocityFunc)(Fighter_GObj* gobj, Vec3* victim_self_vel,
                                    float victim_facing_dir);
@@ -66,12 +50,12 @@ FighterKind ftCo_800BD9E0(Fighter_GObj* gobj, Fighter_GObj* victim_gobj)
     FighterKind victim_kind = victim_fp->kind;
     if (victim_kind == FTKIND_KIRBY) {
         ftCo_800BDA50(victim_gobj);
-        return victim_fp->fv.kb.hat.kind;
+        return victim_fp->u.kb.hat.kind;
     }
     if ((unsigned) (victim_kind - FTKIND_BOY) <= 1 ||
         victim_kind == FTKIND_SANDBAG)
     {
-        return fp->fv.kb.hat.kind;
+        return fp->u.kb.hat.kind;
     }
     if (victim_kind == FTKIND_NANA) {
         victim_kind = FTKIND_POPO;
@@ -82,7 +66,7 @@ FighterKind ftCo_800BD9E0(Fighter_GObj* gobj, Fighter_GObj* victim_gobj)
 void ftCo_800BDA50(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.kb.hat.kind != FTKIND_KIRBY) {
+    if (fp->u.kb.hat.kind != FTKIND_KIRBY) {
         /// @todo Which @c mv is this?
         fp->mv.co.thrownkirby.x18_b1 = true;
     }
@@ -128,14 +112,18 @@ static inline void inlineB2(Fighter_GObj* gobj, Fighter_GObj* thrower_gobj,
     fp->mv.co.thrownkirby.x4 =
         vel_func(thrower_gobj, &fp->self_vel, fp->facing_dir);
     Fighter_UpdateModelScale(gobj);
-    // TODO inline this to HSD_JObjGetScale someway
+/// @todo inline this to ::HSD_JObjGetScale someway
+#ifdef MUST_MATCH
     if (jobj == NULL) {
-        __assert("jobj.h", 0x337, "jobj");
+        __assert("jobj.h", 823, "jobj");
     }
     if (&fp->mv.co.thrownkirby.scale == NULL) {
-        __assert("jobj.h", 0x338, "scale");
+        __assert("jobj.h", 824, "scale");
     }
     fp->mv.co.thrownkirby.scale = jobj->scale;
+#else
+    HSD_JObjGetScale(jobj, &fp->mv.co.thrownkirby.scale);
+#endif
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_SkipThrowException, 0.0f, 1.0f,
                               0.0f, thrower_gobj);
     fp->take_dmg_2_cb = ftCo_800BE7C0;
@@ -296,11 +284,11 @@ void ftCo_800BE494(Fighter_GObj* gobj)
             fp->self_vel.x = self_vel.x * (fp->self_vel.x < 0 ? -1 : +1);
         }
     } else if (fp->kind == FTKIND_KIRBY && fp->mv.co.thrownkirby.x18_b1 &&
-               !fp->fv.kb.hat.x8_b0)
+               !fp->u.kb.hat.x8_b0)
     {
-        ftKb_SpecialN_800F190C(gobj, fp->fv.kb.hat.kind);
-        ftKb_SpecialN_800EEEC4(gobj, fp->fv.kb.hat.kind);
-        fp->fv.kb.hat.kind = FTKIND_KIRBY;
+        ftKb_SpecialN_800F190C(gobj, fp->u.kb.hat.kind);
+        ftKb_SpecialN_800EEEC4(gobj, fp->u.kb.hat.kind);
+        fp->u.kb.hat.kind = FTKIND_KIRBY;
     }
     fp->mv.co.thrownkirby.x10 = ftKb_SpecialN_800F5A98();
     ftCommon_InitGrab(fp, 0, fp->mv.co.thrownkirby.x10);

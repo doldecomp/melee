@@ -5,8 +5,8 @@
 
 #include "baselib/objalloc.h"
 
+#include <math.h>
 #include <dolphin/mtx.h>
-#include <MSL/math.h>
 
 #define VEC2_SQ_LEN(v) ((SQ((v).x) + SQ((v).y)))
 #define VEC3_SQ_LEN(v) ((SQ((v).x) + SQ((v).y) + SQ((v).z)))
@@ -57,9 +57,8 @@ static inline void HSD_MtxSetColVec(MtxPtr mtx, int col, Vec3* vec)
 
 static inline f32 HSD_MtxColMag(MtxPtr mtx, int col)
 {
-    return sqrtf__Ff((mtx[0][col] * mtx[0][col]) +
-                     (mtx[1][col] * mtx[1][col]) +
-                     (mtx[2][col] * mtx[2][col]));
+    return sqrtf((mtx[0][col] * mtx[0][col]) + (mtx[1][col] * mtx[1][col]) +
+                 (mtx[2][col] * mtx[2][col]));
 }
 
 #endif

@@ -1,12 +1,12 @@
 #include "ftCo_Down.h"
 
 #include "ftCo_DownAttack.h"
-#include "math.h"
 
 #include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0DF1.h"
 #include "ft/ftanim.h"

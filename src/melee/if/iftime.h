@@ -1,8 +1,6 @@
 #ifndef MELEE_IF_TIME_H
 #define MELEE_IF_TIME_H
 
-#include <placeholder.h>
-
 #include <baselib/forward.h>
 
 /* 2F3AE8 */ void ifTime_SetTime(HSD_JObj*, int, int);

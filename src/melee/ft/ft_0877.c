@@ -56,7 +56,7 @@ bool ft_800878BC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->item_gobj != NULL) && (it_8026B2B4(fp->item_gobj) == 1)) {
+    if ((fp->item_gobj != NULL) && (itIsHeavy(fp->item_gobj) == 1)) {
         return true;
     }
 
@@ -124,7 +124,7 @@ bool ft_80087A18(HSD_GObj* gobj)
     if ((fp->x2226_b4) &&
         ((var1 = ftCo_800C06B4(fp), ((var1 == 0x7B) != 0)) ||
          (var1 == 0x80)) &&
-        ((fp->x2226_b5)))
+        (fp->x2226_b5))
     {
         return true;
     }
@@ -250,7 +250,7 @@ s32 ft_80087C1C(void)
 
     for (gobj = HSD_GObj_Entities->fighters; gobj != 0; gobj = gobj->next) {
         ftKind = (GET_FIGHTER(gobj))->kind;
-        if (ftKind < 27) {
+        if (ftKind < FTKIND_MASTERH) {
             result = result | 1 << ftKind;
         }
     }
@@ -374,6 +374,8 @@ s32 ft_80087D0C(Fighter* fighter, s32 sfx_id)
             {
                 sfx -= 0x66;
             }
+            break;
+        default:
             break;
         }
     }

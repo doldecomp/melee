@@ -1,15 +1,10 @@
 #ifndef GALE01_2107DC
 #define GALE01_2107DC
 
-#include <placeholder.h>
-#include <platform.h>
-
-#include "baselib/forward.h"
-
-#include "it/inlines.h"
+#include "gr/forward.h"
+#include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-#include <baselib/gobj.h>
 
 /* 2107DC */ void grOldPupupu_802107DC(bool);
 /* 2107E0 */ void grOldPupupu_802107E0(void);
@@ -57,5 +52,6 @@
 /* 211C9C */ void grOldPupupu_80211C9C(Ground_GObj*);
 /* 211CA0 */ DynamicsDesc* grOldPupupu_80211CA0(enum_t);
 /* 211CA8 */ bool grOldPupupu_80211CA8(Vec3*, int, HSD_JObj*);
+/* 3E6748 */ extern StageData grOp_StageData;
 
 #endif

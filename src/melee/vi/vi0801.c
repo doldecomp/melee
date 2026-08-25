@@ -10,6 +10,8 @@
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "it/item.h"
+#include "lb/lb_00F9.h"
+#include "lb/lb_013B.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbspdisplay.h"
@@ -88,8 +90,7 @@ void vi0801_8031EE84(void)
 
         for (j = 0; j < 23; j++) {
             if (i == un_80400128[j][0]) {
-                lb_80011E24(jobj, (HSD_JObj**) &un_804A2EA8[j],
-                            un_80400128[j][1], -1);
+                lb_80011E24(jobj, (&un_804A2EA8[j]), un_80400128[j][1], -1);
             }
         }
     }
@@ -148,11 +149,11 @@ void vi0801_OnEnter(void* unused)
     lb_8000FCDC();
     mpColl_80041C78();
     Ground_801C0378(0x40);
-    Stage_802251E8(0x49, 0);
+    Stage_802251E8(St_Kind_BigBlueRoute, 0);
     Item_80266FA8();
     Item_80266FCC();
     Stage_8022524C();
-    Stage_8022532C(0x49, 0);
+    Stage_8022532C(St_Kind_BigBlueRoute, 0);
 
     gobj = GObj_Create(0xB, 3, 0);
     fog = HSD_FogLoadDesc(un_804D6FB8->fogs->desc);

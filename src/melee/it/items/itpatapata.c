@@ -9,18 +9,17 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/items/itnokonoko.h"
+#include "it/itgroundcoll.h"
 #include "it/ithitbox.h"
 #include "it/itmaplib.h"
 #include "it/itzako.h"
 #include "lb/lb_00B0.h"
 #include "mp/mpcoll.h"
-#include "MSL/math.h"
 
 #include <baselib/jobj.h>
 #include <baselib/random.h>
@@ -552,7 +551,7 @@ Item_GObj* it_802E16F8(s32 arg0, Vec3* pos, s32 facing)
     Item* ip;
     s32 coll_facing;
     Vec3 vel = { 0 };
-    Item_GObj* gobj = it_8027B5B0(0xD4, pos, NULL, &vel, 1);
+    Item_GObj* gobj = it_8027B5B0(It_Kind_Patapata, pos, NULL, &vel, 1);
     PAD_STACK(8);
 
     if (gobj != NULL) {

@@ -5,7 +5,7 @@
 /// @todo Circular dependency
 #include "controller.h" // IWYU pragma: keep
 
-#include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os.h>
 #include <dolphin/pad.h>
 
 extern PadLibData HSD_PadLibData;

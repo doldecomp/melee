@@ -4,6 +4,7 @@
 #include "ef/forward.h"
 #include <baselib/forward.h>
 
+#include <stdarg.h>
 #include <dolphin/mtx.h>
 
 typedef struct EF_ParamEntry {
@@ -11,7 +12,7 @@ typedef struct EF_ParamEntry {
     /* 0x4 */ u16 gfx_id;
     /* 0x6 */ u16 alpha;
 } EF_ParamEntry; /* size = 0x8 */
-STATIC_ASSERT(sizeof(EF_ParamEntry) == 0x8);
+ASSERT_SIZE(EF_ParamEntry, 0x8);
 
 /* 05B4B8 */ void efLib_Init(void);
 /* 05B704 */ void efLib_SetFlags(HSD_GObj* gobj, s32 expires);

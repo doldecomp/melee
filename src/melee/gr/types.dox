@@ -1,0 +1,7 @@
+/// @file melee/gr/types.h
+
+/** @var Ground::GroundVars::taru
+ * Japanese for "barrel," from #grKongo_801D828C and #grOldKongo_802105C8
+ * asserts.
+ * @alias{oldkongo}
+ */

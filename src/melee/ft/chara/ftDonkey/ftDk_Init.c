@@ -585,7 +585,7 @@ Fighter_CostumeStrings ftDk_Init_CostumeStrings[] = {
 void ftDk_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->fv.dk.x222C = 0;
+    fp->u.dk.x222C = 0;
     ftParts_80074A4C(gobj, 0, 0);
 }
 
@@ -619,7 +619,7 @@ void ftDk_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* da = fp->dat_attrs;
-    if (fp->fv.dk.x222C == da->SpecialN.x2C_MAX_ARM_SWINGS) {
+    if (fp->u.dk.x222C == da->SpecialN.x2C_MAX_ARM_SWINGS) {
         ftCo_800BFFD0(fp, 57, 0);
     }
 }

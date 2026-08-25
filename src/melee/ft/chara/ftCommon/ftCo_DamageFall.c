@@ -7,9 +7,7 @@
 #include "ftCo_HammerWait.h"
 #include "ftCo_ItemThrow.h"
 #include "ftCo_SpecialAir.h"
-#include "math.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
 #include "ft/fighter.h"
@@ -39,11 +37,13 @@ static u16 calcShift(float hitlag_mul, FtMotionId msid, int dmg)
     return fcp->x168 * ftCommon_CalcHitlag(dmg, msid, hitlag_mul) + fcp->x16C;
 }
 
-void ftCo_80090594(Fighter* fp, enum_t element, int dmg, FtMotionId msid,
+void ftCo_80090594(Fighter* fp, HitElement element, int dmg, FtMotionId msid,
                    GroundOrAir ground_or_air, float hitlag_mul)
 {
     FtMotionId motion_id = msid;
-    if (element == 10 || element == 12 || element == 6 || element == 7) {
+    if (element == HitElement_Cape || element == HitElement_Disable ||
+        element == HitElement_Nap || element == HitElement_Sleep)
+    {
         return;
     }
     if (fp->motion_id == ftCo_MS_DamageIce) {
@@ -53,7 +53,7 @@ void ftCo_80090594(Fighter* fp, enum_t element, int dmg, FtMotionId msid,
     fp->dmg.x18fa_model_shift_frames = calcShift(hitlag_mul, motion_id, dmg);
     fp->dmg.x18FC = 0;
 
-    if (element == 2) {
+    if (element == HitElement_Electric) {
         fp->dmg.x18F8 = 2;
     } else if (ground_or_air == GA_Air) {
         fp->dmg.x18F8 = 0;
@@ -99,15 +99,15 @@ void ftCo_80090780(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Ground) {
-        ftCommon_8007D5D4((Fighter*) fp);
+        ftCommon_8007D5D4(fp);
     }
     if (ftGetParasolStatus(gobj) != -1) {
         ftCo_800CF4DC(gobj);
     } else {
         Fighter_ChangeMotionState(gobj, 0x26, 0x18001U, 0.0f, 1.0f, 0.0f,
                                   NULL);
-        ftCommon_ClampAirDrift((Fighter*) fp);
-        ftCommon_8007EBAC((Fighter*) fp, 8U, 0U);
+        ftCommon_ClampAirDrift(fp);
+        ftCommon_8007EBAC(fp, 8U, 0U);
     }
 }
 

@@ -4,14 +4,18 @@
 
 #include "ef/efsync.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
-#include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_Wait.h"
+#include "ftCommon/inlines.h"
 #include "ftMario/types.h"
 #include "it/items/itdrmariopill.h"
 #include "it/items/itmariofireball.h"
@@ -20,11 +24,14 @@
 #include <dolphin/mtx.h>
 #include <baselib/random.h>
 
-static int pickMegavitamin(Fighter* fp, int* arr, int outpos)
+static MotionFlags const ftMr_MF_SpecialN_Coll =
+    Ft_MF_SkipColAnim | Ft_MF_UpdateCmd;
+
+static int pickMegavitamin(Fighter* fp, const int* arr, int outpos)
 {
     int result = arr[HSD_Randi(outpos)];
-    fp->fv.mr.x2230_vitaminPrev = fp->fv.mr.x222C_vitaminCurr;
-    fp->fv.mr.x222C_vitaminCurr = result;
+    fp->u.mr.x2230_vitaminPrev = fp->u.mr.x222C_vitaminCurr;
+    fp->u.mr.x222C_vitaminCurr = result;
     return result;
 }
 
@@ -38,8 +45,7 @@ int ftMr_SpecialN_VitaminRandom(HSD_GObj* gobj)
     fp = gobj->user_data;
 
     for (i = r3 = 0; i < 9; i++) {
-        if (i != fp->fv.mr.x222C_vitaminCurr &&
-            i != fp->fv.mr.x2230_vitaminPrev)
+        if (i != fp->u.mr.x222C_vitaminCurr && i != fp->u.mr.x2230_vitaminPrev)
         {
             arr[r3] = i;
             r3++;
@@ -166,10 +172,8 @@ void ftMr_SpecialAirN_Coll(HSD_GObj* gobj)
 void ftMr_SpecialN_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirN,
-                              (Ft_MF_UpdateCmd | Ft_MF_SkipColAnim),
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_GroundToAirStateChange(gobj, fp, ftMr_MS_SpecialAirN,
+                                    ftMr_MF_SpecialN_Coll);
 
     fp->accessory4_cb = ftMr_SpecialN_ItemFireSpawn;
 }
@@ -177,10 +181,8 @@ void ftMr_SpecialN_GroundToAir(HSD_GObj* gobj)
 void ftMr_SpecialAirN_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialN,
-                              (Ft_MF_UpdateCmd | Ft_MF_SkipColAnim),
-                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_AirToGroundStateChange(gobj, fp, ftMr_MS_SpecialN,
+                                    ftMr_MF_SpecialN_Coll);
 
     fp->accessory4_cb = ftMr_SpecialN_ItemFireSpawn;
 }

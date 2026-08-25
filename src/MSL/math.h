@@ -3,41 +3,16 @@
 
 #include <platform.h>
 
+#ifdef MWERKS_GEKKO
+#include <math_ppc.h>
 #include <MetroTRK/intrinsics.h>
+#endif
 
 #define MSL_HI(x) *(int*) &x
 #define MSL_LO(x) *(1 + (int*) &x)
 
 #define M_PI 3.14159265358979323846
-#define M_TAU 6.283185307179586
 #define M_PI_2 (M_PI / 2)
-#define M_PI_3 (M_PI / 3)
-
-#define M_PI_F 3.14159265358979323846F
-#define M_TAU_F 6.283185307179586F
-#define M_PI_2_F (M_PI_F / 2.0F)
-#define M_PI_3_F (M_PI_F / 3.0F)
-
-#define M_PI_L 3.14159265358979323846L
-#define M_TAU_L 6.283185307179586L
-#define M_PI_2_L (M_PI_L / 2.0L)
-#define M_PI_3_L (M_PI_L / 3.0L)
-
-#define SIGNF(x) ((x) > 0.0f ? 1.0f : -1.0f)
-
-static float const deg_to_rad = M_PI / 180;
-static float const rad_to_deg = 180 / M_PI;
-
-#ifdef __MWERKS__
-#pragma push
-#pragma cplusplus on
-#endif
-
-#define FLT_EPSILON 1.00000001335e-10F
-
-#ifdef __MWERKS__
-#pragma pop
-#endif
 
 enum FloatType {
     FP_NAN = 1,
@@ -84,21 +59,41 @@ static inline s32 __fpclassifyd(double x)
     ((sizeof(x) == sizeof(float)) ? __fpclassifyf((float) (x))                \
                                   : __fpclassifyd((double) (x)))
 
-#define ABS(x) ((x) < 0 ? -(x) : (x))
-
+#ifdef MWERKS_GEKKO
+#define fabsf __fabsf
 static inline double fabs(double f)
 {
     return __fabs(f);
 }
+#endif
 
+double fabs(double);
 double frexp(double x, int* exponent);
-float fabsf__Ff(float);
-float tanf(float x);
+float acosf(float);
+float asinf(float);
+float atan2f(float y, float x);
+float atanf(float);
 float cos__Ff(float x);
-float sin__Ff(float x);
-float cosf(float x);
-float sinf(float x);
-void __sinit_trigf_c(void);
+float cosf(float);
+float expf(float);
+float fabsf(float);
+float fabsf__Ff(float);
 float logf(float);
+float sin__Ff(float x);
+float sinf(float);
+float sqrt(double);
+float sqrtf(float);
+void __sinit_trigf_c(void);
+
+static inline float fmodf(float a, float b)
+{
+    long long quotient;
+
+    if (fabsf(b) > fabsf(a)) {
+        return a;
+    }
+    quotient = a / b;
+    return a - b * quotient;
+}
 
 #endif

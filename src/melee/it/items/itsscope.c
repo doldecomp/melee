@@ -1,5 +1,6 @@
 #include "itsscope.h"
 
+#include "inlines.h"
 #include "itsscopebeam.h"
 
 #include <placeholder.h>
@@ -8,12 +9,11 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/it_3F14.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 
 #define GET_ATTRS(ip)                                                         \
     ((itSScopeAttributes*) (ip)->xC4_article_data->x4_specialAttributes)
@@ -36,15 +36,7 @@ HSD_GObj* it_80291BE0(Vec3* arg0)
     Item_GObj* gobj;
 
     spawn.kind = It_Kind_S_Scope;
-    spawn.prev_pos = *arg0;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = -1.0f;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
-    spawn.x0_parent_gobj = NULL;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    Item_InitSpawn(&spawn, NULL, arg0, -1.0f);
     gobj = Item_80268B5C(&spawn);
     if (gobj != NULL) {
         it_80292030(gobj);
@@ -78,25 +70,6 @@ s32 it_80291CF4(Item_GObj* gobj, s32 arg1)
         return arg1 / 8;
     }
     return 9;
-}
-
-static inline s32 it_80291D38_attr(s32 charge_level, itSScopeAttributes* attrs)
-{
-    switch (charge_level) {
-    case 0:
-        return attrs->xC[0];
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 8:
-        return attrs->xC[charge_level];
-    case 9:
-        return attrs->xC[9];
-    }
 }
 
 s32 it_80291D38(Item_GObj* gobj, s32 charge_level)
@@ -170,11 +143,6 @@ void it_80291F14(Item_GObj* gobj, int charge_level)
     if (ip->xD4C < 0) {
         ip->xD4C = 0;
     }
-}
-
-static s32 it_80291D38_outline(Item_GObj* gobj, int charge_level)
-{
-    return it_80291D38(gobj, charge_level);
 }
 
 void it_80291FA8(Item_GObj* gobj, Vec3* pos, int charge_level, float scale)
@@ -255,9 +223,7 @@ void itSScope_Logic21_Thrown(Item_GObj* gobj)
 
 void itSscope_UnkMotion3_Phys(Item_GObj* gobj)
 {
-    ItemAttr* temp_r4 = (GET_ITEM(gobj))->xCC_item_attr;
-    it_80272860(gobj, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
-    it_80274658(gobj, it_804D6D28->x68_float);
+    Item_ApplyFallingPhysics(gobj);
 }
 
 bool itSScope_Logic21_DmgDealt(Item_GObj* gobj)

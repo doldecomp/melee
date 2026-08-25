@@ -1,25 +1,11 @@
 #ifndef GALE01_1FDFF8
 #define GALE01_1FDFF8
 
-#include <placeholder.h>
-
 #include "gr/forward.h"
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-
-typedef struct grKr_804D6A08_t {
-    u32 map_time_min;
-    u32 map_time_max;
-    s32 map_time_acl;
-    float map_rot_spd_min;
-    float map_rot_spd_max;
-    u32 kraid_wait_time;
-    u32 kraid_wait_time_add;
-    float kraid_pos_x[6];
-
-} grKr_804D6A08_t;
 
 /* 1FDFF8 */ void grKraid_OnDemoInit(bool);
 /* 1FDFFC */ void grKraid_OnInit(void);
@@ -54,5 +40,6 @@ typedef struct grKr_804D6A08_t {
 /* 1FF150 */ void grKraid_801FF150(Ground_GObj*);
 /* 1FF154 */ DynamicsDesc* grKraid_OnTouchLine(enum_t);
 /* 1FF15C */ bool grKraid_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
+/* 3E4D0C */ extern StageData grKr_StageData;
 
 #endif

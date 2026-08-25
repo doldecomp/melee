@@ -23,7 +23,6 @@
 #include "pl/types.h"
 
 #include <dolphin/mtx.h>
-#include <dolphin/os.h>
 #include <baselib/debug.h>
 #include <baselib/gobjplink.h>
 #include <baselib/objalloc.h>
@@ -82,7 +81,7 @@ ftMapping ftMapping_list[CHKIND_MAX] = { //////ftMapping_list
 };
 
 ////.bss
-StaticPlayer player_slots[PL_SLOT_MAX];
+StaticPlayer player_slots[Gm_Player_NumMax];
 HSD_ObjAllocData Player_AllocData;
 
 pl_804D6470_t* pl_804D6470;
@@ -96,7 +95,7 @@ static inline bool hasExtraFighterId(ftMapping* data)
 
 static inline void Player_CheckSlot(int slot)
 {
-    if (slot < 0 || !(slot < PL_SLOT_MAX)) {
+    if (slot < 0 || !(slot < Gm_Player_NumMax)) {
         HSD_ASSERTREPORT(102, 0, "cant get player struct! %d\n", slot);
     }
 }
@@ -226,7 +225,7 @@ void Player_80031AD0(int slot)
 
     // the commented line below makes more sense, but is off by one byte.
     // temp_vec = unused_ptr = ftMapping_list;
-    offset_arr = (s8*) (&ftMapping_list[0].extra_internal_id);
+    offset_arr = (&ftMapping_list[0].extra_internal_id);
 
     if (offset_arr[player->player_character * sizeof(ftMapping)] != -1) {
         player->flags.b2 = true;
@@ -1682,11 +1681,7 @@ u8 Player_GetFlagsAEBit1(s32 slot)
     return bit1;
 }
 
-#ifdef BUGFIX
-void Player_SetFlagsAEBit1(int slot, u8 bit1)
-#else
 u8 Player_SetFlagsAEBit1(int slot, u8 bit1)
-#endif
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);
@@ -1786,7 +1781,7 @@ FighterKind Player_80036394(s32 slot)
     entity = player->player_entity[player->transformed[0]];
 
     if (entity) {
-        return ftLib_800872A4(entity);
+        return ftLib_GetKind(entity);
     }
     return -1;
 }
@@ -1897,7 +1892,7 @@ bool Player_800368F8(int slot)
     return ftLib_80086BB4(player->player_entity[player->transformed[0]]);
 }
 
-void Player_80036978(s32 slot, s32 arg1)
+void Player_80036978(s32 slot, Vec3* pos)
 {
     StaticPlayer* player;
 
@@ -1906,9 +1901,7 @@ void Player_80036978(s32 slot, s32 arg1)
     Player_CheckSlot(slot);
     player = &player_slots[slot];
 
-    /// @todo Eliminate cast.
-    ftLib_80086B90(player->player_entity[player->transformed[0]],
-                   (Vec3*) arg1);
+    ftLib_80086B90(player->player_entity[player->transformed[0]], pos);
 }
 
 void Player_InitOrResetPlayer(s32 slot)
@@ -1925,7 +1918,7 @@ void Player_InitOrResetPlayer(s32 slot)
     player = &player_slots[slot];
 
     player->player_state = 0;
-    player->player_character = 8;
+    player->player_character = CKIND_MARIO;
     transformed0 = &player->transformed[0];
     transformed1 = &player->transformed[1];
 
@@ -2041,7 +2034,7 @@ void Player_InitAllPlayers(void)
     plStale_InitAttackInstance();
     plAttack_80037590();
 
-    for (i = 0; i < PL_SLOT_MAX; i++) {
+    for (i = 0; i < Gm_Player_NumMax; i++) {
         Player_InitOrResetPlayer(i);
         pl_8003891C(i);
     }

@@ -1,13 +1,13 @@
 #include "itkamex.h"
 
-#include "ef/eflib.h"
+#include "inlines.h"
+
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_279C.h"
 #include "it/item.h"
-#include "it/itmaplib.h"
+#include "it/itgroundcoll.h"
 #include "lb/lbaudio_ax.h"
 
 #include <baselib/jobj.h>
@@ -64,8 +64,7 @@ void it_802CA58C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool it_802CA5D8(Item_GObj* gobj)
@@ -106,15 +105,13 @@ void it_802CA6A0(Item_GObj* gobj)
         ip->xDD4_itemVar.pokemon.x6C = attrs->x1C;
     }
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
     ip->on_accessory = it_802CA8DC;
 }
 
 bool itKamex_UnkMotion1_Anim(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
-    PAD_STACK(8);
 
     if (!it_80272C6C(gobj)) {
         if (ip->xDD4_itemVar.pokemon.timer <= 0) {
@@ -170,8 +167,7 @@ void it_802CA938(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool itKamex_UnkMotion2_Anim(Item_GObj* gobj)
@@ -203,11 +199,7 @@ bool itKamex_UnkMotion2_Coll(Item_GObj* gobj)
 
 void it_802CAA40(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    it_802762BC(ip);
-    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_EnterAirStateWithHitlag(gobj, 3);
 }
 
 bool itKamex_UnkMotion3_Anim(Item_GObj* gobj)
@@ -246,7 +238,7 @@ void it_802CAB10(Item_GObj* gobj)
     spawn.vel.x = attrs->x14 * ip->facing_dir;
     spawn.vel.y = 0.0f;
     spawn.vel.z = 0.0f;
-    spawn.kind = Pokemon_Kamex_HydroPump;
+    spawn.kind = It_Kind_Kamex_HydroPump;
     ip->xDD4_itemVar.pokemon.x64 ^= 1;
     spawn.x0_parent_gobj = ip->owner;
     spawn.x4_parent_gobj2 = (HSD_GObj*) gobj;
@@ -303,8 +295,7 @@ void it_802CADF0(Item_GObj* gobj)
 
     it_8027ADEC(0x46A, gobj, jobj, 1.2f);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->entered_hitlag = efLib_PauseAll;
-    ip->exited_hitlag = efLib_ResumeAll;
+    Item_SetEffectHitlagCallbacks(ip);
 }
 
 bool it_802CAE60(Item_GObj* gobj)

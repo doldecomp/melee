@@ -1,14 +1,16 @@
-#include "MetroTRK/dolphin_trk.h"
+#include "dolphin_trk.h"
 
-#include "MetroTRK/__exception.h"
-#include "MetroTRK/dolphin_trk_glue.h"
-#include "MetroTRK/flush_cache.h"
-#include "MetroTRK/mem_TRK.h"
-#include "MetroTRK/mpc_7xx_603e.h"
-#include "MetroTRK/ppc_except.h"
-#include "MetroTRK/ppc_targimpl.h"
+#include "__exception.h"
+#include "dolphin_trk_glue.h"
+#include "flush_cache.h"
+#include "mem_TRK.h"
+#include "ppc_except.h"
+#include "ppc_targimpl.h"
 
-#include <dolphin/os.h>
+// For labels in ::InitMetroTRK
+#ifdef MWERKS_GEKKO
+#include "mpc_7xx_603e.h"
+#endif
 
 #define BOOTINFO 0x80000000
 #define MEM2_CACHED 0x90000000
@@ -38,7 +40,7 @@ static u32 TRK_ISR_OFFSETS[NUM_EXCEPTIONS] = {
 };
 
 extern int TRK_main(void);
-extern int InitMetroTRKCommTable(int hwId);
+
 void __TRK_copy_vectors(void);
 
 SECTION_INIT void __TRK_reset(void)
@@ -53,7 +55,7 @@ extern u8 _db_stack_end[];
 /// r5: hardware id
 ASM void InitMetroTRK(void)
 {
-#ifdef __MWERKS__ // clang-format off
+#ifdef MWERKS_GEKKO // clang-format off
     nofralloc
     addi r1, r1, -4
     stw r3, 0(r1)

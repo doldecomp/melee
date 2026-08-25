@@ -1,16 +1,16 @@
 #include "ft_0CDD.h"
 
+#include "ft/forward.h"
+
+#include "ft/ft_084E.h"
+
+#include <baselib/jobj.h>
 #include <melee/ft/chara/ftCommon/ftCo_Attack100.h>
 #include <melee/ft/chara/ftCommon/ftpickupitem.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_081B.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/it/it_26B1.h>
-
-void ftCo_800CE0CC(HSD_GObj*); /* extern */
-void ftCo_800CE14C(HSD_GObj*); /* extern */
-void ftCo_800CE650(HSD_GObj*); /* extern */
-void it_8028E938(Item_GObj*);  /* extern */
 
 /// grounded
 void ftCo_Attack_800CDD14(Fighter_GObj* fighter_gobj)
@@ -50,8 +50,10 @@ void ftCo_800CDDA0(Fighter_GObj* fighter_gobj)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void ftCo_800CDE18(Fighter_GObj* fighter_gobj)
 {
     if (ftAnim_IsFramesRemaining(fighter_gobj) == false) {
@@ -68,7 +70,9 @@ void ftCo_800CDE74(Fighter_GObj* fighter_gobj)
 {
     ft_80084DB0(fighter_gobj);
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void ftCo_800CDE94(Fighter* fighter, Vec3* arg1, Vec3* arg2)
 {

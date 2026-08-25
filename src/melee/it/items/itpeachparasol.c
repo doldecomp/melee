@@ -1,9 +1,9 @@
 #include "itpeachparasol.h"
 
+#include "inlines.h"
+
 #include "it/inlines.h"
 
-#include <common_structs.h>
-#include <melee/db/db.h>
 #include <melee/ft/chara/ftPeach/ftPe_SpecialHi.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/item.h>
@@ -40,21 +40,11 @@ Item_GObj* it_802BDA64(HSD_GObj* parent, Vec3* pos, Fighter_Part arg2, f32 dir)
     SpawnItem spawn;
     Item_GObj* item_gobj;
 
-    spawn.kind = 0x67;
-    spawn.prev_pos = *pos;
-    spawn.pos = spawn.prev_pos;
-    spawn.facing_dir = dir;
-    spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
-    spawn.x0_parent_gobj = parent;
-    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.b0 = true;
-    spawn.x40 = 0;
+    spawn.kind = It_Kind_Peach_Parasol;
+    Item_InitSpawn(&spawn, parent, pos, dir);
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
-        Item_8026AB54(item_gobj, parent, arg2);
-        db_80225DD8(item_gobj, parent);
-        return item_gobj;
+        return Item_AttachToParent(item_gobj, parent, arg2);
     }
     return NULL;
 }

@@ -1,6 +1,5 @@
 #include "itzako.h"
 
-#include "it_266F.h"
 #include "it_2725.h"
 #include "it_3F14.h"
 #include "ithitbox.h"
@@ -8,6 +7,7 @@
 #include "itmaterial.h"
 
 #include "baselib/jobj.h"
+#include "baselib/random.h"
 #include "cm/camera.h"
 #include "ft/fighter.h"
 #include "ft/ftlib.h"
@@ -17,12 +17,14 @@
 #include "gr/grzakogenerator.h"
 #include "it/inlines.h"
 #include "it/items/itheiho.h"
+#include "it/itgroundcoll.h"
 #include "items/itcoin.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 #include "pl/plbonuslib.h"
 #include "ty/tydisplay.h"
 
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 0.0f;
@@ -43,6 +45,7 @@ static void sdata2_order(void)
     (void) 2.0f;
     (void) 0.5f;
 }
+#endif
 
 const Vec3 it_803B85A8[6] = {
     { 1.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 0.0f, 1.0f, 0.0f },
@@ -95,8 +98,10 @@ Item_GObj* it_8027B5B0(ItemKind kind, Vec3* pos, HSD_JObj* jobj, Vec3* vel,
     return gobj;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 
 void it_8027B730(Item_GObj* item_gobj)
 {
@@ -115,7 +120,9 @@ void it_8027B730(Item_GObj* item_gobj)
     it_80275240(item_gobj);
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 static inline f32 it_8027B798_CalcAngle(GroundOrAir ground_or_air, s32 angle,
                                         ftCommonData* common_data,
@@ -566,17 +573,19 @@ bool it_8027CA7C(HSD_GObj* gobj)
     bool chk;
 
     chk = false;
-    if (ftLib_80086C0C(gobj) == 0x14E) {
+    if (ftLib_GetMotionId(gobj) == 0x14E) {
         chk = true;
     }
-    if (ftLib_80086C0C(gobj) == 0x14D) {
+    if (ftLib_GetMotionId(gobj) == 0x14D) {
         chk = true;
     }
     return chk;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 
 void it_8027CAD8(Item_GObj* item_gobj)
 {
@@ -616,7 +625,9 @@ void it_8027CBA4(Item_GObj* item_gobj)
     it_8026B3A8(item_gobj);
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 f32 it_8027CBFC(Item_GObj* item_gobj)
 {
@@ -659,7 +670,7 @@ Item_GObj* it_8027CC88(Item_GObj* item_gobj_arg)
     u32 pad2[4];
 
     item_gobj_var = NULL;
-    if ((gm_8016B498() != 0) && (HSD_Randi(it_804D6D40->x14) == 0)) {
+    if ((gm_IsCurrently1PMode() != 0) && (HSD_Randi(it_804D6D40->x14) == 0)) {
         if (grLib_801C9E40() == 0) {
             var_r30 = Ground_801C5840();
             if (var_r30 != -1) {
@@ -700,8 +711,10 @@ void it_8027CE44(Item_GObj* item_gobj)
     grZakoGenerator_801CACB8(item_gobj);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 
 /// Appears to be a function for Game&Watch items
 void it_8027CE64(Item_GObj* item_gobj, HSD_GObj* fighter_gobj,
@@ -721,4 +734,6 @@ void it_8027CE64(Item_GObj* item_gobj, HSD_GObj* fighter_gobj,
     item->xDD4_itemVar.gamewatch.attr = arg_attr_address;
 }
 
+#ifdef MUST_MATCH
 #pragma pop
+#endif

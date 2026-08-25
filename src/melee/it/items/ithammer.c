@@ -5,10 +5,10 @@
 #include <platform.h>
 
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/itgroundcoll.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
@@ -122,9 +122,7 @@ void itHammer_Logic28_Spawned(HSD_GObj* gobj)
 void it_80293F84(Item_GObj* gobj)
 {
     Item* temp_r4 = GET_ITEM((HSD_GObj*) gobj);
-    temp_r4->x40_vel.z = 0.0f;
-    temp_r4->x40_vel.y = 0.0f;
-    temp_r4->x40_vel.x = 0.0f;
+    itResetVelocity(temp_r4);
     it_8026B390(gobj);
     Item_80268E5C((HSD_GObj*) gobj, 0, ITEM_ANIM_UPDATE);
     thing(gobj);

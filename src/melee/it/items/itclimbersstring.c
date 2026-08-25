@@ -1,16 +1,25 @@
 #include "itclimbersstring.h"
 
+#include "baselib/gobjgxlink.h"
+#include "baselib/gobjuserdata.h"
 #include "ft/chara/ftPopo/ftPp_SpecialS.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "it/inlines.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/items/inlines.h"
 #include "it/items/itlinkhookshot.h"
 #include "lb/lbvector.h"
 
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
+
+/* 2C248C */ static Item_GObj* it_802C248C(Item* ip, HSD_JObj* jobj);
+/* 2C28DC */ static void fn_802C28DC(Item_GObj* gobj);
+/* 2C29E8 */ static void fn_802C29E8(Item_GObj* gobj);
+/* 2C2AF4 */ static void fn_802C2AF4(Item_GObj* gobj);
+/* 2C33B8 */ static void it_802C33B8(Item* ip);
 
 ItemStateTable it_803F76B8[] = {
     { -1, itClimbersstring_UnkMotion3_Anim, NULL, NULL },
@@ -148,7 +157,7 @@ Item_GObj* it_802C27D4(Fighter_GObj* owner, Vec3* pos, int msid, float dir)
     Item_GObj* item_gobj;
     PAD_STACK(20);
 
-    spawn.kind = 0x71;
+    spawn.kind = It_Kind_IceClimber_GumStrings;
     spawn.prev_pos = *pos;
     spawn.pos = spawn.prev_pos;
     spawn.facing_dir = dir;
@@ -273,7 +282,7 @@ bool itClimbersstring_UnkMotion3_Anim(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
 
     if (ip->owner != NULL) {
-        enum_t action = ftLib_80086C0C(ip->owner);
+        enum_t action = ftLib_GetMotionId(ip->owner);
         if (action >= 0x15B && action <= 0x164) {
             should_cleanup = 0;
         } else {
@@ -350,8 +359,8 @@ s32 it_802C2EC4(ItemLink* link, Vec3* target,
     Fighter* fp = GET_FIGHTER(ip->xDD4_itemVar.climbersstring.xC);
     PAD_STACK(4);
 
-    if (fp->fv.pp.x2240.x != 0.0f || fp->fv.pp.x2240.y != 0.0f) {
-        link->pos = fp->fv.pp.x2240;
+    if (fp->u.pp.x2240.x != 0.0f || fp->u.pp.x2240.y != 0.0f) {
+        link->pos = fp->u.pp.x2240;
     }
     link->vel.x = link->vel.y = link->vel.z = 0.0f;
 
@@ -409,8 +418,8 @@ s32 it_802C30E8(ItemLink* link, Vec3* target,
 
     link->vel.y -= 0.9f * attrs->x14;
 
-    if (fp->fv.pp.x2240.x != 0.0f || fp->fv.pp.x2240.y != 0.0f) {
-        link->pos = fp->fv.pp.x2240;
+    if (fp->u.pp.x2240.x != 0.0f || fp->u.pp.x2240.y != 0.0f) {
+        link->pos = fp->u.pp.x2240;
     } else {
         it_802A4420(cur);
     }
@@ -452,32 +461,14 @@ s32 it_802C30E8(ItemLink* link, Vec3* target,
 bool it_802C32D4(ItemLink* link, Vec3* pos, itClimbersStringAttributes* attrs,
                  Item* ip, f32 dist)
 {
-    u8 _pad[16];
-    Vec3 dir;
+    u8 _pad[8];
     ItemLink* prev;
-    ItemLink* cur = link;
-    f32 len;
+    ItemLink* cur;
     f32 step;
-    f32 foo;
 
-    prev = link->prev;
-    while (prev != NULL && !cur->x2C_b0) {
-        cur = prev;
-        prev = prev->prev;
-    }
-    len = it_802A3C98(&cur->pos, pos, &dir);
-    while (prev != NULL && dist > len) {
-        cur->x2C_b0 = false;
-        len = it_802A3C98(&prev->pos, pos, &dir);
-        cur = prev;
-        prev = prev->prev;
-    }
-    foo = attrs->x8;
-    step = len - dist;
-    if (step > foo) {
-        step = foo;
-    }
+    Item_RetractChain(link, pos, dist, &attrs->x8, &prev, &cur, &step);
     it_802C2DB0(cur, pos, attrs, step);
+
     if (prev != NULL) {
         return false;
     }
@@ -567,7 +558,7 @@ void it_802C3520(Item* ip, Vec3* target)
 
 void it_2725_Logic70_PickedUp(Item_GObj* gobj)
 {
-    short pad;
+    s16 pad;
     void (*new_var)(Item_GObj* gobj);
     Item* ip = gobj->user_data;
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);

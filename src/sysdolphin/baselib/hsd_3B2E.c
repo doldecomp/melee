@@ -7,19 +7,20 @@ static s32 lbl_80430BD0[13] = {
     0x54, 0x14, 0xA3, 0x80, 0xFD, 0x6E,
 };
 
+#ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
-
-static u8 fn_803B2E04(u8 prev, s32 cur)
+#endif
+static int fn_803B2E04(u8 prev, s32 cur)
 {
     u32 mod7;
-    u8 val;
+    u32 val;
+    u32 key;
 
+    key = lbl_80430BD0[prev % 13];
+    val = prev ^ cur;
+    val ^= key;
     mod7 = prev % 7;
-    val = prev ^ cur ^ lbl_80430BD0[prev % 13];
-
-    if (mod7 > 6) {
-        return val;
-    }
 
     switch (mod7) {
     case 0:
@@ -58,8 +59,9 @@ static u8 fn_803B2E04(u8 prev, s32 cur)
     }
     return val;
 }
-
-#pragma dont_inline reset
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 int hsd_803B2FA0(u8* data, int len)
 {
@@ -80,8 +82,10 @@ int hsd_803B2FA0(u8* data, int len)
     return 0;
 }
 
+#ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
-
+#endif
 static int fn_803B302C(u32 prev, u32 cur)
 {
     u32 mod7;
@@ -134,8 +138,9 @@ static int fn_803B302C(u32 prev, u32 cur)
     cur ^= prev;
     return cur;
 }
-
-#pragma dont_inline reset
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 int hsd_803B31CC(u8* data, int len)
 {
@@ -144,9 +149,6 @@ int hsd_803B31CC(u8* data, int len)
     int i;
     u32 cur;
     u8 check[16];
-    u8* p;
-    u8* q;
-    int j;
     int k;
 
     if (data == NULL) {
@@ -164,44 +166,10 @@ int hsd_803B31CC(u8* data, int len)
 
     hsd_803B2B20(data + 16, len - 16, check);
 
-    p = data;
-    q = check;
-    k = 0;
-
-    for (j = 2; j != 0; j--) {
-        if (*q != *p) {
+    for (k = 0; k < 16; k++) {
+        if (check[k] != data[k]) {
             return -1;
         }
-        if (*++q != *++p) {
-            return -1;
-        }
-        k++;
-        if (*++q != *++p) {
-            return -1;
-        }
-        k++;
-        if (*++q != *++p) {
-            return -1;
-        }
-        k++;
-        if (*++q != *++p) {
-            return -1;
-        }
-        k++;
-        if (*++q != *++p) {
-            return -1;
-        }
-        k++;
-        if (*++q != *++p) {
-            return -1;
-        }
-        k++;
-        if (*++q != *++p) {
-            return -1;
-        }
-        q++;
-        k++;
-        p++;
     }
 
     return 0;
