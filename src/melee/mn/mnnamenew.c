@@ -991,7 +991,7 @@ bool NameContainsOnlySpaces(void)
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        if ((s8) * (mnNameNew_NullCharacter) != (s8) text[0]) {
+        if ((s8) *mnNameNew_NullCharacter != (s8) text[0]) {
             if ((s8) * (char*) mnNameNew_SpaceCharacter != (s8) text[0] ||
                 ((GlyphChar*) mnNameNew_SpaceCharacter)[1] != text[1])
             {
