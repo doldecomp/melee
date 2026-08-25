@@ -1717,13 +1717,13 @@ static char mnName_RefuseNameUsName[] = "mnNameRefuseNameUs";
 static char mnName_AutoNameName[] = "mnNameAutoName";
 static char mnName_RefuseNameName[] = "mnNameRefuseName";
 
-extern char mnNameNew_NullCharacter[];
+extern char mnNameNew_NullCharacter;
 
 bool IsNameNotAllowed(char* name)
 {
     char** list = NotAllowedNamesList;
     while (true) {
-        if (*mnNameNew_NullCharacter == **list) {
+        if (mnNameNew_NullCharacter == **list) {
             break;
         }
         if (!CompareNameStrings(*list, name)) {

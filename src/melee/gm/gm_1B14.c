@@ -644,7 +644,7 @@ void gm_801B1EEC(GameScene* arg0)
         return;
     }
     stkind = sss->data.data.rules.xE;
-    gm_80473814.x06 = stkind;
+    gm_80473814.x6 = stkind;
     vs_data->data.rules.xE = stkind;
     lbAudioAx_80026F2C(0x18);
     lbAudioAx_8002702C(8, lbAudioAx_80026EBC(vs_data->data.rules.xE));
@@ -732,7 +732,7 @@ void gm_801B2298_OnInit(void)
         if (i != 0) {
             temp_r31->data.players[1].c_kind = CHKIND_NONE;
         }
-        gm_80473814.saved_players[i] = temp_r31->data.players[i];
+        gm_80473814.players[i] = temp_r31->data.players[i];
     }
 }
 

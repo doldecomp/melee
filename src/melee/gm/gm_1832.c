@@ -1956,7 +1956,6 @@ bool gm_8018841C(void)
 }
 
 static TrainingModeState lbl_80473700;
-CssSubStruct gm_80473814;
 UnkAllstarData gm_80473A18;
 
 int gm_80188454(int idx)
@@ -2090,15 +2089,15 @@ void fn_80188644(void)
         i++;
     } while (i < 4);
 
-    gm_80473814.menu_values[0] = 0;
-    gm_80473814.menu_values[1] = 0;
-    gm_80473814.menu_values[2] = 0;
-    gm_80473814.menu_values[3] = 0;
+    lbl_80473700.css.menu_values[0] = 0;
+    lbl_80473700.css.menu_values[1] = 0;
+    lbl_80473700.css.menu_values[2] = 0;
+    lbl_80473700.css.menu_values[3] = 0;
     saved_count = 0;
-    gm_80473814.menu_values[4] = saved_count;
-    gm_80473814.menu_values[5] = saved_count;
-    gm_80473814.menu_values[6] = saved_count;
-    gm_80473814.menu_values[saved_count] = 2;
+    lbl_80473700.css.menu_values[4] = saved_count;
+    lbl_80473700.css.menu_values[5] = saved_count;
+    lbl_80473700.css.menu_values[6] = saved_count;
+    lbl_80473700.css.menu_values[saved_count] = 2;
 }
 
 void fn_80188738(HSD_JObj* arg0)
@@ -2237,7 +2236,7 @@ void fn_80188D3C(HSD_JObj* arg0)
     int val;
     int hundreds;
 
-    val = gm_80473814.anim_frames[0x19];
+    val = gm_80473814.x144[0x19];
 
     jobjs[2] = (arg0 == NULL) ? NULL : arg0->child;
     jobjs[1] = (jobjs[2] == NULL) ? NULL : jobjs[2]->next;
@@ -2266,7 +2265,7 @@ void fn_80188D3C(HSD_JObj* arg0)
 void fn_80188EE8(HSD_GObj* gobj)
 {
     TrainingModeState* state = &lbl_80473700;
-    CssSubStruct* sub = &gm_80473814;
+    CssSubStruct* sub = &state->css;
     HSD_JObj* jobj;
     HSD_JObj* cursor_jobj;
     HSD_Text* text;
@@ -2306,24 +2305,24 @@ void fn_80188EE8(HSD_GObj* gobj)
     fn_80188B3C(sub->jobjs[19]);
 
     jobj = sub->jobjs[12];
-    HSD_JObjReqAnimAll(jobj, (f32) gm_80473814.x03);
+    HSD_JObjReqAnimAll(jobj, (f32) state->css.x03);
     HSD_JObjAnimAll(jobj);
 
-    menu_values = gm_80473814.menu_values;
+    menu_values = state->css.menu_values;
     jobj = sub->jobjs[13];
     HSD_JObjReqAnimAll(jobj, (f32) (u32) menu_values[0]);
     HSD_JObjAnimAll(jobj);
 
     jobj = sub->jobjs[23];
-    HSD_JObjReqAnimAll(jobj, (f32) gm_80473814.x00);
+    HSD_JObjReqAnimAll(jobj, (f32) state->css.x00);
     HSD_JObjAnimAll(jobj);
 
     jobj = sub->jobjs[34];
     HSD_JObjReqAnimAll(jobj, (f32) (u32) menu_values[0]);
     HSD_JObjAnimAll(jobj);
 
-    val = gm_80473814.menu_values[1];
-    text = gm_80473814.text;
+    val = state->css.menu_values[1];
+    text = state->css.text;
     if (lbLang_IsSettingUS() != 0 && val == 0x13) {
         HSD_SisLib_803A6368(text, 0x17);
     } else {
@@ -2332,18 +2331,18 @@ void fn_80188EE8(HSD_GObj* gobj)
     }
 
     jobj = sub->jobjs[32];
-    HSD_JObjReqAnimAll(jobj, (f32) (u32) (gm_80473814.menu_values[2] + 1));
+    HSD_JObjReqAnimAll(jobj, (f32) (u32) (state->css.menu_values[2] + 1));
     HSD_JObjAnimAll(jobj);
 
     jobj = sub->jobjs[31];
-    HSD_JObjReqAnimAll(jobj, (f32) (u32) gm_80473814.menu_values[3]);
+    HSD_JObjReqAnimAll(jobj, (f32) (u32) state->css.menu_values[3]);
     HSD_JObjAnimAll(jobj);
 
     fn_80188D3C(sub->jobjs[27]);
 
     HSD_JObjSetFlags(sub->jobjs[25], JOBJ_HIDDEN);
 
-    val = gm_80473814.menu_values[6];
+    val = state->css.menu_values[6];
     cursor_jobj = sub->jobjs[26];
     if (val == 2 && state->mode == 3) {
         val = 3;
@@ -2368,13 +2367,13 @@ void fn_801891F4(void)
     int i;
 
     buttons = gm_801A36C0((u8) lbl_80473700.mode);
-    sub = &gm_80473814;
+    sub = &lbl_80473700.css;
 
     if (gm_801A45E8(2) != 0) {
         if (sub->x01 == 0) {
             fn_801651FC(0, 0);
             count = lbl_80473700.count;
-            gm_80473814.x03 = 0;
+            lbl_80473700.css.x03 = 0;
             for (i = 0; i < 4; i++) {
                 if (i != 0 && count != 0) {
                     Player_SetPlayerAndEntityCpuType(i, 0);
@@ -2682,14 +2681,14 @@ void fn_80189B88(void)
     int i;
 
     state = &lbl_80473700;
-    sub = &gm_80473814;
+    sub = &state->css;
     sub->x00 = 0;
     sub->x01 = 0;
     HSD_GObj_SetupProc(GObj_Create(0xE, 2, 0), (HSD_GObjEvent) fn_801891F4,
                        0x15);
     gobj = GObj_Create(0xE, 0xF, 0);
     jobj = HSD_JObjLoadJoint((*lbl_804D662C)->joint);
-    gm_80473814.gobj = gobj;
+    state->css.gobj = gobj;
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
     HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_80188EE8, 0x11);
@@ -2724,7 +2723,7 @@ void gm_80189CDC(StartMeleeData* arg0)
     arg0->rules.x5_0 = 1;
 
     for (i = 0; i < 4; i++) {
-        state->players[i] = gm_80473814.saved_players[i] = arg0->players[i];
+        state->players[i] = state->css.saved_players[i] = arg0->players[i];
     }
 
     state->mode = (s32) (arg0->players[0].slot - 1);
@@ -2763,9 +2762,9 @@ HSD_Text* fn_8018A000(void)
         HSD_SisLib_803A62A0(0, (char*) &data[0xDC], (char*) &data[0xC8]);
     }
 
-    *(text_ptr = &gm_80473814.text) = HSD_SisLib_803A5ACC(
+    *(text_ptr = &state->css.text) = HSD_SisLib_803A5ACC(
         0, 0,
-        (12.0f * (HSD_JObjGetTranslationX(gm_80473814.jobjs[1]) + 9.798828f)) +
+        (12.0f * (HSD_JObjGetTranslationX(state->css.jobjs[1]) + 9.798828f)) +
             50.0f,
         150.0f, 0.1f, 167.0f, 16.0f);
     text = *text_ptr;
