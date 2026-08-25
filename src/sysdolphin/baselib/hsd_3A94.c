@@ -254,8 +254,9 @@ void hsd_803A949C(s32 chan, s32 arg1)
                 hsd_804D7988 = result;
                 break;
             }
+            result = (((CardBlock*) state->x0)->x10 << 8) |
+                     ((CardBlock*) state->x0)->x11;
             block = (CardBlock*) state->x0;
-            result = (block->x10 << 8) | block->x11;
             if (result != CMD_S32(0x20)) {
                 hsd_804D7988 = 2;
             } else if ((s32) block->x12 != CMD_S32(0x24)) {
