@@ -2101,8 +2101,8 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                             if (opcode >= 0x20U) {
                                 u16 glyph_idx;
                                 s32 tex_offset;
-                                f32 scale_x;
                                 f32 glyph_x;
+                                f32 scale_x;
                                 if (line_started == 0U) {
                                     f32 measured_width;
 
@@ -2133,8 +2133,8 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                 } else {
                                     tex_offset = glyph_idx - 0x4000;
                                 }
+                                glyph_x = (text->current_width * text->font_size.x) + text->pos_x;
                                 scale_x = text->font_size.x;
-                                glyph_x = (text->current_width * scale_x) + text->pos_x;
                                 if ( text->kerning != 0) {
                                     if (glyph_idx < 0x4000U) {
                                         glyph_x = -((scale_x * (text->x80.x * (f32) (default_kerning[(tex_offset * 2) & 0x1FFFE] - 1))) - glyph_x);
@@ -2151,12 +2151,16 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                     f32 glyph_h = glyph_size * scale_y;
                                     f32 uv_bottom = 1.0F;
                                     f32 uv_left = 0.0F;
-                                    f32 quad_top = glyph_y;
-                                    f32 uv_right = 1.0F;
-                                    f32 quad_right = (text->x88 * glyph_w) + glyph_x;
-                                    f32 quad_bottom = glyph_y + glyph_h;
+                                    f32 uv_right;
+                                    f32 quad_right;
+                                    f32 quad_bottom;
+
+                                    scale_x = glyph_y;
+                                    uv_right = 1.0F;
+                                    quad_right = (text->x88 * glyph_w) + glyph_x;
+                                    quad_bottom = glyph_y + glyph_h;
                                     if ( text->x4E != 0) {
-                                        if ((min_x > quad_right) || (max_x < glyph_x) || (min_y > quad_bottom) || (max_y < quad_top)) {
+                                        if ((min_x > quad_right) || (max_x < glyph_x) || (min_y > quad_bottom) || (max_y < scale_x)) {
                                             goto glyph_draw_done;
                                         }
                                         if (min_x > glyph_x) {
@@ -2169,10 +2173,10 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                             uv_right = 1.0F - (clip_right / glyph_w);
                                             quad_right -= clip_right;
                                         }
-                                        if (min_y > quad_top) {
-                                            f32 clip_top = min_y - quad_top;
+                                        if (min_y > scale_x) {
+                                            f32 clip_top = min_y - scale_x;
                                             uv_top = clip_top / glyph_h;
-                                            quad_top += clip_top;
+                                            scale_x += clip_top;
                                         }
                                         if (max_y < quad_bottom) {
                                             f32 clip_bottom = quad_bottom - max_y;
@@ -2191,7 +2195,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                         GXBegin(GX_QUADS, GX_VTXFMT0, 4U);
                                         {
                                             f32 glyph_depth = text->pos_z;
-                                            f32 neg_quad_top = -quad_top;
+                                            f32 neg_quad_top = -scale_x;
                                             f32 neg_quad_bottom = -quad_bottom;
                                             GXPosition3f32(glyph_x, neg_quad_top, glyph_depth);
                                             GXTexCoord2f32(uv_left, uv_top);
@@ -2209,10 +2213,12 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                     if ( text->kerning != 0) {
                                         if (glyph_idx < 0x4000U) {
                                             u8 *kern_pair = &default_kerning[(tex_offset * 2) & 0x1FFFE];
-                                            text->current_width = (-((text->x88 * (text->x80.x * (f32) (kern_pair[0] + (kern_pair[1] - 2)))) - text->current_width));
+                                            tex_offset = (clear_idx = kern_pair[1] - 2);
+                                            text->current_width = (-((text->x88 * (text->x80.x * (f32) (kern_pair[0] + tex_offset))) - text->current_width));
                                         } else {
                                             u8 *kern_pair = &textures->data[(tex_offset * 2) & 0x1FFFE];
-                                            text->current_width = (-((text->x88 * (text->x80.x * (f32) (kern_pair[0] + (kern_pair[1] - 2)))) - text->current_width));
+                                            tex_offset = (clear_idx = kern_pair[1] - 2);
+                                            text->current_width = (-((text->x88 * (text->x80.x * (f32) (kern_pair[0] + tex_offset))) - text->current_width));
                                         }
                                     }
                                     if (skip_count != 0U) {
