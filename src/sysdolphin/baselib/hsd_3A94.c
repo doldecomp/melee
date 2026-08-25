@@ -2568,8 +2568,9 @@ static inline void cancelQueuedCardCommands(CardBufEntry* entries)
         s32 current = saved;
 
         while (current != hsd_804D7984) {
-            entries[current].x10 = 0;
+            CardBufEntry* queued = &entries[current];
             current = (current + 1) % 128;
+            queued->x10 = 0;
         }
         hsd_804D7984 = saved;
     }
