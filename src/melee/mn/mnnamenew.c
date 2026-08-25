@@ -1,7 +1,5 @@
 #include "mnnamenew.h"
 
-#include "mnnamenew.static.h"
-
 #include "baselib/debug.h"
 #include "dolphin/gx/GXStruct.h"
 #include "gm/gm_1A3F.h"
