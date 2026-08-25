@@ -179,7 +179,7 @@ void hsd_803A949C(s32 chan, s32 arg1)
                     break;
                 }
                 if (CMD_PTR(0x28) != NULL) {
-                    u8* src = state->x0 + offset;
+                    u8* src = (u8*) (offset + (u32) state->x0);
                     memcpy(CMD_PTR(0x28), src + 0x20, CMD_S32(0x30));
                 }
             }
