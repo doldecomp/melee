@@ -603,54 +603,39 @@ u8 THPDec_803310CC(THPScanInfo* info);
 u8 THPDec_803310CC(THPScanInfo* info)
 {
     u32 i;
-    s32 count;
-    s32 count2;
-    s32 tmp;
-    THPScanComp* c;
+    s32 j;
 
-    count = info->x7A * 8;
-    tmp = count + info->x70;
-    tmp--;
-    info->x8CC = tmp / count;
-    count = info->x7B * 8;
-    tmp = count;
-    tmp += info->x72;
-    tmp--;
-    info->x8D0 = tmp / count;
+    info->x8CC = (u16) THPROUNDUP(info->x70, info->x7A * 8);
+    info->x8D0 = (u16) THPROUNDUP(info->x72, info->x7B * 8);
     info->x8CE = 0;
+
     for (i = 0; i < info->x7C; i++) {
-        c = &info->components[i];
-        count = info->x7A * 8;
-        tmp = count + info->x70 * c->samplingH;
-        tmp--;
-        c->x28 = tmp / count;
-        count = info->x7B * 8;
-        tmp = count;
-        tmp += info->x72 * c->samplingV;
-        tmp--;
-        c->x24 = tmp / count;
+        THPScanComp* c = &info->components[i];
+
+        c->x28 = THPROUNDUP(info->x70 * c->samplingH, info->x7A * 8);
+        c->x24 = THPROUNDUP(info->x72 * c->samplingV, info->x7B * 8);
         c->x14 = c->samplingH;
         c->x18 = c->samplingV;
         c->x1C = c->x14 * c->x18;
         c->x20 = c->x14 * 8;
-        count = c->x1C;
-        tmp = count;
-        if (info->x8CE + count > 0x10) {
+
+        j = c->x1C;
+        if (info->x8CE + c->x1C > 0x10) {
             return 0x11;
         }
-        if (tmp > 0) {
-            count2 = tmp;
-            while (count2 > 0) {
-                info->x8BC[info->x8CE++] = i;
-                count2--;
-            }
+
+        while (j-- > 0) {
+            info->x8BC[info->x8CE++] = i;
         }
+
         if (info->x8CE > 6) {
             OSReport("THP does not support anything other than 4:2:0!\n");
             return 0;
         }
+
         c->x06 = 0;
     }
+
     return 0;
 }
 
