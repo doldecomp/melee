@@ -88,7 +88,7 @@ struct gm_804D6804_t {
 
 /// Unlock predicate for a staff-roll entry; the table stores functions with
 /// several different signatures behind it.
-typedef int (*StaffEntryCheck)(s16);
+typedef bool (*StaffEntryCheck)(s16);
 
 typedef struct {
     /* 0x00 */ u8 x0;
@@ -145,14 +145,7 @@ typedef struct StaffRollPtclNode {
     { 3, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 130 } },
     { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 112, 102 } },
     { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 123 } },
-    { 2,
-      { 0 },
-      (StaffEntryCheck) gm_801AA644,
-      0,
-      { 0 },
-      2972,
-      0,
-      { 80, 109 } },
+    { 2, { 0 }, gm_801AA644, 0, { 0 }, 2972, 0, { 80, 109 } },
     { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 123 } },
     { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 123 } },
     { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 109 } },
@@ -211,65 +204,16 @@ typedef struct StaffRollPtclNode {
     { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 116 } },
     { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 81 } },
     { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 88 } },
-    { 1,
-      { 0 },
-      (StaffEntryCheck) gm_801AA664,
-      15,
-      { 0 },
-      2976,
-      1,
-      { 96, 102 } },
+    { 1, { 0 }, gm_801AA664, 15, { 0 }, 2976, 1, { 96, 102 } },
     { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 128, 80 } },
     { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 88 } },
-    { 1,
-      { 0 },
-      (StaffEntryCheck) gm_801AA664,
-      9,
-      { 0 },
-      2980,
-      1,
-      { 80, 123 } },
-    { 1,
-      { 0 },
-      (StaffEntryCheck) gm_801AA664,
-      10,
-      { 0 },
-      2984,
-      1,
-      { 80, 130 } },
+    { 1, { 0 }, gm_801AA664, 9, { 0 }, 2980, 1, { 80, 123 } },
+    { 1, { 0 }, gm_801AA664, 10, { 0 }, 2984, 1, { 80, 130 } },
     { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 109 } },
-    { 1,
-      { 0 },
-      (StaffEntryCheck) gm_801AA664,
-      23,
-      { 0 },
-      2988,
-      1,
-      { 80, 88 } },
-    { 1,
-      { 0 },
-      (StaffEntryCheck) gm_801AA664,
-      24,
-      { 0 },
-      2992,
-      1,
-      { 128, 102 } },
-    { 1,
-      { 0 },
-      (StaffEntryCheck) gm_801AA664,
-      21,
-      { 0 },
-      2996,
-      1,
-      { 96, 109 } },
-    { 1,
-      { 0 },
-      (StaffEntryCheck) gm_801AA664,
-      25,
-      { 0 },
-      3000,
-      1,
-      { 80, 116 } },
+    { 1, { 0 }, gm_801AA664, 23, { 0 }, 2988, 1, { 80, 88 } },
+    { 1, { 0 }, gm_801AA664, 24, { 0 }, 2992, 1, { 128, 102 } },
+    { 1, { 0 }, gm_801AA664, 21, { 0 }, 2996, 1, { 96, 109 } },
+    { 1, { 0 }, gm_801AA664, 25, { 0 }, 3000, 1, { 80, 116 } },
     { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 81 } },
     { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 88 } },
     { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 80 } },
@@ -313,47 +257,12 @@ typedef struct StaffRollPtclNode {
     { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 88 } },
     { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 109 } },
     { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 130 } },
-    { 1,
-      { 0 },
-      (StaffEntryCheck) gm_801AA664,
-      25,
-      { 0 },
-      3004,
-      1,
-      { 80, 116 } },
-    { 2,
-      { 0 },
-      (StaffEntryCheck) gm_801AA688,
-      0,
-      { 0 },
-      3008,
-      1,
-      { 80, 102 } },
-    { 2,
-      { 0 },
-      (StaffEntryCheck) gm_801AA688,
-      0,
-      { 0 },
-      3012,
-      1,
-      { 80, 116 } },
-    { 2,
-      { 0 },
-      (StaffEntryCheck) gm_801AA688,
-      0,
-      { 0 },
-      3016,
-      1,
-      { 80, 123 } },
-    { 2, { 0 }, (StaffEntryCheck) gm_801AA688, 0, { 0 }, 3020, 1, { 80, 95 } },
-    { 1,
-      { 0 },
-      (StaffEntryCheck) gm_801AA688,
-      0,
-      { 0 },
-      3024,
-      1,
-      { 96, 123 } },
+    { 1, { 0 }, gm_801AA664, 25, { 0 }, 3004, 1, { 80, 116 } },
+    { 2, { 0 }, gm_801AA688, 0, { 0 }, 3008, 1, { 80, 102 } },
+    { 2, { 0 }, gm_801AA688, 0, { 0 }, 3012, 1, { 80, 116 } },
+    { 2, { 0 }, gm_801AA688, 0, { 0 }, 3016, 1, { 80, 123 } },
+    { 2, { 0 }, gm_801AA688, 0, { 0 }, 3020, 1, { 80, 95 } },
+    { 1, { 0 }, gm_801AA688, 0, { 0 }, 3024, 1, { 96, 123 } },
     { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 156, 146 } },
     { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 96, 102 } },
     { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 130 } },
@@ -372,14 +281,7 @@ typedef struct StaffRollPtclNode {
     { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 96, 88 } },
     { 2, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 95 } },
     { 3, { 0 }, NULL, 0, { 0 }, 0, 0, { 176, 130 } },
-    { 1,
-      { 0 },
-      (StaffEntryCheck) gm_801AA6D8,
-      269,
-      { 0 },
-      3028,
-      1,
-      { 80, 88 } },
+    { 1, { 0 }, gm_801AA6D8, 269, { 0 }, 3028, 1, { 80, 88 } },
     { 3, { 0 }, NULL, 0, { 0 }, 0, 0, { 192, 139 } },
     { 3, { 0 }, NULL, 0, { 0 }, 0, 0, { 192, 139 } },
     { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 192, 139 } },
@@ -408,44 +310,16 @@ typedef struct StaffRollPtclNode {
     { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 123, 123 } },
     { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 80 } },
     { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 102, 102 } },
-    { 1,
-      { 0 },
-      (StaffEntryCheck) gm_801AA688,
-      0,
-      { 0 },
-      3032,
-      1,
-      { 169, 169 } },
-    { 1,
-      { 0 },
-      (StaffEntryCheck) gm_801AA6FC,
-      0,
-      { 0 },
-      3036,
-      1,
-      { 110, 110 } },
-    { 1,
-      { 0 },
-      (StaffEntryCheck) gm_801AA6D8,
-      272,
-      { 0 },
-      3040,
-      1,
-      { 146, 146 } },
-    { 1, { 0 }, (StaffEntryCheck) gm_801AA774, 0, { 0 }, 3044, 1, { 80, 80 } },
+    { 1, { 0 }, gm_801AA688, 0, { 0 }, 3032, 1, { 169, 169 } },
+    { 1, { 0 }, gm_801AA6FC, 0, { 0 }, 3036, 1, { 110, 110 } },
+    { 1, { 0 }, gm_801AA6D8, 272, { 0 }, 3040, 1, { 146, 146 } },
+    { 1, { 0 }, gm_801AA774, 0, { 0 }, 3044, 1, { 80, 80 } },
     { 1, { 0 }, NULL, 0, { 0 }, 0, 0, { 80, 80 } },
     { 0, { 0 }, NULL, 0, { 0 }, 0, 0, { 122, 140 } },
     { 0, { 0 }, NULL, 0, { 0 }, 0, 0, { 35, 35 } },
     { 0, { 0 }, NULL, 0, { 0 }, 0, 0, { 98, 148 } },
     { 0, { 0 }, NULL, 0, { 0 }, 0, 0, { 28, 28 } },
-    { 0,
-      { 0 },
-      (StaffEntryCheck) gm_801AA688,
-      0,
-      { 0 },
-      3048,
-      1,
-      { 120, 120 } },
+    { 0, { 0 }, gm_801AA688, 0, { 0 }, 3048, 1, { 120, 120 } },
 };
 
 static StaffRollExtraData gm_803DBFD8_extra = {
@@ -502,34 +376,34 @@ static StaffRollExtraData gm_803DBFD8_extra = {
 /* 4D42C8 */ static GXColor gm_804D42C8 = { 0xFF, 0x64, 0x8C, 0xFF };
 /* 4D42CC */ static GXColor gm_804D42CC = { 0xB4, 0xFF, 0xFF, 0xFF };
 
-bool gm_801AA644(void)
+bool gm_801AA644(s16 arg0)
 {
     return gmMainLib_8015EDD4();
 }
 
-bool gm_801AA664(CharacterKind ckind)
+bool gm_801AA664(s16 ckind)
 {
     return gm_IsCKindUnlocked(ckind);
 }
 
-bool gm_801AA688(void)
+bool gm_801AA688(s16 arg0)
 {
     PAD_STACK(4);
     return gm_IsCKindUnlocked(CKIND_MARS) || gm_IsCKindUnlocked(CKIND_EMBLEM);
 }
 
-void gm_801AA6D8(s16 arg0)
+bool gm_801AA6D8(s16 arg0)
 {
-    Toy_803048C0(arg0);
+    return Toy_803048C0(arg0);
 }
 
-bool gm_801AA6FC(void)
+bool gm_801AA6FC(s16 arg0)
 {
     PAD_STACK(4);
     return Toy_803048C0(0x10B) || Toy_803048C0(0x10A) || Toy_803048C0(0x109);
 }
 
-bool gm_801AA774(void)
+bool gm_801AA774(s16 arg0)
 {
     PAD_STACK(4);
     return Toy_803048C0(0x107) || Toy_803048C0(0x108);
