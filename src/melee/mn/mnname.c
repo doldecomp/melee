@@ -33,8 +33,13 @@ GXColor mnName_804D4BE0 = { 0, 0, 0, 0xFF };
 GXColor mnName_804D4BE4 = { 0xA6, 0x81, 0x3D, 0xFF };
 u8 mnName_804D4BE8[4] = { 0x93, 0x94, 0x95, 0 };
 char mnName_StringTerminator[1] = "";
-/// SJIS full-width space, compared against a name's first character.
-char mnName_804D4BF0[4] = "　";
+
+#ifdef MUST_MATCH
+static void order_sdata(void)
+{
+    (void) "　";
+}
+#endif
 
 extern char* mnNameNew_803EE720[];
 extern char* mnNameNew_803EE724[];
@@ -126,7 +131,7 @@ bool IsNameListFull(void)
 static inline bool checkStringRest(const char* ptr)
 {
     char* term = mnName_StringTerminator;
-    char* cmp = mnName_804D4BF0;
+    char* cmp = "　"; // SJIS full-width space
     char c = cmp[0];
     while (*term != *ptr) {
         if (c != *ptr || cmp[1] != ptr[1]) {
