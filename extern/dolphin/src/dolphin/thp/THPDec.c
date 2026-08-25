@@ -1040,9 +1040,9 @@ inline void __THPInverseDCTNoYPos(register THPCoeff* in, register u32 xPos)
             lwz         itmp3, 8(in)
             ps_mul      tmp10, tmp10, tmp11
             lwz         itmp1, 4(in)
-            or.         itmp0, itmp0, itmp3
 
         _loopHead1:
+            or.         itmp0, itmp0, itmp3
             lhz         itmp2, 0x2(in)
             bne         _regularIDCT
             ps_merge00  tmp0, tmp10, tmp10
