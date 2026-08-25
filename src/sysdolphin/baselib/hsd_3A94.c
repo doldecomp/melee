@@ -2632,12 +2632,11 @@ static inline s32 calculateFileBlockCount(CardState* state, s32 file_idx)
 }
 
 static inline s32 retryCardRead(CARDFileInfo* info, s32 offset, void* buffer,
-                                s32 length)
+                                s32 length, s32 retries)
 {
-    s32 retries;
     s32 result;
 
-    for (retries = 0; retries < 10; retries++) {
+    for (; retries < 10; retries++) {
         result = CARDRead(info, buffer, length, offset);
         if (result != -1) {
             break;
@@ -2707,14 +2706,15 @@ static inline s32 queueDataBlockFinal(CardState* state, s32 block_idx, u8* dst,
 }
 
 static inline s32 readCardDataBlockFirst(CardState* state, s32 data_block,
-                                         u8* dst, s32 length)
+                                         u8* dst, s32 length, s32 retries,
+                                         u8* buf)
 {
     s32 offset;
     s32 read_ofs;
     int result;
 
     offset = fn_803ACBE8(state, data_block);
-    result = retryCardRead(&state->file_info, offset, state->x0, state->x8);
+    result = retryCardRead(&state->file_info, offset, buf, state->x8, retries);
     if (result < 0) {
         return result;
     }
@@ -2796,7 +2796,7 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, u8* arg2, s32 arg3,
     s32 file_size;
     s32 callback_seq;
 
-    PAD_STACK(16);
+    PAD_STACK(12);
 
     callback_seq = 0;
     if (arg3 == 0) {
@@ -2877,7 +2877,10 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, u8* arg2, s32 arg3,
         chunk = calculateDataBlockSize(arg0, arg1, i);
 
         if (remaining > chunk) {
-            s32 data_block = loadCardDataBlock(block_map[i]);
+            s32 data_block;
+            u8* buf;
+            s32 retries;
+            data_block = loadCardDataBlock(block_map[i]);
             if (data_block >= 0) {
                 if (arg3 != 0) {
                     result = queueDataBlockFirst(arg0, data_block, dst, chunk);
@@ -2886,8 +2889,10 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, u8* arg2, s32 arg3,
                         return result;
                     }
                 } else {
-                    result =
-                        readCardDataBlockFirst(arg0, data_block, dst, chunk);
+                    retries = 0;
+                    buf = arg0->x0;
+                    result = readCardDataBlockFirst(arg0, data_block, dst,
+                                                    chunk, retries, buf);
                     if (result < 0) {
                         if (result == -0x105) {
                             callback_seq = -259;
