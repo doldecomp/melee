@@ -372,13 +372,13 @@ void hsd_803A949C(s32 chan, s32 arg1)
 
         switch (state->x3B0) {
         case 2:
-            arg1 = 0x1800;
+            remaining11 = 0x1800;
             break;
         case 1:
-            arg1 = 0xE00;
+            remaining11 = 0xE00;
             break;
         default:
-            arg1 = 0;
+            remaining11 = 0;
             break;
         }
 
@@ -386,10 +386,10 @@ void hsd_803A949C(s32 chan, s32 arg1)
             if (CMD_PTR(0x1c) != NULL) {
                 memcpy((void*) CMD_S32(0x1c), state->x0, 0x40);
             }
-            if (arg1 > 0 && CMD_PTR(0x20) != NULL) {
-                memcpy((void*) CMD_S32(0x20), state->x0 + 0x40, arg1);
+            if (remaining11 > 0 && CMD_PTR(0x20) != NULL) {
+                memcpy((void*) CMD_S32(0x20), state->x0 + 0x40, remaining11);
             }
-            hdr_plus_icon = arg1 + 0x40;
+            hdr_plus_icon = remaining11 + 0x40;
             if (state->x24 > state->x8) {
                 if (CMD_PTR(0x24) != NULL) {
                     memcpy((void*) CMD_S32(0x24), state->x0 + hdr_plus_icon,
@@ -411,9 +411,9 @@ void hsd_803A949C(s32 chan, s32 arg1)
                 }
             }
         } else {
-            data_offset = (state->x8 * CMD_S32(0x18)) - 0x40 - arg1;
-            remaining11 = state->x24 - state->x8 * CMD_S32(0x18);
-            if ((u32) remaining11 > state->x8) {
+            data_offset = (state->x8 * CMD_S32(0x18)) - 0x40 - remaining11;
+            chan = state->x24 - state->x8 * CMD_S32(0x18);
+            if ((u32) chan > state->x8) {
                 if (CMD_PTR(0x24) != NULL) {
                     memcpy((u8*) CMD_S32(0x24) + data_offset, state->x0,
                            state->x8);
@@ -422,14 +422,11 @@ void hsd_803A949C(s32 chan, s32 arg1)
                              &CMD_STATE->digest[CMD_S32(0x18) * 0x10]);
             } else {
                 if (CMD_PTR(0x24) != NULL) {
-                    memcpy((u8*) CMD_S32(0x24) + data_offset, state->x0,
-                           remaining11);
+                    memcpy((u8*) CMD_S32(0x24) + data_offset, state->x0, chan);
                 }
-                hsd_803B2B20(CMD_STATE->x0, remaining11,
+                hsd_803B2B20(CMD_STATE->x0, chan,
                              &CMD_STATE->digest[CMD_S32(0x18) * 0x10]);
-                if (memcmp(state->x0 + remaining11, CMD_STATE->digest, 0x30) !=
-                    0)
-                {
+                if (memcmp(state->x0 + chan, CMD_STATE->digest, 0x30) != 0) {
                     hsd_804D7988 = -0x107;
                 }
             }
