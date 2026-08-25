@@ -146,6 +146,7 @@ void hsd_803A949C(s32 chan, s32 arg1)
     s32 remaining;
     s32 remaining11;
     s32 offset;
+    s32 offset13;
     s32 data_offset;
     s32 hdr_plus_icon;
     s32 slot;
@@ -532,22 +533,23 @@ void hsd_803A949C(s32 chan, s32 arg1)
         }
 
         if (slot == 0) {
-            offset = (state->x24 + 0x30) % state->x8;
-            if (hsd_803B31CC(state->x0 + offset, state->x8 - offset) < 0) {
+            offset13 = (state->x24 + 0x30) % state->x8;
+            if (hsd_803B31CC(state->x0 + offset13, state->x8 - offset13) < 0) {
                 state->x170[0] = -0x7FFF;
                 state->x270[0] = 0;
                 break;
             }
             state->x170[slot] =
-                state->x0[offset + 0x11] + (state->x0[offset + 0x10] << 8);
+                state->x0[offset13 + 0x11] +
+                (state->x0[offset13 + 0x10] << 8);
             if (state->x170[slot] != 0) {
                 state->x170[slot] = -0x7FFF;
                 state->x270[slot] = 0;
             } else {
-                state->x270[slot] = state->x0[offset + 0x12];
+                state->x270[slot] = state->x0[offset13 + 0x12];
                 {
                     u8* src13 =
-                        (u8*) (offset + (u32) state->x0);
+                        (u8*) (offset13 + (u32) state->x0);
                     hsd_803AC558(state, src13 + 0x13);
                 }
             }
