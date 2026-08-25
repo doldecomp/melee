@@ -330,7 +330,7 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
                 }
                 if (!(M2C_FIELD(flags, u16*, byte_off) & 0x4000)) {
                     if (arg1 == 0x63) {
-                        if (arg2 != 0) {
+                        if (arg2 == 0) {
                             goto add_trophy;
                         }
                     } else if ((f32) arg1 == Toy_803060BC(trophy, 6)) {
