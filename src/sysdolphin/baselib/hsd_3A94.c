@@ -118,16 +118,11 @@ static inline s32 hsd_803A949C_Close(CardState* state)
     return result;
 }
 
-static inline s32 hsd_803A949C_FileId(CardBlock* block)
-{
-    return (block->x10 << 8) | block->x11;
-}
-
 void hsd_803A949C(s32 chan, s32 arg1)
 {
     CardBufEntry* op = (CardBufEntry*) hsd_804D1138;
     CardState* state;
-    CardBlock* block;
+    u8* block;
     s32 result;
     s32 icon_size;
     s32 remaining;
@@ -233,14 +228,14 @@ void hsd_803A949C(s32 chan, s32 arg1)
                 break;
             }
             result = hsd_804D7980;
-            block = (CardBlock*) (state->x0 + offset);
+            block = state->x0 + offset;
             result = ((CardBufEntry*) ((u8*) op + 0x20))[result].x0;
-            if (hsd_803A949C_FileId(block) != result) {
+            if (((block[0x10] << 8) | block[0x11]) != result) {
                 hsd_804D7988 = 2;
-            } else if ((s32) block->x12 != CMD_S32(0x24)) {
+            } else if ((s32) block[0x12] != CMD_S32(0x24)) {
                 hsd_804D7988 = 2;
             } else if (CMD_S32(0x30) > 0 &&
-                       memcmp((void*) CMD_S32(0x28), block->x20,
+                       memcmp((void*) CMD_S32(0x28), (block += 0x20),
                               CMD_S32(0x30)) != 0)
             {
                 hsd_804D7988 = 2;
@@ -258,13 +253,13 @@ void hsd_803A949C(s32 chan, s32 arg1)
             }
             result = (((CardBlock*) state->x0)->x10 << 8) |
                      ((CardBlock*) state->x0)->x11;
-            block = (CardBlock*) state->x0;
+            block = state->x0;
             if (result != CMD_S32(0x20)) {
                 hsd_804D7988 = 2;
-            } else if ((s32) block->x12 != CMD_S32(0x24)) {
+            } else if ((s32) block[0x12] != CMD_S32(0x24)) {
                 hsd_804D7988 = 2;
             } else if (CMD_S32(0x30) > 0 &&
-                       memcmp((void*) CMD_S32(0x28), block->x20,
+                       memcmp((void*) CMD_S32(0x28), block + 0x20,
                               CMD_S32(0x30)) != 0)
             {
                 hsd_804D7988 = 2;
