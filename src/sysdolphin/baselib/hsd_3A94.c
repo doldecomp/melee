@@ -2599,8 +2599,8 @@ static inline s32 queueClearDataBlock(CardState* state, const u8* dst,
 static inline s32 queueDataBlock(CardState* state, s32 block_idx, u8* dst,
                                  s32 size)
 {
-    s32 offset = fn_803ACBE8(state, block_idx);
-    return queueCardCommand2(state, block_idx, dst, size, offset);
+    return queueCardCommand2(state, block_idx, dst, size,
+                             fn_803ACBE8(state, block_idx));
 }
 
 static inline s32 readCardDataBlock(CardState* state, s32 data_block, u8* dst,
@@ -2643,6 +2643,8 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, u8* arg2, s32 arg3,
     s32 total_blocks;
     s32 file_size;
     s32 callback_seq;
+
+    PAD_STACK(16);
 
     callback_seq = 0;
     if (arg3 == 0) {
