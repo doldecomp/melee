@@ -2552,7 +2552,7 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 file_size;
     s32 callback_seq;
 
-    PAD_STACK(48);
+    PAD_STACK(44);
 
     callback_seq = 0;
     if (arg3 == 0) {
@@ -2572,8 +2572,8 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
     blocks_before = fn_803AC6B8_blocks_before(arg0, arg1);
 
-    file_size = state->x4C[arg1];
-    fn_803ADF90_calc_file_blocks(file_size, arg1, arg0, &remaining,
+    remaining = state->x4C[arg1];
+    fn_803ADF90_calc_file_blocks(remaining, arg1, arg0, &file_size,
                                  &file_blocks);
 
     total_blocks = fn_803AC7DC(arg0);
@@ -2636,6 +2636,7 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     }
 
     dst = (u8*) arg2;
+    remaining = file_size;
 
     for (i = 0; i < file_blocks && remaining > 0; i++) {
         s32 chunk;
