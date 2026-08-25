@@ -64,7 +64,7 @@ struct THPLCWork {
     u8* work512[3];
 };
 static struct THPLCWork __THPLC;
-static u8* __THPLCWork672[3];
+extern u8* __THPLCWork672[3];
 
 typedef struct THPRestartFields {
     u8 pad[0x8FC];
@@ -2793,3 +2793,5 @@ void THPInit(void)
 
     OSInitFastCast();
 }
+
+u8* __THPLCWork672[3];
