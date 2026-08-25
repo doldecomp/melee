@@ -2472,7 +2472,7 @@ s32 fn_803ADE4C(s32 card_state, s32 channel, s32 callback)
 static inline s32 calculateBlocksBefore(struct CardState* file_desc,
                                         s32 file_count)
 {
-    s32 total;
+    u8* total;
     s32 i;
 
     if (file_count >= 9) {
@@ -2482,16 +2482,17 @@ static inline s32 calculateBlocksBefore(struct CardState* file_desc,
         return 0;
     }
 
-    total = 1;
+    total = (u8*) 1;
     if (file_desc->x4C[0] > 0) {
-        total = fn_803AC634(file_desc, 0);
+        total = (u8*) &((CardState*) fn_803AC634(file_desc, 0))->x8;
+        total -= 8;
     }
 
     for (i = 1; i < file_count; i++) {
         total += fn_803AC634(file_desc, i);
     }
 
-    return total;
+    return (s32) total;
 }
 
 static inline s32 queueCardCommand2(CardState* state, s32 block, void* data,
