@@ -2563,8 +2563,8 @@ static inline s32 calculateBlocksBefore(struct CardState* file_desc,
     return (s32) total;
 }
 
-static inline s32 queueCardCommand2(CardState* state, s32 block, void* data,
-                                    s32 length, s32 offset)
+static inline s32 queueCardCommand2First(CardState* state, s32 block,
+                                         void* data, s32 length, s32 offset)
 {
     s32 cmd[9];
 
@@ -2576,6 +2576,25 @@ static inline s32 queueCardCommand2(CardState* state, s32 block, void* data,
     cmd[8] = length;
     cmd[7] = offset;
     return fn_803AC168(cmd);
+}
+
+static inline s32 queueCardCommand2Final(CardState* state, s32 block,
+                                         void* data, s32 length, s32 offset)
+{
+#if defined(MUST_MATCH) && defined(__MWERKS__)
+    s32 raw[9];
+
+    raw[-7 + 0] = 2;
+    raw[-7 + 1] = (s32) state;
+    raw[-7 + 4] = block;
+    raw[-7 + 5] = 0;
+    raw[-7 + 6] = (s32) data;
+    raw[-7 + 8] = length;
+    raw[-7 + 7] = offset;
+    return fn_803AC168((s32*) ((u8*) &raw[0] - 28));
+#else
+    return queueCardCommand2First(state, block, data, length, offset);
+#endif
 }
 
 static inline s32 calculateDataBlockSize(CardState* state, s32 file_idx,
@@ -2659,11 +2678,18 @@ static inline s32 queueClearDataBlock(CardState* state, const u8* dst,
     return fn_803AC168(cmd);
 }
 
-static inline s32 queueDataBlock(CardState* state, s32 block_idx, u8* dst,
-                                 s32 size)
+static inline s32 queueDataBlockFirst(CardState* state, s32 block_idx, u8* dst,
+                                      s32 size)
 {
-    return queueCardCommand2(state, block_idx, dst, size,
-                             fn_803ACBE8(state, block_idx));
+    return queueCardCommand2First(state, block_idx, dst, size,
+                                  fn_803ACBE8(state, block_idx));
+}
+
+static inline s32 queueDataBlockFinal(CardState* state, s32 block_idx, u8* dst,
+                                      s32 size)
+{
+    return queueCardCommand2Final(state, block_idx, dst, size,
+                                  fn_803ACBE8(state, block_idx));
 }
 
 static inline s32 readCardDataBlock(CardState* state, s32 data_block, u8* dst,
@@ -2689,6 +2715,9 @@ static inline s32 readCardDataBlock(CardState* state, s32 data_block, u8* dst,
     return 0;
 }
 
+#ifdef __MWERKS__
+#pragma opt_loop_invariants off
+#endif
 s32 fn_803ADF90(struct CardState* arg0, s32 arg1, u8* arg2, s32 arg3,
                 void (*arg4)(s32, s32))
 {
@@ -2791,7 +2820,7 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, u8* arg2, s32 arg3,
             s32 data_block = block_map[i];
             if (data_block >= 0) {
                 if (arg3 != 0) {
-                    result = queueDataBlock(arg0, data_block, dst, chunk);
+                    result = queueDataBlockFirst(arg0, data_block, dst, chunk);
                     if (result < 0) {
                         cancelQueuedCardCommands(entries);
                         return result;
@@ -2826,7 +2855,8 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, u8* arg2, s32 arg3,
             s32 data_block = block_map[i];
             if (data_block >= 0) {
                 if (arg3 != 0) {
-                    result = queueDataBlock(arg0, data_block, dst, remaining);
+                    result =
+                        queueDataBlockFinal(arg0, data_block, dst, remaining);
                     if (result < 0) {
                         cancelQueuedCardCommands(entries);
                         return result;
@@ -2862,6 +2892,9 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, u8* arg2, s32 arg3,
 
     return callback_seq;
 }
+#ifdef __MWERKS__
+#pragma opt_loop_invariants on
+#endif
 
 static inline void fn_803AE7F8_rewind(CardBufEntry* entries)
 {
