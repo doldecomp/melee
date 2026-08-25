@@ -1086,9 +1086,7 @@ void mnDiagram2_Init(void)
 /// @return Fighter ID at the given rank, or SELKIND_COUNT if no data
 u8 mnDiagram2_GetRankedFighter(u8 stat_type, u8 rank)
 {
-    mnDiagram2_SortEntry* base;
     int j;
-    mnDiagram2_SortEntry* ptr;
     mnDiagram2_SortEntry entries[SELKIND_COUNT];
     mnDiagram2_SortEntry temp;
     int i;
@@ -1097,22 +1095,19 @@ u8 mnDiagram2_GetRankedFighter(u8 stat_type, u8 rank)
     int neg1;
     SelectableCharacterKind selkind;
 
-    ptr = entries;
-    base = ptr;
     i = 0;
     neg1 = -1;
 
     for (i = 0; i < SELKIND_COUNT; i++) {
         selkind = mnDiagram_GetFighterByIndex(i);
-        ptr->idx = selkind;
+        entries[i].idx = selkind;
         if (mn_IsFighterUnlocked(selkind) != 0) {
-            ptr->xC = mnDiagram2_GetStatValue(0, stat_type, selkind);
-            ptr->x8 = 0;
+            entries[i].xC = mnDiagram2_GetStatValue(0, stat_type, selkind);
+            entries[i].x8 = 0;
         } else {
-            ptr->xC = neg1;
-            ptr->x8 = neg1;
+            entries[i].xC = neg1;
+            entries[i].x8 = neg1;
         }
-        ptr++;
     }
 
     // Selection sort with insertion shift
@@ -1133,14 +1128,12 @@ u8 mnDiagram2_GetRankedFighter(u8 stat_type, u8 rank)
         }
 
         if (maxIdx != i) {
-            ptr = &entries[maxIdx];
-            temp = *ptr;
+            temp = entries[maxIdx];
 
             for (j = maxIdx; j > i; j--) {
-                *ptr = *(ptr - 1);
-                ptr--;
+                entries[j] = entries[j - 1];
             }
-            *base = temp;
+            entries[i] = temp;
         }
     }
 
