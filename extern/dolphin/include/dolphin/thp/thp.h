@@ -38,7 +38,8 @@ typedef struct _THPFileInfo {
     u32 currByte;
     u32 cnt;
     u8* x0C;
-    u8 pad[0x78 - 16];
+    THPCoeff* mcuBuffer[6];
+    u8 pad[0x78 - 0x28];
     u8 validHuffmanTabs;
     u8 x78;
     u8 pad3[0xb];
