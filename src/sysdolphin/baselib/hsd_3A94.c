@@ -1694,7 +1694,7 @@ s32 fn_803AC6B8(struct CardState* file_desc, s32 file_count)
 static inline s32 fn_803AC6B8_blocks_before(struct CardState* file_desc,
                                             s32 file_count)
 {
-    s32 total;
+    u8* total;
     s32 i;
 
     if (file_count >= 9) {
@@ -1704,16 +1704,17 @@ static inline s32 fn_803AC6B8_blocks_before(struct CardState* file_desc,
         return 0;
     }
 
-    total = 1;
+    total = (u8*) 1;
     if (file_desc->x4C[0] > 0) {
-        total = fn_803AC634(file_desc, 0);
+        total = (u8*) &((CardState*) fn_803AC634(file_desc, 0))->x8;
+        total -= 8;
     }
 
     for (i = 1; i < file_count; i++) {
         total += fn_803AC634(file_desc, i);
     }
 
-    return total;
+    return (s32) total;
 }
 
 static inline u32 fn_803AC7DC_block_count(struct CardState* file_desc,
@@ -2545,8 +2546,8 @@ static inline s32 calculateFileBlockCount(CardState* state, s32 file_idx)
     }
 }
 
-static inline s32 retryCardRead(CARDFileInfo* info, void* buffer, s32 length,
-                                s32 offset)
+static inline s32 retryCardRead(CARDFileInfo* info, s32 offset, void* buffer,
+                                s32 length)
 {
     s32 retries;
     s32 result;
@@ -2607,7 +2608,7 @@ static inline s32 readCardDataBlock(CardState* state, s32 data_block, u8* dst,
     int result;
 
     offset = fn_803ACBE8(state, data_block);
-    result = retryCardRead(&state->file_info, state->x0, state->x8, offset);
+    result = retryCardRead(&state->file_info, offset, state->x0, state->x8);
     if (result < 0) {
         return result;
     }
