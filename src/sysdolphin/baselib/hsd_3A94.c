@@ -338,8 +338,8 @@ void hsd_803A949C(s32 chan, s32 arg1)
                 }
             }
         } else {
-            remaining = state->x24 - state->x8 * CMD_S32(0x18);
             data_offset = (state->x8 * CMD_S32(0x18)) - 0x40 - icon_size;
+            remaining = state->x24 - state->x8 * CMD_S32(0x18);
             if ((u32) remaining > state->x8) {
                 if (memcmp(state->x0, (u8*) CMD_S32(0x20) + data_offset,
                            state->x8) != 0)
@@ -409,8 +409,8 @@ void hsd_803A949C(s32 chan, s32 arg1)
                 }
             }
         } else {
-            remaining = state->x24 - state->x8 * CMD_S32(0x18);
             data_offset = (state->x8 * CMD_S32(0x18)) - 0x40 - icon_size;
+            remaining = state->x24 - state->x8 * CMD_S32(0x18);
             if ((u32) remaining > state->x8) {
                 if (CMD_PTR(0x24) != NULL) {
                     memcpy((u8*) CMD_S32(0x24) + data_offset, state->x0,
