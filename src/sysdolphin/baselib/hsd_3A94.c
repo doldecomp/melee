@@ -483,8 +483,8 @@ void hsd_803A949C(s32 chan, s32 arg1)
             hsd_804D7988 = arg1;
             break;
         }
-        result = state->file_info.fileNo;
         i = 0;
+        result = state->file_info.fileNo;
         do {
             if (result != -1) {
                 break;
