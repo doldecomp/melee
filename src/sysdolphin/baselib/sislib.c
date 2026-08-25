@@ -72,6 +72,11 @@ static inline u8* HSD_SisLib_BytePtr(void* ptr)
     return ptr;
 }
 
+static inline f32 HSD_SisLib_GlyphWidth(HSD_Text* text, f32 scale_x)
+{
+    return 32.0F * text->x80.x * scale_x;
+}
+
 void* HSD_SisLib_Alloc(s32 size)
 {
     SisBlock* best;
@@ -2146,7 +2151,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                     f32 scale_y = text->font_size.y;
                                     f32 glyph_size = 32.0F * text->x80.y;
                                     f32 uv_top = 0.0F;
-                                    f32 glyph_w = 32.0F * text->x80.x * scale_x;
+                                    f32 glyph_w = HSD_SisLib_GlyphWidth(text, scale_x);
                                     f32 quad_right = (text->x88 * glyph_w) + glyph_x;
                                     f32 glyph_y = (scale_y * (line_height_out - glyph_size)) + (text->pos_y + text->current_height);
                                     f32 glyph_h = glyph_size * scale_y;
