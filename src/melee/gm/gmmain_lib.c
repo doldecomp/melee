@@ -872,23 +872,26 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     return arg0;
 }
 
-void gmMainLib_8015EA80(void)
+static inline void gmMainLib_SetHandicaps(s8* base)
 {
     s32 i;
     s32 j;
-    s8* base = gmMainLib_804D3EE0->unk_530.unk_588;
 
-    gmMainLib_8015CDEC();
     for (i = 0; i < 6; i++) {
         for (j = 0; j < 6; j++) {
             base[0x78 + i * 0x140 + j * 0x24] = 9;
         }
     }
-    for (i = 7; i < 13; i++) {
-        for (j = 0; j < 6; j++) {
-            base[0x78 + i * 0x140 + j * 0x24] = 9;
-        }
-    }
+}
+
+void gmMainLib_8015EA80(void)
+{
+    s8* base = gmMainLib_804D3EE0->unk_530.unk_588;
+    s8* base2 = base + 7 * 0x140;
+
+    gmMainLib_8015CDEC();
+    gmMainLib_SetHandicaps(base);
+    gmMainLib_SetHandicaps(base2);
 }
 
 int gmMainLib_8015ECB0(void)
