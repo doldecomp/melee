@@ -19,6 +19,7 @@
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_16A2.h>
 #include <melee/gm/gm_16AE.h>
 #include <melee/gr/stage.h>
 #include <melee/it/it_26B1.h>
