@@ -342,11 +342,9 @@ static void fn_803B376C(u8* arg0)
     f32 scratch_f11_4;
     f32 scratch_f11_5;
     f32 scratch_f11_6;
-    s32 scratch_r31_2;
     f32 scratch_f27;
     f32 scratch_f6;
-    f32 scratch_f27_3;
-    s32 scratch_r10_2;
+    f32 scratch_f8;
     f32 scratch_f27_6;
     f32 scratch_f30_4;
     f32 scratch_f28;
@@ -366,19 +364,21 @@ static void fn_803B376C(u8* arg0)
     f32 scratch_f30;
     f32 scratch_f27_2;
     f32 scratch_f6_2;
-    f32 scratch_f8;
+    f32 scratch_f27_3;
     f32 scratch_f28_2;
     f32 scratch_f8_3;
     f32 scratch_f27_5;
     f32 scratch_f27_4;
     f32 scratch_f29;
-    s32 scratch_r11_2;
-    s32 scratch_r12_2;
-    s32 scratch_r29_2;
-    s32 scratch_r30_2;
     f32 scratch_f26;
     s32 scratch_r7_2;
     s32 scratch_r9_2;
+    s32 scratch_r10_2;
+    s32 scratch_r11_2;
+    s32 scratch_r12_2;
+    s32 scratch_r31_2;
+    s32 scratch_r30_2;
+    s32 scratch_r29_2;
     s32 work_ctr;
     s32 work_ctr_2;
     s32 work_ctr_3;
@@ -428,7 +428,7 @@ static void fn_803B376C(u8* arg0)
         scratch_f30_2 = scratch_f11_3 + scratch_f28_2;
         scratch_f26_2 = -scratch_f27_3 + scratch_f8_2;
         scratch_f28_3 = -scratch_f11_3 + scratch_f28_2;
-        scratch_f27_4 = scratch_f8_2 + scratch_f27_3;
+        scratch_f27_4 = scratch_f27_3 + scratch_f8_2;
         work_r4[7] = (s32) ((0.980785 * (f64) scratch_f26_2) +
                             (0.19509 * (f64) scratch_f30_2));
         work_r4[5] = (s32) ((0.83147 * (f64) scratch_f27_4) +
