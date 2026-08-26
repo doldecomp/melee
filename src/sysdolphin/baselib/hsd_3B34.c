@@ -22,14 +22,28 @@ typedef union JpegWork {
     } data;
 } JpegWork;
 
+typedef struct JpegComment {
+    char data[0x15];
+} JpegComment;
+
+typedef struct JpegHuffDc {
+    u8 data[0x1C];
+} JpegHuffDc;
+
+typedef struct JpegHuffAc {
+    u8 data[0xB2];
+} JpegHuffAc;
+
 typedef union JpegMetadata {
     u8 raw[0x1B6];
     struct {
-        u8 comment[0x18];
-        u8 huff_dc_luma[0x1C];
-        u8 huff_dc_chroma[0x1C];
-        u8 huff_ac_luma[0xB4];
-        u8 huff_ac_chroma[0xB2];
+        JpegComment comment;
+        u8 comment_pad[3];
+        JpegHuffDc huff_dc_luma;
+        JpegHuffDc huff_dc_chroma;
+        JpegHuffAc huff_ac_luma;
+        u8 huff_ac_luma_pad[2];
+        JpegHuffAc huff_ac_chroma;
     } data;
 } JpegMetadata;
 
@@ -1371,37 +1385,40 @@ void hsd_803B4D64(u32 arg0, u32 arg1)
 
 s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
 {
-    char comment[0x15];
-    u8 huff_dc_luma[0x1C];
-    u8 huff_dc_chroma[0x1C];
-    u8 huff_ac_luma[0xB2];
-    u8* work_r26_2;
+    JpegComment comment;
+    JpegHuffDc huff_dc_luma;
+    JpegHuffDc huff_dc_chroma;
+    JpegHuffAc huff_ac_luma;
+    s32* work_r26_2;
     s32 scratch_r6_4;
     s32 scratch_r6_5;
     s32 scratch_r7_2;
     s32 scratch_r7_4;
-    s32 work_r24;
+    s32 quant_scale;
     s32 work_r25;
+    s32 work_r24;
+    const JpegMetadata* metadata = &lbl_803B9670;
     s32 work_r26;
     s32 work_r3;
     s32 work_r3_2;
     u32 scratch_r23;
     u8 scratch_r6_3;
     u8 scratch_r7_3;
-    u8* scratch_r6;
-    u8* quant_table;
+    u8* quant_table = lbl_80430C40;
     u8* chroma_quant_table;
     u8* base;
     JpegWork* work;
     u8* work_r23;
-    u8 huff_ac_chroma[0xB2];
-    u8* work_r4_4;
-    u8* work_r4_5;
-    u8* work_r5_3;
-    s32 scratch_r0;
-    s32 width;
+    JpegHuffAc huff_ac_chroma;
+    s32* work_r4_3;
+    s32* work_r4_4;
+    s32* work_r4_5;
+    u16 scratch_r0;
     s32 height;
+    s32 width;
     u8* src;
+
+    PAD_STACK(0x2C);
 
     base = HSD_804D2648_BUF;
     work = (JpegWork*) base;
@@ -1412,8 +1429,6 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
     hsd_804D79AC = 0;
     hsd_804D79A0 = (u8*) arg3;
     hsd_804D79A4 = (u8*) arg3;
-    quant_table = lbl_80430C40;
-    chroma_quant_table = quant_table + 0x40;
     work->data.prev_dc[0] = work->data.prev_dc[1] = work->data.prev_dc[2] = 0;
     if (__setjmp((__jmp_buf*) base) != 0) {
         return 0;
@@ -1429,45 +1444,43 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
         longjmp((__jmp_buf*) base, 1);
     }
     hsd_803B46D4();
-    memcpy(comment, lbl_803B9670.data.comment, sizeof(comment));
-    scratch_r23 = strlen(comment) + 1;
+    comment = metadata->data.comment;
+    scratch_r23 = strlen(comment.data) + 1;
     hsd_803B3344(0xFFU);
     hsd_803B3344(0xFEU);
     scratch_r0 = scratch_r23 + 2;
-    hsd_803B3344((u8) (scratch_r0 >> 8U));
+    hsd_803B3344((u8) ((scratch_r23 + 2) >> 8U));
     hsd_803B3344((u8) scratch_r0);
-    hsd_803B3398(comment, scratch_r23);
+    hsd_803B3398(comment.data, scratch_r23);
     hsd_803B4A2C();
-    memcpy(huff_dc_luma, lbl_803B9670.data.huff_dc_luma, sizeof(huff_dc_luma));
+    huff_dc_luma = metadata->data.huff_dc_luma;
     hsd_803B3344(0xFFU);
     hsd_803B3344(0xC4U);
     hsd_803B3344(0U);
     hsd_803B3344(0x1FU);
     hsd_803B3344(0U);
-    hsd_803B3398(huff_dc_luma, 0x1CU);
-    memcpy(huff_dc_chroma, lbl_803B9670.data.huff_dc_chroma,
-           sizeof(huff_dc_chroma));
+    hsd_803B3398(huff_dc_luma.data, 0x1CU);
+    huff_dc_chroma = metadata->data.huff_dc_chroma;
     hsd_803B3344(0xFFU);
     hsd_803B3344(0xC4U);
     hsd_803B3344(0U);
     hsd_803B3344(0x1FU);
     hsd_803B3344(1U);
-    hsd_803B3398(huff_dc_chroma, 0x1CU);
-    memcpy(huff_ac_luma, lbl_803B9670.data.huff_ac_luma, sizeof(huff_ac_luma));
+    hsd_803B3398(huff_dc_chroma.data, 0x1CU);
+    huff_ac_luma = metadata->data.huff_ac_luma;
     hsd_803B3344(0xFFU);
     hsd_803B3344(0xC4U);
     hsd_803B3344(0U);
     hsd_803B3344(0xB5U);
     hsd_803B3344(0x10U);
-    hsd_803B3398(huff_ac_luma, 0xB2U);
-    memcpy(huff_ac_chroma, lbl_803B9670.data.huff_ac_chroma,
-           sizeof(huff_ac_chroma));
+    hsd_803B3398(huff_ac_luma.data, 0xB2U);
+    huff_ac_chroma = metadata->data.huff_ac_chroma;
     hsd_803B3344(0xFFU);
     hsd_803B3344(0xC4U);
     hsd_803B3344(0U);
     hsd_803B3344(0xB5U);
     hsd_803B3344(0x11U);
-    hsd_803B3398(huff_ac_chroma, 0xB2U);
+    hsd_803B3398(huff_ac_chroma.data, 0xB2U);
     hsd_803B4D64(width, height);
     if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
         *hsd_804D79A0++ = 0xFF;
@@ -1542,123 +1555,126 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
     for (work_r24 = 0; work_r24 < height; work_r24 += 0x10) {
         for (work_r25 = 0; work_r25 < width; work_r25 += 0x10) {
             s32 work_r3_3;
-            u8* work_r5_4;
+            s32* work_r5_4;
             hsd_803B3408(src, work_r25, work_r24, width, height);
             work_r26 = 0;
             work_r23 = base + 0x118;
-        loop_61:
-            if (work_r26 < 4) {
-                u8* work_r4_3;
+            while (work_r26 < 4) {
+                s32* work_r5_3;
                 fn_803B376C(work_r23);
-                work_r4_3 = work_r23;
-                work_r5_3 = base + 0x718;
+                quant_scale = lbl_804D6398;
+                work_r4_3 = (s32*) work_r23;
+                work_r5_3 = (s32*) (base + 0x718);
                 for (work_r3 = 0; work_r3 < 0x40; work_r3 += 8) {
                     u8 scratch_r7;
+                    u8* scratch_r6;
                     scratch_r6 = quant_table + work_r3;
-                    scratch_r7 = M2C_FIELD(scratch_r6, u8*, 0);
-                    M2C_FIELD(work_r5_3, s32*, 0) =
-                        ((s32) M2C_FIELD(work_r4_3, s32*, 0) /
-                         ((s32) scratch_r7 / lbl_804D6398));
-                    M2C_FIELD(work_r5_3, s32*, 4) =
-                        ((s32) M2C_FIELD(work_r4_3, s32*, 4) /
-                         ((s32) M2C_FIELD(scratch_r6, u8*, 1) / lbl_804D6398));
-                    M2C_FIELD(work_r5_3, s32*, 8) =
-                        ((s32) M2C_FIELD(work_r4_3, s32*, 8) /
-                         ((s32) M2C_FIELD(scratch_r6, u8*, 2) / lbl_804D6398));
-                    M2C_FIELD(work_r5_3, s32*, 0xC) =
-                        ((s32) M2C_FIELD(work_r4_3, s32*, 0xC) /
-                         ((s32) M2C_FIELD(scratch_r6, u8*, 3) / lbl_804D6398));
-                    M2C_FIELD(work_r5_3, s32*, 0x10) =
-                        ((s32) M2C_FIELD(work_r4_3, s32*, 0x10) /
-                         ((s32) M2C_FIELD(scratch_r6, u8*, 4) / lbl_804D6398));
-                    M2C_FIELD(work_r5_3, s32*, 0x14) =
-                        ((s32) M2C_FIELD(work_r4_3, s32*, 0x14) /
-                         ((s32) M2C_FIELD(scratch_r6, u8*, 5) / lbl_804D6398));
-                    M2C_FIELD(work_r5_3, s32*, 0x18) =
-                        ((s32) M2C_FIELD(work_r4_3, s32*, 0x18) /
-                         ((s32) M2C_FIELD(scratch_r6, u8*, 6) / lbl_804D6398));
-                    scratch_r7_2 = M2C_FIELD(work_r4_3, s32*, 0x1C);
-                    work_r4_3 += 0x20;
-                    M2C_FIELD(work_r5_3, s32*, 0x1C) =
+                    scratch_r7 = scratch_r6[0];
+                    work_r5_3[0] =
+                        ((s32) work_r4_3[0] /
+                         ((s32) scratch_r7 / quant_scale));
+                    work_r5_3[1] =
+                        ((s32) work_r4_3[1] /
+                         ((s32) scratch_r6[1] / quant_scale));
+                    work_r5_3[2] =
+                        ((s32) work_r4_3[2] /
+                         ((s32) scratch_r6[2] / quant_scale));
+                    work_r5_3[3] =
+                        ((s32) work_r4_3[3] /
+                         ((s32) scratch_r6[3] / quant_scale));
+                    work_r5_3[4] =
+                        ((s32) work_r4_3[4] /
+                         ((s32) scratch_r6[4] / quant_scale));
+                    work_r5_3[5] =
+                        ((s32) work_r4_3[5] /
+                         ((s32) scratch_r6[5] / quant_scale));
+                    work_r5_3[6] =
+                        ((s32) work_r4_3[6] /
+                         ((s32) scratch_r6[6] / quant_scale));
+                    scratch_r7_2 = work_r4_3[7];
+                    work_r4_3 += 8;
+                    work_r5_3[7] =
                         (scratch_r7_2 /
-                         ((s32) M2C_FIELD(scratch_r6, u8*, 7) / lbl_804D6398));
-                    work_r5_3 += 0x20;
+                         ((s32) scratch_r6[7] / quant_scale));
+                    work_r5_3 += 8;
                 }
                 hsd_803B3CD8(0);
                 work_r23 += 0x100;
-                work_r26 += 1;
-                goto loop_61;
+                work_r26++;
             }
+            chroma_quant_table = quant_table + 0x40;
             fn_803B376C(base + 0x518);
-            work_r26_2 = base + 0x718;
+            work_r26_2 = (s32*) (base + 0x718);
+            quant_scale = lbl_804D6398;
             work_r5_4 = work_r26_2;
-            work_r4_4 = base + 0x518;
+            work_r4_4 = (s32*) (base + 0x518);
             for (work_r3_2 = 0; work_r3_2 < 0x40; work_r3_2 += 8) {
                 u8* scratch_r6_2;
                 scratch_r6_2 = chroma_quant_table + work_r3_2;
-                scratch_r7_3 = M2C_FIELD(scratch_r6_2, u8*, 0);
-                M2C_FIELD(work_r5_4, s32*, 0) =
-                    ((s32) M2C_FIELD(work_r4_4, s32*, 0) /
-                     ((s32) scratch_r7_3 / lbl_804D6398));
-                M2C_FIELD(work_r5_4, s32*, 4) =
-                    ((s32) M2C_FIELD(work_r4_4, s32*, 4) /
-                     ((s32) M2C_FIELD(scratch_r6_2, u8*, 1) / lbl_804D6398));
-                M2C_FIELD(work_r5_4, s32*, 8) =
-                    ((s32) M2C_FIELD(work_r4_4, s32*, 8) /
-                     ((s32) M2C_FIELD(scratch_r6_2, u8*, 2) / lbl_804D6398));
-                M2C_FIELD(work_r5_4, s32*, 0xC) =
-                    ((s32) M2C_FIELD(work_r4_4, s32*, 0xC) /
-                     ((s32) M2C_FIELD(scratch_r6_2, u8*, 3) / lbl_804D6398));
-                M2C_FIELD(work_r5_4, s32*, 0x10) =
-                    ((s32) M2C_FIELD(work_r4_4, s32*, 0x10) /
-                     ((s32) M2C_FIELD(scratch_r6_2, u8*, 4) / lbl_804D6398));
-                M2C_FIELD(work_r5_4, s32*, 0x14) =
-                    ((s32) M2C_FIELD(work_r4_4, s32*, 0x14) /
-                     ((s32) M2C_FIELD(scratch_r6_2, u8*, 5) / lbl_804D6398));
-                M2C_FIELD(work_r5_4, s32*, 0x18) =
-                    ((s32) M2C_FIELD(work_r4_4, s32*, 0x18) /
-                     ((s32) M2C_FIELD(scratch_r6_2, u8*, 6) / lbl_804D6398));
-                scratch_r7_4 = M2C_FIELD(work_r4_4, s32*, 0x1C);
-                work_r4_4 += 0x20;
-                M2C_FIELD(work_r5_4, s32*, 0x1C) =
+                scratch_r7_3 = scratch_r6_2[0];
+                work_r5_4[0] =
+                    ((s32) work_r4_4[0] /
+                     ((s32) scratch_r7_3 / quant_scale));
+                work_r5_4[1] =
+                    ((s32) work_r4_4[1] /
+                     ((s32) scratch_r6_2[1] / quant_scale));
+                work_r5_4[2] =
+                    ((s32) work_r4_4[2] /
+                     ((s32) scratch_r6_2[2] / quant_scale));
+                work_r5_4[3] =
+                    ((s32) work_r4_4[3] /
+                     ((s32) scratch_r6_2[3] / quant_scale));
+                work_r5_4[4] =
+                    ((s32) work_r4_4[4] /
+                     ((s32) scratch_r6_2[4] / quant_scale));
+                work_r5_4[5] =
+                    ((s32) work_r4_4[5] /
+                     ((s32) scratch_r6_2[5] / quant_scale));
+                work_r5_4[6] =
+                    ((s32) work_r4_4[6] /
+                     ((s32) scratch_r6_2[6] / quant_scale));
+                scratch_r7_4 = work_r4_4[7];
+                work_r4_4 += 8;
+                work_r5_4[7] =
                     (scratch_r7_4 /
-                     ((s32) M2C_FIELD(scratch_r6_2, u8*, 7) / lbl_804D6398));
-                work_r5_4 += 0x20;
+                     ((s32) scratch_r6_2[7] / quant_scale));
+                work_r5_4 += 8;
             }
             hsd_803B3CD8(1);
             fn_803B376C(base + 0x618);
-            work_r4_5 = base + 0x618;
+            quant_scale = lbl_804D6398;
+            work_r4_5 = (s32*) (base + 0x618);
             for (work_r3_3 = 0; work_r3_3 < 0x40; work_r3_3 += 8) {
                 u8* scratch_r5;
                 scratch_r5 = chroma_quant_table + work_r3_3;
-                scratch_r6_3 = M2C_FIELD(scratch_r5, u8*, 0);
-                M2C_FIELD(work_r26_2, s32*, 0) =
-                    ((s32) M2C_FIELD(work_r4_5, s32*, 0) /
-                     ((s32) scratch_r6_3 / lbl_804D6398));
-                M2C_FIELD(work_r26_2, s32*, 4) =
-                    ((s32) M2C_FIELD(work_r4_5, s32*, 4) /
-                     ((s32) M2C_FIELD(scratch_r5, u8*, 1) / lbl_804D6398));
-                M2C_FIELD(work_r26_2, s32*, 8) =
-                    ((s32) M2C_FIELD(work_r4_5, s32*, 8) /
-                     ((s32) M2C_FIELD(scratch_r5, u8*, 2) / lbl_804D6398));
-                M2C_FIELD(work_r26_2, s32*, 0xC) =
-                    ((s32) M2C_FIELD(work_r4_5, s32*, 0xC) /
-                     ((s32) M2C_FIELD(scratch_r5, u8*, 3) / lbl_804D6398));
-                M2C_FIELD(work_r26_2, s32*, 0x10) =
-                    ((s32) M2C_FIELD(work_r4_5, s32*, 0x10) /
-                     ((s32) M2C_FIELD(scratch_r5, u8*, 4) / lbl_804D6398));
-                M2C_FIELD(work_r26_2, s32*, 0x14) =
-                    ((s32) M2C_FIELD(work_r4_5, s32*, 0x14) /
-                     ((s32) M2C_FIELD(scratch_r5, u8*, 5) / lbl_804D6398));
-                M2C_FIELD(work_r26_2, s32*, 0x18) =
-                    ((s32) M2C_FIELD(work_r4_5, s32*, 0x18) /
-                     ((s32) M2C_FIELD(scratch_r5, u8*, 6) / lbl_804D6398));
-                scratch_r6_4 = M2C_FIELD(work_r4_5, s32*, 0x1C);
-                work_r4_5 += 0x20;
-                M2C_FIELD(work_r26_2, s32*, 0x1C) =
+                scratch_r6_3 = scratch_r5[0];
+                work_r26_2[0] =
+                    ((s32) work_r4_5[0] /
+                     ((s32) scratch_r6_3 / quant_scale));
+                work_r26_2[1] =
+                    ((s32) work_r4_5[1] /
+                     ((s32) scratch_r5[1] / quant_scale));
+                work_r26_2[2] =
+                    ((s32) work_r4_5[2] /
+                     ((s32) scratch_r5[2] / quant_scale));
+                work_r26_2[3] =
+                    ((s32) work_r4_5[3] /
+                     ((s32) scratch_r5[3] / quant_scale));
+                work_r26_2[4] =
+                    ((s32) work_r4_5[4] /
+                     ((s32) scratch_r5[4] / quant_scale));
+                work_r26_2[5] =
+                    ((s32) work_r4_5[5] /
+                     ((s32) scratch_r5[5] / quant_scale));
+                work_r26_2[6] =
+                    ((s32) work_r4_5[6] /
+                     ((s32) scratch_r5[6] / quant_scale));
+                scratch_r6_4 = work_r4_5[7];
+                work_r4_5 += 8;
+                work_r26_2[7] =
                     (scratch_r6_4 /
-                     ((s32) M2C_FIELD(scratch_r5, u8*, 7) / lbl_804D6398));
-                work_r26_2 += 0x20;
+                     ((s32) scratch_r5[7] / quant_scale));
+                work_r26_2 += 8;
             }
             hsd_803B3CD8(2);
         }
@@ -1671,9 +1687,11 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
 #endif
         scratch_r6_5 = 8 - hsd_804D79AC;
         hsd_804D79B0 <<= scratch_r6_5;
-        hsd_804D79B0 |= (1 << scratch_r6_5) - 1;
+        scratch_r6_4 = 1 << scratch_r6_5;
+        hsd_804D79B0 |= scratch_r6_4 - 1;
+        scratch_r6_3 = hsd_804D79B0;
         if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
-            *hsd_804D79A0++ = hsd_804D79B0;
+            *hsd_804D79A0++ = scratch_r6_3;
         } else {
             longjmp((__jmp_buf*) base, 1);
         }
