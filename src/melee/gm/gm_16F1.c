@@ -381,7 +381,8 @@ int fn_8016FAD4(struct lbl_8046B6A0_24C_t* rules, int kind, int flags,
     for (i = 0; i < 6; i++) {
         if (x58[i].x0 != 3) {
             u16 sd = x58[i].xA;
-            scores[i] = x58[i].x20 - (x58[i].x24 - sd) + (s8) rules->xC * sd;
+            scores[i] = x58[i].x20 - (x58[i].x24 - sd) +
+                        *(s8*) &rules->xC * sd;
         }
     }
 
@@ -403,6 +404,15 @@ int fn_8016FAD4(struct lbl_8046B6A0_24C_t* rules, int kind, int flags,
         u8 pr = rankings[player];
         if (pr == 0) {
             return lbl_803D5648[entry->x2 - 2] * 2;
+        }
+        {
+            int active_count = 0;
+            for (i = 0; i < 4; i++) {
+                if (x58[i].x0 != 3) {
+                    active_count++;
+                }
+            }
+            (void) active_count;
         }
         if (pr == rankings[6]) {
             return lbl_803D5648[entry->x2 - 2] / 2;
