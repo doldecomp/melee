@@ -1055,7 +1055,17 @@ static inline void hsd_80394F48_set_base_color(void** color)
     *color = &lbl_8040AB00;
 }
 
+static inline s32 hsd_80394F48_get_x4(s32* x4)
+{
+    return *x4;
+}
+
 // @TODO: Currently 96.77% match - register allocation differences remain
+static inline s32 hsd_80394F48_get_x40(s32* px40)
+{
+    return *px40;
+}
+
 void hsd_80394F48(void* data)
 {
     struct lbl_8040AB00_t* base_color = &lbl_8040AB00;
@@ -1063,7 +1073,7 @@ void hsd_80394F48(void* data)
     EventData* dp = data;
     s32 num_entries;
     void** px50;
-    s32* pxC8;
+    s32 cur_row;
     s32* pxCC;
     s32* px4;
     s32* px40;
@@ -1072,7 +1082,7 @@ void hsd_80394F48(void* data)
     s32 saved_row;
     void* hi_color;
     s32 x_base;
-    s32 cur_row;
+    s32* pxC8;
     s32 i;
     s32 b6;
 
@@ -1176,8 +1186,14 @@ void hsd_80394F48(void* data)
         hsd_803922FC(((ParticleFontData*) sp->x4C)->x968, *px4, *px8, b6,
                      (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     } else {
-        hsd_803921B8(((ParticleFontData*) sp->x4C)->x968, *px4, *px8,
-                     (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
+        {
+            s32 xfb_width = sp->x3C;
+
+            hsd_803921B8(
+                ((ParticleFontData*) sp->x4C)->x968,
+                hsd_80394F48_get_x4(px4), *px8, (&sp->x24)[sp->x34],
+                xfb_width, *px40, sp->x44, *px50);
+        }
     }
 
     {
@@ -1205,7 +1221,8 @@ void hsd_80394F48(void* data)
                      (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     } else {
         hsd_803921B8(((ParticleFontData*) sp->x4C)->x968, *px4, *px8,
-                     (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
+                     (&sp->x24)[sp->x34], sp->x3C,
+                     hsd_80394F48_get_x40(px40), sp->x44, *px50);
     }
 
     *px4 += 11;
