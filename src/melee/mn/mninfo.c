@@ -499,6 +499,7 @@ s32 mnInfo_80252758(void)
     HSD_GObjProc* proc;
     HSD_GObj* gobj;
     HSD_Archive* archive;
+    HSD_AnimJoint** animjoint = &mnInfo_804A0958.animjoint;
     PAD_STACK(8);
 
     (void) "Can't get user_data.\n";
@@ -512,11 +513,10 @@ s32 mnInfo_80252758(void)
 
     archive = mn_804D6BB8;
     lbArchive_LoadSections(
-        archive, &mnInfo_804A0958.joint, "MenMainConCo_Top_joint",
-        &mnInfo_804A0958.animjoint, "MenMainConCo_Top_animjoint",
-        &mnInfo_804A0958.matanim_joint, "MenMainConCo_Top_matanim_joint",
-        &mnInfo_804A0958.shapeanim_joint, "MenMainConCo_Top_shapeanim_joint",
-        0);
+        archive, &mnInfo_804A0958.joint, "MenMainConCo_Top_joint", animjoint,
+        "MenMainConCo_Top_animjoint", &mnInfo_804A0958.matanim_joint,
+        "MenMainConCo_Top_matanim_joint", &mnInfo_804A0958.shapeanim_joint,
+        "MenMainConCo_Top_shapeanim_joint", 0);
 
     mnInfo_80251AFC();
 
