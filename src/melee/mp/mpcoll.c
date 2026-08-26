@@ -94,7 +94,7 @@ void mpCollPrev(CollData* cd)
 
     mpColl_804D64A0 = NULL;
     mpColl_804D64A4 = NULL;
-    if (DbLevel >= 3) {
+    if (DbLevel >= DbLKind_DebugRom) {
         if (!(cd->cur_pos.x < 45000.0F) || !(cd->cur_pos.x > -45000.0F) ||
             !(cd->cur_pos.y < 45000.0F) || !(cd->cur_pos.y > -45000.0F))
         {
@@ -815,7 +815,7 @@ void mpCollEnd(CollData* coll, bool arg1, bool arg2)
         mpCollEnd_inline2(coll, coll->ceiling.index, arg2,
                           coll->cur_pos.y - coll->last_pos.y);
     }
-    if (DbLevel >= 3) {
+    if (DbLevel >= DbLKind_DebugRom) {
         if (!(coll->cur_pos.x < 45000.0F && coll->cur_pos.x > -45000.0F &&
               coll->cur_pos.y < 45000.0F && coll->cur_pos.y > -45000.0F))
         {

@@ -367,7 +367,7 @@ f32 ft_80089228(Fighter* fp, int attack_id, int arg2, f32 arg3)
     f32 var_f31;
     StaleMoveTable* tmp;
 
-    if (DbLevel >= 3) {
+    if (DbLevel >= DbLKind_DebugRom) {
         return arg3;
     }
     var_f31 = arg3;

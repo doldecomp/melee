@@ -3095,7 +3095,7 @@ int gm_801BF050(void)
 void gm_801BF060(GameScene* arg0)
 {
     int* temp_r3 = gm_GetGameSceneLeaveDataCallback(arg0);
-    if (DbLevel >= 3) {
+    if (DbLevel >= DbLKind_DebugRom) {
         if (*temp_r3 & 0x100) {
             gm_SetPendingGameMode(GM_DEBUG_VS);
             gm_SetNewGameModePending();

@@ -90,7 +90,7 @@ void ftCo_800DEAE8(Fighter_GObj* gobj, FtMotionId msid0, FtMotionId msid1)
 void ftCo_800DEBD0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (DbLevel >= 3) {
+    if (DbLevel >= DbLKind_DebugRom) {
         if (fp->kind == FTKIND_PEACH) {
             ftPe_Init_8011B93C(gobj);
         }
