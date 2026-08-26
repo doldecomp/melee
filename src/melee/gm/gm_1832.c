@@ -2008,33 +2008,39 @@ int fn_801884F8(void)
 
 void fn_80188550(int arg0)
 {
-    TrainingModeState* state = &lbl_80473700;
-    int current = state->count;
+    union {
+        TrainingModeState* state;
+        u8* bytes;
+    } data;
+    int current;
     int j;
     int to_remove;
 
+    data.state = &lbl_80473700;
+    current = data.state->count;
+
     if (arg0 != current) {
-        if (arg0 > state->count) {
-            PlayerInitData* player;
+        if (arg0 > data.state->count) {
+            u8* player;
             int i;
             int skip;
             int remaining;
 
-            skip = state->count;
-            player = state->players;
+            skip = data.state->count;
+            player = data.bytes;
             remaining = arg0 - current;
             i = 0;
             j = 0;
 
-            for (i = 0; i < 4; i++, player++) {
+            for (i = 0; i < 4; i++, player += sizeof(PlayerInitData)) {
                 if (i != 0) {
                     if (skip == 0) {
                         if (i != 0) {
-                            player->slot_type = 1;
+                            player[0x75] = 1;
                         } else {
-                            player->slot_type = j;
+                            player[0x75] = j;
                         }
-                        gm_8016EDDC(i, player);
+                        gm_8016EDDC(i, (PlayerInitData*) &player[0x74]);
                         if (--remaining == 0) {
                             break;
                         }
@@ -2059,7 +2065,7 @@ void fn_80188550(int arg0)
                 }
             }
         }
-        state->count = arg0;
+        data.state->count = arg0;
     }
 }
 
