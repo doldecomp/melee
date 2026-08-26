@@ -246,6 +246,11 @@ HSD_JObj* mnVibration_GetNameRowJObj(s32 count)
 #pragma pop
 #endif
 
+static inline f32 mnVibration_GetCursorYSpacing(f32 base_y, HSD_JObj* jobj)
+{
+    return HSD_JObjGetTranslationY(jobj) - base_y;
+}
+
 void mnVibration_HandleInput(HSD_GObj* gobj)
 {
     HSD_JObj* cursor_jobj;
@@ -263,8 +268,6 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     u8 rumble_setting;
     HSD_JObj* loaded_joint;
     HSD_JObj* jobj;
-
-    PAD_STACK(4);
 
     if (mn_804D6BC8.cooldown != 0) {
         Menu_DecrementAnimTimer();
@@ -300,7 +303,9 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
 
     // Check A button per controller for rumble toggle
     for (i = 0; i < 4; i++) {
-        if (data->x0[i + 2] == 0) {
+        s32 port_mode = data->x0[i + 2];
+
+        if (port_mode == 0) {
             inputs = gm_GetButtonsTriggered(i);
             if (inputs & PAD_CONFIRM) {
                 HSD_JObj* temp_jobj;
@@ -445,7 +450,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 cursor_row = mnVibration_GetCursorRow(data);
                 base_y = HSD_JObjGetTranslationY(jobj17);
                 jobj18 = data2->jobjs[18];
-                spacing = HSD_JObjGetTranslationY(jobj18) - base_y;
+                spacing = mnVibration_GetCursorYSpacing(base_y, jobj18);
                 HSD_JObjSetTranslateX(cursor_jobj,
                                       HSD_JObjGetTranslationX(jobj17));
                 HSD_JObjSetTranslateY(
@@ -818,11 +823,6 @@ void mnVibration_Think(HSD_GObj* gobj)
         }
         port_idx += 1;
     } while (port_idx < 4);
-}
-
-static inline f32 mnVibration_GetCursorYSpacing(f32 base_y, HSD_JObj* jobj)
-{
-    return mnVibration_JObjGetTranslationY(jobj) - base_y;
 }
 
 void mnVibration_IntroProc(HSD_GObj* arg0)
