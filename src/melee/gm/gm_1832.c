@@ -100,7 +100,7 @@ static HSD_Archive* lbl_804D65F8;
 static HSD_GObj* lbl_804D65F0;
 static SceneDesc* lbl_804D6600;
 
-extern int lbl_804D6608;
+static int lbl_804D6608;
 
 typedef struct {
     s32 v[6];
@@ -123,16 +123,6 @@ ASSERT_SIZE(TrainingItemEntry, 4);
 static inline TrainingItemEntry* TrainingItemTable_Get(void)
 {
     return (TrainingItemEntry*) lbl_803D9828;
-}
-
-static inline s16 TrainingItemTable_GetItemId(s32 idx)
-{
-    return TrainingItemTable_Get()[idx].item_id;
-}
-
-static inline s16 TrainingItemTable_GetTextId(s32 idx)
-{
-    return TrainingItemTable_Get()[idx].text_id;
 }
 
 typedef struct {
@@ -1383,7 +1373,7 @@ void fn_80186F6C(HSD_GObj* arg0)
     }
 }
 
-extern HSD_Archive* lbl_804D6610;
+static HSD_Archive* lbl_804D6610;
 
 #ifdef MUST_MATCH
 #pragma push
@@ -1989,22 +1979,6 @@ int fn_8018846C(void)
     }
     if (ptr[68] != 0) {
         return ptr[67];
-    }
-    return result;
-}
-
-static inline int fn_801884F8_inline(void)
-{
-    int result;
-    TrainingModeState* state = &lbl_80473700;
-
-    result = pl_80041300(0);
-    if (result != 0) {
-        state->result_cache[0] = result;
-        state->result_cache[1] = 1;
-    }
-    if (state->result_cache[1] != 0) {
-        result = state->result_cache[0];
     }
     return result;
 }
@@ -2628,17 +2602,18 @@ void fn_801891F4(void)
         }
     } else {
         if (sub->x01 == 1) {
-            ClassicProcArray speeds;
             int cpu_type;
             int damage;
-            PAD_STACK(32);
+            f32 speeds[] = {
+                2, 1.5, 1, 0.666, 0.5, 0.25,
+            };
 
-            speeds = *(ClassicProcArray*) lbl_803B7C68;
+            PAD_STACK(32);
 
             sfxBack();
             sub->anim_frames[22] = 0x14;
             lb_80019880(__cvt_dbl_usll(
-                (f64) (0.016666668f / ((f32*) speeds.v)[sub->menu_values[0]] *
+                (f64) (0.016666668f / speeds[sub->menu_values[0]] *
                        (f32) gm_801891F4_GetTickRate())));
 
             fn_80188550(sub->menu_values[2] + 1);

@@ -193,53 +193,11 @@
 /* 168F7C */ UNK_RET fn_80168F7C(UNK_PARAMS);
 /* 168F88 */ void gm_80168F88(void);
 /* 168FC4 */ void gm_80168FC4(void);
-/* 169000 */ s32 fn_80169000(void* arg0, void* arg1);
+/* 169000 */ s32 fn_80169000(MatchEnd* arg0, u8* arg1);
 /* 169238 */ u8 gm_80169238(u8);
 /* 169264 */ u8 gm_80169264(u8);
 /* 169290 */ u8 gm_80169290(u8);
 /* 1692BC */ u8 gm_801692BC(u8);
 /* 1692E8 */ void gm_801692E8(u32 secs, datetime* datetime);
-/* 169364 */ struct lbl_8046B488_t* gm_1601_GetUnkData(void);
-/* 169370 */ u8 gm_80169370(s32);
-/* 169384 */ int gm_80169384(void);
-/* 169394 */ s32 gm_80169394(void);
-/* 1693BC */ bool gm_801693BC(int);
-/* 169434 */ void fn_80169434(GmRouteCallback fn);
-/* 169444 */ bool fn_80169444(bool);
-/* 1694A0 */ int gm_801694A0(HSD_GObj*);
-/* 169520 */ void* gm_80169520(void);
-/* 169530 */ void* gm_80169530(void);
-/* 169540 */ void* gm_80169540(void);
-/* 169550 */ void fn_80169550(int slot);
-/* 169574 */ void fn_80169574(ssize_t size, s8* buf);
-/* 1695BC */ void fn_801695BC(u8, u8, u8, const u8*, u8*);
-/* 1697FC */ void fn_801697FC(s8, s8, s8, s8, s8*);
-/* 16989C */ void fn_8016989C(u8*, u8, u8, u8*, u8*);
-/* 169900 */ void fn_80169900(u8, struct lbl_8046B488_t*, s8*, s8*);
-/* 169A84 */ s32 fn_80169A84(u8, s8*, s8*);
-/* 169C54 */ void fn_80169C54(s8, s8);
-/* 169F50 */ UNK_RET fn_80169F50(s8, s8);
-/* 16A09C */ UNK_RET fn_8016A09C(UNK_PARAMS);
-/* 16A164 */ UNK_RET gm_8016A164(UNK_PARAMS);
-/* 16A1F8 */ bool gm_8016A1F8(void);
-/* 16A21C */ void gm_8016A21C(StartMeleeRules*);
-/* 16A22C */ s32 gm_8016A22C(s8 ckind0, s8 ckind1, s8 ckind2, u8, u8, int, int,
-                             int, u8 color, u8, u8, int opp_count, int, int,
-                             int, int, int, f32, f32);
-/* 16A404 */ void gm_8016A404(s32 arg0);
-/* 16A414 */ void gm_8016A414(f32 arg8);
-/* 16A424 */ void gm_8016A424(s8 arg0);
-/* 16A434 */ void gm_8016A434(void);
-/* 16A450 */ void fn_8016A450(void);
-/* 16A46C */ void fn_8016A46C(void);
-/* 16A488 */ void fn_8016A488(int);
-/* 16A4C8 */ void fn_8016A4C8(void);
-/* 16A92C */ void gm_8016A92C(StartMeleeRules*);
-/* 16A944 */ bool gm_8016A944(UNK_PARAMS);
-/* 16A97C */ void* gm_8016A97C(void);
-/* 16A98C */ struct lbl_8046B668_t* gm_8016A98C(void);
-/* 16A998 */ int gm_8016A998(s8, s8);
-/* 16A9E8 */ int gm_8016A9E8(u8 arg0, s8 arg1);
-/* 16AC44 */ bool gm_8016AC44(s8 ckind, s8 costume_id);
 
 #endif

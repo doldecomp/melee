@@ -63,12 +63,6 @@ typedef struct CamDesc {
 } CamDesc;
 extern CamDesc lbl_803B7CA8;
 
-static inline BracketEntrySlot* BracketEntry_GetSlot(BracketEntry* entry,
-                                                     s32 slot_idx)
-{
-    return &entry->slots[slot_idx];
-}
-
 typedef struct BracketData {
     /* 0x0000 */ BracketEntry entries[64];
     /* 0x3700 */ BracketSrcEntry* srcs[3];
@@ -77,12 +71,6 @@ typedef struct BracketData {
 typedef struct BracketSrcPtr {
     BracketSrcEntry* ptr;
 } BracketSrcPtr;
-
-static inline BracketSrcEntry* BracketData_GetSrc(BracketEntry* entries,
-                                                  s32 region)
-{
-    return ((BracketData*) ((BracketSrcPtr*) entries + region))->srcs[0];
-}
 
 static inline void gmTournament_SetBracketByes(BracketEntry* entries,
                                                s32 entrant_count)
@@ -1363,11 +1351,6 @@ void fn_8018D50C(BracketEntry* data, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
 }
 
 static GXColor const col = { 0xFF, 0xFF, 0x00, 0xFF };
-
-static inline int fn_8018DC18_inline0(BracketEntry* data)
-{
-    return data->x20.g;
-}
 
 void fn_8018DC18(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                  s32 arg5)

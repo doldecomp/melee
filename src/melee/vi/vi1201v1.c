@@ -69,11 +69,13 @@ void un_8031F9B4(HSD_GObj* gobj)
 }
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void order_sdata2(void)
 {
     (void) 0.55f;
     (void) 1.0f;
 }
+#endif
 
 void un_8031F9D8(CharacterKind char_index, int costume_id)
 {
@@ -267,10 +269,12 @@ static inline void un_8031FD18_SetupStand(void)
 }
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data(void)
 {
     (void) "!(jobj->flags & JOBJ_USE_QUATERNION)";
 }
+#endif
 
 void un_8031FD18_OnEnter(void* arg)
 {

@@ -27,15 +27,7 @@
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftlib.h>
-#include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_16AE.h>
-#include <melee/gm/gm_16F1.h>
-#include <melee/gm/gm_1832.h>
-#include <melee/gm/gm_1A36.h>
-#include <melee/gm/gm_1A3F.h>
-#include <melee/gm/gm_1A45.h>
-#include <melee/gm/gm_1B03.h>
-#include <melee/gm/gm_1BA8.h>
+#include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmadventure.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/gmregcommon.h>
@@ -159,26 +151,6 @@ typedef struct AllstarStageEntry {
 } AllstarStageEntry;
 ASSERT_SIZE(AllstarStageEntry, 0x1A);
 
-extern AdventureStageEntry lbl_803D7AC0[110];
-extern AllstarStageEntry lbl_803D85F0[55];
-u16 lbl_803D8B88[] = { 0x18, 0x16, 0x12, 0x3, 0x5, 0x4, 0x6, 0x1a, 0x19, 0x7 };
-
-/// @todo .data order hack
-static void order_data(void)
-{
-    (void) "GmRegClr";
-    (void) "ScGamRegClear_scene_data";
-    (void) "Error : Cannot open archive file (File Name : %s).";
-    (void) "SdDec.usd";
-    (void) "SIS_DecisionData";
-    (void) "SdDec.dat";
-    (void) "          ";
-    (void) "               ";
-    (void) "Error : gobj don\'t get (gmRegClearAddModel)\n";
-    (void) "gmregclear.c";
-    (void) "Error : jobj don\'t get (gmRegClearAddModel)\n";
-}
-
 typedef struct RegClearEv {
     /* 0x00 */ char pad_0[0x1C];
     /* 0x1C */ HSD_ImageDesc* x1C;
@@ -193,6 +165,28 @@ static struct lbl_804706C0_t {
     int x10;
     int x14;
 } lbl_804706C0;
+
+extern AdventureStageEntry lbl_803D7AC0[110];
+extern AllstarStageEntry lbl_803D85F0[55];
+u16 lbl_803D8B88[] = { 0x18, 0x16, 0x12, 0x3, 0x5, 0x4, 0x6, 0x1a, 0x19, 0x7 };
+
+/// @todo .data order hack
+#ifdef MUST_MATCH
+static void order_data(void)
+{
+    (void) "GmRegClr";
+    (void) "ScGamRegClear_scene_data";
+    (void) "Error : Cannot open archive file (File Name : %s).";
+    (void) "SdDec.usd";
+    (void) "SIS_DecisionData";
+    (void) "SdDec.dat";
+    (void) "          ";
+    (void) "               ";
+    (void) "Error : gobj don\'t get (gmRegClearAddModel)\n";
+    (void) "gmregclear.c";
+    (void) "Error : jobj don\'t get (gmRegClearAddModel)\n";
+}
+#endif
 
 static UnkAdventureData lbl_80472C30;
 static UnkAllstarData lbl_80472CB0;
@@ -2586,16 +2580,6 @@ s32 fn_801803FC(void* arg0)
     fn_8017FBA4(arg0);
     return fn_8017FA1C(arg0);
     PAD_STACK(4);
-}
-
-static inline void fn_80180630_CheckArchive(HSD_Archive* archive, void* sp38)
-{
-    struct lbl_80472D28_t* state = &lbl_80472D28;
-    state->x48 = archive;
-    if (sp38 == NULL) {
-        OSReport("Error : Cannot open archive file (File Name : %s).",
-                 "GmRegClr");
-    }
 }
 
 static inline HSD_GObj* fn_80180630_CreateCameraGObj(void)

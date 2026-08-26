@@ -1472,26 +1472,6 @@ bool fn_8016D538(void)
     return result;
 }
 
-static inline void fn_8016D634_inline(struct lbl_8046B6A0_24C_t* dst)
-{
-    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
-    if (lbl_8046B6A0.match_over == 0) {
-        *dst = tmp->x24C;
-        dst->is_teams = tmp->x24C8.is_teams;
-        dst->x4 = tmp->match_result;
-        gm_80166378(dst);
-        fn_8016C46C_dontinline((int) dst);
-        if (tmp->match_result != OUTCOME_NO_CONTEST &&
-            tmp->match_result != OUTCOME_RETRY)
-        {
-            fn_8016C4F4(dst);
-        }
-        tmp->match_over = 1;
-    } else {
-        *dst = tmp->x24C;
-    }
-}
-
 void fn_8016D634(void)
 {
     lbl_8046B6A0_t* tmp = &lbl_8046B6A0;

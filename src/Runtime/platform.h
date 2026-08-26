@@ -38,6 +38,20 @@ typedef bool (*Predicate)(void);
 #define MWERKS_GEKKO
 #endif
 
+#ifdef __MWERKS__
+#define ASM asm
+#else
+#define ASM
+#endif
+
+#ifndef UNUSED
+#if defined(__clang__) || defined(__GNUC__)
+#define UNUSED __attribute__((unused))
+#else
+#define UNUSED
+#endif
+#endif
+
 #ifndef ATTRIBUTE_ALIGN
 #if defined(__MWERKS__) || defined(__GNUC__)
 #define ATTRIBUTE_ALIGN(num) __attribute__((aligned(num)))
@@ -98,7 +112,7 @@ typedef bool (*Predicate)(void);
 #endif
 #endif
 
-#ifdef __PPCGEKKO__
+#ifdef MWERKS_GEKKO
 #define qr0 0
 #define qr1 1
 #define qr2 2

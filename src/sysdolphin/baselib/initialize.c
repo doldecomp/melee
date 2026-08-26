@@ -14,6 +14,7 @@
 #include "robj.h"
 #include "shadow.h"
 #include "state.h"
+#include "synth.h"
 #include "tev.h"
 #include "video.h"
 
@@ -22,7 +23,10 @@
 #include <dolphin/os.h>
 #include <dolphin/vi.h>
 
-extern OSHeapHandle HSD_Synth_804D6018;
+static void HSD_DVDInit(void);
+static void HSD_GXInit(void);
+static void HSD_OSInit(void);
+static void HSD_ObjInit(void);
 
 static void* FrameBuffer[HSD_VI_XFB_MAX];
 static HSD_MemReport memReport;
@@ -78,7 +82,7 @@ void HSD_GXSetFifoObj(GXFifoObj* fifo)
     DefaultFifoObj = fifo;
 }
 
-static void HSD_DVDInit(void) {}
+void HSD_DVDInit(void) {}
 
 void** HSD_AllocateXFB(s32 nbuffer, GXRenderModeObj* rm)
 {
@@ -138,7 +142,7 @@ GXFifoObj* HSD_AllocateFifo(u32 size)
     return fifo;
 }
 
-static void HSD_GXInit(void)
+void HSD_GXInit(void)
 {
     GXLightObj lightobj;
     int i;
@@ -154,7 +158,7 @@ static void HSD_GXInit(void)
     HSD_StateInvalidate(-1);
 }
 
-static void HSD_OSInit(void)
+void HSD_OSInit(void)
 {
     uintptr_t new_arena_lo;
     uintptr_t new_arena_hi;
@@ -256,7 +260,7 @@ void HSD_Init_803755A8(void)
     }
 }
 
-static void HSD_ObjInit(void)
+void HSD_ObjInit(void)
 {
     HSD_ListInitAllocData();
     HSD_AObjInitAllocData();

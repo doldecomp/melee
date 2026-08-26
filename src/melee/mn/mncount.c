@@ -86,25 +86,6 @@ static inline void inline_update_entries(HSD_GObj* gobj)
     }
 }
 
-static inline void inline_free_text(HSD_GObj* gobj)
-{
-    MnCountData* userdata = GET_MNCOUNT(gobj);
-    int i;
-
-    for (i = 0; i < MNCOUNT_VISIBLE_ROWS; i++) {
-        if (userdata->labels[i] != NULL) {
-            HSD_SisLib_803A5CC4(userdata->labels[i]);
-            userdata->labels[i] = NULL;
-        }
-        if (userdata->values[i] != NULL) {
-            HSD_SisLib_803A5CC4(userdata->values[i]);
-            userdata->values[i] = NULL;
-        }
-    }
-
-    HSD_SisLib_803A5CC4(userdata->title);
-}
-
 static inline bool mnCount_8025035C_inline(void)
 {
     s32 i;
@@ -576,13 +557,7 @@ void mnCount_CreateRow(HSD_GObj* gobj, int visible_row, mnCount_row data_row)
         mn_8022EA78(buf, 2, row_value / 60 / 60);
         mn_8022EA78(buf - 4, 2, row_value / 60 % 60);
         HSD_SisLib_803A6B98(text, 0.0f, 0.0f, "%u:%s", row_value / 60 / 60,
-        /// @todo Cast forces correct offset
-#ifdef MUST_MATCH
-                            *(char (*)[4]) & buf - 4
-#else
-                            &buf - 4
-#endif
-        );
+                            (char*) buf - 4);
     } else if (inline_is_row_char(data_row)) {
         text->font_size.x = 0.03f;
         text->font_size.y = 0.03f;

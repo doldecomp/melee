@@ -10,8 +10,7 @@
 
 #include "gm/forward.h"
 
-#include "gm/gm_1601.h"
-#include "gm/gm_16AE.h"
+#include "gm/gm_unsplit.h"
 #include "gm/gmregclear.h"
 #include "gm/types.h"
 #include "gr/ground.h"
@@ -780,7 +779,7 @@ void fn_802FA6C4(HSD_GObj* arg)
                 if (ifStock_804A1774.x10C[1 + i]) {
                     HSD_GObjPLink_80390228(ifStock_804A1774.x10C[1 + i]);
                 }
-                if (p[1] == -2) {
+                if (p[1] == (char) -2) {
                     return;
                 }
                 ifStock_804A1774.x10C[1 + i] = ifStock_802F9F48(i);

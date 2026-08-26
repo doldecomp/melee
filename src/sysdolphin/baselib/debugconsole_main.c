@@ -132,426 +132,430 @@ static struct lbl_8040AB00_t lbl_8040AB40 = {
     0x10808000, hsd_80392194, 0x10808000, hsd_80392194,
 };
 
-struct SPREntry lbl_8040ADD8[] = { {
-                                       0x00000009,
-                                       "CTR",
-                                       "Count Register",
-                                       NULL,
-                                   },
-                                   {
-                                       0x000003F5,
-                                       "DABR",
-                                       "Data Address Breakpoint",
-                                       NULL,
-                                   },
-                                   {
-                                       0x00000013,
-                                       "DAR",
-                                       "Data Address Register",
-                                       NULL,
-                                   },
-                                   {
-                                       0x00000219,
-                                       "DBAT0L",
-                                       "Data Block Address Translation",
-                                       hsd_80396E40,
-                                   },
-                                   {
-                                       0x00000218,
-                                       "DBAT0U",
-                                       "Data Block Address Translation",
-                                       hsd_80396E40,
-                                   },
-                                   {
-                                       0x0000021B,
-                                       "DBAT1L",
-                                       "Data Block Address Translation",
-                                       hsd_80396E40,
-                                   },
-                                   {
-                                       0x0000021A,
-                                       "DBAT1U",
-                                       "Data Block Address Translation",
-                                       hsd_80396E40,
-                                   },
-                                   {
-                                       0x0000021D,
-                                       "DBAT2L",
-                                       "Data Block Address Translation",
-                                       hsd_80396E40,
-                                   },
-                                   {
-                                       0x0000021C,
-                                       "DBAT2U",
-                                       "Data Block Address Translation",
-                                       hsd_80396E40,
-                                   },
-                                   {
-                                       0x0000021F,
-                                       "DBAT3L",
-                                       "Data Block Address Translation",
-                                       hsd_80396E40,
-                                   },
-                                   {
-                                       0x0000021E,
-                                       "DBAT3U",
-                                       "Data Block Address Translation",
-                                       hsd_80396E40,
-                                   },
-                                   {
-                                       0x00000016,
-                                       "DEC",
-                                       "Descrimenter",
-                                       NULL,
-                                   },
-                                   {
-                                       0x00000012,
-                                       "DSISR",
-                                       "Data Access/Alignment Exception",
-                                       fn_803970D8,
-                                   },
-                                   {
-                                       0x0000011A,
-                                       "EAR",
-                                       "External Access",
-                                       NULL,
-                                   },
-                                   {
-                                       0x00000211,
-                                       "IBAT0L",
-                                       "Inst Block Address Translation",
-                                       hsd_80396E40,
-                                   },
-                                   {
-                                       0x00000210,
-                                       "IBAT0U",
-                                       "Inst Block Address Translation",
-                                       hsd_80396E40,
-                                   },
-                                   {
-                                       0x00000213,
-                                       "IBAT1L",
-                                       "Inst Block Address Translation",
-                                       hsd_80396E40,
-                                   },
-                                   {
-                                       0x00000212,
-                                       "IBAT1U",
-                                       "Inst Block Address Translation",
-                                       hsd_80396E40,
-                                   },
-                                   {
-                                       0x00000215,
-                                       "IBAT2L",
-                                       "Inst Block Address Translation",
-                                       hsd_80396E40,
-                                   },
-                                   {
-                                       0x00000214,
-                                       "IBAT2U",
-                                       "Inst Block Address Translation",
-                                       hsd_80396E40,
-                                   },
-                                   {
-                                       0x00000217,
-                                       "IBAT3L",
-                                       "Inst Block Address Translation",
-                                       hsd_80396E40,
-                                   },
-                                   {
-                                       0x00000216,
-                                       "IBAT3U",
-                                       "Inst Block Address Translation",
-                                       hsd_80396E40,
-                                   },
-                                   {
-                                       0x00000008,
-                                       "LR",
-                                       "Link Register",
-                                       NULL,
-                                   },
-                                   {
-                                       0x0000011F,
-                                       "PVR",
-                                       "Processor Version",
-                                       NULL,
-                                   },
-                                   {
-                                       0x000003BF,
-                                       "SDA",
-                                       "Sample Data Address",
-                                       NULL,
-                                   },
-                                   {
-                                       0x00000019,
-                                       "SDR1",
-                                       "Page Table Format",
-                                       NULL,
-                                   },
-                                   {
-                                       0x00000110,
-                                       "SPRG0",
-                                       "For Operation System",
-                                       NULL,
-                                   },
-                                   {
-                                       0x00000111,
-                                       "SPRG1",
-                                       "For Operation System",
-                                       NULL,
-                                   },
-                                   {
-                                       0x00000112,
-                                       "SPRG2",
-                                       "For Operation System",
-                                       NULL,
-                                   },
-                                   {
-                                       0x00000113,
-                                       "SPRG3",
-                                       "For Operation System",
-                                       NULL,
-                                   },
-                                   {
-                                       0x0000001A,
-                                       "SRR0",
-                                       "Machine Status Save/Restore",
-                                       fn_803970DC,
-                                   },
-                                   {
-                                       0x0000001B,
-                                       "SRR1",
-                                       "Machine Status Save/Restore",
-                                       fn_803970DC,
-                                   },
-                                   {
-                                       0x000003AF,
-                                       "USDA",
-                                       "Sample Data Address",
-                                       NULL,
-                                   },
-                                   {
-                                       0x00000001,
-                                       "XER",
-                                       "?",
-                                       fn_803970E0,
-                                   },
-                                   {
-                                       0x00000000,
-                                       NULL,
-                                       NULL,
-                                       NULL,
-                                   },
-                                   {
-                                       0x0000039B,
-                                       "DMA_L",
-                                       "Direct Memory Access",
-                                       fn_803970E4,
-                                   },
-                                   {
-                                       0x0000039A,
-                                       "DMA_U",
-                                       "Direct Memory Access",
-                                       fn_803970E4,
-                                   },
-                                   {
-                                       0x00000390,
-                                       "GQR0",
-                                       "Graphics Quantization",
-                                       fn_803970E8,
-                                   },
-                                   {
-                                       0x00000391,
-                                       "GQR1",
-                                       "Graphics Quantization",
-                                       fn_803970E8,
-                                   },
-                                   {
-                                       0x00000392,
-                                       "GQR2",
-                                       "Graphics Quantization",
-                                       fn_803970E8,
-                                   },
-                                   {
-                                       0x00000393,
-                                       "GQR3",
-                                       "Graphics Quantization",
-                                       fn_803970E8,
-                                   },
-                                   {
-                                       0x00000394,
-                                       "GQR4",
-                                       "Graphics Quantization",
-                                       fn_803970E8,
-                                   },
-                                   {
-                                       0x00000395,
-                                       "GQR5",
-                                       "Graphics Quantization",
-                                       fn_803970E8,
-                                   },
-                                   {
-                                       0x00000396,
-                                       "GQR6",
-                                       "Graphics Quantization",
-                                       fn_803970E8,
-                                   },
-                                   {
-                                       0x00000397,
-                                       "GQR7",
-                                       "Graphics Quantization",
-                                       fn_803970E8,
-                                   },
-                                   {
-                                       0x000003F0,
-                                       "HID0",
-                                       "Hardware Implementation Depend",
-                                       fn_803970EC,
-                                   },
-                                   {
-                                       0x000003F1,
-                                       "HID1",
-                                       "Hardware Implementation Depend",
-                                       fn_803970EC,
-                                   },
-                                   {
-                                       0x00000398,
-                                       "HID2",
-                                       "Hardware Implementation Depend",
-                                       fn_803970EC,
-                                   },
-                                   {
-                                       0x000003F2,
-                                       "IABR",
-                                       "Instruction Breakpoint",
-                                       fn_803970F0,
-                                   },
-                                   {
-                                       0x000003FB,
-                                       "ICTC",
-                                       "Instruction Cache Throttle Control",
-                                       fn_803970F4,
-                                   },
-                                   {
-                                       0x000003F9,
-                                       "L2CR",
-                                       "L2 Cache Control",
-                                       fn_803970F8,
-                                   },
-                                   {
-                                       0x000003B8,
-                                       "MMCR0",
-                                       "Perf. Moniter Mode Control",
-                                       fn_803970FC,
-                                   },
-                                   {
-                                       0x000003BC,
-                                       "MMCR1",
-                                       "Perf. Monitor Mode Control",
-                                       fn_803970FC,
-                                   },
-                                   {
-                                       0x000003B9,
-                                       "PMC1",
-                                       "Performance Monitor Counter",
-                                       fn_80397100,
-                                   },
-                                   {
-                                       0x000003BA,
-                                       "PMC2",
-                                       "Performance Monitor Counter",
-                                       fn_80397100,
-                                   },
-                                   {
-                                       0x000003BD,
-                                       "PMC3",
-                                       "Performance Monitor Counter",
-                                       fn_80397100,
-                                   },
-                                   {
-                                       0x000003BE,
-                                       "PMC4",
-                                       "Performance Monitor Counter",
-                                       fn_80397100,
-                                   },
-                                   {
-                                       0x000003BB,
-                                       "SIA",
-                                       "Sample Instruction Address",
-                                       NULL,
-                                   },
-                                   {
-                                       0x000003FC,
-                                       "THRM1",
-                                       "Thermal Managiment",
-                                       fn_80397104,
-                                   },
-                                   {
-                                       0x000003FD,
-                                       "THRM2",
-                                       "Thermal Managiment",
-                                       fn_80397104,
-                                   },
-                                   {
-                                       0x000003FE,
-                                       "THRM3",
-                                       "Thermal Managiment",
-                                       fn_80397104,
-                                   },
-                                   {
-                                       0x000003A8,
-                                       "UMMCR0",
-                                       "Perf. Moniter Mode Control",
-                                       fn_803970FC,
-                                   },
-                                   {
-                                       0x000003AC,
-                                       "UMMCR1",
-                                       "Perf. Moniter Mode Control",
-                                       fn_803970FC,
-                                   },
-                                   {
-                                       0x000003A9,
-                                       "UPMC1",
-                                       "Performance Monitor Counter",
-                                       fn_80397100,
-                                   },
-                                   {
-                                       0x000003AA,
-                                       "UPMC2",
-                                       "Performance Monitor Counter",
-                                       fn_80397100,
-                                   },
-                                   {
-                                       0x000003AD,
-                                       "UPMC3",
-                                       "Performance Monitor Counter",
-                                       fn_80397100,
-                                   },
-                                   {
-                                       0x000003AE,
-                                       "UPMC4",
-                                       "Performance Monitor Counter",
-                                       fn_80397100,
-                                   },
-                                   {
-                                       0x000003AB,
-                                       "USIA",
-                                       "Sample Instruction Address",
-                                       NULL,
-                                   },
-                                   {
-                                       0x00000399,
-                                       "WPAR",
-                                       "Write Pipe Address",
-                                       fn_80397108,
-                                   } };
+struct SPREntry lbl_8040ADD8[] = {
+    {
+        0x00000009,
+        "CTR",
+        "Count Register",
+        NULL,
+    },
+    {
+        0x000003F5,
+        "DABR",
+        "Data Address Breakpoint",
+        NULL,
+    },
+    {
+        0x00000013,
+        "DAR",
+        "Data Address Register",
+        NULL,
+    },
+    {
+        0x00000219,
+        "DBAT0L",
+        "Data Block Address Translation",
+        hsd_80396E40,
+    },
+    {
+        0x00000218,
+        "DBAT0U",
+        "Data Block Address Translation",
+        hsd_80396E40,
+    },
+    {
+        0x0000021B,
+        "DBAT1L",
+        "Data Block Address Translation",
+        hsd_80396E40,
+    },
+    {
+        0x0000021A,
+        "DBAT1U",
+        "Data Block Address Translation",
+        hsd_80396E40,
+    },
+    {
+        0x0000021D,
+        "DBAT2L",
+        "Data Block Address Translation",
+        hsd_80396E40,
+    },
+    {
+        0x0000021C,
+        "DBAT2U",
+        "Data Block Address Translation",
+        hsd_80396E40,
+    },
+    {
+        0x0000021F,
+        "DBAT3L",
+        "Data Block Address Translation",
+        hsd_80396E40,
+    },
+    {
+        0x0000021E,
+        "DBAT3U",
+        "Data Block Address Translation",
+        hsd_80396E40,
+    },
+    {
+        0x00000016,
+        "DEC",
+        "Descrimenter",
+        NULL,
+    },
+    {
+        0x00000012,
+        "DSISR",
+        "Data Access/Alignment Exception",
+        fn_803970D8,
+    },
+    {
+        0x0000011A,
+        "EAR",
+        "External Access",
+        NULL,
+    },
+    {
+        0x00000211,
+        "IBAT0L",
+        "Inst Block Address Translation",
+        hsd_80396E40,
+    },
+    {
+        0x00000210,
+        "IBAT0U",
+        "Inst Block Address Translation",
+        hsd_80396E40,
+    },
+    {
+        0x00000213,
+        "IBAT1L",
+        "Inst Block Address Translation",
+        hsd_80396E40,
+    },
+    {
+        0x00000212,
+        "IBAT1U",
+        "Inst Block Address Translation",
+        hsd_80396E40,
+    },
+    {
+        0x00000215,
+        "IBAT2L",
+        "Inst Block Address Translation",
+        hsd_80396E40,
+    },
+    {
+        0x00000214,
+        "IBAT2U",
+        "Inst Block Address Translation",
+        hsd_80396E40,
+    },
+    {
+        0x00000217,
+        "IBAT3L",
+        "Inst Block Address Translation",
+        hsd_80396E40,
+    },
+    {
+        0x00000216,
+        "IBAT3U",
+        "Inst Block Address Translation",
+        hsd_80396E40,
+    },
+    {
+        0x00000008,
+        "LR",
+        "Link Register",
+        NULL,
+    },
+    {
+        0x0000011F,
+        "PVR",
+        "Processor Version",
+        NULL,
+    },
+    {
+        0x000003BF,
+        "SDA",
+        "Sample Data Address",
+        NULL,
+    },
+    {
+        0x00000019,
+        "SDR1",
+        "Page Table Format",
+        NULL,
+    },
+    {
+        0x00000110,
+        "SPRG0",
+        "For Operation System",
+        NULL,
+    },
+    {
+        0x00000111,
+        "SPRG1",
+        "For Operation System",
+        NULL,
+    },
+    {
+        0x00000112,
+        "SPRG2",
+        "For Operation System",
+        NULL,
+    },
+    {
+        0x00000113,
+        "SPRG3",
+        "For Operation System",
+        NULL,
+    },
+    {
+        0x0000001A,
+        "SRR0",
+        "Machine Status Save/Restore",
+        fn_803970DC,
+    },
+    {
+        0x0000001B,
+        "SRR1",
+        "Machine Status Save/Restore",
+        fn_803970DC,
+    },
+    {
+        0x000003AF,
+        "USDA",
+        "Sample Data Address",
+        NULL,
+    },
+    {
+        0x00000001,
+        "XER",
+        "?",
+        fn_803970E0,
+    },
+    {
+        0x00000000,
+        NULL,
+        NULL,
+        NULL,
+    },
+    {
+        0x0000039B,
+        "DMA_L",
+        "Direct Memory Access",
+        fn_803970E4,
+    },
+    {
+        0x0000039A,
+        "DMA_U",
+        "Direct Memory Access",
+        fn_803970E4,
+    },
+    {
+        0x00000390,
+        "GQR0",
+        "Graphics Quantization",
+        fn_803970E8,
+    },
+    {
+        0x00000391,
+        "GQR1",
+        "Graphics Quantization",
+        fn_803970E8,
+    },
+    {
+        0x00000392,
+        "GQR2",
+        "Graphics Quantization",
+        fn_803970E8,
+    },
+    {
+        0x00000393,
+        "GQR3",
+        "Graphics Quantization",
+        fn_803970E8,
+    },
+    {
+        0x00000394,
+        "GQR4",
+        "Graphics Quantization",
+        fn_803970E8,
+    },
+    {
+        0x00000395,
+        "GQR5",
+        "Graphics Quantization",
+        fn_803970E8,
+    },
+    {
+        0x00000396,
+        "GQR6",
+        "Graphics Quantization",
+        fn_803970E8,
+    },
+    {
+        0x00000397,
+        "GQR7",
+        "Graphics Quantization",
+        fn_803970E8,
+    },
+    {
+        0x000003F0,
+        "HID0",
+        "Hardware Implementation Depend",
+        fn_803970EC,
+    },
+    {
+        0x000003F1,
+        "HID1",
+        "Hardware Implementation Depend",
+        fn_803970EC,
+    },
+    {
+        0x00000398,
+        "HID2",
+        "Hardware Implementation Depend",
+        fn_803970EC,
+    },
+    {
+        0x000003F2,
+        "IABR",
+        "Instruction Breakpoint",
+        fn_803970F0,
+    },
+    {
+        0x000003FB,
+        "ICTC",
+        "Instruction Cache Throttle Control",
+        fn_803970F4,
+    },
+    {
+        0x000003F9,
+        "L2CR",
+        "L2 Cache Control",
+        fn_803970F8,
+    },
+    {
+        0x000003B8,
+        "MMCR0",
+        "Perf. Moniter Mode Control",
+        fn_803970FC,
+    },
+    {
+        0x000003BC,
+        "MMCR1",
+        "Perf. Monitor Mode Control",
+        fn_803970FC,
+    },
+    {
+        0x000003B9,
+        "PMC1",
+        "Performance Monitor Counter",
+        fn_80397100,
+    },
+    {
+        0x000003BA,
+        "PMC2",
+        "Performance Monitor Counter",
+        fn_80397100,
+    },
+    {
+        0x000003BD,
+        "PMC3",
+        "Performance Monitor Counter",
+        fn_80397100,
+    },
+    {
+        0x000003BE,
+        "PMC4",
+        "Performance Monitor Counter",
+        fn_80397100,
+    },
+    {
+        0x000003BB,
+        "SIA",
+        "Sample Instruction Address",
+        NULL,
+    },
+    {
+        0x000003FC,
+        "THRM1",
+        "Thermal Managiment",
+        fn_80397104,
+    },
+    {
+        0x000003FD,
+        "THRM2",
+        "Thermal Managiment",
+        fn_80397104,
+    },
+    {
+        0x000003FE,
+        "THRM3",
+        "Thermal Managiment",
+        fn_80397104,
+    },
+    {
+        0x000003A8,
+        "UMMCR0",
+        "Perf. Moniter Mode Control",
+        fn_803970FC,
+    },
+    {
+        0x000003AC,
+        "UMMCR1",
+        "Perf. Moniter Mode Control",
+        fn_803970FC,
+    },
+    {
+        0x000003A9,
+        "UPMC1",
+        "Performance Monitor Counter",
+        fn_80397100,
+    },
+    {
+        0x000003AA,
+        "UPMC2",
+        "Performance Monitor Counter",
+        fn_80397100,
+    },
+    {
+        0x000003AD,
+        "UPMC3",
+        "Performance Monitor Counter",
+        fn_80397100,
+    },
+    {
+        0x000003AE,
+        "UPMC4",
+        "Performance Monitor Counter",
+        fn_80397100,
+    },
+    {
+        0x000003AB,
+        "USIA",
+        "Sample Instruction Address",
+        NULL,
+    },
+    {
+        0x00000399,
+        "WPAR",
+        "Write Pipe Address",
+        fn_80397108,
+    },
+};
 
+#ifdef MUST_MATCH
 static void gprmsg(void)
 {
     OSReport("- GPR -----------------------------------------------\n");
     OSReport("R%02d=%08X(%11d) R%02d=%08X(%11d)\n");
 }
+#endif
 
 void hsd_80394314(void)
 {
@@ -811,7 +815,8 @@ void hsd_80394950(OSContext* ctx)
     OSRestoreInterrupts(irq);
 }
 
-/// unused function to force data ordering for these report strings
+/// @todo unused function to force data ordering for these report strings
+#ifdef MUST_MATCH
 static void unused(OSContext* ctx)
 {
     OSReport("- MISC ----------------------------------------------\n");
@@ -821,6 +826,7 @@ static void unused(OSContext* ctx)
     OSReport("FPSCR=%08X\n", ctx->fpscr);
     OSReport("GQR%d=%08X GQR%d=%08X\n", 0, ctx->gqr[0], 1, ctx->gqr[1]);
 }
+#endif
 
 void Exception_ReportStackTrace(OSContext* ctx, int max_depth)
 {
@@ -855,7 +861,9 @@ void Exception_ReportCodeline(u16 error, int dsisr, int dar, OSContext* ctx)
 
     OSReport("- UNHANDLED EXCEPTION -------------------------------\n");
     OSReport("DSISR=%08X DAR=%08X\n", dsisr, dar);
+#ifdef MUST_MATCH
     error = error;
+#endif
     OSReport("ERROR %d: ", error);
 
     switch (error) {
@@ -1731,11 +1739,6 @@ static char* lbl_804D62CC = "+- MEMORY DUMP ------------------------------+";
 static char* lbl_804D62D0 = "|%08X=%08X:%08X:%08X:%08X|";
 static char* lbl_804D62D4 = "+--------------------------------------------+";
 
-static inline s32 hsd_80396188_calc_col(void)
-{
-    return ((hsd_804CF810.x20 - 0x2E) / 2) * 11 + 20;
-}
-
 // @TODO: Currently 96.11% match - needs register allocation fix
 static inline void hsd_80396188_draw_rows(char* buf, s32 col, u32** addr,
                                           s32* i)
@@ -1884,7 +1887,10 @@ s32 hsd_803962A8(void* data)
         case 0x100:
             lbl_8040BC3C.x10 = (s32) lbl_8040BAF0.x10;
             lbl_8040BC3C.x18 = &lbl_8040BAF0;
-            if (&lbl_8040BC3C != NULL) {
+#ifdef MUST_MATCH
+            if (&lbl_8040BC3C != NULL)
+#endif
+            {
                 fn_80394DF4(&lbl_8040BC3C);
                 ((ExcptNode*) &lbl_8040BC3C)->next =
                     (ExcptNode*) hsd_804CF810.xD0;
@@ -1900,7 +1906,10 @@ s32 hsd_803962A8(void* data)
             ps_remove_node(&hsd_804CF810, data);
             return 1;
         case 0x1000:
-            if (&lbl_8040BBE8 != NULL) {
+#ifdef MUST_MATCH
+            if (&lbl_8040BBE8 != NULL)
+#endif
+            {
                 fn_80394DF4((void*) &lbl_8040BBE8);
                 ((ExcptNode*) &lbl_8040BBE8)->next =
                     (ExcptNode*) hsd_804CF810.xD0;
@@ -2075,7 +2084,10 @@ s32 hsd_80396A20(void* data)
             ps_remove_node(&hsd_804CF810, node);
             return 1;
         case 0x1000: {
-            if (&lbl_8040BD74 != NULL) {
+#ifdef MUST_MATCH
+            if (&lbl_8040BD74 != NULL)
+#endif
+            {
                 fn_80394DF4(&lbl_8040BD74);
                 lbl_8040BD74.x0 = hsd_804CF810.xD0;
                 hsd_804CF810.xD0 = &lbl_8040BD74;
@@ -2752,8 +2764,11 @@ void* fn_80397814(void* arg)
         *head = NULL;
     }
 
-    /* Link exception node */
-    if (&lbl_8040B8C4 != NULL) {
+/* Link exception node */
+#ifdef MUST_MATCH
+    if (&lbl_8040B8C4 != NULL)
+#endif
+    {
         ((ExcptNode*) &lbl_8040B8C4)->next = NULL;
         hsd_804CF810.xD0 = &lbl_8040B8C4;
         if (((ExcptNode*) &lbl_8040B8C4)->callback != NULL) {

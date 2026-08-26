@@ -21,7 +21,7 @@
 #include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/ftCo_YoshiEgg.h"
 #include "ftCommon/inlines.h"
-#include "ftYoshi/ftYs_Init.h"
+#include "ftYoshi/ftyoshi.h"
 #include "ftYoshi/types.h"
 #include "it/items/ityoshiegglay.h"
 #include "it/items/ityoshitongue.h"

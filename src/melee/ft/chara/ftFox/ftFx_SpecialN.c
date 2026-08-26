@@ -224,7 +224,10 @@ void ftFx_SpecialN_CreateBlasterShot(HSD_GObj* gobj)
     PAD_STACK(4);
 
     /// @todo Seems fake, probably one or more missing @c inline functions.
-    fp = fp = GET_FIGHTER(gobj);
+#ifdef MUST_MATCH
+    fp =
+#endif
+        fp = GET_FIGHTER(gobj);
 
     da = getFtSpecialAttrs(fp);
 
@@ -393,7 +396,10 @@ void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
         f64 launchAngle;
 
         /// @todo Fake assignment.
-        fp = fp = GET_FIGHTER(gobj);
+#ifdef MUST_MATCH
+        fp =
+#endif
+            fp = GET_FIGHTER(gobj);
 
         da = getFtSpecialAttrs(fp);
 
@@ -484,7 +490,10 @@ void ftFx_SpecialAirNLoop_Anim(HSD_GObj* gobj)
         Fighter* fp;
 
         /// @todo Fake assignment.
-        fp = fp = GET_FIGHTER(gobj);
+#ifdef MUST_MATCH
+        fp =
+#endif
+            fp = GET_FIGHTER(gobj);
 
         da = getFtSpecialAttrs(fp);
 

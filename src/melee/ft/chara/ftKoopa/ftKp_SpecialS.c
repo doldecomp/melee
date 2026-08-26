@@ -560,21 +560,6 @@ void ftKp_SpecialSWait_IASA(Fighter_GObj* gobj)
     }
 }
 
-static void ftKp_SpecialAirSWait_IASA_inline_2(Fighter_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->mv.ca.specialhi.vel.x != 0) {
-        Fighter_ChangeMotionState(gobj, 0x163, 0x80U, 0.0f, 1.0f, 0.0f, NULL);
-    } else {
-        Fighter_ChangeMotionState(gobj, 0x162, 0U, 0.0f, 1.0f, 0.0f, NULL);
-    }
-    fp->x2222_b2 = 1;
-    ftCommon_8007E2F4(fp, 0x1FF);
-    ftCommon_8007E2FC(gobj);
-    fp->mv.kp.specials.b_held = false;
-    fp->cmd_vars[0] = 0;
-}
-
 void ftKp_SpecialAirSWait_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

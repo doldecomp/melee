@@ -40,15 +40,6 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
-void fn_800F9260(HSD_GObj*);
-void ftCommon_8007D9A0(Fighter* fp);
-
-static void fn_801095DC(HSD_GObj*);
-static void fn_80109680(HSD_GObj*);
-static void fn_80109714(HSD_GObj*);
-static void fn_801097B8(HSD_GObj*);
-void fn_800F64C8(Fighter_GObj*, float);
-
 MotionState ftKb_Init_MotionStateTable[ftKb_MS_SelfCount] = {
     {
         // ftKb_MS_JumpAerialF1 = 341
@@ -2511,9 +2502,6 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
     },
 };
 
-/* 0F6AC8 */ static void fn_800F6AC8(HSD_GObj* gobj);
-/* 10C288 */ static void fn_8010C288(HSD_GObj* gobj);
-
 void ftKb_Init_800EE528(void)
 {
     /// @todo Bad cast.
@@ -2767,7 +2755,7 @@ void ftKb_SpecialN_800EEC34(int arg0, int arg1, int arg2)
             }
         }
     }
-    if (ftKb_Init_803CB46C[arg0] != -1) {
+    if (ftKb_Init_803CB46C[arg0] != (char) -1) {
         efAsync_LoadAsync(ftKb_Init_803CB46C[arg0]);
     }
 }

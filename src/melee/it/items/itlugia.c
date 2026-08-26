@@ -467,7 +467,12 @@ void it_802D208C(Item_GObj* gobj)
         // permuterslop
         dx = dz = ip->xDD4_itemVar.lugia.x64.x - target.x;
         dy = ip->xDD4_itemVar.lugia.x64.y - target.y;
-        dz = (dz = ip->xDD4_itemVar.lugia.x64.z) - target.z;
+        dz = (
+#ifdef MUST_MATCH
+                 dz =
+#endif
+                     ip->xDD4_itemVar.lugia.x64.z) -
+             target.z;
         {
             f32 dx2 = dx * dx;
             f32 dy2 = dy * dy;

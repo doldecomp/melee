@@ -25,10 +25,12 @@
 #include <baselib/random.h>
 
 /// @todo Float reorder hack
+#ifdef MUST_MATCH
 static float get_zero(void)
 {
     return 0.0f;
 }
+#endif
 
 void ftBossLib_8015BD20(HSD_GObj* gobj)
 {

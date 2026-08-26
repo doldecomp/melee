@@ -23,6 +23,7 @@
 #include <math.h>
 #include <sysdolphin/baselib/random.h>
 
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 0.0199999996f;
@@ -35,6 +36,7 @@ static void sdata2_order(void)
     (void) 3.1415926535897931;
     (void) -3.1415926535897931;
 }
+#endif
 
 ItemStateTable it_803F6A28[5] = {
     { -1, itLinkarrow_UnkMotion0_Anim, itLinkarrow_UnkMotion0_Phys,

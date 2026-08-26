@@ -1,4 +1,6 @@
 #include "ftCo_Attack100.h"
+#include "ftCo_CapturePulled.h"
+#include "ftCo_CatchPull.h"
 #include "ftCo_Fall.h"
 #include "ftCo_ItemThrow.h"
 #include "ftpickupitem.h"
@@ -10,9 +12,7 @@
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 
-bool ftCo_800952DC(Fighter_GObj*);
-void fn_800D9CE8(Fighter_GObj*);
-void fn_800DAADC(Fighter_GObj* arg0, Fighter_GObj* arg1);
+/* 0D8BFC */ static void fn_800D8BFC(Fighter_GObj* arg0);
 
 bool ftCo_Catch_CheckInput(Fighter_GObj* gobj)
 {

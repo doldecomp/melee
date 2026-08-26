@@ -1,6 +1,8 @@
 Diagnostics:
   Includes:
     AnalyzeAngledIncludes: true
+  ClangTidy:
+    Remove: bugprone-integer-division
 ---
 If:
   PathMatch: .*\.dox

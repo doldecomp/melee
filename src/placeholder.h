@@ -9,19 +9,6 @@ typedef void (*jmp_t)(void);
 /// A jump table
 typedef jmp_t jtbl_t[];
 
-#if defined(__clang__) || defined(__GNUC__)
-#include <dolphin/os.h> // IWYU pragma: keep
-#define NOT_IMPLEMENTED                                                       \
-    OSPanic(__FILE__, __LINE__, "%s is not implemented!", __func__)
-#elif M2CTX
-#define NOT_IMPLEMENTED
-#elif defined(__MWERKS__) && defined(MUST_MATCH)
-#define NOT_IMPLEMENTED asm { nop }
-#else
-#define NOT_IMPLEMENTED                                                       \
-    OSPanic(__FILE__, __LINE__, "Function is not implemented!")
-#endif
-
 #ifndef MWERKS_GEKKO
 #define __frsqrte(x) sqrt(x)
 #define sqrtf__Ff(x) sqrtf(x)
@@ -63,20 +50,6 @@ typedef jmp_t jtbl_t[];
 
 #define U32_TO_F32 4503599627370496.0
 #define S32_TO_F32 4503601774854144.0
-
-#ifdef MWERKS_GEKKO
-#define ASM asm
-#else
-#define ASM
-#endif
-
-#ifndef UNUSED
-#if defined(__clang__) || defined(__GNUC__)
-#define UNUSED __attribute__((unused))
-#else
-#define UNUSED
-#endif
-#endif
 
 #define PAD_STACK(bytes)                                                      \
     do {                                                                      \

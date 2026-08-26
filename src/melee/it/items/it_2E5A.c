@@ -40,13 +40,6 @@ ItemStateTable it_803F8BD8[] = {
       it_2E5A_UnkMotion2_Coll },
 };
 
-static inline ItemStateDesc* it_2E5A_ItemStateDesc(Item* ip)
-{
-    it_2E5A_Attrs* attr = ip->xC4_article_data->x4_specialAttributes;
-    return (ItemStateDesc*) &attr->tiers[ip->xDD4_itemVar.it_2E5A.x4]
-        .anim_joint;
-}
-
 static inline float sqrtf_store(float x, volatile float* y)
 {
     if (x > 0.0f) {

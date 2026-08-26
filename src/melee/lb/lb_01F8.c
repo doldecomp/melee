@@ -101,7 +101,7 @@ void lbMthp8001FAA0(const char* filename, int width, int height)
     memset(&header, 0, sizeof(header));
     header.w = width;
     header.h = height;
-    THPDec_8032F8D4((uintptr_t) lbl_804335B8.unk94, context);
+    THPDec_8032F8D4(lbl_804335B8.unk94, context);
     decode_buf = HSD_MemAlloc(THPDec_8032FD40(context, header.h));
     decoded = THPVideoDecode(&header, &output, decode_buf, lbl_804335B8.unk94,
                              context);

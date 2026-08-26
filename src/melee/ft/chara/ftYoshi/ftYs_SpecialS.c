@@ -1,8 +1,9 @@
 #include "ftYs_SpecialS.h"
 
+#include "ftyoshi.h"
+
 #include "ftYoshi/ftYs_SpecialS.static.h"
 
-#include "ftYs_Init.h"
 #include "placeholder.h"
 
 #include "baselib/forward.h"
@@ -296,6 +297,7 @@ void ftYs_SpecialS_8012F0DC(Fighter_GObj* gobj, s32 arg1, s32 arg2, f32 arg3)
 }
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void order_sdata2_0(void)
 {
     (void) 0.5f;
@@ -310,6 +312,7 @@ static void order_sdata2_0(void)
     (void) -0.05f;
     (void) 0.01f;
 }
+#endif
 
 void ftYs_SpecialS_8012F35C(Fighter_GObj* gobj)
 {

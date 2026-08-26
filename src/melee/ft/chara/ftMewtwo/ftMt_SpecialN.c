@@ -260,8 +260,16 @@ void ftMt_SpecialN_ReleaseShadowBall(HSD_GObj* gobj)
     u8 _[16];
 
     /// @todo Missing @c inline function(s).
-    fp = fp = getFighter(gobj);
-    mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
+    fp =
+#ifdef MUST_MATCH
+        fp =
+#endif
+            getFighter(gobj);
+    mewtwoAttrs =
+#ifdef MUST_MATCH
+        mewtwoAttrs =
+#endif
+            getFtSpecialAttrsD(fp);
 
     if ((fp->cmd_vars[1] == 1U) && (fp->u.mt.x2230_shadowHeldGObj != NULL)) {
         Vec3 sp38;
@@ -279,14 +287,22 @@ void ftMt_SpecialN_ReleaseShadowBall(HSD_GObj* gobj)
         ftMewtwo_SpecialN_SetRecoil(gobj);
         fp->u.mt.x2234_shadowBallCharge = 0;
         if (gobj != NULL) {
-            temp_fp = temp_fp = getFighter(gobj);
+            temp_fp =
+#ifdef MUST_MATCH
+                temp_fp =
+#endif
+                    getFighter(gobj);
 
             if (temp_fp->u.mt.x2230_shadowHeldGObj != NULL) {
                 temp_fp->u.mt.x2230_shadowHeldGObj = NULL;
             }
             if (gobj != NULL) {
                 /// @todo Missing @c inline function(s).
-                fp2 = fp2 = getFighter(gobj);
+                fp2 =
+#ifdef MUST_MATCH
+                    fp2 =
+#endif
+                        getFighter(gobj);
 
                 if (fp2->u.mt.x2238_shadowBallGObj != NULL) {
                     efLib_DestroyAll(gobj);

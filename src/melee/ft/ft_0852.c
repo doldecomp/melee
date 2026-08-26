@@ -17,6 +17,7 @@ int ft_8045996C[FTKIND_MAX];
 UnkCostumeStruct lbl_804599F0[5];
 
 /// @todo bss order hack
+#ifdef MUST_MATCH
 static void order_bss(void)
 {
     (void) gFtDataList;
@@ -24,6 +25,7 @@ static void order_bss(void)
     (void) ft_8045996C;
     (void) lbl_804599F0;
 }
+#endif
 
 void ft_8008521C(HSD_GObj* gobj)
 {

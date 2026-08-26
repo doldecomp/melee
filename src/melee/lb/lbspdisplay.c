@@ -19,9 +19,6 @@
 #include "dolphin/gx/GXTexture.h"
 #include "dolphin/gx/GXTransform.h"
 #include "dolphin/gx/GXVert.h"
-
-#include "lb/forward.h"
-
 #include "lb/lbdvd.h"
 #include "lb/types.h"
 
@@ -51,13 +48,6 @@ struct CameraBlurData {
     /* 0x1C */ HSD_ImageDesc* x1C;
     /* 0x20 */ f32 x20;
 };
-
-/* 0103D8 */ static bool lb_800103D8(Vec3* vec, float x0, float x1, float x2,
-                                     float x3, float offset);
-/* 013BB8 */ static bool lb_80013BB8(ColorOverlay* arg);
-/* 013BE4 */ static bool lb_80013BE4(ColorOverlay* arg);
-/* 013FF0 */ static bool lb_80013FF0(ColorOverlay* arg);
-/* 014234 */ static bool lb_80014234(ColorOverlay* arg);
 
 HSD_LObj* lb_80011AC4(LightList** list)
 {

@@ -419,7 +419,11 @@ void HSD_FObjInterpretAnim(HSD_FObj* fobj, void* obj,
             case 4: {
                 if (fobj->fterm <= fobj->time) {
                     u8 _[8] = { 0 };
-                    state = state = 3;
+                    state =
+#ifdef MUST_MATCH
+                        state =
+#endif
+                            3;
 
                     fterm = fobj->fterm;
                     fobj->time -= fobj->fterm;
@@ -427,12 +431,20 @@ void HSD_FObjInterpretAnim(HSD_FObj* fobj, void* obj,
                     break;
                 }
                 FObjUpdateAnim(fobj, obj, obj_update);
-                state = state = 5;
+                state =
+#ifdef MUST_MATCH
+                    state =
+#endif
+                        5;
                 HSD_FObjSetState(fobj, state);
                 return;
             }
             case 5: {
-                state = state = 4;
+                state =
+#ifdef MUST_MATCH
+                    state =
+#endif
+                        4;
                 HSD_FObjSetState(fobj, state);
                 break;
             }
