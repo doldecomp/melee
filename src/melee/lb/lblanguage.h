@@ -3,6 +3,12 @@
 
 #include <platform.h>
 
+enum {
+    LANG_JP,
+    LANG_US,
+    LANG_COUNT,
+};
+
 enum_t lbLang_GetLanguageSetting(void);
 enum_t lbLang_SetLanguageSetting(enum_t language);
 bool lbLang_IsSettingJP(void);

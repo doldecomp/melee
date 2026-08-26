@@ -22,6 +22,7 @@
 #define HSD_GOBJ_CLASS_UI 0xE
 #define HSD_GOBJ_CLASS_TEXT 0x11
 #define HSD_GOBJ_CLASS_CAMERA 0x13
+#define HSD_GOBJ_CLASS_SOUND 0x17
 
 typedef struct HSD_GObj {
     /*  +0 */ u16 classifier;
