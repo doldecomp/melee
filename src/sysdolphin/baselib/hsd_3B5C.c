@@ -590,12 +590,18 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
                         u8* scratch_r16;
 
                         scratch_r19 = *work_r27;
-                        scratch_r16 =
-                            base + (((work_r5 >> 1) +
-                                     (work_r25 + ((work_r4 & 2) * 4)) +
-                                     (((work_r8_2 % 2) * 4) +
-                                      ((work_r8_2 / 2) << 5))) *
-                                    4);
+                        {
+                            s32 chroma_x;
+
+                            chroma_x = (work_r8_2 % 2) * 4;
+                            scratch_r16 =
+                                base + (((work_r5 >> 1) +
+                                         (work_r25 +
+                                          ((work_r4 & 2) * 4)) +
+                                         (chroma_x +
+                                          ((work_r8_2 / 2) << 5))) *
+                                        4);
+                        }
                         scratch_r20 = M2C_FIELD(scratch_r16, s32*, 0x618);
                         scratch_r18 = M2C_FIELD(scratch_r16, s32*, 0x518);
                         store_off = ((work_r8_2 & 1) << 5) +
