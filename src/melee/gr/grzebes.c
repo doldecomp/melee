@@ -1978,7 +1978,6 @@ bool grZebes_801DBB60(Item_GObj* yaku)
     grZe_BubbleEntry* bubbles;
     s32 count = 0;
     f32 max_dist_sq = -1.0f;
-    grZe_BubbleEntry* ej;
 
     HSD_ASSERT(0x898, yaku);
 
@@ -2006,7 +2005,7 @@ bool grZebes_801DBB60(Item_GObj* yaku)
         grZe_BubbleEntry* entry;
         f32 zero;
         grMaterial_801C8E08(yaku);
-        entry = &bubbles[last_idx];
+        entry = &grZe_8049F170[last_idx];
         zero = 0.0f;
         grMaterial_801C8DE0(yaku, entry->x08_x, entry->x0C_y, zero,
                             entry->x08_x, entry->x0C_y, zero,
@@ -2027,30 +2026,28 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                 f32 ei_y = ei->x0C_y;
                 f32 ei_x = ei->x08_x;
                 f32 ei_size = ei->x18_size;
-                s32 rem = 20 - j;
-                ej = &bubbles[j];
-                if (j < 20) {
-                    for (; rem != 0; ej++, j++, rem--) {
-                        if (ej->x00_active == 1 && j != 0 && j != 6) {
-                            f32 ej_x = ej->x08_x;
-                            f32 ej_y = ej->x0C_y;
-                            f32 dx = ei_x - ej_x;
-                            f32 dy = ei_y - ej_y;
-                            f32 dx_sq = dx * dx;
-                            f32 dy_sq = dy * dy;
-                            f32 dist_sq = dx_sq + dy_sq;
-                            if (max_dist_sq < dist_sq) {
-                                f32 ej_size = ej->x18_size;
-                                max_dist_sq = dist_sq;
-                                x1 = ei_x;
-                                y1 = ei_y;
-                                x2 = ej_x;
-                                y2 = ej_y;
-                                if (ei_size > ej_size) {
-                                    last_idx = i;
-                                } else {
-                                    last_idx = j;
-                                }
+                grZe_BubbleEntry* ej = &grZe_8049F170[j];
+                for (; j < 20; ej++, j++) {
+                    if (ej->x00_active == 1 && j != 0 && j != 6) {
+                        f32 ej_x = ej->x08_x;
+                        f32 ej_y = ej->x0C_y;
+                        f32 dx = ei_x - ej_x;
+                        f32 dy = ei_y - ej_y;
+                        f32 dist_sq;
+                        dx *= dx;
+                        dy *= dy;
+                        dist_sq = dx + dy;
+                        if (max_dist_sq < dist_sq) {
+                            f32 ej_size = ej->x18_size;
+                            max_dist_sq = dist_sq;
+                            x1 = ei_x;
+                            y1 = ei_y;
+                            x2 = ej_x;
+                            y2 = ej_y;
+                            if (ei_size > ej_size) {
+                                last_idx = i;
+                            } else {
+                                last_idx = j;
                             }
                         }
                     }
@@ -2061,117 +2058,96 @@ bool grZebes_801DBB60(Item_GObj* yaku)
         if (max_dist_sq < 0.0f) {
             HSD_ASSERT(0x8D2, 0);
         } else if (max_dist_sq < 0.0001f) {
-            grZe_BubbleEntry* entry = &bubbles[last_idx];
+            grZe_BubbleEntry* entry = &grZe_8049F170[last_idx];
             grMaterial_801C8DE0(yaku, entry->x08_x, entry->x0C_y, 0.0f,
                                 entry->x08_x, entry->x0C_y, 0.0f,
                                 (f32) (2.0 * (f64) entry->x18_size));
             return 1;
         } else {
-            f32 dy = y2 - y1;
-            f32 dx = x2 - x1;
-            f32 width = 1.0f;
+            f32 dx;
+            f32 dy;
+            f32 width;
             f32 inv_len_sq;
             int k = 0;
-            grZe_BubbleEntry* bp = bubbles;
-
+            dy = y2 - y1;
+            dx = x2 - x1;
+            width = 1.0f;
             inv_len_sq = 1.0f / (dx * dx + dy * dy);
-            (void) inv_len_sq;
 
-            for (k = 0; k < 20; k++, bp++) {
-                if (bp->x00_active == 1 && k != 0 && k != 6) {
-                    f32 by = bp->x0C_y;
-                    f32 bx = bp->x08_x;
+            for (k = 0; k < 20; k++, bubbles++) {
+                if (bubbles->x00_active == 1 && k != 0 && k != 6) {
+                    f32 by = bubbles->x0C_y;
+                    f32 bx = bubbles->x08_x;
                     f32 dpx = by - y1;
                     f32 dpy = bx - x1;
                     f32 t = inv_len_sq * (dx * dpy + dy * dpx);
-                    f32 closest_dist;
 
-                    if (t < 0.0) {
-                        closest_dist = dpy * dpy + dpx * dpx;
+                    if (t < 0.0f) {
+                        bx = dpy * dpy + dpx * dpx;
                     } else if (t > 1.0f) {
                         f32 ex = bx - x2;
                         f32 ey = by - y2;
-                        f32 ex2 = ex * ex;
-                        f32 ey2 = ey * ey;
-                        closest_dist = ex2 + ey2;
+                        ex *= ex;
+                        ey *= ey;
+                        bx = ex + ey;
                     } else {
                         f32 cx = (dx * t + x1) - bx;
                         f32 cy = (dy * t + y1) - by;
-                        f32 cx2 = cx * cx;
-                        f32 cy2 = cy * cy;
-                        closest_dist = cx2 + cy2;
+                        cx *= cx;
+                        cy *= cy;
+                        bx = cx + cy;
                     }
 
-                    closest_dist = sqrtf(closest_dist);
+                    bx = sqrtf(bx);
 
                     {
-                        f32 check = (f32) (2.0 * (f64) bp->x18_size +
-                                           (f64) closest_dist);
-                        if (check > width) {
+                        if ((f32) (2.0 * (f64) bubbles->x18_size + (f64) bx) >
+                            width) {
+                            f32 new_width;
                             if (t < 0.5f) {
-                                f32 dpx2 = bp->x08_x - x1;
-                                f32 dpy2 = bp->x0C_y - y1;
-                                f32 dist2 = grZebes_801DB3CC_dist2(dpy2, dpx2);
-                                f32 new_width;
-                                dist2 = sqrtf(dist2);
-                                {
-                                    f32 sum = dist2 + width;
-                                    new_width =
-                                        (f32) (0.5 *
-                                               (2.0 * (f64) bp->x18_size +
-                                                (f64) sum));
+                                f32 dpx2 = bubbles->x08_x - x1;
+                                f32 dpy2 = bubbles->x0C_y - y1;
+                                dpx2 *= dpx2;
+                                dpy2 *= dpy2;
+                                t = sqrtf(dpx2 + dpy2);
+                                new_width =
+                                    (f32) (0.5 *
+                                           (2.0 * (f64) bubbles->x18_size +
+                                            (f64) (t + width)));
+                                if (t > 0.001f) {
+                                    dpx2 = (new_width - width) / t;
+                                    x1 += dpx2 * (bubbles->x08_x - x1);
+                                    y1 += dpx2 * (bubbles->x0C_y - y1);
                                 }
-                                if (dist2 > 0.001) {
-                                    f32 ratio = (new_width - width) / dist2;
-                                    x1 += ratio * (bp->x08_x - x1);
-                                    y1 += ratio * (bp->x0C_y - y1);
-                                }
-                                {
-                                    f32 ddy = y1 - y2;
-                                    f32 ddx = x1 - x2;
-                                    f32 dist3 = ddx * ddx + ddy * ddy;
-                                    f32 expand;
-                                    dist3 = sqrtf(dist3);
-                                    expand = new_width - width;
-                                    width = new_width;
-                                    {
-                                        f32 ratio2 = expand / dist3;
-                                        x2 += ddx * ratio2;
-                                        y2 += ddy * ratio2;
-                                    }
-                                }
+                                dpy2 = y1 - y2;
+                                dpx2 = x1 - x2;
+                                t = (new_width - width) /
+                                    sqrtf(dpx2 * dpx2 + dpy2 * dpy2);
+                                width = new_width;
+                                x2 += dpx2 * t;
+                                y2 += dpy2 * t;
                             } else {
-                                f32 dpx2 = bp->x08_x - x2;
-                                f32 dpy2 = bp->x0C_y - y2;
-                                f32 dist2 = grZebes_801DB3CC_dist2(dpy2, dpx2);
-                                f32 new_width;
-                                dist2 = sqrtf(dist2);
-                                {
-                                    f32 sum = dist2 + width;
-                                    new_width =
-                                        (f32) (0.5 *
-                                               (2.0 * (f64) bp->x18_size +
-                                                (f64) sum));
+                                f32 dpx2 = bubbles->x08_x - x2;
+                                f32 dpy2 = bubbles->x0C_y - y2;
+                                dpx2 *= dpx2;
+                                dpy2 *= dpy2;
+                                t = sqrtf(dpx2 + dpy2);
+                                new_width =
+                                    (f32) (0.5 *
+                                           (2.0 * (f64) bubbles->x18_size +
+                                            (f64) (t + width)));
+                                if (t > 0.001f) {
+                                    dpx2 = (new_width - width) / t;
+                                    x2 += dpx2 * (bubbles->x08_x - x2);
+                                    y2 += dpx2 * (bubbles->x0C_y - y2);
                                 }
-                                if (dist2 > 0.001) {
-                                    f32 ratio = (new_width - width) / dist2;
-                                    x2 += ratio * (bp->x08_x - x2);
-                                    y2 += ratio * (bp->x0C_y - y2);
-                                }
-                                {
-                                    f32 ddy = y2 - y1;
-                                    f32 ddx = x2 - x1;
-                                    f32 dist3 = ddx * ddx + ddy * ddy;
-                                    f32 expand;
-                                    dist3 = sqrtf(dist3);
-                                    expand = new_width - width;
-                                    width = new_width;
-                                    {
-                                        f32 ratio2 = expand / dist3;
-                                        x1 += ddx * ratio2;
-                                        y1 += ddy * ratio2;
-                                    }
-                                }
+                                dpy2 = y2 - y1;
+                                dpx2 = x2 - x1;
+                                t = (new_width - width) /
+                                    sqrtf(dpx2 * dpx2 + dpy2 * dpy2);
+                                width = new_width;
+                                x1 += dpx2 * t;
+                                y1 += dpy2 * t;
                             }
                             dy = y2 - y1;
                             dx = x2 - x1;
