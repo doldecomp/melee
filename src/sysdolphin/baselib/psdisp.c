@@ -1940,24 +1940,24 @@ static inline void psUpdateProjectionCache(f32 perspective)
 void psDispParticles(u32 target_link, u32 sw)
 {
     s32 var_r16;
-    s32 var_r15;
+    s32 needs_setup;
     s32 sp7B4;
     void* sp7B0;
     u32 sp7AC;
     u32 sp7A8;
     u8 sp7A5;
     u8 sp7A4;
-    s32 sp7A0;
+    GXColor chan_amb_color;
     void* sp79C;
     psdisp_Tlut tlut_obj;
     GXTexObj sp764;
-    HSD_Particle* sp760;
     HSD_Particle* sp75C;
+    HSD_Particle* sorted_particles;
     psdisp_Mtx billboard_mtx;
     GXTlutObj sp71C;
     f32 sp700;
     GXColor sp6E0;
-    GXColor sp6DC;
+    s32 prev_tex_interp_near;
     GXColor sp6D8;
     GXColor sp6D4;
     GXColor sp6D0;
@@ -1967,10 +1967,10 @@ void psDispParticles(u32 target_link, u32 sw)
     PAD_STACK(0x14);
 
     var_r16 = 0;
-    var_r15 = 0;
+    prev_tex_interp_near = 0;
     sp7A5 = 0;
     sp7A4 = 0xFF;
-    sp7A0 = 1;
+    needs_setup = 1;
     if (sw == 0) {
         if (psFrameNum < 0xFFU) {
             psFrameNum += 1;
@@ -1982,9 +1982,9 @@ void psDispParticles(u32 target_link, u32 sw)
     sp7B4 = 0;
     do {
         if (target_link & (1 << sp7B4)) {
-            particleSort(sp7B4, psFrameNum, &sp760, &sp75C);
+            particleSort(sp7B4, psFrameNum, &sorted_particles, &sp75C);
             if (sw == 1) {
-                pp = sp760;
+                pp = sorted_particles;
             } else {
                 pp = sp75C;
             }
@@ -2011,7 +2011,7 @@ void psDispParticles(u32 target_link, u32 sw)
                     break;
                 }
                 if (!(pp->size < FLT_EPSILON)) {
-                    if (sp7A0 != 0) {
+                    if (needs_setup != 0) {
                         sp79C = NULL;
                         prevPointSize = -1;
                         sp7B0 = NULL;
@@ -2027,8 +2027,8 @@ void psDispParticles(u32 target_link, u32 sw)
                         prevChanMat.a = prevChanAmb.a = 0xFF;
                         sp6E0 = prevChanMat;
                         GXSetChanMatColor(GX_COLOR0A0, sp6E0);
-                        sp6DC = prevChanAmb;
-                        GXSetChanAmbColor(GX_COLOR0A0, sp6DC);
+                        chan_amb_color = prevChanAmb;
+                        GXSetChanAmbColor(GX_COLOR0A0, chan_amb_color);
                         psSetupTevInvalidState();
                         psSetupTevCommon();
                         psSetColor(&prevColorPrim, 0xFF);
@@ -2059,7 +2059,7 @@ void psDispParticles(u32 target_link, u32 sw)
                         psSetupVtxFormat(GX_VTXFMT3, true, false, GX_RGB565);
                         psSetupVtxFormat(GX_VTXFMT4, false, true, GX_RGBA6);
                         psSetupVtxFormat(GX_VTXFMT5, true, true, GX_RGBA6);
-                        sp7A0 = 0;
+                        needs_setup = 0;
                     }
 
                     blend_mode = (pp->kind >> 0x16U) & 3;
@@ -2220,19 +2220,26 @@ void psDispParticles(u32 target_link, u32 sw)
                                 HSD_ASSERT(0x8AA, 0);
                                 break;
                             }
-                            var_r15 = pp->kind & TexInterpNear;
+                            prev_tex_interp_near =
+                                pp->kind & TexInterpNear;
                             GXInitTexObjLOD(
-                                &sp764, (var_r15 != 0) ? GX_NEAR : GX_LINEAR,
+                                &sp764,
+                                (prev_tex_interp_near != 0) ? GX_NEAR
+                                                            : GX_LINEAR,
                                 (pp->kind & TexInterpNear) ? GX_NEAR
                                                            : GX_LINEAR,
                                 0.0f, 0.0f, 0.0f, GX_FALSE, GX_FALSE,
                                 GX_ANISO_1);
                             GXLoadTexObj(&sp764, GX_TEXMAP0);
                         }
-                        if ((u32) var_r15 != (pp->kind & TexInterpNear)) {
-                            var_r15 = pp->kind & TexInterpNear;
+                        if ((u32) prev_tex_interp_near !=
+                            (pp->kind & TexInterpNear))
+                        {
+                            prev_tex_interp_near = pp->kind & TexInterpNear;
                             GXInitTexObjLOD(
-                                &sp764, (var_r15 != 0) ? GX_NEAR : GX_LINEAR,
+                                &sp764,
+                                (prev_tex_interp_near != 0) ? GX_NEAR
+                                                             : GX_LINEAR,
                                 (s32) (pp->kind & TexInterpNear) != 0
                                     ? GX_NEAR
                                     : GX_LINEAR,
@@ -2265,7 +2272,7 @@ void psDispParticles(u32 target_link, u32 sw)
         }
         sp7B4 += 1;
     } while (sp7B4 < 0x10);
-    if (sp7A0 == 0) {
+    if (needs_setup == 0) {
         HSD_StateInvalidate(-1);
     }
 }
