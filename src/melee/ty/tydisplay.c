@@ -789,14 +789,16 @@ static inline void _tyDisplay_80319540_sort_and_place(TyDspConfig* cfg,
     }
 
     {
-        for (k = 0; k < cfg->x08; k++) {
+        s32 j;
+
+        for (k = 0, j = 0; k < cfg->x08; k++, j++) {
             HSD_GObj* gobj;
             cfg->x78 = _tyDisplay_8031BC54(grid->sort[k].key);
             gobj = cfg->x78;
             if (gobj != NULL) {
-                _tyDisplay_804D6F10[k] = (HSD_JObj*) gobj->hsd_obj;
-                HSD_JObjSetTranslateX(_tyDisplay_804D6F10[k], grid->pos[k].x);
-                HSD_JObjSetTranslateZ(_tyDisplay_804D6F10[k], grid->pos[k].z);
+                _tyDisplay_804D6F10[j] = (HSD_JObj*) gobj->hsd_obj;
+                HSD_JObjSetTranslateX(_tyDisplay_804D6F10[j], grid->pos[k].x);
+                HSD_JObjSetTranslateZ(_tyDisplay_804D6F10[j], grid->pos[k].z);
             }
         }
     }
