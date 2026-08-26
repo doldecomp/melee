@@ -720,8 +720,8 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
             dirx = list->x08 * fp->x34_scale.y;
             diry = list->x0C * fp->x34_scale.y;
         } else {
-            dirx = fp->x34_scale.y * -list->x0C;
-            diry = fp->x34_scale.y * -list->x08;
+            dirx = -list->x0C * fp->x34_scale.y;
+            diry = -list->x08 * fp->x34_scale.y;
         }
         scale = get_scale(fp);
         upper = list->x14 * scale;
