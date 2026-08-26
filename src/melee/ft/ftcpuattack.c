@@ -404,8 +404,8 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     f32 t;
     f32 fpPredY;
     f32 relPredY;
-    f32 v;
     f32 sq;
+    f32 v;
     f32 diry;
     f32 fpX;
     f32 fpY;
@@ -423,6 +423,8 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     f32 rangeB;
     f32 x568;
     f32 relx;
+    f32 lower;
+    f32 upper;
     f32 halfRange;
 
     PAD_STACK(0x10);
@@ -458,8 +460,8 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     x568 = target->x1A88.x568;
     count = 0;
     while (list->cmd) {
-        f32 scale;
         f32 dirx;
+        f32 scale;
         found = false;
         if (list->x20 > cpu->level) {
             list++;
@@ -515,7 +517,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
             } else {
                 v = -(tgtTermNeg - tgtVy) / tgtGrav;
             }
-            if (v <= 0.0) {
+            if (v <= 0.0f) {
                 relPredY = (tgtVy * t + tgtY) - fpPredY;
             } else if (t < v) {
                 sq = sqrtf(t);
@@ -536,15 +538,17 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
             dirx = list->x08 * fp->x34_scale.y;
             diry = list->x0C * fp->x34_scale.y + reach;
         } else {
-            dirx = fp->x34_scale.y * -list->x0C - reach;
-            diry = fp->x34_scale.y * -list->x08;
+            dirx = -list->x0C * fp->x34_scale.y - reach;
+            diry = -list->x08 * fp->x34_scale.y;
         }
         dirx *= halfRange;
         diry *= halfRange;
         scale = fp->x34_scale.y;
-        (void) scale;
-        if ((scale * list->x14 + reach) * halfRange > relPredY &&
-            list->x10 * scale * halfRange < relPredY + x568 &&
+        upper = scale * list->x14 + reach;
+        lower = list->x10 * scale;
+        upper *= halfRange;
+        lower *= halfRange;
+        if (upper > relPredY && lower < relPredY + x568 &&
             dirx < relx + rangeF && diry > relx - rangeB)
         {
             if (cpu->xC8 != 0) {
