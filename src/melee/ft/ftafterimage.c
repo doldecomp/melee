@@ -31,7 +31,6 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
     Fighter* fp;
     itSword_UnkBytes* params;
     f32* distPtr;
-    u32 n4;
     f32 cumDist[3];
     AfterimageVtx vtx_buf[151];
     f32 d2;
@@ -39,6 +38,8 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
     s32 remaining;
     s32 numSubdiv;
     s32 nextIdx;
+
+    PAD_STACK(0x20);
 
     if (arg1 != 2) {
         return;
@@ -349,35 +350,14 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             GXPosition3f32(vtx_buf[2].x, vtx_buf[2].y, vtx_buf[2].z);
             GXColor4u8(vtx_buf[2].r, vtx_buf[2].g, vtx_buf[2].b, vtx_buf[2].a);
 
-            if (numVerts > 1) {
-                AfterimageVtx* p = &vtx_buf[1];
-                u32 count = (u32) (numVerts - 1);
-                n4 = count >> 2;
-                if (n4 != 0) {
-                    do {
-                        GXPosition3f32(p[0].x, p[0].y, p[0].z);
-                        GXColor4u8(p[0].r, p[0].g, p[0].b, p[0].a);
-                        GXPosition3f32(p[1].x, p[1].y, p[1].z);
-                        GXColor4u8(p[1].r, p[1].g, p[1].b, p[1].a);
-                        GXPosition3f32(p[2].x, p[2].y, p[2].z);
-                        GXColor4u8(p[2].r, p[2].g, p[2].b, p[2].a);
-                        GXPosition3f32(p[3].x, p[3].y, p[3].z);
-                        GXColor4u8(p[3].r, p[3].g, p[3].b, p[3].a);
-                        p += 4;
-                        n4--;
-                    } while (n4 != 0);
-                    count &= 3;
-                    if (count != 0) {
-                        goto remainder;
-                    }
-                } else {
-                remainder:
-                    do {
-                        GXPosition3f32(p->x, p->y, p->z);
-                        GXColor4u8(p->r, p->g, p->b, p->a);
-                        p++;
-                        count--;
-                    } while (count != 0);
+            {
+                s32 i;
+
+                for (i = 1; i < numVerts; i++) {
+                    GXPosition3f32(vtx_buf[i].x, vtx_buf[i].y,
+                                   vtx_buf[i].z);
+                    GXColor4u8(vtx_buf[i].r, vtx_buf[i].g, vtx_buf[i].b,
+                               vtx_buf[i].a);
                 }
             }
         }
