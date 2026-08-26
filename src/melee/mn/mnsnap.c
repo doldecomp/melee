@@ -861,6 +861,21 @@ static inline void mnSnap_InitDialogText(void)
     }
 }
 
+static inline s32 mnSnap_GetCursorIdx(void)
+{
+    return mnSnap_804A0A10.cursor_idx;
+}
+
+static inline HSD_JObj* mnSnap_GetMoveJObj(void)
+{
+    return mnSnap_804A0A10.move_jobj;
+}
+
+static inline s32 mnSnap_GetActivePhotoCount(void)
+{
+    return mnSnap_804A0A10.photo_count[mnSnap_804A0A10.active_slot];
+}
+
 /// Main per-frame update for the Snap menu. Handles all state transitions
 /// including slot selection, photo browsing, copy/move/delete operations,
 /// and dialog confirmations via a large switch on snap->state.
@@ -1648,7 +1663,7 @@ void fn_802545C4(void)
                 {
                     s32 mi = mnSnap_804A0A10.move_idx;
                     result = lbSnap_8001D7B0(mnSnap_804A0A10.active_slot,
-                                             mnSnap_804A0A10.cursor_idx, mi);
+                                             mnSnap_GetCursorIdx(), mi);
                 }
                 if (result != 8) {
                     do {
@@ -1664,9 +1679,8 @@ void fn_802545C4(void)
             next_state = 6;
             sfxBack();
         } else if (buttons & 0xCF) {
-            result = mnSnap_80253BE0(
-                buttons, &mnSnap_804A0A10.move_idx,
-                mnSnap_804A0A10.photo_count[mnSnap_804A0A10.active_slot]);
+            result = mnSnap_80253BE0(buttons, &mnSnap_804A0A10.move_idx,
+                                      mnSnap_GetActivePhotoCount());
             if (result == 2) {
                 mnSnap_80253640(mnSnap_804A0A10.move_idx / 4);
                 mnSnap_80253964();
@@ -1695,8 +1709,7 @@ void fn_802545C4(void)
                     HSD_JObjClearFlagsAll(mnSnap_804A0A10.move_jobj,
                                           JOBJ_HIDDEN);
                 } else {
-                    HSD_JObjSetFlagsAll(mnSnap_804A0A10.move_jobj,
-                                        JOBJ_HIDDEN);
+                    HSD_JObjSetFlagsAll(mnSnap_GetMoveJObj(), JOBJ_HIDDEN);
                 }
             } else if (result == 1) {
                 if ((mnSnap_804A0A10.move_idx / 4) == mnSnap_804A0A10.cur_page)
