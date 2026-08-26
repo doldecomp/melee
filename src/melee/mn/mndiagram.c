@@ -1042,7 +1042,6 @@ static inline u8 mnDiagram_GetVisibleNameCursorFrom(u8* sorted, int start,
                                                     int rank)
 {
     u8* p;
-    u8* p2;
     int remaining;
     int idx;
 
@@ -1051,6 +1050,7 @@ static inline u8 mnDiagram_GetVisibleNameCursorFrom(u8* sorted, int start,
     idx = start;
     p = p + 0x1C;
     while (remaining > 0) {
+        u8* p2;
         p2 = p;
     loop:
         idx++;
@@ -2436,7 +2436,7 @@ void mnDiagram_DrawGridValues(void* arg0, s32 arg1, s32 arg2, u8 arg3)
     s32 entry_count;
     s32 name_kos;
     s32 fighter_falls;
-    u8 row_name;
+    s32 row_name;
     s32 col_name;
     s32 row_fighter;
     u8 col_fighter;
@@ -2489,7 +2489,7 @@ void mnDiagram_DrawGridValues(void* arg0, s32 arg1, s32 arg2, u8 arg3)
                             int ko_count;
                             col_name = mnDiagram_GetVisibleNameCursorFrom(
                                 sorted, col_start, name_col);
-                            ko_count = GetPersistentNameData(row_name)
+                            ko_count = GetPersistentNameData((u8) row_name)
                                            ->vs_kos[col_name];
                             mnDiagram_DrawCellValue(arg0, (u8) name_col,
                                                     (u8) row, ko_count);
