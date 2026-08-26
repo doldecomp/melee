@@ -476,7 +476,6 @@ void gm_801B5624(GameScene* arg0)
     UnkAllstarData* allstar;
     gm_803DEBE8_t* opp_data;
     s32 i;
-    s32 count;
     u16 round;
     u8 color;
     PAD_STACK(16);
@@ -487,16 +486,15 @@ void gm_801B5624(GameScene* arg0)
     round = gm_8017BE84(arg0->idx);
 
     {
-        u32 start = ((AllstarRoundInfo*) (base + 0x31C))[round].start;
-        opp_data = (gm_803DEBE8_t*) (base + 0x2B8) + start;
+        u32 start = gm_803DEC4C[round].start;
+        opp_data = &gm_803DEBE8[start];
     }
 
     chars[0] = 0x21;
     chars[1] = 0x21;
     chars[2] = 0x21;
 
-    count = ((AllstarRoundInfo*) (base + 0x31C))[round].count;
-    for (i = 0; i < count; i++) {
+    for (i = 0; i < (s32) gm_803DEC4C[round].count; i++) {
         chars[i] = opp_data[i].x3;
     }
 
