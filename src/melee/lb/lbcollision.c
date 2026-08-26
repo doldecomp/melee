@@ -1071,7 +1071,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float start_delta_x;
     float hurt_param_from_hit_start;
     Mtx inv_hurt_mtx;
-    float hurt_delta_x;
+    float hurt_delta_z;
     float hit_start_max_x;
     float hit_end_min_x;
     float hit_start_min_x;
@@ -1116,7 +1116,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     s32 is_hit_segment_degenerate;
     s32 is_parallel;
     s32 is_zero_distance;
-    float hurt_delta_z;
+    float hurt_delta_x;
     float hurt_delta_y;
     PAD_STACK(64);
 
