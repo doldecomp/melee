@@ -346,8 +346,8 @@ static inline void fn_801C8EF8_inline(Ground* gp, HSD_MObj* mobj,
                 OSReport("can't find free color register!\n");
                 HSD_ASSERT(0x88, 0);
             }
-            cnst->comp = reg1_lt4_for_kcsel = 1;
-            cnst->ctype = temp = 0;
+            cnst->comp = temp = 1;
+            cnst->ctype = reg1_lt4_for_kcsel = 0;
             cnst->reg = (u8) reg2;
             color->r = gp->x6C.a;
             color->g = gp->x6C.a;
@@ -359,9 +359,9 @@ static inline void fn_801C8EF8_inline(Ground* gp, HSD_MObj* mobj,
             if (reg1 < 4) {
                 !reg1;
             } else {
-                reg1_lt4_for_kcsel = temp;
+                temp = reg1_lt4_for_kcsel;
             }
-            if (reg1_lt4_for_kcsel != 0) {
+            if (temp != 0) {
                 tevdesc->u.tevconf.kcsel = grMaterial_GetKColorSel(reg1);
             } else {
                 if (reg2 < 4) {
