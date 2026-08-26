@@ -18,7 +18,6 @@
 #include "gm/types.h"
 #include "gr/ground.h"
 #include "gr/stage.h"
-#include "if/ifnametag.h"
 #include "if/ifstatus.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_013B.h"
@@ -33,7 +32,6 @@
 #include "sc/types.h"
 #include "ty/toy.h"
 
-#include <m2c_macros.h>
 #include <baselib/sislib.h>
 #include <baselib/video.h>
 #include <sysdolphin/baselib/controller.h>
@@ -4093,8 +4091,8 @@ s32 fn_80169000(MatchEnd* arg0, u8* arg1)
     u8 positions[4];
     u8* hp = handicaps;
     MatchEnd* p = arg0;
-    u8* sp = (u8*) arg1;
-    u8* hb = (u8*) arg1;
+    u8* sp = arg1;
+    u8* hb = arg1;
     s32 count;
     s32 i;
     UNUSED u8 pad[12];

@@ -9,13 +9,7 @@
 #include "lb/lb_00B0.h"
 
 #include <stddef.h>
-#include <baselib/sislib.h>
-#include <baselib/video.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/debugconsole_main.h>
-#include <sysdolphin/baselib/hsd_3915.h>
 #include <sysdolphin/baselib/random.h>
-#include <melee/gm/gm_1A45.h>
 #include <melee/pl/player.h>
 
 /* 46B488 */ static struct lbl_8046B488_t lbl_8046B488;
@@ -175,7 +169,7 @@ void fn_801695BC(u8 arg0, u8 arg1, u8 arg2, const u8* arg3, s8* arg4)
             colors[i] = tmp;
         }
         color_i = 0;
-        for (i = 0; (s8) arg4[i] != -2; i++) {
+        for (i = 0; arg4[i] != -2; i++) {
             if ((s8) arg0 == (s8) arg3[i]) {
                 if (colors[color_i % ncolors_s32] == -1) {
                     color_i += 1;
@@ -184,10 +178,10 @@ void fn_801695BC(u8 arg0, u8 arg1, u8 arg2, const u8* arg3, s8* arg4)
                 color_i += 1;
             }
         }
-        for (i = 1; (s8) arg4[i] != -2; i++) {
+        for (i = 1; arg4[i] != -2; i++) {
             if ((s8) arg0 == (s8) arg3[i] && (s8) arg0 == (s8) arg3[i - 1]) {
                 if (HSD_Randi(2) != 0) {
-                    tmp2 = (s8) arg4[i];
+                    tmp2 = arg4[i];
                     arg4[i] = arg4[i - 1];
                     arg4[i - 1] = tmp2;
                 }
