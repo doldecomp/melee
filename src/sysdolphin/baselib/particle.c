@@ -604,6 +604,39 @@ s32 hsd_803991D8(HSD_Generator* gen, HSD_JObj* jobj, f32 force, f32 range)
     return 0;
 }
 
+static inline void psUpdateParticleJObj(HSD_Particle* pp)
+{
+    if (pp->kind & 0x8000) {
+        s32 jobj_idx = (pp->kind >> 12) & 7;
+        HSD_JObj* jobj;
+        HSD_JObj** jobj_slot;
+
+        if (hsd_804D08E8[jobj_idx] == NULL) {
+            HSD_JObj* new_jobj = HSD_JObjAlloc();
+            if (new_jobj != NULL) {
+                hsd_8039CF4C(jobj_idx + 1, new_jobj);
+                HSD_JObjUnref(new_jobj);
+            }
+        }
+
+        jobj_slot = &hsd_804D08E8[jobj_idx];
+        jobj = *jobj_slot;
+
+        if (jobj != NULL) {
+            HSD_JObjSetupMatrix(jobj);
+
+            jobj = *jobj_slot;
+            HSD_JObjAddTranslationX(jobj, pp->pos.x - jobj->mtx[0][3]);
+
+            jobj = *jobj_slot;
+            HSD_JObjAddTranslationY(jobj, pp->pos.y - jobj->mtx[1][3]);
+
+            jobj = *jobj_slot;
+            HSD_JObjAddTranslationZ(jobj, pp->pos.z - jobj->mtx[2][3]);
+        }
+    }
+}
+
 // @TODO: Currently 93.95% match - register allocation differences (stmw
 // r20 vs r21), r27/r28 swap, and PC advance codegen patterns
 void* hsd_8039930C(void* pp_arg, void* prev_arg)
@@ -2807,7 +2840,7 @@ do_life:
         t4 = sinB * t2 - t4;
         pp->pos.y = gp->pos.y + t1;
         t4 = cosB * t0 + t4;
-        pp->pos.z = gp->pos.z + t4;
+        pp->pos.z = t4 + gp->pos.z;
     } else {
         /* Simple physics */
         if (pp->kind & 1) {
@@ -2823,37 +2856,7 @@ do_life:
         pp->pos.z += pp->vel.z;
     }
 
-    /* JObj attachment - update JObj position to match particle */
-    if (pp->kind & 0x8000) {
-        s32 jobj_idx = (pp->kind >> 12) & 7;
-        HSD_JObj* jobj;
-        HSD_JObj** jobj_slot;
-
-        /* Allocate JObj if slot is empty */
-        if (hsd_804D08E8[jobj_idx] == NULL) {
-            HSD_JObj* new_jobj = HSD_JObjAlloc();
-            if (new_jobj != NULL) {
-                hsd_8039CF4C(jobj_idx + 1, new_jobj);
-                HSD_JObjUnref(new_jobj);
-            }
-        }
-
-        jobj_slot = &hsd_804D08E8[jobj_idx];
-        jobj = *jobj_slot;
-
-        if (jobj != NULL) {
-            HSD_JObjSetupMatrix(jobj);
-
-            jobj = *jobj_slot;
-            HSD_JObjAddTranslationX(jobj, pp->pos.x - jobj->mtx[0][3]);
-
-            jobj = *jobj_slot;
-            HSD_JObjAddTranslationY(jobj, pp->pos.y - jobj->mtx[1][3]);
-
-            jobj = *jobj_slot;
-            HSD_JObjAddTranslationZ(jobj, pp->pos.z - jobj->mtx[2][3]);
-        }
-    }
+    psUpdateParticleJObj(pp);
 
     /* Callback */
     if (pp->callback != NULL) {
