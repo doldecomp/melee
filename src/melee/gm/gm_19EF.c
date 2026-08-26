@@ -364,6 +364,18 @@ static inline s32 fn_8019F9C4_GetCharIdx(CharacterKind arg0)
     }
 }
 
+static inline void fn_8019F9C4_LoadSymbols(u32 arg0)
+{
+    u8 game_mode = gm_GetCurrentGameMode();
+    char* model_name = gm_80160564(arg0, game_mode);
+    char* scene_name = gm_801604DC(arg0, game_mode);
+
+    lbArchive_LoadSymbols(scene_name, &lbl_804D66AC, model_name, 0);
+    lbArchive_LoadSymbols("GmGoAnim.dat", &lbl_804D66A4,
+                          "ScGamRegGover_scene_data", 0);
+    lbArchive_LoadSymbols("GmRgStnd.dat", &lbl_804D66A8, "standScene", 0);
+}
+
 void fn_8019F9C4(u32 arg0)
 {
     HSD_CObj* cobj;
@@ -389,15 +401,7 @@ void fn_8019F9C4(u32 arg0)
                        "ScGamRegGover_scene_data", 0);
     Toy_803124BC();
     Toy_803102D0();
-    {
-        u8 game_mode = gm_GetCurrentGameMode();
-        char* model_name = gm_80160564(arg0, game_mode);
-        char* scene_name = gm_801604DC(arg0, game_mode);
-        lbArchive_LoadSymbols(scene_name, &lbl_804D66AC, model_name, 0);
-        lbArchive_LoadSymbols("GmGoAnim.dat", &lbl_804D66A4,
-                              "ScGamRegGover_scene_data", 0);
-        lbArchive_LoadSymbols("GmRgStnd.dat", &lbl_804D66A8, "standScene", 0);
-    }
+    fn_8019F9C4_LoadSymbols(arg0);
     cobj = HSD_CObjLoadDesc(lbl_804D669C->cameras->desc);
     cam_gobj = GObj_Create(0x13, 0x14, 0);
     HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B, cobj);
