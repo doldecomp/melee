@@ -3270,7 +3270,7 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                         } else {
                             s32 verify_result =
                                 fn_803ACC0C(arg0, phys, blocks_before + i,
-                                            current_seq, data, chunk);
+                                             current_seq, data, chunk);
 
                             result = verify_result;
                             if (result < 0) {
