@@ -548,7 +548,8 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                     base_throw_speed *=
                         throw_speed_arr[fp->motion_id - ftCo_MS_LightThrowF]
                             .x8;
-                    throw_speed = throw_scale * base_throw_speed;
+                    throw_scale *= base_throw_speed;
+                    throw_speed = throw_scale;
                     vec2.x =
                         fsm * (fp->mv.co.itemthrow4.x8.x - vec0.x) + vec0.x;
                     vec2.y =
