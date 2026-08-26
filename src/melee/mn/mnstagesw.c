@@ -509,7 +509,8 @@ static void mnStageSw_80236548(HSD_GObj* gobj, u8 arg1, u8 arg2)
 static void fn_80236998(HSD_GObj* gobj)
 {
     HSD_JObj* jobj;
-    MnStageSwData* data;
+    MnStageSwData* current_data = gobj->user_data;
+    MnStageSwData* data = current_data;
     AnimLoopSettings* anims;
     s32 changed_menu;
     s32 changed_hovered;
@@ -521,7 +522,6 @@ static void fn_80236998(HSD_GObj* gobj)
     changed_menu = 0;
     changed_hovered = 0;
     changed_confirmed = 0;
-    data = gobj->user_data;
     state = data->x1F;
     PAD_STACK(4);
     if ((state == 0 || state == 1 || state == 3) &&
