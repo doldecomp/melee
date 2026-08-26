@@ -2455,11 +2455,12 @@ void fn_801891F4(void)
                 }
             }
             if (buttons & PAD_BUTTON_A) {
+                s16 item;
                 HSD_JObj* jobj;
                 Vec3 pos;
-                s16 item;
                 lbAudioAx_80024030(8);
-                item = *(s16*) &((s32*) lbl_803D9828)[sub->menu_values[1]];
+                item = TrainingItemTable_Get()
+                           [lbl_80473700.css.menu_values[1]].item_id;
                 jobj = Player_GetEntity(0)->hsd_obj;
                 HSD_JObjGetTranslation2(jobj, &pos);
                 pos.y += 10.0f;
@@ -2628,7 +2629,7 @@ void fn_801891F4(void)
             cpu_type = sub->menu_values[3];
             (void) cpu_type;
             count = lbl_80473700.count;
-            sub->x03 = (u8) cpu_type;
+            lbl_80473700.css.x03 = (u8) cpu_type;
             for (i = 0; i < 4; i++) {
                 if (i != 0 && count != 0) {
                     Player_SetPlayerAndEntityCpuType(i, cpu_type);
