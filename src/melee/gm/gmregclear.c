@@ -1068,7 +1068,7 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
     }
     temp_r0 = arg0->match_end.result;
     if ((temp_r0 == OUTCOME_NO_CONTEST || temp_r0 == OUTCOME_RETRY) &&
-        DbLevel <= 2)
+        DbLevel <= DbLKind_DebugDevelop)
     {
         switch (gm_GetCurrentGameMode()) {
         case GM_CLASSIC:

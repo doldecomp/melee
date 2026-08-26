@@ -564,7 +564,7 @@ void fn_8016B918(void)
             continue;
         }
         temp_r3_2 = Player_GetPlayerId(i);
-        if (DbLevel >= 3) {
+        if (DbLevel >= DbLKind_DebugRom) {
             temp_r3_3 = &HSD_PadCopyStatus[(u8) temp_r3_2];
             if ((temp_r3_3->trigger & HSD_PAD_DPADUP) &&
                 (temp_r3_3->button & HSD_PAD_X))
@@ -631,7 +631,7 @@ int gm_DefaultVSGetPauser(void)
         spPlayerId = Player_GetPlayerId(0);
         spPadStatus = &HSD_PadCopyStatus[(u8) spPlayerId];
         if (spPadStatus->err == 0) {
-            if (DbLevel >= 3) {
+            if (DbLevel >= DbLKind_DebugRom) {
                 if ((spPadStatus->trigger & HSD_PAD_DPADUP) &&
                     (spPadStatus->button & HSD_PAD_X))
                 {
@@ -650,7 +650,7 @@ int gm_DefaultVSGetPauser(void)
         for (mpPlayerId = 0; mpPlayerId < PAD_MAX_CONTROLLERS; mpPlayerId++) {
             mpPadStatus = &HSD_PadCopyStatus[(u8) mpPlayerId];
             if (mpPadStatus->err == 0) {
-                if (DbLevel >= 3) {
+                if (DbLevel >= DbLKind_DebugRom) {
                     if ((mpPadStatus->trigger & HSD_PAD_DPADUP) &&
                         (mpPadStatus->button & HSD_PAD_X))
                     {
@@ -690,7 +690,7 @@ int gm_CameraModeVSGetPauser(void)
     for (var_r30 = 0; var_r30 < PAD_MAX_CONTROLLERS; var_r30++) {
         temp_r3 = &HSD_PadCopyStatus[(u8) var_r30];
         if (temp_r3->err == 0) {
-            if (DbLevel >= 3) {
+            if (DbLevel >= DbLKind_DebugRom) {
                 if ((temp_r3->trigger & HSD_PAD_DPADUP) &&
                     (temp_r3->button & HSD_PAD_X))
                 {
@@ -1151,7 +1151,8 @@ void gm_DoPauseChecksAndRoutine(lbl_8046B6A0_t* arg0, int arg1)
  * @brief Returns the player id pressing unpause, or @c -1 if none.
  *
  * In retail builds, checks for a newly pressed Start button. When @c DbLevel
- * >= 3, accepts D-Pad Up (@c HSD_PAD_DPADUP, @c 1 << 3) plus X instead.
+ * >= DbLKind_DebugRom, accepts D-Pad Up (@c HSD_PAD_DPADUP, @c 1 << 3) plus X
+ * instead.
  */
 static inline int gm_GetPlayerPressingUnpause(void)
 {
@@ -1161,7 +1162,7 @@ static inline int gm_GetPlayerPressingUnpause(void)
     for (playerId = 0; playerId < PAD_MAX_CONTROLLERS; playerId++) {
         pad = &HSD_PadCopyStatus[(u8) playerId];
         if (pad->err == 0) {
-            if (DbLevel >= 3) {
+            if (DbLevel >= DbLKind_DebugRom) {
                 if ((pad->trigger & HSD_PAD_DPADUP) &&
                     (pad->button & HSD_PAD_X))
                 {
@@ -1278,7 +1279,7 @@ void fn_8016CF4C(int slot, MatchOutcome matchResult)
 {
     gm_801A10FC(slot);
     lbl_8046B6A0.match_result = matchResult;
-    if (matchResult != OUTCOME_RETRY && DbLevel >= 3) {
+    if (matchResult != OUTCOME_RETRY && DbLevel >= DbLKind_DebugRom) {
         gm_801A4674(1);
         if (lbl_8046B6A0.x24C8.xD > 1) {
             lbl_8046B6A0.unk_30 = lbl_8046B6A0.x24C8.xD - 1;
@@ -1303,7 +1304,7 @@ static inline void fn_8016CFE0_inline(void)
     int i;
     lbl_8046B6A0_t* tmp;
 
-    if (DbLevel >= 3 && gm_801A46B8(0) != 0 &&
+    if (DbLevel >= DbLKind_DebugRom && gm_801A46B8(0) != 0 &&
         (HSD_PadCopyStatus->button &
          (HSD_PAD_L | HSD_PAD_R | HSD_PAD_A | HSD_PAD_START)) ==
             (HSD_PAD_L | HSD_PAD_R | HSD_PAD_A | HSD_PAD_START))
@@ -1336,7 +1337,7 @@ void fn_8016CFE0(void)
     fn_8016758C();
     if (gm_801A45E8(1) != 0) {
         unpauser_slot = gm_GetPlayerPressingUnpause();
-        if (DbLevel >= 3) {
+        if (DbLevel >= DbLKind_DebugRom) {
             tmp_btns = PAD_TRIGGER_L | PAD_TRIGGER_R | PAD_BUTTON_A;
         } else {
             tmp_btns = PAD_TRIGGER_L | PAD_TRIGGER_R | PAD_BUTTON_A |
@@ -1402,7 +1403,7 @@ static inline int fn_8016CBE8_inline(void)
     for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         pad = &HSD_PadCopyStatus[(u8) i];
         if (pad->err == 0) {
-            if (DbLevel >= 3) {
+            if (DbLevel >= DbLKind_DebugRom) {
                 if ((pad->trigger & HSD_PAD_DPADUP) &&
                     (pad->button & HSD_PAD_X))
                 {
