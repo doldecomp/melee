@@ -888,14 +888,17 @@ void _tyDisplay_80319540(s32 arg0)
 }
 
 static inline void _tyDisplay_80319994_sort_pos(TyDspGrid* grid, s32 count,
-                                                s32* n2, s32* pivot)
+                                                s32 arg0)
 {
-    if (*pivot != 0 && count > 1) {
-        *n2 = count - 1;
-        if (*n2 > 0) {
+    s32 n2;
+    s32 pivot;
+
+    if (arg0 != 0 && count > 1) {
+        n2 = count - 1;
+        if (n2 > 0) {
             TyDspPos tmp;
-            s32 mid = *n2 / 2;
-            s32 n, j;
+            s32 mid = n2 / 2;
+            s32 j, n;
 
             if (mid != 0) {
                 tmp = grid->pos[0];
@@ -903,13 +906,13 @@ static inline void _tyDisplay_80319994_sort_pos(TyDspGrid* grid, s32 count,
                 grid->pos[mid] = tmp;
             }
 
-            *pivot = 0;
+            pivot = 0;
             j = 0;
-            for (n = 1; *n2 >= n; n++) {
+            for (n = 1; n2 >= n; n++) {
                 if (grid->pos[n].z < grid->pos[0].z) {
-                    *pivot += 1;
+                    pivot += 1;
                     j += 8;
-                    if (*pivot != n) {
+                    if (pivot != n) {
                         TyDspPos* p = (TyDspPos*) ((size_t) grid + j + 0x97C);
                         tmp = *p;
                         *p = grid->pos[n];
@@ -918,14 +921,14 @@ static inline void _tyDisplay_80319994_sort_pos(TyDspGrid* grid, s32 count,
                 }
             }
 
-            if (*pivot != 0) {
+            if (pivot != 0) {
                 tmp = grid->pos[0];
-                grid->pos[0] = grid->pos[*pivot];
-                grid->pos[*pivot] = tmp;
+                grid->pos[0] = grid->pos[pivot];
+                grid->pos[pivot] = tmp;
             }
 
-            _tyDisplay_8031830C((TySortElem*) grid->pos, 0, *pivot - 1);
-            _tyDisplay_8031830C((TySortElem*) grid->pos, *pivot + 1, *n2);
+            _tyDisplay_8031830C((TySortElem*) grid->pos, 0, pivot - 1);
+            _tyDisplay_8031830C((TySortElem*) grid->pos, pivot + 1, n2);
         }
     }
 }
@@ -1030,7 +1033,7 @@ void _tyDisplay_80319994(s32 arg0)
         }
     }
 
-    _tyDisplay_80319994_sort_pos(grid, count, &n2, &pivot);
+    _tyDisplay_80319994_sort_pos(grid, count, arg0);
 
     _tyDisplay_80318B1C(cfg->x08);
 
