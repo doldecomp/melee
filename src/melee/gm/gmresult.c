@@ -50,6 +50,33 @@ extern HSD_Archive* lbl_804D65B8;
 #include "pl/player.h"
 #include "sc/types.h"
 
+static void gmresult_sdata2_order(void)
+{
+    (void) 0.0f;
+    (void) -30.0f;
+    (void) 0.0500000007f;
+    (void) 0.0546875f;
+    (void) 0.0590000004f;
+    (void) 10.0f;
+    (void) 1.75f;
+    (void) 11.0f;
+    (void) S32_TO_F32;
+    (void) 12.0f;
+    (void) 300.0f;
+    (void) 100.0f;
+    (void) 0.899999976f;
+    (void) 255.0f;
+    (void) U32_TO_F32;
+    (void) 1.13999999f;
+    (void) 1.12f;
+    (void) 30.0f;
+    (void) 0.109999999f;
+    (void) 0.0799999982f;
+    (void) 0.0900000036f;
+    (void) 5.5f;
+    (void) 1.0f;
+}
+
 MatchEnd* fn_80174274(void)
 {
     return lbl_8046DBE8.x94;
@@ -1078,6 +1105,7 @@ void fn_80175DC8(HSD_GObj* gobj)
 
     data = &lbl_8046DBE8;
     me = data->x94;
+    data_iter = data;
     {
         DynamicModelDesc* model = data->pnlsce->models[0];
         jobj = HSD_JObjLoadJoint(model->joint);
@@ -1097,8 +1125,8 @@ void fn_80175DC8(HSD_GObj* gobj)
     lb_80011E24(jobj, &sp100, 0x69, -1);
     data->x28 = sp100;
 
-    i = 0;
-    jobj_iter = &data->x34[i];
+    jobj_iter = (HSD_JObj**) data_iter + (i = 0);
+    jobj_iter += offsetof(ResultsData, x34) / sizeof(*jobj_iter);
     for (; i < 6; i++, jobj_iter++) {
         lb_80011E24(jobj, jobj_iter, i + 0x62, -1);
     }
