@@ -474,6 +474,11 @@ static inline f32 gmTournament_GetBracketSlideYReverse(BracketEntrySlot* slot)
     return -((f32) slot->x48 - 0.3f * (f32) lbl_804D6630);
 }
 
+static inline HSD_JObj* fn_8018B090_inline0(s32 i, s32 idx)
+{
+    return lbl_80473AB8[idx].slots[i].x2C->hsd_obj;
+}
+
 void fn_8018B090(HSD_GObj* arg0)
 {
     TmData* tm = gm_GetTournamentData();
@@ -491,7 +496,7 @@ void fn_8018B090(HSD_GObj* arg0)
                 if (lbl_80473AB8[idx].slots[i].x30 != 0) {
                     HSD_JObj* jobj;
                     HSD_JObj* jobj2;
-                    jobj = lbl_80473AB8[idx].slots[i].x2C->hsd_obj;
+                    jobj = fn_8018B090_inline0(i, idx);
                     jobj2 = jobj;
                     if (lbl_80473AB8[idx].x2 != 0) {
                         HSD_JObjSetTranslateY(
@@ -540,7 +545,7 @@ void fn_8018B090(HSD_GObj* arg0)
         return;
     case 22: {
         s32 h = lbl_80473AB8[idx].x18;
-        if (h != 0) {
+        if (h) {
             f32 d;
             lbl_803D9DAC.current.x = 320.0f;
             lbl_803D9DAC.current.y = -240.0f;
