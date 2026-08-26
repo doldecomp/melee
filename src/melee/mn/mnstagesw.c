@@ -580,7 +580,7 @@ static void fn_80236998(HSD_GObj* gobj)
             case 3: {
                 s32 i;
 
-                data->x1F = 0;
+                data->x1F = i = 0;
                 mnStageSw_802359C8(data);
                 gobj = gobj->user_data;
                 HSD_JObjClearFlagsAll(((MnStageSwData*) gobj)->x2C,
