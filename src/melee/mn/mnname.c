@@ -141,13 +141,14 @@ static inline bool checkStringRest(const char* ptr)
 
 s32 CompareNameStrings(char* str1, char* str2)
 {
-    char* p1;
-    char* p2;
-    s32 i;
-    for (i = 0, p2 = str2, p1 = str1;; i++, p1++, p2++) {
-        char* ch1 = &str1[i];
+    s8 terminator = (s8) *mnName_StringTerminator;
+    char* p1 = str1;
+    char* p2 = str2;
+    s32 i = 0;
+    while (true) {
+        s8 ch1 = (s8) str1[i];
 
-        if (*mnName_StringTerminator == *ch1) {
+        if (terminator == ch1) {
             if (checkStringRest(&str2[i & 0xFFFFFFFFFFFFFFFF])) {
                 return 0;
             }
@@ -155,7 +156,7 @@ s32 CompareNameStrings(char* str1, char* str2)
         }
 
         {
-            char ch2 = str2[i];
+            s8 ch2 = (s8) str2[i];
 
             if (*mnName_StringTerminator == ch2) {
                 if (checkStringRest(&str1[i])) {
@@ -171,6 +172,9 @@ s32 CompareNameStrings(char* str1, char* str2)
                 return 2;
             }
         }
+        i++;
+        p2++;
+        p1++;
     }
 }
 
@@ -1126,22 +1130,29 @@ void mnName_80239878(u8 arg0, HSD_GObj* gobj)
     }
 }
 
+static inline f32 mnName_80239A24_GetTextColumnWidth(HSD_GObj* gobj,
+                                                     HSD_JObj* text_jobj0)
+{
+    HSD_JObj* text_jobj6 = mnName_802388D4_noinline(gobj, 6U);
+    f32 width = HSD_JObjGetTranslationX(text_jobj0);
+    return HSD_JObjGetTranslationX(text_jobj6) - width;
+}
+
 void mnName_80239A24(HSD_GObj* gobj)
 {
-    GXColor text_color;
+    f32 text_row_height;
     Vec3 text_position;
     HSD_JObj* jobj;
     HSD_JObj* ref_jobj;
     HSD_JObj* ref_jobj2;
     s32 row;
     HSD_JObj* text_jobj0;
-    HSD_JObj* text_jobj6;
     HSD_JObj* text_jobj1;
     HSD_Text* text;
     f32 col_width;
     f32 row_height;
     f32 text_col_width;
-    f32 text_row_height;
+    GXColor text_color;
     s32 j;
     s32 i;
     MnNameArchive* archive = &mnName_804A06C0;
@@ -1152,7 +1163,7 @@ void mnName_80239A24(HSD_GObj* gobj)
     s32 extra;
     s32 total_rows;
     u8 name_idx;
-    PAD_STACK(24);
+    PAD_STACK(8);
 
     i = 0;
     do {
@@ -1183,16 +1194,19 @@ void mnName_80239A24(HSD_GObj* gobj)
     data->text = text;
     text_jobj0 = mnName_802388D4_noinline(gobj, 0U);
     lb_8000B1CC(text_jobj0, mnName_803ED618, &text_position);
-    text->pos_x = text_position.x;
-    text->pos_z = text_position.z;
-    text->pos_y = -text_position.y;
+    {
+        f32 pos_y = -text_position.y;
+        f32 pos_z = text_position.z;
+        f32 pos_x = text_position.x;
+        text->pos_x = pos_x;
+        text->pos_y = pos_y;
+        text->pos_z = pos_z;
+    }
     text->font_size.x = 0.03f;
     text->font_size.y = 0.03f;
     text->text_color = *(&mnName_804D4BE4);
 
-    text_jobj6 = mnName_802388D4_noinline(gobj, 6U);
-    text_col_width = HSD_JObjGetTranslationX(text_jobj0);
-    text_col_width = HSD_JObjGetTranslationX(text_jobj6) - text_col_width;
+    text_col_width = mnName_80239A24_GetTextColumnWidth(gobj, text_jobj0);
     text_jobj1 = mnName_802388D4_noinline(gobj, 1U);
     text_row_height = HSD_JObjGetTranslationY(text_jobj0);
     text_row_height = -(HSD_JObjGetTranslationY(text_jobj1) - text_row_height);
@@ -1442,8 +1456,20 @@ void mnName_8023A290(void)
 
 /// @todo Strings at base offsets are in rodata near mnName_803ED538
 
+typedef struct MnNameData {
+    u8 cur_menu;
+    u8 hovered_selection;
+    u8 anim_state;
+    u8 scroll;
+    u8 sort;
+    u8 pad_5[3];
+    HSD_JObj* jobjs[13];
+    HSD_Text* text;
+    HSD_Text* text2;
+} MnNameData;
+
 static inline void mnName_SetupScrollbarAndText(s32 count, HSD_JObj* scrollbar,
-                                                MnName_GObj* user_data)
+                                                MnNameData* user_data)
 {
     s32 extra;
     f32 rows;
@@ -1458,8 +1484,8 @@ static inline void mnName_SetupScrollbarAndText(s32 count, HSD_JObj* scrollbar,
     rows = (count / 6) + extra;
     if (rows > 4.0f) {
         HSD_JObjClearFlagsAll(scrollbar, JOBJ_HIDDEN);
-        pos = ((f32) user_data->gobj.gx_link) * (14.0f / (rows - 1.0f));
-        HSD_JObjSetTranslateX((HSD_JObj*) user_data->gobj.user_data, pos);
+        pos = ((f32) user_data->scroll) * (14.0f / (rows - 1.0f));
+        HSD_JObjSetTranslateX(user_data->jobjs[9], pos);
     } else {
         HSD_JObjSetFlagsAll(scrollbar, JOBJ_HIDDEN);
     }
@@ -1477,20 +1503,64 @@ static inline void mnName_SetupScrollbarAndText(s32 count, HSD_JObj* scrollbar,
     }
 }
 
+static inline void mnName_InitUserData(MnNameData* user_data, u8 arg0)
+{
+    user_data->cur_menu = mn_804A04F0.cur_menu;
+    user_data->hovered_selection = mn_804A04F0.hovered_selection;
+    user_data->scroll = 0;
+    user_data->sort = 0;
+    user_data->anim_state = arg0;
+    user_data->text = NULL;
+    user_data->text2 = NULL;
+}
+
+static inline void mnName_SetupInitialDisplay(MnNameData* user_data,
+                                              HSD_JObj** next_jobj)
+{
+    HSD_JObj* jobj7;
+
+    if (mn_804A04F0.x10 == 1) {
+        struct mn_80231634_t* p = (struct mn_80231634_t*) user_data->jobjs[10];
+        HSD_JObj* jobj;
+        if (p == NULL) {
+            jobj = NULL;
+        } else {
+            jobj = (HSD_JObj*) p->x10;
+        }
+        HSD_JObjRemoveAll(jobj);
+        if (user_data->text != NULL) {
+            HSD_SisLib_803A5CC4(user_data->text);
+            user_data->text = NULL;
+        }
+        HSD_JObjSetFlagsAll(user_data->jobjs[8], JOBJ_HIDDEN);
+    } else {
+        HSD_JObjRemoveAll((HSD_JObj*) mn_80231634(
+            (struct mn_80231634_t*) user_data->jobjs[10]));
+        if (user_data->text != NULL) {
+            HSD_SisLib_803A5CC4(user_data->text);
+            user_data->text = NULL;
+        }
+        mnName_80239A24((HSD_GObj*) user_data);
+        mnName_80238754_noinline((HSD_GObj*) user_data);
+    }
+    jobj7 = user_data->jobjs[7];
+    HSD_JObjReqAnimAll(jobj7,
+                       mnName_804D4BD0[mn_804A04F0.hovered_selection == 0x18]);
+    HSD_JObjAnimAll(jobj7);
+    *next_jobj = user_data->jobjs[4];
+}
+
 HSD_GObj* mnName_8023A59C(u8 arg0)
 {
     s32 count;
     HSD_JObj* jobj5;
     HSD_JObj* root_jobj;
-    HSD_JObj* jobj7;
     MnNameArchive* archive = &mnName_804A06E0;
-    HSD_JObj* slider;
-    HSD_JObj* scrollbar_container;
     HSD_JObj* jobj4;
-    MnName_GObj* user_data;
+    MnNameData* user_data;
     HSD_GObj* gobj;
     s32 i;
-    PAD_STACK(16);
+    PAD_STACK(24);
 
     gobj = GObj_Create(6U, 7U, 0x80U);
     mnName_804D6BF8 = gobj;
@@ -1502,61 +1572,24 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
                        archive->shapeanim_joint);
     HSD_JObjReqAnimAll(root_jobj, 0.0f);
     HSD_JObjAnimAll(root_jobj);
-    user_data = (MnName_GObj*) HSD_MemAlloc(0x44);
+    user_data = HSD_MemAlloc(sizeof(*user_data));
     HSD_ASSERTREPORT(0x67CU, user_data, "Can't get user_data.\n");
     GObj_InitUserData(gobj, 0U, HSD_Free, user_data);
-    *(u8*) &user_data->gobj.classifier = (u8) mn_804A04F0.cur_menu;
-    *((u8*) &user_data->gobj.classifier + 1) =
-        (u8) mn_804A04F0.hovered_selection;
-    user_data->gobj.gx_link = 0;
-    user_data->gobj.p_priority = 0;
-    user_data->gobj.p_link = arg0;
-    user_data->text = NULL;
-    user_data->text2 = NULL;
+    mnName_InitUserData(user_data, arg0);
     for (i = 0; i < 0xD; i++) {
-        lb_80011E24(root_jobj, (HSD_JObj**) ((u8*) user_data + (i << 2) + 8),
-                    i, -1);
+        lb_80011E24(root_jobj, &user_data->jobjs[i], i, -1);
     }
-    if (mn_804A04F0.x10 == 1) {
-        struct mn_80231634_t* p =
-            (struct mn_80231634_t*) user_data->gobj.user_data_remove_func;
-        HSD_JObj* j;
-        if (p == NULL) {
-            j = NULL;
-        } else {
-            j = (HSD_JObj*) p->x10;
-        }
-        HSD_JObjRemoveAll(j);
-        if (user_data->text != NULL) {
-            HSD_SisLib_803A5CC4(user_data->text);
-            user_data->text = NULL;
-        }
-        HSD_JObjSetFlagsAll((HSD_JObj*) user_data->gobj.hsd_obj, JOBJ_HIDDEN);
-    } else {
-        HSD_JObjRemoveAll((HSD_JObj*) mn_80231634(
-            (struct mn_80231634_t*) user_data->gobj.user_data_remove_func));
-        if (user_data->text != NULL) {
-            HSD_SisLib_803A5CC4(user_data->text);
-            user_data->text = NULL;
-        }
-        mnName_80239A24((HSD_GObj*) user_data);
-        mnName_80238754_noinline((HSD_GObj*) user_data);
-    }
-    jobj7 = ((HSD_JObj**) user_data)[9];
-    HSD_JObjReqAnimAll(jobj7,
-                       mnName_804D4BD0[mn_804A04F0.hovered_selection == 0x18]);
-    HSD_JObjAnimAll(jobj7);
-    jobj4 = (HSD_JObj*) user_data->gobj.proc;
+    mnName_SetupInitialDisplay(user_data, &jobj4);
     HSD_JObjReqAnimAll(jobj4,
                        mnName_804D4BD8[mn_804A04F0.hovered_selection == 0x19]);
     HSD_JObjAnimAll(jobj4);
-    jobj5 = (HSD_JObj*) user_data->gobj.render_cb;
+    jobj5 = user_data->jobjs[5];
     HSD_JObjReqAnimAll(jobj5,
                        mnName_804D4BD8[mn_804A04F0.hovered_selection == 0x1A]);
     HSD_JObjAnimAll(jobj5);
-    scrollbar_container = (HSD_JObj*) user_data->gobj.hsd_obj;
+    root_jobj = user_data->jobjs[8];
     count = GetNameCount_noinline();
-    mnName_SetupScrollbarAndText(count, scrollbar_container, user_data);
+    mnName_SetupScrollbarAndText(count, root_jobj, user_data);
     return gobj;
 }
 
