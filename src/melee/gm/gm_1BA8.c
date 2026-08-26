@@ -849,7 +849,7 @@ gm_801BC00C_GetCharacterKind(gm_801BAB40_src* event_entry)
     return (CharacterKind) (s8) event_entry->c_kind;
 }
 
-s32 gm_801BC00C(void)
+void gm_801BC00C(void)
 {
     struct gm_804D6900_t** event_levels;
     gm_803DF94C_t** event_info = gm_803DF94C;
@@ -965,8 +965,7 @@ s32 gm_801BC00C(void)
         lbBgFlash_80021A10(0.2f);
     }
     Camera_80030E34(ev->x1C);
-    return (s32) HSD_GObj_SetupProc(GObj_Create(0xF, 0x11, 0),
-                                    event_info[idx]->x0, 0x15);
+    HSD_GObj_SetupProc(GObj_Create(0xF, 0x11, 0), event_info[idx]->x0, 0x15);
 }
 
 static u8 gm_803DF918[] = {
