@@ -582,10 +582,12 @@ void mnSnap_80253E90(s32 idx)
 void mnSnap_80253F60(void)
 {
     s32 byte_off = 4;
-    mnSnap_State* snap = &mnSnap_804A0A10;
+    mnSnap_State* snap;
     /* walk strides through card_status (s16 at byte 0x128) */
-    s16* walk = (s16*) snap;
+    s16* walk;
     s32 i;
+
+    walk = (s16*) (snap = &mnSnap_804A0A10);
     for (i = 0; i < 2; i++, walk++, byte_off += 8) {
         if (walk[0x94] != 0) { /* snap->card_status[i] */
             f32 t;
