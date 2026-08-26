@@ -337,7 +337,9 @@ s32 fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
             s8* dst2 = arg1;
             s8* src2 = arg2;
             while (*src2 != -2) {
-                while ((result = (p = &lbl_8046B488.x0 + idx)[0x1C0]) == -1) {
+                while ((result = (p = &lbl_8046B488.x0 + idx)[0x1C0]) ==
+                       -1)
+                {
                     idx = (idx + 1) % 27;
                 }
                 result = Player_800325C8(result, 0);
