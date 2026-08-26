@@ -664,7 +664,6 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
     AnimLoopSettings* settings;
     HSD_JObj* jobj;
     s32 i;
-    s32 j;
     void* user_data;
     s32 visible;
     u8 count;
@@ -692,10 +691,11 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
             valid = 1;
         }
         if (valid) {
+            s32 j;
             HSD_JObj* v;
             struct mn_8022FEC8_jobj_ref_t* p;
 
-            for (j = (visible = 0); j < (u8) i; j++) {
+            for (j = (visible = 0); j < i; j++) {
                 u8 j8 = j;
                 s32 valid2;
                 if (gm_GetCurrentGameMode() == GM_TOURNAMENT && j8 == 4) {
@@ -741,7 +741,7 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
         HSD_JObjAnim(roots[7]);
         HSD_JObjSetFlagsAll(roots[8], JOBJ_HIDDEN);
 
-        hovered = mn_804A04F0.hovered_selection;
+        hovered = mn_8022F538_GetHoveredSelection();
         lb_8001204C(option_roots[hovered], roots, indices, 0x11);
         jobj = roots[16];
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
@@ -761,7 +761,7 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
         if (hovered == 1 &&
             ((struct mn_8022FB88_arg1_t*) mn_804D6BD0->user_data)->x2 == 1)
         {
-            HSD_JObjReqAnim(roots[7], lbl_804D4B8C);
+            HSD_JObjReqAnim(roots[7], (&mn_804D4B88)[1]);
         } else {
             f32* q = (f32*) (base + hovered * 8);
             HSD_JObjReqAnim(roots[7], *(f32*) ((u8*) q + 0x14));
