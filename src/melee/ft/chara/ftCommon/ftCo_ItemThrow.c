@@ -540,20 +540,23 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                 {
                     ftCo_ItemThrowAttrs* throw_speed_arr =
                         (ftCo_ItemThrowAttrs*) Fighter_804D6550;
-                    float cd_xB4 = co_attrs->heavy_throw_velocity_multiplier;
                     float base_throw_speed =
-                        cd_xB4 *
+                        co_attrs->heavy_throw_velocity_multiplier;
+                    float velocity_multiplier = base_throw_speed;
+                    float throw_speed;
+                    float fsm = -fp->cmd_timer / fp->frame_speed_mul;
+                    base_throw_speed *=
                         throw_speed_arr[fp->motion_id - ftCo_MS_LightThrowF]
                             .x8;
-                    float throw_speed = throw_scale * base_throw_speed;
-                    float fsm = -fp->cmd_timer / fp->frame_speed_mul;
+                    throw_speed = throw_scale * base_throw_speed;
                     vec2.x =
                         fsm * (fp->mv.co.itemthrow4.x8.x - vec0.x) + vec0.x;
                     vec2.y =
                         fsm * (fp->mv.co.itemthrow4.x8.y - vec0.y) + vec0.y;
                     vec2.z = 0;
                     pl_8003E978(fp->player_id, fp->x221F_b4, fp->item_gobj,
-                                vec2.y, base_throw_speed, cd_xB4, throw_speed,
+                                vec2.y, base_throw_speed, velocity_multiplier,
+                                throw_speed,
                                 vec0.x, vec0.y, fsm);
                     {
                         FtMoveId msid = fp->motion_id;
