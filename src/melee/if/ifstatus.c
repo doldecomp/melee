@@ -798,21 +798,22 @@ check_done:
 HSD_GObj* ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
 {
     CharacterKind chara;
-    HSD_GObj* gobj;
     HSD_JObj* jobj;
     HSD_TObj* tobj;
     Vec3* vec;
     HSD_MObj* mobj;
     GXColor color;
-    u8 team;
+    u8 idx = player_idx;
     u8 slot;
     u8 hud_color;
     HudIndex* hud = ifStatus_GetHUDInfo();
-    u8 idx = player_idx;
+    u8 team;
     PAD_STACK(0x10);
 
     chara = Player_GetPlayerCharacter((u8) player_idx);
     if (state->next == NULL) {
+        HSD_GObj* gobj;
+
         ifAll_GetArchive();
         gobj = GObj_Create(0xE, 0xF, 0);
         if (gobj == NULL) {
