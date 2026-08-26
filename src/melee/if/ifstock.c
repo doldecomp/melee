@@ -900,6 +900,8 @@ void ifStock_802FAEC4(void)
 {
     HSD_GObj* gobj;
     struct ifStock_804A1378* stock = &ifStock_804A1378;
+    HSD_GObj** p;
+    HSD_GObj** q;
     DynamicModelDesc** sp18;
     int i;
     memzero(stock, sizeof(*stock) - sizeof(stock->x204));
@@ -919,11 +921,13 @@ void ifStock_802FAEC4(void)
         ifStock_804A1ACC.x10C[i] = NULL;
     }
     if (gm_80169394() == 0) {
-        ifStock_804A1774.x10C[0] = NULL;
+        q = &ifStock_804A1774.x10C[0];
+        *q = NULL;
+        p = q;
         ifStock_804A1774.x0 = 0;
         gobj = GObj_Create(14, 15, 0);
         HSD_GObj_SetupProc(gobj, fn_802FA6C4, 17);
-        ifStock_804A1774.x10C[0] = gobj;
+        *p = gobj;
         for (i = 0; i < 130; i++) {
             ifStock_804A1774.x10C[i + 1] = NULL;
         }
