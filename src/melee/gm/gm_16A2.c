@@ -440,8 +440,8 @@ void fn_80169C54(s8 arg0, s8 arg1)
     }
 }
 
-static inline void fn_80169F50_inline(s8 costume, struct lbl_8046B488_t* gp,
-                                      int character)
+static inline void fn_80169F50_inline(s8 costume,
+                                      struct lbl_8046B488_t* gp, int character)
 {
     s32 i;
     s32 costume_id;
