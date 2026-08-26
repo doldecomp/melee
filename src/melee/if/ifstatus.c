@@ -27,6 +27,30 @@
 #include <baselib/random.h>
 #include <baselib/tobj.h>
 
+static void ifStatus_EnsureSdata2Order(void)
+{
+    (void) 1.0f;
+    (void) 0.0f;
+    (void) 2.0f;
+    (void) U32_TO_F32;
+    (void) S32_TO_F32;
+    (void) 300.0f;
+    (void) 100.0f;
+    (void) 0.506900012f;
+    (void) 0.608299971f;
+    (void) 0.304100007f;
+    (void) 1.21650004f;
+    (void) 0.81099999f;
+    (void) 0.101400003f;
+    (void) 1.52069998f;
+    (void) -100.0f;
+    (void) 0.202800006f;
+    (void) 0.5f;
+    (void) 0.649999976f;
+    (void) 0.100000001f;
+    (void) 0.25f;
+}
+
 typedef struct FlagsX {
     u32 b80 : 1;
     u32 b40 : 1;
@@ -612,19 +636,76 @@ void ifStatus_802F5E50(HSD_GObj* gobj, s32 arg1)
     }
 }
 
+static inline HSD_JObj* ifStatus_LoadDamageJoint(HudIndex* hud)
+{
+    return HSD_JObjLoadJoint(hud->unk258);
+}
+
+static inline HSD_JObj* ifStatus_GetDamageJObj(s32 index, HSD_JObj* jobj)
+{
+    HSD_GObj* node = (HSD_GObj*) jobj;
+
+    return (HSD_JObj*) ifStatus_802F6194(node, index);
+}
+
+static inline void ifStatus_InitDamageDisplay(
+    IfDamageState* state, HSD_MatAnimJoint** anim_base)
+{
+    HSD_TObj* tobj;
+    HSD_JObj* percent_jobj = state->jobjs[3];
+
+    if (percent_jobj != NULL) {
+        HSD_FObjDesc* fobjdesc;
+
+        tobj = percent_jobj->u.dobj->mobj->tobj;
+        fobjdesc = ((HSD_AnimJoint*) anim_base[0])
+                       ->child->child->next->next->next->aobjdesc->fobjdesc;
+        HSD_TObjAddAnimAll(tobj, (HSD_TexAnim*) fobjdesc);
+        if (Player_GetMoreFlagsBit2((s8) state->player_slot) != 0) {
+            HSD_TObjReqAnimAll(tobj, 1.0f);
+        } else {
+            HSD_TObjReqAnimAll(tobj, 0.0f);
+        }
+        HSD_AObjSetRate(tobj->aobj, 0.0f);
+        HSD_TObjAnim(tobj);
+    }
+    ifStatus_802F5B48(state->HUD_parent_entity);
+}
+
+static inline void ifStatus_InitDamageAnim(
+    HSD_JObj* jobj, HudIndex* hud, HSD_MatAnimJoint*** anim_base)
+{
+    HSD_JObjRemoveAnim(jobj);
+    (*anim_base) = (HSD_MatAnimJoint**) &hud->janim_selection_joints;
+    lb_8000C07C(jobj, 0, (HSD_AnimJoint**) hud->jobj_desc_parent,
+                (HSD_MatAnimJoint**) (*anim_base)[0],
+                (HSD_ShapeAnimJoint**) (*anim_base)[1]);
+    HSD_JObjReqAnimAll(jobj, 0.0f);
+    HSD_JObjAnimAll(jobj);
+}
+
+static inline void ifStatus_RefreshDamageDisplay(IfDamageState* state)
+{
+    s16 damage_percent = state->damage_percent;
+
+    state->old_damage = !damage_percent;
+    ifStatus_802F4EDC(state->HUD_parent_entity);
+    PAD_STACK(0x18);
+}
+
 HSD_GObj* ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
 {
     HSD_GObj* gobj;
     HSD_MatAnimJoint** anim_base;
     HSD_JObj* jobj;
-    Vec3* vec;
     s32 i;
-    HSD_TObj* tobj;
+    Vec3* vec;
     HudIndex* hud = ifStatus_GetHUDInfo();
+    s32 index = player_idx;
 
     if (state->HUD_parent_entity == NULL) {
         gobj = GObj_Create(0xE, 0xF, 0);
-        jobj = HSD_JObjLoadJoint(hud->unk258);
+        jobj = ifStatus_LoadDamageJoint(hud);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
         GObj_SetupGXLink(gobj, (void (*)(HSD_GObj*, int)) ifStatus_802F5DE0,
                          0xB, 0);
@@ -635,37 +716,20 @@ HSD_GObj* ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
         jobj = state->HUD_parent_entity->hsd_obj;
     }
     state->flags.animation_status_id = 0;
-    HSD_JObjRemoveAnim(jobj);
-    anim_base = (HSD_MatAnimJoint**) &hud->janim_selection_joints;
-    lb_8000C07C(jobj, 0, (HSD_AnimJoint**) hud->jobj_desc_parent,
-                (HSD_MatAnimJoint**) anim_base[0],
-                (HSD_ShapeAnimJoint**) anim_base[1]);
-    HSD_JObjReqAnimAll(jobj, 0.0f);
-    HSD_JObjAnimAll(jobj);
-    vec = ifAll_GetPlayerHUDPosition((u8) player_idx);
+    ifStatus_InitDamageAnim(jobj, hud, &anim_base);
+    vec = ifAll_GetPlayerHUDPosition((u8) index);
     HSD_JObjSetTranslate(jobj, vec);
     for (i = 0; i < 4; i++) {
-        state->jobjs[i] = (HSD_JObj*) ifStatus_802F6194((HSD_GObj*) jobj, i);
+        f32 translation_y;
+
+        state->jobjs[i] = ifStatus_GetDamageJObj(i, jobj);
         state->translation_x[i] = HSD_JObjGetTranslationX(state->jobjs[i]);
-        state->translation_y[i] = HSD_JObjGetTranslationY(state->jobjs[i]);
+        translation_y = HSD_JObjGetTranslationY(state->jobjs[i]);
+        state->translation_y[i] = translation_y;
     }
-    if (state->jobjs[3] != NULL) {
-        tobj = state->jobjs[3]->u.dobj->mobj->tobj;
-        HSD_TObjAddAnimAll(
-            tobj, (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
-                      ->child->child->next->next->next->aobjdesc->fobjdesc);
-        if (Player_GetMoreFlagsBit2((s8) state->player_slot) != 0) {
-            HSD_TObjReqAnimAll(tobj, 1.0f);
-        } else {
-            HSD_TObjReqAnimAll(tobj, 0.0f);
-        }
-        HSD_AObjSetRate(tobj->aobj, 0.0f);
-        HSD_TObjAnim(tobj);
-    }
-    ifStatus_802F5B48(state->HUD_parent_entity);
-    state->old_damage = !state->damage_percent;
-    ifStatus_802F4EDC(state->HUD_parent_entity);
-    PAD_STACK(0x18);
+    ifStatus_InitDamageDisplay(state, anim_base);
+    ifStatus_RefreshDamageDisplay(state);
+    PAD_STACK(8);
     return state->HUD_parent_entity;
 }
 
