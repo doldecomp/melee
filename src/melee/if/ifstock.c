@@ -41,18 +41,22 @@ struct IfStockStealAnim {
     Vec3 end;
 };
 
+struct IfStockData {
+    unsigned char x0[0xC];
+    struct IfStockStealAnim anim[2];
+};
+
 int ifStock_802F7EFC(int arg0, int arg1)
 {
     Vec3 pos;
     struct ifStock_804A1378* stock;
-    struct ifStock_804A1378_x204* arg0_data;
-    struct ifStock_804A1378_x204* arg1_data;
-    struct IfStockStealAnim* anim;
+    struct IfStockData* arg1_data;
+    struct IfStockData* arg0_data;
     int slot;
     int i, j;
     stock = &ifStock_804A1378;
-    arg0_data = &stock->x204[arg0];
-    arg1_data = &stock->x204[arg1];
+    arg1_data = (struct IfStockData*) stock->x204 + arg1;
+    arg0_data = (struct IfStockData*) stock->x204 + arg0;
     if (Player_GetStocks(arg1) == 0) {
         return 1;
     }
@@ -70,46 +74,46 @@ int ifStock_802F7EFC(int arg0, int arg1)
     arg1_data->x0[slot + 5] = 1;
     arg0_data->x0[2] = 0;
     arg1_data->x0[slot - 2] = arg0;
-    if (stock->player[arg1].stocks <= 5 && stock->player[arg1].stocks > 0) {
-        arg1_data->x0[stock->player[arg1].stocks + 4] = 10;
-    }
-    i = 0;
-    if (stock->player[arg1].stocks <= 5 && stock->player[arg1].stocks > 0) {
-        i = 1;
-    }
-    if (i != 0) {
-        j = stock->player[arg1].stocks;
-    } else {
-        j = 1;
+    {
+        int stocks = stock->player[arg1].stocks;
+        if (stocks <= 5 && stocks > 0) {
+            arg1_data->x0[stocks + 4] = 10;
+        }
+        i = 0;
+        if (stocks <= 5 && stocks > 0) {
+            i = 1;
+        }
+        j = i != 0 ? stocks : 1;
     }
     HSD_JObjGetTranslation(stock->player[arg1].x4[0], &pos);
     HSD_JObjReqAnimAll(stock->player[arg1].x4[j], 0.0f);
     HSD_JObjAnimAll(stock->player[arg1].x4[j]);
-    anim = (struct IfStockStealAnim*) &arg1_data
-               ->x0[0xC + (slot - 5) * sizeof(struct IfStockStealAnim)];
-    HSD_JObjGetTranslation(stock->player[arg1].x4[j], &anim->start);
-    anim->start.x += pos.x;
-    anim->start.y += pos.y;
-    anim->start.z += pos.z;
+    HSD_JObjGetTranslation(stock->player[arg1].x4[j],
+                           &arg1_data->anim[slot - 5].start);
+    arg1_data->anim[slot - 5].start.x += pos.x;
+    arg1_data->anim[slot - 5].start.y += pos.y;
+    arg1_data->anim[slot - 5].start.z += pos.z;
     i = 0;
     if (Player_GetStocks(arg0) < 5 && Player_GetStocks(arg0) > 0) {
         i = 1;
     }
-    if (i != 0) {
-        j = Player_GetStocks(arg0);
-    } else {
-        j = 0;
-    }
+    j = i != 0 ? Player_GetStocks(arg0) : 0;
     HSD_JObjGetTranslation(stock->player[arg0].x4[0], &pos);
     HSD_JObjReqAnimAll(stock->player[arg0].x4[j], 0.0f);
     HSD_JObjAnimAll(stock->player[arg0].x4[j]);
-    HSD_JObjGetTranslation(stock->player[arg0].x4[1], &anim->end);
-    anim->end.x += (2.4f * j) + pos.x;
-    anim->end.y = anim->start.y;
-    anim->end.z += pos.z;
-    anim->mid.x = 0.5f * (anim->end.x + anim->start.x);
-    anim->mid.z = 0.5f * (anim->end.z + anim->start.z);
-    anim->mid.y = 10.0f + anim->start.y;
+    HSD_JObjGetTranslation(stock->player[arg0].x4[1],
+                           &arg1_data->anim[slot - 5].end);
+    arg1_data->anim[slot - 5].end.x += (2.4f * j) + pos.x;
+    arg1_data->anim[slot - 5].end.y = arg1_data->anim[slot - 5].start.y;
+    arg1_data->anim[slot - 5].end.z += pos.z;
+    arg1_data->anim[slot - 5].mid.x =
+        0.5f * (arg1_data->anim[slot - 5].end.x +
+                arg1_data->anim[slot - 5].start.x);
+    arg1_data->anim[slot - 5].mid.z =
+        0.5f * (arg1_data->anim[slot - 5].end.z +
+                arg1_data->anim[slot - 5].start.z);
+    arg1_data->anim[slot - 5].mid.y =
+        10.0f + arg1_data->anim[slot - 5].start.y;
     return 0;
 }
 
