@@ -754,7 +754,7 @@ static inline void _tyDisplay_80319540_sort_and_place(TyDspConfig* cfg,
             j = 0;
             cur = (TyDspGrid*) ((size_t) grid + sizeof(TySortElem));
             for (n = 1; n2 >= n;
-                 n++, cur = (TyDspGrid*) ((size_t) cur + sizeof(TySortElem)))
+                 cur = (TyDspGrid*) ((size_t) cur + sizeof(TySortElem)), n++)
             {
                 if (*(s32*) &cur->sort[0].val > *(s32*) &grid->sort[0].val) {
                     pivot += 1;
