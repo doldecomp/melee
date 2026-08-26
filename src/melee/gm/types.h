@@ -1101,11 +1101,11 @@ struct TrainingMenuData {
 }; /// 80473814
 ///
 struct gm_8049E548_t {
-    /* 0x00 */ char c_kind[4];
+    /* 0x00 */ u8 c_kind[4];
     /* 0x04 */ u8 x4[4];
     /* 0x08 */ u8 unk_8;
     /* 0x09 */ u8 unk_9;
-    /* 0x0A */ s8 unk_A;
+    /* 0x0A */ u8 unk_A;
     /* 0x0B */ char pad_B[1];
     /* 0x0C */ u16 unk_C; ///< GrKind
     /* 0x0E */ s8 unk_E;  /* inferred */
