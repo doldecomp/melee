@@ -1546,7 +1546,6 @@ void grZebes_801DAE70(s32 arg0, u8 arg1, f32 x, f32 y, f32 scale)
 s32 grZebes_801DB088(Ground* gp, s32 arg1)
 {
     s32 result = 0;
-    PAD_STACK(0xC);
 
     if (grZe_8049F170[arg1].x00_active != 0) {
         HSD_GObj* gobj = grZe_8049F170[arg1].x20_gobj;
@@ -1685,6 +1684,7 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
             }
         }
     }
+    PAD_STACK(0xC);
     return result;
 }
 
