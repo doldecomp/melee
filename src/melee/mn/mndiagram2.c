@@ -46,15 +46,6 @@ int GetNameCount(void);
 #define mnDiagram_GetNextFighterIndex_s(x)                                    \
     ((int) mnDiagram_GetNextFighterIndex(x))
 
-/// @brief Gets entity index based on mode (name or fighter).
-static inline u8 mnDiagram_GetEntityByIndex(u8 is_name_mode, u8 idx)
-{
-    if (is_name_mode != 0) {
-        return mnDiagram_GetNameByIndex(idx);
-    }
-    return mnDiagram_GetFighterByIndex(idx);
-}
-
 /* Union for 64-bit sorting operations */
 typedef union {
     struct {
@@ -604,8 +595,6 @@ int mnDiagram2_GetStatValue(int is_name_mode, u8 stat_type, u8 entity_idx)
     return is_name_mode;
 }
 
-#undef __FILE__
-#define __FILE__ "jobj.h"
 /// @brief Creates a single stat row entry in the VS Records display.
 /// @param gobj The diagram GObj
 /// @param is_name_mode 0 = Fighter mode, 1 = Name mode
@@ -778,8 +767,6 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
         }
     }
 }
-#undef __FILE__
-#define __FILE__ "mndiagram2.c"
 
 /// @brief Populates all 10 visible stat rows in the diagram.
 /// @param gobj The diagram GObj
@@ -1099,9 +1086,7 @@ void mnDiagram2_Init(void)
 /// @return Fighter ID at the given rank, or SELKIND_COUNT if no data
 u8 mnDiagram2_GetRankedFighter(u8 stat_type, u8 rank)
 {
-    mnDiagram2_SortEntry* base;
     int j;
-    mnDiagram2_SortEntry* ptr;
     mnDiagram2_SortEntry entries[SELKIND_COUNT];
     mnDiagram2_SortEntry temp;
     int i;
@@ -1110,22 +1095,19 @@ u8 mnDiagram2_GetRankedFighter(u8 stat_type, u8 rank)
     int neg1;
     SelectableCharacterKind selkind;
 
-    ptr = entries;
-    base = ptr;
     i = 0;
     neg1 = -1;
 
     for (i = 0; i < SELKIND_COUNT; i++) {
         selkind = mnDiagram_GetFighterByIndex(i);
-        ptr->idx = selkind;
+        entries[i].idx = selkind;
         if (mn_IsFighterUnlocked(selkind) != 0) {
-            ptr->xC = mnDiagram2_GetStatValue(0, stat_type, selkind);
-            ptr->x8 = 0;
+            entries[i].xC = mnDiagram2_GetStatValue(0, stat_type, selkind);
+            entries[i].x8 = 0;
         } else {
-            ptr->xC = neg1;
-            ptr->x8 = neg1;
+            entries[i].xC = neg1;
+            entries[i].x8 = neg1;
         }
-        ptr++;
     }
 
     // Selection sort with insertion shift
@@ -1146,14 +1128,12 @@ u8 mnDiagram2_GetRankedFighter(u8 stat_type, u8 rank)
         }
 
         if (maxIdx != i) {
-            ptr = &entries[maxIdx];
-            temp = *ptr;
+            temp = entries[maxIdx];
 
             for (j = maxIdx; j > i; j--) {
-                *ptr = *(ptr - 1);
-                ptr--;
+                entries[j] = entries[j - 1];
             }
-            *base = temp;
+            entries[i] = temp;
         }
     }
 

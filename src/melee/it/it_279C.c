@@ -1450,9 +1450,12 @@ bool it_8027AB64(Item_GObj* item_gobj)
             spawn.kind = temp_r3 - It_PKind_Start;
         }
     } else if (gm_8018841C()) {
-        spawn.kind = (&common_pokemon == NULL)
-                         ? It_PKind_Sonans
-                         : it_8027A780(item, &common_pokemon);
+        spawn.kind =
+#ifdef MUST_MATCH
+            (&common_pokemon == NULL) ? It_PKind_Sonans :
+#endif
+                                      it_8027A780(item, &common_pokemon);
+
     } else if (gm_GetCurrentGameMode() == GM_OPENING_MV) {
         spawn.kind = it_8027AB64_SelectKind(item);
     } else {

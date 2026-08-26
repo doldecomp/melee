@@ -289,7 +289,8 @@ extern const f32 lbShadow_804D7B94;
 extern const f32 lbShadow_804D7B98;
 extern const f32 lbShadow_804D7B9C;
 
-static inline f32 lbShadow_Sqrtf(f32 x)
+#ifdef MUST_MATCH
+static inline f32 my_sqrtf(f32 x)
 {
     u8 _[0x38] = { 0 };
     volatile f32 y;
@@ -307,6 +308,9 @@ static inline f32 lbShadow_Sqrtf(f32 x)
     }
     return x;
 }
+#else
+#define my_sqrtf(x) sqrtf(x)
+#endif
 
 void lbShadow_8000F38C(s32 arg0)
 {
@@ -332,8 +336,12 @@ void lbShadow_8000F38C(s32 arg0)
     noLight = 0;
     nextGx = (HSD_GObj*) (arg0 - arg0);
 
-    for (gobj = gobj = HSD_GObj_Entities->fighters; gobj != NULL;
-         gobj = gobj->next)
+    for (
+#ifdef MUST_MATCH
+        gobj =
+#endif
+            gobj = HSD_GObj_Entities->fighters;
+        gobj != NULL; gobj = gobj->next)
     {
         LbShadow* lbs = ftLib_800872B0(gobj);
         if (lbs != NULL) {
@@ -390,8 +398,12 @@ void lbShadow_8000F38C(s32 arg0)
         lbVector_Diff(&lightPos, &lightDir, &lightVec);
 
         dist = (lightVec.z * lightVec.z) +
-               (dist = (lightVec.x * lightVec.x) + (lightVec.y * lightVec.y));
-        dist = lbShadow_Sqrtf(dist);
+               (
+#ifdef MUST_MATCH
+                   dist =
+#endif
+                       (lightVec.x * lightVec.x) + (lightVec.y * lightVec.y));
+        dist = my_sqrtf(dist);
 
         if (dist < 0.001f) {
             noLight = 1;

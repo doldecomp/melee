@@ -18,6 +18,8 @@
 #include <melee/gr/stage.h>
 #include <melee/pl/player.h>
 
+/* 0189EC */ static void lbDvd_800189EC(int);
+
 void lbDvd_800174BC(void)
 {
     lbDvd_80018C6C();

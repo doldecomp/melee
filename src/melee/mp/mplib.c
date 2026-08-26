@@ -1565,11 +1565,6 @@ static inline CollLine* mpLineGetCollLine(int line_id)
     return &groundCollLine[line_id];
 }
 
-static inline float* mpVtxGetYBase(void)
-{
-    return &groundCollVtx[0].pos.y;
-}
-
 void mpLib_8004ED5C(int line_id, float* x0_out, float* y0_out, float* x1_out,
                     float* y1_out)
 {
@@ -3940,8 +3935,13 @@ int mpLib_800534FC_Floor(int line_id)
             new_id = -1;
         } else if (new_id != groundCollLine[line_id].x0->next_id1) {
             line_id = new_id;
+#ifdef MUST_MATCH
             new_id = mpLineGetNextCheckResultFirst(
                 (line = groundCollLine[new_id].x0)->next_id1, line);
+#else
+            line = groundCollLine[new_id].x0;
+            new_id = mpLineGetNextCheckResultFirst(line->next_id1, line);
+#endif
             continue;
         }
         break;
@@ -4005,8 +4005,13 @@ int mpLib_800536CC_Floor(int line_id)
             new_id = -1;
         } else if (new_id != groundCollLine[line_id].x0->prev_id1) {
             line_id = new_id;
+#ifdef MUST_MATCH
             new_id = mpLineGetPrevCheckResultFirst(
                 (line = groundCollLine[new_id].x0)->prev_id1, line);
+#else
+            line = groundCollLine[new_id].x0;
+            new_id = mpLineGetPrevCheckResultFirst(line->prev_id1, line);
+#endif
             continue;
         }
         break;
@@ -4043,8 +4048,13 @@ int mpLib_80053A04_Ceiling(int line_id)
             new_id = -1;
         } else if (new_id != groundCollLine[line_id].x0->prev_id1) {
             line_id = new_id;
+#ifdef MUST_MATCH
             new_id = mpLineGetPrevCheckResultFirst(
                 (line = groundCollLine[new_id].x0)->prev_id1, line);
+#else
+            line = groundCollLine[new_id].x0;
+            new_id = mpLineGetPrevCheckResultFirst(line->prev_id1, line);
+#endif
             continue;
         }
         break;

@@ -229,11 +229,13 @@ void it_8026FCF8(Item* arg_item, HitCapsule* arg_hit)
     lbColl_80008440(arg_hit);
 }
 
+#ifdef MUST_MATCH
 static void order_sdata2_0(void)
 {
     (void) 0.0f;
     (void) S32_TO_F32;
 }
+#endif
 
 void it_8026FE68(Item* arg_item0, HitCapsule* hit1, Item* arg_item2,
                  HitCapsule* hit3)
@@ -487,63 +489,6 @@ void it_802703E8(Item_GObj* arg_item_gobj)
             }
         }
     }
-}
-
-static bool it_802706D0_sub(Item_GObj* arg_item_gobj, Item* item,
-                            Item* arg_item, HitCapsule* hit)
-{
-    bool chk2 = false;
-    u32 i;
-    for (i = 0; i < 4U; i++) {
-        if (it_804D6D1C[i] != 0) {
-            HitCapsule* arg_hit = &arg_item->x5D4_hitboxes[i].hit;
-            if ((hit->element == HitElement_Inert) ||
-                (arg_hit->element == HitElement_Inert))
-            {
-                if ((hit->element != arg_hit->element) &&
-                    lbColl_80007AFC(hit, arg_hit, item->scl, arg_item->scl))
-                {
-                    if (hit->element == HitElement_Inert) {
-                        item->xDCE_flag.b6 = 1;
-                        item->toucher = arg_item_gobj;
-                    } else {
-                        arg_item->xDCE_flag.b6 = 1;
-                        arg_item->toucher = item->entity;
-                    }
-                    chk2 = true;
-                    break;
-                }
-            } else if ((hit->x40_b0 == 1) && (arg_hit->x40_b0 == 1) &&
-                       lbColl_80007AFC(hit, arg_hit, item->scl, arg_item->scl))
-            {
-                it_8026FE68(item, hit, arg_item, arg_hit);
-                chk2 = true;
-                break;
-            }
-        }
-    }
-    return chk2;
-}
-
-static s32 it_802706D0_sub2(Item* item, Item* arg_item)
-{
-    s32 n = 0;
-    u32 i;
-    for (i = 0; i < 4; i++) {
-        HitCapsule* arg_hit = &arg_item->x5D4_hitboxes[i].hit;
-        if ((arg_hit->state != HitCapsule_Disabled) &&
-            (arg_hit->element != HitElement_Catch) &&
-            ((arg_hit->x40_b2 && (item->ground_or_air == GA_Air)) ||
-             (arg_hit->x40_b3 && (item->ground_or_air == GA_Ground))) &&
-            !lbColl_8000ACFC(item, arg_hit))
-        {
-            it_804D6D1C[i] = 1;
-            n++;
-        } else {
-            it_804D6D1C[i] = 0;
-        }
-    }
-    return n;
 }
 
 static inline void it_802706D0_sub3(Item* item, Item* arg_item,

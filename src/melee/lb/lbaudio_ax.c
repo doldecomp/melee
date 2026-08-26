@@ -19,6 +19,7 @@
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_16A2.h>
 #include <melee/gm/gm_16AE.h>
 #include <melee/gr/stage.h>
 #include <melee/it/it_26B1.h>
@@ -287,9 +288,11 @@ int lbAudioAx_80023968(int arg0)
     int count = 0;
     int* var_r4;
 
-    if (arg0 < 0 && arg0 >= 0x1E) {
+#ifdef MUST_MATCH
+    if (arg0 < 0 && arg0 >= 30) {
         return -1;
     }
+#endif
 
     var_r4 = lbAudioAx_80023968_inline(arg0);
     while (*var_r4 != 0x83D60) {
@@ -302,12 +305,15 @@ int lbAudioAx_80023968(int arg0)
 int lbAudioAx_80023A44(int arg0, int arg1)
 {
     int* var_r3;
+
+#ifdef MUST_MATCH
     if (arg0 < 0 && arg0 >= 0x1E) {
         return 0x83D60;
     }
     if (arg1 < 0 && 0x83D60 <= arg1) {
         return 0x83D60;
     }
+#endif
 
     var_r3 = lbAudioAx_80023968_inline(arg0);
     return var_r3[arg1];

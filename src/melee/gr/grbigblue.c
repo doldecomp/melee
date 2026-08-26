@@ -41,7 +41,7 @@
                                      mpLib_GroundEnum ground_kind,
                                      float delta_y);
 
-/// @todo Emitted only to lay out the .sdata2 literal pool in retail order.
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 1.0f;
@@ -103,8 +103,7 @@ static void sdata2_order(void)
     (void) 0.0166666675f;
     (void) -10.0f;
 }
-
-#define M_TAU 6.283185307179586
+#endif
 
 typedef struct grBb_ItemKindList {
     ItemKind kinds[5];

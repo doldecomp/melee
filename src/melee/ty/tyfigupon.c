@@ -54,7 +54,6 @@
 /* 3155C8 */ static void _tyFigupon_803155C8(void);
 /* 315C44 */ static void _tyFigupon_80315C44(HSD_GObj*);
 /* 316170 */ static void _tyFigupon_80316170(HSD_GObj*);
-/* 31638C */ static s32 _tyFigupon_8031638C(s16);
 /* 316420 */ static void _tyFigupon_80316420(s32);
 /* 3168DC */ static void _tyFigupon_803168DC(HSD_GObj*);
 /* 316BF8 */ static void _tyFigupon_80316BF8(HSD_GObj*);
@@ -71,6 +70,7 @@
 /* 4D6F08 */ static HSD_CameraDescPerspective* _tyFigupon_804D6F08;
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data_0(void)
 {
     /*   +0 */ (void) "ToyFigurePonPanel_Top_joint";
@@ -82,8 +82,10 @@ static void order_data_0(void)
     /*  +94 */ (void) "ToyFigurePonCoin_Top_matanim_joint";
     /*  +B8 */ (void) "ToyFigurePonCoin_Top_shapeanim_joint";
 }
+#endif
 
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void order_sdata2_0(void)
 {
     /*  +0 */ (void) 0.0f;
@@ -137,6 +139,7 @@ static void order_sdata2_0(void)
     /* +C8 */ (void) -13.599999f;
     /* +CC */ (void) 9.599999f;
 }
+#endif
 
 void _tyFigupon_80314AA8(HSD_JObj* jobj, char* anim_str, char* matanim_str,
                          char* shapeanim_str)
@@ -321,7 +324,11 @@ void _tyFigupon_803153EC(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
     num = arg0;
     temp_r30 = _tyFigupon_804D6EF4;
-    digits_s.s.x0 = digits_s.s.x4 = digits_s.s.x8 = (count = (count = 0));
+    digits_s.s.x0 = digits_s.s.x4 = digits_s.s.x8 = (count =
+#ifdef MUST_MATCH
+                                                         count =
+#endif
+                                                             0);
     do {
         digits_s.digits[count++] = num % 10;
         num /= 10;
@@ -576,11 +583,13 @@ void _tyFigupon_803155C8(void)
 }
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data_108(void)
 {
     /* +108 */ (void) "*** Not Get Figure!\n";
     /* +120 */ (void) __FILE__;
 }
+#endif
 
 static inline s32 tyFigupon_GetCoinCount(void)
 {
@@ -1357,10 +1366,12 @@ void _tyFigupon_8031753C(void)
 }
 
 /// @todo .data order hack
+#ifdef MUST_MATCH
 static void order_data_4A8(void)
 {
     /* +4A8 */ (void) "ScMenFigure_scene_lights";
 }
+#endif
 
 /* 3FEED4 */ static HSD_WObjDesc _tyFigupon_803FEED4 = {
     NULL,

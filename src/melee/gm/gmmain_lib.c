@@ -18,6 +18,8 @@
 #include <melee/mn/mnname.h>
 #include <melee/ty/toy.h>
 
+/* 15D888 */ static void gmMainLib_8015D888(u32);
+
 GameRules gmMainLib_803D4A48 = {
     0,
     0x34,
@@ -734,16 +736,6 @@ void gmMainLib_8015DB80(void)
     }
 }
 
-static inline void gmMainLib_AdjustConfigNameTag(int value, s32 name_tag,
-                                                 struct gmm_x0_528_t** config)
-{
-    if (value == (u8) name_tag) {
-        (*config)[4].c_kind = 0x78;
-    } else if (value > (u8) name_tag && value != 0x78) {
-        (*config)[4].c_kind = value - 1;
-    }
-}
-
 s32 gmMainLib_8015DBF4(s32 arg0)
 {
     extern VsModeData gm_80497618;
@@ -1107,6 +1099,22 @@ GetPersistentFighterDataBase(struct gmm_x1868* data)
     return data->x1F2C;
 }
 
+static inline void ResetAllPersistentFighterData(void)
+{
+    s32 i;
+
+    for (i = 0; i < 0x19; i++) {
+        int j = 0;
+        u8 k = i;
+        struct FighterData* base =
+            GetPersistentFighterDataBase(&gmMainLib_804D3EE0->thing);
+        for (; 0x19 > j; j++) {
+            base[k].fighter_kos[j] = 0;
+        }
+        gmMainLib_8015EF30((struct gmMainLib_8015EF30_s*) &base[k].sd_count);
+    }
+}
+
 static inline void ResetPersistentFighterData(s32 i)
 {
     int j = 0;
@@ -1177,6 +1185,8 @@ void gmMainLib_8015F4F4(u8 arg0)
     gmMainLib_GetSaveData()->x1CB0.deflicker = arg0;
 }
 
+struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;
+
 void gmMainLib_8015F500(void)
 {
     GXRenderModeObj* var_r0;
@@ -1223,22 +1233,15 @@ void gmMainLib_8015F588(bool arg0)
     HSD_VISetConfigure(var_r3);
 }
 
-/// #gmMainLib_8015F600
-
 static s8 gmMainLib_804D3EE4[] = { 0 };
 
 void gmMainLib_8015F600(int arg0, int arg1)
 {
     s32 lang;
-    PAD_STACK(88);
+    PAD_STACK(80);
 
     if (arg0 == 1) {
-        {
-            s32 i;
-            for (i = 0; i < 0x19; i++) {
-                ResetPersistentFighterData(i);
-            }
-        }
+        ResetAllPersistentFighterData();
 
         memzero(&gmMainLib_804D3EE0->thing.trophy_count, 0x25C);
         Toy_80311960();
@@ -1278,21 +1281,10 @@ void gmMainLib_8015F600(int arg0, int arg1)
         do {
             struct NameTagData* data;
             struct NameTagDataBank* bank;
-            s32 i;
             s32 idx;
             idx = j + bank_offset;
-            bank = gmMainLib_804D3EE0->thing.x2FF8;
-            data = &bank[(u8) idx / 19].inner[(u8) idx % 19];
 
-            for (i = 0; 120 > i; i++) {
-                data->vs_kos[i] = 0;
-            }
-            gmMainLib_8015EF30((struct gmMainLib_8015EF30_s*) &data->sd_count);
-
-            for (i = 0; 25 > i; i++) {
-                data->play_time_by_fighter[i] = 0;
-            }
-            data->x1A2 = 5;
+            InitializePersistentNameData(idx);
 
             bank = gmMainLib_804D3EE0->thing.x2FF8;
             {
@@ -1304,8 +1296,9 @@ void gmMainLib_8015F600(int arg0, int arg1)
                 char* src = mnName_8023749C((s32) (u8) idx);
                 if (src != NULL) {
                     s32 k = 0;
-                    while (gmMainLib_804D3EE4[0] != (s8) (u8) *src) {
-                        data->namedata[k] = (u8) *src;
+                    char c;
+                    while (gmMainLib_804D3EE4[0] != (s8) (c = *src)) {
+                        data->namedata[k] = c;
                         k++;
                         src++;
                     }

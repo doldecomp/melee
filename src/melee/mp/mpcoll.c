@@ -43,6 +43,7 @@ static Fighter_GObj* mpColl_804D64A4;
 static Event mpColl_804D64A8;
 int mpColl_804D64AC;
 
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 45000.0f;
@@ -72,6 +73,7 @@ static void sdata2_order(void)
     (void) 0.75;
     (void) -3.0f;
 }
+#endif
 
 #define CollisionFlagAir_StayAirborne 0x1
 #define CollisionFlagAir_PlatformPassCallback 0x2
@@ -899,12 +901,6 @@ void mpCollSetFacingDir(CollData* coll, int facing_dir)
     coll->facing_dir = facing_dir;
 }
 
-static float six(void)
-{
-    return 6.0F;
-}
-
-#define M_TAU 6.283185307179586
 void mpColl_800436E4(CollData* coll, float arg1)
 {
     float var_f1;

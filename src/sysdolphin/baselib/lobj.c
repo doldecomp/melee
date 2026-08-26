@@ -381,7 +381,11 @@ static void setup_spec_lightobj(HSD_LObj* lobj, Mtx mtx, s32 spec_id)
         GXInitLightColor(&lobj->spec_lightobj, lobj->color);
         lobj->shininess = 50.0F;
 
-        x = x = lobj->shininess;
+        x =
+#ifdef MUST_MATCH
+            x =
+#endif
+                lobj->shininess;
 
         x *= 0.5F;
         GXInitLightAttn(&lobj->spec_lightobj, 0.0F, 0.0F, 1.0F, x, 0.0F,

@@ -59,24 +59,36 @@ void gm_801A3F48(GameScene* scene)
     tyDisplay_8031C8B8();
 }
 
+static inline u8 firstScene(GameScene* scene, u8 sentinel)
+{
+    for (; scene->idx != 0xFF; scene++) {
+        do {
+            if (scene->idx == sentinel) {
+                break;
+            }
+        } while (0);
+        return scene->idx;
+    }
+    return 0;
+}
+
 static inline u8 nextScene(GameScene* scenes)
 {
+    GameScene* it = scenes;
+    u8 current = gm_80479D30.routing.curr_scene_idx;
     int i;
     u8 next_scene;
     GameScene* cur = scenes;
 
-    for (i = 0; scenes[i].idx != 0xFF; i++) {
-        if (cur->idx > gm_80479D30.routing.curr_scene_idx) {
+    for (i = 0; (next_scene = it->idx) != 0xFF; i++) {
+        if (cur->idx > current) {
             return scenes[i].idx;
         }
         cur++;
+        it++;
     }
 
-    next_scene = scenes[0].idx;
-    if (next_scene == 0xFF) {
-        next_scene = 0;
-    }
-    return next_scene;
+    return firstScene(scenes, next_scene);
 }
 
 static inline GameScene* findScene(GameScene* scene)
@@ -98,6 +110,7 @@ void gm_801A4014(GameMode* mode)
     GameScene* scene;
     GameState* gm;
     struct GameSceneInfo* info;
+    u32 dead;
     u32 unused[2];
 
     gm = &gm_80479D30;
@@ -111,7 +124,9 @@ void gm_801A4014(GameMode* mode)
         scene->Prep(scene);
     }
     info = &scene->info;
-    handler = gm_FindGameSceneHandler(scene->info.class_id);
+    handler = (GameSceneHandler*) ((uintptr_t) gm_FindGameSceneHandler(
+                                       info->class_id) |
+                                   (dead = 0));
     gm_801A4BD4();
     gm_801A4B88(info);
     if (handler->OnLoad != NULL) {

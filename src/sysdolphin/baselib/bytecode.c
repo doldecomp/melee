@@ -258,7 +258,11 @@ float HSD_ByteCodeEval(u8* bytecode, const f32* args, s32 nb_args)
             HSD_ASSERT(525, stack->next);
             f0 = ((ByteCodeVal*) &stack->data)->f;
             stack = HSD_SListRemove(stack);
-            f1 = f1 = ((ByteCodeVal*) &stack->data)->f;
+            f1 =
+#ifdef MUST_MATCH
+                f1 =
+#endif
+                    ((ByteCodeVal*) &stack->data)->f;
             fv = fmodf(f1, f0);
             stack->data = *(void**) &fv;
             break;

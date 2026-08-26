@@ -22,8 +22,8 @@
 #include "ftCommon/types.h"
 #include "ftSamus/ftSs_SpecialLw_1.h"
 #include "ftSamus/types.h"
+#include "ftYoshi/ftyoshi.h"
 #include "ftYoshi/ftYs_Guard.h"
-#include "ftYoshi/ftYs_Init.h"
 
 #include <dolphin/mtx.h>
 
@@ -41,16 +41,6 @@
 /* 099894 */ static void ftCo_80099894(Fighter_GObj* gobj);
 /* 0998EC */ static void ftCo_800998EC(Fighter_GObj* gobj);
 /* 099954 */ static void ftCo_80099954(Fighter_GObj* gobj);
-
-static inline bool inlineA0(Fighter* fp)
-{
-    if (ABS(fp->input.lstick.x) >= p_ftCommonData->x31C &&
-        fp->x670_timer_lstick_tilt_x < p_ftCommonData->x320)
-    {
-        return true;
-    }
-    return false;
-}
 
 static inline bool inlineA1(Fighter* fp)
 {

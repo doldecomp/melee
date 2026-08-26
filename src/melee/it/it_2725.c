@@ -838,15 +838,21 @@ void it_80273B50(Item_GObj* item_gobj, Vec3* vel)
     {
         Item* item3 = GET_ITEM(item_gobj);
         HSD_JObj* item_jobj3 = GET_JOBJ(item_gobj);
-        if (&sp40 != NULL) {
+#ifdef MUST_MATCH
+        if (&sp40 != NULL)
+#endif
+        {
             lb_8000B1CC(
                 ftLib_80086630((Fighter_GObj*) owner_gobj, item3->xDC4), &sp40,
                 &sp34);
-        } else {
+        }
+#ifdef MUST_MATCH
+        else {
             lb_8000B1CC(
                 ftLib_80086630((Fighter_GObj*) owner_gobj, item3->xDC4), NULL,
                 &sp34);
         }
+#endif
         pos = &item3->pos;
         item3->pos.x = sp34.x;
         item3->pos.y = sp34.y;

@@ -63,6 +63,8 @@ const struct {
     0.0f,
 };
 
+/* 0103D8 */ static bool lb_800103D8(Vec3* vec, float x0, float x1, float x2,
+                                     float x3, float offset);
 /* 4D63A0 */ static struct lb_804D63A0_t* lb_804D63A0;
 /* 4D63A4 */ static struct DynamicsData* cur_data;
 /* 4D63A8 */ static struct lb_804D63A8_t* lb_804D63A8;
@@ -71,6 +73,7 @@ const struct {
 /* 4D63B4 */ static enum_t lb_804D63B4;
 /* 4D63B8 */ static u8 lb_804D63B8;
 
+#ifdef MUST_MATCH
 static void order_data(void)
 {
     (void) "active deffect:";
@@ -79,6 +82,7 @@ static void order_data(void)
     (void) "[NULL]\n\n\n";
     (void) "translate";
 }
+#endif
 
 static inline bool checkJObjFlags(HSD_JObj* jobj)
 {
@@ -451,7 +455,9 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
         return;
     }
     /* Keeps loop_index live from function entry. */
+#ifdef MUST_MATCH
     (void) parent_mtx[loop_index];
+#endif
     if (part > 0xFF) {
         return;
     }

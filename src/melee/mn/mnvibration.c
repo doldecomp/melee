@@ -622,7 +622,11 @@ void mnVibration_CreateNameRow(HSD_GObj* arg0, u8 arg1, u8 arg2)
     text->font_size.x = 0.03f;
     text->font_size.y = 0.03f;
     HSD_SisLib_803A6B98(text, 0.0f, 0.0f, GetNameText(arg1));
-    new_jobj = new_jobj = HSD_JObjLoadJoint(assets->joint);
+    new_jobj =
+#ifdef MUST_MATCH
+        new_jobj =
+#endif
+            HSD_JObjLoadJoint(assets->joint);
     HSD_JObjAddAnimAll(new_jobj, assets->animjoint, assets->matanim,
                        assets->shapeanim);
     HSD_JObjReqAnimAll(new_jobj, name_flag);

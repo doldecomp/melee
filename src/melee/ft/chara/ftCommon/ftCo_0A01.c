@@ -24,6 +24,9 @@
 #include "ftSamus/forward.h"
 
 #include "gm/gm_unsplit.h"
+
+#include "gr/forward.h"
+
 #include "gr/grbigblue.h"
 #include "gr/grcastle.h"
 #include "gr/grcorneria.h"
@@ -49,7 +52,105 @@
 #include <dolphin/mtx.h>
 #include <melee/ft/ftcmdscript.h>
 
+/* 09D044 */ static void ftCo_800A0148(Fighter*);
+/* 09D06C */ static void ftCo_800AC7D4(Fighter*);
+/* 09D280 */ static void ftCo_800A0384(Fighter* fp);
+/* 09D3DC */ static void ftCo_800ACB44(Fighter*);
+/* 09D404 */ static void ftCo_800A0508(Fighter* fp);
+/* 09D5F4 */ static void ftCo_800ACD5C(Fighter* fp);
+/* 09D7EC */ static void ftCo_800A08F0(Fighter* fp);
+/* 09D9F0 */ static void ftCo_800A0AF4(Fighter* fp);
+/* 09DBAC */ static void ftCo_800A0CB0(Fighter* fp);
+/* 09DCC4 */ static void ftCo_800AD42C(Fighter* fp);
+/* 09DDE4 */ static void ftCo_800AD54C(Fighter*);
+/* 09DDFC */ static bool ftCo_800A0F00(Fighter_GObj* gobj);
+/* 09E094 */ static void ftCo_800AD7FC(Fighter*);
+/* 09E4C0 */ static void ftCo_800ADC28(Fighter*);
+/* 09EE38 */ static void ftCo_800A1F3C(Fighter* fp, float arg1, float arg2,
+                                       float arg3);
+/* 09EE94 */ static bool ftCo_800A1F98(int x, float y);
+/* 09EF9C */ static void ftCo_800A20A0(Fighter* fp);
+/* 09F044 */ static void ftCo_800AE7AC(Fighter* fp, Vec3*, int);
+/* 09F0F8 */ static bool ftCo_800A21FC(Fighter* fp);
+/* 09F198 */ static s32 ftCo_800A229C(Fighter* fp, Vec3*);
+/* 09F324 */ static void ftCo_800AEA8C(Fighter* fp);
+/* 09F588 */ static void ftCo_800AECF0(Fighter* fp);
+/* 09F614 */ static bool ftCo_800A2718(mp_UnkStruct0*);
+/* 09F850 */ static void ftCo_800AEFB8(Fighter* fp);
+/* 09FB28 */ static void ftCo_800AF290(Fighter*);
+/* 09FB7C */ static s32 ftCo_800A2C80(Fighter* fp);
+/* 0A0024 */ static void ftCo_800AF78C(Fighter*);
+/* 0A0130 */ static bool ftCo_800A3234(Fighter* fp);
+/* 0A0394 */ static bool ftCo_800A3498(Fighter* fp);
+/* 0A0450 */ static bool ftCo_800A3554(Fighter* fp, float);
+/* 0A04D8 */ static void ftCo_800AFC40(Fighter* fp);
+/* 0A060C */ static bool ftCo_800A3710(Fighter* fp);
+/* 0A06D4 */ static void ftCo_800AFE3C(Fighter*, int);
+/* 0A0804 */ static bool ftCo_800A3908(Fighter* fp, bool);
+/* 0A0990 */ static void ftCo_800B00F8(Fighter*);
+/* 0A0D74 */ static void ftCo_800B04DC(Fighter*);
+/* 0A0F34 */ static bool ftCo_800A4038(Fighter* fp, bool);
+/* 0A0FF8 */ static void ftCo_800B0760(Fighter* fp);
+/* 0A11B0 */ static void ftCo_800B0918(Fighter* fp0, Fighter* fp1);
+/* 0A138C */ static void ftCo_800B0AF4(Fighter* fp);
+/* 0A1540 */ static bool ftCo_800B0CA8(Fighter* fp0, Fighter* fp1);
+/* 0A1664 */ static s32 ftCo_800A4768(Fighter* fp, Vec3* arg1);
+/* 0A1730 */ static bool ftCo_800B0E98(Fighter* fp0, Fighter* fp1);
+/* 0A18B0 */ static void ftCo_800A49B4(Fighter* fp);
+/* 0A18B4 */ static void ftCo_800B101C(Fighter*);
+/* 0A1AE8 */ static Fighter* ftCo_800A4BEC(Fighter* fp);
+/* 0A1B04 */ static void ftCo_800B126C(Fighter*);
+/* 0A1B38 */ static bool ftCo_800A1B38(enum_t);
+/* 0A1D10 */ static void ftCo_800B1478(Fighter*);
+/* 0A1FD0 */ static Fighter* ftCo_800A50D4(Fighter* fp);
+/* 0A2068 */ static void ftCo_800B17D0(Fighter*);
+/* 0A2190 */ static Fighter* ftCo_800A5294(Fighter* fp, int player_id);
+/* 0A22D8 */ static Fighter* ftCo_800A53DC(Fighter*);
+/* 0A2350 */ static void ftCo_800B1AB8(Fighter*);
+/* 0A2788 */ static void ftCo_800B1EF0(Fighter*);
+/* 0A2798 */ static Fighter* ftCo_800A589C(Fighter* fp);
+/* 0A2840 */ static bool ftCo_800A5944(Item* ip);
+/* 0A2A60 */ static void ftCo_800B21C8(Fighter*);
+/* 0A2D50 */ static void ftCo_800B24B8(Fighter*);
+/* 0A3028 */ static void ftCo_800B2790(Fighter* fp);
+/* 0A3C48 */ static void ftCo_800B33B0(Fighter* fp);
+/* 0A5ACC */ static bool ftCo_800A5ACC(Fighter*);
+/* 0A5CE0 */ static Fighter* ftCo_800A5CE0(Fighter* fp);
+/* 0A5F4C */ static Item* ftCo_800A5F4C(Fighter* fp, ItemKind);
+/* 0A61D8 */ static Item* ftCo_800A61D8(Fighter* fp);
+/* 0A648C */ static int ftCo_800A648C(Fighter* fp);
+/* 0A6700 */ static bool ftCo_800A6700(Fighter* fp, Vec3*, Vec3*);
+/* 0A6A98 */ static s32 ftCo_800A6A98(Fighter* fp, Vec3* arg1);
+/* 0A6D2C */ static s32 ftCo_800A6D2C(Fighter* fp, Vec3* arg1);
+/* 0A6FC4 */ static bool ftCo_800A6FC4(Fighter* fp, Vec3*, Vec3*);
+/* 0A75DC */ static void ftCo_800A75DC(Fighter* fp0, Fighter* fp1);
+/* 0A7AAC */ static void ftCo_800A7AAC(Fighter* fp);
+/* 0A80E4 */ static void ftCo_800A80E4(Fighter* fp);
+/* 0A8210 */ static bool ftCo_800A8210(Fighter* fp, Vec3*);
+/* 0A866C */ static void ftCo_800A866C(Fighter* fp);
+/* 0A8940 */ static void ftCo_800A8940(Fighter* fp);
+/* 0A8DE4 */ static void ftCo_800A8DE4(Fighter* fp);
+/* 0A8EB0 */ static void ftCo_800A8EB0(Fighter*);
+/* 0A92CC */ static void ftCo_800A92CC(Fighter* fp);
+/* 0A96B8 */ static void ftCo_800A96B8(Fighter*);
+/* 0A9904 */ static UNK_RET ftCo_800A9904(Fighter*);
+/* 0A9CB4 */ static void ftCo_800A9CB4(Fighter* fp);
+/* 0AA320 */ static void ftCo_800AA320(Fighter* fp, int*, int*);
+/* 0AA42C */ static UNK_RET ftCo_800AA42C(Fighter* fp);
+/* 0AA844 */ static UNK_RET ftCo_800AA844(Fighter* fp);
+/* 0AABC8 */ static void ftCo_800AABC8(Fighter* fp);
+/* 0AACD0 */ static UNK_RET ftCo_800AACD0(Fighter* fp);
+/* 0AAF48 */ static bool ftCo_800AAF48(Fighter* fp);
+/* 0AB224 */ static void ftCo_800AB224(Fighter* fp);
+/* 0ABA34 */ static void ftCo_800ABA34(Fighter* fp);
+/* 0ABBA8 */ static void ftCo_800ABBA8(Fighter* fp);
+/* 0AC30C */ static void ftCo_800AC30C(Fighter* fp);
+/* 0AC434 */ static void ftCo_800AC434(Fighter* fp);
+/* 0AC5A0 */ static void ftCo_800AC5A0(Fighter* fp);
+/* 0B2AFC */ static void ftCo_800B2AFC(Fighter* fp);
+
 /// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void sdata2_order(void)
 {
     (void) 0.0f;
@@ -130,6 +231,7 @@ static void sdata2_order(void)
     (void) 0.300000012f;
     (void) 0.0399999991f;
 }
+#endif
 
 /**
  * Priority table, mapping ItemKind to priority number,
@@ -141,29 +243,6 @@ int ftCo_803C5A68[] = {
     5, 2, 2, 2, 3, 3, 3, 4, 0, 0, 8, 4, 1, 4, 4, 5, 5,
 };
 
-typedef struct ftCo_803C6594_t {
-    /* 00 */ Vec3 x0;
-    /* 0C */ f32 xC;
-    /* 10 */ f32 x10;
-    /* 14 */ f32 x14;
-    /* 18 */ f32 x18;
-    /* 1C */ f32 x1C;
-    /* 20 */ f32 x20;
-    /* 24 */ f32 x24;
-    /* 28 */ f32 x28;
-    /* 2C */ f32 x2C;
-    /* 30 */ f32 x30;
-    /* 34 */ f32 x34;
-    /* 38 */ f32 x38;
-    /* 3C */ f32 x3C;
-    /* 40 */ f32 x40;
-    /* 44 */ u8 x44;
-    /* 48 */ f32 x48;
-    /* 4C */ f32 x4C;
-    /* 50 */ struct ftCo_803C6594_t* next;
-} ftCo_803C6594_t;
-
-/* static */ extern ftCo_803C6594_t* ftCo_803C6594[];
 /* 0A2638 */ static void ftCo_800B1DA0(Fighter* fp);
 
 static inline void ftCo_CpuSetNeutralStick(Fighter* fp)
@@ -5742,7 +5821,11 @@ void ftCo_800AC5A0(Fighter* fp)
         float kb_x = fp->x8c_kb_vel.x;
         float kb_y = fp->x8c_kb_vel.y;
         float kb_mag;
-        kb_mag = kb_x * kb_x + (kb_mag = kb_y * kb_y);
+        kb_mag = kb_x * kb_x + (
+#ifdef MUST_MATCH
+                                   kb_mag =
+#endif
+                                       kb_y * kb_y);
         kb_mag = sqrtf(kb_mag);
         if (!ftCo_IsNearlyZero(kb_mag)) {
             float x = kb_x * (1.0F / kb_mag);
@@ -6882,7 +6965,7 @@ static inline void ftCo_CpuUpdateTargetDistance(Fighter* fp)
     }
 }
 
-static inline void ftCo_CpuUpdateFoodItemTarget(Fighter* fp, bool is_food)
+static inline void ftCo_CpuUpdateFoodItemTarget(Fighter* fp, bool* is_food)
 {
     Item_GObj* item_gobj;
     ItemKind kind;
@@ -6893,15 +6976,15 @@ static inline void ftCo_CpuUpdateFoodItemTarget(Fighter* fp, bool is_food)
     if (item_gobj != NULL) {
         kind = GET_ITEM(item_gobj)->kind;
         if (kind == It_Kind_Heart) {
-            is_food = true;
+            *is_food = true;
         } else if (kind == It_Kind_Tomato) {
-            is_food = true;
+            *is_food = true;
         } else if (kind == It_Kind_Foods) {
-            is_food = true;
+            *is_food = true;
         } else {
-            is_food = false;
+            *is_food = false;
         }
-        if (is_food == false) {
+        if (*is_food == false) {
             data->x4C = NULL;
             return;
         }
@@ -6913,6 +6996,35 @@ static inline void ftCo_CpuUpdateFoodItemTarget(Fighter* fp, bool is_food)
     }
 }
 
+static inline void ftCo_CpuApproachFoodItemTarget(Fighter* fp,
+                                                  struct Fighter_x1A88_t* data,
+                                                  Fighter** target_slot,
+                                                  Vec3* approach_pos)
+{
+    Fighter* nearby_fp;
+    f32 dx;
+    f32 dy;
+    f32 dist;
+
+    if (ftCo_CpuShouldAct(fp)) {
+        if (data->x4C != NULL) {
+            ftCo_800A866C(fp);
+        } else {
+            nearby_fp = *target_slot;
+            if (nearby_fp != NULL && fp->ground_or_air != GA_Air) {
+                dy = fp->cur_pos.y - nearby_fp->cur_pos.y;
+                dx = fp->cur_pos.x - nearby_fp->cur_pos.x;
+                dist = sqrtf(dx * dx + dy * dy);
+                if (!(dist > 50.0) &&
+                    ftCo_800A6700(fp, &nearby_fp->cur_pos, approach_pos) != 0)
+                {
+                    ftCo_800A1F3C(fp, approach_pos->x, approach_pos->y, 5.0F);
+                }
+            }
+        }
+    }
+}
+
 void ftCo_800AF290(Fighter* fp)
 {
     Vec3 sp54;
@@ -6920,10 +7032,6 @@ void ftCo_800AF290(Fighter* fp)
     Vec3 sp30;
 
     Fighter* target;
-    Fighter* nearby_fp;
-    f32 dx;
-    f32 dy;
-    f32 dist;
     s32 cmd;
     s32 redirect;
     bool is_food;
@@ -6968,7 +7076,7 @@ void ftCo_800AF290(Fighter* fp)
 
     target = ftCo_800A4BEC(fp);
     *(target_slot = &fp->x1A88.x44) = target;
-    ftCo_CpuUpdateFoodItemTarget(fp, is_food);
+    ftCo_CpuUpdateFoodItemTarget(fp, &is_food);
     ftCo_CpuUpdateSpecialItemTarget(fp);
     ftCo_CpuUpdateTargetDistance(fp);
     target = data->x44;
@@ -6978,23 +7086,7 @@ void ftCo_800AF290(Fighter* fp)
             return;
         }
     }
-    if (ftCo_CpuShouldAct(fp)) {
-        if (data->x4C != NULL) {
-            ftCo_800A866C(fp);
-        } else {
-            nearby_fp = *target_slot;
-            if (nearby_fp != NULL && fp->ground_or_air != GA_Air) {
-                dy = fp->cur_pos.y - nearby_fp->cur_pos.y;
-                dx = fp->cur_pos.x - nearby_fp->cur_pos.x;
-                dist = sqrtf(dx * dx + dy * dy);
-                if (!(dist > 50.0) &&
-                    ftCo_800A6700(fp, &nearby_fp->cur_pos, &sp30) != 0)
-                {
-                    ftCo_800A1F3C(fp, sp30.x, sp30.y, 5.0F);
-                }
-            }
-        }
-    }
+    ftCo_CpuApproachFoodItemTarget(fp, data, target_slot, &sp30);
     ftCo_800ADE48(fp);
 }
 
@@ -7005,10 +7097,6 @@ void ftCo_800AF78C(Fighter* fp)
     Vec3 approach_pos;
 
     Fighter* target;
-    Fighter* nearby_fp;
-    f32 dx;
-    f32 dy;
-    f32 dist;
     s32 cmd;
     s32 should_escape;
     Fighter** target_slot;
@@ -7053,27 +7141,11 @@ void ftCo_800AF78C(Fighter* fp)
 
     *(target_slot = &fp->x1A88.x44) = ftCo_800A4BEC(fp);
 
-    ftCo_CpuUpdateFoodItemTarget(fp, is_food);
+    ftCo_CpuUpdateFoodItemTarget(fp, &is_food);
     ftCo_CpuUpdateSpecialItemTarget(fp);
 
     ftCo_CpuUpdateTargetDistance(fp);
-    if (ftCo_CpuShouldAct(fp)) {
-        if (data->x4C != NULL) {
-            ftCo_800A866C(fp);
-        } else {
-            nearby_fp = *target_slot;
-            if (nearby_fp != NULL && fp->ground_or_air != GA_Air) {
-                dy = fp->cur_pos.y - nearby_fp->cur_pos.y;
-                dx = fp->cur_pos.x - nearby_fp->cur_pos.x;
-                dist = sqrtf(dx * dx + dy * dy);
-                if (!(dist > 50.0) &&
-                    ftCo_800A6700(fp, &nearby_fp->cur_pos, &approach_pos))
-                {
-                    ftCo_800A1F3C(fp, approach_pos.x, approach_pos.y, 5.0F);
-                }
-            }
-        }
-    }
+    ftCo_CpuApproachFoodItemTarget(fp, data, target_slot, &approach_pos);
     ftCo_800ADE48(fp);
 }
 

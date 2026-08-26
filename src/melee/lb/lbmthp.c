@@ -433,8 +433,9 @@ s32 fn_8001F13C(THPDecComp* streamPlayer)
     return OSRestoreInterrupts(intr);
 }
 
-/// @todo Stripped code leading to function that can't be inlined?
-#ifdef MUST_MATCH
+/// @todo Non-inlined function forces loop in ::lbMthp_8001F800 to yield to
+///       interrupts. Pragma solution likely fake.
+#ifdef __MWERKS__
 #pragma push
 #pragma dont_inline on
 #endif
@@ -442,7 +443,7 @@ s32 fn_8001F294(void)
 {
     return MoviePlayer.unk_110;
 }
-#ifdef MUST_MATCH
+#ifdef __MWERKS__
 #pragma pop
 #endif
 

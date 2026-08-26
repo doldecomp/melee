@@ -320,7 +320,11 @@ static bool setupTopHalfCamera(HSD_CObj* cobj)
     left = cobj->viewport.xmin;
     right = cobj->viewport.xmax;
     top = cobj->viewport.ymin;
-    bottom = bottom = cobj->viewport.ymax;
+    bottom =
+#ifdef MUST_MATCH
+        bottom =
+#endif
+            cobj->viewport.ymax;
     bottom = bottom < rmode->efbHeight ? bottom : rmode->efbHeight;
     width = right - left;
     height = bottom - top;
@@ -477,11 +481,6 @@ void HSD_CObjSetupViewingMtx(HSD_CObj* cobj)
         HSD_CObjClearFlags(cobj, 0x40000000);
         HSD_CObjSetFlags(cobj, 0x80000000);
     }
-}
-
-static void setNewProjection(HSD_CObj* cobj, Mtx44 mtx)
-{
-    GXSetProjection(mtx, makeProjectionMtx(cobj, mtx));
 }
 
 bool HSD_CObjSetCurrent(HSD_CObj* cobj)

@@ -174,7 +174,9 @@ void gm_801BFCFC(GameScene* arg0)
     p3 = &gm_8049E558[0x44];
     memzero(p3, TY_TROPHY_COUNT);
     Toy_803124BC();
+#ifdef MUST_MATCH
     var_r27_2_s11 = var_r27_2;
+#endif
     p3 = gm_8049E558;
     {
         int var_r25;

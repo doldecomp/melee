@@ -26,23 +26,14 @@
 static MotionFlags const ftPr_MF_SpecialS_Coll =
     ftCommon_GroundAirColl_MF | Ft_MF_KeepGfx | Ft_MF_SkipHit;
 
-/// @todo Float order hack.
-static float forceFloatOrder0(void)
+#ifdef MUST_MATCH
+static float order_sdata2(void)
 {
-    return 0;
+    (void) 0.0f;
+    (void) MTXDegToRad(1);
+    (void) 1.0f;
 }
-
-/// @todo Float order hack.
-static float forceFloatOrder1(void)
-{
-    return MTXDegToRad(1);
-}
-
-/// @todo Float order hack.
-static float forceFloatOrder2(void)
-{
-    return 1;
-}
+#endif
 
 void ftPr_SpecialS_Enter(Fighter_GObj* fighter_gobj)
 {

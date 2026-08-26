@@ -1726,12 +1726,12 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
     }
 
     {
-        grZe_YakumonoParam* yakumono_param = yakumono_param;
+        grZe_YakumonoParam* yp = yakumono_param;
         int j;
         for (j = 0; j < 20; j++) {
             if (base[j].x00_active != 0) {
                 base[j].x10 = 0.0f;
-                base[j].x14 = -yakumono_param->x84;
+                base[j].x14 = -yp->x84;
             }
         }
     }

@@ -8,6 +8,7 @@
 /* 094D70 */ bool ftCo_800951D0(Fighter_GObj* gobj);
 /* 094DF4 */ bool ftCo_80095254(Fighter_GObj* gobj);
 /* 094EA4 */ bool ftCo_80094EA4(Fighter_GObj* gobj);
+/* 094E7C */ bool ftCo_800952DC(Fighter_GObj* gobj);
 /* 0951DC */ bool ftCo_8009563C(Fighter_GObj* gobj);
 /* 0952E4 */ void ftCo_80095744(Fighter_GObj* gobj, bool*);
 /* 095328 */ bool ftCo_80095328(Fighter_GObj*, bool*);

@@ -12,6 +12,7 @@
 #define MELEE_GM_UNSPLIT_H
 
 #include <melee/gm/gm_1601.h>    // IWYU pragma: export
+#include <melee/gm/gm_16A2.h>    // IWYU pragma: export
 #include <melee/gm/gm_16AE.h>    // IWYU pragma: export
 #include <melee/gm/gm_16F1.h>    // IWYU pragma: export
 #include <melee/gm/gm_17AD.h>    // IWYU pragma: export

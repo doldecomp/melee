@@ -36,10 +36,12 @@ ItemStateTable it_803F8128[] = {
     },
 };
 
-static void ordering_func(void)
+#ifdef MUST_MATCH
+static void order_data(void)
 {
-    HSD_JObjSetRotationY(NULL, 10);
+    (void) "!(jobj->flags & JOBJ_USE_QUATERNION)";
 }
+#endif
 
 ItemStateTable it_803F8180[] = { {
     0x00000000,

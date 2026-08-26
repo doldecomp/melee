@@ -32,7 +32,9 @@ typedef struct lbArqHandle {
 
 /* 4316C0 */ lbArqGlobal lbArq_804316C0;
 
-#ifdef MUST_MATCH
+/// @todo Non-inlined function forces loop in ::lbArq_80014BD0 to yield to
+///       interrupts. Pragma solution likely fake.
+#ifdef __MWERKS__
 #pragma push
 #pragma dont_inline on
 #endif
@@ -40,7 +42,7 @@ static lbArqState lbArq_80014ABC(lbArqNode* arg0)
 {
     return arg0->state;
 }
-#ifdef MUST_MATCH
+#ifdef __MWERKS__
 #pragma pop
 #endif
 

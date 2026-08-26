@@ -6,7 +6,6 @@
 #include "if/textdraw.h"
 #include "if/types.h"
 #include "lb/lb_00B0.h"
-#include "mn/inlines.h"
 
 #include <printf.h> // IWYU pragma: keep
 #include <stdarg.h>

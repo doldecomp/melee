@@ -66,15 +66,13 @@ bool ftFx_AppealS_CheckInput(HSD_GObj* gobj)
     return false;
 }
 
-static float setFloatOrder(void)
+#ifdef MUST_MATCH
+static float order_sdata2(void)
 {
-    return 0.0f;
+    (void) 0.0f;
+    (void) 1.0f;
 }
-
-static float setFloatOrder2(void)
-{
-    return 1.0f;
-}
+#endif
 
 static inline bool ftFox_AppealS_GetLR(float x1, float x2)
 {

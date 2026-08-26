@@ -110,11 +110,6 @@ typedef struct mnSnap_State {
 static mnSnap_State mnSnap_804A0A10;
 static void* mnSnap_thumb_imgs[4];
 
-static inline s32* mnSnap_GetCardResult(void)
-{
-    return &mnSnap_804A0A10.card_result;
-}
-
 /// Recursively loads snapshot thumbnails from memory card.
 void mnSnap_80253184(void)
 {
@@ -285,11 +280,6 @@ static void mnSnap_8025329C(void)
     }
 }
 
-static inline s32* mnSnap_GetCurPage(mnSnap_State* snap)
-{
-    return &snap->cur_page;
-}
-
 static inline void* mnSnap_GetBlankImg(mnSnap_State* snap)
 {
     return snap->blank_img;
@@ -398,7 +388,9 @@ void mnSnap_80253964(void)
     s32 j;
     s32 page = mnSnap_804A0A10.cur_page;
     s32 base = page * 4;
+#ifdef MUST_MATCH
     page = page;
+#endif
 
     PAD_STACK(8);
 
@@ -660,7 +652,9 @@ void mnSnap_8025409C(s32 dlg_type)
     *p5E = 0;
     /// @remark Matching tactic: the self-assign keeps p5E live so MWCC
     /// re-uses its register instead of rematerializing the address below.
+#ifdef MUST_MATCH
     p5E = p5E;
+#endif
 
     if (dlg_type == 1) {
         left = *p38;
