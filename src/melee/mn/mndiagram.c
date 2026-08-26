@@ -1168,6 +1168,11 @@ static inline u8 mnDiagram_GetVisibleFighterCursorFrom2(u8* sorted, int start,
 /// The "visible entry" scans skip locked fighters / empty name slots, and are
 /// factored into the mnDiagram_GetVisible*From /
 /// mnDiagram_Get{Prev,Next}*Index helpers shared with mndiagram2.
+static inline Diagram* mnDiagram_GetCurrentDiagramData(void)
+{
+    return mnDiagram_804D6C10->user_data;
+}
+
 void mnDiagram_InputProc(HSD_GObj* gobj)
 {
     u8* ptr;
@@ -1178,7 +1183,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     u8* ptr3;
     s16 new_var;
     u8* sorted = mnDiagram_804A0750.sorted_fighters;
-    Diagram* data = mnDiagram_804D6C10->user_data;
+    Diagram* data = mnDiagram_GetCurrentDiagramData();
     u32 input = mn_80229624(4);
     s32 count = 0;
     s32 col;
@@ -1286,7 +1291,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         sfxBack();
         mn_804A04F0.entering_menu = count2;
         {
-            Diagram* d = mnDiagram_804D6C10->user_data;
+            Diagram* d = mnDiagram_GetCurrentDiagramData();
             gmMainLib_GetGameRules()->xE = (u8) (d->fighter_cursor_pos >> 8);
             gmMainLib_GetGameRules()->xF = (u8) d->fighter_cursor_pos;
             gmMainLib_GetGameRules()->unk_x10 = (u8) (d->name_cursor_pos >> 8);
@@ -1299,7 +1304,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     if (input & (MenuInput_LTrigger | MenuInput_RTrigger)) {
         sfxForward();
         {
-            Diagram* d = mnDiagram_804D6C10->user_data;
+            Diagram* d = mnDiagram_GetCurrentDiagramData();
             gmMainLib_GetGameRules()->xE = (u8) (d->fighter_cursor_pos >> 8);
             gmMainLib_GetGameRules()->xF = (u8) d->fighter_cursor_pos;
             gmMainLib_GetGameRules()->unk_x10 = (u8) (d->name_cursor_pos >> 8);
@@ -2764,11 +2769,6 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
             HSD_JObjAddChild(data->jobjs[9], jobj);
         }
     }
-}
-
-static inline Diagram* mnDiagram_GetCurrentDiagramData(void)
-{
-    return mnDiagram_804D6C10->user_data;
 }
 
 void mnDiagram_CursorProc(HSD_GObj* gobj)
