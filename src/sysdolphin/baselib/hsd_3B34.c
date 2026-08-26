@@ -197,11 +197,8 @@ static s32 lbl_804D6398 = 3;
 
 void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
 {
-    f32 green_luma;
-    f32 red_luma;
-    f32 blue_luma;
     s32 second_pixel_offset;
-    s32 tile_row_offset;
+    s32 chroma_block_offset;
     s32 luma_block_offset;
     s32 chroma_pixel_count;
     s32 luma_offset;
@@ -212,13 +209,12 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
     s32 tile_stride;
     s32 luma_row;
     s32 luma_y;
-    u16 pixel1;
     s32 pair_count;
     s32 luma_x;
     s32 tile_y;
     s32 tile_x;
-    u16 pixel0;
-    s32 chroma_block_offset;
+    u16 pixel;
+    s32 tile_row_offset;
     JpegLumaPair* luma_pair;
 
     tile_row_offset = 0;
@@ -294,37 +290,30 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
                         HSD_804D2648_BUF +
                         ((luma_block_offset + luma_offset) * 4) + 0x118);
                     for (pair_count = 2; pair_count != 0; pair_count--) {
-                        pixel0 =
+                        pixel =
                             src[((pixel_index << 5) & 0x20) +
                                 ((pixel_index & 2) * tile_stride)];
                         second_pixel_index = pixel_index + 1;
-                        red_luma = (f32) ((pixel0 >> 8U) & 0xF8);
-                        {
-                            f32 green_value =
-                                0.587f * (f32) ((pixel0 >> 3U) & 0xFC);
-                            green_luma = green_value;
-                        }
                         second_pixel_offset =
                             ((second_pixel_index << 5) & 0x20) +
                             ((second_pixel_index & 2) * tile_stride);
-                        blue_luma = (f32) ((pixel0 * 8) & 0xF8);
                         pixel_index = second_pixel_index + 1;
                         luma_pair->block0[0] =
-                            (s32) ((s32) ((0.114f * blue_luma) +
-                                          ((0.299f * red_luma) +
-                                           green_luma)) -
+                            (s32) ((s32) ((0.114f *
+                                           (f32) ((pixel * 8) & 0xF8)) +
+                                          ((0.299f *
+                                            (f32) ((pixel >> 8U) & 0xF8)) +
+                                           (0.587f *
+                                            (f32) ((pixel >> 3U) & 0xFC)))) -
                                    0x80);
-                        pixel1 = src[second_pixel_offset];
+                        pixel = src[second_pixel_offset];
                         luma_pair->block1[0] =
                             (s32) ((s32) ((0.114f *
-                                           (f32) ((pixel1 * 8) &
-                                                  0xF8)) +
+                                           (f32) ((pixel * 8) & 0xF8)) +
                                           ((0.299f *
-                                            (f32) ((pixel1 >> 8U) &
-                                                   0xF8)) +
+                                            (f32) ((pixel >> 8U) & 0xF8)) +
                                            (0.587f *
-                                            (f32) ((pixel1 >> 3U) &
-                                                   0xFC)))) -
+                                            (f32) ((pixel >> 3U) & 0xFC)))) -
                                    0x80);
                         luma_pair += 1;
                     }
