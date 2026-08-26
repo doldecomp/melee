@@ -83,6 +83,23 @@ static u8 ifStatus_804D57AC[] = { 0x50, 0x00, 0x00, 0xFF };
 /* 4D6D60 */ static u8 ifStatus_804D6D60;
 /* 4D6D61 */ static s8 ifStatus_804D6D61;
 
+static inline GXColor ifStatus_GetDamageColor(f32 factor)
+{
+    GXColor color;
+
+    color.r = (s8) (factor * (f32) (ifStatus_804D57AC[0] -
+                                     ifStatus_804D57A8[0]) +
+                     (f32) ifStatus_804D57A8[0]);
+    color.g = (s8) (factor * (f32) (ifStatus_804D57AC[1] -
+                                     ifStatus_804D57A8[1]) +
+                     (f32) ifStatus_804D57A8[1]);
+    color.b = (s8) (factor * (f32) (ifStatus_804D57AC[2] -
+                                     ifStatus_804D57A8[2]) +
+                     (f32) ifStatus_804D57A8[2]);
+    color.a = 255;
+    return color;
+}
+
 char num_models_name[] = "DmgNum_scene_models";
 char mrk_models_name[] = "DmgMrk_scene_models";
 
@@ -229,6 +246,164 @@ void ifStatus_802F4B84(IfDamageState* state, s32 is_stamina)
     PAD_STACK(8);
 }
 
+static inline void
+ifStatus_InitDamageDigits(IfDamageState* state,
+                          HSD_MatAnimJoint** anim_base)
+{
+    HSD_JObj* digit_jobj;
+    u8 ones_digit;
+    u8 tens_digit;
+    u8 hundreds_digit;
+
+    digit_jobj = state->jobjs[Ones];
+    ones_digit = state->damage_percent % 10;
+    HSD_TObjAddAnimAll(digit_jobj->u.dobj->mobj->tobj,
+                       (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
+                           ->child->child->aobjdesc->fobjdesc);
+    HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * ones_digit);
+    HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
+
+    digit_jobj = state->jobjs[Tens];
+    tens_digit = (state->damage_percent % 100) / 10;
+    HSD_TObjAddAnimAll(digit_jobj->u.dobj->mobj->tobj,
+                       (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
+                           ->child->child->aobjdesc->fobjdesc);
+    HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * tens_digit);
+    HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
+
+    digit_jobj = state->jobjs[Hundreds];
+    hundreds_digit = (state->damage_percent % 1000) / 100;
+    HSD_TObjAddAnimAll(digit_jobj->u.dobj->mobj->tobj,
+                       (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
+                           ->child->child->aobjdesc->fobjdesc);
+    HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj,
+                       2.0F * hundreds_digit);
+    HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
+}
+
+static inline void
+ifStatus_UpdateTensDigit(IfDamageState* state,
+                         HSD_MatAnimJoint** anim_base,
+                         HSD_JObj* digit_jobj)
+{
+    u8 tens_digit;
+
+    tens_digit = (state->damage_percent % 100) / 10;
+    HSD_TObjAddAnimAll(
+        digit_jobj->u.dobj->mobj->tobj,
+        (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
+            ->child->child->aobjdesc->fobjdesc);
+    HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * tens_digit);
+    HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
+
+    if ((state->damage_percent % 1000) / 100 == 0 &&
+        (state->damage_percent % 100) / 10 == 0)
+    {
+        HSD_JObjSetFlagsAll(state->jobjs[Tens], JOBJ_HIDDEN);
+    } else {
+        HSD_JObjClearFlagsAll(state->jobjs[Tens], JOBJ_HIDDEN);
+    }
+}
+
+static inline IfDamageState*
+ifStatus_FindDamageState(HudIndex* hud, HSD_GObj* gobj, s32* index,
+                         IfDamageState** player)
+{
+    IfDamageState* ptr;
+    s32 i;
+
+    ptr = hud->players;
+    for (i = 0; i < 6; ptr++, i++) {
+        if (ptr->HUD_parent_entity == gobj) {
+            *index = i;
+            *player = ptr;
+            return hud->players + i;
+        }
+    }
+    *index = i;
+    *player = ptr;
+    return NULL;
+}
+
+static inline void
+ifStatus_FinishHundredsDigit(HSD_JObj* digit_jobj, IfDamageState* state)
+{
+    s16 clamped_damage;
+    f32 factor;
+    GXColor color;
+    HSD_MObj* mobj;
+
+    HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
+
+    if ((state->damage_percent % 1000) / 100 == 0) {
+        HSD_JObjSetFlagsAll(state->jobjs[Hundreds], JOBJ_HIDDEN);
+    } else {
+        HSD_JObjClearFlagsAll(state->jobjs[Hundreds], JOBJ_HIDDEN);
+    }
+
+    /* Update colors when damage changes */
+    if (state->old_damage != state->damage_percent) {
+        if (Player_GetMoreFlagsBit2((s8) state->player_slot)) {
+            /* Stamina mode: 0-100% range */
+            clamped_damage = state->damage_percent;
+            if (clamped_damage > 100) {
+                clamped_damage = 100;
+            } else if (clamped_damage < 0) {
+                clamped_damage = 0;
+            }
+            factor = 1.0F - ((f32) clamped_damage / 100.0F);
+            color = ifStatus_GetDamageColor(factor);
+        } else {
+            /* Normal mode: 0-300% range */
+            clamped_damage = state->damage_percent;
+            if (clamped_damage > 300) {
+                clamped_damage = 300;
+            } else if (clamped_damage < 0) {
+                clamped_damage = 0;
+            }
+            factor = (f32) clamped_damage / 300.0F;
+            color = ifStatus_GetDamageColor(factor);
+        }
+
+        /* Apply color to all digit materials */
+        mobj = state->jobjs[Hundreds]->u.dobj->mobj;
+        mobj->mat->diffuse.r = color.r;
+        mobj->mat->diffuse.g = color.g;
+        mobj->mat->diffuse.b = color.b;
+
+        mobj = state->jobjs[Tens]->u.dobj->mobj;
+        mobj->mat->diffuse.r = color.r;
+        mobj->mat->diffuse.g = color.g;
+        mobj->mat->diffuse.b = color.b;
+
+        mobj = state->jobjs[Ones]->u.dobj->mobj;
+        mobj->mat->diffuse.r = color.r;
+        mobj->mat->diffuse.g = color.g;
+        mobj->mat->diffuse.b = color.b;
+
+        mobj = state->jobjs[Percent]->u.dobj->mobj;
+        mobj->mat->diffuse.r = color.r;
+        mobj->mat->diffuse.g = color.g;
+        mobj->mat->diffuse.b = color.b;
+    }
+}
+
+static inline void
+ifStatus_FinishOnesDigit(IfDamageState* state,
+                         HSD_MatAnimJoint** anim_base, f32 ones_digit,
+                         HSD_JObj** digit_jobj)
+{
+    HSD_TObjAddAnimAll(
+        (*digit_jobj)->u.dobj->mobj->tobj,
+        (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
+            ->child->child->aobjdesc->fobjdesc);
+    HSD_TObjReqAnimAll((*digit_jobj)->u.dobj->mobj->tobj,
+                       2.0F * ones_digit);
+    HSD_AObjSetRate((*digit_jobj)->u.dobj->mobj->tobj->aobj, 0.0F);
+
+    *digit_jobj = state->jobjs[Tens];
+}
+
 void ifStatus_802F4EDC(HSD_GObj* gobj)
 {
     HudIndex* hud;
@@ -237,39 +412,22 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     HSD_JObj* digit_jobj;
     s32 is_stamina;
     HSD_TObj* tobj;
-    HSD_MObj* mobj;
     HSD_MatAnimJoint** anim_base;
     s32 i;
-    s32 var_ctr;
     u8 ones_digit;
-    u8 tens_digit;
     u8 hundreds_digit;
     f32 digit_offset;
     f32 ones_offset;
     f32 tens_offset;
     f32 hundreds_offset;
     f32 pos;
-    s16 clamped_damage;
-    f32 factor;
-    GXColor color;
     IfDamageState* ptr;
 
-    PAD_STACK(64);
+    PAD_STACK(24);
     hud = ifStatus_GetHUDInfo();
 
-    {
-        ptr = hud->players;
-        jobj = gobj->hsd_obj;
-        for (i = 0; i < 6; ptr++, i++) {
-            if (ptr->HUD_parent_entity == gobj) {
-                state = hud->players + i;
-                goto found_player;
-            }
-        }
-        state = NULL;
-    found_player:
-        (void) 0;
-    }
+    jobj = gobj->hsd_obj;
+    state = ifStatus_FindDamageState(hud, gobj, &i, &ptr);
 
     /* Check for death animation flag (bit 7 of flags byte at offset 0x10) */
     if (state->flags.explode_animation) {
@@ -311,153 +469,33 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
 
         mn_8022F3D8(jobj, 1, 0x400);
 
-        digit_jobj = state->jobjs[Ones];
-        ones_digit = state->damage_percent % 10;
-        HSD_TObjAddAnimAll(digit_jobj->u.dobj->mobj->tobj,
-                           (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
-                               ->child->child->aobjdesc->fobjdesc);
-        HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * ones_digit);
-        HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
-
-        digit_jobj = state->jobjs[Tens];
-        tens_digit = (state->damage_percent % 100) / 10;
-        HSD_TObjAddAnimAll(digit_jobj->u.dobj->mobj->tobj,
-                           (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
-                               ->child->child->aobjdesc->fobjdesc);
-        HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * tens_digit);
-        HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
-
-        digit_jobj = state->jobjs[Hundreds];
-        hundreds_digit = (state->damage_percent % 1000) / 100;
-        HSD_TObjAddAnimAll(digit_jobj->u.dobj->mobj->tobj,
-                           (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
-                               ->child->child->aobjdesc->fobjdesc);
-        HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj,
-                           2.0F * hundreds_digit);
-        HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
+        ifStatus_InitDamageDigits(state, anim_base);
     }
 
     HSD_JObjAnimAll(jobj);
 
+    anim_base = (HSD_MatAnimJoint**) &hud->janim_selection_joints;
     digit_jobj = state->jobjs[Ones];
     ones_digit = state->damage_percent % 10;
-    HSD_TObjAddAnimAll(
-        digit_jobj->u.dobj->mobj->tobj,
-        (HSD_TexAnim*) ifStatus_GetHUDInfo()
-            ->janim_selection_joints->child->child->aobjdesc->fobjdesc);
-    HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * ones_digit);
-    HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
-
-    digit_jobj = state->jobjs[Tens];
-    tens_digit = (state->damage_percent % 100) / 10;
-    HSD_TObjAddAnimAll(
-        digit_jobj->u.dobj->mobj->tobj,
-        (HSD_TexAnim*) ifStatus_GetHUDInfo()
-            ->janim_selection_joints->child->child->aobjdesc->fobjdesc);
-    HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * tens_digit);
-    HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
-
-    if ((state->damage_percent % 1000) / 100 == 0 &&
-        (state->damage_percent % 100) / 10 == 0)
-    {
-        HSD_JObjSetFlagsAll(state->jobjs[Tens], JOBJ_HIDDEN);
-    } else {
-        HSD_JObjClearFlagsAll(state->jobjs[Tens], JOBJ_HIDDEN);
-    }
+    ifStatus_FinishOnesDigit(state, anim_base, ones_digit, &digit_jobj);
+    ifStatus_UpdateTensDigit(state, anim_base, digit_jobj);
 
     digit_jobj = state->jobjs[Hundreds];
     hundreds_digit = (state->damage_percent % 1000) / 100;
     HSD_TObjAddAnimAll(
         digit_jobj->u.dobj->mobj->tobj,
-        (HSD_TexAnim*) ifStatus_GetHUDInfo()
-            ->janim_selection_joints->child->child->aobjdesc->fobjdesc);
+        (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
+            ->child->child->aobjdesc->fobjdesc);
     HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * hundreds_digit);
-    HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
-
-    if ((state->damage_percent % 1000) / 100 == 0) {
-        HSD_JObjSetFlagsAll(state->jobjs[Hundreds], JOBJ_HIDDEN);
-    } else {
-        HSD_JObjClearFlagsAll(state->jobjs[Hundreds], JOBJ_HIDDEN);
-    }
-
-    /* Update colors when damage changes */
-    if (state->old_damage != state->damage_percent) {
-        if (Player_GetMoreFlagsBit2((s8) state->player_slot)) {
-            /* Stamina mode: 0-100% range */
-            clamped_damage = state->damage_percent;
-            if (clamped_damage > 100) {
-                clamped_damage = 100;
-            } else if (clamped_damage < 0) {
-                clamped_damage = 0;
-            }
-            factor = 1.0F - ((f32) clamped_damage / 100.0F);
-            color.r = (s8) (factor * (f32) (ifStatus_804D57AC[0] -
-                                            ifStatus_804D57A8[0]) +
-                            (f32) ifStatus_804D57A8[0]);
-            color.g = (s8) (factor * (f32) (ifStatus_804D57AC[1] -
-                                            ifStatus_804D57A8[1]) +
-                            (f32) ifStatus_804D57A8[1]);
-            color.b = (s8) (factor * (f32) (ifStatus_804D57AC[2] -
-                                            ifStatus_804D57A8[2]) +
-                            (f32) ifStatus_804D57A8[2]);
-            color.a = 255;
-        } else {
-            /* Normal mode: 0-300% range */
-            clamped_damage = state->damage_percent;
-            if (clamped_damage > 300) {
-                clamped_damage = 300;
-            } else if (clamped_damage < 0) {
-                clamped_damage = 0;
-            }
-            factor = (f32) clamped_damage / 300.0F;
-            color.r = (s8) (factor * (f32) (ifStatus_804D57AC[0] -
-                                            ifStatus_804D57A8[0]) +
-                            (f32) ifStatus_804D57A8[0]);
-            color.g = (s8) (factor * (f32) (ifStatus_804D57AC[1] -
-                                            ifStatus_804D57A8[1]) +
-                            (f32) ifStatus_804D57A8[1]);
-            color.b = (s8) (factor * (f32) (ifStatus_804D57AC[2] -
-                                            ifStatus_804D57A8[2]) +
-                            (f32) ifStatus_804D57A8[2]);
-            color.a = 255;
-        }
-
-        /* Apply color to all digit materials */
-        mobj = state->jobjs[Hundreds]->u.dobj->mobj;
-        mobj->mat->diffuse.r = color.r;
-        mobj->mat->diffuse.g = color.g;
-        mobj->mat->diffuse.b = color.b;
-
-        mobj = state->jobjs[Tens]->u.dobj->mobj;
-        mobj->mat->diffuse.r = color.r;
-        mobj->mat->diffuse.g = color.g;
-        mobj->mat->diffuse.b = color.b;
-
-        mobj = state->jobjs[Ones]->u.dobj->mobj;
-        mobj->mat->diffuse.r = color.r;
-        mobj->mat->diffuse.g = color.g;
-        mobj->mat->diffuse.b = color.b;
-
-        mobj = state->jobjs[Percent]->u.dobj->mobj;
-        mobj->mat->diffuse.r = color.r;
-        mobj->mat->diffuse.g = color.g;
-        mobj->mat->diffuse.b = color.b;
-    }
+    ifStatus_FinishHundredsDigit(digit_jobj, state);
 
     /* Update JObj positions when animating */
     if (lb_8000B09C(jobj)) {
         for (i = 0; i < 4; i++) {
-            digit_jobj = state->jobjs[i];
-            if (digit_jobj == NULL) {
-                __assert("jobj.h", 993, "jobj");
-            }
-            state->translation_x[i] = digit_jobj->translate.x;
-
-            digit_jobj = state->jobjs[i];
-            if (digit_jobj == NULL) {
-                __assert("jobj.h", 1006, "jobj");
-            }
-            state->translation_y[i] = digit_jobj->translate.y;
+            state->translation_x[i] =
+                HSD_JObjGetTranslationX(state->jobjs[i]);
+            state->translation_y[i] =
+                HSD_JObjGetTranslationY(state->jobjs[i]);
         }
     }
 
@@ -468,22 +506,13 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     /* Position percent sign */
     digit_jobj = state->jobjs[Percent];
     pos = state->translation_x[Percent] - ones_offset;
-    if (digit_jobj == NULL) {
-        __assert("jobj.h", 932, "jobj");
-    }
-    digit_jobj->translate.x = pos;
-    jobj_flagCheckSetMtxDirtySub(digit_jobj);
+    HSD_JObjSetTranslateX(digit_jobj, pos);
 
     /* Position tens digit */
     digit_offset = ones_offset + tens_offset;
     digit_jobj = state->jobjs[Tens];
     pos = state->translation_x[Tens] + digit_offset;
-    (void) pos;
-    if (digit_jobj == NULL) {
-        __assert("jobj.h", 932, "jobj");
-    }
-    digit_jobj->translate.x = pos;
-    jobj_flagCheckSetMtxDirtySub(digit_jobj);
+    HSD_JObjSetTranslateX(digit_jobj, pos);
 
     /* Position hundreds digit */
     hundreds_offset =
@@ -491,11 +520,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     digit_jobj = state->jobjs[Hundreds];
     pos = state->translation_x[Hundreds] +
           (tens_offset + digit_offset + hundreds_offset);
-    if (digit_jobj == NULL) {
-        __assert("jobj.h", 932, "jobj");
-    }
-    digit_jobj->translate.x = pos;
-    jobj_flagCheckSetMtxDirtySub(digit_jobj);
+    HSD_JObjSetTranslateX(digit_jobj, pos);
 
     /* Handle shake animation */
     if (state->flags.force_digit_shake) {
