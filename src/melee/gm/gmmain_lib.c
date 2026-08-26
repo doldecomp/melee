@@ -805,17 +805,17 @@ s32 gmMainLib_8015DBF4(s32 arg0)
         }                                                                     \
     } while (0)
 
-    config = &gmMainLib_804D3EE0->unk_51C;
+    config = gmMainLib_8015CDC8();
     config_all = (struct gmMainLib_8015DBF4_config*) config;
     ptr = &config->x4;
     val = *ptr;
-    base = (struct gmMainLib_8015DBF4_base*) &gmMainLib_804D3EE0->unk_530
-               .unk_588[0];
     if (val == (u8) arg0) {
         *ptr = 0x78;
     } else if (val > (u8) arg0 && val != 0x78) {
         *ptr = val - 1;
     }
+    base = (struct gmMainLib_8015DBF4_base*) &gmMainLib_804D3EE0->unk_530
+               .unk_588[0];
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_522.x4);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_528.x4);
     ADJ_NAMETAG_78(config_all->unk_530.x4);
