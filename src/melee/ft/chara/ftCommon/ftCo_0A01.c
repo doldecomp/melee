@@ -3847,7 +3847,7 @@ void ftCo_800A7AAC(Fighter* fp)
             if (ftCo_800A2718(island) == 0) {
                 int* x60 = &fp->x1A88.x60;
                 struct Fighter_x1A88_t* data2 = &fp->x1A88;
-                f32 x38 = data->x56C + partner->x1A88.x564;
+                f32 x38 = partner->x1A88.x564 + data->x56C;
                 f32 x = floor_pos.x;
                 f32 y = floor_pos.y;
                 if (*x60 == 0) {
