@@ -693,7 +693,10 @@ static inline void mnStageSw_InitUserData(MnStageSwData* user_data, s8 state)
 
 static inline HSD_JObj* mnStageSw_LoadCursor(void)
 {
-    return HSD_JObjLoadJoint(MenMainCursorSs_Top.joint);
+    HSD_JObj* cursor_jobj;
+
+    cursor_jobj = HSD_JObjLoadJoint(MenMainCursorSs_Top.joint);
+    return cursor_jobj;
 }
 
 static HSD_GObj* mnStageSw_80236CBC(s8 arg0)
@@ -706,7 +709,6 @@ static HSD_GObj* mnStageSw_80236CBC(s8 arg0)
     struct StaticModelDesc* mdl = &MenMainConSs_Top;
     f32 y_spacing;
     u8 idx;
-    u8 hovered;
     u8 enabled;
     s32 i;
     HSD_JObj* cursor_anim_jobj;
@@ -738,6 +740,7 @@ static HSD_GObj* mnStageSw_80236CBC(s8 arg0)
     y_spacing = HSD_JObjGetTranslationY(user_data->x30) -
                 HSD_JObjGetTranslationY(user_data->x2C);
     for (i = 0; i < NUM_STAGES; i++) {
+        u8 hovered;
         HSD_JObj* cursor_jobj;
 
         hovered = mn_804A04F0.hovered_selection;
