@@ -1761,15 +1761,13 @@ void fn_8017AA78(const u8* arg0)
     disp->state.x0_6 = 0;
     state = &disp->state;
 
+    state->dim_w1[0] = lbl_804D3FD0;
+    state->dim_w1[1] = lbl_804D3FD4;
+
     {
         s32 a;
         s32 b;
-        a = lbl_804D3FD0;
-        (void) a;
-        b = lbl_804D3FD4;
-        (void) b;
-        state->dim_w1[0] = a;
-        state->dim_w1[1] = b;
+
         a = lbl_804D3FD8;
         b = lbl_804D3FDC;
         state->dim_h1[0] = a;
