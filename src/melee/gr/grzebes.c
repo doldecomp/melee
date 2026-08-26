@@ -933,8 +933,9 @@ void grZebes_801D99E0(HSD_GObj* gobj)
         f32 accel;
         f32 vel;
         f32 t;
+        f32 target_level;
         f32 delta;
-        f32 abs_delta;
+        f64 abs_delta;
         f32 threshold;
 
         gp->u.zebes5.xC6 = (s16) (gp->u.zebes5.xC6 + 1);
@@ -950,12 +951,13 @@ void grZebes_801D99E0(HSD_GObj* gobj)
         }
         threshold =
             (f32) ((f64) (vel * t) - (0.5 * (f64) accel * (f64) (t * t)));
-        delta = gp->u.zebes5.xD4;
-        delta -= gp->u.zebes5.xD8;
+        target_level = gp->u.zebes5.xD4;
+        delta = target_level - gp->u.zebes5.xD8;
 
-        abs_delta = ABS(delta);
+        abs_delta = delta;
 
-        if (abs_delta < threshold || ABS(delta) < accel) {
+        if ((delta < 0 ? -abs_delta : abs_delta) < threshold ||
+            (delta < 0 ? -abs_delta : abs_delta) < accel) {
             gp->u.zebes5.xC8 = 4;
         } else {
             gp->u.zebes5.xD0 += accel;
