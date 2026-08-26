@@ -1786,12 +1786,14 @@ static inline StKind gm_GetStKind(gm_80187F48_EnterData* data)
 
 static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
 {
-    gm_1832_804736C0_t* data = &lbl_804736C0;
-    char** table = lbl_803D9750;
+    gm_1832_804736C0_t* data;
+    HSD_CObj* cobj;
     u8 stage_index;
     HSD_GObj* gobj;
-    HSD_CObj* cobj;
+    char** table = lbl_803D9750;
     gm_1832_StageState* state;
+
+    data = &lbl_804736C0;
     data->x38 = arg0->x0;
     lb_8000FCDC();
     mpColl_80041C78();
@@ -1902,7 +1904,7 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
 
 void gm_80187F48_OnEnter(void* arg0)
 {
-    PAD_STACK(32);
+    PAD_STACK(24);
     gm_80187F48_OnEnter_inline(arg0);
 }
 
