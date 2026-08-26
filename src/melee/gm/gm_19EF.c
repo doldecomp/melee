@@ -376,6 +376,29 @@ static inline void fn_8019F9C4_LoadSymbols(u32 arg0)
     lbArchive_LoadSymbols("GmRgStnd.dat", &lbl_804D66A8, "standScene", 0);
 }
 
+static inline void fn_8019F9C4_inline1(HSD_JObj* next, HSD_JObj** child)
+{
+    if (next == NULL) {
+        *child = NULL;
+    } else {
+        *child = next->child;
+    }
+    lbl_80479A98.x54 = *child;
+
+    if (lbl_80479A98.x54 == NULL) {
+        *child = NULL;
+    } else {
+        *child = lbl_80479A98.x54->next;
+    }
+    lbl_80479A98.x58 = *child;
+
+    if (lbl_80479A98.x58 == NULL) {
+        *child = NULL;
+    } else {
+        *child = lbl_80479A98.x58->next;
+    }
+}
+
 void fn_8019F9C4(u32 arg0)
 {
     HSD_CObj* cobj;
@@ -479,25 +502,7 @@ void fn_8019F9C4(u32 arg0)
         next = child->next;
     }
 
-    if (next == NULL) {
-        child = NULL;
-    } else {
-        child = next->child;
-    }
-    lbl_80479A98.x54 = child;
-
-    if (lbl_80479A98.x54 == NULL) {
-        child = NULL;
-    } else {
-        child = lbl_80479A98.x54->next;
-    }
-    lbl_80479A98.x58 = child;
-
-    if (lbl_80479A98.x58 == NULL) {
-        child = NULL;
-    } else {
-        child = lbl_80479A98.x58->next;
-    }
+    fn_8019F9C4_inline1(next, &child);
     lbl_80479A98.x5C = child;
 
     {
