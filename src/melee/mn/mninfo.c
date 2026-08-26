@@ -294,7 +294,24 @@ void fn_80251FE4(void)
             data->scroll_idx -= 1;
             sfxMove();
             mnInfo_FreeEntries();
-            mnInfo_CreateEntries(data);
+            {
+                u8* trophy;
+                s32 i;
+                mnInfo_GObj* gobj;
+
+                gobj = mnInfo_804D6C78;
+                trophy = &mnInfo_804A0968[data->scroll_idx];
+                for (i = 0; i < 4; i++) {
+                    if (mnInfo_80251A08(*trophy) != 0) {
+                        u8 id = *trophy;
+
+                        mnInfo_80251D58(gobj, i, id,
+                                        *gmMainLib_8015D804(id));
+                        mnInfo_80251F04(gobj, i, id);
+                    }
+                    trophy++;
+                }
+            }
         }
     } else if (buttons & MenuInput_Down) {
         count = mnInfo_CountUnlocked();
