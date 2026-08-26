@@ -650,8 +650,8 @@ void fn_801AAB74(HSD_GObj* gobj)
     HSD_CObjSetupViewingMtx(gm_804D6830);
 
     for (i = 0; i < gm_804D6800; i++) {
-        leaf = staffInfoSortBuf[i].jobj;
-        PSMTXConcat(gm_804D6830->view_mtx, HSD_JObjGetMtxPtr(leaf),
+        jobj = staffInfoSortBuf[i].jobj;
+        PSMTXConcat(gm_804D6830->view_mtx, HSD_JObjGetMtxPtr(jobj),
                     staffInfoSortBuf[i].mtx);
     }
 
@@ -699,11 +699,12 @@ void fn_801AB200(HSD_GObj* gobj)
     HSD_JObj* cursor_jobj;
     HSD_JObj* jobj_pair[2];
     HSD_JObj* temp_jobj;
-    u8 operand_pad[4];
     Vec3 xform_result;
     f32 proj[8];
     s32 tally_color;
-    s32 tally_color2;
+    GXColor tally_color2;
+    GXColor tally_color_copy;
+    HSD_GObj* leaf;
     HSD_JObj* ptcl_jobj;
     HSD_JObj* ptcl_jobj2;
     HSD_JObj* ptcl_jobj3;
@@ -1119,7 +1120,7 @@ void fn_801AB200(HSD_GObj* gobj)
 
         if (gm_804D6814 >= 0x1285 && gm_804D680C == NULL) {
             tally_count = 0;
-            tally_color2 = gm_804DAAEC;
+            tally_color2 = *(GXColor*) &gm_804DAAEC;
             for (j = 0; j < 6; j++) {
                 HSD_SisLib_803A5CC4(gm_80480D58[j]);
                 gm_80480D58[j] = NULL;
@@ -1141,8 +1142,8 @@ void fn_801AB200(HSD_GObj* gobj)
 
             line_num = HSD_SisLib_803A6B98(gm_804D680C, 0.0f, 0.0f,
                                            gm_803DD23C, tally_count);
-            HSD_SisLib_803A74F0(gm_804D680C, line_num,
-                                (GXColor*) &tally_color2);
+            tally_color_copy = tally_color2;
+            HSD_SisLib_803A74F0(gm_804D680C, line_num, &tally_color_copy);
 
             child_jobj = jobj_pair[0]->child;
             HSD_JObjSetTranslateY(child_jobj, -0.4f);
