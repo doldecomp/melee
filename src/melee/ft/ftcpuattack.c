@@ -369,6 +369,7 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
 int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
 {
     ftCo_AttackEntry sp40[32];
+    float sqrt_tmp[4]; /* pins sqrtf volatile slots at 0x2C..0x38 */
     ftCo_AttackEntry* list = arg2;
     ftCo_AttackEntry* sel;
     struct Fighter_x1A88_t* cpu = &fp->x1A88;
@@ -473,11 +474,11 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
             if (v <= 0.0f) {
                 fpPredY = fpVy * t + fpY;
             } else if (t < v) {
-                sq = sqrtf(t);
+                sq = sqrtf_store(t, &sqrt_tmp[2]);
                 fpPredY = (f32) ((f64) fpY + ((f64) (fpVy * t) -
                                               0.5 * (f64) (fpGrav * sq)));
             } else {
-                sq = sqrtf(v);
+                sq = sqrtf_store(v, &sqrt_tmp[1]);
                 fpPredY =
                     (f32) ((f64) fpY +
                            ((f64) (fpTermNeg * (t - v)) +
@@ -500,12 +501,12 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
             if (v <= 0.0f) {
                 relPredY = (tgtVy * t + tgtY) - fpPredY;
             } else if (t < v) {
-                sq = sqrtf(t);
+                sq = sqrtf_store(t, &sqrt_tmp[0]);
                 relPredY = (f32) (((f64) (tgtVy * t + tgtY) -
                                    0.5 * (f64) (tgtGrav * sq)) -
                                   (f64) fpPredY);
             } else {
-                sq = sqrtf(v);
+                sq = sqrtf_store(v, sqrt_tmp - 1);
                 relPredY = (f32) (((f64) (tgtTermNeg * (t - v)) +
                                    ((f64) (tgtVy * t + tgtY) -
                                     0.5 * (f64) (tgtGrav * sq))) -
