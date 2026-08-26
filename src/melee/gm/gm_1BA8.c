@@ -220,13 +220,22 @@ static inline struct EventData* gm_GetEventData(void)
     return &gmMainLib_804D3EE0->unk_530;
 }
 
+static inline u8 gm_GetNextColor(u8 color)
+{
+    if (color <= 2) {
+        color++;
+    } else {
+        color = 0;
+    }
+    return color;
+}
+
 void gm_801BAD70(GameScene* arg0)
 {
     struct EventData* ev = gm_GetEventData();
     StartMeleeData* md = gm_GetGameSceneLoadDataCallback(arg0);
     u8 level = ev->unk_535;
     s32 player_idx;
-    s32 player_init_off;
     struct gm_804D6900_t** levels;
     gm_803DF94C_t** event_info = gm_803DF94C;
     struct GameCache* cache;
@@ -305,18 +314,15 @@ void gm_801BAD70(GameScene* arg0)
         gm_8016A92C(&md->rules);
     }
 
-    player_idx = 0;
-    player_init_off = 0;
-
     for (i = 0; i < 6; i++) {
         md->players[i].slot_type = Gm_PKind_NA;
     }
 
-    while (player_idx < ((levels[level]->flags >> 5) & 7)) {
+    for (player_idx = 0; player_idx < ((levels[level]->flags >> 5) & 7);
+         player_idx++)
+    {
         while (levels[level]->player_init[player_idx] == NULL) {
             player_idx++;
-            /// @todo loop iterating md->players
-            player_init_off += 0x24;
         }
         gm_801BAB40(&md->players[player_idx],
                     levels[level]->player_init[player_idx]);
@@ -358,12 +364,7 @@ void gm_801BAD70(GameScene* arg0)
             if (c_kind == md->players[0].c_kind) {
                 u8 c = md->players[player_idx].color;
                 if (c == md->players[0].color) {
-                    if (c <= 2) {
-                        c++;
-                    } else {
-                        c = 0;
-                    }
-                    md->players[player_idx].color = c;
+                    md->players[player_idx].color = gm_GetNextColor(c);
                 }
             }
             if (md->players[0].c_kind == CKIND_SEAK &&
@@ -371,12 +372,7 @@ void gm_801BAD70(GameScene* arg0)
             {
                 u8 c = md->players[player_idx].color;
                 if (c == md->players[0].color) {
-                    if (c <= 2) {
-                        c++;
-                    } else {
-                        c = 0;
-                    }
-                    md->players[player_idx].color = c;
+                    md->players[player_idx].color = gm_GetNextColor(c);
                 }
             }
             if (player_idx < 4) {
@@ -384,9 +380,6 @@ void gm_801BAD70(GameScene* arg0)
                 ev->x50[player_idx] = md->players[player_idx].color;
             }
         }
-
-        player_idx++;
-        player_init_off += 0x24;
     }
 
     if (levels[level]->kind == 2) {
@@ -406,12 +399,7 @@ void gm_801BAD70(GameScene* arg0)
         if (md->players[1].c_kind == md->players[0].c_kind) {
             u8 c = md->players[1].color;
             if (c == md->players[0].color) {
-                if (c <= 2) {
-                    c++;
-                } else {
-                    c = 0;
-                }
-                md->players[1].color = c;
+                md->players[1].color = gm_GetNextColor(c);
             }
         }
         if (md->players[0].c_kind == CKIND_SEAK &&
@@ -419,12 +407,7 @@ void gm_801BAD70(GameScene* arg0)
         {
             u8 c = md->players[1].color;
             if (c == md->players[0].color) {
-                if (c <= 2) {
-                    c++;
-                } else {
-                    c = 0;
-                }
-                md->players[1].color = c;
+                md->players[1].color = gm_GetNextColor(c);
             }
         }
         ev->x4C[1] = md->players[1].c_kind;
@@ -433,12 +416,7 @@ void gm_801BAD70(GameScene* arg0)
     if (level == 0x2B) {
         u8 c = ev->x50[2];
         if (ev->x4C[2] == ev->x4C[0] && ev->x50[0] == c) {
-            if (c <= 2) {
-                c++;
-            } else {
-                c = 0;
-            }
-            ev->x50[2] = c;
+            ev->x50[2] = gm_GetNextColor(c);
         }
     }
     if (level == 0x31) {
@@ -461,12 +439,7 @@ void gm_801BAD70(GameScene* arg0)
             if ((s8) ev->x0 == bonus->c_kind) {
                 u8 c;
                 if (ev->x1 == (c = bonus->color)) {
-                    if (c <= 2) {
-                        c++;
-                    } else {
-                        c = 0;
-                    }
-                    ev->x50[1] = c;
+                    ev->x50[1] = gm_GetNextColor(c);
                 }
             }
         } else {
