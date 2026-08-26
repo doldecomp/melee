@@ -1945,39 +1945,58 @@ static inline bool ftCo_IsAlly_dontinline(Fighter* fp0, Fighter* fp1)
     return ftCo_IsAlly(fp0, fp1);
 }
 
-static inline float ftCo_800A3908_inline0(Fighter* fp, s32 t)
+static inline bool ftCo_800A3908_inline0(
+    Fighter* fp, struct Fighter_x1A88_t* data, float x, float y)
 {
-    return fp->co_attrs.gravity * sqrtf((f32) t);
+    if (x < fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
+        x > Stage_GetBlastZoneRightOffset() - data->half_width ||
+        y < data->half_height + Stage_GetBlastZoneBottomOffset() ||
+        y > Stage_GetBlastZoneTopOffset() - data->half_height)
+    {
+        return true;
+    }
+    return false;
+}
+
+static inline s32 ftCo_800A3908_inline1(float x, float y)
+{
+    Vec3 floor_normal;
+    Vec3 floor_pos;
+    int line_id;
+    u32 flags;
+    s32 result;
+
+    line_id = -1;
+    result = mpCheckFloor(x, 5.0f + y, x, y - 5.0f, 0.0f, &floor_pos,
+                          &line_id, &flags, &floor_normal, -1, -1, -1, NULL,
+                          NULL);
+    if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
+        return 0;
+    }
+    return result;
 }
 
 bool ftCo_800A3908(Fighter* fp, bool arg1)
 {
-    struct Fighter_x1A88_t* data2;
-    struct Fighter_x1A88_t* data = &fp->x1A88;
-    s32 t;
     f32 ez;
-    int line_id;
+    struct Fighter_x1A88_t* data2;
+    mp_UnkStruct0* island;
     Vec3 island_pos;
-    Vec3 floor_normal;
-    Vec3 alt_floor_pos;
-    Vec3 alt_floor_normal;
-    f32 dist;
-    Vec3 floor_pos;
+    f32 ex;
     f32 ey;
-    u32 flags;
+    s32 valid;
     f32 grav;
     f32 dx;
     f32 px;
+    f32 dist;
     f32 ddx;
     f32 ddy;
-    mp_UnkStruct0* island;
+    s32 t;
     s32 frames;
-    s32 result;
-    s32 valid;
+    struct Fighter_x1A88_t* data = &fp->x1A88;
     s32 ok;
-    s32 oob;
 
-    PAD_STACK(0x20);
+    PAD_STACK(0x18);
 
     grav = fp->co_attrs.gravity;
     if (grav < 0.00001f && grav > -0.00001f) {
@@ -1994,13 +2013,13 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     for (island = mpIsland_80458E88.next; island != NULL;
          island = island->next)
     {
-        f32 ex;
         island_pos = island->x14;
         ex = island_pos.x;
-        ey = island_pos.y;
-        (void) ey;
+        {
+            f32 y = island_pos.y;
+            ey = y;
+        }
         ez = island_pos.z;
-        (void) ez;
         if (ex < fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
             ex > Stage_GetBlastZoneRightOffset() - data2->half_width ||
             ey < data2->half_height + Stage_GetBlastZoneBottomOffset() ||
@@ -2023,8 +2042,9 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
             if (frames <= 0) {
                 land_y = fp->pos_delta.y * t + fp->cur_pos.y;
             } else if (t < frames) {
-                land_y = fp->cur_pos.y + (fp->pos_delta.y * t -
-                                          0.5 * ftCo_800A3908_inline0(fp, t));
+                land_y = fp->cur_pos.y +
+                         (fp->pos_delta.y * t -
+                          0.5 * (fp->co_attrs.gravity * sqrtf((f32) t)));
             } else {
                 land_y =
                     fp->cur_pos.y +
@@ -2034,43 +2054,12 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
             }
             if (arg1 != 0) {
                 if (!(land_y + data->x558 < ey)) {
-                    valid = 0;
                     px = ex - 5.0;
+                    valid = ftCo_800A3908_inline1(px, ey);
+                    if (valid != 0 &&
+                        !ftCo_800A3908_inline0(fp, data2, px, ey))
                     {
-                        s32 floor_result;
-
-                        line_id = -1;
-                        floor_result = mpCheckFloor(
-                            px, 5.0f + ey, px, ey - 5.0f, 0.0f, &floor_pos,
-                            &line_id, &flags, &floor_normal, -1, -1, -1, NULL,
-                            NULL);
-                        result = floor_result;
-                        if (result != 0 &&
-                            ftCo_800A1B38_noinline(line_id) != 0)
-                        {
-                        } else {
-                            valid = result;
-                        }
-                    }
-                    if (valid != 0) {
-                        if (px < fp->x1A88.half_width +
-                                     Stage_GetBlastZoneLeftOffset() ||
-                            px > Stage_GetBlastZoneRightOffset() -
-                                     data2->half_width ||
-                            ey < data2->half_height +
-                                     Stage_GetBlastZoneBottomOffset() ||
-                            ey > Stage_GetBlastZoneTopOffset() -
-                                     data2->half_height)
-                        {
-                            oob = 1;
-                        } else {
-                            oob = 0;
-                        }
-                        if (oob == 0) {
-                            ok = 1;
-                        } else {
-                            ok = 0;
-                        }
+                        ok = 1;
                     } else {
                         ok = 0;
                     }
@@ -2090,41 +2079,12 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
             } else {
                 ddy = ey - fp->cur_pos.y;
                 px = ex - 5.0;
-                valid = 0;
                 ddx = px - fp->cur_pos.x;
+                valid = ftCo_800A3908_inline1(px, ey);
+                if (valid != 0 &&
+                    !ftCo_800A3908_inline0(fp, data2, px, ey))
                 {
-                    s32 floor_result;
-
-                    line_id = -1;
-                    floor_result = mpCheckFloor(
-                        px, 5.0f + ey, px, ey - 5.0f, 0.0f, &alt_floor_pos,
-                        &line_id, &flags, &alt_floor_normal, -1, -1, -1, NULL,
-                        NULL);
-                    result = floor_result;
-                    if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
-                    } else {
-                        valid = result;
-                    }
-                }
-                if (valid != 0) {
-                    if (px < fp->x1A88.half_width +
-                                 Stage_GetBlastZoneLeftOffset() ||
-                        px > Stage_GetBlastZoneRightOffset() -
-                                 data2->half_width ||
-                        ey < data2->half_height +
-                                 Stage_GetBlastZoneBottomOffset() ||
-                        ey >
-                            Stage_GetBlastZoneTopOffset() - data2->half_height)
-                    {
-                        oob = 1;
-                    } else {
-                        oob = 0;
-                    }
-                    if (oob == 0) {
-                        ok = 1;
-                    } else {
-                        ok = 0;
-                    }
+                    ok = 1;
                 } else {
                     ok = 0;
                 }
@@ -2136,7 +2096,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                             data2->x54.y = ey;
                             data2->x38 = 5.0f;
                             {
-                                s32 kind = stage_info.grkind;
+                                GrKind kind = stage_info.grkind;
                                 ftCo_800A1CC4(fp, ftCo_803C6594[kind]);
                             }
                         }
