@@ -532,22 +532,18 @@ void mn_8022FD18(u8 arg0)
 
 void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
 {
+    AnimLoopSettings* settings;
     struct mn_8022FB88_arg1_t* data;
     HSD_JObj** digit_jobjs;
-    struct mn_8022FEC8_jobj_ref_t* tens_ref;
-    struct mn_8022FEC8_jobj_ref_t* ones_ref;
-    u8* base;
     HSD_JObj* digit_jobj;
     HSD_JObj* digit_jobj2;
     HSD_JObj* tens_jobj;
     HSD_JObj* ones_jobj;
     int value;
-    f32* frame;
 
     PAD_STACK(0x18);
 
     data = HSD_GObjGetUserData(arg0);
-    base = mn_803EC600;
     switch ((s32) arg2) {
     case 1:
         if (((struct mn_8022FB88_arg1_t*) mn_804D6BD0->user_data)->x2 != 1) {
@@ -564,19 +560,17 @@ void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
         HSD_JObjAnimAll(digit_jobj2);
         return;
     case 3:
-        tens_ref = data->xA8;
-        if (tens_ref == NULL) {
+        if (data->xA8 == NULL) {
             tens_jobj = NULL;
         } else {
-            tens_jobj = tens_ref->x10;
+            tens_jobj = data->xA8->x10;
         }
         HSD_JObjReqAnimAll(tens_jobj, (f32) (u8) (arg3 / 10));
         HSD_JObjAnimAll(tens_jobj);
-        ones_ref = data->xAC;
-        if (ones_ref == NULL) {
+        if (data->xAC == NULL) {
             ones_jobj = NULL;
         } else {
-            ones_jobj = ones_ref->x10;
+            ones_jobj = data->xAC->x10;
         }
         HSD_JObjReqAnimAll(ones_jobj, (f32) (u8) (arg3 % 10));
         HSD_JObjAnimAll(ones_jobj);
@@ -593,25 +587,19 @@ void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
 
     if ((mn_804A04F0.buttons & 4) != 0) {
         if (arg2 == 0 || arg2 == 2 || arg2 == 4) {
-            u8* frame_base = base + 0x170;
-            frame = (f32*) (frame_base +
-                            (0xC * (base[0x1DD + (arg2 << 1)] - arg3)));
+            settings =
+                &mn_803EC770[mn_803EC7DC[arg2][1] - arg3];
         }
-        HSD_JObjReqAnimAll(arg1, *frame);
+        HSD_JObjReqAnimAll(arg1, settings->start_frame);
     } else {
         if (arg2 == 0 || arg2 == 2 || arg2 == 4) {
             if (arg3 == 0) {
-                frame =
-                    (f32*) (base + 0x134 + (0xC * base[0x1DD + (arg2 << 1)]));
-                (void) frame;
+                settings = &mn_803EC734[mn_803EC7DC[arg2][1]];
             } else {
-                frame = (f32*) (base + 0x134 + (0xC * (arg3 - 1)));
+                settings = &mn_803EC734[arg3 - 1];
             }
         }
-        {
-            f32 frame_value = *frame;
-            HSD_JObjReqAnimAll(arg1, frame_value);
-        }
+        HSD_JObjReqAnimAll(arg1, settings->start_frame);
     }
     HSD_JObjAnimAll(arg1);
 }
