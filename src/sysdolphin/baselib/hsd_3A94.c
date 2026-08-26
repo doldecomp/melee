@@ -3037,8 +3037,8 @@ static inline void fn_803AE7F8_close(CardState* state)
 }
 
 static inline s32 fn_803AE7F8_queue_write(CardState* state, s32 block,
-                                          s32 logical, s32 seq, void* data,
-                                          s32 size, s32 file_id)
+                                           s32 logical, s32 seq, void* data,
+                                           s32 size, s32 file_id)
 {
     s32 cmd[9];
     s32 init_cmd[9];
