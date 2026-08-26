@@ -44,6 +44,8 @@
 #include <melee/vi/vi1201v1.h>
 #include <melee/vi/vi1201v2.h>
 
+int __rlwinm(int, int, int, int);
+
 GameScene gm_803DF618_Scenes[] = {
     {
         0,
@@ -3124,10 +3126,27 @@ static inline struct gm_random_history* gm_GetRandomHistory(void)
     return (struct gm_random_history*) gmMainLib_804D3EE0;
 }
 
+static inline s32 gm_GetCharacterUsage(s32 index)
+{
+    return gm_GetRandomHistory()->character_usage[index];
+}
+
+static inline s32 gm_GetCharacterUsageDirect(s32 index)
+{
+    return ((struct gm_random_history*) gmMainLib_804D3EE0)
+        ->character_usage[index];
+}
+
+static inline s32 gm_GetStageUsage(s32 index)
+{
+    return gm_GetRandomHistory()->stage_usage[index];
+}
+
 void gm_801BF128(void)
 {
     s32 character_pool[29];
     s32 stage_pool[30];
+    s32* pool;
     s32 c;
     s32 count;
     s32 i;
@@ -3135,7 +3154,8 @@ void gm_801BF128(void)
     s32 a;
     s32 pick;
     s32 dup;
-    PAD_STACK(0x1C);
+    s32 prev;
+    u8 cur_id;
 
     count = 0;
     c = 0;
@@ -3149,10 +3169,8 @@ void gm_801BF128(void)
     character_pool[count] = CKIND_PLAYABLE_COUNT;
     for (i = 0; i < count; i++) {
         for (j = i + 1; j < count; j++) {
-            if ((s32) gm_GetRandomHistory()
-                    ->character_usage[character_pool[j]] >
-                (s32) gm_GetRandomHistory()
-                    ->character_usage[character_pool[i]])
+            if (gm_GetCharacterUsageDirect(character_pool[i]) >
+                gm_GetCharacterUsage(character_pool[j]))
             {
                 a = character_pool[i];
                 character_pool[i] = character_pool[j];
@@ -3161,9 +3179,10 @@ void gm_801BF128(void)
         }
     }
     c = 0;
+    pool = character_pool;
     do {
         do {
-            j = character_pool[HSD_Randi(8)];
+            j = pool[HSD_Randi(8)];
             dup = 0;
             for (pick = 0; pick < c; pick++) {
                 if (j == gm_801BF648(pick) ||
@@ -3176,31 +3195,29 @@ void gm_801BF128(void)
         } while (dup != 0);
         gm_801BF634(c, j);
         gm_801BF65C(c, 0);
-        c++;
-        gm_GetRandomHistory()->character_usage[j]++;
+        c += 1;
+        gm_GetRandomHistory()->character_usage[j] += 1;
     } while (c < 4);
     gm_801BF6C8(HSD_Randi(4));
-    {
-        s32 prev;
-        do {
-            gm_801BF6E8(HSD_Randi(4));
-            prev = gm_801BF6F8();
-        } while (gm_801BF6D8() == prev);
-    }
+    do {
+        gm_801BF6E8(HSD_Randi(4));
+        prev = gm_801BF6F8();
+        c = gm_801BF6D8();
+    } while (c == prev);
 
     c = (count = 0);
     do {
         if (gm_80164430(gm_801641CC(c)) != 0) {
             stage_pool[count] = c;
-            count++;
+            count += 1;
         }
-        c++;
+        c += 1;
     } while (c < 0x1D);
     stage_pool[count] = 0x1D;
     for (i = 0; i < count; i++) {
         for (j = i + 1; j < count; j++) {
-            if ((s32) gm_GetRandomHistory()->stage_usage[stage_pool[j]] >
-                (s32) gm_GetRandomHistory()->stage_usage[stage_pool[i]])
+            if (gm_GetStageUsage(stage_pool[i]) >
+                gm_GetStageUsage(stage_pool[j]))
             {
                 a = stage_pool[i];
                 stage_pool[i] = stage_pool[j];
@@ -3208,15 +3225,14 @@ void gm_801BF128(void)
             }
         }
     }
-    {
-        u32 cur_id;
-        do {
-            pick = stage_pool[HSD_Randi(8)];
-            cur_id = gm_801BF694();
-        } while ((s32) gm_801641CC((u8) pick) == (s32) cur_id);
-    }
-    gm_801BF684((s32) gm_801641CC((u8) pick));
-    gm_GetRandomHistory()->stage_usage[pick]++;
+    do {
+        count = stage_pool[HSD_Randi(8)];
+        cur_id = gm_801BF694();
+        prev = __rlwinm(cur_id, 0, 24, 31);
+        c = gm_801641CC((u8) count);
+    } while (c == prev);
+    gm_801BF684(gm_801641CC((u8) count));
+    gm_GetRandomHistory()->stage_usage[count] += 1;
     gm_801BF6A8(HSD_Randi(4));
 }
 
@@ -3316,7 +3332,7 @@ u8 gm_801BF670(s32 arg0)
     return gm_8049E548.x4[arg0];
 }
 
-void gm_801BF684(u16 arg0)
+void gm_801BF684(s32 arg0)
 {
     gm_8049E548.unk_C = arg0;
 }
