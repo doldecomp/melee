@@ -227,18 +227,53 @@ static inline s32 mnInfo_CountUnlocked(void)
     return count;
 }
 
-void fn_80251FE4(void)
+static inline void mnInfo_CreateEntries(MnInfoData* data)
 {
-    mnInfo_GObj* gobj;
-    MnInfoData* data;
-    u64 buttons;
     u8* trophy;
-    s32 count;
     s32 i;
+    mnInfo_GObj* gobj;
+
+    gobj = mnInfo_804D6C78;
+    trophy = &mnInfo_804A0968[data->scroll_idx];
+    for (i = 0; i < 4; i++) {
+        if (mnInfo_80251A08(*trophy) != 0) {
+            u8 id = *trophy;
+
+            mnInfo_80251D58(gobj, i, id, *gmMainLib_8015D804(id));
+            mnInfo_80251F04(gobj, i, id);
+        }
+        trophy++;
+    }
+}
+
+static inline void mnInfo_FreeEntries(void)
+{
     s32 j;
     MnInfoData* data2;
     MnInfoData* data3;
-    PAD_STACK(0x20);
+
+    j = 0;
+    data2 = mnInfo_804D6C78->user_data;
+    data3 = data2;
+    do {
+        if (data2->left_column[j] != NULL) {
+            HSD_SisLib_803A5CC4(data3->left_column[j]);
+            data2->left_column[j] = NULL;
+        }
+        if (data2->right_column[j] != NULL) {
+            HSD_SisLib_803A5CC4(data3->right_column[j]);
+            data2->right_column[j] = NULL;
+        }
+        j++;
+    } while (j < 4);
+}
+
+void fn_80251FE4(void)
+{
+    MnInfoData* data;
+    u64 buttons;
+    s32 count;
+    PAD_STACK(0x18);
 
     data = mnInfo_804D6C78->user_data;
     if (mn_804D6BC8.cooldown != 0) {
@@ -258,67 +293,16 @@ void fn_80251FE4(void)
         if (data->scroll_idx != 0) {
             data->scroll_idx -= 1;
             sfxMove();
-            j = 0;
-            data2 = mnInfo_804D6C78->user_data;
-            data3 = data2;
-            do {
-                if (data2->left_column[j] != NULL) {
-                    HSD_SisLib_803A5CC4(data3->left_column[j]);
-                    data2->left_column[j] = NULL;
-                }
-                if (data2->right_column[j] != NULL) {
-                    HSD_SisLib_803A5CC4(data3->right_column[j]);
-                    data2->right_column[j] = NULL;
-                }
-                j++;
-            } while (j < 4);
-            gobj = mnInfo_804D6C78;
-            trophy = &mnInfo_804A0968[data->scroll_idx];
-            for (i = 0; i < 4; i++) {
-                if (mnInfo_80251A08(*trophy) != 0) {
-                    u8 id = *trophy;
-
-                    mnInfo_80251D58(gobj, i, id, *gmMainLib_8015D804(id));
-                    mnInfo_80251F04(gobj, i, id);
-                }
-                trophy++;
-            }
+            mnInfo_FreeEntries();
+            mnInfo_CreateEntries(data);
         }
     } else if (buttons & MenuInput_Down) {
-        count = 0;
-        for (j = 0; j < 0x42; j++) {
-            if (mnInfo_80251A08(j) != 0) {
-                count++;
-            }
-        }
+        count = mnInfo_CountUnlocked();
         if ((data->scroll_idx + 4) < count) {
             sfxMove();
             data->scroll_idx += 1;
-            j = 0;
-            data2 = mnInfo_804D6C78->user_data;
-            data3 = data2;
-            do {
-                if (data2->left_column[j] != NULL) {
-                    HSD_SisLib_803A5CC4(data3->left_column[j]);
-                    data2->left_column[j] = NULL;
-                }
-                if (data2->right_column[j] != NULL) {
-                    HSD_SisLib_803A5CC4(data3->right_column[j]);
-                    data2->right_column[j] = NULL;
-                }
-                j++;
-            } while (j < 4);
-            gobj = mnInfo_804D6C78;
-            trophy = &mnInfo_804A0968[data->scroll_idx];
-            for (i = 0; i < 4; i++) {
-                if (mnInfo_80251A08(*trophy) != 0) {
-                    u8 id = *trophy;
-
-                    mnInfo_80251D58(gobj, i, id, *gmMainLib_8015D804(id));
-                    mnInfo_80251F04(gobj, i, id);
-                }
-                trophy++;
-            }
+            mnInfo_FreeEntries();
+            mnInfo_CreateEntries(data);
         }
     }
 }
