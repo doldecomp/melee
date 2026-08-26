@@ -144,7 +144,8 @@ bool fn_800D9930(Fighter_GObj* gobj)
                             effPos.x = jobj->mtx[0][3];
                             effPos.y = jobj->mtx[1][3];
                             effPos.z = jobj->mtx[2][3];
-                            effPos.x = 4.0 * (HSD_Randf() - 0.5f) + effPos.x;
+                            r = HSD_Randf();
+                            effPos.x = 4.0 * (r - 0.5f) + effPos.x;
                             effPos.y = 4.0 * (HSD_Randf() - 0.5f) + effPos.y;
                             r = HSD_Randf() - 0.5f;
                             effPos.z = 4.0 * r + effPos.z;
