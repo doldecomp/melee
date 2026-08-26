@@ -1589,6 +1589,11 @@ void fn_80199AF0(void)
     }
 }
 
+static inline BracketEntry* fn_8019A158_GetBracketEntry(s32 bracket_idx)
+{
+    return &lbl_80473AB8[bracket_idx];
+}
+
 /// @todo All instructions match; only the callee-saved register assignment
 /// is permuted against the target.
 void fn_8019A158(void)
@@ -1603,11 +1608,9 @@ void fn_8019A158(void)
     s32 counter;
     s32 i;
     int k;
-    UNUSED u8 unused[8];
     s32 local1, local2;
     MatchEnd* me;
     u8* cursor;
-    PAD_STACK(4);
 
     td1 = gm_GetTournamentData();
     lbl_804799D8.x48 = &gm_80477738;
@@ -1623,6 +1626,7 @@ void fn_8019A158(void)
     }
 
     me = lbl_804799D8.x48;
+    (void) me;
     result = fn_8018F508(&local2);
     if (result == 1) {
         slot = local2;
@@ -1647,7 +1651,8 @@ void fn_8019A158(void)
     }
 
     if (mode == 1) {
-        BracketEntry* bracket = &lbl_80473AB8[bracket_idx];
+        BracketEntry* bracket =
+            fn_8019A158_GetBracketEntry(bracket_idx);
         cursor = (u8*) bracket;
         for (i = 0; i < 4; i++) {
             if (i == slot) {
@@ -1658,7 +1663,8 @@ void fn_8019A158(void)
             cursor += 0x2C;
         }
     } else if (td1->x2D == 1) {
-        BracketEntry* bracket = &lbl_80473AB8[bracket_idx];
+        BracketEntry* bracket =
+            fn_8019A158_GetBracketEntry(bracket_idx);
         cursor = (u8*) bracket;
         for (i = 0; i < 4; i++) {
             if (cursor[0x4E] == 3) {
@@ -1679,7 +1685,8 @@ void fn_8019A158(void)
             cursor += 0x2C;
         }
     } else {
-        BracketEntry* bracket = &lbl_80473AB8[bracket_idx];
+        BracketEntry* bracket =
+            fn_8019A158_GetBracketEntry(bracket_idx);
         counter = 0;
         cursor = (u8*) bracket;
         for (i = 0; i < 4; i++) {
