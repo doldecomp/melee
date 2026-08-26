@@ -672,7 +672,7 @@ void gmClassic_OnLoad(void)
     gmClassic_80490880Data* o = &gmClassic_80490880;
     gm_803DDEC8Struct* entry;
     s32 i;
-    PAD_STACK(32);
+    PAD_STACK(40);
 
     for (entry = scene_data->matchups.x00; entry->x0 != 0x0D; entry++) {
         entry->xC = NULL;
