@@ -739,19 +739,16 @@ static inline int roll_cpu_type(void)
 static inline s8 findMatchingController(int spawn_slot, int costume_id)
 {
     s8 chr = Player_GetPlayerCharacter(spawn_slot);
-    s32 matching_slot = 0;
+    s32 matching_slot;
 
-find_matching_controller:
-    if (Player_GetPlayerSlotType(matching_slot) != Gm_PKind_NA &&
-        Player_GetFlagsBit1(matching_slot) == 0 &&
-        chr == Player_GetPlayerCharacter(matching_slot) &&
-        costume_id == (s32) Player_GetCostumeId(matching_slot))
-    {
-        return 1;
-    }
-    matching_slot += 1;
-    if (matching_slot < 6) {
-        goto find_matching_controller;
+    for (matching_slot = 0; matching_slot < 6; matching_slot++) {
+        if (Player_GetPlayerSlotType(matching_slot) != Gm_PKind_NA &&
+            Player_GetFlagsBit1(matching_slot) == 0 &&
+            chr == Player_GetPlayerCharacter(matching_slot) &&
+            costume_id == (s32) Player_GetCostumeId(matching_slot))
+        {
+            return 1;
+        }
     }
     return 0;
 }
