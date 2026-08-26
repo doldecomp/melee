@@ -67,14 +67,15 @@ bool fn_800D9558(Fighter_GObj* gobj)
                 }
                 grav = fp->mv.ca.specials.grav;
                 if (grav == (f32) attrs->xA0) {
-                    jobj = fp->parts[51].joint;
-                    HSD_JObjSetupMatrix(jobj);
-                    my = jobj->mtx[1][3];
+                    HSD_JObj* joint = fp->parts[51].joint;
+
+                    HSD_JObjSetupMatrix(joint);
+                    my = joint->mtx[1][3];
                     if (mpCheckAllRemap(NULL, NULL, NULL, NULL, -1, -1,
                                         fp->coll_data.cur_pos.x, my,
                                         2.0 * fp->facing_dir *
                                                 fp->x34_scale.y +
-                                            jobj->mtx[0][3],
+                                            joint->mtx[0][3],
                                         my))
                     {
                         it_802B7B84(fp->u.ss.x223C);
