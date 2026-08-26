@@ -262,33 +262,76 @@ void ifStock_802F8298(HSD_GObj* gobj)
     HSD_JObjAnimAll(jobj_anim);
 }
 
-static inline void ifStock_802F89F8_inline(struct IfStockUserData* user_data,
-                                           int count, int coins)
+static inline int ifStock_802F89F8_count(int coins)
 {
     int i;
+
+    for (i = 0; i < 32; i++) {
+        if (coins == 0) {
+            return i;
+        }
+        coins /= 10;
+    }
+    return 0;
+}
+
+static inline int ifStock_802F89F8_digit(int coins, int position)
+{
+    int i;
+    int divisor = 1;
+
+    if (position == 0) {
+        coins %= 10;
+        return coins;
+    }
+    if (position > 0) {
+        for (i = 0; i < position; i++) {
+            divisor *= 10;
+        }
+    }
+    return (coins / divisor) % 10;
+}
+
+void ifStock_802F89F8(HSD_GObj* gobj)
+{
+    struct IfStockUserData* user_data = GET_IFSTOCK(gobj);
+    int i;
+    int player = user_data->player;
+    HSD_JObj* jobj2 = ifStock_804A1378.player[player].x4[1];
+    HSD_JObj* jobj = gobj->hsd_obj;
+    int coins;
+    int count;
     int j;
     int temp;
     int digit;
+    Player_GetCoins(player);
+    PAD_STACK(32);
+    coins = Player_GetCoins(user_data->player);
+    ifStock_804A1378.player[user_data->player].coins = coins;
+    if ((u32) coins > 99999U) {
+        coins = 99999;
+    }
+    count = ifStock_802F89F8_count(coins);
+    if (count > 5) {
+        count = 5;
+    }
+    HSD_JObjReqAnimAll(jobj2, 0.0f);
+    HSD_TObjReqAnimAll(jobj2->u.dobj->mobj->tobj,
+                       gm_80168BF8(user_data->player));
+    HSD_AObjSetRate(jobj2->u.dobj->mobj->tobj->aobj, 0.0f);
     for (i = 0; i < 5; i++) {
         if (i < count) {
-            int divisor;
-            divisor = 1;
-            for (j = 0; j < i; j++) {
-                divisor *= 10;
+            int divisor = 1;
+            if (i != 0) {
+                for (j = 0; j < i; j++) {
+                    divisor *= 10;
+                }
             }
             HSD_JObjClearFlagsAll(
                 ifStock_804A1378.player[user_data->player].x4[13 - i],
                 JOBJ_HIDDEN);
             temp = count - i - 1;
-            if (temp == 0) {
-                digit = coins % 10;
-            } else {
-                divisor = 1;
-                for (j = 0; j < temp; j++) {
-                    divisor *= 10;
-                }
-                digit = (coins / divisor) % 10;
-            }
+            digit = ifStock_802F89F8_digit(coins, temp);
             HSD_JObjReqAnimAll(
                 ifStock_804A1378.player[user_data->player].x4[13 - i], digit);
         } else {
@@ -304,44 +347,6 @@ static inline void ifStock_802F89F8_inline(struct IfStockUserData* user_data,
             }
         }
     }
-}
-
-void ifStock_802F89F8(HSD_GObj* gobj)
-{
-    struct IfStockUserData* user_data = GET_IFSTOCK(gobj);
-    HSD_JObj* jobj = gobj->hsd_obj;
-    int player = user_data->player;
-    HSD_JObj* jobj2 = ifStock_804A1378.player[player].x4[1];
-    int coins;
-    int i;
-    int coins2;
-    int count;
-    Player_GetCoins(player);
-    PAD_STACK(32);
-    coins = Player_GetCoins(user_data->player);
-    ifStock_804A1378.player[user_data->player].coins = coins;
-    if ((u32) coins > 99999U) {
-        coins = 99999;
-    }
-    coins2 = coins;
-    for (i = 0; i < 32; i++) {
-        if (coins2 != 0) {
-            coins2 /= 10;
-        } else {
-            goto count_done;
-        }
-    }
-    i = 0;
-count_done:
-    count = i;
-    if (count > 5) {
-        count = 5;
-    }
-    HSD_JObjReqAnimAll(jobj2, 0.0f);
-    HSD_TObjReqAnimAll(jobj2->u.dobj->mobj->tobj,
-                       gm_80168BF8(user_data->player));
-    HSD_AObjSetRate(jobj2->u.dobj->mobj->tobj->aobj, 0.0f);
-    ifStock_802F89F8_inline(user_data, count, coins);
     HSD_JObjAnimAll(jobj);
 }
 
