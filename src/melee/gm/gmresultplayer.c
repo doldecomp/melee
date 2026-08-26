@@ -42,6 +42,25 @@
 #include <baselib/random.h>
 #include <baselib/tobj.h>
 
+static void gmresultplayer_sdata2_order(void)
+{
+    (void) 0.0;
+    (void) S32_TO_F32;
+    (void) 10.0f;
+    (void) 40.0f;
+    (void) 0.0f;
+    (void) 1.0f;
+    (void) 0.200000003f;
+    (void) 0.300000012f;
+    (void) 0.0500000007f;
+    (void) 50.0f;
+    (void) 1.0;
+    (void) 29.0f;
+    (void) 30.0f;
+    (void) 120.0f;
+    (void) U32_TO_F32;
+}
+
 extern ResultsData lbl_8046DBE8;
 
 typedef struct {
@@ -419,21 +438,17 @@ bool fn_80177DD0(int slot)
 
 static s32 lbl_804D3FC8 = 1;
 
-static inline MatchEnd* fn_80178050_inline(void)
-{
-    return fn_80174274();
-}
-
 void fn_80178050(HSD_GObj* arg0)
 {
-    MatchEnd* match_end;
-    HSD_JObj* jobj;
-    s32 var_r24;
+    s32 k2;
+    s32 k3;
     ResultsData* data = &lbl_8046DBE8;
+    HSD_JObj* jobj;
+    MatchEnd* match_end = fn_80174274();
+    s32 var_r24;
 
     PAD_STACK(16);
 
-    match_end = fn_80178050_inline();
     jobj = arg0->hsd_obj;
     var_r24 = 0;
 
@@ -488,8 +503,7 @@ void fn_80178050(HSD_GObj* arg0)
             }
 
             {
-                HSD_PadStatus* pad = HSD_PadCopyStatus;
-                s32 k2 = 0;
+                k2 = 0;
                 do {
                     u8 slot = match_end->player_standings[k2].slot_type;
                     if (slot == 0) {
@@ -497,7 +511,7 @@ void fn_80178050(HSD_GObj* arg0)
                             if (fn_80177B7C(k2) != 0) {
                                 fn_80174B4C(data, k2);
                             }
-                            if ((pad->err != 0) ||
+                            if ((HSD_PadCopyStatus[k2].err != 0) ||
                                 (HSD_PadCopyStatus[(u8) k2].trigger &
                                  PAD_BUTTON_START))
                             {
@@ -565,7 +579,7 @@ void fn_80178050(HSD_GObj* arg0)
                         }
                         if (lbl_804D3FC8 != 0) {
                             data->player_data[k2].x0_0 = 0;
-                            if ((pad->err == 0) &&
+                            if ((HSD_PadCopyStatus[k2].err == 0) &&
                                 (HSD_PadCopyStatus[(u8) k2].trigger &
                                  PAD_BUTTON_START))
                             {
@@ -574,7 +588,8 @@ void fn_80178050(HSD_GObj* arg0)
                             }
                         }
                     } else if (slot == 3) {
-                        if ((lbl_804D3FC8 != 0) && (pad->err == 0) &&
+                        if ((lbl_804D3FC8 != 0) &&
+                            (HSD_PadCopyStatus[k2].err == 0) &&
                             (HSD_PadCopyStatus[(u8) k2].trigger &
                              PAD_BUTTON_START))
                         {
@@ -583,12 +598,11 @@ void fn_80178050(HSD_GObj* arg0)
                         }
                     }
                     k2++;
-                    pad++;
                 } while (k2 < 4);
             }
 
             {
-                s32 k3 = 0;
+                k3 = 0;
                 do {
                     if (match_end->player_standings[k3].slot_type != 3) {
                         if (!data->player_data[k3].x0_1) {
