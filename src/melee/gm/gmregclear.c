@@ -710,30 +710,13 @@ static inline void gm_8017CE34_SetupColors(UnkAdventureData* arg1, s32 count,
                                            s8* arg2, u8* colors)
 {
     s32 color_idx;
+    u8* out_color = colors;
+    s8* kind_iter = arg2;
 
-    {
-        u8* out_color = colors;
-        s8* kind_iter = arg2;
-        for (color_idx = 0; color_idx < 3; color_idx++) {
-            u8 kind = (u8) *kind_iter;
-            u8 num_colors = gm_80169238(kind);
-            u8 color_id;
-            if (arg1->x54 != NULL) {
-                u8 requested_color;
-                requested_color =
-                    arg1->x54((u8) count, arg1->x0.cpu_level, (u8) color_idx);
-                if (num_colors != 0) {
-                    color_id = requested_color % num_colors;
-                } else {
-                    color_id = 0;
-                }
-            } else {
-                color_id = 0;
-            }
-            *out_color = color_id;
-            out_color += 1;
-            kind_iter += 1;
-        }
+    for (color_idx = 0; color_idx < 3; color_idx++) {
+        *out_color = gm_8017CD94(arg1, (u8) *kind_iter, count, color_idx);
+        out_color++;
+        kind_iter++;
     }
 }
 
@@ -839,13 +822,15 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
         player_stocks = arg1->x0.stocks;
     }
 
-    player_ckind = (u8) arg1->x0.ckind;
-    if ((player_ckind == CKIND_ZELDA) && (arg1->x0.xC.x12 != 0)) {
+    if ((arg1->x0.ckind == CKIND_ZELDA) &&
+        (arg1->x0.xC.x12 != 0)) {
         player_ckind = CKIND_SEAK;
     } else if (((arg1->x0.x8 & 0x80) != 0) && (arg1->x0.x9 == 1) &&
-               ((s8) player_ckind == CKIND_POPONANA))
+               (arg1->x0.ckind == CKIND_POPONANA))
     {
         player_ckind = CHKIND_POPO;
+    } else {
+        player_ckind = (u8) arg1->x0.ckind;
     }
 
     gm_801B0620(arg0->players, player_ckind, arg1->x0.color, player_stocks,
