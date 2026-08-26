@@ -42,6 +42,8 @@
 #include <baselib/random.h>
 #include <baselib/tobj.h>
 
+/// @todo .sdata2 order hack
+#ifdef MUST_MATCH
 static void gmresultplayer_sdata2_order(void)
 {
     (void) 0.0;
@@ -60,6 +62,26 @@ static void gmresultplayer_sdata2_order(void)
     (void) 120.0f;
     (void) U32_TO_F32;
 }
+
+static void gmresultplayer_sdata2_order_2(void)
+{
+    // Preserve duplicate single-precision bit patterns in the constant pool.
+    GXColor value0 = { 0x00, 0x00, 0x00, 0x00 };
+    GXColor value1 = { 0x3F, 0x80, 0x00, 0x00 };
+    GXColor value100 = { 0x42, 0xC8, 0x00, 0x00 };
+    GXColor value10 = { 0x41, 0x20, 0x00, 0x00 };
+    GXColor value_s32_hi = { 0x43, 0x30, 0x00, 0x00 };
+    GXColor value_s32_lo = { 0x80, 0x00, 0x00, 0x00 };
+
+    (void) value0;
+    (void) value1;
+    (void) value100;
+    (void) value10;
+    (void) value_s32_hi;
+    (void) value_s32_lo;
+    (void) -300.0f;
+}
+#endif
 
 extern ResultsData lbl_8046DBE8;
 
@@ -149,7 +171,7 @@ typedef struct {
 
 lbl_8046E3AC_t lbl_8046E3AC;
 
-typedef struct ResultsDisplayData {
+typedef struct ResultsDisplayDataOverlay {
     /* 0x000 */ u8 pad_000[0x104];
     /* 0x104 */ HSD_ImageDesc player_img1[4];
     /* 0x164 */ HSD_ImageDesc player_img2[4];
@@ -157,9 +179,27 @@ typedef struct ResultsDisplayData {
     /* 0x1DC */ HSD_GObj* gobjs[4];
     /* 0x1EC */ HSD_JObj* jobjs[4];
     /* 0x1FC */ lbl_8046E3AC_t state;
+} ResultsDisplayDataOverlay;
+
+typedef struct ResultsDisplayData {
+    /* 0x000 */ u8 pad_000[0x104];
+    /* 0x104 */ HSD_ImageDesc player_img1[4];
+    /* 0x164 */ HSD_ImageDesc player_img2[4];
+    /* 0x1C4 */ HSD_ImageDesc shared_img;
 } ResultsDisplayData;
 
 ResultsDisplayData lbl_8046E1B0;
+
+/// @todo .bss order hack
+#ifdef MUST_MATCH
+static void order_bss(void)
+{
+    (void) lbl_8046E1B0;
+    (void) lbl_8046E38C;
+    (void) lbl_8046E39C;
+    (void) lbl_8046E3AC;
+}
+#endif
 
 void gm_80177724(struct ResultsMatchInfo* arg0)
 {
@@ -1109,7 +1149,8 @@ int fn_801796F0(int arg0)
 
 void fn_80179854(void)
 {
-    ResultsDisplayData* disp = &lbl_8046E1B0;
+    ResultsDisplayDataOverlay* disp =
+        (ResultsDisplayDataOverlay*) &lbl_8046E1B0;
     MatchEnd* match_end = &disp->state.match_end;
     GXColor color1 = { 0, 0, 0, 0 };
     GXColor color2 = { 0, 0, 0, 0x3C };
@@ -1144,7 +1185,7 @@ static inline int get_big_loser(int slot, MatchEnd* match_end)
     return match_end->player_standings[slot].is_big_loser;
 }
 
-static inline HSD_JObj** get_result_jobjs(ResultsDisplayData* disp)
+static inline HSD_JObj** get_result_jobjs(ResultsDisplayDataOverlay* disp)
 {
     return disp->jobjs;
 }
@@ -1163,7 +1204,8 @@ static inline void prepare_capture(int slot, MatchEnd* match_end,
 
 void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
 {
-    ResultsDisplayData* disp = &lbl_8046E1B0;
+    ResultsDisplayDataOverlay* disp =
+        (ResultsDisplayDataOverlay*) &lbl_8046E1B0;
     MatchEnd* match_end = &disp->state.match_end;
     HSD_JObj* child_jobj;
     HSD_CObj* cobj;
@@ -1370,7 +1412,8 @@ void fn_8017A004(void)
 
 void fn_8017A078(s32 arg0)
 {
-    ResultsDisplayData* disp = &lbl_8046E1B0;
+    ResultsDisplayDataOverlay* disp =
+        (ResultsDisplayDataOverlay*) &lbl_8046E1B0;
     ResultsPlayerConfig const* config = &lbl_803B7B68;
     Vec3 eye;
     Vec3 interest;
@@ -1423,7 +1466,8 @@ HSD_GObj* fn_8017A318(s32 arg0)
     static Scissor const scissor_init = { 270, 370, 124, 276 };
     u32* config = (u32*) &lbl_803B7B68;
     CameraKindData* data = &lbl_803D6A08;
-    ResultsDisplayData* disp = &lbl_8046E1B0;
+    ResultsDisplayDataOverlay* disp =
+        (ResultsDisplayDataOverlay*) &lbl_8046E1B0;
     MatchEnd* match_end = &disp->state.match_end;
     s32 _pad[2];
     Scissor scissor;
@@ -1522,7 +1566,8 @@ HSD_GObj* fn_8017A318(s32 arg0)
 Fighter_GObj* fn_8017A67C(CharacterKind kind, int arg1, int arg2)
 {
     ResultsPlayerConfig const* config = &lbl_803B7B68;
-    ResultsDisplayData* disp = &lbl_8046E1B0;
+    ResultsDisplayDataOverlay* disp =
+        (ResultsDisplayDataOverlay*) &lbl_8046E1B0;
     MatchEnd* match_end = &disp->state.match_end;
     HSD_GObj* gobj = NULL;
     int slot_type;
@@ -1629,7 +1674,8 @@ static inline void inline1(HSD_ImageDesc* imgs, int slot, const u16* w,
 
 void fn_8017A9B4(int slot)
 {
-    ResultsDisplayData* disp = &lbl_8046E1B0;
+    ResultsDisplayDataOverlay* disp =
+        (ResultsDisplayDataOverlay*) &lbl_8046E1B0;
     MatchEnd* match_end = &disp->state.match_end;
     int lookup;
 
@@ -1663,7 +1709,7 @@ static s32 lbl_804D3FF8 = 0x000E000E;
 static s32 lbl_804D3FFC = 0x00060000;
 
 static inline struct MatchTeamData*
-fn_8017AA78_get_team_standings(ResultsDisplayData* disp)
+fn_8017AA78_get_team_standings(ResultsDisplayDataOverlay* disp)
 {
     return disp->state.match_end.team_standings;
 }
@@ -1676,7 +1722,8 @@ static inline PackedS16x4* fn_8017AA78_get_score_entry(int i,
 
 void fn_8017AA78(const u8* arg0)
 {
-    ResultsDisplayData* disp = &lbl_8046E1B0;
+    ResultsDisplayDataOverlay* disp =
+        (ResultsDisplayDataOverlay*) &lbl_8046E1B0;
     u32* p5;
     u32* p7;
     lbl_8046E3AC_t* state;
