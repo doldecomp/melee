@@ -513,7 +513,7 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
     u8* work_r8;
     u8* work_r9;
 
-    PAD_STACK(0x30);
+    PAD_STACK(0x28);
     base = hsd_804D2E70;
     work_r9 = &base[0x118];
     for (work_r10 = 0; work_r10 < 4; work_r10++) {
