@@ -1544,155 +1544,141 @@ void grZebes_801DAE70(s32 arg0, u8 arg1, f32 x, f32 y, f32 scale)
 
 s32 grZebes_801DB088(Ground* gp, s32 arg1)
 {
-    u8 _[0x38];
-    grZe_BubbleEntry* entry = &grZe_8049F170[arg1];
     s32 result = 0;
+    PAD_STACK(0xC);
 
-    if (entry->x00_active != 0) {
-        HSD_GObj** gobjp =
-            &((grZe_BubbleState*) grZe_8049F140)->bubbles[arg1].x20_gobj;
-        HSD_GObj* gobj = *gobjp;
+    if (grZe_8049F170[arg1].x00_active != 0) {
+        HSD_GObj* gobj = grZe_8049F170[arg1].x20_gobj;
 
         if (gobj != NULL) {
             Ground* bgp = GET_GROUND(gobj);
 
             if (bgp != NULL) {
-                Item_GObj* mat = bgp->u.zebes3.xC4;
-
-                if (mat != NULL) {
-                    if (entry->x00_active == 1) {
-                        grMaterial_801C8E08(mat);
+                if (bgp->u.zebes3.xC4 != NULL) {
+                    if (grZe_8049F170[arg1].x00_active == 1) {
+                        grMaterial_801C8E08(bgp->u.zebes3.xC4);
                     } else {
-                        grMaterial_801C8E28(mat);
+                        grMaterial_801C8E28(bgp->u.zebes3.xC4);
                     }
                 }
 
                 {
-                    f32* targetp = &((grZe_BubbleState*) grZe_8049F140)
-                                        ->bubbles[arg1]
-                                        .x1C;
                     f32 speed = yakumono_param->x68;
-                    f32* sizep = &((grZe_BubbleState*) grZe_8049F140)
-                                      ->bubbles[arg1]
-                                      .x18_size;
-                    f32 target = *targetp;
-                    f32 current = *sizep;
+                    f32 target = grZe_8049F170[arg1].x1C;
+                    f32 current = grZe_8049F170[arg1].x18_size;
                     f32 diff = target - current;
 
-                    if (diff > speed) {
-                        *sizep = current + speed;
+                    if (speed < diff) {
+                        grZe_8049F170[arg1].x18_size = current + speed;
                     } else if (diff < -speed) {
-                        *sizep = current - speed;
+                        grZe_8049F170[arg1].x18_size = current - speed;
                     } else {
-                        *sizep = target;
+                        grZe_8049F170[arg1].x18_size = target;
                     }
 
+                    if (grZe_8049F170[arg1].x04 != NULL &&
+                        grAnime_801C83D0(grZe_8049F170[arg1].x20_gobj, 0, 7) !=
+                            0)
                     {
-                        HSD_JObj** jobjp = &((grZe_BubbleState*) grZe_8049F140)
-                                                ->bubbles[arg1]
-                                                .x04;
-
-                        if (*jobjp != NULL &&
-                            grAnime_801C83D0(*gobjp, 0, 7) != 0)
-                        {
-                            HSD_JObjRemoveAll(*jobjp);
-                            *jobjp = NULL;
-                            {
-                                HSD_JObj* jobj = GET_JOBJ(*gobjp);
-                                if (jobj != NULL) {
-                                    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-                                }
-                            }
+                        HSD_JObj* jobj = grZe_8049F170[arg1].x04;
+                        HSD_JObjRemoveAll(jobj);
+                        grZe_8049F170[arg1].x04 = NULL;
+                        if (GET_JOBJ(grZe_8049F170[arg1].x20_gobj) != NULL) {
+                            HSD_JObjClearFlagsAll(
+                                GET_JOBJ(grZe_8049F170[arg1].x20_gobj),
+                                JOBJ_HIDDEN);
                         }
+                    }
 
-                        switch (entry->x00_active) {
-                        case 3: {
-                            s16 t = entry->x02_timer;
-                            entry->x02_timer = (s16) (t - 1);
-                            if (t < 0) {
-                                Item_GObj* m = bgp->u.zebes3.xC4;
-                                if (m != NULL) {
-                                    grMaterial_801C8CDC(m);
-                                }
-                                Ground_801C4A08(entry->x20_gobj);
-                                {
-                                    Vec3 pos;
-                                    pos.x = entry->x08_x;
-                                    pos.y = entry->x0C_y;
-                                    pos.z = 4.0f;
-                                    grLib_801C96F8(0x7530, 0x1E, &pos);
-                                }
-                                Ground_801C5440(gp, 0, 0x61A86);
-                                entry->x20_gobj = NULL;
-                                entry->x04 = NULL;
-                                entry->x00_active = 0;
+                    switch (grZe_8049F170[arg1].x00_active) {
+                    case 3: {
+                        s16 t = grZe_8049F170[arg1].x02_timer;
+                        grZe_8049F170[arg1].x02_timer = (s16) (t - 1);
+                        if (t < 0) {
+                            if (bgp->u.zebes3.xC4 != NULL) {
+                                grMaterial_801C8CDC(bgp->u.zebes3.xC4);
                             }
-                            break;
-                        }
-                        case 2: {
-                            Item_GObj* m = bgp->u.zebes3.xC4;
-                            if (m != NULL) {
-                                grMaterial_801C8CDC(m);
-                            }
-                            Ground_801C4A08(entry->x20_gobj);
+                            Ground_801C4A08(grZe_8049F170[arg1].x20_gobj);
                             {
                                 Vec3 pos;
-                                pos.x = entry->x08_x;
-                                pos.y = entry->x0C_y;
+                                pos.x = grZe_8049F170[arg1].x08_x;
+                                pos.y = grZe_8049F170[arg1].x0C_y;
                                 pos.z = 4.0f;
                                 grLib_801C96F8(0x7530, 0x1E, &pos);
                             }
-                            entry->x20_gobj = NULL;
-                            entry->x04 = NULL;
-                            entry->x00_active = 0;
+                            Ground_801C5440(gp, 0, 0x61A86);
+                            grZe_8049F170[arg1].x20_gobj = NULL;
+                            grZe_8049F170[arg1].x04 = NULL;
+                            grZe_8049F170[arg1].x00_active = 0;
+                        }
+                        break;
+                    }
+                    case 2: {
+                        grZe_BubbleEntry* entry = &grZe_8049F170[arg1];
+                        if (bgp->u.zebes3.xC4 != NULL) {
+                            grMaterial_801C8CDC(bgp->u.zebes3.xC4);
+                        }
+                        Ground_801C4A08(grZe_8049F170[arg1].x20_gobj);
+                        {
+                            Vec3 pos;
+                            pos.x = grZe_8049F170[arg1].x08_x;
+                            pos.y = grZe_8049F170[arg1].x0C_y;
+                            pos.z = 4.0f;
+                            grLib_801C96F8(0x7530, 0x1E, &pos);
+                        }
+                        grZe_8049F170[arg1].x20_gobj = NULL;
+                        grZe_8049F170[arg1].x04 = NULL;
+                        grZe_8049F170[arg1].x00_active = 0;
 
-                            if (arg1 < 7 && arg1 != 0 && arg1 != 6) {
-                                f32 best_dist = 64.0f;
-                                s32 best_idx = -1;
-                                s32 j;
-                                f32 ey = entry->x0C_y;
-                                f32 ex = entry->x08_x;
+                        if (arg1 < 7 && arg1 != 0 && arg1 != 6) {
+                            f32 best_dist = 64.0f;
+                            s32 best_idx = -1;
+                            s32 j;
+                            f32 ey = entry->x0C_y;
+                            f32 ex = entry->x08_x;
 
-                                for (j = 7; j < 20; j++) {
-                                    if (grZe_8049F170[j].x00_active == 1) {
-                                        f32 dx = grZe_8049F170[j].x08_x - ex;
-                                        f32 dy = grZe_8049F170[j].x0C_y - ey;
-                                        f32 dx2 = dx * dx;
-                                        f32 dy2 = dy * dy;
-                                        f32 dist = dx2 + dy2;
-                                        if (dist < best_dist) {
-                                            best_idx = j;
-                                            best_dist = dist;
-                                        }
+                            for (j = 7; j < 20; j++) {
+                                if (grZe_8049F170[j].x00_active == 1) {
+                                    f32 dx = grZe_8049F170[j].x08_x - ex;
+                                    f32 dy = grZe_8049F170[j].x0C_y - ey;
+                                    f32 dx2 = dx * dx;
+                                    f32 dy2 = dy * dy;
+                                    f32 dist = dx2 + dy2;
+                                    if (dist < best_dist) {
+                                        best_idx = j;
+                                        best_dist = dist;
                                     }
-                                }
-
-                                if (best_idx != -1) {
-                                    grZe_BubbleEntry* src =
-                                        &grZe_8049F170[best_idx];
-                                    entry->x00_active = src->x00_active;
-                                    *jobjp = src->x04;
-                                    *sizep = src->x18_size;
-                                    *targetp = src->x1C;
-                                    *gobjp = src->x20_gobj;
-                                    src->x00_active = 0;
-                                    src->x20_gobj = NULL;
-                                } else {
-                                    for (j = 7; j < 20; j++) {
-                                        if (j != 0 && j != 6 &&
-                                            grZe_8049F170[j].x00_active == 1)
-                                        {
-                                            grZe_8049F170[j].x00_active = 3;
-                                            grZe_8049F170[j].x02_timer =
-                                                (s16) (HSD_Randi(0x3C) + 0x0A);
-                                        }
-                                    }
-                                    result = 1;
                                 }
                             }
-                            break;
+
+                            if (best_idx != -1) {
+                                grZe_8049F170[arg1].x00_active =
+                                    grZe_8049F170[best_idx].x00_active;
+                                grZe_8049F170[arg1].x04 =
+                                    grZe_8049F170[best_idx].x04;
+                                grZe_8049F170[arg1].x18_size =
+                                    grZe_8049F170[best_idx].x18_size;
+                                grZe_8049F170[arg1].x1C =
+                                    grZe_8049F170[best_idx].x1C;
+                                grZe_8049F170[arg1].x20_gobj =
+                                    grZe_8049F170[best_idx].x20_gobj;
+                                grZe_8049F170[best_idx].x00_active = 0;
+                                grZe_8049F170[best_idx].x20_gobj = NULL;
+                            } else {
+                                for (j = 7; j < 20; j++) {
+                                    if (j != 0 && j != 6 &&
+                                        grZe_8049F170[j].x00_active == 1)
+                                    {
+                                        grZe_8049F170[j].x00_active = 3;
+                                        grZe_8049F170[j].x02_timer =
+                                            (s16) (HSD_Randi(0x3C) + 0x0A);
+                                    }
+                                }
+                                result = 1;
+                            }
                         }
-                        }
+                        break;
+                    }
                     }
                 }
             }
