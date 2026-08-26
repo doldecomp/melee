@@ -385,15 +385,15 @@ Vec3 grZe_803E1C80[8] = {
 
 void grZebes_801D881C(HSD_GObj* gobj)
 {
-    Vec3 sp80;
-    Vec3 sp74;
-    f32 col_x[6];
-    f32 col_heights[6];
-    Vec3 sp28;
-    Vec3 sp1C;
-    f32 sp18;
-    f32 sp14;
+    f32 intercept;
+    Vec3 spot_pos;
+    Vec3 spot_interest;
+    Vec3 lower_point_pos;
     HSD_GObj* secondary_gobj;
+    f32 col_heights[6];
+    f32 slope;
+    f32 col_x[6];
+    Vec3 upper_point_pos;
     s32 popped;
     Ground* gp = GET_GROUND(gobj);
     s32 result;
@@ -513,13 +513,13 @@ void grZebes_801D881C(HSD_GObj* gobj)
         }
     }
 
-    sp80 = grZe_803B7FF0.spot_pos;
-    sp74 = grZe_803B7FF0.spot_interest;
+    spot_pos = grZe_803B7FF0.spot_pos;
+    spot_interest = grZe_803B7FF0.spot_interest;
     {
         HSD_JObj* jobj = Ground_801C3FA4(gobj, 0xE);
         if (jobj != NULL) {
-            lb_8000B1CC(jobj, &sp80, &grZe_8049F158[0]);
-            lb_8000B1CC(jobj, &sp74, &grZe_8049F140[0]);
+            lb_8000B1CC(jobj, &spot_pos, &grZe_8049F158[0]);
+            lb_8000B1CC(jobj, &spot_interest, &grZe_8049F140[0]);
         }
     }
 
@@ -582,26 +582,26 @@ void grZebes_801D881C(HSD_GObj* gobj)
             }
         }
 
-        sp28 = grZe_803B7FF0.upper_point_pos;
-        sp1C = grZe_803B7FF0.lower_point_pos;
+        upper_point_pos = grZe_803B7FF0.upper_point_pos;
+        lower_point_pos = grZe_803B7FF0.lower_point_pos;
 
         {
             HSD_JObj* sima_jobj;
             sima_jobj = Ground_801C3FA4(gobj, 0xE);
             HSD_ASSERT(0x293, sima_jobj);
-            lb_8000B1CC(sima_jobj, &sp28, &sp28);
+            lb_8000B1CC(sima_jobj, &upper_point_pos, &upper_point_pos);
         }
-        col_x[0] = sp28.x;
-        col_heights[0] = sp28.y;
+        col_x[0] = upper_point_pos.x;
+        col_heights[0] = upper_point_pos.y;
 
         {
             HSD_JObj* sima_jobj;
             sima_jobj = Ground_801C3FA4(secondary_gobj, 1);
             HSD_ASSERT(0x299, sima_jobj);
-            lb_8000B1CC(sima_jobj, &sp1C, &sp1C);
+            lb_8000B1CC(sima_jobj, &lower_point_pos, &lower_point_pos);
         }
-        col_x[5] = sp1C.x;
-        col_heights[5] = sp1C.y;
+        col_x[5] = lower_point_pos.x;
+        col_heights[5] = lower_point_pos.y;
 
         for (i = 0; i < 5; i++) {
             if (i != 0) {
@@ -627,9 +627,9 @@ void grZebes_801D881C(HSD_GObj* gobj)
         mpLib_80057BC0(0);
     }
 
-    Ground_801C4368(&sp18, &sp14);
+    Ground_801C4368(&slope, &intercept);
     grZakoGenerator_801CA43C((grZakoGenerator_Config*) gp->u.zebes5.xFC,
-                             Ground_801C3FA4(gobj, 0xE), sp18);
+                             Ground_801C3FA4(gobj, 0xE), slope);
     Ground_801C2FE0((Ground_GObj*) gobj);
     lb_800115F4();
 }
