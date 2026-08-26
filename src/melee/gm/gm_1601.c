@@ -3404,25 +3404,29 @@ void fn_8016758C(void)
     }
 }
 
-static inline int get_idx(void)
+static inline void get_idx(lbl_8046B6A0_t* info, int* idx)
 {
-    lbl_8046B6A0_t* info = gm_16AE_GetUnkData_1();
     int i;
     for (i = 0; i < ARRAY_SIZE(info->FighterMatchInfo); i++) {
         if (info->FighterMatchInfo[i].x8 == 0) {
-            return i;
+            *idx = i;
+            return;
         }
     }
-    return 0;
+    *idx = 0;
 }
 
 s32 fn_80167638(s32 arg0, Vec3* arg1, Vec3* arg2)
 {
-    int idx = get_idx();
-    s8 chr = Player_GetPlayerCharacter(arg0);
+    lbl_8046B6A0_t* info;
+    int idx;
+    s8 chr;
     s32 tmp;
-    PAD_STACK(8);
 
+    info = gm_16AE_GetUnkData_1();
+    get_idx(info, &idx);
+    chr = Player_GetPlayerCharacter(arg0);
+    PAD_STACK(8);
     if (stage_info.unk8C.b4) {
         Stage_80224E38(arg1, tmp = arg0);
         arg2->z = 0.0f;
@@ -3440,7 +3444,7 @@ s32 fn_80167638(s32 arg0, Vec3* arg1, Vec3* arg2)
             arg2->y = 0.0f;
         }
         {
-            lbl_8046B6A0_t* info = gm_16AE_GetUnkData_1();
+            info = gm_16AE_GetUnkData_1();
             PAD_STACK(8);
             info->FighterMatchInfo[idx].x8 = 0x90;
             info->FighterMatchInfo[idx].x9 = chr;
@@ -4089,8 +4093,7 @@ void gm_80168FC4(void)
 
 s32 fn_80169000(MatchEnd* arg0, u8* arg1)
 {
-    u8 operand_pad[4];
-    u8 handicaps[4];
+    u8 handicaps[6];
     u8 positions[4];
     u8* hp = handicaps;
     MatchEnd* p = arg0;
@@ -4098,7 +4101,8 @@ s32 fn_80169000(MatchEnd* arg0, u8* arg1)
     u8* hb = arg1;
     s32 count;
     s32 i;
-    UNUSED u8 pad[12];
+
+    PAD_STACK(8);
 
     count = 0;
     for (i = 0; i < 4; i++) {
