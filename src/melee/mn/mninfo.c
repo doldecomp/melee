@@ -92,6 +92,7 @@ void mnInfo_80251AFC(void)
 {
     s32 i;
     s32 j;
+    PAD_STACK(8);
 
     for (i = 0; 0x42 > i; i++) {
         mnInfo_804A0968[i] = i;
