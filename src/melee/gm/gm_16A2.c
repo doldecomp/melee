@@ -54,14 +54,6 @@ s32 fn_801693A8(void)
     return gm_1601_GetUnkData()->unk_10_b2;
 }
 
-static inline bool gm_801693BC_inline(u8 ckind)
-{
-    if (ckind - CKIND_BOY <= 1) {
-        return true;
-    }
-    return false;
-}
-
 /// Player is Fighting Wireframe
 bool gm_801693BC(int arg0)
 {
