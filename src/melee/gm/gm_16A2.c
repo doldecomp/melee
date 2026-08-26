@@ -337,10 +337,10 @@ s32 fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
             s8* dst2 = arg1;
             s8* src2 = arg2;
             while (*src2 != -2) {
-                while (lbl_8046B488.x1C0[idx] == -1) {
+                while ((result = (p = &lbl_8046B488.x0 + idx)[0x1C0]) == -1) {
                     idx = (idx + 1) % 27;
                 }
-                result = Player_800325C8(lbl_8046B488.x1C0[idx], 0);
+                result = Player_800325C8(result, 0);
                 *dst2 = result;
                 idx += 1;
                 src2 += 1;
@@ -363,38 +363,30 @@ s32 fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
 void fn_80169C54(s8 arg0, s8 arg1)
 {
     struct lbl_8046B488_t* st;
-    s32* bp;
-    s8* pc;
-    s8* cp;
     s32 buf[7];
+    s8* pc;
     s32 n;
     s32 i;
-    s32 j;
+    s32 count;
     s32 k;
+    s32 j;
+    s8* cp;
     s32 p;
     s32 ch;
 
-    PAD_STACK(8);
-
     n = 0;
     st = fn_8016AE60();
-    pc = (s8*) st;
-    bp = buf;
-    buf[0] = -1;
-    buf[1] = -1;
-    buf[2] = -1;
-    buf[3] = -1;
-    buf[4] = -1;
-    buf[5] = -1;
-    buf[6] = -1;
+    pc = &st->x0;
+    for (i = 0; i < 7; i++) {
+        buf[i] = -1;
+    }
     for (i = 0; i < 3; i++) {
         if ((s32) *pc == 4) {
             if (st->xB == 0) {
-                s32 count;
                 count = gm_80169238(4U);
                 for (k = 0; k < count; k++) {
-                    bp[k] = k;
-                    n += 1;
+                    buf[k] = k;
+                    n++;
                 }
             } else {
                 n = 1;
@@ -402,16 +394,16 @@ void fn_80169C54(s8 arg0, s8 arg1)
             }
             break;
         }
-        pc += 1;
+        pc++;
     }
 
     if (arg0 == 4) {
         buf[n] = arg1;
-        n += 1;
+        n++;
     }
     if (n > 0) {
         j = 0;
-        cp = (s8*) st;
+        cp = &st->x0;
         do {
             ch = *cp;
             if (0x21 != ch && ch != 4) {
@@ -428,8 +420,8 @@ void fn_80169C54(s8 arg0, s8 arg1)
                     }
                 }
             }
-            j += 1;
-            cp += 1;
+            j++;
+            cp++;
         } while (j < 3);
         if (arg0 != 4) {
             p = Player_800325C8((CharacterKind) arg0, 0);
@@ -448,19 +440,22 @@ void fn_80169C54(s8 arg0, s8 arg1)
     }
 }
 
-static inline void fn_80169F50_inline(s32 arg1, struct lbl_8046B488_t* gp,
-                                      int temp_arg0)
+static inline void fn_80169F50_inline(s8 costume, struct lbl_8046B488_t* gp,
+                                      int character)
 {
     s32 i;
-    if (temp_arg0 == 4 && gp->xE != 0) {
-        for (i = 0; gp->x20[i] != -2; i++) {
+    s32 costume_id;
+    if (character == 4 && gp->xE != 0) {
+        i = 0;
+        costume_id = costume;
+        for (; gp->x20[i] != -2; i++) {
             if (gp->x20[i] == -1) {
                 continue;
             }
             if (gp->x124[i] == -1) {
                 continue;
             }
-            Player_80031DA8(gp->x124[i], arg1);
+            Player_80031DA8(gp->x124[i], costume_id);
         }
     }
 }
@@ -476,14 +471,11 @@ void fn_80169F50(s8 arg0, s8 arg1)
 
     temp_arg0 = arg0;
     flag = 0;
-    if (gp->x0 == 4) {
-        flag = 1;
-    } else {
-        p = &gp->x1;
-        if (gp->x1 == 4) {
+    p = &gp->x0;
+    for (i = 0; i < 3; i++) {
+        if (p[i] == 4) {
             flag = 1;
-        } else if (p[1] == 4) {
-            flag = 1;
+            break;
         }
     }
 
@@ -598,11 +590,11 @@ s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, int a5, int mode, int a7,
                 int flag2, int flag1, f32 f1, f32 f2)
 {
     int i;
-    struct lbl_8046B488_t* gp;
+    struct lbl_8046B488_t* gp = &lbl_8046B488;
     struct gm_8016A22C_header* header;
     u8 x7_tmp;
 
-    memzero(&lbl_8046B488, 0x1C0);
+    memzero(gp, 0x1C0);
 
     lbl_8046B488.x0 = k0;
     lbl_8046B488.x1 = k1;
@@ -641,7 +633,6 @@ s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, int a5, int mode, int a7,
 
     lbl_8046B488.xC = a3;
 
-    gp = &lbl_8046B488;
     header = gm_8016A22C_header(gp);
     x7_tmp = header->bytes[7];
     memzero(header->x20, x7_tmp);
