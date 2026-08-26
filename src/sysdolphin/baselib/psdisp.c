@@ -1159,7 +1159,10 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
         f32 uz = up_z;
 
         axis.x = ry * uz - rz * up_y;
-        axis.y = rz * ux - rx * uz;
+        {
+            f32 axis_y_product = ux * rz;
+            axis.y = axis_y_product - rx * uz;
+        }
         axis.z = rx * up_y - ry * ux;
         PSMTXRotAxisRad(mtx, &axis, angle);
         t1 = mtx[1][0] * rx + mtx[1][1] * ry;
@@ -1209,9 +1212,8 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
                 Vec3* translate = &appsrt->translate;
                 Vec3* rotate = (Vec3*) &appsrt->rot;
                 Vec3* scale = &appsrt->scale;
-                MtxPtr mmtx = appsrt->mmtx;
 
-                HSD_MtxSRT(mmtx, scale, rotate, translate, NULL);
+                HSD_MtxSRT(appsrt->mmtx, scale, rotate, translate, NULL);
             }
             if (pp->appsrt->status == PS_APPSTATUS_ONCE) {
                 pp->appsrt->status = PS_APPSTATUS_STILL;
@@ -1287,7 +1289,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
                                (pp->appsrt->ssx * dx + pp->appsrt->ssy * dy));
         prev_pos.y =
             pp->appsrt->x80 + (pp->appsrt->x7C * dz +
-                               (pp->appsrt->x74 * dx + pp->appsrt->x78 * dy));
+                               (pp->appsrt->x78 * dy + pp->appsrt->x74 * dx));
         prev_pos.z =
             pp->appsrt->x90 + (pp->appsrt->x8C * dz +
                                (pp->appsrt->x84 * dx + pp->appsrt->x88 * dy));
