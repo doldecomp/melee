@@ -648,24 +648,26 @@ void hsd_80394434(void* text)
     }
 }
 
-// @TODO: Currently 91.32% match - needs register allocation fix
+// @TODO: Needs register allocation fix
 void hsd_80394544(s32 col, s32 row, u32 num_cols, u32 num_rows, s32 x, s32 y,
                   s32 xfb_buf, s32 xfb_w, s32 xfb_h, s32 xfb_stride,
                   s32 font_data, void* color_data)
 {
     s32 cur_x;
-    s32 interlace;
     u32 r;
     u32 c;
     s32 mode;
+    s32 interlace;
     u8 ch;
+    s32 cur_row;
 
     mode = hsd_804CF810.x0_b7;
     interlace = hsd_804CF810.x0_b6;
     r = 0;
 
     while (r < num_rows) {
-        hsd_80393E68(col, row);
+        cur_row = row;
+        hsd_80393E68(col, cur_row);
         y -= 14;
 
         for (cur_x = x + (c = 0) * 11; c < num_cols; c++) {
@@ -675,11 +677,11 @@ void hsd_80394544(s32 col, s32 row, u32 num_cols, u32 num_rows, s32 x, s32 y,
             }
             if (mode != 0) {
                 hsd_803922FC((void*) (font_data + (ch & 0x7F) * 0x38), cur_x,
-                             y, interlace, xfb_buf, xfb_w, xfb_stride, xfb_h,
+                             y, interlace, xfb_buf, xfb_w, xfb_h, xfb_stride,
                              color_data);
             } else {
                 hsd_803921B8((void*) (font_data + (ch & 0x7F) * 0x38), cur_x,
-                             y, xfb_buf, xfb_w, xfb_stride, xfb_h, color_data);
+                             y, xfb_buf, xfb_w, xfb_h, xfb_stride, color_data);
             }
             cur_x += 11;
         }
