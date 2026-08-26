@@ -183,13 +183,19 @@ return_true:
     return true;
 }
 
+static inline s32 gmResultFormatLabel(s32 slot, StatsEntry* entry,
+                                      f32 zero, f32 neg30, HSD_Text* text)
+{
+    return HSD_SisLib_803A6B98(text, zero, neg30, "%s", entry->get(slot));
+}
+
 void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
                  StatsList* list, s32 entry_idx)
 {
     s32 value_id;
-    StatsEntry* entry;
-    s32 label_id;
     s32 result;
+    s32 label_id;
+    StatsEntry* entry;
     s32 idx;
     s32 stat_value;
     /* Variables for inlined unrolled loop */
@@ -268,9 +274,8 @@ void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
         }
         if (list->mode != 2) {
             if (entry->get != NULL) {
-                label_id = HSD_SisLib_803A6B98(
-                    text2, const_zero, const_neg30, "%s",
-                    entry->get(slot));
+                label_id = gmResultFormatLabel(slot, entry, const_zero,
+                                               const_neg30, text2);
             }
         }
     } else if (list->mode != 2) {
