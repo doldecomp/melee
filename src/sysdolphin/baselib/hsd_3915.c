@@ -410,9 +410,9 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
     GXWGFifo.f32 = x1;
     i = 0;
     a = color->a;
-    b = color->b;
-    GXWGFifo.f32 = y1;
     r = color->r;
+    GXWGFifo.f32 = y1;
+    b = color->b;
     g = color->g;
 
     tick6_y = 6.0F * perp_y;
