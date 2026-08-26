@@ -589,6 +589,8 @@ void hsd_803B3CD8(s32 arg0)
     u8* work_r7;
     u16* work_r27;
 
+    PAD_STACK(0x18);
+
     work_r6 = arg0 == 0 ? lbl_80431678 : lbl_8043169C;
     work = (JpegWork*) &hsd_804D2648;
     work_r7 = (arg0 == 0) ? lbl_80431690 : lbl_804316B4;
