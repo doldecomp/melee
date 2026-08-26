@@ -568,26 +568,67 @@ s32 mnNameNew_8023BAA8(NameNewEntry* arg0, s32 arg1, u8 arg2)
     return (s32) arg2;
 }
 
+static inline s8 CopyAutoNameText(char* cur_text, s32 pick)
+{
+    s32 name_idx;
+    u8 ch;
+    u8** name_ptr;
+    char* text;
+    s32 char_idx;
+    s8 null_ch;
+
+    name_idx = 0;
+    char_idx = name_idx;
+    cur_text[0] = *mnNameNew_NullCharacter;
+    text = cur_text;
+    cur_text[3] = *mnNameNew_NullCharacter;
+    cur_text[6] = *mnNameNew_NullCharacter;
+    cur_text[9] = *mnNameNew_NullCharacter;
+
+    name_ptr = &AutoNamesList[pick];
+    while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
+           (s8) (ch = (*name_ptr)[char_idx]))
+    {
+        text[0] = ch;
+        text[1] = (*name_ptr)[char_idx + 1];
+        text[2] = *mnNameNew_NullCharacter;
+        char_idx += 2;
+        name_idx++;
+        text += 3;
+    }
+
+    cur_text[name_idx * 3] = null_ch;
+    return null_ch;
+}
+
+static inline void UpdateAutoNameHistory(NameNewEntry* data, s32 pick)
+{
+    u8 tmp;
+    s32 i;
+
+    tmp = data->auto_history[0];
+    data->auto_history[0] = (u8) pick;
+    for (i = 1; i < 5; i++) {
+        u8 next = data->auto_history[i];
+        data->auto_history[i] = tmp;
+        tmp = next;
+    }
+}
+
 s32 PickAutoName(HSD_GObj* arg0)
 {
     NameNewEntry* data;
-    u8* cur_text;
+    char* cur_text;
     u8** names;
     s32 count;
     s32 pick;
     s32 dup;
-    s32 char_idx;
-    u8* text;
-    u8** name_ptr;
-    u8 ch;
-    s32 name_idx;
-    u8 tmp;
     s8 null_ch;
 
-    PAD_STACK(48);
+    PAD_STACK(32);
 
     data = arg0->user_data;
-    cur_text = (u8*) mnNameNew_CurrentNameText;
+    cur_text = mnNameNew_CurrentNameText;
 
     do {
         dup = 0;
@@ -615,37 +656,9 @@ s32 PickAutoName(HSD_GObj* arg0)
         }
     } while (dup != 0);
 
-    name_idx = 0;
-    char_idx = name_idx;
-    cur_text[0] = *mnNameNew_NullCharacter;
-    text = cur_text;
-    cur_text[3] = *mnNameNew_NullCharacter;
-    cur_text[6] = *mnNameNew_NullCharacter;
-    cur_text[9] = *mnNameNew_NullCharacter;
+    null_ch = CopyAutoNameText(cur_text, pick);
 
-    name_ptr = &AutoNamesList[pick];
-    while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
-           (s8) (ch = (*name_ptr)[char_idx]))
-    {
-        text[0] = ch;
-        text[1] = (*name_ptr)[char_idx + 1];
-        text[2] = *mnNameNew_NullCharacter;
-        char_idx += 2;
-        name_idx++;
-        text += 3;
-    }
-
-    cur_text[name_idx * 3] = null_ch;
-
-    tmp = data->auto_history[0];
-    data->auto_history[0] = (u8) pick;
-    ch = data->auto_history[1];
-    data->auto_history[1] = tmp;
-    tmp = data->auto_history[2];
-    data->auto_history[2] = ch;
-    ch = data->auto_history[3];
-    data->auto_history[3] = tmp;
-    data->auto_history[4] = ch;
+    UpdateAutoNameHistory(data, pick);
 
     return (s32) null_ch;
 }
@@ -672,8 +685,9 @@ bool NameContainsOnlySpaces(void)
 static inline void CopyCurrentNameToNametag(struct NameTagData* nametag)
 {
     s32 idx;
-    u8* text;
     u8 ch;
+    u8* text;
+    s32 i;
     s8 null_ch;
 
     text = (u8*) mnNameNew_CurrentNameText;
@@ -687,7 +701,10 @@ static inline void CopyCurrentNameToNametag(struct NameTagData* nametag)
             idx += 1;
             ptr += 1;
         }
-        if (null_ch != (s8) * (text += 3)) {
+        for (i = 1; i < 4; i++) {
+            if (null_ch == (s8) * (text += 3)) {
+                break;
+            }
             ptr = text;
             while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
                    (s8) (ch = *ptr))
@@ -901,11 +918,11 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
     s32 key_off;
     u8* key_char;
     s8 null_char;
-    char* src;
+    s32 n;
     u8* dest;
     s32 len;
     u8 cursor;
-    s32 n;
+    char* src;
 
     PAD_STACK(12);
 
@@ -1287,9 +1304,8 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
             return;
         }
         {
-            s32 buttons_arg = (s32) buttons;
             u8 new_sel = mnNameNew_8023BAA8(
-                data, buttons_arg, (u8) mn_804A04F0.hovered_selection);
+                data, (s32) buttons, (u8) mn_804A04F0.hovered_selection);
             if ((s32) new_sel != (s32) mn_804A04F0.hovered_selection) {
                 lbAudioAx_80024030(2);
                 mn_804A04F0.hovered_selection = (u16) new_sel;
