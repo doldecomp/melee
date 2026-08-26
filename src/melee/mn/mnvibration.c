@@ -713,6 +713,7 @@ void mnVibration_Think(HSD_GObj* gobj)
     s32 port;
     s32 port_idx;
     u8 pad_err;
+    u8 pad_idx;
     u8 state;
     HSD_JObj* active_child;
     MnVibrationData* data;
@@ -758,7 +759,8 @@ void mnVibration_Think(HSD_GObj* gobj)
     } while (port < 4);
     port_idx = 0;
     do {
-        pad_err = HSD_PadCopyStatus[(u8) port_idx].err;
+        pad_idx = port_idx;
+        pad_err = HSD_PadCopyStatus[pad_idx].err;
         if ((((s8) pad_err != 0) && (data->x6[port_idx] != 0)) ||
             (((s8) pad_err == 0) && (data->x6[port_idx] == 0)))
         {
@@ -795,7 +797,7 @@ void mnVibration_Think(HSD_GObj* gobj)
                 data->x0[port_idx + 2] = 0;
                 toggle_jobj =
                     ((MnVibrationData*) mnVibration_804D6C28->user_data)
-                        ->jobjs[mnVibration_PortPanelJointIds[(u8) port_idx]];
+                        ->jobjs[mnVibration_PortPanelJointIds[pad_idx]];
                 state = data->x0[port_idx + 2];
                 HSD_JObjReqAnimAll(toggle_jobj, state);
                 HSD_JObjAnimAll(toggle_jobj);
