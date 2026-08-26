@@ -5221,7 +5221,8 @@ static inline void Toy_80310324_setup_sobjs(ToyGlobalsS_* data, UNK_T* syms)
     } while (i < 3);
 }
 
-static inline void _Toy_80310324_setup_trophy(Toy26B8* toy, ToyGlobalsS_* tg)
+static inline void _Toy_80310324_setup_trophy(Toy26B8* toy,
+                                                ToyGlobalsS_* tg)
 {
     s32 trophy_count;
     ToyGlobalsS_* display;
