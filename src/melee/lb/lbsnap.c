@@ -178,8 +178,8 @@ int lbSnap_8001D7B0(int chan, int index, int jndex)
 
 static inline u16 RGB565_TO_RGB5A3(u16 pixel)
 {
-    u16 result = pixel & RGB5A3_MASK_B;
-    result |= (pixel >> 1) & (RGB5A3_MASK_R | RGB5A3_MASK_G);
+    u16 result = (pixel >> 1) & (RGB5A3_MASK_R | RGB5A3_MASK_G);
+    result |= pixel & RGB5A3_MASK_B;
     return result | RGB5A3_MASK_A;
 }
 
