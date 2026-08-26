@@ -1701,8 +1701,16 @@ void _tyDisplay_8031B328(void)
     }
 }
 
+typedef struct TyDspSignedGridSize {
+    u8 x0[0x75];
+    s8 x75;
+    s8 x76;
+} TyDspSignedGridSize;
+
 static inline void tyDisplay_SetGridSize(TyDspConfig* cfg, TyDspGrid* grid)
 {
+    TyDspSignedGridSize* size = (TyDspSignedGridSize*) cfg;
+
     switch (grid->x00) {
     case 0:
     case 1: {
@@ -1710,9 +1718,9 @@ static inline void tyDisplay_SetGridSize(TyDspConfig* cfg, TyDspGrid* grid)
         s32 toggle = 0;
         cfg->x75 = 1;
         cfg->x76 = 1;
-        while ((s8) cfg->x75 * (s8) cfg->x76 < count) {
+        while (size->x75 * size->x76 < count) {
             toggle ^= 1;
-            if (toggle != 0 && (s8) cfg->x75 < 0x14) {
+            if (toggle != 0 && size->x75 < 0x14) {
                 cfg->x75++;
             } else {
                 cfg->x76++;
@@ -1728,9 +1736,9 @@ static inline void tyDisplay_SetGridSize(TyDspConfig* cfg, TyDspGrid* grid)
         s32 toggle = 0;
         cfg->x75 = 1;
         cfg->x76 = 1;
-        while ((s8) cfg->x75 * (s8) cfg->x76 < count) {
+        while (size->x75 * size->x76 < count) {
             toggle ^= 1;
-            if (toggle != 0 && (s8) cfg->x75 < 0x14) {
+            if (toggle != 0 && size->x75 < 0x14) {
                 cfg->x75++;
             } else {
                 cfg->x76++;
@@ -1747,6 +1755,9 @@ void tyDisplay_OnEnter_8031B460(void* arg0)
     TyDspConfig* cfg;
     TyDspBgData* data;
     TyDspGrid* grid;
+    HSD_CObj* cobj;
+    TyDspConfig* cfg2;
+    u8 kind;
     int i;
     PAD_STACK(8);
 
@@ -1814,12 +1825,13 @@ void tyDisplay_OnEnter_8031B460(void* arg0)
     data->x104 = 0;
 
     {
-        TyDspConfig* cfg2 = _tyDisplay_804D6F18;
-        HSD_CObj* cobj = lb_80013B14(HSD_ArchiveGetPublicAddress(
+        cfg2 = _tyDisplay_804D6F18;
+        cobj = lb_80013B14(HSD_ArchiveGetPublicAddress(
             _tyDisplay_804D6F1C->archive, "ScMenDisplay_cam_int1_camera"));
 
         cfg2->x00 = GObj_Create(1, 2, 0);
-        HSD_GObjObject_80390A70(cfg2->x00, HSD_GObj_804D784B, cobj);
+        HSD_GObjObject_80390A70(cfg2->x00,
+                                kind = HSD_GObj_804D784B, cobj);
         GObj_SetupGXLinkMax(cfg2->x00, (GObj_RenderFunc) (Event) Toy_803068E0,
                             0);
 
