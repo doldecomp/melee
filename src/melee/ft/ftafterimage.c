@@ -39,7 +39,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
     s32 numSubdiv;
     s32 nextIdx;
 
-    PAD_STACK(0x20);
+    PAD_STACK(0x8);
 
     if (arg1 != 2) {
         return;
@@ -122,6 +122,9 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
         s32 ringIdx;
         f32 totalDist;
         f32* dp;
+        Vec3 prevPos, delta, crossProd, tempDir;
+
+        PAD_STACK(0x14);
 
         {
             s32 idx = fp->x2101_bits_0to6;
@@ -137,7 +140,6 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
         dp = &cumDist[1];
 
         {
-            Vec3 delta, prevPos;
             s32 i;
             s32 curIdx = ringIdx;
 
@@ -177,7 +179,6 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
         }
 
         {
-            Vec3 tempDir, crossProd;
             f32 scaleDiff = x20FC - x20F8;
             s32 curIdx2;
             f32 blendedInner = params->x0 * scaleDiff + x20F8;
@@ -293,7 +294,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                                         (f32) alpha));
 
                             for (j = 0; j < numSubdiv; j++) {
-                                cumAngle += angle * frac;
+                                cumAngle += frac * angle;
                                 basePosX += stepPosX;
                                 basePosY += stepPosY;
                                 basePosZ += stepPosZ;
