@@ -690,7 +690,7 @@ static const u32 lbl_804DE8E0 = 0xFFFFFFFF;
 
 typedef struct {
     s32 count;
-    u32 color;
+    GXColor color;
 } DispBar;
 
 typedef struct _DispItem {
@@ -705,7 +705,6 @@ typedef struct _DispItem {
 
 typedef DispItem* (*DispCallback)(void*);
 
-// @TODO: Currently 89.78% match - needs minor control flow and register fixes
 void hsd_8039254C(void)
 {
     static GXColor lbl_804D6080 = { 0x40, 0x40, 0x40 };
@@ -714,13 +713,13 @@ void hsd_8039254C(void)
     f32 bar_x;
     f32 t2;
     GXColor default_col;
+    s32 char_count;
+    GXColor bg_col3;
+    GXColor bar_col;
     GXColor bg_col0;
     GXColor bg_col1;
     GXColor txt_col;
     GXColor bg_col2;
-    GXColor bg_col3;
-    GXColor bar_col;
-    s32 char_count;
     s32 count;
     GXColor* p_bg_col0;
     GXColor* p_bg_col1;
@@ -851,9 +850,7 @@ void hsd_8039254C(void)
                         {
                             f32 prev_x;
                             prev_x = bar_x;
-                            bar_col =
-                                *(GXColor*) &bar_draw_ptr->content.bars[0]
-                                     .color;
+                            bar_col = bar_draw_ptr->content.bars[0].color;
                             bar_x += (600.0F / (f32) char_count) * (f32) count;
                             hsd_80391F28(
                                 p_bar_col, prev_x, bar_y, bar_x, bar_y,
