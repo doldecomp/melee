@@ -2731,7 +2731,8 @@ static inline s32 readCardDataBlockFirst(CardState* state, u32 sector_size,
     offset = cardDataBlockOffset(state, sector_size, data_block);
     buf = state->x0;
     retries = 0;
-    result = retryCardRead(&state->file_info, retries, buf, sector_size, offset);
+    result =
+        retryCardRead(&state->file_info, retries, buf, sector_size, offset);
     if (result < 0) {
         return result;
     }
