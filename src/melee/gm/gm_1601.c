@@ -3441,9 +3441,7 @@ s32 fn_80167638(s32 arg0, Vec3* arg1, Vec3* arg2)
         }
         {
             lbl_8046B6A0_t* info = gm_16AE_GetUnkData_1();
-            do {
-                UNUSED unsigned char _[(8)];
-            } while (tmp);
+            PAD_STACK(8);
             info->FighterMatchInfo[idx].x8 = 0x90;
             info->FighterMatchInfo[idx].x9 = chr;
         }
