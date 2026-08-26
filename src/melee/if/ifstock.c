@@ -956,10 +956,11 @@ void ifStock_802FAEC4(void)
         ifStock_804A1774.x108 = -1;
         ifStock_802FA5BC(1); // not inlined
     }
-    for (i = 0; i < 16; i++) {
-        ifStock_804A1A8C[i] = NULL;
+    p = ifStock_804A1A8C;
+    for (i = 0; i < 16; i++, p++) {
+        *p = NULL;
         if (gm_8016B1A8()) {
-            ifStock_804A1A8C[i] = ifStock_802FA118(i);
+            *p = ifStock_802FA118(i);
         }
     }
     if (gm_IsMultimanSmashMode()) {
