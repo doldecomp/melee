@@ -28,7 +28,7 @@ void gm_801A6254(GameScene* arg0)
     MatchExitInfo* temp_r30;
     lbl_8046DBD8_t* temp_r31;
 
-    temp_r30 = gm_GetGameSceneLeaveDataCallback(arg0);
+    temp_r30 = gm_GetGameSceneLeaveData(arg0);
     temp_r31 = gm_GetChallengerData();
     gm_80162968(temp_r30->match_end.frame_count / 60);
     gm_8016247C(temp_r30->match_end.player_standings[0].xE);

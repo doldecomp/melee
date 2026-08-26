@@ -32,7 +32,7 @@ void gm_801A3F48(GameScene* scene)
     PreloadCacheScene* temp_r31;
 
     lbDvd_80018CF4(scene->preload);
-    switch (scene->info.class_id) {
+    switch (scene->info.scene_id) {
     case GS_STAFFROLL:
     case GS_RESULTS:
         HSD_SisLib_803A6048(0xC000);
@@ -120,12 +120,12 @@ void gm_801A4014(GameMode* mode)
     gm->routing.curr_scene_idx = scene->idx;
 
     gm_801A3F48(scene);
-    if (scene->Prep != NULL) {
-        scene->Prep(scene);
+    if (scene->prep != NULL) {
+        scene->prep(scene);
     }
     info = &scene->info;
     handler = (GameSceneHandler*) ((uintptr_t) gm_FindGameSceneHandler(
-                                       info->class_id) |
+                                       info->scene_id) |
                                    (dead = 0));
     gm_801A4BD4();
     gm_801A4B88(info);
@@ -137,8 +137,8 @@ void gm_801A4014(GameMode* mode)
         handler->OnLeave(info->leave_data);
     }
     if (!gmMainLib_8046B0F0.resetting) {
-        if (scene->Decide != NULL) {
-            scene->Decide(scene);
+        if (scene->decide != NULL) {
+            scene->decide(scene);
         }
 
         gm_80479D30.routing.prev_scene_idx = gm->routing.curr_scene_idx;
@@ -168,18 +168,18 @@ void gm_801A4014(GameMode* mode)
         gm_GetAllGameModes();
         memzero(&gm_80479D30, sizeof(gm_80479D30));
         gm_801A3EF4();
-        gmMainLib_8046B0F0.x0 = true;
+        gmMainLib_8046B0F0.reset_code = true;
         gm_ChangeGameModeAfterCurrentScene(GM_BOOT);
         HSD_VISetBlack(0);
     }
 }
 
-void* gm_GetGameSceneLoadDataCallback(GameScene* scene)
+void* gm_GetGameSceneLoadData(GameScene* scene)
 {
     return scene->info.load_data;
 }
 
-void* gm_GetGameSceneLeaveDataCallback(GameScene* scene)
+void* gm_GetGameSceneLeaveData(GameScene* scene)
 {
     return scene->info.leave_data;
 }
@@ -190,9 +190,8 @@ void gm_SetSceneIndex(u8 arg0)
     gm_80479D30.routing.prev_scene_idx = arg0;
 }
 
-void gm_SetPendingSceneIndex(
-    u8 pending_scene) ///< Actually sets the pending scene
-                      ///< to the scene following the input
+/// @note Actually sets the pending scene to the scene following the input
+void gm_SetPendingSceneIndex(u8 pending_scene)
 {
     gm_80479D30.routing.pending_scene_idx = pending_scene + 1;
 }

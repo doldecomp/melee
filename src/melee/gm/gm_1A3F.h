@@ -7,8 +7,8 @@
 
 /* 1A3F48 */ void gm_801A3F48(GameScene*);
 /* 1A4014 */ void gm_801A4014(GameMode*);
-/* 1A427C */ void* gm_GetGameSceneLoadDataCallback(GameScene*);
-/* 1A4284 */ void* gm_GetGameSceneLeaveDataCallback(GameScene*);
+/* 1A427C */ void* gm_GetGameSceneLoadData(GameScene*);
+/* 1A4284 */ void* gm_GetGameSceneLeaveData(GameScene*);
 /* 1A428C */ void gm_SetSceneIndex(u8 arg0);
 /* 1A42A0 */ void gm_SetPendingSceneIndex(u8 pending_scene);
 /* 1A42B4 */ u8 gm_GetPreviousSceneIndex(void);

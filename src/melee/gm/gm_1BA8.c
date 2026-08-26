@@ -118,7 +118,7 @@ void gm_801BA938(struct EventData* arg0, int lo, int hi, bool arg3)
 void gm_801BAA60(GameScene* arg0)
 {
     struct EventData* temp_r31 = &gmMainLib_804D3EE0->unk_530;
-    CSSData* css = gm_GetGameSceneLoadDataCallback(arg0);
+    CSSData* css = gm_GetGameSceneLoadData(arg0);
     PAD_STACK(8);
 
     gm_801B06B0(css, 0xE, temp_r31->x2, 0, temp_r31->x3, temp_r31->x4, 0,
@@ -134,7 +134,7 @@ void gm_801BAAD0(GameScene* arg0)
     struct EventData* temp_r31;
 
     temp_r31 = &gmMainLib_804D3EE0->unk_530;
-    temp_r3 = gm_GetGameSceneLeaveDataCallback(arg0);
+    temp_r3 = gm_GetGameSceneLeaveData(arg0);
     if (temp_r3->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
@@ -185,7 +185,7 @@ s32 gm_801BAC9C(GameScene* arg0, s32 arg1)
     UNUSED u8 _[8];
     u8 chars[33];
     struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
-    StartMeleeData* data = gm_GetGameSceneLoadDataCallback(arg0);
+    StartMeleeData* data = gm_GetGameSceneLoadData(arg0);
     s32 i;
     s32 found;
     s32 count = 0;
@@ -233,7 +233,7 @@ static inline u8 gm_GetNextColor(u8 color)
 void gm_801BAD70(GameScene* arg0)
 {
     struct EventData* ev = gm_GetEventData();
-    StartMeleeData* md = gm_GetGameSceneLoadDataCallback(arg0);
+    StartMeleeData* md = gm_GetGameSceneLoadData(arg0);
     u8 level = ev->unk_535;
     s32 player_idx;
     struct gm_804D6900_t** levels;
@@ -506,7 +506,7 @@ void gm_801BAD70(GameScene* arg0)
 void gm_801BB758(GameScene* arg0)
 {
     struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
-    MatchExitInfo* exit = gm_GetGameSceneLeaveDataCallback(arg0);
+    MatchExitInfo* exit = gm_GetGameSceneLeaveData(arg0);
     u8 stage = ev->unk_535;
     u8 b;
     u8 kind;
@@ -2929,7 +2929,7 @@ void gm_801BED14(GameScene* arg)
 
 void gm_801BED3C(GameScene* arg0)
 {
-    CSSData* temp_r31 = gm_GetGameSceneLoadDataCallback(arg0);
+    CSSData* temp_r31 = gm_GetGameSceneLoadData(arg0);
     temp_r31->data = *gm_801A5244();
 
     gm_80164F18();
@@ -2940,7 +2940,7 @@ void gm_801BED3C(GameScene* arg0)
 
 void gm_801BEDA8(GameScene* arg0)
 {
-    CSSData* css = gm_GetGameSceneLoadDataCallback(arg0);
+    CSSData* css = gm_GetGameSceneLoadData(arg0);
     VsModeData* vs = gm_801A5244();
 
     if (css->pending_scene_change == 2) {
@@ -2958,7 +2958,7 @@ void gm_801BEDA8(GameScene* arg0)
 
 void gm_801BEE58(GameScene* arg0)
 {
-    SSSData* var_r3 = gm_GetGameSceneLoadDataCallback(arg0);
+    SSSData* var_r3 = gm_GetGameSceneLoadData(arg0);
     var_r3->data = gmMainLib_804D3EE0->unk_590;
 }
 
@@ -3094,7 +3094,7 @@ int gm_801BF050(void)
 
 void gm_801BF060(GameScene* arg0)
 {
-    int* temp_r3 = gm_GetGameSceneLeaveDataCallback(arg0);
+    int* temp_r3 = gm_GetGameSceneLeaveData(arg0);
     if (DbLevel >= DbLKind_DebugRom) {
         if (*temp_r3 & 0x100) {
             gm_SetPendingGameMode(GM_DEBUG_VS);
@@ -3124,7 +3124,7 @@ static inline struct gm_random_history* gm_GetRandomHistory(void)
     return (struct gm_random_history*) gmMainLib_804D3EE0;
 }
 
-void gm_801BF128(void)
+void gm_SetupTitleDemo(void)
 {
     s32 character_pool[29];
     s32 stage_pool[30];
@@ -3260,7 +3260,7 @@ void gm_801BF4DC(GameScene* arg0)
     int i;
 
     temp_r30 = &gmMainLib_804D3EE0->unk_1710;
-    md = gm_GetGameSceneLoadDataCallback(arg0);
+    md = gm_GetGameSceneLoadData(arg0);
     gm_80167BC8(temp_r30);
     gm_8016F088(md);
     gm_80168FC4();
@@ -3422,12 +3422,12 @@ void gm_801BF8D8(GameScene* arg)
 
 void gm_801BF8F8(GameScene* arg0)
 {
-    int* val = gm_GetGameSceneLoadDataCallback(arg0);
+    int* val = gm_GetGameSceneLoadData(arg0);
     *val = 1;
 }
 
 void gm_801BF920(GameScene* arg0)
 {
-    gm_GetGameSceneLeaveDataCallback(arg0);
+    gm_GetGameSceneLeaveData(arg0);
     gm_ChangeGameModeAfterCurrentScene(GM_BOOT);
 }

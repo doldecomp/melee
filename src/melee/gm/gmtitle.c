@@ -2,6 +2,7 @@
 
 #include "gm_unsplit.h"
 
+#include <baselib/sislib.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/fog.h>
@@ -11,7 +12,6 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/random.h>
 #include <melee/db/db.h>
-#include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
@@ -19,7 +19,6 @@
 #include <melee/lb/lbmthp.h>
 #include <melee/lb/lbspdisplay.h>
 #include <melee/lb/lbtime.h>
-#include <melee/mn/inlines.h>
 #include <melee/mn/mnmain.h>
 #include <melee/sc/types.h>
 
@@ -34,7 +33,7 @@ static HSD_CameraDescPerspective* gmTitle_804D6708;
 static LightList** gmTitle_804D670C;
 static HSD_FogDesc* gmTitle_804D6710;
 static int gmTitle_804D6714;
-static u32 gmTitle_804D6718;
+static u32 frame_count;
 static u8 gmTitle_804D671C;
 
 extern u32 gm_804D67EC;
@@ -169,7 +168,7 @@ HSD_GObj* gmTitle_801A165C(void)
         HSD_Rand();
         second--;
     }
-    gm_801BF128();
+    gm_SetupTitleDemo();
     return gobj;
 }
 
@@ -259,7 +258,7 @@ HSD_Archive* gmTitle_801A1AC0(void)
         &gm_804D67F0, "TitleMark_sobjdesc", 0);
 }
 
-void gmTitle_801A1C18_OnFrame(void)
+void gmTitle_OnFrame(void)
 {
     int input = gm_GetButtonsTriggered(PAD_ALL_CONTROLLERS);
     int* tmp;
@@ -267,39 +266,9 @@ void gmTitle_801A1C18_OnFrame(void)
         gmTitle_804D6714--;
         return;
     }
-    gmTitle_804D6718++;
-    if (gmTitle_804D6718 > 600) {
-        tmp = gm_GetCurrentSceneExitData();
-        *tmp = 0;
-        gm_801A4B60();
-    } else if (input & HSD_PAD_START) {
-        lbAudioAx_80026F2C(0x1C);
-        lbAudioAx_8002702C(0xC, 0);
-        lbAudioAx_80027168();
-        lbAudioAx_80027648();
-        sfxForward();
-        gmMainLib_8015ECBC();
-        tmp = gm_GetCurrentSceneExitData();
-        *tmp = input;
-        gm_801A4B60();
-    } else if (DbLevel >= DbLKind_DebugRom) {
-        if (input & HSD_PAD_Y) {
-            sfxForward();
-            tmp = gm_GetCurrentSceneExitData();
-            *tmp = input;
-            gm_801A4B60();
-        } else if (input & HSD_PAD_A) {
-            sfxForward();
-            tmp = gm_GetCurrentSceneExitData();
-            *tmp = input;
-            gm_801A4B60();
-        } else if (input & HSD_PAD_X) {
-            sfxForward();
-            tmp = gm_GetCurrentSceneExitData();
-            *tmp = input;
-            gm_801A4B60();
-        }
-    }
+    tmp = gm_GetCurrentSceneExitData();
+    *tmp = 0;
+    gm_801A4B60();
 }
 
 static char* gmTitle_801A1D38(const char* src, char* dst)
@@ -332,7 +301,7 @@ static char* gmTitle_801A1D38(const char* src, char* dst)
     return dst;
 }
 
-void gmTitle_801A1E20_OnEnter(void* unused)
+void gmTitle_OnEnter(void* unused)
 {
     HSD_Text* text;
     int scale;
@@ -340,7 +309,7 @@ void gmTitle_801A1E20_OnEnter(void* unused)
 
     lbAudioAx_800236DC();
     gmTitle_804D6714 = 0x14;
-    gmTitle_804D6718 = 0;
+    frame_count = 0;
 
     archive = gmTitle_801A1AC0();
     (void) archive;

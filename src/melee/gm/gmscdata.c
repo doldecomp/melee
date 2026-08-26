@@ -55,8 +55,8 @@
 static GameSceneHandler gm_803DA920[] = {
     {
         GS_TITLE,
-        gmTitle_801A1C18_OnFrame,
-        gmTitle_801A1E20_OnEnter,
+        gmTitle_OnFrame,
+        gmTitle_OnEnter,
         NULL,
         NULL,
     },
@@ -382,8 +382,8 @@ extern GameScene gm_803DD6A0_Scenes[], gm_803DD6D0_Scenes[],
     gm_803DF618_Scenes[], gm_803DFA18_Scenes[], gm_803DFA48_Scenes[],
     gm_803DFA78_Scenes[], gm_803DFAA8_Scenes[], gm_803DFAD8_Scenes[],
     gm_803DFB08[], gm_803DFB80_Scenes[], gm_803DFBC8_Scenes[],
-    gm_803DFC70_Scenes[], gm_803DFDA8_Scenes[], gm_803DFDD8_Scenes[],
-    gm_803DFE18_Scenes[], gm_803DFE48_Scenes[];
+    gm_803DFC70_Scenes[], gm_803DFDA8_Scenes[], gmBoot_BootScenes[],
+    gmBoot_MemCardScenes[], gm_803DFE48_Scenes[];
 
 GameMode gm_803DACA4[] = {
     {
@@ -712,7 +712,7 @@ GameMode gm_803DACA4[] = {
         NULL,
         NULL,
         NULL,
-        gm_803DFDD8_Scenes,
+        gmBoot_BootScenes,
     },
     {
         1,
@@ -720,7 +720,7 @@ GameMode gm_803DACA4[] = {
         NULL,
         NULL,
         NULL,
-        gm_803DFE18_Scenes,
+        gmBoot_MemCardScenes,
     },
     {
         0,

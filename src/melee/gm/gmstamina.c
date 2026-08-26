@@ -66,7 +66,7 @@ static struct {
 void gm_801B91C8(GameScene* arg0)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->unk_10D0;
-    CSSData* css = gm_GetGameSceneLoadDataCallback(arg0);
+    CSSData* css = gm_GetGameSceneLoadData(arg0);
     css->match_type = 2;
     css->ko_star_counts = 0;
     css->data = *vs;
@@ -86,7 +86,7 @@ void gm_801B9254(GameScene* scene)
 void gm_801B927C(GameScene* arg0)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->unk_10D0;
-    SSSData* sss = gm_GetGameSceneLeaveDataCallback(arg0);
+    SSSData* sss = gm_GetGameSceneLeaveData(arg0);
     if (sss->start_game != 0) {
         *vs = sss->data;
 
@@ -101,7 +101,7 @@ void gm_801B927C(GameScene* arg0)
 void gm_801B931C(GameScene* arg0)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->unk_10D0;
-    StartMeleeData* start = gm_GetGameSceneLoadDataCallback(arg0);
+    StartMeleeData* start = gm_GetGameSceneLoadData(arg0);
     int i;
 
     gm_80167BC8(vs);
