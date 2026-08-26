@@ -709,8 +709,8 @@ static inline s32 gm_8017CE34_CountEnemies(s8* arg0)
 static inline void gm_8017CE34_SetupColors(UnkAdventureData* arg1, s32 count,
                                            s8* arg2, u8* colors)
 {
-    s32 color_idx;
     u8* out_color = colors;
+    s32 color_idx;
     s8* kind_iter = arg2;
 
     for (color_idx = 0; color_idx < 3; color_idx++) {
@@ -738,7 +738,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     u8 enemy_ckind;
     s32 enemy_count;
     s32 enemy_idx;
-    s32 sp8;
+    u8 sp8;
     u8* color_iter;
 
     PAD_STACK(4);
