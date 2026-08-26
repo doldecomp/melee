@@ -512,17 +512,6 @@ void lbBgFlash_800209F4(void)
     lbl_80433658.state.mode = 0;
 }
 
-static inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
-{
-    if (jobj == NULL) {
-        return NULL;
-    }
-    return jobj->parent;
-}
-
-#ifdef MUST_MATCH
-#pragma inline_depth(1)
-#endif
 void fn_80020AEC(HSD_JObj* jobj, Mtx out)
 {
     MtxPtr out_mtx = out;
@@ -531,8 +520,6 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
     s32 i;
     Mtx tmp;
     Vec3 col;
-    volatile f32 scale_mag;
-    u8 _[4];
 
     if (jobj == NULL) {
         parent = NULL;
@@ -542,8 +529,8 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
 
     {
         MtxPtr jobj_mtx = HSD_JObjGetMtxPtr(jobj);
-        HSD_JObjGetMtxPtr(parent);
-        HSD_MtxInverseConcat(parent->mtx, jobj_mtx, out_mtx);
+        HSD_MtxInverseConcat(HSD_JObjGetMtxPtr(parent), jobj_mtx,
+                             out_mtx);
     }
 
     for (i = 0; i < 3; i++) {
@@ -551,9 +538,7 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
         f32 scale_sq;
         f32 factor;
 
-        col.x = out_mtx[0][i];
-        col.y = out_mtx[1][i];
-        col.z = out_mtx[2][i];
+        HSD_MtxColVec(out_mtx, i, &col);
 
         mag = PSVECMag(&col);
         if (mag > 1e-10f) {
@@ -574,27 +559,18 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
             scale_sq = sz + scale_sq;
         }
 
-        if (scale_sq > 0.0f) {
-            f64 e = __frsqrte(scale_sq);
-            e = 0.5 * e * -(((f64) scale_sq * (e * e)) - 3.0);
-            e = 0.5 * e * -(((f64) scale_sq * (e * e)) - 3.0);
-            e = 0.5 * e * -(((f64) scale_sq * (e * e)) - 3.0);
-            scale_mag = (f32) ((f64) scale_sq * e);
-            scale_sq = scale_mag;
-        }
+        scale_sq = sqrtf(scale_sq);
 
         factor = mag * scale_sq;
         col.x *= factor;
         col.y *= factor;
         col.z *= factor;
-        out_mtx[0][i] = col.x;
-        out_mtx[1][i] = col.y;
-        out_mtx[2][i] = col.z;
+        HSD_MtxSetColVec(out_mtx, i, &col);
     }
 
-    cur = jobj_parent(jobj);
+    cur = HSD_JObjGetParent(jobj);
     while (cur != NULL) {
-        if (jobj_parent(cur) != NULL) {
+        if (HSD_JObjGetParent(cur) != NULL) {
             HSD_JObj* grandpar;
             if (cur == NULL) {
                 grandpar = NULL;
@@ -610,9 +586,7 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
         for (i = 0; i < 3; i++) {
             f32 mag;
 
-            col.x = tmp[0][i];
-            col.y = tmp[1][i];
-            col.z = tmp[2][i];
+            HSD_MtxColVec(tmp, i, &col);
 
             mag = PSVECMag(&col);
             if (mag > 0.00001f) {
@@ -622,18 +596,13 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
             col.x *= mag;
             col.y *= mag;
             col.z *= mag;
-            tmp[0][i] = col.x;
-            tmp[1][i] = col.y;
-            tmp[2][i] = col.z;
+            HSD_MtxSetColVec(tmp, i, &col);
         }
 
         PSMTXConcat(tmp, out_mtx, out_mtx);
-        cur = jobj_parent(cur);
+        cur = HSD_JObjGetParent(cur);
     }
 }
-#ifdef MUST_MATCH
-#pragma inline_depth(8)
-#endif
 void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
                         f32 min_angle, f32 unused)
 {
