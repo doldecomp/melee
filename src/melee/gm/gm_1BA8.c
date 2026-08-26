@@ -660,34 +660,44 @@ void gm_801BBA60_OnInit(void)
     }
 }
 
-s32 gm_801BBB64(void)
+static inline void gm_801BBB64_inline(struct EventData* ev)
+{
+    struct gm_804D6900_t** tbl = gm_804D6900[0];
+    u8 idx = ev->unk_535;
+    if ((*tbl[idx]->player_init)->c_kind != CHKIND_NONE) {
+        ev->x44 = 0;
+    } else {
+        ev->x44 = 1;
+    }
+}
+
+void gm_801BBB64(void)
 {
     struct gm_804D6900_t** pp;
     struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
     struct gm_804D6900_t** tbl = gm_804D6900[0];
-    u8 idx = gmMainLib_804D3EE0->unk_530.unk_535;
+    u8 idx = ev->unk_535;
     gm_801BAB40_src* player_init;
     gm_801BAB40_src* event_entry;
     struct gm_804D6900_x4_t* x4;
     int i;
 
-    if ((*tbl[idx]->player_init)->c_kind != 0x21) {
-        ev->x44 = 0;
-    } else {
-        ev->x44 = 1;
-    }
+    gm_801BBB64_inline(ev);
+
     pp = &tbl[idx];
     ev->x48 = (*pp)->x8->unk6;
+
     for (i = 0; i < 4; i++) {
         player_init = (*pp)->player_init[i];
         if (player_init != NULL) {
             ev->x4C[i] = player_init->c_kind;
             ev->x50[i] = (*pp)->player_init[i]->color;
         } else {
-            ev->x4C[i] = 0x21;
+            ev->x4C[i] = CHKIND_NONE;
             ev->x50[i] = 0;
         }
     }
+
     if ((*pp)->kind == 1) {
         ev->x4C[1] = (*pp)->xC->c_kind;
         if ((*pp)->xC->x5 == 1) {
@@ -719,7 +729,7 @@ s32 gm_801BBB64(void)
         ev->x4C[1] = event_entry->c_kind;
         event_entry = (*pp)->x10->entries[ev->x20];
         ev->x50[1] = event_entry->color;
-        return (s32) event_entry;
+        return;
     case 35:
         if (ev->x20 == 0) {
             ev->x44 = 2;
@@ -735,7 +745,7 @@ s32 gm_801BBB64(void)
             ev->x4C[3] = event_entry->c_kind;
             event_entry = (*pp)->x10->entries[3];
             ev->x50[3] = event_entry->color;
-            return (s32) event_entry;
+            return;
         }
         if (ev->x20 == 1) {
             ev->x44 = 4;
@@ -747,7 +757,7 @@ s32 gm_801BBB64(void)
             ev->x4C[2] = event_entry->c_kind;
             event_entry = (*pp)->x10->entries[4];
             ev->x50[2] = event_entry->color;
-            return (s32) event_entry;
+            return;
         }
         break;
     case 43:
@@ -756,9 +766,8 @@ s32 gm_801BBB64(void)
         ev->x4C[2] = event_entry->c_kind;
         event_entry = (gm_801BAB40_src*) x4->x4;
         ev->x50[2] = event_entry->color;
-        return (s32) event_entry;
+        return;
     }
-    return idx;
 }
 
 void gm_801BBEA8_OnLoad(void)
