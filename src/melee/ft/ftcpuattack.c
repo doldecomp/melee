@@ -40,30 +40,6 @@ typedef struct ftCo_AttackEntry {
     /* +20 */ s32 x20;
 } ftCo_AttackEntry;
 
-typedef struct ftCo_x50_attr {
-    /* +00 */ u8 pad00[0x10];
-    /* +10 */ f32 x10;
-    /* +14 */ f32 x14;
-} ftCo_x50_attr;
-
-typedef struct ftCo_x50_t {
-    /* +00 */ u8 pad00[0x40];
-    /* +40 */ f32 x40;
-    /* +44 */ f32 x44;
-    /* +48 */ u8 pad48[0x4C - 0x48];
-    /* +4C */ f32 x4C;
-    /* +50 */ f32 x50;
-    /* +54 */ u8 pad54[0xC0 - 0x54];
-    /* +C0 */ s32 xC0;
-    /* +C4 */ u8 padC4[0xCC - 0xC4];
-    /* +CC */ ftCo_x50_attr* xCC;
-    /* +D0 */ u8 padD0[0xC1C - 0xD0];
-    /* +C1C */ f32 xC1C;
-    /* +C20 */ f32 xC20;
-    /* +C24 */ f32 xC24;
-    /* +C28 */ f32 xC28;
-} ftCo_x50_t;
-
 typedef struct ftCo_CollData {
     /* +00 */ u8 pad0[4];
     /* +04 */ Vec3 p;
@@ -141,7 +117,6 @@ static void sdata2_order(void)
 }
 #endif
 
-/// @todo Fake helper forcing a fresh load of the scale field.
 #ifdef MUST_MATCH
 /// MSL sqrtf expansion writing through a caller-provided stack slot so each
 /// call site owns a distinct 4-byte temp (retail 0x28..0x34 below sp3C).
@@ -160,6 +135,11 @@ static inline float sqrtf_store(float x, volatile float* y)
 #else
 #define sqrtf_store(x, y) sqrtf(x)
 #endif
+
+static inline f32 get_scale(Fighter* fp)
+{
+    return fp->x34_scale.y;
+}
 
 static inline int ftCo_CpuSelectAttack(Fighter* fp,
                                        struct Fighter_x1A88_t* cpu,
@@ -601,9 +581,9 @@ ftCo_803C6594_t* ftCo_803C6594[Gr_Kind_Count] = {
 
 int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
 {
+    Item* x50 = arg1;
     ftCo_AttackEntry sp34[32];
-    ftCo_x50_t* x50 = arg1;
-    ftCo_x50_attr* attrs;
+    ItemAttr* attrs;
     ftCo_AttackEntry* list = arg2;
     ftCo_AttackEntry* sel;
     struct Fighter_x1A88_t* cpu = &fp->x1A88;
@@ -632,30 +612,30 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
     f32 x50Vy;
     f32 x50Vx;
     f32 x50TermNeg;
-    f32 sizeHalf;
-    f32 x50Grav;
     f32 yBound;
+    f32 x50Grav;
+    f32 sizeHalf;
 
     cpu = &fp->x1A88;
     if (list == NULL) {
         return 0;
     }
-    attrs = x50->xCC;
+    attrs = x50->xCC_item_attr;
     count = 0;
     fpTermNeg = -fp->co_attrs.terminal_velocity;
     fpY = fp->cur_pos.y;
-    x50Vy = x50->x44;
-    x50TermNeg = -attrs->x14;
-    sizeHalf = (f32) (0.5 * (x50->xC24 + x50->xC28));
-    yBound = x50->xC1C + x50->xC20;
+    x50Vy = x50->x40_vel.y;
+    x50TermNeg = -attrs->x14_fall_speed_max;
+    sizeHalf = (f32) (0.5 * (x50->xC1C.right + x50->xC1C.left));
+    yBound = x50->xC1C.top + x50->xC1C.bottom;
     fpX = fp->cur_pos.x;
     fpVx = fp->pos_delta.x;
     fpVy = fp->pos_delta.y;
     fpGrav = fp->co_attrs.gravity;
-    x50X = x50->x4C;
-    x50Y = x50->x50;
-    x50Vx = x50->x40;
-    x50Grav = attrs->x10;
+    x50X = x50->pos.x;
+    x50Y = x50->pos.y;
+    x50Vx = x50->x40_vel.x;
+    x50Grav = attrs->x10_fall_speed;
     while (list->cmd) {
         f32 t;
         f32 relx;
@@ -680,7 +660,7 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
         }
         t = list->x04;
         relx = (x50Vx * t + x50X) - (fpVx * t + fpX);
-        if (x50->xC0 == 1) {
+        if (x50->ground_or_air == GA_Air) {
             if (fpGrav < 0.00001f && fpGrav > -0.00001f) {
                 nearzero = true;
             } else {
@@ -707,7 +687,7 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
         } else {
             fpPredY = fpVy * t + fpY;
         }
-        if (x50->xC0 == 1) {
+        if (x50->ground_or_air == GA_Air) {
             if (x50Grav < 0.00001f && x50Grav > -0.00001f) {
                 nearzero = true;
             } else {
@@ -742,7 +722,7 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
             dirx = fp->x34_scale.y * -list->x0C;
             diry = fp->x34_scale.y * -list->x08;
         }
-        scale = fp->x34_scale.y;
+        scale = get_scale(fp);
         upper = list->x14 * scale;
         lower = list->x10 * scale;
         if (upper > relPredY && lower < relPredY + yBound &&
