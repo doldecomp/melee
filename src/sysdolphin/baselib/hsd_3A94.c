@@ -4376,11 +4376,6 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     return 0;
 }
 
-static inline CARDFileInfo* fn_803B0E9C_file_info(struct CardState* arg0)
-{
-    return &arg0->file_info;
-}
-
 s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
     u8 digest[0x30];
@@ -4509,9 +4504,9 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         } else {
             s32 retries;
             u8* buf = arg0->x0;
+            u32 read_size = sector_size;
             for (retries = 0; retries < 10; retries++) {
-                result =
-                    CARDRead(fn_803B0E9C_file_info(arg0), buf, sector_size, 0);
+                result = CARDRead(&arg0->file_info, buf, read_size, 0);
                 if (result != -1) {
                     break;
                 }
@@ -4611,10 +4606,14 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
         {
             s32 retries;
-            u32 write_size = arg0->x8;
-            u8* buf = arg0->x0;
-            s32 offset = write_size * block_idx;
+            s32 offset;
+            u32 write_size;
+            u8* buf;
 
+            write_size = arg0->x8;
+            (void) write_size;
+            buf = arg0->x0;
+            offset = write_size * block_idx;
             for (retries = 0; retries < 10; retries++) {
                 result = CARDWrite(&arg0->file_info, buf, write_size, offset);
                 if (result != -1) {
