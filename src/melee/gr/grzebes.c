@@ -957,9 +957,10 @@ void grZebes_801D99E0(HSD_GObj* gobj)
         delta = target_level - gp->u.zebes5.xD8;
 
         abs_delta = delta;
+        target_level = 0.0f;
 
         if ((delta < 0 ? -abs_delta : abs_delta) < threshold ||
-            (delta < 0 ? -abs_delta : abs_delta) < accel) {
+            (abs_delta < target_level ? -abs_delta : abs_delta) < accel) {
             gp->u.zebes5.xC8 = 4;
         } else {
             gp->u.zebes5.xD0 += accel;
