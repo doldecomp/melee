@@ -52,24 +52,26 @@ static void mnSound_VolumeAnim(HSD_JObj* jobj, s32 sound_music_mix,
 
 static void mnSound_ChannelAnim(HSD_JObj* jobj, s32 channel)
 {
-    HSD_JObj* jobj_anim[3];
+    HSD_JObj* jobj_anim_2;
+    HSD_JObj* jobj_anim_1;
+    HSD_JObj* jobj_anim_0;
     f32 right_frame, left_frame;
-    lb_80011E24(jobj, &jobj_anim[0], 8, -1);
-    lb_80011E24(jobj, &jobj_anim[1], 10, -1);
-    lb_80011E24(jobj, &jobj_anim[2], 9, -1);
-    left_frame = mn_8022F298(jobj_anim[1]);
-    right_frame = mn_8022F298(jobj_anim[2]);
+    lb_80011E24(jobj, &jobj_anim_0, 8, -1);
+    lb_80011E24(jobj, &jobj_anim_1, 10, -1);
+    lb_80011E24(jobj, &jobj_anim_2, 9, -1);
+    left_frame = mn_8022F298(jobj_anim_1);
+    right_frame = mn_8022F298(jobj_anim_2);
 
-    HSD_JObjReqAnimAll(jobj_anim[0], channel);
-    HSD_JObjAnimAll(jobj_anim[0]);
+    HSD_JObjReqAnimAll(jobj_anim_0, channel);
+    HSD_JObjAnimAll(jobj_anim_0);
 
-    HSD_JObjReqAnimAll(jobj_anim[1], left_frame);
-    mn_8022F3D8(jobj_anim[1], 0xFFU, MOBJ_MASK);
-    HSD_JObjAnimAll(jobj_anim[1]);
+    HSD_JObjReqAnimAll(jobj_anim_1, left_frame);
+    mn_8022F3D8(jobj_anim_1, 0xFFU, MOBJ_MASK);
+    HSD_JObjAnimAll(jobj_anim_1);
 
-    HSD_JObjReqAnimAll(jobj_anim[2], right_frame);
-    mn_8022F3D8(jobj_anim[2], 0xFFU, MOBJ_MASK);
-    HSD_JObjAnimAll(jobj_anim[2]);
+    HSD_JObjReqAnimAll(jobj_anim_2, right_frame);
+    mn_8022F3D8(jobj_anim_2, 0xFFU, MOBJ_MASK);
+    HSD_JObjAnimAll(jobj_anim_2);
 }
 
 static inline void mnSound_InitVolumeAnim(HSD_JObj* jobj, s32 sound_music_mix,
