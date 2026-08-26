@@ -387,13 +387,13 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     u8* base;
     s32 is_last_round;
     gm_803DEBE8_t* opp_data;
+    s32 slot_idx;
+    struct GameCache* gc;
     s32 count_processed;
     s32 count;
-    struct GameCache* gc;
-    s32 slot_idx;
-    u64 audio;
     s32 i;
-    PAD_STACK(8);
+    u64 audio;
+    PAD_STACK(12);
 
     base = (u8*) gm_803DE930_Scenes;
     is_last_round = 0;
