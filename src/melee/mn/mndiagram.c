@@ -415,6 +415,18 @@ static inline int mnDiagram_CountUnlockedFightersInline(void)
     return count;
 }
 
+static inline int mnDiagram_CountUnlockedFightersForHeaders(void)
+{
+    int i;
+    int count = 0;
+    for (i = 0; i < SELKIND_COUNT; i++) {
+        if (mn_IsFighterUnlocked(i)) {
+            count++;
+        }
+    }
+    return count;
+}
+
 /// @brief Formats a number with optional decimal places.
 /// @param buf Output buffer for the string.
 /// @param val The value to format (treat last decimal_places digits as
@@ -2634,7 +2646,8 @@ HSD_JObj* mnDiagram_CreateFighterIcon(int idx, int arg1)
 
 void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
 {
-    int count;
+    HSD_JObj* jobj2;
+    s32 count;
     u8* pr;
     u8* p2;
     int remr;
@@ -2646,8 +2659,7 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
     HSD_JObj* sp_jobj;
     u8 stack_obj2[4];
     HSD_JObj* sp_jobj2;
-    u8 stack_obj3[20];
-    int k;
+    u8 stack_obj3[12];
     int idx;
     int remaining;
     u8* p;
@@ -2664,14 +2676,10 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
     (void) &stack_obj3;
 
     // Column headers (fighter icons)
-    joint_data = assets->FaceB;
     for (i = 0; i < 7; i++) {
         sorted = mnDiagram_804A0750.sorted_fighters;
-        for (count = k = 0; k < SELKIND_COUNT; k++) {
-            if (mn_IsFighterUnlocked(k) != 0) {
-                count++;
-            }
-        }
+        joint_data = assets->FaceB;
+        count = mnDiagram_CountUnlockedFightersForHeaders();
         if (count > i) {
             remaining = i;
             idx = arg2;
@@ -2686,8 +2694,8 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
                 idx++;
                 p2++;
                 p++;
-                if (idx >= SELKIND_COUNT) {
-                    fighter_id = SELKIND_COUNT;
+                if (idx >= 0x19) {
+                    fighter_id = 0x19;
                     goto col_found;
                 }
                 if (mn_IsFighterUnlocked(*p2) == 0) {
@@ -2704,10 +2712,12 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
             lb_80011E24(jobj, &sp_jobj, 2, -1);
             HSD_JObjReqAnimAll(sp_jobj, (f32) (fighter_id & 0xFF));
             HSD_JObjAnimAll(sp_jobj);
+            jobj2 = jobj;
+            jobj = data->jobjs[7];
             x_spacing = HSD_JObjGetTranslationX(data->jobjs[8]) -
-                        HSD_JObjGetTranslationX(data->jobjs[7]);
-            HSD_JObjSetTranslateX(jobj, x_spacing * i);
-            HSD_JObjAddChild(data->jobjs[7], jobj);
+                        HSD_JObjGetTranslationX(jobj);
+            HSD_JObjSetTranslateX(jobj2, x_spacing * i);
+            HSD_JObjAddChild(data->jobjs[7], jobj2);
         }
     }
 
@@ -2715,12 +2725,7 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
     joint_data = assets->FaceB;
     for (i = 0; i < 0xA; i++) {
         sorted = mnDiagram_804A0750.sorted_fighters;
-        count = 0;
-        for (k = 0; k < SELKIND_COUNT; k++) {
-            if (mn_IsFighterUnlocked(k) != 0) {
-                count++;
-            }
-        }
+        count = mnDiagram_CountUnlockedFightersForHeaders();
         if (count > i) {
             remr = i;
             idx = arg1;
@@ -2735,7 +2740,7 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
                 idx++;
                 pr2++;
                 pr++;
-                if (idx >= SELKIND_COUNT) {
+                if (idx >= 0x19) {
                     selkind = SELKIND_COUNT;
                     goto row_found;
                 }
@@ -2754,7 +2759,7 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
             HSD_JObjReqAnimAll(sp_jobj2, (f32) (selkind & 0xFF));
             HSD_JObjAnimAll(sp_jobj2);
             y_spacing = HSD_JObjGetTranslationY(data->jobjs[10]) -
-                        HSD_JObjGetTranslationY(data->jobjs[9]);
+                        HSD_JObjGetTranslationY(jobj2 = data->jobjs[9]);
             HSD_JObjSetTranslateY(jobj, y_spacing * i);
             HSD_JObjAddChild(data->jobjs[9], jobj);
         }
