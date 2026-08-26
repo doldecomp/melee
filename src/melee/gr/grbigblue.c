@@ -1595,8 +1595,8 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
     Vec3 back;
     Vec3 normal;
     Vec3 euler;
-    Vec3 check_pos;
     Ground* gp = gobj->user_data;
+    Vec3 check_pos;
     u8* bp = (u8*) gp;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     PAD_STACK(56);
