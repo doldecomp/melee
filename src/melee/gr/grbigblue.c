@@ -3024,9 +3024,22 @@ f32 grBigBlue_801EC58C(Vec3* pos, Vec3* normal_out, f32 half_height)
     return max_y;
 }
 
+typedef union grBb_CarStatus {
+    struct {
+        u8 state : 6;
+        u8 pad_0 : 2;
+        u8 pad_1;
+    } state;
+    struct {
+        u16 pad_0 : 7;
+        u16 lane : 5;
+        u16 pad_1 : 4;
+    } lane;
+} grBb_CarStatus;
+
 typedef struct grBb_Car {
-    u8 state;
-    u8 pad_1[3];
+    grBb_CarStatus status;
+    u8 pad_2[2];
     f32 target;
     f32 xDC;
     Vec3 pos;
@@ -3072,7 +3085,7 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
     } grBb_LaneBits;
     Ground* gp = gobj->user_data;
     s32 i;
-    s32 line_idx;
+    s32 j;
     s32 k;
     u8* car;
 
@@ -3091,6 +3104,7 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
     car = (u8*) gp;
     for (k = 0; k < 4; k++, car += 0x40) {
         if (k < yakumono_param->x18) {
+            s32 line_idx;
             grBb_YakumonoParam* params;
             f32 scale;
             f32 lerp;
@@ -3100,17 +3114,15 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
             ((grBb_StateBits*) (car + 0xD4))->state = 4;
 
             do {
-                struct grBigBlue_CarLane* p;
-
                 line_idx = HSD_Randi(30);
-                p = gp->u.bigblue.car.lanes;
-                for (i = 0; i < k; i++) {
-                    if (((grBb_LaneBits*) p)->lane == line_idx) {
+                for (j = 0; j < k; j++) {
+                    if (((grBb_CarGround*) gp)->typed.cars[j].status.lane.lane ==
+                        line_idx)
+                    {
                         break;
                     }
-                    p++;
                 }
-            } while (i != k);
+            } while (j != k);
 
             ((grBb_LaneBits*) (car + 0xD4))->lane = line_idx;
 
