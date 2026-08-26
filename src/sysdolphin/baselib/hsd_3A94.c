@@ -4710,9 +4710,8 @@ s32 fn_803B1338(CardState* state, s32 arg1)
             if (arg1 != 0) {
                 fdata = state->x70[0].ptr;
                 if (fdata == NULL) {
-                    s32 ofs0 =
-                        sector_size *
-                        ((hdr_base + sector_size - 1) / sector_size - 1);
+                    s32 ofs0 = sector_size *
+                               ((hdr_base + sector_size - 1) / sector_size - 1);
                     cmd0[0] = 2;
                     cmd0[1] = (s32) state;
                     cmd0[4] = 0;
@@ -4732,9 +4731,8 @@ s32 fn_803B1338(CardState* state, s32 arg1)
                     cmd1[2] = 0;
                     result = fn_803AC168(cmd1);
                 } else {
-                    s32 ofs0 =
-                        sector_size *
-                        ((hdr_base + sector_size - 1) / sector_size - 1);
+                    s32 ofs0 = sector_size *
+                               ((hdr_base + sector_size - 1) / sector_size - 1);
                     cmd2[0] = 2;
                     cmd2[1] = (s32) state;
                     cmd2[4] = 0;
@@ -4794,12 +4792,12 @@ s32 fn_803B1338(CardState* state, s32 arg1)
                 } else {
                     fdata = state->x70[0].ptr;
                     if (fdata == NULL) {
-                        result = CARD_WRITE_BLOCK(state, logical, phys, 0,
-                                                  NULL, 0, 0);
+                        result =
+                            CARD_WRITE_BLOCK(state, logical, phys, 0, NULL, 0, 0);
                     } else {
-                        result = CARD_WRITE_BLOCK(state, logical, phys, 0,
-                                                  fdata + offset,
-                                                  state->x8 - 0x20, 0);
+                        result =
+                            CARD_WRITE_BLOCK(state, logical, phys, 0,
+                                             fdata + offset, state->x8 - 0x20, 0);
                         offset += state->x8;
                         offset -= 0x20;
                     }
@@ -4832,8 +4830,8 @@ s32 fn_803B1338(CardState* state, s32 arg1)
                             u8* wdata = fdata + offset;
                             s32 chunk = state->x8 - 0x20;
                             result = fn_803B1338_queue_write(
-                                state, logical, phys, wdata, chunk, file_id,
-                                cmd10, cmd11);
+                                state, logical, phys, wdata, chunk, file_id, cmd10,
+                                cmd11);
                             offset += state->x8;
                             offset -= 0x20;
                         }
@@ -4843,12 +4841,12 @@ s32 fn_803B1338(CardState* state, s32 arg1)
                     } else {
                         fdata = state->x70[file_id].ptr;
                         if (fdata == NULL) {
-                            result = fn_803ACFC0(state, logical, phys, 0, NULL,
-                                                 0, file_id);
+                            result = fn_803ACFC0(state, logical, phys, 0, NULL, 0,
+                                                 file_id);
                         } else {
                             result = fn_803ACFC0(state, logical, phys, 0,
-                                                 fdata + offset,
-                                                 state->x8 - 0x20, file_id);
+                                                 fdata + offset, state->x8 - 0x20,
+                                                 file_id);
                             offset += state->x8;
                             offset -= 0x20;
                         }
@@ -4884,14 +4882,13 @@ s32 fn_803B1338(CardState* state, s32 arg1)
 
         for (i = 0; i < max_redun; i++) {
             if (arg1 != 0) {
-                result = fn_803B1338_queue_write(state, logical, 0xFFFF, NULL,
-                                                 0, file_id, cmd12, cmd13);
+                result = fn_803B1338_queue_write(
+                    state, logical, 0xFFFF, NULL, 0, file_id, cmd12, cmd13);
                 if (result < 0) {
                     return result;
                 }
             } else {
-                result =
-                    fn_803ACFC0(state, logical, 0xFFFF, 0, NULL, 0, file_id);
+                result = fn_803ACFC0(state, logical, 0xFFFF, 0, NULL, 0, file_id);
                 state->x170[logical] = -0x7FFF;
                 state->x270[logical] = 0;
                 if (result < 0) {
@@ -4918,14 +4915,14 @@ s32 fn_803B1338(CardState* state, s32 arg1)
                             fdata = state->x70[file_id].ptr;
                             if (fdata == NULL) {
                                 result = fn_803B1338_queue_write(
-                                    state, logical, phys, NULL, 0, file_id,
-                                    cmd14, cmd15);
+                                    state, logical, phys, NULL, 0, file_id, cmd14,
+                                    cmd15);
                             } else {
                                 u8* wdata = fdata + offset;
                                 s32 chunk = state->x8 - 0x20;
                                 result = fn_803B1338_queue_write(
-                                    state, logical, phys, wdata, chunk,
-                                    file_id, cmd16, cmd17);
+                                    state, logical, phys, wdata, chunk, file_id,
+                                    cmd16, cmd17);
                                 offset += state->x8;
                                 offset -= 0x20;
                             }
