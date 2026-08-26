@@ -1038,11 +1038,25 @@ static void hsd_80394E8C(struct lbl_8040B904_t* node_ptr)
     hsd_804CF810.x0_b5 = 1;
 }
 
-// @TODO: Currently 94.46% match - BSS relocation and register allocation
-// differences remain
+static inline const char* hsd_80394F48_get_first_entry(EventData* data)
+{
+    return data->entries[0];
+}
+
+static inline size_t hsd_80394F48_entry_length(s32 index, EventData* data)
+{
+    return strlen(data->entries[index]);
+}
+
+static inline void hsd_80394F48_set_base_color(void** color)
+{
+    *color = &lbl_8040AB00;
+}
+
+// @TODO: Currently 96.77% match - register allocation differences remain
 void hsd_80394F48(void* data)
 {
-    u8* base_color = (u8*) &lbl_8040AB00;
+    struct lbl_8040AB00_t* base_color = &lbl_8040AB00;
     struct ParticleScreenState* sp = &hsd_804CF810;
     EventData* dp = data;
     s32 num_entries;
@@ -1053,7 +1067,7 @@ void hsd_80394F48(void* data)
     s32* px40;
     s32* px8;
     s32 col_start;
-    s32 row_start;
+    s32 saved_row;
     void* hi_color;
     s32 x_base;
     s32 cur_row;
@@ -1062,19 +1076,21 @@ void hsd_80394F48(void* data)
 
     PAD_STACK(64);
 
-    num_entries = strlen(dp->entries[0]);
+    num_entries = strlen(hsd_80394F48_get_first_entry(dp));
     px50 = &sp->x50;
     pxC8 = &sp->xC8;
     pxCC = &sp->xCC;
     px4 = &sp->x4;
     px40 = &sp->x40;
     px8 = &sp->x8;
-    *px50 = base_color;
+    hsd_80394F48_set_base_color(px50);
     col_start = *pxC8;
-    row_start = *pxCC;
-
-    *px4 = col_start * 11 + 0x14;
-    *px8 = (*px40 - 0x28) - (row_start + 1) * 14;
+    {
+        s32 row = *pxCC;
+        saved_row = row;
+        *px4 = col_start * 11 + 0x14;
+        *px8 = (*px40 - 0x28) - (row + 1) * 14;
+    }
 
     b6 = sp->x0_b6;
     if (sp->x0_b7 != 0) {
@@ -1111,8 +1127,8 @@ void hsd_80394F48(void* data)
 
     *px4 += 11;
     x_base = col_start * 11 + 0x14;
-    hi_color = base_color + 0x20;
-    cur_row = row_start - 1;
+    hi_color = base_color + 1;
+    cur_row = saved_row - 1;
 
     for (i = 0; dp->entries[i] != 0; i++) {
         *px4 = x_base;
@@ -1130,14 +1146,14 @@ void hsd_80394F48(void* data)
         if (i == dp->index) {
             *px50 = hi_color;
         } else {
-            *px50 = base_color;
+            hsd_80394F48_set_base_color(px50);
         }
 
         *px4 += 11;
         hsd_80394434(dp->entries[i]);
 
-        *px4 += strlen(dp->entries[i]) * 11;
-        *px50 = base_color;
+        *px4 += hsd_80394F48_entry_length(i, dp) * 11;
+        hsd_80394F48_set_base_color(px50);
 
         b6 = sp->x0_b6;
         if (sp->x0_b7 != 0) {
@@ -1149,7 +1165,7 @@ void hsd_80394F48(void* data)
         }
     }
 
-    *px50 = base_color;
+    hsd_80394F48_set_base_color(px50);
     *px4 = x_base;
     *px8 = (*px40 - 0x28) - (cur_row + 1) * 14;
 
