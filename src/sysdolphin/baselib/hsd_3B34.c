@@ -565,14 +565,14 @@ void hsd_803B3CD8(s32 arg0)
     s32 work_r24;
     s32 work_r25;
     s32 work_r23;
-    u8* work_r26;
+    s32 work_r29_3;
     s32 work_r28_3;
     s32 work_r28_4;
     s32 work_r28_5;
     s32 work_r28_6;
     s32 work_r29;
     s32 work_r29_2;
-    s32 work_r29_3;
+    u8* work_r26;
     s32 work_r4;
     s32 work_r4_2;
     s32 work_r5;
@@ -770,7 +770,7 @@ loop_13:
             }
             work_r28_2 = 0;
         loop_65:
-            scratch_r31 = *(work_r27 + (work_r28_2 * 2));
+            scratch_r31 = work_r27[work_r28_2];
             work_r29_2 = *(work_r26 + work_r28_2) - 1;
             for (; work_r29_2 >= 0; work_r29_2--) {
                 hsd_804D79AC += 1;
@@ -874,7 +874,7 @@ loop_13:
             }
             work_r28_4 = 0;
         loop_112:
-            scratch_r31_2 = *(work_r27 + (work_r28_4 * 2));
+            scratch_r31_2 = work_r27[work_r28_4];
             work_r29_3 = *(work_r26 + work_r28_4) - 1;
             for (; work_r29_3 >= 0; work_r29_3--) {
                 hsd_804D79AC += 1;
