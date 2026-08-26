@@ -387,14 +387,14 @@ static inline void hsd_80391F28_calc_tick4_y(f32 perp_y, f32* tick4_y)
 void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
 {
     f32 tick6_x;
-    f32 dx;
-    f32 dy;
+    f32 step_y;
+    f32 tick6_y;
     f32 perp_x;
     f32 perp_y;
-    f32 tick6_y;
+    f32 dy;
     f32 tick4_x;
+    f32 dx;
     f32 tick4_y;
-    f32 step_y;
     f32 step_x;
     f32 len;
     s32 i;
@@ -410,11 +410,10 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
     GXWGFifo.f32 = x1;
     i = 0;
     a = color->a;
-    GXWGFifo.f32 = y1;
-
     b = color->b;
-    g = color->g;
+    GXWGFifo.f32 = y1;
     r = color->r;
+    g = color->g;
 
     tick6_y = 6.0F * perp_y;
     {
