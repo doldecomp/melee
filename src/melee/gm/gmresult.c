@@ -1531,7 +1531,7 @@ void fn_80176D3C(Vec3* positions)
             HSD_JObjReqAnimAll(jobj, 0.0F);
             HSD_JObjAnimAll(jobj);
             HSD_GObj_SetupProc(gobj, fn_80176D18, 1);
-            fn_80179F6C(i, (int) gobj);
+            fn_80179F6C(i, gobj);
         }
 
     loop_end:
