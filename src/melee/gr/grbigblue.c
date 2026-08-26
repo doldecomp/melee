@@ -3879,8 +3879,8 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
 
         self = gp->raw;
         self += offset;
-        if (blast + yakumono_param->x68 * scale < gp->data.lanes[index].pos.x)
-        {
+        blast += yakumono_param->x68 * scale;
+        if (gp->data.lanes[index].pos.x > blast) {
             if (0.0F != gp->data.lanes[index].xEC) {
                 result = 9;
             } else {
@@ -3895,8 +3895,8 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
 
         self = gp->raw;
         self += offset;
-        if (blast - yakumono_param->x68 * scale > gp->data.lanes[index].pos.x)
-        {
+        blast -= yakumono_param->x68 * scale;
+        if (gp->data.lanes[index].pos.x < blast) {
             if (0.0F != gp->data.lanes[index].xEC) {
                 result = 9;
             } else {
