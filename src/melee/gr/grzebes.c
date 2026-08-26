@@ -1711,20 +1711,84 @@ static inline f32 grZebes_801DB3CC_normalize(f32 dist, f32 value)
     return value / dist;
 }
 
+static inline void grZebes_801DB3CC_update(grZe_BubbleEntry** base)
+{
+    int k;
+    f32 left_anchor_x = grZe_8049F158[0].x;
+    f32 left_anchor_y = grZe_8049F158[0].y;
+    f32 right_anchor_x = grZe_8049F158[1].x;
+    f32 right_anchor_y = grZe_8049F158[1].y;
+    f32 left_bound_y = grZe_8049F140[0].y;
+    f32 left_bound_x = grZe_8049F140[0].x;
+    f32 right_bound_y = grZe_8049F140[1].y;
+    f32 right_bound_x = grZe_8049F140[1].x;
+
+    (void) 0.0;
+    for (k = 0; k < 20; (*base)++, k++) {
+        if ((*base)->x00_active != 0) {
+            if (k == 0) {
+                (*base)->x10 = 0.0f;
+                (*base)->x14 = 0.0f;
+                (*base)->x08_x = left_anchor_x;
+                (*base)->x0C_y = left_anchor_y;
+            } else if (k == 6) {
+                (*base)->x10 = 0.0f;
+                (*base)->x14 = 0.0f;
+                (*base)->x08_x = right_anchor_x;
+                (*base)->x0C_y = right_anchor_y;
+            } else {
+                f32 old_y = (*base)->x0C_y;
+                f32 old_x = (*base)->x08_x;
+                f32 new_y = old_y + (*base)->x14;
+                f32 new_x = old_x + (*base)->x10;
+                if (new_y < left_bound_y && new_x < left_bound_x) {
+                    if (old_y >= left_bound_y) {
+                        new_y = left_bound_y;
+                    } else if (old_x >= left_bound_x) {
+                        new_x = left_bound_x;
+                    }
+                }
+                if (new_y < right_bound_y && new_x > right_bound_x) {
+                    if (old_y >= right_bound_y) {
+                        new_y = right_bound_y;
+                    } else if (old_x <= right_bound_x) {
+                        new_x = right_bound_x;
+                    }
+                }
+                (*base)->x08_x = new_x;
+                (*base)->x0C_y = new_y;
+                {
+                    f32 vx = (*base)->x10;
+                    f32 max_v = yakumono_param->x88;
+                    if (vx > max_v) {
+                        (*base)->x10 = max_v;
+                    } else if (vx < -max_v) {
+                        (*base)->x10 = -max_v;
+                    }
+                }
+                {
+                    f32 vy = (*base)->x14;
+                    f32 max_v = yakumono_param->x88;
+                    if (vy > max_v) {
+                        (*base)->x14 = max_v;
+                    } else if (vy < -max_v) {
+                        (*base)->x14 = -max_v;
+                    }
+                }
+            }
+        }
+    }
+}
+
 s32 grZebes_801DB3CC(HSD_GObj* gobj)
 {
     grZe_BubbleEntry* base = grZe_8049F170;
     s32 popped = 0;
     int i;
-    grZe_BubbleEntry* ptr;
-    f32 dist;
-    f32 dx;
-    f32 dist2;
-    f32 dx2;
-
-    ptr = base;
-    for (i = 0; i < 20; i++, ptr++) {
-        if (ptr->x00_active != 0 && grZebes_801DB088((Ground*) gobj, i) != 0) {
+    for (i = 0; i < 20; i++) {
+        if (base[i].x00_active != 0 &&
+            grZebes_801DB088((Ground*) gobj, i) != 0)
+        {
             popped = 1;
         }
     }
@@ -1752,16 +1816,13 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                 if (idx != 0 && idx != 6) {
                     f32 fx = zero;
                     f32 fy = zero;
-                    grZe_BubbleEntry* left = &base[idx - 1];
+                    s32 left_idx = idx - 1;
                     right_idx = idx + 1;
-                    if (left->x00_active != 0) {
+                    if (grZe_8049F170[left_idx].x00_active != 0) {
+                        grZe_BubbleEntry* left = &grZe_8049F170[left_idx];
+                        f32 dx = left->x08_x - cur->x08_x;
                         f32 dy = left->x0C_y - cur->x0C_y;
-                        dx = left->x08_x;
-                        dx -= cur->x08_x;
-                        dist = dx * dx + dy * dy;
-                        if (dist > zero) {
-                            dist = sqrtf(dist);
-                        }
+                        f32 dist = sqrtf(dx * dx + dy * dy);
                         {
                             f32 col_r = yakumono_param->x74;
                             if (dist > col_r) {
@@ -1781,15 +1842,11 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                         neighbor_count = 1;
                     }
                     {
-                        grZe_BubbleEntry* right = &base[right_idx];
+                        grZe_BubbleEntry* right = &grZe_8049F170[right_idx];
                         if (right->x00_active != 0) {
+                            f32 dx2 = right->x08_x - cur->x08_x;
                             f32 dy2 = right->x0C_y - cur->x0C_y;
-                            dx2 = right->x08_x;
-                            dx2 -= cur->x08_x;
-                            dist2 = dx2 * dx2 + dy2 * dy2;
-                            if (dist2 > zero) {
-                                dist2 = sqrtf(dist2);
-                            }
+                            f32 dist2 = sqrtf(dx2 * dx2 + dy2 * dy2);
                             {
                                 f32 col_r2 = yakumono_param->x74;
                                 if (dist2 > col_r2) {
@@ -1824,75 +1881,64 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
         for (a = 0; a < 19; a++, ea++) {
             if (ea->x00_active != 0) {
                 int b = a + 1;
-                grZe_BubbleEntry* eb = &base[b];
-                int rem = 20 - b;
-                if (b < 20) {
-                    for (; rem != 0; eb++, b++, rem--) {
-                        if (eb->x00_active != 0) {
-                            f32 dy = eb->x0C_y - ea->x0C_y;
-                            f32 dx = eb->x08_x - ea->x08_x;
-                            f32 dist_sq = grZebes_801DB3CC_dist2(dy, dx);
-                            f32 dist = dist_sq;
-                            if (dist_sq > 0.0f) {
-                                dist = sqrtf(dist_sq);
+                grZe_BubbleEntry* eb = &grZe_8049F170[b];
+                for (; b < 20; eb++, b++) {
+                    if (eb->x00_active != 0) {
+                        f32 dx = eb->x08_x - ea->x08_x;
+                        f32 dy = eb->x0C_y - ea->x0C_y;
+                        f32 dist = sqrtf(dx * dx + dy * dy);
+                        {
+                            grZe_YakumonoParam* yp = yakumono_param;
+                            f32 effective_dist = dist;
+                            f32 avg_size = ea->x18_size + eb->x18_size;
+                            f32 col_rad = yp->x74 * 0.5f * avg_size;
+                            f32 near_rad = yp->x70 * 0.5f * avg_size;
+                            f32 far_rad = yp->x6C * 0.5f * avg_size;
+                            if (dist < 0.001) {
+                                dy = 0.001;
+                                dx = 0.0f;
+                                effective_dist = 0.001;
                             }
-                            {
-                                f32 effective_dist = dist;
-                                f32 avg_size = ea->x18_size + eb->x18_size;
-                                f32 col_rad =
-                                    yakumono_param->x74 * 0.5f * avg_size;
-                                f32 near_rad =
-                                    yakumono_param->x70 * 0.5f * avg_size;
-                                f32 far_rad =
-                                    yakumono_param->x6C * 0.5f * avg_size;
-                                if (dist < 0.001) {
-                                    dy = 0.001;
-                                    dx = 0.0f;
-                                    effective_dist = 0.001;
+                            if (effective_dist < col_rad) {
+                                f32 strength = (f32) (((f64) (col_rad /
+                                                               effective_dist) -
+                                                        1.0) *
+                                                       0.5);
+                                strength = (f32) ((f64) strength * 0.9);
+                                if (a >= 7) {
+                                    f32 vx = -dx * strength;
+                                    f32 vy = -dy * strength;
+                                    f32 clamp_vy = vy;
+                                    if (vy < 0.0f) {
+                                        clamp_vy = 0.0f;
+                                    }
+                                    ea->x10 += vx;
+                                    ea->x14 += clamp_vy;
                                 }
-                                if (effective_dist < col_rad) {
-                                    f32 strength =
-                                        (f32) ((f64) (f32) (((f64) (col_rad /
-                                                                    effective_dist) -
-                                                             1.0) *
-                                                            0.5) *
-                                               0.9);
-                                    if (a >= 7) {
-                                        f32 vx = -dx * strength;
-                                        f32 vy = -dy * strength;
-                                        f32 clamp_vy = vy;
-                                        if (vy < 0.0) {
-                                            clamp_vy = 0.0f;
-                                        }
-                                        ea->x10 += vx;
-                                        ea->x14 += clamp_vy;
+                                if (b >= 7) {
+                                    f32 vx2 = dx * strength;
+                                    f32 vy2 = dy * strength;
+                                    if (vy2 < 0.0f) {
+                                        vy2 = 0.0f;
                                     }
-                                    if (b >= 7) {
-                                        f32 vx2 = dx * strength;
-                                        f32 vy2 = dy * strength;
-                                        if (vy2 < 0.0f) {
-                                            vy2 = 0.0f;
-                                        }
-                                        eb->x10 += vx2;
-                                        eb->x14 += vy2;
-                                    }
-                                } else if (!(effective_dist < near_rad) &&
-                                           effective_dist < far_rad)
-                                {
-                                    f32 attract =
-                                        yakumono_param->x78 / effective_dist;
-                                    if (a >= 7) {
-                                        f32 vx = dx * attract;
-                                        f32 vy = dy * attract;
-                                        ea->x10 += vx;
-                                        ea->x14 += vy;
-                                    }
-                                    if (b >= 7) {
-                                        f32 vx2 = -dx * attract;
-                                        f32 vy2 = -dy * attract;
-                                        eb->x10 += vx2;
-                                        eb->x14 += vy2;
-                                    }
+                                    eb->x10 += vx2;
+                                    eb->x14 += vy2;
+                                }
+                            } else if (!(effective_dist < near_rad) &&
+                                       effective_dist < far_rad)
+                            {
+                                f32 attract = yp->x78 / effective_dist;
+                                if (a >= 7) {
+                                    f32 vx = dx * attract;
+                                    f32 vy = dy * attract;
+                                    ea->x10 += vx;
+                                    ea->x14 += vy;
+                                }
+                                if (b >= 7) {
+                                    f32 vx2 = -dx * attract;
+                                    f32 vy2 = -dy * attract;
+                                    eb->x10 += vx2;
+                                    eb->x14 += vy2;
                                 }
                             }
                         }
@@ -1902,71 +1948,7 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
         }
     }
 
-    {
-        int k;
-        f32 left_anchor_x = grZe_8049F158[0].x;
-        f32 left_anchor_y = grZe_8049F158[0].y;
-        f32 right_anchor_x = grZe_8049F158[1].x;
-        f32 right_anchor_y = grZe_8049F158[1].y;
-        f32 left_bound_y = grZe_8049F140[0].y;
-        f32 left_bound_x = grZe_8049F140[0].x;
-        f32 right_bound_y = grZe_8049F140[1].y;
-        f32 right_bound_x = grZe_8049F140[1].x;
-        for (k = 0; k < 20; base++, k++) {
-            if (base->x00_active != 0) {
-                if (k == 0) {
-                    base->x10 = 0.0f;
-                    base->x14 = 0.0f;
-                    base->x08_x = left_anchor_x;
-                    base->x0C_y = left_anchor_y;
-                } else if (k == 6) {
-                    base->x10 = 0.0f;
-                    base->x14 = 0.0f;
-                    base->x08_x = right_anchor_x;
-                    base->x0C_y = right_anchor_y;
-                } else {
-                    f32 old_y = base->x0C_y;
-                    f32 old_x = base->x08_x;
-                    f32 new_y = old_y + base->x14;
-                    f32 new_x = old_x + base->x10;
-                    if (new_y < left_bound_y && new_x < left_bound_x) {
-                        if (old_y >= left_bound_y) {
-                            new_y = left_bound_y;
-                        } else if (old_x >= left_bound_x) {
-                            new_x = left_bound_x;
-                        }
-                    }
-                    if (new_y < right_bound_y && new_x > right_bound_x) {
-                        if (old_y >= right_bound_y) {
-                            new_y = right_bound_y;
-                        } else if (old_x <= right_bound_x) {
-                            new_x = right_bound_x;
-                        }
-                    }
-                    base->x08_x = new_x;
-                    base->x0C_y = new_y;
-                    {
-                        f32 vx = base->x10;
-                        f32 max_v = yakumono_param->x88;
-                        if (vx > max_v) {
-                            base->x10 = max_v;
-                        } else if (vx < -max_v) {
-                            base->x10 = -max_v;
-                        }
-                    }
-                    {
-                        f32 vy = base->x14;
-                        f32 max_v = yakumono_param->x88;
-                        if (vy > max_v) {
-                            base->x14 = max_v;
-                        } else if (vy < -max_v) {
-                            base->x14 = -max_v;
-                        }
-                    }
-                }
-            }
-        }
-    }
+    grZebes_801DB3CC_update(&base);
 
     return popped;
 }
