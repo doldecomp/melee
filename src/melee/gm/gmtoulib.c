@@ -121,13 +121,7 @@ void fn_8018A514(int count, float val)
     int i;
     s32 n;
 
-    if (count < 9) {
-        region = 0;
-    } else if (count >= 14) {
-        region = 2;
-    } else {
-        region = 1;
-    }
+    region = count < 9 ? 0 : count >= 14 ? 2 : 1;
 
     srcs = (BracketSrcPtr*) ((BracketData*) lbl_80473AB8)->srcs;
     src = srcs[region].ptr;
@@ -146,7 +140,7 @@ void fn_8018A514(int count, float val)
         }
     }
 
-    n = lbl_803D9D20.x20[i];
+    n = lbl_803D9D20.x20[count];
 
     entries = lbl_80473AB8;
     for (i = 0; i < n; i++) {
