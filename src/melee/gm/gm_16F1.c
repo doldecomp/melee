@@ -495,9 +495,10 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     struct lbl_803B7A60_t* zeroes = &lbl_803B7A60;
     u8* flags = rules->pad3F0;
     struct lbl_8046B6A0_24C_58_t* x58 = rules->x58;
-    s32 player_net;
     s32 scores[6];
     u8 rankings[7] = { 0 };
+    s32 player_net;
+    int i;
 
     if (lbl_804D65A0 != 0) {
         return 0;
@@ -509,33 +510,24 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     if (rules->x5 == 3) {
         fn_80171B64((struct lbl_804D65A8_t*) rankings);
     } else {
-        int k;
-
-        for (k = 0; k < 6; k++) {
-            if (x58[k].x0 != 3) {
-                u16 xA = x58[k].xA;
-                scores[k] =
-                    (x58[k].x20 - (x58[k].x24 - xA)) + ((s8) rules->xC * xA);
+        for (i = 0; i < 6; i++) {
+            if (x58[i].x0 != 3) {
+                u16 xA = x58[i].xA;
+                scores[i] = x58[i].x20 - (x58[i].x24 - xA) +
+                            (s8) rules->xC * xA;
             }
         }
 
-        {
-            int idx;
-            for (idx = 0; idx < 6; idx++) {
-                if (x58[idx].x0 != 3) {
-                    s32 my_score = scores[idx];
-                    int j;
-
-                    for (j = 0; j < 6; j++) {
-                        if (x58[j].x0 != 3 && idx != j && my_score < scores[j])
-                        {
-                            rankings[idx]++;
-                        }
+        for (i = 0; i < 6; i++) {
+            if (x58[i].x0 != 3) {
+                int j;
+                for (j = 0; j < 6; j++) {
+                    if (x58[j].x0 != 3 && i != j && scores[i] < scores[j]) {
+                        rankings[i]++;
                     }
-
-                    if (rankings[6] < rankings[idx]) {
-                        rankings[6] = rankings[idx];
-                    }
+                }
+                if (rankings[6] < rankings[i]) {
+                    rankings[6] = rankings[i];
                 }
             }
         }
