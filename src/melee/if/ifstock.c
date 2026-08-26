@@ -515,22 +515,19 @@ HSD_GObj* ifStock_802F96D0(int a, int b, float x, float y)
 void ifStock_802F98E8(unsigned char player, int b)
 {
     struct ifStock_804A1378* stock = &ifStock_804A1378;
-    HSD_GObj* gobj;
+    unsigned char* data;
     HSD_JObj* jobj;
     struct ifStock_804A1378_x204* user_data;
-    struct ifStock_804A1378_per_player* r26;
     int i;
-    unsigned char* data;
+    HSD_GObj* gobj;
     lbl_8046B6A0_t* ae44;
-    PAD_STACK(16);
     if (stock->x0 != NULL) {
         user_data = &stock->x204[player];
         user_data->x0[0] = player;
         user_data->x0[1] = b;
         user_data->x0[2] = 1;
-        r26 = &stock->player[player];
-        if (r26->x0 != NULL) {
-            HSD_GObjPLink_80390228(r26->x0);
+        if (stock->player[player].x0 != NULL) {
+            HSD_GObjPLink_80390228(stock->player[player].x0);
         }
         gobj = GObj_Create(14, 15, 0);
         gobj->user_data = user_data;
@@ -546,7 +543,7 @@ void ifStock_802F98E8(unsigned char player, int b)
                 lb_80011E24(jobj, ifStock_804A1378.player[player].x4, 0, 1, 2,
                             3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
                             -1);
-                r26->x0 = gobj;
+                stock->player[player].x0 = gobj;
                 ifStock_804A1378.player[player].coins =
                     Player_GetCoins(player);
                 ifStock_804A1378.player[player].stocks =
@@ -657,6 +654,7 @@ void ifStock_802F98E8(unsigned char player, int b)
             }
         }
     }
+    PAD_STACK(16);
 }
 
 static inline HSD_GObj* ifStock_802F9F48_inline(int arg)
