@@ -1046,8 +1046,20 @@ s32 mn_80230D18(struct mn_802307F8_t* arg0, HSD_JObj* arg1, s8 arg2)
 
 HSD_GObj* mn_80230E38(int arg0)
 {
+    u8 operand_pad[12];
     u16 jobj_map[17];
     HSD_JObj* jobj_parts[17];
+    union {
+        struct {
+            u32 bytes4;
+            u16 bytes2;
+        } packed;
+        u8 idx[6];
+    } time_indices;
+    union {
+        u16 packed;
+        u8 idx[2];
+    } damage_indices;
     HSD_GObj* gobj;
     struct mn_802307F8_t* user_data;
     u8 num_options;
@@ -1065,7 +1077,8 @@ HSD_GObj* mn_80230E38(int arg0)
     HSD_JObj* root_jobj;
     StaticModelDesc** desc_ptr;
     u16* sub_count_ptr;
-    PAD_STACK(0x40);
+    PAD_STACK(12);
+    PAD_STACK(0x28);
 
     selected = (u8) mn_804A04F0.hovered_selection;
     num_options = mn_803EB6B0[13].selection_count;
@@ -1096,8 +1109,7 @@ HSD_GObj* mn_80230E38(int arg0)
         mn_804A04F0.confirmed_selection = user_data->x9;
     } else {
         mn_804A04F0.confirmed_selection =
-            ((union mn_802307F8_value_view*) user_data)
-                ->indexed.values[user_data->x1];
+            *(&user_data->x2 + user_data->x1);
     }
 
     if ((u8) arg0 != 0) {
@@ -1209,25 +1221,19 @@ HSD_GObj* mn_80230E38(int arg0)
 
                 switch (i) {
                 case 1: {
-                    union {
-                        struct {
-                            u32 bytes4;
-                            u16 bytes2;
-                        } packed;
-                        u8 idx[6];
-                    } time_indices;
+                    u8* index_ptr;
 
                     time_indices.packed.bytes4 = mn_804DBE10;
                     time_indices.packed.bytes2 = mn_804DBE14;
-                    for (j = 0; j < 6; j++) {
+                    index_ptr = time_indices.idx;
+                    for (j = 0; j < 6; j++, index_ptr++) {
                         HSD_JObj* text =
                             HSD_JObjLoadJoint(MenMainNmRl_Top.joint);
                         HSD_JObjAddAnimAll(text, MenMainNmRl_Top.animjoint,
                                            MenMainNmRl_Top.matanim_joint,
                                            MenMainNmRl_Top.shapeanim_joint);
                         HSD_JObjAddChild(
-                            *(&user_data->x34[1].x0 + time_indices.idx[j]),
-                            text);
+                            *(&user_data->x34[1].x0 + *index_ptr), text);
                     }
                     mn_8022FD18((u8) (((struct mn_8022FB88_arg1_t*)
                                            mn_804D6BD0->user_data)
@@ -1235,23 +1241,20 @@ HSD_GObj* mn_80230E38(int arg0)
                     break;
                 }
                 case 3: {
-                    union {
-                        u16 packed;
-                        u8 idx[2];
-                    } damage_indices;
+                    u8* index_ptr;
                     u8 value = user_data->x5;
                     HSD_JObj* digit_jobj;
 
                     damage_indices.packed = mn_804DBDF8;
-                    for (j = 0; j < 2; j++) {
+                    index_ptr = damage_indices.idx;
+                    for (j = 0; j < 2; j++, index_ptr++) {
                         HSD_JObj* text =
                             HSD_JObjLoadJoint(MenMainNmRl_Top.joint);
                         HSD_JObjAddAnimAll(text, MenMainNmRl_Top.animjoint,
                                            MenMainNmRl_Top.matanim_joint,
                                            MenMainNmRl_Top.shapeanim_joint);
                         HSD_JObjAddChild(
-                            *(&user_data->x34[3].x0 + damage_indices.idx[j]),
-                            text);
+                            *(&user_data->x34[3].x0 + *index_ptr), text);
                     }
                     digit_jobj = (HSD_JObj*) mn_80231634(
                         (struct mn_80231634_t*) *(&user_data->x34[3].x0 + 2));
@@ -1266,8 +1269,7 @@ HSD_GObj* mn_80230E38(int arg0)
                 case 0:
                 case 2:
                 case 4: {
-                    u8 value = ((union mn_802307F8_value_view*) user_data)
-                                   ->indexed.values[i];
+                    u8 value = *(&user_data->x2 + i);
                     u8 default_value;
                     AnimLoopSettings* value_als;
 
