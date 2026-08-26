@@ -314,8 +314,8 @@ void ifStock_802F89F8(HSD_GObj* gobj)
     int digit;
     Player_GetCoins(player);
     PAD_STACK(32);
-    coins = Player_GetCoins(user_data->player);
-    ifStock_804A1378.player[user_data->player].coins = coins;
+    coins = ifStock_804A1378.player[user_data->player].coins =
+        Player_GetCoins(user_data->player);
     if ((u32) coins > 99999U) {
         coins = 99999;
     }
