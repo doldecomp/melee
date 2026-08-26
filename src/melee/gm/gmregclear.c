@@ -3337,13 +3337,18 @@ void fn_80181C80(s32 arg0)
     }
 }
 
-static inline s32 fn_80181E18_ComputeRemaining100(s32 count)
+static inline s32 fn_80181E18_ComputeRemaining100(s32* x4, s32 count)
 {
-    return 0x64 - (count + lbl_80472ED8.x4);
+    return 0x64 - (count + *x4);
 }
 
 void fn_80181E18(void)
 {
+    lbl_80472ED8_t* data = &lbl_80472ED8;
+    s32* x4;
+    s32* field;
+    RegClearSpawnEntry* entry;
+    RegClearSpawnEntry* entries;
     s32 entry_idx;
     s32 next;
     s32 temp;
@@ -3351,8 +3356,9 @@ void fn_80181E18(void)
     s32 i;
     s32 mode = gm_GetCurrentGameMode();
 
-    if (lbl_80472ED8.x8 <= 0x5A) {
-        lbl_80472ED8.x8 += 1;
+    field = &data->x8;
+    if (data->x8 <= 0x5A) {
+        *field += 1;
     }
 
     switch (mode) {
@@ -3363,7 +3369,7 @@ void fn_80181E18(void)
     case 0x23:
     case 0x24:
         if (gm_8016AEEC() == 0 && gm_8016AEFC() == 0x3B) {
-            lbl_80473594.x0 = 1;
+            data->record[0].x0 = 1;
             gm_8016B33C(7);
             gm_8016B328();
         }
@@ -3377,15 +3383,16 @@ void fn_80181E18(void)
         break;
     }
 
-    for (entry_idx = 0; entry_idx < 101; entry_idx++) {
-        if (lbl_80472ED8.x54[entry_idx].x0 == -2) {
+    entry = data->x54;
+    for (entry_idx = 0; entry_idx < 101; entry++, entry_idx++) {
+        if (entry->x0 == -2) {
             continue;
         }
 
-        switch (lbl_80473594.x8) {
+        switch (data->record[0].x8) {
         case 0x21:
         case 0x22:
-            lbl_80473594.x4 = gm_8016AEDC();
+            data->record[0].x4 = gm_8016AEDC();
             break;
         }
 
@@ -3393,7 +3400,10 @@ void fn_80181E18(void)
         if (temp < 0) {
             temp = 0;
         }
-        lbl_80473594.x2 = (s16) (temp + lbl_80472ED8.x4);
+        field = &data->x4;
+        x4 = field;
+        next = *x4;
+        data->record[0].x2 = (s16) (temp + next);
 
         switch (mode) {
         case 0x21:
@@ -3401,25 +3411,25 @@ void fn_80181E18(void)
             if (temp < 0) {
                 temp = 0;
             }
-            ifStock_802FA2D0(0xA - (temp + lbl_80472ED8.x4));
+            ifStock_802FA2D0(0xA - (temp + *x4));
             break;
         case 0x22:
             temp = entry_idx - fn_80181BFC(NULL);
             if (temp < 0) {
                 temp = 0;
             }
-            ifStock_802FA2D0(fn_80181E18_ComputeRemaining100(temp));
+            ifStock_802FA2D0(fn_80181E18_ComputeRemaining100(x4, temp));
             break;
         default:
             temp = entry_idx - fn_80181BFC(NULL);
             if (temp < 0) {
                 temp = 0;
             }
-            ifStock_802FA2D0(temp + lbl_80472ED8.x4);
+            ifStock_802FA2D0(temp + *x4);
             break;
         }
 
-        next = lbl_80472ED8.x54[entry_idx].x0;
+        next = data->x54[entry_idx].x0;
 
         if (next == -1) {
             fn_80181C80(entry_idx);
@@ -3436,26 +3446,27 @@ void fn_80181E18(void)
                 }
             }
             if (count == 0) {
-                lbl_80473594.x0 = 1;
+                data->record[0].x0 = 1;
                 gm_8016B33C(7);
                 gm_8016B328();
             }
         } else {
             s32 k;
+            entries = data->x54;
             for (k = next; k < entry_idx; k++) {
-                lbl_80472ED8.x54[k].x0 = -1;
-                lbl_80472ED8.x4 += 1;
+                entries[k].x0 = -1;
+                *x4 += 1;
             }
-            fn_80181C80(lbl_80472ED8.x54[entry_idx].x0);
+            fn_80181C80(data->x54[entry_idx].x0);
             temp = entry_idx - fn_80181BFC(NULL);
             if (temp < 0) {
                 temp = 0;
             }
-            ifStock_802FA2D0(temp + lbl_80472ED8.x4);
+            ifStock_802FA2D0(temp + *x4);
         }
         break;
     }
-    PAD_STACK(16);
+    PAD_STACK(8);
 }
 
 void gm_80182174(void)
