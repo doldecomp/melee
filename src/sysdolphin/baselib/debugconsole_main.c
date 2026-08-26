@@ -2517,7 +2517,7 @@ void hsd_80397520(void* node_ptr)
     }
 }
 
-// @TODO: Currently 99.78% match - register allocation differences remain
+// @TODO: Currently 99.85% match - pad addressing and CR update differ
 void hsd_803975D4(void)
 {
     struct ParticleInputState {
@@ -2570,8 +2570,8 @@ void hsd_803975D4(void)
     ((struct ParticleInputState*) sp)->port = port;
     pads = ((struct ParticleInputState*) sp)->pads;
     buttons = pads[((struct ParticleInputState*) sp)->port].button;
-    changed =
-        pads[((struct ParticleInputState*) sp)->port + 4].button ^ buttons;
+    changed = (&pads[((struct ParticleInputState*) sp)->port])[4].button ^
+              pads[((struct ParticleInputState*) sp)->port].button;
     sp->xC0 = buttons;
     new_press = (u16) (buttons & changed);
     if (new_press != 0) {
