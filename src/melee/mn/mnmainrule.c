@@ -645,6 +645,7 @@ extern MenuKindData mn_803EB6B0[];
 void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
 {
     HSD_JObj* option_roots[8];
+    HSD_JObj** option_root;
     HSD_JObj* roots[17];
     u8 pad_[4];
     u16 indices[17];
@@ -652,11 +653,11 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
     AnimLoopSettings* settings;
     HSD_JObj* jobj;
     s32 i;
-    void* user_data;
+    s32 j;
+    struct mn_802307F8_t* user_data;
     s32 visible;
     u8 count;
     u8 selected;
-    u8 hovered;
     u8* base;
     s32 tail_i;
     struct mn_802307F8_t* data;
@@ -671,7 +672,8 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
         indices[i] = i;
     }
 
-    for (i = 0; i < count; i++) {
+    option_root = option_roots;
+    for (i = 0; i < count; option_root++, i++) {
         s32 valid;
         if (gm_GetCurrentGameMode() == GM_TOURNAMENT && (u8) i == 4) {
             valid = 0;
@@ -679,11 +681,10 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
             valid = 1;
         }
         if (valid) {
-            s32 j;
             HSD_JObj* v;
             struct mn_8022FEC8_jobj_ref_t* p;
 
-            for (j = (visible = 0); j < i; j++) {
+            for (j = (visible = 0); j < (u8) i; j++) {
                 u8 j8 = j;
                 s32 valid2;
                 if (gm_GetCurrentGameMode() == GM_TOURNAMENT && j8 == 4) {
@@ -702,11 +703,13 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
             } else {
                 v = p->x10;
             }
-            option_roots[i] = v;
+            *option_root = v;
         }
     }
 
     if (arg1 != 0) {
+        u8 hovered;
+
         selected = data->x1;
         lb_8001204C(option_roots[selected], roots, indices, 0x11);
         HSD_JObjSetFlagsAll(roots[16], JOBJ_HIDDEN);
@@ -788,11 +791,11 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
                 mn_8022ED6C(roots[13], (AnimLoopSettings*) (base + 0x54));
             }
             if ((u32) (i - 5) <= 1) {
-                u8* q = base + (i == focus) * 0xC;
-                settings = (AnimLoopSettings*) (q + 0x78);
+                settings = (AnimLoopSettings*) base + (i == focus);
+                settings += 10;
             } else {
-                u8* q = base + ((tail_i = i) == focus) * 0xC;
-                settings = (AnimLoopSettings*) (q + 0x60);
+                settings = (AnimLoopSettings*) base + (i == focus);
+                settings += 8;
             }
             mn_8022ED6C(roots[2], settings);
             mn_8022ED6C(roots[8], (AnimLoopSettings*) (base + 0x90));
