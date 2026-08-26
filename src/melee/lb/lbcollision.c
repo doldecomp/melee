@@ -1044,7 +1044,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float closest_dist_sq;
     float local_delta_y;
     float start_delta_x;
-    float start_delta_y;
+    float hurt_param_from_hit_start;
     Mtx inv_hurt_mtx;
     float hurt_delta_x;
     float hit_start_max_x;
@@ -1077,7 +1077,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     float hit_param;
     float local_dist;
     float hurt_param;
-    float hurt_param_from_hit_start;
+    float start_delta_y;
     float hurt_param_from_hit_end;
     float closest_dist;
     float hurt_end_z;
@@ -1287,10 +1287,10 @@ block_39:
                     a2 = *hit_start;
                     dot = (d1.z * (c3.z - a2.z)) +
                           ((d1.x * (c3.x - a2.x)) + (d1.y * (c3.y - a2.y)));
-                    hit_end_mid_x = d1.x * d1.x;
                     hurt_param_from_hit_start =
                         -dot /
-                        ((d1.z * d1.z) + (hit_end_mid_x + (d1.y * d1.y)));
+                        ((d1.z * d1.z) +
+                         ((d1.x * d1.x) + (d1.y * d1.y)));
                 }
                 if (hurt_param_from_hit_start > lbColl_804D7A00) {
                     hurt_param_from_hit_start = hit_start_min_z;
@@ -1329,7 +1329,7 @@ block_39:
                 (hit_param_candidate = ((segment_dot * hurt_start_dot) -
                                         (hurt_len_sq * hit_start_dot)) /
                                        closest_denom);
-            hurt_param = ((hit_len_sq * hurt_start_dot) -
+            hurt_param = ((hurt_start_dot * hit_len_sq) -
                           (segment_dot * hit_start_dot)) /
                          closest_denom;
             if ((hit_param_candidate > lbColl_804D7A00) ||
