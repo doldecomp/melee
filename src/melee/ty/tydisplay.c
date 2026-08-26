@@ -204,14 +204,14 @@ void _tyDisplay_8031830C(TySortElem* base, s32 lo, s32 hi)
 
             {
                 TySortElem* pivot_base;
-                TySortElem* cur;
+                s32 j;
                 pivot3 = pivot + 1;
                 i = pivot + 2;
                 cur = &base[i];
                 pivot_base = &base[pivot];
                 j = pivot + 1;
                 j *= sizeof(TySortElem);
-                for (; i <= hi; i++, cur++) {
+                for (; i <= hi; cur++, i++) {
                     if (cur->val < pivot_base[1].val) {
                         TySortElem* s;
                         pivot3++;
