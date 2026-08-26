@@ -17,6 +17,8 @@
 #include "lb/lb_013B.h"
 #include "lb/types.h"
 
+#include "ft/types.h"
+
 #include <math.h>
 #include <baselib/wobj.h>
 
@@ -702,19 +704,6 @@ void fn_8002113C(HSD_JObj* jobj, Vec3* axis, f32 angle)
     }
 }
 
-typedef struct IKChainData {
-    /* 0x00 */ HSD_JObj* jobj0;
-    /* 0x04 */ HSD_JObj* jobj1;
-    /* 0x08 */ u8 pad_08[4];
-    /* 0x0C */ Vec3 pos0;
-    /* 0x18 */ Vec3 pos1;
-    /* 0x24 */ Vec3 pos2;
-    /* 0x30 */ Vec3 pos3;
-    /* 0x3C */ Vec3 pos4;
-    /* 0x48 */ f32 len0;
-    /* 0x4C */ f32 len1;
-} IKChainData;
-
 static inline f32 calc_acos(f32 value)
 {
     return acosf(value);
@@ -735,7 +724,7 @@ static inline f32 sqrtf_store(f32 x, volatile f32* y)
 
 void lbBgFlash_80021410(void* arg0)
 {
-    IKChainData* data = arg0;
+    IKState* data = arg0;
     u8 pad_hi[32];
     Vec3 axis;
     u8 pad_mid[16];
@@ -893,7 +882,7 @@ void lbBgFlash_80021410(void* arg0)
     cos1 = ((a2 + b2) - c2) / (two_a * len_ab);
     cos2 = ((a2 + c2) - b2) / (two_a * len_ac);
 
-    if (cos1 > 1.0f) {
+    if (1.0f < cos1) {
         cos1 = 1.0f;
     } else if (cos1 < -1.0f) {
         cos1 = -1.0f;
