@@ -886,8 +886,11 @@ static inline void gmMainLib_SetHandicaps(s8* base)
 
 void gmMainLib_8015EA80(void)
 {
-    s8* base = gmMainLib_804D3EE0->unk_530.unk_588;
+    s8* volatile base_temp = gmMainLib_804D3EE0->unk_530.unk_588;
+    s8* base = base_temp;
     s8* base2 = base + 7 * 0x140;
+
+    PAD_STACK(0x90);
 
     gmMainLib_8015CDEC();
     gmMainLib_SetHandicaps(base);
