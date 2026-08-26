@@ -965,17 +965,18 @@ loop:
 static inline u8 mnDiagram_FindNextFighter(u8* sorted,
                                            SelectableCharacterKind cur)
 {
-    u8* p = sorted + cur;
-    SelectableCharacterKind found = cur;
-loop:
-    found++;
-    p++;
-    if (found >= SELKIND_COUNT) {
-        return cur;
-    }
-    if (mn_IsFighterUnlocked(*p) == 0) {
-        goto loop;
-    }
+    u8* p;
+    SelectableCharacterKind found;
+
+    found = cur;
+    p = sorted + cur;
+    do {
+        found++;
+        p++;
+        if (found >= SELKIND_COUNT) {
+            return cur;
+        }
+    } while (mn_IsFighterUnlocked(*p) == 0);
     return found;
 }
 
