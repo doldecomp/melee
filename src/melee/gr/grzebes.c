@@ -399,7 +399,7 @@ void grZebes_801D881C(HSD_GObj* gobj)
     s32 result;
     secondary_gobj = (HSD_GObj*) gp->u.zebes5.xF0;
     result = grZebes_801DA528(gobj, &gp->u.zebes5.xC8, 1, 2);
-    PAD_STACK(4);
+    PAD_STACK(0xC);
 
     if ((s32) gp->u.zebes5.xEC != result) {
         gp->u.zebes5.xEC = result;
@@ -482,10 +482,13 @@ void grZebes_801D881C(HSD_GObj* gobj)
                     f32 scale_min = yakumono_param->x58;
                     grZe_BubbleSpawnPos* pos =
                         (grZe_BubbleSpawnPos*) grZe_8049F140;
-                    grZebes_801DAE70(spawn_phase, 4, pos[spawn_phase].x14_x,
-                                     pos[spawn_phase].x18_y,
-                                     (yakumono_param->x5C - scale_min) * rand +
-                                         scale_min);
+                    {
+                        f32 scale_range = yakumono_param->x5C - scale_min;
+                        grZebes_801DAE70(
+                            spawn_phase, 4, pos[spawn_phase].x14_x,
+                            pos[spawn_phase].x18_y,
+                            scale_range * rand + scale_min);
+                    }
                 }
                 if (spawn_phase <= mirror) {
                     f32 rand2 = HSD_Randf();
@@ -546,10 +549,11 @@ void grZebes_801D881C(HSD_GObj* gobj)
             for (j = 0; j < 20; j++, entry++) {
                 if (entry->x00_active == 1) {
                     f32 dx = entry->x08_x - left_x;
+                    f32 left_frac = (f32) ((f64) dx - 0.9) / colWidth;
+                    f32 right_frac = (f32) (0.9 + (f64) dx);
                     f32 top = (f32) (1.8 * (f64) entry->x18_size +
                                      (f64) entry->x0C_y);
                     {
-                        f32 left_frac = (f32) ((f64) dx - 0.9) / colWidth;
                         s32 col_left = (s32) (0.5 + (f64) left_frac);
                         if (5 < col_left) {
                             col_left = 5;
@@ -562,8 +566,8 @@ void grZebes_801D881C(HSD_GObj* gobj)
                         }
                     }
                     {
-                        f32 right_frac = (f32) (0.9 + (f64) dx) / colWidth;
-                        s32 col_right = (s32) (0.5 + (f64) right_frac);
+                        s32 col_right =
+                            (s32) (0.5 + (f64) (right_frac / colWidth));
                         if (5 < col_right) {
                             col_right = 5;
                         } else if (col_right < 0) {
@@ -601,23 +605,21 @@ void grZebes_801D881C(HSD_GObj* gobj)
 
         for (i = 0; i < 5; i++) {
             if (i != 0) {
-                f32 limit = col_heights[i + 1] - colWidth;
-                if (limit > col_heights[i]) {
-                    col_heights[i] = limit;
+                if (col_heights[i] < col_heights[i + 1] - colWidth) {
+                    col_heights[i] = col_heights[i + 1] - colWidth;
                 }
             }
             if (i != 5) {
-                f32 limit = col_heights[i] - colWidth;
-                if (col_heights[i + 1] < limit) {
-                    col_heights[i + 1] = limit;
+                if (col_heights[i + 1] < col_heights[i] - colWidth) {
+                    col_heights[i + 1] = col_heights[i] - colWidth;
                 }
             }
         }
 
         {
             int k;
-            for (k = 0; k <= 5; k++) {
-                mpVtxSetPos(k, col_x[k], col_heights[k]);
+            for (i = 0, k = 0; i <= 5; i++, k++) {
+                mpVtxSetPos(k, col_x[i], col_heights[i]);
             }
         }
         mpLib_80055E24(0);
