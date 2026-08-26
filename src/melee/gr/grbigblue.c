@@ -3043,6 +3043,7 @@ typedef struct grBb_Car {
 } grBb_Car;
 
 typedef union grBb_CarGround {
+    Ground ground;
     struct {
         u8 pad_0[0xC8];
         HSD_JObj** jobjs;
@@ -4058,23 +4059,23 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
 s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
 {
     s32 result = 0;
-    Ground* gp = gobj->user_data;
+    grBb_CarGround* gp = gobj->user_data;
     Vec3 pos;
 
     PAD_STACK(4);
 
     switch (arg2) {
     case 1: {
-        grBb_Car* car = &((grBb_CarGround*) gp)->typed.cars[arg1];
+        grBb_Car* car = &gp->typed.cars[arg1];
 
         HSD_JObjSetFlagsAll(
-            ((grBb_CarGround*) gp)->typed.jobjs[(*(u16*) car >> 4) & 0x1F],
+            gp->typed.jobjs[(*(u16*) car >> 4) & 0x1F],
             JOBJ_HIDDEN);
 
-        if (gp->u.bigblue.car.lanes[arg1].pos.x > 0.0f) {
-            ((grBb_CarGround*) gp)->typed.ranks[(*(u16*) car >> 4) & 0x1F] = 0;
+        if (gp->typed.cars[arg1].pos.x > 0.0f) {
+            gp->typed.ranks[(*(u16*) car >> 4) & 0x1F] = 0;
         } else {
-            ((grBb_CarGround*) gp)->typed.ranks[(*(u16*) car >> 4) & 0x1F] = 2;
+            gp->typed.ranks[(*(u16*) car >> 4) & 0x1F] = 2;
         }
         {
             typedef struct grBb_StateBits {
@@ -4088,15 +4089,14 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
     }
 
     case 10: {
-        grBb_Car* car = &((grBb_CarGround*) gp)->typed.cars[arg1];
-        car->threshold = 0x14;
+        gp->typed.cars[arg1].threshold = 0x14;
         {
             typedef struct grBb_StateBits {
                 u8 state : 6;
                 u8 pad0 : 2;
             } grBb_StateBits;
             result = 1;
-            ((grBb_StateBits*) car)->state = arg2;
+            ((grBb_StateBits*) &gp->typed.cars[arg1])->state = arg2;
         }
         break;
     }
@@ -4129,15 +4129,14 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
             lo += rand_val;
         }
         {
-            grBb_Car* car = &((grBb_CarGround*) gp)->typed.cars[arg1];
-            car->threshold = lo;
+            gp->typed.cars[arg1].threshold = lo;
             {
                 typedef struct grBb_StateBits {
                     u8 state : 6;
                     u8 pad0 : 2;
                 } grBb_StateBits;
                 result = 1;
-                ((grBb_StateBits*) car)->state = arg2;
+                ((grBb_StateBits*) &gp->typed.cars[arg1])->state = arg2;
             }
         }
         break;
@@ -4156,7 +4155,7 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
             s32 j;
 
             for (j = 0, count = 0; j < 30; j++) {
-                if (((u8*) gp->u.bigblue.xCC)[j] == 0) {
+                if (gp->typed.ranks[j] == 0) {
                     count++;
                 }
             }
@@ -4176,7 +4175,7 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
                 }
 
                 for (; slot < 30; slot++) {
-                    if (((u8*) gp->u.bigblue.xCC)[slot] == 0) {
+                    if (gp->typed.ranks[slot] == 0) {
                         if (--pick < 0) {
                             break;
                         }
@@ -4184,7 +4183,7 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
                 }
 
                 offset = arg1 << 6;
-                car = (u8*) gp + offset;
+                car = gp->bytes + offset;
 
                 {
                     typedef struct grBb_SlotBits {
@@ -4247,28 +4246,28 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
                         }
                         lo += rand_val;
                     }
-                    *(s32*) (((grBb_CarGround*) gp)->bytes + offset + 0xF0) =
+                    *(s32*) (gp->bytes + offset + 0xF0) =
                         lo;
                 }
 
                 car_ec =
-                    (f32*) (((grBb_CarGround*) gp)->bytes + offset + 0xEC);
-                ((u8*) gp->u.bigblue.xCC)[slot] = 1;
+                    (f32*) (gp->bytes + offset + 0xEC);
+                gp->typed.ranks[slot] = 1;
                 *car_ec = 0.0f;
 
                 {
                     Ground_801C5440(
-                        gp, slot,
+                        &gp->ground, slot,
                         ((u32*) ((u8*) grBb_803E2938 + 0x6D8))[HSD_Randi(4)]);
                 }
 
-                Ground_801C5630(gp, arg1, *car_ec);
+                Ground_801C5630(&gp->ground, arg1, *car_ec);
 
                 {
                     HSD_JObj* jobj;
                     HSD_JObjClearFlagsAll(
-                        ((HSD_JObj**) gp->u.bigblue.xC8)[slot], JOBJ_HIDDEN);
-                    jobj = ((HSD_JObj**) gp->u.bigblue.xC8)[slot];
+                        gp->typed.jobjs[slot], JOBJ_HIDDEN);
+                    jobj = gp->typed.jobjs[slot];
                     HSD_JObjSetTranslate(jobj, car_e0);
                 }
 
@@ -4298,7 +4297,7 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
             s32 j;
 
             for (j = 0, count = 0; j < 30; j++) {
-                if (((u8*) gp->u.bigblue.xCC)[j] == 0) {
+                if (gp->typed.ranks[j] == 0) {
                     count++;
                 }
             }
@@ -4319,7 +4318,7 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
                 }
 
                 for (; slot < 30; slot++) {
-                    if (((u8*) gp->u.bigblue.xCC)[slot] == 0) {
+                    if (gp->typed.ranks[slot] == 0) {
                         if (--pick < 0) {
                             break;
                         }
@@ -4327,7 +4326,7 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
                 }
 
                 offset = arg1 << 6;
-                car = (u8*) gp + offset;
+                car = gp->bytes + offset;
 
                 {
                     typedef struct grBb_SlotBits {
@@ -4390,28 +4389,28 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
                         }
                         lo += rand_val;
                     }
-                    *(s32*) (((grBb_CarGround*) gp)->bytes + offset + 0xF0) =
+                    *(s32*) (gp->bytes + offset + 0xF0) =
                         lo;
                 }
 
                 car_ec =
-                    (f32*) (((grBb_CarGround*) gp)->bytes + offset + 0xEC);
-                ((u8*) gp->u.bigblue.xCC)[slot] = 1;
+                    (f32*) (gp->bytes + offset + 0xEC);
+                gp->typed.ranks[slot] = 1;
                 *car_ec = 0.0f;
 
                 {
                     Ground_801C5440(
-                        gp, slot,
+                        &gp->ground, slot,
                         ((u32*) ((u8*) grBb_803E2938 + 0x6D8))[HSD_Randi(4)]);
                 }
 
-                Ground_801C5630(gp, arg1, *car_ec);
+                Ground_801C5630(&gp->ground, arg1, *car_ec);
 
                 {
                     HSD_JObj* jobj;
                     HSD_JObjClearFlagsAll(
-                        ((HSD_JObj**) gp->u.bigblue.xC8)[slot], JOBJ_HIDDEN);
-                    jobj = ((HSD_JObj**) gp->u.bigblue.xC8)[slot];
+                        gp->typed.jobjs[slot], JOBJ_HIDDEN);
+                    jobj = gp->typed.jobjs[slot];
                     HSD_JObjSetTranslate(jobj, car_e0);
                 }
 
@@ -4430,15 +4429,14 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
 
     case 7:
     case 8: {
-        grBb_Car* car = &((grBb_CarGround*) gp)->typed.cars[arg1];
-        car->threshold = 0x3E8;
+        gp->typed.cars[arg1].threshold = 0x3E8;
         {
             typedef struct grBb_StateBits {
                 u8 state : 6;
                 u8 pad0 : 2;
             } grBb_StateBits;
             result = 1;
-            ((grBb_StateBits*) car)->state = arg2;
+            ((grBb_StateBits*) &gp->typed.cars[arg1])->state = arg2;
         }
         break;
     }
@@ -4448,7 +4446,7 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
             u8 state : 6;
             u8 pad0 : 2;
         } grBb_StateBits;
-        ((grBb_StateBits*) &((grBb_CarGround*) gp)->typed.cars[arg1])->state =
+        ((grBb_StateBits*) &gp->typed.cars[arg1])->state =
             arg2;
         break;
     }
