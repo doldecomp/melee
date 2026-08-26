@@ -6149,12 +6149,7 @@ static bool ftCo_800ADE48(Fighter* fp)
     result = mpCheckFloor(px, py + five, px, py - five, 0.0f, &floor_pos,
                           &line_id, &flags, &floor_normal, -1, -1, -1, NULL,
                           (Fighter_GObj*) found);
-    if (result != 0) {
-        if (ftCo_800A1B38_noinline(line_id) != 0) {
-        } else {
-            found = result;
-        }
-    } else {
+    if (result == 0 || ftCo_800A1B38_noinline(line_id) == 0) {
         found = result;
     }
     do {
@@ -6184,12 +6179,7 @@ static bool ftCo_800ADE48(Fighter* fp)
             result = mpCheckFloor(px, py, px, ftCo_800ADE48_inline0(py), 0.0f,
                                   &floor_pos, &line_id, &flags, &floor_normal,
                                   -1, -1, -1, NULL, (Fighter_GObj*) found);
-            if (result != 0) {
-                if (ftCo_800A1B38_noinline(line_id) != 0) {
-                } else {
-                    found = result;
-                }
-            } else {
+            if (result == 0 || ftCo_800A1B38_noinline(line_id) == 0) {
                 found = result;
             }
             if (found != 0) {
@@ -6240,7 +6230,7 @@ static bool ftCo_800ADE48(Fighter* fp)
         data->x94 = 0;
     }
     if (data->x18 != 0x12) {
-        data2 = &fp->x1A88;
+        data2 = ftCo_800ADE48_inline1(fp);
         if (fp->kind == FTKIND_GKOOPS) {
             switch_cmd = 0;
         } else if (data2->xC == 0xF || data2->xC == 0) {
@@ -6451,22 +6441,25 @@ static bool ftCo_800ADE48(Fighter* fp)
                 found = 1;
             } else {
                 kind = ip->kind;
-                if (kind == It_Kind_M_Ball) {
+                switch (kind) {
+                case It_Kind_Capsule:
+                case It_Kind_Box:
+                case It_Kind_Taru:
+                case It_Kind_Egg:
+                case It_Kind_Kusudama:
+                case It_Kind_TaruCann:
+                case It_Kind_BombHei:
+                case It_Kind_M_Ball:
+                case It_Kind_EvYoshiEgg:
                     found = 1;
-                } else if (kind < It_Kind_M_Ball) {
-                    if (kind < It_Kind_Dosei) {
-                        if (kind < 0) {
-                            found = ftCo_ItemCheck(ip);
-                        } else {
-                            found = 1;
-                        }
+                    break;
+                default:
+                    if (ftCo_ItemCheck(ip)) {
+                        found = 1;
                     } else {
-                        found = ftCo_ItemCheck(ip);
+                        found = 0;
                     }
-                } else if (kind != It_Kind_EvYoshiEgg) {
-                    found = ftCo_ItemCheck(ip);
-                } else {
-                    found = 1;
+                    break;
                 }
             }
         }
