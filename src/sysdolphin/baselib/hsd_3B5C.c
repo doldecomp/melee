@@ -394,11 +394,8 @@ static void fn_803B61B4(u8* arg0)
                              (0.55557 * (f64) scratch_r0));
         scratch_f23 = (f32) ((0.55557 * (f64) scratch_r5_2) +
                              (0.83147 * (f64) scratch_r0));
-        {
-            f64 temp = (0.19509 * (f64) scratch_r6) +
-                       (0.980785 * (f64) scratch_r5);
-            scratch_f24 = (f32) temp;
-        }
+        scratch_f24 = (f32) ((0.19509 * (f64) scratch_r6) +
+                             (0.980785 * (f64) scratch_r5));
         scratch_f10 = (f32) (0.707107 * (f64) (scratch_r11 + scratch_r10));
         scratch_f11 = (f32) (0.707107 * (f64) (scratch_r11 - scratch_r10));
         scratch_r0_2 = work_r4[2];
@@ -479,7 +476,7 @@ static void fn_803B61B4(u8* arg0)
         work_r4_2 += 1;
     }
     work_r3 = (s32*) arg0;
-    for (work_ctr_3 = 0; work_ctr_3 < 0x40; work_ctr_3++) {
+    for (work_ctr_3 = 0; 0x40 > work_ctr_3; work_ctr_3++) {
         work_r3[work_ctr_3] >>= 2;
     }
 }
