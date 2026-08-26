@@ -3710,6 +3710,16 @@ static inline u32 gm_80182578_GetRecordScore(RecordBlock* blocks, int idx,
     }
 }
 
+static inline int gm_80182578_GetIndex(void)
+{
+    return lbl_80472ED8.record[0].xC;
+}
+
+static inline u32 gm_80182578_GetScore(void)
+{
+    return (u32) lbl_80472ED8.record[0].x4;
+}
+
 s32 gm_80182578(void)
 {
     RecordBlock* blocks = lbl_803D8D08;
@@ -3733,9 +3743,9 @@ s32 gm_80182578(void)
             mode = gmMainLib_8015D710(gm_CKindToSelKind((u8) idx));
         }
         if (lbl_80472ED8.record[0].x0 != 0) {
-            u32 score_store = (u32) lbl_80472ED8.record[0].x4;
+            u32 score_store = gm_80182578_GetScore();
             if (score_store < score_val) {
-                int i = lbl_80472ED8.record[0].xC;
+                int i = gm_80182578_GetIndex();
                 int m = lbl_80472ED8.record[0].x8;
                 switch (m) {
                 case 33:
@@ -3904,7 +3914,7 @@ s32 gm_80182578(void)
     }
 
     return mode;
-    PAD_STACK(0x40);
+    PAD_STACK(0x38);
 }
 
 static inline RecordBlock* fn_80182B5C_GetRecordBlocks(void)
