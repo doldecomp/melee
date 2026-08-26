@@ -2379,7 +2379,7 @@ void fn_801891F4(void)
     CssSubStruct* sub;
     u64 buttons;
     int count;
-    int i;
+    int i = 0;
 
     buttons = gm_801A36C0((u8) lbl_80473700.mode);
     sub = &lbl_80473700.css;
@@ -2388,8 +2388,8 @@ void fn_801891F4(void)
         if (sub->x01 == 0) {
             fn_801651FC(0, 0);
             count = lbl_80473700.count;
-            lbl_80473700.css.x03 = 0;
-            for (i = 0; i < 4; i++) {
+            lbl_80473700.css.x03 = i;
+            for (; i < 4; i++) {
                 if (i != 0 && count != 0) {
                     Player_SetPlayerAndEntityCpuType(i, 0);
                     count--;
@@ -2629,9 +2629,12 @@ void fn_801891F4(void)
 
             sfxBack();
             sub->anim_frames[22] = 0x14;
-            lb_80019880(__cvt_dbl_usll(
-                (f64) (0.016666668f / speeds[sub->menu_values[0]] *
-                       (f32) gm_801891F4_GetTickRate())));
+            {
+                f32 speed_scale = speeds[sub->menu_values[0]];
+                lb_80019880(__cvt_dbl_usll(
+                    (f64) (0.016666668f / speed_scale *
+                           (f32) gm_801891F4_GetTickRate())));
+            }
 
             fn_80188550(sub->menu_values[2] + 1);
 
