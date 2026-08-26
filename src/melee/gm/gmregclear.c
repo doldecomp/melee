@@ -2629,7 +2629,6 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     s32 sp60;
     s32 sp5C;
     s32 sp58;
-    void* sp38;
     HSD_Archive* archive;
     HSD_GObj* cam_gobj;
     lbl_8046B6A0_t* temp;
@@ -2727,14 +2726,19 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     state->x104 = var_r4;
     lbl_804D65C0 = (var_r4 - (arg0 + arg1)) / 10;
 
-    archive =
-        lbArchive_80016DBC("GmRegClr", &sp38, "ScGamRegClear_scene_data", 0);
-    state->x48 = archive;
-    if (sp38 == NULL) {
-        OSReport("Error : Cannot open archive file (File Name : %s).",
-                 "GmRegClr");
+    PAD_STACK(0x1C);
+    {
+        void* scene_data;
+
+        archive = lbArchive_80016DBC("GmRegClr", &scene_data,
+                                     "ScGamRegClear_scene_data", 0);
+        state->x48 = archive;
+        if (scene_data == NULL) {
+            OSReport("Error : Cannot open archive file (File Name : %s).",
+                     "GmRegClr");
+        }
+        fn_80168A6C(scene_data, &state->x4C, 0);
     }
-    fn_80168A6C(sp38, &state->x4C, 0);
 
     fn_80180630_CreateLightAndCamera(state, &cam_gobj);
     HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B,
@@ -2775,7 +2779,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
 
     arg4->x58[0].xE = coins;
     fn_8017F2A4(&state->x84, 264.0f, 211.0f);
-    PAD_STACK(0x38);
+    PAD_STACK(0x1C);
 }
 
 int fn_80180AC0(void)
