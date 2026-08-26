@@ -414,8 +414,11 @@ void gm_801BAD70(GameScene* arg0)
         ev->x50[1] = md->players[1].color;
     }
     if (level == 0x2B) {
+        s32 c2 = ev->x4C[2];
         u8 c = ev->x50[2];
-        if (ev->x4C[2] == ev->x4C[0] && ev->x50[0] == c) {
+        /// @todo remove void cast hack
+        (void) c2;
+        if (ev->x4C[0] == c2 && ev->x50[0] == c) {
             ev->x50[2] = gm_GetNextColor(c);
         }
     }
