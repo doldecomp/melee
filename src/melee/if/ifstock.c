@@ -540,7 +540,7 @@ void ifStock_802F98E8(unsigned char player, int b)
     struct ifStock_804A1378* stock = &ifStock_804A1378;
     unsigned char* data;
     HSD_JObj* jobj;
-    struct ifStock_804A1378_x204* user_data;
+    struct ifStock_804A1378_x204* volatile user_data;
     int i;
     HSD_GObj* gobj;
     lbl_8046B6A0_t* ae44;
