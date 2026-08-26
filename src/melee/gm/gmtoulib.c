@@ -1471,8 +1471,6 @@ void fn_8018DF68(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     f32 neg_thickness;
     f32 thickness;
     s32 right;
-    s32 third;
-    s32 left_third;
     s32 right_third;
     s32 half;
 
@@ -1491,15 +1489,13 @@ void fn_8018DF68(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
         DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4, color);
     }
 
-    third = arg3 / 3;
-    left_third = arg1 + third;
     left_third_color = line_color;
     {
-        f32 x = (f32) left_third;
+        f32 x = (f32) (arg1 + (arg3 / 3));
         DrawRectangle(x, (f32) arg2, thickness, (f32) arg4, &left_third_color);
     }
 
-    right_third = right - third;
+    right_third = right - (arg3 / 3);
     right_third_color = line_color;
     {
         GXColor* color = &right_third_color;
@@ -1525,14 +1521,14 @@ void fn_8018DF68(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
         if (arg0->slots[1].x4C == 0) {
             GXColor* entry_color = &arg0->x20;
             slot1_vertical_color = *entry_color;
-            DrawRectangle(left_third, arg2, thickness, arg4,
+            DrawRectangle(arg1 + (arg3 / 3), arg2, thickness, arg4,
                           &slot1_vertical_color);
             slot1_horizontal_color = *entry_color;
             {
                 GXColor* color = &slot1_horizontal_color;
-                DrawRectangle(left_third, arg5,
-                              ((arg3 / 2) + thickness) - third, neg_thickness,
-                              color);
+                DrawRectangle(arg1 + (arg3 / 3), arg5,
+                              ((arg3 / 2) + thickness) - (arg3 / 3),
+                              neg_thickness, color);
             }
             return;
         }
@@ -1545,8 +1541,9 @@ void fn_8018DF68(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
             slot2_horizontal_color = *entry_color;
             {
                 f32 y = arg5;
-                DrawRectangle((arg1 + half), y, (half + thickness) - third,
-                              neg_thickness, &slot2_horizontal_color);
+                DrawRectangle((arg1 + half), y,
+                              (half + thickness) - (arg3 / 3), neg_thickness,
+                              &slot2_horizontal_color);
             }
             return;
         }
