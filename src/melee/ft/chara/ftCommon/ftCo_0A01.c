@@ -1047,7 +1047,7 @@ void ftCo_800A1F3C_noinline2(Fighter* fp, float arg1, float arg2, float arg3)
 void ftCo_800A1F3C(Fighter* fp, float arg1, float arg2, float arg3)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
-    if (fp->x1A88.x60 == 0) {
+    if (data->x60 == 0) {
         data->x54.x = arg1;
         data->x54.y = arg2;
         data->x38 = arg3;
@@ -3631,14 +3631,13 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
     f32 fx;
     f32 fy;
     f32 d;
-    f32 cx;
 
     if (fp1 == NULL) {
         return;
     }
     if (fp1->ground_or_air == GA_Air) {
-        s32 result;
         s32 blocked;
+        s32 result;
         mp_UnkStruct0* island;
         fx = fp1->cur_pos.x;
         {
@@ -3668,86 +3667,41 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
         if (result != 0) {
             island = mpIsland_8005AB54(line_id);
             if (ftCo_800A2718(island) == 0) {
-                int* x60 = &fp0->x1A88.x60;
-                struct Fighter_x1A88_t* data2 = &fp0->x1A88;
-                f32 x38 = data->x56C + fp1->x1A88.x564;
-                f32 x = floor_pos.x;
-                f32 y = floor_pos.y;
-                if (*x60 == 0) {
-                    data2->x54.x = x;
-                    data2->x54.y = y;
-                    data2->x38 = x38;
-                    ftCo_800A1CC4(fp0, ftCo_803C6594[stage_info.grkind]);
-                }
+                ftCo_800A1F3C(fp0, floor_pos.x, floor_pos.y,
+                              data->x56C + fp1->x1A88.x564);
                 if (island != NULL) {
                     d = island->x14.x - data->x54.x;
                     if (d < 0.0f) {
                         d = -d;
                     }
                     if (d < 5.0) {
-                        struct Fighter_x1A88_t* data2 = &fp0->x1A88;
-                        f32 x38_edge = data->x56C + fp1->x1A88.x564;
-                        f32 x = island->x14.x - 5.0;
-                        f32 y = island->x14.y;
-                        if (*x60 == 0) {
-                            data2->x54.x = x;
-                            data2->x54.y = y;
-                            data2->x38 = x38_edge;
-                            ftCo_800A1CC4(fp0,
-                                          ftCo_803C6594[stage_info.grkind]);
-                        }
+                        ftCo_800A1F3C(fp0, island->x14.x - 5.0,
+                                      island->x14.y,
+                                      data->x56C + fp1->x1A88.x564);
                     } else {
-                        d = island->x8.x - data->x54.x;
-                        if (d < 0.0f) {
-                            d = -d;
-                        }
+                        d = ABS(island->x8.x - data->x54.x);
                         if (d < 5.0) {
-                            struct Fighter_x1A88_t* data2 = &fp0->x1A88;
-                            f32 x38_edge = data->x56C + fp1->x1A88.x564;
-                            f32 x = 5.0 + island->x8.x;
-                            f32 y = island->x8.y;
-                            if (*x60 == 0) {
-                                data2->x54.x = x;
-                                data2->x54.y = y;
-                                data2->x38 = x38_edge;
-                                ftCo_800A1CC4(
-                                    fp0, ftCo_803C6594[stage_info.grkind]);
-                            }
+                            ftCo_800A1F3C(fp0, 5.0 + island->x8.x,
+                                          island->x8.y,
+                                          data->x56C + fp1->x1A88.x564);
                         }
                     }
                 }
             }
         } else {
             ftCo_800A4768(fp1, &sp18);
-            {
-                struct Fighter_x1A88_t* data2 = &fp0->x1A88;
-                f32 x38 = data->x56C + fp1->x1A88.x564;
-                f32 x = sp18.x;
-                f32 y = sp18.y;
-                if (fp0->x1A88.x60 == 0) {
-                    data2->x54.x = x;
-                    data2->x54.y = y;
-                    data2->x38 = x38;
-                    ftCo_800A1CC4(fp0, ftCo_803C6594[stage_info.grkind]);
-                }
-            }
+            ftCo_800A1F3C(fp0, sp18.x, sp18.y,
+                          data->x56C + fp1->x1A88.x564);
         }
     } else if (ftCo_800A2718(mpIsland_8005AB54(fp1->coll_data.floor.index)) ==
                0)
     {
-        int* x60 = &fp0->x1A88.x60;
         mp_UnkStruct0* island;
         mp_UnkStruct0* fp0_island;
         s32 same_island;
-        f32 x38 = data->x56C + fp1->x1A88.x564;
-        f32 x = fp1->cur_pos.x;
-        f32 y = fp1->cur_pos.y;
-        if (*x60 == 0) {
-            data->x54.x = x;
-            data->x54.y = y;
-            data->x38 = x38;
-            ftCo_800A1CC4(fp0, ftCo_803C6594[stage_info.grkind]);
-        }
+
+        ftCo_800A1F3C(fp0, fp1->cur_pos.x, fp1->cur_pos.y,
+                      data->x56C + fp1->x1A88.x564);
         if (fp0->ground_or_air == GA_Air) {
             same_island = 0;
         } else if (fp1->ground_or_air == GA_Air) {
@@ -3768,32 +3722,15 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
             (island = mpIsland_8005AB54(fp1->coll_data.floor.index)) != NULL &&
             data->x54.y - fp0->cur_pos.y > 0.0)
         {
-            cx = fp0->cur_pos.x;
-            if (0.0f < data->x54.x - cx) {
-                if (cx < island->x8.x) {
-                    struct Fighter_x1A88_t* data2 = &fp0->x1A88;
-                    f32 x = 5.0 + island->x8.x;
-                    f32 y = island->x8.y;
-                    f32 x38 = data->x56C + fp1->x1A88.x564;
-                    if (*x60 == 0) {
-                        data2->x54.x = x;
-                        data2->x54.y = y;
-                        data2->x38 = x38;
-                        ftCo_800A1CC4(fp0, ftCo_803C6594[stage_info.grkind]);
-                    }
+            if (data->x54.x - fp0->cur_pos.x > 0.0) {
+                if (fp0->cur_pos.x < island->x8.x) {
+                    ftCo_800A1F3C(fp0, 5.0 + island->x8.x, island->x8.y,
+                                  data->x56C + fp1->x1A88.x564);
                 }
             } else {
-                if (cx > island->x14.x) {
-                    struct Fighter_x1A88_t* data2 = &fp0->x1A88;
-                    f32 x = island->x14.x - 5.0;
-                    f32 y = island->x14.y;
-                    f32 x38 = data->x56C + fp1->x1A88.x564;
-                    if (*x60 == 0) {
-                        data2->x54.x = x;
-                        data2->x54.y = y;
-                        data2->x38 = x38;
-                        ftCo_800A1CC4(fp0, ftCo_803C6594[stage_info.grkind]);
-                    }
+                if (fp0->cur_pos.x > island->x14.x) {
+                    ftCo_800A1F3C(fp0, island->x14.x - 5.0, island->x14.y,
+                                  data->x56C + fp1->x1A88.x564);
                 }
             }
         }
