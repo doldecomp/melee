@@ -12,11 +12,42 @@ static void order_sdata(void)
     (void) "GmRst";
     (void) "pnlsce";
     (void) "flmsce";
+    (void) "%s";
 }
 #endif
 
 struct ResultsData lbl_8046DBE8;
 static u32 lbl_804D3F8C[2] = { 0x817C817C, 0x817C0000 };
+
+static void gmresult_sdata2_order(void)
+{
+    (void) "%d";
+    (void) "%s%d";
+    (void) 0.0f;
+    (void) -30.0f;
+    (void) 0.0500000007f;
+    (void) 0.0546875f;
+    (void) 0.0590000004f;
+    (void) 10.0f;
+    (void) 1.75f;
+    (void) 11.0f;
+    (void) S32_TO_F32;
+    (void) 12.0f;
+    (void) 300.0f;
+    (void) 100.0f;
+    (void) 0.899999976f;
+    (void) 255.0f;
+    (void) U32_TO_F32;
+    (void) 1.13999999f;
+    (void) 1.12f;
+    (void) 30.0f;
+    (void) 0.109999999f;
+    (void) 0.0799999982f;
+    (void) 0.0900000036f;
+    (void) 5.5f;
+    (void) 1.0f;
+}
+
 u32 lbl_804D3FA0 = 0x817C0000;
 u32 lbl_804D3FA4 = 0x817B0000;
 union {
@@ -49,33 +80,6 @@ extern HSD_Archive* lbl_804D65B8;
 #include "mn/mnmain.h"
 #include "pl/player.h"
 #include "sc/types.h"
-
-static void gmresult_sdata2_order(void)
-{
-    (void) 0.0f;
-    (void) -30.0f;
-    (void) 0.0500000007f;
-    (void) 0.0546875f;
-    (void) 0.0590000004f;
-    (void) 10.0f;
-    (void) 1.75f;
-    (void) 11.0f;
-    (void) S32_TO_F32;
-    (void) 12.0f;
-    (void) 300.0f;
-    (void) 100.0f;
-    (void) 0.899999976f;
-    (void) 255.0f;
-    (void) U32_TO_F32;
-    (void) 1.13999999f;
-    (void) 1.12f;
-    (void) 30.0f;
-    (void) 0.109999999f;
-    (void) 0.0799999982f;
-    (void) 0.0900000036f;
-    (void) 5.5f;
-    (void) 1.0f;
-}
 
 MatchEnd* fn_80174274(void)
 {
@@ -685,85 +689,121 @@ GXColor fn_8017507C(s32 slot)
 
 void fn_80175240(s32 slot)
 {
-    GXColor sp2C;
-    GXColor sp30;
-    GXColor sp28;
-    GXColor sp24;
-    GXColor sp20;
-    GXColor sp1C;
-    GXColor sp18;
-    HSD_Text** temp_r31;
+    GXColor color;
+    GXColor first_color;
+    GXColor second_color;
+    GXColor third_color;
+    GXColor empty_first_color;
+    GXColor empty_second_color;
+    GXColor empty_third_color;
+    GXColor* color_ptr;
     HSD_Text* ko_count;
     MatchEnd* me;
-    f32 temp_f31;
-    f32 temp_f30;
-    s32 temp_r3;
-    s32 var_r3;
-    s32 var_r5;
-    PAD_STACK(16);
+    f32 pos_x;
+    f32 pos_y;
+    f32 pos_z;
+    f32 first_row_offset;
+    f32 second_row_offset;
+    s32 line_id;
+    s32 first_value;
+    s32 value;
+    PAD_STACK(8);
 
     me = lbl_8046DBE8.x94;
     if (me->x5 != 3) {
         /// maybe x4C is an array of Vec2's
-        temp_f31 = 1.14f * (lbl_8046DBE8.x4C[4].y - lbl_8046DBE8.x4C[0].y);
-        temp_f30 = 1.12f * (lbl_8046DBE8.x4C[5].y - lbl_8046DBE8.x4C[4].y);
-        sp30 = fn_8017507C(slot);
-        ko_count = lbl_8046DBE8.player_data[slot].ko_count =
+        first_row_offset =
+            1.14f * (lbl_8046DBE8.x4C[4].y - lbl_8046DBE8.x4C[0].y);
+        second_row_offset =
+            1.12f * (lbl_8046DBE8.x4C[5].y - lbl_8046DBE8.x4C[4].y);
+        color = fn_8017507C(slot);
+        lbl_8046DBE8.player_data[slot].ko_count =
             HSD_SisLib_803A6754(0, 0);
-        ko_count->pos_x = lbl_8046DBE8.x4C[slot].x;
-        ko_count->pos_y = -lbl_8046DBE8.x4C[slot].y - 30.0f;
-        ko_count->pos_z = lbl_8046DBE8.x4C[slot].z;
+        pos_z = lbl_8046DBE8.x4C[slot].z;
+        ko_count = lbl_8046DBE8.player_data[slot].ko_count;
+        pos_y = -lbl_8046DBE8.x4C[slot].y - 30.0f;
+        pos_x = lbl_8046DBE8.x4C[slot].x;
+        ko_count->pos_x = pos_x;
+        ko_count->pos_y = pos_y;
+        ko_count->pos_z = pos_z;
         lbl_8046DBE8.player_data[slot].ko_count->default_alignment = 1;
-        temp_r31 = &lbl_8046DBE8.player_data[slot].ko_count;
         lbl_8046DBE8.player_data[slot].ko_count->default_kerning = 1;
         if (me->player_standings[slot].slot_type != Gm_PKind_NA) {
-            var_r3 = fn_8017AE0C(slot);
-            if (var_r3 > 0x3E7) {
-                var_r3 = 0x3E7;
+            first_value = fn_8017AE0C(slot);
+            if (first_value > 0x3E7) {
+                first_value = 0x3E7;
             }
-            temp_r3 = HSD_SisLib_803A6B98(*temp_r31, 0.0f, 0.0f, "%d", var_r3);
-            HSD_SisLib_803A7548(*temp_r31, temp_r3, 0.11f, 0.08f);
-            sp2C = sp30;
-            HSD_SisLib_803A74F0(*temp_r31, temp_r3, &sp2C);
-            var_r5 = fn_8017B010(slot);
-            if (var_r5 > 0x3E7) {
-                var_r5 = 0x3E7;
+            line_id = HSD_SisLib_803A6B98(
+                lbl_8046DBE8.player_data[slot].ko_count, 0.0f, 0.0f, "%d",
+                first_value);
+            HSD_SisLib_803A7548(
+                lbl_8046DBE8.player_data[slot].ko_count, line_id, 0.11f,
+                0.08f);
+            first_color = color;
+            color_ptr = &first_color;
+            HSD_SisLib_803A74F0(lbl_8046DBE8.player_data[slot].ko_count,
+                                line_id, color_ptr);
+            value = fn_8017B010(slot);
+            if (value > 0x3E7) {
+                value = 0x3E7;
             }
 
-            temp_r3 =
-                HSD_SisLib_803A6B98(*temp_r31, 0.0f, -temp_f31, "%d", var_r5);
-            HSD_SisLib_803A7548(*temp_r31, temp_r3, 0.11f, 0.08f);
-            sp28 = sp30;
-            HSD_SisLib_803A74F0(*temp_r31, temp_r3, &sp28);
-            var_r5 = fn_8017B21C(slot);
-            if (var_r5 > 0x3E7) {
-                var_r5 = 0x3E7;
+            line_id = HSD_SisLib_803A6B98(
+                lbl_8046DBE8.player_data[slot].ko_count, 0.0f,
+                -first_row_offset, "%d", value);
+            HSD_SisLib_803A7548(
+                lbl_8046DBE8.player_data[slot].ko_count, line_id, 0.11f,
+                0.08f);
+            second_color = color;
+            color_ptr = &second_color;
+            HSD_SisLib_803A74F0(lbl_8046DBE8.player_data[slot].ko_count,
+                                line_id, color_ptr);
+            value = fn_8017B21C(slot);
+            if (value > 0x3E7) {
+                value = 0x3E7;
             }
-            temp_r3 = HSD_SisLib_803A6B98(*temp_r31, 0.0f,
-                                          -temp_f31 - temp_f30, "%d", var_r5);
-            HSD_SisLib_803A7548(*temp_r31, temp_r3, 0.11f, 0.08f);
-            sp24 = sp30;
-            HSD_SisLib_803A74F0(*temp_r31, temp_r3, &sp24);
+            line_id = HSD_SisLib_803A6B98(
+                lbl_8046DBE8.player_data[slot].ko_count, 0.0f,
+                -first_row_offset - second_row_offset, "%d", value);
+            HSD_SisLib_803A7548(
+                lbl_8046DBE8.player_data[slot].ko_count, line_id, 0.11f,
+                0.08f);
+            third_color = color;
+            color_ptr = &third_color;
+            HSD_SisLib_803A74F0(lbl_8046DBE8.player_data[slot].ko_count,
+                                line_id, color_ptr);
             return;
         }
-        sp30.r = 0xA0;
-        sp30.g = 0xA0;
-        sp30.b = 0xA0;
-        temp_r3 =
-            HSD_SisLib_803A6B98(*temp_r31, 0.0f, 0.0f, "%s", &lbl_804D3FA0);
-        HSD_SisLib_803A7548(*temp_r31, temp_r3, 0.11f, 0.08f);
-        sp20 = sp30;
-        HSD_SisLib_803A74F0(*temp_r31, temp_r3, &sp20);
-        temp_r3 = HSD_SisLib_803A6B98(*temp_r31, 0.0f, -temp_f31, "%s",
-                                      &lbl_804D3FA0);
-        HSD_SisLib_803A7548(*temp_r31, temp_r3, 0.11f, 0.08f);
-        sp1C = sp30;
-        HSD_SisLib_803A74F0(*temp_r31, temp_r3, &sp1C);
-        temp_r3 = HSD_SisLib_803A6B98(*temp_r31, 0.0f, -temp_f31 - temp_f30,
-                                      "%s", &lbl_804D3FA0);
-        HSD_SisLib_803A7548(*temp_r31, temp_r3, 0.11f, 0.08f);
-        sp18 = sp30;
-        HSD_SisLib_803A74F0(*temp_r31, temp_r3, &sp18);
+        color.r = 0xA0;
+        color.g = 0xA0;
+        color.b = 0xA0;
+        line_id = HSD_SisLib_803A6B98(
+            lbl_8046DBE8.player_data[slot].ko_count, 0.0f, 0.0f, "%s",
+            &lbl_804D3FA0);
+        HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_count,
+                            line_id, 0.11f, 0.08f);
+        empty_first_color = color;
+        color_ptr = &empty_first_color;
+        HSD_SisLib_803A74F0(lbl_8046DBE8.player_data[slot].ko_count, line_id,
+                            color_ptr);
+        line_id = HSD_SisLib_803A6B98(
+            lbl_8046DBE8.player_data[slot].ko_count, 0.0f,
+            -first_row_offset, "%s", &lbl_804D3FA0);
+        HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_count,
+                            line_id, 0.11f, 0.08f);
+        empty_second_color = color;
+        color_ptr = &empty_second_color;
+        HSD_SisLib_803A74F0(lbl_8046DBE8.player_data[slot].ko_count, line_id,
+                            color_ptr);
+        line_id = HSD_SisLib_803A6B98(
+            lbl_8046DBE8.player_data[slot].ko_count, 0.0f,
+            -first_row_offset - second_row_offset, "%s", &lbl_804D3FA0);
+        HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_count,
+                            line_id, 0.11f, 0.08f);
+        empty_third_color = color;
+        color_ptr = &empty_third_color;
+        HSD_SisLib_803A74F0(lbl_8046DBE8.player_data[slot].ko_count, line_id,
+                            color_ptr);
     }
 }
 
