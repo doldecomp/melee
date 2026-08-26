@@ -2647,17 +2647,18 @@ static inline s32 retryCardRead(CARDFileInfo* info, s32 offset, void* buffer,
 
 static inline void cancelQueuedCardCommands(CardBufEntry* entries)
 {
-    s32 saved = hsd_804D7998;
+    s32 snap = hsd_804D7998;
 
-    if (saved >= 0) {
-        s32 current = saved;
+    if (snap >= 0) {
+        s32 saved = snap;
+        s32 zero;
 
-        while (current != hsd_804D7984) {
-            CardBufEntry* queued = &entries[current];
-            current = (current + 1) % 128;
-            queued->x10 = 0;
+        while (saved != hsd_804D7984) {
+            CardBufEntry* queued = &entries[saved];
+            saved = (saved + 1) % 128;
+            queued->x10 = zero = 0;
         }
-        hsd_804D7984 = saved;
+        hsd_804D7984 = snap;
     }
 }
 
