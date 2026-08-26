@@ -153,15 +153,15 @@ static void mnStageSw_802359C8(MnStageSwData* data)
 
 static s32 mnStageSw_80235C58(u8 arg0)
 {
-    s32 low;
-    s32 found;
-    s32 i;
-    s32 idx;
-    u8 high;
-    s32 curr;
     s32 next;
+    s32 found;
+    u8 low;
+    s32 idx;
     u8 end;
+    s32 curr;
+    s32 i;
     u8 start;
+    u8 high;
 
     if (arg0 < 15) {
         low = 0;
@@ -200,8 +200,8 @@ loop_done:
 
     idx = arg0;
     i = 1;
-    next = idx + 1;
     curr = idx + 1;
+    next = idx + 1;
     while (true) {
         s32 temp = idx - i;
         s32 prev = temp;
