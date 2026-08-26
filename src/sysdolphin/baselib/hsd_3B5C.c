@@ -652,14 +652,11 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
 
 s32 hsd_803B6BE4(char* arg0, s32 arg1, void* arg2)
 {
-    s32 work_r28;
-    s32 work_r29;
     s32 scratch_r6_4;
     s32 scratch_r7;
     s32 scratch_r7_3;
-    s32 work_r23;
-    s32 work_r25;
     s32 work_r26;
+    s32 work_r25;
     s32 work_r3;
     s32 work_r3_2;
     s32 scratch_r0_3;
@@ -687,6 +684,7 @@ s32 hsd_803B6BE4(char* arg0, s32 arg1, void* arg2)
     u8* scratch_r5_8;
     u8* scratch_r5_9;
     u8* work_r24;
+    s32 work_r23;
     u8* work_r24_2;
     u8* work_r4;
     u8* work_r4_2;
@@ -700,6 +698,8 @@ s32 hsd_803B6BE4(char* arg0, s32 arg1, void* arg2)
     u8* quant_chroma;
     JpegQuantTables* quant_table;
     JpegState* base;
+    s32 work_r29;
+    s32 work_r28;
 
     PAD_STACK(0x48);
     base = (JpegState*) hsd_804D2E70;
