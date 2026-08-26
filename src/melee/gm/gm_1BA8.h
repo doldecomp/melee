@@ -8,11 +8,13 @@
 #include "melee/mn/forward.h"
 #include <sysdolphin/baselib/forward.h>
 
+struct gm_801BAB40_src;
+
 /* 1BA8FC */ UNK_RET gm_801BA8FC(UNK_PARAMS);
 /* 1BA938 */ void gm_801BA938(struct EventData*, int lo, int hi, bool);
 /* 1BAA60 */ void gm_801BAA60(GameScene*);
 /* 1BAAD0 */ void gm_801BAAD0(GameScene*);
-/* 1BAB40 */ UNK_RET gm_801BAB40(PlayerInitData*, int);
+/* 1BAB40 */ void gm_801BAB40(PlayerInitData*, struct gm_801BAB40_src*);
 /* 1BAC9C */ s32 gm_801BAC9C(GameScene*, s32);
 /* 1BAD70 */ void gm_801BAD70(GameScene*);
 /* 1BB758 */ void gm_801BB758(GameScene*);
