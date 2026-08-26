@@ -88,6 +88,11 @@ static inline bool mnInfo_80251AFC_inline(s32 i)
     return unlock_state == 0;
 }
 
+static inline u32 mnInfo_80251AFC_inline_2(s32 j)
+{
+    return *gmMainLib_8015D804(mnInfo_804A0968[j]);
+}
+
 void mnInfo_80251AFC(void)
 {
     s32 i;
@@ -112,7 +117,7 @@ void mnInfo_80251AFC(void)
             if (mnInfo_80251A08(mnInfo_804A0968[j]) != 0 &&
                 (mnInfo_80251A08(mnInfo_804A0968[i]) == 0 ||
                  *gmMainLib_8015D804(mnInfo_804A0968[i]) >
-                     *gmMainLib_8015D804(mnInfo_804A0968[j])))
+                     mnInfo_80251AFC_inline_2(j)))
             {
                 u8 tmp = mnInfo_804A0968[i];
 
