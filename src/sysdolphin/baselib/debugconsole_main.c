@@ -2544,7 +2544,7 @@ void hsd_80397520(void* node_ptr)
     }
 }
 
-// @TODO: Currently 99.85% match - pad addressing and CR update differ
+// @TODO: Currently 99.93% match - CR update differs
 void hsd_803975D4(void)
 {
     struct ParticleInputState {
@@ -2597,7 +2597,9 @@ void hsd_803975D4(void)
     ((struct ParticleInputState*) sp)->port = port;
     pads = ((struct ParticleInputState*) sp)->pads;
     buttons = pads[((struct ParticleInputState*) sp)->port].button;
-    changed = (&pads[((struct ParticleInputState*) sp)->port])[4].button ^
+    changed = ((PADStatus*) &sp->_pad4[0x30])
+                  [((struct ParticleInputState*) sp)->port]
+                      .button ^
               pads[((struct ParticleInputState*) sp)->port].button;
     sp->xC0 = buttons;
     new_press = (u16) (buttons & changed);
