@@ -876,16 +876,14 @@ void grKongo_801D6AFC(void)
     {
         _struct_grKg_803E188C_0x18* entry = grKg_803E188C;
         u32 count = 3;
-        f32 temp;
 
         do {
-            entry[0].unk10 += values[0];
-            entry[1].unk10 += values[1];
-            entry[2].unk10 += values[2];
-            entry[3].unk10 += values[3];
-            temp = values[4];
+            entry[0].unk10 = values[0] + entry[0].unk10;
+            entry[1].unk10 = values[1] + entry[1].unk10;
+            entry[2].unk10 = values[2] + entry[2].unk10;
+            entry[3].unk10 = values[3] + entry[3].unk10;
+            entry[4].unk10 = values[4] + entry[4].unk10;
             values += 5;
-            entry[4].unk10 += temp;
             entry += 5;
             count--;
         } while (count != 0);
