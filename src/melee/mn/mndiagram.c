@@ -2468,21 +2468,21 @@ void mnDiagram_DrawGridValues(void* arg0, s32 arg1, s32 arg2, u8 arg3)
                 if (is_name_mode != 0) {
                     entry_count = GetNameCount();
                     if (entry_count > bottom_col) {
-                        name_falls = mnDiagram_SumNameFalls(
-                            mnDiagram_GetVisibleNameCursorFrom(
-                                sorted, col_start, bottom_col));
-                        mnDiagram_DrawCellValue(arg0, (u8) bottom_col,
-                                                (u8) row, name_falls);
+                        mnDiagram_DrawCellValue(
+                            arg0, (u8) bottom_col, (u8) row,
+                            mnDiagram_SumNameFalls(
+                                mnDiagram_GetVisibleNameCursorFrom(
+                                    sorted, col_start, bottom_col)));
                     }
                 } else {
                     bottom_unlocked_count =
                         mnDiagram_CountUnlockedFightersInline();
                     if (bottom_unlocked_count > bottom_col) {
-                        fighter_falls = mnDiagram_SumFighterFalls(
-                            mnDiagram_GetVisibleFighterCursorFrom2(
-                                sorted, col_start, bottom_col));
-                        mnDiagram_DrawCellValue(arg0, (u8) bottom_col,
-                                                (u8) row, fighter_falls);
+                        mnDiagram_DrawCellValue(
+                            arg0, (u8) bottom_col, (u8) row,
+                            mnDiagram_SumFighterFalls(
+                                mnDiagram_GetVisibleFighterCursorFrom2(
+                                    sorted, col_start, bottom_col)));
                     }
                 }
                 bottom_col += 1;
