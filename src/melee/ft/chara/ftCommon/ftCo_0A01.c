@@ -1955,7 +1955,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     struct Fighter_x1A88_t* data2;
     struct Fighter_x1A88_t* data = &fp->x1A88;
     s32 t;
-    u32 flags;
+    f32 ez;
     int line_id;
     Vec3 island_pos;
     Vec3 floor_normal;
@@ -1964,7 +1964,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     f32 dist;
     Vec3 floor_pos;
     f32 ey;
-    f32 ez;
+    u32 flags;
     f32 grav;
     f32 dx;
     f32 px;
@@ -2075,14 +2075,13 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                         ok = 0;
                     }
                     if (ok != 0) {
+                        struct Fighter_x1A88_t* data3 = &fp->x1A88;
                         if (fp->x1A88.x60 == 0) {
-                            data2->x54.x = px;
-                            data2->x54.y = ey;
-                            data2->x38 = 5.0f;
-                            {
-                                s32 kind = stage_info.grkind;
-                                ftCo_800A1CC4(fp, ftCo_803C6594[kind]);
-                            }
+                            data3->x54.x = px;
+                            data3->x54.y = ey;
+                            data3->x38 = 5.0f;
+                            ftCo_800A1CC4(fp,
+                                          ftCo_803C6594[stage_info.grkind]);
                         }
                         ftCo_800A49B4(fp);
                         return 1;
@@ -2094,11 +2093,14 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                 valid = 0;
                 ddx = px - fp->cur_pos.x;
                 {
+                    s32 floor_result;
+
                     line_id = -1;
-                    result = mpCheckFloor(px, 5.0f + ey, px, ey - 5.0f, 0.0f,
-                                          &alt_floor_pos, &line_id, &flags,
-                                          &alt_floor_normal, -1, -1, -1, NULL,
-                                          NULL);
+                    floor_result = mpCheckFloor(
+                        px, 5.0f + ey, px, ey - 5.0f, 0.0f, &alt_floor_pos,
+                        &line_id, &flags, &alt_floor_normal, -1, -1, -1, NULL,
+                        NULL);
+                    result = floor_result;
                     if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
                     } else {
                         valid = result;
