@@ -1001,9 +1001,8 @@ void gm_8019E634(void)
     s32 results[4];
     TmData* tmd;
     s32 hmn_cpu;
-    s32 i, j;
     MatchEnd* match_end;
-    s32* results_base;
+    s32 i, j;
 
     tmd = gm_GetTournamentData();
     hmn_cpu = tmd->hmn_cpu_count;
@@ -1015,25 +1014,19 @@ void gm_8019E634(void)
 
     /* Get match results per player */
     match_end = &gm_80477738;
-    results_base = results;
-    {
-        s32* result_ptr;
-        for (result_ptr = results_base, i = 0; i < (s32) tmd->x30;
-             result_ptr++, i++)
-        {
-            *result_ptr = fn_80166CBC(match_end, i);
-        }
+    for (i = 0; i < (s32) tmd->x30; i++) {
+        results[i] = fn_80166CBC(match_end, i);
     }
 
     /* Bubble sort results, keeping indices in parallel */
     for (i = 0; i < (s32) (tmd->x30 - 1); i++) {
         for (j = 0; j < (s32) ((tmd->x30 - 1) - i); j++) {
-            if (results_base[j] > results_base[j + 1]) {
-                s32 tr = results_base[j];
+            if (results[j] > results[j + 1]) {
+                s32 tr = results[j];
                 s32 ti = indices[j];
-                results_base[j] = results_base[j + 1];
+                results[j] = results[j + 1];
                 indices[j] = indices[j + 1];
-                results_base[j + 1] = tr;
+                results[j + 1] = tr;
                 indices[j + 1] = ti;
             }
         }
@@ -1051,8 +1044,7 @@ void gm_8019E634(void)
         /* Read handicap from x37 entries */
         for (i = 0; i < 4; i++) {
             if (i < (s32) tmd->x30) {
-                s32 id = results_base[i];
-                j = get_match_player_index_xF(id);
+                j = get_match_player_index_xF(results[i]);
                 hbuf.bytes[i] = tmd->x37[j].x2;
             }
         }
@@ -1062,7 +1054,7 @@ void gm_8019E634(void)
         /* Write back adjusted handicap */
         for (i = 0; i < 4; i++) {
             if (i < (s32) tmd->x30) {
-                s32 id = results_base[i];
+                s32 id = results[i];
                 j = get_match_player_index_xF(id);
                 tmd->x37[j].x2 = hbuf.bytes[i];
             }
