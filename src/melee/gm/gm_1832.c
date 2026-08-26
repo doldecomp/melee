@@ -1784,6 +1784,21 @@ static inline StKind gm_GetStKind(gm_80187F48_EnterData* data)
     return data->stkind;
 }
 
+static inline u64 gm_80187F48_GetAudioConfig(u8 stage_index, char** table)
+{
+    return lbAudioAx_80026E84(Player_GetPlayerCharacter(0)) |
+           ((u64*) &table[24])[stage_index];
+}
+
+static inline void gm_80187F48_SetupCamera(HSD_GObj* gobj,
+                                            gm_1832_804736C0_t* data,
+                                            HSD_CObj* cobj)
+{
+    HSD_GObj_SetupProc(gobj, fn_80187910, 0);
+    HSD_CObjAddAnim(cobj, *(HSD_CameraAnim**) data->x4[1]);
+    HSD_CObjReqAnim(cobj, 0.0f);
+}
+
 static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
 {
     gm_1832_804736C0_t* data;
@@ -1824,8 +1839,7 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
 
     lbAudioAx_80026F2C((s32) table[stage_index + 12]);
     lbAudioAx_8002702C((s32) table[stage_index + 12],
-                       lbAudioAx_80026E84(Player_GetPlayerCharacter(0)) |
-                           ((u64*) &table[24])[stage_index]);
+                       gm_80187F48_GetAudioConfig(stage_index, table));
     lbAudioAx_80027168();
     lbAudioAx_80027648();
 
@@ -1834,9 +1848,7 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
     cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) *data->x4);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(gobj, (GObj_RenderFunc) (Event) Camera_800304E0, 8);
-    HSD_GObj_SetupProc(gobj, fn_80187910, 0);
-    HSD_CObjAddAnim(cobj, *(HSD_CameraAnim**) data->x4[1]);
-    HSD_CObjReqAnim(cobj, 0.0f);
+    gm_80187F48_SetupCamera(gobj, data, cobj);
 
     {
         HSD_GObj* scene_gobj = GObj_Create(0x13, 0x14, 0);
@@ -1858,7 +1870,6 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
     {
         HSD_JObj* model_jobj;
         HSD_GObj* model_gobj;
-        DynamicModelDesc* model_desc;
         model_gobj = GObj_Create(0xE, 0xF, 0);
         model_jobj =
             HSD_JObjLoadJoint((*data->x0)[11 - state->stage_index]->joint);
@@ -1866,15 +1877,7 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
         HSD_GObjObject_80390A70(model_gobj, HSD_GObj_804D7849, model_jobj);
         GObj_SetupGXLink(model_gobj, fn_80187C9C, 0xB, 0xB);
 
-        model_desc = (*data->x0)[11 - state->stage_index];
-        if (model_desc->anims != NULL) {
-            int model_anim_idx = data->x37.anim_state;
-            if (model_desc->anims[model_anim_idx] != NULL) {
-                lb_8000C0E8(model_jobj, model_anim_idx, model_desc);
-                HSD_JObjReqAnimAll(model_jobj, 0.0f);
-                HSD_JObjAnimAll(model_jobj);
-            }
-        }
+        fn_80187AB4_LoadAnim(model_jobj, data);
         HSD_GObj_SetupProc(model_gobj, fn_80187AB4, 0);
     }
 
@@ -1904,7 +1907,7 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
 
 void gm_80187F48_OnEnter(void* arg0)
 {
-    PAD_STACK(24);
+    PAD_STACK(16);
     gm_80187F48_OnEnter_inline(arg0);
 }
 
