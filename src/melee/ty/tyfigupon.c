@@ -624,7 +624,7 @@ void _tyFigupon_80315C44(HSD_GObj* arg0)
     s32 anim;
     s32 total;
 
-    PAD_STACK(16);
+    PAD_STACK(24);
 
     if ((ud = arg0->user_data) != NULL) {
         if (ud->x8 != 0) {
