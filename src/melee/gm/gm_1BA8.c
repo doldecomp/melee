@@ -417,6 +417,7 @@ void gm_801BAD70(GameScene* arg0)
         s32 c2 = ev->x4C[2];
         u8 c = ev->x50[2];
         /// @todo remove void cast hack
+        /// maybe the inline that will resolve the pad stack will fix this?
         (void) c2;
         if (ev->x4C[0] == c2 && ev->x50[0] == c) {
             ev->x50[2] = gm_GetNextColor(c);
