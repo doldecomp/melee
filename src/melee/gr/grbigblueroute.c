@@ -647,10 +647,10 @@ static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
                     s32 i = 0;
                     while (i < route_idx && jobj != NULL) {
                         i++;
-                        if (jobj != NULL) {
-                            jobj = jobj->next;
-                        } else {
+                        if (jobj == NULL) {
                             jobj = NULL;
+                        } else {
+                            jobj = jobj->next;
                         }
                     }
 
