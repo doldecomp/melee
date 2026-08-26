@@ -474,10 +474,13 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
             arg3_x = arg3->x;
             d1_x = arg1_x - arg4_offset.x;
             d2_x = arg3_x - arg5_offset.x;
-            arg3_z = arg3->z;
+            {
+                f32 z = arg3->z;
+                arg3_z = z;
+            }
             d2_z = arg3_z - arg5_offset.z;
             d1_dot_d2 = (d1_z * d2_z) +
-                        ((d2_x * d1_x) + (d1_y * d2_y));
+                        ((d1_x * d2_x) + (d1_y * d2_y));
             d2_len_sq = (d2_z * d2_z) +
                         ((d2_x * d2_x) + (d2_y * d2_y));
             offset_delta_x = arg4_offset.x - arg5_offset.x;
