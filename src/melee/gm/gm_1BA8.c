@@ -840,13 +840,13 @@ static inline void gm_801BC00C_inline(gm_801BAB40_src* event_entry)
 
 static inline s8 gm_801BC00C_GetCharacter(gm_801BAB40_src* event_entry)
 {
-    return Player_800325C8((CharacterKind) (s8) event_entry->c_kind, 0);
+    return Player_800325C8((CharacterKind) event_entry->c_kind, 0);
 }
 
 static inline CharacterKind
 gm_801BC00C_GetCharacterKind(gm_801BAB40_src* event_entry)
 {
-    return (CharacterKind) (s8) event_entry->c_kind;
+    return (CharacterKind) event_entry->c_kind;
 }
 
 void gm_801BC00C(void)
@@ -3303,7 +3303,7 @@ void gm_801BF634(s32 arg0, s32 character_kind)
 
 int gm_801BF648(s32 arg0)
 {
-    return (u8) gm_8049E548.c_kind[arg0];
+    return gm_8049E548.c_kind[arg0];
 }
 
 void gm_801BF65C(s32 arg0, s8 arg1)
