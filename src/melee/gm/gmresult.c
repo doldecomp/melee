@@ -195,13 +195,11 @@ void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
     /* Variables for inlined unrolled loop */
     s32 loop_i;
     s32 loop_n;
-    s32 loop_outer;
     u8* loop_ptr;
-    u8 loop_val;
     /* Float constants preloaded into registers */
     f32 const_zero = 0.0F;
     f32 const_neg30 = -30.0F;
-    PAD_STACK(4);
+    PAD_STACK(12);
 
     label_id = -1;
     value_id = -1;
@@ -214,7 +212,8 @@ void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
     } else {
         /// Mode 2: special handling for pairs
         if ((entry_idx & 1) == 1 && entry_idx < list->count) {
-            struct UnkResultPlayerData* tmp = lbl_8046DBE8.x94->x44C;
+            struct lbl_8046B6A0_24C_44C_t* tmp =
+                (struct lbl_8046B6A0_24C_44C_t*) lbl_8046DBE8.x94->x44C;
             loop_n = entry_idx / 2;
             loop_i = 0;
             loop_n++;
@@ -225,13 +224,14 @@ void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
                 }
             }
             idx = fn_8016F1F0(loop_i);
-            HSD_SisLib_803A6368(text1, (u16) fn_8016F280(idx) + 60);
+            idx = (u16) fn_8016F280(idx) + 60;
+            HSD_SisLib_803A6368(text1, idx);
         }
     }
 
     if (list->mode == 2 || entry->check != NULL) {
         if (list->mode != 2) {
-            result = ((s32 (*)(s32))(Event) entry->check)(slot);
+            result = entry->check(slot);
             if (result < 0) {
                 value_id = HSD_SisLib_803A6B98(text3, const_zero, const_neg30,
                                                "%s", &lbl_804D3F8C);
@@ -240,19 +240,19 @@ void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
                                                "%d", result);
             }
         } else if ((entry_idx & 1) == 0) {
-            idx = (entry_idx / 2) - 1;
-            if (idx >= 0) {
-                u8* base = lbl_8046DBE8.x94->x44C[0].x0;
-                s32 player_offset =
-                    (u8) slot * sizeof(struct UnkResultPlayerData);
-                loop_n = idx + 1;
-                loop_ptr = base + player_offset;
+            s32 pair_idx = (entry_idx / 2) - 1;
+            if (0 <= pair_idx) {
+                struct lbl_8046B6A0_24C_44C_t* tmp =
+                    (struct lbl_8046B6A0_24C_44C_t*)
+                        lbl_8046DBE8.x94->x44C;
+                loop_n = pair_idx + 1;
+                loop_ptr = tmp[(u8) slot].x0;
                 for (loop_i = 0; loop_i < 256; loop_ptr++, loop_i++) {
                     if (*loop_ptr != 0 && --loop_n == 0) {
                         break;
                     }
                 }
-                stat_value = *(s32*) &base[player_offset + loop_i * 4 + 0x104];
+                stat_value = tmp[(u8) slot].x104[loop_i];
                 if (stat_value < 0) {
                     value_id = HSD_SisLib_803A6B98(text3, const_zero,
                                                    const_neg30, "%s%d",
@@ -270,14 +270,14 @@ void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
             if (entry->get != NULL) {
                 label_id = HSD_SisLib_803A6B98(
                     text2, const_zero, const_neg30, "%s",
-                    ((u8 * (*) (s32))(Event) entry->get)(slot));
+                    entry->get(slot));
             }
         }
     } else if (list->mode != 2) {
         if (entry->get != NULL) {
             label_id = HSD_SisLib_803A6B98(
                 text2, const_zero, const_neg30, "%s",
-                ((u8 * (*) (s32))(Event) entry->get)(slot));
+                entry->get(slot));
         }
     }
 
