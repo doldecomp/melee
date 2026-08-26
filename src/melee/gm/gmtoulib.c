@@ -257,7 +257,7 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                 *p44 = xC;
                 *p34 = xC;
                 {
-                    x18 = *pX18;
+                    x18 = entry->x18;
                     x10 = *pX10;
                     val = x10 + x18 - slot_idx * x18;
                     *p40 = val;
