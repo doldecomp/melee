@@ -2466,6 +2466,16 @@ void fn_80257D7C(void)
     mnSnap_804A0A10.frame_count += 1;
 }
 
+static inline void mnSnap_LoadPageIndicator(void** page_joint,
+                                            mnSnap_State* snap,
+                                            HSD_JObj** parent,
+                                            HSD_JObj** jobj)
+{
+    *jobj = HSD_JObjLoadJoint((HSD_Joint*) *page_joint);
+    snap->fullview_jobj = *jobj;
+    HSD_JObjAddChild(*parent, *jobj);
+}
+
 /// Entry point: initializes the Snap menu scene. Loads assets, creates GObjs,
 /// sets up thumbnail grid positions, SIS text labels, and dialog widgets.
 void mnSnap_80257F24(void)
@@ -2483,13 +2493,18 @@ void mnSnap_80257F24(void)
     HSD_GObjProc* proc;
     HSD_Text* text;
     void** main_joint;
-    void** main_animjoint;
-    void** main_matanim;
     void** main_shapeanim;
-    void** csr_joint;
-    void** csr_animjoint;
-    void** csr_matanim;
+    void** main_matanim;
+    void** main_animjoint;
     void** csr_shapeanim;
+    void** csr_matanim;
+    void** csr_animjoint;
+    void** csr_joint;
+    void** photo_joint;
+    void** sub_shapeanim;
+    void** sub_matanim;
+    void** sub_animjoint;
+    void** page_joint;
     void** arrows_joint;
     void** arrows_animjoint;
     void** arrows_matanim;
@@ -2504,6 +2519,8 @@ void mnSnap_80257F24(void)
     f32 dy;
     f32 dz;
     s32 i;
+
+    PAD_STACK(20);
 
     mn_804D6BC8.cooldown = 5;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
@@ -2531,6 +2548,11 @@ void mnSnap_80257F24(void)
     csr_animjoint = &snap->csr_animjoint;
     csr_matanim = &snap->csr_matanim;
     csr_shapeanim = &snap->csr_shapeanim;
+    photo_joint = &snap->photo_joint;
+    sub_animjoint = &snap->sub_animjoint;
+    sub_matanim = &snap->sub_matanim;
+    sub_shapeanim = &snap->sub_shapeanim;
+    page_joint = &snap->page_joint;
     arrows_joint = &snap->arrows_joint;
     arrows_animjoint = &snap->arrows_animjoint;
     arrows_matanim = &snap->arrows_matanim;
@@ -2545,19 +2567,19 @@ void mnSnap_80257F24(void)
         "MenMainConSn_Top_animjoint", main_matanim,
         "MenMainConSn_Top_matanim_joint", main_shapeanim,
         "MenMainConSn_Top_shapeanim_joint", csr_joint,
-        "MenMainSubCsrSn_Top_joint", csr_animjoint,
-        "MenMainSubCsrSn_Top_animjoint", csr_matanim,
-        "MenMainSubCsrSn_Top_matanim_joint", csr_shapeanim,
-        "MenMainSubCsrSn_Top_shapeanim_joint", (&snap->photo_joint),
-        "MenMainPhotoSn_Top_joint", (&snap->sub_animjoint),
-        "MenMainSubSn_Top_animjoint", (&snap->sub_matanim),
-        "MenMainSubSn_Top_matanim_joint", (&snap->sub_shapeanim),
-        "MenMainSubSn_Top_shapeanim_joint", (&snap->page_joint),
-        "MenMainSubSn_Top_joint", (&snap->load_joint),
-        "MenMainLoadSn_Top_joint", arrows_joint, "MenMainSubSn_Top_joint",
-        arrows_animjoint, "MenMainSubSn_Top_animjoint", arrows_matanim,
-        "MenMainSubSn_Top_matanim_joint", arrows_shapeanim,
-        "MenMainSubSn_Top_shapeanim_joint", warn_joint,
+        "MenMainSubSn_Top_joint", csr_animjoint,
+        "MenMainSubSn_Top_animjoint", csr_matanim,
+        "MenMainSubSn_Top_matanim_joint", csr_shapeanim,
+        "MenMainSubSn_Top_shapeanim_joint", photo_joint,
+        "MenMainSubCsrSn_Top_joint", sub_animjoint,
+        "MenMainSubCsrSn_Top_animjoint", sub_matanim,
+        "MenMainSubCsrSn_Top_matanim_joint", sub_shapeanim,
+        "MenMainSubCsrSn_Top_shapeanim_joint", page_joint,
+        "MenMainPhotoSn_Top_joint", arrows_joint,
+        "MenMainLoadSn_Top_joint", arrows_animjoint,
+        "MenMainLoadSn_Top_animjoint", arrows_matanim,
+        "MenMainLoadSn_Top_matanim_joint", arrows_shapeanim,
+        "MenMainLoadSn_Top_shapeanim_joint", warn_joint,
         "MenMainWarCmn_Top_joint", warn_animjoint,
         "MenMainWarCmn_Top_animjoint", warn_matanim,
         "MenMainWarCmn_Top_matanim_joint", warn_shapeanim,
@@ -2635,10 +2657,10 @@ void mnSnap_80257F24(void)
 
     /* Create 5 thumbnail position JObjs by interpolating */
     for (i = 0; i < 5; i++) {
-        jobj2 = HSD_JObjLoadJoint((HSD_Joint*) snap->photo_joint);
-        HSD_JObjAddAnimAll(jobj2, (HSD_AnimJoint*) snap->sub_animjoint,
-                           (HSD_MatAnimJoint*) snap->sub_matanim,
-                           (HSD_ShapeAnimJoint*) snap->sub_shapeanim);
+        jobj2 = HSD_JObjLoadJoint((HSD_Joint*) *photo_joint);
+        HSD_JObjAddAnimAll(jobj2, (HSD_AnimJoint*) *sub_animjoint,
+                           (HSD_MatAnimJoint*) *sub_matanim,
+                           (HSD_ShapeAnimJoint*) *sub_shapeanim);
         end_pos.x = dx * (f32) i + start_pos.x;
         end_pos.y = dy * (f32) i + start_pos.y;
         end_pos.z = dz * (f32) i + start_pos.z;
@@ -2648,9 +2670,7 @@ void mnSnap_80257F24(void)
     }
 
     /* Load page indicator */
-    jobj2 = HSD_JObjLoadJoint((HSD_Joint*) snap->page_joint);
-    snap->fullview_jobj = jobj2;
-    HSD_JObjAddChild(*thumb_root_ptr, jobj2);
+    mnSnap_LoadPageIndicator(page_joint, snap, thumb_root_ptr, &jobj2);
     HSD_JObjSetFlagsAll(jobj2, JOBJ_HIDDEN);
 
     /* Create 4 SIS text objects for thumbnail labels */
