@@ -3176,8 +3176,8 @@ void gm_801BF128(void)
         } while (dup != 0);
         gm_801BF634(c, j);
         gm_801BF65C(c, 0);
-        c += 1;
-        gm_GetRandomHistory()->character_usage[j] += 1;
+        c++;
+        gm_GetRandomHistory()->character_usage[j]++;
     } while (c < 4);
     gm_801BF6C8(HSD_Randi(4));
     {
@@ -3192,9 +3192,9 @@ void gm_801BF128(void)
     do {
         if (gm_80164430(gm_801641CC(c)) != 0) {
             stage_pool[count] = c;
-            count += 1;
+            count++;
         }
-        c += 1;
+        c++;
     } while (c < 0x1D);
     stage_pool[count] = 0x1D;
     for (i = 0; i < count; i++) {
@@ -3215,8 +3215,8 @@ void gm_801BF128(void)
             cur_id = gm_801BF694();
         } while ((s32) gm_801641CC((u8) pick) == (s32) cur_id);
     }
-    gm_801BF684((u8) gm_801641CC((u8) pick));
-    gm_GetRandomHistory()->stage_usage[pick] += 1;
+    gm_801BF684((s32) gm_801641CC((u8) pick));
+    gm_GetRandomHistory()->stage_usage[pick]++;
     gm_801BF6A8(HSD_Randi(4));
 }
 
@@ -3296,7 +3296,7 @@ void gm_801BF4DC(GameScene* arg0)
 /// @todo .sdata2 order hack
 const f32 gm_804DAC88 = 1.0F;
 
-void gm_801BF634(s32 arg0, s8 character_kind)
+void gm_801BF634(s32 arg0, s32 character_kind)
 {
     gm_8049E548.c_kind[arg0] = character_kind;
 }
@@ -3316,7 +3316,7 @@ u8 gm_801BF670(s32 arg0)
     return gm_8049E548.x4[arg0];
 }
 
-void gm_801BF684(s16 arg0)
+void gm_801BF684(u16 arg0)
 {
     gm_8049E548.unk_C = arg0;
 }
