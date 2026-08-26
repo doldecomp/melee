@@ -1127,6 +1127,7 @@ config.libs = [
             Object(Testing, "melee/gm/gmmain_lib.c"),
             Object(Matching, "melee/gm/gmmain.c"),
             Object(Testing, "melee/gm/gm_1601.c"),
+            Object(Testing, "melee/gm/gm_16A2.c"),
             Object(Matching, "melee/gm/gm_16AE.c"),
             Object(Testing, "melee/gm/gm_16F1.c"),
             Object(Matching, "melee/gm/gm_1736.c"),
