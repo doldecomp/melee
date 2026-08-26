@@ -1125,12 +1125,6 @@ void fn_80179854(void)
 
 extern s32 ftLib_800876B4(HSD_GObj*);
 
-static inline HSD_ImageDesc* get_player_img2(int slot,
-                                             ResultsDisplayData* disp)
-{
-    return &disp->player_img2[slot];
-}
-
 static inline int get_big_loser(int slot, MatchEnd* match_end)
 {
     return match_end->player_standings[slot].is_big_loser;
@@ -1141,6 +1135,18 @@ static inline HSD_JObj** get_result_jobjs(ResultsDisplayData* disp)
     return disp->jobjs;
 }
 
+static inline void prepare_capture(int slot, MatchEnd* match_end,
+                                   HSD_CObj* cobj, HSD_GObj* gobj)
+{
+    GXColor color = gm_80160968(
+        gm_80160854((u8) slot, match_end->player_standings[slot].team,
+                    (u8) (match_end->is_teams == 1),
+                    match_end->player_standings[slot].slot_type));
+    HSD_SetEraseColor(color.r, color.g, color.b, color.a);
+    HSD_CObjEraseScreen(cobj, 1, 0, 0);
+    Camera_800313E0(gobj, 0);
+}
+
 void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
 {
     ResultsDisplayData* disp = &lbl_8046E1B0;
@@ -1148,7 +1154,6 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
     HSD_JObj* child_jobj;
     HSD_CObj* cobj;
     int lookup;
-    PAD_STACK(16);
 
     fn_801795D4();
     fn_801796F0(arg2);
@@ -1162,24 +1167,14 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
             match_end->team_standings[match_end->player_standings[arg2].team]
                 .is_big_loser;
     }
-    cobj = (HSD_CObj*) arg0->hsd_obj;
 
     if (lookup != 0) {
-        HSD_JObj* root = (HSD_JObj*) disp->gobjs[arg2]->hsd_obj;
-        child_jobj = root == NULL ? NULL : root->child;
+        child_jobj = HSD_JObjGetChild(GET_JOBJ(disp->gobjs[arg2]));
     }
 
     if (HSD_CObjSetCurrent(cobj)) {
         if (lookup != 0) {
-            GXColor color;
-
-            color = gm_80160968(
-                gm_80160854((u8) arg2, match_end->player_standings[arg2].team,
-                            (u8) (match_end->is_teams == 1),
-                            match_end->player_standings[arg2].slot_type));
-            HSD_SetEraseColor(color.r, color.g, color.b, color.a);
-            HSD_CObjEraseScreen(cobj, 1, 0, 0);
-            Camera_800313E0(arg0, 0);
+            prepare_capture(arg2, match_end, cobj, arg0);
 
             {
                 HSD_ImageDesc* image_desc = disp->player_img2;
@@ -1223,21 +1218,14 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
                 }
             }
         } else {
-            HSD_GObj* entity = Player_GetEntity(arg2);
-            if (ftLib_800876B4(entity) == 0) {
-                if (disp->state.player_flags[arg2] == 0 && disp->state.x0_6) {
-                    GXColor color;
-
-                    color = gm_80160968(gm_80160854(
-                        (u8) arg2, match_end->player_standings[arg2].team,
-                        (u8) (match_end->is_teams == 1),
-                        match_end->player_standings[arg2].slot_type));
-                    HSD_SetEraseColor(color.r, color.g, color.b, color.a);
-                    HSD_CObjEraseScreen(cobj, 1, 0, 0);
-                    Camera_800313E0(arg0, 0);
+            if (ftLib_800876B4(Player_GetEntity(arg2)) == 0) {
+                int player_flag = disp->state.player_flags[arg2];
+                if (player_flag == 0 && disp->state.x0_6) {
+                    prepare_capture(arg2, match_end, cobj, arg0);
 
                     {
-                        HSD_ImageDesc* desc = get_player_img2(arg2, disp);
+                        HSD_ImageDesc* image_desc = disp->player_img2;
+                        HSD_ImageDesc* desc = &image_desc[arg2];
 
                         HSD_ImageDescCopyFromEFB(
                             desc,
