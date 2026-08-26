@@ -468,8 +468,8 @@ static void fn_803B376C(u8* arg0)
         scratch_f28_6 = (f32) (scratch_r9_2 - scratch_r7_2);
         scratch_f8_3 = (f32) (scratch_r11_2 - scratch_r10_2);
         scratch_f11_5 = (f32) (scratch_r29_2 - scratch_r12_2);
-        work_r4_2[0] = (s32) (0.707107 * (f64) (scratch_f6_2 + scratch_f29));
         scratch_f29_2 = (f32) (scratch_r31_2 - scratch_r30_2);
+        work_r4_2[0] = (s32) (0.707107 * (f64) (scratch_f6_2 + scratch_f29));
         work_r4_2[32] = (s32) (0.707107 * (f64) (scratch_f6_2 - scratch_f29));
         work_r4_2[48] = (s32) ((-0.92388 * (f64) scratch_f28_5) +
                                (0.382683 * (f64) scratch_f27_5));
