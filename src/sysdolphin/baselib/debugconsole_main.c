@@ -52,7 +52,7 @@ struct ParticleScreenState {
     /* 0x40 */ s32 x40;
     /* 0x44 */ s32 x44;
     /* 0x48 */ s32 x48;
-    /* 0x4C */ void* x4C;
+    /* 0x4C */ u8* x4C;
     /* 0x50 */ void* x50;
     /* 0x54 */ u8 _pad4[0x68];
     /* 0xBC */ u32 xBC;
@@ -2016,18 +2016,31 @@ struct lbl_8040BA5C_t lbl_8040BBE8 = {
 static char* lbl_804D62F4 = "+--------------------------+";
 static char* lbl_804D62F8 = "| INPUT ADDRESS : 8%07X |";
 
+static inline void hsd_80396884_draw_char(s8 ch, s32 b6)
+{
+    hsd_803922FC(hsd_804CF810.x4C + (ch & 0x7F) * 0x38,
+                 hsd_804CF810.x4, hsd_804CF810.x8, b6,
+                 (&hsd_804CF810.x24)[hsd_804CF810.x34], hsd_804CF810.x3C,
+                 hsd_804CF810.x40, hsd_804CF810.x44, hsd_804CF810.x50);
+}
+
+static inline void* hsd_80396884_get_x50(void)
+{
+    return hsd_804CF810.x50;
+}
+
 void hsd_80396884(void)
 {
-    char buf[32];
-    s32 b6;
-    s32 x_base;
-    u8 ch;
     void* saved;
+    s32 x_base;
+    s32 b6;
+    u8 ch;
+    char buf[32];
     PAD_STACK(28);
 
     x_base = (hsd_804CF810.x20 - 30) / 2;
     sprintf(buf, lbl_804D62F8, lbl_8040BC3C.x10 & 0x0FFFFFFF);
-    saved = hsd_804CF810.x50;
+    saved = hsd_80396884_get_x50();
     hsd_804CF810.x50 = &lbl_8040AB00;
     hsd_804CF810.x4 = x_base * 11 + 20;
     hsd_804CF810.x8 = hsd_804CF810.x40 - 82;
@@ -2038,19 +2051,15 @@ void hsd_80396884(void)
     hsd_804CF810.x4 = x_base * 11 + 20;
     hsd_804CF810.x8 = hsd_804CF810.x40 - 54;
     hsd_80394434(lbl_804D62F4);
-    hsd_804CF810.x4 = (lbl_8040BC3C.x14 + 19 + x_base) * 11 + 20;
+    hsd_804CF810.x4 = (lbl_8040BC3C.x14 + (19 + x_base)) * 11 + 20;
     hsd_804CF810.x8 = hsd_804CF810.x40 - 68;
     hsd_804CF810.x50 = &lbl_8040AB20;
     b6 = hsd_804CF810.x0_b6;
     ch = *(&buf[19] + lbl_8040BC3C.x14);
     if (hsd_804CF810.x0_b7) {
-        void* bitmap = (void*) ((u8*) hsd_804CF810.x4C + (ch & 0x7F) * 0x38);
-        s32 x = hsd_804CF810.x4;
-        s32 dst = (&hsd_804CF810.x24)[hsd_804CF810.x34];
-        hsd_803922FC(bitmap, x, hsd_804CF810.x8, b6, dst, hsd_804CF810.x3C,
-                     hsd_804CF810.x40, hsd_804CF810.x44, hsd_804CF810.x50);
+        hsd_80396884_draw_char(ch, b6);
     } else {
-        void* bitmap = (void*) ((u8*) hsd_804CF810.x4C + (ch & 0x7F) * 0x38);
+        u8* bitmap = hsd_804CF810.x4C + (ch & 0x7F) * 0x38;
         s32 x = hsd_804CF810.x4;
         s32 dst = (&hsd_804CF810.x24)[hsd_804CF810.x34];
         hsd_803921B8(bitmap, x, hsd_804CF810.x8, dst, hsd_804CF810.x3C,
