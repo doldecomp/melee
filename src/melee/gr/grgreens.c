@@ -1083,27 +1083,23 @@ void fn_802159B4(Item_GObj* item_gobj, Ground* gp)
     return;
 }
 
-static inline Item_GObj* getBlockItemGObj(Ground* gp, int i, int j)
-{
-    return gp->u.greens.x8_blocks[j][i].x10;
-}
-
 void grGreens_802159B8(Ground* gp, int i, int j, int value)
 {
-    HSD_GObj* gobj = getBlockItemGObj(gp, i, j);
     UNUSED u8 pad[8];
     Vec vec;
+    Item_GObj* gobj;
     float f;
     PAD_STACK(0x10);
-
-    if (gobj != NULL && !gp->u.greens.x8_blocks[j][i].x1_7) {
+    if ((gobj = gp->u.greens.x8_blocks[j][i].x10) &&
+        !gp->u.greens.x8_blocks[j][i].x1_7) {
         gp->u.greens.x8_blocks[j][i].x1_7 = 1;
         grMaterial_801C8E28(gobj);
         gp->u.greens.x8_blocks[j][i].x1C = value;
 
         if (gp->u.greens.x8_blocks[j][i].x1_1) {
-            HSD_JObjSetFlagsAll(gp->u.greens.x8_blocks[j][i].xC->hsd_obj,
-                                JOBJ_HIDDEN);
+            HSD_JObj* jobj = gp->u.greens.x8_blocks[j][i].xC->hsd_obj;
+
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             grMaterial_801C8D98(gobj, 1);
             it_80275414(gobj);
             gp->u.greens.x8_blocks[j][i].x1_2 = 1;
