@@ -1710,25 +1710,18 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
                     f32 range_scale;
                     f32 range;
                     f32 velocity;
-                    s32 collided;
+                    f32 next_velocity;
 
                     velocity = 140.0f * Ground_801C0498();
                     range_scale = Ground_801C0498();
                     range = (60.0f * range_scale) + 30.0f;
-                    collided =
-                        grBigBlue_801E8794(jobj, &pos, 1, range, velocity);
-                    if (collided == 0) {
-                        f32 range_scale2;
-                        f32 range2;
-                        f32 next_velocity;
-
-                        next_velocity = 140.0f * Ground_801C0498();
-                        range_scale2 = Ground_801C0498();
-                        range2 = (60.0f * range_scale2) + 30.0f;
-                        collided =
-                            grBigBlue_801EAB50(&pos, 1, range2, next_velocity);
-                    }
-                    if (collided != 0) {
+                    if (grBigBlue_801E8794(jobj, &pos, 1, range, velocity) !=
+                            0 ||
+                        grBigBlue_801EAB50(
+                            &pos, 1,
+                            (60.0f * Ground_801C0498()) + 30.0f,
+                            next_velocity = 140.0f * Ground_801C0498()) != 0)
+                    {
                         *(f32*) (bp + 0xD8) = 0.0f;
                     } else {
                         *(f32*) (bp + 0xD8) = yakumono_param->xD0;
@@ -1845,7 +1838,7 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
                 }
                 if (diff_y < 0.5f) {
                     vy = 0.0f;
-                } else if (pos.y < target_y) {
+                } else if (target_y > pos.y) {
                     vy = (target_y - pos.y) / yakumono_param->xE4;
                     if (vy > yakumono_param->xE8) {
                         vy = yakumono_param->xE8;
@@ -1859,7 +1852,10 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
                 pos.y += vy;
 
                 HSD_JObjAddTranslationX(jobj, *(f32*) (bp + 0xD8));
-                HSD_JObjSetTranslateY(jobj, pos.y);
+                {
+                    f32 translate_y = pos.y;
+                    HSD_JObjSetTranslateY(jobj, translate_y);
+                }
             }
             break;
         }
