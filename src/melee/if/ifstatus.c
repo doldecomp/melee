@@ -706,11 +706,6 @@ check_done:
     return gx_cur;
 }
 
-static inline HSD_GObj* ifStatus_CreateMarkGObj(void)
-{
-    return GObj_Create(0xE, 0xF, 0);
-}
-
 HSD_GObj* ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
 {
     CharacterKind chara;
@@ -720,17 +715,17 @@ HSD_GObj* ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
     Vec3* vec;
     HSD_MObj* mobj;
     GXColor color;
-    u8 slot;
     u8 team;
+    u8 slot;
     u8 hud_color;
     HudIndex* hud = ifStatus_GetHUDInfo();
     u8 idx = player_idx;
     PAD_STACK(0x10);
 
-    chara = Player_GetPlayerCharacter(idx);
+    chara = Player_GetPlayerCharacter((u8) player_idx);
     if (state->next == NULL) {
         ifAll_GetArchive();
-        gobj = ifStatus_CreateMarkGObj();
+        gobj = GObj_Create(0xE, 0xF, 0);
         if (gobj == NULL) {
             HSD_ASSERTREPORT(0x30A, 0,
                              "Error : gobj dont't get (ifAddMark)\n");
