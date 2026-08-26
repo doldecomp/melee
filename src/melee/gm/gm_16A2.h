@@ -6,7 +6,7 @@
 #include <sysdolphin/baselib/forward.h>
 
 struct lbl_8046B488_t* gm_1601_GetUnkData(void);
-u8 gm_80169370(s32);
+s8 gm_80169370(s32);
 int gm_80169384(void);
 s32 gm_80169394(void);
 s32 fn_801693A8(void);

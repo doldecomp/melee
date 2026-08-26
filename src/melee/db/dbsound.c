@@ -48,7 +48,7 @@ void fn_SetupSoundInfo(void)
 void fn_UpdateSoundInfo(void)
 {
     int x;
-    lbAudioAx_80025098(3 < db_ShowSoundInfo ? 1 : 0);
+    lbAudioAx_80025098(3 < db_ShowSoundInfo ? true : false);
     if (db_SoundInfoText) {
         switch (db_ShowSoundInfo) {
         case 0:

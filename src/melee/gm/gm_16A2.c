@@ -34,9 +34,9 @@ struct lbl_8046B488_t* gm_1601_GetUnkData(void)
     return &lbl_8046B488;
 }
 
-u8 gm_80169370(s32 arg0)
+s8 gm_80169370(s32 arg0)
 {
-    return ((u8*) gm_1601_GetUnkData())[arg0];
+    return ((s8*) gm_1601_GetUnkData())[arg0];
 }
 
 int gm_80169384(void)
