@@ -70,6 +70,20 @@ typedef union {
     u8 idx[4];
 } JObjIndices;
 
+typedef union {
+    u16 packed;
+    u8 idx[2];
+} StockIndices;
+
+typedef union {
+    u8 value;
+} ByteIndex;
+
+typedef struct {
+    JObjIndices digits;
+    ByteIndex extra;
+} TimeIndices;
+
 union mn_802307F8_value_view {
     struct mn_802307F8_t fields;
     struct {
@@ -159,9 +173,9 @@ u8 mn_StockCountTextId = 0x2B;
 f32 mn_804D6BD8;
 JObjIndices const mn_804DBDFC = { 0x02030506 };
 HSD_GObj* mn_804D6BD0;
-u16 const mn_804DBE04 = 0x0708;
-s32 const mn_804DBE08 = 0x02030405;
-u8 const mn_804DBE0C = 6;
+StockIndices const mn_804DBE04 = { 0x0708 };
+JObjIndices const mn_804DBE08 = { 0x02030405 };
+ByteIndex const mn_804DBE0C = { 6 };
 u16 const mn_804DBDF8 = 0x203;
 u32 const mn_804DBE10 = 0x02030506;
 u16 const mn_804DBE14 = 0x0708;
@@ -463,14 +477,8 @@ void mn_8022FB88(u8 arg0, void* arg1)
 void mn_8022FD18(u8 arg0)
 {
     UNUSED u8 pad[8];
-    union {
-        u16 packed;
-        u8 idx[2];
-    } stock_digits;
-    struct {
-        JObjIndices digits;
-        u8 extra;
-    } time_indices;
+    StockIndices stock_digits;
+    TimeIndices time_indices;
     HSD_JObj** jobjs;
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
@@ -484,8 +492,8 @@ void mn_8022FD18(u8 arg0)
     u8 val;
 
     data = mn_804D6BD0->user_data;
-    stock_digits.packed = mn_804DBE04;
-    time_indices.digits.packed = mn_804DBE08;
+    stock_digits = mn_804DBE04;
+    time_indices.digits = mn_804DBE08;
     data2 = data;
     time_indices.extra = mn_804DBE0C;
     if (arg0 != 0) {
