@@ -282,7 +282,7 @@ void gmTitle_801A1C18_OnFrame(void)
         tmp = gm_GetCurrentSceneExitData();
         *tmp = input;
         gm_801A4B60();
-    } else if (DbLevel >= 3) {
+    } else if (DbLevel >= DbLKind_DebugRom) {
         if (input & HSD_PAD_Y) {
             sfxForward();
             tmp = gm_GetCurrentSceneExitData();
@@ -361,7 +361,7 @@ void gmTitle_801A1E20_OnEnter(void* unused)
     fn_801A1498_inline();
 
     // Debug shows the build timestamp on the title screen
-    if (DbLevel >= 1) {
+    if (DbLevel >= DbLKind_NoDebugRom) {
         HSD_SisLib_803A611C(0, NULL, 9, 0xD, 0, 0xE, 0, 0x13);
         text = HSD_SisLib_803A6754(0, 0);
         gmTitle_801A1D38(db_build_timestamp, gmTitle_80479B48);

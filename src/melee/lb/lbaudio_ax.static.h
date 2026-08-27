@@ -10,42 +10,39 @@
 #include <melee/ft/forward.h>
 
 /// Sound object userdata (0x48 bytes, allocated by HSD_ObjAlloc)
-typedef struct lbAudioAx_UserData {
-    /* 0x00 */ s32 x0;
+typedef struct {
+    /* 0x00 */ int x0;
     /* 0x04 */ HSD_GObj* gobj;
-    /* 0x08 */ HSD_GObj* entity;
-    /* 0x0C */ s32 xC;
+    /* 0x08 */ HSD_GObj* owner;
+    /* 0x0C */ int xC;
     /* 0x10 */ bool (*x10)(HSD_GObj*);
-    /* 0x14 */ s32 x14;
-    /* 0x18 */ s32 start_val;
-    /* 0x1C */ s32 end_val;
-    /* 0x20 */ s32 x20;
-    /* 0x24 */ s32 pan_left;
-    /* 0x28 */ s32 pan_right;
-    /* 0x2C */ union {
-        s32 pan;
-        struct lbAudioAx_UserData* inner;
-    } x2C;
-    /* 0x30 */ s32 voice_id;
-    /* 0x34 */ s32 current_frame;
-    /* 0x38 */ s32 end_frame;
-    /* 0x3C */ f32 x3C;
-    /* 0x40 */ s32 x40;
-    /* 0x44 */ s32 x44;
+    /* 0x14 */ int id;
+    /* 0x18 */ int start_vol;
+    /* 0x1C */ int end_vol;
+    /* 0x20 */ int vol;
+    /* 0x24 */ int pan_left;
+    /* 0x28 */ int pan_right;
+    /* 0x2C */ int pan;
+    /* 0x30 */ int voice_id;
+    /* 0x34 */ int current_frame;
+    /* 0x38 */ int end_frame;
+    /* 0x3C */ float x3C;
+    /* 0x40 */ int track;
+    /* 0x44 */ bool x44;
 } lbAudioAx_UserData;
 
-static f32 lbl_804D63F0;
+static float lbl_804D63F0;
 static int lbl_804D63F4;
 static int lbl_804D63F8;
 static int lbl_804D63FC;
 static int lbl_804D6400;
 static int lbl_804D6404;
 
-static s32 lbl_804D3870 = 0x700000;
-static int lbl_804D3874 = 1;
-static s32 lbl_804D3878 = -1;
+static int lbl_804D3870 = 0x700000;
+static int sound_mode = 1;
+static int lbl_804D3878 = -1;
 static int lbl_804D387C = 0x7F;
-static f32 lbl_804D3880 = 1.0F; ///< synth volume
+static float synth_volume = 1.0F;
 static int lbl_804D3884 = 0x7F;
 static int lbl_804D3888 = 0x7F;
 static int lbl_804D388C = 0x7F;
@@ -56,52 +53,52 @@ static int lbl_804D389C = 0x7F;
 static int lbl_804D38A0 = 0x7F;
 static int lbl_804D38A4 = 0x7F;
 static int lbl_804D38A8 = 0x7F;
-static f32 lbl_804D38AC = 1.0F;
-static f32 lbl_804D38B0 = 1.0F;
-static f32 lbl_804D38B4 = 1.0F;
-static f32 lbl_804D38B8 = 1.0F;
-static f32 lbl_804D38BC = 1.0F;
-static f32 lbl_804D38C0 = 1.0F;
-static f32 lbl_804D38C4 = 1.0F;
-static f32 lbl_804D38C8 = 1.0F;
+static float lbl_804D38AC = 1.0F;
+static float lbl_804D38B0 = 1.0F;
+static float lbl_804D38B4 = 1.0F;
+static float lbl_804D38B8 = 1.0F;
+static float lbl_804D38BC = 1.0F;
+static float lbl_804D38C0 = 1.0F;
+static float lbl_804D38C4 = 1.0F;
+static float lbl_804D38C8 = 1.0F;
 static int lbl_804D38CC = 0x7F;
-static int lbl_804D38D0 = 7;
-static int lbl_804D38D4 = 7;
+static int ssm_stem_pos = 7;
+static int hps_stem_pos = 7;
 static int lbl_804D38D8 = 1;
 static int lbl_804D38DC = -1;
 static int lbl_804D38E0 = 1;
-static f32 lbl_804D38E4 = 1.0f;
-static f32 lbl_804D38E8 = 1.0f;
-static f32 lbl_804D38EC = 1.0f;
+static float lbl_804D38E4 = 1.0f;
+static float lbl_804D38E8 = 1.0f;
+static float lbl_804D38EC = 1.0f;
 static int lbl_804D38F0 = -1;
 static int lbl_804D38F4 = -1;
 
-static int lbl_804D6408;
+static bool debug_enabled;
 static int lbl_804D640C;
-static bool lbl_804D6410; ///< is paused
+static bool paused;
 static int lbl_804D6414;
 static int lbl_804D6418;
-static s32 lbl_804D641C;
+static int lbl_804D641C;
 static int lbl_804D6420;
 static int lbl_804D6424;
-static s32 lbl_804D6428;
-static s32 lbl_804D642C;
+static int lbl_804D6428;
+static int lbl_804D642C;
 static int lbl_804D6430;
 static int lbl_804D6434;
 
 static HSD_ObjAllocData lbl_80433710;
-static s32 lbl_8043373C[17];
-static s32 lbl_80433780[17];
+static int lbl_8043373C[17];
+static int lbl_80433780[17];
 
-/* 4337C4 */ static int lbl_804337C4[0x38];
-/* 4338A4 */ static int lbl_804338A4[0x38];
-/* 433984 */ static int lbl_80433984[0x38];
-/* 433A64 */ static int lbl_80433A64[0x38];
-/* 433B44 */ extern int lbl_80433B44[0x1F124 / 4];
+static int lbl_804337C4[0x38];
+static int lbl_804338A4[0x38];
+static int lbl_80433984[0x38];
+static int lbl_80433A64[0x38];
+static int lbl_80433B44[0x38];
 
-char lbl_803BB300[0x40] = "";
-char lbl_803BB340[0x40] = "/audio/";
-char lbl_803BB380[0x40] = "/audio/";
+static char cur_hps_stem[0x40] = "";
+static char cur_ssm_file[0x40] = "/audio/";
+static char cur_hps_file[0x40] = "/audio/";
 
 static struct {
     u8 x0;
@@ -234,7 +231,7 @@ static int s32_arr_803BB8D4[0x38][2] = {
     { 0x83D60, 0x83D60 }, { 0x83D60, 0x83D60 },
 };
 
-static char* lbl_803BBCFC[] = {
+static const char* ssm_files[] = {
     "main.ssm",     "pokemon.ssm", "nr_title.ssm", "nr_select.ssm",
     "nr_1p.ssm",    "nr_vs.ssm",   "captain.ssm",  "clink.ssm",
     "dk.ssm",       "drmario.ssm", "falco.ssm",    "fox.ssm",
@@ -251,7 +248,7 @@ static char* lbl_803BBCFC[] = {
     "1pend.ssm",    "last.ssm",    "end.ssm",      NULL,
 };
 
-static char* lbl_803BC314[] = {
+static const char* hps_files[] = {
     "1p_qk.hps",      "akaneia.hps",    "baloon.hps",     "bigblue.hps",
     "castle.hps",     "continue.hps",   "corneria.hps",   "docmari.hps",
     "ending.hps",     "famidemo.hps",   "ff_1p01.hps",    "ff_1p02.hps",
@@ -290,7 +287,7 @@ static u8 unk_arr_803BC4A0[0x21][2] = {
     { 0x62, 0x62 }, { 0x62, 0x62 }, { 0x62, 0x62 }, { 0x62, 0x62 },
 };
 
-static int offsets_arr_803BC4E4[][2] = {
+static u32 offsets_arr_803BC4E4[][2] = {
     2045824, 0, 561760, 1, 153024,  0, 239264, 1, 121888, 0, 54176,  0,
     443328,  1, 298400, 0, 206368,  0, 430560, 1, 599712, 1, 573216, 1,
     487936,  0, 477600, 1, 586208,  1, 526752, 1, 328672, 1, 372992, 1,
@@ -331,11 +328,5 @@ static int offsets_arr_803BC6A4[][2] = {
 /* 4D6448 */ static int lbl_804D6448;
 /* 4D644C */ static int lbl_804D644C;
 /* 4D6450 */ static unsigned int lbl_804D6450;
-/* 4D6454 */ static struct {
-    int** x0;
-    int** x4;
-    int** x8;
-    int** xC;
-}* lbl_804D6454;
 
 #endif

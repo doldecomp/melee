@@ -33,7 +33,7 @@ void fn_SetupItemAndPokemonMenu(void)
 
 void fn_80225A54(int player)
 {
-    if (DbLevel == 4) {
+    if (DbLevel == DbLKind_Develop) {
         if (db_ButtonsDown(player) & HSD_PAD_B) {
             if (db_ButtonsPressed(player) & HSD_PAD_DPADRIGHT) {
                 Item_804A0C64.x4 = Item_804A0C64.x0;

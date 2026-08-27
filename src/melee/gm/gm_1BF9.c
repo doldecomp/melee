@@ -51,10 +51,6 @@ enum {
     TROPHY_PIKMIN = 0x113,
 };
 
-enum {
-    LANG_JP = 0,
-};
-
 void gm_801BF9A8(GameScene* data)
 {
     struct sceneData* scene_data = gm_GetGameSceneLeaveDataCallback(data);

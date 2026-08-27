@@ -15,7 +15,7 @@
 /* 4D6B24 */ char** db_submotion_names;
 /* 4D6B20 */ bool db_804D6B20;
 
-int DbLevel = 1;
+DbLKind DbLevel = DbLKind_NoDebugRom;
 
 char db_build_timestamp[] = "DATE Feb 13 2002  TIME 22:06:27";
 
@@ -71,7 +71,7 @@ void db_Setup(void)
         char** submotion_names;
     }* commonData;
 
-    if (DbLevel >= 3) {
+    if (DbLevel >= DbLKind_DebugRom) {
         for (i = 0; i < 4; i++) {
             db_ButtonStates[i].repeat = 0;
             db_ButtonStates[i].released = 0;
@@ -167,7 +167,7 @@ void db_RunEveryFrame(void)
     int stack[4];
     int i;
     int num_players;
-    if (DbLevel < 3) {
+    if (DbLevel < DbLKind_DebugRom) {
         return;
     }
     if (ftLib_IsMasterHandPresent() || ftLib_IsCrazyHandPresent()) {

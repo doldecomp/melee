@@ -3420,21 +3420,24 @@ s32 fn_80167638(s32 arg0, Vec3* arg1, Vec3* arg2)
 {
     int idx = get_idx();
     s8 chr = Player_GetPlayerCharacter(arg0);
+    s32 tmp;
     PAD_STACK(8);
 
     if (stage_info.unk8C.b4) {
-        Stage_80224E38(arg1, arg0);
+        Stage_80224E38(arg1, tmp = arg0);
         arg2->z = 0.0f;
-        arg2->x = arg2->y = 0.0f;
+        arg2->y = 0.0f;
+        arg2->x = 0.0f;
     } else {
-        arg0 = 0;
-        Stage_80224E38(arg1, 0);
+        tmp = 0 & 0xFFFF;
+        Stage_80224E38(arg1, tmp);
         {
             float sp[] = {
                 0, 1, -1, 2, 0, 0,
             };
             arg2->x = 16.0f * sp[idx];
-            arg2->y = arg2->z = 0.0f;
+            arg2->z = 0.0f;
+            arg2->y = 0.0f;
         }
         {
             lbl_8046B6A0_t* info = gm_16AE_GetUnkData_1();
@@ -3443,7 +3446,7 @@ s32 fn_80167638(s32 arg0, Vec3* arg1, Vec3* arg2)
             info->FighterMatchInfo[idx].x9 = chr;
         }
     }
-    return arg0;
+    return tmp;
 }
 
 void gm_801677C0(struct gm_801677C0_s* arg0)

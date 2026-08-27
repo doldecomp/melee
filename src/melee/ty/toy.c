@@ -5891,7 +5891,7 @@ void Toy_OnEnter_80311AB0(void* arg0)
     _Toy_sbss_804D6E50 = 0;
     _Toy_sbss_804D6EA1 = 0;
 
-    if (DbLevel >= 3) {
+    if (DbLevel >= DbLKind_DebugRom) {
         /* Check Z button */
         buttons = Toy_80305C44();
 

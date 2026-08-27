@@ -1535,14 +1535,14 @@ struct Fighter {
     /* fp+2114 */ SmashAttr smash_attrs;
     /* fp+213C */ s32 x213C;
     /* fp+2140 */ float x2140;
-    /* fp+2144 */ int x2144;
-    /* fp+2148 */ s32 x2148;
-    /* fp+214C */ s32 x214C;
-    /* fp+2150 */ s32 x2150;
-    /* fp+2154 */ s32 x2154;
-    /* fp+2158 */ s32 x2158;
-    /* fp+215C */ s32 x215C;
-    /* fp+2160 */ s32 x2160;
+    /* fp+2144 */ int x2144; ///< AXDriver voice
+    /* fp+2148 */ s32 x2148; ///< AXDriver voice
+    /* fp+214C */ s32 x214C; ///< AXDriver voice
+    /* fp+2150 */ s32 x2150; ///< AXDriver voice
+    /* fp+2154 */ s32 x2154; ///< AXDriver voice
+    /* fp+2158 */ s32 x2158; ///< AXDriver voice
+    /* fp+215C */ s32 x215C; ///< AXDriver voice
+    /* fp+2160 */ s32 x2160; ///< AXDriver voice
     /* fp+2164 */ int x2164;
     /* fp+2168 */ int x2168;
     /* fp+216C */ float unk_grab_val;
