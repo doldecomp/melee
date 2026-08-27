@@ -334,8 +334,6 @@ int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
     return ((sisLib_803A7664_t*) alloc)->xC++;
 }
 
-/// @todo there seems to be a file boundary before this function,
-/// because its data section is 8-byte aligned after the previous C strings
 u8* fn_803A6FEC(u8* sis_data, s32 entry_idx, s32* out_size)
 {
     s32 unused_r4;
