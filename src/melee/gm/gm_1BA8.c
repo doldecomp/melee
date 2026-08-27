@@ -854,9 +854,9 @@ gm_801BC00C_GetCharacterKind(gm_801BAB40_src* event_entry)
 void gm_801BC00C(void)
 {
     struct gm_804D6900_t** event_levels;
+    struct EventData* ev = gm_GetEventData();
+    u8 idx = ev->unk_535;
     gm_803DF94C_t** event_info = gm_803DF94C;
-    struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
-    u8 idx = gmMainLib_804D3EE0->unk_530.unk_535;
     gm_801BAB40_src* event_entry;
     u8 ckind;
     u8 costume;
@@ -865,7 +865,7 @@ void gm_801BC00C(void)
     s8 chr;
     PAD_STACK(0x38);
 
-    gmMainLib_804D3EE0->unk_530.xB_1 = 0;
+    ev->xB_1 = 0;
     ev->x10 = 0;
     ev->x14 = 0;
     ev->x18 = 0;

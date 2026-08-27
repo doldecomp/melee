@@ -46,8 +46,6 @@
 #include <baselib/sislib.h>
 #include <baselib/wobj.h>
 
-const u8 lbl_803B7D3C[0x14] = { 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,
-                                0, 2, 0, 0, 0, 3, 0, 0, 0, 0 };
 u8 lbl_804D6638[0x4];
 int lbl_804D663C;
 
@@ -55,36 +53,36 @@ extern SceneDesc* lbl_804D666C;
 extern SceneDesc* lbl_804D6670;
 extern SceneDesc* lbl_804D6674;
 extern u8 lbl_804D6680[8];
-char* const lbl_804DA6B4 = { 0 };
-char* const lbl_804DA6B8 = { 0 };
-char* const lbl_804DA6BC = { 0 };
-char* const lbl_804DA6C0 = { 0 };
-char* const lbl_804DA6C8 = { 0 };
-char* const lbl_804DA6CC = { 0 };
-char* const lbl_804DA6D0 = { 0 };
+extern char* const lbl_804DA6B4;
+extern char* const lbl_804DA6B8;
+extern char* const lbl_804DA6BC;
+extern char* const lbl_804DA6C0;
+extern char* const lbl_804DA6C8;
+extern char* const lbl_804DA6CC;
+extern char* const lbl_804DA6D0;
 static s32 lbl_804D6630;
 static s32 lbl_804D6634;
 
-struct lbl_803B7C80_t {
+const struct lbl_803B7C80_t {
     s32 v[10];
 } lbl_803B7C80 = {
     30, -20, 15, -12, 10, -8, 6, -4, 2, 1,
 };
 
-HSD_WObjDesc eyepos = {
+/* 3B7CA8 */ static const HSD_CameraDescPerspective lbl_803B7CA8 = {
     NULL,
-    { 320.0f, -240.0f, 415.6922f },
+    0,
+    PROJ_PERSPECTIVE,
+    { 0, 640, 0, 480 },
+    { 0, 640, 0, 480 },
+    &lbl_803D9DF4,
+    &lbl_803D9E08,
+    0.0f,
     NULL,
-};
-
-HSD_WObjDesc interest = {
-    NULL,
-    { 320.0f, -240.0f, 0.0f },
-    NULL,
-};
-
-HSD_CameraDescCommon const cobj = {
-    NULL, (1 << 0), 0, { 0, 640, 0, 480 }, { 0, 640, 0, 480 }, &eyepos,
+    0.1f,
+    30000.0f,
+    60.0f,
+    1.3333333f,
 };
 
 typedef struct BracketData {
@@ -1618,13 +1616,13 @@ static inline void gmTournament_InitBracket(s32 entrant_count, f32 anim_frame,
 #endif
 void fn_8018E618(int arg0, f32 farg0, int arg1)
 {
-    HSD_CObjDesc cam;
+    HSD_CameraDescPerspective cam;
     HSD_GObj* gobj;
     HSD_GObj* tmp;
     s32 i;
     PAD_STACK(16);
 
-    cam.common = cobj;
+    cam = lbl_803B7CA8;
 
     while ((tmp = M2C_FIELD(HSD_GObj_Entities, HSD_GObj**, 0x6C)) != NULL) {
         HSD_GObjPLink_80390228(tmp);
@@ -1649,7 +1647,7 @@ void fn_8018E618(int arg0, f32 farg0, int arg1)
             f32 pos[9];
             struct lbl_803D9DD0_t cobj_data;
         } CObjData;
-        HSD_CObj* cobj = HSD_CObjLoadDesc(&cam);
+        HSD_CObj* cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) &cam);
         CObjData* cobj_data = (CObjData*) &lbl_803D9DAC;
         cobj_data->cobj_data.cobj = cobj;
         {
@@ -2551,8 +2549,8 @@ void fn_80190480(float arg8)
 void fn_801904D0(void)
 {
     struct lbl_803D9DD0_t* tmp = &lbl_803D9DD0;
-    HSD_CObjSetInterest(tmp->cobj, &lbl_803D9DD0.interest);
-    HSD_CObjSetEyePosition(tmp->cobj, &lbl_803D9DD0.eye_position);
+    HSD_CObjSetInterest(tmp->cobj, &lbl_803D9E08.pos);
+    HSD_CObjSetEyePosition(tmp->cobj, &lbl_803D9DF4.pos);
 }
 
 #ifdef MUST_MATCH
@@ -2566,8 +2564,8 @@ void fn_80190520(f32 x, f32 y, f32 z)
 
     if (((s32) x == 0) && ((s32) y == 0) && ((s32) z == 0)) {
         struct lbl_803D9DD0_t* tmp = &lbl_803D9DD0;
-        HSD_CObjSetInterest(tmp->cobj, &lbl_803D9DD0.interest);
-        HSD_CObjSetEyePosition(tmp->cobj, &lbl_803D9DD0.eye_position);
+        HSD_CObjSetInterest(tmp->cobj, &lbl_803D9E08.pos);
+        HSD_CObjSetEyePosition(tmp->cobj, &lbl_803D9DF4.pos);
         return;
     } else {
         struct lbl_803D9DD0_t* tmp = &lbl_803D9DD0;
@@ -2713,3 +2711,11 @@ void gm_801905F0(StartMeleeData* arg0)
 
     fn_8019EF08(&sp18);
 }
+
+char* const lbl_804DA6B4 = NULL;
+char* const lbl_804DA6B8 = NULL;
+char* const lbl_804DA6BC = NULL;
+char* const lbl_804DA6C0 = NULL;
+char* const lbl_804DA6C8 = NULL;
+char* const lbl_804DA6CC = NULL;
+char* const lbl_804DA6D0 = NULL;
