@@ -105,12 +105,6 @@ HSD_Text* HSD_SisLib_803A6754(int font_idx, int context_id)
     return text;
 }
 
-/// @brief Converts ASCII to "SIS" format
-/// @details - Maps ASCII characters to SIS characters by using byte pair
-/// lookup tables
-/// @param data output buffer for the converted string
-/// @param string ASCII string to be converted
-/// @return length of encoded string
 static void sisBeginLine(u8* data, s32* out_idx, s32* has_kerning)
 {
     s32 state = *has_kerning;
@@ -137,6 +131,12 @@ static void sisEndKerning(u8* data, s32* out_idx, s32* has_kerning)
     *out_idx = idx;
 }
 
+/// @brief Converts ASCII to "SIS" format
+/// @details - Maps ASCII characters to SIS characters by using byte pair
+/// lookup tables
+/// @param data output buffer for the converted string
+/// @param string ASCII string to be converted
+/// @return length of encoded string
 s32 HSD_SisLib_803A67EC(u8* data, u8* string)
 {
     u8* str_cursor;
