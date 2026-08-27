@@ -513,6 +513,7 @@ static void fn_80236998(HSD_GObj* gobj)
     MnStageSwData* data = current_data;
     AnimLoopSettings* anims;
     s32 changed_menu;
+    s32 i;
     s32 changed_hovered;
     u64 pad3;
     HSD_JObj* child;
@@ -577,19 +578,18 @@ static void fn_80236998(HSD_GObj* gobj)
         if (mn_8022F298(jobj) >= anims->end_frame) {
             switch ((s32) data->x1F) {
             case 1:
-            case 3: {
-                s32 i;
-
-                data->x1F = i = 0;
+            case 3:
+                data->x1F = changed_menu = 0;
                 mnStageSw_802359C8(data);
                 gobj = gobj->user_data;
                 HSD_JObjClearFlagsAll(((MnStageSwData*) gobj)->x2C,
                                       JOBJ_HIDDEN);
                 HSD_JObjClearFlagsAll(((MnStageSwData*) gobj)->x34,
                                       JOBJ_HIDDEN);
-                for (i = 0; i < NUM_STAGES; i++) {
-                    jobj = mnStageSw_802364A0((MnStageSwData*) gobj, i);
-                    if (i != ((MnStageSwData*) gobj)->x1) {
+                for (; changed_menu < NUM_STAGES; changed_menu++) {
+                    jobj = mnStageSw_802364A0((MnStageSwData*) gobj,
+                                              changed_menu);
+                    if (changed_menu != ((MnStageSwData*) gobj)->x1) {
                         lb_80011E24(jobj, &child, 3, -1);
                         HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
                     }
@@ -598,17 +598,13 @@ static void fn_80236998(HSD_GObj* gobj)
                                    ((MnStageSwData*) gobj)->x1);
                 mnStageSw_804D6BF4 = 0;
                 return;
-            }
             case 2:
-            case 4: {
-                s32 i;
-
+            case 4:
                 for (i = 0; i < NUM_STAGES; i++) {
                     HSD_SisLib_803A5CC4(data->x40[i]);
                 }
                 HSD_GObjPLink_80390228(gobj);
                 return;
-            }
             }
         }
         HSD_JObjAnim(jobj);
