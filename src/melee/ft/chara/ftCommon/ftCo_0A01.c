@@ -6035,19 +6035,25 @@ static bool ftCo_800ADE48(Fighter* fp)
     s32 motion_id;
     s32 cur_cmd;
     f64 five;
-    f32 px;
-    f32 py;
+    f32 x;
+    f32 x2;
+    f32 y;
+    f32 below;
+    f32 above;
     f32 dy;
-    PAD_STACK(0x14);
+    PAD_STACK(8);
 
     data = &fp->x1A88;
     found = 0;
-    px = data->x54.x;
-    py = data->x54.y;
+    x = data->x54.x;
+    x2 = x;
+    y = data->x54.y;
     five = 5.0;
+    below = y - five;
+    above = five + y;
     line_id = -1;
-    result = mpCheckFloor(px, py + five, px, py - five, 0.0f, &floor_pos,
-                          &line_id, &flags, &floor_normal, -1, -1, -1, NULL,
+    result = mpCheckFloor(x2, above, x, below, 0.0f, &floor_pos, &line_id,
+                          &flags, &floor_normal, -1, -1, -1, NULL,
                           (Fighter_GObj*) found);
     if (result == 0 || ftCo_800A1B38_noinline(line_id) == 0) {
         found = result;
@@ -6055,12 +6061,12 @@ static bool ftCo_800ADE48(Fighter* fp)
     do {
         if (found != 0) {
             struct Fighter_x1A88_t* data2 = &fp->x1A88;
-            py = data->x54.y;
-            px = data->x54.x;
-            if (px < fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
-                px > Stage_GetBlastZoneRightOffset() - data2->half_width ||
-                py < data2->half_height + Stage_GetBlastZoneBottomOffset() ||
-                py > Stage_GetBlastZoneTopOffset() - data2->half_height)
+            y = data->x54.y;
+            x = data->x54.x;
+            if (x < fp->x1A88.half_width + Stage_GetBlastZoneLeftOffset() ||
+                x > Stage_GetBlastZoneRightOffset() - data2->half_width ||
+                y < data2->half_height + Stage_GetBlastZoneBottomOffset() ||
+                y > Stage_GetBlastZoneTopOffset() - data2->half_height)
             {
                 in_bounds = 1;
             } else {
@@ -6072,11 +6078,11 @@ static bool ftCo_800ADE48(Fighter* fp)
         }
         data->xFA_b2 = false;
         if (fp->ground_or_air == GA_Air) {
-            px = fp->cur_pos.x;
-            py = fp->cur_pos.y;
+            x = fp->cur_pos.x;
+            y = fp->cur_pos.y;
             line_id = -1;
             found = 0;
-            result = mpCheckFloor(px, py, px, ftCo_800ADE48_inline0(py), 0.0f,
+            result = mpCheckFloor(x, y, x, ftCo_800ADE48_inline0(y), 0.0f,
                                   &floor_pos, &line_id, &flags, &floor_normal,
                                   -1, -1, -1, NULL, (Fighter_GObj*) found);
             if (result == 0 || ftCo_800A1B38_noinline(line_id) == 0) {
