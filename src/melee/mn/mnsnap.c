@@ -109,6 +109,7 @@ typedef struct mnSnap_State {
 
 static mnSnap_State mnSnap_804A0A10;
 static void* mnSnap_thumb_imgs[4];
+/* 4A0B90 */ struct mnSnap_804A0B90_t* mnSnap_804A0B90[4];
 
 /// Recursively loads snapshot thumbnails from memory card.
 void mnSnap_80253184(void)

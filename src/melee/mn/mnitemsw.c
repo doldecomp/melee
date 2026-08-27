@@ -30,8 +30,6 @@ u8 mnItemSw_804D6BEC;
 extern StaticModelDesc MenMainCursorIs_Top;
 extern StaticModelDesc MenMainConIs_Top;
 
-extern u8 mn_804D6BB5;
-
 struct MnItemSwTable {
     /* 0x00 */ f32 x00[4][3];
     /* 0x30 */ f32 x30[18];

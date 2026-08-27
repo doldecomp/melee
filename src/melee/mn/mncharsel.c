@@ -4191,8 +4191,6 @@ void fn_8026407C(HSD_GObj* gobj)
     HSD_FogSet(GET_FOG(gobj));
 }
 
-extern HSD_CObjDesc* MenMain_cam;
-
 static const GXColor mnCharSel_804DC580 = { 255, 255, 0, 255 };
 static const GXColor mnCharSel_804DC584 = { 20, 80, 160, 255 };
 static const GXColor mnCharSel_804DC588 = { 60, 140, 80, 255 };

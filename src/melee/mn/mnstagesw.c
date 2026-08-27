@@ -59,7 +59,7 @@ static u8 mnStageSw_stageIcons[NUM_STAGES] = {
 static f32 mnStageSw_804D4BB8[2] = { 0.0F, 1.0F };
 static HSD_GObj* mnStageSw_804D6BF0;
 static s8 mnStageSw_804D6BF4;
-extern u8 mn_804D6BB5;
+
 extern StaticModelDesc MenMainConSs_Top;
 extern StaticModelDesc MenMainCursorSs_Top;
 

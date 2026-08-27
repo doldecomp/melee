@@ -28,12 +28,16 @@
 #include "sysdolphin/baselib/random.h"
 #include "sysdolphin/baselib/sislib.h"
 
+u8 mnNameNew_804D4F98[8] = { 0 };
+
 typedef char* GlyphRow[4];
 
 /// Glyph strings in the keyboard tables are read through
 /// mnNameNew_NullCharacter, which this translation unit declares
 /// volatile, so the tables store pointers to volatile characters.
 typedef volatile char GlyphChar;
+
+/* 4D6C0C */ u8 mnNameNew_PortInUse;
 
 /// Maps keyboard cursor positions to jobj indices and glyph strings.
 /// Mirrors the key_jobj_ids/x34/xFC/character_bytes fields of
@@ -69,25 +73,13 @@ typedef struct MnNameNewDataLayout {
     char assert_cond[0xC];
 } MnNameNewDataLayout;
 
-extern u8 mnNameNew_PortInUse;
-extern u8** AutoNamesList;
-extern char** NotAllowedNamesList;
-extern u8 mn_804D6BB4;
-extern u8 mn_804D6BB5;
-
-extern void* mnNameNew_804A06F0[4];
-extern void* mnNameNew_804A0700[4];
-extern void* mnNameNew_804A0710[4];
-extern void* mnNameNew_804A0720[8];
-extern char mnNameNew_CurrentNameText[0x10];
-extern u8 mnNameNew_804D4F7C[8];
-extern HSD_GObj* mnNameNew_804D6C08;
-
-extern StaticModelDesc MenMainBack_Top;
-extern StaticModelDesc MenMainPanel_Top;
-extern HSD_CObjDesc* MenMain_cam;
-extern UNK_T MenMain_lights;
-extern HSD_FogDesc* MenMain_fog;
+void* mnNameNew_804A06F0[4];
+void* mnNameNew_804A0700[4];
+void* mnNameNew_804A0710[4];
+void* mnNameNew_804A0720[8];
+char mnNameNew_CurrentNameText[0x10];
+u8 mnNameNew_804D4F7C[8];
+HSD_GObj* mnNameNew_804D6C08;
 
 static AnimLoopSettings mnNameNew_803EDA58[3] = {
     { 0.0f, 19.0f, -0.1f },
@@ -356,8 +348,8 @@ static GXColor mnNameNew_804D4F78 = { 0, 0, 0, 0xFF };
 
 u8 mnNameNew_804D4F7C[8] = { 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'H' };
 
-extern const GXColor mnNameNew_804DBF44;
-extern const GXColor mnNameNew_804DBF48;
+GXColor const mnNameNew_804DBF44 = { 0xA6, 0x81, 0x3D, 0xFF };
+GXColor const mnNameNew_804DBF48 = { 0x00, 0x00, 0x00, 0xFF };
 
 s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
 {
@@ -2068,5 +2060,6 @@ void mnNameNew_8023EA08(UNK_T arg0)
     mnNameNew_EnterFromMnCharSel((HSD_Archive*) arg0, 4);
 }
 
-/// @todo Type inferred from the split: 8 bytes, 8-byte aligned, all zero.
-f64 mnNameNew_804D4F98[1] = { 0.0 };
+/// @todo Must be part of a larger object
+DATA UNK_T mnNameNew_803EE720 = &mnNameNew_804D4F98;
+DATA UNK_T mnNameNew_803EE724 = &mnNameNew_804D4F98;
