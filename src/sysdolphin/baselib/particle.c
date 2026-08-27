@@ -32,6 +32,8 @@ typedef struct {
 #include <baselib/psstructs.h>
 #include <baselib/random.h>
 
+/* 4D78D8 */ u16 hsd_804D78D8;
+/* 4D78DE */ u16 hsd_804D78DE;
 static HSD_JObj* hsd_804D08E8[8];
 static HSD_Particle* hsd_804D0908[16];
 static HSD_Particle* hsd_804D0948[65];

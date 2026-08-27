@@ -36,6 +36,7 @@ static HSD_WObjDesc HSD_SisLib_8040C4A4 = {
 };
 
 static u32 HSD_SisLib_804D7968;
+static SisBlock* HSD_SisLib_804D796C;
 
 static HSD_CameraDescPerspective HSD_SisLib_8040C4B8 = {
     NULL,
@@ -414,8 +415,6 @@ HSD_Text* HSD_SisLib_803A5ACC(int font_idx, s32 context_id, f32 pos_x,
     text->font_idx = font_idx;
     return text;
 }
-
-static SisBlock* HSD_SisLib_804D796C;
 
 void HSD_SisLib_803A5E70(void)
 {

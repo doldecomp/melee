@@ -1,14 +1,13 @@
 #include "psappsrt.h"
 
 #include "objalloc.h"
+#include "particle.h"
 #include "psstructs.h"
 
 #include <string.h>
 
 /* 004D4538 */ static u16 HSD_PSAppSrt_804D7958[4];
 /* 004CDC90 */ HSD_ObjAllocData HSD_PSAppSrt_804D10B0;
-/* 4D78D8 */ static u16 hsd_804D78D8;
-/* 4D78DE */ static u16 hsd_804D78DE;
 
 bool psInitAppSRT(int num, int size)
 {
