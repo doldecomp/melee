@@ -997,7 +997,9 @@ void gm_8019ECAC_OnEnter_inline(void)
 
 void gm_8019E634(void)
 {
-    s32 indices[4];
+    struct Indices {
+        s32 values[4];
+    } indices;
     s32 results[4];
     TmData* tmd;
     s32 hmn_cpu;
@@ -1007,10 +1009,7 @@ void gm_8019E634(void)
     tmd = gm_GetTournamentData();
     hmn_cpu = tmd->hmn_cpu_count;
 
-    indices[0] = lbl_803B7D3C[0];
-    indices[1] = lbl_803B7D3C[1];
-    indices[2] = lbl_803B7D3C[2];
-    indices[3] = lbl_803B7D3C[3];
+    indices = *(struct Indices*) lbl_803B7D3C;
 
     /* Get match results per player */
     match_end = &gm_80477738;
@@ -1023,11 +1022,11 @@ void gm_8019E634(void)
         for (j = 0; j < (s32) ((tmd->x30 - 1) - i); j++) {
             if (results[j] > results[j + 1]) {
                 s32 tr = results[j];
-                s32 ti = indices[j];
+                s32 ti = indices.values[j];
                 results[j] = results[j + 1];
-                indices[j] = indices[j + 1];
+                indices.values[j] = indices.values[j + 1];
                 results[j + 1] = tr;
-                indices[j + 1] = ti;
+                indices.values[j + 1] = ti;
             }
         }
     }
@@ -1065,7 +1064,7 @@ void gm_8019E634(void)
     if ((s32) gm_804771C4.match_type == 1) {
         /* Team mode */
         for (i = 0; i < hmn_cpu; i++) {
-            s32 id = indices[i];
+            s32 id = indices.values[i];
             j = get_match_player_index_xF(id);
             tmd->x37[j].xE = (tmd->x2E - 1) - i;
 
@@ -1074,18 +1073,18 @@ void gm_8019E634(void)
                 id = next_id;
             }
             j = get_match_player_index_xF(id);
-            tmd->x37[j].xE = indices[i];
+            tmd->x37[j].xE = indices.values[i];
         }
     } else {
         /* FFA mode */
         for (i = 0; i < hmn_cpu; i++) {
-            s32 id = indices[(tmd->x30 - 1) - i];
+            s32 id = indices.values[(tmd->x30 - 1) - i];
             j = get_match_player_index_xF(id);
             tmd->x37[j].xE = (tmd->x2E - 1) - i;
 
             id = tmd->x30 + i;
             j = get_match_player_index_xF(id);
-            tmd->x37[j].xE = indices[(tmd->x30 - 1) - i];
+            tmd->x37[j].xE = indices.values[(tmd->x30 - 1) - i];
         }
     }
 
