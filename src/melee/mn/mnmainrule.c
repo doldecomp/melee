@@ -587,17 +587,19 @@ void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
     case 2:
     case 4:
         if ((mn_804A04F0.buttons & 4) != 0) {
-            if (arg2 == 0 || arg2 == 2 || arg2 == 4) {
+            if ((u8) arg2 != 0 && (u8) arg2 != 2 && (u8) arg2 != 4) {
+                settings = NULL;
+            } else {
                 settings = &mn_803EC770[mn_803EC7DC[arg2][1] - arg3];
             }
             HSD_JObjReqAnimAll(arg1, settings->start_frame);
         } else {
-            if (arg2 == 0 || arg2 == 2 || arg2 == 4) {
-                if (arg3 == 0) {
-                    settings = &mn_803EC734[mn_803EC7DC[arg2][1]];
-                } else {
-                    settings = &mn_803EC734[arg3 - 1];
-                }
+            if ((u8) arg2 != 0 && (u8) arg2 != 2 && (u8) arg2 != 4) {
+                settings = NULL;
+            } else if (arg3 == 0) {
+                settings = &mn_803EC734[mn_803EC7DC[arg2][1]];
+            } else {
+                settings = &mn_803EC734[arg3 - 1];
             }
             HSD_JObjReqAnimAll(arg1, settings->start_frame);
         }
