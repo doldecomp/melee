@@ -1003,7 +1003,6 @@ void gm_8019E634(void)
     s32 results[4];
     TmData* tmd;
     s32 hmn_cpu;
-    MatchEnd* match_end;
     s32 i, j;
 
     tmd = gm_GetTournamentData();
@@ -1012,9 +1011,8 @@ void gm_8019E634(void)
     indices = *(struct Indices*) lbl_803B7D3C;
 
     /* Get match results per player */
-    match_end = &gm_80477738;
     for (i = 0; i < (s32) tmd->x30; i++) {
-        results[i] = fn_80166CBC(match_end, i);
+        results[i] = fn_80166CBC(&gm_80477738, i);
     }
 
     /* Bubble sort results, keeping indices in parallel */
