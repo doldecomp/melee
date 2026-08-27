@@ -20,6 +20,9 @@
 #include "gr/stage.h"
 #include "if/ifall.h"
 #include "if/ifstatus.h"
+
+#include "it/forward.h"
+
 #include "it/item.h"
 #include "it/itspawn.h"
 #include "lb/lb_00B0.h"
@@ -103,22 +106,50 @@ static SceneDesc* lbl_804D6600;
 static int lbl_804D6608;
 
 typedef struct {
-    s32 v[6];
+    HSD_GObjEvent v[6];
 } ClassicProcArray;
 
-extern ClassicProcArray lbl_803B7C40;
-extern ClassicProcArray lbl_803B7C28;
+ClassicProcArray const lbl_803B7C28 = {
+    fn_801849E0, fn_80184A04, fn_80184A28,
+    fn_80184A4C, fn_80184A70, fn_80184A94,
+};
+
+ClassicProcArray const lbl_803B7C40 = {
+    fn_801849E0, fn_80184A04, fn_80184A28,
+    fn_80184A4C, fn_80184A70, fn_80184A94,
+};
 
 DynamicModelDesc** lbl_804D662C;
 HSD_Archive* lbl_804D6628;
-extern u8 lbl_803D9828[];
-extern f32 lbl_803B7C68[];
 
 typedef struct TrainingItemEntry {
     s16 item_id;
     s16 text_id;
 } TrainingItemEntry;
 ASSERT_SIZE(TrainingItemEntry, 4);
+
+TrainingItemEntry lbl_803D9828[] = {
+    { It_Kind_Foods, 21 },    { It_Kind_Tomato, 11 },
+    { It_Kind_Heart, 10 },    { It_Kind_L_Gun, 18 },
+    { It_Kind_F_Flower, 35 }, { It_Kind_S_Scope, 25 },
+    { It_Kind_StarRod, 26 },  { It_Kind_LipStick, 19 },
+    { It_Kind_Sword, 14 },    { It_Kind_Bat, 13 },
+    { It_Kind_Harisen, 2 },   { It_Kind_Hammer, 38 },
+    { It_Kind_G_Shell, 16 },  { It_Kind_R_Shell, 17 },
+    { It_Kind_Flipper, 24 },  { It_Kind_Freeze, 20 },
+    { It_Kind_Dosei, 9 },     { It_Kind_M_Ball, 27 },
+    { It_Kind_BombHei, 8 },   { It_Kind_MSBomb, 22 },
+    { It_Kind_Kinoko, 78 },   { It_Kind_DKinoko, 79 },
+    { It_Kind_Star, 12 },     { It_Kind_Parasol, 15 },
+    { It_Kind_WStar, 76 },    { It_Kind_MetalB, 81 },
+    { It_Kind_RabbitC, 77 },  { It_Kind_ScBall, 80 },
+    { It_Kind_TaruCann, 5 },  { It_Kind_Spycloak, 82 },
+    { It_Kind_None, 23 },
+};
+
+f32 const lbl_803B7C68[] = {
+    2.0f, 1.5f, 1.0f, 0.666f, 0.5f, 0.25f,
+};
 
 static inline TrainingItemEntry* TrainingItemTable_Get(void)
 {
@@ -180,7 +211,7 @@ typedef struct ClassicStageEntry {
 } ClassicStageEntry;
 ASSERT_SIZE(ClassicStageEntry, 0x10);
 
-extern ClassicStageEntry lbl_803D9910[65];
+ClassicStageEntry lbl_803D9910[65] = { 0 };
 
 void fn_8018325C(HSD_GObj* arg0, int arg1)
 {
@@ -1914,8 +1945,6 @@ void gm_8018838C_OnFrame(void)
     }
 }
 
-extern f32 lbl_804DA5E8;
-
 f32 gm_801883C0(void)
 {
     HSD_GObj* gobj;
@@ -1931,7 +1960,7 @@ f32 gm_801883C0(void)
     goto check_cobj;
 
 return_default:
-    return lbl_804DA5E8;
+    return 0.0f;
 
 check_cobj:
     aobj = cobj->eyepos->aobj;
@@ -1944,7 +1973,7 @@ check_cobj:
         return aobj->curr_frame;
     }
 
-    return lbl_804DA5E8;
+    return 0.0f;
 }
 
 bool gm_8018841C(void)
@@ -1955,8 +1984,9 @@ bool gm_8018841C(void)
     return false;
 }
 
-static TrainingModeState lbl_80473700;
-UnkAllstarData gm_80473A18;
+/* 473700 */ static TrainingModeState lbl_80473700;
+/* 473814 */ struct TrainingMenuData gm_80473814;
+/* 473A18 */ UnkAllstarData gm_80473A18;
 
 int gm_80188454(int idx)
 {
@@ -2748,7 +2778,7 @@ HSD_Text* fn_8018A000(void)
     HSD_Text* text;
 
     PAD_STACK(0x10);
-    data = lbl_803D9828;
+    data = M2C_BITWISE(u8*, lbl_803D9828);
     state = &lbl_80473700;
     memzero(state->result_cache, sizeof(state->result_cache));
     lbl_804D6628 =

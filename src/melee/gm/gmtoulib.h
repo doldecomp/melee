@@ -172,6 +172,5 @@
 /* 4D663C */ extern int lbl_804D663C;
 /* 4771B8 */ extern struct TmBoxArrays lbl_804771B8;
 /* 3D9D20 */ extern struct lbl_803D9D20_t lbl_803D9D20;
-/* 3B7D18 */ extern const union TmAnimFrameTable lbl_803B7D18;
 
 #endif

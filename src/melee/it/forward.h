@@ -387,6 +387,8 @@ typedef enum ItemKind {
     It_Kind_GreatFox_Laser,  // Great Fox's Laser
     It_Kind_Kyasarin_Egg,    // Birdo's Egg
     /// @}
+
+    It_Kind_None = -999,
 } ItemKind;
 
 #endif
