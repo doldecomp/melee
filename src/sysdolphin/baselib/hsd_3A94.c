@@ -3561,15 +3561,13 @@ static inline void fn_803AF3F0_calc_file_blocks(s32 file_idx, CardState* state,
     if (state->x4C[file_idx] <= 0) {
         *file_blocks = 0;
     } else if (file_idx == 0) {
-        s32 hdr = state->x24;
         u32 sector_size = state->x8;
-        s32 sz0;
+        u32 usable;
         s32 rem;
-        hdr += 0x30;
-        sz0 = state->x4C[0];
-        rem = (s32) ((u32) hdr % sector_size);
-        rem = (s32) (sector_size - 0x20) - rem;
-        rem = sz0 - rem;
+
+        rem = state->x4C[0];
+        usable = sector_size - 0x20;
+        rem = rem - (s32) (usable - (state->x24 + 0x30) % sector_size);
         if (rem <= 0) {
             *file_blocks = 1;
         } else {
@@ -3627,9 +3625,12 @@ s32 fn_803AF3F0(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         hsd_804D7998 = hsd_804D7984;
     } else {
         s32 retries;
-        s32 fd = state->x4;
-        s32 ofs = state->x20;
+        s32 fd;
+        s32 ofs;
         s32 open_result;
+
+        ofs = state->x20;
+        fd = state->x4;
         for (retries = 0; retries < 10; retries++) {
             open_result = CARDFastOpen(fd, ofs, &state->file_info);
             if (open_result != -1) {
