@@ -1,12 +1,14 @@
 #ifndef MELEE_MN_MAIN_H
 #define MELEE_MN_MAIN_H
 
+#include <placeholder.h>
 #include <platform.h>
 
 #include "gm/forward.h"
 #include "mn/forward.h"
 
 #include "mn/types.h"
+#include "sc/types.h"
 
 #include <dolphin/gx.h>
 #include <baselib/object.h>
@@ -113,9 +115,18 @@ typedef struct _MenuInputState {
 /* 22F410 */ int mn_8022F410(float* x, const float* target, float dx);
 /* 22F470 */ int mn_8022F470(int* x, const int* target, int dx);
 /* 22F4CC */ void mn_8022F4CC(void);
-
 /* 4A04F0 */ extern MenuFlow mn_804A04F0;
+/* 4A0508 */ extern StaticModelDesc MenMainBack_Top;
+/* 4A0518 */ extern StaticModelDesc MenMainPanel_Top;
+/* 4D6BB4 */ extern u8 mn_804D6BB4;
+/* 4D6BB5 */ extern u8 mn_804D6BB5;
 /* 4D6BB8 */ extern HSD_Archive* mn_804D6BB8;
+/* 4D6BBC */ extern UNK_T MenMain_lights;
+/* 4D6BC0 */ extern HSD_FogDesc* MenMain_fog;
+/* 4D6BC4 */ extern HSD_CObjDesc* MenMain_cam;
 /* 4D6BC8 */ extern MenuInputState mn_804D6BC8;
+/* 4D6C00 */ extern char** NotAllowedNamesList;
+/* 4D6C04 */ extern u8** AutoNamesList;
+/* 4D6C0C */ extern u8 mnNameNew_PortInUse;
 
 #endif
