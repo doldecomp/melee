@@ -1936,6 +1936,11 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
     return popped;
 }
 
+static inline f32 grZebes_Subtract(f32 lhs, f32 rhs)
+{
+    return lhs - rhs;
+}
+
 bool grZebes_801DBB60(Item_GObj* yaku)
 {
     s32 last_idx;
@@ -1996,7 +2001,7 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                     if (ej->x00_active == 1 && j != 0 && j != 6) {
                         f32 ej_x = ej->x08_x;
                         f32 ej_y = ej->x0C_y;
-                        f32 dx = ei_x - ej_x;
+                        f32 dx = grZebes_Subtract(ei_x, ej_x);
                         f32 dy = ei_y - ej_y;
                         f32 dist_sq;
                         dx *= dx;
