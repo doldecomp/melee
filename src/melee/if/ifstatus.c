@@ -212,6 +212,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     HSD_JObj* jobj;
     HSD_JObj* digit_jobj;
     s32 is_stamina;
+    GXColor color;
     HSD_TObj* tobj;
     HSD_MObj* mobj;
     HSD_MatAnimJoint** anim_base;
@@ -227,7 +228,6 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     f32 pos;
     s16 clamped_damage;
     f32 factor;
-    GXColor color;
     IfDamageState* ptr;
 
     PAD_STACK(64);
@@ -359,6 +359,8 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     /* Update colors when damage changes */
     if (state->old_damage != state->damage_percent) {
         if (Player_GetMoreFlagsBit2((s8) state->player_slot)) {
+            GXColor stamina_color;
+
             /* Stamina mode: 0-100% range */
             clamped_damage = state->damage_percent;
             if (clamped_damage > 100) {
@@ -367,17 +369,23 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
                 clamped_damage = 0;
             }
             factor = 1.0F - ((f32) clamped_damage / 100.0F);
-            color.r = (s8) (factor * (f32) (ifStatus_804D57AC[0] -
-                                            ifStatus_804D57A8[0]) +
-                            (f32) ifStatus_804D57A8[0]);
-            color.g = (s8) (factor * (f32) (ifStatus_804D57AC[1] -
-                                            ifStatus_804D57A8[1]) +
-                            (f32) ifStatus_804D57A8[1]);
-            color.b = (s8) (factor * (f32) (ifStatus_804D57AC[2] -
-                                            ifStatus_804D57A8[2]) +
-                            (f32) ifStatus_804D57A8[2]);
-            color.a = 255;
+            stamina_color.r =
+                (s8) (factor * (f32) (ifStatus_804D57AC[0] -
+                                      ifStatus_804D57A8[0]) +
+                      (f32) ifStatus_804D57A8[0]);
+            stamina_color.g =
+                (s8) (factor * (f32) (ifStatus_804D57AC[1] -
+                                      ifStatus_804D57A8[1]) +
+                      (f32) ifStatus_804D57A8[1]);
+            stamina_color.b =
+                (s8) (factor * (f32) (ifStatus_804D57AC[2] -
+                                      ifStatus_804D57A8[2]) +
+                      (f32) ifStatus_804D57A8[2]);
+            stamina_color.a = 255;
+            color = stamina_color;
         } else {
+            GXColor normal_color;
+
             /* Normal mode: 0-300% range */
             clamped_damage = state->damage_percent;
             if (clamped_damage > 300) {
@@ -386,16 +394,20 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
                 clamped_damage = 0;
             }
             factor = (f32) clamped_damage / 300.0F;
-            color.r = (s8) (factor * (f32) (ifStatus_804D57AC[0] -
-                                            ifStatus_804D57A8[0]) +
-                            (f32) ifStatus_804D57A8[0]);
-            color.g = (s8) (factor * (f32) (ifStatus_804D57AC[1] -
-                                            ifStatus_804D57A8[1]) +
-                            (f32) ifStatus_804D57A8[1]);
-            color.b = (s8) (factor * (f32) (ifStatus_804D57AC[2] -
-                                            ifStatus_804D57A8[2]) +
-                            (f32) ifStatus_804D57A8[2]);
-            color.a = 255;
+            normal_color.r =
+                (s8) (factor * (f32) (ifStatus_804D57AC[0] -
+                                      ifStatus_804D57A8[0]) +
+                      (f32) ifStatus_804D57A8[0]);
+            normal_color.g =
+                (s8) (factor * (f32) (ifStatus_804D57AC[1] -
+                                      ifStatus_804D57A8[1]) +
+                      (f32) ifStatus_804D57A8[1]);
+            normal_color.b =
+                (s8) (factor * (f32) (ifStatus_804D57AC[2] -
+                                      ifStatus_804D57A8[2]) +
+                      (f32) ifStatus_804D57A8[2]);
+            normal_color.a = 255;
+            color = normal_color;
         }
 
         /* Apply color to all digit materials */
