@@ -211,14 +211,11 @@ static void mnSnap_8025329C(void)
             jobj = mnSnap_GetThumbJObj(p52, snap);
             HSD_ASSERT(193, jobj);
             HSD_ASSERT(194, jobj->u.dobj);
-            /* String order from the other branch of the inlined tobj chain. */
+            /// @todo data order hack
             (void) "jobj->u.dobj->mobj";
             (void) "jobj->u.dobj->mobj->tobj";
             (void) "jobj->u.dobj->mobj->tobj->imagedesc";
-            /* Anchor "jobj.h" early so pooled literals follow the original
-             * order jobj, jobj.h, %03d, %d (MWCC pools in first-use order).
-             * Without this the pool emits jobj.h after "%d" and every
-             * reference below resolves to an offset unlike the original. */
+            /// @todo sdata order hack
             (void) "jobj.h";
             HSD_ASSERT(195, jobj->u.dobj->next);
             HSD_ASSERT(196, jobj->u.dobj->next->next);
