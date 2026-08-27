@@ -3172,7 +3172,11 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
             HSD_JObjClearFlagsAll(((HSD_JObj**) gp->u.bigblue.xC8)[line_idx],
                                   JOBJ_HIDDEN);
 
-            jobj = ((HSD_JObj**) gp->u.bigblue.xC8)[line_idx];
+            {
+                HSD_JObj* selected_jobj =
+                    ((HSD_JObj**) gp->u.bigblue.xC8)[line_idx];
+                jobj = selected_jobj;
+            }
 
             HSD_JObjSetTranslate(jobj, (Vec3*) (car + 0xE0));
 
