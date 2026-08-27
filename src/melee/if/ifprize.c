@@ -180,19 +180,19 @@ void un_802FE6A8(void)
     HSD_GObj* gobj_ui;
     HSD_JObj* jobj_ui;
     gobj_camera = GObj_Create(HSD_GOBJ_CLASS_CAMERA, 20, 0);
-    HSD_GObjObject_80390A70(gobj_camera, HSD_GObj_804D784B & 0xFF,
+    HSD_GObjObject_80390A70(gobj_camera, HSD_GObj_CameraKind & 0xFF,
                             HSD_CObjLoadDesc(un_804D6D9C->cameras[0].desc));
     GObj_SetupGXLinkMax(gobj_camera, HSD_GObj_803910D8, 8);
     gobj_camera->gxlink_prios = 0xC00;
     un_803F9D48.x18 = gobj_camera;
     gobj_light = GObj_Create(HSD_GOBJ_CLASS_LIGHT, 3, 0);
-    HSD_GObjObject_80390A70(gobj_light, HSD_GObj_804D784A & 0xFF,
+    HSD_GObjObject_80390A70(gobj_light, HSD_GObj_LightKind & 0xFF,
                             lb_80011AC4(un_804D6D9C->lights));
     GObj_SetupGXLink(gobj_light, HSD_GObj_LObjCallback, 10, 0);
     un_803F9D48.x1C = gobj_light;
     gobj_ui = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
     jobj_ui = HSD_JObjLoadJoint(un_804D6D9C->models[0]->joint);
-    HSD_GObjObject_80390A70(gobj_ui, HSD_GObj_804D7849, jobj_ui);
+    HSD_GObjObject_80390A70(gobj_ui, HSD_GObj_JObjKind, jobj_ui);
     GObj_SetupGXLink(gobj_ui, HSD_GObj_JObjCallback, 11, 0);
     HSD_GObj_SetupProc(gobj_ui, fn_802FE470, 17);
     gm_8016895C(jobj_ui, un_804D6D9C->models[0], 0);

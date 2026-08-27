@@ -227,7 +227,7 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
     cobj = lb_80013B14(&cobj_desc);
     HSD_CObjSetPerspective(cobj, 30.0F, 1.4F);
     {
-        u8 kind = HSD_GObj_804D784B;
+        u8 kind = HSD_GObj_CameraKind;
         HSD_GObjObject_80390A70(gp->u.unk.text_gobj, kind, cobj);
     }
     GObj_SetupGXLinkMax(gp->u.unk.text_gobj, fn_8021EB10, 7);

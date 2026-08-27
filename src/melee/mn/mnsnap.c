@@ -2567,7 +2567,7 @@ void mnSnap_80257F24(void)
     gobj = GObj_Create(6, 7, 0x80);
     snap->main_gobj = gobj;
     jobj = HSD_JObjLoadJoint((HSD_Joint*) *main_joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, (GObj_RenderFunc) fn_80253DB4, 4, 0x80);
     HSD_JObjAddAnimAll(jobj, (HSD_AnimJoint*) *main_animjoint,
                        (HSD_MatAnimJoint*) *main_matanim,
@@ -2600,7 +2600,7 @@ void mnSnap_80257F24(void)
     snap->sub_gobj = gobj;
     jobj = HSD_JObjLoadJoint((HSD_Joint*) *arrows_joint);
     HSD_JObjSetTranslateX(jobj, 3.3F);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, (GObj_RenderFunc) fn_80253DE8, 4, 0x80);
     HSD_JObjAddAnimAll(jobj, (HSD_AnimJoint*) *arrows_animjoint,
                        (HSD_MatAnimJoint*) *arrows_matanim,
@@ -2613,7 +2613,7 @@ void mnSnap_80257F24(void)
     gobj = GObj_Create(6, 7, 0x80);
     snap->cursor_gobj = gobj;
     jobj = HSD_JObjLoadJoint((HSD_Joint*) *csr_joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, (GObj_RenderFunc) fn_80253E1C, 6, 0x80);
     HSD_JObjAddAnimAll(jobj, (HSD_AnimJoint*) *csr_animjoint,
                        (HSD_MatAnimJoint*) *csr_matanim,
@@ -2737,7 +2737,7 @@ void mnSnap_80257F24(void)
     gobj = GObj_Create(6, 7, 0x80);
     snap->warn_gobj = gobj;
     jobj = HSD_JObjLoadJoint((HSD_Joint*) *warn_joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, (GObj_RenderFunc) fn_80253E5C, 6, 0x80);
     HSD_JObjAddAnimAll(jobj, (HSD_AnimJoint*) *warn_animjoint,
                        (HSD_MatAnimJoint*) *warn_matanim,

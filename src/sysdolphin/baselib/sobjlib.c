@@ -601,6 +601,6 @@ void HSD_SObjLib_803A55DC(HSD_GObj* gobj, u16 width, u16 height, int priority)
     HSD_CObjSetNear(cobj, near_val);
     HSD_CObjSetFar(cobj, far_val);
     HSD_CObjSetOrtho(cobj, top, bottom, left, right);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, HSD_SObjLib_803A54EC, priority);
 }

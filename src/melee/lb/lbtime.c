@@ -52,7 +52,7 @@ u32 lbTime_8000AF74(u32 a, int b)
     }
 }
 
-u32 lbTime_8000AFBC(void)
+u32 lbTime_GetTimeInSeconds(void)
 {
     u64 secs = OSTicksToSeconds(OSGetTime());
     if (secs > UINT_MAX) {

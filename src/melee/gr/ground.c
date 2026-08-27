@@ -891,13 +891,13 @@ Ground_GObj* Ground_GetStageGObj(int map_id)
             HSD_GObj* temp_r23_2 = GObj_Create(17, 19, 0);
             temp_r27 = lb_80013B14(archive->unk4->unk8[map_id].x10);
             new_var2 = temp_r23_2;
-            HSD_GObjObject_80390A70(temp_r23_2, HSD_GObj_804D784B, temp_r27);
+            HSD_GObjObject_80390A70(temp_r23_2, HSD_GObj_CameraKind, temp_r27);
             GObj_SetupGXLinkMax(new_var2, &grDisplay_801C5F60, 5);
             temp_r23_2->gxlink_prios = 8;
             gp->x18 = temp_r23_2;
             Ground_801C2BD4(temp_r27);
         }
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, new_var);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, new_var);
         phi_r24 = archive->unk4->unk8[map_id].x30;
         phi_r23 = archive->unk4->unk8[map_id].x2C;
         for (; phi_r24 != 0; phi_r24--, phi_r23++) {
@@ -923,7 +923,7 @@ Ground_GObj* Ground_GetStageGObj(int map_id)
             OSReport("%s:%d: couldn t get jobj\n", __FILE__, 0x598);
             return NULL;
         }
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, temp_r3_11);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, temp_r3_11);
     }
     HSD_GObj_SetupProc(gobj, &Ground_801C1CD0, 1);
     HSD_GObj_SetupProc(gobj, &Ground_801C1D38, 4);
@@ -975,7 +975,7 @@ HSD_GObj* Ground_801C1A20(HSD_Joint* arg0, s32 arg1)
         OSReport("%s:%d: couldn t get jobj\n", __FILE__, 0x5E8);
         return NULL;
     }
-    HSD_GObjObject_80390A70(temp_r30, HSD_GObj_804D7849, temp_r3_4);
+    HSD_GObjObject_80390A70(temp_r30, HSD_GObj_JObjKind, temp_r3_4);
     HSD_GObj_SetupProc(temp_r30, Ground_801C1CD0, 1);
     HSD_GObj_SetupProc(temp_r30, Ground_801C1D38, 4);
     return temp_r30;
@@ -1073,7 +1073,7 @@ HSD_GObj* Ground_801C1E84(void)
 /// void Camera_SetBackgroundColor(u8, u8, u8);     /* extern */
 /// UnkStruct3* grDatFiles_801C6330(int); /* extern */
 /// void Ground_801C1E2C(HSD_GObj*, int); /* extern */
-/// extern s8 HSD_GObj_804D7848;
+/// extern s8 HSD_GObj_FogKind;
 /// extern float @330;
 
 static inline HSD_FogDesc* foo(void)
@@ -1114,7 +1114,7 @@ void Ground_801C1E94(void)
     if (phi_r0 != NULL) {
         temp_r30_2 = GObj_Create(0xA, 0xB, 0);
         temp_r29_2 = HSD_FogLoadDesc(phi_r0);
-        HSD_GObjObject_80390A70(temp_r30_2, HSD_GObj_804D7848, temp_r29_2);
+        HSD_GObjObject_80390A70(temp_r30_2, HSD_GObj_FogKind, temp_r29_2);
         GObj_SetupGXLink(temp_r30_2, Ground_801C1E2C, 0, 0);
         temp_r3 = stageinfo->param;
         if (temp_r3 != NULL) {
@@ -2685,7 +2685,7 @@ light_selected:
         while (true) {
         }
     }
-    HSD_GObjObject_80390A70(temp_r3, HSD_GObj_804D784A, temp_r3_2);
+    HSD_GObjObject_80390A70(temp_r3, HSD_GObj_LightKind, temp_r3_2);
     GObj_SetupGXLink(temp_r3, Ground_801C4640, 0, 0);
     var_r27 = temp_r3_2;
     if (stage_info.param != NULL) {

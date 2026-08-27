@@ -144,7 +144,7 @@ void mnDeflicker_8024A4BC(HSD_GObj* arg0)
     gobj = GObj_Create(HSD_GOBJ_CLASS_ITEM, 7U, 0x80);
     mnDeflicker_804D6C38 = gobj;
     jobj = HSD_JObjLoadJoint(mnDeflicker_804A08B8.joint);
-    temp_r29 = HSD_GObj_804D7849; // ty permuter, why does this fix everything?
+    temp_r29 = HSD_GObj_JObjKind; // ty permuter, why does this fix everything?
     HSD_GObjObject_80390A70(gobj, temp_r29, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
     HSD_JObjAddAnimAll(jobj, mnDeflicker_804A08B8.animjoint,

@@ -204,7 +204,7 @@ void un_802FE260(void)
         gobj = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
         jobj = HSD_JObjLoadJoint(un_804A1F10.x0[0]->joint);
         gobj->user_data = (void*) &un_804DDBA8[i];
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
         GObj_SetupGXLink(gobj, fn_802FDA4C, 11, 0);
         gm_8016895C(jobj, un_804A1F10.x0[0], 0);
         HSD_GObj_SetupProc(gobj, fn_802FDA78, 17);

@@ -32,7 +32,7 @@ static inline void it_802C248C_setupGObj(HSD_GObj* link_gobj,
                                          HSD_JObj* loaded_jobj,
                                          GObj_RenderFunc callback)
 {
-    HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849, loaded_jobj);
+    HSD_GObjObject_80390A70(link_gobj, HSD_GObj_JObjKind, loaded_jobj);
     GObj_SetupGXLink(link_gobj, callback, 6, 0);
 }
 
@@ -103,7 +103,7 @@ static HSD_GObj* it_802C248C(Item* ip, HSD_JObj* jobj)
             link->x2C_b0 = true;
 
             joint = HSD_JObjLoadJoint(it_802C248C_joint28(ip));
-            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849, joint);
+            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_JObjKind, joint);
             GObj_SetupGXLink(link_gobj, HSD_GObj_JObjCallback, 6, 0);
             ip->xDD4_itemVar.climbersstring.x14 = joint;
             result = link_gobj->hsd_obj;

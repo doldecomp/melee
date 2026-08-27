@@ -209,7 +209,7 @@ void ifTime_UpdateTimers(HSD_GObj* arg0)
             OSReport("Error : jobj dont't get (ifAddTimeDownModel)\n");
             OSPanic("iftime.c", 300, "");
         }
-        tmp = HSD_GObj_804D7849;
+        tmp = HSD_GObj_JObjKind;
         HSD_GObjObject_80390A70(x->countdown_timer, tmp, jobj2);
         GObj_SetupGXLink(x->countdown_timer, HSD_GObj_JObjCallback, 11, 0);
         x->countdown_seconds = ifTime_GetCountdownSeconds_dontinline();
@@ -254,7 +254,7 @@ void ifTime_CreateTimers(void)
             OSReport("Error : jobj dont't get (ifAddTime)\n");
             OSPanic("iftime.c", 389, "");
         }
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
         GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 11, 0);
         anims = ifTime_match_timer_models.anims;
         matanims = ifTime_match_timer_models.matanims;

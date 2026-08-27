@@ -1539,7 +1539,7 @@ s32 mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
     setup_desc = mnNameNew_804A0710;
     gobj = GObj_Create(6U, 7U, 0x80U);
     jobj = HSD_JObjLoadJoint(setup_desc[0]);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6U, 0x80U);
     HSD_GObj_SetupProc(gobj, fn_8023CFC8, 0U);
     HSD_JObjAddAnimAll(jobj, setup_desc[1], setup_desc[2], setup_desc[3]);
@@ -1905,7 +1905,7 @@ void mnNameNew_8023E32C(s32 arg0)
     gobj = GObj_Create(6U, 7U, 0x80U);
     mnNameNew_804D6C08 = gobj;
     root_jobj = HSD_JObjLoadJoint(setup_desc[0]);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root_jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, root_jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4U, 0x80U);
     HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_8023DBE8, 0U);
     HSD_JObjAddAnimAll(root_jobj, setup_desc[1], setup_desc[2], setup_desc[3]);

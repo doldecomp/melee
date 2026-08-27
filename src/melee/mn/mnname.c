@@ -1417,7 +1417,7 @@ void mnName_8023A290(void)
 
     gobj = GObj_Create(6U, 7U, 0x80U);
     jobj = HSD_JObjLoadJoint(archive->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6U, 0x80U);
     HSD_GObj_SetupProc(gobj, fn_8023A0BC, 0U);
     HSD_JObjAddAnimAll(jobj, archive->anim_joint, archive->matanim_joint,
@@ -1495,7 +1495,7 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
     gobj = GObj_Create(6U, 7U, 0x80U);
     mnName_804D6BF8 = gobj;
     root_jobj = HSD_JObjLoadJoint(archive->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root_jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, root_jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4U, 0x80U);
     HSD_GObj_SetupProc(gobj, fn_80239574, 0U);
     HSD_JObjAddAnimAll(root_jobj, archive->anim_joint, archive->matanim_joint,

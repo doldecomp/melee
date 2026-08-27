@@ -198,7 +198,7 @@ void gm_801BFCFC(GameScene* arg0)
         if (gmMainLib_8015DA1C(var_r25_2) != 0) {
             if (gmMainLib_8015DA90(var_r25_2) == 0) {
                 u32* KP = gmMainLib_8015D970(var_r25_2);
-                *KP = lbTime_8000AFBC();
+                *KP = lbTime_GetTimeInSeconds();
                 gmMainLib_8015DA40(var_r25_2);
                 Toy_SetUnlockState((s16) var_r25_2, 1);
             }
@@ -227,7 +227,7 @@ void gm_801BFCFC(GameScene* arg0)
         {
             if (gmMainLib_8015DA90(var_r27_2_s11) == 0) {
                 temp_r29_2 = gmMainLib_8015D970(var_r27_2_s11);
-                *temp_r29_2 = lbTime_8000AFBC();
+                *temp_r29_2 = lbTime_GetTimeInSeconds();
                 gmMainLib_8015DA40(var_r27_2_s11);
                 Toy_SetUnlockState((s32) ((s16) var_r27_2_s11), 1);
             }

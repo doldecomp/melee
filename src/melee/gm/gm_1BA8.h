@@ -86,7 +86,7 @@ struct gm_801BAB40_src;
 /* 1BF050 */ int gm_801BF050(void);
 /* 1BF060 */ void gm_801BF060(GameScene*);
 /* 1BF128 */ void gm_SetupTitleDemo(void);
-/* 1BF3F8 */ UNK_RET gm_801BF3F8(UNK_PARAMS);
+/* 1BF3F8 */ void gm_PreloadTitleDemo(void);
 /* 1BF4DC */ void gm_801BF4DC(GameScene*);
 /* 1BF634 */ void gm_801BF634(s32, s32);
 /* 1BF648 */ int gm_801BF648(s32);

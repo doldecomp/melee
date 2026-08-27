@@ -174,7 +174,7 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
         icon_pos.y = icon_pos.y + (f32) idx * icon_spacing;
         icon_gobj = GObj_Create(6, 7, 0x80);
         icon_jobj = HSD_JObjLoadJoint((HSD_Joint*) mnEvent_804A0908[0]);
-        HSD_GObjObject_80390A70(icon_gobj, HSD_GObj_804D7849, icon_jobj);
+        HSD_GObjObject_80390A70(icon_gobj, HSD_GObj_JObjKind, icon_jobj);
         GObj_SetupGXLink(icon_gobj, HSD_GObj_JObjCallback, 4, 0x80);
         mnEvent_8024D4E0(icon_jobj, &icon_pos);
         data->gobjs[idx] = icon_gobj;
@@ -414,7 +414,7 @@ void mnEvent_8024E524(s32 event_idx)
     gobj = GObj_Create(6, 7, 0x80);
     mnEvent_804D6C60 = gobj;
     tree = HSD_JObjLoadJoint(assets[0]);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, tree);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, tree);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
     HSD_JObjAddAnimAll(tree, assets[1], assets[2], assets[3]);
     HSD_JObjReqAnimAll(tree, 0.0f);

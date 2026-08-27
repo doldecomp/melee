@@ -439,7 +439,7 @@ void mnDiagram3_Create(int arg0)
     gobj = GObj_Create(6, 7, 0x80);
     mnDiagram3_804D6C20 = gobj;
     jobj = HSD_JObjLoadJoint(archive->x0);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6, 0x80);
     HSD_JObjAddAnimAll(jobj, archive->x4, archive->x8, archive->xC);
     HSD_JObjReqAnimAll(jobj, mnDiagram3_804DC00C);
@@ -521,7 +521,7 @@ void mnDiagram3_Init(void* arg0)
         popup = GObj_Create(6, 7, 0x80);
         data->popup_gobj = popup;
         popup_jobj = HSD_JObjLoadJoint(archive->x0);
-        HSD_GObjObject_80390A70(popup, HSD_GObj_804D7849, popup_jobj);
+        HSD_GObjObject_80390A70(popup, HSD_GObj_JObjKind, popup_jobj);
         GObj_SetupGXLink(popup, HSD_GObj_JObjCallback, 4, 0x80);
         HSD_JObjAddAnimAll(popup_jobj, archive->x4, archive->x8, archive->xC);
         HSD_JObjReqAnimAll(popup_jobj, mnDiagram3_804DC00C);

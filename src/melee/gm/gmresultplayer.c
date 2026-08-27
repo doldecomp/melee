@@ -1365,7 +1365,7 @@ void fn_8017A004(void)
     ResultsData* data = &lbl_8046DBE8;
     HSD_GObj* gobj = GObj_Create(0xB, 3, 0);
     HSD_LObj* lobj = lb_80011AC4(data->pnlsce->lights);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_LightKind, lobj);
     GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
 }
 
@@ -1388,7 +1388,7 @@ void fn_8017A078(s32 arg0)
 
     gobj = GObj_Create(0x13, 0x14, 0);
     cobj = HSD_CObjLoadDesc(&lbl_803D7910);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
 
     eye.y = (eye.y * (f32) (arg0 + 1)) + (0.7f * Player_800360D8(arg0));
     interest.y =
@@ -1457,7 +1457,7 @@ HSD_GObj* fn_8017A318(s32 arg0)
 
     gobj = GObj_Create(0x13, 0x14, 0);
     cobj = HSD_CObjLoadDesc(&data->cobj_desc);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
 
     {
         s32 n = arg0 + 1;

@@ -3187,7 +3187,7 @@ HSD_GObj* hsd_80398310(u16 class_id, u8 p_link, u8 obj_kind, u32 gx_link)
         return NULL;
     }
     cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) &lbl_8040BF70);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, fn_803982E4, gx_link);
     hsd_80392528((Event) fn_80392A3C);
     fn_80392A08(4, 1, 0);

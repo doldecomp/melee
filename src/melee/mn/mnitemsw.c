@@ -819,7 +819,7 @@ HSD_GObj* mnItemSw_802351A0(s32 arg0)
     mnItemSw_804D6BE8 = gobj;
 
     jobj = HSD_JObjLoadJoint(mdl->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6, 0x80);
     HSD_GObj_SetupProc(gobj, fn_80234C24, 0);
 

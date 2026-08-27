@@ -2555,7 +2555,7 @@ s32 fn_801803FC(void* arg0)
         OSReport("Error : jobj don\'t get (gmRegClearAddModel)\n");
         OSPanic(__FILE__, 0x432, "");
     }
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xBU, 0U);
     HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_8017FF1C, 0x11U);
     fn_801689E4(jobj, mdl, 0);
@@ -2614,7 +2614,7 @@ fn_80180630_CreateLightAndCamera(struct lbl_80472D28_t* state,
     HSD_GObj* light_gobj;
 
     light_gobj = GObj_Create(0xBU, 3U, 0U);
-    HSD_GObjObject_80390A70(light_gobj, (u8) HSD_GObj_804D784A,
+    HSD_GObjObject_80390A70(light_gobj, (u8) HSD_GObj_LightKind,
                             fn_80180630_LoadLightList(state));
     GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0xAU, 0U);
 
@@ -2737,7 +2737,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     fn_80168A6C(sp38, &state->x4C, 0);
 
     fn_80180630_CreateLightAndCamera(state, &cam_gobj);
-    HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B,
+    HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_CameraKind,
                             HSD_CObjLoadDesc(state->x60));
     GObj_SetupGXLinkMax(cam_gobj, HSD_GObj_803910D8, 8U);
     cam_gobj->gxlink_prios = 0x4C00;
@@ -3078,7 +3078,7 @@ void fn_80181708(void)
 
     gobj = GObj_Create(0xEU, 0xFU, 0U);
     jobj = HSD_JObjLoadJoint((*lbl_804D65CC)->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xBU, 0U);
     HSD_GObj_SetupProc(gobj, fn_80180C14, 0x15U);
     gm_8016895C(jobj, *lbl_804D65CC, 0);
@@ -3088,7 +3088,7 @@ void fn_80181708(void)
 
     gobj = (new_var = GObj_Create(0xEU, 0xFU, 0U));
     jobj = HSD_JObjLoadJoint((*lbl_804D65D0)->joint);
-    HSD_GObjObject_80390A70(new_var, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(new_var, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(new_var, HSD_GObj_JObjCallback, 0xBU, 0U);
     HSD_GObj_SetupProc(new_var, fn_80180C60, 0x15U);
     gm_8016895C(jobj, *lbl_804D65D0, 0);
