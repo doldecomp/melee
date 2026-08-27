@@ -6371,9 +6371,10 @@ static bool ftCo_800ADE48(Fighter* fp)
             data->x18 = data->x20;
             return true;
         }
-        return false;
+    } else {
+        return true;
     }
-    return true;
+    return false;
 }
 
 static inline void ftCo_CpuUpdateCommonItemTarget(Fighter* fp)
