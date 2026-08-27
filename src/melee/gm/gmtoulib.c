@@ -1625,13 +1625,13 @@ static inline void gmTournament_InitBracket(s32 entrant_count, f32 anim_frame,
 #endif
 void fn_8018E618(int arg0, f32 farg0, int arg1)
 {
-    HSD_CObjDesc cam;
+    HSD_CameraDescPerspective cam;
     HSD_GObj* gobj;
     HSD_GObj* tmp;
     s32 i;
     PAD_STACK(16);
 
-    cam.common = cobj;
+    cam = *(HSD_CameraDescPerspective*) &cobj;
 
     while ((tmp = M2C_FIELD(HSD_GObj_Entities, HSD_GObj**, 0x6C)) != NULL) {
         HSD_GObjPLink_80390228(tmp);
@@ -1656,7 +1656,7 @@ void fn_8018E618(int arg0, f32 farg0, int arg1)
             f32 pos[9];
             struct lbl_803D9DD0_t cobj_data;
         } CObjData;
-        HSD_CObj* cobj = HSD_CObjLoadDesc(&cam);
+        HSD_CObj* cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) &cam);
         CObjData* cobj_data = (CObjData*) &lbl_803D9DAC;
         cobj_data->cobj_data.cobj = cobj;
         {
