@@ -215,6 +215,11 @@ static void mnSnap_8025329C(void)
             (void) "jobj->u.dobj->mobj";
             (void) "jobj->u.dobj->mobj->tobj";
             (void) "jobj->u.dobj->mobj->tobj->imagedesc";
+            /* Anchor "jobj.h" early so pooled literals follow the original
+             * order jobj, jobj.h, %03d, %d (MWCC pools in first-use order).
+             * Without this the pool emits jobj.h after "%d" and every
+             * reference below resolves to an offset unlike the original. */
+            (void) "jobj.h";
             HSD_ASSERT(195, jobj->u.dobj->next);
             HSD_ASSERT(196, jobj->u.dobj->next->next);
             HSD_ASSERT(197, jobj->u.dobj->next->next->mobj);
