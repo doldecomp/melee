@@ -3,6 +3,7 @@
 #include "hsd_3B2B.h"
 #include "hsd_3B2E.h"
 
+#include <stddef.h>
 #include <string.h>
 #include <dolphin/card.h>
 #include <dolphin/os.h>
@@ -41,6 +42,11 @@ typedef struct CardCmd {
     /* 0x1C */ s32 x1C;
     /* 0x20 */ s32 x20;
 } CardCmd;
+
+typedef union CardCmdStorage {
+    CardCmd command;
+    s32 words[9];
+} CardCmdStorage;
 
 typedef struct HsdCmdEntry {
     s32 type;
@@ -2566,35 +2572,46 @@ static inline s32 calculateBlocksBefore(struct CardState* file_desc,
 static inline s32 queueCardCommand2First(CardState* state, s32 block,
                                          void* data, s32 length, s32 offset)
 {
-    s32 cmd[9];
+    CardCmd command;
 
-    cmd[0] = 2;
-    cmd[1] = (s32) state;
-    cmd[4] = block;
-    cmd[5] = 0;
-    cmd[6] = (s32) data;
-    cmd[8] = length;
-    cmd[7] = offset;
-    return fn_803AC168(cmd);
+    command.type = 2;
+    command.state = state;
+    command.x10 = block;
+    command.x14 = 0;
+    command.x18 = data;
+    command.x20 = length;
+    command.x1C = offset;
+    return fn_803AC168((s32*) &command);
 }
 
 static inline s32 queueCardCommand2Final(CardState* state, s32 block,
                                          void* data, s32 length, s32 offset)
 {
-#if defined(MUST_MATCH) && defined(__MWERKS__)
-    s32 raw[9];
+    CardCmdStorage storage;
 
-    raw[-7 + 0] = 2;
-    raw[-7 + 1] = (s32) state;
-    raw[-7 + 4] = block;
-    raw[-7 + 5] = 0;
-    raw[-7 + 6] = (s32) data;
-    raw[-7 + 8] = length;
-    raw[-7 + 7] = offset;
-    return fn_803AC168((s32*) ((u8*) &raw[0] - 28));
+#if defined(MUST_MATCH) && defined(__MWERKS__)
+    /// @todo MWCC colors @c storage at 0x60(r1), but the original command is
+    /// at 0x44(r1). A normal local @c CardCmd matches every instruction except
+    /// these stack displacements. This still addresses before the C object;
+    /// reproduce that stack coloring and remove the matching-only adjustment.
+#define COMMAND_FIELD(member)                                                 \
+    storage.words[(offsetof(CardCmd, member) - 0x1C) / sizeof(s32)]
+#define COMMAND_PTR ((s32*) ((u8*) storage.words - 0x1C))
 #else
-    return queueCardCommand2First(state, block, data, length, offset);
+#define COMMAND_FIELD(member)                                                 \
+    storage.words[offsetof(CardCmd, member) / sizeof(s32)]
+#define COMMAND_PTR storage.words
 #endif
+    COMMAND_FIELD(type) = 2;
+    COMMAND_FIELD(state) = (s32) state;
+    COMMAND_FIELD(x10) = block;
+    COMMAND_FIELD(x14) = 0;
+    COMMAND_FIELD(x18) = (s32) data;
+    COMMAND_FIELD(x20) = length;
+    COMMAND_FIELD(x1C) = offset;
+    return fn_803AC168(COMMAND_PTR);
+#undef COMMAND_PTR
+#undef COMMAND_FIELD
 }
 
 static inline s32 calculateDataBlockSize(CardState* state, s32 file_idx,
@@ -2665,31 +2682,32 @@ static inline void cancelQueuedCardCommands(CardBufEntry* entries)
 static inline s32 queueClearDataBlock(CardState* state, const u8* dst,
                                       s32 size)
 {
+    CardCmdStorage storage;
+
 #if defined(MUST_MATCH) && defined(__MWERKS__)
-    s32 raw[9];
-
-    raw[-23 + 0] = 4;
-    raw[-23 + 1] = (s32) state;
-    raw[-23 + 4] = 0;
-    raw[-23 + 5] = 0;
-    raw[-23 + 6] = (s32) dst;
-    raw[-23 + 8] = size;
-    raw[-23 + 7] = 0;
-    raw[-23 + 2] = 0;
-    return fn_803AC168((s32*) ((u8*) &raw[0] - 92));
+    /// @todo MWCC colors @c storage at 0xC4(r1), but the original command is
+    /// at 0x68(r1). A normal local @c CardCmd matches every instruction except
+    /// these stack displacements. This still addresses before the C object;
+    /// reproduce that stack coloring and remove the matching-only adjustment.
+#define COMMAND_FIELD(member)                                                 \
+    storage.words[(offsetof(CardCmd, member) - 0x5C) / sizeof(s32)]
+#define COMMAND_PTR ((s32*) ((u8*) storage.words - 0x5C))
 #else
-    s32 cmd[9];
-
-    cmd[0] = 4;
-    cmd[1] = (s32) state;
-    cmd[4] = 0;
-    cmd[5] = 0;
-    cmd[6] = (s32) dst;
-    cmd[8] = size;
-    cmd[7] = 0;
-    cmd[2] = 0;
-    return fn_803AC168(cmd);
+#define COMMAND_FIELD(member)                                                 \
+    storage.words[offsetof(CardCmd, member) / sizeof(s32)]
+#define COMMAND_PTR storage.words
 #endif
+    COMMAND_FIELD(type) = 4;
+    COMMAND_FIELD(state) = (s32) state;
+    COMMAND_FIELD(x10) = 0;
+    COMMAND_FIELD(x14) = 0;
+    COMMAND_FIELD(x18) = (s32) dst;
+    COMMAND_FIELD(x20) = size;
+    COMMAND_FIELD(x1C) = 0;
+    COMMAND_FIELD(x8) = 0;
+    return fn_803AC168(COMMAND_PTR);
+#undef COMMAND_PTR
+#undef COMMAND_FIELD
 }
 
 static inline s32 queueDataBlockFirst(CardState* state, s32 block_idx, u8* dst,
