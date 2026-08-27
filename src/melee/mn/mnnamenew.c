@@ -349,12 +349,39 @@ u8 mnNameNew_804D4F7C[8] = { 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'H' };
 GXColor const mnNameNew_804DBF44 = { 0xA6, 0x81, 0x3D, 0xFF };
 GXColor const mnNameNew_804DBF48 = { 0x00, 0x00, 0x00, 0xFF };
 
+static inline void mnNameNew_SetupKeyText(HSD_Text* text, char** str_table,
+                                          f32 y_range, f32 x_range,
+                                          GXColor* normal,
+                                          GXColor* highlighted)
+{
+    GXColor color;
+    GXColor* color_ptr;
+    f32 font_x;
+    f32 col_x;
+    s32 i;
+
+    for (i = 0; i < 0x32; i++) {
+        font_x = text->font_size.x;
+        col_x = (f32) (9 - (i / 5)) * x_range;
+        HSD_SisLib_803A6B98(text, col_x / font_x,
+                            ((f32) (i % 5) * y_range) / text->font_size.y,
+                            str_table[i], font_x, col_x);
+        if (i == (s32) mn_804A04F0.hovered_selection) {
+            color_ptr = highlighted;
+        } else {
+            color_ptr = normal;
+        }
+        color = *color_ptr;
+        color_ptr = &color;
+        HSD_SisLib_803A74F0(text, i, color_ptr);
+    }
+}
+
 s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
 {
     Vec3 sp50;
     GXColor sp4C;
     GXColor sp48;
-    GXColor sp44;
     MnNameNewDataLayout* layout;
     HSD_JObj* key_jobj;
     HSD_Text* text;
@@ -368,11 +395,7 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
     f32 pos_z;
     f32 base_x;
     f32 base_y;
-    f32 font_x;
-    f32 col_x;
     s32 i;
-    s32 j;
-    GXColor* color_ptr;
 
     FORCE_PAD_STACK(16);
 
@@ -469,22 +492,7 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
     base_y = HSD_JObjGetTranslationY(key_jobj);
     y_range = -(HSD_JObjGetTranslationY(ref2) - base_y);
 
-    j = 0;
-    for (; j < 0x32; j++) {
-        font_x = text->font_size.x;
-        col_x = (f32) (9 - (j / 5)) * x_range;
-        HSD_SisLib_803A6B98(text, col_x / font_x,
-                            ((f32) (j % 5) * y_range) / text->font_size.y,
-                            str_table[j], font_x, col_x);
-        if (j == (s32) mn_804A04F0.hovered_selection) {
-            color_ptr = &sp48;
-        } else {
-            color_ptr = &sp4C;
-        }
-        sp44 = *color_ptr;
-        color_ptr = &sp44;
-        HSD_SisLib_803A74F0(text, j, color_ptr);
-    }
+    mnNameNew_SetupKeyText(text, str_table, y_range, x_range, &sp4C, &sp48);
 
     return (s32) text;
 }
