@@ -1899,18 +1899,17 @@ void mnNameNew_8023E32C(s32 arg0)
     HSD_JObj* root_jobj;
     NameNewEntry* user_data;
     s32 i;
-    void** setup_desc;
 
     PAD_STACK(8);
 
-    setup_desc = mnNameNew_804A06F0;
     gobj = GObj_Create(6U, 7U, 0x80U);
     mnNameNew_804D6C08 = gobj;
-    root_jobj = HSD_JObjLoadJoint(setup_desc[0]);
+    root_jobj = HSD_JObjLoadJoint(mnNameNew_804A06F0[0]);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root_jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4U, 0x80U);
     HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_8023DBE8, 0U);
-    HSD_JObjAddAnimAll(root_jobj, setup_desc[1], setup_desc[2], setup_desc[3]);
+    HSD_JObjAddAnimAll(root_jobj, mnNameNew_804A06F0[1],
+                       mnNameNew_804A06F0[2], mnNameNew_804A06F0[3]);
     HSD_JObjReqAnimAll(root_jobj, 0.0f);
     HSD_JObjAnimAll(root_jobj);
     user_data = HSD_MemAlloc(sizeof(*user_data));
