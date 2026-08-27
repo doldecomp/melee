@@ -1043,7 +1043,7 @@ void fn_801983E4(HSD_GObj* gobj)
     player_count = tm->x30;
     gmTournament_SetPlayerX(&x, player_count, pnum);
 
-    fn_8018FDC4(jobj, x, 666.0f, 80.0f);
+    fn_8018FDC4(jobj, x, 666.0f, 0.01f);
 }
 
 void fn_80198584(ResultsData* results)
