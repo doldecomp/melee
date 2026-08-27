@@ -882,7 +882,7 @@ void grKongo_801D6AFC(void)
             entry[1].unk10 = values[1] + entry[1].unk10;
             entry[2].unk10 = values[2] + entry[2].unk10;
             entry[3].unk10 = values[3] + entry[3].unk10;
-            entry[4].unk10 = values[4] + entry[4].unk10;
+            entry[4].unk10 = entry[4].unk10 + values[4];
             values += 5;
             entry += 5;
             count--;
