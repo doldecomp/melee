@@ -2,6 +2,9 @@
 
 #include "gm_unsplit.h"
 
+#include "gm/gmmain_lib.h"
+#include "mn/inlines.h"
+
 #include <baselib/sislib.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>
@@ -266,9 +269,39 @@ void gmTitle_OnFrame(void)
         gmTitle_804D6714--;
         return;
     }
-    tmp = gm_GetCurrentSceneExitData();
-    *tmp = 0;
-    gm_801A4B60();
+    frame_count++;
+    if (frame_count > 600) {
+        tmp = gm_GetCurrentSceneExitData();
+        *tmp = 0;
+        gm_801A4B60();
+    } else if (input & HSD_PAD_START) {
+        lbAudioAx_80026F2C(0x1C);
+        lbAudioAx_8002702C(0xC, 0);
+        lbAudioAx_80027168();
+        lbAudioAx_80027648();
+        sfxForward();
+        gmMainLib_8015ECBC();
+        tmp = gm_GetCurrentSceneExitData();
+        *tmp = input;
+        gm_801A4B60();
+    } else if (DbLevel >= DbLKind_DebugRom) {
+        if (input & HSD_PAD_Y) {
+            sfxForward();
+            tmp = gm_GetCurrentSceneExitData();
+            *tmp = input;
+            gm_801A4B60();
+        } else if (input & HSD_PAD_A) {
+            sfxForward();
+            tmp = gm_GetCurrentSceneExitData();
+            *tmp = input;
+            gm_801A4B60();
+        } else if (input & HSD_PAD_X) {
+            sfxForward();
+            tmp = gm_GetCurrentSceneExitData();
+            *tmp = input;
+            gm_801A4B60();
+        }
+    }
 }
 
 static char* gmTitle_801A1D38(const char* src, char* dst)
