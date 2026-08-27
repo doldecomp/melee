@@ -283,6 +283,7 @@ void _tyDisplay_80318714(TySortElem* base_, s32 lo, s32 hi)
 
     if (lo < hi) {
         s32 mid = (lo + hi) / 2;
+        TySortElemInt* cur;
         s32 pivot2, pivot, j, i;
 
         if (lo != mid) {
@@ -292,18 +293,20 @@ void _tyDisplay_80318714(TySortElem* base_, s32 lo, s32 hi)
         }
 
         pivot = lo;
+        i = lo + 1;
+        cur = &base[i];
         j = lo;
         j *= sizeof(TySortElemInt);
-        for (i = lo + 1; i <= hi; i++) {
-            if (base[i].val > base[lo].val) {
+        for (; i <= hi; cur++, i++) {
+            if (cur->val > base[lo].val) {
                 TySortElemInt* s;
                 pivot++;
                 j += sizeof(TySortElemInt);
                 if (pivot != i) {
                     s = tyDisplay_GetSortElem(j, base);
                     tmp1 = *s;
-                    *s = base[i];
-                    base[i] = tmp1;
+                    *s = *cur;
+                    *cur = tmp1;
                 }
             }
         }
