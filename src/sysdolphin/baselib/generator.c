@@ -9,6 +9,7 @@
 #include <sysdolphin/baselib/psappsrt.h>
 #include <sysdolphin/baselib/psstructs.h>
 #include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/wobj.h>
 
 /* 4D78F0 */ HSD_CObj* psCamera;
 /* 4D0E5C */
@@ -369,7 +370,6 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     Vec3 look_dir;
     Vec3 cam_up;
     Vec3 cross1;
-    Vec3 vel_norm;
     Mtx trig_mtx;
     f64 eps;
     f32 vel_mag_sq;
@@ -418,7 +418,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     if ((gen->type & 0x100) && gen->jobj != NULL && (gen->type & 0x400) &&
         !(gen->kind & 0x30000))
     {
-        PSMTXCopy((void*) ((u8*) gen->jobj + 0x44), jobj_mtx);
+        PSMTXCopy(gen->jobj->mtx, jobj_mtx);
 
         /* Extract and normalize each column of the 3x3 rotation */
         tmpvec.x = jobj_mtx[0][0];
@@ -453,15 +453,9 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
     /* Billboard orientation: kind & 0x10000 */
     if (gen->kind & 0x10000) {
         HSD_ASSERT(677, psCamera);
-        {
-            HSD_CObj* cobj = psCamera;
-            void* view = *(void**) ((u8*) cobj + 0x24);
-            look_dir.x = *(f32*) ((u8*) view + 0x0C) - gen->pos.x;
-            view = *(void**) ((u8*) cobj + 0x24);
-            look_dir.y = *(f32*) ((u8*) view + 0x10) - gen->pos.y;
-            view = *(void**) ((u8*) cobj + 0x24);
-            look_dir.z = *(f32*) ((u8*) view + 0x14) - gen->pos.z;
-        }
+        look_dir.x = psCamera->eyepos->pos.x - gen->pos.x;
+        look_dir.y = psCamera->eyepos->pos.y - gen->pos.y;
+        look_dir.z = psCamera->eyepos->pos.z - gen->pos.z;
         PSVECNormalize(&look_dir, &look_dir);
         HSD_CObjGetUpVector(psCamera, &cam_up);
         PSVECNormalize(&cam_up, &cam_up);
@@ -481,6 +475,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
 
     /* Velocity-based rotation */
     if ((gen->type & 0xF) != 1 && vel_mag_sq > 0.0F) {
+        Vec3 vel_norm;
         vel_norm.x = gen->vel.x;
         vel_norm.y = gen->vel.y;
         vel_norm.z = gen->vel.z;
