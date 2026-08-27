@@ -1093,15 +1093,54 @@ void fn_80186400(void)
 
 static char lbl_804D40B0[] = "IrRdMap";
 
+static inline void
+gm_80186634_SetupScene(void)
+{
+    HSD_GObj* camera_gobj;
+    HSD_GObj* camera_gobj2;
+    HSD_GObj* model_gobj;
+    HSD_GObj* fog_gobj;
+    HSD_CObj* cobj;
+    HSD_CObj* cobj2;
+    HSD_JObj* jobj;
+    HSD_Fog* fog;
+
+    camera_gobj = GObj_Create(0x13, 0x14, 0);
+    cobj = HSD_CObjLoadDesc(lbl_804D65FC->cameras[0].desc);
+    cobj2 = HSD_CObjLoadDesc(lbl_804D6600->cameras[0].desc);
+    HSD_GObjObject_80390A70(camera_gobj, HSD_GObj_CameraKind, cobj);
+    GObj_SetupGXLinkMax(camera_gobj, HSD_GObj_803910D8, 8);
+    camera_gobj->gxlink_prios = 0x801;
+    camera_gobj2 = GObj_Create(0x13, 0x15, 0);
+    HSD_GObjObject_80390A70(camera_gobj2, HSD_GObj_CameraKind, cobj2);
+    if (lbl_8047368C.model_scale_kind == 4) {
+        GObj_SetupGXLinkMax(camera_gobj2,
+                            (GObj_RenderFunc) (Event) fn_8018569C, 8);
+    } else {
+        GObj_SetupGXLinkMax(camera_gobj2,
+                            (GObj_RenderFunc) (Event) fn_8018575C, 8);
+    }
+    fn_80186400();
+    model_gobj = GObj_Create(0xE, 0xF, 0);
+    jobj = HSD_JObjLoadJoint(lbl_804D6600->models[0]->joint);
+    HSD_GObjObject_80390A70(model_gobj, HSD_GObj_JObjKind, jobj);
+    GObj_SetupGXLink(model_gobj, HSD_GObj_JObjCallback, 0xC, 0);
+    HSD_GObj_SetupProc(model_gobj, (HSD_GObjEvent) (Event) fn_8018504C,
+                       0x11);
+    gm_8016895C(jobj, lbl_804D6600->models[0], 0);
+    HSD_JObjReqAnimAll(jobj, (f32) ((lbl_8047368C.xEE - 1) * 0x32));
+    HSD_JObjAnimAll(jobj);
+    lb_80011E24(jobj, &lbl_804735A8.x4[4], 0xE, -1);
+    lb_80011E24(jobj, &lbl_804735A8.x4[5], 1, -1);
+    fog_gobj = GObj_Create(0xE, 0xF, 0);
+    fog = HSD_FogLoadDesc(lbl_804D65FC->fogs[0].desc);
+    HSD_GObjObject_80390A70(fog_gobj, HSD_GObj_FogKind, fog);
+    GObj_SetupGXLink(fog_gobj, HSD_GObj_FogCallback, 0xB, 0);
+}
+
 void fn_80186634(void* arg0)
 {
     HSD_GObj* gobj;
-    HSD_GObj* gobj2;
-    HSD_JObj* jobj;
-    HSD_CObj* cobj1;
-    HSD_GObj* gobj3;
-    HSD_CObj* cobj2;
-    HSD_GObj* gobj4;
     const char* names[4];
     PAD_STACK(16);
 
@@ -1138,110 +1177,19 @@ void fn_80186634(void* arg0)
 
     switch (lbl_8047368C.model_scale_kind) {
     case 3:
-        gobj2 = GObj_Create(0x13, 0x14, 0);
-        cobj1 = HSD_CObjLoadDesc(lbl_804D65FC->cameras[0].desc);
-        cobj2 = HSD_CObjLoadDesc(lbl_804D6600->cameras[0].desc);
-        HSD_GObjObject_80390A70(gobj2, HSD_GObj_CameraKind, cobj1);
-        GObj_SetupGXLinkMax(gobj2, HSD_GObj_803910D8, 8);
-        gobj2->gxlink_prios = 0x801;
-        gobj3 = GObj_Create(0x13, 0x15, 0);
-        HSD_GObjObject_80390A70(gobj3, HSD_GObj_CameraKind, cobj2);
-        if (lbl_8047368C.model_scale_kind == 4) {
-            GObj_SetupGXLinkMax(gobj3, (GObj_RenderFunc) (Event) fn_8018569C,
-                                8);
-        } else {
-            GObj_SetupGXLinkMax(gobj3, (GObj_RenderFunc) (Event) fn_8018575C,
-                                8);
-        }
-        fn_80186400();
-        gobj4 = GObj_Create(0xE, 0xF, 0);
-        jobj = HSD_JObjLoadJoint(lbl_804D6600->models[0]->joint);
-        HSD_GObjObject_80390A70(gobj4, HSD_GObj_JObjKind, jobj);
-        GObj_SetupGXLink(gobj4, HSD_GObj_JObjCallback, 0xC, 0);
-        HSD_GObj_SetupProc(gobj4, (HSD_GObjEvent) (Event) fn_8018504C, 0x11);
-        gm_8016895C(jobj, lbl_804D6600->models[0], 0);
-        HSD_JObjReqAnimAll(jobj, (f32) ((lbl_8047368C.xEE - 1) * 0x32));
-        HSD_JObjAnimAll(jobj);
-        lb_80011E24(jobj, &lbl_804735A8.x4[4], 0xE, -1);
-        lb_80011E24(jobj, &lbl_804735A8.x4[5], 1, -1);
-        gobj = GObj_Create(0xE, 0xF, 0);
-        {
-            HSD_Fog* fog = HSD_FogLoadDesc(lbl_804D65FC->fogs[0].desc);
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_FogKind, fog);
-        }
-        GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0xB, 0);
+        gm_80186634_SetupScene();
         fn_80186080();
         break;
     case 0:
     case 1:
     case 2:
-        gobj2 = GObj_Create(0x13, 0x14, 0);
-        cobj1 = HSD_CObjLoadDesc(lbl_804D65FC->cameras[0].desc);
-        cobj2 = HSD_CObjLoadDesc(lbl_804D6600->cameras[0].desc);
-        HSD_GObjObject_80390A70(gobj2, HSD_GObj_CameraKind, cobj1);
-        GObj_SetupGXLinkMax(gobj2, HSD_GObj_803910D8, 8);
-        gobj2->gxlink_prios = 0x801;
-        gobj3 = GObj_Create(0x13, 0x15, 0);
-        HSD_GObjObject_80390A70(gobj3, HSD_GObj_CameraKind, cobj2);
-        if (lbl_8047368C.model_scale_kind == 4) {
-            GObj_SetupGXLinkMax(gobj3, (GObj_RenderFunc) (Event) fn_8018569C,
-                                8);
-        } else {
-            GObj_SetupGXLinkMax(gobj3, (GObj_RenderFunc) (Event) fn_8018575C,
-                                8);
-        }
-        fn_80186400();
-        gobj4 = GObj_Create(0xE, 0xF, 0);
-        jobj = HSD_JObjLoadJoint(lbl_804D6600->models[0]->joint);
-        HSD_GObjObject_80390A70(gobj4, HSD_GObj_JObjKind, jobj);
-        GObj_SetupGXLink(gobj4, HSD_GObj_JObjCallback, 0xC, 0);
-        HSD_GObj_SetupProc(gobj4, (HSD_GObjEvent) (Event) fn_8018504C, 0x11);
-        gm_8016895C(jobj, lbl_804D6600->models[0], 0);
-        HSD_JObjReqAnimAll(jobj, (f32) ((lbl_8047368C.xEE - 1) * 0x32));
-        HSD_JObjAnimAll(jobj);
-        lb_80011E24(jobj, &lbl_804735A8.x4[4], 0xE, -1);
-        lb_80011E24(jobj, &lbl_804735A8.x4[5], 1, -1);
-        gobj = GObj_Create(0xE, 0xF, 0);
-        {
-            HSD_Fog* fog = HSD_FogLoadDesc(lbl_804D65FC->fogs[0].desc);
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_FogKind, fog);
-        }
-        GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0xB, 0);
+        gm_80186634_SetupScene();
         fn_801861B8();
         fn_80185D64();
         fn_80185F5C(fn_80185E34());
         break;
     case 4:
-        gobj2 = GObj_Create(0x13, 0x14, 0);
-        cobj1 = HSD_CObjLoadDesc(lbl_804D65FC->cameras[0].desc);
-        cobj2 = HSD_CObjLoadDesc(lbl_804D6600->cameras[0].desc);
-        HSD_GObjObject_80390A70(gobj2, HSD_GObj_CameraKind, cobj1);
-        GObj_SetupGXLinkMax(gobj2, HSD_GObj_803910D8, 8);
-        gobj2->gxlink_prios = 0x801;
-        gobj3 = GObj_Create(0x13, 0x15, 0);
-        HSD_GObjObject_80390A70(gobj3, HSD_GObj_CameraKind, cobj2);
-        if (lbl_8047368C.model_scale_kind == 4) {
-            GObj_SetupGXLinkMax(gobj3, (GObj_RenderFunc) (Event) fn_8018569C,
-                                8);
-        } else {
-            GObj_SetupGXLinkMax(gobj3, (GObj_RenderFunc) (Event) fn_8018575C,
-                                8);
-        }
-        fn_80186400();
-        gobj4 = GObj_Create(0xE, 0xF, 0);
-        jobj = HSD_JObjLoadJoint(lbl_804D6600->models[0]->joint);
-        HSD_GObjObject_80390A70(gobj4, HSD_GObj_JObjKind, jobj);
-        GObj_SetupGXLink(gobj4, HSD_GObj_JObjCallback, 0xC, 0);
-        HSD_GObj_SetupProc(gobj4, (HSD_GObjEvent) (Event) fn_8018504C, 0x11);
-        gm_8016895C(jobj, lbl_804D6600->models[0], 0);
-        HSD_JObjReqAnimAll(jobj, (f32) ((lbl_8047368C.xEE - 1) * 0x32));
-        HSD_JObjAnimAll(jobj);
-        lb_80011E24(jobj, &lbl_804735A8.x4[4], 0xE, -1);
-        lb_80011E24(jobj, &lbl_804735A8.x4[5], 1, -1);
-        gobj = GObj_Create(0xE, 0xF, 0);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_FogKind,
-                                HSD_FogLoadDesc(lbl_804D65FC->fogs[0].desc));
-        GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0xB, 0);
+        gm_80186634_SetupScene();
         fn_801861B8();
         fn_80185D64();
         fn_80185A0C();
@@ -1251,6 +1199,7 @@ void fn_80186634(void* arg0)
 
     lbAudioAx_80023F28(0x2D);
 }
+
 
 void gm_80186DFC_OnFrame(void)
 {
