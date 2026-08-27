@@ -1354,25 +1354,23 @@ block_done:
 
 void HSD_SisLib_803A7684(HSD_Text* text, const u8* cursor, u8 flags)
 {
-    u8* old_buf;
-    u8* src;
-    u32 count;
-    int idx;
-    int old_x6E;
-    int new_x6E;
-
     switch (flags & 0x7F) {
-    case 1:
+    case 1: {
+        u8* old_buf;
+        u32 count;
+        int idx;
+        int new_x6E;
+        int old_x6E;
+
         old_x6E = text->x6E;
         if (old_x6E < (s32) (text->x6C + 5)) {
             new_x6E = old_x6E + 0x10;
             old_buf = (u8*) text->string_buffer;
             text->string_buffer = HSD_SisLib_Alloc(new_x6E);
-            src = old_buf;
             text->x6E = (u16) new_x6E;
             count = old_x6E;
             for (idx = 0; (u32) idx < count; idx++) {
-                text->string_buffer[idx] = *src++;
+                text->string_buffer[idx] = old_buf[idx];
             }
             while (idx < (s32) text->x6E) {
                 text->string_buffer[idx] = 0;
@@ -1388,17 +1386,23 @@ void HSD_SisLib_803A7684(HSD_Text* text, const u8* cursor, u8 flags)
         text->string_buffer[text->x6C++] = (u8) (256.0F * text->x78.y);
         text->string_buffer[text->x6C++] = flags;
         return;
-    case 2:
+    }
+    case 2: {
+        int old_x6E;
+        u32 count;
+        int idx;
+        u8* old_buf;
+        int new_x6E;
+
         old_x6E = text->x6E;
         if (old_x6E < (s32) (text->x6C + 4)) {
             new_x6E = old_x6E + 0x10;
             old_buf = (u8*) text->string_buffer;
             text->string_buffer = HSD_SisLib_Alloc(new_x6E);
-            src = old_buf;
             text->x6E = (u16) new_x6E;
             count = old_x6E;
             for (idx = 0; (u32) idx < count; idx++) {
-                text->string_buffer[idx] = *src++;
+                text->string_buffer[idx] = old_buf[idx];
             }
             while (idx < (s32) text->x6E) {
                 text->string_buffer[idx] = 0;
@@ -1411,17 +1415,23 @@ void HSD_SisLib_803A7684(HSD_Text* text, const u8* cursor, u8 flags)
         text->string_buffer[text->x6C++] = text->active_color.b;
         text->string_buffer[text->x6C++] = flags;
         return;
-    case 3:
+    }
+    case 3: {
+        int old_x6E;
+        u32 count;
+        int idx;
+        u8* old_buf;
+        int new_x6E;
+
         old_x6E = text->x6E;
         if (old_x6E < (s32) (text->x6C + 5)) {
             new_x6E = old_x6E + 0x10;
             old_buf = (u8*) text->string_buffer;
             text->string_buffer = HSD_SisLib_Alloc(new_x6E);
-            src = old_buf;
             text->x6E = (u16) new_x6E;
             count = old_x6E;
             for (idx = 0; (u32) idx < count; idx++) {
-                text->string_buffer[idx] = *src++;
+                text->string_buffer[idx] = old_buf[idx];
             }
             while (idx < (s32) text->x6E) {
                 text->string_buffer[idx] = 0;
@@ -1437,17 +1447,23 @@ void HSD_SisLib_803A7684(HSD_Text* text, const u8* cursor, u8 flags)
         text->string_buffer[text->x6C++] = (u8) (256.0F * text->x80.y);
         text->string_buffer[text->x6C++] = flags;
         return;
-    case 4:
+    }
+    case 4: {
+        int old_x6E;
+        u32 count;
+        int idx;
+        u8* old_buf;
+        int new_x6E;
+
         old_x6E = text->x6E;
         if (old_x6E < (s32) (text->x6C + 2)) {
             new_x6E = old_x6E + 0x10;
             old_buf = (u8*) text->string_buffer;
             text->string_buffer = HSD_SisLib_Alloc(new_x6E);
-            src = old_buf;
             text->x6E = (u16) new_x6E;
             count = old_x6E;
             for (idx = 0; (u32) idx < count; idx++) {
-                text->string_buffer[idx] = *src++;
+                text->string_buffer[idx] = old_buf[idx];
             }
             while (idx < (s32) text->x6E) {
                 text->string_buffer[idx] = 0;
@@ -1458,17 +1474,23 @@ void HSD_SisLib_803A7684(HSD_Text* text, const u8* cursor, u8 flags)
         text->string_buffer[text->x6C++] = text->alignment;
         text->string_buffer[text->x6C++] = flags;
         return;
-    case 5:
+    }
+    case 5: {
+        int new_x6E;
+        u32 count;
+        int idx;
+        u8* old_buf;
+        int old_x6E;
+
         old_x6E = text->x6E;
         if (old_x6E < (s32) (text->x6C + 5)) {
             new_x6E = old_x6E + 0x10;
             old_buf = (u8*) text->string_buffer;
             text->string_buffer = HSD_SisLib_Alloc(new_x6E);
-            src = old_buf;
             text->x6E = (u16) new_x6E;
             count = old_x6E;
             for (idx = 0; (u32) idx < count; idx++) {
-                text->string_buffer[idx] = *src++;
+                text->string_buffer[idx] = old_buf[idx];
             }
             while (idx < (s32) text->x6E) {
                 text->string_buffer[idx] = 0;
@@ -1481,7 +1503,7 @@ void HSD_SisLib_803A7684(HSD_Text* text, const u8* cursor, u8 flags)
         text->string_buffer[text->x6C++] = (u8) ((u32) cursor >> 8U);
         text->string_buffer[text->x6C++] = (u8) (u32) cursor;
         text->string_buffer[text->x6C++] = flags;
-        return;
+    }
     }
 }
 
