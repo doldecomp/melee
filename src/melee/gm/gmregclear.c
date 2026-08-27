@@ -720,6 +720,11 @@ static inline void gm_8017CE34_SetupColors(UnkAdventureData* arg1, s32 count,
     }
 }
 
+static inline u8 gm_8017CE34_GetCpuLevel(UnkAdventureData* arg1)
+{
+    return arg1->x0.cpu_level;
+}
+
 s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
                 u8 arg3, u8 arg4, u8 arg5, s32 arg6, StKind arg7, s32 count,
                 s32 arg9)
@@ -840,7 +845,8 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     {
         u8 team_color;
         if (arg1->x58 != NULL) {
-            team_color = arg1->x58((u8) count, arg1->x0.cpu_level, 0);
+            team_color =
+                arg1->x58((u8) count, gm_8017CE34_GetCpuLevel(arg1), 0);
         } else {
             team_color = 0;
         }
