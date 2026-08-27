@@ -33,7 +33,8 @@ typedef struct {
 #include <baselib/random.h>
 
 static HSD_JObj* hsd_804D08E8[8];
-static void* hsd_804D0908[0x144 / 4];
+static HSD_Particle* hsd_804D0908[16];
+static HSD_Particle* hsd_804D0948[65];
 static HSD_PSFormGroup** psFormGroupArray[65];
 /* 4D0B50 */ static HSD_PSTexGroup** psTexGroupArray[65];
 /* 4D0D58 */ static int psNumCmdList[65];
@@ -334,41 +335,25 @@ void psInitDataBank(int bank, int* cmdBank, int* texBank, u32* ref,
     }
 }
 
-// @TODO: Currently 62.67% match - ASM bytes identical, relocation differences
 void hsd_80398A08(u32 unused)
 {
-    extern u16 hsd_804D78DC;
-    s32 i;
+    int i;
 
     HSD_ObjAllocInit(&hsd_804D0F60.alloc_data, sizeof(HSD_Particle), 4);
-    PAD_STACK(24);
+    PAD_STACK(16);
 
-    i = 0;
-    hsd_804D0908[0] = NULL;
-    hsd_804D0908[1] = NULL;
-    hsd_804D0908[2] = NULL;
-    hsd_804D0908[3] = NULL;
-    hsd_804D0908[4] = NULL;
-    hsd_804D0908[5] = NULL;
-    hsd_804D0908[6] = NULL;
-    hsd_804D0908[7] = NULL;
-    hsd_804D0908[8] = NULL;
-    hsd_804D0908[9] = NULL;
-    hsd_804D0908[10] = NULL;
-    hsd_804D0908[11] = NULL;
-    hsd_804D0908[12] = NULL;
-    hsd_804D0908[13] = NULL;
-    hsd_804D0908[14] = NULL;
-    hsd_804D0908[15] = NULL;
+    for (i = 0; i < 16; i++) {
+        hsd_804D0908[i] = NULL;
+    }
     hsd_804D78E2[0] = 0;
-    hsd_804D78DC = 0;
+    numPeakParticles = 0;
     for (i = 0; i < 0x41; i++) {
         psCmdListArray[i] = NULL;
-        psNumCmdList[i] = 0;
         psFormGroupArray[i] = NULL;
         ptclref_804D0E5C[i] = NULL;
         psTexGroupArray[i] = NULL;
-        hsd_804D0908[i] = NULL;
+        psNumCmdList[i] = 0;
+        hsd_804D0948[i] = NULL;
     }
     psCallback = NULL;
     hsd_804D08E8[0] = NULL;
@@ -416,7 +401,7 @@ HSD_Particle* hsd_80398C04(HSD_Particle** head, int linkNo, int bank, u32 kind,
     }
 
     if (head == NULL) {
-        slot = (HSD_Particle**) &hsd_804D0908[linkNo];
+        slot = &hsd_804D0908[linkNo];
         pp->next = *slot;
         *slot = pp;
     } else {
