@@ -593,7 +593,6 @@ static inline void gm_801B5ACC_inline(u16 round)
 
 void gm_801B5ACC(GameScene* arg0)
 {
-    u8 operand_pad[8];
     s8 chars[3];
     StartMeleeData* data;
     u8* base;
