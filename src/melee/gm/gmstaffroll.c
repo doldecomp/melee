@@ -731,7 +731,6 @@ void fn_801AB200(HSD_GObj* gobj)
     s32 line_num;
     HSD_Generator* gen;
     HSD_psAppSRT* appsrt;
-    HSD_JObj* child_jobj;
     f32 fov_scale;
     f32 half_size;
     f32 highlight_val;
@@ -868,9 +867,10 @@ void fn_801AB200(HSD_GObj* gobj)
                                             gm_803DD1C8.particles[entry_idx],
                                             -1);
                                 if (entry_idx == 0) {
+                                    s32 hover_color = *(s32*) &gm_804D42CC;
                                     p = (StaffRollPtclNode*)
                                             ptcl_jobj2->u.ptcl;
-                                    tally_color = *(s32*) &gm_804D42CC;
+                                    tally_color = hover_color;
                                     p = p->x4.ptr;
                                     p = p->x4.ptr;
                                     p = p->x4.ptr;
@@ -1145,11 +1145,8 @@ void fn_801AB200(HSD_GObj* gobj)
             tally_color_copy = tally_color2;
             HSD_SisLib_803A74F0(gm_804D680C, line_num, &tally_color_copy);
 
-            child_jobj = jobj_pair[0]->child;
-            HSD_JObjSetTranslateY(child_jobj, -0.4f);
-
-            child_jobj = jobj_pair[1]->child;
-            HSD_JObjSetTranslateY(child_jobj, -0.4f);
+            HSD_JObjSetTranslateY(jobj_pair[0]->child, -0.4f);
+            HSD_JObjSetTranslateY(jobj_pair[1]->child, -0.4f);
 
             gm_804D681C = 1;
         }
