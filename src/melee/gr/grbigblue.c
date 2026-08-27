@@ -1842,7 +1842,7 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
                 }
                 if (diff_y < 0.5f) {
                     vy = 0.0f;
-                } else if (pos.y < target_y) {
+                } else if (target_y > pos.y) {
                     vy = (target_y - pos.y) / yakumono_param->xE4;
                     if (vy > yakumono_param->xE8) {
                         vy = yakumono_param->xE8;
