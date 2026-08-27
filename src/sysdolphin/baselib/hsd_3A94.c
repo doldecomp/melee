@@ -2550,32 +2550,6 @@ s32 fn_803ADE4C(s32 card_state, s32 channel, s32 callback)
     return 0;
 }
 
-static inline s32 calculateBlocksBefore(struct CardState* file_desc,
-                                        s32 file_count)
-{
-    u8* total;
-    s32 i;
-
-    if (file_count >= 9) {
-        return 0;
-    }
-    if (file_count == 0) {
-        return 0;
-    }
-
-    total = (u8*) 1;
-    if (file_desc->x4C[0] > 0) {
-        total = (u8*) &((CardState*) fn_803AC634(file_desc, 0))->x8;
-        total -= 8;
-    }
-
-    for (i = 1; i < file_count; i++) {
-        total += fn_803AC634(file_desc, i);
-    }
-
-    return (s32) total;
-}
-
 static inline s32 queueCardCommand2First(CardState* state, s32 block,
                                          void* data, s32 length, s32 offset)
 {
@@ -2861,7 +2835,7 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, u8* arg2, s32 arg3,
         }
     }
 
-    blocks_before = calculateBlocksBefore(arg0, arg1);
+    blocks_before = fn_803AC6B8_blocks_before(arg0, arg1);
 
     file_size = arg0->x4C[arg1];
     file_blocks = calculateFileBlockCount(arg0, arg1);
