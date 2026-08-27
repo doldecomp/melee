@@ -294,13 +294,14 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
 {
     Diagram2* data;
     int result;
-    Diagram2* data2;
+    HSD_GObj* d2;
     u8 x46;
     u8 x47;
     u8 x48;
     u8 entity_idx;
     int selection;
-    HSD_GObj* d2;
+    Diagram2* data2;
+    GameRules* rules;
     PAD_STACK(40);
 
     {
@@ -314,7 +315,8 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         mn_804A04F0.entering_menu = 0;
         data2 = (d2 = mnDiagram2_804D6C18)->user_data;
         x46 = data2->selected_fighter_idx;
-        gmMainLib_GetGameRules()->x12 = x46;
+        rules = gmMainLib_GetGameRules();
+        rules->x12 = x46;
         x47 = data2->selected_name_idx;
         gmMainLib_GetGameRules()->x13 = x47;
         gmMainLib_GetGameRules()->xD = (x48 = data2->is_name_mode);
