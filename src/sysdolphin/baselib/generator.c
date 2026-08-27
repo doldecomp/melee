@@ -1133,8 +1133,7 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
             gen->count = HSD_Randf();
         }
 
-        tg = ((HSD_PSTexGroup***) ((uintptr_t) cmdListArr - bank * 4 -
-                                   0x30C))[bank][gen->texGroup];
+        tg = psTexGroupArray[bank][gen->texGroup];
         if (tg != NULL && tg->palflag != 0) {
             gen->kind |= 0x10;
         }
