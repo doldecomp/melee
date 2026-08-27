@@ -551,13 +551,12 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
             return 0;
         }
         {
-            struct lbl_8046B6A0_24C_58_t* p = x58;
+            u8* rank = rankings;
             int i;
-            for (i = 0; i < 4; i++) {
-                if (p->x0 != 3 && i != arg1 && rankings[i] == 0) {
+            for (i = 0; i < 4; i++, rank++) {
+                if (x58[i].x0 != 3 && i != arg1 && *rank == 0) {
                     return 0;
                 }
-                p++;
             }
         }
         if (rankings[arg1] == 0) {
@@ -570,13 +569,12 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
             return 0;
         }
         {
-            struct lbl_8046B6A0_24C_58_t* p = x58;
+            u8* rank = rankings;
             int i;
-            for (i = 0; i < 4; i++) {
-                if (p->x0 != 3 && i != arg1 && rankings[i] == rankings[6]) {
+            for (i = 0; i < 4; i++, rank++) {
+                if (x58[i].x0 != 3 && i != arg1 && *rank == rankings[6]) {
                     return 0;
                 }
-                p++;
             }
         }
         if (rankings[arg1] == rankings[6]) {
