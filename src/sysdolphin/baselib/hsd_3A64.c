@@ -143,7 +143,6 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
     s32 lut_idx;
     s32 in_idx;
     s32 out_idx;
-    u8* char_ptr;
     s32 has_kerning[1];
     u8 cur_char;
     u8 sjis_hi;
@@ -153,8 +152,7 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
     str_cursor = string;
     out_idx = 0;
     for (in_idx = 0; in_idx < 0x80; in_idx++, str_cursor++) {
-        char_ptr = &string[in_idx];
-        cur_char = *char_ptr;
+        cur_char = string[in_idx];
         if (cur_char == '\0') {
             if (has_kerning[0] != 0) {
                 data[out_idx++] = 0xB;
@@ -188,7 +186,7 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
         } else if ((cur_char >= '0') && (cur_char <= '9')) {
             sisBeginLine(data, &out_idx, has_kerning);
             sjis_hi = 0x82;
-            sjis_lo = (*char_ptr) + 0x1F;
+            sjis_lo = string[in_idx] + 0x1F;
         } else if (cur_char == ':') {
             sisBeginLine(data, &out_idx, has_kerning);
             sjis_hi = 0x81;
@@ -196,16 +194,14 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
         } else if ((cur_char >= 'A') && (cur_char <= 'Z')) {
             sisEndKerning(data, &out_idx, has_kerning);
             sjis_hi = 0x82;
-            sjis_lo = (*char_ptr) + 0x1F;
+            sjis_lo = string[in_idx] + 0x1F;
         } else if ((cur_char >= 'a') && (cur_char <= 'z')) {
             sisEndKerning(data, &out_idx, has_kerning);
             sjis_hi = 0x82;
-            sjis_lo = (*char_ptr) + 0x20;
+            sjis_lo = string[in_idx] + 0x20;
         } else {
-            data[out_idx++] = 0xB;
-            has_kerning[0] = 0;
-            sjis_hi = string[in_idx];
-            in_idx += 1;
+            sisEndKerning(data, &out_idx, has_kerning);
+            sjis_hi = string[in_idx++];
             sjis_lo = str_cursor[1];
             str_cursor += 1;
         }
