@@ -221,14 +221,15 @@ void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
             if (0 <= pair_idx) {
                 struct lbl_8046B6A0_24C_44C_t* tmp =
                     (struct lbl_8046B6A0_24C_44C_t*) lbl_8046DBE8.x94->x44C;
-                loop_n = pair_idx + 1;
-                loop_ptr = tmp[(u8) slot].x0;
-                for (loop_i = 0; loop_i < 256; loop_ptr++, loop_i++) {
-                    if (*loop_ptr != 0 && --loop_n == 0) {
+                s32 i;
+                s32 n = pair_idx + 1;
+                u8* ptr = tmp[(u8) slot].x0;
+                for (i = 0; i < 256; ptr++, i++) {
+                    if (*ptr != 0 && --n == 0) {
                         break;
                     }
                 }
-                stat_value = tmp[(u8) slot].x104[loop_i];
+                stat_value = tmp[(u8) slot].x104[i];
                 if (stat_value < 0) {
                     value_id = HSD_SisLib_803A6B98(text3, const_zero,
                                                    const_neg30, "%s%d",
