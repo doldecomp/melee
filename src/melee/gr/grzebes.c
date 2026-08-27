@@ -1544,6 +1544,11 @@ void grZebes_801DAE70(s32 arg0, u8 arg1, f32 x, f32 y, f32 scale)
     }
 }
 
+static inline s16 grZebes_801DB088_GetTimer(s32 arg1)
+{
+    return grZe_8049F170[arg1].x02_timer;
+}
+
 s32 grZebes_801DB088(Ground* gp, s32 arg1)
 {
     s32 result = 0;
@@ -1593,7 +1598,7 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
 
                     switch (grZe_8049F170[arg1].x00_active) {
                     case 3: {
-                        s16 t = grZe_8049F170[arg1].x02_timer;
+                        s16 t = grZebes_801DB088_GetTimer(arg1);
                         grZe_8049F170[arg1].x02_timer = (s16) (t - 1);
                         if (t < 0) {
                             if (bgp->u.zebes3.xC4 != NULL) {
