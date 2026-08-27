@@ -791,7 +791,7 @@ void fn_8018B090(HSD_GObj* arg0)
                             (int*) &lbl_80473AB8[idx].slots[lbl_804D6634].x40,
                             2);
                 HSD_JObjSetTranslateY(
-                    lbl_80473AB8[idx].slots[lbl_804D6634].x2C->hsd_obj,
+                    fn_8018B090_inline1(idx),
                     -(f32) lbl_80473AB8[idx].slots[lbl_804D6634].x48);
                 if (lbl_80473AB8[idx].slots[lbl_804D6634].x48 ==
                     lbl_80473AB8[idx].slots[lbl_804D6634].x40)
@@ -1767,11 +1767,6 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
 
 char* const lbl_804DA6C4 = lbl_803D9EE8;
 
-static inline char* gmTournament_LoadNameTemplate(char* const* template)
-{
-    return *template;
-}
-
 #ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
@@ -1874,10 +1869,10 @@ void fn_8018F00C(char* dest, s32 slot_id)
     char* tmpl_800;
     char* tmpl_900;
 
-    templates_800[0] = gmTournament_LoadNameTemplate(&lbl_804DA6C4);
-    templates_900[0] = gmTournament_LoadNameTemplate(&lbl_804DA6CC);
-    templates_800[1] = gmTournament_LoadNameTemplate(&lbl_804DA6C8);
-    templates_900[1] = gmTournament_LoadNameTemplate(&lbl_804DA6D0);
+    templates_800[0] = lbl_804DA6C4;
+    templates_900[0] = lbl_804DA6CC;
+    templates_800[1] = lbl_804DA6C8;
+    templates_900[1] = lbl_804DA6D0;
 
     tmpl_800 = templates_800[!!lbLang_IsSavedLanguageUS()];
     tmpl_900 = templates_900[!!lbLang_IsSavedLanguageUS()];
