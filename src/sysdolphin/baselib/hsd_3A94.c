@@ -3,7 +3,7 @@
 #include "hsd_3B2B.h"
 #include "hsd_3B2E.h"
 
-#if defined(MUST_MATCH) && defined(__MWERKS__)
+#ifdef MUST_MATCH
 #include <stddef.h>
 #endif
 #include <string.h>
@@ -45,7 +45,7 @@ typedef struct CardCmd {
     /* 0x20 */ s32 x20;
 } CardCmd;
 
-#if defined(MUST_MATCH) && defined(__MWERKS__)
+#ifdef MUST_MATCH
 typedef union CardCmdStorage {
     CardCmd command;
     s32 words[9];
@@ -2594,7 +2594,7 @@ static inline s32 queueCardCommand2First(CardState* state, s32 block,
 static inline s32 queueCardCommand2Final(CardState* state, s32 block,
                                          void* data, s32 length, s32 offset)
 {
-#if defined(MUST_MATCH) && defined(__MWERKS__)
+#ifdef MUST_MATCH
     CardCmdStorage storage;
 
     /// @todo MWCC colors @c storage at 0x60(r1), but the original command is
@@ -2691,7 +2691,7 @@ static inline void cancelQueuedCardCommands(CardBufEntry* entries)
 static inline s32 queueClearDataBlock(CardState* state, const u8* dst,
                                       s32 size)
 {
-#if defined(MUST_MATCH) && defined(__MWERKS__)
+#ifdef MUST_MATCH
     CardCmdStorage storage;
 
     /// @todo MWCC colors @c storage at 0xC4(r1), but the original command is
