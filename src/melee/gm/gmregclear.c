@@ -2611,6 +2611,11 @@ fn_80180630_CreateLightAndCamera(struct lbl_80472D28_t* state,
     *cam_gobj = fn_80180630_CreateCameraGObj();
 }
 
+static inline int fn_80180630_GetX118(struct lbl_80472D28_t* state)
+{
+    return state->x118;
+}
+
 void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
                  lbl_8046B6A0_24C_t* arg4)
 {
@@ -2760,7 +2765,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     lb_800138CC(state->x2C, fn_8017FE54);
 
     if (gm_GetRules()->x1_1 && coins != 0) {
-        if (state->x118 == 0) {
+        if (fn_80180630_GetX118(state) == 0) {
             un_802FF128(0x5A, 0x1AE, (s32) coins, 5);
         } else {
             un_802FF128(0x86, 0xC8, (s32) coins, 5);
