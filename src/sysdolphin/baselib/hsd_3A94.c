@@ -3073,6 +3073,11 @@ static inline s32 fn_803AE7F8_queue_write(CardState* state, s32 block,
     return result;
 }
 
+static inline s32 fn_803AE7F8_logical_index(s32 file_idx, s32 blocks_before)
+{
+    return file_idx - blocks_before;
+}
+
 static inline void fn_803AE7F8_calc_file_blocks(s32 file_size, s32 file_idx,
                                                 CardState* state,
                                                 s32* file_blocks,
@@ -3161,7 +3166,7 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
             continue;
         }
 
-        logical = file_idx - blocks_before;
+        logical = fn_803AE7F8_logical_index(file_idx, blocks_before);
         if (logical >= 0 && logical < file_blocks) {
             if (current_seq == -1 ||
                 fn_803ACB74(current_seq, state->x270[i]) < 0)
