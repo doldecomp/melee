@@ -1499,8 +1499,9 @@ void HSD_SisLib_803A7684(HSD_Text* text, const u8* cursor, u8 flags)
             HSD_SisLib_Free(old_buf);
         }
         text->string_buffer[text->x6C++] = (u8) ((u32) cursor >> 0x18U);
-        text->string_buffer[text->x6C++] = (u8) ((u32) cursor >> 0x10U);
-        text->string_buffer[text->x6C++] = (u8) ((u32) cursor >> 8U);
+        text->string_buffer[text->x6C++] =
+            (u8) (((u32) cursor >> 0x10U) & 0xFFU);
+        text->string_buffer[text->x6C++] = (u8) (((u32) cursor >> 8U) & 0xFFU);
         text->string_buffer[text->x6C++] = (u8) (u32) cursor;
         text->string_buffer[text->x6C++] = flags;
     }
