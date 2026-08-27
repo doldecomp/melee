@@ -842,8 +842,6 @@ HSD_GObj* mn_80233218(MenuState state)
     mn_804A04F0.confirmed_selection =
         user_data->rule_values.values[user_data->hovered_selection];
 
-    frame_ptr = mn_803ED1D0.text_start_frames;
-
     if ((u8) state != 0) {
         HSD_JObj* anim_jobj = user_data->xC[2];
         switch ((s32) user_data->state) {
@@ -1014,6 +1012,7 @@ HSD_GObj* mn_80233218(MenuState state)
                 HSD_JObjAddChild(option_jobj, value_jobj);
             }
         }
+        frame_ptr += 2;
     }
 
     {
