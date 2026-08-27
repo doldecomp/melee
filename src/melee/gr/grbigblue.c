@@ -496,8 +496,66 @@ void grBigBlue_801E6364(Ground_GObj* gobj)
     HSD_JObj* child;
     Ground* gp = GET_GROUND(gobj);
     s32 i;
+    Vec3 scale;
 
     Ground_801C2ED0(jobj, gp->map_id);
+    PAD_STACK(4);
+
+    scale.x = scale.y = scale.z = 1.0F;
+    HSD_JObjSetScale(jobj, &scale);
+
+    gp->u.bigblue.xC8 = HSD_MemAlloc(120);
+    HSD_ASSERT(774, gp->u.carnull.coll_jobj);
+
+    gp->u.bigblue.xCC = HSD_MemAlloc(30);
+    HSD_ASSERT(776, gp->u.carnull.rank);
+
+    for (i = 0; i < 30; i++) {
+        gp->u.carnull.coll_jobj[i] = Ground_801C3FA4(gobj, grBb_803E2DC0[i]);
+    }
+
+    car_gobj = grBigBlue_801E59F8(4);
+    HSD_ASSERT(783, car_gobj);
+    grFZeroCar_801CAFBC(car_gobj, grBb_803E2D84, 30, 1);
+
+    cur = car_gobj->hsd_obj;
+    i = 0;
+    if (cur == NULL) {
+        cur = NULL;
+    } else {
+        cur = cur->child;
+    }
+
+    for (; i < 30; i++) {
+        child = HSD_JObjGetChild(cur);
+        next = HSD_JObjGetNext(cur);
+
+        HSD_JObjReparent(cur, gp->u.carnull.coll_jobj[i]);
+        HSD_JObjSetRotationY(cur, M_PI_2_F);
+
+        scale.x = scale.y = scale.z = Ground_801C0498() * yakumono_param->xC;
+
+        HSD_JObjSetScale(gp->u.carnull.coll_jobj[i], &scale);
+
+        HSD_JObjGetScale(child, &scale);
+        {
+            f32 ratio = 1.0f / Ground_801C0498();
+            scale.x *= ratio;
+            scale.y *= ratio;
+            scale.z *= ratio;
+        }
+
+        HSD_JObjSetScale(child, &scale);
+
+        if (i == 9) {
+            HSD_JObjSetTranslateX(child, 10.0f);
+        }
+
+        cur = next;
+    }
+
+    Ground_801C4A08(car_gobj);
+    grBigBlue_801EC6C0(gobj);
 
     {
         Vec3 scale;
@@ -1429,7 +1487,7 @@ f32 grBigBlue_801E8B84(f32 right, f32 left, f32 bottom, f32 top)
     Ground* gp = Ground_GetMapGObj(33)->user_data;
     u8 state;
     s32 i = 0;
-    f32 result = -F32_MAX;
+    f32 result = -3.4028235e38f;
     PAD_STACK(8);
 
     if ((unsigned) gp->u.bigblue.car.lanes[i].state != 1U) {
@@ -1917,7 +1975,7 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
 
     HSD_JObjGetTranslation2(jobj, &pos);
 
-    if (grBigBlue_801EC58C(&pos, &normal, 500.0f) == 3.4028235e28f) {
+    if (grBigBlue_801EC58C(&pos, &normal, 500.0f) == -3.4028235e38f) {
         normal.z = 0.0f;
         normal.x = 0.0f;
         normal.y = 1.0f;
@@ -1972,7 +2030,7 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
             pos.y = right_y + gp->u.bigblue.platform.height_offset;
             half_bot.y = left_y + gp->u.bigblue.platform.height_offset;
 
-            if (3.4028235e28f != right_y || 3.4028235e28f != left_y) {
+            if (-3.4028235e38f != right_y || -3.4028235e38f != left_y) {
                 s32 collision;
                 f32 platform_h;
                 f32 bounds_y;
@@ -2031,7 +2089,7 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
                 }
 
                 if (collision == 0) {
-                    if (3.4028235e28f == pos.y) {
+                    if (-3.4028235e38f == pos.y) {
                         OSReport("*** Not Set Position!(Tyukei)\n");
                         HSD_ASSERT(1994, 0);
                     }
@@ -2076,7 +2134,7 @@ void grBigBlue_801EA05C(Ground_GObj* gobj)
 
         if (ace_result == 0 || (ace_result == 1 && pos.y < y_check)) {
             if (bounds_y <= surface_y) {
-                if (3.4028235e28f == surface_y) {
+                if (-3.4028235e38f == surface_y) {
                     gp->u.bigblue.platform.target_y = half_top.y;
                 } else {
                     gp->u.bigblue.platform.target_y =
@@ -4154,7 +4212,7 @@ static inline void grBigBlue_801EE398_inline(s32 arg2, s32 arg1,
         pos->y = 0.0f;
         pos->y = grBigBlue_801EC58C(pos, NULL, 1000.0f);
 
-        if (3.4028235e28f != pos->y) {
+        if (-3.4028235e38f != pos.y) {
             s32 count;
             s32 j;
 
@@ -4293,7 +4351,7 @@ static inline void grBigBlue_801EE398_inline(s32 arg2, s32 arg1,
         pos->y = 0.0f;
         pos->y = grBigBlue_801EC58C(pos, NULL, 1000.0f);
 
-        if (3.4028235e28f != pos->y) {
+        if (-3.4028235e38f != pos.y) {
             s32 count;
             s32 j;
 

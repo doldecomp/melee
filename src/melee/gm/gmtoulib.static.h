@@ -1,3 +1,4 @@
+#include <baselib/wobj.h>
 #include <melee/gm/types.h>
 
 typedef struct BracketSrcEntry {
@@ -63,13 +64,18 @@ struct lbl_803D9DD0_t {
     /* +00 */ HSD_CObj* cobj;
     /* +04 */ char pad_B4[0xD0 - 0xB4];
     /* +20 */ float xD0;
-    /* +24 */ float xD4;
-    /* +28 */ Vec3 eye_position;
-    /* +34 */ char pad_E4[0xEC - 0xE4];
-    /* +3C */ Vec3 interest;
-    /* +48 */ u8 pad_48[0x4];
-} lbl_803D9DD0 = {
-    0, { 0 }, 0, 0, { 320, -240, 415.6922 }, { 0 }, { 320, -240, 0 },
+} lbl_803D9DD0 = { 0, { 0 }, 0 };
+
+/* 3D9DF4 */ static HSD_WObjDesc lbl_803D9DF4 = {
+    NULL,
+    { 320, -240, 415.6922 },
+    NULL,
+};
+
+/* 3D9E08 */ static HSD_WObjDesc lbl_803D9E08 = {
+    NULL,
+    { 320, -240, 0 },
+    NULL,
 };
 
 static s16 lbl_803D9E1C[][2] = {

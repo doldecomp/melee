@@ -28,8 +28,6 @@
 #include "sysdolphin/baselib/random.h"
 #include "sysdolphin/baselib/sislib.h"
 
-u8 mnNameNew_804D4F98[8] = { 0 };
-
 typedef char* GlyphRow[4];
 
 /// Glyph strings in the keyboard tables are read through
@@ -73,12 +71,12 @@ typedef struct MnNameNewDataLayout {
     char assert_cond[0xC];
 } MnNameNewDataLayout;
 
-void* mnNameNew_804A06F0[4];
-void* mnNameNew_804A0700[4];
-void* mnNameNew_804A0710[4];
-void* mnNameNew_804A0720[8];
-char mnNameNew_CurrentNameText[0x10];
-u8 mnNameNew_804D4F7C[8];
+extern void* mnNameNew_804A06F0[4];
+extern void* mnNameNew_804A0700[4];
+extern void* mnNameNew_804A0710[4];
+extern void* mnNameNew_804A0720[8];
+extern char mnNameNew_CurrentNameText[0x10];
+extern u8 mnNameNew_804D4F7C[8];
 HSD_GObj* mnNameNew_804D6C08;
 
 static AnimLoopSettings mnNameNew_803EDA58[3] = {
@@ -2059,6 +2057,13 @@ void mnNameNew_8023EA08(UNK_T arg0)
     mnNameNew_EnterFromMnCharSel((HSD_Archive*) arg0, 4);
 }
 
-/// @todo Must be part of a larger object
-DATA UNK_T mnNameNew_803EE720 = &mnNameNew_804D4F98;
-DATA UNK_T mnNameNew_803EE724 = &mnNameNew_804D4F98;
+char mnNameNew_CurrentNameText[0x10];
+void* mnNameNew_804A0720[8];
+void* mnNameNew_804A0710[4];
+void* mnNameNew_804A0700[4];
+void* mnNameNew_804A06F0[4];
+
+static u8 mnNameNew_804D4F98[8] = { 0 };
+
+char* mnNameNew_803EE720[] = { (char*) mnNameNew_804D4F98 };
+char* mnNameNew_803EE724[] = { (char*) mnNameNew_804D4F98 };
