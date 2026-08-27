@@ -1954,8 +1954,8 @@ void psDispParticles(u32 target_link, u32 sw)
     HSD_Particle* sp75C;
     HSD_Particle* sorted_particles;
     psdisp_Mtx billboard_mtx;
-    GXTlutObj sp71C;
     f32 sp700;
+    GXTlutObj gx_tlut_obj;
     s32 alpha_compare_mode;
     s32 prev_tex_interp_near;
     GXColor sp6D8;
@@ -2189,10 +2189,11 @@ void psDispParticles(u32 target_link, u32 sw)
                                         tlut_obj.tlut_name = GX_TLUT0;
                                         tlut_obj.n_entries =
                                             (fmt == GX_TF_C4) ? 0x10 : 0x100;
-                                        GXInitTlutObj(&sp71C, tlut,
+                                        GXInitTlutObj(&gx_tlut_obj, tlut,
                                                       tlut_obj.fmt,
                                                       tlut_obj.n_entries);
-                                        GXLoadTlut(&sp71C, tlut_obj.tlut_name);
+                                        GXLoadTlut(&gx_tlut_obj,
+                                                   tlut_obj.tlut_name);
                                         sp7B0 = NULL;
                                     }
                                 }
