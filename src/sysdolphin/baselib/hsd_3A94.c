@@ -3232,8 +3232,8 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                             if (chunk == 0) {
                                 cmd_result = 0;
                             } else {
-                                CardCmd cmd;
                                 s32 ofs = fn_803ACBE8(arg0, phys);
+                                CardCmd cmd;
 
                                 cmd.type = 5;
                                 cmd.state = arg0;
@@ -3274,8 +3274,8 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                             if (remaining == 0) {
                                 cmd_result = 0;
                             } else {
-                                CardCmd cmd;
                                 s32 ofs = fn_803ACBE8(arg0, phys);
+                                CardCmd cmd;
 
                                 cmd.type = 5;
                                 cmd.state = arg0;
@@ -3335,7 +3335,7 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     }
 
 after_verify:
-    current_seq = (u8) (current_seq + 1);
+    current_seq = (current_seq + 1) & 0xFF;
     {
         s32 pass;
         s32* map = block_map_ptr;
