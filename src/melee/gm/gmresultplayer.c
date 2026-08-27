@@ -1675,6 +1675,17 @@ static inline PackedS16x4* fn_8017AA78_get_score_entry(int i,
     return &state->score_tbl[i];
 }
 
+static inline int fn_8017AA78_init_state(int unused)
+{
+    ResultsDisplayLayout* disp = (ResultsDisplayLayout*) &lbl_8046E1B0;
+
+    Player_InitAllPlayers();
+    disp->shared_img.image_ptr = NULL;
+    lb_800121FC(&disp->shared_img, 0x64, 0x98, GX_TF_RGB5A3, 0);
+    disp->state.match_end = *fn_80174274();
+    return unused;
+}
+
 void fn_8017AA78(const u8* arg0)
 {
     ResultsDisplayLayout* disp = (ResultsDisplayLayout*) &lbl_8046E1B0;
@@ -1697,12 +1708,7 @@ void fn_8017AA78(const u8* arg0)
     efLib_Init();
     efAsync_LoadSync(0);
     ftDemo_ObjAllocInit();
-    Player_InitAllPlayers();
-
-    disp->shared_img.image_ptr = NULL;
-    lb_800121FC(&disp->shared_img, 0x64, 0x98, GX_TF_RGB5A3, 0);
-
-    disp->state.match_end = *fn_80174274();
+    fn_8017AA78_init_state(0);
 
     disp->state.x0_0 = 1;
     disp->state.x0_4 = 0;
