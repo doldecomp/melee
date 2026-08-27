@@ -708,7 +708,7 @@ static HSD_GObj* mnStageSw_80236CBC(s8 arg0)
     mnStageSw_804D6BF0 = gobj;
 
     jobj = HSD_JObjLoadJoint(mdl->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6, 0x80);
     HSD_GObj_SetupProc(gobj, fn_80236998, 0);
 

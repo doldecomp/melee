@@ -4296,7 +4296,7 @@ s32 mnCharSel_802640A0(void)
     {
         HSD_CObj* cobj;
         cobj = HSD_CObjLoadDesc(MenMain_cam = MODELS->cam);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     }
     GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 0);
     gobj->gxlink_prios = 0x1F;
@@ -4308,21 +4308,21 @@ s32 mnCharSel_802640A0(void)
         HSD_LObj* lobj0 = HSD_LObjLoadDesc(MODELS->light0);
         HSD_LObj* lobj1 = HSD_LObjLoadDesc(MODELS->light1);
         HSD_LObjSetNext(lobj0, lobj1);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj0);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_LightKind, lobj0);
     }
     GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0x80);
 
     gobj = GObj_Create(0xE, 2, 0);
     {
         HSD_Fog* fog = HSD_FogLoadDesc(MODELS->fog);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848, fog);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_FogKind, fog);
     }
     GObj_SetupGXLink(gobj, (GObj_RenderFunc) (Event) fn_8026407C, 0, 0x80);
 
     gobj = GObj_Create(4, 5, 0x80);
     jobj = HSD_JObjLoadJoint(ANIM[0].joint);
     HSD_JObjAddAnimAll(jobj, ANIM[0].anim, ANIM[0].matanim, ANIM[0].shapeanim);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 1, 0x80);
     HSD_GObj_SetupProc(gobj, fn_80263354, 4);
     HSD_JObjReqAnimAll(jobj, 0.0f);
@@ -4339,7 +4339,7 @@ s32 mnCharSel_802640A0(void)
                            ANIM[3].shapeanim);
     }
     {
-        u8 obj_kind = HSD_GObj_804D7849;
+        u8 obj_kind = HSD_GObj_JObjKind;
         HSD_GObjObject_80390A70(mnCharSel_804D6CBC, obj_kind,
                                 mnCharSel_804D6CC0);
     }
@@ -4421,7 +4421,7 @@ s32 mnCharSel_802640A0(void)
         if (mt >= 0xFU && mt <= 0x16U) {
             gobj = GObj_Create(4, 5, 0x80);
             mnCharSel_804D6CC8 = HSD_JObjLoadJoint(ANIM[7].joint);
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849,
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind,
                                     mnCharSel_804D6CC8);
             GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 1, 0x80);
             HSD_GObj_SetupProc(gobj, fn_8025FB2C, 4);
@@ -4437,7 +4437,7 @@ s32 mnCharSel_802640A0(void)
         u8 ck;
         gobj = GObj_Create(4, 5, 0x80);
         mnCharSel_804D6CC4 = HSD_JObjLoadJoint(ANIM[8].joint);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, mnCharSel_804D6CC4);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, mnCharSel_804D6CC4);
         GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 1, 0x80);
         HSD_GObj_SetupProc(gobj, fn_8025FB2C, 4);
         HSD_JObjAddAnimAll(mnCharSel_804D6CC4, ANIM[8].anim, ANIM[8].matanim,
@@ -4464,7 +4464,7 @@ s32 mnCharSel_802640A0(void)
     if (mnCharSel_804D6CB0->match_type == 1) {
         gobj = GObj_Create(4, 5, 0x80);
         mnCharSel_804D6CCC = HSD_JObjLoadJoint(ANIM[5].joint);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, mnCharSel_804D6CCC);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, mnCharSel_804D6CCC);
         GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
         HSD_GObj_SetupProc(gobj, fn_8025FAC0, 4);
         HSD_JObjAddAnimAll(mnCharSel_804D6CCC, ANIM[5].anim, ANIM[5].matanim,
@@ -4478,7 +4478,7 @@ s32 mnCharSel_802640A0(void)
         cursor_gobj = GObj_Create(4, 5, 0x80);
         jobj = HSD_JObjLoadJoint(ANIM[1].joint);
         cursor = HSD_MemAlloc(sizeof(*cursor));
-        HSD_GObjObject_80390A70(cursor_gobj, HSD_GObj_804D7849, jobj);
+        HSD_GObjObject_80390A70(cursor_gobj, HSD_GObj_JObjKind, jobj);
         GObj_SetupGXLink(cursor_gobj, HSD_GObj_JObjCallback, 3, 0x80);
         HSD_GObj_SetupProc(cursor_gobj, mnCharSel_CursorThink, 1);
         GObj_InitUserData(cursor_gobj, 4, HSD_Free, cursor);
@@ -4507,7 +4507,7 @@ s32 mnCharSel_802640A0(void)
             {
                 int player;
                 struct CSSCharModel* model = HSD_MemAlloc(sizeof(*model));
-                HSD_GObjObject_80390A70(model_gobj, HSD_GObj_804D7849, jobj);
+                HSD_GObjObject_80390A70(model_gobj, HSD_GObj_JObjKind, jobj);
                 GObj_InitUserData(model_gobj, 4, HSD_Free, model);
                 GObj_SetupGXLink(model_gobj, HSD_GObj_JObjCallback, 2, 0x80);
                 HSD_GObj_SetupProc(model_gobj, fn_80262648, 2);
@@ -5205,7 +5205,7 @@ s32 mnCharSel_802640A0(void)
     (void) icons[num_players];
     gobj = GObj_Create(4, 5, 0x80);
     jobj = HSD_JObjLoadJoint(ANIM[4].joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
     HSD_GObj_SetupProc(gobj, fn_80262F44, 3);
     HSD_JObjAddAnimAll(jobj, ANIM[4].anim, ANIM[4].matanim, ANIM[4].shapeanim);

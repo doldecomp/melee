@@ -46,7 +46,7 @@ void ftCo_8009F4A4(void)
     lobj0 = lobj;
     lobj1 = lb_8000CDC0(lobj);
     Ground_801C2374(lobj);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_LightKind, lobj);
     GObj_SetupGXLink(gobj, ftCo_8009F54C, 4U, 0U);
     HSD_LObjReqAnimAll(lobj, 0.0F);
     HSD_GObj_SetupProc(gobj, ftCo_8009F480, 1);

@@ -934,7 +934,7 @@ void mnVibration_IntroProc(HSD_GObj* arg0)
             cursor_gobj = GObj_Create(6U, 7U, 0x80U);
             data2->cursor_gobj = cursor_gobj;
             loaded_joint = HSD_JObjLoadJoint(assets->joint);
-            HSD_GObjObject_80390A70(cursor_gobj, HSD_GObj_804D7849,
+            HSD_GObjObject_80390A70(cursor_gobj, HSD_GObj_JObjKind,
                                     loaded_joint);
             GObj_SetupGXLink(cursor_gobj, HSD_GObj_JObjCallback, 4U, 0x80U);
             HSD_GObj_SetupProc(cursor_gobj, mnVibration_CursorThink, 0U);
@@ -983,7 +983,7 @@ void mnVibration_CreateScreen(s32 arg0)
     gobj = GObj_Create(6, 7, 0x80);
     mnVibration_804D6C28 = gobj;
     jobj = HSD_JObjLoadJoint(assets->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
     HSD_JObjAddAnimAll(jobj, assets->animjoint, assets->matanim,
                        assets->shapeanim);

@@ -241,7 +241,7 @@ HSD_GObj* fn_802F77F8(HSD_GObj* gobj, u8 slot, u16 arg2)
     if (gobj != NULL) {
         jobj = HSD_JObjLoadJoint(*(*(HSD_Joint***) base[0]));
         if (jobj != NULL) {
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
             GObj_SetupGXLink(gobj, fn_802F770C, 11, 0);
             j = jobj;
             gm_8016895C(j, *(DynamicModelDesc**) base[0], (u8) arg2);

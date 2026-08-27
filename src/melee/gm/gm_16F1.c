@@ -1711,7 +1711,7 @@ void gm_8017297C(void)
     for (i = 0; i < 0x42; i++) {
         if (gmMainLib_8015D94C(i) == 0) {
             u32* temp_r31 = gmMainLib_8015D804(i);
-            *temp_r31 = lbTime_8000AFBC();
+            *temp_r31 = lbTime_GetTimeInSeconds();
             gmMainLib_8015D8FC(i);
             gmMainLib_8015D8B0(i);
         }

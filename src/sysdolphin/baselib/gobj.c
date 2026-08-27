@@ -9,10 +9,10 @@
 #include "lobj.h"
 #include "object.h"
 
-u8 HSD_GObj_804D784B;
-s8 HSD_GObj_804D784A;
-u8 HSD_GObj_804D7849;
-s8 HSD_GObj_804D7848;
+u8 HSD_GObj_CameraKind;
+s8 HSD_GObj_LightKind;
+u8 HSD_GObj_JObjKind;
+s8 HSD_GObj_FogKind;
 HSD_GObjProc** HSD_GObj_804D7844;
 HSD_GObjProc** HSD_GObj_804D7840;
 s32 HSD_GObj_804D783C;
@@ -248,10 +248,10 @@ void HSD_GObj_803911C0(HSD_Obj* obj)
 void HSD_GObj_80391260(HSD_GObjLibInitDataType* arg0)
 {
     u8 count = HSD_GObj_803912A8(arg0, &HSD_GObj_80408610);
-    HSD_GObj_804D784B = count++;
-    HSD_GObj_804D784A = count++;
-    HSD_GObj_804D7849 = count++;
-    HSD_GObj_804D7848 = count;
+    HSD_GObj_CameraKind = count++;
+    HSD_GObj_LightKind = count++;
+    HSD_GObj_JObjKind = count++;
+    HSD_GObj_FogKind = count;
 }
 
 u8 HSD_GObj_803912A8(HSD_GObjLibInitDataType* arg0, GObjFuncs* arg1)

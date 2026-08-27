@@ -1964,7 +1964,7 @@ void mnDiagram_CreatePopup(s32 arg0, s32 arg1, s32 use_nametag)
     gobj = GObj_Create(6, 7, 0x80);
     data->popup_gobj = gobj;
     jobj = HSD_JObjLoadJoint(joint_data[0]);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6, 0x80);
     HSD_JObjAddAnimAll(jobj, joint_data[1], joint_data[2], joint_data[3]);
     HSD_JObjReqAnimAll(jobj, 0.0f);
@@ -2811,7 +2811,7 @@ void mnDiagram_CreateCursor(void)
     joint_data = mnDiagram_804A0814;
     gobj = GObj_Create(6, 7, 0x80);
     jobj = HSD_JObjLoadJoint(*joint_data);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
     HSD_GObj_SetupProc(gobj, mnDiagram_CursorProc, 0);
 }
@@ -2841,7 +2841,7 @@ void mnDiagram_CreateScreen(u8 arg0)
     gobj = GObj_Create(6, 7, 0x80);
     mnDiagram_804D6C10 = gobj;
     jobj = HSD_JObjLoadJoint(joint_data[0]);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6, 0x80);
     HSD_JObjAddAnimAll(jobj, joint_data[1], joint_data[2], joint_data[3]);
     HSD_JObjReqAnimAll(jobj, 0.0f);

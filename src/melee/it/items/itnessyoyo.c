@@ -100,7 +100,7 @@ HSD_GObj* it_802BE65C(Item* ip, HSD_JObj* bone_jobj)
             link->x2C_b0 = false;
             it_802A24D0(link, 1.0f);
 
-            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849,
+            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_JObjKind,
                                     it_802BE65C_LoadString(ip));
             GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);
         } else if (i == attrs->x0_CHARGE_SPAWN_POS - 1) {
@@ -119,7 +119,7 @@ HSD_GObj* it_802BE65C(Item* ip, HSD_JObj* bone_jobj)
                     ip->xC4_article_data->x4_specialAttributes;
                 HSD_Joint* joint = attrs->x54_yoyo_joint;
                 jobj = HSD_JObjLoadJoint(joint);
-                HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849, jobj);
+                HSD_GObjObject_80390A70(link_gobj, HSD_GObj_JObjKind, jobj);
                 GObj_SetupGXLink(link_gobj, HSD_GObj_JObjCallback, 6, 0);
                 ip->xDD4_itemVar.nessyoyo.x18 = jobj;
                 result = link_gobj->hsd_obj;
@@ -133,7 +133,7 @@ HSD_GObj* it_802BE65C(Item* ip, HSD_JObj* bone_jobj)
             link->pos = ip->pos;
             link->x2C_b0 = false;
             it_802A24D0(link, 1.0f);
-            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849,
+            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_JObjKind,
                                     it_802BE65C_LoadString(ip));
             GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);
         }

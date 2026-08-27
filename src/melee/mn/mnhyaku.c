@@ -175,7 +175,7 @@ void mnHyaku_8024CB94(u8 arg0)
     gobj = GObj_Create(HSD_GOBJ_CLASS_ITEM, 7U, 0x80);
     mnHyaku_804D6C58 = gobj;
     jobj = HSD_JObjLoadJoint(mnHyaku_804A08E8.joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
     HSD_JObjAddAnimAll(jobj, mnHyaku_804A08E8.animjoint,
                        mnHyaku_804A08E8.matanim_joint,

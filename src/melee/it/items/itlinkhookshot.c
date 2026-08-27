@@ -239,7 +239,7 @@ HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
             first_coll->x34_flags.b1234 = 5;
             mpColl_SetECBSource_Fixed(first_coll, NULL, arg8, arg8, arg8,
                                       arg8);
-            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849,
+            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_JObjKind,
                                     it_link_get_joint(arg0, link_idx));
             GObj_SetupGXLink(link_gobj, it_802A24A0, 6U, 0U);
         } else if (link_idx == (s32) (attr->x2C - 1)) {
@@ -254,7 +254,7 @@ HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
             mpColl_80041EE4(last_coll);
             last_coll->x34_flags.b1234 = 5;
             mpColl_SetECBSource_Fixed(last_coll, NULL, arg8, arg8, arg8, arg8);
-            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849,
+            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_JObjKind,
                                     it_link_get_joint_c(arg0));
             GObj_SetupGXLink(link_gobj, HSD_GObj_JObjCallback, 6U, 0U);
             last_jobj = link_gobj->hsd_obj;
@@ -268,7 +268,7 @@ HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
             mpColl_80041EE4(link_coll);
             link_coll->x34_flags.b1234 = 5;
             mpColl_SetECBSource_Fixed(link_coll, NULL, arg8, arg8, arg8, arg8);
-            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849,
+            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_JObjKind,
                                     it_link_get_joint(arg0, link_idx));
             GObj_SetupGXLink(link_gobj, it_802A24A0, 6U, 0U);
         }

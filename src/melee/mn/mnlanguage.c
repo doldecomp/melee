@@ -168,7 +168,7 @@ void mnLanguage_8024C3C4(HSD_GObj* arg0_unused)
     gobj = GObj_Create(HSD_GOBJ_CLASS_ITEM, 7, 0x80);
     mnLanguage_804D6C50 = gobj;
     jobj = HSD_JObjLoadJoint(mnLanguage_804A08D8.x0);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
     HSD_JObjAddAnimAll(jobj, mnLanguage_804A08D8.x4, mnLanguage_804A08D8.x8,
                        mnLanguage_804A08D8.xC);

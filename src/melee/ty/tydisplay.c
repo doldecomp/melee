@@ -1612,7 +1612,7 @@ void _tyDisplay_8031B1FC(void)
     if (joint != NULL) {
         ptr->gobj4 = GObj_Create(9, 9, zero);
         jobj = HSD_JObjLoadJoint(joint);
-        HSD_GObjObject_80390A70(ptr->gobj4, temp = HSD_GObj_804D7849, jobj);
+        HSD_GObjObject_80390A70(ptr->gobj4, temp = HSD_GObj_JObjKind, jobj);
         GObj_SetupGXLink(ptr->gobj4, HSD_GObj_JObjCallback, 0x3C, zero);
         lb_8001204C(jobj, &ptr->jobj, _tyDisplay_804D5ABC, 1);
         return;
@@ -1681,7 +1681,7 @@ void _tyDisplay_8031B328(void)
     {
         scene->x00 = GObj_Create(2, 3, 0);
         lobj = Toy_LoadLObjList(lightData, 0);
-        HSD_GObjObject_80390A70(scene->x00, (u32) HSD_GObj_804D784A, lobj);
+        HSD_GObjObject_80390A70(scene->x00, (u32) HSD_GObj_LightKind, lobj);
         temp = scene->x00;
         GObj_SetupGXLink(temp, HSD_GObj_LObjCallback, 0x34, 0);
     }
@@ -1695,7 +1695,7 @@ void _tyDisplay_8031B328(void)
                                                "ScMenDisplay_fog")) != NULL)
     {
         scene->x08 = GObj_Create(3, 4, 0);
-        HSD_GObjObject_80390A70(scene->x08, temp2 = HSD_GObj_804D7848,
+        HSD_GObjObject_80390A70(scene->x08, temp2 = HSD_GObj_FogKind,
                                 HSD_FogLoadDesc(fogDesc));
         GObj_SetupGXLink(scene->x08, Toy_80306930, 0x35, 0);
     }
@@ -1819,7 +1819,7 @@ void tyDisplay_OnEnter_8031B460(void* arg0)
             _tyDisplay_804D6F1C->archive, "ScMenDisplay_cam_int1_camera"));
 
         cfg2->x00 = GObj_Create(1, 2, 0);
-        HSD_GObjObject_80390A70(cfg2->x00, HSD_GObj_804D784B, cobj);
+        HSD_GObjObject_80390A70(cfg2->x00, HSD_GObj_CameraKind, cobj);
         GObj_SetupGXLinkMax(cfg2->x00, (GObj_RenderFunc) (Event) Toy_803068E0,
                             0);
 
@@ -2141,7 +2141,7 @@ HSD_GObj* _tyDisplay_8031BC54(s32 arg0)
     entry = tyDisplay_8031B9DC(id);
     gobj = GObj_Create(6, 7, 0);
     root = HSD_JObjAlloc();
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, root);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0x3C, 0);
     cat = (c = entry->x04);
     jobj_names = _tyDisplay_803B8988;

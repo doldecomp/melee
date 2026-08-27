@@ -330,7 +330,7 @@ void gm_801A4510(void)
         }
     }
     if (VIGetDTVStatus() != 0 &&
-        (db_gameLaunchButtonState & 0x200 || OSGetProgressiveMode() == 1))
+        (db_gameLaunchButtonState & HSD_PAD_B || OSGetProgressiveMode() == 1))
     {
         gm_80479D30.routing.curr_mode = GM_PROGRESSIVE_SCAN;
     } else {

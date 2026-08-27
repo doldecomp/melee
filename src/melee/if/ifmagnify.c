@@ -467,7 +467,7 @@ void ifMagnify_802FC3C0(s32 slot)
 
     jobj = HSD_JObjLoadJoint(
         (*(DynamicModelDesc**) ifMagnify_804A1DE0.model_desc)->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, ifMagnify_802FB8C0, 0xB, 0);
 
     lb_80011E24(jobj, &child, 2, -1);
@@ -524,7 +524,7 @@ void ifMagnify_802FC618(void)
 
     gobj = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
     cobj = lb_80013B14((HSD_CameraDescPerspective*) &ifMagnify_803F97E8);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, (GObj_RenderFunc) (Event) ifMagnify_802FBBDC, 0);
     gobj->gxlink_prios = 0x10;
 

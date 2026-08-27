@@ -94,7 +94,7 @@ void un_8031E9B8(void)
 
     gobj = GObj_Create(0xE, 0xF, 0);
     jobj = HSD_JObjLoadJoint((*un_804D6FB0->models)->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
     gm_8016895C(jobj, *un_804D6FB0->models, 0);
     HSD_JObjReqAnimAll(jobj, 0.0f);
@@ -159,7 +159,7 @@ void un_8031EBBC_OnEnter(void* unused)
     gobj = GObj_Create(0x13, 0x14, 0);
     cobj =
         lb_80013B14((HSD_CameraDescPerspective*) un_804D6FB0->cameras->desc);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, vi0601_CameraCallback, 2);
     HSD_CObjAddAnim(cobj, un_804D6FB0->cameras->anims[0]);
     HSD_CObjReqAnim(cobj, 0.0f);
@@ -181,7 +181,7 @@ void un_8031EBBC_OnEnter(void* unused)
 
     gobj2 = GObj_Create(0xB, 3, 0);
     lobj = lb_80011AC4(un_804D6FB0->lights);
-    HSD_GObjObject_80390A70(gobj2, HSD_GObj_804D784A, lobj);
+    HSD_GObjObject_80390A70(gobj2, HSD_GObj_LightKind, lobj);
     GObj_SetupGXLink(gobj2, HSD_GObj_LObjCallback, 0, 0);
 
     Player_InitAllPlayers();

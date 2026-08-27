@@ -460,7 +460,7 @@ void* _tyList_80313508(HSD_GObj* parent, char* symbol_name, float x, float y,
         } else {
             HSD_GObj* gobj;
             gobj = GObj_Create(6, 7, 0);
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
             GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0x39, 0);
             return gobj;
         }
@@ -923,7 +923,7 @@ void _tyList_8031457C(void)
     if (desc != NULL) {
         entry->x0 = GObj_Create(1, 2, 0);
         cobj = lb_80013B14(desc);
-        kind = HSD_GObj_804D784B;
+        kind = HSD_GObj_CameraKind;
         HSD_GObjObject_80390A70(entry->x0, kind, cobj);
         GObj_SetupGXLinkMax(entry->x0, Toy_80306954, 0);
         entry->x0->gxlink_prios = 0x9010000000000000ULL;
@@ -936,7 +936,7 @@ void _tyList_8031457C(void)
     if (desc != NULL) {
         entry->x4 = GObj_Create(1, 2, 0);
         cobj = lb_80013B14(desc);
-        kind = HSD_GObj_804D784B;
+        kind = HSD_GObj_CameraKind;
         HSD_GObjObject_80390A70(entry->x4, kind, cobj);
         GObj_SetupGXLinkMax(entry->x4, _tyList_80314504, 0);
         entry->x4->gxlink_prios = 0x0210000000000000ULL;
@@ -996,7 +996,7 @@ void tyList_803147C4(void)
         HSD_ArchiveGetPublicAddress(archive->data, "ScMenFigure_scene_lights");
     if (jobj != NULL) {
         *gobj = GObj_Create(2, 3, 0);
-        HSD_GObjObject_80390A70(*gobj, new_var = HSD_GObj_804D784A,
+        HSD_GObjObject_80390A70(*gobj, new_var = HSD_GObj_LightKind,
                                 Toy_LoadLObjList(jobj, 0));
         GObj_SetupGXLink(*gobj, HSD_GObj_LObjCallback, 52, 0);
     }

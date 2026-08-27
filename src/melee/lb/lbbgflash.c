@@ -462,7 +462,7 @@ void lbBgFlash_800208EC(int arg0)
     lbl_80433658.x44 = GObj_Create(0x14, 0x16, 0);
 
     temp2 = (temp1 = HSD_CObjLoadDesc((HSD_CObjDesc*) &lbl_803BB028));
-    temp3 = HSD_GObj_804D784B;
+    temp3 = HSD_GObj_CameraKind;
     gobj1_slot = &flash->x44;
     HSD_GObjObject_80390A70(*gobj1_slot, temp3 & 0xFFFFFFFF, temp2);
 
@@ -495,12 +495,12 @@ void lbBgFlash_800209F4(void)
     lbl_80433658.x44 = GObj_Create(0x14, 0x16, 0);
     gobj1_slot = &flash->x44;
     HSD_GObjObject_80390A70(*gobj1_slot,
-                            HSD_GObj_804D784B & 0xFFFFFFFFFFFFFFFF,
+                            HSD_GObj_CameraKind & 0xFFFFFFFFFFFFFFFF,
                             HSD_CObjLoadDesc((HSD_CObjDesc*) &lbl_803BB028));
     GObj_SetupGXLinkMax(*gobj1_slot, HSD_GObj_803910D8, 0xa);
     (*gobj1_slot)->gxlink_prios = 0x10000;
 
-    if ((!HSD_GObj_804D784B) && (!HSD_GObj_804D784B)) {
+    if ((!HSD_GObj_CameraKind) && (!HSD_GObj_CameraKind)) {
     }
     // This is flash->x40
     lbl_80433658.x40 = GObj_Create(0x15, 0x16, 2);
