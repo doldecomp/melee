@@ -2837,7 +2837,7 @@ void grBigBlue_801EBAF8(Ground_GObj* gobj)
                                       120.0F * Ground_801C0498());
     }
 
-    if (3.4028235e28f != target_y &&
+    if (-3.4028235e38f != target_y &&
         (!((grBb_ByteBits*) (gp + 0xC4))->b1 || target_y > center.y))
     {
         f32 max_steer = yakumono_param->x70;
@@ -2872,7 +2872,7 @@ void grBigBlue_801EBAF8(Ground_GObj* gobj)
             ((grBb_ByteBits*) (gp + 0xC4))->b1 = 1;
         }
 
-        if (3.4028235e28f != target_y) {
+        if (-3.4028235e38f != target_y) {
             *(f32*) (gp + 0xEC) =
                 -(3.0F * (yakumono_param->x78 * Ground_801C0498()) -
                   *(f32*) (gp + 0xEC));
