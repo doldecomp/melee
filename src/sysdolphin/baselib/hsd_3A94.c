@@ -3822,7 +3822,7 @@ after_verify:
         current_seq = (u8) next;
     }
     for (i = 0; i < file_blocks && remaining > 0; i++) {
-        if ((u32) remaining > (u32) fn_803AF3F0_chunk_size(state)) {
+        if ((u32) fn_803AF3F0_chunk_size(state) < (u32) remaining) {
             if (arg3 != 0) {
                 s32 block = block_map[1][i];
                 s32 cmd_result = fn_803AF3F0_queue_write(
