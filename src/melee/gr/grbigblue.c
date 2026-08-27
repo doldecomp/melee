@@ -657,10 +657,9 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
 
     do {
         s8 idx = gp->u.bigblue.data[i].index;
-        u8 state = gp->u.bigblue.data[i].x1;
         HSD_JObj* jobj = gp->u.bigblue.xD4[idx];
 
-        switch ((s8) state) {
+        switch ((s8) gp->u.bigblue.data[i].x1) {
         case 0: {
             if ((int) grBigBlue_801E89DC(0) != 0) {
                 s32 range = yakumono_param->x8C;
