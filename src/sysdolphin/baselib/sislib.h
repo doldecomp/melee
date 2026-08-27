@@ -105,6 +105,9 @@ struct sislib_UnkAlloc3 {
 };
 
 extern SIS* HSD_SisLib_804D1124[5];
+extern u8 lbl_8040C8C0[0x240];
+extern u8 HSD_SisLib_8040C680[0x240];
+extern u8 HSD_SisLib_8040CB00[0x240];
 
 extern SisBlock* free_head;
 extern SisBlock* used_head;
