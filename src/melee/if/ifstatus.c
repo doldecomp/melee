@@ -719,9 +719,9 @@ HSD_GObj* ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
     HSD_TObj* tobj;
     Vec3* vec;
     HSD_MObj* mobj;
-    GXColor color;
-    u8 slot;
     u8 team;
+    u8 slot;
+    GXColor color;
     u8 hud_color;
     HudIndex* hud = ifStatus_GetHUDInfo();
     u8 idx = player_idx;
