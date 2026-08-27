@@ -3,7 +3,7 @@
 
 #include "mndiagram.h" // IWYU pragma: export
 
-extern char mnDiagram_804D4FA4;
+extern char mnDiagram_804D4FA4[1];
 extern char mnDiagram_804D4FA8[7];
 extern char mnDiagram_804D4FB0[5];
 extern void* mnDiagram_804A0814[4];

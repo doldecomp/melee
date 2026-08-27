@@ -28,6 +28,17 @@
 #include "mn/mnmain.h"
 #include "mn/mnname.h"
 
+/// @todo Split-derived data; types are inferred.
+void* mnDiagram_804A0814[4];
+void* mnDiagram_804A07E4[4];
+void* mnDiagram_804A07F4[4];
+void* mnDiagram_804A0804[4];
+void* mnDiagram_804A0824[4];
+HSD_GObj* mnDiagram_804D6C10;
+mnDiagram_ArchiveData mnDiagram_804A0834;
+mnDiagram_ArchiveData mnDiagram_804A0844;
+mnDiagram_ArchiveData mnDiagram_804A0854;
+
 #define GET_DIAGRAM(gobj) ((Diagram*) HSD_GObjGetUserData(gobj))
 
 /// Sorted fighter indices array (25 fighters + padding)
@@ -124,6 +135,7 @@ typedef struct mnDiagram_AnimTable {
 #define GET_DIAGRAM_ANIM_TABLE() ((mnDiagram_AnimTable*) &mnDiagram_803EE728)
 
 static s32 mnDiagram_PopupTextColor = 0xFF;
+char mnDiagram_804D4FA4[1] = "";
 
 /// @brief Gets the fighter ID at the given sorted index.
 /// @param idx Index into the sorted fighter list
@@ -428,7 +440,7 @@ void mnDiagram_FormatDecimalNumber(char* buf, u32 val, int decimal_places)
                 mn_GetDigitAt(decimal_part, (decimal_places - 1) - i) + '0';
         }
     }
-    buf[digit_count] = mnDiagram_804D4FA4;
+    buf[digit_count] = *mnDiagram_804D4FA4;
 }
 
 /// @brief Formats seconds as MM:SS string.
@@ -450,7 +462,7 @@ void mnDiagram_FormatTime(char* buf, s32 seconds)
     buf[digit_count++] = ':';
     buf[digit_count++] = (secs / 10) + '0';
     buf[digit_count++] = (secs % 10) + '0';
-    buf[digit_count] = mnDiagram_804D4FA4;
+    buf[digit_count] = *mnDiagram_804D4FA4;
 }
 
 /// @brief Converts a number to a null-terminated string.
@@ -465,7 +477,7 @@ void mnDiagram_IntToStr(char* buf, u32 val)
     for (i = 0; i < digit_count; i++) {
         buf[i] = mn_GetDigitAt(val, (digit_count - 1) - i) + '0';
     }
-    buf[digit_count] = mnDiagram_804D4FA4;
+    buf[digit_count] = *mnDiagram_804D4FA4;
 }
 
 /// @brief Gets the previous valid name index.
@@ -1767,7 +1779,7 @@ static inline void mnDiagram_FormatPopupNumber(char* buf, u32 val)
     for (i = 0; i < digit_count; i++) {
         buf[digit_count - 1 - i] = mn_GetDigitAt(val, i) + '0';
     }
-    buf[digit_count] = mnDiagram_804D4FA4;
+    buf[digit_count] = *mnDiagram_804D4FA4;
 }
 
 void mnDiagram_CreatePopupTexts(void* arg0, s32 selkind_or_nametag_slot_id,

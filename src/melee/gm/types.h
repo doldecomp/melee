@@ -1265,8 +1265,8 @@ ASSERT_SIZE(struct TmAnimFrames, 0x6);
 
 /// Table of anim frame triplets (raw s32 words in ROM), see fn_8019C048.
 typedef union TmAnimFrameTable {
-    s32 words[9];
     TmAnimFrames states[6];
+    s32 words[9];
 } TmAnimFrameTable;
 ASSERT_SIZE(union TmAnimFrameTable, 0x24);
 

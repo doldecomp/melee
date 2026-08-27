@@ -469,8 +469,7 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
     }
 }
 
-void hsd_80392194(u8* dst, s32 flags, void* unused1, void* unused2,
-                  const u8* src)
+void hsd_80392194(u8* dst, s32 flags, s32 unused1, s32 unused2, const u8* src)
 {
     u8 b;
     dst[0] = src[0];
@@ -482,12 +481,24 @@ void hsd_80392194(u8* dst, s32 flags, void* unused1, void* unused2,
     dst[1] = b;
 }
 
+typedef void (*GlyphFn)(u8* dst, s32 flags, s32 unused1, s32 unused2,
+                        const u8* src);
+
 typedef struct {
     /* 0x00 */ s32 x0;
-    /* 0x04 */ void (*callback)(void* dst, s32 x, s32 y, s32 val, void* self);
+    /* 0x04 */ GlyphFn callback;
 } GlyphEntry;
 
-extern GlyphEntry lbl_80408898[4];
+GlyphEntry lbl_80408898[4] = {
+    { 0x10808000, hsd_80392194 },
+    { 0x46808000, hsd_80392194 },
+    { 0x7C808000, hsd_80392194 },
+    { 0xB3808000, hsd_80392194 },
+};
+
+DebugFontGlyph HSD_DebugFontAtlas[] ATTRIBUTE_ALIGN(32) = {
+#include <sysdolphin/baselib/debug_font.inc>
+};
 
 void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
                   s32 stride, void* tbl)
@@ -537,7 +548,7 @@ void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
             while (bit_off < 16 && (u32) col < max_x) {
                 val = (word >> ((15 - bit_off) * 2)) & 3;
                 entry = &table[val];
-                entry->callback((void*) shift, col, y, val, entry);
+                entry->callback((u8*) shift, col, y, val, (const u8*) entry);
                 bit_off++;
                 bit_x++;
                 shift += 2;
@@ -604,7 +615,7 @@ void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
             while (bit_off < 16 && (u32) col < max_x) {
                 val = (word >> ((15 - bit_off) * 2)) & 3;
                 entry = &((GlyphEntry*) tbl)[val];
-                entry->callback((void*) shift, col, y, val, entry);
+                entry->callback((u8*) shift, col, y, val, (const u8*) entry);
                 bit_off++;
                 bit_x++;
                 shift += 2;

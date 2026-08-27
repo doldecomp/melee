@@ -35,8 +35,8 @@ extern StaticModelDesc MenMainCursorTr03_Top;
 extern StaticModelDesc MenMainCursorTr04_Top;
 extern StaticModelDesc MenMainNmRl_Top;
 extern MenuKindData mn_803EB6B0[];
-extern HSD_GObj* mn_804D6BE0;
-extern f32 mn_804D6BE4;
+HSD_GObj* mn_804D6BE0;
+f32 mn_804D6BE4;
 
 typedef struct _MenuRulesPlusData {
     MenuKind8 menu_kind;
@@ -60,7 +60,8 @@ typedef struct _MenuRulesPlusData {
 
 typedef struct mn_803ED1D0_t {
     u16 x0[7];
-    u16 xE[6];
+    u16 pad_E;
+    u16 x10[6];
     float text_start_frames[12];
     AnimLoopSettings x4C;
     AnimLoopSettings x58;
@@ -72,6 +73,7 @@ ASSERT_SIZE(mn_803ED1D0_t, 0xA0);
 
 mn_803ED1D0_t mn_803ED1D0 = {
     { 3, 4, 5, 6, 7, 8, 9 },
+    0,
     { 7, 2, 2, 2, 2, 0 },
     { 20.0f, 21.0f, 22.0f, 23.0f, 24.0f, 25.0f, 26.0f, 27.0f, 28.0f, 29.0f,
       30.0f, 31.0f },
@@ -122,7 +124,7 @@ typedef union {
 f32 mnRulePlus_TimeLimitOffFrame = 1.0f;
 volatile const f64 mn_804DBE38 = 4503599627370496.0;
 const JObjIndices mn_804DBE40 = { 0x02030506 };
-volatile f32 mn_804DBE44 = 0.0f;
+volatile const f32 mn_804DBE44[1] = { 0.0f };
 const JObjIndices mn_804DBE48 = { 0x02030506 };
 const f32 mn_804DBE4C = -9.5f;
 const f32 mn_804DBE50 = 8.0f;
@@ -130,7 +132,7 @@ const f32 mn_804DBE54 = 17.0f;
 const f32 mn_804DBE58 = 364.68332f;
 const f32 mn_804DBE5C = 76.77544f;
 const f32 mn_804DBE60 = 0.0521f;
-volatile const f64 mn_804DBE68 = 4503599627370496.0;
+volatile const f64 mn_804DBE68 = 4503601774854144.0;
 
 static inline void SisLib_ClearText(HSD_Text** text)
 {
@@ -853,7 +855,7 @@ HSD_GObj* mn_80233218(MenuState state)
     }
 
     frame_ptr = mn_803ED1D0.text_start_frames;
-    sub_count_ptr = &mn_803ED1D0.xE[1];
+    sub_count_ptr = &mn_803ED1D0.x10[1];
     for (i = 0; i < (s32) num_options; i++) {
         vis_before = 0;
         for (j = vis_before; j < i; j++) {

@@ -109,8 +109,8 @@ typedef struct {
 extern ClassicProcArray lbl_803B7C40;
 extern ClassicProcArray lbl_803B7C28;
 
-extern DynamicModelDesc** lbl_804D662C;
-extern HSD_Archive* lbl_804D6628;
+DynamicModelDesc** lbl_804D662C;
+HSD_Archive* lbl_804D6628;
 extern u8 lbl_803D9828[];
 extern f32 lbl_803B7C68[];
 
@@ -1956,6 +1956,7 @@ bool gm_8018841C(void)
 }
 
 static TrainingModeState lbl_80473700;
+UnkAllstarData gm_80473A18;
 
 int gm_80188454(int idx)
 {

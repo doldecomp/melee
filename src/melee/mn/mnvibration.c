@@ -526,7 +526,7 @@ void mnVibration_UpdatePortPanel(HSD_JObj* arg0, u8 arg1, u8 arg2)
         mn_8022F3D8(sp14, 0xFF, MOBJ_MASK);
         HSD_JObjAnimAll(sp14);
     } else {
-        HSD_JObjReqAnimAll(sp14, mnVibration_804DC020);
+        HSD_JObjReqAnimAll(sp14, 20.0f);
         HSD_JObjAnimAll(sp14);
         HSD_JObjReqAnimAll(sp14, floats->cursor_anim.end_frame);
         mn_8022F3D8(sp14, 0xFF, MOBJ_MASK);
@@ -536,7 +536,7 @@ void mnVibration_UpdatePortPanel(HSD_JObj* arg0, u8 arg1, u8 arg2)
     if (arg2 != 0) {
         HSD_JObjReqAnimAll(sp14, (f32) (arg1 + 1));
     } else {
-        HSD_JObjReqAnimAll(sp14, mnVibration_804DC020);
+        HSD_JObjReqAnimAll(sp14, 20.0f);
     }
     HSD_JObjAnimAll(sp14);
     if (arg2 != 0) {
@@ -547,7 +547,7 @@ void mnVibration_UpdatePortPanel(HSD_JObj* arg0, u8 arg1, u8 arg2)
         return;
     }
     lb_80011E24(arg0, &sp14, 2, -1);
-    HSD_JObjReqAnimAll(sp14, mnVibration_804DC020);
+    HSD_JObjReqAnimAll(sp14, 20.0f);
     HSD_JObjAnimAll(sp14);
 }
 
@@ -750,7 +750,7 @@ void mnVibration_Think(HSD_GObj* gobj)
         if (GetRumbleSettingOfPort(port) != 0) {
             mn_8022EC18(sp44, &mnVibration_803EECF8, MOBJ_MASK);
         } else {
-            HSD_JObjReqAnimAll(sp44, mnVibration_804DC030);
+            HSD_JObjReqAnimAll(sp44, 0.0f);
             mn_8022F3D8(sp44, 0xFF, MOBJ_MASK);
             HSD_JObjAnimAll(sp44);
         }
@@ -987,7 +987,7 @@ void mnVibration_CreateScreen(s32 arg0)
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
     HSD_JObjAddAnimAll(jobj, assets->animjoint, assets->matanim,
                        assets->shapeanim);
-    HSD_JObjReqAnimAll(jobj, mnVibration_804DC030);
+    HSD_JObjReqAnimAll(jobj, 0.0f);
     data = HSD_MemAlloc(sizeof(MnVibrationData));
     if (data == NULL) {
         OSReport(layout->user_data_error);
@@ -1076,3 +1076,12 @@ void mnVibration_Init(int arg0)
         gobj, (void (*)(HSD_GObj*)) mnVibration_HandleInput, 0);
     proc->flags_3 = HSD_GObj_804D783C;
 }
+
+/// @name Intro-reveal frames
+/// @{
+const f32 mnVibration_804DC050 = 10.0f; ///< port panel 1
+const f32 mnVibration_804DC054 = 11.0f; ///< port panel 2
+const f32 mnVibration_804DC058 = 12.0f; ///< port panel 3
+const f32 mnVibration_804DC05C = 13.0f; ///< port panel 4
+const f32 mnVibration_804DC060 = 14.0f; ///< name list
+/// @}

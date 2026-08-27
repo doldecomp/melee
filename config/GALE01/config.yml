@@ -30,3 +30,7 @@ extract:
   header: sysdolphin/baselib/sislib_font.inc
   binary: sysdolphin/baselib/sislib_font.bin
   header_type: raw
+- symbol: HSD_DebugFontAtlas
+  header: sysdolphin/baselib/debug_font.inc
+  binary: sysdolphin/baselib/debug_font.bin
+  header_type: raw

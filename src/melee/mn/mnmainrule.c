@@ -161,10 +161,10 @@ u8 mn_StockCountLimits[2] = { 1, 0x63 };
 /// SIS text id for the rule value label when Mode is Stock Match.
 u8 mn_StockCountTextId = 0x2B;
 
-extern f32 mn_804D6BD8;
+f32 mn_804D6BD8;
 extern u8* mn_804DBDFC;
 extern f32 mn_804DBE00;
-extern HSD_GObj* mn_804D6BD0;
+HSD_GObj* mn_804D6BD0;
 extern u16 mn_804DBE04;
 extern s32 mn_804DBE08;
 extern u8 mn_804DBE0C;
@@ -172,7 +172,7 @@ extern u16 mn_804DBDF8;
 extern u32 mn_804DBE10;
 extern u16 mn_804DBE14;
 
-extern s32 mn_804D6BD4;
+s32 mn_804D6BD4;
 
 void mnItemSw_802358C0(void);
 void mn_802339FC(void);

@@ -137,7 +137,7 @@ jobs:
           ;;
           'test')
             config_args=$(printf '%s ' \
-              '--testing' \
+              '--linkable' \
               "$config_args")
 
             run_configure
