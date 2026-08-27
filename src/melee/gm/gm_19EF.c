@@ -576,7 +576,10 @@ void fn_8019F9C4(u32 arg0)
     }
     lb_8000C290(jobj, node);
 
-    gobj = GObj_Create(0xE, 0xF, 0);
+    {
+        HSD_GObj* character_gobj = GObj_Create(0xE, 0xF, 0);
+        gobj = character_gobj;
+    }
     jobj = HSD_JObjLoadJoint(lbl_804D66AC);
     lbl_804D66B8 = jobj;
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
