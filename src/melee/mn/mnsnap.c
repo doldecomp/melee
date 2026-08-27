@@ -1555,11 +1555,11 @@ void fn_802545C4(void)
                 mnSnap_804A0A10.move_idx = mnSnap_804A0A10.cursor_idx;
                 if ((mnSnap_804A0A10.move_idx / 4) == mnSnap_804A0A10.cur_page)
                 {
-                    jobj = mnSnap_804A0A10.move_jobj;
-                    translate = &mnSnap_804A0A10
-                                     .thumb_jobjs[mnSnap_804A0A10.move_idx % 4]
-                                     ->translate;
-                    HSD_JObjSetTranslateWithMtxDirty(jobj, translate);
+                    HSD_JObjSetTranslateWithMtxDirty(
+                        mnSnap_804A0A10.move_jobj,
+                        &mnSnap_804A0A10
+                             .thumb_jobjs[mnSnap_804A0A10.move_idx % 4]
+                             ->translate);
                     HSD_JObjClearFlagsAll(mnSnap_804A0A10.move_jobj,
                                           JOBJ_HIDDEN);
                 } else {
