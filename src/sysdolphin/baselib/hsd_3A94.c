@@ -4397,14 +4397,31 @@ static inline s32 fn_803B0E9C_read_icons(struct CardState* arg0, s32* cmd,
 static inline s32 fn_803B0E9C_write_block(struct CardState* arg0,
                                           s32 block_idx)
 {
+    u32 write_size = arg0->x8;
+    s32 offset = write_size * block_idx;
+    u8* buf = arg0->x0;
     s32 retries;
     s32 result;
-    u32 write_size = arg0->x8;
-    u8* buf = arg0->x0;
-    s32 offset = write_size * block_idx;
 
     for (retries = 0; retries < 10; retries++) {
         result = CARDWrite(&arg0->file_info, buf, write_size, offset);
+        if (result != -1) {
+            break;
+        }
+    }
+    return result;
+}
+
+static inline s32 fn_803B0E9C_read_first(struct CardState* arg0,
+                                         u32 sector_size)
+{
+    u32 read_size = sector_size;
+    u8* buf = arg0->x0;
+    s32 retries;
+    s32 result;
+
+    for (retries = 0; retries < 10; retries++) {
+        result = CARDRead(&arg0->file_info, buf, read_size, 0);
         if (result != -1) {
             break;
         }
@@ -4423,7 +4440,7 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 cmd_write_icon[9];
     UNUSED u8 pad_cmd_write_icon[16];
     s32 cmd_read_icon[9];
-    UNUSED u8 pad_cmd_read_icon[12];
+    UNUSED u8 pad_cmd_read_icon[8];
     s32 remaining;
     s32 payload_pos;
     s32 block_idx;
@@ -4435,8 +4452,7 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
     if (arg3 == 0) {
         if (arg4 != 0) {
-            result =
-                fn_803B0E9C_read_icons(arg0, cmd_read_icon, arg1, arg2);
+            result = fn_803B0E9C_read_icons(arg0, cmd_read_icon, arg1, arg2);
             if (result < 0) {
                 return result;
             }
@@ -4522,16 +4538,7 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         if (arg3 != 0) {
             memset(arg0->x0, 0, sector_size);
         } else {
-            s32 retries;
-            u8* buf = arg0->x0;
-            u32 read_size = sector_size;
-            for (retries = 0; retries < 10; retries++) {
-                result = CARDRead(&arg0->file_info, buf, read_size, 0);
-                if (result != -1) {
-                    break;
-                }
-            }
-
+            result = fn_803B0E9C_read_first(arg0, sector_size);
             if (result < 0) {
                 return result;
             }
@@ -4584,8 +4591,8 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                 if (arg3 != 0) {
                     memset(arg0->x0, 0, arg0->x8);
                 } else {
-                    s32 retries2;
                     u32 read_size = arg0->x8;
+                    s32 retries2;
                     u8* buf = arg0->x0;
 
                     for (retries2 = 0; retries2 < 10; retries2++) {
