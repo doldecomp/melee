@@ -1689,11 +1689,6 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
     return result;
 }
 
-static inline f32 grZebes_801DB3CC_dist2(f32 dy, f32 dx)
-{
-    return dx * dx + dy * dy;
-}
-
 static inline f32 grZebes_801DB3CC_normalize(f32 dist, f32 value)
 {
     return value / dist;

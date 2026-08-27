@@ -213,7 +213,7 @@ void ifStock_802F8298(HSD_GObj* gobj)
             if (stock->x204[user_data->player].x0[i + 5] <= 10) {
                 {
                     unsigned char* data = stock->x204[user_data->player].x0;
-                    unsigned long anim_offset =
+                    u32 anim_offset =
                         0xC + (i - 5) * sizeof(struct IfStockStealAnim);
                     lbVector_8000DE38(
                         (float (*)[4]) &

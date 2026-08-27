@@ -27,30 +27,6 @@
 #include <baselib/random.h>
 #include <baselib/tobj.h>
 
-static void ifStatus_EnsureSdata2Order(void)
-{
-    (void) 1.0f;
-    (void) 0.0f;
-    (void) 2.0f;
-    (void) U32_TO_F32;
-    (void) S32_TO_F32;
-    (void) 300.0f;
-    (void) 100.0f;
-    (void) 0.506900012f;
-    (void) 0.608299971f;
-    (void) 0.304100007f;
-    (void) 1.21650004f;
-    (void) 0.81099999f;
-    (void) 0.101400003f;
-    (void) 1.52069998f;
-    (void) -100.0f;
-    (void) 0.202800006f;
-    (void) 0.5f;
-    (void) 0.649999976f;
-    (void) 0.100000001f;
-    (void) 0.25f;
-}
-
 typedef struct FlagsX {
     u32 b80 : 1;
     u32 b40 : 1;

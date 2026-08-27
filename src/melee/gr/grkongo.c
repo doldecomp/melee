@@ -984,13 +984,6 @@ extern ? grKg_804D6984;
 static ? grKg_803B7FB0;                             /* unable to generate initializer: unknown type; const */
 #endif
 
-static void grKongo_801D7134_order_sdata2(void)
-{
-    (void) 0.78539816339744828;
-    (void) 6.0f;
-    (void) 37.799999999999997;
-}
-
 void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
 {
     s32 line_id;

@@ -1055,13 +1055,13 @@ static inline void hsd_80394F48_set_base_color(void** color)
     *color = &lbl_8040AB00;
 }
 
-static inline s32 hsd_80394F48_get_x4(s32* x4)
+static inline s32 hsd_80394F48_get_x4(const s32* x4)
 {
     return *x4;
 }
 
 // @TODO: Currently 96.77% match - register allocation differences remain
-static inline s32 hsd_80394F48_get_x40(s32* px40)
+static inline s32 hsd_80394F48_get_x40(const s32* px40)
 {
     return *px40;
 }

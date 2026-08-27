@@ -3325,7 +3325,7 @@ void fn_80181C80(s32 arg0)
     }
 }
 
-static inline s32 fn_80181E18_ComputeRemaining100(s32* x4, s32 count)
+static inline s32 fn_80181E18_ComputeRemaining100(const s32* x4, s32 count)
 {
     return 0x64 - (count + *x4);
 }
