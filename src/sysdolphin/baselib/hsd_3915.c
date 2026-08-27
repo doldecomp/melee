@@ -458,7 +458,7 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
         b = color->b;
         g = color->g;
         r = color->r;
-        x1 += step_x;
+        x1 = step_x + x1;
         y1 += step_y;
         i++;
         GXWGFifo.u8 = r;
