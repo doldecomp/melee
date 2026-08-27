@@ -2840,9 +2840,9 @@ void* fn_80397814(void* arg)
             disp_node = *(void**) keybuf;
             result = 0;
             while (disp_node != NULL && !sp->x0_b5) {
-                if (*(void* (**)(void*) )((u8*) disp_node + 0xC) != NULL) {
-                    result = (s32) (*(void* (**)(void*) )((u8*) disp_node +
-                                                          0xC))(disp_node);
+                if (*(void* (**) (void*) )((u8*) disp_node + 0xC) != NULL) {
+                    result = (s32) (*(void* (**) (void*) )((u8*) disp_node +
+                                                           0xC))(disp_node);
                     switch (result) {
                     case 0:
                         break;

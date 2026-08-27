@@ -646,32 +646,31 @@ HSD_SList* fn_80392480(Event event, int priority)
     HSD_SList* cur = hsd_804D7850;
 
     goto loop_5;
-block_1:
-    {
-        HSD_SList* ret = cur->data;
-        if (event != (Event) ret->next) {
-            if (((struct EventPriority*) ret)->priority <= priority) {
-                prev = cur;
-            }
-            cur = cur->next;
-        loop_5:
-            if (cur != NULL) {
-                goto block_1;
-            }
-            {
-                struct EventPriority* data =
-                    HSD_MemAlloc(sizeof(struct EventPriority));
-                data->event = event;
-                data->priority = priority;
-                if (prev != NULL) {
-                    return HSD_SListAllocAndAppend(prev, data);
-                }
-                ret = HSD_SListAllocAndPrepend(hsd_804D7850, data);
-            }
-            hsd_804D7850 = ret;
+block_1: {
+    HSD_SList* ret = cur->data;
+    if (event != (Event) ret->next) {
+        if (((struct EventPriority*) ret)->priority <= priority) {
+            prev = cur;
         }
-        return ret;
+        cur = cur->next;
+    loop_5:
+        if (cur != NULL) {
+            goto block_1;
+        }
+        {
+            struct EventPriority* data =
+                HSD_MemAlloc(sizeof(struct EventPriority));
+            data->event = event;
+            data->priority = priority;
+            if (prev != NULL) {
+                return HSD_SListAllocAndAppend(prev, data);
+            }
+            ret = HSD_SListAllocAndPrepend(hsd_804D7850, data);
+        }
+        hsd_804D7850 = ret;
     }
+    return ret;
+}
 }
 
 #ifdef MUST_MATCH
