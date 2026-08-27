@@ -538,6 +538,7 @@ void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
     HSD_JObj* tens_jobj;
     HSD_JObj* ones_jobj;
     int value;
+    u8 default_value;
 
     PAD_STACK(0x18);
 
@@ -580,16 +581,20 @@ void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
             if (arg2 != 0 && arg2 != 2 && arg2 != 4) {
                 settings = NULL;
             } else {
-                settings = &mn_803EC770[mn_803EC7DC[arg2][1] - arg3];
+                default_value = mn_803EC7DC[arg2][1];
+                settings = &mn_803EC770[default_value - arg3];
             }
             HSD_JObjReqAnimAll(arg1, settings->start_frame);
         } else {
             if (arg2 != 0 && arg2 != 2 && arg2 != 4) {
                 settings = NULL;
-            } else if (arg3 == 0) {
-                settings = &mn_803EC734[mn_803EC7DC[arg2][1]];
             } else {
-                settings = &mn_803EC734[arg3 - 1];
+                default_value = mn_803EC7DC[arg2][1];
+                if (arg3 == 0) {
+                    settings = &mn_803EC734[default_value];
+                } else {
+                    settings = &mn_803EC734[arg3 - 1];
+                }
             }
             HSD_JObjReqAnimAll(arg1, settings->start_frame);
         }
