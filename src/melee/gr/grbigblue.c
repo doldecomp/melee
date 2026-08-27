@@ -1539,7 +1539,7 @@ void grBigBlue_801E8D64(Ground_GObj* gobj)
     }
 
     y_pos = grBigBlue_801EC58C(&pos, NULL, 500.0f);
-    if (3.4028235e28f == y_pos) {
+    if (-3.4028235e38f == y_pos) {
         y_pos = 0.0f;
     }
 
