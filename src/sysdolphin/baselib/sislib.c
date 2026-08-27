@@ -72,6 +72,11 @@ static inline u8* HSD_SisLib_BytePtr(void* ptr)
     return ptr;
 }
 
+static inline f32 HSD_SisLib_GlyphWidth(HSD_Text* text, f32 scale_x)
+{
+    return 32.0F * text->x80.x * scale_x;
+}
+
 void* HSD_SisLib_Alloc(s32 size)
 {
     SisBlock* best;
@@ -1750,7 +1755,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
         if (pass != 2U) {
             return;
         }
-        text = gobj->user_data;
+        text = HSD_GObjGetUserData(gobj);
     } else {
         text = (HSD_Text*) pass;
     }
@@ -1771,11 +1776,20 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
             }
             HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(), (MtxPtr)&m);
         } else {
+            Mtx projection_m;
+
             GXSetZMode(0U, 0U, 0U);
             GXSetViewport(0.0F, 0.0F, 640.0F, 480.0F, 0.0F, 1.0F);
             GXSetScissor(0, 0, 0x280, 0x1E0);
-            MTXOrtho((MtxPtr)&m, 0.0F, -480.0F, 0.0F, 640.0F, 0.0F, 2.0F);
-            GXSetProjection((MtxPtr)&m, 0);
+#ifdef MUST_MATCH
+            MTXOrtho((MtxPtr) ((u8*) &projection_m[0][0] - 0x14), 0.0F,
+                     -480.0F, 0.0F, 640.0F, 0.0F, 2.0F);
+            GXSetProjection((MtxPtr) ((u8*) &projection_m[2][3] - 0x40), 0);
+#else
+            MTXOrtho((MtxPtr)&projection_m, 0.0F, -480.0F, 0.0F, 640.0F,
+                     0.0F, 2.0F);
+            GXSetProjection((MtxPtr)&projection_m, 0);
+#endif
             m[0][0] = 1.0F;
             m[0][1] = 0.0F;
             m[0][2] = 0.0F;
@@ -1820,12 +1834,12 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
         GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_FALSE, GX_TEVPREV);
         // first quad is the background
         if (text->bg_color.a != 0) {
-            f32 origin_x = text->pos_x;
-            f32 origin_y = text->pos_y;
-            min_x = origin_x;
-            min_y = origin_y;
-            max_x = (text->box_size_x  * text->font_size.x) + origin_x;
-            max_y = (text->box_size_y * text->font_size.y) + origin_y;
+            min_x = text->pos_x;
+            min_y = text->pos_y;
+            max_x =
+                (text->box_size_x * text->font_size.x) + text->pos_x;
+            max_y =
+                (text->box_size_y * text->font_size.y) + text->pos_y;
             GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO, GX_CA_A0);
             GXSetTevColor(GX_TEVREG0, *(&text->bg_color));
             GXBegin(GX_QUADS, GX_VTXFMT0, 4U);
@@ -1865,7 +1879,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
 
             u32 line_started;
 
-            do {
+        restart:
             text->current_height = 0.0F;
             line_started = 0U;
             saved_font_size_x = text->x80.x;
@@ -1882,10 +1896,13 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
             char_delay = text->x92;
             skip_count = text->x98;
             saved_x6C = text->x6C;
-            // this is the compare for the loop
-            while ((line_started < 2U) && ((sis_cursor != text->x60) || ( text->x4B == 0))) {
+            for (;;) {
+                if ((sis_cursor == text->x60) && (text->x4B != 0)) {
+                    break;
+                }
                 if ((sis_cursor == text->x60) && text->x94) {
                     text->x94--;
+                    break;
                 } else {
                     u32 pop_result;
                     s32 clear_idx;
@@ -1899,8 +1916,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                 sis_cursor = (u8*) (pop_result + 4);
                                 break;
                             }
-                            line_started = 2U;
-                            break;
+                            goto render_done;
                         case 1:
                             text->x60 = NULL;
                             clear_idx = 0;
@@ -1917,7 +1933,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                             text->x94 = 0U;
                             text->x4B = 0U;
                             while (clear_idx < (s32) text->x6E) {
-                                *((u8 *)text->string_buffer + clear_idx) = 0;
+                                text->string_buffer[clear_idx] = 0;
                                 clear_idx += 1;
                             }
                             text->x6C = 0;
@@ -1926,8 +1942,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                             text->x98 = 0;
                             sis_cursor += 1;
                             text->sis_buffer = (SIS *)sis_cursor;
-                            line_started = 3U;
-                            break;
+                            goto restart;
                         case 3:
                             if (line_started == 0U) {
                                 line_height_out = 32.0F * text->x80.y;
@@ -1999,8 +2014,8 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                         case 10:
                             if (((u32) text->alloc_data == 0U) || (saved_kerning == 0)) {
                                 HSD_SisLib_803A7684(text, sis_cursor, 1U);
-                                text->x78.x = (f32) ((f32) *(s16*) (sis_cursor + 1) * 0.00390625F);
-                                text->x78.y = (f32) ((f32) *(s16*) (sis_cursor + 3) * 0.00390625F);
+                                text->x78.x = (f32) *(s16*) (sis_cursor + 1) / 256.0F;
+                                text->x78.y = (f32) *(s16*) (sis_cursor + 3) / 256.0F;
                             }
                             sis_cursor += 4;
                             break;
@@ -2021,8 +2036,8 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                             break;
                         case 14:
                             HSD_SisLib_803A7684(text, sis_cursor, 3U);
-                            text->x80.x = (f32) ((f32) *(u16*) (sis_cursor + 1) * 0.00390625F);
-                            text->x80.y = (f32) ((f32) *(u16*) (sis_cursor + 3) * 0.00390625F);
+                            text->x80.x = (f32) *(u16*) (sis_cursor + 1) / 256.0F;
+                            text->x80.y = (f32) *(u16*) (sis_cursor + 3) / 256.0F;
                             sis_cursor += 4;
                             break;
                         case 15:
@@ -2096,8 +2111,8 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                             if (opcode >= 0x20U) {
                                 u16 glyph_idx;
                                 s32 tex_offset;
-                                f32 scale_x;
                                 f32 glyph_x;
+                                f32 scale_x;
                                 if (line_started == 0U) {
                                     f32 measured_width;
 
@@ -2128,8 +2143,8 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                 } else {
                                     tex_offset = glyph_idx - 0x4000;
                                 }
+                                glyph_x = (text->current_width * text->font_size.x) + text->pos_x;
                                 scale_x = text->font_size.x;
-                                glyph_x = (text->current_width * scale_x) + text->pos_x;
                                 if ( text->kerning != 0) {
                                     if (glyph_idx < 0x4000U) {
                                         glyph_x = -((scale_x * (text->x80.x * (f32) (default_kerning[(tex_offset * 2) & 0x1FFFE] - 1))) - glyph_x);
@@ -2138,46 +2153,51 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                     }
                                 }
                                 {
-                                    f32 glyph_size = 32.0F * text->x80.y;
                                     f32 scale_y = text->font_size.y;
+                                    f32 glyph_size = 32.0F * text->x80.y;
                                     f32 uv_top = 0.0F;
-                                    f32 glyph_w = 32.0F * text->x80.x * scale_x;
+                                    f32 glyph_w = HSD_SisLib_GlyphWidth(text, scale_x);
+                                    f32 quad_right = (text->x88 * glyph_w) + glyph_x;
                                     f32 glyph_y = (scale_y * (line_height_out - glyph_size)) + (text->pos_y + text->current_height);
                                     f32 glyph_h = glyph_size * scale_y;
                                     f32 uv_bottom = 1.0F;
                                     f32 uv_left = 0.0F;
-                                    f32 quad_top = glyph_y;
-                                    f32 uv_right = 1.0F;
-                                    f32 quad_right = (text->x88 * glyph_w) + glyph_x;
-                                    f32 quad_bottom = glyph_y + glyph_h;
-                                    u8 draw_glyph = 1U;
+                                    f32 quad_top;
+                                    f32 uv_right;
+                                    f32 quad_bottom;
+
+                                    quad_top = glyph_y;
+                                    uv_right = 1.0F;
+                                    quad_bottom = glyph_y + glyph_h;
+#ifdef MUST_MATCH
+                                    (void) (glyph_y = glyph_y);
+#endif
                                     if ( text->x4E != 0) {
                                         if ((min_x > quad_right) || (max_x < glyph_x) || (min_y > quad_bottom) || (max_y < quad_top)) {
-                                            draw_glyph = 0U;
-                                        } else {
-                                            if (min_x > glyph_x) {
-                                                f32 clip_left = min_x - glyph_x;
-                                                uv_left = clip_left / glyph_w;
-                                                glyph_x += clip_left;
-                                            }
-                                            if (max_x < quad_right) {
-                                                f32 clip_right = quad_right - max_x;
-                                                uv_right = 1.0F - (clip_right / glyph_w);
-                                                quad_right -= clip_right;
-                                            }
-                                            if (min_y > quad_top) {
-                                                f32 clip_top = min_y - quad_top;
-                                                uv_top = clip_top / glyph_h;
-                                                quad_top += clip_top;
-                                            }
-                                            if (max_y < quad_bottom) {
-                                                f32 clip_bottom = quad_bottom - max_y;
-                                                uv_bottom = 1.0F - (clip_bottom / glyph_h);
-                                                quad_bottom -= clip_bottom;
-                                            }
+                                            goto glyph_draw_done;
+                                        }
+                                        if (min_x > glyph_x) {
+                                            f32 clip_left = min_x - glyph_x;
+                                            uv_left = clip_left / glyph_w;
+                                            glyph_x += clip_left;
+                                        }
+                                        if (max_x < quad_right) {
+                                            f32 clip_right = quad_right - max_x;
+                                            uv_right = 1.0F - (clip_right / glyph_w);
+                                            quad_right -= clip_right;
+                                        }
+                                        if (min_y > quad_top) {
+                                            f32 clip_top = min_y - quad_top;
+                                            uv_top = clip_top / glyph_h;
+                                            quad_top += clip_top;
+                                        }
+                                        if (max_y < quad_bottom) {
+                                            f32 clip_bottom = quad_bottom - max_y;
+                                            uv_bottom = 1.0F - (clip_bottom / glyph_h);
+                                            quad_bottom -= clip_bottom;
                                         }
                                     }
-                                    if (draw_glyph != 0U) {
+                                    {
                                         if (glyph_idx < 0x4000U) {
                                             GXInitTexObj(&tex_obj, data + ((tex_offset << 9) & 0x01FFFE00), 0x20U, 0x20U, GX_TF_I4, GX_CLAMP, GX_CLAMP, 0U);
                                         } else {
@@ -2201,14 +2221,17 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                         }
                                         GXEnd();
                                     }
+                                glyph_draw_done:
                                     text->current_width = (f32) ((text->x88 * (text->x80.x * (32.0F + text->x78.x))) + text->current_width);
                                     if ( text->kerning != 0) {
                                         if (glyph_idx < 0x4000U) {
                                             u8 *kern_pair = &default_kerning[(tex_offset * 2) & 0x1FFFE];
-                                            text->current_width = (-((text->x88 * (text->x80.x * (f32) (kern_pair[0] + (kern_pair[1] - 2)))) - text->current_width));
+                                            tex_offset = (clear_idx = kern_pair[1] - 2);
+                                            text->current_width = (-((text->x88 * (text->x80.x * (f32) (kern_pair[0] + tex_offset))) - text->current_width));
                                         } else {
                                             u8 *kern_pair = &textures->data[(tex_offset * 2) & 0x1FFFE];
-                                            text->current_width = (-((text->x88 * (text->x80.x * (f32) (kern_pair[0] + (kern_pair[1] - 2)))) - text->current_width));
+                                            tex_offset = (clear_idx = kern_pair[1] - 2);
+                                            text->current_width = (-((text->x88 * (text->x80.x * (f32) (kern_pair[0] + tex_offset))) - text->current_width));
                                         }
                                     }
                                     if (skip_count != 0U) {
@@ -2225,7 +2248,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                 }
                 sis_cursor++;
             }
-            } while (line_started == 3U);
+        render_done:
             HSD_StateInvalidate(-1);
             text->active_color.r = saved_color_r;
             text->active_color.g = saved_color_g;

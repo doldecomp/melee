@@ -92,7 +92,7 @@ struct gm_801BAB40_src;
 /* 1BF648 */ int gm_801BF648(s32);
 /* 1BF65C */ void gm_801BF65C(s32, s8);
 /* 1BF670 */ u8 gm_801BF670(s32);
-/* 1BF684 */ void gm_801BF684(u16);
+/* 1BF684 */ void gm_801BF684(s32);
 /* 1BF694 */ u8 gm_801BF694(void);
 /* 1BF6A8 */ void gm_801BF6A8(int);
 /* 1BF6B8 */ u8 gm_801BF6B8(void);
