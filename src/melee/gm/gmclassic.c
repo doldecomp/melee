@@ -671,7 +671,7 @@ void gmClassic_OnLoad(void)
     gmClassicSceneData* scene_data = (gmClassicSceneData*) gm_803DDC58_Scenes;
     gmClassic_80490880Data* o = &gmClassic_80490880;
     gm_803DDEC8Struct* entry;
-    PAD_STACK(40);
+    PAD_STACK(56);
 
     for (entry = scene_data->matchups.x00; entry->x0 != 0x0D; entry++) {
         entry->xC = NULL;
