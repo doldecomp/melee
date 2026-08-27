@@ -1427,7 +1427,7 @@ f32 grBigBlue_801E8B84(f32 right, f32 left, f32 bottom, f32 top)
     Ground* gp = Ground_GetMapGObj(33)->user_data;
     u8 state;
     s32 i = 0;
-    f32 result = 3.4028235e28f;
+    f32 result = -F32_MAX;
     PAD_STACK(8);
 
     if ((unsigned) gp->u.bigblue.car.lanes[i].state != 1U) {
