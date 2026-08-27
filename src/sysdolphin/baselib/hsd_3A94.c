@@ -3074,12 +3074,11 @@ static inline s32 fn_803AE7F8_queue_write(CardState* state, s32 block,
     return result;
 }
 
-static inline void fn_803AE7F8_calc_file_blocks(s32 file_size, s32 file_idx,
-                                                CardState* state,
+static inline void fn_803AE7F8_calc_file_blocks(s32 file_idx, CardState* state,
                                                 s32* file_blocks,
                                                 s32* total_blocks)
 {
-    if (file_size <= 0) {
+    if (state->x4C[file_idx] <= 0) {
         *file_blocks = 0;
     } else if (file_idx == 0) {
         u32 sector_size = state->x8;
@@ -3097,8 +3096,8 @@ static inline void fn_803AE7F8_calc_file_blocks(s32 file_size, s32 file_idx,
         }
     } else {
         u32 sector_size = state->x8;
-        *file_blocks =
-            (u32) (file_size + sector_size - 0x21) / (sector_size - 0x20);
+        *file_blocks = (u32) (state->x4C[file_idx] + sector_size - 0x21) /
+                       (sector_size - 0x20);
     }
 
     *total_blocks = fn_803AC7DC(state);
@@ -3122,7 +3121,7 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 total_blocks;
     s32 verify_failed;
     u8* data;
-    PAD_STACK(36);
+    PAD_STACK(56);
 
     repair_result = 0;
     verify_failed = 0;
@@ -3143,8 +3142,7 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     blocks_before = fn_803AC6B8_blocks_before(arg0, arg1);
 
     file_size = state->x4C[arg1];
-    fn_803AE7F8_calc_file_blocks(file_size, arg1, arg0, &file_blocks,
-                                 &total_blocks);
+    fn_803AE7F8_calc_file_blocks(arg1, arg0, &file_blocks, &total_blocks);
 
     for (i = 0; i < file_blocks; i++) {
         block_map[0][i] = -1;
@@ -4020,7 +4018,7 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 remaining;
     s32 result;
     u8* data;
-    PAD_STACK(52);
+    PAD_STACK(56);
 
     needs_rewrite = 0;
     if (arg3 == 0) {
