@@ -3042,8 +3042,8 @@ static inline s32 fn_803AE7F8_queue_write(CardState* state, s32 block,
                                           s32 size, s32 file_id)
 {
     s32 cmd[9];
-    s32 init_cmd[9];
     s32 ofs = fn_803ACBE8(state, block);
+    s32 init_cmd[9];
     s32 result;
 
     if (block == 0) {
@@ -3108,6 +3108,8 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     CardState* state = arg0;
     CardBufEntry* entries = (CardBufEntry*) hsd_804D1138;
     s32 block_map[3][64];
+    UNUSED u8 pad_block_map[32];
+    s32 cmd_done[9];
     s32* block_map_ptr;
     s32 blocks_before;
     s32 current_seq;
@@ -3121,7 +3123,7 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 total_blocks;
     s32 verify_failed;
     u8* data;
-    PAD_STACK(56);
+    PAD_STACK(24);
 
     repair_result = 0;
     verify_failed = 0;
@@ -3327,12 +3329,11 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         }
 
         if (arg3 != 0) {
-            s32 cmd[9];
             s32 cmd_result;
 
-            cmd[0] = 6;
-            cmd[1] = (s32) arg0;
-            cmd_result = fn_803AC168(cmd);
+            cmd_done[0] = 6;
+            cmd_done[1] = (s32) arg0;
+            cmd_result = fn_803AC168(cmd_done);
             if (cmd_result < 0) {
                 fn_803AE7F8_rewind(entries);
                 return cmd_result;
