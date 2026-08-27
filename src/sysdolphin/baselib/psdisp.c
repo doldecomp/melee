@@ -1939,7 +1939,7 @@ static inline void psUpdateProjectionCache(f32 perspective)
 #endif
 void psDispParticles(u32 target_link, u32 sw)
 {
-    s32 var_r16;
+    GXColor chan_mat_color;
     s32 needs_setup;
     s32 sp7B4;
     void* sp7B0;
@@ -1956,7 +1956,7 @@ void psDispParticles(u32 target_link, u32 sw)
     psdisp_Mtx billboard_mtx;
     GXTlutObj sp71C;
     f32 sp700;
-    GXColor sp6E0;
+    s32 alpha_compare_mode;
     s32 prev_tex_interp_near;
     GXColor sp6D8;
     GXColor sp6D4;
@@ -1966,7 +1966,7 @@ void psDispParticles(u32 target_link, u32 sw)
     /// @todo Recover this stack space from the original inline hierarchy.
     PAD_STACK(0x14);
 
-    var_r16 = 0;
+    alpha_compare_mode = 0;
     prev_tex_interp_near = 0;
     sp7A5 = 0;
     sp7A4 = 0xFF;
@@ -2025,8 +2025,8 @@ void psDispParticles(u32 target_link, u32 sw)
                         prevChanMat.r = prevChanMat.g = prevChanMat.b = 0xFF;
                         prevChanAmb.r = prevChanAmb.g = prevChanAmb.b = 0xFF;
                         prevChanMat.a = prevChanAmb.a = 0xFF;
-                        sp6E0 = prevChanMat;
-                        GXSetChanMatColor(GX_COLOR0A0, sp6E0);
+                        chan_mat_color = prevChanMat;
+                        GXSetChanMatColor(GX_COLOR0A0, chan_mat_color);
                         chan_amb_color = prevChanAmb;
                         GXSetChanAmbColor(GX_COLOR0A0, chan_amb_color);
                         psSetupTevInvalidState();
@@ -2079,15 +2079,15 @@ void psDispParticles(u32 target_link, u32 sw)
                         alpha0 = pp->aCmpParam1;
                         alpha1 = pp->aCmpParam2;
                     }
-                    if ((var_r16 != pp->aCmpMode) || (sp7A5 != alpha0) ||
-                        (sp7A4 != alpha1))
+                    if ((alpha_compare_mode != pp->aCmpMode) ||
+                        (sp7A5 != alpha0) || (sp7A4 != alpha1))
                     {
                         sp7A5 = alpha0;
-                        var_r16 = pp->aCmpMode;
+                        alpha_compare_mode = pp->aCmpMode;
                         sp7A4 = alpha1;
-                        GXSetAlphaCompare((var_r16 >> 3) & 7, sp7A5,
-                                          (var_r16 >> 6) & 3, var_r16 & 7,
-                                          sp7A4);
+                        GXSetAlphaCompare((alpha_compare_mode >> 3) & 7, sp7A5,
+                                          (alpha_compare_mode >> 6) & 3,
+                                          alpha_compare_mode & 7, sp7A4);
                     }
 
                     psSetupTev((u32*) pp);
