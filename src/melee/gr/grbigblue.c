@@ -558,82 +558,19 @@ void grBigBlue_801E6364(Ground_GObj* gobj)
     grBigBlue_801EC6C0(gobj);
 
     {
-        Vec3 scale;
-        PAD_STACK(4);
+        s32 min_val;
+        s32 max_val;
 
-        scale.x = scale.y = scale.z = 1.0F;
-        HSD_JObjSetScale(jobj, &scale);
-
-        gp->u.bigblue.xC8 = HSD_MemAlloc(120);
-        HSD_ASSERT(774, gp->u.carnull.coll_jobj);
-
-        gp->u.bigblue.xCC = HSD_MemAlloc(30);
-        HSD_ASSERT(776, gp->u.carnull.rank);
-
-        for (i = 0; i < 30; i++) {
-            gp->u.carnull.coll_jobj[i] =
-                Ground_801C3FA4(gobj, grBb_803E2DC0[i]);
-        }
-
-        car_gobj = grBigBlue_801E59F8(4);
-        HSD_ASSERT(783, car_gobj);
-        grFZeroCar_801CAFBC(car_gobj, grBb_803E2D84, 30, 1);
-
-        cur = car_gobj->hsd_obj;
-        i = 0;
-        if (cur == NULL) {
-            cur = NULL;
-        } else {
-            cur = cur->child;
-        }
-        for (; i < 30; i++) {
-            child = HSD_JObjGetChild(cur);
-            next = HSD_JObjGetNext(cur);
-
-            HSD_JObjReparent(cur, gp->u.carnull.coll_jobj[i]);
-            HSD_JObjSetRotationY(cur, M_PI_2_F);
-
-            scale.x = scale.y = scale.z =
-                Ground_801C0498() * yakumono_param->xC;
-
-            HSD_JObjSetScale(gp->u.carnull.coll_jobj[i], &scale);
-
-            HSD_JObjGetScale(child, &scale);
-            {
-                f32 ratio = 1.0F / Ground_801C0498();
-                scale.x *= ratio;
-                scale.y *= ratio;
-                scale.z *= ratio;
-            }
-
-            HSD_JObjSetScale(child, &scale);
-
-            if (i == 9) {
-                HSD_JObjSetTranslateX(child, 10.0F);
-            }
-
-            cur = next;
-        }
-
-        Ground_801C4A08(car_gobj);
-        grBigBlue_801EC6C0(gobj);
-
+        if ((max_val = yakumono_param->x10) > (min_val = yakumono_param->x14))
         {
-            s32 min_val;
-            s32 max_val;
-
-            if ((max_val = yakumono_param->x10) >
-                (min_val = yakumono_param->x14))
-            {
-                s32 range = max_val - min_val;
-                max_val = min_val + (range != 0 ? HSD_Randi(range) : 0);
-            } else if (max_val < min_val) {
-                s32 range = min_val - max_val;
-                max_val += (range != 0 ? HSD_Randi(range) : 0);
-            }
-
-            *(s16*) ((u8*) gp + 0xD0) = (s16) max_val;
+            s32 range = max_val - min_val;
+            max_val = min_val + (range != 0 ? HSD_Randi(range) : 0);
+        } else if (max_val < min_val) {
+            s32 range = min_val - max_val;
+            max_val += (range != 0 ? HSD_Randi(range) : 0);
         }
+
+        *(s16*) ((u8*) gp + 0xD0) = (s16) max_val;
     }
 }
 
@@ -4212,7 +4149,7 @@ static inline void grBigBlue_801EE398_inline(s32 arg2, s32 arg1,
         pos->y = 0.0f;
         pos->y = grBigBlue_801EC58C(pos, NULL, 1000.0f);
 
-        if (-3.4028235e38f != pos.y) {
+        if (-3.4028235e38f != pos->y) {
             s32 count;
             s32 j;
 
@@ -4351,7 +4288,7 @@ static inline void grBigBlue_801EE398_inline(s32 arg2, s32 arg1,
         pos->y = 0.0f;
         pos->y = grBigBlue_801EC58C(pos, NULL, 1000.0f);
 
-        if (-3.4028235e38f != pos.y) {
+        if (-3.4028235e38f != pos->y) {
             s32 count;
             s32 j;
 

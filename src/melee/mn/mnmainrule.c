@@ -430,7 +430,7 @@ void mn_8022FB88(u8 arg0, void* arg1)
     if (arg0 == 0) {
         HSD_JObj* temp_r27;
         var_r27 = 0;
-        var_r29 = sp14;
+        index_ptr = sp14;
         do {
             HSD_JObjSetFlagsAll(data->x58[*index_ptr], JOBJ_HIDDEN);
             var_r27 += 1;
@@ -442,7 +442,7 @@ void mn_8022FB88(u8 arg0, void* arg1)
         return;
     }
     var_r28 = 0;
-    var_r29_2 = sp14;
+    index_ptr2 = sp14;
     do {
         HSD_JObjClearFlagsAll(data->x58[*index_ptr2], JOBJ_HIDDEN);
         var_r28 += 1;
