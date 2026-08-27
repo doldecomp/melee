@@ -29,6 +29,13 @@ typedef struct MnInfoDataLayout {
     u32 sis_ids[4];
     char date_format[0xC];
     char time_format[0xC];
+    char assert_report[0x18];
+    char assert_file[0xC];
+    char assert_expr[0xC];
+    char top_joint[0x18];
+    char top_animjoint[0x1C];
+    char top_matanim_joint[0x20];
+    char top_shapeanim_joint[0x20];
 } MnInfoDataLayout;
 
 u8 mnInfo_804A0968[0x48];
@@ -128,11 +135,21 @@ void mnInfo_80251AFC(void)
     }
 }
 
-static MnInfoDataLayout mnInfo_layout = {
+static MnInfoDataLayout mnInfo_803EFC08 = {
     { 0.0f, 199.0f, 0.0f },
     { 0x505, 0x506, 0x507, 0x508 },
     "%s.%s.%s",
     "%s:%s:%s",
+    "Can't get user_data.\n",
+    "mninfo.c",
+    "user_data",
+    "MenMainConCo_Top_joint",
+    "MenMainConCo_Top_animjoint",
+    "MenMainConCo_Top_matanim_joint",
+    // Exact-fit init: terminator comes from the following zeroed gap.
+    { 'M', 'e', 'n', 'M', 'a', 'i', 'n', 'C', 'o', 'n', 'C',
+      'o', '_', 'T', 'o', 'p', '_', 's', 'h', 'a', 'p', 'e',
+      'a', 'n', 'i', 'm', '_', 'j', 'o', 'i', 'n', 't' },
 };
 
 #ifdef MUST_MATCH
@@ -154,7 +171,7 @@ s32 mnInfo_80251D58(mnInfo_GObj* arg0, s32 arg1, u32 arg2, u32 arg3)
     MnInfoDataLayout* layout;
 
     data = arg0->user_data;
-    layout = &mnInfo_layout;
+    layout = &mnInfo_803EFC08;
     slot = (HSD_Text**) ((u8*) data + (arg1 * 4));
     if (*(slot += 2) != NULL) {
         HSD_SisLib_803A5CC4(data->left_column[arg1]);
@@ -356,7 +373,7 @@ void mnInfo_802522B8(HSD_GObj* gobj)
     } else {
         HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
     }
-    mn_8022ED6C(jobj, &mnInfo_layout.anim);
+    mn_8022ED6C(jobj, &mnInfo_803EFC08.anim);
 }
 #ifdef MUST_MATCH
 #pragma pop
@@ -414,7 +431,7 @@ static inline void fn_802523D8_inline(MnInfoData* data, HSD_GObj* gobj)
             HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
         }
 
-        mn_8022ED6C(jobj, &mnInfo_layout.anim);
+        mn_8022ED6C(jobj, &mnInfo_803EFC08.anim);
     }
 }
 
@@ -523,10 +540,6 @@ s32 mnInfo_80252758(void)
     HSD_AnimJoint** animjoint = &mnInfo_804A0958.animjoint;
     PAD_STACK(8);
 
-    (void) "Can't get user_data.\n";
-    (void) __FILE__;
-    (void) "user_data";
-
     mn_804D6BC8.cooldown = 5;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
     mn_804A04F0.cur_menu = 0x1D;
@@ -534,10 +547,10 @@ s32 mnInfo_80252758(void)
 
     archive = mn_804D6BB8;
     lbArchive_LoadSections(
-        archive, (void**) &mnInfo_804A0958.joint, "MenMainConCo_Top_joint",
-        animjoint, "MenMainConCo_Top_animjoint",
-        &mnInfo_804A0958.matanim_joint, "MenMainConCo_Top_matanim_joint",
-        &mnInfo_804A0958.shapeanim_joint, "MenMainConCo_Top_shapeanim_joint",
+        archive, (void**) &mnInfo_804A0958.joint, mnInfo_803EFC08.top_joint,
+        animjoint, mnInfo_803EFC08.top_animjoint,
+        &mnInfo_804A0958.matanim_joint, mnInfo_803EFC08.top_matanim_joint,
+        &mnInfo_804A0958.shapeanim_joint, mnInfo_803EFC08.top_shapeanim_joint,
         0);
 
     mnInfo_80251AFC();
