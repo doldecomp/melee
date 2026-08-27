@@ -1700,8 +1700,8 @@ static inline void grZebes_801DB3CC_update(grZe_BubbleEntry** base)
     f32 left_anchor_x = grZe_8049F158[0].x;
     f32 left_anchor_y = grZe_8049F158[0].y;
     f32 right_anchor_x = grZe_8049F158[1].x;
-    f32 right_anchor_y = grZe_8049F158[1].y;
     f32 left_bound_y = grZe_8049F140[0].y;
+    f32 right_anchor_y = grZe_8049F158[1].y;
     f32 left_bound_x = grZe_8049F140[0].x;
     f32 right_bound_y = grZe_8049F140[1].y;
     f32 right_bound_x = grZe_8049F140[1].x;
