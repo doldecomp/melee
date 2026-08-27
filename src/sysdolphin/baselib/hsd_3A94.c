@@ -3092,6 +3092,7 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 free_count;
     s32 i;
     s32 logical;
+    CardState* row;
     s32 repair_result;
     s32 result;
     s32 total_blocks;
@@ -3128,8 +3129,10 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     free_count = 0;
     current_seq = -1;
 
-    for (i = 1; i <= total_blocks; i++) {
-        s32 file_idx = state->x170[i];
+    for (i = 1, row = (CardState*) ((s32*) state + 1); i <= total_blocks;
+         i++, row = (CardState*) ((s32*) row + 1))
+    {
+        s32 file_idx = row->x170[0];
 
         if (file_idx < 0) {
             block_map[2][free_count++] = i;
@@ -3139,9 +3142,9 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         logical = file_idx - blocks_before;
         if (logical >= 0 && logical < file_blocks) {
             if (current_seq == -1 ||
-                fn_803ACB74(current_seq, state->x270[i]) < 0)
+                fn_803ACB74(current_seq, row->x270[0]) < 0)
             {
-                current_seq = state->x270[i];
+                current_seq = row->x270[0];
             }
             if (block_map[0][logical] < 0) {
                 block_map[0][logical] = i;
