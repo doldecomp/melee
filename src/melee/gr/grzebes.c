@@ -1570,7 +1570,8 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
 
                 {
                     f32 speed = yakumono_param->x68;
-                    f32 target = grZe_8049F170[arg1].x1C;
+                    f32 target_value = grZe_8049F170[arg1].x1C;
+                    f32 target = target_value;
                     f32 current = grZe_8049F170[arg1].x18_size;
                     f32 diff = target - current;
 
