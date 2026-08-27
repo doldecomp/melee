@@ -2338,6 +2338,11 @@ static inline u32 gm_801891F4_GetTickRate(void)
     return OS_TIMER_CLOCK;
 }
 
+static inline s32* gm_801891F4_GetMenuValues(CssSubStruct* sub)
+{
+    return sub->menu_values;
+}
+
 void fn_801891F4(void)
 {
     CssSubStruct* sub;
@@ -2484,7 +2489,7 @@ void fn_801891F4(void)
             if (buttons & PAD_ANY_LEFT) {
                 sfxMove();
                 if ((u32) sub->menu_values[sub->x00] != 0) {
-                    sub->menu_values[sub->x00]--;
+                    gm_801891F4_GetMenuValues(sub)[sub->x00]--;
                     if ((u32) sub->menu_values[sub->x00] == 0) {
                         gm_801A36E0(0, 0x19);
                         return;
@@ -2625,7 +2630,7 @@ void fn_801891F4(void)
             }
 
             for (i = 1; i < 4; i++) {
-                fn_8016B388(i, sub->menu_values[4]);
+                fn_8016B388(i, gm_801891F4_GetMenuValues(sub)[4]);
             }
 
             switch (sub->menu_values[6]) {
