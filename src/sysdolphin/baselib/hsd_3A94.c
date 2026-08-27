@@ -4061,8 +4061,7 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     } else {
         u32 sector_size = state->x8;
         u32 usable_size = sector_size - 0x20;
-        file_blocks =
-            (u32) (file_size + sector_size - 0x21) / usable_size;
+        file_blocks = (u32) (file_size + sector_size - 0x21) / usable_size;
     }
 
     total_blocks = fn_803AC7DC(state);
@@ -4887,8 +4886,9 @@ s32 fn_803B1338(CardState* state, s32 arg1)
             s32 i;
             for (i = 0; i < max_redun; i++) {
                 if (arg1 != 0) {
-                    result = fn_803B1338_queue_write(
-                        state, logical, 0xFFFF, NULL, 0, file_id, cmd12, cmd13);
+                    result =
+                        fn_803B1338_queue_write(state, logical, 0xFFFF, NULL,
+                                                0, file_id, cmd12, cmd13);
                     if (result < 0) {
                         return result;
                     }

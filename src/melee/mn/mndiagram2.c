@@ -651,8 +651,8 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
         u32 r22 = row_idx;
         f32 ny = -sp20.y;
         f32 row_y_offset = -f30 * (f32) r22;
-        text = HSD_SisLib_803A5ACC(0, 1, sp20.x, ny + row_y_offset, sp20.z, 320.0f,
-                                   240.0f);
+        text = HSD_SisLib_803A5ACC(0, 1, sp20.x, ny + row_y_offset, sp20.z,
+                                   320.0f, 240.0f);
 
         {
             data->row_labels[row_idx] = text;
@@ -665,9 +665,9 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                     if (r21 != 0xFFFF) {
                         int var_r3;
                         lb_8000B1CC(data->row0_ref, &base->label_pos, &sp20);
-                        text2 = HSD_SisLib_803A5ACC(
-                            0, 1, 12.0f + sp20.x, -sp20.y + row_y_offset,
-                            sp20.z, 1.0f, 1.0f);
+                        text2 = HSD_SisLib_803A5ACC(0, 1, 12.0f + sp20.x,
+                                                    -sp20.y + row_y_offset,
+                                                    sp20.z, 1.0f, 1.0f);
 
                         data->row_icons[row_idx] = text2;
                         text2->default_alignment = 1;
