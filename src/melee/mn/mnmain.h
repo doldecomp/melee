@@ -126,6 +126,5 @@ typedef struct _MenuInputState {
 /* 4D6BC8 */ extern MenuInputState mn_804D6BC8;
 /* 4D6C00 */ extern char** NotAllowedNamesList;
 /* 4D6C04 */ extern u8** AutoNamesList;
-/* 4D6C0C */ extern u8 mnNameNew_PortInUse;
 
 #endif

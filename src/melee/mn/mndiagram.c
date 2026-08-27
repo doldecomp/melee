@@ -1967,7 +1967,7 @@ void mnDiagram_CreatePopup(s32 arg0, s32 arg1, s32 use_nametag)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6, 0x80);
     HSD_JObjAddAnimAll(jobj, joint_data[1], joint_data[2], joint_data[3]);
-    HSD_JObjReqAnimAll(jobj, mnDiagram_804DBF84);
+    HSD_JObjReqAnimAll(jobj, 0.0f);
     HSD_JObjAnimAll(jobj);
 
     user_data = HSD_MemAlloc(sizeof(mnDiagram_PopupData));
@@ -2007,7 +2007,7 @@ void mnDiagram_CreatePopup(s32 arg0, s32 arg1, s32 use_nametag)
         HSD_JObjAddChild(user_data->jobjs[7], icon);
 
         icon = mnDiagram_CreateFighterIcon(arg1, 1);
-        HSD_JObjSetTranslateX(icon, mnDiagram_804DBF94);
+        HSD_JObjSetTranslateX(icon, -1.0f);
         mn_8022F3D8(icon, 1, TOBJ_MASK);
         HSD_JObjAddChild(user_data->jobjs[10], icon);
 
@@ -2015,7 +2015,7 @@ void mnDiagram_CreatePopup(s32 arg0, s32 arg1, s32 use_nametag)
             HSD_JObjSetFlagsAll(user_data->jobjs[1], JOBJ_HIDDEN);
         } else {
             icon = mnDiagram_CreateFighterIcon(arg1, 1);
-            HSD_JObjSetTranslateX(icon, mnDiagram_804DBF94);
+            HSD_JObjSetTranslateX(icon, -1.0f);
             mn_8022F3D8(icon, 1, TOBJ_MASK);
             HSD_JObjAddChild(user_data->jobjs[2], icon);
         }
@@ -2571,8 +2571,7 @@ void mnDiagram_DrawNameHeaders(void* arg0, s32 arg1, s32 arg2)
                     name_id = name_byte;
                     x_spacing = HSD_JObjGetTranslationX(data->jobjs[8]) -
                                 HSD_JObjGetTranslationX(data->jobjs[7]);
-                    HSD_SisLib_803A6B98(text, (x_spacing * i) / 0.02f,
-                                        mnDiagram_804DBF84,
+                    HSD_SisLib_803A6B98(text, (x_spacing * i) / 0.02f, 0.0f,
                                         GetNameText(name_id));
                 }
             }
@@ -2603,8 +2602,7 @@ void mnDiagram_DrawNameHeaders(void* arg0, s32 arg1, s32 arg2)
                           0xFFFFFFFFFFFFFFFFu;
                 y_spacing = HSD_JObjGetTranslationY(data->jobjs[10]) -
                             HSD_JObjGetTranslationY(data->jobjs[9]);
-                HSD_SisLib_803A6B98(row_text, mnDiagram_804DBF84,
-                                    -((y_spacing * i) / 0.03f),
+                HSD_SisLib_803A6B98(row_text, 0.0f, -((y_spacing * i) / 0.03f),
                                     GetNameText(name_id));
             }
         }
@@ -2700,7 +2698,7 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
             jobj = HSD_JObjLoadJoint(joint_data[0]);
             HSD_JObjAddAnimAll(jobj, joint_data[1], joint_data[2],
                                joint_data[3]);
-            HSD_JObjReqAnimAll(jobj, mnDiagram_804DBF84);
+            HSD_JObjReqAnimAll(jobj, 0.0f);
             HSD_JObjAnimAll(jobj);
             lb_80011E24(jobj, &sp_jobj, 2, -1);
             HSD_JObjReqAnimAll(sp_jobj, (f32) (fighter_id & 0xFF));
@@ -2749,7 +2747,7 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
             jobj = HSD_JObjLoadJoint(joint_data[0]);
             HSD_JObjAddAnimAll(jobj, joint_data[1], joint_data[2],
                                joint_data[3]);
-            HSD_JObjReqAnimAll(jobj, mnDiagram_804DBF84);
+            HSD_JObjReqAnimAll(jobj, 0.0f);
             HSD_JObjAnimAll(jobj);
             lb_80011E24(jobj, &sp_jobj2, 2, -1);
             HSD_JObjReqAnimAll(sp_jobj2, (f32) (selkind & 0xFF));
@@ -2846,7 +2844,7 @@ void mnDiagram_CreateScreen(u8 arg0)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6, 0x80);
     HSD_JObjAddAnimAll(jobj, joint_data[1], joint_data[2], joint_data[3]);
-    HSD_JObjReqAnimAll(jobj, mnDiagram_804DBF84);
+    HSD_JObjReqAnimAll(jobj, 0.0f);
 
     user_data = HSD_MemAlloc(sizeof(Diagram));
     HSD_ASSERTREPORT(0x90E, user_data, "Can't get user_data.\n");

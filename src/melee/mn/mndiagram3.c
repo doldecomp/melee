@@ -1,6 +1,6 @@
 #include "mndiagram3.h"
 
-#include "mndiagram3.static.h"
+#include "mn/mndiagram2.static.h"
 
 #include "baselib/debug.h"
 
@@ -22,6 +22,29 @@
 #include <melee/mn/mndiagram2.h>
 #include <melee/mn/mnmain.h>
 #include <melee/mn/mnname.h>
+#include <melee/mn/types.h>
+
+typedef struct mnDiagram3_PosTable {
+    /* 0x00 */ Vec3 x0;  ///< title_pos (3.3,0.5,0)
+    /* 0x0C */ Vec3 xC;  ///< rank_name_pos (-2,0.57,0)
+    /* 0x18 */ Vec3 x18; ///< value_pos (8,0.57,0)
+} mnDiagram3_PosTable;
+
+typedef struct mnDiagram3_StatTable {
+    /* 0x00 */ u16 label_ids[24];      ///< SIS string ids, 0x62..0x79
+    /* 0x30 */ u16 unit_glyph_ids[24]; ///< mnDiagram2 unit/icon column entries
+} mnDiagram3_StatTable;
+
+/* 3EEC10 */ extern AnimLoopSettings mnDiagram3_803EEC10;
+/* 3EEC1C */ extern AnimLoopSettings mnDiagram3_803EEC1C;
+/* 3EEC28 */ extern mnDiagram3_PosTable mnDiagram3_803EEC28;
+/* 3EEC4C */ extern mnDiagram3_StatTable mnDiagram3_803EEC4C;
+/* 4A0844 */ extern mnDiagram_ArchiveData mnDiagram_804A0844;
+/* 4A0854 */ extern mnDiagram_ArchiveData mnDiagram_804A0854;
+/* 4D6C20 */ extern HSD_GObj* mnDiagram3_804D6C20;
+/* 4D6C24 */ extern HSD_GObj* mnDiagram3_804D6C24;
+/* 4D4B64 */ extern GXColor mn_804D4B64;
+/* 2461BC */ void mnDiagram3_HandleInput(HSD_GObj* gobj);
 
 HSD_GObj* mnDiagram3_804D6C20;
 
@@ -90,13 +113,13 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
             stat_ptr = base;
             stat_ptr += (int) stat_type << 1;
             stat_table = (u16*) stat_ptr;
-            icon_x_offset = mnDiagram3_804DC010;
+            icon_x_offset = 1.5f;
             row_spacing = row1_y;
             (void) row_spacing;
             row_spacing = row_spacing - row0_y;
             max_distance = 0x5F5E0FF;
             max_percentage = 0x98967F;
-            divider = mnDiagram3_804DC008;
+            divider = 0.035f;
             max_time = 0x5B8D7F;
             neg_spacing = -row_spacing;
             stat_ptr += 0x6C;
@@ -127,7 +150,7 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
                         }
                         {
                             char* name_str = GetNameText(entity);
-                            f32 f1 = mnDiagram3_804DC00C;
+                            f32 f1 = 0.0f;
                             f32 offset_y = neg_spacing * (f32) i / divider;
                             HSD_SisLib_803A6B98(title_text, f1, offset_y,
                                                 name_str);
@@ -179,7 +202,7 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
                         mnDiagram_FormatDecimalNumber((char*) sp58, val, 0);
                     }
                     {
-                        f32 f1 = mnDiagram3_804DC00C;
+                        f32 f1 = 0.0f;
                         f32 offset_y = neg_spacing * (f32) i / divider;
                         HSD_SisLib_803A6B98(value_text, f1, offset_y,
                                             (char*) sp58);
@@ -219,7 +242,7 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
                     }
 
                     {
-                        f32 f1 = mnDiagram3_804DC00C;
+                        f32 f1 = 0.0f;
                         f32 offset_y = neg_spacing * (f32) i / divider;
                         HSD_SisLib_803A6B98(value_text, f1, offset_y,
                                             (char*) sp58);
@@ -239,8 +262,8 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
                         f32 negated_y = -sp6C.y;
                         icon_text = HSD_SisLib_803A5ACC(
                             0, 1, icon_x_offset + sp6C.x,
-                            neg_spacing * (f32) i + negated_y, sp6C.z,
-                            mnDiagram3_804DC014, mnDiagram3_804DC014);
+                            neg_spacing * (f32) i + negated_y, sp6C.z, 1.0f,
+                            1.0f);
                         data->row_icons[i] = icon_text;
                         icon_text->default_alignment = 1;
                         icon_text->text_color = mn_804D4B64;
@@ -405,7 +428,7 @@ void mnDiagram3_Create(int arg0)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6, 0x80);
     HSD_JObjAddAnimAll(jobj, archive->x4, archive->x8, archive->xC);
-    HSD_JObjReqAnimAll(jobj, mnDiagram3_804DC00C);
+    HSD_JObjReqAnimAll(jobj, 0.0f);
     HSD_JObjAnimAll(jobj);
 
     user_data = (Diagram3*) HSD_MemAlloc(sizeof(Diagram3));
@@ -487,7 +510,7 @@ void mnDiagram3_Init(void* arg0)
         HSD_GObjObject_80390A70(popup, HSD_GObj_804D7849, popup_jobj);
         GObj_SetupGXLink(popup, HSD_GObj_JObjCallback, 4, 0x80);
         HSD_JObjAddAnimAll(popup_jobj, archive->x4, archive->x8, archive->xC);
-        HSD_JObjReqAnimAll(popup_jobj, mnDiagram3_804DC00C);
+        HSD_JObjReqAnimAll(popup_jobj, 0.0f);
         HSD_JObjAnimAll(popup_jobj);
 
         new_var = gobj->user_data;
@@ -500,8 +523,7 @@ void mnDiagram3_Init(void* arg0)
         HSD_JObjSetTranslateX_Fake(popup_jobj, HSD_JObjGetTranslationX(row0));
 
         row0 = data->jobjs[8];
-        row_spacing =
-            row_spacing * mnDiagram3_804DC00C + HSD_JObjGetTranslationY(row0);
+        row_spacing = row_spacing * 0.0f + HSD_JObjGetTranslationY(row0);
         HSD_JObjSetTranslateY_Fake(popup_jobj, row_spacing);
 
         row0 = data->jobjs[8];
@@ -526,15 +548,15 @@ void mnDiagram3_Init(void* arg0)
         lb_8000B1CC(d->jobjs[8], &mnDiagram3_803EEC28.x0, &sp48);
 
         neg_spacing = -neg_spacing;
-        row_spacing = mnDiagram3_804DBFF8;
+        row_spacing = 6.5f;
         stat_idx = (u8) scroll;
         i = 0;
 
         do {
             f32 fi = (f32) i;
-            HSD_Text* text = HSD_SisLib_803A5ACC(
-                0, 1, sp48.x - row_spacing, neg_spacing * fi + -sp48.y, sp48.z,
-                row_spacing, mnDiagram3_804DBFFC);
+            HSD_Text* text = HSD_SisLib_803A5ACC(0, 1, sp48.x - row_spacing,
+                                                 neg_spacing * fi + -sp48.y,
+                                                 sp48.z, row_spacing, 240.0f);
 
             d->row_labels[i] = text;
             {

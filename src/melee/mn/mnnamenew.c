@@ -37,6 +37,8 @@ typedef char* GlyphRow[4];
 /// volatile, so the tables store pointers to volatile characters.
 typedef volatile char GlyphChar;
 
+/* 4D6C0C */ u8 mnNameNew_PortInUse;
+
 /// Maps keyboard cursor positions to jobj indices and glyph strings.
 /// Mirrors the key_jobj_ids/x34/xFC/character_bytes fields of
 /// MnNameNewDataLayout (data object at 0x803EDA7C).
@@ -346,8 +348,8 @@ static GXColor mnNameNew_804D4F78 = { 0, 0, 0, 0xFF };
 
 u8 mnNameNew_804D4F7C[8] = { 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'H' };
 
-extern const GXColor mnNameNew_804DBF44;
-extern const GXColor mnNameNew_804DBF48;
+GXColor const mnNameNew_804DBF44 = { 0xA6, 0x81, 0x3D, 0xFF };
+GXColor const mnNameNew_804DBF48 = { 0x00, 0x00, 0x00, 0xFF };
 
 s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
 {
