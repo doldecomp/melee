@@ -291,11 +291,11 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
                                           4) +
                                          0x118);
                     for (pair_count = 2; pair_count != 0; pair_count--) {
-                        pixel = src[((pixel_index << 5) & 0x20) +
+                        pixel = src[((pixel_index & 1) * 0x20) +
                                     ((pixel_index & 2) * tile_stride)];
                         second_pixel_index = pixel_index + 1;
                         second_pixel_offset =
-                            ((second_pixel_index << 5) & 0x20) +
+                            ((second_pixel_index & 1) * 0x20) +
                             ((second_pixel_index & 2) * tile_stride);
                         pixel_index = second_pixel_index + 1;
                         luma_pair->block0[0] =
