@@ -64,7 +64,6 @@ struct ParticleScreenState {
     /* 0xD4 */ OSContext* xD4;
 };
 
-extern u8 lbl_804088B8[];
 /* 4D78C8 */ int hsd_804D78C8;
 /* 4D78CC */ u32 hsd_804D78CC;
 
@@ -606,7 +605,7 @@ void hsd_80394314(void)
     sp->x20 = (u32) (sp->x3C - 0x28) / 11;
     sp->x1C = (u32) (sp->x40 - 0x50) / 14;
 #endif
-    sp->x4C = lbl_804088B8;
+    sp->x4C = HSD_DebugFontAtlas;
     sp->x50 = 0;
     sp->xC4 = 0;
 }
@@ -2793,8 +2792,8 @@ void* fn_80397814(void* arg)
         hsd_80394544(hsd_804CF810.x18, hsd_804CF810.x14, hsd_804CF810.x20,
                      hsd_804CF810.x1C, 20, hsd_804CF810.x40 - 40,
                      (&hsd_804CF810.x24)[hsd_804CF810.x34], hsd_804CF810.x3C,
-                     hsd_804CF810.x40, hsd_804CF810.x44, (s32) lbl_804088B8,
-                     NULL);
+                     hsd_804CF810.x40, hsd_804CF810.x44,
+                     (s32) HSD_DebugFontAtlas, NULL);
 
         hsd_804CF810.xC8 = 0;
         hsd_804CF810.xCC = hsd_804CF810.x1C - 1;
@@ -2826,7 +2825,7 @@ void* fn_80397814(void* arg)
             next_retrace2 = VIGetRetraceCount();
         } while (next_retrace2 == retrace2);
         retrace2 = next_retrace2;
-        lbl_ptr = lbl_804088B8;
+        lbl_ptr = HSD_DebugFontAtlas;
 
         /* Main rendering loop */
         while (*keybuf != 0) {
@@ -2841,9 +2840,9 @@ void* fn_80397814(void* arg)
             disp_node = *(void**) keybuf;
             result = 0;
             while (disp_node != NULL && !sp->x0_b5) {
-                if (*(void* (**) (void*) )((u8*) disp_node + 0xC) != NULL) {
-                    result = (s32) (*(void* (**) (void*) )((u8*) disp_node +
-                                                           0xC))(disp_node);
+                if (*(void* (**)(void*) )((u8*) disp_node + 0xC) != NULL) {
+                    result = (s32) (*(void* (**)(void*) )((u8*) disp_node +
+                                                          0xC))(disp_node);
                     switch (result) {
                     case 0:
                         break;

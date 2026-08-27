@@ -496,14 +496,8 @@ GlyphEntry lbl_80408898[4] = {
     { 0xB3808000, hsd_80392194 },
 };
 
-/// One cell of the debug console's ASCII font: 14 rows of 4 bytes, 2 bits per
-/// pixel, 12 of the 16 pixels used.
-typedef struct DebugFontGlyph {
-    /*0x00*/ u8 data[56];
-} DebugFontGlyph;
-
-DebugFontGlyph lbl_804088B8[] = {
-#include <sysdolphin/baselib/hsd_3915_font.inc>
+DebugFontGlyph HSD_DebugFontAtlas[] ATTRIBUTE_ALIGN(32) = {
+#include <sysdolphin/baselib/debug_font.inc>
 };
 
 void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
@@ -652,31 +646,32 @@ HSD_SList* fn_80392480(Event event, int priority)
     HSD_SList* cur = hsd_804D7850;
 
     goto loop_5;
-block_1: {
-    HSD_SList* ret = cur->data;
-    if (event != (Event) ret->next) {
-        if (((struct EventPriority*) ret)->priority <= priority) {
-            prev = cur;
-        }
-        cur = cur->next;
-    loop_5:
-        if (cur != NULL) {
-            goto block_1;
-        }
-        {
-            struct EventPriority* data =
-                HSD_MemAlloc(sizeof(struct EventPriority));
-            data->event = event;
-            data->priority = priority;
-            if (prev != NULL) {
-                return HSD_SListAllocAndAppend(prev, data);
+block_1:
+    {
+        HSD_SList* ret = cur->data;
+        if (event != (Event) ret->next) {
+            if (((struct EventPriority*) ret)->priority <= priority) {
+                prev = cur;
             }
-            ret = HSD_SListAllocAndPrepend(hsd_804D7850, data);
+            cur = cur->next;
+        loop_5:
+            if (cur != NULL) {
+                goto block_1;
+            }
+            {
+                struct EventPriority* data =
+                    HSD_MemAlloc(sizeof(struct EventPriority));
+                data->event = event;
+                data->priority = priority;
+                if (prev != NULL) {
+                    return HSD_SListAllocAndAppend(prev, data);
+                }
+                ret = HSD_SListAllocAndPrepend(hsd_804D7850, data);
+            }
+            hsd_804D7850 = ret;
         }
-        hsd_804D7850 = ret;
+        return ret;
     }
-    return ret;
-}
 }
 
 #ifdef MUST_MATCH

@@ -30,9 +30,7 @@ extract:
   header: sysdolphin/baselib/sislib_font.inc
   binary: sysdolphin/baselib/sislib_font.bin
   header_type: raw
-# debugconsole's 128-glyph ASCII font, 56 bytes per cell (14 rows x 4 bytes,
-# 2bpp, 12 of 16 px used)
-- symbol: lbl_804088B8
-  header: sysdolphin/baselib/hsd_3915_font.inc
-  binary: sysdolphin/baselib/hsd_3915_font.bin
+- symbol: HSD_DebugFontAtlas
+  header: sysdolphin/baselib/debug_font.inc
+  binary: sysdolphin/baselib/debug_font.bin
   header_type: raw
