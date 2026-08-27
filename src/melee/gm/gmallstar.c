@@ -579,6 +579,18 @@ void fn_801B5AA8(int arg0)
     lbBgFlash_8002063C(0x78);
 }
 
+static inline void gm_801B5ACC_inline(u16 round)
+{
+    s32 end_idx = (s32) gm_803DEC4C[round + 1].start;
+    gm_803DEBE8_t* opp = &gm_803DEBE8[end_idx];
+
+    while (end_idx < 0x19) {
+        gm_8016A998((s8) opp->x3, 0);
+        opp++;
+        end_idx++;
+    }
+}
+
 void gm_801B5ACC(GameScene* arg0)
 {
     u8 operand_pad[8];
@@ -586,6 +598,7 @@ void gm_801B5ACC(GameScene* arg0)
     StartMeleeData* data;
     u8* base;
     UnkAllstarData* allstar;
+    u16 round;
     u8 color;
     s32 i;
     s32 next_count;
@@ -599,11 +612,10 @@ void gm_801B5ACC(GameScene* arg0)
     allstar = &gm_80473A18;
     allstar->x0.x8 |= 0x80;
 
+    round = gm_8017BE84(arg0->idx);
     {
-        u16 round = gm_8017BE84(arg0->idx);
         gm_803DEBE8_t* opp =
             (gm_803DEBE8_t*) (base + 0x2B8) + gm_803DEC4C[round].start;
-
         color = ((u8*) gm_80490940)[((u32) opp - (u32) (base + 0x2B8)) >> 2];
     }
 
@@ -620,53 +632,43 @@ void gm_801B5ACC(GameScene* arg0)
     data->players[0].xD_b2 = 1;
     data->rules.x7 = 9;
 
-    {
-        u16 round = gm_8017BE84(arg0->idx);
-        AllstarRoundInfo* ri = &gm_803DEC4C[round];
+    round = gm_8017BE84(arg0->idx);
 
+    {
+        AllstarRoundInfo* ri = &gm_803DEC4C[round];
         for (i = 0; i < (s32) ri->count; i++) {
             s32 slot;
-
             do {
                 slot = HSD_Randi(0x1A);
             } while ((s32) allstar->x76[slot] != 0x21);
-            allstar->x76[slot] = gm_803DEBE8[i + ri->start].x3;
+            allstar->x76[slot] = gm_803DEBE8[ri->start + i].x3;
         }
-
-        {
-            AllstarRoundInfo* ri2 = &gm_803DEC4C[round];
-            s32 next_start;
-
-            next_count = (s32) ri2[1].count;
-            next_start = (s32) ri2[1].start;
-            for (i = 0; i < next_count; i++) {
-                allstar->_94[2 + i] = gm_803DEBE8[next_start + i].x3;
-            }
-        }
-
-        allstar->_94[1] = (u8) next_count;
-        allstar->_94[0] = (u8) (round + 1);
-        data->players[0].xC_b1 = 0;
-        data->rules.x1_2 = 1;
-        data->rules.x1_3 = 1;
-        data->rules.x4_4 = 0;
-        gm_8016F088(data);
-        gm_8016A92C(&data->rules);
-
-        {
-            s32 end_idx = (s32) gm_803DEC4C[round + 1].start;
-            gm_803DEBE8_t* opp = &gm_803DEBE8[end_idx];
-
-            while (end_idx < 0x19) {
-                gm_8016A998((s8) opp->x3, 0);
-                opp++;
-                end_idx++;
-            }
-        }
-
-        gm_801B5324(allstar, round + 1);
-        data->rules.x50 = (void (*)(u8))(Event) fn_801B5AA8;
     }
+
+    {
+        AllstarRoundInfo* ri2 = &gm_803DEC4C[round];
+        s32 next_start;
+
+        next_count = (s32) ri2[1].count;
+        next_start = (s32) ri2[1].start;
+        for (i = 0; i < next_count; i++) {
+            allstar->_94[2 + i] = gm_803DEBE8[next_start + i].x3;
+        }
+    }
+
+    allstar->_94[1] = (u8) next_count;
+    allstar->_94[0] = (u8) (round + 1);
+    data->players[0].xC_b1 = 0;
+    data->rules.x1_2 = 1;
+    data->rules.x1_3 = 1;
+    data->rules.x4_4 = 0;
+    gm_8016F088(data);
+    gm_8016A92C(&data->rules);
+
+    gm_801B5ACC_inline(round);
+
+    gm_801B5324(allstar, round + 1);
+    data->rules.x50 = (void (*)(u8))(Event) fn_801B5AA8;
 }
 
 void gm_801B5E7C(GameScene* arg0)
