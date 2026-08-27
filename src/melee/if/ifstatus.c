@@ -299,11 +299,11 @@ static inline IfDamageState* ifStatus_FindDamageState(HudIndex* hud,
 }
 
 static inline void ifStatus_FinishHundredsDigit(HSD_JObj* digit_jobj,
-                                                IfDamageState* state)
+                                                IfDamageState* state,
+                                                GXColor* color)
 {
     s16 clamped_damage;
     f32 factor;
-    GXColor color;
     HSD_MObj* mobj;
 
     HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
@@ -325,7 +325,7 @@ static inline void ifStatus_FinishHundredsDigit(HSD_JObj* digit_jobj,
                 clamped_damage = 0;
             }
             factor = 1.0F - ((f32) clamped_damage / 100.0F);
-            color = ifStatus_GetDamageColor(factor);
+            *color = ifStatus_GetDamageColor(factor);
         } else {
             /* Normal mode: 0-300% range */
             clamped_damage = state->damage_percent;
@@ -335,29 +335,29 @@ static inline void ifStatus_FinishHundredsDigit(HSD_JObj* digit_jobj,
                 clamped_damage = 0;
             }
             factor = (f32) clamped_damage / 300.0F;
-            color = ifStatus_GetDamageColor(factor);
+            *color = ifStatus_GetDamageColor(factor);
         }
 
         /* Apply color to all digit materials */
         mobj = state->jobjs[Hundreds]->u.dobj->mobj;
-        mobj->mat->diffuse.r = color.r;
-        mobj->mat->diffuse.g = color.g;
-        mobj->mat->diffuse.b = color.b;
+        mobj->mat->diffuse.r = color->r;
+        mobj->mat->diffuse.g = color->g;
+        mobj->mat->diffuse.b = color->b;
 
         mobj = state->jobjs[Tens]->u.dobj->mobj;
-        mobj->mat->diffuse.r = color.r;
-        mobj->mat->diffuse.g = color.g;
-        mobj->mat->diffuse.b = color.b;
+        mobj->mat->diffuse.r = color->r;
+        mobj->mat->diffuse.g = color->g;
+        mobj->mat->diffuse.b = color->b;
 
         mobj = state->jobjs[Ones]->u.dobj->mobj;
-        mobj->mat->diffuse.r = color.r;
-        mobj->mat->diffuse.g = color.g;
-        mobj->mat->diffuse.b = color.b;
+        mobj->mat->diffuse.r = color->r;
+        mobj->mat->diffuse.g = color->g;
+        mobj->mat->diffuse.b = color->b;
 
         mobj = state->jobjs[Percent]->u.dobj->mobj;
-        mobj->mat->diffuse.r = color.r;
-        mobj->mat->diffuse.g = color.g;
-        mobj->mat->diffuse.b = color.b;
+        mobj->mat->diffuse.r = color->r;
+        mobj->mat->diffuse.g = color->g;
+        mobj->mat->diffuse.b = color->b;
     }
 }
 
@@ -382,6 +382,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     HSD_JObj* jobj;
     HSD_JObj* digit_jobj;
     s32 is_stamina;
+    GXColor color;
     HSD_TObj* tobj;
     HSD_MatAnimJoint** anim_base;
     s32 i;
@@ -457,7 +458,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
                        (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
                            ->child->child->aobjdesc->fobjdesc);
     HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * hundreds_digit);
-    ifStatus_FinishHundredsDigit(digit_jobj, state);
+    ifStatus_FinishHundredsDigit(digit_jobj, state, &color);
 
     /* Update JObj positions when animating */
     if (lb_8000B09C(jobj)) {
