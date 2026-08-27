@@ -900,7 +900,7 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                                     b0 = *b;
                                                     {
                                                         float dot;
-                                                        float var_f2_2;
+                                                        float scale;
                                                         dot =
                                                             diff_dc_z1 *
                                                                 (c2.z - b0.z) +
@@ -908,7 +908,7 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                                               (c2.x - b0.x)) +
                                                              (diff_dc_y1 *
                                                               (c2.y - b0.y)));
-                                                        var_f2_2 =
+                                                        scale =
                                                             -dot /
                                                             ((diff_dc_z1 *
                                                               diff_dc_z1) +
@@ -916,19 +916,19 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                                                diff_dc_x1) +
                                                               (diff_dc_y1 *
                                                                diff_dc_y1)));
-                                                        if (var_f2_2 >
-                                                            lbColl_804D7A00)
+                                                        if (lbColl_804D7A00 <
+                                                            scale)
                                                         {
-                                                            var_f2_2 =
+                                                            scale =
                                                                 lbColl_804D7A08;
                                                         } else if (
-                                                            var_f2_2 <
+                                                            scale <
                                                             lbColl_804D7A10)
                                                         {
-                                                            var_f2_2 =
+                                                            scale =
                                                                 lbColl_804D79F8;
                                                         }
-                                                        scl_f = var_f2_2;
+                                                        scl_f = scale;
                                                     }
                                                 }
                                             }
