@@ -156,15 +156,10 @@ u8 mn_StockCountLimits[2] = { 1, 0x63 };
 /// SIS text id for the rule value label when Mode is Stock Match.
 u8 mn_StockCountTextId = 0x2B;
 
+extern u16 const mn_804DBDF8;
+
 f32 mn_804D6BD8;
-u8 const mn_804DBDFC[] = { 2, 3, 5, 6 };
 HSD_GObj* mn_804D6BD0;
-u16 const mn_804DBE04 = 0x0708;
-s32 const mn_804DBE08 = 0x02030405;
-u8 const mn_804DBE0C = 6;
-u16 const mn_804DBDF8 = 0x203;
-u32 const mn_804DBE10 = 0x02030506;
-u16 const mn_804DBE14 = 0x0708;
 
 s32 mn_804D6BD4;
 
@@ -404,7 +399,7 @@ void fn_8022F538(HSD_GObj* arg0)
 void mn_8022FB88(u8 arg0, void* arg1)
 {
     struct mn_8022FB88_arg1_t* data = arg1;
-    u8* sp14;
+    u8 sp14[4] = { 2, 3, 5, 6 };
     s32 sp10;
     u8* var_r29;
     HSD_JObj* temp_r29_2;
@@ -418,11 +413,10 @@ void mn_8022FB88(u8 arg0, void* arg1)
     HSD_JObj** temp_r27_2;
     s32 var_r27;
 
-    sp14 = (u8*) mn_804DBDFC;
     if (arg0 == 0) {
         HSD_JObj* temp_r27;
         var_r27 = 0;
-        var_r29 = (u8*) &sp14;
+        var_r29 = sp14;
         do {
             HSD_JObjSetFlagsAll(data->x58[*var_r29], JOBJ_HIDDEN);
             var_r27 += 1;
@@ -434,7 +428,7 @@ void mn_8022FB88(u8 arg0, void* arg1)
         return;
     }
     var_r28 = 0;
-    var_r29_2 = (u8*) &sp14;
+    var_r29_2 = sp14;
     do {
         HSD_JObjClearFlagsAll(data->x58[*var_r29_2], JOBJ_HIDDEN);
         var_r28 += 1;
@@ -463,18 +457,12 @@ void mn_8022FB88(u8 arg0, void* arg1)
 void mn_8022FD18(u8 arg0)
 {
     UNUSED u8 pad[8];
-    union {
-        u16 packed;
-        u8 idx[2];
-    } stock_digits;
-    struct {
-        JObjIndices digits;
-        u8 extra;
-    } time_indices;
+    struct mn_8022FB88_arg1_t* data = mn_804D6BD0->user_data;
+    u8 stock_digits[2] = { 7, 8 };
+    u8 time_indices[5] = { 2, 3, 4, 5, 6 };
     HSD_JObj** jobjs;
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
-    struct mn_8022FB88_arg1_t* data;
     u8* ptr0;
     u8* ptr1;
     u8* ptr2;
@@ -483,21 +471,17 @@ void mn_8022FD18(u8 arg0)
     struct mn_8022FB88_arg1_t* data2;
     u8 val;
 
-    data = mn_804D6BD0->user_data;
-    stock_digits.packed = mn_804DBE04;
-    time_indices.digits.packed = mn_804DBE08;
     data2 = data;
-    time_indices.extra = mn_804DBE0C;
     if (arg0 != 0) {
         i = 0;
-        ptr0 = stock_digits.idx;
+        ptr0 = stock_digits;
         do {
             HSD_JObjSetFlagsAll(data->x58[*ptr0], JOBJ_HIDDEN);
             i += 1;
             ptr0 += 1;
         } while (i < 2);
         i = 0;
-        ptr1 = time_indices.digits.idx;
+        ptr1 = time_indices;
         do {
             HSD_JObjClearFlagsAll(data->x58[*ptr1], JOBJ_HIDDEN);
             i += 1;
@@ -507,14 +491,14 @@ void mn_8022FD18(u8 arg0)
         return;
     }
     i = 0;
-    ptr2 = stock_digits.idx;
+    ptr2 = stock_digits;
     do {
         HSD_JObjClearFlagsAll(data->x58[*ptr2], JOBJ_HIDDEN);
         i += 1;
         ptr2 += 1;
     } while (i < 2);
     i = 0;
-    ptr3 = time_indices.digits.idx;
+    ptr3 = time_indices;
     do {
         HSD_JObjSetFlagsAll(data->x58[*ptr3], JOBJ_HIDDEN);
         i += 1;
@@ -1209,16 +1193,7 @@ HSD_GObj* mn_80230E38(int arg0)
 
                 switch (i) {
                 case 1: {
-                    union {
-                        struct {
-                            u32 bytes4;
-                            u16 bytes2;
-                        } packed;
-                        u8 idx[6];
-                    } time_indices;
-
-                    time_indices.packed.bytes4 = mn_804DBE10;
-                    time_indices.packed.bytes2 = mn_804DBE14;
+                    u8 time_indices[6] = { 2, 3, 5, 6, 7, 8 };
                     for (j = 0; j < 6; j++) {
                         HSD_JObj* text =
                             HSD_JObjLoadJoint(MenMainNmRl_Top.joint);
@@ -1226,8 +1201,7 @@ HSD_GObj* mn_80230E38(int arg0)
                                            MenMainNmRl_Top.matanim_joint,
                                            MenMainNmRl_Top.shapeanim_joint);
                         HSD_JObjAddChild(
-                            *(&user_data->x34[1].x0 + time_indices.idx[j]),
-                            text);
+                            *(&user_data->x34[1].x0 + time_indices[j]), text);
                     }
                     mn_8022FD18((u8) (((struct mn_8022FB88_arg1_t*)
                                            mn_804D6BD0->user_data)
@@ -1532,3 +1506,5 @@ bool mn_80231F80(u8 arg0)
     }
     return true;
 }
+
+u16 const mn_804DBDF8 = 0x203;
