@@ -3702,7 +3702,6 @@ void ftCo_800A7AAC(Fighter* fp)
     u8 _[0x18];
     Vec3 partner_pos;
     f32 d;
-    f32 cx;
 
     PAD_STACK(0xA);
     PAD_STACK(8);
@@ -3823,13 +3822,12 @@ void ftCo_800A7AAC(Fighter* fp)
             if (sub == 0) {
                 island = mpIsland_8005AB54(partner->coll_data.floor.index);
                 if (island != NULL && data->x54.y - fp->cur_pos.y > 0.0) {
-                    cx = fp->cur_pos.x;
-                    if (data->x54.x - cx > 0.0) {
-                        if (cx < island->x8.x) {
+                    if (data->x54.x - fp->cur_pos.x > 0.0) {
+                        if (fp->cur_pos.x < island->x8.x) {
                             ftCo_800A1F3C(fp, 5.0 + island->x8.x, island->x8.y,
                                           data->x56C + partner->x1A88.x564);
                         }
-                    } else if (cx > island->x14.x) {
+                    } else if (fp->cur_pos.x > island->x14.x) {
                         ftCo_800A1F3C(fp, island->x14.x - 5.0, island->x14.y,
                                       data->x56C + partner->x1A88.x564);
                     }
