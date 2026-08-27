@@ -60,12 +60,6 @@ sislib_UnkAlloc3* HSD_SisLib_804D797C;
 u32 lbl_8040C8C0[144] = { 0 };
 u32 HSD_SisLib_8040C680[144] = { 0 };
 
-/// extern ? *HSD_SisLib_804D796C;
-/// extern u8 *HSD_SisLib_804D7978;
-/// sislib_UnknownType001 HSD_SisLib_8040C490 = { 0, 1.0F };
-
-/// u8 HSD_SisLib_8040C490[0x60] = { 0 };
-
 static HSD_Archive* HSD_SisLib_804D1110[5];
 SIS* HSD_SisLib_804D1124[5];
 
