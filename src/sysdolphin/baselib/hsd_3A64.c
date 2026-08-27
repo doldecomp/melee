@@ -111,29 +111,46 @@ HSD_Text* HSD_SisLib_803A6754(int font_idx, int context_id)
 /// @param data output buffer for the converted string
 /// @param string ASCII string to be converted
 /// @return length of encoded string
+static void sisBeginLine(u8* data, s32* out_idx, s32* has_kerning)
+{
+    s32 state = *has_kerning;
+    s32 idx = *out_idx;
+
+    if (state == 0) {
+        data[idx++] = 0xA;
+        data[idx++] = 0xF4;
+        data[idx++] = 0x0;
+        state += 1;
+        data[idx++] = 0x0;
+        data[idx++] = 0x0;
+    }
+    *has_kerning = state;
+    *out_idx = idx;
+}
+
+static void sisEndKerning(u8* data, s32* out_idx, s32* has_kerning)
+{
+    s32 idx = *out_idx;
+
+    data[idx++] = 0xB;
+    *has_kerning = 0;
+    *out_idx = idx;
+}
+
 s32 HSD_SisLib_803A67EC(u8* data, u8* string)
 {
-    u8* lut_ptr;
-    s32 state;
-    s32 state_dot;
-    s32 out_idx_digit;
     u8* str_cursor;
-    s32 state_digit;
     s32 lut_idx;
     s32 in_idx;
     s32 out_idx;
     u8* char_ptr;
-    s32 state_colon;
     s32 has_kerning[1];
-    u8* out_ptr;
     u8 cur_char;
     u8 sjis_hi;
     u8 sjis_lo;
 
     has_kerning[0] = 0;
     str_cursor = string;
-    lut_ptr = lbl_8040C8C0;
-    out_ptr = HSD_SisLib_8040C680;
     out_idx = 0;
     for (in_idx = 0; in_idx < 0x80; in_idx++, str_cursor++) {
         char_ptr = &string[in_idx];
@@ -145,87 +162,43 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
             break;
         }
         if (cur_char == ' ') {
-            state = has_kerning[0];
-            if (state == 0) {
-                data[out_idx++] = 0xA;
-                data[out_idx++] = 0xF4;
-                data[out_idx++] = 0x0;
-                state += 1;
-                data[out_idx++] = 0x0;
-                data[out_idx++] = 0x0;
-            }
-            has_kerning[0] = state;
+            sisBeginLine(data, &out_idx, has_kerning);
             sjis_hi = 0x81;
             sjis_lo = 0x40;
         } else if (cur_char == '"') {
-            data[out_idx++] = 0xB;
-            has_kerning[0] = 0;
+            sisEndKerning(data, &out_idx, has_kerning);
             sjis_hi = 0x81;
             sjis_lo = 0x68;
         } else if (cur_char == '\'') {
-            data[out_idx++] = 0xB;
-            has_kerning[0] = 0;
+            sisEndKerning(data, &out_idx, has_kerning);
             sjis_hi = 0x81;
             sjis_lo = 0x66;
         } else if (cur_char == ',') {
-            data[out_idx++] = 0xB;
-            has_kerning[0] = 0;
+            sisEndKerning(data, &out_idx, has_kerning);
             sjis_hi = 0x81;
             sjis_lo = 0x43;
         } else if (cur_char == '-') {
-            data[out_idx++] = 0xB;
-            has_kerning[0] = 0;
+            sisEndKerning(data, &out_idx, has_kerning);
             sjis_hi = 0x81;
             sjis_lo = 0x7C;
         } else if (cur_char == '.') {
-            state_dot = has_kerning[0];
-            if (state_dot == 0) {
-                data[out_idx++] = 0xA;
-                data[out_idx++] = 0xF4;
-                data[out_idx++] = 0x0;
-                state_dot += 1;
-                data[out_idx++] = 0x0;
-                data[out_idx++] = 0x0;
-            }
-            has_kerning[0] = state_dot;
+            sisBeginLine(data, &out_idx, has_kerning);
             sjis_hi = 0x81;
             sjis_lo = 0x44;
         } else if ((cur_char >= '0') && (cur_char <= '9')) {
-            state_digit = has_kerning[0];
-            out_idx_digit = out_idx;
-            if (state_digit == 0) {
-                data[out_idx_digit++] = 0xA;
-                data[out_idx_digit++] = 0xF4;
-                data[out_idx_digit++] = 0x0;
-                state_digit += 1;
-                data[out_idx_digit++] = 0x0;
-                data[out_idx_digit++] = 0x0;
-            }
-            has_kerning[0] = state_digit;
-            out_idx = out_idx_digit;
+            sisBeginLine(data, &out_idx, has_kerning);
             sjis_hi = 0x82;
             sjis_lo = (*char_ptr) + 0x1F;
         } else if (cur_char == ':') {
-            state_colon = has_kerning[0];
-            if (state_colon == 0) {
-                data[out_idx++] = 0xA;
-                data[out_idx++] = 0xF4;
-                data[out_idx++] = 0x0;
-                state_colon += 1;
-                data[out_idx++] = 0x0;
-                data[out_idx++] = 0x0;
-            }
-            has_kerning[0] = state_colon;
+            sisBeginLine(data, &out_idx, has_kerning);
             sjis_hi = 0x81;
             sjis_lo = 0x46;
         } else if ((cur_char >= 'A') && (cur_char <= 'Z')) {
-            data[out_idx++] = 0xB;
-            has_kerning[0] = 0;
+            sisEndKerning(data, &out_idx, has_kerning);
             sjis_hi = 0x82;
             sjis_lo = (*char_ptr) + 0x1F;
         } else if ((cur_char >= 'a') && (cur_char <= 'z')) {
-            data[out_idx++] = 0xB;
-            has_kerning[0] = 0;
+            sisEndKerning(data, &out_idx, has_kerning);
             sjis_hi = 0x82;
             sjis_lo = (*char_ptr) + 0x20;
         } else {
@@ -239,17 +212,11 @@ s32 HSD_SisLib_803A67EC(u8* data, u8* string)
         for (lut_idx = 0; lut_idx < ARRAY_SIZE(HSD_SisLib_FontAtlas);
              lut_idx++)
         {
-            if ((sjis_hi == lut_ptr[lut_idx * 2]) &&
-                (sjis_lo == lut_ptr[lut_idx * 2 + 1]))
+            if ((sjis_hi == lbl_8040C8C0[lut_idx * 2]) &&
+                (sjis_lo == lbl_8040C8C0[lut_idx * 2 + 1]))
             {
-                s32 write_idx;
-
-                write_idx = out_idx;
-                out_idx += 1;
-                data[write_idx] = out_ptr[lut_idx * 2];
-                write_idx = out_idx;
-                out_idx += 1;
-                data[write_idx] = out_ptr[lut_idx * 2 + 1];
+                data[out_idx++] = HSD_SisLib_8040C680[lut_idx * 2];
+                data[out_idx++] = HSD_SisLib_8040C680[lut_idx * 2 + 1];
                 break;
             }
         }
