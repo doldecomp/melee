@@ -633,8 +633,8 @@ typedef struct grInishie1_801FB3F0_Vars {
     grInishie1_801FB3F0_Block* blocks;
 } grInishie1_801FB3F0_Vars;
 
-static inline void
-set_all_hatena(HSD_GObj* gobj, grInishie1_801FB3F0_Vars* vars)
+static inline void set_all_hatena(HSD_GObj* gobj,
+                                  grInishie1_801FB3F0_Vars* vars)
 {
     u32 i;
 

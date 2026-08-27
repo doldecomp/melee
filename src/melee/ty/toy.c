@@ -405,7 +405,7 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
                 } else {
                     flags.halfwords = gmMainLib_GetTrophyFlags();
                 }
-                if ((u8) *(u16*) (flags.bytes + byte_off) != 0) {
+                if ((u8) * (u16*) (flags.bytes + byte_off) != 0) {
                     obtained_arr[obtained_count++] = trophy;
                 } else {
                     new_arr[new_count++] = trophy;
@@ -5221,8 +5221,7 @@ static inline void Toy_80310324_setup_sobjs(ToyGlobalsS_* data, UNK_T* syms)
     } while (i < 3);
 }
 
-static inline void _Toy_80310324_setup_trophy(Toy26B8* toy,
-                                                ToyGlobalsS_* tg)
+static inline void _Toy_80310324_setup_trophy(Toy26B8* toy, ToyGlobalsS_* tg)
 {
     s32 trophy_count;
     ToyGlobalsS_* display;

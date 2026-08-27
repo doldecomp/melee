@@ -1189,10 +1189,9 @@ void hsd_80394F48(void* data)
         {
             s32 xfb_width = sp->x3C;
 
-            hsd_803921B8(
-                ((ParticleFontData*) sp->x4C)->x968,
-                hsd_80394F48_get_x4(px4), *px8, (&sp->x24)[sp->x34],
-                xfb_width, *px40, sp->x44, *px50);
+            hsd_803921B8(((ParticleFontData*) sp->x4C)->x968,
+                         hsd_80394F48_get_x4(px4), *px8, (&sp->x24)[sp->x34],
+                         xfb_width, *px40, sp->x44, *px50);
         }
     }
 
@@ -1221,8 +1220,8 @@ void hsd_80394F48(void* data)
                      (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     } else {
         hsd_803921B8(((ParticleFontData*) sp->x4C)->x968, *px4, *px8,
-                     (&sp->x24)[sp->x34], sp->x3C,
-                     hsd_80394F48_get_x40(px40), sp->x44, *px50);
+                     (&sp->x24)[sp->x34], sp->x3C, hsd_80394F48_get_x40(px40),
+                     sp->x44, *px50);
     }
 
     *px4 += 11;
@@ -2035,10 +2034,10 @@ static char* lbl_804D62F8 = "| INPUT ADDRESS : 8%07X |";
 
 static inline void hsd_80396884_draw_char(s8 ch, s32 b6)
 {
-    hsd_803922FC((u8*) hsd_804CF810.x4C + (ch & 0x7F) * 0x38,
-                 hsd_804CF810.x4, hsd_804CF810.x8, b6,
-                 (&hsd_804CF810.x24)[hsd_804CF810.x34], hsd_804CF810.x3C,
-                 hsd_804CF810.x40, hsd_804CF810.x44, hsd_804CF810.x50);
+    hsd_803922FC((u8*) hsd_804CF810.x4C + (ch & 0x7F) * 0x38, hsd_804CF810.x4,
+                 hsd_804CF810.x8, b6, (&hsd_804CF810.x24)[hsd_804CF810.x34],
+                 hsd_804CF810.x3C, hsd_804CF810.x40, hsd_804CF810.x44,
+                 hsd_804CF810.x50);
 }
 
 static inline void* hsd_80396884_get_x50(void)
@@ -2614,9 +2613,9 @@ void hsd_803975D4(void)
     ((struct ParticleInputState*) sp)->port = port;
     pads = ((struct ParticleInputState*) sp)->pads;
     buttons = pads[((struct ParticleInputState*) sp)->port].button;
-    changed = ((PADStatus*) &sp->_pad4[0x30])
-                  [((struct ParticleInputState*) sp)->port]
-                      .button ^
+    changed = ((PADStatus*) &sp
+                   ->_pad4[0x30])[((struct ParticleInputState*) sp)->port]
+                  .button ^
               pads[((struct ParticleInputState*) sp)->port].button;
     sp->xC0 = buttons;
     new_press = (u16) (buttons & changed);

@@ -87,15 +87,15 @@ static inline GXColor ifStatus_GetDamageColor(f32 factor)
 {
     GXColor color;
 
-    color.r = (s8) (factor * (f32) (ifStatus_804D57AC[0] -
-                                     ifStatus_804D57A8[0]) +
-                     (f32) ifStatus_804D57A8[0]);
-    color.g = (s8) (factor * (f32) (ifStatus_804D57AC[1] -
-                                     ifStatus_804D57A8[1]) +
-                     (f32) ifStatus_804D57A8[1]);
-    color.b = (s8) (factor * (f32) (ifStatus_804D57AC[2] -
-                                     ifStatus_804D57A8[2]) +
-                     (f32) ifStatus_804D57A8[2]);
+    color.r =
+        (s8) (factor * (f32) (ifStatus_804D57AC[0] - ifStatus_804D57A8[0]) +
+              (f32) ifStatus_804D57A8[0]);
+    color.g =
+        (s8) (factor * (f32) (ifStatus_804D57AC[1] - ifStatus_804D57A8[1]) +
+              (f32) ifStatus_804D57A8[1]);
+    color.b =
+        (s8) (factor * (f32) (ifStatus_804D57AC[2] - ifStatus_804D57A8[2]) +
+              (f32) ifStatus_804D57A8[2]);
     color.a = 255;
     return color;
 }
@@ -246,9 +246,8 @@ void ifStatus_802F4B84(IfDamageState* state, s32 is_stamina)
     PAD_STACK(8);
 }
 
-static inline void
-ifStatus_InitDamageDigits(IfDamageState* state,
-                          HSD_MatAnimJoint** anim_base)
+static inline void ifStatus_InitDamageDigits(IfDamageState* state,
+                                             HSD_MatAnimJoint** anim_base)
 {
     HSD_JObj* digit_jobj;
     u8 ones_digit;
@@ -276,23 +275,20 @@ ifStatus_InitDamageDigits(IfDamageState* state,
     HSD_TObjAddAnimAll(digit_jobj->u.dobj->mobj->tobj,
                        (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
                            ->child->child->aobjdesc->fobjdesc);
-    HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj,
-                       2.0F * hundreds_digit);
+    HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * hundreds_digit);
     HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
 }
 
-static inline void
-ifStatus_UpdateTensDigit(IfDamageState* state,
-                         HSD_MatAnimJoint** anim_base,
-                         HSD_JObj* digit_jobj)
+static inline void ifStatus_UpdateTensDigit(IfDamageState* state,
+                                            HSD_MatAnimJoint** anim_base,
+                                            HSD_JObj* digit_jobj)
 {
     u8 tens_digit;
 
     tens_digit = (state->damage_percent % 100) / 10;
-    HSD_TObjAddAnimAll(
-        digit_jobj->u.dobj->mobj->tobj,
-        (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
-            ->child->child->aobjdesc->fobjdesc);
+    HSD_TObjAddAnimAll(digit_jobj->u.dobj->mobj->tobj,
+                       (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
+                           ->child->child->aobjdesc->fobjdesc);
     HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * tens_digit);
     HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
 
@@ -305,9 +301,10 @@ ifStatus_UpdateTensDigit(IfDamageState* state,
     }
 }
 
-static inline IfDamageState*
-ifStatus_FindDamageState(HudIndex* hud, HSD_GObj* gobj, s32* index,
-                         IfDamageState** player)
+static inline IfDamageState* ifStatus_FindDamageState(HudIndex* hud,
+                                                      HSD_GObj* gobj,
+                                                      s32* index,
+                                                      IfDamageState** player)
 {
     IfDamageState* ptr;
     s32 i;
@@ -325,8 +322,8 @@ ifStatus_FindDamageState(HudIndex* hud, HSD_GObj* gobj, s32* index,
     return NULL;
 }
 
-static inline void
-ifStatus_FinishHundredsDigit(HSD_JObj* digit_jobj, IfDamageState* state)
+static inline void ifStatus_FinishHundredsDigit(HSD_JObj* digit_jobj,
+                                                IfDamageState* state)
 {
     s16 clamped_damage;
     f32 factor;
@@ -388,17 +385,15 @@ ifStatus_FinishHundredsDigit(HSD_JObj* digit_jobj, IfDamageState* state)
     }
 }
 
-static inline void
-ifStatus_FinishOnesDigit(IfDamageState* state,
-                         HSD_MatAnimJoint** anim_base, f32 ones_digit,
-                         HSD_JObj** digit_jobj)
+static inline void ifStatus_FinishOnesDigit(IfDamageState* state,
+                                            HSD_MatAnimJoint** anim_base,
+                                            f32 ones_digit,
+                                            HSD_JObj** digit_jobj)
 {
-    HSD_TObjAddAnimAll(
-        (*digit_jobj)->u.dobj->mobj->tobj,
-        (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
-            ->child->child->aobjdesc->fobjdesc);
-    HSD_TObjReqAnimAll((*digit_jobj)->u.dobj->mobj->tobj,
-                       2.0F * ones_digit);
+    HSD_TObjAddAnimAll((*digit_jobj)->u.dobj->mobj->tobj,
+                       (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
+                           ->child->child->aobjdesc->fobjdesc);
+    HSD_TObjReqAnimAll((*digit_jobj)->u.dobj->mobj->tobj, 2.0F * ones_digit);
     HSD_AObjSetRate((*digit_jobj)->u.dobj->mobj->tobj->aobj, 0.0F);
 
     *digit_jobj = state->jobjs[Tens];
@@ -482,20 +477,17 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
 
     digit_jobj = state->jobjs[Hundreds];
     hundreds_digit = (state->damage_percent % 1000) / 100;
-    HSD_TObjAddAnimAll(
-        digit_jobj->u.dobj->mobj->tobj,
-        (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
-            ->child->child->aobjdesc->fobjdesc);
+    HSD_TObjAddAnimAll(digit_jobj->u.dobj->mobj->tobj,
+                       (HSD_TexAnim*) ((HSD_AnimJoint*) anim_base[0])
+                           ->child->child->aobjdesc->fobjdesc);
     HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj, 2.0F * hundreds_digit);
     ifStatus_FinishHundredsDigit(digit_jobj, state);
 
     /* Update JObj positions when animating */
     if (lb_8000B09C(jobj)) {
         for (i = 0; i < 4; i++) {
-            state->translation_x[i] =
-                HSD_JObjGetTranslationX(state->jobjs[i]);
-            state->translation_y[i] =
-                HSD_JObjGetTranslationY(state->jobjs[i]);
+            state->translation_x[i] = HSD_JObjGetTranslationX(state->jobjs[i]);
+            state->translation_y[i] = HSD_JObjGetTranslationY(state->jobjs[i]);
         }
     }
 
@@ -673,8 +665,8 @@ static inline HSD_JObj* ifStatus_GetDamageJObj(s32 index, HSD_JObj* jobj)
     return (HSD_JObj*) ifStatus_802F6194(node, index);
 }
 
-static inline void ifStatus_InitDamageDisplay(
-    IfDamageState* state, HSD_MatAnimJoint** anim_base)
+static inline void ifStatus_InitDamageDisplay(IfDamageState* state,
+                                              HSD_MatAnimJoint** anim_base)
 {
     HSD_TObj* tobj;
     HSD_JObj* percent_jobj = state->jobjs[3];
@@ -697,8 +689,8 @@ static inline void ifStatus_InitDamageDisplay(
     ifStatus_802F5B48(state->HUD_parent_entity);
 }
 
-static inline void ifStatus_InitDamageAnim(
-    HSD_JObj* jobj, HudIndex* hud, HSD_MatAnimJoint*** anim_base)
+static inline void ifStatus_InitDamageAnim(HSD_JObj* jobj, HudIndex* hud,
+                                           HSD_MatAnimJoint*** anim_base)
 {
     HSD_JObjRemoveAnim(jobj);
     (*anim_base) = (HSD_MatAnimJoint**) &hud->janim_selection_joints;

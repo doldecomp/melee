@@ -11,13 +11,12 @@
 #include <placeholder.h>
 
 #include "dolphin/gx/GXStruct.h"
+#include "ft/types.h"
 
 #include "lb/forward.h"
 
 #include "lb/lb_013B.h"
 #include "lb/types.h"
-
-#include "ft/types.h"
 
 #include <math.h>
 #include <baselib/wobj.h>
@@ -531,8 +530,7 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
 
     {
         MtxPtr jobj_mtx = HSD_JObjGetMtxPtr(jobj);
-        HSD_MtxInverseConcat(HSD_JObjGetMtxPtr(parent), jobj_mtx,
-                             out_mtx);
+        HSD_MtxInverseConcat(HSD_JObjGetMtxPtr(parent), jobj_mtx, out_mtx);
     }
 
     for (i = 0; i < 3; i++) {
@@ -899,10 +897,9 @@ void lbBgFlash_80021410(void* arg0)
     rem = 3.141592653589793 - (f64) acos2;
     if (rem < 0.1745329201221466) {
         f32 ratio = (f32) (fabs(rem) / 0.1745329201221466);
-        acos2 =
-            (f32) (2.9670597334676465 +
-                   (f64) (f32) ((f64) ratio *
-                                ((f64) acos2 - 2.9670597334676465)));
+        acos2 = (f32) (2.9670597334676465 +
+                       (f64) (f32) ((f64) ratio *
+                                    ((f64) acos2 - 2.9670597334676465)));
     }
 
     acos1 -= angle1;

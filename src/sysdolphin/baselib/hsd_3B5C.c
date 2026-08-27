@@ -585,10 +585,8 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
                             chroma_x = (work_r8_2 % 2) * 4;
                             scratch_r16 =
                                 base + (((work_r5 >> 1) +
-                                         (work_r25 +
-                                          ((work_r4 & 2) * 4)) +
-                                         (chroma_x +
-                                          ((work_r8_2 / 2) << 5))) *
+                                         (work_r25 + ((work_r4 & 2) * 4)) +
+                                         (chroma_x + ((work_r8_2 / 2) << 5))) *
                                         4);
                         }
                         scratch_r20 = M2C_FIELD(scratch_r16, s32*, 0x618);

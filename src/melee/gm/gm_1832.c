@@ -1791,8 +1791,8 @@ static inline u64 gm_80187F48_GetAudioConfig(u8 stage_index, char** table)
 }
 
 static inline void gm_80187F48_SetupCamera(HSD_GObj* gobj,
-                                            gm_1832_804736C0_t* data,
-                                            HSD_CObj* cobj)
+                                           gm_1832_804736C0_t* data,
+                                           HSD_CObj* cobj)
 {
     HSD_GObj_SetupProc(gobj, fn_80187910, 0);
     HSD_CObjAddAnim(cobj, *(HSD_CameraAnim**) data->x4[1]);
@@ -2468,8 +2468,8 @@ void fn_801891F4(void)
                 HSD_JObj* jobj;
                 Vec3 pos;
                 lbAudioAx_80024030(8);
-                item = TrainingItemTable_Get()
-                           [lbl_80473700.css.menu_values[1]].item_id;
+                item = TrainingItemTable_Get()[lbl_80473700.css.menu_values[1]]
+                           .item_id;
                 jobj = Player_GetEntity(0)->hsd_obj;
                 HSD_JObjGetTranslation2(jobj, &pos);
                 pos.y += 10.0f;
@@ -2631,9 +2631,9 @@ void fn_801891F4(void)
             sub->anim_frames[22] = 0x14;
             {
                 f32 speed_scale = speeds[sub->menu_values[0]];
-                lb_80019880(__cvt_dbl_usll(
-                    (f64) (0.016666668f / speed_scale *
-                           (f32) gm_801891F4_GetTickRate())));
+                lb_80019880(
+                    __cvt_dbl_usll((f64) (0.016666668f / speed_scale *
+                                          (f32) gm_801891F4_GetTickRate())));
             }
 
             fn_80188550(sub->menu_values[2] + 1);

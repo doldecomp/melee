@@ -1091,7 +1091,8 @@ void grGreens_802159B8(Ground* gp, int i, int j, int value)
     float f;
     PAD_STACK(0x10);
     if ((gobj = gp->u.greens.x8_blocks[j][i].x10) &&
-        !gp->u.greens.x8_blocks[j][i].x1_7) {
+        !gp->u.greens.x8_blocks[j][i].x1_7)
+    {
         gp->u.greens.x8_blocks[j][i].x1_7 = 1;
         grMaterial_801C8E28(gobj);
         gp->u.greens.x8_blocks[j][i].x1C = value;
@@ -1226,11 +1227,10 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
             if (row > 0 && (gp->u.greens.x8_blocks[row - 1][col].status == 1 ||
                             gp->u.greens.x8_blocks[row - 1][col].status == 2))
             {
-                Vec (*positions)[6] = (Vec(*)[6]) gp->u.greens.x4;
+                Vec(*positions)[6] = (Vec(*)[6]) gp->u.greens.x4;
                 float spacing;
 
-                spacing = positions[row][col].y -
-                          positions[row - 1][col].y;
+                spacing = positions[row][col].y - positions[row - 1][col].y;
                 if (gp->u.greens.x8_blocks[row][col].x8 -
                         gp->u.greens.x8_blocks[row - 1][col].x8 <
                     spacing)
@@ -1243,7 +1243,7 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
         }
 
         {
-            Vec (*positions)[6] = (Vec(*)[6]) gp->u.greens.x4;
+            Vec(*positions)[6] = (Vec(*)[6]) gp->u.greens.x4;
             Vec* position = &positions[row][col];
             struct grGreens_BlockVars* block =
                 &gp->u.greens.x8_blocks[row][col];
@@ -1279,9 +1279,10 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
                         break;
                     }
                     pos.x = ((Vec(*)[6]) gp->u.greens.x4)[next_row][col].x;
-                    pos.y = ((Vec(*)[6]) gp->u.greens.x4)[next_row][col].y -
-                            ((Vec(*)[6]) gp->u.greens.x4)[next_row - 1][col].y +
-                            gp->u.greens.x8_blocks[next_row - 1][col].x8;
+                    pos.y =
+                        ((Vec(*)[6]) gp->u.greens.x4)[next_row][col].y -
+                        ((Vec(*)[6]) gp->u.greens.x4)[next_row - 1][col].y +
+                        gp->u.greens.x8_blocks[next_row - 1][col].x8;
                     pos.z = 0.0f;
                     gp->u.greens.x8_blocks[next_row][col].x8 = pos.y;
                     HSD_JObjSetTranslate(

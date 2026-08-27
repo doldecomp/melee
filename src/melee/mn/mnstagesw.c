@@ -681,9 +681,7 @@ static inline void mnStageSw_InitUserData(MnStageSwData* user_data, s8 state)
     disabled = i;
     stage_ids = mnStageSw_803ED4C4;
     for (; (u8) i < NUM_STAGES; stage_ids++, i++) {
-        if (gm_80164430(
-                gm_801641CC(mnStageSw_803ED4C4[(u8) i])) != 0)
-        {
+        if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) i])) != 0) {
             user_data->x2[(u8) i] = gm_80164250(*stage_ids);
         } else {
             user_data->x2[(u8) i] = disabled;

@@ -484,10 +484,10 @@ void grZebes_801D881C(HSD_GObj* gobj)
                         (grZe_BubbleSpawnPos*) grZe_8049F140;
                     {
                         f32 scale_range = yakumono_param->x5C - scale_min;
-                        grZebes_801DAE70(
-                            spawn_phase, 4, pos[spawn_phase].x14_x,
-                            pos[spawn_phase].x18_y,
-                            scale_range * rand + scale_min);
+                        grZebes_801DAE70(spawn_phase, 4,
+                                         pos[spawn_phase].x14_x,
+                                         pos[spawn_phase].x18_y,
+                                         scale_range * rand + scale_min);
                     }
                 }
                 if (spawn_phase <= mirror) {
@@ -960,7 +960,8 @@ void grZebes_801D99E0(HSD_GObj* gobj)
         target_level = 0.0f;
 
         if ((delta < 0 ? -abs_delta : abs_delta) < threshold ||
-            (abs_delta < target_level ? -abs_delta : abs_delta) < accel) {
+            (abs_delta < target_level ? -abs_delta : abs_delta) < accel)
+        {
             gp->u.zebes5.xC8 = 4;
         } else {
             gp->u.zebes5.xD0 += accel;
@@ -1887,10 +1888,10 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                                 effective_dist = 0.001;
                             }
                             if (effective_dist < col_rad) {
-                                f32 strength = (f32) (((f64) (col_rad /
-                                                               effective_dist) -
-                                                        1.0) *
-                                                       0.5);
+                                f32 strength =
+                                    (f32) (((f64) (col_rad / effective_dist) -
+                                            1.0) *
+                                           0.5);
                                 strength = (f32) ((f64) strength * 0.9);
                                 if (a >= 7) {
                                     f32 vx = -dx * strength;
@@ -2071,7 +2072,8 @@ bool grZebes_801DBB60(Item_GObj* yaku)
 
                     {
                         if ((f32) (2.0 * (f64) bubbles->x18_size + (f64) bx) >
-                            width) {
+                            width)
+                        {
                             f32 new_width;
                             if (t < 0.5f) {
                                 f32 dpx2 = bubbles->x08_x - x1;

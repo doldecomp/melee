@@ -822,8 +822,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
         player_stocks = arg1->x0.stocks;
     }
 
-    if ((arg1->x0.ckind == CKIND_ZELDA) &&
-        (arg1->x0.xC.x12 != 0)) {
+    if ((arg1->x0.ckind == CKIND_ZELDA) && (arg1->x0.xC.x12 != 0)) {
         player_ckind = CKIND_SEAK;
     } else if (((arg1->x0.x8 & 0x80) != 0) && (arg1->x0.x9 == 1) &&
                (arg1->x0.ckind == CKIND_POPONANA))

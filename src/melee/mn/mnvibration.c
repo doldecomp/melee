@@ -454,12 +454,11 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 HSD_JObjSetTranslateX(cursor_jobj,
                                       HSD_JObjGetTranslationX(jobj17));
                 HSD_JObjSetTranslateY(
-                    cursor_jobj, (spacing * (f32) cursor_row) +
-                                     HSD_JObjGetTranslationY(
-                                         data2->jobjs[17]));
-                HSD_JObjSetTranslateZ(
                     cursor_jobj,
-                    HSD_JObjGetTranslationZ(data2->jobjs[17]));
+                    (spacing * (f32) cursor_row) +
+                        HSD_JObjGetTranslationY(data2->jobjs[17]));
+                HSD_JObjSetTranslateZ(
+                    cursor_jobj, HSD_JObjGetTranslationZ(data2->jobjs[17]));
             }
         } else if (GetNameCount() > 8 && data->scroll_offset != 0) {
             sfxMove();
@@ -493,12 +492,11 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 HSD_JObjSetTranslateX(cursor_jobj,
                                       HSD_JObjGetTranslationX(jobj17));
                 HSD_JObjSetTranslateY(
-                    cursor_jobj, (spacing * (f32) cursor_row) +
-                                     HSD_JObjGetTranslationY(
-                                         data2->jobjs[17]));
-                HSD_JObjSetTranslateZ(
                     cursor_jobj,
-                    HSD_JObjGetTranslationZ(data2->jobjs[17]));
+                    (spacing * (f32) cursor_row) +
+                        HSD_JObjGetTranslationY(data2->jobjs[17]));
+                HSD_JObjSetTranslateZ(
+                    cursor_jobj, HSD_JObjGetTranslationZ(data2->jobjs[17]));
             }
         } else if (GetNameCount() > 8) {
             name_idx = mnVibration_GetNameSlot(data, 8);

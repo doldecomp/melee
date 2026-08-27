@@ -1651,8 +1651,7 @@ void fn_8019A158(void)
     }
 
     if (mode == 1) {
-        BracketEntry* bracket =
-            fn_8019A158_GetBracketEntry(bracket_idx);
+        BracketEntry* bracket = fn_8019A158_GetBracketEntry(bracket_idx);
         cursor = (u8*) bracket;
         for (i = 0; i < 4; i++) {
             if (i == slot) {
@@ -1663,8 +1662,7 @@ void fn_8019A158(void)
             cursor += 0x2C;
         }
     } else if (td1->x2D == 1) {
-        BracketEntry* bracket =
-            fn_8019A158_GetBracketEntry(bracket_idx);
+        BracketEntry* bracket = fn_8019A158_GetBracketEntry(bracket_idx);
         cursor = (u8*) bracket;
         for (i = 0; i < 4; i++) {
             if (cursor[0x4E] == 3) {
@@ -1685,8 +1683,7 @@ void fn_8019A158(void)
             cursor += 0x2C;
         }
     } else {
-        BracketEntry* bracket =
-            fn_8019A158_GetBracketEntry(bracket_idx);
+        BracketEntry* bracket = fn_8019A158_GetBracketEntry(bracket_idx);
         counter = 0;
         cursor = (u8*) bracket;
         for (i = 0; i < 4; i++) {

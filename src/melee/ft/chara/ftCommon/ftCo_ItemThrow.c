@@ -557,8 +557,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                     vec2.z = 0;
                     pl_8003E978(fp->player_id, fp->x221F_b4, fp->item_gobj,
                                 vec2.y, base_throw_speed, velocity_multiplier,
-                                throw_speed,
-                                vec0.x, vec0.y, fsm);
+                                throw_speed, vec0.x, vec0.y, fsm);
                     {
                         FtMoveId msid = fp->motion_id;
                         if (msid == (FtMoveId) ftCo_MS_LightThrowDrop) {

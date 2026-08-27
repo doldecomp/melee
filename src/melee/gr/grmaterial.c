@@ -293,8 +293,8 @@ static inline void grMaterial_SetTExpReg(HSD_TECnst* cnst)
     HSD_TExpSetReg((HSD_TExp*) cnst);
 }
 
-static inline s32 grMaterial_GetFreeColorReg(HSD_TECnst* cnst,
-                                             HSD_MObj* mobj, s32 start)
+static inline s32 grMaterial_GetFreeColorReg(HSD_TECnst* cnst, HSD_MObj* mobj,
+                                             s32 start)
 {
     return lbGetFreeColorRegister(start, mobj, (HSD_TExp*) cnst);
 }
@@ -305,8 +305,8 @@ static inline GXTevKColorSel grMaterial_GetKColorSel(s32 reg)
 }
 
 static inline void fn_801C8EF8_inline(Ground* gp, HSD_MObj* mobj,
-                                     HSD_TECnst* cnst,
-                                     HSD_TevDesc* tevdesc, GXColor* color)
+                                      HSD_TECnst* cnst, HSD_TevDesc* tevdesc,
+                                      GXColor* color)
 {
     s32 reg2;
     s32 reg1_lt4;

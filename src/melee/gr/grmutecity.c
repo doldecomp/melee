@@ -1642,15 +1642,12 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
         PSVECCrossProduct(&spB4, &sp90, &spA8);
         lbVector_Normalize(&spA8);
 
-        car_pos.x =
-            (3.0 * sp90.x) +
-            (((spC0.x - spCC.x) * grMc_8049F4B8[car_idx].xC) + spCC.x);
-        car_pos.y =
-            (3.0 * sp90.y) +
-            (((spC0.y - spCC.y) * grMc_8049F4B8[car_idx].xC) + spCC.y);
-        car_pos.z =
-            (3.0 * sp90.z) +
-            (((spC0.z - spCC.z) * grMc_8049F4B8[car_idx].xC) + spCC.z);
+        car_pos.x = (3.0 * sp90.x) +
+                    (((spC0.x - spCC.x) * grMc_8049F4B8[car_idx].xC) + spCC.x);
+        car_pos.y = (3.0 * sp90.y) +
+                    (((spC0.y - spCC.y) * grMc_8049F4B8[car_idx].xC) + spCC.y);
+        car_pos.z = (3.0 * sp90.z) +
+                    (((spC0.z - spCC.z) * grMc_8049F4B8[car_idx].xC) + spCC.z);
         *(Vec3*) &grMc_8049F4B8[car_idx].x14 = car_pos;
 
         HSD_JObjSetTranslate(jobj, &car_pos);
@@ -1668,8 +1665,8 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
                 if (sound_count < 1) {
                     if (car_pos.z < 0.0f) {
                         spline_t = (car_pos.z * car_pos.z) +
-                                  ((car_pos.x * car_pos.x) +
-                                   (car_pos.y * car_pos.y));
+                                   ((car_pos.x * car_pos.x) +
+                                    (car_pos.y * car_pos.y));
                         distance = sqrtf(spline_t);
                         spline_t = distance;
                         if (spline_t < 300.0f) {
@@ -1699,8 +1696,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
             if (age > yakumono_param->x30) {
                 if (!grMc_8049F4B8[car_idx].x22_flags.b0) {
                     grLib_801C98A0(jobj);
-                    grMc_8049F4B8[car_idx].x28 =
-                        (s32) (child_jobj = NULL);
+                    grMc_8049F4B8[car_idx].x28 = (s32) (child_jobj = NULL);
                     grLib_801C96F8(0xE3, 0, &car_pos);
                     if (jobj != NULL) {
                         child_jobj = jobj->child;

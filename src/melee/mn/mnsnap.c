@@ -1682,7 +1682,7 @@ void fn_802545C4(void)
             sfxBack();
         } else if (buttons & 0xCF) {
             result = mnSnap_80253BE0(buttons, &mnSnap_804A0A10.move_idx,
-                                      mnSnap_GetActivePhotoCount());
+                                     mnSnap_GetActivePhotoCount());
             if (result == 2) {
                 mnSnap_80253640(mnSnap_804A0A10.move_idx / 4);
                 mnSnap_80253964();
@@ -2483,8 +2483,7 @@ void fn_80257D7C(void)
 
 static inline void mnSnap_LoadPageIndicator(void** page_joint,
                                             mnSnap_State* snap,
-                                            HSD_JObj** parent,
-                                            HSD_JObj** jobj)
+                                            HSD_JObj** parent, HSD_JObj** jobj)
 {
     *jobj = HSD_JObjLoadJoint((HSD_Joint*) *page_joint);
     snap->fullview_jobj = *jobj;
@@ -2582,17 +2581,15 @@ void mnSnap_80257F24(void)
         "MenMainConSn_Top_animjoint", main_matanim,
         "MenMainConSn_Top_matanim_joint", main_shapeanim,
         "MenMainConSn_Top_shapeanim_joint", csr_joint,
-        "MenMainSubSn_Top_joint", csr_animjoint,
-        "MenMainSubSn_Top_animjoint", csr_matanim,
-        "MenMainSubSn_Top_matanim_joint", csr_shapeanim,
+        "MenMainSubSn_Top_joint", csr_animjoint, "MenMainSubSn_Top_animjoint",
+        csr_matanim, "MenMainSubSn_Top_matanim_joint", csr_shapeanim,
         "MenMainSubSn_Top_shapeanim_joint", photo_joint,
         "MenMainSubCsrSn_Top_joint", sub_animjoint,
         "MenMainSubCsrSn_Top_animjoint", sub_matanim,
         "MenMainSubCsrSn_Top_matanim_joint", sub_shapeanim,
         "MenMainSubCsrSn_Top_shapeanim_joint", page_joint,
-        "MenMainPhotoSn_Top_joint", arrows_joint,
-        "MenMainLoadSn_Top_joint", arrows_animjoint,
-        "MenMainLoadSn_Top_animjoint", arrows_matanim,
+        "MenMainPhotoSn_Top_joint", arrows_joint, "MenMainLoadSn_Top_joint",
+        arrows_animjoint, "MenMainLoadSn_Top_animjoint", arrows_matanim,
         "MenMainLoadSn_Top_matanim_joint", arrows_shapeanim,
         "MenMainLoadSn_Top_shapeanim_joint", warn_joint,
         "MenMainWarCmn_Top_joint", warn_animjoint,

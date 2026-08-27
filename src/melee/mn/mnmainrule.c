@@ -580,8 +580,7 @@ void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
     case 4:
         if ((mn_804A04F0.buttons & 4) != 0) {
             if (arg2 == 0 || arg2 == 2 || arg2 == 4) {
-                settings =
-                    &mn_803EC770[mn_803EC7DC[arg2][1] - arg3];
+                settings = &mn_803EC770[mn_803EC7DC[arg2][1] - arg3];
             }
             HSD_JObjReqAnimAll(arg1, settings->start_frame);
         } else {
@@ -1098,8 +1097,7 @@ HSD_GObj* mn_80230E38(int arg0)
     {
         mn_804A04F0.confirmed_selection = user_data->x9;
     } else {
-        mn_804A04F0.confirmed_selection =
-            *(&user_data->x2 + user_data->x1);
+        mn_804A04F0.confirmed_selection = *(&user_data->x2 + user_data->x1);
     }
 
     if ((u8) arg0 != 0) {
@@ -1222,8 +1220,8 @@ HSD_GObj* mn_80230E38(int arg0)
                         HSD_JObjAddAnimAll(text, MenMainNmRl_Top.animjoint,
                                            MenMainNmRl_Top.matanim_joint,
                                            MenMainNmRl_Top.shapeanim_joint);
-                        HSD_JObjAddChild(
-                            *(&user_data->x34[1].x0 + *index_ptr), text);
+                        HSD_JObjAddChild(*(&user_data->x34[1].x0 + *index_ptr),
+                                         text);
                     }
                     mn_8022FD18((u8) (((struct mn_8022FB88_arg1_t*)
                                            mn_804D6BD0->user_data)
@@ -1243,8 +1241,8 @@ HSD_GObj* mn_80230E38(int arg0)
                         HSD_JObjAddAnimAll(text, MenMainNmRl_Top.animjoint,
                                            MenMainNmRl_Top.matanim_joint,
                                            MenMainNmRl_Top.shapeanim_joint);
-                        HSD_JObjAddChild(
-                            *(&user_data->x34[3].x0 + *index_ptr), text);
+                        HSD_JObjAddChild(*(&user_data->x34[3].x0 + *index_ptr),
+                                         text);
                     }
                     digit_jobj = (HSD_JObj*) mn_80231634(
                         (struct mn_80231634_t*) *(&user_data->x34[3].x0 + 2));

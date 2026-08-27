@@ -310,8 +310,7 @@ void fn_80251FE4(void)
                     if (mnInfo_80251A08(*trophy) != 0) {
                         u8 id = *trophy;
 
-                        mnInfo_80251D58(gobj, i, id,
-                                        *gmMainLib_8015D804(id));
+                        mnInfo_80251D58(gobj, i, id, *gmMainLib_8015D804(id));
                         mnInfo_80251F04(gobj, i, id);
                     }
                     trophy++;
@@ -535,10 +534,11 @@ s32 mnInfo_80252758(void)
 
     archive = mn_804D6BB8;
     lbArchive_LoadSections(
-        archive, &mnInfo_804A0958.joint, "MenMainConCo_Top_joint", animjoint,
-        "MenMainConCo_Top_animjoint", &mnInfo_804A0958.matanim_joint,
-        "MenMainConCo_Top_matanim_joint", &mnInfo_804A0958.shapeanim_joint,
-        "MenMainConCo_Top_shapeanim_joint", 0);
+        archive, (void**) &mnInfo_804A0958.joint, "MenMainConCo_Top_joint",
+        animjoint, "MenMainConCo_Top_animjoint",
+        &mnInfo_804A0958.matanim_joint, "MenMainConCo_Top_matanim_joint",
+        &mnInfo_804A0958.shapeanim_joint, "MenMainConCo_Top_shapeanim_joint",
+        0);
 
     mnInfo_80251AFC();
 

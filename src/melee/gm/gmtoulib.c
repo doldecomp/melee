@@ -994,8 +994,7 @@ void fn_8018C8D4(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
         c7 = c0;
         {
             GXColor* color = &c7;
-            DrawRectangle((f32) (arg1 + 0x2B),
-                          (f32) (mid_y = arg2 + half_h),
+            DrawRectangle((f32) (arg1 + 0x2B), (f32) (mid_y = arg2 + half_h),
                           ((f32) arg3 + thickness) - 43.0f, neg_thickness,
                           color);
         }
@@ -1427,8 +1426,8 @@ void fn_8018DC18(BracketEntry* data, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
             c6 = data->x20;
             {
                 GXColor* color = &c6;
-                DrawRectangle((f32) arg1, (f32) arg5,
-                              (f32) half + thickness, neg_thickness, color);
+                DrawRectangle((f32) arg1, (f32) arg5, (f32) half + thickness,
+                              neg_thickness, color);
             }
             return;
         }
@@ -1449,8 +1448,8 @@ void fn_8018DC18(BracketEntry* data, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
         c9 = data->x20;
         {
             GXColor* color = &c9;
-            DrawRectangle((f32) center, (f32) arg5,
-                          (f32) half + thickness, neg_thickness, color);
+            DrawRectangle((f32) center, (f32) arg5, (f32) half + thickness,
+                          neg_thickness, color);
         }
     }
 }

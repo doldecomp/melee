@@ -1,5 +1,0 @@
-git diff --check -- src/melee/gm/gmresultplayer.c
-conflict/reject scan
-PASS: no whitespace errors, conflict markers, .rej, or .orig residue
-scoped status:
- M src/melee/gm/gmresultplayer.c
