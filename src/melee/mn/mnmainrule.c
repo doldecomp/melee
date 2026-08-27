@@ -1037,7 +1037,6 @@ HSD_GObj* mn_80230E38(int arg0)
 {
     u8 operand_pad[4];
     u16 jobj_map[17];
-    HSD_JObj* jobj_parts[17];
     union {
         struct {
             u32 bytes4;
@@ -1045,6 +1044,7 @@ HSD_GObj* mn_80230E38(int arg0)
         } packed;
         u8 idx[6];
     } time_indices;
+    HSD_JObj* jobj_parts[17];
     union {
         u16 packed;
         u8 idx[2];
