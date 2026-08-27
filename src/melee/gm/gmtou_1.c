@@ -991,7 +991,7 @@ void fn_801981A0(HSD_GObj* gobj)
 
     gmTournament_SetPlayerX(&x_pos, data->x30, pnum);
 
-    fn_8018FDC4(jobj, x_pos, 666.0f, 80.0f);
+    fn_8018FDC4(jobj, x_pos, 666.0f, 0.01f);
 
     counter = state->x21[pnum];
     counter = (counter + 1) % 11;
@@ -1038,7 +1038,7 @@ void fn_801983E4(HSD_GObj* gobj)
     player_count = tm->x30;
     gmTournament_SetPlayerX(&x, player_count, pnum);
 
-    fn_8018FDC4(jobj, x, 666.0f, 80.0f);
+    fn_8018FDC4(jobj, x, 666.0f, 0.01f);
 }
 
 void fn_80198584(ResultsData* results)
