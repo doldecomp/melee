@@ -3627,10 +3627,12 @@ s32 fn_803AF3F0(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
             s32 arg1x = state->x170[i];
 
             if (arg1x >= 0) {
+                s32 seq;
                 s32 logical = arg1x - blocks_before;
                 if (logical >= 0 && logical < file_blocks) {
-                    if (fn_803ACB74(current_seq, state->x270[i]) < 0) {
-                        current_seq = state->x270[i];
+                    seq = state->x270[i];
+                    if (fn_803ACB74(current_seq, seq) < 0) {
+                        current_seq = seq;
                     }
                     block_map[0][logical] = i;
                 }
