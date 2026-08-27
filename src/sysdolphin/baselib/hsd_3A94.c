@@ -4371,6 +4371,29 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     return 0;
 }
 
+static inline s32 fn_803B0E9C_read_icons(struct CardState* arg0, s32* cmd,
+                                         s32 file_id, s32 seq)
+{
+    s32 block_idx;
+    s32 result;
+
+    for (block_idx = 0;
+         (u32) block_idx < (0x2F + arg0->x24 + arg0->x8) / arg0->x8;
+         block_idx++)
+    {
+        cmd[0] = 10;
+        cmd[1] = (s32) arg0;
+        cmd[3] = file_id;
+        cmd[4] = seq;
+        cmd[2] = block_idx;
+        result = fn_803AC168(cmd);
+        if (result < 0) {
+            return result;
+        }
+    }
+    return 0;
+}
+
 s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
     u8 digest[0x30];
@@ -4395,23 +4418,8 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
     if (arg3 == 0) {
         if (arg4 != 0) {
-            for (block_idx = 0;
-                 (u32) block_idx < (0x2F + arg0->x24 + arg0->x8) / arg0->x8;)
-            {
-                cmd_read_icon[0] = 10;
-                cmd_read_icon[1] = (s32) arg0;
-                cmd_read_icon[3] = arg1_copy;
-                cmd_read_icon[4] = arg2;
-                cmd_read_icon[2] = block_idx;
-                result = fn_803AC168(cmd_read_icon);
-                if (result >= 0) {
-                    block_idx++;
-                    continue;
-                }
-                goto check_read_result;
-            }
-            result = 0;
-        check_read_result:
+            result =
+                fn_803B0E9C_read_icons(arg0, cmd_read_icon, arg1_copy, arg2);
             if (result < 0) {
                 return result;
             }
