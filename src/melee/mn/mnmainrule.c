@@ -682,7 +682,7 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
             HSD_JObj* v;
             struct mn_8022FEC8_jobj_ref_t* p;
 
-            for (j = (visible = 0); j < (u8) i; j++) {
+            for (j = (visible = 0); j < i; j++) {
                 u8 j8 = j;
                 s32 valid2;
                 if (gm_GetCurrentGameMode() == GM_TOURNAMENT && j8 == 4) {
