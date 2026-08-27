@@ -1741,6 +1741,26 @@ static inline void tyDisplay_SetGridSize(TyDspConfig* cfg, TyDspGrid* grid)
     }
 }
 
+static inline void tyDisplay_SetupCameraAndBackground()
+{
+    TyDspConfig* cfg = _tyDisplay_804D6F18;
+    HSD_CObj* cobj = lb_80013B14(HSD_ArchiveGetPublicAddress(
+        _tyDisplay_804D6F1C->archive, "ScMenDisplay_cam_int1_camera"));
+
+    cfg->x00 = GObj_Create(1, 2, 0);
+    HSD_GObjObject_80390A70(cfg->x00, HSD_GObj_CameraKind, cobj);
+    GObj_SetupGXLinkMax(cfg->x00, (GObj_RenderFunc) (Event) Toy_803068E0, 0);
+    cfg->x00->gxlink_prios = 0x1230000000000000ULL;
+
+    if (_tyDisplay_804D6F20 != 0) {
+        HSD_GObj_SetupProc(cfg->x00, (HSD_GObjEvent) _tyDisplay_8031A94C, 0);
+    } else {
+        HSD_GObj_SetupProc(cfg->x00, (HSD_GObjEvent) _tyDisplay_8031A4EC, 0);
+    }
+    HSD_GObj_80390CD4(cfg->x00);
+    _tyDisplay_8031B328();
+}
+
 void tyDisplay_OnEnter_8031B460(void* arg0)
 {
     s32 sp18;
@@ -1748,7 +1768,7 @@ void tyDisplay_OnEnter_8031B460(void* arg0)
     TyDspBgData* data;
     TyDspGrid* grid;
     int i;
-    PAD_STACK(8);
+    PAD_STACK(12);
 
     _tyDisplay_804D6F10 =
         HSD_MemAlloc(sizeof(*_tyDisplay_804D6F10) * _tyDisplay_804D6F10_len);
@@ -1813,32 +1833,7 @@ void tyDisplay_OnEnter_8031B460(void* arg0)
 
     data->x104 = 0;
 
-    {
-        TyDspConfig* cfg2 = _tyDisplay_804D6F18;
-        HSD_CObj* cobj = lb_80013B14(HSD_ArchiveGetPublicAddress(
-            _tyDisplay_804D6F1C->archive, "ScMenDisplay_cam_int1_camera"));
-
-        cfg2->x00 = GObj_Create(1, 2, 0);
-        HSD_GObjObject_80390A70(cfg2->x00, HSD_GObj_CameraKind, cobj);
-        GObj_SetupGXLinkMax(cfg2->x00, (GObj_RenderFunc) (Event) Toy_803068E0,
-                            0);
-
-        {
-            HSD_GObj* gobj = cfg2->x00;
-            gobj->gxlink_prios = 0x1230000000000000ULL;
-        }
-
-        if (_tyDisplay_804D6F20 != 0) {
-            HSD_GObj_SetupProc(cfg2->x00, (HSD_GObjEvent) _tyDisplay_8031A94C,
-                               0);
-        } else {
-            HSD_GObj_SetupProc(cfg2->x00, (HSD_GObjEvent) _tyDisplay_8031A4EC,
-                               0);
-        }
-        HSD_GObj_80390CD4(cfg2->x00);
-    }
-
-    _tyDisplay_8031B328();
+    tyDisplay_SetupCameraAndBackground();
     _tyDisplay_8031B1FC();
 
     if (_tyDisplay_804D6F20 != 0) {
