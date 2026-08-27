@@ -456,9 +456,9 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
 
     audio = lbAudioAx_80026E84((CharacterKind) arg0->x0.ckind);
     {
-        s8* cp = chars_ptr;
-        for (i = 0; i < 3; i++) {
-            audio |= lbAudioAx_80026E84(cp[i]);
+        s32 j;
+        for (j = 0; j < 3; j++) {
+            audio |= lbAudioAx_80026E84(chars[j]);
         }
     }
 
