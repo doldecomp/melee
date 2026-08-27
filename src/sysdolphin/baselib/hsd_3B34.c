@@ -1569,20 +1569,20 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
                     u8* scratch_r6;
                     scratch_r6 = quant_table + work_r3;
                     scratch_r7 = scratch_r6[0];
-                    work_r5_3[0] = (work_r4_3[0] /
-                                    ((s32) scratch_r7 / quant_scale));
-                    work_r5_3[1] = (work_r4_3[1] /
-                                    ((s32) scratch_r6[1] / quant_scale));
-                    work_r5_3[2] = (work_r4_3[2] /
-                                    ((s32) scratch_r6[2] / quant_scale));
-                    work_r5_3[3] = (work_r4_3[3] /
-                                    ((s32) scratch_r6[3] / quant_scale));
-                    work_r5_3[4] = (work_r4_3[4] /
-                                    ((s32) scratch_r6[4] / quant_scale));
-                    work_r5_3[5] = (work_r4_3[5] /
-                                    ((s32) scratch_r6[5] / quant_scale));
-                    work_r5_3[6] = (work_r4_3[6] /
-                                    ((s32) scratch_r6[6] / quant_scale));
+                    work_r5_3[0] =
+                        (work_r4_3[0] / ((s32) scratch_r7 / quant_scale));
+                    work_r5_3[1] =
+                        (work_r4_3[1] / ((s32) scratch_r6[1] / quant_scale));
+                    work_r5_3[2] =
+                        (work_r4_3[2] / ((s32) scratch_r6[2] / quant_scale));
+                    work_r5_3[3] =
+                        (work_r4_3[3] / ((s32) scratch_r6[3] / quant_scale));
+                    work_r5_3[4] =
+                        (work_r4_3[4] / ((s32) scratch_r6[4] / quant_scale));
+                    work_r5_3[5] =
+                        (work_r4_3[5] / ((s32) scratch_r6[5] / quant_scale));
+                    work_r5_3[6] =
+                        (work_r4_3[6] / ((s32) scratch_r6[6] / quant_scale));
                     scratch_r7_2 = work_r4_3[7];
                     work_r4_3 += 8;
                     work_r5_3[7] =
@@ -1605,18 +1605,18 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
                 scratch_r7_3 = scratch_r6_2[0];
                 work_r5_4[0] =
                     (work_r4_4[0] / ((s32) scratch_r7_3 / quant_scale));
-                work_r5_4[1] = (work_r4_4[1] /
-                                ((s32) scratch_r6_2[1] / quant_scale));
-                work_r5_4[2] = (work_r4_4[2] /
-                                ((s32) scratch_r6_2[2] / quant_scale));
-                work_r5_4[3] = (work_r4_4[3] /
-                                ((s32) scratch_r6_2[3] / quant_scale));
-                work_r5_4[4] = (work_r4_4[4] /
-                                ((s32) scratch_r6_2[4] / quant_scale));
-                work_r5_4[5] = (work_r4_4[5] /
-                                ((s32) scratch_r6_2[5] / quant_scale));
-                work_r5_4[6] = (work_r4_4[6] /
-                                ((s32) scratch_r6_2[6] / quant_scale));
+                work_r5_4[1] =
+                    (work_r4_4[1] / ((s32) scratch_r6_2[1] / quant_scale));
+                work_r5_4[2] =
+                    (work_r4_4[2] / ((s32) scratch_r6_2[2] / quant_scale));
+                work_r5_4[3] =
+                    (work_r4_4[3] / ((s32) scratch_r6_2[3] / quant_scale));
+                work_r5_4[4] =
+                    (work_r4_4[4] / ((s32) scratch_r6_2[4] / quant_scale));
+                work_r5_4[5] =
+                    (work_r4_4[5] / ((s32) scratch_r6_2[5] / quant_scale));
+                work_r5_4[6] =
+                    (work_r4_4[6] / ((s32) scratch_r6_2[6] / quant_scale));
                 scratch_r7_4 = work_r4_4[7];
                 work_r4_4 += 8;
                 work_r5_4[7] =
@@ -1638,13 +1638,13 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
                 work_r26_2[2] =
                     (work_r4_5[2] / ((s32) scratch_r5[2] / quant_scale));
                 work_r26_2[3] =
-                    ((s32) work_r4_5[3] / ((s32) scratch_r5[3] / quant_scale));
+                    (work_r4_5[3] / ((s32) scratch_r5[3] / quant_scale));
                 work_r26_2[4] =
-                    ((s32) work_r4_5[4] / ((s32) scratch_r5[4] / quant_scale));
+                    (work_r4_5[4] / ((s32) scratch_r5[4] / quant_scale));
                 work_r26_2[5] =
-                    ((s32) work_r4_5[5] / ((s32) scratch_r5[5] / quant_scale));
+                    (work_r4_5[5] / ((s32) scratch_r5[5] / quant_scale));
                 work_r26_2[6] =
-                    ((s32) work_r4_5[6] / ((s32) scratch_r5[6] / quant_scale));
+                    (work_r4_5[6] / ((s32) scratch_r5[6] / quant_scale));
                 scratch_r6_4 = work_r4_5[7];
                 work_r4_5 += 8;
                 work_r26_2[7] =
