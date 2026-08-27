@@ -51,6 +51,12 @@ struct IfStockDataOffset {
     struct IfStockData data;
 };
 
+static inline HSD_JObj* ifStock_802F7EFC_inline(
+    int index, int player, struct ifStock_804A1378* stock)
+{
+    return stock->player[player].x4[index];
+}
+
 int ifStock_802F7EFC(int arg0, int arg1)
 {
     Vec3 pos;
@@ -101,7 +107,7 @@ int ifStock_802F7EFC(int arg0, int arg1)
     HSD_JObjGetTranslation(stock->player[arg1].x4[0], &pos);
     HSD_JObjReqAnimAll(stock->player[arg1].x4[j], 0.0f);
     HSD_JObjAnimAll(stock->player[arg1].x4[j]);
-    HSD_JObjGetTranslation(stock->player[arg1].x4[j],
+    HSD_JObjGetTranslation(ifStock_802F7EFC_inline(j, arg1, stock),
                            &arg1_data->anim[slot - 5].start);
     arg1_data->anim[slot - 5].start.x += pos.x;
     arg1_data->anim[slot - 5].start.y += pos.y;
