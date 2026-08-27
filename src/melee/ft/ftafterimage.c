@@ -182,7 +182,8 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             f32 scaleDiff = x20FC - x20F8;
             s32 curIdx2;
             f32 blendedInner = params->x0 * scaleDiff + x20F8;
-            f32 blendedOuter = params->x4 * scaleDiff + x20F8;
+            f32 outerProd = params->x4 * scaleDiff;
+            f32 blendedOuter = outerProd + x20F8;
             f32 interpFactor = 1.0f;
             f32 innerDiff = x20F8 - blendedInner;
             f32 outerDiff = x20FC - blendedOuter;
