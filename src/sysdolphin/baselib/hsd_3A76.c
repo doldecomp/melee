@@ -420,6 +420,28 @@ block_done:
     }
 }
 
+static void sisFitLineToBox(HSD_Text* text, f32 measured_width)
+{
+    if ((text->fitting == 1) && (text->box_size_x < measured_width)) {
+        text->current_width = 0.0F;
+        text->x88 = (text->box_size_x / measured_width);
+    } else {
+        text->x88 = 1.0F;
+        switch ((s32) text->alignment) {
+        case 1:
+            text->current_width =
+                (f32) (0.5F * (text->box_size_x - measured_width));
+            break;
+        case 2:
+            text->current_width = (text->box_size_x - measured_width);
+            break;
+        default:
+            text->current_width = 0.0F;
+            break;
+        }
+    }
+}
+
 void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
 {
     // clang-format off
@@ -782,23 +804,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                 line_started += 1;
                                 HSD_SisLib_803A8134(sis_cursor, text, &line_width_out, &line_height_out);
                                 measured_width = line_width_out;
-                                if (( text->fitting == 1) && (text->box_size_x < measured_width)) {
-                                    text->current_width = 0.0F;
-                                    text->x88 = (text->box_size_x / measured_width);
-                                } else {
-                                    text->x88 = 1.0F;
-                                    switch ((s32) text->alignment) {
-                                    case 1:
-                                        text->current_width = (f32) (0.5F * (text->box_size_x - measured_width));
-                                        break;
-                                    case 2:
-                                        text->current_width = (text->box_size_x - measured_width);
-                                        break;
-                                    default:
-                                        text->current_width = 0.0F;
-                                        break;
-                                    }
-                                }
+                                sisFitLineToBox(text, measured_width);
                             }
                             text->current_width = (f32) (((f64) text->x88 * ((f64) text->x80.x *
                                             (half_glyph + (f64) text->x78.x))) + (f64) text->current_width);
@@ -822,23 +828,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int pass)
                                     line_started += 1;
                                     HSD_SisLib_803A8134(sis_cursor, text, &line_width_out, &line_height_out);
                                     measured_width = line_width_out;
-                                    if (( text->fitting == 1) && (text->box_size_x < measured_width)) {
-                                        text->current_width = 0.0F;
-                                        text->x88 = (text->box_size_x / measured_width);
-                                    } else {
-                                        text->x88 = 1.0F;
-                                        switch (text->alignment) {
-                                        case 1:
-                                            text->current_width = (f32) (0.5F * (text->box_size_x - measured_width));
-                                            break;
-                                        case 2:
-                                            text->current_width = (text->box_size_x - measured_width);
-                                            break;
-                                        default:
-                                            text->current_width = 0.0F;
-                                            break;
-                                        }
-                                    }
+                                    sisFitLineToBox(text, measured_width);
                                 }
                                 glyph_idx = *(u16 *)sis_cursor;
                                 if (glyph_idx < 0x4000U) {
