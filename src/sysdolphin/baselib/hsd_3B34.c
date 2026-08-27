@@ -195,6 +195,11 @@ extern u16 lbl_8043169C[0xC];
 extern u8 lbl_804316B4[0xC];
 static s32 lbl_804D6398 = 3;
 
+static inline s32 hsd_803B3408_inline(s32 index)
+{
+    return (index & 1) * 0x20;
+}
+
 void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
 {
     s32 second_pixel_offset;
@@ -291,11 +296,12 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
                                           4) +
                                          0x118);
                     for (pair_count = 2; pair_count != 0; pair_count--) {
-                        pixel = src[((pixel_index & 1) * 0x20) +
-                                    ((pixel_index & 2) * tile_stride)];
+                        s32 row_offset = (pixel_index & 2) * tile_stride;
+
+                        pixel = src[((pixel_index & 1) * 0x20) + row_offset];
                         second_pixel_index = pixel_index + 1;
                         second_pixel_offset =
-                            ((second_pixel_index & 1) * 0x20) +
+                            hsd_803B3408_inline(second_pixel_index) +
                             ((second_pixel_index & 2) * tile_stride);
                         pixel_index = second_pixel_index + 1;
                         luma_pair->block0[0] =
