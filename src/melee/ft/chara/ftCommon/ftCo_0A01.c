@@ -1996,7 +1996,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     struct Fighter_x1A88_t* data2;
     s32 ok;
 
-    PAD_STACK(0x18);
+    data2 = &fp->x1A88;
 
     grav = fp->co_attrs.gravity;
     if (grav < 0.00001f && grav > -0.00001f) {
@@ -2009,7 +2009,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     } else {
         frames = -(-fp->co_attrs.terminal_velocity - fp->pos_delta.y) / grav;
     }
-    data2 = &fp->x1A88;
+    PAD_STACK(0x18);
     for (island = mpIsland_80458E88.next; island != NULL;
          island = island->next)
     {
