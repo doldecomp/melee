@@ -338,7 +338,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 } else {
                     HSD_JObj* panel_jobj2;
 
-                    PAD_STACK(108);
+                    PAD_STACK(104);
                     gmMainLib_8015ED4C(i, 1);
                     rumble_setting = mnVibration_GetPortRumble(i);
                     temp_jobj =
