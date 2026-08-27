@@ -1209,7 +1209,7 @@ void gm_801B3F40(GameScene* arg0)
     int i;
 
     temp_ret = 0;
-    temp_r30 = gm_GetGameSceneLoadDataCallback(arg0);
+    temp_r30 = gm_GetGameSceneLoadData(arg0);
     temp_r31 = gm_8017E4C4(arg0->idx);
     temp_r3 = gm_GetAdventureData();
     temp_r3->x0.x7 = arg0->idx;
@@ -1248,7 +1248,7 @@ void gm_801B4064(GameScene* arg0)
 
     PAD_STACK(8);
 
-    temp_r28 = gm_GetGameSceneLoadDataCallback(arg0);
+    temp_r28 = gm_GetGameSceneLoadData(arg0);
     temp_r31 = gm_8017E4C4(arg0->idx);
     temp_r27 = gm_GetAdventureData();
     if (temp_r31->x4 != 0) {
@@ -1274,7 +1274,7 @@ void gm_801B4064(GameScene* arg0)
 
 void gm_801B4170(GameScene* arg0)
 {
-    MatchExitInfo* temp_r28 = gm_GetGameSceneLeaveDataCallback(arg0);
+    MatchExitInfo* temp_r28 = gm_GetGameSceneLeaveData(arg0);
     UnkAdventureData* temp_r31 = gm_GetAdventureData();
     setValUnk(arg0->idx, temp_r28->x8);
     if (gm_8017D7AC(temp_r28, &temp_r31->x0, 0x69) &&
@@ -1286,19 +1286,19 @@ void gm_801B4170(GameScene* arg0)
 
 void gm_801B4254(GameScene* scene)
 {
-    DebugGameOverData* data = gm_GetGameSceneLoadDataCallback(scene);
+    DebugGameOverData* data = gm_GetGameSceneLoadData(scene);
     gm_8017C9A8(data, &gm_GetAdventureData()->x0, 0);
 }
 
 void gm_801B4294(GameScene* scene)
 {
-    DebugGameOverData* data = gm_GetGameSceneLeaveDataCallback(scene);
+    DebugGameOverData* data = gm_GetGameSceneLeaveData(scene);
     gm_8017CA38(data, &gm_GetAdventureData()->x0, gmMainLib_8015CDD4(), 0);
 }
 
 void gm_801B42E8(GameScene* scene)
 {
-    CSSData* css = gm_GetGameSceneLoadDataCallback(scene);
+    CSSData* css = gm_GetGameSceneLoadData(scene);
     struct gmm_x0_528_t* temp_r31 = gmMainLib_8015CDD4();
     gm_801B06B0(css, 0xC, temp_r31->c_kind, temp_r31->stocks, temp_r31->color,
                 temp_r31->x4, temp_r31->cpu_level,
@@ -1307,7 +1307,7 @@ void gm_801B42E8(GameScene* scene)
 
 void gm_801B4350(GameScene* scene)
 {
-    CSSData* css = gm_GetGameSceneLeaveDataCallback(scene);
+    CSSData* css = gm_GetGameSceneLeaveData(scene);
     struct gmm_x0_528_t* temp_r29 = gmMainLib_8015CDD4();
     UnkAdventureData* temp_r31 = gm_GetAdventureData();
 
@@ -1334,7 +1334,7 @@ void gm_801B4408(GameScene* scene)
 
 void gm_801B4430(GameScene* scene)
 {
-    CutsceneData* temp_r30 = gm_GetGameSceneLoadDataCallback(scene);
+    CutsceneData* temp_r30 = gm_GetGameSceneLoadData(scene);
     struct gmm_x0_528_t* temp_r31 = gmMainLib_8015CDD4();
     UnkAdventureData* temp_r3 = gm_GetAdventureData();
     u8 var_r0;
@@ -1350,7 +1350,7 @@ void gm_801B4430(GameScene* scene)
 
 void gm_801B44A0(GameScene* scene)
 {
-    MatchExitInfo* temp_r30 = gm_GetGameSceneLeaveDataCallback(scene);
+    MatchExitInfo* temp_r30 = gm_GetGameSceneLeaveData(scene);
     UnkAdventureData* temp_r29 = gm_GetAdventureData();
 
     setValUnk(scene->idx, temp_r30->x8);
@@ -1371,7 +1371,7 @@ void gm_801B44A0(GameScene* scene)
 
 void gm_801B45A4(GameScene* scene)
 {
-    CutsceneData* temp_r31 = gm_GetGameSceneLoadDataCallback(scene);
+    CutsceneData* temp_r31 = gm_GetGameSceneLoadData(scene);
     UnkAdventureData* temp_r7 = gm_GetAdventureData();
     u8 colors[3] = { 0 };
     s8 ckinds[3] = { CKIND_MARIO, CKIND_LUIGI, CHKIND_NONE };
@@ -1388,7 +1388,7 @@ void gm_801B461C(GameScene* scene)
 
     /// If we got here from the Luigi cutscene, change Mario to Luigi.
     if (gm_GetPreviousSceneIndex() == ADVENTURE_LUIGI_CUTSCENE) {
-        StartMeleeData* data = gm_GetGameSceneLoadDataCallback(scene);
+        StartMeleeData* data = gm_GetGameSceneLoadData(scene);
         UnkAdventureData* adventure = gm_GetAdventureData();
         data->players[1].c_kind = CKIND_LUIGI;
         data->players[1].color = gm_804D68D8.x3;
@@ -1398,7 +1398,7 @@ void gm_801B461C(GameScene* scene)
 
 void gm_801B4684(GameScene* scene)
 {
-    MatchExitInfo* temp_r29 = gm_GetGameSceneLeaveDataCallback(scene);
+    MatchExitInfo* temp_r29 = gm_GetGameSceneLeaveData(scene);
     UnkAdventureData* temp_r31 = gm_GetAdventureData();
 
     setValUnk(scene->idx, temp_r29->x8);
@@ -1415,7 +1415,7 @@ void gm_801B4684(GameScene* scene)
 
 void gm_801B4768(GameScene* scene)
 {
-    StartMeleeData* data = gm_GetGameSceneLoadDataCallback(scene);
+    StartMeleeData* data = gm_GetGameSceneLoadData(scene);
     int i;
     gm_801B4064(scene);
     for (i = 0; i < 3; i++) {
@@ -1430,7 +1430,7 @@ void gm_801B47FC(GameScene* scene)
     UnkAdventureData* temp_r31;
     StartMeleeData* temp_r30;
 
-    temp_r30 = gm_GetGameSceneLoadDataCallback(scene);
+    temp_r30 = gm_GetGameSceneLoadData(scene);
     temp_r31 = gm_GetAdventureData();
     gm_801B4064(scene);
     temp_r30->rules.x50 = gm_8017E7A0;
@@ -1439,7 +1439,7 @@ void gm_801B47FC(GameScene* scene)
 
 static inline void gm_801B4860_inline0(GameScene* scene)
 {
-    MatchExitInfo* exit_info = gm_GetGameSceneLeaveDataCallback(scene);
+    MatchExitInfo* exit_info = gm_GetGameSceneLeaveData(scene);
     if (exit_info->match_end.result != OUTCOME_TIMEOUT) {
         UnkAdventureData* tmp = gm_GetAdventureData();
         tmp->x76 = 1;
@@ -1450,7 +1450,7 @@ static inline void gm_801B4860_inline0(GameScene* scene)
 
 static inline void gm_801B4860_inline1(GameScene* scene)
 {
-    MatchExitInfo* exit_info = gm_GetGameSceneLeaveDataCallback(scene);
+    MatchExitInfo* exit_info = gm_GetGameSceneLeaveData(scene);
     UnkAdventureData* adv_data = gm_GetAdventureData();
 
     setValUnk(scene->idx, exit_info->x8);
@@ -1496,9 +1496,9 @@ void gm_801B4974(GameScene* arg0)
     CutsceneData* temp_r28;
     u8* temp_r31;
 
-    temp_r28 = gm_GetGameSceneLoadDataCallback(arg0);
+    temp_r28 = gm_GetGameSceneLoadData(arg0);
     temp_r29 = gm_GetAdventureData();
-    temp_r25 = gm_GetGameSceneLoadDataCallback(arg0);
+    temp_r25 = gm_GetGameSceneLoadData(arg0);
     temp_r24 = gmMainLib_8015CDD4();
     temp_r3 = gm_GetAdventureData();
     var_r4 = temp_r3->x0.ckind;
@@ -1537,7 +1537,7 @@ void gm_801B4B28(GameScene* scene)
 
 void gm_801B4C5C(GameScene* scene)
 {
-    MatchExitInfo* temp_r30 = gm_GetGameSceneLeaveDataCallback(scene);
+    MatchExitInfo* temp_r30 = gm_GetGameSceneLeaveData(scene);
     UnkAdventureData* temp_r29 = gm_GetAdventureData();
 
     setValUnk(scene->idx, temp_r30->x8);
@@ -1570,7 +1570,7 @@ void gm_801B4D34(GameScene* scene)
 void gm_801B4DAC(GameScene* scene)
 {
     UnkAdventureData* temp_r30 = gm_GetAdventureData();
-    StartMeleeData* data = gm_GetGameSceneLoadDataCallback(scene);
+    StartMeleeData* data = gm_GetGameSceneLoadData(scene);
     gm_801B4064(scene);
     if (temp_r30->x7C == CKIND_FALCO) {
         s8 ckinds[3] = { CKIND_FALCO, CHKIND_NONE, CHKIND_NONE };
@@ -1587,7 +1587,7 @@ void gm_801B4E58(GameScene* scene)
 {
     StartMeleeData* data;
     gm_GetAdventureData();
-    data = gm_GetGameSceneLoadDataCallback(scene);
+    data = gm_GetGameSceneLoadData(scene);
     gm_801B4064(scene);
     data->rules.x20 = 1 << 7; ///< enabling an item, which one?
     data->rules.xB = 4;
@@ -1595,7 +1595,7 @@ void gm_801B4E58(GameScene* scene)
 
 void gm_801B4EB8(GameScene* scene)
 {
-    StartMeleeData* data = gm_GetGameSceneLoadDataCallback(scene);
+    StartMeleeData* data = gm_GetGameSceneLoadData(scene);
     int i;
     gm_801B4064(scene);
 
@@ -1611,7 +1611,7 @@ void gm_801B4EB8(GameScene* scene)
 
 void gm_801B4F44(GameScene* scene)
 {
-    StartMeleeData* data = gm_GetGameSceneLoadDataCallback(scene);
+    StartMeleeData* data = gm_GetGameSceneLoadData(scene);
     int i;
     gm_801B4064(scene);
     for (i = 0; i < 3; i++) {
@@ -1624,7 +1624,7 @@ void gm_801B4F44(GameScene* scene)
 
 void gm_801B4FCC(GameScene* scene)
 {
-    MatchExitInfo* temp_r30 = gm_GetGameSceneLeaveDataCallback(scene);
+    MatchExitInfo* temp_r30 = gm_GetGameSceneLeaveData(scene);
     UnkAdventureData* temp_r29 = gm_GetAdventureData();
     setValUnk(scene->idx, temp_r30->x8);
     gm_8017D7AC(temp_r30, &temp_r29->x0, 0x69);
@@ -1640,7 +1640,7 @@ void gm_801B5078(GameScene* scene)
 
 void gm_801B50C4(GameScene* scene)
 {
-    MatchExitInfo* temp_r31 = gm_GetGameSceneLeaveDataCallback(scene);
+    MatchExitInfo* temp_r31 = gm_GetGameSceneLeaveData(scene);
     UnkAdventureData* temp_r30 = gm_GetAdventureData();
 
     UnkAdventureData* temp_r3 = gm_GetAdventureData();

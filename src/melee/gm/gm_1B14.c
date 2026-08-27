@@ -368,7 +368,7 @@ void gm_801B15C8(GameScene* arg0)
     MatchExitInfo* mei;
 
     gm_801A5AF0(arg0, 4, 3);
-    mei = gm_GetGameSceneLeaveDataCallback(arg0);
+    mei = gm_GetGameSceneLeaveData(arg0);
     for (i = 0; i < 6; i++) {
         if (mei->match_end.player_standings[i].slot_type != Gm_PKind_NA) {
             gm_80162A98(mei->match_end.player_standings[i].x20);
@@ -411,7 +411,7 @@ void gm_801B174C(GameScene* arg0)
 {
     SSSData* sss;
 
-    sss = gm_GetGameSceneLoadDataCallback(arg0);
+    sss = gm_GetGameSceneLoadData(arg0);
     sss->x1 = 0;
     sss->no_lras = 1;
     sss->force_stage_id = -1;
@@ -423,7 +423,7 @@ void gm_801B1788(GameScene* arg0)
     u16 stage;
     SSSData* sss;
 
-    sss = gm_GetGameSceneLeaveDataCallback(arg0);
+    sss = gm_GetGameSceneLeaveData(arg0);
     if (sss->start_game != 0) {
         gm_SetPendingSceneIndex(4);
         stage = sss->data.data.rules.xE;
@@ -441,7 +441,7 @@ void gm_801B1788(GameScene* arg0)
 
 void gm_801B1810(GameScene* arg0)
 {
-    StartMeleeData* data = gm_GetGameSceneLoadDataCallback(arg0);
+    StartMeleeData* data = gm_GetGameSceneLoadData(arg0);
     gm_801905F0(data);
 }
 
@@ -449,7 +449,7 @@ void gm_801B1834(GameScene* arg0)
 {
     MatchExitInfo* mei;
 
-    mei = gm_GetGameSceneLeaveDataCallback(arg0);
+    mei = gm_GetGameSceneLeaveData(arg0);
     if (gm_801A52D0(&mei->match_end) != 0) {
         gm_8016260C(mei->match_end.x5, mei->match_end.result);
         gm_801628C4(mei->match_end.frame_count / 60,
@@ -474,7 +474,7 @@ void gm_801B18D4(GameScene* arg0)
     StartMeleeData* src = &gm_804876D8;
     s32 i;
 
-    smd = gm_GetGameSceneLoadDataCallback(arg0);
+    smd = gm_GetGameSceneLoadData(arg0);
 
     for (i = 0; i < 4; i++) {
         smd->players[i] = src->players[i];
@@ -491,7 +491,7 @@ void gm_801B1A2C(GameScene* arg0)
 {
     MatchExitInfo* mei;
 
-    mei = gm_GetGameSceneLeaveDataCallback(arg0);
+    mei = gm_GetGameSceneLeaveData(arg0);
     gm_801629B4(mei->match_end.frame_count / 60);
     gm_80166CCC(&gm_80487810.match_end, &mei->match_end);
 }
@@ -500,7 +500,7 @@ void gm_801B1A84(GameScene* arg0)
 {
     ResultsMatchInfo* rmi;
 
-    rmi = gm_GetGameSceneLoadDataCallback(arg0);
+    rmi = gm_GetGameSceneLoadData(arg0);
     rmi->match_end = gm_80487810.match_end;
 }
 
@@ -508,7 +508,7 @@ void gm_801B1AD4(GameScene* arg0)
 {
     ResultsMatchInfo* rmi;
 
-    rmi = gm_GetGameSceneLoadDataCallback(arg0);
+    rmi = gm_GetGameSceneLoadData(arg0);
     gm_80477738 = rmi->match_end;
 
     gm_8016247C(gm_801688AC(&rmi->match_end));
@@ -532,7 +532,7 @@ void gm_801B1B74(GameScene* arg0)
     PAD_STACK(8);
 
     vs_data = &gmMainLib_804D3EE0->unk_D10;
-    css = gm_GetGameSceneLoadDataCallback(arg0);
+    css = gm_GetGameSceneLoadData(arg0);
     if (gm_804D68C1 != 0) {
         lb_8001C550();
         lb_8001D164(0);
@@ -560,7 +560,7 @@ static void gm_801B07E8_layer(CSSData* css_data, s8* c_kind, s8* stocks,
 void gm_801B1C24(GameScene* arg0)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->unk_D10;
-    CSSData* css = gm_GetGameSceneLeaveDataCallback(arg0);
+    CSSData* css = gm_GetGameSceneLeaveData(arg0);
     s32 i;
     struct GameCache* cache;
     s32 j;
@@ -625,7 +625,7 @@ void gm_801B1EB8(GameScene* arg0)
 {
     SSSData* sss;
 
-    sss = gm_GetGameSceneLoadDataCallback(arg0);
+    sss = gm_GetGameSceneLoadData(arg0);
     sss->x1 = 0;
     sss->force_stage_id = -1;
     sss->unk_stage = 0;
@@ -638,7 +638,7 @@ void gm_801B1EEC(GameScene* arg0)
     s16 stkind;
 
     vs_data = &gmMainLib_804D3EE0->unk_D10;
-    sss = gm_GetGameSceneLeaveDataCallback(arg0);
+    sss = gm_GetGameSceneLeaveData(arg0);
     if (sss->start_game == 0) {
         gm_SetPendingSceneIndex(0);
         return;
@@ -664,7 +664,7 @@ void gm_801B1F70(GameScene* arg0)
     int i;
 
     vs = &gmMainLib_804D3EE0->unk_D10;
-    data = gm_GetGameSceneLoadDataCallback(arg0);
+    data = gm_GetGameSceneLoadData(arg0);
     gm_80167A64(&data->rules);
 
     data->rules = vs->data.rules;
@@ -705,7 +705,7 @@ void gm_801B2204(GameScene* arg0)
 {
     MatchExitInfo* temp_r3;
 
-    temp_r3 = gm_GetGameSceneLeaveDataCallback(arg0);
+    temp_r3 = gm_GetGameSceneLeaveData(arg0);
     gm_80162968(temp_r3->match_end.frame_count / 60);
     gm_8016247C(temp_r3->match_end.player_standings[0].xE);
     gm_80163298(temp_r3->match_end.player_standings[0].character_kind,
@@ -766,7 +766,7 @@ void gm_801B24B4(GameScene* arg0)
 
 void gm_801B2510(GameScene* arg0)
 {
-    int* data = gm_GetGameSceneLeaveDataCallback(arg0);
+    int* data = gm_GetGameSceneLeaveData(arg0);
     int temp_r0 = *data;
     if (temp_r0 == 1 || temp_r0 == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
@@ -781,7 +781,7 @@ void gm_801B254C(GameScene* arg0)
     struct GameCache* temp_r30_2;
 
     temp_r31 = &gmMainLib_804D3EE0->unk_950;
-    temp_r30 = gm_GetGameSceneLoadDataCallback(arg0);
+    temp_r30 = gm_GetGameSceneLoadData(arg0);
     temp_r3 = gm_801A5250();
 
     temp_r30->match_type = 1;
@@ -803,7 +803,7 @@ void gm_801B25D4(GameScene* arg0)
     int i;
 
     temp_r31 = &gmMainLib_804D3EE0->unk_950;
-    temp_r3 = gm_GetGameSceneLeaveDataCallback(arg0);
+    temp_r3 = gm_GetGameSceneLeaveData(arg0);
     if (temp_r3->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
@@ -826,7 +826,7 @@ void gm_801B26AC(GameScene* arg0)
     SSSData* sss;
     VsModeData* vs;
     vs = &gmMainLib_804D3EE0->unk_950;
-    sss = gm_GetGameSceneLoadDataCallback(arg0);
+    sss = gm_GetGameSceneLoadData(arg0);
     sss->data = *vs;
     gm_80167FC4(sss);
 }
@@ -837,7 +837,7 @@ void gm_801B2704(GameScene* arg0)
     SSSData* var_r3;
 
     temp_r31 = &gmMainLib_804D3EE0->unk_950;
-    var_r3 = gm_GetGameSceneLeaveDataCallback(arg0);
+    var_r3 = gm_GetGameSceneLeaveData(arg0);
     if (var_r3->start_game != 0) {
         *temp_r31 = var_r3->data;
         lbAudioAx_80026F2C(0x18);
@@ -855,7 +855,7 @@ void gm_PrepCameraModeVSScene(GameScene* arg0)
     int i;
 
     vs = &gmMainLib_804D3EE0->unk_950;
-    start = gm_GetGameSceneLoadDataCallback(arg0);
+    start = gm_GetGameSceneLoadData(arg0);
     gm_80167BC8(vs);
 
     start->rules = vs->data.rules;
