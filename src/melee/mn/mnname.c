@@ -143,7 +143,7 @@ s32 CompareNameStrings(char* str1, char* str2)
 {
     char* p1;
     char* p2;
-    s32 i;
+    u32 i;
     for (i = 0, p2 = str2, p1 = str1;; i++, p1++, p2++) {
         char* ch1 = &str1[i];
 
