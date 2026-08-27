@@ -854,7 +854,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                         }
                         if ((int) grBigBlue_801E89DC(1) == 0) {
                             u32 cnt2 = base->u.arwing.xC4;
-                            if ((s32) cnt2 >= yakumono_param->xDC &&
+                            if (yakumono_param->xDC <= (s32) cnt2 &&
                                 (s32) gp->u.bigblue.data[i].x2 == 1 &&
                                 ((s32) cnt2 >= yakumono_param->xE0 ||
                                  HSD_Randi(2) != 0))
@@ -947,7 +947,9 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                 s32 sub_state = gp->u.bigblue.data[i].x2C;
 
                 if (sub_state == 0 || gp->u.bigblue.data[i].x34 == 3) {
-                    if (gp->u.bigblue.data[i].x30 == 0 && sub_state != 0) {
+                    s32 prev_sub_state = gp->u.bigblue.data[i].x30;
+
+                    if (prev_sub_state == 0 && sub_state != 0) {
                         gp->u.bigblue.data[i].xC.y = pos.y;
                         gp->u.bigblue.data[i].x4 = yakumono_param->xB0;
                         gp->u.bigblue.data[i].x34 = 1;
@@ -1048,7 +1050,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                         f32 prev_y = gp->u.bigblue.data[i].x28;
                         f32 prev_x = gp->u.bigblue.data[i].x24;
 
-                        if (prev_x < prev_y) {
+                        if (prev_y > prev_x) {
                             gp->u.bigblue.data[i].x18.z =
                                 yakumono_param->xA0 * (prev_y - prev_x);
                             if (gp->u.bigblue.data[i].x18.z >=
