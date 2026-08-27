@@ -1,29 +1,19 @@
 #include "cobj.h"
-#include "gobj.h"
-#include "gobjgxlink.h"
 #include "gobjobject.h"
-#include "gobjplink.h"
-#include "gobjuserdata.h"
-#include "memory.h"
 #include "sislib.h"
 
 #include "sislib.static.h"
 
 #include "sislib_font.h"
-#include "state.h"
-#include "tev.h"
 #include "wobj.h"
 
 #include "dolphin/gx.h"
 #include "dolphin/mtx.h"
 
-#include <m2c_macros.h>
 #include <printf.h> // IWYU pragma: keep
 #include <stdarg.h>
 #include <stdio.h>
-#include <dolphin/os.h>
 #include <dolphin/types.h>
-#include <melee/lb/lbarchive.h> ///< @todo Circular include
 
 u8* HSD_SisLib_803A6478(u8* dst, u8* src)
 {

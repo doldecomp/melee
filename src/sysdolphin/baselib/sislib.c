@@ -7,24 +7,15 @@
 #include "gobjplink.h"
 #include "gobjuserdata.h"
 #include "memory.h"
-
-#include "sislib.static.h"
-
-#include "sislib_font.h"
-#include "state.h"
-#include "tev.h"
 #include "wobj.h"
 
 #include "dolphin/gx.h"
 #include "dolphin/mtx.h"
 
-#include <m2c_macros.h>
 #include <printf.h> // IWYU pragma: keep
-#include <stdarg.h>
 #include <stdio.h>
 #include <dolphin/os.h>
 #include <dolphin/types.h>
-#include <melee/lb/lbarchive.h> ///< @todo Circular include
 
 static HSD_WObjDesc HSD_SisLib_8040C490 = {
     NULL,

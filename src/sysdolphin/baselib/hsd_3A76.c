@@ -1,10 +1,6 @@
 #include "cobj.h"
 #include "gobj.h"
-#include "gobjgxlink.h"
 #include "gobjobject.h"
-#include "gobjplink.h"
-#include "gobjuserdata.h"
-#include "memory.h"
 #include "sislib.h"
 
 #include "sislib.static.h"
@@ -19,9 +15,6 @@
 
 #include <m2c_macros.h>
 #include <printf.h> // IWYU pragma: keep
-#include <stdarg.h>
-#include <stdio.h>
-#include <dolphin/os.h>
 #include <dolphin/types.h>
 #include <melee/lb/lbarchive.h> ///< @todo Circular include
 
