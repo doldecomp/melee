@@ -2608,7 +2608,7 @@ fn_80180630_CreateLightAndCamera(struct lbl_80472D28_t* state,
 void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
                  lbl_8046B6A0_24C_t* arg4)
 {
-    struct lbl_80472D28_t* state = &lbl_80472D28;
+    u16 coins;
     s32 sp64;
     s32 sp60;
     s32 sp5C;
@@ -2620,7 +2620,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     s32 var_r4;
     s32 special_score;
     s32 var_r3;
-    u16 coins;
+    struct lbl_80472D28_t* state = &lbl_80472D28;
     u8 mask;
     u8 var_r0;
 
