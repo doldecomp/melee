@@ -23,6 +23,8 @@
 #include <melee/mn/mnmain.h>
 #include <melee/mn/mnname.h>
 
+HSD_GObj* mnDiagram3_804D6C20;
+
 void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
 {
     Vec3 sp6C;

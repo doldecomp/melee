@@ -489,7 +489,7 @@ def SysdolphinLib(lib_name: str, objects: Objects) -> Library:
         includes=[
             *includes_base,
             "src/sysdolphin",
-            f"build/{config.version}/GALE01/sysdolphin",
+            f"build/{config.version}/sysdolphin",
         ],
         category="hsd",
     )

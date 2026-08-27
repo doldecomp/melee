@@ -42,6 +42,20 @@
 #include <baselib/random.h>
 #include <baselib/sislib.h>
 
+/// @todo Split-derived data; types are inferred.
+const TmAnimFrameTable lbl_803B7D18 = {
+    { { 0, 30, 0 },
+      { 50, 59, 0 },
+      { 60, 70, 1 },
+      { 90, 100, 0 },
+      { 110, 130, 0 },
+      { 150, 160, 0 } },
+};
+const u8 lbl_803B7D3C[0x14] = { 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,
+                                0, 2, 0, 0, 0, 3, 0, 0, 0, 0 };
+u8 lbl_804D6638[0x4];
+int lbl_804D663C;
+
 extern SceneDesc* lbl_804D666C;
 extern SceneDesc* lbl_804D6670;
 extern SceneDesc* lbl_804D6674;
