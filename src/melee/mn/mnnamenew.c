@@ -904,11 +904,11 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
     s32 key_off;
     u8* key_char;
     s8 null_char;
-    char* src;
+    s32 n;
     u8* dest;
     s32 len;
     u8 cursor;
-    s32 n;
+    char* src;
 
     PAD_STACK(12);
 
@@ -1290,9 +1290,8 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
             return;
         }
         {
-            s32 buttons_arg = (s32) buttons;
             u8 new_sel = mnNameNew_8023BAA8(
-                data, buttons_arg, (u8) mn_804A04F0.hovered_selection);
+                data, (s32) buttons, (u8) mn_804A04F0.hovered_selection);
             if ((s32) new_sel != (s32) mn_804A04F0.hovered_selection) {
                 lbAudioAx_80024030(2);
                 mn_804A04F0.hovered_selection = (u16) new_sel;
