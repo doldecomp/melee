@@ -446,7 +446,10 @@ static void fn_803B61B4(u8* arg0)
         scratch_f10 = (f32) (0.707107 * (f64) (scratch_r11_2 + scratch_r10_2));
         scratch_f11 = (f32) (0.707107 * (f64) (scratch_r11_2 - scratch_r10_2));
         scratch_r0_4 = work_r4_2[16];
-        scratch_f12 = scratch_f22 + scratch_f31;
+        {
+            f32 sum = scratch_f22 + scratch_f31;
+            scratch_f12 = sum;
+        }
         scratch_r5_6 = work_r4_2[48];
         scratch_f13 = -scratch_f23 + scratch_f24;
         scratch_f13_2 = scratch_f23 + scratch_f24;
