@@ -3554,6 +3554,37 @@ static inline s32 fn_803AF3F0_queue_cmd(s32* cmd)
     return fn_803AC168(cmd);
 }
 
+static inline void fn_803AF3F0_calc_file_blocks(s32 file_idx, CardState* state,
+                                                s32* file_blocks,
+                                                s32* total_blocks)
+{
+    if (state->x4C[file_idx] <= 0) {
+        *file_blocks = 0;
+    } else if (file_idx == 0) {
+        s32 hdr = state->x24;
+        u32 sector_size = state->x8;
+        s32 sz0;
+        s32 rem;
+        hdr += 0x30;
+        sz0 = state->x4C[0];
+        rem = (s32) ((u32) hdr % sector_size);
+        rem = (s32) (sector_size - 0x20) - rem;
+        rem = sz0 - rem;
+        if (rem <= 0) {
+            *file_blocks = 1;
+        } else {
+            *file_blocks =
+                (u32) (rem + sector_size - 0x21) / (sector_size - 0x20) + 1;
+        }
+    } else {
+        u32 sector_size = state->x8;
+        *file_blocks = (u32) (state->x4C[file_idx] + sector_size - 0x21) /
+                       (sector_size - 0x20);
+    }
+
+    *total_blocks = fn_803AC7DC(state);
+}
+
 s32 fn_803AF3F0(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
     CardBufEntry* entries = (CardBufEntry*) hsd_804D1138;
@@ -3570,7 +3601,7 @@ s32 fn_803AF3F0(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 remaining;
     s32 total_blocks;
     u8* data;
-    PAD_STACK(32);
+    PAD_STACK(56);
 
     seq_match = 0;
     if (arg3 == 0) {
@@ -3589,35 +3620,8 @@ s32 fn_803AF3F0(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
     blocks_before = fn_803AC6B8_blocks_before(state, arg1);
 
-    {
-        s32 size = state->x4C[arg1];
-        file_size = size;
-    }
-    if (file_size <= 0) {
-        file_blocks = 0;
-    } else if (arg1 == 0) {
-        s32 hdr = state->x24;
-        u32 sector_size = state->x8;
-        s32 sz0;
-        s32 rem;
-        hdr += 0x30;
-        sz0 = state->x4C[0];
-        rem = (s32) ((u32) hdr % sector_size);
-        rem = (s32) (sector_size - 0x20) - rem;
-        rem = sz0 - rem;
-        if (rem <= 0) {
-            file_blocks = 1;
-        } else {
-            file_blocks =
-                (u32) (rem + sector_size - 0x21) / (sector_size - 0x20) + 1;
-        }
-    } else {
-        u32 sector_size = state->x8;
-        file_blocks =
-            (u32) (file_size + sector_size - 0x21) / (sector_size - 0x20);
-    }
-
-    total_blocks = fn_803AC7DC(state);
+    file_size = state->x4C[arg1];
+    fn_803AF3F0_calc_file_blocks(arg1, state, &file_blocks, &total_blocks);
 
     if (arg3 != 0) {
         hsd_804D7998 = hsd_804D7984;
