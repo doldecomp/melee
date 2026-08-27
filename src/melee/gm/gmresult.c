@@ -1119,7 +1119,7 @@ void fn_80175DC8(HSD_GObj* gobj)
     {
         DynamicModelDesc* model = data->pnlsce->models[0];
         jobj = HSD_JObjLoadJoint(model->joint);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
         GObj_SetupGXLink(gobj, fn_80175038, 11, 0);
         lb_8000C07C(jobj, 0, model->anims, model->matanims, model->shapeanims);
     }
@@ -1443,7 +1443,7 @@ void fn_80176A6C(void)
         HSD_ASSERT(0x668, 0);
     }
 
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 8U);
     if (lbl_8046DBE8.x0_5) {
         gobj->gxlink_prios = 1;
@@ -1560,7 +1560,7 @@ void fn_80176D3C(Vec3* positions)
             gobj = GObj_Create(14, 15, 0);
             model = &models[winner] - 1;
             jobj = HSD_JObjLoadJoint((*model)->joint);
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
             GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 11, 0);
 
             HSD_JObjSetTranslate(jobj, pos);
@@ -1569,7 +1569,7 @@ void fn_80176D3C(Vec3* positions)
             HSD_JObjReqAnimAll(jobj, 0.0F);
             HSD_JObjAnimAll(jobj);
             HSD_GObj_SetupProc(gobj, fn_80176D18, 1);
-            fn_80179F6C(i, (int) gobj);
+            fn_80179F6C(i, gobj);
         }
 
     loop_end:
@@ -1597,7 +1597,7 @@ void fn_80176F60(void)
     temp_r27 = *data->flmsce->models;
     temp_r29 = GObj_Create(0xE, 0xF, 0);
     jobj = HSD_JObjLoadJoint(temp_r27->joint);
-    HSD_GObjObject_80390A70(temp_r29, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(temp_r29, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(temp_r29, fn_80175038, 0xB, 0);
     lb_8000C0E8(jobj, 0, temp_r27);
     HSD_JObjReqAnimAll(jobj, 0.0F);
@@ -1771,7 +1771,7 @@ void gm_80177368_OnEnter(void* arg0_)
     if (lobj == NULL) {
         gmResultReportLightLObj();
     }
-    HSD_GObjObject_80390A70(light_gobj, (u8) HSD_GObj_804D784A, lobj);
+    HSD_GObjObject_80390A70(light_gobj, (u8) HSD_GObj_LightKind, lobj);
     GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0xA, 0);
     model_gobj = GObj_Create(0xE, 0xF, 0);
     data->x18 = model_gobj;

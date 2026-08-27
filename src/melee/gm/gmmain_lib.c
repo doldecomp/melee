@@ -589,7 +589,7 @@ s32 gmMainLib_8015D818(u32 arg0)
     if (gmMainLib_8015D94C(arg0) == 0) {
         struct gmm_x1868* base = &gmMainLib_804D3EE0->thing;
         u32* q = &base->x1B80[arg0];
-        *q = lbTime_8000AFBC();
+        *q = lbTime_GetTimeInSeconds();
         gmMainLib_8015D888(arg0);
         gmMainLib_8015D8FC(arg0);
         return 1;
@@ -649,7 +649,7 @@ bool gmMainLib_8015D984(u32 arg0)
         u32* temp_r31 = (u32*) gmMainLib_804D3EE0;
         temp_r31 += arg0;
         temp_r31 = (u32*) ((u8*) temp_r31 + 0x6C);
-        *temp_r31 = lbTime_8000AFBC();
+        *temp_r31 = lbTime_GetTimeInSeconds();
 
         gmMainLib_8015D9F4(arg0);
         gmMainLib_8015DA40(arg0);
@@ -1393,7 +1393,7 @@ int gmMainLib_8015FC74(void)
     int temp_r30;
 
     temp_r30 = gmMainLib_8046B0F0.x10;
-    gmMainLib_8046B0F0.x10 = lbTime_8000AFBC();
+    gmMainLib_8046B0F0.x10 = lbTime_GetTimeInSeconds();
     return gmMainLib_8046B0F0.x10 - temp_r30;
 }
 
@@ -1404,5 +1404,5 @@ void gmMainLib_8015FCC0(void)
     tmp->resetting = false;
     tmp->progressive = false;
     tmp->xC = 0;
-    tmp->x10 = lbTime_8000AFBC();
+    tmp->x10 = lbTime_GetTimeInSeconds();
 }

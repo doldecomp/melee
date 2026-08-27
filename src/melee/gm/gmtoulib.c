@@ -1664,7 +1664,7 @@ void fn_8018E618(int arg0, f32 farg0, int arg1)
         cobj_data->cobj_data.cobj = cobj;
         {
             HSD_CObj** cobj_ptr = &cobj_data->cobj_data.cobj;
-            u8* kind_ptr = &HSD_GObj_804D784B;
+            u8* kind_ptr = &HSD_GObj_CameraKind;
             HSD_GObjObject_80390A70(gobj, *kind_ptr, *cobj_ptr);
         }
     }
@@ -1730,7 +1730,7 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
             *(HSD_GObj**) (sub + 0x2C) = gobj;
             gobj = *(HSD_GObj**) (sub + 0x2C);
             jobj = HSD_JObjLoadJoint(model->joint);
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
             GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 2);
             gm_8016895C(jobj, model, 0);
 
@@ -2444,7 +2444,7 @@ HSD_GObj* fn_80190174(HSD_CObjDesc* cobjdesc)
 {
     HSD_GObj* gobj = GObj_Create(0x13, 0x12, 0);
     HSD_CObj* cobj = HSD_CObjLoadDesc(cobjdesc);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 0);
     gobj->gxlink_prios = 7;
     return gobj;
@@ -2461,7 +2461,7 @@ HSD_GObj* fn_801901F8(HSD_CObjDesc* cobjdesc)
 {
     HSD_GObj* gobj = GObj_Create(0x13, 0x15, 2);
     HSD_CObj* cobj = HSD_CObjLoadDesc(cobjdesc);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 2);
     gobj->gxlink_prios = 0xA;
     return gobj;
@@ -2478,7 +2478,7 @@ void fn_8019027C(UNK_T lights)
 {
     HSD_GObj* gobj = GObj_Create(0xB, 0x1A, 0);
     HSD_LObj* lobj = lb_80011AC4(lights);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_LightKind, lobj);
     GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 1, 0);
 }
 #ifdef MUST_MATCH
@@ -2516,7 +2516,7 @@ HSD_GObj* fn_8019035C(bool arg0, DynamicModelDesc* model, int arg2, int arg3,
 {
     HSD_GObj* gobj = GObj_Create(0xE, arg3, 0);
     HSD_JObj* jobj = HSD_JObjLoadJoint(model->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, arg4, 0);
     if (arg6 != NULL) {
         HSD_GObj_SetupProc(gobj, arg6, 0);

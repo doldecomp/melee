@@ -314,7 +314,7 @@ void gm_801A6C54(void)
     gobj = GObj_Create(0x13, 0x14, 0);
     cobj =
         lb_80013B14((HSD_CameraDescPerspective*) gm_804D6748->cameras[0].desc);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, fn_801A6ACC, 8);
     gobj->gxlink_prios = 0x61;
     HSD_CObjAddAnim(cobj, gm_804D6748->cameras[0].anims[0]);
@@ -348,7 +348,7 @@ void gm_801A6DC0(void)
     gobj = GObj_Create(0x13, 0x14, 0);
     cobj =
         lb_80013B14((HSD_CameraDescPerspective*) gm_804D6748->cameras[0].desc);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, fn_801A6D78, 0xB);
     gobj->gxlink_prios = 0x801;
     HSD_CObjAddAnim(cobj, gm_804D6748->cameras[0].anims[0]);
@@ -463,7 +463,7 @@ void gm_801A7070_OnEnter(void* unused)
     /// create lights
     gobj = GObj_Create(0xB, 3, 0);
     lobj = lb_80011AC4(gm_804D6748->lights);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_LightKind, lobj);
     GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
     /// the rest of the gobj spawns creates/handles multiple cameras or deal
     /// with sobjs
@@ -508,7 +508,7 @@ void gm_801A7070_OnEnter(void* unused)
     // create jobj
     gm_804D6768 = gobj = GObj_Create(0xE, 0xF, 0);
     main_jobj = HSD_JObjLoadJoint(gm_804D6798);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, main_jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, main_jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
     main_scale = gm_803DB2EC[gm_801BEFB0()];
     HSD_JObjSetScaleX(main_jobj, main_scale);
@@ -527,7 +527,7 @@ void gm_801A7070_OnEnter(void* unused)
     gobj = GObj_Create(0xE, 0xF, 0);
     gm_804D6778 = gobj;
     trophy_root = HSD_JObjLoadJoint(gm_804D67AC->models[0]->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, trophy_root);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, trophy_root);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
 
     trophy = gm_801A659C(gm_801BEFB0());

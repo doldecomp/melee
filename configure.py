@@ -1185,7 +1185,7 @@ config.libs = [
             Object(Matching, "melee/gm/gminvisible.c"),
             Object(Matching, "melee/gm/gmslomo.c"),
             Object(Matching, "melee/gm/gmlightning.c"),
-            Object(Linkable, "melee/gm/gm_1BA8.c"),
+            Object(Matching, "melee/gm/gm_1BA8.c"),
             Object(Matching, "melee/gm/gmboot.c"),
             Object(Matching, "melee/gm/gm_1BFA.c"),
         ],

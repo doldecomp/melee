@@ -1283,7 +1283,7 @@ GameScene gm_803DFBC8_Scenes[] = {
             NULL,
         },
     },
-    { 0xFF },
+    { -1 },
 };
 
 GameScene gm_803DFC70_Scenes[] = {
@@ -3236,7 +3236,7 @@ void gm_SetupTitleDemo(void)
     gm_801BF6A8(HSD_Randi(4));
 }
 
-void gm_801BF3F8(void)
+void gm_PreloadTitleDemo(void)
 {
     struct GameCache* var_r31;
     u64 temp_ret;
@@ -3304,7 +3304,7 @@ void gm_801BF4DC(GameScene* arg0)
         md->players[i].xE = 4;
         md->players[i].xC_b1 = false;
         if (md->rules.x0_0 == 1) {
-            md->players[i].stocks = 0x63;
+            md->players[i].stocks = 99;
         }
     }
 }

@@ -36,7 +36,7 @@ void un_8031D708(void)
     for (i = 0; un_804D6F68->models[i] != NULL; i++) {
         gobj = GObj_Create(0xE, 0xF, 0);
         jobj = HSD_JObjLoadJoint(un_804D6F68->models[i]->joint);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
         GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 3, 0);
         gm_8016895C(jobj, un_804D6F68->models[i], 0);
         HSD_JObjReqAnimAll(jobj, 0.0f);
@@ -79,13 +79,13 @@ void un_8031D858_OnEnter(void* arg0)
 
     light_gobj = GObj_Create(0xB, 0x3, 0);
     lobj = lb_80011AC4(un_804D6F68->lights);
-    HSD_GObjObject_80390A70(light_gobj, HSD_GObj_804D784A, lobj);
+    HSD_GObjObject_80390A70(light_gobj, HSD_GObj_LightKind, lobj);
     GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0, 0);
 
     cam_gobj = GObj_Create(0x13, 0x14, 0);
     cobj =
         lb_80013B14((HSD_CameraDescPerspective*) un_804D6F68->cameras[0].desc);
-    HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(cam_gobj, HSD_GObj_803910D8, 8);
     cam_gobj->gxlink_prios = 0x89;
     HSD_CObjAddAnim(cobj, un_804D6F68->cameras[0].anims[0]);

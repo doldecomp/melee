@@ -90,7 +90,7 @@ void fn_801A1134(void)
     lb_80011E24(jobj, &lbl_80479B10.z, 10, -1);
     lb_80011E24(jobj, &lbl_80479B10.analog_stick_outline, 11, -1);
     lbl_80479B10.analog_stick = HSD_JObjGetChild(lbl_80479B10.analog_stick);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xBU, 0U);
     gm_8016895C(jobj, scene->models[0], 0);
     HSD_JObjReqAnimAll(jobj, 1.0f);

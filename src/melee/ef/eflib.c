@@ -227,7 +227,7 @@ void efLib_Destroy(HSD_GObj* gobj)
             }
         }
         obj_kind = gobj->obj_kind;
-        if (obj_kind == HSD_GObj_804D7849) {
+        if (obj_kind == HSD_GObj_JObjKind) {
             jobj = gobj->hsd_obj;
             HSD_JObjWalkTree(jobj, hsd_8039D688, NULL);
         }
@@ -256,7 +256,7 @@ void efLib_DestroyAll(HSD_GObj* gobj)
         if (((effect_1 = GET_EFFECT(gobj_1)) != NULL) &&
             (effect_1->parent_gobj == gobj))
         {
-            if (effect_1->gobj->obj_kind == HSD_GObj_804D7849) {
+            if (effect_1->gobj->obj_kind == HSD_GObj_JObjKind) {
                 HSD_JObjWalkTree(effect_1->gobj->hsd_obj, hsd_8039D688, NULL);
             }
             HSD_GObjPLink_80390228(effect_1->gobj);
@@ -272,13 +272,13 @@ void efLib_DestroyAll(HSD_GObj* gobj)
         gobj_2 = gobj_2->next;
         if ((effect_2 != NULL) && (effect_2->parent_gobj == gobj)) {
             gobj_3 = effect_2->gobj;
-            if (gobj_3->obj_kind == HSD_GObj_804D7849) {
+            if (gobj_3->obj_kind == HSD_GObj_JObjKind) {
                 HSD_JObjWalkTree(gobj_3->hsd_obj, hsd_8039D688, NULL);
             }
             HSD_GObjPLink_80390228(effect_2->gobj);
         }
     }
-    if (gobj->obj_kind == HSD_GObj_804D7849) {
+    if (gobj->obj_kind == HSD_GObj_JObjKind) {
         HSD_JObjWalkTree(gobj->hsd_obj, hsd_8039D688, NULL);
     }
 }
@@ -502,7 +502,7 @@ EF_Effect* efLib_Create(int gfx_id, HSD_GObj* parent_gobj)
             return NULL;
         }
         {
-            u8 kind = HSD_GObj_804D7849;
+            u8 kind = HSD_GObj_JObjKind;
             HSD_GObjObject_80390A70(effect->gobj, kind, jobj);
         }
         if ((u32) (10.0F * desc->lifetime) % 10 != 0) {

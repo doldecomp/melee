@@ -743,7 +743,7 @@ void fn_8019DD60(void)
     gobj = GObj_Create(0xE, 0x1A, 0);
     {
         HSD_Fog* tmp = HSD_FogLoadDesc(lbl_804D6690->fogs->desc);
-        HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_804D7848, tmp);
+        HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_FogKind, tmp);
     }
     GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
 

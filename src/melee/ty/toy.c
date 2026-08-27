@@ -1558,7 +1558,7 @@ void Toy_80306D70(s32 arg0)
 
             data->gobj = GObj_Create(2, 1, 0);
             lobj = Toy_LoadLObjList(sp14, &spC);
-            kind = HSD_GObj_804D784A;
+            kind = HSD_GObj_LightKind;
             HSD_GObjObject_80390A70(data->gobj, kind, lobj);
             GObj_SetupGXLink(data->gobj, HSD_GObj_LObjCallback, 0x37, 0);
             if (spC != 0) {
@@ -1661,7 +1661,7 @@ void _Toy_80307018(void)
     if (lights != NULL) {
         ptr2->x0 = GObj_Create(2, 3, 0);
         obj = Toy_LoadLObjList(lights, 0);
-        kind = HSD_GObj_804D784A;
+        kind = HSD_GObj_LightKind;
         HSD_GObjObject_80390A70(ptr2->x0, kind, obj);
         GObj_SetupGXLink(ptr2->x0, HSD_GObj_LObjCallback, 0x36, 0);
 
@@ -1669,7 +1669,7 @@ void _Toy_80307018(void)
             fog_desc = _Toy_803B8844;
             fog = HSD_FogLoadDesc(&fog_desc);
             ptr2->x8 = GObj_Create(3, 4, 0);
-            kind = HSD_GObj_804D7848;
+            kind = HSD_GObj_FogKind;
             HSD_GObjObject_80390A70(ptr2->x8, kind, fog);
             GObj_SetupGXLink(ptr2->x8, _Toy_80306A0C, 0x35, 0);
         }
@@ -1848,7 +1848,7 @@ void Toy_80307470(s32 arg0)
                               tg->x50, (&data->ptrs[arg0 * 3])[0x22C / 4]),
                           matanim[0], anim[0]);
         HSD_JObjReqAnimAll(loaded_jobj, 0.0f);
-        HSD_GObjObject_80390A70(tg->x0, (kind = HSD_GObj_804D7849),
+        HSD_GObjObject_80390A70(tg->x0, (kind = HSD_GObj_JObjKind),
                                 loaded_jobj);
         GObj_SetupGXLink(tg->x0, HSD_GObj_JObjCallback, 0x3C, 0);
 
@@ -1901,7 +1901,7 @@ void _Toy_803075E8(s32 arg0)
         if (joint != NULL) {
             td->gobj = GObj_Create(4, 7, 0);
             jobj = HSD_JObjLoadJoint(joint);
-            kind = HSD_GObj_804D7849;
+            kind = HSD_GObj_JObjKind;
             HSD_GObjObject_80390A70(td->gobj, kind, jobj);
             GObj_SetupGXLink(td->gobj, HSD_GObj_JObjCallback, 0x33, 0);
 
@@ -2465,7 +2465,7 @@ HSD_GObj* Toy_803087F4(void* arg0)
     trophy_jobj = HSD_JObjLoadJoint(joint);
     HSD_JObjAddChild(parent_jobj, trophy_jobj);
 
-    kind = HSD_GObj_804D7849;
+    kind = HSD_GObj_JObjKind;
     HSD_GObjObject_80390A70(anim->gobj, kind, parent_jobj);
     GObj_SetupGXLink(anim->gobj, HSD_GObj_JObjCallback, 0x39, 0);
 
@@ -4881,7 +4881,7 @@ void _Toy_8030FA50(void)
     /* Main CObj (offset 0x00) */
     state[0] = GObj_Create(1U, 2U, 0U);
     cobj = lb_80013B14(cam_desc);
-    kind = HSD_GObj_804D784B;
+    kind = HSD_GObj_CameraKind;
     HSD_GObjObject_80390A70(state[0], kind, cobj);
     GObj_SetupGXLinkMax(state[0], Toy_80306954, 0U);
     gobj = state[0];
@@ -4902,7 +4902,7 @@ void _Toy_8030FA50(void)
     frustum_near = -0.026839f;
     HSD_CObjSetFrustum(cobj, frustum_top, frustum_bottom, frustum_near,
                        frustum_far);
-    kind = HSD_GObj_804D784B;
+    kind = HSD_GObj_CameraKind;
     HSD_GObjObject_80390A70(state[2], kind, cobj);
     GObj_SetupGXLinkMax(state[2], (GObj_RenderFunc) (Event) Toy_803068E0, 0U);
     gobj = state[2];
@@ -4927,7 +4927,7 @@ void _Toy_8030FA50(void)
     /* Camera2 (offset 0x04) */
     state[1] = GObj_Create(1U, 2U, 0U);
     cobj = lb_80013B14(&_Toy_803FE68C);
-    kind = HSD_GObj_804D784B;
+    kind = HSD_GObj_CameraKind;
     HSD_GObjObject_80390A70(state[1], kind, cobj);
     GObj_SetupGXLinkMax(state[1], Toy_803068E0, 0U);
     gobj = state[1];
@@ -4947,7 +4947,7 @@ void _Toy_8030FA50(void)
     /* Light camera (offset 0x0C) */
     state[3] = GObj_Create(1U, 2U, 0U);
     cobj = lb_80013B14(cam_desc);
-    kind = HSD_GObj_804D784B;
+    kind = HSD_GObj_CameraKind;
     HSD_GObjObject_80390A70(state[3], kind, cobj);
     GObj_SetupGXLinkMax(state[3], HSD_GObj_803910D8, 0U);
     gobj = state[3];

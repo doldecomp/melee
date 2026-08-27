@@ -1401,7 +1401,7 @@ void fn_80193230(void)
     fn_80192E6C();
     gobj = GObj_Create(0xE, 0x1A, 0);
     fog = HSD_FogLoadDesc(lbl_804D664C->fogs[0].desc);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848, fog);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_FogKind, fog);
     GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
 }
 #ifdef MUST_MATCH
@@ -1531,7 +1531,7 @@ void fn_801935B8(void)
     fn_80192E6C();
     gobj = GObj_Create(0xE, 0x1A, 0);
     fog = HSD_FogLoadDesc(lbl_804D664C->fogs[0].desc);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848, fog);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_FogKind, fog);
     GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
 
     lbl_804D6658 = 0;
