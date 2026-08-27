@@ -1979,7 +1979,7 @@ static inline s32 ftCo_800A3908_inline1(float x, float y)
 bool ftCo_800A3908(Fighter* fp, bool arg1)
 {
     f32 ez;
-    struct Fighter_x1A88_t* data2;
+    struct Fighter_x1A88_t* data = &fp->x1A88;
     mp_UnkStruct0* island;
     Vec3 island_pos;
     f32 ex;
@@ -1993,7 +1993,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     f32 ddy;
     s32 t;
     s32 frames;
-    struct Fighter_x1A88_t* data = &fp->x1A88;
+    struct Fighter_x1A88_t* data2;
     s32 ok;
 
     PAD_STACK(0x18);
