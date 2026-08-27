@@ -211,10 +211,12 @@ static void mnSnap_8025329C(void)
             jobj = mnSnap_GetThumbJObj(p52, snap);
             HSD_ASSERT(193, jobj);
             HSD_ASSERT(194, jobj->u.dobj);
-            /* String order from the other branch of the inlined tobj chain. */
+            /// @todo data order hack
             (void) "jobj->u.dobj->mobj";
             (void) "jobj->u.dobj->mobj->tobj";
             (void) "jobj->u.dobj->mobj->tobj->imagedesc";
+            /// @todo sdata order hack
+            (void) "jobj.h";
             HSD_ASSERT(195, jobj->u.dobj->next);
             HSD_ASSERT(196, jobj->u.dobj->next->next);
             HSD_ASSERT(197, jobj->u.dobj->next->next->mobj);
