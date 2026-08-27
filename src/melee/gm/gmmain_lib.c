@@ -1327,7 +1327,7 @@ void gmMainLib_8015FA34(s32 arg0)
     for (i = 1; i < 9; i++) {
         if ((arg0 != 0 && arg0 != 2) || lb_8001B6E0(i) != 0) {
             gmMainLib_8015F600(i, 0);
-        } else if (i == 1 && !gmMainLib_8046B0F0.reset_code) {
+        } else if (i == 1 && !gmMainLib_8046B0F0.skip_intro) {
             gm_IncrementPowerCount();
         }
     }
@@ -1394,7 +1394,7 @@ int gmMainLib_8015FC74(void)
 void gmMainLib_8015FCC0(void)
 {
     struct gmMainLib_8046B0F0_t* tmp = &gmMainLib_8046B0F0;
-    tmp->reset_code = OSGetResetCode() == 0x80000000 ? true : false;
+    tmp->skip_intro = OSGetResetCode() == 0x80000000 ? true : false;
     tmp->resetting = false;
     tmp->progressive = false;
     tmp->xC = 0;

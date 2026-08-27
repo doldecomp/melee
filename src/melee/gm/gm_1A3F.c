@@ -168,7 +168,7 @@ void gm_801A4014(GameMode* mode)
         gm_GetAllGameModes();
         memzero(&gm_80479D30, sizeof(gm_80479D30));
         gm_801A3EF4();
-        gmMainLib_8046B0F0.reset_code = true;
+        gmMainLib_8046B0F0.skip_intro = true;
         gm_ChangeGameModeAfterCurrentScene(GM_BOOT);
         HSD_VISetBlack(0);
     }

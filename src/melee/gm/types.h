@@ -600,7 +600,7 @@ struct gm_8017DB6C_arg0_t {
 ASSERT_SIZE(struct gm_8017DB6C_arg0_t, 0xC);
 
 struct gmMainLib_8046B0F0_t {
-    /* 00 */ bool reset_code;  ///< ::OSGetResetCode had flag (1 << 31)
+    /* 00 */ bool skip_intro;  ///< Skips the opening movie when booting
     /* 04 */ bool resetting;   ///< reset switch pressed
     /* 08 */ bool progressive; ///< true = progressive, false = interlaced
     /* 0C */ bool xC;          // movie playback done, maybe?
