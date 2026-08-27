@@ -1590,11 +1590,12 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
     Vec3 back;
     Vec3 normal;
     Vec3 euler;
+    u8 pad[4];
     Vec3 check_pos;
     Ground* gp = gobj->user_data;
     u8* bp = (u8*) gp;
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    PAD_STACK(56);
+    PAD_STACK(52);
 
     HSD_JObjGetTranslation2(jobj, &pos);
 
