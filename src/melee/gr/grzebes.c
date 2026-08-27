@@ -2114,10 +2114,14 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                                 dpx2 *= dpx2;
                                 dpy2 *= dpy2;
                                 t = sqrtf(dpx2 + dpy2);
-                                new_width =
-                                    (f32) (0.5 *
-                                           (2.0 * (f64) bubbles->x18_size +
-                                            (f64) (t + width)));
+                                {
+                                    f32 calculated_width =
+                                        (f32) (0.5 *
+                                               (2.0 *
+                                                    (f64) bubbles->x18_size +
+                                                (f64) (t + width)));
+                                    new_width = calculated_width;
+                                }
                                 if (t > 0.001f) {
                                     dpx2 = (new_width - width) / t;
                                     x2 += dpx2 * (bubbles->x08_x - x2);
