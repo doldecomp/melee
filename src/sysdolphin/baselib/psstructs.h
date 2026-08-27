@@ -319,13 +319,6 @@ void psInitParticle(int num);
 
 void psRemoveParticle(void);
 
-HSD_Particle* psGenerateParticle0(HSD_Particle* p, int linkNo, int bank,
-                                  u32 kind, u16 texGroup, u8* list, int life,
-                                  float x, float y, float z, float vx,
-                                  float vy, float vz, float size, float grav,
-                                  float fric, int palflag, HSD_Generator* gp,
-                                  int flgInterpret);
-
 HSD_Particle* psGenerateParticleID0(HSD_Particle* p, int linkNo, int bank,
                                     int id, int flgInterpret);
 

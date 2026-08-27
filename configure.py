@@ -1891,12 +1891,12 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/hsd_393C.c"),
             Object(Linkable, "sysdolphin/baselib/debugconsole_main.c"),
             Object(
-                NonMatching,
+                Linkable,
                 "sysdolphin/baselib/particle.c",
                 extra_cflags=["-Cpp_exceptions on"],
             ),
             Object(
-                NonMatching,
+                Linkable,
                 "sysdolphin/baselib/generator.c",
                 extra_cflags=["-Cpp_exceptions on"],
             ),
@@ -1916,7 +1916,7 @@ config.libs = [
                 extra_cflags=["-Cpp_exceptions on"],
             ),
             Object(Matching, "sysdolphin/baselib/sobjlib.c"),
-            Object(NonMatching, "sysdolphin/baselib/sislib.c"),
+            Object(Linkable, "sysdolphin/baselib/sislib.c"),
             Object(Matching, "sysdolphin/baselib/sislib_font.c"),
             Object(Matching, "sysdolphin/baselib/hsd_4D11.c"),
             Object(Linkable, "sysdolphin/baselib/hsd_3A94.c"),
