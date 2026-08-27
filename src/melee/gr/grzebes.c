@@ -390,8 +390,8 @@ void grZebes_801D881C(HSD_GObj* gobj)
     Vec3 spot_interest;
     Vec3 lower_point_pos;
     HSD_GObj* secondary_gobj;
-    f32 col_heights[6];
     f32 slope;
+    f32 col_heights[6];
     f32 col_x[6];
     Vec3 upper_point_pos;
     s32 popped;
