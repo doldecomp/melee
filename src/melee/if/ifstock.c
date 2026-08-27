@@ -549,7 +549,7 @@ void ifStock_802F98E8(unsigned char player, int b)
     lbl_8046B6A0_t* ae44;
     if (stock->x0 != NULL) {
         user_data = &stock->x204[player];
-        user_data->x0[0] = player;
+        stock->x204[player].x0[0] = player;
         user_data->x0[1] = b;
         user_data->x0[2] = 1;
         if (stock->player[player].x0 != NULL) {
