@@ -359,6 +359,7 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
     GXColor sp44;
     MnNameNewDataLayout* layout;
     HSD_JObj* key_jobj;
+    HSD_Text* text;
     HSD_JObj* ref1;
     HSD_JObj* ref2;
     char** str_table;
@@ -399,99 +400,95 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
     if (arg0->key_text != NULL) {
         HSD_SisLib_803A5CC4(arg0->key_text);
     }
-    {
-        HSD_Text* text;
+    text = HSD_SisLib_803A6754(0, (s32) mn_804D6BB5);
+    arg0->key_text = text;
 
-        text = HSD_SisLib_803A6754(0, (s32) mn_804D6BB5);
-        arg0->key_text = text;
-
-        key_jobj = arg0->jobjs[16];
+    key_jobj = arg0->jobjs[16];
+    if (key_jobj == NULL) {
+        key_jobj = NULL;
+    } else {
+        key_jobj = key_jobj->child;
+    }
+    for (i = 0; i < 50; i++) {
+        if (i == 0x2D) {
+            break;
+        }
         if (key_jobj == NULL) {
             key_jobj = NULL;
         } else {
-            key_jobj = key_jobj->child;
+            key_jobj = key_jobj->next;
         }
-        for (i = 0; i < 50; i++) {
-            if (i == 0x2D) {
-                break;
-            }
-            if (key_jobj == NULL) {
-                key_jobj = NULL;
-            } else {
-                key_jobj = key_jobj->next;
-            }
+    }
+
+    lb_8000B1CC(key_jobj, &layout->x8CC, &sp50);
+    pos_x = sp50.x;
+    pos_y = -sp50.y;
+    pos_z = sp50.z;
+    text->pos_x = pos_x;
+    text->pos_y = pos_y;
+    text->pos_z = pos_z;
+    text->font_size.x = 0.03f;
+    text->font_size.y = 0.04f;
+    text->text_color = mnNameNew_804D4F6C;
+
+    ref1 = arg0->jobjs[16];
+    if (ref1 == NULL) {
+        ref1 = NULL;
+    } else {
+        ref1 = ref1->child;
+    }
+    for (i = 0; i < 50; i++) {
+        if (i == 0x28) {
+            break;
         }
-
-        lb_8000B1CC(key_jobj, &layout->x8CC, &sp50);
-        pos_x = sp50.x;
-        pos_y = -sp50.y;
-        pos_z = sp50.z;
-        text->pos_x = pos_x;
-        text->pos_y = pos_y;
-        text->pos_z = pos_z;
-        text->font_size.x = 0.03f;
-        text->font_size.y = 0.04f;
-        text->text_color = mnNameNew_804D4F6C;
-
-        ref1 = arg0->jobjs[16];
         if (ref1 == NULL) {
             ref1 = NULL;
         } else {
-            ref1 = ref1->child;
+            ref1 = ref1->next;
         }
-        for (i = 0; i < 50; i++) {
-            if (i == 0x28) {
-                break;
-            }
-            if (ref1 == NULL) {
-                ref1 = NULL;
-            } else {
-                ref1 = ref1->next;
-            }
+    }
+
+    base_x = HSD_JObjGetTranslationX(key_jobj);
+    x_range = HSD_JObjGetTranslationX(ref1) - base_x;
+
+    ref2 = arg0->jobjs[16];
+    if (ref2 == NULL) {
+        ref2 = NULL;
+    } else {
+        ref2 = ref2->child;
+    }
+    for (i = 0; i < 50; i++) {
+        if (i == 0x2E) {
+            break;
         }
-
-        base_x = HSD_JObjGetTranslationX(key_jobj);
-        x_range = HSD_JObjGetTranslationX(ref1) - base_x;
-
-        ref2 = arg0->jobjs[16];
         if (ref2 == NULL) {
             ref2 = NULL;
         } else {
-            ref2 = ref2->child;
+            ref2 = ref2->next;
         }
-        for (i = 0; i < 50; i++) {
-            if (i == 0x2E) {
-                break;
-            }
-            if (ref2 == NULL) {
-                ref2 = NULL;
-            } else {
-                ref2 = ref2->next;
-            }
-        }
-
-        base_y = HSD_JObjGetTranslationY(key_jobj);
-        y_range = -(HSD_JObjGetTranslationY(ref2) - base_y);
-
-        j = 0;
-        for (; j < 0x32; j++) {
-            font_x = text->font_size.x;
-            col_x = (f32) (9 - (j / 5)) * x_range;
-            HSD_SisLib_803A6B98(text, col_x / font_x,
-                                ((f32) (j % 5) * y_range) / text->font_size.y,
-                                str_table[j], font_x, col_x);
-            if (j == (s32) mn_804A04F0.hovered_selection) {
-                color_ptr = &sp48;
-            } else {
-                color_ptr = &sp4C;
-            }
-            sp44 = *color_ptr;
-            color_ptr = &sp44;
-            HSD_SisLib_803A74F0(text, j, color_ptr);
-        }
-
-        return (s32) text;
     }
+
+    base_y = HSD_JObjGetTranslationY(key_jobj);
+    y_range = -(HSD_JObjGetTranslationY(ref2) - base_y);
+
+    j = 0;
+    for (; j < 0x32; j++) {
+        font_x = text->font_size.x;
+        col_x = (f32) (9 - (j / 5)) * x_range;
+        HSD_SisLib_803A6B98(text, col_x / font_x,
+                            ((f32) (j % 5) * y_range) / text->font_size.y,
+                            str_table[j], font_x, col_x);
+        if (j == (s32) mn_804A04F0.hovered_selection) {
+            color_ptr = &sp48;
+        } else {
+            color_ptr = &sp4C;
+        }
+        sp44 = *color_ptr;
+        color_ptr = &sp44;
+        HSD_SisLib_803A74F0(text, j, color_ptr);
+    }
+
+    return (s32) text;
 }
 
 s32 mnNameNew_8023BAA8(NameNewEntry* arg0, s32 arg1, u8 arg2)
@@ -568,67 +565,26 @@ s32 mnNameNew_8023BAA8(NameNewEntry* arg0, s32 arg1, u8 arg2)
     return (s32) arg2;
 }
 
-static inline s8 CopyAutoNameText(char* cur_text, s32 pick)
-{
-    s32 name_idx;
-    u8 ch;
-    u8** name_ptr;
-    char* text;
-    s32 char_idx;
-    s8 null_ch;
-
-    name_idx = 0;
-    char_idx = name_idx;
-    cur_text[0] = *mnNameNew_NullCharacter;
-    text = cur_text;
-    cur_text[3] = *mnNameNew_NullCharacter;
-    cur_text[6] = *mnNameNew_NullCharacter;
-    cur_text[9] = *mnNameNew_NullCharacter;
-
-    name_ptr = &AutoNamesList[pick];
-    while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
-           (s8) (ch = (*name_ptr)[char_idx]))
-    {
-        text[0] = ch;
-        text[1] = (*name_ptr)[char_idx + 1];
-        text[2] = *mnNameNew_NullCharacter;
-        char_idx += 2;
-        name_idx++;
-        text += 3;
-    }
-
-    cur_text[name_idx * 3] = null_ch;
-    return null_ch;
-}
-
-static inline void UpdateAutoNameHistory(NameNewEntry* data, s32 pick)
-{
-    u8 tmp;
-    s32 i;
-
-    tmp = data->auto_history[0];
-    data->auto_history[0] = (u8) pick;
-    for (i = 1; i < 5; i++) {
-        u8 next = data->auto_history[i];
-        data->auto_history[i] = tmp;
-        tmp = next;
-    }
-}
-
 s32 PickAutoName(HSD_GObj* arg0)
 {
     NameNewEntry* data;
-    char* cur_text;
+    u8* cur_text;
     u8** names;
     s32 count;
     s32 pick;
     s32 dup;
+    s32 char_idx;
+    u8* text;
+    u8** name_ptr;
+    u8 ch;
+    s32 name_idx;
+    u8 tmp;
     s8 null_ch;
 
-    PAD_STACK(32);
+    PAD_STACK(48);
 
     data = arg0->user_data;
-    cur_text = mnNameNew_CurrentNameText;
+    cur_text = (u8*) mnNameNew_CurrentNameText;
 
     do {
         dup = 0;
@@ -656,9 +612,37 @@ s32 PickAutoName(HSD_GObj* arg0)
         }
     } while (dup != 0);
 
-    null_ch = CopyAutoNameText(cur_text, pick);
+    name_idx = 0;
+    char_idx = name_idx;
+    cur_text[0] = *mnNameNew_NullCharacter;
+    text = cur_text;
+    cur_text[3] = *mnNameNew_NullCharacter;
+    cur_text[6] = *mnNameNew_NullCharacter;
+    cur_text[9] = *mnNameNew_NullCharacter;
 
-    UpdateAutoNameHistory(data, pick);
+    name_ptr = &AutoNamesList[pick];
+    while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
+           (s8) (ch = (*name_ptr)[char_idx]))
+    {
+        text[0] = ch;
+        text[1] = (*name_ptr)[char_idx + 1];
+        text[2] = *mnNameNew_NullCharacter;
+        char_idx += 2;
+        name_idx++;
+        text += 3;
+    }
+
+    cur_text[name_idx * 3] = null_ch;
+
+    tmp = data->auto_history[0];
+    data->auto_history[0] = (u8) pick;
+    ch = data->auto_history[1];
+    data->auto_history[1] = tmp;
+    tmp = data->auto_history[2];
+    data->auto_history[2] = ch;
+    ch = data->auto_history[3];
+    data->auto_history[3] = tmp;
+    data->auto_history[4] = ch;
 
     return (s32) null_ch;
 }
@@ -685,9 +669,8 @@ bool NameContainsOnlySpaces(void)
 static inline void CopyCurrentNameToNametag(struct NameTagData* nametag)
 {
     s32 idx;
-    u8 ch;
     u8* text;
-    s32 i;
+    u8 ch;
     s8 null_ch;
 
     text = (u8*) mnNameNew_CurrentNameText;
@@ -701,10 +684,7 @@ static inline void CopyCurrentNameToNametag(struct NameTagData* nametag)
             idx += 1;
             ptr += 1;
         }
-        for (i = 1; i < 4; i++) {
-            if (null_ch == (s8) * (text += 3)) {
-                break;
-            }
+        if (null_ch != (s8) * (text += 3)) {
             ptr = text;
             while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
                    (s8) (ch = *ptr))
@@ -918,11 +898,11 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
     s32 key_off;
     u8* key_char;
     s8 null_char;
-    s32 n;
+    char* src;
     u8* dest;
     s32 len;
     u8 cursor;
-    char* src;
+    s32 n;
 
     PAD_STACK(12);
 
@@ -1304,8 +1284,9 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
             return;
         }
         {
+            s32 buttons_arg = (s32) buttons;
             u8 new_sel = mnNameNew_8023BAA8(
-                data, (s32) buttons, (u8) mn_804A04F0.hovered_selection);
+                data, buttons_arg, (u8) mn_804A04F0.hovered_selection);
             if ((s32) new_sel != (s32) mn_804A04F0.hovered_selection) {
                 lbAudioAx_80024030(2);
                 mn_804A04F0.hovered_selection = (u16) new_sel;
