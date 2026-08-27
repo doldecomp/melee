@@ -4446,6 +4446,7 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 block_idx;
     s32 digest_idx;
     s32 result;
+    s32 has_blocks;
     u32 sector_size;
 
     arg0->x24 = hsd_803AC340(&arg0->x3B0);
@@ -4497,8 +4498,6 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                     cmd_clear[2] = zero;
                     result = fn_803AC168(cmd_clear);
                 } else {
-                    s32 has_blocks;
-
                     if (arg0->x4C[0] > 0) {
                         has_blocks = 1;
                     } else {
