@@ -157,7 +157,7 @@ u8 mn_StockCountLimits[2] = { 1, 0x63 };
 u8 mn_StockCountTextId = 0x2B;
 
 f32 mn_804D6BD8;
-u8 const mn_804DBDFC[] = { 2, 3, 5, 6 };
+JObjIndices const mn_804DBDFC = { 0x02030506 };
 HSD_GObj* mn_804D6BD0;
 u16 const mn_804DBE04 = 0x0708;
 s32 const mn_804DBE08 = 0x02030405;
@@ -404,9 +404,9 @@ void fn_8022F538(HSD_GObj* arg0)
 void mn_8022FB88(u8 arg0, void* arg1)
 {
     struct mn_8022FB88_arg1_t* data = arg1;
-    u8* sp14;
+    JObjIndices indices;
     s32 sp10;
-    u8* var_r29;
+    u8* index_ptr;
     HSD_JObj* temp_r29_2;
     HSD_JObj* temp_r29_3;
     int new_var;
@@ -414,19 +414,19 @@ void mn_8022FB88(u8 arg0, void* arg1)
     HSD_JObj* temp_r28;
     HSD_JObj* temp_r29;
     s32 var_r28;
-    u8* var_r29_2;
+    u8* index_ptr2;
     HSD_JObj** temp_r27_2;
     s32 var_r27;
 
-    sp14 = (u8*) mn_804DBDFC;
+    indices = mn_804DBDFC;
     if (arg0 == 0) {
         HSD_JObj* temp_r27;
         var_r27 = 0;
-        var_r29 = (u8*) &sp14;
+        index_ptr = indices.idx;
         do {
-            HSD_JObjSetFlagsAll(data->x58[*var_r29], JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(data->x58[*index_ptr], JOBJ_HIDDEN);
             var_r27 += 1;
-            var_r29 += 1;
+            index_ptr += 1;
         } while (var_r27 < 4);
         temp_r27 = data->x58[4];
         HSD_JObjReqAnimAll(temp_r27, mn_804D4B90);
@@ -434,11 +434,11 @@ void mn_8022FB88(u8 arg0, void* arg1)
         return;
     }
     var_r28 = 0;
-    var_r29_2 = (u8*) &sp14;
+    index_ptr2 = indices.idx;
     do {
-        HSD_JObjClearFlagsAll(data->x58[*var_r29_2], JOBJ_HIDDEN);
+        HSD_JObjClearFlagsAll(data->x58[*index_ptr2], JOBJ_HIDDEN);
         var_r28 += 1;
-        var_r29_2 += 1;
+        index_ptr2 += 1;
     } while (var_r28 < 4);
     temp_r28 = data->x58[4];
     HSD_JObjReqAnimAll(temp_r28, mn_804D6BD8);
