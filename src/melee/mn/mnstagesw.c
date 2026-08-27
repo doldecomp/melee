@@ -752,7 +752,7 @@ static HSD_GObj* mnStageSw_80236CBC(s8 arg0)
         HSD_JObjReqAnimAll(cursor_anim_jobj, mnStageSw_804D4BB8[enabled]);
         HSD_JObjAnimAll(cursor_anim_jobj);
         lb_80011E24(cursor_jobj, &sp48, 3, -1);
-        if (hovered == idx) {
+        if (idx == hovered) {
             HSD_JObjReqAnimAll(sp48, anims[0].start_frame);
             HSD_JObjAnimAll(sp48);
         } else {
