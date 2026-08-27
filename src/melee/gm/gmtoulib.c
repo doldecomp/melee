@@ -28,9 +28,12 @@
 #include "pl/player.h"
 #include "sc/types.h"
 
+#include <baselib/forward.h>
+
 #include <m2c_macros.h>
 #include <stdio.h>
 #include <string.h>
+#include <baselib/cobj.h>
 #include <baselib/controller.h>
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>
@@ -41,16 +44,8 @@
 #include <baselib/mobj.h>
 #include <baselib/random.h>
 #include <baselib/sislib.h>
+#include <baselib/wobj.h>
 
-/// @todo Split-derived data; types are inferred.
-const TmAnimFrameTable lbl_803B7D18 = {
-    { { 0, 30, 0 },
-      { 50, 59, 0 },
-      { 60, 70, 1 },
-      { 90, 100, 0 },
-      { 110, 130, 0 },
-      { 150, 160, 0 } },
-};
 const u8 lbl_803B7D3C[0x14] = { 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,
                                 0, 2, 0, 0, 0, 3, 0, 0, 0, 0 };
 u8 lbl_804D6638[0x4];
@@ -60,22 +55,37 @@ extern SceneDesc* lbl_804D666C;
 extern SceneDesc* lbl_804D6670;
 extern SceneDesc* lbl_804D6674;
 extern u8 lbl_804D6680[8];
-extern char* lbl_804DA6B4;
-extern char* lbl_804DA6B8;
-extern char* lbl_804DA6BC;
-extern char* lbl_804DA6C0;
-extern char* lbl_804DA6C8;
-extern char* lbl_804DA6CC;
-extern char* lbl_804DA6D0;
+char* const lbl_804DA6B4 = { 0 };
+char* const lbl_804DA6B8 = { 0 };
+char* const lbl_804DA6BC = { 0 };
+char* const lbl_804DA6C0 = { 0 };
+char* const lbl_804DA6C8 = { 0 };
+char* const lbl_804DA6CC = { 0 };
+char* const lbl_804DA6D0 = { 0 };
 static s32 lbl_804D6630;
 static s32 lbl_804D6634;
-extern struct lbl_803B7C80_t {
+
+struct lbl_803B7C80_t {
     s32 v[10];
-} lbl_803B7C80;
-typedef struct CamDesc {
-    s32 d[14];
-} CamDesc;
-extern CamDesc lbl_803B7CA8;
+} lbl_803B7C80 = {
+    30, -20, 15, -12, 10, -8, 6, -4, 2, 1,
+};
+
+HSD_WObjDesc eyepos = {
+    NULL,
+    { 320.0f, -240.0f, 415.6922f },
+    NULL,
+};
+
+HSD_WObjDesc interest = {
+    NULL,
+    { 320.0f, -240.0f, 0.0f },
+    NULL,
+};
+
+HSD_CameraDescCommon const cobj = {
+    NULL, (1 << 0), 0, { 0, 640, 0, 480 }, { 0, 640, 0, 480 }, &eyepos,
+};
 
 typedef struct BracketData {
     /* 0x0000 */ BracketEntry entries[64];
@@ -1608,13 +1618,13 @@ static inline void gmTournament_InitBracket(s32 entrant_count, f32 anim_frame,
 #endif
 void fn_8018E618(int arg0, f32 farg0, int arg1)
 {
-    CamDesc cam;
+    HSD_CObjDesc cam;
     HSD_GObj* gobj;
     HSD_GObj* tmp;
     s32 i;
     PAD_STACK(16);
 
-    cam = lbl_803B7CA8;
+    cam.common = cobj;
 
     while ((tmp = M2C_FIELD(HSD_GObj_Entities, HSD_GObj**, 0x6C)) != NULL) {
         HSD_GObjPLink_80390228(tmp);
@@ -1639,7 +1649,7 @@ void fn_8018E618(int arg0, f32 farg0, int arg1)
             f32 pos[9];
             struct lbl_803D9DD0_t cobj_data;
         } CObjData;
-        HSD_CObj* cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) &cam);
+        HSD_CObj* cobj = HSD_CObjLoadDesc(&cam);
         CObjData* cobj_data = (CObjData*) &lbl_803D9DAC;
         cobj_data->cobj_data.cobj = cobj;
         {
