@@ -130,27 +130,49 @@ static inline MnEventData* mnEvent_GetData(void)
     return mnEvent_804D6C60->user_data;
 }
 
+static inline HSD_GObj* mnEvent_CreateIcon(s32 idx)
+{
+    HSD_JObj* jobj_0A;
+    HSD_JObj* jobj_0C;
+    HSD_JObj* icon_jobj;
+    HSD_GObj* icon_gobj;
+    HSD_JObj* tree;
+    Vec3 pos;
+    f32 spacing;
+    void** assets = mnEvent_804A08F8;
+
+    tree = mnEvent_804D6C60->hsd_obj;
+    lb_80011E24(tree, &jobj_0A, 0xA, -1);
+    lb_80011E24(tree, &jobj_0C, 0xC, -1);
+    spacing = HSD_JObjGetTranslationY(jobj_0A);
+    spacing = HSD_JObjGetTranslationY(jobj_0C) - spacing;
+    HSD_JObjGetTranslation(jobj_0A, &pos);
+    pos.y += (f32) idx * spacing;
+
+    icon_gobj = GObj_Create(6, 7, 0x80);
+    icon_jobj = HSD_JObjLoadJoint(assets[4]);
+    HSD_GObjObject_80390A70(icon_gobj, HSD_GObj_804D7849, icon_jobj);
+    GObj_SetupGXLink(icon_gobj, HSD_GObj_JObjCallback, 4, 0x80);
+    mnEvent_8024D4E0(icon_jobj, &pos);
+    return icon_gobj;
+}
+
 void mnEvent_8024D15C(s32 idx, s32 event_id)
 {
     HSD_JObj* jobj_0A;
     HSD_JObj* jobj_0C;
     Vec3 pos;
-    Vec3 icon_pos;
-    HSD_JObj* jobj_0C_2;
-    f32 icon_spacing;
     MnEventData* data;
     HSD_Text** texts;
     HSD_Text** text_slot;
     HSD_Text** icons;
     HSD_Text** icon_slot;
-    void** assets;
-    HSD_GObj* icon_gobj;
-    HSD_JObj* icon_jobj;
     HSD_Text* text;
     HSD_Text* icon_text;
     f32 spacing;
-    HSD_JObj* jobj_0A_2;
     HSD_JObj* tree;
+    f32 text_x;
+    f32 text_y;
     s32 sis_idx;
     PAD_STACK(0x38);
 
@@ -162,35 +184,18 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
     spacing = HSD_JObjGetTranslationY(jobj_0A);
     spacing = HSD_JObjGetTranslationY(jobj_0C) - spacing;
     HSD_JObjGetTranslation(jobj_0A, &pos);
-
     pos.y = -(((f32) idx * spacing) + pos.y);
 
     if (data->gobjs[idx] != NULL) {
         HSD_GObjPLink_80390228(data->gobjs[idx]);
         data->gobjs[idx] = NULL;
     }
-
     if (gmMainLib_8015CEFC(event_id) != 0) {
-        assets = mnEvent_804A08F8;
-        tree = mnEvent_804D6C60->hsd_obj;
-        lb_80011E24(tree, &jobj_0A_2, 0xA, -1);
-        lb_80011E24(tree, &jobj_0C_2, 0xC, -1);
-        icon_spacing = HSD_JObjGetTranslationY(jobj_0A_2);
-        icon_spacing = HSD_JObjGetTranslationY(jobj_0C_2) - icon_spacing;
-        HSD_JObjGetTranslation(jobj_0A_2, &icon_pos);
-
-        icon_pos.y = icon_pos.y + (f32) idx * icon_spacing;
-        icon_gobj = GObj_Create(6, 7, 0x80);
-        icon_jobj = HSD_JObjLoadJoint((HSD_Joint*) mnEvent_804A0908[0]);
-        HSD_GObjObject_80390A70(icon_gobj, HSD_GObj_804D7849, icon_jobj);
-        GObj_SetupGXLink(icon_gobj, HSD_GObj_JObjCallback, 4, 0x80);
-        mnEvent_8024D4E0(icon_jobj, &icon_pos);
-        data->gobjs[idx] = icon_gobj;
+        data->gobjs[idx] = mnEvent_CreateIcon(idx);
     }
 
     texts = data->texts;
     text_slot = &texts[idx];
-    (void) text_slot;
     if (*text_slot != NULL) {
         HSD_SisLib_803A5CC4(data->texts[idx]);
     }
@@ -198,8 +203,10 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
     *text_slot = text;
     text->font_size.x = 0.035f;
     text->font_size.y = 0.035f;
-    text->pos_x = pos.x + mnEvent_803EF764.x;
-    text->pos_y = pos.y + mnEvent_803EF764.y;
+    text_x = pos.x + mnEvent_803EF764.x;
+    text_y = pos.y + mnEvent_803EF764.y;
+    text->pos_x = text_x;
+    text->pos_y = text_y;
     text->pos_z = 17.0f;
     text->default_kerning = 1;
     *(s32*) &text->text_color = mnEvent_804D5028;
@@ -210,9 +217,10 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
     if (*icon_slot != NULL) {
         HSD_SisLib_803A5CC4(data->icons[idx]);
     }
-    icon_text = HSD_SisLib_803A5ACC(0, 1, pos.x + mnEvent_803EF770.x,
-                                    pos.y + mnEvent_803EF770.y, 17.0f,
-                                    364.68332f, 38.38772f);
+    text_x = pos.x + mnEvent_803EF770.x;
+    text_y = pos.y + mnEvent_803EF770.y;
+    icon_text = HSD_SisLib_803A5ACC(0, 1, text_x, text_y, 17.0f, 364.68332f,
+                                    38.38772f);
     *icon_slot = icon_text;
     icon_text->font_size.x = 0.035f;
     icon_text->font_size.y = 0.035f;
