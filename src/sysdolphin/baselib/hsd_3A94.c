@@ -4060,8 +4060,9 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         }
     } else {
         u32 sector_size = state->x8;
+        u32 usable_size = sector_size - 0x20;
         file_blocks =
-            (u32) (file_size + sector_size - 0x21) / (sector_size - 0x20);
+            (u32) (file_size + sector_size - 0x21) / usable_size;
     }
 
     total_blocks = fn_803AC7DC(state);
