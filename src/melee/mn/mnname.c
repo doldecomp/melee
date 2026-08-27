@@ -41,9 +41,6 @@ static void order_sdata(void)
 }
 #endif
 
-extern char* mnNameNew_803EE720[];
-extern char* mnNameNew_803EE724[];
-
 extern char mnName_804D4C04[8];
 
 typedef struct {
@@ -1630,7 +1627,7 @@ void mnName_8023A9B4(u8 arg0)
     mnName_80239A24((HSD_GObj*) gobj2);
 }
 
-char** AutoNamesList;
+u8** AutoNamesList;
 char** NotAllowedNamesList;
 
 static inline void mnName_InitNameDisplayOrder(void)

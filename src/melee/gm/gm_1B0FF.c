@@ -11,8 +11,8 @@
 #include "melee/lb/lbdvd.h"
 #include "melee/lb/lbsnap.h"
 #include "melee/mn/mngallery.h"
-#include "melee/mn/mnsnap.h"
 #include "melee/mn/types.h"
+#include "mn/mnsnap.h"
 
 #include <sysdolphin/baselib/memory.h>
 

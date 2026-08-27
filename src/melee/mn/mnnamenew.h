@@ -34,5 +34,7 @@
 /* 23E630 */ void mnNameNew_EnterFromMnName(UNK_T);
 /* 23E6D0 */ void mnNameNew_EnterFromMnCharSel(HSD_Archive*, s32);
 /* 23EA08 */ void mnNameNew_8023EA08(UNK_T);
+/* 3EE720 */ extern DATA UNK_T mnNameNew_803EE720;
+/* 3EE724 */ extern DATA UNK_T mnNameNew_803EE724;
 
 #endif

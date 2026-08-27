@@ -75,8 +75,6 @@ static void sdata2_order(void)
 /* 4D4190 */ static s32 lbl_804D4190 = 0xFFFFFFFF;
 /* 4D4194 */ static s32 lbl_804D4194 = -1;
 
-/* 4D663C */ int lbl_804D663C;
-
 void fn_80196510(void)
 {
     int stage;
@@ -532,7 +530,7 @@ typedef union TmPlayerAnimFrameTable {
 } TmPlayerAnimFrameTable;
 ASSERT_SIZE(TmPlayerAnimFrameTable, sizeof(s32) * 9);
 
-extern TmPlayerAnimFrameTable lbl_803B7CE0;
+TmPlayerAnimFrameTable const lbl_803B7CE0 = { 0 };
 
 void fn_80196FFC(HSD_GObj* gobj)
 {
@@ -633,25 +631,15 @@ void fn_80196FFC(HSD_GObj* gobj)
     fn_8019044C(jobj, (f32) lbl_804799D8.x2A[pnum].cur);
 }
 
-extern f32 lbl_804DA7E8; // 6.5f
-extern f32 lbl_804DA7EC; // 19.5f
-extern f32 lbl_804DA7F0; // 2.0f
-extern f32 lbl_804DA810; // 4.5f
-extern f32 lbl_804DA814; // 5.5f
-extern f32 lbl_804DA818; // 666.0f
-extern f32 lbl_804DA81C; // 0.3f
-extern f32 lbl_804DA820; // 12.6f
-
 static inline f32 gmTournament_GetPlayerX(u8 player_count, s32 player)
 {
     if ((s32) player_count == 4) {
         return (13.0f * (f32) player) + -19.5f;
     }
     if ((s32) player_count == 3) {
-        return lbl_804DA7E8 + ((13.0f * (f32) player) - lbl_804DA7EC);
+        return 6.5f + ((13.0f * (f32) player) - 19.5f);
     }
-    return lbl_804DA7E8 +
-           ((13.0f * (lbl_804DA7F0 * (f32) player)) - lbl_804DA7EC);
+    return 6.5f + ((13.0f * (2.0f * (f32) player)) - 19.5f);
 }
 
 static inline void gmTournament_SetPlayerX(f32* x, u8 player_count, s32 player)
@@ -659,10 +647,9 @@ static inline void gmTournament_SetPlayerX(f32* x, u8 player_count, s32 player)
     if ((s32) player_count == 4) {
         *x = (13.0f * (f32) player) + -19.5f;
     } else if ((s32) player_count == 3) {
-        *x = lbl_804DA7E8 + ((13.0f * (f32) player) - lbl_804DA7EC);
+        *x = 6.5f + ((13.0f * (f32) player) - 19.5f);
     } else {
-        *x = lbl_804DA7E8 +
-             ((13.0f * (lbl_804DA7F0 * (f32) player)) - lbl_804DA7EC);
+        *x = 6.5f + ((13.0f * (2.0f * (f32) player)) - 19.5f);
     }
 }
 
@@ -700,7 +687,7 @@ void fn_801973F8(HSD_GObj* gobj)
     player_count = tm->x30;
     x = gmTournament_GetPlayerX(player_count, pnum);
 
-    fn_8018FDC4(jobj, lbl_804DA810 + x, lbl_804DA814, lbl_804DA818);
+    fn_8018FDC4(jobj, 4.5f + x, 5.5f, 666.0f);
 
     if (lbl_804799D8.x2A[pnum].state == 4) {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
@@ -786,7 +773,7 @@ void fn_801977AC(HSD_GObj* gobj)
     players = tm->x30;
     x = gmTournament_GetPlayerX(players, pnum);
 
-    fn_8018FDC4(jobj, lbl_804DA81C + x, lbl_804DA820, lbl_804DA818);
+    fn_8018FDC4(jobj, 0.3f + x, 12.6f, 666.0f);
 
     if (lbl_804799D8.x2A[pnum].state == 4) {
         if (lbl_804799D8.x1D[pnum] < 0x28) {
@@ -806,7 +793,7 @@ void fn_801977AC(HSD_GObj* gobj)
         players = tm->x30;
         x = gmTournament_GetPlayerX(players, pnum);
 
-        fn_8018FDC4(jobj, lbl_804DA81C + x, lbl_804DA820, lbl_804DA818);
+        fn_8018FDC4(jobj, 0.3f + x, 12.6f, 666.0f);
     }
 }
 
@@ -846,7 +833,7 @@ void fn_80197AF0(HSD_GObj* gobj)
     players = tm->x30;
     gmTournament_SetPlayerX(&x, players, pnum);
 
-    fn_8018FDC4(jobj, x, lbl_804DA818, lbl_804DA818);
+    fn_8018FDC4(jobj, x, 666.0f, 666.0f);
 
     if (lbl_804799D8.x44[pnum] != 6 || lbl_804799D8.x2A[pnum].state == 1 ||
         lbl_804799D8.x2A[pnum].state == 2 || lbl_804799D8.x2A[pnum].state == 4)
@@ -918,7 +905,7 @@ void fn_80197E18(HSD_GObj* gobj)
     }
 
     gmTournament_SetPlayerX(&x_pos, data->x30, pnum);
-    fn_8018FDC4(jobj, x_pos, lbl_804DA818, lbl_804DA818);
+    fn_8018FDC4(jobj, x_pos, 666.0f, 666.0f);
 }
 
 /// @todo Currently 70.24% match - needs register allocation fix
@@ -962,11 +949,9 @@ void fn_80197FD8(HSD_GObj* gobj)
 
         gmTournament_SetPlayerX(&x_position, num_players, port);
 
-        fn_8018FDC4(jobj, x_position, lbl_804DA818, lbl_804DA818);
+        fn_8018FDC4(jobj, x_position, 666.0f, 666.0f);
     }
 }
-
-extern f32 lbl_804DA824; // 0.01f
 
 /// @todo Down to linking
 /// Updates player cursor animation and position.
@@ -1006,7 +991,7 @@ void fn_801981A0(HSD_GObj* gobj)
 
     gmTournament_SetPlayerX(&x_pos, data->x30, pnum);
 
-    fn_8018FDC4(jobj, x_pos, lbl_804DA818, lbl_804DA824);
+    fn_8018FDC4(jobj, x_pos, 666.0f, 80.0f);
 
     counter = state->x21[pnum];
     counter = (counter + 1) % 11;
@@ -1053,7 +1038,7 @@ void fn_801983E4(HSD_GObj* gobj)
     player_count = tm->x30;
     gmTournament_SetPlayerX(&x, player_count, pnum);
 
-    fn_8018FDC4(jobj, x, lbl_804DA818, lbl_804DA824);
+    fn_8018FDC4(jobj, x, 666.0f, 80.0f);
 }
 
 void fn_80198584(ResultsData* results)
@@ -1256,13 +1241,6 @@ void fn_80198C60(void)
 #endif
 
 SceneDesc* lbl_804D666C;
-extern f32 lbl_804DA808; // 0.0f
-extern f32 lbl_804DA82C; // 0.054945f
-extern f32 lbl_804DA830; // 0.08f
-extern f32 lbl_804DA834; // (float)
-extern f32 lbl_804DA838; // 250.0f
-extern f32 lbl_804DA83C; // 1.5f
-extern f32 lbl_804DA840; // (float)
 
 /// Initializes the scene rendering components for the gm_18A5 game mode.
 void fn_80198D18(void)
@@ -1283,16 +1261,16 @@ void fn_80198D18(void)
     td = gm_GetTournamentData();
     td->x524[2] = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
     text = td->x524[2];
-    text->font_size.x = lbl_804DA82C;
-    text->font_size.y = lbl_804DA830;
+    text->font_size.x = 0.054945f;
+    text->font_size.y = 0.08f;
     td->x524[2]->default_alignment = 1;
     td->x524[2]->default_kerning = 1;
 
     td->x524[3] = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
     td->x524[3]->default_alignment = 1;
     td->x524[3]->default_kerning = 1;
-    HSD_SisLib_803A6B98(td->x524[3], lbl_804DA834, lbl_804DA838, "    ");
-    HSD_SisLib_803A7548(td->x524[3], 0, lbl_804DA83C, lbl_804DA83C);
+    HSD_SisLib_803A6B98(td->x524[3], 320.0f, 250.0f, "    ");
+    HSD_SisLib_803A7548(td->x524[3], 0, 1.5f, 1.5f);
 
     gobj = GObj_Create(0xE, 0x1A, 0);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848,
@@ -1302,20 +1280,6 @@ void fn_80198D18(void)
 }
 
 SceneDesc* lbl_804D6674;
-extern f32 lbl_804DA828;
-extern f32 lbl_804DA844;
-extern f32 lbl_804DA848;
-extern f32 lbl_804DA84C;
-extern f32 lbl_804DA850;
-extern f32 lbl_804DA854;
-extern f32 lbl_804DA858;
-extern f32 lbl_804DA85C;
-extern f32 lbl_804DA860;
-extern f32 lbl_804DA864;
-extern f32 lbl_804DA868;
-extern f32 lbl_804DA86C;
-extern f32 lbl_804DA870;
-extern f32 lbl_804DA874;
 
 /// Matched bar data relocations
 void fn_80198EBC(void)
@@ -1446,7 +1410,7 @@ void fn_80198EBC(void)
         fn_8019044C(jobj, anim_rate);
 
         gobj = fn_8019035C(0, lbl_804D6674->models[8], 0, 0x1A, 2, 1,
-                           fn_80197AF0, lbl_804DA808);
+                           fn_80197AF0, 0.0f);
         fn_8018FBD8(gobj, i);
 
         gobj = fn_8019035C(0, lbl_804D6674->models[13], 0, 0x1A, 2, 1,
@@ -1472,18 +1436,16 @@ void fn_80198EBC(void)
                            fn_801981A0, anim_rate);
         jobj = GET_JOBJ(gobj);
         fn_8018FBD8(gobj, i);
-        fn_8018FDC4(jobj, lbl_804DA870, lbl_804DA818, lbl_804DA874);
+        fn_8018FDC4(jobj, -2.5f, 666.0f, 0.02f);
 
         gobj = fn_8019035C(0, lbl_804D6674->models[14], 0, 0x1A, 2, 1,
                            fn_801983E4, anim_rate);
         fn_8018FBD8(gobj, i);
     }
 
-    fn_8019035C(0, lbl_804D6674->models[5], 0, 0x1A, 2, 1, fn_801976D4,
-                lbl_804DA808);
+    fn_8019035C(0, lbl_804D6674->models[5], 0, 0x1A, 2, 1, fn_801976D4, 0.0f);
 
-    gobj = fn_8019035C(0, lbl_804D6674->models[0], 0, 0x1A, 2, 1, NULL,
-                       lbl_804DA808);
+    gobj = fn_8019035C(0, lbl_804D6674->models[0], 0, 0x1A, 2, 1, NULL, 0.0f);
     j16 = GET_JOBJ(gobj);
 
     j16 = HSD_JObjGetChild(j16);
@@ -1497,10 +1459,9 @@ void fn_80198EBC(void)
         lbl_803DA0D0.bounce_y[j] = HSD_JObjGetTranslationY(j16);
     }
 
-    fn_8019035C(0, lbl_804D6674->models[6], 0, 0x1A, 2, 1, fn_80197D4C,
-                lbl_804DA808);
+    fn_8019035C(0, lbl_804D6674->models[6], 0, 0x1A, 2, 1, fn_80197D4C, 0.0f);
     fn_8019035C(0, lbl_804D6674->models[2], 0, 0x1A, 3, 1,
-                (void (*)(HSD_GObj*)) fn_80198584, lbl_804DA808);
+                (void (*)(HSD_GObj*)) fn_80198584, 0.0f);
 }
 
 void fn_80199AF0(void)
@@ -1557,10 +1518,8 @@ void fn_80199AF0(void)
     fn_801901F8(lbl_804D666C->cameras->desc);
     fn_801902F0((int) gobj);
     fn_8019027C(lbl_804D666C->lights);
-    fn_8019035C(0, lbl_804D666C->models[5], 0, 0x1A, 2, 1, fn_80196DBC,
-                lbl_804DA808);
-    fn_8019035C(0, lbl_804D666C->models[4], 0, 0x1A, 2, 1, fn_80196E30,
-                lbl_804DA840);
+    fn_8019035C(0, lbl_804D666C->models[5], 0, 0x1A, 2, 1, fn_80196DBC, 0.0f);
+    fn_8019035C(0, lbl_804D666C->models[4], 0, 0x1A, 2, 1, fn_80196E30, 80.0f);
 
     fn_80198C60();
 
@@ -1581,9 +1540,9 @@ void fn_80199AF0(void)
     }
 
     fn_8019035C(0, lbl_804D6670->models[0], mode, 0x1A, 3, 1, fn_801985D4,
-                lbl_804DA808);
+                0.0f);
     gobj = fn_8019035C(0, lbl_804D6670->models[2], 0, 0x1A, 3, 1, fn_80198824,
-                       lbl_804DA808);
+                       0.0f);
 
     jobj = HSD_JObjGetChild(GET_JOBJ(gobj));
 
@@ -2127,7 +2086,7 @@ typedef struct TimerFmt {
 typedef char* TextPtr;
 typedef u8* BytePtr;
 
-extern u8 lbl_803B7D04[20];
+u8 const lbl_803B7D04[20] = { 0 };
 
 /// Tournament match timer display/audio state machine.
 /// Handles match countdown, audio transitions, and end conditions.
@@ -2361,9 +2320,8 @@ void fn_8019B458(s32* arg0)
         fn_80198D18();
 
         {
-            HSD_GObj* gobj =
-                fn_8019035C(0, lbl_804D6670->models[3], match, 0x1A, 3, 1,
-                            fn_80196EEC, lbl_804DA808);
+            HSD_GObj* gobj = fn_8019035C(0, lbl_804D6670->models[3], match,
+                                         0x1A, 3, 1, fn_80196EEC, 0.0f);
 
             if ((s32) td2->pad_x34[0] == match) {
                 HSD_JObjSetFlagsAll(gobj->hsd_obj, JOBJ_HIDDEN);
@@ -2379,7 +2337,7 @@ void fn_8019B458(s32* arg0)
         }
 
         fn_80198BA0();
-        fn_8018E618(tm->entrants, lbl_804DA810, tm->x2C);
+        fn_8018E618(tm->entrants, 4.5f, tm->x2C);
         fn_8018E85C(lbl_804D6670->models[4], tm->x2C);
         fn_8018FA24();
 

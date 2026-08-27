@@ -27,8 +27,6 @@
 /* 1C9BC8 */ static void grLib_801C9BC8(HSD_GObj*);
 /* 1C9C40 */ static void grLib_801C9C40(HSD_GObj*);
 
-extern HSD_Generator* hsd_804D78FC;
-
 static VecMtx grLib_8049EF58;
 static Vec3 grLib_unusedvec1;
 static Vec3 grLib_unusedvec2;

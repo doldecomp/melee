@@ -108,6 +108,15 @@ struct lbl_803DA2E0_t lbl_803DA2E0 = {
     },
 };
 
+const TmAnimFrameTable lbl_803B7D18 = {
+    { { 0, 30, 0 },
+      { 50, 59, 0 },
+      { 60, 70, 1 },
+      { 90, 100, 0 },
+      { 110, 130, 0 },
+      { 150, 160, 0 } },
+};
+
 static inline f32 gmTournament_GetPlayerX(u8 player_count, s32 player)
 {
     if ((s32) player_count == 4) {

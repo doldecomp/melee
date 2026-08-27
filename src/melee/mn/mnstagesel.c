@@ -371,7 +371,6 @@ void fn_8025A974(HSD_GObj* gobj, int unused)
 /// OnLoad
 /// #mnStageSel_8025A998_OnEnter
 
-extern HSD_CObjDesc* MenMain_cam;
 static const Vec3 mnStageSel_803B8550 = { 0, -13, 0 };
 
 static inline void make_stage_icon(HSD_JObj** out)
