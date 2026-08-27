@@ -34,9 +34,8 @@
 #include <stdarg.h>
 #include <baselib/generator.h>
 // externs
-extern u32* ptclref_804D0E5C[65];
+
 extern EF_DAT_Entry efAsync_DatEntries[51];
-extern u32 hsd_804D7900;
 
 // forward declarations to avoid sdata2 pollution
 void HSD_MtxGetScale(Mtx, Vec3*);
@@ -167,7 +166,7 @@ void efLib_Init(void)
 
     hsd_8039D354(0);
     hsd_80398A08(0);
-    hsd_804D7900 = (u32) efLib_Cb_PtclAppSRTHook;
+    hsd_804D7900 = efLib_Cb_PtclAppSRTHook;
 
     gobj = GObj_Create(8U, 0xBU, 1U);
     GObj_SetupGXLink(gobj, efLib_render_callback, 7U, 2U);
@@ -1049,27 +1048,23 @@ void (*lbl_803BF810[0x03])(HSD_Particle* particle) = { efLib_Cb_ParticleRender,
 // bank 0 refs (0x96, 0x97, 0x98, 0x21B). If matched, attaches an
 // AppSRT transform so the particle inherits transforms from its
 // parent joint.
-void efLib_Cb_PtclAppSRTHook(HSD_Particle* particle)
+void efLib_Cb_PtclAppSRTHook(HSD_Generator* gen)
 {
-    if (particle->cmdList ==
-        ((HSD_PSCmdList*) ptclref_804D0E5C[0][0x96])->cmdList)
+    if (gen->cmdList == ((HSD_PSCmdList*) ptclref_804D0E5C[0][0x96])->cmdList)
     {
-        hsd_8039D1E4((HSD_Generator*) particle, lbl_803BF810);
+        hsd_8039D1E4(gen, lbl_803BF810);
     }
-    if (particle->cmdList ==
-        ((HSD_PSCmdList*) ptclref_804D0E5C[0][0x97])->cmdList)
+    if (gen->cmdList == ((HSD_PSCmdList*) ptclref_804D0E5C[0][0x97])->cmdList)
     {
-        hsd_8039D1E4((HSD_Generator*) particle, lbl_803BF810);
+        hsd_8039D1E4(gen, lbl_803BF810);
     }
-    if (particle->cmdList ==
-        ((HSD_PSCmdList*) ptclref_804D0E5C[0][0x98])->cmdList)
+    if (gen->cmdList == ((HSD_PSCmdList*) ptclref_804D0E5C[0][0x98])->cmdList)
     {
-        hsd_8039D1E4((HSD_Generator*) particle, lbl_803BF810);
+        hsd_8039D1E4(gen, lbl_803BF810);
     }
-    if (particle->cmdList ==
-        ((HSD_PSCmdList*) ptclref_804D0E5C[0][0x21B])->cmdList)
+    if (gen->cmdList == ((HSD_PSCmdList*) ptclref_804D0E5C[0][0x21B])->cmdList)
     {
-        hsd_8039D1E4((HSD_Generator*) particle, lbl_803BF810);
+        hsd_8039D1E4(gen, lbl_803BF810);
     }
 }
 

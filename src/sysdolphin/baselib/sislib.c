@@ -36,6 +36,7 @@ static HSD_WObjDesc HSD_SisLib_8040C4A4 = {
 };
 
 static u32 HSD_SisLib_804D7968;
+static SisBlock* HSD_SisLib_804D796C;
 
 static HSD_CameraDescPerspective HSD_SisLib_8040C4B8 = {
     NULL,
@@ -57,12 +58,8 @@ SisBlock* free_head;
 SisBlock* used_head;
 HSD_Text* HSD_SisLib_804D7978;
 sislib_UnkAlloc3* HSD_SisLib_804D797C;
-
-/// extern ? *HSD_SisLib_804D796C;
-/// extern u8 *HSD_SisLib_804D7978;
-/// sislib_UnknownType001 HSD_SisLib_8040C490 = { 0, 1.0F };
-
-/// u8 HSD_SisLib_8040C490[0x60] = { 0 };
+u32 lbl_8040C8C0[144] = { 0 };
+u32 HSD_SisLib_8040C680[144] = { 0 };
 
 static HSD_Archive* HSD_SisLib_804D1110[5];
 SIS* HSD_SisLib_804D1124[5];
@@ -418,8 +415,6 @@ HSD_Text* HSD_SisLib_803A5ACC(int font_idx, s32 context_id, f32 pos_x,
     text->font_idx = font_idx;
     return text;
 }
-
-static SisBlock* HSD_SisLib_804D796C;
 
 void HSD_SisLib_803A5E70(void)
 {

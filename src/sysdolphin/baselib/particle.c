@@ -32,14 +32,16 @@ typedef struct {
 #include <baselib/psstructs.h>
 #include <baselib/random.h>
 
+/* 4D78D8 */ u16 hsd_804D78D8;
+/* 4D78DE */ u16 hsd_804D78DE;
 static HSD_JObj* hsd_804D08E8[8];
 static HSD_Particle* hsd_804D0908[16];
 static HSD_Particle* hsd_804D0948[65];
 static HSD_PSFormGroup** psFormGroupArray[65];
-/* 4D0B50 */ static HSD_PSTexGroup** psTexGroupArray[65];
-/* 4D0D58 */ static int psNumCmdList[65];
+/* 4D0B50 */ HSD_PSTexGroup** psTexGroupArray[65];
+/* 4D0C54 */ int psNumCmdList[65];
 /* 4D0C54 */ static HSD_PSCmdList** psCmdListArray[65];
-/* 4D0E5C */ static u32* ptclref_804D0E5C[65];
+/* 4D0E5C */ u32* ptclref_804D0E5C[65];
 /* 4D0F60 */ struct hsd_804D0F60_t hsd_804D0F60;
 
 typedef struct PSNode {
@@ -346,11 +348,11 @@ void hsd_80398A08(u32 unused)
     hsd_804D08E8[7] = NULL;
 }
 
-HSD_Particle* hsd_80398C04(HSD_Particle** head, int linkNo, int bank, u32 kind,
-                           u16 texGroup, u8* list, int life, int palflag,
-                           f32 x, f32 y, f32 z, f32 vx, f32 vy, f32 vz,
-                           f32 size, f32 grav, f32 fric, HSD_Generator* gp,
-                           int flgInterpret)
+HSD_Particle* psGenerateParticle0(HSD_Particle** head, int linkNo, int bank,
+                                  u32 kind, u16 texGroup, u8* list, int life,
+                                  int palflag, f32 x, f32 y, f32 z, f32 vx,
+                                  f32 vy, f32 vz, f32 size, f32 grav, f32 fric,
+                                  HSD_Generator* gp, int flgInterpret)
 {
     HSD_Particle* pp;
     HSD_Particle** slot;
@@ -481,9 +483,9 @@ void hsd_80398F0C(s32 linkNo, s32 bank, s32 kind, u16 texGroup, s32 cmdList,
                   f32 vel_x, f32 vel_y, f32 vel_z, f32 fric, f32 rate,
                   f32 angle3)
 {
-    hsd_80398C04(0, linkNo, bank, kind, texGroup, (u8*) cmdList, life, zero,
-                 pos_x, pos_y, pos_z, vel_x, vel_y, vel_z, fric, rate, angle3,
-                 (HSD_Generator*) gen, 1);
+    psGenerateParticle0(0, linkNo, bank, kind, texGroup, (u8*) cmdList, life,
+                        zero, pos_x, pos_y, pos_z, vel_x, vel_y, vel_z, fric,
+                        rate, angle3, (HSD_Generator*) gen, 1);
 }
 #ifdef MUST_MATCH
 #pragma pop
@@ -962,7 +964,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                                 palflag = 0;
                             }
                             child = psGenerateParticle0(
-                                pp, linkNo, bank, cl->kind, cl->texGroup,
+                                &pp, linkNo, bank, cl->kind, cl->texGroup,
                                 cl->cmdList, cl->life, 0.0F, 0.0F, 0.0F,
                                 cl->vx, cl->vy, cl->vz, cl->size, cl->grav,
                                 cl->fric, palflag, NULL, 0);
@@ -1019,7 +1021,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                                 palflag = 0;
                             }
                             child = psGenerateParticle0(
-                                pp, linkNo, bank, cl->kind, cl->texGroup,
+                                &pp, linkNo, bank, cl->kind, cl->texGroup,
                                 cl->cmdList, cl->life, 0.0F, 0.0F, 0.0F,
                                 cl->vx, cl->vy, cl->vz, cl->size, cl->grav,
                                 cl->fric, palflag, NULL, 0);
@@ -1318,7 +1320,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                                 palflag = 0;
                             }
                             child = psGenerateParticle0(
-                                pp, linkNo, bank, cl->kind, cl->texGroup,
+                                &pp, linkNo, bank, cl->kind, cl->texGroup,
                                 cl->cmdList, cl->life, 0.0F, 0.0F, 0.0F,
                                 cl->vx, cl->vy, cl->vz, cl->size, cl->grav,
                                 cl->fric, palflag, NULL, 0);
@@ -1616,7 +1618,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                                 palflag = 0;
                             }
                             child = psGenerateParticle0(
-                                pp, linkNo, bank, cl->kind, cl->texGroup,
+                                &pp, linkNo, bank, cl->kind, cl->texGroup,
                                 cl->cmdList, cl->life, 0.0F, 0.0F, 0.0F,
                                 cl->vx, cl->vy, cl->vz, cl->size, cl->grav,
                                 cl->fric, palflag, NULL, 0);
@@ -1678,7 +1680,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                                 palflag = 0;
                             }
                             child = psGenerateParticle0(
-                                pp, linkNo, bank, cl->kind, cl->texGroup,
+                                &pp, linkNo, bank, cl->kind, cl->texGroup,
                                 cl->cmdList, cl->life, 0.0F, 0.0F, 0.0F,
                                 cl->vx, cl->vy, cl->vz, cl->size, cl->grav,
                                 cl->fric, palflag, NULL, 0);

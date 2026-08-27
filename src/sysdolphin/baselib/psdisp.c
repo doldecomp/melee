@@ -9,6 +9,7 @@
 
 #include "baselib/lobj.h"
 #include "baselib/mtx.h"
+#include "baselib/particle.h"
 #include "baselib/psdisptev.h"
 #include "baselib/psstructs.h"
 #include "baselib/state.h"
@@ -58,9 +59,7 @@ typedef struct {
 };
 /* 40C360 */ static u8 HSD_PSDisp_8040C360[0x10] = { 0 };
 /* 4D6380 */ static u8 psFrameNum = 0x7B;
-/* 4D0908 */ extern HSD_Particle* hsd_804D0908[146];
-/* 4D0B50 */ extern HSD_PSTexGroup** psTexGroupArray[65];
-/* 4D0C54 */ extern HSD_PSFormGroup** psNumCmdList[65];
+/* 4D0908 */ HSD_Particle* hsd_804D0908[146];
 /* 4D0FC0 */ static Mtx vmtx;
 /* 4D0FF0 */ static Mtx rvmtx;
 /* 4D1020 */ static f32 prj[GX_PROJECTION_SZ];
@@ -2110,8 +2109,9 @@ void psDispParticles(u32 target_link, u32 sw)
                     }
 
                     if (psNumCmdList[pp->bank] != NULL &&
-                        (form_group = psNumCmdList[pp->bank][pp->texGroup]) !=
-                            NULL
+                        (form_group = M2C_BITWISE(
+                             HSD_PSFormGroup***,
+                             psNumCmdList)[pp->bank][pp->texGroup]) != NULL
 #ifdef MUST_MATCH
                         && form_group->formTable != NULL
 #endif
