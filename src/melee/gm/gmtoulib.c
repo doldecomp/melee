@@ -474,6 +474,11 @@ static inline HSD_JObj* fn_8018B090_inline0(s32 i, s32 idx)
     return lbl_80473AB8[idx].slots[i].x2C->hsd_obj;
 }
 
+static inline HSD_JObj* fn_8018B090_inline1(s32 idx)
+{
+    return lbl_80473AB8[idx].slots[lbl_804D6634].x2C->hsd_obj;
+}
+
 void fn_8018B090(HSD_GObj* arg0)
 {
     TmData* tm = gm_GetTournamentData();
@@ -765,7 +770,7 @@ void fn_8018B090(HSD_GObj* arg0)
                             (int*) &lbl_80473AB8[idx].slots[lbl_804D6634].x3C,
                             2);
                 HSD_JObjSetTranslateX(
-                    lbl_80473AB8[idx].slots[lbl_804D6634].x2C->hsd_obj,
+                    fn_8018B090_inline1(idx),
                     (f32) lbl_80473AB8[idx].slots[lbl_804D6634].x44);
                 if (lbl_80473AB8[idx].slots[lbl_804D6634].x44 ==
                     lbl_80473AB8[idx].slots[lbl_804D6634].x3C)
