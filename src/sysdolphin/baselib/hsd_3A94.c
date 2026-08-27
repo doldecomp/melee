@@ -3130,7 +3130,7 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     current_seq = -1;
 
     for (i = 1, row = (CardState*) ((s32*) state + 1); i <= total_blocks;
-         i++, row = (CardState*) ((s32*) row + 1))
+         row = (CardState*) ((s32*) row + 1), i++)
     {
         s32 file_idx = row->x170[0];
 
@@ -3190,10 +3190,13 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     if (arg3 != 0) {
         hsd_804D7998 = hsd_804D7984;
     } else {
-        s32 fd = state->x4;
-        s32 ofs = state->x20;
+        s32 fd;
+        s32 ofs;
         s32 open_result;
         s32 retries;
+
+        ofs = state->x20;
+        fd = state->x4;
         for (retries = 0; retries < 10; retries++) {
             open_result = CARDFastOpen(fd, ofs, &state->file_info);
             if (open_result != -1) {
