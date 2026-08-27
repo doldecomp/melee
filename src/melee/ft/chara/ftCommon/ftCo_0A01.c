@@ -6011,13 +6011,13 @@ static bool ftCo_800ADE48(Fighter* fp)
 {
     s32 switch_cmd;
     struct Fighter_x1A88_t* data;
-    struct Fighter_x1A88_t* data2;
+    Item* ip;
     u32 flags;
     int line_id;
     Vec3 floor_normal;
     Vec3 floor_pos;
     Item_GObj* item_gobj;
-    Item* ip;
+    struct Fighter_x1A88_t* data2;
     ItemKind kind;
     s32 found;
     s32 result;
