@@ -4378,11 +4378,10 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 static inline s32 fn_803B0E9C_read_icons(struct CardState* arg0, CardCmd* cmd,
                                          s32 file_id, s32 seq)
 {
-    s32 block_idx;
+    u32 block_idx;
     s32 result;
 
-    for (block_idx = 0;
-         (u32) block_idx < (0x2F + arg0->x24 + arg0->x8) / arg0->x8;
+    for (block_idx = 0; block_idx < (0x2F + arg0->x24 + arg0->x8) / arg0->x8;
          block_idx++)
     {
         cmd->type = 10;
