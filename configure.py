@@ -1212,7 +1212,7 @@ config.libs = [
             Object(Matching, "melee/gr/grcorneria.c"),
             Object(Matching, "melee/gr/grstory.c"),
             Object(Matching, "melee/gr/gronett.c"),
-            Object(NonMatching, "melee/gr/grbigblue.c"),
+            Object(Linkable, "melee/gr/grbigblue.c"),
             Object(Linkable, "melee/gr/grmutecity.c"),
             Object(Matching, "melee/gr/grfourside.c"),
             Object(Matching, "melee/gr/grgreatbay.c"),
