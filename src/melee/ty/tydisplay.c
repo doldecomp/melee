@@ -366,6 +366,7 @@ void _tyDisplay_80318714(TySortElem* base_, s32 lo, s32 hi)
 
             {
                 TySortElemInt* pivot_base;
+                s32 j;
                 pivot3 = pivot + 1;
                 i = pivot + 2;
                 cur = &base[i];
