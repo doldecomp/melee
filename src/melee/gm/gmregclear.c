@@ -27,15 +27,7 @@
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftlib.h>
-#include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_16AE.h>
-#include <melee/gm/gm_16F1.h>
-#include <melee/gm/gm_1832.h>
-#include <melee/gm/gm_1A36.h>
-#include <melee/gm/gm_1A3F.h>
-#include <melee/gm/gm_1A45.h>
-#include <melee/gm/gm_1B03.h>
-#include <melee/gm/gm_1BA8.h>
+#include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmadventure.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/gmregcommon.h>
@@ -1091,7 +1083,7 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
     }
     temp_r0 = arg0->match_end.result;
     if ((temp_r0 == OUTCOME_NO_CONTEST || temp_r0 == OUTCOME_RETRY) &&
-        DbLevel <= 2)
+        DbLevel <= DbLKind_DebugDevelop)
     {
         switch (gm_GetCurrentGameMode()) {
         case GM_CLASSIC:
@@ -1493,7 +1485,7 @@ u8 gm_8017E48C(GameScene* scene)
     u8 count = 0;
     int i;
     for (i = 0; scene->idx != gm_803DE1B8_Scenes[i].idx; i++) {
-        if (gm_803DE1B8_Scenes[i].info.class_id == GS_VS) {
+        if (gm_803DE1B8_Scenes[i].info.scene_id == GS_VS) {
             count++;
         }
     }

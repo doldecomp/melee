@@ -6,7 +6,6 @@
 #include "ft/forward.h"
 
 #include "gm/gm_1601.h"
-#include "gm/types.h"
 #include "mn/types.h"
 
 #include <dolphin/mtx.h>
@@ -232,8 +231,6 @@ static const s16 lbl_803B7A00[] = {
     0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0x0000, 0x0000,
 };
 /* 46B378 */ static struct lbl_8046B378_t lbl_8046B378;
-/* 46B488 */ static struct lbl_8046B488_t lbl_8046B488;
-/* 46B668 */ static struct lbl_8046B668_t lbl_8046B668;
 /* 4D6598 */ static s8 lbl_804D6598;
 /* 4D659A */ static u16 lbl_804D659A;
 #endif

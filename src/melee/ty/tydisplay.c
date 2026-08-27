@@ -1775,7 +1775,7 @@ void tyDisplay_OnEnter_8031B460(void* arg0)
     _tyDisplay_804D6F2C = 0;
     _tyDisplay_804D6F24 = NULL;
 
-    if ((s32) DbLevel >= 3 && (Toy_80305C44() & 0x10)) {
+    if ((s32) DbLevel >= DbLKind_DebugRom && (Toy_80305C44() & 0x10)) {
         _tyDisplay_804D6F20 = 1;
         cfg->x7C = 0;
     }

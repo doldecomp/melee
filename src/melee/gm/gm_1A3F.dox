@@ -8,8 +8,8 @@
  */
 /* 1A4014 */ void gm_801A4014(GameMode* mode);
 
-/* 1A427C */ void* gm_GetGameSceneLoadDataCallback(GameScene*);
-/* 1A4284 */ void* gm_GetGameSceneLeaveDataCallback(GameScene*);
+/* 1A427C */ void* gm_GetGameSceneLoadData(GameScene*);
+/* 1A4284 */ void* gm_GetGameSceneLeaveData(GameScene*);
 
 /**
  * @brief Sets the scene index for both the current and previous scene.

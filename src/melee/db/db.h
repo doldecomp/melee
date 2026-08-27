@@ -8,14 +8,13 @@
 
 #include <baselib/controller.h>
 
-extern char db_build_timestamp[];
-extern int DbLevel;
-extern u16 db_gameLaunchButtonState;
-extern char** db_bonus_names;
-extern char** db_motionstate_names;
-extern char** db_submotion_names;
-extern bool db_804D6B20;
-extern int db_MiscVisualEffectsStatus;
+typedef enum DbLKind {
+    DbLKind_Master = 0,
+    DbLKind_NoDebugRom = 1,
+    DbLKind_DebugDevelop = 2,
+    DbLKind_DebugRom = 3,
+    DbLKind_Develop = 4,
+} DbLKind;
 
 /* 225374 */ void db_GetGameLaunchButtonState(void);
 /* 2254B8 */ void db_Setup(void);
@@ -76,5 +75,13 @@ extern int db_MiscVisualEffectsStatus;
 /* 2291A0 */ void fn_CheckBonusInfo(int arg0);
 /* 229220 */ void fn_SetupObjAllocLimiter(void);
 /* 229240 */ void fn_UpdateObjAllocLimiter(int arg0);
+/* 3EA6C8 */ extern char db_build_timestamp[];
+/* 4D4A08 */ extern DbLKind DbLevel;
+/* 4D6B20 */ extern bool db_804D6B20;
+/* 4D6B24 */ extern char** db_submotion_names;
+/* 4D6B28 */ extern char** db_motionstate_names;
+/* 4D6B2C */ extern char** db_bonus_names;
+/* 4D6B30 */ extern u16 db_gameLaunchButtonState;
+/* 4D6B80 */ extern int db_MiscVisualEffectsStatus;
 
 #endif

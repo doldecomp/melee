@@ -238,7 +238,7 @@ UNK_T gm_801B6320(void)
 void gm_801B632C(GameScene* arg0)
 {
     struct gmm_x0_584_t* temp_r31 = &gmMainLib_804D3EE0->unk_530.unk_584;
-    CSSData* temp_r30 = gm_GetGameSceneLoadDataCallback(arg0);
+    CSSData* temp_r30 = gm_GetGameSceneLoadData(arg0);
 
     if (gm_804D68E9 != 0) {
         lb_8001C550();
@@ -255,7 +255,7 @@ void gm_801B632C(GameScene* arg0)
 void gm_801B63C4(GameScene* arg0)
 {
     struct gmm_x0_584_t* temp_r31 = &gmMainLib_804D3EE0->unk_530.unk_584;
-    CSSData* temp_r3 = gm_GetGameSceneLeaveDataCallback(arg0);
+    CSSData* temp_r3 = gm_GetGameSceneLeaveData(arg0);
 
     if (temp_r3->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
@@ -270,7 +270,7 @@ void gm_801B63C4(GameScene* arg0)
 void gm_801B6428(GameScene* arg0)
 {
     struct gmm_x0_584_t* temp_r31;
-    StartMeleeData* temp_r3 = gm_GetGameSceneLoadDataCallback(arg0);
+    StartMeleeData* temp_r3 = gm_GetGameSceneLoadData(arg0);
     s32 temp_r3_2;
     u8 var_r4_2;
 
@@ -338,7 +338,7 @@ void gm_801B65D4(GameScene* arg0)
     PAD_STACK(4);
 
     var_r29 = 0;
-    temp_r3 = gm_GetGameSceneLeaveDataCallback(arg0);
+    temp_r3 = gm_GetGameSceneLeaveData(arg0);
     temp_r28 = &gmMainLib_804D3EE0->unk_530.unk_584;
     gm_80162968(temp_r3->match_end.frame_count / 60);
     gm_8016247C(temp_r3->match_end.player_standings[0].xE);
@@ -481,7 +481,7 @@ static void gm_801B6AD8_inline(GameScene* scene, int x)
     struct GameCache* temp_r31_2;
 
     temp_r31 = &gmMainLib_804D3EE0->unk_1490;
-    temp_r3 = gm_GetGameSceneLoadDataCallback(scene);
+    temp_r3 = gm_GetGameSceneLoadData(scene);
     temp_r31->data.players[0].stocks = 1;
     temp_r31->data.players[0].x18 = 1.0F;
     temp_r31->data.players[0].x1C = 1.0F;
@@ -586,7 +586,7 @@ void gm_801B6B70(GameScene* scene)
     PAD_STACK(8);
 
     data = &gmMainLib_804D3EE0->unk_1490;
-    css_data = gm_GetGameSceneLeaveDataCallback(scene);
+    css_data = gm_GetGameSceneLeaveData(scene);
     if (css_data->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
@@ -604,7 +604,7 @@ void gm_801B6BE8(GameScene* scene)
     PAD_STACK(8);
 
     temp_r31 = &gmMainLib_804D3EE0->unk_1490;
-    temp_r3 = gm_GetGameSceneLoadDataCallback(scene);
+    temp_r3 = gm_GetGameSceneLoadData(scene);
 
     temp_r3->rules = temp_r31->data.rules;
     gm_801B69C0(temp_r3);
@@ -671,7 +671,7 @@ void gm_801B6F44(GameScene* scene)
     PAD_STACK(8);
 
     temp_r29 = &gmMainLib_804D3EE0->unk_1490;
-    temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
+    temp_r3 = gm_GetGameSceneLeaveData(scene);
     if (temp_r3->match_end.result == OUTCOME_RETRY) {
         gm_SetPendingSceneIndex(1);
         return;
@@ -697,7 +697,7 @@ void gm_801B70DC(GameScene* scene)
     PAD_STACK(8);
 
     data = &gmMainLib_804D3EE0->unk_1490;
-    css_data = gm_GetGameSceneLeaveDataCallback(scene);
+    css_data = gm_GetGameSceneLeaveData(scene);
     if (css_data->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
@@ -715,7 +715,7 @@ void gm_801B7154(GameScene* scene)
     PAD_STACK(8);
 
     temp_r31 = &gmMainLib_804D3EE0->unk_1490;
-    temp_r3 = gm_GetGameSceneLoadDataCallback(scene);
+    temp_r3 = gm_GetGameSceneLoadData(scene);
 
     temp_r3->rules = temp_r31->data.rules;
     gm_801B69C0(temp_r3);
@@ -746,7 +746,7 @@ void gm_801B74F0(GameScene* scene)
     PAD_STACK(8);
 
     temp_r29 = &gmMainLib_804D3EE0->unk_1490;
-    temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
+    temp_r3 = gm_GetGameSceneLeaveData(scene);
     if (temp_r3->match_end.result == OUTCOME_RETRY) {
         gm_SetPendingSceneIndex(1);
         return;
@@ -772,7 +772,7 @@ void gm_801B7688(GameScene* scene)
     PAD_STACK(8);
 
     data = &gmMainLib_804D3EE0->unk_1490;
-    css_data = gm_GetGameSceneLeaveDataCallback(scene);
+    css_data = gm_GetGameSceneLeaveData(scene);
     if (css_data->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
@@ -848,7 +848,7 @@ void gm_801B7700(GameScene* scene)
     u16* temp_r27;
 
     temp_r30 = getMultimanData();
-    temp_r3 = gm_GetGameSceneLoadDataCallback(scene);
+    temp_r3 = gm_GetGameSceneLoadData(scene);
 
     temp_r3->rules = temp_r30->data.rules;
     gm_801B69C0(temp_r3);
@@ -869,7 +869,7 @@ void gm_801B7AA0(GameScene* scene)
     PAD_STACK(8);
 
     temp_r30 = &gmMainLib_804D3EE0->unk_1490;
-    temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
+    temp_r3 = gm_GetGameSceneLeaveData(scene);
     if (temp_r3->match_end.result == OUTCOME_RETRY) {
         gm_SetPendingSceneIndex(1);
         return;
@@ -894,7 +894,7 @@ void gm_801B7C0C(GameScene* scene)
     PAD_STACK(8);
 
     data = &gmMainLib_804D3EE0->unk_1490;
-    css_data = gm_GetGameSceneLeaveDataCallback(scene);
+    css_data = gm_GetGameSceneLeaveData(scene);
     if (css_data->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
@@ -909,7 +909,7 @@ void gm_801B7C84(GameScene* scene)
     u16* temp_r27;
 
     temp_r30 = getMultimanData();
-    temp_r3 = gm_GetGameSceneLoadDataCallback(scene);
+    temp_r3 = gm_GetGameSceneLoadData(scene);
 
     PAD_STACK(8);
 
@@ -932,7 +932,7 @@ void gm_801B8024(GameScene* scene)
     PAD_STACK(8);
 
     temp_r29 = &gmMainLib_804D3EE0->unk_1490;
-    temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
+    temp_r3 = gm_GetGameSceneLeaveData(scene);
     if (temp_r3->match_end.result == OUTCOME_RETRY) {
         gm_SetPendingSceneIndex(1);
         return;
@@ -957,7 +957,7 @@ void gm_801B81A8(GameScene* scene)
     PAD_STACK(8);
 
     data = &gmMainLib_804D3EE0->unk_1490;
-    css_data = gm_GetGameSceneLeaveDataCallback(scene);
+    css_data = gm_GetGameSceneLeaveData(scene);
     if (css_data->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
@@ -968,7 +968,7 @@ void gm_801B81A8(GameScene* scene)
 void gm_801B8220(GameScene* scene)
 {
     VsModeData* temp_r30 = &gmMainLib_804D3EE0->unk_1490;
-    StartMeleeData* temp_r3 = gm_GetGameSceneLoadDataCallback(scene);
+    StartMeleeData* temp_r3 = gm_GetGameSceneLoadData(scene);
     s32* temp_r29;
 
     PAD_STACK(8);
@@ -992,7 +992,7 @@ void gm_801B8580(GameScene* scene)
     PAD_STACK(8);
 
     temp_r30 = &gmMainLib_804D3EE0->unk_1490;
-    temp_r3 = gm_GetGameSceneLeaveDataCallback(scene);
+    temp_r3 = gm_GetGameSceneLeaveData(scene);
     if (temp_r3->match_end.result == OUTCOME_RETRY) {
         gm_SetPendingSceneIndex(1U);
         return;
@@ -1017,7 +1017,7 @@ void gm_801B86D4(GameScene* scene)
     PAD_STACK(8);
 
     data = &gmMainLib_804D3EE0->unk_1490;
-    css_data = gm_GetGameSceneLeaveDataCallback(scene);
+    css_data = gm_GetGameSceneLeaveData(scene);
     if (css_data->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
@@ -1028,7 +1028,7 @@ void gm_801B86D4(GameScene* scene)
 void gm_801B874C(GameScene* scene)
 {
     VsModeData* temp_r29 = &gmMainLib_804D3EE0->unk_1490;
-    StartMeleeData* temp_r3 = gm_GetGameSceneLoadDataCallback(scene);
+    StartMeleeData* temp_r3 = gm_GetGameSceneLoadData(scene);
     s32* temp_r28;
     int i;
 
@@ -1069,7 +1069,7 @@ void gm_801B8AF8(GameScene* arg0)
     PAD_STACK(8);
 
     temp_r30 = &gmMainLib_804D3EE0->unk_1490;
-    temp_r3 = gm_GetGameSceneLeaveDataCallback(arg0);
+    temp_r3 = gm_GetGameSceneLeaveData(arg0);
     if (temp_r3->match_end.result == OUTCOME_RETRY) {
         gm_SetPendingSceneIndex(1);
         return;

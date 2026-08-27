@@ -331,7 +331,7 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
                 if (!(M2C_FIELD(flags, u16*, byte_off) & 0x4000)) {
                     if (arg1 == 0x63) {
                         if (arg2 != 0) {
-                            goto add_trophy;
+                            (void) arg2;
                         }
                     } else if ((f32) arg1 == Toy_803060BC(trophy, 6)) {
                         if (arg2 != 0) {
@@ -380,24 +380,22 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
                 if (M2C_FIELD(flags, u16*, byte_off) & 0x4000) {
                     goto add_obtained;
                 }
+                (void) arg2;
             } else {
-                if (arg2 == 0) {
-                add_obtained:
-                    if (gm_IsCurrently1PMode() != 0 ||
-                        gm_GetCurrentGameMode() == GM_TOY_LOTTERY)
-                    {
-                        flags = default_flags;
-                    } else {
-                        flags = gmMainLib_GetTrophyFlags();
-                    }
-                    if ((u8) * (u16*) ((u8*) flags + byte_off) != 0) {
-                        obtained_arr[obtained_count++] = trophy;
-                    } else {
-                    add_trophy:
-                        new_arr[new_count++] = trophy;
-                    }
-                    total++;
+            add_obtained:
+                if (gm_IsCurrently1PMode() != 0 ||
+                    gm_GetCurrentGameMode() == GM_TOY_LOTTERY)
+                {
+                    flags = default_flags;
+                } else {
+                    flags = gmMainLib_GetTrophyFlags();
                 }
+                if ((u8) * (u16*) ((u8*) flags + byte_off) != 0) {
+                    obtained_arr[obtained_count++] = trophy;
+                } else {
+                    new_arr[new_count++] = trophy;
+                }
+                total++;
             }
         }
         trophy++;
@@ -5893,7 +5891,7 @@ void Toy_OnEnter_80311AB0(void* arg0)
     _Toy_sbss_804D6E50 = 0;
     _Toy_sbss_804D6EA1 = 0;
 
-    if (DbLevel >= 3) {
+    if (DbLevel >= DbLKind_DebugRom) {
         /* Check Z button */
         buttons = Toy_80305C44();
 

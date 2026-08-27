@@ -8,20 +8,22 @@
 #include "melee/mn/forward.h"
 #include <sysdolphin/baselib/forward.h>
 
+struct gm_801BAB40_src;
+
 /* 1BA8FC */ UNK_RET gm_801BA8FC(UNK_PARAMS);
 /* 1BA938 */ void gm_801BA938(struct EventData*, int lo, int hi, bool);
 /* 1BAA60 */ void gm_801BAA60(GameScene*);
 /* 1BAAD0 */ void gm_801BAAD0(GameScene*);
-/* 1BAB40 */ UNK_RET gm_801BAB40(PlayerInitData*, int);
+/* 1BAB40 */ void gm_801BAB40(PlayerInitData*, struct gm_801BAB40_src*);
 /* 1BAC9C */ s32 gm_801BAC9C(GameScene*, s32);
 /* 1BAD70 */ void gm_801BAD70(GameScene*);
 /* 1BB758 */ void gm_801BB758(GameScene*);
 /* 1BBA60 */ void gm_801BBA60_OnInit(void);
-/* 1BBB64 */ s32 gm_801BBB64(void);
+/* 1BBB64 */ void gm_801BBB64(void);
 /* 1BBEA8 */ void gm_801BBEA8_OnLoad(void);
 /* 1BBFE4 */ void gm_801BBFE4_OnUnload(void);
 /* 1BBFE8 */ void fn_801BBFE8(void);
-/* 1BC00C */ s32 gm_801BC00C(void);
+/* 1BC00C */ void gm_801BC00C(void);
 /* 1BC488 */ int gm_801BC488(UNK_PARAMS);
 /* 1BC4F4 */ UNK_RET gm_801BC4F4(HSD_GObj*);
 /* 1BC670 */ void gm_801BC670(HSD_GObj*);
@@ -83,20 +85,20 @@
 /* 1BF040 */ void gm_801BF040(s8);
 /* 1BF050 */ int gm_801BF050(void);
 /* 1BF060 */ void gm_801BF060(GameScene*);
-/* 1BF128 */ void gm_801BF128(void);
+/* 1BF128 */ void gm_SetupTitleDemo(void);
 /* 1BF3F8 */ UNK_RET gm_801BF3F8(UNK_PARAMS);
 /* 1BF4DC */ void gm_801BF4DC(GameScene*);
-/* 1BF634 */ void gm_801BF634(s32, s8);
+/* 1BF634 */ void gm_801BF634(s32, s32);
 /* 1BF648 */ int gm_801BF648(s32);
 /* 1BF65C */ void gm_801BF65C(s32, s8);
 /* 1BF670 */ u8 gm_801BF670(s32);
-/* 1BF684 */ void gm_801BF684(s16);
+/* 1BF684 */ void gm_801BF684(s32);
 /* 1BF694 */ u8 gm_801BF694(void);
-/* 1BF6A8 */ void gm_801BF6A8(s8);
+/* 1BF6A8 */ void gm_801BF6A8(int);
 /* 1BF6B8 */ u8 gm_801BF6B8(void);
-/* 1BF6C8 */ void gm_801BF6C8(s8);
+/* 1BF6C8 */ void gm_801BF6C8(int);
 /* 1BF6D8 */ int gm_801BF6D8(void);
-/* 1BF6E8 */ void gm_801BF6E8(s8);
+/* 1BF6E8 */ void gm_801BF6E8(int);
 /* 1BF6F8 */ int gm_801BF6F8(void);
 /* 1BF708 */ void gm_801BF708(s8);
 /* 1BF718 */ u8 gm_801BF718(void);

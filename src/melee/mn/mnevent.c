@@ -42,7 +42,7 @@ s32 mnEvent_8024CE74(
 {
     s32 count;
 
-    if (DbLevel > 2) {
+    if (DbLevel > DbLKind_DebugDevelop) {
         return 0x2A;
     }
     count = mnEvent_CountUnlocked();

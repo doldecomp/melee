@@ -1566,11 +1566,6 @@ bool fn_801725A8(void)
     return false;
 }
 
-enum {
-    LANG_JP = 0,
-    LANG_US = 1,
-};
-
 bool fn_801725E4(void)
 {
     if (lbLang_GetLanguageSetting() == LANG_JP &&

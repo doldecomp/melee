@@ -1084,7 +1084,7 @@ s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param)
 }
 
 bool AXDriver_8038E30C(s32 channel, s32 type, void* param, u8* heap,
-                       u32 heap_size)
+                       size_t heap_size)
 {
     if (channel < 0 || channel > 1) {
         return false;

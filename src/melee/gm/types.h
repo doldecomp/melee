@@ -64,11 +64,11 @@ struct GameScene {
     /* 01 */ u8 preload;
     /* 02 */ u16 flags;
 
-    /* 04 */ void (*Prep)(GameScene*);
-    /* 08 */ void (*Decide)(GameScene*);
+    /* 04 */ void (*prep)(GameScene*);
+    /* 08 */ void (*decide)(GameScene*);
 
     struct GameSceneInfo {
-        /* 0C */ u8 class_id;
+        /* 0C */ u8 scene_id;
         /* 10 */ void* load_data;  ///< data passed to OnLoad callback
         /* 14 */ void* leave_data; ///< data passed to OnLeave callback
     } info;
@@ -114,11 +114,6 @@ typedef struct {
     u8 (*game_mode_override)(void);
 } GameState;
 ASSERT_SIZE(GameState, 0x14);
-
-struct sceneData {
-    u32 a;
-    u8 scene_id;
-};
 
 struct gmm_x1CB0 {
     /* +0 */ u8 item_freq;
@@ -605,7 +600,7 @@ struct gm_8017DB6C_arg0_t {
 ASSERT_SIZE(struct gm_8017DB6C_arg0_t, 0xC);
 
 struct gmMainLib_8046B0F0_t {
-    /* 00 */ bool x0;
+    /* 00 */ bool skip_intro;  ///< Skips the opening movie when booting
     /* 04 */ bool resetting;   ///< reset switch pressed
     /* 08 */ bool progressive; ///< true = progressive, false = interlaced
     /* 0C */ bool xC;          // movie playback done, maybe?
@@ -1101,11 +1096,11 @@ struct TrainingMenuData {
 }; /// 80473814
 ///
 struct gm_8049E548_t {
-    /* 0x00 */ char c_kind[4];
+    /* 0x00 */ u8 c_kind[4];
     /* 0x04 */ u8 x4[4];
     /* 0x08 */ u8 unk_8;
     /* 0x09 */ u8 unk_9;
-    /* 0x0A */ s8 unk_A;
+    /* 0x0A */ u8 unk_A;
     /* 0x0B */ char pad_B[1];
     /* 0x0C */ u16 unk_C; ///< GrKind
     /* 0x0E */ s8 unk_E;  /* inferred */
