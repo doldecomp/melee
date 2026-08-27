@@ -637,9 +637,8 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
     f32 f31;
     int mode = is_name_mode;
     f32 f30;
-    Diagram2* user_data = gobj->user_data;
 
-    data = user_data;
+    data = gobj->user_data;
     base = &mnDiagram2_803EEAD0;
 
     f31 = HSD_JObjGetTranslationY(data->row0_ref);
