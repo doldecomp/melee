@@ -106,7 +106,8 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
         limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
 
         {
-            int val = scroll + offset;
+            int sum = scroll + offset;
+            int val = sum;
             if (val >= limit) {
                 val = val - limit;
             } else {
