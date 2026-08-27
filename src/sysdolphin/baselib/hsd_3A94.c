@@ -3574,6 +3574,7 @@ s32 fn_803AF3F0(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 remaining;
     s32 total_blocks;
     u8* data;
+    s32* vmap;
     PAD_STACK(60);
 
     seq_match = 0;
@@ -3663,20 +3664,22 @@ s32 fn_803AF3F0(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     if (seq_match == 0) {
         remaining = file_size;
         data = (u8*) arg2;
-        for (i = 0; i < file_blocks && remaining > 0; i++) {
+        for (i = 0, vmap = block_map[0]; i < file_blocks && remaining > 0;
+             i++, vmap++)
+        {
             if ((u32) remaining > (u32) fn_803AF3F0_chunk_size(state)) {
                 if (arg3 != 0) {
                     s32 cmd_result = fn_803AF3F0_queue_verify(
-                        state, block_map[0][i], blocks_before + i, current_seq,
-                        data, fn_803AF3F0_chunk_size(state));
+                        state, *vmap, blocks_before + i, current_seq, data,
+                        fn_803AF3F0_chunk_size(state));
                     if (cmd_result < 0) {
                         fn_803AF3F0_rewind(entries);
                         return cmd_result;
                     }
                 } else {
                     s32 verify_result = fn_803ACC0C(
-                        state, block_map[0][i], blocks_before + i, current_seq,
-                        data, fn_803AF3F0_chunk_size(state));
+                        state, *vmap, blocks_before + i, current_seq, data,
+                        fn_803AF3F0_chunk_size(state));
                     if (verify_result < 0) {
                         fn_803AF3F0_close(state);
                         return verify_result;
@@ -3690,15 +3693,15 @@ s32 fn_803AF3F0(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
             } else {
                 if (arg3 != 0) {
                     s32 cmd_result = fn_803AF3F0_queue_verify(
-                        state, block_map[0][i], blocks_before + i, current_seq,
-                        data, remaining);
+                        state, *vmap, blocks_before + i, current_seq, data,
+                        remaining);
                     if (cmd_result < 0) {
                         fn_803AF3F0_rewind(entries);
                         return cmd_result;
                     }
                 } else {
                     s32 verify_result =
-                        fn_803ACC0C(state, block_map[0][i], blocks_before + i,
+                        fn_803ACC0C(state, *vmap, blocks_before + i,
                                     current_seq, data, remaining);
                     if (verify_result < 0) {
                         fn_803AF3F0_close(state);
