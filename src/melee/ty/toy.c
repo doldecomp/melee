@@ -4538,9 +4538,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                 total = *gmMainLib_GetTrophyCount();
                             }
                             if (total > 3) {
-                                s16 prev_trophy = display->selectedIdx;
-
-                                if ((prev_trophy - 1) < 0) {
+                                if ((display->selectedIdx - 1) < 0) {
                                     s32 count;
                                     s32 list_idx;
                                     ToyListEntry* list_entry;
@@ -4555,11 +4553,12 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                     } else {
                                         count = *gmMainLib_GetTrophyCount();
                                     }
-                                    list_idx = count + display->selectedIdx;
+                                    list_idx = count;
+                                    list_idx += display->selectedIdx;
                                     list_entry = display->first_entry->prev;
                                     {
-                                        s16 trophy_id =
-                                            Toy_sbss_804D6EDC[list_idx - 1];
+                                        s32 idx = list_idx - 1;
+                                        s16 trophy_id = Toy_sbss_804D6EDC[idx];
                                         model_data = Toy_8030813C(trophy_id);
                                         if ((old_archive =
                                                  list_entry->archive) != NULL)
@@ -4585,8 +4584,8 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                     s16 trophy_id;
 
                                     list_entry = display->first_entry->prev;
-                                    trophy_id =
-                                        Toy_sbss_804D6EDC[prev_trophy - 1];
+                                    trophy_id = Toy_sbss_804D6EDC
+                                        [display->selectedIdx - 1];
                                     model_data = Toy_8030813C(trophy_id);
                                     if ((old_archive = list_entry->archive) !=
                                         NULL)
