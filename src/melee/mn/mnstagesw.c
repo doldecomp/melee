@@ -151,6 +151,11 @@ static void mnStageSw_802359C8(MnStageSwData* data)
     }
 }
 
+static inline s32 mnStageSw_GetPreviousIndex(s32 offset, s32 index)
+{
+    return index - offset;
+}
+
 static s32 mnStageSw_80235C58(u8 arg0)
 {
     s32 next;
@@ -203,7 +208,7 @@ loop_done:
     curr = idx + 1;
     next = idx + 1;
     while (true) {
-        s32 temp = idx - i;
+        s32 temp = mnStageSw_GetPreviousIndex(i, idx);
         s32 prev = temp;
 
         if (low <= prev &&
