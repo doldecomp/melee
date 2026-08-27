@@ -3015,11 +3015,12 @@ static inline void fn_803AE7F8_rewind(CardBufEntry* entries)
 
     if (snap >= 0) {
         s32 saved = snap;
-        s32 zero = 0;
+        s32 zero;
 
         while (saved != hsd_804D7984) {
-            entries[saved].x10 = zero;
+            CardBufEntry* queued = &entries[saved];
             saved = (saved + 1) % 128;
+            queued->x10 = zero = 0;
         }
         hsd_804D7984 = snap;
     }
@@ -3528,11 +3529,12 @@ static inline void fn_803AF3F0_rewind(CardBufEntry* entries)
 
     if (snap >= 0) {
         s32 saved = snap;
-        s32 zero = 0;
+        s32 zero;
 
         while (saved != hsd_804D7984) {
-            entries[saved].x10 = zero;
+            CardBufEntry* queued = &entries[saved];
             saved = (saved + 1) % 128;
+            queued->x10 = zero = 0;
         }
         hsd_804D7984 = snap;
     }
@@ -3916,11 +3918,12 @@ static inline void fn_803B0120_rewind(CardBufEntry* entries)
 
     if (snap >= 0) {
         s32 saved = snap;
-        s32 zero = 0;
+        s32 zero;
 
         while (saved != hsd_804D7984) {
-            entries[saved].x10 = zero;
+            CardBufEntry* queued = &entries[saved];
             saved = (saved + 1) % 128;
+            queued->x10 = zero = 0;
         }
         hsd_804D7984 = snap;
     }
