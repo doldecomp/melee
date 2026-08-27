@@ -1035,7 +1035,7 @@ s32 mn_80230D18(struct mn_802307F8_t* arg0, HSD_JObj* arg1, s8 arg2)
 
 HSD_GObj* mn_80230E38(int arg0)
 {
-    u8 operand_pad[12];
+    u8 operand_pad[4];
     u16 jobj_map[17];
     HSD_JObj* jobj_parts[17];
     union {
