@@ -635,8 +635,8 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
     HSD_Text* text;
     HSD_Text* text2;
     f32 f31;
-    f32 f30;
     int mode = is_name_mode;
+    f32 f30;
     Diagram2* user_data = gobj->user_data;
 
     data = user_data;
@@ -650,8 +650,8 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
     {
         u32 r22 = row_idx;
         f32 ny = -sp20.y;
-        f32 temp_f31 = -f30 * (f32) r22;
-        text = HSD_SisLib_803A5ACC(0, 1, sp20.x, ny + temp_f31, sp20.z, 320.0f,
+        f32 row_y_offset = -f30 * (f32) r22;
+        text = HSD_SisLib_803A5ACC(0, 1, sp20.x, ny + row_y_offset, sp20.z, 320.0f,
                                    240.0f);
 
         {
@@ -665,11 +665,9 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                     if (r21 != 0xFFFF) {
                         int var_r3;
                         lb_8000B1CC(data->row0_ref, &base->label_pos, &sp20);
-                        {
-                            f32 py2 = -sp20.y + temp_f31;
-                            text2 = HSD_SisLib_803A5ACC(
-                                0, 1, 12.0f + sp20.x, py2, sp20.z, 1.0f, 1.0f);
-                        }
+                        text2 = HSD_SisLib_803A5ACC(
+                            0, 1, 12.0f + sp20.x, -sp20.y + row_y_offset,
+                            sp20.z, 1.0f, 1.0f);
 
                         data->row_icons[row_idx] = text2;
                         text2->default_alignment = 1;
@@ -718,7 +716,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                     text3->font_size.y = 0.035f;
                     lb_8000B1CC(data->icon_parent, &base->value_pos, &sp20);
                     {
-                        f32 py = -sp20.y + temp_f31;
+                        f32 py = -sp20.y + row_y_offset;
                         text3->pos_x = sp20.x;
                         text3->pos_y = py;
                         text3->pos_z = sp20.z;
