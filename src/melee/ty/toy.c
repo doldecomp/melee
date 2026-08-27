@@ -405,7 +405,7 @@ s32 Toy_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
                 } else {
                     flags.halfwords = gmMainLib_GetTrophyFlags();
                 }
-                if ((u8) * (u16*) (flags.bytes + byte_off) != 0) {
+                if ((u8) *(u16*) (flags.bytes + byte_off) != 0) {
                     obtained_arr[obtained_count++] = trophy;
                 } else {
                     new_arr[new_count++] = trophy;

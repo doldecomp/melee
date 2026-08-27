@@ -52,7 +52,7 @@ struct ParticleScreenState {
     /* 0x40 */ s32 x40;
     /* 0x44 */ s32 x44;
     /* 0x48 */ s32 x48;
-    /* 0x4C */ u8* x4C;
+    /* 0x4C */ void* x4C;
     /* 0x50 */ void* x50;
     /* 0x54 */ u8 _pad4[0x68];
     /* 0xBC */ u32 xBC;
@@ -2035,7 +2035,7 @@ static char* lbl_804D62F8 = "| INPUT ADDRESS : 8%07X |";
 
 static inline void hsd_80396884_draw_char(s8 ch, s32 b6)
 {
-    hsd_803922FC(hsd_804CF810.x4C + (ch & 0x7F) * 0x38,
+    hsd_803922FC((u8*) hsd_804CF810.x4C + (ch & 0x7F) * 0x38,
                  hsd_804CF810.x4, hsd_804CF810.x8, b6,
                  (&hsd_804CF810.x24)[hsd_804CF810.x34], hsd_804CF810.x3C,
                  hsd_804CF810.x40, hsd_804CF810.x44, hsd_804CF810.x50);
@@ -2076,7 +2076,7 @@ void hsd_80396884(void)
     if (hsd_804CF810.x0_b7) {
         hsd_80396884_draw_char(ch, b6);
     } else {
-        u8* bitmap = hsd_804CF810.x4C + (ch & 0x7F) * 0x38;
+        u8* bitmap = (u8*) hsd_804CF810.x4C + (ch & 0x7F) * 0x38;
         s32 x = hsd_804CF810.x4;
         s32 dst = (&hsd_804CF810.x24)[hsd_804CF810.x34];
         hsd_803921B8(bitmap, x, hsd_804CF810.x8, dst, hsd_804CF810.x3C,
