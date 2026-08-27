@@ -496,18 +496,17 @@ void grBigBlue_801E6364(Ground_GObj* gobj)
     HSD_JObj* child;
     Ground* gp = GET_GROUND(gobj);
     s32 i;
-    Vec3 scale;
-    f32 trans_x;
-    f32 scale_base;
-    f32 rot_y;
 
     Ground_801C2ED0(jobj, gp->map_id);
-    PAD_STACK(4);
 
-    scale.x = scale.y = scale.z = 1.0F;
-    HSD_JObjSetScale(jobj, &scale);
+    {
+        Vec3 scale;
+        PAD_STACK(4);
 
-    gp->u.bigblue.xC8 = HSD_MemAlloc(120);
+        scale.x = scale.y = scale.z = 1.0F;
+        HSD_JObjSetScale(jobj, &scale);
+
+        gp->u.bigblue.xC8 = HSD_MemAlloc(120);
     HSD_ASSERT(774, gp->u.carnull.coll_jobj);
 
     gp->u.bigblue.xCC = HSD_MemAlloc(30);
@@ -528,24 +527,21 @@ void grBigBlue_801E6364(Ground_GObj* gobj)
     } else {
         cur = cur->child;
     }
-    rot_y = M_PI_2_F;
-    scale_base = 1.0f;
-    trans_x = 10.0f;
-
     for (; i < 30; i++) {
         child = HSD_JObjGetChild(cur);
         next = HSD_JObjGetNext(cur);
 
         HSD_JObjReparent(cur, gp->u.carnull.coll_jobj[i]);
-        HSD_JObjSetRotationY(cur, rot_y);
+        HSD_JObjSetRotationY(cur, M_PI_2_F);
 
-        scale.x = scale.y = scale.z = Ground_801C0498() * yakumono_param->xC;
+        scale.x = scale.y = scale.z =
+            Ground_801C0498() * yakumono_param->xC;
 
         HSD_JObjSetScale(gp->u.carnull.coll_jobj[i], &scale);
 
         HSD_JObjGetScale(child, &scale);
         {
-            f32 ratio = scale_base / Ground_801C0498();
+            f32 ratio = 1.0F / Ground_801C0498();
             scale.x *= ratio;
             scale.y *= ratio;
             scale.z *= ratio;
@@ -554,7 +550,7 @@ void grBigBlue_801E6364(Ground_GObj* gobj)
         HSD_JObjSetScale(child, &scale);
 
         if (i == 9) {
-            HSD_JObjSetTranslateX(child, trans_x);
+            HSD_JObjSetTranslateX(child, 10.0F);
         }
 
         cur = next;
@@ -577,6 +573,7 @@ void grBigBlue_801E6364(Ground_GObj* gobj)
         }
 
         *(s16*) ((u8*) gp + 0xD0) = (s16) max_val;
+        }
     }
 }
 
