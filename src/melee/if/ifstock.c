@@ -46,6 +46,11 @@ struct IfStockData {
     struct IfStockStealAnim anim[2];
 };
 
+struct IfStockDataOffset {
+    unsigned char x0[0x204];
+    struct IfStockData data;
+};
+
 int ifStock_802F7EFC(int arg0, int arg1)
 {
     Vec3 pos;
@@ -55,8 +60,12 @@ int ifStock_802F7EFC(int arg0, int arg1)
     int slot;
     int i, j;
     stock = &ifStock_804A1378;
-    arg1_data = (struct IfStockData*) stock->x204 + arg1;
-    arg0_data = (struct IfStockData*) stock->x204 + arg0;
+    arg0_data = (struct IfStockData*) stock;
+    arg0_data += arg0;
+    arg1_data = (struct IfStockData*) stock;
+    arg1_data += arg1;
+    arg0_data = &((struct IfStockDataOffset*) arg0_data)->data;
+    arg1_data = &((struct IfStockDataOffset*) arg1_data)->data;
     if (Player_GetStocks(arg1) == 0) {
         return 1;
     }
@@ -65,7 +74,7 @@ int ifStock_802F7EFC(int arg0, int arg1)
         stock->player[arg1].stocks = 1;
     }
     {
-        int value = arg1_data->x0[10];
+        unsigned char value = arg1_data->x0[10];
 
         if (value == 0) {
             slot = 5;
