@@ -3180,7 +3180,10 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
 
             HSD_JObjSetTranslate(jobj, (Vec3*) (car + 0xE0));
 
-            ((u8*) gp->u.bigblue.xCC)[line_idx] = 1;
+            {
+                u8* lane_states = gp->u.bigblue.xCC;
+                lane_states[line_idx] = 1;
+            }
         } else {
             ((grBb_StateBits*) (car + 0xD4))->state = 1;
         }
