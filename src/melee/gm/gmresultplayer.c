@@ -1151,7 +1151,7 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
     HSD_JObj* child_jobj;
     HSD_CObj* cobj;
     int lookup;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     fn_801795D4();
     fn_801796F0(arg2);
