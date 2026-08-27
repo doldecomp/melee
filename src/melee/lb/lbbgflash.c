@@ -515,91 +515,59 @@ void lbBgFlash_800209F4(void)
 
 void fn_80020AEC(HSD_JObj* jobj, Mtx out)
 {
-    MtxPtr out_mtx = out;
-    HSD_JObj* parent;
+    f32 scale;
+    Vec3 col;
+    Mtx tmp;
     HSD_JObj* cur;
     s32 i;
-    Mtx tmp;
-    Vec3 col;
 
-    if (jobj == NULL) {
-        parent = NULL;
-    } else {
-        parent = jobj->parent;
-    }
-
-    {
-        MtxPtr jobj_mtx = HSD_JObjGetMtxPtr(jobj);
-        HSD_MtxInverseConcat(HSD_JObjGetMtxPtr(parent), jobj_mtx, out_mtx);
-    }
+    HSD_MtxInverseConcat(HSD_JObjGetMtxPtr(HSD_JObjGetParent(jobj)),
+                         HSD_JObjGetMtxPtr(jobj), out);
 
     for (i = 0; i < 3; i++) {
-        f32 mag;
-        f32 scale_sq;
-        f32 factor;
-
-        HSD_MtxColVec(out_mtx, i, &col);
-
-        mag = PSVECMag(&col);
-        if (mag > 1e-10f) {
-            mag = 1.0f / mag;
+        col.x = out[0][i];
+        col.y = out[1][i];
+        col.z = out[2][i];
+        scale = PSVECMag(&col);
+        if (scale > 1e-10F) {
+            scale = 1.0F / scale;
         }
-
-        {
-            f32 sx;
-            f32 sy;
-            f32 sz;
-            sy = jobj->mtx[1][i];
-            sx = jobj->mtx[0][i];
-            sz = jobj->mtx[2][i];
-            sy *= sy;
-            sx *= sx;
-            sz *= sz;
-            scale_sq = sy + sx;
-            scale_sq = sz + scale_sq;
-        }
-
-        scale_sq = sqrtf(scale_sq);
-
-        factor = mag * scale_sq;
-        col.x *= factor;
-        col.y *= factor;
-        col.z *= factor;
-        HSD_MtxSetColVec(out_mtx, i, &col);
+        scale *= HSD_MtxColMag(jobj->mtx, i);
+        col.x *= scale;
+        col.y *= scale;
+        col.z *= scale;
+        out[0][i] = col.x;
+        out[1][i] = col.y;
+        out[2][i] = col.z;
     }
 
     cur = HSD_JObjGetParent(jobj);
     while (cur != NULL) {
         if (HSD_JObjGetParent(cur) != NULL) {
-            HSD_JObj* grandpar;
-            if (cur == NULL) {
-                grandpar = NULL;
-            } else {
-                grandpar = cur->parent;
-            }
-            HSD_MtxInverseConcat(HSD_JObjGetMtxPtr(grandpar),
-                                 HSD_JObjGetMtxPtr(cur), tmp);
+            HSD_MtxInverseConcat(
+                HSD_JObjGetMtxPtr(HSD_JObjGetParent(cur)),
+                HSD_JObjGetMtxPtr(cur), tmp);
         } else {
             PSMTXCopy(HSD_JObjGetMtxPtr(cur), tmp);
         }
 
         for (i = 0; i < 3; i++) {
-            f32 mag;
-
-            HSD_MtxColVec(tmp, i, &col);
-
-            mag = PSVECMag(&col);
-            if (mag > 0.00001f) {
-                mag = 1.0f / mag;
+            col.x = tmp[0][i];
+            col.y = tmp[1][i];
+            col.z = tmp[2][i];
+            scale = PSVECMag(&col);
+            if (scale > 1e-5F) {
+                scale = 1.0F / scale;
             }
-
-            col.x *= mag;
-            col.y *= mag;
-            col.z *= mag;
-            HSD_MtxSetColVec(tmp, i, &col);
+            col.x *= scale;
+            col.y *= scale;
+            col.z *= scale;
+            tmp[0][i] = col.x;
+            tmp[1][i] = col.y;
+            tmp[2][i] = col.z;
         }
 
-        PSMTXConcat(tmp, out_mtx, out_mtx);
+        PSMTXConcat(tmp, out, out);
         cur = HSD_JObjGetParent(cur);
     }
 }
