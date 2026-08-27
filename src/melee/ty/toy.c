@@ -3469,7 +3469,11 @@ void _Toy_80309404(HSD_GObj* gobj)
                         }
 
                         if (flags[idx] & 0x8000) {
-                            idx = Toy_sbss_804D6EDC[display->selectedIdx];
+                            {
+                                s16 selected_trophy =
+                                    Toy_sbss_804D6EDC[display->selectedIdx];
+                                idx = selected_trophy;
+                            }
                             if ((gm_IsCurrently1PMode() != 0) ||
                                 (gm_GetCurrentGameMode() == GM_TOY_LOTTERY))
                             {
