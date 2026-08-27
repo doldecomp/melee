@@ -3486,39 +3486,36 @@ static inline s32 fn_803AF3F0_queue_write(CardState* state, s32 block,
                                           s32 logical, s32 seq, void* data,
                                           s32 size, s32 file_id)
 {
-    s32 ofs = fn_803ACBE8(state, block);
+    CardCmd cmd;
+    CardCmd init_cmd;
     s32 result;
+    s32 ofs = fn_803ACBE8(state, block);
 
     if (block == 0) {
+        s32 zero = 0;
+
         if (logical != 0) {
             return -0x101;
         }
-        {
-            CardCmd cmd;
-            s32 zero = 0;
-            cmd.type = 2;
-            cmd.state = state;
-            cmd.x10 = zero;
-            cmd.x14 = zero;
-            cmd.x18 = (void*) zero;
-            cmd.x20 = zero;
-            cmd.x1C = ofs;
-            fn_803AC168((s32*) &cmd);
-        }
+        init_cmd.type = 2;
+        init_cmd.state = state;
+        init_cmd.x10 = zero;
+        init_cmd.x14 = zero;
+        init_cmd.x18 = (void*) zero;
+        init_cmd.x20 = zero;
+        init_cmd.x1C = ofs;
+        fn_803AC168((s32*) &init_cmd);
     }
-    {
-        CardCmd cmd;
-        cmd.type = 1;
-        cmd.state = state;
-        cmd.xC = block;
-        cmd.x10 = logical;
-        cmd.x14 = seq;
-        cmd.x18 = data;
-        cmd.x20 = size;
-        cmd.x1C = ofs;
-        cmd.x8 = file_id;
-        result = fn_803AC168((s32*) &cmd);
-    }
+    cmd.type = 1;
+    cmd.state = state;
+    cmd.xC = block;
+    cmd.x10 = logical;
+    cmd.x14 = seq;
+    cmd.x18 = data;
+    cmd.x20 = size;
+    cmd.x1C = ofs;
+    cmd.x8 = file_id;
+    result = fn_803AC168((s32*) &cmd);
     return result;
 }
 
