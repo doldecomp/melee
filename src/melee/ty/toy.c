@@ -5001,14 +5001,14 @@ void _Toy_8030FE48(ToyDisplayList* data, s32 arg1)
     Toy26B8* toy = (Toy26B8*) &_Toy_804A26B8;
     s16* sel = &toy->selectedIdx;
     s32 sort_idx = 0;
-    s16* ptr;
+    void* sym2;
     s32 count;
     s32 entry_count;
     char* result;
     s16 trophyIdx;
     void* sym;
     void* zero;
-    void* sym2;
+    s16* ptr;
     s32 start;
 
     _Toy_8030FE48_init_sort_key(&ptr);
