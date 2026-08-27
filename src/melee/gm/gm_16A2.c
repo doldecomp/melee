@@ -360,6 +360,12 @@ s32 fn_80169A84(u8 arg0, s8* arg1, s8* arg2)
     }
 }
 
+static inline struct lbl_8046B488_t*
+fn_80169C54_inline(void)
+{
+    return fn_8016AE60();
+}
+
 void fn_80169C54(s8 arg0, s8 arg1)
 {
     struct lbl_8046B488_t* st;
@@ -375,7 +381,7 @@ void fn_80169C54(s8 arg0, s8 arg1)
     s32 ch;
 
     n = 0;
-    st = fn_8016AE60();
+    st = fn_80169C54_inline();
     pc = &st->x0;
     for (i = 0; i < 7; i++) {
         buf[i] = -1;
