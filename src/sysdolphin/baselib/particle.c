@@ -35,9 +35,9 @@ typedef struct {
 /* 4D78D8 */ u16 hsd_804D78D8;
 /* 4D78DE */ u16 hsd_804D78DE;
 static HSD_JObj* hsd_804D08E8[8];
-static HSD_Particle* hsd_804D0908[16];
-static HSD_Particle* hsd_804D0948[65];
-static HSD_PSFormGroup** psFormGroupArray[65];
+/* 4D0908 */ HSD_Particle* hsd_804D0908[16];
+/* 4D0948 */ HSD_Particle* hsd_804D0948[65];
+/* 4D0A4C */ HSD_PSFormGroup** psFormGroupArray[65];
 /* 4D0B50 */ HSD_PSTexGroup** psTexGroupArray[65];
 /* 4D0C54 */ int psNumCmdList[65];
 /* 4D0D58 */ HSD_PSCmdList** psCmdListArray[65];
@@ -321,6 +321,9 @@ void hsd_80398A08(u32 unused)
 {
     int i;
 
+    (void) hsd_804D0908;
+    (void) hsd_804D0948;
+    (void) psFormGroupArray;
     (void) psTexGroupArray;
     (void) psNumCmdList;
     (void) psCmdListArray;

@@ -59,7 +59,6 @@ typedef struct {
 };
 /* 40C360 */ static u8 HSD_PSDisp_8040C360[0x10] = { 0 };
 /* 4D6380 */ static u8 psFrameNum = 0x7B;
-/* 4D0908 */ HSD_Particle* hsd_804D0908[146];
 /* 4D0FC0 */ static Mtx vmtx;
 /* 4D0FF0 */ static Mtx rvmtx;
 /* 4D1020 */ static f32 prj[GX_PROJECTION_SZ];
@@ -2108,10 +2107,12 @@ void psDispParticles(u32 target_link, u32 sw)
                         }
                     }
 
-                    if (psNumCmdList[pp->bank] != NULL &&
-                        (form_group = M2C_BITWISE(
-                             HSD_PSFormGroup***,
-                             psNumCmdList)[pp->bank][pp->texGroup]) != NULL
+                    if (((HSD_PSFormGroup***) psNumCmdList)[pp->bank] !=
+                            NULL &&
+                        (form_group =
+                             ((HSD_PSFormGroup***)
+                                  psNumCmdList)[pp->bank][pp->texGroup]) !=
+                            NULL
 #ifdef MUST_MATCH
                         && form_group->formTable != NULL
 #endif
