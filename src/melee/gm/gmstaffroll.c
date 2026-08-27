@@ -737,7 +737,7 @@ void fn_801AB200(HSD_GObj* gobj)
     f32 highlight_val;
     f32 offset1, offset2;
     HSD_Text* tally_text;
-    PAD_STACK(80);
+    PAD_STACK(72);
 
     lb_80011E24(root, &cursor_jobj, 7, -1);
 
