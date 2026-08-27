@@ -662,7 +662,7 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                 arg5->z = d2_z * arg5_scl + arg5_offset.z;
             }
         }
-            PAD_STACK(96);
+            PAD_STACK(92);
             return end(arg4, arg5, unk_sum);
         }
         }
