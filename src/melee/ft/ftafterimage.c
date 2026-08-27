@@ -357,8 +357,11 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
                 for (i = 1; i < numVerts; i++) {
                     GXPosition3f32(vtx_buf[i].x, vtx_buf[i].y, vtx_buf[i].z);
-                    GXColor4u8(vtx_buf[i].r, vtx_buf[i].g, vtx_buf[i].b,
-                               vtx_buf[i].a);
+                    {
+                        u8 r = vtx_buf[i].r;
+                        GXColor4u8(r, vtx_buf[i].g, vtx_buf[i].b,
+                                   vtx_buf[i].a);
+                    }
                 }
             }
         }
