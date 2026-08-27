@@ -1699,6 +1699,11 @@ static inline f32 grZebes_801DB3CC_normalize(f32 dist, f32 value)
     return value / dist;
 }
 
+static inline f32 grZebes_801DB3CC_scale(f32 scale, f32 value)
+{
+    return value * scale;
+}
+
 static inline void grZebes_801DB3CC_update(grZe_BubbleEntry** base)
 {
     int k;
@@ -1904,7 +1909,8 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                                     ea->x14 += clamp_vy;
                                 }
                                 if (b >= 7) {
-                                    f32 vx2 = dx * strength;
+                                    f32 vx2 =
+                                        grZebes_801DB3CC_scale(strength, dx);
                                     f32 vy2 = dy * strength;
                                     if (vy2 < 0.0f) {
                                         vy2 = 0.0f;
