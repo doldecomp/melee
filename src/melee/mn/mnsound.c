@@ -305,13 +305,16 @@ void mnSound_80249C08(int unused)
     }
 
     {
-        Vec3 pos_1;
-        Vec3 pos_0;
         HSD_JObj* jobj_anim_2;
         HSD_JObj* jobj_anim_1;
         HSD_JObj* jobj_anim_0;
-        mnSound_InitVolumeAnim(GET_JOBJ(gobj), user_data->unk3, &pos_0, &pos_1,
-                               &jobj_anim_0, &jobj_anim_1, &jobj_anim_2);
+        {
+            Vec3 pos_1;
+            Vec3 pos_0;
+            mnSound_InitVolumeAnim(GET_JOBJ(gobj), user_data->unk3, &pos_0,
+                                   &pos_1, &jobj_anim_0, &jobj_anim_1,
+                                   &jobj_anim_2);
+        }
     }
 
     {
