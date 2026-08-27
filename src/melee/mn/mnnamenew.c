@@ -358,7 +358,7 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
     GXColor sp48;
     GXColor sp44;
     MnNameNewDataLayout* layout;
-    HSD_JObj* key_jobj;
+    s32 j;
     HSD_Text* text;
     HSD_JObj* ref1;
     HSD_JObj* ref2;
@@ -373,7 +373,7 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
     f32 font_x;
     f32 col_x;
     s32 i;
-    s32 j;
+    HSD_JObj* key_jobj;
     GXColor* color_ptr;
 
     FORCE_PAD_STACK(16);
