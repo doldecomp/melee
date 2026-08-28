@@ -1,8 +1,5 @@
-#include "gm_1B03.h"
-
-#include "gm_1B03.static.h"
-
 #include "gm/gm_1A3F.h"
+#include "if/soundtest.h"
 
 #include "lb/forward.h"
 
@@ -19,29 +16,62 @@
 
 #include <sysdolphin/baselib/memory.h>
 
-/* 1B0FF8 */ static void gm_801B0FF8(GameScene*);
-/* 1B138C */ static void gm_801B138C(GameScene*);
-/* 4D68BC */ MenuExitData* gm_804D68BC;
-/* 4D68B8 */ MenuEnterData* gm_804D68B8;
-/* 4D68B0 */ UNK_T gm_804D68B0[0x8 / 4];
+struct DebugSoundTestData {
+    struct SoundTestData* x0;
+    u32 x4;
+};
+
+/* 1B0FB8 */ static void onEnterDebug(GameScene*);
+/* 1B0FF8 */ static void onEnter(GameScene*);
+/* 1B138C */ static void onExit(GameScene*);
+/* 4D68B0 */ static struct DebugSoundTestData debug_enter_data;
+/* 4D68B8 */ static MenuEnterData* enter_data;
+/* 4D68BC */ static MenuExitData* exit_data;
+
+GameScene gm_803DD888_Scenes[] = {
+    {
+        0,
+        lbDvdPreload_2,
+        0,
+        onEnterDebug,
+        NULL,
+        {
+            GS_DEBUG_MENU,
+            &debug_enter_data,
+            NULL,
+        },
+    },
+    { -1 },
+};
 
 GameScene gm_803DD8B8_Scenes[] = {
     {
         0,
         lbDvdPreload_2,
         0,
-        gm_801B0FF8,
-        gm_801B138C,
+        onEnter,
+        onExit,
         {
             GS_MENU,
-            &gm_804D68B8,
-            &gm_804D68BC,
+            &enter_data,
+            &exit_data,
         },
     },
     { -1 },
 };
 
-void gm_801B0FF8(GameScene* scene)
+void onEnterDebug(GameScene* arg0)
+{
+    struct DebugSoundTestData* data;
+
+    data = gm_GetGameSceneLoadData(arg0);
+    data->x0 = (struct SoundTestData*) &un_803F9FA4;
+    data->x4 = 0;
+    un_802FF7DC();
+    un_802FF884("/audio");
+}
+
+void onEnter(GameScene* scene)
 {
     GameRules* rules;
     MenuEnterData* data;
@@ -212,7 +242,7 @@ void gm_801B0FF8(GameScene* scene)
     }
 }
 
-void gm_801B138C(GameScene* arg0)
+void onExit(GameScene* arg0)
 {
     MenuExitData* data = arg0->info.leave_data;
 

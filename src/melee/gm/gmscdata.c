@@ -2,7 +2,6 @@
 
 #include "gm_1A33.h"
 #include "gm_1B03.h"
-#include "gm_1B0FF.h"
 #include "gm_unsplit.h"
 #include "gmadventure.h"
 #include "gmallstar.h"
@@ -15,6 +14,7 @@
 #include "gminvisible.h"
 #include "gmlightning.h"
 #include "gmmenu.h"
+#include "gmmenumode.h"
 #include "gmmovieend.h"
 #include "gmmultiman.h"
 #include "gmomake15.h"
@@ -36,8 +36,8 @@
 #include "gmvsmode.h"
 #include "types.h"
 
-#include "gm/gm_1B0FB.h"
 #include "gm/gmcameramode.h"
+#include "gm/gmmenumode.h"
 #include "gm/gmtrainingmode.h"
 #include "if/ifprize.h"
 #include "mn/mncharsel.h"
