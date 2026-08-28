@@ -218,13 +218,14 @@ void lbSnap_8001DA5C(const u8* arg0)
     int ctr;
 
     for (dst_x = 0; dst_x < 32; dst_x++) {
-        int src_x = (dst_x * 204 / 32) + 138;
+        int src_x_base = dst_x * 204 / 32;
         u8* dst_col = dst + ((dst_x % 4) * 8);
         int tile_column = lbSnap_GetTiledColumn(dst_x);
         int dst_y = 0;
         int src_y_accum = 0;
         u16 pixel;
         for (ctr = 0; ctr < 32; ctr++) {
+            int src_x = src_x_base + 138;
             pixel = *(u16*) &arg0[lbSnap_GetTiledRGBOffset(
                 src_x, src_y_accum / 64 + 96, 160)];
             *(u16*) &dst_col[lbSnap_GetTiledYOff(tile_column, dst_y + 16)] =
