@@ -303,9 +303,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
 
     // Check A button per controller for rumble toggle
     for (i = 0; i < 4; i++) {
-        s32 port_mode = data->x0[i + 2];
-
-        if (port_mode == 0) {
+        if (data->x0[i + 2] == 0) {
             inputs = gm_GetButtonsTriggered(i);
             if (inputs & PAD_CONFIRM) {
                 HSD_JObj* temp_jobj;
@@ -423,7 +421,8 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
             GetPersistentNameData(name_idx)->rumble_toggle = 1;
         }
         rumble_setting = mnVibration_GetNameRumble(name_idx);
-        jobj = mnVibration_GetNameRowJObj(data->x0[1]);
+        cursor_row = data->x0[1];
+        jobj = mnVibration_GetNameRowJObj(cursor_row);
         HSD_JObjReqAnimAll(jobj, (f32) rumble_setting);
         HSD_JObjAnimAll(jobj);
         return;
@@ -472,7 +471,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     {
         cursor_row = mnVibration_GetCursorRow(data);
         if (cursor_row < 7) {
-            u8 name_row = cursor_row + 1;
+            s32 name_row = cursor_row + 1;
             name_idx = mnVibration_GetNameSlot(data, name_row);
             if (name_idx != 0xFF) {
                 MnVibrationData* data2;
