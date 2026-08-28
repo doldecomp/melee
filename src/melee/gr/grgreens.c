@@ -1246,9 +1246,10 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
             Vec(*positions)[6] = (Vec(*)[6]) gp->u.greens.x4;
             Vec* position = &positions[row][col];
             struct grGreens_BlockVars* block =
-                &gp->u.greens.x8_blocks[row][col];
+                gp->u.greens.x8_blocks[row];
+            block += col;
 
-            if (block->x8 < position->y) {
+            if (position->y > block->x8) {
                 block->x8 = position->y;
                 gp->u.greens.x8_blocks[row][col].status = 3;
                 gp->u.greens.x8_blocks[row][col].x1_5 = 1;
