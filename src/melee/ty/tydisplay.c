@@ -148,7 +148,6 @@ void _tyDisplay_8031830C(TySortElem* base_, s32 lo, s32 hi)
 
         if (lo < pivot - 1) {
             s32 mid2 = pivot + lo;
-            s32 i;
             mid2 = (mid2 - 1) / 2;
 
             if (lo != mid2) {
@@ -302,7 +301,6 @@ void _tyDisplay_80318714(TySortElem* base_, s32 lo, s32 hi)
 
         if (lo < pivot - 1) {
             s32 mid2 = pivot + lo;
-            s32 i;
             mid2 = (mid2 - 1) / 2;
 
             if (lo != mid2) {
@@ -906,7 +904,20 @@ void _tyDisplay_80319994(s32 arg0)
         _tyDisplay_80319540_sort(cfg, grid);
     }
 
-    _tyDisplay_80319994_place(grid, cfg);
+    {
+        for (count = 0; count < cfg->x08; count++) {
+            HSD_GObj* gobj;
+            cfg->x78 = _tyDisplay_8031BC54(grid->sort[count].key);
+            gobj = cfg->x78;
+            if (gobj != NULL) {
+                _tyDisplay_804D6F10[count] = (HSD_JObj*) gobj->hsd_obj;
+                HSD_JObjSetTranslateX(_tyDisplay_804D6F10[count],
+                                      grid->pos[count].x);
+                HSD_JObjSetTranslateZ(_tyDisplay_804D6F10[count],
+                                      grid->pos[count].z);
+            }
+        }
+    }
 }
 
 void _tyDisplay_80319EF0(void)
@@ -1585,26 +1596,6 @@ static inline void tyDisplay_SetGridSize(TyDspConfig* cfg, TyDspGrid* grid)
         break;
     }
     }
-}
-
-static inline void tyDisplay_SetupCameraAndBackground(void)
-{
-    TyDspConfig* cfg = _tyDisplay_804D6F18;
-    HSD_CObj* cobj = lb_80013B14(HSD_ArchiveGetPublicAddress(
-        _tyDisplay_804D6F1C->archive, "ScMenDisplay_cam_int1_camera"));
-
-    cfg->x00 = GObj_Create(1, 2, 0);
-    HSD_GObjObject_80390A70(cfg->x00, HSD_GObj_CameraKind, cobj);
-    GObj_SetupGXLinkMax(cfg->x00, (GObj_RenderFunc) (Event) Toy_803068E0, 0);
-    cfg->x00->gxlink_prios = 0x1230000000000000ULL;
-
-    if (_tyDisplay_804D6F20 != 0) {
-        HSD_GObj_SetupProc(cfg->x00, (HSD_GObjEvent) _tyDisplay_8031A94C, 0);
-    } else {
-        HSD_GObj_SetupProc(cfg->x00, (HSD_GObjEvent) _tyDisplay_8031A4EC, 0);
-    }
-    HSD_GObj_80390CD4(cfg->x00);
-    _tyDisplay_8031B328();
 }
 
 void tyDisplay_OnEnter_8031B460(void* arg0)
