@@ -3405,10 +3405,16 @@ s32 ftCo_800A6A98(Fighter* fp, Vec3* arg1)
     return 1;
 }
 
+static inline s32 ftCo_800A6D2C_inline0(f32 mx, f32 my, Vec3* fpos, int* lid,
+                                        u32* fl, Vec3* fn, s32 blocked)
+{
+    return mpCheckFloor(mx, 5.0f + my, mx, my - 20.0f, 0.0f, fpos, lid, fl, fn,
+                        -1, -1, -1, NULL, (Fighter_GObj*) blocked);
+}
+
 s32 ftCo_800A6D2C(Fighter* fp, Vec3* arg1)
 {
     f32 dist;
-    mp_UnkStruct0* island;
     Vec3 b;
     Vec3 a;
     Vec3 floor_pos;
@@ -3426,6 +3432,7 @@ s32 ftCo_800A6D2C(Fighter* fp, Vec3* arg1)
     f32 dx;
     f32 dy;
     struct Fighter_x1A88_t* data = &fp->x1A88;
+    mp_UnkStruct0* island;
     f32 best;
 
     PAD_STACK(4);
@@ -3435,7 +3442,7 @@ s32 ftCo_800A6D2C(Fighter* fp, Vec3* arg1)
     for (island = mpIsland_80458E88.next; island != NULL;
          island = island->next)
     {
-        if (ftCo_800A2718(island) == 0 && cur_island != island) {
+        if (ftCo_800A2718(island) == 0 && island != cur_island) {
             a = island->x8;
             b = island->x14;
             HSD_Randf();
@@ -3443,9 +3450,8 @@ s32 ftCo_800A6D2C(Fighter* fp, Vec3* arg1)
             line_id = -1;
             mx = 0.5f * (b.x + a.x);
             my = 0.5f * (b.y + a.y);
-            result = mpCheckFloor(mx, 5.0f + my, mx, my - 20.0f, 0.0f,
-                                  &floor_pos, &line_id, &flags, &floor_normal,
-                                  -1, -1, -1, NULL, (Fighter_GObj*) blocked);
+            result = ftCo_800A6D2C_inline0(mx, my, &floor_pos, &line_id,
+                                           &flags, &floor_normal, blocked);
             if (result != 0) {
                 line = line_id;
                 if (grBigBlue_801EF844(line) || grInishie1_801FCAAC(line) ||
