@@ -4204,7 +4204,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
 {
     struct {
         Vec3 vec;
-        u8 pad[8];
+        u8 pad[12];
     } sp140;
     Vec3 sp134;
     Vec3 sp128;
@@ -4214,7 +4214,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
         u8 pad[4];
         void* prev;
         void* prev_wrap;
-        u8 trailing_pad[0x4C];
+        u8 trailing_pad[0x48];
     } archive_symbols;
     Toy26B8* base;
     ToyCameraControl* ed4;
@@ -4538,8 +4538,8 @@ void _Toy_8030E110(HSD_GObj* arg0)
                             }
                             if (total > 3) {
                                 if ((display->selectedIdx - 1) < 0) {
-                                    s32 count;
                                     s32 list_idx;
+                                    s32 count;
                                     ToyListEntry* list_entry;
                                     HSD_Archive* old_archive;
                                     char* model_data;
@@ -4552,9 +4552,10 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                     } else {
                                         count = *gmMainLib_GetTrophyCount();
                                     }
+                                    count += display->selectedIdx;
                                     list_idx = count;
-                                    list_idx += display->selectedIdx;
-                                    list_entry = display->first_entry->prev;
+                                    list_entry = display->first_entry;
+                                    list_entry = list_entry->prev;
                                     {
                                         s32 idx = list_idx - 1;
                                         s16 trophy_id = Toy_sbss_804D6EDC[idx];
@@ -4660,12 +4661,12 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                 }
                                 if ((s32) (display->selectedIdx + 1) >= count)
                                 {
-                                    s32 count2;
+                                    s32 list_idx;
                                     ToyListEntry* list_entry;
                                     HSD_Archive* old_archive;
                                     char* model_data;
                                     s16 trophy_id;
-                                    s32 list_idx;
+                                    s32 count2;
 
                                     if ((gm_IsCurrently1PMode() != 0) ||
                                         (gm_GetCurrentGameMode() ==
@@ -4675,8 +4676,10 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                     } else {
                                         count2 = *gmMainLib_GetTrophyCount();
                                     }
-                                    list_entry = display->last_entry->next;
-                                    list_idx = display->selectedIdx - count2;
+                                    list_entry = display->last_entry;
+                                    count2 = display->selectedIdx - count2;
+                                    list_idx = count2;
+                                    list_entry = list_entry->next;
                                     trophy_id =
                                         Toy_sbss_804D6EDC[list_idx + 1];
                                     model_data = Toy_8030813C(trophy_id);
