@@ -1204,7 +1204,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     s32 found;
     s32 cur;
     s32 count2;
-    u8 sp[64];
+    PAD_STACK(56);
     mn_804A04F0.buttons = input;
     count2 = 0;
     if (input & MenuInput_Confirm) {
@@ -1223,7 +1223,8 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             row = mn_804A04F0.hovered_selection >> 8;
             (void) row;
             row_result = mnDiagram_GetVisibleNameFrom(
-                sorted, data->name_cursor_pos >> 8, row);
+                sorted, data->name_cursor_pos >> 8,
+                mn_804A04F0.hovered_selection >> 8);
             mnDiagram_CreatePopup(col_result, row_result, 1);
             return;
         }
