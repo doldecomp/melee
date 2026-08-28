@@ -690,17 +690,11 @@ u8 gm_8017CD94(UnkAdventureData* arg0, int arg1, int arg2, int arg3)
 static inline s32 gm_8017CE34_CountEnemies(s8* arg0)
 {
     s32 count = 0;
+    s32 i;
 
-    if ((s32) (u8) arg0[0] != 0x21) {
-        count = 1;
-    }
-    {
-        s8* p = &arg0[1];
-        if ((s32) *p != 0x21) {
-            count += 1;
-        }
-        if ((s32) p[1] != 0x21) {
-            count += 1;
+    for (i = 0; i < 3; i++) {
+        if ((s32) arg0[i] != 0x21) {
+            count++;
         }
     }
     return count;
@@ -743,7 +737,6 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     u8 enemy_ckind;
     s32 enemy_count;
     s32 enemy_idx;
-    u8 sp8;
     u8* color_iter;
 
     PAD_STACK(4);
@@ -871,6 +864,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
             s32 event_enemy_count;
             s32 special_stage;
             s32 special_enemy_mode;
+            u8 sp8;
             u8 first_enemy;
             u32 stage_flags;
 
@@ -899,10 +893,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
                 }
             }
 
-            {
-                GrKind grkind = Stage_8022519C(arg7);
-                stage_flags = Ground_801C5AD0(grkind);
-            }
+            stage_flags = Ground_801C5AD0(Stage_8022519C(arg7));
 
             gm_8016A22C((s8) (u8) arg2[0], arg2[1], arg2[2], colors[0],
                         colors[1], (s32) colors[2], special_stage,
