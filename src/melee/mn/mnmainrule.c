@@ -665,7 +665,6 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
     AnimLoopSettings* settings;
     HSD_JObj* jobj;
     s32 i;
-    s32 visible;
     struct mn_802307F8_t* user_data;
     s32 j;
     u8 count;
@@ -693,10 +692,13 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
             valid = 1;
         }
         if (valid) {
+            s32 visible;
             HSD_JObj* v;
             struct mn_8022FEC8_jobj_ref_t* p;
 
-            for (j = (visible = 0); j < i; j++) {
+            visible = valid - 1;
+            j = visible;
+            for (; j < (s32) (u8) i; j++) {
                 u8 j8 = j;
                 s32 valid2;
                 if (gm_GetCurrentGameMode() == GM_TOURNAMENT && j8 == 4) {
