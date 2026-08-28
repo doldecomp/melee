@@ -469,6 +469,19 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     lbAudioAx_80027168();
 }
 
+static inline void gm_801B5624_inline(s8* char_ids,
+                                      gm_803DEBE8_t* opp_data, u16 round)
+{
+    s32 i;
+
+    for (i = 0; i < 3; i++) {
+        char_ids[i] = 0x21;
+    }
+    for (i = 0; i < (s32) gm_803DEC4C[round].count; i++) {
+        char_ids[i] = opp_data[i].x3;
+    }
+}
+
 void gm_801B5624(GameScene* arg0)
 {
     s8 chars[3];
@@ -476,10 +489,9 @@ void gm_801B5624(GameScene* arg0)
     u8* base;
     UnkAllstarData* allstar;
     gm_803DEBE8_t* opp_data;
-    s32 i;
     u16 round;
     u8 color;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     base = (u8*) gm_803DE930_Scenes;
     data = gm_GetGameSceneLoadData(arg0);
@@ -491,13 +503,7 @@ void gm_801B5624(GameScene* arg0)
         opp_data = &gm_803DEBE8[start];
     }
 
-    chars[0] = 0x21;
-    chars[1] = 0x21;
-    chars[2] = 0x21;
-
-    for (i = 0; i < (s32) gm_803DEC4C[round].count; i++) {
-        chars[i] = opp_data[i].x3;
-    }
+    gm_801B5624_inline(chars, opp_data, round);
 
     allstar->x0.xB = 4;
     allstar->x0.x8 = 0;
