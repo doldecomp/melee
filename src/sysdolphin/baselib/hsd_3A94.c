@@ -3728,9 +3728,10 @@ s32 fn_803AF3F0(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         for (i = 0; i < file_blocks && remaining > 0; i++) {
             if ((u32) remaining > (u32) fn_803AF3F0_chunk_size(state)) {
                 if (arg3 != 0) {
+                    s32 block = block_map[0][i];
                     s32 cmd_result = fn_803AF3F0_queue_verify_first(
-                        state, block_map[0][i], blocks_before + i, current_seq,
-                        data, fn_803AF3F0_chunk_size(state));
+                        state, block, blocks_before + i, current_seq, data,
+                        fn_803AF3F0_chunk_size(state));
                     if (cmd_result < 0) {
                         fn_803AF3F0_rewind(entries);
                         return cmd_result;
