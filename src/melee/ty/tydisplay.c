@@ -103,13 +103,7 @@ static void order_data_44(void)
 }
 #endif
 
-static inline TySortElem* tyDisplay_SortElemAtOffset(TySortElem* base,
-                                                     size_t offset)
-{
-    return (TySortElem*) ((size_t) base + offset);
-}
-
-void _tyDisplay_8031830C(TySortElem* base, s32 lo, s32 hi)
+void _tyDisplay_8031830C(TySortElem* base_, s32 lo, s32 hi)
 {
     TySortElem tmp0, tmp1, tmp2, tmp3, tmp4;
     UNUSED unsigned char pad0[4];
@@ -118,11 +112,13 @@ void _tyDisplay_8031830C(TySortElem* base, s32 lo, s32 hi)
     TySortElem tmp6, tmp7;
     UNUSED unsigned char pad2[4];
     TySortElem tmp8;
+    UNUSED unsigned char pad6C[4];
+    TySortElem* base = (TySortElem*) (size_t) base_;
 
     if (lo < hi) {
         s32 mid = (lo + hi) / 2;
-        TySortElem* cur;
-        s32 pivot2, pivot, j, i;
+        s32 pivot2, pivot, i;
+        TySortElem* p;
 
         if (lo != mid) {
             tmp0 = base[lo];
@@ -131,20 +127,15 @@ void _tyDisplay_8031830C(TySortElem* base, s32 lo, s32 hi)
         }
 
         pivot = lo;
-        i = lo + 1;
-        cur = &base[i];
-        j = lo;
-        j *= sizeof(TySortElem);
-        for (; i <= hi; cur++, i++) {
-            if (cur->val < base[lo].val) {
-                TySortElem* s;
+        for (i = lo + 1; i <= hi; i++) {
+            if (base[i].val < base[lo].val) {
                 pivot++;
-                j += sizeof(TySortElem);
                 if (pivot != i) {
-                    s = tyDisplay_SortElemAtOffset(base, j);
-                    tmp1 = *s;
-                    *s = *cur;
-                    *cur = tmp1;
+                    tmp1 = *(TySortElem*) ((size_t) base +
+                                           pivot * sizeof(TySortElem));
+                    *(TySortElem*) ((size_t) base +
+                                    pivot * sizeof(TySortElem)) = base[i];
+                    base[i] = tmp1;
                 }
             }
         }
@@ -167,17 +158,14 @@ void _tyDisplay_8031830C(TySortElem* base, s32 lo, s32 hi)
             }
 
             pivot2 = lo;
-            j = lo;
-            j *= sizeof(TySortElem);
             for (i = lo + 1; i <= pivot - 1; i++) {
                 if (base[i].val < base[lo].val) {
-                    TySortElem* s;
                     pivot2++;
-                    j += sizeof(TySortElem);
                     if (pivot2 != i) {
-                        s = (TySortElem*) ((size_t) base + j);
-                        tmp4 = *s;
-                        *s = base[i];
+                        p = (TySortElem*) ((size_t) base +
+                                           pivot2 * sizeof(TySortElem));
+                        tmp4 = *p;
+                        *p = base[i];
                         base[i] = tmp4;
                     }
                 }
@@ -189,8 +177,8 @@ void _tyDisplay_8031830C(TySortElem* base, s32 lo, s32 hi)
                 base[pivot2] = tmp5;
             }
 
-            _tyDisplay_8031830C(base, lo, pivot2 - 1);
-            _tyDisplay_8031830C(base, pivot2 + 1, pivot - 1);
+            _tyDisplay_8031830C(base_, lo, pivot2 - 1);
+            _tyDisplay_8031830C(base_, pivot2 + 1, pivot - 1);
         }
 
         if (pivot + 1 < hi) {
@@ -205,36 +193,39 @@ void _tyDisplay_8031830C(TySortElem* base, s32 lo, s32 hi)
 
             {
                 TySortElem* pivot_base;
-                s32 j;
+                TySortElem* s;
+                s32 poff;
                 pivot3 = pivot + 1;
                 i = pivot + 2;
-                cur = &base[i];
-                pivot_base = &base[pivot];
-                j = pivot + 1;
-                j *= sizeof(TySortElem);
-                for (; i <= hi; i++, cur++) {
-                    if (cur->val < pivot_base[1].val) {
-                        TySortElem* s;
+                p = &base[i];
+                poff = pivot;
+                poff *= sizeof(TySortElem);
+                pivot_base = (TySortElem*) ((size_t) base + poff);
+                for (; i <= hi; p++, i++) {
+                    if (p->val < pivot_base[1].val) {
                         pivot3++;
-                        j += sizeof(TySortElem);
                         if (pivot3 != i) {
-                            s = (TySortElem*) ((size_t) base + j);
+                            s = (TySortElem*) ((size_t) base +
+                                               pivot3 * sizeof(TySortElem));
                             tmp7 = *s;
-                            *s = *cur;
-                            *cur = tmp7;
+                            *s = *p;
+                            *p = tmp7;
                         }
                     }
                 }
+
+                if (pivot + 1 != pivot3) {
+                    TySortElem* pb2;
+                    (void) &((TySortElem*) ((size_t) base_ + poff))[0];
+                    pb2 = (TySortElem*) ((size_t) base_ + poff);
+                    tmp8 = pb2[1];
+                    pb2[1] = base[pivot3];
+                    base[pivot3] = tmp8;
+                }
             }
 
-            if (pivot + 1 != pivot3) {
-                tmp8 = base[pivot + 1];
-                base[pivot + 1] = base[pivot3];
-                base[pivot3] = tmp8;
-            }
-
-            _tyDisplay_8031830C(base, pivot + 1, pivot3 - 1);
-            _tyDisplay_8031830C(base, pivot3 + 1, hi);
+            _tyDisplay_8031830C(base_, pivot + 1, pivot3 - 1);
+            _tyDisplay_8031830C(base_, pivot3 + 1, hi);
         }
     }
 }
@@ -265,12 +256,6 @@ typedef struct TySortElemInt {
     s32 val;
 } TySortElemInt;
 
-static inline TySortElemInt* tyDisplay_GetSortElem(size_t offset,
-                                                   TySortElemInt* base)
-{
-    return (TySortElemInt*) ((size_t) base + offset);
-}
-
 void _tyDisplay_80318714(TySortElem* base_, s32 lo, s32 hi)
 {
     TySortElemInt tmp0, tmp1, tmp2, tmp3, tmp4;
@@ -280,12 +265,13 @@ void _tyDisplay_80318714(TySortElem* base_, s32 lo, s32 hi)
     TySortElemInt tmp6, tmp7;
     UNUSED unsigned char pad2[4];
     TySortElemInt tmp8;
+    UNUSED unsigned char pad6C[4];
     TySortElemInt* base = (TySortElemInt*) base_;
 
     if (lo < hi) {
         s32 mid = (lo + hi) / 2;
-        TySortElemInt* cur;
-        s32 pivot2, pivot, j, i;
+        s32 pivot2, pivot, i;
+        TySortElemInt* p;
 
         if (lo != mid) {
             tmp0 = base[lo];
@@ -294,20 +280,16 @@ void _tyDisplay_80318714(TySortElem* base_, s32 lo, s32 hi)
         }
 
         pivot = lo;
-        i = lo + 1;
-        cur = &base[i];
-        j = lo;
-        j *= sizeof(TySortElemInt);
-        for (; i <= hi; cur++, i++) {
-            if (cur->val > base[lo].val) {
-                TySortElemInt* s;
+        for (i = lo + 1; i <= hi; i++) {
+            if (base[i].val > base[lo].val) {
                 pivot++;
-                j += sizeof(TySortElemInt);
                 if (pivot != i) {
-                    s = tyDisplay_GetSortElem(j, base);
-                    tmp1 = *s;
-                    *s = *cur;
-                    *cur = tmp1;
+                    tmp1 = *(TySortElemInt*) ((size_t) base +
+                                              pivot * sizeof(TySortElemInt));
+                    *(TySortElemInt*) ((size_t) base +
+                                       pivot * sizeof(TySortElemInt)) =
+                        base[i];
+                    base[i] = tmp1;
                 }
             }
         }
@@ -330,17 +312,14 @@ void _tyDisplay_80318714(TySortElem* base_, s32 lo, s32 hi)
             }
 
             pivot2 = lo;
-            j = lo;
-            j *= sizeof(TySortElemInt);
             for (i = lo + 1; i <= pivot - 1; i++) {
                 if (base[i].val > base[lo].val) {
-                    TySortElemInt* s;
                     pivot2++;
-                    j += sizeof(TySortElemInt);
                     if (pivot2 != i) {
-                        s = (TySortElemInt*) ((size_t) base + j);
-                        tmp4 = *s;
-                        *s = base[i];
+                        p = (TySortElemInt*) ((size_t) base +
+                                              pivot2 * sizeof(TySortElemInt));
+                        tmp4 = *p;
+                        *p = base[i];
                         base[i] = tmp4;
                     }
                 }
@@ -368,32 +347,36 @@ void _tyDisplay_80318714(TySortElem* base_, s32 lo, s32 hi)
 
             {
                 TySortElemInt* pivot_base;
-                s32 j;
+                TySortElemInt* s;
+                s32 poff;
                 pivot3 = pivot + 1;
                 i = pivot + 2;
-                cur = &base[i];
-                pivot_base = &base[pivot];
-                j = pivot + 1;
-                j *= sizeof(TySortElemInt);
-                for (; i <= hi; cur++, i++) {
-                    if (cur->val > pivot_base[1].val) {
-                        TySortElemInt* s;
+                p = &base[i];
+                poff = pivot;
+                poff *= sizeof(TySortElemInt);
+                pivot_base = (TySortElemInt*) ((size_t) base + poff);
+                for (; i <= hi; p++, i++) {
+                    if (p->val > pivot_base[1].val) {
                         pivot3++;
-                        j += sizeof(TySortElemInt);
                         if (pivot3 != i) {
-                            s = (TySortElemInt*) ((size_t) base + j);
+                            s = (TySortElemInt*) ((size_t) base +
+                                                  pivot3 *
+                                                      sizeof(TySortElemInt));
                             tmp7 = *s;
-                            *s = *cur;
-                            *cur = tmp7;
+                            *s = *p;
+                            *p = tmp7;
                         }
                     }
                 }
-            }
 
-            if (pivot + 1 != pivot3) {
-                tmp8 = base[pivot + 1];
-                base[pivot + 1] = base[pivot3];
-                base[pivot3] = tmp8;
+                if (pivot + 1 != pivot3) {
+                    TySortElemInt* pb2;
+                    (void) &((TySortElemInt*) ((size_t) base_ + poff))[0];
+                    pb2 = (TySortElemInt*) ((size_t) base_ + poff);
+                    tmp8 = pb2[1];
+                    pb2[1] = base[pivot3];
+                    base[pivot3] = tmp8;
+                }
             }
 
             _tyDisplay_80318714(base_, pivot + 1, pivot3 - 1);
@@ -469,6 +452,113 @@ void _tyDisplay_80318B1C(s32 arg0)
     }
 }
 
+static inline TySortElem* tyDisplay_GetGridSortElem(size_t offset,
+                                                    TyDspGrid* grid)
+{
+    return (TySortElem*) ((size_t) grid + offset + 0x14);
+}
+
+static inline void _tyDisplay_80319540_sort(TyDspConfig* cfg, TyDspGrid* grid)
+{
+    s32 n2;
+    _tyDisplay_80318B1C(cfg->x08);
+
+    if (cfg->x08 > 1) {
+        n2 = (cfg->x08 / 3) * 2;
+        if (n2 > 0) {
+            struct {
+                u8 pad0[4];
+                TySortElem tmp2;
+                u8 pad1[4];
+                TySortElem tmp1, tmp0;
+            } temps;
+            s32 mid = n2 / 2;
+            TyDspGrid* cur;
+            s32 pivot, n;
+
+            if (mid != 0) {
+                temps.tmp0 = grid->sort[0];
+                grid->sort[0] = grid->sort[mid];
+                grid->sort[mid] = temps.tmp0;
+            }
+
+            pivot = 0;
+            cur = (TyDspGrid*) ((size_t) grid + sizeof(TySortElem));
+            for (n = 1; n2 >= n;
+                 cur = (TyDspGrid*) ((size_t) cur + sizeof(TySortElem)), n++)
+            {
+                if (*(s32*) &cur->sort[0].val > *(s32*) &grid->sort[0].val) {
+                    pivot += 1;
+                    if (pivot != n) {
+                        TySortElem* s = tyDisplay_GetGridSortElem(
+                            pivot * sizeof(TySortElem), grid);
+                        temps.tmp1 = *s;
+                        *s = cur->sort[0];
+                        cur->sort[0] = temps.tmp1;
+                    }
+                }
+            }
+
+            if (pivot != 0) {
+                temps.tmp2 = grid->sort[0];
+                grid->sort[0] = grid->sort[pivot];
+                grid->sort[pivot] = temps.tmp2;
+            }
+
+            _tyDisplay_80318714(grid->sort, 0, pivot - 1);
+            _tyDisplay_80318714(grid->sort, pivot + 1, n2);
+        }
+    }
+}
+
+static inline void _tyDisplay_80319994_sort_pos(TyDspGrid* grid, s32 count)
+{
+    if (count > 1) {
+        s32 n2;
+        s32 pivot;
+        n2 = count - 1;
+        if (n2 > 0) {
+            struct {
+                TyDspPos tmp2;
+                u8 pad1[4];
+                TyDspPos tmp1, tmp0;
+            } temps;
+            s32 mid = n2 / 2;
+            s32 n;
+
+            if (mid != 0) {
+                temps.tmp0 = grid->pos[0];
+                grid->pos[0] = grid->pos[mid];
+                grid->pos[mid] = temps.tmp0;
+            }
+
+            pivot = 0;
+            for (n = 1; n2 >= n; n++) {
+                if (grid->pos[n].z < grid->pos[0].z) {
+                    pivot += 1;
+                    if (pivot != n) {
+                        TyDspPos* p =
+                            (TyDspPos*) ((size_t) grid +
+                                         pivot * sizeof(TyDspPos) + 0x97C);
+                        temps.tmp1 = *p;
+                        *p = grid->pos[n];
+                        grid->pos[n] = temps.tmp1;
+                    }
+                }
+            }
+
+            if (pivot != 0) {
+                temps.tmp2 = grid->pos[0];
+                grid->pos[0] = grid->pos[pivot];
+                grid->pos[pivot] = temps.tmp2;
+            }
+
+            _tyDisplay_8031830C((TySortElem*) grid->pos, 0, pivot - 1);
+            _tyDisplay_8031830C((TySortElem*) grid->pos, pivot + 1, n2);
+        }
+    }
+}
+
 static inline f32 _tyDisplay_80318CB4_calc_dist_sq(f32 dz, f32 dx)
 {
     return dx * dx + dz * dz;
@@ -497,7 +587,6 @@ static inline void _tyDisplay_80318CB4_place_toys(TyDspGrid* grid,
 
 void _tyDisplay_80318CB4(s32 arg0)
 {
-    s32 n2;
     TyDspGrid* grid = _tyDisplay_804D6F14;
     s32 i;
     s32 k;
@@ -510,11 +599,8 @@ void _tyDisplay_80318CB4(s32 arg0)
     f32 dist_limit;
     s32 count;
     TyDspConfig* cfg = _tyDisplay_804D6F18;
-    s32 mid;
-    s32 pivot;
-    s32 n;
 
-    PAD_STACK(0x3C);
+    PAD_STACK(0x2C);
 
     memzero(grid, sizeof(*grid));
     grid->x08_min_z = -3.5f;
@@ -633,175 +719,11 @@ void _tyDisplay_80318CB4(s32 arg0)
     }
 
     count = cfg->x08;
-    if (count > 1) {
-        n2 = count - 1;
-        if (n2 > 0) {
-            struct {
-                TyDspPos tmp2;
-                u8 pad[4];
-                TyDspPos tmp1, tmp0;
-            } pos_temps;
-            s32 j;
-            PAD_STACK(4);
-            mid = n2 / 2;
+    _tyDisplay_80319994_sort_pos(grid, count);
 
-            if (mid != 0) {
-                pos_temps.tmp0 = grid->pos[0];
-                grid->pos[0] = grid->pos[mid];
-                grid->pos[mid] = pos_temps.tmp0;
-            }
-
-            pivot = 0;
-            j = 0;
-            for (n = 1; n <= n2; n++) {
-                if (grid->pos[n].z < grid->pos[0].z) {
-                    pivot += 1;
-                    j += 8;
-                    if (pivot != n) {
-                        TyDspPos* p = (TyDspPos*) ((size_t) grid + j + 0x97C);
-                        pos_temps.tmp1 = *p;
-                        *p = grid->pos[n];
-                        grid->pos[n] = pos_temps.tmp1;
-                    }
-                }
-            }
-
-            if (pivot != 0) {
-                pos_temps.tmp2 = grid->pos[0];
-                grid->pos[0] = grid->pos[pivot];
-                grid->pos[pivot] = pos_temps.tmp2;
-            }
-
-            _tyDisplay_8031830C((TySortElem*) grid->pos, 0, pivot - 1);
-            _tyDisplay_8031830C((TySortElem*) grid->pos, pivot + 1, n2);
-        }
-    }
-
-    _tyDisplay_80318B1C(cfg->x08);
-
-    count = cfg->x08;
-    if (count > 1) {
-        n2 = (count / 3) * 2;
-        if (n2 > 0) {
-            struct {
-                TySortElem tmp2;
-                u8 pad[4];
-                TySortElem tmp1, tmp0;
-            } sort_temps;
-            mid = n2 / 2;
-
-            if (mid != 0) {
-                sort_temps.tmp0 = grid->sort[0];
-                grid->sort[0] = grid->sort[mid];
-                grid->sort[mid] = sort_temps.tmp0;
-            }
-
-            pivot = 0;
-            {
-                s32 j = 0;
-                for (n = 1; n <= n2; n++) {
-                    if (*(s32*) &grid->sort[n].val >
-                        *(s32*) &grid->sort[0].val)
-                    {
-                        pivot += 1;
-                        j += 8;
-                        if (pivot != n) {
-                            TySortElem* s =
-                                (TySortElem*) ((size_t) grid + j + 0x14);
-                            sort_temps.tmp1 = *s;
-                            *s = grid->sort[n];
-                            grid->sort[n] = sort_temps.tmp1;
-                        }
-                    }
-                }
-            }
-
-            if (pivot != 0) {
-                sort_temps.tmp2 = grid->sort[0];
-                grid->sort[0] = grid->sort[pivot];
-                grid->sort[pivot] = sort_temps.tmp2;
-            }
-
-            _tyDisplay_80318714(grid->sort, 0, pivot - 1);
-            _tyDisplay_80318714(grid->sort, pivot + 1, n2);
-        }
-    }
+    _tyDisplay_80319540_sort(cfg, grid);
 
     _tyDisplay_80318CB4_place_toys(grid, cfg);
-}
-
-static inline TySortElem* tyDisplay_GetGridSortElem(size_t offset,
-                                                    TyDspGrid* grid)
-{
-    return (TySortElem*) ((size_t) grid + offset + 0x14);
-}
-
-static inline void _tyDisplay_80319540_sort_and_place(TyDspConfig* cfg,
-                                                      TyDspGrid* grid)
-{
-    s32 k;
-    s32 n2;
-    _tyDisplay_80318B1C(cfg->x08);
-
-    if (cfg->x08 > 1) {
-        n2 = (cfg->x08 / 3) * 2;
-        if (0 < n2) {
-            struct {
-                u8 pad0[4];
-                TySortElem tmp2;
-                u8 pad1[4];
-                TySortElem tmp1, tmp0;
-            } temps;
-            TyDspGrid* cur;
-            s32 pivot, n;
-
-            k = n2 / 2;
-            if (k != 0) {
-                temps.tmp0 = grid->sort[0];
-                grid->sort[0] = grid->sort[k];
-                grid->sort[k] = temps.tmp0;
-            }
-
-            pivot = 0;
-            cur = (TyDspGrid*) ((size_t) grid + sizeof(TySortElem));
-            for (n = 1; n2 >= n;
-                 cur = (TyDspGrid*) ((size_t) cur + sizeof(TySortElem)), n++)
-            {
-                if (*(s32*) &cur->sort[0].val > *(s32*) &grid->sort[0].val) {
-                    pivot += 1;
-                    if (pivot != n) {
-                        TySortElem* s = tyDisplay_GetGridSortElem(
-                            pivot * sizeof(TySortElem), grid);
-                        temps.tmp1 = *s;
-                        *s = cur->sort[0];
-                        cur->sort[0] = temps.tmp1;
-                    }
-                }
-            }
-
-            if (pivot != 0) {
-                temps.tmp2 = grid->sort[0];
-                grid->sort[0] = grid->sort[pivot];
-                grid->sort[pivot] = temps.tmp2;
-            }
-
-            _tyDisplay_80318714(grid->sort, 0, pivot - 1);
-            _tyDisplay_80318714(grid->sort, pivot + 1, n2);
-        }
-    }
-
-    {
-        for (k = 0; k < cfg->x08; k++) {
-            HSD_GObj* gobj;
-            cfg->x78 = _tyDisplay_8031BC54(grid->sort[k].key);
-            gobj = cfg->x78;
-            if (gobj != NULL) {
-                _tyDisplay_804D6F10[k] = (HSD_JObj*) gobj->hsd_obj;
-                HSD_JObjSetTranslateX(_tyDisplay_804D6F10[k], grid->pos[k].x);
-                HSD_JObjSetTranslateZ(_tyDisplay_804D6F10[k], grid->pos[k].z);
-            }
-        }
-    }
 }
 
 void _tyDisplay_80319540(s32 arg0)
@@ -886,214 +808,102 @@ void _tyDisplay_80319540(s32 arg0)
         }
     }
 
-    _tyDisplay_80319540_sort_and_place(cfg, grid);
-}
+    _tyDisplay_80319540_sort(cfg, grid);
 
-static inline TyDspPos* tyDisplay_GetGridPosElem(size_t offset,
-                                                 TyDspGrid* grid)
-{
-    return (TyDspPos*) ((size_t) grid + offset + 0x97C);
-}
-
-typedef struct TyDspPosTemps {
-    TyDspPos tmp2;
-    u8 pad[4];
-    TyDspPos tmp1, tmp0;
-} TyDspPosTemps;
-
-static inline void _tyDisplay_80319994_sort_pos(TyDspGrid* grid, s32 count,
-                                                s32 arg0, TyDspPosTemps* temps)
-{
-    if (arg0 != 0 && count > 1) {
-        s32 n2 = count - 1;
-        if (n2 > 0) {
-            s32 mid = n2 / 2;
-            TyDspGrid* cur;
-            s32 pivot;
-            s32 n, j;
-
-            if (mid != 0) {
-                temps->tmp0 = grid->pos[0];
-                grid->pos[0] = grid->pos[mid];
-                grid->pos[mid] = temps->tmp0;
+    {
+        for (i = 0; i < cfg->x08; i++) {
+            HSD_GObj* gobj;
+            (void) &_tyDisplay_804D6F10[i];
+            cfg->x78 = _tyDisplay_8031BC54(grid->sort[i].key);
+            gobj = cfg->x78;
+            if (gobj != NULL) {
+                _tyDisplay_804D6F10[i] = (HSD_JObj*) gobj->hsd_obj;
+                HSD_JObjSetTranslateX(_tyDisplay_804D6F10[i], grid->pos[i].x);
+                HSD_JObjSetTranslateZ(_tyDisplay_804D6F10[i], grid->pos[i].z);
             }
-
-            pivot = 0;
-            j = 0;
-            n = 1;
-            cur = (TyDspGrid*) ((size_t) grid + sizeof(TyDspPos));
-            for (; n2 >= n;
-                 cur = (TyDspGrid*) ((size_t) cur + sizeof(TyDspPos)), n++)
-            {
-                if (cur->pos[0].z < grid->pos[0].z) {
-                    pivot += 1;
-                    j += 8;
-                    if (pivot != n) {
-                        TyDspPos* p = tyDisplay_GetGridPosElem(j, grid);
-                        temps->tmp1 = *p;
-                        *p = cur->pos[0];
-                        cur->pos[0] = temps->tmp1;
-                    }
-                }
-            }
-
-            if (pivot != 0) {
-                temps->tmp2 = grid->pos[0];
-                grid->pos[0] = grid->pos[pivot];
-                grid->pos[pivot] = temps->tmp2;
-            }
-
-            _tyDisplay_8031830C((TySortElem*) grid->pos, 0, pivot - 1);
-            _tyDisplay_8031830C((TySortElem*) grid->pos, pivot + 1, n2);
-        }
-    }
-}
-
-static inline void _tyDisplay_80319994_place(TyDspGrid* grid, TyDspConfig* cfg)
-{
-    s32 count;
-    s32 jobj_idx;
-
-    count = 0;
-    jobj_idx = count;
-    for (; count < cfg->x08; count++, jobj_idx++) {
-        HSD_GObj* gobj;
-        cfg->x78 = _tyDisplay_8031BC54(grid->sort[count].key);
-        gobj = cfg->x78;
-        if (gobj != NULL) {
-            _tyDisplay_804D6F10[jobj_idx] = (HSD_JObj*) gobj->hsd_obj;
-            HSD_JObjSetTranslateX(_tyDisplay_804D6F10[jobj_idx],
-                                  grid->pos[count].x);
-            HSD_JObjSetTranslateZ(_tyDisplay_804D6F10[jobj_idx],
-                                  grid->pos[count].z);
         }
     }
 }
 
 void _tyDisplay_80319994(s32 arg0)
 {
-    UNUSED u8 frame_pad[0x20];
-    TyDspPosTemps pos_temps;
-    UNUSED u8 pad1[4];
-    TySortElem sort_tmp0, sort_tmp1;
-    UNUSED u8 pad2[4];
-    TySortElem sort_tmp2;
-    s32 count;
     TyDspConfig* cfg = _tyDisplay_804D6F18;
+    TyDspGrid* grid = _tyDisplay_804D6F14;
     f32 xoff = 0.0f;
     s32 pivot;
-    TyDspGrid* grid = _tyDisplay_804D6F14;
-
-    memzero(grid, sizeof(*grid));
-    grid->x08_min_z = -3.5f;
-    grid->x04_min_x = -3.5f;
-    grid->x10_max_z = 3.5f;
-    grid->x0C_max_x = 3.5f;
-
+    s32 count;
+    PAD_STACK(0x20);
     {
-        TyDspGrid* cur = grid;
-        s32 ring;
-        s32 i;
-        s32 col;
-        s32 row;
+        pivot = arg0;
+        memzero(grid, sizeof(*grid));
+        grid->x08_min_z = -3.5f;
+        grid->x04_min_x = -3.5f;
+        grid->x10_max_z = 3.5f;
+        grid->x0C_max_x = 3.5f;
 
-        row = 0;
-        col = 0;
-        ring = 1;
-        i = 0;
-        for (; i < (count = cfg->x08); i++) {
-            if (i == 0) {
-                cur->pos[0].x = 0.0f;
-                cur->pos[0].z = 0.0f;
-            } else {
-                cur->pos[0].x = 9.0f * (f32) col + xoff;
-                if (arg0 != 0) {
-                    cur->pos[0].z = -9.0f * (f32) row;
+        {
+            TyDspGrid* cur = grid;
+            s32 ring;
+            s32 i;
+            s32 col;
+            s32 row;
+
+            row = 0;
+            col = 0;
+            ring = 1;
+            i = 0;
+            for (; i < (count = cfg->x08); i++) {
+                if (i == 0) {
+                    cur->pos[0].x = 0.0f;
+                    cur->pos[0].z = 0.0f;
                 } else {
-                    cur->pos[0].z = 9.0f * (f32) row;
-                }
-            }
-            col += 1;
-            if (col >= ring) {
-                xoff -= 4.5f;
-                col = 0;
-                row += 1;
-                ring += 1;
-            }
-            {
-                f32 x = cur->pos[0].x;
-                if (x < grid->x04_min_x) {
-                    grid->x04_min_x = x;
-                }
-            }
-            {
-                f32 x = cur->pos[0].x;
-                if (x > grid->x0C_max_x) {
-                    grid->x0C_max_x = x;
-                }
-            }
-            {
-                f32 z = cur->pos[0].z;
-                if (z < grid->x08_min_z) {
-                    grid->x08_min_z = z;
-                }
-            }
-            {
-                f32 z = cur->pos[0].z;
-                if (z > grid->x10_max_z) {
-                    grid->x10_max_z = z;
-                }
-            }
-            cur = (TyDspGrid*) ((size_t) cur + sizeof(TyDspPos));
-        }
-    }
-
-    _tyDisplay_80319994_sort_pos(grid, count, arg0, &pos_temps);
-
-    _tyDisplay_80318B1C(cfg->x08);
-
-    {
-        count = cfg->x08;
-        if (count > 1) {
-            s32 n2 = (count / 3) * 2;
-            if (n2 > 0) {
-                s32 mid = n2 / 2;
-                s32 n, j;
-
-                if (mid != 0) {
-                    sort_tmp0 = grid->sort[0];
-                    grid->sort[0] = grid->sort[mid];
-                    grid->sort[mid] = sort_tmp0;
-                }
-
-                pivot = 0;
-                j = 0;
-                for (n = 1; n2 >= n; n++) {
-                    if (*(s32*) &grid->sort[n].val >
-                        *(s32*) &grid->sort[0].val)
-                    {
-                        pivot += 1;
-                        j += 8;
-                        if (pivot != n) {
-                            TySortElem* s =
-                                (TySortElem*) ((size_t) grid + j + 0x14);
-                            sort_tmp1 = *s;
-                            *s = grid->sort[n];
-                            grid->sort[n] = sort_tmp1;
-                        }
+                    cur->pos[0].x = 9.0f * (f32) col + xoff;
+                    if (pivot != 0) {
+                        cur->pos[0].z = -9.0f * (f32) row;
+                    } else {
+                        cur->pos[0].z = 9.0f * (f32) row;
                     }
                 }
-
-                if (pivot != 0) {
-                    sort_tmp2 = grid->sort[0];
-                    grid->sort[0] = grid->sort[pivot];
-                    grid->sort[pivot] = sort_tmp2;
+                col += 1;
+                if (col >= ring) {
+                    xoff -= 4.5f;
+                    col = 0;
+                    row += 1;
+                    ring += 1;
                 }
+                {
+                    f32 x = cur->pos[0].x;
+                    if (x < grid->x04_min_x) {
+                        grid->x04_min_x = x;
+                    }
+                }
+                {
+                    f32 x = cur->pos[0].x;
+                    if (x > grid->x0C_max_x) {
+                        grid->x0C_max_x = x;
+                    }
+                }
+                {
+                    f32 z = cur->pos[0].z;
+                    if (z < grid->x08_min_z) {
+                        grid->x08_min_z = z;
+                    }
+                }
+                {
+                    f32 z = cur->pos[0].z;
+                    if (z > grid->x10_max_z) {
+                        grid->x10_max_z = z;
+                    }
+                }
+                cur = (TyDspGrid*) ((size_t) cur + sizeof(TyDspPos));
+            }
 
-                _tyDisplay_80318714(grid->sort, 0, pivot - 1);
-                _tyDisplay_80318714(grid->sort, pivot + 1, n2);
+            if (pivot != 0) {
+                _tyDisplay_80319994_sort_pos(grid, count);
             }
         }
+
+        _tyDisplay_80319540_sort(cfg, grid);
     }
 
     _tyDisplay_80319994_place(grid, cfg);
@@ -1742,9 +1552,10 @@ static inline void tyDisplay_SetGridSize(TyDspConfig* cfg, TyDspGrid* grid)
     case 1: {
         s32 count = cfg->x08;
         s32 toggle = 0;
+        s32 a;
         cfg->x75 = 1;
         cfg->x76 = 1;
-        while ((s8) cfg->x75 * (s8) cfg->x76 < count) {
+        while (a = (s8) cfg->x75, (void) a, a * (s8) cfg->x76 < count) {
             toggle ^= 1;
             if (toggle != 0 && (s8) cfg->x75 < 0x14) {
                 cfg->x75++;
@@ -1760,9 +1571,10 @@ static inline void tyDisplay_SetGridSize(TyDspConfig* cfg, TyDspGrid* grid)
     case 3: {
         s32 count = cfg->x08;
         s32 toggle = 0;
+        s32 a;
         cfg->x75 = 1;
         cfg->x76 = 1;
-        while ((s8) cfg->x75 * (s8) cfg->x76 < count) {
+        while (a = (s8) cfg->x75, (void) a, a * (s8) cfg->x76 < count) {
             toggle ^= 1;
             if (toggle != 0 && (s8) cfg->x75 < 0x14) {
                 cfg->x75++;
@@ -1801,8 +1613,11 @@ void tyDisplay_OnEnter_8031B460(void* arg0)
     TyDspConfig* cfg;
     TyDspBgData* data;
     TyDspGrid* grid;
+    HSD_CObj* cobj;
+    TyDspConfig* cfg2;
     int i;
-    PAD_STACK(12);
+    u8 kind;
+    PAD_STACK(8);
 
     _tyDisplay_804D6F10 =
         HSD_MemAlloc(sizeof(*_tyDisplay_804D6F10) * _tyDisplay_804D6F10_len);
@@ -1867,7 +1682,32 @@ void tyDisplay_OnEnter_8031B460(void* arg0)
 
     data->x104 = 0;
 
-    tyDisplay_SetupCameraAndBackground();
+    {
+        cfg2 = _tyDisplay_804D6F18;
+        cobj = lb_80013B14(HSD_ArchiveGetPublicAddress(
+            _tyDisplay_804D6F1C->archive, "ScMenDisplay_cam_int1_camera"));
+
+        cfg2->x00 = GObj_Create(1, 2, 0);
+        HSD_GObjObject_80390A70(cfg2->x00, kind = HSD_GObj_CameraKind, cobj);
+        GObj_SetupGXLinkMax(cfg2->x00, (GObj_RenderFunc) (Event) Toy_803068E0,
+                            0);
+
+        {
+            HSD_GObj* gobj = cfg2->x00;
+            gobj->gxlink_prios = 0x1230000000000000ULL;
+        }
+
+        if (_tyDisplay_804D6F20 != 0) {
+            HSD_GObj_SetupProc(cfg2->x00, (HSD_GObjEvent) _tyDisplay_8031A94C,
+                               0);
+        } else {
+            HSD_GObj_SetupProc(cfg2->x00, (HSD_GObjEvent) _tyDisplay_8031A4EC,
+                               0);
+        }
+        HSD_GObj_80390CD4(cfg2->x00);
+    }
+
+    _tyDisplay_8031B328();
     _tyDisplay_8031B1FC();
 
     if (_tyDisplay_804D6F20 != 0) {
