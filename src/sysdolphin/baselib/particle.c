@@ -1545,16 +1545,16 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         HSD_MtxSRT(srt->mmtx, &srt->scale, (Vec3*) rot,
                                    &srt->translate, NULL);
                     }
-                    pp->pos.x = pp->appsrt->mmtx[0][1] * pp->pos.y +
-                                pp->appsrt->mmtx[0][0] * pp->pos.x +
+                    pp->pos.x = pp->appsrt->mmtx[0][0] * pp->pos.x +
+                                pp->appsrt->mmtx[0][1] * pp->pos.y +
                                 pp->appsrt->mmtx[0][2] * pp->pos.z +
                                 pp->appsrt->mmtx[0][3];
-                    pp->pos.y = pp->appsrt->mmtx[1][1] * pp->pos.y +
-                                pp->appsrt->mmtx[1][0] * pp->pos.x +
+                    pp->pos.y = pp->appsrt->mmtx[1][0] * pp->pos.x +
+                                pp->appsrt->mmtx[1][1] * pp->pos.y +
                                 pp->appsrt->mmtx[1][2] * pp->pos.z +
                                 pp->appsrt->mmtx[1][3];
-                    pp->pos.z = pp->appsrt->mmtx[2][1] * pp->pos.y +
-                                pp->appsrt->mmtx[2][0] * pp->pos.x +
+                    pp->pos.z = pp->appsrt->mmtx[2][0] * pp->pos.x +
+                                pp->appsrt->mmtx[2][1] * pp->pos.y +
                                 pp->appsrt->mmtx[2][2] * pp->pos.z +
                                 pp->appsrt->mmtx[2][3];
                     psRemoveParticleAppSRT(pp);
