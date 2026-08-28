@@ -688,10 +688,6 @@ typedef struct StaffRollPoints {
     },
 };
 
-/* 3DD23C */ static char gm_803DD23C[] = {
-    0x25, 0x64, 0x20, 0x82, 0x67, 0x82, 0x68, 0x82, 0x73, 0,
-};
-
 /* 4DAAEC */ volatile const s32 gm_804DAAEC = 0xFFB40000;
 
 void fn_801AB200(HSD_GObj* gobj)
@@ -1145,7 +1141,7 @@ void fn_801AB200(HSD_GObj* gobj)
             }
 
             line_num = HSD_SisLib_803A6B98(gm_804D680C, 0.0f, 0.0f,
-                                           gm_803DD23C, tally_count);
+                                           "%d ＨＩＴ", tally_count);
             tally_color_copy = tally_color2;
             HSD_SisLib_803A74F0(gm_804D680C, line_num, &tally_color_copy);
 
