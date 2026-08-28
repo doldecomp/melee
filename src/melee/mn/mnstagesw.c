@@ -151,6 +151,20 @@ static void mnStageSw_802359C8(MnStageSwData* data)
     }
 }
 
+static inline s32 mnStageSw_IsRangeEmpty(u8 range_start, u8 range_end)
+{
+    s32 curr;
+
+    for (curr = range_start; curr <= range_end; curr++) {
+        if (gm_80164430(gm_801641CC(
+                mnStageSw_803ED4C4[(u8) curr])) != 0)
+        {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 static inline s32 mnStageSw_GetPreviousIndex(s32 offset, s32 index)
 {
     return index - offset;
@@ -159,7 +173,6 @@ static inline s32 mnStageSw_GetPreviousIndex(s32 offset, s32 index)
 static s32 mnStageSw_80235C58(u8 arg0)
 {
     s32 next;
-    s32 found;
     u8 low;
     s32 idx;
     u8 end;
@@ -183,17 +196,7 @@ static s32 mnStageSw_80235C58(u8 arg0)
         end = 28;
     }
 
-    curr = start;
-    while (curr <= end) {
-        if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) curr])) != 0) {
-            found = 0;
-            goto loop_done;
-        }
-        curr++;
-    }
-    found = 1;
-loop_done:
-    if (found != 0) {
+    if (mnStageSw_IsRangeEmpty(start, end) != 0) {
         return -1;
     }
 
