@@ -346,14 +346,14 @@ static void fn_803B61B4(u8* arg0)
     f32 scratch_f13_3;
     f32 scratch_f10;
     f32 scratch_f11;
-    f32 scratch_f22_2;
+    f32 scratch_f24_2;
     f32 scratch_f25;
     f32 scratch_f25_2;
-    s32 scratch_r5_6;
+    f32 scratch_f23_2;
     f32 scratch_f12_2;
     f32 scratch_f23;
     s32 scratch_r6_2;
-    f32 scratch_f24_2;
+    f32 scratch_f22_2;
     f32 scratch_f10_2;
     s32 scratch_r0;
     s32 scratch_r0_2;
@@ -370,7 +370,7 @@ static void fn_803B61B4(u8* arg0)
     f32 scratch_f13_2;
     f32 scratch_f22;
     f32 scratch_f31;
-    f32 scratch_f23_2;
+    s32 scratch_r5_6;
     s32 work_ctr;
     s32 work_ctr_2;
     s32 work_ctr_3;
