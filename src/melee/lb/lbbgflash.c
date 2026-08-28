@@ -735,6 +735,18 @@ static inline f32 sqrtf_store(f32 x, volatile f32* y)
     return x;
 }
 
+static inline void adjust_length(f32 limit_pow, f32 limit, f32* length_pow,
+                                 f32* length)
+{
+    f32 next_pow = *length * *length_pow;
+
+    *length_pow = next_pow;
+    if (*length > limit) {
+        *length = ((11.0f * limit) / 10.0f) +
+                  (-limit_pow / (10.0f * *length_pow));
+    }
+}
+
 void lbBgFlash_80021410(void* arg0)
 {
     IKState* data = arg0;
@@ -882,13 +894,7 @@ void lbBgFlash_80021410(void* arg0)
     len_pow = len_ab * len_pow;
     len_pow = len_ab * len_pow;
     len_pow = len_ab * len_pow;
-    {
-        f32 next_pow = len_ab * len_pow;
-        len_pow = next_pow;
-    }
-    if (len_ab > sum_len) {
-        len_ab = ((11.0f * sum_len) / 10.0f) + (-sum_pow / (10.0f * len_pow));
-    }
+    adjust_length(sum_pow, sum_len, &len_pow, &len_ab);
 
     a2 = len_bc * len_bc;
     b2 = len_ab * len_ab;
