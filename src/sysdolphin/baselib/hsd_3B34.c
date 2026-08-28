@@ -523,6 +523,10 @@ void hsd_803B3CD8(s32 arg0)
 {
     s32 work_r31;
     JpegWork* work;
+    s32 one;
+    s32 bit_count;
+    s32 mask;
+    u8 bit_buffer;
     s32 scratch_r5_9;
     s32 work_r28_2;
     s32 work_r28;
@@ -585,7 +589,7 @@ void hsd_803B3CD8(s32 arg0)
     u8* work_r7;
     u16* work_r27;
 
-    PAD_STACK(0x18);
+    PAD_STACK(0x10);
 
     work_r6 = arg0 == 0 ? lbl_80431678 : lbl_8043169C;
     work = (JpegWork*) &hsd_804D2648;
@@ -647,14 +651,22 @@ loop_13:
     scratch_r28 = work_r6[work_r31];
     work_r29 = work_r7[work_r31] - 1;
     for (; work_r29 >= 0; work_r29--) {
-        hsd_804D79AC += 1;
-        hsd_804D79B0 *= 2;
-        if (scratch_r28 & (1 << work_r29)) {
+        one = 1;
+        bit_count = hsd_804D79AC;
+        mask = one << work_r29;
+        bit_buffer = hsd_804D79B0;
+
+        hsd_804D79AC = bit_count + 1;
+        bit_buffer <<= one;
+        hsd_804D79B0 = bit_buffer;
+        if (scratch_r28 & mask) {
             hsd_804D79B0 |= 1;
         }
         if (hsd_804D79AC == 8) {
+            u8 output_byte = hsd_804D79B0;
+
             if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
-                *hsd_804D79A0++ = hsd_804D79B0;
+                *hsd_804D79A0++ = output_byte;
             } else {
                 longjmp(&work->jmp_buf, 1);
             }
@@ -677,14 +689,22 @@ loop_13:
         }
         work_r28 = work_r31 - 1;
         for (; work_r28 >= 0; work_r28--) {
-            hsd_804D79AC += 1;
-            hsd_804D79B0 *= 2;
-            if (work_r25 & (1 << work_r28)) {
+            one = 1;
+            bit_count = hsd_804D79AC;
+            mask = one << work_r28;
+            bit_buffer = hsd_804D79B0;
+
+            hsd_804D79AC = bit_count + 1;
+            bit_buffer <<= one;
+            hsd_804D79B0 = bit_buffer;
+            if (work_r25 & mask) {
                 hsd_804D79B0 |= 1;
             }
             if (hsd_804D79AC == 8) {
+                u8 output_byte = hsd_804D79B0;
+
                 if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
-                    *hsd_804D79A0++ = hsd_804D79B0;
+                    *hsd_804D79A0++ = output_byte;
                 } else {
                     longjmp(&work->jmp_buf, 1);
                 }
@@ -757,14 +777,22 @@ loop_13:
             scratch_r31 = work_r27[work_r28_2];
             work_r29_2 = *(work_r26 + work_r28_2) - 1;
             for (; work_r29_2 >= 0; work_r29_2--) {
-                hsd_804D79AC += 1;
-                hsd_804D79B0 *= 2;
-                if (scratch_r31 & (1 << work_r29_2)) {
+                one = 1;
+                bit_count = hsd_804D79AC;
+                mask = one << work_r29_2;
+                bit_buffer = hsd_804D79B0;
+
+                hsd_804D79AC = bit_count + 1;
+                bit_buffer <<= one;
+                hsd_804D79B0 = bit_buffer;
+                if (scratch_r31 & mask) {
                     hsd_804D79B0 |= 1;
                 }
                 if (hsd_804D79AC == 8) {
+                    u8 output_byte = hsd_804D79B0;
+
                     if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
-                        *hsd_804D79A0++ = hsd_804D79B0;
+                        *hsd_804D79A0++ = output_byte;
                     } else {
                         longjmp(&work->jmp_buf, 1);
                     }
@@ -783,14 +811,22 @@ loop_13:
             }
             work_r28_3 = work_r28_2 - 1;
             for (; work_r28_3 >= 0; work_r28_3--) {
-                hsd_804D79AC += 1;
-                hsd_804D79B0 *= 2;
-                if ((work_r24 + 1) & (1 << work_r28_3)) {
+                one = 1;
+                bit_count = hsd_804D79AC;
+                mask = one << work_r28_3;
+                bit_buffer = hsd_804D79B0;
+
+                hsd_804D79AC = bit_count + 1;
+                bit_buffer <<= one;
+                hsd_804D79B0 = bit_buffer;
+                if ((work_r24 + 1) & mask) {
                     hsd_804D79B0 |= 1;
                 }
                 if (hsd_804D79AC == 8) {
+                    u8 output_byte = hsd_804D79B0;
+
                     if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
-                        *hsd_804D79A0++ = hsd_804D79B0;
+                        *hsd_804D79A0++ = output_byte;
                     } else {
                         longjmp(&work->jmp_buf, 1);
                     }
@@ -857,14 +893,22 @@ loop_13:
             scratch_r31_2 = work_r27[work_r28_4];
             work_r29_3 = *(work_r26 + work_r28_4) - 1;
             for (; work_r29_3 >= 0; work_r29_3--) {
-                hsd_804D79AC += 1;
-                hsd_804D79B0 *= 2;
-                if (scratch_r31_2 & (1 << work_r29_3)) {
+                one = 1;
+                bit_count = hsd_804D79AC;
+                mask = one << work_r29_3;
+                bit_buffer = hsd_804D79B0;
+
+                hsd_804D79AC = bit_count + 1;
+                bit_buffer <<= one;
+                hsd_804D79B0 = bit_buffer;
+                if (scratch_r31_2 & mask) {
                     hsd_804D79B0 |= 1;
                 }
                 if (hsd_804D79AC == 8) {
+                    u8 output_byte = hsd_804D79B0;
+
                     if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
-                        *hsd_804D79A0++ = hsd_804D79B0;
+                        *hsd_804D79A0++ = output_byte;
                     } else {
                         longjmp(&work->jmp_buf, 1);
                     }
@@ -886,14 +930,22 @@ loop_13:
             }
             work_r28_5 = work_r28_4 - 1;
             for (; work_r28_5 >= 0; work_r28_5--) {
-                hsd_804D79AC += 1;
-                hsd_804D79B0 *= 2;
-                if (work_r22 & (1 << work_r28_5)) {
+                one = 1;
+                bit_count = hsd_804D79AC;
+                mask = one << work_r28_5;
+                bit_buffer = hsd_804D79B0;
+
+                hsd_804D79AC = bit_count + 1;
+                bit_buffer <<= one;
+                hsd_804D79B0 = bit_buffer;
+                if (work_r22 & mask) {
                     hsd_804D79B0 |= 1;
                 }
                 if (hsd_804D79AC == 8) {
+                    u8 output_byte = hsd_804D79B0;
+
                     if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
-                        *hsd_804D79A0++ = hsd_804D79B0;
+                        *hsd_804D79A0++ = output_byte;
                     } else {
                         longjmp(&work->jmp_buf, 1);
                     }
@@ -921,14 +973,22 @@ loop_13:
         scratch_r29 = *work_r27;
         work_r28_6 = *work_r26 - 1;
         for (; work_r28_6 >= 0; work_r28_6--) {
-            hsd_804D79AC += 1;
-            hsd_804D79B0 *= 2;
-            if (scratch_r29 & (1 << work_r28_6)) {
+            one = 1;
+            bit_count = hsd_804D79AC;
+            mask = one << work_r28_6;
+            bit_buffer = hsd_804D79B0;
+
+            hsd_804D79AC = bit_count + 1;
+            bit_buffer <<= one;
+            hsd_804D79B0 = bit_buffer;
+            if (scratch_r29 & mask) {
                 hsd_804D79B0 |= 1;
             }
             if (hsd_804D79AC == 8) {
+                u8 output_byte = hsd_804D79B0;
+
                 if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
-                    *hsd_804D79A0++ = hsd_804D79B0;
+                    *hsd_804D79A0++ = output_byte;
                 } else {
                     longjmp(&work->jmp_buf, 1);
                 }
