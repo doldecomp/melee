@@ -310,8 +310,8 @@ float lbColl_80005FC0(Vec3* arg0, Vec3* arg1, Vec3* arg2, float* arg3)
 
 static inline bool end(Vec3* a, Vec3* b, float unk_sum)
 {
-    float y = a->y - b->y;
     float x = a->x - b->x;
+    float y = a->y - b->y;
     float z = a->z - b->z;
 
     if (unk_sum * unk_sum < z * z + (x * x + y * y)) {
