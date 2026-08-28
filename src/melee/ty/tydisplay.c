@@ -752,7 +752,7 @@ static inline void _tyDisplay_80319540_sort_and_place(TyDspConfig* cfg,
                 TySortElem tmp1, tmp0;
             } temps;
             TyDspGrid* cur;
-            s32 pivot, n, j;
+            s32 pivot, n;
 
             k = n2 / 2;
             if (k != 0) {
@@ -762,16 +762,15 @@ static inline void _tyDisplay_80319540_sort_and_place(TyDspConfig* cfg,
             }
 
             pivot = 0;
-            j = 0;
             cur = (TyDspGrid*) ((size_t) grid + sizeof(TySortElem));
             for (n = 1; n2 >= n;
                  cur = (TyDspGrid*) ((size_t) cur + sizeof(TySortElem)), n++)
             {
                 if (*(s32*) &cur->sort[0].val > *(s32*) &grid->sort[0].val) {
                     pivot += 1;
-                    j += 8;
                     if (pivot != n) {
-                        TySortElem* s = tyDisplay_GetGridSortElem(j, grid);
+                        TySortElem* s = tyDisplay_GetGridSortElem(
+                            pivot * sizeof(TySortElem), grid);
                         temps.tmp1 = *s;
                         *s = cur->sort[0];
                         cur->sort[0] = temps.tmp1;
