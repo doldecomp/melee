@@ -263,6 +263,7 @@ static inline void mnInfo_CreateEntries(MnInfoData* data)
 
     gobj = mnInfo_804D6C78;
     trophy = &mnInfo_804A0968[data->scroll_idx];
+    (void) trophy;
     for (i = 0; i < 4; i++) {
         if (mnInfo_80251A08(*trophy) != 0) {
             u8 id = *trophy;
