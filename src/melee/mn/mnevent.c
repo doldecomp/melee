@@ -166,7 +166,7 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
     f32 text_x;
     f32 text_y;
     HSD_JObj* tree;
-    PAD_STACK(0x40);
+    PAD_STACK(0x28);
 
     tree = mnEvent_804D6C60->hsd_obj;
     data = mnEvent_804D6C60->user_data;
