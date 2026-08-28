@@ -31,6 +31,7 @@
 #include "gmtiny.h"
 #include "gmtitle.h"
 #include "gmtoulib.h"
+#include "gmtoumode.h"
 #include "gmtrainingmode.h"
 #include "gmvsmelee.h"
 #include "types.h"

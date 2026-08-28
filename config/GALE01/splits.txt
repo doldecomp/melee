@@ -2548,8 +2548,12 @@ melee/gm/gm_1B0FF.c:
 	.sbss       start:0x804D68B0 end:0x804D68C0
 
 melee/gm/gm_1B14.c:
-	.text       start:0x801B14A0 end:0x801B1B74
-	.data       start:0x803DD9A0 end:0x803DDB80
+	.text       start:0x801B14A0 end:0x801B1724
+	.data       start:0x803DD9A0 end:0x803DDAC0
+
+melee/gm/gmtoumode.c:
+	.text       start:0x801B1724 end:0x801B1B74
+	.data       start:0x803DDAC0 end:0x803DDB80
 
 melee/gm/gmtrainingmode.c:
 	.text       start:0x801B1B74 end:0x801B23F0
