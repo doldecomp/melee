@@ -2379,9 +2379,9 @@ void fn_8017FF1C(HSD_GObj* gobj)
     u8 mask;
     HSD_JObj* sp28;
 
-    data.state = &lbl_80472D28;
+    data.state = (data.state = &lbl_80472D28);
     jobj = gobj->hsd_obj;
-    HSD_JObjAnimAll(gobj->hsd_obj);
+    HSD_JObjAnimAll(jobj);
 
     if (data.arg->x118 == 0) {
         fn_8017F608(data.arg);
