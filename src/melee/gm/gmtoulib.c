@@ -468,23 +468,32 @@ static inline f32 gmTournament_GetBracketSlideYReverse(BracketEntrySlot* slot)
     return -((f32) slot->x48 - 0.3f * (f32) lbl_804D6630);
 }
 
-static inline HSD_JObj* fn_8018B090_inline0(s32 i, s32 idx)
+static inline HSD_JObj*
+fn_8018B090_inline0(BracketEntry* bracket_entries, s32 bracket_slot_index,
+                     s32 bracket_entry_index)
 {
-    return lbl_80473AB8[idx].slots[i].x2C->hsd_obj;
+    return bracket_entries[bracket_entry_index]
+        .slots[bracket_slot_index]
+        .x2C->hsd_obj;
 }
 
-static inline HSD_JObj* fn_8018B090_inline1(s32 idx)
+static inline HSD_JObj*
+fn_8018B090_inline1(BracketEntry* bracket_entries, s32 bracket_entry_index)
 {
-    return lbl_80473AB8[idx].slots[lbl_804D6634].x2C->hsd_obj;
+    return bracket_entries[bracket_entry_index]
+        .slots[lbl_804D6634]
+        .x2C->hsd_obj;
 }
 
-static inline BracketEntry* fn_8018B090_inline2(s32 idx)
+static inline BracketEntry*
+fn_8018B090_inline2(BracketEntry* bracket_entries, s32 bracket_entry_index)
 {
-    return &lbl_80473AB8[idx];
+    return &bracket_entries[bracket_entry_index];
 }
 
 void fn_8018B090(HSD_GObj* arg0)
 {
+    BracketEntry* entries = lbl_80473AB8;
     TmData* tm = gm_GetTournamentData();
     s32 var_r24 = 0;
     s32 idx = fn_8018F74C();
@@ -495,30 +504,30 @@ void fn_8018B090(HSD_GObj* arg0)
         lbl_804D6630 = 0;
         return;
     case 21:
-        if (lbl_80473AB8[idx].x18 != 0) {
+        if (entries[idx].x18 != 0) {
             for (i = 0; i < 4; i++) {
-                if (lbl_80473AB8[idx].slots[i].x30 != 0) {
+                if (entries[idx].slots[i].x30 != 0) {
                     HSD_JObj* jobj;
                     HSD_JObj* jobj2;
-                    jobj = fn_8018B090_inline0(i, idx);
+                    jobj = fn_8018B090_inline0(entries, i, idx);
                     jobj2 = jobj;
-                    if (lbl_80473AB8[idx].x2 != 0) {
+                    if (entries[idx].x2 != 0) {
                         HSD_JObjSetTranslateY(
                             jobj2, gmTournament_GetBracketSlideYReverse(
-                                       &lbl_80473AB8[idx].slots[i]));
+                                       &entries[idx].slots[i]));
                     } else {
-                        switch (lbl_80473AB8[idx].x4) {
+                        switch (entries[idx].x4) {
                         case 1:
                             if (i == 0) {
                                 HSD_JObjSetTranslateY(
                                     jobj2,
                                     gmTournament_GetBracketSlideYForward(
-                                        &lbl_80473AB8[idx].slots[i]));
+                                        &entries[idx].slots[i]));
                             } else {
                                 HSD_JObjSetTranslateY(
                                     jobj2,
                                     gmTournament_GetBracketSlideYReverse(
-                                        &lbl_80473AB8[idx].slots[i]));
+                                        &entries[idx].slots[i]));
                             }
                             break;
                         case 2:
@@ -527,18 +536,18 @@ void fn_8018B090(HSD_GObj* arg0)
                                 HSD_JObjSetTranslateY(
                                     jobj2,
                                     gmTournament_GetBracketSlideYForward(
-                                        &lbl_80473AB8[idx].slots[i]));
+                                        &entries[idx].slots[i]));
                             } else {
                                 HSD_JObjSetTranslateY(
                                     jobj2,
                                     gmTournament_GetBracketSlideYReverse(
-                                        &lbl_80473AB8[idx].slots[i]));
+                                        &entries[idx].slots[i]));
                             }
                             break;
                         default:
                             HSD_JObjSetTranslateY(
                                 jobj2, gmTournament_GetBracketSlideYForward(
-                                           &lbl_80473AB8[idx].slots[i]));
+                                           &entries[idx].slots[i]));
                             break;
                         }
                     }
@@ -548,18 +557,18 @@ void fn_8018B090(HSD_GObj* arg0)
         lbl_804D6630 += 1;
         return;
     case 22: {
-        s32 h = lbl_80473AB8[idx].x18;
+        s32 h = entries[idx].x18;
         if (h) {
             f32 d;
             lbl_803D9DAC.current.x = 320.0f;
             lbl_803D9DAC.current.y = -240.0f;
             lbl_803D9DAC.current.z = 0.0f;
             lbl_803D9DAC.target.x =
-                (f32) (lbl_80473AB8[idx].xC + (lbl_80473AB8[idx].x14 / 2));
-            lbl_803D9DAC.target.y = -(f32) (lbl_80473AB8[idx].x10 + (h / 2));
+                (f32) (entries[idx].xC + (entries[idx].x14 / 2));
+            lbl_803D9DAC.target.y = -(f32) (entries[idx].x10 + (h / 2));
             lbl_803D9DAC.target.z = -150.0f;
             d = lbl_803D9DAC.target.x - lbl_803D9DAC.current.x;
-            d = 0.033333f * d;
+            d *= 0.033333f;
             if (d < 0.0f) {
                 d = -d;
             }
@@ -579,7 +588,7 @@ void fn_8018B090(HSD_GObj* arg0)
         lbl_804D6630 = 0;
         /* fallthrough */
     case 23:
-        if (lbl_80473AB8[idx].x18 != 0) {
+        if (entries[idx].x18 != 0) {
             s32 amount = lbl_804D6630 / 6;
             lbl_804D6630 += 1;
             if (mn_8022F410(&lbl_803D9DAC.current.x, &lbl_803D9DAC.target.x,
@@ -611,55 +620,55 @@ void fn_8018B090(HSD_GObj* arg0)
             }
             fn_80190520(lbl_803D9DAC.current.x, lbl_803D9DAC.current.y,
                         lbl_803D9DAC.current.z);
-            if (lbl_80473AB8[idx].x4 != 1) {
+            if (entries[idx].x4 != 1) {
                 for (i = 0; i < 4; i++) {
-                    if (lbl_80473AB8[idx].slots[i].x30 != 0) {
-                        mn_8022F470((int*) &lbl_80473AB8[idx].slots[i].x48,
-                                    (int*) &lbl_80473AB8[idx].slots[i].x40,
+                    if (entries[idx].slots[i].x30 != 0) {
+                        mn_8022F470((int*) &entries[idx].slots[i].x48,
+                                    (int*) &entries[idx].slots[i].x40,
                                     amount);
                         {
-                            f32 y = -(f32) lbl_80473AB8[idx].slots[i].x48;
+                            f32 y = -(f32) entries[idx].slots[i].x48;
                             HSD_JObjSetTranslateY(
-                                lbl_80473AB8[idx].slots[i].x2C->hsd_obj, y);
+                                entries[idx].slots[i].x2C->hsd_obj, y);
                         }
                     }
                 }
                 return;
             }
             for (i = 0; i < 4; i++) {
-                if (lbl_80473AB8[idx].slots[i].x30 != 0) {
-                    lbl_80473AB8[idx].slots[i].x40 =
-                        lbl_80473AB8[idx].slots[i].x48;
+                if (entries[idx].slots[i].x30 != 0) {
+                    entries[idx].slots[i].x40 =
+                        entries[idx].slots[i].x48;
                 }
             }
         }
         return;
     case 24:
-        if (lbl_80473AB8[idx].x18 != 0) {
+        if (entries[idx].x18 != 0) {
             struct lbl_803B7C80_t sp;
             s32* arr;
             sp = lbl_803B7C80;
             arr = sp.v;
             lbl_804D6630 += 1;
             for (i = 0; i < 4; i++) {
-                if (lbl_80473AB8[idx].slots[i].x30 != 0) {
-                    HSD_JObj* jobj = lbl_80473AB8[idx].slots[i].x2C->hsd_obj;
-                    if (lbl_80473AB8[idx].x2 != 0) {
+                if (entries[idx].slots[i].x30 != 0) {
+                    HSD_JObj* jobj = entries[idx].slots[i].x2C->hsd_obj;
+                    if (entries[idx].x2 != 0) {
                         HSD_JObjSetTranslateY(
-                            jobj, -((f32) lbl_80473AB8[idx].slots[i].x40 -
+                            jobj, -((f32) entries[idx].slots[i].x40 -
                                     (0.1f * (f32) arr[lbl_804D6630 % 10])));
                     } else {
-                        switch (lbl_80473AB8[idx].x4) {
+                        switch (entries[idx].x4) {
                         case 1:
                             if (i == 0) {
                                 HSD_JObjSetTranslateY(
                                     jobj,
                                     -((0.1f * (f32) arr[lbl_804D6630 % 10]) +
-                                      (f32) lbl_80473AB8[idx].slots[i].x40));
+                                      (f32) entries[idx].slots[i].x40));
                             } else {
                                 HSD_JObjSetTranslateY(
                                     jobj,
-                                    -((f32) lbl_80473AB8[idx].slots[i].x40 -
+                                    -((f32) entries[idx].slots[i].x40 -
                                       (0.1f * (f32) arr[lbl_804D6630 % 10])));
                             }
                             break;
@@ -669,18 +678,18 @@ void fn_8018B090(HSD_GObj* arg0)
                                 HSD_JObjSetTranslateY(
                                     jobj,
                                     -((0.1f * (f32) arr[lbl_804D6630 % 10]) +
-                                      (f32) lbl_80473AB8[idx].slots[i].x40));
+                                      (f32) entries[idx].slots[i].x40));
                             } else {
                                 HSD_JObjSetTranslateY(
                                     jobj,
-                                    -((f32) lbl_80473AB8[idx].slots[i].x40 -
+                                    -((f32) entries[idx].slots[i].x40 -
                                       (0.1f * (f32) arr[lbl_804D6630 % 10])));
                             }
                             break;
                         default:
                             HSD_JObjSetTranslateY(
                                 jobj, -((0.1f * (f32) arr[lbl_804D6630 % 10]) +
-                                        (f32) lbl_80473AB8[idx].slots[i].x40));
+                                        (f32) entries[idx].slots[i].x40));
                             break;
                         }
                     }
@@ -690,27 +699,27 @@ void fn_8018B090(HSD_GObj* arg0)
         return;
     case 25:
         for (i = 0; i < 4; i++) {
-            if (lbl_80473AB8[idx].slots[i].x30 != 0) {
-                lbl_80473AB8[idx].slots[i].x48 =
-                    lbl_80473AB8[idx].slots[i].x40;
+            if (entries[idx].slots[i].x30 != 0) {
+                entries[idx].slots[i].x48 =
+                    entries[idx].slots[i].x40;
             }
         }
         return;
     case 32: {
-        s32 h = lbl_80473AB8[idx].x18;
+        s32 h = entries[idx].x18;
         if (h != 0) {
             fn_80190520(
-                (f32) (lbl_80473AB8[idx].xC + (lbl_80473AB8[idx].x14 / 2)),
-                -(f32) (lbl_80473AB8[idx].x10 + (h / 2)), -150.0f);
+                (f32) (entries[idx].xC + (entries[idx].x14 / 2)),
+                -(f32) (entries[idx].x10 + (h / 2)), -150.0f);
             for (i = 0; i < 4; i++) {
-                if (lbl_80473AB8[idx].slots[i].x4C == 0) {
-                    lbl_80473AB8[idx].slots[i].x3C =
-                        lbl_80473AB8[idx].xC + (lbl_80473AB8[idx].x14 / 2);
+                if (entries[idx].slots[i].x4C == 0) {
+                    entries[idx].slots[i].x3C =
+                        entries[idx].xC + (entries[idx].x14 / 2);
                 } else {
-                    s32 t = lbl_80473AB8[idx].slots[i].x40;
-                    lbl_80473AB8[idx].slots[i].x40 =
-                        lbl_80473AB8[idx].slots[i].x38;
-                    lbl_80473AB8[idx].slots[i].x38 = t;
+                    s32 t = entries[idx].slots[i].x40;
+                    entries[idx].slots[i].x40 =
+                        entries[idx].slots[i].x38;
+                    entries[idx].slots[i].x38 = t;
                 }
             }
         } else {
@@ -720,48 +729,49 @@ void fn_8018B090(HSD_GObj* arg0)
         tm->cur_option = 0x21;
         return;
     case 33:
-        if (lbl_80473AB8[idx].x18 != 0) {
+        if (entries[idx].x18 != 0) {
             for (i = 0; i < 4; i++) {
-                if (lbl_80473AB8[idx].slots[i].x30 == 0) {
+                if (entries[idx].slots[i].x30 == 0) {
                     var_r24 += 1;
                 } else {
-                    u8 t5 = lbl_80473AB8[idx].slots[i].x4C;
+                    u8 t5 = entries[idx].slots[i].x4C;
                     if (t5 == 0) {
                         lbl_804D6634 = i;
-                        if (lbl_80473AB8[idx].x4 != 1) {
-                            mn_8022F470((int*) &lbl_80473AB8[idx].slots[i].x44,
-                                        (int*) &lbl_80473AB8[idx].slots[i].x3C,
+                        if (entries[idx].x4 != 1) {
+                            mn_8022F470((int*) &entries[idx].slots[i].x44,
+                                        (int*) &entries[idx].slots[i].x3C,
                                         2);
-                            if (lbl_80473AB8[idx].slots[i].x44 ==
-                                lbl_80473AB8[idx].slots[i].x3C)
+                            if (entries[idx].slots[i].x44 ==
+                                entries[idx].slots[i].x3C)
                             {
                                 var_r24 += 1;
                             }
                             HSD_JObjSetTranslateX(
-                                lbl_80473AB8[idx].slots[i].x2C->hsd_obj,
-                                (f32) lbl_80473AB8[idx].slots[i].x44);
+                                entries[idx].slots[i].x2C->hsd_obj,
+                                (f32) entries[idx].slots[i].x44);
                         } else {
                             var_r24 += 1;
                         }
                     } else {
-                        mn_8022F470((int*) &lbl_80473AB8[idx].slots[i].x48,
-                                    (int*) &lbl_80473AB8[idx].slots[i].x40,
+                        mn_8022F470((int*) &entries[idx].slots[i].x48,
+                                    (int*) &entries[idx].slots[i].x40,
                                     t5 + ((t5 + 1) / 2));
-                        if (lbl_80473AB8[idx].slots[i].x48 ==
-                            lbl_80473AB8[idx].slots[i].x40)
+                        if (entries[idx].slots[i].x48 ==
+                            entries[idx].slots[i].x40)
                         {
                             var_r24 += 1;
                         }
                         HSD_JObjSetTranslateY(
-                            lbl_80473AB8[idx].slots[i].x2C->hsd_obj,
-                            -(f32) lbl_80473AB8[idx].slots[i].x48);
+                            entries[idx].slots[i].x2C->hsd_obj,
+                            -(f32) entries[idx].slots[i].x48);
                     }
                 }
             }
             if (var_r24 == 4) {
-                lbl_80473AB8[idx].slots[lbl_804D6634].x3C =
+                s32 slot_idx = lbl_804D6634;
+                entries[idx].slots[slot_idx].x3C =
                     lbl_803D9E1C[tm->entrants][0];
-                lbl_80473AB8[idx].slots[lbl_804D6634].x40 =
+                entries[idx].slots[slot_idx].x40 =
                     lbl_803D9E1C[tm->entrants][1];
                 tm->cur_option = 0x22;
             }
@@ -770,16 +780,16 @@ void fn_8018B090(HSD_GObj* arg0)
         }
         return;
     case 34:
-        if (lbl_80473AB8[idx].x18 != 0) {
+        if (entries[idx].x18 != 0) {
             if (tm->x33 == 5) {
-                mn_8022F470((int*) &lbl_80473AB8[idx].slots[lbl_804D6634].x44,
-                            (int*) &lbl_80473AB8[idx].slots[lbl_804D6634].x3C,
+                mn_8022F470((int*) &entries[idx].slots[lbl_804D6634].x44,
+                            (int*) &entries[idx].slots[lbl_804D6634].x3C,
                             2);
                 HSD_JObjSetTranslateX(
-                    fn_8018B090_inline1(idx),
-                    (f32) lbl_80473AB8[idx].slots[lbl_804D6634].x44);
-                if (lbl_80473AB8[idx].slots[lbl_804D6634].x44 ==
-                    lbl_80473AB8[idx].slots[lbl_804D6634].x3C)
+                    fn_8018B090_inline1(entries, idx),
+                    (f32) entries[idx].slots[lbl_804D6634].x44);
+                if (entries[idx].slots[lbl_804D6634].x44 ==
+                    entries[idx].slots[lbl_804D6634].x3C)
                 {
                     tm->cur_option = 0x23;
                 }
@@ -793,16 +803,16 @@ void fn_8018B090(HSD_GObj* arg0)
         }
         return;
     case 35:
-        if (lbl_80473AB8[idx].x18 != 0) {
+        if (entries[idx].x18 != 0) {
             if (tm->x33 == 5) {
-                mn_8022F470((int*) &lbl_80473AB8[idx].slots[lbl_804D6634].x48,
-                            (int*) &lbl_80473AB8[idx].slots[lbl_804D6634].x40,
+                mn_8022F470((int*) &entries[idx].slots[lbl_804D6634].x48,
+                            (int*) &entries[idx].slots[lbl_804D6634].x40,
                             2);
                 HSD_JObjSetTranslateY(
-                    fn_8018B090_inline1(idx),
-                    -(f32) lbl_80473AB8[idx].slots[lbl_804D6634].x48);
-                if (lbl_80473AB8[idx].slots[lbl_804D6634].x48 ==
-                    lbl_80473AB8[idx].slots[lbl_804D6634].x40)
+                    fn_8018B090_inline1(entries, idx),
+                    -(f32) entries[idx].slots[lbl_804D6634].x48);
+                if (entries[idx].slots[lbl_804D6634].x48 ==
+                    entries[idx].slots[lbl_804D6634].x40)
                 {
                     tm->x33 = 6;
                 }
@@ -816,12 +826,12 @@ void fn_8018B090(HSD_GObj* arg0)
         }
         return;
     case 36: {
-        s32 h = lbl_80473AB8[idx].x18;
+        s32 h = entries[idx].x18;
         if (h != 0) {
             f32 d;
             lbl_803D9DAC.current.x =
-                (f32) (lbl_80473AB8[idx].xC + (lbl_80473AB8[idx].x14 / 2));
-            lbl_803D9DAC.current.y = -(f32) ((h / 2) + lbl_80473AB8[idx].x10);
+                (f32) (entries[idx].xC + (entries[idx].x14 / 2));
+            lbl_803D9DAC.current.y = -(f32) ((h / 2) + entries[idx].x10);
             lbl_803D9DAC.current.z = -150.0f;
             lbl_803D9DAC.target.x = 320.0f;
             lbl_803D9DAC.target.y = -240.0f;
@@ -846,7 +856,7 @@ void fn_8018B090(HSD_GObj* arg0)
         tm->cur_option = 0x25;
         return;
     case 37:
-        if (lbl_80473AB8[idx].x18 == 0) {
+        if (entries[idx].x18 == 0) {
             lbl_804D6630 = 0x78;
         }
         if (lbl_804D6630 < 0x78) {
@@ -866,7 +876,7 @@ void fn_8018B090(HSD_GObj* arg0)
         tm->cur_option = 0x26;
         return;
     case 38:
-        if (lbl_80473AB8[idx].x18 == 0) {
+        if (entries[idx].x18 == 0) {
             lbl_804D6630 = 0x78;
         }
         if (lbl_804D6630 < 0x78) {
@@ -879,27 +889,27 @@ void fn_8018B090(HSD_GObj* arg0)
             u8* next_entry;
             u8* next_slot;
             for (i = 0; i < 4; i++) {
-                if (lbl_80473AB8[idx].slots[i].x4C == 0) {
+                if (entries[idx].slots[i].x4C == 0) {
                     break;
                 }
                 r = i + 1;
             }
-            src = fn_8018B090_inline2(fn_8018F74C());
+            src = fn_8018B090_inline2(entries, fn_8018F74C());
             src->x1 = 0;
             next_entry = &src->x5;
             next_slot = &src->x6;
-            lbl_80473AB8[*next_entry].slots[*next_slot].x30 = 1;
-            lbl_80473AB8[*next_entry].slots[*next_slot].x50 =
+            entries[*next_entry].slots[*next_slot].x30 = 1;
+            entries[*next_entry].slots[*next_slot].x50 =
                 src->slots[r].x50;
-            lbl_80473AB8[*next_entry].slots[*next_slot].x51 =
+            entries[*next_entry].slots[*next_slot].x51 =
                 src->slots[r].x51;
-            lbl_80473AB8[*next_entry].slots[*next_slot].x52 =
+            entries[*next_entry].slots[*next_slot].x52 =
                 src->slots[r].x52;
-            lbl_80473AB8[*next_entry].slots[*next_slot].x4D =
+            entries[*next_entry].slots[*next_slot].x4D =
                 src->slots[r].x4D;
-            lbl_80473AB8[*next_entry].slots[*next_slot].x4E =
+            entries[*next_entry].slots[*next_slot].x4E =
                 src->slots[r].x4E;
-            lbl_80473AB8[*next_entry].slots[*next_slot].x4F =
+            entries[*next_entry].slots[*next_slot].x4F =
                 src->slots[r].x4F;
             src->slots[r].x30 = 0;
             src->slots[r].x4E = 3;
