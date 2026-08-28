@@ -3853,10 +3853,9 @@ after_verify:
 
         if ((u32) remaining > (u32) (chunk = fn_803AF3F0_chunk_size(state))) {
             if (arg3 != 0) {
-                s32 block = block_map[1][i];
                 s32 cmd_result = fn_803AF3F0_queue_write_first(
-                    state, block, blocks_before + i, current_seq, data, chunk,
-                    arg1);
+                    state, block_map[1][i], blocks_before + i, current_seq,
+                    data, chunk, arg1);
                 if (cmd_result < 0) {
                     fn_803AF3F0_rewind(entries);
                     return cmd_result;
