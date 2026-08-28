@@ -527,12 +527,14 @@ void grZebes_801D881C(HSD_GObj* gobj)
         int i;
         f32 colWidth;
         f32 left_x;
+        f32* heights;
 
         mpJointListAdd(0);
         mpLib_80057424(0);
 
         colWidth = (grZe_8049F140[1].x - grZe_8049F140[0].x) / 5.0f;
         left_x = grZe_8049F140[0].x;
+        heights = col_heights;
 
         col_heights[0] = -9999.0f;
         col_heights[1] = -9999.0f;
@@ -605,13 +607,13 @@ void grZebes_801D881C(HSD_GObj* gobj)
 
         for (i = 0; i < 5; i++) {
             if (i != 0) {
-                if (col_heights[i] < col_heights[i + 1] - colWidth) {
-                    col_heights[i] = col_heights[i + 1] - colWidth;
+                if (heights[i] < heights[i + 1] - colWidth) {
+                    heights[i] = heights[i + 1] - colWidth;
                 }
             }
             if (i != 5) {
-                if (col_heights[i + 1] < col_heights[i] - colWidth) {
-                    col_heights[i + 1] = col_heights[i] - colWidth;
+                if (heights[i + 1] < heights[i] - colWidth) {
+                    heights[i + 1] = heights[i] - colWidth;
                 }
             }
         }
