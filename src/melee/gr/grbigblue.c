@@ -4221,11 +4221,9 @@ static inline void grBigBlue_801EE398_inline(s32 arg2, s32 arg1,
                 *(f32*) (car + 0x10C) = 0.0f;
 
                 {
-                    f32 hi_f = yakumono_param->x60;
-                    f32 lo_f = yakumono_param->x5C;
-                    s32 hi = (s32) hi_f;
-                    s32 lo = (s32) lo_f;
-                    if ((s32) lo_f > (s32) hi_f) {
+                    s32 hi = (s32) yakumono_param->x60;
+                    s32 lo = (s32) yakumono_param->x5C;
+                    if (lo > hi) {
                         s32 diff = lo - hi;
                         s32 rand_val;
                         if (diff != 0) {
@@ -4361,11 +4359,9 @@ static inline void grBigBlue_801EE398_inline(s32 arg2, s32 arg1,
                 *(f32*) (car + 0x10C) = 0.0f;
 
                 {
-                    f32 hi_f = yakumono_param->x60;
-                    f32 lo_f = yakumono_param->x5C;
-                    s32 hi = (s32) hi_f;
-                    s32 lo = (s32) lo_f;
-                    if ((s32) lo_f > (s32) hi_f) {
+                    s32 hi = (s32) yakumono_param->x60;
+                    s32 lo = (s32) yakumono_param->x5C;
+                    if (lo > hi) {
                         s32 diff = lo - hi;
                         s32 rand_val;
                         if (diff != 0) {
