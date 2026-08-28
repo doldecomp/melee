@@ -3433,7 +3433,8 @@ after_verify:
 
 static inline s32 fn_803AF3F0_chunk_size(CardState* state)
 {
-    return state->x8 - 0x20;
+    u32 sector_size = state->x8;
+    return sector_size - 0x20;
 }
 
 static inline s32 fn_803AF3F0_queue_verify(CardState* state, s32 block,
