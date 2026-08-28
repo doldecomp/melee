@@ -3895,12 +3895,14 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
     case 7: {
         f32 blast = Stage_GetBlastZoneRightOffset();
         f32 scale = Ground_801C0498();
+        grBigBlue_CarPhysicsLane* lane;
 
         self = gp->raw;
         self += offset;
         blast += yakumono_param->x68 * scale;
-        if (gp->data.lanes[index].pos.x > blast) {
-            if (0.0F != gp->data.lanes[index].xEC) {
+        lane = &gp->data.lanes[index];
+        if (lane->pos.x > blast) {
+            if (0.0F != lane->xEC) {
                 result = 9;
             } else {
                 result = 1;
@@ -3911,12 +3913,14 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
     case 8: {
         f32 blast = Stage_GetBlastZoneLeftOffset();
         f32 scale = Ground_801C0498();
+        grBigBlue_CarPhysicsLane* lane;
 
         self = gp->raw;
         self += offset;
         blast -= yakumono_param->x68 * scale;
-        if (gp->data.lanes[index].pos.x < blast) {
-            if (0.0F != gp->data.lanes[index].xEC) {
+        lane = &gp->data.lanes[index];
+        if (lane->pos.x < blast) {
+            if (0.0F != lane->xEC) {
                 result = 9;
             } else {
                 result = 1;
