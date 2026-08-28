@@ -638,7 +638,10 @@ void gm_801B5ACC(GameScene* arg0)
     data->players[0].xD_b2 = 1;
     data->rules.x7 = 9;
 
-    round = gm_8017BE84(arg0->idx);
+    {
+        u16 current_round = gm_8017BE84(arg0->idx);
+        round = current_round;
+    }
 
     {
         AllstarRoundInfo* ri = &gm_803DEC4C[round];
