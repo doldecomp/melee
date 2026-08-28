@@ -617,8 +617,8 @@ static inline HSD_Particle* psDispSubPoint(HSD_Particle* pp)
 
 static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
 {
-    Vec3 vbuf[32];
     GXColor cbuf[32];
+    Vec3 vbuf[32];
     Vec3* p;
     GXColor* c;
     HSD_Particle* last;
