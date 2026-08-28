@@ -38,6 +38,7 @@ typedef struct MnInfoDataLayout {
     char top_shapeanim_joint[0x20];
 } MnInfoDataLayout;
 
+StaticModelDesc mnInfo_804A0958;
 u8 mnInfo_804A0968[0x48];
 HSD_GObj* mnInfo_804D6C78;
 extern GXColor mn_804D4B64;
@@ -110,6 +111,9 @@ void mnInfo_80251AFC(void)
     s32 i;
     s32 j;
     PAD_STACK(8);
+
+    /// @todo Keep #mnInfo_804A0958 before #mnInfo_804A0968 in `.bss`.
+    (void) &mnInfo_804A0958;
 
     for (i = 0; 0x42 > i; i++) {
         mnInfo_804A0968[i] = i;
@@ -492,12 +496,15 @@ static inline void fn_80252548_inline(MnInfoData* data, HSD_GObj* gobj)
                 mnInfo_80251F04((mnInfo_GObj*) gobj, i, id);
             }
         }
-        jobj = HSD_JObjLoadJoint(mnInfo_804A0958.joint);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
-        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
-        HSD_JObjAddAnimAll(jobj, mnInfo_804A0958.animjoint,
-                           mnInfo_804A0958.matanim_joint,
-                           mnInfo_804A0958.shapeanim_joint);
+        {
+            StaticModelDesc* model = &mnInfo_804A0958;
+
+            jobj = HSD_JObjLoadJoint(model->joint);
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
+            GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
+            HSD_JObjAddAnimAll(jobj, model->animjoint, model->matanim_joint,
+                               model->shapeanim_joint);
+        }
         HSD_JObjReqAnimAll(jobj, 0.0f);
         mnInfo_802522B8(gobj);
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
@@ -512,8 +519,6 @@ void fn_80252548(HSD_GObj* gobj)
     PAD_STACK(8);
     fn_80252548_inline(data, gobj);
 }
-
-StaticModelDesc mnInfo_804A0958;
 
 #ifdef MUST_MATCH
 #pragma push
