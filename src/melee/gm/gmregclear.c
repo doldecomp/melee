@@ -2378,46 +2378,54 @@ void fn_8017FE54(HSD_GObj* gobj)
 void fn_8017FF1C(HSD_GObj* gobj)
 {
     HSD_JObj* jobj;
-    struct lbl_80472D28_t* state = &lbl_80472D28;
+    /// @todo Consolidate these split-derived views of the same state object.
+    union {
+        struct lbl_80472D28_t* state;
+        fn_8017FA1C_arg* arg;
+    } data;
     s32 result;
     s32 i;
     u8 mask;
     HSD_JObj* sp28;
 
+    data.state = &lbl_80472D28;
     jobj = gobj->hsd_obj;
     HSD_JObjAnimAll(gobj->hsd_obj);
 
-    if (state->x118 == 0) {
-        fn_8017F608(state);
+    if (data.arg->x118 == 0) {
+        fn_8017F608(data.arg);
     }
 
-    result = fn_8017FA1C(state);
-    fn_8017FBA4(state);
+    {
+        fn_8017FA1C_arg* arg = data.arg;
+        result = fn_8017FA1C(arg);
+    }
+    fn_8017FBA4(data.arg);
 
-    if (state->x117 != 0 && state->x110 > 0x29U) {
-        state->xC0 = fn_8017F47C(&state->x84, (s32) state->xC0);
+    if (data.state->x117 != 0 && data.state->x110 > 0x29U) {
+        data.state->xC0 = fn_8017F47C(&data.state->x84, (s32) data.state->xC0);
 
         mask = fn_8017F008();
-        if (fn_8016F9A8(gm_8016B774(), state->xC0, mask, 0) > 7) {
-            state->x11F = 0;
+        if (fn_8016F9A8(gm_8016B774(), data.state->xC0, mask, 0) > 7) {
+            data.state->x11F = 0;
         } else {
-            state->x11F = 1;
+            data.state->x11F = 1;
         }
 
         mask = fn_8017F008();
-        if (fn_8016F870(gm_8016B774(), state->xC0, mask, 0) < 0) {
-            state->x11E = 1;
+        if (fn_8016F870(gm_8016B774(), data.state->xC0, mask, 0) < 0) {
+            data.state->x11E = 1;
         } else {
-            state->x11E = 0;
+            data.state->x11E = 0;
         }
 
-        if (state->x110 % 30 == 0 && state->xC8 == 0) {
+        if (data.state->x110 % 30 == 0 && data.state->xC8 == 0) {
             mask = fn_8017F008();
-            if (fn_8016F9A8(gm_8016B774(), state->xC0, mask, 0) > 7) {
-                state->xC0 = (u16) (state->xC0 + 1);
+            if (fn_8016F9A8(gm_8016B774(), data.state->xC0, mask, 0) > 7) {
+                data.state->xC0 = (u16) (data.state->xC0 + 1);
             } else {
-                state->xC8 = 1;
-                state->xC4 = state->x110;
+                data.state->xC8 = 1;
+                data.state->xC4 = data.state->x110;
             }
         }
 
@@ -2428,14 +2436,14 @@ void fn_8017FF1C(HSD_GObj* gobj)
                 ((repeat | buttons) & 0))
             {
                 mask = fn_8017F008();
-                if (fn_8016F740(gm_8016B774(), state->xC0, mask, 0) > 0) {
+                if (fn_8016F740(gm_8016B774(), data.state->xC0, mask, 0) > 0) {
                     mask = fn_8017F008();
-                    if (fn_8016F9A8(gm_8016B774(), state->xC0, mask, 0) > 7) {
+                    if (fn_8016F9A8(gm_8016B774(), data.state->xC0, mask, 0) > 7) {
                         mask = fn_8017F008();
-                        state->xC0 =
-                            fn_8016F740(gm_8016B774(), state->xC0, mask, 0);
-                        state->xC8 = 1;
-                        state->xC4 = state->x110;
+                        data.state->xC0 =
+                            fn_8016F740(gm_8016B774(), data.state->xC0, mask, 0);
+                        data.state->xC8 = 1;
+                        data.state->xC4 = data.state->x110;
                     }
                 }
             } else {
@@ -2444,28 +2452,31 @@ void fn_8017FF1C(HSD_GObj* gobj)
                 if (((repeat | buttons) & (PAD_BUTTON_UP | PAD_STICK_UP)) |
                     ((repeat | buttons) & 0))
                 {
-                    mask = fn_8017F008();
-                    if (fn_8016F870(gm_8016B774(), state->xC0, mask, 0) >= 0) {
-                        mask = fn_8017F008();
-                        state->xC0 =
-                            fn_8016F870(gm_8016B774(), state->xC0, mask, 0);
-                        state->xC8 = 1;
-                        state->xC4 = state->x110;
+                    if (fn_8016F870(gm_8016B774(), data.state->xC0,
+                                     (u8) fn_8017F008(), 0) >= 0)
+                    {
+                        data.state->xC0 = fn_8016F870(
+                            gm_8016B774(), data.state->xC0,
+                            (u8) fn_8017F008(), 0);
+                        data.state->xC8 = 1;
+                        data.state->xC4 = data.state->x110;
                     }
                 }
             }
         }
     }
 
-    if (state->x11A != 0 && state->x110 > 0x14U && state->x11D < state->x11C &&
-        (s32) (0.5f * (f32) (state->x110 - 0x14)) > (s32) state->x11D)
+    if (data.state->x11A != 0 && data.state->x110 > 0x14U &&
+        data.state->x11D < data.state->x11C &&
+        (s32) (0.5f * (f32) (data.state->x110 - 0x14)) >
+            (s32) data.state->x11D)
     {
-        lb_80011E24(jobj, &sp28, state->x11D + 7, -1);
+        lb_80011E24(jobj, &sp28, data.state->x11D + 7, -1);
         HSD_JObjClearFlagsAll(sp28, JOBJ_HIDDEN);
-        state->x11D = (u8) (state->x11D + 1);
+        data.state->x11D = (u8) (data.state->x11D + 1);
     }
 
-    if (state->x115 == 0 && result != 0) {
+    if (data.state->x115 == 0 && result != 0) {
         fn_80168F2C(0);
     }
 
@@ -2474,46 +2485,46 @@ void fn_8017FF1C(HSD_GObj* gobj)
             (HSD_PadMasterStatus[(u8) Player_GetPlayerId(i)].trigger &
              HSD_PAD_A))
         {
-            state->xFC = state->x104;
-            state->x115 = 1;
+            data.state->xFC = data.state->x104;
+            data.state->x115 = 1;
             break;
         }
     }
 
-    if (state->x110 > 0x3EU) {
+    if (data.state->x110 > 0x3EU) {
         for (i = 0; i < 6; i++) {
             if (Player_GetPlayerSlotType(i) == Gm_PKind_Human &&
                 (HSD_PadMasterStatus[(u8) Player_GetPlayerId(i)].trigger &
                  0x1000))
             {
-                state->xFC = state->x104;
-                state->x116 = 1;
+                data.state->xFC = data.state->x104;
+                data.state->x116 = 1;
                 sfxForward();
                 break;
             }
         }
     }
 
-    if (state->x11E != 0) {
-        HSD_JObjSetFlagsAll(state->x20, JOBJ_HIDDEN);
+    if (data.state->x11E != 0) {
+        HSD_JObjSetFlagsAll(data.state->x20, JOBJ_HIDDEN);
     } else {
-        HSD_JObjClearFlagsAll(state->x20, JOBJ_HIDDEN);
+        HSD_JObjClearFlagsAll(data.state->x20, JOBJ_HIDDEN);
     }
 
-    if (state->x11F != 0) {
-        HSD_JObjSetFlagsAll(state->x24, JOBJ_HIDDEN);
+    if (data.state->x11F != 0) {
+        HSD_JObjSetFlagsAll(data.state->x24, JOBJ_HIDDEN);
     } else {
-        HSD_JObjClearFlagsAll(state->x24, JOBJ_HIDDEN);
+        HSD_JObjClearFlagsAll(data.state->x24, JOBJ_HIDDEN);
     }
 
-    if (state->x10C < 1.0f) {
-        state->x10C += 0.05f;
+    if (data.state->x10C < 1.0f) {
+        data.state->x10C += 0.05f;
     } else {
-        state->x10C = 1.0f;
+        data.state->x10C = 1.0f;
     }
 
-    if (state->x110 + 0x10000 != 0xFFFF) {
-        state->x110 = state->x110 + 1;
+    if (data.state->x110 + 0x10000 != 0xFFFF) {
+        data.state->x110 = data.state->x110 + 1;
     }
     PAD_STACK(0x1C);
 }
