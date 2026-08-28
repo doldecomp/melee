@@ -974,17 +974,16 @@ HSD_GObj* mn_80233218(MenuState state)
                 switch (i) {
                 case 0: {
                     JObjIndices digit_indices = mn_804DBE48;
-                    j = 0;
-                    do {
+                    u8* index_ptr = digit_indices.idx;
+                    for (j = 0; j < 4; j++, index_ptr++) {
                         HSD_JObj* num_jobj =
                             HSD_JObjLoadJoint(MenMainNmRl_Top.joint);
                         HSD_JObjAddAnimAll(num_jobj, MenMainNmRl_Top.animjoint,
                                            MenMainNmRl_Top.matanim_joint,
                                            MenMainNmRl_Top.shapeanim_joint);
-                        HSD_JObjAddChild(
-                            user_data->x34[0][digit_indices.idx[j]], num_jobj);
-                        j++;
-                    } while (j < 4);
+                        HSD_JObjAddChild(user_data->x34[0][*index_ptr],
+                                         num_jobj);
+                    }
                     mn_802324E4(user_data->rule_values.time_limit, user_data);
                     break;
                 }
