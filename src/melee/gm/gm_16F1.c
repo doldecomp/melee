@@ -1048,8 +1048,6 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     }
 
     case 0xFC: {
-        struct lbl_8046B6A0_24C_58_t(*x58_array)[6] = &rules->x58;
-
         {
             struct lbl_8046B6A0_24C_58_t* p = x58;
             int i;
@@ -1071,7 +1069,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                     p++;
                 }
             }
-            if (!((*x58_array)[arg1].x3 & 1) && rankings[arg1] == 0 &&
+            if (!(rules->x58[arg1].x3 & 1) && rankings[arg1] == 0 &&
                 x58[arg1].x20 == 0)
             {
                 return 1;
@@ -1094,13 +1092,13 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                         p++;
                     }
                 }
-                if (!((*x58_array)[arg1].x3 & 1) && x58[arg1].x5 == 0 &&
+                if (!(rules->x58[arg1].x3 & 1) && x58[arg1].x5 == 0 &&
                     x58[arg1].x20 == 0)
                 {
                     return 1;
                 }
             } else {
-                if (!((*x58_array)[arg1].x3 & 1) && x58[arg1].x20 == 0) {
+                if (!(rules->x58[arg1].x3 & 1) && x58[arg1].x20 == 0) {
                     return 1;
                 }
             }
