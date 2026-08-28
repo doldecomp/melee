@@ -15,7 +15,6 @@ bool fn_800D9558(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* attrs;
     Item_GObj* item;
-    s32 frame;
     s32 i;
     itSamusGrappleAttributes* grappleAttrs;
     HSD_GObj* segGobj;
@@ -26,7 +25,7 @@ bool fn_800D9558(Fighter_GObj* gobj)
     f32 grav;
     f32 my;
     f32 r;
-    PAD_STACK(0x10);
+    PAD_STACK(0x18);
     if (fp->kind == FTKIND_SAMUS) {
         attrs = fp->dat_attrs;
         fp->mv.ca.specials.grav += 1.0;
@@ -44,12 +43,14 @@ bool fn_800D9558(Fighter_GObj* gobj)
         } else if (grav > (f32) attrs->x9C) {
             if (grav <= (f32) attrs->xA8) {
                 Item* it;
-                it = GET_ITEM(fp->u.ss.x223C);
+                it = fp->u.ss.x223C->user_data;
                 item = fp->u.ss.x223C;
                 grappleAttrs = it->xC4_article_data->x4_specialAttributes;
                 if (item != NULL) {
-                    for (i = 0, frame = 0x14; i < 6; i++, frame += 3) {
-                        if (fp->mv.ca.specials.grav == (f32) frame) {
+                    for (i = 0; i < 6; i++) {
+                        if (fp->mv.ca.specials.grav ==
+                            (f32) (i * 3 + 0x14))
+                        {
                             segGobj = it->xDD4_itemVar.samusgrapple.x0->gobj;
                             jobj = (HSD_JObj*) segGobj->hsd_obj;
                             HSD_JObjSetupMatrix(jobj);
