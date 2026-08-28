@@ -468,25 +468,25 @@ static inline f32 gmTournament_GetBracketSlideYReverse(BracketEntrySlot* slot)
     return -((f32) slot->x48 - 0.3f * (f32) lbl_804D6630);
 }
 
-static inline HSD_JObj*
-fn_8018B090_inline0(BracketEntry* bracket_entries, s32 bracket_slot_index,
-                     s32 bracket_entry_index)
+static inline HSD_JObj* fn_8018B090_inline0(BracketEntry* bracket_entries,
+                                            s32 bracket_slot_index,
+                                            s32 bracket_entry_index)
 {
     return bracket_entries[bracket_entry_index]
         .slots[bracket_slot_index]
         .x2C->hsd_obj;
 }
 
-static inline HSD_JObj*
-fn_8018B090_inline1(BracketEntry* bracket_entries, s32 bracket_entry_index)
+static inline HSD_JObj* fn_8018B090_inline1(BracketEntry* bracket_entries,
+                                            s32 bracket_entry_index)
 {
     return bracket_entries[bracket_entry_index]
         .slots[lbl_804D6634]
         .x2C->hsd_obj;
 }
 
-static inline BracketEntry*
-fn_8018B090_inline2(BracketEntry* bracket_entries, s32 bracket_entry_index)
+static inline BracketEntry* fn_8018B090_inline2(BracketEntry* bracket_entries,
+                                                s32 bracket_entry_index)
 {
     return &bracket_entries[bracket_entry_index];
 }
@@ -624,8 +624,7 @@ void fn_8018B090(HSD_GObj* arg0)
                 for (i = 0; i < 4; i++) {
                     if (entries[idx].slots[i].x30 != 0) {
                         mn_8022F470((int*) &entries[idx].slots[i].x48,
-                                    (int*) &entries[idx].slots[i].x40,
-                                    amount);
+                                    (int*) &entries[idx].slots[i].x40, amount);
                         {
                             f32 y = -(f32) entries[idx].slots[i].x48;
                             HSD_JObjSetTranslateY(
@@ -637,8 +636,7 @@ void fn_8018B090(HSD_GObj* arg0)
             }
             for (i = 0; i < 4; i++) {
                 if (entries[idx].slots[i].x30 != 0) {
-                    entries[idx].slots[i].x40 =
-                        entries[idx].slots[i].x48;
+                    entries[idx].slots[i].x40 = entries[idx].slots[i].x48;
                 }
             }
         }
@@ -700,25 +698,22 @@ void fn_8018B090(HSD_GObj* arg0)
     case 25:
         for (i = 0; i < 4; i++) {
             if (entries[idx].slots[i].x30 != 0) {
-                entries[idx].slots[i].x48 =
-                    entries[idx].slots[i].x40;
+                entries[idx].slots[i].x48 = entries[idx].slots[i].x40;
             }
         }
         return;
     case 32: {
         s32 h = entries[idx].x18;
         if (h != 0) {
-            fn_80190520(
-                (f32) (entries[idx].xC + (entries[idx].x14 / 2)),
-                -(f32) (entries[idx].x10 + (h / 2)), -150.0f);
+            fn_80190520((f32) (entries[idx].xC + (entries[idx].x14 / 2)),
+                        -(f32) (entries[idx].x10 + (h / 2)), -150.0f);
             for (i = 0; i < 4; i++) {
                 if (entries[idx].slots[i].x4C == 0) {
                     entries[idx].slots[i].x3C =
                         entries[idx].xC + (entries[idx].x14 / 2);
                 } else {
                     s32 t = entries[idx].slots[i].x40;
-                    entries[idx].slots[i].x40 =
-                        entries[idx].slots[i].x38;
+                    entries[idx].slots[i].x40 = entries[idx].slots[i].x38;
                     entries[idx].slots[i].x38 = t;
                 }
             }
@@ -739,8 +734,7 @@ void fn_8018B090(HSD_GObj* arg0)
                         lbl_804D6634 = i;
                         if (entries[idx].x4 != 1) {
                             mn_8022F470((int*) &entries[idx].slots[i].x44,
-                                        (int*) &entries[idx].slots[i].x3C,
-                                        2);
+                                        (int*) &entries[idx].slots[i].x3C, 2);
                             if (entries[idx].slots[i].x44 ==
                                 entries[idx].slots[i].x3C)
                             {
@@ -783,8 +777,7 @@ void fn_8018B090(HSD_GObj* arg0)
         if (entries[idx].x18 != 0) {
             if (tm->x33 == 5) {
                 mn_8022F470((int*) &entries[idx].slots[lbl_804D6634].x44,
-                            (int*) &entries[idx].slots[lbl_804D6634].x3C,
-                            2);
+                            (int*) &entries[idx].slots[lbl_804D6634].x3C, 2);
                 HSD_JObjSetTranslateX(
                     fn_8018B090_inline1(entries, idx),
                     (f32) entries[idx].slots[lbl_804D6634].x44);
@@ -806,8 +799,7 @@ void fn_8018B090(HSD_GObj* arg0)
         if (entries[idx].x18 != 0) {
             if (tm->x33 == 5) {
                 mn_8022F470((int*) &entries[idx].slots[lbl_804D6634].x48,
-                            (int*) &entries[idx].slots[lbl_804D6634].x40,
-                            2);
+                            (int*) &entries[idx].slots[lbl_804D6634].x40, 2);
                 HSD_JObjSetTranslateY(
                     fn_8018B090_inline1(entries, idx),
                     -(f32) entries[idx].slots[lbl_804D6634].x48);
@@ -899,18 +891,12 @@ void fn_8018B090(HSD_GObj* arg0)
             next_entry = &src->x5;
             next_slot = &src->x6;
             entries[*next_entry].slots[*next_slot].x30 = 1;
-            entries[*next_entry].slots[*next_slot].x50 =
-                src->slots[r].x50;
-            entries[*next_entry].slots[*next_slot].x51 =
-                src->slots[r].x51;
-            entries[*next_entry].slots[*next_slot].x52 =
-                src->slots[r].x52;
-            entries[*next_entry].slots[*next_slot].x4D =
-                src->slots[r].x4D;
-            entries[*next_entry].slots[*next_slot].x4E =
-                src->slots[r].x4E;
-            entries[*next_entry].slots[*next_slot].x4F =
-                src->slots[r].x4F;
+            entries[*next_entry].slots[*next_slot].x50 = src->slots[r].x50;
+            entries[*next_entry].slots[*next_slot].x51 = src->slots[r].x51;
+            entries[*next_entry].slots[*next_slot].x52 = src->slots[r].x52;
+            entries[*next_entry].slots[*next_slot].x4D = src->slots[r].x4D;
+            entries[*next_entry].slots[*next_slot].x4E = src->slots[r].x4E;
+            entries[*next_entry].slots[*next_slot].x4F = src->slots[r].x4F;
             src->slots[r].x30 = 0;
             src->slots[r].x4E = 3;
             tm->cur_option = 0x27;

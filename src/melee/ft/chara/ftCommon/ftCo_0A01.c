@@ -3192,10 +3192,9 @@ bool ftCo_800A6700(Fighter* fp, Vec3* arg1, Vec3* arg2)
             ax = a.x;
             ay = a.y;
             px = ax + 5.0;
-            result =
-                ftCo_800A0FB0(&floor_pos, &line_id, &flags, &floor_normal, -1,
-                              -1, -1, ax + 5.0, ay + 5.0, ax + 5.0,
-                              ay - 5.0, 0.0f);
+            result = ftCo_800A0FB0(&floor_pos, &line_id, &flags, &floor_normal,
+                                   -1, -1, -1, ax + 5.0, ay + 5.0, ax + 5.0,
+                                   ay - 5.0, 0.0f);
             if (result != 0) {
                 if (!ftCo_800A6700_inline0(fp, px, ay)) {
                     px = px - arg1->x;
@@ -6026,10 +6025,9 @@ static bool ftCo_800ADE48(Fighter* fp)
     above = five + y;
     line_id = -1;
     do {
-        result =
-            mpCheckFloor(x2, above, x, below, 0.0f, &floor_pos, &line_id, &flags,
-                         &floor_normal, -1, -1, -1, NULL,
-                         (Fighter_GObj*) found);
+        result = mpCheckFloor(x2, above, x, below, 0.0f, &floor_pos, &line_id,
+                              &flags, &floor_normal, -1, -1, -1, NULL,
+                              (Fighter_GObj*) found);
         if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
             (void) result;
         } else {

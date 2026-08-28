@@ -125,21 +125,18 @@ u8 mnEvent_804D6C65;
 static char mnEvent_804D5040[3] = "%d";
 static char mnEvent_804D5044[4] = { 0x81, 0x7C, 0, 0 };
 
-static inline MnEventData*
-mnEvent_GetData(void)
+static inline MnEventData* mnEvent_GetData(void)
 {
     return mnEvent_804D6C60->user_data;
 }
 
-static inline void mnEvent_SetupIcon(
-    HSD_JObj* icon_jobj, HSD_GObj* icon_gobj)
+static inline void mnEvent_SetupIcon(HSD_JObj* icon_jobj, HSD_GObj* icon_gobj)
 {
     HSD_GObjObject_80390A70(icon_gobj, HSD_GObj_JObjKind, icon_jobj);
     GObj_SetupGXLink(icon_gobj, HSD_GObj_JObjCallback, 4, 0x80);
 }
 
-static inline void mnEvent_CreateIconForSlot(
-    s32 idx, HSD_GObj** slot)
+static inline void mnEvent_CreateIconForSlot(s32 idx, HSD_GObj** slot)
 {
     HSD_JObj* jobj_0A;
     HSD_JObj* jobj_0C;

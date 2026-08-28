@@ -530,8 +530,7 @@ void mn_8022FD18(u8 arg0)
     HSD_JObjAnimAll(jobj2);
 }
 
-static inline void
-mn_8022FEC8_AnimDigit(HSD_JObj* jobj, u8 digit)
+static inline void mn_8022FEC8_AnimDigit(HSD_JObj* jobj, u8 digit)
 {
     HSD_JObjReqAnimAll(jobj, (f32) digit);
     HSD_JObjAnimAll(jobj);
@@ -540,10 +539,10 @@ mn_8022FEC8_AnimDigit(HSD_JObj* jobj, u8 digit)
 static inline void
 mn_8022FEC8_AnimDamageDigits(u8 value, struct mn_8022FB88_arg1_t* data)
 {
-    mn_8022FEC8_AnimDigit(
-        data->xA8 == NULL ? NULL : data->xA8->x10, (u8) (value / 10));
-    mn_8022FEC8_AnimDigit(
-        data->xAC == NULL ? NULL : data->xAC->x10, (u8) (value % 10));
+    mn_8022FEC8_AnimDigit(data->xA8 == NULL ? NULL : data->xA8->x10,
+                          (u8) (value / 10));
+    mn_8022FEC8_AnimDigit(data->xAC == NULL ? NULL : data->xAC->x10,
+                          (u8) (value % 10));
 }
 
 static inline AnimLoopSettings* mn_8022FEC8_GetSettings(u8 rule_kind,
@@ -1236,8 +1235,8 @@ HSD_GObj* mn_80230E38(int arg0)
                         HSD_JObjAddAnimAll(text, MenMainNmRl_Top.animjoint,
                                            MenMainNmRl_Top.matanim_joint,
                                            MenMainNmRl_Top.shapeanim_joint);
-                        HSD_JObjAddChild(
-                            *(&user_data->x34[1].x0 + *index_ptr), text);
+                        HSD_JObjAddChild(*(&user_data->x34[1].x0 + *index_ptr),
+                                         text);
                     }
                     mn_8022FD18((u8) (((struct mn_8022FB88_arg1_t*)
                                            mn_804D6BD0->user_data)

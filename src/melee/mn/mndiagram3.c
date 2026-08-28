@@ -501,9 +501,9 @@ static inline void mnDiagram3_CreateRowLabels(HSD_GObj* labels_gobj)
 
     do {
         f32 fi = (f32) i;
-        HSD_Text* text = HSD_SisLib_803A5ACC(
-            0, 1, pos.x - row_spacing, neg_spacing * fi + -pos.y, pos.z,
-            row_spacing, 240.0f);
+        HSD_Text* text = HSD_SisLib_803A5ACC(0, 1, pos.x - row_spacing,
+                                             neg_spacing * fi + -pos.y, pos.z,
+                                             row_spacing, 240.0f);
 
         data->row_labels[i] = text;
         {
@@ -535,7 +535,7 @@ static inline void mnDiagram3_CreateRowLabels(HSD_GObj* labels_gobj)
 }
 
 static inline f32 mnDiagram3_GetPopupSpacing(HSD_JObj* popup_row,
-                                              Diagram3* data)
+                                             Diagram3* data)
 {
     return HSD_JObjGetTranslationY(data->jobjs[9]) -
            HSD_JObjGetTranslationY(popup_row);

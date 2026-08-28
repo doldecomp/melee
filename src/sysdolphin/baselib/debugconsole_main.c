@@ -1065,8 +1065,8 @@ static inline s32 hsd_80394F48_get_x8(const s32* px8)
     return *px8;
 }
 
-static inline struct lbl_8040AB00_t* hsd_80394F48_get_highlight_color(
-    struct lbl_8040AB00_t* base_color)
+static inline struct lbl_8040AB00_t*
+hsd_80394F48_get_highlight_color(struct lbl_8040AB00_t* base_color)
 {
     return base_color + 1;
 }

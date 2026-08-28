@@ -902,8 +902,7 @@ typedef struct TyDspPosTemps {
 } TyDspPosTemps;
 
 static inline void _tyDisplay_80319994_sort_pos(TyDspGrid* grid, s32 count,
-                                                s32 arg0,
-                                                TyDspPosTemps* temps)
+                                                s32 arg0, TyDspPosTemps* temps)
 {
     if (arg0 != 0 && count > 1) {
         s32 n2 = count - 1;

@@ -691,11 +691,10 @@ static inline void mnStageSw_InitUserData(MnStageSwData* user_data, s8 state)
     }
 }
 
-static inline void mnStageSw_SetCursorAnim(s32 index,
-                                            MnStageSwData* user_data,
-                                            HSD_JObj* cursor_jobj,
-                                            u8* cursor_index,
-                                            HSD_JObj** cursor_anim_jobj)
+static inline void mnStageSw_SetCursorAnim(s32 index, MnStageSwData* user_data,
+                                           HSD_JObj* cursor_jobj,
+                                           u8* cursor_index,
+                                           HSD_JObj** cursor_anim_jobj)
 {
     u8 enabled;
 
@@ -705,9 +704,9 @@ static inline void mnStageSw_SetCursorAnim(s32 index,
     HSD_JObjReqAnimAll(*cursor_anim_jobj, mnStageSw_804D4BB8[enabled]);
 }
 
-static inline HSD_JObj*
-mnStageSw_CreateCursor(MnStageSwData* user_data, s32 index,
-                       AnimLoopSettings* anims)
+static inline HSD_JObj* mnStageSw_CreateCursor(MnStageSwData* user_data,
+                                               s32 index,
+                                               AnimLoopSettings* anims)
 {
     HSD_JObj* cursor_jobj;
     HSD_JObj* cursor_anim_jobj;

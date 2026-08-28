@@ -48,9 +48,7 @@ bool fn_800D9558(Fighter_GObj* gobj)
                 grappleAttrs = it->xC4_article_data->x4_specialAttributes;
                 if (item != NULL) {
                     for (i = 0; i < 6; i++) {
-                        if (fp->mv.ca.specials.grav ==
-                            (f32) (i * 3 + 0x14))
-                        {
+                        if (fp->mv.ca.specials.grav == (f32) (i * 3 + 0x14)) {
                             segGobj = it->xDD4_itemVar.samusgrapple.x0->gobj;
                             jobj = (HSD_JObj*) segGobj->hsd_obj;
                             HSD_JObjSetupMatrix(jobj);

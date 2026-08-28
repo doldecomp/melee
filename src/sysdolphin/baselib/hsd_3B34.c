@@ -1471,7 +1471,8 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
     hsd_804D79A0 = (u8*) arg3;
     hsd_804D79A4 = (u8*) arg3;
     state.quant_table = lbl_80430C40;
-    state.work->data.prev_dc[0] = state.work->data.prev_dc[1] = state.work->data.prev_dc[2] = 0;
+    state.work->data.prev_dc[0] = state.work->data.prev_dc[1] =
+        state.work->data.prev_dc[2] = 0;
     if (__setjmp((__jmp_buf*) state.base) != 0) {
         return 0;
     }

@@ -1714,8 +1714,7 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
                     if (grBigBlue_801E8794(jobj, &pos, 1, range, velocity) !=
                             0 ||
                         grBigBlue_801EAB50(
-                            &pos, 1,
-                            (60.0f * Ground_801C0498()) + 30.0f,
+                            &pos, 1, (60.0f * Ground_801C0498()) + 30.0f,
                             next_velocity = 140.0f * Ground_801C0498()) != 0)
                     {
                         *(f32*) (bp + 0xD8) = 0.0f;

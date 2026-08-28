@@ -814,8 +814,8 @@ s32 gmMainLib_8015DBF4(s32 arg0)
                              (VsModeData*) ((s8*) base + 0xF08), (u8) arg0);
     gmMainLib_AdjustNameTags(&base->unk_D10,
                              (VsModeData*) ((s8*) base + 0x788), (u8) arg0);
-    gmMainLib_AdjustNameTags(&base->unk_590,
-                             (VsModeData*) ((s8*) base + 8), (u8) arg0);
+    gmMainLib_AdjustNameTags(&base->unk_590, (VsModeData*) ((s8*) base + 8),
+                             (u8) arg0);
     gmMainLib_AdjustNameTags(&base->unk_6D0,
                              (VsModeData*) ((s8*) base + 0x148), (u8) arg0);
     gmMainLib_AdjustNameTags(&base->unk_810,

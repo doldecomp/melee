@@ -405,7 +405,7 @@ static inline void fn_8019F9C4_inline1(HSD_JObj* next, HSD_JObj** child)
 }
 
 static inline void fn_8019F9C4_inline2(HSD_JObj* next, HSD_JObj* model,
-                                        HSD_GObj** result)
+                                       HSD_GObj** result)
 {
     HSD_JObj* node;
 
@@ -423,7 +423,7 @@ static inline void fn_8019F9C4_inline2(HSD_JObj* next, HSD_JObj* model,
 }
 
 static inline void fn_8019F9C4_inline3(HSD_JObj* model, HSD_GObj* object,
-                                        CharacterKind arg0, s32* char_idx)
+                                       CharacterKind arg0, s32* char_idx)
 {
     lbl_804D66B8 = model;
     HSD_GObjObject_80390A70(object, HSD_GObj_JObjKind, model);

@@ -500,7 +500,8 @@ static inline s32 gmClassic_GetMatchupCount(const gmClassicMatchup* matchups)
     return count;
 }
 
-static gmClassicMatchup* gmClassic_801B2BA4(gmClassicMatchup* arg0, u8* arg1,
+static gmClassicMatchup* gmClassic_801B2BA4(gmClassicMatchup* arg0,
+                                            const u8* arg1,
                                             gm_803DDEC8Struct* arg2)
 {
     s32 outer;

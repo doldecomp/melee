@@ -3604,8 +3604,7 @@ s32 fn_803AF3F0(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
             s32 arg1x = state->x170[i];
 
             if (arg1x >= 0) {
-                s32 logical =
-                    fn_803AE7F8_logical_index(arg1x, blocks_before);
+                s32 logical = fn_803AE7F8_logical_index(arg1x, blocks_before);
                 if (logical >= 0 && logical < file_blocks) {
                     if (fn_803ACB74(current_seq, state->x270[i]) < 0) {
                         current_seq = state->x270[i];
@@ -3790,9 +3789,9 @@ after_verify:
                 }
             } else {
                 s32 block = block_map[1][i];
-                s32 write_result = fn_803ACFC0(
-                    state, block, blocks_before + i, current_seq, data,
-                    fn_803AF3F0_chunk_size(state), arg1);
+                s32 write_result =
+                    fn_803ACFC0(state, block, blocks_before + i, current_seq,
+                                data, fn_803AF3F0_chunk_size(state), arg1);
                 if (write_result < 0) {
                     state->x170[block_map[1][i]] = -0x7FFF;
                     state->x270[block_map[1][i]] = 0;
@@ -4267,9 +4266,8 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         if (remaining > chunk) {
             if (arg3 != 0) {
                 s32 block = block_map[0][i];
-                s32 cmd_result =
-                    fn_803B0120_queue_write(state, block, logical, current_seq,
-                                            data, chunk, arg1);
+                s32 cmd_result = fn_803B0120_queue_write(
+                    state, block, logical, current_seq, data, chunk, arg1);
                 if (cmd_result < 0) {
                     fn_803B0120_rewind(entries);
                     return cmd_result;
@@ -4382,8 +4380,7 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
     if (arg3 == 0) {
         if (arg4 != 0) {
-            result =
-                fn_803B0E9C_queue_reads(arg0, arg1, arg2, cmd_read_icon);
+            result = fn_803B0E9C_queue_reads(arg0, arg1, arg2, cmd_read_icon);
             if (result < 0) {
                 return result;
             }

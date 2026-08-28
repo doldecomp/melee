@@ -1159,14 +1159,14 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
         if (is_teams == 0) {
             lookup = get_big_loser(arg2, match_end);
         } else {
-            lookup = match_end
-                         ->team_standings[match_end->player_standings[arg2].team]
-                         .is_big_loser;
+            lookup =
+                match_end
+                    ->team_standings[match_end->player_standings[arg2].team]
+                    .is_big_loser;
         }
     }
     if (lookup != 0) {
-        child_jobj = HSD_JObjGetChild(
-            (HSD_JObj*) disp->gobjs[arg2]->hsd_obj);
+        child_jobj = HSD_JObjGetChild((HSD_JObj*) disp->gobjs[arg2]->hsd_obj);
     }
 
     if (HSD_CObjSetCurrent(cobj)) {

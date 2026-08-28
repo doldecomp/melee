@@ -2470,8 +2470,9 @@ void mnDiagram_DrawGridValues(void* arg0, s32 arg1, s32 arg2, u8 arg3)
                     if (entry_count > bottom_col) {
                         mnDiagram_DrawCellValue(
                             arg0, (u8) bottom_col, (u8) row,
-                            mnDiagram_SumNameFalls(mnDiagram_GetVisibleNameFrom(
-                                sorted, col_start, bottom_col)));
+                            mnDiagram_SumNameFalls(
+                                mnDiagram_GetVisibleNameFrom(sorted, col_start,
+                                                             bottom_col)));
                     }
                 } else {
                     bottom_unlocked_count =

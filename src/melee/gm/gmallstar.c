@@ -469,8 +469,8 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     lbAudioAx_80027168();
 }
 
-static inline void gm_801B5624_inline(s8* char_ids,
-                                      gm_803DEBE8_t* opp_data, u16 round)
+static inline void gm_801B5624_inline(s8* char_ids, gm_803DEBE8_t* opp_data,
+                                      u16 round)
 {
     s32 i;
 

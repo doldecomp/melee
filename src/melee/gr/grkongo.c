@@ -921,15 +921,13 @@ void grKongo_801D6AFC(void)
 
 static inline f32 grKongo_801D7134_calc_angle(s32 index)
 {
-    f32 angle =
-        (f32) (0.7853981633974483 *
-               (0.5 *
-                (f64) (((grKg_803E188C[index].unk14 -
-                         grKg_803E188C[index - 1].unk14) /
-                        6.0f) +
-                       ((grKg_803E188C[index + 1].unk14 -
-                         grKg_803E188C[index].unk14) /
-                        6.0f))));
+    f32 angle = (f32) (0.7853981633974483 *
+                       (0.5 * (f64) (((grKg_803E188C[index].unk14 -
+                                       grKg_803E188C[index - 1].unk14) /
+                                      6.0f) +
+                                     ((grKg_803E188C[index + 1].unk14 -
+                                       grKg_803E188C[index].unk14) /
+                                      6.0f))));
 
     if (angle > MTXDegToRad(yakumono_param->unkAC)) {
         angle = MTXDegToRad(yakumono_param->unkAC);

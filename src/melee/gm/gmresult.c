@@ -154,7 +154,7 @@ return_true:
     return true;
 }
 
-static inline s32 gmResultFindNth(u8* values, s32 n)
+static inline s32 gmResultFindNth(const u8* values, s32 n)
 {
     s32 i;
 
@@ -233,8 +233,7 @@ void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
             if (0 <= pair_idx) {
                 struct lbl_8046B6A0_24C_44C_t* tmp =
                     (struct lbl_8046B6A0_24C_44C_t*) lbl_8046DBE8.x94->x44C;
-                s32 i = gmResultFindNth(tmp[(u8) slot].x0,
-                                        pair_idx + 1);
+                s32 i = gmResultFindNth(tmp[(u8) slot].x0, pair_idx + 1);
                 stat_value = tmp[(u8) slot].x104[i];
                 if (stat_value < 0) {
                     value_id = HSD_SisLib_803A6B98(text3, const_zero,
@@ -1141,8 +1140,7 @@ void fn_80175DC8(HSD_GObj* gobj)
     lb_80011E24(jobj, &sp100, 0x69, -1);
     data->x28 = sp100;
 
-    jobj_iter =
-        (HSD_JObj**) (data_iter == data ? data_iter : data) + (i = 0);
+    jobj_iter = (HSD_JObj**) (data_iter == data ? data_iter : data) + (i = 0);
     jobj_iter += offsetof(ResultsData, x34) / sizeof(*jobj_iter);
     for (; i < 6; i++, jobj_iter++) {
         lb_80011E24(jobj, jobj_iter, i + 0x62, -1);
