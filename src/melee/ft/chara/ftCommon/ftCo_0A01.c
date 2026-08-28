@@ -1961,11 +1961,11 @@ static inline bool ftCo_800A3908_inline0(Fighter* fp,
 
 static inline s32 ftCo_800A3908_inline1(float x, float y)
 {
-    Vec3 floor_normal;
-    Vec3 floor_pos;
-    int line_id;
-    u32 flags;
     s32 result;
+    Vec3 floor_normal;
+    int line_id;
+    Vec3 floor_pos;
+    u32 flags;
 
     line_id = -1;
     result = mpCheckFloor(x, 5.0f + y, x, y - 5.0f, 0.0f, &floor_pos, &line_id,
@@ -1976,11 +1976,16 @@ static inline s32 ftCo_800A3908_inline1(float x, float y)
     return result;
 }
 
+static inline float ftCo_GetTerminalVelocity(Fighter* fp)
+{
+    return fp->co_attrs.terminal_velocity;
+}
+
 bool ftCo_800A3908(Fighter* fp, bool arg1)
 {
     f32 ez;
     struct Fighter_x1A88_t* data = &fp->x1A88;
-    mp_UnkStruct0* island;
+    f32 dist;
     Vec3 island_pos;
     f32 ex;
     f32 ey;
@@ -1988,15 +1993,14 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     f32 grav;
     f32 dx;
     f32 px;
-    f32 dist;
+    mp_UnkStruct0* island;
     f32 ddx;
     f32 ddy;
     s32 t;
     s32 frames;
     struct Fighter_x1A88_t* data2;
+    StageInfo* info;
     s32 ok;
-
-    data2 = &fp->x1A88;
 
     grav = fp->co_attrs.gravity;
     if (grav < 0.00001f && grav > -0.00001f) {
@@ -2009,6 +2013,8 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     } else {
         frames = -(-fp->co_attrs.terminal_velocity - fp->pos_delta.y) / grav;
     }
+    info = &stage_info;
+    data2 = &fp->x1A88;
     PAD_STACK(0x18);
     for (island = mpIsland_80458E88.next; island != NULL;
          island = island->next)
@@ -2050,7 +2056,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                     fp->cur_pos.y +
                     ((fp->pos_delta.y * frames -
                       0.5 * (fp->co_attrs.gravity * sqrtf((f32) frames))) -
-                     (f32) (t - frames) * fp->co_attrs.terminal_velocity);
+                     (f32) (t - frames) * ftCo_GetTerminalVelocity(fp));
             }
             if (arg1 != 0) {
                 if (!(land_y + data->x558 < ey)) {
@@ -2094,7 +2100,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
                             data2->x54.y = ey;
                             data2->x38 = 5.0f;
                             {
-                                GrKind kind = stage_info.grkind;
+                                GrKind kind = info->grkind;
                                 ftCo_800A1CC4(fp, ftCo_803C6594[kind]);
                             }
                         }
@@ -2105,11 +2111,6 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
         }
     }
     return 0;
-}
-
-static inline float ftCo_GetTerminalVelocity(Fighter* fp)
-{
-    return fp->co_attrs.terminal_velocity;
 }
 
 static inline bool ftCo_800A4038_inline0(Fighter* fp,
