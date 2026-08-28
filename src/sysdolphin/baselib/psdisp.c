@@ -1886,24 +1886,19 @@ static inline void psUpdateProjectionCache(f32 perspective)
         f32 w3;
         f32 y_scale;
         f32 y_offset;
-        f32 product;
         f32 y0;
         f32 y1;
         f32 y2;
         f32 y3;
 
         w0 = vmtx[2][0];
-        product = x_offset * w0;
-        pvmtx[0][0] = x_scale * vmtx[0][0] + product;
+        pvmtx[0][0] = x_scale * vmtx[0][0] + x_offset * w0;
         w1 = vmtx[2][1];
-        product = x_offset * w1;
-        pvmtx[0][1] = x_scale * vmtx[0][1] + product;
+        pvmtx[0][1] = x_scale * vmtx[0][1] + x_offset * w1;
         w2 = vmtx[2][2];
-        product = x_offset * w2;
-        pvmtx[0][2] = x_scale * vmtx[0][2] + product;
+        pvmtx[0][2] = x_scale * vmtx[0][2] + x_offset * w2;
         w3 = vmtx[2][3];
-        product = x_offset * w3;
-        pvmtx[0][3] = x_scale * vmtx[0][3] + product;
+        pvmtx[0][3] = x_scale * vmtx[0][3] + x_offset * w3;
         y_scale = prj[3];
         y_offset = prj[4];
         y0 = y_offset * w0;
@@ -1915,21 +1910,14 @@ static inline void psUpdateProjectionCache(f32 perspective)
         pvmtx[1][2] = y_scale * vmtx[1][2] + y2;
         pvmtx[1][3] = y_scale * vmtx[1][3] + y3;
     } else {
-        f32 x_offset = prj[2];
-        f32 x_scale = prj[1];
-        f32 y_offset;
-        f32 y_scale;
-
-        pvmtx[0][0] = x_scale * vmtx[0][0] + x_offset;
-        pvmtx[0][1] = x_scale * vmtx[0][1] + x_offset;
-        pvmtx[0][2] = x_scale * vmtx[0][2] + x_offset;
-        pvmtx[0][3] = x_scale * vmtx[0][3] + x_offset;
-        y_scale = prj[3];
-        y_offset = prj[4];
-        pvmtx[1][0] = y_scale * vmtx[1][0] + y_offset;
-        pvmtx[1][1] = y_scale * vmtx[1][1] + y_offset;
-        pvmtx[1][2] = y_scale * vmtx[1][2] + y_offset;
-        pvmtx[1][3] = y_scale * vmtx[1][3] + y_offset;
+        pvmtx[0][0] = prj[1] * vmtx[0][0] + prj[2];
+        pvmtx[0][1] = prj[1] * vmtx[0][1] + prj[2];
+        pvmtx[0][2] = prj[1] * vmtx[0][2] + prj[2];
+        pvmtx[0][3] = prj[1] * vmtx[0][3] + prj[2];
+        pvmtx[1][0] = prj[3] * vmtx[1][0] + prj[4];
+        pvmtx[1][1] = prj[3] * vmtx[1][1] + prj[4];
+        pvmtx[1][2] = prj[3] * vmtx[1][2] + prj[4];
+        pvmtx[1][3] = prj[3] * vmtx[1][3] + prj[4];
     }
     /// @todo Passing @c rvmtx directly swaps the first two axis loads.
     psUpdateBillboardAxes(*(const Mtx*) rvmtx);
