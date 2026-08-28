@@ -1093,54 +1093,89 @@ void fn_80186400(void)
 
 static char lbl_804D40B0[] = "IrRdMap";
 
-static inline void gm_80186634_SetupScene(void)
+typedef struct ClassicArchiveNameArray {
+    const char* v[4];
+} ClassicArchiveNameArray;
+
+typedef struct ClassicArchiveNameLocal {
+    ClassicArchiveNameArray names;
+    u32 pad;
+} ClassicArchiveNameLocal;
+
+static inline void*
+gm_80186634_LoadLightList(void)
 {
-    HSD_GObj* camera_gobj;
-    HSD_GObj* camera_gobj2;
-    HSD_GObj* model_gobj;
-    HSD_GObj* fog_gobj;
+    return lb_80011AC4(lbl_804D65FC->lights);
+}
+
+static inline void
+gm_80186634_SetupLight(void)
+{
+    HSD_GObj* gobj;
+
+    gobj = GObj_Create(0xB, 3, 0);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_LightKind,
+                            gm_80186634_LoadLightList());
+    GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
+}
+
+static inline void
+gm_80186634_SetupCamera(void)
+{
+    HSD_GObj* gobj2;
+    HSD_GObj* gobj;
     HSD_CObj* cobj;
     HSD_CObj* cobj2;
-    HSD_JObj* jobj;
-    HSD_Fog* fog;
 
-    camera_gobj = GObj_Create(0x13, 0x14, 0);
+    gobj = GObj_Create(0x13, 0x14, 0);
     cobj = HSD_CObjLoadDesc(lbl_804D65FC->cameras[0].desc);
     cobj2 = HSD_CObjLoadDesc(lbl_804D6600->cameras[0].desc);
-    HSD_GObjObject_80390A70(camera_gobj, HSD_GObj_CameraKind, cobj);
-    GObj_SetupGXLinkMax(camera_gobj, HSD_GObj_803910D8, 8);
-    camera_gobj->gxlink_prios = 0x801;
-    camera_gobj2 = GObj_Create(0x13, 0x15, 0);
-    HSD_GObjObject_80390A70(camera_gobj2, HSD_GObj_CameraKind, cobj2);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
+    GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 8);
+    gobj->gxlink_prios = 0x801;
+    gobj2 = GObj_Create(0x13, 0x15, 0);
+    HSD_GObjObject_80390A70(gobj2, HSD_GObj_CameraKind, cobj2);
     if (lbl_8047368C.model_scale_kind == 4) {
-        GObj_SetupGXLinkMax(camera_gobj2,
-                            (GObj_RenderFunc) (Event) fn_8018569C, 8);
+        GObj_SetupGXLinkMax(gobj2, (GObj_RenderFunc) (Event) fn_8018569C, 8);
     } else {
-        GObj_SetupGXLinkMax(camera_gobj2,
-                            (GObj_RenderFunc) (Event) fn_8018575C, 8);
+        GObj_SetupGXLinkMax(gobj2, (GObj_RenderFunc) (Event) fn_8018575C, 8);
     }
-    fn_80186400();
-    model_gobj = GObj_Create(0xE, 0xF, 0);
+}
+
+static inline void
+gm_80186634_SetupModel(void)
+{
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+
+    gobj = GObj_Create(0xE, 0xF, 0);
     jobj = HSD_JObjLoadJoint(lbl_804D6600->models[0]->joint);
-    HSD_GObjObject_80390A70(model_gobj, HSD_GObj_JObjKind, jobj);
-    GObj_SetupGXLink(model_gobj, HSD_GObj_JObjCallback, 0xC, 0);
-    HSD_GObj_SetupProc(model_gobj, (HSD_GObjEvent) (Event) fn_8018504C, 0x11);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xC, 0);
+    HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) (Event) fn_8018504C, 0x11);
     gm_8016895C(jobj, lbl_804D6600->models[0], 0);
     HSD_JObjReqAnimAll(jobj, (f32) ((lbl_8047368C.xEE - 1) * 0x32));
     HSD_JObjAnimAll(jobj);
     lb_80011E24(jobj, &lbl_804735A8.x4[4], 0xE, -1);
     lb_80011E24(jobj, &lbl_804735A8.x4[5], 1, -1);
-    fog_gobj = GObj_Create(0xE, 0xF, 0);
+}
+
+static inline void
+gm_80186634_SetupFog(void)
+{
+    HSD_GObj* gobj;
+    HSD_Fog* fog;
+
+    gobj = GObj_Create(0xE, 0xF, 0);
     fog = HSD_FogLoadDesc(lbl_804D65FC->fogs[0].desc);
-    HSD_GObjObject_80390A70(fog_gobj, HSD_GObj_FogKind, fog);
-    GObj_SetupGXLink(fog_gobj, HSD_GObj_FogCallback, 0xB, 0);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_FogKind, fog);
+    GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0xB, 0);
 }
 
 void fn_80186634(void* arg0)
 {
-    HSD_GObj* gobj;
-    const char* names[4];
-    PAD_STACK(16);
+    ClassicArchiveNameLocal local;
+    PAD_STACK(12);
 
     lbArchive_80016DBC("GmIntEz.dat", &lbl_804D6604, "gmIntroEasyTable", 0);
     Camera_80028B9C(0xC);
@@ -1154,20 +1189,14 @@ void fn_80186634(void* arg0)
     efLib_Init();
     efAsync_LoadSync(0);
 
-    names[0] = lbl_803B7C58[0];
-    names[1] = lbl_803B7C58[1];
-    names[3] = lbl_803B7C58[3];
-    names[2] = lbl_803B7C58[2];
-    lbl_804D65F4 =
-        lbArchive_80016DBC(names[lbl_8047368C.game_type], &lbl_804D65FC,
-                           "ScItrAllstar_scene_data", 0);
+    local.names = *(const ClassicArchiveNameArray*) lbl_803B7C58;
+    lbl_804D65F4 = lbArchive_80016DBC(
+        local.names.v[lbl_8047368C.game_type], &lbl_804D65FC,
+        "ScItrAllstar_scene_data", 0);
     lbl_804D65F8 = lbArchive_80016DBC(lbl_804D40B0, &lbl_804D6600,
                                       "ScItrAllstar_scene_data", 0);
 
-    gobj = GObj_Create(0xB, 3, 0);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_LightKind,
-                            lb_80011AC4(lbl_804D65FC->lights));
-    GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
+    gm_80186634_SetupLight();
 
     if (lbl_8047368C.model_scale_kind != 3) {
         lbl_8047368C.game_type = 0;
@@ -1175,19 +1204,28 @@ void fn_80186634(void* arg0)
 
     switch (lbl_8047368C.model_scale_kind) {
     case 3:
-        gm_80186634_SetupScene();
+        gm_80186634_SetupCamera();
+        fn_80186400();
+        gm_80186634_SetupModel();
+        gm_80186634_SetupFog();
         fn_80186080();
         break;
     case 0:
     case 1:
     case 2:
-        gm_80186634_SetupScene();
+        gm_80186634_SetupCamera();
+        fn_80186400();
+        gm_80186634_SetupModel();
+        gm_80186634_SetupFog();
         fn_801861B8();
         fn_80185D64();
         fn_80185F5C(fn_80185E34());
         break;
     case 4:
-        gm_80186634_SetupScene();
+        gm_80186634_SetupCamera();
+        fn_80186400();
+        gm_80186634_SetupModel();
+        gm_80186634_SetupFog();
         fn_801861B8();
         fn_80185D64();
         fn_80185A0C();
