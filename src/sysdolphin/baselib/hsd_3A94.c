@@ -3984,6 +3984,13 @@ static inline void fn_803B0120_close(CardState* state)
     }
 }
 
+static inline s32 fn_803B0120_chunk_size(CardState* state)
+{
+    s32 size = state->x8;
+
+    return size - 0x20;
+}
+
 static inline s32 fn_803B0120_queue_verify(CardState* state, s32 block,
                                            s32 logical, s32 seq, void* data,
                                            s32 size)
@@ -4012,39 +4019,36 @@ static inline s32 fn_803B0120_queue_write(CardState* state, s32 block,
                                           s32 logical, s32 seq, void* data,
                                           s32 size, s32 file_id)
 {
+    CardCmd cmd;
     s32 ofs = fn_803ACBE8(state, block);
+    CardCmd init_cmd;
     s32 result;
 
     if (block == 0) {
+        s32 zero = 0;
+
         if (logical != 0) {
             return -0x101;
         }
-        {
-            CardCmd cmd;
-            s32 zero = 0;
-            cmd.type = 2;
-            cmd.state = state;
-            cmd.x10 = zero;
-            cmd.x14 = zero;
-            cmd.x18 = (void*) zero;
-            cmd.x20 = zero;
-            cmd.x1C = ofs;
-            fn_803AC168((s32*) &cmd);
-        }
+        init_cmd.type = 2;
+        init_cmd.state = state;
+        init_cmd.x10 = zero;
+        init_cmd.x14 = zero;
+        init_cmd.x18 = (void*) zero;
+        init_cmd.x20 = zero;
+        init_cmd.x1C = ofs;
+        fn_803AC168((s32*) &init_cmd);
     }
-    {
-        CardCmd cmd;
-        cmd.type = 1;
-        cmd.state = state;
-        cmd.xC = block;
-        cmd.x10 = logical;
-        cmd.x14 = seq;
-        cmd.x18 = data;
-        cmd.x20 = size;
-        cmd.x1C = ofs;
-        cmd.x8 = file_id;
-        result = fn_803AC168((s32*) &cmd);
-    }
+    cmd.type = 1;
+    cmd.state = state;
+    cmd.xC = block;
+    cmd.x10 = logical;
+    cmd.x14 = seq;
+    cmd.x18 = data;
+    cmd.x20 = size;
+    cmd.x1C = ofs;
+    cmd.x8 = file_id;
+    result = fn_803AC168((s32*) &cmd);
     return result;
 }
 
@@ -4064,7 +4068,7 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 remaining;
     s32 result;
     u8* data;
-    PAD_STACK(80);
+    PAD_STACK(16);
 
     needs_rewrite = 0;
     if (arg3 == 0) {
@@ -4219,7 +4223,7 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
             if (logical == 0) {
                 chunk = fn_803B0120_first_chunk(state);
             } else {
-                chunk = state->x8 - 0x20;
+                chunk = fn_803B0120_chunk_size(state);
             }
 
             if (remaining > chunk) {
@@ -4300,24 +4304,8 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         secondary_count--;
         if (arg3 != 0) {
             s32 block = block_map[1][secondary_count];
-            s32 cmd_result;
-            s32 ofs = fn_803ACBE8(state, block);
-            if (!block) {
-                cmd_result = -257;
-            } else {
-                CardCmd cmd;
-                s32 zero = 0;
-                cmd.type = 1;
-                cmd.state = state;
-                cmd.xC = block;
-                cmd.x10 = 0xFFFF;
-                cmd.x14 = zero;
-                cmd.x18 = (void*) zero;
-                cmd.x20 = zero;
-                cmd.x1C = ofs;
-                cmd.x8 = arg1;
-                cmd_result = fn_803AC168((s32*) &cmd);
-            }
+            s32 cmd_result = fn_803B0120_queue_write(state, block, 0xFFFF, 0,
+                                                     NULL, 0, arg1);
             if (cmd_result < 0) {
                 fn_803B0120_rewind(entries);
                 return cmd_result;
@@ -4334,16 +4322,19 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         }
     }
 
-    remaining = file_size;
-    data = (u8*) arg2;
-    current_seq = (u8) (current_seq + 1);
+    {
+        s32 next = current_seq + 1;
+        remaining = file_size;
+        data = (u8*) arg2;
+        current_seq = next & 0xFF;
+    }
     for (i = 0; i < file_blocks && remaining > 0; i++) {
         s32 logical = blocks_before + i;
         s32 chunk;
         if (logical == 0) {
             chunk = fn_803B0120_first_chunk(state);
         } else {
-            chunk = state->x8 - 0x20;
+            chunk = fn_803B0120_chunk_size(state);
         }
 
         if (remaining > chunk) {
