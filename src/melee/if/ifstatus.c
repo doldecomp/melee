@@ -629,7 +629,8 @@ HSD_GObj* ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
     HudIndex* hud = ifStatus_GetHUDInfo();
 
     if (state->HUD_parent_entity == NULL) {
-        gobj = GObj_Create(0xE, 0xF, 0);
+        HSD_GObj* new_gobj = GObj_Create(0xE, 0xF, 0);
+        gobj = new_gobj;
         jobj = HSD_JObjLoadJoint(hud->unk258);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
         GObj_SetupGXLink(gobj, (void (*)(HSD_GObj*, int)) ifStatus_802F5DE0,
@@ -651,7 +652,8 @@ HSD_GObj* ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
     vec = ifAll_GetPlayerHUDPosition((u8) player_idx);
     HSD_JObjSetTranslate(jobj, vec);
     for (i = 0; i < 4; i++) {
-        state->jobjs[i] = (HSD_JObj*) ifStatus_802F6194((HSD_GObj*) jobj, i);
+        HSD_GObj* node = (HSD_GObj*) jobj;
+        state->jobjs[i] = (HSD_JObj*) ifStatus_802F6194(node, i);
         state->translation_x[i] = HSD_JObjGetTranslationX(state->jobjs[i]);
         state->translation_y[i] = HSD_JObjGetTranslationY(state->jobjs[i]);
     }
