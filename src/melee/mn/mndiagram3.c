@@ -594,6 +594,20 @@ static inline f32 mnDiagram3_GetRowSpacing(Diagram3* data)
            HSD_JObjGetTranslationY(data->jobjs[8]);
 }
 
+static inline void mnDiagram3_ClearRowLabels(Diagram3* data)
+{
+    int i = 0;
+    Diagram3* check_data = data;
+    Diagram3* text_data = data;
+
+    do {
+        if (check_data->row_labels[i] != NULL) {
+            HSD_SisLib_803A5CC4(text_data->row_labels[i]);
+            check_data->row_labels[i] = NULL;
+        }
+    } while (++i < 10);
+}
+
 void mnDiagram3_HandleInput(HSD_GObj* gobj)
 {
     char* base = (char*) &mnDiagram3_803EEC10;
@@ -609,24 +623,13 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
 
     if (input & MenuInput_Back) {
         sfxBack();
-        i = mn_804A04F0.entering_menu = 0;
+        mn_804A04F0.entering_menu = 0;
         gmMainLib_GetGameRules()->xD =
             ((Diagram3*) mnDiagram3_804D6C20->user_data)->is_name_mode;
         mnDiagram2_ClearDetailView(mnDiagram3_804D6C20);
         HSD_GObjPLink_80390228(data->popup_gobj);
         data = mnDiagram3_804D6C20->user_data;
-        {
-            HSD_Text** check_cur = data->row_labels;
-            HSD_Text** text_cur = &data->row_labels[i];
-            do {
-                if (*check_cur != NULL) {
-                    HSD_SisLib_803A5CC4(*text_cur);
-                    *check_cur = NULL;
-                }
-                check_cur++;
-                text_cur++;
-            } while (++i < 0xA);
-        }
+        mnDiagram3_ClearRowLabels(data);
         mn_80229894(0x1C, 0, 3);
         return;
     }
@@ -637,17 +640,7 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
         mnDiagram2_ClearDetailView(mnDiagram3_804D6C20);
         HSD_GObjPLink_80390228(data->popup_gobj);
         data = mnDiagram3_804D6C20->user_data;
-        {
-            Diagram3* check_data = data;
-            Diagram3* text_data = data;
-            i = 0;
-            do {
-                if (check_data->row_labels[i] != NULL) {
-                    HSD_SisLib_803A5CC4(text_data->row_labels[i]);
-                    check_data->row_labels[i] = NULL;
-                }
-            } while (++i < 0xA);
-        }
+        mnDiagram3_ClearRowLabels(data);
         HSD_GObjPLink_80390228(gobj);
         if (input & MenuInput_LTrigger) {
             mnDiagram2_Init();
@@ -669,17 +662,7 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
             data->scroll_offset = 0;
         }
         data = mnDiagram3_804D6C20->user_data;
-        {
-            Diagram3* check_data = data;
-            Diagram3* text_data = data;
-            i = 0;
-            do {
-                if (check_data->row_labels[i] != NULL) {
-                    HSD_SisLib_803A5CC4(text_data->row_labels[i]);
-                    check_data->row_labels[i] = NULL;
-                }
-            } while (++i < 0xA);
-        }
+        mnDiagram3_ClearRowLabels(data);
         {
             int base_idx;
             u8 base_idx_u8;
@@ -755,17 +738,7 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
             sfxMove();
             data->scroll_offset = data->scroll_offset - 1;
             data = mnDiagram3_804D6C20->user_data;
-            {
-                Diagram3* check_data = data;
-                Diagram3* text_data = data;
-                i = 0;
-                do {
-                    if (check_data->row_labels[i] != NULL) {
-                        HSD_SisLib_803A5CC4(text_data->row_labels[i]);
-                        check_data->row_labels[i] = NULL;
-                    }
-                } while (++i < 0xA);
-            }
+            mnDiagram3_ClearRowLabels(data);
             data = mnDiagram3_804D6C20->user_data;
             base_idx = data->scroll_offset;
             base_idx_u8 = base_idx;
@@ -835,17 +808,7 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
             sfxMove();
             data->scroll_offset = data->scroll_offset + 1;
             data = mnDiagram3_804D6C20->user_data;
-            {
-                Diagram3* check_data = data;
-                Diagram3* text_data = data;
-                i = 0;
-                do {
-                    if (check_data->row_labels[i] != NULL) {
-                        HSD_SisLib_803A5CC4(text_data->row_labels[i]);
-                        check_data->row_labels[i] = NULL;
-                    }
-                } while (++i < 0xA);
-            }
+            mnDiagram3_ClearRowLabels(data);
             data = mnDiagram3_804D6C20->user_data;
             base_idx = data->scroll_offset;
             base_idx_u8 = base_idx;
