@@ -1047,6 +1047,27 @@ s32 mn_80230D18(struct mn_802307F8_t* arg0, HSD_JObj* arg1, s8 arg2)
     return ret;
 }
 
+static inline s32 mn_80230E38_CountVisible(u8 limit)
+{
+    u8 option_index;
+    s32 visible;
+    s32 i;
+    s32 count = 0;
+
+    for (i = 0; i < (s32) limit; i++) {
+        option_index = i;
+        if (gm_GetCurrentGameMode() == GM_TOURNAMENT && option_index == 4) {
+            visible = 0;
+        } else {
+            visible = 1;
+        }
+        if (visible != 0) {
+            count++;
+        }
+    }
+    return count;
+}
+
 HSD_GObj* mn_80230E38(int arg0)
 {
     u8 operand_pad[12];
@@ -1060,7 +1081,6 @@ HSD_GObj* mn_80230E38(int arg0)
     struct mn_802307F8_t* user_data;
     u8 num_options;
     u8 selected;
-    u8 option_index;
     s32 i, j;
     s32 vis_before;
     s32 vis_total;
@@ -1125,34 +1145,10 @@ HSD_GObj* mn_80230E38(int arg0)
     desc_ptr = (StaticModelDesc**) (mn_803EC600 + 0x1EC);
     sub_count_ptr = (u16*) (mn_803EC600 + 0x208);
     for (i = 0; i < (s32) num_options; desc_ptr++, i++) {
-        vis_before = 0;
-        for (j = vis_before; j < (s32) (u8) i; j++) {
-            option_index = j;
-            if (gm_GetCurrentGameMode() == GM_TOURNAMENT && option_index == 4)
-            {
-                visible = 0;
-            } else {
-                visible = 1;
-            }
-            if (visible != 0) {
-                vis_before++;
-            }
-        }
+        vis_before = mn_80230E38_CountVisible((u8) i);
 
-        vis_total = 0;
         option_jobj = user_data->xC[((u16*) mn_803EC600)[(u8) vis_before]];
-        for (j = vis_total; j < 7; j++) {
-            option_index = j;
-            if (gm_GetCurrentGameMode() == GM_TOURNAMENT && option_index == 4)
-            {
-                visible = 0;
-            } else {
-                visible = 1;
-            }
-            if (visible != 0) {
-                vis_total++;
-            }
-        }
+        vis_total = mn_80230E38_CountVisible(7);
 
         HSD_JObjReqAnim(option_jobj, (f32) vis_total);
         HSD_JObjAnim(option_jobj);
@@ -1224,7 +1220,7 @@ HSD_GObj* mn_80230E38(int arg0)
                     } time_indices;
                     u8* index_ptr;
 
-                    PAD_STACK(0x28);
+                    PAD_STACK(0x18);
 
                     time_indices.packed.bytes4 = mn_804DBE10;
                     time_indices.packed.bytes2 = mn_804DBE14;
