@@ -3779,12 +3779,12 @@ after_verify:
                     block_map[0][i] = -1;
                 }
             }
-        }
-        if (secondary_count < file_blocks) {
-            if (arg3 == 0) {
-                fn_803AF3F0_close(state);
+            if (secondary_count < file_blocks) {
+                if (arg3 == 0) {
+                    fn_803AF3F0_close(state);
+                }
+                return -257;
             }
-            return -257;
         }
     }
 
