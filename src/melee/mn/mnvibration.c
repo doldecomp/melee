@@ -251,6 +251,18 @@ static inline f32 mnVibration_GetCursorYSpacing(f32 base_y, HSD_JObj* jobj)
     return HSD_JObjGetTranslationY(jobj) - base_y;
 }
 
+static inline void mnVibration_AnimatePortPanel(MnVibrationData* data,
+                                                s32 port)
+{
+    HSD_JObj* jobj;
+    u8 state;
+
+    state = data->x0[port + 2];
+    jobj = data->jobjs[mnVibration_PortPanelJointIds[(u8) port]];
+    HSD_JObjReqAnimAll(jobj, (f32) state);
+    HSD_JObjAnimAll(jobj);
+}
+
 void mnVibration_HandleInput(HSD_GObj* gobj)
 {
     HSD_JObj* cursor_jobj;
@@ -259,7 +271,6 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
     s32 i;
     u64 inputs;
     u64 inputs_repeat;
-    HSD_JObj* panel_jobj;
     u8 cursor_row;
     u8 scroll_offset;
     s32 name_count;
@@ -375,25 +386,15 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
         for (j = 0; j < 4; j++) {
             inputs = gm_GetButtonsTriggered(j);
             if ((inputs & PAD_ANY_LEFT) && data->x0[j + 2] == 1) {
-                u8 state;
                 sfxMove();
                 data->x0[j + 2] = 0;
-                state = data->x0[j + 2];
-                panel_jobj =
-                    data->jobjs[mnVibration_PortPanelJointIds[(u8) j]];
-                HSD_JObjReqAnimAll(panel_jobj, (f32) state);
-                HSD_JObjAnimAll(panel_jobj);
+                mnVibration_AnimatePortPanel(data, j);
             } else {
                 inputs = gm_GetButtonsTriggered(j);
                 if ((inputs & PAD_ANY_RIGHT) && data->x0[j + 2] == 0) {
-                    u8 state;
                     sfxMove();
                     data->x0[j + 2] = 1;
-                    state = data->x0[j + 2];
-                    panel_jobj =
-                        data->jobjs[mnVibration_PortPanelJointIds[(u8) j]];
-                    HSD_JObjReqAnimAll(panel_jobj, (f32) state);
-                    HSD_JObjAnimAll(panel_jobj);
+                    mnVibration_AnimatePortPanel(data, j);
                 }
             }
         }
