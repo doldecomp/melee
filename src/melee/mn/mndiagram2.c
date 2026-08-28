@@ -626,16 +626,18 @@ int mnDiagram2_GetStatValue(int is_name_mode, u8 stat_type, u8 entity_idx)
 /// @param stat_type Stat category index (0-23)
 /// @param row_idx Row position (0-9, 10 visible rows)
 /// @param entity_idx Fighter or Name index for stat lookup
-void mnDiagram2_CreateStatRow(HSD_GObj* gobj, int is_name_mode, u8 stat_type,
+void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                               u8 row_idx, u8 entity_idx)
 {
     u8 str[8];
     Vec3 sp20;
     Diagram2* data;
+    HSD_JObj* jobj;
     MnDiagram2RowLayout* base;
     HSD_Text* text;
     f32 f31;
     f32 f30;
+    int mode = is_name_mode;
     Diagram2* user_data = gobj->user_data;
 
     data = user_data;
@@ -679,8 +681,8 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, int is_name_mode, u8 stat_type,
 
                         if (var_r3 != 0 &&
                             mnDiagram_IsDistanceOverflow(
-                                mnDiagram2_GetStatValue(
-                                    is_name_mode, stat_type, entity_idx)))
+                                mnDiagram2_GetStatValue(mode, stat_type,
+                                                        entity_idx)))
                         {
                             HSD_SisLib_803A6368(text2, 0x7F);
                         } else {
@@ -692,12 +694,12 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, int is_name_mode, u8 stat_type,
                 {
                     int var_r0 = mnDiagram2_IsIconOnlyStat(stat_type);
 
-                    if (var_r0 != 0 && (u32) mnDiagram2_GetStatValue(
-                                           is_name_mode, stat_type,
-                                           entity_idx) < SELKIND_COUNT)
+                    if (var_r0 != 0 &&
+                        (u32) mnDiagram2_GetStatValue(
+                            mode, stat_type, entity_idx) < SELKIND_COUNT)
                     {
                         HSD_JObj* jobj = mnDiagram_CreateFighterIcon(
-                            mnDiagram2_GetStatValue(is_name_mode, stat_type,
+                            mnDiagram2_GetStatValue(mode, stat_type,
                                                     entity_idx),
                             0);
                         HSD_JObjSetTranslateX(jobj, base->icon_pos.x);
@@ -726,8 +728,8 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, int is_name_mode, u8 stat_type,
                     text3->default_alignment = 2;
 
                     if (mnDiagram2_IsTimeStat(stat_type)) {
-                        int val = mnDiagram2_GetStatValue(
-                            is_name_mode, stat_type, entity_idx);
+                        int val = mnDiagram2_GetStatValue(mode, stat_type,
+                                                          entity_idx);
                         if ((u32) val > 0x927BF) {
                             val = 0x927BF;
                         }
@@ -736,8 +738,8 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, int is_name_mode, u8 stat_type,
                         int var_r0_3 = mnDiagram2_IsDistanceStat(stat_type);
 
                         if (var_r0_3 != 0) {
-                            u32 val = mnDiagram2_GetStatValue(
-                                is_name_mode, stat_type, entity_idx);
+                            u32 val = mnDiagram2_GetStatValue(mode, stat_type,
+                                                              entity_idx);
                             val = mnDiagram_ConvertDistanceForDisplay(val);
                             if (val > 0x98967F) {
                                 val = 0x98967F;
@@ -749,7 +751,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, int is_name_mode, u8 stat_type,
 
                             if (var_r0_4 != 0) {
                                 int val = mnDiagram2_GetStatValue(
-                                    is_name_mode, stat_type, entity_idx);
+                                    mode, stat_type, entity_idx);
                                 if ((u32) val > 0xF423F) {
                                     val = 0xF423F;
                                 }
