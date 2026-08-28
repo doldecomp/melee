@@ -1379,7 +1379,7 @@ bool gm_801720F8(void)
     if (gm_8016B3D8()) {
         return true;
     }
-    return gm_GetRules()->x0_0 == 1;
+    return gm_GetRules()->match_mode == 1;
 }
 
 int gm_80172140(void)

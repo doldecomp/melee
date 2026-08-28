@@ -2638,9 +2638,9 @@ void gm_801905F0(StartMeleeData* arg0)
     gm_80168FC4();
     gm_80167A64(&arg0->rules);
     arg0->rules.is_teams = false;
-    arg0->rules.xE = tm->x28;
+    arg0->rules.stkind = tm->x28;
     fn_801640B0(&arg0->rules.x20);
-    arg0->rules.x0_0 = rules->mode;
+    arg0->rules.match_mode = rules->mode;
     if (rules->mode != 1) {
         arg0->rules.x0_6 = true;
     } else if (rules->stock_time_limit != 0) {
@@ -2651,22 +2651,22 @@ void gm_801905F0(StartMeleeData* arg0)
     if (arg0->rules.x0_6) {
         if (rules->mode != 1) {
             if (rules->time_limit == 0) {
-                arg0->rules.x10 = 99 * 60;
+                arg0->rules.time_limit = 99 * 60;
             } else {
-                arg0->rules.x10 = rules->time_limit * 60;
+                arg0->rules.time_limit = rules->time_limit * 60;
             }
         } else {
             if (rules->stock_time_limit == 0) {
-                arg0->rules.x10 = 99 * 60;
+                arg0->rules.time_limit = 99 * 60;
             } else {
-                arg0->rules.x10 = rules->stock_time_limit * 60;
+                arg0->rules.time_limit = rules->stock_time_limit * 60;
             }
         }
     }
-    if (arg0->rules.x0_0 == 1) {
+    if (arg0->rules.match_mode == 1) {
         arg0->rules.x2_0 = true;
     }
-    arg0->rules.x0_7 = false;
+    arg0->rules.timer_counts_up = false;
     arg0->rules.x4_2 = false;
     arg0->rules.x4_4 = false;
     arg0->rules.xB = gmMainLib_8015CC58()->item_freq;
@@ -2694,7 +2694,7 @@ void gm_801905F0(StartMeleeData* arg0)
     } else {
         arg0->rules.disable_pausing = true;
     }
-    if (rules->score_display != 0 && !arg0->rules.x0_0) {
+    if (rules->score_display != 0 && !arg0->rules.match_mode) {
         arg0->rules.x3_0 = true;
     } else {
         arg0->rules.x3_0 = false;
@@ -2735,7 +2735,7 @@ void gm_801905F0(StartMeleeData* arg0)
         }
     }
 
-    sp18.stkind = arg0->rules.xE;
+    sp18.stkind = arg0->rules.stkind;
     for (i = 0; i < 4; i++) {
         sp18.slot_type[i] = arg0->players[i].slot_type;
         sp18.char_id[i] = arg0->players[i].c_kind;

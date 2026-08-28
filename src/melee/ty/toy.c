@@ -5200,46 +5200,27 @@ void Toy_803102D0(void)
     }
 }
 
-static inline void Toy_80310324_setup_sobjs(ToyGlobalsS_* data, UNK_T* syms)
+static inline void toy_toggle_flag(Toy26B8* toy)
 {
-    s32 i;
-    HSD_SObj* sobj;
-
-    i = 0;
-    do {
-        sobj = HSD_SObjLib_803A477C(data->x8, syms[i], 0, 0, 0x80, 0);
-        sobj->x1C = 2.0f;
-        i += 1;
-        sobj->x20 = 2.0f;
-        sobj->x40 = 1;
-    } while (i < 3);
-}
-
-static inline void _Toy_80310324_setup_trophy(Toy26B8* toy, ToyGlobalsS_* tg)
-{
-    s32 trophy_count;
-    ToyGlobalsS_* display;
     s16 idx;
+    s16 idx2;
+    ToyGlobalsS_* tg6;
     u16* flags;
-    ToySubStructS_* selected;
-    ToyGlobalsS_* camera;
+
+    tg6 = (ToyGlobalsS_*) Toy_sbss_804D6EE0;
+    idx = Toy_sbss_804D6EDC[tg6->x154];
 
     if (gm_IsCurrently1PMode() != 0 ||
         gm_GetCurrentGameMode() == GM_TOY_LOTTERY)
     {
-        trophy_count = toy->trophy_count;
+        flags = toy->trophy_flags;
     } else {
-        trophy_count = *gmMainLib_GetTrophyCount();
+        flags = gmMainLib_GetTrophyFlags();
     }
 
-    if (trophy_count != 0) {
-        memzero(&toy->anim, sizeof(toy->anim));
-        _Toy_8030FE48((ToyDisplayList*) Toy_sbss_804D6EE0, 0);
-        display = (ToyGlobalsS_*) Toy_sbss_804D6EE0;
-        Toy_803087F4(display->x140);
-
-        display = (ToyGlobalsS_*) Toy_sbss_804D6EE0;
-        idx = Toy_sbss_804D6EDC[display->x154];
+    if (flags[idx] & 0x8000) {
+        tg6 = (ToyGlobalsS_*) Toy_sbss_804D6EE0;
+        idx2 = Toy_sbss_804D6EDC[tg6->x154];
 
         if (gm_IsCurrently1PMode() != 0 ||
             gm_GetCurrentGameMode() == GM_TOY_LOTTERY)
@@ -5249,38 +5230,38 @@ static inline void _Toy_80310324_setup_trophy(Toy26B8* toy, ToyGlobalsS_* tg)
             flags = gmMainLib_GetTrophyFlags();
         }
 
-        if (flags[idx] & 0x8000) {
-            display = (ToyGlobalsS_*) Toy_sbss_804D6EE0;
-            {
-                s16 new_idx = Toy_sbss_804D6EDC[display->x154];
-                idx = new_idx;
-            }
-
-            if (gm_IsCurrently1PMode() != 0 ||
-                gm_GetCurrentGameMode() == GM_TOY_LOTTERY)
-            {
-                flags = toy->trophy_flags;
-            } else {
-                flags = gmMainLib_GetTrophyFlags();
-            }
-
-            flags += idx;
-            *flags ^= 0x8000;
-        }
-
-        display = (ToyGlobalsS_*) Toy_sbss_804D6EE0;
-        selected = display->x140;
-        _Toy_803084A0(selected->x10);
-
-        display = (ToyGlobalsS_*) Toy_sbss_804D6EE0;
-        selected = display->x140;
-        Toy_803083D8(tg->x30, selected->x10);
-
-        camera = (ToyGlobalsS_*) _Toy_sbss_804D6E6C;
-        camera->x0 = GObj_Create(6, 7, 0);
-        GObj_SetupGXLink(camera->x0, _Toy_80312050, 0x39, 0);
-        camera->x4 = 1;
+        flags += idx2;
+        *flags ^= 0x8000;
     }
+}
+
+static inline void toy_make_gobj(void)
+{
+    ToyGlobalsS_* tg3;
+
+    tg3 = (ToyGlobalsS_*) _Toy_sbss_804D6E6C;
+    tg3->x0 = GObj_Create(6, 7, 0);
+    GObj_SetupGXLink(tg3->x0, _Toy_80312050, 0x39, 0);
+    tg3->x4 = 1;
+}
+
+static inline void toy_sobj_loop(ToyGlobalsS_* tg2, UNK_T* syms)
+{
+    s32 i;
+    HSD_SObj* sobj;
+    s32 one;
+    f32 two;
+
+    i = 0;
+    two = 2.0f;
+    one = 1;
+    do {
+        sobj = HSD_SObjLib_803A477C(tg2->x8, syms[i], 0, 0, 0x80, 0);
+        *(f32*) ((char*) sobj + 0x1C) = two;
+        i += 1;
+        *(f32*) ((char*) sobj + 0x20) = two;
+        *(s32*) ((char*) sobj + 0x40) = one;
+    } while (i < 3);
 }
 
 void Toy_80310324(void)
@@ -5293,8 +5274,8 @@ void Toy_80310324(void)
     HSD_GObj* gobj;
     UNK_T syms[3];
     UNK_T sym[1];
-
-    PAD_STACK(12);
+    s32 var_r0;
+    HSD_GObj* gobj;
 
     toy = (void*) &_Toy_804A26B8;
     tg = (ToyGlobalsS_*) Toy_sbss_804D6ED8;
@@ -5322,7 +5303,7 @@ void Toy_80310324(void)
         tg2->x8 = GObj_Create(4, 5, 0);
         GObj_SetupGXLink(tg2->x8, HSD_SObjLib_803A49E0, 0x32, 0);
 
-        Toy_80310324_setup_sobjs(tg2, syms);
+        toy_sobj_loop(tg2, syms);
     }
 
     _Toy_803075E8(0);
@@ -5336,7 +5317,32 @@ void Toy_80310324(void)
         gobj = *(HSD_GObj**) ((char*) gobj + 0x4);
     }
 
-    _Toy_80310324_setup_trophy(toy, tg);
+    if (gm_IsCurrently1PMode() != 0 ||
+        gm_GetCurrentGameMode() == GM_TOY_LOTTERY)
+    {
+        var_r0 = toy->trophy_count;
+    } else {
+        var_r0 = *gmMainLib_GetTrophyCount();
+    }
+
+    if (var_r0 != 0) {
+        memzero(&toy->anim, sizeof(toy->anim));
+        _Toy_8030FE48(Toy_sbss_804D6EE0, 0);
+        tg6 = (ToyGlobalsS_*) Toy_sbss_804D6EE0;
+        Toy_803087F4(tg6->x140);
+
+        toy_toggle_flag(toy);
+
+        tg6 = (ToyGlobalsS_*) Toy_sbss_804D6EE0;
+        sub = tg6->x140;
+        _Toy_803084A0(sub->x10);
+
+        tg6 = (ToyGlobalsS_*) Toy_sbss_804D6EE0;
+        sub = tg6->x140;
+        Toy_803083D8(tg->x30, sub->x10);
+
+        toy_make_gobj();
+    }
 
     _Toy_80307828(0);
 

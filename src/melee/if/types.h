@@ -178,6 +178,7 @@ struct un_80301C64_t {
     void* x0;
     s32 x4;
 };
+ASSERT_SIZE(struct un_80301C64_t, 0x8);
 
 enum soundtest_callback_arg0 {
     soundtest_callback_0,

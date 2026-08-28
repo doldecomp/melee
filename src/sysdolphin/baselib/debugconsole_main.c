@@ -2573,7 +2573,6 @@ void hsd_803975D4(void)
     u32 reset_mask;
     s32 port;
     u16 buttons;
-    u16 changed;
     u32 new_press;
 
     reset_mask = 0;
@@ -2610,17 +2609,16 @@ void hsd_803975D4(void)
     }
     ((struct ParticleInputState*) sp)->port = port;
     pads = ((struct ParticleInputState*) sp)->pads;
+    /* keeps pads a real local instead of a CSE temp; see reg alloc */
+    (void) pads;
     buttons = pads[((struct ParticleInputState*) sp)->port].button;
-    changed = ((PADStatus*) &sp
-                   ->_pad4[0x30])[((struct ParticleInputState*) sp)->port]
-                  .button ^
-              pads[((struct ParticleInputState*) sp)->port].button;
+    new_press =
+        (u16) (buttons &
+               ((&((PADStatus*)
+                       sp->_pad4)[4])[((struct ParticleInputState*) sp)->port]
+                    .button ^
+                buttons));
     sp->xC0 = buttons;
-    new_press = (u16) (buttons & changed);
-#ifdef MUST_MATCH
-    // Keep MWCC's CR update on the copy into new_press.
-    new_press = (u16) new_press;
-#endif
     if (new_press != 0) {
         ((struct ParticleInputState*) sp)->repeat = 0;
     } else if (pads[((struct ParticleInputState*) sp)->port].button != 0) {

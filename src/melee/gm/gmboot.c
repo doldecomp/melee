@@ -76,11 +76,10 @@ void bootOnLeave(GameScene* data)
         }
     }
 
-    // Set scene exit callback?
-    gm_801A4330(lb_8001CE78);
+    gm_SetGameModeOverride(lbCardGame_DecideGameMode);
 
     // Enter mode
-    // Gekko "boot to CSS" code changes scene_id to a hardcoded 2
+    // Gekko "boot to CSS" code changes scene_id to a hardcoded 2 (::GM_VS)
     gm_ChangeGameModeAfterCurrentScene(scene_data->mode_id);
 }
 

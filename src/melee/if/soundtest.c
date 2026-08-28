@@ -137,12 +137,6 @@
 /* 45A6C0 */ extern u8 gmMainLib_8045A6C0[];
 /* 4D6B88 */ extern int db_804D6B88;
 
-struct SoundTestMenuData {
-    /* 0x000 */ struct un_80304138_objalloc_t_x8 entries[11];
-    /* 0x160 */ char x160[0xC];
-    /* 0x16C */ char x16C[0x18];
-};
-
 /// Overlay used to reach the menu data through the label block that precedes
 /// it, the way the original code addresses it.
 struct un_803F9F28_t {
@@ -263,7 +257,7 @@ struct un_803FA258_t {
 /* 803F9F80 */ extern char un_803F9F80[];
 /* 803F9F8C */ extern char un_803F9F8C[];
 /* 803F9F98 */ extern char un_803F9F98[];
-/* 803F9FA4 */ extern struct SoundTestMenuData un_803F9FA4;
+/* 803F9FA4 */
 /* 803FA128 */ extern int un_803FA128[76];
 /* 803FA258 */ extern struct un_803FA258_t un_803FA258;
 /* 803FA3E8 */ extern char* un_803FA3E8[3];
@@ -282,13 +276,11 @@ struct un_803FA258_t {
 /* 803FA4A8 */ extern char un_803FA4A8[];
 /* 803FA4B8 */ extern char un_803FA4B8[];
 /* 803FA4CC */ extern char un_803FA4CC[];
-/* 803FA4E0 */ extern struct un_80304138_objalloc_t_x8 un_803FA4E0[11];
 /* 803FA640 */ extern char un_803FA640[];
 /* 803FA658 */ extern struct un_80304138_objalloc_t_x8 un_803FA658[8];
 /* 803FA758 */ extern char un_803FA758[];
 /* 803FA768 */ extern char un_803FA768[];
 /* 803FA77C */ extern char un_803FA77C[];
-/* 803FA790 */ extern struct un_80304138_objalloc_t_x8 un_803FA790[4];
 /* 803FA810 */ extern char un_803FA810[];
 /* 803FA81C */ extern char un_803FA81C[];
 /* 803FA828 */ extern char un_803FA828[];
@@ -556,7 +548,6 @@ struct un_803FA258_t {
 /* 803FC490 */ extern char un_803FC490[];
 /* 803FC4A4 */ extern char un_803FC4A4[];
 /* 803FC4B8 */ extern char un_803FC4B8[];
-/* 803FC4CC */ extern struct un_80304138_objalloc_t_x8 un_803FC4CC[10];
 /* 803FC60C */ extern char un_803FC60C[];
 /* 803FC61C */ extern char un_803FC61C[];
 /* 803FC62C */ extern char un_803FC62C[];
@@ -984,16 +975,13 @@ bool un_802FFEA4(enum soundtest_callback_arg0 update_scene)
     return false;
 }
 
-void un_802FFEE0(s32* arg0)
+void un_802FFEE0(struct UnkSoundTestData0* arg0)
 {
-#define ST_MIN(a, b) ((a) < (b) ? (a) : (b))
-    u16 val = ST_MIN((u16) un_803FA258.x12C, 0x3E);
-#undef ST_MIN
-
-    ((u16*) arg0)[0] = val;
-    ((u16*) arg0)[1] = (u16) un_803FA258.x130;
-    arg0[1] = 0x98967F;
-    arg0[2] = 0;
+    u16 val = MIN((u16) un_803FA258.x12C, 0x3E);
+    arg0->x0 = val;
+    arg0->x2 = un_803FA258.x130;
+    arg0->x4 = 0x98967F;
+    arg0->x8 = 0;
 }
 
 void un_802FFF2C(StartMeleeData* arg0)
@@ -1009,35 +997,35 @@ void un_802FFF2C(StartMeleeData* arg0)
     r->is_teams = s->x130.xC;
     switch (s->x130.xC8) {
     case 0:
-        r->x0_0 = 0;
+        r->match_mode = 0;
         timer = s->x130.xCC[1] + s->x130.xCC[0] * 0x3C;
         if (timer != 0) {
-            r->x10 = timer;
+            r->time_limit = timer;
             r->x0_6 = 1;
         } else {
             r->x0_6 = 0;
         }
         break;
     case 1:
-        r->x0_0 = 1;
+        r->match_mode = 1;
         r->x0_6 = 0;
         break;
     case 2:
-        r->x0_0 = 2;
+        r->match_mode = 2;
         timer = s->x130.xCC[1] + s->x130.xCC[0] * 0x3C;
         if (timer != 0) {
-            r->x10 = timer;
+            r->time_limit = timer;
             r->x0_6 = 1;
         } else {
             r->x0_6 = 0;
         }
         break;
     default:
-        r->x0_0 = 0;
+        r->match_mode = 0;
         r->x0_6 = 0;
         break;
     }
-    r->xE = s->x130.x8;
+    r->stkind = s->x130.x8;
     r->x20 = -1;
     r->xB = s->x130.xCC[3] - 1;
     r->xC = -1;
@@ -2120,34 +2108,33 @@ bool un_80301B48(enum soundtest_callback_arg0 arg0)
     return false;
 }
 
-void un_80301BA8(void* arg0)
+void un_80301BA8(struct UnkSoundTestData1* out)
 {
-    u8* out = arg0;
-    *(s32*) (out + 0x0) = un_803FA258.x104;
-    *(s32*) (out + 0x4) = un_803FA258.x108;
-    out[0xA] = (u8) un_803FA258.x100;
-    out[0xB] = (u8) un_803FA258.x10C;
-    out[0xC] = (u8) un_803FA258.x11C;
-    out[0x8] = 0;
-    out[0x9] = 0x78;
-    out[0xD] = (u8) un_803FA258.x110;
-    out[0x19] = (u8) un_803FA258.xF8;
-    out[0xE] = (u8) un_803FA258.x114;
-    out[0x1A] = (u8) un_803FA258.xF8;
-    out[0xF] = (u8) un_803FA258.x118;
-    out[0x1B] = (u8) un_803FA258.xF8;
-    out[0x10] = (u8) un_803FA258.x120;
-    out[0x1C] = (u8) un_803FA258.xFC;
-    out[0x11] = (u8) un_803FA258.x124;
-    out[0x1D] = (u8) un_803FA258.xFC;
-    out[0x12] = (u8) un_803FA258.x128;
-    out[0x1E] = (u8) un_803FA258.xFC;
-    out[0x13] = 0;
-    out[0x14] = 0;
-    out[0x15] = 0;
-    out[0x16] = 0;
-    out[0x17] = 0;
-    out[0x18] = 0;
+    out->unk_0 = un_803FA258.x104;
+    out->unk_4 = un_803FA258.x108;
+    out->unk_A = un_803FA258.x100;
+    out->unk_B = un_803FA258.x10C;
+    out->unk_C = un_803FA258.x11C;
+    out->unk_8 = 0;
+    out->unk_9 = 0x78;
+    out->unk_D = un_803FA258.x110;
+    out->unk_19 = un_803FA258.xF8;
+    out->unk_E = un_803FA258.x114;
+    out->unk_1A = un_803FA258.xF8;
+    out->unk_F = un_803FA258.x118;
+    out->unk_1B = un_803FA258.xF8;
+    out->unk_10 = un_803FA258.x120;
+    out->unk_1C = un_803FA258.xFC;
+    out->unk_11 = un_803FA258.x124;
+    out->unk_1D = un_803FA258.xFC;
+    out->unk_12 = un_803FA258.x128;
+    out->unk_1E = un_803FA258.xFC;
+    out->unk_13 = 0;
+    out->unk_14 = 0;
+    out->unk_15 = 0;
+    out->unk_16 = 0;
+    out->unk_17 = 0;
+    out->unk_18 = 0;
 }
 
 void un_80301C64(un_80301C64_t* arg0)

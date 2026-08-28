@@ -515,27 +515,57 @@ void lbBgFlash_800209F4(void)
 
 void fn_80020AEC(HSD_JObj* jobj, Mtx out)
 {
-    f32 scale;
+    HSD_JObj* cur;
+    s32 i;
     Mtx tmp;
     Vec3 col;
     HSD_JObj* cur;
     s32 i;
 
-    HSD_MtxInverseConcat(HSD_JObjGetMtxPtr(HSD_JObjGetParent(jobj)),
+    HSD_MtxInverseConcat(HSD_JObjGetMtxPtr(jobj_parent(jobj)),
                          HSD_JObjGetMtxPtr(jobj), out);
 
     for (i = 0; i < 3; i++) {
+        f32 mag;
+        f32 scale_sq;
+        f32 factor;
+
         col.x = out[0][i];
         col.y = out[1][i];
         col.z = out[2][i];
-        scale = PSVECMag(&col);
-        if (scale > 1e-10F) {
-            scale = 1.0F / scale;
+
+        mag = PSVECMag(&col);
+        if (mag > 1e-10f) {
+            mag = 1.0f / mag;
         }
-        scale *= HSD_MtxColMag(jobj->mtx, i);
-        col.x *= scale;
-        col.y *= scale;
-        col.z *= scale;
+
+        {
+            f32 sx;
+            f32 sy;
+            f32 sz;
+            sy = jobj->mtx[1][i];
+            sx = jobj->mtx[0][i];
+            sz = jobj->mtx[2][i];
+            sy *= sy;
+            sx *= sx;
+            sz *= sz;
+            scale_sq = sy + sx;
+            scale_sq = sz + scale_sq;
+        }
+
+        if (scale_sq > 0.0f) {
+            f64 e = __frsqrte(scale_sq);
+            e = 0.5 * e * -(((f64) scale_sq * (e * e)) - 3.0);
+            e = 0.5 * e * -(((f64) scale_sq * (e * e)) - 3.0);
+            e = 0.5 * e * -(((f64) scale_sq * (e * e)) - 3.0);
+            scale_mag = (f32) ((f64) scale_sq * e);
+            scale_sq = scale_mag;
+        }
+
+        factor = mag * scale_sq;
+        col.x *= factor;
+        col.y *= factor;
+        col.z *= factor;
         out[0][i] = col.x;
         out[1][i] = col.y;
         out[2][i] = col.z;
@@ -543,8 +573,8 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
 
     cur = HSD_JObjGetParent(jobj);
     while (cur != NULL) {
-        if (HSD_JObjGetParent(cur) != NULL) {
-            HSD_MtxInverseConcat(HSD_JObjGetMtxPtr(HSD_JObjGetParent(cur)),
+        if (jobj_parent(cur) != NULL) {
+            HSD_MtxInverseConcat(HSD_JObjGetMtxPtr(jobj_parent(cur)),
                                  HSD_JObjGetMtxPtr(cur), tmp);
         } else {
             PSMTXCopy(HSD_JObjGetMtxPtr(cur), tmp);
@@ -567,7 +597,7 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
         }
 
         PSMTXConcat(tmp, out, out);
-        cur = HSD_JObjGetParent(cur);
+        cur = jobj_parent(cur);
     }
 }
 void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,

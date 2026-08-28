@@ -501,7 +501,7 @@ void gm_8017C838(void)
     sp10[0] = FTKIND_NONE;
     sp10[1] = FTKIND_NONE;
     sp10[2] = FTKIND_NONE;
-    switch (temp_r3->x24C8.xE) {
+    switch (temp_r3->x24C8.stkind) {
     case 0x3B:
         sp10[0] = FTKIND_YOSHI;
         break;
@@ -769,14 +769,14 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     arg0->rules.x0_3 = arg1->x0.xB;
 
     if (arg6 != 0) {
-        arg0->rules.x10 = (u32) arg6;
+        arg0->rules.time_limit = (u32) arg6;
         arg0->rules.x0_6 = 1;
     } else {
         arg0->rules.x0_6 = 0;
     }
 
     arg0->rules.x18 = (u32) arg1->x0.xC.x18;
-    arg0->rules.xE = (u16) arg7;
+    arg0->rules.stkind = (u16) arg7;
     arg0->rules.xB = arg1->x48((u8) count, arg1->x0.cpu_level);
 
     arg0->rules.x20 = (u64) -1;
@@ -1852,7 +1852,7 @@ s32 fn_8017F09C(void)
         lbl_8046B6A0_t* p2 = gm_16AE_GetUnkData_0();
         int flag;
         if (data->x118 != 0 || (data->x11A != 0 && data->x11B == 0) ||
-            p2->x24C8.x0_7)
+            p2->x24C8.timer_counts_up)
         {
             flag = 0;
         } else {
@@ -2115,7 +2115,7 @@ void fn_8017F608(void* arg0)
             p->x74->default_alignment = 2;
             gm = gm_16AE_GetUnkData_0();
             if (state->x118 != 0 || (state->x11A != 0 && state->x11B == 0) ||
-                (gm->x24C8.x0_7))
+                (gm->x24C8.timer_counts_up))
             {
                 show = 0;
             } else {

@@ -1,7 +1,5 @@
 #include "gm_1832.h"
 
-#include "gm_1B03.static.h"
-
 #include "gm_unsplit.h"
 
 #include "cm/camera.h"
@@ -13,7 +11,6 @@
 #include "gm/gm_1A36.h"
 #include "gm/gm_1A3F.h"
 #include "gm/gm_1A45.h"
-#include "gm/gm_1B14.h"
 #include "gm/gmmain_lib.h"
 #include "gm/types.h"
 #include "gr/ground.h"
@@ -2753,7 +2750,7 @@ void gm_80189CDC(StartMeleeData* arg0)
     TrainingModeState* state = &lbl_80473700;
     s32 i;
 
-    arg0->rules.x0_0 = 0;
+    arg0->rules.match_mode = 0;
     arg0->rules.is_teams = 1;
     arg0->rules.xB = -1;
     arg0->rules.x20 = 0xFFFFFFFFFFFFFFFFULL;
