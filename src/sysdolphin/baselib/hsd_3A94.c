@@ -4948,14 +4948,12 @@ s32 fn_803B1338(CardState* state, s32 arg1)
                         } else {
                             fdata = state->x70[file_id].ptr;
                             if (fdata == NULL) {
-                                s32 write_result = fn_803ACFC0(
+                                result = fn_803ACFC0(
                                     state, logical, phys, 0, NULL, 0, file_id);
-                                result = write_result;
                             } else {
-                                s32 write_result = fn_803ACFC0(
+                                result = fn_803ACFC0(
                                     state, logical, phys, 0, fdata + offset,
                                     state->x8 - 0x20, file_id);
-                                result = write_result;
                                 offset += state->x8;
                                 offset -= 0x20;
                             }
