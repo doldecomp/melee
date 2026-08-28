@@ -2805,12 +2805,15 @@ void _Toy_80309404(HSD_GObj* gobj)
     u32 trigger;
     u32 button;
     s32 sign;
-    s32 sp138;
-    s32 sp134;
-    s32 sp130;
-    s32 sp12C;
+    struct {
+        void* next;
+        void* next_wrap;
+        void* prev;
+        void* prev_wrap;
+        u8 trailing_pad[0x78];
+    } archive_symbols;
 
-    PAD_STACK(280);
+    PAD_STACK(164);
 
     cobj = gobj->hsd_obj;
     base = (Toy26B8*) &_Toy_804A26B8;
@@ -3217,15 +3220,11 @@ void _Toy_80309404(HSD_GObj* gobj)
                 }
                 {
                     TyDisplayData* display;
-                    u32 trig2;
 
                     display = Toy_sbss_804D6EE0;
-                    if (state->x30 < 0.0f) {
-                        goto cycle_prev;
-                    }
-                    trig2 = Toy_80305B88();
-                    if (trig2 & 0x441) {
-                    cycle_prev: {
+                    if ((state->x30 < 0.0f) ||
+                        (Toy_80305B88() & 0x441))
+                    {
                         s32 total;
 
                         sfxMove();
@@ -3265,7 +3264,8 @@ void _Toy_80309404(HSD_GObj* gobj)
                                 }
                                 lk = cnt;
                                 lk += display->selectedIdx;
-                                entry = display->first_entry->prev;
+                                entry = display->first_entry;
+                                entry = entry->prev;
                                 {
                                     s32 idx = lk - 1;
                                     s16 tid = Toy_sbss_804D6EDC[idx];
@@ -3278,7 +3278,8 @@ void _Toy_80309404(HSD_GObj* gobj)
                                     entry->symbol_name = md + 0x24;
                                     entry->trophy_id = tid;
                                     entry->archive = lbArchive_LoadSymbols(
-                                        entry->archive_name, &sp138,
+                                        entry->archive_name,
+                                        &archive_symbols.prev_wrap,
                                         entry->symbol_name, 0);
                                 }
                             } else {
@@ -3299,7 +3300,7 @@ void _Toy_80309404(HSD_GObj* gobj)
                                 entry->symbol_name = md + 0x24;
                                 entry->trophy_id = tid;
                                 entry->archive = lbArchive_LoadSymbols(
-                                    entry->archive_name, &sp134,
+                                    entry->archive_name, &archive_symbols.prev,
                                     entry->symbol_name, 0);
                             }
                             {
@@ -3319,16 +3320,9 @@ void _Toy_80309404(HSD_GObj* gobj)
                             display->selected_entry =
                                 display->selected_entry->prev;
                         }
-                    }
-                    } else {
-                        if (state->x30 > 0.0f) {
-                            goto cycle_next;
-                        }
-                        trig2 = Toy_80305B88();
-                        if (!(trig2 & 0x822)) {
-                            goto after_cycle_direction;
-                        }
-                    cycle_next: {
+                    } else if ((state->x30 > 0.0f) ||
+                               (Toy_80305B88() & 0x822))
+                    {
                         s32 total;
 
                         sfxMove();
@@ -3388,7 +3382,8 @@ void _Toy_80309404(HSD_GObj* gobj)
                                 entry->symbol_name = md + 0x24;
                                 entry->trophy_id = tid;
                                 entry->archive = lbArchive_LoadSymbols(
-                                    entry->archive_name, &sp130,
+                                    entry->archive_name,
+                                    &archive_symbols.next_wrap,
                                     entry->symbol_name, 0);
                             } else {
                                 ToyListEntry* entry;
@@ -3408,7 +3403,7 @@ void _Toy_80309404(HSD_GObj* gobj)
                                 entry->symbol_name = md + 0x24;
                                 entry->trophy_id = tid;
                                 entry->archive = lbArchive_LoadSymbols(
-                                    entry->archive_name, &sp12C,
+                                    entry->archive_name, &archive_symbols.next,
                                     entry->symbol_name, 0);
                             }
                             {
@@ -3429,9 +3424,7 @@ void _Toy_80309404(HSD_GObj* gobj)
                                 display->selected_entry->next;
                         }
                     }
-                    }
 
-                after_cycle_direction:
                     _Toy_80307828(0);
                     _Toy_8030715C(0.0f, 0.0f);
                     state->x58 = 0x95E;
