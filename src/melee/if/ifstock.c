@@ -79,16 +79,12 @@ int ifStock_802F7EFC(int arg0, int arg1)
     if (stock->player[arg1].stocks < 0) {
         stock->player[arg1].stocks = 1;
     }
-    {
-        unsigned char value = arg1_data->x0[10];
-
-        if (value == 0) {
-            slot = 5;
-        } else if (arg1_data->x0[11] == 0) {
-            slot = 6;
-        } else {
-            return 2;
-        }
+    if (arg1_data->x0[10] == 0) {
+        slot = 5;
+    } else if (arg1_data->x0[11] == 0) {
+        slot = 6;
+    } else {
+        return 2;
     }
     arg1_data->x0[slot + 5] = 1;
     arg0_data->x0[2] = 0;
