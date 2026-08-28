@@ -4482,7 +4482,6 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 remaining;
     s32 payload_pos;
     s32 block_idx;
-    s32 digest_idx;
     s32 result;
     s32 has_blocks;
     u32 sector_size;
@@ -4601,7 +4600,6 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
     memset(digest, 0, sizeof(digest));
     block_idx = 0;
-    digest_idx = 0;
     remaining = arg0->x24 - payload_pos;
 
     while (remaining >= 0) {
@@ -4612,7 +4610,7 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
             sector_size = arg0->x8;
             arg2 += sector_size - payload_pos;
             remaining -= sector_size - payload_pos;
-            hsd_803B2B20(arg0->x0, sector_size, &digest[digest_idx]);
+            hsd_803B2B20(arg0->x0, sector_size, &digest[block_idx * 0x10]);
 
             result = fn_803B0E9C_write_block(arg0, block_idx);
 
@@ -4622,7 +4620,6 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
             payload_pos = 0;
             block_idx++;
-            digest_idx += 0x10;
 
             if (remaining + 0x30 < (s32) arg0->x24) {
                 if (arg3 != 0) {
@@ -4650,7 +4647,7 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
         memcpy(arg0->x0 + payload_pos, (void*) arg2, remaining);
         payload_pos += remaining;
-        hsd_803B2B20(arg0->x0, payload_pos, &digest[digest_idx]);
+        hsd_803B2B20(arg0->x0, payload_pos, &digest[block_idx * 0x10]);
         memcpy(arg0->x0 + payload_pos, digest, 0x30);
         remaining = -1;
 
@@ -4661,7 +4658,6 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         }
 
         block_idx++;
-        digest_idx += 0x10;
     }
 
     return 0;
