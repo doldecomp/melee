@@ -38,7 +38,7 @@ typedef bool (*Predicate)(void);
 #define MWERKS_GEKKO
 #endif
 
-#ifdef __MWERKS__
+#if defined(__MWERKS__) && !defined(M2CTX)
 #define ASM asm
 #else
 #define ASM
