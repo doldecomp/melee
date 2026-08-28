@@ -202,7 +202,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
             remaining = (s8) (u8) fp->x2100 - 1;
             distPtr = &cumDist[0];
-            vp = &vtx_buf[0];
+            vp = vtx_buf;
 
             while (remaining >= 0) {
                 f32 outerScale, innerScale;
@@ -349,18 +349,22 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
             GXPosition3f32(vtx_buf[0].x, vtx_buf[0].y, vtx_buf[0].z);
             GXColor4u8(vtx_buf[0].r, vtx_buf[0].g, vtx_buf[0].b, vtx_buf[0].a);
-            GXPosition3f32(vtx_buf[2].x, vtx_buf[2].y, vtx_buf[2].z);
-            GXColor4u8(vtx_buf[2].r, vtx_buf[2].g, vtx_buf[2].b, vtx_buf[2].a);
+            {
+                AfterimageVtx* vtx = &vtx_buf[2];
+
+                GXPosition3f32(vtx->x, vtx->y, vtx->z);
+                GXColor4u8(vtx->r, vtx->g, vtx->b, vtx->a);
+            }
 
             {
                 s32 i;
+                AfterimageVtx* vtx = &vtx_buf[1];
 
-                for (i = 1; i < numVerts; i++) {
-                    GXPosition3f32(vtx_buf[i].x, vtx_buf[i].y, vtx_buf[i].z);
+                for (i = 1; i < numVerts; i++, vtx++) {
+                    GXPosition3f32(vtx->x, vtx->y, vtx->z);
                     {
-                        u8 r = vtx_buf[i].r;
-                        GXColor4u8(r, vtx_buf[i].g, vtx_buf[i].b,
-                                   vtx_buf[i].a);
+                        u8 r = vtx->r;
+                        GXColor4u8(r, vtx->g, vtx->b, vtx->a);
                     }
                 }
             }
