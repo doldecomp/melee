@@ -12,6 +12,11 @@ typedef struct ToyDisplayList {
 } ToyDisplayList;
 ASSERT_SIZE(ToyDisplayList, 0x158);
 
+typedef struct ToyUnkJObjData {
+    /* 0x00 */ u8 pad_00[0x10];
+    /* 0x10 */ HSD_JObj* jobj;
+} ToyUnkJObjData;
+
 /* 3053C4 */ static void _Toy_803053C4(s32, s32, s32);
 /* 3062EC */ static void _Toy_803062EC(s32 arg0, u32 arg1, f32 farg0);
 /* 3064B8 */ static s16 _Toy_803064B8(s16 arg0, s8 arg1);
@@ -3543,17 +3548,18 @@ void _Toy_8030B530(HSD_GObj* arg0)
         u32 trigger;
         u32 button;
         f32 angle;
-        s32 sp190;
-        s32 sp18C;
-        s32 sp188;
-        s32 sp184;
+        struct {
+            void* next;
+            void* next_wrap;
+            void* prev;
+            void* prev_wrap;
+        } archive_symbols;
 
-        PAD_STACK(296);
+        PAD_STACK(304);
 
         {
-            void* anim_state_ptr = M2C_FIELD(anim, void**, 0x0);
-            void* x28_ptr = M2C_FIELD(anim_state_ptr, void**, 0x28);
-            jobj_child = M2C_FIELD(x28_ptr, HSD_JObj**, 0x10);
+            ToyUnkJObjData* data = anim->gobj->hsd_obj;
+            jobj_child = data->jobj;
             jobj_next = jobj_child->next;
         }
 
@@ -3671,32 +3677,23 @@ void _Toy_8030B530(HSD_GObj* arg0)
             {
                 u8 mode = state->x61;
                 if ((s8) mode == 0) {
-                    ToyTransitionObj* transition = state->x0;
-                    transition->x24 = 0;
-                    transition->x20 = 0x480000;
-                    transition = state->x4;
-                    transition->x24 = 0;
-                    transition->x20 = 0;
-                    transition = state->xC;
-                    transition->x24 = 0;
-                    transition->x20 = 0;
+                    ((HSD_GObj*) state->x0)->gxlink_prios =
+                        0x0048000000000000ULL;
+                    ((HSD_GObj*) state->x4)->gxlink_prios = 0;
+                    ((HSD_GObj*) state->xC)->gxlink_prios = 0;
                     state->x61 = 1;
                     state->x5C = 0;
                     return;
                 }
                 if ((s8) mode == 2) {
-                    ToyTransitionObj* transition;
                     state->x5C = 0;
                     _Toy_80307828(0);
-                    transition = state->x0;
-                    transition->x24 = 0;
-                    transition->x20 = 0x50480000;
-                    transition = state->x4;
-                    transition->x24 = 0;
-                    transition->x20 = (s32) 0x80000000U;
-                    transition = state->xC;
-                    transition->x24 = 0;
-                    transition->x20 = 0x40000000;
+                    ((HSD_GObj*) state->x0)->gxlink_prios =
+                        0x5048000000000000ULL;
+                    ((HSD_GObj*) state->x4)->gxlink_prios =
+                        0x8000000000000000ULL;
+                    ((HSD_GObj*) state->xC)->gxlink_prios =
+                        0x4000000000000000ULL;
                     state->x5C = 0;
                     state->x61 = 3;
                     sfxBack();
@@ -3773,18 +3770,26 @@ void _Toy_8030B530(HSD_GObj* arg0)
                 angle = lb_8000D008(adj_y, adj_x);
 
                 if (state->x18 < -25.0f) {
-                    f32 abs_x2 = adj_x;
-                    *(u32*) &abs_x2 &= ~0x80000000;
-                    if (abs_x2 > 0.8f) {
+                    union {
+                        f32 f;
+                        u32 u;
+                    } abs_x2;
+                    abs_x2.f = adj_x;
+                    abs_x2.u &= ~0x80000000;
+                    if (abs_x2.f > 0.8f) {
                         f32 dx = 0.01f * cosf(angle);
                         HSD_JObjAddTranslationX(jobj_next, dx);
                         _Toy_803062EC((s32) anim->xC, 0U,
                                       HSD_JObjGetTranslationX(jobj_next));
                     }
                     {
-                        f32 abs_y2 = adj_y;
-                        *(u32*) &abs_y2 &= ~0x80000000;
-                        if (abs_y2 > 0.8f) {
+                        union {
+                            f32 f;
+                            u32 u;
+                        } abs_y2;
+                        abs_y2.f = adj_y;
+                        abs_y2.u &= ~0x80000000;
+                        if (abs_y2.f > 0.8f) {
                             f32 sin = sinf(angle);
                             f32 dz = 0.01f * -sin;
                             HSD_JObjAddTranslationZ(jobj_next, dz);
@@ -3793,18 +3798,26 @@ void _Toy_8030B530(HSD_GObj* arg0)
                         }
                     }
                 } else {
-                    f32 abs_x3 = adj_x;
-                    *(u32*) &abs_x3 &= ~0x80000000;
-                    if (abs_x3 > 0.8f) {
+                    union {
+                        f32 f;
+                        u32 u;
+                    } abs_x3;
+                    abs_x3.f = adj_x;
+                    abs_x3.u &= ~0x80000000;
+                    if (abs_x3.f > 0.8f) {
                         f32 dx = 0.01f * cosf(angle);
                         HSD_JObjAddTranslationX(jobj_next, dx);
                         _Toy_803062EC((s32) anim->xC, 0U,
                                       HSD_JObjGetTranslationX(jobj_next));
                     }
                     {
-                        f32 abs_y3 = adj_y;
-                        *(u32*) &abs_y3 &= ~0x80000000;
-                        if (abs_y3 > 0.8f) {
+                        union {
+                            f32 f;
+                            u32 u;
+                        } abs_y3;
+                        abs_y3.f = adj_y;
+                        abs_y3.u &= ~0x80000000;
+                        if (abs_y3.f > 0.8f) {
                             f32 dy = 0.01f * sinf(angle);
                             HSD_JObjAddTranslationY(jobj_next, dy);
                             _Toy_803062EC((s32) anim->xC, 1U,
@@ -3999,7 +4012,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                             entry->symbol_name = md + 0x24;
                             entry->trophy_id = tid;
                             entry->archive = lbArchive_LoadSymbols(
-                                entry->archive_name, &sp190,
+                                entry->archive_name, &archive_symbols.prev_wrap,
                                 entry->symbol_name, 0);
                         }
                     } else {
@@ -4018,7 +4031,8 @@ void _Toy_8030B530(HSD_GObj* arg0)
                         entry->symbol_name = md + 0x24;
                         entry->trophy_id = tid;
                         entry->archive =
-                            lbArchive_LoadSymbols(entry->archive_name, &sp18C,
+                            lbArchive_LoadSymbols(entry->archive_name,
+                                                  &archive_symbols.prev,
                                                   entry->symbol_name, 0);
                     }
                     if (display->last_entry->archive != NULL) {
@@ -4087,7 +4101,8 @@ void _Toy_8030B530(HSD_GObj* arg0)
                         entry->symbol_name = md + 0x24;
                         entry->trophy_id = tid;
                         entry->archive =
-                            lbArchive_LoadSymbols(entry->archive_name, &sp188,
+                            lbArchive_LoadSymbols(entry->archive_name,
+                                                  &archive_symbols.next_wrap,
                                                   entry->symbol_name, 0);
                     } else {
                         ToyListEntry* entry;
@@ -4105,7 +4120,8 @@ void _Toy_8030B530(HSD_GObj* arg0)
                         entry->symbol_name = md + 0x24;
                         entry->trophy_id = tid;
                         entry->archive =
-                            lbArchive_LoadSymbols(entry->archive_name, &sp184,
+                            lbArchive_LoadSymbols(entry->archive_name,
+                                                  &archive_symbols.next,
                                                   entry->symbol_name, 0);
                     }
                     if (display->first_entry->archive != NULL) {
