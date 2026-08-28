@@ -44,7 +44,10 @@
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/random.h>
+
+#ifdef MUST_MATCH
 #include <MetroTRK/intrinsics.h>
+#endif
 
 GameScene gm_803DF618_Scenes[] = {
     {
@@ -3225,7 +3228,13 @@ void gm_SetupTitleDemo(void)
     do {
         count = stage_pool[HSD_Randi(8)];
         cur_id = gm_801BF694();
-        prev = __rlwinm(cur_id, 0, 24, 31);
+        prev =
+#ifdef MUST_MATCH
+            __rlwinm(cur_id, 0, 24, 31);
+#else
+            cur_id & 0xFF;
+#endif
+
         c = gm_801641CC((u8) count);
     } while (c == prev);
     gm_801BF684(gm_801641CC((u8) count));
