@@ -4038,16 +4038,6 @@ void ftCo_800A866C(Fighter* fp)
     }
 }
 
-static inline s32 ftCo_800A8940_inline0(int line_id, s32 blocked)
-{
-    if (grBigBlue_801EF844(line_id) || grInishie1_801FCAAC(line_id) ||
-        grCorneria_801E2D90(line_id) || grVenom_80206D10(line_id))
-    {
-        blocked = 1;
-    }
-    return blocked;
-}
-
 void ftCo_800A8940(Fighter* fp)
 {
     mp_UnkStruct0* island;
@@ -4067,8 +4057,8 @@ void ftCo_800A8940(Fighter* fp)
     f32 py;
     f32 width;
     s32 result;
-    s32 blocked;
-    u8 _3[4];
+
+    PAD_STACK(8);
 
     rnd = HSD_Randf();
     cur_island = mpIsland_8005AB54(fp->coll_data.floor.index);
@@ -4116,20 +4106,13 @@ void ftCo_800A8940(Fighter* fp)
     } else {
         px = width * rnd2 + chosen->x8.x;
     }
-    blocked = 0;
     py = rnd2 * (island->x14.y - island->x8.y) + chosen->x8.y;
-    line_id = -1;
     {
         f32 bottom = py - 100.0f;
         f32 top = 5.0f + py;
-        result = mpCheckFloor(px, top, px, bottom, 0.0f, &floor_pos, &line_id,
-                              &flags, &floor_normal, -1, -1, -1, NULL, NULL);
-    }
-    if (result != 0) {
-        blocked = ftCo_800A8940_inline0(line_id, blocked);
-        if (blocked != 0) {
-            result = 0;
-        }
+        result =
+            ftCo_800A0FB0(&floor_pos, &line_id, &flags, &floor_normal, -1, -1,
+                          -1, px, top, px, bottom, 0.0f);
     }
     if (result != 0) {
         if (!ftCo_800A6700_inline0(fp, floor_pos.x, floor_pos.y)) {
