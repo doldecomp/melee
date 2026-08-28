@@ -543,7 +543,9 @@ s32 mnInfo_80252758(void)
     HSD_GObjProc* proc;
     HSD_GObj* gobj;
     HSD_Archive* archive;
-    HSD_AnimJoint** animjoint = &mnInfo_804A0958.animjoint;
+    StaticModelDesc* model = &mnInfo_804A0958;
+    char* top_joint = mnInfo_803EFC08.top_joint;
+    HSD_AnimJoint** animjoint = &model->animjoint;
     PAD_STACK(8);
 
     mn_804D6BC8.cooldown = 5;
@@ -553,11 +555,10 @@ s32 mnInfo_80252758(void)
 
     archive = mn_804D6BB8;
     lbArchive_LoadSections(
-        archive, (void**) &mnInfo_804A0958.joint, mnInfo_803EFC08.top_joint,
-        animjoint, mnInfo_803EFC08.top_animjoint,
-        &mnInfo_804A0958.matanim_joint, mnInfo_803EFC08.top_matanim_joint,
-        &mnInfo_804A0958.shapeanim_joint, mnInfo_803EFC08.top_shapeanim_joint,
-        0);
+        archive, &model->joint, top_joint, animjoint,
+        mnInfo_803EFC08.top_animjoint, &model->matanim_joint,
+        mnInfo_803EFC08.top_matanim_joint, &model->shapeanim_joint,
+        mnInfo_803EFC08.top_shapeanim_joint, 0);
 
     mnInfo_80251AFC();
 
