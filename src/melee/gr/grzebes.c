@@ -526,13 +526,13 @@ void grZebes_801D881C(HSD_GObj* gobj)
     if (gp->u.zebes5.xC4 == 0) {
         int i;
         f32 colWidth;
-        f32 left_x;
+        grZe_BubbleState* state = (grZe_BubbleState*) grZe_8049F140;
 
         mpJointListAdd(0);
         mpLib_80057424(0);
 
-        colWidth = (grZe_8049F140[1].x - grZe_8049F140[0].x) / 5.0f;
-        left_x = grZe_8049F140[0].x;
+        colWidth =
+            (state->positions[1].x - state->positions[0].x) / 5.0f;
         heights = col_heights;
 
         col_heights[0] = -9999.0f;
@@ -545,9 +545,9 @@ void grZebes_801D881C(HSD_GObj* gobj)
         (void) 0.9;
 
         {
-            int j;
-            grZe_BubbleEntry* entry = grZe_8049F170;
-            for (j = 0; j < 20; j++, entry++) {
+            f32 left_x = state->positions[0].x;
+            grZe_BubbleEntry* entry = state->bubbles;
+            for (i = 0; i < 20; i++, entry++) {
                 if (entry->x00_active == 1) {
                     f32 dx = entry->x08_x - left_x;
                     f32 left_frac = (f32) ((f64) dx - 0.9) / colWidth;
