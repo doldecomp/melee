@@ -4380,6 +4380,26 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     return 0;
 }
 
+static inline s32 fn_803B0E9C_queue_reads(
+    CardState* state, s32 file_id, s32 seq_num, s32* cmd)
+{
+    s32 result;
+    u32 i;
+
+    for (i = 0; i < (0x2F + state->x24 + state->x8) / state->x8; i++) {
+        cmd[0] = 10;
+        cmd[1] = (s32) state;
+        cmd[3] = file_id;
+        cmd[4] = seq_num;
+        cmd[2] = i;
+        result = fn_803AC168(cmd);
+        if (result < 0) {
+            return result;
+        }
+    }
+    return 0;
+}
+
 s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
     u8 digest[0x30];
@@ -4393,7 +4413,6 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 cmd_read_icon[9];
     UNUSED u8 pad_cmd_read_icon[20];
     s32 payload_pos;
-    s32 remaining;
     s32 block_idx;
     s32 digest_idx;
     s32 result;
@@ -4404,23 +4423,8 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
     if (arg3 == 0) {
         if (arg4 != 0) {
-            for (block_idx = 0;
-                 (u32) block_idx < (0x2F + arg0->x24 + arg0->x8) / arg0->x8;)
-            {
-                cmd_read_icon[0] = 10;
-                cmd_read_icon[1] = (s32) arg0;
-                cmd_read_icon[3] = arg1_copy;
-                cmd_read_icon[4] = arg2;
-                cmd_read_icon[2] = block_idx;
-                result = fn_803AC168(cmd_read_icon);
-                if (result >= 0) {
-                    block_idx++;
-                    continue;
-                }
-                goto check_read_result;
-            }
-            result = 0;
-        check_read_result:
+            result = fn_803B0E9C_queue_reads(arg0, arg1_copy, arg2,
+                                              cmd_read_icon);
             if (result < 0) {
                 return result;
             }
@@ -4542,11 +4546,11 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     memset(digest, 0, sizeof(digest));
     block_idx = 0;
     digest_idx = 0;
-    remaining = arg0->x24 - payload_pos;
+    arg1_copy = arg0->x24 - payload_pos;
 
-    while (remaining >= 0) {
+    while (arg1_copy >= 0) {
         sector_size = arg0->x8;
-        if ((u32) (payload_pos + remaining) > sector_size) {
+        if ((u32) (payload_pos + arg1_copy) > sector_size) {
             s32 retries;
             s32 offset;
             u32 write_size;
@@ -4556,7 +4560,7 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                    sector_size - payload_pos);
             sector_size = arg0->x8;
             arg2 += sector_size - payload_pos;
-            remaining -= sector_size - payload_pos;
+            arg1_copy -= sector_size - payload_pos;
             hsd_803B2B20(arg0->x0, sector_size, &digest[digest_idx]);
 
             write_size = arg0->x8;
@@ -4578,7 +4582,7 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
             block_idx++;
             digest_idx += 0x10;
 
-            if (remaining + 0x30 < (s32) arg0->x24) {
+            if (arg1_copy + 0x30 < (s32) arg0->x24) {
                 if (arg3 != 0) {
                     memset(arg0->x0, 0, arg0->x8);
                 } else {
@@ -4602,11 +4606,11 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
             continue;
         }
 
-        memcpy(arg0->x0 + payload_pos, (void*) arg2, remaining);
-        payload_pos += remaining;
+        memcpy(arg0->x0 + payload_pos, (s32*) arg2, arg1_copy);
+        payload_pos += arg1_copy;
         hsd_803B2B20(arg0->x0, payload_pos, &digest[digest_idx]);
         memcpy(arg0->x0 + payload_pos, digest, 0x30);
-        remaining = -1;
+        arg1_copy = -1;
 
         {
             s32 retries;
