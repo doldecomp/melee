@@ -2732,7 +2732,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     state->x104 = var_r4;
     lbl_804D65C0 = (var_r4 - (arg0 + arg1)) / 10;
 
-    PAD_STACK(0x1C);
+    PAD_STACK(0x20);
     {
         void* scene_data;
 
@@ -2785,7 +2785,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
 
     arg4->x58[0].xE = coins;
     fn_8017F2A4(&state->x84, 264.0f, 211.0f);
-    PAD_STACK(0x1C);
+    PAD_STACK(0x18);
 }
 
 int fn_80180AC0(void)
