@@ -636,12 +636,12 @@ typedef struct grInishie1_801FB3F0_Vars {
 static inline void set_all_hatena(HSD_GObj* gobj,
                                   grInishie1_801FB3F0_Vars* vars)
 {
-    u32 i;
+    u32 i = 0;
 
     vars->xC8 = 0;
     vars->xC6 = 0;
 
-    for (i = 0; i < 0x13; ++i) {
+    for (; i < 0x13; ++i) {
         vars->blocks[i].x0 = 3;
         grInishie1_801FBAA0(gobj, i);
         vars->blocks[i].x20 = 0;
