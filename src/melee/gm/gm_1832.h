@@ -74,7 +74,7 @@
 /* 18A2C4 */ f32 gm_8018A2C4(u8, u8);
 /* 18A314 */ f32 gm_8018A314(u8, u8);
 /* 18A364 */ void fn_8018A364(int);
-
+/* 473814 */ extern struct TrainingMenuData gm_80473814;
 /* 473A18 */ extern UnkAllstarData gm_80473A18;
 
 #endif
