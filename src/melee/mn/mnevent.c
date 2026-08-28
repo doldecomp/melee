@@ -479,12 +479,13 @@ void fn_8024D864(HSD_GObj* gobj)
     HSD_JObj* jobj_0A;
     HSD_JObj* jobj_0B;
     HSD_JObj* jobj_09;
+    HSD_JObj* tree;
     MnEventData* data;
     u64 inputs;
-    s32 page;
+    u8 page;
     f32 y_a;
     f32 y_b;
-    PAD_STACK(0x78);
+    PAD_STACK(0x70);
 
     if (mn_804D6BC8.cooldown != 0) {
         mn_804D6BC8.cooldown -= 1;
@@ -550,12 +551,14 @@ void fn_8024D864(HSD_GObj* gobj)
         if (page != 0) {
             sfxMove();
             data->page -= 1;
-            lb_80011E24(mnEvent_804D6C60->hsd_obj, &jobj_0A, 0xA, -1);
-            lb_80011E24(mnEvent_804D6C60->hsd_obj, &jobj_0C, 0xC, -1);
+            tree = mnEvent_804D6C60->hsd_obj;
+            page = data->page;
+            lb_80011E24(tree, &jobj_0A, 0xA, -1);
+            lb_80011E24(tree, &jobj_0C, 0xC, -1);
             y_a = HSD_JObjGetTranslationY(jobj_0A);
             y_b = HSD_JObjGetTranslationY(jobj_0C);
-            lb_80011E24(mnEvent_804D6C60->hsd_obj, &jobj_0B, 0xB, -1);
-            mnEvent_SetPageY(jobj_0B, data->page, y_a, y_b);
+            lb_80011E24(tree, &jobj_0B, 0xB, -1);
+            mnEvent_SetPageY(jobj_0B, page, y_a, y_b);
             mnEvent_ShowSelected(data, &jobj_09);
             return;
         }
@@ -570,12 +573,14 @@ void fn_8024D864(HSD_GObj* gobj)
         if (page < 8) {
             sfxMove();
             data->page += 1;
-            lb_80011E24(mnEvent_804D6C60->hsd_obj, &jobj_0A, 0xA, -1);
-            lb_80011E24(mnEvent_804D6C60->hsd_obj, &jobj_0C, 0xC, -1);
+            tree = mnEvent_804D6C60->hsd_obj;
+            page = data->page;
+            lb_80011E24(tree, &jobj_0A, 0xA, -1);
+            lb_80011E24(tree, &jobj_0C, 0xC, -1);
             y_a = HSD_JObjGetTranslationY(jobj_0A);
             y_b = HSD_JObjGetTranslationY(jobj_0C);
-            lb_80011E24(mnEvent_804D6C60->hsd_obj, &jobj_0B, 0xB, -1);
-            mnEvent_SetPageY(jobj_0B, data->page, y_a, y_b);
+            lb_80011E24(tree, &jobj_0B, 0xB, -1);
+            mnEvent_SetPageY(jobj_0B, page, y_a, y_b);
             mnEvent_ShowSelected(data, &jobj_09);
             return;
         }
