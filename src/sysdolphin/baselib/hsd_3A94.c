@@ -3015,11 +3015,12 @@ static inline void fn_803AE7F8_rewind(CardBufEntry* entries)
 
     if (snap >= 0) {
         s32 saved = snap;
-        s32 zero = 0;
+        s32 zero;
 
         while (saved != hsd_804D7984) {
-            entries[saved].x10 = zero;
+            CardBufEntry* queued = &entries[saved];
             saved = (saved + 1) % 128;
+            queued->x10 = zero = 0;
         }
         hsd_804D7984 = snap;
     }
@@ -3078,6 +3079,34 @@ static inline s32 fn_803AE7F8_logical_index(s32 file_idx, s32 blocks_before)
     return file_idx - blocks_before;
 }
 
+static inline s32 fn_803AE7F8_file_block_count(CardState* file_state,
+                                                s32 file_idx)
+{
+    if (file_state->x4C[file_idx] <= 0) {
+        return 0;
+    }
+
+    if (file_idx == 0) {
+        u32 usable;
+        u32 sector_size = file_state->x8;
+        s32 remaining;
+
+        remaining = file_state->x4C[0];
+        remaining = remaining - (s32) ((usable = sector_size - 0x20) -
+                                        (file_state->x24 + 0x30) % sector_size);
+        if (remaining <= 0) {
+            return 1;
+        }
+        return (u32) (remaining + sector_size - 0x21) / usable + 1;
+    }
+
+    {
+        u32 sector_size = file_state->x8;
+        return (u32) (file_state->x4C[file_idx] + sector_size - 0x21) /
+               (sector_size - 0x20);
+    }
+}
+
 s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
     CardState* state = arg0;
@@ -3096,7 +3125,7 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 total_blocks;
     s32 verify_failed;
     u8* data;
-    PAD_STACK(32);
+    PAD_STACK(56);
 
     repair_result = 0;
     verify_failed = 0;
@@ -3117,7 +3146,7 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     blocks_before = fn_803AC6B8_blocks_before(arg0, arg1);
 
     file_size = state->x4C[arg1];
-    file_blocks = calculateFileBlockCount(arg0, arg1);
+    file_blocks = fn_803AE7F8_file_block_count(arg0, arg1);
     total_blocks = fn_803AC7DC(arg0);
 
     for (i = 0; i < file_blocks; i++) {
@@ -3207,6 +3236,7 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     }
 
     if (verify_failed == 0) {
+        s32 finish_cmd[9];
         s32* map;
         s32 pass;
 
@@ -3306,12 +3336,11 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         }
 
         if (arg3 != 0) {
-            s32 cmd[9];
             s32 cmd_result;
 
-            cmd[0] = 6;
-            cmd[1] = (s32) arg0;
-            cmd_result = fn_803AC168(cmd);
+            finish_cmd[0] = 6;
+            finish_cmd[1] = (s32) arg0;
+            cmd_result = fn_803AC168(finish_cmd);
             if (cmd_result < 0) {
                 fn_803AE7F8_rewind(entries);
                 return cmd_result;
