@@ -670,7 +670,6 @@ bool NameContainsOnlySpaces(void)
 {
     s16 null_char;
     char* text = mnNameNew_CurrentNameText;
-    s8 null_char = *mnNameNew_NullCharacter;
     s32 i;
 
     for (i = 0; i < 4; i++) {
