@@ -4114,7 +4114,7 @@ s32 fn_80169000(MatchEnd* arg0, u8* arg1)
     }
 
     if (handicaps[positions[0]] >= 2 && handicaps[positions[count - 1]] <= 8) {
-        handicaps[positions[0]] -= 1;
+        handicaps[positions[0]] = handicaps[positions[0]] - 1;
         handicaps[positions[count - 1]] += 1;
     } else if (handicaps[positions[0]] == 1 &&
                handicaps[positions[count - 1]] <= 7)
@@ -4128,7 +4128,8 @@ s32 fn_80169000(MatchEnd* arg0, u8* arg1)
         if (handicaps[positions[0]] == 1 &&
             handicaps[positions[count - 1]] == 8)
         {
-            handicaps[positions[count - 1]] += 1;
+            handicaps[positions[count - 1]] =
+                handicaps[positions[count - 1]] + 1;
             if (handicaps[positions[1]] >= 2) {
                 handicaps[positions[1]] -= 1;
             }
