@@ -1465,6 +1465,19 @@ static inline f32 grMc_GetTrackMidpoint(Ground* gp)
     return 0.5f * (gp->u.mutecity.xD4 + gp->u.mutecity.xD8);
 }
 
+static inline f32 grMc_Sqrtf(f32 x, volatile f32* result)
+{
+    if (x > 0.0f) {
+        f64 guess = __frsqrte((f64) x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        *result = (f32) (x * guess);
+        return *(volatile f32*) result;
+    }
+    return x;
+}
+
 void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
 {
     Vec3 car_pos;
@@ -1487,6 +1500,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
     Vec3 sp38;
     Vec3 sp2C;
     Vec3 sp20;
+    f32 sqrt_tmp[4];
     Ground* car_gp;
     Ground* gp;
     HSD_JObj* car_jobj;
@@ -1503,7 +1517,6 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
     gp = arg1->user_data;
     car_jobj = arg0->hsd_obj;
     Ground_801C0498();
-    PAD_STACK(12);
     track_mid = grMc_GetTrackMidpoint(gp);
     Camera_GetTransformPosition(&spE8);
 
@@ -1667,7 +1680,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
                         spline_t = (car_pos.z * car_pos.z) +
                                    ((car_pos.x * car_pos.x) +
                                     (car_pos.y * car_pos.y));
-                        distance = sqrtf(spline_t);
+                        distance = grMc_Sqrtf(spline_t, &sqrt_tmp[3]);
                         spline_t = distance;
                         if (spline_t < 300.0f) {
                             switch (HSD_Randi(3)) {
