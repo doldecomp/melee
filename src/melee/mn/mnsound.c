@@ -50,6 +50,30 @@ static void mnSound_VolumeAnim(HSD_JObj* jobj, s32 sound_music_mix,
     }
 }
 
+static inline void mnSound_InitChannelAnim(HSD_JObj* jobj, s32 channel,
+                                           HSD_JObj** jobj_anim_0,
+                                           HSD_JObj** jobj_anim_1,
+                                           HSD_JObj** jobj_anim_2)
+{
+    f32 right_frame, left_frame;
+    lb_80011E24(jobj, jobj_anim_0, 8, -1);
+    lb_80011E24(jobj, jobj_anim_1, 10, -1);
+    lb_80011E24(jobj, jobj_anim_2, 9, -1);
+    left_frame = mn_8022F298(*jobj_anim_1);
+    right_frame = mn_8022F298(*jobj_anim_2);
+
+    HSD_JObjReqAnimAll(*jobj_anim_0, channel);
+    HSD_JObjAnimAll(*jobj_anim_0);
+
+    HSD_JObjReqAnimAll(*jobj_anim_1, left_frame);
+    mn_8022F3D8(*jobj_anim_1, 0xFFU, MOBJ_MASK);
+    HSD_JObjAnimAll(*jobj_anim_1);
+
+    HSD_JObjReqAnimAll(*jobj_anim_2, right_frame);
+    mn_8022F3D8(*jobj_anim_2, 0xFFU, MOBJ_MASK);
+    HSD_JObjAnimAll(*jobj_anim_2);
+}
+
 static void mnSound_ChannelAnim(HSD_JObj* jobj, s32 channel)
 {
     f32 right_frame, left_frame;
@@ -295,7 +319,14 @@ void mnSound_80249C08(int unused)
         Menu_InitCenterText(menu, text_id);
     }
 
-    mnSound_ChannelAnim(GET_JOBJ(gobj), user_data->unk1);
+    {
+        HSD_JObj* channel_anim_2;
+        HSD_JObj* channel_anim_1;
+        HSD_JObj* channel_anim_0;
+        mnSound_InitChannelAnim(GET_JOBJ(gobj), user_data->unk1,
+                                &channel_anim_0, &channel_anim_1,
+                                &channel_anim_2);
+    }
 
     {
         HSD_JObj* sp5C;
@@ -305,16 +336,13 @@ void mnSound_80249C08(int unused)
     }
 
     {
+        Vec3 pos_1;
+        Vec3 pos_0;
         HSD_JObj* jobj_anim_2;
         HSD_JObj* jobj_anim_1;
         HSD_JObj* jobj_anim_0;
-        {
-            Vec3 pos_1;
-            Vec3 pos_0;
-            mnSound_InitVolumeAnim(GET_JOBJ(gobj), user_data->unk3, &pos_0,
-                                   &pos_1, &jobj_anim_0, &jobj_anim_1,
-                                   &jobj_anim_2);
-        }
+        mnSound_InitVolumeAnim(GET_JOBJ(gobj), user_data->unk3, &pos_0, &pos_1,
+                               &jobj_anim_0, &jobj_anim_1, &jobj_anim_2);
     }
 
     {
