@@ -44,7 +44,21 @@ typedef struct mnDiagram3_StatTable {
 /* 4D6C20 */ extern HSD_GObj* mnDiagram3_804D6C20;
 /* 4D6C24 */ extern HSD_GObj* mnDiagram3_804D6C24;
 /* 4D4B64 */ extern GXColor mn_804D4B64;
+/* 4DC008 */ extern const f32 mnDiagram3_804DC008;
+/* 4DC00C */ extern const f32 mnDiagram3_804DC00C;
+/* 4DC010 */ extern const f32 mnDiagram3_804DC010;
+/* 4DC014 */ extern const f32 mnDiagram3_804DC014;
 /* 2461BC */ void mnDiagram3_HandleInput(HSD_GObj* gobj);
+
+#ifdef MUST_MATCH
+static void sdata2_order(void)
+{
+    (void) U32_TO_F32;
+    (void) 6.5f;
+    (void) 240.0f;
+    (void) S32_TO_F32;
+}
+#endif
 
 HSD_GObj* mnDiagram3_804D6C20;
 
@@ -113,13 +127,13 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
             stat_ptr = base;
             stat_ptr += (int) stat_type << 1;
             stat_table = (u16*) stat_ptr;
-            icon_x_offset = 1.5f;
+            icon_x_offset = mnDiagram3_804DC010;
             row_spacing = row1_y;
             (void) row_spacing;
             row_spacing = row_spacing - row0_y;
             max_distance = 0x5F5E0FF;
             max_percentage = 0x98967F;
-            divider = 0.035f;
+            divider = mnDiagram3_804DC008;
             max_time = 0x5B8D7F;
             neg_spacing = -row_spacing;
             stat_ptr += 0x6C;
@@ -150,7 +164,7 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
                         }
                         {
                             char* name_str = GetNameText(entity);
-                            f32 f1 = 0.0f;
+                            f32 f1 = mnDiagram3_804DC00C;
                             f32 offset_y = neg_spacing * (f32) i / divider;
                             HSD_SisLib_803A6B98(title_text, f1, offset_y,
                                                 name_str);
@@ -181,13 +195,13 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
                 }
 
                 if (mnDiagram2_IsIconOnlyStat(stat_type)) {
-                    mnDiagram2_GetAggregatedFighterRank(sp48, stat_type,
-                                                        (u8) i);
+                    u8 rank = (u8) i;
+
+                    mnDiagram2_GetAggregatedFighterRank(sp48, stat_type, rank);
                     if (sp48[0] == 0x19) {
                         goto next;
                     }
-                    mnDiagram2_GetAggregatedFighterRank(sp38, stat_type,
-                                                        (u8) i);
+                    mnDiagram2_GetAggregatedFighterRank(sp38, stat_type, rank);
                     icon = mnDiagram_CreateFighterIcon(sp38[0], 0);
                     HSD_JObjSetTranslateY(icon, row_spacing * (f32) i);
                     HSD_JObjAddChild(data->jobjs[6], icon);
@@ -202,7 +216,7 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
                         mnDiagram_FormatDecimalNumber((char*) sp58, val, 0);
                     }
                     {
-                        f32 f1 = 0.0f;
+                        f32 f1 = mnDiagram3_804DC00C;
                         f32 offset_y = neg_spacing * (f32) i / divider;
                         HSD_SisLib_803A6B98(value_text, f1, offset_y,
                                             (char*) sp58);
@@ -242,7 +256,7 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
                     }
 
                     {
-                        f32 f1 = 0.0f;
+                        f32 f1 = mnDiagram3_804DC00C;
                         f32 offset_y = neg_spacing * (f32) i / divider;
                         HSD_SisLib_803A6B98(value_text, f1, offset_y,
                                             (char*) sp58);
@@ -262,8 +276,8 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
                         f32 negated_y = -sp6C.y;
                         icon_text = HSD_SisLib_803A5ACC(
                             0, 1, icon_x_offset + sp6C.x,
-                            neg_spacing * (f32) i + negated_y, sp6C.z, 1.0f,
-                            1.0f);
+                            neg_spacing * (f32) i + negated_y, sp6C.z,
+                            mnDiagram3_804DC014, mnDiagram3_804DC014);
                         data->row_icons[i] = icon_text;
                         icon_text->default_alignment = 1;
                         icon_text->text_color = mn_804D4B64;
@@ -425,10 +439,10 @@ void mnDiagram3_Create(int arg0)
     gobj = GObj_Create(6, 7, 0x80);
     mnDiagram3_804D6C20 = gobj;
     jobj = HSD_JObjLoadJoint(archive->x0);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6, 0x80);
     HSD_JObjAddAnimAll(jobj, archive->x4, archive->x8, archive->xC);
-    HSD_JObjReqAnimAll(jobj, 0.0f);
+    HSD_JObjReqAnimAll(jobj, mnDiagram3_804DC00C);
     HSD_JObjAnimAll(jobj);
 
     user_data = (Diagram3*) HSD_MemAlloc(sizeof(Diagram3));
@@ -442,33 +456,6 @@ void mnDiagram3_Create(int arg0)
     }
 
     HSD_GObj_SetupProc(gobj, mnDiagram3_Think, 0);
-}
-
-static inline void HSD_JObjSetTranslateX_Fake(HSD_JObj* jobj, f32 x)
-{
-    HSD_ASSERT(932, jobj);
-    jobj->translate.x = x;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        (HSD_JObjSetMtxDirty)(jobj);
-    }
-}
-
-static inline void HSD_JObjSetTranslateY_Fake(HSD_JObj* jobj, f32 y)
-{
-    HSD_ASSERT(947, jobj);
-    jobj->translate.y = y;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        (HSD_JObjSetMtxDirty)(jobj);
-    }
-}
-
-static inline void HSD_JObjSetTranslateZ_Fake(HSD_JObj* jobj, f32 z)
-{
-    HSD_ASSERT(962, jobj);
-    jobj->translate.z = z;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        (HSD_JObjSetMtxDirty)(jobj);
-    }
 }
 
 void mnDiagram3_Init(void* arg0)
@@ -507,10 +494,10 @@ void mnDiagram3_Init(void* arg0)
         popup = GObj_Create(6, 7, 0x80);
         data->popup_gobj = popup;
         popup_jobj = HSD_JObjLoadJoint(archive->x0);
-        HSD_GObjObject_80390A70(popup, HSD_GObj_804D7849, popup_jobj);
+        HSD_GObjObject_80390A70(popup, HSD_GObj_JObjKind, popup_jobj);
         GObj_SetupGXLink(popup, HSD_GObj_JObjCallback, 4, 0x80);
         HSD_JObjAddAnimAll(popup_jobj, archive->x4, archive->x8, archive->xC);
-        HSD_JObjReqAnimAll(popup_jobj, 0.0f);
+        HSD_JObjReqAnimAll(popup_jobj, mnDiagram3_804DC00C);
         HSD_JObjAnimAll(popup_jobj);
 
         new_var = gobj->user_data;
@@ -520,14 +507,17 @@ void mnDiagram3_Init(void* arg0)
                       HSD_JObjGetTranslationY(row0);
 
         row0 = data->jobjs[8];
-        HSD_JObjSetTranslateX_Fake(popup_jobj, HSD_JObjGetTranslationX(row0));
+        HSD_JObjSetTranslateXWithMtxDirty(popup_jobj,
+                                          HSD_JObjGetTranslationX(row0));
 
         row0 = data->jobjs[8];
-        row_spacing = row_spacing * 0.0f + HSD_JObjGetTranslationY(row0);
-        HSD_JObjSetTranslateY_Fake(popup_jobj, row_spacing);
+        row_spacing =
+            row_spacing * mnDiagram3_804DC00C + HSD_JObjGetTranslationY(row0);
+        HSD_JObjSetTranslateYWithMtxDirty(popup_jobj, row_spacing);
 
         row0 = data->jobjs[8];
-        HSD_JObjSetTranslateZ_Fake(popup_jobj, HSD_JObjGetTranslationZ(row0));
+        HSD_JObjSetTranslateZWithMtxDirty(popup_jobj,
+                                          HSD_JObjGetTranslationZ(row0));
     }
 
     {
@@ -890,3 +880,8 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
         }
     }
 }
+
+const f32 mnDiagram3_804DC008 = 0.035f;
+const f32 mnDiagram3_804DC00C = 0.0f;
+const f32 mnDiagram3_804DC010 = 1.5f;
+const f32 mnDiagram3_804DC014 = 1.0f;

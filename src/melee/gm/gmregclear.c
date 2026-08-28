@@ -501,7 +501,7 @@ void gm_8017C838(void)
     sp10[0] = FTKIND_NONE;
     sp10[1] = FTKIND_NONE;
     sp10[2] = FTKIND_NONE;
-    switch (temp_r3->x24C8.xE) {
+    switch (temp_r3->x24C8.stkind) {
     case 0x3B:
         sp10[0] = FTKIND_YOSHI;
         break;
@@ -788,14 +788,14 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     arg0->rules.x0_3 = arg1->x0.xB;
 
     if (arg6 != 0) {
-        arg0->rules.x10 = (u32) arg6;
+        arg0->rules.time_limit = (u32) arg6;
         arg0->rules.x0_6 = 1;
     } else {
         arg0->rules.x0_6 = 0;
     }
 
     arg0->rules.x18 = (u32) arg1->x0.xC.x18;
-    arg0->rules.xE = (u16) arg7;
+    arg0->rules.stkind = (u16) arg7;
     arg0->rules.xB = arg1->x48((u8) count, arg1->x0.cpu_level);
 
     arg0->rules.x20 = (u64) -1;
@@ -1874,7 +1874,7 @@ s32 fn_8017F09C(void)
         lbl_8046B6A0_t* p2 = gm_16AE_GetUnkData_0();
         int flag;
         if (data->x118 != 0 || (data->x11A != 0 && data->x11B == 0) ||
-            p2->x24C8.x0_7)
+            p2->x24C8.timer_counts_up)
         {
             flag = 0;
         } else {
@@ -2137,7 +2137,7 @@ void fn_8017F608(void* arg0)
             p->x74->default_alignment = 2;
             gm = gm_16AE_GetUnkData_0();
             if (state->x118 != 0 || (state->x11A != 0 && state->x11B == 0) ||
-                (gm->x24C8.x0_7))
+                (gm->x24C8.timer_counts_up))
             {
                 show = 0;
             } else {
@@ -2555,7 +2555,7 @@ s32 fn_801803FC(void* arg0)
         OSReport("Error : jobj don\'t get (gmRegClearAddModel)\n");
         OSPanic(__FILE__, 0x432, "");
     }
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xBU, 0U);
     HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_8017FF1C, 0x11U);
     fn_801689E4(jobj, mdl, 0);
@@ -2614,7 +2614,7 @@ fn_80180630_CreateLightAndCamera(struct lbl_80472D28_t* state,
     HSD_GObj* light_gobj;
 
     light_gobj = GObj_Create(0xBU, 3U, 0U);
-    HSD_GObjObject_80390A70(light_gobj, (u8) HSD_GObj_804D784A,
+    HSD_GObjObject_80390A70(light_gobj, (u8) HSD_GObj_LightKind,
                             fn_80180630_LoadLightList(state));
     GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0xAU, 0U);
 
@@ -2737,7 +2737,7 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     fn_80168A6C(sp38, &state->x4C, 0);
 
     fn_80180630_CreateLightAndCamera(state, &cam_gobj);
-    HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B,
+    HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_CameraKind,
                             HSD_CObjLoadDesc(state->x60));
     GObj_SetupGXLinkMax(cam_gobj, HSD_GObj_803910D8, 8U);
     cam_gobj->gxlink_prios = 0x4C00;
@@ -3078,7 +3078,7 @@ void fn_80181708(void)
 
     gobj = GObj_Create(0xEU, 0xFU, 0U);
     jobj = HSD_JObjLoadJoint((*lbl_804D65CC)->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xBU, 0U);
     HSD_GObj_SetupProc(gobj, fn_80180C14, 0x15U);
     gm_8016895C(jobj, *lbl_804D65CC, 0);
@@ -3088,7 +3088,7 @@ void fn_80181708(void)
 
     gobj = (new_var = GObj_Create(0xEU, 0xFU, 0U));
     jobj = HSD_JObjLoadJoint((*lbl_804D65D0)->joint);
-    HSD_GObjObject_80390A70(new_var, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(new_var, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(new_var, HSD_GObj_JObjCallback, 0xBU, 0U);
     HSD_GObj_SetupProc(new_var, fn_80180C60, 0x15U);
     gm_8016895C(jobj, *lbl_804D65D0, 0);

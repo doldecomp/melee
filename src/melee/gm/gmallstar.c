@@ -516,9 +516,9 @@ void gm_801B5624(GameScene* arg0)
                 (s32) opp_data->x2, (s32) round, (s32) color);
 
     data->rules.x0_6 = 1;
-    data->rules.x0_7 = 1;
+    data->rules.timer_counts_up = 1;
     data->rules.x1_0 = 1;
-    data->rules.x10 = (s32) allstar->x9C / 60;
+    data->rules.time_limit = (s32) allstar->x9C / 60;
     data->rules.x14 = ((s32) allstar->x9C % 60) + 1;
     data->rules.x20 &= 0xFFFFFFFFFFFBFCFFULL;
 
@@ -613,9 +613,9 @@ void gm_801B5ACC(GameScene* arg0)
                 (s32) color);
 
     data->rules.x0_6 = 0;
-    data->rules.x0_7 = 1;
+    data->rules.timer_counts_up = 1;
     data->rules.x1_0 = 1;
-    data->rules.x10 = (s32) allstar->x9C / 60;
+    data->rules.time_limit = (s32) allstar->x9C / 60;
     data->rules.x14 = (s32) allstar->x9C % 60;
     data->rules.xD = 0x78;
     data->players[0].x10 = allstar->x74;

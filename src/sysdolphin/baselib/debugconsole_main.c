@@ -2517,7 +2517,6 @@ void hsd_80397520(void* node_ptr)
     }
 }
 
-// @TODO: Currently 99.78% match - register allocation differences remain
 void hsd_803975D4(void)
 {
     struct ParticleInputState {
@@ -2532,7 +2531,6 @@ void hsd_803975D4(void)
     u32 reset_mask;
     s32 port;
     u16 buttons;
-    u16 changed;
     u32 new_press;
 
     reset_mask = 0;
@@ -2569,11 +2567,16 @@ void hsd_803975D4(void)
     }
     ((struct ParticleInputState*) sp)->port = port;
     pads = ((struct ParticleInputState*) sp)->pads;
+    /* keeps pads a real local instead of a CSE temp; see reg alloc */
+    (void) pads;
     buttons = pads[((struct ParticleInputState*) sp)->port].button;
-    changed =
-        pads[((struct ParticleInputState*) sp)->port + 4].button ^ buttons;
+    new_press =
+        (u16) (buttons &
+               ((&((PADStatus*)
+                       sp->_pad4)[4])[((struct ParticleInputState*) sp)->port]
+                    .button ^
+                buttons));
     sp->xC0 = buttons;
-    new_press = (u16) (buttons & changed);
     if (new_press != 0) {
         ((struct ParticleInputState*) sp)->repeat = 0;
     } else if (pads[((struct ParticleInputState*) sp)->port].button != 0) {
@@ -3187,7 +3190,7 @@ HSD_GObj* hsd_80398310(u16 class_id, u8 p_link, u8 obj_kind, u32 gx_link)
         return NULL;
     }
     cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) &lbl_8040BF70);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, fn_803982E4, gx_link);
     hsd_80392528((Event) fn_80392A3C);
     fn_80392A08(4, 1, 0);

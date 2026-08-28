@@ -94,7 +94,7 @@ static void sdata2_order(void)
 #endif
 
 /* 4D6688 */ extern HSD_Archive* lbl_804D6688;
-/* 3B7D3C */ extern s32 lbl_803B7D3C[4];
+/* 3B7D3C */ extern const s32 lbl_803B7D3C[5];
 /* 479A58 */ struct TmAnimTimers lbl_80479A58;
 /* 4D6690 */ extern SceneDesc* lbl_804D6690;
 /* 4D668C */ extern HSD_Archive* lbl_804D668C;
@@ -743,7 +743,7 @@ void fn_8019DD60(void)
     gobj = GObj_Create(0xE, 0x1A, 0);
     {
         HSD_Fog* tmp = HSD_FogLoadDesc(lbl_804D6690->fogs->desc);
-        HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_804D7848, tmp);
+        HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_FogKind, tmp);
     }
     GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
 
@@ -1240,3 +1240,5 @@ static void order_data_1(void)
     (void) "ckind:%d\n";
 }
 #endif
+
+/* 3B7D3C */ const s32 lbl_803B7D3C[5] = { 0, 1, 2, 3, 0 };

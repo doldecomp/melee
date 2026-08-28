@@ -991,7 +991,7 @@ void fn_801981A0(HSD_GObj* gobj)
 
     gmTournament_SetPlayerX(&x_pos, data->x30, pnum);
 
-    fn_8018FDC4(jobj, x_pos, 666.0f, 80.0f);
+    fn_8018FDC4(jobj, x_pos, 666.0f, 0.01f);
 
     counter = state->x21[pnum];
     counter = (counter + 1) % 11;
@@ -1038,7 +1038,7 @@ void fn_801983E4(HSD_GObj* gobj)
     player_count = tm->x30;
     gmTournament_SetPlayerX(&x, player_count, pnum);
 
-    fn_8018FDC4(jobj, x, 666.0f, 80.0f);
+    fn_8018FDC4(jobj, x, 666.0f, 0.01f);
 }
 
 void fn_80198584(ResultsData* results)
@@ -1273,7 +1273,7 @@ void fn_80198D18(void)
     HSD_SisLib_803A7548(td->x524[3], 0, 1.5f, 1.5f);
 
     gobj = GObj_Create(0xE, 0x1A, 0);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848,
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_FogKind,
                             (0, HSD_FogLoadDesc(lbl_804D666C->fogs[0].desc)));
     GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
     fn_80198BA0();
@@ -1306,7 +1306,7 @@ void fn_80198EBC(void)
     fn_80198C60();
 
     gobj = GObj_Create(0xE, 0x1A, 0);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848,
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_FogKind,
                             (0, HSD_FogLoadDesc(lbl_804D666C->fogs[0].desc)));
     GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
     fn_80198BA0();
@@ -1524,7 +1524,7 @@ void fn_80199AF0(void)
     fn_80198C60();
 
     gobj = GObj_Create(0xE, 0x1A, 0);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848,
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_FogKind,
                             (0, HSD_FogLoadDesc(lbl_804D666C->fogs[0].desc)));
     GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
     fn_80198BA0();

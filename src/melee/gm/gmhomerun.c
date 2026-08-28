@@ -1,7 +1,5 @@
 #include "gmhomerun.h"
 
-#include "gm_1B03.static.h"
-
 #include "gm_unsplit.h"
 #include "gmvsdata.h"
 
@@ -105,8 +103,8 @@ void gm_801B9A3C(GameScene* arg0)
 
     data->rules = vs->data.rules;
 
-    data->rules.xE = 0x54;
-    data->rules.x0_0 = 1;
+    data->rules.stkind = 0x54;
+    data->rules.match_mode = 1;
     data->rules.x0_6 = true;
     data->rules.x1_0 = true;
     data->rules.x4_2 = false;
@@ -114,7 +112,7 @@ void gm_801B9A3C(GameScene* arg0)
 
     data->rules.is_teams = false;
     data->rules.xB = -1;
-    data->rules.x10 = 0xA;
+    data->rules.time_limit = 0xA;
     data->rules.x34 = 1.0f;
     data->rules.x30 = 1.0f;
 

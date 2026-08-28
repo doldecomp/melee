@@ -534,7 +534,7 @@ int HSD_SisLib_803A611C(int font_idx, HSD_GObj* parent_gobj, u16 class_id,
             if (cobj != NULL) {
                 HSD_CObjSetOrtho(cobj, 0.0F, -480.0F, 0.0F, 640.0F);
                 {
-                    u8 tmp = HSD_GObj_804D784B;
+                    u8 tmp = HSD_GObj_CameraKind;
                     HSD_GObjObject_80390A70(entry->x4, tmp, cobj);
                 }
                 GObj_SetupGXLinkMax(entry->x4, HSD_GObj_803910D8, render_prio);

@@ -113,7 +113,7 @@ int it_802BAF2C(Item* ip, HSD_JObj* jobj)
             link->pos = zero;
             link->x2C_b0 = false;
             it_802A24D0(link, 1.0f);
-            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849,
+            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_JObjKind,
                                     it_802BAF2C_Load_x64(ip));
             GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);
         } else if (i == attrs->x0 - 1) {
@@ -129,7 +129,7 @@ int it_802BAF2C(Item* ip, HSD_JObj* jobj)
             it_802A24D0(link, 1.0f);
             {
                 HSD_JObj* joint = it_802BAF2C_Load_x68(ip);
-                HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849, joint);
+                HSD_GObjObject_80390A70(link_gobj, HSD_GObj_JObjKind, joint);
             }
             GObj_SetupGXLink(link_gobj, HSD_GObj_JObjCallback, 6, 0);
             result = link_gobj->hsd_obj;
@@ -142,7 +142,7 @@ int it_802BAF2C(Item* ip, HSD_JObj* jobj)
             link->pos = zero;
             link->x2C_b0 = false;
             it_802A24D0(link, 1.0f);
-            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849,
+            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_JObjKind,
                                     it_802BAF2C_Load_x64(ip));
             GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);
         }

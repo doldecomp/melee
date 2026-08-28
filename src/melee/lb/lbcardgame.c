@@ -227,7 +227,7 @@ void lb_8001CE00(void)
     _p(xC) = true;
 }
 
-u8 lb_8001CE78(void)
+u8 lbCardGame_DecideGameMode(void)
 {
     lb_8001CAF4();
     if (_p(x8) != 0 && _p(x8) != 4) {
@@ -256,7 +256,7 @@ void lb_8001CF18(void)
         HSD_JObj* jobj;
         HSD_GObj* gobj = GObj_Create(0x18, 0x3D, 0);
         HSD_CObj* cobj = HSD_CObjLoadDesc(_p(x64)->cameras[0].desc);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
         GObj_SetupGXLinkMax(gobj, fn_8001CEE4, 0xE);
         gobj->gxlink_prios = 0x80000;
 
@@ -266,7 +266,7 @@ void lb_8001CF18(void)
         HSD_JObjSetTranslateX(jobj, lb_804D3808[_p(x60)][0]);
         HSD_JObjSetTranslateY(jobj, lb_804D3808[_p(x60)][1]);
 
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
         GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0x13, 0);
         HSD_GObj_SetupProc(gobj, fn_8001CEC0, 0);
         gm_8016895C(jobj, _p(x64)->models[0], 0);

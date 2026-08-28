@@ -1543,7 +1543,7 @@ void Toy_80306D70(s32 arg0)
 
             data->gobj = GObj_Create(2, 1, 0);
             lobj = Toy_LoadLObjList(sp14, &spC);
-            kind = HSD_GObj_804D784A;
+            kind = HSD_GObj_LightKind;
             HSD_GObjObject_80390A70(data->gobj, kind, lobj);
             GObj_SetupGXLink(data->gobj, HSD_GObj_LObjCallback, 0x37, 0);
             if (spC != 0) {
@@ -1646,7 +1646,7 @@ void _Toy_80307018(void)
     if (lights != NULL) {
         ptr2->x0 = GObj_Create(2, 3, 0);
         obj = Toy_LoadLObjList(lights, 0);
-        kind = HSD_GObj_804D784A;
+        kind = HSD_GObj_LightKind;
         HSD_GObjObject_80390A70(ptr2->x0, kind, obj);
         GObj_SetupGXLink(ptr2->x0, HSD_GObj_LObjCallback, 0x36, 0);
 
@@ -1654,7 +1654,7 @@ void _Toy_80307018(void)
             fog_desc = _Toy_803B8844;
             fog = HSD_FogLoadDesc(&fog_desc);
             ptr2->x8 = GObj_Create(3, 4, 0);
-            kind = HSD_GObj_804D7848;
+            kind = HSD_GObj_FogKind;
             HSD_GObjObject_80390A70(ptr2->x8, kind, fog);
             GObj_SetupGXLink(ptr2->x8, _Toy_80306A0C, 0x35, 0);
         }
@@ -1833,7 +1833,7 @@ void Toy_80307470(s32 arg0)
                               tg->x50, (&data->ptrs[arg0 * 3])[0x22C / 4]),
                           matanim[0], anim[0]);
         HSD_JObjReqAnimAll(loaded_jobj, 0.0f);
-        HSD_GObjObject_80390A70(tg->x0, (kind = HSD_GObj_804D7849),
+        HSD_GObjObject_80390A70(tg->x0, (kind = HSD_GObj_JObjKind),
                                 loaded_jobj);
         GObj_SetupGXLink(tg->x0, HSD_GObj_JObjCallback, 0x3C, 0);
 
@@ -1886,7 +1886,7 @@ void _Toy_803075E8(s32 arg0)
         if (joint != NULL) {
             td->gobj = GObj_Create(4, 7, 0);
             jobj = HSD_JObjLoadJoint(joint);
-            kind = HSD_GObj_804D7849;
+            kind = HSD_GObj_JObjKind;
             HSD_GObjObject_80390A70(td->gobj, kind, jobj);
             GObj_SetupGXLink(td->gobj, HSD_GObj_JObjCallback, 0x33, 0);
 
@@ -2450,7 +2450,7 @@ HSD_GObj* Toy_803087F4(void* arg0)
     trophy_jobj = HSD_JObjLoadJoint(joint);
     HSD_JObjAddChild(parent_jobj, trophy_jobj);
 
-    kind = HSD_GObj_804D7849;
+    kind = HSD_GObj_JObjKind;
     HSD_GObjObject_80390A70(anim->gobj, kind, parent_jobj);
     GObj_SetupGXLink(anim->gobj, HSD_GObj_JObjCallback, 0x39, 0);
 
@@ -4847,7 +4847,7 @@ void _Toy_8030FA50(void)
     /* Main CObj (offset 0x00) */
     state[0] = GObj_Create(1U, 2U, 0U);
     cobj = lb_80013B14(cam_desc);
-    kind = HSD_GObj_804D784B;
+    kind = HSD_GObj_CameraKind;
     HSD_GObjObject_80390A70(state[0], kind, cobj);
     GObj_SetupGXLinkMax(state[0], Toy_80306954, 0U);
     gobj = state[0];
@@ -4868,7 +4868,7 @@ void _Toy_8030FA50(void)
     frustum_near = -0.026839f;
     HSD_CObjSetFrustum(cobj, frustum_top, frustum_bottom, frustum_near,
                        frustum_far);
-    kind = HSD_GObj_804D784B;
+    kind = HSD_GObj_CameraKind;
     HSD_GObjObject_80390A70(state[2], kind, cobj);
     GObj_SetupGXLinkMax(state[2], (GObj_RenderFunc) (Event) Toy_803068E0, 0U);
     gobj = state[2];
@@ -4893,7 +4893,7 @@ void _Toy_8030FA50(void)
     /* Camera2 (offset 0x04) */
     state[1] = GObj_Create(1U, 2U, 0U);
     cobj = lb_80013B14(&_Toy_803FE68C);
-    kind = HSD_GObj_804D784B;
+    kind = HSD_GObj_CameraKind;
     HSD_GObjObject_80390A70(state[1], kind, cobj);
     GObj_SetupGXLinkMax(state[1], Toy_803068E0, 0U);
     gobj = state[1];
@@ -4913,7 +4913,7 @@ void _Toy_8030FA50(void)
     /* Light camera (offset 0x0C) */
     state[3] = GObj_Create(1U, 2U, 0U);
     cobj = lb_80013B14(cam_desc);
-    kind = HSD_GObj_804D784B;
+    kind = HSD_GObj_CameraKind;
     HSD_GObjObject_80390A70(state[3], kind, cobj);
     GObj_SetupGXLinkMax(state[3], HSD_GObj_803910D8, 0U);
     gobj = state[3];
@@ -5178,11 +5178,72 @@ void Toy_803102D0(void)
     }
 }
 
-void Toy_80310324(void)
+static inline void toy_toggle_flag(Toy26B8* toy)
 {
     s16 idx;
+    s16 idx2;
+    ToyGlobalsS_* tg6;
+    u16* flags;
+
+    tg6 = (ToyGlobalsS_*) Toy_sbss_804D6EE0;
+    idx = Toy_sbss_804D6EDC[tg6->x154];
+
+    if (gm_IsCurrently1PMode() != 0 ||
+        gm_GetCurrentGameMode() == GM_TOY_LOTTERY)
+    {
+        flags = toy->trophy_flags;
+    } else {
+        flags = gmMainLib_GetTrophyFlags();
+    }
+
+    if (flags[idx] & 0x8000) {
+        tg6 = (ToyGlobalsS_*) Toy_sbss_804D6EE0;
+        idx2 = Toy_sbss_804D6EDC[tg6->x154];
+
+        if (gm_IsCurrently1PMode() != 0 ||
+            gm_GetCurrentGameMode() == GM_TOY_LOTTERY)
+        {
+            flags = toy->trophy_flags;
+        } else {
+            flags = gmMainLib_GetTrophyFlags();
+        }
+
+        flags += idx2;
+        *flags ^= 0x8000;
+    }
+}
+
+static inline void toy_make_gobj(void)
+{
     ToyGlobalsS_* tg3;
+
+    tg3 = (ToyGlobalsS_*) _Toy_sbss_804D6E6C;
+    tg3->x0 = GObj_Create(6, 7, 0);
+    GObj_SetupGXLink(tg3->x0, _Toy_80312050, 0x39, 0);
+    tg3->x4 = 1;
+}
+
+static inline void toy_sobj_loop(ToyGlobalsS_* tg2, UNK_T* syms)
+{
     s32 i;
+    HSD_SObj* sobj;
+    s32 one;
+    f32 two;
+
+    i = 0;
+    two = 2.0f;
+    one = 1;
+    do {
+        sobj = HSD_SObjLib_803A477C(tg2->x8, syms[i], 0, 0, 0x80, 0);
+        *(f32*) ((char*) sobj + 0x1C) = two;
+        i += 1;
+        *(f32*) ((char*) sobj + 0x20) = two;
+        *(s32*) ((char*) sobj + 0x40) = one;
+    } while (i < 3);
+}
+
+void Toy_80310324(void)
+{
     Toy26B8* toy;
     ToyGlobalsS_* tg;
     ToyGlobalsS_* tg2;
@@ -5192,14 +5253,8 @@ void Toy_80310324(void)
     ToySubStructS_* sub;
     UNK_T syms[3];
     UNK_T sym[1];
-    s32 one;
     s32 var_r0;
-    HSD_SObj* sobj;
     HSD_GObj* gobj;
-    u16* flags;
-    f32 two;
-
-    PAD_STACK(4);
 
     toy = (void*) &_Toy_804A26B8;
     tg = (ToyGlobalsS_*) Toy_sbss_804D6ED8;
@@ -5227,16 +5282,7 @@ void Toy_80310324(void)
         tg2->x8 = GObj_Create(4, 5, 0);
         GObj_SetupGXLink(tg2->x8, HSD_SObjLib_803A49E0, 0x32, 0);
 
-        i = 0;
-        two = 2.0f;
-        one = 1;
-        do {
-            sobj = HSD_SObjLib_803A477C(tg2->x8, syms[i], 0, 0, 0x80, 0);
-            *(f32*) ((char*) sobj + 0x1C) = two;
-            i += 1;
-            *(f32*) ((char*) sobj + 0x20) = two;
-            *(s32*) ((char*) sobj + 0x40) = one;
-        } while (i < 3);
+        toy_sobj_loop(tg2, syms);
     }
 
     _Toy_803075E8(0);
@@ -5264,32 +5310,7 @@ void Toy_80310324(void)
         tg6 = (ToyGlobalsS_*) Toy_sbss_804D6EE0;
         Toy_803087F4(tg6->x140);
 
-        tg6 = (ToyGlobalsS_*) Toy_sbss_804D6EE0;
-        idx = Toy_sbss_804D6EDC[tg6->x154];
-
-        if (gm_IsCurrently1PMode() != 0 ||
-            gm_GetCurrentGameMode() == GM_TOY_LOTTERY)
-        {
-            flags = toy->trophy_flags;
-        } else {
-            flags = gmMainLib_GetTrophyFlags();
-        }
-
-        if (flags[idx] & 0x8000) {
-            tg6 = (ToyGlobalsS_*) Toy_sbss_804D6EE0;
-            idx = Toy_sbss_804D6EDC[tg6->x154];
-
-            if (gm_IsCurrently1PMode() != 0 ||
-                gm_GetCurrentGameMode() == GM_TOY_LOTTERY)
-            {
-                flags = toy->trophy_flags;
-            } else {
-                flags = gmMainLib_GetTrophyFlags();
-            }
-
-            flags += idx;
-            *flags ^= 0x8000;
-        }
+        toy_toggle_flag(toy);
 
         tg6 = (ToyGlobalsS_*) Toy_sbss_804D6EE0;
         sub = tg6->x140;
@@ -5299,10 +5320,7 @@ void Toy_80310324(void)
         sub = tg6->x140;
         Toy_803083D8(tg->x30, sub->x10);
 
-        tg3 = (ToyGlobalsS_*) _Toy_sbss_804D6E6C;
-        tg3->x0 = GObj_Create(6, 7, 0);
-        GObj_SetupGXLink(tg3->x0, _Toy_80312050, 0x39, 0);
-        tg3->x4 = 1;
+        toy_make_gobj();
     }
 
     _Toy_80307828(0);

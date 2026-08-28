@@ -877,7 +877,7 @@ void lb_800138EC(s32 arg0, GObj_RenderFunc render_func, u32 arg2, s8 arg3,
     HSD_CObjSetNear(cobj, zero);
     HSD_CObjSetFar(cobj, far);
     HSD_CObjSetOrtho(cobj, ortho_top, ortho_bot, ortho_left, ortho_right);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
 
     data = HSD_MemAlloc(sizeof(struct lb_800138D8_t));
     data->x0 = x;

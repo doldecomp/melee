@@ -28,8 +28,6 @@
 #include "sysdolphin/baselib/random.h"
 #include "sysdolphin/baselib/sislib.h"
 
-u8 mnNameNew_804D4F98[8] = { 0 };
-
 typedef char* GlyphRow[4];
 
 /// Glyph strings in the keyboard tables are read through
@@ -73,12 +71,12 @@ typedef struct MnNameNewDataLayout {
     char assert_cond[0xC];
 } MnNameNewDataLayout;
 
-void* mnNameNew_804A06F0[4];
-void* mnNameNew_804A0700[4];
-void* mnNameNew_804A0710[4];
-void* mnNameNew_804A0720[8];
-char mnNameNew_CurrentNameText[0x10];
-u8 mnNameNew_804D4F7C[8];
+extern void* mnNameNew_804A06F0[4];
+extern void* mnNameNew_804A0700[4];
+extern void* mnNameNew_804A0710[4];
+extern void* mnNameNew_804A0720[8];
+extern char mnNameNew_CurrentNameText[0x10];
+extern u8 mnNameNew_804D4F7C[8];
 HSD_GObj* mnNameNew_804D6C08;
 
 static AnimLoopSettings mnNameNew_803EDA58[3] = {
@@ -650,11 +648,13 @@ s32 PickAutoName(HSD_GObj* arg0)
 #line 779 "mnnamenew.c"
 bool NameContainsOnlySpaces(void)
 {
+    s16 null_char;
     char* text = mnNameNew_CurrentNameText;
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        if ((s8) *mnNameNew_NullCharacter != (s8) text[0]) {
+        null_char = (s8) *mnNameNew_NullCharacter;
+        if (null_char != (s8) text[0]) {
             if ((s8) * (char*) "　" != (s8) text[0] ||
                 ((GlyphChar*) "　")[1] != text[1])
             {
@@ -1541,7 +1541,7 @@ s32 mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1, u8 arg2)
     setup_desc = mnNameNew_804A0710;
     gobj = GObj_Create(6U, 7U, 0x80U);
     jobj = HSD_JObjLoadJoint(setup_desc[0]);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6U, 0x80U);
     HSD_GObj_SetupProc(gobj, fn_8023CFC8, 0U);
     HSD_JObjAddAnimAll(jobj, setup_desc[1], setup_desc[2], setup_desc[3]);
@@ -1907,7 +1907,7 @@ void mnNameNew_8023E32C(s32 arg0)
     gobj = GObj_Create(6U, 7U, 0x80U);
     mnNameNew_804D6C08 = gobj;
     root_jobj = HSD_JObjLoadJoint(setup_desc[0]);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root_jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, root_jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4U, 0x80U);
     HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_8023DBE8, 0U);
     HSD_JObjAddAnimAll(root_jobj, setup_desc[1], setup_desc[2], setup_desc[3]);
@@ -2060,6 +2060,13 @@ void mnNameNew_8023EA08(UNK_T arg0)
     mnNameNew_EnterFromMnCharSel((HSD_Archive*) arg0, 4);
 }
 
-/// @todo Must be part of a larger object
-DATA UNK_T mnNameNew_803EE720 = &mnNameNew_804D4F98;
-DATA UNK_T mnNameNew_803EE724 = &mnNameNew_804D4F98;
+char mnNameNew_CurrentNameText[0x10];
+void* mnNameNew_804A0720[8];
+void* mnNameNew_804A0710[4];
+void* mnNameNew_804A0700[4];
+void* mnNameNew_804A06F0[4];
+
+static u8 mnNameNew_804D4F98[8] = { 0 };
+
+char* mnNameNew_803EE720[] = { (char*) mnNameNew_804D4F98 };
+char* mnNameNew_803EE724[] = { (char*) mnNameNew_804D4F98 };

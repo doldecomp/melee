@@ -117,7 +117,7 @@ void mnGallery_80258A08(HSD_GObj* gobj, u16 width, u16 height, u32 priority)
     HSD_CObjSetNear(cobj, near_val);
     HSD_CObjSetFar(cobj, far);
     HSD_CObjSetOrtho(cobj, top, bottom, left, right);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, mnGallery_8025896C, priority);
 }
 
@@ -430,7 +430,7 @@ void mnGallery_8025963C(void)
     gobj = GObj_Create(6, 7, 0x80);
     mnGallery_804D6C88 = gobj;
     jobj = HSD_JObjLoadJoint(model->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
     HSD_JObjAddAnimAll(jobj, model->animjoint, model->matanim_joint,
                        model->shapeanim_joint);
@@ -450,7 +450,7 @@ void mnGallery_8025963C(void)
         child_gobj = GObj_Create(6, 7, 0x80);
         user_data->gobjs[i] = child_gobj;
         jobj = HSD_JObjLoadJoint(model->joint);
-        HSD_GObjObject_80390A70(child_gobj, HSD_GObj_804D7849, jobj);
+        HSD_GObjObject_80390A70(child_gobj, HSD_GObj_JObjKind, jobj);
         GObj_SetupGXLink(child_gobj, HSD_GObj_JObjCallback, 4, 0x80);
         HSD_JObjAddAnimAll(jobj, model->animjoint, model->matanim_joint,
                            model->shapeanim_joint);

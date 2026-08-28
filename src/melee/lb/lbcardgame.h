@@ -14,7 +14,7 @@
 /* 01CC84 */ void lb_8001CC84(void);
 /* 01CDB4 */ void lb_8001CDB4(void);
 /* 01CE00 */ void lb_8001CE00(void);
-/* 01CE78 */ u8 lb_8001CE78(void);
+/* 01CE78 */ u8 lbCardGame_DecideGameMode(void);
 /* 01CF18 */ void lb_8001CF18(void);
 /* 01D164 */ void lb_8001D164(int);
 /* 01D1F4 */ void lb_8001D1F4(void);

@@ -632,7 +632,7 @@ void _tyFigupon_80315C44(HSD_GObj* arg0)
                 gobj = GObj_Create(9, 9, 0);
                 jobj = HSD_JObjLoadJoint(HSD_ArchiveGetPublicAddress(
                     ef4_2->archive, "ToyFigurePonCoin_Top_joint"));
-                HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+                HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
                 GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0x3C, 0);
                 _tyFigupon_80314AA8(jobj, "ToyFigurePonCoin_Top_animjoint",
                                     "ToyFigurePonCoin_Top_matanim_joint",
@@ -1258,7 +1258,7 @@ void _tyFigupon_8031753C(void)
         s32 total;
         ef4->x00 = (u32) GObj_Create(9, 9, 0);
         jobj = HSD_JObjLoadJoint(panel.joint);
-        HSD_GObjObject_80390A70((HSD_GObj*) ef4->x00, temp = HSD_GObj_804D7849,
+        HSD_GObjObject_80390A70((HSD_GObj*) ef4->x00, temp = HSD_GObj_JObjKind,
                                 jobj);
         panel.render_cb = HSD_GObj_JObjCallback;
         GObj_SetupGXLink((HSD_GObj*) ef4->x00, panel.render_cb, 0x3C, 1);
@@ -1270,7 +1270,7 @@ void _tyFigupon_8031753C(void)
                                             "ToyFigurePonBg_Top_joint");
         ef4->unk4 = GObj_Create(9, 9, 0);
         jobj = HSD_JObjLoadJoint(joint);
-        HSD_GObjObject_80390A70(ef4->unk4, temp = HSD_GObj_804D7849, jobj);
+        HSD_GObjObject_80390A70(ef4->unk4, temp = HSD_GObj_JObjKind, jobj);
         GObj_SetupGXLink(ef4->unk4, panel.render_cb, 0x3C, 0);
         _tyFigupon_80314AA8(jobj, "ToyFigurePonBg_Top_animjoint",
                             "ToyFigurePonBg_Top_matanim_joint",
@@ -1329,7 +1329,7 @@ void _tyFigupon_8031753C(void)
                                             "ToyFigurePonLever_Top_joint");
         ef4->x08 = (u32) GObj_Create(9, 9, 0);
         jobj = HSD_JObjLoadJoint(joint);
-        HSD_GObjObject_80390A70((HSD_GObj*) ef4->x08, temp = HSD_GObj_804D7849,
+        HSD_GObjObject_80390A70((HSD_GObj*) ef4->x08, temp = HSD_GObj_JObjKind,
                                 jobj);
         GObj_SetupGXLink((HSD_GObj*) ef4->x08, HSD_GObj_JObjCallback, 0x3C, 0);
         _tyFigupon_80314AA8(jobj, "ToyFigurePonLever_Top_animjoint",
@@ -1415,7 +1415,7 @@ void _tyFigupon_80317A60(void)
     data->x0 = GObj_Create(1, 2, 0);
     cobj = lb_80013B14(cam_desc);
     _tyFigupon_804D6F04 = (HSD_CObjDesc*) cam_desc;
-    HSD_GObjObject_80390A70(data->x0, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(data->x0, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(data->x0, _tyFigupon_80314BE4, 0);
     gobj = data->x0;
     gobj->gxlink_prios = 0x5010000000000000ULL;
@@ -1423,7 +1423,7 @@ void _tyFigupon_80317A60(void)
     data->x4 = GObj_Create(1, 2, 0);
     cobj = lb_80013B14(&_tyFigupon_803FEEFC);
     _tyFigupon_804D6F08 = &_tyFigupon_803FEEFC;
-    HSD_GObjObject_80390A70(data->x4, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(data->x4, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(data->x4, Toy_803068E0, 0);
     gobj = data->x4;
     gobj->gxlink_prios = 0x2680000000000000ULL;
@@ -1571,7 +1571,7 @@ void tyFigupon_OnEnter_80317D80(void* arg0)
             ed4->x0 = (u32) GObj_Create(2, 3, 0);
             lobj = Toy_LoadLObjList(temp, 0);
             HSD_GObjObject_80390A70((HSD_GObj*) ed4->x0,
-                                    kind = HSD_GObj_804D784A, lobj);
+                                    kind = HSD_GObj_LightKind, lobj);
             {
                 HSD_GObj* gobj = (HSD_GObj*) ed4->x0;
                 GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0x34, 0);
@@ -1585,7 +1585,7 @@ void tyFigupon_OnEnter_80317D80(void* arg0)
                                         "ToyFigurePonNget_Top_joint");
     data->x8 = GObj_Create(0xA, 0xA, 0);
     jobj = HSD_JObjLoadJoint(joint);
-    HSD_GObjObject_80390A70(data->x8, kind = HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(data->x8, kind = HSD_GObj_JObjKind, jobj);
     _tyFigupon_80314AA8(jobj, "ToyFigurePonNget_Top_animjoint",
                         "ToyFigurePonNget_Top_matanim_joint",
                         "ToyFigurePonNget_Top_shapeanim_joint");

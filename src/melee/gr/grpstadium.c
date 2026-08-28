@@ -1188,7 +1188,7 @@ HSD_GObj* grStadium_801D2BEC(void)
     gobj = GObj_Create(0x11, 0x13, 0);
     cobj = lb_80013B14(&grPs_803E14FC);
     HSD_CObjSetOrtho(cobj, 0.0F, -160.0F, 0.0F, 250.0F);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, fn_801D2ED0, 1);
     gobj->gxlink_prios = 2;
     text = HSD_MemAlloc(sizeof(*text));
@@ -1537,7 +1537,7 @@ void grStadium_801D3460(Ground_GObj* gobj)
     temp_r4->x34.x = 0.625f;
     temp_r4->x34.y = 0.625f;
 
-    if ((rules->x10 == 0) | !rules->x0_6) {
+    if ((rules->time_limit == 0) | !rules->x0_6) {
         HSD_SisLib_803A6B98(gp2->win_dynamic_p, 125.0F, 120.0F, "00:00 00");
         return;
     }

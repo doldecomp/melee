@@ -1417,7 +1417,7 @@ void mnName_8023A290(void)
 
     gobj = GObj_Create(6U, 7U, 0x80U);
     jobj = HSD_JObjLoadJoint(archive->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6U, 0x80U);
     HSD_GObj_SetupProc(gobj, fn_8023A0BC, 0U);
     HSD_JObjAddAnimAll(jobj, archive->anim_joint, archive->matanim_joint,
@@ -1479,29 +1479,29 @@ static inline void mnName_SetupScrollbarAndText(s32 count, HSD_JObj* scrollbar,
 
 HSD_GObj* mnName_8023A59C(u8 arg0)
 {
+    HSD_GObj* gobj;
     s32 count;
     HSD_JObj* jobj5;
-    HSD_JObj* root_jobj;
-    HSD_JObj* jobj7;
+    HSD_JObj* root_jobj[1];
+    HSD_JObj* jobj7[1];
     MnNameArchive* archive = &mnName_804A06E0;
     HSD_JObj* slider;
     HSD_JObj* scrollbar_container;
     HSD_JObj* jobj4;
     MnName_GObj* user_data;
-    HSD_GObj* gobj;
     s32 i;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     gobj = GObj_Create(6U, 7U, 0x80U);
     mnName_804D6BF8 = gobj;
-    root_jobj = HSD_JObjLoadJoint(archive->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root_jobj);
+    root_jobj[0] = HSD_JObjLoadJoint(archive->joint);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, root_jobj[0]);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4U, 0x80U);
     HSD_GObj_SetupProc(gobj, fn_80239574, 0U);
-    HSD_JObjAddAnimAll(root_jobj, archive->anim_joint, archive->matanim_joint,
-                       archive->shapeanim_joint);
-    HSD_JObjReqAnimAll(root_jobj, 0.0f);
-    HSD_JObjAnimAll(root_jobj);
+    HSD_JObjAddAnimAll(root_jobj[0], archive->anim_joint,
+                       archive->matanim_joint, archive->shapeanim_joint);
+    HSD_JObjReqAnimAll(root_jobj[0], 0.0f);
+    HSD_JObjAnimAll(root_jobj[0]);
     user_data = (MnName_GObj*) HSD_MemAlloc(0x44);
     HSD_ASSERTREPORT(0x67CU, user_data, "Can't get user_data.\n");
     GObj_InitUserData(gobj, 0U, HSD_Free, user_data);
@@ -1514,8 +1514,8 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
     user_data->text = NULL;
     user_data->text2 = NULL;
     for (i = 0; i < 0xD; i++) {
-        lb_80011E24(root_jobj, (HSD_JObj**) ((u8*) user_data + (i << 2) + 8),
-                    i, -1);
+        lb_80011E24(root_jobj[0],
+                    (HSD_JObj**) ((u8*) user_data + (i << 2) + 8), i, -1);
     }
     if (mn_804A04F0.x10 == 1) {
         struct mn_80231634_t* p =
@@ -1542,10 +1542,10 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
         mnName_80239A24((HSD_GObj*) user_data);
         mnName_80238754_noinline((HSD_GObj*) user_data);
     }
-    jobj7 = ((HSD_JObj**) user_data)[9];
-    HSD_JObjReqAnimAll(jobj7,
+    jobj7[0] = ((HSD_JObj**) user_data)[9];
+    HSD_JObjReqAnimAll(jobj7[0],
                        mnName_804D4BD0[mn_804A04F0.hovered_selection == 0x18]);
-    HSD_JObjAnimAll(jobj7);
+    HSD_JObjAnimAll(jobj7[0]);
     jobj4 = (HSD_JObj*) user_data->gobj.proc;
     HSD_JObjReqAnimAll(jobj4,
                        mnName_804D4BD8[mn_804A04F0.hovered_selection == 0x19]);

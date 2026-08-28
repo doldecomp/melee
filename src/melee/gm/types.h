@@ -49,6 +49,7 @@ struct DebugGameOverData {
     /* 16 */ u16 x16;
     /* 18 */ u16 x18;
 };
+ASSERT_SIZE(struct DebugGameOverData, 0x1C);
 
 typedef struct un_804A1F48_t {
     u16 x0;
@@ -64,8 +65,8 @@ struct GameScene {
     /* 01 */ u8 preload;
     /* 02 */ u16 flags;
 
-    /* 04 */ void (*prep)(GameScene*);
-    /* 08 */ void (*decide)(GameScene*);
+    /* 04 */ void (*on_enter)(GameScene*);
+    /* 08 */ void (*on_exit)(GameScene*);
 
     struct GameSceneInfo {
         /* 0C */ u8 scene_id;
@@ -79,9 +80,9 @@ struct GameMode {
     u8 preload;
     u8 idx; ///< GameModeKind
 
-    void (*Load)(void);
-    void (*Unload)(void);
-    void (*Init)(void);
+    void (*on_load)(void);
+    void (*on_unload)(void);
+    void (*on_init)(void);
 
     GameScene* scenes;
 }; // 803DACA4
@@ -89,9 +90,9 @@ struct GameMode {
 struct GameSceneHandler {
     u8 class_id;
 
-    void (*OnFrame)(void);
-    void (*OnLoad)(void*);
-    void (*OnLeave)(void*);
+    void (*on_frame)(void);
+    void (*on_load)(void*);
+    void (*on_leave)(void*);
     void (*unk_func)(void);
 }; // 803DA920
 

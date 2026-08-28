@@ -83,9 +83,9 @@ void gm_801BFABC(GameScene* arg0)
     gm_80167A64(&temp_r30->rules);
     gm_80167A14(temp_r30->players);
     temp_r30->rules.x0_6 = false;
-    temp_r30->rules.x0_0 = 1;
+    temp_r30->rules.match_mode = 1;
     temp_r30->rules.x0_3 = 2;
-    temp_r30->rules.xE = gm_8016075C(gm_CKindToSelKind(temp_r31->x4));
+    temp_r30->rules.stkind = gm_8016075C(gm_CKindToSelKind(temp_r31->x4));
     gm_801B0620(&temp_r30->players[0], temp_r31->x0, temp_r31->x1, 1,
                 temp_r31->x2);
     gm_801B0664(&temp_r30->players[1], temp_r31->x4, 0, 1, 1);
@@ -198,7 +198,7 @@ void gm_801BFCFC(GameScene* arg0)
         if (gmMainLib_8015DA1C(var_r25_2) != 0) {
             if (gmMainLib_8015DA90(var_r25_2) == 0) {
                 u32* KP = gmMainLib_8015D970(var_r25_2);
-                *KP = lbTime_8000AFBC();
+                *KP = lbTime_GetTimeInSeconds();
                 gmMainLib_8015DA40(var_r25_2);
                 Toy_SetUnlockState((s16) var_r25_2, 1);
             }
@@ -227,7 +227,7 @@ void gm_801BFCFC(GameScene* arg0)
         {
             if (gmMainLib_8015DA90(var_r27_2_s11) == 0) {
                 temp_r29_2 = gmMainLib_8015D970(var_r27_2_s11);
-                *temp_r29_2 = lbTime_8000AFBC();
+                *temp_r29_2 = lbTime_GetTimeInSeconds();
                 gmMainLib_8015DA40(var_r27_2_s11);
                 Toy_SetUnlockState((s32) ((s16) var_r27_2_s11), 1);
             }
