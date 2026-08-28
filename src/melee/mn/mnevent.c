@@ -125,7 +125,21 @@ u8 mnEvent_804D6C65;
 static char mnEvent_804D5040[3] = "%d";
 static char mnEvent_804D5044[4] = { 0x81, 0x7C, 0, 0 };
 
-static inline HSD_GObj* mnEvent_CreateIcon(s32 idx)
+static inline MnEventData*
+mnEvent_GetData(void)
+{
+    return mnEvent_804D6C60->user_data;
+}
+
+static inline void mnEvent_SetupIcon(
+    HSD_JObj* icon_jobj, HSD_GObj* icon_gobj)
+{
+    HSD_GObjObject_80390A70(icon_gobj, HSD_GObj_JObjKind, icon_jobj);
+    GObj_SetupGXLink(icon_gobj, HSD_GObj_JObjCallback, 4, 0x80);
+}
+
+static inline void mnEvent_CreateIconForSlot(
+    s32 idx, HSD_GObj** slot)
 {
     HSD_JObj* jobj_0A;
     HSD_JObj* jobj_0C;
@@ -142,14 +156,13 @@ static inline HSD_GObj* mnEvent_CreateIcon(s32 idx)
     spacing = HSD_JObjGetTranslationY(jobj_0A);
     spacing = HSD_JObjGetTranslationY(jobj_0C) - spacing;
     HSD_JObjGetTranslation(jobj_0A, &pos);
-    pos.y += (f32) idx * spacing;
+    pos.y = pos.y + (f32) idx * spacing;
 
     icon_gobj = GObj_Create(6, 7, 0x80);
     icon_jobj = HSD_JObjLoadJoint(assets[4]);
-    HSD_GObjObject_80390A70(icon_gobj, HSD_GObj_JObjKind, icon_jobj);
-    GObj_SetupGXLink(icon_gobj, HSD_GObj_JObjCallback, 4, 0x80);
+    mnEvent_SetupIcon(icon_jobj, icon_gobj);
     mnEvent_8024D4E0(icon_jobj, &pos);
-    return icon_gobj;
+    *slot = icon_gobj;
 }
 
 void mnEvent_8024D15C(s32 idx, s32 event_id)
@@ -158,7 +171,9 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
     HSD_JObj* jobj_0C;
     Vec3 pos;
     MnEventData* data;
+    HSD_Text** text_base;
     HSD_Text** text_slot;
+    HSD_Text** icon_base;
     HSD_Text** icon_slot;
     HSD_Text* text;
     HSD_Text* icon_text;
@@ -166,10 +181,11 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
     f32 text_x;
     f32 text_y;
     HSD_JObj* tree;
-    PAD_STACK(0x28);
+    s32 sis_idx;
+    PAD_STACK(0x30);
 
     tree = mnEvent_804D6C60->hsd_obj;
-    data = mnEvent_804D6C60->user_data;
+    data = mnEvent_GetData();
     lb_80011E24(tree, &jobj_0A, 0xA, -1);
     lb_80011E24(tree, &jobj_0C, 0xC, -1);
 
@@ -180,25 +196,27 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
     pos.y = -(((f32) idx * spacing) + pos.y);
 
     if (data->gobjs[idx] != NULL) {
-        HSD_GObjPLink_80390228(data->gobjs[idx]);
+        HSD_GObj** gobjs = data->gobjs;
+        HSD_GObj* old_gobj = gobjs[idx];
+        HSD_GObjPLink_80390228(old_gobj);
         data->gobjs[idx] = NULL;
     }
 
     if (gmMainLib_8015CEFC(event_id) != 0) {
-        data->gobjs[idx] = mnEvent_CreateIcon(idx);
+        mnEvent_CreateIconForSlot(idx, &data->gobjs[idx]);
     }
 
-    text_slot = &data->texts[idx];
-    (void) text_slot;
+    text_base = data->texts;
+    text_slot = &text_base[idx];
     if (*text_slot != NULL) {
         HSD_SisLib_803A5CC4(data->texts[idx]);
     }
     text = HSD_SisLib_803A6754(0, 1);
     *text_slot = text;
-    text_x = pos.x + mnEvent_803EF764.x;
-    text_y = pos.y + mnEvent_803EF764.y;
     text->font_size.x = 0.035f;
     text->font_size.y = 0.035f;
+    text_x = pos.x + mnEvent_803EF764.x;
+    text_y = pos.y + mnEvent_803EF764.y;
     text->pos_x = text_x;
     text->pos_y = text_y;
     text->pos_z = 17.0f;
@@ -206,7 +224,8 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
     *(s32*) &text->text_color = mnEvent_804D5028;
     HSD_SisLib_803A6B98(text, 0.0f, 0.0f, mnEvent_803EF77C, event_id + 1);
 
-    icon_slot = &data->icons[idx];
+    icon_base = data->icons;
+    icon_slot = &icon_base[idx];
     if (*icon_slot != NULL) {
         HSD_SisLib_803A5CC4(data->icons[idx]);
     }
@@ -216,8 +235,8 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
     *icon_slot = icon_text;
     icon_text->font_size.x = 0.035f;
     icon_text->font_size.y = 0.035f;
-    HSD_SisLib_803A6368(icon_text,
-                        ((gm_801BEBA8((u8) event_id) * 2) & 0x1FE) + 0x154);
+    sis_idx = ((gm_801BEBA8((u8) event_id) * 2) & 0x1FE) + 0x154;
+    HSD_SisLib_803A6368(icon_text, sis_idx);
 }
 
 void mnEvent_8024D4E0(HSD_JObj* jobj, Vec3* translate)
