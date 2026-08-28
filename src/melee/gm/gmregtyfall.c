@@ -419,15 +419,10 @@ static inline void initImages(void)
     }
 }
 
-void gm_801A7070_OnEnter(void* unused)
+static inline void setupTrophy(HSD_JObj* trophy_root)
 {
     s32 trophy;
-    HSD_JObj* player_jobj;
     HSD_JObj* jobj;
-    HSD_JObj* main_jobj;
-    HSD_JObj* trophy_root;
-
-    f32 main_scale;
     f32 translate_x;
     f32 translate_y;
     f32 translate_z;
@@ -435,6 +430,38 @@ void gm_801A7070_OnEnter(void* unused)
     f32 inverse_scale;
     f32 trophy_scale;
     f32 root_scale;
+
+    trophy = gm_801A659C(gm_801BEFB0());
+    jobj = HSD_JObjGetChild(trophy_root);
+    translate_x = -Toy_803060BC(trophy, 0);
+    HSD_JObjSetTranslateXWithMtxDirty(jobj, translate_x);
+    translate_y = -Toy_803060BC(trophy, 1);
+    HSD_JObjSetTranslateYWithMtxDirty(jobj, translate_y);
+    translate_z = -Toy_803060BC(trophy, 2);
+    HSD_JObjSetTranslateZWithMtxDirty(jobj, translate_z);
+
+    rotation_y = -(0.017453292f * Toy_803060BC(trophy, 5));
+    HSD_JObjSetRotationYWithMtxDirty(jobj, rotation_y);
+    inverse_scale = 1.0f / Toy_803060BC(trophy, 3);
+    trophy_scale = Toy_803060BC(trophy, 4);
+    trophy_scale = trophy_scale * inverse_scale;
+    HSD_JObjSetScaleXWithMtxDirty(jobj, trophy_scale);
+    HSD_JObjSetScaleYWithMtxDirty(jobj, trophy_scale);
+    HSD_JObjSetScaleZWithMtxDirty(jobj, trophy_scale);
+    root_scale = gm_803DB2EC[gm_801BEFB0()];
+    HSD_JObjSetScaleX(trophy_root, root_scale);
+    HSD_JObjSetScaleY(trophy_root, root_scale);
+    HSD_JObjSetScaleZ(trophy_root, root_scale);
+}
+
+void gm_801A7070_OnEnter(void* unused)
+{
+    HSD_JObj* player_jobj;
+    HSD_JObj* jobj;
+    HSD_JObj* main_jobj;
+    HSD_JObj* trophy_root;
+
+    f32 main_scale;
 
     HSD_GObj* gobj;
     HSD_LObj* lobj;
@@ -530,27 +557,7 @@ void gm_801A7070_OnEnter(void* unused)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, trophy_root);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
 
-    trophy = gm_801A659C(gm_801BEFB0());
-    jobj = HSD_JObjGetChild(trophy_root);
-    translate_x = -Toy_803060BC(trophy, 0);
-    HSD_JObjSetTranslateXWithMtxDirty(jobj, translate_x);
-    translate_y = -Toy_803060BC(trophy, 1);
-    HSD_JObjSetTranslateYWithMtxDirty(jobj, translate_y);
-    translate_z = -Toy_803060BC(trophy, 2);
-    HSD_JObjSetTranslateZWithMtxDirty(jobj, translate_z);
-
-    rotation_y = -(0.017453292f * Toy_803060BC(trophy, 5));
-    HSD_JObjSetRotationYWithMtxDirty(jobj, rotation_y);
-    inverse_scale = 1.0f / Toy_803060BC(trophy, 3);
-    trophy_scale = Toy_803060BC(trophy, 4);
-    trophy_scale = trophy_scale * inverse_scale;
-    HSD_JObjSetScaleXWithMtxDirty(jobj, trophy_scale);
-    HSD_JObjSetScaleYWithMtxDirty(jobj, trophy_scale);
-    HSD_JObjSetScaleZWithMtxDirty(jobj, trophy_scale);
-    root_scale = gm_803DB2EC[gm_801BEFB0()];
-    HSD_JObjSetScaleX(trophy_root, root_scale);
-    HSD_JObjSetScaleY(trophy_root, root_scale);
-    HSD_JObjSetScaleZ(trophy_root, root_scale);
+    setupTrophy(trophy_root);
 
     HSD_GObj_SetupProc(gobj, fn_801A6844, 0x17);
     jobj = gm_804D6768->hsd_obj;
