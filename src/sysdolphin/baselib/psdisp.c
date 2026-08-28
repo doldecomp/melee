@@ -1925,7 +1925,7 @@ static inline void psUpdateProjectionCache(f32 perspective)
 
 #ifdef MUST_MATCH
 #pragma push
-#pragma inline_depth(3)
+#pragma inline_depth(4)
 #endif
 void psDispParticles(u32 target_link, u32 sw)
 {
@@ -1954,7 +1954,7 @@ void psDispParticles(u32 target_link, u32 sw)
     u32 prev_kind;
     HSD_Particle* pp;
     /// @todo Recover this stack space from the original inline hierarchy.
-    PAD_STACK(0x14);
+    PAD_STACK(0x3c);
 
     alpha_compare_mode = 0;
     prev_tex_interp_near = 0;
