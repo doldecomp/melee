@@ -950,6 +950,8 @@ void mnVibration_IntroProc(HSD_GObj* arg0)
             cursor_jobj = cursor_gobj->hsd_obj;
             jobj17 = data2->jobjs[17];
             cursor_row = data2->x0[1];
+            (void) jobj17;
+            (void) cursor_row;
             base_y = mnVibration_JObjGetTranslationY(jobj17);
             jobj18 = data2->jobjs[18];
             spacing = mnVibration_GetCursorYSpacing(base_y, jobj18);
