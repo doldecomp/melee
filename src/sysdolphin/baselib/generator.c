@@ -671,8 +671,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                     {
                         f32 rnd = HSD_Randf();
                         f32 range = gen->aux.disc.maxAngle - cur_angle;
-                        cone_angle = (f32) (M_PI + gen->angle);
                         cur_angle = range * rnd + cur_angle;
+                        cone_angle = (f32) (M_PI + gen->angle);
                     }
                 }
                 break;
