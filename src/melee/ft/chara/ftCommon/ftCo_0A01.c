@@ -3171,12 +3171,13 @@ bool ftCo_800A6700(Fighter* fp, Vec3* arg1, Vec3* arg2)
 {
     mp_UnkStruct0* island;
     f32 best;
+    f32 px;
+    f32 ay;
     f32 ax;
     Vec3 b;
     Vec3 a;
     Vec3 floor_pos;
     Vec3 floor_normal;
-    f32 px;
     f32 dy;
     f32 dist;
     s32 result;
@@ -3188,14 +3189,15 @@ bool ftCo_800A6700(Fighter* fp, Vec3* arg1, Vec3* arg2)
         if (ftCo_800A2718(island) == 0) {
             int line_id;
             u32 flags;
-            f32 ay;
+            f32 by;
             a = island->x8;
             ax = a.x;
             ay = a.y;
             px = ax + 5.0;
             result =
                 ftCo_800A0FB0(&floor_pos, &line_id, &flags, &floor_normal, -1,
-                              -1, -1, px, ay + 5.0, px, ay - 5.0, 0.0f);
+                              -1, -1, ax + 5.0, ay + 5.0, ax + 5.0,
+                              ay - 5.0, 0.0f);
             if (result != 0) {
                 if (!ftCo_800A6700_inline0(fp, px, ay)) {
                     px = px - arg1->x;
@@ -3211,20 +3213,20 @@ bool ftCo_800A6700(Fighter* fp, Vec3* arg1, Vec3* arg2)
             }
             b = island->x14;
             ax = b.x;
-            ay = b.y;
+            by = b.y;
             px = ax - 5.0;
             result =
                 ftCo_800A0FB0(&floor_pos, &line_id, &flags, &floor_normal, -1,
-                              -1, -1, px, ay + 5.0, px, ay - 5.0, 0.0f);
+                              -1, -1, px, by + 5.0, px, by - 5.0, 0.0f);
             if (result != 0) {
-                if (!ftCo_800A6700_inline0(fp, px, ay)) {
+                if (!ftCo_800A6700_inline0(fp, px, by)) {
                     px = px - arg1->x;
-                    dy = ay - arg1->y;
+                    dy = by - arg1->y;
                     dist = px * px + dy * dy;
                     if (dist > best) {
                         best = dist;
                         arg2->x = ax - 5.0;
-                        arg2->y = ay;
+                        arg2->y = by;
                         arg2->z = b.z;
                     }
                 }
