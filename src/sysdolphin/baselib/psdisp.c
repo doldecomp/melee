@@ -1283,8 +1283,8 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
             pp->appsrt->x90 + (pp->appsrt->x8C * z +
                                (pp->appsrt->x84 * x + pp->appsrt->x88 * y));
     } else {
-        f32 dx = pp->pos.x - pp->vel.x;
         f32 dy = pp->pos.y - pp->vel.y;
+        f32 dx = pp->pos.x - pp->vel.x;
         f32 dz = pp->pos.z - pp->vel.z;
         prev_pos.x =
             pp->appsrt->x70 + (pp->appsrt->x6C * dz +
@@ -1456,8 +1456,8 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                 draw_mtx[2][3] + (draw_mtx[2][2] * z +
                                   (draw_mtx[2][0] * x + draw_mtx[2][1] * y));
         } else {
-            f32 dx = pp->pos.x - pp->vel.x;
             f32 dy = pp->pos.y - pp->vel.y;
+            f32 dx = pp->pos.x - pp->vel.x;
             f32 dz = pp->pos.z - pp->vel.z;
 
             prev_pos.x =
