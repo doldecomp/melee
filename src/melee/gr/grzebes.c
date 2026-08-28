@@ -389,13 +389,13 @@ void grZebes_801D881C(HSD_GObj* gobj)
     Vec3 spot_pos;
     Vec3 spot_interest;
     Vec3 lower_point_pos;
-    HSD_GObj* secondary_gobj;
     f32 slope;
     f32 col_heights[6];
     f32 col_x[6];
     Vec3 upper_point_pos;
-    s32 popped;
+    f32* heights;
     Ground* gp = GET_GROUND(gobj);
+    HSD_GObj* secondary_gobj;
     s32 result;
     secondary_gobj = (HSD_GObj*) gp->u.zebes5.xF0;
     result = grZebes_801DA528(gobj, &gp->u.zebes5.xC8, 1, 2);
@@ -427,14 +427,14 @@ void grZebes_801D881C(HSD_GObj* gobj)
     }
 
     {
-        popped = grZebes_801DB3CC(gobj);
+        result = grZebes_801DB3CC(gobj);
         grZebes_801DC260();
         grZebes_801DBB60((HSD_GObj*) gp->u.zebes5.x100);
         grZebes_801DC408(gobj);
 
         switch (gp->u.zebes5.xC4) {
         case 0:
-            if (popped != 0) {
+            if (result != 0) {
                 gp->u.zebes5.xC4 = 1;
                 grAnime_801C8098(gobj, 0xE, 1, 3, 0.0f, 1.0f);
                 grAnime_801C7980(gobj, 0xE, 1U);
@@ -527,7 +527,6 @@ void grZebes_801D881C(HSD_GObj* gobj)
         int i;
         f32 colWidth;
         f32 left_x;
-        f32* heights;
 
         mpJointListAdd(0);
         mpLib_80057424(0);
