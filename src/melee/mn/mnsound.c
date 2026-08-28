@@ -282,7 +282,10 @@ void mnSound_80249C08(int unused)
     HSD_JObj* jobj;
     Menu* user_data;
     HSD_GObjProc* proc;
-    PAD_STACK(24);
+    HSD_JObj* sound_selection_jobj;
+    HSD_JObj* channel_selection_jobj;
+    HSD_JObj* volume_cursor_jobj;
+    PAD_STACK(4);
     mnSound_804D6C30 = gobj;
     jobj = HSD_JObjLoadJoint(model->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
@@ -323,16 +326,16 @@ void mnSound_80249C08(int unused)
         HSD_JObj* channel_anim_2;
         HSD_JObj* channel_anim_1;
         HSD_JObj* channel_anim_0;
+        PAD_STACK(4);
         mnSound_InitChannelAnim(GET_JOBJ(gobj), user_data->unk1,
                                 &channel_anim_0, &channel_anim_1,
                                 &channel_anim_2);
     }
 
     {
-        HSD_JObj* sp5C;
-        lb_80011E24(jobj, &sp5C, 6, -1);
-        HSD_JObjReqAnimAll(sp5C, anims[5].end_frame);
-        HSD_JObjAnimAll(sp5C);
+        lb_80011E24(jobj, &volume_cursor_jobj, 6, -1);
+        HSD_JObjReqAnimAll(volume_cursor_jobj, anims[5].end_frame);
+        HSD_JObjAnimAll(volume_cursor_jobj);
     }
 
     {
@@ -341,22 +344,22 @@ void mnSound_80249C08(int unused)
         HSD_JObj* jobj_anim_2;
         HSD_JObj* jobj_anim_1;
         HSD_JObj* jobj_anim_0;
+        PAD_STACK(8);
         mnSound_InitVolumeAnim(GET_JOBJ(gobj), user_data->unk3, &pos_0, &pos_1,
                                &jobj_anim_0, &jobj_anim_1, &jobj_anim_2);
     }
 
     {
-        HSD_JObj* sp64;
-        HSD_JObj* sp60;
         gm_801602C0(user_data->unk3);
-        lb_80011E24(jobj, &sp64, 0xE, -1);
+        lb_80011E24(jobj, &sound_selection_jobj, 0xE, -1);
         {
             AnimLoopSettings* anim = &anims[user_data->unk2];
-            mn_8022ED6C(sp64, anim + 1);
+            mn_8022ED6C(sound_selection_jobj, anim + 1);
         }
-        lb_80011E24(jobj, &sp60, 0xB, -1);
-        HSD_JObjReqAnimAll(sp60, anims[user_data->unk1 + 3].end_frame);
-        HSD_JObjAnimAll(sp60);
+        lb_80011E24(jobj, &channel_selection_jobj, 0xB, -1);
+        HSD_JObjReqAnimAll(
+            channel_selection_jobj, anims[user_data->unk1 + 3].end_frame);
+        HSD_JObjAnimAll(channel_selection_jobj);
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     }
 }
