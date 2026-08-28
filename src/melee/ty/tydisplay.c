@@ -1756,7 +1756,7 @@ static inline void tyDisplay_SetGridSize(TyDspConfig* cfg, TyDspGrid* grid)
     }
 }
 
-static inline void tyDisplay_SetupCameraAndBackground()
+static inline void tyDisplay_SetupCameraAndBackground(void)
 {
     TyDspConfig* cfg = _tyDisplay_804D6F18;
     HSD_CObj* cobj = lb_80013B14(HSD_ArchiveGetPublicAddress(
