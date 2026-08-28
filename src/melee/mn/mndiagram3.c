@@ -622,7 +622,7 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
     int i;
     u8 limit;
     int v;
-    PAD_STACK(72);
+    PAD_STACK(64);
 
     if (input & MenuInput_Back) {
         sfxBack();
@@ -717,8 +717,7 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
             cur = mnDiagram3_804D6C20->user_data;
             popup = data->popup_gobj->hsd_obj;
             n = data->cursor_row;
-            spacing = HSD_JObjGetTranslationY(cur->jobjs[9]) -
-                      HSD_JObjGetTranslationY(cur->jobjs[8]);
+            spacing = mnDiagram3_GetRowSpacing(cur);
             HSD_JObjSetTranslateX(popup,
                                   HSD_JObjGetTranslationX(cur->jobjs[8]));
             HSD_JObjSetTranslateY(popup,
