@@ -320,6 +320,7 @@ void _tyDisplay_80318714(TySortElem* base_, s32 lo, s32 hi)
 
         if (lo < pivot - 1) {
             s32 mid2 = pivot + lo;
+            s32 i;
             mid2 = (mid2 - 1) / 2;
 
             if (lo != mid2) {
