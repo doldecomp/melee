@@ -3653,6 +3653,12 @@ s32 fn_803AF3F0(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 remaining;
     s32 total_blocks;
     u8* data;
+    struct {
+        s32 v;
+    } free_blk;
+    struct {
+        s32 v;
+    } write_blk;
     PAD_STACK(16);
 
     seq_match = 0;
@@ -3804,14 +3810,11 @@ after_verify:
     if (secondary_count > file_blocks) {
         for (i = file_blocks; i < secondary_count; i++) {
             if (arg3 != 0) {
-                struct {
-                    s32 v;
-                } blk;
                 s32 cmd_result;
 
-                blk.v = block_map[1][i];
+                free_blk.v = block_map[1][i];
                 cmd_result = fn_803AF3F0_queue_write_final(
-                    state, blk.v, 0xFFFF, 0, NULL, 0, arg1);
+                    state, free_blk.v, 0xFFFF, 0, NULL, 0, arg1);
                 if (cmd_result < 0) {
                     fn_803AF3F0_rewind(entries);
                     return cmd_result;
@@ -3860,15 +3863,12 @@ after_verify:
 
         if ((u32) remaining > (u32) (chunk = fn_803AF3F0_chunk_size(state))) {
             if (arg3 != 0) {
-                struct {
-                    s32 v;
-                } blk;
                 s32 cmd_result;
 
-                blk.v = block_map[1][i];
+                write_blk.v = block_map[1][i];
                 cmd_result = fn_803AF3F0_queue_write_first(
-                    state, blk.v, blocks_before + i, current_seq, data, chunk,
-                    arg1);
+                    state, write_blk.v, blocks_before + i, current_seq, data,
+                    chunk, arg1);
                 if (cmd_result < 0) {
                     fn_803AF3F0_rewind(entries);
                     return cmd_result;
