@@ -412,16 +412,18 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
     mn_803ED1D0_t* rule_data = &mn_803ED1D0;
     u8 num_options = mn_803EB6B0[15].selection_count;
     MenuRulesPlusData* data = gobj->user_data;
+    HSD_JObj** option_root;
     s32 i;
     s32 visible;
     u16 selected;
-    PAD_STACK(8);
+    PAD_STACK(4);
 
     for (i = 0; 17 > i; i++) {
         jobj_map[i] = (u16) i;
     }
 
-    for (i = 0; i < (s32) num_options; i++) {
+    option_root = option_roots;
+    for (i = 0; i < (s32) num_options; option_root++, i++) {
         s32 valid;
 
         if (gm_GetCurrentGameMode() == GM_TOURNAMENT && (u8) i == 1) {
@@ -460,7 +462,7 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
                 } else {
                     child = root->child;
                 }
-                option_roots[i] = child;
+                *option_root = child;
             }
         }
     }
