@@ -665,6 +665,8 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
     s32 i;
     struct mn_802307F8_t* user_data;
     s32 j;
+    u8 j8;
+    u8 focus;
     u8 count;
     u8 selected;
     u8* base;
@@ -697,8 +699,8 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
             visible = valid - 1;
             j = visible;
             for (; j < (s32) (u8) i; j++) {
-                u8 j8 = j;
                 s32 valid2;
+                j8 = j;
                 if (gm_GetCurrentGameMode() == GM_TOURNAMENT && j8 == 4) {
                     valid2 = 0;
                 } else {
@@ -786,7 +788,6 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
     }
 
     for (i = 0; i < count; i++) {
-        u8 focus;
         s32 valid;
         if (gm_GetCurrentGameMode() == GM_TOURNAMENT && (u8) i == 4) {
             valid = 0;
