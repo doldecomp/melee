@@ -559,21 +559,19 @@ void fn_8018B090(HSD_GObj* arg0)
         lbl_804D6630 += 1;
         return;
     case 22: {
-        s32 h = entries[idx].x18;
+        BracketEntry* entry = &entries[idx];
+        s32 h = entry->x18;
         if (h) {
             f32 d;
             lbl_803D9DAC.current.x = 320.0f;
             lbl_803D9DAC.current.y = -240.0f;
             lbl_803D9DAC.current.z = 0.0f;
             lbl_803D9DAC.target.x =
-                (f32) (entries[idx].xC + (entries[idx].x14 / 2));
-            lbl_803D9DAC.target.y = -(f32) (entries[idx].x10 + (h / 2));
+                (f32) (entry->xC + (entry->x14 / 2));
+            lbl_803D9DAC.target.y = -(f32) (entry->x10 + (h / 2));
             lbl_803D9DAC.target.z = -150.0f;
-            d = lbl_803D9DAC.target.x - lbl_803D9DAC.current.x;
-            d *= 0.033333f;
-            if (d < 0.0f) {
-                d = -d;
-            }
+            d = ABS((lbl_803D9DAC.target.x - lbl_803D9DAC.current.x) *
+                    0.033333f);
             lbl_803D9DAC.step.x = 1.0f + d;
             d = 0.033333f * (lbl_803D9DAC.target.y - lbl_803D9DAC.current.y);
             if (d < 0.0f) {
