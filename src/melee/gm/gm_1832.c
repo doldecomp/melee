@@ -2383,13 +2383,14 @@ void fn_801891F4(void)
 {
     CssSubStruct* sub;
     u64 buttons;
-    int count;
-    int i;
 
     buttons = gm_801A36C0((u8) lbl_80473700.mode);
     sub = &lbl_80473700.css;
 
     if (gm_801A45E8(2) != 0) {
+        int count;
+        int i;
+
         if (sub->x01 == 0) {
             fn_801651FC(0, 0);
             count = lbl_80473700.count;
@@ -2625,8 +2626,9 @@ void fn_801891F4(void)
         }
     } else {
         if (sub->x01 == 1) {
+            int count;
+            int i;
             int cpu_type;
-            int damage;
             f32 speeds[] = {
                 2, 1.5, 1, 0.666, 0.5, 0.25,
             };
@@ -2647,7 +2649,7 @@ void fn_801891F4(void)
             cpu_type = sub->menu_values[3];
             (void) cpu_type;
             count = lbl_80473700.count;
-            sub->x03 = (u8) cpu_type;
+            lbl_80473700.css.x03 = (u8) cpu_type;
             for (i = 0; i < 4; i++) {
                 if (i != 0 && count != 0) {
                     Player_SetPlayerAndEntityCpuType(i, cpu_type);
@@ -2658,20 +2660,30 @@ void fn_801891F4(void)
                 }
             }
 
-            damage = sub->menu_values[4];
-            count = lbl_80473700.count;
-            for (i = 0; i < 4; i++) {
-                if (i != 0 && count != 0) {
-                    Player_SetHUDDamage(i, damage);
-                    count--;
-                    if (count == 0) {
-                        break;
+            {
+                int count;
+                int i;
+                int damage;
+
+                damage = sub->menu_values[4];
+                count = lbl_80473700.count;
+                for (i = 0; i < 4; i++) {
+                    if (i != 0 && count != 0) {
+                        Player_SetHUDDamage(i, damage);
+                        count--;
+                        if (count == 0) {
+                            break;
+                        }
                     }
                 }
             }
 
-            for (i = 1; i < 4; i++) {
-                fn_8016B388(i, gm_801891F4_GetMenuValues(sub)[4]);
+            {
+                int i;
+
+                for (i = 1; i < 4; i++) {
+                    fn_8016B388(i, gm_801891F4_GetMenuValues(sub)[4]);
+                }
             }
 
             switch (sub->menu_values[6]) {
