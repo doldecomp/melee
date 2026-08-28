@@ -768,7 +768,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                                     str[2] = mnDiagram2_804D4FD0[2];
                                 } else {
                                     int val = mnDiagram2_GetStatValue(
-                                        is_name_mode, stat_type, entity_idx);
+                                        mode, stat_type, entity_idx);
                                     if ((u32) val > 0x98967F) {
                                         val = 0x98967F;
                                     }
