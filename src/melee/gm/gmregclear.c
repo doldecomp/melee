@@ -2745,8 +2745,9 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     lbAudioAx_80023F28(var_r3);
 
     Camera_8002F7AC(0);
-    lb_800121FC(&state->x30, 0x280, 0x1E0, GX_TF_RGB5A3, 0);
-    state->x2C = lb_800138EC(&state->x30, NULL, 2U, 0x32, 0.0f, 0.0f, 1.0f, 1.0f);
+    lb_800121FC(&state->x30, 640, 480, GX_TF_RGB5A3, 0);
+    state->x2C =
+        lb_800138EC(&state->x30, NULL, 2U, 0x32, 0.0f, 0.0f, 1.0f, 1.0f);
     lb_800138D8(state->x2C, 1);
     lb_800138CC(state->x2C, fn_8017FE54);
 

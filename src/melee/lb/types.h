@@ -291,17 +291,17 @@ struct PreloadCache {
 };
 
 struct CameraBlurData {
-    /* 0x00 */ f32 x0;
-    /* 0x04 */ f32 x4;
-    /* 0x08 */ f32 x8;
-    /* 0x0C */ f32 xC;
-    /* 0x10 */ u8 x10;
-    /* 0x11 */ u8 x11;
-    /* 0x12 */ u8 x12;
+    /* 0x00 */ f32 pos_x;
+    /* 0x04 */ f32 pos_y;
+    /* 0x08 */ f32 scale_x;
+    /* 0x0C */ f32 scale_y;
+    /* 0x10 */ u8 base_alpha;
+    /* 0x11 */ u8 blur_size;
+    /* 0x12 */ u8 mode;
     /* 0x13 */ char pad_13[0x18 - 0x13];
-    /* 0x18 */ HSD_GObjEvent x18;
-    /* 0x1C */ HSD_ImageDesc* x1C;
-    /* 0x20 */ f32 x20;
+    /* 0x18 */ HSD_GObjEvent callback;
+    /* 0x1C */ HSD_ImageDesc* efb_copy;
+    /* 0x20 */ f32 tint_factor;
 };
 
 struct lb_80432A68_38_t {
