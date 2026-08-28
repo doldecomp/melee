@@ -668,13 +668,17 @@ s32 PickAutoName(HSD_GObj* arg0)
 #line 779 "mnnamenew.c"
 bool NameContainsOnlySpaces(void)
 {
+    s16 null_char;
     char* text = mnNameNew_CurrentNameText;
     s8 null_char = *mnNameNew_NullCharacter;
     s32 i;
 
     for (i = 0; i < 4; i++) {
+        null_char = (s8) *mnNameNew_NullCharacter;
         if (null_char != (s8) text[0]) {
-            if ((s8) "　"[0] != (s8) text[0] || (s8) "　"[1] != (s8) text[1]) {
+            if ((s8) * (char*) "　" != (s8) text[0] ||
+                ((GlyphChar*) "　")[1] != text[1])
+            {
                 return false;
             }
         }

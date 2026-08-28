@@ -2067,34 +2067,34 @@ static inline bool gm_8016E9C8_inline(void)
     }
 }
 
-void gm_8016E9C8(void* arg0_raw)
+void gm_8016E9C8(void* user_data)
 {
-    struct EndMeleeData* arg0 = arg0_raw;
+    struct EndMeleeData* data = user_data;
     lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
     int i;
 
     if (lbl_8046B6A0.match_over == 0) {
-        arg0->xC = lbl_8046B6A0.x24C;
-        arg0->xC.is_teams = lbl_8046B6A0.x24C8.is_teams;
-        arg0->xC.x4 = lbl_8046B6A0.match_result;
-        gm_80166378(&arg0->xC);
-        fn_8016C46C_dontinline((int) &arg0->xC);
+        data->xC = lbl_8046B6A0.x24C;
+        data->xC.is_teams = lbl_8046B6A0.x24C8.is_teams;
+        data->xC.x4 = lbl_8046B6A0.match_result;
+        gm_80166378(&data->xC);
+        fn_8016C46C_dontinline((int) &data->xC);
         if (tmp->match_result != OUTCOME_NO_CONTEST &&
             tmp->match_result != OUTCOME_RETRY)
         {
-            fn_8016C4F4(&arg0->xC);
+            fn_8016C4F4(&data->xC);
         }
         tmp->match_over = 1;
     } else {
-        arg0->xC = lbl_8046B6A0.x24C;
+        data->xC = lbl_8046B6A0.x24C;
     }
     if (lbl_8046B6A0.x24C8.x4_4) {
-        arg0->x0 = fn_8017F294();
+        data->x0 = fn_8017F294();
     } else {
-        arg0->x0 = lbl_8046B6A0.x24C8.x18;
+        data->x0 = lbl_8046B6A0.x24C8.x18;
     }
-    arg0->x4 = lbl_8046B6A0.timer_seconds;
-    arg0->x8 = Ground_801C5ABC();
+    data->x4 = lbl_8046B6A0.timer_seconds;
+    data->x8 = Ground_801C5ABC();
 
     if (gm_8016B3D8() || gm_8016E9C8_inline() ||
         gm_GetCurrentGameMode() == GM_VS)
@@ -2112,22 +2112,22 @@ void gm_8016E9C8(void* arg0_raw)
     }
 }
 
-void gm_8016EBC0_OnEnter(void* arg0)
+void gm_8016EBC0_OnEnter(void* user_data)
 {
-    StartMeleeData* tmp = arg0;
-    tmp->rules.x6 = true;
-    fn_8016E730(tmp);
+    StartMeleeData* data = user_data;
+    data->rules.x6 = true;
+    fn_8016E730(data);
     ifStatus_802F6EA4(1, -1, -1, 0, (void*) fn_8016B7B4, fn_8016B7F8);
     ifTime_CreateTimers();
-    ifStatus_802F665C(tmp->rules.x0_3);
+    ifStatus_802F665C(data->rules.x0_3);
 }
 
-void gm_8016EC28_OnEnter(void* arg0)
+void gm_8016EC28_OnEnter(void* user_data)
 {
-    StartMeleeData* tmp = arg0;
+    StartMeleeData* data = user_data;
     struct lbl_8046B6A0_t* tmp2;
 
-    fn_8016E730(tmp);
+    fn_8016E730(data);
     Ground_801C1154();
     grStadium_801D410C();
     un_802FD404();
@@ -2141,7 +2141,7 @@ void gm_8016EC28_OnEnter(void* arg0)
         ifStatus_802F6EA4(8, -1, -1, 0, 0, fn_8016B784);
     }
     un_802FD428();
-    ifStatus_802F665C(tmp->rules.x0_3);
+    ifStatus_802F665C(data->rules.x0_3);
     fn_8018A000();
 }
 
