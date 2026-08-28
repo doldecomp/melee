@@ -1998,7 +1998,7 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
     f32 ddy;
     s32 t;
     s32 frames;
-    struct Fighter_x1A88_t* data2;
+    struct Fighter_x1A88_t* data2 = &fp->x1A88;
     StageInfo* info;
     s32 ok;
 
@@ -2014,7 +2014,6 @@ bool ftCo_800A3908(Fighter* fp, bool arg1)
         frames = -(-fp->co_attrs.terminal_velocity - fp->pos_delta.y) / grav;
     }
     info = &stage_info;
-    data2 = &fp->x1A88;
     PAD_STACK(0x18);
     for (island = mpIsland_80458E88.next; island != NULL;
          island = island->next)
