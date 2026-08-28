@@ -849,8 +849,8 @@ void hsd_8039254C(void)
                         {
                             f32 prev_x;
                             prev_x = bar_x;
-                            bar_col = bar_draw_ptr->content.bars[0].color;
                             bar_x += (600.0F / (f32) char_count) * (f32) count;
+                            bar_col = bar_draw_ptr->content.bars[0].color;
                             hsd_80391F28(
                                 p_bar_col, prev_x, bar_y, bar_x, bar_y,
                                 (f32) bar_draw_ptr->content.bars[0].count);
