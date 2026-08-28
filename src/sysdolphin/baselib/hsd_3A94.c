@@ -3346,22 +3346,53 @@ after_verify:
             data = (u8*) arg2;
             for (i = 0; i < file_blocks && remaining > 0; i++) {
                 s32 phys;
+                s32 chunk;
 
-                if ((u32) remaining > (u32) (state->x8 - 0x20)) {
+                if ((u32) remaining > (u32) (chunk = state->x8 - 0x20)) {
                     phys = map[i];
                     if (phys >= 0) {
                         if (arg3 != 0) {
-                            s32 cmd_result = fn_803AE7F8_queue_write(
-                                arg0, phys, blocks_before + i, current_seq,
-                                data, state->x8 - 0x20, arg1);
+                            s32 zero;
+                            s32 cmd_result;
+                            CardCmd init_cmd;
+                            s32 ofs;
+                            CardCmd cmd;
+
+                            ofs = fn_803ACBE8(arg0, phys);
+                            if (phys == 0) {
+                                zero = 0;
+                                if (blocks_before + i != 0) {
+                                    cmd_result = -0x101;
+                                    goto repair_full_queued;
+                                }
+                                init_cmd.type = 2;
+                                init_cmd.state = arg0;
+                                init_cmd.x10 = zero;
+                                init_cmd.x14 = zero;
+                                init_cmd.x18 = (void*) zero;
+                                init_cmd.x20 = zero;
+                                init_cmd.x1C = ofs;
+                                fn_803AC168((s32*) &init_cmd);
+                            }
+                            cmd.type = 1;
+                            cmd.state = arg0;
+                            cmd.xC = phys;
+                            cmd.x10 = blocks_before + i;
+                            cmd.x14 = current_seq;
+                            cmd.x18 = data;
+                            cmd.x20 = chunk;
+                            cmd.x1C = ofs;
+                            cmd.x8 = arg1;
+                            cmd_result = fn_803AC168((s32*) &cmd);
+                        repair_full_queued:
                             if (cmd_result < 0) {
                                 fn_803AE7F8_rewind(entries);
                                 return cmd_result;
                             }
                         } else {
-                            result = fn_803ACFC0(arg0, phys, blocks_before + i,
-                                                 current_seq, data,
-                                                 state->x8 - 0x20, arg1);
+                            result =
+                                fn_803ACFC0(arg0, phys, blocks_before + i,
+                                            current_seq, data, chunk, arg1);
                             if (result < 0) {
                                 state->x170[block_map[pass][i]] = -0x7FFF;
                                 state->x270[block_map[pass][i]] = 0;
@@ -3380,9 +3411,39 @@ after_verify:
                     phys = map[i];
                     if (phys >= 0) {
                         if (arg3 != 0) {
-                            s32 cmd_result = fn_803AE7F8_queue_write(
-                                arg0, phys, blocks_before + i, current_seq,
-                                data, remaining, arg1);
+                            s32 zero;
+                            s32 cmd_result;
+                            CardCmd init_cmd;
+                            s32 ofs;
+                            CardCmd cmd;
+
+                            ofs = fn_803ACBE8(arg0, phys);
+                            if (phys == 0) {
+                                zero = 0;
+                                if (blocks_before + i != 0) {
+                                    cmd_result = -0x101;
+                                    goto repair_tail_queued;
+                                }
+                                init_cmd.type = 2;
+                                init_cmd.state = arg0;
+                                init_cmd.x10 = zero;
+                                init_cmd.x14 = zero;
+                                init_cmd.x18 = (void*) zero;
+                                init_cmd.x20 = zero;
+                                init_cmd.x1C = ofs;
+                                fn_803AC168((s32*) &init_cmd);
+                            }
+                            cmd.type = 1;
+                            cmd.state = arg0;
+                            cmd.xC = phys;
+                            cmd.x10 = blocks_before + i;
+                            cmd.x14 = current_seq;
+                            cmd.x18 = data;
+                            cmd.x20 = remaining;
+                            cmd.x1C = ofs;
+                            cmd.x8 = arg1;
+                            cmd_result = fn_803AC168((s32*) &cmd);
+                        repair_tail_queued:
                             if (cmd_result < 0) {
                                 fn_803AE7F8_rewind(entries);
                                 return cmd_result;
