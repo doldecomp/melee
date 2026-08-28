@@ -3399,10 +3399,9 @@ after_verify:
                                 fn_803AE7F8_close(state);
                                 return pass == 0 ? -260 : -258;
                             }
+                            state->x170[map[i]] = blocks_before + i;
+                            state->x270[map[i]] = current_seq;
                         }
-
-                        state->x170[map[i]] = blocks_before + i;
-                        state->x270[map[i]] = current_seq;
                     }
 
                     remaining -= state->x8 - 0x20;
@@ -3458,10 +3457,9 @@ after_verify:
                                 fn_803AE7F8_close(state);
                                 return pass == 0 ? -260 : -258;
                             }
+                            state->x170[map[i]] = blocks_before + i;
+                            state->x270[map[i]] = current_seq;
                         }
-
-                        state->x170[map[i]] = blocks_before + i;
-                        state->x270[map[i]] = current_seq;
                     }
 
                     remaining = 0;
