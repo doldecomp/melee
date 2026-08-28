@@ -195,13 +195,13 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
                 }
 
                 if (mnDiagram2_IsIconOnlyStat(stat_type)) {
-                    mnDiagram2_GetAggregatedFighterRank(sp48, stat_type,
-                                                        (u8) i);
+                    u8 rank = (u8) i;
+
+                    mnDiagram2_GetAggregatedFighterRank(sp48, stat_type, rank);
                     if (sp48[0] == 0x19) {
                         goto next;
                     }
-                    mnDiagram2_GetAggregatedFighterRank(sp38, stat_type,
-                                                        (u8) i);
+                    mnDiagram2_GetAggregatedFighterRank(sp38, stat_type, rank);
                     icon = mnDiagram_CreateFighterIcon(sp38[0], 0);
                     HSD_JObjSetTranslateY(icon, row_spacing * (f32) i);
                     HSD_JObjAddChild(data->jobjs[6], icon);
