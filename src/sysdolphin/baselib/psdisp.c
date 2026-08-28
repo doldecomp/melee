@@ -1160,8 +1160,8 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
 
         axis.x = ry * uz - rz * up_y;
         {
-            f32 axis_y_product = ux * rz;
-            axis.y = axis_y_product - rx * uz;
+            f32 axis_y_product = rx * uz;
+            axis.y = rz * ux - axis_y_product;
         }
         axis.z = rx * up_y - ry * ux;
         PSMTXRotAxisRad(mtx, &axis, angle);
@@ -1253,9 +1253,9 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
         f32 pos_y;
         f32 transformed_x;
 
-        cur_pos.z = appsrt->x88 * (pos_y = pp->pos.y);
+        cur_pos.x = appsrt->ssy * (pos_y = pp->pos.y);
         cur_pos.y = appsrt->x78 * pos_y;
-        cur_pos.x = appsrt->ssy * pos_y;
+        cur_pos.z = appsrt->x88 * pos_y;
         cur_pos.y = appsrt->x74 * pp->pos.x + cur_pos.y;
         cur_pos.z = (cur_pos.x = appsrt->ssx * pp->pos.x + cur_pos.x,
                      appsrt->x84 * pp->pos.x + cur_pos.z);
