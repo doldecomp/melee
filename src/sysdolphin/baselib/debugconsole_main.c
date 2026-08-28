@@ -1191,9 +1191,9 @@ void hsd_80394F48(void* data)
     }
 
     {
-        s32 j = 0;
+        x_base = 0;
         *px4 += 11;
-        while (j < num_entries) {
+        while (x_base < num_entries) {
             b6 = sp->x0_b6;
             if (sp->x0_b7 != 0) {
                 hsd_803922FC(((ParticleFontData*) sp->x4C)->x9D8, *px4, *px8,
@@ -1204,7 +1204,7 @@ void hsd_80394F48(void* data)
                              (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44,
                              *px50);
             }
-            j++;
+            x_base++;
             *px4 += 11;
         }
     }
