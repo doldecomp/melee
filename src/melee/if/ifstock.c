@@ -582,10 +582,15 @@ HSD_GObj* ifStock_802F96D0(int a, int b, float x, float y)
     return gobj;
 }
 
+static inline HSD_JObj*
+ifStock_802F98E8_get_x3C(unsigned char player)
+{
+    return ifStock_804A1378.player[player].x3C;
+}
+
 void ifStock_802F98E8(unsigned char player, int b)
 {
     struct ifStock_804A1378* stock = &ifStock_804A1378;
-    unsigned char* data;
     HSD_JObj* jobj;
     struct ifStock_804A1378_x204* volatile user_data;
     int i;
@@ -604,6 +609,8 @@ void ifStock_802F98E8(unsigned char player, int b)
         if (gobj != NULL) {
             jobj = HSD_JObjLoadJoint((*stock->x0)->joint);
             if (jobj != NULL) {
+                unsigned char* data;
+
                 HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
                 GObj_SetupGXLink(gobj, fn_802F94E0, 11, 0);
                 gm_8016895C(jobj, *stock->x0, 0);
@@ -653,7 +660,7 @@ void ifStock_802F98E8(unsigned char player, int b)
                 case 1:
                     HSD_JObjSetFlagsAll(ifStock_804A1378.player[player].x24,
                                         JOBJ_HIDDEN);
-                    HSD_JObjSetFlagsAll(ifStock_804A1378.player[player].x3C,
+                    HSD_JObjSetFlagsAll(ifStock_802F98E8_get_x3C(player),
                                         JOBJ_HIDDEN);
                     for (i = 0; i < 7; i++, data++) {
                         jobj = ifStock_804A1378.player[player].x4[i + 1];
@@ -713,7 +720,8 @@ void ifStock_802F98E8(unsigned char player, int b)
                 ae44 = gm_16AE_GetUnkData_1();
                 if (ae44->FighterMatchInfo[player].x4_b1) {
                     GXColor c = { 0x08, 0x08, 0x08, 0x80 };
-                    ifStock_802FB4EC(player, &c);
+                    GXColor* color = &c;
+                    ifStock_802FB4EC(player, color);
                 } else if (ae44->FighterMatchInfo[player].x4_b0) {
                     GXColor c = { 0x3C, 0x3C, 0x46, 0x80 };
                     GXColor* color = &c;
