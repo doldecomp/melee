@@ -516,8 +516,8 @@ void lbBgFlash_800209F4(void)
 void fn_80020AEC(HSD_JObj* jobj, Mtx out)
 {
     f32 scale;
-    Vec3 col;
     Mtx tmp;
+    Vec3 col;
     HSD_JObj* cur;
     s32 i;
 
