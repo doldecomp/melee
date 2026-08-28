@@ -465,7 +465,7 @@ void gm_801A7070_OnEnter(void* unused)
 
     HSD_GObj* gobj;
     HSD_LObj* lobj;
-    PAD_STACK(116);
+    PAD_STACK(68);
 
     gm_804D6740 = 0x1E;
     gm_804D6750 = 0x320;
