@@ -196,8 +196,11 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
                 }
 
                 if (mnDiagram2_IsIconOnlyStat(stat_type)) {
-                    mnDiagram2_GetAggregatedFighterRank(sp48, stat_type,
-                                                        (u8) i);
+                    {
+                        u8 ii = (u8) i;
+                        mnDiagram2_GetAggregatedFighterRank(sp48, stat_type,
+                                                            ii);
+                    }
                     if (sp48[0] == 0x19) {
                         goto next;
                     }
