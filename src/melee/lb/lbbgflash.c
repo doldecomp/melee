@@ -825,7 +825,7 @@ void lbBgFlash_80021410(void* arg0)
     sum_pow = sum_len * sum_pow;
     sum_pow = sum_len * sum_pow;
     sum_pow = sum_len * sum_pow;
-    sum_pow = sum_len * sum_pow;
+    sum_pow *= sum_len;
     len_pow = len_ab * len_ab;
     len_pow = len_ab * len_pow;
     len_pow = len_ab * len_pow;
