@@ -332,14 +332,12 @@ static inline int ifStock_802F89F8_digit(int coins, int position)
     int i;
     int divisor = 1;
 
-    if (position == 0) {
+    if (position - 1 == 0) {
         coins %= 10;
         return coins;
     }
-    if (position > 0) {
-        for (i = 0; i < position; i++) {
-            divisor *= 10;
-        }
+    for (i = 0; i < position - 1; i++) {
+        divisor *= 10;
     }
     return (coins / divisor) % 10;
 }
@@ -353,7 +351,6 @@ void ifStock_802F89F8(HSD_GObj* gobj)
     HSD_JObj* jobj = gobj->hsd_obj;
     int coins;
     int count;
-    int temp;
     int digit;
     int divisor;
     Player_GetCoins(player);
@@ -377,8 +374,7 @@ void ifStock_802F89F8(HSD_GObj* gobj)
             HSD_JObjClearFlagsAll(
                 ifStock_804A1378.player[user_data->player].x4[13 - i],
                 JOBJ_HIDDEN);
-            temp = count - i - 1;
-            digit = ifStock_802F89F8_digit(coins, temp);
+            digit = ifStock_802F89F8_digit(coins, count - i);
             HSD_JObjReqAnimAll(
                 ifStock_804A1378.player[user_data->player].x4[13 - i], digit);
         } else {
