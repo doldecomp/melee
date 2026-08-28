@@ -939,53 +939,29 @@ void grKongo_801D6AFC(void)
     }
 }
 
-#if 0
+static inline f32 grKongo_801D7134_calc_angle(s32 index)
+{
+    f32 angle =
+        (f32) (0.7853981633974483 *
+               (0.5 *
+                (f64) (((grKg_803E188C[index].unk14 -
+                         grKg_803E188C[index - 1].unk14) /
+                        6.0f) +
+                       ((grKg_803E188C[index + 1].unk14 -
+                         grKg_803E188C[index].unk14) /
+                        6.0f))));
 
-void grKongo_801D69B0(HSD_GObj *arg0) {
-    HSD_JObj *temp_r29;
-    f32 temp_f31;
-    s32 temp_cr0_eq;
-    s32 var_r3;
-    struct _struct_grKg_803E188C_0x18 *var_r30;
-    u32 temp_r4;
-    u32 var_r28;
-
-    var_r28 = 0U;
-    var_r30 = &grKg_803E188C[0];
-    do {
-        var_r30->unk4 = Ground_801C3FA4(arg0, (s32) var_r30->unk0);
-        var_r30->unkC = var_r30->unk8;
-        temp_r29 = var_r30->unk4;
-        temp_f31 = var_r30->unkC;
-        temp_r29->rotate.x = temp_f31;
-        HSD_JObjSetRotationX(temp_r30, &temp_f31);
-        var_r28 += 1;
-        var_r30 += 0x18;
-    } while (var_r28 < 0xFU);
-    grKg_804D6984.unk0 = Ground_801C3FA4(arg0, 0xB);
-    grKg_804D6984.unk4 = Ground_801C3FA4(arg0, 0x21);
-    grKongo_801D7134(arg0, 1);
-    grKongo_801D77E0(arg0, 1);
-    mpJointSetB10(4);
+    if (angle > MTXDegToRad(yakumono_param->unkAC)) {
+        angle = MTXDegToRad(yakumono_param->unkAC);
+    } else if (angle < -MTXDegToRad(yakumono_param->unkAC)) {
+        angle = -MTXDegToRad(yakumono_param->unkAC);
+    }
+    return angle;
 }
-#endif
-
-#if 0
-
-
-? ftCo_8009EC70(Vec3 *, s32 *);                     /* extern */
-u32 it_802E18B4(HSD_GObj *);                        /* extern */
-? it_802E2330(Vec3 *, s32 *);                       /* extern */
-? mpLib_8005667C(?);                                /* extern */
-? mpVtxGetPos(?, f32 *, ? *);                    /* extern */
-? mpLib_80056758(s32, ?, f32, ?, f32);              /* extern */
-? ftCo_800C0764(?, s32 (*)(HSD_GObj *, HSD_GObj *)); /* extern */
-extern ? grKg_804D6984;
-static ? grKg_803B7FB0;                             /* unable to generate initializer: unknown type; const */
-#endif
 
 void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
 {
+    u32 i;
     s32 line_id;
     Ground* gp;
     _struct_grKg_803E188C_0x18* table;
@@ -994,31 +970,21 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
     f32 old_angle;
     f32 temp;
     f32 displacement;
-    u32 i;
-    PAD_STACK(0x20);
+    PAD_STACK(0x18);
 
     gp = gobj->user_data;
     grKongo_801D6AFC();
 
-    for (i = 0U; i < 15U; i++) {
-        grKg_803E188C[i].unk14 = (f32) (37.8 * tanf(-grKg_803E188C[i].unkC));
+    for (arg1 = 0; (u32) arg1 < 15U; arg1++) {
+        grKg_803E188C[arg1].unk14 =
+            (f32) (37.8 * tanf(-grKg_803E188C[arg1].unkC));
     }
 
     displacement =
         grKg_803E188C[2].unkC * (MTXDegToRad(yakumono_param->unkA8) /
                                      MTXDegToRad(yakumono_param->unk90) -
                                  1.0f);
-    angle = (f32) (0.7853981633974483 *
-                   (0.5 *
-                    (f64) (((grKg_803E188C[2].unk14 - grKg_803E188C[1].unk14) /
-                            6.0f) +
-                           ((grKg_803E188C[3].unk14 - grKg_803E188C[2].unk14) /
-                            6.0f))));
-    if (angle > MTXDegToRad(yakumono_param->unkAC)) {
-        angle = MTXDegToRad(yakumono_param->unkAC);
-    } else if (angle < -MTXDegToRad(yakumono_param->unkAC)) {
-        angle = -MTXDegToRad(yakumono_param->unkAC);
-    }
+    angle = grKongo_801D7134_calc_angle(2);
     HSD_JObjSetRotationX(grKg_804D6984.unk0, displacement);
     old_angle = HSD_JObjGetRotationZ(grKg_804D6984.unk0);
     HSD_JObjSetRotationZ(grKg_804D6984.unk0, angle);
@@ -1030,18 +996,7 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
         grKg_803E188C[12].unkC * ((MTXDegToRad(yakumono_param->unkA8) /
                                    MTXDegToRad(yakumono_param->unk90)) -
                                   1.0f);
-    angle =
-        (f32) (0.7853981633974483 *
-               (0.5 *
-                (f64) (((grKg_803E188C[12].unk14 - grKg_803E188C[11].unk14) /
-                        6.0f) +
-                       ((grKg_803E188C[13].unk14 - grKg_803E188C[12].unk14) /
-                        6.0f))));
-    if (angle > MTXDegToRad(yakumono_param->unkAC)) {
-        angle = MTXDegToRad(yakumono_param->unkAC);
-    } else if (angle < -MTXDegToRad(yakumono_param->unkAC)) {
-        angle = -MTXDegToRad(yakumono_param->unkAC);
-    }
+    angle = grKongo_801D7134_calc_angle(12);
     HSD_JObjSetRotationX(grKg_804D6984.unk4, displacement);
     old_angle = HSD_JObjGetRotationZ(grKg_804D6984.unk4);
     HSD_JObjSetRotationZ(grKg_804D6984.unk4, angle);
