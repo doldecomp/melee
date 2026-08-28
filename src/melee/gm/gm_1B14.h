@@ -13,15 +13,6 @@
 /* 1B1688 */ void gm_801B1688(GameScene*);
 /* 1B16A8 */ void gm_801B16A8(GameScene*);
 /* 1B16C8 */ void gm_801B16C8(GameScene*);
-/* 1B1724 */ void gm_801B1724(GameScene*);
-/* 1B174C */ void gm_801B174C(GameScene*);
-/* 1B1788 */ void gm_801B1788(GameScene*);
-/* 1B1810 */ void gm_801B1810(GameScene*);
-/* 1B1834 */ void gm_801B1834(GameScene*);
-/* 1B18D4 */ void gm_801B18D4(GameScene*);
-/* 1B1A2C */ void gm_801B1A2C(GameScene*);
-/* 1B1A84 */ void gm_801B1A84(GameScene*);
-/* 1B1AD4 */ void gm_801B1AD4(GameScene*);
 /* 3DD9A0 */ extern GameScene gm_803DD9A0_Scenes[];
 /* 3DDA78 */ extern GameScene gm_803DDA78_Scenes[];
 /* 473814 */ extern struct TrainingMenuData gm_80473814;

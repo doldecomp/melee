@@ -5,7 +5,6 @@
 
 /* 1A50A0 */ GameSceneHandler* gm_GetAllGameSceneHandlers(void);
 /* 1A50AC */ GameMode* gm_GetAllGameModes(void);
-/* 3DDAC0 */ extern GameScene gm_803DDAC0_Scenes[];
 /* 3DDC58 */ extern GameScene gm_803DDC58_Scenes[];
 /* 3DE930 */ extern GameScene gm_803DE930_Scenes[];
 /* 3DECB8 */ extern GameScene gm_803DECB8_Scenes[];
