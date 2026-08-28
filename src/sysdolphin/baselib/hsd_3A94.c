@@ -3575,7 +3575,7 @@ s32 fn_803AF3F0(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 remaining;
     s32 total_blocks;
     u8* data;
-    PAD_STACK(32);
+    PAD_STACK(28);
 
     seq_match = 0;
     if (arg3 == 0) {
@@ -3594,43 +3594,19 @@ s32 fn_803AF3F0(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
     blocks_before = fn_803AC6B8_blocks_before(state, arg1);
 
-    {
-        s32 size = state->x4C[arg1];
-        file_size = size;
-    }
-    if (file_size <= 0) {
-        file_blocks = 0;
-    } else if (arg1 == 0) {
-        s32 hdr = state->x24;
-        u32 sector_size = state->x8;
-        s32 sz0;
-        s32 rem;
-        hdr += 0x30;
-        sz0 = state->x4C[0];
-        rem = (s32) ((u32) hdr % sector_size);
-        rem = (s32) (sector_size - 0x20) - rem;
-        rem = sz0 - rem;
-        if (rem <= 0) {
-            file_blocks = 1;
-        } else {
-            file_blocks =
-                (u32) (rem + sector_size - 0x21) / (sector_size - 0x20) + 1;
-        }
-    } else {
-        u32 sector_size = state->x8;
-        file_blocks =
-            (u32) (file_size + sector_size - 0x21) / (sector_size - 0x20);
-    }
-
+    file_size = state->x4C[arg1];
+    file_blocks = calculateFileBlockCount(state, arg1);
     total_blocks = fn_803AC7DC(state);
 
     if (arg3 != 0) {
         hsd_804D7998 = hsd_804D7984;
     } else {
         s32 retries;
-        s32 fd = state->x4;
-        s32 ofs = state->x20;
+        s32 fd;
+        s32 ofs;
         s32 open_result;
+        ofs = state->x20;
+        fd = state->x4;
         for (retries = 0; retries < 10; retries++) {
             open_result = CARDFastOpen(fd, ofs, &state->file_info);
             if (open_result != -1) {
@@ -3655,7 +3631,8 @@ s32 fn_803AF3F0(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
             s32 arg1x = state->x170[i];
 
             if (arg1x >= 0) {
-                s32 logical = arg1x - blocks_before;
+                s32 logical =
+                    fn_803AE7F8_logical_index(arg1x, blocks_before);
                 if (logical >= 0 && logical < file_blocks) {
                     if (fn_803ACB74(current_seq, state->x270[i]) < 0) {
                         current_seq = state->x270[i];
@@ -3697,9 +3674,10 @@ s32 fn_803AF3F0(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                         return cmd_result;
                     }
                 } else {
-                    s32 verify_result = fn_803ACC0C(
-                        state, block_map[0][i], blocks_before + i, current_seq,
-                        data, fn_803AF3F0_chunk_size(state));
+                    s32 chunk = fn_803AF3F0_chunk_size(state);
+                    s32 verify_result =
+                        fn_803ACC0C(state, block_map[0][i], blocks_before + i,
+                                    current_seq, data, chunk);
                     if (verify_result < 0) {
                         fn_803AF3F0_close(state);
                         return verify_result;
@@ -3811,12 +3789,12 @@ after_verify:
                     block_map[0][i] = -1;
                 }
             }
-        }
-        if (secondary_count < file_blocks) {
-            if (arg3 == 0) {
-                fn_803AF3F0_close(state);
+            if (secondary_count < file_blocks) {
+                if (arg3 == 0) {
+                    fn_803AF3F0_close(state);
+                }
+                return -257;
             }
-            return -257;
         }
     }
 
@@ -3838,9 +3816,10 @@ after_verify:
                     return cmd_result;
                 }
             } else {
+                s32 block = block_map[1][i];
                 s32 write_result = fn_803ACFC0(
-                    state, block_map[1][i], blocks_before + i, current_seq,
-                    data, fn_803AF3F0_chunk_size(state), arg1);
+                    state, block, blocks_before + i, current_seq, data,
+                    fn_803AF3F0_chunk_size(state), arg1);
                 if (write_result < 0) {
                     state->x170[block_map[1][i]] = -0x7FFF;
                     state->x270[block_map[1][i]] = 0;
