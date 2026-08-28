@@ -656,9 +656,9 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
     AnimLoopSettings* settings;
     HSD_JObj* jobj;
     s32 i;
-    s32 j;
-    struct mn_802307F8_t* user_data;
     s32 visible;
+    struct mn_802307F8_t* user_data;
+    s32 j;
     u8 count;
     u8 selected;
     u8* base;
