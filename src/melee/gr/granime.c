@@ -981,8 +981,8 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
         ((aj = ajp[arg4]) != NULL))
     {
         aj = &aj[arg2];
-        req_flags |= 0x81;
         anim_flags |= 0x220;
+        req_flags |= 0x81;
     } else {
         aj = NULL;
     }
@@ -990,8 +990,8 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
         ((mj = mjp[arg4]) != NULL))
     {
         mj = &mj[arg2];
-        req_flags |= 0x416;
         anim_flags |= 0x7484;
+        req_flags |= 0x416;
     } else {
         mj = NULL;
     }
@@ -999,8 +999,8 @@ void grAnime_801C7C1C(HSD_JObj* jobj, s32 map_id, s32 arg2, s32 arg3, s32 arg4,
         ((sj = sjp[arg4]) != NULL))
     {
         sj = &sj[arg2];
-        req_flags |= 8;
         anim_flags |= 0x100;
+        req_flags |= 8;
     } else {
         sj = NULL;
     }
