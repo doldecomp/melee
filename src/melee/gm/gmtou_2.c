@@ -560,11 +560,16 @@ void fn_8019D1BC(void)
 
     for (i = 0; i < (s32) tmd->x30; i++) {
         {
-            HSD_GObj* first_gobj =
+            HSD_GObj* first_gobj;
+            HSD_JObj* first_c;
+            HSD_JObj* first_jobj;
+
+            first_gobj =
                 fn_8019035C(0, lbl_804D6694->models[12], 0, 0x1A, 2, 1,
                             fn_8019C048, (f32) i);
-            HSD_JObj* first_jobj = GET_JOBJ(first_gobj);
-            HSD_JObjSetTranslateY(first_jobj, -2.5f);
+            first_jobj = GET_JOBJ(first_gobj);
+            first_c = GET_JOBJ(first_gobj);
+            HSD_JObjSetTranslateY(first_c, -2.5f);
             fn_8018FBD8(first_gobj, i);
 
             c = HSD_JObjGetChild(first_jobj);
