@@ -3821,7 +3821,8 @@ void ftCo_800A7AAC(Fighter* fp)
                 sub = 0;
                 break;
             }
-            if (sub == 0) {
+            switch (sub) {
+            case 0:
                 island = mpIsland_8005AB54(partner->coll_data.floor.index);
                 if (island != NULL && data->x54.y - fp->cur_pos.y > 0.0) {
                     if (data->x54.x - fp->cur_pos.x > 0.0) {
