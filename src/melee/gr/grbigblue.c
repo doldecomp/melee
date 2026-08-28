@@ -666,7 +666,8 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                 Vec3* pos_ptr;
 
                 if (range != 0) {
-                    rand_val = HSD_Randi(range);
+                    s32 random_value = HSD_Randi(range);
+                    rand_val = random_value;
                 } else {
                     rand_val = 0;
                 }
@@ -776,13 +777,10 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                             if (found == 0) {
                                 Vec3 speeds2;
                                 speeds2 = grBb_803B8114;
-                                {
-                                    Vec3* pos_ptr = &pos;
-                                    found = grBigBlue_801EAB50(
-                                        pos_ptr, 0,
-                                        2.0f * (speeds2.x * Ground_801C0498()),
-                                        25.0f);
-                                }
+                                found = grBigBlue_801EAB50(
+                                    &pos, 0,
+                                    2.0f * (speeds2.x * Ground_801C0498()),
+                                    25.0f);
                             }
                             if (found == 0) {
                                 f32 bound = grBigBlue_801E8D04();
@@ -849,7 +847,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                         }
                         if ((int) grBigBlue_801E89DC(1) == 0) {
                             u32 cnt2 = base->u.arwing.xC4;
-                            if (yakumono_param->xDC <= (s32) cnt2 &&
+                            if ((s32) cnt2 >= yakumono_param->xDC &&
                                 (s32) gp->u.bigblue.data[i].x2 == 1 &&
                                 ((s32) cnt2 >= yakumono_param->xE0 ||
                                  HSD_Randi(2) != 0))
@@ -870,17 +868,17 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                         if (jobj != bone_ptr->u.bigblue.xD4[j]) {
                             u8 other_state = other->u.bigblue.data[j].x1;
                             if ((s8) other_state == 3) {
-                                if ((gp->u.bigblue.data[j].x2 == 1 &&
-                                     gp->u.bigblue.data[j].x38.x <
+                                if ((other->u.bigblue.data[j].x2 == 1 &&
+                                     other->u.bigblue.data[j].x38.x <
                                          Stage_GetCamBoundsRightOffset()) ||
-                                    (gp->u.bigblue.data[j].x2 == -1 &&
-                                     gp->u.bigblue.data[j].x38.x >
+                                    (other->u.bigblue.data[j].x2 == -1 &&
+                                     other->u.bigblue.data[j].x38.x >
                                          Stage_GetCamBoundsLeftOffset()))
                                 {
                                     active_count++;
                                 }
                             } else if ((s8) other_state == 1 &&
-                                       gp->u.bigblue.data[j].x4 == 0)
+                                       other->u.bigblue.data[j].x4 == 0)
                             {
                                 active_count++;
                             }
@@ -993,9 +991,13 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                     } else {
                         dir_val = -1;
                     }
-                    if (gp->u.bigblue.data[i].x18.y != (f32) dir_val) {
-                        gp->u.bigblue.data[i].x4 = yakumono_param->xB0;
-                        gp->u.bigblue.data[i].x34 = 1;
+                    {
+                        int direction_changed =
+                            gp->u.bigblue.data[i].x18.y != (f32) dir_val;
+                        if (direction_changed) {
+                            gp->u.bigblue.data[i].x4 = yakumono_param->xB0;
+                            gp->u.bigblue.data[i].x34 = 1;
+                        }
                     }
                     gp->u.bigblue.data[i].x18.y = (f32) dir_val;
 
