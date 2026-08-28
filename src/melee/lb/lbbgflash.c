@@ -834,7 +834,10 @@ void lbBgFlash_80021410(void* arg0)
     len_pow = len_ab * len_pow;
     len_pow = len_ab * len_pow;
     len_pow = len_ab * len_pow;
-    len_pow = len_ab * len_pow;
+    {
+        f32 next_pow = len_ab * len_pow;
+        len_pow = next_pow;
+    }
     if (len_ab > sum_len) {
         len_ab = ((11.0f * sum_len) / 10.0f) + (-sum_pow / (10.0f * len_pow));
     }
