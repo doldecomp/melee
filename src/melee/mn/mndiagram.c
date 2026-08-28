@@ -2718,9 +2718,8 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
             HSD_JObjReqAnimAll(sp_jobj, (f32) (fighter_id & 0xFF));
             HSD_JObjAnimAll(sp_jobj);
             jobj2 = jobj;
-            jobj = data->jobjs[7];
             x_spacing = HSD_JObjGetTranslationX(data->jobjs[8]) -
-                        HSD_JObjGetTranslationX(jobj);
+                        HSD_JObjGetTranslationX(jobj = data->jobjs[7]);
             HSD_JObjSetTranslateX(jobj2, x_spacing * i);
             HSD_JObjAddChild(data->jobjs[7], jobj2);
         }
