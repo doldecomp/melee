@@ -503,23 +503,21 @@ static inline s32 gmClassic_GetMatchupCount(const gmClassicMatchup* matchups)
 static gmClassicMatchup* gmClassic_801B2BA4(gmClassicMatchup* arg0, u8* arg1,
                                             gm_803DDEC8Struct* arg2)
 {
+    s32 outer;
     s32 j;
     gmClassicMatchup* entry;
     gmClassicMatchup* result;
-    s32 outer;
-    u8* order;
-    s8 target_char;
-    gm_803DDEC8Struct* temp;
+    s32 target_char;
     s32 k;
+    s32 temp_idx;
 
     result = NULL;
     target_char = gmMainLib_8015CDC8()->c_kind;
-    order = arg1;
     outer = 0;
 
     goto check;
 loop:
-    entry = &arg0[*order];
+    entry = &arg0[arg1[outer]];
     for (j = 0; j < 3; j++) {
         int cur_char = entry->x02[j];
 
@@ -536,18 +534,21 @@ loop:
             goto next;
         }
 
-        for (temp = arg2; temp->x0 != 0xD; temp++) {
+        for (temp_idx = 0; arg2[temp_idx].x0 != 0xD; temp_idx++) {
             for (k = 0; k < 3; k++) {
-                if (temp->xC != NULL && cur_char == temp->xC->x02[k]) {
+                if (arg2[temp_idx].xC != NULL &&
+                    cur_char == arg2[temp_idx].xC->x02[k])
+                {
                     goto next;
                 }
             }
         }
 
-        for (temp = arg2; temp->x0 != 0xD; temp++) {
-            if (temp->xC != NULL) {
-                s32 stage1 = Stage_8022519C(entry->x00);
-                if (Stage_8022519C(temp->xC->x00) == stage1) {
+        for (temp_idx = 0; arg2[temp_idx].x0 != 0xD; temp_idx++) {
+            if (arg2[temp_idx].xC != NULL) {
+                if (Stage_8022519C(arg2[temp_idx].xC->x00) ==
+                    Stage_8022519C(entry->x00))
+                {
                     result = entry;
                     goto next;
                 }
@@ -559,7 +560,6 @@ loop:
     }
 next:
     outer++;
-    order++;
 check:
     if (outer < gmClassic_GetMatchupCount(arg0)) {
         goto loop;
