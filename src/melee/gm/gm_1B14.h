@@ -22,16 +22,6 @@
 /* 1B1A2C */ void gm_801B1A2C(GameScene*);
 /* 1B1A84 */ void gm_801B1A84(GameScene*);
 /* 1B1AD4 */ void gm_801B1AD4(GameScene*);
-/* 1B1B74 */ void gm_801B1B74(GameScene*);
-/* 1B1C24 */ void gm_801B1C24(GameScene*);
-/* 1B1EB8 */ void gm_801B1EB8(GameScene*);
-/* 1B1EEC */ void gm_801B1EEC(GameScene*);
-/* 1B1F6C */ void fn_801B1F6C(int);
-/* 1B1F70 */ void gm_801B1F70(GameScene*);
-/* 1B2204 */ void gm_801B2204(GameScene*);
-/* 1B2298 */ void gm_801B2298_OnInit(void);
-/* 1B23C4 */ void gm_801B23C4_OnLoad(void);
-/* 1B23F0 */ void gm_801B23F0(void);
 /* 3DD9A0 */ extern GameScene gm_803DD9A0_Scenes[];
 /* 3DDA78 */ extern GameScene gm_803DDA78_Scenes[];
 /* 473814 */ extern struct TrainingMenuData gm_80473814;
