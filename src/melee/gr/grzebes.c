@@ -2069,7 +2069,7 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                         bx = dpy * dpy + dpx * dpx;
                     } else if (t > 1.0f) {
                         f32 ex = bx - x2;
-                        f32 ey = by - y2;
+                        f32 ey = grZebes_Subtract(by, y2);
                         ex *= ex;
                         ey *= ey;
                         bx = ex + ey;
@@ -2134,7 +2134,7 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                                     sqrtf(dpx2 * dpx2 + dpy2 * dpy2);
                                 width = new_width;
                                 x1 += dpx2 * t;
-                                y1 += t * dpy2;
+                                y1 += dpy2 * t;
                             }
                             dy = y2 - y1;
                             dx = x2 - x1;
