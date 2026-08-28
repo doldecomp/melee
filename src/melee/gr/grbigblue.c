@@ -3316,9 +3316,13 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
         f32 dist;
         f32 closest_dist = F32_MAX;
         u8* car_p = (u8*) gp;
-        s32 car_idx = 0;
-        s32 found_ten = 0;
-        s32 closest_lane = -1;
+        s32 car_idx;
+        s32 found_ten;
+        s32 closest_lane;
+
+        found_ten = 0;
+        closest_lane = -1;
+        car_idx = 0;
 
         {
             s32 ctr;
@@ -3360,6 +3364,7 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
         if (found_ten == 0 && closest_lane != -1) {
             register s32 st_val;
             register u8 byte;
+            u8* p = bp;
             u8* target_car = bp + (closest_lane << 6);
 
             st_val = 10;
@@ -3371,63 +3376,62 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
 
             st_val = 4;
             {
-                u32 st = (bp[0xD4] >> 2) & 0x3F;
+                u32 st = (p[0xD4] >> 2) & 0x3F;
                 if ((st == 7 &&
-                     *(f32*) (bp + 0xE0) < *(f32*) (target_car + 0xE0)) ||
+                     *(f32*) (p + 0xE0) < *(f32*) (target_car + 0xE0)) ||
                     (st == 8 &&
-                     *(f32*) (bp + 0xE0) > *(f32*) (target_car + 0xE0)))
+                     *(f32*) (p + 0xE0) > *(f32*) (target_car + 0xE0)))
                 {
-                    byte = bp[0xD4];
+                    byte = p[0xD4];
 #ifdef MUST_MATCH
                     asm { rlwimi byte, st_val, 2, 24, 29 }
 #endif
-                    bp[0xD4] = byte;
+                    p[0xD4] = byte;
                 }
             }
 
+            p += 0x40;
             {
-                u32 st = (bp[0x114] >> 2) & 0x3F;
-                if ((st == 7 &&
-                     *(f32*) (bp + 0x120) < *(f32*) (target_car + 0xE0)) ||
-                    (st == 8 &&
-                     *(f32*) (bp + 0x120) > *(f32*) (target_car + 0xE0)))
-                {
-                    byte = bp[0x114];
-#ifdef MUST_MATCH
-                    asm { rlwimi byte, st_val, 2, 24, 29 }
-#endif
-                    bp[0x114] = byte;
-                }
-            }
+                u32 st = (p[0xD4] >> 2) & 0x3F;
 
-            {
-                u8* p2 = bp + 0x80;
-                u32 st = (bp[0x154] >> 2) & 0x3F;
                 if ((st == 7 &&
-                     *(f32*) (p2 + 0xE0) < *(f32*) (target_car + 0xE0)) ||
+                     *(f32*) (p + 0xE0) < *(f32*) (target_car + 0xE0)) ||
                     (st == 8 &&
-                     *(f32*) (p2 + 0xE0) > *(f32*) (target_car + 0xE0)))
+                     *(f32*) (p + 0xE0) > *(f32*) (target_car + 0xE0)))
                 {
-                    byte = p2[0xD4];
+                    byte = p[0xD4];
 #ifdef MUST_MATCH
                     asm { rlwimi byte, st_val, 2, 24, 29 }
 #endif
-                    p2[0xD4] = byte;
+                    p[0xD4] = byte;
                 }
+
+                st = (p[0x114] >> 2) & 0x3F;
+                p += 0x40;
+                if ((st == 7 &&
+                     *(f32*) (p + 0xE0) < *(f32*) (target_car + 0xE0)) ||
+                    (st == 8 &&
+                     *(f32*) (p + 0xE0) > *(f32*) (target_car + 0xE0)))
                 {
-                    u8* p3 = p2 + 0x40;
-                    u32 st3 = (p2[0x114] >> 2) & 0x3F;
-                    if ((st3 == 7 &&
-                         *(f32*) (p3 + 0xE0) < *(f32*) (target_car + 0xE0)) ||
-                        (st3 == 8 &&
-                         *(f32*) (p3 + 0xE0) > *(f32*) (target_car + 0xE0)))
-                    {
-                        byte = p3[0xD4];
+                    byte = p[0xD4];
 #ifdef MUST_MATCH
-                        asm { rlwimi byte, st_val, 2, 24, 29 }
+                    asm { rlwimi byte, st_val, 2, 24, 29 }
 #endif
-                        p3[0xD4] = byte;
-                    }
+                    p[0xD4] = byte;
+                }
+
+                st = (p[0x114] >> 2) & 0x3F;
+                p += 0x40;
+                if ((st == 7 &&
+                     *(f32*) (p + 0xE0) < *(f32*) (target_car + 0xE0)) ||
+                    (st == 8 &&
+                     *(f32*) (p + 0xE0) > *(f32*) (target_car + 0xE0)))
+                {
+                    typedef struct grBb_StateBits {
+                        u8 state : 6;
+                        u8 pad0 : 2;
+                    } grBb_StateBits;
+                    ((grBb_StateBits*) (p + 0xD4))->state = st_val;
                 }
             }
         }
@@ -3439,22 +3443,31 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
         s16 timer = *(s16*) (bp + 0xD0);
         *(s16*) (bp + 0xD0) = timer - 1;
         if (timer < 0) {
+            u8* p;
+            u32 st;
+
             active_count = -1;
             if ((u32) ((bp[0xD4] >> 2) & 0x3F) == 1) {
                 active_count = 0;
-            } else if ((u32) ((bp[0x114] >> 2) & 0x3F) == 1) {
-                active_count = 1;
-            } else if ((u32) ((bp[0x154] >> 2) & 0x3F) == 1) {
-                active_count = 2;
-            } else if ((u32) ((bp[0x194] >> 2) & 0x3F) == 1) {
-                active_count = 3;
+            } else {
+                p = bp + 0x40;
+                if ((u32) ((p[0xD4] >> 2) & 0x3F) == 1) {
+                    active_count = 1;
+                } else {
+                    st = (p[0x114] >> 2) & 0x3F;
+                    p += 0x40;
+                    if (st == 1) {
+                        active_count = 2;
+                    } else if ((u32) ((p[0x114] >> 2) & 0x3F) == 1) {
+                        active_count = 3;
+                    }
+                }
             }
 
             if (active_count != -1) {
                 s32 right_count = 0;
                 s32 left_count = 0;
                 s32 direction;
-                u32 st;
 
                 st = (bp[0xD4] >> 2) & 0x3F;
                 if (st == 7) {
@@ -3462,19 +3475,21 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                 } else if (st == 8) {
                     left_count = 1;
                 }
-                st = (bp[0x114] >> 2) & 0x3F;
+                p = bp + 0x40;
+                st = (p[0xD4] >> 2) & 0x3F;
                 if (st == 7) {
                     right_count++;
                 } else if (st == 8) {
                     left_count++;
                 }
-                st = (bp[0x154] >> 2) & 0x3F;
+                st = (p[0x114] >> 2) & 0x3F;
+                p += 0x40;
                 if (st == 7) {
                     right_count++;
                 } else if (st == 8) {
                     left_count++;
                 }
-                st = (bp[0x194] >> 2) & 0x3F;
+                st = (p[0x114] >> 2) & 0x3F;
                 if (st == 7) {
                     right_count++;
                 } else if (st == 8) {
@@ -3504,31 +3519,30 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                         pick = 0;
                     }
                     for (pos = 0; pos < 30; pos++) {
-                        if ((*((u8*) gp->u.bigblue.xCC + pos)) == 0 &&
-                            --pick < 0)
-                        {
+                        u8 state = grBigBlue_GetLaneStates(gp)[pos];
+                        if (state == 0 && --pick < 0) {
                             if (grBigBlue_801EE398(ground_gobj, active_count,
-                                                   5) != 0)
+                                                   5) == 0)
                             {
-                                s32 tmin = yakumono_param->x10;
-                                s32 tmax = yakumono_param->x14;
+                                return;
+                            }
+                            {
+                                s32 tmax;
+                                s32 tmin;
+
+                                tmin = yakumono_param->x10;
+                                tmax = yakumono_param->x14;
                                 if (tmin > tmax) {
                                     s32 diff = tmin - tmax;
-                                    if (diff != 0) {
-                                        tmin = tmax + HSD_Randi(diff);
-                                    } else {
-                                        tmin = tmax;
-                                    }
+                                    tmin = tmax +
+                                           (diff != 0 ? HSD_Randi(diff) : 0);
                                 } else if (tmin < tmax) {
                                     s32 diff = tmax - tmin;
-                                    if (diff != 0) {
-                                        tmin += HSD_Randi(diff);
-                                    }
+                                    tmin += diff != 0 ? HSD_Randi(diff) : 0;
                                 }
                                 *(s16*) (bp + 0xD0) = (s16) tmin;
                                 return;
                             }
-                            return;
                         }
                     }
                 } else if (direction == -1) {
@@ -3540,31 +3554,30 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
                         pick = 0;
                     }
                     for (pos = 0; pos < 30; pos++) {
-                        if ((*((u8*) gp->u.bigblue.xCC + pos)) == 2 &&
-                            --pick < 0)
-                        {
+                        u8 state = grBigBlue_GetLaneStates(gp)[pos];
+                        if (state == 2 && --pick < 0) {
                             if (grBigBlue_801EE398(ground_gobj, active_count,
-                                                   6) != 0)
+                                                   6) == 0)
                             {
-                                s32 tmin = yakumono_param->x10;
-                                s32 tmax = yakumono_param->x14;
+                                return;
+                            }
+                            {
+                                s32 tmax;
+                                s32 tmin;
+
+                                tmin = yakumono_param->x10;
+                                tmax = yakumono_param->x14;
                                 if (tmin > tmax) {
                                     s32 diff = tmin - tmax;
-                                    if (diff != 0) {
-                                        tmin = tmax + HSD_Randi(diff);
-                                    } else {
-                                        tmin = tmax;
-                                    }
+                                    tmin = tmax +
+                                           (diff != 0 ? HSD_Randi(diff) : 0);
                                 } else if (tmin < tmax) {
                                     s32 diff = tmax - tmin;
-                                    if (diff != 0) {
-                                        tmin += HSD_Randi(diff);
-                                    }
+                                    tmin += diff != 0 ? HSD_Randi(diff) : 0;
                                 }
                                 *(s16*) (bp + 0xD0) = (s16) tmin;
                                 return;
                             }
-                            return;
                         }
                     }
                 }
