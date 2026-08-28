@@ -886,14 +886,22 @@ void _tyDisplay_80319540(s32 arg0)
     _tyDisplay_80319540_sort_and_place(cfg, grid);
 }
 
-static inline void _tyDisplay_80319994_sort_pos(TyDspGrid* grid, s32 count,
-                                                s32* n2, s32* pivot)
+static inline TyDspPos* tyDisplay_GetGridPosElem(size_t offset,
+                                                 TyDspGrid* grid)
 {
-    if (*pivot != 0 && count > 1) {
-        *n2 = count - 1;
-        if (*n2 > 0) {
+    return (TyDspPos*) ((size_t) grid + offset + 0x97C);
+}
+
+static inline void _tyDisplay_80319994_sort_pos(TyDspGrid* grid, s32 count,
+                                                s32 arg0)
+{
+    if (arg0 != 0 && count > 1) {
+        s32 n2 = count - 1;
+        if (n2 > 0) {
             TyDspPos tmp;
-            s32 mid = *n2 / 2;
+            s32 mid = n2 / 2;
+            TyDspGrid* cur;
+            s32 pivot;
             s32 n, j;
 
             if (mid != 0) {
@@ -902,29 +910,33 @@ static inline void _tyDisplay_80319994_sort_pos(TyDspGrid* grid, s32 count,
                 grid->pos[mid] = tmp;
             }
 
-            *pivot = 0;
+            pivot = 0;
             j = 0;
-            for (n = 1; *n2 >= n; n++) {
-                if (grid->pos[n].z < grid->pos[0].z) {
-                    *pivot += 1;
+            n = 1;
+            cur = (TyDspGrid*) ((size_t) grid + sizeof(TyDspPos));
+            for (; n2 >= n;
+                 cur = (TyDspGrid*) ((size_t) cur + sizeof(TyDspPos)), n++)
+            {
+                if (cur->pos[0].z < grid->pos[0].z) {
+                    pivot += 1;
                     j += 8;
-                    if (*pivot != n) {
-                        TyDspPos* p = (TyDspPos*) ((size_t) grid + j + 0x97C);
+                    if (pivot != n) {
+                        TyDspPos* p = tyDisplay_GetGridPosElem(j, grid);
                         tmp = *p;
-                        *p = grid->pos[n];
-                        grid->pos[n] = tmp;
+                        *p = cur->pos[0];
+                        cur->pos[0] = tmp;
                     }
                 }
             }
 
-            if (*pivot != 0) {
+            if (pivot != 0) {
                 tmp = grid->pos[0];
-                grid->pos[0] = grid->pos[*pivot];
-                grid->pos[*pivot] = tmp;
+                grid->pos[0] = grid->pos[pivot];
+                grid->pos[pivot] = tmp;
             }
 
-            _tyDisplay_8031830C((TySortElem*) grid->pos, 0, *pivot - 1);
-            _tyDisplay_8031830C((TySortElem*) grid->pos, *pivot + 1, *n2);
+            _tyDisplay_8031830C((TySortElem*) grid->pos, 0, pivot - 1);
+            _tyDisplay_8031830C((TySortElem*) grid->pos, pivot + 1, n2);
         }
     }
 }
@@ -937,16 +949,19 @@ static inline TySortElem tyDisplay_GetSortElemValue(TySortElem* elem)
 static inline void _tyDisplay_80319994_place(TyDspGrid* grid, TyDspConfig* cfg)
 {
     s32 count;
+    s32 jobj_idx;
 
-    for (count = 0; count < cfg->x08; count++) {
+    count = 0;
+    jobj_idx = count;
+    for (; count < cfg->x08; count++, jobj_idx++) {
         HSD_GObj* gobj;
         cfg->x78 = _tyDisplay_8031BC54(grid->sort[count].key);
         gobj = cfg->x78;
         if (gobj != NULL) {
-            _tyDisplay_804D6F10[count] = (HSD_JObj*) gobj->hsd_obj;
-            HSD_JObjSetTranslateX(_tyDisplay_804D6F10[count],
+            _tyDisplay_804D6F10[jobj_idx] = (HSD_JObj*) gobj->hsd_obj;
+            HSD_JObjSetTranslateX(_tyDisplay_804D6F10[jobj_idx],
                                   grid->pos[count].x);
-            HSD_JObjSetTranslateZ(_tyDisplay_804D6F10[count],
+            HSD_JObjSetTranslateZ(_tyDisplay_804D6F10[jobj_idx],
                                   grid->pos[count].z);
         }
     }
@@ -957,13 +972,11 @@ void _tyDisplay_80319994(s32 arg0)
     s32 count;
     TyDspConfig* cfg = _tyDisplay_804D6F18;
     f32 xoff = 0.0f;
-    s32 n2;
     s32 pivot;
     TyDspGrid* grid = _tyDisplay_804D6F14;
 
-    PAD_STACK(0x38);
+    PAD_STACK(0x30);
 
-    pivot = arg0;
     memzero(grid, sizeof(*grid));
     grid->x08_min_z = -3.5f;
     grid->x04_min_x = -3.5f;
@@ -987,7 +1000,7 @@ void _tyDisplay_80319994(s32 arg0)
                 cur->pos[0].z = 0.0f;
             } else {
                 cur->pos[0].x = 9.0f * (f32) col + xoff;
-                if (pivot != 0) {
+                if (arg0 != 0) {
                     cur->pos[0].z = -9.0f * (f32) row;
                 } else {
                     cur->pos[0].z = 9.0f * (f32) row;
@@ -1028,14 +1041,14 @@ void _tyDisplay_80319994(s32 arg0)
         }
     }
 
-    _tyDisplay_80319994_sort_pos(grid, count, &n2, &pivot);
+    _tyDisplay_80319994_sort_pos(grid, count, arg0);
 
     _tyDisplay_80318B1C(cfg->x08);
 
     {
         count = cfg->x08;
         if (count > 1) {
-            n2 = (count / 3) * 2;
+            s32 n2 = (count / 3) * 2;
             if (n2 > 0) {
                 TySortElem tmp;
                 s32 mid = n2 / 2;
