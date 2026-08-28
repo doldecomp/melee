@@ -3245,8 +3245,7 @@ void _Toy_80309404(HSD_GObj* gobj)
                         }
                         if (total > 3) {
                             if ((display->selectedIdx - 1) < 0) {
-                                s32 cnt;
-                                s32 lk;
+                                s32 list_idx;
                                 ToyListEntry* entry;
                                 HSD_Archive* oa;
                                 char* md;
@@ -3255,16 +3254,15 @@ void _Toy_80309404(HSD_GObj* gobj)
                                     (gm_GetCurrentGameMode() ==
                                      GM_TOY_LOTTERY))
                                 {
-                                    cnt = base->trophy_count;
+                                    list_idx = base->trophy_count;
                                 } else {
-                                    cnt = *gmMainLib_GetTrophyCount();
+                                    list_idx = *gmMainLib_GetTrophyCount();
                                 }
-                                lk = cnt;
-                                lk += display->selectedIdx;
+                                list_idx += display->selectedIdx;
                                 entry = display->first_entry;
                                 entry = entry->prev;
                                 {
-                                    s32 idx = lk - 1;
+                                    s32 idx = list_idx - 1;
                                     s16 tid = Toy_sbss_804D6EDC[idx];
                                     md = Toy_8030813C(tid);
                                     if ((oa = entry->archive) != NULL) {
