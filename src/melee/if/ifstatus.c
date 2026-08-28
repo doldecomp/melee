@@ -620,6 +620,11 @@ static inline HSD_JObj* ifStatus_GetDamageJObj(HSD_JObj* arg0, s32 i)
     return (HSD_JObj*) ifStatus_802F6194(node, i);
 }
 
+static inline HSD_JObj* ifStatus_LoadDamageJObj(HudIndex* hud)
+{
+    return HSD_JObjLoadJoint(hud->unk258);
+}
+
 HSD_GObj* ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
 {
     HSD_GObj* gobj;
@@ -632,7 +637,7 @@ HSD_GObj* ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
 
     if (state->HUD_parent_entity == NULL) {
         gobj = GObj_Create(0xE, 0xF, 0);
-        jobj = HSD_JObjLoadJoint(hud->unk258);
+        jobj = ifStatus_LoadDamageJObj(hud);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
         GObj_SetupGXLink(gobj, (void (*)(HSD_GObj*, int)) ifStatus_802F5DE0,
                          0xB, 0);
