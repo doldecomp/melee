@@ -3870,16 +3870,16 @@ heading_converge:
 #pragma pop
 #endif
 
-/// @todo Currently 87.41% match - compiler CSEs gp+offset into one register
-/// (4 NV regs) instead of keeping them separate (5 NV regs, stmw r27)
+/// @todo The remaining mismatch swaps the gp and offset registers.
 s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
 {
-    grBigBlue_CarPhysics* gp;
     u8* self;
-    s32 result;
     s32 offset;
+    grBigBlue_CarPhysics* gp;
+    s32 result;
 
-    offset = index << 6;
+    offset = index;
+    offset <<= 6;
     result = 0;
     gp = gobj->user_data;
 
@@ -4044,7 +4044,9 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
         }
 
         /* Final threshold check */
-        if (*(f32*) (gp->raw + offset + 0xE4) < -2000.0F) {
+        self = gp->raw;
+        self += offset;
+        if (*(f32*) (self + 0xE4) < -2000.0F) {
             result = 1;
         }
         break;
