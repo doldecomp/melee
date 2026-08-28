@@ -120,8 +120,8 @@ void gm_801A4014(GameMode* mode)
     gm->routing.curr_scene_idx = scene->idx;
 
     gm_801A3F48(scene);
-    if (scene->prep != NULL) {
-        scene->prep(scene);
+    if (scene->on_enter != NULL) {
+        scene->on_enter(scene);
     }
     info = &scene->info;
     handler = (GameSceneHandler*) ((uintptr_t) gm_FindGameSceneHandler(
@@ -129,16 +129,16 @@ void gm_801A4014(GameMode* mode)
                                    (dead = 0));
     gm_801A4BD4();
     gm_801A4B88(info);
-    if (handler->OnLoad != NULL) {
-        handler->OnLoad(info->load_data);
+    if (handler->on_load != NULL) {
+        handler->on_load(info->load_data);
     }
-    gm_801A4D34(handler->OnFrame, info);
-    if (!gmMainLib_8046B0F0.resetting && handler->OnLeave != NULL) {
-        handler->OnLeave(info->leave_data);
+    gm_801A4D34(handler->on_frame, info);
+    if (!gmMainLib_8046B0F0.resetting && handler->on_leave != NULL) {
+        handler->on_leave(info->leave_data);
     }
     if (!gmMainLib_8046B0F0.resetting) {
-        if (scene->decide != NULL) {
-            scene->decide(scene);
+        if (scene->on_exit != NULL) {
+            scene->on_exit(scene);
         }
 
         gm_80479D30.routing.prev_scene_idx = gm->routing.curr_scene_idx;

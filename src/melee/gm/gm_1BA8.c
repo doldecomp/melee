@@ -5,51 +5,54 @@
 #include "gm_unsplit.h"
 
 #include "ft/forward.h"
-#include "pl/forward.h"
 
-#include "vi/vi1201v1.h"
+#include "melee/cm/camera.h"
+#include "melee/db/db.h"
+#include "melee/ft/ftbosslib.h"
+#include "melee/ft/ftlib.h"
+#include "melee/gm/gm_1601.h"
+#include "melee/gm/gm_16F1.h"
+#include "melee/gm/gm_unsplit.h"
+#include "melee/gm/gmmain_lib.h"
+#include "melee/gm/gmvsmelee.h"
+#include "melee/gm/types.h"
+#include "melee/gr/ground.h"
+#include "melee/if/ifstock.h"
+#include "melee/it/items/itevyoshiegg.h"
+#include "melee/lb/lbarchive.h"
+#include "melee/lb/lbaudio_ax.h"
+#include "melee/lb/lbbgflash.h"
+#include "melee/lb/lbcardgame.h"
+#include "melee/lb/lbcardnew.h"
+#include "melee/lb/lbdvd.h"
+#include "melee/lb/lbmthp.h"
+#include "melee/lb/types.h"
+#include "melee/mn/types.h"
+
+#include "melee/pl/forward.h"
+
+#include "melee/pl/player.h"
+#include "melee/pl/plbonuslib.h"
+#include "melee/vi/vi0102.h"
+#include "melee/vi/vi0401.h"
+#include "melee/vi/vi0501.h"
+#include "melee/vi/vi0502.h"
+#include "melee/vi/vi1101.h"
+#include "melee/vi/vi1201v1.h"
+#include "melee/vi/vi1201v2.h"
 
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/random.h>
-#include <melee/cm/camera.h>
-#include <melee/db/db.h>
-#include <melee/ft/ftbosslib.h>
-#include <melee/ft/ftlib.h>
-#include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_16F1.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/gmvsmelee.h>
-#include <melee/gm/types.h>
-#include <melee/gr/ground.h>
-#include <melee/if/ifstock.h>
-#include <melee/it/items/itevyoshiegg.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbbgflash.h>
-#include <melee/lb/lbcardgame.h>
-#include <melee/lb/lbcardnew.h>
-#include <melee/lb/lbdvd.h>
-#include <melee/lb/lbmthp.h>
-#include <melee/lb/types.h>
-#include <melee/mn/types.h>
-#include <melee/pl/player.h>
-#include <melee/pl/plbonuslib.h>
-#include <melee/vi/vi0102.h>
-#include <melee/vi/vi0401.h>
-#include <melee/vi/vi0501.h>
-#include <melee/vi/vi0502.h>
-#include <melee/vi/vi1101.h>
-#include <melee/vi/vi1201v1.h>
-#include <melee/vi/vi1201v2.h>
 
-int __rlwinm(int, int, int, int);
+#ifdef MUST_MATCH
+#include <MetroTRK/intrinsics.h>
+#endif
 
 GameScene gm_803DF618_Scenes[] = {
     {
         0,
-        3,
+        lbDvdPreload_3,
         0,
         gm_801BAA60,
         gm_801BAAD0,
@@ -61,7 +64,7 @@ GameScene gm_803DF618_Scenes[] = {
     },
     {
         1,
-        3,
+        lbDvdPreload_3,
         0,
         gm_801BAD70,
         gm_801BB758,
@@ -71,11 +74,8 @@ GameScene gm_803DF618_Scenes[] = {
             &gm_804979D8,
         },
     },
-    { 0xFF },
+    { -1 },
 };
-
-extern u8 gm_804D68F8;
-extern u8 gm_804D68F9;
 
 void gm_801BA8FC(void)
 {
@@ -3228,7 +3228,13 @@ void gm_SetupTitleDemo(void)
     do {
         count = stage_pool[HSD_Randi(8)];
         cur_id = gm_801BF694();
-        prev = __rlwinm(cur_id, 0, 24, 31);
+        prev =
+#ifdef MUST_MATCH
+            __rlwinm(cur_id, 0, 24, 31);
+#else
+            cur_id & 0xFF;
+#endif
+
         c = gm_801641CC((u8) count);
     } while (c == prev);
     gm_801BF684(gm_801641CC((u8) count));

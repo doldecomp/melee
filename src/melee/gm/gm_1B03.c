@@ -37,11 +37,19 @@
 /* 4831A8 */ struct ResultsMatchInfo gm_804831A8;
 /* 480DC8 */ static UNK_T gm_80480DC8[0x20 / 4];
 /* 480DE8 */ static StartMeleeData gm_80480DE8;
+/* 4D68A4 */ UNK_T gm_804D68A4[0x8 / 4];
+/* 4D689C */ UNK_T gm_804D689C[0x8 / 4];
+/* 4D6898 */ UNK_T gm_804D6898[0x4 / 4];
+/* 4D6890 */ UNK_T gm_804D6890[0x8 / 4];
+/* 4D688C */ UNK_T gm_804D688C[0x4 / 4];
+/* 4D6884 */ UNK_T gm_804D6884[0x8 / 4];
+/* 4D6880 */ UNK_T gm_804D6880[0x4 / 4];
+/* 4D6878 */ u32 gm_804D6878[2];
 
 /* 3DD6A0 */ GameScene gm_803DD6A0_Scenes[] = {
     {
         0,
-        3,
+        lbDvdPreload_3,
         0,
         gm_801B087C,
         gm_801B089C,

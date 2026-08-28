@@ -1,7 +1,7 @@
 #include "gmscdata.h"
 
 #include "gm_1A33.h"
-#include "gm_1B14.h"
+#include "gm_1B03.h"
 #include "gm_unsplit.h"
 #include "gmadventure.h"
 #include "gmallstar.h"
@@ -14,6 +14,7 @@
 #include "gminvisible.h"
 #include "gmlightning.h"
 #include "gmmenu.h"
+#include "gmmenumode.h"
 #include "gmmovieend.h"
 #include "gmmultiman.h"
 #include "gmomake15.h"
@@ -29,9 +30,15 @@
 #include "gmtiny.h"
 #include "gmtitle.h"
 #include "gmtoulib.h"
+#include "gmtoumode.h"
+#include "gmtrainingmode.h"
 #include "gmvsmelee.h"
+#include "gmvsmode.h"
 #include "types.h"
 
+#include "gm/gmcameramode.h"
+#include "gm/gmmenumode.h"
+#include "gm/gmtrainingmode.h"
 #include "if/ifprize.h"
 #include "mn/mncharsel.h"
 #include "mn/mnmain.h"
@@ -51,7 +58,6 @@
 #include "vi/vi1201v2.h"
 #include "vi/vi1202.h"
 
-/// @todo Do these callbacks have uniform signatures, or polymorphic user data?
 static GameSceneHandler gm_803DA920[] = {
     {
         GS_TITLE,
@@ -343,8 +349,8 @@ static GameSceneHandler gm_803DA920[] = {
     {
         GS_MEMCARD,
         gm_801AF568_OnFrame,
-        (void*) gm_801B0264_OnEnter,
-        (void*) gm_801B0304_OnLeave,
+        gm_801B0264_OnEnter,
+        gm_801B0304_OnLeave,
         NULL,
     },
     {
@@ -369,21 +375,6 @@ static GameSceneHandler gm_803DA920[] = {
         NULL,
     },
 };
-
-extern GameScene gm_803DD6D0_Scenes[], gm_803DD888_Scenes[],
-    gm_803DD8B8_Scenes[], gm_803DDA78_Scenes[], gm_803DDAC0_Scenes[],
-    gm_803DDB80_Scenes[], gm_803DDC58_Scenes[], gm_803DE930_Scenes[],
-    gm_803DECB8_Scenes[], gm_803DED00_Scenes[], gm_803DED48_Scenes[],
-    gm_803DED90_Scenes[], gm_803DEDD8_Scenes[], gm_803DEE20_Scenes[],
-    gm_803DEE68_Scenes[], gm_803DEEB0_Scenes[], gm_803DEF88_Scenes[],
-    gm_803DF060_Scenes[], gm_803DF138_Scenes[], gm_803DF198_Scenes[],
-    gm_803DF1E0_Scenes[], gm_803DF2B8_Scenes[], gm_803DF390_Scenes[],
-    gm_803DF468_Scenes[], gm_803DF540_Scenes[], gm_803DF618_Scenes[],
-    gm_803DFA18_Scenes[], gm_803DFA48_Scenes[], gm_803DFA78_Scenes[],
-    gm_803DFAA8_Scenes[], gm_803DFAD8_Scenes[], gm_803DFB08[],
-    gm_803DFB80_Scenes[], gm_803DFBC8_Scenes[], gm_803DFC70_Scenes[],
-    gm_803DFDA8_Scenes[], gmBoot_BootScenes[], gmBoot_MemCardScenes[],
-    gm_803DFE48_Scenes[];
 
 GameMode gm_803DACA4[] = {
     {
@@ -459,7 +450,7 @@ GameMode gm_803DACA4[] = {
         gm_803DFAD8_Scenes,
     },
     {
-        0x01,
+        1,
         GM_CAMERA_MODE,
         NULL,
         NULL,
