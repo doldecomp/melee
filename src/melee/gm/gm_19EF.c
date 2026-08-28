@@ -78,8 +78,13 @@ static struct {
     u8 pad_21;
     u16 x22;
     HSD_Text* x24;
-    HSD_GObj* x28;
-    HSD_JObj* x2C[10];
+    union {
+        struct {
+            HSD_GObj* gobj;
+            HSD_JObj* jobjs[10];
+        } typed;
+        HSD_JObj* jobj_slots[11];
+    } x28;
     HSD_JObj* x54;
     HSD_JObj* x58;
     HSD_JObj* x5C;
@@ -99,7 +104,7 @@ static void fn_8019EFC4(HSD_PadStatus* pad)
     HSD_JObj* child_next;
     HSD_JObj* jobj;
 
-    jobj = lbl_80479A98.x28->hsd_obj;
+    jobj = lbl_80479A98.x28.typed.gobj->hsd_obj;
     if (lbl_80479A98.x60 != 0) {
         if (jobj == NULL) {
             jobj = NULL;
@@ -469,21 +474,17 @@ void fn_8019F9C4(u32 arg0)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
     gm_8016895C(jobj, lbl_804D66A0->models[0], 0);
-    lbl_80479A98.x28 = gobj;
+    lbl_80479A98.x28.typed.gobj = gobj;
 
     if (jobj == NULL) {
         child = NULL;
     } else {
         child = jobj->child;
     }
-    if (child == NULL) {
-        node = NULL;
-    } else {
-        node = child->child;
-    }
+    node = child == NULL ? NULL : child->child;
 
-    for (i = 0; i < 10; i++) {
-        lbl_80479A98.x2C[i] = node;
+    for (i = 1; i <= 10; i++) {
+        lbl_80479A98.x28.jobj_slots[i] = node;
         if (node->next != NULL) {
             node = node->next;
         }
@@ -516,9 +517,11 @@ void fn_8019F9C4(u32 arg0)
     HSD_JObjReqAnimAll(lbl_80479A98.x54, (f32) lbl_80479A98.x64);
     for (i = 10; i > 0; i--) {
         if (i > lbl_80479A98.x70) {
-            HSD_JObjSetFlags(lbl_80479A98.x2C[i - 1], JOBJ_HIDDEN);
+            HSD_JObjSetFlags(lbl_80479A98.x28.jobj_slots[i],
+                             JOBJ_HIDDEN);
         } else {
-            HSD_JObjClearFlags(lbl_80479A98.x2C[i - 1], JOBJ_HIDDEN);
+            HSD_JObjClearFlags(lbl_80479A98.x28.jobj_slots[i],
+                               JOBJ_HIDDEN);
         }
     }
     HSD_JObjAnimAll(jobj);
@@ -612,8 +615,11 @@ void fn_8019F9C4(u32 arg0)
     HSD_SisLib_803A611C(0, cam_gobj, 9, 0x12, 0, 0xB, 0, 0x13);
     HSD_SisLib_803A62A0(0, "SdIntro.dat", "SIS_IntroData");
     lbl_80479A98.x24 = HSD_SisLib_803A6754(0, 0);
-    lbl_80479A98.x24->font_size.x = 0.1f;
-    lbl_80479A98.x24->font_size.y = 0.1f;
+    {
+        HSD_Text* text = lbl_80479A98.x24;
+        text->font_size.x = 0.1f;
+        text->font_size.y = 0.1f;
+    }
     lbl_80479A98.x24->default_alignment = 2;
     HSD_SisLib_803A6B98(lbl_80479A98.x24, 240.0f, 176.0f, " ");
     if (lbl_80479A98.x20 == 0) {
