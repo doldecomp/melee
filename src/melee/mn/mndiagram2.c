@@ -1003,18 +1003,19 @@ void mnDiagram2_Create(int arg0)
 {
     int entity_val;
     Diagram2* user_data;
-    mnDiagram_ArchiveData* archive = &mnDiagram_804A0834;
+    u8 entity_idx;
     HSD_GObj* gobj;
     Diagram2* new_var;
     int j;
-    u32 is_name;
-    u8 entity_idx;
+    int threshold;
+    mnDiagram_ArchiveData* archive = &mnDiagram_804A0834;
     int scroll;
     int i;
-    int threshold;
+    u32 is_name;
     HSD_JObj* jobj;
     int offset;
     Diagram2* user_data2;
+    HSD_JObj** cursor;
 
     gobj = GObj_Create(6, 7, 0x80);
     mnDiagram2_804D6C18 = gobj;
@@ -1030,10 +1031,13 @@ void mnDiagram2_Create(int arg0)
     GObj_InitUserData(gobj, 0, (void (*)(void*)) mnDiagram2_FreeUserData,
                       user_data);
 
-    for (i = 0; i < 15; i++) {
-        lb_80011E24(jobj, (HSD_JObj**) ((u8*) user_data + (i << 2) + 8), i,
-                    -1);
-    }
+    i = (offset = 0);
+    cursor = (HSD_JObj**) user_data + i;
+    do {
+        lb_80011E24(jobj, cursor + 2, i, -1);
+        i++;
+        cursor++;
+    } while (i < 15);
 
     HSD_GObj_SetupProc(gobj, mnDiagram2_Think, 0);
 
@@ -1067,7 +1071,10 @@ void mnDiagram2_Create(int arg0)
         j++;
     } while (j < 10);
 
-    is_name = user_data->is_name_mode;
+    {
+        u32 mode = user_data->is_name_mode;
+        is_name = mode;
+    }
     user_data2 = gobj->user_data;
     if (is_name) {
         HSD_JObjSetFlagsAll(user_data2->fighter_mode_header, JOBJ_HIDDEN);
