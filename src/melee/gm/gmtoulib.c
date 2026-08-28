@@ -205,17 +205,18 @@ void fn_8018A970(int arg0)
 
 void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
 {
+    u8* px3;
+    s32 x14;
+    s32* pX10;
+    s32* p48;
     s32* p34;
     s32* p3C;
-    s32* p44;
-    s32* p38;
-    s32* p40;
-    s32* p48;
     BracketEntry* entry;
+    s32* p44;
     s32* pX18;
-    s32* pX10;
+    s32* p38;
     s32 xC;
-    s32 x14;
+    s32* p40;
     s32 x10;
     s32 x18;
     s32 val;
@@ -223,6 +224,7 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
     s32 val2;
     s32 tmp;
     u8 x2;
+    u8 x3;
     u8 tm_x2E;
 
     TmData* tm = gm_GetTournamentData();
@@ -237,8 +239,8 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
     entry = &lbl_80473AB8[entry_idx];
 
     if (entry->x1 != 0) {
-        u8* px3 = &entry->x3;
-        u8 x3 = *px3;
+        px3 = &entry->x3;
+        x3 = *px3;
         (void) px3;
         if (x3 == 0 && entry->x4 != 0) {
             switch (entry->x4) {
@@ -404,10 +406,10 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
             *p44 = val1;
             *p34 = val1;
             {
-                x18 = lbl_80473AB8[entry_idx].x18;
+                x18 = *pX18;
                 x2 = lbl_80473AB8[entry_idx].x2;
                 x10 = lbl_80473AB8[entry_idx].x10;
-                val2 = x10 + x18 - x18 * x2;
+                val2 = x10 + x18 - x2 * x18;
                 *p40 = val2;
                 *p48 = val2;
                 *p38 = val2;
