@@ -384,6 +384,8 @@ void fn_80169C54(s8 arg0, s8 arg1)
     s32 count;
     s32 k;
     s32 j;
+    s32 p1;
+    s32 p0;
     s8* cp;
     s32 p;
     s32 ch;
@@ -434,16 +436,16 @@ void fn_80169C54(s8 arg0, s8 arg1)
             cp++;
         } while (j < 3);
         if (arg0 != 4) {
-            p = Player_800325C8((CharacterKind) arg0, 0);
-            if ((p != -1) && (p != 4)) {
+            p0 = Player_800325C8((CharacterKind) arg0, 0);
+            if ((p0 != -1) && (p0 != 4)) {
                 for (k = 0; k < n; k++) {
-                    Player_80031DA8(p, buf[k]);
+                    Player_80031DA8(p0, buf[k]);
                 }
             }
-            p = Player_800325C8((CharacterKind) arg0, 1);
-            if ((p != -1) && (p != 4)) {
+            p1 = Player_800325C8((CharacterKind) arg0, 1);
+            if ((p1 != -1) && (p1 != 4)) {
                 for (k = 0; k < n; k++) {
-                    Player_80031DA8(p, buf[k]);
+                    Player_80031DA8(p1, buf[k]);
                 }
             }
         }
