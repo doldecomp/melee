@@ -4209,7 +4209,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
         u8 pad[4];
         void* prev;
         void* prev_wrap;
-        u8 trailing_pad[0x48];
+        u8 trailing_pad[0x4C];
     } archive_symbols;
     Toy26B8* base;
     ToyCameraControl* ed4;
@@ -4227,7 +4227,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
     s16 trophy_id;
     HSD_Archive* archive;
 
-    PAD_STACK(60);
+    PAD_STACK(56);
 
     base = (Toy26B8*) &_Toy_804A26B8;
     anim = &base->anim;
