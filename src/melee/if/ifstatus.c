@@ -472,7 +472,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
         ((state->damage_percent % 1000) / 100 == 1) ? 0.5069F : 0.0F;
     digit_jobj = state->jobjs[Hundreds];
     pos = state->translation_x[Hundreds] +
-          (tens_offset + digit_offset + hundreds_offset);
+          (hundreds_offset + tens_offset + digit_offset);
     if (digit_jobj == NULL) {
         __assert("jobj.h", 932, "jobj");
     }
