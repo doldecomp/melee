@@ -682,12 +682,12 @@ s32 hsd_803B6BE4(char* arg0, s32 arg1, void* arg2)
     u8* scratch_r5_8;
     u8* scratch_r5_9;
     u8* work_r24;
+    s32* work_r24_2;
     s32 work_r23;
-    u8* work_r24_2;
     u8* work_r4;
     u8* work_r4_2;
     u8* work_r4_3;
-    u8* work_r4_4;
+    s32* work_r4_4;
     u8* work_r4_5;
     u8* work_r5;
     u8* work_r5_2;
@@ -880,8 +880,7 @@ loop_24:
                 work_r24 += 0x100;
             }
             hsd_803B5EA0(1);
-            work_r24_2 = (u8*) base->work.coeff;
-            work_r4_4 = work_r24_2;
+            work_r4_4 = work_r24_2 = base->work.coeff;
             quant_chroma = quant_table->chroma;
             work_r5_2 = (u8*) base->work.cb;
             for (work_r3_4 = 0; work_r3_4 < 0x40; work_r3_4 += 8) {
@@ -908,7 +907,7 @@ loop_24:
                     (s32) (M2C_FIELD(work_r4_4, s32*, 0x18) *
                            M2C_FIELD(scratch_r6_2, u8*, 6));
                 scratch_r7_3 = M2C_FIELD(work_r4_4, s32*, 0x1C);
-                work_r4_4 += 0x20;
+                work_r4_4 += 8;
                 M2C_FIELD(work_r5_2, s32*, 0x1C) =
                     (s32) (scratch_r7_3 * M2C_FIELD(scratch_r6_2, u8*, 7));
                 work_r5_2 += 0x20;
@@ -941,7 +940,7 @@ loop_24:
                     (s32) (M2C_FIELD(work_r24_2, s32*, 0x18) *
                            M2C_FIELD(scratch_r5_17, u8*, 6));
                 scratch_r6_4 = M2C_FIELD(work_r24_2, s32*, 0x1C);
-                work_r24_2 += 0x20;
+                work_r24_2 += 8;
                 M2C_FIELD(work_r4_5, s32*, 0x1C) =
                     (s32) (scratch_r6_4 * M2C_FIELD(scratch_r5_17, u8*, 7));
                 work_r4_5 += 0x20;
