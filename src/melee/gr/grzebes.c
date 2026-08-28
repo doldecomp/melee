@@ -1575,7 +1575,7 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
                     f32 current = grZe_8049F170[arg1].x18_size;
                     f32 diff = target - current;
 
-                    if (speed < diff) {
+                    if (diff > speed) {
                         grZe_8049F170[arg1].x18_size = current + speed;
                     } else if (diff < -speed) {
                         grZe_8049F170[arg1].x18_size = current - speed;
@@ -1621,7 +1621,6 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
                         break;
                     }
                     case 2: {
-                        grZe_BubbleEntry* entry = &grZe_8049F170[arg1];
                         if (bgp->u.zebes3.xC4 != NULL) {
                             grMaterial_801C8CDC(bgp->u.zebes3.xC4);
                         }
@@ -1638,11 +1637,12 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
                         grZe_8049F170[arg1].x00_active = 0;
 
                         if (arg1 < 7 && arg1 != 0 && arg1 != 6) {
+                            grZe_BubbleEntry* entry = &grZe_8049F170[arg1];
                             f32 best_dist = 64.0f;
                             s32 best_idx = -1;
-                            s32 j;
                             f32 ey = entry->x0C_y;
                             f32 ex = entry->x08_x;
+                            s32 j;
 
                             for (j = 7; j < 20; j++) {
                                 if (grZe_8049F170[j].x00_active == 1) {
@@ -1691,7 +1691,7 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
             }
         }
     }
-    PAD_STACK(0xC);
+    PAD_STACK(8);
     return result;
 }
 
