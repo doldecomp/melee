@@ -404,6 +404,33 @@ static inline void fn_8019F9C4_inline1(HSD_JObj* next, HSD_JObj** child)
     }
 }
 
+static inline void fn_8019F9C4_inline2(HSD_JObj* next, HSD_JObj* model,
+                                        HSD_GObj** result)
+{
+    HSD_JObj* node;
+
+    if (next == NULL) {
+        node = NULL;
+    } else {
+        node = next->child;
+    }
+    lb_8000C290(model, node);
+
+    {
+        HSD_GObj* character_gobj = GObj_Create(0xE, 0xF, 0);
+        *result = character_gobj;
+    }
+}
+
+static inline void fn_8019F9C4_inline3(HSD_JObj* model, HSD_GObj* object,
+                                        CharacterKind arg0, s32* char_idx)
+{
+    lbl_804D66B8 = model;
+    HSD_GObjObject_80390A70(object, HSD_GObj_JObjKind, model);
+    GObj_SetupGXLink(object, HSD_GObj_JObjCallback, 0xB, 0);
+    *char_idx = fn_8019F9C4_GetCharIdx(arg0);
+}
+
 void fn_8019F9C4(u32 arg0)
 {
     HSD_CObj* cobj;
@@ -570,23 +597,9 @@ void fn_8019F9C4(u32 arg0)
     } else {
         next = child->child;
     }
-    if (next == NULL) {
-        node = NULL;
-    } else {
-        node = next->child;
-    }
-    lb_8000C290(jobj, node);
-
-    {
-        HSD_GObj* character_gobj = GObj_Create(0xE, 0xF, 0);
-        gobj = character_gobj;
-    }
+    fn_8019F9C4_inline2(next, jobj, &gobj);
     jobj = HSD_JObjLoadJoint(lbl_804D66AC);
-    lbl_804D66B8 = jobj;
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
-    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
-
-    char_idx = fn_8019F9C4_GetCharIdx(arg0);
+    fn_8019F9C4_inline3(jobj, gobj, arg0, &char_idx);
 
     if (jobj == NULL) {
         child = NULL;
