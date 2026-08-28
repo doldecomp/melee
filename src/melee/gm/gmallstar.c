@@ -386,9 +386,9 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     s8* chars_ptr;
     u8* base;
     s32 is_last_round;
-    gm_803DEBE8_t* opp_data;
-    s32 slot_idx;
     struct GameCache* gc;
+    s32 slot_idx;
+    gm_803DEBE8_t* opp_data;
     s32 count_processed;
     s32 count;
     s32 i;
@@ -458,7 +458,8 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     {
         s32 j;
         for (j = 0; j < 3; j++) {
-            audio |= lbAudioAx_80026E84(chars[j]);
+            CharacterKind ckind = chars[j];
+            audio |= lbAudioAx_80026E84(ckind);
         }
     }
 
