@@ -475,10 +475,10 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                 arg3_z = z;
             }
             d2_z = arg3_z - arg5_offset.z;
-            d1_dot_d2 = (d1_z * d2_z) + ((d1_x * d2_x) + (d1_y * d2_y));
-            d2_len_sq = (d2_z * d2_z) + ((d2_x * d2_x) + (d2_y * d2_y));
             offset_delta_x = arg4_offset.x - arg5_offset.x;
             d1_len_sq = (d1_z * d1_z) + ((d1_x * d1_x) + (d1_y * d1_y));
+            d2_len_sq = (d2_z * d2_z) + ((d2_x * d2_x) + (d2_y * d2_y));
+            d1_dot_d2 = (d1_z * d2_z) + ((d1_x * d2_x) + (d1_y * d2_y));
             offset_delta_z = arg4_offset.z - arg5_offset.z;
             d2_dot_offset_delta =
                 (d2_z * offset_delta_z) +
