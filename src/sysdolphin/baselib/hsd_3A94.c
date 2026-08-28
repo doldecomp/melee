@@ -3861,7 +3861,7 @@ after_verify:
                 state->x170[block_map[1][i]] = blocks_before + i;
                 state->x270[block_map[1][i]] = current_seq;
             }
-            remaining -= chunk;
+            remaining -= state->x8 - 0x20;
             data += fn_803AF3F0_chunk_size(state);
         } else {
             if (arg3 != 0) {
