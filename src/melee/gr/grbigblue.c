@@ -3088,8 +3088,8 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
 
     for (i = 0; i < 30; i++) {
         mpJointSetCb1(lbl_803E2DFC[i], &gp->ground, fn_801EF60C);
-        HSD_JObjSetFlagsAll(
-            ((HSD_JObj**) gp->ground.u.bigblue.xC8)[i], JOBJ_HIDDEN);
+        HSD_JObjSetFlagsAll(((HSD_JObj**) gp->ground.u.bigblue.xC8)[i],
+                            JOBJ_HIDDEN);
         gp->typed.ranks[i] = HSD_Randi(2) ? 0 : 2;
     }
 
@@ -3114,8 +3114,7 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
             do {
                 line_idx = HSD_Randi(30);
                 for (j = 0; j < k; j++) {
-                    if (gp->typed.cars[j].status.lane.lane == line_idx)
-                    {
+                    if (gp->typed.cars[j].status.lane.lane == line_idx) {
                         break;
                     }
                 }
@@ -3184,8 +3183,7 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
             *(s32*) (car + 0xF0) = lo;
 
             {
-                Ground_801C5440(&gp->ground, k,
-                                 lbl_803E3010[HSD_Randi(4)]);
+                Ground_801C5440(&gp->ground, k, lbl_803E3010[HSD_Randi(4)]);
             }
 
             *(f32*) (car + 0xEC) = 1.0F;

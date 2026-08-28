@@ -674,9 +674,7 @@ bool NameContainsOnlySpaces(void)
 
     for (i = 0; i < 4; i++) {
         if (null_char != (s8) text[0]) {
-            if ((s8) "　"[0] != (s8) text[0] ||
-                (s8) "　"[1] != (s8) text[1])
-            {
+            if ((s8) "　"[0] != (s8) text[0] || (s8) "　"[1] != (s8) text[1]) {
                 return false;
             }
         }
@@ -1300,8 +1298,8 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
         return;
     }
     {
-        u8 new_sel = mnNameNew_8023BAA8(
-            data, (s32) buttons, (u8) mn_804A04F0.hovered_selection);
+        u8 new_sel = mnNameNew_8023BAA8(data, (s32) buttons,
+                                        (u8) mn_804A04F0.hovered_selection);
         if ((s32) new_sel != (s32) mn_804A04F0.hovered_selection) {
             lbAudioAx_80024030(2);
             mn_804A04F0.hovered_selection = (u16) new_sel;
@@ -1726,7 +1724,7 @@ void fn_8023DBE8(HSD_GObj* arg0)
     mnNameNew_8023DA08(data);
     cursor = data->x1;
 
-    if ((s32) cursor != (s32) *(hovered = &flow->hovered_selection)) {
+    if ((s32) cursor != (s32) * (hovered = &flow->hovered_selection)) {
         if (cursor >= 0x32U && cursor < 0x3AU) {
             jobj = data->jobjs[mnNameNew_KeyMap.key_jobj_ids[cursor - 0x32]];
         } else {

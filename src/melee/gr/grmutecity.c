@@ -1473,7 +1473,7 @@ static inline f32 grMc_Sqrtf(f32 x, volatile f32* result)
         guess = 0.5 * guess * (3.0 - guess * guess * x);
         guess = 0.5 * guess * (3.0 - guess * guess * x);
         *result = (f32) (x * guess);
-        return *(volatile f32*) result;
+        return *result;
     }
     return x;
 }

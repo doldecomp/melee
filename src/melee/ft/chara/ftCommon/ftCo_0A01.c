@@ -4112,9 +4112,8 @@ void ftCo_800A8940(Fighter* fp)
     {
         f32 bottom = py - 100.0f;
         f32 top = 5.0f + py;
-        result =
-            ftCo_800A0FB0(&floor_pos, &line_id, &flags, &floor_normal, -1, -1,
-                          -1, px, top, px, bottom, 0.0f);
+        result = ftCo_800A0FB0(&floor_pos, &line_id, &flags, &floor_normal, -1,
+                               -1, -1, px, top, px, bottom, 0.0f);
     }
     if (result != 0) {
         if (!ftCo_800A6700_inline0(fp, floor_pos.x, floor_pos.y)) {

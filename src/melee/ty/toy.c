@@ -3127,9 +3127,7 @@ void _Toy_80309404(HSD_GObj* gobj)
             }
         }
 
-        if (state->x50 || state->x54 ||
-            (Toy_80305C44() & HSD_PAD_A))
-        {
+        if (state->x50 || state->x54 || (Toy_80305C44() & HSD_PAD_A)) {
             _Toy_803102C4(0);
         } else {
             _Toy_803102C4(1);

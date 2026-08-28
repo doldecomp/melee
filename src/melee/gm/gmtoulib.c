@@ -226,8 +226,7 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
     u8 tm_x2E;
 
     TmData* tm = gm_GetTournamentData();
-    BracketEntrySlot* slot =
-        &lbl_80473AB8[entry_idx].slots[slot_idx];
+    BracketEntrySlot* slot = &lbl_80473AB8[entry_idx].slots[slot_idx];
 
     p34 = &slot->x34;
     p3C = &slot->x3C;

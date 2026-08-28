@@ -1094,9 +1094,11 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
         gen->bank = bank;
         gen->linkNo = linkNo;
         gen->kind = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->kind;
-        gen->texGroup = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->texGroup;
+        gen->texGroup =
+            ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->texGroup;
         gen->life = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->life;
-        gen->genLife = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->genLife;
+        gen->genLife =
+            ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->genLife;
         gen->pos.z = 0.0F;
         gen->pos.y = 0.0F;
         gen->pos.x = 0.0F;
@@ -1106,16 +1108,16 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
         gen->grav = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->grav;
         gen->fric = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->fric;
         gen->size = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->size;
-        gen->cmdList = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->cmdList;
+        gen->cmdList =
+            ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->cmdList;
         gen->radius = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->radius;
         gen->angle = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->angle;
         gen->random = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->random;
 
         if (gen->kind & 0x100) {
             if (gen->random < 0.0F) {
-                gen->count = (1.0F + gen->random > 1.1920929e-7F)
-                                 ? 1.0F
-                                 : 0.0F;
+                gen->count =
+                    (1.0F + gen->random > 1.1920929e-7F) ? 1.0F : 0.0F;
             } else {
                 gen->count = 0.9999999F;
             }
@@ -1139,7 +1141,8 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
         case 0:
         case 3:
         case 4: {
-            HSD_PSCmdList* c = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx];
+            HSD_PSCmdList* c =
+                ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx];
             f32 p1 = c->param1;
             if (p1 == 0.0F && c->param2 == 0.0F) {
                 gen->aux.disc.minAngle = 0.0F;
@@ -1152,13 +1155,17 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
             break;
         }
         case 1:
-            gen->aux.line.x2 = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->param1;
-            gen->aux.line.y2 = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->param2;
-            gen->aux.line.z2 = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->param3;
+            gen->aux.line.x2 =
+                ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->param1;
+            gen->aux.line.y2 =
+                ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->param2;
+            gen->aux.line.z2 =
+                ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->param3;
             break;
         case 6:
         case 7: {
-            HSD_PSCmdList* c = ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx];
+            HSD_PSCmdList* c =
+                ((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx];
             f32 p1 = c->param1;
             if (p1 == 0.0F && c->param2 == 0.0F) {
                 gen->aux.cone.minAngle = 0.0F;
@@ -1186,13 +1193,19 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
             gen->aux.rect.xz = 0.0F;
             gen->aux.rect.xy = 0.0F;
             gen->aux.rect.flag = 0;
-            if (((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->param1 < 0.0F) {
+            if (((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->param1 <
+                0.0F)
+            {
                 gen->aux.rect.flag |= 1;
             }
-            if (((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->param2 < 0.0F) {
+            if (((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->param2 <
+                0.0F)
+            {
                 gen->aux.rect.flag |= 2;
             }
-            if (((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->param3 < 0.0F) {
+            if (((HSD_PSCmdList***) ptclref_804D0E5C)[bank][idx]->param3 <
+                0.0F)
+            {
                 gen->aux.rect.flag |= 4;
             }
             break;
@@ -1204,8 +1217,7 @@ HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
                 sqrtf(gen->vel.z * gen->vel.z +
                       (gen->vel.x * gen->vel.x + gen->vel.y * gen->vel.y));
 
-            mag = sqrtf(gen->vel.x * gen->vel.x +
-                        gen->vel.z * gen->vel.z);
+            mag = sqrtf(gen->vel.x * gen->vel.x + gen->vel.z * gen->vel.z);
 
             if (mag < 1.1754944e-38F) {
                 if (gen->vel.y >= 0.0F) {

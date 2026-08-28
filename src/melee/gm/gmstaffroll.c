@@ -982,9 +982,8 @@ void fn_801AB200(HSD_GObj* gobj)
                 } else {
                     x_pos = gm_803DBFD8_extra.x_positions[gm_804D6810];
                     text_arr[text_idx] = HSD_SisLib_803A5ACC(
-                        0, 0, 1.45f + x_pos,
-                        (0.19f * (f32) text_idx) + 0.67f, 0.0f, 0.0f,
-                        100.0f);
+                        0, 0, 1.45f + x_pos, (0.19f * (f32) text_idx) + 0.67f,
+                        0.0f, 0.0f, 100.0f);
                 }
 
                 text_arr[text_idx]->default_kerning = 1;
@@ -1021,9 +1020,9 @@ void fn_801AB200(HSD_GObj* gobj)
                     if (selected == 0x4B && text_idx == 2) {
                         line_num = gm_IsCKindUnlocked(CKIND_DRMARIO) * 2;
                         HSD_SisLib_803A6368(
-                            text_arr[text_idx], 0xBEC +
-                                             gm_IsCKindUnlocked(CKIND_LUIGI) +
-                                             line_num);
+                            text_arr[text_idx],
+                            0xBEC + gm_IsCKindUnlocked(CKIND_LUIGI) +
+                                line_num);
                     } else if (text_idx == 2 && check_failed == 1) {
                         if (lbLang_IsSavedLanguageJP() != 0) {
                             HSD_SisLib_803A6368(text_arr[text_idx],

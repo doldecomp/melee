@@ -564,9 +564,8 @@ void fn_8019D1BC(void)
             HSD_JObj* first_c;
             HSD_JObj* first_jobj;
 
-            first_gobj =
-                fn_8019035C(0, lbl_804D6694->models[12], 0, 0x1A, 2, 1,
-                            fn_8019C048, (f32) i);
+            first_gobj = fn_8019035C(0, lbl_804D6694->models[12], 0, 0x1A, 2,
+                                     1, fn_8019C048, (f32) i);
             first_jobj = GET_JOBJ(first_gobj);
             first_c = GET_JOBJ(first_gobj);
             HSD_JObjSetTranslateY(first_c, -2.5f);

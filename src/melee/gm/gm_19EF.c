@@ -517,11 +517,9 @@ void fn_8019F9C4(u32 arg0)
     HSD_JObjReqAnimAll(lbl_80479A98.x54, (f32) lbl_80479A98.x64);
     for (i = 10; i > 0; i--) {
         if (i > lbl_80479A98.x70) {
-            HSD_JObjSetFlags(lbl_80479A98.x28.jobj_slots[i],
-                             JOBJ_HIDDEN);
+            HSD_JObjSetFlags(lbl_80479A98.x28.jobj_slots[i], JOBJ_HIDDEN);
         } else {
-            HSD_JObjClearFlags(lbl_80479A98.x28.jobj_slots[i],
-                               JOBJ_HIDDEN);
+            HSD_JObjClearFlags(lbl_80479A98.x28.jobj_slots[i], JOBJ_HIDDEN);
         }
     }
     HSD_JObjAnimAll(jobj);

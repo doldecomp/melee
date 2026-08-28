@@ -1102,14 +1102,12 @@ typedef struct ClassicArchiveNameLocal {
     u32 pad;
 } ClassicArchiveNameLocal;
 
-static inline void*
-gm_80186634_LoadLightList(void)
+static inline void* gm_80186634_LoadLightList(void)
 {
     return lb_80011AC4(lbl_804D65FC->lights);
 }
 
-static inline void
-gm_80186634_SetupLight(void)
+static inline void gm_80186634_SetupLight(void)
 {
     HSD_GObj* gobj;
 
@@ -1119,8 +1117,7 @@ gm_80186634_SetupLight(void)
     GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
 }
 
-static inline void
-gm_80186634_SetupCamera(void)
+static inline void gm_80186634_SetupCamera(void)
 {
     HSD_GObj* gobj2;
     HSD_GObj* gobj;
@@ -1142,8 +1139,7 @@ gm_80186634_SetupCamera(void)
     }
 }
 
-static inline void
-gm_80186634_SetupModel(void)
+static inline void gm_80186634_SetupModel(void)
 {
     HSD_GObj* gobj;
     HSD_JObj* jobj;
@@ -1160,8 +1156,7 @@ gm_80186634_SetupModel(void)
     lb_80011E24(jobj, &lbl_804735A8.x4[5], 1, -1);
 }
 
-static inline void
-gm_80186634_SetupFog(void)
+static inline void gm_80186634_SetupFog(void)
 {
     HSD_GObj* gobj;
     HSD_Fog* fog;
@@ -1190,9 +1185,9 @@ void fn_80186634(void* arg0)
     efAsync_LoadSync(0);
 
     local.names = *(const ClassicArchiveNameArray*) lbl_803B7C58;
-    lbl_804D65F4 = lbArchive_80016DBC(
-        local.names.v[lbl_8047368C.game_type], &lbl_804D65FC,
-        "ScItrAllstar_scene_data", 0);
+    lbl_804D65F4 =
+        lbArchive_80016DBC(local.names.v[lbl_8047368C.game_type],
+                           &lbl_804D65FC, "ScItrAllstar_scene_data", 0);
     lbl_804D65F8 = lbArchive_80016DBC(lbl_804D40B0, &lbl_804D6600,
                                       "ScItrAllstar_scene_data", 0);
 
@@ -2644,9 +2639,9 @@ void fn_801891F4(void)
             sub->anim_frames[22] = 0x14;
             {
                 f32 selected_speed = speeds[sub->menu_values[0]];
-                lb_80019880(__cvt_dbl_usll(
-                    (f64) (0.016666668f / selected_speed *
-                           (f32) gm_801891F4_GetTickRate())));
+                lb_80019880(
+                    __cvt_dbl_usll((f64) (0.016666668f / selected_speed *
+                                          (f32) gm_801891F4_GetTickRate())));
             }
 
             fn_80188550(sub->menu_values[2] + 1);

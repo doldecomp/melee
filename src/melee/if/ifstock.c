@@ -136,15 +136,16 @@ int ifStock_802F7EFC(int arg0, int arg1)
     return 0;
 }
 
-static inline int ifStock_802F8298_get_count(
-    int i, struct IfStockUserData* user_data,
-    struct ifStock_804A1378* stock)
+static inline int ifStock_802F8298_get_count(int i,
+                                             struct IfStockUserData* user_data,
+                                             struct ifStock_804A1378* stock)
 {
     return stock->x204[user_data->player].x0[i + 5];
 }
 
-static inline unsigned char* ifStock_802F8298_get_data(
-    struct IfStockUserData* user_data, struct ifStock_804A1378* stock)
+static inline unsigned char*
+ifStock_802F8298_get_data(struct IfStockUserData* user_data,
+                          struct ifStock_804A1378* stock)
 {
     return stock->x204[user_data->player].x0;
 }

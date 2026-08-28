@@ -672,13 +672,13 @@ void hsd_80394544(s32 col, s32 row, u32 num_cols, u32 num_rows, s32 x, s32 y,
                 break;
             }
             if (mode != 0) {
-                hsd_803922FC(
-                    &((DebugFontGlyph*) font_data)[ch & 0x7F], x + c * 11, y,
-                    interlace, xfb_buf, xfb_w, xfb_h, xfb_stride, color_data);
+                hsd_803922FC(&((DebugFontGlyph*) font_data)[ch & 0x7F],
+                             x + c * 11, y, interlace, xfb_buf, xfb_w, xfb_h,
+                             xfb_stride, color_data);
             } else {
-                hsd_803921B8(
-                    &((DebugFontGlyph*) font_data)[ch & 0x7F], x + c * 11, y,
-                    xfb_buf, xfb_w, xfb_h, xfb_stride, color_data);
+                hsd_803921B8(&((DebugFontGlyph*) font_data)[ch & 0x7F],
+                             x + c * 11, y, xfb_buf, xfb_w, xfb_h, xfb_stride,
+                             color_data);
             }
         }
         r++;

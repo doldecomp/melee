@@ -156,9 +156,7 @@ static inline s32 mnStageSw_IsRangeEmpty(u8 range_start, u8 range_end)
     s32 curr;
 
     for (curr = range_start; curr <= range_end; curr++) {
-        if (gm_80164430(gm_801641CC(
-                mnStageSw_803ED4C4[(u8) curr])) != 0)
-        {
+        if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[(u8) curr])) != 0) {
             return 0;
         }
     }

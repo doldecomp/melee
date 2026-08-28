@@ -552,8 +552,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                     float velocity_multiplier =
                         co_attrs->heavy_throw_velocity_multiplier;
                     float throw_speed;
-                    base_throw_speed =
-                        velocity_multiplier * base_throw_speed;
+                    base_throw_speed = velocity_multiplier * base_throw_speed;
                     throw_scale *= base_throw_speed;
                     throw_speed = throw_scale;
                     vec2.x =

@@ -2438,10 +2438,12 @@ void fn_8017FF1C(HSD_GObj* gobj)
                 mask = fn_8017F008();
                 if (fn_8016F740(gm_8016B774(), data.state->xC0, mask, 0) > 0) {
                     mask = fn_8017F008();
-                    if (fn_8016F9A8(gm_8016B774(), data.state->xC0, mask, 0) > 7) {
+                    if (fn_8016F9A8(gm_8016B774(), data.state->xC0, mask, 0) >
+                        7)
+                    {
                         mask = fn_8017F008();
-                        data.state->xC0 =
-                            fn_8016F740(gm_8016B774(), data.state->xC0, mask, 0);
+                        data.state->xC0 = fn_8016F740(
+                            gm_8016B774(), data.state->xC0, mask, 0);
                         data.state->xC8 = 1;
                         data.state->xC4 = data.state->x110;
                     }
@@ -2453,11 +2455,11 @@ void fn_8017FF1C(HSD_GObj* gobj)
                     ((repeat | buttons) & 0))
                 {
                     if (fn_8016F870(gm_8016B774(), data.state->xC0,
-                                     (u8) fn_8017F008(), 0) >= 0)
+                                    (u8) fn_8017F008(), 0) >= 0)
                     {
-                        data.state->xC0 = fn_8016F870(
-                            gm_8016B774(), data.state->xC0,
-                            (u8) fn_8017F008(), 0);
+                        data.state->xC0 =
+                            fn_8016F870(gm_8016B774(), data.state->xC0,
+                                        (u8) fn_8017F008(), 0);
                         data.state->xC8 = 1;
                         data.state->xC4 = data.state->x110;
                     }

@@ -365,8 +365,7 @@ static inline struct lbl_8046B488_t* fn_80169C54_inline(void)
     return fn_8016AE60();
 }
 
-static inline void
-fn_80169C54_apply(s32 p, s32 count, s32* buf)
+static inline void fn_80169C54_apply(s32 p, s32 count, s32* buf)
 {
     s32 i;
 

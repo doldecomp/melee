@@ -528,8 +528,8 @@ void mn_8022FD18(u8 arg0)
     HSD_JObjAnimAll(jobj2);
 }
 
-static inline AnimLoopSettings*
-mn_8022FEC8_GetSettings(u8 rule_kind, u8 rule_value)
+static inline AnimLoopSettings* mn_8022FEC8_GetSettings(u8 rule_kind,
+                                                        u8 rule_value)
 {
     u8 default_value;
 

@@ -719,8 +719,7 @@ static inline HSD_GObj* ifStatus_CreateMarkGObj(void)
     return GObj_Create(0xE, 0xF, 0);
 }
 
-static inline void ifStatus_GetPlayerCharacter(s32 arg0,
-                                                CharacterKind* chara)
+static inline void ifStatus_GetPlayerCharacter(s32 arg0, CharacterKind* chara)
 {
     u8 idx = arg0;
     *chara = Player_GetPlayerCharacter(idx);

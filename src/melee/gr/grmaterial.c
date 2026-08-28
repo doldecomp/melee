@@ -304,8 +304,7 @@ static inline GXTevKColorSel grMaterial_GetKColorSel(s32 reg)
     return lb_8000CCA4(reg);
 }
 
-static inline void
-fn_801C8EF8_inline(Ground* gp, HSD_MObj* mobj)
+static inline void fn_801C8EF8_inline(Ground* gp, HSD_MObj* mobj)
 {
     u8 cnst_pad[0x14];
     HSD_TECnst cnst;

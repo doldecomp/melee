@@ -4380,8 +4380,8 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     return 0;
 }
 
-static inline s32 fn_803B0E9C_queue_reads(
-    CardState* state, s32 file_id, s32 seq_num, s32* cmd)
+static inline s32 fn_803B0E9C_queue_reads(CardState* state, s32 file_id,
+                                          s32 seq_num, s32* cmd)
 {
     s32 result;
     u32 i;
@@ -4423,8 +4423,8 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
     if (arg3 == 0) {
         if (arg4 != 0) {
-            result = fn_803B0E9C_queue_reads(arg0, arg1_copy, arg2,
-                                              cmd_read_icon);
+            result =
+                fn_803B0E9C_queue_reads(arg0, arg1_copy, arg2, cmd_read_icon);
             if (result < 0) {
                 return result;
             }
@@ -4952,8 +4952,8 @@ s32 fn_803B1338(CardState* state, s32 arg1)
                         } else {
                             fdata = state->x70[file_id].ptr;
                             if (fdata == NULL) {
-                                result = fn_803ACFC0(
-                                    state, logical, phys, 0, NULL, 0, file_id);
+                                result = fn_803ACFC0(state, logical, phys, 0,
+                                                     NULL, 0, file_id);
                             } else {
                                 result = fn_803ACFC0(
                                     state, logical, phys, 0, fdata + offset,
