@@ -57,8 +57,8 @@
 /// @todo Possible split here due to usage of #gm_80480DC8
 /* 3DD6D0 */ GameScene gm_803DD6D0_Scenes[] = {
     {
-        0x00,
-        0x02,
+        0,
+        lbDvdPreload_2,
         0,
         gm_801B09C0,
         NULL,
@@ -69,8 +69,8 @@
         },
     },
     {
-        0x01,
-        0x02,
+        1,
+        lbDvdPreload_2,
         0,
         gm_801B0A34,
         NULL,
@@ -81,8 +81,8 @@
         },
     },
     {
-        0x02,
-        0x02,
+        2,
+        lbDvdPreload_2,
         0,
         gm_801B0AC8,
         NULL,
@@ -93,8 +93,8 @@
         },
     },
     {
-        0x03,
-        0x02,
+        3,
+        lbDvdPreload_2,
         0,
         gm_801B0B00,
         gm_801B0B24,
@@ -105,8 +105,8 @@
         },
     },
     {
-        0x04,
-        0x02,
+        4,
+        lbDvdPreload_2,
         0,
         gm_801B0B48,
         NULL,
@@ -117,8 +117,8 @@
         },
     },
     {
-        0x05,
-        0x02,
+        5,
+        lbDvdPreload_2,
         0,
         gm_801B0B8C,
         gm_801B0BF0,
@@ -129,8 +129,8 @@
         },
     },
     {
-        0x06,
-        0x02,
+        6,
+        lbDvdPreload_2,
         0,
         gm_801B0C18,
         gm_801B099C,
@@ -141,8 +141,8 @@
         },
     },
     {
-        0x07,
-        0x02,
+        7,
+        lbDvdPreload_2,
         0,
         gm_801B0C50,
         gm_801B099C,
@@ -153,8 +153,8 @@
         },
     },
     {
-        0x08,
-        0x02,
+        8,
+        lbDvdPreload_2,
         0,
         NULL,
         gm_801B099C,
@@ -165,8 +165,8 @@
         },
     },
     {
-        0x09,
-        0x02,
+        9,
+        lbDvdPreload_2,
         0,
         gm_801B0C74,
         gm_801B099C,
@@ -177,8 +177,8 @@
         },
     },
     {
-        0x0A,
-        0x02,
+        10,
+        lbDvdPreload_2,
         0,
         gm_801B0CF0,
         gm_801B099C,
@@ -189,8 +189,8 @@
         },
     },
     {
-        0x0B,
-        0x02,
+        11,
+        lbDvdPreload_2,
         0,
         gm_801B0DD0,
         gm_801B0F1C,
@@ -201,8 +201,8 @@
         },
     },
     {
-        0x0C,
-        0x02,
+        12,
+        lbDvdPreload_2,
         0,
         NULL,
         gm_801B099C,
@@ -213,8 +213,8 @@
         },
     },
     {
-        0x0D,
-        0x02,
+        13,
+        lbDvdPreload_2,
         0,
         gm_801B0F60,
         gm_801B0F90,
@@ -225,8 +225,8 @@
         },
     },
     {
-        0x0E,
-        0x02,
+        14,
+        lbDvdPreload_2,
         0,
         NULL,
         NULL,
@@ -236,7 +236,7 @@
             NULL,
         },
     },
-    { 0xFF },
+    { -1 },
 };
 
 /**

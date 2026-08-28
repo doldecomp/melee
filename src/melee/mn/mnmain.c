@@ -2,6 +2,7 @@
 
 #include "dolphin/pad.h"
 
+#include "gm/forward.h"
 #include "mn/forward.h"
 
 #include "mn/types.h"
@@ -2754,12 +2755,13 @@ static inline void mn_8022DDA8_inline(const u16* sp2B4)
     mn_8022C068(lobj, temp_r29, mn_804A04F0.light_lerp_frames);
 }
 
-void mn_8022DDA8_OnEnter(MenuEnterData* data)
+void mn_8022DDA8_OnEnter(void* user_data)
 {
     u16* hovered_selection;
     HSD_GObj* temp_r3_8;
     u8 menu_kind;
     void (*var_r4)(HSD_GObj*);
+    MenuEnterData* data = user_data;
 
     u8 _[0x14];
 
