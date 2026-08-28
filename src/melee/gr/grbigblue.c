@@ -3215,6 +3215,11 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
 #pragma pop
 #endif
 
+static inline u8* grBigBlue_GetLaneStates(Ground* gp)
+{
+    return gp->u.bigblue.xCC;
+}
+
 void grBigBlue_801ECB50(Ground_GObj* gobj)
 {
     s32 i = 0;
@@ -3227,7 +3232,7 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
 
     /* Count free (0) and reserved (2) lanes */
     for (i = 0; i < 30; i++) {
-        u8 val = ((u8*) gp->u.bigblue.xCC)[i];
+        u8 val = grBigBlue_GetLaneStates(gp)[i];
         if (val == 0) {
             free_count++;
         } else if (val == 2) {
@@ -3286,7 +3291,7 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
             active_count = 1;
         }
         p = bp + 0x40;
-        st = (bp[0x114] >> 2) & 0x3F;
+        st = (p[0xD4] >> 2) & 0x3F;
         if (st != 1 && st != 7 && st != 8) {
             active_count++;
         }
