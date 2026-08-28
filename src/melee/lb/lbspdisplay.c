@@ -42,7 +42,7 @@ struct CameraBlurData {
     /* 0x0C */ f32 xC;
     /* 0x10 */ u8 x10;
     /* 0x11 */ u8 x11;
-    /* 0x12 */ u8 x12;
+    /* 0x12 */ s8 x12;
     /* 0x13 */ char pad_13[0x18 - 0x13];
     /* 0x18 */ HSD_GObjEvent x18;
     /* 0x1C */ HSD_ImageDesc* x1C;
@@ -820,13 +820,13 @@ void fn_800138AC(void* ptr)
 
 void lb_800138CC(HSD_GObj* gobj, HSD_GObjEvent arg1)
 {
-    struct lb_800138D8_t* data = HSD_GObjGetUserData(gobj);
+    struct CameraBlurData* data = HSD_GObjGetUserData(gobj);
     data->x18 = arg1;
 }
 
 void lb_800138D8(HSD_GObj* gobj, s8 arg1)
 {
-    struct lb_800138D8_t* data = HSD_GObjGetUserData(gobj);
+    struct CameraBlurData* data = HSD_GObjGetUserData(gobj);
     data->x12 = 1;
     data->x11 = arg1;
 }
@@ -834,12 +834,12 @@ void lb_800138D8(HSD_GObj* gobj, s8 arg1)
 static const Vec3 lb_803B72A8 = { 0.0F, 0.0F, 1.0F };
 static const Vec3 lb_803B72B4 = { 0.0F, 0.0F, 0.0F };
 
-HSD_GObj* lb_800138EC(s32 arg0, GObj_RenderFunc render_func, u32 arg2, s8 arg3,
+HSD_GObj* lb_800138EC(HSD_ImageDesc* img, GObj_RenderFunc render_func, u32 arg2, s8 arg3,
                  f32 x, f32 y, f32 w, f32 h)
 {
     HSD_GObj* gobj;
     HSD_CObj* cobj;
-    struct lb_800138D8_t* data;
+    struct CameraBlurData* data;
     HSD_RectS16 viewport;
     Scissor scissor;
     Vec3 eye;
@@ -879,14 +879,14 @@ HSD_GObj* lb_800138EC(s32 arg0, GObj_RenderFunc render_func, u32 arg2, s8 arg3,
     HSD_CObjSetOrtho(cobj, ortho_top, ortho_bot, ortho_left, ortho_right);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
 
-    data = HSD_MemAlloc(sizeof(struct lb_800138D8_t));
+    data = HSD_MemAlloc(sizeof(struct CameraBlurData));
     data->x0 = x;
     data->x4 = y;
     data->x8 = w;
     data->xC = h;
     data->x10 = arg3;
     data->x12 = 0;
-    data->x1C = arg0;
+    data->x1C = img;
     data->x18 = 0;
     GObj_InitUserData(gobj, 0, fn_800138AC, data);
 

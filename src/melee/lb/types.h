@@ -290,20 +290,6 @@ struct PreloadCache {
     UNK_T x974;
 };
 
-struct lb_800138D8_t {
-    /*  +0 */ f32 x0;
-    /*  +4 */ f32 x4;
-    /*  +8 */ f32 x8;
-    /*  +C */ f32 xC;
-    /* +10 */ s8 x10;
-    /* +11 */ s8 x11;
-    /* +12 */ s8 x12;
-    /* +13 */ char pad_13[0x18 - 0x13];
-    /* +18 */ HSD_GObjEvent x18;
-    /* +1C */ s32 x1C;
-    /* +20 */ char pad_20[0x24 - 0x20];
-};
-
 struct lb_80432A68_38_t {
     /* 0x0 */ s32 unk_0;
     /* 0x4 */ s32 unk_4;
