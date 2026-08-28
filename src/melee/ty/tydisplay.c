@@ -741,21 +741,21 @@ static inline void _tyDisplay_80319540_sort_and_place(TyDspConfig* cfg,
 
     if (cfg->x08 > 1) {
         n2 = (cfg->x08 / 3) * 2;
-        if (n2 > 0) {
+        if (0 < n2) {
             struct {
                 u8 pad0[4];
                 TySortElem tmp2;
                 u8 pad1[4];
                 TySortElem tmp1, tmp0;
             } temps;
-            s32 mid = n2 / 2;
             TyDspGrid* cur;
             s32 pivot, n, j;
 
-            if (mid != 0) {
+            k = n2 / 2;
+            if (k != 0) {
                 temps.tmp0 = grid->sort[0];
-                grid->sort[0] = grid->sort[mid];
-                grid->sort[mid] = temps.tmp0;
+                grid->sort[0] = grid->sort[k];
+                grid->sort[k] = temps.tmp0;
             }
 
             pivot = 0;
