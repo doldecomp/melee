@@ -3806,7 +3806,7 @@ after_verify:
             for (i = 0; i < file_blocks && secondary_count < file_blocks; i++)
             {
                 s32 primary = block_map[0][i];
-                if (primary >= 0) {
+                if (0 <= primary) {
                     block_map[1][secondary_count++] = primary;
                     block_map[0][i] = -1;
                 }
