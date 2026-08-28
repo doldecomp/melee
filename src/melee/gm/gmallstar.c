@@ -641,7 +641,7 @@ void gm_801B5ACC(GameScene* arg0)
             do {
                 slot = HSD_Randi(0x1A);
             } while ((s32) allstar->x76[slot] != 0x21);
-            allstar->x76[slot] = gm_803DEBE8[ri->start + i].x3;
+            allstar->x76[slot] = gm_803DEBE8[i + ri->start].x3;
         }
     }
 
