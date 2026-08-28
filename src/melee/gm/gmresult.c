@@ -1110,7 +1110,7 @@ void fn_80175DC8(HSD_GObj* gobj)
     HSD_Text* title_text;
     s32 j;
 
-    PAD_STACK(24);
+    PAD_STACK(20);
 
     data = &lbl_8046DBE8;
     me = data->x94;
@@ -1134,7 +1134,8 @@ void fn_80175DC8(HSD_GObj* gobj)
     lb_80011E24(jobj, &sp100, 0x69, -1);
     data->x28 = sp100;
 
-    jobj_iter = (HSD_JObj**) data_iter + (i = 0);
+    jobj_iter =
+        (HSD_JObj**) (data_iter == data ? data_iter : data) + (i = 0);
     jobj_iter += offsetof(ResultsData, x34) / sizeof(*jobj_iter);
     for (; i < 6; i++, jobj_iter++) {
         lb_80011E24(jobj, jobj_iter, i + 0x62, -1);
