@@ -1951,8 +1951,8 @@ void psDispParticles(u32 target_link, u32 sw)
     void* sp79C;
     psdisp_Tlut tlut_obj;
     GXTexObj sp764;
-    HSD_Particle* sp75C;
     HSD_Particle* sorted_particles;
+    HSD_Particle* non_edge_particles;
     psdisp_Mtx billboard_mtx;
     f32 sp700;
     GXTlutObj gx_tlut_obj;
@@ -1982,11 +1982,12 @@ void psDispParticles(u32 target_link, u32 sw)
     sp7B4 = 0;
     do {
         if (target_link & (1 << sp7B4)) {
-            particleSort(sp7B4, psFrameNum, &sorted_particles, &sp75C);
+            particleSort(sp7B4, psFrameNum, &sorted_particles,
+                         &non_edge_particles);
             if (sw == 1) {
                 pp = sorted_particles;
             } else {
-                pp = sp75C;
+                pp = non_edge_particles;
             }
             while (pp != NULL) {
                 HSD_PSTexGroup* tex_group = NULL;
