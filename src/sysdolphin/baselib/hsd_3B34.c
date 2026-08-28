@@ -203,13 +203,12 @@ static inline s32 hsd_803B3408_inline(s32 index)
 void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
 {
     s32 second_pixel_offset;
-    s32 chroma_block_offset;
-    s32 luma_block_offset;
     s32 chroma_pixel_count;
     s32 luma_offset;
     s32 second_pixel_index;
     s32 chroma_row_base;
     s32 luma_row_base;
+    s32 luma_block_offset;
     s32 pixel_index;
     s32 tile_stride;
     s32 luma_row;
@@ -218,18 +217,19 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
     s32 luma_x;
     s32 tile_y;
     s32 tile_x;
+    s32 chroma_block_offset;
     u16 pixel;
     s32 tile_row_offset;
     JpegLumaPair* luma_pair;
     u16* pixel_ptr;
 
-    tile_row_offset = 0;
     tile_stride = ((width + 0xF) / 16) << 6;
     chroma_row_base = 0;
     luma_row_base = 0;
     for (tile_y = 0; tile_y < 2; tile_y++) {
         u16* src;
         chroma_block_offset = chroma_row_base;
+        tile_row_offset = tile_y * tile_stride;
         src = (u16*) image +
               (((x / 4) * 0x10) + ((y / 4) * tile_stride) + tile_row_offset);
         luma_block_offset = 0;
@@ -331,7 +331,6 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
             chroma_block_offset += 2;
             luma_block_offset += 4;
         }
-        tile_row_offset += tile_stride;
         chroma_row_base += 0x10;
         luma_row_base += 4;
     }
