@@ -1705,15 +1705,31 @@ static inline f32 grZebes_801DB3CC_scale(f32 scale, f32 value)
     return value * scale;
 }
 
+static inline f32 grZebes_801DB3CC_dist(f32 dy, f32 dx)
+{
+    return sqrtf(dx * dx + dy * dy);
+}
+
+static inline f32 grZebes_801DB3CC_half_radius(grZe_YakumonoParam* yp)
+{
+    return yp->x74 * 0.5f;
+}
+
+static inline f32 grZebes_801DB3CC_update_y(grZe_BubbleEntry** base,
+                                             f32 old_y)
+{
+    return old_y + (*base)->x14;
+}
+
 static inline void grZebes_801DB3CC_update(grZe_BubbleEntry** base)
 {
     int k;
     f32 left_anchor_x = grZe_8049F158[0].x;
     f32 left_anchor_y = grZe_8049F158[0].y;
-    f32 right_anchor_x = grZe_8049F158[1].x;
+    f32 left_bound_x = grZe_8049F140[0].x;
     f32 left_bound_y = grZe_8049F140[0].y;
     f32 right_anchor_y = grZe_8049F158[1].y;
-    f32 left_bound_x = grZe_8049F140[0].x;
+    f32 right_anchor_x = grZe_8049F158[1].x;
     f32 right_bound_y = grZe_8049F140[1].y;
     f32 right_bound_x = grZe_8049F140[1].x;
 
@@ -1734,7 +1750,7 @@ static inline void grZebes_801DB3CC_update(grZe_BubbleEntry** base)
                 f32 old_y = (*base)->x0C_y;
                 f32 current_x = (*base)->x08_x;
                 f32 old_x = current_x;
-                f32 new_y = old_y + (*base)->x14;
+                f32 new_y = grZebes_801DB3CC_update_y(base, old_y);
                 f32 new_x = old_x + (*base)->x10;
                 if (new_y < left_bound_y && new_x < left_bound_x) {
                     if (old_y >= left_bound_y) {
@@ -1817,7 +1833,7 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                         grZe_BubbleEntry* left = &grZe_8049F170[left_idx];
                         f32 dx = left->x08_x - cur->x08_x;
                         f32 dy = left->x0C_y - cur->x0C_y;
-                        f32 dist = sqrtf(dx * dx + dy * dy);
+                        f32 dist = grZebes_801DB3CC_dist(dy, dx);
                         {
                             f32 col_r = yakumono_param->x74;
                             if (dist > col_r) {
@@ -1886,7 +1902,8 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                             grZe_YakumonoParam* yp = yakumono_param;
                             f32 effective_dist = dist;
                             f32 avg_size = ea->x18_size + eb->x18_size;
-                            f32 col_rad = yp->x74 * 0.5f * avg_size;
+                            f32 col_rad =
+                                grZebes_801DB3CC_half_radius(yp) * avg_size;
                             f32 near_rad = yp->x70 * 0.5f * avg_size;
                             f32 far_rad = yp->x6C * 0.5f * avg_size;
                             if (dist < 0.001) {
