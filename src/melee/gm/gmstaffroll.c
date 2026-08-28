@@ -699,11 +699,11 @@ void fn_801AB200(HSD_GObj* gobj)
     HSD_JObj* cursor_jobj;
     HSD_JObj* jobj_pair[2];
     HSD_JObj* temp_jobj;
+    GXColor tally_color_copy;
     Vec3 xform_result;
     f32 proj[8];
     s32 tally_color;
     GXColor tally_color2;
-    GXColor tally_color_copy;
     HSD_GObj* leaf;
     HSD_JObj* ptcl_jobj;
     HSD_JObj* ptcl_jobj2;
@@ -735,6 +735,7 @@ void fn_801AB200(HSD_GObj* gobj)
     f32 half_size;
     f32 highlight_val;
     f32 offset1, offset2;
+    HSD_Text* text;
     HSD_Text* tally_text;
     PAD_STACK(72);
 
@@ -930,6 +931,8 @@ void fn_801AB200(HSD_GObj* gobj)
         if (selected != -1 &&
             (button == HSD_PAD_B || (gm_804D6818 == 0 && button == HSD_PAD_A)))
         {
+            int text_idx;
+
             lb_80011E24(root, &temp_jobj, 8, -1);
             HSD_JObjReqAnimAll(temp_jobj, 0.0f);
             lbAudioAx_800237A8(0x7A12A, 0x7F, 0x40);
@@ -950,18 +953,18 @@ void fn_801AB200(HSD_GObj* gobj)
             page_6 = base_page + 6;
             page_8 = base_page + 8;
             text_arr = gm_80480D58;
-            for (j = 0; j < 6; j++) {
-                if (text_arr[j] != NULL) {
-                    HSD_SisLib_803A5CC4(text_arr[j]);
+            for (text_idx = 0; text_idx < 6; text_idx++) {
+                if (text_arr[text_idx] != NULL) {
+                    HSD_SisLib_803A5CC4(text_arr[text_idx]);
                 }
 
                 gm_804D6810 = entry_data->x0;
 
-                if (j == 0) {
+                if (text_idx == 0) {
                     x_pos = gm_803DBFD8_extra.x_positions[gm_804D6810];
                     gm_80480D58[0] = HSD_SisLib_803A5ACC(
                         0, 0, 1.45f + x_pos, 0.86f, 0.0f, 0.0f, 100.0f);
-                } else if (j == 1) {
+                } else if (text_idx == 1) {
                     if (selected == 0xAC) {
                         offset1 = 0.2f;
                     } else {
@@ -978,31 +981,33 @@ void fn_801AB200(HSD_GObj* gobj)
                         0.0f, 100.0f);
                 } else {
                     x_pos = gm_803DBFD8_extra.x_positions[gm_804D6810];
-                    text_arr[j] = HSD_SisLib_803A5ACC(
-                        0, 0, 1.45f + x_pos, (0.19f * (f32) j) + 0.67f, 0.0f,
-                        0.0f, 100.0f);
+                    text_arr[text_idx] = HSD_SisLib_803A5ACC(
+                        0, 0, 1.45f + x_pos,
+                        (0.19f * (f32) text_idx) + 0.67f, 0.0f, 0.0f,
+                        100.0f);
                 }
 
-                text_arr[j]->default_kerning = 1;
-                text_arr[j]->font_size.x = 0.00376f;
-                text_arr[j]->font_size.y = 0.0045f;
+                text_arr[text_idx]->default_kerning = 1;
+                text = text_arr[text_idx];
+                text->font_size.x = 0.00376f;
+                text->font_size.y = 0.0045f;
 
-                if (j == 0) {
+                if (text_idx == 0) {
                     if (check_failed == 0 || entry_data->has_check == 0) {
-                        text_arr[j]->text_color.r = 0xC3;
-                        text_arr[j]->text_color.g = 0xC3;
-                        text_arr[j]->text_color.b = 0xC3;
+                        text_arr[text_idx]->text_color.r = 0xC3;
+                        text_arr[text_idx]->text_color.g = 0xC3;
+                        text_arr[text_idx]->text_color.b = 0xC3;
                         if (lbLang_IsSavedLanguageJP() != 0) {
                             HSD_SisLib_803A6368(gm_80480D58[0], page_5);
                         } else {
                             HSD_SisLib_803A6368(gm_80480D58[0], page_6);
                         }
                     }
-                } else if (j == 1) {
+                } else if (text_idx == 1) {
                     if (check_failed == 0 || entry_data->has_check == 0) {
-                        text_arr[j]->text_color.r = 0xE8;
-                        text_arr[j]->text_color.g = 0x37;
-                        text_arr[j]->text_color.b = 0xE0;
+                        text_arr[text_idx]->text_color.r = 0xE8;
+                        text_arr[text_idx]->text_color.g = 0x37;
+                        text_arr[text_idx]->text_color.b = 0xE0;
                         if (lbLang_IsSavedLanguageJP() != 0) {
                             HSD_SisLib_803A6368(gm_80480D58[1], jp_page1);
                         } else {
@@ -1010,27 +1015,27 @@ void fn_801AB200(HSD_GObj* gobj)
                         }
                     }
                 } else {
-                    text_arr[j]->text_color.r = 0xFF;
-                    text_arr[j]->text_color.g = 0xB4;
-                    text_arr[j]->text_color.b = 0;
-                    if (selected == 0x4B && j == 2) {
+                    text_arr[text_idx]->text_color.r = 0xFF;
+                    text_arr[text_idx]->text_color.g = 0xB4;
+                    text_arr[text_idx]->text_color.b = 0;
+                    if (selected == 0x4B && text_idx == 2) {
                         line_num = gm_IsCKindUnlocked(CKIND_DRMARIO) * 2;
                         HSD_SisLib_803A6368(
-                            text_arr[j], 0xBEC +
+                            text_arr[text_idx], 0xBEC +
                                              gm_IsCKindUnlocked(CKIND_LUIGI) +
                                              line_num);
-                    } else if (j == 2 && check_failed == 1) {
+                    } else if (text_idx == 2 && check_failed == 1) {
                         if (lbLang_IsSavedLanguageJP() != 0) {
-                            HSD_SisLib_803A6368(text_arr[j],
+                            HSD_SisLib_803A6368(text_arr[text_idx],
                                                 entry_data->alt_page + 2);
                         } else {
-                            HSD_SisLib_803A6368(text_arr[j],
+                            HSD_SisLib_803A6368(text_arr[text_idx],
                                                 entry_data->alt_page + 3);
                         }
                     } else if (lbLang_IsSavedLanguageJP() != 0) {
-                        HSD_SisLib_803A6368(text_arr[j], jp_page);
+                        HSD_SisLib_803A6368(text_arr[text_idx], jp_page);
                     } else {
-                        HSD_SisLib_803A6368(text_arr[j], en_page);
+                        HSD_SisLib_803A6368(text_arr[text_idx], en_page);
                     }
                 }
                 jp_page++;
@@ -1039,8 +1044,7 @@ void fn_801AB200(HSD_GObj* gobj)
 
             if (button == HSD_PAD_A && gm_804D6820 == 0) {
                 gen = hsd_8039F05C(0, 0, 0x27);
-                appsrt = gen->appsrt;
-                if (appsrt == NULL) {
+                if ((appsrt = gen->appsrt) == NULL) {
                     appsrt = psAddGeneratorAppSRT_begin(gen, 1);
                 }
 
