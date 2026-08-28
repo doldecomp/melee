@@ -2524,7 +2524,7 @@ void mnSnap_80257F24(void)
     HSD_Text* text;
     void** main_joint;
     void** main_shapeanim;
-    void** main_matanim;
+    void** warn_matanim;
     void** main_animjoint;
     void** csr_shapeanim;
     void** csr_matanim;
@@ -2541,7 +2541,7 @@ void mnSnap_80257F24(void)
     void** arrows_shapeanim;
     void** warn_joint;
     void** warn_animjoint;
-    void** warn_matanim;
+    void** main_matanim;
     void** warn_shapeanim;
     Vec3 start_pos;
     Vec3 end_pos;
@@ -2628,7 +2628,7 @@ void mnSnap_80257F24(void)
 
     slot_jobj_ptr = &snap->slot_a_jobj;
     snap->blank_img =
-        *(void**) (snap->slot_a_jobj)->u.dobj->mobj->tobj->imagedesc;
+        snap->slot_a_jobj->u.dobj->mobj->tobj->imagedesc->image_ptr;
 
     if (snap->photo_count[snap->active_slot] <= 4) {
         HSD_JObjSetFlagsAll(snap->arrow_jobj, JOBJ_HIDDEN);
