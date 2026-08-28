@@ -35,7 +35,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
     f32 d2;
     s32 numSubdiv;
 
-    PAD_STACK(0x8);
+    PAD_STACK(0x10);
 
     if (arg1 != 2) {
         return;
@@ -161,11 +161,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                 prevPos = delta;
 
                 if (i != 0) {
-                    if (curIdx != 0) {
-                        nextIdx = curIdx - 1;
-                    } else {
-                        nextIdx = 2;
-                    }
+                    nextIdx = curIdx != 0 ? curIdx - 1 : 2;
                 }
                 curIdx = nextIdx;
             }
@@ -179,30 +175,34 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             s32 remaining;
             f32* distPtr;
             s32 numVerts;
-            f32 scaleDiff = x20FC - x20F8;
+            f32 scaleDiff;
             s32 curIdx2;
-            f32 blendedInner = params->x0 * scaleDiff + x20F8;
-            f32 outerProd = params->x4 * scaleDiff;
-            f32 blendedOuter = outerProd + x20F8;
-            f32 interpFactor = 1.0f;
-            f32 innerDiff = x20F8 - blendedInner;
-            f32 outerDiff = x20FC - blendedOuter;
+            s32 idx2;
+            f32 blendedOuter;
+            f32 blendedInner;
+            f32 interpFactor;
+            f32 innerDiff;
+            f32 outerDiff;
             AfterimageVtx* vp;
 
+            scaleDiff = x20FC - x20F8;
+            idx2 = fp->x2101_bits_0to6;
+            blendedInner = params->x0 * scaleDiff + x20F8;
+            vp = vtx_buf;
+            blendedOuter = params->x4 * scaleDiff + x20F8;
             numVerts = 0;
 
-            {
-                s32 idx2 = fp->x2101_bits_0to6;
-                if (idx2 != 0) {
-                    curIdx2 = idx2 - 1;
-                } else {
-                    curIdx2 = 2;
-                }
+            if (idx2 != 0) {
+                curIdx2 = idx2 - 1;
+            } else {
+                curIdx2 = 2;
             }
 
+            innerDiff = x20F8 - blendedInner;
+            interpFactor = 1.0f;
             remaining = (s8) (u8) fp->x2100 - 1;
+            outerDiff = x20FC - blendedOuter;
             distPtr = &cumDist[0];
-            vp = vtx_buf;
 
             while (remaining >= 0) {
                 f32 outerScale, innerScale;
@@ -226,7 +226,10 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                 vp->b = params->xC;
                 vp->a = alpha;
 
-                (vp + 1)->x = curEntry->xC.x * outerScale + curEntry->x0.x;
+                {
+                    f32 x = curEntry->xC.x * outerScale;
+                    (vp + 1)->x = x + curEntry->x0.x;
+                }
                 (vp + 1)->y = curEntry->xC.y * outerScale + curEntry->x0.y;
                 (vp + 1)->z = curEntry->xC.z * outerScale + curEntry->x0.z;
                 (vp + 1)->r = params->xE;
@@ -353,7 +356,10 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                 AfterimageVtx* vtx = &vtx_buf[2];
 
                 GXPosition3f32(vtx->x, vtx->y, vtx->z);
-                GXColor4u8(vtx->r, vtx->g, vtx->b, vtx->a);
+                {
+                    u8 r = vtx->r;
+                    GXColor4u8(r, vtx->g, vtx->b, vtx->a);
+                }
             }
 
             {
@@ -362,7 +368,10 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
                 for (i = 1; i < numVerts; i++, vtx++) {
                     GXPosition3f32(vtx->x, vtx->y, vtx->z);
-                    GXColor4u8(vtx->r, vtx->g, vtx->b, vtx->a);
+                    {
+                        u8 r = vtx->r;
+                        GXColor4u8(r, vtx->g, vtx->b, vtx->a);
+                    }
                 }
             }
         }
