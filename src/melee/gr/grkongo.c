@@ -851,70 +851,92 @@ void grKongo_801D6AFC(void)
     f32 sp44[15];
     f32 sp8[15];
     f32* values = sp44;
-    s32 i;
 
     {
         f32* p = values;
+        s32 i;
 
         for (i = 15; i > 0; i--) {
             *p++ = 0.0f;
         }
     }
 
-    for (i = 0; i < 15; i++) {
-        rad_compare_b(grKg_803E188C[i].unkC - grKg_803E188C[i].unk8,
-                      yakumono_param->unk94, &grKg_803E188C[i].unk10);
+    {
+        s32 i;
+
+        for (i = 0; i < 15; i++) {
+            rad_compare_b(grKg_803E188C[i].unkC - grKg_803E188C[i].unk8,
+                          yakumono_param->unk94, &grKg_803E188C[i].unk10);
+        }
     }
 
     {
         _struct_grKg_803E188C_0x18* entry = grKg_803E188C;
+        s32 i;
 
         for (i = 15; i > 0; i--) {
-            entry->unk10 = *values + entry->unk10;
+            entry->unk10 += *values;
             values++;
             entry++;
         }
     }
 
-    for (i = 0; i < 15; i++) {
-        Ground_ClampSymmetric(grKg_803E188C[i].unk10,
-                              MTXDegToRad(yakumono_param->unk98),
-                              &grKg_803E188C[i].unk10);
+    {
+        s32 i;
+
+        for (i = 0; i < 15; i++) {
+            Ground_ClampSymmetric(grKg_803E188C[i].unk10,
+                                  MTXDegToRad(yakumono_param->unk98),
+                                  &grKg_803E188C[i].unk10);
+        }
     }
 
-    for (i = 0; i < 15; i++) {
-        grKg_803E188C[i].unkC += grKg_803E188C[i].unk10;
-        Ground_ClampSymmetric(grKg_803E188C[i].unkC,
-                              MTXDegToRad(yakumono_param->unk90),
-                              &grKg_803E188C[i].unkC);
+    {
+        s32 i;
+
+        for (i = 0; i < 15; i++) {
+            grKg_803E188C[i].unkC += grKg_803E188C[i].unk10;
+            Ground_ClampSymmetric(grKg_803E188C[i].unkC,
+                                  MTXDegToRad(yakumono_param->unk90),
+                                  &grKg_803E188C[i].unkC);
+        }
     }
 
     {
         f32* p = sp8;
+        s32 i;
 
         for (i = 15; i > 0; i--) {
             *p++ = 0.0f;
         }
     }
 
-    for (i = 0; i < 15; i++) {
-        if (grKg_803E188C[i].unk2 == 0) {
-            if (i != 0 && grKg_803E188C[i - 1].unk2 == 0) {
-                rad_compare_c(grKg_803E188C[i - 1].unkC -
-                                  grKg_803E188C[i].unkC,
-                              yakumono_param->unk9C, &sp8[i]);
-            }
-            if ((u32) i != 14 && grKg_803E188C[i + 1].unk2 == 0) {
-                rad_compare_c(grKg_803E188C[i + 1].unkC -
-                                  grKg_803E188C[i].unkC,
-                              yakumono_param->unk9C, &sp8[i]);
+    {
+        s32 i;
+
+        for (i = 0; i < 15; i++) {
+            if (grKg_803E188C[i].unk2 == 0) {
+                if (i != 0 && grKg_803E188C[i - 1].unk2 == 0) {
+                    rad_compare_c(grKg_803E188C[i - 1].unkC -
+                                      grKg_803E188C[i].unkC,
+                                  yakumono_param->unk9C, &sp8[i]);
+                }
+                if ((u32) i != 14 && grKg_803E188C[i + 1].unk2 == 0) {
+                    rad_compare_c(grKg_803E188C[i + 1].unkC -
+                                      grKg_803E188C[i].unkC,
+                                  yakumono_param->unk9C, &sp8[i]);
+                }
             }
         }
     }
 
-    for (i = 0; i < 15; i++) {
-        if (sp8[i] != 0.0) {
-            grKg_803E188C[i].unkC += sp8[i];
+    {
+        s32 i;
+
+        for (i = 0; i < 15; i++) {
+            if (sp8[i] != 0.0) {
+                grKg_803E188C[i].unkC += sp8[i];
+            }
         }
     }
 }
