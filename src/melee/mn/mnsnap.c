@@ -878,6 +878,46 @@ static inline s32 mnSnap_GetActivePhotoCount(void)
     return mnSnap_804A0A10.photo_count[mnSnap_804A0A10.active_slot];
 }
 
+static inline void* mnSnap_GetCurrentThumbImage(mnSnap_State* snap)
+{
+    return mnSnap_thumb_imgs[snap->cursor_idx % 4];
+}
+
+static inline void mnSnap_AnimateCardSlots(s32* active_slot)
+{
+    s32 i;
+    s32 byte_off;
+    f32 t;
+
+    i = 0;
+    byte_off = 4;
+    do {
+        if (mnSnap_804A0A10.card_status[i] != 0) {
+            if (*active_slot == i) {
+                t = 1.0F;
+            } else {
+                t = 0.0F;
+            }
+            HSD_JObjReqAnimAll(
+                *((HSD_JObj**) ((((u32) (&mnSnap_804A0A10)) +
+                                 byte_off) +
+                                0x98)),
+                t);
+        } else {
+            HSD_JObjReqAnimAll(
+                *((HSD_JObj**) ((((u32) (&mnSnap_804A0A10)) +
+                                 byte_off) +
+                                0x98)),
+                2.0F);
+        }
+        HSD_JObjAnimAll(
+            *((HSD_JObj**) ((((u32) (&mnSnap_804A0A10)) + byte_off) +
+                            0x98)));
+        i++;
+        byte_off += 8;
+    } while (i < 2);
+}
+
 /// Main per-frame update for the Snap menu. Handles all state transitions
 /// including slot selection, photo browsing, copy/move/delete operations,
 /// and dialog confirmations via a large switch on snap->state.
@@ -1023,33 +1063,7 @@ void fn_802545C4(void)
                 mnSnap_804A0A10.dlg_text->pos_x = jobj->translate.x - 6.0F;
                 lbAudioAx_80024030(3);
             }
-            i = 0;
-            byte_off = 4;
-            do {
-                if (mnSnap_804A0A10.card_status[i] != 0) {
-                    if (mnSnap_804A0A10.active_slot == i) {
-                        t = 1.0F;
-                    } else {
-                        t = 0.0F;
-                    }
-                    HSD_JObjReqAnimAll(
-                        *((HSD_JObj**) ((((u32) (&mnSnap_804A0A10)) +
-                                         byte_off) +
-                                        0x98)),
-                        t);
-                } else {
-                    HSD_JObjReqAnimAll(
-                        *((HSD_JObj**) ((((u32) (&mnSnap_804A0A10)) +
-                                         byte_off) +
-                                        0x98)),
-                        2.0F);
-                }
-                HSD_JObjAnimAll(
-                    *((HSD_JObj**) ((((u32) (&mnSnap_804A0A10)) + byte_off) +
-                                    0x98)));
-                i++;
-                byte_off += 8;
-            } while (i < 2);
+            mnSnap_AnimateCardSlots(&mnSnap_804A0A10.active_slot);
         }
         break;
 
@@ -1532,7 +1546,8 @@ void fn_802545C4(void)
                 HSD_JObjClearFlagsAll(mnSnap_804A0A10.fullview_jobj,
                                       JOBJ_HIDDEN);
                 jobj = mnSnap_804A0A10.fullview_jobj;
-                thumb_img = mnSnap_thumb_imgs[mnSnap_804A0A10.cursor_idx % 4];
+                thumb_img =
+                    mnSnap_GetCurrentThumbImage(&mnSnap_804A0A10);
                 HSD_ASSERT(181, jobj);
                 HSD_ASSERT(182, jobj->u.dobj);
                 HSD_ASSERT(183, jobj->u.dobj->mobj);
