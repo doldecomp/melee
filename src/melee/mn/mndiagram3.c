@@ -35,6 +35,13 @@ typedef struct mnDiagram3_StatTable {
     /* 0x30 */ u16 unit_glyph_ids[24]; ///< mnDiagram2 unit/icon column entries
 } mnDiagram3_StatTable;
 
+typedef struct mnDiagram3_DataTable {
+    /* 0x00 */ AnimLoopSettings x0;
+    /* 0x0C */ AnimLoopSettings xC;
+    /* 0x18 */ mnDiagram3_PosTable positions;
+    /* 0x3C */ mnDiagram3_StatTable stats;
+} mnDiagram3_DataTable;
+
 /* 3EEC10 */ extern AnimLoopSettings mnDiagram3_803EEC10;
 /* 3EEC1C */ extern AnimLoopSettings mnDiagram3_803EEC1C;
 /* 3EEC28 */ extern mnDiagram3_PosTable mnDiagram3_803EEC28;
@@ -64,22 +71,14 @@ HSD_GObj* mnDiagram3_804D6C20;
 
 void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
 {
+    u16* unit_glyph_ids;
     Vec3 sp6C;
     u32 max_distance;
     u8 sp58[0x10];
     u8 sp48[0x10];
-    u8 sp38[0x10];
-    union {
-        u8 bytes[0x10];
-        struct {
-            u8 x0;
-            u8 pad_x1[7];
-            s32 x8;
-            s32 xC;
-        } fields;
-    } sp28;
     Diagram3* data;
-    char* base;
+    u8 fighter_rank[0x10];
+    mnDiagram3_DataTable* table;
     HSD_JObj* row0;
     f32 neg_spacing;
     f32 row_spacing;
@@ -94,9 +93,18 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
     s32 entity;
     u32 max_time;
     u32 max_percentage;
+    union {
+        u8 bytes[0x10];
+        struct {
+            u8 x0;
+            u8 pad_x1[7];
+            s32 x8;
+            s32 xC;
+        } fields;
+    } sp28;
 
     data = gobj->user_data;
-    base = (char*) &mnDiagram3_803EEC10;
+    table = (mnDiagram3_DataTable*) &mnDiagram3_803EEC10;
 
     {
         u8 scroll = data->cursor_row;
@@ -123,11 +131,7 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
         f32 row1_y = HSD_JObjGetTranslationY(data->jobjs[7]);
 
         {
-            u16* stat_table;
-            char* stat_ptr;
-            stat_ptr = base;
-            stat_ptr += (int) stat_type << 1;
-            stat_table = (u16*) stat_ptr;
+            unit_glyph_ids = table->stats.unit_glyph_ids;
             icon_x_offset = mnDiagram3_804DC010;
             row_spacing = row1_y;
             (void) row_spacing;
@@ -137,14 +141,12 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
             divider = mnDiagram3_804DC008;
             max_time = 0x5B8D7F;
             neg_spacing = -row_spacing;
-            stat_ptr += 0x6C;
-            stat_table = (u16*) stat_ptr;
 
             for (i = 0; i < 5; i++) {
                 if (data->is_name_mode != 0) {
                     if (!mnDiagram2_IsIconOnlyStat(stat_type)) {
                         if (i == 0) {
-                            lb_8000B1CC(data->jobjs[6], (Vec3*) (base + 0x24),
+                            lb_8000B1CC(data->jobjs[6], &table->positions.xC,
                                         &sp6C);
                             title_text = HSD_SisLib_803A6754(0, 1);
                             data->title_text = title_text;
@@ -179,7 +181,7 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
                 }
 
                 if (i == 0) {
-                    lb_8000B1CC(data->jobjs[6], (Vec3*) (base + 0x30), &sp6C);
+                    lb_8000B1CC(data->jobjs[6], &table->positions.x18, &sp6C);
                     value_text = HSD_SisLib_803A6754(0, 1);
                     data->value_text = value_text;
                     value_text->font_size.x = divider;
@@ -204,9 +206,9 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
                     if (sp48[0] == 0x19) {
                         goto next;
                     }
-                    mnDiagram2_GetAggregatedFighterRank(sp38, stat_type,
-                                                        (u8) i);
-                    icon = mnDiagram_CreateFighterIcon(sp38[0], 0);
+                    mnDiagram2_GetAggregatedFighterRank(fighter_rank,
+                                                        stat_type, (u8) i);
+                    icon = mnDiagram_CreateFighterIcon(fighter_rank[0], 0);
                     HSD_JObjSetTranslateY(icon, row_spacing * (f32) i);
                     HSD_JObjAddChild(data->jobjs[6], icon);
 
@@ -268,13 +270,12 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
                 }
 
                 {
-                    u16 icon_id = *stat_table;
-                    int r17 = icon_id;
-                    if (r17 == 0xFFFF) {
+                    int icon_id = unit_glyph_ids[stat_type];
+                    if (icon_id == 0xFFFF) {
                         goto next;
                     }
 
-                    lb_8000B1CC(data->jobjs[6], (Vec3*) (base + 0x30), &sp6C);
+                    lb_8000B1CC(data->jobjs[6], &table->positions.x18, &sp6C);
                     {
                         HSD_Text* icon_text;
                         f32 negated_y = -sp6C.y;
@@ -296,7 +297,7 @@ void mnDiagram3_PopulateRankings(HSD_GObj* gobj)
                                 goto next;
                             }
                         }
-                        HSD_SisLib_803A6368(icon_text, r17);
+                        HSD_SisLib_803A6368(icon_text, icon_id);
                     }
                 }
 
