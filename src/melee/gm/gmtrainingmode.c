@@ -194,11 +194,11 @@ void gm_801B1EEC(GameScene* arg0)
         gm_SetPendingSceneIndex(0);
         return;
     }
-    stkind = sss->data.data.rules.xE;
+    stkind = sss->data.data.rules.stkind;
     gm_80473814.x6 = stkind;
-    vs_data->data.rules.xE = stkind;
+    vs_data->data.rules.stkind = stkind;
     lbAudioAx_80026F2C(0x18);
-    lbAudioAx_8002702C(8, lbAudioAx_80026EBC(vs_data->data.rules.xE));
+    lbAudioAx_8002702C(8, lbAudioAx_80026EBC(vs_data->data.rules.stkind));
     lbAudioAx_80027168();
 }
 

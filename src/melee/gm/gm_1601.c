@@ -3581,32 +3581,32 @@ void gm_80167BC8(VsModeData* vs_data)
 
     switch (rules->mode) {
     case 0:
-        vs_data->data.rules.x0_0 = 0;
+        vs_data->data.rules.match_mode = 0;
         if (rules->time_limit != 0) {
             vs_data->data.rules.x0_6 = 1;
-            vs_data->data.rules.x10 = rules->time_limit * 60;
+            vs_data->data.rules.time_limit = rules->time_limit * 60;
         }
         break;
     case 1:
-        vs_data->data.rules.x0_0 = 1;
+        vs_data->data.rules.match_mode = 1;
         if (rules->stock_time_limit != 0) {
             vs_data->data.rules.x0_6 = 1;
-            vs_data->data.rules.x10 = rules->stock_time_limit * 60;
+            vs_data->data.rules.time_limit = rules->stock_time_limit * 60;
             break;
         }
         break;
     case 2:
-        vs_data->data.rules.x0_0 = 2;
+        vs_data->data.rules.match_mode = 2;
         if (rules->time_limit != 0) {
             vs_data->data.rules.x0_6 = 1;
-            vs_data->data.rules.x10 = rules->time_limit * 60;
+            vs_data->data.rules.time_limit = rules->time_limit * 60;
         }
         break;
     case 3:
-        vs_data->data.rules.x0_0 = 3;
+        vs_data->data.rules.match_mode = 3;
         if (rules->time_limit != 0) {
             vs_data->data.rules.x0_6 = 1;
-            vs_data->data.rules.x10 = rules->time_limit * 60;
+            vs_data->data.rules.time_limit = rules->time_limit * 60;
         }
         break;
     }
@@ -3643,7 +3643,7 @@ void gm_80167BC8(VsModeData* vs_data)
         }
     }
 
-    vs_data->data.rules.x1_7 = (rules->friendly_fire & 1);
+    vs_data->data.rules.friendly_fire = (rules->friendly_fire & 1);
     vs_data->data.rules.x30 = 0.1f * rules->damage_ratio;
     vs_data->data.rules.xB = (s8) prefs->item_freq;
     prefs = gmMainLib_8015CC58();

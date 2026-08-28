@@ -108,7 +108,7 @@ void gm_801B931C(GameScene* arg0)
 
     start->rules.x2_5 = false;
     start->rules.x0_6 = false;
-    start->rules.x0_0 = 1;
+    start->rules.match_mode = 1;
     start->rules.x44 = fn_801B9850;
     start->rules.x3_0 = false;
     gm_80167A14(start->players);

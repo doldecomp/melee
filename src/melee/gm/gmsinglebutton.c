@@ -140,7 +140,7 @@ void gm_801BA188(GameScene* scene)
 
 void fn_801BA1B4(StartMeleeData* data, StartMeleeData* unused)
 {
-    data->rules.x2_3 = true;
+    data->rules.single_button = true;
 }
 
 void gm_801BA1C8(GameScene* scene)
