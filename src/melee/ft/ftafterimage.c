@@ -30,14 +30,10 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 {
     Fighter* fp;
     itSword_UnkBytes* params;
-    f32* distPtr;
     f32 cumDist[3];
     AfterimageVtx vtx_buf[151];
     f32 d2;
-    s32 numVerts;
-    s32 remaining;
     s32 numSubdiv;
-    s32 nextIdx;
 
     PAD_STACK(0x8);
 
@@ -117,6 +113,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
     }
 
     {
+        s32 nextIdx;
         f32 x20F8 = fp->x20F8;
         f32 x20FC = fp->x20FC;
         s32 ringIdx;
@@ -179,6 +176,9 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
         }
 
         {
+            s32 remaining;
+            f32* distPtr;
+            s32 numVerts;
             f32 scaleDiff = x20FC - x20F8;
             s32 curIdx2;
             f32 blendedInner = params->x0 * scaleDiff + x20F8;
@@ -207,6 +207,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             while (remaining >= 0) {
                 f32 outerScale, innerScale;
                 s32 alpha;
+                struct Fighter_x20B0_t* nextEntry;
 
                 struct Fighter_x20B0_t* curEntry = &fp->x20B0[curIdx2];
                 outerScale = interpFactor * outerDiff + blendedOuter;
@@ -237,7 +238,6 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
                 if (remaining != 0) {
                     s32 nextRingIdx;
-                    struct Fighter_x20B0_t* nextEntry;
 
                     if (curIdx2 != 0) {
                         nextRingIdx = curIdx2 - 1;
@@ -362,10 +362,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
                 for (i = 1; i < numVerts; i++, vtx++) {
                     GXPosition3f32(vtx->x, vtx->y, vtx->z);
-                    {
-                        u8 r = vtx->r;
-                        GXColor4u8(r, vtx->g, vtx->b, vtx->a);
-                    }
+                    GXColor4u8(vtx->r, vtx->g, vtx->b, vtx->a);
                 }
             }
         }
