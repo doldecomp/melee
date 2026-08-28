@@ -117,7 +117,7 @@ static void order_sdata(void)
 }
 #endif
 
-volatile char mnNameNew_NullCharacter[1] = "";
+char mnNameNew_NullCharacter[1] = "";
 
 static MnNameNewGlyphTable mnNameNew_GlyphTable = {
     {
