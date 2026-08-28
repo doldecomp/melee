@@ -1446,20 +1446,21 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
     u32 scratch_r23;
     u8 scratch_r6_3;
     u8 scratch_r7_3;
+    JpegHuffAc huff_ac_chroma;
     struct {
         u8* base;
         JpegWork* work;
         u8* quant_table;
     } state;
-    JpegHuffAc huff_ac_chroma;
     s32* work_r4_3;
     s32* work_r4_4;
     u16 scratch_r0;
+    u32 comment_size;
     s32 height;
     s32 width;
     u8* src;
 
-    PAD_STACK(0x18);
+    PAD_STACK(0x1C);
 
     state.base = HSD_804D2648_BUF;
     state.work = (JpegWork*) state.base;
@@ -1491,8 +1492,9 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
     scratch_r23 = strlen(comment.data) + 1;
     hsd_803B3344(0xFFU);
     hsd_803B3344(0xFEU);
-    scratch_r0 = scratch_r23 + 2;
-    hsd_803B3344((u8) ((scratch_r23 + 2) >> 8U));
+    comment_size = scratch_r23 + 2;
+    scratch_r0 = comment_size;
+    hsd_803B3344((u8) (comment_size >> 8U));
     hsd_803B3344((u8) scratch_r0);
     hsd_803B3398(comment.data, scratch_r23);
     hsd_803B4A2C();
@@ -1605,8 +1607,8 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
             s32 work_r3_3;
             s32* work_r5_4;
             hsd_803B3408(src, work_r25, work_r24, width, height);
-            work_r26 = 0;
-            work_r23 = state.base + 0x118;
+            work_r23 = state.base + ((work_r26 = 0) << 8);
+            work_r23 += 0x118;
             while (work_r26 < 4) {
                 s32* work_r5_3;
                 fn_803B376C(work_r23);
