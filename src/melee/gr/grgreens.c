@@ -1192,7 +1192,7 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
 {
     Ground* gp = GET_GROUND(gobj);
     Vec pos;
-    float scale;
+    float f;
     int next_row;
     PAD_STACK(0x18);
 
@@ -1266,10 +1266,10 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
                     HSD_JObjSetTranslate(
                         gp->u.greens.x8_blocks[next_row][col].xC->hsd_obj,
                         &pos);
-                    scale = 1.0f / Ground_801C0498();
-                    pos.x *= scale;
-                    pos.y *= scale;
-                    pos.z *= scale;
+                    f = 1.0f / Ground_801C0498();
+                    pos.x *= f;
+                    pos.y *= f;
+                    pos.z *= f;
                     HSD_JObjSetTranslate(
                         gp->u.greens.x8_blocks[next_row][col].x14, &pos);
                 }
@@ -1279,19 +1279,19 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
                         break;
                     }
                     pos.x = ((Vec(*)[6]) gp->u.greens.x4)[next_row][col].x;
+                    f = ((Vec(*)[6]) gp->u.greens.x4)[next_row][col].y -
+                        ((Vec(*)[6]) gp->u.greens.x4)[next_row - 1][col].y;
                     pos.y =
-                        ((Vec(*)[6]) gp->u.greens.x4)[next_row][col].y -
-                        ((Vec(*)[6]) gp->u.greens.x4)[next_row - 1][col].y +
-                        gp->u.greens.x8_blocks[next_row - 1][col].x8;
+                        f + gp->u.greens.x8_blocks[next_row - 1][col].x8;
                     pos.z = 0.0f;
                     gp->u.greens.x8_blocks[next_row][col].x8 = pos.y;
                     HSD_JObjSetTranslate(
                         gp->u.greens.x8_blocks[next_row][col].xC->hsd_obj,
                         &pos);
-                    scale = 1.0f / Ground_801C0498();
-                    pos.x *= scale;
-                    pos.y *= scale;
-                    pos.z *= scale;
+                    f = 1.0f / Ground_801C0498();
+                    pos.x *= f;
+                    pos.y *= f;
+                    pos.z *= f;
                     HSD_JObjSetTranslate(
                         gp->u.greens.x8_blocks[next_row][col].x14, &pos);
                 }
@@ -1308,10 +1308,10 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
     pos.y = gp->u.greens.x8_blocks[row][col].x8;
     pos.z = 0.0f;
     HSD_JObjSetTranslate(gp->u.greens.x8_blocks[row][col].xC->hsd_obj, &pos);
-    scale = 1.0f / Ground_801C0498();
-    pos.x *= scale;
-    pos.y *= scale;
-    pos.z *= scale;
+    f = 1.0f / Ground_801C0498();
+    pos.x *= f;
+    pos.y *= f;
+    pos.z *= f;
     HSD_JObjSetTranslate(gp->u.greens.x8_blocks[row][col].x14, &pos);
 }
 
