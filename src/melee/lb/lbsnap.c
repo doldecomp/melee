@@ -192,7 +192,7 @@ static inline int lbSnap_GetTiledRGBOffset(int x, int y, int tile_stride)
 {
     int tile_x = x / 4;
     int tile_base = tile_x * tile_stride;
-    return ((tile_base + (y / 4)) << 5) + (lbSnap_GetTiledRemainder(x) * 8) +
+    return (((y / 4) + tile_base) << 5) + (lbSnap_GetTiledRemainder(x) * 8) +
            (lbSnap_GetTiledRemainder(y) * 2);
 }
 
