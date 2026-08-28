@@ -5047,12 +5047,16 @@ void _Toy_8030FE48(ToyDisplayList* data, s32 arg1)
     }
 
     if (data->visible_count == entry_count) {
-        s32 j = 0;
-        s32 offset = j;
-        ToyListEntry* entry = data->entries;
+        s32 offset;
+        ToyListEntry* entry;
 
-        for (; j < data->visible_count; j += 1, offset += 2, entry++) {
-            if (j == data->selectedIdx) {
+        start = 0;
+        offset = start;
+        entry = data->entries;
+        for (; start < data->visible_count;
+             start += 1, offset += 2, entry++)
+        {
+            if (start == data->selectedIdx) {
                 trophyIdx = Toy_sbss_804D6EDC[offset / 2];
                 result = Toy_8030813C(trophyIdx);
                 if (entry->archive != NULL) {
