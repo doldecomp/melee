@@ -384,32 +384,27 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     s8 chars[3];
     u8 colors[3];
     s8* chars_ptr;
-    u8* base;
     s32 is_last_round;
     gm_803DEBE8_t* opp_data;
     struct GameCache* gc;
     s32 slot_idx;
     s32 count_processed;
-    s32 count;
     s32 i;
     u64 audio;
-    PAD_STACK(12);
+    PAD_STACK(16);
 
-    base = (u8*) gm_803DE930_Scenes;
     is_last_round = 0;
     chars_ptr = chars;
 
-    {
-        u32 start = ((AllstarRoundInfo*) (base + 0x31C))[arg1].start;
-        opp_data = (gm_803DEBE8_t*) (base + 0x2B8) + start;
-    }
+    opp_data = &gm_803DEBE8[gm_803DEC4C[arg1].start];
 
     chars_ptr[0] = 0x21;
     chars_ptr[1] = 0x21;
     chars_ptr[2] = 0x21;
 
-    count = ((AllstarRoundInfo*) (base + 0x31C))[arg1].count;
-    for (count_processed = 0; count_processed < count; count_processed++) {
+    for (count_processed = 0;
+         count_processed < (s32) gm_803DEC4C[arg1].count;
+         count_processed++) {
         chars[count_processed] = opp_data[count_processed].x3;
     }
 
