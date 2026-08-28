@@ -4684,38 +4684,34 @@ static inline s32 fn_803B1338_queue_write(CardState* state, s32 logical,
                                           s32 phys, void* data, s32 size,
                                           s32 file_id)
 {
+    s32 cmd[10];
     s32 ofs = fn_803ACBE8(state, logical);
+    s32 init_cmd[10];
     s32 result;
 
     if (logical == 0) {
         if (phys != 0) {
             return -0x101;
         }
-        {
-            s32 cmd[10];
-            cmd[0] = 2;
-            cmd[1] = (s32) state;
-            cmd[4] = 0;
-            cmd[5] = 0;
-            cmd[6] = 0;
-            cmd[8] = 0;
-            cmd[7] = ofs;
-            fn_803AC168(cmd);
-        }
+        init_cmd[0] = 2;
+        init_cmd[1] = (s32) state;
+        init_cmd[4] = 0;
+        init_cmd[5] = 0;
+        init_cmd[6] = 0;
+        init_cmd[8] = 0;
+        init_cmd[7] = ofs;
+        fn_803AC168(init_cmd);
     }
-    {
-        s32 cmd[10];
-        cmd[0] = 1;
-        cmd[1] = (s32) state;
-        cmd[3] = logical;
-        cmd[4] = phys;
-        cmd[5] = 0;
-        cmd[6] = (s32) data;
-        cmd[8] = size;
-        cmd[7] = ofs;
-        cmd[2] = file_id;
-        result = fn_803AC168(cmd);
-    }
+    cmd[0] = 1;
+    cmd[1] = (s32) state;
+    cmd[3] = logical;
+    cmd[4] = phys;
+    cmd[5] = 0;
+    cmd[6] = (s32) data;
+    cmd[8] = size;
+    cmd[7] = ofs;
+    cmd[2] = file_id;
+    result = fn_803AC168(cmd);
     return result;
 }
 
@@ -4730,7 +4726,7 @@ s32 fn_803B1338(CardState* state, s32 arg1)
     s32 i;
     s32 phys;
     u8* fdata;
-    PAD_STACK(168);
+    PAD_STACK(128);
 
     max_redun = 0;
     phys = 1;
@@ -4926,22 +4922,8 @@ s32 fn_803B1338(CardState* state, s32 arg1)
 
     for (i = 0; i < max_redun; i++) {
         if (arg1 != 0) {
-            s32 ofs = fn_803ACBE8(state, logical);
-            if (logical == 0) {
-                result = -257;
-            } else {
-                s32 cmd[10];
-                cmd[0] = 1;
-                cmd[1] = (s32) state;
-                cmd[3] = logical;
-                cmd[4] = 0xFFFF;
-                cmd[5] = 0;
-                cmd[6] = 0;
-                cmd[8] = 0;
-                cmd[7] = ofs;
-                cmd[2] = file_id;
-                result = fn_803AC168(cmd);
-            }
+            result = fn_803B1338_queue_write(state, logical, 0xFFFF, NULL, 0,
+                                             file_id);
             if (result < 0) {
                 return result;
             }
