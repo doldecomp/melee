@@ -10,6 +10,7 @@
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/types.h>
 
+/* 1B0FB8 */ static void gm_801B0FB8(GameScene*);
 /* 4D68A4 */ UNK_T gm_804D68A4[0x8 / 4];
 /* 4D689C */ UNK_T gm_804D689C[0x8 / 4];
 /* 4D6898 */ UNK_T gm_804D6898[0x4 / 4];

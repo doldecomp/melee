@@ -66,5 +66,6 @@
 /* 4D68A4 */ extern UNK_T gm_804D68A4[0x8 / 4];
 /* 4D68B0 */ extern UNK_T gm_804D68B0[0x8 / 4];
 /* 3DD6A0 */ extern GameScene gm_803DD6A0_Scenes[];
+/* 3DD6D0 */ extern GameScene gm_803DD6D0_Scenes[];
 
 #endif

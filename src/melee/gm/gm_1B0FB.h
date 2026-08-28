@@ -1,8 +1,8 @@
 #ifndef GALE01_1B0FB8
 #define GALE01_1B0FB8
 
-#include "gm/forward.h"
+#include "gm/types.h"
 
-/* 1B0FB8 */ void gm_801B0FB8(GameScene*);
+/* 3DD888 */ extern GameScene gm_803DD888_Scenes[];
 
 #endif
