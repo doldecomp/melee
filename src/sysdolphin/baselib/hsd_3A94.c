@@ -4638,6 +4638,16 @@ static inline s32 fn_803B1338_queue_write(CardState* state, s32 logical,
     return result;
 }
 
+static inline u8* fn_803B1338_data_at(u8* file_payload, s32 offset)
+{
+    return file_payload + offset;
+}
+
+static inline s32 fn_803B1338_data_size(CardState* state)
+{
+    return state->x8 - 0x20;
+}
+
 s32 fn_803B1338(CardState* state, s32 arg1)
 {
     PAD_STACK(72);
@@ -4663,10 +4673,11 @@ s32 fn_803B1338(CardState* state, s32 arg1)
         s32 result;
         s32 logical;
         s32 max_redun;
+        s32 file_blocks;
         s32 file_id;
         s32 phys;
         u8* fdata;
-        PAD_STACK(56);
+        PAD_STACK(32);
 
         max_redun = 0;
         phys = 1;
@@ -4675,7 +4686,6 @@ s32 fn_803B1338(CardState* state, s32 arg1)
         if ((s32) fn_803AC634(state, 0) != 0) {
             s32 i;
             s32 offset;
-            s32 file_blocks;
             s32 hdr_offset;
             u32 hdr_base;
             u32 sector_size;
@@ -4760,11 +4770,11 @@ s32 fn_803B1338(CardState* state, s32 arg1)
                     } else {
                         s32 chunk;
                         u8* wdata;
-                        wdata = fdata + offset;
-                        chunk = state->x8 - 0x20;
+                        wdata = fn_803B1338_data_at(fdata, offset);
+                        chunk = fn_803B1338_data_size(state);
                         result = fn_803B1338_queue_write(
                             state, logical, phys, wdata, chunk, 0, cmd6, cmd7);
-                        offset += state->x8;
+                        offset = state->x8 + offset;
                         offset -= 0x20;
                     }
                     if (result < 0) {
@@ -4779,7 +4789,7 @@ s32 fn_803B1338(CardState* state, s32 arg1)
                         result = CARD_WRITE_BLOCK(state, logical, phys, 0,
                                                   fdata + offset,
                                                   state->x8 - 0x20, 0);
-                        offset += state->x8;
+                        offset = state->x8 + offset;
                         offset -= 0x20;
                     }
                     if (result < 0) {
@@ -4798,7 +4808,6 @@ s32 fn_803B1338(CardState* state, s32 arg1)
         for (file_id = 1; file_id < 9; file_id++) {
             s32 j;
             s32 offset;
-            s32 file_blocks;
             file_blocks = fn_803AC634(state, file_id);
             offset = 0;
             if (file_blocks > 0) {
@@ -4810,12 +4819,12 @@ s32 fn_803B1338(CardState* state, s32 arg1)
                                 state, logical, phys, NULL, 0, file_id, cmd8,
                                 cmd9);
                         } else {
-                            u8* wdata = fdata + offset;
-                            s32 chunk = state->x8 - 0x20;
+                            u8* wdata = fn_803B1338_data_at(fdata, offset);
+                            s32 chunk = fn_803B1338_data_size(state);
                             result = fn_803B1338_queue_write(
                                 state, logical, phys, wdata, chunk, file_id,
                                 cmd10, cmd11);
-                            offset += state->x8;
+                            offset = state->x8 + offset;
                             offset -= 0x20;
                         }
                         if (result < 0) {
@@ -4830,7 +4839,7 @@ s32 fn_803B1338(CardState* state, s32 arg1)
                             result = fn_803ACFC0(state, logical, phys, 0,
                                                  fdata + offset,
                                                  state->x8 - 0x20, file_id);
-                            offset += state->x8;
+                            offset = state->x8 + offset;
                             offset -= 0x20;
                         }
                         if (result < 0) {
@@ -4889,12 +4898,12 @@ s32 fn_803B1338(CardState* state, s32 arg1)
 
         phys = 1;
         if ((s32) fn_803AC634(state, 0) != 0) {
-            phys = fn_803AC634(state, 0);
+            file_blocks = fn_803AC634(state, 0);
+            phys = file_blocks;
         }
         for (file_id = 1; file_id < 9; file_id++) {
             s32 k;
             s32 offset;
-            s32 file_blocks;
             file_blocks = fn_803AC634(state, file_id);
             offset = 0;
             if (file_blocks > 0) {
@@ -4910,12 +4919,12 @@ s32 fn_803B1338(CardState* state, s32 arg1)
                             } else {
                                 s32 chunk;
                                 u8* wdata;
-                                wdata = fdata + offset;
-                                chunk = state->x8 - 0x20;
+                                wdata = fn_803B1338_data_at(fdata, offset);
+                                chunk = fn_803B1338_data_size(state);
                                 result = fn_803B1338_queue_write(
                                     state, logical, phys, wdata, chunk,
                                     file_id, cmd16, cmd17);
-                                offset += state->x8;
+                                offset = state->x8 + offset;
                                 offset -= 0x20;
                             }
                             if (result < 0) {
@@ -4930,7 +4939,7 @@ s32 fn_803B1338(CardState* state, s32 arg1)
                                 result = fn_803ACFC0(
                                     state, logical, phys, 0, fdata + offset,
                                     state->x8 - 0x20, file_id);
-                                offset += state->x8;
+                                offset = state->x8 + offset;
                                 offset -= 0x20;
                             }
                             if (result < 0) {
