@@ -4084,7 +4084,7 @@ void ftCo_800A8940(Fighter* fp)
     f32 py;
     f32 width;
     s32 result;
-    s32 blocked = 0;
+    s32 blocked;
 
     rnd = HSD_Randf();
     cur_island = mpIsland_8005AB54(fp->coll_data.floor.index);
@@ -4132,7 +4132,9 @@ void ftCo_800A8940(Fighter* fp)
     } else {
         px = width * rnd2 + chosen->x8.x;
     }
+    blocked = 0;
     py = rnd2 * (island->x14.y - island->x8.y) + chosen->x8.y;
+    line_id = -1;
     {
         f32 bottom = py - 100.0f;
         f32 top = 5.0f + py;
