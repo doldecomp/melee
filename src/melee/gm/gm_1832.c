@@ -2477,11 +2477,13 @@ void fn_801891F4(void)
             }
             if (buttons & PAD_BUTTON_A) {
                 HSD_JObj* jobj;
+                HSD_GObj* player_entity;
                 Vec3 pos;
                 s16 item;
                 lbAudioAx_80024030(8);
                 item = *(s16*) &((s32*) lbl_803D9828)[sub->menu_values[1]];
-                jobj = Player_GetEntity(0)->hsd_obj;
+                player_entity = Player_GetEntity(0);
+                jobj = player_entity->hsd_obj;
                 HSD_JObjGetTranslation2(jobj, &pos);
                 pos.y += 10.0f;
                 it_8026D258(&pos, (ItemKind) item);
@@ -2640,9 +2642,12 @@ void fn_801891F4(void)
 
             sfxBack();
             sub->anim_frames[22] = 0x14;
-            lb_80019880(__cvt_dbl_usll(
-                (f64) (0.016666668f / speeds[sub->menu_values[0]] *
-                       (f32) gm_801891F4_GetTickRate())));
+            {
+                f32 selected_speed = speeds[sub->menu_values[0]];
+                lb_80019880(__cvt_dbl_usll(
+                    (f64) (0.016666668f / selected_speed *
+                           (f32) gm_801891F4_GetTickRate())));
+            }
 
             fn_80188550(sub->menu_values[2] + 1);
 
