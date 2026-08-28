@@ -2619,11 +2619,11 @@ static inline int fn_80180630_GetX118(struct lbl_80472D28_t* state)
 void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
                  lbl_8046B6A0_24C_t* arg4)
 {
-    u16 coins;
+    s32 coin_count;
     s32 sp64;
     s32 sp60;
-    s32 sp5C;
-    s32 sp58;
+    s32 special_score_value;
+    u16 coins;
     HSD_Archive* archive;
     HSD_GObj* cam_gobj;
     lbl_8046B6A0_t* temp;
@@ -2665,9 +2665,10 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
         temp = gm_16AE_GetUnkData_0();
         state->x118 = 1;
         if (temp->match_result == OUTCOME_UNK_1P_BONUS_STAGE_END) {
-            grPushOn_80219204(Ground_801C1DD4(), (int*) &sp5C, (int*) &sp58);
-            special_score = sp5C;
-            coins = (u16) sp58;
+            grPushOn_80219204(Ground_801C1DD4(), (int*) &special_score_value,
+                              (int*) &coin_count);
+            special_score = special_score_value;
+            coins = (u16) coin_count;
             state->x108 = 0x1F4;
         }
         break;
