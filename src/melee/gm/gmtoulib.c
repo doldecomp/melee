@@ -1487,6 +1487,7 @@ void fn_8018DF68(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     f32 neg_thickness;
     f32 thickness;
     s32 right;
+    s32 third;
     s32 right_third;
     s32 half;
 
@@ -1506,12 +1507,14 @@ void fn_8018DF68(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     }
 
     left_third_color = line_color;
+    third = arg3 / 3;
     {
-        f32 x = (f32) (arg1 + (arg3 / 3));
-        DrawRectangle(x, (f32) arg2, thickness, (f32) arg4, &left_third_color);
+        f32 x = (f32) (arg1 + third);
+        GXColor* color = &left_third_color;
+        DrawRectangle(x, (f32) arg2, thickness, (f32) arg4, color);
     }
 
-    right_third = right - (arg3 / 3);
+    right_third = right - third;
     right_third_color = line_color;
     {
         GXColor* color = &right_third_color;
@@ -1521,60 +1524,74 @@ void fn_8018DF68(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
 
     neg_thickness = -thickness;
     horizontal_color = line_color;
-    DrawRectangle((f32) arg1, (f32) arg5, (f32) arg3 + thickness,
-                  neg_thickness, &horizontal_color);
+    {
+        GXColor* color = &horizontal_color;
+        DrawRectangle((f32) arg1, (f32) arg5, (f32) arg3 + thickness,
+                      neg_thickness, color);
+    }
 
     if (arg0->x20.g == 0) {
         if (arg0->slots[0].x4C == 0) {
-            GXColor* entry_color = &arg0->x20;
-            slot0_vertical_color = *entry_color;
-            DrawRectangle(arg1, arg2, thickness, arg4, &slot0_vertical_color);
-            slot0_horizontal_color = *entry_color;
-            DrawRectangle(arg1, arg5, (arg3 / 2) + thickness, neg_thickness,
-                          &slot0_horizontal_color);
+            slot0_vertical_color = arg0->x20;
+            {
+                GXColor* color = &slot0_vertical_color;
+                DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
+                              color);
+            }
+            slot0_horizontal_color = arg0->x20;
+            {
+                GXColor* color = &slot0_horizontal_color;
+                DrawRectangle((f32) arg1, (f32) arg5,
+                              (f32) (arg3 / 2) + thickness, neg_thickness,
+                              color);
+            }
             return;
         }
         if (arg0->slots[1].x4C == 0) {
-            GXColor* entry_color = &arg0->x20;
-            slot1_vertical_color = *entry_color;
-            DrawRectangle(arg1 + (arg3 / 3), arg2, thickness, arg4,
-                          &slot1_vertical_color);
-            slot1_horizontal_color = *entry_color;
+            slot1_vertical_color = arg0->x20;
+            {
+                GXColor* color = &slot1_vertical_color;
+                DrawRectangle((f32) (arg1 + third), (f32) arg2, thickness,
+                              (f32) arg4, color);
+            }
+            slot1_horizontal_color = arg0->x20;
             {
                 GXColor* color = &slot1_horizontal_color;
-                DrawRectangle(arg1 + (arg3 / 3), arg5,
-                              ((arg3 / 2) + thickness) - (arg3 / 3),
+                DrawRectangle((f32) (arg1 + third), (f32) arg5,
+                              ((f32) (arg3 / 2) + thickness) - third,
                               neg_thickness, color);
             }
             return;
         }
         if (arg0->slots[2].x4C == 0) {
-            GXColor* entry_color = &arg0->x20;
-            slot2_vertical_color = *entry_color;
-            DrawRectangle(right_third, arg2, thickness, arg4,
-                          &slot2_vertical_color);
-            half = arg3 / 2;
-            slot2_horizontal_color = *entry_color;
+            slot2_vertical_color = arg0->x20;
             {
-                f32 y = arg5;
-                DrawRectangle((arg1 + half), y,
-                              (half + thickness) - (arg3 / 3), neg_thickness,
-                              &slot2_horizontal_color);
+                GXColor* color = &slot2_vertical_color;
+                DrawRectangle((f32) right_third, (f32) arg2, thickness,
+                              (f32) arg4, color);
+            }
+            half = arg3 / 2;
+            slot2_horizontal_color = arg0->x20;
+            {
+                GXColor* color = &slot2_horizontal_color;
+                DrawRectangle((f32) (arg1 + half), (f32) arg5,
+                              ((f32) half + thickness) - third, neg_thickness,
+                              color);
             }
             return;
         }
+        slot3_vertical_color = arg0->x20;
         {
-            GXColor* entry_color = &arg0->x20;
-            slot3_vertical_color = *entry_color;
-            DrawRectangle(right, arg2, thickness, arg4, &slot3_vertical_color);
-            half = arg3 / 2;
-            slot3_horizontal_color = *entry_color;
-        }
-        {
-            f32 y = arg5;
-            GXColor* color = &slot3_horizontal_color;
-            DrawRectangle((arg1 + half), y, half + thickness, neg_thickness,
+            GXColor* color = &slot3_vertical_color;
+            DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4,
                           color);
+        }
+        half = arg3 / 2;
+        slot3_horizontal_color = arg0->x20;
+        {
+            GXColor* color = &slot3_horizontal_color;
+            DrawRectangle((f32) (arg1 + half), (f32) arg5,
+                          (f32) half + thickness, neg_thickness, color);
         }
     }
 }
