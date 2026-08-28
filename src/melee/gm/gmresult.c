@@ -154,6 +154,18 @@ return_true:
     return true;
 }
 
+static inline s32 gmResultFindNth(u8* values, s32 n)
+{
+    s32 i;
+
+    for (i = 0; i < 256; i++) {
+        if (values[i] != 0 && --n == 0) {
+            break;
+        }
+    }
+    return i;
+}
+
 static inline s32 gmResultFormatLabel(s32 slot, StatsEntry* entry, f32 zero,
                                       f32 neg30, HSD_Text* text)
 {
@@ -176,7 +188,7 @@ void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
     /* Float constants preloaded into registers */
     f32 const_zero = 0.0F;
     f32 const_neg30 = -30.0F;
-    PAD_STACK(12);
+    PAD_STACK(4);
 
     label_id = -1;
     value_id = -1;
@@ -221,13 +233,8 @@ void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
             if (0 <= pair_idx) {
                 struct lbl_8046B6A0_24C_44C_t* tmp =
                     (struct lbl_8046B6A0_24C_44C_t*) lbl_8046DBE8.x94->x44C;
-                s32 i;
-                s32 n = pair_idx + 1;
-                for (i = 0; i < 256; i++) {
-                    if (tmp[(u8) slot].x0[i] != 0 && --n == 0) {
-                        break;
-                    }
-                }
+                s32 i = gmResultFindNth(tmp[(u8) slot].x0,
+                                        pair_idx + 1);
                 stat_value = tmp[(u8) slot].x104[i];
                 if (stat_value < 0) {
                     value_id = HSD_SisLib_803A6B98(text3, const_zero,
