@@ -1238,7 +1238,7 @@ block_39:
         (hurt_delta_y * start_delta_y) + (hurt_delta_x * start_delta_x);
     hit_start_dot = (hit_delta.z * start_delta_z) + hit_start_dot;
     hurt_start_dot = (hurt_delta_z * start_delta_z) + hurt_start_dot;
-    closest_denom = (hit_len_sq * hurt_len_sq) - (segment_dot * segment_dot);
+    closest_denom = (hurt_len_sq * hit_len_sq) - (segment_dot * segment_dot);
     if ((hurt_len_sq < lbColl_804D79F0) && (hurt_len_sq > lbColl_804D79F4)) {
         is_hurt_segment_degenerate = 1;
     } else {
