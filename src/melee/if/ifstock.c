@@ -304,6 +304,19 @@ static inline int ifStock_802F89F8_count(int coins)
     return 0;
 }
 
+static inline int ifStock_802F89F8_divisor(int position)
+{
+    int i;
+    int divisor = 1;
+
+    if (position != 0) {
+        for (i = 0; i < position; i++) {
+            divisor *= 10;
+        }
+    }
+    return divisor;
+}
+
 static inline int ifStock_802F89F8_digit(int coins, int position)
 {
     int i;
@@ -330,12 +343,11 @@ void ifStock_802F89F8(HSD_GObj* gobj)
     HSD_JObj* jobj = gobj->hsd_obj;
     int coins;
     int count;
-    int j;
     int temp;
     int digit;
     int divisor;
     Player_GetCoins(player);
-    PAD_STACK(24);
+    PAD_STACK(16);
     coins = ifStock_804A1378.player[user_data->player].coins =
         Player_GetCoins(user_data->player);
     if ((u32) coins > 99999U) {
@@ -351,12 +363,7 @@ void ifStock_802F89F8(HSD_GObj* gobj)
     HSD_AObjSetRate(jobj2->u.dobj->mobj->tobj->aobj, 0.0f);
     for (i = 0; i < 5; i++) {
         if (i < count) {
-            divisor = 1;
-            if (i != 0) {
-                for (j = 0; j < i; j++) {
-                    divisor *= 10;
-                }
-            }
+            divisor = ifStock_802F89F8_divisor(i);
             HSD_JObjClearFlagsAll(
                 ifStock_804A1378.player[user_data->player].x4[13 - i],
                 JOBJ_HIDDEN);
