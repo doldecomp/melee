@@ -6026,13 +6026,16 @@ static bool ftCo_800ADE48(Fighter* fp)
     below = y - five;
     above = five + y;
     line_id = -1;
-    result =
-        mpCheckFloor(x2, above, x, below, 0.0f, &floor_pos, &line_id, &flags,
-                     &floor_normal, -1, -1, -1, NULL, (Fighter_GObj*) found);
-    if (result == 0 || ftCo_800A1B38_noinline(line_id) == 0) {
-        found = result;
-    }
     do {
+        result =
+            mpCheckFloor(x2, above, x, below, 0.0f, &floor_pos, &line_id, &flags,
+                         &floor_normal, -1, -1, -1, NULL,
+                         (Fighter_GObj*) found);
+        if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
+            (void) result;
+        } else {
+            found = result;
+        }
         if (found != 0) {
             struct Fighter_x1A88_t* data2 = &fp->x1A88;
             y = data->x54.y;
@@ -6053,13 +6056,16 @@ static bool ftCo_800ADE48(Fighter* fp)
         data->xFA_b2 = false;
         if (fp->ground_or_air == GA_Air) {
             x = fp->cur_pos.x;
+            x2 = x;
             y = fp->cur_pos.y;
             line_id = -1;
             found = 0;
-            result = mpCheckFloor(x, y, x, ftCo_800ADE48_inline0(y), 0.0f,
+            result = mpCheckFloor(x2, y, x, ftCo_800ADE48_inline0(y), 0.0f,
                                   &floor_pos, &line_id, &flags, &floor_normal,
                                   -1, -1, -1, NULL, (Fighter_GObj*) found);
-            if (result == 0 || ftCo_800A1B38_noinline(line_id) == 0) {
+            if (result != 0 && ftCo_800A1B38_noinline(line_id) != 0) {
+                (void) result;
+            } else {
                 found = result;
             }
             if (found != 0) {
@@ -6136,13 +6142,7 @@ static bool ftCo_800ADE48(Fighter* fp)
     cur_cmd = data->x18;
     if (cur_cmd != 0x11) {
         motion_id = fp->motion_id;
-        if (motion_id == ftCo_MS_BarrelWait) {
-            switch_cmd = 1;
-        } else if (motion_id == ftCo_MS_Barrel) {
-            switch_cmd = 2;
-        } else {
-            switch_cmd = 0;
-        }
+        switch_cmd = inlineH0(fp);
         if (switch_cmd != 0) {
             ftCo_800B4A78(fp);
             data->x18 = 0x11;
