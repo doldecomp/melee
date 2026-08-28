@@ -746,6 +746,16 @@ static inline void mnSnap_ShowSubmenu(mnSnap_State* snap)
     HSD_JObjSetFlagsAll(snap->move_jobj, JOBJ_HIDDEN);
 }
 
+static inline void mnSnap_HideSubmenu(mnSnap_State* snap)
+{
+    s32 i;
+
+    for (i = 0; i < 5; i++) {
+        HSD_JObjSetFlagsAll(snap->option_jobjs[i], JOBJ_HIDDEN);
+    }
+    HSD_JObjClearFlagsAll(snap->move_jobj, JOBJ_HIDDEN);
+}
+
 /// Resets to slot selection state after a card error or empty card.
 void mnSnap_80254298(void)
 {
@@ -922,12 +932,12 @@ void fn_802545C4(void)
 {
     u64 buttons;
     s32 state;
-    s32 byte_off;
+    f32 t;
     s32 byte_off2;
     s32 i;
     s32 result;
     s32 slot;
-    f32 t;
+    s32 byte_off;
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
     Vec3* translate;
@@ -1557,12 +1567,7 @@ void fn_802545C4(void)
                 mnSnap_804A0A10.state = 0xB;
                 HSD_JObjAnimAll(mnSnap_804A0A10.submenu_jobj);
                 mnSnap_804A0A10.timer = 4;
-                for (i = 0; i < 5; i++) {
-                    HSD_JObjSetFlagsAll(mnSnap_804A0A10.option_jobjs[i],
-                                        JOBJ_HIDDEN);
-                }
-
-                HSD_JObjClearFlagsAll(mnSnap_804A0A10.move_jobj, JOBJ_HIDDEN);
+                mnSnap_HideSubmenu(&mnSnap_804A0A10);
                 mnSnap_804A0A10.move_idx = mnSnap_804A0A10.cursor_idx;
                 if ((mnSnap_804A0A10.move_idx / 4) == mnSnap_804A0A10.cur_page)
                 {
@@ -1744,12 +1749,7 @@ void fn_802545C4(void)
             mnSnap_804A0A10.state = next_state;
             HSD_JObjReqAnimAll(mnSnap_804A0A10.submenu_jobj, 0.0F);
             HSD_JObjAnimAll(mnSnap_804A0A10.submenu_jobj);
-            for (i = 0; i < 5; i++) {
-                HSD_JObjClearFlagsAll(mnSnap_804A0A10.option_jobjs[i],
-                                      JOBJ_HIDDEN);
-            }
-
-            HSD_JObjSetFlagsAll(mnSnap_804A0A10.move_jobj, JOBJ_HIDDEN);
+            mnSnap_ShowSubmenu(&mnSnap_804A0A10);
             mnSnap_80253AE4(1);
             if ((mnSnap_804A0A10.cursor_idx / 4) != mnSnap_804A0A10.cur_page) {
                 mnSnap_80253640(mnSnap_804A0A10.cursor_idx / 4);
