@@ -128,10 +128,9 @@ bool IsNameListFull(void)
 static inline bool checkStringRest(const char* ptr)
 {
     char* term = mnName_StringTerminator;
-    char* cmp = "　"; // SJIS full-width space
-    char c = cmp[0];
+    char c = "　"[0]; // SJIS full-width space
     while (*term != *ptr) {
-        if (c != *ptr || cmp[1] != ptr[1]) {
+        if (c != *ptr || "　"[1] != ptr[1]) {
             return false;
         }
         ptr += 2;
