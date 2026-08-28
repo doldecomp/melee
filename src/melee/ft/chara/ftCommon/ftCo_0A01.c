@@ -2166,9 +2166,8 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
     s32 t;
     s32 frames;
     struct Fighter_x1A88_t* data2;
+    StageInfo* info;
     s32 ok;
-
-    data2 = &fp->x1A88;
 
     grav = fp->co_attrs.gravity;
     if (grav < 0.00001f && grav > -0.00001f) {
@@ -2181,6 +2180,8 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
     } else {
         frames = ftCo_800A4038_inline2(fp) / grav;
     }
+    info = &stage_info;
+    data2 = &fp->x1A88;
     PAD_STACK(0x4);
     for (island = mpIsland_80458E88.next; island != NULL;
          island = island->next)
@@ -2266,7 +2267,7 @@ bool ftCo_800A4038(Fighter* fp, bool arg1)
                             data2->x54.y = ey;
                             data2->x38 = 5.0f;
                             {
-                                GrKind kind = stage_info.grkind;
+                                GrKind kind = info->grkind;
                                 ftCo_800A1CC4(fp, ftCo_803C6594[kind]);
                             }
                         }
