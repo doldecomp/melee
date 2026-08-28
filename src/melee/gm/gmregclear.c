@@ -1111,7 +1111,7 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
     return 1;
 }
 
-s32 fn_8017D9C0(const u8* arg0, const u8* arg1)
+s32 fn_8017D9C0(const u8* used_ckinds, const u8* preset_ckinds)
 {
     u8* base;
     u8* p;
@@ -1119,14 +1119,16 @@ s32 fn_8017D9C0(const u8* arg0, const u8* arg1)
     s32 j;
     u8 temp;
     u8* dst;
-    u8 ch;
-    s32 excluded_idx;
-    s32 rejected_idx;
+    u8 ckind;
+    s32 used_idx;
+    s32 preset_idx;
     s32 len;
+
+    PAD_STACK(8);
 
     p = base = lbl_803D79F0;
     len = 0;
-    while ((s32) *p != 0x21) {
+    while ((s32) *p != CHKIND_NONE) {
         p++;
         len++;
     }
@@ -1143,30 +1145,29 @@ s32 fn_8017D9C0(const u8* arg0, const u8* arg1)
     p = base;
     for (i = 0; i < len; i++) {
         if (gm_IsCKindUnlocked(*p) != 0) {
-            ch = *p;
-            for (excluded_idx = 0; excluded_idx < 4; excluded_idx++) {
-                if ((s8) ch == (s8) arg0[excluded_idx]) {
-                    excluded_idx = -1;
+            ckind = *p;
+            for (used_idx = 0; used_idx < 4; used_idx++) {
+                if ((s8) ckind == (s8) used_ckinds[used_idx]) {
+                    used_idx = -1;
                     break;
                 }
             }
-            if (excluded_idx != -1) {
-                for (rejected_idx = 0; rejected_idx < 3; rejected_idx++) {
-                    if ((s8) ch == (s8) arg1[rejected_idx]) {
-                        rejected_idx = -1;
+            if (used_idx != -1) {
+                for (preset_idx = 0; preset_idx < 3; preset_idx++) {
+                    if ((s8) ckind == (s8) preset_ckinds[preset_idx]) {
+                        preset_idx = -1;
                         break;
                     }
                 }
-                if (rejected_idx != -1) {
-                    return (s32) base[i];
+                if (preset_idx != -1) {
+                    return base[i];
                 }
             }
         }
         p++;
     }
 
-    return 0x21;
-    PAD_STACK(8);
+    return CHKIND_NONE;
 }
 
 void gm_8017DB58(struct Unk1PData_x24* arg0)
