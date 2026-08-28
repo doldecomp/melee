@@ -1697,11 +1697,6 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
     return result;
 }
 
-static inline f32 grZebes_801DB3CC_normalize(f32 dist, f32 value)
-{
-    return value / dist;
-}
-
 static inline f32 grZebes_801DB3CC_scale(f32 scale, f32 value)
 {
     return value * scale;
@@ -1824,16 +1819,16 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                             f32 col_r = yakumono_param->x74;
                             if (dist > col_r) {
                                 f32 max_force = yakumono_param->x80;
-                                f32 norm_x =
-                                    grZebes_801DB3CC_normalize(dist, dx);
-                                f32 norm_y =
-                                    grZebes_801DB3CC_normalize(dist, dy);
-                                f32 push = dist - col_r;
+                                f32 push;
+
+                                dx /= dist;
+                                push = dist - col_r;
+                                dist = dy / dist;
                                 if (push > max_force) {
                                     push = max_force;
                                 }
-                                fx = norm_x * push + zero;
-                                fy = norm_y * push + zero;
+                                fx += dx * push;
+                                fy += dist * push;
                             }
                         }
                         neighbor_count = 1;
