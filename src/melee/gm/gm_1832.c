@@ -1796,12 +1796,14 @@ static inline StKind gm_GetStKind(gm_80187F48_EnterData* data)
 
 static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
 {
-    gm_1832_804736C0_t* data = &lbl_804736C0;
+    gm_1832_804736C0_t* data;
     char** table = lbl_803D9750;
     u8 stage_index;
     HSD_GObj* gobj;
     HSD_CObj* cobj;
     gm_1832_StageState* state;
+
+    data = &lbl_804736C0;
     data->x38 = arg0->x0;
     lb_8000FCDC();
     mpColl_80041C78();
