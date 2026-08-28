@@ -717,6 +717,13 @@ static inline HSD_GObj* ifStatus_CreateMarkGObj(void)
     return GObj_Create(0xE, 0xF, 0);
 }
 
+static inline void ifStatus_GetPlayerCharacter(s32 arg0,
+                                                CharacterKind* chara)
+{
+    u8 idx = arg0;
+    *chara = Player_GetPlayerCharacter(idx);
+}
+
 HSD_GObj* ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
 {
     CharacterKind chara;
@@ -731,9 +738,8 @@ HSD_GObj* ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
     u8 hud_color;
     HudIndex* hud = ifStatus_GetHUDInfo();
     u8 idx = player_idx;
-    PAD_STACK(0x10);
 
-    chara = Player_GetPlayerCharacter(idx);
+    ifStatus_GetPlayerCharacter(player_idx, &chara);
     if (state->next == NULL) {
         ifAll_GetArchive();
         gobj = ifStatus_CreateMarkGObj();
