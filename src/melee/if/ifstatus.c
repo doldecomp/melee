@@ -740,6 +740,8 @@ HSD_GObj* ifStatus_802F61FC(IfDamageState* state, s32 player_idx)
     HudIndex* hud = ifStatus_GetHUDInfo();
     u8 idx = player_idx;
 
+    PAD_STACK(16);
+
     ifStatus_GetPlayerCharacter(player_idx, &chara);
     if (state->next == NULL) {
         ifAll_GetArchive();
