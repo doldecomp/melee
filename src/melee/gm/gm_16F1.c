@@ -570,15 +570,16 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         }
         {
             u8* rank = rankings;
+            u8 max_rank = rankings[6];
             int i;
             for (i = 0; i < 4; i++, rank++) {
-                if (x58[i].x0 != 3 && i != arg1 && *rank == rankings[6]) {
+                if (x58[i].x0 != 3 && i != arg1 && *rank == max_rank) {
                     return 0;
                 }
             }
-        }
-        if (rankings[arg1] == rankings[6]) {
-            return 1;
+            if (rankings[arg1] == max_rank) {
+                return 1;
+            }
         }
         return 0;
 
