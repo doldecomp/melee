@@ -596,6 +596,16 @@ static inline s32 tyFigupon_GetCoinCount(void)
     return gm_801623D8() / 10u;
 }
 
+static inline void tyFigupon_StoreDigits(s32* digits, s32 value)
+{
+    s32 i = 0;
+
+    do {
+        digits[i++] = value % 10;
+        value /= 10;
+    } while (value > 0);
+}
+
 void _tyFigupon_80315C44(HSD_GObj* arg0)
 {
     struct un_804D6EF4_t* ef4 = _tyFigupon_804D6EF4;
@@ -607,9 +617,8 @@ void _tyFigupon_80315C44(HSD_GObj* arg0)
     s32 count;
     s32 anim;
     s32 i;
-    s32 idx;
 
-    PAD_STACK(16);
+    PAD_STACK(24);
 
     if ((ud = arg0->user_data) != NULL) {
         if (ud->x8 != 0) {
@@ -649,24 +658,13 @@ void _tyFigupon_80315C44(HSD_GObj* arg0)
                 ud->x18 = i;
                 ud->x14 = i;
                 ud->x10 = i;
-                do {
-                    ((s32*) ud)[i + 4] = total % 10;
-                    total /= 10;
-                    i++;
-                } while (total > 0);
+                tyFigupon_StoreDigits(&ud->x10, total);
                 count = ef4->x5E;
                 i = 0;
                 ud->x30 = i;
                 ud->x2C = i;
                 ud->x28 = i;
-                do {
-                    {
-                        s32 idx = i + 10;
-                        ((s32*) ud)[idx] = count % 10;
-                    }
-                    count /= 10;
-                    i++;
-                } while (count > 0);
+                tyFigupon_StoreDigits(&ud->x28, count);
                 _tyFigupon_803153EC(gm_801623D8() / 10u, 3, 3, 1, 0);
                 _tyFigupon_803153EC((u32) ef4->x5E, 6, 2, 0, 0);
                 ef4 = _tyFigupon_804D6EF4;
@@ -713,12 +711,7 @@ void _tyFigupon_80315C44(HSD_GObj* arg0)
             ud->x18 = i;
             ud->x14 = i;
             ud->x10 = i;
-            do {
-                idx = i + 4;
-                ((s32*) ud)[idx] = total % 10;
-                total /= 10;
-                i++;
-            } while (total > 0);
+            tyFigupon_StoreDigits(&ud->x10, total);
             _tyFigupon_803153EC(gm_801623D8() / 10u, 3, 3, 1, (s32) &ud->x10);
             HSD_AObjSetRate(ef4->jobjs[3]->child->u.dobj->mobj->tobj->aobj,
                             2.0f);
