@@ -2053,7 +2053,7 @@ bool grZebes_801DBB60(Item_GObj* yaku)
             width = 1.0f;
             inv_len_sq = 1.0f / (dx * dx + dy * dy);
 
-            for (k = 0; k < 20; k++, bubbles++) {
+            for (k = 0; k < 20; bubbles++, k++) {
                 if (bubbles->x00_active == 1 && k != 0 && k != 6) {
                     f32 by = bubbles->x0C_y;
                     f32 bx = bubbles->x08_x;
