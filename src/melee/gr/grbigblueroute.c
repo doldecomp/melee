@@ -669,11 +669,14 @@ static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
                         re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
                         re->x28 = (void*) item;
                         if (item != NULL) {
-                            grMaterial_801C8E28((HSD_GObj*) re->x28);
+                            RouteEntry* route_entries = gp->u.car.car_info;
+                            grMaterial_801C8E28(
+                                (HSD_GObj*) route_entries[route_idx].x28);
                         }
                     }
                 }
             }
+            (void) re;
         }
     }
 
