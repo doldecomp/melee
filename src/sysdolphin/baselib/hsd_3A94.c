@@ -4282,7 +4282,9 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
             }
         } else {
             s32 block = block_map[1][secondary_count];
-            result = fn_803ACFC0(state, block, 0xFFFF, 0, NULL, 0, arg1);
+            s32 write_result =
+                fn_803ACFC0(state, block, 0xFFFF, 0, NULL, 0, arg1);
+            result = write_result;
             state->x170[block_map[1][secondary_count]] = -0x7FFF;
             state->x270[block_map[1][secondary_count]] = 0;
             if (result < 0) {
