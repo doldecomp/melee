@@ -1251,6 +1251,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
     {
         HSD_psAppSRT* appsrt = pp->appsrt;
         f32 pos_y;
+        f32 transformed_x;
 
         cur_pos.z = appsrt->x88 * (pos_y = pp->pos.y);
         cur_pos.y = appsrt->x78 * pos_y;
@@ -1258,7 +1259,8 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
         cur_pos.y = appsrt->x74 * pp->pos.x + cur_pos.y;
         cur_pos.z = (cur_pos.x = appsrt->ssx * pp->pos.x + cur_pos.x,
                      appsrt->x84 * pp->pos.x + cur_pos.z);
-        cur_pos.x = appsrt->x6C * pp->pos.z + cur_pos.x;
+        transformed_x = appsrt->x6C * pp->pos.z + cur_pos.x;
+        cur_pos.x = transformed_x;
         cur_pos.y = appsrt->x7C * pp->pos.z + cur_pos.y;
         cur_pos.z = appsrt->x8C * pp->pos.z + cur_pos.z;
         cur_pos.x = appsrt->x70 + cur_pos.x;
