@@ -339,39 +339,37 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
 static void fn_803B376C(u8* arg0)
 {
     f32 scratch_f4;
-    f32 scratch_f11_2;
     f32 scratch_f8_2;
-    f32 scratch_f11_4;
-    f32 scratch_f11_5;
-    f32 scratch_f11_6;
-    f32 scratch_f27;
-    f32 scratch_f6;
     f32 scratch_f8;
-    f32 scratch_f27_6;
-    f32 scratch_f30_4;
-    f32 scratch_f28;
-    f32 scratch_f11_3;
-    f32 scratch_f28_3;
-    f32 scratch_f28_4;
-    f32 scratch_f28_5;
-    f32 scratch_f28_6;
-    f32 scratch_f28_7;
+    f32 scratch_f11_4;
+    f32 scratch_f6;
     f32 scratch_f4_2;
-    f32 scratch_f29_2;
-    f32 scratch_f29_3;
     f32 scratch_f11;
-    f32 scratch_f30_2;
-    f32 scratch_f30_3;
-    f32 scratch_f8_4;
     f32 scratch_f30;
-    f32 scratch_f27_2;
-    f32 scratch_f6_2;
-    f32 scratch_f27_3;
-    f32 scratch_f28_2;
+    f32 scratch_f28;
+    f32 scratch_f28_3;
+    f32 scratch_f28_6;
+    f32 scratch_f28_4;
+    f32 scratch_f30_3;
+    f32 scratch_f28_7;
+    f32 scratch_f8_4;
+    f32 scratch_f11_6;
+    f32 scratch_f30_2;
+    f32 scratch_f29_2;
     f32 scratch_f8_3;
+    f32 scratch_f30_4;
+    f32 scratch_f28_5;
+    f32 scratch_f29_3;
+    f32 scratch_f6_2;
+    f32 scratch_f27;
+    f32 scratch_f11_3;
+    f32 scratch_f27_2;
+    f32 scratch_f27_3;
     f32 scratch_f27_5;
+    f32 scratch_f28_2;
     f32 scratch_f27_4;
     f32 scratch_f29;
+    f32 scratch_f27_6;
     f32 scratch_f26;
     s32 scratch_r7_2;
     s32 scratch_r9_2;
@@ -383,13 +381,12 @@ static void fn_803B376C(u8* arg0)
     s32 scratch_r29_2;
     s32 work_ctr;
     s32 work_ctr_2;
-    s32 work_ctr_3;
-    s32* work_r3;
     s32* work_r4;
     s32* work_r4_2;
 
     work_r4 = (s32*) arg0;
     for (work_ctr = 8; work_ctr != 0; work_ctr--) {
+        f32 scratch_f11_2;
         s32 scratch_r7;
         f32 scratch_f26_2;
         s32 scratch_r9;
@@ -425,8 +422,8 @@ static void fn_803B376C(u8* arg0)
                             (0.382683 * (f64) scratch_f26));
         work_r4[2] = (s32) ((0.382683 * (f64) scratch_f27_2) +
                             (0.92388 * (f64) scratch_f26));
-        scratch_f11_3 = (f32) (0.707107 * (f64) (scratch_f8 + scratch_f11_2));
         scratch_f8_2 = (f32) (0.707107 * (f64) (scratch_f8 - scratch_f11_2));
+        scratch_f11_3 = (f32) (0.707107 * (f64) (scratch_f8 + scratch_f11_2));
         scratch_f30_2 = scratch_f11_3 + scratch_f28_2;
         scratch_f26_2 = -scratch_f27_3 + scratch_f8_2;
         scratch_f28_3 = -scratch_f11_3 + scratch_f28_2;
@@ -443,6 +440,7 @@ static void fn_803B376C(u8* arg0)
     }
     work_r4_2 = (s32*) arg0;
     for (work_ctr_2 = 8; work_ctr_2 != 0; work_ctr_2--) {
+        f32 scratch_f11_5;
         scratch_r31_2 = work_r4_2[0];
         scratch_r30_2 = work_r4_2[56];
         scratch_r29_2 = work_r4_2[8];
@@ -469,18 +467,16 @@ static void fn_803B376C(u8* arg0)
                                (0.382683 * (f64) scratch_f27_5));
         work_r4_2[16] = (s32) ((0.382683 * (f64) scratch_f28_5) +
                                (0.92388 * (f64) scratch_f27_5));
+        scratch_f8_4 = (f32) (0.707107 * (f64) (scratch_f8_3 - scratch_f11_5));
         scratch_f11_6 =
             (f32) (0.707107 * (f64) (scratch_f8_3 + scratch_f11_5));
-        scratch_f8_4 = (f32) (0.707107 * (f64) (scratch_f8_3 - scratch_f11_5));
-        scratch_f30_4 = scratch_f29_2 + scratch_f11_6;
+        scratch_f30_4 = scratch_f11_6 + scratch_f29_2;
         scratch_f27_6 = -scratch_f28_6 + scratch_f8_4;
         scratch_f29_3 = -scratch_f11_6 + scratch_f29_2;
         scratch_f28_7 = scratch_f28_6 + scratch_f8_4;
-        {
-            f64 scratch_f30_5 = 0.19509 * (f64) scratch_f30_4;
-            work_r4_2[56] =
-                (s32) ((0.980785 * (f64) scratch_f27_6) + scratch_f30_5);
-        }
+        work_r4_2[56] =
+            (s32) ((0.980785 * (f64) scratch_f27_6) +
+                   (0.19509 * (f64) scratch_f30_4));
         work_r4_2[40] = (s32) ((0.83147 * (f64) scratch_f28_7) +
                                (0.55557 * (f64) scratch_f29_3));
         work_r4_2[24] = (s32) ((-0.55557 * (f64) scratch_f28_7) +
@@ -489,28 +485,9 @@ static void fn_803B376C(u8* arg0)
                               (0.980785 * (f64) scratch_f30_4));
         work_r4_2 += 1;
     }
-    work_r3 = (s32*) arg0;
-    work_ctr_3 = 4;
-    do {
-        work_r3[0] = work_r3[0] >> 2;
-        work_r3[1] = work_r3[1] >> 2;
-        work_r3[2] = work_r3[2] >> 2;
-        work_r3[3] = work_r3[3] >> 2;
-        work_r3[4] = work_r3[4] >> 2;
-        work_r3[5] = work_r3[5] >> 2;
-        work_r3[6] = work_r3[6] >> 2;
-        work_r3[7] = work_r3[7] >> 2;
-        work_r3[8] = work_r3[8] >> 2;
-        work_r3[9] = work_r3[9] >> 2;
-        work_r3[10] = work_r3[10] >> 2;
-        work_r3[11] = work_r3[11] >> 2;
-        work_r3[12] = work_r3[12] >> 2;
-        work_r3[13] = work_r3[13] >> 2;
-        work_r3[14] = work_r3[14] >> 2;
-        work_r3[15] = work_r3[15] >> 2;
-        work_r3 += 16;
-        work_ctr_3 -= 1;
-    } while (work_ctr_3 != 0);
+    for (work_ctr = 0; 0x40 > work_ctr; work_ctr++) {
+        ((s32*) arg0)[work_ctr] >>= 2;
+    }
 }
 
 static inline s32 hsd_803B3CD8_dec(s32 value)
