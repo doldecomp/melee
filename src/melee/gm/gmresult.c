@@ -223,9 +223,8 @@ void fn_80174468(s32 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
                     (struct lbl_8046B6A0_24C_44C_t*) lbl_8046DBE8.x94->x44C;
                 s32 i;
                 s32 n = pair_idx + 1;
-                u8* ptr = tmp[(u8) slot].x0;
-                for (i = 0; i < 256; ptr++, i++) {
-                    if (*ptr != 0 && --n == 0) {
+                for (i = 0; i < 256; i++) {
+                    if (tmp[(u8) slot].x0[i] != 0 && --n == 0) {
                         break;
                     }
                 }
