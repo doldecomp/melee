@@ -5,11 +5,12 @@
 #include "gmvsdata.h"
 
 #include "gm/gm_1A3F.h"
-#include "gm/gm_1BA8.h"
 #include "gm/gmmovieend.h"
 #include "if/if_2FD9.h"
+
+#include "lb/forward.h"
+
 #include "melee/gm/gm_unsplit.h"
-#include "melee/gm/gmcamera.h"
 #include "melee/gm/gmmain_lib.h"
 #include "melee/gm/gmresult.h"
 #include "melee/gm/gmtoulib.h"
@@ -27,12 +28,11 @@
 
 /* 4D68C0 */ static u8 gm_804D68C0;
 /* 4D68C1 */ static u8 gm_804D68C1;
-/* 4D68C8 */ static s64 gm_804D68C8;
 
 GameScene gm_803DD9A0_Scenes[] = {
     {
-        0x00,
-        0x03,
+        0,
+        lbDvdPreload_3,
         0,
         gm_801B14A0,
         gm_801B14DC,
@@ -43,8 +43,8 @@ GameScene gm_803DD9A0_Scenes[] = {
         },
     },
     {
-        0x01,
-        0x03,
+        1,
+        lbDvdPreload_3,
         0,
         gm_801B1514,
         gm_801B154C,
@@ -55,8 +55,8 @@ GameScene gm_803DD9A0_Scenes[] = {
         },
     },
     {
-        0x02,
-        0x03,
+        2,
+        lbDvdPreload_3,
         0,
         gm_801B1588,
         gm_801B15C8,
@@ -67,8 +67,8 @@ GameScene gm_803DD9A0_Scenes[] = {
         },
     },
     {
-        0x03,
-        0x03,
+        3,
+        lbDvdPreload_3,
         0,
         gm_801B1648,
         gm_801B1688,
@@ -79,8 +79,8 @@ GameScene gm_803DD9A0_Scenes[] = {
         },
     },
     {
-        0x04,
-        0x03,
+        4,
+        lbDvdPreload_3,
         0,
         gm_801B16A8,
         gm_801B16C8,
@@ -91,8 +91,8 @@ GameScene gm_803DD9A0_Scenes[] = {
         },
     },
     {
-        0x80,
-        0x02,
+        128,
+        lbDvdPreload_2,
         0,
         gm_801BFA6C,
         NULL,
@@ -103,8 +103,8 @@ GameScene gm_803DD9A0_Scenes[] = {
         },
     },
     {
-        0x81,
-        0x02,
+        129,
+        lbDvdPreload_2,
         0,
         gm_801BFABC,
         gm_801A6254,
@@ -115,8 +115,8 @@ GameScene gm_803DD9A0_Scenes[] = {
         },
     },
     {
-        0xC0,
-        0x02,
+        192,
+        lbDvdPreload_2,
         0,
         gm_801BFCFC,
         gm_801A6308,
@@ -126,13 +126,13 @@ GameScene gm_803DD9A0_Scenes[] = {
             NULL,
         },
     },
-    { 0xFF },
+    { -1 },
 };
 
 GameScene gm_803DDA78_Scenes[] = {
     {
-        0x01,
-        0x02,
+        1,
+        lbDvdPreload_2,
         0,
         gm_801B13B8,
         NULL,
@@ -143,8 +143,8 @@ GameScene gm_803DDA78_Scenes[] = {
         },
     },
     {
-        0x03,
-        0x02,
+        3,
+        lbDvdPreload_2,
         0,
         gm_801B16A8,
         NULL,
@@ -154,13 +154,13 @@ GameScene gm_803DDA78_Scenes[] = {
             NULL,
         },
     },
-    { 0xFF },
+    { -1 },
 };
 
 GameScene gm_803DDAC0_Scenes[] = {
     {
-        0x00,
-        0x03,
+        0,
+        lbDvdPreload_3,
         0,
         gm_801B1724,
         NULL,
@@ -171,8 +171,8 @@ GameScene gm_803DDAC0_Scenes[] = {
         },
     },
     {
-        0x01,
-        0x03,
+        1,
+        lbDvdPreload_3,
         0,
         NULL,
         NULL,
@@ -183,8 +183,8 @@ GameScene gm_803DDAC0_Scenes[] = {
         },
     },
     {
-        0x02,
-        0x03,
+        2,
+        lbDvdPreload_3,
         0,
         NULL,
         NULL,
@@ -195,20 +195,20 @@ GameScene gm_803DDAC0_Scenes[] = {
         },
     },
     {
-        0x03,
-        0x03,
+        3,
+        lbDvdPreload_3,
         0,
         gm_801B174C,
         gm_801B1788,
         {
             GS_SSS,
-            gm_8048BD20,
-            gm_8048BD20,
+            &gm_8048BD20,
+            &gm_8048BD20,
         },
     },
     {
-        0x04,
-        0x03,
+        4,
+        lbDvdPreload_3,
         0,
         gm_801B1810,
         gm_801B1834,
@@ -219,20 +219,20 @@ GameScene gm_803DDAC0_Scenes[] = {
         },
     },
     {
-        0x05,
-        0x03,
+        5,
+        lbDvdPreload_3,
         0,
         gm_801B18D4,
         gm_801B1A2C,
         {
             GS_SUDDEN_DEATH,
             &gm_804876D8,
-            gm_8048BE68,
+            &gm_8048BE68,
         },
     },
     {
-        0x06,
-        0x03,
+        6,
+        lbDvdPreload_3,
         0,
         gm_801B1A84,
         gm_801B1AD4,
@@ -242,13 +242,13 @@ GameScene gm_803DDAC0_Scenes[] = {
             NULL,
         },
     },
-    { 0xFF },
+    { -1 },
 };
 
 GameScene gm_803DDB80_Scenes[] = {
     {
-        0x00,
-        0x03,
+        0,
+        lbDvdPreload_3,
         0,
         gm_801B1B74,
         gm_801B1C24,
@@ -259,8 +259,8 @@ GameScene gm_803DDB80_Scenes[] = {
         },
     },
     {
-        0x01,
-        0x03,
+        1,
+        lbDvdPreload_3,
         0,
         gm_801B1EB8,
         gm_801B1EEC,
@@ -271,8 +271,8 @@ GameScene gm_803DDB80_Scenes[] = {
         },
     },
     {
-        0x02,
-        0x03,
+        2,
+        lbDvdPreload_3,
         0,
         gm_801B1F70,
         gm_801B2204,
@@ -282,59 +282,7 @@ GameScene gm_803DDB80_Scenes[] = {
             gm_8048E5F8,
         },
     },
-    { 0xFF },
-};
-
-GameScene gm_CameraModeScenes[] = {
-    {
-        0x00,
-        0x03,
-        0,
-        gm_801B24B4,
-        gm_801B2510,
-        {
-            GS_CAMERA_VS,
-            &gm_804D68C8,
-            &gm_804D68C8,
-        },
-    },
-    {
-        0x01,
-        0x03,
-        0,
-        gm_801B254C,
-        gm_801B25D4,
-        {
-            GS_CSS,
-            &gm_804807B0,
-            &gm_804807B0,
-        },
-    },
-    {
-        0x02,
-        0x03,
-        0,
-        gm_801B26AC,
-        gm_801B2704,
-        {
-            GS_SSS,
-            &gm_80480668,
-            &gm_80480668,
-        },
-    },
-    {
-        0x03,
-        0x03,
-        0,
-        gm_PrepCameraModeVSScene,
-        gm_801B2AF8,
-        {
-            GS_VS,
-            &gm_80480530,
-            &gm_80479D98,
-        },
-    },
-    { 0xFF },
+    { -1 },
 };
 
 void gm_801B14A0(GameScene* arg0)
@@ -615,7 +563,7 @@ void gm_801B1C24(GameScene* arg0)
         for (k = 0; k < 4; k++) {
             mask |= lbAudioAx_80026E84(vs->data.players[k].c_kind);
         }
-        lbAudioAx_80026F2C(0x14);
+        lbAudioAx_80026F2C(20);
         lbAudioAx_8002702C(4, mask);
         lbAudioAx_80027168();
     }
@@ -713,7 +661,7 @@ void gm_801B2204(GameScene* arg0)
                     temp_r3->match_end.player_standings[0].character_kind));
     gm_80173BC4(temp_r3->match_end.player_standings[0].character_kind);
     gm_80173EEC();
-    if (!gm_80173754(0x1C, gm_804D68C0)) {
+    if (!gm_80173754(28, gm_804D68C0)) {
         gm_SetPendingSceneIndex(0);
     }
     sfxForward();
@@ -744,171 +692,8 @@ void gm_801B23C4_OnLoad(void)
 
 void gm_801B23F0(void)
 {
-    size_t size = GXGetTexBufferSize(0x280, 0x1E0, 4, 0, 0);
-    lbDvd_80017740(0, 0x7D6, 4, 4, OSRoundUp32B(size), 0, 1, 0x20, 0);
-    lbDvd_80017740(0, 0x7D7, 4, 4, lbSnap_8001E204(), 0, 1, 0x20, 0);
-    lbDvd_80017740(0, 0x7D8, 4, 4, lbSnap_8001E210(), 0, 1, 0x20, 0);
-}
-
-void gm_801B24B4(GameScene* arg0)
-{
-    Unk80433380_48* temp_r31_2;
-    struct GameCache* temp_r31;
-
-    temp_r31 = &lbDvd_GetPreloadCacheScene()->game_cache;
-    lbDvd_800174BC();
-    temp_r31->mode_id = GM_CAMERA_MODE;
-    lbDvd_80018254();
-    lb_8001C550();
-    temp_r31_2 = lbDvd_GetPreloadedArchive(0x7D8);
-    lbSnap_8001E218(lbDvd_GetPreloadedArchive(0x7D7), temp_r31_2);
-}
-
-void gm_801B2510(GameScene* arg0)
-{
-    int* data = gm_GetGameSceneLeaveData(arg0);
-    int temp_r0 = *data;
-    if (temp_r0 == 1 || temp_r0 == 2) {
-        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
-    }
-}
-
-void gm_801B254C(GameScene* arg0)
-{
-    VsModeData* temp_r31;
-    u8* temp_r3;
-    CSSData* temp_r30;
-    struct GameCache* temp_r30_2;
-
-    temp_r31 = &gmMainLib_804D3EE0->unk_950;
-    temp_r30 = gm_GetGameSceneLoadData(arg0);
-    temp_r3 = gm_801A5250();
-
-    temp_r30->match_type = 1;
-    temp_r30->ko_star_counts = temp_r3;
-
-    temp_r30->data = *temp_r31;
-
-    temp_r30_2 = &lbDvd_GetPreloadCacheScene()->game_cache;
-    lbDvd_800174BC();
-    temp_r30_2->mode_id = GM_CAMERA_MODE;
-    lbDvd_80018254();
-}
-
-void gm_801B25D4(GameScene* arg0)
-{
-    VsModeData* temp_r31;
-    u64 temp_ret;
-    CSSData* temp_r3;
-    int i;
-
-    temp_r31 = &gmMainLib_804D3EE0->unk_950;
-    temp_r3 = gm_GetGameSceneLeaveData(arg0);
-    if (temp_r3->pending_scene_change == 2) {
-        gm_ChangeGameModeAfterCurrentScene(GM_MENU);
-        return;
-    }
-
-    *temp_r31 = temp_r3->data;
-
-    temp_ret = 0;
-    for (i = 0; i < 6; i++) {
-        temp_ret |= lbAudioAx_80026E84(temp_r3->data.data.players[i].c_kind);
-    }
-
-    lbAudioAx_80026F2C(0x14);
-    lbAudioAx_8002702C(4, temp_ret);
-    lbAudioAx_80027168();
-}
-
-void gm_801B26AC(GameScene* arg0)
-{
-    SSSData* sss;
-    VsModeData* vs;
-    vs = &gmMainLib_804D3EE0->unk_950;
-    sss = gm_GetGameSceneLoadData(arg0);
-    sss->data = *vs;
-    gm_80167FC4(sss);
-}
-
-void gm_801B2704(GameScene* arg0)
-{
-    VsModeData* temp_r31;
-    SSSData* var_r3;
-
-    temp_r31 = &gmMainLib_804D3EE0->unk_950;
-    var_r3 = gm_GetGameSceneLeaveData(arg0);
-    if (var_r3->start_game != 0) {
-        *temp_r31 = var_r3->data;
-        lbAudioAx_80026F2C(0x18);
-        lbAudioAx_8002702C(8, lbAudioAx_80026EBC(temp_r31->data.rules.xE));
-        lbAudioAx_80027168();
-        return;
-    }
-    gm_SetPendingSceneIndex(1);
-}
-
-void gm_PrepCameraModeVSScene(GameScene* arg0)
-{
-    VsModeData* vs;
-    StartMeleeData* start;
-    int i;
-
-    vs = &gmMainLib_804D3EE0->unk_950;
-    start = gm_GetGameSceneLoadData(arg0);
-    gm_80167BC8(vs);
-
-    start->rules = vs->data.rules;
-    start->rules.x0_0 = 0;
-
-    start->rules.x0_6 = vs->data.rules.x4_4 = false;
-
-    start->rules.x5_0 = true;
-    start->rules.x1_2 = true;
-    start->rules.x1_3 = true;
-    start->rules.x2_5 = false;
-    start->rules.x2_6 = false;
-    start->rules.x3_1 = false;
-    start->rules.x4_0 = false;
-
-    start->rules.on_unpause_override = gm_80165268;
-    start->rules.on_pause_override = gm_80165268;
-    start->rules.check_for_pauser_override = gm_CameraModeVSGetPauser;
-    start->rules.x44 = gmCamera_801A31FC;
-    start->rules.x48 = gmCamera_801A3098;
-    start->rules.x4C = gmCamera_801A30E4;
-
-    start->rules.xD = 1;
-    start->rules.disable_pausing = false;
-
-    for (i = 0; i < 6; i++) {
-        start->players[i] = vs->data.players[i];
-        start->players[i].xD_b3 = true;
-    }
-
-    gm_801B0348(start);
-    gm_8016F088(start);
-    gm_80168FC4();
-    lb_8001C550();
-    lbSnap_8001E218(lbDvd_GetPreloadedArchive(0x7D7),
-                    lbDvd_GetPreloadedArchive(0x7D8));
-}
-
-void gm_801B2AF8(GameScene* arg0)
-{
-    VsModeData* temp_r30;
-    u8* temp_r29;
-
-    temp_r30 = &gmMainLib_804D3EE0->unk_950;
-    temp_r29 = gm_801A5250();
-    gm_80168638(&gm_80479D98.match_end);
-    gm_80168710(&gm_80479D98.match_end, temp_r30);
-    gm_8016247C(gm_801688AC(&gm_80479D98.match_end));
-    gm_801A5258(temp_r29, &gm_80479D98.match_end);
-    gm_SetPendingSceneIndex(1);
-}
-
-void gm_801B2B7C_OnInit(void)
-{
-    gm_80167B50(&gmMainLib_804D3EE0->unk_950);
+    size_t size = GXGetTexBufferSize(640, 480, 4, 0, 0);
+    lbDvd_80017740(0, 2006, 4, 4, OSRoundUp32B(size), 0, 1, 32, 0);
+    lbDvd_80017740(0, 2007, 4, 4, lbSnap_8001E204(), 0, 1, 32, 0);
+    lbDvd_80017740(0, 2008, 4, 4, lbSnap_8001E210(), 0, 1, 32, 0);
 }

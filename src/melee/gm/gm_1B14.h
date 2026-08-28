@@ -32,16 +32,8 @@
 /* 1B2298 */ void gm_801B2298_OnInit(void);
 /* 1B23C4 */ void gm_801B23C4_OnLoad(void);
 /* 1B23F0 */ void gm_801B23F0(void);
-/* 1B24B4 */ void gm_801B24B4(GameScene*);
-/* 1B2510 */ void gm_801B2510(GameScene*);
-/* 1B254C */ void gm_801B254C(GameScene*);
-/* 1B25D4 */ void gm_801B25D4(GameScene*);
-/* 1B26AC */ void gm_801B26AC(GameScene*);
-/* 1B2704 */ void gm_801B2704(GameScene*);
-/* 1B2790 */ void gm_PrepCameraModeVSScene(GameScene*);
-/* 1B2AF8 */ void gm_801B2AF8(GameScene*);
-/* 1B2B7C */ void gm_801B2B7C_OnInit(void);
-/* 3DD9A0 */ extern GameScene gm_803DD9A0_Scenes[9];
+/* 3DD9A0 */ extern GameScene gm_803DD9A0_Scenes[];
+/* 3DDA78 */ extern GameScene gm_803DDA78_Scenes[];
 /* 473814 */ extern struct TrainingMenuData gm_80473814;
 
 #endif
