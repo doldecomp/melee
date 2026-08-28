@@ -2534,7 +2534,7 @@ melee/gm/gm_1AED.c:
 melee/gm/gm_1B03.c:
 	.text       start:0x801B0348 end:0x801B0FB8
 	.data       start:0x803DD6A0 end:0x803DD888
-	.bss        start:0x80480DC8 end:0x80490880
+	.bss        start:0x80480DC8 end:0x804876D8
 	.sbss       start:0x804D6878 end:0x804D68B0
 
 melee/gm/gmmenumode.c:
@@ -2550,10 +2550,12 @@ melee/gm/gmvsmode.c:
 melee/gm/gmtoumode.c:
 	.text       start:0x801B1724 end:0x801B1B74
 	.data       start:0x803DDAC0 end:0x803DDB80
+	.bss        start:0x804876D8 end:0x8048E230
 
 melee/gm/gmtrainingmode.c:
 	.text       start:0x801B1B74 end:0x801B23F0
 	.data       start:0x803DDB80 end:0x803DDBE0
+	.bss        start:0x8048E230 end:0x80490880
 	.sbss       start:0x804D68C0 end:0x804D68C8
 
 melee/gm/gmcameramode.c:

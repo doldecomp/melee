@@ -13,7 +13,6 @@
 #include "melee/lb/lbcardgame.h"
 #include "melee/lb/lbcardnew.h"
 #include "melee/lb/lbdvd.h"
-#include "melee/lb/lbsnap.h"
 #include "melee/lb/lbtime.h"
 #include "melee/lb/types.h"
 #include "melee/mn/types.h"
@@ -28,6 +27,10 @@
 /* 1B2204 */ static void gm_801B2204(GameScene*);
 /* 4D68C0 */ static u8 gm_804D68C0;
 /* 4D68C1 */ static u8 gm_804D68C1;
+/* 48E230 */ static CSSData css_data;
+/* 48E378 */ static SSSData sss_data;
+/* 48E4C0 */ static StartMeleeData training_enter_data;
+/* 48E5F8 */ static UNK_T training_exit_data[0x2288 / 4];
 
 GameScene gm_803DDB80_Scenes[] = {
     {
@@ -38,8 +41,8 @@ GameScene gm_803DDB80_Scenes[] = {
         gm_801B1C24,
         {
             GS_CSS,
-            &gm_8048E230,
-            &gm_8048E230,
+            &css_data,
+            &css_data,
         },
     },
     {
@@ -50,8 +53,8 @@ GameScene gm_803DDB80_Scenes[] = {
         gm_801B1EEC,
         {
             GS_SSS,
-            &gm_8048E378,
-            &gm_8048E378,
+            &sss_data,
+            &sss_data,
         },
     },
     {
@@ -62,8 +65,8 @@ GameScene gm_803DDB80_Scenes[] = {
         gm_801B2204,
         {
             GS_TRAINING_MODE,
-            &gm_8048E4C0,
-            gm_8048E5F8,
+            &training_enter_data,
+            &training_exit_data,
         },
     },
     { -1 },
@@ -288,12 +291,4 @@ void gm_801B23C4_OnLoad(void)
 {
     gm_804D68C0 = gm_801677F0();
     gm_804D68C1 = 0;
-}
-
-void gm_801B23F0(void)
-{
-    size_t size = GXGetTexBufferSize(640, 480, 4, 0, 0);
-    lbDvd_80017740(0, 2006, 4, 4, OSRoundUp32B(size), 0, 1, 32, 0);
-    lbDvd_80017740(0, 2007, 4, 4, lbSnap_8001E204(), 0, 1, 32, 0);
-    lbDvd_80017740(0, 2008, 4, 4, lbSnap_8001E210(), 0, 1, 32, 0);
 }

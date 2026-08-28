@@ -19,6 +19,8 @@
 #include "melee/lb/types.h"
 #include "melee/mn/types.h"
 
+#include <dolphin/os.h>
+
 /* 1B24B4 */ static void gm_801B24B4(GameScene*);
 /* 1B2510 */ static void gm_801B2510(GameScene*);
 /* 1B254C */ static void gm_801B254C(GameScene*);
@@ -80,6 +82,14 @@ GameScene gm_CameraModeScenes[] = {
     },
     { -1 },
 };
+
+void gm_801B23F0(void)
+{
+    size_t size = GXGetTexBufferSize(640, 480, 4, 0, 0);
+    lbDvd_80017740(0, 2006, 4, 4, OSRoundUp32B(size), 0, 1, 32, 0);
+    lbDvd_80017740(0, 2007, 4, 4, lbSnap_8001E204(), 0, 1, 32, 0);
+    lbDvd_80017740(0, 2008, 4, 4, lbSnap_8001E210(), 0, 1, 32, 0);
+}
 
 void gm_801B24B4(GameScene* arg0)
 {
