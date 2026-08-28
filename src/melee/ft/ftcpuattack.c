@@ -587,13 +587,12 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
 {
     Item* x50 = arg1;
     ftCo_AttackEntry sp34[32];
-    ItemAttr* attrs;
     ftCo_AttackEntry* list = arg2;
     struct Fighter_x1A88_t* cpu = &fp->x1A88;
     s32 count;
     s32 i;
     s32 j;
-    bool found;
+    f32 fpVy;
     bool nearzero;
     f32 r;
     f32 sum;
@@ -602,42 +601,41 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
     f32 fpPredY;
     f32 relPredY;
     f32 v;
-    f32 sq;
+    f32 yBound;
     f32 diry;
     f32 acc;
     f32 fpX;
     f32 fpY;
     f32 fpVx;
-    f32 fpVy;
+    bool found;
     f32 fpGrav;
     f32 x50X;
     f32 x50Y;
     f32 x50Vy;
     f32 x50Vx;
     f32 x50TermNeg;
-    f32 yBound;
+    f32 sq;
     f32 x50Grav;
     f32 sizeHalf;
 
     if (list == NULL) {
         return 0;
     }
-    attrs = x50->xCC_item_attr;
     count = 0;
     fpTermNeg = -fp->co_attrs.terminal_velocity;
     fpY = fp->cur_pos.y;
     x50Vy = x50->x40_vel.y;
-    x50TermNeg = -attrs->x14_fall_speed_max;
+    x50TermNeg = -x50->xCC_item_attr->x14_fall_speed_max;
     sizeHalf = (f32) (0.5 * (x50->xC1C.right + x50->xC1C.left));
-    yBound = x50->xC1C.top + x50->xC1C.bottom;
+    fpVy = fp->pos_delta.y;
     fpX = fp->cur_pos.x;
     fpVx = fp->pos_delta.x;
-    fpVy = fp->pos_delta.y;
+    yBound = x50->xC1C.top + x50->xC1C.bottom;
     fpGrav = fp->co_attrs.gravity;
     x50X = x50->pos.x;
     x50Y = x50->pos.y;
     x50Vx = x50->x40_vel.x;
-    x50Grav = attrs->x10_fall_speed;
+    x50Grav = x50->xCC_item_attr->x10_fall_speed;
     while (list->cmd) {
         f32 t;
         f32 relx;
@@ -674,20 +672,20 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
                 v = -(fpTermNeg - fpY) / fpGrav;
             }
             if (v <= 0.0f) {
-                fpPredY = fpVy * t + fpY;
+                fpPredY = t * fpVy + fpY;
             } else if (t < v) {
                 sq = sqrtf(t);
-                fpPredY = (f32) ((f64) fpY + ((f64) (fpVy * t) -
+                fpPredY = (f32) ((f64) fpY + ((f64) (t * fpVy) -
                                               0.5 * (f64) (fpGrav * sq)));
             } else {
                 sq = sqrtf(v);
                 fpPredY =
                     (f32) ((f64) fpY +
                            ((f64) (fpTermNeg * (t - v)) +
-                            ((f64) (fpVy * t) - 0.5 * (f64) (fpGrav * sq))));
+                            ((f64) (t * fpVy) - 0.5 * (f64) (fpGrav * sq))));
             }
         } else {
-            fpPredY = fpVy * t + fpY;
+            fpPredY = t * fpVy + fpY;
         }
         if (x50->ground_or_air == GA_Air) {
             if (x50Grav < 0.00001f && x50Grav > -0.00001f) {
