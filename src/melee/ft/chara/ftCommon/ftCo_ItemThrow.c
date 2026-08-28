@@ -516,9 +516,9 @@ void ftCo_ItemThrow_Anim(Fighter_GObj* gobj)
     }
 }
 
-static inline float getItemThrowFsm(Fighter* fp)
+static inline float getHeavyThrowVelocityMultiplier(ftCo_DatAttrs* attrs)
 {
-    return -fp->cmd_timer / fp->frame_speed_mul;
+    return attrs->heavy_throw_velocity_multiplier;
 }
 
 void ftCo_80095EFC(Fighter_GObj* gobj)
@@ -545,12 +545,12 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                 {
                     ftCo_ItemThrowAttrs* throw_speed_arr =
                         (ftCo_ItemThrowAttrs*) Fighter_804D6550;
-                    float fsm = getItemThrowFsm(fp);
+                    float fsm = -fp->cmd_timer / fp->frame_speed_mul;
                     float base_throw_speed =
                         throw_speed_arr[fp->motion_id - ftCo_MS_LightThrowF]
                             .x8;
                     float velocity_multiplier =
-                        co_attrs->heavy_throw_velocity_multiplier;
+                        getHeavyThrowVelocityMultiplier(co_attrs);
                     float throw_speed;
                     base_throw_speed = velocity_multiplier * base_throw_speed;
                     throw_scale *= base_throw_speed;
