@@ -365,6 +365,16 @@ static inline struct lbl_8046B488_t* fn_80169C54_inline(void)
     return fn_8016AE60();
 }
 
+static inline void
+fn_80169C54_apply(s32 p, s32 count, s32* buf)
+{
+    s32 i;
+
+    for (i = 0; i < count; i++) {
+        Player_80031DA8(p, buf[i]);
+    }
+}
+
 void fn_80169C54(s8 arg0, s8 arg1)
 {
     struct lbl_8046B488_t* st;
@@ -414,15 +424,11 @@ void fn_80169C54(s8 arg0, s8 arg1)
             if (0x21 != ch && ch != 4) {
                 p = Player_800325C8((CharacterKind) ch, 0);
                 if ((p != -1) && (p != 4)) {
-                    for (k = 0; k < n; k++) {
-                        Player_80031DA8(p, buf[k]);
-                    }
+                    fn_80169C54_apply(p, n, buf);
                 }
                 p = Player_800325C8((CharacterKind) ch, 1);
                 if ((p != -1) && (p != 4)) {
-                    for (k = 0; k < n; k++) {
-                        Player_80031DA8(p, buf[k]);
-                    }
+                    fn_80169C54_apply(p, n, buf);
                 }
             }
             j++;
