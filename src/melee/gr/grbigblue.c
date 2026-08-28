@@ -3064,6 +3064,23 @@ typedef union grBb_CarGround {
     u8 bytes[0x1D4];
 } grBb_CarGround;
 
+static inline f32 grBigBlue_801EC6C0_inline(s32 index)
+{
+    grBb_YakumonoParam* params;
+    f32 scale;
+    f32 result;
+
+    params = yakumono_param;
+    scale = Ground_801C0498();
+    result = (f32) params->x1C * scale;
+    scale = result / (f32) (params->x18 + 1);
+    result = (f32) (index + 1) * scale;
+
+    scale = Ground_801C0498();
+    params = yakumono_param;
+    return result + 0.5F * -((f32) params->x1C * scale);
+}
+
 /// @todo Needs register allocation fixes.
 #ifdef MUST_MATCH
 #pragma push
@@ -3126,15 +3143,7 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
             i = 0;
             ((grBb_ByteBits*) (car + 0xD4))->b6 = i;
 
-            params = yakumono_param;
-            scale = Ground_801C0498();
-            lerp = (f32) params->x1C * scale;
-            scale = lerp / (f32) (params->x18 + 1);
-            lerp = (f32) (k + 1) * scale;
-
-            scale = Ground_801C0498();
-            params = yakumono_param;
-            *(f32*) (car + 0xE0) = lerp + 0.5F * -((f32) params->x1C * scale);
+            *(f32*) (car + 0xE0) = grBigBlue_801EC6C0_inline(k);
 
             scale = Ground_801C0498();
             params = yakumono_param;
@@ -3146,15 +3155,7 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
 
             *(f32*) (car + 0xE8) = 0.0F;
 
-            params = yakumono_param;
-            scale = Ground_801C0498();
-            lerp = (f32) params->x1C * scale;
-            scale = lerp / (f32) (params->x18 + 1);
-            lerp = (f32) (k + 1) * scale;
-
-            scale = Ground_801C0498();
-            params = yakumono_param;
-            *(f32*) (car + 0xD8) = lerp + 0.5F * -((f32) params->x1C * scale);
+            *(f32*) (car + 0xD8) = grBigBlue_801EC6C0_inline(k);
 
             *(f32*) (car + 0xDC) = 0.0F;
 
