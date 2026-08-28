@@ -51,12 +51,6 @@ struct IfStockDataOffset {
     struct IfStockData data;
 };
 
-static inline HSD_JObj* ifStock_802F7EFC_inline(int index, int player,
-                                                struct ifStock_804A1378* stock)
-{
-    return stock->player[player].x4[index];
-}
-
 int ifStock_802F7EFC(int arg0, int arg1)
 {
     Vec3 pos;
@@ -103,17 +97,17 @@ int ifStock_802F7EFC(int arg0, int arg1)
     HSD_JObjGetTranslation(stock->player[arg1].x4[0], &pos);
     HSD_JObjReqAnimAll(stock->player[arg1].x4[j], 0.0f);
     HSD_JObjAnimAll(stock->player[arg1].x4[j]);
-    HSD_JObjGetTranslation(ifStock_802F7EFC_inline(j, arg1, stock),
+    HSD_JObjGetTranslation(stock->player[arg1].x4[j],
                            &arg1_data->anim[slot - 5].start);
     arg1_data->anim[slot - 5].start.x += pos.x;
     arg1_data->anim[slot - 5].start.y += pos.y;
     arg1_data->anim[slot - 5].start.z += pos.z;
-    i = 0;
-    if (Player_GetStocks(arg0) < 5 && Player_GetStocks(arg0) > 0) {
-        i = 1;
-    }
+    i = Player_GetStocks(arg0) < 5 && Player_GetStocks(arg0) > 0;
     j = i != 0 ? Player_GetStocks(arg0) : 0;
-    HSD_JObjGetTranslation(stock->player[arg0].x4[0], &pos);
+    {
+        HSD_JObj* jobj = stock->player[arg0].x4[0];
+        HSD_JObjGetTranslation(jobj, &pos);
+    }
     HSD_JObjReqAnimAll(stock->player[arg0].x4[j], 0.0f);
     HSD_JObjAnimAll(stock->player[arg0].x4[j]);
     HSD_JObjGetTranslation(stock->player[arg0].x4[1],
