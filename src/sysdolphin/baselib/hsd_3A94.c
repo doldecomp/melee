@@ -3499,9 +3499,9 @@ static inline s32 fn_803AF3F0_queue_write(CardState* state, s32 block,
                                           s32 size, s32 file_id)
 {
     CardCmd cmd;
+    s32 ofs = fn_803ACBE8(state, block);
     CardCmd init_cmd;
     s32 result;
-    s32 ofs = fn_803ACBE8(state, block);
 
     if (block == 0) {
         s32 zero = 0;
@@ -3610,7 +3610,7 @@ s32 fn_803AF3F0(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 total_blocks;
     u8* data;
     s32* vmap;
-    PAD_STACK(60);
+    PAD_STACK(24);
 
     seq_match = 0;
     if (arg3 == 0) {
@@ -3777,25 +3777,8 @@ after_verify:
     if (secondary_count > file_blocks) {
         for (i = file_blocks; i < secondary_count; i++) {
             if (arg3 != 0) {
-                s32 block = block_map[1][i];
-                s32 cmd_result;
-                s32 ofs = fn_803ACBE8(state, block);
-                if (block == 0) {
-                    cmd_result = -257;
-                } else {
-                    CardCmd cmd;
-                    s32 zero = 0;
-                    cmd.type = 1;
-                    cmd.state = state;
-                    cmd.xC = block;
-                    cmd.x10 = 0xFFFF;
-                    cmd.x14 = zero;
-                    cmd.x18 = (void*) zero;
-                    cmd.x20 = zero;
-                    cmd.x1C = ofs;
-                    cmd.x8 = arg1;
-                    cmd_result = fn_803AF3F0_queue_cmd(&cmd);
-                }
+                s32 cmd_result = fn_803AF3F0_queue_write(
+                    state, block_map[1][i], 0xFFFF, 0, NULL, 0, arg1);
                 if (cmd_result < 0) {
                     fn_803AF3F0_rewind(entries);
                     return cmd_result;
