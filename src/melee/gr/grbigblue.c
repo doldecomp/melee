@@ -653,9 +653,8 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
     s32 i;
     Vec3 pos;
     Ground* gp = GET_GROUND(gobj);
-    i = 0;
 
-    do {
+    for (i = 0; i < 3; i++) {
         s8 idx = gp->u.bigblue.data[i].index;
         HSD_JObj* jobj = gp->u.bigblue.xD4[idx];
 
@@ -1226,8 +1225,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
             break;
         }
         }
-        i++;
-    } while (i < 3);
+    }
 
     Ground_801C2FE0(gobj);
 }
