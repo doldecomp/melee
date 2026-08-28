@@ -3637,6 +3637,7 @@ static inline void fn_803AF3F0_calc_file_blocks(s32 file_idx, CardState* state,
     *total_blocks = fn_803AC7DC(state);
 }
 
+/// @todo Only the write loop's sector/offset registers differ.
 s32 fn_803AF3F0(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
     CardBufEntry* entries = (CardBufEntry*) hsd_804D1138;
