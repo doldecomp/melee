@@ -9,6 +9,7 @@ float __fnmsubs(float, float, float);
 double __fabs(double);
 float __fabsf(float);
 double __frsqrte(double);
+int __rlwinm(int, int, int, int);
 
 void* __memcpy(void* dst, const void* src, unsigned long n);
 

@@ -3,6 +3,9 @@
 #include "gm_1B03.static.h"
 
 #include "gm/gm_1A3F.h"
+
+#include "lb/forward.h"
+
 #include "melee/gm/gm_unsplit.h"
 #include "melee/gm/gmmain_lib.h"
 #include "melee/gm/types.h"
@@ -25,7 +28,7 @@
 GameScene gm_803DD8B8_Scenes[] = {
     {
         0,
-        2,
+        lbDvdPreload_2,
         0,
         gm_801B0FF8,
         gm_801B138C,
@@ -38,7 +41,7 @@ GameScene gm_803DD8B8_Scenes[] = {
     { -1 },
 };
 
-void gm_801B0FF8(GameScene* scene) ///< Return to menu?
+void gm_801B0FF8(GameScene* scene)
 {
     GameRules* rules;
     MenuEnterData* data;
@@ -215,39 +218,4 @@ void gm_801B138C(GameScene* arg0)
 
     gm_SetPendingGameMode(data->pending_mode);
     gm_SetNewGameModePending();
-}
-
-void gm_801B13B8(GameScene* arg0)
-{
-    StartMeleeData* temp_r28 = gm_GetGameSceneLoadData(arg0);
-    int i;
-
-    gm_80167A64(&temp_r28->rules);
-    temp_r28->rules.xE = 0x20;
-    temp_r28->rules.xB = -1;
-    temp_r28->rules.xC = -1;
-    temp_r28->rules.x0_0 = 0;
-
-    for (i = 0; i < 6; i++) {
-        gm_8016795C(&temp_r28->players[i]);
-        temp_r28->players[i].stocks = 0;
-        temp_r28->players[i].xE = 4;
-    }
-
-    temp_r28->players[0].c_kind = CKIND_LINK;
-    temp_r28->players[1].c_kind = CKIND_MARIO;
-    temp_r28->players[2].c_kind = CKIND_LINK;
-    temp_r28->players[3].c_kind = CKIND_LINK;
-
-    temp_r28->players[0].slot_type = Gm_PKind_Human;
-    temp_r28->players[1].slot_type = Gm_PKind_Human;
-    temp_r28->players[2].slot_type = Gm_PKind_NA;
-    temp_r28->players[3].slot_type = Gm_PKind_NA;
-
-    temp_r28->players[0].xC_b0 = false;
-    temp_r28->players[1].xC_b0 = false;
-    temp_r28->players[2].xC_b0 = false;
-    temp_r28->players[3].xC_b0 = false;
-
-    gm_80168FC4();
 }

@@ -3,7 +3,6 @@
 #include "gm_1A33.h"
 #include "gm_1B03.h"
 #include "gm_1B0FF.h"
-#include "gm_1B14.h"
 #include "gm_unsplit.h"
 #include "gmadventure.h"
 #include "gmallstar.h"
@@ -34,6 +33,7 @@
 #include "gmtoumode.h"
 #include "gmtrainingmode.h"
 #include "gmvsmelee.h"
+#include "gmvsmode.h"
 #include "types.h"
 
 #include "gm/gm_1B0FB.h"

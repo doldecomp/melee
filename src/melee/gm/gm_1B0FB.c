@@ -29,7 +29,7 @@ GameScene gm_803DD888_Scenes[] = {
         NULL,
         {
             GS_DEBUG_MENU,
-            gm_804D68B0,
+            &gm_804D68B0,
             NULL,
         },
     },

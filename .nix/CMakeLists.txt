@@ -524,7 +524,7 @@ set(SOURCES
     src/melee/gm/gm_1B03.c
     src/melee/gm/gm_1B0FB.c
     src/melee/gm/gm_1B0FF.c
-    src/melee/gm/gm_1B14.c
+    src/melee/gm/gmvsmode.c
     src/melee/gm/gm_1BA8.c
     src/melee/gm/gmboot.c
     src/melee/gm/gm_1BFA.c
