@@ -456,13 +456,18 @@ static inline TySortElem* tyDisplay_GetGridSortElem(size_t offset,
     return (TySortElem*) ((size_t) grid + offset + 0x14);
 }
 
+static inline s32 _tyDisplay_80319540_get_count(TyDspConfig* cfg)
+{
+    return (cfg->x08 / 3) * 2;
+}
+
 static inline void _tyDisplay_80319540_sort(TyDspConfig* cfg, TyDspGrid* grid)
 {
     s32 n2;
     _tyDisplay_80318B1C(cfg->x08);
 
     if (cfg->x08 > 1) {
-        n2 = (cfg->x08 / 3) * 2;
+        n2 = _tyDisplay_80319540_get_count(cfg);
         if (n2 > 0) {
             struct {
                 u8 pad0[4];
@@ -811,7 +816,6 @@ void _tyDisplay_80319540(s32 arg0)
     {
         for (i = 0; i < cfg->x08; i++) {
             HSD_GObj* gobj;
-            (void) &_tyDisplay_804D6F10[i];
             cfg->x78 = _tyDisplay_8031BC54(grid->sort[i].key);
             gobj = cfg->x78;
             if (gobj != NULL) {
