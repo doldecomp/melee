@@ -3210,8 +3210,8 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     }
 
     if (verify_failed == 0) {
-        s32 pass;
         s32* map;
+        s32 pass;
 
         pass = 0;
         map = block_map_ptr;
