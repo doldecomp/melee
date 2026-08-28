@@ -855,17 +855,10 @@ void grKongo_801D6AFC(void)
 
     {
         f32* p = values;
-        u32 count = 3;
 
-        do {
-            p[0] = 0.0f;
-            p[1] = 0.0f;
-            p[2] = 0.0f;
-            p[3] = 0.0f;
-            p[4] = 0.0f;
-            p += 5;
-            count--;
-        } while (count != 0);
+        for (i = 15; i > 0; i--) {
+            *p++ = 0.0f;
+        }
     }
 
     for (i = 0; i < 15; i++) {
@@ -875,18 +868,12 @@ void grKongo_801D6AFC(void)
 
     {
         _struct_grKg_803E188C_0x18* entry = grKg_803E188C;
-        u32 count = 3;
 
-        do {
-            entry[0].unk10 = values[0] + entry[0].unk10;
-            entry[1].unk10 = values[1] + entry[1].unk10;
-            entry[2].unk10 = values[2] + entry[2].unk10;
-            entry[3].unk10 = values[3] + entry[3].unk10;
-            entry[4].unk10 = entry[4].unk10 + values[4];
-            values += 5;
-            entry += 5;
-            count--;
-        } while (count != 0);
+        for (i = 15; i > 0; i--) {
+            entry->unk10 = *values + entry->unk10;
+            values++;
+            entry++;
+        }
     }
 
     for (i = 0; i < 15; i++) {
@@ -904,17 +891,10 @@ void grKongo_801D6AFC(void)
 
     {
         f32* p = sp8;
-        u32 count = 3;
 
-        do {
-            p[0] = 0.0f;
-            p[1] = 0.0f;
-            p[2] = 0.0f;
-            p[3] = 0.0f;
-            p[4] = 0.0f;
-            p += 5;
-            count--;
-        } while (count != 0);
+        for (i = 15; i > 0; i--) {
+            *p++ = 0.0f;
+        }
     }
 
     for (i = 0; i < 15; i++) {
