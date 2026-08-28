@@ -3694,7 +3694,7 @@ s32 fn_803AF3F0(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
             if (arg1x >= 0) {
                 s32 seq;
                 s32 logical = arg1x - blocks_before;
-                if (logical >= 0 && logical < file_blocks) {
+                if (0 <= logical && logical < file_blocks) {
                     seq = state->x270[i];
                     if (fn_803ACB74(current_seq, seq) < 0) {
                         current_seq = seq;
@@ -3703,7 +3703,7 @@ s32 fn_803AF3F0(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                 }
             } else {
                 s32 logical = -(arg1x + blocks_before);
-                if (logical >= 0 && logical < file_blocks) {
+                if (0 <= logical && logical < file_blocks) {
                     block_map[1][secondary_count] = i;
                     secondary_count++;
                 } else {
