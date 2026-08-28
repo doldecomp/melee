@@ -1,7 +1,5 @@
 #include "gm_1832.h"
 
-#include "gm_1B03.static.h"
-
 #include "gm_unsplit.h"
 
 #include "cm/camera.h"
