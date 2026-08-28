@@ -1143,8 +1143,9 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
 {
     ResultsDisplayLayout* disp = (ResultsDisplayLayout*) &lbl_8046E1B0;
     MatchEnd* match_end = &disp->state.match_end;
-    HSD_JObj* child_jobj;
+    HSD_ImageDesc* desc;
     HSD_CObj* cobj;
+    HSD_JObj* child_jobj;
     int lookup;
     PAD_STACK(8);
 
@@ -1153,18 +1154,19 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
 
     cobj = (HSD_CObj*) arg0->hsd_obj;
 
-    if (match_end->is_teams == 0) {
-        lookup = get_big_loser(arg2, match_end);
-    } else {
-        lookup =
-            match_end->team_standings[match_end->player_standings[arg2].team]
-                .is_big_loser;
+    {
+        int is_teams = match_end->is_teams;
+        if (is_teams == 0) {
+            lookup = get_big_loser(arg2, match_end);
+        } else {
+            lookup = match_end
+                         ->team_standings[match_end->player_standings[arg2].team]
+                         .is_big_loser;
+        }
     }
-    cobj = (HSD_CObj*) arg0->hsd_obj;
-
     if (lookup != 0) {
-        HSD_JObj* root = (HSD_JObj*) disp->gobjs[arg2]->hsd_obj;
-        child_jobj = root == NULL ? NULL : root->child;
+        child_jobj = HSD_JObjGetChild(
+            (HSD_JObj*) disp->gobjs[arg2]->hsd_obj);
     }
 
     if (HSD_CObjSetCurrent(cobj)) {
@@ -1181,7 +1183,7 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
 
             {
                 HSD_ImageDesc* image_desc = disp->player_img2;
-                HSD_ImageDesc* desc = &image_desc[arg2];
+                desc = &image_desc[arg2];
 
                 HSD_ImageDescCopyFromEFB(
                     desc,
