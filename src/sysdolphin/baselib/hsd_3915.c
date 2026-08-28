@@ -355,7 +355,7 @@ void hsd_80391E18(const u8* list, f32 x1, f32 y1, f32 x2, f32 y2)
     }
 }
 
-// @TODO: Currently 88.12% match - register allocation differences remain
+// @TODO: Register allocation differences remain
 static inline void hsd_80391F28_calc_perp_and_begin(f32 dy, f32 dx,
                                                     f32* perp_x, f32* perp_y)
 {
@@ -396,7 +396,6 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
     f32 dx;
     f32 tick4_y;
     f32 step_x;
-    f32 len;
     s32 i;
     u8 r, g, b, a;
 
@@ -408,12 +407,11 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
     step_x = dx / count;
 
     GXWGFifo.f32 = x1;
-    i = 0;
-    a = color->a;
+    g = color->g;
     r = color->r;
     GXWGFifo.f32 = y1;
     b = color->b;
-    g = color->g;
+    a = color->a;
 
     tick6_y = 6.0F * perp_y;
     {
@@ -435,7 +433,7 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
     GXWGFifo.u8 = b;
     GXWGFifo.u8 = a;
 
-    while ((f32) i <= count) {
+    for (i = 0; (f32) i <= count; i++) {
         GXBegin(0xA8, 0, 2);
         GXWGFifo.f32 = x1;
         GXWGFifo.f32 = y1;
@@ -460,7 +458,6 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
         r = color->r;
         x1 = step_x + x1;
         y1 += step_y;
-        i++;
         GXWGFifo.u8 = r;
         GXWGFifo.u8 = g;
         GXWGFifo.u8 = b;
