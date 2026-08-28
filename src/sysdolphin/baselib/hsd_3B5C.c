@@ -336,7 +336,7 @@ void hsd_803B5EA0(s32 arg0)
 #pragma dont_inline off
 #endif
 
-static void fn_803B61B4(u8* arg0)
+void fn_803B61B4(s32* arg0)
 {
     f32 scratch_f9;
     f32 scratch_f12;
@@ -378,7 +378,7 @@ static void fn_803B61B4(u8* arg0)
     s32* work_r4;
     s32* work_r4_2;
 
-    work_r4 = (s32*) arg0;
+    work_r4 = arg0;
     for (work_ctr = 8; work_ctr != 0; work_ctr--) {
         s32 scratch_r6;
 
@@ -681,33 +681,38 @@ s32 hsd_803B6BE4(char* arg0, s32 arg1, void* arg2)
     u8* scratch_r5_7;
     u8* scratch_r5_8;
     u8* scratch_r5_9;
-    u8* work_r24;
+    s32* work_r24;
     s32* work_r24_2;
     s32 work_r23;
     u8* work_r4;
     u8* work_r4_2;
-    u8* work_r4_3;
+    s32* work_r4_3;
     s32* work_r4_4;
-    u8* work_r4_5;
-    u8* work_r5;
-    u8* work_r5_2;
+    s32* work_r4_5;
+    s32* work_r5;
+    s32* work_r5_2;
     u8* qptr;
     u8 qbyte;
     u8* quant_chroma;
-    JpegQuantTables* quant_table;
-    JpegState* base;
-    s32 work_r29;
-    s32 work_r28;
+    struct {
+        u8* base;
+        JpegState* work;
+        JpegQuantTables* quant_table;
+        s32 width;
+        s32 height;
+    } state;
 
-    PAD_STACK(0x48);
-    base = (JpegState*) hsd_804D2E70;
+    PAD_STACK(0x30);
+    state.base = hsd_804D2E70;
+    state.work = (JpegState*) state.base;
     hsd_804D79C0 = arg1;
-    quant_table = (JpegQuantTables*) lbl_80431090;
+    state.quant_table = (JpegQuantTables*) lbl_80431090;
     hsd_804D79B8 = (u8*) arg0;
     hsd_804D79BC = (u8*) arg0;
-    base->work.prev_dc[0] = base->work.prev_dc[1] = base->work.prev_dc[2] = 0;
+    state.work->work.prev_dc[0] = state.work->work.prev_dc[1] =
+        state.work->work.prev_dc[2] = 0;
     hsd_804D79C4 = 0;
-    if (__setjmp((__jmp_buf*) base) != 0) {
+    if (__setjmp(&state.work->jmp) != 0) {
         return 0;
     }
     scratch_r5 = &hsd_804D79BC[hsd_804D79C0];
@@ -718,34 +723,34 @@ loop_3:
         for (work_r3 = 0; work_r3 < 0x40; work_r3 += 8) {
             scratch_r5 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5 + 1;
-            quant_table->luma[work_r4[0]] = *scratch_r5;
+            state.quant_table->luma[work_r4[0]] = *scratch_r5;
             scratch_r5_2 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_2 + 1;
-            quant_table->luma[work_r4[1]] = *scratch_r5_2;
+            state.quant_table->luma[work_r4[1]] = *scratch_r5_2;
             scratch_r5_3 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_3 + 1;
-            quant_table->luma[work_r4[2]] = *scratch_r5_3;
+            state.quant_table->luma[work_r4[2]] = *scratch_r5_3;
             scratch_r5_4 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_4 + 1;
-            quant_table->luma[work_r4[3]] = *scratch_r5_4;
+            state.quant_table->luma[work_r4[3]] = *scratch_r5_4;
             scratch_r5_5 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_5 + 1;
-            quant_table->luma[work_r4[4]] = *scratch_r5_5;
+            state.quant_table->luma[work_r4[4]] = *scratch_r5_5;
             scratch_r5_6 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_6 + 1;
-            quant_table->luma[work_r4[5]] = *scratch_r5_6;
+            state.quant_table->luma[work_r4[5]] = *scratch_r5_6;
             scratch_r5_7 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_7 + 1;
-            quant_table->luma[work_r4[6]] = *scratch_r5_7;
+            state.quant_table->luma[work_r4[6]] = *scratch_r5_7;
             scratch_r5_8 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_8 + 1;
             scratch_r0 = work_r4[7];
             work_r4 += 8;
-            quant_table->luma[scratch_r0] = *scratch_r5_8;
+            state.quant_table->luma[scratch_r0] = *scratch_r5_8;
         }
     } else {
         if (++hsd_804D79B8 >= scratch_r5) {
-            longjmp((__jmp_buf*) base, 1);
+            longjmp(&state.work->jmp, 1);
         } else {
             goto loop_3;
         }
@@ -759,56 +764,56 @@ loop_11:
             scratch_r5_9 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_9 + 1;
             scratch_r0_3 = work_r4_2[0];
-            qptr = quant_table->luma + scratch_r0_3;
+            qptr = state.quant_table->luma + scratch_r0_3;
             qbyte = *scratch_r5_9;
             qptr[0x40] = qbyte;
             scratch_r5_10 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_10 + 1;
             scratch_r0_3 = work_r4_2[1];
-            qptr = quant_table->luma + scratch_r0_3;
+            qptr = state.quant_table->luma + scratch_r0_3;
             qbyte = *scratch_r5_10;
             qptr[0x40] = qbyte;
             scratch_r5_11 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_11 + 1;
             scratch_r0_3 = work_r4_2[2];
-            qptr = quant_table->luma + scratch_r0_3;
+            qptr = state.quant_table->luma + scratch_r0_3;
             qbyte = *scratch_r5_11;
             qptr[0x40] = qbyte;
             scratch_r5_12 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_12 + 1;
             scratch_r0_3 = work_r4_2[3];
-            qptr = quant_table->luma + scratch_r0_3;
+            qptr = state.quant_table->luma + scratch_r0_3;
             qbyte = *scratch_r5_12;
             qptr[0x40] = qbyte;
             scratch_r5_13 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_13 + 1;
             scratch_r0_3 = work_r4_2[4];
-            qptr = quant_table->luma + scratch_r0_3;
+            qptr = state.quant_table->luma + scratch_r0_3;
             qbyte = *scratch_r5_13;
             qptr[0x40] = qbyte;
             scratch_r5_14 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_14 + 1;
             scratch_r0_3 = work_r4_2[5];
-            qptr = quant_table->luma + scratch_r0_3;
+            qptr = state.quant_table->luma + scratch_r0_3;
             qbyte = *scratch_r5_14;
             qptr[0x40] = qbyte;
             scratch_r5_15 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_15 + 1;
             scratch_r0_3 = work_r4_2[6];
-            qptr = quant_table->luma + scratch_r0_3;
+            qptr = state.quant_table->luma + scratch_r0_3;
             qbyte = *scratch_r5_15;
             qptr[0x40] = qbyte;
             scratch_r5_16 = hsd_804D79B8;
             hsd_804D79B8 = scratch_r5_16 + 1;
             scratch_r0_3 = work_r4_2[7];
             work_r4_2 += 8;
-            qptr = quant_table->luma + scratch_r0_3;
+            qptr = state.quant_table->luma + scratch_r0_3;
             qbyte = *scratch_r5_16;
             qptr[0x40] = qbyte;
         }
     } else {
         if (++hsd_804D79B8 >= scratch_r5) {
-            longjmp((__jmp_buf*) base, 1);
+            longjmp(&state.work->jmp, 1);
         } else {
             goto loop_11;
         }
@@ -817,13 +822,13 @@ loop_11:
 loop_19:
     if (*(u16*) hsd_804D79B8 == 0xFFC0) {
         hsd_804D79B8 += 5;
-        work_r28 = *(u16*) hsd_804D79B8;
+        state.height = *(u16*) hsd_804D79B8;
         hsd_804D79B8 += 2;
-        work_r29 = *(u16*) hsd_804D79B8;
+        state.width = *(u16*) hsd_804D79B8;
         hsd_804D79B8 += 0xC;
     } else {
         if (++hsd_804D79B8 >= scratch_r5) {
-            longjmp((__jmp_buf*) base, 1);
+            longjmp(&state.work->jmp, 1);
         } else {
             goto loop_19;
         }
@@ -835,20 +840,20 @@ loop_24:
         hsd_804D79B8 += 0xC;
     } else {
         if (++hsd_804D79B8 >= scratch_r5) {
-            longjmp((__jmp_buf*) base, 1);
+            longjmp(&state.work->jmp, 1);
         } else {
             goto loop_24;
         }
     }
-    for (work_r25 = 0; work_r25 < work_r28; work_r25 += 0x10) {
-        for (work_r26 = 0; work_r26 < work_r29; work_r26 += 0x10) {
-            work_r24 = (u8*) base->work.luma;
+    for (work_r25 = 0; work_r25 < state.height; work_r25 += 0x10) {
+        for (work_r26 = 0; work_r26 < state.width; work_r26 += 0x10) {
+            work_r24 = state.work->work.luma;
             for (work_r23 = 0; work_r23 < 4; work_r23++) {
                 hsd_803B5EA0(0);
                 work_r5 = work_r24;
-                work_r4_3 = (u8*) base->work.coeff;
+                work_r4_3 = state.work->work.coeff;
                 for (work_r3_3 = 0; work_r3_3 < 0x40; work_r3_3 += 8) {
-                    u8* scratch_r6 = quant_table->luma + work_r3_3;
+                    u8* scratch_r6 = state.quant_table->luma + work_r3_3;
                     scratch_r0_7 = M2C_FIELD(scratch_r6, u8*, 0);
                     M2C_FIELD(work_r5, s32*, 0) =
                         (s32) (M2C_FIELD(work_r4_3, s32*, 0) * scratch_r0_7);
@@ -871,18 +876,18 @@ loop_24:
                         (s32) (M2C_FIELD(work_r4_3, s32*, 0x18) *
                                M2C_FIELD(scratch_r6, u8*, 6));
                     scratch_r7 = M2C_FIELD(work_r4_3, s32*, 0x1C);
-                    work_r4_3 += 0x20;
+                    work_r4_3 += 8;
                     M2C_FIELD(work_r5, s32*, 0x1C) =
                         (s32) (scratch_r7 * M2C_FIELD(scratch_r6, u8*, 7));
-                    work_r5 += 0x20;
+                    work_r5 += 8;
                 }
                 fn_803B61B4(work_r24);
-                work_r24 += 0x100;
+                work_r24 += 0x40;
             }
             hsd_803B5EA0(1);
-            work_r4_4 = work_r24_2 = base->work.coeff;
-            quant_chroma = quant_table->chroma;
-            work_r5_2 = (u8*) base->work.cb;
+            work_r4_4 = work_r24_2 = state.work->work.coeff;
+            quant_chroma = state.quant_table->chroma;
+            work_r5_2 = state.work->work.cb;
             for (work_r3_4 = 0; work_r3_4 < 0x40; work_r3_4 += 8) {
                 u8* scratch_r6_2 = quant_chroma + work_r3_4;
                 scratch_r7_2 = M2C_FIELD(scratch_r6_2, u8*, 0);
@@ -910,12 +915,12 @@ loop_24:
                 work_r4_4 += 8;
                 M2C_FIELD(work_r5_2, s32*, 0x1C) =
                     (s32) (scratch_r7_3 * M2C_FIELD(scratch_r6_2, u8*, 7));
-                work_r5_2 += 0x20;
+                work_r5_2 += 8;
             }
-            fn_803B61B4((u8*) base->work.cb);
+            fn_803B61B4(state.work->work.cb);
             hsd_803B5EA0(2);
-            quant_chroma = quant_table->chroma;
-            work_r4_5 = (u8*) base->work.cr;
+            quant_chroma = state.quant_table->chroma;
+            work_r4_5 = state.work->work.cr;
             for (work_r3_5 = 0; work_r3_5 < 0x40; work_r3_5 += 8) {
                 u8* scratch_r5_17 = quant_chroma + work_r3_5;
                 scratch_r6_3 = M2C_FIELD(scratch_r5_17, u8*, 0);
@@ -943,13 +948,13 @@ loop_24:
                 work_r24_2 += 8;
                 M2C_FIELD(work_r4_5, s32*, 0x1C) =
                     (s32) (scratch_r6_4 * M2C_FIELD(scratch_r5_17, u8*, 7));
-                work_r4_5 += 0x20;
+                work_r4_5 += 8;
             }
-            fn_803B61B4((u8*) base->work.cr);
-            fn_803B6820((u8*) arg2, work_r26, work_r25, work_r29, work_r28);
+            fn_803B61B4(state.work->work.cr);
+            fn_803B6820(arg2, work_r26, work_r25, state.width, state.height);
         }
     }
-    return work_r29 * work_r28 * 2;
+    return state.width * state.height * 2;
 }
 
 u8 lbl_80431638[0x40] = {
