@@ -2016,17 +2016,23 @@ bool grZebes_801DBB60(Item_GObj* yaku)
     grMaterial_801C8E08(yaku);
 
     {
-        s32 i = 0;
-        grZe_BubbleEntry* ei = bubbles;
+        grZe_BubbleEntry* ei;
+        s32 i;
         f32 x1, y1, x2, y2;
 
+        i = 0;
+        ei = bubbles;
         for (; i < 20; i++, ei++) {
             if (ei->x00_active == 1 && i != 0 && i != 6) {
                 s32 j = i + 1;
-                f32 ei_y = ei->x0C_y;
-                f32 ei_x = ei->x08_x;
-                f32 ei_size = ei->x18_size;
+                f32 ei_x;
+                f32 ei_size;
+                f32 ei_y;
                 grZe_BubbleEntry* ej = &grZe_8049F170[j];
+
+                ei_y = ei->x0C_y;
+                ei_x = ei->x08_x;
+                ei_size = ei->x18_size;
                 for (; j < 20; ej++, j++) {
                     if (ej->x00_active == 1 && j != 0 && j != 6) {
                         f32 ej_x = ej->x08_x;
@@ -2087,15 +2093,15 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                     } else if (t > 1.0f) {
                         f32 ex = bx - x2;
                         f32 ey = grZebes_Subtract(by, y2);
-                        ex *= ex;
-                        ey *= ey;
-                        bx = ex + ey;
+                        f32 ex_sq = ex * ex;
+                        f32 ey_sq = ey * ey;
+                        bx = ex_sq + ey_sq;
                     } else {
                         f32 cx = (dx * t + x1) - bx;
                         f32 cy = (dy * t + y1) - by;
-                        cx *= cx;
-                        cy *= cy;
-                        bx = cx + cy;
+                        f32 cx_sq = cx * cx;
+                        f32 cy_sq = cy * cy;
+                        bx = cx_sq + cy_sq;
                     }
 
                     bx = sqrtf(bx);
