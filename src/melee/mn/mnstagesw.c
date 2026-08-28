@@ -691,11 +691,48 @@ static inline void mnStageSw_InitUserData(MnStageSwData* user_data, s8 state)
     }
 }
 
-static inline HSD_JObj* mnStageSw_LoadCursor(void)
+static inline void mnStageSw_SetCursorAnim(s32 index,
+                                            MnStageSwData* user_data,
+                                            HSD_JObj* cursor_jobj,
+                                            u8* cursor_index,
+                                            HSD_JObj** cursor_anim_jobj)
+{
+    u8 enabled;
+
+    *cursor_index = (u8) index;
+    enabled = user_data->x2[*cursor_index];
+    lb_80011E24(cursor_jobj, cursor_anim_jobj, 2, -1);
+    HSD_JObjReqAnimAll(*cursor_anim_jobj, mnStageSw_804D4BB8[enabled]);
+}
+
+static inline HSD_JObj*
+mnStageSw_CreateCursor(MnStageSwData* user_data, s32 index,
+                       AnimLoopSettings* anims)
 {
     HSD_JObj* cursor_jobj;
+    HSD_JObj* cursor_anim_jobj;
+    HSD_JObj* hover_anim_jobj;
+    u8 hovered;
+    u8 idx;
 
+    hovered = mn_804A04F0.hovered_selection;
     cursor_jobj = HSD_JObjLoadJoint(MenMainCursorSs_Top.joint);
+    HSD_JObjAddAnimAll(cursor_jobj, MenMainCursorSs_Top.animjoint,
+                       MenMainCursorSs_Top.matanim_joint,
+                       MenMainCursorSs_Top.shapeanim_joint);
+    mnStageSw_SetCursorAnim(index, user_data, cursor_jobj, &idx,
+                            &cursor_anim_jobj);
+    HSD_JObjAnimAll(cursor_anim_jobj);
+    lb_80011E24(cursor_jobj, &hover_anim_jobj, 3, -1);
+    if (idx == hovered) {
+        HSD_JObjReqAnimAll(hover_anim_jobj, anims[0].start_frame);
+        HSD_JObjAnimAll(hover_anim_jobj);
+    } else {
+        HSD_JObjSetFlagsAll(hover_anim_jobj, JOBJ_HIDDEN);
+    }
+    if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[idx])) == 0) {
+        HSD_JObjSetFlagsAll(cursor_jobj, JOBJ_HIDDEN);
+    }
     return cursor_jobj;
 }
 
@@ -703,15 +740,11 @@ static HSD_GObj* mnStageSw_80236CBC(s8 arg0)
 {
     HSD_GObj* gobj;
     HSD_JObj* jobj;
-    HSD_JObj* sp48;
     MnStageSwData* user_data;
     AnimLoopSettings* anims = mnStageSw_803ED488;
     struct StaticModelDesc* mdl = &MenMainConSs_Top;
     f32 y_spacing;
-    u8 idx;
-    u8 enabled;
     s32 i;
-    HSD_JObj* cursor_anim_jobj;
 
     gobj = GObj_Create(6, 7, 0x80);
     mnStageSw_804D6BF0 = gobj;
@@ -740,29 +773,9 @@ static HSD_GObj* mnStageSw_80236CBC(s8 arg0)
     y_spacing = HSD_JObjGetTranslationY(user_data->x30) -
                 HSD_JObjGetTranslationY(user_data->x2C);
     for (i = 0; i < NUM_STAGES; i++) {
-        u8 hovered;
         HSD_JObj* cursor_jobj;
 
-        hovered = mn_804A04F0.hovered_selection;
-        cursor_jobj = mnStageSw_LoadCursor();
-        HSD_JObjAddAnimAll(cursor_jobj, MenMainCursorSs_Top.animjoint,
-                           MenMainCursorSs_Top.matanim_joint,
-                           MenMainCursorSs_Top.shapeanim_joint);
-        idx = i;
-        enabled = user_data->x2[idx];
-        lb_80011E24(cursor_jobj, &cursor_anim_jobj, 2, -1);
-        HSD_JObjReqAnimAll(cursor_anim_jobj, mnStageSw_804D4BB8[enabled]);
-        HSD_JObjAnimAll(cursor_anim_jobj);
-        lb_80011E24(cursor_jobj, &sp48, 3, -1);
-        if (idx == hovered) {
-            HSD_JObjReqAnimAll(sp48, anims[0].start_frame);
-            HSD_JObjAnimAll(sp48);
-        } else {
-            HSD_JObjSetFlagsAll(sp48, JOBJ_HIDDEN);
-        }
-        if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[idx])) == 0) {
-            HSD_JObjSetFlagsAll(cursor_jobj, JOBJ_HIDDEN);
-        }
+        cursor_jobj = mnStageSw_CreateCursor(user_data, i, anims);
         if (i < 15) {
             HSD_JObjAddChild(user_data->x2C, cursor_jobj);
             HSD_JObjAddTranslationY(cursor_jobj, y_spacing * (f32) i);
