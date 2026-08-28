@@ -688,10 +688,10 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
     float diff_dc_y;
     float d_y;
     float diff_ba_y;
-    float diff_ba_x;
+    float sqdist2_dc;
     float d_x;
     Vec3 a1;
-    float sqdist2_dc;
+    float diff_ba_x;
     float sqdist2_ba;
     Vec3 c1;
     float dot2_diff_dc_ac;
@@ -699,9 +699,8 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
     float determinant;
     float sum_pq = p + q;
     Vec3 a0;
-    u8 operand_pad[8];
 
-    PAD_STACK(80);
+    PAD_STACK(48);
 
     a0 = *a;
     (void) a0;
@@ -790,14 +789,20 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                         diff_ac_y = a1_y - c1.y;
                         diff_dc_y = d_y - c1.y;
                         diff_ba_x = b_x - a1.x;
-                        d_x = d->x;
+                        {
+                            float loaded_d_x = d->x;
+                            d_x = loaded_d_x;
+                        }
                         diff_dc_x = d_x - c1.x;
 
                         dot2_diff_ba_dc = lbColl_Dot2(diff_ba_x, diff_ba_y,
                                                       diff_dc_x, diff_dc_y);
 
-                        sqdist2_dc =
-                            diff_dc_x * diff_dc_x + diff_dc_y * diff_dc_y;
+                        {
+                            float dist2_dc = diff_dc_x * diff_dc_x +
+                                             diff_dc_y * diff_dc_y;
+                            sqdist2_dc = dist2_dc;
+                        }
                         sqdist2_ba =
                             diff_ba_x * diff_ba_x + diff_ba_y * diff_ba_y;
                         diff_ac_x = a1.x - c1.x;
@@ -808,8 +813,11 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                         dot2_diff_ba_ac =
                             diff_ba_x * diff_ac_x + diff_ba_y * diff_ac_y;
 
-                        determinant = sqdist2_ba * sqdist2_dc -
-                                      dot2_diff_ba_dc * dot2_diff_ba_dc;
+                        {
+                            float lengths_product = sqdist2_ba * sqdist2_dc;
+                            determinant = lengths_product -
+                                          dot2_diff_ba_dc * dot2_diff_ba_dc;
+                        }
 
                         {
                             float scl_e;
@@ -838,7 +846,6 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                 float a_mid_y = a1_y - mid_y;
                                 float b_mid_y = b_y - mid_y;
                                 {
-                                    float temp_scl_f;
                                     float a_mid_x = a1.x - mid_x;
                                     float b_mid_x = b_x - mid_x;
                                     if ((a_mid_x * a_mid_x +
@@ -846,95 +853,68 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                         (b_mid_x * b_mid_x +
                                          b_mid_y * b_mid_y))
                                     {
-                                        float diff_dc_x;
-                                        float temp_f8_2;
+                                        float scale;
+                                        Vec3 a2;
+                                        Vec3 delta;
                                         Vec3 c3;
+
                                         c3 = c0;
-                                        diff_dc_x = d_x - c->x;
-                                        temp_f8_2 = d_y - c->y;
+                                        scl_e = 0.0f;
+                                        delta.x = d_x - c->x;
+                                        delta.y = d_y - c->y;
+                                        delta.z = d->z - c->z;
                                         {
-                                            {
-                                                Vec3 a2;
-                                                float diff_dc_z;
-                                                float dot;
-                                                a2 = a0;
-                                                diff_dc_z = d->z;
-                                                diff_dc_z -= c->z;
-                                                scl_e = 0.0f;
-                                                dot =
-                                                    diff_dc_z * (c3.z - a2.z) +
-                                                    ((diff_dc_x *
-                                                      (c3.x - a2.x)) +
-                                                     (temp_f8_2 *
-                                                      (c3.y - a2.y)));
-                                                temp_scl_f =
-                                                    -dot /
-                                                    ((diff_dc_z * diff_dc_z) +
-                                                     ((diff_dc_x * diff_dc_x) +
-                                                      (temp_f8_2 *
-                                                       temp_f8_2)));
-                                            }
+                                            float dot;
+
+                                            a2 = a0;
+                                            dot =
+                                                delta.z * (c3.z - a2.z) +
+                                                ((delta.x * (c3.x - a2.x)) +
+                                                 (delta.y * (c3.y - a2.y)));
+                                            scale =
+                                                -dot /
+                                                ((delta.z * delta.z) +
+                                                 ((delta.x * delta.x) +
+                                                  (delta.y * delta.y)));
                                         }
-                                        if (temp_scl_f > lbColl_804D7A00) {
-                                            temp_scl_f = lbColl_804D7A08;
-                                        } else if (temp_scl_f <
-                                                   lbColl_804D7A10)
-                                        {
-                                            temp_scl_f = lbColl_804D79F8;
+                                        if (scale > lbColl_804D7A00) {
+                                            scale = lbColl_804D7A08;
+                                        } else if (scale < lbColl_804D7A10) {
+                                            scale = lbColl_804D79F8;
                                         }
-                                        scl_f = temp_scl_f;
+                                        scl_f = scale;
                                     } else {
+                                        Vec3 delta;
                                         Vec3 c2;
 
                                         c2 = c0;
+                                        scl_e = 1.0f;
+                                        delta.x = d_x - c->x;
+                                        delta.y = d_y - c->y;
+                                        delta.z = d->z - c->z;
                                         {
-                                            float diff_dc_x1;
-                                            scl_e = 1.0f;
-                                            diff_dc_x1 = d_x - c->x;
-                                            {
-                                                float diff_dc_y1;
-                                                float diff_dc_z1;
-                                                diff_dc_y1 = d_y - c->y;
-                                                diff_dc_z1 = d->z;
-                                                diff_dc_z1 -= c->z;
-                                                {
-                                                    Vec3 b0;
+                                            Vec3 b0;
+                                            float dot;
+                                            float scale;
 
-                                                    b0 = *b;
-                                                    {
-                                                        float dot;
-                                                        float scale;
-                                                        dot =
-                                                            diff_dc_z1 *
-                                                                (c2.z - b0.z) +
-                                                            ((diff_dc_x1 *
-                                                              (c2.x - b0.x)) +
-                                                             (diff_dc_y1 *
-                                                              (c2.y - b0.y)));
-                                                        scale =
-                                                            -dot /
-                                                            ((diff_dc_z1 *
-                                                              diff_dc_z1) +
-                                                             ((diff_dc_x1 *
-                                                               diff_dc_x1) +
-                                                              (diff_dc_y1 *
-                                                               diff_dc_y1)));
-                                                        if (lbColl_804D7A00 <
-                                                            scale)
-                                                        {
-                                                            scale =
-                                                                lbColl_804D7A08;
-                                                        } else if (
-                                                            scale <
-                                                            lbColl_804D7A10)
-                                                        {
-                                                            scale =
-                                                                lbColl_804D79F8;
-                                                        }
-                                                        scl_f = scale;
-                                                    }
-                                                }
+                                            b0 = *b;
+                                            dot =
+                                                delta.z * (c2.z - b0.z) +
+                                                ((delta.x * (c2.x - b0.x)) +
+                                                 (delta.y * (c2.y - b0.y)));
+                                            scale =
+                                                -dot /
+                                                ((delta.z * delta.z) +
+                                                 ((delta.x * delta.x) +
+                                                  (delta.y * delta.y)));
+                                            if (scale > lbColl_804D7A00) {
+                                                scale = lbColl_804D7A08;
+                                            } else if (scale <
+                                                       lbColl_804D7A10)
+                                            {
+                                                scale = lbColl_804D79F8;
                                             }
+                                            scl_f = scale;
                                         }
                                     }
                                 }
