@@ -258,18 +258,18 @@ static inline s32 mnInfo_CountUnlocked(void)
     return count;
 }
 
-static inline void mnInfo_CreateEntries(MnInfoData* data)
+inline void mnInfo_CreateEntries(u32 id)
 {
     u8* trophy;
     s32 i;
     mnInfo_GObj* gobj;
 
     gobj = mnInfo_804D6C78;
-    trophy = &mnInfo_804A0968[data->scroll_idx];
+    trophy = &mnInfo_804A0968[id];
     (void) trophy;
     for (i = 0; i < 4; i++) {
         if (mnInfo_80251A08(*trophy) != 0) {
-            u8 id = *trophy;
+            id = *trophy;
 
             mnInfo_80251D58(gobj, i, id, *gmMainLib_8015D804(id));
             mnInfo_80251F04(gobj, i, id);
@@ -350,7 +350,7 @@ void fn_80251FE4(void)
             sfxMove();
             data->scroll_idx += 1;
             mnInfo_FreeEntries();
-            mnInfo_CreateEntries(data);
+            mnInfo_CreateEntries(data->scroll_idx);
         }
     }
 }
