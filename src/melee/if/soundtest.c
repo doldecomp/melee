@@ -137,12 +137,6 @@
 /* 45A6C0 */ extern u8 gmMainLib_8045A6C0[];
 /* 4D6B88 */ extern int db_804D6B88;
 
-struct SoundTestMenuData {
-    /* 0x000 */ struct un_80304138_objalloc_t_x8 entries[11];
-    /* 0x160 */ char x160[0xC];
-    /* 0x16C */ char x16C[0x18];
-};
-
 /// Overlay used to reach the menu data through the label block that precedes
 /// it, the way the original code addresses it.
 struct un_803F9F28_t {
@@ -263,7 +257,7 @@ struct un_803FA258_t {
 /* 803F9F80 */ extern char un_803F9F80[];
 /* 803F9F8C */ extern char un_803F9F8C[];
 /* 803F9F98 */ extern char un_803F9F98[];
-/* 803F9FA4 */ extern struct SoundTestMenuData un_803F9FA4;
+/* 803F9FA4 */
 /* 803FA128 */ extern int un_803FA128[76];
 /* 803FA258 */ extern struct un_803FA258_t un_803FA258;
 /* 803FA3E8 */ extern char* un_803FA3E8[3];
