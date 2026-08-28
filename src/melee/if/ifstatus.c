@@ -631,7 +631,7 @@ HSD_GObj* ifStatus_802F5EC0(IfDamageState* state, s32 player_idx)
     HudIndex* hud = ifStatus_GetHUDInfo();
 
     if (state->HUD_parent_entity == NULL) {
-        gobj = gobj = GObj_Create(0xE, 0xF, 0);
+        gobj = GObj_Create(0xE, 0xF, 0);
         jobj = HSD_JObjLoadJoint(hud->unk258);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
         GObj_SetupGXLink(gobj, (void (*)(HSD_GObj*, int)) ifStatus_802F5DE0,

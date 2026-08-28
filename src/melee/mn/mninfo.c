@@ -560,7 +560,7 @@ s32 mnInfo_80252758(void)
 
     archive = mn_804D6BB8;
     lbArchive_LoadSections(
-        archive, &model->joint, top_joint, animjoint,
+        archive, (void**) &model->joint, top_joint, animjoint,
         mnInfo_803EFC08.top_animjoint, &model->matanim_joint,
         mnInfo_803EFC08.top_matanim_joint, &model->shapeanim_joint,
         mnInfo_803EFC08.top_shapeanim_joint, 0);

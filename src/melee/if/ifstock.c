@@ -1029,8 +1029,8 @@ void ifStock_802FAEC4(void)
     memzero(&ifStock_804A1ACC, sizeof(ifStock_804A1ACC));
     memzero(&ifStock_804A1A8C, sizeof(ifStock_804A1A8C));
     memzero(&ifStock_804A1774, sizeof(ifStock_804A1774));
-    lbArchive_LoadSections(*ifAll_GetArchive(), &scene_models, "Stc_scemdls",
-                           0);
+    lbArchive_LoadSections(*ifAll_GetArchive(), (void**) &scene_models,
+                           "Stc_scemdls", 0);
     {
         HSD_GObj** proc = (HSD_GObj**) &ifStock_804A1ACC.x108;
         HSD_GObj* gobj;

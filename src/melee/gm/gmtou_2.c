@@ -943,8 +943,8 @@ void gm_8019DF8C_OnFrame(void)
                     if (color_status != 2 && color_status != 1) {
                         if (buttons & PAD_BUTTON_X) {
                             /* Down: increment color */
-                            if ((s32) tmd->x4B8[i].x3 <
-                                (s32) ((u8) gm_80169238((u8) fn_8018F6FC(
+                            if (tmd->x4B8[i].x3 <
+                                (s32) (gm_80169238((u8) fn_8018F6FC(
                                            (CSSIconHud) tmd->x4B8[i].x1)) -
                                        1))
                             {

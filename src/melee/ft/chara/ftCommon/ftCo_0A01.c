@@ -4084,7 +4084,7 @@ void ftCo_800A8940(Fighter* fp)
     f32 py;
     f32 width;
     s32 result;
-    s32 blocked;
+    s32 blocked = 0;
 
     rnd = HSD_Randf();
     cur_island = mpIsland_8005AB54(fp->coll_data.floor.index);
