@@ -2777,15 +2777,17 @@ f32 _Toy_80309338(Vec3* arg0, Vec3* arg1)
 void _Toy_80309404(HSD_GObj* gobj)
 {
     struct {
-        u8 pad[0x2C];
         Vec3 pos;
-        u8 pad2[0x10];
-    } eye_pad;
-    Vec3 eye_pos;
+        u8 pad[0x10];
+    } unused_eye;
+    Vec3 transition_eye;
+    Vec3 transition_interest;
+    struct {
+        Vec3 pos;
+        u8 pad[0x14];
+    } eye_pos;
     ToyCameraControl* ed4;
     HSD_CObj* cobj;
-    Vec3 transition_interest;
-    Vec3 transition_eye;
     Toy26B8* base;
     ToyED8Data* ed8;
     Toy6E68* state;
@@ -2803,7 +2805,7 @@ void _Toy_80309404(HSD_GObj* gobj)
     s32 sp130;
     s32 sp12C;
 
-    PAD_STACK(256);
+    PAD_STACK(280);
 
     cobj = gobj->hsd_obj;
     base = (Toy26B8*) &_Toy_804A26B8;
@@ -2815,8 +2817,8 @@ void _Toy_80309404(HSD_GObj* gobj)
     movement_update = 0.0f;
     rotate_update = 0.0f;
 
-    HSD_CObjGetEyePosition(cobj, &eye_pos);
-    dist = _Toy_80309338(&eye_pos, NULL);
+    HSD_CObjGetEyePosition(cobj, &eye_pos.pos);
+    dist = _Toy_80309338(&eye_pos.pos, NULL);
 
     {
         f32 val;
@@ -2994,21 +2996,9 @@ void _Toy_80309404(HSD_GObj* gobj)
             _Toy_sbss_804D6E88 = HSD_CObjGetRight(cobj);
             _Toy_sbss_804D6E8C = HSD_CObjGetLeft(cobj);
             state->x5C = 0;
-            {
-                ToyTransitionObj* obj = state->x0;
-                obj->x24 = 0;
-                obj->x20 = 0x480000;
-            }
-            {
-                ToyTransitionObj* obj = state->x4;
-                obj->x24 = 0;
-                obj->x20 = 0;
-            }
-            {
-                ToyTransitionObj* obj = state->xC;
-                obj->x24 = 0;
-                obj->x20 = 0;
-            }
+            ((HSD_GObj*) state->x0)->gxlink_prios = 0x0048000000000000ULL;
+            ((HSD_GObj*) state->x4)->gxlink_prios = 0;
+            ((HSD_GObj*) state->xC)->gxlink_prios = 0;
             state->x61 = 1;
             _Toy_8030715C(0.0f, 0.0f);
             return;
@@ -3053,21 +3043,9 @@ void _Toy_80309404(HSD_GObj* gobj)
             _Toy_sbss_804D6E88 = HSD_CObjGetRight(cobj);
             _Toy_sbss_804D6E8C = HSD_CObjGetLeft(cobj);
 
-            {
-                ToyTransitionObj* obj = state->x0;
-                obj->x24 = 0;
-                obj->x20 = 0x50480000;
-            }
-            {
-                ToyTransitionObj* obj = state->x4;
-                obj->x24 = 0;
-                obj->x20 = (s32) 0x80000000U;
-            }
-            {
-                ToyTransitionObj* obj = state->xC;
-                obj->x24 = 0;
-                obj->x20 = 0x40000000;
-            }
+            ((HSD_GObj*) state->x0)->gxlink_prios = 0x5048000000000000ULL;
+            ((HSD_GObj*) state->x4)->gxlink_prios = 0x8000000000000000ULL;
+            ((HSD_GObj*) state->xC)->gxlink_prios = 0x4000000000000000ULL;
             jobj_node = (ToyJObjNode*) Toy_sbss_804D6ED8->xC->x28;
             while (jobj_node != NULL) {
                 jobj_node->x40 = 9;
@@ -3077,7 +3055,7 @@ void _Toy_80309404(HSD_GObj* gobj)
             state->x5C = 0;
             transition_eye = _Toy_803B88E0;
             transition_interest = _Toy_803B88EC;
-            HSD_CObjGetEyePosition(cobj, &eye_pad.pos);
+            HSD_CObjGetEyePosition(cobj, &unused_eye.pos);
             transition_eye.y = 8.0f;
             HSD_CObjGetInterest(cobj, &transition_interest);
             base->x0.x = (transition_eye.x - transition_interest.x) / 10.0f;
@@ -3149,13 +3127,12 @@ void _Toy_80309404(HSD_GObj* gobj)
             }
         }
 
-        if (!state->x50 && !state->x54) {
-            button = Toy_80305C44();
-            if (button & HSD_PAD_A) {
-                _Toy_803102C4(0);
-            } else {
-                _Toy_803102C4(1);
-            }
+        if (state->x50 || state->x54 ||
+            (Toy_80305C44() & HSD_PAD_A))
+        {
+            _Toy_803102C4(0);
+        } else {
+            _Toy_803102C4(1);
         }
         if (state->x50 || state->x54) {
             movement_update = 1.0f;
@@ -3202,7 +3179,7 @@ void _Toy_80309404(HSD_GObj* gobj)
         }
         tmp = state->x1C;
         if (tmp < -360.0f) {
-            state->x1C = (f32) (tmp + 360.0f);
+            state->x1C += 360.0f;
         }
         tmp = state->x1C;
         if (tmp > 360.0f) {
@@ -3526,9 +3503,9 @@ void _Toy_80309404(HSD_GObj* gobj)
             anim->x0E = 0;
             _Toy_80307F64(2, 0);
         }
+        _Toy_80308DC8(cobj);
     }
 
-    _Toy_80308DC8(cobj);
     _Toy_8030715C(state->x50, state->x54);
     state->x38 = state->x30;
     state->x3C = state->x34;
