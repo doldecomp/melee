@@ -3810,7 +3810,7 @@ after_verify:
         s32 next = current_seq + 1;
         remaining = file_size;
         data = (u8*) arg2;
-        current_seq = (u8) next;
+        current_seq = next & 0xFF;
     }
     for (j = 0; j < file_blocks && remaining > 0; j++) {
         s32 chunk;
