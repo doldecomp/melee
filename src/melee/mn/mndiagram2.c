@@ -294,14 +294,14 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
 {
     Diagram2* data;
     int result;
-    Diagram2* data2;
+    HSD_GObj* d2;
     u8 x46;
     u8 x47;
     u8 x48;
-    u8 var_r6;
-    u8 var_r5;
-    int var_r28;
-    HSD_GObj* d2;
+    u8 entity_idx;
+    int selection;
+    Diagram2* data2;
+    GameRules* rules;
     PAD_STACK(40);
 
     {
@@ -315,15 +315,17 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         mn_804A04F0.entering_menu = 0;
         data2 = (d2 = mnDiagram2_804D6C18)->user_data;
         x46 = data2->selected_fighter_idx;
-        gmMainLib_GetGameRules()->x12 = x46;
+        rules = gmMainLib_GetGameRules();
+        rules->x12 = x46;
         x47 = data2->selected_name_idx;
         gmMainLib_GetGameRules()->x13 = x47;
-        gmMainLib_GetGameRules()->xD = (x48 = data2->is_name_mode);
+        gmMainLib_GetGameRules()->xD = (x48 = (int) data2->is_name_mode);
         mn_80229894(0x1C, 0, 3);
         mnDiagram2_ClearStatRows(mnDiagram2_804D6C18);
         return;
     }
 
+    selection = 0;
     if (result & 0xC0) {
         sfxForward();
         data2 = mnDiagram2_804D6C18->user_data;
@@ -349,23 +351,22 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
             return;
         }
         sfxForward();
-        var_r28 = 0;
         if (data->is_name_mode == 0) {
-            var_r28 = 1;
+            selection = 1;
         }
-        data->is_name_mode = var_r28;
+        data->is_name_mode = selection;
         if (data->is_name_mode == 0 && (s32) (data->scroll_offset + 10) > 0x15)
         {
             data->scroll_offset = 0;
         }
         mnDiagram2_RefreshStatRows();
         if (data->is_name_mode != 0) {
-            var_r5 = data->selected_name_idx;
+            entity_idx = data->selected_name_idx;
         } else {
-            var_r5 = data->selected_fighter_idx;
+            entity_idx = data->selected_fighter_idx;
         }
         mnDiagram2_UpdateHeader(mnDiagram2_804D6C18, data->is_name_mode,
-                                var_r5);
+                                entity_idx);
         x48 = data->is_name_mode;
         data2 = (d2 = mnDiagram2_804D6C18)->user_data;
         if (x48 != 0) {
@@ -376,11 +377,11 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
             HSD_JObjSetFlagsAll(data2->name_mode_header, JOBJ_HIDDEN);
         }
         if (x48 != 0) {
-            var_r5 = data2->selected_name_idx;
+            entity_idx = data2->selected_name_idx;
         } else {
-            var_r5 = data2->selected_fighter_idx;
+            entity_idx = data2->selected_fighter_idx;
         }
-        mnDiagram2_UpdateHeader(d2, x48, var_r5);
+        mnDiagram2_UpdateHeader(d2, x48, entity_idx);
         return;
     }
 
@@ -399,22 +400,22 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
                 mnDiagram2_RefreshStatRows();
             }
         } else if (result & 4) {
-            var_r28 =
+            selection =
                 (u8) mnDiagram_GetPrevNameIndex_s(data->selected_name_idx);
-            if ((s32) data->selected_name_idx != var_r28) {
+            if ((s32) data->selected_name_idx != selection) {
                 sfxMove();
-                data->selected_name_idx = var_r28;
+                data->selected_name_idx = selection;
                 mnDiagram2_RefreshStatRows();
                 mnDiagram2_UpdateHeader(mnDiagram2_804D6C18,
                                         data->is_name_mode,
                                         data->selected_name_idx);
             }
         } else if (result & 8) {
-            var_r28 =
+            selection =
                 (u8) mnDiagram_GetNextNameIndex_s(data->selected_name_idx);
-            if ((s32) data->selected_name_idx != var_r28) {
+            if ((s32) data->selected_name_idx != selection) {
                 sfxMove();
-                data->selected_name_idx = var_r28;
+                data->selected_name_idx = selection;
                 mnDiagram2_RefreshStatRows();
                 mnDiagram2_UpdateHeader(mnDiagram2_804D6C18,
                                         data->is_name_mode,
@@ -436,22 +437,22 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
                 mnDiagram2_RefreshStatRows();
             }
         } else if (result & 4) {
-            var_r28 = (u8) mnDiagram_GetPrevFighterIndex_s(
+            selection = (u8) mnDiagram_GetPrevFighterIndex_s(
                 data->selected_fighter_idx);
-            if ((s32) data->selected_fighter_idx != var_r28) {
+            if ((s32) data->selected_fighter_idx != selection) {
                 sfxMove();
-                data->selected_fighter_idx = var_r28;
+                data->selected_fighter_idx = selection;
                 mnDiagram2_RefreshStatRows();
                 mnDiagram2_UpdateHeader(mnDiagram2_804D6C18,
                                         data->is_name_mode,
                                         data->selected_fighter_idx);
             }
         } else if (result & 8) {
-            var_r28 = (u8) mnDiagram_GetNextFighterIndex_s(
+            selection = (u8) mnDiagram_GetNextFighterIndex_s(
                 data->selected_fighter_idx);
-            if ((s32) data->selected_fighter_idx != var_r28) {
+            if ((s32) data->selected_fighter_idx != selection) {
                 sfxMove();
-                data->selected_fighter_idx = var_r28;
+                data->selected_fighter_idx = selection;
                 mnDiagram2_RefreshStatRows();
                 mnDiagram2_UpdateHeader(mnDiagram2_804D6C18,
                                         data->is_name_mode,
