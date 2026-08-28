@@ -581,9 +581,22 @@ void fn_801B5AA8(int arg0)
     lbBgFlash_8002063C(0x78);
 }
 
-static inline void gm_801B5ACC_inline(u16 round)
+static inline void
+gm_801B5ACC_inline0(StartMeleeData* data, GameScene* arg0, u16* round)
 {
-    s32 end_idx = (s32) gm_803DEC4C[round + 1].start;
+    data->players[0].xD_b2 = 1;
+    data->rules.x7 = 9;
+
+    {
+        u16 current_round = gm_8017BE84(arg0->idx);
+        *round = current_round;
+    }
+}
+
+static inline void
+gm_801B5ACC_inline1(AllstarRoundInfo* ri)
+{
+    s32 end_idx = (s32) ri[1].start;
     gm_803DEBE8_t* opp = &gm_803DEBE8[end_idx];
 
     while (end_idx < 0x19) {
@@ -630,22 +643,19 @@ void gm_801B5ACC(GameScene* arg0)
     data->rules.x14 = (s32) allstar->x9C % 60;
     data->rules.xD = 0x78;
     data->players[0].x10 = allstar->x74;
-    data->players[0].xD_b2 = 1;
-    data->rules.x7 = 9;
-
-    {
-        u16 current_round = gm_8017BE84(arg0->idx);
-        round = current_round;
-    }
+    gm_801B5ACC_inline0(data, arg0, &round);
 
     {
         AllstarRoundInfo* ri = &gm_803DEC4C[round];
+        u8* slot_base = allstar->x76;
         for (i = 0; i < (s32) ri->count; i++) {
+            u8* slot_ptr;
             s32 slot;
             do {
                 slot = HSD_Randi(0x1A);
-            } while ((s32) allstar->x76[slot] != 0x21);
-            allstar->x76[slot] = gm_803DEBE8[i + ri->start].x3;
+                slot_ptr = &slot_base[slot];
+            } while ((s32) *slot_ptr != 0x21);
+            *slot_ptr = gm_803DEBE8[i + ri->start].x3;
         }
     }
 
@@ -669,7 +679,7 @@ void gm_801B5ACC(GameScene* arg0)
     gm_8016F088(data);
     gm_8016A92C(&data->rules);
 
-    gm_801B5ACC_inline(round);
+    gm_801B5ACC_inline1(&gm_803DEC4C[round]);
 
     gm_801B5324(allstar, round + 1);
     data->rules.x50 = (void (*)(u8))(Event) fn_801B5AA8;
