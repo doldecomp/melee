@@ -204,9 +204,9 @@ static s32 mnStageSw_80235C58(u8 arg0)
         return arg0;
     }
 
-    idx = arg0;
     i = 1;
-    curr = idx + 1;
+    curr = arg0 + 1;
+    idx = arg0;
     next = idx + 1;
     while (true) {
         s32 temp = mnStageSw_GetPreviousIndex(i, idx);
