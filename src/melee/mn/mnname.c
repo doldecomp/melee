@@ -125,11 +125,15 @@ bool IsNameListFull(void)
     return true;
 }
 
-static inline bool checkStringRest(const char* ptr)
+static inline s8 readNameTerminator(volatile char* terminator)
 {
-    char* term = mnName_StringTerminator;
+    return *terminator;
+}
+
+static inline bool checkStringRest(const char* ptr, s8 terminator)
+{
     char c = "　"[0]; // SJIS full-width space
-    while (*term != *ptr) {
+    while (terminator != *ptr) {
         if (c != *ptr || "　"[1] != ptr[1]) {
             return false;
         }
@@ -148,7 +152,9 @@ s32 CompareNameStrings(char* str1, char* str2)
         s8 ch1 = (s8) str1[i];
 
         if (terminator == ch1) {
-            if (checkStringRest(&str2[i & 0xFFFFFFFFFFFFFFFF])) {
+            if (checkStringRest(
+                    &str2[i & 0xFFFFFFFFFFFFFFFF],
+                    readNameTerminator(mnName_StringTerminator))) {
                 return 0;
             }
             return 2;
@@ -158,7 +164,7 @@ s32 CompareNameStrings(char* str1, char* str2)
             s8 ch2 = (s8) str2[i];
 
             if (*mnName_StringTerminator == ch2) {
-                if (checkStringRest(&str1[i])) {
+                if (checkStringRest(&str1[i], terminator)) {
                     return 0;
                 }
                 return 1;
