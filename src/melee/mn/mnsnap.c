@@ -2490,6 +2490,11 @@ static inline void mnSnap_LoadPageIndicator(void** page_joint,
     HSD_JObjAddChild(*parent, *jobj);
 }
 
+static inline s16* mnSnap_GetCardStatus(mnSnap_State* snap)
+{
+    return snap->card_status;
+}
+
 /// Entry point: initializes the Snap menu scene. Loads assets, creates GObjs,
 /// sets up thumbnail grid positions, SIS text labels, and dialog widgets.
 void mnSnap_80257F24(void)
@@ -2552,7 +2557,7 @@ void mnSnap_80257F24(void)
         photo_count[1] = zero;
     }
     snap->card_status[0] = zero;
-    snap->card_status[1] = zero;
+    mnSnap_GetCardStatus(snap)[1] = zero;
 
     main_joint = &snap->main_joint;
     main_animjoint = &snap->main_animjoint;
