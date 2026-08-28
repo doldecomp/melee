@@ -701,6 +701,18 @@ typedef struct _DispItem {
 
 typedef DispItem* (*DispCallback)(void*);
 
+static inline s32 count_bar_units(DispItem* item)
+{
+    s32 total = 0;
+    s32 count;
+
+    while ((count = item->content.bars[0].count) > 0) {
+        total += count;
+        item = (DispItem*) ((DispBar*) item + 1);
+    }
+    return total;
+}
+
 void hsd_8039254C(void)
 {
     static GXColor lbl_804D6080 = { 0x40, 0x40, 0x40 };
@@ -709,6 +721,7 @@ void hsd_8039254C(void)
     f32 bar_x;
     f32 t2;
     GXColor default_col;
+    DispItem* bar_draw_ptr;
     s32 char_count;
     GXColor bg_col3;
     GXColor bar_col;
@@ -764,9 +777,9 @@ void hsd_8039254C(void)
                 {
                     char_count = 0;
                     {
-                        s32 j = 0;
+                        s32 j;
                         s32 len = strlen(item->content.text);
-                        char_count = j;
+                        j = char_count;
                         while (j < len) {
                             if ((s8) item->content.text[j] != '\\') {
                                 char_count++;
@@ -816,17 +829,7 @@ void hsd_8039254C(void)
                 col_pos = 60;
                 break;
             case 1: {
-                DispItem* bar_ptr;
-                DispItem* bar_draw_ptr;
-
-                bar_ptr = item;
-                char_count = 0;
-                {
-                    while ((count = bar_ptr->content.bars[0].count) > 0) {
-                        char_count += count;
-                        bar_ptr = (DispItem*) ((DispBar*) bar_ptr + 1);
-                    }
-                }
+                char_count = count_bar_units(item);
                 if (char_count > 0) {
                     if (col_pos != 0) {
                         line = (f32) ((f64) line - 0.5);
