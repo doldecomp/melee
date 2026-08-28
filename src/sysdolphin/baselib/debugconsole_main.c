@@ -1055,10 +1055,20 @@ static inline s32 hsd_80394F48_get_x4(const s32* x4)
     return *x4;
 }
 
-// @TODO: Currently 96.77% match - register allocation differences remain
 static inline s32 hsd_80394F48_get_x40(const s32* px40)
 {
     return *px40;
+}
+
+static inline s32 hsd_80394F48_get_x8(const s32* px8)
+{
+    return *px8;
+}
+
+static inline struct lbl_8040AB00_t* hsd_80394F48_get_highlight_color(
+    struct lbl_8040AB00_t* base_color)
+{
+    return base_color + 1;
 }
 
 void hsd_80394F48(void* data)
@@ -1074,8 +1084,7 @@ void hsd_80394F48(void* data)
     s32* px40;
     s32* px8;
     s32 col_start;
-    s32 saved_row;
-    void* hi_color;
+    struct lbl_8040AB00_t* hi_color;
     s32 x_base;
     s32* pxC8;
     s32 i;
@@ -1093,10 +1102,9 @@ void hsd_80394F48(void* data)
     hsd_80394F48_set_base_color(px50);
     col_start = *pxC8;
     {
-        s32 row = *pxCC;
-        saved_row = row;
+        cur_row = *pxCC;
         *px4 = col_start * 11 + 0x14;
-        *px8 = (*px40 - 0x28) - (row + 1) * 14;
+        *px8 = (*px40 - 0x28) - (cur_row + 1) * 14;
     }
 
     b6 = sp->x0_b6;
@@ -1134,8 +1142,8 @@ void hsd_80394F48(void* data)
 
     *px4 += 11;
     x_base = col_start * 11 + 0x14;
-    hi_color = base_color + 1;
-    cur_row = saved_row - 1;
+    hi_color = hsd_80394F48_get_highlight_color(base_color);
+    cur_row -= 1;
 
     for (i = 0; dp->entries[i] != 0; i++) {
         *px4 = x_base;
@@ -1181,13 +1189,9 @@ void hsd_80394F48(void* data)
         hsd_803922FC(((ParticleFontData*) sp->x4C)->x968, *px4, *px8, b6,
                      (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     } else {
-        {
-            s32 xfb_width = sp->x3C;
-
-            hsd_803921B8(((ParticleFontData*) sp->x4C)->x968,
-                         hsd_80394F48_get_x4(px4), *px8, (&sp->x24)[sp->x34],
-                         xfb_width, *px40, sp->x44, *px50);
-        }
+        hsd_803921B8(((ParticleFontData*) sp->x4C)->x968,
+                     hsd_80394F48_get_x4(px4), hsd_80394F48_get_x8(px8),
+                     (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     }
 
     {
