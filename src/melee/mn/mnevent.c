@@ -475,17 +475,22 @@ void mnEvent_8024E524(s32 event_idx)
     mnEvent_ShowSelected(user_data, &jobj_09);
 }
 
+static inline u8 mnEvent_GetPage(const MnEventData* data)
+{
+    return data->page;
+}
+
 void fn_8024D864(HSD_GObj* gobj)
 {
-    HSD_JObj* jobj_0C;
-    HSD_JObj* jobj_0A;
-    HSD_JObj* jobj_0B;
-    HSD_JObj* jobj_09;
-    HSD_JObj* tree;
-    MnEventData* data;
-    u64 inputs;
     u8 page;
     f32 y_a;
+    MnEventData* data;
+    HSD_JObj* jobj_09;
+    HSD_JObj* tree;
+    HSD_JObj* jobj_0B;
+    u64 inputs;
+    HSD_JObj* jobj_0C;
+    HSD_JObj* jobj_0A;
     f32 y_b;
     PAD_STACK(0x70);
 
@@ -554,7 +559,7 @@ void fn_8024D864(HSD_GObj* gobj)
             sfxMove();
             data->page -= 1;
             tree = mnEvent_804D6C60->hsd_obj;
-            page = data->page;
+            page = mnEvent_GetPage(data);
             lb_80011E24(tree, &jobj_0A, 0xA, -1);
             lb_80011E24(tree, &jobj_0C, 0xC, -1);
             y_a = HSD_JObjGetTranslationY(jobj_0A);
@@ -576,7 +581,7 @@ void fn_8024D864(HSD_GObj* gobj)
             sfxMove();
             data->page += 1;
             tree = mnEvent_804D6C60->hsd_obj;
-            page = data->page;
+            page = mnEvent_GetPage(data);
             lb_80011E24(tree, &jobj_0A, 0xA, -1);
             lb_80011E24(tree, &jobj_0C, 0xC, -1);
             y_a = HSD_JObjGetTranslationY(jobj_0A);
