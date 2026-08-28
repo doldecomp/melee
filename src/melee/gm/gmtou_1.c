@@ -1606,7 +1606,6 @@ void fn_8019A158(void)
     TmData* td1;
     TmData* td2;
     s32 mode;
-    s32 slot;
     s32 sel;
     s32 bracket_idx;
     s32 result;
@@ -1615,6 +1614,9 @@ void fn_8019A158(void)
     int k;
     s32 local1, local2;
     MatchEnd* me;
+    struct {
+        s32 slot;
+    } state;
     u8* cursor;
 
     td1 = gm_GetTournamentData();
@@ -1634,20 +1636,20 @@ void fn_8019A158(void)
     (void) me;
     result = fn_8018F508(&local2);
     if (result == 1) {
-        slot = local2;
+        state.slot = local2;
     } else {
         for (i = 0; i < 4; i++) {
             if (me->player_standings[i].slot_type != 3 &&
                 me->player_standings[i].is_small_loser == 0)
             {
-                slot = i;
+                state.slot = i;
                 goto found;
             }
         }
-        slot = -1;
+        state.slot = -1;
     found:;
     }
-    sel = slot;
+    sel = state.slot;
 
     bracket_idx = fn_8018F74C();
 
@@ -1659,8 +1661,8 @@ void fn_8019A158(void)
         BracketEntry* bracket = fn_8019A158_GetBracketEntry(bracket_idx);
         cursor = (u8*) bracket;
         for (i = 0; i < 4; i++) {
-            if (i == slot) {
-                bracket->slots[slot].x4C = 0;
+            if (i == state.slot) {
+                bracket->slots[state.slot].x4C = 0;
             } else {
                 cursor[0x4C] = 3;
             }
