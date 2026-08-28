@@ -912,6 +912,55 @@ void fn_802FA8C0(HSD_GObj* arg)
     }
 }
 
+static inline void ifStock_802FAEC4_call_802FA5BC(int arg)
+{
+    ifStock_802FA5BC(arg);
+}
+
+static inline void ifStock_802FAEC4_clear_acc(int count)
+{
+    int i;
+
+    for (i = 0; i < count; i++) {
+        ifStock_804A1ACC.x10C[i] = NULL;
+    }
+}
+
+static inline void ifStock_802FAEC4_clear_1774(int count)
+{
+    int i;
+
+    for (i = 0; i < count; i++) {
+        ifStock_804A1774.x10C[i + 1] = NULL;
+    }
+}
+
+static inline void ifStock_802FAEC4_init_1A8C(HSD_GObj** p)
+{
+    struct ifStock_804A1378* stock = &ifStock_804A1378;
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    int i;
+
+    for (i = 0; i < 16; i++, p++) {
+        *p = NULL;
+        if (gm_8016B1A8()) {
+            *p = ifStock_802FA118(i);
+        }
+    }
+    if (gm_IsMultimanSmashMode()) {
+        gobj = GObj_Create(14, 15, 0);
+        jobj = HSD_JObjLoadJoint(stock->x4->joint);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
+        GObj_SetupGXLink(gobj, fn_802F9598, 11, 0);
+        gm_8016895C(jobj, stock->x4, 0);
+        HSD_JObjReqAnimAll(jobj, 10.0f);
+        HSD_JObjAnimAll(jobj);
+        stock->gobj = gobj;
+        lb_80011E24(jobj, &stock->jobj, 0, 1, 2, 3, 4, 5, -1);
+    }
+}
+
 void fn_802FAC34(HSD_GObj* arg)
 {
     int i;
@@ -961,72 +1010,45 @@ void fn_802FAC34(HSD_GObj* arg)
     }
 }
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma dont_inline on
-#endif
 void ifStock_802FAEC4(void)
 {
-    HSD_GObj* gobj;
     struct ifStock_804A1378* stock = &ifStock_804A1378;
-    HSD_GObj** p;
-    HSD_GObj** q;
-    DynamicModelDesc** sp18;
-    int i;
+    DynamicModelDesc** scene_models;
     memzero(stock, sizeof(*stock) - sizeof(stock->x204));
     memzero(&ifStock_804A1ACC, sizeof(ifStock_804A1ACC));
     memzero(&ifStock_804A1A8C, sizeof(ifStock_804A1A8C));
     memzero(&ifStock_804A1774, sizeof(ifStock_804A1774));
-    lbArchive_LoadSections(*ifAll_GetArchive(), (void**) &sp18, "Stc_scemdls",
+    lbArchive_LoadSections(*ifAll_GetArchive(), &scene_models, "Stc_scemdls",
                            0);
-    stock->x0 = sp18;
-    stock->x4 = sp18[1];
-    ifStock_804A1ACC.x108 = 0;
-    ifStock_804A1ACC.x0 = 0;
-    gobj = GObj_Create(14, 15, 0);
-    HSD_GObj_SetupProc(gobj, fn_802FAC34, 17);
-    ifStock_804A1ACC.x108 = (int) gobj;
-    for (i = 0; i < 130; i++) {
-        ifStock_804A1ACC.x10C[i] = NULL;
+    {
+        HSD_GObj** proc = (HSD_GObj**) &ifStock_804A1ACC.x108;
+        HSD_GObj* gobj;
+
+        stock->x0 = scene_models;
+        stock->x4 = scene_models[1];
+        *proc = NULL;
+        ifStock_804A1ACC.x0 = 0;
+        gobj = GObj_Create(14, 15, 0);
+        HSD_GObj_SetupProc(gobj, fn_802FAC34, 17);
+        *proc = gobj;
+        ifStock_802FAEC4_clear_acc(130);
     }
     if (gm_80169394() == 0) {
-        q = &ifStock_804A1774.x10C[0];
-        *q = NULL;
-        p = q;
+        HSD_GObj** proc = &ifStock_804A1774.x10C[0];
+        HSD_GObj* gobj;
+
+        *proc = NULL;
         ifStock_804A1774.x0 = 0;
         gobj = GObj_Create(14, 15, 0);
         HSD_GObj_SetupProc(gobj, fn_802FA6C4, 17);
-        *p = gobj;
-        for (i = 0; i < 130; i++) {
-            ifStock_804A1774.x10C[i + 1] = NULL;
-        }
+        *proc = gobj;
+        ifStock_802FAEC4_clear_1774(130);
     } else if (gm_8016A1F8()) {
         ifStock_804A1774.x108 = -1;
-        ifStock_802FA5BC(1); // not inlined
+        ifStock_802FAEC4_call_802FA5BC(1);
     }
-    p = ifStock_804A1A8C;
-    for (i = 0; i < 16; i++, p++) {
-        *p = NULL;
-        if (gm_8016B1A8()) {
-            *p = ifStock_802FA118(i);
-        }
-    }
-    if (gm_IsMultimanSmashMode()) {
-        // ifStock_802FA5BC(0); // inlined
-        HSD_GObj* gobj2 = GObj_Create(14, 15, 0);
-        HSD_JObj* jobj = HSD_JObjLoadJoint(stock->x4->joint);
-        HSD_GObjObject_80390A70(gobj2, HSD_GObj_JObjKind, jobj);
-        GObj_SetupGXLink(gobj2, fn_802F9598, 11, 0);
-        gm_8016895C(jobj, stock->x4, 0);
-        HSD_JObjReqAnimAll(jobj, 10.0f);
-        HSD_JObjAnimAll(jobj);
-        stock->gobj = gobj2;
-        lb_80011E24(jobj, &stock->jobj, 0, 1, 2, 3, 4, 5, -1);
-    }
+    ifStock_802FAEC4_init_1A8C(ifStock_804A1A8C);
 }
-#ifdef MUST_MATCH
-#pragma pop
-#endif
 
 void ifStock_802FB390(void)
 {
