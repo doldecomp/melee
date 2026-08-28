@@ -1118,7 +1118,7 @@ s32 fn_8017D9C0(const u8* used_ckinds, const u8* preset_ckinds)
     s32 i;
     s32 j;
     u8 temp;
-    u8* dst;
+    s32 swap_idx;
     u8 ckind;
     s32 used_idx;
     s32 preset_idx;
@@ -1126,26 +1126,24 @@ s32 fn_8017D9C0(const u8* used_ckinds, const u8* preset_ckinds)
 
     PAD_STACK(8);
 
-    p = base = lbl_803D79F0;
+    base = lbl_803D79F0;
+    p = lbl_803D79F0;
     len = 0;
     while ((s32) *p != CHKIND_NONE) {
         p++;
         len++;
     }
 
-    p = base;
     for (j = 0; j < len; j++) {
-        temp = *p;
-        dst = &base[HSD_Randi(len)];
-        *p = *dst;
-        p++;
-        *dst = temp;
+        temp = lbl_803D79F0[j];
+        swap_idx = HSD_Randi(len);
+        lbl_803D79F0[j] = base[swap_idx];
+        base[swap_idx] = temp;
     }
 
-    p = base;
     for (i = 0; i < len; i++) {
-        if (gm_IsCKindUnlocked(*p) != 0) {
-            ckind = *p;
+        if (gm_IsCKindUnlocked(((u8*) base)[i]) != 0) {
+            ckind = ((u8*) base)[i];
             for (used_idx = 0; used_idx < 4; used_idx++) {
                 if ((s8) ckind == (s8) used_ckinds[used_idx]) {
                     used_idx = -1;
@@ -1164,7 +1162,6 @@ s32 fn_8017D9C0(const u8* used_ckinds, const u8* preset_ckinds)
                 }
             }
         }
-        p++;
     }
 
     return CHKIND_NONE;
