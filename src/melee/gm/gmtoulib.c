@@ -226,14 +226,14 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
     u8 tm_x2E;
 
     TmData* tm = gm_GetTournamentData();
-    BracketEntrySlot* slot = &lbl_80473AB8[entry_idx].slots[slot_idx];
+    BracketData* bracket = (BracketData*) lbl_80473AB8;
 
-    p34 = &slot->x34;
-    p3C = &slot->x3C;
-    p44 = &slot->x44;
-    p38 = &slot->x38;
-    p40 = &slot->x40;
-    p48 = &slot->x48;
+    p34 = &bracket->entries[entry_idx].slots[slot_idx].x34;
+    p3C = &bracket->entries[entry_idx].slots[slot_idx].x3C;
+    p44 = &bracket->entries[entry_idx].slots[slot_idx].x44;
+    p38 = &bracket->entries[entry_idx].slots[slot_idx].x38;
+    p40 = &bracket->entries[entry_idx].slots[slot_idx].x40;
+    p48 = &bracket->entries[entry_idx].slots[slot_idx].x48;
     entry = &lbl_80473AB8[entry_idx];
 
     if (entry->x1 != 0) {
