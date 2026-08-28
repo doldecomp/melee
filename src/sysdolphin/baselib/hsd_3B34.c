@@ -221,6 +221,7 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
     u16 pixel;
     s32 tile_row_offset;
     JpegLumaPair* luma_pair;
+    u16* pixel_ptr;
 
     tile_row_offset = 0;
     tile_stride = ((width + 0xF) / 16) << 6;
@@ -248,7 +249,6 @@ void hsd_803B3408(u8* image, s32 x, s32 y, s32 width, s32 height)
                     s32 blue_chroma;
                     u16 pixel;
                     u16 pixel_again;
-                    u16* pixel_ptr;
                     JpegWork* chroma_work;
 
                     chroma_x_offset = (chroma_x & 2) * 4;
