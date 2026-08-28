@@ -136,6 +136,19 @@ int ifStock_802F7EFC(int arg0, int arg1)
     return 0;
 }
 
+static inline int ifStock_802F8298_get_count(
+    int i, struct IfStockUserData* user_data,
+    struct ifStock_804A1378* stock)
+{
+    return stock->x204[user_data->player].x0[i + 5];
+}
+
+static inline unsigned char* ifStock_802F8298_get_data(
+    struct IfStockUserData* user_data, struct ifStock_804A1378* stock)
+{
+    return stock->x204[user_data->player].x0;
+}
+
 void ifStock_802F8298(HSD_GObj* gobj)
 {
     struct IfStockUserData* user_data;
@@ -181,8 +194,8 @@ void ifStock_802F8298(HSD_GObj* gobj)
                     vecB.z += vecA.z;
                     efSync_Spawn(0x474, gobj, &vecB);
                 }
-                if (stock->x204[user_data->player].x0[i + 5] < 10) {
-                    stock->x204[user_data->player].x0[i + 5] += 1;
+                if (ifStock_802F8298_get_count(i, user_data, stock) < 10) {
+                    ifStock_802F8298_get_data(user_data, stock)[i + 5] += 1;
                 }
             }
             HSD_JObjReqAnimAll(jobj2,
