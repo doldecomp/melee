@@ -522,7 +522,6 @@ set(SOURCES
     src/melee/gm/gm_1ADD.c
     src/melee/gm/gm_1AED.c
     src/melee/gm/gm_1B03.c
-    src/melee/gm/gm_1B0FB.c
     src/melee/gm/gmmenumode.c
     src/melee/gm/gmvsmode.c
     src/melee/gm/gm_1BA8.c
