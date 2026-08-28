@@ -18,7 +18,7 @@
 /* 1B14A0 */ static void onEnterCss(GameScene*);
 /* 1B14DC */ static void onExitCss(GameScene*);
 /* 1B1514 */ static void onEnterSss(GameScene*);
-/* 1B154C */ static void OnExitSss(GameScene*);
+/* 1B154C */ static void onExitSss(GameScene*);
 /* 1B1588 */ static void onEnterVs(GameScene*);
 /* 1B15C8 */ static void onExitVs(GameScene*);
 /* 1B1648 */ static void onEnterSuddenDeath(GameScene*);
@@ -44,7 +44,7 @@ GameScene gm_803DD9A0_Scenes[] = {
         lbDvdPreload_3,
         0,
         onEnterSss,
-        OnExitSss,
+        onExitSss,
         {
             GS_SSS,
             &gm_80480668,
@@ -204,7 +204,7 @@ void onEnterSss(GameScene* arg0)
     gm_801A5754(arg0, gm_801A5244());
 }
 
-void OnExitSss(GameScene* arg0)
+void onExitSss(GameScene* arg0)
 {
     gm_801A57A8(arg0, gm_801A5244(), 0);
 }
