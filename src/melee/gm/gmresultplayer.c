@@ -1685,8 +1685,6 @@ void fn_8017AA78(const u8* arg0)
     PackedS16x4* p5;
     PackedS16x4* p7;
     lbl_8046E3AC_t* state;
-    MatchEnd* end;
-    struct MatchPlayerData* player_standings;
 
     memzero(disp->pad_000, sizeof(disp->pad_000));
     lbBgFlash_800208EC(6);
@@ -1708,8 +1706,6 @@ void fn_8017AA78(const u8* arg0)
     disp->state.x0_6 = 0;
     p5 = (PackedS16x4*) lbl_803D7038;
     state = &disp->state;
-    end = &state->match_end;
-    player_standings = end->player_standings;
     p7 = (PackedS16x4*) lbl_803D7018;
 
     {
@@ -1721,10 +1717,12 @@ void fn_8017AA78(const u8* arg0)
         (void) b;
         state->dim_w1[0] = a;
         state->dim_w1[1] = b;
-        a = lbl_804D3FD8;
-        b = lbl_804D3FDC;
         {
             u32* dim_h1 = inline3(state);
+            a = lbl_804D3FD8;
+            (void) a;
+            b = lbl_804D3FDC;
+            (void) b;
             dim_h1[0] = a;
             dim_h1[1] = b;
         }
@@ -1748,14 +1746,15 @@ void fn_8017AA78(const u8* arg0)
 
     {
         int i;
-        struct MatchTeamData* team_standings;
         for (i = 0; i < 4; i++) {
             state->player_flags[i] = 0;
             state->costume_override[i] = arg0[i];
-            if (inline4(disp) == OUTCOME_NO_CONTEST) {
-                player_standings[i].is_big_loser = 1;
+            if ((u8) inline4(disp) == OUTCOME_NO_CONTEST) {
+                struct MatchTeamData* team_standings;
+                state->match_end.player_standings[i].is_big_loser = 1;
                 team_standings = fn_8017AA78_get_team_standings(disp);
-                team_standings[player_standings[i].team].is_big_loser = 1;
+                team_standings[state->match_end.player_standings[i].team]
+                    .is_big_loser = 1;
             }
             state->x6[i] = 0;
             state->score_tbl[i] = p5[i];
