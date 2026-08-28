@@ -83,9 +83,9 @@ void gm_801BFABC(GameScene* arg0)
     gm_80167A64(&temp_r30->rules);
     gm_80167A14(temp_r30->players);
     temp_r30->rules.x0_6 = false;
-    temp_r30->rules.x0_0 = 1;
+    temp_r30->rules.match_mode = 1;
     temp_r30->rules.x0_3 = 2;
-    temp_r30->rules.xE = gm_8016075C(gm_CKindToSelKind(temp_r31->x4));
+    temp_r30->rules.stkind = gm_8016075C(gm_CKindToSelKind(temp_r31->x4));
     gm_801B0620(&temp_r30->players[0], temp_r31->x0, temp_r31->x1, 1,
                 temp_r31->x2);
     gm_801B0664(&temp_r30->players[1], temp_r31->x4, 0, 1, 1);

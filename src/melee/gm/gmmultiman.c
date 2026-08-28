@@ -278,11 +278,11 @@ void gm_801B6428(GameScene* arg0)
 
     temp_r3->rules = gm_80490960.data.data.rules;
 
-    temp_r3->rules.x0_0 = 1;
+    temp_r3->rules.match_mode = 1;
     temp_r3->rules.is_teams = false;
     temp_r3->rules.x0_6 = true;
-    temp_r3->rules.x10 = 0;
-    temp_r3->rules.x0_7 = true;
+    temp_r3->rules.time_limit = 0;
+    temp_r3->rules.timer_counts_up = true;
     temp_r3->rules.timer_shows_hours = true;
     temp_r3->rules.x4_2 = true;
     temp_r3->rules.x2_5 = false;
@@ -308,10 +308,10 @@ void gm_801B6428(GameScene* arg0)
     gm_801B0620(temp_r3->players, var_r4_2, temp_r31->unk_585, 1, gm_804D68E8);
     temp_r3->players[0].xA = temp_r31->unk_586;
     temp_r3->players[0].xC_b1 = false;
-    temp_r3->rules.xE = gm_801647F8(temp_r3->players[0].c_kind);
+    temp_r3->rules.stkind = gm_801647F8(temp_r3->players[0].c_kind);
     {
         PreloadCacheScene* scene = lbDvd_GetPreloadCacheScene();
-        scene->game_cache.stkind = temp_r3->rules.xE;
+        scene->game_cache.stkind = temp_r3->rules.stkind;
     }
     lbDvd_80018254();
     gm_8016F088(temp_r3);
@@ -501,10 +501,10 @@ static void gm_801B6AD8_inline(GameScene* scene, int x)
 void gm_801B69C0(StartMeleeData* arg0)
 {
     gmMainLib_GetGameRules();
-    arg0->rules.x0_0 = 0;
+    arg0->rules.match_mode = 0;
     arg0->rules.x0_6 = true;
-    arg0->rules.x0_7 = true;
-    arg0->rules.x10 = 0;
+    arg0->rules.timer_counts_up = true;
+    arg0->rules.time_limit = 0;
     arg0->rules.timer_shows_hours = true;
     arg0->rules.x4_2 = true;
     arg0->rules.x2_5 = false;
@@ -513,7 +513,7 @@ void gm_801B69C0(StartMeleeData* arg0)
     arg0->rules.x4_3 = true;
     arg0->rules.x5_1 = true;
     arg0->rules.is_teams = true;
-    arg0->rules.xE = 0x11D;
+    arg0->rules.stkind = 0x11D;
     arg0->rules.x18 = 0;
     arg0->rules.xB = 2;
     arg0->rules.x2C = 0.5F;
@@ -565,15 +565,15 @@ static inline void gmMultiman_InitTimedRules(StartMeleeData* match,
                                              u32 time_limit)
 {
     match->rules.x0_6 = true;
-    match->rules.x0_7 = false;
-    match->rules.x10 = time_limit;
+    match->rules.timer_counts_up = false;
+    match->rules.time_limit = time_limit;
 }
 
 static inline void gmMultiman_InitScoreRules(StartMeleeData* match)
 {
     match->rules.x0_6 = false;
-    match->rules.x0_7 = false;
-    match->rules.x10 = 0;
+    match->rules.timer_counts_up = false;
+    match->rules.time_limit = 0;
     match->rules.x5_0 = true;
     match->rules.x5_1 = false;
 }

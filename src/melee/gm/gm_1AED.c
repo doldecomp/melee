@@ -10,6 +10,31 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/mn/inlines.h>
 
+struct leaveData {
+    int unk0;
+    u8 unk4;
+};
+
+struct enterData_x0_t {
+    int unk0;
+    u8 unk4;
+    u8 unk5;
+    u8 _[2];
+};
+
+struct enterData {
+    struct enterData_x0_t unk0;
+    struct leaveData unk8;
+    int unk10;
+    int unk14;
+    int unk18;
+    u8 unk1C;
+};
+
+/* 1AEE6C */ static void gm_801AEE6C(int, int, int);
+/* 1AF0D4 */ static bool gm_801AF0D4(void);
+/* 1AF250 */ static void gm_801AF250(void);
+
 static u8 gm_804D6870;
 static u16 gm_804D6872;
 
@@ -20,7 +45,7 @@ static int gm_803DD550_us[] = {
     1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 5, 2, 5, 2, 3, 2, 2, 4, 2, 3, 2, 1, 2,
 };
 
-static struct gm_80480DA8_t gm_80480DA8;
+static struct enterData gm_80480DA8;
 
 void gm_801AEE6C(int arg0, int arg1, int arg2)
 {
@@ -414,20 +439,23 @@ void gm_801AF568_OnFrame(void)
     }
 }
 
-void gm_801B0264_OnEnter(struct gm_80480DA8_t* arg0)
+static inline bool checkUnk0(void)
 {
-    s32 var_r0;
+    if (gm_80480DA8.unk0.unk0 == 0) {
+        return false;
+    }
+    return true;
+}
+
+void gm_801B0264_OnEnter(void* user_data)
+{
+    struct enterData* data = user_data;
 
     memzero(&gm_80480DA8, sizeof(gm_80480DA8));
-    if (arg0 != 0U) {
-        gm_80480DA8.unk0 = arg0->unk0;
+    if (data != NULL) {
+        gm_80480DA8.unk0 = data->unk0;
     }
-    if (gm_80480DA8.unk0.unk0 == 0) {
-        var_r0 = 0;
-    } else {
-        var_r0 = 1;
-    }
-    gm_80480DA8.unk14 = var_r0;
+    gm_80480DA8.unk14 = checkUnk0();
     gm_80480DA8.unk8.unk4 = gm_80480DA8.unk0.unk5;
     lb_8001C550();
     lb_8001D164(0);
@@ -436,10 +464,11 @@ void gm_801B0264_OnEnter(struct gm_80480DA8_t* arg0)
     gm_804D6872 = 6;
 }
 
-void gm_801B0304_OnLeave(struct gm_80480DA8_8_t* arg0)
+void gm_801B0304_OnLeave(void* user_data)
 {
-    if (arg0 != NULL) {
-        *arg0 = gm_80480DA8.unk8;
+    struct leaveData* data = user_data;
+    if (data != NULL) {
+        *data = gm_80480DA8.unk8;
     }
     gm_801AE848(0);
 }

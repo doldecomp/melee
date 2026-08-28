@@ -5,51 +5,55 @@
 #include "gm_unsplit.h"
 
 #include "ft/forward.h"
-#include "pl/forward.h"
 
-#include "vi/vi1201v1.h"
+#include "gm/gmtitlemode.h"
+#include "melee/cm/camera.h"
+#include "melee/db/db.h"
+#include "melee/ft/ftbosslib.h"
+#include "melee/ft/ftlib.h"
+#include "melee/gm/gm_1601.h"
+#include "melee/gm/gm_16F1.h"
+#include "melee/gm/gm_unsplit.h"
+#include "melee/gm/gmmain_lib.h"
+#include "melee/gm/gmvsmelee.h"
+#include "melee/gm/types.h"
+#include "melee/gr/ground.h"
+#include "melee/if/ifstock.h"
+#include "melee/it/items/itevyoshiegg.h"
+#include "melee/lb/lbarchive.h"
+#include "melee/lb/lbaudio_ax.h"
+#include "melee/lb/lbbgflash.h"
+#include "melee/lb/lbcardgame.h"
+#include "melee/lb/lbcardnew.h"
+#include "melee/lb/lbdvd.h"
+#include "melee/lb/lbmthp.h"
+#include "melee/lb/types.h"
+#include "melee/mn/types.h"
+
+#include "melee/pl/forward.h"
+
+#include "melee/pl/player.h"
+#include "melee/pl/plbonuslib.h"
+#include "melee/vi/vi0102.h"
+#include "melee/vi/vi0401.h"
+#include "melee/vi/vi0501.h"
+#include "melee/vi/vi0502.h"
+#include "melee/vi/vi1101.h"
+#include "melee/vi/vi1201v1.h"
+#include "melee/vi/vi1201v2.h"
 
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/random.h>
-#include <melee/cm/camera.h>
-#include <melee/db/db.h>
-#include <melee/ft/ftbosslib.h>
-#include <melee/ft/ftlib.h>
-#include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_16F1.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/gmvsmelee.h>
-#include <melee/gm/types.h>
-#include <melee/gr/ground.h>
-#include <melee/if/ifstock.h>
-#include <melee/it/items/itevyoshiegg.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbbgflash.h>
-#include <melee/lb/lbcardgame.h>
-#include <melee/lb/lbcardnew.h>
-#include <melee/lb/lbdvd.h>
-#include <melee/lb/lbmthp.h>
-#include <melee/lb/types.h>
-#include <melee/mn/types.h>
-#include <melee/pl/player.h>
-#include <melee/pl/plbonuslib.h>
-#include <melee/vi/vi0102.h>
-#include <melee/vi/vi0401.h>
-#include <melee/vi/vi0501.h>
-#include <melee/vi/vi0502.h>
-#include <melee/vi/vi1101.h>
-#include <melee/vi/vi1201v1.h>
-#include <melee/vi/vi1201v2.h>
 
-int __rlwinm(int, int, int, int);
+#ifdef MUST_MATCH
+#include <MetroTRK/intrinsics.h>
+#endif
 
 GameScene gm_803DF618_Scenes[] = {
     {
         0,
-        3,
+        lbDvdPreload_3,
         0,
         gm_801BAA60,
         gm_801BAAD0,
@@ -61,7 +65,7 @@ GameScene gm_803DF618_Scenes[] = {
     },
     {
         1,
-        3,
+        lbDvdPreload_3,
         0,
         gm_801BAD70,
         gm_801BB758,
@@ -71,11 +75,8 @@ GameScene gm_803DF618_Scenes[] = {
             &gm_804979D8,
         },
     },
-    { 0xFF },
+    { -1 },
 };
-
-extern u8 gm_804D68F8;
-extern u8 gm_804D68F9;
 
 void gm_801BA8FC(void)
 {
@@ -248,18 +249,18 @@ void gm_801BAD70(GameScene* arg0)
                           "sqEventInitDataLevelTbl", 0);
     levels = gm_804D6900[0];
     gm_80167A64(&md->rules);
-    md->rules.x0_0 = levels[level]->x8->x0_0;
+    md->rules.match_mode = levels[level]->x8->x0_0;
     md->rules.x0_3 = levels[level]->x8->x0_3;
     md->rules.x0_6 = levels[level]->x8->x0_6;
-    md->rules.x0_7 = levels[level]->x8->x0_7;
+    md->rules.timer_counts_up = levels[level]->x8->x0_7;
     md->rules.x1_0 = 1;
     md->rules.x1_1 = 0;
     md->rules.x1_2 = 0;
     md->rules.x1_3 = 0;
     md->rules.timer_shows_hours = 0;
-    md->rules.x1_7 = levels[level]->x8->x1_1;
+    md->rules.friendly_fire = levels[level]->x8->x1_1;
     md->rules.x2_2 = 0;
-    md->rules.x2_3 = 0;
+    md->rules.single_button = 0;
     md->rules.disable_pausing = 0;
     md->rules.x2_5 = levels[level]->x8->x1_2;
     md->rules.x3_1 = 1;
@@ -284,8 +285,8 @@ void gm_801BAD70(GameScene* arg0)
     md->rules.xB = levels[level]->x8->unk3;
     md->rules.xC = levels[level]->x8->unk4;
     md->rules.xD = 0x6E;
-    md->rules.xE = levels[level]->x8->unk6;
-    md->rules.x10 = levels[level]->x8->unk8;
+    md->rules.stkind = levels[level]->x8->unk6;
+    md->rules.time_limit = levels[level]->x8->unk8;
     md->rules.x14 = 0;
     md->rules.x18 = 0;
     md->rules.x20 = levels[level]->x8->x10;
@@ -293,7 +294,7 @@ void gm_801BAD70(GameScene* arg0)
     md->rules.x30 = levels[level]->x8->x1C;
     md->rules.x34 = levels[level]->x8->unk20;
     md->rules.x44 = fn_801BBFE8;
-    if (md->rules.x0_7 & 1) {
+    if (md->rules.timer_counts_up & 1) {
         ev->xB_0 = 1;
     }
     if (levels[level]->x8->x1_0) {
@@ -306,12 +307,12 @@ void gm_801BAD70(GameScene* arg0)
         u16 stage;
         ev->xB_4 = 1;
         stage = levels[level]->x10->stage[ev->x20];
-        md->rules.xE = stage;
+        md->rules.stkind = stage;
         ev->x48 = stage;
         if (ev->x20 > 0) {
             md->rules.x1_2 = 1;
             md->rules.x1_3 = 1;
-            md->rules.x10 = ev->x2C;
+            md->rules.time_limit = ev->x2C;
         }
         gm_8016A92C(&md->rules);
     }
@@ -1213,7 +1214,7 @@ GameScene gm_803DFB80_Scenes[] = {
 GameScene gm_803DFBC8_Scenes[] = {
     {
         0,
-        3,
+        lbDvdPreload_3,
         0,
         gm_801BF85C,
         gm_801BF898,
@@ -1225,7 +1226,7 @@ GameScene gm_803DFBC8_Scenes[] = {
     },
     {
         1,
-        3,
+        lbDvdPreload_3,
         0,
         gm_801BF4DC,
         NULL,
@@ -1237,9 +1238,9 @@ GameScene gm_803DFBC8_Scenes[] = {
     },
     {
         2,
-        3,
+        lbDvdPreload_3,
         0,
-        gm_801B087C,
+        gmTitleMode_OnEnter,
         gm_801BF060,
         {
             GS_TITLE,
@@ -1249,7 +1250,7 @@ GameScene gm_803DFBC8_Scenes[] = {
     },
     {
         3,
-        3,
+        lbDvdPreload_3,
         0,
         gm_801BF4DC,
         NULL,
@@ -1261,7 +1262,7 @@ GameScene gm_803DFBC8_Scenes[] = {
     },
     {
         4,
-        3,
+        lbDvdPreload_3,
         0,
         NULL,
         gm_801BF8B8,
@@ -1273,7 +1274,7 @@ GameScene gm_803DFBC8_Scenes[] = {
     },
     {
         5,
-        3,
+        lbDvdPreload_3,
         0,
         NULL,
         gm_801BF8D8,
@@ -1289,7 +1290,7 @@ GameScene gm_803DFBC8_Scenes[] = {
 GameScene gm_803DFC70_Scenes[] = {
     {
         0,
-        2,
+        lbDvdPreload_2,
         0,
         gm_801BF728,
         NULL,
@@ -1301,7 +1302,7 @@ GameScene gm_803DFC70_Scenes[] = {
     },
     {
         1,
-        2,
+        lbDvdPreload_2,
         0,
         NULL,
         NULL,
@@ -1313,7 +1314,7 @@ GameScene gm_803DFC70_Scenes[] = {
     },
     {
         2,
-        2,
+        lbDvdPreload_2,
         0,
         NULL,
         NULL,
@@ -1325,7 +1326,7 @@ GameScene gm_803DFC70_Scenes[] = {
     },
     {
         3,
-        2,
+        lbDvdPreload_2,
         0,
         NULL,
         NULL,
@@ -1337,7 +1338,7 @@ GameScene gm_803DFC70_Scenes[] = {
     },
     {
         4,
-        2,
+        lbDvdPreload_2,
         0,
         NULL,
         NULL,
@@ -1349,7 +1350,7 @@ GameScene gm_803DFC70_Scenes[] = {
     },
     {
         5,
-        2,
+        lbDvdPreload_2,
         0,
         NULL,
         NULL,
@@ -1361,7 +1362,7 @@ GameScene gm_803DFC70_Scenes[] = {
     },
     {
         6,
-        2,
+        lbDvdPreload_2,
         0,
         NULL,
         NULL,
@@ -1373,7 +1374,7 @@ GameScene gm_803DFC70_Scenes[] = {
     },
     {
         7,
-        2,
+        lbDvdPreload_2,
         0,
         NULL,
         NULL,
@@ -1385,7 +1386,7 @@ GameScene gm_803DFC70_Scenes[] = {
     },
     {
         8,
-        2,
+        lbDvdPreload_2,
         0,
         NULL,
         NULL,
@@ -1397,7 +1398,7 @@ GameScene gm_803DFC70_Scenes[] = {
     },
     {
         9,
-        2,
+        lbDvdPreload_2,
         0,
         NULL,
         NULL,
@@ -1409,7 +1410,7 @@ GameScene gm_803DFC70_Scenes[] = {
     },
     {
         10,
-        2,
+        lbDvdPreload_2,
         0,
         NULL,
         NULL,
@@ -1421,7 +1422,7 @@ GameScene gm_803DFC70_Scenes[] = {
     },
     {
         11,
-        2,
+        lbDvdPreload_2,
         0,
         NULL,
         gm_801BF834,
@@ -1437,7 +1438,7 @@ GameScene gm_803DFC70_Scenes[] = {
 GameScene gm_803DFDA8_Scenes[] = {
     {
         0,
-        2,
+        lbDvdPreload_2,
         0,
         gm_801BF8F8,
         gm_801BF920,
@@ -1447,7 +1448,7 @@ GameScene gm_803DFDA8_Scenes[] = {
             &gm_804D693C,
         },
     },
-    { 0xFF },
+    { -1 },
 };
 
 int gm_801BC488(void)
@@ -1571,7 +1572,7 @@ void gm_801BC754(HSD_GObj* gobj)
     PAD_STACK(0x48);
 
     temp_r29 = &gmMainLib_804D3EE0->unk_530;
-    switch (gm_16AE_GetUnkData_0()->x24C8.x0_0) {
+    switch (gm_16AE_GetUnkData_0()->x24C8.match_mode) {
     case 1:
         count = 0;
         temp_r28 = &gmMainLib_804D3EE0->unk_530;
@@ -3228,7 +3229,13 @@ void gm_SetupTitleDemo(void)
     do {
         count = stage_pool[HSD_Randi(8)];
         cur_id = gm_801BF694();
-        prev = __rlwinm(cur_id, 0, 24, 31);
+        prev =
+#ifdef MUST_MATCH
+            __rlwinm(cur_id, 0, 24, 31);
+#else
+            cur_id & 0xFF;
+#endif
+
         c = gm_801641CC((u8) count);
     } while (c == prev);
     gm_801BF684(gm_801641CC((u8) count));
@@ -3282,9 +3289,9 @@ void gm_801BF4DC(GameScene* arg0)
     gm_80168FC4();
     gm_80167A64(&md->rules);
 
-    md->rules.x0_0 = gm_801BF6B8();
+    md->rules.match_mode = gm_801BF6B8();
     md->rules.x0_6 = false;
-    md->rules.x10 = 0;
+    md->rules.time_limit = 0;
     md->rules.x1_0 = false;
     md->rules.x1_2 = true;
     md->rules.x1_3 = true;
@@ -3292,7 +3299,7 @@ void gm_801BF4DC(GameScene* arg0)
     md->rules.x7 = 0;
     md->rules.x44 = gm_80183218;
     md->rules.x34 = gm_804DAC88;
-    md->rules.xE = (u16) gm_801BF694();
+    md->rules.stkind = (u16) gm_801BF694();
     gm_80167A14(md->players);
 
     for (i = 0; i < 4; i++) {
@@ -3303,7 +3310,7 @@ void gm_801BF4DC(GameScene* arg0)
         md->players[i].cpu_level = 9;
         md->players[i].xE = 4;
         md->players[i].xC_b1 = false;
-        if (md->rules.x0_0 == 1) {
+        if (md->rules.match_mode == 1) {
             md->players[i].stocks = 99;
         }
     }

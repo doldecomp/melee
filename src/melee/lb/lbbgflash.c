@@ -525,8 +525,6 @@ static inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
 #endif
 void fn_80020AEC(HSD_JObj* jobj, Mtx out)
 {
-    MtxPtr out_mtx = out;
-    HSD_JObj* parent;
     HSD_JObj* cur;
     s32 i;
     Mtx tmp;
@@ -534,26 +532,17 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
     volatile f32 scale_mag;
     u8 _[4];
 
-    if (jobj == NULL) {
-        parent = NULL;
-    } else {
-        parent = jobj->parent;
-    }
-
-    {
-        MtxPtr jobj_mtx = HSD_JObjGetMtxPtr(jobj);
-        HSD_JObjGetMtxPtr(parent);
-        HSD_MtxInverseConcat(parent->mtx, jobj_mtx, out_mtx);
-    }
+    HSD_MtxInverseConcat(HSD_JObjGetMtxPtr(jobj_parent(jobj)),
+                         HSD_JObjGetMtxPtr(jobj), out);
 
     for (i = 0; i < 3; i++) {
         f32 mag;
         f32 scale_sq;
         f32 factor;
 
-        col.x = out_mtx[0][i];
-        col.y = out_mtx[1][i];
-        col.z = out_mtx[2][i];
+        col.x = out[0][i];
+        col.y = out[1][i];
+        col.z = out[2][i];
 
         mag = PSVECMag(&col);
         if (mag > 1e-10f) {
@@ -587,21 +576,15 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
         col.x *= factor;
         col.y *= factor;
         col.z *= factor;
-        out_mtx[0][i] = col.x;
-        out_mtx[1][i] = col.y;
-        out_mtx[2][i] = col.z;
+        out[0][i] = col.x;
+        out[1][i] = col.y;
+        out[2][i] = col.z;
     }
 
     cur = jobj_parent(jobj);
     while (cur != NULL) {
         if (jobj_parent(cur) != NULL) {
-            HSD_JObj* grandpar;
-            if (cur == NULL) {
-                grandpar = NULL;
-            } else {
-                grandpar = cur->parent;
-            }
-            HSD_MtxInverseConcat(HSD_JObjGetMtxPtr(grandpar),
+            HSD_MtxInverseConcat(HSD_JObjGetMtxPtr(jobj_parent(cur)),
                                  HSD_JObjGetMtxPtr(cur), tmp);
         } else {
             PSMTXCopy(HSD_JObjGetMtxPtr(cur), tmp);
@@ -627,7 +610,7 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
             tmp[2][i] = col.z;
         }
 
-        PSMTXConcat(tmp, out_mtx, out_mtx);
+        PSMTXConcat(tmp, out, out);
         cur = jobj_parent(cur);
     }
 }

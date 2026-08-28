@@ -154,7 +154,7 @@ void gm_801A57A8(GameScene* scene_data, VsModeData* vs_data, u8 id)
     if (sss_data->start_game != 0) {
         *vs_data = sss_data->data;
         lbAudioAx_80026F2C(0x18);
-        lbAudioAx_8002702C(8, lbAudioAx_80026EBC(vs_data->data.rules.xE));
+        lbAudioAx_8002702C(8, lbAudioAx_80026EBC(vs_data->data.rules.stkind));
         lbAudioAx_80027168();
     } else {
         gm_SetPendingSceneIndex(id);
@@ -172,7 +172,7 @@ void gm_801A583C(GameScene* scene_data, VsModeData* vs_data,
     gm_80167BC8(vs_data);
     match_start_data->rules = vs_data->data.rules;
 
-    if (match_start_data->rules.x0_0 == 1) {
+    if (match_start_data->rules.match_mode == 1) {
         match_start_data->rules.x2_0 = 1;
     }
     match_start_data->rules.x4_1 = 1;
