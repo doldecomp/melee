@@ -2560,7 +2560,6 @@ void hsd_80397520(void* node_ptr)
     }
 }
 
-// @TODO: Currently 99.93% match - CR update differs
 void hsd_803975D4(void)
 {
     struct ParticleInputState {
@@ -2619,6 +2618,10 @@ void hsd_803975D4(void)
               pads[((struct ParticleInputState*) sp)->port].button;
     sp->xC0 = buttons;
     new_press = (u16) (buttons & changed);
+#ifdef MUST_MATCH
+    // Keep MWCC's CR update on the copy into new_press.
+    new_press = (u16) new_press;
+#endif
     if (new_press != 0) {
         ((struct ParticleInputState*) sp)->repeat = 0;
     } else if (pads[((struct ParticleInputState*) sp)->port].button != 0) {
