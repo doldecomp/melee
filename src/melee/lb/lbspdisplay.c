@@ -834,7 +834,7 @@ void lb_800138D8(HSD_GObj* gobj, s8 arg1)
 static const Vec3 lb_803B72A8 = { 0.0F, 0.0F, 1.0F };
 static const Vec3 lb_803B72B4 = { 0.0F, 0.0F, 0.0F };
 
-void lb_800138EC(s32 arg0, GObj_RenderFunc render_func, u32 arg2, s8 arg3,
+HSD_GObj* lb_800138EC(s32 arg0, GObj_RenderFunc render_func, u32 arg2, s8 arg3,
                  f32 x, f32 y, f32 w, f32 h)
 {
     HSD_GObj* gobj;
