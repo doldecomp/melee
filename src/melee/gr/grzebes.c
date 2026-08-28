@@ -2118,8 +2118,7 @@ bool grZebes_801DBB60(Item_GObj* yaku)
                                 {
                                     f32 calculated_width =
                                         (f32) (0.5 *
-                                               (2.0 *
-                                                    (f64) bubbles->x18_size +
+                                               (2.0 * (f64) bubbles->x18_size +
                                                 (f64) (t + width)));
                                     new_width = calculated_width;
                                 }

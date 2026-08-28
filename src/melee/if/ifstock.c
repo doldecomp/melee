@@ -51,8 +51,8 @@ struct IfStockDataOffset {
     struct IfStockData data;
 };
 
-static inline HSD_JObj* ifStock_802F7EFC_inline(
-    int index, int player, struct ifStock_804A1378* stock)
+static inline HSD_JObj* ifStock_802F7EFC_inline(int index, int player,
+                                                struct ifStock_804A1378* stock)
 {
     return stock->player[player].x4[index];
 }

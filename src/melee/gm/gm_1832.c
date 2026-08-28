@@ -1093,8 +1093,7 @@ void fn_80186400(void)
 
 static char lbl_804D40B0[] = "IrRdMap";
 
-static inline void
-gm_80186634_SetupScene(void)
+static inline void gm_80186634_SetupScene(void)
 {
     HSD_GObj* camera_gobj;
     HSD_GObj* camera_gobj2;
@@ -1125,8 +1124,7 @@ gm_80186634_SetupScene(void)
     jobj = HSD_JObjLoadJoint(lbl_804D6600->models[0]->joint);
     HSD_GObjObject_80390A70(model_gobj, HSD_GObj_JObjKind, jobj);
     GObj_SetupGXLink(model_gobj, HSD_GObj_JObjCallback, 0xC, 0);
-    HSD_GObj_SetupProc(model_gobj, (HSD_GObjEvent) (Event) fn_8018504C,
-                       0x11);
+    HSD_GObj_SetupProc(model_gobj, (HSD_GObjEvent) (Event) fn_8018504C, 0x11);
     gm_8016895C(jobj, lbl_804D6600->models[0], 0);
     HSD_JObjReqAnimAll(jobj, (f32) ((lbl_8047368C.xEE - 1) * 0x32));
     HSD_JObjAnimAll(jobj);
@@ -1199,7 +1197,6 @@ void fn_80186634(void* arg0)
 
     lbAudioAx_80023F28(0x2D);
 }
-
 
 void gm_80186DFC_OnFrame(void)
 {

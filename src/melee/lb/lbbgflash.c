@@ -544,9 +544,8 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
     cur = HSD_JObjGetParent(jobj);
     while (cur != NULL) {
         if (HSD_JObjGetParent(cur) != NULL) {
-            HSD_MtxInverseConcat(
-                HSD_JObjGetMtxPtr(HSD_JObjGetParent(cur)),
-                HSD_JObjGetMtxPtr(cur), tmp);
+            HSD_MtxInverseConcat(HSD_JObjGetMtxPtr(HSD_JObjGetParent(cur)),
+                                 HSD_JObjGetMtxPtr(cur), tmp);
         } else {
             PSMTXCopy(HSD_JObjGetMtxPtr(cur), tmp);
         }

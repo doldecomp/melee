@@ -934,8 +934,7 @@ static inline TySortElem tyDisplay_GetSortElemValue(TySortElem* elem)
     return *elem;
 }
 
-static inline void _tyDisplay_80319994_place(TyDspGrid* grid,
-                                             TyDspConfig* cfg)
+static inline void _tyDisplay_80319994_place(TyDspGrid* grid, TyDspConfig* cfg)
 {
     s32 count;
 
