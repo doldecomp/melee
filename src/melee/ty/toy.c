@@ -4194,10 +4194,14 @@ void _Toy_8030E110(HSD_GObj* arg0)
     } sp140;
     Vec3 sp134;
     Vec3 sp128;
-    void* spD8;
-    void* spD4;
-    void* spCC;
-    void* spC8;
+    struct {
+        void* next;
+        void* next_wrap;
+        u8 pad[4];
+        void* prev;
+        void* prev_wrap;
+        u8 trailing_pad[0x4C];
+    } archive_symbols;
     Toy26B8* base;
     ToyCameraControl* ed4;
     HSD_CObj* cobj;
@@ -4214,8 +4218,7 @@ void _Toy_8030E110(HSD_GObj* arg0)
     s16 trophy_id;
     HSD_Archive* archive;
 
-    PAD_STACK(72);
-    PAD_STACK(68);
+    PAD_STACK(60);
 
     base = (Toy26B8*) &_Toy_804A26B8;
     anim = &base->anim;
@@ -4556,8 +4559,8 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                         list_entry->archive =
                                             lbArchive_LoadSymbols(
                                                 list_entry->archive_name,
-                                                &spD8, list_entry->symbol_name,
-                                                0);
+                                                &archive_symbols.prev_wrap,
+                                                list_entry->symbol_name, 0);
                                     }
                                 } else {
                                     ToyListEntry* list_entry;
@@ -4581,7 +4584,8 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                     list_entry->trophy_id = trophy_id;
                                     list_entry->archive =
                                         lbArchive_LoadSymbols(
-                                            list_entry->archive_name, &spD4,
+                                            list_entry->archive_name,
+                                            &archive_symbols.prev,
                                             list_entry->symbol_name, 0);
                                 }
                                 {
@@ -4674,7 +4678,8 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                     list_entry->trophy_id = trophy_id;
                                     list_entry->archive =
                                         lbArchive_LoadSymbols(
-                                            list_entry->archive_name, &spCC,
+                                            list_entry->archive_name,
+                                            &archive_symbols.next_wrap,
                                             list_entry->symbol_name, 0);
                                 } else {
                                     ToyListEntry* list_entry;
@@ -4698,7 +4703,8 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                     list_entry->trophy_id = trophy_id;
                                     list_entry->archive =
                                         lbArchive_LoadSymbols(
-                                            list_entry->archive_name, &spC8,
+                                            list_entry->archive_name,
+                                            &archive_symbols.next,
                                             list_entry->symbol_name, 0);
                                 }
                                 {
