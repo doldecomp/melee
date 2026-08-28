@@ -349,6 +349,14 @@ u8 mnNameNew_804D4F7C[8] = { 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'H' };
 GXColor const mnNameNew_804DBF44 = { 0xA6, 0x81, 0x3D, 0xFF };
 GXColor const mnNameNew_804DBF48 = { 0x00, 0x00, 0x00, 0xFF };
 
+static inline void mnNameNew_SetKeyColor(HSD_Text* text, s32 index,
+                                         GXColor* color_ptr, GXColor* color)
+{
+    *color = *color_ptr;
+    color_ptr = color;
+    HSD_SisLib_803A74F0(text, index, color_ptr);
+}
+
 s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
 {
     Vec3 sp50;
@@ -481,9 +489,7 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
         } else {
             color_ptr = &sp4C;
         }
-        color = *color_ptr;
-        color_ptr = &color;
-        HSD_SisLib_803A74F0(text, j, color_ptr);
+        mnNameNew_SetKeyColor(text, j, color_ptr, &color);
     }
 
     return (s32) text;
