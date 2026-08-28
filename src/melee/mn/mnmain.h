@@ -3,7 +3,6 @@
 
 #include <platform.h>
 
-#include "gm/forward.h"
 #include "mn/forward.h"
 
 #include "mn/types.h"
@@ -87,7 +86,7 @@ typedef struct _MenuInputState {
 /* 22D7F4 */ void mn_8022D7F4(HSD_GObj*);
 /* 22DB10 */ void mn_8022DB10(HSD_GObj*);
 /* 22DD38 */ void mn_8022DD38_OnFrame(void);
-/* 22DDA8 */ void mn_8022DDA8_OnEnter(MenuEnterData*);
+/* 22DDA8 */ void mn_8022DDA8_OnEnter(void*);
 /* 22E950 */ bool mn_IsFighterUnlocked(SelectableCharacterKind);
 /* 22E978 */ void mn_8022E978(u8 item_idx,
                               u8 enable); ///< set/unset item mask bit

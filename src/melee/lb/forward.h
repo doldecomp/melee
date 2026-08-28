@@ -114,4 +114,11 @@ typedef enum LbCardNewTaskArray {
     /* 0x0B */ LbCardNewTaskArray_Max = 11,
 } LbCardNewTaskArray;
 
+typedef enum lbDvdPreloadKind {
+    lbDvdPreload_0,
+    lbDvdPreload_1,
+    lbDvdPreload_2,
+    lbDvdPreload_3,
+} lbDvdPreloadKind;
+
 #endif

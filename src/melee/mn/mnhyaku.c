@@ -1,5 +1,7 @@
 #include "mnhyaku.h"
 
+#include "gm/forward.h"
+
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "mn/inlines.h"
