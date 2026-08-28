@@ -100,6 +100,11 @@ static inline u32 mnInfo_80251AFC_inline_2(s32 j)
     return *gmMainLib_8015D804(mnInfo_804A0968[j]);
 }
 
+static inline s32 mnInfo_80251AFC_inline_3(u8* ids, s32 i)
+{
+    return ids[i];
+}
+
 void mnInfo_80251AFC(void)
 {
     s32 i;
@@ -123,7 +128,8 @@ void mnInfo_80251AFC(void)
         for (j = i + 1; j < 0x42; j++) {
             if (mnInfo_80251A08(mnInfo_804A0968[j]) != 0 &&
                 (mnInfo_80251A08(mnInfo_804A0968[i]) == 0 ||
-                 *gmMainLib_8015D804(mnInfo_804A0968[i]) >
+                 *gmMainLib_8015D804(
+                     mnInfo_80251AFC_inline_3(mnInfo_804A0968, i)) >
                      mnInfo_80251AFC_inline_2(j)))
             {
                 u8 tmp = mnInfo_804A0968[i];
