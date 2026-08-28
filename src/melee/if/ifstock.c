@@ -695,7 +695,8 @@ void ifStock_802F98E8(unsigned char player, int b)
                     ifStock_802FB4EC(player, &c);
                 } else if (ae44->FighterMatchInfo[player].x4_b0) {
                     GXColor c = { 0x3C, 0x3C, 0x46, 0x80 };
-                    ifStock_802FB4EC(player, &c);
+                    GXColor* color = &c;
+                    ifStock_802FB4EC(player, color);
                 }
                 fn_802F9410(gobj); // inlined
             } else {
