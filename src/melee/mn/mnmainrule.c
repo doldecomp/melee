@@ -530,6 +530,22 @@ void mn_8022FD18(u8 arg0)
     HSD_JObjAnimAll(jobj2);
 }
 
+static inline void
+mn_8022FEC8_AnimDigit(HSD_JObj* jobj, u8 digit)
+{
+    HSD_JObjReqAnimAll(jobj, (f32) digit);
+    HSD_JObjAnimAll(jobj);
+}
+
+static inline void
+mn_8022FEC8_AnimDamageDigits(u8 value, struct mn_8022FB88_arg1_t* data)
+{
+    mn_8022FEC8_AnimDigit(
+        data->xA8 == NULL ? NULL : data->xA8->x10, (u8) (value / 10));
+    mn_8022FEC8_AnimDigit(
+        data->xAC == NULL ? NULL : data->xAC->x10, (u8) (value % 10));
+}
+
 static inline AnimLoopSettings* mn_8022FEC8_GetSettings(u8 rule_kind,
                                                         u8 rule_value)
 {
@@ -549,8 +565,6 @@ void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
     HSD_JObj** digit_jobjs;
     HSD_JObj* digit_jobj;
     HSD_JObj* digit_jobj2;
-    HSD_JObj* tens_jobj;
-    HSD_JObj* ones_jobj;
     int value;
     u8 default_value;
 
@@ -566,27 +580,12 @@ void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
         digit_jobjs = data->x58;
         value = arg3;
         digit_jobj = digit_jobjs[7];
-        HSD_JObjReqAnimAll(digit_jobj, (f32) (u8) (value / 10));
-        HSD_JObjAnimAll(digit_jobj);
+        mn_8022FEC8_AnimDigit(digit_jobj, (u8) (value / 10));
         digit_jobj2 = digit_jobjs[8];
-        HSD_JObjReqAnimAll(digit_jobj2, (f32) (u8) (value % 10));
-        HSD_JObjAnimAll(digit_jobj2);
+        mn_8022FEC8_AnimDigit(digit_jobj2, (u8) (value % 10));
         return;
     case 3:
-        if (data->xA8 == NULL) {
-            tens_jobj = NULL;
-        } else {
-            tens_jobj = data->xA8->x10;
-        }
-        HSD_JObjReqAnimAll(tens_jobj, (f32) (u8) (arg3 / 10));
-        HSD_JObjAnimAll(tens_jobj);
-        if (data->xAC == NULL) {
-            ones_jobj = NULL;
-        } else {
-            ones_jobj = data->xAC->x10;
-        }
-        HSD_JObjReqAnimAll(ones_jobj, (f32) (u8) (arg3 % 10));
-        HSD_JObjAnimAll(ones_jobj);
+        mn_8022FEC8_AnimDamageDigits(arg3, data);
         return;
     case 0:
     case 2:
