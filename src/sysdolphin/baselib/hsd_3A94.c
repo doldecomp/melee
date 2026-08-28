@@ -4064,7 +4064,7 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 remaining;
     s32 result;
     u8* data;
-    PAD_STACK(56);
+    PAD_STACK(80);
 
     needs_rewrite = 0;
     if (arg3 == 0) {
@@ -4240,7 +4240,7 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                         return result;
                     }
                     if (result > 0) {
-                        break;
+                        goto verify_done;
                     }
                 }
                 remaining -= chunk;
@@ -4263,38 +4263,38 @@ s32 fn_803B0120(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                         return result;
                     }
                     if (result > 0) {
-                        break;
+                        goto verify_done;
                     }
                 }
                 remaining = 0;
             }
         }
 
-        if (i >= file_blocks || remaining <= 0) {
-            if (arg3 != 0) {
-                CardCmd cmd;
-                s32 cmd_result;
-                cmd.type = 6;
-                cmd.state = state;
-                cmd_result = fn_803AC168((s32*) &cmd);
-                if (cmd_result < 0) {
-                    fn_803B0120_rewind(entries);
-                    return cmd_result;
-                }
-            } else {
-                s32 retries;
-                for (retries = 0; retries < 10; retries++) {
-                    result = CARDClose(&state->file_info);
-                    if (result != -1) {
-                        break;
-                    }
-                }
-                if (result < 0) {
-                    return -267;
-                }
-                return 1;
+        if (arg3 != 0) {
+            CardCmd cmd;
+            s32 cmd_result;
+            cmd.type = 6;
+            cmd.state = state;
+            cmd_result = fn_803AC168((s32*) &cmd);
+            if (cmd_result < 0) {
+                fn_803B0120_rewind(entries);
+                return cmd_result;
             }
+        } else {
+            s32 retries;
+            for (retries = 0; retries < 10; retries++) {
+                result = CARDClose(&state->file_info);
+                if (result != -1) {
+                    break;
+                }
+            }
+            if (result < 0) {
+                return -267;
+            }
+            return 1;
         }
+
+    verify_done:;
     }
     while (secondary_count > 0) {
         secondary_count--;
