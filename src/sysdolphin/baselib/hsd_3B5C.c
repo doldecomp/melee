@@ -514,8 +514,7 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
     u8* work_r9;
 
     PAD_STACK(0x28);
-    base = hsd_804D2E70;
-    work_r9 = &base[0x118];
+    work_r9 = &hsd_804D2E70[0x118];
     for (work_r10 = 0; work_r10 < 4; work_r10++) {
         work_r8 = work_r9;
         for (work_ctr = 4; work_ctr != 0; work_ctr--) {
@@ -555,6 +554,7 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
         }
         work_r9 += 0x100;
     }
+    base = hsd_804D2E70;
     scratch_r6 = (s32) (arg3 + 0xF) / 16;
     sc16 = scratch_r6 << 4;
     work_r21 = work_r22 = 0;
