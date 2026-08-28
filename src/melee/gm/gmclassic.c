@@ -476,7 +476,7 @@ static inline void gmClassic_InitMatchupOrder(const gmClassicMatchup* matchups,
     s32 count;
     s32 i;
 
-    for (count = 0; matchups[count].x00 != 0x148; count++) {
+    for (count = 0; matchups->x00 != 0x148; matchups++, count++) {
     }
 
     for (i = 0; i < count; i++) {
@@ -484,10 +484,10 @@ static inline void gmClassic_InitMatchupOrder(const gmClassicMatchup* matchups,
     }
 
     for (i = 0; i < count; i++) {
-        u8* swap = &order[HSD_Randi(count)];
+        s32 swap_idx = HSD_Randi(count);
         u8 tmp = order[i];
-        order[i] = *swap;
-        *swap = tmp;
+        order[i] = order[swap_idx];
+        order[swap_idx] = tmp;
     }
 }
 
