@@ -386,9 +386,9 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     s8* chars_ptr;
     u8* base;
     s32 is_last_round;
+    gm_803DEBE8_t* opp_data;
     struct GameCache* gc;
     s32 slot_idx;
-    gm_803DEBE8_t* opp_data;
     s32 count_processed;
     s32 count;
     s32 i;
@@ -432,9 +432,10 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
 
     gc = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_80018C6C();
-    slot_idx = 1;
-    gc->entries[0].char_id = (s32) arg0->x0.ckind;
-    gc->entries[0].color = arg0->x0.color;
+    slot_idx = 0;
+    gc->entries[slot_idx].char_id = (s32) arg0->x0.ckind;
+    gc->entries[slot_idx].color = arg0->x0.color;
+    slot_idx++;
     lbDvd_80018254();
     lbDvd_80018C2C(0xC7);
     lbDvd_80017700(4);
@@ -456,9 +457,8 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
 
     audio = lbAudioAx_80026E84((CharacterKind) arg0->x0.ckind);
     {
-        s32 j;
-        for (j = 0; j < 3; j++) {
-            CharacterKind ckind = chars[j];
+        for (i = 0; i < 3; i++) {
+            CharacterKind ckind = chars[i];
             audio |= lbAudioAx_80026E84(ckind);
         }
     }
