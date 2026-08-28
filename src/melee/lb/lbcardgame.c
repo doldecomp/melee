@@ -227,7 +227,7 @@ void lb_8001CE00(void)
     _p(xC) = true;
 }
 
-u8 lb_8001CE78(void)
+u8 lbCardGame_DecideGameMode(void)
 {
     lb_8001CAF4();
     if (_p(x8) != 0 && _p(x8) != 4) {

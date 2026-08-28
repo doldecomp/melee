@@ -1,12 +1,12 @@
 #include "gmscdata.h"
 
 #include "gm_1A33.h"
-#include "gm_1B03.h"
 #include "gm_unsplit.h"
 #include "gmadventure.h"
 #include "gmallstar.h"
 #include "gmapproach.h"
 #include "gmclassic.h"
+#include "gmdebugmode.h"
 #include "gmfixedcamera.h"
 #include "gmgiant.h"
 #include "gmhomerun.h"
@@ -29,6 +29,7 @@
 #include "gmsupersudden.h"
 #include "gmtiny.h"
 #include "gmtitle.h"
+#include "gmtitlemode.h"
 #include "gmtoulib.h"
 #include "gmtoumode.h"
 #include "gmtrainingmode.h"
@@ -58,7 +59,7 @@
 #include "vi/vi1201v2.h"
 #include "vi/vi1202.h"
 
-static GameSceneHandler gm_803DA920[] = {
+static GameSceneHandler scene_handlers[] = {
     {
         GS_TITLE,
         gmTitle_OnFrame,
@@ -376,7 +377,7 @@ static GameSceneHandler gm_803DA920[] = {
     },
 };
 
-GameMode gm_803DACA4[] = {
+static GameMode game_modes[] = {
     {
         1,
         GM_TITLE,
@@ -749,10 +750,10 @@ GameMode gm_803DACA4[] = {
 
 GameSceneHandler* gm_GetAllGameSceneHandlers(void)
 {
-    return gm_803DA920;
+    return scene_handlers;
 }
 
 GameMode* gm_GetAllGameModes(void)
 {
-    return gm_803DACA4;
+    return game_modes;
 }

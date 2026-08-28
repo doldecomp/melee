@@ -1168,6 +1168,9 @@ config.libs = [
             Object(Matching, "melee/gm/gm_1ADD.c"),
             Object(Matching, "melee/gm/gm_1AED.c"),
             Object(Matching, "melee/gm/gm_1B03.c"),
+            # Game modes
+            Object(Matching, "melee/gm/gmtitlemode.c"),
+            Object(Matching, "melee/gm/gmdebugmode.c"),
             Object(Matching, "melee/gm/gmmenumode.c"),
             Object(Matching, "melee/gm/gmvsmode.c"),
             Object(Matching, "melee/gm/gmtoumode.c"),

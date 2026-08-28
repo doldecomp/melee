@@ -2532,10 +2532,18 @@ melee/gm/gm_1AED.c:
 	.sdata2     start:0x804DABF8 end:0x804DAC18
 
 melee/gm/gm_1B03.c:
-	.text       start:0x801B0348 end:0x801B0FB8
-	.data       start:0x803DD6A0 end:0x803DD888
+	.text       start:0x801B0348 end:0x801B087C
+
+melee/gm/gmtitlemode.c:
+	.text       start:0x801B087C end:0x801B099C
+	.data       start:0x803DD6A0 end:0x803DD6D0
+	.sbss       start:0x804D6878 end:0x804D6880
+
+melee/gm/gmdebugmode.c:
+	.text       start:0x801B099C end:0x801B0FB8
+	.data       start:0x803DD6D0 end:0x803DD888
 	.bss        start:0x80480DC8 end:0x804876D8
-	.sbss       start:0x804D6878 end:0x804D68B0
+	.sbss       start:0x804D6880 end:0x804D68B0
 
 melee/gm/gmmenumode.c:
 	.text       start:0x801B0FB8 end:0x801B13B8

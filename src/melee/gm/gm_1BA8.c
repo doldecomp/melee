@@ -6,6 +6,7 @@
 
 #include "ft/forward.h"
 
+#include "gm/gmtitlemode.h"
 #include "melee/cm/camera.h"
 #include "melee/db/db.h"
 #include "melee/ft/ftbosslib.h"
@@ -1213,7 +1214,7 @@ GameScene gm_803DFB80_Scenes[] = {
 GameScene gm_803DFBC8_Scenes[] = {
     {
         0,
-        3,
+        lbDvdPreload_3,
         0,
         gm_801BF85C,
         gm_801BF898,
@@ -1225,7 +1226,7 @@ GameScene gm_803DFBC8_Scenes[] = {
     },
     {
         1,
-        3,
+        lbDvdPreload_3,
         0,
         gm_801BF4DC,
         NULL,
@@ -1237,9 +1238,9 @@ GameScene gm_803DFBC8_Scenes[] = {
     },
     {
         2,
-        3,
+        lbDvdPreload_3,
         0,
-        gm_801B087C,
+        gmTitleMode_OnEnter,
         gm_801BF060,
         {
             GS_TITLE,
@@ -1249,7 +1250,7 @@ GameScene gm_803DFBC8_Scenes[] = {
     },
     {
         3,
-        3,
+        lbDvdPreload_3,
         0,
         gm_801BF4DC,
         NULL,
@@ -1261,7 +1262,7 @@ GameScene gm_803DFBC8_Scenes[] = {
     },
     {
         4,
-        3,
+        lbDvdPreload_3,
         0,
         NULL,
         gm_801BF8B8,
@@ -1273,7 +1274,7 @@ GameScene gm_803DFBC8_Scenes[] = {
     },
     {
         5,
-        3,
+        lbDvdPreload_3,
         0,
         NULL,
         gm_801BF8D8,
@@ -1289,7 +1290,7 @@ GameScene gm_803DFBC8_Scenes[] = {
 GameScene gm_803DFC70_Scenes[] = {
     {
         0,
-        2,
+        lbDvdPreload_2,
         0,
         gm_801BF728,
         NULL,
@@ -1301,7 +1302,7 @@ GameScene gm_803DFC70_Scenes[] = {
     },
     {
         1,
-        2,
+        lbDvdPreload_2,
         0,
         NULL,
         NULL,
@@ -1313,7 +1314,7 @@ GameScene gm_803DFC70_Scenes[] = {
     },
     {
         2,
-        2,
+        lbDvdPreload_2,
         0,
         NULL,
         NULL,
@@ -1325,7 +1326,7 @@ GameScene gm_803DFC70_Scenes[] = {
     },
     {
         3,
-        2,
+        lbDvdPreload_2,
         0,
         NULL,
         NULL,
@@ -1337,7 +1338,7 @@ GameScene gm_803DFC70_Scenes[] = {
     },
     {
         4,
-        2,
+        lbDvdPreload_2,
         0,
         NULL,
         NULL,
@@ -1349,7 +1350,7 @@ GameScene gm_803DFC70_Scenes[] = {
     },
     {
         5,
-        2,
+        lbDvdPreload_2,
         0,
         NULL,
         NULL,
@@ -1361,7 +1362,7 @@ GameScene gm_803DFC70_Scenes[] = {
     },
     {
         6,
-        2,
+        lbDvdPreload_2,
         0,
         NULL,
         NULL,
@@ -1373,7 +1374,7 @@ GameScene gm_803DFC70_Scenes[] = {
     },
     {
         7,
-        2,
+        lbDvdPreload_2,
         0,
         NULL,
         NULL,
@@ -1385,7 +1386,7 @@ GameScene gm_803DFC70_Scenes[] = {
     },
     {
         8,
-        2,
+        lbDvdPreload_2,
         0,
         NULL,
         NULL,
@@ -1397,7 +1398,7 @@ GameScene gm_803DFC70_Scenes[] = {
     },
     {
         9,
-        2,
+        lbDvdPreload_2,
         0,
         NULL,
         NULL,
@@ -1409,7 +1410,7 @@ GameScene gm_803DFC70_Scenes[] = {
     },
     {
         10,
-        2,
+        lbDvdPreload_2,
         0,
         NULL,
         NULL,
@@ -1421,7 +1422,7 @@ GameScene gm_803DFC70_Scenes[] = {
     },
     {
         11,
-        2,
+        lbDvdPreload_2,
         0,
         NULL,
         gm_801BF834,
@@ -1437,7 +1438,7 @@ GameScene gm_803DFC70_Scenes[] = {
 GameScene gm_803DFDA8_Scenes[] = {
     {
         0,
-        2,
+        lbDvdPreload_2,
         0,
         gm_801BF8F8,
         gm_801BF920,
@@ -1447,7 +1448,7 @@ GameScene gm_803DFDA8_Scenes[] = {
             &gm_804D693C,
         },
     },
-    { 0xFF },
+    { -1 },
 };
 
 int gm_801BC488(void)
