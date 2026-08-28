@@ -119,39 +119,9 @@ ClassicProcArray const lbl_803B7C40 = {
 DynamicModelDesc** lbl_804D662C;
 HSD_Archive* lbl_804D6628;
 
-typedef struct TrainingItemEntry {
-    s16 item_id;
-    s16 text_id;
-} TrainingItemEntry;
-ASSERT_SIZE(TrainingItemEntry, 4);
-
-TrainingItemEntry lbl_803D9828[] = {
-    { It_Kind_Foods, 21 },    { It_Kind_Tomato, 11 },
-    { It_Kind_Heart, 10 },    { It_Kind_L_Gun, 18 },
-    { It_Kind_F_Flower, 35 }, { It_Kind_S_Scope, 25 },
-    { It_Kind_StarRod, 26 },  { It_Kind_LipStick, 19 },
-    { It_Kind_Sword, 14 },    { It_Kind_Bat, 13 },
-    { It_Kind_Harisen, 2 },   { It_Kind_Hammer, 38 },
-    { It_Kind_G_Shell, 16 },  { It_Kind_R_Shell, 17 },
-    { It_Kind_Flipper, 24 },  { It_Kind_Freeze, 20 },
-    { It_Kind_Dosei, 9 },     { It_Kind_M_Ball, 27 },
-    { It_Kind_BombHei, 8 },   { It_Kind_MSBomb, 22 },
-    { It_Kind_Kinoko, 78 },   { It_Kind_DKinoko, 79 },
-    { It_Kind_Star, 12 },     { It_Kind_Parasol, 15 },
-    { It_Kind_WStar, 76 },    { It_Kind_MetalB, 81 },
-    { It_Kind_RabbitC, 77 },  { It_Kind_ScBall, 80 },
-    { It_Kind_TaruCann, 5 },  { It_Kind_Spycloak, 82 },
-    { It_Kind_None, 23 },
-};
-
 f32 const lbl_803B7C68[] = {
     2.0f, 1.5f, 1.0f, 0.666f, 0.5f, 0.25f,
 };
-
-static inline TrainingItemEntry* TrainingItemTable_Get(void)
-{
-    return (TrainingItemEntry*) lbl_803D9828;
-}
 
 typedef struct {
     /* 0x00 */ f32 vals[3];
@@ -196,19 +166,6 @@ static struct {
     /* 0x678 */ ClassicSlotVals x678[4];
     /* 0x6A8 */ ClassicCharLayout x6A8[28];
 }* lbl_804D6604;
-
-/// Classic mode stage data table entry (size 0x10)
-/// Table has 65 entries: 13 stages × 5 difficulty levels
-typedef struct ClassicStageEntry {
-    /* 0x00 */ u8 stage_kind;
-    /* 0x01 */ u8 pad_1;
-    /* 0x02 */ u16 scale0_pct; ///< Divided by 100 to get ratio
-    /* 0x04 */ u16 scale1_pct; ///< Divided by 100 to get ratio
-    /* 0x06 */ u8 pad_6[0xA];
-} ClassicStageEntry;
-ASSERT_SIZE(ClassicStageEntry, 0x10);
-
-ClassicStageEntry lbl_803D9910[65] = { 0 };
 
 void fn_8018325C(HSD_GObj* arg0, int arg1)
 {
@@ -408,6 +365,21 @@ void fn_80184A94(HSD_GObj* gobj)
     fn_80184138(gobj, 2);
 }
 
+static f32 lbl_803D9248[] = {
+    0.6f,  0.35f, 0.6f,  0.5f,  0.6f,  0.35f, 0.6f,  0.6f,  0.7f,  0.6f,
+    0.5f,  0.6f,  0.6f,  0.6f,  0.5f,  0.5f,  0.6f,  0.5f,  0.6f,  0.6f,
+    0.5f,  0.6f,  0.6f,  0.6f,  0.6f,  0.5f,  0.5f,  0.5f,  0.0f,  -6.0f,
+    0.0f,  0.0f,  -3.5f, 0.0f,  -1.0f, -3.5f, 0.0f,  0.0f,  -3.5f, 0.0f,
+    0.0f,  -1.0f, 0.0f,  0.0f,  -3.0f, 0.0f,  0.0f,  -5.0f, 0.0f,  0.0f,
+    -3.5f, 0.0f,  0.0f,  -3.5f, 0.0f,  0.0f,  -3.5f, 0.0f,  0.0f,  -3.0f,
+    0.0f,  -0.5f, -3.5f, 0.0f,  -2.0f, -6.0f, 0.0f,  0.0f,  -2.5f, 0.0f,
+    0.0f,  -2.5f, 0.0f,  -1.0f, -1.0f, 0.0f,  0.0f,  -5.0f, 0.0f,  0.0f,
+    -3.0f, 0.0f,  -1.0f, -6.0f, 0.0f,  -1.0f, -2.5f, 0.0f,  -1.0f, -3.5f,
+    0.0f,  0.0f,  -3.5f, 0.0f,  0.0f,  -4.0f, 0.0f,  -1.0f, -3.5f, 0.0f,
+    0.0f,  -1.5f, 0.0f,  0.0f,  -4.5f, 0.0f,  0.0f,  -3.5f, 0.0f,  0.0f,
+    -3.5f, 0.0f,  3.0f,  4.0f,  -5.0f,
+};
+
 static char lbl_803D9414[] = { 0x82, 0x73, 0x82, 0x85, 0x82, 0x81,
                                0x82, 0x8D, 0,    0,    0,    0 };
 
@@ -426,6 +398,8 @@ void fn_80184AB8(HSD_GObj* arg0)
 
     PAD_STACK(4);
 
+    /// @todo .data order hack
+    (void) "ScItrAllstar_scene_data";
     jobj = arg0->hsd_obj;
     HSD_JObjAnimAll(jobj);
 
@@ -581,21 +555,6 @@ void fn_8018504C(void)
         }
     }
 }
-
-static f32 lbl_803D9248[] = {
-    0.6f,  0.35f, 0.6f,  0.5f,  0.6f,  0.35f, 0.6f,  0.6f,  0.7f,  0.6f,
-    0.5f,  0.6f,  0.6f,  0.6f,  0.5f,  0.5f,  0.6f,  0.5f,  0.6f,  0.6f,
-    0.5f,  0.6f,  0.6f,  0.6f,  0.6f,  0.5f,  0.5f,  0.5f,  0.0f,  -6.0f,
-    0.0f,  0.0f,  -3.5f, 0.0f,  -1.0f, -3.5f, 0.0f,  0.0f,  -3.5f, 0.0f,
-    0.0f,  -1.0f, 0.0f,  0.0f,  -3.0f, 0.0f,  0.0f,  -5.0f, 0.0f,  0.0f,
-    -3.5f, 0.0f,  0.0f,  -3.5f, 0.0f,  0.0f,  -3.5f, 0.0f,  0.0f,  -3.0f,
-    0.0f,  -0.5f, -3.5f, 0.0f,  -2.0f, -6.0f, 0.0f,  0.0f,  -2.5f, 0.0f,
-    0.0f,  -2.5f, 0.0f,  -1.0f, -1.0f, 0.0f,  0.0f,  -5.0f, 0.0f,  0.0f,
-    -3.0f, 0.0f,  -1.0f, -6.0f, 0.0f,  -1.0f, -2.5f, 0.0f,  -1.0f, -3.5f,
-    0.0f,  0.0f,  -3.5f, 0.0f,  0.0f,  -4.0f, 0.0f,  -1.0f, -3.5f, 0.0f,
-    0.0f,  -1.5f, 0.0f,  0.0f,  -4.5f, 0.0f,  0.0f,  -3.5f, 0.0f,  0.0f,
-    -3.5f, 0.0f,  3.0f,  4.0f,  -5.0f,
-};
 
 typedef struct ClassicCharData {
     f32 scale[28];
@@ -2274,6 +2233,31 @@ void fn_80188D3C(HSD_JObj* arg0)
     }
 }
 
+typedef struct TrainingItemEntry {
+    s16 item_id;
+    s16 text_id;
+} TrainingItemEntry;
+ASSERT_SIZE(TrainingItemEntry, 4);
+
+TrainingItemEntry lbl_803D9828[] = {
+    { It_Kind_Foods, 21 },    { It_Kind_Tomato, 11 },
+    { It_Kind_Heart, 10 },    { It_Kind_L_Gun, 18 },
+    { It_Kind_F_Flower, 35 }, { It_Kind_S_Scope, 25 },
+    { It_Kind_StarRod, 26 },  { It_Kind_LipStick, 19 },
+    { It_Kind_Sword, 14 },    { It_Kind_Bat, 13 },
+    { It_Kind_Harisen, 2 },   { It_Kind_Hammer, 38 },
+    { It_Kind_G_Shell, 16 },  { It_Kind_R_Shell, 17 },
+    { It_Kind_Flipper, 24 },  { It_Kind_Freeze, 20 },
+    { It_Kind_Dosei, 9 },     { It_Kind_M_Ball, 27 },
+    { It_Kind_BombHei, 8 },   { It_Kind_MSBomb, 22 },
+    { It_Kind_Kinoko, 78 },   { It_Kind_DKinoko, 79 },
+    { It_Kind_Star, 12 },     { It_Kind_Parasol, 15 },
+    { It_Kind_WStar, 76 },    { It_Kind_MetalB, 81 },
+    { It_Kind_RabbitC, 77 },  { It_Kind_ScBall, 80 },
+    { It_Kind_TaruCann, 5 },  { It_Kind_Spycloak, 82 },
+    { It_Kind_None, 23 },
+};
+
 void fn_80188EE8(HSD_GObj* gobj)
 {
     TrainingModeState* state = &lbl_80473700;
@@ -2338,7 +2322,7 @@ void fn_80188EE8(HSD_GObj* gobj)
     if (lbLang_IsSettingUS() != 0 && val == 0x13) {
         HSD_SisLib_803A6368(text, 0x17);
     } else {
-        item_table = TrainingItemTable_Get();
+        item_table = lbl_803D9828;
         HSD_SisLib_803A6368(text, (s32) item_table[val].text_id);
     }
 
@@ -2810,6 +2794,19 @@ HSD_Text* fn_8018A000(void)
     (*text_ptr)->default_alignment = 2;
     return text;
 }
+
+/// Classic mode stage data table entry (size 0x10)
+/// Table has 65 entries: 13 stages × 5 difficulty levels
+typedef struct ClassicStageEntry {
+    /* 0x00 */ u8 stage_kind;
+    /* 0x01 */ u8 pad_1;
+    /* 0x02 */ u16 scale0_pct; ///< Divided by 100 to get ratio
+    /* 0x04 */ u16 scale1_pct; ///< Divided by 100 to get ratio
+    /* 0x06 */ u8 pad_6[0xA];
+} ClassicStageEntry;
+ASSERT_SIZE(ClassicStageEntry, 0x10);
+
+ClassicStageEntry lbl_803D9910[65] = { 0 };
 
 u8 gm_8018A160(u8 difficulty, u8 stage_slot)
 {
