@@ -1639,12 +1639,16 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
 
                         if (arg1 < 7 && arg1 != 0 && arg1 != 6) {
                             grZe_BubbleEntry* entry = &grZe_8049F170[arg1];
-                            f32 best_dist = 64.0f;
-                            s32 best_idx = -1;
-                            f32 ey = entry->x0C_y;
-                            f32 ex = entry->x08_x;
+                            f32 ey;
+                            f32 ex;
+                            f32 best_dist;
                             s32 j;
+                            s32 best_idx;
 
+                            best_dist = 64.0f;
+                            ey = entry->x0C_y;
+                            ex = entry->x08_x;
+                            best_idx = -1;
                             for (j = 7; j < 20; j++) {
                                 if (grZe_8049F170[j].x00_active == 1) {
                                     f32 dx = grZe_8049F170[j].x08_x - ex;
