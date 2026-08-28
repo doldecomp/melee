@@ -713,6 +713,35 @@ static inline s32 count_bar_units(DispItem* item)
     return total;
 }
 
+static inline s32 count_text_chars(char* text)
+{
+    s32 count;
+    s32 i;
+    s32 len;
+
+    if (text == NULL) {
+        return 0;
+    }
+    count = 0;
+    len = strlen(text);
+    i = count;
+    while (i < len) {
+        if ((s8) text[i] != '\\') {
+            count++;
+        } else {
+            i++;
+            switch ((s8) text[i]) {
+            case 'c':
+            case 'C':
+                i += 6;
+                break;
+            }
+        }
+        i++;
+    }
+    return count;
+}
+
 void hsd_8039254C(void)
 {
     static GXColor lbl_804D6080 = { 0x40, 0x40, 0x40 };
@@ -723,12 +752,6 @@ void hsd_8039254C(void)
     GXColor default_col;
     DispItem* bar_draw_ptr;
     s32 char_count;
-    GXColor bg_col3;
-    GXColor bar_col;
-    GXColor bg_col0;
-    GXColor bg_col1;
-    GXColor txt_col;
-    GXColor bg_col2;
     s32 count;
     GXColor* p_bg_col0;
     GXColor* p_bg_col1;
@@ -740,12 +763,8 @@ void hsd_8039254C(void)
     s32 first;
     HSD_SList* event_node;
 
-    p_bar_col = &bar_col;
-    p_bg_col3 = &bg_col3;
-    p_bg_col2 = &bg_col2;
-    p_bg_col1 = &bg_col1;
-    p_txt_col = &txt_col;
-    p_bg_col0 = &bg_col0;
+    PAD_STACK(4);
+
     col_pos = 60;
     first = 1;
     line = 1.0F;
@@ -760,6 +779,8 @@ void hsd_8039254C(void)
 
         while (item != NULL) {
             if (first != 0) {
+                GXColor bg_col0;
+                p_bg_col0 = &bg_col0;
                 if (lbl_804D6080.a != 0) {
                     hsd_80391A04(10.0F, 10.0F, 6);
                     bg_col0 = lbl_804D6080;
@@ -768,37 +789,12 @@ void hsd_8039254C(void)
                 first = 0;
             }
             switch (item->type) {
-            case 0:
-#ifdef MUST_MATCH
-                if ((&item->content) == NULL) {
-                    char_count = 0;
-                } else
-#endif
-                {
-                    char_count = 0;
-                    {
-                        s32 j;
-                        s32 len = strlen(item->content.text);
-                        j = char_count;
-                        while (j < len) {
-                            if ((s8) item->content.text[j] != '\\') {
-                                char_count++;
-                            } else {
-                                j++;
-                                {
-                                    char* tmp = item->content.text;
-                                    switch ((s8) tmp[j]) {
-                                    case 'c':
-                                    case 'C':
-                                        j += 6;
-                                        break;
-                                    }
-                                }
-                            }
-                            j++;
-                        }
-                    }
-                }
+            case 0: {
+                GXColor bg_col1;
+                GXColor txt_col;
+                p_bg_col1 = &bg_col1;
+                p_txt_col = &txt_col;
+                char_count = count_text_chars(item->content.text);
                 if (col_pos + char_count > 60) {
                     line -= 1.0F;
                     col_pos = 0;
@@ -814,7 +810,10 @@ void hsd_8039254C(void)
                              (f32) (col_pos * 10), 10.0F * line);
                 col_pos = col_pos + (2 + char_count);
                 break;
-            case 2:
+            }
+            case 2: {
+                GXColor bg_col2;
+                p_bg_col2 = &bg_col2;
                 if (col_pos != 0) {
                     line = (f32) ((f64) line - 0.5);
                     if (lbl_804D6080.a != 0) {
@@ -828,7 +827,12 @@ void hsd_8039254C(void)
                 hsd_80391E18(item->content.gradient, 0.0F, t2, 600.0F, t2);
                 col_pos = 60;
                 break;
+            }
             case 1: {
+                GXColor bg_col3;
+                GXColor bar_col;
+                p_bar_col = &bar_col;
+                p_bg_col3 = &bg_col3;
                 char_count = count_bar_units(item);
                 if (char_count > 0) {
                     if (col_pos != 0) {
