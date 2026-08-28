@@ -735,12 +735,13 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                 }
 
                 {
+                    float a1_y = a1.y;
                     float loaded_b_y = b->y;
                     float b_y = loaded_b_y;
-                    if (a1.y > b_y) {
+                    if (a1_y > b_y) {
                         {
                             float y;
-                            y = a1.y;
+                            y = a1_y;
                             y += sum_pq;
                             if (y < c1.y && y < d->y) {
                                 return false;
@@ -755,7 +756,7 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
 
                     } else {
                         {
-                            float y = a1.y - sum_pq;
+                            float y = a1_y - sum_pq;
                             if (y > c1.y && y > d->y) {
                                 return false;
                             }
@@ -771,9 +772,9 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                     {
                         float dot2_diff_ba_dc;
                         float diff_ac_y;
-                        diff_ba_y = b_y - a1.y;
+                        diff_ba_y = b_y - a1_y;
                         d_y = lbColl_GetY(d);
-                        diff_ac_y = a1.y - c1.y;
+                        diff_ac_y = a1_y - c1.y;
                         diff_dc_y = d_y - c1.y;
                         diff_ba_x = b_x - a1.x;
                         d_x = d->x;
@@ -817,19 +818,20 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                     }
                                 }
                             } else if (approximatelyZero(determinant)) {
-                                float temp_f7_2 =
+                                float mid_y =
                                     lbColl_804D7A18 * diff_dc_y + c1.y;
-                                float temp_f5_2 =
+                                float mid_x =
                                     lbColl_804D7A18 * diff_dc_x + c1.x;
-                                float temp_f6_2 = a1.y - temp_f7_2;
-                                float temp_f7_3 = b_y - temp_f7_2;
+                                float a_mid_y = a1_y - mid_y;
+                                float b_mid_y = b_y - mid_y;
                                 {
                                     float temp_scl_f;
-                                    float f4 = a1.x - temp_f5_2;
-                                    float temp_f5_3 = b_x - temp_f5_2;
-                                    if ((f4 * f4 + temp_f6_2 * temp_f6_2) <
-                                        (temp_f5_3 * temp_f5_3 +
-                                         temp_f7_3 * temp_f7_3))
+                                    float a_mid_x = a1.x - mid_x;
+                                    float b_mid_x = b_x - mid_x;
+                                    if ((a_mid_x * a_mid_x +
+                                         a_mid_y * a_mid_y) <
+                                        (b_mid_x * b_mid_x +
+                                         b_mid_y * b_mid_y))
                                     {
                                         float diff_dc_x;
                                         float temp_f8_2;
@@ -974,7 +976,7 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                             }
 
                             e->x = diff_ba_x * scl_e + a1.x;
-                            e->y = diff_ba_y * scl_e + a1.y;
+                            e->y = diff_ba_y * scl_e + a1_y;
                             e->z = 0.0f;
 
                             f->x = diff_dc_x * scl_f + c1.x;
