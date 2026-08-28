@@ -376,6 +376,7 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     s32 count;
     s32 i;
     s32 j;
+    s32 k;
     bool found;
     bool nearzero;
     f32 r;
@@ -564,11 +565,13 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     }
     inv = 1.0 / sum;
     acc = 0.0f;
-    for (i = 0, sel = sp40; i < count; i++, sel++) {
+    sel = sp40;
+    for (k = 0; k < count; k++) {
         acc += sel->weight;
         if (acc * inv >= r) {
-            return ftCo_CpuSelectAttack(fp, cpu, &sp40[i]);
+            return ftCo_CpuSelectAttack(fp, cpu, &sp40[k]);
         }
+        sel++;
     }
     HSD_ASSERT(0x1C5, 0);
 }
