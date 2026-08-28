@@ -140,13 +140,14 @@ static inline bool checkStringRest(const char* ptr)
 
 s32 CompareNameStrings(char* str1, char* str2)
 {
-    char* p1;
-    char* p2;
-    u32 i;
-    for (i = 0, p2 = str2, p1 = str1;; i++, p1++, p2++) {
-        char* ch1 = &str1[i];
+    s8 terminator = (s8) *mnName_StringTerminator;
+    char* p1 = str1;
+    char* p2 = str2;
+    s32 i = 0;
+    while (true) {
+        s8 ch1 = (s8) str1[i];
 
-        if (*mnName_StringTerminator == *ch1) {
+        if (terminator == ch1) {
             if (checkStringRest(&str2[i & 0xFFFFFFFFFFFFFFFF])) {
                 return 0;
             }
@@ -154,7 +155,7 @@ s32 CompareNameStrings(char* str1, char* str2)
         }
 
         {
-            char ch2 = str2[i];
+            s8 ch2 = (s8) str2[i];
 
             if (*mnName_StringTerminator == ch2) {
                 if (checkStringRest(&str1[i])) {
@@ -170,6 +171,9 @@ s32 CompareNameStrings(char* str1, char* str2)
                 return 2;
             }
         }
+        i++;
+        p2++;
+        p1++;
     }
 }
 
