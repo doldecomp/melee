@@ -4063,6 +4063,8 @@ static inline void grBigBlue_801EE398_inline(s32 arg2, s32 arg1,
                                              grBb_CarGround* gp, s32* result,
                                              Vec3* pos)
 {
+    s32 slot;
+
     PAD_STACK(4);
 
     switch (arg2) {
@@ -4160,12 +4162,13 @@ static inline void grBigBlue_801EE398_inline(s32 arg2, s32 arg1,
 
             if (count != 0) {
                 s32 pick;
-                s32 slot = 0;
                 s32 offset;
                 u8* car;
                 u8* car_d4;
                 Vec3* car_e0;
                 f32* car_ec;
+
+                slot = 0;
                 if (count != 0) {
                     pick = HSD_Randi(count);
                 } else {
@@ -4297,12 +4300,13 @@ static inline void grBigBlue_801EE398_inline(s32 arg2, s32 arg1,
 
             if (count != 0) {
                 s32 pick;
-                s32 slot = 0;
                 s32 offset;
                 u8* car;
                 u8* car_d4;
                 Vec3* car_e0;
                 f32* car_ec;
+
+                slot = 0;
 
                 if (count != 0) {
                     pick = HSD_Randi(count);
