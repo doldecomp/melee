@@ -1,9 +1,7 @@
 #include "gmtou_2.h"
 
-#include "gm_1601.h"
 #include "gm_1A3F.h"
 #include "gm_1A45.h"
-#include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "gmtoulib.h"
 #include "types.h"
@@ -882,7 +880,7 @@ void gm_8019DF8C_OnFrame(void)
                                 chr = fn_8018F6DC(0x19);
                             }
                         } while (gm_IsCKindUnlocked(
-                                     fn_8018F6FC((CSSIconHud) chr)) == 0);
+                                     (u8) fn_8018F6FC((CSSIconHud) chr)) == 0);
                         tmd->x4B8[i].x1 = chr;
 
                         j = get_match_player_index(i);
@@ -909,7 +907,7 @@ void gm_8019DF8C_OnFrame(void)
                                 chr = fn_8018F6DC(0);
                             }
                         } while (gm_IsCKindUnlocked(
-                                     fn_8018F6FC((CSSIconHud) chr)) == 0);
+                                     (u8) fn_8018F6FC((CSSIconHud) chr)) == 0);
                         tmd->x4B8[i].x1 = chr;
 
                         j = get_match_player_index(i);
@@ -945,7 +943,7 @@ void gm_8019DF8C_OnFrame(void)
                         if (buttons & PAD_BUTTON_X) {
                             /* Down: increment color */
                             if ((s32) tmd->x4B8[i].x3 <
-                                (s32) (gm_80169238(fn_8018F6FC(
+                                (s32) ((u8) gm_80169238((u8) fn_8018F6FC(
                                            (CSSIconHud) tmd->x4B8[i].x1)) -
                                        1))
                             {
