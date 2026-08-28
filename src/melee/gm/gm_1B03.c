@@ -1,8 +1,8 @@
 #include "gm_1B03.h"
 
-#include "gm_1B03.static.h"
-
+#include "dolphin/types.h"
 #include "gm/gm_1A3F.h"
+#include "gm/types.h"
 #include "if/soundtest.h"
 
 #include "mn/forward.h"
@@ -21,27 +21,43 @@
 #include <melee/lb/lbdvd.h>
 #include <melee/mn/types.h>
 
-/* 480F20 */ MatchExitInfo gm_80480F20;
-/* 48E5F8 */ UNK_T gm_8048E5F8[0x2288 / 4];
-/* 48E4C0 */ StartMeleeData gm_8048E4C0;
-/* 48E378 */ SSSData gm_8048E378;
-/* 48E230 */ CSSData gm_8048E230;
-/* 48BE68 */ UNK_T gm_8048BE68[0x23C8 / 4];
-/* 48BD20 */ UNK_T gm_8048BD20[0x148 / 4];
-/* 489A98 */ UNK_T gm_80489A98[0x2288 / 4];
-/* 487810 */ MatchExitInfo gm_80487810;
-/* 4876D8 */ StartMeleeData gm_804876D8;
-/* 485454 */ UNK_T gm_80485454[0x2284 / 4];
-/* 485438 */ UNK_T gm_80485438[0x1C / 4];
-/* 48542C */ UNK_T gm_8048542C[0xC / 4];
-/* 4831A8 */ struct ResultsMatchInfo gm_804831A8;
+struct DebugResultsData {
+    u8 x0_0 : 1;
+    u8 x0_1 : 1;
+    u8 x0_other : 6;
+    u8 x1;
+    u8 x2;
+    u8 x3;
+    u8 x4;
+    u8 pad_x5[3];
+    MatchEnd match_end;
+}; /// data used by gm_801B0DD0
+
+struct DebugMemcardData {
+    u32 x0;
+    u8 x4;
+};
+
 /* 480DC8 */ static UNK_T gm_80480DC8[0x20 / 4];
 /* 480DE8 */ static StartMeleeData gm_80480DE8;
+/* 480F20 */ static MatchExitInfo gm_80480F20;
+/* 4831A8 */ static struct ResultsMatchInfo gm_804831A8;
+/* 4D6878 */ static u32 gm_804D6878[2];
+/* 48542C */ static UNK_T gm_8048542C[0xC / 4];
+/* 485438 */ static UNK_T gm_80485438[0x1C / 4];
+/* 485454 */ static UNK_T gm_80485454[0x2284 / 4];
+/* 4D6880 */ static UNK_T gm_804D6880[0x4 / 4];
+/* 4D6884 */ static UNK_T gm_804D6884[0x8 / 4];
+/* 4D688C */ static UNK_T gm_804D688C[0x4 / 4];
+/* 4D6890 */ static UNK_T gm_804D6890[0x8 / 4];
+/* 4D6898 */ static UNK_T gm_804D6898[0x4 / 4];
+/* 4D689C */ static UNK_T gm_804D689C[0x8 / 4];
+/* 4D68A4 */ static UNK_T gm_804D68A4[0x8 / 4];
 
 /* 3DD6A0 */ GameScene gm_803DD6A0_Scenes[] = {
     {
         0,
-        3,
+        lbDvdPreload_3,
         0,
         gm_801B087C,
         gm_801B089C,

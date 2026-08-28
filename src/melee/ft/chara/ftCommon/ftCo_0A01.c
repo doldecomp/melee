@@ -4266,14 +4266,24 @@ void ftCo_800A866C(Fighter* fp)
     }
 }
 
-static inline s32 ftCo_800A8940_inline0(int line_id, s32 blocked)
+static inline s32 ftCo_800A8940_inline0(s32 result_in, s32 blocked_in,
+                                        const int* line_id_ptr)
 {
-    if (grBigBlue_801EF844(line_id) || grInishie1_801FCAAC(line_id) ||
-        grCorneria_801E2D90(line_id) || grVenom_80206D10(line_id))
-    {
-        blocked = 1;
+    int line_id;
+    s32 blocked = blocked_in;
+    s32 result = result_in;
+    if (result != 0) {
+        line_id = *line_id_ptr;
+        if (grBigBlue_801EF844(line_id) || grInishie1_801FCAAC(line_id) ||
+            grCorneria_801E2D90(line_id) || grVenom_80206D10(line_id))
+        {
+            blocked = 1;
+        }
+        if (blocked != 0) {
+            result = 0;
+        }
     }
-    return blocked;
+    return result;
 }
 
 void ftCo_800A8940(Fighter* fp)
@@ -4296,7 +4306,6 @@ void ftCo_800A8940(Fighter* fp)
     f32 width;
     s32 result;
     s32 blocked;
-    u8 _3[4];
 
     rnd = HSD_Randf();
     cur_island = mpIsland_8005AB54(fp->coll_data.floor.index);
@@ -4353,12 +4362,7 @@ void ftCo_800A8940(Fighter* fp)
         result = mpCheckFloor(px, top, px, bottom, 0.0f, &floor_pos, &line_id,
                               &flags, &floor_normal, -1, -1, -1, NULL, NULL);
     }
-    if (result != 0) {
-        blocked = ftCo_800A8940_inline0(line_id, blocked);
-        if (blocked != 0) {
-            result = 0;
-        }
-    }
+    result = ftCo_800A8940_inline0(result, blocked, &line_id);
     if (result != 0) {
         if (!ftCo_800A6700_inline0(fp, floor_pos.x, floor_pos.y)) {
             f32 x;

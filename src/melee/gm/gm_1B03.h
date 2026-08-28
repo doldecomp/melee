@@ -1,13 +1,11 @@
 #ifndef GALE01_1B0348
 #define GALE01_1B0348
 
-#include <placeholder.h>
+#include "melee/gm/types.h"
 
-#include <melee/mn/forward.h>
+#include "melee/mn/forward.h"
 
-#include <melee/gm/types.h>
-
-/* 1B0348 */ void gm_801B0348(StartMeleeData*); /// Character tints?
+/* 1B0348 */ void gm_801B0348(StartMeleeData*); ///< Character tints?
 /* 1B0474 */ void gm_801B0474(StartMeleeData*, MatchEnd*);
 /* 1B05F4 */ void gm_801B05F4(PlayerInitData*, int);
 /* 1B0620 */ void gm_801B0620(PlayerInitData*, u8 c_kind, u8 color, u8 stocks,
@@ -41,30 +39,7 @@
 /* 1B0F1C */ void gm_801B0F1C(GameScene*);
 /* 1B0F60 */ void gm_801B0F60(GameScene*);
 /* 1B0F90 */ void gm_801B0F90(GameScene*);
-
-/* 480F20 */ extern MatchExitInfo gm_80480F20;
-/* 4831A8 */ extern struct ResultsMatchInfo gm_804831A8;
-/* 48542C */ extern UNK_T gm_8048542C[0xC / 4];
-/* 485438 */ extern UNK_T gm_80485438[0x1C / 4];
-/* 485454 */ extern UNK_T gm_80485454[0x2284 / 4];
-/* 4876D8 */ extern StartMeleeData gm_804876D8;
-/* 487810 */ extern MatchExitInfo gm_80487810;
-/* 489A98 */ extern UNK_T gm_80489A98[0x2288 / 4];
-/* 48BD20 */ extern UNK_T gm_8048BD20[0x148 / 4];
-/* 48BE68 */ extern UNK_T gm_8048BE68[0x23C8 / 4];
-/* 48E230 */ extern CSSData gm_8048E230;
-/* 48E378 */ extern SSSData gm_8048E378;
-/* 48E4C0 */ extern StartMeleeData gm_8048E4C0;
-/* 48E5F8 */ extern UNK_T gm_8048E5F8[0x2288 / 4];
-/* 4D6878 */ extern u32 gm_804D6878[2];
-/* 4D6880 */ extern UNK_T gm_804D6880[0x4 / 4];
-/* 4D6884 */ extern UNK_T gm_804D6884[0x8 / 4];
-/* 4D688C */ extern UNK_T gm_804D688C[0x4 / 4];
-/* 4D6890 */ extern UNK_T gm_804D6890[0x8 / 4];
-/* 4D6898 */ extern UNK_T gm_804D6898[0x4 / 4];
-/* 4D689C */ extern UNK_T gm_804D689C[0x8 / 4];
-/* 4D68A4 */ extern UNK_T gm_804D68A4[0x8 / 4];
-/* 4D68B0 */ extern UNK_T gm_804D68B0[0x8 / 4];
 /* 3DD6A0 */ extern GameScene gm_803DD6A0_Scenes[];
+/* 3DD6D0 */ extern GameScene gm_803DD6D0_Scenes[];
 
 #endif

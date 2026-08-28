@@ -2534,23 +2534,34 @@ melee/gm/gm_1AED.c:
 melee/gm/gm_1B03.c:
 	.text       start:0x801B0348 end:0x801B0FB8
 	.data       start:0x803DD6A0 end:0x803DD888
-	.bss        start:0x80480DC8 end:0x80490880
-
-melee/gm/gm_1B0FB.c:
-	.text       start:0x801B0FB8 end:0x801B0FF8
-	.data       start:0x803DD888 end:0x803DD8B8
-	.sdata      start:0x804D4310 end:0x804D4318
+	.bss        start:0x80480DC8 end:0x804876D8
 	.sbss       start:0x804D6878 end:0x804D68B0
 
-melee/gm/gm_1B0FF.c:
-	.text       start:0x801B0FF8 end:0x801B14A0
-	.data       start:0x803DD8B8 end:0x803DD9A0
+melee/gm/gmmenumode.c:
+	.text       start:0x801B0FB8 end:0x801B13B8
+	.data       start:0x803DD888 end:0x803DD9A0
+	.sdata      start:0x804D4310 end:0x804D4318
 	.sbss       start:0x804D68B0 end:0x804D68C0
 
-melee/gm/gm_1B14.c:
-	.text       start:0x801B14A0 end:0x801B2BA4
-	.data       start:0x803DD9A0 end:0x803DDC58
-	.sbss       start:0x804D68C0 end:0x804D68D0
+melee/gm/gmvsmode.c:
+	.text       start:0x801B13B8 end:0x801B1724
+	.data       start:0x803DD9A0 end:0x803DDAC0
+
+melee/gm/gmtoumode.c:
+	.text       start:0x801B1724 end:0x801B1B74
+	.data       start:0x803DDAC0 end:0x803DDB80
+	.bss        start:0x804876D8 end:0x8048E230
+
+melee/gm/gmtrainingmode.c:
+	.text       start:0x801B1B74 end:0x801B23F0
+	.data       start:0x803DDB80 end:0x803DDBE0
+	.bss        start:0x8048E230 end:0x80490880
+	.sbss       start:0x804D68C0 end:0x804D68C8
+
+melee/gm/gmcameramode.c:
+	.text       start:0x801B23F0 end:0x801B2BA4
+	.data       start:0x803DDBE0 end:0x803DDC58
+	.sbss       start:0x804D68C8 end:0x804D68D0
 
 melee/gm/gmclassic.c:
 	.text       start:0x801B2BA4 end:0x801B3F40

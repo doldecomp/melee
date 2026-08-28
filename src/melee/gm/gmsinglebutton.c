@@ -1,7 +1,5 @@
 #include "gmsinglebutton.h"
 
-#include "gm_1B03.static.h"
-
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "gmvsdata.h"

@@ -1,7 +1,5 @@
 #include "gmhomerun.h"
 
-#include "gm_1B03.static.h"
-
 #include "gm_unsplit.h"
 #include "gmvsdata.h"
 
