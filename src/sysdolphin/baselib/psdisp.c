@@ -1929,7 +1929,6 @@ static inline void psUpdateProjectionCache(f32 perspective)
 #endif
 void psDispParticles(u32 target_link, u32 sw)
 {
-    GXColor chan_mat_color;
     s32 needs_setup;
     s32 sp7B4;
     void* sp7B0;
@@ -1940,6 +1939,7 @@ void psDispParticles(u32 target_link, u32 sw)
     GXColor chan_amb_color;
     void* sp79C;
     psdisp_Tlut tlut_obj;
+    GXColor chan_mat_color;
     GXTexObj sp764;
     HSD_Particle* sorted_particles;
     HSD_Particle* non_edge_particles;
