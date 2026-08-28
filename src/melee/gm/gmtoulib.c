@@ -479,6 +479,11 @@ static inline HSD_JObj* fn_8018B090_inline1(s32 idx)
     return lbl_80473AB8[idx].slots[lbl_804D6634].x2C->hsd_obj;
 }
 
+static inline BracketEntry* fn_8018B090_inline2(s32 idx)
+{
+    return &lbl_80473AB8[idx];
+}
+
 void fn_8018B090(HSD_GObj* arg0)
 {
     TmData* tm = gm_GetTournamentData();
@@ -613,9 +618,11 @@ void fn_8018B090(HSD_GObj* arg0)
                         mn_8022F470((int*) &lbl_80473AB8[idx].slots[i].x48,
                                     (int*) &lbl_80473AB8[idx].slots[i].x40,
                                     amount);
-                        HSD_JObjSetTranslateY(
-                            lbl_80473AB8[idx].slots[i].x2C->hsd_obj,
-                            -(f32) lbl_80473AB8[idx].slots[i].x48);
+                        {
+                            f32 y = -(f32) lbl_80473AB8[idx].slots[i].x48;
+                            HSD_JObjSetTranslateY(
+                                lbl_80473AB8[idx].slots[i].x2C->hsd_obj, y);
+                        }
                     }
                 }
                 return;
@@ -878,7 +885,7 @@ void fn_8018B090(HSD_GObj* arg0)
                 }
                 r = i + 1;
             }
-            src = &lbl_80473AB8[fn_8018F74C()];
+            src = fn_8018B090_inline2(fn_8018F74C());
             src->x1 = 0;
             next_entry = &src->x5;
             next_slot = &src->x6;
@@ -901,7 +908,7 @@ void fn_8018B090(HSD_GObj* arg0)
         }
         break;
     }
-    PAD_STACK(0x30);
+    PAD_STACK(0x28);
 }
 
 /* 3D9EE8 */ static char lbl_803D9EE8[] = {
