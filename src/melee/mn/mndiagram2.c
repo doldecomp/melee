@@ -1016,6 +1016,7 @@ void mnDiagram2_Create(int arg0)
     HSD_JObj* jobj;
     int offset;
     Diagram2* user_data2;
+    HSD_JObj** cursor;
 
     gobj = GObj_Create(6, 7, 0x80);
     mnDiagram2_804D6C18 = gobj;
@@ -1031,9 +1032,13 @@ void mnDiagram2_Create(int arg0)
     GObj_InitUserData(gobj, 0, (void (*)(void*)) mnDiagram2_FreeUserData,
                       user_data);
 
-    for (i = 0; i < 15; i++) {
-        lb_80011E24(jobj, &user_data->x8 + i, i, -1);
-    }
+    i = (offset = 0);
+    cursor = (HSD_JObj**) user_data + i;
+    do {
+        lb_80011E24(jobj, cursor + 2, i, -1);
+        i++;
+        cursor++;
+    } while (i < 15);
 
     HSD_GObj_SetupProc(gobj, mnDiagram2_Think, 0);
 
