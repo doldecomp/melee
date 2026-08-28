@@ -571,26 +571,67 @@ s32 mnNameNew_8023BAA8(NameNewEntry* arg0, s32 arg1, u8 arg2)
     return (s32) arg2;
 }
 
+static inline s8 CopyAutoNameText(char* output, s32 pick)
+{
+    s32 name_idx;
+    u8 ch;
+    u8** name_ptr;
+    char* text;
+    s32 char_idx;
+    s8 null_ch;
+
+    name_idx = 0;
+    char_idx = name_idx;
+    output[0] = *mnNameNew_NullCharacter;
+    text = output;
+    output[3] = *mnNameNew_NullCharacter;
+    output[6] = *mnNameNew_NullCharacter;
+    output[9] = *mnNameNew_NullCharacter;
+
+    name_ptr = &AutoNamesList[pick];
+    while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
+           (s8) (ch = (*name_ptr)[char_idx]))
+    {
+        text[0] = ch;
+        text[1] = (*name_ptr)[char_idx + 1];
+        text[2] = *mnNameNew_NullCharacter;
+        char_idx += 2;
+        name_idx++;
+        text += 3;
+    }
+
+    output[name_idx * 3] = null_ch;
+    return null_ch;
+}
+
+static inline void UpdateAutoNameHistory(NameNewEntry* data, s32 pick)
+{
+    u8 tmp;
+    s32 i;
+
+    tmp = data->auto_history[0];
+    data->auto_history[0] = (u8) pick;
+    for (i = 1; i < 5; i++) {
+        u8 next = data->auto_history[i];
+        data->auto_history[i] = tmp;
+        tmp = next;
+    }
+}
+
 s32 PickAutoName(HSD_GObj* arg0)
 {
     NameNewEntry* data;
-    u8* cur_text;
+    char* cur_text;
     u8** names;
     s32 count;
     s32 pick;
     s32 dup;
-    s32 char_idx;
-    u8* text;
-    u8** name_ptr;
-    u8 ch;
-    s32 name_idx;
-    u8 tmp;
     s8 null_ch;
 
-    PAD_STACK(48);
+    PAD_STACK(32);
 
     data = arg0->user_data;
-    cur_text = (u8*) mnNameNew_CurrentNameText;
+    cur_text = mnNameNew_CurrentNameText;
 
     do {
         dup = 0;
@@ -618,37 +659,8 @@ s32 PickAutoName(HSD_GObj* arg0)
         }
     } while (dup != 0);
 
-    name_idx = 0;
-    char_idx = name_idx;
-    cur_text[0] = *mnNameNew_NullCharacter;
-    text = cur_text;
-    cur_text[3] = *mnNameNew_NullCharacter;
-    cur_text[6] = *mnNameNew_NullCharacter;
-    cur_text[9] = *mnNameNew_NullCharacter;
-
-    name_ptr = &AutoNamesList[pick];
-    while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
-           (s8) (ch = (*name_ptr)[char_idx]))
-    {
-        text[0] = ch;
-        text[1] = (*name_ptr)[char_idx + 1];
-        text[2] = *mnNameNew_NullCharacter;
-        char_idx += 2;
-        name_idx++;
-        text += 3;
-    }
-
-    cur_text[name_idx * 3] = null_ch;
-
-    tmp = data->auto_history[0];
-    data->auto_history[0] = (u8) pick;
-    ch = data->auto_history[1];
-    data->auto_history[1] = tmp;
-    tmp = data->auto_history[2];
-    data->auto_history[2] = ch;
-    ch = data->auto_history[3];
-    data->auto_history[3] = tmp;
-    data->auto_history[4] = ch;
+    null_ch = CopyAutoNameText(cur_text, pick);
+    UpdateAutoNameHistory(data, pick);
 
     return (s32) null_ch;
 }
