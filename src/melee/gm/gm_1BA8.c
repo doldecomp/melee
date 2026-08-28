@@ -249,18 +249,18 @@ void gm_801BAD70(GameScene* arg0)
                           "sqEventInitDataLevelTbl", 0);
     levels = gm_804D6900[0];
     gm_80167A64(&md->rules);
-    md->rules.x0_0 = levels[level]->x8->x0_0;
+    md->rules.match_mode = levels[level]->x8->x0_0;
     md->rules.x0_3 = levels[level]->x8->x0_3;
     md->rules.x0_6 = levels[level]->x8->x0_6;
-    md->rules.x0_7 = levels[level]->x8->x0_7;
+    md->rules.timer_counts_up = levels[level]->x8->x0_7;
     md->rules.x1_0 = 1;
     md->rules.x1_1 = 0;
     md->rules.x1_2 = 0;
     md->rules.x1_3 = 0;
     md->rules.timer_shows_hours = 0;
-    md->rules.x1_7 = levels[level]->x8->x1_1;
+    md->rules.friendly_fire = levels[level]->x8->x1_1;
     md->rules.x2_2 = 0;
-    md->rules.x2_3 = 0;
+    md->rules.single_button = 0;
     md->rules.disable_pausing = 0;
     md->rules.x2_5 = levels[level]->x8->x1_2;
     md->rules.x3_1 = 1;
@@ -285,8 +285,8 @@ void gm_801BAD70(GameScene* arg0)
     md->rules.xB = levels[level]->x8->unk3;
     md->rules.xC = levels[level]->x8->unk4;
     md->rules.xD = 0x6E;
-    md->rules.xE = levels[level]->x8->unk6;
-    md->rules.x10 = levels[level]->x8->unk8;
+    md->rules.stkind = levels[level]->x8->unk6;
+    md->rules.time_limit = levels[level]->x8->unk8;
     md->rules.x14 = 0;
     md->rules.x18 = 0;
     md->rules.x20 = levels[level]->x8->x10;
@@ -294,7 +294,7 @@ void gm_801BAD70(GameScene* arg0)
     md->rules.x30 = levels[level]->x8->x1C;
     md->rules.x34 = levels[level]->x8->unk20;
     md->rules.x44 = fn_801BBFE8;
-    if (md->rules.x0_7 & 1) {
+    if (md->rules.timer_counts_up & 1) {
         ev->xB_0 = 1;
     }
     if (levels[level]->x8->x1_0) {
@@ -307,12 +307,12 @@ void gm_801BAD70(GameScene* arg0)
         u16 stage;
         ev->xB_4 = 1;
         stage = levels[level]->x10->stage[ev->x20];
-        md->rules.xE = stage;
+        md->rules.stkind = stage;
         ev->x48 = stage;
         if (ev->x20 > 0) {
             md->rules.x1_2 = 1;
             md->rules.x1_3 = 1;
-            md->rules.x10 = ev->x2C;
+            md->rules.time_limit = ev->x2C;
         }
         gm_8016A92C(&md->rules);
     }
@@ -1572,7 +1572,7 @@ void gm_801BC754(HSD_GObj* gobj)
     PAD_STACK(0x48);
 
     temp_r29 = &gmMainLib_804D3EE0->unk_530;
-    switch (gm_16AE_GetUnkData_0()->x24C8.x0_0) {
+    switch (gm_16AE_GetUnkData_0()->x24C8.match_mode) {
     case 1:
         count = 0;
         temp_r28 = &gmMainLib_804D3EE0->unk_530;
@@ -3289,9 +3289,9 @@ void gm_801BF4DC(GameScene* arg0)
     gm_80168FC4();
     gm_80167A64(&md->rules);
 
-    md->rules.x0_0 = gm_801BF6B8();
+    md->rules.match_mode = gm_801BF6B8();
     md->rules.x0_6 = false;
-    md->rules.x10 = 0;
+    md->rules.time_limit = 0;
     md->rules.x1_0 = false;
     md->rules.x1_2 = true;
     md->rules.x1_3 = true;
@@ -3299,7 +3299,7 @@ void gm_801BF4DC(GameScene* arg0)
     md->rules.x7 = 0;
     md->rules.x44 = gm_80183218;
     md->rules.x34 = gm_804DAC88;
-    md->rules.xE = (u16) gm_801BF694();
+    md->rules.stkind = (u16) gm_801BF694();
     gm_80167A14(md->players);
 
     for (i = 0; i < 4; i++) {
@@ -3310,7 +3310,7 @@ void gm_801BF4DC(GameScene* arg0)
         md->players[i].cpu_level = 9;
         md->players[i].xE = 4;
         md->players[i].xC_b1 = false;
-        if (md->rules.x0_0 == 1) {
+        if (md->rules.match_mode == 1) {
             md->players[i].stocks = 99;
         }
     }

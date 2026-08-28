@@ -182,7 +182,7 @@ void gm_801B2704(GameScene* arg0)
     if (var_r3->start_game != 0) {
         *temp_r31 = var_r3->data;
         lbAudioAx_80026F2C(0x18);
-        lbAudioAx_8002702C(8, lbAudioAx_80026EBC(temp_r31->data.rules.xE));
+        lbAudioAx_8002702C(8, lbAudioAx_80026EBC(temp_r31->data.rules.stkind));
         lbAudioAx_80027168();
         return;
     }
@@ -200,7 +200,7 @@ void gm_PrepCameraModeVSScene(GameScene* arg0)
     gm_80167BC8(vs);
 
     start->rules = vs->data.rules;
-    start->rules.x0_0 = 0;
+    start->rules.match_mode = 0;
 
     start->rules.x0_6 = vs->data.rules.x4_4 = false;
 

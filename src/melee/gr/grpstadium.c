@@ -1537,7 +1537,7 @@ void grStadium_801D3460(Ground_GObj* gobj)
     temp_r4->x34.x = 0.625f;
     temp_r4->x34.y = 0.625f;
 
-    if ((rules->x10 == 0) | !rules->x0_6) {
+    if ((rules->time_limit == 0) | !rules->x0_6) {
         HSD_SisLib_803A6B98(gp2->win_dynamic_p, 125.0F, 120.0F, "00:00 00");
         return;
     }

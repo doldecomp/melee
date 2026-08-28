@@ -997,35 +997,35 @@ void un_802FFF2C(StartMeleeData* arg0)
     r->is_teams = s->x130.xC;
     switch (s->x130.xC8) {
     case 0:
-        r->x0_0 = 0;
+        r->match_mode = 0;
         timer = s->x130.xCC[1] + s->x130.xCC[0] * 0x3C;
         if (timer != 0) {
-            r->x10 = timer;
+            r->time_limit = timer;
             r->x0_6 = 1;
         } else {
             r->x0_6 = 0;
         }
         break;
     case 1:
-        r->x0_0 = 1;
+        r->match_mode = 1;
         r->x0_6 = 0;
         break;
     case 2:
-        r->x0_0 = 2;
+        r->match_mode = 2;
         timer = s->x130.xCC[1] + s->x130.xCC[0] * 0x3C;
         if (timer != 0) {
-            r->x10 = timer;
+            r->time_limit = timer;
             r->x0_6 = 1;
         } else {
             r->x0_6 = 0;
         }
         break;
     default:
-        r->x0_0 = 0;
+        r->match_mode = 0;
         r->x0_6 = 0;
         break;
     }
-    r->xE = s->x130.x8;
+    r->stkind = s->x130.x8;
     r->x20 = -1;
     r->xB = s->x130.xCC[3] - 1;
     r->xC = -1;

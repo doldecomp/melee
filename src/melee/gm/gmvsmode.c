@@ -160,10 +160,10 @@ void onEnterDebugVs(GameScene* arg0)
     int i;
 
     gm_80167A64(&data->rules);
-    data->rules.xE = 0x20;
+    data->rules.stkind = 0x20;
     data->rules.xB = -1;
     data->rules.xC = -1;
-    data->rules.x0_0 = 0;
+    data->rules.match_mode = 0;
 
     for (i = 0; i < 6; i++) {
         gm_8016795C(&data->players[i]);

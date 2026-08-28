@@ -771,7 +771,7 @@ void mnStageSel_8025B850_OnFrame(void)
 {
     if (mnStageSel_804D6C90->force_stage_id >= 0) {
         mnStageSel_804D6CAF = 2;
-        mnStageSel_804D6C90->data.data.rules.xE =
+        mnStageSel_804D6C90->data.data.rules.stkind =
             mnStageSel_804D6C90->force_stage_id;
         gm_801A4B60();
         return;
@@ -833,7 +833,7 @@ void mnStageSel_8025B850_OnFrame(void)
         gm_801A4B60();
     }
     if (mnStageSel_804D6CAF == 2) {
-        mnStageSel_804D6C90->data.data.rules.xE =
+        mnStageSel_804D6C90->data.data.rules.stkind =
             mnStageSel_803F06D0[mnStageSel_804D6CAE].xB;
         gm_801A4B60();
     }
@@ -851,7 +851,7 @@ void mnStageSel_8025BB5C_OnLeave(UNK_T unused)
     tmp->start_game = mnStageSel_804D6CAF == 2 ? true : false;
     if (tmp->start_game) {
         PreloadCacheScene* cache = lbDvd_GetPreloadCacheScene();
-        cache->game_cache.stkind = tmp->data.data.rules.xE;
+        cache->game_cache.stkind = tmp->data.data.rules.stkind;
         lbDvd_80018254();
     }
 }

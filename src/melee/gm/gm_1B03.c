@@ -83,7 +83,7 @@ void gm_801B0474(StartMeleeData* arg0, MatchEnd* arg1)
     int var_r7;
     int i;
 
-    arg0->rules.x0_0 = 1;
+    arg0->rules.match_mode = 1;
     arg0->rules.x0_6 = false;
     arg0->rules.x2_5 = false;
 

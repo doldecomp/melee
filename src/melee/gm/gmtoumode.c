@@ -143,7 +143,7 @@ void gm_801B1788(GameScene* arg0)
     sss = gm_GetGameSceneLeaveData(arg0);
     if (sss->start_game != 0) {
         gm_SetPendingSceneIndex(4);
-        stage = sss->data.data.rules.xE;
+        stage = sss->data.data.rules.stkind;
         gm_GetTournamentData()->x28 = stage;
         return;
     }
