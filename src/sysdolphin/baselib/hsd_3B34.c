@@ -575,19 +575,12 @@ void hsd_803B3CD8(s32 arg0)
     u16 scratch_r29;
     u16 scratch_r31;
     u16 scratch_r31_2;
-    u8* scratch_r4_10;
     u8* scratch_r4_11;
-    u8* scratch_r4_13;
     u8* scratch_r4_14;
-    u8* scratch_r4_15;
     u8* scratch_r4_16;
-    u8* scratch_r4_24;
     u8* scratch_r4_25;
-    u8* scratch_r4_26;
     u8* scratch_r4_27;
-    u8* scratch_r4_28;
     u8* scratch_r4_29;
-    u8* scratch_r4_8;
     u8* scratch_r4_9;
     u8* work_r7;
     u16* work_r27;
@@ -660,10 +653,8 @@ loop_13:
             hsd_804D79B0 |= 1;
         }
         if (hsd_804D79AC == 8) {
-            scratch_r4_8 = hsd_804D79A0;
-            if (scratch_r4_8 < &hsd_804D79A4[hsd_804D79A8]) {
-                hsd_804D79A0 = scratch_r4_8 + 1;
-                *scratch_r4_8 = hsd_804D79B0;
+            if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
+                *hsd_804D79A0++ = hsd_804D79B0;
             } else {
                 longjmp(&work->jmp_buf, 1);
             }
@@ -692,10 +683,8 @@ loop_13:
                 hsd_804D79B0 |= 1;
             }
             if (hsd_804D79AC == 8) {
-                scratch_r4_10 = hsd_804D79A0;
-                if (scratch_r4_10 < &hsd_804D79A4[hsd_804D79A8]) {
-                    hsd_804D79A0 = scratch_r4_10 + 1;
-                    *scratch_r4_10 = hsd_804D79B0;
+                if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
+                    *hsd_804D79A0++ = hsd_804D79B0;
                 } else {
                     longjmp(&work->jmp_buf, 1);
                 }
@@ -774,10 +763,8 @@ loop_13:
                     hsd_804D79B0 |= 1;
                 }
                 if (hsd_804D79AC == 8) {
-                    scratch_r4_13 = hsd_804D79A0;
-                    if (scratch_r4_13 < &hsd_804D79A4[hsd_804D79A8]) {
-                        hsd_804D79A0 = scratch_r4_13 + 1;
-                        *scratch_r4_13 = hsd_804D79B0;
+                    if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
+                        *hsd_804D79A0++ = hsd_804D79B0;
                     } else {
                         longjmp(&work->jmp_buf, 1);
                     }
@@ -802,10 +789,8 @@ loop_13:
                     hsd_804D79B0 |= 1;
                 }
                 if (hsd_804D79AC == 8) {
-                    scratch_r4_15 = hsd_804D79A0;
-                    if (scratch_r4_15 < &hsd_804D79A4[hsd_804D79A8]) {
-                        hsd_804D79A0 = scratch_r4_15 + 1;
-                        *scratch_r4_15 = hsd_804D79B0;
+                    if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
+                        *hsd_804D79A0++ = hsd_804D79B0;
                     } else {
                         longjmp(&work->jmp_buf, 1);
                     }
@@ -878,10 +863,8 @@ loop_13:
                     hsd_804D79B0 |= 1;
                 }
                 if (hsd_804D79AC == 8) {
-                    scratch_r4_24 = hsd_804D79A0;
-                    if (scratch_r4_24 < &hsd_804D79A4[hsd_804D79A8]) {
-                        hsd_804D79A0 = scratch_r4_24 + 1;
-                        *scratch_r4_24 = hsd_804D79B0;
+                    if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
+                        *hsd_804D79A0++ = hsd_804D79B0;
                     } else {
                         longjmp(&work->jmp_buf, 1);
                     }
@@ -909,10 +892,8 @@ loop_13:
                     hsd_804D79B0 |= 1;
                 }
                 if (hsd_804D79AC == 8) {
-                    scratch_r4_26 = hsd_804D79A0;
-                    if (scratch_r4_26 < &hsd_804D79A4[hsd_804D79A8]) {
-                        hsd_804D79A0 = scratch_r4_26 + 1;
-                        *scratch_r4_26 = hsd_804D79B0;
+                    if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
+                        *hsd_804D79A0++ = hsd_804D79B0;
                     } else {
                         longjmp(&work->jmp_buf, 1);
                     }
@@ -946,10 +927,8 @@ loop_13:
                 hsd_804D79B0 |= 1;
             }
             if (hsd_804D79AC == 8) {
-                scratch_r4_28 = hsd_804D79A0;
-                if (scratch_r4_28 < &hsd_804D79A4[hsd_804D79A8]) {
-                    hsd_804D79A0 = scratch_r4_28 + 1;
-                    *scratch_r4_28 = hsd_804D79B0;
+                if (hsd_804D79A0 < &hsd_804D79A4[hsd_804D79A8]) {
+                    *hsd_804D79A0++ = hsd_804D79B0;
                 } else {
                     longjmp(&work->jmp_buf, 1);
                 }
