@@ -914,8 +914,6 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
     u8 cursor;
     char* src;
 
-    PAD_STACK(12);
-
     name_text = mnNameNew_CurrentNameText;
     {
         NameNewEntry* entry = mnNameNew_804D6C08->user_data;
@@ -949,9 +947,10 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     n = 0;
                     {
                         u16 sel2 = mn_804A04F0.hovered_selection;
-                        char** ptrs = layout->lower_glyphs[(u8) sel2];
-                        null_char = (s8) *mnNameNew_NullCharacter;
-                        while ((s8) *ptrs[0] != null_char) {
+                        GlyphRow* glyphs = layout->lower_glyphs;
+                        char** ptrs = glyphs[(u8) sel2];
+                        null_char = (s8) *((GlyphChar*) mnNameNew_NullCharacter);
+                        while (null_char != (s8) *ptrs[0]) {
                             ptrs++;
                             n++;
                         }
@@ -968,7 +967,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 cursor = data->cursor_pos;
                 name_text[cursor * 3] = "　"[0];
                 name_text[cursor * 3 + 1] = "　"[1];
-                name_text[cursor * 3 + 2] = *mnNameNew_NullCharacter;
+                name_text[cursor * 3 + 2] = *((GlyphChar*) mnNameNew_NullCharacter);
                 lbAudioAx_80024030(1);
                 if (data->cursor_pos < 3) {
                     data->cursor_pos = (u8) (data->cursor_pos + 1);
@@ -1034,18 +1033,18 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 (void) cursor;
                 {
                     char* slot = &name_text[cursor * 3];
-                    if ((s8) *mnNameNew_NullCharacter != (s8) slot[0]) {
+                    if ((s8) *((GlyphChar*) mnNameNew_NullCharacter) != (s8) slot[0]) {
                         n = 1;
                     }
                     if (n != 0) {
-                        slot[0] = *mnNameNew_NullCharacter;
+                        slot[0] = *((GlyphChar*) mnNameNew_NullCharacter);
                         mnNameNew_8023CE4C();
                         return;
                     }
                 }
                 if (cursor != 0) {
                     name_text[(u8) (cursor - 1) * 3] =
-                        *mnNameNew_NullCharacter;
+                        *((GlyphChar*) mnNameNew_NullCharacter);
                     data->cursor_pos = (u8) (data->cursor_pos - 1);
                     mnNameNew_8023CE4C();
                     return;
@@ -1056,7 +1055,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
             case 0x37:
                 lbAudioAx_80024030(1);
                 PickAutoName(mnNameNew_804D6C08);
-                null_char = (s8) *mnNameNew_NullCharacter;
+                null_char = (s8) *((GlyphChar*) mnNameNew_NullCharacter);
                 {
                     char* p = name_text;
                     if (null_char != (s8) *p) {
@@ -1095,7 +1094,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     src = name_text;
                     src_iter = src;
                     dest_iter = dest;
-                    for (; (s8) *mnNameNew_NullCharacter != (s8) *src_iter;
+                    for (; (s8) *((GlyphChar*) mnNameNew_NullCharacter) != (s8) *src_iter;
                          dest_iter++, dest++, len++, src_iter++)
                     {
                         *dest_iter = *src_iter;
@@ -1104,7 +1103,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     src += 3;
                     src_iter = src;
                     dest_iter = dest;
-                    for (; (s8) *mnNameNew_NullCharacter != (s8) *src_iter;
+                    for (; (s8) *((GlyphChar*) mnNameNew_NullCharacter) != (s8) *src_iter;
                          dest_iter++, dest++, len++, src_iter++)
                     {
                         *dest_iter = *src_iter;
@@ -1113,7 +1112,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     src += 3;
                     src_iter = src;
                     dest_iter = dest;
-                    for (; (s8) *mnNameNew_NullCharacter != (s8) *src_iter;
+                    for (; (s8) *((GlyphChar*) mnNameNew_NullCharacter) != (s8) *src_iter;
                          dest_iter++, dest++, len++, src_iter++)
                     {
                         *dest_iter = *src_iter;
@@ -1122,16 +1121,16 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     src += 3;
                     src_iter = src;
                     dest_iter = dest;
-                    for (; (s8) *mnNameNew_NullCharacter != (s8) *src_iter;
+                    for (; (s8) *((GlyphChar*) mnNameNew_NullCharacter) != (s8) *src_iter;
                          dest_iter++, dest++, len++, src_iter++)
                     {
                         *dest_iter = *src_iter;
                     }
                 }
 
-                name_buffer[len] = *mnNameNew_NullCharacter;
+                name_buffer[len] = *((GlyphChar*) mnNameNew_NullCharacter);
 
-                if ((s8) name_text[0] == (s8) *mnNameNew_NullCharacter) {
+                if ((s8) name_text[0] == (s8) *((GlyphChar*) mnNameNew_NullCharacter)) {
                     n = 1;
                 } else {
                     n = 0;
@@ -1175,7 +1174,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 src = name_text;
                 src_iter = src;
                 dest_iter = dest;
-                for (; (s8) *mnNameNew_NullCharacter != (s8) *src_iter;
+                for (; (s8) *((GlyphChar*) mnNameNew_NullCharacter) != (s8) *src_iter;
                      dest_iter++, dest++, len++, src_iter++)
                 {
                     *dest_iter = *src_iter;
@@ -1184,7 +1183,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 src += 3;
                 src_iter = src;
                 dest_iter = dest;
-                for (; (s8) *mnNameNew_NullCharacter != (s8) *src_iter;
+                for (; (s8) *((GlyphChar*) mnNameNew_NullCharacter) != (s8) *src_iter;
                      dest_iter++, dest++, len++, src_iter++)
                 {
                     *dest_iter = *src_iter;
@@ -1193,7 +1192,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 src += 3;
                 src_iter = src;
                 dest_iter = dest;
-                for (; (s8) *mnNameNew_NullCharacter != (s8) *src_iter;
+                for (; (s8) *((GlyphChar*) mnNameNew_NullCharacter) != (s8) *src_iter;
                      dest_iter++, dest++, len++, src_iter++)
                 {
                     *dest_iter = *src_iter;
@@ -1202,16 +1201,16 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 src += 3;
                 src_iter = src;
                 dest_iter = dest;
-                for (; (s8) *mnNameNew_NullCharacter != (s8) *src_iter;
+                for (; (s8) *((GlyphChar*) mnNameNew_NullCharacter) != (s8) *src_iter;
                      dest_iter++, dest++, len++, src_iter++)
                 {
                     *dest_iter = *src_iter;
                 }
             }
 
-            name_buffer[len] = *mnNameNew_NullCharacter;
+            name_buffer[len] = *((GlyphChar*) mnNameNew_NullCharacter);
 
-            if ((s8) name_text[0] == (s8) *mnNameNew_NullCharacter) {
+            if ((s8) name_text[0] == (s8) *((GlyphChar*) mnNameNew_NullCharacter)) {
                 n = 1;
             } else {
                 n = 0;
@@ -1241,7 +1240,9 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
     if (buttons & 0xC0) {
         lbAudioAx_80024030(1);
         if (buttons & 0x40) {
-            if (data->mode != 0) {
+            s32 mode = data->mode;
+
+            if (mode != 0) {
                 data->mode = (u8) (data->mode - 1);
             } else {
                 data->mode = 2;
@@ -1261,7 +1262,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
     }
     if (buttons & 0x20) {
         lbAudioAx_80024030(0);
-        null_char = (s8) *mnNameNew_NullCharacter;
+        null_char = (s8) *((GlyphChar*) mnNameNew_NullCharacter);
         if (null_char == (s8) name_text[0]) {
             n = 1;
         }
@@ -1279,12 +1280,12 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
             n = 0;
         }
         if (n != 0) {
-            name_text[cursor * 3] = *mnNameNew_NullCharacter;
+            name_text[cursor * 3] = *((GlyphChar*) mnNameNew_NullCharacter);
             mnNameNew_8023CE4C();
             return;
         }
         if (cursor != 0) {
-            name_text[(u8) (cursor - 1) * 3] = *mnNameNew_NullCharacter;
+            name_text[(u8) (cursor - 1) * 3] = *((GlyphChar*) mnNameNew_NullCharacter);
             data->cursor_pos = (u8) (data->cursor_pos - 1);
             mnNameNew_8023CE4C();
             return;
