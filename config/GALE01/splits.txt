@@ -2548,12 +2548,16 @@ melee/gm/gm_1B0FF.c:
 	.sbss       start:0x804D68B0 end:0x804D68C0
 
 melee/gm/gm_1B14.c:
-	.text       start:0x801B14A0 end:0x801B24B4
-	.data       start:0x803DD9A0 end:0x803DDBE0
+	.text       start:0x801B14A0 end:0x801B1B74
+	.data       start:0x803DD9A0 end:0x803DDB80
+
+melee/gm/gmtrainingmode.c:
+	.text       start:0x801B1B74 end:0x801B23F0
+	.data       start:0x803DDB80 end:0x803DDBE0
 	.sbss       start:0x804D68C0 end:0x804D68C8
 
 melee/gm/gmcameramode.c:
-	.text       start:0x801B24B4 end:0x801B2BA4
+	.text       start:0x801B23F0 end:0x801B2BA4
 	.data       start:0x803DDBE0 end:0x803DDC58
 	.sbss       start:0x804D68C8 end:0x804D68D0
 
