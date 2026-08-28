@@ -3140,7 +3140,7 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         }
 
         logical = file_idx - blocks_before;
-        if (logical >= 0 && logical < file_blocks) {
+        if (0 <= logical && logical < file_blocks) {
             if (current_seq == -1 ||
                 fn_803ACB74(current_seq, row->x270[0]) < 0)
             {
