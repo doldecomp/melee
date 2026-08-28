@@ -171,6 +171,8 @@ u8 mn_StockCountLimits[2] = { 1, 0x63 };
 u8 mn_StockCountTextId = 0x2B;
 
 extern u16 const mn_804DBDF8;
+u32 const mn_804DBE10;
+u16 const mn_804DBE14;
 
 f32 mn_804D6BD8;
 HSD_GObj* mn_804D6BD0;
@@ -1047,14 +1049,7 @@ s32 mn_80230D18(struct mn_802307F8_t* arg0, HSD_JObj* arg1, s8 arg2)
 
 HSD_GObj* mn_80230E38(int arg0)
 {
-    u8 operand_pad[4];
-    union {
-        struct {
-            u32 bytes4;
-            u16 bytes2;
-        } packed;
-        u8 idx[6];
-    } time_indices;
+    u8 operand_pad[12];
     u16 jobj_map[17];
     HSD_JObj* jobj_parts[17];
     union {
@@ -1079,7 +1074,6 @@ HSD_GObj* mn_80230E38(int arg0)
     StaticModelDesc** desc_ptr;
     u16* sub_count_ptr;
     PAD_STACK(12);
-    PAD_STACK(0x28);
 
     selected = (u8) mn_804A04F0.hovered_selection;
     num_options = mn_803EB6B0[13].selection_count;
@@ -1221,15 +1215,28 @@ HSD_GObj* mn_80230E38(int arg0)
 
                 switch (i) {
                 case 1: {
-                    u8 time_indices[6] = { 2, 3, 5, 6, 7, 8 };
-                    for (j = 0; j < 6; j++) {
+                    union {
+                        struct {
+                            u32 bytes4;
+                            u16 bytes2;
+                        } packed;
+                        u8 idx[6];
+                    } time_indices;
+                    u8* index_ptr;
+
+                    PAD_STACK(0x28);
+
+                    time_indices.packed.bytes4 = mn_804DBE10;
+                    time_indices.packed.bytes2 = mn_804DBE14;
+                    index_ptr = time_indices.idx;
+                    for (j = 0; j < 6; j++, index_ptr++) {
                         HSD_JObj* text =
                             HSD_JObjLoadJoint(MenMainNmRl_Top.joint);
                         HSD_JObjAddAnimAll(text, MenMainNmRl_Top.animjoint,
                                            MenMainNmRl_Top.matanim_joint,
                                            MenMainNmRl_Top.shapeanim_joint);
                         HSD_JObjAddChild(
-                            *(&user_data->x34[1].x0 + time_indices[j]), text);
+                            *(&user_data->x34[1].x0 + *index_ptr), text);
                     }
                     mn_8022FD18((u8) (((struct mn_8022FB88_arg1_t*)
                                            mn_804D6BD0->user_data)
@@ -1531,4 +1538,6 @@ bool mn_80231F80(u8 arg0)
     return true;
 }
 
-u16 const mn_804DBDF8 = 0x203;
+u32 const mn_804DBE10 = 0x02030506;
+u16 const mn_804DBE14 = 0x0708;
+u16 const mn_804DBDF8 = 0x0203;
