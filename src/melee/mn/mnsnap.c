@@ -2506,6 +2506,15 @@ static inline s16* mnSnap_GetCardStatus(mnSnap_State* snap)
     return snap->card_status;
 }
 
+static inline void mnSnap_SetBlankImg(mnSnap_State* snap)
+{
+    if (snap == NULL) {
+        return;
+    }
+    snap->blank_img =
+        snap->slot_a_jobj->u.dobj->mobj->tobj->imagedesc->image_ptr;
+}
+
 /// Entry point: initializes the Snap menu scene. Loads assets, creates GObjs,
 /// sets up thumbnail grid positions, SIS text labels, and dialog widgets.
 void mnSnap_80257F24(void)
@@ -2627,8 +2636,7 @@ void mnSnap_80257F24(void)
                 1, -1);
 
     slot_jobj_ptr = &snap->slot_a_jobj;
-    snap->blank_img =
-        snap->slot_a_jobj->u.dobj->mobj->tobj->imagedesc->image_ptr;
+    mnSnap_SetBlankImg(snap);
 
     if (snap->photo_count[snap->active_slot] <= 4) {
         HSD_JObjSetFlagsAll(snap->arrow_jobj, JOBJ_HIDDEN);
