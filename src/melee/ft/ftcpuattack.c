@@ -586,7 +586,6 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
     ftCo_AttackEntry sp34[32];
     ItemAttr* attrs;
     ftCo_AttackEntry* list = arg2;
-    ftCo_AttackEntry* sel;
     struct Fighter_x1A88_t* cpu = &fp->x1A88;
     s32 count;
     s32 i;
@@ -617,7 +616,6 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
     f32 x50Grav;
     f32 sizeHalf;
 
-    cpu = &fp->x1A88;
     if (list == NULL) {
         return 0;
     }
@@ -761,8 +759,8 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
     }
     inv = 1.0 / sum;
     acc = 0.0f;
-    for (i = 0, sel = sp34; i < count; i++, sel++) {
-        acc += sel->weight;
+    for (i = 0; i < count; i++) {
+        acc += sp34[i].weight;
         if (acc * inv >= r) {
             return sp34[i].cmd;
         }
