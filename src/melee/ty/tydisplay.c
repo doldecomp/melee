@@ -809,15 +809,17 @@ void _tyDisplay_80319540(s32 arg0)
     _tyDisplay_80319540_sort(cfg, grid);
 
     {
-        for (i = 0; i < cfg->x08; i++) {
+        for (cur = (TyDspGrid*) ((size_t) grid + (i = 0) * sizeof(TySortElem));
+             i < cfg->x08;
+             cur = (TyDspGrid*) ((size_t) cur + sizeof(TySortElem)), i++)
+        {
             HSD_GObj* gobj;
-            (void) &_tyDisplay_804D6F10[i];
-            cfg->x78 = _tyDisplay_8031BC54(grid->sort[i].key);
+            cfg->x78 = _tyDisplay_8031BC54(cur->sort[0].key);
             gobj = cfg->x78;
             if (gobj != NULL) {
                 _tyDisplay_804D6F10[i] = (HSD_JObj*) gobj->hsd_obj;
-                HSD_JObjSetTranslateX(_tyDisplay_804D6F10[i], grid->pos[i].x);
-                HSD_JObjSetTranslateZ(_tyDisplay_804D6F10[i], grid->pos[i].z);
+                HSD_JObjSetTranslateX(_tyDisplay_804D6F10[i], cur->pos[0].x);
+                HSD_JObjSetTranslateZ(_tyDisplay_804D6F10[i], cur->pos[0].z);
             }
         }
     }
