@@ -445,17 +445,20 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
             s32 j = (visible = 0);
 
             for (; j < (s32) (u8) i; j++) {
-                if (mn_80231F80((u8) j) != 0) {
+                u8 j8 = j;
+                if (mn_80231F80(j8) != 0) {
                     visible++;
                 }
             }
             {
+                HSD_JObj* child;
                 HSD_JObj* root = data->xC[rule_data->x0[(u8) visible]];
                 if (root == NULL) {
-                    option_roots[i] = NULL;
+                    child = NULL;
                 } else {
-                    option_roots[i] = root->child;
+                    child = root->child;
                 }
+                option_roots[i] = child;
             }
         }
     }
