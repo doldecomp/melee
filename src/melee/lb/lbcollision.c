@@ -455,8 +455,6 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                     float d2_x;
                     float d2_y;
                     float d2_z;
-                    float arg3_x;
-                    float arg3_y;
                     float arg3_z;
                     float offset_delta_y;
                     float offset_delta_z;
@@ -469,13 +467,11 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                     float denom;
 
                     d1_y = arg1->y - arg4_offset.y;
-                    arg3_y = arg3->y;
                     d1_z = arg1->z - arg4_offset.z;
-                    d2_y = arg3_y - arg5_offset.y;
+                    d2_y = arg3->y - arg5_offset.y;
                     offset_delta_y = arg4_offset.y - arg5_offset.y;
-                    arg3_x = arg3->x;
                     d1_x = arg1_x - arg4_offset.x;
-                    d2_x = arg3_x - arg5_offset.x;
+                    d2_x = arg3->x - arg5_offset.x;
                     {
                         f32 z = arg3->z;
                         arg3_z = z;
@@ -547,8 +543,8 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
 
                                     c3 = arg5_offset;
                                     arg4_scl = 0.0f;
-                                    d1.x = arg3_x - arg2->x;
-                                    d1.y = arg3_y - arg2->y;
+                                    d1.x = arg3->x - arg2->x;
+                                    d1.y = arg3->y - arg2->y;
                                     d1.z = arg3_z - arg2->z;
                                     {
                                         float dot;
@@ -575,8 +571,8 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
 
                                     c2 = arg5_offset;
                                     arg4_scl = 1.0f;
-                                    d1.x = arg3_x - arg2->x;
-                                    d1.y = arg3_y - arg2->y;
+                                    d1.x = arg3->x - arg2->x;
+                                    d1.y = arg3->y - arg2->y;
                                     d1.z = arg3_z - arg2->z;
                                     {
                                         float dot;
