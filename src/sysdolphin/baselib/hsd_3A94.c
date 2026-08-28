@@ -3048,35 +3048,6 @@ static inline s32 fn_803AE7F8_queue_write(CardState* state, s32 block,
     return result;
 }
 
-static inline void fn_803AE7F8_calc_file_blocks(s32 file_idx, CardState* state,
-                                                s32* file_blocks,
-                                                s32* total_blocks)
-{
-    if (state->x4C[file_idx] <= 0) {
-        *file_blocks = 0;
-    } else if (file_idx == 0) {
-        u32 sector_size = state->x8;
-        u32 usable;
-        s32 rem;
-
-        rem = state->x4C[0];
-        usable = sector_size - 0x20;
-        rem = rem - (s32) (usable - (state->x24 + 0x30) % sector_size);
-        if (rem <= 0) {
-            *file_blocks = 1;
-        } else {
-            *file_blocks =
-                (u32) (rem + sector_size - 0x21) / (sector_size - 0x20) + 1;
-        }
-    } else {
-        u32 sector_size = state->x8;
-        *file_blocks = (u32) (state->x4C[file_idx] + sector_size - 0x21) /
-                       (sector_size - 0x20);
-    }
-
-    *total_blocks = fn_803AC7DC(state);
-}
-
 s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
     CardState* state = arg0;
@@ -3119,7 +3090,8 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     blocks_before = fn_803AC6B8_blocks_before(arg0, arg1);
 
     file_size = state->x4C[arg1];
-    fn_803AE7F8_calc_file_blocks(arg1, arg0, &file_blocks, &total_blocks);
+    file_blocks = fn_803AC634(arg0, arg1);
+    total_blocks = fn_803AC7DC(arg0);
 
     for (i = 0; i < file_blocks; i++) {
         block_map[0][i] = -1;
@@ -3481,10 +3453,12 @@ after_verify:
             return repair_result == 0 ? -267 : repair_result;
         }
     } else {
-        entries[0].x0 = 2;
-        entries[0].x4 = (s32) arg0;
-        entries[0].x8 = arg4;
-        entries[0].xC = arg1;
+        CardBufEntry* entry = entries;
+
+        entry->x0 = 2;
+        entry->x4 = (s32) arg0;
+        entry->x8 = arg4;
+        entry->xC = arg1;
         hsd_804D7998 = -1;
     }
 
