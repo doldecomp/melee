@@ -319,7 +319,8 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         rules->x12 = x46;
         x47 = data2->selected_name_idx;
         gmMainLib_GetGameRules()->x13 = x47;
-        gmMainLib_GetGameRules()->xD = (x48 = data2->is_name_mode);
+        gmMainLib_GetGameRules()->xD =
+            (x48 = (int) data2->is_name_mode);
         mn_80229894(0x1C, 0, 3);
         mnDiagram2_ClearStatRows(mnDiagram2_804D6C18);
         return;
