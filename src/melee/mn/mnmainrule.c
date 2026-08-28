@@ -528,6 +528,18 @@ void mn_8022FD18(u8 arg0)
     HSD_JObjAnimAll(jobj2);
 }
 
+static inline AnimLoopSettings*
+mn_8022FEC8_GetSettings(u8 rule_kind, u8 rule_value)
+{
+    u8 default_value;
+
+    if (rule_kind != 0 && rule_kind != 2 && rule_kind != 4) {
+        return NULL;
+    }
+    default_value = mn_803EC7DC[rule_kind][1];
+    return &mn_803EC770[default_value - rule_value];
+}
+
 void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
 {
     AnimLoopSettings* settings;
@@ -578,12 +590,7 @@ void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
     case 2:
     case 4:
         if ((mn_804A04F0.buttons & 4) != 0) {
-            if (arg2 != 0 && arg2 != 2 && arg2 != 4) {
-                settings = NULL;
-            } else {
-                default_value = mn_803EC7DC[arg2][1];
-                settings = &mn_803EC770[default_value - arg3];
-            }
+            settings = mn_8022FEC8_GetSettings(arg2, arg3);
             HSD_JObjReqAnimAll(arg1, settings->start_frame);
         } else {
             if (arg2 != 0 && arg2 != 2 && arg2 != 4) {
