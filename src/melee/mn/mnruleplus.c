@@ -441,9 +441,11 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
         } else {
             valid = 1;
         }
-        if (valid != 0) {
-            s32 j = (visible = 0);
+        if (valid) {
+            s32 j;
 
+            visible = valid - 1;
+            j = visible;
             for (; j < (s32) (u8) i; j++) {
                 u8 j8 = j;
                 if (mn_80231F80(j8) != 0) {
