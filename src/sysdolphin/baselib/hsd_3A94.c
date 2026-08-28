@@ -4474,9 +4474,12 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         if (arg3 != 0) {
             memset(arg0->x0, 0, sector_size);
         } else {
+            u32 read_size;
             s32 retries;
-            u8* buf = arg0->x0;
-            u32 read_size = sector_size;
+            u8* buf;
+
+            buf = arg0->x0;
+            read_size = sector_size;
             for (retries = 0; retries < 10; retries++) {
                 result = CARDRead(&arg0->file_info, buf, read_size, 0);
                 if (result != -1) {
@@ -4515,10 +4518,10 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     while (remaining >= 0) {
         sector_size = arg0->x8;
         if ((u32) (payload_pos + remaining) > sector_size) {
+            u8* buf;
             s32 retries;
             s32 offset;
             u32 write_size;
-            u8* buf;
 
             memcpy(arg0->x0 + payload_pos, (s32*) arg2,
                    sector_size - payload_pos);
@@ -4550,10 +4553,12 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                 if (arg3 != 0) {
                     memset(arg0->x0, 0, arg0->x8);
                 } else {
+                    u8* buf;
                     s32 retries2;
-                    u32 read_size = arg0->x8;
-                    u8* buf = arg0->x0;
+                    u32 read_size;
 
+                    read_size = arg0->x8;
+                    buf = arg0->x0;
                     for (retries2 = 0; retries2 < 10; retries2++) {
                         result = CARDRead(&arg0->file_info, buf, read_size,
                                           read_size * block_idx);
@@ -4577,10 +4582,10 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         remaining = -1;
 
         {
-            s32 retries;
-            s32 offset;
             u32 write_size;
+            s32 retries;
             u8* buf;
+            s32 offset;
 
             write_size = arg0->x8;
             (void) write_size;
