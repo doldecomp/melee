@@ -3559,11 +3559,6 @@ static inline void fn_803AF3F0_close(CardState* state)
     }
 }
 
-static inline s32 fn_803AF3F0_queue_cmd(CardCmd* cmd)
-{
-    return fn_803AC168((s32*) cmd);
-}
-
 static inline s32 fn_803AF3F0_open(s32 fd, s32 ofs, CARDFileInfo* info)
 {
     s32 retries;
@@ -3578,7 +3573,7 @@ static inline s32 fn_803AF3F0_open(s32 fd, s32 ofs, CARDFileInfo* info)
     return open_result;
 }
 
-static inline void fn_803AF3F0_check_seq(CardState* state, s32* primary,
+static inline void fn_803AF3F0_check_seq(CardState* state, const s32* primary,
                                          s32 count, s32 current_seq,
                                          s32* seq_match)
 {
