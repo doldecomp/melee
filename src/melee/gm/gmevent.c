@@ -15,6 +15,7 @@
 #include "melee/gr/ground.h"
 #include "melee/if/ifstock.h"
 #include "melee/it/items/itevyoshiegg.h"
+#include "melee/lb/lb_0219.h"
 #include "melee/lb/lbarchive.h"
 #include "melee/lb/lbaudio_ax.h"
 #include "melee/lb/lbbgflash.h"

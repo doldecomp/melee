@@ -164,12 +164,24 @@ melee/lb/lb_01F8.c:
 	.sdata2     start:0x804D7CE0 end:0x804D7CE8
 
 melee/lb/lbbgflash.c:
-	.text       start:0x8001FC08 end:0x80021CE8
-	.data       start:0x803BB000 end:0x803BB0B0
-	.bss        start:0x80433658 end:0x804336D0
-	.sdata      start:0x804D3840 end:0x804D3868
+	.text       start:0x8001FC08 end:0x80020AEC
+	.data       start:0x803BB000 end:0x803BB060
+	.bss        start:0x80433658 end:0x804336A0
+	.sdata      start:0x804D3840 end:0x804D3850
+	.sdata2     start:0x804D7CE8 end:0x804D7D10
+
+melee/lb/lb_020A.c:
+	.text       start:0x80020AEC end:0x800219E4
+	.data       start:0x803BB060 end:0x803BB088
+	.sdata      start:0x804D3850 end:0x804D3868
+	.sdata2     start:0x804D7D10 end:0x804D7D60
+
+melee/lb/lb_0219.c:
+	.text       start:0x800219E4 end:0x80021CE8
+	.data       start:0x803BB088 end:0x803BB0B0
+	.bss        start:0x804336A0 end:0x804336D0
 	.sbss       start:0x804D63D8 end:0x804D63E8
-	.sdata2     start:0x804D7CE8 end:0x804D7D70
+	.sdata2     start:0x804D7D60 end:0x804D7D70
 
 melee/lb/lbrefract.c:
 	.text       start:0x80021CE8 end:0x80022C30
