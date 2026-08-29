@@ -621,7 +621,7 @@ void gm_801B5ACC(GameScene* arg0)
     s32 i;
     s32 next_count;
 
-    PAD_STACK(24);
+    PAD_STACK(20);
     chars[0] = 0x21;
     chars[1] = 0x21;
     chars[2] = 0x21;
