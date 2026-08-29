@@ -709,9 +709,9 @@ static inline s32 mnVibration_GetPortModeIndex(s32 port)
     return port + 2;
 }
 
-static inline void
-mnVibration_ThinkInline(HSD_GObj* gobj, MnVibrationData* data,
-                        HSD_JObj** port_anim_jobj)
+static inline void mnVibration_ThinkInline(HSD_GObj* gobj,
+                                           MnVibrationData* data,
+                                           HSD_JObj** port_anim_jobj)
 {
     HSD_JObj* panel_jobj;
     HSD_JObj* port_child;

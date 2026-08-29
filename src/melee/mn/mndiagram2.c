@@ -661,8 +661,8 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
         row = row_idx;
         ny = -position.y;
         row_y_offset = -f30 * (f32) row;
-        text = HSD_SisLib_803A5ACC(0, 1, position.x, ny + row_y_offset, position.z,
-                                   320.0f, 240.0f);
+        text = HSD_SisLib_803A5ACC(0, 1, position.x, ny + row_y_offset,
+                                   position.z, 320.0f, 240.0f);
 
         {
             data->row_labels[row_idx] = text;
@@ -673,7 +673,8 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                 {
                     unit_glyph_id = base->unit_glyph_ids[stat_type];
                     if (unit_glyph_id != 0xFFFF) {
-                        lb_8000B1CC(data->row0_ref, &base->label_pos, &position);
+                        lb_8000B1CC(data->row0_ref, &base->label_pos,
+                                    &position);
                         text2 = HSD_SisLib_803A5ACC(0, 1, 12.0f + position.x,
                                                     -position.y + row_y_offset,
                                                     position.z, 1.0f, 1.0f);
@@ -718,7 +719,8 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                     data->row_values[row_idx] = text3;
                     text3->font_size.x = 0.03f;
                     text3->font_size.y = 0.035f;
-                    lb_8000B1CC(data->icon_parent, &base->value_pos, &position);
+                    lb_8000B1CC(data->icon_parent, &base->value_pos,
+                                &position);
                     {
                         px = position.x;
                         py = -position.y + row_y_offset;

@@ -531,8 +531,7 @@ void grZebes_801D881C(HSD_GObj* gobj)
         mpJointListAdd(0);
         mpLib_80057424(0);
 
-        colWidth =
-            (state->positions[1].x - state->positions[0].x) / 5.0f;
+        colWidth = (state->positions[1].x - state->positions[0].x) / 5.0f;
         heights = col_heights;
 
         col_heights[0] = -9999.0f;
@@ -1720,8 +1719,7 @@ static inline f32 grZebes_801DB3CC_half_radius(grZe_YakumonoParam* yp)
     return yp->x74 * 0.5f;
 }
 
-static inline f32 grZebes_801DB3CC_update_y(grZe_BubbleEntry** base,
-                                             f32 old_y)
+static inline f32 grZebes_801DB3CC_update_y(grZe_BubbleEntry** base, f32 old_y)
 {
     return old_y + (*base)->x14;
 }

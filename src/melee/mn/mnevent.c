@@ -222,17 +222,16 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
         text->pos_z = 17.0f;
         text->default_kerning = 1;
         *(s32*) &text->text_color = mnEvent_804D5028;
-        HSD_SisLib_803A6B98(text, 0.0f, 0.0f, mnEvent_803EF77C,
-                            event_id + 1);
+        HSD_SisLib_803A6B98(text, 0.0f, 0.0f, mnEvent_803EF77C, event_id + 1);
 
         icon_base = data->icons;
         icon_slot = &icon_base[idx];
         if (*icon_slot != NULL) {
             HSD_SisLib_803A5CC4(data->icons[idx]);
         }
-        icon_text = HSD_SisLib_803A5ACC(
-            0, 1, pos.x + mnEvent_803EF770.x, pos.y + mnEvent_803EF770.y,
-            17.0f, 364.68332f, 38.38772f);
+        icon_text = HSD_SisLib_803A5ACC(0, 1, pos.x + mnEvent_803EF770.x,
+                                        pos.y + mnEvent_803EF770.y, 17.0f,
+                                        364.68332f, 38.38772f);
         *icon_slot = icon_text;
         icon_text->font_size.x = 0.035f;
         icon_text->font_size.y = 0.035f;

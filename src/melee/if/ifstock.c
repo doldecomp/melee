@@ -642,8 +642,8 @@ void ifStock_802F98E8(unsigned char player, int b)
                             for (i = 0; i < 7; i++, data++) {
                                 jobj =
                                     ifStock_804A1378.player[player].x4[i + 1];
-                                if (i <
-                                        ifStock_804A1378.player[player].stocks ||
+                                if (i < ifStock_804A1378.player[player]
+                                            .stocks ||
                                     i >= 5)
                                 {
                                     data[5] = 0;
@@ -657,8 +657,8 @@ void ifStock_802F98E8(unsigned char player, int b)
                                 HSD_JObjReqAnimAll(jobj, data[5]);
                                 HSD_TObjReqAnimAll(jobj->u.dobj->mobj->tobj,
                                                    gm_80168BF8(player));
-                                HSD_AObjSetRate(
-                                    jobj->u.dobj->mobj->tobj->aobj, 0.0f);
+                                HSD_AObjSetRate(jobj->u.dobj->mobj->tobj->aobj,
+                                                0.0f);
                             }
                         }
                     }

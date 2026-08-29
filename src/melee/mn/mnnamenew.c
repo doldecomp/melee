@@ -698,9 +698,7 @@ static inline void CopyCurrentNameToNametag(struct NameTagData* nametag)
             break;
         }
         ptr = text;
-        while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
-               (s8) (ch = *ptr))
-        {
+        while ((null_ch = (s8) *mnNameNew_NullCharacter) != (s8) (ch = *ptr)) {
             nametag->namedata[idx] = (s8) ch;
             idx += 1;
             ptr += 1;
@@ -1254,8 +1252,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
         return;
     } else if (buttons & 0x20) {
         lbAudioAx_80024030(0);
-        if ((s8) name_text[0] ==
-            (s8) * ((GlyphChar*) mnNameNew_NullCharacter))
+        if ((s8) name_text[0] == (s8) * ((GlyphChar*) mnNameNew_NullCharacter))
         {
             n = 1;
         }

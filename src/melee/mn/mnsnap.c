@@ -595,8 +595,7 @@ void mnSnap_80253F60(void)
                 t = 0.0F;
             }
             HSD_JObjReqAnimAll(
-                *(HSD_JObj**) ((u32) &mnSnap_804A0A10 + byte_off + 0x98),
-                t);
+                *(HSD_JObj**) ((u32) &mnSnap_804A0A10 + byte_off + 0x98), t);
         } else {
             HSD_JObjReqAnimAll(
                 *(HSD_JObj**) ((u32) &mnSnap_804A0A10 + byte_off + 0x98),

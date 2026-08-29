@@ -4006,8 +4006,8 @@ void _Toy_8030B530(HSD_GObj* arg0)
                                 entry->trophy_id = tid;
                                 entry->archive = lbArchive_LoadSymbols(
                                     entry->archive_name,
-                                    &archive_symbols.prev_wrap, entry->symbol_name,
-                                    0);
+                                    &archive_symbols.prev_wrap,
+                                    entry->symbol_name, 0);
                             }
                         } else {
                             ToyListEntry* entry;
@@ -4032,11 +4032,13 @@ void _Toy_8030B530(HSD_GObj* arg0)
                             lbArchive_80016EFC(display->last_entry->archive);
                             display->last_entry->archive = NULL;
                         }
-                        display->selected_entry = display->selected_entry->prev;
+                        display->selected_entry =
+                            display->selected_entry->prev;
                         display->first_entry = display->first_entry->prev;
                         display->last_entry = display->last_entry->prev;
                     } else {
-                        display->selected_entry = display->selected_entry->prev;
+                        display->selected_entry =
+                            display->selected_entry->prev;
                     }
                 } else {
                     s32 total;
@@ -4094,8 +4096,9 @@ void _Toy_8030B530(HSD_GObj* arg0)
                             entry->symbol_name = md + 0x24;
                             entry->trophy_id = tid;
                             entry->archive = lbArchive_LoadSymbols(
-                                entry->archive_name, &archive_symbols.next_wrap,
-                                entry->symbol_name, 0);
+                                entry->archive_name,
+                                &archive_symbols.next_wrap, entry->symbol_name,
+                                0);
                         } else {
                             ToyListEntry* entry;
                             HSD_Archive* oa;
@@ -4119,11 +4122,13 @@ void _Toy_8030B530(HSD_GObj* arg0)
                             lbArchive_80016EFC(display->first_entry->archive);
                             display->first_entry->archive = NULL;
                         }
-                        display->selected_entry = display->selected_entry->next;
+                        display->selected_entry =
+                            display->selected_entry->next;
                         display->first_entry = display->first_entry->next;
                         display->last_entry = display->last_entry->next;
                     } else {
-                        display->selected_entry = display->selected_entry->next;
+                        display->selected_entry =
+                            display->selected_entry->next;
                     }
                 }
 
@@ -4132,7 +4137,8 @@ void _Toy_8030B530(HSD_GObj* arg0)
                 state->x58 = 0x95E;
                 Toy_803087F4(display->selected_entry);
                 _Toy_803084A0(display->selected_entry->trophy_id);
-                Toy_803083D8(ed8->x30, (s32) display->selected_entry->trophy_id);
+                Toy_803083D8(ed8->x30,
+                             (s32) display->selected_entry->trophy_id);
             }
 
             trigger = Toy_80305B88();
@@ -4146,8 +4152,8 @@ void _Toy_8030B530(HSD_GObj* arg0)
                 f32 right = HSD_CObjGetRight(cobj);
                 f32 left = HSD_CObjGetLeft(cobj);
                 if (HSD_PadCopyStatus[1].trigger & HSD_PAD_START) {
-                    OSReport("top = %f, bottom = %f, right = %f, left = %f\n", top,
-                             bottom, right, left);
+                    OSReport("top = %f, bottom = %f, right = %f, left = %f\n",
+                             top, bottom, right, left);
                     return;
                 }
                 if (HSD_PadCopyStatus[1].button & HSD_PAD_DPADUP) {
@@ -5064,9 +5070,7 @@ void _Toy_8030FE48(ToyDisplayList* data, s32 arg1)
         start = 0;
         offset = start;
         entry = data->entries;
-        for (; start < data->visible_count;
-             start += 1, offset += 2, entry++)
-        {
+        for (; start < data->visible_count; start += 1, offset += 2, entry++) {
             if (start == data->selectedIdx) {
                 trophyIdx = Toy_sbss_804D6EDC[offset / 2];
                 result = Toy_8030813C(trophyIdx);

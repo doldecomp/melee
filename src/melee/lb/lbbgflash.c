@@ -742,8 +742,8 @@ static inline void adjust_length(f32 limit_pow, f32 limit, f32* length_pow,
 
     *length_pow = next_pow;
     if (*length > limit) {
-        *length = ((11.0f * limit) / 10.0f) +
-                  (-limit_pow / (10.0f * *length_pow));
+        *length =
+            ((11.0f * limit) / 10.0f) + (-limit_pow / (10.0f * *length_pow));
     }
 }
 

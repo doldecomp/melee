@@ -402,9 +402,9 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     chars_ptr[1] = 0x21;
     chars_ptr[2] = 0x21;
 
-    for (count_processed = 0;
-         count_processed < (s32) gm_803DEC4C[arg1].count;
-         count_processed++) {
+    for (count_processed = 0; count_processed < (s32) gm_803DEC4C[arg1].count;
+         count_processed++)
+    {
         chars[count_processed] = opp_data[count_processed].x3;
     }
 
@@ -581,8 +581,8 @@ void fn_801B5AA8(int arg0)
     lbBgFlash_8002063C(0x78);
 }
 
-static inline void
-gm_801B5ACC_inline0(StartMeleeData* data, GameScene* arg0, u16* round)
+static inline void gm_801B5ACC_inline0(StartMeleeData* data, GameScene* arg0,
+                                       u16* round)
 {
     data->players[0].xD_b2 = 1;
     data->rules.x7 = 9;
@@ -593,8 +593,7 @@ gm_801B5ACC_inline0(StartMeleeData* data, GameScene* arg0, u16* round)
     }
 }
 
-static inline void
-gm_801B5ACC_inline1(AllstarRoundInfo* ri)
+static inline void gm_801B5ACC_inline1(AllstarRoundInfo* ri)
 {
     s32 end_idx = (s32) ri[1].start;
     gm_803DEBE8_t* opp = &gm_803DEBE8[end_idx];

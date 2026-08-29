@@ -629,8 +629,8 @@ static inline s32 tyFigupon_GetBetCount(struct un_804D6EF4_t* ef4)
     return ef4->x5E;
 }
 
-static inline void tyFigupon_FinishCoinDrop(
-    HSD_GObj* gobj, TyFiguponUD* ud, struct un_804D6EF4_t* ef4)
+static inline void tyFigupon_FinishCoinDrop(HSD_GObj* gobj, TyFiguponUD* ud,
+                                            struct un_804D6EF4_t* ef4)
 {
     struct un_804D6EF4_t* ef4_2;
     s32 anim = 0;

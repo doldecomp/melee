@@ -1225,8 +1225,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
             (void) row;
             cursor_pos = data->name_cursor_pos;
             row_result = mnDiagram_GetVisibleNameFrom(
-                sorted, cursor_pos >> 8,
-                mn_804A04F0.hovered_selection >> 8);
+                sorted, cursor_pos >> 8, mn_804A04F0.hovered_selection >> 8);
             mnDiagram_CreatePopup(col_result, row_result, 1);
             return;
         }

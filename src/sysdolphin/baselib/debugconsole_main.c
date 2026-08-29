@@ -1071,8 +1071,7 @@ hsd_80394F48_get_highlight_color(struct lbl_8040AB00_t* base_color)
     return base_color + 1;
 }
 
-static inline void
-hsd_80394F48_set_col_start(s32* pxC8, s32* col_start)
+static inline void hsd_80394F48_set_col_start(const s32* pxC8, s32* col_start)
 {
     *col_start = *pxC8;
 }
@@ -1082,8 +1081,7 @@ static inline s32 hsd_80394F48_get_x_base(s32 col_start)
     return col_start * 11 + 0x14;
 }
 
-static inline void**
-hsd_80394F48_get_x50_ptr(struct ParticleScreenState* sp)
+static inline void** hsd_80394F48_get_x50_ptr(struct ParticleScreenState* sp)
 {
     return &sp->x50;
 }
@@ -1098,9 +1096,8 @@ static inline s32* hsd_80394F48_get_xCC_ptr(struct ParticleScreenState* sp)
     return &sp->xCC;
 }
 
-static inline void
-hsd_80394F48_init(void* data, s32* num_entries, void*** px50, s32** pxC8,
-                  s32** pxCC)
+static inline void hsd_80394F48_init(void* data, s32* num_entries,
+                                     void*** px50, s32** pxC8, s32** pxCC)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
     EventData* dp = data;

@@ -796,8 +796,7 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     config_all = (struct gmMainLib_8015DBF4_config*) config;
     ptr = &config->x4;
     val = *ptr;
-    base = (struct gmMainLib_8015DBF4_base*)
-        &config_all->unk_530.unk_588[0];
+    base = (struct gmMainLib_8015DBF4_base*) &config_all->unk_530.unk_588[0];
     if (val == (u8) arg0) {
         *ptr = 0x78;
     } else if (val > (u8) arg0 && val != 0x78) {

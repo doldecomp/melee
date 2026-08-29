@@ -549,8 +549,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                     float base_throw_speed;
                     float throw_speed;
                     interpolation = fp->mv.co.itemthrow4.x8.x;
-                    throw_speed_arr =
-                        (ftCo_ItemThrowAttrs*) Fighter_804D6550;
+                    throw_speed_arr = (ftCo_ItemThrowAttrs*) Fighter_804D6550;
                     velocity_multiplier =
                         co_attrs->heavy_throw_velocity_multiplier;
                     table_speed =
@@ -559,8 +558,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                     base_throw_speed = velocity_multiplier * table_speed;
                     throw_scale *= base_throw_speed;
                     throw_speed = throw_scale;
-                    interpolation =
-                        fsm * (interpolation - vec0.x) + vec0.x;
+                    interpolation = fsm * (interpolation - vec0.x) + vec0.x;
                     vec2.x = interpolation;
                     interpolation =
                         fsm * (fp->mv.co.itemthrow4.x8.y - vec0.y) + vec0.y;

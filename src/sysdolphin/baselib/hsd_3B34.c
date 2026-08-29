@@ -200,14 +200,12 @@ static inline s32 hsd_803B3408_inline(s32 index)
     return (index & 1) * 0x20;
 }
 
-static inline s32
-hsd_803B3408_offset(s32 tile_stride, s32 y, s32 x)
+static inline s32 hsd_803B3408_offset(s32 tile_stride, s32 y, s32 x)
 {
     return ((x / 4) * 0x10) + ((y / 4) * tile_stride);
 }
 
-static inline void
-hsd_803B3408_set_stride(s32* tile_stride, s32 width)
+static inline void hsd_803B3408_set_stride(s32* tile_stride, s32 width)
 {
     *tile_stride = ((width + 0xF) / 16) << 6;
 }
@@ -487,9 +485,8 @@ static void fn_803B376C(u8* arg0)
         scratch_f27_6 = -scratch_f28_6 + scratch_f8_4;
         scratch_f29_3 = -scratch_f11_6 + scratch_f29_2;
         scratch_f28_7 = scratch_f28_6 + scratch_f8_4;
-        work_r4_2[56] =
-            (s32) ((0.980785 * (f64) scratch_f27_6) +
-                   (0.19509 * (f64) scratch_f30_4));
+        work_r4_2[56] = (s32) ((0.980785 * (f64) scratch_f27_6) +
+                               (0.19509 * (f64) scratch_f30_4));
         work_r4_2[40] = (s32) ((0.83147 * (f64) scratch_f28_7) +
                                (0.55557 * (f64) scratch_f29_3));
         work_r4_2[24] = (s32) ((-0.55557 * (f64) scratch_f28_7) +

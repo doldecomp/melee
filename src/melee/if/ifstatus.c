@@ -320,8 +320,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
         HSD_TObjAddAnimAll(
             post_digit_jobj->u.dobj->mobj->tobj,
             (HSD_TexAnim*) anim_joints[0]->child->child->aobjdesc->fobjdesc);
-        HSD_TObjReqAnimAll(post_digit_jobj->u.dobj->mobj->tobj,
-                           2.0F * digit);
+        HSD_TObjReqAnimAll(post_digit_jobj->u.dobj->mobj->tobj, 2.0F * digit);
         HSD_AObjSetRate(post_digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
 
         post_digit_jobj = state->jobjs[Tens];
@@ -329,8 +328,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
         HSD_TObjAddAnimAll(
             post_digit_jobj->u.dobj->mobj->tobj,
             (HSD_TexAnim*) anim_joints[0]->child->child->aobjdesc->fobjdesc);
-        HSD_TObjReqAnimAll(post_digit_jobj->u.dobj->mobj->tobj,
-                           2.0F * digit);
+        HSD_TObjReqAnimAll(post_digit_jobj->u.dobj->mobj->tobj, 2.0F * digit);
         HSD_AObjSetRate(post_digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
 
         if ((state->damage_percent % 1000) / 100 == 0 &&
@@ -346,8 +344,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
         HSD_TObjAddAnimAll(
             post_digit_jobj->u.dobj->mobj->tobj,
             (HSD_TexAnim*) anim_joints[0]->child->child->aobjdesc->fobjdesc);
-        HSD_TObjReqAnimAll(post_digit_jobj->u.dobj->mobj->tobj,
-                           2.0F * digit);
+        HSD_TObjReqAnimAll(post_digit_jobj->u.dobj->mobj->tobj, 2.0F * digit);
         HSD_AObjSetRate(post_digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
     }
 

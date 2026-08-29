@@ -325,7 +325,8 @@ void grAnime_801C6A54(HSD_JObj* jobj, HSD_AnimJoint* animjoint,
             loaded_aobj = HSD_AObjLoadDesc(animjoint->aobjdesc);
             jobj->aobj = loaded_aobj;
             grAnime_JObjSortAnim(jobj->aobj);
-            if (loaded_aobj != NULL) {}
+            if (loaded_aobj != NULL) {
+            }
         }
         grAnime_801C6960(jobj->robj, animjoint->robj_anim);
     }
@@ -386,8 +387,7 @@ void grAnime_801C6C0C(HSD_JObj* jobj, HSD_AnimJoint* animjoint,
     HSD_ShapeAnimJoint* next_sj;
 
     if (jobj != NULL) {
-        grAnime_801C6A54_inner(jobj, animjoint, matanimjoint,
-                                shapeanimjoint);
+        grAnime_801C6A54_inner(jobj, animjoint, matanimjoint, shapeanimjoint);
         if (!(jobj->flags & 0x1000)) {
             jp = jobj->child;
             if (animjoint != NULL) {
@@ -599,8 +599,8 @@ void grAnime_801C706C(HSD_TObj* tobj, s32 flags, void* func, u32 type,
     }
 }
 
-static inline void grAnime_MObjForeachAnim(
-    HSD_MObj* mobj, int flags, void* func, u32 type, void* param)
+static inline void grAnime_MObjForeachAnim(HSD_MObj* mobj, int flags,
+                                           void* func, u32 type, void* param)
 {
     if (mobj == NULL) {
         return;
@@ -611,8 +611,8 @@ static inline void grAnime_MObjForeachAnim(
     grAnime_801C706C(mobj->tobj, flags, func, type, param);
 }
 
-static inline void grAnime_PObjForeachAnim(
-    HSD_PObj* pobj, int flags, void* func, u32 type, void* param)
+static inline void grAnime_PObjForeachAnim(HSD_PObj* pobj, int flags,
+                                           void* func, u32 type, void* param)
 {
     if ((flags & CALL_ON_POBJ) && pobj != NULL &&
         pobj_type(pobj) == POBJ_SHAPEANIM && pobj->u.unk != NULL &&
@@ -648,8 +648,8 @@ static inline bool grAnime_801C6F50_wrapped(HSD_JObj* obj, int flags,
     return ((obj->flags & 0x4020) ? false : true);
 }
 
-static inline void grAnime_RObjForeachAnim(
-    HSD_RObj* robj, int flags, void* func, u32 type, void* param)
+static inline void grAnime_RObjForeachAnim(HSD_RObj* robj, int flags,
+                                           void* func, u32 type, void* param)
 {
     for (; robj != NULL; robj = robj->next) {
         if ((flags & 0x200) && robj->aobj != NULL) {
@@ -672,26 +672,27 @@ void grAnime_801C7228(HSD_JObj* obj, int flags, void* func, u32 type,
     }
 }
 
-static inline void grAnime_801C70E0_inner(
-    HSD_DObj* arg0, int arg1, void* arg2, u32 arg3, void* arg4)
+static inline void grAnime_801C70E0_inner(HSD_DObj* arg0, int arg1, void* arg2,
+                                          u32 arg3, void* arg4)
 {
     grAnime_801C70E0(arg0, arg1, arg2, arg3, arg4);
 }
 
-static inline void grAnime_801C70E0_noinline(
-    HSD_DObj* arg0, int arg1, void* arg2, u32 arg3, void* arg4)
+static inline void grAnime_801C70E0_noinline(HSD_DObj* arg0, int arg1,
+                                             void* arg2, u32 arg3, void* arg4)
 {
     grAnime_801C70E0_inner(arg0, arg1, arg2, arg3, arg4);
 }
 
-static inline void grAnime_801C7228_inner(
-    HSD_JObj* arg0, int arg1, void* arg2, u32 arg3, void* arg4, int arg5)
+static inline void grAnime_801C7228_inner(HSD_JObj* arg0, int arg1, void* arg2,
+                                          u32 arg3, void* arg4, int arg5)
 {
     grAnime_801C7228(arg0, arg1, arg2, arg3, arg4, arg5);
 }
 
-static inline void grAnime_801C7228_noinline(
-    HSD_JObj* arg0, int arg1, void* arg2, u32 arg3, void* arg4, int arg5)
+static inline void grAnime_801C7228_noinline(HSD_JObj* arg0, int arg1,
+                                             void* arg2, u32 arg3, void* arg4,
+                                             int arg5)
 {
     grAnime_801C7228_inner(arg0, arg1, arg2, arg3, arg4, arg5);
 }

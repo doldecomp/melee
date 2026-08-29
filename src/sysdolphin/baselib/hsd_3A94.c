@@ -3080,7 +3080,7 @@ static inline s32 fn_803AE7F8_logical_index(s32 file_idx, s32 blocks_before)
 }
 
 static inline s32 fn_803AE7F8_file_block_count(CardState* file_state,
-                                                s32 file_idx)
+                                               s32 file_idx)
 {
     if (file_state->x4C[file_idx] <= 0) {
         return 0;
@@ -3093,7 +3093,7 @@ static inline s32 fn_803AE7F8_file_block_count(CardState* file_state,
 
         remaining = file_state->x4C[0];
         remaining = remaining - (s32) ((usable = sector_size - 0x20) -
-                                        (file_state->x24 + 0x30) % sector_size);
+                                       (file_state->x24 + 0x30) % sector_size);
         if (remaining <= 0) {
             return 1;
         }

@@ -719,8 +719,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                     s32 height_rand;
 
                     gp->u.bigblue.data[i].x8 = yakumono_param->x90;
-                    height_range =
-                        yakumono_param->x94 - yakumono_param->x90;
+                    height_range = yakumono_param->x94 - yakumono_param->x90;
                     if (height_range < 0.0f) {
                         height_range = -height_range;
                     }
@@ -784,8 +783,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
                             speeds2 = grBb_803B8114;
                             found = grBigBlue_801EAB50(
                                 &pos, 0,
-                                2.0f * (speeds2.x * Ground_801C0498()),
-                                25.0f);
+                                2.0f * (speeds2.x * Ground_801C0498()), 25.0f);
                         }
                         if (found == 0) {
                             f32 bound = grBigBlue_801E8D04();
@@ -814,8 +812,7 @@ void grBigBlue_801E6C60(Ground_GObj* gobj)
 
                     gp->u.bigblue.data[i].x38 = pos;
                     gp->u.bigblue.data[i].x44.x =
-                        yakumono_param->x98 *
-                        (f32) gp->u.bigblue.data[i].x2;
+                        yakumono_param->x98 * (f32) gp->u.bigblue.data[i].x2;
                     gp->u.bigblue.data[i].x44.z = 0.0f;
                     gp->u.bigblue.data[i].x44.y = 0.0f;
                     gp->u.bigblue.data[i].x18.z = 0.0f;
@@ -1828,14 +1825,12 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
                 if (diff_y < 0.5f) {
                     vy = 0.0f;
                 } else if (pos.y < *(f32*) (bp + 0xD0)) {
-                    vy = (*(f32*) (bp + 0xD0) - pos.y) /
-                         yakumono_param->xE4;
+                    vy = (*(f32*) (bp + 0xD0) - pos.y) / yakumono_param->xE4;
                     if (vy > yakumono_param->xE8) {
                         vy = yakumono_param->xE8;
                     }
                 } else {
-                    vy = (*(f32*) (bp + 0xD0) - pos.y) /
-                         yakumono_param->xEC;
+                    vy = (*(f32*) (bp + 0xD0) - pos.y) / yakumono_param->xEC;
                     if (vy < -yakumono_param->xF0) {
                         vy = -yakumono_param->xF0;
                     }
@@ -3220,8 +3215,8 @@ static inline u8* grBigBlue_GetLaneStates(Ground* gp)
     return gp->u.bigblue.xCC;
 }
 
-static inline void grBigBlue_FindClosestCar(
-    Ground* gp, s32* found_ten, s32* closest_lane)
+static inline void grBigBlue_FindClosestCar(Ground* gp, s32* found_ten,
+                                            s32* closest_lane)
 {
     f32 closest_dist = F32_MAX;
     f32 dist;

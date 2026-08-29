@@ -566,9 +566,9 @@ s32 grBigBlueRoute_8020C530(Ground_GObj* arg0)
 
 /// @todo The initial Ground load is coalesced directly into r31 instead of
 /// passing through r6.
-#define GRBB_ROUTE_ENTRY_AT(car_info, offset)                         \
-    ((RouteEntry*) &((union grBigBlueRoute_RouteStorage*) (car_info)) \
-                        ->bytes[offset])
+#define GRBB_ROUTE_ENTRY_AT(car_info, offset)                                 \
+    ((RouteEntry*) &((union grBigBlueRoute_RouteStorage*) (car_info))         \
+         ->bytes[offset])
 static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
                                              Ground_GObj* gobj)
 {
