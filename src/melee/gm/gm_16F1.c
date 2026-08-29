@@ -404,6 +404,14 @@ int fn_8016FAD4(struct lbl_8046B6A0_24C_t* rules, int kind, int flags,
         if (pr == 0) {
             return lbl_803D5648[entry->x2 - 2] * 2;
         }
+        {
+            int j;
+            for (j = 0; j < 4; j++) {
+                if (x58[j].x0 == 3) {
+                    break;
+                }
+            }
+        }
         if (pr == rankings[6]) {
             return lbl_803D5648[entry->x2 - 2] / 2;
         }
@@ -541,7 +549,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         }
     }
 
-    PAD_STACK(4);
+    PAD_STACK(8);
 
     switch (arg2) {
     case 0xD7:
@@ -1069,8 +1077,8 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                     p++;
                 }
             }
-            if (!(x58[arg1].x3 & 1) && rankings[arg1] == 0 &&
-                x58[arg1].x20 == 0)
+            if (!(((u8*) x58)[arg1 * sizeof(*x58) + 3] & 1) &&
+                rankings[arg1] == 0 && x58[arg1].x20 == 0)
             {
                 return 1;
             }
@@ -1092,13 +1100,15 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                         p++;
                     }
                 }
-                if (!(x58[arg1].x3 & 1) && x58[arg1].x5 == 0 &&
-                    x58[arg1].x20 == 0)
+                if (!(((u8*) x58)[arg1 * sizeof(*x58) + 3] & 1) &&
+                    x58[arg1].x5 == 0 && x58[arg1].x20 == 0)
                 {
                     return 1;
                 }
             } else {
-                if (!(x58[arg1].x3 & 1) && x58[arg1].x20 == 0) {
+                if (!(((u8*) x58)[arg1 * sizeof(*x58) + 3] & 1) &&
+                    x58[arg1].x20 == 0)
+                {
                     return 1;
                 }
             }
@@ -1143,7 +1153,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 }
                 for (j = 3; j >= 1; j--) {
                     u32* p = vals;
-                    for (i = j; (u32) i > 0; i--) {
+                    for (i = j; i > 0; i--) {
                         if (p[0] > p[1]) {
                             u32 tmp = p[1];
                             p[1] = p[0];
@@ -1188,7 +1198,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 }
                 for (j = 3; j >= 1; j--) {
                     u32* p = vals;
-                    for (i = j; (u32) i > 0; i--) {
+                    for (i = j; i > 0; i--) {
                         if (p[0] < p[1]) {
                             u32 tmp = p[1];
                             p[1] = p[0];

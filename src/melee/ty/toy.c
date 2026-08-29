@@ -2764,7 +2764,7 @@ void _Toy_80309404(HSD_GObj* gobj)
     struct {
         u8 pad[0x2C];
         Vec3 pos;
-        u8 pad2[0x10];
+        u8 pad2[0x8];
     } eye_pad;
     Vec3 eye_pos;
     HSD_CObj* cobj;
@@ -3556,7 +3556,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
         s32 sp188;
         s32 sp184;
 
-        PAD_STACK(304);
+        PAD_STACK(296);
 
         {
             void* anim_state_ptr = M2C_FIELD(anim, void**, 0x0);
