@@ -868,9 +868,9 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
             f32 up_len = sqrtf(up.x * up.x + up.y * up.y + up_z * up_z);
 
             if (up_len != 0.0f) {
+                f32 dz = z - prev_z;
                 f32 dx = x - prev_x;
                 f32 dy = y - prev_y;
-                f32 dz = z - prev_z;
                 f32 xl = dx * dx;
                 f32 yl = dy * dy;
                 f32 zl = dz * dz;
