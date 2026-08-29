@@ -1808,21 +1808,25 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
 
 static inline void psUpdateBillboardAxes(const Mtx inv_view)
 {
-    f32 right;
-    f32 up;
+    f32 right_x;
+    f32 up_x;
+    f32 right_y;
+    f32 up_y;
+    f32 right_z;
+    f32 up_z;
 
-    right = inv_view[0][0];
-    up = inv_view[0][1];
-    HSD_PSDisp_804D7914 = right + up;
-    HSD_PSDisp_804D7918 = right - up;
-    right = inv_view[1][0];
-    up = inv_view[1][1];
-    HSD_PSDisp_804D791C = right + up;
-    HSD_PSDisp_804D7920 = right - up;
-    right = inv_view[2][0];
-    up = inv_view[2][1];
-    HSD_PSDisp_804D7924 = right + up;
-    HSD_PSDisp_804D7928 = right - up;
+    right_x = inv_view[0][0];
+    up_x = inv_view[0][1];
+    HSD_PSDisp_804D7914 = right_x + up_x;
+    HSD_PSDisp_804D7918 = right_x - up_x;
+    right_y = inv_view[1][0];
+    up_y = inv_view[1][1];
+    HSD_PSDisp_804D791C = right_y + up_y;
+    HSD_PSDisp_804D7920 = right_y - up_y;
+    right_z = inv_view[2][0];
+    up_z = inv_view[2][1];
+    HSD_PSDisp_804D7924 = right_z + up_z;
+    HSD_PSDisp_804D7928 = right_z - up_z;
 }
 
 static inline void psUpdateProjectionCache(f32 perspective)
