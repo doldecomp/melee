@@ -1192,7 +1192,7 @@ static inline void psScaleAppSRTAxes(HSD_Particle* pp, Mtx mtx)
  * point path stamps @c frameNum unconditionally under its own NULL guard, the
  * polygon path only inside the changed-frame block. Both branches fold away.
  */
-static inline void psUpdateAppSRT(HSD_Particle* pp, int always_stamp)
+static inline void psUpdateAppSRT(HSD_Particle* pp, bool always_stamp)
 {
     if (pp->appsrt->frameNum != psFrameNum) {
         f32 scale_x;
