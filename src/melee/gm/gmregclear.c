@@ -3717,9 +3717,29 @@ static inline int gm_80182578_GetIndexFromPointer(const int* idx_ptr)
     return *idx_ptr;
 }
 
-static inline u32 gm_80182578_GetScoreFromData(RegClearRecordOverlay* data)
+inline void gm_80182578_SetTime(RecordBlock* blocks, int idx, int mode,
+                                u16 value)
 {
-    return (u32) data->record.x4;
+    switch (mode) {
+    case 33:
+        blocks[0].times[idx] = value;
+        break;
+    case 34:
+        blocks[1].times[idx] = value;
+        break;
+    case 35:
+        blocks[2].times[idx] = value;
+        break;
+    case 36:
+        blocks[3].times[idx] = value;
+        break;
+    case 37:
+        blocks[4].times[idx] = value;
+        break;
+    case 38:
+        blocks[5].times[idx] = value;
+        break;
+    }
 }
 
 s32 gm_80182578(void)
@@ -3737,7 +3757,7 @@ s32 gm_80182578(void)
     idx_ptr = &data->record.xC;
     blocks = lbl_803D8D08;
     mode = data->record.x8;
-    idx = data->record.xC;
+    idx = gm_80182578_GetIndexFromPointer(idx_ptr);
     time_val = gm_80182578_GetRecordTime(blocks, idx, mode);
 
     score_val = gm_80182578_GetRecordScore(blocks, idx, mode);
@@ -3751,7 +3771,7 @@ s32 gm_80182578(void)
             mode = gmMainLib_8015D710(gm_CKindToSelKind((u8) idx));
         }
         if (data->record.x0 != 0) {
-            u32 score_store = gm_80182578_GetScoreFromData(data);
+            u32 score_store = (u32) data->record.x4;
             if (score_store < score_val) {
                 int i = gm_80182578_GetIndexFromPointer(idx_ptr);
                 int m = *mode_ptr;
@@ -3795,33 +3815,9 @@ s32 gm_80182578(void)
                     blocks[5].scores[i] = score_store;
                     break;
                 }
-                {
-                    u16 time_store = data->record.x2;
-                    switch (m) {
-                    case 33:
-                        blocks[0].times[i] = time_store;
-                        break;
-                    case 34:
-                        blocks[1].times[i] = time_store;
-                        break;
-                    case 35:
-                        blocks[2].times[i] = time_store;
-                        break;
-                    case 36:
-                        blocks[3].times[i] = time_store;
-                        break;
-                    case 37:
-                        blocks[4].times[i] = time_store;
-                        break;
-                    case 38:
-                        blocks[5].times[i] = time_store;
-                        break;
-                    }
-                }
+                gm_80182578_SetTime(blocks, i, m, data->record.x2);
             }
-            return mode;
-        }
-        if ((s32) data->record.x2 > (s32) time_val && mode == 0) {
+        } else if ((s32) data->record.x2 > (s32) time_val && mode == 0) {
             int i = *idx_ptr;
             int m = *mode_ptr;
             switch (m) {
@@ -3921,7 +3917,7 @@ s32 gm_80182578(void)
         break;
     }
 
-    return mode;
+    return 0;
     PAD_STACK(0x38);
 }
 
