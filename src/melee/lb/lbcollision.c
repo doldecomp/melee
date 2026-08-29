@@ -502,11 +502,10 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                             } else {
                                 arg5_scl = 0.0f;
                                 {
-                                    float scale =
+                                    arg4_scl =
                                         -d1_dot_offset_delta / d1_len_sq;
-                                    arg4_scl = scale;
 
-                                    if (scale > lbColl_804D7A00) {
+                                    if (arg4_scl > lbColl_804D7A00) {
                                         arg4_scl = lbColl_804D7A08;
                                     } else if (arg4_scl < lbColl_804D7A10) {
                                         arg4_scl = lbColl_804D79F8;
@@ -597,7 +596,7 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                                     }
                                 }
                             } else {
-                                float unclamped_arg4_scl =
+                                arg4_scl =
                                     ((d1_dot_d2 * d2_dot_offset_delta) -
                                      (d2_len_sq * d1_dot_offset_delta)) /
                                     denom;
@@ -605,8 +604,7 @@ bool lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                                     ((d1_len_sq * d2_dot_offset_delta) -
                                      (d1_dot_d2 * d1_dot_offset_delta)) /
                                     denom;
-                                arg4_scl = unclamped_arg4_scl;
-                                if (unclamped_arg4_scl > lbColl_804D7A00 ||
+                                if (arg4_scl > lbColl_804D7A00 ||
                                     arg4_scl < lbColl_804D7A10 ||
                                     arg5_scl > lbColl_804D7A00 ||
                                     arg5_scl < lbColl_804D7A10)
