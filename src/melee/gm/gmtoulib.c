@@ -207,7 +207,7 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
 {
     u8* px3;
     s32 x14;
-    s32* pX10;
+    s32 val1;
     s32* p48;
     s32* p34;
     s32* p3C;
@@ -220,7 +220,7 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
     s32 x10;
     s32 x18;
     s32 val;
-    s32 val1;
+    s32* pX10;
     s32 val2;
     s32 tmp;
     u8 x2;
@@ -235,7 +235,10 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
     p44 = &bracket->entries[entry_idx].slots[slot_idx].x44;
     p38 = &bracket->entries[entry_idx].slots[slot_idx].x38;
     p40 = &bracket->entries[entry_idx].slots[slot_idx].x40;
-    p48 = &bracket->entries[entry_idx].slots[slot_idx].x48;
+    {
+        s32* slot_x48 = &bracket->entries[entry_idx].slots[slot_idx].x48;
+        p48 = slot_x48;
+    }
     entry = &lbl_80473AB8[entry_idx];
 
     if (entry->x1 != 0) {
@@ -406,10 +409,13 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
             *p44 = val1;
             *p34 = val1;
             {
-                x18 = *pX18;
-                x2 = lbl_80473AB8[entry_idx].x2;
+                x18 = lbl_80473AB8[entry_idx].x18;
+                {
+                    u8 entry_x2 = lbl_80473AB8[entry_idx].x2;
+                    x2 = entry_x2;
+                }
                 x10 = lbl_80473AB8[entry_idx].x10;
-                val2 = x10 + x18 - x2 * x18;
+                val2 = x10 + x18 - x18 * x2;
                 *p40 = val2;
                 *p48 = val2;
                 *p38 = val2;
