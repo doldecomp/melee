@@ -822,9 +822,9 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
         if (pp->kind & Tornado) {
             calcTornadoLastPos(pp, &prev_x, &prev_y, &prev_z);
         } else {
-            prev_x = x - ppvx;
-            prev_y = y - ppvy;
-            prev_z = z - ppvz;
+            prev_x = x - pp->vel.x;
+            prev_y = y - pp->vel.y;
+            prev_z = z - pp->vel.z;
         }
         getClrTrail(pp, &color);
         if (it == NULL) {
