@@ -1247,7 +1247,6 @@ static inline void psUpdateAppSRT(HSD_Particle* pp, bool always_stamp,
 
 static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
 {
-    GXColor draw_color;
     Mtx scratch_mtx;
     Vec3 cur_pos;
     Vec3 prev_pos;
@@ -1310,6 +1309,8 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
     ax = pp->size > 42.5 ? 255.0f : 6.0f * pp->size;
     w = (s32) ax;
     if (pp->kind & Trail) {
+        GXColor draw_color;
+
         if (prevLineWidth != (s32) (u8) w) {
             prevLineWidth = (u8) w;
             GXSetLineWidth((u8) w, GX_TO_ONE);
@@ -1372,7 +1373,6 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
 
 static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
 {
-    GXColor draw_color;
     Mtx draw_mtx;
     Vec3 cur_pos;
     Vec3 prev_pos;
@@ -1578,6 +1578,8 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
      * @c GXPosition3f32: the inline's argument evaluation forces an extra
      * live FP register here and grows the frame past the target. */
     if (pp->kind & Trail) {
+        GXColor draw_color;
+
         getClrTrail(pp, &draw_color);
         if (it == NULL) {
             if (pp->kind & DispTexture) {
