@@ -1391,11 +1391,12 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
     Vec3 cur_pos;
     Vec3 scratch_scale;
     Vec3 prev_pos;
+    f32 x_extent;
+    f32 y_extent;
     f32 ax;
     f32 ay;
     f32 bx;
     f32 by;
-    f32 y_extent;
     f32 angle;
     u8* it = texform;
 
@@ -1453,15 +1454,16 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
         }
         psScaleAppSRTAxes(pp, draw_mtx);
     }
-    bx = pp->appsrt->x94 * pp->size;
+    x_extent = pp->appsrt->x94 * pp->size;
     y_extent = pp->appsrt->x98 * pp->size;
     if (it == NULL) {
         ay = y_extent;
         by = -ay;
+        bx = x_extent;
         ax = bx;
     } else {
         ay = 0.0f;
-        ax = bx;
+        ax = x_extent;
         by = -y_extent;
         bx = ay;
     }
