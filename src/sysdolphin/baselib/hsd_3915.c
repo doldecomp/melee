@@ -407,8 +407,9 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
     step_x = dx / count;
 
     GXWGFifo.f32 = x1;
-    r = color->r;
     GXWGFifo.f32 = y1;
+    r = color->r;
+    GXWGFifo.u8 = r;
     g = color->g;
     b = color->b;
     a = color->a;
@@ -421,7 +422,6 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
     tick4_x = 4.0F * perp_x;
     hsd_80391F28_calc_tick4_y(perp_y, &tick4_y);
 
-    GXWGFifo.u8 = r;
     GXWGFifo.u8 = g;
     GXWGFifo.u8 = b;
     GXWGFifo.u8 = a;
