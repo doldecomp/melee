@@ -2169,8 +2169,8 @@ void psDispParticles(u32 target_link, u32 sw)
                                                       tlut_obj.n_entries);
                                         GXLoadTlut(&gx_tlut_obj,
                                                    tlut_obj.tlut_name);
-                                        sp7B0 = NULL;
                                     }
+                                    sp7B0 = NULL;
                                 }
                             }
                         }
