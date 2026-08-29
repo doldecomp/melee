@@ -577,32 +577,34 @@ void mnSnap_80253E90(s32 idx)
 }
 
 /// Animates the memory card slot selector highlights.
-/// Pointer arithmetic required to match: walk[0x94] reads card_status[i],
-/// and (snap + byte_off + 0x98) accesses slot_a_jobj / slot_b_jobj.
+/// The walk advances through card_status, while byte_off selects the slot
+/// animation pointers from the interleaved slot fields.
 void mnSnap_80253F60(void)
 {
-    s32 byte_off = 4;
-    mnSnap_State* snap;
-    /* walk strides through card_status (s16 at byte 0x128) */
-    s16* walk;
+    s32 byte_off;
+    s16* walk = (s16*) &mnSnap_804A0A10;
     s32 i;
 
-    walk = (s16*) (snap = &mnSnap_804A0A10);
-    for (i = 0; i < 2; i++, walk++, byte_off += 8) {
-        if (walk[0x94] != 0) { /* snap->card_status[i] */
+    for (i = 0; i < 2; i++) {
+        byte_off = (i * 2 + 1) * 4;
+        if (walk[0x94] != 0) {
             f32 t;
-            if (snap->active_slot == i) {
+            if (mnSnap_804A0A10.active_slot == i) {
                 t = 1.0F;
             } else {
                 t = 0.0F;
             }
-            HSD_JObjReqAnimAll(*(HSD_JObj**) ((u32) snap + byte_off + 0x98),
-                               t);
+            HSD_JObjReqAnimAll(
+                *(HSD_JObj**) ((u32) &mnSnap_804A0A10 + byte_off + 0x98),
+                t);
         } else {
-            HSD_JObjReqAnimAll(*(HSD_JObj**) ((u32) snap + byte_off + 0x98),
-                               2.0F);
+            HSD_JObjReqAnimAll(
+                *(HSD_JObj**) ((u32) &mnSnap_804A0A10 + byte_off + 0x98),
+                2.0F);
         }
-        HSD_JObjAnimAll(*(HSD_JObj**) ((u32) snap + byte_off + 0x98));
+        HSD_JObjAnimAll(
+            *(HSD_JObj**) ((u32) &mnSnap_804A0A10 + byte_off + 0x98));
+        walk++;
     }
 }
 
