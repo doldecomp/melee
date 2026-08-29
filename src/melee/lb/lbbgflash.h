@@ -10,6 +10,8 @@
 
 #include "dolphin/gx/GXStruct.h"
 
+#include "ft/forward.h"
+
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 
@@ -27,7 +29,7 @@
 /* 020AEC */ void fn_80020AEC(HSD_JObj*, Mtx);
 /* 020E38 */ void lbBgFlash_80020E38(HSD_JObj*, Vec3*, f32, f32, f32);
 /* 02113C */ void fn_8002113C(HSD_JObj*, Vec3*, f32);
-/* 021410 */ void lbBgFlash_80021410(void*);
+/* 021410 */ void lbBgFlash_80021410(IKState*);
 /* 0219E4 */ void fn_800219E4(void*);
 /* 021A10 */ void lbBgFlash_80021A10(f32);
 /* 021A18 */ void lbBgFlash_80021A18(int);

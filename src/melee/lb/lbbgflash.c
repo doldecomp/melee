@@ -11,6 +11,7 @@
 #include <placeholder.h>
 
 #include "dolphin/gx/GXStruct.h"
+#include "ft/types.h"
 
 #include "lb/forward.h"
 
@@ -716,27 +717,26 @@ void fn_8002113C(HSD_JObj* jobj, Vec3* axis, f32 angle)
     }
 }
 
-typedef struct IKChainData {
-    /* 0x00 */ HSD_JObj* jobj0;
-    /* 0x04 */ HSD_JObj* jobj1;
-    /* 0x08 */ u8 pad_08[4];
-    /* 0x0C */ Vec3 pos0;
-    /* 0x18 */ Vec3 pos1;
-    /* 0x24 */ Vec3 pos2;
-    /* 0x30 */ Vec3 pos3;
-    /* 0x3C */ Vec3 pos4;
-    /* 0x48 */ f32 len0;
-    /* 0x4C */ f32 len1;
-} IKChainData;
-
 static inline f32 calc_acos(f32 value)
 {
     return acosf(value);
 }
 
-void lbBgFlash_80021410(void* arg0)
+static inline f32 sqrtf_store(f32 x, volatile f32* y)
 {
-    IKChainData* data = arg0;
+    if (x > 0.0f) {
+        f64 guess = __frsqrte((f64) x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        *y = (f32) (x * guess);
+        return *y;
+    }
+    return x;
+}
+
+void lbBgFlash_80021410(IKState* data)
+{
     u8 pad_hi[32];
     Vec3 axis;
     u8 pad_mid[16];
@@ -770,7 +770,7 @@ void lbBgFlash_80021410(void* arg0)
     f32 dz;
     f32 dy;
     Vec3* pDiff;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     HSD_JObjSetupMatrix(data->jobj1);
 
@@ -816,14 +816,7 @@ void lbBgFlash_80021410(void* arg0)
 
     pDiff = lbVector_Diff(&data->pos0, &data->pos1, &diff_pos0_pos1);
     dot = (axis.z * pDiff->z) + ((axis.x * pDiff->x) + (axis.y * pDiff->y));
-    if ((sin_val = 1.0f - (dot * dot)) > 0.0f) {
-        f64 e = __frsqrte(sin_val);
-        e = 0.5 * e * -(((f64) sin_val * (e * e)) - 3.0);
-        e = 0.5 * e * -(((f64) sin_val * (e * e)) - 3.0);
-        e = 0.5 * e * -(((f64) sin_val * (e * e)) - 3.0);
-        sin_mag = (f32) ((f64) sin_val * e);
-        sin_val = sin_mag;
-    }
+    sin_val = sqrtf_store(1.0f - (dot * dot), &sin_mag);
     data->len0 = data->len0 * sin_val;
 
     lbVector_Diff(&data->pos4, &data->pos0, &temp_delta);
@@ -844,14 +837,7 @@ void lbBgFlash_80021410(void* arg0)
     dx *= dx;
     dy *= dy;
     dz *= dz;
-    if ((len_ab = dz + (dx + dy)) > 0.0f) {
-        f64 e = __frsqrte(len_ab);
-        e = 0.5 * e * -(((f64) len_ab * (e * e)) - 3.0);
-        e = 0.5 * e * -(((f64) len_ab * (e * e)) - 3.0);
-        e = 0.5 * e * -(((f64) len_ab * (e * e)) - 3.0);
-        len_ab_mag = (f32) ((f64) len_ab * e);
-        len_ab = len_ab_mag;
-    }
+    len_ab = sqrtf_store(dz + (dx + dy), &len_ab_mag);
 
     dx = data->pos0.x - data->pos1.x;
     dz = data->pos0.z;
@@ -860,17 +846,7 @@ void lbBgFlash_80021410(void* arg0)
     dx *= dx;
     dy *= dy;
     dz *= dz;
-    {
-        int positive = (len_bc = dz + (dx + dy)) > 0.0f;
-        if (positive) {
-            f64 e = __frsqrte(len_bc);
-            e = 0.5 * e * -(((f64) len_bc * (e * e)) - 3.0);
-            e = 0.5 * e * -(((f64) len_bc * (e * e)) - 3.0);
-            e = 0.5 * e * -(((f64) len_bc * (e * e)) - 3.0);
-            len_bc_mag = (f32) ((f64) len_bc * e);
-            len_bc = len_bc_mag;
-        }
-    }
+    len_bc = sqrtf_store(dz + (dx + dy), &len_bc_mag);
     data->len0 = len_bc;
 
     dx = data->pos1.x - data->pos3.x;
@@ -880,14 +856,7 @@ void lbBgFlash_80021410(void* arg0)
     dx *= dx;
     dy *= dy;
     dz *= dz;
-    if ((len_ac = dz + (dx + dy)) > 0.0f) {
-        f64 e = __frsqrte(len_ac);
-        e = 0.5 * e * -(((f64) len_ac * (e * e)) - 3.0);
-        e = 0.5 * e * -(((f64) len_ac * (e * e)) - 3.0);
-        e = 0.5 * e * -(((f64) len_ac * (e * e)) - 3.0);
-        len_ac_mag = (f32) ((f64) len_ac * e);
-        len_ac = len_ac_mag;
-    }
+    len_ac = sqrtf_store(dz + (dx + dy), &len_ac_mag);
     data->len1 = len_ac;
 
     len_bc = data->len0;
@@ -941,10 +910,10 @@ void lbBgFlash_80021410(void* arg0)
     acos2 = calc_acos(cos2);
     rem = 3.141592653589793 - (f64) acos2;
     if (rem < 0.1745329201221466) {
-        acos2 =
-            (f32) (2.9670597334676465 +
-                   (f64) (f32) ((f64) (f32) (fabs(rem) / 0.1745329201221466) *
-                                ((f64) acos2 - 2.9670597334676465)));
+        f32 ratio = (f32) (fabs(rem) / 0.1745329201221466);
+        acos2 = (f32) (2.9670597334676465 +
+                       (f64) (f32) ((f64) ratio *
+                                    ((f64) acos2 - 2.9670597334676465)));
     }
 
     acos1 -= angle1;
