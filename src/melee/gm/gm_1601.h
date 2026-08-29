@@ -193,7 +193,7 @@
 /* 168F7C */ UNK_RET fn_80168F7C(UNK_PARAMS);
 /* 168F88 */ void gm_80168F88(void);
 /* 168FC4 */ void gm_80168FC4(void);
-/* 169000 */ s32 fn_80169000(MatchEnd* arg0, u8* arg1);
+/* 169000 */ void fn_80169000(MatchEnd* arg0, u8* arg1);
 /* 169238 */ u8 gm_80169238(u8);
 /* 169264 */ u8 gm_80169264(u8);
 /* 169290 */ u8 gm_80169290(u8);

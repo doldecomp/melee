@@ -2658,13 +2658,54 @@ melee/gm/gmlightning.c:
 	.data       start:0x803DF540 end:0x803DF618
 	.sdata2     start:0x804DAC70 end:0x804DAC78
 
-melee/gm/gm_1BA8.c:
-	.text       start:0x801BA8FC end:0x801BF948
-	.data       start:0x803DF618 end:0x803DFDD8
-	.bss        start:0x80497758 end:0x8049E558
+melee/gm/gmevent.c:
+	.text       start:0x801BA8FC end:0x801BEC80
+	.data       start:0x803DF618 end:0x803DFA18
+	.bss        start:0x80497758 end:0x8049BEE8
 	.sdata      start:0x804D4330 end:0x804D44C8
-	.sbss       start:0x804D6900 end:0x804D6940
-	.sdata2     start:0x804DAC78 end:0x804DAC90
+	.sbss       start:0x804D6900 end:0x804D6908
+	.sdata2     start:0x804DAC78 end:0x804DAC88
+
+melee/gm/gmtoygallery.c:
+	.text       start:0x801BEC80 end:0x801BECA8
+	.data       start:0x803DFA18 end:0x803DFA48
+	.sbss       start:0x804D6908 end:0x804D6920
+
+melee/gm/gmtoylottery.c:
+	.text       start:0x801BECA8 end:0x801BED14
+	.data       start:0x803DFA48 end:0x803DFA78
+
+melee/gm/gmtoycollection.c:
+	.text       start:0x801BED14 end:0x801BED3C
+	.data       start:0x803DFA78 end:0x803DFAA8
+
+melee/gm/gmhanyucss.c:
+	.text       start:0x801BED3C end:0x801BEE58
+	.data       start:0x803DFAA8 end:0x803DFAD8
+	.bss        start:0x8049BEE8 end:0x8049C030
+
+melee/gm/gmhanyusss.c:
+	.text       start:0x801BEE58 end:0x801BEE9C
+	.data       start:0x803DFAD8 end:0x803DFB08
+	.bss        start:0x8049C030 end:0x8049C178
+
+melee/gm/gmgover.c:
+	.text       start:0x801BEE9C end:0x801BF060
+	.data       start:0x803DFB08 end:0x803DFBC8
+	.bss        start:0x8049C178 end:0x8049C188
+	.sbss       start:0x804D6920 end:0x804D6928
+
+melee/gm/gmopeningmode.c:
+	.text       start:0x801BF060 end:0x801BF8F8
+	.data       start:0x803DFBC8 end:0x803DFDA8
+	.bss        start:0x8049C188 end:0x8049E558
+	.sbss       start:0x804D6928 end:0x804D6938
+	.sdata2     start:0x804DAC88 end:0x804DAC90
+
+melee/gm/gmprogressivemode.c:
+	.text       start:0x801BF8F8 end:0x801BF948
+	.data       start:0x803DFDA8 end:0x803DFDD8
+	.sbss       start:0x804D6938 end:0x804D6940
 
 melee/gm/gmboot.c:
 	.text       start:0x801BF948 end:0x801BFA6C

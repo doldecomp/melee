@@ -3,7 +3,7 @@
 
 #include "ft/forward.h"
 
-#include "gm/gm_1BA8.h"
+#include "gm/gmevent.h"
 #include "gm/gmregtyfall.h"
 #include "gm/inlines.h"
 #include "lb/lb_00B0.h"

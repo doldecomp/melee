@@ -1,0 +1,13 @@
+/// @returns ::GrKind
+/* 1BF694 */ u8 gm_801BF694(void);
+
+/**
+ * Scene table for #GM_CAMERA_MODE.
+ *
+ * The only game-mode scenes that install a
+ * #StartMeleeRules::check_for_pauser_override callback
+ * (#gm_CameraModeVSGetPauser).
+ */
+/* 3DDBE0 */ extern GameScene gm_CameraModeScenes[5];
+
+#endif

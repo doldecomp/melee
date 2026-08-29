@@ -28,6 +28,8 @@ void ftCo_Attack_800CDD14(Fighter_GObj* fighter_gobj)
         case It_Kind_S_Scope:
             ft_800D76B8(fighter_gobj);
             break;
+        default:
+            break;
         }
     }
 }
@@ -47,6 +49,8 @@ void ftCo_800CDDA0(Fighter_GObj* fighter_gobj)
     case It_Kind_S_Scope:
         ft_800D7770(fighter_gobj);
         return;
+    default:
+        break;
     }
 }
 
