@@ -200,6 +200,8 @@ bool ftpickupitem_8009447C(Fighter_GObj* gobj, Item_GObj* item_gobj)
         case It_Kind_Coin:
             Item_8026A8EC(item_gobj);
             goto block_35;
+        default:
+            break;
         }
     }
 block_35:
@@ -391,6 +393,8 @@ void ftpickupitem_80094B6C(Fighter_GObj* gobj, Item_GObj* item_gobj)
         case It_Kind_Coin:
             Item_8026A8EC(item_gobj);
             return;
+        default:
+            break;
         }
     }
 }

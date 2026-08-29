@@ -2645,6 +2645,8 @@ void ftKb_Init_OnItemPickup(HSD_GObj* gobj, bool arg1)
         case 4:
             ftAnim_80070FB4(gobj, 1, 2);
             break;
+        default:
+            break;
         }
         if (arg1) {
             ftAnim_80070C48(gobj, 1);

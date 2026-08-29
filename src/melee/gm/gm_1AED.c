@@ -142,7 +142,7 @@ static inline u8 set_gm_804D6870_inline(void)
 
 static inline bool gm_801AEDC8_flag_check(void)
 {
-    if (gm_801AEDC8() & 0x1100) {
+    if (gm_801AEDC8() & (HSD_PAD_START | HSD_PAD_A)) {
         sfxForward();
         return true;
     }

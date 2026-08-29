@@ -567,6 +567,8 @@ void ftPr_Init_OnItemPickup(HSD_GObj* gobj, bool flag)
         case 4:
             ftAnim_80070FB4(gobj, 0, 1);
             break;
+        default:
+            break;
         }
         if (flag) {
             ftAnim_80070C48(gobj, 0);

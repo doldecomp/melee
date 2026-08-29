@@ -25,16 +25,10 @@
 /* 3DF468 */ extern GameScene gm_803DF468_Scenes[];
 /* 3DF540 */ extern GameScene gm_803DF540_Scenes[];
 /* 3DF618 */ extern GameScene gm_803DF618_Scenes[];
-/* 3DFA18 */ extern GameScene gm_803DFA18_Scenes[];
-/* 3DFA48 */ extern GameScene gm_803DFA48_Scenes[];
-/* 3DFA78 */ extern GameScene gm_803DFA78_Scenes[];
 /* 3DFAA8 */ extern GameScene gm_803DFAA8_Scenes[];
-/* 3DFAD8 */ extern GameScene gm_803DFAD8_Scenes[];
-/* 3DFB08 */ extern GameScene gm_803DFB08[];
 /* 3DFB80 */ extern GameScene gm_803DFB80_Scenes[];
 /* 3DFBC8 */ extern GameScene gm_803DFBC8_Scenes[];
 /* 3DFC70 */ extern GameScene gm_803DFC70_Scenes[];
-/* 3DFDA8 */ extern GameScene gm_803DFDA8_Scenes[];
 /* 3DFDD8 */ extern GameScene gmBoot_BootScenes[];
 /* 3DFE18 */ extern GameScene gmBoot_MemCardScenes[];
 /* 3DFE48 */ extern GameScene gm_803DFE48_Scenes[];
