@@ -291,15 +291,15 @@ void lbBgFlash_80021410(IKState* data)
     lbVector_Normalize(&axis);
 
     {
-        f32 nx = axis.x;
-        f32 nz = axis.z;
         f32 ny = axis.y;
+        f32 nz = axis.z;
+        f32 nx;
         f32 dot;
         f32 d;
         f32 x = data->pos4.x;
 
         dot = -((nz * data->pos1.z) +
-                ((nx * data->pos1.x) + (data->pos1.y * ny)));
+                (((nx = axis.x) * data->pos1.x) + (ny * data->pos1.y)));
 
         d = -(dot + ((data->pos4.z * nz) + ((x * nx) + (data->pos4.y * ny))));
         data->pos4.x = (d * nx) + x;
