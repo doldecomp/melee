@@ -245,7 +245,6 @@ static inline f32 sqrtf_store(f32 x, volatile f32* y)
 void lbBgFlash_80021410(IKState* data)
 {
     u8 pad_hi[32];
-    f32 one;
     Vec3 axis;
     u8 pad_mid[16];
     Vec3 diff_pos0_pos1;
@@ -400,12 +399,11 @@ void lbBgFlash_80021410(IKState* data)
     two_a = 2.0f * len_bc;
     c2 = len_ac * len_ac;
 
-    (void) (two_a * len_ab);
     cos1 = ((a2 + b2) - c2) / (two_a * len_ab);
     cos2 = ((a2 + c2) - b2) / (two_a * len_ac);
 
-    if (cos1 > (one = 1.0f)) {
-        cos1 = one;
+    if (cos1 > 1.0f) {
+        cos1 = 1.0f;
     } else if (cos1 < -1.0f) {
         cos1 = -1.0f;
     }
