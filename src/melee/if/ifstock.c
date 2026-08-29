@@ -188,8 +188,11 @@ void ifStock_802F8298(HSD_GObj* gobj)
                     vecB.z += vecA.z;
                     efSync_Spawn(0x474, gobj, &vecB);
                 }
-                if (stock->x204[user_data->player].x0[i + 5] < 10) {
-                    stock->x204[user_data->player].x0[i + 5] += 1;
+                if (ifStock_802F8298_get_data(stock)[user_data->player]
+                        .x0[i + 5] < 10)
+                {
+                    ifStock_802F8298_get_data(stock)[user_data->player]
+                        .x0[i + 5] += 1;
                 }
             }
             HSD_JObjReqAnimAll(jobj2,
