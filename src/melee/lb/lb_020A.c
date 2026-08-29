@@ -294,7 +294,6 @@ void lbBgFlash_80021410(IKState* data)
         f32 ny = axis.y;
         f32 nz = axis.z;
         f32 nx;
-        f32 dot;
         f32 d;
         f32 x;
 
