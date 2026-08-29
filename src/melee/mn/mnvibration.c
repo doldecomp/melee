@@ -704,44 +704,25 @@ void mnVibration_OnAnimComplete(HSD_GObj* gobj)
     }
 }
 
-static inline HSD_JObj* mnVibration_GetPortChildAt(HSD_GObj* gobj, s32 n)
+static inline s32 mnVibration_GetPortModeIndex(s32 port)
 {
-    HSD_JObj* child;
-    HSD_JObj* temp_jobj;
-    s32 i;
-
-    temp_jobj = ((MnVibrationData*) gobj->user_data)->jobjs[23];
-    if (temp_jobj == NULL) {
-        child = NULL;
-    } else {
-        child = temp_jobj->child;
-    }
-    for (i = 0; i < n; i++) {
-        if (child == NULL) {
-            child = NULL;
-        } else {
-            child = child->next;
-        }
-    }
-    return child;
+    return port + 2;
 }
 
-void mnVibration_Think(HSD_GObj* gobj)
+static inline void
+mnVibration_ThinkInline(HSD_GObj* gobj, MnVibrationData* data,
+                        HSD_JObj** port_anim_jobj)
 {
-    HSD_JObj* sp44;
-    HSD_JObj* toggle_jobj;
+    HSD_JObj* panel_jobj;
     HSD_JObj* port_child;
     s32 port;
-    s32 port_idx;
-    u8 pad_err;
     u8 pad_idx;
-    u8 state;
+    u8 pad_err;
+    s32 port_idx;
+    u8 anim_state;
     HSD_JObj* active_child;
-    MnVibrationData* data;
     HSD_JObj* disconnected_child;
-    u8 sp[52];
 
-    data = gobj->user_data;
     if ((u8) mn_804A04F0.cur_menu != 0x13) {
         HSD_GObjProc* proc;
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
@@ -768,13 +749,13 @@ void mnVibration_Think(HSD_GObj* gobj)
                 }
             }
         }
-        lb_80011E24(port_child, &sp44, 1, -1);
+        lb_80011E24(port_child, port_anim_jobj, 1, -1);
         if (GetRumbleSettingOfPort(port) != 0) {
-            mn_8022EC18(sp44, &mnVibration_803EECF8, MOBJ_MASK);
+            mn_8022EC18(*port_anim_jobj, &mnVibration_803EECF8, MOBJ_MASK);
         } else {
-            HSD_JObjReqAnimAll(sp44, 0.0f);
-            mn_8022F3D8(sp44, 0xFF, MOBJ_MASK);
-            HSD_JObjAnimAll(sp44);
+            HSD_JObjReqAnimAll(*port_anim_jobj, 0.0f);
+            mn_8022F3D8(*port_anim_jobj, 0xFF, MOBJ_MASK);
+            HSD_JObjAnimAll(*port_anim_jobj);
         }
         port += 1;
     } while (port < 4);
@@ -812,23 +793,57 @@ void mnVibration_Think(HSD_GObj* gobj)
                 mnVibration_UpdatePortPanel(disconnected_child, port_idx, 0);
                 data->x6[port_idx] = 0;
             } else {
-                HSD_JObjClearFlagsAll(
-                    data->jobjs[mnVibration_PortPanelJointIds[port_idx]],
-                    JOBJ_HIDDEN);
-                data->x0[port_idx + 2] = 0;
-                toggle_jobj =
-                    ((MnVibrationData*) mnVibration_804D6C28->user_data)
-                        ->jobjs[mnVibration_PortPanelJointIds[pad_idx]];
-                state = data->x0[port_idx + 2];
-                HSD_JObjReqAnimAll(toggle_jobj, state);
+                HSD_JObj* toggle_jobj;
+
+                panel_jobj =
+                    data->jobjs[mnVibration_PortPanelJointIds[port_idx]];
+                HSD_JObjClearFlagsAll(panel_jobj, JOBJ_HIDDEN);
+                data->x0[mnVibration_GetPortModeIndex(port_idx)] = 0;
+                {
+                    HSD_JObj* selected_panel =
+                        ((MnVibrationData*) mnVibration_804D6C28->user_data)
+                            ->jobjs[mnVibration_PortPanelJointIds[pad_idx]];
+                    toggle_jobj = selected_panel;
+                }
+                {
+                    u8 port_mode = data->x0[port_idx + 2];
+                    anim_state = port_mode;
+                }
+                HSD_JObjReqAnimAll(toggle_jobj, anim_state);
                 HSD_JObjAnimAll(toggle_jobj);
-                active_child = mnVibration_GetPortChildAt(gobj, port_idx);
+                {
+                    HSD_JObj* port_list =
+                        ((MnVibrationData*) gobj->user_data)->jobjs[23];
+                    s32 i;
+
+                    if (port_list == NULL) {
+                        active_child = NULL;
+                    } else {
+                        active_child = port_list->child;
+                    }
+                    for (i = 0; i < port_idx; i++) {
+                        if (active_child == NULL) {
+                            active_child = NULL;
+                        } else {
+                            active_child = active_child->next;
+                        }
+                    }
+                }
                 mnVibration_UpdatePortPanel(active_child, port_idx, 1);
                 data->x6[port_idx] = 1;
             }
         }
         port_idx += 1;
     } while (port_idx < 4);
+}
+
+void mnVibration_Think(HSD_GObj* gobj)
+{
+    {
+        HSD_JObj* port_anim_jobj;
+        mnVibration_ThinkInline(gobj, gobj->user_data, &port_anim_jobj);
+    }
+    PAD_STACK(36);
 }
 
 void mnVibration_IntroProc(HSD_GObj* arg0)
