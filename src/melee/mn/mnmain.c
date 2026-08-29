@@ -3,6 +3,9 @@
 #include "dolphin/pad.h"
 
 #include "gm/forward.h"
+
+#include "gm/gmevent.h"
+
 #include "mn/forward.h"
 
 #include "mn/types.h"

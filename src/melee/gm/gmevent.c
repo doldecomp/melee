@@ -1,6 +1,4 @@
-#include "gm_1BA8.h"
-
-#include "gm_1BA8.static.h"
+#include "gmevent.h"
 
 #include "gm_unsplit.h"
 
@@ -50,29 +48,222 @@
 #include <MetroTRK/intrinsics.h>
 #endif
 
+struct UnkSmallLoadData {
+    u8 pad[8];
+};
+
+typedef struct gm_801BAB40_src {
+    /* 0x00 */ s8 c_kind;
+    /* 0x01 */ u8 slot_type;
+    /* 0x02 */ u8 stocks;
+    /* 0x03 */ u8 color;
+    /* 0x04 */ u8 x5;
+    /* 0x05 */ u8 sub_color;
+    /* 0x06 */ u8 team;
+    /* 0x07 */ u8 xB;
+    /* 0x08 */ u8 flags;
+    /* 0x09 */ u8 xE;
+    /* 0x0A */ u8 cpu_level;
+    /* 0x0B */ u8 pad;
+    /* 0x0C */ u16 x12;
+    /* 0x0E */ u16 hp;
+    /* 0x10 */ f32 x18;
+    /* 0x14 */ f32 x1C;
+    /* 0x18 */ f32 x20;
+} gm_801BAB40_src;
+
+struct gm_event_char_list {
+    u8 c_kind[33];
+};
+
+/// Per-level match init data; shares its first two bytes' bitfield layout
+/// with #StartMeleeRules.
+struct gm_evinit {
+    /* 0x00 */ u32 x0_0 : 3;
+    /* 0x00 */ u32 x0_3 : 3;
+    /* 0x00 */ u32 x0_6 : 1;
+    /* 0x00 */ u32 x0_7 : 1;
+    /* 0x01 */ u32 x1_0 : 1;
+    /* 0x01 */ u32 x1_1 : 1;
+    /* 0x01 */ u32 x1_2 : 1;
+    /* 0x01 */ u32 x1_3 : 1;
+    /* 0x01 */ u32 x1_4 : 1;
+    /* 0x01 */ u32 x1_5 : 3;
+    /* 0x02 */ u8 unk2;
+    /* 0x03 */ s8 unk3;
+    /* 0x04 */ s8 unk4;
+    /* 0x05 */ u8 unk5;
+    /* 0x06 */ u16 unk6;
+    /* 0x08 */ u32 unk8;
+    /* 0x0C */ u8 padC[4];
+    /* 0x10 */ u64 x10;
+    /* 0x18 */ s32 x18;
+    /* 0x1C */ f32 x1C;
+    /* 0x20 */ f32 unk20;
+    /* 0x24 */ f32 unk24;
+};
+
+/// Per-round stage and opponent table, for levels with multiple rounds.
+struct gm_evstage_table {
+    /* 0x00 */ u8 count;
+    /* 0x01 */ u8 pad1;
+    /* 0x02 */ u16 stage[7];
+    /* 0x10 */ struct gm_801BAB40_src* entries[5];
+};
+
+struct gm_evbonus {
+    /* 0x00 */ s8 c_kind;
+    /* 0x01 */ u8 x1;
+    /* 0x02 */ u8 x2;
+    /* 0x03 */ u8 x3;
+    /* 0x04 */ u8 x4;
+    /* 0x05 */ u8 x5;
+    /* 0x06 */ u8 color;
+    /* 0x07 */ u8 pad7;
+    /* 0x08 */ f32 x8;
+    /* 0x0C */ f32 xC;
+    /* 0x10 */ f32 x10;
+    /* 0x14 */ u8 flags;
+    /* 0x15 */ u8 x15;
+    /* 0x16 */ u8 x16;
+    /* 0x17 */ u8 x17;
+};
+
+struct gm_random_history {
+    u8 pad0[2];
+    u8 character_usage[0x1A];
+    u8 stage_usage[0x1D];
+};
+
+struct gm_804D6900_t {
+    /* 0x00 */ u8 kind;
+    /* 0x01 */ u8 flags; ///< top 3 bits: player count
+    /* 0x02 */ u8 pad2[2];
+    /* 0x04 */ struct gm_804D6900_x4_t {
+        int x0;
+        intptr_t x4;
+    }* x4;
+    /* 0x08 */ struct gm_evinit* x8;
+    /* 0x0C */ struct gm_evbonus* xC;
+    /* 0x10 */ struct gm_evstage_table* x10;
+    /* 0x14 */ struct gm_801BAB40_src* player_init[5];
+};
+
+/* 1BA938 */ static void gm_801BA938(struct EventData*, int lo, int hi, bool);
+/* 1BAA60 */ static void onEnterCss(GameScene*);
+/* 1BAAD0 */ static void onExitCss(GameScene*);
+/* 1BAB40 */ static void gm_801BAB40(PlayerInitData*, struct gm_801BAB40_src*);
+/* 1BAC9C */ static s32 gm_801BAC9C(GameScene*, s32);
+/* 1BAD70 */ static void onEnterVs(GameScene*);
+/* 1BB758 */ static void onExitVs(GameScene*);
+/* 1BBB64 */ static void gm_801BBB64(void);
+/* 1BBFE8 */ static void fn_801BBFE8(void);
+/* 1BC00C */ static void gm_801BC00C(void);
+/* 1BC488 */ static int gm_801BC488(UNK_PARAMS);
+/* 1BC4F4 */ static UNK_RET gm_801BC4F4(HSD_GObj*);
+/* 1BC670 */ static void gm_801BC670(HSD_GObj*);
+/* 1BC754 */ static void gm_801BC754(HSD_GObj*);
+/* 1BC9E8 */ static void gm_801BC9E8(HSD_GObj*);
+/* 1BCAF0 */ static void gm_801BCAF0(HSD_GObj*);
+/* 1BCC9C */ static void gm_801BCC9C(HSD_GObj*);
+/* 1BCF20 */ static void gm_801BCF20(HSD_GObj*);
+/* 1BCF40 */ static void gm_801BCF40(HSD_GObj*);
+/* 1BD028 */ static void gm_801BD028(HSD_GObj*);
+/* 1BD164 */ static void gm_801BD164(HSD_GObj*);
+/* 1BD30C */ static void gm_801BD30C(HSD_GObj*);
+/* 1BD44C */ static void gm_801BD44C(HSD_GObj*);
+/* 1BD46C */ static void gm_801BD46C(HSD_GObj*);
+/* 1BD658 */ static void gm_801BD658(HSD_GObj*);
+/* 1BD7FC */ static void gm_801BD7FC(HSD_GObj*);
+/* 1BD93C */ static void gm_801BD93C(HSD_GObj*);
+/* 1BDAD4 */ static void gm_801BDAD4(HSD_GObj*);
+/* 1BDAF4 */ static void gm_801BDAF4(HSD_GObj*);
+/* 1BDC08 */ static void gm_801BDC08(HSD_GObj*);
+/* 1BDD44 */ static void gm_801BDD44(HSD_GObj*);
+/* 1BDE94 */ static void gm_801BDE94(HSD_GObj*);
+/* 1BE37C */ static void gm_801BE37C(HSD_GObj*);
+/* 1BE39C */ static void gm_801BE39C(HSD_GObj*);
+/* 1BE618 */ static void gm_801BE618(HSD_GObj*);
+/* 1BE638 */ static void gm_801BE638(HSD_GObj*);
+/* 1BEA10 */ static void gm_801BEA10(int);
+/* 1BEA4C */ static void gm_801BEA4C(int);
+/* 1BEA88 */ static void gm_801BEA88(int, int);
+/* 1BEAF0 */ static void gm_801BEAF0(int);
+/* 1BEB2C */ static void gm_801BEB2C(int);
+/* 1BEC80 */ static void gm_801BEC80(GameScene*);
+/* 1BECA8 */ static void gm_801BECA8(GameScene*);
+/* 1BECD0 */ static void gm_801BECD0(GameScene*);
+/* 1BED14 */ static void gm_801BED14(GameScene*);
+/* 1BED3C */ static void gm_801BED3C(GameScene*);
+/* 1BEDA8 */ static void gm_801BEDA8(GameScene*);
+/* 1BEE58 */ static void gm_801BEE58(GameScene*);
+/* 1BEE9C */ static void gm_801BEE9C(GameScene*);
+/* 1BEF84 */ static void gm_801BEF84(GameScene*);
+/* 1BEFF0 */ static int gm_801BEFF0(void);
+/* 1BF030 */ static int gm_801BF030(void);
+/* 1BF060 */ static void gm_801BF060(GameScene*);
+/* 1BF4DC */ static void gm_801BF4DC(GameScene*);
+/* 1BF634 */ static void gm_801BF634(s32, s32);
+/* 1BF648 */ static int gm_801BF648(s32);
+/* 1BF65C */ static void gm_801BF65C(s32, s8);
+/* 1BF670 */ static u8 gm_801BF670(s32);
+/* 1BF684 */ static void gm_801BF684(s32);
+/* 1BF694 */ static u8 gm_801BF694(void);
+/* 1BF6A8 */ static void gm_801BF6A8(int);
+/* 1BF6B8 */ static u8 gm_801BF6B8(void);
+/* 1BF6C8 */ static void gm_801BF6C8(int);
+/* 1BF6E8 */ static void gm_801BF6E8(int);
+/* 1BF728 */ static void gm_801BF728(GameScene*);
+/* 1BF834 */ static void gm_801BF834(GameScene*);
+/* 1BF85C */ static void gm_801BF85C(GameScene*);
+/* 1BF898 */ static void gm_801BF898(GameScene*);
+/* 1BF8B8 */ static void gm_801BF8B8(GameScene*);
+/* 1BF8D8 */ static void gm_801BF8D8(GameScene*);
+/* 1BF8F8 */ static void gm_801BF8F8(GameScene*);
+/* 1BF920 */ static void gm_801BF920(GameScene*);
+/* 497758 */ static CSSData css_data;
+/* 4978A0 */ static StartMeleeData enter_vs_data;
+/* 4979D8 */ static MatchExitInfo exit_vs_data[2];
+/* 49BEE8 */ static CSSData gm_8049BEE8;
+/* 49C030 */ static CSSData gm_8049C030;
+/* 49C178 */ static u8 gm_8049C178[16];
+/* 49C188 */ static UNK_T gm_8049C188[0x138 / 4];
+/* 49C2C0 */ static MatchExitInfo gm_8049C2C0;
+/* 49E548 */ static struct gm_8049E548_t gm_8049E548;
+/* 4D6900 */ static struct gm_804D6900_t** gm_804D6900[2];
+/* 4D6908 */ static struct UnkSmallLoadData gm_804D6908;
+/* 4D6910 */ static struct UnkSmallLoadData gm_804D6910;
+/* 4D6910 */ static struct UnkSmallLoadData gm_804D6918;
+/* 4D6920 */ static struct UnkSmallLoadData gm_804D6920;
+/* 4D6928 */ static UNK_T gm_804D6928;
+/* 4D692C */ static UNK_T gm_804D692C;
+/* 4D6930 */ static struct UnkSmallLoadData gm_804D6930;
+/* 4D6938 */ static UNK_T gm_804D6938;
+/* 4D693C */ static UNK_T gm_804D693C;
+
 GameScene gm_803DF618_Scenes[] = {
     {
         0,
         lbDvdPreload_3,
         0,
-        gm_801BAA60,
-        gm_801BAAD0,
+        onEnterCss,
+        onExitCss,
         {
             GS_CSS,
-            &gm_80497758,
-            &gm_80497758,
+            &css_data,
+            &css_data,
         },
     },
     {
         1,
         lbDvdPreload_3,
         0,
-        gm_801BAD70,
-        gm_801BB758,
+        onEnterVs,
+        onExitVs,
         {
             GS_VS,
-            &gm_804978A0,
-            &gm_804979D8,
+            &enter_vs_data,
+            &exit_vs_data,
         },
     },
     { -1 },
@@ -86,7 +277,7 @@ void gm_801BA8FC(void)
 
 void gm_801BA938(struct EventData* arg0, int lo, int hi, bool arg3)
 {
-    struct GameCache* temp_r7 = &lbDvd_GetPreloadCacheScene()->game_cache;
+    struct GameCache* cache = &lbDvd_GetPreloadCacheScene()->game_cache;
     u64 mask;
     s8 char_id;
     int i;
@@ -94,16 +285,16 @@ void gm_801BA938(struct EventData* arg0, int lo, int hi, bool arg3)
     for (i = lo; i < hi; i++) {
         char_id = arg0->x4C[i];
         if (char_id != CHKIND_NONE) {
-            temp_r7->entries[i].char_id = char_id;
-            temp_r7->entries[i].color = arg0->x50[i];
+            cache->entries[i].char_id = char_id;
+            cache->entries[i].color = arg0->x50[i];
             if (arg0->x45 != 0 && i > 0 && arg0->x4C[i] == 4) {
-                temp_r7->entries[i].x5 = 0;
+                cache->entries[i].x5 = 0;
             }
         }
     }
 
     if (arg3 != 0) {
-        temp_r7->stkind = arg0->x48;
+        cache->stkind = arg0->x48;
     }
     lbDvd_80018254();
     mask = 0;
@@ -118,7 +309,7 @@ void gm_801BA938(struct EventData* arg0, int lo, int hi, bool arg3)
     lbAudioAx_80027168();
 }
 
-void gm_801BAA60(GameScene* arg0)
+void onEnterCss(GameScene* arg0)
 {
     struct EventData* temp_r31 = &gmMainLib_804D3EE0->unk_530;
     CSSData* css = gm_GetGameSceneLoadData(arg0);
@@ -131,7 +322,7 @@ void gm_801BAA60(GameScene* arg0)
     }
 }
 
-void gm_801BAAD0(GameScene* arg0)
+void onExitCss(GameScene* arg0)
 {
     CSSData* temp_r3;
     struct EventData* temp_r31;
@@ -186,7 +377,7 @@ void gm_801BAB40(PlayerInitData* arg0, gm_801BAB40_src* src)
 s32 gm_801BAC9C(GameScene* arg0, s32 arg1)
 {
     UNUSED u8 _[8];
-    u8 chars[33];
+    u8 chars[CHKIND_MAX];
     struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
     StartMeleeData* data = gm_GetGameSceneLoadData(arg0);
     s32 i;
@@ -197,10 +388,10 @@ s32 gm_801BAC9C(GameScene* arg0, s32 arg1)
         (struct gm_event_char_list*) (*gm_804D6900)[ev->unk_535]->x4;
     PAD_STACK(8);
 
-    for (i = 0; i < 0x21; i++) {
+    for (i = 0; i < CHKIND_MAX; i++) {
         u8* ptr = &src->c_kind[i];
         u8 c = *ptr;
-        if ((s32) c == 0x21) {
+        if ((s32) c == CHKIND_MAX) {
             break;
         }
         found = 0;
@@ -233,7 +424,7 @@ static inline u8 gm_GetNextColor(u8 color)
     return color;
 }
 
-void gm_801BAD70(GameScene* arg0)
+void onEnterVs(GameScene* arg0)
 {
     struct EventData* ev = gm_GetEventData();
     StartMeleeData* md = gm_GetGameSceneLoadData(arg0);
@@ -506,7 +697,7 @@ void gm_801BAD70(GameScene* arg0)
     gm_80168F88();
 }
 
-void gm_801BB758(GameScene* arg0)
+void onExitVs(GameScene* arg0)
 {
     struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
     MatchExitInfo* exit = gm_GetGameSceneLeaveData(arg0);
@@ -550,12 +741,12 @@ void gm_801BB758(GameScene* arg0)
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
     }
-    ev->x3C += gm_80168940(&gm_804979D8[0].match_end);
+    ev->x3C += gm_80168940(&exit_vs_data[0].match_end);
     ev->x40 += (s32) exit->match_end.frame_count;
     b = ((u8*) ev)[0xB];
     if (((b >> 3) & 1) && ((b >> 5) & 1)) {
-        ev->x24 = gm_804979D8[0].match_end.player_standings[0].stocks;
-        ev->x28 = gm_804979D8[0].match_end.player_standings[0].percent;
+        ev->x24 = exit_vs_data[0].match_end.player_standings[0].stocks;
+        ev->x28 = exit_vs_data[0].match_end.player_standings[0].percent;
         ev->xB_2 = 0;
         ev->xB_5 = 0;
         t = ev->x20;
@@ -1037,6 +1228,7 @@ static gm_803DF94C_t gm_804D44B0 = { gm_801BE618, NULL };
 static gm_803DF94C_t gm_804D44B8 = { gm_801BE638, NULL };
 static gm_803DF94C_t gm_804D44C0 = { gm_801BC754, NULL };
 
+/// @todo move above usage
 gm_803DF94C_t* gm_803DF94C[] = {
     &gm_804D4330, &gm_804D43B8, &gm_804D4340, &gm_804D4348, &gm_804D4350,
     &gm_804D4358, &gm_804D4360, &gm_804D4368, &gm_804D4370, &gm_804D4378,
