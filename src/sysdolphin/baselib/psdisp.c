@@ -617,8 +617,8 @@ static inline HSD_Particle* psDispSubPoint(HSD_Particle* pp)
 
 static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
 {
-    GXColor cbuf[32];
     Vec3 vbuf[32];
+    GXColor cbuf[32];
     Vec3* p;
     GXColor* c;
     HSD_Particle* last;
@@ -1919,7 +1919,7 @@ static inline void psUpdateProjectionCache(f32 perspective)
 
 #ifdef MUST_MATCH
 #pragma push
-#pragma inline_depth(4)
+#pragma inline_depth(3)
 #endif
 void psDispParticles(u32 target_link, u32 sw)
 {
