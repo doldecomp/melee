@@ -3079,6 +3079,11 @@ static inline f32 grBigBlue_801EC6C0_inline(s32 index)
     return result + 0.5F * -((f32) params->x1C * scale);
 }
 
+static inline f32 grBigBlue_801EC6C0_inline2(s32 k)
+{
+    return grBigBlue_801EC6C0_inline(k);
+}
+
 /// @todo Needs register allocation fixes.
 #ifdef MUST_MATCH
 #pragma push
@@ -3141,7 +3146,7 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
             i = 0;
             ((grBb_ByteBits*) (car + 0xD4))->b6 = i;
 
-            *(f32*) (car + 0xE0) = grBigBlue_801EC6C0_inline(k);
+            *(f32*) (car + 0xE0) = grBigBlue_801EC6C0_inline2(k);
 
             scale = Ground_801C0498();
             params = yakumono_param;
