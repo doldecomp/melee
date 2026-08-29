@@ -2665,6 +2665,7 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
     HSD_JObj* sp_jobj;
     u8 stack_obj2[4];
     HSD_JObj* jobj2;
+    HSD_JObj* row_jobj;
     HSD_JObj* sp_jobj2;
     u8 stack_obj3[12];
     int idx;
@@ -2756,19 +2757,19 @@ void mnDiagram_DrawFighterHeaders(void* arg0, int arg1, int arg2)
                 remr--;
             }
         row_found:
-            jobj = HSD_JObjLoadJoint(joint_data[0]);
-            HSD_JObjAddAnimAll(jobj, joint_data[1], joint_data[2],
+            row_jobj = HSD_JObjLoadJoint(joint_data[0]);
+            HSD_JObjAddAnimAll(row_jobj, joint_data[1], joint_data[2],
                                joint_data[3]);
-            HSD_JObjReqAnimAll(jobj, 0.0f);
-            HSD_JObjAnimAll(jobj);
-            lb_80011E24(jobj, &sp_jobj2, 2, -1);
+            HSD_JObjReqAnimAll(row_jobj, 0.0f);
+            HSD_JObjAnimAll(row_jobj);
+            lb_80011E24(row_jobj, &sp_jobj2, 2, -1);
             fighter_kind = selkind & 0xFF;
             HSD_JObjReqAnimAll(sp_jobj2, (f32) fighter_kind);
             HSD_JObjAnimAll(sp_jobj2);
             y_spacing = HSD_JObjGetTranslationY(data->jobjs[10]) -
                         HSD_JObjGetTranslationY(jobj2 = data->jobjs[9]);
-            HSD_JObjSetTranslateY(jobj, y_spacing * i);
-            HSD_JObjAddChild(data->jobjs[9], jobj);
+            HSD_JObjSetTranslateY(row_jobj, y_spacing * i);
+            HSD_JObjAddChild(data->jobjs[9], row_jobj);
         }
     }
 }
