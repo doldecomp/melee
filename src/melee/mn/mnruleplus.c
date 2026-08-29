@@ -781,9 +781,21 @@ void fn_80232F44(HSD_GObj* gobj)
     }
 }
 
+static inline s32 mnRulePlus_CountVisible(u8 limit)
+{
+    s32 i;
+    s32 count = 0;
+
+    for (i = 0; i < (s32) limit; i++) {
+        if (mn_80231F80((u8) i) != 0) {
+            count++;
+        }
+    }
+    return count;
+}
+
 HSD_GObj* mn_80233218(MenuState state)
 {
-    u8 operand_pad[8];
     HSD_JObj* jobj_parts[17];
     u16 jobj_map[17];
     HSD_GObj* gobj;
@@ -804,7 +816,7 @@ HSD_GObj* mn_80233218(MenuState state)
     f32* frame_ptr;
     u16* volatile sub_count_ptr;
     GameRules* rules;
-    PAD_STACK(8);
+    PAD_STACK(4);
 
     selected = (u8) mn_804A04F0.hovered_selection;
     num_options = mn_803EB6B0[15].selection_count;
@@ -869,20 +881,10 @@ HSD_GObj* mn_80233218(MenuState state)
 
     sub_count_ptr = mn_803ED1D0.x10;
     for (i = 0; i < (s32) num_options; i++) {
-        vis_before = 0;
-        for (j = vis_before; j < (s32) (u8) i; j++) {
-            if (mn_80231F80((u8) j) != 0) {
-                vis_before++;
-            }
-        }
+        vis_before = mnRulePlus_CountVisible((u8) i);
 
-        vis_total = 0;
         option_jobj = user_data->xC[mn_803ED1D0.x0[(u8) vis_before]];
-        for (j = vis_total; j < 6; j++) {
-            if (mn_80231F80((u8) j) != 0) {
-                vis_total++;
-            }
-        }
+        vis_total = mnRulePlus_CountVisible(6);
 
         HSD_JObjReqAnim(option_jobj, (f32) vis_total);
         HSD_JObjAnim(option_jobj);
