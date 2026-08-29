@@ -1236,7 +1236,9 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
 {
     Mtx scratch_mtx;
     Vec3 scratch_scale;
-    Vec3 cur_pos;
+    f32 cur_x;
+    f32 cur_y;
+    f32 cur_z;
     f32 prev_x;
     f32 prev_y;
     f32 prev_z;
@@ -1250,18 +1252,18 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
         HSD_psAppSRT* appsrt = pp->appsrt;
         f32 y_component;
 
-        cur_pos.x = appsrt->ssy * (y_component = pp->pos.y);
-        cur_pos.y = appsrt->x78 * y_component;
-        cur_pos.z = appsrt->x88 * y_component;
-        cur_pos.x = appsrt->ssx * pp->pos.x + cur_pos.x;
-        cur_pos.z = (y_component = appsrt->x74 * pp->pos.x + cur_pos.y,
-                     appsrt->x84 * pp->pos.x + cur_pos.z);
-        cur_pos.x = appsrt->x6C * pp->pos.z + cur_pos.x;
-        cur_pos.y = appsrt->x7C * pp->pos.z + y_component;
-        cur_pos.z = appsrt->x8C * pp->pos.z + cur_pos.z;
-        cur_pos.x = appsrt->x70 + cur_pos.x;
-        cur_pos.y = appsrt->x80 + cur_pos.y;
-        cur_pos.z = appsrt->x90 + cur_pos.z;
+        cur_x = appsrt->ssy * (y_component = pp->pos.y);
+        cur_y = appsrt->x78 * y_component;
+        cur_z = appsrt->x88 * y_component;
+        cur_x = appsrt->ssx * pp->pos.x + cur_x;
+        cur_z = (y_component = appsrt->x74 * pp->pos.x + cur_y,
+                 appsrt->x84 * pp->pos.x + cur_z);
+        cur_z = (cur_x = appsrt->x6C * pp->pos.z + cur_x,
+                 cur_y = appsrt->x7C * pp->pos.z + y_component,
+                 appsrt->x8C * pp->pos.z + cur_z);
+        cur_x = appsrt->x70 + cur_x;
+        cur_y = appsrt->x80 + cur_y;
+        cur_z = appsrt->x90 + cur_z;
     }
     if (pp->kind & Tornado) {
         f32 x;
@@ -1317,9 +1319,9 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
         if (pp->kind & DispTexture) {
             GXTexCoord1x8(0);
         }
-        GXWGFifo.f32 = cur_pos.x;
-        GXWGFifo.f32 = cur_pos.y;
-        GXWGFifo.f32 = cur_pos.z;
+        GXWGFifo.f32 = cur_x;
+        GXWGFifo.f32 = cur_y;
+        GXWGFifo.f32 = cur_z;
         GXColor4u8(draw_color.r, draw_color.g, draw_color.b, draw_color.a);
         if (pp->kind & DispTexture) {
             GXTexCoord1x8(1);
@@ -1336,9 +1338,9 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
             setVtxDesc(1);
             GXBegin(GX_POINTS, GX_VTXFMT1, 1);
         }
-        GXWGFifo.f32 = cur_pos.x;
-        GXWGFifo.f32 = cur_pos.y;
-        GXWGFifo.f32 = cur_pos.z;
+        GXWGFifo.f32 = cur_x;
+        GXWGFifo.f32 = cur_y;
+        GXWGFifo.f32 = cur_z;
         if (pp->kind & DispTexture) {
             GXTexCoord1x8(1);
         }
