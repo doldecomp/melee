@@ -12,7 +12,6 @@
 #include <placeholder.h>
 
 #include "ft/types.h"
-#include "lb/types.h"
 
 #include <math.h>
 #include <dolphin/mtx.h>
