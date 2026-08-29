@@ -1777,7 +1777,6 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
             }
             {
                 f32 target_z;
-                f32 target_y;
                 f32 diff_y;
                 f32 vy;
                 f32 bound_y;
@@ -1825,21 +1824,21 @@ void grBigBlue_801E93D8(Ground_GObj* gobj)
                     *(f32*) (bp + 0xD0) = bound_y + yakumono_param->xCC;
                 }
 
-                target_y = *(f32*) (bp + 0xD0);
-                (void) target_y;
-                diff_y = pos.y - target_y;
+                diff_y = pos.y - *(f32*) (bp + 0xD0);
                 if (diff_y < 0.0f) {
                     diff_y = -diff_y;
                 }
                 if (diff_y < 0.5f) {
                     vy = 0.0f;
-                } else if (target_y > pos.y) {
-                    vy = (target_y - pos.y) / yakumono_param->xE4;
+                } else if (pos.y < *(f32*) (bp + 0xD0)) {
+                    vy = (*(f32*) (bp + 0xD0) - pos.y) /
+                         yakumono_param->xE4;
                     if (vy > yakumono_param->xE8) {
                         vy = yakumono_param->xE8;
                     }
                 } else {
-                    vy = (target_y - pos.y) / yakumono_param->xEC;
+                    vy = (*(f32*) (bp + 0xD0) - pos.y) /
+                         yakumono_param->xEC;
                     if (vy < -yakumono_param->xF0) {
                         vy = -yakumono_param->xF0;
                     }
