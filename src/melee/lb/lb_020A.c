@@ -403,6 +403,7 @@ void lbBgFlash_80021410(IKState* data)
     two_a = 2.0f * len_bc;
     c2 = len_ac * len_ac;
 
+    (void) (two_a * len_ab);
     cos1 = ((a2 + b2) - c2) / (two_a * len_ab);
     cos2 = ((a2 + c2) - b2) / (two_a * len_ac);
 
