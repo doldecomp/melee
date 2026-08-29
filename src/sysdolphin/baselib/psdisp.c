@@ -1054,9 +1054,9 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
                         GXPrimitive primitive = it[0];
                         u8 count = it[1];
                         s32 i;
+                        u8 r;
                         u8 b;
                         u8 g;
-                        u8 r;
 
                         it += 4;
                         if (pp->kind & DispTexture) {
@@ -1678,9 +1678,9 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                     GXPrimitive primitive = it[0];
                     u8 count = it[1];
                     s32 i;
+                    u8 r;
                     u8 b;
                     u8 g;
-                    u8 r;
 
                     it += 4;
                     if (pp->kind & DispTexture) {
@@ -1849,8 +1849,8 @@ static inline void psUpdateProjectionCache(f32 perspective)
         f32 x_offset = prj[2];
         f32 w1;
         f32 w2;
-        f32 w3;
         f32 y_scale;
+        f32 w3;
         f32 y_offset;
         f32 y0;
         f32 y1;
