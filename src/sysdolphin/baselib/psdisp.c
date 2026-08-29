@@ -1312,27 +1312,15 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
         GXWGFifo.f32 = prev_x;
         GXWGFifo.f32 = prev_y;
         GXWGFifo.f32 = prev_z;
-        {
-            u8 a = draw_color.a;
-            f32 alpha = (f32) a * pp->trail;
-            u8 b = draw_color.b;
-            u8 g = draw_color.g;
-            u8 r = draw_color.r;
-            GXColor4u8(r, g, b, (u8) alpha);
-        }
+        GXColor4u8(draw_color.r, draw_color.g, draw_color.b,
+                   (u8) ((f32) draw_color.a * pp->trail));
         if (pp->kind & DispTexture) {
             GXTexCoord1x8(0);
         }
         GXWGFifo.f32 = cur_pos.x;
         GXWGFifo.f32 = cur_pos.y;
         GXWGFifo.f32 = cur_pos.z;
-        {
-            u8 a = draw_color.a;
-            u8 b = draw_color.b;
-            u8 g = draw_color.g;
-            u8 r = draw_color.r;
-            GXColor4u8(r, g, b, a);
-        }
+        GXColor4u8(draw_color.r, draw_color.g, draw_color.b, draw_color.a);
         if (pp->kind & DispTexture) {
             GXTexCoord1x8(1);
         }
