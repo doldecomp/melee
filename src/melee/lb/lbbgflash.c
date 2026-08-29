@@ -735,18 +735,6 @@ static inline f32 sqrtf_store(f32 x, volatile f32* y)
     return x;
 }
 
-static inline void adjust_length(f32 limit_pow, f32 limit, f32* length_pow,
-                                 f32* length)
-{
-    f32 next_pow = *length * *length_pow;
-
-    *length_pow = next_pow;
-    if (*length > limit) {
-        *length =
-            ((11.0f * limit) / 10.0f) + (-limit_pow / (10.0f * *length_pow));
-    }
-}
-
 void lbBgFlash_80021410(void* arg0)
 {
     IKState* data = arg0;
@@ -760,14 +748,15 @@ void lbBgFlash_80021410(void* arg0)
     volatile f32 len_ab_mag;
     volatile f32 len_bc_mag;
     volatile f32 len_ac_mag;
+    f32 eleven;
     f32 dot;
     f32 sin_val;
     f32 len_ab;
+    f32 sum_len;
     f32 len_bc;
     f32 len_ac;
     f32 angle1;
     f32 angle2;
-    f32 sum_len;
     f32 sum_pow;
     f32 len_pow;
     f32 c2;
@@ -776,12 +765,15 @@ void lbBgFlash_80021410(void* arg0)
     f32 two_a;
     f32 cos1;
     f32 cos2;
+    f32 ten;
     f32 acos1;
     f32 acos2;
     f64 rem;
     f32 dx;
     f32 dz;
     f32 dy;
+    f32 last;
+    f64 pi;
     Vec3* pDiff;
     PAD_STACK(8);
 
@@ -793,15 +785,17 @@ void lbBgFlash_80021410(void* arg0)
     lbVector_Normalize(&axis);
 
     {
-        f32 nx = axis.x;
-        f32 nz = axis.z;
         f32 ny = axis.y;
-        f32 dot;
+        f32 nz = axis.z;
+        f32 nx;
         f32 d;
-        f32 x = data->pos4.x;
+        f32 x;
 
+        nx = *(f32*) &axis;
         dot = -((nz * data->pos1.z) +
-                ((nx * data->pos1.x) + (data->pos1.y * ny)));
+                ((nx * data->pos1.x) + (ny * data->pos1.y)));
+
+        x = data->pos4.x;
 
         d = -(dot + ((data->pos4.z * nz) + ((x * nx) + (data->pos4.y * ny))));
         data->pos4.x = (d * nx) + x;
@@ -837,7 +831,7 @@ void lbBgFlash_80021410(void* arg0)
     angle1 = lbVector_Angle(&temp_delta, &pos1_from_pos0);
 
     lbVector_Diff(&data->pos2, &data->pos1, &temp_delta);
-    angle2 = (f32) (3.141592653589793 -
+    angle2 = (f32) ((pi = 3.141592653589793) -
                     lbVector_Angle(&temp_delta, &pos1_from_pos0));
 
     dx = data->pos0.x - data->pos4.x;
@@ -872,11 +866,9 @@ void lbBgFlash_80021410(void* arg0)
     len_ac = sqrtf_store(dz + (dx + dy), &len_ac_mag);
     data->len1 = len_ac;
 
-    len_bc = data->len0;
-    len_ac = data->len1;
-
-    sum_len = (10.0f * (len_bc + len_ac)) / 11.0f;
-    sum_pow = sum_len * sum_len;
+    sum_len = (ten = 10.0f) * ((len_bc = data->len0) + (len_ac = data->len1));
+    sum_len /= (eleven = 11.0f);
+    sum_pow = sum_len * (sum_len * sum_len);
     sum_pow = sum_len * sum_pow;
     sum_pow = sum_len * sum_pow;
     sum_pow = sum_len * sum_pow;
@@ -885,16 +877,15 @@ void lbBgFlash_80021410(void* arg0)
     sum_pow = sum_len * sum_pow;
     sum_pow = sum_len * sum_pow;
     sum_pow = sum_len * sum_pow;
-    sum_pow *= sum_len;
-    len_pow = len_ab * len_ab;
+    len_pow = len_ab * (len_ab * (len_ab * len_ab));
     len_pow = len_ab * len_pow;
     len_pow = len_ab * len_pow;
     len_pow = len_ab * len_pow;
     len_pow = len_ab * len_pow;
-    len_pow = len_ab * len_pow;
-    len_pow = len_ab * len_pow;
-    len_pow = len_ab * len_pow;
-    adjust_length(sum_pow, sum_len, &len_pow, &len_ab);
+    last = len_ab * (len_pow = len_ab * len_pow);
+    if (len_ab > sum_len) {
+        len_ab = ((eleven * sum_len) / ten) + (-sum_pow / (ten * last));
+    }
 
     a2 = len_bc * len_bc;
     b2 = len_ab * len_ab;
@@ -904,7 +895,7 @@ void lbBgFlash_80021410(void* arg0)
     cos1 = ((a2 + b2) - c2) / (two_a * len_ab);
     cos2 = ((a2 + c2) - b2) / (two_a * len_ac);
 
-    if (1.0f < cos1) {
+    if (cos1 > 1.0f) {
         cos1 = 1.0f;
     } else if (cos1 < -1.0f) {
         cos1 = -1.0f;
