@@ -805,9 +805,15 @@ static inline void psSetCurrentMtx(GXPosNrmMtx idx)
     }
 }
 
+static inline void psMaskAbsF32(f32* value)
+{
+    *(s32*) value &= 0x7FFFFFFF;
+}
+
 static inline void psDispSub(HSD_Particle* pp, u8* texform)
 {
     f32 abs_angle;
+    f32 abs_y;
     f32 right_y;
     f32 right_x;
     f32 right_z;
@@ -910,8 +916,8 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
                 (pvmtx[1][0] * pp->vel.x + pvmtx[1][1] * pp->vel.y);
         }
         {
-            f32 abs_y = y;
-            *(s32*) &abs_y &= 0x7FFFFFFF;
+            abs_y = y;
+            psMaskAbsF32(&abs_y);
             if (abs_y < FLT_MIN) {
                 angle = (x >= 0.0f) ? 1.5707964f : -1.5707964f;
             } else {
@@ -925,7 +931,7 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
         angle = pp->rotate;
     }
     abs_angle = angle;
-    *(s32*) &abs_angle &= 0x7FFFFFFF;
+    psMaskAbsF32(&abs_angle);
     if (abs_angle > 0.01) {
         Mtx mtx;
         Vec3 axis;
@@ -1193,7 +1199,7 @@ static inline void psScaleAppSRTAxes(HSD_Particle* pp, Mtx mtx)
  * polygon path only inside the changed-frame block. Both branches fold away.
  */
 static inline void psUpdateAppSRT(HSD_Particle* pp, bool always_stamp,
-                                  Mtx scratch_mtx)
+                                  Mtx scratch_mtx, Vec3* scratch_scale)
 {
     if (pp->appsrt->frameNum != psFrameNum) {
         f32 scale_x;
@@ -1223,15 +1229,14 @@ static inline void psUpdateAppSRT(HSD_Particle* pp, bool always_stamp,
         scale_y = sqrtf(scale_y);
         pp->appsrt->x98 = scale_y;
         if (pp->appsrt->xA2 != 0) {
-            Vec3 scale;
-
             PSMTXIdentity(scratch_mtx);
             scratch_mtx[0][3] = pp->appsrt->translate.x;
             scratch_mtx[1][3] = pp->appsrt->translate.y;
             scratch_mtx[2][3] = pp->appsrt->translate.z;
             PSMTXConcat(vmtx, scratch_mtx, scratch_mtx);
-            HSD_MtxGetScale(scratch_mtx, &scale);
-            PSMTXScale((MtxPtr) &pp->appsrt->ssx, scale.x, scale.y, scale.z);
+            HSD_MtxGetScale(scratch_mtx, scratch_scale);
+            PSMTXScale((MtxPtr) &pp->appsrt->ssx, scratch_scale->x,
+                       scratch_scale->y, scratch_scale->z);
             pp->appsrt->x70 = scratch_mtx[0][3];
             pp->appsrt->x80 = scratch_mtx[1][3];
             pp->appsrt->x90 = scratch_mtx[2][3];
@@ -1248,6 +1253,7 @@ static inline void psUpdateAppSRT(HSD_Particle* pp, bool always_stamp,
 static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
 {
     Mtx scratch_mtx;
+    Vec3 scratch_scale;
     Vec3 cur_pos;
     Vec3 prev_pos;
     f32 ax;
@@ -1255,7 +1261,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
 
     psSetCurrentMtx(GX_PNMTX1);
     if (pp->appsrt != NULL) {
-        psUpdateAppSRT(pp, true, scratch_mtx);
+        psUpdateAppSRT(pp, true, scratch_mtx, &scratch_scale);
     }
     {
         HSD_psAppSRT* appsrt = pp->appsrt;
@@ -1373,8 +1379,11 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
 
 static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
 {
+    f32 abs_angle;
+    f32 abs_v;
     Mtx draw_mtx;
     Vec3 cur_pos;
+    Vec3 scratch_scale;
     Vec3 prev_pos;
     f32 ax;
     f32 ay;
@@ -1382,10 +1391,9 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
     f32 by;
     f32 y_extent;
     f32 angle;
-    f32 abs_angle;
     u8* it = texform;
 
-    psUpdateAppSRT(pp, false, draw_mtx);
+    psUpdateAppSRT(pp, false, draw_mtx, &scratch_scale);
     {
         f32 app_cur_x;
         f32 app_cur_y;
@@ -1545,8 +1553,8 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
             }
         }
         {
-            f32 abs_v = vf2;
-            *(s32*) &abs_v &= 0x7FFFFFFF;
+            abs_v = vf2;
+            psMaskAbsF32(&abs_v);
             if (abs_v < FLT_MIN) {
                 angle = (-vf1 >= 0.0f) ? 1.5707964f : -1.5707964f;
             } else {
@@ -1560,7 +1568,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
         angle = pp->rotate;
     }
     abs_angle = angle;
-    *(s32*) &abs_angle &= 0x7FFFFFFF;
+    psMaskAbsF32(&abs_angle);
     if (abs_angle > 0.01) {
         f32 c = cosf(angle);
         f32 s = sinf(angle);
@@ -1913,7 +1921,6 @@ void psDispParticles(u32 target_link, u32 sw)
     HSD_Particle* sorted_particles;
     HSD_Particle* non_edge_particles;
     psdisp_Mtx billboard_mtx;
-    f32 sp700;
     GXTlutObj gx_tlut_obj;
     s32 alpha_compare_mode;
     s32 prev_tex_interp_near;
@@ -1922,8 +1929,6 @@ void psDispParticles(u32 target_link, u32 sw)
     GXColor sp6D0;
     u32 prev_kind;
     HSD_Particle* pp;
-    /// @todo Recover this stack space from the original inline hierarchy.
-    PAD_STACK(0x34);
 
     alpha_compare_mode = 0;
     prev_tex_interp_near = 0;
@@ -1967,6 +1972,9 @@ void psDispParticles(u32 target_link, u32 sw)
                 u32 width;
                 u32 height;
 
+                /// @todo Recover this stack space from the original inline
+                /// hierarchy.
+                PAD_STACK(0x38);
                 if ((sw == 1) && !(pp->kind & TexEdge)) {
                     break;
                 }
@@ -2106,8 +2114,7 @@ void psDispParticles(u32 target_link, u32 sw)
                             sp7B0 = NULL;
                             PSMTXScale(temp_mtx, scale_s, scale_t, 1.0f);
                             if (pp->kind & MirrorT) {
-                                sp700 = 1.0f;
-                                temp_mtx[1][3] = sp700;
+                                temp_mtx[1][3] = 1.0f;
                             }
                             GXLoadTexMtxImm(temp_mtx, GX_TEXMTX0, GX_MTX2x4);
                             GXSetTexCoordGen2(GX_TEXCOORD0, GX_TG_MTX2x4,
