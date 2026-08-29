@@ -1880,6 +1880,7 @@ static inline void psUpdateProjectionCache(f32 perspective)
 #endif
 void psDispParticles(u32 target_link, u32 sw)
 {
+    UNUSED u8 stack_pad[4];
     s32 sp7B4;
     void* sp7B0;
     u32 sp7AC;
