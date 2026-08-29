@@ -5,7 +5,9 @@
 #include "ft/ft_0892.h"
 #include "ft/inlines.h"
 #include "it/items/itsamusgrapple.h"
+#include "it/types.h"
 #include "lb/lb_00B0.h"
+#include "mp/mplib.h"
 
 #include <baselib/random.h>
 
