@@ -48,7 +48,6 @@ struct IfStockData {
 
 struct IfStockDataOffset {
     unsigned char x0[0x204];
-    struct IfStockData data;
 };
 
 int ifStock_802F7EFC(int arg0, int arg1)
@@ -57,15 +56,17 @@ int ifStock_802F7EFC(int arg0, int arg1)
     struct ifStock_804A1378* stock;
     struct IfStockData* arg1_data;
     struct IfStockData* arg0_data;
+    struct IfStockDataOffset* arg0_base;
+    struct IfStockDataOffset* arg1_base;
     int slot;
     int i, j;
     stock = &ifStock_804A1378;
-    arg0_data = (struct IfStockData*) stock;
-    arg0_data += arg0;
-    arg1_data = (struct IfStockData*) stock;
-    arg1_data += arg1;
-    arg0_data = &((struct IfStockDataOffset*) arg0_data)->data;
-    arg1_data = &((struct IfStockDataOffset*) arg1_data)->data;
+    arg0_base =
+        (struct IfStockDataOffset*) ((struct IfStockData*) stock + arg0);
+    arg1_base =
+        (struct IfStockDataOffset*) ((struct IfStockData*) stock + arg1);
+    arg0_data = (struct IfStockData*) ++arg0_base;
+    arg1_data = (struct IfStockData*) ++arg1_base;
     if (Player_GetStocks(arg1) == 0) {
         return 1;
     }
