@@ -731,7 +731,7 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
     f32 attack_ratio;
     u8 player_stocks;
     u8 player_ckind;
-    u8 flags;
+    s32 flags;
     s8* enemy_kind;
     f32 defense_ratio;
     u8 enemy_ckind;
@@ -1025,13 +1025,13 @@ s32 gm_8017CE34(StartMeleeData* arg0, UnkAdventureData* arg1, s8* arg2,
         arg0->rules.x0_3 = 3;
         arg0->rules.disable_pausing = 1;
         arg0->rules.x7 = 0;
-        arg0->rules.x44 = (void (*)(void)) fn_8017C71C;
+        flags = (s32) (arg0->rules.x44 = (void (*)(void)) fn_8017C71C);
         arg1->x0.xC.xC = 6;
     }
     if (arg7 == 0x49) {
         arg1->x0.xC.xC = 8;
     }
-    return (s32) flags;
+    return flags;
 }
 
 bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
