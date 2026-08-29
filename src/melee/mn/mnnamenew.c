@@ -687,51 +687,29 @@ bool NameContainsOnlySpaces(void)
 static inline void CopyCurrentNameToNametag(struct NameTagData* nametag)
 {
     s32 idx;
-    u8* text;
     u8 ch;
+    u8* text;
     s8 null_ch;
+    s32 i;
 
     text = (u8*) mnNameNew_CurrentNameText;
-    null_ch = (s8) *mnNameNew_NullCharacter;
     idx = 0;
-    if (null_ch != (s8) *text) {
+    for (i = 0; i < 4; i++) {
         u8* ptr;
+
+        null_ch = (s8) *mnNameNew_NullCharacter;
+        if (null_ch == (s8) *text) {
+            break;
+        }
         ptr = text;
-        while ((null_ch = (s8) *mnNameNew_NullCharacter) != (s8) (ch = *ptr)) {
+        while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
+               (s8) (ch = *ptr))
+        {
             nametag->namedata[idx] = (s8) ch;
             idx += 1;
             ptr += 1;
         }
-        if (null_ch != (s8) * (text += 3)) {
-            ptr = text;
-            while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
-                   (s8) (ch = *ptr))
-            {
-                nametag->namedata[idx] = (s8) ch;
-                idx += 1;
-                ptr += 1;
-            }
-            if (null_ch != (s8) * (text += 3)) {
-                ptr = text;
-                while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
-                       (s8) (ch = *ptr))
-                {
-                    nametag->namedata[idx] = (s8) ch;
-                    idx += 1;
-                    ptr += 1;
-                }
-                if (null_ch != (s8) * (text += 3)) {
-                    ptr = text;
-                    while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
-                           (s8) (ch = *ptr))
-                    {
-                        nametag->namedata[idx] = (s8) ch;
-                        idx += 1;
-                        ptr += 1;
-                    }
-                }
-            }
-        }
+        text += 3;
     }
     nametag->namedata[idx] = (s8) *mnNameNew_NullCharacter;
 }
