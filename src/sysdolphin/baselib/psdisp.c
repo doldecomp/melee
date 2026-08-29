@@ -524,12 +524,10 @@ static inline HSD_Particle* psDispSubPoint(HSD_Particle* pp)
     HSD_Particle* q;
     s32 count;
     s32 i;
-    f32 fw;
     s32 w;
 
     psSetCurrentMtx(GX_PNMTX0);
-    fw = (pp->size > 42.5) ? 255.0f : 6.0f * pp->size;
-    w = (s32) fw;
+    w = (s32) ((pp->size > 42.5) ? 255.0f : 6.0f * pp->size);
     if (prevPointSize != (s32) (u8) w) {
         prevPointSize = (u8) w;
         GXSetPointSize((u8) w, GX_TO_ONE);
@@ -623,12 +621,10 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
     HSD_Particle* q;
     s32 count;
     s32 i;
-    f32 fw;
     s32 w;
 
     psSetCurrentMtx(GX_PNMTX0);
-    fw = (pp->size > 42.5) ? 255.0f : 6.0f * pp->size;
-    w = (s32) fw;
+    w = (s32) ((pp->size > 42.5) ? 255.0f : 6.0f * pp->size);
     if (prevLineWidth != (s32) (u8) w) {
         prevLineWidth = (u8) w;
         GXSetLineWidth((u8) w, GX_TO_ONE);
@@ -811,10 +807,15 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
     f32 prev_x;
     f32 prev_y;
     f32 prev_z;
+    Vec2 right;
+    f32 right_z;
     Vec2 up;
     f32 up_z;
     u8* it = texform;
 
+    right.x = x0;
+    right.y = y0;
+    right_z = z0;
     up.x = x1;
     up.y = y1;
     up_z = z1;
@@ -839,7 +840,8 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                 setVtxDesc(3);
                 GXBegin(GX_QUADS, GX_VTXFMT3, 4);
             }
-            GXPosition3f32(prev_x - x0, prev_y - y0, prev_z - z0);
+            GXPosition3f32(prev_x - right.x, prev_y - right.y,
+                           prev_z - right_z);
             {
                 u8 a = color.a;
                 f32 alpha = (f32) a * pp->trail;
@@ -862,7 +864,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
             if (pp->kind & DispTexture) {
                 GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 1;
             }
-            GXPosition3f32(x + x0, y + y0, z + z0);
+            GXPosition3f32(x + right.x, y + right.y, z + right_z);
             {
                 u8 a = color.a;
                 u8 b = color.b;
@@ -942,9 +944,9 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                         if (pp->kind & TexFlipT) {
                             t = 1.0f - t;
                         }
-                        GXWGFifo.f32 = up.x * tx + (x0 * sx + x);
-                        GXWGFifo.f32 = up.y * tx + (y0 * sx + y);
-                        GXWGFifo.f32 = up_z * tx + (z0 * sx + z);
+                        GXWGFifo.f32 = up.x * tx + (right.x * sx + x);
+                        GXWGFifo.f32 = up.y * tx + (right.y * sx + y);
+                        GXWGFifo.f32 = up_z * tx + (right_z * sx + z);
                         GXColor4u8(color.r, color.g, color.b, alpha);
                         if (pp->kind & DispTexture) {
                             GXWGFifo.f32 = s;
@@ -962,7 +964,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
             setVtxDesc(1);
             GXBegin(GX_QUADS, GX_VTXFMT1, 4);
         }
-        GXPosition3f32(x - x0, y - y0, z - z0);
+        GXPosition3f32(x - right.x, y - right.y, z - right_z);
         if (pp->kind & DispTexture) {
             GXWGFifo.u8 = (pp->kind >> 16) & 0xC;
         }
@@ -970,7 +972,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
         if (pp->kind & DispTexture) {
             GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 1;
         }
-        GXPosition3f32(x + x0, y + y0, z + z0);
+        GXPosition3f32(x + right.x, y + right.y, z + right_z);
         if (pp->kind & DispTexture) {
             GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 2;
         }
@@ -1009,9 +1011,9 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                 if (pp->kind & TexFlipT) {
                     t = 1.0f - t;
                 }
-                GXWGFifo.f32 = x + x0 * sx + up.x * tx;
-                GXWGFifo.f32 = y + y0 * sx + up.y * tx;
-                GXWGFifo.f32 = z + z0 * sx + up_z * tx;
+                GXWGFifo.f32 = x + right.x * sx + up.x * tx;
+                GXWGFifo.f32 = y + right.y * sx + up.y * tx;
+                GXWGFifo.f32 = z + right_z * sx + up_z * tx;
                 if (pp->kind & DispTexture) {
                     GXWGFifo.f32 = s;
                     GXWGFifo.f32 = t;
