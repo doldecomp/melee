@@ -191,6 +191,7 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
         return;
     }
 
+    (void) 4503601774854144.0;
     hsd_80391A04(1.0f, 1.0f, 1);
     mode = data->state.mode;
 

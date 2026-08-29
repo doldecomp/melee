@@ -587,7 +587,7 @@ config.libs = [
             Object(Matching, "melee/lb/lbanim.c"),
             Object(Matching, "melee/lb/lbmthp.c"),
             Object(Matching, "melee/lb/lb_01F8.c"),
-            Object(Linkable, "melee/lb/lbbgflash.c"),
+            Object(Matching, "melee/lb/lbbgflash.c"),
             Object(Linkable, "melee/lb/lb_020A.c"),
             Object(Matching, "melee/lb/lb_0219.c"),
             Object(Matching, "melee/lb/lbrefract.c"),
