@@ -2530,14 +2530,14 @@ void mnSnap_80257F24(void)
     void** page_joint;
     void** arrows_joint;
     void** arrows_animjoint;
-    void** arrows_matanim;
+    Vec3 end_pos;
     void** arrows_shapeanim;
     void** warn_joint;
     void** warn_animjoint;
     void** main_matanim;
     void** warn_shapeanim;
     Vec3 start_pos;
-    Vec3 end_pos;
+    void** arrows_matanim;
     f32 dx;
     f32 dy;
     f32 dz;
