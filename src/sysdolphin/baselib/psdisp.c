@@ -697,24 +697,12 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
                 }
                 for (i = count; i != 0; i--) {
                     GXPosition3f32(p[1].x, p[1].y, p[1].z);
-                    {
-                        u8 a = c[1].a;
-                        u8 b = c[1].b;
-                        u8 g = c[1].g;
-                        u8 r = c[1].r;
-                        GXColor4u8(r, g, b, a);
-                    }
+                    GXColor4u8(c[1].r, c[1].g, c[1].b, c[1].a);
                     if (pp->kind & DispTexture) {
                         GXTexCoord1x8(0);
                     }
                     GXPosition3f32(p[0].x, p[0].y, p[0].z);
-                    {
-                        u8 a = c[0].a;
-                        u8 b = c[0].b;
-                        u8 g = c[0].g;
-                        u8 r = c[0].r;
-                        GXColor4u8(r, g, b, a);
-                    }
+                    GXColor4u8(c[0].r, c[0].g, c[0].b, c[0].a);
                     if (pp->kind & DispTexture) {
                         GXTexCoord1x8(1);
                     }
@@ -743,24 +731,12 @@ static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp)
         }
         for (i = count; i != 0; i--) {
             GXPosition3f32(p[1].x, p[1].y, p[1].z);
-            {
-                u8 a = c[1].a;
-                u8 b = c[1].b;
-                u8 g = c[1].g;
-                u8 r = c[1].r;
-                GXColor4u8(r, g, b, a);
-            }
+            GXColor4u8(c[1].r, c[1].g, c[1].b, c[1].a);
             if (pp->kind & DispTexture) {
                 GXTexCoord1x8(0);
             }
             GXPosition3f32(p[0].x, p[0].y, p[0].z);
-            {
-                u8 a = c[0].a;
-                u8 b = c[0].b;
-                u8 g = c[0].g;
-                u8 r = c[0].r;
-                GXColor4u8(r, g, b, a);
-            }
+            GXColor4u8(c[0].r, c[0].g, c[0].b, c[0].a);
             if (pp->kind & DispTexture) {
                 GXTexCoord1x8(1);
             }
@@ -1923,7 +1899,6 @@ void psDispParticles(u32 target_link, u32 sw)
     s32 needs_setup;
     void* sp79C;
     psdisp_Tlut tlut_obj;
-    GXColor chan_mat_color;
     GXTexObj sp764;
     HSD_Particle* sorted_particles;
     HSD_Particle* non_edge_particles;
@@ -1931,9 +1906,6 @@ void psDispParticles(u32 target_link, u32 sw)
     GXTlutObj gx_tlut_obj;
     s32 alpha_compare_mode;
     s32 prev_tex_interp_near;
-    GXColor sp6D8;
-    GXColor sp6D4;
-    GXColor sp6D0;
     u32 prev_kind;
     HSD_Particle* pp;
 
@@ -1997,20 +1969,16 @@ void psDispParticles(u32 target_link, u32 sw)
                         prevChanMat.r = prevChanMat.g = prevChanMat.b = 0xFF;
                         prevChanAmb.r = prevChanAmb.g = prevChanAmb.b = 0xFF;
                         prevChanMat.a = prevChanAmb.a = 0xFF;
-                        chan_mat_color = prevChanMat;
-                        GXSetChanMatColor(GX_COLOR0A0, chan_mat_color);
+                        GXSetChanMatColor(GX_COLOR0A0, prevChanMat);
                         GXSetChanAmbColor(GX_COLOR0A0, prevChanAmb);
                         psSetupTevInvalidState();
                         psSetupTevCommon();
                         psSetColor(&prevColorPrim, 0xFF);
                         psSetColor(&prevColorEnv, 0);
                         psSetColor(&prevColorMat, 0xFF);
-                        sp6D8 = prevColorPrim;
-                        GXSetTevColor(GX_TEVREG0, sp6D8);
-                        sp6D4 = prevColorEnv;
-                        GXSetTevColor(GX_TEVREG1, sp6D4);
-                        sp6D0 = prevColorMat;
-                        GXSetTevColor(GX_TEVREG2, sp6D0);
+                        GXSetTevColor(GX_TEVREG0, prevColorPrim);
+                        GXSetTevColor(GX_TEVREG1, prevColorEnv);
+                        GXSetTevColor(GX_TEVREG2, prevColorMat);
                         HSD_PSDisp_804D792C = -1;
                         GXSetZCompLoc(GX_FALSE);
                         HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(), vmtx);
