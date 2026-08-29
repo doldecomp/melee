@@ -1275,8 +1275,9 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
                     break;
                 }
                 pos.x = (gp->u.greens.x4 + next_row * 6)[col].x;
-                pos.y = (gp->u.greens.x4 + next_row * 6)[col].y -
-                        (gp->u.greens.x4 + next_row * 6 - 6)[col].y +
+                scale = (gp->u.greens.x4 + next_row * 6)[col].y -
+                        (gp->u.greens.x4 + next_row * 6 - 6)[col].y;
+                pos.y = scale +
                         gp->u.greens.x8_blocks[next_row - 1][col].x8;
                 pos.z = 0.0f;
                 gp->u.greens.x8_blocks[next_row][col].x8 = pos.y;
