@@ -288,70 +288,87 @@ void grMaterial_801C8E74(void)
     grMaterial_803E0A20.make_texp = hsdMObj.make_texp;
 }
 
-static inline void grMaterial_SetupOverlayTev(Ground* gp, HSD_MObj* mobj)
+static inline void grMaterial_SetTExpReg(HSD_TECnst* cnst)
 {
-    u8 pad3[0x1C];
-    HSD_TECnst sp_cnst;
-    u8 pad2[0x54];
-    HSD_TevDesc sp_tevdesc;
-    GXColor sp114;
-    s32 reg1_lt4_for_kcsel;
-    s32 temp2;
+    HSD_TExpSetReg((HSD_TExp*) cnst);
+}
+
+static inline s32 grMaterial_GetFreeColorReg(HSD_TECnst* cnst, HSD_MObj* mobj,
+                                             s32 start)
+{
+    return lbGetFreeColorRegister(start, mobj, (HSD_TExp*) cnst);
+}
+
+static inline GXTevKColorSel grMaterial_GetKColorSel(s32 reg)
+{
+    return lb_8000CCA4(reg);
+}
+
+static inline void fn_801C8EF8_inline(Ground* gp, HSD_MObj* mobj)
+{
+    u8 cnst_pad[0x14];
+    HSD_TECnst cnst;
+    u8 tevdesc_pad[0x54];
+    HSD_TevDesc tevdesc;
+    GXColor color;
     s32 reg2;
     s32 reg1_lt4;
     s32 alpha_reg;
     s32 temp;
     s32 reg1;
 
-    (void) pad2;
-    (void) pad3;
+    (void) cnst_pad;
+    (void) tevdesc_pad;
+
     if (grMaterial_GetOverlay(gp)->x7C_color_enable || gp->x10_flags.b6) {
-        sp_cnst = grMaterial_803E0A20.texp_tmpl;
-        sp_tevdesc = grMaterial_803E0A20.tevdesc_tmpl;
-        sp_tevdesc.stage = HSD_StateAssignTev();
+        cnst = grMaterial_803E0A20.texp_tmpl;
+        tevdesc = grMaterial_803E0A20.tevdesc_tmpl;
+        tevdesc.stage = HSD_StateAssignTev();
         if (grMaterial_GetOverlay(gp)->x7C_color_enable) {
+            s32 reg1_lt4_for_kcsel;
+
             reg1 = lbGetFreeColorRegister(0, mobj, NULL);
             if (reg1 == -1) {
                 OSReport("can't find free color register!\n");
                 HSD_ASSERT(0x7A, 0);
             }
-            sp_cnst.comp = reg1_lt4 = 1;
-            sp_cnst.ctype = temp = 0;
-            sp_cnst.reg = (u8) reg1;
-            sp_cnst.val = &gp->x6C;
-            HSD_TExpSetReg((HSD_TExp*) &sp_cnst);
+            cnst.comp = reg1_lt4 = 1;
+            cnst.ctype = temp = 0;
+            cnst.reg = (u8) reg1;
+            cnst.val = &gp->x6C;
+            grMaterial_SetTExpReg(&cnst);
             if (reg1 < 4) {
                 !reg1;
             } else {
-                reg1_lt4 = 0;
+                reg1_lt4 = temp;
             }
             if (reg1_lt4 != 0) {
                 temp = 4;
             } else {
                 temp = 0;
             }
-            reg2 = lbGetFreeColorRegister(temp, mobj, (HSD_TExp*) &sp_cnst);
+            reg2 = grMaterial_GetFreeColorReg(&cnst, mobj, temp);
             if (reg2 == -1) {
                 OSReport("can't find free color register!\n");
                 HSD_ASSERT(0x88, 0);
             }
-            sp_cnst.comp = reg1_lt4_for_kcsel = 1;
-            sp_cnst.ctype = temp2 = 0;
-            sp_cnst.reg = (u8) reg2;
-            sp114.r = gp->x6C.a;
-            sp114.g = gp->x6C.a;
-            sp114.b = gp->x6C.a;
-            sp_cnst.val = &sp114;
-            HSD_TExpSetReg((HSD_TExp*) &sp_cnst);
-            sp_tevdesc.u.tevconf.clr_b = lb_8000CC8C(reg1);
-            sp_tevdesc.u.tevconf.clr_c = lb_8000CC8C(reg2);
+            cnst.comp = temp = 1;
+            cnst.ctype = reg1_lt4_for_kcsel = 0;
+            cnst.reg = (u8) reg2;
+            color.r = gp->x6C.a;
+            color.g = gp->x6C.a;
+            color.b = gp->x6C.a;
+            cnst.val = &color;
+            grMaterial_SetTExpReg(&cnst);
+            tevdesc.u.tevconf.clr_b = lb_8000CC8C(reg1);
+            tevdesc.u.tevconf.clr_c = lb_8000CC8C(reg2);
             if (reg1 < 4) {
                 !reg1;
             } else {
-                reg1_lt4_for_kcsel = 0;
+                temp = reg1_lt4_for_kcsel;
             }
-            if (reg1_lt4_for_kcsel != 0) {
-                sp_tevdesc.u.tevconf.kcsel = lb_8000CCA4(reg1);
+            if (temp != 0) {
+                tevdesc.u.tevconf.kcsel = grMaterial_GetKColorSel(reg1);
             } else {
                 if (reg2 < 4) {
                     temp = 1;
@@ -359,7 +376,7 @@ static inline void grMaterial_SetupOverlayTev(Ground* gp, HSD_MObj* mobj)
                     temp = 0;
                 }
                 if (temp != 0) {
-                    sp_tevdesc.u.tevconf.kcsel = lb_8000CCA4(reg2);
+                    tevdesc.u.tevconf.kcsel = lb_8000CCA4(reg2);
                 }
             }
         }
@@ -369,16 +386,16 @@ static inline void grMaterial_SetupOverlayTev(Ground* gp, HSD_MObj* mobj)
                 OSReport("can't find free alpha register!\n");
                 HSD_ASSERT(0xA7, 0);
             }
-            sp_cnst.comp = 5;
-            sp_cnst.ctype = 3;
-            sp_cnst.reg = (u8) alpha_reg;
-            sp_cnst.val = &gp->xC0;
-            HSD_TExpSetReg((HSD_TExp*) &sp_cnst);
-            sp_tevdesc.u.tevconf.alpha_b = GX_CA_APREV;
-            sp_tevdesc.u.tevconf.alpha_c = lb_8000CD90(alpha_reg);
-            sp_tevdesc.u.tevconf.alpha_d = GX_CA_ZERO;
+            cnst.comp = 5;
+            cnst.ctype = 3;
+            cnst.reg = (u8) alpha_reg;
+            cnst.val = &gp->xC0;
+            grMaterial_SetTExpReg(&cnst);
+            tevdesc.u.tevconf.alpha_b = GX_CA_APREV;
+            tevdesc.u.tevconf.alpha_c = lb_8000CD90(alpha_reg);
+            tevdesc.u.tevconf.alpha_d = GX_CA_ZERO;
         }
-        HSD_SetupTevStage(&sp_tevdesc);
+        HSD_SetupTevStage(&tevdesc);
     }
 }
 
@@ -418,8 +435,7 @@ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode)
     HSD_TObjSetupVolatileTev(tobj, mobj_rendermode);
 
     gp = HSD_GObj_804D7814->user_data;
-    (void) gp;
-    grMaterial_SetupOverlayTev(gp, mobj);
+    fn_801C8EF8_inline(gp, mobj);
     HSD_SetupRenderModeWithCustomPE(mobj_rendermode, mobj->pe);
     if (cur_tobj != NULL) {
         *cur_tobj = NULL;

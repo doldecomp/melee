@@ -1192,9 +1192,9 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
 {
     Ground* gp = GET_GROUND(gobj);
     Vec pos;
-    float f;
+    float scale;
     int next_row;
-    PAD_STACK(0x18);
+    PAD_STACK(0x1C);
 
     if (gp->u.greens.x8_blocks[row][col].status == Gr_Greens_Block_Status_None)
     {
@@ -1227,7 +1227,6 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
             if (row > 0 && (gp->u.greens.x8_blocks[row - 1][col].status == 1 ||
                             gp->u.greens.x8_blocks[row - 1][col].status == 2))
             {
-                Vec(*positions)[6] = (Vec(*)[6]) gp->u.greens.x4;
                 float spacing;
 
                 spacing = (gp->u.greens.x4 + row * 6)[col].y -
@@ -1302,10 +1301,10 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
     pos.y = gp->u.greens.x8_blocks[row][col].x8;
     pos.z = 0.0f;
     HSD_JObjSetTranslate(gp->u.greens.x8_blocks[row][col].xC->hsd_obj, &pos);
-    f = 1.0f / Ground_801C0498();
-    pos.x *= f;
-    pos.y *= f;
-    pos.z *= f;
+    scale = 1.0f / Ground_801C0498();
+    pos.x *= scale;
+    pos.y *= scale;
+    pos.z *= scale;
     HSD_JObjSetTranslate(gp->u.greens.x8_blocks[row][col].x14, &pos);
 }
 
