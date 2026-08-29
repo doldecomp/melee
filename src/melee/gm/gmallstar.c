@@ -379,6 +379,11 @@ static AllstarRoundInfo gm_803DEC4C[13] = {
 
 gm_80490940_t gm_80490940[5];
 
+static inline gm_803DEBE8_t* gm_801B5324_inline(u8 round)
+{
+    return &gm_803DEBE8[gm_803DEC4C[round].start];
+}
+
 void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
 {
     s8 chars[3];
@@ -396,7 +401,7 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     is_last_round = 0;
     chars_ptr = chars;
 
-    opp_data = &gm_803DEBE8[gm_803DEC4C[arg1].start];
+    opp_data = gm_801B5324_inline(arg1);
 
     chars_ptr[0] = 0x21;
     chars_ptr[1] = 0x21;
