@@ -1724,17 +1724,27 @@ static inline f32 grZebes_801DB3CC_update_y(grZe_BubbleEntry** base, f32 old_y)
     return old_y + (*base)->x14;
 }
 
+static inline f32 grZebes_801DB3CC_get_x(Vec3* point)
+{
+    return point->x;
+}
+
+static inline f32 grZebes_801DB3CC_get_y(Vec3* point)
+{
+    return point->y;
+}
+
 static inline void grZebes_801DB3CC_update(grZe_BubbleEntry** base)
 {
     int k;
-    f32 left_anchor_x = grZe_8049F158[0].x;
-    f32 left_anchor_y = grZe_8049F158[0].y;
-    f32 left_bound_x = grZe_8049F140[0].x;
-    f32 left_bound_y = grZe_8049F140[0].y;
-    f32 right_anchor_y = grZe_8049F158[1].y;
-    f32 right_anchor_x = grZe_8049F158[1].x;
-    f32 right_bound_y = grZe_8049F140[1].y;
-    f32 right_bound_x = grZe_8049F140[1].x;
+    f32 left_anchor_x = grZebes_801DB3CC_get_x(&grZe_8049F158[0]);
+    f32 left_anchor_y = grZebes_801DB3CC_get_y(&grZe_8049F158[0]);
+    f32 right_anchor_x = grZebes_801DB3CC_get_x(&grZe_8049F158[1]);
+    f32 right_anchor_y = grZebes_801DB3CC_get_y(&grZe_8049F158[1]);
+    f32 left_bound_y = grZebes_801DB3CC_get_y(&grZe_8049F140[0]);
+    f32 left_bound_x = grZebes_801DB3CC_get_x(&grZe_8049F140[0]);
+    f32 right_bound_y = grZebes_801DB3CC_get_y(&grZe_8049F140[1]);
+    f32 right_bound_x = grZebes_801DB3CC_get_x(&grZe_8049F140[1]);
 
     (void) 0.0;
     for (k = 0; k < 20; (*base)++, k++) {
