@@ -161,6 +161,8 @@ static inline void Fighter_OnItemPickup(Fighter_GObj* gobj, bool catchItemFlag,
         case 4:
             ftAnim_80070FB4(gobj, bool2, 3);
             break;
+        default:
+            break;
         }
         if (catchItemFlag) {
             ftAnim_80070C48(gobj, bool3);
