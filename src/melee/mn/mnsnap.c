@@ -1044,20 +1044,25 @@ void fn_802545C4(void)
                 mnSnap_80253E90(1);
             }
         } else {
+            s32* active_slot = &mnSnap_804A0A10.active_slot;
+#ifdef MUST_MATCH
+            active_slot = active_slot;
+#endif
+
             mnSnap_804A0A10.state = 2;
             mnSnap_804A0A10.timer = 0xB;
-            mnSnap_804A0A10.active_slot = 0;
+            *active_slot = 0;
             HSD_JObjReqAnim(mnSnap_804A0A10.slot_a_jobj, 0.0F);
             HSD_JObjAnim(mnSnap_804A0A10.slot_a_jobj);
             HSD_JObjReqAnim(mnSnap_804A0A10.slot_b_jobj, 0.0F);
             HSD_JObjAnim(mnSnap_804A0A10.slot_b_jobj);
             mnSnap_804A0A10.pending_loads = 0;
             if (mnSnap_804A0A10.card_status[0] != 0) {
-                mnSnap_804A0A10.active_slot = 0;
+                *active_slot = 0;
             } else if (mnSnap_804A0A10.card_status[1] != 0) {
-                mnSnap_804A0A10.active_slot = 1;
+                *active_slot = 1;
             } else {
-                mnSnap_804A0A10.active_slot = -1;
+                *active_slot = -1;
                 mnSnap_804A0A10.dlg_timer = 9;
                 mnSnap_804A0A10.dlg_active = 1;
                 mnSnap_8025409C(0);
@@ -1078,7 +1083,7 @@ void fn_802545C4(void)
                 mnSnap_804A0A10.dlg_text->pos_x = jobj->translate.x - 6.0F;
                 lbAudioAx_80024030(3);
             }
-            mnSnap_AnimateCardSlots(&mnSnap_804A0A10.active_slot);
+            mnSnap_AnimateCardSlots(active_slot);
         }
         break;
 
