@@ -1599,10 +1599,24 @@ static inline BracketEntry* fn_8019A158_GetBracketEntry(s32 bracket_idx)
     return &lbl_80473AB8[bracket_idx];
 }
 
-/// @todo All instructions match; only the callee-saved register assignment
-/// is permuted against the target.
+typedef struct MatchEndStanding {
+    u8 pad[0x5D];
+    u8 is_big_loser;
+    u8 is_small_loser;
+    u8 pad5F[0xA8 - 0x5F];
+} MatchEndStanding;
+ASSERT_SIZE(MatchEndStanding, 0xA8);
+
+typedef struct Lbl804799D8Text {
+    u8 pad[0x4E];
+    char x4E[20];
+} Lbl804799D8Text;
+
+/// Initializes tournament bracket result state.
 void fn_8019A158(void)
 {
+    Lbl804799D8Text* base_ptr;
+    MatchEnd** x48_ptr;
     TmData* td1;
     TmData* td2;
     BracketEntry* bracket;
@@ -1621,9 +1635,11 @@ void fn_8019A158(void)
     s32 local1, local2;
     PAD_STACK(4);
 
+    base_ptr = (Lbl804799D8Text*) &lbl_804799D8;
     td1 = gm_GetTournamentData();
-    lbl_804799D8.x48 = &gm_80477738;
-    lbl_804799D8.x0 = mode = 0;
+    ((struct Lbl804799D8_t*) base_ptr)->x48 = &gm_80477738;
+    x48_ptr = &((struct Lbl804799D8_t*) base_ptr)->x48;
+    ((struct Lbl804799D8_t*) base_ptr)->x0 = mode = 0;
 
     td2 = gm_GetTournamentData();
 
@@ -1634,7 +1650,7 @@ void fn_8019A158(void)
         mode = 2;
     }
 
-    me = lbl_804799D8.x48;
+    me = *x48_ptr;
     (void) me;
     result = fn_8018F508(&local2);
     if (result == 1) {
@@ -1656,7 +1672,7 @@ void fn_8019A158(void)
     bracket_idx = fn_8018F74C();
 
     for (k = 0; k < 20; k++) {
-        lbl_804799D8.x4E[k] = 0;
+        ((struct Lbl804799D8_t*) base_ptr)->x4E[k] = 0;
     }
 
     if (mode == 1) {
@@ -1677,14 +1693,14 @@ void fn_8019A158(void)
             if (cursor[0x4E] == 3) {
                 cursor[0x4C] = 3;
             } else {
+                MatchEndStanding* standing;
                 u8 v;
-                /// @todo byte-offset walker: player_standings[i] is biased
-                /// +0x58 from the MatchEnd base the original walks from.
-                u8* p = (u8*) lbl_804799D8.x48 + i * 0xA8;
-                v = p[0x5E];
-                p[0x5D] = v;
+
+                standing = &((MatchEndStanding*) *x48_ptr)[i];
+                v = standing->is_small_loser;
+                standing->is_big_loser = v;
                 cursor[0x4C] = v;
-                if (lbl_804799D8.x48->player_standings[i].is_small_loser == 0)
+                if ((*x48_ptr)->player_standings[i].is_small_loser == 0)
                 {
                     sel = i;
                 }
@@ -1692,17 +1708,14 @@ void fn_8019A158(void)
             cursor += 0x2C;
         }
     } else {
-        bracket = fn_8019A158_GetBracketEntry(bracket_idx);
         counter = 0;
-        cursor = (u8*) bracket;
         for (i = 0; i < 4; i++) {
-            if (cursor[0x4E] == 3) {
-                cursor[0x4C] = 4;
+            if (lbl_80473AB8[bracket_idx].slots[i].x4E == 3) {
+                lbl_80473AB8[bracket_idx].slots[i].x4C = 4;
             } else {
-                cursor[0x4C] = counter;
+                lbl_80473AB8[bracket_idx].slots[i].x4C = counter;
                 counter++;
             }
-            cursor += 0x2C;
         }
 
         switch (counter) {
@@ -1728,34 +1741,35 @@ void fn_8019A158(void)
 
         {
             u8 v = lbl_80473AB8[bracket_idx].slots[0].x4C;
-            lbl_804799D8.x48->player_standings[0].is_big_loser = v;
-            lbl_804799D8.x48->player_standings[0].is_small_loser = v;
+            (*x48_ptr)->player_standings[0].is_big_loser = v;
+            (*x48_ptr)->player_standings[0].is_small_loser = v;
             v = lbl_80473AB8[bracket_idx].slots[1].x4C;
-            lbl_804799D8.x48->player_standings[1].is_big_loser = v;
-            lbl_804799D8.x48->player_standings[1].is_small_loser = v;
+            (*x48_ptr)->player_standings[1].is_big_loser = v;
+            (*x48_ptr)->player_standings[1].is_small_loser = v;
             v = lbl_80473AB8[bracket_idx].slots[2].x4C;
-            lbl_804799D8.x48->player_standings[2].is_big_loser = v;
-            lbl_804799D8.x48->player_standings[2].is_small_loser = v;
+            (*x48_ptr)->player_standings[2].is_big_loser = v;
+            (*x48_ptr)->player_standings[2].is_small_loser = v;
             v = lbl_80473AB8[bracket_idx].slots[3].x4C;
-            lbl_804799D8.x48->player_standings[3].is_big_loser = v;
-            lbl_804799D8.x48->player_standings[3].is_small_loser = v;
+            (*x48_ptr)->player_standings[3].is_big_loser = v;
+            (*x48_ptr)->player_standings[3].is_small_loser = v;
         }
 
-        cursor = (u8*) bracket;
         for (i = 0; i < 4; i++) {
-            if (cursor[0x4C] == 0) {
+            if (lbl_80473AB8[bracket_idx].slots[i].x4C == 0) {
                 sel = i;
             }
-            cursor += 0x2C;
         }
     }
 
     {
-        lbl_804799D8.x4C = sel;
-        lbl_804799D8.x4D = lbl_80473AB8[bracket_idx].slots[sel].x4E;
+        ((struct Lbl804799D8_t*) base_ptr)->x4C = sel;
+        ((struct Lbl804799D8_t*) base_ptr)->x4D =
+            lbl_80473AB8[bracket_idx].slots[sel].x4E;
 
-        if (lbl_804799D8.x4D == 0 && lbl_80473AB8[bracket_idx].x18 != 0) {
-            u8 s = lbl_804799D8.x4C;
+        if (((struct Lbl804799D8_t*) base_ptr)->x4D == 0 &&
+            lbl_80473AB8[bracket_idx].x18 != 0)
+        {
+            u8 s = ((struct Lbl804799D8_t*) base_ptr)->x4C;
             u16 val = td1->x4B8[s].x6;
             if (val <= 0x78) {
                 gm_80167858(s, (s32) val, 0x1F, 0x78);
@@ -1767,7 +1781,7 @@ void fn_8019A158(void)
         cursor = (u8*) &lbl_80473AB8[bracket_idx] + sel * 0x2C;
         {
             u8 model_idx = cursor[0x50];
-            fn_8018F00C((char*) lbl_804799D8.x4E, td1->x37[model_idx].x9);
+            fn_8018F00C(base_ptr->x4E, td1->x37[model_idx].x9);
         }
     }
 }
