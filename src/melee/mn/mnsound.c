@@ -274,6 +274,16 @@ void fn_80249A1C(HSD_GObj* arg0)
     }
 }
 
+static inline void mnSound_InitUserData(Menu* user_data, HSD_GObj* gobj)
+{
+    HSD_GObjProc* proc;
+    user_data->unk3 = gmMainLib_8015ED74();
+    user_data->text = NULL;
+    GObj_InitUserData(gobj, 0U, HSD_Free, user_data);
+    proc = HSD_GObj_SetupProc(gobj, fn_80249A1C, 0U);
+    proc->flags_3 = HSD_GObj_804D783C;
+}
+
 void mnSound_80249C08(int unused)
 {
     StaticModelDesc* model = &mnSound_804A08A8;
@@ -281,7 +291,7 @@ void mnSound_80249C08(int unused)
     HSD_GObj* gobj = GObj_Create(HSD_GOBJ_CLASS_ITEM, 7U, 0x80U);
     HSD_JObj* jobj;
     Menu* user_data;
-    HSD_GObjProc* proc;
+    UNUSED HSD_GObjProc* proc;
     HSD_JObj* sound_selection_jobj;
     HSD_JObj* channel_selection_jobj;
     HSD_JObj* volume_cursor_jobj;
@@ -302,11 +312,7 @@ void mnSound_80249C08(int unused)
     user_data->cursor = 0x14;
     user_data->unk1 = lbAudioAx_80024BD0();
     user_data->unk2 = 0U;
-    user_data->unk3 = gmMainLib_8015ED74();
-    user_data->text = NULL;
-    GObj_InitUserData(gobj, 0U, HSD_Free, user_data);
-    proc = HSD_GObj_SetupProc(gobj, fn_80249A1C, 0U);
-    proc->flags_3 = HSD_GObj_804D783C;
+    mnSound_InitUserData(user_data, gobj);
 
     {
         Menu* menu = GET_MENU(mnSound_804D6C30);
