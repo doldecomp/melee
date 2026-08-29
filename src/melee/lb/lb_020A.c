@@ -381,9 +381,7 @@ void lbBgFlash_80021410(IKState* data)
     sum_pow = sum_len * sum_pow;
     sum_pow = sum_len * sum_pow;
     sum_pow = sum_len * sum_pow;
-    len_pow = len_ab * len_ab;
-    len_pow = len_ab * len_pow;
-    len_pow = len_ab * len_pow;
+    len_pow = len_ab * (len_ab * (len_ab * len_ab));
     len_pow = len_ab * len_pow;
     len_pow = len_ab * len_pow;
     len_pow = len_ab * len_pow;
