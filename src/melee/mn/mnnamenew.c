@@ -957,7 +957,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                         char** ptrs = glyphs[(u8) sel2];
                         null_char =
                             (s8) * ((GlyphChar*) mnNameNew_NullCharacter);
-                        while (null_char != (s8) *ptrs[0]) {
+                        while ((s8) *ptrs[0] != null_char) {
                             ptrs++;
                             n++;
                         }
@@ -1174,9 +1174,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 return;
             }
         }
-        return;
-    }
-    if (buttons & 0x100) {
+    } else if (buttons & 0x100) {
         if (mn_804A04F0.hovered_selection == 0x38 ||
             mn_804A04F0.hovered_selection == 0x39)
         {
@@ -1258,11 +1256,10 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
         }
         mn_804A04F0.hovered_selection = 0x39;
         return;
-    }
-    if (buttons & 0xC0) {
+    } else if (buttons & 0xC0) {
         lbAudioAx_80024030(1);
         if (buttons & 0x40) {
-            s32 mode = data->mode;
+            u8 mode = data->mode;
 
             if (mode != 0) {
                 data->mode = (u8) (data->mode - 1);
@@ -1281,11 +1278,11 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                            (u8) mn_804A04F0.hovered_selection);
         mnNameNew_8023B314(data, (s32) mn_804A04F0.hovered_selection);
         return;
-    }
-    if (buttons & 0x20) {
+    } else if (buttons & 0x20) {
         lbAudioAx_80024030(0);
-        null_char = (s8) * ((GlyphChar*) mnNameNew_NullCharacter);
-        if (null_char == (s8) name_text[0]) {
+        if ((s8) name_text[0] ==
+            (s8) * ((GlyphChar*) mnNameNew_NullCharacter))
+        {
             n = 1;
         }
         if (n != 0) {
@@ -1296,10 +1293,12 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
             u8 cursor_pos = data->cursor_pos;
             cursor = cursor_pos;
         }
-        if (null_char != (s8) name_text[cursor * 3]) {
-            n = 1;
-        } else {
+        if ((s8) * ((GlyphChar*) mnNameNew_NullCharacter) ==
+            (s8) name_text[cursor * 3])
+        {
             n = 0;
+        } else {
+            n = 1;
         }
         if (n != 0) {
             name_text[cursor * 3] = *((GlyphChar*) mnNameNew_NullCharacter);
@@ -1315,8 +1314,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
         }
         lbAudioAx_80024030(3);
         return;
-    }
-    {
+    } else {
         u8 new_sel = mnNameNew_8023BAA8(data, (s32) buttons,
                                         (u8) mn_804A04F0.hovered_selection);
         if ((s32) new_sel != (s32) mn_804A04F0.hovered_selection) {
