@@ -2632,13 +2632,14 @@ void fn_80180630(int arg0, int arg1, int arg2, bool arg3,
     s32 var_r4;
     s32 special_score;
     s32 var_r3;
-    struct lbl_80472D28_t* state = &lbl_80472D28;
+    struct lbl_80472D28_t* state;
     u8 mask;
     u8 var_r0;
 
     special_score = 0;
     coins = arg4->x58[0].xE;
-    memzero(state, sizeof(*state));
+    memzero(&lbl_80472D28, sizeof(lbl_80472D28));
+    state = &lbl_80472D28;
     state->xD4 = -1;
     state->xD8 = 0;
     state->xE0 = -1;
