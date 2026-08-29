@@ -11,6 +11,7 @@
 #include <placeholder.h>
 
 #include "dolphin/gx/GXStruct.h"
+#include "lb/lb_013B.h"
 #include "lb/lbbgflash.h"
 #include "lb/types.h"
 

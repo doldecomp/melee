@@ -6,7 +6,6 @@
 #include "ft/inlines.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_020A.h"
-#include "lb/lbbgflash.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 

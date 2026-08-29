@@ -36,8 +36,8 @@
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_0195.h>
+#include <melee/lb/lb_0219.h>
 #include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbbgflash.h>
 #include <melee/lb/lbrefract.h>
 #include <melee/lb/lbtime.h>
 #include <melee/mn/types.h>

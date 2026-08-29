@@ -11,14 +11,9 @@
 #include <placeholder.h>
 
 #include "dolphin/gx/GXStruct.h"
-#include "ft/types.h"
 
 #include "lb/forward.h"
 
-#include "lb/lb_013B.h"
-#include "lb/types.h"
-
-#include <math.h>
 #include <baselib/wobj.h>
 
 typedef struct BgFlashState {
@@ -52,19 +47,8 @@ BgFlashData lbl_80433658;
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
-#include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
-#include <baselib/gobjuserdata.h>
 #include <baselib/hsd_3915.h>
-#include <baselib/jobj.h>
-#include <baselib/mtx.h>
-#include <baselib/objalloc.h>
-#include <baselib/quatlib.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbvector.h>
-
-/* 021C18 */ static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd,
-                                     int arg2);
 
 static GXColor lbl_804D3840 = { 0, 0, 0, 255 };
 static GXColor lbl_804D3844 = { 0, 0, 0, 0 };
