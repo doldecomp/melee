@@ -683,6 +683,8 @@ static inline float lbColl_GetY(Vec3* v)
 bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                      float p, float q, float r)
 {
+    Vec3 a1;
+    Vec3 c1;
     float diff_dc_x;
     float diff_ac_x;
     float diff_dc_y;
@@ -690,19 +692,16 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
     float diff_ba_y;
     float sqdist2_dc;
     float d_x;
-    Vec3 a1;
     float diff_ba_x;
     float sqdist2_ba;
-    Vec3 c1;
     float dot2_diff_dc_ac;
     float dot2_diff_ba_ac;
     float determinant;
     float sum_pq = p + q;
-    Vec3 a0;
+    Vec3 a0 = *a;
 
     PAD_STACK(48);
 
-    a0 = *a;
     (void) a0;
     a1 = a0;
     {
