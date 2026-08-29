@@ -427,14 +427,14 @@ static s32 lbl_804D3FC8 = 1;
 void fn_80178050(HSD_GObj* arg0)
 {
     s32 k2;
-    s32 k3;
-    ResultsData* data = &lbl_8046DBE8;
     HSD_JObj* jobj;
-    MatchEnd* match_end = fn_80174274();
+    ResultsData* data = &lbl_8046DBE8;
+    MatchEnd* match_end;
     s32 var_r24;
 
     PAD_STACK(16);
 
+    match_end = fn_80174274();
     jobj = arg0->hsd_obj;
     var_r24 = 0;
 
@@ -1712,9 +1712,7 @@ void fn_8017AA78(const u8* arg0)
         s32 a;
         s32 b;
         a = lbl_804D3FD0;
-        (void) a;
         b = lbl_804D3FD4;
-        (void) b;
         state->dim_w1[0] = a;
         state->dim_w1[1] = b;
         {

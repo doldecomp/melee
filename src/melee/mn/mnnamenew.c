@@ -1425,7 +1425,7 @@ void fn_8023D0F8(void* arg0)
     HSD_Free(arg0);
 }
 
-s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u8 arg1, u8 arg2, s32 arg3)
+s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u16 arg1, u8 arg2, s32 arg3)
 {
     GXColor* glyph_color_ptr;
     char* str;
@@ -1472,7 +1472,7 @@ s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u8 arg1, u8 arg2, s32 arg3)
     table_lower =
         AddCharacterToName_getGlyphs(layout->lower_glyphs, (u8) arg3);
     (void) table_lower;
-    for (i = 0; i < (u16) arg1; i++) {
+    for (i = 0; i < (s32) (u8) arg1; i++) {
         if ((u8) (arg3 - 0x30) <= 1U) {
             if ((i % 2) != 0) {
                 str = table_upper[i / 2];

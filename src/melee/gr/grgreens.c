@@ -1230,7 +1230,8 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
                 Vec(*positions)[6] = (Vec(*)[6]) gp->u.greens.x4;
                 float spacing;
 
-                spacing = positions[row][col].y - positions[row - 1][col].y;
+                spacing = (gp->u.greens.x4 + row * 6)[col].y -
+                          (gp->u.greens.x4 + row * 6 - 6)[col].y;
                 if (gp->u.greens.x8_blocks[row][col].x8 -
                         gp->u.greens.x8_blocks[row - 1][col].x8 <
                     spacing)
@@ -1242,59 +1243,52 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
             }
         }
 
+        if (gp->u.greens.x8_blocks[row][col].x8 <
+            (gp->u.greens.x4 + row * 6)[col].y)
         {
-            Vec* positions = gp->u.greens.x4;
-            Vec* position;
-
-            position = positions;
-            position += row * 6;
-            position += col;
-            if (gp->u.greens.x8_blocks[row][col].x8 < position->y) {
-                gp->u.greens.x8_blocks[row][col].x8 = position->y;
-                gp->u.greens.x8_blocks[row][col].status = 3;
-                gp->u.greens.x8_blocks[row][col].x1_5 = 1;
-                for (next_row = row + 1; next_row < 5; next_row++) {
-                    if (gp->u.greens.x8_blocks[next_row][col].status != 2) {
-                        break;
-                    }
-                    gp->u.greens.x8_blocks[next_row][col].x8 =
-                        ((Vec(*)[6]) gp->u.greens.x4)[next_row][col].y;
-                    gp->u.greens.x8_blocks[next_row][col].status = 3;
-                    gp->u.greens.x8_blocks[next_row][col].x1_5 = 1;
-                    pos.x = ((Vec(*)[6]) gp->u.greens.x4)[next_row][col].x;
-                    pos.y = gp->u.greens.x8_blocks[next_row][col].x8;
-                    pos.z = 0.0f;
-                    HSD_JObjSetTranslate(
-                        gp->u.greens.x8_blocks[next_row][col].xC->hsd_obj,
-                        &pos);
-                    f = 1.0f / Ground_801C0498();
-                    pos.x *= f;
-                    pos.y *= f;
-                    pos.z *= f;
-                    HSD_JObjSetTranslate(
-                        gp->u.greens.x8_blocks[next_row][col].x14, &pos);
+            gp->u.greens.x8_blocks[row][col].x8 =
+                (gp->u.greens.x4 + row * 6)[col].y;
+            gp->u.greens.x8_blocks[row][col].status = 3;
+            gp->u.greens.x8_blocks[row][col].x1_5 = 1;
+            for (next_row = row + 1; next_row < 5; next_row++) {
+                if (gp->u.greens.x8_blocks[next_row][col].status != 2) {
+                    break;
                 }
-            } else {
-                for (next_row = row + 1; next_row < 5; next_row++) {
-                    if (gp->u.greens.x8_blocks[next_row][col].status != 2) {
-                        break;
-                    }
-                    pos.x = ((Vec(*)[6]) gp->u.greens.x4)[next_row][col].x;
-                    f = ((Vec(*)[6]) gp->u.greens.x4)[next_row][col].y -
-                        ((Vec(*)[6]) gp->u.greens.x4)[next_row - 1][col].y;
-                    pos.y = f + gp->u.greens.x8_blocks[next_row - 1][col].x8;
-                    pos.z = 0.0f;
-                    gp->u.greens.x8_blocks[next_row][col].x8 = pos.y;
-                    HSD_JObjSetTranslate(
-                        gp->u.greens.x8_blocks[next_row][col].xC->hsd_obj,
-                        &pos);
-                    f = 1.0f / Ground_801C0498();
-                    pos.x *= f;
-                    pos.y *= f;
-                    pos.z *= f;
-                    HSD_JObjSetTranslate(
-                        gp->u.greens.x8_blocks[next_row][col].x14, &pos);
+                gp->u.greens.x8_blocks[next_row][col].x8 =
+                    (gp->u.greens.x4 + next_row * 6)[col].y;
+                gp->u.greens.x8_blocks[next_row][col].status = 3;
+                gp->u.greens.x8_blocks[next_row][col].x1_5 = 1;
+                pos.x = (gp->u.greens.x4 + next_row * 6)[col].x;
+                pos.y = gp->u.greens.x8_blocks[next_row][col].x8;
+                pos.z = 0.0f;
+                HSD_JObjSetTranslate(
+                    gp->u.greens.x8_blocks[next_row][col].xC->hsd_obj, &pos);
+                scale = 1.0f / Ground_801C0498();
+                pos.x *= scale;
+                pos.y *= scale;
+                pos.z *= scale;
+                HSD_JObjSetTranslate(gp->u.greens.x8_blocks[next_row][col].x14,
+                                     &pos);
+            }
+        } else {
+            for (next_row = row + 1; next_row < 5; next_row++) {
+                if (gp->u.greens.x8_blocks[next_row][col].status != 2) {
+                    break;
                 }
+                pos.x = (gp->u.greens.x4 + next_row * 6)[col].x;
+                pos.y = (gp->u.greens.x4 + next_row * 6)[col].y -
+                        (gp->u.greens.x4 + next_row * 6 - 6)[col].y +
+                        gp->u.greens.x8_blocks[next_row - 1][col].x8;
+                pos.z = 0.0f;
+                gp->u.greens.x8_blocks[next_row][col].x8 = pos.y;
+                HSD_JObjSetTranslate(
+                    gp->u.greens.x8_blocks[next_row][col].xC->hsd_obj, &pos);
+                scale = 1.0f / Ground_801C0498();
+                pos.x *= scale;
+                pos.y *= scale;
+                pos.z *= scale;
+                HSD_JObjSetTranslate(gp->u.greens.x8_blocks[next_row][col].x14,
+                                     &pos);
             }
         }
         break;
@@ -1304,7 +1298,7 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
         return;
     }
 
-    pos.x = ((Vec(*)[6]) gp->u.greens.x4)[row][col].x;
+    pos.x = (gp->u.greens.x4 + row * 6)[col].x;
     pos.y = gp->u.greens.x8_blocks[row][col].x8;
     pos.z = 0.0f;
     HSD_JObjSetTranslate(gp->u.greens.x8_blocks[row][col].xC->hsd_obj, &pos);

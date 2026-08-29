@@ -951,10 +951,18 @@ static inline f32 grKongo_801D7134_calc_angle(s32 index)
                                        grKg_803E188C[index].unk14) /
                                       6.0f))));
 
-    if (angle > MTXDegToRad(yakumono_param->unkAC)) {
-        angle = MTXDegToRad(yakumono_param->unkAC);
-    } else if (angle < -MTXDegToRad(yakumono_param->unkAC)) {
-        angle = -MTXDegToRad(yakumono_param->unkAC);
+    {
+        s32 var_ctr_1 = 3;
+        f32* p = sp44;
+        do {
+            p[0] = 0.0f;
+            p[1] = 0.0f;
+            p[2] = 0.0f;
+            p[3] = 0.0f;
+            p[4] = 0.0f;
+            p += 5;
+            var_ctr_1 -= 1;
+        } while (var_ctr_1 != 0);
     }
     return angle;
 }
@@ -1019,13 +1027,14 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
     i = 0;
     line_id = 0x28;
     do {
-        s32 current_line_id = line_id;
-        temp = table->unk14;
-        mpLib_80056758(current_line_id, 0.0f, temp, 0.0f, temp);
+        s32 id;
+        temp = entry->unk14;
+        id = line_id;
+        mpLib_80056758(id, 0.0f, temp, 0.0f, temp);
         if ((s32) i == 0) {
-            mpLib_80056758(current_line_id - 1, 0.0f, temp, 0.0f, temp);
+            mpLib_80056758(id - 1, 0.0f, temp, 0.0f, temp);
         } else if (i == 14) {
-            mpLib_80056758(current_line_id + 1, 0.0f, temp, 0.0f, temp);
+            mpLib_80056758(id + 1, 0.0f, temp, 0.0f, temp);
         }
         i++;
         line_id += 2;
