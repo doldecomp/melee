@@ -1919,7 +1919,6 @@ void psDispParticles(u32 target_link, u32 sw)
     u8 sp7A5;
     u8 sp7A4;
     s32 needs_setup;
-    GXColor chan_amb_color;
     void* sp79C;
     psdisp_Tlut tlut_obj;
     GXColor chan_mat_color;
@@ -1998,8 +1997,7 @@ void psDispParticles(u32 target_link, u32 sw)
                         prevChanMat.a = prevChanAmb.a = 0xFF;
                         chan_mat_color = prevChanMat;
                         GXSetChanMatColor(GX_COLOR0A0, chan_mat_color);
-                        chan_amb_color = prevChanAmb;
-                        GXSetChanAmbColor(GX_COLOR0A0, chan_amb_color);
+                        GXSetChanAmbColor(GX_COLOR0A0, prevChanAmb);
                         psSetupTevInvalidState();
                         psSetupTevCommon();
                         psSetColor(&prevColorPrim, 0xFF);
