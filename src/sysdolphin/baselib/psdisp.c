@@ -908,8 +908,8 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                         }
                         t = *(f32*) &it[4];
                         it += 8;
-                        converted_alpha = (s32) (255.0f - t * trail_alpha);
                         alpha = (s32) (255.0f - t * trail_alpha);
+                        converted_alpha = (s32) (255.0f - t * trail_alpha);
                         if (converted_alpha < 0) {
                             alpha = 0;
                         }
@@ -1030,12 +1030,12 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
         right_z = rvmtx[2][0] * pp->size;
         up_z = -rvmtx[2][1] * pp->size;
     } else {
-        right_x = HSD_PSDisp_804D7914 * pp->size;
         up_x = HSD_PSDisp_804D7918 * pp->size;
-        right_y = HSD_PSDisp_804D791C * pp->size;
+        right_x = HSD_PSDisp_804D7914 * pp->size;
         up_y = HSD_PSDisp_804D7920 * pp->size;
-        right_z = HSD_PSDisp_804D7924 * pp->size;
+        right_y = HSD_PSDisp_804D791C * pp->size;
         up_z = HSD_PSDisp_804D7928 * pp->size;
+        right_z = HSD_PSDisp_804D7924 * pp->size;
     }
     if ((pp->kind & Trail) || (pp->kind & DirVec)) {
         f32 x;
@@ -1690,8 +1690,8 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                         }
                         t = *(f32*) &it[4];
                         it += 8;
-                        converted_alpha = (s32) (255.0f - t * trail_alpha);
                         alpha = (s32) (255.0f - t * trail_alpha);
+                        converted_alpha = (s32) (255.0f - t * trail_alpha);
                         if (converted_alpha < 0) {
                             alpha = 0;
                         }
