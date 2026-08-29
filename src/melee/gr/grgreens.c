@@ -1232,10 +1232,11 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
             {
                 float spacing;
 
+                spacing = (gp->u.greens.x4 + row * 6)[col].y -
+                          (gp->u.greens.x4 + row * 6 - 6)[col].y;
                 if (gp->u.greens.x8_blocks[row][col].x8 -
                         gp->u.greens.x8_blocks[row - 1][col].x8 <
-                    (spacing = (gp->u.greens.x4 + col)[row * 6].y -
-                               (gp->u.greens.x4 + col)[(row - 1) * 6].y))
+                    spacing)
                 {
                     gp->u.greens.x8_blocks[row][col].status = 2;
                     gp->u.greens.x8_blocks[row][col].x8 =
@@ -1245,10 +1246,10 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
         }
 
         if (gp->u.greens.x8_blocks[row][col].x8 <
-            (gp->u.greens.x4 + col)[row * 6].y)
+            (gp->u.greens.x4 + row * 6)[col].y)
         {
             gp->u.greens.x8_blocks[row][col].x8 =
-                (gp->u.greens.x4 + col)[row * 6].y;
+                (gp->u.greens.x4 + row * 6)[col].y;
             gp->u.greens.x8_blocks[row][col].status = 3;
             gp->u.greens.x8_blocks[row][col].x1_5 = 1;
             for (next_row = row + 1; next_row < 5; next_row++) {
@@ -1256,10 +1257,10 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
                     break;
                 }
                 gp->u.greens.x8_blocks[next_row][col].x8 =
-                    (gp->u.greens.x4 + col)[next_row * 6].y;
+                    (gp->u.greens.x4 + next_row * 6)[col].y;
                 gp->u.greens.x8_blocks[next_row][col].status = 3;
                 gp->u.greens.x8_blocks[next_row][col].x1_5 = 1;
-                pos.x = (gp->u.greens.x4 + col)[next_row * 6].x;
+                pos.x = (gp->u.greens.x4 + next_row * 6)[col].x;
                 pos.y = gp->u.greens.x8_blocks[next_row][col].x8;
                 pos.z = 0.0f;
                 HSD_JObjSetTranslate(
@@ -1276,9 +1277,9 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
                 if (gp->u.greens.x8_blocks[next_row][col].status != 2) {
                     break;
                 }
-                pos.x = (gp->u.greens.x4 + col)[next_row * 6].x;
-                pos.y = (gp->u.greens.x4 + col)[next_row * 6].y -
-                        (gp->u.greens.x4 + col)[(next_row - 1) * 6].y +
+                pos.x = (gp->u.greens.x4 + next_row * 6)[col].x;
+                pos.y = (gp->u.greens.x4 + next_row * 6)[col].y -
+                        (gp->u.greens.x4 + next_row * 6 - 6)[col].y +
                         gp->u.greens.x8_blocks[next_row - 1][col].x8;
                 pos.z = 0.0f;
                 gp->u.greens.x8_blocks[next_row][col].x8 = pos.y;
@@ -1299,7 +1300,7 @@ void grGreens_80215ED8(Ground_GObj* gobj, int col, int row)
         return;
     }
 
-    pos.x = (gp->u.greens.x4 + col)[row * 6].x;
+    pos.x = (gp->u.greens.x4 + row * 6)[col].x;
     pos.y = gp->u.greens.x8_blocks[row][col].x8;
     pos.z = 0.0f;
     HSD_JObjSetTranslate(gp->u.greens.x8_blocks[row][col].xC->hsd_obj, &pos);

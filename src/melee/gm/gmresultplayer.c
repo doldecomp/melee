@@ -424,21 +424,17 @@ bool fn_80177DD0(int slot)
 
 static s32 lbl_804D3FC8 = 1;
 
-static inline MatchEnd* fn_80178050_inline(void)
-{
-    return fn_80174274();
-}
-
 void fn_80178050(HSD_GObj* arg0)
 {
-    MatchEnd* match_end;
+    s32 k2;
     HSD_JObj* jobj;
-    s32 var_r24;
     ResultsData* data = &lbl_8046DBE8;
+    MatchEnd* match_end;
+    s32 var_r24;
 
     PAD_STACK(16);
 
-    match_end = fn_80178050_inline();
+    match_end = fn_80174274();
     jobj = arg0->hsd_obj;
     var_r24 = 0;
 
@@ -493,8 +489,7 @@ void fn_80178050(HSD_GObj* arg0)
             }
 
             {
-                HSD_PadStatus* pad = HSD_PadCopyStatus;
-                s32 k2 = 0;
+                k2 = 0;
                 do {
                     u8 slot = match_end->player_standings[k2].slot_type;
                     if (slot == 0) {
@@ -502,7 +497,7 @@ void fn_80178050(HSD_GObj* arg0)
                             if (fn_80177B7C(k2) != 0) {
                                 fn_80174B4C(data, k2);
                             }
-                            if ((pad->err != 0) ||
+                            if ((HSD_PadCopyStatus[k2].err != 0) ||
                                 (HSD_PadCopyStatus[(u8) k2].trigger &
                                  PAD_BUTTON_START))
                             {
@@ -570,7 +565,7 @@ void fn_80178050(HSD_GObj* arg0)
                         }
                         if (lbl_804D3FC8 != 0) {
                             data->player_data[k2].x0_0 = 0;
-                            if ((pad->err == 0) &&
+                            if ((HSD_PadCopyStatus[k2].err == 0) &&
                                 (HSD_PadCopyStatus[(u8) k2].trigger &
                                  PAD_BUTTON_START))
                             {
@@ -579,7 +574,8 @@ void fn_80178050(HSD_GObj* arg0)
                             }
                         }
                     } else if (slot == 3) {
-                        if ((lbl_804D3FC8 != 0) && (pad->err == 0) &&
+                        if ((lbl_804D3FC8 != 0) &&
+                            (HSD_PadCopyStatus[k2].err == 0) &&
                             (HSD_PadCopyStatus[(u8) k2].trigger &
                              PAD_BUTTON_START))
                         {
@@ -588,7 +584,6 @@ void fn_80178050(HSD_GObj* arg0)
                         }
                     }
                     k2++;
-                    pad++;
                 } while (k2 < 4);
             }
 
@@ -1718,9 +1713,7 @@ void fn_8017AA78(const u8* arg0)
         s32 a;
         s32 b;
         a = lbl_804D3FD0;
-        (void) a;
         b = lbl_804D3FD4;
-        (void) b;
         state->dim_w1[0] = a;
         state->dim_w1[1] = b;
         a = lbl_804D3FD8;

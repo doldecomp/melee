@@ -878,12 +878,17 @@ void grKongo_801D6AFC(void)
     f32 sp8[15];
 
     {
+        s32 var_ctr_1 = 3;
         f32* p = sp44;
-        s32 i = 0;
         do {
-            *p++ = 0.0f;
-            i++;
-        } while (i < 15);
+            p[0] = 0.0f;
+            p[1] = 0.0f;
+            p[2] = 0.0f;
+            p[3] = 0.0f;
+            p[4] = 0.0f;
+            p += 5;
+            var_ctr_1 -= 1;
+        } while (var_ctr_1 != 0);
     }
     var_r5 = sp44;
     entries = grKg_803E188C;
@@ -1112,12 +1117,14 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
     i = 0;
     line_id = 0x28;
     do {
+        s32 id;
         temp = entry->unk14;
-        mpLib_80056758(line_id, 0.0f, temp, 0.0f, temp);
+        id = line_id;
+        mpLib_80056758(id, 0.0f, temp, 0.0f, temp);
         if ((s32) i == 0) {
-            mpLib_80056758(line_id - 1, 0.0f, temp, 0.0f, temp);
+            mpLib_80056758(id - 1, 0.0f, temp, 0.0f, temp);
         } else if (i == 14) {
-            mpLib_80056758(line_id + 1, 0.0f, temp, 0.0f, temp);
+            mpLib_80056758(id + 1, 0.0f, temp, 0.0f, temp);
         }
         i++;
         line_id += 2;
