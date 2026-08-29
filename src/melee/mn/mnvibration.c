@@ -263,6 +263,15 @@ static inline void mnVibration_AnimatePortPanel(MnVibrationData* data,
     HSD_JObjAnimAll(jobj);
 }
 
+static inline void mnVibration_AnimateNameRow(u8 row, u8 state)
+{
+    HSD_JObj* jobj;
+
+    jobj = mnVibration_GetNameRowJObj(row);
+    HSD_JObjReqAnimAll(jobj, (f32) state);
+    HSD_JObjAnimAll(jobj);
+}
+
 void mnVibration_HandleInput(HSD_GObj* gobj)
 {
     HSD_JObj* cursor_jobj;
@@ -423,9 +432,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
         }
         rumble_setting = mnVibration_GetNameRumble(name_idx);
         cursor_row = data->x0[1];
-        jobj = mnVibration_GetNameRowJObj(cursor_row);
-        HSD_JObjReqAnimAll(jobj, (f32) rumble_setting);
-        HSD_JObjAnimAll(jobj);
+        mnVibration_AnimateNameRow(cursor_row, rumble_setting);
         return;
     }
 
@@ -451,6 +458,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 base_y = HSD_JObjGetTranslationY(jobj17);
                 jobj18 = data2->jobjs[18];
                 spacing = mnVibration_GetCursorYSpacing(base_y, jobj18);
+                jobj17 = data2->jobjs[17];
                 HSD_JObjSetTranslateX(cursor_jobj,
                                       HSD_JObjGetTranslationX(jobj17));
                 HSD_JObjSetTranslateY(
@@ -489,6 +497,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 base_y = HSD_JObjGetTranslationY(jobj17);
                 jobj18 = data2->jobjs[18];
                 spacing = HSD_JObjGetTranslationY(jobj18) - base_y;
+                jobj17 = data2->jobjs[17];
                 HSD_JObjSetTranslateX(cursor_jobj,
                                       HSD_JObjGetTranslationX(jobj17));
                 HSD_JObjSetTranslateY(
@@ -499,8 +508,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                     cursor_jobj, HSD_JObjGetTranslationZ(data2->jobjs[17]));
             }
         } else if (GetNameCount() > 8) {
-            name_idx = mnVibration_GetNameSlot(data, 8);
-            if (name_idx != 0xFF) {
+            if (mnVibration_GetNameSlot(data, 8) != 0xFF) {
                 sfxMove();
                 data->scroll_offset++;
                 if (data->scroll_offset >= GetNameCount()) {
