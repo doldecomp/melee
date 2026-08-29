@@ -1541,16 +1541,24 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                 f32 tz;
                 calcTornadoLastPos(pp, &tx, &ty, &tz);
                 {
-                    f32 dy = pp->pos.y - ty;
-                    f32 dx = pp->pos.x - tx;
-                    f32 dz = pp->pos.z - tz;
+                    f32 dx;
+                    f32 dy;
+                    f32 dz;
+
+                    dy = pp->pos.y - ty;
+                    dx = pp->pos.x - tx;
+                    dz = pp->pos.z - tz;
                     vf1 = s7F8 * dz + (s800 * dx + s7FC * dy);
                     vf2 = f20 * dz + (f17 * dx + f18 * dy);
                 }
             } else {
-                f32 vy = pp->vel.y;
-                f32 vx = pp->vel.x;
-                f32 vz = pp->vel.z;
+                f32 vz;
+                f32 vx;
+                f32 vy;
+
+                vy = pp->vel.y;
+                vx = pp->vel.x;
+                vz = pp->vel.z;
                 vf1 = s7F8 * vz + (s800 * vx + s7FC * vy);
                 vf2 = f20 * vz + (f17 * vx + f18 * vy);
             }
