@@ -1499,9 +1499,9 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
             w0 = pp->appsrt->x90 +
                  (pp->appsrt->x8C * pp->pos.z +
                   (pp->appsrt->x84 * pp->pos.x + pp->appsrt->x88 * pp->pos.y));
+            f16 = prj[1] * pp->appsrt->x6C + prj[2] * pp->appsrt->x8C;
             s808 = prj[1] * pp->appsrt->ssx + prj[2] * pp->appsrt->x84;
             s804 = prj[1] * pp->appsrt->ssy + prj[2] * pp->appsrt->x88;
-            f16 = prj[1] * pp->appsrt->x6C + prj[2] * pp->appsrt->x8C;
             f20 = prj[1] * pp->appsrt->x70 + prj[2] * pp->appsrt->x90;
             f12 = prj[3] * pp->appsrt->x74 + prj[4] * pp->appsrt->x84;
             f8 = prj[3] * pp->appsrt->x78 + prj[4] * pp->appsrt->x88;
