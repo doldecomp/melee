@@ -27,6 +27,10 @@ typedef struct JpegLumaPair {
     s32 block1[0x40];
 } JpegLumaPair;
 
+typedef struct JpegByteBuffer {
+    u8 data[1];
+} JpegByteBuffer;
+
 typedef struct JpegComment {
     char data[0x15];
 } JpegComment;
@@ -1413,51 +1417,43 @@ void hsd_803B4D64(u32 arg0, u32 arg1)
     hsd_803B4D64_inline(arg0, arg1, &hsd_804D2648);
 }
 
-s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
+static inline s32 hsd_803B51C8_inline(
+    s32 image, s32 image_height, s32 image_width, char* output,
+    s32 output_capacity, const JpegMetadata* metadata, JpegComment* comment,
+    JpegHuffDc* huff_dc_luma, JpegHuffDc* huff_dc_chroma,
+    JpegHuffAc* huff_ac_luma, JpegHuffAc* huff_ac_chroma)
 {
-    JpegComment comment;
-    JpegHuffDc huff_dc_luma;
-    JpegHuffDc huff_dc_chroma;
-    JpegHuffAc huff_ac_luma;
+    s32 work_r24;
+    s32 work_r25;
     s32* work_r26_2;
     s32 scratch_r6_4;
     s32 scratch_r6_5;
     s32 scratch_r7_2;
     s32 scratch_r7_4;
     s32 quant_scale;
-    s32 work_r25;
-    s32 work_r24;
-    const JpegMetadata* const metadata = &lbl_803B9670;
-    s32 work_r3;
-    s32 work_r3_2;
-    u32 scratch_r23;
+    u16 scratch_r0;
     u8 scratch_r6_3;
     u8 scratch_r7_3;
-    JpegHuffAc huff_ac_chroma;
     struct {
         u8* base;
         JpegWork* work;
         u8* quant_table;
     } state;
-    s32* work_r4_3;
-    s32* work_r4_4;
-    u16 scratch_r0;
+    u32 scratch_r23;
     u32 comment_size;
-    s32 height;
     s32 width;
+    s32 height;
     u8* src;
-
-    PAD_STACK(0x1C);
 
     state.base = HSD_804D2648_BUF;
     state.work = (JpegWork*) state.base;
-    src = (u8*) arg0;
-    width = arg1;
-    height = arg2;
-    hsd_804D79A8 = arg4;
+    src = ((JpegByteBuffer*) image)->data;
+    width = image_width;
+    height = image_height;
+    hsd_804D79A8 = output_capacity;
     hsd_804D79AC = 0;
-    hsd_804D79A0 = (u8*) arg3;
-    hsd_804D79A4 = (u8*) arg3;
+    hsd_804D79A0 = ((JpegByteBuffer*) output)->data;
+    hsd_804D79A4 = ((JpegByteBuffer*) output)->data;
     state.quant_table = lbl_80430C40;
     state.work->data.prev_dc[0] = state.work->data.prev_dc[1] =
         state.work->data.prev_dc[2] = 0;
@@ -1475,44 +1471,44 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
         longjmp((__jmp_buf*) state.base, 1);
     }
     hsd_803B46D4();
-    comment = metadata->data.comment;
-    scratch_r23 = strlen(comment.data) + 1;
+    *comment = metadata->data.comment;
+    scratch_r23 = strlen(comment->data) + 1;
     hsd_803B3344(0xFFU);
     hsd_803B3344(0xFEU);
     comment_size = scratch_r23 + 2;
     scratch_r0 = comment_size;
     hsd_803B3344((u8) (comment_size >> 8U));
     hsd_803B3344((u8) scratch_r0);
-    hsd_803B3398(comment.data, scratch_r23);
+    hsd_803B3398(comment->data, scratch_r23);
     hsd_803B4A2C();
-    huff_dc_luma = metadata->data.huff_dc_luma;
+    *huff_dc_luma = metadata->data.huff_dc_luma;
     hsd_803B3344(0xFFU);
     hsd_803B3344(0xC4U);
     hsd_803B3344(0U);
     hsd_803B3344(0x1FU);
     hsd_803B3344(0U);
-    hsd_803B3398(huff_dc_luma.data, 0x1CU);
-    huff_dc_chroma = metadata->data.huff_dc_chroma;
+    hsd_803B3398(huff_dc_luma->data, 0x1CU);
+    *huff_dc_chroma = metadata->data.huff_dc_chroma;
     hsd_803B3344(0xFFU);
     hsd_803B3344(0xC4U);
     hsd_803B3344(0U);
     hsd_803B3344(0x1FU);
     hsd_803B3344(1U);
-    hsd_803B3398(huff_dc_chroma.data, 0x1CU);
-    huff_ac_luma = metadata->data.huff_ac_luma;
+    hsd_803B3398(huff_dc_chroma->data, 0x1CU);
+    *huff_ac_luma = metadata->data.huff_ac_luma;
     hsd_803B3344(0xFFU);
     hsd_803B3344(0xC4U);
     hsd_803B3344(0U);
     hsd_803B3344(0xB5U);
     hsd_803B3344(0x10U);
-    hsd_803B3398(huff_ac_luma.data, 0xB2U);
-    huff_ac_chroma = metadata->data.huff_ac_chroma;
+    hsd_803B3398(huff_ac_luma->data, 0xB2U);
+    *huff_ac_chroma = metadata->data.huff_ac_chroma;
     hsd_803B3344(0xFFU);
     hsd_803B3344(0xC4U);
     hsd_803B3344(0U);
     hsd_803B3344(0xB5U);
     hsd_803B3344(0x11U);
-    hsd_803B3398(huff_ac_chroma.data, 0xB2U);
+    hsd_803B3398(huff_ac_chroma->data, 0xB2U);
     {
         void (*const write_frame_header)(u32, u32) = hsd_803B4D64;
         write_frame_header(width, height);
@@ -1591,20 +1587,20 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
         for (work_r25 = 0; work_r25 < width; work_r25 += 0x10) {
             s32 work_r26;
             u8* work_r23;
-            s32 work_r3_3;
-            s32* work_r5_4;
             hsd_803B3408(src, work_r25, work_r24, width, height);
             work_r23 = state.base + ((work_r26 = 0) << 8);
             work_r23 += 0x118;
             while (work_r26 < 4) {
+                u8* scratch_r6;
                 s32* work_r5_3;
+                s32* work_r4_3;
+                s32 work_r3;
                 fn_803B376C(work_r23);
                 quant_scale = lbl_804D6398;
                 work_r4_3 = (s32*) work_r23;
                 work_r5_3 = (s32*) (state.base + 0x718);
                 for (work_r3 = 0; work_r3 < 0x40; work_r3 += 8) {
                     u8 scratch_r7;
-                    u8* scratch_r6;
                     scratch_r6 = state.quant_table + work_r3;
                     scratch_r7 = scratch_r6[0];
                     work_r5_3[0] =
@@ -1632,13 +1628,16 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
                 work_r26++;
             }
             {
+                u8* scratch_r6_2;
+                s32* work_r5_4;
+                s32* work_r4_4;
+                s32 work_r3_2;
                 u8* chroma_quant_table = state.quant_table + 0x40;
                 fn_803B376C(state.base + 0x518);
                 work_r5_4 = work_r26_2 = (s32*) (state.base + 0x718);
                 quant_scale = lbl_804D6398;
                 work_r4_4 = (s32*) (state.base + 0x518);
                 for (work_r3_2 = 0; work_r3_2 < 0x40; work_r3_2 += 8) {
-                    u8* scratch_r6_2;
                     scratch_r6_2 = chroma_quant_table + work_r3_2;
                     scratch_r7_3 = scratch_r6_2[0];
                     work_r5_4[0] =
@@ -1665,12 +1664,13 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
             }
             {
                 u8* chroma_quant_table = state.quant_table + 0x40;
+                u8* scratch_r5;
                 s32* work_r4_5;
+                s32 work_r3_3;
                 fn_803B376C(state.base + 0x618);
                 quant_scale = lbl_804D6398;
                 work_r4_5 = (s32*) (state.base + 0x618);
                 for (work_r3_3 = 0; work_r3_3 < 0x40; work_r3_3 += 8) {
-                    u8* scratch_r5;
                     scratch_r5 = chroma_quant_table + work_r3_3;
                     scratch_r6_3 = scratch_r5[0];
                     work_r26_2[0] =
@@ -1727,6 +1727,21 @@ s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
         longjmp((__jmp_buf*) state.base, 1);
     }
     return hsd_804D79A0 - hsd_804D79A4;
+}
+
+s32 hsd_803B51C8(s32 arg0, s32 arg1, s32 arg2, char* arg3, s32 arg4)
+{
+    JpegComment comment;
+    JpegHuffDc huff_dc_luma;
+    JpegHuffDc huff_dc_chroma;
+    JpegHuffAc huff_ac_luma;
+    JpegHuffAc huff_ac_chroma;
+
+    PAD_STACK(0x18);
+
+    return hsd_803B51C8_inline(
+        arg0, arg2, arg1, arg3, arg4, &lbl_803B9670, &comment, &huff_dc_luma,
+        &huff_dc_chroma, &huff_ac_luma, &huff_ac_chroma);
 }
 
 void hsd_803B5C2C(s32 arg0)
