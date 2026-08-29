@@ -4087,18 +4087,16 @@ void gm_80168FC4(void)
     lbAudioAx_80027648();
 }
 
-s32 fn_80169000(MatchEnd* arg0, u8* arg1)
+void fn_80169000(MatchEnd* arg0, u8* arg1)
 {
     u8 operand_pad[4];
     u8 handicaps[4];
     u8 positions[4];
-    u8* hp = handicaps;
     MatchEnd* p = arg0;
-    u8* sp = arg1;
     u8* hb = arg1;
     s32 count;
     s32 i;
-    UNUSED u8 pad[12];
+    UNUSED u8 pad[8];
 
     count = 0;
     for (i = 0; i < 4; i++) {
@@ -4106,9 +4104,19 @@ s32 fn_80169000(MatchEnd* arg0, u8* arg1)
             count += 1;
             positions[p->player_standings[i].is_small_loser] = i;
         }
-        *hp++ = *sp++;
+        /// @todo Matching tactic: indexing both arrays (rather than
+        /// walking `*hp++ = *sp++` through named locals) makes both copy
+        /// pointers compiler-created webs, which outrank the standings
+        /// induction variable and let the source pointer take r3.
+        handicaps[i] = arg1[i];
     }
 
+    /// @todo Matching tactic: this dead read manufactures one extra
+    /// interference edge on the long-lived `&handicaps[positions[0]]` web.
+    /// That pushes its degree at simplify-stack visit time from 28 to 29
+    /// (== K), so it is deferred a pass, coloured earlier, and takes r3
+    /// instead of r6 -- which is the whole tail register assignment.
+    (void) handicaps[positions[0]];
     if (handicaps[positions[0]] >= 2 && handicaps[positions[count - 1]] <= 8) {
         handicaps[positions[0]] -= 1;
         handicaps[positions[count - 1]] += 1;
