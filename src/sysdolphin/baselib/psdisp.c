@@ -1187,6 +1187,64 @@ static inline void psScaleAppSRTAxes(HSD_Particle* pp, Mtx mtx)
     mtx[2][2] *= pp->size;
 }
 
+/**
+ * @remarks @p always_stamp is a compile-time constant at both call sites: the
+ * point path stamps @c frameNum unconditionally under its own NULL guard, the
+ * polygon path only inside the changed-frame block. Both branches fold away.
+ */
+static inline void psUpdateAppSRT(HSD_Particle* pp, int always_stamp)
+{
+    if (pp->appsrt->frameNum != psFrameNum) {
+        f32 scale_x;
+        f32 scale_y;
+
+        if (pp->appsrt->status != PS_APPSTATUS_STILL) {
+            HSD_psAppSRT* appsrt = pp->appsrt;
+            Vec3* translate = &appsrt->translate;
+            Vec3* rotate = (Vec3*) &appsrt->rot;
+            Vec3* scale = &appsrt->scale;
+            MtxPtr mmtx = appsrt->mmtx;
+
+            HSD_MtxSRT(mmtx, scale, rotate, translate, NULL);
+        }
+        if (pp->appsrt->status == PS_APPSTATUS_ONCE) {
+            pp->appsrt->status = PS_APPSTATUS_STILL;
+        }
+        PSMTXConcat(vmtx, pp->appsrt->mmtx, (MtxPtr) &pp->appsrt->ssx);
+        scale_x = pp->appsrt->ssx * pp->appsrt->ssx +
+                  pp->appsrt->x74 * pp->appsrt->x74 +
+                  pp->appsrt->x84 * pp->appsrt->x84;
+        scale_x = sqrtf(scale_x);
+        pp->appsrt->x94 = scale_x;
+        scale_y = pp->appsrt->ssy * pp->appsrt->ssy +
+                  pp->appsrt->x78 * pp->appsrt->x78 +
+                  pp->appsrt->x88 * pp->appsrt->x88;
+        scale_y = sqrtf(scale_y);
+        pp->appsrt->x98 = scale_y;
+        if (pp->appsrt->xA2 != 0) {
+            Mtx temp_mtx;
+            Vec3 scale;
+
+            PSMTXIdentity(temp_mtx);
+            temp_mtx[0][3] = pp->appsrt->translate.x;
+            temp_mtx[1][3] = pp->appsrt->translate.y;
+            temp_mtx[2][3] = pp->appsrt->translate.z;
+            PSMTXConcat(vmtx, temp_mtx, temp_mtx);
+            HSD_MtxGetScale(temp_mtx, &scale);
+            PSMTXScale((MtxPtr) &pp->appsrt->ssx, scale.x, scale.y, scale.z);
+            pp->appsrt->x70 = temp_mtx[0][3];
+            pp->appsrt->x80 = temp_mtx[1][3];
+            pp->appsrt->x90 = temp_mtx[2][3];
+        }
+        if (!always_stamp) {
+            pp->appsrt->frameNum = psFrameNum;
+        }
+    }
+    if (always_stamp) {
+        pp->appsrt->frameNum = psFrameNum;
+    }
+}
+
 static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
 {
     GXColor draw_color;
@@ -1197,50 +1255,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
 
     psSetCurrentMtx(GX_PNMTX1);
     if (pp->appsrt != NULL) {
-        if (pp->appsrt->frameNum != psFrameNum) {
-            f32 scale_x;
-            f32 scale_y;
-
-            if (pp->appsrt->status != PS_APPSTATUS_STILL) {
-                HSD_psAppSRT* appsrt = pp->appsrt;
-                Vec3* translate = &appsrt->translate;
-                Vec3* rotate = (Vec3*) &appsrt->rot;
-                Vec3* scale = &appsrt->scale;
-
-                HSD_MtxSRT(appsrt->mmtx, scale, rotate, translate, NULL);
-            }
-            if (pp->appsrt->status == PS_APPSTATUS_ONCE) {
-                pp->appsrt->status = PS_APPSTATUS_STILL;
-            }
-            PSMTXConcat(vmtx, pp->appsrt->mmtx, (MtxPtr) &pp->appsrt->ssx);
-            scale_x = pp->appsrt->ssx * pp->appsrt->ssx +
-                      pp->appsrt->x74 * pp->appsrt->x74 +
-                      pp->appsrt->x84 * pp->appsrt->x84;
-            scale_x = sqrtf(scale_x);
-            pp->appsrt->x94 = scale_x;
-            scale_y = pp->appsrt->ssy * pp->appsrt->ssy +
-                      pp->appsrt->x78 * pp->appsrt->x78 +
-                      pp->appsrt->x88 * pp->appsrt->x88;
-            scale_y = sqrtf(scale_y);
-            pp->appsrt->x98 = scale_y;
-            if (pp->appsrt->xA2 != 0) {
-                Mtx temp_mtx;
-                Vec3 scale;
-
-                PSMTXIdentity(temp_mtx);
-                temp_mtx[0][3] = pp->appsrt->translate.x;
-                temp_mtx[1][3] = pp->appsrt->translate.y;
-                temp_mtx[2][3] = pp->appsrt->translate.z;
-                PSMTXConcat(vmtx, temp_mtx, temp_mtx);
-                HSD_MtxGetScale(temp_mtx, &scale);
-                PSMTXScale((MtxPtr) &pp->appsrt->ssx, scale.x, scale.y,
-                           scale.z);
-                pp->appsrt->x70 = temp_mtx[0][3];
-                pp->appsrt->x80 = temp_mtx[1][3];
-                pp->appsrt->x90 = temp_mtx[2][3];
-            }
-        }
-        pp->appsrt->frameNum = psFrameNum;
+        psUpdateAppSRT(pp, true);
     }
     {
         HSD_psAppSRT* appsrt = pp->appsrt;
@@ -1368,50 +1383,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
     f32 abs_angle;
     u8* it = texform;
 
-    if (pp->appsrt->frameNum != psFrameNum) {
-        f32 scale_x;
-        f32 scale_y;
-
-        if (pp->appsrt->status != PS_APPSTATUS_STILL) {
-            HSD_psAppSRT* appsrt = pp->appsrt;
-            Vec3* translate = &appsrt->translate;
-            Vec3* rotate = (Vec3*) &appsrt->rot;
-            Vec3* scale = &appsrt->scale;
-            MtxPtr mmtx = appsrt->mmtx;
-
-            HSD_MtxSRT(mmtx, scale, rotate, translate, NULL);
-        }
-        if (pp->appsrt->status == PS_APPSTATUS_ONCE) {
-            pp->appsrt->status = PS_APPSTATUS_STILL;
-        }
-        PSMTXConcat(vmtx, pp->appsrt->mmtx, (MtxPtr) &pp->appsrt->ssx);
-        scale_x = pp->appsrt->ssx * pp->appsrt->ssx +
-                  pp->appsrt->x74 * pp->appsrt->x74 +
-                  pp->appsrt->x84 * pp->appsrt->x84;
-        scale_x = sqrtf(scale_x);
-        pp->appsrt->x94 = scale_x;
-        scale_y = pp->appsrt->ssy * pp->appsrt->ssy +
-                  pp->appsrt->x78 * pp->appsrt->x78 +
-                  pp->appsrt->x88 * pp->appsrt->x88;
-        scale_y = sqrtf(scale_y);
-        pp->appsrt->x98 = scale_y;
-        if (pp->appsrt->xA2 != 0) {
-            Mtx temp_mtx;
-            Vec3 scale;
-
-            PSMTXIdentity(temp_mtx);
-            temp_mtx[0][3] = pp->appsrt->translate.x;
-            temp_mtx[1][3] = pp->appsrt->translate.y;
-            temp_mtx[2][3] = pp->appsrt->translate.z;
-            PSMTXConcat(vmtx, temp_mtx, temp_mtx);
-            HSD_MtxGetScale(temp_mtx, &scale);
-            PSMTXScale((MtxPtr) &pp->appsrt->ssx, scale.x, scale.y, scale.z);
-            pp->appsrt->x70 = temp_mtx[0][3];
-            pp->appsrt->x80 = temp_mtx[1][3];
-            pp->appsrt->x90 = temp_mtx[2][3];
-        }
-        pp->appsrt->frameNum = psFrameNum;
-    }
+    psUpdateAppSRT(pp, false);
     {
         Mtx draw_mtx;
         f32 app_cur_x;
@@ -1948,7 +1920,7 @@ void psDispParticles(u32 target_link, u32 sw)
     u32 prev_kind;
     HSD_Particle* pp;
     /// @todo Recover this stack space from the original inline hierarchy.
-    PAD_STACK(0x8);
+    PAD_STACK(0x4);
 
     alpha_compare_mode = 0;
     prev_tex_interp_near = 0;
