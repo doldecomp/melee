@@ -1111,39 +1111,47 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
     return 1;
 }
 
-s32 fn_8017D9C0(const u8* used_ckinds, const u8* preset_ckinds)
+#ifdef MUST_MATCH
+#pragma opt_propagation off
+#endif
+static inline s32 pick_random_ckind(u8* arr, const u8* used_ckinds,
+                                    const u8* preset_ckinds)
 {
-    u8* base;
-    u8* p;
-    s32 i;
-    s32 j;
+    struct {
+        s32 count;
+        u8* cursor;
+    } scan;
     u8 temp;
+    s32 j;
+    s32 i;
     s32 swap_idx;
     u8 ckind;
     s32 used_idx;
     s32 preset_idx;
-    s32 len;
+    u8* base;
+    u8* w;
+    u8* w2;
 
-    PAD_STACK(8);
-
-    base = lbl_803D79F0;
-    p = lbl_803D79F0;
-    len = 0;
-    while ((s32) *p != CHKIND_NONE) {
-        p++;
-        len++;
+    base = arr;
+    scan.cursor = base;
+    scan.count = 0;
+    while ((s32) *scan.cursor != CHKIND_NONE) {
+        scan.cursor++;
+        scan.count++;
     }
 
-    for (j = 0; j < len; j++) {
-        temp = lbl_803D79F0[j];
-        swap_idx = HSD_Randi(len);
-        lbl_803D79F0[j] = base[swap_idx];
+    w = base;
+    for (j = 0; j < scan.count; j++) {
+        temp = *w;
+        swap_idx = HSD_Randi(scan.count);
+        *w++ = base[swap_idx];
         base[swap_idx] = temp;
     }
 
-    for (i = 0; i < len; i++) {
-        if (gm_IsCKindUnlocked(((u8*) base)[i]) != 0) {
-            ckind = ((u8*) base)[i];
+    w2 = base;
+    for (i = 0; i < scan.count; i++) {
+        if (gm_IsCKindUnlocked(*w2) != 0) {
+            ckind = *w2;
             for (used_idx = 0; used_idx < 4; used_idx++) {
                 if ((s8) ckind == (s8) used_ckinds[used_idx]) {
                     used_idx = -1;
@@ -1162,10 +1170,20 @@ s32 fn_8017D9C0(const u8* used_ckinds, const u8* preset_ckinds)
                 }
             }
         }
+        w2++;
     }
 
     return CHKIND_NONE;
 }
+
+s32 fn_8017D9C0(const u8* used_ckinds, const u8* preset_ckinds)
+{
+    return pick_random_ckind(lbl_803D79F0, used_ckinds, preset_ckinds);
+}
+#ifdef MUST_MATCH
+#pragma opt_propagation reset
+#pragma dont_inline on
+#endif
 
 void gm_8017DB58(struct Unk1PData_x24* arg0)
 {
@@ -1250,6 +1268,9 @@ s32 gm_8017DB88(void* arg0, u8 arg1, s32 arg2, s32 arg3, u8* arg4, u8 arg5,
         return count;
     }
 }
+#ifdef MUST_MATCH
+#pragma dont_inline off
+#endif
 
 s32 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1, u8 arg2)
 {
