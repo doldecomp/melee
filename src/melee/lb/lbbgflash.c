@@ -180,6 +180,15 @@ void fn_8001FC08(void)
     }
 }
 
+/// @todo .sdata2 order hack: the signed int-to-float conversion constant,
+/// with no signed conversion left in the TU to allocate it.
+#ifdef MUST_MATCH
+static void sdata2_order(void)
+{
+    (void) 4503601774854144.0;
+}
+#endif
+
 void fn_8001FEC4(HSD_GObj* gobj, s32 code)
 {
     BgFlashData* data = &lbl_80433658;
@@ -191,7 +200,6 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
         return;
     }
 
-    (void) 4503601774854144.0;
     hsd_80391A04(1.0f, 1.0f, 1);
     mode = data->state.mode;
 
