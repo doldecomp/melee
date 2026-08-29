@@ -925,6 +925,13 @@ static inline void mnSnap_AnimateCardSlots(const s32* active_slot)
     } while (i < 2);
 }
 
+static inline void mnSnap_UpdateSlotStatus(s32 slot)
+{
+    if (lbSnap_8001D338(slot) != 0) {
+        mnSnap_80253E90(slot);
+    }
+}
+
 /// Main per-frame update for the Snap menu. Handles all state transitions
 /// including slot selection, photo browsing, copy/move/delete operations,
 /// and dialog confirmations via a large switch on snap->state.
@@ -1332,10 +1339,7 @@ void fn_802545C4(void)
         break;
 
     case 3:
-        slot = mnSnap_804A0A10.active_slot;
-        if (lbSnap_8001D338(slot) != 0) {
-            mnSnap_80253E90(slot);
-        }
+        mnSnap_UpdateSlotStatus(mnSnap_804A0A10.active_slot);
         if (mnSnap_804A0A10.dlg_result != 0) {
             sfxBack();
         }
@@ -1934,10 +1938,7 @@ void fn_802545C4(void)
                 mnSnap_804A0A10.dlg_text = NULL;
             }
         } else {
-            s32 other_slot = mnSnap_804A0A10.active_slot ^ 1;
-            if (lbSnap_8001D338(other_slot) != 0) {
-                mnSnap_80253E90(other_slot);
-            }
+            mnSnap_UpdateSlotStatus(mnSnap_804A0A10.active_slot ^ 1);
             if (mnSnap_804A0A10.card_status[mnSnap_804A0A10.active_slot ^ 1] !=
                 0)
             {
@@ -1963,10 +1964,7 @@ void fn_802545C4(void)
                 mnSnap_804A0A10.dlg_text = NULL;
             }
         } else {
-            s32 other_slot = mnSnap_804A0A10.active_slot ^ 1;
-            if (lbSnap_8001D338(other_slot) != 0) {
-                mnSnap_80253E90(other_slot);
-            }
+            mnSnap_UpdateSlotStatus(mnSnap_804A0A10.active_slot ^ 1);
             if (mnSnap_804A0A10.card_status[mnSnap_804A0A10.active_slot ^ 1] ==
                 0)
             {
@@ -2201,12 +2199,7 @@ void fn_802545C4(void)
     case 21:
         if (mnSnap_804A0A10.dlg_result == 1) {
             s16 card_status;
-            {
-                s32 other_slot = mnSnap_804A0A10.active_slot ^ 1;
-                if (lbSnap_8001D338(other_slot) != 0) {
-                    mnSnap_80253E90(other_slot);
-                }
-            }
+            mnSnap_UpdateSlotStatus(mnSnap_804A0A10.active_slot ^ 1);
             card_status =
                 mnSnap_804A0A10.card_status[mnSnap_804A0A10.active_slot ^ 1];
             if (card_status == 0) {
@@ -2306,12 +2299,7 @@ void fn_802545C4(void)
             }
         } else {
             s16 card_status;
-            {
-                s32 other_slot = mnSnap_804A0A10.active_slot ^ 1;
-                if (lbSnap_8001D338(other_slot) != 0) {
-                    mnSnap_80253E90(other_slot);
-                }
-            }
+            mnSnap_UpdateSlotStatus(mnSnap_804A0A10.active_slot ^ 1);
             card_status =
                 mnSnap_804A0A10.card_status[mnSnap_804A0A10.active_slot ^ 1];
             if (card_status != 0) {
@@ -2398,12 +2386,7 @@ void fn_802545C4(void)
             }
         } else {
             s16 card_status;
-            {
-                s32 other_slot = mnSnap_804A0A10.active_slot ^ 1;
-                if (lbSnap_8001D338(other_slot) != 0) {
-                    mnSnap_80253E90(other_slot);
-                }
-            }
+            mnSnap_UpdateSlotStatus(mnSnap_804A0A10.active_slot ^ 1);
             card_status =
                 mnSnap_804A0A10.card_status[mnSnap_804A0A10.active_slot ^ 1];
             if (card_status == 0) {
