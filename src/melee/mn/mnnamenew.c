@@ -569,64 +569,27 @@ s32 mnNameNew_8023BAA8(NameNewEntry* arg0, s32 arg1, u8 arg2)
     return (s32) arg2;
 }
 
-static inline s8 CopyAutoNameText(char* output, s32 pick)
+inline u8 GetAutoNameCharacter(u8** names, s32 char_idx)
 {
-    s32 name_idx;
-    u8 ch;
-    u8** name_ptr;
-    char* text;
-    s32 char_idx;
-    s8 null_ch;
-
-    name_idx = 0;
-    char_idx = name_idx;
-    output[0] = *mnNameNew_NullCharacter;
-    text = output;
-    output[3] = *mnNameNew_NullCharacter;
-    output[6] = *mnNameNew_NullCharacter;
-    output[9] = *mnNameNew_NullCharacter;
-
-    name_ptr = &AutoNamesList[pick];
-    while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
-           (s8) (ch = (*name_ptr)[char_idx]))
-    {
-        text[0] = ch;
-        text[1] = (*name_ptr)[char_idx + 1];
-        text[2] = *mnNameNew_NullCharacter;
-        char_idx += 2;
-        name_idx++;
-        text += 3;
-    }
-
-    output[name_idx * 3] = null_ch;
-    return null_ch;
+    return (*names)[char_idx];
 }
 
-static inline void UpdateAutoNameHistory(NameNewEntry* data, s32 pick)
+static inline s32 PickAutoNameInline(HSD_GObj* arg0)
 {
-    u8 tmp;
-    s32 i;
-
-    tmp = data->auto_history[0];
-    data->auto_history[0] = (u8) pick;
-    for (i = 1; i < 5; i++) {
-        u8 next = data->auto_history[i];
-        data->auto_history[i] = tmp;
-        tmp = next;
-    }
-}
-
-s32 PickAutoName(HSD_GObj* arg0)
-{
-    NameNewEntry* data;
     char* cur_text;
+    NameNewEntry* data;
     u8** names;
     s32 count;
     s32 pick;
     s32 dup;
+    u8** name_ptr;
+    char* text;
+    s32 char_idx;
+    u8 ch;
     s8 null_ch;
-
-    PAD_STACK(32);
+    u8 tmp;
+    s32 name_idx;
+    s32 i;
 
     data = arg0->user_data;
     cur_text = mnNameNew_CurrentNameText;
@@ -657,10 +620,43 @@ s32 PickAutoName(HSD_GObj* arg0)
         }
     } while (dup != 0);
 
-    null_ch = CopyAutoNameText(cur_text, pick);
-    UpdateAutoNameHistory(data, pick);
+    name_idx = 0;
+    char_idx = name_idx;
+    cur_text[0] = *mnNameNew_NullCharacter;
+    text = cur_text;
+    cur_text[3] = *mnNameNew_NullCharacter;
+    cur_text[6] = *mnNameNew_NullCharacter;
+    cur_text[9] = *mnNameNew_NullCharacter;
+
+    name_ptr = &AutoNamesList[pick];
+    while ((null_ch = (s8) *mnNameNew_NullCharacter) !=
+           (s8) (ch = GetAutoNameCharacter(name_ptr, char_idx)))
+    {
+        text[0] = ch;
+        text[1] = GetAutoNameCharacter(name_ptr, char_idx + 1);
+        text[2] = *mnNameNew_NullCharacter;
+        char_idx += 2;
+        name_idx++;
+        text += 3;
+    }
+
+    cur_text[name_idx * 3] = null_ch;
+
+    tmp = data->auto_history[0];
+    data->auto_history[0] = (u8) pick;
+    for (i = 1; i < 5; i++) {
+        u8 next = data->auto_history[i];
+        data->auto_history[i] = tmp;
+        tmp = next;
+    }
 
     return (s32) null_ch;
+}
+
+s32 PickAutoName(HSD_GObj* arg0)
+{
+    PAD_STACK(16);
+    return PickAutoNameInline(arg0);
 }
 
 #line 779 "mnnamenew.c"
