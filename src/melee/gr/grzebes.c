@@ -1545,6 +1545,11 @@ void grZebes_801DAE70(s32 arg0, u8 arg1, f32 x, f32 y, f32 scale)
     }
 }
 
+static inline Ground* grZebes_801DB088_GetGround(HSD_GObj* gobj)
+{
+    return GET_GROUND(gobj);
+}
+
 static inline s16 grZebes_801DB088_GetTimer(s32 arg1)
 {
     return grZe_8049F170[arg1].x02_timer;
@@ -1558,7 +1563,7 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
         HSD_GObj* gobj = grZe_8049F170[arg1].x20_gobj;
 
         if (gobj != NULL) {
-            Ground* bgp = GET_GROUND(gobj);
+            Ground* bgp = grZebes_801DB088_GetGround(gobj);
 
             if (bgp != NULL) {
                 if (bgp->u.zebes3.xC4 != NULL) {
