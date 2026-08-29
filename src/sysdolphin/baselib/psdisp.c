@@ -1237,8 +1237,9 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
     Mtx scratch_mtx;
     Vec3 scratch_scale;
     Vec3 cur_pos;
-    Vec3 prev_pos;
-    f32 ax;
+    f32 prev_x;
+    f32 prev_y;
+    f32 prev_z;
     s32 w;
 
     psSetCurrentMtx(GX_PNMTX1);
@@ -1268,32 +1269,31 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
         f32 z;
 
         calcTornadoLastPos(pp, &x, &y, &z);
-        prev_pos.x =
+        prev_x =
             pp->appsrt->x70 + (pp->appsrt->x6C * z +
                                (pp->appsrt->ssx * x + pp->appsrt->ssy * y));
-        prev_pos.y =
+        prev_y =
             pp->appsrt->x80 + (pp->appsrt->x7C * z +
                                (pp->appsrt->x74 * x + pp->appsrt->x78 * y));
-        prev_pos.z =
+        prev_z =
             pp->appsrt->x90 + (pp->appsrt->x8C * z +
                                (pp->appsrt->x84 * x + pp->appsrt->x88 * y));
     } else {
         f32 dy = pp->pos.y - pp->vel.y;
         f32 dx = pp->pos.x - pp->vel.x;
         f32 dz = pp->pos.z - pp->vel.z;
-        prev_pos.x =
+        prev_x =
             pp->appsrt->x70 + (pp->appsrt->x6C * dz +
                                (pp->appsrt->ssx * dx + pp->appsrt->ssy * dy));
-        prev_pos.y =
+        prev_y =
             pp->appsrt->x80 + (pp->appsrt->x7C * dz +
                                (pp->appsrt->x78 * dy + pp->appsrt->x74 * dx));
-        prev_pos.z =
+        prev_z =
             pp->appsrt->x90 + (pp->appsrt->x8C * dz +
                                (pp->appsrt->x84 * dx + pp->appsrt->x88 * dy));
     }
 
-    ax = pp->size > 42.5 ? 255.0f : 6.0f * pp->size;
-    w = (s32) ax;
+    w = (s32) ((pp->size > 42.5) ? 255.0f : 6.0f * pp->size);
     if (pp->kind & Trail) {
         GXColor draw_color;
 
@@ -1309,9 +1309,9 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
             setVtxDesc(3);
             GXBegin(GX_LINES, GX_VTXFMT3, 2);
         }
-        GXWGFifo.f32 = prev_pos.x;
-        GXWGFifo.f32 = prev_pos.y;
-        GXWGFifo.f32 = prev_pos.z;
+        GXWGFifo.f32 = prev_x;
+        GXWGFifo.f32 = prev_y;
+        GXWGFifo.f32 = prev_z;
         {
             u8 a = draw_color.a;
             f32 alpha = (f32) a * pp->trail;
