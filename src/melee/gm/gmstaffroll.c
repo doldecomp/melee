@@ -702,8 +702,8 @@ void fn_801AB200(HSD_GObj* gobj)
     s32 tally_color;
     GXColor tally_color2;
     HSD_GObj* leaf;
-    HSD_JObj* ptcl_jobj;
-    HSD_JObj* ptcl_jobj2;
+    f32 fov_scale;
+    f32 offset1, offset2;
     HSD_JObj* ptcl_jobj3;
     s32 selected;
     s32 button;
@@ -728,10 +728,10 @@ void fn_801AB200(HSD_GObj* gobj)
     s32 line_num;
     HSD_Generator* gen;
     HSD_psAppSRT* appsrt;
-    f32 fov_scale;
+    HSD_JObj* ptcl_jobj;
     f32 half_size;
     f32 highlight_val;
-    f32 offset1, offset2;
+    HSD_JObj* ptcl_jobj2;
     HSD_Text* text;
     HSD_Text* tally_text;
     PAD_STACK(72);
