@@ -811,8 +811,8 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
     f32 right_y;
     f32 right_x;
     f32 right_z;
-    f32 up_x;
     f32 up_y;
+    f32 up_x;
     f32 up_z;
     f32 angle;
     f32 x;
