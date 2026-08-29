@@ -47,6 +47,12 @@ struct grBigBlueRoute_8020DA9C_t {
     /* +8 */ int x8;
 };
 
+/* car_info stores 31 RouteEntry records in its 0x554-byte allocation. */
+union grBigBlueRoute_RouteStorage {
+    RouteEntry entries[31];
+    u8 bytes[0x554];
+};
+
 /* 20DA9C */ static int
 grBigBlueRoute_8020DA9C(struct grBigBlueRoute_8020DA9C_t*);
 
@@ -558,20 +564,21 @@ s32 grBigBlueRoute_8020C530(Ground_GObj* arg0)
     HSD_ASSERT(0X2E5, 0);
 }
 
-/// @todo Register allocation and addressing-mode choices for RouteEntry
-/// stores.
+/// @todo The initial Ground load is coalesced directly into r31 instead of
+/// passing through r6.
+#define GRBB_ROUTE_ENTRY_AT(car_info, offset)                         \
+    ((RouteEntry*) &((union grBigBlueRoute_RouteStorage*) (car_info)) \
+                        ->bytes[offset])
 static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
                                              Ground_GObj* gobj)
 {
-    PAD_STACK(8);
-
     if (route_idx == 0) {
         route_idx = 30;
         ((RouteEntry*) gp->u.car.car_info)[30].flags.b1 = 1;
         gp->u.car.x10A = yakumono_param->x4C;
     } else {
-        s32 max_val;
         s32 min_val;
+        s32 max_val;
         s32 new_timer;
 
         route_idx = grBigBlueRoute_8020C530(gobj);
@@ -594,46 +601,47 @@ static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
     }
 
     if (route_idx != -1) {
-        // probably an inline of some sort
-        RouteEntry* re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
+        s32 route = route_idx;
+        s32 offset = route * sizeof(RouteEntry);
+        RouteEntry* re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset);
 
-        (&((RouteEntry*) gp->u.car.car_info)[route_idx])->flags.b0 = 1;
-        (&((RouteEntry*) gp->u.car.car_info)[route_idx])->flags.b6 = 0;
-        (&((RouteEntry*) gp->u.car.car_info)[route_idx])->flags.b2_5 = 1;
+        GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset)->flags.b0 = 1;
+        GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset)->flags.b6 = 0;
+        GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset)->flags.b2_5 = 1;
 
-        re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
+        re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset);
         re->x4 = 1.0F;
 
-        re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
+        re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset);
         re->x8 = yakumono_param->x20;
 
-        re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
+        re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset);
         re->xC = 0.5F;
 
         {
             f32 rand = HSD_Randf();
-            re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
+            re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset);
             re->x10 = rand;
         }
 
-        re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
+        re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset);
         re->x14 = 0.0F;
 
-        re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
+        re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset);
         re->x18 = yakumono_param->x3C;
 
-        re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
+        re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset);
         (void) re;
         re->x1C = 0.0F;
 
         {
             f32 rand = HSD_Randf();
-            re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
+            re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset);
             (void) re;
             re->x20 = 5.2359877f * rand - 2.6179938f;
         }
 
-        if (!((RouteEntry*) gp->u.car.car_info)[route_idx].flags.b1) {
+        if (!GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset)->flags.b1) {
             HSD_JObj* root = gobj->hsd_obj;
             if (root != NULL) {
                 HSD_JObj* jobj;
@@ -645,7 +653,7 @@ static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
 
                 if (jobj != NULL) {
                     s32 i = 0;
-                    while (i < route_idx && jobj != NULL) {
+                    while (i < route && jobj != NULL) {
                         i++;
                         if (jobj == NULL) {
                             jobj = NULL;
@@ -666,12 +674,12 @@ static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
                             0, 1, gp, jobj,
                             (void (*)(Item_GObj*, Ground*)) fn_8020DEAC, NULL,
                             NULL);
-                        re = &((RouteEntry*) gp->u.car.car_info)[route_idx];
+                        re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset);
                         re->x28 = (void*) item;
                         if (item != NULL) {
                             RouteEntry* route_entries = gp->u.car.car_info;
-                            grMaterial_801C8E28(
-                                (HSD_GObj*) route_entries[route_idx].x28);
+                            re = GRBB_ROUTE_ENTRY_AT(route_entries, offset);
+                            grMaterial_801C8E28((HSD_GObj*) re->x28);
                         }
                     }
                 }
@@ -682,11 +690,12 @@ static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
 
     gp->u.car.x108++;
 }
+#undef GRBB_ROUTE_ENTRY_AT
 
 void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    PAD_STACK(8);
+    Ground* spawn_gp = gobj->user_data;
 
     if (!((f32) gp->u.car.x108 < 1.0f + yakumono_param->x40)) {
         return;
@@ -696,7 +705,7 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
         return;
     }
 
-    grBigBlueRoute_SpawnRoute(gp->u.car.x108, gp, gobj);
+    grBigBlueRoute_SpawnRoute(gp->u.car.x108, spawn_gp, gobj);
 }
 
 static const Vec3 grBb_Route_803B83E0 = { 0.0f, 1.0f, 0.0f };
