@@ -818,7 +818,6 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
     f32 x;
     f32 y;
     f32 z;
-    Mtx mtx;
 
     x = pp->pos.x;
     y = pp->pos.y;
@@ -928,6 +927,7 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
     abs_angle = angle;
     *(s32*) &abs_angle &= 0x7FFFFFFF;
     if (abs_angle > 0.01) {
+        Mtx mtx;
         Vec3 axis;
 
         f32 t1;
