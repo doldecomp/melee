@@ -1915,13 +1915,13 @@ static inline void psUpdateProjectionCache(f32 perspective)
 #endif
 void psDispParticles(u32 target_link, u32 sw)
 {
-    s32 needs_setup;
     s32 sp7B4;
     void* sp7B0;
     u32 sp7AC;
     u32 sp7A8;
     u8 sp7A5;
     u8 sp7A4;
+    s32 needs_setup;
     GXColor chan_amb_color;
     void* sp79C;
     psdisp_Tlut tlut_obj;
