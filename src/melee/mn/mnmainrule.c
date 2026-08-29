@@ -1094,7 +1094,6 @@ HSD_GObj* mn_80230E38(int arg0)
     HSD_JObj* root_jobj;
     StaticModelDesc** desc_ptr;
     u16* sub_count_ptr;
-    PAD_STACK(12);
 
     selected = (u8) mn_804A04F0.hovered_selection;
     num_options = mn_803EB6B0[13].selection_count;
@@ -1221,7 +1220,7 @@ HSD_GObj* mn_80230E38(int arg0)
                     } time_indices;
                     u8* index_ptr;
 
-                    PAD_STACK(0x18);
+                    PAD_STACK(0x28);
 
                     time_indices.packed.bytes4 = mn_804DBE10;
                     time_indices.packed.bytes2 = mn_804DBE14;
