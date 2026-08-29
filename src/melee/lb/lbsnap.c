@@ -230,7 +230,10 @@ void lbSnap_8001DA5C(const u8* arg0)
                 src_x, src_y_accum / 64 + 96, 160)];
             *(u16*) &dst_col[lbSnap_GetTiledYOff(tile_column, dst_y + 16)] =
                 RGB565_TO_RGB5A3(pixel);
-            src_y_accum += 448;
+            {
+                int next_src_y_accum = src_y_accum + 448;
+                src_y_accum = next_src_y_accum;
+            }
 
             pixel = *(u16*) &arg0[lbSnap_GetTiledRGBOffset(
                 src_x, src_y_accum / 64 + 96, 160)];
