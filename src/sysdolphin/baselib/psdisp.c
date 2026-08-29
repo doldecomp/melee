@@ -1269,21 +1269,17 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
     }
     {
         HSD_psAppSRT* appsrt = pp->appsrt;
-        f32 pos_y;
-        f32 transformed_x;
-        f32 transformed_z;
+        f32 y_component;
 
-        cur_pos.x = appsrt->ssy * (pos_y = pp->pos.y);
-        cur_pos.y = appsrt->x78 * pos_y;
-        cur_pos.z = appsrt->x88 * pos_y;
+        cur_pos.x = appsrt->ssy * (y_component = pp->pos.y);
+        cur_pos.y = appsrt->x78 * y_component;
+        cur_pos.z = appsrt->x88 * y_component;
         cur_pos.x = appsrt->ssx * pp->pos.x + cur_pos.x;
-        cur_pos.z = (cur_pos.y = appsrt->x74 * pp->pos.x + cur_pos.y,
+        cur_pos.z = (y_component = appsrt->x74 * pp->pos.x + cur_pos.y,
                      appsrt->x84 * pp->pos.x + cur_pos.z);
-        transformed_x = appsrt->x6C * pp->pos.z + cur_pos.x;
-        cur_pos.x = transformed_x;
-        cur_pos.y = appsrt->x7C * pp->pos.z + cur_pos.y;
-        transformed_z = appsrt->x8C * pp->pos.z + cur_pos.z;
-        cur_pos.z = transformed_z;
+        cur_pos.x = appsrt->x6C * pp->pos.z + cur_pos.x;
+        cur_pos.y = appsrt->x7C * pp->pos.z + y_component;
+        cur_pos.z = appsrt->x8C * pp->pos.z + cur_pos.z;
         cur_pos.x = appsrt->x70 + cur_pos.x;
         cur_pos.y = appsrt->x80 + cur_pos.y;
         cur_pos.z = appsrt->x90 + cur_pos.z;
@@ -1405,20 +1401,19 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
         f32 app_cur_x;
         f32 app_cur_y;
         f32 app_cur_z;
+        f32 pos_x;
+        f32 pos_y;
 
         PSMTXCopy((MtxPtr) &pp->appsrt->ssx, draw_mtx);
-        app_cur_x =
-            draw_mtx[0][3] +
-            (draw_mtx[0][2] * pp->pos.z +
-             (draw_mtx[0][0] * pp->pos.x + draw_mtx[0][1] * pp->pos.y));
-        app_cur_y =
-            draw_mtx[1][3] +
-            (draw_mtx[1][2] * pp->pos.z +
-             (draw_mtx[1][0] * pp->pos.x + draw_mtx[1][1] * pp->pos.y));
-        app_cur_z =
-            draw_mtx[2][3] +
-            (draw_mtx[2][2] * pp->pos.z +
-             (draw_mtx[2][0] * pp->pos.x + draw_mtx[2][1] * pp->pos.y));
+        app_cur_x = draw_mtx[0][3] + (draw_mtx[0][2] * pp->pos.z +
+                                      (draw_mtx[0][0] * (pos_x = pp->pos.x) +
+                                       draw_mtx[0][1] * (pos_y = pp->pos.y)));
+        app_cur_y = draw_mtx[1][3] +
+                    (draw_mtx[1][2] * pp->pos.z +
+                     (draw_mtx[1][0] * pos_x + draw_mtx[1][1] * pos_y));
+        app_cur_z = draw_mtx[2][3] +
+                    (draw_mtx[2][2] * pp->pos.z +
+                     (draw_mtx[2][0] * pos_x + draw_mtx[2][1] * pos_y));
         cur_pos.x = app_cur_x;
         cur_pos.y = app_cur_y;
         cur_pos.z = app_cur_z;
