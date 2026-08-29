@@ -12,6 +12,7 @@
 #include <placeholder.h>
 
 #include "ft/types.h"
+#include "lb/types.h"
 
 #include <math.h>
 #include <dolphin/mtx.h>
@@ -245,6 +246,7 @@ static inline f32 sqrtf_store(f32 x, volatile f32* y)
 void lbBgFlash_80021410(IKState* data)
 {
     u8 pad_hi[32];
+    f32 one;
     Vec3 axis;
     u8 pad_mid[16];
     Vec3 diff_pos0_pos1;
@@ -270,12 +272,15 @@ void lbBgFlash_80021410(IKState* data)
     f32 two_a;
     f32 cos1;
     f32 cos2;
+    f32 ten;
+    f32 eleven;
     f32 acos1;
     f32 acos2;
     f64 rem;
     f32 dx;
     f32 dz;
     f32 dy;
+    f64 pi;
     Vec3* pDiff;
     PAD_STACK(8);
 
@@ -331,7 +336,7 @@ void lbBgFlash_80021410(IKState* data)
     angle1 = lbVector_Angle(&temp_delta, &pos1_from_pos0);
 
     lbVector_Diff(&data->pos2, &data->pos1, &temp_delta);
-    angle2 = (f32) (3.141592653589793 -
+    angle2 = (f32) ((pi = 3.141592653589793) -
                     lbVector_Angle(&temp_delta, &pos1_from_pos0));
 
     dx = data->pos0.x - data->pos4.x;
@@ -369,7 +374,7 @@ void lbBgFlash_80021410(IKState* data)
     len_bc = data->len0;
     len_ac = data->len1;
 
-    sum_len = (10.0f * (len_bc + len_ac)) / 11.0f;
+    sum_len = ((ten = 10.0f) * (len_bc + len_ac)) / (eleven = 11.0f);
     sum_pow = sum_len * sum_len;
     sum_pow = sum_len * sum_pow;
     sum_pow = sum_len * sum_pow;
@@ -390,7 +395,7 @@ void lbBgFlash_80021410(IKState* data)
     len_pow = len_ab * len_pow;
     len_pow = len_ab * len_pow;
     if (len_ab > sum_len) {
-        len_ab = ((11.0f * sum_len) / 10.0f) + (-sum_pow / (10.0f * len_pow));
+        len_ab = ((eleven * sum_len) / ten) + (-sum_pow / (ten * len_pow));
     }
 
     a2 = len_bc * len_bc;
@@ -401,8 +406,8 @@ void lbBgFlash_80021410(IKState* data)
     cos1 = ((a2 + b2) - c2) / (two_a * len_ab);
     cos2 = ((a2 + c2) - b2) / (two_a * len_ac);
 
-    if (cos1 > 1.0f) {
-        cos1 = 1.0f;
+    if (cos1 > (one = 1.0f)) {
+        cos1 = one;
     } else if (cos1 < -1.0f) {
         cos1 = -1.0f;
     }
