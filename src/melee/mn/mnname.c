@@ -1146,11 +1146,11 @@ static inline f32 mnName_80239A24_GetTextColumnWidth(HSD_GObj* gobj,
 void mnName_80239A24(HSD_GObj* gobj)
 {
     f32 text_row_height;
-    Vec3 text_position;
+    s32 row;
     HSD_JObj* jobj;
     HSD_JObj* ref_jobj;
     HSD_JObj* ref_jobj2;
-    s32 row;
+    Vec3 text_position;
     HSD_JObj* text_jobj0;
     HSD_JObj* text_jobj1;
     HSD_Text* text;
