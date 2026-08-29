@@ -908,9 +908,6 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                     GXPrimitive primitive = it[0];
                     u8 count = it[1];
                     s32 i;
-                    u8 r;
-                    u8 b;
-                    u8 g;
 
                     it += 4;
                     if (pp->kind & DispTexture) {
@@ -920,9 +917,6 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                         setVtxDesc(3);
                         GXBegin(primitive, GX_VTXFMT3, count);
                     }
-                    b = color.b;
-                    g = color.g;
-                    r = color.r;
                     for (i = count; i > 0; i--) {
                         f32 s = *(f32*) &it[0];
                         f32 sx = 2.0f * (s - 0.5f);
@@ -951,7 +945,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                         GXWGFifo.f32 = up.x * tx + (x0 * sx + x);
                         GXWGFifo.f32 = up.y * tx + (y0 * sx + y);
                         GXWGFifo.f32 = up_z * tx + (z0 * sx + z);
-                        GXColor4u8(r, g, b, alpha);
+                        GXColor4u8(color.r, color.g, color.b, alpha);
                         if (pp->kind & DispTexture) {
                             GXWGFifo.f32 = s;
                             GXWGFifo.f32 = t;
@@ -1701,9 +1695,6 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                     GXPrimitive primitive = it[0];
                     u8 count = it[1];
                     s32 i;
-                    u8 r;
-                    u8 b;
-                    u8 g;
 
                     it += 4;
                     if (pp->kind & DispTexture) {
@@ -1713,9 +1704,6 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                         setVtxDesc(3);
                         GXBegin(primitive, GX_VTXFMT3, count);
                     }
-                    b = draw_color.b;
-                    g = draw_color.g;
-                    r = draw_color.r;
                     for (i = count; i > 0; i--) {
                         f32 s = *(f32*) &it[0];
                         f32 sx = 2.0f * (s - 0.5f);
@@ -1744,7 +1732,8 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
                         GXWGFifo.f32 = cur_pos.x + ax * sx + bx * tx;
                         GXWGFifo.f32 = cur_pos.y + ay * sx + by * tx;
                         GXWGFifo.f32 = cur_pos.z;
-                        GXColor4u8(r, g, b, (u8) alpha);
+                        GXColor4u8(draw_color.r, draw_color.g, draw_color.b,
+                                   (u8) alpha);
                         if (pp->kind & DispTexture) {
                             GXWGFifo.f32 = s;
                             GXWGFifo.f32 = t;
