@@ -1605,6 +1605,7 @@ void fn_8019A158(void)
 {
     TmData* td1;
     TmData* td2;
+    BracketEntry* bracket;
     s32 mode;
     s32 sel;
     s32 bracket_idx;
@@ -1612,12 +1613,13 @@ void fn_8019A158(void)
     s32 counter;
     s32 i;
     int k;
-    s32 local1, local2;
     MatchEnd* me;
     struct {
         s32 slot;
     } state;
     u8* cursor;
+    s32 local1, local2;
+    PAD_STACK(4);
 
     td1 = gm_GetTournamentData();
     lbl_804799D8.x48 = &gm_80477738;
@@ -1658,7 +1660,7 @@ void fn_8019A158(void)
     }
 
     if (mode == 1) {
-        BracketEntry* bracket = fn_8019A158_GetBracketEntry(bracket_idx);
+        bracket = fn_8019A158_GetBracketEntry(bracket_idx);
         cursor = (u8*) bracket;
         for (i = 0; i < 4; i++) {
             if (i == state.slot) {
@@ -1669,7 +1671,7 @@ void fn_8019A158(void)
             cursor += 0x2C;
         }
     } else if (td1->x2D == 1) {
-        BracketEntry* bracket = fn_8019A158_GetBracketEntry(bracket_idx);
+        bracket = fn_8019A158_GetBracketEntry(bracket_idx);
         cursor = (u8*) bracket;
         for (i = 0; i < 4; i++) {
             if (cursor[0x4E] == 3) {
@@ -1690,7 +1692,7 @@ void fn_8019A158(void)
             cursor += 0x2C;
         }
     } else {
-        BracketEntry* bracket = fn_8019A158_GetBracketEntry(bracket_idx);
+        bracket = fn_8019A158_GetBracketEntry(bracket_idx);
         counter = 0;
         cursor = (u8*) bracket;
         for (i = 0; i < 4; i++) {
