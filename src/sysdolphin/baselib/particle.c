@@ -615,53 +615,31 @@ s32 hsd_803991D8(HSD_Generator* gen, HSD_JObj* jobj, f32 force, f32 range)
 static inline void psUpdateParticle(HSD_Particle* pp)
 {
     if (pp->kind & Tornado) {
-        HSD_Generator* gp = pp->gen;
-        f32 sinA, sinB, cosA, cosB;
-        f32 R;
-        f32 d, e, nd, vz;
-        f32 t0, t1, t2, t3, t4;
+        f32 radius;
+        f32 px, py, pz;
+        f32 sina, sinb, cosa, cosb;
+        HSD_Generator* gp;
 
-        sinA = sinf(pp->grav);
-        sinB = sinf(pp->fric);
-        cosA = cosf(pp->grav);
-        cosB = cosf(pp->fric);
+        gp = pp->gen;
+        sina = sinf(pp->grav);
+        sinb = sinf(pp->fric);
+        cosa = cosf(pp->grav);
+        cosb = cosf(pp->fric);
 
         pp->vel.z += gp->aux.tornado.vel;
-
-        R = gp->radius;
-        if (R < 0.0F) {
-            R = -R;
-        }
-        {
-            f32 ang = gp->angle;
-            if (ang < 0.0F) {
-                ang = -ang;
-            }
-            R = pp->vel.z * tanf(ang) + R;
-        }
+        radius = ABS(gp->radius);
+        radius += pp->vel.z * tanf(ABS(gp->angle));
         pp->vel.x += gp->grav;
-        R *= pp->vel.y;
+        radius *= pp->vel.y;
+        px = radius * cosf(pp->vel.x);
+        py = radius * sinf(pp->vel.x);
+        pz = pp->vel.z;
 
-        d = R * cosf(pp->vel.x);
-        e = R * sinf(pp->vel.x);
-        nd = -d;
-        vz = pp->vel.z;
-
-        t0 = vz * sinB;
-        t1 = e * cosA;
-        t2 = nd * sinA;
-        t3 = d * cosB + t0;
-        t0 = vz * sinA;
-        t1 = sinB * t2 + t1;
-        pp->pos.x = gp->pos.x + t3;
-        t2 = nd * cosA;
-        t4 = e * sinA;
-        t1 = cosB * t0 + t1;
-        t0 = vz * cosA;
-        t4 = sinB * t2 - t4;
-        pp->pos.y = gp->pos.y + t1;
-        t4 = cosB * t0 + t4;
-        pp->pos.z = gp->pos.z + t4;
+        pp->pos.x = px * cosb + pz * sinb + gp->pos.x;
+        pp->pos.y = -px * sina * sinb + py * cosa + pz * sina * cosb +
+                    gp->pos.y;
+        pp->pos.z = -px * cosa * sinb - py * sina + pz * cosa * cosb +
+                    gp->pos.z;
     } else {
         if (pp->kind & 1) {
             pp->vel.y -= pp->grav;
