@@ -296,10 +296,12 @@ void lbBgFlash_80021410(IKState* data)
         f32 nx;
         f32 dot;
         f32 d;
-        f32 x = data->pos4.x;
+        f32 x;
 
         dot = -((nz * data->pos1.z) +
                 (((nx = axis.x) * data->pos1.x) + (ny * data->pos1.y)));
+
+        x = data->pos4.x;
 
         d = -(dot + ((data->pos4.z * nz) + ((x * nx) + (data->pos4.y * ny))));
         data->pos4.x = (d * nx) + x;
