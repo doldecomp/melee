@@ -242,7 +242,6 @@ static inline f32 sqrtf_store(f32 x, volatile f32* y)
     return x;
 }
 
-/// @todo Only differs by register allocation.
 void lbBgFlash_80021410(IKState* data)
 {
     u8 pad_hi[32];
@@ -259,11 +258,11 @@ void lbBgFlash_80021410(IKState* data)
     f32 dot;
     f32 sin_val;
     f32 len_ab;
+    f32 sum_len;
     f32 len_bc;
     f32 len_ac;
     f32 angle1;
     f32 angle2;
-    f32 sum_len;
     f32 sum_pow;
     f32 len_pow;
     f32 c2;
@@ -373,11 +372,9 @@ void lbBgFlash_80021410(IKState* data)
     len_ac = sqrtf_store(dz + (dx + dy), &len_ac_mag);
     data->len1 = len_ac;
 
-    sum_len =
-        ((ten = 10.0f) * ((len_bc = data->len0) + (len_ac = data->len1))) /
-        (eleven = 11.0f);
-    sum_pow = sum_len * sum_len;
-    sum_pow = sum_len * sum_pow;
+    sum_len = (ten = 10.0f) * ((len_bc = data->len0) + (len_ac = data->len1));
+    sum_len /= (eleven = 11.0f);
+    sum_pow = sum_len * (sum_len * sum_len);
     sum_pow = sum_len * sum_pow;
     sum_pow = sum_len * sum_pow;
     sum_pow = sum_len * sum_pow;
