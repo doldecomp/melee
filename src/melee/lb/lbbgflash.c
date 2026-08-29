@@ -12,8 +12,6 @@
 
 #include "dolphin/gx/GXStruct.h"
 
-#include "lb/forward.h"
-
 #include <baselib/wobj.h>
 
 typedef struct BgFlashState {
