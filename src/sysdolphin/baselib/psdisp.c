@@ -858,7 +858,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
             if (pp->kind & DispTexture) {
                 GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 1;
             }
-            GXPosition3f32(x + x0, y + y0, z + z0);
+            GXPosition3f32(x + x0, y + y0, z0 + z);
             {
                 u8 a = color.a;
                 u8 b = color.b;
@@ -972,11 +972,11 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
         if (pp->kind & DispTexture) {
             GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 1;
         }
-        GXPosition3f32(x + x0, y + y0, z + z0);
+        GXPosition3f32(x + x0, y + y0, z0 + z);
         if (pp->kind & DispTexture) {
             GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 2;
         }
-        GXPosition3f32(x + x1, y + y1, z + z1);
+        GXPosition3f32(x1 + x, y1 + y, z1 + z);
         if (pp->kind & DispTexture) {
             GXWGFifo.u8 = ((pp->kind >> 16) & 0xC) + 3;
         }
@@ -1101,7 +1101,7 @@ static inline void psDispSub(HSD_Particle* pp, u8* texform)
             cur_y = pvmtx[0][1] * pp->pos.y;
             cur_y_term = pvmtx[1][1] * pp->pos.y;
             prev_x_sum = pvmtx[0][0] * prev_x + prev_xy;
-            prev_yx = pvmtx[1][0] * prev_x + prev_y_terms;
+            prev_yx = prev_x * pvmtx[1][0] + prev_y_terms;
             cur_yx = pvmtx[1][0] * pp->pos.x + cur_y_term;
             x = w0inv * (pvmtx[0][3] + (pvmtx[0][2] * pp->pos.z +
                                         (pvmtx[0][0] * pp->pos.x + cur_y))) -
