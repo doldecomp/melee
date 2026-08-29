@@ -523,6 +523,7 @@ static inline void _tyDisplay_80319994_sort_pos(TyDspGrid* grid, s32 count)
             } temps;
             s32 mid = n2 / 2;
             TyDspPos* p;
+            TyDspGrid* cur;
             s32 n;
 
             if (mid != 0) {
@@ -532,15 +533,18 @@ static inline void _tyDisplay_80319994_sort_pos(TyDspGrid* grid, s32 count)
             }
 
             pivot = 0;
-            for (n = 1; n2 >= n; n++) {
-                if (grid->pos[n].z < grid->pos[0].z) {
+            cur = (TyDspGrid*) ((size_t) grid + sizeof(TyDspPos));
+            for (n = 1; n2 >= n;
+                 cur = (TyDspGrid*) ((size_t) cur + sizeof(TyDspPos)), n++)
+            {
+                if (cur->pos[0].z < grid->pos[0].z) {
                     pivot += 1;
                     if (pivot != n) {
                         p = (TyDspPos*) ((size_t) grid +
                                          pivot * sizeof(TyDspPos) + 0x97C);
                         temps.tmp1 = *p;
-                        *p = grid->pos[n];
-                        grid->pos[n] = temps.tmp1;
+                        *p = cur->pos[0];
+                        cur->pos[0] = temps.tmp1;
                     }
                 }
             }
