@@ -1071,6 +1071,47 @@ hsd_80394F48_get_highlight_color(struct lbl_8040AB00_t* base_color)
     return base_color + 1;
 }
 
+static inline void
+hsd_80394F48_set_col_start(s32* pxC8, s32* col_start)
+{
+    *col_start = *pxC8;
+}
+
+static inline s32 hsd_80394F48_get_x_base(s32 col_start)
+{
+    return col_start * 11 + 0x14;
+}
+
+static inline void**
+hsd_80394F48_get_x50_ptr(struct ParticleScreenState* sp)
+{
+    return &sp->x50;
+}
+
+static inline s32* hsd_80394F48_get_x8_ptr(struct ParticleScreenState* sp)
+{
+    return &sp->x8;
+}
+
+static inline s32* hsd_80394F48_get_xCC_ptr(struct ParticleScreenState* sp)
+{
+    return &sp->xCC;
+}
+
+static inline void
+hsd_80394F48_init(void* data, s32* num_entries, void*** px50, s32** pxC8,
+                  s32** pxCC)
+{
+    struct ParticleScreenState* sp = &hsd_804CF810;
+    EventData* dp = data;
+    PAD_STACK(64);
+
+    *num_entries = strlen(hsd_80394F48_get_first_entry(dp));
+    *px50 = hsd_80394F48_get_x50_ptr(sp);
+    *pxC8 = &sp->xC8;
+    *pxCC = hsd_80394F48_get_xCC_ptr(sp);
+}
+
 void hsd_80394F48(void* data)
 {
     struct lbl_8040AB00_t* base_color = &lbl_8040AB00;
@@ -1090,17 +1131,13 @@ void hsd_80394F48(void* data)
     s32 i;
     s32 b6;
 
-    PAD_STACK(64);
+    hsd_80394F48_init(data, &num_entries, &px50, &pxC8, &pxCC);
 
-    num_entries = strlen(hsd_80394F48_get_first_entry(dp));
-    px50 = &sp->x50;
-    pxC8 = &sp->xC8;
-    pxCC = &sp->xCC;
     px4 = &sp->x4;
     px40 = &sp->x40;
-    px8 = &sp->x8;
+    px8 = hsd_80394F48_get_x8_ptr(sp);
     hsd_80394F48_set_base_color(px50);
-    col_start = *pxC8;
+    hsd_80394F48_set_col_start(pxC8, &col_start);
     {
         cur_row = *pxCC;
         *px4 = col_start * 11 + 0x14;
@@ -1141,7 +1178,7 @@ void hsd_80394F48(void* data)
     }
 
     *px4 += 11;
-    x_base = col_start * 11 + 0x14;
+    x_base = hsd_80394F48_get_x_base(col_start);
     hi_color = hsd_80394F48_get_highlight_color(base_color);
     cur_row -= 1;
 
@@ -1189,9 +1226,10 @@ void hsd_80394F48(void* data)
         hsd_803922FC(((ParticleFontData*) sp->x4C)->x968, *px4, *px8, b6,
                      (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     } else {
-        hsd_803921B8(((ParticleFontData*) sp->x4C)->x968,
-                     hsd_80394F48_get_x4(px4), hsd_80394F48_get_x8(px8),
-                     (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
+        s32 x = hsd_80394F48_get_x4(px4);
+        hsd_803921B8(((ParticleFontData*) sp->x4C)->x968, x,
+                     hsd_80394F48_get_x8(px8), (&sp->x24)[sp->x34], sp->x3C,
+                     *px40, sp->x44, *px50);
     }
 
     {
