@@ -1040,6 +1040,26 @@ extern ? grKg_804D6984;
 static ? grKg_803B7FB0;                             /* unable to generate initializer: unknown type; const */
 #endif
 
+static inline f32 grKongo_calc_angle(s32 index)
+{
+    f32 angle =
+        (f32) (0.7853981633974483 *
+               (0.5 *
+                (f64) (((grKg_803E188C[index].unk14 -
+                         grKg_803E188C[index - 1].unk14) /
+                        6.0f) +
+                       ((grKg_803E188C[index + 1].unk14 -
+                         grKg_803E188C[index].unk14) /
+                        6.0f))));
+
+    if (angle > MTXDegToRad(yakumono_param->unkAC)) {
+        angle = MTXDegToRad(yakumono_param->unkAC);
+    } else if (angle < -MTXDegToRad(yakumono_param->unkAC)) {
+        angle = -MTXDegToRad(yakumono_param->unkAC);
+    }
+    return angle;
+}
+
 void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
 {
     s32 line_id;
@@ -1052,30 +1072,21 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
     f32 temp;
     f32 displacement;
     u32 i;
-    PAD_STACK(0x18);
+    PAD_STACK(0x10);
 
     gp = gobj->user_data;
     grKongo_801D6AFC();
 
     for (i = 0U; i < 15U; i++) {
-        grKg_803E188C[i].unk14 = (f32) (37.8 * tanf(-grKg_803E188C[i].unkC));
+        grKg_803E188C[i].unk14 =
+            (f32) (37.8 * tanf(-grKg_803E188C[i].unkC));
     }
 
     displacement =
         grKg_803E188C[2].unkC * (MTXDegToRad(yakumono_param->unkA8) /
                                      MTXDegToRad(yakumono_param->unk90) -
                                  1.0f);
-    angle = (f32) (0.7853981633974483 *
-                   (0.5 *
-                    (f64) (((grKg_803E188C[2].unk14 - grKg_803E188C[1].unk14) /
-                            6.0f) +
-                           ((grKg_803E188C[3].unk14 - grKg_803E188C[2].unk14) /
-                            6.0f))));
-    if (angle > MTXDegToRad(yakumono_param->unkAC)) {
-        angle = MTXDegToRad(yakumono_param->unkAC);
-    } else if (angle < -MTXDegToRad(yakumono_param->unkAC)) {
-        angle = -MTXDegToRad(yakumono_param->unkAC);
-    }
+    angle = grKongo_calc_angle(2);
     HSD_JObjSetRotationX(grKg_804D6984.unk0, displacement);
     old_angle = HSD_JObjGetRotationZ(grKg_804D6984.unk0);
     HSD_JObjSetRotationZ(grKg_804D6984.unk0, angle);
@@ -1087,18 +1098,7 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
         grKg_803E188C[12].unkC * ((MTXDegToRad(yakumono_param->unkA8) /
                                    MTXDegToRad(yakumono_param->unk90)) -
                                   1.0f);
-    angle =
-        (f32) (0.7853981633974483 *
-               (0.5 *
-                (f64) (((grKg_803E188C[12].unk14 - grKg_803E188C[11].unk14) /
-                        6.0f) +
-                       ((grKg_803E188C[13].unk14 - grKg_803E188C[12].unk14) /
-                        6.0f))));
-    if (angle > MTXDegToRad(yakumono_param->unkAC)) {
-        angle = MTXDegToRad(yakumono_param->unkAC);
-    } else if (angle < -MTXDegToRad(yakumono_param->unkAC)) {
-        angle = -MTXDegToRad(yakumono_param->unkAC);
-    }
+    angle = grKongo_calc_angle(12);
     HSD_JObjSetRotationX(grKg_804D6984.unk4, displacement);
     old_angle = HSD_JObjGetRotationZ(grKg_804D6984.unk4);
     HSD_JObjSetRotationZ(grKg_804D6984.unk4, angle);
@@ -1106,19 +1106,23 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
         gp->u.kongo.xD8 = -(angle - old_angle);
     }
 
-    entry = (_struct_grKg_803E188C_0x18*) ((u8*) grKg_803E16E0 + 0x1AC);
-    for (i = 0; i < 15; i++) {
-        HSD_JObjSetRotationX(entry->unk4, entry->unkC);
-        entry++;
+    table = grKg_803E188C;
+    entry = table;
+    {
+        u32 index;
+
+        for (index = 0; index < 15; index++) {
+            HSD_JObjSetRotationX(entry->unk4, entry->unkC);
+            entry++;
+        }
     }
 
     mpLib_80057424(4);
-    entry = (_struct_grKg_803E188C_0x18*) ((u8*) grKg_803E16E0 + 0x1AC);
     i = 0;
     line_id = 0x28;
     do {
         s32 id;
-        temp = entry->unk14;
+        temp = table->unk14;
         id = line_id;
         mpLib_80056758(id, 0.0f, temp, 0.0f, temp);
         if ((s32) i == 0) {
@@ -1128,7 +1132,7 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
         }
         i++;
         line_id += 2;
-        entry++;
+        table++;
     } while (i < 15);
 }
 
