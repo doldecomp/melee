@@ -255,6 +255,7 @@ void lbBgFlash_80021410(IKState* data)
     volatile f32 len_ab_mag;
     volatile f32 len_bc_mag;
     volatile f32 len_ac_mag;
+    f32 eleven;
     f32 dot;
     f32 sin_val;
     f32 len_ab;
@@ -272,13 +273,13 @@ void lbBgFlash_80021410(IKState* data)
     f32 cos1;
     f32 cos2;
     f32 ten;
-    f32 eleven;
     f32 acos1;
     f32 acos2;
     f64 rem;
     f32 dx;
     f32 dz;
     f32 dy;
+    f32 last;
     f64 pi;
     Vec3* pDiff;
     PAD_STACK(8);
@@ -390,10 +391,9 @@ void lbBgFlash_80021410(IKState* data)
     len_pow = len_ab * len_pow;
     len_pow = len_ab * len_pow;
     len_pow = len_ab * len_pow;
-    len_pow = len_ab * len_pow;
-    len_pow = len_ab * len_pow;
+    last = len_ab * (len_pow = len_ab * len_pow);
     if (len_ab > sum_len) {
-        len_ab = ((eleven * sum_len) / ten) + (-sum_pow / (ten * len_pow));
+        len_ab = ((eleven * sum_len) / ten) + (-sum_pow / (ten * last));
     }
 
     a2 = len_bc * len_bc;
