@@ -1088,7 +1088,7 @@ bool lbColl_80006E58(Vec3* hit_start, Vec3* hit_end, Vec3* hurt_start,
     s32 is_zero_distance;
     float hurt_delta_x;
     float hurt_delta_y;
-    PAD_STACK(56);
+    PAD_STACK(44);
 
     // Fast reject when the expanded hit segment AABB misses both hurt
     // endpoints.
@@ -1203,9 +1203,12 @@ block_39:
     hurt_len_sq = (hurt_delta_x * hurt_delta_x) + hurt_len_sq;
     segment_dot = (hit_delta.z * hurt_delta_z) + segment_dot;
     hurt_len_sq = (hurt_delta_z * hurt_delta_z) + hurt_len_sq;
-    hit_start_mid_z = hit_delta.z * hit_delta.z;
+    {
+        float hit_delta_z_sq = hit_delta.z * hit_delta.z;
+        hit_start_mid_z = hit_delta_z_sq;
+    }
     start_delta_z = hit_start_copy.z - hurt_start_copy.z;
-    hit_len_sq = hit_start_mid_z + (hit_start_mid_x + hit_start_mid_y);
+    hit_len_sq = hit_start_mid_z + (hit_start_mid_y + hit_start_mid_x);
     hit_start_dot = hit_delta.y * start_delta_y;
     {
         float hit_start_dot_x = hit_delta.x * start_delta_x;
@@ -1213,8 +1216,8 @@ block_39:
     }
     hurt_start_dot =
         (hurt_delta_y * start_delta_y) + (hurt_delta_x * start_delta_x);
-    hit_start_dot = (hit_delta.z * start_delta_z) + hit_start_dot;
     hurt_start_dot = (hurt_delta_z * start_delta_z) + hurt_start_dot;
+    hit_start_dot = (hit_delta.z * start_delta_z) + hit_start_dot;
     closest_denom = (hurt_len_sq * hit_len_sq) - (segment_dot * segment_dot);
     if ((hurt_len_sq < lbColl_804D79F0) && (hurt_len_sq > lbColl_804D79F4)) {
         is_hurt_segment_degenerate = 1;
@@ -1256,8 +1259,12 @@ block_39:
             hurt_mid_x = (float) ((lbColl_804D7A18 * (f64) hurt_delta_x) +
                                   (f64) hurt_start_copy.x);
             hit_start_mid_y = hit_start_copy.y - hurt_mid_y;
-            hurt_mid_z = (float) ((lbColl_804D7A18 * (f64) hurt_delta_z) +
-                                  (f64) hurt_start_copy.z);
+            {
+                f64 hurt_mid_z_product =
+                    lbColl_804D7A18 * (f64) hurt_delta_z;
+                hurt_mid_z = (float) (hurt_mid_z_product +
+                                      (f64) hurt_start_copy.z);
+            }
             hit_end_mid_y = hit_end->y - hurt_mid_y;
             hit_start_mid_x = hit_start_copy.x - hurt_mid_x;
             hit_end_mid_x = hit_end->x - hurt_mid_x;
