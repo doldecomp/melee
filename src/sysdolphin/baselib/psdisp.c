@@ -1885,18 +1885,18 @@ static inline void psUpdateProjectionCache(f32 perspective)
 void psDispParticles(u32 target_link, u32 sw)
 {
     UNUSED u8 stack_pad[4];
-    void* sp7B0;
-    s32 sp7B4;
     u32 sp7A8;
+    s32 sp7B4;
+    void* sp7B0;
     u32 sp7AC;
+    void* sp79C;
     u8 sp7A5;
     u8 sp7A4;
-    void* sp79C;
     s32 needs_setup;
     psdisp_Tlut tlut_obj;
-    HSD_Particle* sorted_particles;
-    GXTexObj sp764;
     HSD_Particle* non_edge_particles;
+    GXTexObj sp764;
+    HSD_Particle* sorted_particles;
     psdisp_Mtx billboard_mtx;
     GXTlutObj gx_tlut_obj;
     s32 alpha_compare_mode;
