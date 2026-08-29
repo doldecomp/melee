@@ -29,8 +29,6 @@ void fn_800219E4(void* arg0)
     HSD_ObjFree(&lbl_804336A0, arg0);
 }
 
-f32 lbl_804D63D8;
-
 typedef struct {
     char pad[0x2C];
     void* x2C;
@@ -38,6 +36,7 @@ typedef struct {
 
 BgFlashGlobal* lbl_804D63E0;
 struct Fighter_804D653C_t* lbl_804D63DC;
+f32 lbl_804D63D8;
 
 void lbBgFlash_80021A10(f32 arg8)
 {
