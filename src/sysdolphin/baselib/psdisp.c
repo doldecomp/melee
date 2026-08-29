@@ -1447,16 +1447,17 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
         }
         psScaleAppSRTAxes(pp, draw_mtx);
     }
-    ax = pp->appsrt->x94 * pp->size;
-    bx = ax;
+    bx = pp->appsrt->x94 * pp->size;
     y_extent = pp->appsrt->x98 * pp->size;
     if (it == NULL) {
         ay = y_extent;
         by = -ay;
+        ax = bx;
     } else {
         ay = 0.0f;
+        ax = bx;
         by = -y_extent;
-        bx = 0.0f;
+        bx = ay;
     }
     if ((pp->kind & Trail) || (pp->kind & DirVec)) {
         f32 vf1;
