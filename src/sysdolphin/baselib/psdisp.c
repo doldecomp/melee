@@ -1192,7 +1192,8 @@ static inline void psScaleAppSRTAxes(HSD_Particle* pp, Mtx mtx)
  * point path stamps @c frameNum unconditionally under its own NULL guard, the
  * polygon path only inside the changed-frame block. Both branches fold away.
  */
-static inline void psUpdateAppSRT(HSD_Particle* pp, bool always_stamp)
+static inline void psUpdateAppSRT(HSD_Particle* pp, bool always_stamp,
+                                  Mtx scratch_mtx)
 {
     if (pp->appsrt->frameNum != psFrameNum) {
         f32 scale_x;
@@ -1222,19 +1223,18 @@ static inline void psUpdateAppSRT(HSD_Particle* pp, bool always_stamp)
         scale_y = sqrtf(scale_y);
         pp->appsrt->x98 = scale_y;
         if (pp->appsrt->xA2 != 0) {
-            Mtx temp_mtx;
             Vec3 scale;
 
-            PSMTXIdentity(temp_mtx);
-            temp_mtx[0][3] = pp->appsrt->translate.x;
-            temp_mtx[1][3] = pp->appsrt->translate.y;
-            temp_mtx[2][3] = pp->appsrt->translate.z;
-            PSMTXConcat(vmtx, temp_mtx, temp_mtx);
-            HSD_MtxGetScale(temp_mtx, &scale);
+            PSMTXIdentity(scratch_mtx);
+            scratch_mtx[0][3] = pp->appsrt->translate.x;
+            scratch_mtx[1][3] = pp->appsrt->translate.y;
+            scratch_mtx[2][3] = pp->appsrt->translate.z;
+            PSMTXConcat(vmtx, scratch_mtx, scratch_mtx);
+            HSD_MtxGetScale(scratch_mtx, &scale);
             PSMTXScale((MtxPtr) &pp->appsrt->ssx, scale.x, scale.y, scale.z);
-            pp->appsrt->x70 = temp_mtx[0][3];
-            pp->appsrt->x80 = temp_mtx[1][3];
-            pp->appsrt->x90 = temp_mtx[2][3];
+            pp->appsrt->x70 = scratch_mtx[0][3];
+            pp->appsrt->x80 = scratch_mtx[1][3];
+            pp->appsrt->x90 = scratch_mtx[2][3];
         }
         if (!always_stamp) {
             pp->appsrt->frameNum = psFrameNum;
@@ -1248,6 +1248,7 @@ static inline void psUpdateAppSRT(HSD_Particle* pp, bool always_stamp)
 static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
 {
     GXColor draw_color;
+    Mtx scratch_mtx;
     Vec3 cur_pos;
     Vec3 prev_pos;
     f32 ax;
@@ -1255,7 +1256,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
 
     psSetCurrentMtx(GX_PNMTX1);
     if (pp->appsrt != NULL) {
-        psUpdateAppSRT(pp, true);
+        psUpdateAppSRT(pp, true, scratch_mtx);
     }
     {
         HSD_psAppSRT* appsrt = pp->appsrt;
@@ -1372,6 +1373,7 @@ static inline void psDispSubAPPSRTPoint(HSD_Particle* pp)
 static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
 {
     GXColor draw_color;
+    Mtx draw_mtx;
     Vec3 cur_pos;
     Vec3 prev_pos;
     f32 ax;
@@ -1383,9 +1385,8 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
     f32 abs_angle;
     u8* it = texform;
 
-    psUpdateAppSRT(pp, false);
+    psUpdateAppSRT(pp, false, draw_mtx);
     {
-        Mtx draw_mtx;
         f32 app_cur_x;
         f32 app_cur_y;
         f32 app_cur_z;
@@ -1920,7 +1921,7 @@ void psDispParticles(u32 target_link, u32 sw)
     u32 prev_kind;
     HSD_Particle* pp;
     /// @todo Recover this stack space from the original inline hierarchy.
-    PAD_STACK(0x4);
+    PAD_STACK(0x34);
 
     alpha_compare_mode = 0;
     prev_tex_interp_near = 0;
