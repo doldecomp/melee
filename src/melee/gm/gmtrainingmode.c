@@ -2,6 +2,7 @@
 
 #include "gm_1B03.h"
 
+#include "gm/gm_1884.h"
 #include "gm/gm_1A3F.h"
 
 #include "lb/forward.h"

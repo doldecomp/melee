@@ -2,6 +2,7 @@
 
 #include "gm/gmallstar.static.h"
 
+#include "gm_1884.h"
 #include "gm_unsplit.h"
 #include "gmregcommon.h"
 

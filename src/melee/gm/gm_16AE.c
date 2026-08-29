@@ -2,6 +2,7 @@
 
 #include "gm_16AE.static.h"
 
+#include "gm_1884.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 
