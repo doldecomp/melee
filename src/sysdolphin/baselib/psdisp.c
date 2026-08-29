@@ -1459,8 +1459,7 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
     if (it == NULL) {
         ay = y_extent;
         by = -ay;
-        bx = x_extent;
-        ax = bx;
+        ax = bx = x_extent;
     } else {
         ay = 0.0f;
         ax = x_extent;
