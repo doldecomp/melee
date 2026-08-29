@@ -652,53 +652,30 @@ void mn_80230198(HSD_GObj* gobj, HSD_JObj* jobj, u8 mode)
 
 extern MenuKindData mn_803EB6B0[];
 
-void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
+static inline void mn_80230274_InitOptionRoots(
+    HSD_JObj** option_roots, u8* base, struct mn_802307F8_t* data, u8 count,
+    s32* i)
 {
-    HSD_JObj* option_roots[8];
     HSD_JObj** option_root;
-    HSD_JObj* roots[17];
-    u8 pad_[4];
-    u16 indices[17];
-    u8 pad_2[4];
-    AnimLoopSettings* settings;
-    HSD_JObj* jobj;
-    s32 i;
-    struct mn_802307F8_t* user_data;
-    s32 j;
     u8 j8;
-    u8 focus;
-    u8 count;
-    u8 selected;
-    u8* base;
-    s32 tail_i;
-    struct mn_802307F8_t* data;
-
-    PAD_STACK(0x20);
-
-    user_data = arg0->user_data;
-    count = mn_803EB6B0[13].selection_count;
-    base = mn_803EC600;
-    data = user_data;
-    for (i = 0; 0x11 > i; i++) {
-        indices[i] = i;
-    }
+    s32 j;
+    s32 visible;
 
     option_root = option_roots;
-    for (i = 0; i < count; option_root++, i++) {
+    for (*i = 0; *i < count; option_root++, (*i)++) {
         s32 valid;
-        if (gm_GetCurrentGameMode() == GM_TOURNAMENT && (u8) i == 4) {
+        if (gm_GetCurrentGameMode() == GM_TOURNAMENT && (u8) *i == 4) {
             valid = 0;
         } else {
             valid = 1;
         }
         if (valid) {
-            s32 visible;
             HSD_JObj* v;
             struct mn_8022FEC8_jobj_ref_t* p;
 
-            visible = valid - 1;
+            visible = 0;
             j = visible;
-            for (; j < (s32) (u8) i; j++) {
+            for (; j < (s32) (u8) *i; j++) {
                 s32 valid2;
                 j8 = j;
                 if (gm_GetCurrentGameMode() == GM_TOURNAMENT && j8 == 4) {
@@ -720,6 +697,37 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
             *option_root = v;
         }
     }
+}
+
+void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
+{
+    HSD_JObj* option_roots[8];
+    HSD_JObj* roots[17];
+    u8 pad_[4];
+    u16 indices[17];
+    u8 pad_2[4];
+    AnimLoopSettings* settings;
+    HSD_JObj* jobj;
+    s32 i;
+    struct mn_802307F8_t* user_data;
+    u8 focus;
+    u8 count;
+    u8 selected;
+    u8* base;
+    s32 tail_i;
+    struct mn_802307F8_t* data;
+
+    PAD_STACK(0x20);
+
+    user_data = arg0->user_data;
+    count = mn_803EB6B0[13].selection_count;
+    base = mn_803EC600;
+    data = user_data;
+    for (i = 0; 0x11 > i; i++) {
+        indices[i] = i;
+    }
+
+    mn_80230274_InitOptionRoots(option_roots, base, data, count, &i);
 
     if (arg1 != 0) {
         u8 hovered;
