@@ -1452,8 +1452,8 @@ static inline void psDispSubAppSRT(HSD_Particle* pp, u8* texform)
             f32 f13;
             f32 f16;
             f32 f20;
-            f32 s808;
             f32 s804;
+            f32 s808;
 
             if (pp->kind & Tornado) {
                 calcTornadoLastPos(pp, &prev_x, &prev_y, &prev_z);
