@@ -47,9 +47,11 @@ typedef enum CmSnapStatus {
 } CmSnapStatus;
 
 typedef enum CmSubjectState {
-    /* 0x0 */ CmSubjectState_Active, ///< always framed by a camera
+    /* 0x0 */ CmSubjectState_Active,   ///< always framed by a camera
     /* 0x1 */ CmSubjectState_Inactive, ///< never framed by a camera
-    /* 0x2 */ CmSubjectState_Auto, ///< framed only when inside the camera bounds, disabled otherwise. (eg. Items, Arwing, etc)
+    /* 0x2 */ CmSubjectState_Auto,     ///< framed only when inside the camera
+                                   ///< bounds, inactive otherwise. (eg. Items,
+                                   ///< Arwing, etc)
 } CmSubjectState;
 
 #endif
