@@ -318,7 +318,7 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         gmMainLib_GetGameRules()->x12 = x46;
         x47 = data2->selected_name_idx;
         gmMainLib_GetGameRules()->x13 = x47;
-        gmMainLib_GetGameRules()->xD = (x48 = data2->is_name_mode);
+        gmMainLib_GetGameRules()->xD = (x48 = data2->is_name_mode ^ 0);
         mn_80229894(0x1C, 0, 3);
         mnDiagram2_ClearStatRows(mnDiagram2_804D6C18);
         return;
@@ -331,8 +331,7 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         gmMainLib_GetGameRules()->x12 = x46;
         x47 = data2->selected_name_idx;
         gmMainLib_GetGameRules()->x13 = x47;
-        x48 = data2->is_name_mode;
-        gmMainLib_GetGameRules()->xD = x48;
+        gmMainLib_GetGameRules()->xD = (x48 = data2->is_name_mode ^ 0);
         mnDiagram2_ClearStatRows(mnDiagram2_804D6C18);
         HSD_GObjPLink_80390228(gobj);
         if (result & 0x40) {
@@ -343,13 +342,13 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         return;
     }
 
+    var_r28 = 0;
     if (result & 0xC00) {
         if (GetNameCount() == 0) {
             lbAudioAx_80024030(3);
             return;
         }
         sfxForward();
-        var_r28 = 0;
         if (data->is_name_mode == 0) {
             var_r28 = 1;
         }

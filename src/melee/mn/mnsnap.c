@@ -2504,6 +2504,7 @@ void mnSnap_80257F24(void)
     f32 dy;
     f32 dz;
     s32 i;
+    PAD_STACK(20);
 
     mn_804D6BC8.cooldown = 5;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;

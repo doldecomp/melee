@@ -380,7 +380,7 @@ static AllstarRoundInfo gm_803DEC4C[13] = {
 
 gm_80490940_t gm_80490940[5];
 
-void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
+void gm_801B5324(UnkAllstarData* arg0, s32 arg1)
 {
     s8 chars[3];
     u8 colors[3];
@@ -394,7 +394,7 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     s32 slot_idx;
     u64 audio;
     s32 i;
-    PAD_STACK(8);
+    PAD_STACK(12);
 
     base = (u8*) gm_803DE930_Scenes;
     is_last_round = 0;
@@ -409,7 +409,8 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     chars_ptr[1] = 0x21;
     chars_ptr[2] = 0x21;
 
-    count = ((AllstarRoundInfo*) (base + 0x31C))[arg1].count;
+    count =
+        ((AllstarRoundInfo*) ((u8*) gm_803DE930_Scenes + 0x31C))[arg1].count;
     for (count_processed = 0; count_processed < count; count_processed++) {
         chars[count_processed] = opp_data[count_processed].x3;
     }
@@ -421,7 +422,7 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     gmRegSetupEnemyColorTable(arg0->x0.ckind, arg0->x0.color, chars_ptr,
                               colors);
 
-    if ((s32) arg1 == 0xC) {
+    if (arg1 == 0xC) {
         chars_ptr[0] = 3;
         colors[0] = 0;
         is_last_round = 1;
