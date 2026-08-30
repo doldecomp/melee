@@ -749,7 +749,8 @@ void fn_80013614(HSD_GObj* gobj)
             GXSetScissor(0, 110, 640, 290);
         }
 
-        lb_80012994(efb_copy, base_alpha, blur_size, pos_x, pos_y, scale_x, scale_y, tint_factor);
+        lb_80012994(efb_copy, base_alpha, blur_size, pos_x, pos_y, scale_x,
+                    scale_y, tint_factor);
     } else {
         HSD_CObj* cobj = (HSD_CObj*) gobj->hsd_obj;
         HSD_ImageDesc* efb_copy;
@@ -793,7 +794,8 @@ void fn_80013614(HSD_GObj* gobj)
                             GX_CA_ZERO);
             GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
                             GX_CS_SCALE_1, 1, GX_TEVPREV);
-            lb_8001271C(&tex_obj, pos_x, pos_y, (float) width, (float) height, scale_x, scale_y);
+            lb_8001271C(&tex_obj, pos_x, pos_y, (float) width, (float) height,
+                        scale_x, scale_y);
         }
         HSD_StateInvalidate(2);
     }
@@ -821,7 +823,8 @@ static const Vec3 lb_803B72A8 = { 0.0F, 0.0F, 1.0F };
 static const Vec3 lb_803B72B4 = { 0.0F, 0.0F, 0.0F };
 
 HSD_GObj* lb_800138EC(HSD_ImageDesc* img, GObj_RenderFunc render_func,
-                      int prio, s8 alpha, float pos_x, float pos_y, float scale_x, float scale_y)
+                      int prio, s8 alpha, float pos_x, float pos_y,
+                      float scale_x, float scale_y)
 {
     HSD_GObj* gobj;
     HSD_CObj* cobj;
