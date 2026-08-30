@@ -147,6 +147,11 @@ static inline bool checkStringRest(const char* ptr, s8 terminator)
     return true;
 }
 
+static inline u8 unsignedCharacter(s32 character)
+{
+    return (u8) character;
+}
+
 s32 CompareNameStrings(char* str1, char* str2)
 {
     union {
@@ -172,19 +177,20 @@ s32 CompareNameStrings(char* str1, char* str2)
         }
 
         {
-            u8 ch2 = (u8) str2[i];
+            s8 ch2 = (s8) str2[i];
 
-            if (signedCharactersEqual(*mnName_StringTerminator, ch2)) {
+            if (signedCharactersEqual(*mnName_StringTerminator,
+                                      unsignedCharacter(ch2))) {
                 if (checkStringRest(&str1[i], terminator)) {
                     return 0;
                 }
                 return 1;
             }
 
-            if (unsigned_str1[i] > ch2) {
+            if (unsigned_str1[i] > unsignedCharacter(ch2)) {
                 return 1;
             }
-            if (unsigned_str1[i] < ch2) {
+            if (unsigned_str1[i] < unsignedCharacter(ch2)) {
                 return 2;
             }
         }
