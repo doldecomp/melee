@@ -56,6 +56,16 @@ int Toy_GetTrophyTotal(void)
     }
 }
 
+static inline s32 _Toy_GetTrophyTotal(Toy26B8* toy)
+{
+    if (gm_IsCurrently1PMode() != 0 ||
+        gm_GetCurrentGameMode() == GM_TOY_LOTTERY)
+    {
+        return toy->trophy_count;
+    }
+    return *gmMainLib_GetTrophyCount();
+}
+
 static inline u16* idk(void)
 {
     if (gm_IsCurrently1PMode() || gm_GetCurrentGameMode() == GM_TOY_LOTTERY) {
@@ -3534,7 +3544,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
         u32 button;
         f32 angle;
 
-        PAD_STACK(72);
+        PAD_STACK(64);
 
         {
             ToyUnkJObjData* data = anim->gobj->hsd_obj;
@@ -4059,13 +4069,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                     }
                     if (total > 3) {
                         s32 cnt;
-                        if ((gm_IsCurrently1PMode() != 0) ||
-                            (gm_GetCurrentGameMode() == GM_TOY_LOTTERY))
-                        {
-                            cnt = base->trophy_count;
-                        } else {
-                            cnt = *gmMainLib_GetTrophyCount();
-                        }
+                        cnt = _Toy_GetTrophyTotal(base);
                         if ((s32) (display->selectedIdx + 1) >= cnt) {
                             s32 cnt2;
                             ToyListEntry* entry;
@@ -4971,16 +4975,6 @@ void _Toy_8030FA50(void)
         gobj = state[2];
         gobj->gxlink_prios = 0x02A0000000000000ULL;
     }
-}
-
-static inline s32 _Toy_GetTrophyTotal(Toy26B8* toy)
-{
-    if (gm_IsCurrently1PMode() != 0 ||
-        gm_GetCurrentGameMode() == GM_TOY_LOTTERY)
-    {
-        return toy->trophy_count;
-    }
-    return *gmMainLib_GetTrophyCount();
 }
 
 static inline void _Toy_8030FE48_init_sort_key(s16** ptr)
