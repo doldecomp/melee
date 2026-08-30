@@ -4996,6 +4996,46 @@ static inline void _Toy_8030FE48_init_sort_key(s16** ptr)
     *ptr = &_Toy_sbss_804D6E64->key[sort_mode];
 }
 
+inline void _Toy_8030FE48_setup_entry(ToyListEntry* entry,
+                                       s16 trophy_idx)
+{
+    char* result = Toy_8030813C(trophy_idx);
+
+    if (entry->archive != NULL) {
+        lbArchive_80016EFC(entry->archive);
+        entry->archive = NULL;
+    }
+    entry->archive_name = result + 4;
+    entry->symbol_name = result + 0x24;
+    entry->trophy_id = trophy_idx;
+}
+
+inline void _Toy_8030FE48_link_entries(ToyDisplayList* data,
+                                        s32 entry_count)
+{
+    s32 i;
+    ToyListEntry* last_entry;
+    ToyListEntry* entry;
+    s32 last;
+
+    last = entry_count - 1;
+    entry = data->entries;
+    last_entry = &data->entries[last];
+    for (i = 0; i < entry_count; i++) {
+        if (i == 0) {
+            entry->prev = last_entry;
+        } else {
+            entry->prev = &data->entries[i - 1];
+        }
+        if (i == last) {
+            entry->next = data->entries;
+        } else {
+            entry->next = &data->entries[i + 1];
+        }
+        entry++;
+    }
+}
+
 void _Toy_8030FE48(ToyDisplayList* data, s32 arg1)
 {
     Toy26B8* toy = (Toy26B8*) &_Toy_804A26B8;
@@ -5004,8 +5044,6 @@ void _Toy_8030FE48(ToyDisplayList* data, s32 arg1)
     void* sym2;
     s32 count;
     s32 entry_count;
-    char* result;
-    s16 trophyIdx;
     void* sym;
     void* zero;
     s16* ptr;
@@ -5035,25 +5073,7 @@ void _Toy_8030FE48(ToyDisplayList* data, s32 arg1)
     }
 
     if (arg1 == 0) {
-        s32 last = entry_count - 1;
-        ToyListEntry* entry = data->entries;
-        s32 i;
-        ToyListEntry* last_entry;
-
-        last_entry = &data->entries[last];
-        for (i = 0; i < entry_count; i++) {
-            if (i == 0) {
-                entry->prev = last_entry;
-            } else {
-                entry->prev = &data->entries[i - 1];
-            }
-            if (i == last) {
-                entry->next = data->entries;
-            } else {
-                entry->next = &data->entries[i + 1];
-            }
-            entry++;
-        }
+        _Toy_8030FE48_link_entries(data, entry_count);
     }
 
     zero = NULL;
@@ -5070,29 +5090,13 @@ void _Toy_8030FE48(ToyDisplayList* data, s32 arg1)
         entry = data->entries;
         for (; start < data->visible_count; offset += 2, entry++, start += 1) {
             if (start == data->selectedIdx) {
-                trophyIdx = Toy_sbss_804D6EDC[offset / 2];
-                result = Toy_8030813C(trophyIdx);
-                if (entry->archive != NULL) {
-                    lbArchive_80016EFC(entry->archive);
-                    entry->archive = NULL;
-                }
-
-                entry->archive_name = result + 4;
-                entry->symbol_name = result + 0x24;
-                entry->trophy_id = trophyIdx;
+                _Toy_8030FE48_setup_entry(
+                    entry, Toy_sbss_804D6EDC[offset / 2]);
                 entry->archive = lbArchive_LoadSymbols(
                     entry->archive_name, &sym, entry->symbol_name, 0);
             } else {
-                trophyIdx = Toy_sbss_804D6EDC[offset / 2];
-                result = Toy_8030813C(trophyIdx);
-                if (entry->archive != NULL) {
-                    lbArchive_80016EFC(entry->archive);
-                    entry->archive = NULL;
-                }
-
-                entry->archive_name = result + 4;
-                entry->symbol_name = result + 0x24;
-                entry->trophy_id = trophyIdx;
+                _Toy_8030FE48_setup_entry(
+                    entry, Toy_sbss_804D6EDC[offset / 2]);
             }
         }
 
@@ -5146,29 +5150,13 @@ void _Toy_8030FE48(ToyDisplayList* data, s32 arg1)
             }
 
             if (startIdx == data->selectedIdx) {
-                trophyIdx = Toy_sbss_804D6EDC[startIdx];
-                result = Toy_8030813C(trophyIdx);
-                if (cur->archive != NULL) {
-                    lbArchive_80016EFC(cur->archive);
-                    cur->archive = NULL;
-                }
-
-                cur->archive_name = result + 4;
-                cur->symbol_name = result + 0x24;
-                cur->trophy_id = trophyIdx;
+                _Toy_8030FE48_setup_entry(cur,
+                                          Toy_sbss_804D6EDC[startIdx]);
                 cur->archive = lbArchive_LoadSymbols(cur->archive_name, &sym2,
                                                      cur->symbol_name, 0);
             } else {
-                trophyIdx = Toy_sbss_804D6EDC[startIdx];
-                result = Toy_8030813C(trophyIdx);
-                if (cur->archive != NULL) {
-                    lbArchive_80016EFC(cur->archive);
-                    cur->archive = NULL;
-                }
-
-                cur->archive_name = result + 4;
-                cur->symbol_name = result + 0x24;
-                cur->trophy_id = trophyIdx;
+                _Toy_8030FE48_setup_entry(cur,
+                                          Toy_sbss_804D6EDC[startIdx]);
             }
 
             cur = cur->next;
