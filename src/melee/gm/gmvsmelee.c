@@ -17,9 +17,9 @@
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/lbtime.h>
 
-/* 4807B0 */ CSSData gm_804807B0;
-/* 480668 */ SSSData gm_80480668;
-/* 480530 */ StartMeleeData gm_80480530;
+/* 4807B0 */ CSSData gmVsMelee_CssData;
+/* 480668 */ SSSData gmVsMelee_SssData;
+/* 480530 */ StartMeleeData gmVsMelee_StartData;
 /* 47E2A4 */ MatchExitInfo gm_8047E2A4;
 /* 47C020 */ ResultsMatchInfo gm_8047C020;
 /* 4D6730 */ static u8 gm_804D6730[6];
@@ -29,7 +29,7 @@ VsModeData* gm_801A5244(void)
     return &gmMainLib_804D3EE0->unk_590;
 }
 
-u8* gm_801A5250(void)
+u8* gmVsMelee_GetKOCounts(void)
 {
     return gm_804D6730;
 }
@@ -101,7 +101,7 @@ void gm_Mode_Vs_OnInit(void)
     gmMainLib_8015CDEC();
 }
 
-void gm_801A55C4(void)
+void gmVsMelee_ResetKOCounts(void)
 {
     memzero(&gm_804D6730, sizeof(gm_804D6730));
 }
@@ -116,7 +116,7 @@ void gm_Mode_Vs_OnUnload(void) {}
 void gm_801A5618(GameModeState* scene_data, VsModeData* vs_data,
                  int match_type)
 {
-    CSSData* css_data = gm_GetGameSceneLoadData(scene_data);
+    CSSData* css_data = gm_GetGameModeStateEnterData(scene_data);
     css_data->match_type = match_type;
     css_data->ko_star_counts = gm_804D6730;
     css_data->data = *vs_data;
@@ -129,7 +129,7 @@ void gm_801A5680(GameModeState* scene_data, VsModeData* vs_data)
     u64 mask;
     s32 i;
 
-    css_data = gm_GetGameSceneLeaveData(scene_data);
+    css_data = gm_GetGameModeStateExitData(scene_data);
     if (css_data->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
@@ -147,7 +147,7 @@ void gm_801A5680(GameModeState* scene_data, VsModeData* vs_data)
 
 void gm_801A5754(GameModeState* scene_data, VsModeData* vs_data)
 {
-    SSSData* sss_data = gm_GetGameSceneLoadData(scene_data);
+    SSSData* sss_data = gm_GetGameModeStateEnterData(scene_data);
     sss_data->data = *vs_data;
     gm_80167FC4(sss_data);
 }
@@ -156,14 +156,14 @@ void gm_801A57A8(GameModeState* scene_data, VsModeData* vs_data, u8 id)
 {
     SSSData* sss_data;
 
-    sss_data = gm_GetGameSceneLeaveData(scene_data);
+    sss_data = gm_GetGameModeStateExitData(scene_data);
     if (sss_data->start_game != 0) {
         *vs_data = sss_data->data;
         lbAudioAx_80026F2C(0x18);
         lbAudioAx_8002702C(8, lbAudioAx_80026EBC(vs_data->data.rules.stkind));
         lbAudioAx_80027168();
     } else {
-        gm_SetPendingSceneIndex(id);
+        gm_SetNextGameModeStateId(id);
     }
 }
 
@@ -174,7 +174,7 @@ void gm_801A583C(GameModeState* scene_data, VsModeData* vs_data,
     StartMeleeData* match_start_data;
     s32 i;
 
-    match_start_data = gm_GetGameSceneLoadData(scene_data);
+    match_start_data = gm_GetGameModeStateEnterData(scene_data);
     gm_80167BC8(vs_data);
     match_start_data->rules = vs_data->data.rules;
 
@@ -205,7 +205,7 @@ void gm_801A583C(GameModeState* scene_data, VsModeData* vs_data,
 
 void gm_801A5AF0(GameModeState* scene_data, u8 id, u8 id2)
 {
-    MatchExitInfo* match_exit_info = gm_GetGameSceneLeaveData(scene_data);
+    MatchExitInfo* match_exit_info = gm_GetGameModeStateExitData(scene_data);
     int i;
 
     for (i = 0; i < 6; i++) {
@@ -226,9 +226,9 @@ void gm_801A5AF0(GameModeState* scene_data, u8 id, u8 id2)
     }
 
     if (!gm_80167140(&match_exit_info->match_end)) {
-        gm_SetPendingSceneIndex(id);
+        gm_SetNextGameModeStateId(id);
     } else {
-        gm_SetPendingSceneIndex(id2);
+        gm_SetNextGameModeStateId(id2);
     }
 }
 
@@ -239,7 +239,7 @@ void gm_801A5C3C(GameModeState* scene_data, VsModeData* vs_data,
     StartMeleeData* match_start_data;
     s32 i;
 
-    match_start_data = gm_GetGameSceneLoadData(scene_data);
+    match_start_data = gm_GetGameModeStateEnterData(scene_data);
     match_start_data->rules = vs_data->data.rules;
 
     if (callback != NULL) {
@@ -265,13 +265,13 @@ void gm_801A5EC8(GameModeState* scene_data)
 {
     MatchExitInfo* exit_info;
 
-    exit_info = gm_GetGameSceneLeaveData(scene_data);
+    exit_info = gm_GetGameModeStateExitData(scene_data);
     gm_80166CCC(&gm_80479D98.match_end, &exit_info->match_end);
 }
 
 void gm_801A5F00(GameModeState* scene_data)
 {
-    struct ResultsMatchInfo* exit_info = gm_GetGameSceneLoadData(scene_data);
+    struct ResultsMatchInfo* exit_info = gm_GetGameModeStateEnterData(scene_data);
     gm_80177724(exit_info);
     exit_info->match_end = gm_80479D98.match_end;
 }
@@ -304,19 +304,19 @@ void gm_801A5F64(GameModeState* scene_data, VsModeData* vs_data, u8 next_scene)
                 gm_801736E8(match_end->player_standings[idx].character_kind,
                             (match_end->player_standings[idx].x3), idx,
                             match_end->player_standings[idx].x4, unk, 0);
-                gm_SetPendingSceneIndex(0x80);
+                gm_SetNextGameModeStateId(0x80);
                 unk_bool = true;
             } else if ((unk = gm_80172D78()) != CHKIND_NONE) {
                 gm_801736E8(match_end->player_standings[idx].character_kind,
                             (match_end->player_standings[idx].x3), idx,
                             match_end->player_standings[idx].x4, unk, 0);
-                gm_SetPendingSceneIndex(0x80);
+                gm_SetNextGameModeStateId(0x80);
                 unk_bool = true;
             } else if ((unk = gm_80172E74()) != CHKIND_NONE) {
                 gm_801736E8(match_end->player_standings[idx].character_kind,
                             (match_end->player_standings[idx].x3), idx,
                             match_end->player_standings[idx].x4, unk, 0);
-                gm_SetPendingSceneIndex(0x80);
+                gm_SetNextGameModeStateId(0x80);
                 unk_bool = true;
             }
             foo = gm_80172F00(gmMainLib_8015EDB0()->x0);
@@ -328,7 +328,7 @@ void gm_801A5F64(GameModeState* scene_data, VsModeData* vs_data, u8 next_scene)
             gm_80173EEC();
             if (!unk_bool && gm_801721EC()) {
                 gm_801736E8(0x21, 0, idx, 0x78, unk, 0);
-                gm_SetPendingSceneIndex(0xC0);
+                gm_SetNextGameModeStateId(0xC0);
                 unk_bool = true;
             }
             if (unk_bool) {
@@ -343,5 +343,5 @@ void gm_801A5F64(GameModeState* scene_data, VsModeData* vs_data, u8 next_scene)
     lb_8001C550();
     lb_8001D164(0);
     lb_8001CE00();
-    gm_SetPendingSceneIndex(next_scene);
+    gm_SetNextGameModeStateId(next_scene);
 }

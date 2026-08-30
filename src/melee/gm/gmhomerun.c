@@ -25,8 +25,8 @@ GameModeState gm_Mode_Homerun_States[] = {
         gm_801B999C,
         {
             GS_CSS,
-            &gm_804807B0,
-            &gm_804807B0,
+            &gmVsMelee_CssData,
+            &gmVsMelee_CssData,
         },
     },
     {
@@ -37,7 +37,7 @@ GameModeState gm_Mode_Homerun_States[] = {
         gm_801B9DD8,
         {
             GS_VS,
-            &gm_80480530,
+            &gmVsMelee_StartData,
             &gm_80479D98,
         },
     },
@@ -54,7 +54,7 @@ void gm_801B98E8(GameModeState* scene)
     struct GameCache* game_cache;
     VsModeData* vs = &gm_80497618;
 
-    css = gm_GetGameSceneLoadData(scene);
+    css = gm_GetGameModeStateEnterData(scene);
     if (gm_804D68F9 != 0) {
         lb_8001C550();
         lb_8001D164(0);
@@ -77,7 +77,7 @@ void gm_801B999C(GameModeState* scene)
     VsModeData* vs = &gm_80497618;
     CSSData* temp_r3;
 
-    temp_r3 = gm_GetGameSceneLeaveData(scene);
+    temp_r3 = gm_GetGameModeStateExitData(scene);
     if (temp_r3->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
@@ -99,7 +99,7 @@ void gm_801B9A3C(GameModeState* arg0)
     VsModeData* vs = &gm_80497618;
     int i;
 
-    data = gm_GetGameSceneLoadData(arg0);
+    data = gm_GetGameModeStateEnterData(arg0);
     gm_80167A64(&data->rules);
 
     data->rules = vs->data.rules;
@@ -147,12 +147,12 @@ void gm_801B9DD8(GameModeState* arg0)
     MatchExitInfo* temp_r3;
     u16 tmp;
 
-    temp_r3 = gm_GetGameSceneLeaveData(arg0);
+    temp_r3 = gm_GetGameModeStateExitData(arg0);
     gm_80162968(temp_r3->match_end.frame_count / 60);
     gm_8016247C(temp_r3->match_end.player_standings[0].xE);
     gm_80180BA0();
     if (temp_r3->match_end.result == OUTCOME_RETRY) {
-        gm_SetPendingSceneIndex(1);
+        gm_SetNextGameModeStateId(1);
         return;
     }
     selkind = gm_CKindToSelKind(
@@ -169,7 +169,7 @@ void gm_801B9DD8(GameModeState* arg0)
     gm_80173EEC();
     gm_80172898(8);
     if (gm_80173754(0x20, gm_804D68F8) == 0) {
-        gm_SetPendingSceneIndex(0);
+        gm_SetNextGameModeStateId(0);
     }
 }
 

@@ -32,7 +32,7 @@
 
 static inline ColorOverlay* grMaterial_GetOverlay(Ground* gp)
 {
-    return (ColorOverlay*) &gp->self_vel;
+    return (ColorOverlay*) ((u8*) gp + 0x40);
 }
 
 struct grMaterial_MObjInfo {

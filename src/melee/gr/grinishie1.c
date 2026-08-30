@@ -145,6 +145,24 @@ static struct grInishie1_YakumonoParam* yakumono_param;
 /// initial velocity for items spawned from hatena blocks
 const Vec3 grI1_803B8268 = { 0.0f, 5.0f, 0.0f };
 
+#define DOBJ_LOOP(jobj)                                                       \
+    {                                                                         \
+        HSD_DObj* dobj = HSD_JObjGetDObj(jobj);                               \
+        while (dobj != NULL) {                                                \
+            HSD_DObjSetFlags(dobj, 1U);                                       \
+            dobj = (dobj != NULL) ? dobj->next : NULL;                        \
+        }                                                                     \
+    };
+
+#define DOBJ_CLEAR_LOOP(jobj)                                                 \
+    {                                                                         \
+        HSD_DObj* dobj = HSD_JObjGetDObj(jobj);                               \
+        while (dobj != NULL) {                                                \
+            HSD_DObjClearFlags(dobj, 1U);                                     \
+            dobj = (dobj != NULL) ? dobj->next : NULL;                        \
+        }                                                                     \
+    }
+
 GrJoint grI1_803E48C8[] = {
     { 13, 3, 3 },  { 14, 3, 14 }, { 15, 3, 15 }, { 16, 3, 16 },
     { 17, 3, 17 }, { 18, 3, 18 }, { 19, 3, 19 },
@@ -781,7 +799,6 @@ void grInishie1_801FBA34(HSD_GObj* gobj, HSD_JObj* jobj)
 
 void grInishie1_801FBAA0(HSD_GObj* gobj, s32 ix)
 {
-    HSD_DObj* dobj;
     HSD_JObj* hatena_jobj;
     Vec3 position;
     Ground* mapgp = HSD_GObjGetUserData(gobj);
@@ -808,24 +825,15 @@ void grInishie1_801FBAA0(HSD_GObj* gobj, s32 ix)
             hatena_gp->u.inishie13.xCC = 1;
         }
 
-        dobj = HSD_JObjGetDObj(mapgp->u.inishie1.block[ix].jobj2);
-        while (dobj != NULL) {
-            HSD_DObjSetFlags(dobj, 1U);
-            dobj = (dobj != NULL) ? dobj->next : NULL;
-        }
+        DOBJ_LOOP(mapgp->u.inishie1.block[ix].jobj2);
     }
 }
 
 void grInishie1_801FBC4C(HSD_GObj* gobj, u32 index)
 {
     Ground* gp = GET_GROUND(gobj);
-    HSD_DObj* dobj;
     HSD_JObj* jobj2 = gp->u.inishie1.block[index].jobj2;
-    dobj = HSD_JObjGetDObj(jobj2);
-    while (dobj != NULL) {
-        HSD_DObjClearFlags(dobj, 1U);
-        dobj = (dobj != NULL) ? dobj->next : NULL;
-    }
+    DOBJ_CLEAR_LOOP(jobj2);
     Ground_801C4A08(gp->u.inishie1.block[index].hatena_gobj);
     gp->u.inishie1.block[index].hatena_gobj = NULL;
 }

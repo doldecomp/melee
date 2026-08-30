@@ -23,8 +23,8 @@ GameModeState gm_Mode_StaminaVs_States[] = {
         gm_801B922C,
         {
             GS_CSS,
-            &gm_804807B0,
-            &gm_804807B0,
+            &gmVsMelee_CssData,
+            &gmVsMelee_CssData,
         },
     },
     {
@@ -35,8 +35,8 @@ GameModeState gm_Mode_StaminaVs_States[] = {
         gm_801B927C,
         {
             GS_SSS,
-            &gm_80480668,
-            &gm_80480668,
+            &gmVsMelee_SssData,
+            &gmVsMelee_SssData,
         },
     },
     {
@@ -47,7 +47,7 @@ GameModeState gm_Mode_StaminaVs_States[] = {
         gm_801B9560,
         {
             GS_VS,
-            &gm_80480530,
+            &gmVsMelee_StartData,
             &gm_80479D98,
         },
     },
@@ -63,7 +63,7 @@ static struct {
 void gm_801B91C8(GameModeState* arg0)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->unk_10D0;
-    CSSData* css = gm_GetGameSceneLoadData(arg0);
+    CSSData* css = gm_GetGameModeStateEnterData(arg0);
     css->match_type = 2;
     css->ko_star_counts = 0;
     css->data = *vs;
@@ -83,7 +83,7 @@ void gm_801B9254(GameModeState* scene)
 void gm_801B927C(GameModeState* arg0)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->unk_10D0;
-    SSSData* sss = gm_GetGameSceneLeaveData(arg0);
+    SSSData* sss = gm_GetGameModeStateExitData(arg0);
     if (sss->start_game != 0) {
         *vs = sss->data;
 
@@ -92,13 +92,13 @@ void gm_801B927C(GameModeState* arg0)
         lbAudioAx_80027168();
         return;
     }
-    gm_SetPendingSceneIndex(0);
+    gm_SetNextGameModeStateId(0);
 }
 
 void gm_801B931C(GameModeState* arg0)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->unk_10D0;
-    StartMeleeData* start = gm_GetGameSceneLoadData(arg0);
+    StartMeleeData* start = gm_GetGameModeStateEnterData(arg0);
     int i;
 
     gm_80167BC8(vs);
@@ -139,7 +139,7 @@ void gm_Mode_StaminaVs_OnInit(void)
 void gm_Mode_StaminaVs_OnLoad(void)
 {
     gm_SetGameSpeed(1.0F);
-    gm_801A55C4();
+    gmVsMelee_ResetKOCounts();
 }
 
 /// Number of players / teams remaining

@@ -50,7 +50,7 @@ GameModeState gm_Mode_Boot_States[] = {
 
 void bootOnLoad(GameModeState* scene)
 {
-    struct loadData* scene_data = gm_GetGameSceneLoadData(scene);
+    struct loadData* scene_data = gm_GetGameModeStateEnterData(scene);
     scene_data->x4 = 0;
     scene_data->x0 = 0;
     if (gmMainLib_8046B0F0.skip_intro == true) {
@@ -63,7 +63,7 @@ void bootOnLoad(GameModeState* scene)
 
 void bootOnLeave(GameModeState* data)
 {
-    struct leaveData* scene_data = gm_GetGameSceneLeaveData(data);
+    struct leaveData* scene_data = gm_GetGameModeStateExitData(data);
 
     if (!Toy_803048C0(TROPHY_PIKMIN)) {
         if (!lb_8001C2D8(0, "01",
@@ -101,7 +101,7 @@ GameModeState gm_Mode_MemCard_States[] = {
 
 void memcardOnLoad(GameModeState* scene)
 {
-    struct loadData* temp_r3 = gm_GetGameSceneLoadData(scene);
+    struct loadData* temp_r3 = gm_GetGameModeStateEnterData(scene);
     temp_r3->x4 = 0;
     temp_r3->x0 = 1;
 }

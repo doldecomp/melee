@@ -752,6 +752,17 @@ static inline void gmMainLib_AdjustNameTags(VsModeData* load_vmd,
     }
 }
 
+inline void gmMainLib_AdjustNameTag(u8* tag_ptr, u8 tag)
+{
+    u8 value = *tag_ptr;
+
+    if (value == tag) {
+        *tag_ptr = 0x78;
+    } else if (value > tag && value != 0x78) {
+        *tag_ptr = value - 1;
+    }
+}
+
 s32 gmMainLib_8015DBF4(s32 arg0)
 {
     extern VsModeData gm_80497618;
@@ -793,14 +804,8 @@ s32 gmMainLib_8015DBF4(s32 arg0)
 
     config = gmMainLib_8015CDC8();
     config_all = (struct gmMainLib_8015DBF4_config*) config;
-    ptr = &config->x4;
-    val = *ptr;
     base = (struct gmMainLib_8015DBF4_base*) &config_all->unk_530.unk_588[0];
-    if (val == (u8) arg0) {
-        *ptr = 0x78;
-    } else if (val > (u8) arg0 && val != 0x78) {
-        *ptr = val - 1;
-    }
+    gmMainLib_AdjustNameTag(&config->x4, (u8) arg0);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_522.x4);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_528.x4);
     ADJ_NAMETAG_78(config_all->unk_530.x4);
@@ -868,7 +873,16 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     return arg0;
 }
 
-static inline void gmMainLib_SetHandicaps(s8* base)
+static inline void
+SetPlayerHandicaps(struct PlayerInitData* p0, struct PlayerInitData* p1,
+                   struct PlayerInitData* p2, struct PlayerInitData* p3,
+                   struct PlayerInitData* p4, struct PlayerInitData* p5)
+{
+    p5->handicap = p4->handicap = p3->handicap = p2->handicap = p1->handicap =
+        p0->handicap = 9;
+}
+
+void gmMainLib_8015EA80(void)
 {
     struct gmMainLib_8015EA80_modes {
         u8 pad[8];
@@ -877,26 +891,20 @@ static inline void gmMainLib_SetHandicaps(s8* base)
         (struct gmMainLib_8015EA80_modes*) gmMainLib_804D3EE0->unk_530.unk_588;
     struct PlayerInitData* players;
     s32 i;
-    s32 j;
 
+    PAD_STACK(0x90);
+
+    gmMainLib_8015CDEC();
     for (i = 0; i < 6; i++) {
         players = data->modes[i].data.players;
         SetPlayerHandicaps(&players[0], &players[1], &players[2], &players[3],
                            &players[4], &players[5]);
     }
-}
-
-void gmMainLib_8015EA80(void)
-{
-    s8* volatile base_temp = gmMainLib_804D3EE0->unk_530.unk_588;
-    s8* base = base_temp;
-    s8* base2 = base + 7 * 0x140;
-
-    PAD_STACK(0x90);
-
-    gmMainLib_8015CDEC();
-    gmMainLib_SetHandicaps(base);
-    gmMainLib_SetHandicaps(base2);
+    for (i = 7; i < 13; i++) {
+        players = data->modes[i].data.players;
+        SetPlayerHandicaps(&players[0], &players[1], &players[2], &players[3],
+                           &players[4], &players[5]);
+    }
 }
 
 int gmMainLib_8015ECB0(void)

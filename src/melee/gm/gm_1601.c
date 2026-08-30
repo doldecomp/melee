@@ -3404,29 +3404,25 @@ void fn_8016758C(void)
     }
 }
 
-static inline void get_idx(lbl_8046B6A0_t* info, int* idx)
+static inline int get_idx(void)
 {
+    lbl_8046B6A0_t* info = gm_16AE_GetUnkData_1();
     int i;
     for (i = 0; i < ARRAY_SIZE(info->FighterMatchInfo); i++) {
         if (info->FighterMatchInfo[i].x8 == 0) {
-            *idx = i;
-            return;
+            return i;
         }
     }
-    *idx = 0;
+    return 0;
 }
 
 s32 fn_80167638(s32 arg0, Vec3* arg1, Vec3* arg2)
 {
-    lbl_8046B6A0_t* info;
-    int idx;
-    s8 chr;
+    int idx = get_idx();
+    s8 chr = Player_GetPlayerCharacter(arg0);
     s32 tmp;
-
-    info = gm_16AE_GetUnkData_1();
-    get_idx(info, &idx);
-    chr = Player_GetPlayerCharacter(arg0);
     PAD_STACK(8);
+
     if (stage_info.unk8C.b4) {
         Stage_80224E38(arg1, tmp = arg0);
         arg2->z = 0.0f;
@@ -3444,7 +3440,7 @@ s32 fn_80167638(s32 arg0, Vec3* arg1, Vec3* arg2)
             arg2->y = 0.0f;
         }
         {
-            info = gm_16AE_GetUnkData_1();
+            lbl_8046B6A0_t* info = gm_16AE_GetUnkData_1();
             PAD_STACK(8);
             info->FighterMatchInfo[idx].x8 = 0x90;
             info->FighterMatchInfo[idx].x9 = chr;

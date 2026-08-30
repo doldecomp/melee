@@ -14,6 +14,7 @@ extern UNK_T gmClassic_80470708[];
 extern DebugGameOverData gmClassic_80470850;
 extern UNK_T gmClassic_8047086C;
 extern UNK_T gmClassic_80472AF8;
+u8 gm_804908A0[112];
 UNK_T gmClassic_804D68D0;
 
 typedef struct gmClassicMatchup {
@@ -57,8 +58,13 @@ ASSERT_SIZE(gmClassicIntroData, 0x20);
 
 typedef struct gmClassic_80490880Data {
     /* 0x00 */ gmClassicIntroData x00;
+    /* 0x20 */ u8 x20[0x0C];
+    /* 0x2C */ u8 x2C[0x28];
+    /* 0x54 */ u8 x54[0x20];
+    /* 0x74 */ u8 x74[0x0C];
+    /* 0x80 */ u8 x80[0x10];
 } gmClassic_80490880Data;
-ASSERT_SIZE(gmClassic_80490880Data, 0x20);
+ASSERT_SIZE(gmClassic_80490880Data, 0x90);
 
 typedef union gmClassic_804908A0Data {
     /* 0x00 */ u8 bytes[0x70];
@@ -98,7 +104,6 @@ typedef struct gmClassicSceneData {
 ASSERT_SIZE(gmClassicSceneData, 0x560);
 
 static gmClassic_80490880Data gmClassic_80490880;
-u8 gm_804908A0[112];
 
 GameModeState gm_Mode_Classic_States[] = {
     {
@@ -508,11 +513,12 @@ static inline void gmClassic_InitMatchupOrder(const gmClassicMatchup* matchups,
     }
 
     for (i = 0; i < count; i++) {
-        u8* swap = &order[HSD_Randi(count)];
-        u8* cur = &order[i];
-        u8 tmp = *cur;
-        *cur = *swap;
-        *swap = tmp;
+        s32 swap_idx = HSD_Randi(count);
+        gmClassicOrderIndex* swap = &runtime[swap_idx];
+        gmClassicOrderIndex* cur = &order[i];
+        u8 tmp = cur->idx;
+        cur->idx = swap[order_offset].idx;
+        swap[order_offset].idx = tmp;
     }
 }
 
@@ -606,15 +612,15 @@ static gmClassicMatchupData gm_804D4328 = { { 0x053, { 0x21, 0x21, 0x21 }, 0 },
 
 static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
 {
-    gmClassicRuntimeData* o = (gmClassicRuntimeData*) &gmClassic_80490880;
+    gmClassic_80490880Data* o = &gmClassic_80490880;
     gm_803DDEC8Struct* ptr;
     gmClassicSceneData* scene_data =
         (gmClassicSceneData*) gm_Mode_Classic_States;
 
     for (ptr = arg0; ptr->x0 != 0xD; ptr++) {
         if (ptr->x1 & 8) {
-            gmClassicMatchup* result = gmClassic_801B2BA4(
-                scene_data->matchups.x2B0, o->state.order.x60, arg0);
+            gmClassicMatchup* result =
+                gmClassic_801B2BA4(scene_data->matchups.x2B0, o->x80, arg0);
             if (result != NULL) {
                 ptr->xC = result;
             } else {
@@ -627,8 +633,8 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
     for (ptr = arg0; ptr->x0 != 0xD; ptr++) {
         u8 flags = ptr->x1;
         if ((flags & 2) && !(flags & 0x20)) {
-            gmClassicMatchup* result = gmClassic_801B2BA4(
-                scene_data->matchups.x26C, o->state.order.x54, arg0);
+            gmClassicMatchup* result =
+                gmClassic_801B2BA4(scene_data->matchups.x26C, o->x74, arg0);
             if (result != NULL) {
                 ptr->xC = result;
             } else {
@@ -641,8 +647,8 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
     for (ptr = arg0; ptr->x0 != 0xD; ptr++) {
         u8 flags = ptr->x1;
         if ((flags & 0x10) && !(flags & 0x20)) {
-            gmClassicMatchup* result = gmClassic_801B2BA4(
-                scene_data->matchups.x1B8, o->state.order.x34, arg0);
+            gmClassicMatchup* result =
+                gmClassic_801B2BA4(scene_data->matchups.x1B8, o->x54, arg0);
             if (result != NULL) {
                 ptr->xC = result;
             } else {
@@ -655,8 +661,8 @@ static gm_803DDEC8Struct* gmClassic_801B2D54(gm_803DDEC8Struct* arg0)
     for (ptr = arg0; ptr->x0 != 0xD; ptr++) {
         u8 flags = ptr->x1;
         if (flags == 0 || flags == 4) {
-            gmClassicMatchup* result = gmClassic_801B2BA4(
-                scene_data->matchups.x0CC, o->state.order.x0C, arg0);
+            gmClassicMatchup* result =
+                gmClassic_801B2BA4(scene_data->matchups.x0CC, o->x2C, arg0);
             if (result != NULL) {
                 ptr->xC = result;
             } else {
@@ -697,9 +703,9 @@ void gm_Mode_Classic_OnLoad(void)
     UnkAllstarData* data;
     gmClassicSceneData* scene_data =
         (gmClassicSceneData*) gm_Mode_Classic_States;
-    gmClassic_80490880Data* o = &gmClassic_80490880;
+    gmClassicRuntimeData* o = (gmClassicRuntimeData*) &gmClassic_80490880;
     gm_803DDEC8Struct* entry;
-    PAD_STACK(56);
+    PAD_STACK(40);
 
     for (entry = scene_data->matchups.x00; entry->x0 != 0x0D; entry++) {
         entry->xC = NULL;
@@ -723,7 +729,7 @@ void gm_Mode_Classic_OnLoad(void)
     gm_8017C984(data);
 
     {
-        u8* p = o->x20;
+        u8* p = o->state.order.x00;
         int i;
         for (i = 12; i > 0; i--) {
             *p++ = 0;
@@ -744,7 +750,7 @@ void gm_Mode_Classic_OnLoad(void)
     data->x6C = gm_8017EC00;
     data->x70 = gm_8017EC50;
 
-    gm_SetSceneIndex(0x70U);
+    gm_SetGameModeStateId(0x70U);
     gm_80172174();
     Ground_801C5A28();
 }
@@ -783,7 +789,7 @@ void gmClassic_801B3500(GameModeState* arg0)
     s8 ckind;
     gm_803DDEC8Struct* new_var;
 
-    sd = gm_GetGameSceneLoadData(arg0);
+    sd = gm_GetGameModeStateEnterData(arg0);
     entry = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->id)];
     new_var = entry;
     ad = gm_GetAllStarData();
@@ -948,7 +954,7 @@ void gmClassic_801B3A34(GameModeState* arg0)
 
     PAD_STACK(8);
 
-    temp_r30 = gm_GetGameSceneLoadData(arg0);
+    temp_r30 = gm_GetGameModeStateEnterData(arg0);
     temp_r31 = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->id)];
     temp_r29 = gm_GetAllStarData();
     new_var = temp_r30;
@@ -989,7 +995,7 @@ void gmClassic_801B3B40(GameModeState* arg0)
     s32 mask;
     PAD_STACK(4);
 
-    mei = (MatchExitInfo*) gm_GetGameSceneLeaveData(arg0);
+    mei = (MatchExitInfo*) gm_GetGameModeStateExitData(arg0);
     asd = gm_GetAllStarData();
     entry = &gmClassic_803DDEC8.x00[(u8) gm_8017BE84(arg0->id)];
     exit_result = mei->x8;
@@ -1049,19 +1055,19 @@ void gmClassic_801B3B40(GameModeState* arg0)
 
 void gmClassic_801B3D44(GameModeState* scene)
 {
-    struct DebugGameOverData* temp_r31 = gm_GetGameSceneLoadData(scene);
+    struct DebugGameOverData* temp_r31 = gm_GetGameModeStateEnterData(scene);
     gm_8017C9A8(temp_r31, &gm_GetAllStarData()->x0, 1);
 }
 
 void gmClassic_801B3D84(GameModeState* scene)
 {
-    DebugGameOverData* temp_r30 = gm_GetGameSceneLeaveData(scene);
+    DebugGameOverData* temp_r30 = gm_GetGameModeStateExitData(scene);
     gm_8017CA38(temp_r30, &gm_GetAllStarData()->x0, gmMainLib_8015CDC8(), 1);
 }
 
 void gmClassic_801B3DD8(GameModeState* scene)
 {
-    CSSData* css = gm_GetGameSceneLoadData(scene);
+    CSSData* css = gm_GetGameModeStateEnterData(scene);
     struct gmm_x0_528_t* temp_r31 = gmMainLib_8015CDC8();
     gm_801B06B0(css, 0xB, temp_r31->c_kind, temp_r31->stocks, temp_r31->color,
                 temp_r31->x4, temp_r31->cpu_level,
@@ -1071,7 +1077,7 @@ void gmClassic_801B3DD8(GameModeState* scene)
 
 void gmClassic_801B3E44(GameModeState* scene)
 {
-    CSSData* temp_r30 = gm_GetGameSceneLeaveData(scene);
+    CSSData* temp_r30 = gm_GetGameModeStateExitData(scene);
     gmm_x0_528_t* temp_r29 = gmMainLib_8015CDC8();
     UnkAllstarData* temp_r31 = gm_GetAllStarData();
     gm_803DDEC8Struct* r4 = gmClassic_803DDEC8.x00;
@@ -1089,7 +1095,7 @@ void gmClassic_801B3E44(GameModeState* scene)
     temp_r31->x0.stocks = temp_r29->stocks;
     temp_r31->x0.x4 = temp_r29->x4;
     gmClassic_801B2D54(r4);
-    gm_SetPendingSceneIndex(temp_r29->x5 << 3);
+    gm_SetNextGameModeStateId(temp_r29->x5 << 3);
     gm_80168F88();
 }
 

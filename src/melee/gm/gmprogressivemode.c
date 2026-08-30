@@ -25,12 +25,12 @@ GameModeState gm_Mode_ProgScan_States[] = {
 
 void gm_801BF8F8(GameModeState* arg0)
 {
-    int* val = gm_GetGameSceneLoadData(arg0);
+    int* val = gm_GetGameModeStateEnterData(arg0);
     *val = 1;
 }
 
 void gm_801BF920(GameModeState* arg0)
 {
-    gm_GetGameSceneLeaveData(arg0);
+    gm_GetGameModeStateExitData(arg0);
     gm_ChangeGameModeAfterCurrentScene(GM_BOOT);
 }

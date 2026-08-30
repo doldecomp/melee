@@ -612,7 +612,7 @@ void gm_8017CA38(DebugGameOverData* arg0, Unk1PData* arg1, gmm_x0_528_t* arg2,
         arg1->xC.x18 = lbTime_8000AEC8((u32) arg0->x4, 1U);
         arg1->stocks = arg2->stocks;
         arg1->xC.xD = lbTime_8000AF74((u32) arg1->xC.xD, 1);
-        gm_SetPendingSceneIndex(arg1->x7);
+        gm_SetNextGameModeStateId(arg1->x7);
     }
 }
 
@@ -700,7 +700,7 @@ static inline s32 gm_8017CE34_CountEnemies(const s8* arg0)
     s32 i;
 
     for (i = 0; i < 3; i++) {
-        if ((s32) arg0[i] != CHKIND_NONE) {
+        if ((s32) arg0[i] != 0x21) {
             count++;
         }
     }
@@ -710,20 +710,26 @@ static inline s32 gm_8017CE34_CountEnemies(const s8* arg0)
 static inline void gm_8017CE34_SetupColors(UnkAdventureData* arg1, s32 count,
                                            s8* arg2, u8* colors)
 {
-    u8* out_color = colors;
     s32 color_idx;
-    s8* kind_iter = arg2;
+    u8* out_color = colors;
+    u8 num_colors;
+    u8 result;
 
     for (color_idx = 0; color_idx < 3; color_idx++) {
-        *out_color = gm_8017CD94(arg1, (u8) *kind_iter, count, color_idx);
+        num_colors = gm_80169238((u8) arg2[color_idx]);
+        if (arg1->x54 != NULL) {
+            result = arg1->x54(count, arg1->x0.cpu_level, color_idx);
+            if (num_colors != 0) {
+                result %= num_colors;
+            } else {
+                result = 0;
+            }
+        } else {
+            result = 0;
+        }
+        *out_color = result;
         out_color++;
-        kind_iter++;
     }
-}
-
-static inline u8 gm_8017CE34_GetCpuLevel(UnkAdventureData* arg1)
-{
-    return arg1->x0.cpu_level;
 }
 
 static inline u8 gm_8017CE34_GetCpuLevel(UnkAdventureData* arg1)
@@ -1095,18 +1101,18 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
             if (arg0->match_end.result == OUTCOME_TIMEOUT) {
                 arg1->stocks--;
                 if (arg1->stocks == 0) {
-                    gm_SetPendingSceneIndex(arg2);
+                    gm_SetNextGameModeStateId(arg2);
                     return 0;
                 }
                 if (!(arg1->x8 & 0x40)) {
                     arg1->xC.x10++;
-                    gm_SetPendingSceneIndex(gm_GetCurrentSceneIndex());
+                    gm_SetNextGameModeStateId(gm_GetCurrentSceneIndex());
                     return 0;
                 }
             }
         } else {
             arg1->xC.x10 = 0;
-            gm_SetPendingSceneIndex(arg2);
+            gm_SetNextGameModeStateId(arg2);
             return 0;
         }
     }
@@ -1283,7 +1289,7 @@ s32 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1, u8 arg2)
     for (i = 0; i < 3; i++) {
         if (arg1[i].ckind != CHKIND_NONE) {
             gm_8016795C(&arg0[index]);
-            arg0[index].c_kind = arg1[i].ckind;
+            arg0[index].ckind = arg1[i].ckind;
             arg0[index].slot_type = 1;
             arg0[index].stocks = 1;
             arg0[index].team = arg0->team;
@@ -1293,7 +1299,7 @@ s32 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1, u8 arg2)
             arg0[index].x18 = arg1[i].x4;
             arg0[index].x1C = arg1[i].x8;
             arg0[index].xD_b1 = 1;
-            if (arg0[index].c_kind == CKIND_GKOOPS) {
+            if (arg0[index].ckind == CKIND_GKOOPS) {
                 arg0[index].xC_b1 = 0;
             }
             index++;
@@ -1600,10 +1606,10 @@ void gm_8017E7FC(u8 matchResult)
         struct StartMeleeRules* rules = gm_GetRules();
         rules->x4_5 = 1;
         r31->x77 = 0;
-        gm_SetPendingSceneIndex(0x5A);
+        gm_SetNextGameModeStateId(0x5A);
     } else {
         r31->x77 = 1;
-        gm_SetPendingSceneIndex(0x5A);
+        gm_SetNextGameModeStateId(0x5A);
     }
 }
 
@@ -3374,7 +3380,7 @@ void fn_80181C80(s32 arg0)
         }
         data->x54[arg0].x0 = -2;
         sp10.team = !Player_GetTeam(0);
-        sp10.c_kind = data->x54[arg0].x5;
+        sp10.ckind = data->x54[arg0].x5;
         sp10.cpu_level = data->x54[arg0].x6;
         sp10.xE = data->x54[arg0].x7;
         sp10.x18 = data->x54[arg0].x8;
@@ -3550,7 +3556,7 @@ void gm_80182174(void)
 
     gm_8016795C(&lbl_80472ED8.xC);
 
-    ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.c_kind = CKIND_BOY;
+    ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.ckind = CKIND_BOY;
     ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.slot_type = 1;
     ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.stocks = 1;
     ((volatile lbl_80472ED8_t*) &lbl_80472ED8)->xC.xD_b4 = 1;
@@ -4135,7 +4141,7 @@ void fn_80182F40(HSD_GObj* unused)
         lbAudioAx_80023694();
         if (gm_GetCurrentSceneIndex() == 3 && gmMainLib_8015DB00() % 2 == 0) {
             gmMainLib_8015DB18();
-            gm_SetPendingSceneIndex(0);
+            gm_SetNextGameModeStateId(0);
         }
         gm_801A4B60();
         return;

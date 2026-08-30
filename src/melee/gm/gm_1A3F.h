@@ -3,10 +3,10 @@
 
 #include <melee/gm/forward.h>
 
-/* 1A427C */ void* gm_GetGameSceneLoadData(GameModeState*);
-/* 1A4284 */ void* gm_GetGameSceneLeaveData(GameModeState*);
-/* 1A428C */ void gm_SetSceneIndex(u8 idx);
-/* 1A42A0 */ void gm_SetPendingSceneIndex(u8 pending_scene);
+/* 1A427C */ void* gm_GetGameModeStateEnterData(GameModeState*);
+/* 1A4284 */ void* gm_GetGameModeStateExitData(GameModeState*);
+/* 1A428C */ void gm_SetGameModeStateId(u8 idx);
+/* 1A42A0 */ void gm_SetNextGameModeStateId(u8 pending_scene);
 /* 1A42B4 */ u8 gm_GetPreviousSceneIndex(void);
 /* 1A42C4 */ u8 gm_GetCurrentSceneIndex(void);
 /* 1A42D4 */ void gm_SetNewGameModePending(void);

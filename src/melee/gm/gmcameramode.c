@@ -51,8 +51,8 @@ GameModeState gm_Mode_Camera_States[] = {
         gm_801B25D4,
         {
             GS_CSS,
-            &gm_804807B0,
-            &gm_804807B0,
+            &gmVsMelee_CssData,
+            &gmVsMelee_CssData,
         },
     },
     {
@@ -63,8 +63,8 @@ GameModeState gm_Mode_Camera_States[] = {
         gm_801B2704,
         {
             GS_SSS,
-            &gm_80480668,
-            &gm_80480668,
+            &gmVsMelee_SssData,
+            &gmVsMelee_SssData,
         },
     },
     {
@@ -75,7 +75,7 @@ GameModeState gm_Mode_Camera_States[] = {
         gm_801B2AF8,
         {
             GS_VS,
-            &gm_80480530,
+            &gmVsMelee_StartData,
             &gm_80479D98,
         },
     },
@@ -106,7 +106,7 @@ void gm_801B24B4(GameModeState* arg0)
 
 void gm_801B2510(GameModeState* arg0)
 {
-    int* data = gm_GetGameSceneLeaveData(arg0);
+    int* data = gm_GetGameModeStateExitData(arg0);
     int temp_r0 = *data;
     if (temp_r0 == 1 || temp_r0 == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
@@ -121,8 +121,8 @@ void gm_801B254C(GameModeState* arg0)
     struct GameCache* temp_r30_2;
 
     temp_r31 = &gmMainLib_804D3EE0->unk_950;
-    temp_r30 = gm_GetGameSceneLoadData(arg0);
-    temp_r3 = gm_801A5250();
+    temp_r30 = gm_GetGameModeStateEnterData(arg0);
+    temp_r3 = gmVsMelee_GetKOCounts();
 
     temp_r30->match_type = 1;
     temp_r30->ko_star_counts = temp_r3;
@@ -143,7 +143,7 @@ void gm_801B25D4(GameModeState* arg0)
     int i;
 
     temp_r31 = &gmMainLib_804D3EE0->unk_950;
-    temp_r3 = gm_GetGameSceneLeaveData(arg0);
+    temp_r3 = gm_GetGameModeStateExitData(arg0);
     if (temp_r3->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
@@ -166,7 +166,7 @@ void gm_801B26AC(GameModeState* arg0)
     SSSData* sss;
     VsModeData* vs;
     vs = &gmMainLib_804D3EE0->unk_950;
-    sss = gm_GetGameSceneLoadData(arg0);
+    sss = gm_GetGameModeStateEnterData(arg0);
     sss->data = *vs;
     gm_80167FC4(sss);
 }
@@ -177,7 +177,7 @@ void gm_801B2704(GameModeState* arg0)
     SSSData* var_r3;
 
     temp_r31 = &gmMainLib_804D3EE0->unk_950;
-    var_r3 = gm_GetGameSceneLeaveData(arg0);
+    var_r3 = gm_GetGameModeStateExitData(arg0);
     if (var_r3->start_game != 0) {
         *temp_r31 = var_r3->data;
         lbAudioAx_80026F2C(0x18);
@@ -185,7 +185,7 @@ void gm_801B2704(GameModeState* arg0)
         lbAudioAx_80027168();
         return;
     }
-    gm_SetPendingSceneIndex(1);
+    gm_SetNextGameModeStateId(1);
 }
 
 void gm_PrepCameraModeVSScene(GameModeState* arg0)
@@ -195,7 +195,7 @@ void gm_PrepCameraModeVSScene(GameModeState* arg0)
     int i;
 
     vs = &gmMainLib_804D3EE0->unk_950;
-    start = gm_GetGameSceneLoadData(arg0);
+    start = gm_GetGameModeStateEnterData(arg0);
     gm_80167BC8(vs);
 
     start->rules = vs->data.rules;
@@ -240,12 +240,12 @@ void gm_801B2AF8(GameModeState* arg0)
     u8* temp_r29;
 
     temp_r30 = &gmMainLib_804D3EE0->unk_950;
-    temp_r29 = gm_801A5250();
+    temp_r29 = gmVsMelee_GetKOCounts();
     gm_80168638(&gm_80479D98.match_end);
     gm_80168710(&gm_80479D98.match_end, temp_r30);
     gm_8016247C(gm_801688AC(&gm_80479D98.match_end));
     gm_801A5258(temp_r29, &gm_80479D98.match_end);
-    gm_SetPendingSceneIndex(1);
+    gm_SetNextGameModeStateId(1);
 }
 
 void gm_Mode_Camera_OnInit(void)

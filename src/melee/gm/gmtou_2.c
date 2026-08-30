@@ -847,7 +847,7 @@ void gm_Scene_TouAlt_OnFrame(void)
                     lbl_80479A58.x18[i] = (u8) (lbl_80479A58.x18[i] + 1);
                     if (lbl_80479A58.x18[i] > 0x5AU) {
                         sfxForward();
-                        gm_SetPendingSceneIndex(0U);
+                        gm_SetNextGameModeStateId(0U);
                         gm_801A4B60();
                         return;
                     }
@@ -1016,7 +1016,12 @@ void gm_8019E634(void)
 
     /* Get match results per player */
     for (i = 0; i < (s32) tmd->x30; i++) {
-        results[i] = fn_80166CBC(&gm_80477738, i);
+        union {
+            u8 (*u8_fn)(MatchEnd*, ssize_t);
+            s32 (*s32_fn)(MatchEnd*, ssize_t);
+        } get_result;
+        get_result.u8_fn = fn_80166CBC;
+        results[i] = get_result.s32_fn(&gm_80477738, i);
     }
 
     /* Bubble sort results, keeping indices in parallel */

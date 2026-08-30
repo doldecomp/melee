@@ -419,53 +419,89 @@ static inline void initImages(void)
     }
 }
 
-static inline void setupTrophy(HSD_JObj* trophy_root)
+static inline void gm_801A7070_SetupMain(u8 priority)
+{
+    HSD_JObj* jobj;
+    HSD_GObj* gobj;
+    HSD_JObj* player_jobj;
+    f32 scale;
+
+    gobj = GObj_Create(0xE, 0xF, priority);
+    gm_804D6768 = gobj;
+    jobj = HSD_JObjLoadJoint(gm_804D6798);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
+    scale = gm_803DB2EC[gm_801BEFB0()];
+    HSD_JObjSetScaleX(jobj, scale);
+    HSD_JObjSetScaleY(jobj, scale);
+    HSD_JObjSetScaleZ(jobj, scale);
+
+    HSD_GObj_SetupProc(gobj, fn_801A6664, 0x17);
+    player_jobj = Player_80036EA0(0);
+    lb_8000C1C0(HSD_JObjGetChild(HSD_JObjGetChild(
+                    HSD_JObjGetChild(HSD_JObjGetChild(jobj)))),
+                player_jobj);
+    lb_8000C290(HSD_JObjGetChild(HSD_JObjGetChild(
+                    HSD_JObjGetChild(HSD_JObjGetChild(jobj)))),
+                player_jobj);
+}
+
+static inline f32 getTrophyTranslateZ(s32 trophy)
+{
+    return Toy_803060BC(trophy, 2);
+}
+
+static inline void gm_801A7070_SetupTrophy(u8 priority)
 {
     s32 trophy;
+    HSD_GObj* gobj;
     HSD_JObj* jobj;
-    f32 translate_x;
-    f32 translate_y;
-    f32 translate_z;
-    f32 rotation_y;
-    f32 inverse_scale;
-    f32 trophy_scale;
-    f32 root_scale;
+    HSD_JObj* child;
+    HSD_JObj* target;
+    f32 val;
+    f32 scale;
+
+    gobj = GObj_Create(0xE, 0xF, priority);
+    gm_804D6778 = gobj;
+    jobj = HSD_JObjLoadJoint(gm_804D67AC->models[0]->joint);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, jobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
 
     trophy = gm_801A659C(gm_801BEFB0());
-    jobj = HSD_JObjGetChild(trophy_root);
-    translate_x = -Toy_803060BC(trophy, 0);
-    HSD_JObjSetTranslateXWithMtxDirty(jobj, translate_x);
-    translate_y = -Toy_803060BC(trophy, 1);
-    HSD_JObjSetTranslateYWithMtxDirty(jobj, translate_y);
-    translate_z = -Toy_803060BC(trophy, 2);
-    HSD_JObjSetTranslateZWithMtxDirty(jobj, translate_z);
+    child = jobj == NULL ? NULL : jobj->child;
+    val = -Toy_803060BC(trophy, 0);
+    HSD_JObjSetTranslateXWithMtxDirty(child, val);
+    val = -Toy_803060BC(trophy, 1);
+    HSD_JObjSetTranslateYWithMtxDirty(child, val);
+    val = -getTrophyTranslateZ(trophy);
+    HSD_JObjSetTranslateZWithMtxDirty(child, val);
 
-    rotation_y = -(0.017453292f * Toy_803060BC(trophy, 5));
-    HSD_JObjSetRotationYWithMtxDirty(jobj, rotation_y);
-    inverse_scale = 1.0f / Toy_803060BC(trophy, 3);
-    trophy_scale = Toy_803060BC(trophy, 4);
-    trophy_scale = trophy_scale * inverse_scale;
-    HSD_JObjSetScaleXWithMtxDirty(jobj, trophy_scale);
-    HSD_JObjSetScaleYWithMtxDirty(jobj, trophy_scale);
-    HSD_JObjSetScaleZWithMtxDirty(jobj, trophy_scale);
-    root_scale = gm_803DB2EC[gm_801BEFB0()];
-    HSD_JObjSetScaleX(trophy_root, root_scale);
-    HSD_JObjSetScaleY(trophy_root, root_scale);
-    HSD_JObjSetScaleZ(trophy_root, root_scale);
+    val = -(0.017453292f * Toy_803060BC(trophy, 5));
+    HSD_JObjSetRotationYWithMtxDirty(child, val);
+    scale = 1.0f / Toy_803060BC(trophy, 3);
+    val = Toy_803060BC(trophy, 4);
+    scale = val * scale;
+    HSD_JObjSetScaleXWithMtxDirty(child, scale);
+    HSD_JObjSetScaleYWithMtxDirty(child, scale);
+    HSD_JObjSetScaleZWithMtxDirty(child, scale);
+    val = gm_803DB2EC[gm_801BEFB0()];
+    HSD_JObjSetScaleX(jobj, val);
+    HSD_JObjSetScaleY(jobj, val);
+    HSD_JObjSetScaleZ(jobj, val);
+
+    HSD_GObj_SetupProc(gobj, fn_801A6844, 0x17);
+    target = gm_804D6768->hsd_obj;
+    target = HSD_JObjGetNext(HSD_JObjGetChild(HSD_JObjGetChild(
+        HSD_JObjGetChild(HSD_JObjGetChild(HSD_JObjGetChild(target))))));
+    lb_8000C1C0(gobj->hsd_obj, target);
+    lb_8000C290(gobj->hsd_obj, target);
 }
 
 void gm_Scene_ToyFall_OnEnter(void* unused)
 {
-    HSD_JObj* player_jobj;
-    HSD_JObj* jobj;
-    HSD_JObj* main_jobj;
-    HSD_JObj* trophy_root;
-
-    f32 main_scale;
-
     HSD_GObj* gobj;
     HSD_LObj* lobj;
-    PAD_STACK(68);
+    PAD_STACK(44);
 
     gm_804D6740 = 0x1E;
     gm_804D6750 = 0x320;
@@ -534,20 +570,7 @@ void gm_Scene_ToyFall_OnEnter(void* unused)
 
     gm_801A7070_SetupMain(0);
     gm_GetCurrentSceneEnterData();
-    gobj = GObj_Create(0xE, 0xF, 0);
-    gm_804D6778 = gobj;
-    trophy_root = HSD_JObjLoadJoint(gm_804D67AC->models[0]->joint);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_JObjKind, trophy_root);
-    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
-
-    setupTrophy(trophy_root);
-
-    HSD_GObj_SetupProc(gobj, fn_801A6844, 0x17);
-    jobj = gm_804D6768->hsd_obj;
-    jobj = HSD_JObjGetNext(HSD_JObjGetChild(HSD_JObjGetChild(
-        HSD_JObjGetChild(HSD_JObjGetChild(HSD_JObjGetChild(jobj))))));
-    lb_8000C1C0(gobj->hsd_obj, jobj);
-    lb_8000C290(gobj->hsd_obj, jobj);
+    gm_801A7070_SetupTrophy(0);
     lbAudioAx_800237A8(0x7EF40, 0x7FU, 0x40U);
 }
 

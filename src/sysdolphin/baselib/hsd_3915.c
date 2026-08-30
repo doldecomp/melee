@@ -355,7 +355,7 @@ void hsd_80391E18(const u8* list, f32 x1, f32 y1, f32 x2, f32 y2)
     }
 }
 
-// @TODO: Register allocation differences remain
+// @TODO: Currently 88.12% match - register allocation differences remain
 static inline void hsd_80391F28_calc_perp_and_begin(f32 dy, f32 dx,
                                                     f32* perp_x, f32* perp_y)
 {
@@ -407,7 +407,6 @@ void hsd_80391F28(GXColor* color, f32 x1, f32 y1, f32 x2, f32 y2, f32 count)
     step_x = dx / count;
 
     GXWGFifo.f32 = x1;
-    i = 0;
     GXWGFifo.f32 = y1;
     r = color->r;
     GXWGFifo.u8 = r;

@@ -385,12 +385,14 @@ void fn_80169C54(s8 arg0, s8 arg1)
     s32 count;
     s32 k;
     s32 j;
+    s32 p1;
+    s32 p0;
     s8* cp;
     s32 p;
     s32 ch;
 
     n = 0;
-    st = fn_8016AE60();
+    st = fn_80169C54_inline();
     pc = &st->x0;
     for (i = 0; i < 7; i++) {
         buf[i] = -1;

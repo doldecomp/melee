@@ -248,7 +248,7 @@ void gm_801BA938(struct EventData* arg0, int lo, int hi, bool arg3)
 void onEnterCss(GameModeState* arg0)
 {
     struct EventData* temp_r31 = &gmMainLib_804D3EE0->unk_530;
-    CSSData* css = gm_GetGameSceneLoadData(arg0);
+    CSSData* css = gm_GetGameModeStateEnterData(arg0);
     PAD_STACK(8);
 
     gm_801B06B0(css, 0xE, temp_r31->x2, 0, temp_r31->x3, temp_r31->x4, 0,
@@ -264,7 +264,7 @@ void onExitCss(GameModeState* arg0)
     struct EventData* temp_r31;
 
     temp_r31 = &gmMainLib_804D3EE0->unk_530;
-    temp_r3 = gm_GetGameSceneLeaveData(arg0);
+    temp_r3 = gm_GetGameModeStateExitData(arg0);
     if (temp_r3->pending_scene_change == 2) {
         gm_ChangeGameModeAfterCurrentScene(GM_MENU);
         return;
@@ -315,7 +315,7 @@ s32 gm_801BAC9C(GameModeState* arg0, s32 arg1)
     UNUSED u8 _[8];
     u8 chars[CHKIND_MAX];
     struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
-    StartMeleeData* data = gm_GetGameSceneLoadData(arg0);
+    StartMeleeData* data = gm_GetGameModeStateEnterData(arg0);
     s32 i;
     s32 found;
     s32 count = 0;
@@ -363,7 +363,7 @@ static inline u8 gm_GetNextColor(u8 color)
 void onEnterVs(GameModeState* arg0)
 {
     struct EventData* ev = gm_GetEventData();
-    StartMeleeData* md = gm_GetGameSceneLoadData(arg0);
+    StartMeleeData* md = gm_GetGameModeStateEnterData(arg0);
     u8 level = ev->unk_535;
     s32 player_idx;
     struct gm_804D6900_t** levels;
@@ -636,7 +636,7 @@ void onEnterVs(GameModeState* arg0)
 void onExitVs(GameModeState* arg0)
 {
     struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
-    MatchExitInfo* exit = gm_GetGameSceneLeaveData(arg0);
+    MatchExitInfo* exit = gm_GetGameModeStateExitData(arg0);
     u8 stage = ev->unk_535;
     u8 b;
     u8 kind;
@@ -670,7 +670,7 @@ void onExitVs(GameModeState* arg0)
             lbDvd_80018254();
             lbDvd_80017700(4);
         }
-        gm_SetPendingSceneIndex(1);
+        gm_SetNextGameModeStateId(1);
         return;
     }
     if (exit->match_end.result == OUTCOME_NO_CONTEST) {
@@ -688,7 +688,7 @@ void onExitVs(GameModeState* arg0)
         t = ev->x20;
         ev->x20 = t + 1;
         gm_801BBB64();
-        gm_SetPendingSceneIndex(1);
+        gm_SetNextGameModeStateId(1);
         return;
     }
     if (ev->xB_1) {
@@ -940,7 +940,7 @@ void gm_Mode_Event_OnLoad(void)
     temp_r30->x40 = 0;
     gm_801BBB64();
     if (temp_r29[temp_r28]->player_init[0]->c_kind != 0x21) {
-        gm_SetSceneIndex(1);
+        gm_SetGameModeStateId(1);
     }
 }
 

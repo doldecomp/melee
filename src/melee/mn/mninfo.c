@@ -161,7 +161,7 @@ static MnInfoDataLayout mnInfo_803EFC08 = {
       'a', 'n', 'i', 'm', '_', 'j', 'o', 'i', 'n', 't' },
 };
 
-#define mnInfo_layout (*(MnInfoDataLayout*) mnInfo_803EFC08)
+#define mnInfo_layout mnInfo_803EFC08
 
 #ifdef MUST_MATCH
 #pragma push
@@ -182,7 +182,7 @@ s32 mnInfo_80251D58(mnInfo_GObj* arg0, s32 arg1, u32 arg2, u32 arg3)
     MnInfoDataLayout* layout;
 
     data = arg0->user_data;
-    layout = &mnInfo_layout;
+    layout = &mnInfo_803EFC08;
     slot = (HSD_Text**) ((u8*) data + (arg1 * 4));
     if (*(slot += 2) != NULL) {
         HSD_SisLib_803A5CC4(data->left_column[arg1]);
@@ -385,7 +385,7 @@ void mnInfo_802522B8(HSD_GObj* gobj)
     } else {
         HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
     }
-    mn_8022ED6C(jobj, &mnInfo_layout.anim);
+    mn_8022ED6C(jobj, &mnInfo_803EFC08.anim);
 }
 #ifdef MUST_MATCH
 #pragma pop
@@ -443,7 +443,7 @@ static inline void fn_802523D8_inline(MnInfoData* data, HSD_GObj* gobj)
             HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
         }
 
-        mn_8022ED6C(jobj, &mnInfo_layout.anim);
+        mn_8022ED6C(jobj, &mnInfo_803EFC08.anim);
     }
 }
 

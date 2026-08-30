@@ -403,7 +403,7 @@ void mn_8022FB88(u8 arg0, void* arg1)
     struct mn_8022FB88_arg1_t* data = arg1;
     u8 sp14[4] = { 2, 3, 5, 6 };
     s32 sp10;
-    u8* index_ptr;
+    u8* var_r29;
     HSD_JObj* temp_r29_2;
     HSD_JObj* temp_r29_3;
     int new_var;
@@ -411,18 +411,18 @@ void mn_8022FB88(u8 arg0, void* arg1)
     HSD_JObj* temp_r28;
     HSD_JObj* temp_r29;
     s32 var_r28;
-    u8* index_ptr2;
+    u8* var_r29_2;
     HSD_JObj** temp_r27_2;
     s32 var_r27;
 
     if (arg0 == 0) {
         HSD_JObj* temp_r27;
         var_r27 = 0;
-        index_ptr = sp14;
+        var_r29 = sp14;
         do {
-            HSD_JObjSetFlagsAll(data->x58[*index_ptr], JOBJ_HIDDEN);
+            HSD_JObjSetFlagsAll(data->x58[*var_r29], JOBJ_HIDDEN);
             var_r27 += 1;
-            index_ptr += 1;
+            var_r29 += 1;
         } while (var_r27 < 4);
         temp_r27 = data->x58[4];
         HSD_JObjReqAnimAll(temp_r27, mn_804D4B90);
@@ -430,11 +430,11 @@ void mn_8022FB88(u8 arg0, void* arg1)
         return;
     }
     var_r28 = 0;
-    index_ptr2 = sp14;
+    var_r29_2 = sp14;
     do {
-        HSD_JObjClearFlagsAll(data->x58[*index_ptr2], JOBJ_HIDDEN);
+        HSD_JObjClearFlagsAll(data->x58[*var_r29_2], JOBJ_HIDDEN);
         var_r28 += 1;
-        index_ptr2 += 1;
+        var_r29_2 += 1;
     } while (var_r28 < 4);
     temp_r28 = data->x58[4];
     HSD_JObjReqAnimAll(temp_r28, mn_804D6BD8);
@@ -643,37 +643,13 @@ static inline void mn_80230274_InitOptionRoots(HSD_JObj** option_roots,
                                                struct mn_802307F8_t* data,
                                                u8 count, s32* i)
 {
-    HSD_JObj* option_roots[8];
     HSD_JObj** option_root;
-    HSD_JObj* roots[17];
-    u8 pad_[4];
-    u16 indices[17];
-    u8 pad_2[4];
-    AnimLoopSettings* settings;
-    HSD_JObj* jobj;
-    s32 i;
-    struct mn_802307F8_t* user_data;
-    s32 j;
     u8 j8;
-    u8 focus;
-    u8 count;
-    u8 selected;
-    u8* base;
-    s32 tail_i;
-    struct mn_802307F8_t* data;
-
-    PAD_STACK(0x20);
-
-    user_data = arg0->user_data;
-    count = mn_803EB6B0[13].selection_count;
-    base = mn_803EC600;
-    data = user_data;
-    for (i = 0; 0x11 > i; i++) {
-        indices[i] = i;
-    }
+    s32 j;
+    s32 visible;
 
     option_root = option_roots;
-    for (i = 0; i < count; option_root++, i++) {
+    for (*i = 0; *i < count; option_root++, (*i)++) {
         s32 valid;
         if (gm_GetCurrentGameMode() == GM_TOURNAMENT && (u8) *i == 4) {
             valid = 0;
@@ -681,13 +657,12 @@ static inline void mn_80230274_InitOptionRoots(HSD_JObj** option_roots,
             valid = 1;
         }
         if (valid) {
-            s32 visible;
             HSD_JObj* v;
             struct mn_8022FEC8_jobj_ref_t* p;
 
-            visible = valid - 1;
+            visible = 0;
             j = visible;
-            for (; j < (s32) (u8) i; j++) {
+            for (; j < (s32) (u8) *i; j++) {
                 s32 valid2;
                 j8 = j;
                 if (gm_GetCurrentGameMode() == GM_TOURNAMENT && j8 == 4) {
@@ -1113,7 +1088,6 @@ HSD_GObj* mn_80230E38(int arg0)
     StaticModelDesc* desc;
     HSD_JObj* root_jobj;
     u16* sub_count_ptr;
-    PAD_STACK(12);
 
     selected = (u8) mn_804A04F0.hovered_selection;
     num_options = mn_803EB6B0[13].selection_count;
@@ -1163,7 +1137,7 @@ HSD_GObj* mn_80230E38(int arg0)
     }
 
     sub_count_ptr = (u16*) (mn_803EC600 + 0x208);
-    for (i = 0; i < (s32) num_options; desc_ptr++, i++) {
+    for (i = 0; i < (s32) num_options; i++) {
         vis_before = mn_80230E38_CountVisible((u8) i);
 
         option_jobj = user_data->xC[((u16*) mn_803EC600)[(u8) vis_before]];
@@ -1239,7 +1213,7 @@ HSD_GObj* mn_80230E38(int arg0)
                     } time_indices;
                     u8* index_ptr;
 
-                    PAD_STACK(0x18);
+                    PAD_STACK(0x28);
 
                     time_indices.packed.bytes4 = mn_804DBE10;
                     time_indices.packed.bytes2 = mn_804DBE14;

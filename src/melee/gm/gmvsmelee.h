@@ -8,12 +8,12 @@
 #include <melee/gm/forward.h>
 
 /* 1A5244 */ struct VsModeData* gm_801A5244(void);
-/* 1A5250 */ u8* gm_801A5250(void); /// Returns KO Star Counts
+/* 1A5250 */ u8* gmVsMelee_GetKOCounts(void); /// Returns KO Star Counts
 /* 1A5258 */ void gm_801A5258(u8*, MatchEnd*);
 /* 1A52D0 */ bool gm_801A52D0(MatchEnd*);
 /* 1A5360 */ u8 gm_801A5360(MatchEnd*);
 /* 1A5598 */ void gm_Mode_Vs_OnInit(void);
-/* 1A55C4 */ void gm_801A55C4(void); /// Zeroes KO Star Counts
+/* 1A55C4 */ void gmVsMelee_ResetKOCounts(void); /// Zeroes KO Star Counts
 /* 1A55EC */ void gm_Mode_Vs_OnLoad(void);
 /* 1A5614 */ void gm_Mode_Vs_OnUnload(void);
 /* 1A5618 */ void gm_801A5618(GameModeState*, struct VsModeData*,
@@ -40,9 +40,9 @@ gm_801A5C3C(GameModeState*, struct VsModeData*,
 /* 479D98 */ extern MatchExitInfo gm_80479D98;
 /* 47C020 */ extern ResultsMatchInfo gm_8047C020;
 /* 47E2A4 */ extern MatchExitInfo gm_8047E2A4;
-/* 480530 */ extern StartMeleeData gm_80480530;
-/* 480668 */ extern SSSData gm_80480668;
-/* 4807B0 */ extern CSSData gm_804807B0;
+/* 480530 */ extern StartMeleeData gmVsMelee_StartData;
+/* 480668 */ extern SSSData gmVsMelee_SssData;
+/* 4807B0 */ extern CSSData gmVsMelee_CssData;
 /* 4D6860 */ extern UNK_T gm_804D6860[];
 
 #endif

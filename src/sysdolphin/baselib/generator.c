@@ -361,16 +361,17 @@ HSD_Generator* hsd_8039D9C8(void)
 // switch case logic, Newton-Raphson sqrt inlining, trig matrix layout
 f32 hsd_8039DAD4(HSD_Generator* gen)
 {
-    f32 radius;
-    Vec3 vel_out;
     Vec3 vel_copy;
+    f32 tmp;
     Vec3 emit_pos;
-    Vec3 cross1;
     Vec3 tmpvec;
+    Vec3 vel_out;
     Mtx rot_mtx;
     Mtx jobj_mtx;
     Vec3 look_dir;
     Vec3 cam_up;
+    Vec3 cross1;
+    Vec3 vel_norm;
     Mtx trig_mtx;
     f64 eps;
     f32 vel_mag_sq;
@@ -466,7 +467,6 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
 
     /* Velocity-based rotation */
     if ((gen->type & 0xF) != 1 && vel_mag_sq > 0.0F) {
-        Vec3 vel_norm;
         vel_norm.x = gen->vel.x;
         vel_norm.y = gen->vel.y;
         vel_norm.z = gen->vel.z;
@@ -620,7 +620,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                         }
                     } else {
                         f64 cone_angle_d =
-                            M_PI - atan2f(gen->aux.cone.height, sin_az) -
+                            M_PI_2 - atan2f(gen->aux.cone.height, sin_az) -
                             gen->angle;
                         cone_angle = (f32) cone_angle_d;
                     }
@@ -646,7 +646,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                     } else {
                         f64 cone_angle_d =
                             gen->angle +
-                            (M_PI - atan2f(gen->aux.cone.height, sin_az));
+                            (M_PI_2 - atan2f(gen->aux.cone.height, sin_az));
                         cone_angle = (f32) cone_angle_d;
                     }
                 }
@@ -664,7 +664,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                         f32 rnd = HSD_Randf();
                         f32 range = gen->aux.disc.maxAngle - cur_angle;
                         cur_angle = range * rnd + cur_angle;
-                        cone_angle = (f32) (M_PI + gen->angle);
+                        cone_angle = (f32) (M_PI_2 + gen->angle);
                     }
                 }
                 break;
@@ -1060,7 +1060,8 @@ HSD_Generator* hsd_8039EFAC(s32 linkNo, s32 bank, s32 gfx_id, HSD_JObj* jobj)
     return gen;
 }
 
-// @TODO: ptclref_804D0E5C has an incorrect element type in particle.h.
+// @TODO: Currently 96.66% match - command-array register swap and stack
+// frame differences remain
 HSD_Generator* hsd_8039F05C(s32 linkNo, s32 bank, s32 idx)
 {
     HSD_Generator* gen;

@@ -48,7 +48,6 @@ struct IfStockData {
 
 struct IfStockDataOffset {
     unsigned char x0[0x204];
-    struct IfStockData data;
 };
 
 int ifStock_802F7EFC(int arg0, int arg1)
@@ -57,15 +56,17 @@ int ifStock_802F7EFC(int arg0, int arg1)
     struct ifStock_804A1378* stock;
     struct IfStockData* arg1_data;
     struct IfStockData* arg0_data;
+    struct IfStockDataOffset* arg0_base;
+    struct IfStockDataOffset* arg1_base;
     int slot;
     int i, j;
     stock = &ifStock_804A1378;
-    arg0_data = (struct IfStockData*) stock;
-    arg0_data += arg0;
-    arg1_data = (struct IfStockData*) stock;
-    arg1_data += arg1;
-    arg0_data = &((struct IfStockDataOffset*) arg0_data)->data;
-    arg1_data = &((struct IfStockDataOffset*) arg1_data)->data;
+    arg0_base =
+        (struct IfStockDataOffset*) ((struct IfStockData*) stock + arg0);
+    arg1_base =
+        (struct IfStockDataOffset*) ((struct IfStockData*) stock + arg1);
+    arg0_data = (struct IfStockData*) ++arg0_base;
+    arg1_data = (struct IfStockData*) ++arg1_base;
     if (Player_GetStocks(arg1) == 0) {
         return 1;
     }
@@ -142,15 +143,41 @@ static inline void ifStock_802F8298_init(HSD_GObj* gobj,
     *stock = &ifStock_804A1378;
 }
 
+static inline int ifStock_802F8298_get_flag(struct IfStockUserData* user_data,
+                                            struct ifStock_804A1378* stock)
+{
+    return stock->x204[user_data->player].x0[2];
+}
+
+static inline int
+ifStock_802F8298_get_player(struct IfStockUserData* user_data)
+{
+    return user_data->player;
+}
+
+static inline HSD_JObj*
+ifStock_802F8298_get_x3C(struct IfStockUserData* user_data,
+                         struct ifStock_804A1378* stock)
+{
+    return stock->player[user_data->player].x3C;
+}
+
+static inline HSD_JObj*
+ifStock_802F8298_get_x40(struct IfStockUserData* user_data,
+                         struct ifStock_804A1378* stock)
+{
+    return stock->player[user_data->player].x40;
+}
+
 void ifStock_802F8298(HSD_GObj* gobj)
 {
     struct IfStockUserData* user_data;
     HSD_JObj* jobj;
-    struct ifStock_804A1378* stock;
+    int i;
     HSD_JObj* jobj_anim;
     Vec3 vecA, vecB, vecC, vecD;
     HSD_JObj* jobj2;
-    int i;
+    struct ifStock_804A1378* stock;
     ifStock_802F8298_init(gobj, &user_data, &jobj, &stock);
     jobj_anim = jobj;
     stock->player[user_data->player].stocks =

@@ -33,8 +33,8 @@ GameModeState gm_Mode_Vs_States[] = {
         onExitCss,
         {
             GS_CSS,
-            &gm_804807B0,
-            &gm_804807B0,
+            &gmVsMelee_CssData,
+            &gmVsMelee_CssData,
         },
     },
     {
@@ -45,8 +45,8 @@ GameModeState gm_Mode_Vs_States[] = {
         onExitSss,
         {
             GS_SSS,
-            &gm_80480668,
-            &gm_80480668,
+            &gmVsMelee_SssData,
+            &gmVsMelee_SssData,
         },
     },
     {
@@ -57,7 +57,7 @@ GameModeState gm_Mode_Vs_States[] = {
         onExitVs,
         {
             GS_VS,
-            &gm_80480530,
+            &gmVsMelee_StartData,
             &gm_80479D98,
         },
     },
@@ -69,7 +69,7 @@ GameModeState gm_Mode_Vs_States[] = {
         onExitSuddenDeath,
         {
             GS_SUDDEN_DEATH,
-            &gm_80480530,
+            &gmVsMelee_StartData,
             &gm_8047E2A4,
         },
     },
@@ -105,7 +105,7 @@ GameModeState gm_Mode_Vs_States[] = {
         gm_801A6254,
         {
             GS_VS,
-            &gm_80480530,
+            &gmVsMelee_StartData,
             &gm_80479D98,
         },
     },
@@ -133,7 +133,7 @@ GameModeState gm_Mode_DebugVs_States[] = {
         NULL,
         {
             GS_VS,
-            &gm_80480530,
+            &gmVsMelee_StartData,
             &gm_80479D98,
         },
     },
@@ -154,7 +154,7 @@ GameModeState gm_Mode_DebugVs_States[] = {
 
 void onEnterDebugVs(GameModeState* arg0)
 {
-    StartMeleeData* data = gm_GetGameSceneLoadData(arg0);
+    StartMeleeData* data = gm_GetGameModeStateEnterData(arg0);
     int i;
 
     gm_80167A64(&data->rules);
@@ -218,7 +218,7 @@ void onExitVs(GameModeState* arg0)
     MatchExitInfo* mei;
 
     gm_801A5AF0(arg0, 4, 3);
-    mei = gm_GetGameSceneLeaveData(arg0);
+    mei = gm_GetGameModeStateExitData(arg0);
     for (i = 0; i < 6; i++) {
         if (mei->match_end.player_standings[i].slot_type != Gm_PKind_NA) {
             gm_80162A98(mei->match_end.player_standings[i].x20);

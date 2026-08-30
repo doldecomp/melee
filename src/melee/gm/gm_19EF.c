@@ -472,9 +472,6 @@ void fn_8019F9C4(u32 arg0)
     HSD_JObj** ptr;
     s32 char_idx;
     s32 i;
-    f32 f;
-    f32 scale;
-    PAD_STACK(16);
 
     char_idx = fn_8019F9C4_GetCharIdx(arg0);
     arg0 = (char_idx == -1) ? 8 : arg0;

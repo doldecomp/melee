@@ -1127,6 +1127,7 @@ void hsd_80394F48(void* data)
     struct lbl_8040AB00_t* hi_color;
     s32 x_base;
     s32* pxC8;
+    s32 entry_idx;
     s32 i;
     s32 b6;
 
@@ -1203,7 +1204,7 @@ void hsd_80394F48(void* data)
         *px4 += 11;
         hsd_80394434(dp->entries[entry_idx]);
 
-        *px4 += hsd_80394F48_entry_length(i, dp) * 11;
+        *px4 += hsd_80394F48_entry_length(entry_idx, dp) * 11;
         hsd_80394F48_set_base_color(px50);
 
         b6 = sp->x0_b6;

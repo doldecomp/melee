@@ -1381,6 +1381,8 @@ void fn_801874FC(void)
     lb_80011E24(jobj, &lbl_804736B0.xC, 6, -1);
 }
 
+/// #fn_801874FC
+
 #ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
@@ -1803,12 +1805,13 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
         GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0xA, 0);
     }
 
+    state = &data->x36;
     {
         HSD_JObj* model_jobj;
         HSD_GObj* model_gobj;
         model_gobj = GObj_Create(0xE, 0xF, 0);
         model_jobj =
-            HSD_JObjLoadJoint((*data->x0)[11 - data->x36.stage_index]->joint);
+            HSD_JObjLoadJoint((*data->x0)[11 - state->stage_index]->joint);
         lb_80011C18(model_jobj, 0x08000000);
         HSD_GObjObject_80390A70(model_gobj, HSD_GObj_JObjKind, model_jobj);
         GObj_SetupGXLink(model_gobj, fn_80187C9C, 0xB, 0xB);

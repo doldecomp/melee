@@ -130,6 +130,11 @@ static inline s8 readNameTerminator(const volatile char* terminator)
     return *terminator;
 }
 
+static inline bool signedCharactersEqual(s8 lhs, u8 rhs)
+{
+    return lhs == (s8) rhs;
+}
+
 static inline bool checkStringRest(const char* ptr, s8 terminator)
 {
     char c = "　"[0]; // SJIS full-width space
@@ -149,14 +154,20 @@ static inline u8 unsignedCharacter(s32 character)
 
 s32 CompareNameStrings(char* str1, char* str2)
 {
+    union {
+        char* signed_characters;
+        u8* unsigned_characters;
+    } string1;
+    u8* unsigned_str1;
     s8 terminator = (s8) *mnName_StringTerminator;
-    char* p1 = str1;
-    char* p2 = str2;
     s32 i = 0;
+
+    string1.signed_characters = str1;
+    unsigned_str1 = string1.unsigned_characters;
     while (true) {
         s8 ch1 = (s8) str1[i];
 
-        if (terminator == ch1) {
+        if (signedCharactersEqual(terminator, (u8) ch1)) {
             if (checkStringRest(&str2[i & 0xFFFFFFFFFFFFFFFF],
                                 readNameTerminator(mnName_StringTerminator)))
             {
@@ -168,7 +179,9 @@ s32 CompareNameStrings(char* str1, char* str2)
         {
             s8 ch2 = (s8) str2[i];
 
-            if (*mnName_StringTerminator == ch2) {
+            if (signedCharactersEqual(*mnName_StringTerminator,
+                                      unsignedCharacter(ch2)))
+            {
                 if (checkStringRest(&str1[i], terminator)) {
                     return 0;
                 }
@@ -183,8 +196,6 @@ s32 CompareNameStrings(char* str1, char* str2)
             }
         }
         i++;
-        p2++;
-        p1++;
     }
 }
 
@@ -1151,7 +1162,7 @@ static inline f32 mnName_80239A24_GetTextColumnWidth(HSD_GObj* gobj,
 void mnName_80239A24(HSD_GObj* gobj)
 {
     f32 text_row_height;
-    Vec3 text_position;
+    s32 row;
     HSD_JObj* jobj;
     HSD_JObj* ref_jobj;
     HSD_JObj* ref_jobj2;

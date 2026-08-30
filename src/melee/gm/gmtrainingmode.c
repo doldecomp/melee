@@ -84,7 +84,7 @@ void gm_801B1B74(GameModeState* arg0)
     PAD_STACK(8);
 
     vs_data = &gmMainLib_804D3EE0->unk_D10;
-    css = gm_GetGameSceneLoadData(arg0);
+    css = gm_GetGameModeStateEnterData(arg0);
     if (gm_804D68C1 != 0) {
         lb_8001C550();
         lb_8001D164(0);
@@ -112,7 +112,7 @@ static void gm_801B07E8_layer(CSSData* css_data, s8* c_kind, s8* stocks,
 void gm_801B1C24(GameModeState* arg0)
 {
     VsModeData* vs = &gmMainLib_804D3EE0->unk_D10;
-    CSSData* css = gm_GetGameSceneLeaveData(arg0);
+    CSSData* css = gm_GetGameModeStateExitData(arg0);
     s32 i;
     struct GameCache* cache;
     s32 j;
@@ -177,7 +177,7 @@ void gm_801B1EB8(GameModeState* arg0)
 {
     SSSData* sss;
 
-    sss = gm_GetGameSceneLoadData(arg0);
+    sss = gm_GetGameModeStateEnterData(arg0);
     sss->x1 = 0;
     sss->force_stage_id = -1;
     sss->unk_stage = 0;
@@ -190,9 +190,9 @@ void gm_801B1EEC(GameModeState* arg0)
     s16 stkind;
 
     vs_data = &gmMainLib_804D3EE0->unk_D10;
-    sss = gm_GetGameSceneLeaveData(arg0);
+    sss = gm_GetGameModeStateExitData(arg0);
     if (sss->start_game == 0) {
-        gm_SetPendingSceneIndex(0);
+        gm_SetNextGameModeStateId(0);
         return;
     }
     stkind = sss->data.data.rules.stkind;
@@ -216,7 +216,7 @@ void gm_801B1F70(GameModeState* arg0)
     int i;
 
     vs = &gmMainLib_804D3EE0->unk_D10;
-    data = gm_GetGameSceneLoadData(arg0);
+    data = gm_GetGameModeStateEnterData(arg0);
     gm_80167A64(&data->rules);
 
     data->rules = vs->data.rules;
@@ -257,7 +257,7 @@ void gm_801B2204(GameModeState* arg0)
 {
     MatchExitInfo* temp_r3;
 
-    temp_r3 = gm_GetGameSceneLeaveData(arg0);
+    temp_r3 = gm_GetGameModeStateExitData(arg0);
     gm_80162968(temp_r3->match_end.frame_count / 60);
     gm_8016247C(temp_r3->match_end.player_standings[0].xE);
     gm_80163298(temp_r3->match_end.player_standings[0].character_kind,
@@ -266,7 +266,7 @@ void gm_801B2204(GameModeState* arg0)
     gm_80173BC4(temp_r3->match_end.player_standings[0].character_kind);
     gm_80173EEC();
     if (!gm_80173754(28, gm_804D68C0)) {
-        gm_SetPendingSceneIndex(0);
+        gm_SetNextGameModeStateId(0);
     }
     sfxForward();
 }

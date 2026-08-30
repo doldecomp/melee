@@ -564,11 +564,14 @@ s32 grBigBlueRoute_8020C530(Ground_GObj* arg0)
     HSD_ASSERT(0X2E5, 0);
 }
 
-/// @todo The initial Ground load is coalesced directly into r31 instead of
-/// passing through r6.
 #define GRBB_ROUTE_ENTRY_AT(car_info, offset)                                 \
     ((RouteEntry*) &((union grBigBlueRoute_RouteStorage*) (car_info))         \
          ->bytes[offset])
+static inline s32 grBigBlueRoute_Randi(s32 range)
+{
+    return HSD_Randi(range);
+}
+
 static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
                                              Ground_GObj* gobj)
 {
@@ -602,8 +605,7 @@ static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
     }
 
     if (route_idx != -1) {
-        s32 route = route_idx;
-        s32 offset = route * sizeof(RouteEntry);
+        s32 offset = route_idx * sizeof(RouteEntry);
         RouteEntry* re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset);
 
         GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset)->flags.b0 = 1;
@@ -654,7 +656,7 @@ static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
 
                 if (jobj != NULL) {
                     s32 i = 0;
-                    while (i < route && jobj != NULL) {
+                    while (i < route_idx && jobj != NULL) {
                         i++;
                         if (jobj == NULL) {
                             jobj = NULL;
@@ -678,8 +680,8 @@ static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
                         re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info, offset);
                         re->x28 = (void*) item;
                         if (item != NULL) {
-                            RouteEntry* route_entries = gp->u.car.car_info;
-                            re = GRBB_ROUTE_ENTRY_AT(route_entries, offset);
+                            re = GRBB_ROUTE_ENTRY_AT(gp->u.car.car_info,
+                                                     offset);
                             grMaterial_801C8E28((HSD_GObj*) re->x28);
                         }
                     }
@@ -696,7 +698,6 @@ static inline void grBigBlueRoute_SpawnRoute(s32 route_idx, Ground* gp,
 void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    Ground* spawn_gp = gobj->user_data;
 
     if (!((f32) gp->u.car.x108 < 1.0f + yakumono_param->x40)) {
         return;
@@ -706,7 +707,7 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
         return;
     }
 
-    grBigBlueRoute_SpawnRoute(gp->u.car.x108, spawn_gp, gobj);
+    grBigBlueRoute_SpawnRoute(gp->u.car.x108, gp, gobj);
 }
 
 static const Vec3 grBb_Route_803B83E0 = { 0.0f, 1.0f, 0.0f };
