@@ -3,7 +3,7 @@
 
 #include <melee/gm/forward.h>
 
-/* 1B5324 */ void gm_801B5324(UnkAllstarData*, s32);
+/* 1B5324 */ void gm_801B5324(UnkAllstarData*, u8);
 /* 1B5624 */ void gm_801B5624(GameModeState*);
 /* 1B59AC */ void gm_801B59AC(GameModeState*);
 /* 1B5AA8 */ void fn_801B5AA8(int);

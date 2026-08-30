@@ -227,6 +227,15 @@ HSD_JObj* mnVibration_GetNameRowJObj(s32 count)
 #pragma pop
 #endif
 
+static inline void mnVibration_AnimateNameRow(u8 row, u8 state)
+{
+    HSD_JObj* jobj;
+
+    jobj = mnVibration_GetNameRowJObj(row);
+    HSD_JObjReqAnimAll(jobj, (f32) state);
+    HSD_JObjAnimAll(jobj);
+}
+
 void mnVibration_HandleInput(HSD_GObj* gobj)
 {
     HSD_JObj* cursor_jobj;
@@ -402,9 +411,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
             GetPersistentNameData(name_idx)->rumble_toggle = 1;
         }
         rumble_setting = mnVibration_GetNameRumble(name_idx);
-        jobj = mnVibration_GetNameRowJObj(data->x0[1]);
-        HSD_JObjReqAnimAll(jobj, (f32) rumble_setting);
-        HSD_JObjAnimAll(jobj);
+        mnVibration_AnimateNameRow(data->x0[1], rumble_setting);
         return;
     }
 
@@ -433,6 +440,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 base_y = HSD_JObjGetTranslationY(jobj17);
                 jobj18 = data2->jobjs[18];
                 spacing = HSD_JObjGetTranslationY(jobj18) - base_y;
+                jobj17 = data2->jobjs[17];
                 temp_x = HSD_JObjGetTranslationX(jobj17);
                 HSD_JObjSetTranslateX(cursor_jobj, temp_x);
                 jobj17 = data2->jobjs[17];
@@ -475,6 +483,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 base_y = HSD_JObjGetTranslationY(jobj17);
                 jobj18 = data2->jobjs[18];
                 spacing = HSD_JObjGetTranslationY(jobj18) - base_y;
+                jobj17 = data2->jobjs[17];
                 temp_x = HSD_JObjGetTranslationX(jobj17);
                 HSD_JObjSetTranslateX(cursor_jobj, temp_x);
                 jobj17 = data2->jobjs[17];
@@ -486,8 +495,7 @@ void mnVibration_HandleInput(HSD_GObj* gobj)
                 HSD_JObjSetTranslateZ(cursor_jobj, temp_z);
             }
         } else if (GetNameCount() > 8) {
-            name_idx = mnVibration_GetNameSlot(data, 8);
-            if (name_idx != 0xFF) {
+            if (mnVibration_GetNameSlot(data, 8) != 0xFF) {
                 sfxMove();
                 data->scroll_offset++;
                 if (data->scroll_offset >= GetNameCount()) {
@@ -713,6 +721,7 @@ void mnVibration_Think(HSD_GObj* gobj)
     s32 port;
     s32 port_idx;
     u8 pad_err;
+    u8 pad_idx;
     u8 state;
     HSD_JObj* active_child;
     MnVibrationData* data;
@@ -758,7 +767,8 @@ void mnVibration_Think(HSD_GObj* gobj)
     } while (port < 4);
     port_idx = 0;
     do {
-        pad_err = HSD_PadCopyStatus[(u8) port_idx].err;
+        pad_idx = port_idx;
+        pad_err = HSD_PadCopyStatus[pad_idx].err;
         if ((((s8) pad_err != 0) && (data->x6[port_idx] != 0)) ||
             (((s8) pad_err == 0) && (data->x6[port_idx] == 0)))
         {
@@ -795,7 +805,7 @@ void mnVibration_Think(HSD_GObj* gobj)
                 data->x0[port_idx + 2] = 0;
                 toggle_jobj =
                     ((MnVibrationData*) mnVibration_804D6C28->user_data)
-                        ->jobjs[mnVibration_PortPanelJointIds[(u8) port_idx]];
+                        ->jobjs[mnVibration_PortPanelJointIds[pad_idx]];
                 state = data->x0[port_idx + 2];
                 HSD_JObjReqAnimAll(toggle_jobj, state);
                 HSD_JObjAnimAll(toggle_jobj);
@@ -821,7 +831,6 @@ void mnVibration_IntroProc(HSD_GObj* arg0)
     MnVibrationData* data2;
     HSD_GObj* cursor_gobj;
     HSD_JObj* loaded_joint;
-    MnVibrationData* data3;
     HSD_JObj* cursor_jobj;
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
@@ -938,21 +947,23 @@ void mnVibration_IntroProc(HSD_GObj* arg0)
                                     loaded_joint);
             GObj_SetupGXLink(cursor_gobj, HSD_GObj_JObjCallback, 4U, 0x80U);
             HSD_GObj_SetupProc(cursor_gobj, mnVibration_CursorThink, 0U);
-            data3 = arg0->user_data;
+            data2 = arg0->user_data;
             cursor_jobj = cursor_gobj->hsd_obj;
-            jobj17 = data3->jobjs[17];
+            jobj17 = data2->jobjs[17];
             cursor_row = data2->x0[1];
+            (void) jobj17;
+            (void) cursor_row;
             base_y = mnVibration_JObjGetTranslationY(jobj17);
-            jobj18 = data3->jobjs[18];
+            jobj18 = data2->jobjs[18];
             spacing = mnVibration_GetCursorYSpacing(base_y, jobj18);
-            jobj17 = data3->jobjs[17];
+            jobj17 = data2->jobjs[17];
             temp_x = mnVibration_JObjGetTranslationX(jobj17);
             mnVibration_JObjSetTranslateX(cursor_jobj, temp_x);
-            jobj17 = data3->jobjs[17];
+            jobj17 = data2->jobjs[17];
             mnVibration_JObjSetTranslateY(
                 cursor_jobj, (spacing * (f32) cursor_row) +
                                  mnVibration_JObjGetTranslationY(jobj17));
-            jobj17 = data3->jobjs[17];
+            jobj17 = data2->jobjs[17];
             temp_z = mnVibration_JObjGetTranslationZ(jobj17);
             mnVibration_JObjSetTranslateZ(cursor_jobj, temp_z);
         }

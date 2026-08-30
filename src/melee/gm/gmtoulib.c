@@ -119,13 +119,7 @@ void fn_8018A514(int count, float val)
     int i;
     s32 n;
 
-    if (count < 9) {
-        region = 0;
-    } else if (count >= 14) {
-        region = 2;
-    } else {
-        region = 1;
-    }
+    region = count < 9 ? 0 : count >= 14 ? 2 : 1;
 
     srcs = (BracketSrcPtr*) ((BracketData*) lbl_80473AB8)->srcs;
     src = srcs[region].ptr;
@@ -144,7 +138,7 @@ void fn_8018A514(int count, float val)
         }
     }
 
-    n = lbl_803D9D20.x20[i];
+    n = lbl_803D9D20.x20[count];
 
     entries = lbl_80473AB8;
     for (i = 0; i < n; i++) {
@@ -472,8 +466,32 @@ static inline f32 gmTournament_GetBracketSlideYReverse(BracketEntrySlot* slot)
     return -((f32) slot->x48 - 0.3f * (f32) lbl_804D6630);
 }
 
+static inline HSD_JObj* fn_8018B090_inline0(BracketEntry* bracket_entries,
+                                            s32 bracket_slot_index,
+                                            s32 bracket_entry_index)
+{
+    return bracket_entries[bracket_entry_index]
+        .slots[bracket_slot_index]
+        .x2C->hsd_obj;
+}
+
+static inline HSD_JObj* fn_8018B090_inline1(BracketEntry* bracket_entries,
+                                            s32 bracket_entry_index)
+{
+    return bracket_entries[bracket_entry_index]
+        .slots[lbl_804D6634]
+        .x2C->hsd_obj;
+}
+
+static inline BracketEntry* fn_8018B090_inline2(BracketEntry* bracket_entries,
+                                                s32 bracket_entry_index)
+{
+    return &bracket_entries[bracket_entry_index];
+}
+
 void fn_8018B090(HSD_GObj* arg0)
 {
+    BracketEntry* entries = lbl_80473AB8;
     TmData* tm = gm_GetTournamentData();
     s32 var_r24 = 0;
     s32 idx = fn_8018F74C();
@@ -484,30 +502,30 @@ void fn_8018B090(HSD_GObj* arg0)
         lbl_804D6630 = 0;
         return;
     case 21:
-        if (lbl_80473AB8[idx].x18 != 0) {
+        if (entries[idx].x18 != 0) {
             for (i = 0; i < 4; i++) {
-                if (lbl_80473AB8[idx].slots[i].x30 != 0) {
+                if (entries[idx].slots[i].x30 != 0) {
                     HSD_JObj* jobj;
                     HSD_JObj* jobj2;
-                    jobj = lbl_80473AB8[idx].slots[i].x2C->hsd_obj;
+                    jobj = fn_8018B090_inline0(entries, i, idx);
                     jobj2 = jobj;
-                    if (lbl_80473AB8[idx].x2 != 0) {
+                    if (entries[idx].x2 != 0) {
                         HSD_JObjSetTranslateY(
                             jobj2, gmTournament_GetBracketSlideYReverse(
-                                       &lbl_80473AB8[idx].slots[i]));
+                                       &entries[idx].slots[i]));
                     } else {
-                        switch (lbl_80473AB8[idx].x4) {
+                        switch (entries[idx].x4) {
                         case 1:
                             if (i == 0) {
                                 HSD_JObjSetTranslateY(
                                     jobj2,
                                     gmTournament_GetBracketSlideYForward(
-                                        &lbl_80473AB8[idx].slots[i]));
+                                        &entries[idx].slots[i]));
                             } else {
                                 HSD_JObjSetTranslateY(
                                     jobj2,
                                     gmTournament_GetBracketSlideYReverse(
-                                        &lbl_80473AB8[idx].slots[i]));
+                                        &entries[idx].slots[i]));
                             }
                             break;
                         case 2:
@@ -516,18 +534,18 @@ void fn_8018B090(HSD_GObj* arg0)
                                 HSD_JObjSetTranslateY(
                                     jobj2,
                                     gmTournament_GetBracketSlideYForward(
-                                        &lbl_80473AB8[idx].slots[i]));
+                                        &entries[idx].slots[i]));
                             } else {
                                 HSD_JObjSetTranslateY(
                                     jobj2,
                                     gmTournament_GetBracketSlideYReverse(
-                                        &lbl_80473AB8[idx].slots[i]));
+                                        &entries[idx].slots[i]));
                             }
                             break;
                         default:
                             HSD_JObjSetTranslateY(
                                 jobj2, gmTournament_GetBracketSlideYForward(
-                                           &lbl_80473AB8[idx].slots[i]));
+                                           &entries[idx].slots[i]));
                             break;
                         }
                     }
@@ -537,21 +555,18 @@ void fn_8018B090(HSD_GObj* arg0)
         lbl_804D6630 += 1;
         return;
     case 22: {
-        s32 h = lbl_80473AB8[idx].x18;
-        if (h != 0) {
+        BracketEntry* entry = &entries[idx];
+        s32 h = entry->x18;
+        if (h) {
             f32 d;
             lbl_803D9DAC.current.x = 320.0f;
             lbl_803D9DAC.current.y = -240.0f;
             lbl_803D9DAC.current.z = 0.0f;
-            lbl_803D9DAC.target.x =
-                (f32) (lbl_80473AB8[idx].xC + (lbl_80473AB8[idx].x14 / 2));
-            lbl_803D9DAC.target.y = -(f32) (lbl_80473AB8[idx].x10 + (h / 2));
+            lbl_803D9DAC.target.x = (f32) (entry->xC + (entry->x14 / 2));
+            lbl_803D9DAC.target.y = -(f32) (entry->x10 + (h / 2));
             lbl_803D9DAC.target.z = -150.0f;
-            d = lbl_803D9DAC.target.x - lbl_803D9DAC.current.x;
-            d = 0.033333f * d;
-            if (d < 0.0f) {
-                d = -d;
-            }
+            d = ABS((lbl_803D9DAC.target.x - lbl_803D9DAC.current.x) *
+                    0.033333f);
             lbl_803D9DAC.step.x = 1.0f + d;
             d = 0.033333f * (lbl_803D9DAC.target.y - lbl_803D9DAC.current.y);
             if (d < 0.0f) {
@@ -568,7 +583,7 @@ void fn_8018B090(HSD_GObj* arg0)
         lbl_804D6630 = 0;
         /* fallthrough */
     case 23:
-        if (lbl_80473AB8[idx].x18 != 0) {
+        if (entries[idx].x18 != 0) {
             s32 amount = lbl_804D6630 / 6;
             lbl_804D6630 += 1;
             if (mn_8022F410(&lbl_803D9DAC.current.x, &lbl_803D9DAC.target.x,
@@ -600,53 +615,53 @@ void fn_8018B090(HSD_GObj* arg0)
             }
             fn_80190520(lbl_803D9DAC.current.x, lbl_803D9DAC.current.y,
                         lbl_803D9DAC.current.z);
-            if (lbl_80473AB8[idx].x4 != 1) {
+            if (entries[idx].x4 != 1) {
                 for (i = 0; i < 4; i++) {
-                    if (lbl_80473AB8[idx].slots[i].x30 != 0) {
-                        mn_8022F470((int*) &lbl_80473AB8[idx].slots[i].x48,
-                                    (int*) &lbl_80473AB8[idx].slots[i].x40,
-                                    amount);
-                        HSD_JObjSetTranslateY(
-                            lbl_80473AB8[idx].slots[i].x2C->hsd_obj,
-                            -(f32) lbl_80473AB8[idx].slots[i].x48);
+                    if (entries[idx].slots[i].x30 != 0) {
+                        mn_8022F470((int*) &entries[idx].slots[i].x48,
+                                    (int*) &entries[idx].slots[i].x40, amount);
+                        {
+                            f32 y = -(f32) entries[idx].slots[i].x48;
+                            HSD_JObjSetTranslateY(
+                                entries[idx].slots[i].x2C->hsd_obj, y);
+                        }
                     }
                 }
                 return;
             }
             for (i = 0; i < 4; i++) {
-                if (lbl_80473AB8[idx].slots[i].x30 != 0) {
-                    lbl_80473AB8[idx].slots[i].x40 =
-                        lbl_80473AB8[idx].slots[i].x48;
+                if (entries[idx].slots[i].x30 != 0) {
+                    entries[idx].slots[i].x40 = entries[idx].slots[i].x48;
                 }
             }
         }
         return;
     case 24:
-        if (lbl_80473AB8[idx].x18 != 0) {
+        if (entries[idx].x18 != 0) {
             struct lbl_803B7C80_t sp;
             s32* arr;
             sp = lbl_803B7C80;
             arr = sp.v;
             lbl_804D6630 += 1;
             for (i = 0; i < 4; i++) {
-                if (lbl_80473AB8[idx].slots[i].x30 != 0) {
-                    HSD_JObj* jobj = lbl_80473AB8[idx].slots[i].x2C->hsd_obj;
-                    if (lbl_80473AB8[idx].x2 != 0) {
+                if (entries[idx].slots[i].x30 != 0) {
+                    HSD_JObj* jobj = entries[idx].slots[i].x2C->hsd_obj;
+                    if (entries[idx].x2 != 0) {
                         HSD_JObjSetTranslateY(
-                            jobj, -((f32) lbl_80473AB8[idx].slots[i].x40 -
+                            jobj, -((f32) entries[idx].slots[i].x40 -
                                     (0.1f * (f32) arr[lbl_804D6630 % 10])));
                     } else {
-                        switch (lbl_80473AB8[idx].x4) {
+                        switch (entries[idx].x4) {
                         case 1:
                             if (i == 0) {
                                 HSD_JObjSetTranslateY(
                                     jobj,
                                     -((0.1f * (f32) arr[lbl_804D6630 % 10]) +
-                                      (f32) lbl_80473AB8[idx].slots[i].x40));
+                                      (f32) entries[idx].slots[i].x40));
                             } else {
                                 HSD_JObjSetTranslateY(
                                     jobj,
-                                    -((f32) lbl_80473AB8[idx].slots[i].x40 -
+                                    -((f32) entries[idx].slots[i].x40 -
                                       (0.1f * (f32) arr[lbl_804D6630 % 10])));
                             }
                             break;
@@ -656,18 +671,18 @@ void fn_8018B090(HSD_GObj* arg0)
                                 HSD_JObjSetTranslateY(
                                     jobj,
                                     -((0.1f * (f32) arr[lbl_804D6630 % 10]) +
-                                      (f32) lbl_80473AB8[idx].slots[i].x40));
+                                      (f32) entries[idx].slots[i].x40));
                             } else {
                                 HSD_JObjSetTranslateY(
                                     jobj,
-                                    -((f32) lbl_80473AB8[idx].slots[i].x40 -
+                                    -((f32) entries[idx].slots[i].x40 -
                                       (0.1f * (f32) arr[lbl_804D6630 % 10])));
                             }
                             break;
                         default:
                             HSD_JObjSetTranslateY(
                                 jobj, -((0.1f * (f32) arr[lbl_804D6630 % 10]) +
-                                        (f32) lbl_80473AB8[idx].slots[i].x40));
+                                        (f32) entries[idx].slots[i].x40));
                             break;
                         }
                     }
@@ -677,27 +692,24 @@ void fn_8018B090(HSD_GObj* arg0)
         return;
     case 25:
         for (i = 0; i < 4; i++) {
-            if (lbl_80473AB8[idx].slots[i].x30 != 0) {
-                lbl_80473AB8[idx].slots[i].x48 =
-                    lbl_80473AB8[idx].slots[i].x40;
+            if (entries[idx].slots[i].x30 != 0) {
+                entries[idx].slots[i].x48 = entries[idx].slots[i].x40;
             }
         }
         return;
     case 32: {
-        s32 h = lbl_80473AB8[idx].x18;
+        s32 h = entries[idx].x18;
         if (h != 0) {
-            fn_80190520(
-                (f32) (lbl_80473AB8[idx].xC + (lbl_80473AB8[idx].x14 / 2)),
-                -(f32) (lbl_80473AB8[idx].x10 + (h / 2)), -150.0f);
+            fn_80190520((f32) (entries[idx].xC + (entries[idx].x14 / 2)),
+                        -(f32) (entries[idx].x10 + (h / 2)), -150.0f);
             for (i = 0; i < 4; i++) {
-                if (lbl_80473AB8[idx].slots[i].x4C == 0) {
-                    lbl_80473AB8[idx].slots[i].x3C =
-                        lbl_80473AB8[idx].xC + (lbl_80473AB8[idx].x14 / 2);
+                if (entries[idx].slots[i].x4C == 0) {
+                    entries[idx].slots[i].x3C =
+                        entries[idx].xC + (entries[idx].x14 / 2);
                 } else {
-                    s32 t = lbl_80473AB8[idx].slots[i].x40;
-                    lbl_80473AB8[idx].slots[i].x40 =
-                        lbl_80473AB8[idx].slots[i].x38;
-                    lbl_80473AB8[idx].slots[i].x38 = t;
+                    s32 t = entries[idx].slots[i].x40;
+                    entries[idx].slots[i].x40 = entries[idx].slots[i].x38;
+                    entries[idx].slots[i].x38 = t;
                 }
             }
         } else {
@@ -707,48 +719,48 @@ void fn_8018B090(HSD_GObj* arg0)
         tm->cur_option = 0x21;
         return;
     case 33:
-        if (lbl_80473AB8[idx].x18 != 0) {
+        if (entries[idx].x18 != 0) {
             for (i = 0; i < 4; i++) {
-                if (lbl_80473AB8[idx].slots[i].x30 == 0) {
+                if (entries[idx].slots[i].x30 == 0) {
                     var_r24 += 1;
                 } else {
-                    u8 t5 = lbl_80473AB8[idx].slots[i].x4C;
+                    u8 t5 = entries[idx].slots[i].x4C;
                     if (t5 == 0) {
                         lbl_804D6634 = i;
-                        if (lbl_80473AB8[idx].x4 != 1) {
-                            mn_8022F470((int*) &lbl_80473AB8[idx].slots[i].x44,
-                                        (int*) &lbl_80473AB8[idx].slots[i].x3C,
-                                        2);
-                            if (lbl_80473AB8[idx].slots[i].x44 ==
-                                lbl_80473AB8[idx].slots[i].x3C)
+                        if (entries[idx].x4 != 1) {
+                            mn_8022F470((int*) &entries[idx].slots[i].x44,
+                                        (int*) &entries[idx].slots[i].x3C, 2);
+                            if (entries[idx].slots[i].x44 ==
+                                entries[idx].slots[i].x3C)
                             {
                                 var_r24 += 1;
                             }
                             HSD_JObjSetTranslateX(
-                                lbl_80473AB8[idx].slots[i].x2C->hsd_obj,
-                                (f32) lbl_80473AB8[idx].slots[i].x44);
+                                entries[idx].slots[i].x2C->hsd_obj,
+                                (f32) entries[idx].slots[i].x44);
                         } else {
                             var_r24 += 1;
                         }
                     } else {
-                        mn_8022F470((int*) &lbl_80473AB8[idx].slots[i].x48,
-                                    (int*) &lbl_80473AB8[idx].slots[i].x40,
+                        mn_8022F470((int*) &entries[idx].slots[i].x48,
+                                    (int*) &entries[idx].slots[i].x40,
                                     t5 + ((t5 + 1) / 2));
-                        if (lbl_80473AB8[idx].slots[i].x48 ==
-                            lbl_80473AB8[idx].slots[i].x40)
+                        if (entries[idx].slots[i].x48 ==
+                            entries[idx].slots[i].x40)
                         {
                             var_r24 += 1;
                         }
                         HSD_JObjSetTranslateY(
-                            lbl_80473AB8[idx].slots[i].x2C->hsd_obj,
-                            -(f32) lbl_80473AB8[idx].slots[i].x48);
+                            entries[idx].slots[i].x2C->hsd_obj,
+                            -(f32) entries[idx].slots[i].x48);
                     }
                 }
             }
             if (var_r24 == 4) {
-                lbl_80473AB8[idx].slots[lbl_804D6634].x3C =
+                s32 slot_idx = lbl_804D6634;
+                entries[idx].slots[slot_idx].x3C =
                     lbl_803D9E1C[tm->entrants][0];
-                lbl_80473AB8[idx].slots[lbl_804D6634].x40 =
+                entries[idx].slots[slot_idx].x40 =
                     lbl_803D9E1C[tm->entrants][1];
                 tm->cur_option = 0x22;
             }
@@ -757,16 +769,15 @@ void fn_8018B090(HSD_GObj* arg0)
         }
         return;
     case 34:
-        if (lbl_80473AB8[idx].x18 != 0) {
+        if (entries[idx].x18 != 0) {
             if (tm->x33 == 5) {
-                mn_8022F470((int*) &lbl_80473AB8[idx].slots[lbl_804D6634].x44,
-                            (int*) &lbl_80473AB8[idx].slots[lbl_804D6634].x3C,
-                            2);
+                mn_8022F470((int*) &entries[idx].slots[lbl_804D6634].x44,
+                            (int*) &entries[idx].slots[lbl_804D6634].x3C, 2);
                 HSD_JObjSetTranslateX(
-                    lbl_80473AB8[idx].slots[lbl_804D6634].x2C->hsd_obj,
-                    (f32) lbl_80473AB8[idx].slots[lbl_804D6634].x44);
-                if (lbl_80473AB8[idx].slots[lbl_804D6634].x44 ==
-                    lbl_80473AB8[idx].slots[lbl_804D6634].x3C)
+                    fn_8018B090_inline1(entries, idx),
+                    (f32) entries[idx].slots[lbl_804D6634].x44);
+                if (entries[idx].slots[lbl_804D6634].x44 ==
+                    entries[idx].slots[lbl_804D6634].x3C)
                 {
                     tm->cur_option = 0x23;
                 }
@@ -780,16 +791,15 @@ void fn_8018B090(HSD_GObj* arg0)
         }
         return;
     case 35:
-        if (lbl_80473AB8[idx].x18 != 0) {
+        if (entries[idx].x18 != 0) {
             if (tm->x33 == 5) {
-                mn_8022F470((int*) &lbl_80473AB8[idx].slots[lbl_804D6634].x48,
-                            (int*) &lbl_80473AB8[idx].slots[lbl_804D6634].x40,
-                            2);
+                mn_8022F470((int*) &entries[idx].slots[lbl_804D6634].x48,
+                            (int*) &entries[idx].slots[lbl_804D6634].x40, 2);
                 HSD_JObjSetTranslateY(
-                    lbl_80473AB8[idx].slots[lbl_804D6634].x2C->hsd_obj,
-                    -(f32) lbl_80473AB8[idx].slots[lbl_804D6634].x48);
-                if (lbl_80473AB8[idx].slots[lbl_804D6634].x48 ==
-                    lbl_80473AB8[idx].slots[lbl_804D6634].x40)
+                    fn_8018B090_inline1(entries, idx),
+                    -(f32) entries[idx].slots[lbl_804D6634].x48);
+                if (entries[idx].slots[lbl_804D6634].x48 ==
+                    entries[idx].slots[lbl_804D6634].x40)
                 {
                     tm->x33 = 6;
                 }
@@ -803,12 +813,12 @@ void fn_8018B090(HSD_GObj* arg0)
         }
         return;
     case 36: {
-        s32 h = lbl_80473AB8[idx].x18;
+        s32 h = entries[idx].x18;
         if (h != 0) {
             f32 d;
             lbl_803D9DAC.current.x =
-                (f32) (lbl_80473AB8[idx].xC + (lbl_80473AB8[idx].x14 / 2));
-            lbl_803D9DAC.current.y = -(f32) ((h / 2) + lbl_80473AB8[idx].x10);
+                (f32) (entries[idx].xC + (entries[idx].x14 / 2));
+            lbl_803D9DAC.current.y = -(f32) ((h / 2) + entries[idx].x10);
             lbl_803D9DAC.current.z = -150.0f;
             lbl_803D9DAC.target.x = 320.0f;
             lbl_803D9DAC.target.y = -240.0f;
@@ -833,7 +843,7 @@ void fn_8018B090(HSD_GObj* arg0)
         tm->cur_option = 0x25;
         return;
     case 37:
-        if (lbl_80473AB8[idx].x18 == 0) {
+        if (entries[idx].x18 == 0) {
             lbl_804D6630 = 0x78;
         }
         if (lbl_804D6630 < 0x78) {
@@ -853,7 +863,7 @@ void fn_8018B090(HSD_GObj* arg0)
         tm->cur_option = 0x26;
         return;
     case 38:
-        if (lbl_80473AB8[idx].x18 == 0) {
+        if (entries[idx].x18 == 0) {
             lbl_804D6630 = 0x78;
         }
         if (lbl_804D6630 < 0x78) {
@@ -866,35 +876,29 @@ void fn_8018B090(HSD_GObj* arg0)
             u8* next_entry;
             u8* next_slot;
             for (i = 0; i < 4; i++) {
-                if (lbl_80473AB8[idx].slots[i].x4C == 0) {
+                if (entries[idx].slots[i].x4C == 0) {
                     break;
                 }
                 r = i + 1;
             }
-            src = &lbl_80473AB8[fn_8018F74C()];
+            src = fn_8018B090_inline2(entries, fn_8018F74C());
             src->x1 = 0;
             next_entry = &src->x5;
             next_slot = &src->x6;
-            lbl_80473AB8[*next_entry].slots[*next_slot].x30 = 1;
-            lbl_80473AB8[*next_entry].slots[*next_slot].x50 =
-                src->slots[r].x50;
-            lbl_80473AB8[*next_entry].slots[*next_slot].x51 =
-                src->slots[r].x51;
-            lbl_80473AB8[*next_entry].slots[*next_slot].x52 =
-                src->slots[r].x52;
-            lbl_80473AB8[*next_entry].slots[*next_slot].x4D =
-                src->slots[r].x4D;
-            lbl_80473AB8[*next_entry].slots[*next_slot].x4E =
-                src->slots[r].x4E;
-            lbl_80473AB8[*next_entry].slots[*next_slot].x4F =
-                src->slots[r].x4F;
+            entries[*next_entry].slots[*next_slot].x30 = 1;
+            entries[*next_entry].slots[*next_slot].x50 = src->slots[r].x50;
+            entries[*next_entry].slots[*next_slot].x51 = src->slots[r].x51;
+            entries[*next_entry].slots[*next_slot].x52 = src->slots[r].x52;
+            entries[*next_entry].slots[*next_slot].x4D = src->slots[r].x4D;
+            entries[*next_entry].slots[*next_slot].x4E = src->slots[r].x4E;
+            entries[*next_entry].slots[*next_slot].x4F = src->slots[r].x4F;
             src->slots[r].x30 = 0;
             src->slots[r].x4E = 3;
             tm->cur_option = 0x27;
         }
         break;
     }
-    PAD_STACK(0x30);
+    PAD_STACK(0x28);
 }
 
 /* 3D9EE8 */ static char lbl_803D9EE8[] = {
@@ -924,7 +928,7 @@ void fn_8018C8D4(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8, c9;
     s32 half_h, third_h;
     s32 mid_y, bot_y, two_third_y;
-    s32 half, center, right, left;
+    s32 half, center, right;
     GXColor c10, c11, c12, c13, c14, c15, c16, c17, c18, c19;
     GXColor c20, c21, c22, c23, c24, c25, c26, c27, c28, c29;
     GXColor c30, c31, c32, c33;
@@ -989,12 +993,10 @@ void fn_8018C8D4(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
         }
 
         neg_thickness = -thickness;
-        left = arg1 + 0x2B;
-        mid_y = arg2 + half_h;
         c7 = c0;
         {
             GXColor* color = &c7;
-            DrawRectangle((f32) left, (f32) mid_y,
+            DrawRectangle((f32) (arg1 + 0x2B), (f32) (mid_y = arg2 + half_h),
                           ((f32) arg3 + thickness) - 43.0f, neg_thickness,
                           color);
         }
@@ -1058,17 +1060,12 @@ void fn_8018C8D4(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     case 3:
         half = arg3 / 2;
         third_h = arg4 / 3;
-        center = arg1 + half;
-        mid_y = arg2 + third_h;
 
         c15 = c0;
         {
             GXColor* color = &c15;
-            {
-                f32 tmp_p34770 = (f32) center;
-                DrawRectangle(tmp_p34770, (f32) mid_y, thickness,
-                              (f32) (third_h - 2), color);
-            }
+            DrawRectangle((f32) (arg1 + half), (f32) (arg2 + third_h),
+                          thickness, (f32) (third_h - 2), color);
         }
 
         c16 = c0;
@@ -1105,8 +1102,8 @@ void fn_8018C8D4(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
         c20 = c0;
         {
             GXColor* color = &c20;
-            DrawRectangle((f32) arg1, (f32) mid_y, (f32) arg3 + thickness,
-                          neg_thickness, color);
+            DrawRectangle((f32) arg1, (f32) (arg2 + third_h),
+                          (f32) arg3 + thickness, neg_thickness, color);
         }
 
         c21 = c0;
@@ -1134,8 +1131,9 @@ void fn_8018C8D4(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                 c24 = data->x20;
                 {
                     GXColor* color = &c24;
-                    DrawRectangle((f32) center, (f32) (arg2 + (arg4 / 2)),
-                                  thickness, (f32) ((arg4 / 6) - 1), color);
+                    DrawRectangle((f32) (arg1 + half),
+                                  (f32) (arg2 + (arg4 / 2)), thickness,
+                                  (f32) ((arg4 / 6) - 1), color);
                 }
                 return;
             }
@@ -1150,14 +1148,15 @@ void fn_8018C8D4(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                 c26 = data->x20;
                 {
                     GXColor* color = &c26;
-                    DrawRectangle((f32) center, (f32) two_third_y, (f32) half,
-                                  neg_thickness, color);
+                    DrawRectangle((f32) (arg1 + half), (f32) two_third_y,
+                                  (f32) half, neg_thickness, color);
                 }
                 c27 = data->x20;
                 {
                     GXColor* color = &c27;
-                    DrawRectangle((f32) center, (f32) (arg2 + (arg4 / 2)),
-                                  thickness, (f32) ((arg4 / 6) - 1), color);
+                    DrawRectangle((f32) (arg1 + half),
+                                  (f32) (arg2 + (arg4 / 2)), thickness,
+                                  (f32) ((arg4 / 6) - 1), color);
                 }
                 return;
             }
@@ -1171,14 +1170,14 @@ void fn_8018C8D4(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                 c29 = data->x20;
                 {
                     GXColor* color = &c29;
-                    DrawRectangle((f32) arg1, (f32) mid_y, (f32) half,
-                                  neg_thickness, color);
+                    DrawRectangle((f32) arg1, (f32) (arg2 + third_h),
+                                  (f32) half, neg_thickness, color);
                 }
                 c30 = data->x20;
                 {
                     GXColor* color = &c30;
-                    DrawRectangle((f32) center, (f32) mid_y, thickness,
-                                  (f32) ((arg4 / 6) - 1), color);
+                    DrawRectangle((f32) (arg1 + half), (f32) (arg2 + third_h),
+                                  thickness, (f32) ((arg4 / 6) - 1), color);
                 }
                 return;
             }
@@ -1191,14 +1190,14 @@ void fn_8018C8D4(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
             c32 = data->x20;
             {
                 GXColor* color = &c32;
-                DrawRectangle((f32) center, (f32) mid_y, (f32) half,
-                              neg_thickness, color);
+                DrawRectangle((f32) (arg1 + half), (f32) (arg2 + third_h),
+                              (f32) half, neg_thickness, color);
             }
             c33 = data->x20;
             {
                 GXColor* color = &c33;
-                DrawRectangle((f32) center, (f32) mid_y, thickness,
-                              (f32) ((arg4 / 6) - 1), color);
+                DrawRectangle((f32) (arg1 + half), (f32) (arg2 + third_h),
+                              thickness, (f32) ((arg4 / 6) - 1), color);
             }
         }
         break;
@@ -1374,7 +1373,7 @@ void fn_8018D50C(BracketEntry* data, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
 
 static GXColor const col = { 0xFF, 0xFF, 0x00, 0xFF };
 
-void fn_8018DC18(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
+void fn_8018DC18(BracketEntry* data, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                  s32 arg5)
 {
     f32 thickness;
@@ -1385,7 +1384,7 @@ void fn_8018DC18(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8, c9;
 
     c0 = col;
-    thickness = arg0->x1C;
+    thickness = data->x1C;
     c1 = c0;
     {
         GXColor* color = &c1;
@@ -1415,29 +1414,41 @@ void fn_8018DC18(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                       neg_thickness, color);
     }
 
-    if (arg0->x20.g == 0) {
-        if (arg0->slots[0].x4C == 0) {
-            GXColor* entry_color = &arg0->x20;
-            c5 = *entry_color;
-            DrawRectangle(arg1, arg2, thickness, arg4, &c5);
-            c6 = *entry_color;
-            DrawRectangle(arg1, arg5, half + thickness, neg_thickness, &c6);
+    if (data->x20.g == 0) {
+        if (data->slots[0].x4C == 0) {
+            c5 = data->x20;
+            {
+                GXColor* color = &c5;
+                DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
+                              color);
+            }
+            c6 = data->x20;
+            {
+                GXColor* color = &c6;
+                DrawRectangle((f32) arg1, (f32) arg5, (f32) half + thickness,
+                              neg_thickness, color);
+            }
             return;
         }
-        if (arg0->slots[1].x4C == 0) {
-            c7 = arg0->x20;
+        if (data->slots[1].x4C == 0) {
+            c7 = data->x20;
             {
                 GXColor* color = &c7;
                 DrawRectangle(center, arg2, thickness, arg4, color);
             }
             return;
         }
+        c8 = data->x20;
         {
-            GXColor* entry_color = &arg0->x20;
-            c8 = *entry_color;
-            DrawRectangle(right, arg2, thickness, arg4, &c8);
-            c9 = *entry_color;
-            DrawRectangle(center, arg5, half + thickness, neg_thickness, &c9);
+            GXColor* color = &c8;
+            DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4,
+                          color);
+        }
+        c9 = data->x20;
+        {
+            GXColor* color = &c9;
+            DrawRectangle((f32) center, (f32) arg5, (f32) half + thickness,
+                          neg_thickness, color);
         }
     }
 }
@@ -1465,7 +1476,6 @@ void fn_8018DF68(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     f32 thickness;
     s32 right;
     s32 third;
-    s32 left_third;
     s32 right_third;
     s32 half;
 
@@ -1484,12 +1494,12 @@ void fn_8018DF68(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
         DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4, color);
     }
 
-    third = arg3 / 3;
-    left_third = arg1 + third;
     left_third_color = line_color;
+    third = arg3 / 3;
     {
-        f32 x = (f32) left_third;
-        DrawRectangle(x, (f32) arg2, thickness, (f32) arg4, &left_third_color);
+        f32 x = (f32) (arg1 + third);
+        GXColor* color = &left_third_color;
+        DrawRectangle(x, (f32) arg2, thickness, (f32) arg4, color);
     }
 
     right_third = right - third;
@@ -1502,59 +1512,74 @@ void fn_8018DF68(BracketEntry* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
 
     neg_thickness = -thickness;
     horizontal_color = line_color;
-    DrawRectangle((f32) arg1, (f32) arg5, (f32) arg3 + thickness,
-                  neg_thickness, &horizontal_color);
+    {
+        GXColor* color = &horizontal_color;
+        DrawRectangle((f32) arg1, (f32) arg5, (f32) arg3 + thickness,
+                      neg_thickness, color);
+    }
 
     if (arg0->x20.g == 0) {
         if (arg0->slots[0].x4C == 0) {
-            GXColor* entry_color = &arg0->x20;
-            slot0_vertical_color = *entry_color;
-            DrawRectangle(arg1, arg2, thickness, arg4, &slot0_vertical_color);
-            slot0_horizontal_color = *entry_color;
-            DrawRectangle(arg1, arg5, (arg3 / 2) + thickness, neg_thickness,
-                          &slot0_horizontal_color);
-            return;
-        }
-        if (arg0->slots[1].x4C == 0) {
-            GXColor* entry_color = &arg0->x20;
-            slot1_vertical_color = *entry_color;
-            DrawRectangle(left_third, arg2, thickness, arg4,
-                          &slot1_vertical_color);
-            slot1_horizontal_color = *entry_color;
+            slot0_vertical_color = arg0->x20;
             {
-                GXColor* color = &slot1_horizontal_color;
-                DrawRectangle(left_third, arg5,
-                              ((arg3 / 2) + thickness) - third, neg_thickness,
+                GXColor* color = &slot0_vertical_color;
+                DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
+                              color);
+            }
+            slot0_horizontal_color = arg0->x20;
+            {
+                GXColor* color = &slot0_horizontal_color;
+                DrawRectangle((f32) arg1, (f32) arg5,
+                              (f32) (arg3 / 2) + thickness, neg_thickness,
                               color);
             }
             return;
         }
-        if (arg0->slots[2].x4C == 0) {
-            GXColor* entry_color = &arg0->x20;
-            slot2_vertical_color = *entry_color;
-            DrawRectangle(right_third, arg2, thickness, arg4,
-                          &slot2_vertical_color);
-            half = arg3 / 2;
-            slot2_horizontal_color = *entry_color;
+        if (arg0->slots[1].x4C == 0) {
+            slot1_vertical_color = arg0->x20;
             {
-                f32 y = arg5;
-                DrawRectangle((arg1 + half), y, (half + thickness) - third,
-                              neg_thickness, &slot2_horizontal_color);
+                GXColor* color = &slot1_vertical_color;
+                DrawRectangle((f32) (arg1 + third), (f32) arg2, thickness,
+                              (f32) arg4, color);
+            }
+            slot1_horizontal_color = arg0->x20;
+            {
+                GXColor* color = &slot1_horizontal_color;
+                DrawRectangle((f32) (arg1 + third), (f32) arg5,
+                              ((f32) (arg3 / 2) + thickness) - third,
+                              neg_thickness, color);
             }
             return;
         }
-        {
-            GXColor* entry_color = &arg0->x20;
-            slot3_vertical_color = *entry_color;
-            DrawRectangle(right, arg2, thickness, arg4, &slot3_vertical_color);
+        if (arg0->slots[2].x4C == 0) {
+            slot2_vertical_color = arg0->x20;
+            {
+                GXColor* color = &slot2_vertical_color;
+                DrawRectangle((f32) right_third, (f32) arg2, thickness,
+                              (f32) arg4, color);
+            }
             half = arg3 / 2;
-            slot3_horizontal_color = *entry_color;
+            slot2_horizontal_color = arg0->x20;
+            {
+                GXColor* color = &slot2_horizontal_color;
+                DrawRectangle((f32) (arg1 + half), (f32) arg5,
+                              ((f32) half + thickness) - third, neg_thickness,
+                              color);
+            }
+            return;
         }
+        slot3_vertical_color = arg0->x20;
         {
-            f32 y = arg5;
-            GXColor* color = &slot3_horizontal_color;
-            DrawRectangle((arg1 + half), y, half + thickness, neg_thickness,
+            GXColor* color = &slot3_vertical_color;
+            DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4,
                           color);
+        }
+        half = arg3 / 2;
+        slot3_horizontal_color = arg0->x20;
+        {
+            GXColor* color = &slot3_horizontal_color;
+            DrawRectangle((f32) (arg1 + half), (f32) arg5,
+                          (f32) half + thickness, neg_thickness, color);
         }
     }
 }

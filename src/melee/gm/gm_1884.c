@@ -503,17 +503,23 @@ static inline u32 gm_801891F4_GetTickRate(void)
     return OS_TIMER_CLOCK;
 }
 
+static inline s32* gm_801891F4_GetMenuValues(CssSubStruct* sub)
+{
+    return sub->menu_values;
+}
+
 void fn_801891F4(void)
 {
     CssSubStruct* sub;
     u64 buttons;
-    int count;
-    int i;
 
     buttons = gm_801A36C0((u8) lbl_80473700.mode);
     sub = &lbl_80473700.css;
 
     if (gm_801A45E8(2) != 0) {
+        int count;
+        int i;
+
         if (sub->x01 == 0) {
             fn_801651FC(0, 0);
             count = lbl_80473700.count;
@@ -594,11 +600,13 @@ void fn_801891F4(void)
             }
             if (buttons & PAD_BUTTON_A) {
                 HSD_JObj* jobj;
+                HSD_GObj* player_entity;
                 Vec3 pos;
                 s16 item;
                 lbAudioAx_80024030(8);
                 item = *(s16*) &((s32*) lbl_803D9828)[sub->menu_values[1]];
-                jobj = Player_GetEntity(0)->hsd_obj;
+                player_entity = Player_GetEntity(0);
+                jobj = player_entity->hsd_obj;
                 HSD_JObjGetTranslation2(jobj, &pos);
                 pos.y += 10.0f;
                 it_8026D258(&pos, (ItemKind) item);
@@ -609,7 +617,7 @@ void fn_801891F4(void)
             if (buttons & PAD_ANY_LEFT) {
                 sfxMove();
                 if ((u32) sub->menu_values[sub->x00] != 0) {
-                    sub->menu_values[sub->x00]--;
+                    gm_801891F4_GetMenuValues(sub)[sub->x00]--;
                     return;
                 }
                 sub->menu_values[sub->x00] = 2;
@@ -747,8 +755,9 @@ void fn_801891F4(void)
         }
     } else {
         if (sub->x01 == 1) {
+            int count;
+            int i;
             int cpu_type;
-            int damage;
             f32 speeds[] = {
                 2, 1.5, 1, 0.666, 0.5, 0.25,
             };
@@ -757,16 +766,19 @@ void fn_801891F4(void)
 
             sfxBack();
             sub->anim_frames[22] = 0x14;
-            lb_80019880(__cvt_dbl_usll(
-                (f64) (0.016666668f / speeds[sub->menu_values[0]] *
-                       (f32) gm_801891F4_GetTickRate())));
+            {
+                f32 selected_speed = speeds[sub->menu_values[0]];
+                lb_80019880(
+                    __cvt_dbl_usll((f64) (0.016666668f / selected_speed *
+                                          (f32) gm_801891F4_GetTickRate())));
+            }
 
             fn_80188550(sub->menu_values[2] + 1);
 
             cpu_type = sub->menu_values[3];
             (void) cpu_type;
             count = lbl_80473700.count;
-            sub->x03 = (u8) cpu_type;
+            lbl_80473700.css.x03 = (u8) cpu_type;
             for (i = 0; i < 4; i++) {
                 if (i != 0 && count != 0) {
                     Player_SetPlayerAndEntityCpuType(i, cpu_type);
@@ -777,20 +789,30 @@ void fn_801891F4(void)
                 }
             }
 
-            damage = sub->menu_values[4];
-            count = lbl_80473700.count;
-            for (i = 0; i < 4; i++) {
-                if (i != 0 && count != 0) {
-                    Player_SetHUDDamage(i, damage);
-                    count--;
-                    if (count == 0) {
-                        break;
+            {
+                int count;
+                int i;
+                int damage;
+
+                damage = sub->menu_values[4];
+                count = lbl_80473700.count;
+                for (i = 0; i < 4; i++) {
+                    if (i != 0 && count != 0) {
+                        Player_SetHUDDamage(i, damage);
+                        count--;
+                        if (count == 0) {
+                            break;
+                        }
                     }
                 }
             }
 
-            for (i = 1; i < 4; i++) {
-                fn_8016B388(i, sub->menu_values[4]);
+            {
+                int i;
+
+                for (i = 1; i < 4; i++) {
+                    fn_8016B388(i, gm_801891F4_GetMenuValues(sub)[4]);
+                }
             }
 
             switch (sub->menu_values[6]) {
