@@ -152,7 +152,6 @@ bool itEvyoshiegg_UnkMotion3_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #itEvyoshiegg_UnkMotion5_Anim
 bool itEvyoshiegg_UnkMotion5_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);

@@ -1379,8 +1379,6 @@ void fn_801874FC(void)
     lb_80011E24(jobj, &lbl_804736B0.xC, 6, -1);
 }
 
-/// #fn_801874FC
-
 #ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on

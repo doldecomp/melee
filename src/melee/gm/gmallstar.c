@@ -721,8 +721,6 @@ void gm_801B5F50(GameModeState* arg0)
     lbDvd_800174BC();
 }
 
-/// #gm_801B5F50
-
 void gm_801B5FB4(GameModeState* arg0)
 {
     CSSData* temp_r31 = gm_GetGameSceneLeaveData(arg0);

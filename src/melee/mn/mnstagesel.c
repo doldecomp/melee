@@ -368,9 +368,6 @@ void fn_8025A974(HSD_GObj* gobj, int unused)
     HSD_FogSet(gobj->hsd_obj);
 }
 
-/// OnLoad
-/// #mnStageSel_Scene_OnEnter
-
 static const Vec3 mnStageSel_803B8550 = { 0, -13, 0 };
 
 static inline void make_stage_icon(HSD_JObj** out)

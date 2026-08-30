@@ -255,8 +255,6 @@ void ftCo_CaptureWaitLw_IASA(Fighter_GObj* gobj)
     fn_800DC014(gobj);
 }
 
-/// #ftCo_CaptureWaitLw_Phys
-
 static inline void ftCo_CaptureWaitLw_Phys_inline(Fighter_GObj* gobj)
 {
     register Fighter* temp_r31;
