@@ -683,18 +683,19 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
 {
     Vec3 a1;
     Vec3 c1;
-    float diff_dc_x;
-    float diff_ac_x;
-    float diff_dc_y;
-    float d_y;
     float diff_ba_y;
+    float diff_dc_x;
+    float diff_dc_y;
+    float diff_ba_x;
+    float diff_ac_x;
+    float d_y;
     float sqdist2_dc;
     float d_x;
-    float diff_ba_x;
     float sqdist2_ba;
     float dot2_diff_dc_ac;
     float dot2_diff_ba_ac;
     float determinant;
+    float c1_y;
     float sum_pq = p + q;
     Vec3 a0 = *a;
 
@@ -781,10 +782,11 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                     {
                         float dot2_diff_ba_dc;
                         float diff_ac_y;
+                        c1_y = c1.y;
                         diff_ba_y = b_y - a1_y;
                         d_y = lbColl_GetY(d);
-                        diff_ac_y = a1_y - c1.y;
-                        diff_dc_y = d_y - c1.y;
+                        diff_ac_y = a1_y - c1_y;
+                        diff_dc_y = d_y - c1_y;
                         diff_ba_x = b_x - a1.x;
                         {
                             float loaded_d_x = d->x;
@@ -837,7 +839,7 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                 }
                             } else if (approximatelyZero(determinant)) {
                                 float mid_y =
-                                    lbColl_804D7A18 * diff_dc_y + c1.y;
+                                    lbColl_804D7A18 * diff_dc_y + c1_y;
                                 float mid_x =
                                     lbColl_804D7A18 * diff_dc_x + c1.x;
                                 float a_mid_y = a1_y - mid_y;
@@ -965,7 +967,7 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                             e->z = 0.0f;
 
                             f->x = diff_dc_x * scl_f + c1.x;
-                            f->y = diff_dc_y * scl_f + c1.y;
+                            f->y = diff_dc_y * scl_f + c1_y;
                             f->z = 0.0f;
                         }
                     }
