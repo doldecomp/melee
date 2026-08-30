@@ -171,13 +171,13 @@ static inline s32 mnStageSw_GetPreviousIndex(s32 offset, s32 index)
 static s32 mnStageSw_80235C58(u8 arg0)
 {
     s32 next;
-    s32 idx;
     s32 lower;
+    s32 curr;
     u8 end;
     s32 upper;
     u8 start;
-    u8 low;
-    s32 curr;
+    s32 low;
+    s32 idx;
     s32 i;
     u8 high;
 
@@ -206,11 +206,11 @@ static s32 mnStageSw_80235C58(u8 arg0)
         return arg0;
     }
 
-    i = 1;
-    curr = arg0 + 1;
+    i = 0;
     idx = arg0;
-    next = idx + 1;
-    lower = low;
+    next = idx + ++i;
+    curr = idx + 1;
+    lower = (u8) low;
     upper = high;
     while (true) {
         s32 temp = mnStageSw_GetPreviousIndex(i, idx);
