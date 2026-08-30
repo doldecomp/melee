@@ -1123,12 +1123,6 @@ void fn_80179854(void)
 
 extern s32 ftLib_800876B4(HSD_GObj*);
 
-static inline HSD_ImageDesc* get_player_img2(int slot,
-                                             ResultsDisplayLayout* disp)
-{
-    return &disp->player_img2[slot];
-}
-
 static inline int get_big_loser(int slot, MatchEnd* match_end)
 {
     return match_end->player_standings[slot].is_big_loser;

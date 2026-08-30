@@ -450,12 +450,11 @@ static inline u8 mnItemSw_UpdateConfirmed(MnItemSwData* user_data,
 void mnItemSw_8023453C(HSD_GObj* gobj, u8 arg1, u8 arg2)
 {
     HSD_JObj* sp44;
-    u8 arg1_ = arg1;
-    HSD_JObj* sp3C;
     u8 cursor;
     HSD_JObj* cjobj;
     MnItemSwData* data = gobj->user_data;
     struct MnItemSwTable* tbl = mnItemSw_GetTable();
+    u8 arg1_ = arg1;
     f32 x;
     u8 arg2_ = arg2;
 
@@ -530,19 +529,7 @@ void mnItemSw_8023453C(HSD_GObj* gobj, u8 arg1, u8 arg2)
     }
 
     if (arg2_ != 0) {
-        if (mn_804A04F0.hovered_selection == 0x1F ||
-            mn_804A04F0.hovered_selection == 0x20)
-        {
-            mnItemSw_ReqFreqAnim(data->jobjs[3], tbl,
-                                 mn_804A04F0.confirmed_selection);
-        } else {
-            u8 confirmed = mn_804A04F0.confirmed_selection;
-            HSD_JObj* jobj =
-                mnItemSw_8023405C(data, (u8) mn_804A04F0.hovered_selection);
-            lb_80011E24(jobj, &sp3C, 2, -1);
-            HSD_JObjReqAnimAll(sp3C, mnItemSw_804D4BA0[confirmed]);
-            HSD_JObjAnimAll(sp3C);
-        }
+        arg1_ = mnItemSw_UpdateConfirmed(data, tbl, arg1_);
     }
 
     {

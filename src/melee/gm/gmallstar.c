@@ -380,6 +380,11 @@ static AllstarRoundInfo gm_803DEC4C[13] = {
 
 gm_80490940_t gm_80490940[5];
 
+static inline gm_803DEBE8_t* gm_801B5324_inline(u8 round)
+{
+    return &gm_803DEBE8[gm_803DEC4C[round].start];
+}
+
 void gm_801B5324(UnkAllstarData* arg0, s32 arg1)
 {
     s8 chars[3];
@@ -391,7 +396,8 @@ void gm_801B5324(UnkAllstarData* arg0, s32 arg1)
     s32 slot_idx;
     s32 count_processed;
     s32 i;
-    PAD_STACK(12);
+    u64 audio;
+    PAD_STACK(16);
 
     is_last_round = 0;
     chars_ptr = chars;
@@ -402,9 +408,9 @@ void gm_801B5324(UnkAllstarData* arg0, s32 arg1)
     chars_ptr[1] = 0x21;
     chars_ptr[2] = 0x21;
 
-    count =
-        ((AllstarRoundInfo*) ((u8*) gm_803DE930_Scenes + 0x31C))[arg1].count;
-    for (count_processed = 0; count_processed < count; count_processed++) {
+    for (count_processed = 0; count_processed < (s32) gm_803DEC4C[arg1].count;
+         count_processed++)
+    {
         chars[count_processed] = opp_data[count_processed].x3;
     }
 

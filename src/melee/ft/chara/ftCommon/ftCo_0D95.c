@@ -4,10 +4,9 @@
 #include "ft/fighter.h"
 #include "ft/ft_0892.h"
 #include "ft/inlines.h"
+#include "it/inlines.h"
 #include "it/items/itsamusgrapple.h"
-#include "it/types.h"
 #include "lb/lb_00B0.h"
-#include "mp/mplib.h"
 
 #include <baselib/random.h>
 
@@ -17,7 +16,7 @@ bool fn_800D9558(Fighter_GObj* gobj)
     s32 i;
     ftSs_DatAttrs* attrs;
     Item_GObj* item;
-    s32 i;
+    Item* it;
     itSamusGrappleAttributes* grappleAttrs;
     HSD_GObj* segGobj;
     HSD_JObj* jobj;
@@ -75,7 +74,7 @@ bool fn_800D9558(Fighter_GObj* gobj)
                                         fp->coll_data.cur_pos.x, my,
                                         2.0 * fp->facing_dir *
                                                 fp->x34_scale.y +
-                                            joint->mtx[0][3],
+                                            jobj->mtx[0][3],
                                         my))
                     {
                         it_802B7B84(fp->u.ss.x223C);

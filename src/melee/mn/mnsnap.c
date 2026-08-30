@@ -2547,7 +2547,6 @@ void mnSnap_80257F24(void)
     f32 dy;
     f32 dz;
     s32 i;
-    PAD_STACK(20);
 
     PAD_STACK(12);
 

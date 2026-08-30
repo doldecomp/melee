@@ -2782,11 +2782,8 @@ void _Toy_80309404(HSD_GObj* gobj)
 {
     struct {
         Vec3 pos;
-        u8 pad2[0x8];
-    } eye_pad;
-    Vec3 eye_pos;
-    HSD_CObj* cobj;
-    Vec3 transition_interest;
+        u8 pad[0x10];
+    } unused_eye;
     Vec3 transition_eye;
     Vec3 transition_interest;
     struct {
@@ -3539,7 +3536,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
         u32 button;
         f32 angle;
 
-        PAD_STACK(296);
+        PAD_STACK(72);
 
         {
             ToyUnkJObjData* data = anim->gobj->hsd_obj;
