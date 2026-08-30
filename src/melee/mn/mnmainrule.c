@@ -66,9 +66,35 @@ struct mn_8022FEC8_jobj_ref_t {
 };
 
 typedef union {
-    s32 packed;
+    u32 packed;
     u8 idx[4];
-} JObjIndices;
+} JObjIndices4;
+
+typedef union {
+    u16 packed;
+    u8 idx[2];
+} JObjIndices2;
+
+typedef union {
+    u8 packed;
+    u8 idx[1];
+} JObjIndices1;
+
+typedef union {
+    struct {
+        JObjIndices4 hi;
+        JObjIndices1 lo;
+    } parts;
+    u8 idx[5];
+} JObjIndices5;
+
+typedef union {
+    struct {
+        JObjIndices4 hi;
+        JObjIndices2 lo;
+    } parts;
+    u8 idx[6];
+} JObjIndices6;
 
 union mn_802307F8_value_view {
     struct mn_802307F8_t fields;
@@ -156,10 +182,6 @@ u8 mn_StockCountLimits[2] = { 1, 0x63 };
 /// SIS text id for the rule value label when Mode is Stock Match.
 u8 mn_StockCountTextId = 0x2B;
 
-extern u16 const mn_804DBDF8;
-extern u32 const mn_804DBE10;
-extern u16 const mn_804DBE14;
-
 f32 mn_804D6BD8;
 HSD_GObj* mn_804D6BD0;
 
@@ -185,6 +207,9 @@ void fn_8022F538(HSD_GObj* arg0)
     u8 hovered;
 
     PAD_STACK(0x20);
+
+    /// @remark Keeps the unsigned conversion constant first in .sdata2.
+    (void) U32_TO_F32;
 
     data = HSD_GObjGetUserData(mn_804D6BD0);
     buttons = mn_80229624(4);
@@ -398,6 +423,8 @@ void fn_8022F538(HSD_GObj* arg0)
     }
 }
 
+JObjIndices2 const mn_804DBDF8 = { 0x0203 };
+
 void mn_8022FB88(u8 arg0, void* arg1)
 {
     struct mn_8022FB88_arg1_t* data = arg1;
@@ -456,12 +483,16 @@ void mn_8022FB88(u8 arg0, void* arg1)
     HSD_JObjAnimAll(temp_r29_3);
 }
 
+JObjIndices2 const mn_804DBE04 = { 0x0708 };
+JObjIndices4 const mn_804DBE08 = { 0x02030405 };
+JObjIndices1 const mn_804DBE0C = { 0x06 };
+
 void mn_8022FD18(u8 arg0)
 {
     UNUSED u8 pad[8];
     struct mn_8022FB88_arg1_t* data = mn_804D6BD0->user_data;
-    u8 stock_digits[2] = { 7, 8 };
-    u8 time_indices[5] = { 2, 3, 4, 5, 6 };
+    JObjIndices2 stock_digits;
+    JObjIndices5 time_indices;
     HSD_JObj** jobjs;
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
@@ -474,16 +505,19 @@ void mn_8022FD18(u8 arg0)
     u8 val;
 
     data2 = data;
+    stock_digits = mn_804DBE04;
+    time_indices.parts.hi = mn_804DBE08;
+    time_indices.parts.lo = mn_804DBE0C;
     if (arg0 != 0) {
         i = 0;
-        ptr0 = stock_digits;
+        ptr0 = stock_digits.idx;
         do {
             HSD_JObjSetFlagsAll(data->x58[*ptr0], JOBJ_HIDDEN);
             i += 1;
             ptr0 += 1;
         } while (i < 2);
         i = 0;
-        ptr1 = time_indices;
+        ptr1 = time_indices.idx;
         do {
             HSD_JObjClearFlagsAll(data->x58[*ptr1], JOBJ_HIDDEN);
             i += 1;
@@ -493,14 +527,14 @@ void mn_8022FD18(u8 arg0)
         return;
     }
     i = 0;
-    ptr2 = stock_digits;
+    ptr2 = stock_digits.idx;
     do {
         HSD_JObjClearFlagsAll(data->x58[*ptr2], JOBJ_HIDDEN);
         i += 1;
         ptr2 += 1;
     } while (i < 2);
     i = 0;
-    ptr3 = time_indices;
+    ptr3 = time_indices.idx;
     do {
         HSD_JObjSetFlagsAll(data->x58[*ptr3], JOBJ_HIDDEN);
         i += 1;
@@ -820,6 +854,9 @@ void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
         }
     }
 }
+
+JObjIndices4 const mn_804DBE10 = { 0x02030506 };
+JObjIndices2 const mn_804DBE14 = { 0x0708 };
 
 void mn_802307F8(struct mn_802307F8_t* arg0, s32 arg1, s32 arg2)
 {
@@ -1202,17 +1239,11 @@ HSD_GObj* mn_80230E38(int arg0)
 
                 switch (i) {
                 case 1: {
-                    union {
-                        struct {
-                            u32 bytes4;
-                            u16 bytes2;
-                        } packed;
-                        u8 idx[6];
-                    } time_indices;
+                    JObjIndices6 time_indices;
                     u8* index_ptr;
 
-                    time_indices.packed.bytes4 = mn_804DBE10;
-                    time_indices.packed.bytes2 = mn_804DBE14;
+                    time_indices.parts.hi = mn_804DBE10;
+                    time_indices.parts.lo = mn_804DBE14;
                     index_ptr = time_indices.idx;
                     for (j = 0; j < 6; j++, index_ptr++) {
                         HSD_JObj* text =
@@ -1229,17 +1260,14 @@ HSD_GObj* mn_80230E38(int arg0)
                     break;
                 }
                 case 3: {
-                    union {
-                        u16 packed;
-                        u8 idx[2];
-                    } damage_indices;
+                    JObjIndices2 damage_indices;
                     u8* index_ptr;
                     u8 value = user_data->x5;
                     HSD_JObj* digit_jobj;
 
                     PAD_STACK(0x24);
 
-                    damage_indices.packed = mn_804DBDF8;
+                    damage_indices = mn_804DBDF8;
                     index_ptr = damage_indices.idx;
                     for (j = 0; j < 2; j++, index_ptr++) {
                         HSD_JObj* text =
@@ -1528,7 +1556,3 @@ bool mn_80231F80(u8 arg0)
     }
     return true;
 }
-
-u32 const mn_804DBE10 = 0x02030506;
-u16 const mn_804DBE14 = 0x0708;
-u16 const mn_804DBDF8 = 0x203;
