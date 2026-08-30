@@ -195,6 +195,12 @@ static void order_data(void)
     (void) "Error : gobj don\'t get (gmRegClearAddModel)\n";
     (void) "gmregclear.c";
     (void) "Error : jobj don\'t get (gmRegClearAddModel)\n";
+    (void) "SdClr.usd";
+    (void) "SIS_ClearData";
+    (void) "SdClr.dat";
+    (void) "IfHrNoCn";
+    (void) "ScInfCnt_scene_models";
+    (void) "IfHrReco";
 }
 #endif
 
