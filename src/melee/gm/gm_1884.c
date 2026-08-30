@@ -148,31 +148,29 @@ void fn_80188550(int arg0)
 {
     TrainingModeState* state = &lbl_80473700;
     int current = state->count;
-    int j;
     int to_remove;
+    int j;
 
     if (arg0 != current) {
         if (arg0 > state->count) {
-            PlayerInitData* player;
             int i;
             int skip;
             int remaining;
 
             skip = state->count;
-            player = state->players;
             remaining = arg0 - current;
             i = 0;
             j = 0;
 
-            for (i = 0; i < 4; i++, player++) {
+            for (i = 0; i < 4; i++) {
                 if (i != 0) {
                     if (skip == 0) {
                         if (i != 0) {
-                            player->slot_type = 1;
+                            lbl_80473700.players[i].slot_type = 1;
                         } else {
-                            player->slot_type = j;
+                            lbl_80473700.players[i].slot_type = j;
                         }
-                        gm_8016EDDC(i, player);
+                        gm_8016EDDC(i, &lbl_80473700.players[i]);
                         if (--remaining == 0) {
                             break;
                         }
