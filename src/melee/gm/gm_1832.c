@@ -14,8 +14,6 @@
 #include "gm/types.h"
 #include "gr/ground.h"
 #include "gr/stage.h"
-
-
 #include "it/item.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"

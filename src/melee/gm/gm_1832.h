@@ -5,7 +5,6 @@
 
 #include <sysdolphin/baselib/forward.h>
 
-
 /* 1849E0 */ void fn_801849E0(HSD_GObj*);
 /* 184A04 */ void fn_80184A04(HSD_GObj*);
 /* 184A28 */ void fn_80184A28(HSD_GObj*);
