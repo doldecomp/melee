@@ -1887,13 +1887,13 @@ static inline void psUpdateProjectionCache(f32 perspective)
 void psDispParticles(u32 target_link, u32 sw)
 {
     u32 sp7A8;
-    s32 sp7B4;
     void* sp7B0;
     u32 sp7AC;
-    void* sp79C;
+    s32 sp7B4;
     u8 sp7A5;
     u8 sp7A4;
     s32 needs_setup;
+    void* sp79C;
     psdisp_Tlut tlut_obj;
     HSD_Particle* non_edge_particles;
     GXTexObj sp764;
