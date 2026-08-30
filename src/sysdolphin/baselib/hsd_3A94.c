@@ -4870,8 +4870,8 @@ s32 fn_803B1338(CardState* state, s32 arg1)
                                 state, logical, phys, NULL, 0, file_id, cmd8,
                                 cmd9);
                         } else {
-                            s32 chunk = fn_803B1338_data_size(state);
                             u8* wdata = fn_803B1338_data_at(fdata, offset);
+                            s32 chunk = fn_803B1338_data_size(state);
                             result = fn_803B1338_queue_write(
                                 state, logical, phys, wdata, chunk, file_id,
                                 cmd10, cmd11);

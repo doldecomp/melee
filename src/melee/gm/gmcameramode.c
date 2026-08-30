@@ -1,7 +1,6 @@
 #include "gmcameramode.h"
 
 #include "gm_1B03.h"
-#include "gmvsdata.h"
 
 #include "gm/gm_1A3F.h"
 
@@ -21,17 +20,17 @@
 
 #include <dolphin/os.h>
 
-/* 1B24B4 */ static void gm_801B24B4(GameScene*);
-/* 1B2510 */ static void gm_801B2510(GameScene*);
-/* 1B254C */ static void gm_801B254C(GameScene*);
-/* 1B25D4 */ static void gm_801B25D4(GameScene*);
-/* 1B26AC */ static void gm_801B26AC(GameScene*);
-/* 1B2704 */ static void gm_801B2704(GameScene*);
-/* 1B2790 */ static void gm_PrepCameraModeVSScene(GameScene*);
-/* 1B2AF8 */ static void gm_801B2AF8(GameScene*);
+/* 1B24B4 */ static void gm_801B24B4(GameModeState*);
+/* 1B2510 */ static void gm_801B2510(GameModeState*);
+/* 1B254C */ static void gm_801B254C(GameModeState*);
+/* 1B25D4 */ static void gm_801B25D4(GameModeState*);
+/* 1B26AC */ static void gm_801B26AC(GameModeState*);
+/* 1B2704 */ static void gm_801B2704(GameModeState*);
+/* 1B2790 */ static void gm_PrepCameraModeVSScene(GameModeState*);
+/* 1B2AF8 */ static void gm_801B2AF8(GameModeState*);
 /* 4D68C8 */ static s64 gm_804D68C8;
 
-GameScene gm_CameraModeScenes[] = {
+GameModeState gm_Mode_Camera_States[] = {
     {
         0,
         lbDvdPreload_3,
@@ -91,21 +90,21 @@ void gm_801B23F0(void)
     lbDvd_80017740(0, 2008, 4, 4, lbSnap_8001E210(), 0, 1, 32, 0);
 }
 
-void gm_801B24B4(GameScene* arg0)
+void gm_801B24B4(GameModeState* arg0)
 {
     Unk80433380_48* temp_r31_2;
     struct GameCache* temp_r31;
 
     temp_r31 = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_800174BC();
-    temp_r31->mode_id = GM_CAMERA_MODE;
+    temp_r31->mode_kind = GM_CAMERA_MODE;
     lbDvd_80018254();
     lb_8001C550();
     temp_r31_2 = lbDvd_GetPreloadedArchive(0x7D8);
     lbSnap_8001E218(lbDvd_GetPreloadedArchive(0x7D7), temp_r31_2);
 }
 
-void gm_801B2510(GameScene* arg0)
+void gm_801B2510(GameModeState* arg0)
 {
     int* data = gm_GetGameSceneLeaveData(arg0);
     int temp_r0 = *data;
@@ -114,7 +113,7 @@ void gm_801B2510(GameScene* arg0)
     }
 }
 
-void gm_801B254C(GameScene* arg0)
+void gm_801B254C(GameModeState* arg0)
 {
     VsModeData* temp_r31;
     u8* temp_r3;
@@ -132,11 +131,11 @@ void gm_801B254C(GameScene* arg0)
 
     temp_r30_2 = &lbDvd_GetPreloadCacheScene()->game_cache;
     lbDvd_800174BC();
-    temp_r30_2->mode_id = GM_CAMERA_MODE;
+    temp_r30_2->mode_kind = GM_CAMERA_MODE;
     lbDvd_80018254();
 }
 
-void gm_801B25D4(GameScene* arg0)
+void gm_801B25D4(GameModeState* arg0)
 {
     VsModeData* temp_r31;
     u64 temp_ret;
@@ -162,7 +161,7 @@ void gm_801B25D4(GameScene* arg0)
     lbAudioAx_80027168();
 }
 
-void gm_801B26AC(GameScene* arg0)
+void gm_801B26AC(GameModeState* arg0)
 {
     SSSData* sss;
     VsModeData* vs;
@@ -172,7 +171,7 @@ void gm_801B26AC(GameScene* arg0)
     gm_80167FC4(sss);
 }
 
-void gm_801B2704(GameScene* arg0)
+void gm_801B2704(GameModeState* arg0)
 {
     VsModeData* temp_r31;
     SSSData* var_r3;
@@ -189,7 +188,7 @@ void gm_801B2704(GameScene* arg0)
     gm_SetPendingSceneIndex(1);
 }
 
-void gm_PrepCameraModeVSScene(GameScene* arg0)
+void gm_PrepCameraModeVSScene(GameModeState* arg0)
 {
     VsModeData* vs;
     StartMeleeData* start;
@@ -235,7 +234,7 @@ void gm_PrepCameraModeVSScene(GameScene* arg0)
                     lbDvd_GetPreloadedArchive(0x7D8));
 }
 
-void gm_801B2AF8(GameScene* arg0)
+void gm_801B2AF8(GameModeState* arg0)
 {
     VsModeData* temp_r30;
     u8* temp_r29;
@@ -249,7 +248,7 @@ void gm_801B2AF8(GameScene* arg0)
     gm_SetPendingSceneIndex(1);
 }
 
-void gm_801B2B7C_OnInit(void)
+void gm_Mode_Camera_OnInit(void)
 {
     gm_80167B50(&gmMainLib_804D3EE0->unk_950);
 }

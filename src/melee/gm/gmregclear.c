@@ -700,7 +700,7 @@ static inline s32 gm_8017CE34_CountEnemies(const s8* arg0)
     s32 i;
 
     for (i = 0; i < 3; i++) {
-        if ((s32) arg0[i] != 0x21) {
+        if ((s32) arg0[i] != CHKIND_NONE) {
             count++;
         }
     }
@@ -710,26 +710,20 @@ static inline s32 gm_8017CE34_CountEnemies(const s8* arg0)
 static inline void gm_8017CE34_SetupColors(UnkAdventureData* arg1, s32 count,
                                            s8* arg2, u8* colors)
 {
-    s32 color_idx;
     u8* out_color = colors;
-    u8 num_colors;
-    u8 result;
+    s32 color_idx;
+    s8* kind_iter = arg2;
 
     for (color_idx = 0; color_idx < 3; color_idx++) {
-        num_colors = gm_80169238((u8) arg2[color_idx]);
-        if (arg1->x54 != NULL) {
-            result = arg1->x54(count, arg1->x0.cpu_level, color_idx);
-            if (num_colors != 0) {
-                result %= num_colors;
-            } else {
-                result = 0;
-            }
-        } else {
-            result = 0;
-        }
-        *out_color = result;
+        *out_color = gm_8017CD94(arg1, (u8) *kind_iter, count, color_idx);
         out_color++;
+        kind_iter++;
     }
+}
+
+static inline u8 gm_8017CE34_GetCpuLevel(UnkAdventureData* arg1)
+{
+    return arg1->x0.cpu_level;
 }
 
 static inline u8 gm_8017CE34_GetCpuLevel(UnkAdventureData* arg1)
@@ -1494,12 +1488,12 @@ u8 gm_8017E440(void)
     return r31->x0.slot;
 }
 
-u8 gm_8017E48C(GameScene* scene)
+u8 gm_8017E48C(GameModeState* scene)
 {
     u8 count = 0;
     int i;
-    for (i = 0; scene->idx != gm_803DE1B8_Scenes[i].idx; i++) {
-        if (gm_803DE1B8_Scenes[i].info.scene_id == GS_VS) {
+    for (i = 0; scene->id != gm_Mode_Adventure_States[i].id; i++) {
+        if (gm_Mode_Adventure_States[i].info.scene_kind == GS_VS) {
             count++;
         }
     }
@@ -3795,7 +3789,7 @@ inline void gm_80182578_SetTime(RecordBlock* blocks, int idx, int mode,
     }
 }
 
-s32 gm_80182578(void)
+void gm_80182578(void)
 {
     RegClearRecordOverlay* data = (RegClearRecordOverlay*) &lbl_80472ED8;
     int* idx_ptr;
@@ -3970,7 +3964,6 @@ s32 gm_80182578(void)
         break;
     }
 
-    return 0;
     PAD_STACK(0x38);
 }
 

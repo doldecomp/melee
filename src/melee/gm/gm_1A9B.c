@@ -2,7 +2,7 @@
 /// Game-over "Regend" ending THP playback scene (OnEnter/OnFrame pair).
 ///
 /// This TU is split from gmregenddisp.c: the retail object anchors the THP
-/// table loads in gm_801A9B30_OnEnter at the first table literal
+/// table loads in gm_Scene_Congrats_OnEnter at the first table literal
 /// (gm_803DB640, displacements 0x278/0x5B4/0x8D0), i.e. at this TU's own
 /// .data+0. MWCC 1.2.5n always places its merged-data anchor (..data.N) at
 /// the object's .data start, so these tables cannot share a TU with the
@@ -82,7 +82,7 @@ static char* gmRegend_AllstarThpFiles[] = {
     "GmRegendAllstarPichu.thp",     "GmRegendAllstarGanon.thp",
 };
 
-void gm_801A9B30_OnEnter(UNK_T unused)
+void gm_Scene_Congrats_OnEnter(UNK_T unused)
 {
     HSD_SObj* thp_disp;
     s32 ckind;
@@ -144,7 +144,7 @@ void gm_801A9B30_OnEnter(UNK_T unused)
     }
 }
 
-void gm_801A9D0C_OnFrame(void)
+void gm_Scene_Congrats_OnFrame(void)
 {
     if (gmRegend_InputDelayTimer != 0) {
         gmRegend_InputDelayTimer--;

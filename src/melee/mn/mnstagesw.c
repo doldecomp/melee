@@ -171,14 +171,12 @@ static inline s32 mnStageSw_GetPreviousIndex(s32 offset, s32 index)
 static s32 mnStageSw_80235C58(u8 arg0)
 {
     s32 next;
-    s32 idx;
-    s32 lower;
-    u8 end;
-    s32 upper;
-    u8 start;
     u8 low;
+    s32 idx;
+    u8 end;
     s32 curr;
     s32 i;
+    u8 start;
     u8 high;
 
     if (arg0 < 15) {
@@ -210,8 +208,6 @@ static s32 mnStageSw_80235C58(u8 arg0)
     curr = arg0 + 1;
     idx = arg0;
     next = idx + 1;
-    lower = low;
-    upper = high;
     while (true) {
         s32 temp = mnStageSw_GetPreviousIndex(i, idx);
         s32 prev = temp;
@@ -551,6 +547,7 @@ static void fn_80236998(HSD_GObj* gobj)
     MnStageSwData* data = current_data;
     AnimLoopSettings* anims;
     s32 changed_menu;
+    s32 i;
     s32 changed_hovered;
     u64 pad3;
     HSD_JObj* child;
@@ -616,11 +613,30 @@ static void fn_80236998(HSD_GObj* gobj)
             switch ((s32) data->x1F) {
             case 1:
             case 3:
-                mnStageSw_FinishEnter(gobj, data, &child);
+                data->x1F = changed_menu = 0;
+                mnStageSw_802359C8(data);
+                gobj = gobj->user_data;
+                HSD_JObjClearFlagsAll(((MnStageSwData*) gobj)->x2C,
+                                      JOBJ_HIDDEN);
+                HSD_JObjClearFlagsAll(((MnStageSwData*) gobj)->x34,
+                                      JOBJ_HIDDEN);
+                for (; changed_menu < NUM_STAGES; changed_menu++) {
+                    jobj = mnStageSw_802364A0((MnStageSwData*) gobj,
+                                              changed_menu);
+                    if (changed_menu != ((MnStageSwData*) gobj)->x1) {
+                        lb_80011E24(jobj, &child, 3, -1);
+                        HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
+                    }
+                }
+                mnStageSw_80236178((MnStageSwData*) gobj,
+                                   ((MnStageSwData*) gobj)->x1);
+                mnStageSw_804D6BF4 = 0;
                 return;
             case 2:
             case 4:
-                mnStageSw_FreeTexts(data);
+                for (i = 0; i < NUM_STAGES; i++) {
+                    HSD_SisLib_803A5CC4(data->x40[i]);
+                }
                 HSD_GObjPLink_80390228(gobj);
                 return;
             }

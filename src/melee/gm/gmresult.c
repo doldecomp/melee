@@ -19,6 +19,37 @@ static void order_sdata(void)
 struct ResultsData lbl_8046DBE8;
 static u32 lbl_804D3F8C[2] = { 0x817C817C, 0x817C0000 };
 
+#ifdef MUST_MATCH
+static void gmresult_sdata2_order(void)
+{
+    (void) "%d";
+    (void) "%s%d";
+    (void) 0.0f;
+    (void) -30.0f;
+    (void) 0.0500000007f;
+    (void) 0.0546875f;
+    (void) 0.0590000004f;
+    (void) 10.0f;
+    (void) 1.75f;
+    (void) 11.0f;
+    (void) S32_TO_F32;
+    (void) 12.0f;
+    (void) 300.0f;
+    (void) 100.0f;
+    (void) 0.899999976f;
+    (void) 255.0f;
+    (void) U32_TO_F32;
+    (void) 1.13999999f;
+    (void) 1.12f;
+    (void) 30.0f;
+    (void) 0.109999999f;
+    (void) 0.0799999982f;
+    (void) 0.0900000036f;
+    (void) 5.5f;
+    (void) 1.0f;
+}
+#endif
+
 u32 lbl_804D3FA0 = 0x817C0000;
 u32 lbl_804D3FA4 = 0x817B0000;
 union {
@@ -1710,7 +1741,7 @@ static inline void gmResultReportModelGObj(void)
     HSD_ASSERT(0x6A2, 0);
 }
 
-void gm_80177368_OnEnter(void* arg0_)
+void gm_Scene_Results_OnEnter(void* arg0_)
 {
     ResultsMatchInfo* arg0 = arg0_;
     HSD_GObj* light_gobj;
@@ -1807,7 +1838,7 @@ void gm_80177368_OnEnter(void* arg0_)
     }
 }
 
-void gm_80177704_OnLeave(void* unused)
+void gm_Scene_Results_OnExit(void* unused)
 {
     fn_801701AC();
 }

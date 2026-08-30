@@ -176,7 +176,7 @@ void fn_8031DD14(HSD_GObj* gobj)
     }
 }
 
-void un_8031DE58_OnEnter(void* arg)
+void vi0501_Scene_OnEnter(void* arg)
 {
     u8 char_index;
     HSD_Fog* fog;
@@ -237,7 +237,7 @@ void un_8031DE58_OnEnter(void* arg)
     lbAudioAx_800237A8(0x20C, 0x7F, 0x40);
 }
 
-void vi_8031E0F0_OnFrame(void)
+void vi0501_Scene_OnFrame(void)
 {
     vi_8031CAAC();
 }

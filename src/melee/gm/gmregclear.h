@@ -51,7 +51,7 @@
 /* 17E424 */ UnkAdventureData* gm_GetAdventureData(void);
 /* 17E430 */ u8 gm_8017E430(void); ///< returns a player slot
 /* 17E440 */ u8 gm_8017E440(void);
-/* 17E48C */ u8 gm_8017E48C(GameScene*);
+/* 17E48C */ u8 gm_8017E48C(GameModeState*);
 /* 17E4C4 */ struct gm_803DE650_t* gm_8017E4C4(u8);
 /* 17E500 */ u8 gm_8017E500(u8, u8);
 /* 17E528 */ f32 gm_8017E528(u8, u8);
@@ -118,7 +118,7 @@
 /* 182174 */ UNK_RET gm_80182174(UNK_PARAMS);
 /* 182510 */ bool gm_IsMultimanSmashMode(void);
 /* 182554 */ void gm_80182554(int, int);
-/* 182578 */ s32 gm_80182578(void);
+/* 182578 */ void gm_80182578(void);
 /* 182B5C */ UNK_RET fn_80182B5C(UNK_PARAMS);
 /* 182DF0 */ UnkMultimanData* gm_80182DF0(int c_kind, int);
 /* 182F40 */ void fn_80182F40(HSD_GObj*);

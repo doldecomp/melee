@@ -2454,12 +2454,9 @@ melee/gm/gmmenu.c:
 melee/gm/gmvsmelee.c:
 	.text       start:0x801A5244 end:0x801A6254
 	.data       start:0x803DB040 end:0x803DB050
-	.bss        start:0x80479D98 end:0x8047C020
+	.bss        start:0x80479D98 end:0x804808F8
 	.sdata      start:0x804D4270 end:0x804D4278
 	.sbss       start:0x804D6730 end:0x804D6738
-
-melee/gm/gmvsdata.c:
-	.bss        start:0x8047C020 end:0x804808F8
 
 melee/gm/gmmovieend.c:
 	.text       start:0x801A6254 end:0x801A659C
@@ -4705,14 +4702,14 @@ melee/vi/vi0501.c:
 	.sdata2     start:0x804DE060 end:0x804DE090
 
 melee/vi/vi0502.c:
-	.text       start:0x8031E110 end:0x8031E6CC
+	.text       start:0x8031E110 end:0x8031E6EC
 	.data       start:0x804000D0 end:0x80400108
 	.sdata      start:0x804D5AE8 end:0x804D5AF8
 	.sbss       start:0x804D6F90 end:0x804D6FB0
 	.sdata2     start:0x804DE090 end:0x804DE0A8
 
 melee/vi/vi0601.c:
-	.text       start:0x8031E6CC end:0x8031ED70
+	.text       start:0x8031E6EC end:0x8031ED70
 	.data       start:0x80400108 end:0x80400128
 	.sdata      start:0x804D5AF8 end:0x804D5B08
 	.sbss       start:0x804D6FB0 end:0x804D6FB8

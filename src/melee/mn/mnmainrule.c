@@ -157,8 +157,8 @@ u8 mn_StockCountLimits[2] = { 1, 0x63 };
 u8 mn_StockCountTextId = 0x2B;
 
 extern u16 const mn_804DBDF8;
-u32 const mn_804DBE10;
-u16 const mn_804DBE14;
+extern u32 const mn_804DBE10;
+extern u16 const mn_804DBE14;
 
 f32 mn_804D6BD8;
 HSD_GObj* mn_804D6BD0;
@@ -643,13 +643,37 @@ static inline void mn_80230274_InitOptionRoots(HSD_JObj** option_roots,
                                                struct mn_802307F8_t* data,
                                                u8 count, s32* i)
 {
+    HSD_JObj* option_roots[8];
     HSD_JObj** option_root;
-    u8 j8;
+    HSD_JObj* roots[17];
+    u8 pad_[4];
+    u16 indices[17];
+    u8 pad_2[4];
+    AnimLoopSettings* settings;
+    HSD_JObj* jobj;
+    s32 i;
+    struct mn_802307F8_t* user_data;
     s32 j;
-    s32 visible;
+    u8 j8;
+    u8 focus;
+    u8 count;
+    u8 selected;
+    u8* base;
+    s32 tail_i;
+    struct mn_802307F8_t* data;
+
+    PAD_STACK(0x20);
+
+    user_data = arg0->user_data;
+    count = mn_803EB6B0[13].selection_count;
+    base = mn_803EC600;
+    data = user_data;
+    for (i = 0; 0x11 > i; i++) {
+        indices[i] = i;
+    }
 
     option_root = option_roots;
-    for (*i = 0; *i < count; option_root++, (*i)++) {
+    for (i = 0; i < count; option_root++, i++) {
         s32 valid;
         if (gm_GetCurrentGameMode() == GM_TOURNAMENT && (u8) *i == 4) {
             valid = 0;
@@ -657,12 +681,13 @@ static inline void mn_80230274_InitOptionRoots(HSD_JObj** option_roots,
             valid = 1;
         }
         if (valid) {
+            s32 visible;
             HSD_JObj* v;
             struct mn_8022FEC8_jobj_ref_t* p;
 
-            visible = 0;
+            visible = valid - 1;
             j = visible;
-            for (; j < (s32) (u8) *i; j++) {
+            for (; j < (s32) (u8) i; j++) {
                 s32 valid2;
                 j8 = j;
                 if (gm_GetCurrentGameMode() == GM_TOURNAMENT && j8 == 4) {
@@ -1088,6 +1113,7 @@ HSD_GObj* mn_80230E38(int arg0)
     StaticModelDesc* desc;
     HSD_JObj* root_jobj;
     u16* sub_count_ptr;
+    PAD_STACK(12);
 
     selected = (u8) mn_804A04F0.hovered_selection;
     num_options = mn_803EB6B0[13].selection_count;
@@ -1137,7 +1163,7 @@ HSD_GObj* mn_80230E38(int arg0)
     }
 
     sub_count_ptr = (u16*) (mn_803EC600 + 0x208);
-    for (i = 0; i < (s32) num_options; i++) {
+    for (i = 0; i < (s32) num_options; desc_ptr++, i++) {
         vis_before = mn_80230E38_CountVisible((u8) i);
 
         option_jobj = user_data->xC[((u16*) mn_803EC600)[(u8) vis_before]];
@@ -1213,7 +1239,7 @@ HSD_GObj* mn_80230E38(int arg0)
                     } time_indices;
                     u8* index_ptr;
 
-                    PAD_STACK(0x28);
+                    PAD_STACK(0x18);
 
                     time_indices.packed.bytes4 = mn_804DBE10;
                     time_indices.packed.bytes2 = mn_804DBE14;
@@ -1529,4 +1555,4 @@ bool mn_80231F80(u8 arg0)
 
 u32 const mn_804DBE10 = 0x02030506;
 u16 const mn_804DBE14 = 0x0708;
-u16 const mn_804DBDF8 = 0x0203;
+u16 const mn_804DBDF8 = 0x203;

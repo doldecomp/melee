@@ -17,6 +17,11 @@
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/lbtime.h>
 
+/* 4807B0 */ CSSData gm_804807B0;
+/* 480668 */ SSSData gm_80480668;
+/* 480530 */ StartMeleeData gm_80480530;
+/* 47E2A4 */ MatchExitInfo gm_8047E2A4;
+/* 47C020 */ ResultsMatchInfo gm_8047C020;
 /* 4D6730 */ static u8 gm_804D6730[6];
 
 VsModeData* gm_801A5244(void)
@@ -90,7 +95,7 @@ u8 gm_801A5360(MatchEnd* match_end)
     return 0;
 }
 
-void gm_801A5598_OnInit(void)
+void gm_Mode_Vs_OnInit(void)
 {
     gm_80167B50(&gmMainLib_804D3EE0->unk_590);
     gmMainLib_8015CDEC();
@@ -101,14 +106,15 @@ void gm_801A55C4(void)
     memzero(&gm_804D6730, sizeof(gm_804D6730));
 }
 
-void gm_801A55EC_OnLoad(void)
+void gm_Mode_Vs_OnLoad(void)
 {
     memzero(&gm_804D6730, sizeof(gm_804D6730));
 }
 
-void gm_801A5614_OnUnload(void) {}
+void gm_Mode_Vs_OnUnload(void) {}
 
-void gm_801A5618(GameScene* scene_data, VsModeData* vs_data, int match_type)
+void gm_801A5618(GameModeState* scene_data, VsModeData* vs_data,
+                 int match_type)
 {
     CSSData* css_data = gm_GetGameSceneLoadData(scene_data);
     css_data->match_type = match_type;
@@ -117,7 +123,7 @@ void gm_801A5618(GameScene* scene_data, VsModeData* vs_data, int match_type)
     lbDvd_800174BC();
 }
 
-void gm_801A5680(GameScene* scene_data, VsModeData* vs_data)
+void gm_801A5680(GameModeState* scene_data, VsModeData* vs_data)
 {
     CSSData* css_data;
     u64 mask;
@@ -139,14 +145,14 @@ void gm_801A5680(GameScene* scene_data, VsModeData* vs_data)
     lbAudioAx_80027168();
 }
 
-void gm_801A5754(GameScene* scene_data, VsModeData* vs_data)
+void gm_801A5754(GameModeState* scene_data, VsModeData* vs_data)
 {
     SSSData* sss_data = gm_GetGameSceneLoadData(scene_data);
     sss_data->data = *vs_data;
     gm_80167FC4(sss_data);
 }
 
-void gm_801A57A8(GameScene* scene_data, VsModeData* vs_data, u8 id)
+void gm_801A57A8(GameModeState* scene_data, VsModeData* vs_data, u8 id)
 {
     SSSData* sss_data;
 
@@ -161,7 +167,7 @@ void gm_801A57A8(GameScene* scene_data, VsModeData* vs_data, u8 id)
     }
 }
 
-void gm_801A583C(GameScene* scene_data, VsModeData* vs_data,
+void gm_801A583C(GameModeState* scene_data, VsModeData* vs_data,
                  void (*callback)(StartMeleeData*, StartMeleeData*),
                  void (*callback2)(PlayerInitData*, PlayerInitData*))
 {
@@ -197,7 +203,7 @@ void gm_801A583C(GameScene* scene_data, VsModeData* vs_data,
     gm_80168FC4();
 }
 
-void gm_801A5AF0(GameScene* scene_data, u8 id, u8 id2)
+void gm_801A5AF0(GameModeState* scene_data, u8 id, u8 id2)
 {
     MatchExitInfo* match_exit_info = gm_GetGameSceneLeaveData(scene_data);
     int i;
@@ -226,7 +232,7 @@ void gm_801A5AF0(GameScene* scene_data, u8 id, u8 id2)
     }
 }
 
-void gm_801A5C3C(GameScene* scene_data, VsModeData* vs_data,
+void gm_801A5C3C(GameModeState* scene_data, VsModeData* vs_data,
                  void (*callback)(StartMeleeData*, StartMeleeData*),
                  void (*callback2)(PlayerInitData*, PlayerInitData*))
 {
@@ -255,7 +261,7 @@ void gm_801A5C3C(GameScene* scene_data, VsModeData* vs_data,
     gm_801B0474(match_start_data, &gm_80479D98.match_end);
 }
 
-void gm_801A5EC8(GameScene* scene_data)
+void gm_801A5EC8(GameModeState* scene_data)
 {
     MatchExitInfo* exit_info;
 
@@ -263,14 +269,14 @@ void gm_801A5EC8(GameScene* scene_data)
     gm_80166CCC(&gm_80479D98.match_end, &exit_info->match_end);
 }
 
-void gm_801A5F00(GameScene* scene_data)
+void gm_801A5F00(GameModeState* scene_data)
 {
     struct ResultsMatchInfo* exit_info = gm_GetGameSceneLoadData(scene_data);
     gm_80177724(exit_info);
     exit_info->match_end = gm_80479D98.match_end;
 }
 
-void gm_801A5F64(GameScene* scene_data, VsModeData* vs_data, u8 next_scene)
+void gm_801A5F64(GameModeState* scene_data, VsModeData* vs_data, u8 next_scene)
 {
     MatchEnd* match_end;
     u8* tmp = gm_804D6730;
@@ -289,7 +295,7 @@ void gm_801A5F64(GameScene* scene_data, VsModeData* vs_data, u8 next_scene)
 
     if (gm_801A52D0(match_end)) {
         gm_8016247C(gm_801688AC(match_end));
-        if (scene_data[1].idx != 0xFF) {
+        if (scene_data[1].id != 0xFF) {
             gm_GetVsPlayMatchTotal();
             unk_bool = false;
             idx = gm_801A5360(match_end);

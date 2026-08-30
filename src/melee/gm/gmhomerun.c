@@ -1,7 +1,8 @@
 #include "gmhomerun.h"
 
 #include "gm_unsplit.h"
-#include "gmvsdata.h"
+
+#include "gm/gmvsmelee.h"
 
 #include <melee/pl/forward.h>
 
@@ -15,7 +16,7 @@
 #include <melee/lb/types.h>
 #include <melee/mn/types.h>
 
-GameScene gm_803DF198_Scenes[] = {
+GameModeState gm_Mode_Homerun_States[] = {
     {
         0,
         3,
@@ -47,7 +48,7 @@ VsModeData gm_80497618;
 static u8 gm_804D68F8;
 static u8 gm_804D68F9;
 
-void gm_801B98E8(GameScene* scene)
+void gm_801B98E8(GameModeState* scene)
 {
     CSSData* css;
     struct GameCache* game_cache;
@@ -71,7 +72,7 @@ void gm_801B98E8(GameScene* scene)
     gm_804D68F9 = lbTime_8000AF74(gm_804D68F9, 1);
 }
 
-void gm_801B999C(GameScene* scene)
+void gm_801B999C(GameModeState* scene)
 {
     VsModeData* vs = &gm_80497618;
     CSSData* temp_r3;
@@ -92,7 +93,7 @@ void gm_801B999C(GameScene* scene)
     vs->data.players[1].team = 1;
 }
 
-void gm_801B9A3C(GameScene* arg0)
+void gm_801B9A3C(GameModeState* arg0)
 {
     StartMeleeData* data;
     VsModeData* vs = &gm_80497618;
@@ -138,7 +139,7 @@ void gm_801B9A3C(GameScene* arg0)
     gm_80180B18();
 }
 
-void gm_801B9DD8(GameScene* arg0)
+void gm_801B9DD8(GameModeState* arg0)
 {
     u32 temp_r31;
     s32* temp_r3_2;
@@ -172,13 +173,13 @@ void gm_801B9DD8(GameScene* arg0)
     }
 }
 
-void gm_801B9EB8_OnInit(void)
+void gm_Mode_Homerun_OnInit(void)
 {
     VsModeData* data = &gm_80497618;
     gm_80167B50(data);
 }
 
-void gm_801B9EE4_OnLoad(void)
+void gm_Mode_Homerun_OnLoad(void)
 {
     gm_804D68F8 = gm_801677F0();
     gm_804D68F9 = 0;

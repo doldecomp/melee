@@ -1455,6 +1455,11 @@ UNK_T grMc_803E3C6C[] = {
     grMuteCity_801F19C4, grMuteCity_801F19DC, grMuteCity_801F19F4,
 };
 
+static inline HSD_JObj* grMc_GetRightSplineJoint(Ground* gp)
+{
+    return gp->u.mutecity.xE0;
+}
+
 static inline f32 grMc_GetTrackMidpoint(Ground* gp)
 {
     return 0.5f * (gp->u.mutecity.xD4 + gp->u.mutecity.xD8);
@@ -1500,6 +1505,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
     Ground* gp;
     HSD_JObj* car_jobj;
     HSD_JObj* jobj;
+    HSD_JObj* child_jobj;
     s32 car_idx;
     s32 sound_count;
     f32 spline_t;
@@ -1612,7 +1618,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
         spA8 = sp44;
     block_28_done:
         lb_8000B1CC(gp->u.mutecity.xE0, &spA8, &spA8);
-        lb_8000B1CC(gp->u.mutecity.xE0, NULL, &spD8);
+        lb_8000B1CC(grMc_GetRightSplineJoint(gp), NULL, &spD8);
         lbVector_Sub(&spA8, &spD8);
         lbVector_Normalize(&spA8);
 
@@ -1703,9 +1709,12 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
             if (age > yakumono_param->x30) {
                 if (!grMc_8049F4B8[car_idx].x22_flags.b0) {
                     grLib_801C98A0(jobj);
-                    grMc_8049F4B8[car_idx].x28 = 0;
+                    grMc_8049F4B8[car_idx].x28 = (s32) (child_jobj = NULL);
                     grLib_801C96F8(0xE3, 0, &car_pos);
-                    HSD_JObjUnref(HSD_JObjGetChild(jobj));
+                    if (jobj != NULL) {
+                        child_jobj = jobj->child;
+                    }
+                    HSD_JObjUnref(child_jobj);
                     {
                         HSD_JObj* new_jobj = Ground_801C13D0(5, 0);
                         if (new_jobj != NULL) {
@@ -1727,8 +1736,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
             } else if (age > yakumono_param->x2C &&
                        (u32) grMc_8049F4B8[car_idx].x28 == 0)
             {
-                grMuteCity_801F2AB0(0x116, jobj);
-                grMc_8049F4B8[car_idx].x28 = (s32) jobj;
+                grMc_8049F4B8[car_idx].x28 = grMuteCity_801F2AB0(0x116, jobj);
             }
         }
 
@@ -1815,8 +1823,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
                     grMc_8049F4B8[car_idx].x28 = 0;
                 }
             } else if ((u32) grMc_8049F4B8[car_idx].x28 == 0) {
-                grMuteCity_801F2AB0(0x119, jobj);
-                grMc_8049F4B8[car_idx].x28 = (s32) jobj;
+                grMc_8049F4B8[car_idx].x28 = grMuteCity_801F2AB0(0x119, jobj);
             }
         }
 
@@ -1914,7 +1921,7 @@ void grMuteCity_801F290C(Ground_GObj* gobj)
     grMc_StackPad(*(grMc_StackPadArg*) gp->u.mutecity2.saved_colors);
 }
 
-void grMuteCity_801F2AB0(s32 arg0, HSD_JObj* arg1)
+s32 grMuteCity_801F2AB0(s32 arg0, HSD_JObj* arg1)
 {
     HSD_Generator* gen;
     HSD_psAppSRT* appsrt;

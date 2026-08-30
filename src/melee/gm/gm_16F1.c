@@ -532,10 +532,10 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     struct lbl_8046B6A0_24C_t* rules = arg0;
     struct lbl_803B7A60_t* zeroes = &lbl_803B7A60;
     u8* flags = rules->pad3F0;
-    s32 player_net;
+    struct lbl_8046B6A0_24C_58_t* x58 = rules->x58;
     s32 scores[6];
     u8 rankings[7] = { 0 };
-    struct lbl_8046B6A0_24C_58_t* x58 = rules->x58;
+    s32 player_net;
     int i;
 
     if (lbl_804D65A0 != 0) {
@@ -570,6 +570,8 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
             }
         }
     }
+
+    PAD_STACK(4);
 
     switch (arg2) {
     case 0xD7:
@@ -640,6 +642,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     case 0xDB: {
         s32 vals[4];
         s32* base;
+        s32* p;
         int i, j;
         if (x58[arg1].x20 >= 3) {
             base = vals;
@@ -655,7 +658,15 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 }
             }
             for (j = 3; j >= 1; j--) {
-                fn_801701C0_Sort(base, j);
+                p = base;
+                for (i = j; i > 0; i--) {
+                    if (p[0] < p[1]) {
+                        s32 tmp = p[1];
+                        p[1] = p[0];
+                        p[0] = tmp;
+                    }
+                    p++;
+                }
             }
             if (base[0] == x58[arg1].x20 && base[0] >= base[1] * 2) {
                 return 1;
@@ -686,6 +697,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     case 0xDD: {
         s32 vals[4];
         s32* base;
+        s32* p;
         int i, j;
         if (x58[arg1].x40 >= 3) {
             base = vals;
@@ -701,7 +713,15 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 }
             }
             for (j = 3; j >= 1; j--) {
-                fn_801701C0_Sort(base, j);
+                p = base;
+                for (i = j; i > 0; i--) {
+                    if (p[0] < p[1]) {
+                        s32 tmp = p[1];
+                        p[1] = p[0];
+                        p[0] = tmp;
+                    }
+                    p++;
+                }
             }
             if (base[0] == x58[arg1].x40 && base[0] >= base[1] * 2) {
                 return 1;
@@ -732,6 +752,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     case 0xDF: {
         s32 vals[4];
         s32* base;
+        s32* p;
         int i, j;
         player_net = x58[arg1].x24 - x58[arg1].xA;
         if ((u32) player_net >= 3) {
@@ -748,7 +769,15 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 }
             }
             for (j = 3; j >= 1; j--) {
-                fn_801701C0_Sort(base, j);
+                p = base;
+                for (i = j; i > 0; i--) {
+                    if (p[0] < p[1]) {
+                        s32 tmp = p[1];
+                        p[1] = p[0];
+                        p[0] = tmp;
+                    }
+                    p++;
+                }
             }
             if ((u32) base[0] == (u32) (x58[arg1].x24 - x58[arg1].xA) &&
                 base[0] >= base[1] * 2)
@@ -782,6 +811,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     case 0xE1: {
         s32 vals[4];
         s32* base;
+        s32* p;
         int i, j;
         if (x58[arg1].xA >= 3) {
             base = vals;
@@ -797,7 +827,15 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 }
             }
             for (j = 3; j >= 1; j--) {
-                fn_801701C0_Sort(base, j);
+                p = base;
+                for (i = j; i > 0; i--) {
+                    if (p[0] < p[1]) {
+                        s32 tmp = p[1];
+                        p[1] = p[0];
+                        p[0] = tmp;
+                    }
+                    p++;
+                }
             }
             if (base[0] == x58[arg1].xA && base[0] >= base[1] * 2) {
                 return 1;
@@ -1035,8 +1073,8 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                     }
                 }
             }
-            if (!(((u8*) x58)[arg1 * sizeof(*x58) + 3] & 1) &&
-                rankings[arg1] == 0 && x58[arg1].x20 == 0)
+            if (!(rules->x58[arg1].x3 & 1) && rankings[arg1] == 0 &&
+                x58[arg1].x20 == 0)
             {
                 return 1;
             }
@@ -1056,15 +1094,13 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                         }
                     }
                 }
-                if (!(((u8*) x58)[arg1 * sizeof(*x58) + 3] & 1) &&
-                    x58[arg1].x5 == 0 && x58[arg1].x20 == 0)
+                if (!(rules->x58[arg1].x3 & 1) && x58[arg1].x5 == 0 &&
+                    x58[arg1].x20 == 0)
                 {
                     return 1;
                 }
             } else {
-                if (!(((u8*) x58)[arg1 * sizeof(*x58) + 3] & 1) &&
-                    x58[arg1].x20 == 0)
-                {
+                if (!(rules->x58[arg1].x3 & 1) && x58[arg1].x20 == 0) {
                     return 1;
                 }
             }
@@ -1109,7 +1145,15 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                     }
                 }
                 for (j = 3; j >= 1; j--) {
-                    fn_801701C0_SortU32(vals, j, true);
+                    p = vals;
+                    for (i = j; (u32) i > 0; i--) {
+                        if (p[0] > p[1]) {
+                            u32 tmp = p[1];
+                            p[1] = p[0];
+                            p[0] = tmp;
+                        }
+                        p++;
+                    }
                 }
                 if (vals[0] == pl_800408B8(arg1) && vals[0] <= vals[1] / 2) {
                     return 1;
@@ -1147,7 +1191,15 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                     }
                 }
                 for (j = 3; j >= 1; j--) {
-                    fn_801701C0_SortU32(vals, j, false);
+                    p = vals;
+                    for (i = j; (u32) i > 0; i--) {
+                        if (p[0] < p[1]) {
+                            u32 tmp = p[1];
+                            p[1] = p[0];
+                            p[0] = tmp;
+                        }
+                        p++;
+                    }
                 }
                 if (vals[0] == pl_80040894(arg1) && vals[0] >= vals[1] * 2) {
                     return 1;

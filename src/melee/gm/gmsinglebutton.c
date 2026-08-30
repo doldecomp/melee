@@ -2,7 +2,6 @@
 
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
-#include "gmvsdata.h"
 #include "gmvsmelee.h"
 #include "types.h"
 
@@ -11,10 +10,10 @@
 
 /* extern functions referenced in Scenes */
 
-extern void gm_801A6254(GameScene*);
-extern void gm_801A6308(GameScene*);
+extern void gm_801A6254(GameModeState*);
+extern void gm_801A6308(GameModeState*);
 
-GameScene gm_803DF2B8_Scenes[] = {
+GameModeState gm_Mode_SingleButtonVs_States[] = {
     {
         0,
         3,
@@ -114,25 +113,25 @@ GameScene gm_803DF2B8_Scenes[] = {
     { -1 },
 };
 
-void gm_801BA10C(GameScene* scene)
+void gm_801BA10C(GameModeState* scene)
 {
     VsModeData* data = &gmMainLib_804D3EE0->unk_BD0;
     gm_801A5618(scene, data, 8);
 }
 
-void gm_801BA138(GameScene* scene)
+void gm_801BA138(GameModeState* scene)
 {
     VsModeData* data = &gmMainLib_804D3EE0->unk_BD0;
     gm_801A5680(scene, data);
 }
 
-void gm_801BA160(GameScene* scene)
+void gm_801BA160(GameModeState* scene)
 {
     VsModeData* data = &gmMainLib_804D3EE0->unk_BD0;
     gm_801A5754(scene, data);
 }
 
-void gm_801BA188(GameScene* scene)
+void gm_801BA188(GameModeState* scene)
 {
     VsModeData* data = &gmMainLib_804D3EE0->unk_BD0;
     gm_801A57A8(scene, data, 0);
@@ -143,45 +142,45 @@ void fn_801BA1B4(StartMeleeData* data, StartMeleeData* unused)
     data->rules.single_button = true;
 }
 
-void gm_801BA1C8(GameScene* scene)
+void gm_801BA1C8(GameModeState* scene)
 {
     VsModeData* data = &gmMainLib_804D3EE0->unk_BD0;
     gm_801A583C(scene, data, fn_801BA1B4, NULL);
 }
 
-void gm_801BA1FC(GameScene* scene)
+void gm_801BA1FC(GameModeState* scene)
 {
     gm_801A5AF0(scene, 4, 3);
 }
 
-void gm_801BA224(GameScene* scene)
+void gm_801BA224(GameModeState* scene)
 {
     VsModeData* data = &gmMainLib_804D3EE0->unk_BD0;
     gm_801A5C3C(scene, data, fn_801BA1B4, NULL);
 }
 
-void gm_801BA258(GameScene* scene)
+void gm_801BA258(GameModeState* scene)
 {
     gm_801A5EC8(scene);
 }
 
-void gm_801BA278(GameScene* scene)
+void gm_801BA278(GameModeState* scene)
 {
     gm_801A5F00(scene);
 }
 
-void gm_801BA298(GameScene* scene)
+void gm_801BA298(GameModeState* scene)
 {
     VsModeData* data = &gmMainLib_804D3EE0->unk_BD0;
     gm_801A5F64(scene, data, 0);
 }
 
-void gm_801BA2C4_OnInit(void)
+void gm_Mode_SingleButtonVs_OnInit(void)
 {
     gm_80167B50(&gmMainLib_804D3EE0->unk_BD0);
 }
 
-void gm_801BA2EC_OnLoad(void)
+void gm_Mode_SingleButtonVs_OnLoad(void)
 {
     gm_801A55C4();
 }

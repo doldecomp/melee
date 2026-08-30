@@ -122,18 +122,6 @@ void ftSk_SpecialAirHi_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-/// #fn_80112ED8
-
-/// #ftSk_SpecialHi_80112F48
-
-/// #ftSk_SpecialHi_80112FA8
-
-/// #fn_80113038
-
-/// #ftSk_SpecialHi_Enter
-
-/// #ftSk_SpecialAirHi_Enter
-
 void ftSk_SpecialHiStart_0_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {

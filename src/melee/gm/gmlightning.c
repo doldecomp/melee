@@ -3,13 +3,12 @@
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "gmmovieend.h"
-#include "gmvsdata.h"
 #include "gmvsmelee.h"
 #include "types.h"
 
 #include "if/if_2FD9.h"
 
-GameScene gm_803DF540_Scenes[] = {
+GameModeState gm_Mode_LightningVs_States[] = {
     {
         0,
         3,
@@ -109,22 +108,22 @@ GameScene gm_803DF540_Scenes[] = {
     { -1 },
 };
 
-void gm_801BA704(GameScene* scene)
+void gm_801BA704(GameModeState* scene)
 {
     gm_801A5618(scene, &gmMainLib_804D3EE0->unk_1350, 9);
 }
 
-void gm_801BA730(GameScene* scene)
+void gm_801BA730(GameModeState* scene)
 {
     gm_801A5680(scene, &gmMainLib_804D3EE0->unk_1350);
 }
 
-void gm_801BA758(GameScene* scene)
+void gm_801BA758(GameModeState* scene)
 {
     gm_801A5754(scene, &gmMainLib_804D3EE0->unk_1350);
 }
 
-void gm_801BA780(GameScene* scene)
+void gm_801BA780(GameModeState* scene)
 {
     gm_801A57A8(scene, &gmMainLib_804D3EE0->unk_1350, 0);
 }
@@ -135,44 +134,44 @@ static void fn_801BA7AC(StartMeleeData* data, StartMeleeData* unused)
     data->rules.x34 = 1.25F;
 }
 
-void gm_801BA7B8(GameScene* scene)
+void gm_801BA7B8(GameModeState* scene)
 {
     VsModeData* data = &gmMainLib_804D3EE0->unk_1350;
     gm_801A583C(scene, data, fn_801BA7AC, NULL);
 }
 
-void gm_801BA7EC(GameScene* scene)
+void gm_801BA7EC(GameModeState* scene)
 {
     gm_801A5AF0(scene, 4, 3);
 }
 
-void gm_801BA814(GameScene* scene)
+void gm_801BA814(GameModeState* scene)
 {
     VsModeData* data = &gmMainLib_804D3EE0->unk_1350;
     gm_801A5C3C(scene, data, fn_801BA7AC, NULL);
 }
 
-void gm_801BA848(GameScene* scene)
+void gm_801BA848(GameModeState* scene)
 {
     gm_801A5EC8(scene);
 }
 
-void gm_801BA868(GameScene* scene)
+void gm_801BA868(GameModeState* scene)
 {
     gm_801A5F00(scene);
 }
 
-void gm_801BA888(GameScene* scene)
+void gm_801BA888(GameModeState* scene)
 {
     gm_801A5F64(scene, &gmMainLib_804D3EE0->unk_1350, 0);
 }
 
-void gm_801BA8B4_OnInit(void)
+void gm_Mode_LightningVs_OnInit(void)
 {
     gm_80167B50(&gmMainLib_804D3EE0->unk_1350);
 }
 
-void gm_801BA8DC_OnLoad(void)
+void gm_Mode_LightningVs_OnLoad(void)
 {
     gm_801A55C4();
 }

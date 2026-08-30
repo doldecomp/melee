@@ -61,7 +61,7 @@ void gmCamera_801A33BC(void)
     }
 }
 
-void gmCamera_801A34FC_OnFrame(void)
+void gm_Scene_CameraVs_OnFrame(void)
 {
     CameraVsData* data;
     s32 i;
@@ -96,7 +96,7 @@ void gmCamera_801A34FC_OnFrame(void)
     }
 }
 
-void gmCamera_801A3634_OnEnter(void* arg0)
+void gm_Scene_CameraVs_OnEnter(void* arg0)
 {
     u32* state = arg0;
 
@@ -112,4 +112,4 @@ void gmCamera_801A3634_OnEnter(void* arg0)
     gmCamera_801A33BC();
 }
 
-void gmCamera_801A367C_OnLeave(UNK_T unused) {}
+void gm_Scene_CameraVs_OnExit(UNK_T unused) {}

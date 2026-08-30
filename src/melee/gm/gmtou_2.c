@@ -795,7 +795,7 @@ static inline s32 get_match_player_index_xF(s32 player)
     return 0;
 }
 
-void gm_8019DF8C_OnFrame(void)
+void gm_Scene_TouAlt_OnFrame(void)
 {
     TmVsData vsdata;
     TmData* tmd;
@@ -944,7 +944,7 @@ void gm_8019DF8C_OnFrame(void)
                     if (color_status != 2 && color_status != 1) {
                         if (buttons & PAD_BUTTON_X) {
                             /* Down: increment color */
-                            if (tmd->x4B8[i].x3 <
+                            if ((s32) tmd->x4B8[i].x3 <
                                 (s32) (gm_80169238((u8) fn_8018F6FC(
                                            (CSSIconHud) tmd->x4B8[i].x1)) -
                                        1))
@@ -1016,12 +1016,7 @@ void gm_8019E634(void)
 
     /* Get match results per player */
     for (i = 0; i < (s32) tmd->x30; i++) {
-        union {
-            u8 (*u8_fn)(MatchEnd*, ssize_t);
-            s32 (*s32_fn)(MatchEnd*, ssize_t);
-        } get_result;
-        get_result.u8_fn = fn_80166CBC;
-        results[i] = get_result.s32_fn(&gm_80477738, i);
+        results[i] = fn_80166CBC(&gm_80477738, i);
     }
 
     /* Bubble sort results, keeping indices in parallel */
@@ -1137,7 +1132,7 @@ void gm_8019E634(void)
     }
 }
 
-void gm_8019ECAC_OnEnter(void* arg0)
+void gm_Scene_TouAlt_OnEnter(void* arg0)
 {
     struct {
         StKind stkind;
@@ -1190,7 +1185,7 @@ void gm_8019ECAC_OnEnter(void* arg0)
     lbAudioAx_80023F28(gmMainLib_8015ECB0());
 }
 
-void gm_8019EE54_OnLeave(void* arg0)
+void gm_Scene_TouAlt_OnExit(void* arg0)
 {
     lbArchive_80016EFC(lbl_804D6688);
     lbArchive_80016EFC(lbl_804D668C);

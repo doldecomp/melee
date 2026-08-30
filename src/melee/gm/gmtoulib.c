@@ -139,8 +139,7 @@ void fn_8018A514(int count, float val)
         }
     }
 
-    counts = lbl_803D9D20.x20;
-    n = counts[count];
+    n = lbl_803D9D20.x20[count];
 
     entries = lbl_80473AB8;
     for (i = 0; i < n; i++) {
@@ -770,8 +769,8 @@ void fn_8018B090(HSD_GObj* arg0)
                 }
             }
             if (var_r24 == 4) {
-                s32 slot_idx;
-                entries[idx].slots[slot_idx = lbl_804D6634].x3C =
+                s32 slot_idx = lbl_804D6634;
+                entries[idx].slots[slot_idx].x3C =
                     lbl_803D9E1C[tm->entrants][0];
                 entries[idx].slots[slot_idx].x40 =
                     lbl_803D9E1C[tm->entrants][1];
@@ -2065,8 +2064,6 @@ int fn_8018F410(void)
     return char_id;
 }
 
-/// #fn_8018F410
-
 #ifdef MUST_MATCH
 #pragma push
 #pragma auto_inline off
@@ -2618,8 +2615,6 @@ void fn_80190520(f32 x, f32 y, f32 z)
 #ifdef MUST_MATCH
 #pragma pop
 #endif
-
-/// #fn_80190520
 
 static inline int gm_801905F0_inline0(int c_kind)
 {

@@ -38,6 +38,7 @@ typedef struct ToyUnkJObjData {
 /* 30B530 */ static void _Toy_8030B530(HSD_GObj*);
 /* 30E110 */ static void _Toy_8030E110(HSD_GObj*);
 /* 30FA50 */ static void _Toy_8030FA50(void);
+/* 30FE48 */ static void _Toy_8030FE48(ToyDisplayList*, s32);
 /* 3102C4 */ static void _Toy_803102C4(s8 arg0);
 /* 3109A0 */ static void _Toy_803109A0(s32, s32, s32);
 /* 310B48 */ static void _Toy_80310B48(HSD_GObj*);
@@ -3366,7 +3367,6 @@ void _Toy_80309404(HSD_GObj* gobj)
                                 }
                                 lk = display->selectedIdx - cnt2;
                                 tid = Toy_sbss_804D6EDC[lk + 1];
-                                entry = display->last_entry->next;
                                 md = Toy_8030813C(tid);
                                 if ((oa = entry->archive) != NULL) {
                                     lbArchive_80016EFC(oa);
@@ -3385,8 +3385,6 @@ void _Toy_80309404(HSD_GObj* gobj)
                                 char* md;
                                 s16 tid;
 
-                                tid = Toy_sbss_804D6EDC[display->selectedIdx +
-                                                        1];
                                 entry = display->last_entry->next;
                                 md = Toy_8030813C(tid);
                                 if ((oa = entry->archive) != NULL) {
@@ -3977,6 +3975,7 @@ void _Toy_8030B530(HSD_GObj* arg0)
                     }
                     if (total > 3) {
                         if ((display->selectedIdx - 1) < 0) {
+                            s32 cnt;
                             s32 lk;
                             ToyListEntry* entry;
                             HSD_Archive* oa;
@@ -3984,10 +3983,11 @@ void _Toy_8030B530(HSD_GObj* arg0)
                             if ((gm_IsCurrently1PMode() != 0) ||
                                 (gm_GetCurrentGameMode() == GM_TOY_LOTTERY))
                             {
-                                lk = base->trophy_count;
+                                cnt = base->trophy_count;
                             } else {
-                                lk = *gmMainLib_GetTrophyCount();
+                                cnt = *gmMainLib_GetTrophyCount();
                             }
+                            lk = cnt;
                             lk += display->selectedIdx;
                             entry = display->first_entry;
                             entry = entry->prev;
@@ -4012,8 +4012,8 @@ void _Toy_8030B530(HSD_GObj* arg0)
                             HSD_Archive* oa;
                             char* md;
                             s16 tid;
-                            tid = Toy_sbss_804D6EDC[display->selectedIdx - 1];
                             entry = display->first_entry->prev;
+                            tid = Toy_sbss_804D6EDC[display->selectedIdx - 1];
                             md = Toy_8030813C(tid);
                             if ((oa = entry->archive) != NULL) {
                                 lbArchive_80016EFC(oa);
@@ -4102,8 +4102,8 @@ void _Toy_8030B530(HSD_GObj* arg0)
                             HSD_Archive* oa;
                             char* md;
                             s16 tid;
-                            tid = Toy_sbss_804D6EDC[display->selectedIdx + 1];
                             entry = display->last_entry->next;
+                            tid = Toy_sbss_804D6EDC[display->selectedIdx + 1];
                             md = Toy_8030813C(tid);
                             if ((oa = entry->archive) != NULL) {
                                 lbArchive_80016EFC(oa);
@@ -4579,9 +4579,9 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                     char* model_data;
                                     s16 trophy_id;
 
+                                    list_entry = display->first_entry->prev;
                                     trophy_id = Toy_sbss_804D6EDC
                                         [display->selectedIdx - 1];
-                                    list_entry = display->first_entry->prev;
                                     model_data = Toy_8030813C(trophy_id);
                                     if ((old_archive = list_entry->archive) !=
                                         NULL)
@@ -4657,12 +4657,12 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                 }
                                 if ((s32) (display->selectedIdx + 1) >= count)
                                 {
-                                    s32 count2;
+                                    s32 list_idx;
                                     ToyListEntry* list_entry;
                                     HSD_Archive* old_archive;
                                     char* model_data;
                                     s16 trophy_id;
-                                    s32 list_idx;
+                                    s32 count2;
 
                                     if ((gm_IsCurrently1PMode() != 0) ||
                                         (gm_GetCurrentGameMode() ==
@@ -4672,10 +4672,12 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                     } else {
                                         count2 = *gmMainLib_GetTrophyCount();
                                     }
-                                    list_idx = display->selectedIdx - count2;
+                                    list_entry = display->last_entry;
+                                    count2 = display->selectedIdx - count2;
+                                    list_idx = count2;
+                                    list_entry = list_entry->next;
                                     trophy_id =
                                         Toy_sbss_804D6EDC[list_idx + 1];
-                                    list_entry = display->last_entry->next;
                                     model_data = Toy_8030813C(trophy_id);
                                     if ((old_archive = list_entry->archive) !=
                                         NULL)
@@ -4698,9 +4700,9 @@ void _Toy_8030E110(HSD_GObj* arg0)
                                     char* model_data;
                                     s16 trophy_id;
 
+                                    list_entry = display->last_entry->next;
                                     trophy_id = Toy_sbss_804D6EDC
                                         [display->selectedIdx + 1];
-                                    list_entry = display->last_entry->next;
                                     model_data = Toy_8030813C(trophy_id);
                                     if ((old_archive = list_entry->archive) !=
                                         NULL)
@@ -4994,44 +4996,6 @@ static inline void _Toy_8030FE48_init_sort_key(s16** ptr)
     *ptr = &_Toy_sbss_804D6E64->key[sort_mode];
 }
 
-inline void _Toy_8030FE48_setup_entry(ToyListEntry* entry, s16 trophy_idx)
-{
-    char* result = Toy_8030813C(trophy_idx);
-
-    if (entry->archive != NULL) {
-        lbArchive_80016EFC(entry->archive);
-        entry->archive = NULL;
-    }
-    entry->archive_name = result + 4;
-    entry->symbol_name = result + 0x24;
-    entry->trophy_id = trophy_idx;
-}
-
-inline void _Toy_8030FE48_link_entries(ToyDisplayList* data, s32 entry_count)
-{
-    s32 i;
-    ToyListEntry* last_entry;
-    ToyListEntry* entry;
-    s32 last;
-
-    last = entry_count - 1;
-    entry = data->entries;
-    last_entry = &data->entries[last];
-    for (i = 0; i < entry_count; i++) {
-        if (i == 0) {
-            entry->prev = last_entry;
-        } else {
-            entry->prev = &data->entries[i - 1];
-        }
-        if (i == last) {
-            entry->next = data->entries;
-        } else {
-            entry->next = &data->entries[i + 1];
-        }
-        entry++;
-    }
-}
-
 void _Toy_8030FE48(ToyDisplayList* data, s32 arg1)
 {
     Toy26B8* toy = (Toy26B8*) &_Toy_804A26B8;
@@ -5040,6 +5004,8 @@ void _Toy_8030FE48(ToyDisplayList* data, s32 arg1)
     void* sym2;
     s32 count;
     s32 entry_count;
+    char* result;
+    s16 trophyIdx;
     void* sym;
     void* zero;
     s16* ptr;
@@ -5053,6 +5019,40 @@ void _Toy_8030FE48(ToyDisplayList* data, s32 arg1)
             data->selectedIdx = (s16) sort_idx;
             *sel = data->selectedIdx;
             break;
+        }
+
+        ptr += TY_SORT_KEY_COUNT;
+        sort_idx += 1;
+    }
+
+    count = _Toy_GetTrophyTotal(toy);
+    entry_count = count;
+    if (count > 3) {
+        data->visible_count = 3;
+        entry_count = 0xD;
+    } else {
+        data->visible_count = (s8) count;
+    }
+
+    if (arg1 == 0) {
+        s32 last = entry_count - 1;
+        ToyListEntry* entry = data->entries;
+        s32 i;
+        ToyListEntry* last_entry;
+
+        last_entry = &data->entries[last];
+        for (i = 0; i < entry_count; i++) {
+            if (i == 0) {
+                entry->prev = last_entry;
+            } else {
+                entry->prev = &data->entries[i - 1];
+            }
+            if (i == last) {
+                entry->next = data->entries;
+            } else {
+                entry->next = &data->entries[i + 1];
+            }
+            entry++;
         }
 
         ptr += TY_SORT_KEY_COUNT;
@@ -5084,15 +5084,31 @@ void _Toy_8030FE48(ToyDisplayList* data, s32 arg1)
         start = 0;
         offset = start;
         entry = data->entries;
-        for (; start < data->visible_count; offset += 2, entry++, start += 1) {
+        for (; start < data->visible_count; start += 1, offset += 2, entry++) {
             if (start == data->selectedIdx) {
-                _Toy_8030FE48_setup_entry(entry,
-                                          Toy_sbss_804D6EDC[offset / 2]);
+                trophyIdx = Toy_sbss_804D6EDC[offset / 2];
+                result = Toy_8030813C(trophyIdx);
+                if (entry->archive != NULL) {
+                    lbArchive_80016EFC(entry->archive);
+                    entry->archive = NULL;
+                }
+
+                entry->archive_name = result + 4;
+                entry->symbol_name = result + 0x24;
+                entry->trophy_id = trophyIdx;
                 entry->archive = lbArchive_LoadSymbols(
                     entry->archive_name, &sym, entry->symbol_name, 0);
             } else {
-                _Toy_8030FE48_setup_entry(entry,
-                                          Toy_sbss_804D6EDC[offset / 2]);
+                trophyIdx = Toy_sbss_804D6EDC[offset / 2];
+                result = Toy_8030813C(trophyIdx);
+                if (entry->archive != NULL) {
+                    lbArchive_80016EFC(entry->archive);
+                    entry->archive = NULL;
+                }
+
+                entry->archive_name = result + 4;
+                entry->symbol_name = result + 0x24;
+                entry->trophy_id = trophyIdx;
             }
         }
 
@@ -5146,11 +5162,29 @@ void _Toy_8030FE48(ToyDisplayList* data, s32 arg1)
             }
 
             if (startIdx == data->selectedIdx) {
-                _Toy_8030FE48_setup_entry(cur, Toy_sbss_804D6EDC[startIdx]);
+                trophyIdx = Toy_sbss_804D6EDC[startIdx];
+                result = Toy_8030813C(trophyIdx);
+                if (cur->archive != NULL) {
+                    lbArchive_80016EFC(cur->archive);
+                    cur->archive = NULL;
+                }
+
+                cur->archive_name = result + 4;
+                cur->symbol_name = result + 0x24;
+                cur->trophy_id = trophyIdx;
                 cur->archive = lbArchive_LoadSymbols(cur->archive_name, &sym2,
                                                      cur->symbol_name, 0);
             } else {
-                _Toy_8030FE48_setup_entry(cur, Toy_sbss_804D6EDC[startIdx]);
+                trophyIdx = Toy_sbss_804D6EDC[startIdx];
+                result = Toy_8030813C(trophyIdx);
+                if (cur->archive != NULL) {
+                    lbArchive_80016EFC(cur->archive);
+                    cur->archive = NULL;
+                }
+
+                cur->archive_name = result + 4;
+                cur->symbol_name = result + 0x24;
+                cur->trophy_id = trophyIdx;
             }
 
             cur = cur->next;
@@ -5907,7 +5941,7 @@ void Toy_80311960(void)
     ((u16*) base)[0x1F6] = 0;
 }
 
-void Toy_OnEnter_80311AB0(void* arg0)
+void Toy_Scene_OnEnter(void* arg0)
 {
     u8* base;
     s16* selp;
@@ -6041,7 +6075,7 @@ void _Toy_80311F5C(void)
     }
 }
 
-void Toy_OnFrame_80312018(void)
+void Toy_Scene_OnFrame(void)
 {
     TyModeState* state = (TyModeState*) Toy_804A284C;
 
@@ -6121,7 +6155,7 @@ void _Toy_80312050(HSD_GObj* gobj, int code)
     }
 }
 
-void Toy_OnInit_803122D0(void)
+void Toy_Mode_OnInit(void)
 {
     Toy* userData = (Toy*) &_Toy_804A26B8;
     void* targetPtr;

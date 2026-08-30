@@ -14,8 +14,8 @@
 /* 3208F0 */ void un_803208F0(HSD_GObj*);
 /* 320984 */ void un_80320984(HSD_GObj*);
 /* 320A1C */ void fn_80320A1C(HSD_GObj*);
-/* 320A40 */ void un_80320A40_OnEnter(void*);
-/* 3210EC */ void un_803210EC_OnFrame(void);
+/* 320A40 */ void vi1201v2_Scene_OnEnter(void*);
+/* 3210EC */ void vi1201v2_Scene_OnFrame(void);
 /* 4D7038 */ extern u8 un_804D7038[8]; ///< @todo #ViCharaDesc?
 
 #endif

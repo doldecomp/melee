@@ -626,8 +626,6 @@ void it_802EC4D0(Item_GObj* gobj)
     Item_80268E5C(gobj, 10, 2);
 }
 
-/// #itTincle_UnkMotion10_Anim
-
 bool itTincle_UnkMotion10_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);

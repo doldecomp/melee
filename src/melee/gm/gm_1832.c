@@ -1169,7 +1169,7 @@ void fn_80186634(void* arg0)
     lbAudioAx_80023F28(0x2D);
 }
 
-void gm_80186DFC_OnFrame(void)
+void gm_Scene_IntroEasy_OnFrame(void)
 {
     if (lbl_804735A8.x0 != 0) {
         lbAudioAx_800236DC();
@@ -1207,7 +1207,7 @@ typedef struct ClassicModeEnterData {
     /* 0x1C */ int x1C;
 } ClassicModeEnterData;
 
-void gm_80186E30_OnEnter(void* arg0_)
+void gm_Scene_IntroEasy_OnEnter(void* arg0_)
 {
     ClassicModeEnterData* arg0 = arg0_;
 
@@ -1381,8 +1381,6 @@ void fn_801874FC(void)
     lb_80011E24(jobj, &lbl_804736B0.xC, 6, -1);
 }
 
-/// #fn_801874FC
-
 #ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
@@ -1404,7 +1402,7 @@ void fn_80187714(void)
 #pragma pop
 #endif
 
-void gm_8018776C_OnFrame(void)
+void gm_Scene_IntroAllstar_OnFrame(void)
 {
     if (lbl_804736B0.x0 != 0) {
         lbArchive_80016EFC(lbl_804D6610);
@@ -1417,7 +1415,7 @@ void gm_8018776C_OnFrame(void)
 #pragma push
 #pragma dont_inline on
 #endif
-void gm_801877A8_OnEnter(void* arg0_)
+void gm_Scene_IntroAllstar_OnEnter(void* arg0_)
 {
     struct enterdata* arg0 = arg0_;
     HSD_GObj* temp_r30;
@@ -1723,13 +1721,29 @@ static inline StKind gm_GetStKind(gm_80187F48_EnterData* data)
     return data->stkind;
 }
 
+static inline u64 gm_80187F48_GetAudioConfig(u8 stage_index, char** table)
+{
+    return lbAudioAx_80026E84(Player_GetPlayerCharacter(0)) |
+           ((u64*) &table[24])[stage_index];
+}
+
+static inline void gm_80187F48_SetupCamera(HSD_GObj* gobj,
+                                           gm_1832_804736C0_t* data,
+                                           HSD_CObj* cobj)
+{
+    HSD_GObj_SetupProc(gobj, fn_80187910, 0);
+    HSD_CObjAddAnim(cobj, *(HSD_CameraAnim**) data->x4[1]);
+    HSD_CObjReqAnim(cobj, 0.0f);
+}
+
 static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
 {
     gm_1832_804736C0_t* data;
-    char** table = lbl_803D9750;
     HSD_CObj* cobj;
-    HSD_GObj* gobj;
     u8 stage_index;
+    HSD_GObj* gobj;
+    char** table = lbl_803D9750;
+    gm_1832_StageState* state;
 
     data = &lbl_804736C0;
     data->x38 = arg0->x0;
@@ -1762,8 +1776,7 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
 
     lbAudioAx_80026F2C((s32) table[stage_index + 12]);
     lbAudioAx_8002702C((s32) table[stage_index + 12],
-                       lbAudioAx_80026E84(Player_GetPlayerCharacter(0)) |
-                           ((u64*) &table[24])[stage_index]);
+                       gm_80187F48_GetAudioConfig(stage_index, table));
     lbAudioAx_80027168();
     lbAudioAx_80027648();
 
@@ -1772,9 +1785,7 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
     cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) *data->x4);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_CameraKind, cobj);
     GObj_SetupGXLinkMax(gobj, (GObj_RenderFunc) (Event) Camera_800304E0, 8);
-    HSD_GObj_SetupProc(gobj, fn_80187910, 0);
-    HSD_CObjAddAnim(cobj, *(HSD_CameraAnim**) data->x4[1]);
-    HSD_CObjReqAnim(cobj, 0.0f);
+    gm_80187F48_SetupCamera(gobj, data, cobj);
 
     {
         HSD_GObj* scene_gobj = GObj_Create(0x13, 0x14, 0);
@@ -1795,7 +1806,6 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
     {
         HSD_JObj* model_jobj;
         HSD_GObj* model_gobj;
-        DynamicModelDesc* model_desc;
         model_gobj = GObj_Create(0xE, 0xF, 0);
         model_jobj =
             HSD_JObjLoadJoint((*data->x0)[11 - data->x36.stage_index]->joint);
@@ -1803,15 +1813,7 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
         HSD_GObjObject_80390A70(model_gobj, HSD_GObj_JObjKind, model_jobj);
         GObj_SetupGXLink(model_gobj, fn_80187C9C, 0xB, 0xB);
 
-        model_desc = (*data->x0)[11 - data->x36.stage_index];
-        if (model_desc->anims != NULL) {
-            int model_anim_idx = data->x37.anim_state;
-            if (model_desc->anims[model_anim_idx] != NULL) {
-                lb_8000C0E8(model_jobj, model_anim_idx, model_desc);
-                HSD_JObjReqAnimAll(model_jobj, 0.0f);
-                HSD_JObjAnimAll(model_jobj);
-            }
-        }
+        fn_80187AB4_LoadAnim(model_jobj, data);
         HSD_GObj_SetupProc(model_gobj, fn_80187AB4, 0);
     }
 
@@ -1839,19 +1841,19 @@ static inline void gm_80187F48_OnEnter_inline(gm_80187F48_EnterData* arg0)
     lbAudioAx_80023F28(0x2E);
 }
 
-void gm_80187F48_OnEnter(void* arg0)
+void gm_Scene_IntroNormal_OnEnter(void* arg0)
 {
-    PAD_STACK(24);
+    PAD_STACK(16);
     gm_80187F48_OnEnter_inline(arg0);
 }
 
-void gm_80188364_OnLeave(void* arg0)
+void gm_Scene_IntroNormal_OnLeave(void* arg0)
 {
     HSD_Archive** var = &lbl_804D6620;
     lbArchive_80016EFC(*var);
 }
 
-void gm_8018838C_OnFrame(void)
+void gm_Scene_IntroNormal_OnFrame(void)
 {
     if (lbl_804736C0.x36.done) {
         gm_801A4B60();

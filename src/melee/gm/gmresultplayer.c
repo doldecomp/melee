@@ -1142,10 +1142,11 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
 {
     ResultsDisplayLayout* disp = (ResultsDisplayLayout*) &lbl_8046E1B0;
     MatchEnd* match_end = &disp->state.match_end;
+    int lookup;
     HSD_ImageDesc* desc;
     HSD_CObj* cobj;
     HSD_JObj* child_jobj;
-    int lookup;
+    PAD_STACK(8);
 
     fn_801795D4();
     fn_801796F0(arg2);
@@ -1159,10 +1160,8 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
             match_end->team_standings[match_end->player_standings[arg2].team]
                 .is_big_loser;
     }
-
     if (lookup != 0) {
-        HSD_JObj* root = (HSD_JObj*) disp->gobjs[arg2]->hsd_obj;
-        child_jobj = root == NULL ? NULL : root->child;
+        child_jobj = HSD_JObjGetChild((HSD_JObj*) disp->gobjs[arg2]->hsd_obj);
     }
 
     if (HSD_CObjSetCurrent(cobj)) {
@@ -1222,8 +1221,8 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
         } else {
             HSD_GObj* entity = Player_GetEntity(arg2);
             if (ftLib_800876B4(entity) == 0) {
-                u8* player_flags = &get_player_flags(disp)[arg2];
-                if (*player_flags == 0 && disp->state.x0_6) {
+                u8* player_flags = disp->state.player_flags;
+                if (player_flags[arg2] == 0 && disp->state.x0_6) {
                     GXColor color;
 
                     color = gm_80160968(gm_80160854(
@@ -1257,7 +1256,7 @@ void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
                                                  0x7C, 1, 0);
                         HSD_CObjEndCurrent();
 
-                        *player_flags = 1;
+                        player_flags[arg2] = 1;
                         {
                             HSD_JObj* jobj2 = get_result_jobjs(disp)[arg2];
                             jobj2->u.dobj->next->mobj->tobj->imagedesc = desc;
@@ -1665,22 +1664,23 @@ fn_8017AA78_get_team_standings(ResultsDisplayLayout* disp)
     return disp->state.match_end.team_standings;
 }
 
-static inline void fn_8017AA78_init_state(GXTexFmt image_format)
+static inline int inline2(int unused)
 {
     ResultsDisplayLayout* disp = (ResultsDisplayLayout*) &lbl_8046E1B0;
 
     Player_InitAllPlayers();
     disp->shared_img.image_ptr = NULL;
-    lb_800121FC(&disp->shared_img, 0x64, 0x98, image_format, 0);
+    lb_800121FC(&disp->shared_img, 0x64, 0x98, GX_TF_RGB5A3, 0);
     disp->state.match_end = *fn_80174274();
+    return unused;
 }
 
-static inline u32* fn_8017AA78_get_dim_h1(lbl_8046E3AC_t* state)
+static inline u32* inline3(lbl_8046E3AC_t* state)
 {
     return state->dim_h1;
 }
 
-static inline int fn_8017AA78_get_result(ResultsDisplayLayout* disp)
+static inline int inline4(ResultsDisplayLayout* disp)
 {
     return disp->state.match_end.result;
 }
@@ -1691,7 +1691,6 @@ void fn_8017AA78(const u8* arg0)
     PackedS16x4* p5;
     PackedS16x4* p7;
     lbl_8046E3AC_t* state;
-    u8* player_state;
 
     memzero(disp->pad_000, sizeof(disp->pad_000));
     lbBgFlash_800208EC(6);
@@ -1706,7 +1705,7 @@ void fn_8017AA78(const u8* arg0)
     efLib_Init();
     efAsync_LoadSync(0);
     ftDemo_ObjAllocInit();
-    fn_8017AA78_init_state(GX_TF_RGB5A3);
+    inline2(0);
 
     disp->state.x0_0 = 1;
     disp->state.x0_4 = 0;
@@ -1714,7 +1713,6 @@ void fn_8017AA78(const u8* arg0)
     p5 = (PackedS16x4*) lbl_803D7038;
     state = &disp->state;
     p7 = (PackedS16x4*) lbl_803D7018;
-    player_state = state->player_flags;
 
     {
         s32 a;
@@ -1726,7 +1724,7 @@ void fn_8017AA78(const u8* arg0)
         state->dim_w1[0] = a;
         state->dim_w1[1] = b;
         {
-            u32* dim_h1 = fn_8017AA78_get_dim_h1(state);
+            u32* dim_h1 = inline3(state);
             a = lbl_804D3FD8;
             (void) a;
             b = lbl_804D3FDC;
@@ -1754,10 +1752,10 @@ void fn_8017AA78(const u8* arg0)
 
     {
         int i;
-        for (i = 0; i < 4; i++, player_state++) {
-            player_state[0] = 0;
-            player_state[0x23] = arg0[i];
-            if ((u8) fn_8017AA78_get_result(disp) == OUTCOME_NO_CONTEST) {
+        for (i = 0; i < 4; i++) {
+            state->player_flags[i] = 0;
+            state->costume_override[i] = arg0[i];
+            if ((u8) inline4(disp) == OUTCOME_NO_CONTEST) {
                 struct MatchTeamData* team_standings;
                 state->match_end.player_standings[i].is_big_loser = 1;
                 team_standings = fn_8017AA78_get_team_standings(disp);

@@ -20,7 +20,7 @@
 /* 1A9498 */ void fn_801A9498(HSD_GObj*);
 /* 1A94BC */ void fn_801A94BC(HSD_GObj*);
 /* 1A9630 */ void gm_801A9630(void);
-/* 1A9B30 */ void gm_801A9B30_OnEnter(UNK_T);
-/* 1A9D0C */ void gm_801A9D0C_OnFrame(void);
+/* 1A9B30 */ void gm_Scene_Congrats_OnEnter(UNK_T);
+/* 1A9D0C */ void gm_Scene_Congrats_OnFrame(void);
 
 #endif

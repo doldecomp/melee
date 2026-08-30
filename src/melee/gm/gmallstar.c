@@ -19,7 +19,7 @@ extern DebugGameOverData gmClassic_80470850;
 extern MatchExitInfo gmClassic_8047086C;
 extern StartMeleeData gmClassic_80472AF8;
 
-GameScene gm_803DE930_Scenes[] = {
+GameModeState gm_Mode_AllStar_States[] = {
     {
         0,
         3,
@@ -380,39 +380,33 @@ static AllstarRoundInfo gm_803DEC4C[13] = {
 
 gm_80490940_t gm_80490940[5];
 
-static inline void gm_801B5324_inline(s8* char_ids, gm_803DEBE8_t* opp_data,
-                                      s32 round)
-{
-    s32 i;
-
-    for (i = 0; i < 3; i++) {
-        char_ids[i] = 0x21;
-    }
-    for (i = 0; i < (s32) gm_803DEC4C[round].count; i++) {
-        char_ids[i] = opp_data[i].x3;
-    }
-}
-
-void gm_801B5324(UnkAllstarData* arg0, s32 arg1)
+void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
 {
     s8 chars[3];
     u8 colors[3];
+    s8* chars_ptr;
     s32 is_last_round;
     gm_803DEBE8_t* opp_data;
     struct GameCache* gc;
     s32 slot_idx;
+    s32 count_processed;
     s32 i;
     u64 audio;
     PAD_STACK(16);
 
     is_last_round = 0;
 
-    {
-        u32 start = gm_803DEC4C[arg1].start;
-        opp_data = &gm_803DEBE8[start];
-    }
+    opp_data = &gm_803DEBE8[gm_803DEC4C[arg1].start];
 
-    gm_801B5324_inline(chars, opp_data, arg1);
+    chars_ptr[0] = 0x21;
+    chars_ptr[1] = 0x21;
+    chars_ptr[2] = 0x21;
+
+    for (count_processed = 0; count_processed < (s32) gm_803DEC4C[arg1].count;
+         count_processed++)
+    {
+        chars[count_processed] = opp_data[count_processed].x3;
+    }
 
     for (i = 0; i < 3; i++) {
         colors[i] = arg0->x54(arg1, arg0->x0.cpu_level, (u8) i);
@@ -420,8 +414,8 @@ void gm_801B5324(UnkAllstarData* arg0, s32 arg1)
 
     gmRegSetupEnemyColorTable(arg0->x0.ckind, arg0->x0.color, chars, colors);
 
-    if (arg1 == 0xC) {
-        chars[0] = 3;
+    if ((s32) arg1 == 0xC) {
+        chars_ptr[0] = 3;
         colors[0] = 0;
         is_last_round = 1;
         chars[1] = 3;
@@ -457,9 +451,9 @@ void gm_801B5324(UnkAllstarData* arg0, s32 arg1)
 
     audio = lbAudioAx_80026E84((CharacterKind) arg0->x0.ckind);
     {
-        s32 j;
-        for (j = 0; j < 3; j++) {
-            audio |= lbAudioAx_80026E84(chars[j]);
+        for (i = 0; i < 3; i++) {
+            CharacterKind ckind = chars[i];
+            audio |= lbAudioAx_80026E84(ckind);
         }
     }
 
@@ -482,7 +476,7 @@ static inline void gm_801B5624_inline(s8* char_ids, gm_803DEBE8_t* opp_data,
     }
 }
 
-void gm_801B5624(GameScene* arg0)
+void gm_801B5624(GameModeState* arg0)
 {
     s8 chars[3];
     StartMeleeData* data;
@@ -493,10 +487,10 @@ void gm_801B5624(GameScene* arg0)
     u8 color;
     PAD_STACK(8);
 
-    base = (u8*) gm_803DE930_Scenes;
+    base = (u8*) gm_Mode_AllStar_States;
     data = gm_GetGameSceneLoadData(arg0);
     allstar = &gm_80473A18;
-    round = gm_8017BE84(arg0->idx);
+    round = gm_8017BE84(arg0->id);
 
     {
         u32 start = gm_803DEC4C[round].start;
@@ -508,14 +502,14 @@ void gm_801B5624(GameScene* arg0)
     allstar->x0.xB = 4;
     allstar->x0.x8 = 0;
 
-    round = gm_8017BE84(arg0->idx);
+    round = gm_8017BE84(arg0->id);
     {
         gm_803DEBE8_t* opp = (gm_803DEBE8_t*) (base + 0x2B8) +
                              ((AllstarRoundInfo*) (base + 0x31C))[round].start;
         color = ((u8*) gm_80490940)[((u32) opp - (u32) (base + 0x2B8)) >> 2];
     }
 
-    round = gm_8017BE84(arg0->idx);
+    round = gm_8017BE84(arg0->id);
 
     gm_8017CE34(data, (UnkAdventureData*) allstar, chars, 0, 0, 0, 0,
                 (s32) opp_data->x2, (s32) round, (s32) color);
@@ -527,13 +521,13 @@ void gm_801B5624(GameScene* arg0)
     data->rules.x14 = ((s32) allstar->x9C % 60) + 1;
     data->rules.x20 &= 0xFFFFFFFFFFFBFCFFULL;
 
-    if (arg0->idx == 0) {
+    if (arg0->id == 0) {
         data->players[0].xC_b1 = 1;
     } else {
         data->players[0].xC_b1 = 0;
     }
 
-    if (arg0->idx == 0x60) {
+    if (arg0->id == 0x60) {
         u8* cpu_level = &allstar->x0.cpu_level;
         f32 f31;
         f32 f30;
@@ -554,14 +548,14 @@ void gm_801B5624(GameScene* arg0)
 
     data->players[0].x10 = allstar->x74;
     gm_8016F088(data);
-    allstar->x0.x7 = arg0->idx;
+    allstar->x0.x7 = arg0->id;
 }
 
-void gm_801B59AC(GameScene* arg0)
+void gm_801B59AC(GameModeState* arg0)
 {
-    u8* base = (u8*) gm_803DE930_Scenes;
+    u8* base = (u8*) gm_Mode_AllStar_States;
     MatchExitInfo* exit = gm_GetGameSceneLeaveData(arg0);
-    u8 idx = arg0->idx;
+    u8 idx = arg0->id;
     s32 result = exit->x8;
     UnkAllstarData* data = &gm_80473A18;
     u16 round = gm_8017BE84(idx);
@@ -576,7 +570,7 @@ void gm_801B59AC(GameScene* arg0)
     }
     data->x74 = exit->match_end.player_standings[0].percent;
     data->x9C += exit->match_end.frame_count;
-    if (gm_8017D7AC(exit, &data->x0, 0x69) != 0 && arg0->idx == 0x60) {
+    if (gm_8017D7AC(exit, &data->x0, 0x69) != 0 && arg0->id == 0x60) {
         gm_8017CBAC((UnkAdventureData*) data, gmMainLib_8015CDE0(), 0x17);
     }
 }
@@ -586,14 +580,14 @@ void fn_801B5AA8(int arg0)
     lbBgFlash_8002063C(0x78);
 }
 
-static inline void gm_801B5ACC_inline0(StartMeleeData* data, GameScene* arg0,
-                                       u16* round)
+static inline void gm_801B5ACC_inline0(StartMeleeData* data,
+                                       GameModeState* arg0, u16* round)
 {
     data->players[0].xD_b2 = 1;
     data->rules.x7 = 9;
 
     {
-        u16 current_round = gm_8017BE84(arg0->idx);
+        u16 current_round = gm_8017BE84(arg0->id);
         *round = current_round;
     }
 }
@@ -610,7 +604,7 @@ static inline void gm_801B5ACC_inline1(AllstarRoundInfo* ri)
     }
 }
 
-void gm_801B5ACC(GameScene* arg0)
+void gm_801B5ACC(GameModeState* arg0)
 {
     s8 chars[3];
     StartMeleeData* data;
@@ -625,12 +619,12 @@ void gm_801B5ACC(GameScene* arg0)
     chars[0] = 0x21;
     chars[1] = 0x21;
     chars[2] = 0x21;
-    base = (u8*) gm_803DE930_Scenes;
+    base = (u8*) gm_Mode_AllStar_States;
     data = gm_GetGameSceneLoadData(arg0);
     allstar = &gm_80473A18;
     allstar->x0.x8 |= 0x80;
 
-    round = gm_8017BE84(arg0->idx);
+    round = gm_8017BE84(arg0->id);
     {
         gm_803DEBE8_t* opp =
             (gm_803DEBE8_t*) (base + 0x2B8) + gm_803DEC4C[round].start;
@@ -689,20 +683,20 @@ void gm_801B5ACC(GameScene* arg0)
     data->rules.x50 = (void (*)(u8))(Event) fn_801B5AA8;
 }
 
-void gm_801B5E7C(GameScene* arg0)
+void gm_801B5E7C(GameModeState* arg0)
 {
     MatchExitInfo* exit = gm_GetGameSceneLeaveData(arg0);
     gm_80473A18.x74 = exit->match_end.player_standings[0].percent;
     gm_8017D7AC(exit, &gm_80473A18.x0, 0x69);
 }
 
-void gm_801B5EB4(GameScene* arg0)
+void gm_801B5EB4(GameModeState* arg0)
 {
     DebugGameOverData* data = gm_GetGameSceneLoadData(arg0);
     gm_8017C9A8(data, &gm_80473A18.x0, 2);
 }
 
-void gm_801B5EE4(GameScene* arg0)
+void gm_801B5EE4(GameModeState* arg0)
 {
     DebugGameOverData* data = gm_GetGameSceneLeaveData(arg0);
     UnkAllstarData* r30 = &gm_80473A18;
@@ -712,7 +706,7 @@ void gm_801B5EE4(GameScene* arg0)
     }
 }
 
-void gm_801B5F50(GameScene* arg0)
+void gm_801B5F50(GameModeState* arg0)
 {
     CSSData* temp_r31;
     struct gmm_x0_528_t* temp_r3;
@@ -725,9 +719,7 @@ void gm_801B5F50(GameScene* arg0)
     lbDvd_800174BC();
 }
 
-/// #gm_801B5F50
-
-void gm_801B5FB4(GameScene* arg0)
+void gm_801B5FB4(GameModeState* arg0)
 {
     CSSData* temp_r31 = gm_GetGameSceneLeaveData(arg0);
     struct gmm_x0_528_t* temp_r30 = gmMainLib_8015CDE0();
@@ -749,13 +741,13 @@ void gm_801B5FB4(GameScene* arg0)
     gm_801B5324(r29, temp_r30->x5);
 }
 
-void gm_801B607C(GameScene* unused)
+void gm_801B607C(GameModeState* unused)
 {
     gm_SetPendingGameMode(GM_MENU);
     gm_SetNewGameModePending();
 }
 
-void gm_801B60A4_OnLoad(void)
+void gm_Mode_AllStar_OnLoad(void)
 {
     UnkAllstarData* data;
     u32 index;
@@ -823,7 +815,7 @@ void gm_801B60A4_OnLoad(void)
     Ground_801C5A28();
 }
 
-void gm_801B62D8_OnInit(void)
+void gm_Mode_AllStar_OnInit(void)
 {
     struct gmm_x0_528_t* temp_r3 = gmMainLib_8015CDE0();
     temp_r3->c_kind = CHKIND_NONE;

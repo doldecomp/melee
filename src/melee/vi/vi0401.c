@@ -114,7 +114,7 @@ static void vi0401_8031D23C(HSD_GObj* gobj)
     }
 }
 
-void un_8031D288_OnEnter(void* data)
+void vi0401_Scene_OnEnter(void* data)
 {
     HSD_CObj* cobj;
     HSD_GObj* cam_gobj;
@@ -212,7 +212,7 @@ void un_8031D288_OnEnter(void* data)
     lbAudioAx_800237A8(0x61a8a, 0x7F, 0x40);
 }
 
-void un_8031D698_OnFrame(void)
+void vi0401_Scene_OnFrame(void)
 {
     u64 result = gm_GetButtonsTriggered(gm_8017E430());
     if ((result & PAD_BUTTON_START) != 0) {

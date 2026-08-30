@@ -161,6 +161,8 @@ static MnInfoDataLayout mnInfo_803EFC08 = {
       'a', 'n', 'i', 'm', '_', 'j', 'o', 'i', 'n', 't' },
 };
 
+#define mnInfo_layout (*(MnInfoDataLayout*) mnInfo_803EFC08)
+
 #ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
@@ -180,7 +182,7 @@ s32 mnInfo_80251D58(mnInfo_GObj* arg0, s32 arg1, u32 arg2, u32 arg3)
     MnInfoDataLayout* layout;
 
     data = arg0->user_data;
-    layout = &mnInfo_803EFC08;
+    layout = &mnInfo_layout;
     slot = (HSD_Text**) ((u8*) data + (arg1 * 4));
     if (*(slot += 2) != NULL) {
         HSD_SisLib_803A5CC4(data->left_column[arg1]);
@@ -383,7 +385,7 @@ void mnInfo_802522B8(HSD_GObj* gobj)
     } else {
         HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
     }
-    mn_8022ED6C(jobj, &mnInfo_803EFC08.anim);
+    mn_8022ED6C(jobj, &mnInfo_layout.anim);
 }
 #ifdef MUST_MATCH
 #pragma pop
@@ -441,7 +443,7 @@ static inline void fn_802523D8_inline(MnInfoData* data, HSD_GObj* gobj)
             HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
         }
 
-        mn_8022ED6C(jobj, &mnInfo_803EFC08.anim);
+        mn_8022ED6C(jobj, &mnInfo_layout.anim);
     }
 }
 
@@ -549,9 +551,13 @@ s32 mnInfo_80252758(void)
     HSD_GObj* gobj;
     HSD_Archive* archive;
     StaticModelDesc* model = &mnInfo_804A0958;
-    char* top_joint = mnInfo_803EFC08.top_joint;
+    char* top_joint = mnInfo_layout.top_joint;
     HSD_AnimJoint** animjoint = &model->animjoint;
     PAD_STACK(8);
+
+    (void) "Can't get user_data.\n";
+    (void) __FILE__;
+    (void) "user_data";
 
     mn_804D6BC8.cooldown = 5;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
@@ -561,9 +567,9 @@ s32 mnInfo_80252758(void)
     archive = mn_804D6BB8;
     lbArchive_LoadSections(
         archive, (void**) &model->joint, top_joint, animjoint,
-        mnInfo_803EFC08.top_animjoint, &model->matanim_joint,
-        mnInfo_803EFC08.top_matanim_joint, &model->shapeanim_joint,
-        mnInfo_803EFC08.top_shapeanim_joint, 0);
+        mnInfo_layout.top_animjoint, &model->matanim_joint,
+        mnInfo_layout.top_matanim_joint, &model->shapeanim_joint,
+        mnInfo_layout.top_shapeanim_joint, 0);
 
     mnInfo_80251AFC();
 
@@ -571,7 +577,10 @@ s32 mnInfo_80252758(void)
     mnInfo_804D6C78 = gobj;
 
     user_data = HSD_MemAlloc(sizeof(*user_data));
-    HSD_ASSERTREPORT(0x267, user_data, "Can't get user_data.\n");
+    if (user_data == NULL) {
+        OSReport(mnInfo_layout.assert_report);
+        __assert(mnInfo_layout.assert_file, 0x267, mnInfo_layout.assert_expr);
+    }
     mnInfo_80252720(user_data);
     GObj_InitUserData(gobj, 0, HSD_Free, user_data);
 

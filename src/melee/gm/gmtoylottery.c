@@ -7,33 +7,33 @@
 #include "melee/lb/lbcardnew.h"
 #include "melee/lb/types.h"
 
-/* 1BECA8 */ static void gm_801BECA8(GameScene*);
-/* 1BECD0 */ static void gm_801BECD0(GameScene*);
-/* 4D6910 */ static UNK_T gm_804D6910[2];
+/* 1BECA8 */ static void onEnter(GameModeState*);
+/* 1BECD0 */ static void onExit(GameModeState*);
+/* 4D6910 */ static UNK_T exit_data[2];
 
-GameScene gm_803DFA48_Scenes[] = {
+GameModeState gm_Mode_ToyLottery_States[] = {
     {
         0,
         lbDvdPreload_2,
         0,
-        gm_801BECA8,
-        gm_801BECD0,
+        onEnter,
+        onExit,
         {
             GS_TOY_LOTTERY,
             NULL,
-            &gm_804D6910,
+            &exit_data,
         },
     },
     { -1 },
 };
 
-void gm_801BECA8(GameScene* arg)
+void onEnter(UNUSED GameModeState* state)
 {
     lb_8001C550();
     lb_8001D164(0);
 }
 
-void gm_801BECD0(GameScene* arg)
+void onExit(UNUSED GameModeState* state)
 {
     gm_80172898(4);
     if (!gm_80173754(1, 0)) {

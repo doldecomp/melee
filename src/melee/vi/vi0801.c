@@ -117,7 +117,7 @@ void vi0801_8031EFE4(HSD_GObj* gobj)
     }
 }
 
-void vi0801_OnEnter(void* unused)
+void vi0801_Scene_OnEnter(void* unused)
 {
     HSD_CObj* cobj;
     HSD_GObj* gobj;
@@ -172,7 +172,7 @@ void vi0801_OnEnter(void* unused)
     lbAudioAx_80024E50(0);
 }
 
-void vi0801_OnFrame(void)
+void vi0801_Scene_OnFrame(void)
 {
     vi_8031CAAC();
 }

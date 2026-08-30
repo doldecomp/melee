@@ -43,25 +43,25 @@ struct exitIntroData {
 };
 ASSERT_SIZE(struct exitIntroData, 0x4);
 
-/* 1B099C */ static void onExitIntro(GameScene*);
-/* 1B09C0 */ static void onEnterMenu0(GameScene*);
+/* 1B099C */ static void onExitIntro(GameModeState*);
+/* 1B09C0 */ static void onEnterMenu0(GameModeState*);
 /* 1B09F8 */ static int fn_801B09F8(int);
-/* 1B0A34 */ static void onEnterMenu1(GameScene*);
+/* 1B0A34 */ static void onEnterMenu1(GameModeState*);
 /* 1B0A8C */ static int fn_801B0A8C(int);
-/* 1B0AC8 */ static void onEnterMenu2(GameScene*);
-/* 1B0B00 */ static void onEnterPrize(GameScene*);
-/* 1B0B24 */ static void onExitPrize(GameScene*);
-/* 1B0B48 */ static void onEnterVs(GameScene*);
-/* 1B0B8C */ static void onEnterResults0(GameScene*);
-/* 1B0BF0 */ static void onExitResults0(GameScene*);
-/* 1B0C18 */ static void onEnterIntroEasy(GameScene*);
-/* 1B0C50 */ static void onEnterIntroAllstar(GameScene*);
-/* 1B0C74 */ static void onEnterGameOver(GameScene*);
-/* 1B0CF0 */ static void onEnterApproach(GameScene*);
-/* 1B0DD0 */ static void onEnterResults1(GameScene*);
-/* 1B0F1C */ static void onExitResults1(GameScene*);
-/* 1B0F60 */ static void onEnterMemCard(GameScene*);
-/* 1B0F90 */ static void onExitMemCard(GameScene*);
+/* 1B0AC8 */ static void onEnterMenu2(GameModeState*);
+/* 1B0B00 */ static void onEnterPrize(GameModeState*);
+/* 1B0B24 */ static void onExitPrize(GameModeState*);
+/* 1B0B48 */ static void onEnterVs(GameModeState*);
+/* 1B0B8C */ static void onEnterResults0(GameModeState*);
+/* 1B0BF0 */ static void onExitResults0(GameModeState*);
+/* 1B0C18 */ static void onEnterIntroEasy(GameModeState*);
+/* 1B0C50 */ static void onEnterIntroAllstar(GameModeState*);
+/* 1B0C74 */ static void onEnterGameOver(GameModeState*);
+/* 1B0CF0 */ static void onEnterApproach(GameModeState*);
+/* 1B0DD0 */ static void onEnterResults1(GameModeState*);
+/* 1B0F1C */ static void onExitResults1(GameModeState*);
+/* 1B0F60 */ static void onEnterMemCard(GameModeState*);
+/* 1B0F90 */ static void onExitMemCard(GameModeState*);
 /* 480DC8 */ static struct UnkSoundTestData1 intro_easy_enter_data;
 /* 480DE8 */ static StartMeleeData vs_enter_data;
 /* 480F20 */ static MatchExitInfo vs_exit_data;
@@ -77,7 +77,7 @@ ASSERT_SIZE(struct exitIntroData, 0x4);
 /* 4D689C */ static struct DebugMemcardData memcard_enter_data;
 /* 4D68A4 */ static struct DebugMemcardData memcard_exit_data;
 
-/* 3DD6D0 */ GameScene gm_803DD6D0_Scenes[] = {
+/* 3DD6D0 */ GameModeState gm_Mode_Debug_States[] = {
     {
         0,
         lbDvdPreload_2,
@@ -261,12 +261,12 @@ ASSERT_SIZE(struct exitIntroData, 0x4);
     { -1 },
 };
 
-void onExitIntro(GameScene* unused)
+void onExitIntro(GameModeState* unused)
 {
     gm_SetPendingSceneIndex(0); // onEnterMenu0
 }
 
-void onEnterMenu0(GameScene* arg0)
+void onEnterMenu0(GameModeState* arg0)
 {
     struct enterMenu0_Data* temp_r3 = gm_GetGameSceneLoadData(arg0);
     temp_r3->x0 = un_803FA4E0;
@@ -283,7 +283,7 @@ int fn_801B09F8(int arg0)
     return 0;
 }
 
-void onEnterMenu1(GameScene* arg0)
+void onEnterMenu1(GameModeState* arg0)
 {
     struct enterMenu0_Data* temp_r3 = gm_GetGameSceneLoadData(arg0);
     temp_r3->x0 = un_803FA790;
@@ -304,24 +304,24 @@ int fn_801B0A8C(int arg0)
     return 0;
 }
 
-void onEnterMenu2(GameScene* arg0)
+void onEnterMenu2(GameModeState* arg0)
 {
     struct enterMenu0_Data* temp_r3 = gm_GetGameSceneLoadData(arg0);
     temp_r3->x0 = un_803FC4CC;
     temp_r3->x4 = fn_801B0A8C;
 }
 
-void onEnterPrize(GameScene* arg0)
+void onEnterPrize(GameModeState* arg0)
 {
     un_802FFEE0(gm_GetGameSceneLoadData(arg0));
 }
 
-void onExitPrize(GameScene* arg0)
+void onExitPrize(GameModeState* arg0)
 {
     gm_SetPendingSceneIndex(2);
 }
 
-void onEnterVs(GameScene* arg0)
+void onEnterVs(GameModeState* arg0)
 {
     un_802FFF2C(gm_GetGameSceneLoadData(arg0));
     lbAudioAx_80026F2C(0x12);
@@ -330,34 +330,34 @@ void onEnterVs(GameScene* arg0)
     lbAudioAx_80027648();
 }
 
-void onEnterResults0(GameScene* arg0)
+void onEnterResults0(GameModeState* arg0)
 {
     struct ResultsMatchInfo* temp_r3 = gm_GetGameSceneLoadData(arg0);
     gm_80177724(temp_r3);
     temp_r3->match_end = vs_exit_data.match_end;
 }
 
-void onExitResults0(GameScene* arg0)
+void onExitResults0(GameModeState* arg0)
 {
     gm_GetGameSceneLeaveData(arg0);
     gm_SetPendingSceneIndex(0);
 }
 
-void onEnterIntroEasy(GameScene* arg0)
+void onEnterIntroEasy(GameModeState* arg0)
 {
     struct UnkSoundTestData1* temp_r31 = gm_GetGameSceneLoadData(arg0);
     gm_80168F88();
     un_80301BA8(temp_r31);
 }
 
-void onEnterIntroAllstar(GameScene* arg0)
+void onEnterIntroAllstar(GameModeState* arg0)
 {
     un_80301C64(gm_GetGameSceneLoadData(arg0));
 }
 
 extern int un_803FA258[];
 
-void onEnterGameOver(GameScene* arg0)
+void onEnterGameOver(GameModeState* arg0)
 {
     struct DebugGameOverData* data;
 
@@ -371,7 +371,7 @@ void onEnterGameOver(GameScene* arg0)
     data->x16 = (HSD_Randi(0xA) + 1);
 }
 
-void onEnterApproach(GameScene* arg0)
+void onEnterApproach(GameModeState* arg0)
 {
     u8* temp_r3 = gm_GetGameSceneLoadData(arg0);
     temp_r3[1] = 0;
@@ -417,7 +417,7 @@ void onEnterApproach(GameScene* arg0)
     }
 }
 
-void onEnterResults1(GameScene* arg0)
+void onEnterResults1(GameModeState* arg0)
 {
     u64 sfx_result = 0;
     int i;
@@ -453,7 +453,7 @@ void onEnterResults1(GameScene* arg0)
     PAD_STACK(8);
 }
 
-void onExitResults1(GameScene* arg0)
+void onExitResults1(GameModeState* arg0)
 {
     lbAudioAx_800236DC();
     if (HSD_PadCopyStatus->button & HSD_PAD_L) {
@@ -463,14 +463,14 @@ void onExitResults1(GameScene* arg0)
     }
 }
 
-void onEnterMemCard(GameScene* arg0)
+void onEnterMemCard(GameModeState* arg0)
 {
     struct DebugMemcardData* data = gm_GetGameSceneLoadData(arg0);
     data->x0 = 1;
     data->x4 = 0;
 }
 
-void onExitMemCard(GameScene* arg0)
+void onExitMemCard(GameModeState* arg0)
 {
     UNUSED struct DebugMemcardData* data = gm_GetGameSceneLeaveData(arg0);
     gm_SetPendingSceneIndex(0);

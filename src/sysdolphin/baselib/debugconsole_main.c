@@ -52,7 +52,7 @@ struct ParticleScreenState {
     /* 0x40 */ s32 x40;
     /* 0x44 */ s32 x44;
     /* 0x48 */ s32 x48;
-    /* 0x4C */ void* x4C;
+    /* 0x4C */ u8* x4C;
     /* 0x50 */ void* x50;
     /* 0x54 */ u8 _pad4[0x68];
     /* 0xBC */ u32 xBC;
@@ -605,7 +605,7 @@ void hsd_80394314(void)
     sp->x20 = (u32) (sp->x3C - 0x28) / 11;
     sp->x1C = (u32) (sp->x40 - 0x50) / 14;
 #endif
-    sp->x4C = HSD_DebugFontAtlas;
+    sp->x4C = (u8*) HSD_DebugFontAtlas;
     sp->x50 = 0;
     sp->xC4 = 0;
 }
@@ -620,7 +620,7 @@ void hsd_80394434(void* text)
     s32 y = sp->x8;
     s32 mode = sp->x0_b7;
     s32 interlace = sp->x0_b6;
-    u8* font = (u8*) sp->x4C;
+    u8* font = sp->x4C;
     s8* ptr = text;
 
     while (*ptr != 0) {
@@ -1035,6 +1035,8 @@ static void hsd_80394E8C(struct lbl_8040B904_t* node_ptr)
     hsd_804CF810.x0_b5 = 1;
 }
 
+// @TODO: Currently 94.46% match - BSS relocation and register allocation
+// differences remain
 static inline const char* hsd_80394F48_get_first_entry(EventData* data)
 {
     return data->entries[0];
@@ -1125,7 +1127,6 @@ void hsd_80394F48(void* data)
     struct lbl_8040AB00_t* hi_color;
     s32 x_base;
     s32* pxC8;
-    s32 entry_idx;
     s32 i;
     s32 b6;
 
@@ -1202,7 +1203,7 @@ void hsd_80394F48(void* data)
         *px4 += 11;
         hsd_80394434(dp->entries[entry_idx]);
 
-        *px4 += hsd_80394F48_entry_length(entry_idx, dp) * 11;
+        *px4 += hsd_80394F48_entry_length(i, dp) * 11;
         hsd_80394F48_set_base_color(px50);
 
         b6 = sp->x0_b6;
@@ -1432,12 +1433,12 @@ void hsd_803957C0(void* input)
         b6 = draw_sp->x0_b6;
 
         if (draw_sp->x0_b7) {
-            hsd_803922FC((void*) ((u8*) draw_sp->x4C + (ch & 0x7F) * 0x38),
+            hsd_803922FC((void*) (draw_sp->x4C + (ch & 0x7F) * 0x38),
                          hsd_804CF810.x4, hsd_804CF810.x8, b6,
                          (&hsd_804CF810.x24)[draw_sp->x34], draw_sp->x3C,
                          hsd_804CF810.x40, hsd_804CF810.x44, hsd_804CF810.x50);
         } else {
-            hsd_803921B8((void*) ((u8*) draw_sp->x4C + (ch & 0x7F) * 0x38),
+            hsd_803921B8((void*) (draw_sp->x4C + (ch & 0x7F) * 0x38),
                          hsd_804CF810.x4, hsd_804CF810.x8,
                          (&hsd_804CF810.x24)[draw_sp->x34], draw_sp->x3C,
                          hsd_804CF810.x40, hsd_804CF810.x44, hsd_804CF810.x50);
@@ -2069,7 +2070,7 @@ static char* lbl_804D62F8 = "| INPUT ADDRESS : 8%07X |";
 
 static inline void hsd_80396884_draw_char(s8 ch, s32 b6)
 {
-    hsd_803922FC((u8*) hsd_804CF810.x4C + (ch & 0x7F) * 0x38, hsd_804CF810.x4,
+    hsd_803922FC(hsd_804CF810.x4C + (ch & 0x7F) * 0x38, hsd_804CF810.x4,
                  hsd_804CF810.x8, b6, (&hsd_804CF810.x24)[hsd_804CF810.x34],
                  hsd_804CF810.x3C, hsd_804CF810.x40, hsd_804CF810.x44,
                  hsd_804CF810.x50);
@@ -2110,7 +2111,7 @@ void hsd_80396884(void)
     if (hsd_804CF810.x0_b7) {
         hsd_80396884_draw_char(ch, b6);
     } else {
-        u8* bitmap = (u8*) hsd_804CF810.x4C + (ch & 0x7F) * 0x38;
+        u8* bitmap = hsd_804CF810.x4C + (ch & 0x7F) * 0x38;
         s32 x = hsd_804CF810.x4;
         s32 dst = (&hsd_804CF810.x24)[hsd_804CF810.x34];
         hsd_803921B8(bitmap, x, hsd_804CF810.x8, dst, hsd_804CF810.x3C,

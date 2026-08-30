@@ -59,62 +59,42 @@ typedef struct un_804A1F48_t {
 } un_804A1F48_t;
 ASSERT_SIZE(struct un_804A1F48_t, 0xC);
 
-/// @note Colloquially known as "Minor Scene"
-struct GameScene {
-    /* 00 */ u8 idx;
-    /* 01 */ u8 preload;
-    /* 02 */ u16 flags;
+struct GameModeState {
+    /* +0 */ u8 id;      ///< locally defined by game mode
+    /* +1 */ u8 preload; ///< ::lbDvdPreloadKind
+    /* +2 */ u16 flags;
 
-    /* 04 */ void (*on_enter)(GameScene*);
-    /* 08 */ void (*on_exit)(GameScene*);
+    /* +4 */ void (*on_enter)(GameModeState*);
+    /* +8 */ void (*on_exit)(GameModeState*);
 
     struct GameSceneInfo {
-        /* 0C */ u8 scene_id;
-        /* 10 */ void* load_data;  ///< data passed to OnLoad callback
-        /* 14 */ void* leave_data; ///< data passed to OnLeave callback
+        /* +0 */ u8 scene_kind;    ///< ::GameSceneKind
+        /* +4 */ void* enter_data; ///< data passed to GameScene::on_enter
+        /* +8 */ void* exit_data;  ///< data passed to GameScene::on_exit
     } info;
 };
 
 /// @note Colloquially known as "Major Scene"
 struct GameMode {
-    u8 preload;
-    u8 idx; ///< GameModeKind
+    u8 preloaded; ///< ::bool
+    u8 kind;      ///< ::GameModeKind
 
     void (*on_load)(void);
     void (*on_unload)(void);
     void (*on_init)(void);
 
-    GameScene* scenes;
-}; // 803DACA4
+    GameModeState* states;
+};
 
-struct GameSceneHandler {
-    u8 class_id;
-
+/// @note Colloquially known as "Minor Scene"
+struct GameScene {
+    u8 kind; ///< ::GameSceneKind
     void (*on_frame)(void);
-    void (*on_load)(void*);
-    void (*on_leave)(void*);
-    void (*unk_func)(void);
-}; // 803DA920
-
-typedef struct {
-    u8 curr_mode;         ///< GameModeKind
-    u8 pending_mode;      ///< GameModeKind
-    u8 prev_mode;         ///< GameModeKind
-    u8 curr_scene_idx;    ///< scene graph scene index for associated GameMode
-    u8 prev_scene_idx;    ///< scene graph scene index for associated GameMode
-    u8 pending_scene_idx; ///< scene graph scene index for associated GameMode
-} GameRouting;
-
-typedef struct {
-    GameRouting routing;
-    GameRouting backup;
-    u8 pending;
-    u8 x0D;
-    u8 x0E;
-    u8 x0F;
-    u8 (*game_mode_override)(void);
-} GameState;
-ASSERT_SIZE(GameState, 0x14);
+    void (*on_enter)(void*);
+    void (*on_exit)(void*);
+    UNUSED UNK_T unused;
+};
+ASSERT_SIZE(struct GameScene, 0x14);
 
 struct gmm_x1CB0 {
     /* +0 */ u8 item_freq;

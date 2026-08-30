@@ -1,7 +1,5 @@
 #include "gmvsmode.h"
 
-#include "gmvsdata.h"
-
 #include "gm/gm_1A3F.h"
 #include "gm/gmmovieend.h"
 #include "if/if_2FD9.h"
@@ -14,19 +12,19 @@
 #include "melee/gm/types.h"
 #include "melee/lb/types.h"
 
-/* 1B13B8 */ static void onEnterDebugVs(GameScene*);
-/* 1B14A0 */ static void onEnterCss(GameScene*);
-/* 1B14DC */ static void onExitCss(GameScene*);
-/* 1B1514 */ static void onEnterSss(GameScene*);
-/* 1B154C */ static void onExitSss(GameScene*);
-/* 1B1588 */ static void onEnterVs(GameScene*);
-/* 1B15C8 */ static void onExitVs(GameScene*);
-/* 1B1648 */ static void onEnterSuddenDeath(GameScene*);
-/* 1B1688 */ static void onExitSuddenDeath(GameScene*);
-/* 1B16A8 */ static void onEnterResults(GameScene*);
-/* 1B16C8 */ static void onExitResults(GameScene*);
+/* 1B13B8 */ static void onEnterDebugVs(GameModeState*);
+/* 1B14A0 */ static void onEnterCss(GameModeState*);
+/* 1B14DC */ static void onExitCss(GameModeState*);
+/* 1B1514 */ static void onEnterSss(GameModeState*);
+/* 1B154C */ static void onExitSss(GameModeState*);
+/* 1B1588 */ static void onEnterVs(GameModeState*);
+/* 1B15C8 */ static void onExitVs(GameModeState*);
+/* 1B1648 */ static void onEnterSuddenDeath(GameModeState*);
+/* 1B1688 */ static void onExitSuddenDeath(GameModeState*);
+/* 1B16A8 */ static void onEnterResults(GameModeState*);
+/* 1B16C8 */ static void onExitResults(GameModeState*);
 
-GameScene gm_803DD9A0_Scenes[] = {
+GameModeState gm_Mode_Vs_States[] = {
     {
         0,
         lbDvdPreload_3,
@@ -126,7 +124,7 @@ GameScene gm_803DD9A0_Scenes[] = {
     { -1 },
 };
 
-GameScene gm_803DDA78_Scenes[] = {
+GameModeState gm_Mode_DebugVs_States[] = {
     {
         1,
         lbDvdPreload_2,
@@ -154,7 +152,7 @@ GameScene gm_803DDA78_Scenes[] = {
     { -1 },
 };
 
-void onEnterDebugVs(GameScene* arg0)
+void onEnterDebugVs(GameModeState* arg0)
 {
     StartMeleeData* data = gm_GetGameSceneLoadData(arg0);
     int i;
@@ -189,32 +187,32 @@ void onEnterDebugVs(GameScene* arg0)
     gm_80168FC4();
 }
 
-void onEnterCss(GameScene* arg0)
+void onEnterCss(GameModeState* arg0)
 {
     gm_801A5618(arg0, gm_801A5244(), 0);
 }
 
-void onExitCss(GameScene* arg0)
+void onExitCss(GameModeState* arg0)
 {
     gm_801A5680(arg0, gm_801A5244());
 }
 
-void onEnterSss(GameScene* arg0)
+void onEnterSss(GameModeState* arg0)
 {
     gm_801A5754(arg0, gm_801A5244());
 }
 
-void onExitSss(GameScene* arg0)
+void onExitSss(GameModeState* arg0)
 {
     gm_801A57A8(arg0, gm_801A5244(), 0);
 }
 
-void onEnterVs(GameScene* arg0)
+void onEnterVs(GameModeState* arg0)
 {
     gm_801A583C(arg0, gm_801A5244(), NULL, NULL);
 }
 
-void onExitVs(GameScene* arg0)
+void onExitVs(GameModeState* arg0)
 {
     s32 i;
     MatchExitInfo* mei;
@@ -230,22 +228,22 @@ void onExitVs(GameScene* arg0)
     }
 }
 
-void onEnterSuddenDeath(GameScene* arg0)
+void onEnterSuddenDeath(GameModeState* arg0)
 {
     gm_801A5C3C(arg0, gm_801A5244(), NULL, NULL);
 }
 
-void onExitSuddenDeath(GameScene* arg0)
+void onExitSuddenDeath(GameModeState* arg0)
 {
     gm_801A5EC8(arg0);
 }
 
-void onEnterResults(GameScene* arg0)
+void onEnterResults(GameModeState* arg0)
 {
     gm_801A5F00(arg0);
 }
 
-void onExitResults(GameScene* arg0)
+void onExitResults(GameModeState* arg0)
 {
     gm_801A5F64(arg0, gm_801A5244(), 0);
     if (gm_801743A4(gm_8047C020.match_end.result) == 0) {

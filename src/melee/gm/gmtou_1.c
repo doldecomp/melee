@@ -1599,20 +1599,8 @@ static inline BracketEntry* fn_8019A158_GetBracketEntry(s32 bracket_idx)
     return &lbl_80473AB8[bracket_idx];
 }
 
-typedef struct MatchEndStanding {
-    u8 pad[0x5D];
-    u8 is_big_loser;
-    u8 is_small_loser;
-    u8 pad5F[0xA8 - 0x5F];
-} MatchEndStanding;
-ASSERT_SIZE(MatchEndStanding, 0xA8);
-
-typedef struct Lbl804799D8Text {
-    u8 pad[0x4E];
-    char x4E[20];
-} Lbl804799D8Text;
-
-/// Initializes tournament bracket result state.
+/// @todo All instructions match; only the callee-saved register assignment
+/// is permuted against the target.
 void fn_8019A158(void)
 {
     Lbl804799D8Text* base_ptr;
@@ -1650,7 +1638,7 @@ void fn_8019A158(void)
         mode = 2;
     }
 
-    me = *x48_ptr;
+    me = lbl_804799D8.x48;
     (void) me;
     result = fn_8018F508(&local2);
     if (result == 1) {
@@ -1707,6 +1695,7 @@ void fn_8019A158(void)
             cursor += 0x2C;
         }
     } else {
+        bracket = fn_8019A158_GetBracketEntry(bracket_idx);
         counter = 0;
         for (i = 0; i < 4; i++) {
             if (lbl_80473AB8[bracket_idx].slots[i].x4E == 3) {
@@ -1784,8 +1773,6 @@ void fn_8019A158(void)
         }
     }
 }
-
-/// #fn_8019A158_end
 
 void fn_8019A71C(s32* state, u32 unused1, u32 unused2)
 {
@@ -2224,7 +2211,7 @@ void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
 
 /// @todo Currently 89.97% match - permuter couldn't improve
 /// Per-frame update for tournament mode menu.
-void gm_8019B2DC_OnFrame(void)
+void gm_Scene_TouBracket_OnFrame(void)
 {
     s32 sp[13];
     u32 arg1;
@@ -2408,7 +2395,7 @@ void fn_8019B458(s32* arg0)
             }
 
             {
-                PreloadCacheScene* scene = lbDvd_GetPreloadCacheScene();
+                PreloadedGameModeState* scene = lbDvd_GetPreloadCacheScene();
                 struct GameCache* gc = &scene->game_cache;
                 lbDvd_800174BC();
 
@@ -2473,7 +2460,7 @@ void fn_8019B860(TmData* tm)
     tm->cur_option = 0x20;
 }
 
-void gm_8019B8C4_OnEnter(void* arg0)
+void gm_Scene_TouBracket_OnEnter(void* arg0)
 {
     lbl_804D6668 = NULL;
     lbl_804D6664 = NULL;
@@ -2498,7 +2485,7 @@ void gm_8019B8C4_OnEnter(void* arg0)
     lbAudioAx_80023F28(0x5E);
 }
 
-void gm_8019B9C8_OnLeave(void* arg0)
+void gm_Scene_TouBracket_OnExit(void* arg0)
 {
     lbArchive_80016EFC(lbl_804D6660);
     lbArchive_80016EFC(lbl_804D6638);

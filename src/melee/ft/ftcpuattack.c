@@ -406,7 +406,6 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
     f32 relx;
     f32 lower;
     f32 upper;
-    f32 relPredY;
     f32 halfRange;
 
     PAD_STACK(4);
@@ -525,12 +524,10 @@ int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
         dirx *= halfRange;
         diry *= halfRange;
         scale = fp->x34_scale.y;
-        {
-            f32 u = list->x14 * scale + reach;
-            f32 l = list->x10 * scale;
-            upper = u * halfRange;
-            lower = l * halfRange;
-        }
+        upper = list->x14 * scale + reach;
+        lower = list->x10 * scale;
+        upper *= halfRange;
+        lower *= halfRange;
         if (upper > relPredY && lower < relPredY + x568 &&
             dirx < relx + rangeF && diry > relx - rangeB)
         {
@@ -641,7 +638,6 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
     while (list->cmd) {
         f32 relx;
         f32 diry;
-        f32 directionScale;
         f32 scale;
         f32 upper;
         f32 lower;
@@ -723,8 +719,8 @@ int ftCo_800B5AB0(Fighter* fp, void* arg1, void* arg2)
             dirx *= directionScale;
             diry = list->x0C * directionScale;
         } else {
-            dirx = -list->x0C * (directionScale = get_scale(fp));
-            diry = -list->x08 * directionScale;
+            dirx = -list->x0C * fp->x34_scale.y;
+            diry = -list->x08 * fp->x34_scale.y;
         }
         scale = get_scale(fp);
         upper = list->x14 * scale;

@@ -21,14 +21,14 @@ struct DebugSoundTestData {
     u32 x4;
 };
 
-/* 1B0FB8 */ static void onEnterDebug(GameScene*);
-/* 1B0FF8 */ static void onEnter(GameScene*);
-/* 1B138C */ static void onExit(GameScene*);
+/* 1B0FB8 */ static void onEnterDebug(GameModeState*);
+/* 1B0FF8 */ static void onEnter(GameModeState*);
+/* 1B138C */ static void onExit(GameModeState*);
 /* 4D68B0 */ static struct DebugSoundTestData debug_enter_data;
 /* 4D68B8 */ static MenuEnterData* enter_data;
 /* 4D68BC */ static MenuExitData* exit_data;
 
-GameScene gm_803DD888_Scenes[] = {
+GameModeState gm_Mode_DebugMenu_States[] = {
     {
         0,
         lbDvdPreload_2,
@@ -44,7 +44,7 @@ GameScene gm_803DD888_Scenes[] = {
     { -1 },
 };
 
-GameScene gm_803DD8B8_Scenes[] = {
+GameModeState gm_Mode_Menu_States[] = {
     {
         0,
         lbDvdPreload_2,
@@ -60,7 +60,7 @@ GameScene gm_803DD8B8_Scenes[] = {
     { -1 },
 };
 
-void onEnterDebug(GameScene* arg0)
+void onEnterDebug(GameModeState* arg0)
 {
     struct DebugSoundTestData* data;
 
@@ -71,13 +71,13 @@ void onEnterDebug(GameScene* arg0)
     un_802FF884("/audio");
 }
 
-void onEnter(GameScene* scene)
+void onEnter(GameModeState* scene)
 {
     GameRules* rules;
     MenuEnterData* data;
     GameModeKind previous_mode;
 
-    data = scene->info.load_data;
+    data = scene->info.enter_data;
     lb_8001C550();
     lb_8001D164(0);
     lbSnap_8001E218(HSD_MemAlloc(lbSnap_8001E204()),
@@ -211,7 +211,7 @@ void onEnter(GameScene* scene)
         data->menu_kind = MENU_KIND_SPECIAL;
         data->hovered_selection = SEL_SPECIAL_VS_LIGHTNING;
         return;
-    case GM_FIXED_CAMERA_VS:
+    case GM_CAMERA_VS:
         data->menu_kind = MENU_KIND_SPECIAL;
         data->hovered_selection = SEL_SPECIAL_VS_FIXED_CAMERA;
         return;
@@ -242,9 +242,9 @@ void onEnter(GameScene* scene)
     }
 }
 
-void onExit(GameScene* arg0)
+void onExit(GameModeState* arg0)
 {
-    MenuExitData* data = arg0->info.leave_data;
+    MenuExitData* data = arg0->info.exit_data;
 
     gm_SetPendingGameMode(data->pending_mode);
     gm_SetNewGameModePending();
