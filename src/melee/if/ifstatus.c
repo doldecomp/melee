@@ -347,12 +347,11 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     GXColor stamina_color;
     UNUSED u8 pad_b[4];
     GXColor normal_color;
-    UNUSED u8 pad_c[28];
+    UNUSED u8 pad_c[24];
     HSD_TObj* tobj;
     HSD_MatAnimJoint** anim_base;
     s32 i;
     u8 digit;
-    f32 digit_offset;
     f32 ones_offset;
     f32 tens_offset;
     f32 hundreds_offset;
@@ -459,41 +458,50 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     ifStatus_UpdateDamageDisplay(state, jobj, &color, &stamina_color,
                                  &normal_color);
 
-    /* Calculate digit spacing offsets based on which digit is "1" */
-    ones_offset = (state->damage_percent % 10 == 1) ? 0.5069F : 0.0F;
-    tens_offset = ((state->damage_percent % 100) / 10 == 1) ? 0.5069F : 0.0F;
+    {
+        struct {
+            f32 value;
+        } digit_offset;
 
-    /* Position percent sign */
-    digit_jobj = state->jobjs[Percent];
-    pos = state->translation_x[Percent] - ones_offset;
-    if (digit_jobj == NULL) {
-        __assert("jobj.h", 932, "jobj");
-    }
-    digit_jobj->translate.x = pos;
-    jobj_flagCheckSetMtxDirtySub(digit_jobj);
+        /* Calculate digit spacing offsets based on which digit is "1" */
+        ones_offset = (state->damage_percent % 10 == 1) ? 0.5069F : 0.0F;
+        tens_offset =
+            ((state->damage_percent % 100) / 10 == 1) ? 0.5069F : 0.0F;
 
-    /* Position tens digit */
-    digit_offset = ones_offset + tens_offset;
-    digit_jobj = state->jobjs[Tens];
-    pos = state->translation_x[Tens] + digit_offset;
-    (void) pos;
-    if (digit_jobj == NULL) {
-        __assert("jobj.h", 932, "jobj");
-    }
-    digit_jobj->translate.x = pos;
-    jobj_flagCheckSetMtxDirtySub(digit_jobj);
+        /* Position percent sign */
+        digit_jobj = state->jobjs[Percent];
+        pos = state->translation_x[Percent] - ones_offset;
+        if (digit_jobj == NULL) {
+            __assert("jobj.h", 932, "jobj");
+        }
+        digit_jobj->translate.x = pos;
+        jobj_flagCheckSetMtxDirtySub(digit_jobj);
 
-    /* Position hundreds digit */
-    hundreds_offset =
-        ((state->damage_percent % 1000) / 100 == 1) ? 0.5069F : 0.0F;
-    digit_jobj = state->jobjs[Hundreds];
-    pos = ifStatus_GetStoredTranslationX(state, Hundreds) +
-          (tens_offset + hundreds_offset + digit_offset);
-    if (digit_jobj == NULL) {
-        __assert("jobj.h", 932, "jobj");
+        /* Position tens digit */
+        digit_offset.value = ones_offset;
+        digit_offset.value += tens_offset;
+        digit_jobj = state->jobjs[Tens];
+        pos = state->translation_x[Tens] + digit_offset.value;
+        (void) pos;
+        if (digit_jobj == NULL) {
+            __assert("jobj.h", 932, "jobj");
+        }
+        digit_jobj->translate.x = pos;
+        jobj_flagCheckSetMtxDirtySub(digit_jobj);
+
+        /* Position hundreds digit */
+        hundreds_offset =
+            ((state->damage_percent % 1000) / 100 == 1) ? 0.5069F : 0.0F;
+        digit_jobj = state->jobjs[Hundreds];
+        digit_offset.value += tens_offset + hundreds_offset;
+        pos = ifStatus_GetStoredTranslationX(state, Hundreds) -
+              -digit_offset.value;
+        if (digit_jobj == NULL) {
+            __assert("jobj.h", 932, "jobj");
+        }
+        digit_jobj->translate.x = pos;
+        jobj_flagCheckSetMtxDirtySub(digit_jobj);
     }
-    digit_jobj->translate.x = pos;
-    jobj_flagCheckSetMtxDirtySub(digit_jobj);
 
     /* Handle shake animation */
     if (state->flags.force_digit_shake) {
