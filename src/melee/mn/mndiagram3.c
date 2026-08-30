@@ -643,18 +643,54 @@ static inline void mnDiagram3_ClearRowLabels(Diagram3* data)
     } while (++i < 10);
 }
 
+static inline void mnDiagram3_RebuildRowLabels(Diagram3* data, char* base,
+                                                Vec3* pos, int count)
+{
+    f32 spacing;
+    int i;
+    int base_idx;
+    int v;
+    HSD_Text* text;
+    u8 base_idx_u8;
+    u8 i_u8;
+    u8 limit;
+
+    base_idx = data->scroll_offset;
+    spacing = HSD_JObjGetTranslationY(data->jobjs[9]) -
+              HSD_JObjGetTranslationY(data->jobjs[8]);
+    lb_8000B1CC(data->jobjs[8], (Vec3*) (base + 0x18), pos);
+    base_idx_u8 = base_idx;
+    i = 0;
+    do {
+        text = HSD_SisLib_803A5ACC(
+            0, 1, pos->x - 6.5f, -spacing * (f32) i + -pos->y, pos->z,
+            6.5f, 240.0f);
+        data->row_labels[i] = text;
+        i_u8 = i;
+        limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
+        v = base_idx_u8 + i_u8;
+        if (v >= limit) {
+            v -= limit;
+        } else {
+            v = (u8) v;
+        }
+        HSD_SisLib_803A6368(text, ((u16*) (base + 0x3C))[(u8) v]);
+        i++;
+    } while (i < count);
+}
+
+static inline void mnDiagram3_RefreshRankings(HSD_GObj* diagram_gobj)
+{
+    mnDiagram2_ClearDetailView(diagram_gobj);
+    mnDiagram3_PopulateRankings(diagram_gobj);
+}
+
 void mnDiagram3_HandleInput(HSD_GObj* gobj)
 {
     char* base = (char*) &mnDiagram3_803EEC10;
     Diagram3* data = mnDiagram3_804D6C20->user_data;
     u32 input = Menu_GetAllInputs();
-    Vec3 spDC;
-    Vec3 spC0;
-    Vec3 spA4;
-    int i;
-    u8 limit;
-    int v;
-    PAD_STACK(64);
+    PAD_STACK(32);
 
     if (input & MenuInput_Back) {
         sfxBack();
@@ -685,6 +721,9 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
         return;
     }
     if (input & (MenuInput_XButton | MenuInput_YButton)) {
+        Vec3 mode_label_pos;
+        PAD_STACK(12);
+
         if (GetNameCount() == 0) {
             lbAudioAx_80024030(3);
             return;
@@ -698,44 +737,9 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
         }
         data = mnDiagram3_804D6C20->user_data;
         mnDiagram3_ClearRowLabels(data);
-        {
-            int base_idx;
-            u8 base_idx_u8;
-            u8 i_u8;
-            f32 spacing;
-            data = mnDiagram3_804D6C20->user_data;
-            base_idx = data->scroll_offset;
-            base_idx_u8 = base_idx;
-            spacing = HSD_JObjGetTranslationY(data->jobjs[9]) -
-                      HSD_JObjGetTranslationY(data->jobjs[8]);
-            lb_8000B1CC(data->jobjs[8], (Vec3*) (base + 0x18), &spDC);
-            for (i = 0; i < 0xA; i++) {
-                HSD_Text* t = HSD_SisLib_803A5ACC(0, 1, spDC.x - 6.5f,
-                                                  -spacing * (f32) i + -spDC.y,
-                                                  spDC.z, 6.5f, 240.0f);
-                data->row_labels[i] = t;
-                i_u8 = i;
-                limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
-                {
-                    int tmp = base_idx_u8 + i_u8;
-                    v = tmp;
-                }
-                if (v >= limit) {
-                    v = v - limit;
-                } else {
-                    v = (u8) v;
-                }
-                {
-                    u8 idx = v;
-                    HSD_SisLib_803A6368(t, ((u16*) (base + 0x3C))[idx]);
-                }
-            }
-        }
-        {
-            HSD_GObj* diagram_gobj = mnDiagram3_804D6C20;
-            mnDiagram2_ClearDetailView(diagram_gobj);
-            mnDiagram3_PopulateRankings(diagram_gobj);
-        }
+        data = mnDiagram3_804D6C20->user_data;
+        mnDiagram3_RebuildRowLabels(data, base, &mode_label_pos, 10);
+        mnDiagram3_RefreshRankings(mnDiagram3_804D6C20);
         return;
     }
     if (input & 1) {
@@ -746,9 +750,9 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
             f32 spacing;
             sfxMove();
             data->cursor_row = data->cursor_row - 1;
-            cur = mnDiagram3_804D6C20->user_data;
             popup = data->popup_gobj->hsd_obj;
             n = data->cursor_row;
+            cur = mnDiagram3_804D6C20->user_data;
             spacing = mnDiagram3_GetRowSpacing(cur);
             HSD_JObjSetTranslateX(popup,
                                   HSD_JObjGetTranslationX(cur->jobjs[8]));
@@ -757,54 +761,20 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
                                       HSD_JObjGetTranslationY(cur->jobjs[8]));
             HSD_JObjSetTranslateZ(popup,
                                   HSD_JObjGetTranslationZ(cur->jobjs[8]));
-            {
-                HSD_GObj* diagram_gobj = mnDiagram3_804D6C20;
-                mnDiagram2_ClearDetailView(diagram_gobj);
-                mnDiagram3_PopulateRankings(diagram_gobj);
-            }
+            mnDiagram3_RefreshRankings(mnDiagram3_804D6C20);
             return;
         }
         if (data->scroll_offset != 0) {
-            int base_idx;
-            u8 base_idx_u8;
-            u8 i_u8;
-            f32 spacing;
+            Vec3 up_label_pos;
+            PAD_STACK(8);
+
             sfxMove();
             data->scroll_offset = data->scroll_offset - 1;
             data = mnDiagram3_804D6C20->user_data;
             mnDiagram3_ClearRowLabels(data);
             data = mnDiagram3_804D6C20->user_data;
-            base_idx = data->scroll_offset;
-            base_idx_u8 = base_idx;
-            spacing = HSD_JObjGetTranslationY(data->jobjs[9]) -
-                      HSD_JObjGetTranslationY(data->jobjs[8]);
-            lb_8000B1CC(data->jobjs[8], (Vec3*) (base + 0x18), &spC0);
-            for (i = 0; i < 0xA; i++) {
-                HSD_Text* t = HSD_SisLib_803A5ACC(0, 1, spC0.x - 6.5f,
-                                                  -spacing * (f32) i + -spC0.y,
-                                                  spC0.z, 6.5f, 240.0f);
-                data->row_labels[i] = t;
-                i_u8 = i;
-                limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
-                {
-                    int tmp = base_idx_u8 + i_u8;
-                    v = tmp;
-                }
-                if (v >= limit) {
-                    v = v - limit;
-                } else {
-                    v = (u8) v;
-                }
-                {
-                    u8 idx = v;
-                    HSD_SisLib_803A6368(t, ((u16*) (base + 0x3C))[idx]);
-                }
-            }
-            {
-                HSD_GObj* diagram_gobj = mnDiagram3_804D6C20;
-                mnDiagram2_ClearDetailView(diagram_gobj);
-                mnDiagram3_PopulateRankings(diagram_gobj);
-            }
+            mnDiagram3_RebuildRowLabels(data, base, &up_label_pos, 10);
+            mnDiagram3_RefreshRankings(mnDiagram3_804D6C20);
         }
     } else if (input & 2) {
         u32 down_limit;
@@ -815,9 +785,9 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
             f32 spacing;
             sfxMove();
             data->cursor_row = data->cursor_row + 1;
-            cur = mnDiagram3_804D6C20->user_data;
             popup = data->popup_gobj->hsd_obj;
             n = data->cursor_row;
+            cur = mnDiagram3_804D6C20->user_data;
             spacing = mnDiagram3_GetRowSpacing(cur);
             HSD_JObjSetTranslateX(popup,
                                   HSD_JObjGetTranslationX(cur->jobjs[8]));
@@ -826,55 +796,21 @@ void mnDiagram3_HandleInput(HSD_GObj* gobj)
                                       HSD_JObjGetTranslationY(cur->jobjs[8]));
             HSD_JObjSetTranslateZ(popup,
                                   HSD_JObjGetTranslationZ(cur->jobjs[8]));
-            {
-                HSD_GObj* diagram_gobj = mnDiagram3_804D6C20;
-                mnDiagram2_ClearDetailView(diagram_gobj);
-                mnDiagram3_PopulateRankings(diagram_gobj);
-            }
+            mnDiagram3_RefreshRankings(mnDiagram3_804D6C20);
             return;
         }
         down_limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
         if ((u32) (data->scroll_offset + 0xA) < down_limit) {
-            int base_idx;
-            u8 base_idx_u8;
-            u8 i_u8;
-            f32 spacing;
+            Vec3 down_label_pos;
+            PAD_STACK(24);
+
             sfxMove();
             data->scroll_offset = data->scroll_offset + 1;
             data = mnDiagram3_804D6C20->user_data;
             mnDiagram3_ClearRowLabels(data);
             data = mnDiagram3_804D6C20->user_data;
-            base_idx = data->scroll_offset;
-            base_idx_u8 = base_idx;
-            spacing = HSD_JObjGetTranslationY(data->jobjs[9]) -
-                      HSD_JObjGetTranslationY(data->jobjs[8]);
-            lb_8000B1CC(data->jobjs[8], (Vec3*) (base + 0x18), &spA4);
-            for (i = 0; i < 0xA; i++) {
-                HSD_Text* t = HSD_SisLib_803A5ACC(0, 1, spA4.x - 6.5f,
-                                                  -spacing * (f32) i + -spA4.y,
-                                                  spA4.z, 6.5f, 240.0f);
-                data->row_labels[i] = t;
-                i_u8 = i;
-                limit = (data->is_name_mode != 0) ? 0x18 : 0x15;
-                {
-                    int tmp = base_idx_u8 + i_u8;
-                    v = tmp;
-                }
-                if (v >= limit) {
-                    v = v - limit;
-                } else {
-                    v = (u8) v;
-                }
-                {
-                    u8 idx = v;
-                    HSD_SisLib_803A6368(t, ((u16*) (base + 0x3C))[idx]);
-                }
-            }
-            {
-                HSD_GObj* diagram_gobj = mnDiagram3_804D6C20;
-                mnDiagram2_ClearDetailView(diagram_gobj);
-                mnDiagram3_PopulateRankings(diagram_gobj);
-            }
+            mnDiagram3_RebuildRowLabels(data, base, &down_label_pos, 10);
+            mnDiagram3_RefreshRankings(mnDiagram3_804D6C20);
         }
     }
 }
