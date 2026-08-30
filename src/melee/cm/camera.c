@@ -231,10 +231,10 @@ void Camera_80028B9C(int n_subjects)
     cm_804D6468 = NULL;
 }
 
-void Camera_80028F5C(CmSubject* subject, s32 arg1)
+void Camera_80028F5C(CmSubject* subject, CmSubjectState state)
 {
     if (subject != NULL) {
-        subject->x8 = arg1;
+        subject->state = state;
         subject->x10.z = 0.0f;
         subject->x10.y = 0.0f;
         subject->x10.x = 0.0f;
@@ -361,8 +361,8 @@ bool Camera_8002928C(CmSubject* cam)
     float bottom;
     float top;
 
-    if (cam->x8 != 1 && !cam->xC_b1) {
-        if (cam->x8 == 2) {
+    if (cam->state != CmSubjectState_Inactive && !cam->xC_b1) {
+        if (cam->state == CmSubjectState_Auto) {
             if (cam->xE != 0) {
                 cam->xE--;
                 return false;
@@ -2481,7 +2481,7 @@ void Camera_8002CDDC(void* unused)
     if (*slot_ptr != 10 && *slot_ptr != 11 &&
         (gobj = Player_GetEntity(*slot_ptr)) != NULL &&
         (subject = ftLib_80086B74(gobj)) != NULL && Camera_8002928C(subject) &&
-        !subject->x8 &&
+        subject->state == CmSubjectState_Active &&
         Camera_80029124(&subject->x1C, 0) == CAM_BOUNDS_INSIDE &&
         ABS(subject->x1C.z) < 30.0f)
     {

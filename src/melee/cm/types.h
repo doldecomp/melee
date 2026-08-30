@@ -10,7 +10,7 @@
 struct CmSubject {
     /* +00 */ CmSubject* next;
     /* +04 */ CmSubject* prev;
-    /* +08 */ bool x8;
+    /* +08 */ CmSubjectState state;
     /* +0C:0 */ u8 xC_b0 : 1;
     /* +0C:1 */ u8 xC_b1 : 1;
     /* +0C:2 */ u8 xC_b2 : 1;

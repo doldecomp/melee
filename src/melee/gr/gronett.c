@@ -210,7 +210,7 @@ void grOnett_801E3930(Ground_GObj* gobj)
     gp->u.onett.subject->x10.y = 0.0f;
     gp->u.onett.subject->x10.z = 0.0f;
     gp->u.onett.subject->x1C = gp->u.onett.subject->x10;
-    gp->u.onett.subject->x8 = true;
+    gp->u.onett.subject->state = CmSubjectState_Inactive;
 }
 
 void grOnett_801E3A34(Ground_GObj* gobj)
@@ -274,9 +274,9 @@ void grOnett_801E3C60(Ground_GObj* gobj)
     grOnett_801E5538(gobj);
     if (gp->u.onett.subject != NULL) {
         if (Ground_801C5794() != 0) {
-            gp->u.onett.subject->x8 = false;
+            gp->u.onett.subject->state = CmSubjectState_Active;
         } else {
-            gp->u.onett.subject->x8 = true;
+            gp->u.onett.subject->state = CmSubjectState_Inactive;
         }
     }
     lb_800115F4();

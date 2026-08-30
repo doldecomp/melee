@@ -26,7 +26,7 @@ void ftCamera_80076064(Fighter* fp)
     UnkFloat6_Camera spC;
     camera_box = fp->x890_cameraBox;
     ftCamera_80076018(fp->ft_data->x3C, &spC, fp->x34_scale.y);
-    camera_box->x8 = 0;
+    camera_box->state = CmSubjectState_Active;
     if (fp->facing_dir == 1.0f) {
         camera_box->x40.x = spC.x0.z;
         camera_box->x40.y = spC.x0.y * Stage_GetCamFixedZoom();

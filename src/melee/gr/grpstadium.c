@@ -236,7 +236,7 @@ void fn_801D11E4(Ground_GObj* gobj)
 
     if (cam != NULL) {
         float scale = Ground_801C0498();
-        gp->u.display.xF4->x8 = 1;
+        gp->u.display.xF4->state = CmSubjectState_Inactive;
         gp->u.display.xF4->x10.x = 0;
         gp->u.display.xF4->x10.y = 30 * scale;
         gp->u.display.xF4->x10.z = 0;
@@ -984,7 +984,7 @@ void grStadium_801D2528(Ground_GObj* gobj, int arg1, int arg2)
         gp->u.display.xF8_0 = false;
         gp->u.display.xF8_1 = false;
         if (gp->u.display.xF4 != NULL) {
-            gp->u.display.xF4->x8 = 1;
+            gp->u.display.xF4->state = CmSubjectState_Inactive;
         }
         break;
     case 1:
@@ -994,7 +994,7 @@ void grStadium_801D2528(Ground_GObj* gobj, int arg1, int arg2)
         gp->u.display.xF8_0 = false;
         gp->u.display.xF8_1 = false;
         if (gp->u.display.xF4 != NULL) {
-            gp->u.display.xF4->x8 = 1;
+            gp->u.display.xF4->state = CmSubjectState_Inactive;
         }
         break;
     case 9:
@@ -1004,7 +1004,7 @@ void grStadium_801D2528(Ground_GObj* gobj, int arg1, int arg2)
         gp->u.display.xF8_0 = false;
         gp->u.display.xF8_1 = false;
         if (gp->u.display.xF4 != NULL) {
-            gp->u.display.xF4->x8 = 1;
+            gp->u.display.xF4->state = CmSubjectState_Inactive;
         }
         break;
     case 14:
@@ -1014,7 +1014,7 @@ void grStadium_801D2528(Ground_GObj* gobj, int arg1, int arg2)
         gp->u.display.xF8_0 = false;
         gp->u.display.xF8_1 = false;
         if (gp->u.display.xF4 != NULL) {
-            gp->u.display.xF4->x8 = 1;
+            gp->u.display.xF4->state = CmSubjectState_Inactive;
         }
         break;
     case 10:
@@ -1026,21 +1026,21 @@ void grStadium_801D2528(Ground_GObj* gobj, int arg1, int arg2)
         gp->u.display.xF8_0 = false;
         gp->u.display.xF8_1 = false;
         if (gp->u.display.xF4 != NULL) {
-            gp->u.display.xF4->x8 = 1;
+            gp->u.display.xF4->state = CmSubjectState_Inactive;
         }
         break;
     case 15:
         gp->u.display.xE6 = 0x20;
         gp->u.display.xE0 = yakumono_param->x20;
         if (gp->u.display.xF4 != NULL) {
-            gp->u.display.xF4->x8 = 1;
+            gp->u.display.xF4->state = CmSubjectState_Inactive;
         }
         break;
     case 16:
         gp->u.display.xE6 = 0x80;
         gp->u.display.xE0 = yakumono_param->x20;
         if (gp->u.display.xF4 != NULL) {
-            gp->u.display.xF4->x8 = 1;
+            gp->u.display.xF4->state = CmSubjectState_Inactive;
         }
         break;
     case 7:
@@ -1050,7 +1050,7 @@ void grStadium_801D2528(Ground_GObj* gobj, int arg1, int arg2)
         gp->u.display.xF8_0 = false;
         gp->u.display.xF8_1 = false;
         if (gp->u.display.xF4 != NULL) {
-            gp->u.display.xF4->x8 = 1;
+            gp->u.display.xF4->state = CmSubjectState_Inactive;
         }
         break;
     case 8:
@@ -1074,7 +1074,7 @@ void grStadium_801D2528(Ground_GObj* gobj, int arg1, int arg2)
         gp->u.display.xF8_0 = false;
         gp->u.display.xF8_1 = false;
         if (gp->u.display.xF4 != NULL) {
-            gp->u.display.xF4->x8 = 1;
+            gp->u.display.xF4->state = CmSubjectState_Inactive;
         }
         break;
     case 17:
@@ -1089,35 +1089,35 @@ void grStadium_801D2528(Ground_GObj* gobj, int arg1, int arg2)
         gp->u.display.xE6 = 1;
         gp->u.display.xE0 = yakumono_param->x28;
         if (gp->u.display.xF4 != NULL) {
-            gp->u.display.xF4->x8 = 0;
+            gp->u.display.xF4->state = CmSubjectState_Active;
         }
         break;
     case 3:
         gp->u.display.xE6 = 2;
         gp->u.display.xE0 = yakumono_param->x28;
         if (gp->u.display.xF4 != NULL) {
-            gp->u.display.xF4->x8 = 0;
+            gp->u.display.xF4->state = CmSubjectState_Active;
         }
         break;
     case 4:
         gp->u.display.xE6 = 4;
         gp->u.display.xE0 = yakumono_param->x28;
         if (gp->u.display.xF4 != NULL) {
-            gp->u.display.xF4->x8 = 0;
+            gp->u.display.xF4->state = CmSubjectState_Active;
         }
         break;
     case 5:
         gp->u.display.xE6 = 0x10;
         gp->u.display.xE0 = yakumono_param->x28;
         if (gp->u.display.xF4 != NULL) {
-            gp->u.display.xF4->x8 = 0;
+            gp->u.display.xF4->state = CmSubjectState_Active;
         }
         break;
     case 6:
         gp->u.display.xE6 = 8;
         gp->u.display.xE0 = yakumono_param->x28;
         if (gp->u.display.xF4 != NULL) {
-            gp->u.display.xF4->x8 = 0;
+            gp->u.display.xF4->state = CmSubjectState_Active;
         }
         break;
     }
@@ -2048,7 +2048,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
             temp_r3_2 = GET_GROUND(temp_r3);
             if (temp_r3_2 != NULL) {
                 if (temp_r3_2->u.display.xF4 != NULL) {
-                    temp_r3_2->u.display.xF4->x8 = false;
+                    temp_r3_2->u.display.xF4->state = CmSubjectState_Active;
                 }
             }
         }

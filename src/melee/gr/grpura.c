@@ -8,6 +8,7 @@
 #include "types.h"
 
 #include <platform.h>
+#include "cm/forward.h"
 
 #include "cm/camera.h"
 #include "cm/types.h"
@@ -801,9 +802,9 @@ void grPura_80212CD4(HSD_GObj* arg0)
                 lb_8000B1CC(gp2->u.pura3.xC4[i], NULL, &subject_pos);
                 gp->u.pura3.x128[i]->x10 = subject_pos;
                 if (HSD_JObjGetFlags(node) & 0x10) {
-                    gp->u.pura3.x128[i]->x8 = 1;
+                    gp->u.pura3.x128[i]->state = CmSubjectState_Inactive;
                 } else {
-                    gp->u.pura3.x128[i]->x8 = 0;
+                    gp->u.pura3.x128[i]->state = CmSubjectState_Active;
                 }
                 gp->u.pura3.x128[i]->x48.x = 30.0f;
                 gp->u.pura3.x128[i]->x48.y = -30.0f;
@@ -831,9 +832,9 @@ void grPura_80212EF4(HSD_GObj* arg0)
             lb_8000B1CC(gp2->u.pura3.xC4[i], NULL, &spC);
             gp->u.pura3.x128[i]->x10 = spC;
             if (HSD_JObjGetFlags(gp2->u.pura3.xC4[i]) & 0x10) {
-                gp->u.pura3.x128[i]->x8 = 1;
+                gp->u.pura3.x128[i]->state = CmSubjectState_Inactive;
             } else {
-                gp->u.pura3.x128[i]->x8 = 0;
+                gp->u.pura3.x128[i]->state = CmSubjectState_Active;
             }
         }
     }
