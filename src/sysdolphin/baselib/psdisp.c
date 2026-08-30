@@ -779,6 +779,7 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
                                         f32 y, f32 z, f32 x0, f32 y0, f32 z0,
                                         f32 x1, f32 y1, f32 z1)
 {
+    GXColor color;
     f32 prev_x;
     f32 prev_y;
     f32 prev_z;
@@ -797,8 +798,6 @@ static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, f32 x,
 
     psSetCurrentMtx(GX_PNMTX0);
     if (pp->kind & Trail) {
-        GXColor color;
-
         if (pp->kind & Tornado) {
             calcTornadoLastPos(pp, &prev_x, &prev_y, &prev_z);
         } else {
