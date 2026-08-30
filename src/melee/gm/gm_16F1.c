@@ -35,54 +35,9 @@ struct lbl_803D6300_t {
     bool (*x4)(void);
 };
 
-struct lbl_803D6300_t lbl_803D6300[] = {
-    { 0x0016, 0xFFFF, fn_801735F0 },
-    { 0x0017, 0x0001, fn_80173644 },
-    { 0x0018, 0xFFFF, fn_80173510 },
-    { 0x0019, 0xFFFF, NULL },
-    { 0x001A, 0xFFFF, NULL },
-    { 0x001B, 0xFFFF, fn_8017367C },
-    { 0x001C, 0xFFFF, gm_80164ABC },
-    { 0x001D, 0xFFFF, gm_80164600 },
-    { 0x001E, 0x0040, fn_80162CCC },
-    { 0x001F, 0x0040, gm_80162EC8 },
-    { 0x0020, 0x0040, fn_801630C4 },
-    { 0x0021, 0x0040, gm_80162D1C },
-    { 0x0022, 0x0040, gm_80162F18 },
-    { 0x0023, 0x0040, gm_80163114 },
-    { 0x0024, 0x0010, fn_801722BC },
-    { 0x0025, 0x0010, fn_801722F4 },
-    { 0x0026, 0x0080, gmMainLib_8015D508 },
-    { 0x0027, 0x0020, fn_80163D24 },
-    { 0x0028, 0x0020, fn_80163D74 },
-    { 0x0029, 0x0040, fn_8017232C },
-    { 0x002A, 0x0040, fn_80172428 },
-    { 0x002B, 0x0040, fn_80172380 },
-    { 0x002C, 0x0040, fn_80172478 },
-    { 0x002D, 0x0040, fn_801723D4 },
-    { 0x002E, 0x0040, fn_801724C8 },
-    { 0x002F, 0x0001, fn_801724D0 },
-    { 0x0030, 0x0001, fn_80172504 },
-    { 0x0031, 0x0001, fn_80172538 },
-    { 0x0032, 0x0001, fn_8017256C },
-    { 0x0033, 0x0001, fn_801725A8 },
-    { 0x0034, 0x0001, fn_801725E4 },
-    { 0x0035, 0x0001, fn_80172624 },
-    { 0x0036, 0x0001, fn_80172664 },
-    { 0x0037, 0xFFFF, fn_80172698 },
-    { 0x0038, 0xFFFF, fn_801726CC },
-    { 0x0039, 0xFFFF, fn_80172700 },
-    { 0x003A, 0xFFFF, fn_80172734 },
-    { 0x003B, 0xFFFF, fn_80172768 },
-    { 0x003C, 0xFFFF, un_80304470 },
-    { 0x003D, 0xFFFF, un_80304510 },
-    { 0x0041, 0x0010, gmMainLib_8015CF94 },
-    { 0x0042, 0x0000, NULL },
-};
-
 int fn_8016F180(int kind)
 {
-    struct lbl_803D5A4C_t* curr = lbl_803D5A4C;
+    struct lbl_803D5A4C_t* curr = lbl_803D5A4C.entries;
     while (curr->kind != kind) {
         if (curr->kind == 0x29A) {
             return 0;
@@ -95,7 +50,7 @@ int fn_8016F180(int kind)
 Gm_DecType gmDecisionGetType(int kind)
 {
     struct lbl_803D5A4C_t* curr;
-    for (curr = lbl_803D5A4C; curr->kind != kind; curr++) {
+    for (curr = lbl_803D5A4C.entries; curr->kind != kind; curr++) {
         if (curr->kind == 0x29A) {
             return Gm_DecType_Flag;
         }
@@ -105,12 +60,12 @@ Gm_DecType gmDecisionGetType(int kind)
 
 s32 fn_8016F1F0(int idx)
 {
-    return lbl_803D5A4C[idx].kind;
+    return lbl_803D5A4C.entries[idx].kind;
 }
 
 int gm_8016F208(int kind)
 {
-    struct lbl_803D5A4C_t* curr = lbl_803D5A4C;
+    struct lbl_803D5A4C_t* curr = lbl_803D5A4C.entries;
     while (curr->kind != kind) {
         if (curr->kind == 0x29A) {
             return 0;
@@ -130,7 +85,7 @@ int fn_8016F280(int arg0)
 
 int gm_8016F2F8(int kind, u8 arg1)
 {
-    struct lbl_803D5A4C_t* curr = lbl_803D5A4C;
+    struct lbl_803D5A4C_t* curr = lbl_803D5A4C.entries;
     while (curr->kind != kind) {
         if (curr->kind == 0x29A) {
             return -1;
@@ -160,7 +115,7 @@ void fn_8016F344(struct lbl_8046B6A0_24C_t* arg0)
 /// drops that zero-extension and regresses gm_8016F208/fn_8016F280.
 static inline u16 fn_8016F39C_GetSisTextId(int kind)
 {
-    struct lbl_803D5A4C_t* curr = lbl_803D5A4C;
+    struct lbl_803D5A4C_t* curr = lbl_803D5A4C.entries;
     while (curr->kind != kind) {
         if (curr->kind == 0x29A) {
             return 0;
@@ -188,7 +143,7 @@ int fn_8016F39C(HSD_Text** arg0, void* arg1, u8 arg2, u16 arg3, u8 arg4,
     idx = arg3;
     while ((u32) idx < 0x101U) {
         matched = 0;
-        if (lbl_803D5A4C[idx].kind < 0xD7) {
+        if (lbl_803D5A4C.entries[idx].kind < 0xD7) {
             flags = fn_8016F180(idx);
             if (arg4 & flags) {
                 if (pl_80039418(arg5, idx) != 0) {
@@ -226,7 +181,7 @@ int fn_8016F548(void* arg0, u16 arg1, u8 mask, u8 player_id)
     }
 
     for (i = arg1; (u32) i < 0x101U; i++) {
-        if (lbl_803D5A4C[i].kind < 0xD7) {
+        if (lbl_803D5A4C.entries[i].kind < 0xD7) {
             if (mask & (u8) fn_8016F180(i)) {
                 if (pl_80039418(player_id, i) != 0) {
                     return i;
@@ -242,7 +197,7 @@ int fn_8016F548(void* arg0, u16 arg1, u8 mask, u8 player_id)
     }
 
     for (i = 0x100; i >= 0; i--) {
-        if (lbl_803D5A4C[i].kind < 0xD7) {
+        if (lbl_803D5A4C.entries[i].kind < 0xD7) {
             if (mask & (u8) fn_8016F180(i)) {
                 if (pl_80039418(player_id, i) != 0) {
                     return i;
@@ -275,7 +230,7 @@ int fn_8016F740(void* arg0, u16 arg1, u8 mask, u8 player_id)
 
     i = temp;
     for (; (u32) i < 0x101U; i++) {
-        if (lbl_803D5A4C[i].kind < 0xD7) {
+        if (lbl_803D5A4C.entries[i].kind < 0xD7) {
             flags = fn_8016F180(i);
             if (mask & flags) {
                 if (pl_80039418(player_id, i) != 0) {
@@ -308,7 +263,7 @@ int fn_8016F870(void* arg0, u16 arg1, u8 mask, u8 player_id)
     }
 
     for (i = arg1 - 1; i >= 0; i--) {
-        kind = lbl_803D5A4C[i].kind;
+        kind = lbl_803D5A4C.entries[i].kind;
 
         if (kind < 0xD7) {
             flags = fn_8016F180(i);
@@ -341,7 +296,7 @@ int fn_8016F9A8(void* arg0, u16 arg1, u8 mask, u8 player_id)
     }
 
     for (i = arg1; (u32) i < 0x101; i++) {
-        if (lbl_803D5A4C[i].kind < 0xD7) {
+        if (lbl_803D5A4C.entries[i].kind < 0xD7) {
             flags = fn_8016F180(i);
             if (mask & flags) {
                 if (pl_80039418(player_id, i) != 0) {
@@ -365,7 +320,7 @@ int fn_8016F9A8(void* arg0, u16 arg1, u8 mask, u8 player_id)
 int fn_8016FAD4(struct lbl_8046B6A0_24C_t* rules, int kind, int flags,
                 u8 player)
 {
-    struct lbl_803D5A4C_t* entry = lbl_803D5A4C;
+    struct lbl_803D5A4C_t* entry = lbl_803D5A4C.entries;
     struct lbl_8046B6A0_24C_58_t* x58 = rules->x58;
     u8 rankings[7] = { 0 };
     s32 scores[6];
@@ -450,7 +405,7 @@ int fn_8016FFD4(struct lbl_8046B6A0_24C_t* arg0, int arg1, u8 arg2)
     int count = 0;
 
     for (i = 0; (u32) i < 0x101U; i++) {
-        if (lbl_803D5A4C[i].kind < 0xD7) {
+        if (lbl_803D5A4C.entries[i].kind < 0xD7) {
             if ((arg1 & 0xFF) & (u8) fn_8016F180(i) &&
                 pl_80039418(arg2, i) != 0)
             {
@@ -470,8 +425,8 @@ int fn_8016FFD4(struct lbl_8046B6A0_24C_t* arg0, int arg1, u8 arg2)
 
 int fn_80170110(void* arg0, int idx, int mask, u8 player_id)
 {
-    struct lbl_803D5A4C_t* curr = lbl_803D5A4C;
-    int kind = lbl_803D5A4C[idx].kind;
+    struct lbl_803D5A4C_t* curr = lbl_803D5A4C.entries;
+    int kind = lbl_803D5A4C.entries[idx].kind;
     u8 flags;
 
     flags = (fn_8016F180(kind));
@@ -1614,6 +1569,51 @@ bool fn_80172768(void)
     }
     return false;
 }
+
+struct lbl_803D6300_t lbl_803D6300[] ATTRIBUTE_ALIGN(8) = {
+    { 0x0016, 0xFFFF, fn_801735F0 },
+    { 0x0017, 0x0001, fn_80173644 },
+    { 0x0018, 0xFFFF, fn_80173510 },
+    { 0x0019, 0xFFFF, NULL },
+    { 0x001A, 0xFFFF, NULL },
+    { 0x001B, 0xFFFF, fn_8017367C },
+    { 0x001C, 0xFFFF, gm_80164ABC },
+    { 0x001D, 0xFFFF, gm_80164600 },
+    { 0x001E, 0x0040, fn_80162CCC },
+    { 0x001F, 0x0040, gm_80162EC8 },
+    { 0x0020, 0x0040, fn_801630C4 },
+    { 0x0021, 0x0040, gm_80162D1C },
+    { 0x0022, 0x0040, gm_80162F18 },
+    { 0x0023, 0x0040, gm_80163114 },
+    { 0x0024, 0x0010, fn_801722BC },
+    { 0x0025, 0x0010, fn_801722F4 },
+    { 0x0026, 0x0080, gmMainLib_8015D508 },
+    { 0x0027, 0x0020, fn_80163D24 },
+    { 0x0028, 0x0020, fn_80163D74 },
+    { 0x0029, 0x0040, fn_8017232C },
+    { 0x002A, 0x0040, fn_80172428 },
+    { 0x002B, 0x0040, fn_80172380 },
+    { 0x002C, 0x0040, fn_80172478 },
+    { 0x002D, 0x0040, fn_801723D4 },
+    { 0x002E, 0x0040, fn_801724C8 },
+    { 0x002F, 0x0001, fn_801724D0 },
+    { 0x0030, 0x0001, fn_80172504 },
+    { 0x0031, 0x0001, fn_80172538 },
+    { 0x0032, 0x0001, fn_8017256C },
+    { 0x0033, 0x0001, fn_801725A8 },
+    { 0x0034, 0x0001, fn_801725E4 },
+    { 0x0035, 0x0001, fn_80172624 },
+    { 0x0036, 0x0001, fn_80172664 },
+    { 0x0037, 0xFFFF, fn_80172698 },
+    { 0x0038, 0xFFFF, fn_801726CC },
+    { 0x0039, 0xFFFF, fn_80172700 },
+    { 0x003A, 0xFFFF, fn_80172734 },
+    { 0x003B, 0xFFFF, fn_80172768 },
+    { 0x003C, 0xFFFF, un_80304470 },
+    { 0x003D, 0xFFFF, un_80304510 },
+    { 0x0041, 0x0010, gmMainLib_8015CF94 },
+    { 0x0042, 0x0000, NULL },
+};
 
 bool fn_8017279C(int arg0, u16 arg1)
 {
