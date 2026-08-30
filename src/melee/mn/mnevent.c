@@ -486,15 +486,15 @@ void fn_8024D864(HSD_GObj* gobj)
     MnEventData* data;
     HSD_JObj* up_jobj_0B;
     HSD_JObj* tree;
-    HSD_JObj* up_jobj_0C;
     u64 inputs;
+    HSD_JObj* volatile up_jobj_0C;
     HSD_JObj* up_jobj_0A;
     f32 y_b;
 
     {
         HSD_JObj* down_jobj_0B;
         HSD_JObj* down_jobj_0C;
-        HSD_JObj* down_jobj_0A;
+        HSD_JObj* volatile down_jobj_0A;
 
         if (mn_804D6BC8.cooldown != 0) {
             mn_804D6BC8.cooldown -= 1;
