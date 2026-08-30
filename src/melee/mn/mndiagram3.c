@@ -514,7 +514,13 @@ static inline void mnDiagram3_CreateRowLabels(int count)
             }
             limit = (u8) limit;
 
+            /// @remark Matching tactic: the self-assign keeps type_idx live
+            /// for MWCC register allocation.
+#ifdef MUST_MATCH
             val = (stat_idx = (u8) scroll) + (type_idx = type_idx);
+#else
+            val = (stat_idx = (u8) scroll) + type_idx;
+#endif
             if (val >= limit) {
                 limit = val - limit;
             } else {
