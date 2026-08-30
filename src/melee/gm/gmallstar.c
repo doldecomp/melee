@@ -397,7 +397,10 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     is_last_round = 0;
     chars_ptr = chars;
 
-    opp_data = &gm_803DEBE8[gm_803DEC4C[arg1].start];
+    {
+        gm_803DEBE8_t* opponent = &gm_803DEBE8[gm_803DEC4C[arg1].start];
+        opp_data = opponent;
+    }
 
     chars_ptr[0] = 0x21;
     chars_ptr[1] = 0x21;
